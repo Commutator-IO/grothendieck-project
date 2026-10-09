@@ -1,0 +1,1435 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 33, pages 1-180.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% footnotes. In any dispute of substance the transcription governs: whoever
+% cites Grothendieck must cite the batch-NN.fr.tex files.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-04 — first pass, unchecked against
+% the pages by a human. The folder was read WHOLE — nine batches, pages 1-180,
+% all of them transcribed — before any of this was written, and it is written
+% as ONE file for the shelfmark.
+%
+% What the folder is: working notes, on the backs of unrelated typescripts,
+% for the 1965 seminar on étale cohomology and L-functions (SGA 5), numbered by
+% him from 1° to (32), then a cover « Compléments dualité ». Only the odd pages
+% carry his hand, plus page 2 and pages 164-179 as listed in the spine section.
+% Much of the connecting prose is illegible in the transcription; formulas
+% carry. Where the argument depends on an illegible stretch, a footnote says
+% that the reconstruction is ours.
+%
+% Notation fixed for the whole document (spine section, « Conventions »):
+% Lambda = Z/nZ with n invertible on every scheme in play unless said
+% otherwise; modern names Rf_*, Rf_!, f^*, Rf^!, R\mathcal{H}om, \otimes^L
+% replace his R_! f_*, R^! f, LF^*; the twist Lambda(d) = mu_n^{\otimes d} is
+% kept under his name T_{X/S} when d is a relative dimension; K_X is the
+% dualising complex and D_X = R\mathcal{H}om(-, K_X); degrees are
+% COHOMOLOGICAL throughout, including § (31) where the page indexes
+% homologically (converted there, footnoted).
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   p. 9   specialisation needs F constructible, not only « loc. libre »;
+%   p. 17  the generalisation to f of finite type needs coefficients prime to
+%          the characteristics (Artin-Schreier counter-example);
+%   p. 19  the étale trace is f_! f^* F -> F, not f_!(F) -> F;
+%   p. 33  the indices of the top-degree transitivity are swapped on the page;
+%   p. 35  the supports and indices of the « compatibilité des deux traces »
+%          are reconstructed;
+%   p. 47  Hom into (Z/n)_S, not _X; all R^j_! f_* F must be locally constant;
+%   p. 49  i^! goes from C(X) to C(Y);
+%   p. 55  Verdier duality has Rf_* (not R_! f_*) on the left;
+%   p. 65  the arrows of the reduction diagram are redrawn;
+%   p. 73  Ri^!(T_{X/S}) = T_{Y/S}[-2d], and the Gysin map lands in
+%          R^{2r}_! f_*(T_{X/S}), not in T_{X/S};
+%   p. 79  g^*F = g^!F \otimes T^{-1}_{Y/Z}[-2d], inverse twist;
+%   p. 89  first projection formula corrected to Rf_* RHom(F, f^!G);
+%   p. 93  the induction formula holds for every F, by a formal argument; the
+%          page's proof (smooth case) needs F constructible;
+%   p. 111 the two sides of the Prop. are identical on the page;
+%   p. 115 the hypotheses of the special Künneth case are paired by side;
+%   p. 145-147 the second coupling and the composite v u are corrected;
+%   p. 159 u : T -> X x_S Y must be proper for the counit to exist;
+%   p. 171 statement (i) as read is false over a non-separably-closed field.
+%
+% Announced and never established in the folder: the statement of global
+% duality (p. 45 is a title alone); smooth base change as a consequence of
+% duality (p. 57-59: « ce que je n'ai pas fait »); the compatibility of the
+% trace maps in § 23 (p. 69) and the coherence of the transitivity
+% isomorphisms (p. 87, « Nous l'admettrons »); §§ 27-29, absent; the
+% L-functions themselves (part c) of page 1); the theorem of p. 171, marked
+% « à vérifier ! ».
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{33}
+\pages{1}{180}
+\dating{1965-[vers 1971]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{SGA 1965. MS [Manuscrit] brouillon : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ce dossier est un brouillon de séminaire. Il commence par une phrase qui en
+donne le ton : « Nous prendrons comme prétexte la théorie des fonctions $L$
+pour développer plus avant le formalisme de la cohomologie étale. » Le
+prétexte n'est jamais atteint ; le formalisme, lui, est construit presque
+entièrement, sur cent quatre-vingts pages écrites au dos de tapuscrits qui
+n'ont rien à voir --- un texte sur les systèmes de racines, des épreuves des
+\emph{Éléments de géométrie algébrique}, des articles en anglais.
+
+De quoi s'agit-il ? D'abord d'un problème de comptage. Une équation polynomiale
+à coefficients dans un corps fini n'a qu'un nombre fini de solutions, et l'on
+voudrait savoir comment ce nombre varie quand on agrandit le corps. Les
+fonctions $L$ (et les fonctions zêta) sont les séries qui rangent ces nombres.
+Or en topologie on sait compter certains points sans les chercher un à un : la
+formule des points fixes de Lefschetz dit que le nombre de points fixes d'une
+application continue d'une variété compacte dans elle-même se lit sur son
+action en cohomologie, comme une somme alternée de traces. Les solutions d'une
+équation sur un corps fini sont justement les points fixes d'une application,
+l'élévation à la puissance $q$. Il « suffit » donc d'avoir, pour les variétés
+algébriques sur un corps quelconque, une cohomologie qui se comporte comme
+celle des variétés compactes : c'est la cohomologie étale.
+
+Le dossier ne démontre pas qu'elle existe --- c'était l'objet des séminaires
+précédents --- ; il en monte le \emph{formulaire}. L'idée qui arrive ici est
+qu'un petit nombre d'opérations sur les faisceaux, attachées à chaque morphisme
+$f : X \to Y$, suffit à tout exprimer : l'image inverse $f^{*}$, l'image
+directe $Rf_{*}$, l'image directe à supports propres $Rf_{!}$, et une dernière,
+$Rf^{!}$, qui n'existe que comme l'« adjoint » de $Rf_{!}$ --- le procédé qui
+répond à $Rf_{!}$ comme la transposée d'une matrice répond à la matrice. Pour
+une variété lisse de dimension $d$, $Rf^{!}$ n'est rien d'autre que $f^{*}$
+décalé de $2d$ degrés et légèrement tordu, et l'adjonction entre $Rf_{!}$ et
+$Rf^{!}$ redonne la dualité de Poincaré des variétés compactes : la cohomologie
+en degré $i$ et la cohomologie à supports compacts en degré $2d-i$ sont duales
+l'une de l'autre. On lit dans ces pages, mise en tableaux, la liste des
+relations entre ces opérations --- transitivités, adjonctions, formules de
+projection, de changement de base, d'« induction » --- qu'on appelle aujourd'hui
+le formalisme des six opérations.
+
+Le dossier va ensuite là où l'on voulait aller : à la formule de
+Lefschetz--Verdier, qui calcule une somme alternée de traces comme une
+intersection, et qui la découpe en contributions locales attachées aux points
+fixes. Pour y parvenir, il faut savoir prendre la trace d'un endomorphisme
+d'un complexe et non plus d'un espace vectoriel --- car à coefficients
+$\mathbb{Z}/\ell^{2}\mathbb{Z}$ les groupes de cohomologie ne sont plus libres et
+la trace ordinaire n'a plus de sens ; d'où, au milieu du dossier, une petite
+théorie des complexes parfaits et de leurs traces.
+
+Une page, la 121, montre l'auteur choisissant sa route. Il en sait assez,
+écrit-il, pour faire tout de suite une formule de Lefschetz « cuite et
+pressée » et redescendre vers les fonctions $L$. Il ne le fait pas : « Étant
+parti dans un formulaire de dualité général, je préfère en compléter les lignes
+essentielles avant de me mettre aux applications de détail. » Ce choix ---
+achever la forme générale avant le cas qui l'avait motivée --- est le dossier
+entier. On y voit aussi, page 57, une honnêteté de travail qui vaut d'être
+relevée : il faudrait prouver qu'un isomorphisme est bien l'adjoint d'un autre,
+« ce que je n'ai pas fait », et cela « me semble nullement clair ».
+
+La dernière liasse, « Compléments dualité », est une liste : appendices
+possibles, sujets de recherche (puissances extérieures dans les catégories
+dérivées, dualité analytique, descente cohomologique, dualité pour les
+opérateurs différentiels), et des énoncés plausibles qu'il marque lui-même
+« à vérifier ! ». Les noms à chercher ensuite sont ceux du formalisme des six
+opérations, de la dualité de Verdier, des complexes parfaits et de la formule
+des traces de Lefschetz--Verdier.
+
+\keywords{étale cohomology, six-functor formalism, proper base change, smooth base change, Artin comparison theorem, Artin vanishing, purity theorem, absolute purity, constructible sheaf, cohomology with compact support, cycle class, Kummer sequence, trace morphism, Poincaré duality, Verdier duality, exceptional inverse image, Gysin map, projection formula, Künneth formula, derived tensor product, perfect complex, Tor-amplitude, cohomological correspondence, Lefschetz-Verdier trace formula, local terms, dualizing complex, biduality}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier est une suite d'articles numérotés de sa main, de 1° à (32), suivie
+d'une couverture. Seules les pages impaires portent son écriture, à quelques
+exceptions près : la page 2 (une feuille de croquis), et, dans la dernière
+liasse, les pages 164, 165, 166, 169, 171, 173, 175, 177 et 179 ; les autres
+sont les versos dactylographiés de textes étrangers à ces notes. Les stations
+de l'argument sont les suivantes.
+
+\begin{itemize}
+\item \textbf{Pages 1 à 19 --- le programme} (articles 1° à 14) : site étale,
+points géométriques, localisation stricte, les grands théorèmes (changement de
+base propre, comparaison, dimension cohomologique, pureté, finitude), et la
+définition de $Rf_{!}$.
+\item \textbf{Pages 21 à 35 --- les classes fondamentales} (15 à 17) : classe
+locale d'un sous-schéma par la suite de Kummer, trace d'un morphisme lisse,
+compatibilité des deux.
+\item \textbf{Pages 37 à 59 --- passage aux catégories dérivées et dualité}
+(18 à 22) : $Lf^{*}$, $R\mathcal{H}om$, $Rf_{!}$ sur les complexes, l'énoncé
+annoncé de la dualité globale (un titre seul, page 45), la dualité pour une
+immersion, la pureté relative.
+\item \textbf{Pages 61 à 83 --- le foncteur $Rf^{!}$} (23, 23 bis, 24) : sa
+définition pour un morphisme qui se plonge dans un morphisme lisse,
+l'indépendance de la factorisation, les morphismes de Gysin.
+\item \textbf{Pages 85 à 119 --- le formulaire} (25 et 26) : tableau des
+relations entre les six opérations, puis produit tensoriel dérivé, formule de
+projection pour $Rf_{!}$, formule de Künneth.
+\item \textbf{Pages 121 à 161 --- Lefschetz} ((3), (30) à (32)) : la page où il
+choisit sa route ; trace d'un endomorphisme de complexe parfait ; complexes de
+Tor-dimension finie ; formule de Lefschetz--Verdier et termes locaux.
+\item \textbf{Pages 163 à 179 --- « Compléments dualité »} : listes et énoncés
+à vérifier.
+\end{itemize}
+
+La numérotation a des trous qui sont des faits du dossier. Les articles 18) et
+19) sont annoncés page 35, le 19) (« Th.\ de dualité globale ») ne reçoit
+page 45 qu'un titre, numéroté « § (9) » ; les articles 27 à 29 manquent, et la
+page 121 s'ouvre sur un point « (3) » dont les deux premiers sont absents. Ce
+que le dossier annonce sans l'établir est relevé à sa place et rassemblé en
+tête du fichier.
+
+\subsection*{Conventions, valables pour tout le dossier}
+
+\begin{itemize}
+\item On fixe un entier $n \geq 1$ et l'on pose $\Lambda = \mathbb{Z}/n\mathbb{Z}$
+(il l'appelle $A$). Sauf mention contraire, $n$ est \emph{inversible sur tous
+les schémas considérés} --- « premier aux caractéristiques résiduelles ». Les
+faisceaux sont des faisceaux étales de $\Lambda$-modules, et $D(X)$,
+$D^{+}(X)$, $D^{-}(X)$, $D^{b}(X)$ désignent les catégories dérivées
+correspondantes.
+\item Les opérations reçoivent leurs noms d'aujourd'hui : $Rf_{*}$, $f^{*}$,
+$Rf_{!}$, $Rf^{!}$, $R\mathcal{H}om$, $\overset{L}{\otimes}$.\footnote{Il écrit
+$\mathbb{R}_{!}f_{*}$ ou $\mathbb{R}_{!}f$ pour $Rf_{!}$, $\mathbb{R}^{!}f$ ou
+$\mathbb{R}f^{!}$ pour $Rf^{!}$, et $\mathbb{L}f^{*}$ pour l'image inverse.
+Pour des faisceaux étales de $\Lambda$-modules, $f^{*}$ est exact et n'a pas
+besoin d'être dérivé ; le $\mathbb{L}$ ne devient nécessaire que pour des
+topos annelés généraux, cadre qu'il garde en vue (pages 37 et 91), et nous ne
+l'écrivons que là.}
+\item Pour un entier $d$, $\Lambda(d) = \mu_{n}^{\otimes d}$ (torsion de Tate).
+Quand $d$ est une dimension relative, on garde son nom : pour $f : X \to S$
+lisse purement de dimension relative $d$, $T_{X/S} = \Lambda(d)$ ; pour une
+immersion fermée $Y \hookrightarrow X$ de sous-schémas lisses sur une même base,
+de codimension $c$, $T_{Y/X} = \Lambda(c)$, de sorte que
+$T_{X/S}|_{Y} \simeq T_{Y/X} \otimes T_{Y/S}$.
+\item $K_{X}$ désigne le complexe dualisant de $X$ relatif à la base fixée
+($K_{X} = Ra^{!}\Lambda$ pour $a : X \to S$), et $D_{X} = R\mathcal{H}om(-,
+K_{X})$.\footnote{Il écrit $R^{\bullet}_{X}$ et $K^{\bullet}_{X}$
+indifféremment.}
+\item Les degrés sont \emph{cohomologiques} partout, y compris à
+l'article (31), où la page indexe homologiquement ; la conversion est
+signalée sur place.
+\end{itemize}
+
+\pagerange{1}{19}
+\section*{Le programme (pages 1 à 19)}
+
+La première page annonce trois parties : (a) poursuivre l'étude de la
+cohomologie étale à coefficients de torsion, en développant le formalisme de
+dualité et des formules de Künneth et de Lefschetz ; (b) étendre le formalisme
+aux coefficients $\ell$-adiques ; (c) appliquer le tout aux fonctions $L$. Le
+dossier est presque entièrement consacré à (a). Suit une liste numérotée, que
+nous restituons en énoncés.
+
+\pagerange{1}{3}
+\subsection*{Site, topos, points (articles 1° à 6°, pages 1 à 3)}
+
+Le site étale $X_{\text{ét}}$ d'un schéma $X$, ses faisceaux, sa cohomologie.
+Pour $X = \operatorname{Spec}(k)$, le topos étale est équivalent à la catégorie
+des ensembles discrets munis d'une action continue du groupe profini
+$\pi = \operatorname{Gal}(k^{s}/k)$.\footnote{La page écrit
+$X_{\text{ét}} \simeq \widetilde{X}_{\text{ét}} \simeq \mathrm{Ens}(\pi)$ ; le
+premier signe, entre un site et son topos, est un abus, et
+« $\mathrm{Ens}(\pi)$ » doit s'entendre des $\pi$-ensembles \emph{continus}.}
+Un morphisme $f : X \to Y$ définit un morphisme de topos, avec $f^{*}$ exact
+(il commute aux limites inductives quelconques et aux limites projectives
+finies) et $f_{*}$ commutant aux limites projectives ; d'où la transitivité et
+la suite spectrale de Leray.
+
+Un point géométrique $\xi \to X$ définit un foncteur fibre $F \mapsto F_{\xi} =
+\varinjlim F(X')$, la limite portant sur les voisinages étales de $\xi$ ; la
+famille de ces foncteurs est conservative. L'anneau
+$\mathcal{O}_{X,\xi} = \varinjlim \Gamma(X', \mathcal{O}_{X'})$ est le
+\emph{hensélisé strict} de $X$ en $\xi$ --- hensélien à corps résiduel
+séparablement clos --- et, si $\overline{X} = \operatorname{Spec}
+\mathcal{O}_{X,\xi}$, on a $F_{\xi} = \Gamma(\overline{X}, F|_{\overline{X}})$.
+Application (6°) : les fibres de $R^{q}f_{*}F$, pour $f$ quasi-compact et
+quasi-séparé, sont la cohomologie des images inverses sur les hensélisés
+stricts. Une note de marge remarque que 5° et 6° n'ont pas de véritable
+analogue dans les espaces topologiques ordinaires.
+
+\pagerange{3}{13}
+\subsection*{Les grands théorèmes (articles 7° à 12, pages 3 à 13)}
+
+\emph{Changement de base propre.} Si $f : X \to Y$ est propre et $F$ de
+torsion sur $X$, la formation des $R^{q}f_{*}F$ commute à tout changement de
+base $Y' \to Y$ ; en particulier $(R^{q}f_{*}F)_{\bar y} \simeq H^{q}(X_{\bar
+y}, F)$, et, pour $X$ propre sur un corps séparablement clos $k$ et $K
+\supset k$ séparablement clos, $H^{i}(X,F) \simeq H^{i}(X_{K}, F)$. Le même
+énoncé vaut sans propreté si $Y' \to Y$ est \emph{lisse}, $f$ quasi-compact et
+quasi-séparé et $F$ de torsion première aux caractéristiques résiduelles de
+$Y$ (changement de base lisse) ; et l'invariance par extension du corps
+séparablement clos vaut sans propreté pour $F$ de torsion première à la
+caractéristique.
+
+\emph{Comparaison.} Pour $X$ de type fini sur $\mathbb{C}$ et $F$ de torsion
+constructible, $H^{i}(X, F) \to H^{i}(X^{\mathrm{an}}, F^{\mathrm{an}})$ est un
+isomorphisme ; de même pour les $R^{i}f_{*}$ d'un morphisme de type
+fini.\footnote{La page dit « $X$ préschéma loc.\ de type fini » et « tout $F$
+faisceau de torsion ». Nous énonçons la forme constructible, qui suffit à tout
+ce qui suit et qui est le théorème de comparaison d'Artin sous sa forme
+usuelle ; nous ne vérifions pas ici l'extension plus large de la page. Un
+paragraphe suivant, biffé de quatre traits, esquissait une réduction au cas
+algébrique au-dessus d'un voisinage ; une marge évoque la résolution des
+singularités et un « GAGA plus complet ».} Il propose, comme énoncé
+\emph{à prouver}, une version relative au-dessus d'un espace analytique $Y$ :
+pour $f : X \to Y$ de type fini et $F$ constructible de torsion, les flèches
+$H^{q}(X,F) \to H^{q}(X^{\mathrm{an}}, F^{\mathrm{an}})$ et
+$(R^{q}f_{*}F)^{\mathrm{an}} \to R^{q}f^{\mathrm{an}}_{*}F^{\mathrm{an}}$
+devraient être des isomorphismes, d'où, par passage à la limite sur les
+voisinages d'un point $y$, une comparaison entre la cohomologie du schéma
+$X \times_{Y} \operatorname{Spec}\mathcal{O}_{Y,y}$ et la limite des
+cohomologies analytiques des $(f^{\mathrm{an}})^{-1}(U)$. Une marge ajoute :
+« Devrait aussi se généraliser au contexte rigide-analytique
+… ».\footnote{L'énoncé relatif reste ici une conjecture de travail ; la page
+dit « À prouver ». La remarque sur le cas rigide-analytique précède les
+théories de la cohomologie étale des espaces rigides et de Berkovich, qu'il ne
+pouvait connaître ; nous la signalons sans y attacher de priorité.}
+
+\emph{Spécialisation} (9°). Si $f : X \to Y$ est propre et lisse et $F$
+localement constant constructible de torsion première aux caractéristiques
+résiduelles, les $R^{q}f_{*}F$ sont localement constants
+constructibles.\footnote{La page dit $F$ « loc.\ libre » et conclut
+« loc.\ libres » ; il faut entendre localement constant, et l'hypothèse de
+finitude (fibres finies) est nécessaire pour la conclusion constructible ;
+nous l'ajoutons.}
+
+\emph{Dimension cohomologique} (10°). Si $X$ est de type fini sur un corps
+séparablement clos, de dimension $n$, et $F$ de torsion, $H^{i}(X,F) = 0$ pour
+$i > 2n$ ; si $X$ est affine, déjà pour $i > n$ (théorème de type Lefschetz,
+aujourd'hui « théorème d'annulation d'Artin »). Il commente : la dimension
+« topologique » d'une variété est le double de sa dimension de Krull, et
+l'abaissement dans le cas affine « peut donner des idées fausses ». La page
+suivante renvoie à Artin, Woods Hole.
+
+\emph{Supports} (11). Les sous-faisceaux du faisceau final sont les ouverts de
+$X$. Si $U$ est ouvert, de fermé complémentaire $Y$, les faisceaux qui sont le
+faisceau final sur $U$ forment une catégorie équivalente à celle des faisceaux
+sur $Y$, par l'image directe ; en particulier les faisceaux abéliens sur $X$
+nuls sur $U$ « sont » les faisceaux abéliens sur $Y$. On définit
+$\Gamma_{Y}(F) \subset \Gamma(X,F)$, le faisceau $\underline{\Gamma}_{Y}(F)
+\subset F$ des sections à support dans $Y$, et leurs dérivés :
+\[
+  H^{i}_{Y}(X, F) \simeq \operatorname{Ext}^{i}(\mathbb{Z}_{Y}, F), \qquad
+  \underline{H}^{i}_{Y}(F) \simeq \mathcal{E}xt^{i}(\mathbb{Z}_{Y}, F)
+  \simeq R^{i-1}u_{*}(F|_{U}) \quad (i \geq 2),
+\]
+où $\mathbb{Z}_{Y}$ est le faisceau constant de $Y$ prolongé par zéro et $u : U
+\to X$ l'inclusion ; pour $i = 0, 1$, ce sont le noyau et le conoyau de $F \to
+u_{*}(F|_{U})$.\footnote{La première égalité vient de la suite exacte $0 \to
+u_{!}\mathbb{Z}_{U} \to \mathbb{Z}_{X} \to \mathbb{Z}_{Y} \to 0$, qui donne
+$\operatorname{Hom}(\mathbb{Z}_{Y}, F) = \Gamma_{Y}(F)$. La marge renvoie à
+« SGA 1962, notes Hartshorne 1961 ».}
+
+\emph{Pureté} (12). Si $Y \subset X$ sont lisses sur un corps $k$, $Y$ de
+codimension $p$ en chaque point, alors pour $n$ inversible
+\[
+  \underline{H}^{i}_{Y}(\Lambda_{X}) = 0 \quad (i \neq 2p), \qquad
+  \underline{H}^{2p}_{Y}(\Lambda_{X}) \simeq \Lambda_{Y}(-p) =
+  \mu_{n}^{\otimes(-p)}.
+\]
+Le faisceau $\mu_{n}$, noyau de l'élévation à la puissance $n$ dans
+$\mathbb{G}_{m}$, est un schéma en groupes fini et plat ; si $n$ est
+inversible il est étale, localement isomorphe à $\mathbb{Z}/n\mathbb{Z}$,
+« et il ne faut surtout pas les confondre » : le choix d'une racine primitive
+$\zeta$ fournit un isomorphisme $\mu_{n}^{\otimes d} \simeq \Lambda$, qui est
+multiplié par $\lambda^{d}$ si l'on remplace $\zeta$ par $\zeta^{\lambda}$. La
+pureté se démontre « immédiatement » par changement de base lisse. Il pose le
+problème d'une pureté \emph{absolue}, où la lissité est remplacée par la
+régularité, et note qu'elle dépend de la résolution des
+singularités.\footnote{C'est la conjecture de pureté absolue, démontrée bien
+plus tard par Gabber (exposée par Fujiwara) sans résolution des
+singularités ; il ne pouvait le connaître. Le reste de la phrase de la page,
+après « OK », est en partie illisible.} Une remarque de marge demande d'expliquer
+la classe fondamentale --- c'est l'objet de l'article 15.
+
+\pagerange{13}{19}
+\subsection*{Constructibilité et supports propres (articles 13 et 14, pages 13 à 19)}
+
+\emph{Constructibilité.} Un faisceau est constructible s'il existe une
+partition finie de $X$ en parties localement fermées sur chacune desquelles il
+est localement constant, à fibres de type fini. \emph{Théorème :} si $f : X \to
+Y$ est propre et $Y$ localement noethérien, les $R^{i}f_{*}F$ d'un faisceau de
+torsion constructible sont constructibles ; \emph{corollaire :} pour $X$ propre
+sur un corps séparablement clos, les $H^{i}(X, F)$ sont finis. Il demande
+l'extension à $f$ de type fini, qui « se ramène au cas d'une immersion » puis,
+par résolution des singularités et pureté, ou plutôt par des « bons
+modèles ».\footnote{Cette extension n'est vraie que pour des coefficients
+premiers aux caractéristiques : pour $j : \mathbb{A}^{1} \to \operatorname{Spec}
+k$ en caractéristique $p$, $H^{1}(\mathbb{A}^{1}_{k^{s}}, \mathbb{Z}/p)$ est
+infini (théorie d'Artin--Schreier). La page ne le précise pas. Sous cette
+réserve, le théorème a été obtenu plus tard sans résolution (Deligne,
+« Théorèmes de finitude », pour une base régulière de dimension $\leq 1$ ;
+Gabber, en général) ; il ne pouvait le connaître.}
+
+\emph{Supports propres.} Soit $f : X \to Y$ \emph{compactifiable}, c'est-à-dire
+composé $X \xrightarrow{\,i\,} \overline{X} \xrightarrow{\,\bar f\,} Y$ d'une
+immersion ouverte et d'un morphisme propre (c'est le cas, dit-il, si $f$ est
+quasi-projectif et $Y$ quasi-compact).\footnote{Le théorème de compactification
+de Nagata (1962--1963) assure que tout morphisme séparé de type fini entre
+schémas noethériens est compactifiable ; la page ne l'invoque pas.} Pour $F$ de
+torsion sur $X$, on pose
+\[
+  R^{q}f_{!}F = R^{q}\bar f_{*}(i_{!}F),
+\]
+$i_{!}$ désignant le prolongement par zéro ; c'est un foncteur cohomologique en
+$F$, indépendant, à isomorphisme canonique près, de la compactification
+choisie.\footnote{La justification de l'indépendance, pages 17 et 19, est
+presque entièrement illisible ; nous donnons l'énoncé sans sa démonstration.
+L'article avait d'abord été commencé page 13 sous le numéro 13 et barré ; il
+est récrit ici comme 14.} Les propriétés sont « identiques à celles des
+$R^{q}f_{*}$ quand $f$ est propre » : comparaison avec le cas classique sur
+$\mathbb{C}$, changement de base, finitude, suite spectrale de Leray ; si $f$
+est quasi-fini, $R^{i}f_{!}F = 0$ pour $i > 0$ ; enfin, si $f$ est étale, il y
+a un homomorphisme trace canonique
+\[
+  \operatorname{Tr}_{f}(F) : f_{!}f^{*}F \longrightarrow F,
+\]
+d'où, pour $f : X' \to X$ étale au-dessus de $Y$ et $g' = gf$, une flèche
+covariante $R^{q}g'_{!}(f^{*}F) = R^{q}g_{!}(f_{!}f^{*}F) \to R^{q}g_{!}(F)$
+.\footnote{La page écrit $\operatorname{Tr}_{f}(F) : f_{!}(F) \to F$ ; pour $F$
+sur la base, la source est $f_{!}f^{*}F$, comme le confirme la flèche
+covariante qui suit. La liste a deux articles numérotés (vi) ; le second,
+« suite exacte en cohomologie relative », n'est pas développé.}
+
+\section*{Classes fondamentales (pages 21 à 35)}
+
+\pagerange{21}{29}
+\subsection*{La classe locale (article 15, pages 21 à 29)}
+
+Soit $Y \hookrightarrow X$ un fermé et $j : U = X - Y \to X$ l'ouvert
+complémentaire. Supposons d'abord $Y = V(\varphi)$, où $\varphi$ est une section
+régulière (non diviseur de zéro) de $\mathcal{O}_{X}$. Alors $\varphi$ est une
+section de $j_{*}\mathbb{G}_{m,U}$, déterminée à une unité de $X$ près,
+donc une section canonique de $j_{*}\mathbb{G}_{m,U}/\mathbb{G}_{m,X}$. La suite
+exacte de cohomologie locale
+\[
+  0 \to \underline{H}^{0}_{Y}(\mathbb{G}_{m,X}) \to \mathbb{G}_{m,X} \to
+  j_{*}\mathbb{G}_{m,U} \xrightarrow{\ d\ } \underline{H}^{1}_{Y}(\mathbb{G}_{m,X})
+  \to 0,
+\]
+où le premier terme est nul parce que $U$ est schématiquement dense, identifie
+$\underline{H}^{1}_{Y}(\mathbb{G}_{m,X})$ à $j_{*}\mathbb{G}_{m,U} /
+\mathbb{G}_{m,X}$ ; on pose $\beta_{Y/X} = d\varphi$.\footnote{Il note
+l'inclusion de l'ouvert $i$ ; nous réservons $i$ à l'immersion du fermé.} La
+suite de Kummer $0 \to \mu_{n} \to \mathbb{G}_{m} \xrightarrow{n} \mathbb{G}_{m}
+\to 0$ ($n$ inversible) donne un cobord $\partial_{n} :
+\underline{H}^{1}_{Y}(\mathbb{G}_{m}) \to \underline{H}^{2}_{Y}(\mu_{n})$, et
+\[
+  \gamma_{Y/X} = \partial_{n}(\beta_{Y/X}) \in
+  \Gamma\bigl(X, \underline{H}^{2}_{Y}(\mu_{n,X})\bigr).
+\]
+La définition est locale, compatible aux changements de base qui conservent
+l'hypothèse ; si $Y$ est localement intersection complète de codimension $d$,
+localement $Y = Y_{1} \cap \dots \cap Y_{d}$ avec des $Y_{k}$ comme ci-dessus,
+et l'on pose $\gamma_{Y/X} = \gamma_{Y_{1}/X} \cup \dots \cup \gamma_{Y_{d}/X}
+\in \Gamma(X, \underline{H}^{2d}_{Y}(\mu_{n}^{\otimes d}))$, ce qui ne dépend
+pas du choix des $Y_{k}$ et se recolle.\footnote{Ce dernier point est affirmé,
+non démontré. Le passage qui le précède, page 23, est presque entièrement
+illisible.} Propriétés caractéristiques : (i) compatibilité aux changements de
+base admissibles ; (ii) le cas d'un diviseur $V(\varphi)$ ; (iii)
+multiplicativité $\gamma_{Y \cdot Y'/X} = \gamma_{Y/X}\cdot\gamma_{Y'/X}$ pour
+$Y$, $Y'$ sans composante excédentaire ; (iv) compatibilité à l'excision. La
+« bonne » classe, note-t-il, vit dans $\Gamma(Y,
+\underline{H}^{2d}_{Y}(\mathbb{Z}_{\ell}(d)))$, pour tout $\ell$ premier aux
+caractéristiques résiduelles.\footnote{Lecture incertaine du mot qui précède
+(« le “bon” \dots ») ; le sens $\ell$-adique est sûr.}
+
+\emph{Classes de cycles.} Supposons $\underline{H}^{i}_{Y}(\Lambda_{X}) = 0$ pour
+$i < 2d$ --- situation de pureté, vraie (i) si $X$ et $Y$ sont lisses sur une
+base, (ii) si $X$ et $Y$ sont réguliers, $X$ excellent de caractéristique
+nulle,\footnote{Par résolution des singularités ; c'est aujourd'hui un cas de
+la pureté absolue de Gabber, sans restriction de caractéristique.} (iii) si
+$d = 1$ et $X$ est normal. La suite spectrale $H^{p}(X,
+\underline{H}^{q}_{Y}) \Rightarrow H^{p+q}_{Y}(X, -)$ donne alors
+$H^{i}_{Y}(X, \Lambda(d)) = 0$ pour $i < 2d$ et
+\[
+  H^{2d}_{Y}(X, \Lambda(d)) \simeq \Gamma\bigl(Y,
+  \underline{H}^{2d}_{Y}(\Lambda(d))\bigr),
+\]
+d'où un élément canonique $\gamma_{Y/X} \in H^{2d}_{Y}(X, \Lambda(d))$, qu'on
+peut envoyer dans $H^{2d}(X, \Lambda(d))$ ou, si $Y$ est propre sur une base
+$S$, dans la cohomologie de $X$ à supports propres sur
+$S$.\footnote{La page écrit dans ce dernier groupe $\mu_{n,X}$ sans la
+puissance $\otimes d$ ; nous la rétablissons. Un N.B.\ sur
+$\beta_{Y/X} \in H^{1}_{Y}(X, \mathbb{G}_{m})$ est en partie illisible.}
+
+\emph{Exemple 1.} Si $X$ est lisse de dimension $d$ sur un corps séparablement
+clos et $x$ un point rationnel, $\gamma_{x/X} \in H^{2d}_{c}(X, \Lambda(d))$ ; il
+annonce que cet élément ne dépend pas de $x$ si $X$ est connexe --- ce qu'on
+avait vérifié directement pour $d=1$ : sur une courbe propre lisse connexe, la
+théorie de Kummer globale fournit $t : H^{2}(X, \mu_{n}) \xrightarrow{\sim}
+\mathbb{Z}/n\mathbb{Z}$, et $t(\gamma_{x/X}) = 1$.\footnote{La phrase qui
+annonce l'indépendance, page 27, est d'une syntaxe incertaine ; nous lisons
+une indépendance annoncée, démontrée par la trace de l'article 16.}
+
+\emph{Exemple 2.} Si $X$ et $Y$ sont lisses sur $S$, $Y$ de codimension $d$ et
+propre sur $S$, on a $\Gamma(Y, \underline{H}^{2d}_{Y}(\Lambda(d))) \simeq
+H^{2d}_{Y}(X, \Lambda(d)) \to \Gamma(S, R^{2d}f_{!}\Lambda(d))$.\footnote{La
+flèche vers la cohomologie à supports propres demande que le support $Y$ soit
+propre sur $S$ ; la page ne le dit pas.}
+
+\pagerange{31}{33}
+\subsection*{La classe globale : la trace (article 16, pages 31 et 33)}
+
+Pour $f : X \to Y$ lisse, compactifiable, purement de dimension relative $d$,
+il y a un homomorphisme canonique
+\[
+  \operatorname{Tr}_{f} : R^{2d}f_{!}(T_{X/Y}) \longrightarrow \Lambda_{Y},
+\]
+caractérisé par : (i) la compatibilité aux changements de base ; (ii) la
+transitivité pour un composé --- si $g$ est lisse de dimension relative $d'$,
+$R^{2(d+d')}(gf)_{!} = R^{2d'}g_{!} \circ R^{2d}f_{!}$ en degré
+maximal ;\footnote{La page écrit $(R^{2d}_{!}g)(R^{2d'}_{!}f)$, les indices
+échangés par rapport aux dimensions. L'égalité en degré maximal vient de la
+suite spectrale de Leray, puisque $R^{q}f_{!} = 0$ pour $q > 2d$.} (iii) le
+cas d'un isomorphisme ; (iv) le cas de $\mathbb{P}^{1}_{S} \to S$, $S$ spectre
+d'un corps séparablement clos, où c'est l'isomorphisme de Kummer. De plus (v)
+si les fibres de $f$ sont connexes et non vides, $\operatorname{Tr}_{f}$ est
+un isomorphisme, et (vi) il est compatible à la dualité. C'est la trace du
+théorème de dualité de Poincaré.
+
+\pagerange{35}{35}
+\subsection*{Compatibilité des deux classes (article 17, page 35)}
+
+Soit $i : Y \hookrightarrow X$ une immersion fermée de $S$-schémas lisses, $g :
+Y \to S$ de dimension relative $r$, $f : X \to S$ de dimension relative $r +
+d$. La pureté s'écrit $\underline{H}^{q}_{Y}(T_{X/S}) = 0$ pour $q \neq 2d$ et
+$\underline{H}^{2d}_{Y}(T_{X/S}) \simeq T_{Y/S}$ (sur $Y$). Notons
+$R^{q}_{Y}f_{!}$ la cohomologie à supports propres sur $S$ \emph{et} contenus
+dans $Y$. La suite spectrale de cohomologie locale donne $R^{q}_{Y}f_{!}(T_{X/S})
+= 0$ pour $q < 2d$ et
+\[
+  R^{2r+2d}_{Y}f_{!}(T_{X/S}) \simeq R^{2r}g_{!}(T_{Y/S}),
+\]
+et la compatibilité annoncée est la commutativité de
+\[
+  R^{2r}g_{!}(T_{Y/S}) \simeq R^{2r+2d}_{Y}f_{!}(T_{X/S}) \longrightarrow
+  R^{2r+2d}f_{!}(T_{X/S}) \xrightarrow{\ \operatorname{Tr}_{f}\ } \Lambda_{S},
+\]
+dont le composé doit être $\operatorname{Tr}_{g}$.\footnote{Les indices de la
+page ($g_{*Y}$, $g_{*X}$, « supports propres$/S$ dans $Y$ ») sont lus tels
+quels par la transcription, et la première ligne de son implication
+(« $R^{i}_{!}g_{*Y}(T_{X/S}) = 0$ si $i < 2d$ ») mêle les degrés des deux
+morphismes ; la forme ci-dessus est notre reconstruction, la seule cohérente
+avec les dimensions. Des formules encadrées et biffées au-dessus écrivaient
+déjà $T_{Y/X} \otimes T_{Y/S} \simeq T_{X/S}|_{Y}$.} La compatibilité
+« s'exprime plus aisément quand on dispose de la catégorie dérivée » : d'où les
+deux titres qui suivent, 18) catégories dérivées, 19) théorème de dualité
+globale.
+
+\section*{Catégories dérivées et dualité (pages 37 à 59)}
+
+\pagerange{37}{39}
+\subsection*{Catégories dérivées (article 18, pages 37 et 39)}
+
+Les foncteurs entre catégories triangulées commutent à la translation et
+préservent les triangles distingués ; $D$, $D^{-}$, $D^{b}$ sont utiles même
+sans assez de projectifs. Pour un morphisme de topos annelés, l'image inverse
+se dérive à gauche, sur $D^{-}$, au moyen de résolutions plates --- c'est la
+construction qu'il attribue à la « suite de Verdier » --- et s'étend à $D^{+}$
+et $D^{b}$ quand $f$ est de Tor-dimension finie ; pour $f$ plat, $f^{*}$ est
+exact et passe directement aux $D^{+}$.\footnote{Pour les faisceaux étales de
+$\Lambda$-modules, $f^{*}$ est toujours exact ; ces distinctions ne servent
+qu'au cadre des topos annelés. La phrase entre crochets de la page 37 est de
+lecture très incertaine. Une marge note qu'on peut aussi construire « un
+adjoint à droite, $\mathbb{R}f^{\times}$, mais il n'a pas la variance
+intuitive » ; la page ne dit pas de quel foncteur, et nous ne
+l'identifions pas.}
+
+Pour des complexes $F$, $G$, on définit $R\operatorname{Hom}(F, G) =
+\operatorname{Hom}^{\bullet}(F, C(G))$, où $C(G)$ est une résolution injective,
+et le faisceau $R\mathcal{H}om(F, G)$, liés par
+\[
+  R\operatorname{Hom}(F, G) = R\Gamma\bigl(X, R\mathcal{H}om(F, G)\bigr) ;
+\]
+$\operatorname{Ext}^{i}(F, G) = \operatorname{Hom}(F, G[i])$, les
+$\mathcal{E}xt^{i}$ sont les faisceaux correspondants, et la suite spectrale
+$E_{2}^{pq} = H^{p}(X, \mathcal{E}xt^{q}(F, G)) \Rightarrow
+\operatorname{Ext}^{p+q}(F, G)$ relie les deux.\footnote{Il écrit le décalage
+$C(i)$ ; nous écrivons $[i]$. Une seconde suite spectrale, obtenue « terme à
+terme », est seulement indiquée, sous une forme qui n'est pas utilisable
+telle quelle.}
+
+\pagerange{41}{43}
+\subsection*{L'image directe à supports propres sur les complexes (pages 41 et 43)}
+
+Pour $f$ compactifiable comme plus haut, $Rf_{!} = R\bar f_{*} \circ i_{!} :
+D^{+}(X) \to D^{+}(Y)$, avec $\mathcal{H}^{i}(Rf_{!}) = R^{i}f_{!}$. Il vérifie
+$R(gf)_{!} \simeq Rg_{!}Rf_{!}$ et la compatibilité à l'extension de la base.
+Si $Y$ est quasi-compact, $\bar f_{*}$ est de dimension cohomologique finie (les
+fibres étant de dimension bornée), et $Rf_{!}$ se prolonge à $D(X) \to D(Y)$, en
+respectant $D^{-}$, $D^{+}$, $D^{b}$.
+
+Pour un carré cartésien, $h : X' \to X$, $g : Y' \to Y$, $f' : X' \to Y'$, on
+définit pour tout $f$ et tout $F \in D^{+}(X)$ la flèche de changement de base
+\[
+  g^{*}Rf_{*}F \longrightarrow Rf'_{*}h^{*}F,
+\]
+qui redonne en cohomologie les $g^{*}R^{i}f_{*}F \to R^{i}f'_{*}h^{*}F$ ; c'est
+un isomorphisme quand $f$ est propre (changement de base propre).
+
+\pagerange{45}{47}
+\subsection*{La dualité globale, et un exemple (pages 45 et 47)}
+
+La page 45 ne porte qu'un titre : « Le th.\ de dualité globale : énoncé
+général pour un morphisme lisse compactifiable ».\footnote{Le titre est
+numéroté « § (9) » ; c'est vraisemblablement le 19) annoncé page 35. L'énoncé
+n'est écrit nulle part dans le dossier : ce que les articles suivants
+utilisent en est la forme d'adjonction, $\operatorname{Hom}(F, Rf^{!}G) \simeq
+\operatorname{Hom}(Rf_{!}F, G)$, et le calcul $Rf^{!}G = f^{*}G \otimes
+T_{X/S}[2d]$ pour $f$ lisse.} La page 47 en donne l'exemple (article 20) : sur
+un corps $k$ algébriquement clos, pour $X$ de dimension $d$,
+$H^{i}_{c}(X, F)^{\vee} \simeq H^{-i}(X, D_{X}F)$, où $(-)^{\vee} =
+\operatorname{Hom}(-, \Lambda)$ ; si $X$ est lisse et $F$ localement constant
+constructible,
+\[
+  H^{i}_{c}(X, F)^{\vee} \simeq H^{2d-i}\bigl(X, \mathcal{H}om(F,
+  \Lambda(d))\bigr),
+\]
+la dualité de Poincaré. « On retrouve le th.\ de finitude d'Artin. » Au-dessus
+d'une base $S$ quelconque, pour $f : X \to S$ lisse de dimension relative $d$,
+si \emph{tous} les $R^{j}f_{!}F$ sont localement constants constructibles (par
+exemple $f$ propre et lisse, $F$ localement constant constructible), on a
+\[
+  \mathcal{H}om\bigl(R^{i}f_{!}F, \Lambda_{S}\bigr) \simeq
+  \mathcal{H}^{-i}\bigl(Rf_{*}D_{X}F\bigr),
+\]
+et, pour $F$ localement constant, $\simeq R^{2d-i}f_{*}\mathcal{H}om(F,
+\Lambda(d))$.\footnote{La page écrit $(\mathbb{Z}/n\mathbb{Z})_{X}$ ; le faisceau
+vit sur la base $S$. L'hypothèse portant sur tous les $j$ est nécessaire :
+c'est elle qui permet de passer de $R\mathcal{H}om(Rf_{!}F, \Lambda_{S})$ aux
+$\mathcal{H}om$ des faisceaux de cohomologie, car $\mathcal{E}xt^{q}(L,
+\Lambda) = 0$ pour $q > 0$ et $L$ localement constant constructible
+($\Lambda$ étant auto-injectif). La page indique une généralisation où
+l'hypothèse ne vaut que pour $i \leq i_{0}$ et la conclusion pour $j \geq 2d -
+i_{0}$.}
+
+\pagerange{49}{53}
+\subsection*{La dualité pour une immersion (article 21, pages 49 à 53)}
+
+Soit $i : Y \to X$ une immersion. Le foncteur $i_{!}$ est exact (égal à $i_{*}$
+si $i$ est fermée), donc $Ri_{!} = i_{!}$. On définit $i^{!}$, des complexes
+de $X$ vers ceux de $Y$,\footnote{La page écrit $i^{!} : C(Y) \to C(X)$ ; le
+sens est l'inverse, comme le montre la définition.} en factorisant $i$ en une
+immersion fermée $i' : Y \to \mathcal{U}$ suivie d'une immersion ouverte $j :
+\mathcal{U} \to X$, et en posant $i^{!}F = i'^{*}\underline{\Gamma}_{Y}(j^{*}F)$.
+Il ne dépend pas de la factorisation, car il est adjoint à droite de $i_{!}$ :
+\[
+  \operatorname{Hom}_{Y}(G, i^{!}F) \simeq \operatorname{Hom}_{X}(i_{!}G, F).
+\]
+Comme $i_{!}$ est exact, $i^{!}$ transforme injectifs en injectifs, d'où $Ri^{!}
+: D^{+}(X) \to D^{+}(Y)$ et la \emph{formule de dualité pour les immersions},
+isomorphisme bifonctoriel
+\[
+  \operatorname{Hom}(G, Ri^{!}F) \simeq \operatorname{Hom}(i_{!}G, F),
+\]
+qui se vérifie en remplaçant $F$ par une résolution injective. Si $i$ est
+fermée, $i_{*}Ri^{!} \simeq R\underline{\Gamma}_{Y}$ et
+$\mathcal{H}^{q}(Ri^{!}F) \simeq i^{*}\underline{H}^{q}_{Y}(F)$. La co-unité de
+l'adjonction est l'homomorphisme trace $\operatorname{Tr}_{i}(F) : i_{!}Ri^{!}F
+\to F$, « de la même façon que dans le cas du th.\ de dualité globale pour un
+morphisme lisse ».\footnote{Le renvoi aux généralités sur les topos
+(« cf Exp IV ») est de la page ; une partie de l'argument de la page 51 est
+illisible, et un passage encadré y est biffé.}
+
+\pagerange{55}{59}
+\subsection*{La pureté relative comme conséquence de la dualité (article 22, pages 55 à 59)}
+
+Soit $i : Y \hookrightarrow X$ une immersion fermée de $S$-schémas lisses, de
+codimension $d$, $f : X \to S$, $g = fi$. Puisque $Rg_{!} = Rf_{!}i_{!}$,
+l'unicité des adjoints donne $Rg^{!} \simeq Ri^{!}Rf^{!}$. Avec $Rf^{!}G =
+f^{*}G \otimes T_{X/S}[2\dim(X/S)]$ et la même formule pour $g$, il vient
+\[
+  Ri^{!}(f^{*}G) \simeq g^{*}G \otimes T_{Y/X}^{-1}[-2d],
+\]
+c'est-à-dire $\underline{H}^{q}_{Y}(f^{*}G) = 0$ pour $q \neq 2d$ et
+$\underline{H}^{2d}_{Y}(f^{*}G) \simeq g^{*}G \otimes T_{Y/X}^{-1}$ : le théorème
+de pureté relatif, pour tout faisceau $G$ de la base.\footnote{La page passe
+par la forme faisceautique de la dualité,
+$Rf_{*}R\mathcal{H}om(K, Rf^{!}G) \simeq R\mathcal{H}om(Rf_{!}K, G)$, appliquée
+à $K = \Lambda_{Y}$ ; elle écrit au premier membre $\mathbb{R}_{!}f_{*}$, là
+où la formule de Verdier a $Rf_{*}$, et la flèche qui suit (« s'écrit
+$g_{*}(\dots) \xrightarrow{\sim} G$ ») n'est pas utilisable telle quelle. Nous
+donnons la conséquence qu'elle vise par le chemin le plus court ; la
+lissité de $g$, illisible sur la page, est requise.} Pour un $Y$ plus général
+(ligne illisible), il se ramène, localement, au cas où $X = \mathbb{A}^{d}_{S}$
+et $Y$ est sa section nulle --- au moyen d'équations $t_{1}, \dots, t_{d}$ de
+$Y$, qui définissent un morphisme lisse $X \to \mathbb{A}^{d}_{S}$ au voisinage
+de $Y$ --- par le changement de base lisse.
+
+\emph{Le changement de base lisse comme conséquence de la dualité}
+(« d'après Verdier »). Pour une immersion $i : Y \to X$ et un morphisme lisse
+$X' \to X$, de changé $Y' \to Y$, il veut un isomorphisme $g^{*}Ri^{!} \to
+Ri'^{!}f^{*}$, et l'obtient par adjonction : les adjoints de $Rf_{!}Ri'_{!}$ et
+de $Ri_{!}Rg_{!}$ sont « évidemment isomorphes ». Mais il faut prouver que
+l'isomorphisme ainsi obtenu est bien l'« adjoint » de la flèche de changement de
+base, « ce que je n'ai pas fait », et qui demanderait de savoir des choses sur
+des arguments non bornés --- « ce qui me semble nullement clair ». La note
+s'arrête sur « Ref exposé d'Artin ».\footnote{L'argument est donc annoncé et
+non établi dans le dossier. Les pages 57 et 59 sont en grande partie
+illisibles ; nous ne restituons que ce qu'elles disent clairement.}
+
+\section*{Le foncteur $Rf^{!}$ (pages 61 à 83)}
+
+\pagerange{61}{71}
+\subsection*{Morphismes lissement compactifiables (article 23, pages 61 à 71)}
+
+Un morphisme $f : X \to Y$ est \emph{lissement compactifiable} s'il se
+factorise en une immersion $i : X \to X'$ suivie d'un morphisme lisse (et
+projectif) $f' : X' \to Y$ --- par exemple si $f$ est quasi-projectif (et $Y$
+convenable), via $X \hookrightarrow \mathbb{P}^{r}_{Y}$. On pose
+\[
+  Rf^{!} = Ri^{!} \circ Rf'^{!} : D^{+}(Y) \to D^{+}(X), \qquad Rf'^{!}G =
+  f'^{*}G \otimes T_{X'/Y}[2\dim(X'/Y)],
+\]
+et la dualité pour $f'$ et pour $i$ donne l'isomorphisme fonctoriel
+\[
+  \operatorname{Hom}(F, Rf^{!}G) \simeq \operatorname{Hom}(Rf_{!}F, G) \qquad
+  (F \in D^{b}(X),\ G \in D^{+}(Y)).
+\]
+Quand $f$ est lui-même lisse, cette définition doit coïncider avec la
+définition directe : c'est, dit-il, essentiellement le théorème de pureté
+relatif, avec la transitivité des degrés.\footnote{Le passage est encadré et
+marqué « à préciser » ; sa lecture est très lacunaire.}
+
+\emph{Indépendance de la factorisation.} L'argument, dit-il, est dû à
+Hartshorne pour la dualité des faisceaux cohérents. Deux factorisations par
+$X'$ et $X''$ se comparent à la troisième, par $X''' = X' \times_{Y} X''$ ; on
+est ramené à deux factorisations dont l'une domine l'autre, $i' = g\,i''$ avec $g :
+X'' \to X'$ lisse, puis, par la transitivité $Rf''^{!} \simeq Rg^{!}Rf'^{!}$ des
+morphismes lisses, au cas $X' = Y$. Changeant de notations : on a un morphisme
+lisse $g : X \to Y$, une immersion $i : Y' \to Y$, et une immersion de $Y'$
+dans $X$ au-dessus de $Y$, c'est-à-dire une section $\sigma$ de $g' : X' = X
+\times_{Y} Y' \to Y'$ ; soit $j : X' \to X$ la projection, immersion déduite de
+$i$. Il s'agit de prouver
+\[
+  Ri^{!} \simeq R(j\sigma)^{!}\,Rg^{!}
+\]
+(et une compatibilité des traces). Elle résulte de deux isomorphismes :
+\[
+  \text{(a)}\ \ Rg'^{!}\,Ri^{!} \simeq Rj^{!}\,Rg^{!}, \qquad
+  \text{(b)}\ \ \mathrm{id} \simeq R\sigma^{!}\,Rg'^{!},
+\]
+car alors $Ri^{!} \simeq R\sigma^{!}Rg'^{!}Ri^{!} \simeq R\sigma^{!}Rj^{!}Rg^{!}
+\simeq R(j\sigma)^{!}Rg^{!}$.\footnote{Le schéma de la page dessine $j$ et $i$
+de $X$ vers $X'$ et de $Y$ vers $Y'$ ; les flèches sont dans l'autre sens, comme
+l'exigent la définition de $X'$ et la formule $(*)$ qu'il écrit ensuite. Nous
+redessinons ainsi le carré : $j : X' \to X$, $i : Y' \to Y$, $\sigma : Y' \to
+X'$.} L'isomorphisme (b) relève des classes fondamentales locales et globales
+(pureté pour une section d'un morphisme lisse) ; (a), qui s'écrit après
+décalage et torsion $g'^{*}Ri^{!} \simeq Rj^{!}g^{*}$, est le changement de base
+lisse.\footnote{Il écrit la torsion par analogie avec le cas cohérent, en termes
+de $\underline{\Omega}^{d}_{X'/Y'} \simeq \underline{\Omega}^{d}_{X/Y}
+\otimes_{\mathcal{O}_{X}} \mathcal{O}_{X'}$ ; dans le cadre étale, c'est
+$T_{X'/Y'} = T_{X/Y}|_{X'}$.} La compatibilité aux traces, qui reste à vérifier,
+est laissée.
+
+Deux remarques : la fonctorialité de $Rf^{!}$ et les compatibilités aux
+transitivités sont renvoyées au « formulaire » (article 25) ; et l'hypothèse
+« lissement compactifiable » devrait pouvoir être affaiblie, la définition
+de $Rf^{!}$ par recollement valant pour $f$ localement de type fini. Il note
+enfin la flèche trace $\operatorname{Tr}_{f} : Rf_{!}Rf^{!} \to \mathrm{id}$, co-unité
+de l'adjonction.\footnote{La page 71 est presque entièrement illisible, et la
+fin en est biffée.}
+
+\pagerange{73}{81}
+\subsection*{Sous-schéma lisse d'un schéma lisse ; Gysin (article 23 bis, pages 73 à 81)}
+
+Soit $i : Y \hookrightarrow X$ une immersion fermée de $S$-schémas lisses, de
+codimension $d$, $f : X \to S$ de dimension relative $r$, $g : Y \to S$ de
+dimension relative $r - d$. La pureté donne $Ri^{!}(T_{X/S}) \simeq
+T_{Y/S}[-2d]$, et la trace de $i$ un homomorphisme $i_{*}T_{Y/S}[-2d] \to
+T_{X/S}$ ; en appliquant $Rf_{!}$,
+\[
+  Rg_{!}(T_{Y/S})[-2d] \longrightarrow Rf_{!}(T_{X/S}), \qquad
+  R^{q-2d}g_{!}(T_{Y/S}) \longrightarrow R^{q}f_{!}(T_{X/S}),
+\]
+et pour $q = 2r$, $R^{2(r-d)}g_{!}(T_{Y/S}) \to R^{2r}f_{!}(T_{X/S})$, qui (a)
+est compatible aux traces : composé avec $\operatorname{Tr}_{f}$, il donne
+$\operatorname{Tr}_{g}$.\footnote{La page écrit d'abord $T_{Y/S}[2d]$ puis
+$T_{Y/S}[-2d]$ ; le signe correct est $-2d$. Elle donne pour but de la dernière
+flèche $T_{X/S}$, ce que la transcription relève déjà ; le but est
+$R^{2r}f_{!}(T_{X/S})$, puis $\Lambda_{S}$ par la trace.} (b) Plus
+généralement, pour tout $G$ sur $S$, $Rg^{!}G \simeq Ri^{!}Rf^{!}G$, ce qui
+« généralise le th.\ de pureté relatif » et « devrait être explicité dans
+SGAA » ; on en tire $\underline{H}^{q}_{Y}(f^{*}G) = 0$ pour $q \neq 2d$,
+$\simeq g^{*}G \otimes T_{Y/X}^{-1}$ pour $q = 2d$, et l'homomorphisme canonique
+$i_{*}Rg^{!}G \to Rf^{!}G$ rend commutatif le triangle
+\[
+  \operatorname{Tr}_{f} \circ Rf_{!}\bigl(i_{*}Rg^{!}G \to Rf^{!}G\bigr) =
+  \operatorname{Tr}_{g} : Rg_{!}Rg^{!}G \to G.
+\]
+Il en conclut que l'isomorphisme de dualité $\Theta_{g}$ est « induit » par
+$\Theta_{f}$, au moyen de l'isomorphisme de dualité (trivial) $\Theta_{i}$ et de
+l'isomorphisme de transitivité : pour $F$ sur $Y$, le carré
+\[
+  \operatorname{Ext}^{q}_{Y}(F, Rg^{!}G) \xrightarrow{\Theta_{g}}
+  \operatorname{Ext}^{q}_{S}(Rg_{!}F, G), \qquad
+  \operatorname{Ext}^{q}_{X}(i_{*}F, Rf^{!}G) \xrightarrow{\Theta_{f}}
+  \operatorname{Ext}^{q}_{S}(Rf_{!}i_{*}F, G)
+\]
+commute, les flèches verticales étant $\Theta_{i}$ et la transitivité.
+
+Il enchaîne sur deux points : 2°) la transitivité $R(gf)^{!} \simeq
+Rf^{!}Rg^{!}$ ; 3°) le cas de deux $Z$-schémas lisses. Soient $g : Y \to Z$
+lisse de dimension relative $d$, $h : X \to Z$ lisse de dimension relative $d'$,
+et $f : X \to Y$ un $Z$-morphisme quelconque (compactifiable). Pour $F$ sur $Z$,
+$g^{*}F = g^{!}F \otimes T_{Y/Z}^{-1}[-2d]$, d'où
+\[
+  Rf^{!}(g^{*}F) \simeq h^{!}F \otimes T_{Y/Z}^{-1}[-2d] \simeq h^{*}F \otimes
+  T_{X/Y}[2d_{X/Y}], \qquad T_{X/Y} = T_{X/Z} \otimes T_{Y/Z}^{-1},\quad
+  d_{X/Y} = d' - d.
+\]
+Entre schémas lisses sur une même base, tout morphisme se comporte donc, pour
+$Rf^{!}$, comme un morphisme lisse de « dimension relative » $d_{X/Y}$,
+éventuellement négative --- ce qu'on appelle aujourd'hui la dimension relative
+virtuelle.\footnote{La page écrit $G^{\bullet} \simeq g^{!}(F^{\bullet}) \otimes
+T_{Y/Z}[-2d]$ ; la torsion est l'inverse, puisque $g^{!}F = g^{*}F \otimes
+T_{Y/Z}[2d]$. Ici $T_{X/Y}$ est une torsion de Tate, $\Lambda(d_{X/Y})$, et non
+le faisceau d'un morphisme lisse. Le nom qu'il donne à $d_{X/Y}$ est d'une
+lecture incertaine.}
+
+Page 81, les \emph{morphismes de Gysin} qui en résultent, sans condition de
+finitude sur $f$ : en appliquant $Rg_{!}$ à la trace $Rf_{!}Rf^{!}(g^{*}F) \to
+g^{*}F$,
+\[
+  Rh_{!}\bigl(h^{*}F \otimes T_{X/Y}[2d_{X/Y}]\bigr) \longrightarrow
+  Rg_{!}(g^{*}F), \qquad
+  R^{q+2d_{X/Y}}h_{!}(h^{*}F)(d_{X/Y}) \longrightarrow R^{q}g_{!}(g^{*}F),
+\]
+et, si $f$ est propre et $Z$ le spectre d'un corps, $H^{q+2d_{X/Y}}(X,
+h^{*}F)(d_{X/Y}) \to H^{q}(Y, g^{*}F)$. Pour une immersion fermée de
+codimension $c$, $d_{X/Y} = -c$ et l'on retrouve le Gysin qui élève le degré de
+$2c$. Il admet que ces morphismes satisfont la transitivité qui
+s'impose.\footnote{Sur la page, la torsion est écrite $\otimes T_{X/Y}$ après
+le $R^{q}h_{!}$ ; c'est la torsion de Tate, faisceau de la base, qui
+seule a un sens à cet endroit.}
+
+\pagerange{83}{83}
+\subsection*{Trace et Gysin en général (article 24, page 83)}
+
+Pour $f : X \to Y$ localement compactifiable et $G \in D^{+}(Y)$, la co-unité
+$Rf_{!}Rf^{!}G \to G$ donne $R^{q}f_{!}(Rf^{!}G) \to \mathcal{H}^{q}(G)$ et
+$H^{q}_{\Phi(f)}(X, Rf^{!}G) \to H^{q}(Y, G)$, $\Phi(f)$ désignant la famille
+des supports propres sur $Y$ ; pour $f$ propre, $H^{q}(X, Rf^{!}G) \to H^{q}(Y,
+G)$. Variante au-dessus d'une base $Z$, avec $h = gf$ : $Rh_{!}(Rf^{!}G) \to
+Rg_{!}G$, et $H^{q}_{\Phi(h)}(X, Rf^{!}G) \to H^{q}_{\Phi(g)}(Y, G)$.
+
+\section*{Le formulaire (pages 85 à 119)}
+
+\pagerange{85}{97}
+\subsection*{Les six opérations (article 25, pages 85 à 97)}
+
+Le titre annonce un « formulaire de $Rf_{!}$, $Rf_{*}$, $Rf^{!}$, $f^{*}$, et
+$\overset{L}{\otimes}$ et $R\mathcal{H}om$ » --- quatre opérations entre
+catégories et deux opérations internes : ce sont les six opérations.
+$Rf_{!}$ est défini pour $f$ compactifiable, $Rf^{!}$ pour $f$ « lissifiable »
+au sens de l'article 23.
+
+\emph{1° Transitivités.}
+\[
+  R(gf)_{*} \simeq Rg_{*}Rf_{*}, \quad (gf)^{*} \simeq f^{*}g^{*}, \quad
+  R(gf)_{!} \simeq Rg_{!}Rf_{!}, \quad R(gf)^{!} \simeq Rf^{!}Rg^{!}.
+\]
+Pour $Rf^{!}$ cela résulte « immédiatement » par adjonction. Une démonstration
+directe se décompose en trois cas : deux morphismes lisses, deux morphismes
+dont l'un est une immersion (triviaux), et la commutation des images inverses,
+qui est le changement de base lisse. Il faudrait vérifier que pour trois
+composés les isomorphismes de transitivité satisfont la compatibilité
+habituelle : « Nous l'admettrons. »
+
+\emph{2° Adjonctions.}
+\[
+  \operatorname{Hom}(Rf_{!}F, G) \simeq \operatorname{Hom}(F, Rf^{!}G), \qquad
+  \operatorname{Hom}(f^{*}G, F) \simeq \operatorname{Hom}(G, Rf_{*}F),
+\]
+la seconde étant triviale (on remplace $F$ par une résolution injective).
+
+\emph{3° Formules de projection} (sous forme interne) :
+\[
+  R\mathcal{H}om(Rf_{!}F, G) \simeq Rf_{*}R\mathcal{H}om(F, Rf^{!}G), \qquad
+  R\mathcal{H}om(G, Rf_{*}F) \simeq Rf_{*}R\mathcal{H}om(f^{*}G, F),
+\]
+la première étant la forme faisceautique de la dualité de
+Verdier ;\footnote{La page écrit au second membre
+$Rf_{*}(R\mathcal{H}om(Rf^{!}(F), G))$, ce que la transcription relève : les
+variances ne s'accordent pas, $F$ vivant sur $X$ et $G$ sur $Y$. La forme
+correcte est celle que nous donnons.} et, pour la forme tensorielle, $G
+\overset{L}{\otimes} Rf_{*}F \simeq Rf_{*}(f^{*}G \overset{L}{\otimes} F)$ si
+$G$ est localement libre de type fini, ce qui « peut se généraliser » à $G$
+localement constant.\footnote{Dans cette troisième formule les signes $!$ et
+$*$ sont surchargés et la lecture $Rf_{*}$ est incertaine. Pour $Rf_{!}$, la
+formule de projection vaut sans hypothèse sur $G$ : c'est le théorème de la
+page 111, ci-dessous.} Les isomorphismes 2° et 3° s'expriment à l'aide de la
+trace $\operatorname{Tr}_{f} : Rf_{!}Rf^{!} \to \mathrm{id}$ et de l'unité
+$\tau_{f} : \mathrm{id} \to Rf_{*}f^{*}$, et il y a des compatibilités entre
+eux et les transitivités de 1°.
+
+\emph{4° Changement de base.} Pour un carré cartésien de flèches $g : Y' \to Y$,
+$g' : X' \to X$, $f$, $f'$ :
+\[
+  g^{*}Rf_{!} \xrightarrow{\ \sim\ } Rf'_{!}g'^{*} \quad (\text{toujours}),
+  \qquad g^{*}Rf_{*} \xrightarrow{\ \sim\ } Rf'_{*}g'^{*} \quad
+  (f \text{ propre, ou } g \text{ lisse}),
+\]
+\[
+  g'^{*}Rf^{!} \xrightarrow{\ \sim\ } Rf'^{!}g^{*} \quad (f \text{ ou } g
+  \text{ lisse}), \qquad Rg^{!}Rf_{*} \simeq Rf'_{*}Rg'^{!} \quad (\text{toujours}).
+\]
+La dernière, note-t-il, est conséquence de la première par
+adjonction.\footnote{Elle en est l'adjointe à droite, les rôles de $f$ et $g$
+échangés. La troisième se démontre en séparant le cas lisse (changement de base
+lisse) et le cas d'une immersion (trivial), comme le dit la marge. Une flèche
+encadrée $Rg^{!}Rf_{!} \Rightarrow Rf'_{!}Rg'^{!}$ est biffée.}
+
+\emph{5° Formules d'induction.}
+\[
+  Rf^{!}R\mathcal{H}om(F, G) \simeq R\mathcal{H}om(f^{*}F, Rf^{!}G), \qquad
+  f^{*}(F \overset{L}{\otimes} G) \simeq f^{*}F \overset{L}{\otimes} f^{*}G.
+\]
+La première vaut pour tous $F \in D^{-}(Y)$, $G \in D^{+}(Y)$ : par adjonction
+et formule de projection pour $Rf_{!}$, les deux membres représentent le même
+foncteur $K \mapsto \operatorname{Hom}(Rf_{!}K \overset{L}{\otimes} F, G)$. La
+page la démontre autrement, en distinguant deux cas.\footnote{La démonstration
+de la page, dans le cas lisse, procède par dévissage de $F$ (filtration par des
+prolongements par zéro de faisceaux localement constants), ce qui suppose $F$
+à cohomologie constructible ; une incise effacée de la page 93 semble
+mentionner cette hypothèse. L'argument formel que nous donnons s'en passe.}
+(a) \emph{$f$ lisse} : la formule équivaut, puisque $Rf^{!} = f^{*}(d)[2d]$, à
+la commutation de $f^{*}$ aux $\mathcal{E}xt$ locaux ; on se ramène à $F =
+i_{!}F'$, $i : Y' \to Y$ immersion, $F'$ localement constant, et la chaîne
+\begin{align*}
+  f^{*}R\mathcal{H}om(i_{!}F', G) &\simeq f^{*}Ri_{*}R\mathcal{H}om(F', Ri^{!}G)
+  \simeq Rj_{*}R\mathcal{H}om(f'^{*}F', Rj^{!}f^{*}G) \\
+  &\simeq R\mathcal{H}om(j_{!}f'^{*}F', f^{*}G)
+\end{align*}
+--- dualité pour $i$, changement de base lisse, hypothèse de récurrence pour
+$f' : X' \to Y'$, dualité pour $j : X' \to X$ --- ramène au cas $F$ localement
+constant, puis constant, puis $F = \Lambda_{Y}$, trivial. (b) \emph{$f$ immersion
+fermée} : avec $G$ injectif, $\mathcal{H}om^{\bullet}(F, G)$ est flasque et
+$f^{!}G$ injectif, et $f^{!}\mathcal{H}om^{\bullet}(F, G) \simeq
+\mathcal{H}om^{\bullet}(f^{*}F, f^{!}G)$.
+
+Les formules de projection et d'induction s'interprètent comme des formules
+\emph{d'échange} par la dualité $D$ :
+\[
+  Rf_{*}D_{X} \simeq D_{Y}Rf_{!}, \qquad Rf^{!}D_{Y} \simeq D_{X}f^{*} :
+\]
+$D$ échange $Rf_{*}$ et $Rf_{!}$, $f^{*}$ et $Rf^{!}$.
+
+\pagerange{99}{107}
+\subsection*{Produit tensoriel dérivé (article 26, pages 99 à 107)}
+
+Généralités, valables sur tout topos annelé. Un Module $F$ est plat si $F
+\otimes -$ est exact, ce qui équivaut à : $\mathcal{H}om(F, I)$ injectif pour
+tout injectif $I$, et se vérifie ici sur les fibres. Tout Module est quotient
+d'un plat (une somme de $\Lambda_{U}$, $U$ étale sur $X$, prolongés par zéro) ;
+tout $L \in D^{-}(X)$ admet donc une résolution plate, et $D^{-}(X)$ est
+équivalente à la catégorie des complexes plats bornés supérieurement, localisée
+par les quasi-isomorphismes. On calcule $L \overset{L}{\otimes} M$ en résolvant
+$L$ et $M$ par des plats. Ses faisceaux de cohomologie sont les \emph{hypertor}
+$\mathcal{T}or_{i}(L, M)$ ; tout triangle en l'un des arguments donne la suite
+exacte longue habituelle. La formation de $L \overset{L}{\otimes} M$ commute
+aux images inverses, en particulier au passage aux fibres. Variante globale :
+$R\Gamma(X, L \overset{L}{\otimes} M)$.\footnote{Une marge s'interroge : « est-ce
+vrai dans le contexte des topos généraux ?! » ; une autre, sur la variante
+globale, est en partie illisible.}
+
+Lois formelles : associativité ; commutativité (« attention aux signes ! ») ;
+adjonction
+\[
+  R\mathcal{H}om(L \overset{L}{\otimes} M, K) \simeq R\mathcal{H}om\bigl(L,
+  R\mathcal{H}om(M, K)\bigr),
+\]
+et ses variantes $R\operatorname{Hom}$ et $\operatorname{Hom}$ globales, pour
+$K \in D^{+}$. Pour un morphisme de topos annelés, $Lf^{*} : D^{-}(Y) \to
+D^{-}(X)$ se définit par les complexes plats et vérifie
+$Lf^{*}(L \overset{L}{\otimes} M) \simeq Lf^{*}L \overset{L}{\otimes} Lf^{*}M$
+et $L(gf)^{*} \simeq Lf^{*}Lg^{*}$. Notation : pour $L$ sur $X$ et $M$ sur $Y$,
+$L \overset{L}{\otimes}_{Y} M = L \overset{L}{\otimes} Lf^{*}M$.
+
+\emph{Adjonction et projection.} $\operatorname{Hom}(Lf^{*}L, K) \simeq
+\operatorname{Hom}(L, Rf_{*}K)$, et, sous forme interne,
+$Rf_{*}R\mathcal{H}om(Lf^{*}L, K) \simeq R\mathcal{H}om(L, Rf_{*}K)$, d'où la
+forme globale en appliquant $R\Gamma(Y, -)$ ; la vérification se ramène à $L =
+\Lambda_{Y'}$ pour $Y' \to Y$ étale, où c'est le fait que $R\Gamma(Y',
+Rf'_{*}-) = R\Gamma(X', -)$.
+
+Il précise, page 107, s'être borné aux formules générales valables sans
+condition de régularité (pseudo-cohérence, quasi-cohérence), et aux cas
+« naturels » d'existence des opérations, sans examiner les variantes
+d'hypothèse de Tor-dimension ou d'Ext-dimension finie.
+
+\pagerange{107}{111}
+\subsection*{Domaines de définition (pages 107 à 111)}
+
+Pour Künneth, on est obligé de travailler sur $\Lambda = \mathbb{Z}/n\mathbb{Z}$,
+qui n'est pas de dimension globale finie,\footnote{Dès que $n$ a un facteur
+carré : sur $\mathbb{Z}/4$, le module $\mathbb{Z}/2$ n'a pas de résolution
+projective finie. C'est ce qui interdit de rester dans les $D^{+}$, le
+produit tensoriel dérivé de deux faisceaux pouvant être non borné.} donc dans
+les $D^{-}$, et il faut savoir définir $Rf_{*}$ et $Rf_{!}$ hors de $D^{+}$.
+Pour $Rf_{*}$, c'est possible dès que $f_{*}$ est de dimension cohomologique
+finie : peut-être dès que $Y$ est noethérien, en tout cas, par la finitude de la
+dimension cohomologique des corps de type fini, pour $f$ de type fini et $Y$ de
+type fini sur un corps ou sur $\operatorname{Spec}\mathbb{Z}$.\footnote{Il
+s'agit de la dimension cohomologique du foncteur $f_{*}$, qui se lit sur les
+fibres au-dessus des hensélisés stricts de $Y$, non de celle de $Y$ : pour
+$R\Gamma$, c'est-à-dire $f$ à valeurs dans $\operatorname{Spec} k$, il faut
+$\operatorname{cd}(k)$ finie, ce qui est faux pour $k = \mathbb{R}$ ou
+$\mathbb{Q}$ à coefficients $\mathbb{Z}/2$. Pour $f$ de type fini entre
+schémas quasi-excellents, la finitude cherchée, à coefficients premiers aux
+caractéristiques, a été établie plus tard par Gabber ; il ne pouvait le
+connaître.} Pour $Rf_{!}$, par le changement de base propre, dès que $Y$ est
+quasi-compact : $Rf_{!}$ envoie $D$, $D^{+}$, $D^{-}$, $D^{b}$ dans les
+catégories correspondantes si $Y$ est quasi-compact et $f$ compactifiable ;
+$Rf_{*}$ de même sous les hypothèses précédentes ; $f^{*}$ toujours ; $Rf^{!}$
+si $f$ est compactifiable de type fini, $Y$ de type fini sur un corps ou sur
+$\operatorname{Spec}\mathbb{Z}$. En revanche $\overset{L}{\otimes}$ et
+$R\mathcal{H}om$ n'ont aucune raison d'être de dimension cohomologique finie.
+
+\pagerange{111}{119}
+\subsection*{Formule de projection et formule de Künneth (pages 111 à 119)}
+
+\emph{Théorème} (formule de projection). Soit $f : X \to Y$ compactifiable, $Y$
+quasi-compact, $L \in D^{-}(X)$, $M \in D^{-}(Y)$. Il existe un isomorphisme
+canonique bifonctoriel
+\[
+  Rf_{!}L \overset{L}{\otimes} M \simeq Rf_{!}(L \overset{L}{\otimes} f^{*}M).
+\]
+On se ramène à $f$ propre, $L$ à termes $f_{*}$-acycliques, $M$ à termes plats ;
+la flèche vient de $M \to \mathcal{H}om^{\bullet}(f_{*}L, f_{*}(L \otimes M))$,
+composé avec une résolution $f_{*}$-acyclique de $L \otimes M$. Pour voir que
+c'est un isomorphisme, on se ramène à $M = i_{!}\Lambda_{Y'}$, $i : Y' \to Y$
+étale ; avec $i_{!}Q \otimes P \simeq i_{!}(Q \otimes i^{*}P)$ et le carré
+cartésien $j : X' \to X$, $f' : X' \to Y'$,
+\[
+  i_{!}\Lambda_{Y'} \otimes Rf_{!}L \simeq i_{!}i^{*}Rf_{!}L \simeq
+  i_{!}Rf'_{!}j^{*}L \simeq Rf_{!}j_{!}j^{*}L \simeq Rf_{!}\bigl(f^{*}i_{!}
+  \Lambda_{Y'} \otimes L\bigr).
+\]
+« O.K. »\footnote{Au dernier membre la page porte $\mathbb{L}j^{*}(L)$ au lieu
+de $L$, ce que la transcription relève : $j_{!}j^{*}L = j_{!}\Lambda_{X'}
+\otimes L$ et $j_{!}\Lambda_{X'} = f^{*}i_{!}\Lambda_{Y'}$.}
+
+Juste avant, une proposition de la même encre plus foncée affirme la formule
+analogue pour $Rf_{*}$, $Rf_{*}L \overset{L}{\otimes} M \simeq Rf_{*}(L
+\overset{L}{\otimes} f^{*}M)$, quand $M$ est à cohomologie localement constante
+constructible, ou quand $f$ est quasi-compact quasi-séparé et $M$ à cohomologie
+localement constante --- « sans réserve de dimension cohomologique
+finie ».\footnote{Sur la page, les deux membres de la proposition sont
+identiques ; nous donnons la forme qu'il énonce et esquisse page 119, par
+réduction à $M = \Lambda_{Y}$. Il l'écrit avec $M$ « pseudo-cohérent » entre
+parenthèses. Nous la donnons comme son énoncé ; elle suppose $Rf_{*}$ défini sur
+les complexes considérés.} La page 119 donne la raison de cette restriction :
+pour $Rf_{*}$, la formule de projection est fausse en général, l'exemple, pour autant qu'il se lise, étant
+celui d'une immersion ouverte et de $M$ le prolongement par zéro du faisceau
+constant d'un ouvert.
+
+\emph{Corollaire} (formule de Künneth). Soient $f : X \to S$, $g : Y \to S$
+compactifiables, $S$ quasi-compact, $Z = X \times_{S} Y$ avec ses projections
+$p_{1} : Z \to X$, $p_{2} : Z \to Y$ et $h : Z \to S$ ; pour $L \in D^{-}(X)$,
+$M \in D^{-}(Y)$,
+\[
+  Rh_{!}\bigl(p_{1}^{*}L \overset{L}{\otimes} p_{2}^{*}M\bigr) \simeq
+  Rf_{!}L \overset{L}{\otimes} Rg_{!}M,
+\]
+par deux applications de la formule de projection.\footnote{Il nomme les
+projections $g'$ et $f'$, changés de base de $g$ et de $f$.} Cas particulier :
+si $F$ est plat et tous les $R^{i}f_{!}F$ plats (ou de même du côté de
+$G$),\footnote{La page écrit « $F$ ou $G$ plat, et les $R^{i}_{!}f(F)$ ou les
+$R^{j}_{!}(G)$ plats », sans dire que les deux hypothèses portent sur le même
+côté ; c'est nécessaire, car c'est la platitude de ce côté qui permet de le
+représenter par un complexe plat borné à cohomologie plate, et d'annuler les
+$\mathcal{T}or$.}
+\[
+  R^{m}h_{!}\bigl(p_{1}^{*}F \otimes p_{2}^{*}G\bigr) \simeq
+  \bigoplus_{i+j=m} R^{i}f_{!}F \otimes R^{j}g_{!}G.
+\]
+On ne peut espérer mieux, même sur un corps algébriquement
+clos : il faut s'attendre à des termes $\mathcal{T}or$.
+
+Pour la cohomologie à supports quelconques, la formule de Künneth est fausse à
+coefficients $\mathbb{Z}/p$ en caractéristique $p$. Elle vaut si l'un des deux
+morphismes est propre et la base un corps séparablement clos :
+\[
+  R(f \times g)_{*}(L \boxtimes M) \simeq Rf_{*}L \overset{L}{\otimes}
+  Rg_{*}M,
+\]
+par la formule de projection pour le changé propre de $f$, le changement de base
+propre, puis la formule de projection pour $g$ --- qui exige que $Rf_{*}L$ soit à
+cohomologie localement constante, « !!! », ce qui est le cas sur un corps
+séparablement clos. Sans propreté, il faudrait des coefficients premiers à la
+caractéristique et la dualité locale.\footnote{Ce dernier cas a été établi plus
+tard (Deligne, « Théorèmes de finitude ») ; la page n'en esquisse que la
+direction, sur des lignes en partie illisibles.} Il note enfin que ces résultats
+ne dépendent pas de la dualité, et que la formule de Künneth propre avait déjà
+été établie par Verdier au moyen du théorème de dualité globale.
+
+\section*{Lefschetz (pages 121 à 161)}
+
+\pagerange{121}{121}
+\subsection*{Un choix de route (page 121)}
+
+« Nous en savons assez (formules de Künneth, dualité globale) pour faire la
+Lefschetz “cuite et pressée”, en redescendant sur terre. » Pour les courbes, on
+récupérerait par des arguments élémentaires, sans résolution des
+singularités, des formules de Lefschetz menant à la rationalité des fonctions
+$L$. Il pourrait aussi continuer à généraliser : dualité locale, théorème de
+bidualité, Lefschetz--Verdier. Il choisit la seconde voie : « Étant parti dans
+un formulaire de dualité général, je préfère en compléter les lignes
+essentielles avant de me mettre aux applications de détail. »\footnote{La page
+s'ouvre sur un point « (3) », dont (1) et (2) ne sont pas dans le dossier ; les
+articles 27 à 29 y manquent aussi. Plusieurs mots du premier paragraphe sont
+incertains.}
+
+\pagerange{123}{137}
+\subsection*{Trace d'un endomorphisme de complexe parfait (article 30, pages 123 à 137)}
+
+Classiquement, pour un endomorphisme $f$ d'une variété compacte $X$,
+$\sum(-1)^{i}\operatorname{Tr}(f \mid H^{i}(X))$ est le nombre de points
+fixes, comptés avec multiplicité. Verdier a établi une version à coefficients
+quelconques, de nature locale ; le cas « élémentaire » (variété, coefficients
+localement constants) résulte de la dualité de Poincaré, et l'auteur veut
+le donner en détail dans le cadre des schémas.\footnote{Ce paragraphe, page 123,
+est en grande partie illisible ; nous ne gardons que ce qui se lit. Une marge
+porte un nom de lecture incertaine (« Walters »).}
+
+Une difficulté préliminaire : à coefficients $\Lambda = \mathbb{Z}/\ell^{2}$
+les $H^{i}(X, F)$ ne sont plus libres et les traces des $f^{(i)}$ ne sont pas
+définies ; une méthode exposée ailleurs passe aux coefficients
+$\mathbb{Z}_{\ell}$ intègres.\footnote{La page renvoie à un exposé (« exposé
+Bourbaki », lecture incertaine) sans que l'on puisse lire de qui ; nous ne
+l'identifions pas.} La sienne est de remplacer les $H^{i}(X, \Lambda)$ par le
+complexe $R\Gamma(X, \Lambda)$ qui leur donne naissance, et les $f^{(i)}$ par
+l'endomorphisme $R\Gamma(f)$.
+
+\emph{Le formalisme.} Soit $A$ un anneau commutatif, non nécessairement
+noethérien, et $L \in D^{-}(A)$. $L$ est \emph{pseudo-cohérent} s'il est
+isomorphe à un complexe de modules de type fini en chaque degré, et de
+\emph{Tor-dimension finie} s'il est isomorphe à un complexe plat borné. Les
+complexes pseudo-cohérents de Tor-dimension finie sont ceux qui sont isomorphes
+dans $D(A)$ à un complexe borné de modules projectifs de type fini : ce sont les
+complexes \emph{parfaits}. Pour un endomorphisme $u$ d'un tel $L$ (dans $D(A)$),
+on définit $\operatorname{Tr}_{*}u \in A$ par : ($\alpha$) si $L$ est un
+complexe borné de projectifs de type fini et $u$ un morphisme de complexes,
+$\operatorname{Tr}_{*}u = \sum(-1)^{i}\operatorname{Tr}u_{i}$ ; ($\beta$)
+$\operatorname{Tr}_{*}$ est invariant par isomorphisme dans $D(A)$. L'unicité
+est claire ; l'existence revient à l'invariance de ($\alpha$) par homotopie.
+Propriétés : (a) en degré $0$, c'est la trace ordinaire ; (b) additivité pour
+une suite exacte courte de complexes munie d'endomorphismes
+compatibles ;\footnote{Additivité pour une suite exacte de \emph{complexes},
+avec endomorphismes donnés sur chacun : sur un triangle distingué de $D(A)$, le
+morphisme de triangles n'étant pas unique, l'additivité est en général en
+défaut. La page dit « pour une suite exacte ».} (c) $\operatorname{Tr}_{*}(uv)
+= \operatorname{Tr}_{*}(vu)$ ; (d) $\operatorname{Tr}_{*}(u
+\overset{L}{\otimes} v) = \operatorname{Tr}_{*}(u)\operatorname{Tr}_{*}(v)$.
+
+\emph{Forme intrinsèque.} Pour $L$ parfait, $L^{\vee} = R\operatorname{Hom}(L,
+A)$ est parfait, $L \to L^{\vee\vee}$ est un isomorphisme, $(L
+\overset{L}{\otimes} L')^{\vee} \simeq L^{\vee} \overset{L}{\otimes} L'^{\vee}$,
+et pour tout $M$, $R\operatorname{Hom}(L, M) \simeq L^{\vee}
+\overset{L}{\otimes} M$. Si $L$ et $M$ sont parfaits,
+$R\operatorname{Hom}(L, M)$ et $R\operatorname{Hom}(M, L)$ sont duaux l'un de
+l'autre, par l'accouplement qui à $u \in \operatorname{Hom}_{D(A)}(L, M)$ et $v
+\in \operatorname{Hom}_{D(A)}(M, L)$ associe
+\[
+  \langle u, v \rangle = \operatorname{Tr}_{*}(vu) = \operatorname{Tr}_{*}(uv)
+  \in A,
+\]
+qui vaut $\sum(-1)^{i}\operatorname{Tr}(v_{i}u_{i})$ quand $L$, $M$ sont des
+complexes bornés de projectifs de type fini et $u$, $v$ des morphismes de
+complexes. En particulier $\sum(-1)^{i}\operatorname{Tr}u_{i} = \langle u,
+\mathrm{id}_{L}\rangle$ : une expression intrinsèque de la trace
+alternée.\footnote{Les lettres de la première somme de la page sont surchargées,
+$(vu)$ puis $(uv)$ sans certitude ; les deux sont égales.} Pour appliquer cela à
+Lefschetz, il faut savoir que $R\Gamma(X, \Lambda)$ est parfait ; une marge
+note que le formalisme vaut sur un espace annelé sous hypothèse de
+pseudo-cohérence.
+
+\pagerange{137}{141}
+\subsection*{Complexes de Tor-dimension finie sur un schéma (article 31, pages 137 à 141)}
+
+Soit $L \in D^{-}(X)$. On dit que $L$ est de Tor-amplitude contenue dans
+$[a, b]$ si, pour tout Module $F$, $\mathcal{H}^{q}(F \overset{L}{\otimes} L) =
+0$ hors de $[a, b]$ ; c'est une condition sur les fibres aux points géométriques.
+Si $L$ est de Tor-amplitude $[a, b]$ et $L' \in D^{b}$ à cohomologie dans $[a',
+b']$, $L \overset{L}{\otimes} L'$ a sa cohomologie dans $[a + a', b + b']$ ; d'où
+la stabilité de la Tor-amplitude par produit tensoriel (les bornes s'ajoutent)
+et par image inverse. Remarques : ces notions valent pour un faisceau d'anneaux
+quelconque ; $L$ est de Tor-amplitude $[a, b]$ si et seulement s'il est
+quasi-isomorphe à un complexe plat nul hors de $[a, b]$.\footnote{La page
+indexe homologiquement --- « $\mathcal{T}or_{i}(F, L) = 0$ pour $i \notin [N,
+M]$ », avec des complexes notés $L_{\bullet}$ --- ; nous convertissons en degrés
+cohomologiques, $[a, b] = [-M, -N]$. C'est la seule lecture qui rende cohérente
+la borne de la proposition qui suit.}
+
+\emph{Proposition} (anneau de base de torsion). Soit $f : X \to Y$
+compactifiable à fibres de dimension $\leq d$. Si $L \in D^{b}(X)$ est de
+Tor-amplitude $[a, b]$, $Rf_{!}L$ est de Tor-amplitude $[a, b + 2d]$. En effet,
+pour $L'$ sur $Y$ de Tor-amplitude $[a', b']$, la formule de projection donne
+$Rf_{!}L \overset{L}{\otimes} L' \simeq Rf_{!}(L \overset{L}{\otimes} f^{*}L')$ ;
+le complexe $L \overset{L}{\otimes} f^{*}L'$ a sa cohomologie dans $[a + a', b +
+b']$, et $Rf_{!}$, de dimension cohomologique $\leq 2d$, la place dans $[a + a',
+b + b' + 2d]$.\footnote{En homologique, sur la page : « $R_{!}f(L_{\bullet})$
+est de tor-dim.\ majorée par $[N-2d, M]$ ». Le début de l'énoncé est à la fin de
+la page 139 ; la fin de la démonstration, page 141.} Joint à la finitude, cela
+assure que $Rf_{!}$ d'un complexe constructible de Tor-dimension finie est
+parfait sur un corps séparablement clos --- ce dont l'article 30 avait besoin.
+
+\pagerange{143}{161}
+\subsection*{La formule de Lefschetz--Verdier (article 32, pages 143 à 161)}
+
+Soient $f : X \to S$, $g : Y \to S$, $Z = X \times_{S} Y$, $p_{1}$, $p_{2}$ les
+projections, $h : Z \to S$, $F$ sur $X$, $G$ sur $Y$. Une \emph{correspondance
+cohomologique} de $(X, F)$ vers $(Y, G)$ est un élément de
+\begin{align*}
+  \operatorname{Corr}(X, F; Y, G) &= \operatorname{Hom}(p_{1}^{*}F,
+  Rp_{2}^{!}G) \simeq \operatorname{Hom}(Rp_{2!}p_{1}^{*}F, G) \\
+  &\simeq \operatorname{Hom}(g^{*}Rf_{!}F, G) \simeq \operatorname{Hom}(Rf_{!}F,
+  Rg_{*}G),
+\end{align*}
+par adjonction, changement de base propre, adjonction. De même
+$\operatorname{Hom}(p_{2}^{*}G, Rp_{1}^{!}F) \simeq \operatorname{Hom}(Rg_{!}G,
+Rf_{*}F)$. Si $f$ et $g$ sont propres, $S$ le spectre d'un corps séparablement
+clos et $F$, $G$ constructibles de Tor-dimension finie, $Rf_{*}F$ et
+$Rg_{*}G$ sont parfaits, et les deux groupes s'accouplent à valeurs dans
+$\Lambda$ par l'accouplement $\langle u, v\rangle = \operatorname{Tr}_{*}(vu)$ de
+l'article 30 --- des « nombres de Lefschetz ».
+
+\emph{L'accouplement local.} Sur $X$, pour $\mathcal{L}$ parfait, la trace est
+le composé $R\mathcal{H}om(\mathcal{L}, \mathcal{L}) \simeq
+\mathcal{L}^{\vee} \overset{L}{\otimes} \mathcal{L} \to \Lambda_{X}$, qui sur
+$\mathcal{H}^{0}$ s'écrit $\varphi \mapsto \sum(-1)^{i}\operatorname{Tr}
+\varphi_{i}$ quand $\mathcal{L}$ est localement libre de type fini en chaque
+degré. Pour $\mathcal{L}$, $\mathcal{M}$ parfaits, les compositions $(u, v)
+\mapsto vu \in R\mathcal{H}om(\mathcal{L}, \mathcal{L})$ et $(u, v) \mapsto uv
+\in R\mathcal{H}om(\mathcal{M}, \mathcal{M})$ ont même trace, et l'accouplement
+$R\mathcal{H}om(\mathcal{L}, \mathcal{M}) \otimes R\mathcal{H}om(\mathcal{M},
+\mathcal{L}) \to \Lambda_{X}$ identifie chacun des deux facteurs au dual de
+l'autre.\footnote{La page écrit la seconde composition sur
+$R\mathcal{H}om(\mathcal{M}, \mathcal{L}) \times R\mathcal{H}om(\mathcal{L},
+\mathcal{L})$, et le composé $v u$ comme une flèche $\mathcal{L} \to
+\mathcal{M}$ ; il faut $R\mathcal{H}om(\mathcal{L}, \mathcal{M})$ au second
+facteur, et $vu : \mathcal{L} \to \mathcal{L}$. Elle écrit aussi $u$ et $v$
+avec des décalages $[i]$, $[-i]$, dont les signes ne sont pas contrôlés ; nous
+nous en tenons aux morphismes de degré $0$.}
+
+\emph{L'accouplement sur $Z$} (sans hypothèse de propreté). On veut un
+accouplement
+\[
+  R\mathcal{H}om(p_{1}^{*}F, Rp_{2}^{!}G) \otimes R\mathcal{H}om(p_{2}^{*}G,
+  Rp_{1}^{!}F) \longrightarrow K_{Z} = Rh^{!}\Lambda_{S}.
+\]
+On a $Rp_{2}^{!}G \to Rp_{2}^{!}D_{Y}D_{Y}G = D_{Z}p_{2}^{*}D_{Y}G$ (isomorphisme si
+$G$ est constructible), d'où
+\[
+  R\mathcal{H}om(p_{1}^{*}F, Rp_{2}^{!}G) \to D_{Z}\bigl(p_{1}^{*}F
+  \overset{L}{\otimes} p_{2}^{*}D_{Y}G\bigr),
+\]
+et de même $R\mathcal{H}om(p_{2}^{*}G, Rp_{1}^{!}F) \to D_{Z}(p_{2}^{*}G
+\overset{L}{\otimes} p_{1}^{*}D_{X}F)$. Les accouplements d'évaluation $F
+\otimes D_{X}F \to K_{X}$, $G \otimes D_{Y}G \to K_{Y}$ et la flèche $K_{X}
+\boxtimes K_{Y} \to K_{Z}$ donnent
+\[
+  (\ast\ast)\qquad p_{1}^{*}F \overset{L}{\otimes} p_{2}^{*}D_{Y}G
+  \longrightarrow D_{Z}\bigl(p_{2}^{*}G \overset{L}{\otimes}
+  p_{1}^{*}D_{X}F\bigr),
+\]
+la « formule cruciale ». \emph{Le théorème fondamental de Verdier} est que
+$(\ast\ast)$ est un isomorphisme ; l'accouplement cherché est alors la
+composition de $R\mathcal{H}om(p_{2}^{*}G, Rp_{1}^{!}F) \to D_{Z}(p_{2}^{*}G
+\otimes p_{1}^{*}D_{X}F) \simeq p_{1}^{*}F \otimes p_{2}^{*}D_{Y}G$ avec
+l'évaluation sur $D_{Z}(p_{1}^{*}F \otimes p_{2}^{*}D_{Y}G)$.\footnote{Les
+lignes des pages 149 et 151 qui décrivent la construction sont en grande partie
+illisibles ; nous restituons le composé que les formules lisibles imposent. La
+flèche $K_{X} \boxtimes K_{Y} \to K_{Z}$ est, dit-il, triviale si $X$ ou $Y$ est
+lisse ; une marge ajoute qu'il faut, même alors, des résolutions de
+singularités.}
+
+Ce théorème résulte de deux isomorphismes, (1) $K_{X} \boxtimes K_{Y}
+\xrightarrow{\sim} K_{X \times Y}$ et (2) $F \boxtimes D_{Y}G
+\xrightarrow{\sim} D_{Z}(D_{X}F \boxtimes G)$, qui découlent d'une
+formule de « Künneth local » :
+\[
+  R\mathcal{H}om(F \boxtimes G, P \boxtimes Q) \simeq R\mathcal{H}om(F, P)
+  \boxtimes R\mathcal{H}om(G, Q), \qquad R(f \times g)^{!}(P \boxtimes Q)
+  \simeq Rf^{!}P \boxtimes Rg^{!}Q,
+\]
+valables pour $F$, $G$ constructibles de Tor-dimension finie, sur un corps $k$,
+$n$ premier à sa caractéristique. Sa démonstration passe par des plongements
+dans des schémas lisses et la résolution des singularités --- acquise en
+caractéristique nulle, et en caractéristique $p$ en dimension $\leq 2$ ---, ce
+qui introduit des « dimensions parasites » ; il préférerait des morphismes
+finis $X \to X'$ vers des schémas lisses de même dimension, pour lesquels
+$(\varphi \times \psi)^{!}(P \boxtimes Q) \simeq \varphi^{!}P \boxtimes
+\psi^{!}Q$.\footnote{Localement, de tels morphismes finis sont fournis par le
+lemme de normalisation de Noether ; la page ne le nomme pas. La dépendance
+envers la résolution des singularités a été levée plus tard (Deligne,
+« Théorèmes de finitude », qui établit sur un corps la bidualité et cette
+formule de Künneth pour $R\mathcal{H}om$) ; il ne pouvait le connaître.}
+
+\emph{La formule.} En appliquant $R\Gamma(Z, -)$ à l'accouplement local et en
+composant avec la trace $\operatorname{Tr}_{h} : R\Gamma(Z, K_{Z}) \to \Lambda$
+($f$ et $g$ propres, $S$ spectre d'un corps séparablement clos), on obtient un
+accouplement
+\[
+  \operatorname{Hom}(p_{1}^{*}F, Rp_{2}^{!}G) \times \operatorname{Hom}(p_{2}^{*}G,
+  Rp_{1}^{!}F) \to \Lambda, \qquad (\xi, \eta) \mapsto
+  \operatorname{Tr}_{h}(\xi \cup \eta),
+\]
+qui doit coïncider avec l'accouplement $\langle\ ,\ \rangle$ des complexes
+parfaits $Rf_{*}F$ et $Rg_{*}G$ :
+\[
+  \operatorname{Tr}_{h}(\xi \cup \eta) = \langle \xi, \eta\rangle.
+\]
+En particulier, pour $X = Y$, $F = G$ et $\eta = \delta$ la correspondance
+identique, portée par la diagonale :
+\[
+  \operatorname{Tr}_{h}(\xi \cup \delta) = \operatorname{Tr}_{*}\bigl(\xi \mid
+  R\Gamma(X, F)\bigr) = \sum_{i}(-1)^{i}\operatorname{Tr}\bigl(\xi \mid H^{i}(X,
+  F)\bigr).
+\]
+« C'est la formule de Lefschetz--Verdier. »\footnote{La forme développée
+$\sum(-1)^{i}\operatorname{Tr}$ suppose $Rf_{*}F$ représenté par un complexe
+plat de type fini en chaque degré, comme le dit la marge de la page 157.}
+
+\emph{Correspondances portées par un schéma, termes locaux.} Soit $u = (u_{1},
+u_{2}) : T \to X \times_{S} Y$ un morphisme propre. Tout $\alpha \in
+\operatorname{Hom}(u_{1}^{*}F, Ru_{2}^{!}G)$ définit $\bar\alpha \in
+\operatorname{Corr}(X, F; Y, G)$, par
+\[
+  Ru_{*}R\mathcal{H}om(u^{*}p_{1}^{*}F, Ru^{!}Rp_{2}^{!}G) \simeq
+  R\mathcal{H}om(p_{1}^{*}F, Ru_{*}Ru^{!}Rp_{2}^{!}G) \to
+  R\mathcal{H}om(p_{1}^{*}F, Rp_{2}^{!}G),
+\]
+la dernière flèche étant la co-unité $Ru_{*}Ru^{!} = Ru_{!}Ru^{!} \to
+\mathrm{id}$.\footnote{Cette co-unité n'existe pour $Ru_{*}$ que si $u$ est
+propre ; la page ne le dit pas. Pour l'élément $\beta$ d'une correspondance $T'
+\to Y \times_{S} X$ en sens inverse, la page répète la forme de $\alpha$ ; il
+faut $\beta \in \operatorname{Hom}(u'^{*}_{2}G, Ru'^{!}_{1}F)$.} De même une
+correspondance $\beta$ portée par $u' : T' \to X \times_{S} Y$ définit $\bar\beta
+\in \operatorname{Corr}(Y, G; X, F)$. Si $\overline{T}$, $\overline{T'}$ sont
+les images de $T$, $T'$, $\bar\alpha$ vit dans la cohomologie de $Z$ à supports
+dans $\overline{T}$, $\bar\beta$ à supports dans $\overline{T'}$, et leur
+cup-produit dans $H^{0}_{\overline{T} \cap \overline{T'}}(Z,
+K_{Z})$.\footnote{La page identifie encore ce groupe à un groupe calculé sur
+$\overline{T} \times_{S} \overline{T'}$, d'une lecture incertaine ; nous ne le
+reprenons pas.} Si $\overline{T} \cap \overline{T'}$ est réunion disjointe d'un
+nombre fini de parties ouvertes et fermées $S_{\alpha}$, on obtient des
+composantes canoniques, et
+\[
+  \langle \xi, \eta \rangle = \sum_{\alpha} \langle \xi, \eta
+  \rangle_{S_{\alpha}} .
+\]
+Ce sont les \emph{termes locaux} de la formule. Exemple : si $\overline{T}
+\cap \overline{T'} = \emptyset$, le nombre de Lefschetz est nul.\footnote{Le
+calcul de ces termes locaux --- en particulier la conjecture de Deligne qu'ils
+sont « naïfs » après torsion par une puissance assez grande du Frobenius,
+démontrée par Fujiwara puis Varshavsky --- est postérieur ; le dossier ne fait
+que les définir.}
+
+\pagerange{164}{179}
+\section*{Compléments dualité (pages 163 à 179)}
+
+La couverture de la page 163 ne porte que ces deux mots.\footnote{Elle n'a pas
+de marque de page dans la transcription ; le titre en est repris.}
+
+\emph{Appendices possibles} (page 164) : (1) majorer la codimension injective par
+la dimension injective des fibres --- une note au crayon propose
+$\operatorname{codim\,inj}(F) \leq \sup_{F_{\bar x} \neq 0}[2\dim
+\mathcal{O}_{X,x} + \dim\operatorname{inj}F_{\bar x}]$ --- et la dimension
+cohomologique stricte d'un schéma (« consulter notes de Verdier ») ; (2) le cas
+d'un anneau de coefficients localement constant, de torsion première aux
+caractéristiques résiduelles, avec un complexe dualisant localement constant,
+« dualisant fibre par fibre », sur $X$ régulier. Un troisième appendice,
+« applications aux théorèmes de Lefschetz cohomologiques locaux et globaux »,
+est barré.
+
+\emph{Sujets de recherche} (page 165) : puissances extérieures dans les
+catégories dérivées, $\lambda$-anneaux ; dualité analytique ; descente
+cohomologique et applications ; Künneth pour les complexes quasi-cohérents ;
+dualité pour les complexes d'opérateurs différentiels, « site stratifiant ».
+Un dernier sujet, profondeurs cohomologiques et homotopiques et théorèmes de
+Lefschetz locaux et globaux, est barré.
+
+\emph{Validité des théorèmes de dualité} (page 166). (1) La dualité globale
+$\operatorname{Hom}(Rf_{!}F, G) \simeq \operatorname{Hom}(F, Rf^{!}G)$ vaut pour
+$f$ compactifiable et lissifiable entre schémas annelés par des faisceaux
+d'anneaux $\Lambda_{X}$, $\Lambda_{Y}$ tels qu'en tout point géométrique $\bar
+y$ un entier $n_{\bar y}$ premier à la caractéristique de $k(\bar y)$ annule
+$\Lambda_{Y,\bar y}$. (2) La dualité locale --- la bidualité $F
+\xrightarrow{\sim} D_{X}D_{X}F$, avec $D_{X}F$ constructible, pour $F \in
+D^{b}_{c}(X)$ --- vaut sur $X$ noethérien régulier, annelé par un faisceau
+d'anneaux localement constant de torsion noethériens premiers aux
+caractéristiques résiduelles, avec un complexe dualisant localement constant
+sur les fibres, « + résolution et pureté sur $X$ ».\footnote{La page écrit
+$D_{X}(F) = R\mathcal{H}om(F, A_{X})$ ; sur $X$ régulier, la pureté rend le
+complexe dualisant localement isomorphe à $\Lambda_{X}$ décalé et tordu, ce qui
+explique l'écriture, mais la définition est $R\mathcal{H}om(F, K_{X})$.}
+
+\emph{Énoncés plausibles} (page 169), sur un schéma excellent de dimension
+finie : $D_{X}$ induit des anti-équivalences $D_{c}(X)^{\mathrm{op}} \simeq
+D_{c}(X)$, $D^{-}_{c}(X)^{\mathrm{op}} \simeq D^{+}_{c}(X)$,
+$D^{+}_{c}(X)^{\mathrm{op}} \simeq D^{-}_{c}(X)$,
+$D^{b}_{c}(X)^{\mathrm{op}} \simeq D^{b}_{c}(X)$.\footnote{La page omet
+l'exposant « opposé » sur la dernière ligne.} Pour $F \in D^{-}_{c}(X)$ et $G =
+D_{X}F$ : ($\ast$) $F$ est de Tor-dimension finie si et seulement si $G$ est de
+« pseudo-dimension injective finie » (il existe $N$ tel que
+$\mathcal{E}xt^{i}(P, G) = 0$ pour $i > N$ et tout $P$ parfait constructible) ;
+($\ast\ast$) si et seulement si les fibres $G_{\bar x}$ sont de dimension
+injective finie. Si $X$ est de dimension cohomologique finie, pseudo-dimension
+et dimension injectives finies coïncident. Le sens direct de ($\ast$) est
+formel, par $R\mathcal{H}om(P, D_{X}F) \simeq D_{X}(P \overset{L}{\otimes} F)$ ;
+la réciproque utilise la bidualité pour $F \overset{L}{\otimes} P$. Si les
+anneaux $\Lambda_{\bar x}$ sont de Gorenstein --- c'est le cas de
+$\mathbb{Z}/n$ ---, Tor-dimension finie et pseudo-dimension injective finie
+devraient coïncider dans $D_{c}$, et $D_{X}$ induire une anti-autoéquivalence
+de la catégorie de ces complexes.
+
+\emph{Un théorème « à vérifier ! »} (pages 171 et 173). Soit $X$ lisse de type
+fini sur un corps $k$, de dimension $\leq n$, $\Lambda = \mathbb{Z}/N$ avec $N$
+premier à la caractéristique, $F$ un faisceau plat et $G$ un faisceau à fibres
+injectives --- c'est-à-dire plates, $\Lambda$ étant auto-injectif. Si $k$ est
+séparablement clos et $F$ constructible, $\operatorname{Ext}^{i}(F, G) = 0$
+pour $i > 2n$.\footnote{La transcription lit d'abord un énoncé (i), sans
+hypothèse sur $k$, puis (ii) pour $k$ séparablement clos, avec en outre une
+borne « $i > n$ » d'une lecture incertaine. Tel qu'il est lu, (i) est faux sur
+un corps non séparablement clos : pour $X = \operatorname{Spec}\mathbb{F}_{q}$
+($n = 0$) et $F = G = \Lambda$, $\operatorname{Ext}^{1} = H^{1}(\mathbb{F}_{q},
+\Lambda) \neq 0$. Comme la page ramène (i) à (ii) « par passage à la limite »,
+il pourrait s'agir dans (i) des faisceaux $\mathcal{E}xt^{i}$ ; nous ne
+l'affirmons pas, et ne donnons que l'énoncé (ii), qu'il marque lui-même « à
+vérifier ! ».} L'esquisse de démonstration se ramène à $k$ algébriquement clos,
+puis, par récurrence sur la longueur de $F$ et au moyen des générateurs
+$i_{!}\Lambda_{X'}$ ($X'$ affine étale sur $X$), à $X$ affine et $F$
+constructible ; puis veut, par passage à la limite, supposer $G$ constructible
+--- et bute sur une question qu'il laisse ouverte : « est-il vrai que $G$ est
+limite inductive filtrante de faisceaux constructibles à fibres
+\emph{injectives} ?? ».
+
+\emph{Calculs} (pages 175 à 179). Trois pages de calculs épars accompagnent
+cet énoncé : la suite spectrale $E_{2}^{pq} = H^{p}(X, \mathcal{E}xt^{q}(F, G))
+\Rightarrow \operatorname{Ext}^{p+q}(F, G)$ et le dénombrement, sur un
+diagramme, des termes qui peuvent contribuer en degré $> 2d$ ; l'identité
+$\operatorname{Ext}^{m}(i_{!}F, G) \simeq \operatorname{Ext}^{m}(F, Ri^{!}G)$ ;
+l'écriture $R\mathcal{H}om(F, G) \simeq R\mathcal{H}om(F, D_{X}D_{X}G) \simeq
+D_{X}(F \overset{L}{\otimes} D_{X}G)$, qui ramène la majoration des
+$\mathcal{E}xt^{i}(F, G)$ à des conditions de dimension du support des
+$\mathcal{E}xt^{-q}(G, \Lambda)$ ; et, page 179, la suite exacte de
+cohomologie locale en un point mise en regard, terme à terme, de sa duale, avec
+les annotations « dualité parfaite triviale (via pureté) » et « dualité
+parfaite ?? ». La page se clôt sur deux équivalences entre Tor-amplitude de $F$
+et amplitude injective de $D_{X}F$, et inversement, dont les bornes, telles
+qu'écrites, ne sont pas symétriques ; la page ne fixe pas ses conventions de
+degré, et nous ne les donnons pas comme énoncés.\footnote{La transcription les
+reproduit telles quelles : Tor-dimension de $F$ dans $[N, M]$ si et seulement si
+dimension injective locale de $D(F)$ dans $[-2n+N, M]$ ; dimension injective
+de $F$ dans $[P, Q]$ si et seulement si Tor-dimension de $DF$ dans $[P - 2n,
+Q]$.} Le dossier s'arrête là.
+
+\end{document}

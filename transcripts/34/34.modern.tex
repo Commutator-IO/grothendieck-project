@@ -1,0 +1,2650 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 34, pages 1-209.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote. In any dispute of substance the transcription governs: whoever
+% cites Grothendieck must cite the batch-NN.fr.tex files.
+%
+% Scope: ONE document for the whole shelfmark. The folder is the manuscript
+% draft of the first exposés of SGA 7, in six runs with their own paginations:
+% exposé I (pp. 2-50), exposé II (pp. 52-81, and its §6 at pp. 182-198),
+% exposé III (pp. 83-127), a chapter headed IV but paginated V (pp. 129-161),
+% exposé VI (pp. 163-180), and an appendix on weights (pp. 199-208).
+%
+% NOTATION fixed for the whole folder:
+%   S = Spec V a henselian trait, s, eta, k, K, p the exponent characteristic
+%   of k, l a prime different from p, Lambda_nu = Z/l^(nu+1);
+%   pi = Gal(Kbar/K), pi_0 = Gal(kbar/k), I the inertia, P its p-Sylow,
+%   I_t = I/P = prod_{l != p} Z_l(1);
+%   underlined Psi^q_nu = R^q g_* restricted to the special fibre: Deligne's
+%   R^q Psi (SGA 7 XIII). Underlined Phi^q_nu is the folder's sheaf of
+%   vanishing cycles, which is Deligne's R^(q-1) Phi for q >= 2; the shift is
+%   kept, because the folder's exact sequences are written with it;
+%   subscript t for the tame versions, which the pages write "mod" or "tame".
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - p. 5: Noether's theorem holds for a GENERAL surface of degree >= 4;
+%   - p. 19: U' is an open subgroup of I_t, not I_t;
+%   - p. 24: H^i(Gamma, V) = 0 for i > 0, not i >= 0;
+%   - pp. 29-32: Prop. 6.1 gives only that the radical is unipotent;
+%   - p. 30: the root-of-unity condition is on k, not on kbar;
+%   - pp. 41-42: Lemma 8.5 needs A henselian;
+%   - p. 45: duality needs X smooth, not proper; the H_c sequence is reordered;
+%   - p. 52: Th. 1.1 of exposé II needs k of finite type over its prime field;
+%   - p. 57: Lemma 1.5.1 needs the semisimplicity Deligne proved later;
+%   - p. 62: pi_1(X) for pi_1(Y) in Th. 1.15;
+%   - p. 72: the twist is Z_l(-1)^(n-1), not Z_l(1)^(n-1);
+%   - p. 77: Lemma 3.2 gives finite generation, not finite presentation;
+%   - p. 80: H^1, not H^2, of the complete curve;
+%   - p. 87: the transition maps multiply by the ramification index;
+%   - p. 91: Q must be of order prime to l;
+%   - p. 94: (n, p) = 1, not (n, l) = 1;
+%   - p. 98: U, not Y, in Cor. 3.5;
+%   - p. 104: the degrees of the Gysin composite are i-2d;
+%   - p. 123: the integer m of 4.16-4.17 must be an lcm of LOCAL gcds,
+%     not the gcd of all multiplicities (counter-example in the footnote);
+%   - p. 135: the degeneration rests on cd_l = 0, not cd_l <= r;
+%   - p. 137: Cor. 2.6 needs X_eta smooth and proper;
+%   - pp. 160, 208: Hochschild-Serre coinvariants carry a twist (-1);
+%   - p. 190: "de dimension finie" is "d'indice fini";
+%   - p. 206: H^p(X_0) has weights <= p, not = p.
+%
+% Announced in the folder and never established there: Prop. 9.8 (p. 50,
+% blank); the end of the proof of II 1.9 in characteristic 0 (p. 68); the
+% proof of Lemma 8.5 (p. 43, "laissée au lecteur"); Lemma V 5.3.3 (p. 152,
+% "Donner démonstration !"); the compatibilities of V 6.3 b) (p. 159);
+% Lemma VI 3.1, sent to an exposé VII (p. 178).
+%
+% Comparison with print (SGA 7 I, LNM 288, 1972; SGA 7 II, LNM 340, 1973) is
+% made from the two tables of contents and what is known of their contents,
+% not by a line-by-line collation, and is hedged accordingly in the text.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-04 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{34}
+\pages{1}{209}
+\dating{[vers 1967-1973]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{SGA 7 : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces deux cents feuillets sont, pour l'essentiel, le brouillon de la main de
+Grothendieck des
+premiers exposés d'un séminaire tenu à Bures de 1967 à 1969 et intitulé
+\emph{Groupes de monodromie en géométrie algébrique} --- SGA 7. Ils posent une
+seule question, sous six formes : \emph{que se passe-t-il quand on fait le tour
+d'un point où une famille d'objets géométriques dégénère ?}
+
+L'image est celle d'une famille de courbes qui dépend d'un paramètre. Pour
+presque toutes les valeurs, la courbe est lisse ; en une valeur particulière,
+un petit cercle tracé sur elle se pince jusqu'à n'être plus qu'un point. Faisons
+tourner le paramètre une fois autour de cette valeur, sans jamais l'atteindre :
+on revient à la courbe de départ, mais tout ce qui était dessiné sur elle a été
+transporté, et pas forcément à l'identique. Un chemin qui traversait le cercle
+pincé revient \emph{tordu d'un tour complet} autour de lui. Ce transport, vu sur
+les invariants de la courbe (sa cohomologie), est une matrice ; c'est la
+\emph{monodromie}. Le phénomène observé est toujours le même : la matrice n'est
+pas une rotation, c'est un \emph{cisaillement} --- comme
+$\left(\begin{smallmatrix} 1 & 1 \\ 0 & 1 \end{smallmatrix}\right)$, qui ne fait
+rien sur une droite et pousse tout le reste parallèlement à elle. Le
+\emph{théorème de monodromie} dit qu'il en est toujours ainsi, à ceci près qu'il
+faut parfois faire plusieurs tours avant de voir un pur cisaillement : la
+monodromie est \emph{quasi-unipotente}.
+
+En géométrie algébrique, « tourner autour d'un point » n'a pas de sens
+littéral ; c'est un groupe de Galois qui en tient lieu, le groupe d'\emph{inertie}
+d'un corps local. Le dossier en donne deux démonstrations. La première est
+d'une simplicité étonnante, et toute arithmétique. Le corps de base ne se
+contente pas de tourner autour du point : il agit aussi sur le tour lui-même,
+en le parcourant $q$ fois au lieu d'une. La matrice de monodromie se trouve donc
+\emph{semblable à sa propre puissance $q$-ième}. Or un ensemble fini de nombres
+complexes qui ne change pas quand on élève chacun à la puissance $q$ ne peut
+contenir que des racines de l'unité --- on le vérifie en suivant les angles sur
+le cercle. Les valeurs propres sont donc des racines de l'unité, et c'est tout
+le théorème. La seconde démonstration est géométrique : elle regarde la
+dégénérescence de près, après l'avoir rendue aussi simple que possible (des
+composantes lisses qui se croisent comme des hyperplans de coordonnées), et
+calcule tout localement. Elle donne davantage : une borne sur la longueur du
+cisaillement.
+
+Pour cette seconde démonstration, le dossier forge l'instrument qui a survécu à
+tout le reste : les \emph{cycles évanescents}, qui mesurent localement l'écart
+entre la fibre dégénérée et les fibres voisines. Il en donne la fibre en un
+point --- la cohomologie de ce qu'on appelle aujourd'hui la \emph{fibre de
+Milnor} ---, borne leurs degrés par le théorème de Lefschetz affine, et étudie
+en détail le cas d'un point singulier isolé, au moyen de cinq espaces qu'il
+apprend à réduire à quatre. Un exposé entier fait la même chose pour le groupe
+fondamental au lieu de la cohomologie, et trouve qu'un tour autour d'une
+dégénérescence de courbes agit comme un produit de torsions autour des cercles
+pincés, chacune élevée à une puissance qui mesure « la vitesse avec laquelle
+disparaît la singularité ». D'autres feuillets associent à toute représentation
+$\ell$-adique un groupe de Lie et un groupe algébrique, et un appendice esquisse
+la théorie des \emph{poids} qui ordonne la cohomologie d'une variété ouverte.
+
+Qu'est-ce qui a paru ? Les deux volumes imprimés de SGA 7 (1972 et 1973)
+sautent directement de l'exposé II à l'exposé VI : il n'y a pas d'exposés III,
+IV ni V. Le théorème de monodromie et ses deux démonstrations ont paru sous la
+forme d'un résumé rédigé par Deligne ; les cycles évanescents ont paru sous la
+forme, plus générale et plus souple, que Deligne leur a donnée dans le second
+volume. Le brouillon des exposés manquants, lui, est ici.
+
+C'est un manuscrit de travail, et il se montre comme tel : des démonstrations
+« laissées au lecteur », une compatibilité « laissée au rédacteur en forme ! »,
+une proposition numérotée et laissée en blanc, des paragraphes barrés d'une
+croix puis récrits sur la page suivante, et des consignes à soi-même
+--- « laissons tomber », « Donner démonstration ! », « faire $\widetilde S = S$
+ici ! ». Une phrase dit assez l'humeur du chantier, au moment où une hypothèse de
+nullité lui permet de ramener cinq espaces à quatre : « on est débarrassé du
+seul $\bar V$ des cinq schémas qui n'est pas noethérien ! ». Et une autre en dit la mesure, à propos des groupes
+qu'il vient de construire : ils sont « démesurément grands et ils échappent
+pratiquement à notre contrôle. Leur rôle est surtout théorique ».
+
+\keywords{local monodromy theorem, quasi-unipotent representation, inertia group, tame inertia, wild inertia, Tate twist, l-adic representation, Abhyankar's lemma, cohomological descent, resolution of singularities, Poincaré duality, geometric class field theory, Riemann hypothesis for curves, Bertini theorem, abelian scheme, isotrivial abelian variety, complex multiplication, Néron model, semistable reduction, Chebotarev density theorem, Tate module, vanishing cycles, nearby cycles, specialization map, cohomological purity, Gysin sequence, normal crossings divisor, Kummer covering, unipotent monodromy, Milnor fibre, affine Lefschetz theorem, étale depth, local acyclicity, perverse sheaf, isolated singularity, outer Galois action, prime-to-p fundamental group, van Kampen theorem, Dehn twist, versal deformation, l-adic Lie group, Tannakian category, pro-algebraic group, arithmetic fundamental group, Tate conjecture, weight spectral sequence, standard conjectures, independence of l}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+Le dossier n'a pas de pagination continue de l'auteur ; il en a six, une par
+rédaction. On les donne ici avec les pages du fonds, qui sont les seules
+qu'emploie la suite.
+
+\begin{itemize}
+  \item \textbf{Pages 2 à 50} --- \emph{Exposé I}, « Généralités, le théorème de
+    monodromie par voie arithmétique » (sa pagination 1 à 49). La structure du
+    groupe d'inertie, les représentations quasi-unipotentes, l'énoncé du
+    théorème de monodromie, sa démonstration arithmétique, et les réductions
+    au cas projectif et lisse.
+  \item \textbf{Pages 52 à 81} --- \emph{Exposé II}, « Une variante du théorème
+    de monodromie » (sa pagination II.1 à II.30). Ce n'est plus l'inertie d'un
+    corps local qui agit, mais le groupe de Galois d'un corps de type fini sur
+    le groupe fondamental géométrique ; applications aux schémas abéliens et à
+    la multiplication complexe.
+  \item \textbf{Pages 83 à 127} --- \emph{Exposé III}, « Le théorème de
+    monodromie par voie géométrique » (sa pagination 1 à 43). Les cycles
+    évanescents, le calcul local au voisinage d'un diviseur à croisements
+    normaux, la démonstration géométrique.
+  \item \textbf{Pages 129 à 161} --- un chapitre titré \emph{IV}, « Propriétés
+    générales des faisceaux de cycles évanescents », mais paginé V.1 à V.34
+    (et dont une note marginale dit « dans Exp.\ V »). Fibres des cycles
+    évanescents, bornes de Lefschetz, cinq schémas, point singulier isolé.
+  \item \textbf{Pages 163 à 180} --- \emph{Exposé VI}, « Groupe de monodromie et
+    groupe fondamental » (sa pagination 1 à 16).
+  \item \textbf{Pages 182 à 198} --- le \emph{§ 6 de l'exposé II}, paginé II.31
+    à II.47 : il prolonge la pagination de l'exposé II, que la page 81 avait
+    arrêtée à II.30. Groupes de Lie, groupes pro-algébriques et algèbres de Lie
+    associés aux représentations $\ell$-adiques ; groupe fondamental
+    arithmétique.
+  \item \textbf{Pages 199 à 208} --- un \emph{appendice} titré « SGA 7
+    [IX ?] appendice. Applications des conjectures standard sur les cycles
+    algébriques » : les poids.
+\end{itemize}
+
+Les pages impaires 201 à 209 sont des feuillets d'une dactylographie anglaise
+d'une autre main, sur les actions de groupes réductifs, intercalés dans
+l'appendice ; la transcription les note sans les transcrire, et cette lecture
+fait de même.
+
+\subsection*{Ce qui a paru, et ce qui n'a pas paru}
+
+La comparaison qui suit porte sur la table des matières des deux volumes
+imprimés et sur ce qu'on sait de leur contenu ; elle n'est pas une collation
+ligne à ligne, que cette lecture n'a pas faite.
+
+\emph{SGA 7 I} (Lecture Notes in Mathematics 288, 1972), dirigé par
+Grothendieck, comprend les exposés I, II, VI, VII, VIII et IX. L'exposé I est un
+« Résumé des premiers exposés de A. Grothendieck », rédigé par P. Deligne :
+c'est là que le théorème de monodromie et ses deux démonstrations ont paru, et
+ces feuillets sont, selon toute vraisemblance, le texte de ces premiers exposés.
+L'exposé II imprimé, de M. Raynaud, porte sur les propriétés de finitude du
+groupe fondamental --- non sur la « variante » que le brouillon appelle exposé
+II. L'exposé VI imprimé, de D. S. Rim, est consacré en anglais à la théorie
+formelle des déformations, l'outil que l'exposé VI du brouillon renvoie à un
+exposé ultérieur. L'exposé IX, de Grothendieck, « Modèles de Néron et
+monodromie », contient le théorème de réduction semi-stable des variétés
+abéliennes que le brouillon invoque, page 66, comme devant être « prouvé
+ultérieurement ».
+
+\emph{SGA 7 II} (Lecture Notes in Mathematics 340, 1973), dirigé par Deligne et
+Katz, commence à l'exposé X. Son exposé XIII, « Le formalisme des cycles
+évanescents », de Deligne, donne aux cycles évanescents la forme qui est restée
+--- deux foncteurs entre catégories dérivées, reliés par un triangle --- et son
+exposé XIX, « Le théorème de Noether », de Deligne, démontre l'énoncé que la
+page 5 attribue déjà à Deligne.
+
+\emph{Aucun des deux volumes ne contient d'exposés III, IV ou V.} La démonstration
+géométrique a paru dans le résumé de Deligne ; le reste --- le principe de
+localisation des pages 83 à 95, les bornes de Lefschetz des pages 133 à 141, les
+cinq schémas et le point singulier isolé des pages 143 à 161, l'action de
+l'inertie sur le groupe fondamental des pages 163 à 180, les groupes de Lie des
+pages 182 à 198 --- ne figure pas, à notre connaissance, sous cette forme dans
+SGA 7. Plusieurs de ces énoncés sont devenus des théorèmes ailleurs ; on le
+signale à leur place, avec la prudence qui convient.
+
+\subsection*{Conventions, valables pour tout le dossier}
+
+$S = \operatorname{Spec} V$ est un trait (spectre d'un anneau de valuation
+discrète), le plus souvent hensélien, de point fermé $s$ et de point générique
+$\eta$ ; $k = k(s)$, $K = k(\eta)$, $p$ l'exposant caractéristique de $k$, et
+$\ell$ un nombre premier différent de $p$. On fixe une clôture séparable
+$\overline K$, d'où $\bar\eta$, une clôture séparable $\bar k$ et $\bar s$. On
+note
+\[
+  \pi = \operatorname{Gal}(\overline K / K), \qquad
+  \pi_0 = \operatorname{Gal}(\bar k / k), \qquad
+  1 \to I \to \pi \to \pi_0 \to 1 ,
+\]
+$I$ le groupe d'inertie, $P$ son $p$-sous-groupe de Sylow (l'inertie sauvage),
+et $I_t = I/P$ l'inertie modérée. On écrit $\mathbf{Z}_\ell(1) = \varprojlim_\nu
+\mu_{\ell^\nu}$, $\mathbf{Z}_\ell(n) = \mathbf{Z}_\ell(1)^{\otimes n}$, et
+$\Lambda_\nu = \mathbf{Z}/\ell^{\nu+1}\mathbf{Z}$ --- c'est la convention du
+dossier, décalée d'un cran par rapport à l'usage courant $\mathbf{Z}/\ell^\nu$.
+
+Une représentation d'un groupe $G$ sur un espace $E$ est \emph{unipotente
+d'échelon $\leq r$} si $E$ admet une filtration stable à $r$ crans au plus, sur
+les quotients de laquelle $G$ agit trivialement ; de façon équivalente,
+$(g-1)^r = 0$ pour tout $g$ quand $G$ est monogène. \emph{Essentiellement}
+unipotente (resp.\ triviale, abélienne, résoluble) veut dire : unipotente
+(resp.\ \ldots) sur un sous-groupe ouvert.
+
+\emph{Les cycles évanescents.} Le dossier emploie deux familles de faisceaux
+sur la fibre spéciale, et il faut les fixer une fois pour toutes, parce que
+l'usage imprimé (SGA 7 XIII) en a fait autre chose. On note
+$\underline\Psi^q_\nu$ le faisceau $R^q \bar g_* (\Lambda_\nu)$ restreint à la
+fibre spéciale, où $\bar g$ envoie la fibre générique géométrique dans le
+schéma total : c'est exactement le $R^q\Psi(\Lambda_\nu)$ de Deligne, la
+cohomologie des « cycles proches ». Le dossier note $\underline\Phi^q_\nu$ les
+faisceaux de cohomologie locale à supports dans la fibre spéciale ; ils sont
+reliés aux précédents (page 93) par
+\[
+  \underline\Phi^q_\nu = \underline\Psi^{q-1}_\nu \quad (q \geq 2), \qquad
+  0 \to \underline\Phi^0_\nu \to \Lambda_\nu \to \underline\Psi^0_\nu \to
+  \underline\Phi^1_\nu \to 0 ,
+\]
+de sorte que le $\underline\Phi^q_\nu$ du dossier est le $R^{q-1}\Phi$ de
+Deligne : \emph{décalé d'un degré}. On garde ce décalage, parce que les suites
+exactes du dossier sont écrites avec lui ; il suffit de s'en souvenir en
+comparant avec la littérature. L'indice $\mathrm{t}$ désigne les versions
+modérées (le dossier écrit « mod » ou « tame »).
+
+\subsection*{Ce que le dossier annonce et n'établit pas}
+
+La proposition 9.8 de l'exposé I (page 50) est un numéro suivi de pointillés.
+La démonstration du théorème II~1.9 s'arrête, page 68, sur « Choisissons alors
+$\ell$ tel que ». Le lemme d'Abhyankar I~8.5 est énoncé avec « Démonstration
+laissée au lecteur », le lemme V~5.3.3 avec « Donner démonstration ! », les
+compatibilités de V~6.3 avec « laissée au rédacteur en forme ! ». Le lemme clef
+VI~3.1 est renvoyé à un exposé VII, la construction de modèles réguliers à un
+« exposé ultérieur », la forme explicite des automorphismes de VI~3.2.1 à
+Deligne « par voie transcendante ». Chacune de ces absences est signalée à sa
+place, et aucune n'est comblée par cette lecture au-delà de ce qu'elle dit.
+
+\pagerange{2}{5}
+\section*{Exposé I. Généralités ; le théorème de monodromie par voie arithmétique (pages 2 à 50)}
+
+\subsection*{Les représentations à étudier (pages 2 à 5)}
+
+L'objet du séminaire est l'étude de certaines représentations $\ell$-adiques de
+$\pi$ provenant de la géométrie, c'est-à-dire d'homomorphismes continus
+\[
+  \pi \longrightarrow \operatorname{Aut}_{\mathbf{Z}_\ell}(E)
+  \qquad\text{ou}\qquad
+  \pi \longrightarrow \operatorname{Aut}_{\mathbf{Q}_\ell}(E),
+\]
+$E$ de type fini sur $\mathbf{Z}_\ell$ (resp.\ de dimension finie sur
+$\mathbf{Q}_\ell$).\footnote{La page 2 précise d'abord que, dans tout ce qui
+suit, $\ell \neq \operatorname{car} k$ ; la phrase est surchargée et une partie
+illisible, mais la convention est reprise partout ensuite.} Les deux sources sont
+les suivantes.
+
+\emph{La cohomologie} (exemple 0.3). Si $X_K$ est un schéma algébrique sur $K$
+et $i$ un entier tels que $H^i(X_{\overline K}, \mathbf{Z}/\ell)$ soit fini, alors
+$E = H^i(X_{\overline K}, \mathbf{Z}_\ell) = \varprojlim_\nu
+H^i(X_{\overline K}, \mathbf{Z}/\ell^\nu)$ est de type fini sur
+$\mathbf{Z}_\ell$, et $\pi$ y agit par transport de structure. La finitude est
+acquise dans trois cas : (a) si l'on dispose de la résolution des singularités
+au sens de Hironaka en dimension $\leq \dim X$ --- par exemple en caractéristique
+nulle ; (b) si $X_K$ est propre ; (c) si $X_K$ est lisse.\footnote{Dans le cas
+(c), la finitude se déduit de (b) par la dualité de Poincaré, qui échange
+$H^i$ et la cohomologie à supports propres $H^{2n-i}_c$, finie par le
+théorème de changement de base propre ; c'est l'argument de la page 45. On
+sait aujourd'hui que la finitude vaut pour tout $X_K$ de type fini, sans
+résolution, par les théorèmes de finitude de Deligne (SGA 4½, 1977).}
+
+\emph{Les modules de Tate} (exemple 0.4). Si $A$ est un groupe algébrique
+commutatif sur $K$, $E = T_\ell(A) = \varprojlim_\nu {}_{\ell^\nu}A(\overline K)$
+ne change pas quand on remplace $A$ par $(A^\circ)_{\mathrm{red}}$ ; c'est un
+$\mathbf{Z}_\ell$-module libre de rang $2\alpha + \mu$, où $\alpha$ et $\mu$ sont
+les dimensions des parties abélienne et torique de
+$(A_{\overline K})^\circ_{\mathrm{red}}$, la partie unipotente ne contribuant
+pas.
+
+Les deux sources se rejoignent en degré $1$ (remarque 0.5). Pour une variété
+abélienne $A$, $H^1(A_{\overline K}, \mathbf{Z}_\ell) \simeq
+\operatorname{Hom}(T_\ell A, \mathbf{Z}_\ell)$ ; et pour $X_K$ propre, lisse et
+géométriquement connexe, la suite de Kummer donne
+\[
+  H^1(X_{\overline K}, \mathbf{Z}_\ell(1)) \simeq
+  T_\ell\bigl(\underline{\operatorname{Pic}}_{X/K}(\overline K)\bigr),
+  \qquad\text{soit}\qquad
+  H^1(X_{\overline K}, \mathbf{Z}_\ell) \simeq
+  T_\ell(\underline{\operatorname{Pic}}_{X/K}) \otimes \mathbf{Z}_\ell(-1).
+\]
+\footnote{La connexité géométrique, que la page ne dit pas, sert à ce que
+$\Gamma(X_{\overline K}, \mathcal{O}^*) = \overline K^*$ soit divisible, sans
+quoi un terme $\Gamma(\mathcal{O}^*)/\ell^\nu$ s'ajoute au membre de gauche. Les
+mots « propre et lisse » sont d'une lecture incertaine sur la page ; ce sont
+les hypothèses sous lesquelles l'isomorphisme vaut tel qu'il est écrit.}
+
+Pourquoi ces représentations ? Pour les variétés abéliennes, la connaissance du
+$\pi$-module $T_\ell(A)$ renseigne sur le \emph{modèle de Néron} de $A$, et
+réciproquement (0.6). Et pour un schéma $X$ sur $S$ de fibre générique $X_K$,
+la comparaison de $H^i(X)$, $H^i(X_s)$ et $H^i(X_{\bar\eta})$ passe par
+l'action de $\pi$ --- on a parfois $H^i(X_s) \simeq H^i(X_{\bar\eta})^\pi$. Cette
+étude locale est l'outil de l'étude \emph{globale} d'un morphisme $X \to S$ de
+base une courbe : quand $S = \mathbf{P}^1_k$ et que $X$ est un pinceau de
+sections hyperplanes d'une variété projective lisse, c'est la théorie de
+Lefschetz. Par cette voie, écrit la page 4, Deligne montre que pour une surface
+$X_0 \subset \mathbf{P}^3_k$ de degré $\geq 4$, en caractéristique quelconque,
+$\mathbf{Z} \simeq \operatorname{Pic}(\mathbf{P}^3) \to \operatorname{Pic}(X_0)$
+est un isomorphisme.\footnote{L'énoncé est vrai pour une surface \emph{générale}
+de degré $\geq 4$, non pour toute : une quartique qui contient une droite a un
+groupe de Picard de rang au moins $2$, et la quartique de Fermat sur
+$\mathbf{C}$ en a un de rang $20$. C'est le théorème de Noether ; la page ne dit
+pas « générale ». La démonstration de Deligne par les pinceaux de Lefschetz a
+paru dans SGA 7 II, exposé XIX, « Le théorème de Noether ».}
+
+\pagerange{5}{10}
+\subsection*{La structure du groupe d'inertie (pages 5 à 10)}
+
+On suppose $V$ hensélien.\footnote{La page passe de la section 0 à la section 2 ;
+il n'y a pas de section 1, et les numéros 2.1, 2.2, 2.3 sont réordonnés et
+surchargés. On suit l'ordre logique.} La plus grande sous-extension
+$\widetilde K$ de $\overline K / K$ non ramifiée sur $V$ a pour anneau des
+entiers un hensélisé strict $\widetilde V$ de $V$, de corps résiduel $\bar k$ ;
+on pose $\widetilde S = \operatorname{Spec}\widetilde V$. L'extension
+$\widetilde K/K$ est galoisienne de groupe $\pi_0 = \operatorname{Gal}(\bar k/k)$,
+d'où la suite exacte
+\[
+  1 \to I \to \pi \to \pi_0 \to 1, \qquad I = \operatorname{Gal}(\overline K/\widetilde K).
+\]
+\footnote{La page écrit l'indice de $\widetilde K$ de façon empâtée ; la
+transcription le lit « nr ». C'est en tout cas l'extension maximale non
+ramifiée.} Si $k$ est séparablement clos, $I = \pi$. L'objet du séminaire,
+précise la page 7, est \emph{plutôt l'étude des représentations $\ell$-adiques
+du groupe d'inertie $I$}, qu'on appelle aussi dans ce rôle \emph{groupe de
+monodromie locale} ; mais on verra que le fait qu'une représentation de $I$ se
+prolonge à $\pi$ lui impose des restrictions « draconiennes » --- c'est tout le
+ressort de la démonstration arithmétique.
+
+Le choix de $\overline K$ détermine $\bar k$, et pour tout revêtement étale
+$S' \to S$ on a des bijections canoniques
+$\operatorname{Hom}_S(\bar s, S') \simeq \operatorname{Hom}_S(\widetilde S, S')
+\simeq \operatorname{Hom}_S(\bar\eta, S')$ (2.3.1). Appliquées à $S' = \mu_n$,
+$n$ inversible sur $k$, elles identifient $\mu_n(\bar k)$ et
+$\mu_n(\overline K)$, d'où, à la limite, une identification
+$T_\ell(\bar k^*) \simeq T_\ell(\overline K^*)$ : c'est le module libre de rang
+$1$ noté $\mathbf{Z}_\ell(1)$, compatible aux actions de $\pi$ et de $\pi_0$.
+
+L'inertie sauvage $P$ est le $p$-sous-groupe de Sylow de $I$ ($P = 1$ si
+$p = 1$) ; il est distingué, et $I_t = I/P$ est le groupe de Galois de la plus
+grande sous-extension modérément ramifiée $\overline K_t$, réunion des extensions
+kummériennes $K_n = \widetilde K(t^{1/n})$, $n$ premier à $p$, $t$ une
+uniformisante. La théorie de Kummer donne un isomorphisme canonique
+\[
+  I_t \;\simeq\; \varprojlim_{(n,p)=1} \mu_n(\overline K) \;=\; \prod_{\ell \neq p}\mathbf{Z}_\ell(1),
+  \qquad \sigma \longmapsto \bigl(\sigma(t^{1/n})/t^{1/n}\bigr)_n ,
+\]
+indépendant du choix de $t$ (2.4.2). Comme $P$ est caractéristique dans $I$,
+$\pi$ agit par conjugaison sur $I_t$ ; $I$ y agit trivialement puisque $I_t$ est
+commutatif, d'où une action de $\pi_0$, et l'on vérifie qu'elle est l'action
+naturelle de $\pi_0$ sur les racines de l'unité (remarque 2.5) :
+\[
+  g\,\sigma\,g^{-1} = \sigma^{\chi(g)} \qquad (g \in \pi,\ \sigma \in I_t),
+\]
+$\chi$ le caractère cyclotomique. Cette formule est la seule arithmétique dont
+la première démonstration ait besoin. La page 10 met en garde : un isomorphisme
+$\mathbf{Z}_\ell(1) \simeq \mathbf{Z}_\ell$ revient au choix d'un système de
+racines primitives $\ell^\nu$-ièmes de l'unité, qui n'est pas naturel ; seule
+l'écriture intrinsèque tient compte de l'action de $\pi_0$.
+
+\pagerange{11}{16}
+\subsection*{Changement de trait (pages 11 à 16)}
+
+Soit $f : S' = \operatorname{Spec} V' \to S$ un morphisme dominant de traits.
+Une clôture séparable $\overline{K'}$ de $K'$ en définit une $\overline K$ de
+$K$, d'où un morphisme d'extensions $(I' \to \pi' \to \pi'_0) \to
+(I \to \pi \to \pi_0)$, compatible aux inerties sauvages, et un homomorphisme
+$I'_t \to I_t$ entre deux produits de $\mathbf{Z}_\ell(1)$, ceux-ci étant
+identifiés grâce à $\overline K \subset \overline{K'}$.
+
+\emph{Proposition 3.12.} Si $\mathfrak{m}V' = \mathfrak{m}'^{\,e}$, l'homomorphisme
+$I'_t \to I_t$ est la multiplication par $e$.
+
+Le calcul est celui qu'on attend : si $t = u' t'^{\,e}$ avec $u'$ une unité de
+$\widetilde V'$, alors $\theta_n = t^{1/n}$ s'écrit $\lambda\,\theta_n'^{\,e}$
+avec $\lambda^n = u'$, donc $\lambda \in \widetilde V'$ est fixe, et
+$\varepsilon \in \mu_n$ agissant par $\theta'_n \mapsto \varepsilon\theta'_n$
+agit sur $\theta_n$ par $\varepsilon^e$.
+
+\emph{Proposition 3.13.} Si $V' = \widehat V$ est le complété, les deux morphismes
+d'extensions sont des isomorphismes. En effet $\pi'_0 \to \pi_0$ est un
+isomorphisme ($k' = k$) et $I'_t \to I_t$ aussi ($e = 1$) ; $\pi' \to \pi$ est
+surjectif parce que, $V$ étant hensélien, $K_1 \otimes_K \widehat K$ est un corps
+pour toute extension finie séparable $K_1$ ; et il est injectif par la
+« continuité des racines » --- deux polynômes séparables assez voisins à
+coefficients dans $\widehat K$ définissent des $\widehat K$-algèbres isomorphes,
+de sorte que toute extension finie séparable de $\widehat K$ provient d'une
+extension de $K$.\footnote{La moitié inférieure de la page 13 (la fin de
+l'énoncé et un premier état de la démonstration) est barrée ; la démonstration
+retenue est celle de la page 14, qui ne l'est pas. Une hypothèse « $V$
+excellent » est biffée dans l'énoncé : elle n'est en effet pas nécessaire,
+l'argument de Krasner valant pour tout trait hensélien.} Conséquence (remarque
+3.14) : dans la plupart des questions du séminaire, on peut supposer $V$
+complet.
+
+Si $\pi' \subset \pi$ est ouvert, correspondant à une extension finie séparable
+$K'/K$, de normalisé $V'$, on a $I' = I \cap \pi'$, et l'indice $[I : I']$
+s'interprète comme l'indice de ramification « géométrique » : il vaut $e$ quand
+l'extension résiduelle est séparable.\footnote{La page 15 est très raturée ; les
+énoncés 3.14 et 3.15 n'en sont lus que par fragments. On donne ce qu'ils disent
+de lisible et de vrai : $I' = I \cap \pi'$, et
+$[I'/(I',I')]^{(\ell)} \simeq \mathbf{Z}_\ell(1)$ pour $\ell \neq p$, puisque
+l'inertie sauvage $P' = P \cap I'$ est un pro-$p$-groupe.} Lorsque $\pi'$ est
+distingué dans $\pi$, $\pi$ agit sur $I'_t \simeq \prod_{\ell\neq p}
+\mathbf{Z}_\ell(1)$, et cette action passe par $\pi_0$ comme plus haut ; comme
+$I$ agit trivialement sur les racines de l'unité :
+
+\emph{Corollaire 3.16.} Pour tout sous-groupe ouvert distingué $I'$ de $I$,
+l'extension naturelle de $I/I'$ par le quotient modéré $I'_t$ de $I'$ est
+\emph{centrale}.
+
+\pagerange{17}{20}
+\subsection*{Représentations $\ell$-adiques de $I$ (pages 17 à 20)}
+
+Pour $E$ de type fini sur $\mathbf{Z}_\ell$, $G = \operatorname{Aut}(E) =
+\varprojlim_\nu \operatorname{Aut}(E \otimes \Lambda_\nu)$ est profini.
+
+\emph{Lemme 4.3.} Le noyau $G^1$ de $G \to \operatorname{Aut}(E/\ell E)$ est un
+sous-groupe ouvert, et c'est un pro-$\ell$-groupe. (Un $u \equiv 1 \bmod \ell$
+induit l'identité sur le gradué de la filtration $\ell$-adique, et une
+récurrence montre que $u^{\ell^\nu}$ est l'identité sur $E \otimes \Lambda_\nu$.)
+
+\emph{Corollaire 4.4.} Tout sous-groupe fermé $Q$ de $G$ qui est limite projective
+de groupes finis d'ordre premier à $\ell$ s'injecte dans
+$\operatorname{Aut}(E/\ell E)$ ; en particulier $Q$ est fini.
+
+\emph{Corollaire 4.5.} Soit $u : I \to G$ continu. Le noyau $I^{(\ell')}$ de
+$I \to \mathbf{Z}_\ell(1)$ (image inverse de $\prod_{\ell'\neq\ell,p}
+\mathbf{Z}_{\ell'}(1)$) est d'ordre premier à $\ell$, donc a une image finie ;
+sur le sous-groupe ouvert $U = u^{-1}(G^1)$, l'image de $U \cap I^{(\ell')}$ est
+à la fois pro-$\ell$ et d'ordre premier à $\ell$, donc triviale, et $u|_U$ se
+factorise par l'image de $U$ dans $\mathbf{Z}_\ell(1)$, sous-groupe ouvert
+$\ell^\nu\mathbf{Z}_\ell(1) \simeq \mathbf{Z}_\ell(1)$. \emph{Quitte à passer à
+un sous-groupe ouvert, une représentation $\ell$-adique de $I$ est une
+représentation de $\mathbf{Z}_\ell(1)$.} Si l'on prend $U$ assez petit pour que
+$u(U \cap P) = 1$, $u|_U$ se factorise par l'image de $U$ dans $I_t$, qui est un
+sous-groupe ouvert de $I_t$ --- en particulier commutatif.\footnote{La page 19
+écrit « $U' \simeq I_t$ » ; ce qui est vrai est que $U'$ est un sous-groupe
+ouvert de $I_t$, isomorphe à $I_t$ comme groupe profini mais non égal à lui.
+La numérotation de ces corollaires est double sur la page (deux « 4.5 ») ; on
+les fond.}
+
+Enfin (4.10), une représentation continue de $\pi$ sur un $\mathbf{Q}_\ell$-espace
+$E$ de dimension finie laisse stable un réseau, $\pi$ étant compact : tout ce
+qui précède s'y applique.
+
+\pagerange{20}{28}
+\subsection*{Représentations quasi-unipotentes (pages 20 à 28)}
+
+\emph{Définition 5.1.} Un automorphisme est quasi-unipotent si ses valeurs propres
+sont des racines de l'unité. Une représentation $u$ d'un groupe profini $\pi$ sur
+un espace de dimension finie est \emph{quasi-unipotente} s'il existe un
+sous-groupe ouvert $U$ de $\pi$ tel que $u|_U$ soit unipotente.\footnote{La page
+20 donne d'abord la définition élément par élément, puis, à la page 21, celle par
+un sous-groupe ouvert. Pour une représentation continue sur un
+$\mathbf{Q}_\ell$-espace de dimension $n$, les deux sont équivalentes : les
+valeurs propres vivent dans des extensions de degré $\leq n$ de
+$\mathbf{Q}_\ell$, qui sont en nombre fini et ne contiennent qu'un nombre fini de
+racines de l'unité, de sorte qu'il existe $N$ avec $u(g)^N$ unipotent pour tout
+$g$ ; cette condition est Zariski-fermée, et un groupe algébrique connexe dont
+tous les éléments ont une puissance $N$-ième unipotente est unipotent. Ce
+complément est de nous.}
+
+Soit $G$ le groupe algébrique engendré par $u(\pi)$ --- l'adhérence de Zariski
+de $u(\pi)$ dans $\operatorname{GL}(E)$ --- et $G^0$ sa composante neutre. Pour
+$R$ un corps topologique et $u$ continue :
+
+\emph{5.3.} $u$ est quasi-unipotente si et seulement si $G^0$ est unipotent.
+Si $G^0$ est unipotent, $U = u^{-1}(G^0(R))$ est fermé d'indice fini, donc
+ouvert, et agit de façon unipotente. Réciproquement, si $U$ ouvert agit de façon
+unipotente, l'adhérence $H$ de $u(U)$ est d'indice fini dans $G$, donc contient
+$G^0$, qui est donc unipotent.
+
+\emph{5.4--5.5.} En caractéristique nulle, un élément unipotent de $G(R)$ est dans
+$G^0(R)$ (il est sur un sous-groupe à un paramètre). Donc
+$U = u^{-1}(G^0(R))$ est le plus grand sous-groupe de $\pi$ qui agisse de façon
+unipotente ; il est ouvert et distingué, et $\pi/U \simeq G(R)/G^0(R)$. Pour
+tout sous-groupe ouvert $U' \subset U$, on a $E^{U'} = E^U = E^{G^0}$ : un
+groupe fini qui agit de façon unipotente en caractéristique nulle agit
+trivialement. Si de plus $G^0$ est unipotent, l'extension $G$ de
+$\Gamma = G/G^0$ par $G^0$ est scindée, de façon unique à conjugaison près :
+$G \simeq \Gamma \ltimes G^0$, parce qu'un groupe unipotent de caractéristique
+nulle est filtré par des groupes vectoriels, uniquement divisibles, dont la
+cohomologie sous un groupe fini est nulle en degrés $>0$.\footnote{La page 24
+écrit « $H^i(\Gamma, V) = 0$ pour $i \geq 0$ » ; c'est pour $i > 0$, le
+$H^0$ étant le module des invariants. Le premier état de 5.4, à la page 22, est
+barré ; la page 25, qui reprend 5.5, l'est aussi, mais en reproduit le contenu
+sous une forme que la page 23 conserve. On donne l'énoncé que les trois pages
+ont en commun.}
+
+\emph{5.6.} Si $R = \mathbf{Q}_\ell$ et $G^0$ commutatif, alors $G^0 \simeq
+\mathbf{G}_a^d$, et l'image de $U$ dans $G^0(\mathbf{Q}_\ell) \simeq
+\mathbf{Q}_\ell^d$ est un sous-$\mathbf{Z}_\ell$-module compact, donc libre de
+rang $d' \leq d$, et $d' = d$ parce qu'elle engendre $G^0$. Si $N$ est le noyau
+de $u$, $U/N \simeq \mathbf{Z}_\ell^d$, et $G(\mathbf{Q}_\ell)$ est déterminé
+par $\pi/U$, $U/N$ et l'extension de l'un par l'autre, poussée par
+$U/N \to U/N \otimes \mathbf{Q}_\ell$.
+
+\emph{5.7. Le cas de l'inertie.} Prenons $\pi = I$ ($k$ séparablement clos). Par
+le corollaire 4.5, $u|_U$ se factorise par $U^{\mathrm{ab}}(\ell) \simeq
+\mathbf{Z}_\ell(1)$, donc $G^0$, unipotent et engendré par l'image d'un groupe
+procyclique, est de dimension $\leq 1$ et commutatif. Et le groupe fini
+$\Gamma = I/U$ agit trivialement sur $U^{\mathrm{ab}}(\ell)$ (corollaire 3.16),
+donc centralise $G^0$ : le produit semi-direct est direct,
+\[
+  G \simeq G^0 \times \Gamma, \qquad
+  G(\mathbf{Q}_\ell) \simeq
+  \begin{cases} \Gamma & \text{si $U$ agit trivialement,}\\
+  \mathbf{Q}_\ell(1) \times \Gamma & \text{sinon.}\end{cases}
+\]
+\footnote{La page 27 renvoie pour cela à « (3.15) » et à une formule « (5.5.3) »
+qui n'apparaît pas ; l'argument est celui du corollaire 3.16 et du scindage
+de 5.5.} En termes d'aujourd'hui : sur un sous-groupe ouvert,
+$u(\sigma) = \exp\bigl(t_\ell(\sigma)\,N\bigr)$ pour un endomorphisme nilpotent
+$N$ et le caractère $t_\ell : I \to \mathbf{Z}_\ell(1)$ --- c'est le
+\emph{logarithme de la monodromie}. Un passage barré de la page 28, avec sa
+note marginale, entrevoit l'étape suivante : les représentations
+quasi-unipotentes de $I$ forment une catégorie tensorielle équivalente à celle
+des représentations algébriques d'un système projectif de groupes
+$\Gamma_i \times \mathbf{G}_a(1)$. C'est, à peu de chose près, la forme que
+Deligne donnera aux représentations de Weil--Deligne.\footnote{Le
+rapprochement est de nous ; le passage est barré, et la page ne le développe
+pas.}
+
+\pagerange{28}{32}
+\subsection*{Corps résiduel de type fini (pages 28 à 32)}
+
+Une première rédaction, « Cas d'un corps résiduel fini », est barrée à la page
+28 ; elle n'allait pas plus loin que l'identification $\pi_0 \simeq
+\widehat{\mathbf{Z}}$ par le Frobenius $\lambda \mapsto \lambda^q$, qui agit sur
+$I_t$ par élévation à la puissance $q$. La page 29 reprend sous le titre « Cas
+d'un corps résiduel de type fini », et la page 31 récrit encore la proposition
+principale. On en donne l'énoncé juste, puis l'argument qui suffit au théorème
+de monodromie.
+
+\emph{Proposition 6.1.} Soit $1 \to I \to \pi \to \pi_0 \to 1$ une extension
+de groupes profinis telle que, pour tout sous-groupe ouvert $\pi'$ de $\pi$ et
+$I' = I \cap \pi'$, le plus grand quotient de $I'^{\mathrm{ab}}(\ell)$ sur lequel
+$\pi'_0 = \pi'/I'$ agit trivialement soit fini. Soit $u$ une représentation
+$\ell$-adique de $\pi$, $G$ et $H$ les groupes algébriques engendrés par $u(\pi)$
+et $u(I)$. Alors $H$ est distingué dans $G$, et le radical de $H^0$ est
+unipotent. \emph{En particulier, si $u(I)$ est essentiellement résoluble, $u|_I$
+est quasi-unipotente.}\footnote{La rédaction de la page 29 supposait $I$
+résoluble et concluait à la quasi-unipotence ; celle de la page 31 conclut
+seulement que le radical $R$ de $H^0$ est unipotent, et le corollaire 6.2 de la
+page 32 ajoute l'hypothèse de résolubilité. Sans elle la conclusion est fausse :
+rien n'empêche $H^0$ d'avoir une partie semi-simple. On garde donc l'énoncé de
+la page 31 et le corollaire de la page 32. L'argument : $R = T \cdot U$ avec
+$U$ unipotent caractéristique et $T$ un tore ; $G^0$, connexe, agit
+trivialement sur $T = R/U$, le groupe des automorphismes d'un tore étant
+discret ; $T$ est donc un quotient des coinvariants de $G^0$ dans
+$A = R/[R,R]$, qui sont nuls par l'hypothèse ; donc $T = 1$.}
+
+Dans le cas qui sert, celui où $I$ agit à travers $\mathbf{Z}_\ell(1)$
+(corollaire 4.5), l'argument se réduit à quelques lignes, et c'est sous cette
+forme qu'il est passé à la postérité. Soit $\sigma$ un générateur
+topologique de l'image de $I$ dans $\mathbf{Z}_\ell(1)$. Pour $g \in \pi$, la
+formule de la remarque 2.5 donne
+\[
+  u(g)\,u(\sigma)\,u(g)^{-1} = u(\sigma)^{\chi(g)} ,
+\]
+de sorte que l'ensemble fini des valeurs propres de $u(\sigma)$ est stable par
+$\lambda \mapsto \lambda^{\chi(g)}$. Si $\chi(\pi)$ est infini, un $a = \chi(g)$
+d'ordre infini permute cet ensemble, donc une puissance $a^m \neq 1$ le fixe
+point par point : $\lambda^{a^m - 1} = 1$ avec $a^m - 1 \neq 0$ dans
+$\mathbf{Z}_\ell$, et $\lambda$ est une racine de l'unité.\footnote{Ce
+raccourci est de nous ; il est l'argument que Serre et Tate attribuent à
+Grothendieck dans l'appendice de « Good reduction of abelian varieties »
+(Annals of Math.\ 88, 1968), article que la bibliographie de la page 81 cite.}
+
+\emph{Proposition 6.2.} Si l'extension de $k$ engendrée par les racines
+$\ell^\nu$-ièmes de l'unité ($\nu \in \mathbf{N}$) est infinie --- autrement dit
+si aucune extension finie de $k$ ne les contient toutes --- toute représentation
+$\ell$-adique de $\pi$ induit sur $I$ une représentation quasi-unipotente.
+\footnote{La page 30 écrit « l'extension de $\bar k$ engendrée par les racines »,
+ce qui n'aurait pas de sens, $\bar k$ les contenant déjà ; c'est l'extension de
+$k$.} C'est le cas si $k$ est fini, ou de type fini sur son corps premier.
+
+Le corollaire 6.3 de la page 30, très abrégé, conclut que toute représentation
+$\ell$-adique continue de $\pi$ induit sur $I$ une représentation
+essentiellement unipotente --- la transcription lit « unipotente triviale », avec
+doute ---, et ajoute « Cf.\ II 1.12, qu'il y aurait lieu de reprendre ici » :
+c'est le lemme 1.12 de l'exposé II, page 61, qui en est la version
+« abélienne ». La seconde rédaction s'achève, page 32, sur un titre sans
+contenu : « Prop.\ 6.3. Application aux groupes de monodromie \ldots ».
+
+\pagerange{33}{35}
+\subsection*{Le théorème de monodromie : l'énoncé (pages 33 à 35)}
+
+\emph{Conjecture 7.1} (que la page attribue à Serre et Tate). Sous les conditions
+de l'exemple 0.3, et pour $\ell \neq p$, la représentation du groupe d'inertie
+\[
+  I \longrightarrow \operatorname{Aut}_{\mathbf{Z}_\ell}\bigl(H^i(X_{\overline K}, \mathbf{Z}_\ell)\bigr)
+\]
+est quasi-unipotente : il existe un sous-groupe d'indice fini $U$ de $I$ dont
+l'image est formée d'automorphismes unipotents.\footnote{Le titre de la section
+était suivi des mots « énoncé conjectural », biffés.}
+
+La suite du dossier en donne deux démonstrations « relatives », qui utilisent
+l'une et l'autre la résolution des singularités, et d'où il résulte qu'elle est
+vraie (7.2) : (a) si $K$ est de caractéristique nulle ; (b) si $i = 1$ ; (c) si
+$S$ est le hensélisé, ou le hensélisé strict, de l'anneau local d'un point d'un
+schéma de type fini sur un corps ou sur $\mathbf{Z}$, et si $X_K$ est propre ou
+$K$ de caractéristique nulle. La démonstration arithmétique, dans le présent
+exposé, couvre (a) et (c) ; la démonstration géométrique, dans l'exposé suivant,
+couvre (a) et (b) et précise la conclusion.\footnote{L'exposé « suivant »
+annoncé page 34 est, dans le dossier, l'exposé III des pages 83 et suivantes ;
+l'exposé II des pages 52 à 81 s'est intercalé entre les deux. Le
+théorème est vrai aujourd'hui sans restriction sur le corps résiduel, pour
+$X_K$ propre et lisse au moins : les altérations de de Jong (1996) ramènent au
+cas d'une réduction semi-stable, où l'action de l'inertie est unipotente. Nous
+le disons à notre connaissance, sans en refaire la démonstration.}
+
+Les pages 34 et 35 esquissent, à travers des lignes très surchargées, deux
+raffinements conjecturaux. D'abord (7.3) l'indépendance de $\ell$ : pour $g \in
+I$ (et même $g \in \pi$), la trace de $g$ sur $H^i(X_{\overline K},
+\mathbf{Q}_\ell)$ devrait être un entier indépendant de $\ell \neq p$ --- ce
+qu'on prouvera pour $i = 1$ « dans les conditions de Néron ». Ensuite (7.4), pour
+$k$ fini, la forme de Serre--Tate : la même conclusion pour les $g \in \pi$ dont
+l'image dans $\operatorname{Gal}(\bar k/k) \simeq \widehat{\mathbf{Z}}$ tombe
+dans $\mathbf{Z}$, avec une note marginale sur les valeurs propres, entiers
+algébriques de valeur absolue $q^{w/2}$, $0 \leq w \leq 2i$. Enfin le souhait que
+les groupes algébriques engendrés par ces représentations proviennent de groupes
+définis sur $\mathbf{Q}$, indépendamment de $\ell$.\footnote{Les pages 34 et 35
+sont lues pour une large part avec doute ; on n'en retient que ce qui est
+articulé avec des formules lisibles. L'indépendance de $\ell$ des traces de
+l'inertie n'est pas, à notre connaissance, établie en général en inégale
+caractéristique.}
+
+\pagerange{36}{44}
+\subsection*{La démonstration arithmétique (pages 36 à 44)}
+
+\emph{Théorème 8.1.} Supposons que $V$ soit limite inductive filtrante de
+sous-anneaux locaux $V_\alpha$, d'idéaux maximaux $\mathfrak{m} \cap V_\alpha$,
+contenant l'uniformisante $t$, tels que :
+\begin{itemize}
+  \item[(a)] $V_\alpha$ et $V_\alpha / tV_\alpha$ sont réguliers ;
+  \item[(b)] aucune extension finie du corps résiduel $k_\alpha$ ne contient
+    toutes les racines $\ell^\nu$-ièmes de l'unité.
+\end{itemize}
+Alors pour tout $X_K$ propre sur $K$, l'action de $I$ sur
+$H^i(X_{\overline K}, \mathbf{Q}_\ell)$ est quasi-unipotente.\footnote{L'énoncé
+est très repris sur la page 36 ; on y lit aussi une clause « lorsque
+l'opération de $I$ \ldots{} se fait à travers $I_t$ » et une autre « dès que les
+$V_\alpha$ sont des anneaux de valuation discrète ». La démonstration qui suit
+(pages 39 à 41) utilise la propreté de $X_K$ pour la constructibilité, et
+traite séparément la partie sauvage ; on donne l'énoncé que cette démonstration
+établit.}
+
+\emph{Corollaire 8.2.} Le théorème vaut pour $X_K$ propre : (a) si $V$ est le
+hensélisé (ou hensélisé strict) de l'anneau local d'un point d'un schéma de
+type fini sur un corps ou sur $\mathbf{Z}$ ; (b) si $K$ est de caractéristique
+nulle.
+
+\emph{Démonstration de 8.2.} (a) Si le schéma est de type fini sur un corps
+premier ou sur $\mathbf{Z}$, les corps résiduels sont de type fini et vérifient
+(b). Sur un corps $k_0$ quelconque, on écrit $k_0$ comme réunion de sous-corps
+$k_\alpha$ de type fini, le schéma et son point descendant à $k_\alpha$ pour
+$\alpha$ grand ; par platitude, $\dim \mathcal{O}_{S_\alpha, x_\alpha} \leq 1$,
+et pour $\alpha$ grand c'est un anneau de valuation discrète dont $t$ est une
+uniformisante ; on passe aux hensélisés. (b) Si $K$ est de caractéristique
+nulle, $V$ est réunion de sous-$\mathbf{Q}$-algèbres locales $V_\alpha$
+essentiellement de type fini ; par Hironaka, une modification propre régulière
+$S'_\alpha \to \operatorname{Spec} V_\alpha$ rend $\operatorname{div}(t)$ à
+croisements normaux, et le point de $S'_\alpha$ dominé par $V$ donne un anneau
+local régulier où $t$ est un monôme ; les $V'_\alpha$ de cette espèce sont
+cofinaux, et l'on se ramène, comme l'indique la note de la page 38, au cas où
+$t$ fait partie d'un système régulier de paramètres.\footnote{La page 38 écrit
+$t = \prod x_i^{n_i}$ et suppose $n_1 = 1$ dans une note marginale presque
+illisible ; c'est ce cas qui donne la condition (a) de 8.1. Une page entière de
+la variante sur un corps quelconque (page 38) est barrée et remplacée par
+l'argument de la page 37.}
+
+\emph{Remarque 8.3.} La démonstration du cas (b) vaudrait sans restriction sur
+$V$ si l'on disposait de la résolution des singularités au sens de Hironaka pour
+les schémas de type fini sur $\mathbf{Z}$ ; il suffirait même de
+l'\emph{uniformisation locale}.
+
+\emph{Démonstration de 8.1.} On peut supposer les $V_\alpha$ henséliens. Pour
+$\alpha$ grand, $X_K$ provient d'un schéma propre $X_\alpha$ sur
+$U_\alpha = \operatorname{Spec}(V_\alpha)_t$, et $R^i f_{\alpha *}\mathbf{Z}_\ell$
+est constructible (SGA 5 VI) ; quitte à agrandir $\alpha$, il est lisse sur
+$U_\alpha$ tout entier, de sorte que, par le changement de base propre et
+lisse, la représentation de $\pi$ sur $H^i(X_{\overline K}, \mathbf{Z}_\ell)$
+provient d'une représentation de $\pi_1(U_\alpha)$ par
+$\pi \to \pi_1(U_\alpha)$.\footnote{La page 40 renvoie à « SGA IV 8 » pour le
+rétrécissement de $U_\alpha$ ; un petit schéma marginal y figure
+$g : S \to S_\alpha \supset U_\alpha$. Elle écrit « $V_\alpha = U_\alpha$ » là
+où il faut lire que l'ouvert de lissité est $U_\alpha$ tout entier.} On quotiente
+par la torsion ; l'image de l'inertie sauvage est finie (corollaire 4.5), et
+l'on peut donc supposer que l'action de l'inertie de $\pi_1(U_\alpha)$ se fait
+à travers sa partie modérée.\footnote{Le début de la page 41, où cette
+réduction est faite, est en grande partie illisible ; on en donne le sens, que
+fixe le corollaire 4.5.} On applique alors le lemme de structure suivant.
+
+\emph{Lemme 8.5} (une variante du lemme d'Abhyankar). Soient $A$ un anneau local
+noethérien régulier \emph{hensélien}, de corps résiduel $k$, $(x_i)_{1 \leq i
+\leq n}$ une partie d'un système régulier de paramètres, $x = \prod x_i$,
+$S = \operatorname{Spec} A$, $U = S_x$, $\xi$ un point géométrique de $U$.
+\begin{itemize}
+  \item[(a)] $\pi_1(S, \xi) \simeq \operatorname{Gal}(\bar k / k)$.
+  \item[(b)] $\pi_1(U,\xi) \to \pi_1(S,\xi)$ est surjectif, de noyau
+    $I \simeq \pi_1(\widetilde U, \tilde\xi)$, où $\widetilde U$ est l'image
+    inverse de $U$ dans le hensélisé strict.
+  \item[(c)] Le plus grand quotient $I_t$ de $I$ d'ordre premier à $p$ est
+    canoniquement isomorphe à $\bigl(\prod_{\ell\neq p}\mathbf{Z}_\ell(1)\bigr)^n$ ;
+    un revêtement correspond à une représentation qui se factorise par $I_t$ si
+    et seulement s'il est modérément ramifié le long des
+    $\operatorname{div}(x_i)$.
+  \item[(d)] L'action de $\pi_1(U,\xi)$ sur $\prod_{\ell \neq p}
+    I^{\mathrm{ab}}(\ell)$ passe par $\operatorname{Gal}(\bar k/k)$ et
+    s'identifie, facteur par facteur, à l'action naturelle sur les
+    $\mathbf{Z}_\ell(1)$.
+\end{itemize}
+\footnote{La page 41 ne dit pas « hensélien » ; sans cette hypothèse, (a) est
+faux, $\pi_1(S)$ n'ayant aucune raison de se réduire au groupe de Galois du
+corps résiduel. Le premier état barré du lemme, à la page 40, la portait. La
+page 43 conclut : « Démonstration laissée au lecteur » ; le résultat est celui
+de SGA 1 XIII 5.} 
+
+\emph{Corollaire 8.6.} Sous les conditions de 8.5, si aucune extension finie de
+$k$ ne contient toutes les racines $\ell^\nu$-ièmes de l'unité, toute
+représentation $\ell$-adique \emph{modérée} de $\pi_1(U,\xi)$ (celle où $I$
+agit à travers $I_t$) est quasi-unipotente sur $I$. --- C'est l'argument des
+pages 28 à 32, appliqué à chaque facteur $\mathbf{Z}_\ell(1)$.
+
+Dans l'application (remarque 8.7), $n = 1$, $x_1 = t$, et l'homomorphisme
+$I \to I'$ de l'inertie de $V$ vers celle de $V_\alpha$ induit un isomorphisme
+$I_t \simeq I'_t$ (proposition 3.12 avec $e = 1$) : la quasi-unipotence sur
+l'inertie de $V_\alpha$ donne celle sur $I$.
+
+\emph{Remarque 8.8 et corollaire 8.9.} La propreté n'a servi qu'à rendre
+$R^i f_{\alpha *}$ localement constant au voisinage du point générique ; la
+résolution des singularités au sens de Hironaka, en dimension $\leq \dim X_K$
+(SGA 5 II), suffit à le garantir, et elle est connue en caractéristique nulle et,
+par Abhyankar, en dimension $\leq 2$. Donc les conclusions de 8.2 restent vraies
+pour $X_K$ seulement de type fini, pourvu que dans le cas (a) $K$ soit de
+caractéristique nulle ou que $\dim X_K \leq 2$.\footnote{Un premier état du
+corollaire 8.9, à la page 44, est encadré et barré en croix ; on suit le
+second, écrit au-dessous.}
+
+\pagerange{45}{50}
+\subsection*{Réductions au cas projectif et lisse (pages 45 à 50)}
+
+Le § 9 fait voir que le théorème, pour tout $X_K$ de type fini, se ramène au cas
+projectif et lisse, moyennant la résolution des singularités. On raisonne par
+récurrence sur $n = \dim X_K$, en supposant le théorème connu en dimension
+$\leq n - 1$, et l'on traite aussi la cohomologie à supports propres
+$H^i_c$ --- que la page note $H^i_!$.
+
+\emph{9.1. $X_K$ lisse.} La dualité de Poincaré donne, pour $X_K$ lisse purement
+de dimension $n$, un isomorphisme $\pi$-équivariant
+\[
+  H^i(X_{\overline K}, \mathbf{Q}_\ell) \simeq
+  H^{2n-i}_c(X_{\overline K}, \mathbf{Q}_\ell)^\vee(-n) ;
+\]
+$I$ agissant trivialement sur $\mathbf{Q}_\ell(-n)$, l'action sur $H^i$ est
+quasi-unipotente (resp.\ unipotente) si et seulement si l'action sur
+$H^{2n-i}_c$ l'est.\footnote{La page ajoute « et si $X$ est propre » ; ce n'est
+pas nécessaire, la dualité de Poincaré entre $H$ et $H_c$ ne demandant que la
+lissité. Dans la formule, un facteur $\otimes \mathbf{Q}_\ell(n)$ est raturé et
+remplacé par $(-n)$.}
+
+\emph{9.2. $H_c$, et nature birationnelle de la question.} Pour $U$ ouvert dense
+de $X_K$ de complémentaire $Y$, la suite exacte
+\[
+  \cdots \to H^i_c(U_{\overline K}) \to H^i_c(X_{\overline K}) \to
+  H^i_c(Y_{\overline K}) \to H^{i+1}_c(U_{\overline K}) \to \cdots
+\]
+et l'hypothèse de récurrence, appliquée à $Y$, montrent que la quasi-unipotence
+sur $H^i_c(X)$ équivaut à la quasi-unipotence sur $H^i_c(U)$, la propriété étant
+stable par extensions, sous-objets et quotients.\footnote{La page 45 écrit la
+suite dans l'ordre $H_!(Y) \to H_!(X) \to H_!(U)$, qui est celui de la
+cohomologie ordinaire ; pour les supports propres, c'est l'ordre ci-dessus. La
+lettre $Y$ du premier terme est une lecture.} La question est donc
+birationnelle : on peut remplacer $X_K$ par un ouvert affine lisse (après une
+extension radicielle finie), puis, si l'on dispose de la résolution des
+singularités sur la clôture parfaite de $K$, par un modèle projectif et lisse.
+
+\emph{Proposition 9.4.} (a) Pour $V$ fixé, la validité du théorème pour les
+$H^i_c$ des $X_K$ de dimension $\leq n$ résulte de sa validité pour les $X_{K'}$
+lisses (et l'on peut les supposer affines), $K'$ parcourant les extensions
+radicielles finies de $K$, munies de la clôture normale $V'$ de $V$. (b) Si
+toute extension de type fini de degré de transcendance $\leq n$ de
+$K^{p^{-\infty}}$ a un modèle projectif et lisse, il suffit de traiter les
+$X_{K'}$ projectifs et lisses. (c) Ces conditions étant remplies, le théorème
+vaut aussi pour les $H^i$ des $X_K$ lisses de dimension $\leq n$ (par 9.1).
+
+\emph{9.5--9.6. $H^i$ pour $X_K$ quelconque.} Par récurrence sur $i$ : après une
+extension radicielle, une modification propre surjective $X' \to X$ avec $X'$
+lisse donne la suite spectrale de descente cohomologique
+\[
+  E_2^{pq} = H^p\bigl(\alpha \mapsto H^q((X'/X)^{\alpha+1}_{\overline K},
+  \mathbf{Q}_\ell)\bigr) \Longrightarrow H^{p+q}(X_{\overline K}, \mathbf{Q}_\ell),
+\]
+où $(X'/X)^{\alpha+1}$ est le produit fibré itéré ; un morphisme propre
+surjectif est de descente cohomologique universelle, et c'est ce qui rend
+la suite légitime.\footnote{La page l'appelle « suite spectrale de descente de
+Deligne » ; la descente cohomologique pour les morphismes propres surjectifs est
+exposée dans SGA 4 V\textsuperscript{bis}. Le passage (page 48) qui en tire la
+conclusion est barré en croix et récrit page 49.} Pour $p + q = i$ et $q < i$,
+l'hypothèse de récurrence sur $i$ (sans restriction de dimension) s'applique ;
+reste $E_2^{0,i} \subset H^i(X'_{\overline K})$, couvert par le cas lisse.
+
+\emph{Proposition 9.6.} Si l'on dispose de la résolution des singularités
+ordinaire sur $K^{p^{-\infty}}$ en toute dimension, et si l'action de $I$ sur
+les $H^i_c$ des $X_K$ projectifs et lisses est quasi-unipotente --- et le reste
+après toute extension radicielle finie ---, alors elle l'est sur les
+$H^i(X_{\overline K}, \mathbf{Q}_\ell)$ de tout $X_K$ de type fini.
+
+Remarque 9.3 : le cas d'un $X$ lisse non séparé se ramène au cas séparé par la
+suite spectrale de Leray d'un recouvrement fini par des ouverts affines.
+
+\emph{9.7. Les degrés $0$ et $1$.} En degré $0$, $\pi$ agit à travers un
+quotient fini (l'action est « quasi-triviale »). En degré $1$, après extension
+finie de $K$, on suppose les composantes irréductibles de $X_{\mathrm{red}}$
+géométriquement intègres ; avec $X'$ le normalisé de $X$, $X'' = X' \times_X X'$,
+la suite spectrale de descente donne
+\[
+  0 \to H^1\bigl(\alpha \mapsto H^0((X'/X)^{\alpha+1}_{\overline K})\bigr) \to
+  H^1(X_{\overline K}) \to
+  \operatorname{Ker}\bigl(H^1(X'_{\overline K}) \rightrightarrows H^1(X''_{\overline K})\bigr),
+\]
+dont le premier terme est quasi-trivial : on est ramené à $X$ géométriquement
+normal et intègre, puis, puisque $H^1(X) \hookrightarrow H^1(U)$ pour $U$ ouvert
+dense, à un ouvert, puis --- par un argument que la page 50 n'achève pas --- à
+une courbe lisse.
+
+\emph{Proposition 9.8.} La page porte ce numéro suivi de pointillés : l'énoncé
+n'a pas été écrit.\footnote{Les pages 49 et 50 contiennent un long passage
+encadré et barré en croix, illisible pour l'essentiel, et une parenthèse qui
+conclut : « est donc ramené au cas d'une courbe \emph{lisse} sur $K$. A
+expliciter ». La page 51 est blanche. Le cas $i = 1$ est repris par l'exposé II,
+§ 5, pages 80 et 81.}
+
+\pagerange{52}{55}
+\section*{Exposé II. Une variante du théorème de monodromie (pages 52 à 81)}
+
+\subsection*{L'énoncé et ses premiers corollaires (pages 52 à 55)}
+
+L'exposé, dit la page 52, donne « un résultat de nature analogue au théorème de
+monodromie de l'exposé précédent, à titre de nouvelle illustration de la méthode
+qui y était employée », et précise qu'il ne servira plus dans la suite du
+séminaire. Le rôle de $I \subset \pi$ y est tenu par le groupe fondamental
+géométrique à l'intérieur du groupe fondamental arithmétique.
+
+\emph{Théorème 1.1.} Soient $k$ un corps de type fini sur son corps premier,
+$X$ un $k$-schéma normal, géométriquement connexe, localement de type fini,
+$\xi$ un point géométrique de $X$, et $\bar k$ la clôture séparable de $k$ dans
+$k(\xi)$, d'où la suite exacte (SGA 1 IX)
+\[
+  1 \to \pi_1(\bar X, \xi) \to \pi_1(X, \xi) \to \operatorname{Gal}(\bar k/k) \to 1,
+  \qquad \bar X = X \otimes_k \bar k .
+\]
+Soient $\ell \neq \operatorname{car} k$, $\pi$ un sous-groupe ouvert de
+$\pi_1(X,\xi)$, $\pi_0$ son image dans $\operatorname{Gal}(\bar k/k)$,
+$I = \pi \cap \pi_1(\bar X, \xi)$, et $I(\ell)$ la composante $\ell$-primaire de
+$I^{\mathrm{ab}}$. Alors $I(\ell)$ est un $\mathbf{Z}_\ell$-module de type fini,
+et le plus grand quotient de $I(\ell)$ sur lequel $\pi_0$ agit trivialement est
+\emph{fini}.\footnote{La page 52 commence l'énoncé par « Soient $k$ un corps »,
+suivi d'un passage biffé où se lit « le corps \ldots{} déduit de $k$ » et de la
+parenthèse « (ou non absolu) ». L'hypothèse que $k$ soit de type fini sur son
+corps premier est nécessaire --- pour $k = \mathbf{C}$, $\pi_0$ est trivial et le
+quotient en question est $I(\ell)$ tout entier --- et c'est celle qu'utilisent
+la démonstration de la page 73 (réduction à un corps fini) et la remarque 2.6.
+Nous la rétablissons.}
+
+En termes de cohomologie (page 71), l'énoncé dit que
+$H^1(\bar X, \mathbf{Z}_\ell)^{\pi_0} = 0$ ; c'est la forme sous laquelle il est
+démontré. Aujourd'hui on le lit sur les \emph{poids} : la cohomologie
+$H^1(\bar X, \mathbf{Q}_\ell)$ d'une variété sur un corps de type fini est de
+poids $1$ et $2$, jamais $0$, de sorte que le Frobenius n'y a pas la valeur propre
+$1$.\footnote{Cette lecture est de nous. Les énoncés de finitude de cette espèce
+--- noyau de $\pi_1^{\mathrm{ab}}(X) \to \operatorname{Gal}(\bar k/k)^{\mathrm{ab}}$
+fini, au moins hors de la caractéristique --- ont été repris et étendus par Katz
+et Lang, « Finiteness theorems in geometric classfield theory » (1981) ; nous
+n'avons pas confronté les deux textes.}
+
+\emph{Corollaire 1.2.} De la suite exacte $(I^{\mathrm{ab}})_{\pi_0} \to
+\pi^{\mathrm{ab}} \to \pi_0^{\mathrm{ab}} \to 1$, prise en composantes
+$\ell$-primaires : l'homomorphisme surjectif $\pi^{\mathrm{ab}}(\ell) \to
+\pi_0^{\mathrm{ab}}(\ell)$ a un \emph{noyau fini}.
+
+\emph{Corollaire 1.3.} Soit $u : \pi_1(X,\xi) \to \operatorname{Aut}_{\mathbf{Q}_\ell}(E)$
+une représentation $\ell$-adique dont la restriction à $\pi_1(\bar X,\xi)$ est
+essentiellement résoluble. Alors cette restriction est essentiellement
+unipotente (donc essentiellement triviale si elle est semi-simple). On prend
+$\pi$ ouvert tel que l'image de $I$ soit un pro-$\ell$-groupe résoluble ; elle
+se factorise alors par l'extension de $\pi_0$ par $I(\ell)$, et la proposition
+I~6.1 conclut.\footnote{La page 54 suppose l'image de $I$ abélienne, et c'est
+le cas où l'argument passe sans retouche : la représentation se factorise par
+$I(\ell)$, dont les coinvariants sous $\pi_0$ sont finis. Pour une image
+résoluble, il faut appliquer I~6.1 au $I(\ell)$ de chaque sous-groupe ouvert,
+ce que l'hypothèse de 1.1, valable pour tout $\pi$ ouvert, permet.}
+
+\emph{Corollaire 1.4.} Si la représentation de $\pi_1(X,\xi)$ elle-même est
+essentiellement abélienne, sa restriction à $\pi_1(\bar X,\xi)$ est
+essentiellement triviale : il existe un sous-groupe ouvert $V$ de $\pi$ tel que
+$u|_V$ se factorise par l'image de $V$ dans $\pi_0$. On prend $\pi$ tel que
+$u(\pi)$ soit un pro-$\ell$-groupe abélien ; $u|_\pi$ se factorise par
+$\pi^{\mathrm{ab}}(\ell)$, et par 1.2 un sous-groupe ouvert de
+$\pi^{\mathrm{ab}}(\ell)$ s'injecte dans $\pi_0^{\mathrm{ab}}(\ell)$.
+
+\pagerange{55}{63}
+\subsection*{Schémas abéliens (pages 55 à 63)}
+
+\emph{Théorème 1.5.} Soient $k$ séparablement clos, $X$ normal, connexe,
+localement de type fini sur $k$, $\xi$ un point géométrique, $\ell \neq
+\operatorname{car} k$, $A$ un schéma abélien sur $X$. Si la représentation de
+$\pi_1(X,\xi)$ sur $T_\ell(A_\xi)$ est essentiellement résoluble, elle est
+essentiellement triviale, et il existe un revêtement étale fini surjectif
+$X' \to X$, un schéma abélien $B$ sur $k$ et une isogénie radicielle
+$B_{X'} \to A_{X'}$. En caractéristique nulle, $A$ devient donc constant, à
+isogénie près, sur un revêtement étale fini.
+
+\emph{Démonstration.} Un ouvert non vide $U$ de $X$ normal a un $\pi_1$ qui
+se surjecte sur celui de $X$ : on peut supposer $X$ affine, donc de type fini.
+Tout descend alors à un sous-corps $k_0$ de type fini, en $A_0 \to X_0 \to
+\operatorname{Spec} k_0$, et $\pi_1(X,\xi) \to \pi_1(\bar X_0, \xi)$ est
+surjectif ; le corollaire 1.3, appliqué à $X_0$ sur $k_0$, donne que la
+représentation est essentiellement unipotente. On conclut par le
+
+\emph{Lemme 1.5.1} (adaptation d'un résultat de Lang--Néron, qui utilise
+Mordell--Weil). Si l'action de $\pi_1(X,\xi)$ sur $T_\ell(A_\xi)$ est
+unipotente, elle est triviale, et il existe $B$ sur $k$ et une isogénie
+radicielle $B_X \to A$.\footnote{Le passage de « unipotente » à « triviale »
+demande que l'action de $\pi_1(X,\xi)$ sur $T_\ell(A_\xi) \otimes \mathbf{Q}_\ell$
+soit semi-simple. Le dossier le sait : une note biffée au bas de la page 55
+« conjecture que l'action de $\pi_1(X,\xi)$ sur $T_\ell(A_\xi)$ est toujours
+semi-simple », et la page 62 le rappelle. Cette semi-simplicité a été démontrée
+par Deligne --- par la théorie de Hodge en caractéristique nulle (« Théorie de
+Hodge II », 1971), et pour la monodromie géométrique des faisceaux purs en
+général dans « La conjecture de Weil II » (1980). Le lemme est donc vrai, mais
+sa démonstration repose sur un théorème postérieur au dossier ; la page 57 ne
+la donne pas.}
+
+\emph{Corollaire 1.6.} Si pour un $\ell \neq \operatorname{car} k$ l'action sur
+$T_\ell(A_\xi)$ est essentiellement résoluble --- ce qui équivaut à
+essentiellement triviale ---, il en est de même pour tout autre $\ell'$.
+(L'isotrivialité, à isogénie radicielle près, ne dépend pas de $\ell$.)
+
+\emph{Corollaire 1.7.} En caractéristique nulle, si de plus le $n$-torsion
+${}_nA$ est un revêtement trivial de $X$ pour un $n \geq 3$, $A$ est un schéma
+abélien \emph{constant}. La descente le décrit en effet par une représentation
+du groupe de Galois $\Gamma$ de $X'/X$ dans le groupe discret
+$\operatorname{Aut}_k(B)$, triviale sur ${}_nB(k)$, donc triviale puisque
+$n \geq 3$. Remarque 1.8 : il suffit que $k$ soit séparablement clos.
+
+L'énoncé 1.5 est purement géométrique, sa démonstration arithmétique. En voici
+la variante arithmétique.
+
+\emph{Théorème 1.9.} Soient $K$ un corps de type fini sur son corps premier
+$\mathfrak{k}$, $A_K$ un schéma abélien sur $K$ dont l'action de
+$\operatorname{Gal}(\overline K / K)$ sur $T_\ell(A(\overline K))$ est
+essentiellement résoluble. Alors il existe une extension finie $k' \subset
+\overline K$ de $\mathfrak{k}$, un schéma abélien $B$ sur $k'$, et une isogénie
+radicielle entre $B \otimes_{k'} K'$ et $A \otimes_K K'$, où $K' = Kk'$. En
+caractéristique nulle, on veut de plus que $B$ provienne d'un schéma abélien sur
+l'anneau des entiers du corps de nombres $k'$ --- bonne réduction partout.
+
+\emph{1.10. Existence de $B$.} Soit $k$ la fermeture algébrique du corps premier
+dans $K$ --- un corps fini ou un corps de nombres, parfait --- et $X$ un
+$k$-schéma affine intègre, normal, de corps des fonctions $K$, sur lequel $A$
+s'étend ; après extension finie de $k$, $X$ est géométriquement intègre. Le
+corollaire 1.3, puis Lang--Néron sur un revêtement étale $X'$, donnent $B$ sur
+une extension finie $k'$ et une isogénie radicielle $B_{X'} \to A_{X'}$. En
+caractéristique $p > 0$, $\operatorname{Gal}(\bar k'/k') \simeq
+\widehat{\mathbf{Z}}$ étant abélien, on en conclut que l'action de
+$\operatorname{Gal}(\overline K/K)$ est en fait essentiellement \emph{abélienne} ;
+et réciproquement (page 60), l'existence de $B$ sur un corps fini entraîne une
+action essentiellement abélienne. En caractéristique nulle, par le critère de
+Néron--Ogg--Šafarevič, on est ramené à voir que pour tout idéal maximal de
+l'anneau des entiers, l'inertie agit de façon quasi-triviale.\footnote{Le bas de
+la page 59 est barré en croix et récrit ; la page 60, qui dit la réciproque, est
+lue avec de nombreuses lacunes, et le nom « Šafarevič » y est lu tel quel. La
+section 1.11, « Borne inférieure », n'a qu'un titre et une ligne de
+pointillés.}
+
+\emph{Lemme 1.12.} Si $V$ est un anneau de valuation discrète dont le corps
+résiduel vérifie l'hypothèse de I~6.2, toute représentation $\ell$-adique
+continue \emph{abélienne} de $\pi = \operatorname{Gal}(\overline K / K)$ est
+essentiellement triviale sur $I(\ell)$. --- Il se déduit de I~6.2 comme 1.4 de
+1.1 par 1.2.
+
+\emph{Remarque 1.13.} Le seul exemple connu d'action abélienne et semi-simple
+du groupe de Galois sur $T_\ell(A)$ est celui des variétés « de type CM » au sens
+de Shimura et Taniyama ; une telle variété devient, sur une extension finie
+séparable, radiciellement isogène à un schéma abélien défini sur un corps fini
+(caractéristique $p$), resp.\ sur l'anneau des entiers d'un corps de nombres
+(caractéristique nulle). Et la page 62 conjecture : en caractéristique nulle,
+une variété abélienne sur un corps de type fini dont l'action galoisienne est
+essentiellement abélienne --- ou seulement essentiellement résoluble --- est de
+type CM.\footnote{C'est aujourd'hui un théorème, à notre connaissance, par la
+conjecture de Tate démontrée par Faltings (1983) et la semi-simplicité qui
+l'accompagne : une image de Galois essentiellement abélienne fait du commutant
+une algèbre de dimension $2\dim A$, qui est alors $\operatorname{End}(A)
+\otimes \mathbf{Q}_\ell$ ; c'est la multiplication complexe. Pour une image
+essentiellement résoluble, l'adhérence de Zariski est réductive (Faltings) de
+composante neutre résoluble, donc un tore, et l'on est ramené au cas abélien.}
+
+\emph{1.14--1.16. Au-delà des schémas abéliens.} Certains arguments dépassent
+les schémas abéliens et s'appliqueront à des « motifs » de poids quelconque,
+« une fois la théorie des motifs assise sur des bases solides ». Ainsi :
+
+\emph{Théorème 1.15.} Soient $k$ algébriquement clos, $Y$ normal, connexe,
+localement de type fini sur $k$, $\xi$ un point géométrique, $f : X \to Y$
+propre, $i$ un entier tel que $R^i f_*\mathbf{Z}_\ell$ soit lisse ; soit $G$ le
+groupe algébrique engendré par l'image de $\pi_1(Y, \xi)$ dans
+$\operatorname{GL}\bigl(H^i(X_\xi, \mathbf{Q}_\ell)\bigr)$. Alors le radical de
+$G^0$ est unipotent. En particulier, si la représentation est essentiellement
+résoluble, elle est essentiellement unipotente ; si elle est de plus
+semi-simple, elle est essentiellement triviale.\footnote{La page 62 écrit
+$\pi_1(X,\xi)$ ; c'est du groupe fondamental de la base $Y$ qu'il s'agit. La
+condition « $R^i f_*$ lisse » est vraie, ajoute la marge, quitte à rétrécir $Y$.
+On sait aujourd'hui davantage pour $f$ propre et lisse : $G^0$ est
+semi-simple (Deligne, « Weil II », 3.4.1).} La propreté (1.16) n'a servi qu'à
+rendre $R^i f_*$ constructible près du point générique ; la résolution des
+singularités en dimension $\leq \dim X_y$ y suffit, ce qui couvre la
+caractéristique nulle et $\dim X_y \leq 2$ ; et pour $i = 1$ la conclusion vaut
+sans propreté, par les réductions du § 5. Une remarque barrée (1.17) envisageait
+d'étendre 1.1 aux quotients pro-$\ell$ résolubles de $I$ « comme 1.1 résulte de
+l'hypothèse de Riemann--Weil en dimension 1 ».
+
+\pagerange{64}{68}
+\subsection*{Fin de la démonstration de 1.9 (pages 64 à 68)}
+
+\emph{Lemme.} Si $A$ est un schéma abélien sur un corps fini, les relèvements du
+Frobenius agissent de façon semi-simple sur $T_\ell(A) \otimes \mathbf{Q}_\ell$.
+Le Frobenius est dans le centre de $\operatorname{End}(A) \otimes \mathbf{Q}$,
+algèbre semi-simple (Weil) dont le centre est une algèbre étale ; il agit donc de
+façon semi-simple.
+
+\emph{Corollaires 1 et 2.} Pour $A$ abélien sur $S$ de type fini sur
+$\mathbf{Z}$, les Frobenius des points fermés agissent de façon semi-simple ; et
+si l'action de $\pi_1(S,\xi)$ est essentiellement nilpotente, elle est
+semi-simple et essentiellement abélienne. En effet, après un revêtement étale,
+$G = G^0 = T \times U$ ; les Frobenius sont denses dans $\pi_1$ (Čebotarev),
+donc leurs images engendrent $G$ comme groupe algébrique ; elles sont
+semi-simples, donc dans $T$ ; donc $U = 1$.
+
+Il reste, en caractéristique nulle, à obtenir la bonne réduction potentielle aux
+places de caractéristique résiduelle $\ell$. La page 66 la ramène à un lemme
+« signalé par Serre » :
+
+\emph{Lemme.} Soient $V$ un anneau de valuation discrète de corps des fractions
+$K$, $\ell \neq \operatorname{car} K$ (mais peut-être égal à la caractéristique
+résiduelle), $A$ abélien sur $K$. Si l'inertie agit de façon semi-simple sur
+$T_\ell(A) \otimes \mathbf{Q}_\ell$, $A$ a potentiellement bonne réduction.
+
+Si la caractéristique résiduelle est $\neq \ell$, c'est immédiat : l'action est
+essentiellement unipotente et semi-simple, donc essentiellement triviale. Si elle
+vaut $\ell$, on invoque le théorème de réduction semi-stable --- « qui se prouve
+ultérieurement » : après extension finie, la composante neutre de la fibre
+spéciale du modèle de Néron est extension d'une variété abélienne par un tore de
+dimension $r$, et la semi-simplicité force $r = 0$.\footnote{La page 66 renvoie
+la démonstration « à exposé ultérieur » ; le théorème de réduction semi-stable a
+paru dans SGA 7 I, exposé IX. L'argument de la page 67, par un sous-module
+$M \simeq \mathbf{Z}_\ell^r$ fixe sous $I$ et le modèle de Néron, est esquissé
+avec des lacunes ; on n'en garde que la conclusion.}
+
+\emph{Remarque de Serre.} Si l'on savait qu'en caractéristique nulle une action
+résoluble est essentiellement abélienne, on en conclurait qu'une telle variété
+abélienne est de type CM après extension finie (voir la note de la remarque 1.13).
+
+On est ainsi ramené à un schéma abélien sur l'anneau des entiers $R$ d'un corps
+de nombres, avec une action abélienne de $\pi_1(\operatorname{Spec} R)$ sur
+$V_\ell$ ; une telle représentation est « localement algébrique » et
+« rationnelle » (polynômes caractéristiques des Frobenius à coefficients
+rationnels), et deux représentations $V_\ell$, $V_{\ell'}$ ayant mêmes polynômes
+de Frobenius presque partout, l'une semi-simple abélienne, ont même
+semi-simplifiée. La page 68 s'arrête sur « Choisissons alors $\ell$ tel que » :
+\emph{la démonstration de 1.9 en caractéristique nulle n'est pas
+achevée.}\footnote{La page 69 commence par un passage barré qui envisageait de
+remplacer partout, dans 1.3, 1.5, 1.9 et 1.13, « essentiellement abélienne » par
+« essentiellement résoluble », sous réserve de la semi-simplicité.}
+
+\pagerange{69}{73}
+\subsection*{Démonstration de 1.1 pour une courbe (pages 69 à 73)}
+
+\emph{2.1--2.3. Réductions.} Pour $U$ ouvert affine de $X$ normal,
+$\pi_1(U) \to \pi_1(X)$ est surjectif (SGA 1 V), donc aussi
+$\pi_1(\bar U) \to \pi_1(\bar X)$, et la conclusion pour $U$ entraîne celle pour
+$X$ : on peut supposer $X$ affine. Remplacer $k$ par une extension finie revient
+à remplacer $\pi$ par un sous-groupe ouvert : c'est permis (2.2). On plonge
+$X$ comme ouvert dense d'un $X'$ projectif normal ; après une extension
+radicielle finie (EGA IV 17.15.14.2), le normalisé de $X' \otimes k_1$ est
+géométriquement normal, et comme il est géométriquement unibranche, le passage
+ne change pas les $\pi_1$ géométriques. On est ramené à $X'$ géométriquement
+normal.
+
+\emph{2.4. Forme cohomologique.} $V = \pi_1(\bar X)^{\mathrm{ab}}(\ell)$ est de
+type fini sur $\mathbf{Z}_\ell$, ce qui revient à la finitude de
+$H^1(\bar X, \mathbf{Z}/\ell)$ (vraie pour $X$ de type fini sur un corps
+séparablement clos, et démontrée au § 3 par réduction aux courbes). La finitude
+de $V_{\pi_0}$ équivaut à $(V \otimes \mathbf{Q}_\ell)_{\pi_0} = 0$, donc par
+dualité à $(\check V)^{\pi_0} = 0$, et comme $\check V \simeq
+\operatorname{Hom}(\pi_1(\bar X), \mathbf{Z}_\ell) = H^1(\bar X, \mathbf{Z}_\ell)$ :
+\[
+  H^1(\bar X, \mathbf{Z}_\ell)^{\pi_0} = 0 . \tag{2.4.1}
+\]
+Une note encadrée prescrit de se ramener d'abord à $\pi = \pi_1(X,\xi)$ en
+passant au revêtement étale fini $X'$ qui correspond à $\pi$.
+
+\emph{2.5. Le cas d'une courbe.} Soit $X'$ une courbe projective lisse, $X$ un
+ouvert, et --- après extension finie --- les points $x_1, \ldots, x_n$ de
+$X' - X$ rationnels sur $k$. La suite de localisation
+\[
+  0 \to H^1(\bar X', \mathbf{Z}_\ell) \to H^1(\bar X, \mathbf{Z}_\ell) \to
+  \bigoplus_{i=1}^n H^2_{x_i}(\bar X', \mathbf{Z}_\ell) \to
+  H^2(\bar X', \mathbf{Z}_\ell) \to 0 ,
+\]
+avec $H^2_{x_i} \simeq \mathbf{Z}_\ell(-1) \simeq H^2(\bar X')$ et la dernière
+flèche la somme, montre que $H^1(\bar X)$ est extension de
+$\mathbf{Z}_\ell(-1)^{n-1}$ par $H^1(\bar X')$.\footnote{La page 72 écrit
+« extension de $\mathbf{Z}_\ell(1)^{n-1}$ », alors qu'elle vient d'écrire
+$H^2_{x_i} \simeq \mathbf{Z}_\ell(-1)$ ; c'est $\mathbf{Z}_\ell(-1)$. Le signe
+est sans effet sur l'argument, $\pi_0$ n'ayant d'invariants ni sur l'un ni sur
+l'autre. Elle écrit aussi $H^2_{x_i}(\bar X, \ldots)$ pour la cohomologie locale
+de $\bar X'$ en $x_i$.} Comme $k$ est de type fini, le caractère cyclotomique a
+une image infinie et $\mathbf{Z}_\ell(-1)^{\pi_0} = 0$ ; d'où
+$H^1(\bar X)^{\pi_0} = H^1(\bar X')^{\pi_0}$, et il reste
+\[
+  H^1(\bar X', \mathbf{Z}_\ell)^{\pi_0} = 0 , \tag{2.5.5}
+\]
+« conséquence connue de l'hypothèse de Riemann--Weil, prouvée en dimension 1 ».
+Pour la démontrer, on étale $X'$ en une courbe propre et lisse $C \to S$, $S$
+normal de type fini sur $\mathbf{Z}$ : la relation s'écrit
+$H^0(S, R^1 f_*\mathbf{Z}_\ell) = 0$, ne change pas quand on rétrécit $S$, et se
+ramène donc à la fibre en un point fermé, c'est-à-dire au cas d'un corps fini.
+Là, l'argument de Weil (les valeurs propres du Frobenius sur $H^1$ sont de
+valeur absolue $q^{1/2} \neq 1$) est barré au profit d'un argument plus
+élémentaire, écrit dans la marge : $H^1(\bar C, \mathbf{Z}_\ell) \simeq
+T_\ell(J)^\vee$, $J$ la jacobienne ; le noyau de $1 - f$ sur le dual est nul si
+et seulement si celui de $1 - f$ sur $T_\ell(J)$ l'est, c'est-à-dire si le groupe
+$J(k)$ a une partie $\ell$-primaire finie, ce qui est trivial puisque $J(k)$ est
+fini.\footnote{Sur un corps fini, le module de Tate des points rationnels est
+$T_\ell(J)^{f} = 0$ parce que $J(k)$ est fini ; c'est en effet sans recours à
+l'hypothèse de Riemann. La transcription signale que la rédaction de la page 73
+est « très surchargée ».}
+
+\emph{Remarque 2.6} (marge). On a utilisé deux propriétés du corps : (a)
+l'extension engendrée par les racines $\ell^\nu$-ièmes de l'unité est infinie ;
+(b) pour tout schéma abélien $A$ sur une extension finie, les coinvariants de
+$T_\ell(A)$ sont finis. Ni l'une ni l'autre ne vaut pour $K = \mathbf{R}$.
+
+\pagerange{74}{77}
+\subsection*{Réduction à la dimension 1 par une section linéaire générique (pages 74 à 77)}
+
+\emph{3.1.} Soient $X'$ projectif, intègre, normal, géométriquement connexe sur
+$k$, plongé dans $\mathbf{P}^r_k$, de dimension $n$, $X$ un ouvert dense. Soient
+$T$ la grassmannienne des sous-espaces linéaires de codimension $n-1$, $t$ son
+point générique, $K = k(t)$ --- extension transcendante pure de $k$ ---, $L_t$ le
+sous-espace « générique », et
+\[
+  C' = L_t \cap X'_K , \qquad C = C' \cap X_K ;
+\]
+$C'$ est une courbe géométriquement normale et géométriquement connexe sur $K$.
+On choisit $\xi_1$ au-dessus de $\xi$ et l'on obtient un morphisme de suites
+exactes
+\[
+  \begin{array}{ccccccccc}
+  1 & \to & \pi_1(\bar C, \xi_1) & \to & \pi_1(C, \xi_1) & \to & \operatorname{Gal}(\overline K/K) & \to & 1 \\
+  & & \downarrow{\scriptstyle\alpha} & & \downarrow{\scriptstyle\beta} & & \downarrow{\scriptstyle\gamma} & & \\
+  1 & \to & \pi_1(\bar X, \xi) & \to & \pi_1(X, \xi) & \to & \operatorname{Gal}(\bar k/k) & \to & 1 .
+  \end{array}
+\]
+
+\emph{Lemme 3.2.} Les trois flèches verticales sont surjectives. Pour $\gamma$,
+parce que $k$ est algébriquement fermé dans $K = k(t)$. Pour $\alpha$, on peut
+supposer $k$ séparablement clos ; il s'agit de voir que l'image inverse dans $C$
+d'un revêtement étale connexe $X_1$ de $X$ est géométriquement connexe ; or $X_1$
+se prolonge en un revêtement normal intègre $X'_1 \to X'$, et par le théorème
+de Bertini l'image inverse de $L_t$ dans $X'_1$ est géométriquement
+irréductible.\footnote{Bertini demande $n \geq 2$, ce qui est le cas où la
+réduction a un objet. La page 75 dit aussi qu'on suppose l'image de $\xi$
+dans celle de $C$ --- condition anodine, $\xi$ pouvant être pris au-dessus du
+point générique.}
+
+\emph{3.3.} Donc si $C$ sur $K$ satisfait aux conclusions de 1.1, $X$ sur $k$
+aussi ; et $K$ est de type fini dès que $k$ l'est. Avec les réductions de 2.3,
+1.1 est ramené au cas d'une courbe, traité au § 2.
+
+\emph{Remarque 3.4.} La page en tire que, pour $X$ de type fini sur un corps
+séparablement clos de caractéristique $p \geq 0$, le plus grand quotient premier
+à $p$ de $\pi_1(X,\xi)$ est de présentation finie, en se ramenant par descente
+au cas normal, puis par 3.2 à une courbe. Mais le lemme 3.2 ne donne qu'une
+\emph{surjection} : l'argument établit la génération topologique finie, non la
+présentation finie.\footnote{La présentation finie demande de contrôler les
+relations, que la surjectivité de $\alpha$ ne contrôle pas. Le dossier y revient
+à la remarque VI~1.3.1 (page 166), où il l'attribue à un argument de J.\ P.\
+Murre utilisant la résolution des singularités. Sans résolution, en
+caractéristique positive, la question a été réglée beaucoup plus tard ; voir,
+à notre connaissance, Esnault, Schusterman et Srinivas, « Finite presentation of
+the tame fundamental group » (Selecta Mathematica).}
+
+\pagerange{78}{81}
+\subsection*{Un complément, et la réduction pour $H^1$ (pages 78 à 81)}
+
+\emph{Proposition 4.1.} Sous les conditions de 1.1, pour presque tout $\ell$,
+$\overline{[\pi', I(\ell)]} = I(\ell)$ : le plus grand quotient de $I(\ell)$ sur
+lequel $\pi_0$ agit trivialement est \emph{nul}. Par dualité, c'est le
+
+\emph{Corollaire 4.2.} Pour presque tout $\ell$, $H^1(\bar X, \mathbf{Z}/\ell)^{\pi_0} = 0$.
+
+On se ramène comme plus haut à une courbe projective lisse $X'$ privée de points
+rationnels $x_i$, et la suite de localisation mod $\ell$ fait de
+$H^1(\bar X, \mathbf{Z}/\ell)$ une extension de
+$\bigl(\mu_\ell^{\otimes -1}\bigr)^{n-1}$ par $H^1(\bar X', \mathbf{Z}/\ell)$. Si
+$N$ est le nombre de racines de l'unité dans $k$ (fini, $k$ étant de type fini),
+pour $\ell \nmid N$ le groupe $\pi_0$ agit non trivialement sur la droite
+$\mu_\ell^{\otimes -1}$, sans invariants, d'où $H^1(\bar X)^{\pi_0} \subset
+H^1(\bar X')^{\pi_0}$. On se ramène à $k$ fini ; avec $f$ le Frobenius et
+${}_\ell J(\bar k)$ fini, noyau et conoyau de $1 - f$ ont même cardinal, et
+l'annulation équivaut à ${}_\ell J(k) = 0$, vrai pour $\ell \nmid N' =
+\operatorname{card} J(k)$. Donc pour $\ell \nmid NN'$, c'est fini.
+
+\emph{Corollaire 4.3.} Si $X$ est normal, géométriquement intègre, de type fini
+sur $\mathbf{F}_q$, alors pour tout $\ell \neq p$ l'homomorphisme
+$\pi_1(X,\xi)^{\mathrm{ab}}(\ell) \to \operatorname{Gal}(\bar{\mathbf{F}}_q /
+\mathbf{F}_q)(\ell) \simeq \mathbf{Z}_\ell$ a un noyau fini, et c'est un
+isomorphisme pour presque tout $\ell$.\footnote{La page 79 écrit
+« $\pi_1(\mathbf{F}_p) \simeq \widehat{\mathbf{Z}}$ » ; il s'agit du groupe de
+Galois de $\mathbf{F}_q$, $q = p^r$, et de sa composante $\ell$-primaire,
+pour que le but soit celui de la source.}
+
+\emph{§ 5. Réduction du théorème de monodromie pour $H^1$ au cas d'une courbe
+projective lisse.} Revenons au trait $S$ de l'exposé I. La suite spectrale de
+descente pour un morphisme fini ramène à $X$ normal (5.1) ; une extension finie,
+à un ouvert d'un projectif géométriquement connexe et géométriquement unibranche
+(5.2) ; le lemme 3.2 --- qui rend $H^1(\bar X) \to H^1(\bar C)$ injectif ---, à une
+courbe projective lisse, en choisissant un anneau de valuation de $K(t)$ qui
+domine $V$, de sorte que l'inertie nouvelle s'envoie sur un sous-groupe d'indice
+fini de l'ancienne (5.3). Les points à l'infini étant rationnels, l'inertie agit
+trivialement sur les $H^2_x \simeq \mathbf{Z}_\ell(-1)$, et il suffit de prouver
+la quasi-unipotence sur le $H^1$ de la courbe complète.\footnote{La page 80
+écrit « sur $H^2(\overline{X'}, \mathbf{Z}_\ell)$ » ; c'est sur
+$H^1(\overline{X'}, \mathbf{Z}_\ell)$, l'action sur $H^2 \simeq
+\mathbf{Z}_\ell(-1)$ étant triviale de toute façon.}
+
+\emph{Remarque 5.4.} L'exposé III prouvera que, pour $X_K$ courbe lisse séparée,
+l'inertie agit sur $H^1(X_{\overline K}, \mathbf{Z}_\ell)$ de façon
+essentiellement unipotente d'échelon $2$ ; on en déduit alors, par 5.1 à 5.3,
+que pour $X_K$ de type fini l'action est essentiellement unipotente d'échelon
+$3$, et d'échelon $2$ si $X$ est normal.
+
+\emph{Bibliographie} (page 81). [1] A.\ Grothendieck, « Un théorème sur les
+homomorphismes de schémas abéliens », Invent.\ Math.\ 2 (1966), 59--78. [2]
+S.\ Lang --- entrée inachevée. [3] J.-P.\ Serre et J.\ Tate, « Good reduction of
+abelian varieties ». [4] G.\ Shimura et Y.\ Taniyama, \emph{Complex
+multiplication of abelian varieties}, Publ.\ Math.\ Soc.\ Japan 6 (1961).
+
+\pagerange{83}{91}
+\section*{Exposé III. Le théorème de monodromie par voie géométrique (pages 83 à 127)}
+
+\subsection*{La suite exacte des cycles évanescents (pages 83 à 91)}
+
+On garde les notations de l'exposé I, et l'on se donne $X$ propre sur $S$. Il
+s'agit de relier $H^i(X_{\bar s})$ et $H^i(X_{\bar\eta})$, à coefficients
+$\Lambda_\nu$ ou $\mathbf{Z}_\ell$ --- question « liée intimement » à celle de
+l'action de $\pi$ sur $H^i(X_{\bar\eta})$. Quitte à remplacer $S$ par
+$\widetilde S$, on le suppose strictement local.
+
+Écrivons $\overline K = \varinjlim K_\alpha$ ($K_\alpha$ finies sur $K$), $S_\alpha$
+le normalisé de $S$ dans $K_\alpha$ --- encore strictement local, de point fermé
+$s_\alpha$ de corps résiduel radiciel sur $k$ ---, et $X_\alpha = X \times_S
+S_\alpha$. Le passage de $X_s$ à $X_{\alpha, s_\alpha}$ est un homéomorphisme
+universel, donc $H^*(X_s) \simeq H^*(X_{\alpha,s_\alpha})$ ; et par le changement
+de base propre, $H^*(X) \simeq H^*(X_s)$ et $H^*(X_\alpha) \simeq
+H^*(X_{\alpha,s_\alpha})$. Les suites de cohomologie relative de $X_\alpha$
+modulo l'ouvert $X_{\eta_\alpha}$, passées à la limite, donnent la \emph{suite
+exacte des cycles évanescents}
+\[
+  \cdots \to \Phi^i_\nu \to H^i(X_s, \Lambda_\nu) \to H^i(X_{\bar\eta}, \Lambda_\nu)
+  \to \Phi^{i+1}_\nu \to \cdots, \qquad
+  \Phi^i_\nu = \varinjlim_\alpha H^i_{X_{\alpha,s}}(X_\alpha, \Lambda_\nu) .
+  \tag{1.9}
+\]
+\emph{1.11.} $\Phi^i_\nu$ est le groupe des \emph{cycles évanescents en dimension
+$i$} : il mesure « l'écart » entre la cohomologie des fibres géométriques
+spéciale et générale. Les groupes étant finis, on passe à la limite sur $\nu$
+et l'on obtient la même suite à coefficients $\mathbf{Z}_\ell$, avec $\Phi^i =
+\varprojlim_\nu \Phi^i_\nu$.\footnote{Dans la convention de SGA 7 XIII, le
+même énoncé s'écrit $\cdots \to H^i(X_s, \Lambda) \to H^i(X_{\bar\eta},\Lambda)
+\to H^i(X_s, R\Phi\Lambda) \to \cdots$ : le $\Phi^{i+1}_\nu$ du dossier est le
+$H^i(X_s, R\Phi\Lambda_\nu)$ de Deligne. C'est le décalage fixé dans les
+conventions.}
+
+\emph{1.12. Du local au global.} Les suites spectrales de cohomologie locale,
+pour $\alpha$ variable, donnent à la limite --- les sites étales des
+$X_{\alpha,s}$ s'identifiant à celui de $X_0 = X_s$ ---
+\[
+  E_2^{pq} = H^p(X_0, \underline\Phi^q_\nu) \Longrightarrow \Phi^{p+q}_\nu, \qquad
+  \underline\Phi^q_\nu = \varinjlim_\alpha \underline H^q_{X_{\alpha,s}}(\Lambda_{\nu, X_\alpha}) ,
+  \tag{1.14}
+\]
+où les $\underline\Phi^q_\nu$ sont des faisceaux sur $X_0$ \emph{dont le calcul
+est de nature locale sur $X$}.\footnote{La page 86 écrit l'exposant de (1.15)
+comme une étoile, là où l'on attend $q$. Elle signale que le passage à la limite
+sur $\nu$ dans (1.14) demanderait de vérifier que le système des
+$\underline\Phi^q_\nu$ forme un faisceau $\ell$-adique ; c'est la question de
+la remarque 2.8 ci-dessous.}
+
+\emph{1.16. Le cas lisse.} Si $X \to S$ est lisse et $\ell \neq p$, la pureté
+donne $\underline H^q_{X_{\alpha,s}}(\Lambda_\nu) = 0$ pour $q \neq 2$ et
+$\simeq \Lambda_\nu(-1)$ pour $q = 2$ ; dans la limite, la flèche de transition
+de $S_\alpha$ à $S_\beta$ est la multiplication par l'indice de ramification
+$e_{\alpha\beta}$, et comme ces indices deviennent divisibles par toute
+puissance de $\ell$, la limite est nulle.\footnote{La page 87 écrit « la
+multiplication par $n_{\alpha\beta}$ », le degré de $S_\beta$ sur $S_\alpha$.
+Le relèvement de la classe de la fibre spéciale est multiplié par l'indice de
+ramification, qui ne coïncide avec le degré que si l'extension résiduelle est
+triviale ; elle est ici radicielle. La conclusion ne change pas, puisque les
+extensions $K(t^{1/\ell^n})$ font croître l'indice de ramification autant qu'on
+veut.} Donc $\underline\Phi^q_\nu = 0$ pour tout $q$, et
+\[
+  H^i(X_s, \Lambda_\nu) \xrightarrow{\ \sim\ } H^i(X_{\bar\eta}, \Lambda_\nu)
+\]
+pour $X$ propre et lisse sur $S$ : c'est le théorème de spécialisation
+(SGA 4 XVI).
+
+\emph{Proposition 1.17.} Les faisceaux $\underline\Phi^q_\nu$ sont à support dans
+l'ensemble $T$ des points de $X_0$ où $f$ n'est pas lisse ($\ell \neq p$). Si $T$
+est fini (1.18), la suite (1.14) dégénère et $\Phi^i_\nu = \bigoplus_{t \in T}
+(\underline\Phi^i_\nu)_t$ : les cycles évanescents sont une somme de termes
+\emph{purement locaux}.
+
+\emph{1.20. L'action de l'inertie.} Par construction, $I$ agit sur les
+$\underline\Phi^q_\nu$ ; (1.14) est une suite spectrale de $I$-modules et (1.9)
+une suite exacte de $I$-modules, $I$ agissant trivialement sur
+$H^*(X_s, \Lambda_\nu)$. On pourrait donc prouver le théorème de monodromie en
+montrant qu'un sous-groupe ouvert de $I$ agit trivialement sur \emph{tous} les
+$\underline\Phi^q_\nu$ : un énoncé purement local, accessible au calcul.
+
+\emph{1.21. Un ouvert de la fibre générique.} Pour $U$ ouvert de $X_\eta$ et
+$Y = X - U \supset X_0$, on a de même $\Phi^i_\nu = \varinjlim_\alpha
+H^i_{Y_\alpha}(X_\alpha, \Lambda_\nu)$, $Y_\alpha$ l'image inverse de $Y$, la
+suite $\cdots \to \Phi^i_\nu \to H^i(X_s) \to H^i(U_{\bar\eta}) \to
+\Phi^{i+1}_\nu \to \cdots$, et les faisceaux $\underline\Phi^q_\nu =
+\varinjlim_\alpha \underline H^q_{Y_\alpha}(\Lambda_\nu)|X_{\alpha,0}$.
+
+\emph{1.26. La partie modérée.} Le calcul local n'est souvent possible qu'en se
+bornant aux extensions modérées $K(n) = K(t^{1/n})$, $(n,p) = 1$, dont la
+réunion est $\overline K_t$. Comme $P$ est un pro-$p$-groupe et les coefficients
+de $\ell$-torsion, la suite de Hochschild--Serre donne
+\[
+  H^*(U_{\overline K_t}, \Lambda_\nu) \xrightarrow{\ \sim\ } H^*(U_{\overline K}, \Lambda_\nu)^P ,
+\]
+d'où une suite exacte $\cdots \to \Phi^i_{\nu,\mathrm{t}} \to H^i(X_s) \to
+H^i(U_{\bar\eta})^P \to \Phi^{i+1}_{\nu,\mathrm{t}} \to \cdots$, des faisceaux
+$\underline\Phi^q_{\nu,\mathrm{t}} = \varinjlim_{(n,p)=1}
+\underline H^q_{Y(n)}(\Lambda_\nu)|X(n)_0$, et une suite spectrale de
+localisation. Elle sert surtout quand $P$ agit trivialement sur
+$H^*(U_{\bar\eta}, \mathbf{Z}_\ell)$, ce qui est le cas après extension finie
+(corollaire I~4.5).
+
+\emph{1.33.} Tout cela vaut pour n'importe quel sous-groupe fermé distingué $Q$
+de $I$ d'ordre premier à $\ell$ --- par exemple le noyau de
+$I \to \mathbf{Z}_\ell(1)$, ce qui revient à ne prendre que les $K(\ell^r)$.
+\footnote{La page 91 écrit « tel que $I/Q$ soit premier à $\ell$ » ; ce dont
+l'argument de Hochschild--Serre a besoin est que $Q$ soit d'ordre (surnaturel)
+premier à $\ell$, et l'exemple que donne la page, $I/Q \simeq
+\mathbf{Z}_\ell(1)$, est de ce type.}
+
+\pagerange{92}{95}
+\subsection*{La suite spectrale de Leray (pages 92 à 95)}
+
+\emph{2.1.} Plutôt que la cohomologie relative, on utilise désormais la suite
+spectrale de Leray du morphisme $g : \bar U \to \widetilde X$ (avec
+$\bar U = U_{\bar\eta}$, $\widetilde X = X \times_S \widetilde S$), et l'on ne
+suppose pas $X$ lisse :
+\[
+  E_2^{pq} = H^p(\widetilde X_0, \underline\Psi^q_\nu) \Longrightarrow
+  H^{p+q}(\bar U, \Lambda_\nu), \qquad
+  \underline\Psi^q_\nu = R^q g_*(\Lambda_\nu)\,|\,\widetilde X_0
+  = \varinjlim_\alpha R^q g_{\alpha *}(\Lambda_\nu)\,|\,\widetilde X_0 ,
+  \tag{2.5}
+\]
+la restriction à la fibre spéciale étant légitime par le changement de base
+propre. Le groupe $\pi$ agit sur la situation, $I$ par $\bar X$-automorphismes,
+et (2.5) est une suite spectrale de $\pi$-modules (2.9).
+
+\emph{2.7--2.8.} Le calcul des $\underline\Psi^q_\nu$ est local sur
+$\widetilde X$, et ils sont reliés aux $\underline\Phi^q_\nu$ du n° 1 par
+\[
+  \underline\Phi^q_\nu = \underline\Psi^{q-1}_\nu \ (q \geq 2), \qquad
+  0 \to \underline\Phi^0_\nu \to \Lambda_{\nu, X_0} \to \underline\Psi^0_\nu
+  \to \underline\Phi^1_\nu \to 0 :
+\]
+au décalage près, ce sont les faisceaux de cycles évanescents --- ceux qu'on
+appelle aujourd'hui les \emph{cycles proches}, $R^q\Psi$.
+
+\emph{2.10.} Variante modérée, en remplaçant $\overline K$ par $\overline K_t$ :
+$E_2^{pq} = H^p(\widetilde X_0, \underline\Psi^q_{\nu,\mathrm{t}}) \Rightarrow
+H^{p+q}(\bar U, \Lambda_\nu)^P$, avec $\underline\Psi^q_{\nu,\mathrm{t}} =
+\varinjlim_{(n,p)=1} R^q g_{n*}(\Lambda_\nu)|\widetilde X_0$, $g_n :
+U_{K(n)} \to \widetilde X$.\footnote{La page 94 écrit la condition
+$(n, \ell) = 1$ sous la limite ; c'est $(n,p) = 1$, comme en 1.28 : ce sont les
+extensions modérées, et l'on a besoin au contraire des $n$ divisibles par
+$\ell$. Les pages 94 et 95 sont des demi-feuilles, paginées 11$'$ et 11$''$.}
+
+\emph{Remarque 2.8 (page 95).} Il semble plausible, ajoute une demi-feuille
+d'une encre plus pâle, qu'on puisse montrer, avec la résolution des
+singularités, que les $\underline\Psi^q_\nu$ sont constructibles et forment un
+système $\ell$-adique constructible, d'où des suites spectrales $\ell$-adiques ;
+le n° 5 le fera dans un cas typique.\footnote{C'est aujourd'hui un théorème, sans
+résolution : Deligne a démontré la constructibilité de $R\Psi$ au-dessus d'un
+trait hensélien dans « Théorèmes de finitude en cohomologie $\ell$-adique »
+(SGA 4½, 1977).}
+
+\pagerange{96}{100}
+\subsection*{Le théorème principal (pages 96 à 100)}
+
+On suppose $\ell \neq p$, $X$ régulier, et $Y = X - U$ un diviseur à croisements
+normaux (contenant $X_0$), et l'on suppose que $X$ satisfait au théorème de
+pureté cohomologique (défini au § 4).\footnote{Une note marginale de la page 96
+dit : « Nous supposons en tout ce chapitre plus que $X$ régulier satisfait aux
+propriétés de pureté cohomologique (cf.\ 4.1) ». Le reste de 3.1 est rayé à
+grandes boucles.}
+
+\emph{Théorème 3.2.} Sous ces hypothèses, $H^i(U_{\overline K}, \mathbf{Z}_\ell)$
+est de type fini, et l'action de $I$ sur $E = H^i(U_{\overline K},
+\mathbf{Z}_\ell)^P$ est essentiellement unipotente. Plus précisément, soit
+$X_0 = \sum_\lambda m_\lambda X_0^{(\lambda)}$ la fibre spéciale comme diviseur,
+$m$ le ppcm des $m_\lambda$, $m'$ sa partie première à $p$, et $I'$ le
+sous-groupe ouvert d'indice $m'$ de $I$ (image inverse de $m'I_t$). Alors $I'$
+agit sur $E$ de façon unipotente d'échelon $\leq i+1$ : si $g$ engendre
+topologiquement $I_t$,
+\[
+  (1 - g_E^{\,m'})^{i+1} = 0 . \tag{3.3}
+\]
+\footnote{L'énoncé porte sur les invariants sous l'inertie sauvage. Que $P$
+agisse trivialement sur $H^i(U_{\overline K})$ quand les multiplicités sont
+premières à $p$ est la question posée en 6.4 ci-dessous ; elle n'est pas
+tranchée dans le dossier. Le mot « hommage ! » que la page 97 écrit près du
+générateur $g$ est lu avec doute.} La borne $i+1$ est celle que donne la suite
+spectrale : la filtration de l'aboutissement en degré $i$ a $i+1$ crans.
+
+\emph{Remarque 3.4.} (a) La démonstration vaut, \emph{mutatis mutandis}, dans le
+cas analytique complexe, pour $f : X \to S$ avec $S$ régulier de dimension $1$
+--- sans $P$ ; la page attribue l'énoncé, dans ce cas, à P.\ A.\
+Griffiths.\footnote{Le théorème de monodromie complexe est associé à plusieurs
+noms --- Landman, Griffiths, Clemens, Brieskorn, Katz ; la page ne cite que
+Griffiths.} (b) La démonstration fournit une filtration \emph{canonique} de $E$,
+invariante par $\pi$ tout entier.
+
+\emph{Corollaire 3.5.} Fixons $n \geq 0$ et supposons : (i) que pour toute
+extension finie $K'$ de $K$, de normalisé $S'$, la résolution \emph{forte} des
+singularités soit possible pour les schémas de type fini de dimension relative
+$\leq n$ sur $\widehat{S'}$ ; (ii) que pour tout tel $X'$ régulier et tout
+diviseur régulier $Y'$, le couple $(X', Y')$ satisfasse au théorème de pureté
+cohomologique pour $\ell$. Alors pour $U$ lisse et quasi-projectif sur $K$, de
+dimension $n$, l'action de $I$ sur $H^i(U_{\overline K}, \mathbf{Z}_\ell)$ est
+essentiellement unipotente d'échelon $i+1$.\footnote{La page 98 écrit
+$H^i(Y_{\overline K}, \mathbf{Z}_\ell)$ sur une écriture biffée ; la
+démonstration porte sur $U$.} On se ramène à $S$ complet (I~3.13), on prend pour
+$X$ l'adhérence schématique de $U$ dans un projectif sur $S$ --- plat et réduit
+---, on fait agir $P$ trivialement sur $E$ par une extension finie
+(corollaire I~4.5), on résout par (i) jusqu'à $X$ régulier et $Y$ à croisements
+normaux, et l'on applique 3.2 grâce à (ii).
+
+\emph{Remarque 3.6 et corollaire 3.7.} Avec le résultat de Hironaka, on peut se
+dispenser de la quasi-projectivité ; et par les réductions de l'exposé I, § 9,
+pour tout $U$ de type fini sur $K$, $H^i(U_{\overline K}, \mathbf{Z}_\ell)$ est
+de type fini et l'inertie y agit de façon essentiellement unipotente --- de même
+pour $H^i_c$ si $U$ est séparé.
+
+\emph{Remarques 3.8.} (a) Pour l'instant, 3.5 et 3.7 ne s'appliquent qu'en
+caractéristique nulle, par Hironaka et par le théorème de pureté d'Artin
+(SGA 4 XIX) ; et en égale caractéristique, si l'on dispose de la résolution pour
+les schémas de type fini sur un corps, par SGA 4 XVI, pour $S$ hensélisé strict
+d'un schéma de type fini. (b) Pour $n = 1$, la condition (i) est satisfaite
+(Abhyankar). La démonstration du § 5 montre d'ailleurs que la pureté pour les
+couples de dimension $\leq i$ suffit pour $H^i$ ; pour $i = 1$, c'est la pureté
+de Zariski--Nagata (SGA 1, SGA 2). D'où :
+
+\emph{Corollaire 3.9.} Pour $X_K$ une courbe lisse sur $K$, l'inertie agit sur
+$H^1(X_{\overline K}, \mathbf{Z}_\ell)$ de façon essentiellement unipotente
+d'échelon $2$.
+
+\emph{Corollaire 3.10.} Pour $X_K$ de type fini sur $K$, $E = H^1(X_{\overline K},
+\mathbf{Z}_\ell)$ est de type fini et l'inertie y agit de façon essentiellement
+unipotente d'échelon $3$, et même $2$ si $X$ est normal (par la réduction de la
+remarque II~5.4).
+
+\pagerange{101}{105}
+\subsection*{Pureté cohomologique et classe de cycle (pages 101 à 105)}
+
+\emph{Définition 4.1.} Un schéma régulier $X$ \emph{satisfait au théorème de
+pureté cohomologique} si, pour tout $X'$ étale sur $X$, tout sous-schéma régulier
+$Y$ de $X'$, tout sous-schéma régulier $Z$ de $Y$ purement de codimension $1$, et
+tout entier $n$ inversible sur $Z$, on a, avec $\Lambda = \mathbf{Z}/n$,
+\[
+  \underline H^i_Z(\Lambda_Y) = 0 \quad (i \neq 2) ,
+  \qquad\text{ou encore}\qquad
+  R^i f_*(\Lambda_{Y - Z}) = 0 \quad (i \neq 0, 1),
+\]
+$f : Y - Z \to Y$ l'inclusion ; \emph{en dimension $\leq r$} si cela vaut pour
+$i \leq r$. La condition est locale pour la topologie étale, et stable par
+localisation étale et passage à un sous-schéma régulier ; elle est triviale en
+dimension $\leq 1$ (4.2 b).\footnote{La page 101 écrit dans la remarque 4.2 a)
+« $H^i(Z - Y, \mathbf{Z}/n)$ », pour $Y - Z$.}
+
+\emph{4.2 c).} On conjecture que tout schéma régulier y satisfait (SGA 4 XVI).
+C'est démontré pour $X$ lisse sur un corps (SGA 4 XVI) et pour $X$ excellent de
+caractéristique nulle (SGA 4 XIX), et en caractéristique donnée si l'on dispose
+de la résolution des singularités ; en inégale caractéristique et dimension
+$\geq 2$, ce n'est pas prouvé « à l'heure actuelle ».\footnote{La conjecture est
+devenue le théorème de pureté absolue de Gabber ; voir K.\ Fujiwara, « A proof of
+the absolute purity conjecture (after Gabber) » (2002). Les hypothèses de
+pureté de tout l'exposé III sont donc aujourd'hui inconditionnelles.}
+
+\emph{Proposition 4.2.} Si $X$ satisfait au théorème de pureté et si $Y \subset X$
+est régulier, purement de codimension $d$, alors pour $\Lambda = \mathbf{Z}/n$
+($n$ inversible)
+\[
+  \underline H^i_Y(\Lambda_X) = 0 \quad (i \neq 2d), \qquad
+  \underline H^{2d}_Y(\Lambda_X) \simeq \Lambda_Y(-d) .
+\]
+Par récurrence sur $d$ : pour $d = 1$, c'est Kummer et le lemme d'Abhyankar
+absolu (SGA 4 XIX 1.3) ; pour $d > 1$, on choisit localement un diviseur
+régulier $Z \supset Y$, et la suite spectrale $\underline H^p_Y(\underline
+H^q_Z(\Lambda_X)) \Rightarrow \underline H^{p+q}_Y(\Lambda_X)$ n'a qu'un terme,
+en $p = 2(d-1)$, $q = 2$.\footnote{La page 103 écrit « localement isomorphe à
+$\Lambda_Z$ si $r = 1$ » là où il faut « si $q = 2$ », et appelle (4.2.1) ou
+(4.2.1 bis) l'isomorphisme qui est (4.2.2) ; la construction canonique pour $d$
+quelconque est renvoyée à SGA 4 XIX 3.4, et à un « SGA 4 XVIII » laissé sans
+numéro.}
+
+\emph{Corollaire 4.3} (suite de Gysin). Sous ces hypothèses, pour $F$ localement
+constant annulé par $n$ et $F(d) = F \otimes \mu_n^{\otimes d}$, on a une suite
+exacte
+\[
+  \cdots \to H^{i-2d}(Y, F(-d)) \xrightarrow{\ \alpha\ } H^i(X, F)
+  \xrightarrow{\ \beta\ } H^i(X - Y, F) \xrightarrow{\ \gamma\ }
+  H^{i-2d+1}(Y, F(-d)) \to \cdots
+\]
+--- la suite de cohomologie relative, compte tenu de $H^i_Y(X,F) \simeq
+H^{i-2d}(Y, F(-d))$ ---, et le composé $H^{i-2d}(X, F(-d)) \to H^{i-2d}(Y, F(-d))
+\xrightarrow{\alpha} H^i(X, F)$ est le cup-produit par la classe de cycle
+$\operatorname{cl}(Y) \in H^{2d}(X, \Lambda(d))$, image de la section unité. Pour
+$d = 1$, c'est la première classe de Chern de $\mathcal{O}_X(Y)$, image de sa
+classe dans $\operatorname{Pic}(X) = H^1(X, \mathbf{G}_m)$ par le cobord de la
+suite de Kummer.\footnote{La page 104 écrit les degrés du composé
+$H^{i-2} \to H^i \to H^i$ ; la lecture suit la page, et la transcription note
+que « les exposants et les twists de cette ligne sont surchargés ». Ce qui est
+correct, et cohérent avec la suite, est $i - 2d$. Les compatibilités sont
+renvoyées à SGA 5 IV. La remarque 4.3.3 s'arrête sur des points de suspension.}
+
+\pagerange{106}{112}
+\subsection*{Le complémentaire d'un diviseur à croisements normaux (pages 106 à 112)}
+
+\emph{4.4--4.5.} Soient $X$ régulier, $D = \sum_{i=1}^r D_i$ un diviseur à
+croisements normaux à composantes $D_i$ régulières, $U = X - \bigcup D_i$,
+$f : U \to X$ l'inclusion, $n$ inversible, $\Lambda = \mathbf{Z}/n$. Si $X$
+satisfait au théorème de pureté :
+\[
+  R^1 f_*(\Lambda_U) \simeq \bigoplus_{i=1}^r \Lambda_{D_i}(-1), \qquad
+  \textstyle\bigwedge^p R^1 f_*(\Lambda_U) \xrightarrow{\ \sim\ } R^p f_*(\Lambda_U),
+\]
+\[
+  R^p f_*(\Lambda_U) \simeq \bigoplus_{i_1 < \cdots < i_p}
+  \Lambda_{D_{i_1} \cap \cdots \cap D_{i_p}}(-p) .
+\]
+Le premier isomorphisme vient des $R^1 f_{i*} \simeq \underline H^2_{D_i}
+\simeq \Lambda_{D_i}(-1)$, $f_i : X - D_i \to X$, et se vérifie fibre par fibre :
+pour $X$ strictement local, $H^1(U, \mu_n) \simeq \Lambda^r$, ce qui résulte de
+la détermination du groupe fondamental modéré de $U$.\footnote{Un premier état
+de la démonstration de (i), par la suite spectrale d'un recouvrement de $U$ par
+les $X - D_i$, est encadré et barré (pages 107 et 108) ; la page 107 y écrit
+$U = \bigcup U_i$ pour une intersection. La rédaction retenue est celle de la
+page 108.} Le second, par récurrence sur $r$ : avec $U' = X - \bigcup_{i < r}
+D_i$ et $D'_r = U' \cap D_r$, la suite de Gysin
+\[
+  \cdots \to H^{i-2}(D'_r, \Lambda(-1)) \xrightarrow{\ \alpha_i\ } H^i(U', \Lambda)
+  \to H^i(U, \Lambda) \to H^{i-1}(D'_r, \Lambda(-1)) \to \cdots
+\]
+a ses flèches $\alpha_i$ \emph{nulles} : la restriction $H^*(U') \to H^*(D'_r)$
+étant surjective par l'hypothèse de récurrence, il suffit de voir que le composé
+$H^{i-2}(U', \Lambda(-1)) \to H^i(U', \Lambda)$ l'est ; c'est le cup-produit par
+la classe de $D'_r$, restriction de celle de $D_r$, nulle puisque $D_r$ est
+principal sur $X$ strictement local. La suite se coupe en suites exactes courtes
+$0 \to H^i(U') \to H^i(U) \to H^{i-1}(D'_r)(-1) \to 0$, qu'on compare par
+cup-produit à la décomposition $\bigwedge^i H^1(U) \simeq \bigwedge^i H^1(U')
+\oplus \bigwedge^{i-1}H^1(U') \otimes \Lambda(-1)$ ; les flèches extrêmes étant
+bijectives, celle du milieu l'est.\footnote{La page 112 « admet » la
+commutativité du second carré, « une vérification fastidieuse de compatibilité
+des isomorphismes ».}
+
+\pagerange{113}{120}
+\subsection*{La tour de Kummer (pages 113 à 120)}
+
+\emph{4.6--4.7.} Si $D_i = V(a_i)$ et $m$ est inversible, le revêtement
+$X' = \operatorname{Spec}\mathcal{O}_X[T_1, \ldots, T_r]/(T_i^m - a_i)$ est
+régulier, les $\Delta_i = V(T_i)$ forment un diviseur à croisements normaux,
+$p^*D_i = m\Delta_i$, $U' = p^{-1}(U)$, et sur les identifications
+précédentes le changement de base $p^*R^1 f_* \to R^1 f'_*$ est la multiplication
+par $m$, donc $p^* R^q f_* \to R^q f'_*$ la multiplication par $m^q$. D'où : pour
+$X$ strictement local satisfaisant à la pureté et $n \mid m$,
+$H^*(U, \Lambda) \to H^*(U', \Lambda)$ est \emph{nul en degrés $> 0$}.
+
+\emph{4.8--4.9.} Pour $X = \operatorname{Spec} A$ strictement local régulier,
+$(a_i)$ une partie d'un système régulier de paramètres, les
+$U(m) = U \times_X \operatorname{Spec} A[T_i]/(T_i^m - a_i)$ forment un système
+projectif de revêtements principaux, de limite $U(\infty)$, principal de groupe
+\[
+  G = \varprojlim_m \mu_m(X)^r = \textstyle\prod_{\ell \neq p} \mathbf{Z}_\ell(1)^r .
+\]
+Si $X$ et les $X(m)$ satisfont à la pureté, les transitions sont nulles en degrés
+$>0$ dès que $nm \mid m'$, d'où :
+\[
+  H^i(U(\infty), \Lambda) = 0 \quad (i \neq 0), \qquad H^0(U(\infty), \Lambda) \simeq \Lambda .
+\]
+Autrement dit, pour des coefficients premiers à $p$, $U$ se comporte comme un
+espace d'Eilenberg--MacLane de groupe $G$ : $H^*(U, \Lambda) \simeq
+H^*(G, \Lambda)$.\footnote{La formulation « Eilenberg--MacLane » est de nous ; la
+page dit seulement (4.9.1). Les remarques barrées 4.10 notaient qu'avec la pureté
+en dimension $\leq N$ seulement --- toujours vraie pour $N = 1$ --- (4.9.1) vaut
+pour $i \leq N$ ; la remarque 4.12 de la page 119 le reprend.}
+
+\emph{4.10--4.11.} Pour un homomorphisme $\varphi : G \to \Gamma$ de noyau $H$ et
+d'image $K$, le revêtement $U' = U(\infty) \times^G \Gamma$ est réunion de copies
+de $U(\infty)/H$ indexées par $\Gamma/K$, et Hochschild--Serre avec 4.9 donne
+un isomorphisme d'anneaux gradués à opérateurs $\Gamma$
+\[
+  H^*(U', \Lambda) \simeq \operatorname{Ind}_K^\Gamma H^*(H, \Lambda),
+\]
+$K$ agissant trivialement sur $H^*(H, \Lambda)$ parce que $G$ est commutatif.
+Donc le sous-groupe des éléments de $\Gamma$ qui agissent trivialement sur
+$H^*(U', \Lambda)$ est l'image $K = \varphi(G)$.\footnote{La page 117 écrit
+l'anneau induit $H^*(H,\Lambda) \overset{G}{\times} \Gamma$ ; et l'énoncé 4.11
+de la page 119 parle d'un « $\Gamma''$ » qu'elle ne définit pas, avec la
+précision interlinéaire « $\Gamma''$ est le sous-groupe des $g \in \Gamma$ qui
+opèrent trivialement sur $H^*(U', \Lambda)$ » ; c'est l'image de $G$, que la même
+page appelle $\Gamma'$.} Pour $\Lambda = \mathbf{Z}/\ell^{\nu+1}$, $H(\ell)$ est
+libre de rang $s \leq r$, et $H^*(H, \Lambda) \simeq \bigwedge^* \Lambda^s$
+(4.13).
+
+\emph{4.14--4.15. Le cas qui sert.} Donnons des entiers $m_i \geq 0$ et
+$t = a_1^{m_1} \cdots a_r^{m_r}$ ; les $U'(m) = U \times_X \operatorname{Spec}
+A[T]/(T^m - t)$ forment une tour de limite $U'$, principale de groupe
+$\Gamma = \prod_{\ell \neq p} \mathbf{Z}_\ell(1)$, et
+\[
+  U' = U(\infty) \times^G \Gamma, \qquad
+  \varphi(\lambda_1, \ldots, \lambda_r) = \textstyle\sum_i m_i \lambda_i .
+\]
+C'est la situation locale de la monodromie : $t$ est l'uniformisante de la base,
+$U'$ est la fibre générique au-dessus de $\overline K_t$, et $\Gamma = I_t$.
+
+\pagerange{121}{123}
+\subsection*{L'action locale de l'inertie modérée (pages 121 à 123)}
+
+\emph{Corollaire 4.15.} Soient $m$ le pgcd des $m_i$ et $m'$ sa partie première à
+$p$. Le sous-groupe des éléments de $\Gamma$ qui agissent trivialement sur
+$H^*(U', \Lambda)$ est $\Gamma' = m'\Gamma$, d'indice $m'$, et ne dépend pas de
+$n$.
+
+\emph{4.16--4.17. Forme globale.} Soient $X$ régulier, $D$ à croisements normaux,
+$t \in \Gamma(X, \mathcal{O}_X)$ inversible sur $U = X - D$, $X_0 = V(t)$ de
+caractéristique $p$, et $f : U' = \varprojlim U'(n) \to X$, où
+$U'(n) = U \times_X \operatorname{Spec}\mathcal{O}_X[T]/(T^n - t)$. Pour
+$x \in X_0$, soit $m_x$ le pgcd des multiplicités dans $\operatorname{div}(t)$ des
+composantes de $D$ qui passent par $x$, et soit $m$ le ppcm des $m_x$ --- il
+divise le ppcm des multiplicités des composantes de $X_0$. Soit $m'$ sa partie
+première à $p$. Si les localisés stricts de $X$ et leurs revêtements kummériens
+satisfont à la pureté, \emph{le sous-groupe $m'G$ agit trivialement sur les
+faisceaux $R^*f_*(\Lambda_{U'})|X_0$} --- qui sont les
+$\underline\Psi^*_{\nu,\mathrm{t}}$. C'est 4.15 par localisation stricte.
+\footnote{La page 123 prend pour $m$ le \emph{pgcd} de toutes les multiplicités
+$m_i$ des composantes de $D$. C'est faux en général : si la fibre spéciale a deux
+composantes disjointes de multiplicités $2$ et $3$, le pgcd global vaut $1$, mais
+en un point de la composante de multiplicité $2$ seule, la monodromie locale est
+d'ordre $2$ par 4.15. Le corollaire 4.15 est local, et ce qui se globalise est le
+ppcm des pgcd locaux ; c'est d'ailleurs un ppcm, celui des multiplicités, que
+l'énoncé 3.2 de la page 96 emploie, et que la remarque 6.3 lui emprunte. On
+corrige donc 4.16 dans ce sens. La page écrit aussi $\operatorname{div}(\pi)$ pour
+$\operatorname{div}(t)$.} Un paragraphe 4.18, qui voulait préciser la structure
+d'anneau gradué de ces faisceaux, est barré.
+
+\pagerange{124}{124}
+\subsection*{La démonstration du théorème 3.2 (page 124)}
+
+On utilise la suite spectrale modérée (2.5 bis) pour $\nu$ variable. Les
+$\underline\Psi^q_{\nu,\mathrm{t}}$ sont constructibles par les calculs du § 4,
+les $E_2^{pq}$ sont finis, et l'on passe à la limite :
+\[
+  E_2^{pq} = \varprojlim_\nu H^p(\widetilde X_0, \underline\Psi^q_{\nu,\mathrm{t}})
+  \Longrightarrow H^{p+q}(\bar U, \mathbf{Z}_\ell)^P ,
+\]
+suite compatible à l'action de $I_t$. Par 4.17, le sous-groupe d'indice $m'$
+de $I_t$ agit trivialement sur les faisceaux $\underline\Psi^q_{\nu,\mathrm{t}}$,
+donc sur tous les $E_2^{pq}$, donc sur le gradué de l'aboutissement ; en degré
+$i$, ce gradué a au plus $i+1$ crans. « On a gagné. »
+
+\pagerange{125}{127}
+\subsection*{Application aux faisceaux de cycles évanescents (pages 125 à 127)}
+
+\emph{6.1.} Soient $X$ de type fini sur le trait strictement local $S$, $U$ un
+ouvert \emph{régulier} de $X_\eta$, $Y = X - U$, et supposons qu'il existe
+$p : X' \to X$ propre avec $X'$ régulier, $p^{-1}(Y)$ à croisements normaux, et
+$p^{-1}(U) \simeq U$ --- ce qu'assure Hironaka si $S$ est excellent de
+caractéristique nulle, et qui est « plausible » pour $S$ excellent quelconque ;
+l'hypothèse d'excellence est anodine, puisqu'on peut passer au complété.
+
+\emph{Théorème 6.2.} (i) Les $\underline\Psi^q_{\nu,\mathrm{t}} =
+(\underline\Psi^q_\nu)^P$ sont constructibles et forment un système AR-$\ell$-adique
+(SGA 5 V), donc définissent un faisceau $\ell$-adique constructible
+$\underline\Psi^q_{\mathrm{t}}$. (ii) Il existe un sous-groupe ouvert $I'$ de $I$
+qui agit sur tous les $\underline\Psi^q_{\nu,\mathrm{t}}$, et sur
+$\underline\Psi^q_{\mathrm{t}}$, de façon unipotente d'échelon $\leq q + 1$.
+
+\emph{Démonstration.} Avec $g' : U_{\overline K_t} \to X'$ et $g = p g'$, la suite
+spectrale de Leray
+\[
+  E_2^{ab}(\nu) = R^a p_*\bigl(R^b g'_*\Lambda_\nu\bigr) \Longrightarrow
+  R^{a+b} g_*\Lambda_\nu = \underline\Psi^{a+b}_{\nu,\mathrm{t}}
+\]
+a ses termes sur lesquels $I'$ agit trivialement (§ 4 sur $X'$) ; en degré total
+$q$, elle a $q+1$ termes, d'où l'échelon.\footnote{Un calcul barré de la page
+126 donnait d'abord l'échelon $(0+1) + (1+1) + \cdots + (q+1) = q(q+1)/2$, avant
+la correction en $q+1$.} La constructibilité et la condition AR-$\ell$-adique
+passent de $R^b g'_*$, explicitement calculés, aux $R^a p_*$ par le changement de
+base propre et SGA 5 VI 2.2, V 5.2.
+
+\emph{Remarque 6.3.} On peut prendre pour $I'$ le sous-groupe d'indice $m'$, $m'$
+défini comme en 3.2 à partir des multiplicités sur $X'$.
+
+\emph{6.4. Deux questions.} Il serait plus raisonnable de démontrer 6.2 sans
+supposer $U$ régulier, et pour les $\underline\Psi^q_\nu$ eux-mêmes au lieu de
+leurs invariants sous $P$. Pour le second point, il faudrait d'abord répondre par
+l'affirmative à la question : \emph{les composantes réduites de $X_0$ étant
+lisses et les multiplicités premières à $p$, $P$ agit-il trivialement sur les
+$\underline\Psi^q_\nu$ ?} Cela impliquerait que $P$ agit trivialement sur
+$H^i(U_{\bar\eta}, \Lambda_\nu)$ pour $X$ propre --- ce qui n'est pas prouvé
+« à l'heure actuelle », sauf pour $i = 1$, qui sera démontré dans un exposé
+ultérieur.\footnote{À notre connaissance la réponse est oui : sous ces
+hypothèses, le lemme d'Abhyankar rend modérés les revêtements qui calculent les
+fibres des cycles proches ; c'est le calcul classique des cycles proches d'une
+réduction à croisements normaux de multiplicités premières à $p$, exposé par
+exemple par Illusie dans « Autour du théorème de monodromie locale »
+(Astérisque 223, 1994). Nous n'en avons pas
+refait la vérification ici. La page 127 s'interrompt sur une ligne barrée ; la
+page 128 est blanche.}
+
+\pagerange{129}{132}
+\section*{« IV ». Propriétés générales des faisceaux de cycles évanescents (pages 129 à 161)}
+
+Le chapitre porte le numéro IV, écrit sur un titre corrigé d'une autre encre ---
+le premier titre était « Cas des points singuliers isolés de la fibre spéciale »
+---, mais ses feuillets sont paginés V.1 à V.34, et une note marginale de la page
+130 dit « dans Exp.\ V ». On le désigne par son titre. Une note de la page 129
+fixe une convention qu'on adopte : omettre l'indice $\nu$ de $\Lambda_\nu$ quand
+il n'y a pas de confusion, et écrire $H^*(X)$ pour $H^*(X, \Lambda)$.
+
+\subsection*{La fibre des cycles proches (pages 129 à 132)}
+
+\emph{1.1.} Soient $\bar x$ un point géométrique de $\widetilde X_0$, $X'$ le
+localisé strict de $\widetilde X$ en $\bar x$, $f' : X' \to \widetilde S$, et
+$U'$ l'image inverse de $U$, ouvert de la fibre générique de $f'$. Le calcul
+habituel des fibres des $R^q g_*$ (SGA 4 VII) donne une « interprétation
+frappante » :
+\[
+  (\underline\Psi^q_\nu)_{\bar x} \simeq H^q(U' \otimes_{\widetilde K} \overline K, \Lambda_\nu),
+  \qquad\text{et pour } U = X_\eta :\quad
+  (\underline\Psi^q_\nu)_{\bar x} \simeq H^q(X' \times_{\widetilde S} \bar\eta, \Lambda_\nu) .
+\]
+\emph{La fibre en $\bar x$ des cycles proches est la cohomologie de la fibre
+générique géométrique du localisé strict de $X$ en $\bar x$.} C'est ce qu'on
+appelle aujourd'hui la \emph{fibre de Milnor} en $\bar x$ ; une note marginale
+de la page 131 le dit à sa façon : les relations globales entre les deux fibres
+géométriques se lisent sur les cycles évanescents.\footnote{La note marginale est
+en grande partie illisible ; on n'en retient que « De façon imagée, \ldots{} les
+relations globales entre les deux fibres géométriques $X_{\bar s}$, $X_{\bar\eta}$
+\ldots{} des cycles évanescents ». Une autre consigne marginale de la page 130,
+« faire $\widetilde S = S$ ici ! », est suivie : on suppose désormais $S$
+strictement local.} De même pour la partie modérée, avec $\overline K_t$ au lieu
+de $\overline K$ (papillon collé de la page 131).
+
+\emph{1.4.} Comme $X'$ est limite d'étales affines $X_\alpha$ sur $X$,
+\[
+  (\underline\Psi^i_\nu)_{\bar x} \simeq \varinjlim_\alpha H^i\bigl((X_\alpha \times_X U)_{\bar\eta}, \Lambda\bigr),
+\]
+et les $(X_\alpha \times_X U)_{\bar\eta}$ sont des schémas algébriques
+quasi-affines sur $\bar\eta$ --- affines si $U = X_\eta$, et plus généralement si
+$U \to X_\eta$ est affine.
+
+\pagerange{133}{138}
+\subsection*{Le théorème de Lefschetz affine et la dimension des supports (pages 133 à 138)}
+
+\emph{2.1.} Supposons $U \to X_\eta$ affine, et soit $n_x$ le maximum des
+dimensions des fibres génériques des composantes de $X$ qui passent par $x$. Les
+schémas de 1.4 sont affines de dimension $\leq n_x$, et le théorème de Lefschetz
+affine (SGA 4 XIV) donne
+\[
+  (\underline\Psi^i_\nu)_{\bar x} = 0 \qquad (i > n_x) . \tag{2.1.1}
+\]
+
+\emph{Théorème 2.3.} Plus précisément,
+\[
+  (\underline\Psi^q_\nu)_{\bar x} = 0 \qquad \bigl(q > n_x - \dim \overline{\{x\}}\bigr),
+\]
+en particulier pour $q > \dim \mathcal{O}_{X_0, x}$ quand $n_x = \dim_x X_0$
+(par exemple si $X$ est plat sur $S$). De façon équivalente,
+$(\underline\Phi^q_\nu)_{\bar x} = 0$ pour $q > n_x + 1 - \dim \overline{\{x\}}$,
+$q \geq 1$.
+
+\emph{Démonstration.} On peut supposer $X$ affine, $n = n_x = \dim X_\eta$, et
+l'on pose $r = \deg\operatorname{tr} k(x)/k$. Des $t_1, \ldots, t_r \in
+\Gamma(X, \mathcal{O}_X)$ relevant une base de transcendance de $k(x)$
+définissent $h : X \to Y = \mathbf{A}^r_S$ ; $y = h(x)$ est le point générique
+de la fibre spéciale $\mathbf{A}^r_k$, $x$ est fermé dans sa fibre, et quitte à
+restreindre $X$, les fibres de $h$ sont de dimension $\leq n - r$. Soit $S_1$ le
+localisé strict de $Y$ en un point géométrique au-dessus de $y$ : c'est un
+\emph{trait} strictement hensélien, dont $t$ est encore une uniformisante, de
+corps des fractions $L$ séparable sur $K$. Par (2.1.1) appliqué à $X_1 = X
+\times_Y S_1$ sur $S_1$, de dimension relative $\leq n - r$, les fibres
+géométriques de $\varphi : U'_{\bar\eta} \to S_1 \times_S \bar\eta$ ont une
+cohomologie nulle au-delà de $n - r$. Or $S_1 \times_S \bar\eta$ est le spectre
+d'un corps de $\ell$-dimension cohomologique \emph{nulle} : son groupe de Galois
+est l'inertie de $S_1$ privée de sa partie modérée, puisque $\overline K$
+contient déjà toutes les racines $t^{1/n}$, $(n,p) = 1$. La suite spectrale de
+Leray de $\varphi$ dégénère donc en $H^i(U'_{\bar\eta}) \simeq
+H^0(R^i\varphi_*)$, nul pour $i > n - r$.\footnote{La page 135 invoque à cet
+endroit que « $\operatorname{cd}_\ell$ de $S_{1\eta} = \lambda$ est $\leq r$ »
+(SGA 4 XV), lecture d'ailleurs incertaine ; une dimension cohomologique $\leq r$
+ne ferait pas dégénérer la suite spectrale, et ne donnerait que $i > n$. Ce qui
+fait marcher l'argument, et que la page écrit en un sens --- la suite spectrale
+est prise au-dessus de $S_{1\bar\eta}$ ---, est que la base est de dimension
+cohomologique nulle. On rétablit cette justification.} Le théorème est, dans le
+langage d'aujourd'hui, la condition de support de la \emph{perversité} de
+$R\Psi\Lambda[n]$ pour $X$ plat de dimension relative $n$.\footnote{Ce
+rapprochement est de nous. La perversité des cycles proches est due à Gabber ;
+voir Illusie, « Perversité et variation » (1994).}
+
+\emph{Corollaire 2.4.} $\underline\Psi^q_\nu = 0$ pour $q > \dim X_\eta$, et
+$\underline\Phi^q_\nu = 0$ pour $q > \dim X_\eta + 1$.
+
+\emph{2.5. Conséquence globale.} Soit $Z$ le fermé de $X_0$ où $f$ n'est pas
+lisse, $d = \dim Z$, $n = \dim X_{\bar\eta}$, et supposons $d \leq n + 1$ (par
+exemple $X$ plat). Les $\underline\Phi^q_\nu$ sont portés par $Z$, de support de
+dimension $\leq n + 1 - q$ ; comme la dimension cohomologique d'un schéma de
+dimension $\delta$ est $2\delta$ (SGA 4 X), $H^p(X_0, \underline\Phi^q_\nu) \neq 0$
+entraîne $p \leq 2\min(d, n+1-q)$, d'où dans tous les cas
+$p + q \leq n + d + 1$. Donc, si $X$ est propre :
+
+\emph{Corollaire 2.5.} Les groupes de cycles évanescents $\Phi^i_\nu$ sont nuls
+pour $i > n + d + 1$ ; autrement dit $H^i(X_0, \Lambda_\nu) \to
+H^i(X_{\bar\eta}, \Lambda_\nu)$ est un isomorphisme pour $i > n + d + 1$, un
+épimorphisme pour $i = n + d + 1$, et l'inertie agit trivialement sur
+$H^i(X_{\bar\eta}, \Lambda_\nu)$ pour $i \geq n + d + 1$.
+
+\emph{Corollaire 2.6.} Si de plus $X_\eta$ est lisse sur $\eta$, la dualité de
+Poincaré donne : l'inertie agit trivialement sur $H^i(X_{\bar\eta},
+\Lambda_\nu)$ pour $i \notin [n - d, n + d]$. En particulier, si $f$ n'a qu'un
+nombre fini de points non lisses ($d = 0$), elle agit trivialement sauf en
+degré $n$.\footnote{La page 137 dit « avec les hypothèses précédentes » ; la
+dualité demande en outre que $X_\eta$ soit propre et lisse, ce que les
+hypothèses précédentes ne disent pas. Le cas $d = 0$ est le cas classique d'une
+dégénérescence à singularités isolées, où la cohomologie évanescente est
+concentrée en degré moitié.}
+
+\emph{Remarque 2.7.} Pour $f$ projectif, une démonstration plus simple : une
+section plane générique $Y$ de codimension $d+1$ évite $Z$, donc est lisse sur
+$S$, et le théorème de Lefschetz affine rend l'homomorphisme de Gysin
+$H^i(Y_{\bar\eta}) \to H^{i+2(d+1)}(X_{\bar\eta})(d+1)$ surjectif pour
+$i \geq n - d - 1$ et bijectif pour $i > n - d - 1$ ; le carré de Gysin entre
+fibres spéciale et générique, où la flèche relative à $Y$ est bijective
+(spécialisation lisse), conclut.
+
+\emph{Remarque 2.8.} Une conjecture : pour $X = \operatorname{Spec} A$ strictement
+local de dimension $n$, $t \in A$, $U = X - V(t)$ et $U(\infty)$ la tour des
+$U(m) = U \times_X \operatorname{Spec} A[T]/(T^m - t)$, la dimension cohomologique
+de $U(\infty)$, pour des coefficients premiers à $p$, est-elle $\leq n - 1$ ?
+--- alors que la conjecture « standard » de SGA 4 XIV ne donne que $\leq n$ pour
+chaque $U(m)$.\footnote{La transcription note que la fin de la phrase semble
+porter sur $U(m)$ là où l'on attend $U(\infty)$. La conjecture « standard » de
+SGA 4 XIV pour les schémas strictement locaux est devenue le théorème de
+Lefschetz affine de Gabber ; voir Illusie, Laszlo et Orgogozo,
+\emph{Travaux de Gabber sur l'uniformisation locale et la cohomologie étale des
+schémas quasi-excellents} (Astérisque 363--364, 2014). Nous ne vérifions pas ici
+si la borne $n-1$ pour $U(\infty)$ en découle.}
+
+\pagerange{139}{142}
+\subsection*{Le théorème de Lefschetz global (pages 139 à 142)}
+
+\emph{3.1.} Supposons $X$ projectif et plat sur $S$, et que les fibres $X_s$ et
+$X_{\bar\eta}$ soient de \emph{profondeur étale} $\geq m$ (SGA 2 XIV) au sens où
+$\operatorname{prof\,ét}_x + \dim \overline{\{x\}} \geq m$ en tout point. Avec $Y$
+comme en 2.7, le théorème de Lefschetz global (SGA 2 XIV 4.6), appliqué aux deux
+fibres, rend $H^i(X_?) \to H^i(Y_?)$ bijectif pour $i < m - d - 1$ et injectif
+pour $i = m - d - 1$ ; comme la spécialisation est bijective pour $Y$, elle
+l'est pour $X$ dans le même domaine, autrement dit
+\[
+  \Phi^i_\nu = 0 \qquad (i \leq m - d - 1) . \tag{3.1.3}
+\]
+
+\emph{Remarque 3.2.} (a) Si $X_s$ est localement d'intersection complète,
+purement de dimension $n$, il en est de même de $X_{\bar\eta}$, et l'on peut
+prendre $m = n$ ; on verra au § 5 qu'on peut alors améliorer (3.1.3) en
+$i \leq n - d$. (b) Sans intersection complète, on ne peut pas : soit $X'$ la
+réunion disjointe de deux $\mathbf{P}^1_S$, et $X$ obtenu en identifiant deux
+points rationnels de $X'_s$ situés sur les deux composantes. Les hypothèses
+valent avec $m = n = 1$ et $d = 0$, mais $X_0$ est connexe et $X_{\bar\eta}$ ne
+l'est pas : $H^0(X_0) \to H^0(X_{\bar\eta})$ n'est pas surjectif, et
+$\Phi^1 \neq 0$.\footnote{Un premier état de la remarque 3.2, à la page 140, est
+barré : il tirait de (3.1.3) et de 2.7 la nullité des $\Phi^i$ hors de
+$[n-d, n+d+1]$ sous l'hypothèse d'intersection complète, et la comparait au
+corollaire 2.6. La page 141 le remplace par l'énoncé ci-dessus.}
+
+\emph{3.3.} La suite donnera des résultats \emph{locaux} analogues, avec la
+profondeur locale (SGA 2 XIV 4.5) au lieu de la profondeur globale. La page 142,
+d'une écriture rapide et en partie illisible, en dit les limites : ces résultats
+supposent la résolution des singularités et le théorème de profondeur affine
+locale, acquis en caractéristique nulle ; en caractéristique inégale, seulement
+sous des restrictions dimensionnelles « draconiennes » ($\dim X_\eta \leq 2$).
+
+\pagerange{143}{147}
+\subsection*{Les cinq schémas (pages 143 à 147)}
+
+\emph{4.1.} Soient $x \in X_0$, $\bar x$ au-dessus, $X'$ le localisé strict de
+$X$ en $\bar x$, et
+\[
+  V = X' - \{\bar x\}, \quad V_s = V \times_S s, \quad V_\eta = V - V_s, \quad
+  V_{\bar\eta} = V_\eta \times_\eta \bar\eta, \quad
+  \bar V = V \times_S \bar S ,
+\]
+où $\bar S = \varprojlim S_\alpha$ est le normalisé de $S$ dans $\overline K$. La
+fibre générique de $\bar V$ est $V_{\bar\eta}$ et sa fibre fermée
+$V_{\bar s} = V_s \otimes_k k(\bar s)$, qu'on identifie à $V_s$, l'extension
+résiduelle étant radicielle. On a deux carrés cartésiens :
+
+\begin{tikzcd}
+V_s \arrow[r, hook, "i"] & V & V_\eta \arrow[l, hook', "j"'] \\
+V_{\bar s} \arrow[u, "\wr"] \arrow[r, hook, "\bar i"] & \bar V \arrow[u, "h"] & V_{\bar\eta} \arrow[l, hook', "\bar j"'] \arrow[u]
+\end{tikzcd}
+
+\emph{4.2. Les rôles.} « Du point de vue topologique », ces cinq schémas jouent
+des rôles bien distincts : $V_s$ porte la structure locale de la fibre $X_0$ en
+$x$ ; $V$ celle du schéma ambiant ; $V_\eta = V - V_s$ relie les deux ;
+$V_{\bar\eta}$ porte les cycles évanescents en $x$ ---
+\[
+  (\underline\Phi^i_\nu)_{\bar x} \simeq H^{i-1}(V_{\bar\eta}, \Lambda_\nu) \ (i \geq 2), \qquad
+  0 \to (\underline\Phi^0_\nu)_{\bar x} \to \Lambda_\nu \to H^0(V_{\bar\eta}) \to
+  (\underline\Phi^1_\nu)_{\bar x} \to 0
+\]
+(note marginale) --- ; et $\bar V$ met en relation $V_s \simeq V_{\bar s}$ et
+$V_{\bar\eta}$. Les rôles de $V_\eta$ et de $\bar V$ sont auxiliaires : l'étude
+topologique de $f$ au voisinage de $x$ est pour l'essentiel celle de $V_s$, $V$,
+$V_{\bar\eta}$. Le groupe $I$ agit sur $\bar V$ par $S$-automorphismes, à travers
+son action sur $\bar S$, trivialement sur $V_{\bar s}$ et de la façon évidente
+sur $V_{\bar\eta}$ (4.3).
+
+\emph{4.4. Premier triangle.} On note $R\Gamma_I(\bar V, \Lambda_\nu)$ la
+cohomologie de $\bar V$ prise dans la catégorie dérivée des
+$\Lambda_\nu$-modules à action continue de $I$.\footnote{La page écrit
+$\mathbb{R}(\Gamma, I)$ ; on abrège.} Le triangle de cohomologie à supports
+\[
+  R\Gamma_I\bigl(V_{\bar s}, \underline\Phi^\bullet\bigr) \to R\Gamma_I(\bar V, \Lambda_\nu)
+  \xrightarrow{\ \bar j^*\ } R\Gamma_I(V_{\bar\eta}, \Lambda_\nu) \to , \qquad
+  \underline\Phi^\bullet = R\underline\Gamma_{V_{\bar s}}(\Lambda_{\nu, \bar V}), \tag{A}
+\]
+où $\underline\Phi^\bullet$ est la restriction à $V_s$ du complexe de cycles
+évanescents du n° III~1. Si $(\underline\Phi^i_\nu)_{\bar x'} = 0$ pour $i < m$
+aux points de $V_s$, alors $H^i(V_s, \underline\Phi^\bullet) = 0$ pour $i < m$, et
+$H^i(\bar V) \to H^i(V_{\bar\eta})$ est injectif pour $i \leq m - 1$, bijectif
+pour $i \leq m - 2$. Si c'est vrai pour $m = \infty$ --- si $f$ est
+\emph{localement acyclique} en les points de $V_s$ ---, $\bar j^*$ est un
+isomorphisme, et les cinq schémas se réduisent à quatre : « on est débarrassé du
+seul $\bar V$ des cinq schémas qui n'est pas noethérien ! »
+
+\emph{4.5. Second triangle.} L'inclusion $V_{\bar s} \hookrightarrow \bar V$ donne
+$R\Gamma_I(\bar V, \bar j_!\Lambda_\nu) \to R\Gamma_I(\bar V, \Lambda_\nu)
+\xrightarrow{\bar i^*} R\Gamma(V_s, \Lambda_\nu)^{\mathrm{triv}} \to$ (B), où
+l'exposant $\mathrm{triv}$ signale l'action triviale.
+
+\pagerange{148}{155}
+\subsection*{Les théorèmes de profondeur locale (pages 148 à 155)}
+
+\emph{5.1.} Soient $f : X \to S$ localement de type fini, $S$ strictement local,
+$x \in X_0$, et supposons $(\underline\Phi^i_\nu)_{\bar x'} = 0$ pour $i \leq m'$
+aux points voisins de $x$ dans $X_0$, distincts de $x$. Alors
+\[
+  (\underline\Phi^i_\nu)_{\bar x} = H^i_x(\bar X', \Lambda_\nu)
+  = \varinjlim_h H^i_x(X(h), \Lambda_\nu) \qquad (i \leq m'),
+\]
+$X(h)$ les changements de base finis, et la nullité en $x$ résulterait de
+$\operatorname{prof}_x X(h) \geq m' + 1$ pour tout $h$. Par récurrence sur
+$\dim \mathcal{O}_{X_0,x}$ :
+
+\emph{Théorème 5.2.} Soit $Z \subset X_0$. Si (a) en toute générisation $x'$ de
+$x$ dans $X_0 - Z$, $(\underline\Phi^i_\nu)_{\bar x'} = 0$ pour $i \leq m'$ --- par
+exemple si $Z$ contient les points où $f$ n'est pas lisse ---, et (b) en toute
+générisation $x'$ de $x$ dans $Z$, $\operatorname{prof}_{\bar x'} X(h) \geq m'+1$
+pour tout $h$, alors $(\underline\Phi^i_\nu)_{\bar x} = 0$ pour $i \leq m'$ : $f$
+est localement $(m'+1)$-acyclique en $x$. Si $f$ est propre,
+$H^i(X_0) \to H^i(X_{\bar\eta})$ est alors un isomorphisme pour $i < m'$ et un
+monomorphisme pour $i = m'$.
+
+\emph{Corollaire 5.3.} Soit $d$ le maximum des $\dim\overline{\{x'\}}$, $x'$
+générisation de $x$ dans $Z$. La condition (b) est satisfaite dans chacun des cas :
+\emph{Cas I}, si les profondeurs étales de $X_0$ aux points de $Z$, et de
+$X_{\bar\eta}$, sont assez grandes --- par exemple $\geq m$ et $\geq m - 1$, avec
+$m' = m - d - 1$ ; \emph{Cas II}, si $f$ est plat en $x$ et
+$m' = \operatorname{prof\,géom}^*_x(X_0) - d$, la profondeur géométrique
+(SGA 2 XIV 5.3) étant augmentée de $\dim\overline{\{x\}}$. Le cas I se ramène,
+par le théorème de profondeur locale (SGA 2 XIV 4.5), à la bijectivité de
+$H^i(V) \to H^i(V_s)$ en bas degrés ; le cas II, à l'inégalité
+$\operatorname{prof\,ét} \geq \operatorname{prof\,géom}$ et au
+
+\emph{Lemme 5.3.3.} (i) Pour $A$ local noethérien et $\mathfrak{p}$ premier,
+$\operatorname{prof\,géom} A_{\mathfrak{p}} \geq \operatorname{prof\,géom} A -
+\dim A/\mathfrak{p}$. (ii) Pour $A \to B$ local et plat, sous une hypothèse
+d'existence d'un anneau formellement lisse sur $k$ de corps résiduel celui de
+$B$, $\operatorname{prof\,géom} B \geq \operatorname{prof\,géom} A +
+\operatorname{prof\,géom}(B \otimes_A k)$.
+
+La page 152 conclut : « Donner démonstration ! » ; \emph{le lemme n'est pas
+démontré dans le dossier}.\footnote{Les pages 151 et 152 renvoient deux fois à
+« SGA 1 XIV » pour la profondeur, sans doute pour SGA 2 XIV. Une note de bas de
+page dit que l'hypothèse de (ii) est « peut-être inutile », et renvoie pour une
+généralisation à EGA 0\textsubscript{IV} 22.2.2. Le corollaire 5.3 de la page
+149, dans un premier état, est encadré et barré.}
+
+\emph{Corollaire 5.4.} Si $X$ est plat sur $S$ et $X_0$ localement d'intersection
+complète, purement de dimension $n$, alors $\underline\Phi^i_\nu = 0$ pour
+$i \notin [n - d + 1, n + d + 1]$, $d = \dim Z$. Si $d = 0$,
+$\underline\Phi^i_\nu = 0$ pour $i \neq n + 1$ : la spécialisation
+$H^i(X_0) \to H^i(X_{\bar\eta})$ est un isomorphisme pour $i \neq n, n+1$, un
+monomorphisme pour $i = n$, un épimorphisme pour $i = n+1$, et l'inertie agit
+trivialement sur $H^i(X_{\bar\eta})$ pour $i \neq n$.\footnote{Dans la convention
+de SGA 7 XIII, c'est dire que $R\Phi$ est concentré en degré $n$ : la
+cohomologie évanescente d'une singularité isolée d'intersection complète est en
+degré moitié. La page 153 porte plusieurs variantes biffées de l'intervalle ; on
+donne celle qui résulte de 5.3 et de 2.3.}
+
+\emph{5.5--5.6. La version non commutative.} Supposant $f$ localement
+1-acyclique en les générisations strictes de $x$, on a $H^i(\bar V, G) \simeq
+H^i(V_{\bar\eta}, G)$ pour $i \leq 1$ et $G$ fini d'ordre premier à $p$ ; la
+locale 1-asphéricité en $x$ résulte donc de $H^i(V(h), G) = 0$ pour $i \leq 1$,
+vrai si les $X(h)$ sont des intersections complètes de dimension $\geq 3$ en $x$
+(pureté de Grothendieck, SGA 2) --- ce qui, pour $f$ plat, revient à $X_0$
+intersection complète de dimension $\geq 2$ en $x$.
+
+\emph{Théorème 5.6.} Si $f$ est plat, si l'ensemble $Z$ des points non lisses de
+$X_0$ est de codimension $\geq 2$ dans $X_0$, et si $X_0$ est localement
+d'intersection complète, alors $f$ est localement 1-asphérique pour les nombres
+premiers $\neq p$. En particulier, si $f$ est propre, la spécialisation
+$H^1(X_0, G) \to H^1(X_{\bar\eta}, G)$ est un isomorphisme pour tout groupe fini
+$G$ d'ordre premier à $p$.
+
+\emph{Remarque 5.7.} (a) La page « doute » qu'on puisse remplacer l'hypothèse
+d'intersection complète par $\operatorname{prof\,géom}_x X_0 \geq 2$ sur $Z$. (b)
+Conjecture : pour $f : X \to S$ plat entre schémas strictement locaux noethériens
+(excellents), le lieu singulier de la fibre fermée étant de dimension $\leq d$
+après toute extension finie et $m = \operatorname{prof\,géom} B$, $f$ serait
+localement $(m-d-1)$-acyclique pour les premiers $\neq p$, et localement
+1-asphérique si $m - d \geq 2$ ; ce serait « démontrable » à partir de la
+conjecture de SGA 2 XIV 6.3 et de la résolution des singularités.
+
+\pagerange{156}{161}
+\subsection*{Un point non lisse isolé (pages 156 à 161)}
+
+\emph{6.1.} Supposons $\underline\Phi^i_\nu|_V = 0$ pour tout $i$ --- c'est le cas si
+$x$ est un point maximal de l'ensemble des points non lisses. Alors (4.4) les cinq
+schémas se réduisent à quatre : $R\Gamma_I(\bar V) \xrightarrow{\sim}
+R\Gamma_I(V_{\bar\eta})$. Le groupe $\pi$ qui agit est désormais $I$.
+
+\emph{6.2. La donnée fondamentale.} L'inclusion $V_{\bar s} \to \bar V \simeq
+V_{\bar\eta}$ donne une flèche
+\[
+  u : K^\bullet = R\Gamma_I(V_{\bar\eta}, \Lambda_\nu) \longrightarrow
+  (L^\bullet)^{\mathrm{triv}}, \qquad L^\bullet = R\Gamma(V_s, \Lambda_\nu),
+\]
+qui, dit la page 157, « domine la structure cohomologique des quatre schémas » :
+elle permet de retrouver formellement leurs cohomologies. En oubliant l'action,
+c'est la flèche $R\Gamma(V_{\bar\eta}) \to R\Gamma(V_s)$ ; en prenant les
+invariants dérivés, et puisque l'inertie modérée est de dimension
+cohomologique $1$ pour $\ell$,
+\[
+  R\Gamma(I, \Lambda_\nu) \simeq \Lambda_\nu \oplus \Lambda_\nu(-1)[-1], \qquad
+  R\Gamma^I(K^\bullet) \simeq R\Gamma(V_\eta, \Lambda_\nu),
+\]
+on obtient $R\Gamma^I(u) = (\alpha, \beta) : R\Gamma(V_\eta) \to R\Gamma(V_s)
+\oplus R\Gamma(V_s)(-1)[-1]$, où $\alpha$ est la restriction et $\beta$ un
+morphisme de degré $1$.
+
+\emph{Proposition 6.3.} (a) $\underline H^i_{V_s}(\Lambda_{\nu,V}) = 0$ pour
+$i \neq 2$ et $\simeq \Lambda_{\nu,V_s}(-1)$ pour $i = 2$ : on a la pureté pour
+$V_s \subset V$, d'où $R\Gamma_{V_s}(V, \Lambda_\nu) \simeq
+R\Gamma(V_s, \Lambda_\nu)(-1)[-2]$. (b) Dans le triangle de Gysin
+\[
+  R\Gamma(V_s, \Lambda_\nu)(-1)[-2] \to R\Gamma(V, \Lambda_\nu) \to
+  R\Gamma(V_\eta, \Lambda_\nu) \xrightarrow{\ \partial\ } ,
+\]
+le bord $\partial$ s'identifie à $\beta$ ; donc (corollaire 6.4) le triangle est,
+à des signes et décalages près, celui du cône de $\beta$, et
+$R\Gamma(V)$ se calcule à partir de la seule donnée $u$.
+
+Pour (a), la démonstration (page 159) est le calcul
+\[
+  i^* Rj_*\Lambda_{V_\eta} \simeq R\Gamma^I\, i^* Rg_*\Lambda_{\bar V}
+  \simeq R\Gamma^I(\Lambda_{V_s})^{\mathrm{triv}} \simeq \Lambda_{V_s} \oplus \Lambda_{V_s}(-1)[-1],
+\]
+qui utilise $\Lambda_{\bar V} \simeq R\bar j_*\Lambda_{V_{\bar\eta}}$ --- c'est
+exactement l'acyclicité locale supposée en 6.1 ---, puis les relations habituelles
+entre $\underline H^i_{V_s}$ et $R^i j_*$. Pour (b) : « Compatibilité laissée au
+rédacteur en forme ! »\footnote{La page 158 ajoute « signe ? » dans la marge, et
+le mot qui qualifie le triangle de 6.4 est lu « cône » ou « cylindre
+d'application ». On a écrit $g : \bar V \to V$.}
+
+\emph{6.5.} Avec $n = \dim \mathcal{O}_{X_0,x}$, le théorème 2.3 donne
+$H^i(V_{\bar\eta}) = 0$ pour $i > n$. La suite de Hochschild--Serre
+\[
+  0 \to H^{i-1}(V_{\bar\eta})_I(-1) \to H^i(V_\eta) \to H^i(V_{\bar\eta})^I \to 0
+\]
+en tire $H^i(V_\eta) = 0$ pour $i > n+1$, et la suite de Gysin
+$\cdots \to H^{i-2}(V_s)(-1) \to H^i(V) \to H^i(V_\eta) \to H^{i-1}(V_s)(-1)
+\to \cdots$ montre que $H^{i-2}(V_s)(-1) \to H^i(V)$ est un isomorphisme pour
+$i \geq n+3$ et un épimorphisme pour $i = n + 2$.\footnote{La page 160 écrit les
+coinvariants sans le twist $(-1)$ : $H^1(I, M) \simeq M_I(-1)$ pour une action
+modérée, et c'est ce terme qui apparaît. Les bornes de (6.5.6) sont surchargées
+sur la page (« $i > n$ » suivi d'un chiffre noirci) et la flèche y est écrite
+dans l'autre sens ; on donne les bornes qui résultent des deux suites exactes.
+Dans la suite de Gysin, la page omet aussi le twist du terme $H^{i-1}(V_s)$.}
+
+\emph{6.6--6.7. Le cas d'une intersection complète.} Si $X$ est équidimensionnel
+de dimension $n + 1$ et intersection complète en $x$, on a
+\[
+  \begin{cases}
+  H^i(V_s) = 0 & (0 < i \leq n - 2),\\
+  H^i(V) = 0 & (0 < i \leq n - 1),\\
+  H^i(V_{\bar\eta}) = 0 & (i \neq 0, n),\\
+  H^i(V_\eta) = 0 & (i \neq 0, 1, n, n+1),
+  \end{cases}
+\]
+et $H^i(V) \to H^i(V_{\bar\eta}) \to H^i(V_s)$ sont des isomorphismes pour
+$i \leq n - 2$, des monomorphismes pour $i = n - 1$.\footnote{La page 161 écrit
+$W_\eta$ dans la dernière ligne, et $H^0(V_s)$ dans la parenthèse qui concerne
+$H^0(V)$ ; on lit $V_\eta$ et $H^0(V) \simeq \Lambda$. L'énoncé sur
+$H^i(V_{\bar\eta})$ est celui de Milnor : la fibre de Milnor d'une singularité
+isolée d'intersection complète a la cohomologie d'un bouquet de sphères de
+dimension $n$.} Si de plus $x$ est isolé parmi les points non lisses de $f$
+\emph{dans $X$}, $V_s$ et $V$ ont la dualité de Poincaré en dimensions $2n-1$ et
+$2n+1$ --- ce sont les « entrelacs » de la singularité dans $X_0$ et dans $X$ ---, d'où
+\[
+  H^i(V_s) = 0 \ (i \neq 0, n-1, n, 2n-1), \qquad
+  H^i(V) = 0 \ (i \neq 0, n, n+1, 2n+1),
+\]
+avec $H^{2n-1}(V_s) \simeq \Lambda(-n)$ pour $n \geq 2$ et
+$H^{2n+1}(V) \simeq \Lambda(-n-1)$ pour $n \geq 1$. C'est sur ces formules que
+s'arrête le chapitre.
+
+\pagerange{163}{168}
+\section*{Exposé VI. Groupe de monodromie et groupe fondamental (pages 163 à 180)}
+
+\subsection*{Les énoncés (pages 163 à 167)}
+
+Les exposés précédents étudiaient l'action de l'inertie sur les invariants
+cohomologiques de $X_{\overline K}$ ; celui-ci étudie son action sur le groupe
+fondamental. Une note marginale précise qu'il « n'est pas nécessaire pour la
+compréhension des autres exposés du séminaire ». On suppose $V$ strictement
+local, de sorte que $\pi = I$.
+
+\emph{1.1.} Pour un groupe profini $\pi$, $\pi^{(p')}$ désigne son plus grand
+quotient premier à $p$ --- le quotient par le sous-groupe engendré par les
+$p$-sous-groupes de Sylow ; sa formation est fonctorielle et induit
+$\operatorname{Out}(\pi) \to \operatorname{Out}(\pi^{(p')})$.\footnote{La page
+écrit « Šilov » pour Sylow, et $\operatorname{Autext}$ pour le groupe des
+automorphismes extérieurs, qu'on note $\operatorname{Out}$.} Pour $X_K$ de type
+fini, géométriquement connexe, muni d'un point géométrique $\xi$, la suite exacte
+$1 \to \pi_1(X_{\overline K}, \xi) \to \pi_1(X_K, \xi) \to I \to 1$
+(SGA 1 IX 6.1) définit une action extérieure
+\[
+  I \longrightarrow \operatorname{Out}\bigl(\pi_1^{(p')}(X_{\overline K}, \xi)\bigr) .
+\]
+Un point rationnel scinde la suite et relève l'action en une vraie action
+(1.2). Par la suite exacte $1 \to \pi/Z \to \operatorname{Aut}\pi \to
+\operatorname{Out}\pi \to 1$, où $Z$ est le centre :
+
+\emph{Lemme 1.2.6.} L'image de $I$ dans $\operatorname{Aut}
+\pi_1^{(p')}(X_{\overline K})$ est d'ordre premier à $p$ si et seulement si son
+image dans $\operatorname{Out}$ l'est. On dit alors que $I$ agit
+\emph{modérément} ; la condition ne dépend pas du point rationnel choisi.
+
+\emph{Théorème 1.3} (« de l'action essentiellement modérée du groupe de
+monodromie locale »). Pour $X_K$ de type fini, $\pi_1^{(p')}(X_{\overline K},
+\xi)$ est topologiquement de type fini, et un sous-groupe ouvert $I'$ de $I$ agit
+modérément sur lui.\footnote{Pour une courbe, l'énoncé résulte aujourd'hui du
+théorème de réduction semi-stable : après extension finie, la courbe a un
+modèle semi-stable, et l'inertie sauvage agit trivialement sur le $\pi_1$
+premier à $p$. Nous ne savons pas si l'énoncé, sous la forme générale qu'il a
+ici, a paru ; il n'est pas dans SGA 7 à notre connaissance.}
+
+\emph{Remarque 1.3.1.} Un argument de J.\ P.\ Murre, utilisant le théorème
+précédent et la résolution des singularités dans le cas non propre, montre que
+pour $X$ de type fini sur un corps séparablement clos, $\pi_1^{(p')}(X, \xi)$ est
+de présentation finie comme pro-$p'$-groupe.
+
+\emph{Théorème 1.4} (« de l'action modérée du groupe de monodromie locale »). Soient
+$S$ strictement local, $\bar X$ projectif et plat de présentation finie sur $S$,
+$Y \subset \bar X$ fermé, $X = \bar X - Y$, $U$ un ouvert de $S$ (resp.\ $y$ un
+point de $S$), $\xi$ un point géométrique de $X|_U$ (resp.\ de $X_y$). On suppose
+(a) $\bar X$, $Y$ projectifs ; (b) $Y_s$ rare dans $\bar X_s$ ; (c)
+$\bar X_{\bar s}$ à croisements normaux hors d'une partie de codimension $\geq 2$ ;
+(d) $\bar X|_U$ lisse et $Y|_U$ diviseur à croisements normaux relatif (resp.\
+$\bar X_y$ à lieu non lisse de codimension $\geq 2$). Alors l'image de
+$I = \pi_1(U, \xi)$ (resp.\ $\pi_1(y, \xi)$) dans $\operatorname{Out}\,
+\pi_1^{(p')}(X_{\bar y}, \xi)$ --- et dans $\operatorname{Aut}$ quand une section
+de $\bar X$ la relève --- est un groupe \emph{abélien} premier à $p$ ; en dimension
+relative $1$, de rang $\leq \nu$, le nombre de points singuliers de
+$X_{\bar s}$.\footnote{Un long passage entre (b) et (d) est biffé et surchargé, et
+une note marginale entourée l'est en partie ; on ne donne que ce qui s'en
+dégage. La page 168 est le verso dactylographié d'un document sans rapport, que
+la transcription ne retient pas.}
+
+\pagerange{169}{177}
+\subsection*{Réductions (pages 169 à 177)}
+
+\emph{2.1. Au cas géométriquement normal.} Remplacer $K$ par une extension finie
+est permis. Après une extension radicielle, le normalisé $X_0$ de
+$X_{\mathrm{red}}$ est géométriquement normal ; avec $X_1$, $X_2$ ses produits
+fibrés sur $X$, la méthode de Van Kampen (SGA 1 IX 5) présente
+$\pi_1(X_{\overline K})$ par les $\pi_1$ des composantes de $X_0$ et des
+générateurs indexés par les composantes de $X_1$, une fois choisis des
+« chemins de descente » entre points rationnels. Ces chemins forment un torseur
+sous $\pi_1$, à opérateurs $I$, qui n'a pas en général de point fixe ; mais
+après passage au quotient premier à $p$, sa restriction au $p$-groupe $P$ a une
+classe nulle dans $H^1(P, \pi_1^{(p')})$, un pro-$p$-groupe n'ayant pas de
+cohomologie non commutative à coefficients dans un groupe premier à $p$. On
+choisit donc des chemins invariants par $P$ --- un « lemme 2.1.1 » qui voulait
+l'énoncer en général est barré en croix au bas de la page 171 ---, et si $P$ agit trivialement sur les
+$\pi_1^{(p')}$ des composantes de $X_0$, il agit trivialement sur
+$\pi_1^{(p')}(X_{\overline K})$.\footnote{La page 172 esquisse l'argument par la
+conjugaison des Sylow, avec des lacunes ; la page 170 est un brouillon non
+paginé, barré au crayon, où figurent un croquis de la descente
+$X''' \rightrightarrows X'' \rightrightarrows X' \to X$, une courbe elliptique
+avec deux points, une courbe nodale, et la flèche
+$H^0(K, A) \to H^1(K, T_\ell(A))$ ; il n'est pas intégré à la rédaction.}
+
+\emph{2.2. Au cas affine lisse de dimension 1.} Pour $U_K$ ouvert affine dense,
+$\pi_1(U_{\overline K}) \to \pi_1(X_{\overline K})$ est surjectif et
+$I$-équivariant ; puis des sections hyperplanes génériques, comme en II~3,
+ramènent à la dimension $1$.
+
+\emph{2.3. À la situation 1.4.} Pour $X_K$ courbe, soit $\bar X_K$ son modèle
+complet, lisse après extension radicielle. « Une théorie non triviale, qui sera
+faite dans un exposé ultérieur », fournit, après extension finie, un modèle
+projectif $\bar X$ sur $S$, régulier, dont la fibre spéciale est un diviseur à
+croisements normaux ; les points à l'infini étant rationnels, ils sont donnés par
+des sections $g_i$, et quitte à éclater des points fermés de la fibre spéciale,
+$X_s + \sum g_i(S)$ est à croisements normaux. Les $g_i(S)$ sont alors deux à deux
+disjoints --- trois branches ne peuvent se croiser normalement en dimension $2$
+--- et, $\bar X$ étant régulier, contenus dans l'ouvert de lissité.\footnote{Une
+note marginale de la page 174 demande : « corps résiduel parfait ? ». La
+résolution des surfaces arithmétiques est due à Abhyankar et Lipman ; la
+réduction semi-stable des courbes, qui rendrait la réduction plus directe, à
+Deligne et Mumford (1969).}
+
+\emph{2.4. Réduction de 1.4 à la dimension relative 1.} Par récurrence : on plonge
+$\bar X$ dans $\mathbf{P}^r_S$, on remplace $S$ par le localisé strict $S'$ de
+$S[t_1, \ldots, t_r]$ au point maximal de la fibre spéciale, et l'on coupe par
+l'hyperplan « générique » de coordonnées $(0, t_1, \ldots, t_r)$. La section
+$(\bar X^{(1)}, Y^{(1)})$ satisfait encore (a), (b), (c), et (d) au-dessus d'un
+ouvert $U'$ de $S'|_U$ qui se surjecte sur $U$ ; $I' \to I$ est surjectif, les
+$\pi_1^{(p')}$ des fibres sont invariants (SGA 1 XIII), et par Bertini
+$\pi_1^{(p')}(X^{(1)}_{\bar y}) \to \pi_1^{(p')}(X_{\bar y})$ est surjectif.
+\footnote{Une note marginale prévient qu'il peut falloir remplacer le plongement
+initial par un plongement de Veronese. Un premier état de 2.4, à la page 175, est
+barré en croix.}
+
+\pagerange{178}{180}
+\subsection*{La dimension relative 1 : torsions autour des points doubles (pages 178 à 180)}
+
+On choisit un anneau de Cohen $W$ de corps résiduel $k$ et $W \to A$
+($S = \operatorname{Spec} A$) induisant l'identité sur $k$.
+
+\emph{Lemme 3.1} (« qui sera prouvé dans l'exposé VII à l'aide de la théorie de
+Schlessinger »). Sous les conditions (a), (b), (c) de 1.4, en dimension relative
+$1$, il existe $A_0 \simeq W[[t_1, \ldots, t_N]]$, un couple $(\bar X_0, Y_0)$ sur
+$S_0 = \operatorname{Spec} A_0$ satisfaisant à (a), (b), (c) --- une courbe
+projective plate dont la fibre fermée n'a que des points doubles ordinaires,
+munie de sections ---, et $f : S \to S_0$, tels que : (i) les points singuliers
+$x_1, \ldots, x_\nu$ de la fibre fermée correspondent à des diviseurs
+$D_i = \operatorname{div}(t_i)$ de $S_0$, et $\operatorname{div}(p) + \sum D_i$ est
+à croisements normaux ; (ii) $U_0 = S_0 - \bigcup D_i$ est le plus grand ouvert
+au-dessus duquel $\bar X_0$ est lisse ; (iii) $(\bar X, Y)$ se déduit de
+$(\bar X_0, Y_0)$ par $f$.\footnote{C'est la déformation \emph{verselle} d'une
+courbe nodale, où chaque point double se lisse selon une équation $xy = t_i$.
+L'exposé VII annoncé n'a pas paru sous cette forme ; l'exposé VI imprimé de SGA 7
+I, de D.\ S.\ Rim, est consacré à la théorie formelle des déformations. Les
+pages 178 et 179 sont lues avec plusieurs incertitudes, et la formule de (i) est
+inachevée sur la page.}
+
+\emph{3.2. Démonstration de 1.4.} $f$ envoie $U$ dans $U_0$, et par
+l'invariance des $\pi_1^{(p')}$ (SGA 1 XIII) on se ramène à la situation
+universelle. Là, par les variantes du lemme d'Abhyankar, le groupe fondamental
+modéré de $U_0$, complémentaire d'un diviseur à croisements normaux dans un
+régulier local, est abélien premier à $p$ :
+\[
+  \pi_1^{\mathrm{t}}(U_0, \xi) \simeq \widehat{\mathbf{Z}}'(1)^{\nu},
+  \qquad \widehat{\mathbf{Z}}'(1) = \textstyle\prod_{\ell \neq p} \mathbf{Z}_\ell(1),
+\]
+un facteur par point double (3.2.1). L'action de $\pi_1(U_0)$ est donc
+déterminée par $\nu$ automorphismes extérieurs $h_1, \ldots, h_\nu$ de
+$\pi_1^{(p')}(X_{\overline K})$ qui commutent, un par point double --- ceux qu'on
+appelle aujourd'hui les \emph{torsions de Dehn} autour des cercles évanescents.
+Comme la structure de $\pi_1^{(p')}$ d'une courbe est connue (SGA 1 XIII), « le
+problème de déterminer la forme des $h_i$ devient assez concret. Cela sera fait
+par Deligne par voie \emph{transcendante} dans un exposé ultérieur ».
+
+Quand $S$ est lui-même un trait, l'action extérieure de $I_t \simeq
+\widehat{\mathbf{Z}}'(1)$ est donnée par l'homomorphisme $I_t \to
+\pi_1^{\mathrm{t}}(U_0) \simeq \widehat{\mathbf{Z}}'(1)^\nu$, qui est
+$\lambda \mapsto (n_i\lambda)_i$, avec $n_i = \operatorname{long}(V/\mathfrak{m}_iV)$
+la multiplicité de l'image inverse de $D_i$ --- localement, le point double
+$x_i$ a pour équation $xy = t^{n_i}$. Le générateur agit donc par
+\[
+  h = h_1^{n_1} \cdots h_\nu^{n_\nu} .
+\]
+« L'entier $n_i$ mesure, heuristiquement, la vitesse avec laquelle disparaît la
+singularité $x_i$ en passant de la fibre spéciale à la fibre générique. » C'est
+sur cette formule que s'arrête l'exposé.\footnote{La page 179 écrit
+$\mathbf{Z}'_\ell(1)^I$, l'indice $\ell$ étant surchargé ; on écrit
+$\widehat{\mathbf{Z}}'(1)$. L'interprétation des $h_i$ comme torsions de Dehn,
+et de l'équation locale $xy = t^{n_i}$, est de nous ; c'est la forme classique de
+la formule de Picard--Lefschetz pour le groupe fondamental.}
+
+\pagerange{182}{189}
+\section*{Exposé II, § 6. Groupes et algèbres de Lie associés aux représentations $\ell$-adiques (pages 182 à 198)}
+
+Ces feuillets prolongent la pagination de l'exposé II (II.31 à II.47) ; le mot
+« Appendice » est biffé dans le titre, et une note marginale ajoute à « Groupes »
+les mots « analytiques ou algébriques ». On fixe $\ell$, et les représentations
+sont sur $\mathbf{Q}_\ell$.
+
+\subsection*{Le groupe analytique et le groupe algébrique (pages 182 à 189)}
+
+\emph{6.1--6.3.} Une structure de groupe analytique $\ell$-adique sur un groupe
+topologique est essentiellement unique ; tout homomorphisme continu entre tels
+groupes est analytique, et tout sous-groupe fermé est analytique (Cartan). Pour
+un groupe profini $\Pi$, les quotients analytiques forment un système projectif
+$\Pi^{\mathrm{an}} = (G_\alpha)$ --- deux quotients analytiques en dominent un
+troisième, sous-groupe fermé de leur produit. Une représentation $\ell$-adique de
+$\Pi$ a pour image un groupe analytique : la catégorie des représentations de
+$\Pi$ est la limite inductive de celles des $G_\alpha$.
+
+\emph{6.4.} D'où un système projectif d'algèbres de Lie
+$\mathfrak{g} = \operatorname{Lie}^{\mathrm{an}}(\Pi) = (\mathfrak{g}_\alpha)$ et un
+foncteur fidèle, non pleinement fidèle, $\operatorname{Rep}(\Pi) \to
+\operatorname{Rep}(\mathfrak{g})$. Comme un sous-groupe ouvert a la même algèbre
+de Lie, on obtient
+\[
+  \varinjlim_{U \subset \Pi \text{ ouvert}} \operatorname{Rep}_{\mathbf{Q}_\ell}(U)
+  \xrightarrow{\ \sim\ } \operatorname{Rep}(\mathfrak{g}),
+\]
+et c'est une équivalence : toute représentation de dimension finie d'une algèbre
+de Lie $\ell$-adique s'intègre sur un sous-groupe ouvert assez petit, et les
+morphismes se lisent sur les germes. La catégorie
+$\operatorname{Rep}(\Pi)$, même munie du produit tensoriel, ne permet pas de
+retrouver $\Pi$ ni $\mathfrak{g}$, déjà pour $\Pi = \widehat{\mathbf{Z}}$ (6.5).
+
+\emph{6.6. Le groupe pro-algébrique.} Pour chaque représentation $E$, soit
+$\widetilde G_E$ le groupe algébrique engendré dans $\operatorname{GL}(E)$ par
+l'image de $\pi$ --- son \emph{enveloppe algébrique}. Les épimorphismes
+$E \to F$ donnent des épimorphismes $\widetilde G_E \to \widetilde G_F$, et
+$\pi^{\mathrm{alg}} = (\widetilde G_E)$ est un pro-groupe algébrique affine sur
+$\mathbf{Q}_\ell$, avec
+\[
+  \operatorname{Rep}_{\mathbf{Q}_\ell}(\pi) \simeq \operatorname{Rep}(\pi^{\mathrm{alg}}),
+  \qquad \pi^{\mathrm{alg}} / (\pi^{\mathrm{alg}})^0 \simeq \pi .
+\]
+C'est, en termes d'aujourd'hui, le groupe \emph{tannakien} de la catégorie
+$\operatorname{Rep}_{\mathbf{Q}_\ell}(\pi)$ ; la seconde égalité vient de ce que
+tout quotient fini de $\pi$ apparaît, par sa représentation régulière, comme un
+groupe de composantes.\footnote{La justification de la seconde égalité est de
+nous. Une note encadrée de la page 184 insiste : « Attention, il est essentiel
+ici de travailler sur $\mathbf{Q}_\ell$ ! ».} Avec
+$\widetilde{\mathfrak{g}} = \operatorname{Lie}(\pi^{\mathrm{alg}})$, on a
+$\varinjlim_U \operatorname{Rep}(U) \simeq \operatorname{Rep}(\widetilde G^0) \to
+\operatorname{Rep}(\widetilde{\mathfrak{g}})$, la première flèche étant une
+équivalence --- passer à un sous-groupe ouvert revient à passer à la composante
+neutre --- et la seconde seulement pleinement fidèle.
+
+\emph{6.6.1--6.6.3.} L'homomorphisme canonique $\pi^{\mathrm{an}} \to
+\pi^{\mathrm{alg}}$ envoie l'image $G_E$ de $\pi$ dans son enveloppe algébrique
+$\widetilde G_E$ ; il est « dense », et induit $\mathfrak{g} \to
+\widetilde{\mathfrak{g}}$, isomorphisme si et seulement si les algèbres de Lie
+$\operatorname{Lie}(G_E)$ sont algébriques, c'est-à-dire si les $G_E$ sont ouverts
+dans les $\widetilde G_E(\mathbf{Q}_\ell)$. Les remarques 6.7 et 6.8 --- marquées
+« laissons tomber » --- expliquent pourquoi l'équivalence avec les représentations
+de $\widetilde{\mathfrak{g}}$ ne contredit pas l'existence de groupes semi-simples
+non simplement connexes (leurs revêtements simplement connexes, au sens de
+Chevalley, apparaissent plus haut dans le système), et attachent à la situation
+une classe dans $H^2(\pi, Z'(\mathbf{Q}_\ell))$, $Z'$ le centre du revêtement
+simplement connexe.\footnote{Ces deux remarques sont très raturées, et la page 189
+l'est en partie ; on n'en donne que l'objet.}
+
+\pagerange{190}{198}
+\subsection*{Fonctorialité, pro-objets, et le groupe fondamental arithmétique (pages 190 à 198)}
+
+\emph{6.9.} Un homomorphisme $u : \pi \to \pi'$ induit des flèches compatibles
+entre les $\pi^{\mathrm{an}}$, $\pi^{\mathrm{alg}}$ et leurs algèbres de Lie ; si
+$u$ est surjectif, ces flèches le sont ; si l'image de $u$ est d'indice fini,
+$G^0 \to G'^0$, $\mathfrak{g} \to \mathfrak{g}'$ et $\widetilde{\mathfrak{g}} \to
+\widetilde{\mathfrak{g}}'$ sont surjectifs.\footnote{La page 190 écrit « de
+dimension finie » ; c'est « d'indice fini ».}
+
+\emph{6.10--6.12.} Pour un système projectif $\Pi = (\pi_\lambda)$ de groupes
+profinis, on forme les systèmes $\Pi^{\mathrm{an}}$, $\Pi^{\mathrm{alg}}$, et
+$\operatorname{Rep}(\Pi) \simeq \operatorname{Rep}(\Pi^{\mathrm{alg}}) \simeq
+\varinjlim_\lambda \operatorname{Rep}(\pi_\lambda)$. Attention : $\Pi^{\mathrm{an}}$
+n'est pas $(\varprojlim \pi_\lambda)^{\mathrm{an}}$. Si les $\pi_\lambda$ sont finis
+et que la limite est un groupe analytique de dimension $>0$, $\Pi^{\mathrm{an}}$
+est formé de groupes discrets, « plus petit » (exemple 6.10.1) ; si les
+$\pi_\lambda$ sont les sous-groupes d'indice fini d'un $\pi$ (exemple 6.10.2), la limite est triviale mais
+$\Pi^{\mathrm{alg}} = (\pi^{\mathrm{alg}})^0$, « plus grand ». Quand les
+transitions sont quasi-surjectives (d'image d'indice fini), il en va de même de
+celles de $\Pi^{\mathrm{an}}$ et $\Pi^{\mathrm{alg}}$, et les systèmes d'algèbres
+de Lie sont stricts.
+
+\emph{6.13. Le groupe fondamental arithmétique.} Soit $X = \varprojlim X_\lambda$,
+limite d'un système filtrant à transitions affines --- le cas intéressant est
+celui où les $X_\lambda$ sont de type fini sur $\mathbf{Z}$, le pro-objet étant
+alors déterminé par $X$, par exemple pour $X$ de présentation finie sur un
+corps. Le pro-groupe $\Pi = (\pi_1(X_\lambda, \xi))_\lambda$ « mérite d'être
+appelé le pro-groupe fondamental \emph{arithmétique} de $X$ »,
+$\pi_1^{\mathrm{arith}}(X, \xi)$ ; ses représentations $\ell$-adiques sont la
+limite inductive des $\mathbf{Q}_\ell$-faisceaux lisses sur les $X_\lambda$. On
+a $\pi_1(X, \xi) \simeq \varprojlim \Pi$, mais $\pi_1(X,\xi)$ ne détermine pas
+$\Pi$ : pour le spectre d'un corps algébriquement clos, $\pi_1$ est trivial et
+$\Pi$ ne l'est jamais.
+
+\emph{6.14--6.15.} Pour $X$ intègre et normal, les transitions sont
+quasi-surjectives. Et si $\ell$ est inversible sur $X$, $\Pi$ n'est jamais
+« discret » : $\dim \mathfrak{g} > 0$. En caractéristique $p$, $X \to
+\operatorname{Spec}\mathbf{F}_p$ induit une quasi-surjection sur
+$\widehat{\mathbf{Z}}$, dont l'enveloppe $\widehat{\mathbf{Z}}^{\mathrm{alg}}$ est
+de dimension infinie ; en caractéristique nulle, on remplace
+$\widehat{\mathbf{Z}}$ par le plus grand quotient abélien
+$\mathbf{Z}_\ell^*$ de $\pi_1(\operatorname{Spec}\mathbf{Z}[1/\ell])$.
+
+\emph{6.16. Pourquoi ce pro-groupe.} Tous les faisceaux $\ell$-adiques lisses qui
+interviennent en pratique sont « de nature arithmétique » : ils proviennent d'un
+$X_\lambda$, et de façon unique à passage à un $X_\mu$ près. Exemples : les
+$R^i f_*\mathbf{Q}_\ell$ d'un morphisme propre et lisse, avec les morphismes
+définis par des correspondances algébriques ; les modules de Tate d'un schéma
+abélien $A$ sur $X$, avec
+\[
+  \operatorname{End}(A) \otimes \mathbf{Q}_\ell \hookrightarrow
+  \operatorname{End}_\Pi\bigl(T_\ell(A_\xi) \otimes \mathbf{Q}_\ell\bigr). \tag{6.15.1}
+\]
+
+\emph{Remarque 6.16.} Une des conséquences des \emph{conjectures de Tate} est que
+(6.15.1) est bijectif pour $X$ normal intègre ; on se ramène au cas du spectre
+d'un corps algébriquement clos, ce qui « montre à quel point (même dans un cas
+réputé "géométrique") l'opération de $\Pi$ est loin d'être triviale ». C'est
+prouvé par Tate pour un corps fini.\footnote{Pour les corps de type fini, c'est
+aujourd'hui un théorème : Faltings (1983) en caractéristique nulle, Zarhin et
+Mori en caractéristique positive, à notre connaissance. Deux remarques portent le
+numéro 6.16 sur la page ; on les garde.}
+
+\emph{Remarque 6.17.} « On s'est rendu compte que $\Pi$ lui-même, ou $G =
+\Pi^{\mathrm{an}}$, $\widetilde G = \Pi^{\mathrm{alg}}$, $\mathfrak{g}$,
+$\widetilde{\mathfrak{g}}$, sont démesurément grands et ils échappent pratiquement
+à notre contrôle. Leur rôle est surtout théorique, via leurs représentations
+$\ell$-adiques. » Dans chaque problème, on n'examine que les représentations qui
+se factorisent par un $\widetilde G_E$ fixé, enveloppe algébrique de l'image d'un
+$\pi_1(X_\lambda)$, et le second membre de (6.15.1) s'écrit
+$\operatorname{End}_{G_E}(E) = \operatorname{End}_{\widetilde G_E}(E)$ --- et,
+quand le $\pi_1$ arithmétique de $X$ est trivial, $\operatorname{End}_{\mathfrak{g}_E}(E)$.
+La rédaction s'arrête au milieu de la page 198.
+
+\pagerange{199}{209}
+\section*{Appendice. Les poids (pages 199 à 208)}
+
+Une feuille de titre (page 199) porte, de sa main : « SGA 7 [IX ?] appendice.
+Applications des conjectures standard sur les cycles algébriques ».\footnote{Le
+numéro romain est lu avec doute. À notre connaissance, l'exposé IX imprimé de
+SGA 7 I, « Modèles de Néron et monodromie », ne comporte pas d'appendice de ce
+titre.} Les feuillets qui suivent appliquent les \emph{poids} --- les valeurs
+absolues des valeurs propres du Frobenius, entiers de Weil --- à trois
+présentations de la cohomologie. Ce qui y est conjectural, à la date, est la
+pureté de la cohomologie des variétés projectives et lisses, qu'on tire des
+conjectures standard ; elle est devenue un théorème avec la démonstration des
+conjectures de Weil par Deligne (1974). Les feuillets supposent implicitement
+un corps de base fini, ou un trait à corps résiduel fini, pour que le Frobenius
+ait un sens.\footnote{Les pages impaires 201, 203, 205, 207 et 209 sont des
+feuillets (paginés -2.12-, -2.3-, -2.5-, -2.11-, -2.10-) d'une dactylographie
+anglaise d'une autre main, non signée ni datée, sur les actions de groupes
+réductifs --- propreté d'une action, critère numérique de semi-stabilité par les
+sous-groupes à un paramètre, théorème d'Iwahori ; la transcription les note sans
+les transcrire, conformément aux règles du projet sur les textes de tiers, et
+cette lecture n'en dit pas davantage. Quelques marques au crayon en marge sont
+d'attribution incertaine.}
+
+\emph{1) Un diviseur à croisements normaux.} Pour $Y = \bigcup Y_\alpha$ propre,
+à composantes et intersections $Y_\sigma$ projectives et lisses, la suite
+spectrale de Mayer--Vietoris
+\[
+  E_2^{pq} = H^p\bigl(\sigma \mapsto H^q(Y_\sigma, \mathbf{Q}_\ell)\bigr)
+  \Longrightarrow H^{p+q}(Y, \mathbf{Q}_\ell)
+\]
+a son terme $E_2^{pq}$ pur de poids $q$ ; les $d_r$, $r \geq 2$, joignant des
+poids différents, sont nuls, et $H^i(Y)$ est filtré par les $E_2^{p,i-p}$, de
+poids $0, 1, \ldots, i$.\footnote{La page 200 dit « $d_r^{pq}$ est nul pour tout
+$r$ » ; il s'agit des $d_r$ au-delà de $E_2$, le terme $E_2$ étant déjà la
+cohomologie du complexe de Čech.} Une note marginale : avec les conjectures
+standard, les dimensions des $E_2^{pq}$ sont indépendantes de $\ell$.
+
+\emph{2) Un schéma lisse non propre.} Soit $X = X' - Y$, $X'$ projectif et lisse,
+$Y$ à croisements normaux à composantes lisses. (a) Dans la suite
+\[
+  \cdots \to H^{i-1}(Y) \to H^i_c(X) \to H^i(X') \to H^i(Y) \to H^{i+1}_c(X) \to \cdots,
+\]
+où $H^{i-1}(Y)$ est de poids $\leq i-1$ et $H^i(X')$ pur de poids $i$, le noyau
+de $H^i_c(X) \to H^i(X')$ est la partie de poids $\leq i - 1$ de $H^i_c(X)$ ; il ne
+dépend donc pas de la compactification choisie, non plus que le noyau et le
+conoyau de $\varphi^i : H^i(X') \to H^i(Y)$. La filtration par les poids de
+$H^i(Y)$ induit sur $\operatorname{Coker}\varphi^i$ une filtration dont les
+quotients sont les défauts d'exactitude de $H^i(X') \to \prod H^i(Y_\alpha) \to
+\prod H^i(Y_{\alpha\beta})$ et les $E_2^{p,q}$, $p \geq 1$ ; elle aussi est
+indépendante de la résolution, et c'est la filtration par les poids.\footnote{La
+page 202 dit que cette filtration correspond à celle de « $H_!^{i+1}(X)$ »,
+l'exposant étant lu avec doute ; c'est bien sur $H^{i+1}_c(X)$ que
+$\operatorname{Coker}\varphi^i$ s'injecte. Le début de la phrase est sur un
+feuillet antérieur, absent du dossier.} (b) Par dualité, la suite spectrale de
+cohomologie locale le long de $Y$,
+\[
+  E_2^{pq} = H^p\bigl(Y, \underline H^q_Y(\mathbf{Q}_{\ell, X'})\bigr), \qquad
+  \underline H^q_Y(\mathbf{Q}_\ell) \simeq \bigoplus_{\alpha_1 < \cdots < \alpha_{q-1}}
+  \mathbf{Q}_{\ell, Y_{\alpha_1 \cdots \alpha_{q-1}}}(-(q-1)) \quad (q \geq 2),
+\]
+a des termes de poids $p + 2q - 2$, d'où $d_r = 0$ pour $r \geq 3$ ; et son
+$E_3$ est, à twist près, dual de l'$E_2$ de (a).\footnote{La page 202 écrit le
+twist final $(-1)$, puis $(-(q-1))$ à la ligne suivante ; c'est $(-(q-1))$.}
+(c) La suite spectrale de Leray de $g : X \hookrightarrow X'$,
+\[
+  E_2^{pq} = H^p(X', R^q g_*\mathbf{Q}_\ell) =
+  \bigoplus_{\alpha_1 < \cdots < \alpha_q} H^p(Y_{\alpha_1 \cdots \alpha_q})(-q)
+  \ (q \geq 1), \qquad E_2^{p0} = H^p(X'),
+\]
+--- par la formule $R^q g_* \simeq \bigwedge^q \bigoplus_\alpha
+\mathbf{Q}_\ell(-1)_{Y_\alpha}$ de III~4.5 --- a des termes purs de poids
+$p + 2q$, d'où encore $d_r = 0$ pour $r \geq 3$ ; il reste à calculer
+$E_3 = E_\infty$, c'est-à-dire les $d_2$, qui sont des morphismes de Gysin,
+duaux des restrictions. C'est ce qu'on appelle aujourd'hui la \emph{suite
+spectrale des poids}.\footnote{Pour la version complexe, Deligne, « Théorie de
+Hodge II » (1971) ; pour la dégénérescence semi-stable sur un trait,
+Rapoport et Zink (1982). Le rapprochement est de nous.}
+
+\emph{3) Sur un trait} (pages 206 et 208). Soient $X$ régulier propre sur $S$,
+$Y \supset X_0$ à croisements normaux, $U = X - Y$, $g : U \to X$ ; pour
+simplifier $Y = X_0$, $U = X_\eta$. La suite spectrale de Leray
+\[
+  E_2^{pq} = H^p(X_0, R^q g_*\mathbf{Q}_\ell|_{X_0}) \Longrightarrow H^{p+q}(X_\eta),
+\]
+\[
+  E_2^{pq} = \bigoplus_{\alpha_1 < \cdots < \alpha_q} H^p(Y_{\alpha_1 \cdots \alpha_q})(-q)
+  \ (q \geq 1), \qquad E_2^{p0} = H^p(X_0),
+\]
+a des termes de poids $p + 2q$ pour $q \geq 1$, et $\leq p$ pour $q = 0$. Pour
+$d_r : E_r^{pq} \to E_r^{p+r, q-r+1}$ : si $q - r + 1 \neq 0$, les poids
+$p + 2q$ et $p + 2q - r + 2$ diffèrent dès que $r \neq 2$ ; si $q - r + 1 = 0$, il
+faut $p + 2q \leq p + r = p + q + 1$, soit $q \leq 1$, donc $r \leq 2$. Donc
+$d_r = 0$ pour $r \geq 3$, et $H^i$ est filtré par $E^{i,0}, E^{i-1,1}, \ldots,
+E^{0,i}$, de poids $i, i+1, \ldots, 2i$.\footnote{La page 206 dit $E_2^{p0} =
+H^p(X_0)$ « de poids $p$ ». La fibre $X_0$ n'est pas lisse, et sa cohomologie est
+de poids $\leq p$, comme au 1) ; c'est d'ailleurs l'inégalité que l'argument
+utilise ensuite au cas b). Le diagramme de la page 204, où les flèches $d_2$ sont
+mises en dualité, est lu avec des exposants incertains.}
+
+Modulo l'identification des $d_2$ à des morphismes canoniques « de nature
+motivique » --- « compatibilité à vérifier » ---, la dimension des
+$E_\infty^{pq}$ serait indépendante de $\ell$, et les polynômes caractéristiques
+du Frobenius inverse à coefficients entiers indépendants de $\ell$. Par la suite
+exacte
+\[
+  0 \to H^{i-1}(X_{\bar\eta})_I(-1) \to H^i(X_\eta) \to H^i(X_{\bar\eta})^I \to 0,
+\]
+on en tirerait les mêmes informations sur les invariants et les coinvariants de
+l'inertie --- dimensions indépendantes de $\ell$, polynômes caractéristiques
+entiers indépendants de $\ell$ --- par récurrence sur $i$. La page 208 s'arrête
+sur « et l'hyp.\ de récurrence\ldots ».\footnote{La page écrit la suite sans le
+twist $(-1)$ du premier terme ; voir la note sur la page 160. Elle ajoute que
+les valeurs propres auraient des valeurs absolues « $q^{i/2}$ », lecture
+incertaine. Les invariants $H^i(X_{\bar\eta})^I$ sont en général de poids
+$\leq i$, non purs ; les questions de ce type relèvent de la conjecture de
+monodromie-poids de Deligne, établie en égale caractéristique et, à notre
+connaissance, ouverte en général en inégale caractéristique.}
+
+\end{document}

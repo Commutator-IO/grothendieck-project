@@ -1,0 +1,1159 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 37, pages 1-99.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. Where the manuscript is loose or mistaken, the true statement is
+% what appears here and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite the
+% batch-NN.fr.tex files.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-04 — first pass, unchecked against
+% the pages by a human. The folder was read whole: five batches, pages 1-99,
+% all transcribed. This reading was made on Opus 5.5 and is not measured
+% against the Opus 5 reference reading of folder 115.
+%
+% WHAT THE FOLDER IS. A dossier of editorial work, not a mathematical text:
+% the Springer re-editions of SGA 1, 4, 5, 6, 7 and of EGA I and II, ordered
+% by tan covers (« SGA 1 », « SGA 4 », « SGA 5 », « SGA 6 », « SGA 7 »,
+% « Réédition EGA I », « EGA II »), with letters, lists of corrections and a
+% few pieces of unpublished mathematics. The spine is therefore the order of
+% the covers, and the mathematics is read where it sits on it.
+%
+% THIRD-PARTY LETTERS AND TEXTS (Verdier pp. 8-11, 13; Artin pp. 33-34;
+% Hartshorne pp. 53-54; an unidentified reader's commentary pp. 65-71;
+% Deligne pp. 74-75; Dieudonné p. 95) are noted only in the transcription,
+% and this reading restates nothing of them beyond what those notes say
+% (RIGHTS.md). His own letters and typescripts are read in full.
+%
+% DATING DOUBTS kept visible (src/content/letters.json): Verdier's « 16
+% Juillet » (p. 8) and « le 28 Mai » (p. 13) carry no year, 1971 is inferred;
+% p. 12 thanks for a letter « du 23 Mai », to be settled on the facsimile;
+% the letter on « 2.1.1 » (pp. 29-30) and Artin's (pp. 33-34) are undated,
+% their placing about 1969-1971 is not established; pp. 2, 17 and all the
+% manuscript notes are undated.
+%
+% NOTATION fixed once: \widetilde{X}_{\text{ét}} for the étale topos;
+% \widehat{C} for presheaves on C (the pages write C^\wedge); Ind(C); Ouv(E)
+% for subobjects of the final object; L for a set of primes; A_n = A/T^{n+1}
+% in the EGA exchange. Exposé numbers are roman, « SGA 4 VI 1.25 ».
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - p. 16: hypothesis (ii) as written is weaker than the comparison lemma's,
+%     and the page announces, does not prove, the cocontinuity;
+%   - p. 22: (i bis) says « adjoint à droite »; the condition that makes
+%     Ind(C) a topos is a LEFT EXACT LEFT adjoint — read so;
+%   - pp. 29-30: L must consist of primes invertible on the base (on k in
+%     2.1.2) — supplied;
+%   - p. 37: the Čech-type formula by sieves is false in general for n >= 2;
+%     hypercoverings (Verdier) give the true one;
+%   - p. 48: « all morphisms of C are monos » is false as a criterion
+%     (C = a group); the criterion is « C is a preorder »; the first line's
+%     illegible word is not guessed;
+%   - p. 51: D(i_* F) = i_* D(F) holds for the underived direct image in
+%     dimension 1, not in general — supplied;
+%   - p. 92: the written generators of J_n are NOT linearly independent over
+%     B (X_0 . X_1 T lies in T J_n); they are independent modulo the ideal
+%     (X_i), which is what the minimality needs;
+%   - p. 96: the lemma's blank is \sum m_i; A_{f_i} should be the completed
+%     ring A_{\{f_i\}}; « tensorisant par A_0 » is by A_n.
+%
+% Announced and never established in the folder: the 5°) of exercise 4.10.6
+% (p. 16 breaks off); exercise « 2 » on Ind(C) (p. 22) and the exercises of
+% VIII § 10 (pp. 38-39) are stated, not proved; 10.5 is empty; the letter of
+% p. 93 breaks off mid-sentence; whether a) => c) in EGA I 10.10.5 holds
+% without noetherian hypotheses is left open by both correspondents.
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{37}
+\pages{1}{99}
+\dating{1967-1971}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Rééditions SGA, EGA [SGA 4 à SGA 7, EGA I et EGA II] : tapuscrits et copies de tapuscrit annoté (s.d.), lettres (1967-1971, s.d.), notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ce dossier montre l'envers d'une œuvre publiée : comment des séminaires de
+recherche, tirés à l'origine en quelques centaines d'exemplaires ronéotés à
+l'Institut des Hautes Études Scientifiques, deviennent des livres. Entre 1967
+et 1971, les \emph{Séminaires de Géométrie Algébrique} (SGA) et les
+\emph{Éléments de Géométrie Algébrique} (EGA) sont réédités chez Springer.
+On voit ici ce que cela demande : retrouver les exemplaires d'archives,
+relancer des rédacteurs dispersés (Verdier à Brandeis, Ferrand qui ne rend pas
+son exposé), compter les pages, faire taper, relire, corriger des renvois
+ligne par ligne, et décider de ce qu'on laisse incomplet.
+
+Le moment est particulier. En septembre 1970 l'auteur quitte l'IHÉS, parce
+que l'institut accepte des subventions militaires ; la dernière page d'une
+préface, dans un état antérieur au texte imprimé, le dit sans détour. Huit mois
+plus tard il écrit qu'il ne trouve « pas une minute » pour la réédition de
+SGA 4, et qu'il est prêt à la laisser « incomplète et dégueulasse » plutôt que
+de la payer d'un jour ou deux pris sur le « boulot survie, infiniment plus
+important ». Le dossier enregistre ainsi, en marge des mathématiques, le
+moment où celui qui les avait organisées commence à s'en détourner --- et la
+conscience professionnelle avec laquelle il continue pourtant à poser des
+questions précises sur des exercices faux.
+
+Car il y a des mathématiques, et quelques-unes ne sont pas dans les livres
+publiés. L'idée qui les relie toutes est celle de \emph{topos} : au lieu
+d'étudier un espace par ses points, on l'étudie par la catégorie des
+« faisceaux » qu'il porte --- de la même façon qu'on peut connaître un groupe
+par toutes ses représentations plutôt que par ses éléments. Cette catégorie
+garde l'essentiel de l'espace, et elle existe dans des situations où les
+points font défaut. Quatre morceaux s'en détachent.
+
+D'abord un dictionnaire, fait à la main sur le verso d'une page de SGA 4,
+entre quatre types d'objets finis : les espaces topologiques finis, les
+ensembles ordonnés finis, les treillis finis, et les topos « finis ». C'est
+le cas le plus élémentaire où l'on puisse voir qu'un espace, l'ordre de ses
+points et la forme de ses ouverts sont trois façons de dire la même chose.
+
+Ensuite, un paragraphe resté inédit de SGA 4 qui définit les \emph{étendues
+algébriques} et les \emph{espaces algébriques} comme des topos annelés
+localement semblables au topos étale d'un schéma --- l'idée, aujourd'hui
+centrale, qu'un objet géométrique peut être recollé non par des ouverts mais
+par des « revêtements » étales, quitte à garder la trace de ses symétries.
+
+Puis un exercice, inédit lui aussi, qui demande quand la catégorie des
+« ind-objets » d'une petite catégorie est un topos, et une lettre qui
+propose d'énoncer pour des \emph{champs} (des faisceaux à valeurs dans les
+catégories) le théorème de changement de base lisse.
+
+Enfin, en 1967, un échange de lettres avec Dieudonné sur la façon d'énoncer,
+sans hypothèse noethérienne, un critère des EGA : Grothendieck y construit un
+contre-exemple, prouve un lemme sur le nombre de générateurs d'un module, et
+signale qu'une démonstration d'EGA IV est en défaut, la question se ramenant à
+savoir si un module « localement projectif » est projectif. Ni l'un ni
+l'autre ne tranche ; la réponse viendra de Raynaud et Gruson.
+
+Ce que cherche un lecteur qui veut aller plus loin : la théorie des topos
+(topos cohérents, théorème de Deligne sur les points), la topologie
+d'Alexandrov et la dualité de Birkhoff pour le dictionnaire fini, les espaces
+algébriques et les champs de Deligne--Mumford pour les étendues, et la
+descente de la projectivité pour la dernière question.
+
+\keywords{SGA re-edition, étale topos, coherent topos, locally finitely presentable topos, Ind-completion, smooth base change, Giraud stacks, hypercovering, Alexandrov topology, Birkhoff duality, algebraic space, Deligne-Mumford stack, étendue, formal scheme, formally smooth morphism, descent of projectivity, cotangent complex, local invariant cycle theorem}
+\end{resume}
+
+\section*{Le fil du dossier, et ses conventions}
+
+Le dossier est rangé par séminaire, sous des chemises de papier bistre
+inscrites en haut à droite ; ces chemises donnent son fil, et la lecture le
+suit :
+
+\begin{itemize}
+\item pages 2 à 4 --- la réédition dans son ensemble : ce qui reste à
+frapper, deux lettres du 3.11.1970 ;
+\item « SGA 1 », page 6 --- la dernière page d'une préface ;
+\item « SGA 4 », pages 8 à 49 --- de loin la plus longue section :
+l'exercice IV 4.10.6, le sommaire de VI, le plan en trois fascicules, les
+notes exposé par exposé, un exercice inédit sur $\mathrm{Ind}(C)$, la lettre
+sur « 2.1.1 », la réponse d'Artin, un § 10 inédit de VIII sur les étendues
+algébriques, la liste de terminologie, le dictionnaire des topos finis ;
+\item « SGA 5 », pages 51 à 54 --- notes, et la lettre de Hartshorne ;
+\item « SGA 6 », pages 56 à 71 --- notes, et les commentaires dactylographiés
+d'un lecteur sur l'exposé X ;
+\item « SGA 7 », pages 73 à 82 --- la lettre à Ferrand (qui concerne en fait
+SGA 6), la lettre de Deligne de 1968, les appendices prévus ;
+\item « Réédition EGA I », pages 84 à 97 --- la table des matières de la
+nouvelle édition, et l'échange avec Dieudonné d'août-septembre 1967 ;
+\item « EGA II », page 99.
+\end{itemize}
+
+Les dates écrites vont du 27.8.1967 au 23.6.1971 ; elles ne suivent pas
+l'ordre des pages. Plusieurs pièces n'ont \emph{pas d'année} et leur datation
+est inférée : les lettres de Verdier « 16 Juillet » (page 8) et « le 28 Mai »
+(page 13), données pour 1971 parce qu'elles répondent à la lettre du
+18.5.1971 ; la lettre sur « 2.1.1 » (pages 29-30) et celle d'Artin (pages
+33-34), sans date du tout. Ces doutes sont rappelés là où ils comptent.
+
+Les lettres et textes d'autres personnes --- Verdier, Artin, Hartshorne,
+Deligne, Dieudonné, un lecteur anonyme de SGA 6 --- ne sont pas reproduits
+dans la transcription, qui en donne seulement une notice ; cette lecture
+n'en dit pas plus que ces notices. Ses lettres à lui sont lues en entier.
+
+Notations : $\widetilde{X}_{\text{ét}}$ est le topos étale du schéma $X$ ;
+$\widehat{C}$ la catégorie des préfaisceaux d'ensembles sur une petite
+catégorie $C$ (les pages écrivent $C^{\wedge}$) ; $\mathrm{Ouv}(E)$ l'ensemble
+ordonné des sous-objets de l'objet final d'un topos $E$ ; $\mathrm{Ind}(C)$ la
+catégorie des ind-objets de $C$. Un renvoi « VI 1.25 » se lit dans le
+séminaire de la section où l'on se trouve.
+
+Ce que le dossier annonce sans l'établir : la suite (5°) de l'exercice
+4.10.6, interrompue ; les démonstrations de l'exercice sur $\mathrm{Ind}(C)$
+et des exercices du § 10 de VIII, seulement énoncés ; et, dans l'échange avec
+Dieudonné, l'implication a) $\Rightarrow$ c) de EGA I 10.10.5 sans hypothèse
+noethérienne, que ni l'un ni l'autre n'arrive à prouver ou à réfuter.
+
+\pagerange{2}{4}
+\section*{La réédition dans son ensemble (pages 2 à 4)}
+
+Une feuille dactylographiée, sans date ni signature, intitulée « SGA :
+Manuscripts à frapper », fait l'état des lieux séminaire par séminaire. Pour
+SGA 4 : la fin de IV, V et la fin de VI par Verdier, VI B et un appendice à
+XVII par Saint-Donat, les tables et l'index ; pour SGA 5 : IV (rédacteur
+inconnu), VII par Jouanolou, XI et XII par Bucur, XIV par lui-même ; pour
+SGA 6 : XI par Ferrand ; pour SGA 7 : des exposés sans rédacteur désigné, V
+par Mme Raynaud, VI par Rim. Les nombres de pages sont estimés ; un nombre
+souligné signale un manuscrit disponible, un point d'interrogation un exposé
+qui ne sera peut-être jamais rédigé.\footnote{Au crayon, vraisemblablement de
+sa main sans que ce soit établi : la ligne de SGA 1 (un index) est barrée,
+suivie de deux mots dont le dernier se lit peut-être « Saarbach » ; « écrire
+Bucur » en face de SGA 5 ; un trait ondulé qui annule tout le bloc de SGA 6 ;
+« écr. Deligne » en face de SGA 7 V et VI.}
+Le total est d'environ 250 pages prêtes, et 200 à venir pour SGA 4,
+« cela dépendra de Mr. Verdier, qui est à Brandeis cette année ».\footnote{La
+feuille n'est pas datée ; la mention de Verdier à Brandeis et l'accord avec
+les lettres du 3.11.1970 la placent à l'automne 1970, sans que ce soit
+établi.}
+
+Deux doubles de lettres du 3.11.1970 suivent. À Mme Michon, à l'IHÉS : il
+manque, parmi les exemplaires d'archives qu'il a emportés, SGA 4 XVII et la
+première partie de VI, dont il a besoin pour « l'édition photooffset en
+préparation ». À Deligne : a-t-il fini de lire l'exposé de Rim (SGA 7 VI) ?
+corrigera-t-il la frappe de son exposé SGA 4 XVIII ? a-t-il des nouvelles de
+Ferrand pour SGA 6 XI ?
+
+\pagerange{6}{6}
+\section*{SGA 1 : la fin d'une préface (page 6)}
+
+Sous la chemise « SGA 1 », un seul feuillet tapé, paginé (ix), signé « Massy,
+Août 1970 » : la dernière page de la préface de la réédition de SGA 1, dans
+un état antérieur au texte imprimé.\footnote{La transcription l'a comparé à
+la préface publiée (Lecture Notes 224) : celle-ci dit « immoral et
+dangereux », non « profondément immoral et extrêmement dangereux » ; « quitte
+l'IHES le 30 septembre 1970 », non « le 30 Septembre prochain » ; elle
+attribue la décision de ne plus diffuser à une demande de l'auteur
+(« J'ai demandé à M. Motchane \ldots »), là où ce feuillet dit que le
+directeur « s'est déclaré d'accord » ; et elle ajoute un remerciement à
+J.~P. Delale pour les index.}
+Il y explique s'être trouvé travailler trois ans dans une institution « alors
+qu'elle participait à [son] insu à un mode de financement » qu'il juge
+« profondément immoral et extrêmement dangereux » ; seul de cet avis parmi
+ses collègues, il quitte l'IHÉS et suspend toute collaboration scientifique
+avec lui tant qu'il acceptera de telles subventions ; l'IHÉS cessera de
+diffuser ses textes et le Séminaire, que Springer publiera dans les
+\emph{Lecture Notes}, en prenant à sa charge la frappe des exposés nouveaux
+et manquants. C'est ce qui donne au dossier entier sa raison d'être.
+
+\pagerange{8}{16}
+\section*{SGA 4 : l'exercice IV 4.10.6 (pages 8 à 16)}
+
+\subsection*{Une correspondance autour d'un exercice faux}
+
+Le premier objet de la section SGA 4 est un exercice. La lettre du 3.11.1970
+à Verdier (page 15) rappelle ce qui manque pour que SGA 4 soit complet : V, et
+VI à partir du § 5, que Verdier rédige ; VI B de Saint-Donat, qu'il doit
+relire ; l'appendice à XVII, que Grothendieck lui envoie. Six mois plus tard,
+le 18.5.1971 (page 14), la réédition est « bloquée » : il manque les deux
+appendices de Deligne (« assez de points », « image inverse d'un plat ») et
+une version corrigée de l'exercice IV 4.10.6, dont il a « entièrement
+oublié ce qui était canulé ». « C'est un exercice qui sert tout le temps
+(!), il ne devrait donc pas être question de le vider. Il doit y avoir
+quelque chose de vrai à mettre à la place du faux \ldots » Le même jour il
+demande à Verdier de demander à Artin ce qu'il faut faire des exposés
+postérieurs à VI.
+
+Verdier répond (page 13), d'une lettre que la transcription ne reproduit
+pas : selon sa notice, les deux appendices iront aux exposés V et VI, une
+« version non canulée de 4.10.6 » suivra, et il demande une copie de IV
+§§ 9-13.\footnote{Cette lettre est datée « le 28 Mai » sans année ; 1971 se
+déduit de l'en-tête de Brandeis et de la lettre à laquelle elle répond. La
+réponse de Grothendieck du 23.6.1971 (page 12) remercie pour une lettre
+« du 23 Mai » --- la page porte bien 23. Laquelle des deux dates est la
+bonne reste à vérifier sur le fac-similé.}
+Le 23.6.1971 (page 12), l'exercice n'est toujours pas arrivé : la dactylo
+termine, Springer rend la machine louée, et la publication du fascicule 1 de
+SGA 4 est remise « sine die ». La nouvelle rédaction arrive enfin avec une
+lettre de Verdier datée « 16 Juillet », sans année (page 8) ; d'après la
+notice de la transcription, elle l'envoie avec des broutilles relevées dans
+IV n°s 9 sqq., et signale qu'il manque le n° 14 ; Grothendieck note en marge
+« demander à Messing ».\footnote{L'année 1971 est inférée, non écrite : la
+lettre envoie l'exercice corrigé que réclament les lettres du 18.5.1971 et du
+23.6.1971.}
+Le tapuscrit joint (pages 9 à 11) est la rédaction de Verdier ; la
+transcription n'en donne que l'objet --- un $\mathcal{U}$-site $S$ de
+topologie moins fine que la canonique, une partie $\underline{M}$ de
+$\mathrm{Fl}(S)$ soumise à des conditions a) à d), le « petit site »
+$S(X)$, les foncteurs $\mathrm{Res}_X$ et $\mathrm{Prol}_X$, le plongement du
+« petit topos » $S(X)^{\sim}$ dans le « gros topos » $(S_{/X})^{\sim}$, puis
+l'exercice 4.10.7 ---, et il n'en est pas dit plus ici.\footnote{Le modèle
+est celui du topos étale d'un schéma $X$ (petit topos, faisceaux sur les
+$X$-schémas étales) plongé dans le topos de tous les $X$-schémas munis de la
+topologie étale (gros topos). Ce rapprochement est le nôtre.}
+
+\subsection*{Une généralisation, inachevée}
+
+Sur papier de l'IHÉS, une page (16) intitulée « Continuation de SGA 4 IV
+4.10.6 » commence une généralisation des points 3° et 4° de l'exercice :
+au lieu du petit site $S(X) \subset S_{/X}$, une sous-catégorie pleine
+quelconque. Lue en clair :
+
+\emph{Soit $S_0 \subset S$ une sous-catégorie pleine telle que}
+
+(i) \emph{si $u : X \to Y$ est dans $\underline{M}$ et $Y \in S_0$, alors
+$X \in S_0$ ;}
+
+(ii) \emph{pour tout $X \in S$ il existe une famille couvrante $(X_i \to X)$
+dont chaque $X_i$ admet un morphisme vers un objet de $S_0$.}
+
+On munit $S_0$ de la topologie induite. Le feuillet se propose de prouver
+qu'une famille de morphismes de $S_0$ est couvrante dans $S_0$ si et
+seulement si elle l'est dans $S$ --- ce qu'il paraphrase en disant que
+l'inclusion $S_0 \to S$ est cocontinue ---, puis que l'ensemble
+$\underline{M}_0$ des $u : X \to Y$ de $\underline{M}$ avec $Y \in S_0$ (donc
+$X \in S_0$ par (i)) satisfait dans $S_0$ les conditions a) à d) de 1°, et
+enfin de construire, comme au 3°, une restriction
+$\mathrm{Res} : S^{\sim} \to S_0^{\sim}$ commutant aux limites inductives et
+projectives et un prolongement
+$\mathrm{Prol} : S_0^{\sim} \to S^{\sim}$ exact et pleinement fidèle.
+Rien de cela n'est démontré : la feuille s'arrête au milieu de cette
+dernière phrase.\footnote{La fin de la page est très cursive ; « cocontinu »,
+« ssi », « commute », « pleinement fidèle » sont des lectures incertaines,
+guidées par le 3° de l'exercice. Deux remarques de notre fait. L'hypothèse
+(ii), telle qu'écrite (« le crible engendré par les objets de $S_0$ est
+couvrant »), demande seulement que les $X_i$ \emph{s'envoient} dans des
+objets de $S_0$ ; c'est plus faible que l'hypothèse du lemme de comparaison
+(SGA 4 III 4.1 : tout objet de $S$ est couvert par des objets de $S_0$), qui
+est ce qui donne d'ordinaire $S_0^{\sim} \simeq S^{\sim}$. Ici on ne veut
+justement pas une équivalence, mais un plongement analogue à celui du petit
+topos dans le gros, et c'est (i), la stabilité par les flèches de
+$\underline{M}$, qui doit en tenir lieu ; le feuillet ne dit pas comment. Par
+ailleurs, « couvrante dans $S_0$ si et seulement si couvrante dans $S$ » est
+la propriété qui rend l'inclusion à la fois continue et cocontinue lorsque
+$S_0$ est stable par les produits fibrés qu'on utilise ; elle n'est pas, à
+elle seule, la définition de la cocontinuité.}
+
+\pagerange{17}{17}
+\section*{SGA 4 : le sommaire de l'exposé VI (page 17)}
+
+Un sommaire dactylographié de l'exposé VI, « Conditions de finitude », repris
+à l'encre, donne l'ordre qu'il voulait :
+
+\begin{enumerate}
+\item conditions de finitude pour les objets et flèches d'un topos (pages 1
+à 19 du tapuscrit) ;
+\item pour un topos (20 à 37) ;
+\item pour un morphisme de topos (38 à 46) ;
+\item pour un topos obtenu par recollement (47 à 65) ;
+\item cohomologie d'une limite inductive de faisceaux sur un topos cohérent ;
+\item catégories fibrées et limites inductives (rappels) ;
+\item sites et topos fibrés ;
+\item limites projectives de topos ;
+\item cas des limites projectives filtrantes de topos cohérents à morphismes
+de transition cohérents : passage à la limite en cohomologie ;
+\item appendice, par P. Deligne : un topos cohérent a suffisamment de
+points.\footnote{L'ordre ci-dessus est celui qui résulte des renumérotations
+à l'encre : le n° 9 dactylographié devient 5 et remonte après le n° 4, les
+n°s 5 à 7 deviennent 6 à 8 ; le numéro du « 8 » dactylographié est surchargé
+d'un chiffre illisible, et nous le plaçons en 9 sous réserve. Le n° 4 tapé
+était « Constructibilité » ; il est barré et remplacé à la main. La ligne 10
+est entièrement manuscrite, d'une écriture très rapide ; « suffisamment de
+points » est lu sous réserve. Que l'appendice soit le théorème de Deligne sur
+les points des topos cohérents est une identification de notre fait,
+cohérente avec la lettre du 18.5.1971 (« assez de points »).}
+\end{enumerate}
+
+Deux paragraphes dactylographiés, ensuite annulés au crayon, disaient que le
+n° 4 contiendrait « le sorite des groupes constructibles », des faisceaux de
+torsion, de la constructibilité pour les Modules et leurs complexes, et que
+l'auteur pensait le rédiger lui-même « mais ne le garanti[t] pas ». Reste,
+non barrée, l'annonce que la rédaction des n°s 1 à 3 est complète, à quelques
+exemples près : un topos localement algébrique non algébrique, et --- ajouté
+au crayon --- un topos ayant une famille génératrice d'objets cohérents qui
+n'est pas localement algébrique.\footnote{Le feuillet est tenu pour un
+tapuscrit de lui, inédit, d'après les arguments de la transcription : il
+diffère du sommaire publié de VI, et son auteur y annonce rédiger lui-même un
+numéro. Une note pâle au crayon en tête (« 1.9.5, 1.23, 2.9 --- à reporter au
+n° 3 ») n'est lue qu'en partie.}
+
+\pagerange{18}{20}
+\section*{SGA 4 : renvois, fascicules, stencils (pages 18 à 20)}
+
+Trois pages de travail. La première relève dans le tirage de SGA 4 XVII six
+renvois à vérifier : à V (pages 75, 170, 175), à $f_{!}$ pour les ensembles
+pointés et les faisceaux en groupes (« Consulter Verdier »), à VI B, et à la
+seconde édition d'EGA II pour le lemme de Chow.
+
+La deuxième est un plan de SGA 4 en trois fascicules, avec un nombre de pages
+par exposé : le premier (préface, exposés I à IV, tables et index) d'environ
+570 pages ; le second, exposés V à XI, de 432 pages (V : 100, VI : 150, VI B :
+30, VII : 24, VIII : 46, IX : 42, X : 21, XI : 19 --- la somme est exacte) ;
+le troisième, « Théorèmes de changement de base et de dualité globale »,
+exposés XII à XIX, d'environ 640 pages.\footnote{Les nombres donnés pour XII à
+XIX (57, 15, 24, 38, 44, 210, 200, 51) font 639 ; la page écrit « $\#\,640$ »,
+le signe valant « environ ». Les titres des fascicules sont des lectures
+douteuses. Les trois tomes publiés en 1972-1973 (Lecture Notes 269, 270, 305)
+coupent autrement, après IV et après VIII ; ce rapprochement est le nôtre.}
+
+La troisième donne des instructions pour un stencil : insérer le texte
+manquant comme une « p. 83 bis », corriger à la page 85 des
+$\mathbb{L}g^{*}$ en $\mathbb{L}g'^{*}$ et inversement --- puis tout est
+barré : « Le texte oublié a été reporté ici \emph{par erreur} !!! ». Une
+addition au crayon, $210 + 76 + 250 = 536$, est juste.
+
+\pagerange{21}{27}
+\section*{SGA 4 : notes exposé par exposé (pages 21 à 27)}
+
+\subsection*{Exposé VI}
+
+Une liste rapide (page 21) : retoucher l'introduction ; au § 4, remplacer la
+notation $E_{/\varphi}$ par $\varphi\backslash E$ ; changer l'exercice sur les
+topos finis ; en VI 1.25, remplacer une condition d'existence de sommes par
+« il existe des limites inductives finies » ; ajouter un exercice sur les
+limites inductives de topos.\footnote{Plusieurs mots de cette page sont
+illisibles ; on n'a retenu que les points lisibles.}
+
+\pagerange{22}{22}
+\subsection*{Un exercice inédit : quand $\mathrm{Ind}(C)$ est-il un topos ?}
+
+La page 22, cotée au crayon « SGA 4 VI 2 », est un exercice dactylographié qui
+n'est pas dans l'exposé VI publié.\footnote{La transcription l'a vérifié sur
+la réédition d'Orgogozo : VI n'y contient aucun exercice sur
+$\mathrm{Ind}(C)$ comme topos, ni le mot « enveloppe de Karoubi ».}
+Le voici en clair.
+
+\emph{Exercice. Soient $C$ une petite catégorie et $C'$ une enveloppe de
+Karoubi de $C$ (SGA 4 IV 7.5 b). Les conditions suivantes sont
+équivalentes :}
+
+(i) \emph{$\mathrm{Ind}(C)$ est un $\mathcal{U}$-topos ;}
+
+(i bis) \emph{le foncteur canonique $\mathrm{Ind}(C) \to \widehat{C}$ admet un
+adjoint à gauche exact à gauche ;}\footnote{La page dit « un adjoint à
+droite qui est exact à gauche ». Lu à la lettre, c'est une condition vide
+quant à l'exactitude : un adjoint à droite commute toujours aux limites
+projectives. Ce que demande le critère de Giraud --- et ce qui équivaut à (i)
+pour une sous-catégorie pleine de $\widehat{C}$ stable par limites inductives
+filtrantes --- est que $\mathrm{Ind}(C)$ soit une sous-catégorie
+\emph{réflexive} de $\widehat{C}$ à réflecteur exact à gauche, c'est-à-dire
+que l'inclusion ait un adjoint à gauche exact à gauche (le « faisceau
+associé »). Nous corrigeons en ce sens.}
+
+(i ter) \emph{il existe une topologie sur $C$ pour laquelle les faisceaux sont
+exactement les préfaisceaux ind-représentables ;}
+
+(ii) \emph{dans $C'$ les limites inductives finies existent, le foncteur
+canonique de $C'$ dans la catégorie des faisceaux y commute, pour la
+topologie dont les familles couvrantes sont celles qui sont raffinées par une
+famille finie épimorphique (ou épimorphique effective universelle) ;}
+
+(iii) \emph{lorsque $C$ a des limites projectives finies, de sorte qu'on peut
+prendre $C' = C$ : $C$ a des limites inductives finies et satisfait la
+condition ST) de I 8.8 f) ;}
+
+(iv) \emph{il existe un topos $E$ engendré par sa sous-catégorie pleine
+$E_{PF}$ et une équivalence $C' \simeq E_{PF}$.}
+
+\emph{De plus, la topologie de (i ter) est alors celle de (ii), le topos $E$
+de (iv) est équivalent à $\mathrm{Ind}(C)$, et ce topos est parfait si et
+seulement si les limites projectives finies sont représentables dans $C'$.}
+
+Le sens moderne est clair. $\mathrm{Ind}(C)$ ne dépend que de l'enveloppe de
+Karoubi --- d'où le rôle de $C'$, et la remarque juste qu'une catégorie à
+limites projectives finies est déjà karoubienne. La condition (iv) dit que
+$\mathrm{Ind}(C)$ est un topos \emph{localement de présentation finie} :
+un topos engendré par ses objets de présentation finie, $C'$ étant
+précisément la catégorie de ceux-ci, et l'on a alors
+$E \simeq \mathrm{Ind}(E_{PF})$. La topologie de (ii) est la topologie
+« finitaire », celle des topos cohérents.\footnote{Nous lisons $E_{PF}$
+comme la sous-catégorie des objets de présentation finie ; la parenthèse qui
+devait donner le renvoi est restée vide, et la condition ST) de I 8.8 f) n'est
+pas rappelée sur la page. Les termes « localement de présentation finie »
+(Gabriel--Ulmer, 1971) et « topologie finitaire » sont postérieurs ou
+extérieurs à la page. L'énoncé est donné comme un exercice, sans
+démonstration ; nous n'en avons vérifié en détail que (i) $\Leftrightarrow$
+(i bis) corrigé et (i) $\Leftrightarrow$ (iv), et « parfait » est pris au
+sens de VI 2.9.1, que la page ne rappelle pas.}
+
+\pagerange{23}{24}
+\subsection*{Exposés VII et IX : la cohérence du topos étale}
+
+Page 23, deux ajouts à l'exposé VII :
+
+\emph{5.6. (a) Le topos $\widetilde{X}_{\text{ét}}$ est localement cohérent ;
+il est cohérent si et seulement si le schéma $X$ est quasi-compact et
+quasi-séparé.}\footnote{La page ajoute « (resp. quasi-séparé) » après
+« quasi-compact quasi-séparé », sans l'énoncé parallèle qui le justifierait ;
+nous l'omettons. Les « (réf) » ajoutés au-dessus de la ligne attendent des
+renvois.}
+
+\emph{(b) Si $(X_i)_{i \in I}$ est un système projectif filtrant de schémas à
+morphismes de transition affines et $X = \varprojlim X_i$ (EGA IV 8), alors
+$\widetilde{X}_{\text{ét}}$ est la limite projective, au sens des topos, des
+$\widetilde{X_i}_{\text{ét}}$.}\footnote{L'indice de la limite est lu « top »
+sous réserve.}
+
+\emph{Corollaire 5.6.1. Un objet $X'$ de $\mathrm{Et}(X)$ est quasi-compact
+(resp. cohérent) dans $\widetilde{X}_{\text{ét}}$ si et seulement si le schéma
+$X'$ est quasi-compact (resp. quasi-compact et quasi-séparé).}\footnote{La
+page est elliptique (« est (quasi-compact) \ldots\ ssi $X'$ est q.c. (resp.
+coh.) ») ; nous restituons l'énoncé parallèle. Elle signale aussi « VII 2.1
+c) (p. 9) » comme erroné, sans dire en quoi.}
+
+Ces énoncés servent aussitôt. La page 24 est la note annoncée pour la page 8
+de l'exposé IX : elle prouve que la notion de faisceau d'ensembles
+constructible de IX 2.3 coïncide avec la notion de finitude de VI 1.9.3, et
+du même coup que $\widetilde{X}_{\text{ét}}$ satisfait aux conditions
+équivalentes de VI 1.25. L'argument, une fois la page débarrassée d'un
+premier essai qu'il a barré, est le suivant.\footnote{Un premier état d'une
+quinzaine de lignes est annulé de longs traits obliques ; il identifiait la
+seconde catégorie aux objets cohérents et invoquait VI 1.24. Nous ne lisons
+que la version maintenue, dont l'ordre des premiers mots est lui-même
+incertain.}
+La question est locale ; on suppose $X$ affine, donc cohérent. Soient $C$ et
+$C'$ les sous-catégories strictement pleines de $\widetilde{X}_{\text{ét}}$
+formées des faisceaux constructibles au sens de IX 2.3 et au sens de VI 1.9.3 ;
+il s'agit de montrer $C = C'$. Par VI 2.9 b), il suffit que $C$ soit stable
+par limites projectives et inductives finies, génératrice, et formée d'objets
+quasi-compacts ; les deux premiers points sont IX 2.6 (i) et 2.7.2. Reste la
+quasi-compacité : par IX 2.7, tout $F \in C$ est quotient d'un $G$
+représentable par un schéma quasi-compact et quasi-séparé ; $G$ est
+quasi-compact dans le topos par 5.6.1 ci-dessus, et un quotient d'un objet
+quasi-compact l'est encore (VI 1.3).
+
+Il ajoute : « Bien entendu, il y aurait eu lieu de refondre les §§ 1, 2 du
+présent exposé, en les rattachant aux notions générales de finitude de VI.
+Nous laissons ce soin de rédaction aux générations futures. »
+
+\pagerange{25}{27}
+\subsection*{Les autres exposés}
+
+Une page au crayon (25) note : pour IV, les modules plats sur un anneau non
+commutatif et $f_{!}$ pour des foncteurs en groupes ; pour XVII 4.2.3, un
+renvoi à V 3.7 peut-être changé ; pour XVIII, un théorème de finitude pour les
+faisceaux d'anneaux de torsion quelconques ; une préface à la seconde édition
+qui signale les autres contributions de Deligne (intégration et trace des
+torseurs) ; « Que faire avec C.D. de Verdier : inclure ? » ; et pour IV § 8,
+des exercices importants : topos locaux, pseudo-ponctuels,
+$\widehat{I}$ pour $I$ ordonné.\footnote{« C.D. » s'entend vraisemblablement
+des catégories dérivées de Verdier ; lecture de notre fait. Plusieurs mots de
+la page sont incertains.}
+Une demi-feuille (27) : compléter XVI 1 « comme dans Giraud ». Entre les
+deux, un feuillet tapé de SGA 7 VII (les biextensions, 2.1.1 à 2.2.3), texte
+publié, a servi de brouillon et porte quelques retouches à l'encre (page
+26).
+
+\pagerange{29}{30}
+\section*{Une lettre sur « 2.1.1 » : le changement de base lisse pour les champs (pages 29 et 30)}
+
+Une lettre dactylographiée, sans date, sans formule d'appel ni signature,
+s'adresse à quelqu'un qu'il tutoie et dont le texte, divisé en chapitres,
+contient un énoncé « 2.1.1 » sur les champs.\footnote{Le destinataire n'est pas
+nommé sur les feuillets et la transcription ne le devine pas ; nous non plus.
+La lettre n'a pas de date : la mention d'une « réédition de SGA 4 » la place
+vers 1970-1971, ce qui n'est pas établi. Au crayon en tête : « SGA 4 XVI ».}
+Sur le fond, dit-il, 2.1.1 se ramène au cas où $X$ est affine, et c'est alors
+une conséquence du théorème de changement de base de SGA 4 XVI 1.1 ; mais
+utiliser là toute la force du changement de base propre est « abusif » :
+interprété comme un énoncé d'acyclicité globale, 2.1.1 se ramène au cas
+particulier 2.1.5, puis au cas d'un corps de degré de transcendance 1, et par
+là au changement de base pour le $H^1$ premier à $p$ d'une courbe propre et
+lisse. Il propose de l'énoncer en toutes lettres dans la réédition de SGA 4,
+ce qui dispensera le correspondant de le prouver ; sur la rédaction, il lui
+reproche d'avoir « tout présent[é] à l'envers », demande de regrouper 2.1.1,
+2.1.7 et 2.1.5, de remplacer « pro-lisse resp. lisse » par « localement
+$L$-1-asphérique », et de reporter en IV ou V les énoncés 2.12, 2.1.3, 2.1.4,
+2.1.7.1, qui « n'ont rien à voir avec les schémas ».
+
+Le texte joint (page 30) est l'énoncé qu'il propose. Les hypothèses que la
+page laisse implicites sont rétablies.\footnote{Les deux renvois à SGA 4 XV
+qui donnent les exemples (« un morphisme lisse », « une limite projective
+filtrante de $S$-schémas lisses à transitions affines ») ne valent que si $L$
+est formé de nombres premiers inversibles sur $S$ : pour $p$ égal à une
+caractéristique résiduelle, le changement de base lisse est faux (le $H^1$
+d'Artin--Schreier de la droite affine). De même, l'extension
+$k \subset k'$ du corollaire n'est universellement localement
+$L$-1-asphérique que pour $L$ premier à la caractéristique de $k$. La page ne
+le dit pas ; nous le supposons.}
+
+\emph{Théorème 2.1.1. Soit $L$ un ensemble de nombres premiers inversibles sur
+$S$, et $f : S' \to S$ un morphisme universellement localement
+$L$-1-asphérique (SGA 4 XV 1.11) --- par exemple un morphisme lisse (XV 2.1),
+ou un morphisme tel que $S'$ soit limite projective d'un système projectif
+filtrant de $S$-schémas lisses à morphismes de transition affines (XV 1.13
+(ii)). Soient $g : X \to S$ un morphisme de schémas, le carré cartésien}
+
+\begin{tikzcd}
+X \arrow[d, "g"'] & X' \arrow[l, "f'"'] \arrow[d, "g'"] \\
+S & S' \arrow[l, "f"]
+\end{tikzcd}
+
+\emph{$G$ un ind-$L$-champ sur $X$ et $G' = f'^{*}G$ son image inverse sur
+$X'$.}
+
+\emph{a) Si $f$ est un morphisme local de schémas strictement locaux, le
+foncteur $G(X) \to G'(X')$ est une équivalence de catégories.}
+
+\emph{b) Si $g$ est cohérent (quasi-compact et quasi-séparé), le morphisme de
+changement de base $f^{*}g_{*}G \to g'_{*}f'^{*}G$ est une équivalence de
+champs sur $S'$.}
+
+\emph{Corollaire 2.1.2. Soient $k$ un corps séparablement clos, $k'$ une
+extension séparablement close de $k$, $L$ un ensemble de nombres premiers
+distincts de la caractéristique, $X$ un $k$-schéma et $X' = X \otimes_k k'$.
+Pour tout ind-$L$-champ $G$ sur $X$, d'image inverse $G'$ sur $X'$, le
+foncteur $G(X) \to G'(X')$ est une équivalence de catégories} --- car
+$\mathrm{Spec}(k') \to \mathrm{Spec}(k)$ est universellement localement
+$L$-1-asphérique (renvoi à SGA 4 XVI laissé en blanc).
+
+La démonstration est esquissée : a) par SGA 4 XVI, « nouvelle édition ! », et
+V ; b) en se ramenant à a) par les lemmes 2.1.7.2 et 2.1.7.4 renumérotés.
+« En tout, ça devrait faire 3 pages au Chap. VII au maximum. »
+
+C'est le théorème de changement de base lisse en degrés $\le 1$, pour des
+coefficients non commutatifs : sur un champ en groupoïdes, l'énoncé couvre à
+la fois les sections ($H^0$) et les torseurs ($H^1$ non abélien au sens de
+Giraud).\footnote{« Ind-$L$-champ » est le terme de la page ; nous l'entendons
+comme un champ dont les faisceaux d'automorphismes sont des
+ind-$L$-faisceaux, ce que la ligne tapée biffée après « champ » disait
+explicitement.}
+
+\pagerange{32}{35}
+\section*{Les réponses d'Artin, et d'autres notes (pages 32 à 35)}
+
+Une lettre d'Artin en anglais (pages 33-34), sans date ni signature sur les
+feuillets, répond à ses questions sur les exposés XIII, XIX, X, XII et IX de
+SGA 4 ; la transcription ne la reproduit pas. D'après sa notice, Artin accepte
+l'hypothèse noethérienne en XIII 3.1 si Grothendieck la juge nécessaire,
+accepte des retouches dans XIX, et fournit des références : Ax pour X, son
+article « Algebraic approximation of structures over complete local rings »
+pour XII 5.10, et des références pour le théorème de Tsen en IX.\footnote{La
+lettre n'est pas datée. L'article qu'elle cite comme à paraître a paru aux
+Publications de l'IHÉS, 36 (1969), ce qui la place vers cette date ---
+datation non établie.}
+La page 32, de sa main, en tire la liste : compléter des références (Giraud
+pour XII, les travaux récents d'Artin pour XII 5.10, le théorème de Tsen pour
+IX p. 34), revoir l'hypothèse noethérienne de XIII 3.1, des pages de XIX.
+
+La page 35 ajoute, pour VIII, qu'il faut renvoyer à IV pour les généralités
+sur les foncteurs fibres ; elle note aussi, avant de le barrer, qu'un univers
+est « \emph{non vide} ! ».
+
+\pagerange{37}{37}
+\section*{Cohomologie d'un topos de préfaisceaux (page 37)}
+
+Une page au crayon, entre des notes sur SGA 4 XVIII (Deligne) et SGA 5 VII,
+propose d'ajouter à l'exposé V quelques mots sur les foncteurs dérivés de la
+limite projective.
+
+a) Sur un topos de préfaisceaux $\widehat{C}$, la cohomologie est celle de la
+catégorie : pour un préfaisceau abélien $F$,
+\[
+H^n(\widehat{C}, F) \simeq \varprojlim\nolimits^{(n)}_{C^{\circ}} F ,
+\]
+les foncteurs dérivés de la limite projective sur $C^{\circ}$.\footnote{La
+page écrit $\varprojlim^{(n)}_{C}$ ; $F$ étant contravariant sur $C$, la
+limite est prise sur $C^{\circ}$. L'objet final de $\widehat{C}$ est le
+préfaisceau constant, et $H^0 = \mathrm{Hom}(\mathbb{Z}, F) = \varprojlim F$ ;
+l'énoncé est exact.}
+
+b) Pour un topos général, il cherche une formule de type Čech :
+\[
+H^n(\widetilde{E}, F) \simeq \varinjlim_{\mathcal{U}}\ \varprojlim\nolimits^{(n)}_{\mathcal{U}}\, F ,
+\]
+la limite inductive portant sur les cribles couvrants $\mathcal{U}$ --- en
+marge : « Si ça marche \ldots ».\footnote{Le membre de droite est en partie
+illisible ; nous le complétons par $F$. Ainsi écrite, la formule est vraie
+pour $n \le 1$ mais fausse en général : la limite sur les cribles est une
+cohomologie de Čech, qui diffère de la cohomologie dérivée en degré $\ge 2$.
+La forme exacte remplace les cribles par les \emph{hyperrecouvrements} ---
+c'est le théorème de Verdier (SGA 4 V 7). La page ne dit pas que ça marche.}
+
+\pagerange{38}{39}
+\section*{SGA 4 VIII § 10 : étendues algébriques et espaces algébriques (pages 38 et 39)}
+
+Un tapuscrit coté « SGA 4 VIII » porte un § 10 qui n'est ni dans l'exposé
+publié ni dans le tirage original de l'IHÉS.\footnote{Vérification faite par
+la transcription : l'exposé VIII publié et le tapuscrit IHÉS s'arrêtent au
+§ 9. Les deux entrées manuscrites de la liste de terminologie (page 44) citent
+pourtant « étendue algébrique VIII 10.2 » et « espace algébrique VIII 10.4 ».}
+Il est annoncé comme une suite d'exercices « qui ne seront pas utilisés dans
+la suite du Séminaire ». Les renvois à IV y sont pour la plupart laissés en
+blanc.
+
+\emph{10.1. Un schéma $X$ se reconstruit, à isomorphisme unique près, à partir
+du topos annelé $(\widetilde{X}_{\text{ét}}, \mathcal{O}_X)$ connu à
+équivalence près.} Les sous-objets de l'objet final du topos étale sont les
+ouverts de $X$, d'où l'espace sous-jacent, $\mathrm{Top}(X) \simeq
+\mathrm{Ouv}(\widetilde{X}_{\text{ét}})^{\sim}$ (VIII 6.1) ; on conclut par IV
+4.2.3. Plus précisément, \emph{pour deux schémas $X$, $X'$, l'application
+$\mathrm{Hom}(X, X') \to \mathrm{Homtoplocan}(\widetilde{X}_{\text{ét}},
+\widetilde{X}'_{\text{ét}})$ est une équivalence de la catégorie discrète
+$\mathrm{Hom}(X, X')$ sur la catégorie des morphismes de topos localement
+annelés.}\footnote{La notation $\mathrm{Homtoplocan}$ est celle de IV 11
+(« topos localement annelés »). On trouve ces énoncés, développés, chez M.
+Hakim, \emph{Topos annelés et schémas relatifs} (1972) ; le rapprochement est
+le nôtre, et rien sur la page n'y renvoie. La page écrit « à isomorphique
+unique près ».}
+
+\emph{10.2. Pour un topos annelé $(E, \mathcal{O}_E)$, les conditions suivantes
+sont équivalentes :}
+
+(i) \emph{il existe une famille $(X_i)$ d'objets de $E$ couvrant l'objet
+final et des schémas $X'_i$ tels que chaque topos annelé induit $E_{/X_i}$
+soit équivalent à $\widetilde{X'_i}_{\text{ét}}$ ;}
+
+(ii) \emph{de même, avec une famille réduite à un seul objet ;}
+
+(iii) \emph{il existe un schéma $X_0$ et une prérelation d'équivalence
+$X_1 \rightrightarrows X_0$ dans la catégorie des schémas, à projection
+$p_1 : X_1 \to X_0$ étale, telle que $(E, \mathcal{O}_E)$ soit équivalent au
+topos annelé obtenu par recollement (descente, IV 9) du diagramme
+semi-simplicial des topos étales annelés de}
+\[
+X_2 \mathrel{\substack{\longrightarrow\\[-2pt] \longrightarrow\\[-2pt] \longrightarrow}} X_1 \rightrightarrows X_0 ,
+\qquad X_2 = (X_1, p_2) \times_{X_0} (X_1, p_1) .
+\]
+
+\emph{On dit alors que $(E, \mathcal{O}_E)$ est une étendue algébrique} ---
+l'analogue des étendues topologiques de IV 9.\footnote{« Semi-simplicial »
+traduit un « ½-simplicial » ajouté à l'encre et lu sous réserve. La
+symétrie de la prérelation entraîne que $p_2$ est étale aussi.}
+
+\emph{10.3. Une étendue algébrique a suffisamment de points ; elle est
+localement annelée, et pour deux étendues algébriques $E$, $E'$, la catégorie
+$\mathrm{Homtoplocan}(E, E')$ est un groupoïde.}
+
+\emph{10.4. Pour une étendue algébrique $E$, les conditions suivantes sont
+équivalentes :} (i) \emph{pour toute étendue algébrique $E'$,
+$\mathrm{Homtoplocan}(E', E)$ est rigide, c'est-à-dire équivalente à une
+catégorie discrète ;} (ii) \emph{le groupe des automorphismes de tout point
+géométrique de $E$ est trivial ;} (iii) \emph{dans une présentation comme en
+10.2 (iii), $(p_1, p_2) : X_1 \to X_0 \times X_0$ est un monomorphisme,
+c'est-à-dire que $X_1$ est une relation d'équivalence étale.}
+
+\emph{On dit alors que $E$ est rigide, ou que c'est un espace algébrique} ---
+avec une note de sa main : « La terminologie est due à M. ARTIN, qui a mis en
+évidence l'importance de cette notion en Géométrie Algébrique. » Le numéro
+10.5 est tapé, et rien ne suit.
+
+Ces pages disent, dans le langage des topos, ce que l'on dit aujourd'hui avec
+des champs. Une étendue algébrique est la donnée d'un groupoïde étale de
+schémas vu à travers son topos étale annelé --- ce qu'on appelle un champ de
+Deligne--Mumford ; 10.3 est le fait que les morphismes de tels champs forment
+des groupoïdes, et 10.4 le critère selon lequel un champ de Deligne--Mumford
+à inertie triviale est un espace algébrique, quotient d'un schéma par une
+relation d'équivalence étale.\footnote{Ces identifications sont les nôtres ;
+elles tiennent à équivalence de topos annelés près, ce qui n'est pas tout à
+fait la même chose qu'une équivalence de champs. Le tapuscrit n'est pas daté ;
+l'article de Deligne et Mumford et la définition des espaces algébriques par
+Artin datent de 1969, et rien sur la page ne cite le premier. Le mot
+« étendue » vient de IV 9 ; dans la théorie des topos il désigne encore un
+topos localement localique.}
+
+\pagerange{40}{44}
+\section*{La terminologie de SGA 4 (pages 40 à 44)}
+
+Une liste dactylographiée, bilingue, donne pour chaque terme de SGA 4 (de VII
+1.1 à XIX 6.7) son équivalent anglais et son renvoi : site et topos étale,
+point géométrique, foncteur fibre, anneau hensélien et strictement local,
+spécialisation et générisation, suite spectrale de Hochschild--Serre, faisceaux
+de torsion et constructibles, Kummer, Hilbert 90, Artin--Schreier,
+$\ell$-dimension cohomologique, fibration élémentaire, changement de base
+propre et lisse, lemme de Chow, théorème de finitude, Lefschetz affine,
+morphismes universellement localement $n$-acycliques et 1-asphériques,
+pureté cohomologique relative et absolue, lemme d'Abhyankar, acyclicité locale,
+changement de base par morphisme régulier. En tête, de sa main : « Attention,
+faire \emph{deux} listes disjointes ! » --- les notations, encore mêlées aux
+termes, sont entourées au crayon pour une seconde liste. Une coupure « Vol. 2 »
+passe devant l'exposé XII ; deux entrées manuscrites terminent la liste :
+\emph{étendue algébrique} (« algebraic spread ») et \emph{espace algébrique},
+renvoyant au § 10 de VIII qu'on vient de lire.\footnote{La page 41, un premier
+état abandonné des cinq premières lignes, ne porte rien de sa main. Les
+entrées « théorème de finitude » ont été regroupées au crayon en une seule,
+avec les renvois XIV 1.1, XVII, XVI 5.1, 5.2, XIX 5.1.}
+
+\pagerange{46}{49}
+\section*{Topos finis : un dictionnaire (pages 46 à 49)}
+
+Au verso de deux feuillets tapés de SGA 4 et de SGA 7, une suite de notes\footnote{Le recto de la page 46 est SGA 4 IV 9.1.13, « Questions ouvertes »
+sur les sous-topos ; celui de la page 48 un feuillet du second exposé sur les
+biextensions de SGA 7. Tous deux sont publiés et barrés.}
+compare quatre sortes d'objets finis : un espace topologique fini sobre $X$,
+un ensemble ordonné fini $I$, un treillis fini $\sigma$ (les ouverts), et un
+topos $E$. Le tiers supérieur de la page 46, barré, contient un premier essai ;
+le reste est un « Dictionnaire » encadré, dont les flèches se lisent ainsi :
+
+\begin{itemize}
+\item $X \mapsto I$ : l'ensemble des points ordonné par générisation ;
+$I \mapsto X$ : $I$ muni de la topologie dont les ouverts sont les cribles ;
+\item $X \mapsto \sigma = \mathrm{Ouv}(X)$ ; $I \mapsto \sigma =
+\mathrm{Crib}(I)$, et en sens inverse un foncteur $\sigma \mapsto$ (ses
+« fibres », lecture incertaine) ;
+\item $E \mapsto \mathrm{Ouv}(E)$ ; $\sigma \mapsto \sigma^{\sim}$, le topos
+des faisceaux sur le treillis ;
+\item $X \mapsto \mathrm{Top}(X)$ ; $E \mapsto \mathrm{Point}(E)$ ;
+\item $I \mapsto \widehat{I}$ ; $E \mapsto \underline{\mathrm{Point}}(E)$, la
+catégorie des points.
+\end{itemize}
+
+Ce sont les dualités classiques du cas fini : les espaces finis sobres
+(c'est-à-dire $T_0$) correspondent aux ensembles ordonnés finis ; un treillis
+distributif fini est le treillis des cribles de l'ensemble ordonné de ses
+éléments premiers (dualité de Birkhoff) ; et tous ces objets ont le même
+topos.\footnote{Le nom de Birkhoff et le mot « $T_0$ » sont les nôtres. Que
+le foncteur inverse $\sigma \mapsto X$ soit celui des filtres premiers (les
+points d'un treillis) est une lecture de notre fait : la page porte un
+« $\underline{\mathrm{Fib}}(\sigma)^{\circ}$ » douteux. Une ligne isolée
+définit un « schéma simplicial fini » comme un « ensemble avec ensemble
+filtrant de parties » ; la définition usuelle d'un complexe simplicial
+abstrait demande une famille de parties finies stable par passage aux
+parties, et nous ne savons pas ce que « filtrant » visait.}
+Chaque type a une opération « opposée » --- topologie opposée, ordre opposé ---,
+et la page demande, entouré : « ? $E \mapsto E^{\mathrm{opp}}$ ? ». En
+dessous, $\widehat{C}$ et $C^{\vee} = \widehat{C^{\circ}}$, « \emph{topos
+opposé} ? ».\footnote{Une remarque de notre fait sur cette question. Pour les
+topos de préfaisceaux, l'opération est bien définie à équivalence près :
+$\widehat{C} \simeq \widehat{D}$ équivaut à l'équivalence des enveloppes de
+Karoubi de $C$ et $D$, et l'enveloppe de Karoubi de $C^{\circ}$ est l'opposée
+de celle de $C$. Elle ne s'étend pas à tous les topos, faute d'un site
+privilégié, et n'est pas fonctorielle en les morphismes de topos.}
+
+La page 48 précise le lien entre $I$ et son topos. Pour un ensemble ordonné
+$I$, un \emph{crible} est une partie $U$ telle que $x \in U$ et $y \le x$
+entraînent $y \in U$. Les cribles sont les ouverts d'une topologie sur $I$ ;
+ce sont aussi les sous-objets de l'objet final de $\widehat{I}$, de sorte que
+\[
+\mathrm{Ouv}(I) = \mathrm{Crib}(I) \simeq \mathrm{Ouv}(\widehat{I}) ,
+\qquad\text{d'où}\qquad
+\widehat{I} \simeq \mathrm{Ouv}(I)^{\sim} = \mathrm{Top}(I) .
+\]
+Pour cette topologie, $y \le x$ signifie que $y$ est une générisation de $x$.
+\footnote{Le « donc » de la page suppose que $\widehat{I}$ est engendré par
+les sous-objets de son objet final ; c'est vrai parce que $I$ est ordonné (les
+représentables $h_x \to 1$ sont des monomorphismes). Cela vaut pour tout
+ensemble ordonné, fini ou non. La page porte aussi un « On a $I \simeq
+\mathrm{Top}(X)$ » qui ne peut pas se lire tel quel ; nous l'omettons.}
+
+Suit une caractérisation des topos de cette forme, en quatre lignes reliées
+par des doubles flèches. Ce qui est juste est ceci : \emph{pour un topos $E$,
+les conditions suivantes sont équivalentes : $E$ est engendré par des
+sous-objets de l'objet final connexes, non vides et projectifs ; $E$ est
+équivalent à $\widehat{I}$ pour un ensemble ordonné $I$. Pour $E =
+\widehat{C}$, cela revient à dire que $C$ est un préordre (deux flèches de
+même source et de même but sont égales) ; pour $E = \mathrm{Top}(X)$ avec $X$
+sobre, que l'ensemble des générisations de tout point $x$ est un voisinage de
+$x$} --- c'est-à-dire que $X$ est un espace d'Alexandrov.\footnote{Deux
+écarts avec la page. Pour $\widehat{C}$, elle écrit « tous les morphismes de
+$C$ sont des monomorphismes » ; c'est insuffisant : si $C$ est un groupe $G$,
+toutes ses flèches sont inversibles mais $\widehat{C}$, le topos des
+$G$-ensembles, n'a que deux sous-objets de l'objet final et n'est pas engendré
+par eux dès que $G \neq 1$. Ensuite, la première des quatre lignes, « $E$ a
+suffisamment de [\ldots], et est engendré par ses ouverts », a un mot
+illisible que nous ne restituons pas ; si c'était « points », l'équivalence
+avec la ligne suivante serait fausse (le topos des faisceaux sur
+$\mathbb{R}$). Le nom d'Alexandrov est le nôtre.}
+
+\pagerange{51}{54}
+\section*{SGA 5 (pages 51 à 54)}
+
+Des notes pour SGA 5 (pages 51-52) : en VII, le théorème de Lefschetz faible
+sans supposer $X$ et $Y$ lisses, seulement $X - Y$ ; en VI, une définition
+raisonnable des $\mathbb{Q}_\ell$-faisceaux en termes de champ associé, et un
+nouveau numéro reprenant en langage de $\mathbb{Z}_\ell$- et
+$\mathbb{Q}_\ell$-faisceaux les notions de SGA 4 ; en IV, faire dans le cas
+relativement lisse toutes les constructions essentielles ; en V, signaler
+l'emploi de coefficients trop particuliers ; en XIII et XIV, commenter le cas
+cristallin, les formules de congruence mod $p$, et les variantes
+cristallines à propos d'un théorème de Katz.\footnote{« VI » (deux fois),
+« trop » et « une note » sont des lectures incertaines.}
+Et, pour I § 5 : si $i : y \to X$ est l'inclusion du point générique et $F_y$
+un Module localement libre sur $y$, donner
+\[
+D(i_{*}F_y) = i_{*}D(F_y) .
+\]
+\footnote{Telle quelle, la formule demande des hypothèses que la page ne donne
+pas. Pour l'image directe dérivée, la règle générale est
+$D \circ Rf_{!} = Rf_{*} \circ D$, et $i_{!} \neq Ri_{*}$. Ce qui est vrai,
+et vraisemblablement visé, est l'énoncé pour une courbe $X$ régulière et
+l'image directe \emph{non dérivée}, avec les décalages et torsions de la
+dualité : c'est l'autodualité du prolongement intermédiaire $j_{!*}$, que
+la littérature postérieure (Beilinson--Bernstein--Deligne) énonce en toute
+dimension. Rapprochement et hypothèses sont de notre fait.}
+
+Une lettre de R. Hartshorne, datée « Aug 4, 1969 » (pages 53-54), n'est pas
+reproduite. D'après la notice de la transcription, il y demande à quel
+séminaire appartiennent les notes de Jouanolou « Systèmes projectifs
+$J$-adiques », exprime un doute sur la démonstration du « théorème de Shih »
+qu'elles contiennent, et explique pourquoi une hypothèse artinienne y serait
+inutile. Grothendieck a écrit en tête, au crayon : « Faire copie pour
+Jouanolou ».
+
+\pagerange{56}{71}
+\section*{SGA 6 (pages 56 à 71)}
+
+\subsection*{Notes}
+
+Les notes pour SGA 6 sont courtes (pages 56 à 63) : donner en VI
+l'interprétation des « suites multiplicatives de polynômes » de Hirzebruch
+par une opération $f * g$ sur les séries formelles ; mentionner Serre et
+Jouanolou sur la page de garde ; signaler SGA 2 V 3.5 en II 2.2.6 ; en VII,
+écrire la formule d'auto-intersection pour $\mathrm{Gr}(X)$ et
+$\mathrm{Gr}(Y)$ après 4.6 ; donner la structure additive explicite de
+$\mathrm{Gr}(\widetilde{X}) \otimes \mathbb{Q}$ pour un schéma
+éclaté ;\footnote{La page n'écrit pas de formule. Celle qu'on connaît
+aujourd'hui, pour l'éclatement $\widetilde{X}$ de $X$ le long d'un
+sous-schéma régulier $Y$ de codimension $c$, est
+$\mathrm{Gr}(\widetilde{X})_{\mathbb{Q}} \simeq \mathrm{Gr}(X)_{\mathbb{Q}}
+\oplus \bigoplus_{1 \le k \le c-1} \mathrm{Gr}(Y)_{\mathbb{Q}}$, au décalage
+de graduation près ; le rapprochement est le nôtre.}
+en X, tenir compte des conventions d'Illusie et faire relire par Berthelot ;
+et en III 1, ajouter une note : \emph{un morphisme plat localement de
+présentation finie est parfait, a fortiori pseudo-cohérent.}\footnote{Énoncé
+exact : un morphisme parfait est par définition pseudo-cohérent et de
+Tor-dimension finie, et un morphisme plat localement de présentation finie
+l'est. Le « 6 » de « SGA 6 » est cerclé, peut-être récrit.}
+La page 63 est une liste de pages d'un tapuscrit avec un numéro d'exposé (IV
+ou IX) dont l'objet n'est pas dit.
+
+Une bande déchirée (page 58) commence une construction sans contexte :
+posant $\bar{\imath}\,\bar{\jmath} = \tau$, définir pour tout objet $E$ d'une
+catégorie $C$ une action $\tau(E) \times E \to E$ qui fasse de $E$ un objet
+formellement principal homogène sous l'objet-groupe $\tau(E)$ ; la suite est
+emportée.\footnote{Lecture incertaine dans son ensemble ; la fin de la bande
+manque.}
+
+\pagerange{65}{71}
+\subsection*{Commentaires d'un lecteur sur l'exposé X}
+
+Sept feuillets dactylographiés (pages 65 à 71), « Commentaires Exp. X » et
+« Commentaires Appendice », sont les remarques ligne à ligne d'un lecteur
+non identifié sur la frappe d'un exposé X, selon toute apparence celui de
+SGA 6, et de son appendice. Ce n'est pas un texte de Grothendieck ; la
+transcription ne le reproduit pas, et rien n'y est de sa main.
+
+\pagerange{73}{82}
+\section*{SGA 7 (pages 73 à 82)}
+
+Sous la chemise « SGA 7 » vient d'abord une lettre qui concerne SGA 6 : à
+Ferrand, le 3.11.1970 (page 73), il demande s'il peut compter sur l'exposé
+SGA 6 XI « d'ici fin décembre » ; sinon, il publiera SGA 6 sans lui, et
+souhaite que Ferrand en fasse au moins un article d'exposition, « après le
+travail que tu t'es tapé », pour pouvoir y renvoyer dans l'introduction.
+
+Une lettre de P. Deligne, « Bures sur Yvette, le 21 octobre 1968 » (pages
+74-75), n'est pas reproduite. D'après la notice de la transcription, elle
+montre, sans « savants recollages de complexes cotangents », qu'un espace
+analytique complexe compact $X$ est un schéma si et seulement si
+$X_{\mathrm{red}}$ en est un, à l'aide du complexe cotangent et de
+GAGA.\footnote{« Être un schéma » s'entend ici, selon nous, comme « être
+l'analytifié d'un schéma » ; la notice ne le précise pas.}
+Il a noté en tête : « Joindre SGA 7 VI App. II ? », et sa page 76 prévoit en
+effet pour VI un « appendice : la lettre Deligne 2 pages ».\footnote{Le
+premier mot, « Joindre », est une lecture incertaine.}
+
+Ses notes pour SGA 7 (pages 76 à 82) prévoient encore : un appendice à XXI
+sur la torsion en cohomologie cristalline (« de Katz »), en XXII des
+commentaires sur la cohomologie cristalline et un renvoi à la démonstration
+par Deligne du théorème de congruence de Katz généralisé, peut-être un exposé
+XXIII ; dans l'appendice de VI, harmoniser la notation $L\Omega_{X/k}$ du
+complexe cotangent relatif et mettre une bibliographie commune ; en I, le fait
+que le groupe d'inertie a un $p$-sous-groupe de Sylow infini (renvoi à Serre,
+\emph{Cohomologie galoisienne}) ; en VI, traiter aussi le « local invariant
+cycle problem » pour le $H^1$, et signaler la conjecture de Griffiths en
+dimension quelconque.\footnote{Le théorème des cycles invariants locaux,
+établi plus tard par Deligne (\emph{La conjecture de Weil II}, 1980) en
+situation de géométrie algébrique ; le rapprochement est le nôtre. « Corps »
+et « Coh. galois. » sont lus sous réserve ; un bloc pour VIII, barré, parlait
+de « faux schémas abéliens » et de « motifs mixtes effectifs de poids 1 ».}
+En VI ou XIII, vérifier qu'on y trouve qu'en déformant une singularité
+quadratique ordinaire on obtient au plus autant de telles singularités, et,
+en d'autres termes, que \emph{l'ensemble des points où un morphisme plat
+localement de présentation finie est lisse ou a une singularité quadratique
+ordinaire est ouvert}.\footnote{« déformant », « donne », « car. rés. 2 » sont
+des lectures incertaines ; un mot avant « ouvert » est illisible.}
+Le reste (pages 79, 80, 82) est une liste de pages et de lignes des exposés
+IX et XVIII où ajouter des références (à SGA 5 IV, à XII, XIV, XVI, au livre
+de Demazure--Gabriel).
+
+\pagerange{84}{91}
+\section*{EGA I : la table de la nouvelle édition (pages 84 à 91)}
+
+Sous la chemise « Réédition EGA I », six feuillets tapés paginés 538 à 543
+sont la table des matières de la nouvelle édition d'EGA I (Springer,
+\emph{Grundlehren} 166, 1971), et deux feuillets non paginés appartiennent à
+son index terminologique ; textes publiés, non reproduits.\footnote{L'identification
+repose sur la structure de la table (nouveau chapitre 0 avec
+quasi-homéomorphismes, espaces de Jacobson, espace sobre associé ; nouveau
+§ 7 du chapitre I, « Ensembles constructibles dans les schémas » ; appendice
+« Ultraschémas et espaces algébriques de Serre »), non sur une collation ligne
+à ligne. Les feuillets sont rangés dans l'ordre 538, 541, 539, 540, 542, 543.}
+Deux marques au crayon, vraisemblablement les siennes : deux lignes périmées
+(« 2.4. Fonctions constructibles », « 2.5. ») biffées au chapitre 0, et un
+cadre « Morphismes affines » qui demande un numéro nouveau après I 10.15.
+
+\pagerange{92}{97}
+\section*{EGA I 10.10.5 sans hypothèse noethérienne : l'échange avec Dieudonné (pages 92 à 97)}
+
+Le cadre est celui des schémas formels : $A$ est un anneau adique, ici
+complet pour la topologie $T$-adique, $A_n = A/T^{n+1}A$,
+$X = \mathrm{Spf}(A)$, $X_n = \mathrm{Spec}(A_n)$. La proposition I 10.10.5
+compare, pour un $\mathcal{O}_X$-Module $F$, trois conditions : a) et c) qui
+portent sur $F$ lui-même, b) qui dit que $F$ est limite projective d'un
+système de Modules $F_n$ sur les $X_n$ qui se recollent, chacun de
+présentation finie.\footnote{La page ne rappelle pas l'énoncé de 10.10.5 ;
+nous le reconstituons seulement dans la mesure où les deux lettres de lui le
+font : a) et c) équivalentes entre elles, b) plus faible hors du cas
+noethérien. Le détail de a) et c) n'est pas restitué ici.}
+
+\subsection*{La lettre du 27.8.1967 : un contre-exemple}
+
+Dieudonné a « tiqué » sur la généralisation proposée. Grothendieck admet que
+b) n'implique pas a) et c) hors du cas noethérien, et le montre. Soient $k$
+un corps, $B = k[X_0, X_1, \ldots]$ l'anneau de polynômes en une infinité
+d'indéterminées, $A = B[[T]]$, $A_n = B[T]/(T^{n+1})$, et
+\[
+J_n = (X_0,\ X_1 T,\ \ldots,\ X_n T^n) \subset A_n , \qquad M_n = A_n/J_n .
+\]
+Les $M_n$ se recollent ($X_{n+1}T^{n+1}$ est nul dans $A_n$) et sont de
+présentation finie ; mais \emph{l'idéal $J_n$ ne peut pas être engendré par
+moins de $n+1$ éléments}. Si les $M_n$ provenaient d'un $A$-module de
+présentation finie $M$, on aurait des présentations
+$A_n^p \to A_n^q \to M_n \to 0$ avec $p$, $q$ indépendants de $n$, et
+(lemme de Schanuel) $J_n$ serait engendré par au plus $p + q$ éléments.
+
+Preuve de la minimalité. Soit $\mathfrak{m} = (X_i)_{i \ge 0} \subset B$. Si
+$a_0, \ldots, a_n \in B$ vérifient
+$\sum_i a_i X_i T^i \in T J_n$ dans $A_n$, réduisons modulo l'idéal engendré
+par les $X_j$, $j \neq i$ : il vient, dans $k[X_i, T]/(T^{n+1})$,
+$a'_i X_i T^i \in X_i T^{i+1} k[X_i, T]$, où $a'_i$ est l'image de $a_i$ dans
+$k[X_i]$ ; en comparant les coefficients de $T^i$ ($i \le n$), $a'_i X_i = 0$,
+donc $a'_i = 0$ et $a_i \in (X_j)_{j \neq i} \subset \mathfrak{m}$. Ainsi les
+$n+1$ générateurs écrits ont des images linéairement indépendantes sur $k$
+dans $J_n / (TJ_n + \mathfrak{m}J_n)$, qui est donc de dimension $n+1$ ; par
+Nakayama gradué, ou simplement parce que tout système générateur de $J_n$ en
+donne un de cet espace, $J_n$ demande au moins $n+1$
+générateurs.\footnote{La lettre affirme plus : que les images sont
+linéairement indépendantes sur $B$ dans $J_n/TJ_n$, et conclut « d'où
+évidemment $a_i = 0$ ». C'est faux : $X_0 \cdot (X_1 T) = T \cdot X_1 \cdot
+X_0 \in TJ_n$, relation non triviale à coefficient $a_1 = X_0$. Son argument
+(réduire modulo les $X_j$, $j \neq i$) prouve exactement que $a_i$ s'annule
+\emph{dans} $k[X_i]$, c'est-à-dire $a_i \in \mathfrak{m}$, et c'est ce qui suffit
+pour la minimalité ; nous rédigeons ainsi. La lettre écrit aussi
+« $B[T] = A[T, (X_i)]$ » là où l'on attend $k[T, (X_i)]$.}
+
+Il suggère donc de rédiger 10.10.5 comme deux conditions équivalentes
+impliquant une troisième, équivalente aux deux autres dans le cas
+noethérien, et de donner le contre-exemple.
+
+La même lettre (page 93) signale un « canular ennuyeux » dans EGA IV 17.1.6
+(i) : la démonstration du caractère local de la lissité formelle, via
+16.5.17, ne marche que si $\Omega^1_{X/Y}$ est de présentation finie, par
+exemple si $f$ est localement de type fini. La question équivaut, dit-il, à
+celle-ci : \emph{si un $A$-module $M$ est localement projectif sur
+$\mathrm{Spec}(A)$ --- s'il existe des $f_i$ engendrant l'idéal unité avec
+chaque $M_{f_i}$ projectif sur $A_{f_i}$ ---, $M$ est-il projectif ?} Il
+l'avait posée à D. Lazard sans se rappeler la réponse, propose un erratum, et
+note qu'en pratique on prouve toujours directement la lissité formelle
+globale.\footnote{La réponse est oui : la projectivité descend par
+fidèle platitude, et en particulier se vérifie localement pour la topologie
+de Zariski (Raynaud--Gruson, \emph{Critères de platitude et de projectivité},
+Inventiones 1971, seconde partie). La lissité formelle est donc bien locale.
+La lettre de 1967 ne pouvait pas le savoir ; le renvoi est le nôtre.}
+Elle transmet enfin des critiques de Samuel et d'Illusie sur son projet de
+§ 0 pour la réédition, et s'interrompt au milieu d'une phrase, au bas du
+verso.
+
+\subsection*{La réponse de Dieudonné, et la lettre du 15.9.1967}
+
+Dieudonné répond le 11 septembre (page 95) ; la transcription ne reproduit
+pas sa lettre. D'après sa notice, il remercie du contre-exemple mais n'est
+« toujours pas convaincu » que, sans condition noethérienne, a) entraîne c),
+faute de présentations $A_n^p \to A_n^q \to M_n \to 0$ à $p$ et $q$ fixes.
+Grothendieck a écrit en marge : « cf. EGA IV 18.3.2.1. »
+
+Sa réponse du 15.9.1967 (pages 96-97) accorde que les objections sont
+fondées, et prouve du moins que de tels $p$ et $q$ existent, par un lemme.
+
+\emph{Lemme. Soient $A$ un anneau, $M$ un $A$-module, $f_1, \ldots, f_m \in A$
+engendrant l'idéal unité, et supposons que pour tout $i$ le $A_{f_i}$-module
+$M_{f_i}$ soit engendré par $m_i$ éléments. Alors $M$ est engendré par
+$\sum_i m_i$ éléments.}\footnote{La machine a laissé un blanc entre « $m$ » et
+« $m_i$ » ; la suite (« $mp$ éléments, où $m$ est le nombre des $f_i$ »)
+impose $\sum m_i$. Le même blanc fait que la lettre emploie $n$ pour le nombre
+des $f_i$ dans l'énoncé et $m$ dans la suite ; nous écrivons $m$.}
+
+En effet, écrivons les générateurs de $M_{f_i}$ sous la forme $h^i_j /
+f_i^{N}$ avec $h^i_j \in M$ ; le sous-module $N$ engendré par tous les
+$h^i_j$ vérifie $N_{f_i} = M_{f_i}$ pour tout $i$, et comme les
+$\mathrm{Spec}(A_{f_i})$ recouvrent $\mathrm{Spec}(A)$, $N = M$.\footnote{La
+lettre écrit « l'ouvert $\mathrm{Spec}(A_{f_i})$ de $\mathrm{Spec}(A_f)$ » et
+« engendrent $M$, donc $M$ » : deux lapsus de frappe.}
+
+Application. Dans la situation de 10.10.5, $M = \varprojlim M_n$ est un
+$A$-module de type fini ; on choisit un épimorphisme $u : A^q \to M$, et des
+$f_1, \ldots, f_m \in A$ dont les images engendrent l'idéal unité de $A_0$
+(donc de $A$, $T$ étant topologiquement nilpotent) et tels que, sur les
+ouverts correspondants de $X$, $F$ soit de présentation finie, c'est-à-dire
+de la forme $\widetilde{M_i}$ avec $M_i$ de présentation finie sur l'anneau
+$A_{\{f_i\}}$ de l'ouvert formel correspondant.\footnote{La lettre écrit
+$A_i = A_{f_i}$ ; l'anneau de l'ouvert $\mathrm{Spf}(A)_{f_i}$ est le séparé
+complété $A_{\{f_i\}}$ du localisé (EGA $0_{\mathrm{I}}$ 7.6). Cela ne change
+rien à l'argument, puisque $A_{\{f_i\}} \otimes_A A_n = (A_n)_{f_i}$.}
+Le noyau de $A_{\{f_i\}}^q \to M_i$ est engendré par un nombre fini $p$
+d'éléments (on prend le plus grand des nombres obtenus pour les $i$) ; en
+tensorisant par $A_n$,\footnote{La lettre dit « tensorisant par $A_0$ » ; la
+suite porte sur $A_n$.}
+la suite exacte $(A_n)_{f_i}^p \to (A_n)_{f_i}^q \to (M_n)_{f_i} \to 0$ montre
+que $R_n = \mathrm{Ker}(A_n^q \to M_n)$ est localement engendré par $p$
+éléments, donc par $mp$ éléments d'après le lemme --- et $mp$ ne dépend pas
+de $n$.
+
+La difficulté qui reste est de choisir ces présentations \emph{compatibles}
+quand $n$ varie, c'est-à-dire un $A^p \to A^q$ d'image $\mathrm{Ker}\, u$. Si
+Dieudonné y parvient, 10.10.5 retrouvera trois conditions équivalentes, en
+demandant dans b) une présentation finie « uniformément en $n$ » ; sinon il
+faudra un contre-exemple à a) $\Rightarrow$ c), car « la question devrait être
+tirée au clair ». Le dossier n'en dit pas plus : la question reste ouverte
+entre eux.
+
+En tout état de cause, il faudra donner en corollaire, \emph{sans hypothèse
+noethérienne}, l'équivalence de :
+
+\begin{itemize}
+\item[a)] $F$ est localement libre de type fini ;
+\item[b)] $F$ est isomorphe à la limite projective d'une suite $(F_n)$ de
+$\mathcal{O}_{X_n}$-Modules localement libres de type fini qui se recollent ;
+\item[c)] $F$ est isomorphe à $\widetilde{M}$, avec $M$ un $A$-module
+projectif de type fini,
+\end{itemize}
+
+en procédant comme pour 10.10.5 avec EGA IV 18.3.2.1 --- un lemme qui, dit-il,
+devrait venir en corollaire après $0_{\mathrm{I}}$ 7.2.9.\footnote{L'énoncé
+est exact ($X = \mathrm{Spf}(A)$ affine, $A$ complet et séparé) : un module
+projectif de type fini sur $A_0$ se relève, de façon unique à isomorphisme
+près, en un module projectif de type fini sur chaque $A_n$, puis sur $A$, et
+$M = \varprojlim M_n$.}
+Quant aux modifications qu'il préconisait pour I 10.11, elles tombent si
+10.10.5 ne s'arrange pas ; on peut cependant dire qu'un $F$ de présentation
+finie est limite projective de $F_n$ de présentation finie qui se recollent
+(sans réciproque), que $F$ est localement libre si et seulement si les $F_n$
+le sont, et que le reste de 10.11 vaut sans hypothèse noethérienne, sauf deux
+énoncés.\footnote{« ssi » est une frappe surchargée, lue sous réserve. Les
+deux exceptions sont « 10.7.11.2 » --- ainsi sur la page, où l'on attendrait
+un numéro de 10.11 --- et la partie « injectivité » de 10.11.9.}
+
+Entre les deux lettres, une page (94) note seulement, pour I 10.12
+(« Morphismes adiques de schémas formels ») : « Stabilité par
+$\varprojlim$ (ou non ?) ».
+
+\pagerange{99}{99}
+\section*{EGA II (page 99)}
+
+Une dernière page énumère pour la réédition d'EGA II : (a) transférer
+EGA IV 4.8, un exposé des morphismes affines de préschémas formels, un
+appendice sur les schémas formels ; (b) en II 6.5.10 et 6.5.11, ajouter des
+formules, la seconde pour le cas où $X' \to X$ est génériquement décomposé, et
+en 6.5.7 renvoyer à EGA IV 21 ; (c) remonter EGA IV 19.4.11, « revu et
+augmenté » ; (d) un point sur 7.4.2.\footnote{Plusieurs mots sont illisibles
+ou incertains : « écrit », « préschémas », « pour », « décomposé », et la
+ligne (d) presque entière.}
+
+\end{document}
