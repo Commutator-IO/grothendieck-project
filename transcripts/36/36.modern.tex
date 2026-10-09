@@ -1,0 +1,1714 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 36, pages 1-84
+% (the whole folder, five batches, all transcribed).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% pages are loose or mistaken, the true statement is what appears here and the
+% footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-NN.fr.tex.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-04 — first pass, unchecked against the pages by a human.
+% Checked: Opus 5.5 (claude-opus-5-5), 2026-10-09 — the skill's checks run, the reading re-read against
+% the transcriptions, five local corrections (pp. 82, 70, 78 footnotes; spine; p. 27).
+%
+% Scope: batches 1-5, pages 1-84, all transcribed, read whole before any of
+% this was written; ONE file for the shelfmark.
+%
+% What the folder is. His working papers for his share of SGA 7 (Exposés VII-IX:
+% biextensions, Néron models and monodromy), plus one typescript that is not
+% part of any published exposé. Seven runs, most under a cover in his hand:
+% (1) pp. 2-7, an unidentified reader's remarks on a typed state of Exposé IX,
+%     with his pencil replies — another person's text, noted only, as the
+%     transcription notes it (RIGHTS.md);
+% (2) pp. 9-26, the typescript « Le théorème de Griffiths par voie
+%     algébrique », §§ 1-7 and a bare heading 8;
+% (3) pp. 27-33, notes on biextensions of complexes [M -> G] (what Deligne later
+%     named 1-motives), on the backs of three typed leaves of Exposé VIII;
+% (4) pp. 34-45, « Picard et dualité »;
+% (5) pp. 46-57, « Biextensions de faisceaux de groupes »;
+% (6) pp. 59-70, « Th. du cycle invariant : cas du H^1 », typescript and
+%     manuscript working;
+% (7) pp. 72-80, « Th. d'orthogonalité pour les modèles de Néron,
+%     démonstration arithmétique »;
+% (8) pp. 81-83, « Autodualité de la jacobienne, suivant Artin-Mazur ».
+% Leaves of other people's typescripts (Bourbaki pp. 37, 65-71; a Čech
+% cohomology typescript pp. 48, 50; drafts of Mumford's GIT pp. 52, 54, 56, 58)
+% are mentioned only as the transcription mentions them.
+%
+% Notation fixed for the whole document (departures from the pages' letters):
+% — In the Griffiths typescript, sections 4-7: dim X = m throughout. The page
+%   uses m in § 4, 2n in §§ 5-6 and n in § 7 (where its n is § 4's m); the
+%   reading writes m everywhere and m = 2n where §§ 5-6 need it. In 7.6 the sum
+%   of degrees the page calls r (also the ambient P^r) is e; in the proof of 7.1
+%   q = p^f (the page: p^m). The structural morphism of the curve C in § 1,
+%   which the page leaves unnamed and later calls g, is q_C : C -> S; g is
+%   X -> S.
+% — Pages 35-45: his curly z_l, z_p are written mu_l, mu_p and his i_p is
+%   alpha_p — the values his table gives are exactly theirs; his f_!, f^!, f_.
+%   in the adjunction formulas are written Rf_* (the right adjoint of f^*).
+% — Pages 73-76: the subgroup the page calls S (in G_Y) is H, to free S.
+% — Nothing else is renamed.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — p. 9: the degree condition m = m' + N - 2d' (the typed « - dim(Y'/S) » is
+%   struck and left blank).
+% — p. 13: Y_s -> X_s for the page's X_s -> X_s.
+% — p. 14: « Grif(Y) (x) Q contains P^{2n}_alg(X) as a subspace » is stated as
+%   what the argument gives: a subspace of Grif (x) Q mapping ONTO P^{2n}_alg(X).
+% — p. 15: E^{2n-1} for the page's E^{n-1}.
+% — p. 17: the generic hypersurface's coefficients are indexed by monomials of
+%   degree d, not t_0..t_r.
+% — pp. 17-26: Théorème 7.1 is given in the form the ink amends it to (trace on
+%   a u-stable subspace V'_0); the typed form (trace on all of V_0), which 7.2
+%   needs, is not established by the argument, and his own margins say
+%   « pas prouvé » of 7.1 and 7.2. Lemme 7.8's « sous-groupe ouvert » is a
+%   decomposition group (closed, not open in general).
+% — p. 23: Lemme 7.6 needs N <= e d_1^m; the page has the inequality reversed
+%   (its own remark « N <= r » for d_1 = 1 confirms the direction).
+% — p. 30: n-divisibility nG = G for the page's « _nG = G ».
+% — p. 38: the inductive limit of M/nM is M (x) Q/Z, not M (x) Q; and the two
+%   limit sequences give H^1(X, A) = the TORSION subgroup of Ext^1(A', Pic_X).
+% — p. 55: the quadratic identity is phi(u+v) + phi(u-v) = 2(phi(u)+phi(v)).
+% — p. 57: k o Delta^* j = 2 splits the extension only after pull-back by 2.
+% — p. 60: d^t = p^h d with h >= 0, and p^h divisible by pgcd(mu_i) — not equal
+%   to it (counterexample in the footnote).
+% — p. 62: Ker(Br(K) -> Br(X_eta)) for the page's X_etabar.
+% — p. 63: d(X'/S') is the p-part of d (= p^r only when d^t = d).
+%
+% What the folder announces and never establishes: §§ 7-8 of the Griffiths
+% typescript beyond what is above (7.2 and 7.3 rest on the unproved typed 7.1;
+% § 8 is a heading); the proofs of a)-d) and Corollaires 9, 10, 15 of the
+% invariant-cycle typescript (the manuscript proves the case n prime to p and
+% refers b) to Raynaud); the equivalences of Corollaires 1-2 of p. 47-49; the
+% questions of pp. 39, 40 and 70 (« Sous quelles conditions ??? », « demander à
+% Raynaud si Ker est tout Z/dZ »).
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{36}
+\pages{1}{84}
+\dating{[vers 1967-1973]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{SGA 7 (ma part) : notes manuscrites (s.d.), tapuscrit annoté (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces feuillets sont les papiers de travail de Grothendieck pour sa part d'un
+séminaire collectif, SGA~7, consacré à ce qui arrive à une famille de variétés
+algébriques quand l'un de ses membres dégénère.
+
+L'image la plus simple est celle d'une famille de tores --- de surfaces en forme
+de bouée --- dont l'un, au centre, est pincé : un de ses cercles s'est réduit à
+un point. Sur un tore voisin, deux sortes de lacets cohabitent. Celui qui va se
+pincer, le \emph{cycle évanescent}, revient à lui-même quand on fait tourner le
+paramètre autour du centre ; l'autre, qui fait le tour dans l'autre sens, revient
+déformé, alourdi d'une copie du premier. Cette transformation est la
+\emph{monodromie}. Ce que le dossier cherche à comprendre, c'est l'algèbre de
+cette situation quand le tore est remplacé par une variété abélienne ou une
+jacobienne, et les lacets par un module de Tate : quels lacets sont fixes, quels
+lacets « meurent » dans la fibre pincée, et comment la dualité --- l'accouplement
+qui mesure l'enlacement de deux lacets --- se comporte vis-à-vis de ces deux
+sous-ensembles. La réponse tient en un mot : \emph{orthogonalité}. Les lacets qui
+meurent d'un côté sont orthogonaux aux lacets fixes de l'autre ; dans l'exemple
+du tore, le lacet qui se pince n'enlace pas lui-même.
+
+Pour le dire, il faut un outil, et le dossier le forge en même temps : la
+\emph{biextension}, une façon d'encoder un accouplement bilinéaire entre deux
+groupes qui garde la trace de ce qui se passe au-dessus de la fibre pincée. Une
+bonne part des notes en développe le maniement : comment une biextension se
+reconstruit à partir de ses morceaux, comment on la décrit quand les groupes sont
+des complexes plutôt que des groupes, comment la forme d'intersection des
+composantes d'une fibre dégénérée produit, sur le groupe des composantes, une
+dualité finie qui mesure exactement l'obstruction à prolonger la dualité
+au-dessus du point singulier.
+
+Un texte tapé tranche sur le reste : un essai pour démontrer « par voie
+algébrique », en toute caractéristique, un théorème de Griffiths --- qu'une
+variété peut porter des cycles qui sont des bords sans pouvoir être déformés en
+rien. L'idée est de compter des points sur des corps finis : un nombre de points
+qui n'est pas ce qu'il « devrait » être modulo $p$ trahit une cohomologie qui
+n'est pas de la forme qu'on voulait exclure.
+
+Ce dossier montre aussi un mathématicien qui relit son propre texte et le
+démonte. Sur le tapuscrit où il écrit « je vais prouver », l'encre ajoute
+« non, pas tout à fait ! », puis, en face du théorème et du corollaire, « pas
+prouvé ». Ailleurs : « la triste vérité est que je ne sais pas montrer » ; « Sous
+quelles conditions ??? » ; « demander à Raynaud ». Ce qu'il appelait l'attitude
+d'écoute passe aussi par là : laisser le texte dire où il ne tient pas, plutôt
+que de le faire tenir.
+
+Les noms modernes à chercher ensuite sont ceux de la dernière ligne.
+
+\keywords{Griffiths group, coniveau, Hodge level, Lefschetz pencil, vanishing cycles, Woods Hole fixed point formula, Chebotarev density theorem, 1-motive, biextension, Weil pairing, fppf cohomology, Cartier duality, Artin-Schreier-Witt theory, Néron-Severi group, invariant cycle theorem, Néron model, Grothendieck's orthogonality theorem, Frobenius weights, component group, Grothendieck's pairing}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+Le titre de l'inventaire --- « SGA 7 (ma part) » --- dit ce que le dossier
+rassemble : ce dont Grothendieck s'était chargé dans le séminaire sur la
+monodromie, tenu à Bures en 1967--1969 et publié en deux volumes (SGA~7~I, 1972 ;
+SGA~7~II, 1973). Sa part publiée comprend les exposés I, II et VI à IX ; ceux que
+touche ce dossier sont VII et VIII (biextensions) et IX (modèles de Néron et
+monodromie). Le fil qui relie les feuillets est le
+suivant : une variété abélienne $A$ sur le corps des fractions $K$ d'un anneau de
+valuation discrète, son module de Tate $M = T_\ell(A)$, la filtration
+\[ M \supset M^{I} \supset M^{I}_{t} \]
+par la partie fixe sous l'inertie et la partie torique, et la façon dont
+l'accouplement de Weil entre $M$ et le module de la variété duale traite ces
+filtrations. Tout le reste est outillage, ou détour.
+
+Les stations, dans l'ordre des pages :
+\begin{itemize}
+\item \textbf{Pages 2 à 7} --- les remarques d'un lecteur sur un état tapé de
+l'exposé IX, avec ses réponses au crayon. Un texte d'autrui, signalé seulement.
+\item \textbf{Pages 9 à 26} --- le tapuscrit « Le théorème de Griffiths par voie
+algébrique », n\textsuperscript{os} 1 à 7 et un titre de n\textsuperscript{o}~8.
+C'est le détour : il relève de l'autre moitié de SGA~7 (pinceaux de Lefschetz,
+cycles évanescents) et d'aucun exposé publié.
+\item \textbf{Pages 27 à 33} --- biextensions de complexes $[M \to G]$, l'objet
+que Deligne nommera plus tard 1-motif.
+\item \textbf{Pages 34 à 45} --- « Picard et dualité » : cohomologie plate d'une
+courbe, torseurs sous un groupe fini et sous une variété abélienne, groupe
+fondamental d'une variété abélienne.
+\item \textbf{Pages 46 à 57} --- « Biextensions de faisceaux de groupes » :
+reconstruction d'une biextension par restriction, biextensions sans
+rigidification, le groupe de Néron--Severi.
+\item \textbf{Pages 59 à 70} --- le théorème des cycles invariants pour le
+$H^1$, en tapuscrit puis à la main.
+\item \textbf{Pages 72 à 80} --- le théorème d'orthogonalité, démonstration
+arithmétique.
+\item \textbf{Pages 81 à 83} --- l'autodualité du groupe des composantes du
+modèle de Néron d'une jacobienne.
+\end{itemize}
+Les feuillets d'autres textes que le dossier contient --- une rédaction Bourbaki
+(page 37 et pages 65 à 71), un tapuscrit sur la cohomologie de Čech (pages 48 et
+50), des feuillets d'une rédaction de la théorie géométrique des invariants de
+Mumford (pages 52, 54, 56, 58) --- ne sont signalés qu'à leur place, et pas
+au-delà de ce qu'en dit la transcription.
+
+\emph{Conventions.} $k$ désigne le corps de base ou le corps résiduel selon la
+section, ce que chaque section rappelle ; $\ell$ est un nombre premier
+différent de la caractéristique résiduelle quand rien d'autre n'est dit. Pour un
+groupe abélien (ou un faisceau) $P$ et un entier $n$, on écrit comme lui
+${}_nP$ le noyau et $P_n = P/nP$ le conoyau de la multiplication par $n$. Dans
+le tapuscrit Griffiths, la dimension de la variété ambiante $X$ est notée $m$
+partout\footnote{Le tapuscrit la note $m$ au n\textsuperscript{o}~4, $2n$ aux
+n\textsuperscript{os}~5 et 6, et $n$ au n\textsuperscript{o}~7, où son $n$ est le
+$m$ du n\textsuperscript{o}~4. Garder ses lettres aurait fait désigner par $n$
+deux entiers différents à deux pages d'intervalle.} ; on écrit $m = 2n$ là où les
+n\textsuperscript{os}~5 et 6 en ont besoin. Les faisceaux qu'il note d'un $z$
+bouclé (pages 35 et suivantes) sont écrits $\mu_\ell$, $\mu_p$, et son $i_p$
+est écrit $\alpha_p$ : les valeurs que sa table leur donne sont exactement les
+leurs.
+
+\pagerange{2}{7}
+\section*{Les remarques d'un lecteur sur l'exposé IX (pages 2 à 7)}
+
+Six feuillets quadrillés, numérotés 1 à 6, titrés « Remarques. SGA~7 IX », d'une
+main non identifiée qui tutoie l'auteur de l'exposé : un relecteur parcourt un
+état dactylographié de l'exposé IX --- \emph{Modèles de Néron et monodromie},
+l'exposé de Grothendieck --- section par section, en renvoyant aux pages et aux
+lignes du tapuscrit. Ce texte n'est pas le sien et n'est pas reproduit ici ; il
+suffit de dire qu'il couvre l'introduction et les sections 1 à 11 (la 8 laissée
+vide), et qu'au feuillet 2 le lecteur compare l'accouplement « d'A.~M. » à celui de
+l'auteur.\footnote{Que « A.~M. » soit Artin--Mazur, dont le dernier titre du
+dossier (page 81) se réclame, est notre inférence ; ni les remarques ni la
+transcription ne le disent.}
+
+Ce qui est de lui, ce sont les réponses au crayon, et elles disent assez bien
+comment l'exposé a été défendu : « guillemets suffisants ? », « je le dis ! »,
+« c'est dit dans la 5.13 », « c'est pourtant trivial », « non, mon argument
+marche », « si ? », deux fois « que faire ? », et, à l'encre, en face d'une
+objection qui jugeait fausse une page entière, « CANULAR ?! ».\footnote{Le crayon
+du feuillet 2 a été vérifié de sa main sur le fac-similé ; pour les autres
+feuillets la transcription le dit vraisemblablement le sien, sans plus, et l'encre
+de « CANULAR ?! » « présumément » sienne.}
+
+\pagerange{9}{26}
+\section*{Le théorème de Griffiths par voie algébrique (pages 9 à 26)}
+
+Un tapuscrit de dix-huit pages, paginé à la main, sous un titre au crayon. Il est
+écrit à la première personne par un auteur qui n'est ni Deligne ni Katz, il parle
+de « la théorie des cycles évanescents, qui sera prouvée dans SGA 7 cette
+année », et ce qu'il démontre n'est dans aucun des exposés publiés de
+Grothendieck.\footnote{Le plan de SGA~7 du dossier 35 portait « XX Th.\ de
+Griffiths », biffé. Dans SGA~7~II publié, l'exposé XX, de Katz, s'intitule, à
+notre connaissance, « Le niveau de la cohomologie des intersections complètes »,
+et l'exposé XXII, du même, « Une formule de congruence pour la fonction $\zeta$ » :
+ce sont les deux ingrédients que ce tapuscrit appelle « le procédé de Katz » et
+« la congruence de Deligne ». Le rapprochement est nôtre. La phrase sur SGA~7
+« cette année » situe le tapuscrit pendant le séminaire, 1967--1969.} Le
+problème est celui que Griffiths avait résolu par voie transcendante en 1969 :
+exhiber des cycles homologiquement équivalents à zéro qui ne sont pas
+algébriquement équivalents à zéro. Le tapuscrit veut le faire en toute
+caractéristique.
+
+Le plan est simple à énoncer. Une classe de cohomologie primitive, sur l'espace
+total d'une famille, donne une classe de $H^1$ de la base (n\textsuperscript{o}~1).
+Si un cycle de la fibre générique est algébriquement trivial, cette classe vient de
+la variété ambiante, sous deux hypothèses a) et b) (n\textsuperscript{os}~2 et 3).
+Pour un pinceau de Lefschetz, la classe d'un cycle primitif ne vient jamais de la
+variété ambiante (n\textsuperscript{o}~4). Donc, sous a) et b), un cycle primitif
+non nul de $X$ se restreint en un cycle non trivial du groupe de Griffiths de la
+section hyperplane générique (n\textsuperscript{o}~5). Reste à vérifier b), ce qui
+est l'objet d'une conjecture (n\textsuperscript{o}~6) et d'un théorème annoncé
+(n\textsuperscript{o}~7) que l'auteur, à l'encre, déclare non prouvé.
+
+\pagerange{9}{11}
+\subsection*{La classe $u(x)$ d'une classe primitive (n\textsuperscript{o}~1, pages 9 à 11)}
+
+Soit $f\colon Y \to S$ un morphisme propre et lisse, $S$ régulier et connexe, à
+caractéristiques résiduelles différentes de $\ell$, et $F$ un faisceau
+$\ell$-adique lisse de rang un sur $S$ (en pratique $\mathbf{Z}_\ell(i)$). Une
+classe $x \in H^m(Y, F_Y)$ est dite \emph{primitive} si son image dans
+$H^0(S, R^m f_* F)$ est nulle ; comme $R^m f_* F$ est lisse et $S$ connexe, il
+revient au même que sa restriction à une fibre géométrique $Y_{\bar s}$ soit
+nulle. Dans la suite spectrale de Leray
+$E_2^{p,q} = H^p(S, R^q f_*F) \Rightarrow H^{p+q}(Y, F)$, une classe primitive est
+dans le premier cran $F^1H^m$ de la filtration, et son image dans
+$F^1/F^2 = E_\infty^{1,m-1}$ est un élément
+\[ u(x) \in E_2^{1,m-1} = H^1(S, R^{m-1}f_*F_Y), \]
+puisqu'aucune différentielle n'aboutit en bidegré $(1, m-1)$ et que
+$E_\infty^{1,m-1}$ est donc un sous-groupe de $E_2^{1,m-1}$.\footnote{Le
+tapuscrit pose $u(x) \in E_2^{1,m-1}$ sans ce commentaire. L'exposant $m$ est
+partout écrit ou repassé à la main sur une autre lettre tapée.} Appliquée à la
+classe d'un cycle, c'est l'avatar $\ell$-adique de la \emph{fonction normale}
+de Poincaré et Griffiths ; aujourd'hui on parle d'application d'Abel--Jacobi
+$\ell$-adique.
+
+\emph{Fonctorialité.} Soit $Y'$ propre et lisse sur $S$, de dimension relative
+constante $d'$, et $Z \in H^N(Y \times_S Y', G)$, avec un accouplement
+$F' \otimes G \to F(d')$. Par le formalisme des correspondances cohomologiques,
+$Z$ définit $x' \mapsto Z(x') = \mathrm{pr}_{1*}(\mathrm{pr}_2^*x' \cdot Z)$, de
+$H^{m'}(Y', F')$ dans $H^m(Y, F)$, avec
+\[ m = m' + N - 2d' . \]
+\footnote{Le tapuscrit écrit « $m = m' + N - \dim(Y'/S)$ », puis la machine
+biffe « $\dim(Y'/S)$ » sans rien mettre à la place. L'image directe le long d'une
+fibration de dimension relative $d'$ abaisse le degré de $2d'$ : c'est ce terme qui
+manque, et la torsion $(d')$ de l'accouplement, que le tapuscrit donne, en est la
+contrepartie.} Si $x'$ est primitive, $Z(x')$ l'est, et
+\[ u(Z(x')) = Z(u(x')) , \]
+où le second membre se lit à travers l'homomorphisme
+$R^{m'-1}f'_*F_{Y'} \to R^{m-1}f_*F_Y$ que $Z$ définit par localisation étale sur
+$S$.
+
+\emph{Le cas qui servira.} On prend pour $Y'$ une courbe relative
+$q_C\colon C \to S$ à fibres géométriques connexes, munie de deux sections $t_0$,
+$t_1$, et pour $x' \in H^2(C, \mathbf{Z}_\ell(1))$ la classe du diviseur relatif
+$t_1(S) - t_0(S)$, primitive parce que de degré nul sur chaque fibre ; on prend
+pour $Z$ la classe d'un cycle de codimension $n$ sur $Y \times_S C$, encore noté
+$Z$.\footnote{Le tapuscrit ne nomme pas le morphisme structural de $C$, et
+l'écrit $g$ à la page 11 ; on le note $q_C$, la lettre $g$ servant plus loin à
+$X \to S$.} Alors $x = Z(x')$ est la classe du cycle $z = Z(t_1) - Z(t_0)$ de
+$Y$, de degré $2n$, et $u(x) = Z(u(x'))$ dans $H^1(S, R^{2n-1}f_*\mathbf{Z}_\ell(n))$.
+Le tapuscrit prend soin de dire que ces classes de cycles et ces intersections
+n'ont de sens, « en l'état actuel de la Science », que sous des hypothèses du
+genre « $S$ de type fini sur un corps », et on les suppose. La conséquence qui
+servira est celle-ci :
+
+\begin{quote}
+si l'homomorphisme $Z\colon R^1q_{C*}\mathbf{Z}_\ell(1) \to
+R^{2n-1}f_*\mathbf{Z}_\ell(n)$ est nul --- ou, ce qui revient au même puisque ce
+sont des faisceaux lisses sur une base connexe, si $Z\colon H^1(C_{\bar s},
+\mathbf{Z}_\ell(1)) \to H^{2n-1}(Y_{\bar s}, \mathbf{Z}_\ell(n))$ est nul ---
+alors $u(\mathrm{cl}(z)) = 0$.
+\end{quote}
+
+\pagerange{11}{12}
+\subsection*{Décomposer un cycle algébriquement trivial (n\textsuperscript{o}~2, pages 11 et 12)}
+
+Soit $i\colon Y \to X$ un morphisme de variétés propres et lisses sur un corps
+algébriquement clos $k$, et
+\[ i^*\colon H^{2n-1}(X, \mathbf{Q}_\ell(n)) \to H^{2n-1}(Y, \mathbf{Q}_\ell(n)). \]
+On suppose :
+\begin{itemize}
+\item[a)] il existe $v\colon H^{2n-1}(Y) \to H^{2n-1}(X)$, induit par un cycle
+algébrique (à coefficients rationnels) sur $Y \times X$, tel que $i^* v$ soit
+l'identité sur l'image de $i^*$ ;
+\item[b)] pour toute courbe propre, lisse et connexe $C$ sur $k$ et tout cycle
+$Z$ de codimension $n$ sur $Y \times C$, l'image de
+$Z\colon H^1(C, \mathbf{Q}_\ell(1)) \to H^{2n-1}(Y, \mathbf{Q}_\ell(n))$ est
+contenue dans celle de $i^*$.
+\end{itemize}
+L'hypothèse a) est un cas particulier des conjectures standard ; elle est vraie
+quand $i$ est l'inclusion d'une section hyperplane et que l'opérateur $\Lambda$
+de Lefschetz est algébrique sur $X$, ce qu'on sait, dit le tapuscrit, quand $X$
+se relève en caractéristique nulle avec sa polarisation. L'hypothèse b) dit,
+dans le langage des motifs, que le plus grand morceau de niveau 1 du motif de
+réalisation $\operatorname{Coker} i^*$ est nul ; en termes d'aujourd'hui, que
+$\operatorname{Coker} i^*$ ne rencontre pas le cran de coniveau $n-1$ de la
+cohomologie de $Y$.\footnote{« Niveau » est son mot, au sens qu'on dit
+aujourd'hui « niveau de Hodge » : un morceau de $H^{2n-1}$ est de niveau 1 s'il
+est engendré par des images de $H^1$ de courbes, c'est-à-dire s'il est dans le
+cran $N^{n-1}$ de la filtration par le coniveau. « Plus grand » est ajouté à
+l'encre.}
+
+\emph{Énoncé.} Sous a) et b), tout cycle $z \in Z^n(Y)$ algébriquement équivalent
+à zéro s'écrit, dans le groupe de Chow $\mathrm{CH}^n(Y) \otimes \mathbf{Q}$,
+\[ z = i^*(z') + z'' , \]
+où $z' \in Z^n(X)_{\mathbf{Q}}$ est algébriquement équivalent à zéro et
+$z'' = Z''(t_1) - Z''(t_0)$ pour un $\mathbf{Q}$-cycle $Z''$ de codimension $n$
+sur $Y \times C$ qui induit l'homomorphisme nul $H^1(C) \to H^{2n-1}(Y)$.
+
+\emph{Démonstration.} On écrit $z = Z(t_1) - Z(t_0)$ avec $Z$ un cycle sur
+$Y \times C$, $C$ une courbe lisse connexe.\footnote{Qu'une seule courbe suffise
+à paramétrer un cycle algébriquement équivalent à zéro est classique ; le
+tapuscrit le prend pour acquis.} Par b), $Z\colon H^1(C) \to H^{2n-1}(Y)$ tombe
+dans l'image de $i^*$, donc par a) $Z = i^*(vZ)$ ; le composé
+$vZ\colon H^1(C) \to H^{2n-1}(X)$ est induit par un $\mathbf{Q}$-cycle $Z'$ sur
+$X \times C$, puisque $v$ l'est. On pose $Z'' = Z - (i \times
+\mathrm{id}_C)^*Z'$, qui induit l'homomorphisme nul, puis $z' = Z'(t_1) -
+Z'(t_0)$ et $z'' = Z''(t_1) - Z''(t_0)$.\footnote{Le tapuscrit écrit
+« $(iv)Z = i(vZ)$ », $i$ pour $i^*$. Les égalités de cycles qu'il écrit sont des
+égalités de classes : $(i \times \mathrm{id}_C)^*$ est le tiré en arrière du
+calcul d'intersection sur les variétés lisses, défini modulo l'équivalence
+rationnelle. D'où la formulation dans $\mathrm{CH}^n(Y) \otimes \mathbf{Q}$, et
+les coefficients rationnels, que l'encre ajoute (« $\mathbf{Q}$- » au-dessus de
+« cycle »).}
+
+\pagerange{12}{13}
+\subsection*{La version relative (n\textsuperscript{o}~3, pages 12 et 13)}
+
+Soient maintenant $X$, $Y$ propres et lisses sur $S$ régulier et connexe,
+$g\colon X \to S$, $f\colon Y \to S$, et $i\colon Y \to X$ un $S$-morphisme.
+On suppose a) et b) vérifiés par $i_{\bar s}\colon Y_{\bar s} \to X_{\bar s}$,
+où $\bar s$ est un point géométrique au-dessus du point générique de
+$S$.\footnote{Le tapuscrit écrit « $i_{\bar s}\colon X_{\bar s} \to X_{\bar
+s}$ ».} Soit $z \in Z^n(Y)$ dont la restriction à $Y_{\bar s}$ est
+algébriquement, donc homologiquement, équivalente à zéro ; sa classe est
+primitive et $u(z) \in H^1(S, R^{2n-1}f_*\mathbf{Z}_\ell(n))$ est définie.
+
+\emph{Énoncé.} Quitte à remplacer $S$ par un ouvert non vide,
+$u(z)$ appartient, modulo torsion, à l'image de
+\[ i^*\colon H^1(S, R^{2n-1}g_*\mathbf{Z}_\ell(n)) \to H^1(S,
+R^{2n-1}f_*\mathbf{Z}_\ell(n)) . \]
+La restriction à un ouvert est, dit le tapuscrit, « probablement inutile ».
+
+\emph{Démonstration.} On applique le n\textsuperscript{o}~2 à $i_{\bar s}$. La
+courbe $C$, ses points $t_0$, $t_1$ et les cycles $Z'$, $Z''$ sont définis sur
+une extension finie du corps des fonctions de $S$ ; un argument de trace ramène à
+ce corps lui-même, au prix d'un multiple entier --- d'où le « modulo torsion » ---
+et, sur un ouvert de $S$, $C$ devient une courbe relative propre et lisse, $Z''$
+un cycle sur $Y \times_S C$, et la décomposition $z = i^*(z') + z''$ vaut sur
+$S$. Alors $u(z) = i^*u(z') + u(z'')$, et $u(z'') = 0$ par le
+n\textsuperscript{o}~1, puisque $Z''$ induit l'homomorphisme nul sur la fibre en
+$\bar s$.
+
+\pagerange{13}{15}
+\subsection*{L'homomorphisme de Griffiths, et ce qu'il donne (n\textsuperscript{os}~4 et 5, pages 13 à 15)}
+
+Soit $X$ projective et lisse de dimension $m$ sur $k$ algébriquement clos, et un
+pinceau de Lefschetz ; l'éclatement de son axe donne $\widetilde{X}$ et
+$\tilde f\colon \widetilde{X} \to \mathbf{P}^1_k$, dont les fibres sont les
+sections du pinceau. Soit $S \subset \mathbf{P}^1_k$ l'ouvert où $\tilde f$ est
+lisse, et $f\colon Y = \widetilde{X}|_S \to S$. La partie primitive $P^m(X)$ est
+le noyau de $H^m(X) \to H^0(S, R^mf_*\mathbf{Q}_\ell)$, c'est-à-dire le noyau de
+la restriction à une section hyperplane --- la partie primitive au sens de
+Lefschetz. Le n\textsuperscript{o}~1 fournit l'\emph{homomorphisme de Griffiths}
+\[ \gamma\colon P^m(X) \longrightarrow H^1(S, R^{m-1}f_*\mathbf{Q}_\ell). \]
+L'immersion $i\colon Y \to X_S = X \times S$ au-dessus de $S$ donne
+\[ i^*\colon H^1(S, H^{m-1}(X, \mathbf{Q}_\ell)) \to H^1(S,
+R^{m-1}f_*\mathbf{Q}_\ell). \]
+
+\begin{tikzcd}
+Y \arrow[rr, "i"] \arrow[dr, "f"'] & & X_S \arrow[dl, "g"] \\
+& S &
+\end{tikzcd}
+
+\emph{Énoncé.} $\gamma^{-1}(\operatorname{Im} i^*) = 0$. Le tapuscrit renvoie à
+« des calculs explicites essentiellement triviaux, compte tenu de la structure
+cohomologique connue d'une variété éclatée ». En voici la substance, qui est
+nôtre : sous le théorème de Lefschetz difficile, le faisceau $R^{m-1}f_*\mathbf{Q}_\ell$
+est somme directe de la partie constante $H^{m-1}(X)$ et de la partie
+évanescente $\mathcal{E}$, l'image de
+$i^*$ est le premier facteur de $H^1(S, -)$, et la composante de $\gamma$ dans
+$H^1(S, \mathcal{E})$ est injective, parce que $P^m(X)$ s'identifie, par la suite
+de Leray de $\tilde f$ et la théorie de Lefschetz, à $H^1(\mathbf{P}^1,
+j_*\mathcal{E})$, qui s'injecte dans
+$H^1(S, \mathcal{E})$.
+
+\emph{Le théorème de Griffiths, conditionnel} (n\textsuperscript{o}~5). On
+suppose $m = 2n$, et que l'inclusion $Y_{\bar s} \to X_{k(\bar s)}$ de la
+section hyperplane générique satisfait a) et b). Soit $z \in Z^n(X)$ dont la
+restriction à $Y_{\bar s}$ est algébriquement équivalente à zéro. Sa classe est
+alors primitive ; par le n\textsuperscript{o}~3, $\gamma(\mathrm{cl}(z))$ tombe
+modulo torsion dans l'image de $i^*$ ; par le n\textsuperscript{o}~4, elle est
+nulle : \emph{$z$ est homologiquement équivalent à zéro}, à torsion près.
+
+Soit $\operatorname{Grif}(Y_{\bar s})$ le groupe des cycles homologiquement
+équivalents à zéro modulo ceux qui sont algébriquement équivalents à zéro --- le
+nom est le sien, et c'est resté le nom. Restreindre à $Y_{\bar s}$ les cycles de
+$X$ de classe primitive envoie ceux-ci dans $\operatorname{Grif}(Y_{\bar s})$,
+et ce qui précède dit que le noyau de cette application, tensorisée par
+$\mathbf{Q}$, est formé de cycles homologiquement triviaux sur $X$. Il en résulte
+que \emph{$\operatorname{Grif}(Y_{\bar s}) \otimes \mathbf{Q}$ contient un
+sous-espace qui se surjecte sur $P^{2n}_{\mathrm{alg}}(X)$}, l'espace des classes
+primitives algébriques de $X$ --- espace qui, dit le tapuscrit, « a une nette
+tendance à être $\neq 0$ ».\footnote{Le tapuscrit dit que $\operatorname{Grif}
+\otimes \mathbf{Q}$ « contient comme sous-espace » $P^{2n}_{\mathrm{alg}}(X)$.
+L'argument donne moins : un cycle homologiquement trivial de $X$ n'a aucune raison
+de se restreindre en un cycle algébriquement trivial de $Y_{\bar s}$, de sorte
+que la restriction n'est pas définie sur les classes de cohomologie. Ce qui est
+établi, c'est un sous-quotient, et l'inégalité de dimensions qui suffit au
+propos.} Dans l'exemple minimal de Griffiths --- $X$ quadrique de
+$\mathbf{P}^5$, $z$ la différence de deux plans des deux familles --- c'est
+exactement ce qu'il faut.
+
+\pagerange{15}{16}
+\subsection*{La conjecture du n\textsuperscript{o}~6 (pages 15 et 16)}
+
+\emph{Conjecture.} Soit $X \subset \mathbf{P}^r_k$ comme au
+n\textsuperscript{o}~5, avec $n \geqslant 2$. Il existe $d_0$ tel que, pour tout
+pinceau de Lefschetz assez général d'hypersurfaces de degré $d \geqslant d_0$,
+l'inclusion de la section générique $Y_{\bar s} \hookrightarrow X_{\bar s}$
+satisfasse b).\footnote{« $\subset \mathbf{P}^r_k$ », « avec $n \geqslant 2$ »
+et « de Lefschetz » sont tapés en interligne, « assez général » est à l'encre, et
+l'énoncé est marqué en marge d'un double trait.} L'hypothèse a), elle, relève
+de la conjecture d'algébricité de $\Lambda$.
+
+On suppose le théorème de Lefschetz difficile vrai sur $X$ et $\Lambda$
+algébrique.\footnote{« Lefschetz vache » est son mot pour le théorème de
+Lefschetz difficile, conjectural en caractéristique $p$ quand ces lignes sont
+écrites et démontré par Deligne (\emph{La conjecture de Weil II}, 1980).} Soit
+$E^{2n-1} \subset H^{2n-1}(Y_{\bar s})$ l'orthogonal de $H^{2n-1}(X)$ : la
+partie évanescente. La théorie des cycles évanescents donne qu'elle est
+\emph{un module simple sous $\operatorname{Gal}(k(\bar s)/k(s))$ et sous chacun
+de ses sous-groupes ouverts} ; le tapuscrit en voit la raison dans la parité :
+en dimension impaire $2n-1$, les monodromies locales sont des transvections et
+non des symétries, et aucune de leurs puissances ne s'annule.\footnote{L'argument
+du tapuscrit est une indication. L'énoncé, sous sa forme « pour tout sous-groupe
+ouvert », découle aujourd'hui de ce que l'adhérence de Zariski du groupe de
+monodromie géométrique est le groupe symplectique tout entier, connexe, dès que
+la monodromie n'est pas finie (Deligne, \emph{La conjecture de Weil I}, 1974,
+§~5, via Kazhdan--Margulis). On signale le cas de monodromie finie comme une
+réserve que le tapuscrit ne fait pas.} Comme la plus grande partie de niveau 1
+est stable par Galois, la condition b) équivaut alors à : \emph{$E^{2n-1}$ n'est
+pas tout entier de niveau 1}.
+
+\emph{En caractéristique nulle,} si $E^{2n-1}$ était de niveau 1, ses
+composantes de Hodge seraient nulles hors des types $(n, n-1)$ et $(n-1,
+n)$\footnote{Le tapuscrit écrit ici $E^{n-1}$ ; c'est $E^{2n-1}$.}, donc
+$H^{p,q}(X) \to H^{p,q}(Y)$ serait un isomorphisme pour les autres types, et en
+particulier, comme $n \geqslant 2$, $H^{2n-1}(X, \mathcal{O}_X) \to
+H^{2n-1}(Y, \mathcal{O}_Y)$ aussi. Or la dimension du second membre tend vers
+l'infini avec $d$. Cela démontre la conjecture en caractéristique nulle, par la
+méthode de Lefschetz reprise par Griffiths.
+
+\emph{En caractéristique $p$,} on ne sait, dit-il, que des cas particuliers ;
+Katz traite les intersections complètes et un pinceau assez général, ce qui suffit
+à l'exemple minimal. Pour voir que $E^{2n-1}(Y_{\bar s})$ n'est pas de niveau 1, il
+suffit de trouver un point $t$ du pinceau où $E^{2n-1}(Y_{\bar t})$ ne l'est pas ---
+par le critère de bonne réduction de Néron--Ogg--Chafarevitch ; « la triste vérité
+est que je ne sais pas montrer de façon générale, même en admettant les
+conjectures standard, que le niveau d'un motif ne peut que diminuer par
+spécialisation ». En se spécialisant sur un corps fini à $q$ éléments, le niveau 1
+force les valeurs propres de Frobenius sur $E^{2n-1}(Y_{\bar t})$ à être divisibles
+par $q^{n-1}$ (comme entiers algébriques) ; il suffit donc de trouver $t$ où l'une
+d'elles est une unité $p$-adique. C'est ce que Katz obtient par la formule des
+points fixes de Woods Hole et Verdier.\footnote{Le tapuscrit écrit
+« Lefschetz-Woodshole-Verdier » : la formule des points fixes pour la cohomologie
+cohérente, issue du colloque de Woods Hole (1964), sous la forme algébrique que
+lui donne Verdier. « (et est peut-être équivalent à) », qui suit « implique »,
+est ajouté à l'encre.}
+
+\pagerange{16}{20}
+\subsection*{Le théorème 7.1 et ses corollaires (n\textsuperscript{o}~7, pages 16 à 20)}
+
+Le n\textsuperscript{o}~7 est écrit deux fois. La première rédaction tient en une
+ligne, au bas de la page 16 : « Le procédé de Katz. A lui de jouer \ldots ». La
+seconde, page 17, commence par « Je vais prouver la conjecture du
+n\textsuperscript{o}~6 pour des pinceaux de Lefschetz assez généraux
+d'hypersurfaces de grand degré », et l'encre entoure « vais prouver » et écrit
+en tête du feuillet : « non, pas tout à fait ! ».\footnote{Le « non » est d'une
+lecture incertaine ; « pas tout à fait » ne l'est pas.}
+
+Dans tout ce numéro, $X \subset \mathbf{P}^r_k$ est projectif, équidimensionnel,
+de Cohen--Macaulay, de dimension $m > 0$, sur un corps $k$ de caractéristique
+$p > 0$.
+
+\emph{Le cadre.} Soit $S_d$ l'espace projectif des formes de degré $d$, $k'$ son
+corps des fonctions et $Y \subset X_{k'}$ la section de $X$ par l'hypersurface
+générique de degré $d$.\footnote{Le tapuscrit écrit $k' = k(t_0, \ldots, t_r)$.
+Les coefficients de la forme générique de degré $d$ sont indexés par les monômes
+de degré $d$ en $r+1$ variables, et c'est en autant d'indéterminées que $k'$ est
+engendré.} Soit $E_0(Y)$ le conoyau de $H^{m-1}(X_{k'}, \mathcal{O}) \to
+H^{m-1}(Y, \mathcal{O}_Y)$, espace de dimension finie sur $k'$, muni du Frobenius
+$p$-linéaire $F$ induit par l'élévation à la puissance $p$. Sa \emph{partie
+semi-simple} $V$ est le plus grand sous-espace stable sur lequel $F$ est bijectif ;
+l'ensemble $V_0$ des $x \in V \otimes \bar k'$ tels que $Fx = x$ est un
+$\mathbf{F}_p$-espace de dimension $\dim_{k'}V$, sur lequel agit
+$G = \operatorname{Gal}(\bar k'/k')$, d'image $G_0 \subset
+\operatorname{Aut}(V_0)$. En langage d'aujourd'hui, $V_0$ est le
+$\mathbf{F}_p$-système local étale qui correspond à la partie de pente nulle de
+$(E_0, F)$, et $\dim V$ un rang de Hasse--Witt stable.
+
+\emph{Théorème 7.1.} Il existe $d_0$ tel que pour tout $d \geqslant d_0$ et tout
+$a \in \mathbf{F}_p$, il existe $u \in G_0$ et un sous-espace $V'_0 \subset V_0$
+stable par $u$ avec $\operatorname{Tr}(u|V'_0) = a$.\footnote{C'est l'énoncé tel
+que l'encre le corrige : « d'un sous-groupe $V'_0 \subset V_0$ stable par $G_0$ »
+est inséré sous la ligne sans place marquée, et « $|V'_0$ » ajouté à la trace. La
+stabilité que la démonstration fournit (lemme 7.5) est par $u$, non par $G_0$ ;
+on écrit ce qui est démontré. Le texte tapé disait davantage : un $u \in G_0$ de
+trace $a$ \emph{sur $V_0$ tout entier}, et ajoutait que $G_0$ n'est pas un
+$p$-groupe --- parenthèse barrée à l'encre. Le tapuscrit écrit
+$a \in \mathbf{F}_p^*$ ; la démonstration donne tout $a \in \mathbf{F}_p$.}
+
+En marge de cet énoncé, à l'encre et de biais : « pas prouvé sous cette forme
+juste ».\footnote{Lecture incertaine. Telle qu'elle se lit, et rapprochée de la
+note du corollaire 7.2, elle signifie que l'énoncé tapé n'est pas prouvé ; on
+verra que l'argument donne exactement la forme corrigée.}
+
+\emph{Corollaire 7.2.} Supposons $k$ fini. Pour tout ouvert non vide $U$ de
+$S_d$ et tout entier $a$, il existerait une extension finie $k'$ de $k$ et
+$t \in U(k')$ tel que
+\[ \operatorname{card} Y_t(k') \equiv a \pmod p , \]
+où $Y_t$ est la section de $X_{k'}$ par l'hypersurface $t$. En marge, à l'encre :
+« pas prouvé ; également 7.1 sous sa forme juste », et un « pas prouvé » au crayon
+au bout de la démonstration.\footnote{La première marginale est d'une lecture
+incertaine ; la seconde, dans un ovale au crayon, ne l'est pas. On écrit le
+corollaire au conditionnel pour cette raison.}
+
+La démonstration esquissée est la suivante. Pour $Y$ propre sur un corps fini, la
+somme alternée des traces du Frobenius sur les $H^i(Y, \mathcal{O}_Y)$ est
+congrue modulo $p$ au nombre de points rationnels --- la congruence que le
+tapuscrit attribue à Deligne, par la formule de Lefschetz--Verdier.\footnote{Elle
+est exposée, à notre connaissance, par Katz dans SGA~7~XXII, et étendue à tout
+schéma propre par Fulton (1978).} Le choix de $d_0$ assure
+$H^i(X, \mathcal{O}_X(-d)) = 0$ pour $i < m$ --- c'est là que sert l'hypothèse de
+Cohen--Macaulay ---, donc $H^i(X, \mathcal{O}) \to H^i(Y_s, \mathcal{O})$ est un
+isomorphisme pour $i \leqslant m-2$ et injectif pour $i = m-1$. Sur un ouvert
+convenable $U$, la formation des $R^if_*\mathcal{O}$ commute au changement de
+base, et $V$ s'étend en un sous-fibré $\underline{V}$ stable sur lequel $F$ est
+bijectif ; la représentation $V_0$ provient alors du groupe fondamental $\pi$ de
+$U$. On obtient, $f_t \in G_0$ désignant le Frobenius du point $t$ et $c_t$ la
+somme alternée des traces de Frobenius sur les $H^i(X, \mathcal{O}_X)$,
+$0 \leqslant i \leqslant m-1$,
+\[ \operatorname{card} Y_t(k') \equiv c_t + (-1)^{m-1}\operatorname{Tr} f_t
+\pmod p . \]
+Quitte à agrandir $k$, $c_t = c$ ne dépend pas de $t$, et le théorème de densité
+de Čebotarev donne un $t$ de Frobenius $f_t$ prescrit dans $G_0$.\footnote{Pour
+les schémas de type fini sur un corps fini ; Serre, 1965. Le caron est ajouté à la
+main.} Mais il faut pour cela un $f \in G_0$ de trace prescrite \emph{sur $V_0$
+tout entier} : c'est la forme tapée de 7.1, que l'argument n'établit pas. Le
+corollaire 7.2 reste donc non démontré, comme l'auteur le note.
+
+\emph{Corollaire 7.3.} Supposons $m$ pair, $m \geqslant 4$, et $X$ lisse. Il
+existerait un ouvert non vide $U'$ de la grassmannienne des droites de $S_d$ tel
+que, pour toute droite $D \in U'(k')$ ($k'$ une extension quelconque de $k$)
+définissant un pinceau de Lefschetz sur $X_{k'}$, la partie évanescente
+$E(Y_t)$ de la section au point générique $t$ de $D$ ne soit pas de niveau 1, ni
+ne contienne de sous-motif non nul de niveau 1, même après extension de
+$k(t)$.\footnote{L'hypothèse « $m$ pair, $X$ lisse » est tapée, « $\geqslant 4$ »
+et les ajouts sur $U'$ et $D$ sont à l'encre. La note encadrée de la marge définit
+$U'$ comme un ouvert de droites rencontrant $\overline{U}$ telles que $\pi_1(D
+\cap U) \to \pi_1(U)$ soit surjectif, et annonce « une variante de Bertini » ;
+« ouvert » et « $U$ » y sont d'une lecture incertaine, et un mot y est illisible.}
+
+L'argument : par le critère de Néron--Ogg--Chafarevitch, on se ramène à $k$ fini,
+et il suffit de trouver un point fermé $s$ de $D$ où les valeurs propres de
+Frobenius sur $E^{m-1}(Y_s, \mathbf{Q}_\ell)$ ne sont pas toutes divisibles par
+$p$. Par la formule des traces, le théorème de Lefschetz faible et la dualité de
+Poincaré, le nombre de points de $Y_s$ est la somme d'un terme venu de la
+cohomologie de $X$ et de $(-1)^{m-1}\operatorname{Tr}(\mathrm{Frob} \mid
+E^{m-1}(Y_s))$ ; les termes de degré $i \leqslant m-2$ et leurs duaux de degré
+$2m-2-i$, une fois $k$ agrandi pour que les valeurs propres sur les
+$H^i(X_{\bar k})$ soient congrues à $0$ ou $1$ modulo $p$, contribuent modulo
+$p$ une constante $c$ indépendante de $s$ (les duaux sont divisibles par
+$q$).\footnote{La formule de la page 20 est reprise à l'encre et coupée par le
+bord du feuillet ; l'exposant du facteur $(1 + q^{\ldots})$ est illisible, et les
+signes ont été biffés plusieurs fois. On donne la structure de la formule, non sa
+lettre ; la justification par la divisibilité des termes duaux est nôtre.} Si
+toutes les valeurs propres sur $E^{m-1}$ étaient divisibles par $p$, on aurait
+$\operatorname{card} Y_s(k') \equiv c$ pour toute extension finie $k'$ ; il
+suffit donc de trouver $s \in D \cap U$ et $k'$ avec $\operatorname{card}
+Y_s(k') \not\equiv c$. C'est ce que donnerait 7.2, raffiné en imposant à $s$ de
+rester sur une droite $D$ donnée : par Bertini, $\pi_1(D \cap U)$ se surjecte sur
+$\pi_1(U)$, donc sur $G_0$, et Čebotarev s'applique sur $D \cap U$. Le
+tapuscrit s'arrête là, au milieu de la page 20.
+
+\pagerange{21}{26}
+\subsection*{Remords, démonstration de 7.1, et le n\textsuperscript{o}~8 (pages 21 à 26)}
+
+\emph{Remarques 7.4.} a) « Remords à 7.3 » : inutile de supposer $m$ pair et
+$m \geqslant 4$ si l'on énonce que \emph{le niveau de $E^{m-1}(Y_t)$ est
+$m-1$}, c'est-à-dire que $E^{m-1}(Y_t)$ n'a aucun morceau de coniveau
+$\geqslant 1$. Point n'est besoin alors du critère de Néron--Ogg--Chafarevitch :
+si un cycle sur $Z \times Y_{\bar t}$ définissait un épimorphisme
+$H^{m-3}(Z)(-1) \to E(Y_{\bar t})$, il se spécialiserait aux points $s$ de $D$
+voisins de $t$, et les valeurs propres de Frobenius sur $E(Y_{\bar s})$ seraient
+divisibles par $\operatorname{card} k(s)$, ce qu'un choix de $D$ assez général
+interdit. Si $m$ est impair, la représentation de monodromie ne reste plus
+simple sur les sous-groupes ouverts, mais le plus grand sous-motif de niveau
+$< m-1$ est stable par Galois, et la même conclusion vaut sur $k(t)$.\footnote{Le
+tapuscrit tape « de niveau $n-1$ » en interligne, là où le sens demande « de
+niveau $< n-1$ » --- la transcription le signale d'un « sic ? ». « épi » est tapé
+au-dessus de « morphisme ».} b) Le langage des motifs n'a servi que de
+commodité ; on peut l'éviter en définissant la filtration par le niveau sur la
+cohomologie $\ell$-adique comme en a). « Ceci dit, l'énoncé 7.3 \ldots{} est
+démontré sans aucune conjecture (pas même Lefschetz vache pour $X$ \ldots) » ---
+\emph{une fois 7.2 acquis}, précise-t-on ici, puisque 7.3 en dépend.
+
+\emph{Démonstration de 7.1.} On prend $d_0$ tel que $H^i(X,
+\mathcal{O}_X(-d)) = 0$ pour $d \geqslant d_0$ et $i < m$, et pour $U \subset
+S_d$ l'ouvert des $s$ où $\dim Y_s = m-1$, qui est aussi le plus grand ouvert où
+$\underline{Y} \to S_d$ est plat. Par EGA~III~7, les $R^if_*\mathcal{O}_Y$ sont
+plats sur $U$ et commutent au changement de base. « On fera attention » : on
+devra utiliser des points $s$ où $Y_s$ est réductible, et ce n'est qu'une fois
+7.1 acquis qu'on pourrait descendre dans un petit ouvert de $S_d$, comme en 7.2.
+On se ramène à $k$ fini à $q = p^f$ éléments, et, quitte à l'agrandir, à ce que
+les valeurs propres des Frobenius sur les $H^i(X, \mathcal{O}_X)$ soient $0$ ou
+$1$ ; soit $c$ la somme alternée des rangs semi-simples des $H^i(X,
+\mathcal{O}_X)$, $0 \leqslant i \leqslant m-1$. La congruence de Deligne et les
+isomorphismes précédents donnent, pour tout $s \in U(k')$,
+\[ \operatorname{card} Y_s(k') \equiv c + (-1)^{m-1}\operatorname{Tr} f_s
+\pmod p , \]
+où $f_s$ est le Frobenius relatif à $k'$ sur la partie semi-simple de $E_0(Y_s)$.
+\footnote{Le tapuscrit note $q = p^m$ ; on écrit $p^f$, $m$ étant la dimension.
+L'encre corrige « c'est la puissance $m$-ème du frobenius » en « ce sont les
+puissances \ldots{} des frobenius ».} Le théorème découle de deux lemmes.
+
+\emph{Lemme 7.5.} Pour tout $s \in U$, il existe $f \in G_0$ et un sous-espace
+$V'_0 \subset V_0$ stable par $f$ tels que le polynôme caractéristique de $f$
+sur $V'_0$ soit celui de $f_s$ ; en particulier $\operatorname{Tr}(f|V'_0) =
+\operatorname{Tr} f_s$.\footnote{L'ajout « et $V'_0 \subset V_0$ stable par
+$f$ » est à l'encre ; « stable par » est d'une lecture incertaine.}
+
+\emph{Lemme 7.6.} Pour tout entier $N \geqslant 0$, il existe $d'_0$ tel que pour
+tout $d \geqslant d'_0$ il existe une extension finie $k'$ de $k$ et $s \in
+U_d(k')$ avec $\operatorname{card} Y_s(k') = N$. Cela vaut dès que $X$ est un
+sous-schéma fermé de $\mathbf{P}^r_k$ de dimension $m \geqslant 1$.
+
+\emph{Démonstration de 7.6.} On peut supposer $X$ réduit. Soit $e$ la somme des
+degrés des composantes irréductibles de dimension $m$, et $d_1$ tel que
+$N \leqslant e\, d_1^{\,m}$.\footnote{Le tapuscrit écrit $r$ pour cette somme, et
+« $N \geqslant r d_1^{\,n}$ ». L'inégalité doit aller dans l'autre sens : on veut
+découper $N$ points parmi les $e\,d_1^{\,m}$ points de $Z$. Le tapuscrit le
+confirme lui-même quelques lignes plus bas, où le cas $d_1 = 1$ est celui de
+« $N \leqslant r$ ».} Quitte à agrandir $k$, les composantes $X_i$ sont
+géométriquement irréductibles, chacune a un point rationnel $x_i$, et $m$ formes
+$\phi_0, \ldots, \phi_{m-1}$ de degré $d_1$ découpent sur $X$ un schéma fini
+étale $Z$ de degré $e\,d_1^{\,m}$, à points tous rationnels, évitant les $x_i$.
+Quitte à agrandir encore $k$ et $d_1$, une forme $\phi_m$ de degré $d_1$ découpe
+sur $Z$ exactement $N$ points.\footnote{Ce pas est affirmé, non argumenté.} Pour
+$d_2 \geqslant m+1$, il existe sur un corps fini une forme $\underline{\phi}$ en
+$m+1$ variables, de degré $d_2$, sans zéro non trivial --- une forme normique,
+restreinte au besoin à un sous-espace. Alors $\phi =
+\underline{\phi}(\phi_0, \ldots, \phi_m)$, de degré $d_1d_2$, a pour zéros
+rationnels sur $X$ exactement les $N$ points de $Z \cap H_{\phi_m}$, et ne
+s'annule en aucun $x_i$, donc définit un point de $U$. Si $N \leqslant e$, on
+prend $d_1 = 1$, et $d'_0 = m+1$ convient. Sinon, on multiplie $\phi$ par une forme
+$\psi$ de degré $d_3 \geqslant m+1$ sans zéro rationnel sur $X$ (le cas $N = 0$),
+ce qui ne change pas l'ensemble des zéros rationnels, et l'on atteint tous les
+degrés $d = d_1d_2 + d_3$ ; avec $d_2 = m+1$, on peut prendre
+\[ d'_0 = (d_1 + 1)(m+1). \]
+\footnote{Le tapuscrit écrit $(H_{\phi\psi} \cap X)(k) = Z(k)$ ; c'est
+$(H_{\phi_m} \cap Z)(k)$, de cardinal $N$.}
+
+\emph{Comment 7.1 en résulte.} Pour $a \in \mathbf{F}_p$, on choisit $N \in [0,
+p-1]$ congru à $c + (-1)^{m-1}a$, on prend $d \geqslant d_0$ et $\geqslant$ les
+$d'_0(N)$ ; 7.6 donne $s$ avec $\operatorname{Tr} f_s = a$, et 7.5 un $f \in G_0$
+et un $V'_0$ stable par $f$ avec $\operatorname{Tr}(f|V'_0) = a$. C'est la forme
+corrigée de 7.1, et rien de plus : le passage par un sous-espace est inévitable,
+parce que les points $s$ fournis par 7.6 sont des sections réductibles, dont la
+partie semi-simple peut être plus petite que la partie générique.
+
+\emph{Remarques 7.7.} a) On obtient ainsi une estimation de $d_0$ en fonction de
+$p$, de $e$ et du plus petit entier qui assure l'annulation des $H^i(X,
+\mathcal{O}(-d))$. Si l'on se contente d'au moins deux traces distinctes, on peut
+prendre $d'_0 = m+1$ ; cela suffit, dans la forme corrigée, à établir que
+$V \neq 0$, c'est-à-dire que le Frobenius n'est pas nilpotent sur
+$E_0(Y)$.\footnote{Le tapuscrit en déduit aussi que $G_0$ n'est pas un
+$p$-groupe : cela vaut pour la forme tapée de 7.1 (les éléments d'un $p$-groupe
+de $\operatorname{GL}(V_0)$ ont tous la trace $\dim V_0$), non pour la forme
+corrigée, où des sous-espaces différents donnent des traces différentes même si
+$G_0$ est trivial. Il en déduit enfin que ce choix de $d_0$ suffit à une forme
+affaiblie de 7.2, donc à 7.3 : cela suppose de nouveau la forme tapée.} b) On
+peut améliorer $d'_0$ en découpant $N = N' + N''$ et en prenant des formes
+produits de degrés premiers entre eux.\footnote{Le tapuscrit écrit « $N''
+\geqslant r d_2'^{\,n}$ » ; le sens demande $d''_1$, et l'inégalité dans le même
+sens qu'en 7.6, corrigée comme plus haut.} c) Les formes auxiliaires sans zéro
+sont des formes normiques, géométriquement produits de formes linéaires : c'est
+pourquoi on ne peut travailler que dans le gros ouvert $U_d$.
+
+\emph{Lemme 7.8 (la raison de 7.5).} Soit $S$ un schéma normal de
+caractéristique $p$, $\underline{V}$ un module localement libre de type fini muni
+d'un endomorphisme $p$-linéaire, $t$ un point de $S$ et $s$ une spécialisation de
+$t$. Soient $V_1$ et $V_0$ les $\mathbf{F}_p$-représentations de $G_t$ et $G_s$
+définies par les parties semi-simples des fibres en $t$ et en $s$. Il existe un
+sous-groupe de décomposition $D \subset G_t$ au-dessus de $s$ et un sous-espace
+$V'_0 \subset V_1$ stable par $D$, tels que l'action de $D$ sur $V'_0$ se factorise
+par $D \to G_s$ et soit isomorphe à $V_0$.\footnote{Le tapuscrit dit « un
+sous-groupe \emph{ouvert} $G'_t$ de $G_t$ » ; un groupe de décomposition est
+fermé et n'est pas ouvert en général. Ce qui suffit à 7.5, c'est qu'il contienne
+un relèvement du Frobenius de $s$.} La démonstration, dit-il, est « par l'âne qui
+trotte », en se ramenant à $S$ intègre et hensélien, de point fermé $s$ et de point
+générique $t$. Elle tient en ceci, qui est nôtre : l'équation $Fx = x$ définit un
+revêtement étale, de sorte que ses solutions dans la fibre spéciale se relèvent de
+façon unique au-dessus du hensélisé, et s'injectent dans la fibre générique. C'est
+la version en caractéristique $p$ de ce que le rang de Hasse--Witt stable (le
+$p$-rang, pour une variété abélienne) ne peut que baisser par spécialisation.
+
+Le tapuscrit s'achève, page 26, sur un titre à l'encre sans texte :
+« 8. Relations heuristiques entre cohomologie cristalline et la torsion
+cristalline, et la cohomologie cohérente. (J'ai donné notes à
+Berthelot) ».\footnote{« torsion » et « Berthelot » sont d'une lecture
+incertaine.}
+
+\pagerange{27}{33}
+\section*{Biextensions de complexes $[M \to G]$ (pages 27 à 33)}
+
+Notes à l'encre, écrites pour trois d'entre elles au dos de feuillets du
+tapuscrit de l'exposé VIII. Elles posent la situation que Deligne publiera en 1974
+sous le nom de \emph{1-motifs} : une variété abélienne
+munie d'un réseau et d'un tore, et sa duale.\footnote{Deligne, \emph{Théorie de
+Hodge III}, Publ.\ IHES 44 (1974), §~10. Ces feuillets ne sont pas datés ; on ne
+dit rien de l'ordre entre les deux, et le nom de « 1-motif » n'est pas sur la
+page.}
+
+\emph{La situation} (pages 27 et 28). Soient $B$, $B'$ deux schémas abéliens
+duaux, $\varepsilon$ la biextension de Poincaré de $B \times B'$ par
+$\mathbb{G}_m$, $M$, $M'$ deux groupes « réseaux » (localement libres de type
+fini), et $i\colon M \to B$, $i'\colon M' \to B'$. Comme
+$\underline{\operatorname{Hom}}(B, \mathbb{G}_m) = 0$ et
+$\underline{\operatorname{Ext}}^1(M', \mathbb{G}_m) = 0$, on a
+\[ \operatorname{Hom}(M', \underline{\operatorname{Ext}}^1(B, \mathbb{G}_m))
+\simeq \operatorname{Biext}(B, M'; \mathbb{G}_m) \simeq
+\operatorname{Ext}^1(B, D(M')) , \]
+où $D(M') = \underline{\operatorname{Hom}}(M', \mathbb{G}_m)$ est le tore dual de
+$M'$ ; comme $\underline{\operatorname{Ext}}^1(B, \mathbb{G}_m) = B'$,
+\emph{se donner $i'$ revient à se donner une extension}
+\[ 0 \to D(M') \to G \to B \to 0 , \]
+et symétriquement $i$ donne $0 \to D(M) \to G' \to B' \to 0$. On pose $T =
+D(M')$, $T' = D(M)$. Les \emph{relèvements} $M \to G$ de $i$ correspondent alors
+aux trivialisations de la biextension $\varepsilon_{i,i'}$ tirée en arrière sur
+$M \times M'$, et de même les relèvements $M' \to G'$ de $i'$ ; et les deux
+trivialisations de $\varepsilon_{M,M'}$ qu'on déduit d'un côté et de l'autre
+coïncident.\footnote{L'« Exemple » de la page 28, d'où viennent ces équivalences,
+est d'une lecture incertaine par endroits (« si », « vrai », « ainsi »,
+« Donc »), et un passage biffé y est à peu près illisible. Les deux conditions
+d'annulation sont écrites sous les flèches, entourées.}
+
+\emph{Le complexe et sa biextension} (page 30). Posons $A = [M \to G]$ et $A' =
+[M' \to G']$, complexes en degrés $-1$ et $0$. Lorsque $M \to G$ et $M' \to G'$
+sont injectifs, on a une biextension canonique de $(G/M, G'/M')$ ; en général, on
+dispose d'une classe canonique
+\[ \xi \in \operatorname{Ext}^1(A \overset{L}{\otimes} A', \mathbb{G}_m), \]
+qui est la classe d'une biextension de $(A, A')$ par $\mathbb{G}_m$ (SGA~7~VII).
+Le groupe de $n$-torsion du complexe, ${}_nA = \underline{\operatorname{Ext}}^0
+(\mathbf{Z}/n, A)$, s'insère dans
+\[ 0 \to {}_nG \to {}_nA \to M_n \to 0 \]
+dès que ${}_nM = 0$ et que $G$ est $n$-divisible\footnote{La page écrit
+« ${}_nG = G$ », puis « i.e.\ $nB = B$, $nT = T$ » : c'est la divisibilité qui
+est voulue. Pour un groupe extension d'un schéma abélien par un tore, elle est
+d'ailleurs automatique en topologie plate. La parenthèse « ce dernier résulte de
+${}_nM = 0$ » ne se comprend pas telle quelle.}, et à la limite sur $n =
+\ell^\nu$
+\[ 0 \to T_\ell(G) \to T_\ell(A) \to M \otimes \mathbf{Z}_\ell \to 0 , \]
+et de même pour $A'$.\footnote{Le premier terme de la seconde suite se lit
+$T_\ell(A')$ ; on lit $T_\ell(G')$ par symétrie, comme la transcription.} C'est
+la filtration par le poids du module de Tate d'un 1-motif : $T_\ell(T) \subset
+T_\ell(G) \subset T_\ell(A)$.
+
+\emph{L'accouplement et l'orthogonalité} (page 32). La classe $\xi$ induit
+\[ \varphi^\xi_n\colon {}_nA \times {}_nA' \to \mu_n , \qquad
+T_\ell(A) \times T_\ell(A') \to \mathbf{Z}_\ell(1) . \]
+
+\emph{Proposition.} Dans cet accouplement, ${}_nT = D(M'_n)$ est orthogonal à
+${}_nG'$, et ${}_nG$ est orthogonal à ${}_nT' = D(M_n)$. Les accouplements induits
+--- entre ${}_nA/{}_nG = M_n$ et ${}_nT'$, entre ${}_nA'/{}_nG' = M'_n$ et
+${}_nT$, et entre ${}_nG/{}_nT = {}_nB$ et ${}_nG'/{}_nT' = {}_nB'$ --- sont
+« ceux qu'on devine » : les dualités de Cartier évidentes et l'accouplement de
+Weil.\footnote{Sous $D(M'_n)$, la page écrit « $= {}_nT'$ », et sous $D(M_n)$
+« $= {}_nT$ », ce qui intervertit les identifications des pages 27 et 28
+($T = D(M')$, $T' = D(M)$) ; on suit ces dernières. Les deux parenthèses « (le
+reste si ${}_nM' = 0$) » sont d'une lecture incertaine.}
+
+\emph{Corollaire.} Si ${}_nM = {}_nM' = 0$ et que l'accouplement de Weil entre
+${}_nB$ et ${}_nB'$ est parfait, l'accouplement entre ${}_nA$ et ${}_nA'$ est
+parfait --- le gradué l'est.\footnote{Pour des schémas abéliens duaux,
+l'accouplement de Weil sur les ${}_n$ est toujours parfait (dualité de Cartier
+entre ${}_nB$ et ${}_nB'$) ; l'hypothèse est donc automatique. L'exemple que la
+page en donne est d'une lecture incertaine.}
+
+\emph{Les feuillets tapés} (pages 29, 31, 33). Au dos des pages 28, 30 et 32, et
+reproduits tête-bêche, trois feuillets d'un état dactylographié de l'exposé VIII
+de SGA~7, §~2, « Accouplements définis par une biextension » (de 2.1 à la fin de
+2.3) : un texte publié, que la transcription ne reproduit pas. On y voit ses
+corrections à l'encre --- des renvois rectifiés, des flèches nommées dans les
+diagrammes, et, à la place de « qu'on laisse au lecteur le soin d'établir »,
+« cf.~2.3 ci-dessous pour une démonstration ».
+
+\pagerange{34}{45}
+\section*{Picard et dualité (pages 34 à 45)}
+
+Une couverture porte ce titre (page 34). Les feuillets qui suivent tournent autour
+d'une seule formule --- les torseurs sur $X$ sous un groupe commutatif $G$ se
+lisent comme des homomorphismes du dual de $G$ vers le foncteur de Picard de $X$ ---
+et de ses variantes.\footnote{Rien sur les feuillets 41 à 45 ne dit qu'ils
+appartiennent tous à la chemise « Picard et dualité » ; on les y range parce
+qu'ils en continuent les formules.} La topologie est la topologie plate (fppf)
+partout où interviennent $\mu_p$ et $\alpha_p$.
+
+\pagerange{35}{35}
+\subsection*{La cohomologie plate d'une courbe (page 35)}
+
+Une table, pour $X$ une courbe propre, lisse et connexe sur $k$ algébriquement
+clos de caractéristique $p$, de jacobienne $P$.\footnote{La page ne dit pas ces
+hypothèses ; ce sont celles où la table est vraie.}
+\[
+\begin{array}{c|ccc}
+ & H^0 & H^1 & H^2 \\
+\hline
+\mu_\ell & \mu_\ell(k) & {}_\ell P & \mathbf{Z}/\ell \\
+\mu_p & 0 & {}_pP(k) & \mathbf{Z}/p \\
+\alpha_p & 0 & \operatorname{Ker}\bigl(F \mid H^1(X, \mathcal{O}_X)\bigr) &
+\operatorname{Coker}\bigl(F \mid H^1(X, \mathcal{O}_X)\bigr)
+\end{array}
+\]
+avec, pour les coefficients constants, $H^i(X, \mathbf{Z}/\ell) = H^i(X,
+\mu_\ell) \otimes \operatorname{Hom}(\mu_\ell(k), \mathbf{Z}/\ell)$, et
+$H^0(X, \mathbf{Z}/p) = \mathbf{Z}/p$, $H^1(X, \mathbf{Z}/p) = H^1(X,
+\mathcal{O}_X)^{F=1}$, $H^2(X, \mathbf{Z}/p) = 0$. Les lignes $\mu$ sont la
+théorie de Kummer ; les lignes $p$ sont la dualité de Serre--Cartier, que la marge
+nomme ; l'accouplement ${}_\ell P \times {}_\ell P \to \mu_\ell$ est l'autodualité
+de la jacobienne.\footnote{Il note d'un $z$ bouclé ce qu'on écrit $\mu_\ell$,
+$\mu_p$, et $U_\ell$ le groupe $\mu_\ell(k)$ ; il note $i_p$ ce qu'on écrit
+$\alpha_p$, noyau du Frobenius de $\mathbb{G}_a$. La page ne nomme pas ces
+faisceaux : leur identification est nôtre, et repose sur ce que la table leur
+attribue exactement leurs valeurs. Elle écrit « $H^2(X, \mathbf{Z}/p) \simeq
+H^2(X, \mathbf{Z}/p) = 0$ » tel quel, et « et cohomologie discrète », d'une
+lecture incertaine, en marge.}
+
+\pagerange{36}{36}
+\subsection*{Une adjonction, et un programme (page 36)}
+
+Pour $f\colon X \to S$ et $B$ un faisceau sur $S$,
+\[ \operatorname{Ext}_X(f^*B, \mathbb{G}_m) \simeq \operatorname{Ext}_S(B,
+Rf_*\mathbb{G}_m) , \]
+d'où une suite spectrale d'aboutissement $\operatorname{Ext}_X$ et de terme
+$H^p(X, \underline{\operatorname{Ext}}^q_X(f^*B, \mathbb{G}_m))$.\footnote{La page
+écrit $f^!$ ; l'adjoint à droite de $f^*$ est $Rf_*$, et c'est lui que la formule
+demande ($f^!$ est l'adjoint à droite de $Rf_!$). Même lecture plus bas pour ses
+$f_!$ et $f_{\cdot}$.} Suit, en accolade, une liste de sujets, presque tous
+d'une lecture incertaine : suites exactes de cohomologie et critères de
+représentabilité ; Frobenius et Verschiebung ; dualité de Cartier ; un théorème
+de finitude ; propriétés formelles, puis différentielles, des groupes et des
+fibrés ; et le cas particulier des fibrés linéaires, symplectiques, orthogonaux.
+C'est un plan, et le dossier n'en développe que le début.
+
+\pagerange{38}{40}
+\subsection*{Torseurs sous une variété abélienne (pages 38 à 40)}
+
+Soit $X$ propre et lisse sur $k$ algébriquement clos, avec $H^0(X,
+\mathcal{O}_X) = k$, et $A$ une variété abélienne sur $k$, de duale
+$A'$.\footnote{La page dit « $X$ propre et simple sur $k$ », annonce des
+« généralisations à une base quelconque », et ne dit pas que $k$ est
+algébriquement clos ; c'est ce qu'il faut pour que $A(k)$ soit divisible et que les
+torseurs sous un groupe fini venus de la base soient triviaux.} On sait que
+$H^1(X, A)$ est de torsion, et la suite de Kummer $0 \to {}_nA \to A \to A \to 0$
+donne
+\[ 0 \to A(X)_n \to H^1(X, {}_nA) \to {}_nH^1(X, A) \to 0 . \]
+On a $A(X)_n = \operatorname{Hom}(\operatorname{Alb}_X, A)_n$, et
+$H^1(X, G) \simeq \operatorname{Hom}(D(G), \underline{\operatorname{Pic}}_X)$
+pour un groupe commutatif fini $G$, de dual de Cartier $D(G)$ ; comme
+$\operatorname{Hom}(\operatorname{Alb}_X, A) \simeq \operatorname{Hom}(A',
+\underline{\operatorname{Pic}}^0_{X,\mathrm{red}})$ (la duale de l'albanaise) et $D({}_nA) \simeq {}_nA'$,
+\[ (*) \qquad 0 \to \operatorname{Hom}(A', \underline{\operatorname{Pic}}^0_X)_n \to
+\operatorname{Hom}({}_nA', \underline{\operatorname{Pic}}_X) \to {}_nH^1(X, A) \to 0 . \]
+D'autre part, la suite $0 \to {}_nA' \to A' \to A' \to 0$, à laquelle on
+applique $\operatorname{Hom}(-, \underline{\operatorname{Pic}}_X)$, donne
+\[ (**) \qquad 0 \to \operatorname{Hom}(A', \underline{\operatorname{Pic}}_X)_n \to
+\operatorname{Hom}({}_nA', \underline{\operatorname{Pic}}_X) \to
+{}_n\operatorname{Ext}^1(A', \underline{\operatorname{Pic}}_X) \to 0 . \]
+Les premiers termes coïncident ($A'$ est connexe), et à la limite inductive sur $n$
+\[ 0 \to \operatorname{Hom}(A', \underline{\operatorname{Pic}}_X) \otimes
+\mathbf{Q}/\mathbf{Z} \to \operatorname{Hom}(T_{\cdot}(A'),
+\underline{\operatorname{Pic}}_X) \to H^1(X, A) \to 0 , \]
+où $\operatorname{Hom}(T_\cdot(A'), -) = \varinjlim_n \operatorname{Hom}({}_nA',
+-)$, et de même avec $\operatorname{Ext}^1$. D'où
+\[ \boxed{H^1(X, A) \simeq \operatorname{Ext}^1(A',
+\underline{\operatorname{Pic}}_X)_{\mathrm{tors}}} \]
+à comparer à la formule de dualité $H^1(X, G) \simeq \operatorname{Hom}(D(G),
+\underline{\operatorname{Pic}}_X)$ pour $G$ fini.\footnote{Deux corrections. La
+page écrit $\otimes_{\mathbf{Z}} \mathbf{Q}$ ; la limite inductive des $N/nN$
+pour les flèches de multiplication est $N \otimes \mathbf{Q}/\mathbf{Z}$. Et la
+limite des ${}_n\operatorname{Ext}^1$ est le sous-groupe de torsion de
+$\operatorname{Ext}^1$, non $\operatorname{Ext}^1$ tout entier comme l'écrit
+l'encadré : les deux coïncident si $\operatorname{Ext}^1(A',
+\underline{\operatorname{Pic}}_X)$ est de torsion, ce que la page ne discute pas.
+Il faut enfin que les flèches de $(*)$ et $(**)$ se correspondent, ce qu'elle
+admet. L'exposant $0$ du dernier terme de $(**)$ est d'une lecture incertaine.}
+En marge : « Cet isomorphisme reste-t-il valable pour $X$ singulier ??? Il est
+possible qu'on ait besoin de $H^i(X, \mathbb{G}_m) = 0$ pour $i \geqslant 2$ ».
+Une remarque introduit les flèches canoniques
+\[ \operatorname{Ext}^1(\underline{\operatorname{Alb}}_X, A) \to H^1(X, A), \qquad
+\operatorname{Ext}^1(\underline{\operatorname{Alb}}_X, A) \simeq
+\operatorname{Ext}^1(A', \underline{\operatorname{Alb}}_X{}') \simeq
+\operatorname{Ext}^1(A', \underline{\operatorname{Pic}}^{\tau}_X) , \]
+dont il affirme qu'on vérifie que ce sont des isomorphismes sur une partie que la
+page ne laisse pas lire.\footnote{L'exposant $\tau$ est d'une lecture incertaine ;
+les trois dernières lignes de la page 39 ne sont lues qu'en partie.}
+
+Page 40, la même question en relatif, pour $X \to S$ et un $S$-groupe
+$\gamma$, écrite avec le faisceau $\underline{\mathcal{H}}^1(X/S; -) =
+R^1f_*$ :
+\[ R^1f_*\underline{\operatorname{Hom}}_{S\text{-gr}}(\gamma, G) \simeq
+\underline{\operatorname{Hom}}_{S\text{-gr}}(\gamma, R^1f_*G), \qquad
+R^1f_*\underline{\operatorname{Ext}}^1_{S\text{-gr}}(\gamma, G) \simeq
+\underline{\operatorname{Ext}}^1_{S\text{-gr}}(\gamma, R^1f_*G) , \]
+la première donnée comme isomorphisme de foncteurs « quand tout est affine sur
+$S$ (?) », la seconde suivie de « Sous quelles conditions ??? ». Le feuillet ne
+tranche pas, et l'on ne tranche pas pour lui.
+
+\pagerange{41}{43}
+\subsection*{Un morphisme birationnel, et l'adjonction pour $\mathbb{G}_m$ (pages 41 à 43)}
+
+La page 41, barrée de deux diagonales, considère un morphisme propre et
+birationnel $f\colon X \to Y$ de schémas intègres, et l'ouvert $U \subset Y$ où
+$f^{-1}$ est défini ; si $Y$ est régulier en codimension 1, le complémentaire de
+$U$ est de codimension $\geqslant 2$. Une classe $\xi \in \operatorname{Pic}(X)$
+donne par la section $g\colon U \to f^{-1}(U)$ une classe de
+$\operatorname{Pic}(U)$, donc un cycle divisoriel sur $Y$ --- et la page s'arrête
+là.
+
+La page 42 écrit l'adjonction pour $f\colon X \to Y$ :
+\[ \boxed{\underline{\operatorname{Ext}}^i_X(f^*G, H) \simeq
+\underline{\operatorname{Ext}}^i_Y(G, Rf_*H)} , \]
+puis la spécialise à $H = \mathbb{G}_m$, où $Rf_*\mathbb{G}_m$ est le complexe
+qu'il note $\underline{\operatorname{Pic}}^\bullet_{X/Y}$, de faisceaux de
+cohomologie $f_*\mathbb{G}_m$, $\underline{\operatorname{Pic}}_{X/Y} =
+R^1f_*\mathbb{G}_m$, $R^2f_*\mathbb{G}_m$, \ldots{} --- « les supérieurs ».
+\footnote{La page écrit $f_!$ et $f_{\cdot}$ ; voir la page 36. Les exposants
+$(1)$, $(2)$ de $\underline{\operatorname{Pic}}$ sont d'une lecture incertaine ;
+on les lit comme les $R^1$, $R^2$.} Pour $G$ fini et plat, de dual $D(G)$, avec
+$f_*\mathcal{O}_X = \mathcal{O}_Y$ et $Y$ le spectre d'un corps algébriquement
+clos, il en sort une suite spectrale
+\[ E_2^{p,q} = \operatorname{Ext}^p(G, R^qf_*\mathbb{G}_m) \Rightarrow
+H^{p+q}(X, D(G)) , \]
+dont il écrit les bas degrés : $H^0(X, D(G)) = D(G)$, $H^1(X, D(G)) =
+\operatorname{Hom}(G, \underline{\operatorname{Pic}}_X)$ --- c'est l'encadré
+$H^1(X, G) \simeq \operatorname{Hom}(D(G), \underline{\operatorname{Pic}}_X)$, aux
+rôles de $G$ et $D(G)$ près ---, et, pour $i = 2$,
+\[ H^2(X, D(G)) \neq \operatorname{Ext}^1(G, \underline{\operatorname{Pic}}_X)
+\oplus \operatorname{Hom}(G, R^2f_*\mathbb{G}_m) \quad ! \]
+Le signe $\neq$ et le point d'exclamation sont les siens : $H^2$ n'est pas une
+somme, mais porte une filtration dont le gradué est $\operatorname{Ext}^1(G,
+\underline{\operatorname{Pic}}_X)$ et le noyau de la différentielle
+$\operatorname{Hom}(G, R^2f_*\mathbb{G}_m) \to \operatorname{Ext}^2(G,
+\underline{\operatorname{Pic}}_X)$.\footnote{Cette lecture du « $\neq$ ! » est
+nôtre. La dernière ligne de la page, sur $H^{i-1}(X, G')$, est lue en partie, et
+ses exposants sont illisibles.}
+
+La page 43 commence une définition et l'abandonne : « \emph{Foncteurs adjoints.}
+Définition 1. Soient $X, Y \in (\mathrm{Cat})$, $f\colon X \to Y$ et $g\colon Y
+\to X$, on dit que $(f, g)$ est un couple de foncteurs adjoints, ou que $g$ est
+adjoint de $f$, ou que $f$ est coadjoint de $g$, s'il existe un \ldots
+».\footnote{La phrase s'arrête avant de dire de quel côté est l'adjonction ; on ne
+peut donc pas traduire « adjoint » et « coadjoint » en « adjoint à droite » et « à
+gauche ».} Suivent la curryfication
+\[ \operatorname{Hom}(X, \underline{\operatorname{Hom}}_{S\text{-gr}}(\gamma,
+G)) \simeq \{X \times \gamma \to G, \text{ additifs en } \gamma\} \simeq
+\operatorname{Hom}_{S\text{-gr}}(\gamma, \underline{\operatorname{Hom}}_S(X, G)) ,
+\]
+et, pour un $S$-groupe commutatif $\gamma$ et $X$ muni d'une section $a$, la suite
+exacte scindée par l'évaluation en $a$
+\[ 0 \to \gamma \to \underline{\operatorname{Hom}}_S(X, \gamma) \to
+\operatorname{Hom}((X, a), (\gamma, e)) \to 0 , \]
+avec $\underline{\operatorname{Hom}}_S(X, \gamma) = \gamma$ lorsque
+$f_*\mathcal{O}_X = \mathcal{O}_S$ et $\gamma$ est affine.\footnote{La page écrit
+« $\doteq \gamma$ », sans dire sous quelles hypothèses ; on donne celles où c'est
+vrai. Une égalité entre $H^1(X, \underline{\operatorname{Hom}}(\gamma, G))$ et
+$H^1(X, \underline{\operatorname{Ext}}^1(\gamma, G))$, écrite en tête, est
+abandonnée aussitôt, et on ne la reprend pas.}
+
+\pagerange{44}{45}
+\subsection*{Le groupe fondamental d'une variété abélienne (pages 44 et 45)}
+
+Soit $A$ une variété abélienne sur $k$ algébriquement clos de caractéristique
+$p$, $A^*$ sa duale. Le fait qui porte tout est qu'\emph{un revêtement étale
+d'une variété abélienne est une variété abélienne} (Serre--Lang) : le groupe
+fondamental est abélien, limite des noyaux des isogénies.
+
+\emph{La partie première à $p$} (page 45). $\pi_1^{(p')}(A) \simeq
+\varprojlim_{(n,p)=1} {}_nA$, et pour $\ell \neq p$
+\[ \pi_1^{\ell}(A) \simeq T_\ell(A) = \operatorname{Hom}(\mathbf{Q}_\ell/
+\mathbf{Z}_\ell, A). \]
+Par Kummer, $\operatorname{Hom}(\pi_1^\ell(A), \mu_{\ell^\infty})$ est le
+sous-groupe de $\operatorname{Pic}(A) = H^1(A, \mathcal{O}_A^*)$ formé des
+éléments d'ordre une puissance de $\ell$. Si le groupe de Néron--Severi de $A$ est
+sans torsion, ce sous-groupe est $A^*[\ell^\infty]$, et l'on obtient
+l'accouplement de Weil
+\[ \boxed{T_\ell(A) \times T_\ell(A^*) \longrightarrow T_\ell(\mu) =
+\mathbf{Z}_\ell(1)} , \]
+parfait, et ses niveaux finis ${}_{\ell^k}A \times {}_{\ell^k}A^* \to
+\mu_{\ell^k}$.\footnote{« Si on admet que $A$ \ldots{} pas de torsion » : le mot
+illisible est sans doute le sujet de « pas de torsion », et la lecture de ce
+dernier est incertaine. L'hypothèse dont l'argument a besoin est que
+$\mathrm{NS}(A)$ soit sans torsion, ce qui est vrai pour une variété abélienne
+($\underline{\operatorname{Pic}}^\tau_A = \underline{\operatorname{Pic}}^0_A$).
+La page note $U_\ell$ le groupe des racines de l'unité d'ordre une puissance de
+$\ell$.}
+
+\emph{La partie $p$} (page 44). Par la théorie d'Artin--Schreier--Witt, on a
+\[ H^1(A, \mathbf{Z}/p^n) \simeq H^1(A, W_n\mathcal{O}_A)^{F=1} , \]
+donc
+\[ \operatorname{Hom}(\pi_1^p(A), \mathbf{Z}_p) = H^1(A, \mathbf{Z}_p) \simeq
+H^1(A, W\mathcal{O}_A)^{F=1} , \]
+et, comme $\pi_1^p(A) \simeq T_p(A)$, un accouplement parfait de
+$\mathbf{Z}_p$-modules libres de type fini
+\[ \boxed{T_p(A) \times H^1(A, W\mathcal{O}_A)^{F=1} \longrightarrow
+\mathbf{Z}_p} , \]
+de rang le $p$-rang de $A$ ; après extension des scalaires,
+$\operatorname{Hom}_{\mathrm{cont}}(T_p(A), W(k)) \simeq H^1(A,
+W\mathcal{O}_A)_s$, la partie de pente nulle.\footnote{Il écrit
+$\mathbb{W}$ pour $W\mathcal{O}_A$, l'exposant $(p)$ pour les points fixes de $F$,
+et l'indice $s$ pour la partie semi-simple. Le $\Lambda$ d'un encadré est d'une
+lecture incertaine ; on lit $W(k)$, comme dans le dernier.}
+
+\pagerange{46}{58}
+\section*{Biextensions de faisceaux de groupes (pages 46 à 58)}
+
+Une couverture au crayon porte ce titre (page 46). Toutes les biextensions sont
+de faisceaux abéliens sur un topos, par un faisceau abélien $G$.
+
+\pagerange{47}{50}
+\subsection*{Reconstruire une biextension à partir d'une restriction (pages 47 à 50)}
+
+Soit $0 \to P' \to P \to P'' \to 0$ exacte, et $Q$, avec a) $Q$ $n$-divisible et
+b) ${}_nP \to P''$ épimorphique.\footnote{La page écrit « a) ${}_nQ = Q$ » ; le
+sens, et le corollaire 1 qui écrit « $pQ = Q$ », demandent la divisibilité.} Une
+biextension $E$ de $P \times Q$ par $G$ définit a) sa restriction $E'$ à
+$P' \times Q$, d'où un accouplement $E'(n)\colon {}_nP' \times {}_nQ \to G$ ; b)
+sa restriction à ${}_nP \times Q$, c'est-à-dire un accouplement $\varphi\colon
+{}_nP \times {}_nQ \to G$ ; et $\varphi$ prolonge $E'(n)$. Ces accouplements sont
+à valeurs dans ${}_nG$, par bilinéarité.
+
+« Je dis que le foncteur $E \mapsto (E', \varphi)$ est une équivalence de
+catégories. » La pleine fidélité revient à
+$\underline{\operatorname{Hom}}(P'' \otimes Q, G) = 0$, ce que a) et b)
+assurent puisqu'ils donnent $P'' \otimes Q = 0$ ; le reste de l'argument est
+barré de diagonales et n'est pas repris.\footnote{Le passage barré invoque une
+condition c) qui n'est pas sur la page.}
+
+\emph{Corollaire 1.} Soit $\mathbb{P}$ un ensemble de nombres premiers ; on
+suppose $\varinjlim_n {}_nP \to P''$ surjectif, $n$ parcourant les entiers à
+facteurs dans $\mathbb{P}$, et $pQ = Q$ pour $p \in \mathbb{P}$. Alors $E
+\mapsto (E', \varphi)$ est une équivalence entre les biextensions de $(P, Q)$
+par $G$ et les couples formés d'une biextension $E'$ de $(P', Q)$ et d'un
+accouplement
+\[ \varphi\colon T_{\mathbb{P}}(P) \times T_{\mathbb{P}}(Q) \to
+T_{\mathbb{P}}(G) \]
+prolongeant celui, $\varphi_{\mathbb{P}, E'}$, que définit $E'$. Un « NB »
+encadré, lu en partie, précise qu'il faut entendre les $T_{\mathbb{P}}$ comme
+des systèmes projectifs et garder le système des ${}_nP \times {}_nQ \to {}_nG$
+avec leurs compatibilités, plutôt que leur limite.
+
+\emph{Corollaire 2.} Soient $0 \to P' \to P \to P'' \to 0$ et $0 \to Q' \to Q
+\to Q'' \to 0$ exactes ; on suppose a) $pP = P$ et $pQ' = Q'$ pour $p \in
+\mathbb{P}$ (ou la condition symétrique), b) $\varinjlim {}_nP \to P''$ et
+$\varinjlim {}_nQ \to Q''$ épimorphiques. Alors $E \mapsto (E', \varphi)$, où
+$E'$ est la restriction à $P' \times Q'$ et $\varphi\colon T_{\mathbb{P}}(P)
+\times T_{\mathbb{P}}(Q) \to T_{\mathbb{P}}(G)$ prolonge $\varphi_{E',
+\mathbb{P}}$, est une équivalence de catégories. On applique le corollaire 1 deux
+fois : à $0 \to P' \to P \to P'' \to 0$ et $Q'$, puis à $P$ et $0 \to Q' \to Q \to
+Q'' \to 0$.
+
+Les deux corollaires reposent sur l'équivalence de la page 47, dont la
+démonstration est barrée ; le dossier ne les établit pas.
+
+Les pages 48 et 50 sont deux feuillets, numérotés 15 et 13, d'un tapuscrit
+français qui n'est pas de lui et n'appartient pas à SGA~7 --- préfaisceaux et
+faisceaux de modules sur un site, comparaison entre cohomologie de Čech et
+cohomologie des faisceaux ---, avec des corrections à l'encre d'une main non
+établie.
+
+\pagerange{51}{53}
+\subsection*{Biextensions sans hypothèse de rigidité (pages 51 et 53)}
+
+Soient $A$, $G$ des faisceaux abéliens au-dessus de $S$, $f\colon A \to S$
+le morphisme structural, $e_A$ la section unité, $G_A = f^*G$.
+
+a) Si $\underline{\operatorname{Hom}}_{\mathrm{gr}}(A, G) = 0$, la suite
+spectrale locale-globale donne
+\[ \operatorname{Ext}^1(A, G) \simeq H^0(S,
+\underline{\operatorname{Ext}}^1(A, G)) : \]
+les faisceaux d'extensions déterminent les extensions.
+
+b) Si $\underline{\operatorname{Hom}}_{\mathrm{pct}}(A, G) = 0$ --- les morphismes
+de faisceaux d'ensembles qui respectent la section unité, de sorte que $G
+\xrightarrow{\sim} f_*G_A$ ---, la suite de Leray, scindée par $e_A$, donne
+\[ H^1(A, G_A) \simeq H^1(S, G) \times H^0(S, R^1f_*G_A) , \]
+et $H^0(S, R^1f_*G_A)$ classifie les $G_A$-torseurs rigidifiés le long de
+$e_A$. Le foncteur qui envoie une extension de $A$ par $G$ sur le torseur
+rigidifié sous-jacent est pleinement fidèle, d'où une injection
+$\operatorname{Ext}^1(A, G) \hookrightarrow H^1(A, G_A)$, d'image essentielle
+les torseurs $L$ tels que
+\[ \Lambda(L) = m^*L \otimes \mathrm{pr}_1^*L^{-1} \otimes \mathrm{pr}_2^*L^{-1}
+\]
+soit trivial, $m$ désignant l'addition. On a donc une suite exacte de faisceaux,
+et une flèche vers le Néron--Severi :
+
+\begin{tikzcd}[column sep=small]
+0 \arrow[r] & \underline{\operatorname{Ext}}^1(A, G) \arrow[r, "i"] & R^1f_*G_A \arrow[r, "j"] \arrow[d, "k"'] & \underline{\operatorname{Tors}}_{\mathrm{birig,sym}}(A, A; G) \\
+ & & \underline{\mathrm{NS}}(A) \arrow[ur, "j'"'] &
+\end{tikzcd}
+
+où $j(L) = \Lambda(L)$ et où $j'$ dit que les bitorseurs symétriques
+birigidifiés de cette forme sont des biextensions.\footnote{La page dessine $k$
+en oblique et met $j'$ sur une seconde ligne, sous un signe d'égalité. Le
+« pct » est glosé en marge : « Hom (pas nécessairement multiplicatifs) qui
+respectent la section unité » ; « pas nécessairement » est d'une lecture
+incertaine. Le premier membre de la formule de $H^1$ est écrit $A_G$ ; on lit
+$G_A$, comme au second.} Pour $G = \mathbb{G}_m$ et $A$ un schéma abélien, c'est
+la situation classique : $\underline{\operatorname{Ext}}^1(A, \mathbb{G}_m) = A'$,
+$R^1f_*\mathbb{G}_m = \underline{\operatorname{Pic}}_{A/S}$, et $j'$ envoie une
+classe de Néron--Severi $L$ sur le fibré de Mumford $\Lambda(L)$, c'est-à-dire sur
+l'homomorphisme symétrique $\varphi_L\colon A \to A'$.
+
+c) Soit $B$ un autre faisceau abélien. Si
+$\underline{\operatorname{Hom}}_{\mathrm{gr}}(A, G) = 0$, la catégorie
+$\underline{\operatorname{BIEXT}}(A, B; G)$ est discrète, et
+\[ \operatorname{Biext}(A, B; G) \simeq \operatorname{Hom}_{\mathrm{gr}}(B,
+\underline{\operatorname{Ext}}^1(A, G)) . \]
+Si l'on suppose seulement $\underline{\operatorname{Hom}}_{\mathrm{pct}}(A, G) =
+0$, on a des injections
+\[ \operatorname{Biext}(A, B; G) \hookrightarrow
+\operatorname{Hom}_{\mathrm{gr}}(B, R^1f_*G_A) \hookrightarrow H^0(B,
+R^1f_{B*}G_{A \times_S B}) , \]
+le dernier terme classifiant les $G_{A \times_S B}$-torseurs rigidifiés le long
+de $e_{A \times_S B}$. Les torseurs qui sont des biextensions sont ceux qui sont
+rigidifiables, et pour lesquels l'application $B \to R^1f_*G_A$ qu'ils
+définissent est additive et se factorise par $\underline{\operatorname{Ext}}^1(A,
+G)$ ; la marge rappelle que rigidifiabilité et factorisation ensemble disent que
+l'application symétrique $A \to R^1q_*G_B$ est additive. On obtient des foncteurs
+pleinement fidèles de catégories discrètes
+\[ \underline{\operatorname{BIEXT}}(A, B; G) \to
+\underline{\operatorname{TORS\,BIRIG}}_{e_A, e_B}(A, B; G) \to
+\underline{\operatorname{TORS\,RIG}}_{e_{A \times_S B}}(G_{A \times_S B}) , \]
+qui sont, dit la page, des équivalences « dans deux cas importants » qu'elle ne
+nomme pas.\footnote{« pl.\ fid. », « équivalence » et « vérifiable » sont d'une
+lecture incertaine dans cette dernière phrase.}
+
+\pagerange{55}{57}
+\subsection*{La diagonale, et le groupe de Néron--Severi (pages 55 et 57)}
+
+On définit une flèche en sens inverse de $j$ en tirant en arrière par la
+diagonale $\Delta\colon A \to A \times_S A$ :
+\[ \Delta^*\colon \underline{\operatorname{Tors}}_{\mathrm{birig,sym}}(A, A; G) \to
+R^1f_*G_A . \]
+Comme $m \circ \Delta = 2\,\mathrm{id}_A$ et $\mathrm{pr}_i \circ \Delta =
+\mathrm{id}_A$,
+\[ \Delta^* j(L) \simeq (2\,\mathrm{id}_A)^*(L) \otimes L^{-2} , \]
+et modulo $A' = \underline{\operatorname{Ext}}^1(A, G)$, c'est-à-dire dans le
+Néron--Severi, cela vaut $4L - 2L = 2L$. Cela résulte du
+
+\emph{Lemme.} Pour tout entier $n$, $(n\,\mathrm{id}_A)^*L \equiv n^2L$ dans
+$\underline{\mathrm{NS}}(A)$. Plus généralement, $u \mapsto u^*$, de
+$\operatorname{Hom}(A, B)$ dans $\operatorname{Hom}(\underline{\mathrm{NS}}(B),
+\underline{\mathrm{NS}}(A))$, est quadratique :
+\[ \varphi(u+v) + \varphi(u-v) = 2\bigl(\varphi(u) + \varphi(v)\bigr) .
+\]
+\footnote{La page porte, d'une lecture incertaine, $\varphi(u+v) - \varphi(u-v)$.
+Avec le signe $-$, $v = 0$ donnerait $0 = 2\varphi(u)$ ; c'est l'identité du
+parallélogramme qui est vraie, et qui donne, pour $u = v$, $\varphi(2u) =
+4\varphi(u)$.} En effet $u \mapsto (u \times u)^*$ est quadratique sur les
+biextensions, par biadditivité, et la flèche des biextensions vers
+$\underline{\mathrm{NS}}$ est linéaire.
+
+Page 57 : le composé $k \circ \Delta^* j\colon \underline{\mathrm{NS}}_{A/S} \to
+\underline{\mathrm{NS}}_{A/S}$ est la multiplication par $2$. Par conséquent
+\emph{l'image réciproque par $2\,\mathrm{id}$ de l'extension canonique}
+\[ 0 \to A' \to \underline{P}_{A/S} \to \underline{\mathrm{NS}}_{A/S} \to 0 \]
+\emph{est canoniquement scindée} par $\Delta^* j$ ; autrement dit la classe de
+l'extension est tuée par $2$, et l'extension est canoniquement scindée après
+inversion de $2$.\footnote{La page dit que l'extension « splitte canoniquement »,
+avec deux mots illisibles avant « de l'extension » ; « par » et « splitte » sont
+d'une lecture incertaine, et elle écrit « par $P_{A/S}$ » là où le noyau de
+$k\colon \underline{P}_{A/S} \to \underline{\mathrm{NS}}_{A/S}$ est $A'$. Un
+relèvement $s$ avec $ks = 2$ ne scinde pas l'extension elle-même ; on écrit ce
+qu'il scinde.} Il commence ensuite à dire que la restriction de $j \circ \Delta^*$
+aux bitorseurs symétriques est la multiplication par $2$ --- ce qui est vrai, une
+biextension symétrique $E$ vérifiant $\Lambda(\Delta^*E) \simeq E \otimes
+\sigma^*E \simeq E^2$ ---, et la page s'arrête.
+
+Les pages 52, 54, 56 et 58 sont des feuillets d'une rédaction anglaise de la
+théorie géométrique des invariants de Mumford. Le seul qui porte quelque chose de
+lui, la page 56, a en marge des remarques au crayon, en anglais, présumées de sa
+main, sur les hypothèses d'une proposition : « Seems to hold for any equivalence
+relation \ldots{} Is \emph{flat} enough ?? », « Doesn't seem enough, $G$
+\emph{smooth}/$k$ ! », « ambiguous ».
+
+\pagerange{59}{70}
+\section*{Le théorème des cycles invariants pour le $H^1$ (pages 59 à 70)}
+
+Une couverture, de sa main : « "Th.\ du cycle invariant" : Cas du $H^1$ » (page
+59). Un tapuscrit corrigé à l'encre et au crayon (pages 60 à 63) énonce le
+théorème et trois corollaires ; des notes manuscrites (pages 64 à 70) le
+démontrent dans le cas d'un entier premier à $p$, d'abord sous l'hypothèse d'un
+zéro-cycle de degré 1, puis sans elle.
+
+Le problème est celui du \emph{cycle invariant} : pour une famille sur un disque,
+les classes de la fibre générale fixes par la monodromie viennent-elles de
+l'espace total ? Le théorème des cycles invariants le dit en caractéristique
+nulle, et ce dossier en donne, pour le $H^1$ et au-dessus d'un trait, la forme
+arithmétique exacte, avec le défaut qu'il mesure.\footnote{En $\ell$-adique, le
+théorème des cycles invariants général est démontré par Deligne
+(\emph{La conjecture de Weil II}, 1980) sous des hypothèses de géométrie
+(familles sur une courbe sur un corps fini) qui ne sont pas celles d'ici.}
+
+\pagerange{60}{63}
+\subsection*{L'énoncé (pages 60 à 63)}
+
+Soit $S$ un trait strictement local (le spectre d'un anneau de valuation discrète
+strictement hensélien $V$), de point fermé $s$ de corps $k$ de caractéristique $p$,
+de point générique $\eta$ de corps $K$, et $I = \operatorname{Gal}(K^s/K)$, qui
+est ici le groupe d'inertie. Soit $f\colon X \to S$ projectif, $X$ régulier, avec
+$\mathcal{O}_S \xrightarrow{\sim} f_*\mathcal{O}_X$, de sorte que $X$ est plat sur
+$S$ et que la fibre spéciale $X_0$ est un diviseur. On note $(D_i)_{i \in J}$ ses
+composantes irréductibles réduites et
+\[ X_0 = \sum_{i \in J} d_iD_i, \qquad d = \operatorname{pgcd}(d_i) . \]
+Soit $\Delta \simeq \mathbf{Z}^J$ le groupe des diviseurs de support dans $X_0$, et
+\[ \Gamma = \Delta / \mathbf{Z}X_0 \hookrightarrow \operatorname{Pic}(X)
+\]
+son image dans $\operatorname{Pic}(X)$\footnote{La page dit « la catégorie des
+diviseurs » ; c'est le groupe. Dans $\Gamma \simeq {}/\mathbf{Z}.X_0$, le
+numérateur est laissé en blanc par la machine. Que $\Delta/\mathbf{Z}X_0$
+s'injecte dans $\operatorname{Pic}(X)$ vient de ce qu'une fonction dont le
+diviseur est porté par $X_0$ est inversible sur $X_\eta$, donc dans $K^*$ puisque
+$H^0(X_\eta, \mathcal{O}) = K$.}, et
+\[ w\colon \Gamma \to \operatorname{Pic}(X) \to \operatorname{Pic}(X_0) \to
+\mathrm{NS}(X_0) = \operatorname{Im}\bigl(\operatorname{Pic}(X_0) \to
+\underline{\mathrm{NS}}_{X_0/k}(k)\bigr) . \]
+Soit enfin $d^t$ l'indice de $X_\eta$, le pgcd des degrés de ses zéro-cycles.
+
+\emph{Théorème.}
+\begin{itemize}
+\item[a)] $d^t = \operatorname{pgcd}(\mu_id_i)$, où $\mu_i$ est la multiplicité
+radicielle de $D_i$ sur $k$. En particulier $d$ divise $d^t$ et $d^t = p^hd$ pour
+un $h \geqslant 0$ ; si $k$ est parfait, $h = 0$ et $d^t = d$.\footnote{L'encre
+remplace la fin de la phrase tapée par « on a $d^t = p^hd$, où $p^h =
+\operatorname{pgcd}(\mu_i)$ ». La première moitié est juste, la seconde non :
+$p^h$ est seulement divisible par $\operatorname{pgcd}(\mu_i)$. Avec deux
+composantes, $d_1 = 1$, $\mu_1 = p$ et $d_2 = p$, $\mu_2 = 1$, on a $d = 1$,
+$\operatorname{pgcd}(\mu_i) = 1$ et $d^t = p$. La marginale « donc $h = 0$ i.e.\
+$d = d_t$ si $k$ est parfait » est juste. La formule a) elle-même est, dit le
+tapuscrit, « essentiellement une reformulation d'un résultat de M.~Raynaud », dont
+la référence est laissée en blanc ; le renvoi à EGA~IV l'est aussi.}
+\item[b)] $w$ est un homomorphisme de groupes abéliens de type fini \emph{dont le
+noyau est contenu dans le sous-groupe de torsion de $\Gamma$}. Ce dernier est
+canoniquement $\mathbf{Z}/d$, engendré par l'image de $\frac1d X_0 = \sum
+\frac{d_i}{d}D_i$. Donc $R = \operatorname{Ker} w$ est cyclique d'ordre $d'$
+divisant $d$, et a fortiori $d^t$.
+\item[c)] Supposons $n$ premier à $p$, ou $d^t$ premier à $p$, ou $k$ parfait
+(donc algébriquement clos). On a une suite exacte canonique, fonctorielle en $X$,
+\[ (6) \qquad 0 \to {}_n\Gamma \to H^1(X, \mu_n) \xrightarrow{u_n}
+H^1(X_{\bar\eta}, \mu_n)^I \to \operatorname{Ker} w_n \to 0 , \]
+où $w_n = w \otimes \mathbf{Z}/n\colon \Gamma_n \to \mathrm{NS}(X_0)_n$ et
+${}_n\Gamma \simeq \mathbf{Z}/(n, d)$ ; elles forment un système projectif quand
+$n$ varie.
+\item[d)] Pour tout nombre premier $\ell$, on a une suite exacte canonique,
+fonctorielle en $X$,
+\[ (7) \qquad 0 \to H^1(X, \mathbf{Z}_\ell(1)) \xrightarrow{u(\ell)}
+H^1(X_{\bar\eta}, \mathbf{Z}_\ell(1))^I \to R \otimes \mathbf{Z}_\ell \to 0, \]
+avec $R \otimes \mathbf{Z}_\ell = 0$ si $\ell \nmid d'$ --- a fortiori si $\ell
+\nmid d^t$ --- et $\mathbf{Z}/\ell$ si $\ell \mid d'$.
+\end{itemize}
+\footnote{Pour $n$ ou $\ell$ divisible par $p$, il s'agit de cohomologie plate.
+« fonctorielle en $X$ » est ajouté au crayon ; une parenthèse sur le passage à la
+limite, sous les conditions de c), est encadrée et barrée au crayon. Le $\ne$ tapé
+de « $\ell \ne d'$ » est surchargé en $\nmid$.}
+
+\emph{Corollaire 9.} $u(\ell)$ est injectif, de conoyau fini, nul pour presque
+tout $\ell$ ; de même avec $\mathbf{Z}_\ell$ au lieu de $\mathbf{Z}_\ell(1)$ si
+$\ell \neq p$ --- les racines de l'unité d'ordre premier à $p$ étant dans $K$,
+l'inertie agit trivialement sur $\mathbf{Z}_\ell(1)$.
+
+\emph{Corollaire 10.} Pour $n$ quelconque, on a
+\[ 0 \to {}_n\Gamma \to H^1(X, \mu_n) \xrightarrow{u_n} H^1(X_{\bar\eta},
+\mu_n)^I \to Q(n) \to 0, \qquad 0 \to \operatorname{Ker} w_n \to Q(n) \to
+\Theta(n) \to 0 , \]
+avec
+\[ \Theta(n) \hookrightarrow {}_n\operatorname{Ker}\bigl(\mathrm{Br}(K) \to
+\mathrm{Br}(X_\eta)\bigr) \hookrightarrow {}_{(n, d^t)}\mathrm{Br}(K) ,
+\]
+\footnote{Le tapuscrit écrit $\mathrm{Br}(X_{\bar\eta})$. Le noyau de
+$\mathrm{Br}(K) \to \mathrm{Br}(X_{\bar\eta})$ est $\mathrm{Br}(K)$ tout entier,
+puisque cette flèche se factorise par $\mathrm{Br}(\bar K) = 0$ ; c'est le noyau
+vers $\mathrm{Br}(X_\eta)$ qui contient l'obstruction et qui est tué par l'indice
+$d^t$.} de sorte que $\Theta(n) = 0$ si $n$ ou $d^t$ est premier à $p$ (le groupe
+de Brauer de $K$ est de $p$-torsion), ou si $k$ est parfait ($\mathrm{Br}(K) =
+0$). En tous cas, si $p^r$ est la plus grande puissance de $p$ divisant $d^t$,
+$p^r\Theta(n) = 0$ pour tout $n$. Comme les flèches de transition sur les
+$\Theta(\ell^\nu)$ sont des multiplications par $\ell$, $\varprojlim_\nu
+\Theta(\ell^\nu) = 0$, et (7) se déduit de (11) par passage à la
+limite.\footnote{Pour $\ell = p$, ce passage à la limite demande une condition
+de Mittag-Leffler sur les $H^1(X, \mu_{p^\nu})$ plats, que le tapuscrit ne
+vérifie pas.}
+
+\emph{Corollaire 15.} Écrivons $d^t = p^ra$ avec $(a, p) = 1$. Il existe un
+diagramme, unique à isomorphisme près,
+
+\begin{tikzcd}
+X \arrow[d, "f"'] & X' \arrow[l, "h"'] \arrow[d, "f'"] \\
+S & S' \arrow[l, "g"']
+\end{tikzcd}
+
+où $S' \to S$ est le revêtement kummérien connexe (modérément ramifié) de groupe
+$\mu_a$, $h$ un revêtement étale, le carré cartésien au-dessus de
+$\eta$\footnote{La page porte une lettre tracée à la main en forme de $\eta$ devant
+« $\to S$ », sur un blanc de la machine ; on lit le changement de base $S' \to
+S$, restreint au point générique.} ; $f'$ satisfait aux mêmes hypothèses que $f$,
+et la partie première à $p$ de $d(X'/S')$ est $1$.\footnote{La page dit
+« $d(X'/S')$ est maintenant égal à $p^r$ ». Le revêtement de degré $a$ divise les
+multiplicités par $a$, qui est la partie première à $p$ de $d$ ; $d(X'/S')$ est la
+partie $p$ de $d$, qui vaut $p^r$ quand $d^t = d$ (par exemple $k$ parfait), et
+qui peut être plus petite sinon (voir a)). Seule compte, pour la suite, qu'elle
+soit une puissance de $p$. Que $h$ soit étale vient de ce que $a$ divise tous les
+$d_i$ et est premier à $p$.} Si $I' \subset I$ est le groupe d'inertie de $S'$,
+pour tout $n$ premier à $p$,
+\[ u'_n\colon H^1(X', \mu_n) \to H^1(X'_{\bar\eta}, \mu_n)^{I'} \]
+est injectif, de conoyau ${}_n\delta/{}_n\delta'$, où $\delta$ est le
+sous-groupe de torsion de $\operatorname{Coker} w$ et $\delta'$ celui de
+$\mathrm{NS}(X_0)$, pris pour $X'$.\footnote{La page renvoie à « $w$ défini dans
+(5) », c'est-à-dire pour $X$ ; c'est pour $X'$ que le calcul des pages 64 à 66
+donne ce conoyau.} Par suite, pour tout $\ell \neq p$,
+\[ u'(\ell)\colon H^1(X', \mathbf{Z}_\ell) \xrightarrow{\sim} H^1(X'_{\bar\eta},
+\mathbf{Z}_\ell)^{I'} \]
+\emph{est un isomorphisme}. Le tapuscrit s'arrête sur cet énoncé, au milieu de la
+page 63 ; aucune démonstration ne suit dans le dossier.
+
+\pagerange{64}{68}
+\subsection*{La démonstration, pour $n$ premier à $p$ et un zéro-cycle de degré 1 (pages 64 à 68)}
+
+La page 64 reprend l'énoncé à la main, avec $X$ propre et l'hypothèse que $X_\eta$
+a un zéro-cycle de degré 1. Soit $\delta$ le sous-groupe de torsion du conoyau de
+$\Delta \to \underline{\mathrm{NS}}_{X_0/k}(k)$, $\delta'$ celui de
+$\mathrm{NS}(X_0)$, $\delta'' = \delta/\delta'$. Pour $n$ premier à $p$ on a
+\[ 0 \to H^1(X, \mu_n) \xrightarrow{u_n} H^1(X_{\bar\eta}, \mu_n)^I \to
+{}_n\delta/{}_n\delta' \to 0 , \]
+et, à la limite, pour $\ell \neq p$,
+\[ H^1(X, \mathbf{Z}_\ell) \xrightarrow{\sim} H^1(X_{\bar\eta},
+\mathbf{Z}_\ell)^I \]
+--- « Théorème des cycles invariants ».\footnote{La suite de la page 64 se
+prolonge, d'une lecture douteuse, par « $\to {}_n\delta'' \to {}_n\delta' \to
+\delta_n \to \delta''_n \to 0$ ». Le terme qui s'insère après $u_n$ est
+${}_n\delta/{}_n\delta'$, sous-groupe de ${}_n\delta''$, comme le montre la suite
+exacte du serpent que la page 68 écrit pour $0 \to \delta' \to \delta \to \delta''
+\to 0$ ; on le donne. Le terme ${}_n\Gamma$ que la page écrit en tête est nul ici,
+$\Gamma$ étant sans torsion (voir plus bas).}
+
+\emph{Démonstration.} $X$ est intègre et plat sur $S$, donc $H^1(X, \mu_n)
+\hookrightarrow H^1(X_\eta, \mu_n)$. Par Kummer, et parce que $V^*/V^{*n} = 0$ et
+$K^*/K^{*n} = \mathbf{Z}/n$ ($V$ strictement local, $n$ premier à $p$),
+\[ H^1(X, \mu_n) \simeq {}_n\operatorname{Pic}(X), \quad H^1(X_\eta,
+\mu_n)/(\mathbf{Z}/n) \simeq {}_n\operatorname{Pic}(X_\eta), \quad
+H^1(X_{\bar\eta}, \mu_n) \simeq {}_n\operatorname{Pic}(X_{\bar\eta}) . \]
+Le zéro-cycle de degré 1 donne $\operatorname{Pic}(X_\eta) \simeq
+\underline{\operatorname{Pic}}_{X_\eta/K}(K) = P(K) = P(K^s)^I$. Ainsi $u_n$
+s'identifie à ${}_n\operatorname{Pic}(X) \to {}_n\operatorname{Pic}(X_\eta)$.
+Comme $X$ est régulier --- il suffirait que ses anneaux locaux soient factoriels
+---, on a
+\[ 0 \to \Gamma \xrightarrow{i} \operatorname{Pic}(X) \xrightarrow{v}
+\operatorname{Pic}(X_\eta) \to 0 , \]
+d'où, par le lemme du serpent, $\operatorname{Ker} u_n = {}_n\Gamma$ et
+$\operatorname{Coker} u_n \simeq \operatorname{Ker}(i_n\colon \Gamma_n \to
+\operatorname{Pic}(X)_n)$.
+
+\emph{Lemme} (marge de la page 66). $\operatorname{Pic}(X)_n \hookrightarrow
+\operatorname{Pic}(X_0)_n$, du moins si $S$ est complet, ce qui suffit : les
+obstructions à relever d'un voisinage infinitésimal au suivant sont dans des
+$k$-vectoriels, où $n$ est inversible.\footnote{La page renvoie à « PCA, exposé
+sur Picard » et dit le lemme « facile » ; la justification est résumée.} Donc
+$\operatorname{Ker} i_n = \operatorname{Ker} j_n$, $j\colon \Gamma \to
+\operatorname{Pic}(X_0)$. Puis $\operatorname{Pic}(X_0) =
+\underline{\operatorname{Pic}}_{X_0/k}(k)$, le groupe
+$\operatorname{Pic}^0(X_0)$ est $n$-divisible, et $\operatorname{Pic}(X_0)_n =
+\mathrm{NS}(X_0)_n$. On obtient $\operatorname{Coker} u_n \simeq
+\operatorname{Ker} w_n$.
+
+Il dit alors que \emph{$\Gamma$ est sans torsion et $w$ injectif} (le lemme
+marqué (D), page 68, « ici $X$ régulier, semble-t-il »). Que $\Gamma$ soit sans
+torsion : l'adhérence schématique dans $X$ d'un point fermé de $X_\eta$ est finie
+et plate sur $S$, de degré égal à sa multiplicité d'intersection avec $X_0 =
+\sum d_iD_i$, donc multiple de $d$ ; ainsi $d \mid d^t$, et $d^t = 1$ force $d =
+1$.\footnote{La page écrit « $\Gamma = \mathbf{Z}/d\mathbf{Z}$ » pour le
+sous-groupe de torsion de $\Gamma$.} Avec $0 \to \Gamma \to \mathrm{NS}(X_0) \to
+\operatorname{Coker} w \to 0$, le serpent donne $\operatorname{Ker} w_n \simeq
+\operatorname{Coker}({}_n\mathrm{NS}(X_0) \to {}_n\operatorname{Coker} w) =
+{}_n\delta/{}_n\delta'$, l'application $\delta' \to \delta$ étant injective parce
+que $\Gamma$ est sans torsion. À la limite sur les $\ell^\nu$, ces groupes finis
+s'annulent et l'on obtient l'isomorphisme.
+
+Que $w$ soit injectif modulo torsion --- l'assertion b) ---, la page 68 le renvoie
+à Raynaud : « Or c'est fait par Raynaud dans sa note : spécialisation des
+foncteurs de Picard, th.~3 ». Une tentative barrée voulait se ramener à la
+dimension relative 1, où c'est la négativité de la matrice d'intersection des
+$D_i$.\footnote{M.~Raynaud, « Spécialisation du foncteur de Picard », publié in
+extenso aux Publ.\ IHES 38 (1970) ; « note » et « th.~3 » sont la page. En
+dimension relative 1, le noyau de la forme d'intersection sur $\mathbf{Q}^J$ est
+la droite engendrée par $X_0$ (lemme de Zariski) : c'est b).}
+
+\pagerange{70}{70}
+\subsection*{Variante : sans zéro-cycle de degré 1 (page 70)}
+
+« Laissons tomber l'hypothèse » $d^t = 1$.\footnote{La page écrit « l'hypothèse $d'$ ($=$ pgcd des deg.\ des $0$-cycles sur $X_\eta$) $= 1$ » : son $d'$ est ici l'indice, que le tapuscrit note $d^t$, et non l'ordre $d'$ de $R$ des pages 60 et 61.} Comme $\mathrm{Br}(K)$ est de
+$p$-torsion, $0 \to \operatorname{Pic}(X_\eta) \to P(K) \to \Theta \to 0$ avec
+$\Theta \subset \mathrm{Br}(K)$ de $p$-torsion, donc ${}_n\operatorname{Pic}(X_\eta)
+\simeq {}_nP(K)$ pour $n$ premier à $p$ ; mais $\Gamma$ peut avoir de la torsion,
+et l'on trouve la suite (6) de c), puis à la limite la suite (7) de d), avec $R =
+\operatorname{Ker}(\Gamma \to \mathrm{NS}(X_0))$, et $R \otimes \mathbf{Z}_\ell =
+\mathbf{Z}/\ell$ si $\ell \mid d$, $0$ sinon.\footnote{C'est l'encadré de la
+marge. Il suppose $R$ égal au sous-groupe de torsion tout entier ; le tapuscrit,
+plus prudent, écrit $\ell \mid d'$, $d'$ l'ordre de $R$.} On voit ainsi --- « au
+moins modulo résolution des singularités », dit une incise --- que $R$ est de
+torsion, donc un sous-groupe du $\mathbf{Z}/d$ de torsion de $\Gamma$, avec « une
+tendance » à lui être égal. En marge : « demander à Raynaud si Ker est tout
+$\mathbf{Z}/d\mathbf{Z}$ ».\footnote{En dimension relative 1, les pages 82 et 83
+du même dossier répondent oui : leur $\Phi = \operatorname{Ker} u \simeq
+\mathbf{Z}/d$ est ce noyau. Le rapprochement est nôtre.} La page esquisse enfin
+la réduction au cas sans torsion par un scindage $\Gamma \simeq \Gamma' \oplus T$,
+$T = \operatorname{Tors}\Gamma$, et s'arrête sur la suite $0 \to \delta' \to
+\delta \to \delta'' \to 0$, $\delta'$ désignant la torsion première à $p$ de
+$\mathrm{NS}(X_0)$.
+
+\pagerange{72}{80}
+\section*{Le théorème d'orthogonalité, démonstration arithmétique (pages 72 à 80)}
+
+Une couverture : « Th.\ d'orthogonalité pour les modèles de Néron, démonstration
+arithmétique », et plus bas, du même crayon, « $\ell$ (partiel !) ».\footnote{Un
+signe au-dessus de « orthogonalité » se lit peut-être « $\ell/p$ ». Le
+« (partiel !) » dit sans doute que seul le cas $\ell$ différent de la
+caractéristique résiduelle est traité ; c'est ce que font les feuillets.} C'est
+le théorème de l'exposé IX : pour une variété abélienne à mauvaise réduction, la
+partie torique du module de Tate est orthogonale, pour l'accouplement de Weil, à
+la partie fixe du module de la duale. La démonstration est « arithmétique » parce
+qu'elle passe par les poids de Frobenius sur un corps fini.
+
+\pagerange{73}{76}
+\subsection*{L'énoncé général et sa démonstration (pages 73 à 76)}
+
+\emph{Cadre.} Soit $A$ un anneau noethérien, $J$-adique, régulier et complet,
+$X = \operatorname{Spec}A$, $Y = V(J)$, $U = X - Y$. Tout schéma fini étale sur
+$Y$ se prolonge de façon unique en un schéma fini étale $\tilde Z$ sur $X$ ; de
+même pour les faisceaux $\ell$-adiques lisses. Soient $G$, $G'$ des schémas en
+groupes commutatifs plats sur $X$, dont les restrictions à $U$ sont des schémas
+abéliens $A_U$, $A'_U$, munis d'une classe de correspondances divisorielles
+$\xi$ sur $A_U \times A'_U$, et $\ell$ inversible sur $Y$, donc sur $X$. Soient
+$H \subset G_Y$ un sous-groupe plat sur $Y$ dont les ${}_{\ell^\nu}H$ sont finis
+sur $Y$, et $T' \subset G'_Y$ un tore.\footnote{La page note $S$ ce sous-groupe ;
+on l'appelle $H$ pour garder $S$ aux bases. Le « NB » de la marge justifie la
+suite : les ${}_{\ell^\nu}G$ sont étales et quasi-finis séparés sur $X$ et
+contiennent donc les relèvements ${}_{\ell^\nu}\tilde H$.} Les modules de Tate
+$T_\ell(\tilde H) \subset T_\ell(G)$ et $T_\ell(\tilde T') \subset T_\ell(G')$
+sont définis, et leurs restrictions à $U$ sont des sous-modules de $T_\ell(A_U)$
+et $T_\ell(A'_U)$. La classe $\xi$ définit l'accouplement de Weil
+\[ \varphi_\xi\colon T_\ell(A_U) \times T_\ell(A'_U) \to
+T_\ell(\mathbb{G}_{m,U}) . \]
+
+\emph{Théorème.} $\varphi_\xi\bigl(T_\ell(\tilde H)|_U,\ T_\ell(\tilde
+T')|_U\bigr) = 0$, en chaque point de $U$.
+
+\emph{Démonstration.} Elle se fait en deux temps.
+
+\emph{Réduction à un trait à corps résiduel fini.} Si $A/J$ est de type fini sur
+$\mathbf{Z}$, tout point $x$ de $U$ a dans son adhérence un point $y$ de $Y$ de
+corps résiduel fini ; on remplace $X$ par le complété en $y$, puis, $X - Y$ étant
+de Jacobson, par l'adhérence normalisée d'un point $z$ avec
+$\dim\overline{\{z\}} = 1$ : $X$ devient le spectre d'un anneau de valuation
+discrète complet $V$ à corps résiduel fini $k$, et $Y$ son point fermé. Les
+modules $T_\ell(\tilde H)$, $T_\ell(\tilde T')$ sont non ramifiés, et
+l'accouplement, compatible à Galois, provient d'un accouplement
+$\operatorname{Gal}(\bar k/k)$-équivariant
+\[ T_\ell(H) \times T_\ell(T') \to T_\ell(\mathbb{G}_{m,k}). \]\footnote{La fin de la
+page 73 n'est lue que par bribes ; les étapes de la réduction sont celles que la
+page 74 rend lisibles.}
+
+\emph{Lemme.} Soit $k$ un corps fini, $\ell$ différent de sa caractéristique,
+$H$, $T$ deux groupes algébriques commutatifs sur $k$, $T$ de type multiplicatif.
+Tout accouplement \emph{compatible à l'action de Galois}
+\[ T_\ell(H) \times T_\ell(T) \to T_\ell(\mathbb{G}_m) \]
+est nul.\footnote{La page dit « tout accouplement » ; c'est faux sans
+l'équivariance, qui est l'hypothèse dont la démonstration se sert et que la
+situation fournit.} En effet, on peut supposer $H$ et $T$ connexes et réduits, $T$
+un tore déployé $\mathbb{G}_m^s$ après extension finie, et $H$ extension d'une
+variété abélienne par un tore $\mathbb{G}_m^r$ (la partie unipotente n'a pas de
+module de Tate en $\ell$). Le Frobenius agit par $q$ sur $T_\ell(\mathbb{G}_m^r)$,
+sur $T_\ell(T)$ et sur $T_\ell(\mathbb{G}_m)$ ; un accouplement équivariant entre
+les deux premiers vit sur un espace où Frobenius agit par $q^2$ et doit aboutir
+là où il agit par $q$ : il est nul. Sur la partie abélienne, les valeurs propres
+sont, par Weil, de valeur absolue $q^{1/2}$, donc $q^{3/2}$ sur le produit
+tensoriel, et l'accouplement est encore nul. C'est un argument de poids au sens
+d'aujourd'hui : $-1$ et $-2$ ne s'accouplent pas en $-2$.
+
+\emph{Cas général.} On écrit $V = \varinjlim A_i$, $A_i \subset V$ de type fini sur
+$\mathbf{Z}$, et $X = \varprojlim X_i$, $Y = \varprojlim Y_i$, $U = \varprojlim
+U_i$. Pour $i$ grand, $G$, $G'$, $\xi$, $T'$ et $H$ proviennent de données sur
+$X_i$ ; on peut supposer $H$ connexe (on le remplace par $H^0$), $\ell$ inversible
+sur les $X_i$ (on remplace $A_i$ par $A_i[1/\ell]$), et l'on complète $A_0$ en
+l'idéal de $Y_0$. On est ramené au théorème pour un anneau $\mathfrak{p}$-adique
+régulier complet avec $A_0/\mathfrak{p}$ de type fini sur $\mathbf{Z}$, qui est le
+premier cas. « CQFD ».\footnote{La page 76 est d'une lecture incertaine sur
+plusieurs mots de liaison, et un « groupe » illisible suit « extension successive
+d'une V.A., d'un tore et d'un » ; la structure de l'argument est claire.}
+
+\pagerange{78}{80}
+\subsection*{Les modèles de Néron (pages 78 à 80)}
+
+\emph{Corollaire 1.} Soit $V$ un anneau de valuation discrète hensélien, de corps
+résiduel $k$ et de corps des fractions $K$, $A$ une variété abélienne sur $K$, $G$
+son modèle de Néron, $T$ le tore maximal de $G_k$, $\ell \neq \operatorname{car}
+k$. On pose $M(A) = T_\ell(A(\bar K))$ ; on a
+\[ M(A)^I_t \subset M(A)^I \subset M(A) , \]
+où $M(A)^I = T_\ell(G_k)$ est la partie fixe sous l'inertie et $M(A)^I_t =
+T_\ell(T)$ la partie torique.\footnote{Il note $M(A)^I_0$ la partie torique ; on
+écrit $M^I_t$ pour ne pas suggérer une composante neutre. Le premier « $M(T)$ »
+est corrigé en $M(A)$.} Si $A'$ est une variété abélienne sur $K$ et $\xi$ une
+correspondance divisorielle sur $A \times A'$, d'où un accouplement compatible à
+$\pi = \operatorname{Gal}(\bar K/K)$
+\[ \varphi_\xi\colon M(A) \times M(A') \to T_\ell(\bar K^*) , \]
+alors
+\[ \varphi_\xi\bigl(M(A)^I,\ M(A')^I_t\bigr) = 0 \quad\text{et}\quad
+\varphi_\xi\bigl(M(A)^I_t,\ M(A')^I\bigr) = 0 . \]
+\footnote{La page annonce des « relations entre » ces modules, sans les écrire ;
+ce sont celles-ci, que le théorème donne et que la page 80 énonce. Sous sa forme
+publiée (SGA~7~IX), le théorème d'orthogonalité dit davantage, à notre
+connaissance : lorsque $A'$ est la variété duale et $\xi$ la classe de Poincaré, $M(A)^I_t$ est exactement l'orthogonal de $M(A')^I$, et symétriquement.
+Ces feuillets n'établissent que l'annulation.}
+
+\emph{Corollaire 2.} Si $\xi$ est une polarisation de $A$, d'où une forme
+bilinéaire alternée non dégénérée $\varphi_\xi$ sur $M(A)$, alors
+$\varphi_\xi(M^I, M^I_t) = 0$.
+
+\emph{Remarque.} Si $k$ est séparablement clos, les accouplements de niveau fini
+\[ {}_{\ell^\nu}A'(K) \times {}_{\ell^\nu}T(k) \to \mu_{\ell^\nu} \]
+ne sont pas nuls en général, même pour $\nu = 1$ : pour $x \in {}_{\ell^\nu}T(k)$
+non nul, il existe $x' \in {}_{\ell^\nu}A'(\bar K)$ avec $\varphi(x, x') \neq 0$,
+et, quitte à agrandir $K$, $x'$ devient rationnel. L'orthogonalité est un énoncé
+$\ell$-adique, qui ne descend pas aux niveaux finis.
+
+La page 80, barrée, reprend l'énoncé avec $V$ strictement hensélien, $A'$ la duale
+et $G'$ son modèle de Néron, et la chaîne
+\[ T_\ell(A(\bar K))^I = T_\ell(A(K)) = T_\ell(G(V)) = T_\ell(G(k)) =
+T_\ell(G^0(k)) \supset T_\ell(T(k)) , \]
+qui identifie la partie fixe au module de Tate de la fibre spéciale du modèle de
+Néron ; puis elle recommence l'argument par passage à la limite, et s'arrête.
+
+\pagerange{81}{84}
+\section*{Autodualité de la jacobienne, suivant Artin--Mazur (pages 81 à 84)}
+
+Une couverture porte, biffé, « Extensions et biextensions de groupes
+algébriques \ldots », avec un mot encadré, « Obstruct\ldots », et, en dessous, le
+titre retenu.\footnote{« Obstruct » est d'une lecture incertaine. Le dossier ne dit
+pas de quel travail d'Artin et Mazur il s'agit.} Les deux pages qui suivent
+calculent le groupe des composantes du modèle de Néron d'une jacobienne et la
+dualité qu'il porte.
+
+\pagerange{82}{82}
+\subsection*{Le cas de la dimension relative 1 (page 82)}
+
+Soit $X$ une courbe propre et plate sur un trait $S$, à fibre générique lisse et
+géométriquement connexe, cohomologiquement plate en dimension 0, c'est-à-dire
+$H^0(X_s, \mathcal{O}_{X_s}) = k(s)$.\footnote{« cohom.\ plat » est d'une lecture
+incertaine ; la condition qui suit le précise. La lissité de la fibre générique
+n'est pas écrite, et elle est nécessaire pour que $P^0_\eta$ soit une jacobienne.}
+Soit $P = \underline{\operatorname{Pic}}_{X/S}$, $C_1, \ldots, C_r$ les
+composantes de la fibre spéciale, de multiplicités $d_i$, et $\delta_i$ l'entier
+tel que les degrés des faisceaux inversibles sur $C_i$ soient les multiples de
+$\delta_i$. Soient $E \subset P$ le sous-groupe engendré par les classes des
+$\mathcal{O}_X(C_i)$, $Q = P/E$, et
+\[ P' = \operatorname{Ker}(P \xrightarrow{\deg} \mathbf{Z}_S), \qquad Q' =
+\operatorname{Ker}(Q \xrightarrow{\deg} \mathbf{Z}_S) . \]
+\footnote{La page ne définit ni $E$, ni $Q$, ni les $\delta_i$ ; ce sont ceux de la théorie de
+Raynaud, et le N.B.\ de la page confirme $E$ et la division des degrés par les $\delta_i$.} On a un diagramme commutatif de
+suites exactes de faisceaux fppf :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+ & 0 \arrow[d] & 0 \arrow[d] & 0 \arrow[d] & \\
+0 \arrow[r] & \Phi \arrow[r] \arrow[d] & P^0 \arrow[r] \arrow[d] & Q^0 \arrow[r] \arrow[d] & 0 \\
+0 \arrow[r] & E \arrow[r] \arrow[d] & P' \arrow[r] \arrow[d] & Q' \arrow[r] \arrow[d] & 0 \\
+0 \arrow[r] & E/\Phi \arrow[r] \arrow[d] & E^* \arrow[r] \arrow[d] & \Psi \arrow[r] \arrow[d] & 0 \\
+ & 0 & 0 & 0 &
+\end{tikzcd}
+
+$E$, $E^*$, $\Phi$, $\Psi$ sont représentables par des schémas en groupes étales,
+de fibre générique triviale. Si $k(s)$ est séparablement clos, leurs fibres
+spéciales se calculent ainsi. Soient
+
+\begin{tikzcd}[column sep=large]
+0 \arrow[r] & \mathbf{Z} \arrow[r, "\lambda"] & \mathbf{Z}^r \arrow[r, "\alpha"] & E_{(s)} \arrow[r] \arrow[d, dashed, "u"] & 0 \\
+ & \mathbf{Z} & \mathbf{Z}^r \arrow[l, "\mu"'] & E^*_{(s)} \arrow[l, "\beta"'] & 0 \arrow[l]
+\end{tikzcd}
+
+avec $\lambda(1) = (d_i)_i$, $\mu(n) = \sum_i d_i\delta_in_i$, $\alpha(n) =
+\mathrm{cl}\,\mathcal{O}_X(\sum n_iC_i)$ et $\beta(L) = (\deg L|_{C_i}/\delta_i)_i$
+; l'homomorphisme $u$ est donné par la matrice d'intersection :
+\[ (\beta u\alpha)(n) = \Bigl(\sum_i n_i\,(C_i \cdot C_j)/\delta_j\Bigr)_{1
+\leqslant j \leqslant r} . \]
+Alors
+\[ \Phi_{(s)} = \operatorname{Ker} u \simeq \mathbf{Z}/d, \qquad \Psi_{(s)} =
+\operatorname{Coker} u, \qquad d = \operatorname{pgcd}(d_i) . \]
+\footnote{Ce sont les identités qu'on vérifie : $\mu\beta u\alpha = 0$ parce que
+$C_i \cdot X_s = 0$, et le noyau de la matrice d'intersection sur $\mathbf{Z}^r$
+est $\mathbf{Z}(d_i/d)$, dont l'image dans $E_{(s)} = \mathbf{Z}^r/\mathbf{Z}(d_i)$
+est cyclique d'ordre $d$. La page écrit aussi $\mu = (d^t_i)$.}
+
+Si les anneaux locaux de $X$, après passage au hensélisé strict de la base, sont
+factoriels, $\Psi_s$ est fini, comme $\Phi_s$ ; si de plus $k(s)$ est parfait ou
+$(d^t, p) = 1$, $Q'$ est un modèle de Néron de
+\[ Q'_\eta = P'_\eta = P^0_\eta = \underline{\operatorname{Pic}}^0_{X_\eta/K} .
+\]
+\footnote{Les biffures montrent l'hypothèse « $k(s)$ parfait ou $(d^t, p) = 1$ »
+déplacée de la finitude de $\Psi_s$ à la propriété de Néron. C'est le théorème de
+Raynaud (1970) sur le modèle de Néron d'une jacobienne ; voir Bosch,
+Lütkebohmert, Raynaud, \emph{Néron Models}, chap.~9.} En particulier, si $d^t =
+1$, donc $d = 1$ et $\Phi = 0$, $Q'$ est un modèle de Néron de $P^0_\eta$, pourvu
+que $P'$ soit représentable.\footnote{La parenthèse « (loc.\ \ldots) » devant
+« sur $S$ représentable » a un mot illisible, et « pourvu que » est d'une lecture
+incertaine.} Le groupe $\Psi_s$ est donc le \emph{groupe des composantes} de la
+fibre spéciale du modèle de Néron.
+
+\pagerange{83}{84}
+\subsection*{La dualité sur le groupe des composantes (page 83)}
+
+Accouplons $\mathbf{Z}^r$ à lui-même par $\langle n, n'\rangle = \sum_i
+\delta_in_in'_i$. Alors $\lambda$ et $\mu$ sont transposées, et $E^*(s) =
+\operatorname{Ker}\mu$ s'accouple à $E(s) = \operatorname{Coker}\lambda$ par
+$\langle\alpha(x), y^*\rangle = \langle x, \beta y^*\rangle$, à valeurs dans
+$\mathbf{Z}$. De plus $u$ est \emph{autoadjoint} :
+\[ \langle x, u(y)\rangle = \langle y, u(x)\rangle \qquad (x, y \in E(s)), \]
+car pour $x = \alpha(n)$, $y = \alpha(n')$, $\langle n, \beta u\alpha(n')\rangle
+= \sum_{i,j} n_jn'_i\,(C_i \cdot C_j)$, symétrique par symétrie de la forme
+d'intersection.
+
+Si les $\delta_i$ valent tous $1$ (par exemple $k(s)$ algébriquement clos), cet
+accouplement identifie $E^*(s)$ à $\operatorname{Hom}(E(s), \mathbf{Z})$. Si de
+plus $d = 1$, c'est-à-dire $d^t = 1$, $E(s)$ est libre, $u$ est injectif et
+autoadjoint, et son conoyau $\Psi(s)$ hérite d'une \emph{autodualité canonique},
+parfaite et symétrique, à valeurs dans $\mathbf{Q}/\mathbf{Z}$ : celle du groupe
+discriminant d'une forme entière non dégénérée.\footnote{La page écrit « (p.ex.\
+$k(s)$ parfait) » : pour un corps résiduel séparablement clos, parfait veut dire
+algébriquement clos. La phrase qui ajoute $d = 1$ est d'une lecture incertaine
+par endroits (« symétrique », un mot illisible).} « Cette autodualité exprime
+l'obstruction à étendre la biextension qu'on a en $Q'_\eta \times Q'_\eta =
+P^0_\eta \times P^0_\eta$ par $\mathbb{G}_m$, en une biextension des modèles de
+Néron $Q'$, $Q'$ par $\mathbb{G}_m$. »
+
+C'est, sous sa forme générale, l'accouplement que l'exposé IX définit sur les
+groupes de composantes des modèles de Néron d'une variété abélienne et de sa
+duale, comme obstruction à prolonger la biextension de Poincaré --- ce qu'on
+appelle aujourd'hui \emph{l'accouplement de Grothendieck}. Ces deux pages en
+donnent, pour une jacobienne, la description par la matrice
+d'intersection.\footnote{Que l'accouplement de Grothendieck sur le groupe des
+composantes d'une jacobienne coïncide avec celui que donne la matrice
+d'intersection a été démontré par Bosch et Lorenzini (\emph{Invent.\ Math.} 148,
+2002). La page affirme cette coïncidence sans la démontrer ; l'attribution « suivant
+Artin--Mazur » de la couverture est la sienne.} La page 84 est une feuille
+blanche à en-tête de l'IHES.
+
+\end{document}

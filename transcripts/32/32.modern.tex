@@ -1,0 +1,1124 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 32, pages 2-47.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. Where the manuscript is loose or mistaken, the true statement is
+% what appears here and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite the
+% batch-NN.fr.tex files.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-09 — first pass, unchecked against
+% the pages by a human. The folder was read whole: three batches, pages 1-47,
+% all transcribed (pages 1, 3 and 5 are covers and carry nothing else). This
+% reading was made on Opus 5.5 and is not measured against the Opus 5
+% reference reading of folder 115.
+%
+% WHAT THE FOLDER IS. Correction material for SGA 4, almost all of it about
+% exposés XVII and XVIII (Rf_!, Rf^!, global duality). Several hands; the
+% transcription attributes none of them except the signed letter of page 30.
+% The spine is the formalism of Rf^! and of what a « formulaire » built on it
+% must contain (Gysin, local fundamental classes, base change), seen from
+% three sides: his typescript of proposals (pp. 6-14), a redactor's § 3.1 on
+% Rf^! annotated in pencil (pp. 36-47), and the letter that says what is
+% still missing (pp. 30-31).
+%
+% THIRD-PARTY TEXT. The letter signed P. Deligne (p. 30) and the list that
+% goes with it (p. 31) are summarised here at the level of the transcription's
+% notes and header, no further (RIGHTS.md: third-party correspondence may not
+% be circulated without permission). The unattributed redactions (pp. 25-27,
+% 36-47) are read for their mathematics only; who wrote them is not asserted.
+%
+% NOTATION fixed once: \mathcal{A} for the torsion ring (the typescript
+% writes A); f_!^\bullet, f^!_\bullet for the functors at the level of
+% complexes; \delta(f) = d - d' the virtual dimension (the typescript's own
+% proposal, p. 11); c = d' - d the codimension of an immersion. The local
+% fundamental class formulas of § 5 of the typescript are renumbered (5.1)-(5.6),
+% since the typescript reuses (4.4)-(4.9).
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - p. 4: the bounds written with a single d, surcharged, are false as
+%     written (L Lambda^2(M[2]) = L Gamma^2(M)[4]); the true bounds are those
+%     the [p,q] statement at the foot of the page gives;
+%   - p. 4: the direct-summand clause needs T to preserve P on finite sums;
+%   - p. 9: « f quasi-fini, d = d', donc automatiquement plat » needs
+%     Cohen-Macaulay fibres (two planes meeting at a point, projected onto A^2);
+%   - pp. 12-13: the typescript's « c = d - d' » and the signs of (4.7),
+%     (4.8), (4.9) and of the ink « i.e. » of (4.5) are inverted; the
+%     codimension is d' - d, as the typed (4.5), (4.6) and the ink minus signs
+%     of p. 14 have it; Rf^!(A_Y) lives on X, not Y;
+%   - p. 13: « c = 0 i.e. f isomorphisme » — an open and closed immersion;
+%   - p. 41: tau_{<= d} should be tau_{<= 2d} (as on p. 44, and the pencil asks);
+%   - p. 46: D^+(S, f^*A) should be D^+(S, A);
+%   - p. 47: Proposition 3.1.18 (i) is false as written (both H^i on L, and
+%     the vanishing is in the wrong direction): the true statement is
+%     L in D^{>= k} => Rf^!L in D^{>= k-2d}.
+%
+% Announced and never established in the folder: the formulaires of §§ 4-5
+% (pp. 8-14) are lists, not proofs; the agreement of the construction of
+% p. 42 with that of 3.1.9 (p. 43, « je n'ai pas vérifié »); the iso of
+% pro-objects of 3.1.17 (« vraisemblablement »); 3.1.10, 3.1.11, 3.1.13 are
+% cited and are not in the folder; the base change g'^*Rf^! -> Rf'^!g^* beyond
+% smooth g is asked, not shown (p. 36).
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{32}
+\pages{1}{47}
+\dating{[vers 1963-1977]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Corrections (références, rajouts) [dont SGA 4] : tapuscrit (s.d.), notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces feuillets sont l'atelier d'un livre en train de se fermer. Le
+\emph{Séminaire de Géométrie Algébrique} SGA 4, tenu à l'IHÉS en 1963--1964,
+existait en exposés ronéotés ; avant qu'il ne paraisse chez Springer, il fallait
+corriger, compléter, et surtout décider de ce qu'on écrirait et de ce qu'on
+laisserait de côté. Le dossier rassemble des fiches de corrections, des
+feuillets de rédaction annotés au crayon, un tapuscrit de propositions, une
+lettre, et quelques calculs griffonnés en marge de tout cela.
+
+Le sujet presque unique est la \emph{dualité} en cohomologie étale. Une
+analogie d'abord. Sur une variété compacte orientée de dimension $n$, la
+dualité de Poincaré met en regard la cohomologie en degré $i$ et en degré
+$n-i$ ; elle permet de « pousser » une classe d'une sous-variété vers la
+variété ambiante (c'est l'homomorphisme de Gysin), et elle attache à toute
+sous-variété une classe de cohomologie, sa « classe fondamentale ». Pour les
+schémas, Grothendieck et ses élèves ont remplacé ce théorème par une
+\emph{adjonction} : à toute application $f$ correspond un foncteur « image
+directe à supports propres » $Rf_!$, et celui-ci possède un adjoint à droite
+$Rf^!$. Tout le reste --- la trace, Gysin, les classes fondamentales, le
+comportement par changement de base --- doit se déduire de ce couple. Mais
+« doit se déduire » n'est pas « est écrit » : une adjonction donne beaucoup de
+flèches, et vérifier qu'elles sont compatibles entre elles est un travail
+immense et ingrat.
+
+C'est ce travail qu'on voit ici, de trois côtés. Un tapuscrit de l'auteur dit
+au rédacteur ce que doivent contenir les paragraphes sur Gysin et sur la
+classe fondamentale locale, et s'arrête souvent pour se corriger (« je
+constate que c'est par cette flèche qu'il aurait fallu commencer »,
+« Remords »). Une rédaction soignée du paragraphe qui construit $Rf^!$, d'une
+autre écriture, est couverte d'annotations au crayon qui demandent des
+références, questionnent des notations et proposent un nouveau plan (« Le plan
+de 3.1 semble flou »). Et une lettre signée de Deligne, qui rédigeait
+l'exposé XVIII, fait l'inventaire de ce qui manque encore. Entre les trois
+passent des fiches de calcul plus libres : les foncteurs dérivés de foncteurs
+non additifs (puissances symétriques, extérieures, divisées), les torseurs sur
+un espace projectif, un accouplement entre fibrés en droites sur une courbe,
+et, tête-bêche sur un feuillet barré, la question de savoir si l'uniformisation
+d'une surface de Riemann se relève de $PSL_2(\mathbb{R})$ à $SL_2(\mathbb{R})$.
+
+On y voit une manière de travailler : écrire non pas les démonstrations mais
+la \emph{liste} des énoncés qu'un formalisme doit fournir, persuadé que,
+la liste bien faite, chaque énoncé deviendra « pratiquement trivial à partir
+des définitions ». Le dossier enregistre aussi la limite de cette conviction :
+le rédacteur annonce qu'il ne comblera pas certains manques « dans un temps
+prévisible ».
+
+Pour aller plus loin, on cherchera : les six opérations de Grothendieck et la
+dualité de Verdier, l'image inverse exceptionnelle, la classe de cycle et la
+pureté cohomologique (le texte « Cycle » de SGA 4½), les foncteurs dérivés de
+Dold et Puppe, les champs de Picard, la classe d'Euler des représentations
+fuchsiennes et les caractéristiques thêta, l'accouplement de Deligne et le
+symbole modéré.
+
+\keywords{SGA 4, six functor formalism, exceptional inverse image, Verdier duality, trace morphism, Gysin morphism, cycle class, local fundamental class, cohomological purity, base change, sheafified duality, local duality, biduality, derived functors of non-additive functors, Dold-Kan correspondence, polynomial functor, torsor, projective bundle, Picard stack, Fuchsian representation, Euler class, theta characteristic, Deligne pairing, tame symbol}
+\end{resume}
+
+\section*{Le fil du dossier, et ses conventions}
+
+Le dossier n'a pas d'ordre interne écrit. Trois chemises (pages 1, 3 et 5)
+n'ont que des titres, que les sections reprennent. Le fil qu'on suit est
+celui des pages ; ce qui relie les pièces est l'exposé XVIII de SGA 4,
+« La formule de dualité globale », et l'exposé XVII qui le précède :
+
+\begin{itemize}
+\item page 2 --- un relevé de lignes à corriger dans SGA 4 IX ;
+\item page 4 --- foncteurs dérivés de foncteurs non additifs (chemise « XVII ») ;
+\item pages 6 à 14 --- son tapuscrit : propositions pour un § 4
+« Homomorphisme de Gysin » et un § 5 « Classe fondamentale locale » ;
+\item pages 15 à 24 --- fiches de corrections sur XVIII 1.1--1.2, et les
+torseurs sur un fibré projectif ;
+\item pages 25 à 27 --- trois feuillets d'une rédaction de XVIII 1.2 (le
+lemme 1.2.9) ;
+\item page 28 --- une parenthèse : relever $PSL_2(\mathbb{R})$ à
+$SL_2(\mathbb{R})$ ;
+\item pages 29 à 34 --- références à vérifier dans XVII, la lettre signée
+P.~Deligne et sa liste de compatibilités manquantes, des fiches « État avant
+Illusie » et « État primitif » ;
+\item pages 35 à 47 --- esquisses, puis une rédaction du § 3.1 sur $Rf^!$
+(3.1.6 à 3.1.19), annotée au crayon.
+\end{itemize}
+
+Le rapport entre ces pièces n'est écrit nulle part ; on le lit ainsi. La
+lettre de la page 30 accompagne, selon la transcription, « un envoi de
+pièces sur l'exposé XVIII et le § 3.1 sur $Rf^!$ ». Il est vraisemblable que
+le tapuscrit des pages 6 à 14 et la rédaction annotée des pages 36 à 47 en
+fassent partie --- la seconde portant alors des annotations au crayon qui
+seraient les siennes --- mais la transcription n'attribue aucune de ces
+écritures, et cette lecture ne le fait pas non plus.\footnote{La lettre de la
+page 30 et la liste de la page 31 sont d'un tiers. Cette lecture n'en dit que
+ce que les notes et l'en-tête de la transcription en disent, et ne cite pas
+ses phrases.}
+
+\emph{Conventions.} Tous les schémas sont munis de leur topologie étale ;
+$\mathcal{A}$ est un faisceau d'anneaux de torsion, annulé par un entier $n$
+premier aux caractéristiques résiduelles,\footnote{Le tapuscrit écrit « un
+Anneau de torsion $A$ » ; la rédaction du § 3.1 écrit $\mathcal{A}$. On garde
+$\mathcal{A}$ partout.} et $D(X, \mathcal{A})$ la catégorie dérivée des
+faisceaux de $\mathcal{A}$-modules sur $X$. Un morphisme est
+\emph{compactifiable} s'il se factorise en une immersion ouverte suivie d'un
+morphisme propre ; on a alors $Rf_! = R\bar f_* \circ j_!$ pour toute telle
+factorisation $f = \bar f j$, et son adjoint à droite $Rf^!$.
+Au niveau des complexes, $f_!^{\bullet}$ désigne le foncteur explicite qui
+calcule $Rf_!$ et $f^!_{\bullet}$ son adjoint. Pour un morphisme $f\colon X
+\to Y$ entre schémas de dimensions relatives $d$ et $d'$ sur une base $S$, on
+note $\delta(f) = d - d'$ sa \emph{dimension virtuelle}, comme le tapuscrit le
+propose ; pour une immersion, $c = d' - d = -\delta(f)$ est sa
+codimension.\footnote{Ce choix tranche une incohérence du tapuscrit, qui pose
+« $c = d - d'$ » et écrit ensuite « $c = 1$, $X$ diviseur » ; voir la section
+des pages 12 à 14.}
+
+Ce que le dossier annonce sans l'établir : les deux « formulaires » des
+pages 8 à 14 sont des listes d'énoncés, sans démonstration ; la coïncidence de
+deux constructions de $Rf^!$ (page 43) ; l'isomorphisme de pro-objets de
+l'exemple 3.1.17 ; le changement de base pour $Rf^!$ au-delà du cas lisse.
+Les paragraphes 3.1.1 à 3.1.5 et 3.1.10 à 3.1.13, auxquels la rédaction
+renvoie, ne sont pas dans le dossier.
+
+\pagerange{2}{2}
+\section*{SGA 4 IX : des lignes à corriger (page 2)}
+
+Sur une feuille par ailleurs vierge, un relevé de pages et de lignes de
+l'exposé IX de SGA 4 --- pages 2, 3, 60, 61, 63, 80 et 91 --- sans le texte
+des corrections.\footnote{Une ligne biffée entre la page 3 et la page 60 est
+illisible ; le numéro « 63 » est lu sans certitude.}
+
+\pagerange{4}{4}
+\section*{Foncteurs dérivés d'un foncteur non additif (page 4)}
+
+Sous une chemise marquée « XVII »,\footnote{La chemise porte « Notes et
+lettres », biffé, « XVII » encadré, et au crayon un numéro lu « 5.5 » sans
+certitude.} une page au crayon rassemble ce qu'il faut savoir des foncteurs
+dérivés d'un foncteur \emph{non additif} $T$ sur les modules plats ---
+puissances divisées $\Gamma^n$, extérieures $\Lambda^n$, symétriques
+$\mathrm{Sym}^n$.\footnote{La page nomme aussi un $\otimes$ surmonté d'un
+signe lu comme un tilde, sans certitude ; on ne l'interprète pas.} Un tel $T$
+ne passe pas aux complexes terme à terme ; la construction de Dold et Puppe le
+fait passer par les objets simpliciaux. Par la correspondance de Dold--Kan
+$N$, un complexe $K$ concentré en degrés $\leqslant 0$ est le complexe
+normalisé d'un module simplicial $N^{-1}K$ ; on remplace $K$ par une
+résolution plate, on applique $T$ en chaque degré simplicial, et l'on revient
+aux complexes :
+\[
+LT(K) = N\, T\, N^{-1}(K), \qquad LT\colon D^{\leqslant 0} \to D^{\leqslant 0}.
+\]
+Ce qu'il en retient :
+
+\begin{itemize}
+\item $LT$ commute aux limites inductives filtrantes, dès que $T$ le
+fait (c'est le cas de $\Gamma^n$, $\Lambda^n$, $\mathrm{Sym}^n$) : les
+résolutions plates de Dold et Puppe se forment fibre par fibre et commutent
+aux limites inductives.\footnote{La justification, entre crochets sur la page,
+n'est lue qu'en partie ; on la donne dans sa forme la plus probable. La ligne
+suivante, « $D^{b,\mathrm{tor}\leqslant 0} \to D^{\leqslant 0}$ : mes
+ingrédients », ne dit pas ce qu'elle annonce.}
+
+\item Soit $T$ de degré $\leqslant n$ (au sens des foncteurs polynomiaux
+d'Eilenberg et Mac Lane) avec $T(0) = 0$. Au niveau des complexes, si $K$ est
+concentré dans l'intervalle $[p, q]$,
+\[
+N T N^{-1} K \ \text{est concentré dans}\
+\begin{cases}
+[p,\, nq] & \text{si } 0 \leqslant p \leqslant q,\\
+[np,\, q] & \text{si } p \leqslant q \leqslant 0.
+\end{cases}
+\]
+Le premier cas se lit avec la correspondance de Dold--Kan cosimpliciale, le
+second avec la simpliciale.\footnote{La page ne dit pas laquelle ; la lecture
+qui fait des deux cas deux énoncés en degrés cohomologiques est la nôtre. Elle
+écrit aussi « $K$ dans $[p, nq]$ » au second membre, là où c'est $NTN^{-1}K$
+qui est dans l'intervalle.} La borne du côté de $0$ ne bouge pas, celle du
+côté opposé est multipliée par $n$ : c'est le décalage
+$L\mathrm{Sym}^n(M[1]) \simeq L\Lambda^n(M)[n]$,
+$L\Lambda^n(M[1]) \simeq L\Gamma^n(M)[n]$.
+
+\item Passant aux catégories dérivées : si $K \in D^{\leqslant q}$
+($q \leqslant 0$), alors $LT(K) \in D^{\leqslant q}$ ; si $K$ est de
+tor-amplitude dans $[p, q]$, alors $LT(K)$ a sa cohomologie dans $[np, q]$,
+et sa tor-amplitude y est aussi lorsque $T$ transforme modules plats en
+modules plats.\footnote{La page écrit ces bornes avec une seule lettre $d$,
+surchargée : « si $\operatorname{tordim} K < -d$, $H^i(LT(K)) = 0$ si $i<d$ »
+et « si $H^i(K) = 0$ pour $i > d$, $H^i(LT(K)) = 0$ si $i \geqslant nd$ ».
+Telles qu'écrites, elles sont fausses : pour $M$ plat,
+$L\Lambda^2(M[2]) \simeq L\Gamma^2(M)[4]$ est non nul en degré $-4$, et pour
+$T = \mathrm{id}$ (de degré $\leqslant n$) aucune borne en $nd$ ne vaut du
+côté de $0$. On donne les bornes qu'entraîne l'énoncé « $[p,q]$ » du bas de la
+page, qui est juste.}
+
+\item Si $T$ conserve une propriété $P$ des modules, stable par facteurs
+directs, et si $T$ transforme les sommes directes finies d'objets ayant $P$ en
+objets ayant $P$, alors les composantes de $NTN^{-1}K$ ont $P$ dès que celles
+de $K$ l'ont.\footnote{La seconde hypothèse est ajoutée : les composantes de
+$N^{-1}K$ sont des sommes directes finies de composantes de $K$, et
+$T(M \oplus M')$ contient les effets croisés de $T$. Un mot illisible de la
+page en tenait peut-être lieu.}
+\end{itemize}
+
+La page s'achève sur « Ajouter remarque formulaire ».\footnote{Lu sans
+certitude. Quelle remarque, et à quel formulaire, la page ne le dit pas.}
+
+\pagerange{6}{9}
+\section*{L'homomorphisme de Gysin : un tapuscrit de propositions (pages 6 à 9)}
+
+Sous une chemise « Notes », un tapuscrit corrigé à l'encre de sa main
+s'adresse au rédacteur d'un exposé : il propose le contenu d'un § 4,
+\emph{Homomorphisme de Gysin}, et d'un § 5, \emph{Classe fondamentale
+locale}.\footnote{Le tapuscrit renvoie à « XVII », au « par.\,2 » (la trace
+d'un morphisme lisse), à « 3.1 » et à « XVI 3.7 » : c'est l'exposé XVIII de
+SGA 4 qui est visé, sans que la page le nomme.}
+
+\subsection*{La flèche de Gysin}
+
+Soit un triangle commutatif de $S$-schémas
+\[
+f\colon X \to Y, \qquad p\colon X \to S, \qquad q\colon Y \to S, \qquad p = q f,
+\]
+avec $p$ plat de présentation finie et de dimension relative $\leqslant d$,
+$q$ lisse de dimension relative $d'$, $p$ et $q$ compactifiables, et
+$\mathcal{A}$ un Anneau de torsion sur $S$ premier aux caractéristiques
+résiduelles.\footnote{« $p$ plat de prés.\ finie, $q$ lisse » est un ajout à
+l'encre ; la version tapée supposait seulement $p$ et $q$ de dimensions
+relatives $d$ et $d'$. Une question en marge demande si un Anneau
+$\mathcal{A}_Y$ de torsion sur $Y$ ne suffirait pas.} Pour un complexe $F$ de
+$\mathcal{A}$-modules sur $S$, posons $F_X = p^*F$, $F_Y = q^*F$. On définit
+une flèche canonique, l'\emph{homomorphisme de Gysin} ou \emph{homomorphisme
+trace},
+\[
+(4.2)\qquad \mathrm{Tr}_f\colon Rf_!(F_X) \longrightarrow F_Y(-\delta)[-2\delta],
+\qquad \delta = \delta(f) = d - d'.
+\]
+Lorsque $p$ est, lui aussi, lisse de dimension relative exactement $d$, on a
+$Rf^!F_Y \simeq F_X(\delta)[2\delta]$ par la dualité de Poincaré pour $p$ et
+$q$, et $\mathrm{Tr}_f$ est simplement la counité $Rf_!Rf^! \to \mathrm{id}$
+de l'adjonction, évaluée en $F_Y(-\delta)[-2\delta]$.
+
+Par abus, on appelle encore Gysin toute flèche qui s'en déduit par un
+foncteur. Ainsi : en cohomologie, $R^if_!(F_X) \to
+\underline{H}^{i-2\delta}(F_Y)(-\delta)$ (4.2.1) ;\footnote{La page définit
+(4.2.1) « en appliquant $\underline{H}^i$ à (4.2.1) » --- il faut lire (4.2)
+--- et écrit d'abord l'indice $i$ au but, avec le décalage, biffé ; on donne
+l'indice juste.} en appliquant $Rq_!$, $Rp_!(F_X) \to
+Rq_!(F_Y)(-\delta)[-2\delta]$ (4.2.2) ; plus généralement, pour $g\colon Y
+\to Z$ compactifiable, $R(gf)_!(F_X) \to Rg_!(F_Y)(-\delta)[-2\delta]$
+(4.2.3) ; en appliquant $Rg_*$, une flèche partant de l'image directe « à
+supports propres relativement à $f$ »,
+\[
+(4.2.4)\qquad R(gf)_{c(f)}(F_X) := Rg_*Rf_!(F_X) \longrightarrow
+Rg_*(F_Y)(-\delta)[-2\delta],
+\]
+et, pour $Z$ le topos ponctuel,
+\[
+(4.2.5)\qquad R\Gamma_{c(f)}(X, F_X) := R\Gamma(Y, Rf_!F_X) \longrightarrow
+R\Gamma(Y, F_Y(-\delta))[-2\delta].
+\]
+Si $f$ est propre,\footnote{Le tapuscrit écrit $R\Gamma_X$ au premier membre de
+(4.2.5) ; comme $Rf_!F_X$ vit sur $Y$, ce sont les sections sur $Y$. Dans
+(4.2.4) et (4.2.5), l'indice « $!$ » tapé est remplacé à l'encre par
+« $c(f)$ ».} $Rf_! = Rf_*$ et ces flèches deviennent (4.2.6) à (4.2.8)
+--- notamment $R\Gamma(X, F_X) \to R\Gamma(Y, F_Y(-\delta))[-2\delta]$.
+
+\subsection*{La bonne forme : des coefficients sur $Y$}
+
+Tensorisant (4.2) par un complexe $G$ sur $Y$ et utilisant la formule de
+projection, on obtient pour tout $G$ une flèche
+\[
+(4.3)\qquad \mathrm{Tr}_f\colon Rf_!(f^*G) \longrightarrow G(-\delta)[-2\delta],
+\]
+ou, de façon équivalente, $Rf_!(f^*G(\delta)) \to G[-2\delta]$ (4.3 bis). Il
+note aussitôt que c'est par (4.3) qu'il aurait fallu commencer : on peut
+oublier $F$, et lorsque $p$ est lisse et $G$ localement isomorphe à l'image
+inverse d'un complexe sur $S$, (4.3) est la counité d'adjonction. Les exemples
+(4.2.1) à (4.2.8) se déduiraient de (4.3).\footnote{« (NB je ne précise pas
+ici ni ailleurs les hypothèses de degré) » : les catégories dérivées ne sont
+pas bornées dans le tapuscrit. Il faut au moins $G \in D^-$ pour que la
+formule de projection s'applique sans précaution.}
+
+Deux remarques de méthode. La notation $f_*$, qui désigne à la fois un
+foncteur et la flèche de Gysin, est mauvaise ; il propose $\mathrm{Tr}_f$.
+Et les variantes sont trop nombreuses pour qu'un formulaire les donne toutes
+sans déduction : il faut l'écrire pour (4.3), et montrer sur un exemple --- le
+cas propre, après $Rg_*$ --- ce qu'il devient.
+
+\subsection*{Le formulaire proposé}
+
+Les articles suivants « doivent certainement figurer ».\footnote{Les lettres
+des articles sont récrites à l'encre ; on suit les lettres à l'encre, et
+l'ordre qu'indiquent les flèches de la marge.}
+
+\begin{itemize}
+\item[a)] \emph{Cas quasi-fini.} Si $\delta = 0$ et $f$ est quasi-fini et plat,
+$\mathrm{Tr}_f$ est la trace de XVII.\footnote{Le tapuscrit dit « $f$
+quasi-fini (et alors automatiquement plat, supposant que la dimension relative
+de $p$ est partout $d$) ». Ce n'est vrai que si les fibres de $p$ sont de
+Cohen--Macaulay --- par exemple si $X$ est lisse sur $S$ --- par le critère de
+platitude par fibres et la « platitude miraculeuse ». Contre-exemple : sur un
+corps, la réunion de deux plans de $\mathbb{A}^4$ qui se coupent en un point,
+projetée finiment sur $\mathbb{A}^2$, est de dimension $2$ partout et n'est
+pas plate sur $\mathbb{A}^2$. On a ajouté « et plat » à l'hypothèse.}
+\item[b)] \emph{Cas lisse.} Si $f$ est lisse, c'est la trace du § 2.
+\item[c)] \emph{Transitivité} pour $gf$, $g\colon Y \to Z$, $Z$ lisse et
+compactifiable sur $S$.
+\item[d)] \emph{Formule de projection.} Tensoriser (4.3) par $G'$ donne la
+flèche de Gysin de $G \otimes^L G'$ ; il en résulte que (4.3) est connue pour
+tout $G$ dès qu'on connaît
+\[
+(4.4)\qquad Rf_!\bigl(\mathcal{A}_X(\delta)[2\delta]\bigr) \longrightarrow
+\mathcal{A}_Y,
+\]
+et la formule de projection sur les classes de cohomologie en découle.
+\item[e)] \emph{Changement d'Anneau} $\mathcal{A} \to \mathcal{A}'$ : il suffit
+de connaître (4.4) pour les $\mathcal{A} = \mathbb{Z}/n\mathbb{Z}$.
+\item[f)] \emph{Künneth}, pour $g_1 \times_S g_2$, et \emph{changement de base}
+$S' \to S$.
+\item[g)] \emph{Indépendance de $S$}, pour $S \to T$ lisse.
+\item[h)] \emph{Formule d'échange}, pour un carré cartésien
+$X' = X \times_Y Y'$ : $g^*\mathrm{Tr}_f$, composé avec le changement de base
+pour $Rf_!$, est $\mathrm{Tr}_{f'}$. Il faut que $X'$ soit plat sur $S$, d'où
+une hypothèse de Tor-indépendance de $X$ et $Y'$ sur $Y$ ; cela marche si $X$
+est lisse sur $S$ et $f$, $g$ transversaux (EGA IV 17).
+\end{itemize}
+
+\pagerange{10}{11}
+\subsection*{Les deux derniers articles, et le degré (pages 10 et 11)}
+
+\begin{itemize}
+\item[i)] \emph{Formule de transposition} : Gysin en cohomologie à supports
+propres est le transposé de l'image inverse --- « tautologique »,
+pense-t-il.
+\item[j)] \emph{Formules de linéarité}, notamment pour une immersion de
+schémas lisses, dont Jouanolou a besoin, et pour les variétés éclatées qui
+s'en déduisent.
+\end{itemize}
+
+Un plan est proposé pour le § 4 : définitions et notations, formulaire
+général, formulaire pour les classes de cohomologie ; et la dimension
+virtuelle $\delta(f) = d - d'$ « mérite une lettre simple ».
+
+\emph{Le degré.} Si $f$ est propre et $\delta = 0$,
+\[
+\mathrm{Tr}_f(1_X) = N\cdot 1_Y,
+\]
+où $N$ est une fonction localement constante à valeurs entières sur $Y$, le
+\emph{degré} de $f$, égale au degré usuel sur le plus grand ouvert où $f$ est
+fini localement libre. Par la formule de projection,
+$\mathrm{Tr}_f \circ f^* = N$ sur $H^*(Y, G)$ ; donc $\operatorname{Ker}(f^*)$
+est annulé par $N$, et $f^*$ est injectif, et même inversible à gauche, si $N$
+est inversible dans $\mathcal{A}$ --- en particulier si $N = 1$.
+
+Plus finement, si $S = \operatorname{Spec} k$, $Y$ irréductible de point
+générique $\eta$, $f$ propre et $X_\eta \neq \varnothing$, et si $N$ est le
+pgcd des degrés des $0$-cycles de $X_\eta$, il existe une flèche fonctorielle
+en $G$, $H^*(X, G_X) \to H^*(Y, G)$, dont le composé avec $f^*$ est $N$. Le
+calcul de la page 10 la construit. Soient $x_i$ des points fermés de $X_\eta$,
+de degrés $n_i = [k(x_i) : k(\eta)]$, et des entiers $d_i$ avec
+$\sum d_i n_i = N$ (Bézout) ; soient $Z_i = \overline{\{x_i\}}$,
+$u_i\colon Z_i \hookrightarrow X$ et $f_i = f u_i\colon Z_i \to Y$, propre,
+génériquement fini de degré $n_i$. Alors
+\[
+\Bigl(\sum_i d_i\, f_{i*} u_i^*\Bigr) f^* = \sum_i d_i\, f_{i*} f_i^* =
+\sum_i d_i\, n_i\, \mathrm{id} = N\,\mathrm{id},
+\]
+où $f_{i*}$ est la flèche de Gysin de $f_i$, et $f_{i*}f_i^* = n_i$ par
+l'énoncé précédent appliqué à $f_i$.\footnote{La page 10 est au crayon, sur
+un verso, sans lien écrit avec le tapuscrit ; c'est le calcul qui justifie
+l'énoncé entre crochets de la page 11. Elle écrit la dernière égalité
+« $\sum d_i (f_{i*}f_i^*)\, n_i\, \mathrm{id}$ ». L'énoncé suppose $Y$ lisse
+sur $k$, comme tout le paragraphe ($q$ lisse).}
+
+\pagerange{12}{14}
+\section*{La classe fondamentale locale (pages 12 à 14)}
+
+Le § 5 proposé part de la flèche de Gysin. Par adjonction, la connaissance de
+(4.3) équivaut à celle d'une flèche
+\[
+(5.1)\qquad f^*(G)(\delta)[2\delta] \longrightarrow Rf^!G,
+\]
+fonctorielle en $G$, qu'il propose d'appeler \emph{classe fondamentale
+locale} (« autre nom ? » en marge).\footnote{Le tapuscrit numérote (4.4) à
+(4.9) les formules de ce paragraphe, alors que (4.4) est déjà pris au
+§ 4. On les renumérote (5.1) à (5.6).} Par le § 4, il suffit de la connaître
+pour $G = \mathcal{A}_Y$, où elle devient un élément
+\[
+(5.2)\qquad \varphi_f\colon \mathcal{A}_X \to Rf^!(\mathcal{A}_Y)(-\delta)[-2\delta],
+\qquad\text{i.e.}\quad \varphi_f \in H^{-2\delta}\bigl(X, Rf^!(\mathcal{A}_Y)(-\delta)\bigr),
+\]
+d'où une section
+\[
+(5.3)\qquad \varphi_f \in H^0\bigl(X, R^{-2\delta}f^!(\mathcal{A}_Y)(-\delta)\bigr),
+\]
+qui mérite peut-être mieux encore le nom de classe fondamentale
+locale.\footnote{Les formules tapées de (4.5) et (4.6) ont les bons signes
+($d'-d = -\delta$) ; l'ajout à l'encre « i.e. $\varphi_f \in
+H^{2(d-d')}(Y, Rf^!(A_Y)(d-d'))$ » les inverse, et place la cohomologie sur
+$Y$. Or $Rf^!(\mathcal{A}_Y)$ est un complexe sur $X$. Le tapuscrit n'a pas les
+crochets des décalages.} Sa formation est fonctorielle en l'Anneau $\mathcal{A}$
+(voire $\mathcal{A}_Y$) ; il suffit de la connaître pour les
+$\mathbb{Z}/n\mathbb{Z}$. Lorsqu'on dispose de la \emph{pureté}
+\[
+(5.4)\qquad R^if^!(\mathcal{A}_Y) = 0 \quad\text{pour } i \neq -2\delta,
+\]
+(5.3) détermine (5.2), qui mérite alors le nom de \emph{classe fondamentale
+globale}.
+
+\subsection*{Le cas d'une immersion fermée}
+
+Soit désormais $f\colon X \hookrightarrow Y$ une immersion fermée, de
+codimension $c = -\delta = d' - d$. La pureté (5.4) vaut alors : elle est dans
+XVI 3.7 lorsque $X$ est lisse sur $S$, et le cas général s'en déduit par
+dévissage (SGA 2 XIV, 1.10 et 1.18).\footnote{Le tapuscrit écrit la pureté
+« pour $i \neq 2(d-d')$ ». Pour une immersion de codimension $c$, c'est en
+degré $2c = 2(d'-d)$ que $Rf^!\mathcal{A}_Y$ est concentré :
+$Rf^!\mathcal{A}_Y \simeq \mathcal{A}_X(-c)[-2c]$ dans le cas lisse. Le signe
+« $\neq$ » lui-même est surchargé et lu sans certitude.} Comme
+$H^*(X, Rf^!\mathcal{A}_Y) = H^*_X(Y, \mathcal{A}_Y)$, la classe devient
+\[
+(5.5)\qquad \gamma_{X/Y} \in H^{2c}_X\bigl(Y, \mathcal{A}_Y(c)\bigr),
+\]
+la \emph{classe de cohomologie à supports dans $X$ de $X$ dans $Y$}, d'image
+\[
+(5.6)\qquad \gamma_{X/Y} \in H^{2c}\bigl(Y, \mathcal{A}_Y(c)\bigr),
+\]
+la \emph{classe de cohomologie de $X$ dans $Y$} --- aujourd'hui la classe de
+cycle.\footnote{Le tapuscrit écrit $H^{2(d-d')}$ et $(d-d')$ dans (4.8) et
+(4.9) : même inversion de signe. Le nom $\gamma_{X/Y}$ et l'indice $X$ sont
+écrits à l'encre sur un $\varphi_f$ tapé.} Leur formalisme, étendu par
+linéarité aux cycles, « sera étudié systématiquement dans SGA 5 IV » ; ici,
+seules les propriétés élémentaires de la classe locale.\footnote{À notre
+connaissance, l'exposé de SGA 5 sur la classe de cycle n'a pas paru dans le
+volume publié ; c'est le texte « Cycle » de SGA 4½ (1977) qui en tient lieu. La
+page ne peut pas le savoir.}
+
+\emph{Propriétés proposées.}\footnote{Le tapuscrit pose « $p = d - d'$ »,
+récrit à l'encre en une lettre qu'on lit $c$. Avec $c = d - d'$, « $c = 1$ :
+diviseur » serait faux ; on lit $c$ comme la codimension, ce que confirment les
+signes « $-$ » ajoutés à l'encre dans le diagramme du « Remords ».}
+\begin{itemize}
+\item[a)] Si $X$ est lisse sur $S$ et $G$ localement isomorphe à l'image
+inverse d'un complexe sur $S$ (par exemple $G = \mathcal{A}_Y$), (5.1) est un
+isomorphisme (essentiellement XVI 3.7) : c'est la pureté cohomologique
+relative.
+\item[b)] Si $c = 0$, $f$ identifie $X$ à une partie ouverte et fermée de $Y$,
+et (5.1) est l'identité, $\varphi_f = 1$.\footnote{La page dit « $f$ un
+isomorphisme ». Une immersion fermée de codimension $0$ d'un $S$-schéma plat
+dans un $S$-schéma lisse n'est un isomorphisme que sur son image, réunion de
+composantes connexes de $Y$.}
+\item[c)] Si $c = 1$, $X$ est un diviseur relatif de $Y/S$, et $\varphi_f$ est
+donné par la théorie de Kummer : c'est l'image de la classe de $\mathcal{O}(X)$
+par le cobord de la suite de Kummer, à supports dans $X$.
+\item[d)] Compatibilité à la \emph{transitivité} et aux \emph{intersections}
+--- « essentiellement identiques » --- dans le cas lisse et transversal.
+\item[e)] Compatibilité au \emph{changement de base} $S' \to S$ et aux
+\emph{produits} $Y_1 \times_S Y_2$.
+\item[f)] Compatibilité au changement d'anneau.
+\item[g)] Indépendance de $S$ ($S \to T$).
+\item[h)] \emph{Relation avec Gysin} : $\gamma_{X/Y}$ est l'image de $1_X$ par
+Gysin ; et $Rf_!$ de (5.1), suivi de la counité d'adjonction, est la flèche de
+Gysin.
+\item[i)] \emph{Remords} : le triangle
+\end{itemize}
+
+\begin{tikzcd}
+f^*(G)(-c)[-2c] \arrow[r] \arrow[dr] & Rf^!(G) \\
+& Rf^!(\mathcal{A}_Y) \otimes^L f^*(G) \arrow[u]
+\end{tikzcd}
+
+commute, où la flèche horizontale est (5.1), l'oblique est $\varphi_f \otimes
+f^*G$, et la verticale la flèche canonique « qu'on devine », analogue au
+changement de base pour les $Rf^!$ --- qui, dit-il, manque dans 3.1, comme ce
+dernier ; elle est un isomorphisme si $G$ est localement libre.\footnote{La
+page dit que l'oblique « est déduite par $\otimes^L G$ » de (4.5) ; c'est
+$\otimes^L f^*G$. Le trait de crayon de la marge fait venir cet article i) à
+la suite de h).}
+
+Il pense que, le formulaire du § 4 acquis, celui-ci est « pratiquement
+trivial », et propose de finir par une \emph{caractérisation} des classes
+fondamentales locales d'un couple lisse : nature locale (pour la topologie de
+Zariski), cas $c = 0$, cas $c = 1$ défini par une équation, et compatibilité au
+cup-produit d) (où il suffit qu'un des facteurs soit de codimension $1$). Cet
+énoncé d'existence et d'unicité, signale-t-il, se démontre indépendamment de
+la dualité et de la trace, et avait été donné au séminaire oral avant la
+dualité.
+
+\pagerange{15}{23}
+\section*{Fiches de corrections sur XVIII 1.1--1.2 (pages 15 à 23)}
+
+Neuf fiches de format irrégulier, à l'encre ou au crayon, renvoient chacune à
+un paragraphe de l'exposé XVIII et à une page ou une ligne d'un tapuscrit qui
+n'est pas ici.\footnote{La transcription n'attribue pas ces fiches. Une autre
+main a coché la plupart des articles d'un « ok » au crayon ; une fiche
+(page 21) est en tête « XVII -- 1.2 », sa dernière ligne dit XVIII. Les fiches
+des pages 15 et 17 sont pâles et lues en partie seulement.} Elles demandent :
+pourquoi supposer une certaine hypothèse de cohérence à cet endroit ; de
+décrire un faisceau d'automorphismes comme celui des automorphismes de $x$
+« qui sont \emph{dans} $\mathrm{pch}(K)$ » ; de préciser $R^1f_*\mathbb{G}_m$
+et d'écrire $R^1p_*p^*G$ ; de remplacer un renvoi à 1.2.2.1 par (1.2.3) et
+(1.2.4.2) ; d'ajouter une référence à Mac Lane ; d'annuler un renvoi à 1.2.1.
+Deux observations mathématiques s'y glissent. L'une (page 17) écrit le
+$G$-torseur associé à un couple :
+\[
+K(K_0, \varphi) = p^*(K_0) + \varphi_*\bigl(\mathcal{O}(1)\bigr),
+\]
+où $p\colon P(E) \to S$ est un fibré projectif, $K_0$ un $G$-torseur sur $S$,
+$\varphi \in \mathrm{Hom}(\mathbb{G}_m, G)$, et $\varphi_*\mathcal{O}(1)$ le
+$G$-torseur déduit du $\mathbb{G}_m$-torseur $\mathcal{O}(1)$ ; et suggère de
+remarquer que $\Gamma(S, R^1p_*G) = H^1(P(E), G)/H^1(S, G)$ --- ce que la
+page 24 établit, sous hypothèse.\footnote{La page écrit
+« $p^*(\varphi)[\mathcal{O}(1)]$ » pour $\varphi_*\mathcal{O}(1)$.} L'autre
+(page 23), biffée : « $\operatorname{Lie}\operatorname{Pic}_X =
+H^1(X, \mathcal{O}_X)$ ? » --- c'est vrai, et c'est exactement ce qui sert à
+la page 26.
+
+\pagerange{24}{24}
+\section*{Torseurs sur un fibré projectif (page 24)}
+
+Soient $p\colon P(E) \to S$ un fibré projectif et $G$ un faisceau en groupes
+commutatifs sur $S$. On compare deux conditions :\footnote{La page n'a pas de tilde sur la flèche de I.a, et ne rappelle pas
+la définition de (1.2.1.1) ; on la reconstitue d'après la fiche de la page 17
+et la démonstration qui suit. La note de la transcription décrit (1.2.1.1)
+comme allant des $G$-torseurs sur $S$ vers ceux sur $P(E)$ ; la donnée de
+$\varphi$ est nécessaire pour que la surjectivité essentielle ait un sens.}
+
+\begin{itemize}
+\item[I.] (a) $G \xrightarrow{\sim} p_*p^*G$ ; (b) la flèche
+$\underline{\mathrm{Hom}}(\mathbb{G}_m, G) \to R^1p_*G$,
+$\varphi \mapsto \varphi_*\mathcal{O}(1)$, est un isomorphisme ;
+\item[II.] le foncteur (1.2.1.1), $(K_0, \varphi) \mapsto K(K_0, \varphi)$,
+des couples formés d'un $G$-torseur sur $S$ et d'un $\varphi \in
+\mathrm{Hom}(\mathbb{G}_m, G)$ vers les $p^*G$-torseurs sur $P(E)$, est une
+équivalence, et le reste après toute localisation étale sur $S$.
+\end{itemize}
+
+\emph{Remarque 1.} Sous I.a, et si $p$ a une section, la suite exacte des
+termes de bas degré de Leray donne
+\[
+0 \to H^1(S, G) \to H^1(P(E), G) \xrightarrow{\ \theta\ } \Gamma(S, R^1p_*G) \to 0,
+\]
+la surjectivité de $\theta$ venant de ce que $H^2(S, G) \to H^2(P(E), G)$ est
+injectif, rétracté par la section.
+
+\emph{Remarque 2.} La pleine fidélité de (1.2.1.1) est locale sur $S$ ; et,
+pleine fidélité acquise, la surjectivité essentielle l'est aussi. On peut donc
+supposer que $p$ a une section.
+
+\emph{Remarque 3.} I.b suffit pour que $\mathrm{Hom}(\mathbb{G}_m, G) \to
+H^1(P(E), G)$ soit injectif : composée avec $\theta$, c'est I.b sur les
+sections globales.
+
+\emph{I $\Rightarrow$ II.} Pleine fidélité : si $K(K_0, \varphi) \simeq
+K(K'_0, \varphi')$, on applique $\theta$ et l'on trouve $\varphi = \varphi'$ ;
+alors $p^*K_0 \simeq p^*K'_0$, et I.a (les automorphismes de $p^*G$ sur
+$P(E)$ sont ceux de $G$) donne la pleine fidélité. Surjectivité essentielle :
+pour $K \in H^1(P(E), G)$, I.b donne $\varphi$ avec $\theta(K) =
+\theta(\varphi_*\mathcal{O}(1))$, et $K - \varphi_*\mathcal{O}(1)$ est dans le
+noyau de $\theta$, donc vient de $H^1(S, G)$.\footnote{La page écrit
+« $\theta(K) - \varphi(\mathcal{O}(1)) \in H^1(S, G)$ » ; c'est la différence
+des torseurs, et non de leurs images par $\theta$, qui est visée.}
+\emph{II $\Rightarrow$ I.} I.a résulte de la pleine fidélité ; I.b, de la
+surjectivité essentielle appliquée localement, compte tenu de ce qui précède.
+
+\pagerange{25}{27}
+\section*{Une rédaction de XVIII 1.2 : le lemme 1.2.9 (pages 25 à 27)}
+
+Trois feuillets d'une rédaction soignée, folios 8 et 12 pour les deux
+derniers.\footnote{Encre bleue, papier quadrillé ; une flèche verte inverse
+l'ordre des alinéas a.\ et b., et on suit l'ordre qu'elle indique. Le numéro
+du lemme est corrigé de 1.2.7 en 1.2.9.}
+
+\textbf{Lemme 1.2.9.} \emph{Soient $S$ un schéma local artinien, $\bar s$ un
+point géométrique de $S$, $f\colon X \to S$ propre et lisse, et $G$ un schéma
+en groupes commutatif lisse de type fini sur $S$. Si $H^0(X_{\bar s},
+\mathcal{O}) = k(\bar s)$, si $\operatorname{Pic}^{\tau}X_{\bar s} = 0$ et si
+$G_{\bar s}$ ne contient pas de sous-groupe $\mathbb{G}_m$, alors $f^*$ est une
+équivalence de la catégorie des $G$-torseurs sur $S$ sur celle des
+$f^*G$-torseurs sur $X$.}
+
+\emph{a.} La question est étale-locale sur $S$ ; on suppose $S$ strictement
+hensélien. Alors $X/S$ a une section (les fibres lisses sur un corps
+séparablement clos ont des points rationnels, que le lemme de Hensel relève),
+et $f^*$ est pleinement fidèle par 1.2.3 et (1.2.4.2).
+
+\emph{b.} Cas d'un corps. Si $A$ est une variété abélienne, $H^1(X, A)$ est
+de torsion (Raynaud [1, XIII 2.6]), donc réunion des images des $H^1(X,
+{}_nA)$. Si $G$ est extension de $A$ par un groupe affine $G_0$ et $G^n$ l'image
+réciproque de ${}_nA$ dans $G$, $H^1(X, G)$ est réunion des images des
+$H^1(X, G^n)$ : un $G$-torseur dont l'image dans $H^1(X, A)$ est tuée par $n$
+provient de $G^n = \operatorname{Ker}(G \to A \xrightarrow{n} A)$. Les $G^n$
+sont affines, non nécessairement lisses, et l'on conclut par 1.2.8.
+
+\emph{c.} Pour $S$ strictement hensélien et $G$ lisse, $H^1(S, G) = 0$ ; il
+s'agit de voir $H^1(X, G) = 0$. Par récurrence sur la longueur, supposons-le
+après restriction à $S_0 \subset S$ défini par un idéal $I$ de carré nul et de
+longueur $1$. Un $G$-torseur sur $X$ est alors une déformation du torseur
+trivial de $X_0$ ; avec $L = e^*\Omega^1_{G/S}$ ($e$ la section unité), ces
+déformations sont classées par
+\[
+H^1\bigl(X_{s}, f^*\underline{\mathrm{Hom}}(L, I)\bigr) \simeq
+H^1(X_s, \mathcal{O}) \otimes \operatorname{Lie}(G_s) \otimes I = 0,
+\]
+car $H^1(X_s, \mathcal{O}) = \operatorname{Lie}\operatorname{Pic}_{X_s}$ est
+nul quand $\operatorname{Pic}^{\tau}$ l'est.\footnote{La page conclut « $= 0$ »
+sans dire pourquoi ; la justification par l'algèbre de Lie du schéma de
+Picard est la nôtre --- c'est la question biffée de la page 23. Elle
+suppose $\operatorname{Pic}^{\tau} = 0$ comme schéma, nilpotents compris. La
+page écrit « ceci prouve 12.9 » pour 1.2.9.}
+
+La page 27, barrée de deux diagonales, montre pour $S$ artinien une
+implication (1) $\Rightarrow$ (1') entre conditions qui ne sont pas dans le
+dossier : si $G$ est fini localement libre, de dual de Cartier $G'$, il se
+plonge dans le schéma en groupes lisse $A(G)$ des unités de l'algèbre affine
+de $G'$, comme sous-groupe des caractères de $G'$ ; une suite exacte $0 \to G
+\to G_1 \to G_2 \to 0$ à $G_1$, $G_2$ lisses et la cohomologie de $P(E)$
+(1.2.3, 1.2.2) donnent $\underline{\mathrm{Hom}}(\mathbb{G}_m, G)
+\xrightarrow{\sim} R^1p_*G$. Un dernier cas (iii) se ramène, quitte à étendre
+le corps, à une extension $0 \to \mathbb{G}_m^n \to G_0 \to H \to 0$ avec $H$
+sans tore.
+
+\pagerange{28}{28}
+\section*{Relever l'uniformisation à $SL_2(\mathbb{R})$ (page 28)}
+
+Tête-bêche, sur un feuillet barré, des notes brèves en colonnes. Une surface
+de Riemann compacte $X$ de genre $g \geqslant 2$ est un quotient du disque ;
+l'uniformisation fournit un torseur plat sous $PSL_2(\mathbb{R}) =
+\operatorname{Aut}(\text{disque})$ sur $X$, c'est-à-dire une représentation
+$\pi_1(X) \to PSL_2(\mathbb{R})$. La question est : \emph{se relève-t-elle à
+$SL_2(\mathbb{R})$ ?} Comme $SL_2(\mathbb{R}) \to PSL_2(\mathbb{R})$ est une
+extension centrale par $\{\pm 1\}$, les notes posent correctement la théorie
+d'obstruction : obstruction dans $H^2(X, \mathbb{Z}/2)$, relèvements formant
+un torseur sous $H^1(X, \mathbb{Z}/2)$, automorphismes $H^0(X, \mathbb{Z}/2)$.
+Concrètement, avec des générateurs $x_1, \dots, x_{2g}$ de $\pi_1$ soumis à
+$[x_1, x_2]\cdots[x_{2g-1}, x_{2g}] = e$, on relève les $x_i$ et la relation
+relevée vaut $\pm 1$.\footnote{La page écrit $(x_1x_2)\cdots(x_{2g-1}x_{2g})$
+pour les commutateurs. Les autres notes --- une extension
+« $0 \to \omega \to V \to \omega^{-1} \to 0$ attaché à $D$ », « disque
+orienté », « azumaya », des revêtements de degré $k$ et un « $g-1$ » cerclé ---
+sont trop brèves pour être lues sûrement ; on ne les interprète pas.}
+
+La page ne conclut pas. La réponse est classique : le signe est la réduction
+modulo $2$ de la classe d'Euler de la représentation, qui vaut $\pm(2g-2)$
+pour l'uniformisation ; elle est paire, la représentation se relève, et ses
+$2^{2g}$ relèvements correspondent aux racines carrées du fibré canonique
+(caractéristiques thêta), le fibré plat de rang $2$ relevé étant une extension
+de $\omega^{-1/2}$ par $\omega^{1/2}$.\footnote{Rien sur la page ne dit si
+l'auteur connaissait ce calcul ; le « $g-1$ » cerclé, degré d'une
+caractéristique thêta, le suggère sans l'établir. La date du feuillet n'est pas
+connue.}
+
+\pagerange{29}{29}
+\section*{SGA 4 XVII : références à vérifier (page 29)}
+
+Au crayon : vérifier le renvoi XVII 0.13 pour « $F$ premier aux
+caractéristiques résiduelles de $X$ », et ajouter la variante relative --- pour
+$X \to S$ et $F$ sur $X$, « premier aux caractéristiques résiduelles de
+$S$ », c'est-à-dire, pour tout $s \in S$, au-dessus de
+$\operatorname{Spec}\mathcal{O}_{S,s}$, annulé par un entier inversible en
+$s$.\footnote{La ligne est elliptique ; c'est sa lecture la plus probable.}
+Et : « 1.2.9 : plat / lisse par Illusie » --- vraisemblablement, que le
+lemme 1.2.9 des pages 25 à 27 vaut pour $f$ plat au lieu de lisse, grâce à la
+théorie des déformations d'Illusie.\footnote{Lecture nôtre ; la page n'en dit
+pas plus.}
+
+\pagerange{30}{31}
+\section*{Une lettre signée P.~Deligne, et une liste (pages 30 et 31)}
+
+Une lettre signée « P.~Deligne », cotée « L 4 », accompagne un envoi de pièces
+sur l'exposé XVIII et le § 3.1 sur $Rf^!$. Elle dit ce qui manque --- Gysin,
+le changement de base $g^*Rf^! \xrightarrow{\sim} Rf'^!g^*$ sous hypothèses,
+des compatibilités, la compatibilité aux classes fondamentales locales ---,
+ce que le rédacteur entend combler ou non avant que SGA 4 ne devienne un
+livre, et la liste des pièces jointes. La page 31, de la même main, est
+vraisemblablement la « liste incomplète de compatibilités manquantes » que la
+lettre annonce, en neuf articles a) à i).\footnote{Lettre d'un tiers : on n'en
+dit que ce qu'en disent les notes et l'en-tête de la transcription
+(RIGHTS.md). Elle n'est pas datée ; « avant que SGA 4 ne devienne un livre »
+la place avant la publication dans les \emph{Lecture Notes} (1972--1973).}
+
+Ce qui intéresse le fil du dossier est la correspondance entre ces manques et
+les autres pièces : Gysin et les classes fondamentales locales sont l'objet
+du tapuscrit des pages 6 à 14 ; le changement de base pour $Rf^!$ est la
+flèche que le « Remords » de la page 14 dit manquer dans 3.1, et que la
+rédaction de la page 36 n'obtient que sous hypothèse de lissité.
+
+\pagerange{32}{34}
+\section*{« État avant Illusie », « État primitif » (pages 32 à 34)}
+
+Deux fiches de calcul et une troisième presque vide.\footnote{La
+transcription n'attribue pas ces fiches. « ETAT Avant Illusie » et « ETAT
+PRIMITIF » sont à l'encre rouge ; à quoi renvoient ces états, la page ne le
+dit pas.}
+
+\emph{Page 32.} D'un côté, la suite exacte des termes de bas degré de la
+suite spectrale de Leray d'un morphisme $X \to S$ :
+$0 \to H^1(S, f_*\mathcal{F}) \to H^1(X, \mathcal{F}) \to H^0(S, R^1f_*\mathcal{F})
+\to H^2(S, f_*\mathcal{F})$. De l'autre, retourné, un accouplement entre
+fibrés en droites sur une courbe relative $f\colon X \to S$ :
+$\langle \mathcal{O}(E), \mathcal{M}\rangle = N_{E/S}(\mathcal{M})$ pour un
+diviseur $E$ fini et plat sur $S$, et
+\[
+\langle \mathcal{O}(E), \mathcal{O}(F)\rangle \simeq
+\det Rf_*\bigl(\mathcal{O}_E \otimes^L \mathcal{O}_F\bigr)^{\pm 1},
+\]
+calculé par la suite $0 \to \mathcal{O}(-F) \to \mathcal{O} \to \mathcal{O}_F
+\to 0$.\footnote{La page écrit l'exposant $-1$. Avec la normalisation
+$N_{E/S}(\mathcal{M}) = \det f_*(\mathcal{M}|_E) \otimes
+\det f_*(\mathcal{O}_E)^{-1}$, le calcul donne $\langle \mathcal{O}(E),
+\mathcal{O}(-F)\rangle = \det f_*(\mathcal{O}_{E\cap F})^{-1}$ et donc
+l'exposant $+1$ pour $\mathcal{O}(F)$ ; l'écart est une convention de signe du
+déterminant, ou la ligne précédente de la page, écrite pour $\mathcal{O}(-F)$.
+On ne tranche pas.} C'est ce qu'on appelle aujourd'hui l'\emph{accouplement de
+Deligne}.\footnote{Le nom et la théorie générale sont postérieurs (Deligne,
+« Le déterminant de la cohomologie », 1987) ; la fiche n'est pas datée.}
+
+\emph{Page 33.} Le symbole modéré en un point $x$ d'une courbe,
+\[
+(-1)^{v_x(f)\, v_x(g)}\, \frac{g^{v_x(f)}}{f^{v_x(g)}},
+\]
+au milieu de combinaisons de diviseurs ;\footnote{C'est l'inverse de la
+normalisation la plus courante, $(f, g)_x = (-1)^{v(f)v(g)} f^{v(g)}/g^{v(f)}$ ;
+les deux conventions sont en usage.} puis, à l'encre rouge, les puissances
+symétriques d'une présentation $T'' \rightrightarrows T' \to T$ et des mots de
+descente (« desc.\ él. », « desc.\ finie ») avec une résolution simpliciale
+$A_2 \Rrightarrow A_1 \rightrightarrows A_0 \to A$. \emph{Page 34} : « ETAT
+PRIMITIF. contient : ? compatibilité », le reste effacé.
+
+\pagerange{35}{35}
+\section*{Esquisses : adjonction et changement de base (page 35)}
+
+Une page barrée de schémas plutôt que de phrases : l'adjonction
+$\mathrm{Hom}(f_!K, L) \simeq \mathrm{Hom}(K, f^!L)$ et sa forme locale
+au-dessus d'un $V$ étale sur $S$, l'amorce de sa forme faisceautique
+$Rf_*R\underline{\mathrm{Hom}}(\ ,\ ) \simeq \cdots$ (que la page 46
+écrira), et deux carrés de changement de base, l'un pour $g^*$ et $f_!$,
+l'autre pour $g_*$ et $f^!$, avec « dém : fib + cofib ».\footnote{La ligne
+s'arrête sur « $Rf_*R\mathrm{Hom}(f_!K, L) \sim$ », qui n'a pas le sens voulu :
+la forme juste, celle de la page 46, est $Rf_*R\underline{\mathrm{Hom}}(K,
+Rf^!L) \simeq R\underline{\mathrm{Hom}}(Rf_!K, L)$.}
+
+\pagerange{36}{37}
+\section*{Le § 3.1 sur $Rf^!$ : les quatre flèches de changement de base (pages 36 et 37)}
+
+Commence ici une rédaction à l'encre bleue d'un § 3.1 sur le foncteur $Rf^!$,
+annotée au crayon d'une autre écriture qu'on appelle « le lecteur ».\footnote{Les
+annotations au crayon sont des questions (« Qui sont $\mathcal{A}$,
+$\mathcal{B}$ ? », « réf ? », « pas clair »), des insertions et un plan. On
+les signale en note ; la transcription n'attribue ni le corps ni le crayon.}
+On en a les paragraphes 3.1.6 (fin) à 3.1.9 et 3.1.14 à 3.1.19.
+
+Soit un carré cartésien
+\[
+X' = X \times_S S' \xrightarrow{\ g'\ } X, \qquad f'\colon X' \to S', \qquad
+f\colon X \to S, \qquad g\colon S' \to S,
+\]
+avec $f$ compactifiable et $\mathcal{A}$ de torsion sur $S$. L'isomorphisme
+de changement de base propre (XVII 5.2) $g^*Rf_! \simeq Rf'_!g'^*$ se
+transpose, en passant aux adjoints à droite, en
+\[
+(3.1.6.3)\qquad Rg'_*\,Rf'^! \xrightarrow{\ \sim\ } Rf^!\,Rg_*
+\]
+de $D^+(S', g^*\mathcal{A})$ dans $D^+(X, f^*\mathcal{A})$. On a ainsi quatre
+flèches :
+\[
+(3.1.6.4)\qquad
+\begin{array}{ll}
+g^*Rf_* \longrightarrow Rf'_*\,g'^* & \qquad g^*Rf_! \xrightarrow{\ \sim\ } Rf'_!\,g'^* \\[1ex]
+Rg^!Rf_* \xrightarrow{\ \sim\ } Rf'_*\,Rg'^! & \qquad Rg^!Rf_! \longleftarrow Rf'_!\,Rg'^!
+\end{array}
+\]
+Celles de la diagonale principale sont chacune sa propre conjuguée (en
+termes d'aujourd'hui : le \emph{mate} de chacune, par les deux adjonctions,
+est la flèche de même forme où $f$ et $g$ échangent leurs rôles), et sont
+définies pour tout carré commutatif dès que sources et buts ont un sens ;
+celles de l'autre diagonale sont conjuguées l'une de l'autre, et définies pour
+un carré cartésien avec $f$ (resp.\ $g$) compactifiable.\footnote{La page dit
+« autoadjointes » et « adjoints l'un de l'autre ». Dans les flèches marquées
+$\sim$, une pointe est surchargée à l'autre bout ; on les donne dans le sens
+de 3.1.6.3 et de XVII 5.2. Le crayon précise « des catégories $D^+$ » et
+demande « Peut-on dire la raison ? » des compatibilités du type XII 4.4 aux
+composés.}
+
+Le lecteur ajoute en bas de page la flèche qui manque, $g'^*Rf^! \to
+Rf'^!g^*$, toujours définie (par adjonction à partir de $g^*Rf_! \simeq
+Rf'_!g'^*$), et qui est un isomorphisme sous hypothèse de lissité --- vrai si
+$g$ est lisse, ou si $f$ est lisse.\footnote{Le crayon, très effacé, semble
+aller plus loin : « $g$ (loc.) acyclique (p.\ ex.\ lisse) ». Cette lecture
+n'affirme que le cas lisse.} La page 37 ne porte qu'un titre biffé,
+« 3.1.3 Constructions du foncteur $Rf^!$ ».
+
+\pagerange{38}{40}
+\section*{La formule d'induction (pages 38 à 40)}
+
+\textbf{3.1.7.} Soient $\mathcal{A}$, $\mathcal{B}$ deux faisceaux d'anneaux
+de torsion sur $S$, $F$ un $f^*\mathcal{B}$-Module à droite sur $X$ et $G$ un
+$(\mathcal{A}, \mathcal{B})$-bimodule sur $S$. On a une flèche de type
+projection
+\[
+(3.1.7.1)\qquad f_!^{\bullet}F \otimes_{\mathcal{B}} G \longrightarrow
+f_!^{\bullet}(F \otimes_{\mathcal{B}} f^*G),
+\]
+qui se transpose, pour $H$ un $\mathcal{A}$-module sur $S$, en
+$\underline{\mathrm{Hom}}_{\mathcal{A}}(f^*G, f^!_{\bullet}H) \to
+f^!_{\bullet}\underline{\mathrm{Hom}}_{\mathcal{A}}(G, H)$ (3.1.7.2), et se
+dérive en l'\emph{homomorphisme d'induction}
+\[
+(3.1.7.3)\qquad R\underline{\mathrm{Hom}}_{\mathcal{A}}(f^*L, Rf^!M)
+\longrightarrow Rf^!\,R\underline{\mathrm{Hom}}_{\mathcal{A}}(L, M),
+\]
+pour $L \in D^-(S, \mathcal{A}, \mathcal{B})$ et $M \in D^+(S,
+\mathcal{A})$.\footnote{Le crayon demande où vivent $L$ et $M$ (« $L \in
+\mathrm{ob}$ ? »), et « Réf.\ ? » ; les bornes $D^-$, $D^+$ sont celles que la
+page donne un peu plus loin.} Pour $K \in D^-(X, f^*\mathcal{B})$, le carré
+
+\begin{tikzcd}[column sep=small, row sep=large, nodes={font=\scriptsize}]
+\mathrm{Hom}(K, R\underline{\mathrm{Hom}}(f^*L, Rf^!M)) \arrow[r, "(1)"] \arrow[d, leftrightarrow, "\wr"'] & \mathrm{Hom}(K, Rf^!R\underline{\mathrm{Hom}}(L, M)) \arrow[r, leftrightarrow, "\sim"] & \mathrm{Hom}(Rf_!K, R\underline{\mathrm{Hom}}(L, M)) \arrow[d, leftrightarrow, "\wr"] \\
+\mathrm{Hom}(K \otimes^L f^*L, Rf^!M) \arrow[r, leftrightarrow, "\sim"'] & \mathrm{Hom}(Rf_!(K \otimes^L f^*L), M) \arrow[r, "(2)"'] & \mathrm{Hom}(Rf_!K \otimes^L L, M)
+\end{tikzcd}
+
+commute ; (2) vient de la formule de projection, c'est un isomorphisme
+(XVII 5.2),\footnote{La page disait d'abord « changement de base », corrigé
+en « projection » ; le crayon note « terminologie ».} donc (1) en est un pour
+tout $K$, et (3.1.7.3) aussi --- les objets $(f^*\mathcal{B})_U[m]$, pour $U$
+étale sur $X$, suffisent à détecter un isomorphisme dans $D^+$.
+
+\textbf{Proposition 3.1.8} (« formule d'induction »). \emph{La flèche
+(3.1.7.3) est un isomorphisme :}
+\[
+R\underline{\mathrm{Hom}}_{\mathcal{A}}(f^*L, Rf^!M) \xrightarrow{\ \sim\ }
+Rf^!\,R\underline{\mathrm{Hom}}_{\mathcal{A}}(L, M).
+\]
+C'est la compatibilité, devenue standard dans le formalisme des six
+opérations, de $Rf^!$ au $\underline{\mathrm{Hom}}$ interne.
+
+\textbf{3.1.9.} Soit $u\colon \mathcal{B} \to \mathcal{A}$ un homomorphisme
+d'anneaux de torsion. Prenant pour $L$ le bimodule $\mathcal{A}$ en degré $0$,
+$\underline{\mathrm{Hom}}_{\mathcal{A}}(L, -)$ est la restriction des scalaires
+$u_\cdot$, et 3.1.8 dit que le carré
+
+\begin{tikzcd}
+D^{+}(X, f^{*}\mathcal{A}) \arrow[r, "u_\cdot"] & D^{+}(X, f^{*}\mathcal{B}) \\
+D^{+}(S, \mathcal{A}) \arrow[r, "u_\cdot"] \arrow[u, "Rf^{!}"] & D^{+}(S, \mathcal{B}) \arrow[u, "Rf^{!}"']
+\end{tikzcd}
+
+commute à isomorphisme près : $Rf^!$ commute à la restriction des scalaires,
+et l'anneau $\mathcal{A}$ « ne joue qu'un rôle bidon » dans sa
+définition.\footnote{La page 40 ne porte qu'une ligne biffée, « Prenons Soit
+$\mathcal{B}$ ».}
+
+\pagerange{41}{43}
+\section*{Calculer $Rf^!$ par des complexes explicites (pages 41 à 43)}
+
+\textbf{3.1.14.} Soit $f\colon X \to S$ compactifiable, $f = \bar f j$ une
+compactification, à fibres de dimension $\leqslant d$. Le mécanisme est le
+suivant : pour un complexe d'injectifs $I$ sur $S$, les sections sur $U$
+(étale sur $X$) de $f^!_{\bullet}I$ sont, par adjonction,
+\[
+\Gamma(U, f^!_{\bullet}I) = \mathrm{Hom}^{\bullet}(\mathcal{A}_U, f^!_{\bullet}I)
+= \mathrm{Hom}^{\bullet}\bigl(K(U), I\bigr), \qquad
+K(U) = f_!^{\bullet}(\mathcal{A}_U) = \bar f_*\,\tau_{\leqslant 2d}\,
+C^{\bullet}(j_!\mathcal{A}_U),
+\]
+où $\mathcal{A}_U$ est le prolongement par zéro à $X$ du faisceau constant
+$\mathcal{A}$ sur $U$ et $C^{\bullet}$ la résolution de Godement. Toute
+famille fonctorielle $U \mapsto K(U)$ de complexes quasi-isomorphes à
+$Rf_!(\mathcal{A}_U)$ (et convenables) calcule ainsi $Rf^!$ : c'est le
+« procédé de 3.1.10 ».\footnote{Les paragraphes 3.1.3, 3.1.4, 3.1.10 et
+3.1.12 auxquels la page renvoie ne sont pas dans le dossier ; ce qu'on dit du
+procédé de 3.1.10 est déduit de son usage ici et aux pages 42 et 44. La page
+écrit $\tau^*_{\leqslant d}$ ; la dimension cohomologique de $Rf_!$ étant
+$2d$, c'est $\tau_{\leqslant 2d}$, comme à la page 44, et comme le crayon le
+demande (« $\tau''_{\leqslant 2d}$ ? »). Le crayon demande aussi « dire qui est
+$A_U$ ».}
+
+Si $n\mathcal{A} = 0$, la formule de projection donne $Rf_!\mathcal{A}_U
+\simeq \mathcal{A} \otimes^L Rf_!(\mathbb{Z}/n)_U$ (XVII 5.2). Mieux :
+$f_!^{\bullet}((\mathbb{Z}/n)_U)$ est un complexe de faisceaux \emph{plats}.
+On se ramène à $n = \ell^k$ ; un faisceau $F$ de $\mathbb{Z}/\ell^k$-modules
+est plat si et seulement si, pour $i < k$, la multiplication par $\ell^i$
+induit $F/\ell F \xrightarrow{\sim} \ell^iF/\ell^{i+1}F$ --- condition qui
+s'exprime par des noyaux et conoyaux, donc passe des $(\mathbb{Z}/n)_U$,
+plats, aux $f_!^i((\mathbb{Z}/n)_U)$, puisque les $f_!^i$ sont
+exacts.\footnote{Le critère est juste : un module sur $\mathbb{Z}/\ell^k$ est
+somme directe de cycliques, et la condition pour $i = k-1$ exclut déjà les
+facteurs $\mathbb{Z}/\ell^e$ avec $e < k$.} Par suite la flèche canonique
+\[
+f_!^{\bullet}\bigl((\mathbb{Z}/n)_U\bigr) \otimes \mathcal{A}
+\longrightarrow f_!^{\bullet}(\mathcal{A}_U)
+\]
+est un quasi-isomorphisme, et $Rf^!$ est aussi donné par la famille
+$U \mapsto f_!^{\bullet}((\mathbb{Z}/n)_U) \otimes \mathcal{A}$, c'est-à-dire
+par $\mathrm{Hom}^{\bullet}_{\mathbb{Z}/n}(f_!^{\bullet}((\mathbb{Z}/n)_U),
+I)$.\footnote{La page écrit la famille sans le $\otimes \mathcal{A}$ ; le
+crayon le demande (« $\otimes\mathcal{A}$ ? »). Les deux écritures se valent
+si l'on prend les $\mathrm{Hom}$ sur $\mathbb{Z}/n$.}
+
+On peut aller plus loin avec la résolution plate canonique $L_{\bullet}(F)$
+d'un Module $F$ --- $L_0(F)$ est le Module libre engendré par le faisceau
+d'ensembles $F$, on recommence avec le noyau de $L_0(F) \to F$, et ainsi de
+suite --- et la famille
+\[
+U \longmapsto K_0(U) := L_{\bullet}\bigl(f_!^{\bullet}((\mathbb{Z}/n)_U)\bigr),
+\]
+dont les termes sont des Modules libres sur des faisceaux d'ensembles. Pour un
+complexe $G$ de $\mathcal{A}$-Modules acycliques pour les foncteurs
+$\mathrm{Hom}(\mathbb{Z}/n[E], -) = \Gamma(E, -)$, $E$ faisceau d'ensembles,
+le complexe $K_0^!(G) : U \mapsto \mathrm{Hom}^{\bullet}(K_0(U), G)$ calcule
+déjà $RK_0^!(G) = Rf^!G$.\footnote{La page laisse en blanc la parenthèse
+qui devait dire « acycliques » pour quoi (« ?? » au crayon) ; la condition
+qu'on écrit est notre reconstruction. Il faut aussi $G$ borné inférieurement.}
+On retrouve ainsi que $\mathcal{A}$ ne joue qu'un rôle bidon.
+
+Une bande de papier ajoute : « Je n'ai pas vérifié que cette construction
+coïncide avec celle de 3.1.9. »\footnote{Les deux constructions représentent
+l'adjoint à droite de $Rf_!$, elles sont donc canoniquement isomorphes ; ce
+qui reste à vérifier est que les flèches qu'on en déduit coïncident. Le
+dossier ne le fait pas.}
+
+\pagerange{44}{45}
+\section*{Une variante locale sur la base (pages 44 et 45)}
+
+\textbf{3.1.15.} On peut aussi décrire $Rf^!$ par le procédé de 3.1.13, qui
+laisse varier la base. Soit $f = \bar f j$ comme plus haut, $n\mathcal{A} =
+0$. Pour $W = (U, V, \varphi)$ dans la catégorie $X_f$ de 3.1.13 --- $V$ étale
+sur $S$, $U$ étale sur $X_V = X \times_S V$ ---, posons
+\[
+(3.1.15.1)\qquad K(W) = \bar f_{V*}\,\tau_{\leqslant 2d}\,C^{\bullet}_{\bar
+X_V}(\mathcal{A}_U), \qquad \bar X_V = \bar X \times_S V.
+\]
+Pour $j_V\colon V \to S$ le morphisme structural, on a un quasi-isomorphisme
+\[
+j_{V!}\,K(W) \xrightarrow{\ \sim\ } \bar f_*\,\tau_{\leqslant 2d}\,
+C^{\bullet}_{\bar X}(\mathcal{A}_U),
+\]
+les deux membres calculant $Rf_!(\mathcal{A}_U)$ (XVII 5.2), et le système
+des $K(W)$ calcule donc $Rf^!$.\footnote{La page invoque « 3.1.9 » pour cette
+conséquence, avec « pas clair » et « ? » au crayon ; le renvoi est douteux, et
+c'est le procédé de 3.1.13 qui est en jeu. Le crayon demande aussi si le
+$\bar f_*$ du second membre n'est pas $(j\bar f_V)_*$, et marque « signification
+pas claire » en face de $\mathcal{A}_U$. Le diagramme de la marge ---
+$\bar X_V \to \bar X$, $X_V \to X$, $U \to X_V$, $V \to S$ --- est celui
+des schémas en jeu.} La page 45 ne porte qu'une ligne biffée,
+« Proposition 3.1.12. Le morphis ».
+
+\pagerange{46}{47}
+\section*{Dualité faisceautique, un exemple, et la finitude (pages 46 et 47)}
+
+\textbf{3.1.16.} L'isomorphisme d'adjonction
+\[
+(3.1.16.1)\qquad \mathrm{Hom}(Rf_!K, L) \simeq \mathrm{Hom}(K, Rf^!L),
+\qquad K \in D(X, f^*\mathcal{A}),\ L \in D^+(S, \mathcal{A}),
+\]
+s'écrit, pour $K \in D^-(X, f^*\mathcal{A})$ et $L$ un complexe borné
+inférieurement d'injectifs, au niveau des complexes :
+$\mathrm{Hom}^{\bullet}(f_!^{\bullet}K, L) \simeq \mathrm{Hom}^{\bullet}(K,
+f^!_{\bullet}L)$.\footnote{La page écrit la seconde fois $D^+(S,
+f^*\mathcal{A})$ ; $f^*\mathcal{A}$ vit sur $X$, il faut $D^+(S,
+\mathcal{A})$. Le crayon demande « $L$, ou $K$ et $L$ ? » : seul $L$ doit
+être fait d'injectifs.} En le localisant au-dessus de chaque $j\colon V \to
+S$ étale (avec $j'\colon X_V \to X$), on obtient
+\[
+(3.1.16.2)\qquad Rf_*\,R\underline{\mathrm{Hom}}(K, Rf^!L)
+\xrightarrow{\ \sim\ } R\underline{\mathrm{Hom}}(Rf_!K, L),
+\]
+la \emph{dualité faisceautique} : ses sections sur $V$ sont les deux membres
+de (3.1.16.1) pour $f_V$.\footnote{Le crayon propose de « remonter » cet
+énoncé en corollaire de 3.1.4, dont il serait une « conséquence triviale ».
+Dans le calcul de la page, la flèche $f_!^{\bullet}(j'_!j'^*K) \to
+j_!j^*f_!^{\bullet}K$ n'est qu'un quasi-isomorphisme ; l'indice d'un des
+$\mathrm{Hom}$ n'est pas lu sûrement.}
+
+\textbf{3.1.17. Exemple.} Soient $X$ compactifiable sur un corps
+algébriquement clos $k$, $x$ un point fermé, $n$ inversible dans $k$. Comme
+$\mathbb{Z}/n$ est injectif sur lui-même, (3.1.11.1) donne
+\[
+\underline{H}^{-i}(Rf^!\mathbb{Z}/n)_x \simeq \varinjlim_{U}
+\mathrm{Hom}\bigl(H^i_c(U, \mathbb{Z}/n), \mathbb{Z}/n\bigr),
+\]
+la limite portant sur la catégorie des voisinages étales $U$ de $x$. Si
+la flèche $H^i_x(X, \mathbb{Z}/n) \to \text{« }\varprojlim_U\text{ »}\,
+H^i_c(U, \mathbb{Z}/n)$ est un isomorphisme de pro-objets, on en tire
+\[
+\underline{H}^{-i}(Rf^!\mathbb{Z}/n)_x \simeq H^i_x(X, \mathbb{Z}/n)^{\vee},
+\]
+la \emph{dualité locale} en un point fermé. La page juge que cela résulte
+« vraisemblablement » du théorème de bidualité de SGA 5 I, qui dépend de la
+résolution des singularités.\footnote{À la date de la page, c'était exact.
+La bidualité pour les schémas de type fini sur un corps a été établie sans
+résolution par Deligne (SGA 4½, « Théorèmes de finitude en cohomologie
+$\ell$-adique », 1977) ; avec elle, l'isomorphisme découle de $i_x^*D \simeq
+D\,i_x^!$. Le crayon se demande s'il ne faut pas $W(x)$ pour les voisinages ;
+une note de marge est illisible. Le renvoi précis dans SGA 5 I est laissé en
+blanc.}
+
+La finitude suit de la construction : les $f^!_i$ (3.1.4.5) sont adjoints à
+droite de foncteurs exacts, donc transforment injectifs en injectifs.
+
+\textbf{Proposition 3.1.18.} \emph{Soient $f\colon X \to S$ compactifiable
+de dimension relative $\leqslant d$ et $L \in D^+(S, \mathcal{A})$.}
+\begin{itemize}
+\item[(i)] \emph{Si $\underline{H}^i(L) = 0$ pour $i < k$, alors
+$\underline{H}^i(Rf^!L) = 0$ pour $i < k - 2d$.}\footnote{La page énonce (i) avec « $\underline{H}^i(L) = 0$ pour $i
+\geqslant k$ » dans l'hypothèse et dans la conclusion, celle-ci portant encore
+sur $L$. Ainsi écrit, l'énoncé est faux : pour une immersion fermée de
+codimension $c \geqslant 1$ entre schémas lisses et $L = \mathbb{Z}/n$, nul en
+degrés $\geqslant 1$, $Rf^!L \simeq \mathbb{Z}/n(-c)[-2c]$ est non nul en degré
+$2c$. L'énoncé juste est la borne inférieure : $Rf_!$ étant d'amplitude
+$[0, 2d]$, $\mathrm{Hom}(K, Rf^!L) = \mathrm{Hom}(Rf_!K, L) = 0$ pour $K \in
+D^{<k-2d}$. Pour (ii), « $\dim\operatorname{inj} \leqslant m$ » s'entend :
+isomorphe à un complexe d'injectifs nul en degrés $> m$ ; alors $f^!_{\bullet}$
+d'un tel complexe l'est encore. Le crayon veut remonter la proposition « avant
+3.1.5 ».}
+\item[(ii)] $\dim\operatorname{inj}(Rf^!L) \leqslant
+\dim\operatorname{inj}(L)$.
+\end{itemize} (ii) découle de ce que les $f^!_i$ conservent les injectifs.
+
+\textbf{3.1.19.} Si $f$ est quasi-fini, on peut prendre $d = 0$ dans la
+construction 3.1.4 : $f_!$ est alors exact et a un adjoint à droite $f^!$ dont
+$Rf^!$ est le dérivé. Pour une immersion $f\colon X \hookrightarrow S$, $f^!$
+est le foncteur « sections à support dans $X$ », et\footnote{La page écrit $\underline{H}^i_X(L)$, faisceau sur $S$ à support
+dans $X$ ; on le restreint à $X$.}
+\[
+(3.1.19.1)\qquad R^if^!L = \underline{H}^i_X(L)\big|_X.
+\]
+Le crayon ajoute : si $f$ est étale,
+$Rf^! = f^*$, d'où la nature locale de $Rf^!$.
+
+\subsection*{Le plan proposé, et un calcul au crayon}
+
+En bas de la page 47, le lecteur trouve « le plan de 3.1 flou après 3.1.4 »
+et en propose un autre : a) propriétés formelles de $Rf^!$ pour $f$ fixé
+(3.1.5, 3.1.18, 3.1.19, 3.1.8, 3.1.9) ; b) propriétés pour $f$ variable
+(3.1.6, et le changement de base par un morphisme lisse --- « à ne pas
+oublier ! ») ; c) sorites sur la construction locale (3.1.10 à 3.1.13).
+
+Dessous, pour $f$ lisse de dimension relative $d$, le calcul de $Rf^!$ par
+la diagonale $\Delta\colon X \to X \times_S X$ :
+\[
+Rf^! \simeq (p_1\Delta)^*Rf^! \simeq \Delta^*p_1^*Rf^!
+\underset{\text{chgt de base lisse}}{\simeq} \Delta^*Rp_2^!f^*
+\underset{\text{pureté}}{\simeq} R\Delta^!Rp_2^!f^*(d)[2d] \simeq f^*(d)[2d].
+\]
+La première étape utilise le changement de base par $p_1$, lisse ; la seconde
+la pureté relative pour l'immersion $\Delta$, de codimension $d$, du couple
+$(X \times_S X, \Delta(X))$ lisse sur $X$ par $p_1$, avec des coefficients
+venus de la base --- c'est XVI 3.7, déjà cité à la page 13 ; la dernière,
+$p_2\Delta = \mathrm{id}$.\footnote{Le crayon marque « pureté relative ?? ».
+Un $f$ en trop précède le premier $\simeq$, quelques signes sont gommés, et
+l'exposant du dernier $f$ n'est pas lu sûrement ; on écrit $f^*$, la seule
+lecture qui rende le calcul juste.}
+
+\end{document}

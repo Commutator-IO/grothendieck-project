@@ -1,0 +1,864 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 40, pages 1-27.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. Where the manuscript is loose or mistaken, the true statement is
+% what appears here and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite the
+% batch-NN.fr.tex files.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-09 — first pass, unchecked against
+% the pages by a human. The folder was read whole: two batches, pages 1-27,
+% all transcribed. This reading was made on Opus 5.5 and is not measured
+% against the Opus 5 reference reading of folder 115.
+%
+% WHAT THE FOLDER IS. Twenty-seven pages of fast working notes, all in his
+% hand, undated, no third-party material. The spine: affine group schemes as
+% commutative Hopf algebras (pp. 1-2), their actions (pp. 2-4), principal
+% homogeneous spaces in the affine category and two criteria for them (pp.
+% 4-15), the example of the Frobenius kernel alpha_p in characteristic p
+% (pp. 16-18), the classification H^1(A, alpha_p) = A/A^p (pp. 18-23), and a
+% global version by the Frobenius exact sequence (pp. 24-27).
+%
+% NOTATION fixed once for the whole document (departures from the pages):
+%   G = Spec B the group, E = Spec C the space; Delta_B for his p_B (the
+%   diagonal); S for his antipode x |-> x-check; m_C for the multiplication
+%   C (x) C -> C, which the pages call Delta_C (pp. 5, 10-13) — renamed, since
+%   Delta also names a comultiplication; U = Hom_A(B, A) (his curled U) with
+%   Delta_U and eta; C^G for the invariants, which the pages call C' (p. 6) —
+%   C' is also used for a second module (p. 3) and for the dual Hom_A(C, A)
+%   (p. 14), here M^vee. p_1, p_2 are kept as the pages use them: the algebra
+%   maps C -> C (x) C dual to the projections. The group of pp. 16-27 is
+%   named alpha_p; the pages call it B (and its sheaf the ornate B_X).
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - p. 1: the counit condition « p_B x - x(x)1 - 1(x)x in J(x)J » holds for
+%     x in J, not for all x (it fails for x = 1);
+%   - pp. 3-4: with the convolution (uv)(b) = (u (x) v) Delta_B(b), a left
+%     coaction gives a RIGHT U-module; the page fixes no order, the opposite
+%     convolution is chosen so that C is a left module;
+%   - pp. 9, 14-15: the converse « psi iso => phi iso » needs C finite
+%     projective; the page's construction stops at « Pour ceci, ---- », the
+%     proof given (psi is the C-transpose of phi) is ours;
+%   - pp. 16-17: freeness of C is not a consequence of the pseudo-torsor
+%     condition (p. 8's own example C = B/JB shows it);
+%   - p. 20: the framed local argument needs D(C) to be a direct summand,
+%     not shown; a reduction to the residue field is supplied;
+%   - p. 21: the struck proof takes the FIRST nonzero coefficient; it must be
+%     the last; the noetherian hypothesis queried there is not needed;
+%   - p. 22: the additive law of H^1 does correspond to that of A/A^p (the
+%     page says it is not proved); the corollary must keep u^p in A
+%     (otherwise A[u]/(u^p - u) would qualify);
+%   - p. 23: the classes au + b fill only part of P(C/A), all of it (minus 0)
+%     over a field;
+%   - pp. 24-25: the exact sequence is one of fppf sheaves, and Frobenius is
+%     not surjective in the Zariski or étale sense;
+%   - p. 26: n ranges over all positive integers prime to p, not 1..p-1.
+%
+% Announced and never established in the folder: the converse of pp. 14-15
+% (left at « Pour ceci, ---- » with « ??? »); the two « Questions » of p. 18
+% (only the second is pursued); the additive law of p. 22; the surjectivity
+% of Frobenius « en un sens technique » (p. 25, margin « ? »).
+
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{40}
+\pages{1}{27}
+\dating{[années 1960-1970]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Calculs [affines sur des] fibrés principaux affines : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces vingt-sept pages sont des calculs de travail, écrits vite, sur une
+question simple à dire : quand un groupe agit sur un objet de façon
+« parfaitement régulière », que peut-on dire de cet objet, et combien y en
+a-t-il ?
+
+Le modèle à garder en tête est celui d'un groupe $G$ qui agit sur un ensemble
+$E$ \emph{librement et transitivement} : pour deux points $x$, $y$ de $E$, il
+existe un et un seul $g$ tel que $x = g\,y$. Un tel $E$ ressemble trait pour
+trait à $G$ lui-même, à ceci près qu'on n'y a pas choisi d'origine --- comme
+un espace affine ressemble à un espace vectoriel dont on aurait oublié où est
+le zéro. On l'appelle un \emph{espace principal homogène}, ou aujourd'hui un
+\emph{torseur}. Sur un ensemble il n'y a rien à classer : dès qu'on choisit un
+point, $E$ s'identifie à $G$. Mais si $E$ dépend d'un paramètre, on ne peut
+pas toujours choisir ce point de façon cohérente, et les torseurs non
+triviaux mesurent exactement cette impossibilité.
+
+Ici, groupes et espaces ne sont pas des ensembles mais des objets de la
+géométrie algébrique, connus par leurs algèbres de fonctions. Le dossier
+commence donc par traduire tout le langage des groupes dans celui des
+algèbres : la loi de groupe devient une « diagonale » $B \to B \otimes B$,
+l'action devient une application $C \to B \otimes C$, et la condition « libre
+et transitive » devient l'affirmation qu'une certaine application
+$C \otimes C \to B \otimes C$ est un isomorphisme. Quand l'algèbre $B$ est de
+dimension finie, on peut aussi passer à son dual, qui est une algèbre
+d'\emph{opérateurs} agissant sur $C$, et la condition se lit sur ces
+opérateurs : ils doivent fournir une base de tous les endomorphismes de $C$.
+
+Puis vient un exemple qui n'a pas d'équivalent pour les ensembles. En
+caractéristique $p$, le groupe des $x$ tels que $x^p = 0$ n'a qu'un seul
+point, et pourtant n'est pas trivial : il est « infinitésimal ». Agir par ce
+groupe, c'est la même chose que se donner une dérivation $D$ de puissance
+$p$-ième nulle. Le dossier montre que ses torseurs sont exactement les
+algèbres obtenues en adjoignant une racine $p$-ième, $A[U]/(U^p - a)$, et que
+deux d'entre elles sont isomorphes si et seulement si les nombres $a$
+diffèrent d'une puissance $p$-ième. La classification tient en une formule :
+le groupe de ces torseurs est $A/A^p$.
+
+Les dernières pages refont ce résultat d'un seul coup d'œil, à l'aide d'une
+suite exacte --- le groupe infinitésimal est le noyau de l'élévation à la
+puissance $p$ --- et en tirent une version globale, valable sur une variété
+quelconque. Une remarque finale montre un phénomène inattendu : deux torseurs
+« lisses » peuvent avoir une somme qui ne l'est pas.
+
+Ce qu'on cherchera ensuite : schémas en groupes affines et algèbres de Hopf,
+dualité de Cartier, torseurs et cohomologie plate, le schéma en groupes
+$\alpha_p$, et les extensions radicielles de hauteur un.
+
+\keywords{affine group scheme, Hopf algebra, comodule algebra, module algebra, pseudo-torsor, torsor, Cartier duality, Frobenius kernel, restricted Lie algebra, purely inseparable extension, fppf cohomology}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier a une seule ligne, sans reprise ni mouture.
+
+\begin{itemize}
+\item \textbf{Pages 1 et 2} --- les schémas en groupes affines comme
+algèbres de Hopf commutatives ; le dual $\mathcal{U}$ quand l'algèbre est
+libre de rang fini.
+\item \textbf{Pages 2 à 4} --- les actions, sous forme de coaction, puis sous
+forme de module sur $\mathcal{U}$.
+\item \textbf{Pages 4 à 10} --- les espaces principaux homogènes : la
+condition d'isomorphisme, le quotient par le groupe, et deux critères
+équivalents pour $B$ et $C$ libres de type fini.
+\item \textbf{Pages 11 à 15} --- reprise catégorique et démonstration de
+l'équivalence des deux critères, dont une direction reste inachevée sur la
+page.
+\item \textbf{Pages 16 à 18} --- l'exemple de $\alpha_p$ : actions par
+dérivations, et la « Proposition ».
+\item \textbf{Pages 18 à 23} --- la classification : $H^1(A,\alpha_p) = A/A^p$,
+le « Théorème » et son « Corollaire ».
+\item \textbf{Pages 24 à 27} --- la suite exacte de Frobenius, la version
+globale, et la « Remarque » sur $k[[X]]$.
+\end{itemize}
+
+Conventions valables pour tout le dossier. $A$ est un anneau commutatif, les
+algèbres sont commutatives et unitaires sauf mention contraire, et les produits
+tensoriels sont pris sur $A$. Le groupe est $G = \operatorname{Spec} B$,
+l'espace sur lequel il agit est $E = \operatorname{Spec} C$. On note
+$\Delta_B$ la comultiplication de $B$ (la page écrit $p_B$), $\varepsilon$ sa
+coünité, $J = \operatorname{Ker}\varepsilon$, $S$ son antipode (la page écrit
+$x \mapsto \check{x}$), et $m_C \colon C \otimes C \to C$ la multiplication
+de $C$.\footnote{La page note $\Delta_C$ la multiplication de $C$ (pages 5,
+10 à 13). On la renomme $m_C$ parce que $\Delta$ désigne ailleurs une
+comultiplication, et que les deux se rencontrent dans les mêmes formules.}
+On note $p_1, p_2 \colon C \to C \otimes C$ les homomorphismes
+$x \mapsto x \otimes 1$ et $x \mapsto 1 \otimes x$, duaux des deux projections
+$E \times E \to E$, comme le fait la page. Les invariants de $C$ sont notés
+$C^G$.\footnote{La page les note $C'$ (page 6). Elle emploie aussi $C'$ pour
+un second module quelconque (page 3) et pour le dual $\operatorname{Hom}_A(C,
+A)$ (page 14) ; ce dernier est noté ici $C^{\vee}$.} À partir de la page 16
+le groupe est $\alpha_p$, que la page appelle $B$, et son faisceau sur un
+préschéma $X$ est $\alpha_{p,X}$.
+
+\pagerange{1}{2}
+\section*{Groupes affines et algèbres de Hopf (pages 1 et 2)}
+
+Un groupe dans la catégorie opposée à celle des $A$-algèbres --- c'est-à-dire
+un schéma en groupes affine $G = \operatorname{Spec} B$ sur $A$ --- est une
+$A$-algèbre $B$ munie d'un homomorphisme d'algèbres coassociatif
+$\Delta_B \colon B \to B \otimes B$, d'une coünité
+$\varepsilon \colon B \to A$ et d'une antipode $S \colon B \to B$ : une
+\emph{algèbre de Hopf commutative}. La coünité est caractérisée par
+\[
+\Delta_B x - (x \otimes 1 + 1 \otimes x) \in J \otimes J
+\qquad (x \in J),
+\]
+et elle est unique si elle existe.\footnote{La page écrit cette condition pour
+tout $x \in B$. Elle est fausse pour $x = 1$, puisque
+$\Delta_B(1) - 2\,(1 \otimes 1) = -\,1 \otimes 1 \notin J \otimes J$ ; elle
+est juste pour $x \in J$, ou, pour tout $x$, sous la forme
+$\Delta_B x - x \otimes 1 - 1 \otimes x + \varepsilon(x)\, 1 \otimes 1 \in J
+\otimes J$. Comme $B = A \cdot 1 \oplus J$, la condition sur $J$ équivaut aux
+deux axiomes de coünité $(\varepsilon \otimes \mathrm{id})\Delta_B =
+(\mathrm{id} \otimes \varepsilon)\Delta_B = \mathrm{id}$.} L'antipode est
+l'homomorphisme d'algèbres tel que, si $\Delta_B x = \sum y_i \otimes z_i$,
+\[
+\sum S(y_i)\, z_i = \sum y_i\, S(z_i) = \varepsilon(x)\cdot 1 .
+\]
+Elle est unique, c'est une involution (parce que $B$ est commutative), et
+l'on a $\varepsilon \circ S = \varepsilon$ et
+$\Delta_B (S x) = \sum S(z_i) \otimes S(y_i)$.
+
+Supposons $B$ libre de rang fini sur $A$\footnote{La page écrit « libre de
+rang fini sur $B$ » ; il faut lire $A$.} et soit
+$\mathcal{U} = \operatorname{Hom}_A(B, A)$ son dual. Toute la structure passe
+au dual en se retournant : la multiplication de $B$ devient une
+comultiplication $\Delta_{\mathcal{U}}$, \emph{cocommutative} et
+coassociative, avec la coünité $\eta(u) = u(1_B)$ ; la comultiplication de
+$B$ devient une multiplication associative et unitaire, en général non
+commutative ; les deux sont compatibles ($\Delta_{\mathcal{U}}$ est un
+homomorphisme d'algèbres) ; l'antipode devient un antiautomorphisme
+involutif $S_{\mathcal{U}}$, déterminé de façon unique par l'identité
+$\sum y_i\, S_{\mathcal{U}}(z_i) = \sum S_{\mathcal{U}}(y_i)\, z_i =
+\eta(x)\cdot 1$ pour $\Delta_{\mathcal{U}} x = \sum y_i \otimes z_i$. Bref,
+$\mathcal{U}$ est une algèbre de Hopf cocommutative, l'« hyperalgèbre » du
+groupe.\footnote{Le mot est celui de Dieudonné, qui l'introduit au cours des
+années cinquante pour les groupes de Lie formels en caractéristique $p$. On
+dit aujourd'hui algèbre des distributions (au sens de Demazure--Gabriel) ou,
+pour un groupe fini et plat comme ici, algèbre du groupe ; quand $G$ est
+commutatif, $\mathcal{U}$ est commutative et son spectre est le \emph{dual de
+Cartier} de $G$. Le dossier emploie le mot plus librement, pour toute algèbre
+de Hopf (page 24) ; la page ne dit pas où elle l'a pris.}
+
+\pagerange{2}{4}
+\section*{Actions : coactions et modules-algèbres (pages 2 à 4)}
+
+Faire agir $G$ à gauche sur $E = \operatorname{Spec} C$, c'est se donner un
+homomorphisme d'algèbres unitaires
+\[
+q_C \colon C \longrightarrow B \otimes C
+\]
+qui satisfait à deux conditions : l'\emph{associativité},
+$(\mathrm{id}_B \otimes q_C)\, q_C = (\Delta_B \otimes \mathrm{id}_C)\,
+q_C$, et l'\emph{unité}, $(\varepsilon \otimes \mathrm{id}_C)\, q_C =
+\mathrm{id}_C$, qui s'écrit aussi $q_C(y) \in 1 \otimes y + J \otimes C$.
+C'est ce qu'on appelle aujourd'hui une \emph{algèbre-comodule} sur $B$.
+
+\begin{tikzcd}[column sep=huge, row sep=large]
+B \otimes B \otimes C & B \otimes C \arrow[l, "\mathrm{id}_B \otimes q_C"'] \\
+B \otimes C \arrow[u, "\Delta_B \otimes \mathrm{id}_C"] & C \arrow[l, "q_C"] \arrow[u, "q_C"']
+\end{tikzcd}
+
+Si $B$ est libre de rang fini, $B \otimes C' \simeq
+\operatorname{Hom}_A(\mathcal{U}, C')$ pour tout $A$-module $C'$, de sorte
+qu'une application $A$-linéaire $C \to B \otimes C'$ est la même chose qu'une
+application $A$-linéaire $\mathcal{U} \to \operatorname{Hom}_A(C, C')$. Pour
+$C' = C$, la coaction devient ainsi une action de $\mathcal{U}$ sur $C$, que
+l'on note $u \cdot x = (u \otimes \mathrm{id}_C)\, q_C(x)$. Les axiomes
+d'associativité et d'unité disent que $C$ est un $\mathcal{U}$-module
+unitaire\footnote{Un point d'ordre que la page ne fixe pas. Si l'on munit
+$\mathcal{U}$ de la convolution $(uv)(b) = (u \otimes v)\,\Delta_B(b)$, une
+coaction \emph{à gauche} fait de $C$ un module \emph{à droite} : on trouve
+$(uv)\cdot x = v \cdot (u \cdot x)$. Pour que $C$ soit un module à gauche,
+comme la page l'écrit, on prend la convolution opposée,
+$(uv)(b) = (v \otimes u)\,\Delta_B(b)$, et c'est la convention adoptée ici.
+Quand $G$ est commutatif --- c'est le cas de tous les exemples du dossier ---
+les deux coïncident.} ; et que $q_C$ soit un homomorphisme d'algèbres
+unitaires se traduit par
+\[
+u \cdot 1_C = \eta(u)\, 1_C, \qquad
+u \cdot (xy) = \sum (v_i \cdot x)(w_i \cdot y)
+\quad\text{si } \Delta_{\mathcal{U}} u = \sum v_i \otimes w_i .
+\]
+C'est la notion de \emph{$\mathcal{U}$-module-algèbre}.\footnote{Dans la
+première de ces conditions la page écrit $q_{\mathcal{U}}$, dans la seconde
+$p_{\mathcal{U}}$, pour le même homomorphisme $\mathcal{U} \to
+\operatorname{Hom}_A(C, C')$ ; on n'en garde qu'un. La page écrit d'abord ces
+conditions pour deux algèbres $C$ et $C'$ distinctes, puis pour $C' = C$.}
+Si $u$ est un élément « primitif » ($\Delta_{\mathcal{U}} u = u \otimes 1 +
+1 \otimes u$), la seconde condition dit simplement que $u$ agit par une
+dérivation : c'est ce qui servira à partir de la page 16.
+
+\pagerange{4}{8}
+\section*{Espaces principaux homogènes et quotient (pages 4 à 8)}
+
+\subsection*{La condition}
+
+Que $E$ soit un espace principal homogène sous $G$ --- que l'action soit
+« libre et transitive » --- s'exprime en demandant que le morphisme
+$G \times E \to E \times E$, $(g, y) \mapsto (g y, y)$, soit un isomorphisme.
+Sur les algèbres, c'est l'homomorphisme
+\[
+\varphi = (q_C, p_2) \colon C \otimes C \longrightarrow B \otimes C,
+\qquad
+\varphi(x \otimes y) = q_C(x)\,(1 \otimes y),
+\]
+c'est-à-dire le composé $(\mathrm{id}_B \otimes m_C) \circ (q_C \otimes
+\mathrm{id}_C)$. Il revient au même de demander qu'il existe un
+homomorphisme d'algèbres unitaires $g_C \colon B \to C \otimes C$ --- le
+morphisme $E \times E \to G$ qui envoie $(x, y)$ sur l'unique $g$ tel que
+$x = g y$ --- rendant commutatifs les deux triangles
+\[
+(g_C, p_2) \circ q_C = p_1, \qquad \varphi \circ g_C = p_1,
+\]
+où $(g_C, p_2) \colon B \otimes C \to C \otimes C$ est
+$b \otimes y \mapsto g_C(b)\,(1 \otimes y)$ et où $p_1$ désigne, dans le
+second, l'homomorphisme $b \mapsto b \otimes 1$ de $B$ dans
+$B \otimes C$. En effet $(g_C, p_2)$ est alors l'inverse de
+$\varphi$.\footnote{Le haut de la page 5, où ces conditions sont d'abord
+cherchées, est barré et à peu près illisible ; la transcription en donne une
+lecture très incomplète, qu'on ne reconstitue pas. La formulation retenue est
+celle que la page 11 reprend en termes catégoriques.}
+
+Cette condition seule ne fait pas de $E$ un torseur au sens d'aujourd'hui :
+elle est satisfaite, par exemple, par l'objet vide ($C = 0$). On dit qu'un
+tel $E$ est \emph{formellement principal homogène}, ou un
+\emph{pseudo-torseur}.\footnote{Le terme « formellement principal homogène »
+est celui de la page 11 ; c'est aussi celui de SGA 3. Un \emph{torseur}
+demande en outre que $E$ soit, localement pour une topologie convenable (la
+topologie plate), isomorphe à $G$ --- pour $E$ affine, que $C$ soit
+fidèlement plate sur $A$. La page 10 y ajoute une condition sur les
+invariants ; quand $C$ est libre et non nul, comme la page le suppose à
+partir de la page 9, $C$ est fidèlement plate et les deux notions
+coïncident.}
+
+\subsection*{Le quotient par le groupe}
+
+Soit $h \colon \mathcal{D} \to C$ un homomorphisme d'algèbres tel que
+$q_C \circ h = (x \mapsto 1 \otimes x) \circ h$, autrement dit un morphisme
+$E \to \operatorname{Spec}\mathcal{D}$ constant sur les orbites. Cela
+signifie exactement que $h$ prend ses valeurs dans la sous-algèbre des
+\emph{invariants}
+\[
+C^G = \{\, x \in C \;:\; q_C(x) = 1 \otimes x \,\}.
+\]
+Donc \emph{le quotient de $E$ par $G$ dans la catégorie des schémas affines
+existe, et c'est $\operatorname{Spec} C^G$} : c'est l'égalisateur des deux
+homomorphismes $C \rightrightarrows B \otimes C$.\footnote{La page appelle
+ces éléments « primitifs », puis ajoute au-dessus « invariants », qui est le
+mot juste ; à la page 7 elle dit « semi-primitifs ». La lecture d'une ligne de
+la page 6 (« on voit qu'on a tout ce qu'il faut ») est très incertaine.} La
+question que pose la page 6 --- un tel $h$ se factorise-t-il par
+$A$ ? --- revient donc à savoir si $C^G = A$.
+
+Mais ce quotient « dans la catégorie » peut être très différent du quotient
+géométrique. Soit $k$ algébriquement clos, $E$ le groupe linéaire, $G$ un
+sous-groupe de Borel agissant par translations. Le quotient $E/G$ existe dans
+la catégorie des schémas : c'est la variété des drapeaux, qui est complète.
+Ses seules fonctions globales sont les constantes ; donc
+$C^G = k$, et le quotient dans la catégorie des variétés affines est réduit à
+un point.\footnote{Paragraphe embrassé d'un grand crochet en marge, à la
+lecture incertaine en plusieurs mots (« groupe linéaire », « réduit au
+point »).}
+
+\subsection*{Les invariants d'un pseudo-torseur}
+
+Si $E$ est un pseudo-torseur et $x \in C^G$, le premier triangle appliqué à
+$x$ donne
+\[
+x \otimes 1 = 1 \otimes x \quad\text{dans } C \otimes C .
+\]
+Si de plus $A \cdot 1_C$ est un facteur direct du $A$-module $C$, avec
+$\lambda \mapsto \lambda 1_C$ injectif, cette égalité force
+$x \in A \cdot 1_C$ : écrivant $C = A \cdot 1 \oplus N$ et $x = \lambda + n$,
+la composante de $x \otimes 1 - 1 \otimes x$ dans $N \otimes A$ est
+$n \otimes 1$, d'où $n = 0$. Donc $C^G = A$. L'hypothèse est satisfaite dès
+que $C$ est un $A$-module libre ayant une base contenant $1_C$, et en
+particulier dès que $C$ est libre de type fini et non nul.\footnote{La page
+dit « comme on voit facilement ». Pour $C$ projectif de type fini, un
+élément est unimodulaire dès que son image dans chaque fibre
+$C \otimes k(\mathfrak{p})$ est non nulle ; c'est le cas de $1_C$ dès que
+toutes ces fibres sont non nulles. L'hypothèse $C \neq 0$, que la page ne
+dit pas, est nécessaire.}
+
+Sans hypothèse de cette sorte, c'est faux, et la page 8 le montre : si $J$
+est un idéal de $A$ et $C = B / JB$, avec la coaction obtenue en réduisant
+$\Delta_B$ modulo $J$, les axiomes restent vérifiés, $E$ est même un
+pseudo-torseur, et pourtant $C^G = A/J$.\footnote{Que cet $E$ soit un
+pseudo-torseur n'est pas dit par la page, qui écrit seulement que « les
+axiomes restent vérifiés » ; c'est immédiat, puisque $\varphi$ est la
+réduction modulo $J$ de l'isomorphisme $(\Delta_B, p_2)$ de $G \times G$.
+Le même exemple montre, contre ce que suggère la page 16, que la liberté de
+$C$ n'est pas conséquence de la seule condition de pseudo-torseur.}
+
+\pagerange{9}{10}
+\section*{Deux critères quand $B$ et $C$ sont libres de type fini (pages 9 et 10)}
+
+Supposons $B$ et $C$ libres de type fini, $C \neq 0$. Le paragraphe
+précédent montre alors que la condition sur les invariants est conséquence de
+celle de pseudo-torseur. Le critère s'écrit de deux façons.
+
+\emph{Par $\varphi$.} Via $B \otimes C \simeq \operatorname{Hom}_A(\mathcal{U},
+C)$, l'homomorphisme $\varphi$ devient
+\[
+\varphi \colon C \otimes C \longrightarrow \operatorname{Hom}_A(\mathcal{U}, C),
+\qquad \varphi(x \otimes y)(u) = (u \cdot x)\, y ,
+\]
+le second membre étant muni de la convolution $v * w = m_C \circ (v \otimes
+w) \circ \Delta_{\mathcal{U}}$, pour laquelle $\varphi$ est un homomorphisme
+d'algèbres. $E$ est un pseudo-torseur si et seulement si $\varphi$ est
+bijectif.
+
+\emph{Par les opérateurs.} Soit
+\[
+\psi \colon C \otimes \mathcal{U} \longrightarrow \operatorname{End}_A(C),
+\qquad \psi(x \otimes u)(y) = x\,(u \cdot y).
+\]
+\emph{$\varphi$ est un isomorphisme si et seulement si $\psi$ en est un} :
+autrement dit, $E$ est un pseudo-torseur si et seulement si les opérateurs
+de $\mathcal{U}$, pris avec des coefficients dans $C$, fournissent
+exactement tous les endomorphismes $A$-linéaires de $C$.\footnote{En marge,
+un « ? » : sur la page, l'équivalence est annoncée, pas démontrée. Elle l'est
+aux pages 12 à 15, dans un sens seulement ; voir la section suivante. Dans la
+conclusion entre crochets, la page écrit « fibré principal homogène sous
+$C$ » ; il faut lire $B$. La moitié inférieure de la page 9, barrée, esquisse
+un argument par changement de base $A' = C$ qu'on ne reconstitue pas.}
+
+Enfin, la condition sur les invariants s'écrit en termes de $\mathcal{U}$ :
+$x \in C^G$ si et seulement si $u \cdot x = \eta(u)\, x$ pour tout
+$u \in \mathcal{U}$.
+
+\pagerange{11}{15}
+\section*{Reprise catégorique ; l'équivalence des deux critères (pages 11 à 15)}
+
+\subsection*{Le cadre}
+
+Soit $\mathcal{C}$ une catégorie avec objet final $e$ et produits, $G$ un
+groupe de $\mathcal{C}$, $E$ un objet sur lequel $G$ opère par
+$q_E \colon G \times E \to E$. On dit que $E$ est \emph{formellement
+principal homogène} si $(q_E, p_2) \colon G \times E \to E \times E$ est un
+isomorphisme ; il revient au même qu'il existe $g_E \colon E \times E \to G$
+--- « $x = g(x, y)\, y$ », dit la marge --- tel que
+\[
+q_E \circ (g_E, p_2) = p_1 \ \text{sur } E \times E,
+\qquad
+g_E \circ (q_E, p_2) = p_1 \ \text{sur } G \times E .
+\]
+Pour $\mathcal{C}$ opposée à la catégorie des $A$-algèbres, on retrouve
+exactement les deux triangles des pages 4 et 5.
+
+\subsection*{Le critère $\psi$ est le transposé du critère $\varphi$}
+
+On n'a plus besoin ici que $B$ soit libre. Posons
+\[
+\psi \colon \operatorname{Hom}_A(B, C) \longrightarrow \operatorname{End}_A(C),
+\qquad
+\psi(v) = m_C \circ (v \otimes \mathrm{id}_C) \circ q_C .
+\]
+Quand $B$ est libre de type fini, $\operatorname{Hom}_A(B, C) \simeq C
+\otimes \mathcal{U}$ et l'on retrouve le $\psi$ de la page 9.
+
+\emph{Si $\varphi$ est un isomorphisme, $\psi$ en est un}, d'inverse
+\[
+\psi'(w) = m_C \circ (w \otimes \mathrm{id}_C) \circ g_C .
+\]
+La page le vérifie par deux colonnes de diagrammes (page 13), qui réécrivent
+$\psi\psi'(w)$ et $\psi'\psi(v)$ en échangeant l'ordre des étapes jusqu'à
+reconnaître $w$ et $v$.\footnote{La page donne, pour chacune des deux
+identités, six colonnes reliées par des accolades ; la transcription ne
+reproduit que la première et la dernière. Dans les colonnes intermédiaires de
+la seconde, plusieurs $B$ figurent là où l'on attend $C$ ; ce sont des
+lapsus sans incidence sur le calcul.} Il y a une raison plus courte, qui
+explique aussi la réciproque. Munissons $B \otimes C$ et $C \otimes C$ de
+leur structure de $C$-module par le facteur de droite ; $\varphi$ est alors
+$C$-linéaire. Une application $A$-linéaire $v \colon B \to C$ est la même
+chose qu'une application $C$-linéaire $\tilde v \colon B \otimes C \to C$,
+et de même $\operatorname{End}_A(C) \simeq \operatorname{Hom}_C(C \otimes C,
+C)$, $w \mapsto (x \otimes y \mapsto w(x)\,y)$. Dans ces identifications,
+\[
+\psi(v) = \tilde v \circ \varphi \ \text{restreint à } C \otimes 1 :
+\qquad \psi = \operatorname{Hom}_C(\varphi, C).
+\]
+Le critère $\psi$ est donc le \emph{transposé}, en tant que $C$-module, du
+critère $\varphi$.\footnote{Cette lecture est la nôtre ; la page procède par
+calcul direct.} Il en résulte aussitôt que $\psi$ est bijectif si $\varphi$
+l'est.
+
+\subsection*{La réciproque}
+
+Réciproquement, \emph{si $C$ est un $A$-module projectif de type fini (par
+exemple libre de type fini) et $B$ libre de type fini, et si $\psi$ est un
+isomorphisme, alors $\varphi$ en est un}. En effet $B \otimes C$ et
+$C \otimes C$ sont alors des $C$-modules projectifs de type fini, pour
+lesquels un homomorphisme est bijectif dès que son transposé l'est.
+
+La page suit un autre chemin, qu'elle ne mène pas à son terme. Elle part de
+l'inverse $\psi'$ de $\psi$, le regarde comme une application
+$\psi'_1 \colon B \to \operatorname{Hom}(\operatorname{End}_A(C), C)$, et
+cherche à en tirer $g_C$ en composant avec une application naturelle
+\[
+\rho \colon \operatorname{Hom}(\operatorname{End}_A(C), C) \simeq C \otimes
+C^{\vee} \otimes C \xrightarrow{\ \mathrm{id} \otimes \varepsilon_C \otimes
+\mathrm{id}\ } C \otimes C,
+\]
+où $\varepsilon_C \colon C^{\vee} \to A$ est l'évaluation en $1_C$. Il
+resterait à vérifier que $g_C = \rho \circ \psi'_1$ satisfait aux deux
+triangles ; la page s'arrête sur « Pour ceci, ---- », avec « ??? » en marge,
+et le reste de la page 15 est blanc.\footnote{La page 14 contient aussi un
+crochet barré qui énonce l'application naturelle
+$P \otimes \operatorname{Hom}(Q, R) \to
+\operatorname{Hom}(\operatorname{Hom}(P, Q), R)$. L'argument par
+transposition donné ci-dessus est le nôtre ; il établit la réciproque sans
+passer par $\rho$, et ne dit pas si le $g_C$ de la page est le bon.}
+
+\pagerange{16}{18}
+\section*{L'exemple de $\alpha_p$ (pages 16 à 18)}
+
+\subsection*{Le groupe et son hyperalgèbre}
+
+Soit $A$ de caractéristique $p$ et
+\[
+\mathcal{U} = A[X]/(X^p),
+\qquad \Delta X = X \otimes 1 + 1 \otimes X,
+\quad \varepsilon(X) = 0,
+\quad S(X) = -X .
+\]
+La comultiplication est bien définie parce que, en caractéristique $p$,
+$\Delta(X^p) = X^p \otimes 1 + 1 \otimes X^p$ appartient à l'idéal engendré
+par $X^p \otimes 1$ et $1 \otimes X^p$. C'est l'algèbre de Hopf du schéma en
+groupes $\alpha_p$ des $x$ tels que $x^p = 0$ --- le noyau du Frobenius du
+groupe additif, comme le diront les pages 24 et suivantes. Elle est isomorphe
+à sa duale : la base duale de $(X^i)_{0 \le i < p}$ est formée des
+$Y^i / i!$, où $Y$ est primitif et $Y^p = 0$.\footnote{La page affirme cet
+autodualité sans la démontrer ; la vérification est la nôtre. Elle utilise
+que $i!$ est inversible pour $i < p$. En termes modernes, $\alpha_p$ est son
+propre dual de Cartier.} On peut donc regarder $\mathcal{U}$ indifféremment
+comme l'algèbre du groupe ou comme son hyperalgèbre, et la page passe de l'un
+à l'autre : elle appelle $B$ le groupe dont $\mathcal{U}$ est le dual.
+
+\subsection*{Actions par dérivations}
+
+Faire opérer $\mathcal{U}$ sur une $A$-algèbre commutative $C$, c'est se
+donner l'image $D$ de $X$, un endomorphisme $A$-linéaire de $C$, soumis à deux
+conditions : $D^p = 0$, pour que $A[X]/(X^p)$ agisse ; et $D(xy) = x\,Dy +
+y\,Dx$, parce que $X$ est primitif. \emph{Une action de $\alpha_p$ sur
+$\operatorname{Spec} C$ est donc la même chose qu'une $A$-dérivation de $C$
+de puissance $p$-ième nulle.}\footnote{En caractéristique $p$, $D^p$ est
+encore une dérivation ; la condition $D^p = 0$ n'est donc pas automatique,
+et c'est elle qui distingue $\alpha_p$ du groupe additif tout entier.}
+
+Supposons $C$ libre de type fini et non nul. Comme $C \otimes C \simeq B
+\otimes C$, son rang est nécessairement $p$.\footnote{La page suppose $C$
+libre et ajoute que cela « semble d'ailleurs une conséquence de notre
+hypothèse ». Ce n'est pas le cas pour un simple pseudo-torseur (exemple de la
+page 8) ; c'est vrai, localement, pour un torseur : si $C$ est fidèlement
+plate, l'isomorphisme $C \otimes C \simeq B \otimes C$ montre par descente
+que $C$ est localement libre de rang $p$.} Par le critère de la page 9,
+$\operatorname{Spec} C$ est alors principal homogène si et seulement si
+\[
+1, D, D^2, \ldots, D^{p-1} \ \text{forment une base du $C$-module}\
+\operatorname{End}_A(C),
+\]
+où $C$ agit sur $\operatorname{End}_A(C)$ par $(\lambda w)(y) = \lambda\,
+w(y)$.
+
+\subsection*{La « Proposition »}
+
+Supposons que $C$ admette une $p$-base sur $A$ réduite à un élément $u$ :
+$C \simeq A[u]/(u^p - a)$ avec $a \in A$. Toute valeur de $Du$ définit une
+$A$-dérivation, puisque $D(u^p - a) = p\, u^{p-1} Du = 0$ ; prenons $Du = 1$,
+de sorte que $D(u^n) = n\, u^{n-1}$ et $D^p = 0$. Identifions
+$\operatorname{End}_A(C)$ à $C^p$ par $w \mapsto (w(u^j))_{0 \le j \le p-1}$
+--- c'est un isomorphisme de $C$-modules. Les $D^i$ deviennent les lignes de
+la matrice triangulaire
+\[
+\bigl(D^i(u^j)\bigr)_{0 \le i, j \le p-1}
+=
+\begin{pmatrix}
+1 & u & u^2 & \cdots & u^{p-1} \\
+0 & 1 & 2u & \cdots & (p-1)\, u^{p-2} \\
+0 & 0 & 2! & \cdots & (p-1)(p-2)\, u^{p-3} \\
+\vdots & & & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & (p-1)!
+\end{pmatrix},
+\]
+de déterminant $0!\,1!\,2!\cdots(p-1)!$, image d'un élément non nul de
+$\mathbb{Z}/p\mathbb{Z}$, donc inversible. D'où :
+
+\begin{quote}
+\textbf{Proposition} (page 18). \emph{Soit $C$ une $A$-algèbre admettant une
+$p$-base réduite à un élément $u$, c'est-à-dire $C = A[u]/(u^p - a)$. Muni de
+la dérivation $D$ telle que $Du = 1$, $\operatorname{Spec} C$ est un torseur
+sous $\alpha_p$.}
+\end{quote}
+
+C'est bien un torseur et non seulement un pseudo-torseur, puisque $C$ est
+libre et non nul, donc fidèlement plat.\footnote{La page dit « espace homogène
+fibré principal » et n'a pas la distinction ; on la fait parce que la
+condition des invariants (page 10) est ici satisfaite, $1_C$ faisant partie
+d'une base.}
+
+\pagerange{18}{18}
+\subsection*{Deux « Questions »}
+
+La page 18 pose deux questions qu'elle ne reprend pas. La première :
+pour $C$ comme ci-dessus, déterminer toutes les façons d'obtenir la
+$C$-algèbre $\operatorname{End}_A(C)$ comme $C \otimes \mathcal{U}$ à partir
+d'une sous-$A$-hyperalgèbre $\mathcal{U}$ libre de rang $p$. La seconde :
+déterminer celles de ces $\mathcal{U}$ qui sont l'algèbre enveloppante d'une
+$p$-algèbre de Lie libre de rang un, de puissance $p$-ième
+nulle.\footnote{Les ajouts interlinéaires de ces deux lignes sont serrés et
+en partie illisibles, et l'ordre de lecture est incertain ; on ne garde que
+ce que la transcription lit. Les noms modernes sont ceux d'\emph{algèbre de
+Lie restreinte} (Jacobson, 1941) et d'\emph{algèbre enveloppante restreinte}.
+L'équivalence entre schémas en groupes finis de hauteur un et $p$-algèbres de
+Lie est exposée dans SGA 3 (exposé VII$_{\mathrm{A}}$) ; la page ne cite
+rien.} Les pages 22 et 23 répondent en partie à la première, pour
+$\mathcal{U} \simeq \alpha_p$.
+
+\pagerange{19}{23}
+\section*{La classification : $H^1(A, \alpha_p) = A/A^p$ (pages 19 à 23)}
+
+\subsection*{Les invariants d'un torseur sous $\alpha_p$}
+
+Soit $C$ une $A$-algèbre libre de rang $p$, munie d'une $A$-dérivation $D$
+telle que $D^p = 0$ et que $1, D, \ldots, D^{p-1}$ forment une base de
+$\operatorname{End}_A(C)$ sur $C$. Alors \emph{$\operatorname{Ker} D = A$}.
+
+Cela repose sur un lemme d'orthogonalité. Pour un sous-$A$-module $M$ de $C$,
+notons $M^{\circ} \subset \operatorname{End}_A(C)$ l'ensemble des
+endomorphismes nuls sur $M$, et pour $L \subset \operatorname{End}_A(C)$
+notons $L^{\circ} \subset C$ l'ensemble des éléments annulés par $L$.
+
+\begin{quote}
+\textbf{Lemme} (page 19). \emph{Si $M$ est libre de rang $m$ et facteur
+direct dans $C$, alors $M^{\circ}$ est un sous-$C$-module libre de rang $p - m$
+et facteur direct de $\operatorname{End}_A(C)$, et $M = (M^{\circ})^{\circ}$.
+Si $L \subset M^{\circ}$ est un sous-$C$-module libre de rang $p - m$ et
+facteur direct, alors $L = M^{\circ}$, et donc $M = L^{\circ}$.}
+\end{quote}
+
+Si $C = M \oplus N$, on a $M^{\circ} \simeq \operatorname{Hom}_A(N, C)$, libre
+de rang $p - m$ sur $C$ ; un $x \notin M$ a une composante non nulle dans
+$N$, que la projection sur $N$ ne tue pas ; et $L$, facteur direct de
+$M^{\circ}$ de même rang, lui est égal. On applique le lemme à $M = A \cdot
+1_C$ et à $L$ engendré par $D, D^2, \ldots, D^{p-1}$, qui sont nuls sur $A$ et
+font partie d'une base : il vient
+$A = L^{\circ} = \{x : D^i x = 0,\ 1 \le i \le p-1\} = \operatorname{Ker}
+D$.\footnote{L'énoncé du lemme est en partie illisible sur la page (une
+dizaine de mots), et deux notes tournées dans la marge (dont « Lemme ») ne
+se lisent qu'à peine. La formulation ci-dessus est reconstituée à partir de
+ce qui est lisible et de l'usage qui en est fait à la page 20 ; la
+démonstration esquissée est la nôtre.}
+
+Une conséquence au passage : pour tout $x \in C$, $x^p \in A$, puisque
+$D(x^p) = p\,x^{p-1}\,Dx = 0$.
+
+\subsection*{L'élément $u$}
+
+\begin{quote}
+\textbf{Corollaire} (page 20). \emph{Il existe $u \in C$ tel que $Du = 1$,
+et $u$ est unique à l'addition près d'un élément de $A$.}
+\end{quote}
+
+L'unicité vient de $\operatorname{Ker} D = A$. Pour l'existence, la question
+est locale sur $\operatorname{Spec} A$ : l'ensemble des $u$ tels que
+$Du = 1$, s'il n'est pas vide, est un espace principal homogène sous le
+groupe additif $A$, et un torseur sous le faisceau structural d'un schéma
+affine est trivial ($H^1(\operatorname{Spec} A, \mathcal{O}) = 0$) ; on peut
+donc supposer $A$ local, d'idéal maximal $\mathfrak{m}$ et de corps résiduel
+$k$. Les hypothèses passent à $\bar C = C / \mathfrak{m} C$ et à la dérivation
+réduite $\bar D$, et l'énoncé sur les invariants donne
+$\operatorname{Ker}\bar D = k$. Un endomorphisme nilpotent d'un $k$-espace de
+dimension $p$ dont le noyau est une droite a un seul bloc de Jordan, donc
+$\bar D^{p-1} \neq 0$. Choisissons $x \in C$ avec $\bar D^{p-1} \bar x \neq
+0$ : alors $D^{p-1} x$ est dans $\operatorname{Ker} D = A$ et a une image non
+nulle dans $k$ ; c'est une unité $c$ de $A$, et $u = c^{-1} D^{p-2} x$
+convient.\footnote{La page raisonne autrement, dans un passage encadré et
+traversé de deux obliques, dont on ne sait s'il est annulé : $A$ étant local,
+l'image de $D$ est libre de rang $p - 1$ (isomorphe à $C/A$), et elle
+contient $A$ parce que tout $v = \sum \lambda_i D^i$ nul sur $D(C)$ vérifie
+$vD = 0$, donc $\lambda_0 = \cdots = \lambda_{p-2} = 0$, donc $v$ est nul
+sur $A$. Le calcul est juste, mais conclure $A \subset D(C)$ de
+$D(C)^{\circ} \subset A^{\circ}$ demande, par le lemme, que $D(C)$ soit
+facteur direct dans $C$ --- ce qui est vrai sur un corps et que la page
+n'établit pas sur un anneau local. La réduction au corps résiduel ci-dessus
+est la nôtre. Une note tournée dans la marge, presque illisible, invoque un
+endomorphisme $\Theta$ avec $\Theta(1) = 0$ et $\Theta(u) = 1$ ; on ne la
+reconstitue pas.}
+
+\pagerange{20}{21}
+\subsection*{Tout torseur est $A[U]/(U^p - a)$}
+
+\emph{Si $Du = 1$, les $u^i$ ($0 \le i \le p-1$) forment une base de $C$ sur
+$A$.} Posons $a = u^p$, qui est dans $A$, et $C_a = A[U]/(U^p - a)$ avec la
+dérivation $D_a U = 1$. Par la Proposition, $C_a$ est un torseur. L'homomorphisme
+$C_a \to C$, $U \mapsto u$, commute aux dérivations, donc est un morphisme de
+torseurs sous $\alpha_p$ ; et un morphisme entre deux torseurs sous un même
+groupe est un isomorphisme.\footnote{La page énonce ce dernier fait entre
+crochets, pour deux pseudo-torseurs dans une catégorie $\mathcal{C}$
+quelconque, sous une condition dont la lecture est très incertaine (le mot
+souligné lu « monomis », un carré $G \times E \to G \times E'$ au-dessus de
+$E \times E \to E' \times E'$) ; elle l'applique à la catégorie des anneaux
+finis sur $A$ et se demande s'il faut $A$ noethérien. Pour de vrais torseurs
+il n'en est rien : après un changement de base fidèlement plat qui trivialise
+les deux, un morphisme équivariant $G \to G$ est une translation, donc un
+isomorphisme, et cela descend. Pour de simples pseudo-torseurs l'énoncé est
+faux (l'objet vide s'envoie dans tout pseudo-torseur).}
+
+Le début de la page 21 contient une autre démonstration, barrée, de
+l'indépendance linéaire des $u^i$ : d'une relation $\sum \lambda_i u^i = 0$,
+on tire une contradiction en appliquant une puissance de $D$. Il faut
+l'appliquer au \emph{dernier} coefficient non nul $\lambda_\beta$ : $D^\beta$
+donne alors $\beta!\,\lambda_\beta = 0$, donc $\lambda_\beta =
+0$.\footnote{La page prend le \emph{premier} coefficient non nul
+$\lambda_\alpha$ et écrit que $D^\alpha$ donne $\alpha!\,\lambda_\alpha = 0$ ;
+c'est faux, car les termes d'indice supérieur laissent des puissances de $u$.
+Le passage est encadré et barré, peut-être pour cette raison ; la lecture
+« $\alpha!\,\lambda_\alpha = 0$ » est d'ailleurs incertaine. Cet argument ne
+donnerait de toute façon que l'indépendance, pas la génération.}
+
+\pagerange{22}{23}
+\subsection*{Le « Théorème » et le « Corollaire »}
+
+\begin{quote}
+\textbf{Théorème} (page 22). \emph{L'ensemble $H^1(A, \alpha_p)$ des classes
+de torseurs sous $\alpha_p$ s'identifie au groupe additif $A/A^p$, où
+$A^p = \{x^p : x \in A\}$. À $a \in A$ correspond la classe de
+$C_a = A[U]/(U^p - a)$, munie de la dérivation $D_a U = 1$ ; et
+$C_a \simeq C_b$ si et seulement si $a \equiv b \pmod{A^p}$. Tout torseur
+$C$ est isomorphe à un $C_a$, avec $a = u^p$ pour un $u$ tel que $Du = 1$,
+lui-même déterminé à l'addition près d'un élément de $A$.}
+\end{quote}
+
+Le dernier point est la section précédente. Pour le critère d'isomorphie :
+un isomorphisme équivariant $C_a \to C_b$ envoie $U$ sur un élément $v$ tel
+que $D_b v = 1$, donc $v = U + c$ avec $c \in A$, et $a = v^p = b + c^p$.
+Comme $A$ est de caractéristique $p$, $A^p$ est un sous-anneau et le
+quotient $A/A^p$ un groupe.\footnote{Ce qui précède vaut pour les torseurs à
+algèbre libre, ceux que la page considère. Pour un torseur quelconque,
+l'algèbre est localement libre de rang $p$, et l'argument de la section
+précédente --- qui est local, puis recollé par
+$H^1(\operatorname{Spec} A, \mathcal{O}) = 0$ --- fournit encore un $u$
+global ; l'énoncé vaut donc pour tous les torseurs.}
+
+La page ajoute : « On n'a pas prouvé que la loi additive naturelle de
+$H^1(A; B)$ correspond à celle de $A/A^p$ ». Elle y correspond. La
+bijection est le cobord $\delta \colon A \to H^1(A, \alpha_p)$ de la suite
+exacte de Frobenius des pages 24 et 25 --- $\delta(a)$ est le torseur des
+racines $p$-ièmes de $a$, c'est-à-dire $\operatorname{Spec} C_a$ --- et un
+cobord est un homomorphisme de groupes.\footnote{La fin de la phrase de la
+page est mal lue (« \ldots{} paraît être pas facile ») ; on ne sait si elle
+juge la vérification facile ou difficile. Le recours au cobord est le nôtre ;
+la page 27 se sert d'ailleurs de cette loi, sans y revenir.}
+
+\begin{quote}
+\textbf{Corollaire} (pages 22 et 23). \emph{Une $A$-algèbre commutative $C$
+admet une structure de torseur sous $\alpha_p$ si et seulement si elle admet
+une $p$-base réduite à un élément, c'est-à-dire un $u$ tel que les $u^i$
+($0 \le i \le p-1$) forment une base de $C$ sur $A$ et que $u^p \in A$.\footnote{La page écrit « i.e. un $u \in C$ tel que les $u^i$ forment une
+base de $C$ sur $A$ », sans répéter $u^p \in A$, que contenait la définition
+de la page 17. La condition est nécessaire : sur un corps $k$ de
+caractéristique $p$, l'algèbre $k[u]/(u^p - u)$ a la base $(u^i)$ mais est
+étale, et n'est pas un torseur sous $\alpha_p$ ; aucune dérivation ne
+vérifie $Du = 1$, car on aurait $0 = D(u^p - u) = -Du$.} Une
+telle structure équivaut à la donnée d'une classe de tels $u$ modulo $A$, ou
+encore de la dérivation $D$ telle que $Du = 1$.}
+\end{quote}
+
+Enfin, la page décrit les
+sous-$A$-hyperalgèbres $\mathcal{U}' \subset \operatorname{End}_A(C)$,
+isomorphes à $A[X]/(X^p)$, qui font de $C$ un torseur. Une telle
+$\mathcal{U}'$ est $A[D]$, et elle détermine $D$ au produit près par une unité
+de $A$, puisque les éléments primitifs de $A[X]/(X^p)$ sont les $cX$ et que
+ses automorphismes sont les $X \mapsto cX$ avec $c \in A^*$. Remplacer $D$ par
+$c^{-1} D$ remplace $u$ par $cu$ ; la donnée de $\mathcal{U}'$ équivaut donc à
+celle d'une classe de $p$-bases modulo $u \mapsto au + b$, avec $a \in A^*$ et
+$b \in A$, c'est-à-dire d'un point de $(C/A)/A^*$.\footnote{La page écrit que
+ces données sont en correspondance biunivoque avec \emph{les} éléments de
+l'espace projectif $\mathbf{P}_A(C/A) = (C/A)/A^*$. En général on n'obtient
+qu'une partie de $(C/A)/A^*$ : les classes dont un représentant engendre une
+$p$-base. Sur un corps $k$, quand $C$ est un corps radiciel de degré $p$, tout
+$u \notin k$ convient et l'on obtient tout l'espace projectif privé de la
+classe nulle, de dimension $p - 2$. Le passage de la page 23 est par endroits
+illisible.} En réponse partielle à la première « Question » de la page 18 :
+pour $C$ radiciel de degré $p$ sur un corps, les façons de présenter
+$\operatorname{End}_k(C)$ comme $C \otimes \mathcal{U}'$ avec
+$\mathcal{U}' \simeq A[X]/(X^p)$ forment un espace projectif.
+
+\pagerange{24}{26}
+\section*{Le point de vue global : la suite de Frobenius (pages 24 à 26)}
+
+Sous le titre « Autre façon d'obtenir ces résultats, et des résultats
+\emph{globaux} », la page reprend tout en une suite exacte. Soit $X$ un
+préschéma sur $\mathbb{F}_p$ --- un schéma, dirait-on aujourd'hui. Le groupe
+additif $\mathbb{G}_{a,X}$ a pour algèbre de Hopf $\mathcal{O}_X[T]$, avec
+$T$ primitif ; le Frobenius $\Phi$, donné par $T \mapsto T^p$, est un
+endomorphisme du groupe, et son noyau --- l'image inverse de la section unité,
+d'algèbre $\mathcal{O}_X[T]/(T^p)$ --- est $\alpha_{p,X}$.\footnote{La page
+écrit que l'idéal d'augmentation « est engendré par $T^p$ ». C'est $T$ qui
+engendre $\operatorname{Ker}\varepsilon$, et $T^p = \Phi(T)$ qui engendre
+l'idéal $\Phi(\operatorname{Ker}\varepsilon)$ ; la conclusion,
+$\mathcal{O}_X[T]/(T^p)$, est juste. La page appelle « hyperalgèbre »
+l'algèbre de Hopf $\mathcal{O}_X[T]$.} D'où la suite exacte
+\[
+0 \longrightarrow \alpha_{p,X} \longrightarrow \mathbb{G}_{a,X}
+\xrightarrow{\ \Phi\ } \mathbb{G}_{a,X} \longrightarrow 0 .
+\]
+Qu'elle soit exacte à droite est le point délicat. La page affirme que
+$\Phi$ est surjectif « en un sens technique suffisant » : tout morphisme
+$\mathbb{G}_{a,X} \to Y$ invariant sous l'action de $\mathbb{G}_{a,X}$ par
+$\Phi$ se factorise par $X$ --- autrement dit $\Phi$ est un épimorphisme
+effectif.\footnote{En marge, un « ? » et, de biais, « justifier ? ».
+L'argument esquissé par la page (une injectivité sur les algèbres, « du moins
+si $Y$ est affine ») est en partie illisible. L'énoncé correct est que
+$\Phi$ est fini et fidèlement plat, donc un épimorphisme de faisceaux pour la
+topologie \emph{plate} (fppf). Il ne l'est pas pour la topologie de Zariski ni
+pour la topologie étale : extraire une racine $p$-ième n'est pas possible
+étale-localement. La cohomologie qui suit est donc la cohomologie plate.}
+La suite longue de cohomologie, où $A = \Gamma(X, \mathcal{O}_X)$, s'écrit
+\[
+0 \to H^0(X, \alpha_p) \to A \xrightarrow{\ F\ } A \to H^1(X, \alpha_p)
+\to H^1(X, \mathcal{O}_X) \xrightarrow{\ F\ } H^1(X, \mathcal{O}_X),
+\]
+en utilisant que la cohomologie plate de $\mathbb{G}_a$ est la cohomologie
+ordinaire de $\mathcal{O}_X$.\footnote{Ce dernier point --- la comparaison
+des cohomologies plate et de Zariski pour un faisceau quasi cohérent --- est
+un théorème de Grothendieck (descente fidèlement plate) ; la page l'utilise
+sans le dire. La phrase entre crochets qui suit la suite sur la page est en
+partie illisible.} Donc $H^1(X, \alpha_p)$ est une extension
+\[
+0 \to A/A^p \to H^1(X, \alpha_p) \to \operatorname{Ker}\bigl(F \mid
+H^1(X, \mathcal{O}_X)\bigr) \to 0 .
+\]
+Pour $X$ affine, $H^1(X, \mathcal{O}_X) = 0$ et l'on retrouve le Théorème de
+la page 22. Pour $X$ une variété complète sur un corps algébriquement clos
+$k$, $A = k$ est parfait, $A/A^p = 0$, et
+\[
+H^1(X, \alpha_p) = \operatorname{Ker}\bigl(F \mid H^1(X, \mathcal{O}_X)\bigr),
+\]
+le sous-espace du $k$-espace de dimension finie $H^1(X, \mathcal{O}_X)$ tué
+par le Frobenius.\footnote{$F$ est $p$-linéaire ($F(\lambda x) = \lambda^p
+F(x)$), de sorte que son noyau est bien un sous-espace vectoriel. Le mot
+« annulé » est d'une lecture incertaine. L'égalité $A = k$ suppose $X$ connexe
+et réduit, ce que contient le mot « variété ».}
+
+\pagerange{26}{27}
+\section*{Une remarque sur les revêtements de $k[[X]]$ (pages 26 et 27)}
+
+Soit $A = k[[X]]$, $k$ algébriquement clos. Un torseur non trivial sous
+$\alpha_p$ est $A[T]/(T^p - f)$ avec $f \notin A^p$, et l'on peut retrancher
+de $f$ toute puissance $p$-ième, c'est-à-dire ses termes d'exposant divisible
+par $p$. Soit $n$ le plus petit exposant non divisible par $p$ qui reste : en
+changeant d'uniformisante ($Y = X\,\epsilon^{1/n}$ pour une unité $\epsilon$
+convenable), l'anneau devient
+\[
+A[X^{n/p}] \simeq A[T]/(T^p - X^n), \qquad n \ge 1,\ p \nmid n ;
+\]
+pour $f \in A^p$ on obtient l'anneau $A[T]/(T^p)$.\footnote{La page borne $n$
+par $p - 1$ (la borne inférieure est illisible). C'est trop restrictif :
+$n$ parcourt tous les entiers positifs premiers à $p$, et les anneaux obtenus
+sont deux à deux non isomorphes. Dans $k[[Z]]$ avec $Z^p = X$, l'anneau est
+$k[[Z^p, Z^n]]$, dont le semi-groupe des valuations, engendré par $p$ et $n$,
+est un invariant ; pour $n = p+1$ il ne contient aucun entier de $1$ à
+$p - 1$, et ne provient d'aucun $n \le p-1$. Il s'agit ici de l'anneau, non
+de la structure de torseur, que l'unité $\epsilon$ modifie.} Si $n = 1$ c'est
+un anneau local régulier ; sinon il ne l'est pas. Pour $p = 3$ et $n = 2$, on
+obtient $A[X^{2/3}]$, le sous-anneau de $k[[Y]] = k[[X^{1/3}]]$ formé des
+séries sans terme en $Y$ --- le cusp.
+
+Or, pour la loi de groupe de $H^1(A, \alpha_p) = A/A^p$, ce torseur non
+régulier est la \emph{somme} de deux torseurs réguliers : ceux des racines
+$p$-ièmes de $X$ et de $-X + X^2$, puisque
+$X + (-X + X^2) = X^2$.\footnote{La page dit cela pour $p$ quelconque, après
+l'exemple $p = 3$ ; l'addition est celle de $A/A^p$, dont la page 22 disait
+n'avoir pas prouvé qu'elle est celle de $H^1$.} La régularité ne passe donc
+pas à la somme. Elle ne passe même pas au produit fibré : si $C_1$ et $C_2$
+sont ces deux anneaux, $C_1 \otimes_A C_2 \simeq C_1[T]/(T^p)$ a des
+nilpotents. En effet, dans $C_1$, on a $X = s^p$ et
+$-X + X^2 = (-s + s^2)^p$, de sorte que l'équation de $C_2$ devient une
+puissance $p$-ième parfaite.\footnote{Ce calcul est le nôtre ; la page
+affirme l'isomorphisme $C_1 \otimes_A C_2 \simeq C_1[T]/(T^p)$ sans le
+justifier. La somme des deux torseurs est le quotient de ce produit fibré par
+l'antidiagonale de $\alpha_p \times \alpha_p$.}
+
+\end{document}
