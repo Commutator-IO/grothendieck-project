@@ -4867,4 +4867,345 @@ export const FINDINGS: Finding[] = [
     settle:
       'Search the literature on integer-valued polynomials over rings with zero divisors (Cahen–Chabert, Integer-Valued Polynomials, 1997, and its sequels; Frisch; Elliott’s later papers and the CIRM 2010 note, acirm.34) and Borger–Wieland 2005 for a biring/plethory structure on Int(k₀) relative to a non-domain extension; and decide whether the generalisation is more than routine, since for a domain the freeness hypothesis is stronger than Elliott’s flatness. If found, mark matched.',
   },
+// Folder 142 — find-novelty pass, Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading, 2026-10-10.
+// Dropped as matches already footnoted in the reading: the « relation des lacets » (Drinfeld 1990 / Ihara 1991, GT),
+// tangential base points (Deligne 1989), injectivity of the Kummer map (Mordell–Weil, Lang–Néron), Brown's groupoid
+// van Kampen, Belyi reduction, Prop. 2 (finite-order homeomorphism isotopic to id on a hyperbolic surface), the
+// covering-groupoid lifting lemma (standard covering theory), PGL_2(Z) presentation. Pages 99 and 102–103 are too
+// illegible to carry a claim.
+  {
+    id: '142-galois-image-conditions-single-curve',
+    cote: '142',
+    pages: '94–95, 98–101',
+    kind: 'mathematical',
+    claim:
+      'The folder lists necessary conditions for a vertex-fixing automorphism Θ of the profinite fundamental groupoid Π̂₁(X, I) of one curve X over K to come from Gal(K̄/K) — lifting to Π̂₁(X′, I′) for every finite étale cover X′ of X defined over K, stability of kernels of π̂₁(X′, x′) → π̂₁(Y, f(x′)) for every K-morphism f : X′ → Y, compatibility along morphisms between covers, and the loop (inertia) condition with one multiplier — and conjectures them sufficient when X is an anabelian curve and K is of finite type over Q; a characterisation of the Galois image in this form, attached to a single curve and its covers, was not found in the sources read, which state it for the category of all varieties.',
+    basis:
+      'Page 94 states a) and b) as « conditions nécessaires »; page 95 conjectures them sufficient « lorsque X est (disons) une courbe algébrique anabélienne, avec K extension de type fini de Q » and expects uniqueness of u for K algebraic over Q; pages 98–101 restate them as 1)–4), calling 1) the loop condition « sûrement la plus importante de toutes, et de très loin ! ». In the transcription « exagère » (p. 95) is \\uncertain{} and several words of the conjecture sentence are \\ill{}, but « conjecturant », « nécessaires », « suffisantes », « provienne bien d’un u ∈ Γ », « courbe algébrique anabélienne » and « extension de type fini de Q » are read; the conjecture is stated for a) and b), and 1)–4) are a later restatement whose relation to it the page does not spell out. Condition 1) is written out only in the reading’s summary of pages 98–99, which are largely illegible.',
+    ours:
+      'The reading’s footnote says that a characterisation of the Galois image by conditions of this kind is, to its knowledge, open. This pass reads it differently: Ihara’s question / Oda–Matsumoto conjecture (I/OM), which characterises Gal_{k₀} as the automorphisms of the geometric fundamental group functor on k₀-varieties compatible with all morphisms, is stated as proved by Pop for 𝒱 = all varieties; the folder’s statement differs in being attached to one curve X, its finite étale covers and morphisms out of them, with explicit base points and the inertia condition, so whether it is implied by or equivalent to a published variant is the open point, not the characterisation in general. The grouping of a), b) and 1)–4) into one statement is the reading’s.',
+    literature: [
+      'A. Topaz, « The Galois action on geometric lattices and the mod-ℓ I/OM » (arXiv 1510.08836), §1–§1.2, read 2026-10-10 through a fetched HTML rendering (first part only): statement of I/OM as ρ_{k₀,𝒱} : Gal_{k₀} → Out(π̄₁|_𝒱) for subcategories 𝒱 of varieties, and attribution of the absolute I/OM for 𝒱 = Var_{k₀} to Pop (unpublished 1999 manuscript, later released); no inertia condition and no single-curve version stated there.',
+      'F. Pop, « Finite tripod variants of I/OM: On Ihara’s question/Oda–Matsumoto conjecture », Invent. Math. (2019), 745–797, DOI 10.1007/s00222-019-00855-8 — abstract only, via a newsletter page, 2026-10-10; the theorem was not read.',
+    ],
+    status: 'candidate',
+    settle:
+      'Read Pop 2019 (tripod variants), whose subcategories are built from finite étale covers of P¹ ∖ {0, 1, ∞}: if it proves that automorphisms of the geometric fundamental groups of the covers of one hyperbolic curve (or of U_{0,3}), compatible with the morphisms among them, come from Galois, mark matched with the section number. Also check H. Nakamura’s and Y. Ihara’s surveys of the GT/I/OM programme and Mochizuki’s Hom-form of the anabelian conjecture for a single-curve formulation with inertia. Nothing here is a priority claim; the folder is dated only « [à partir de 1978] » and, by its mention of Belyi, after 1979.',
+  },
+  {
+    id: '142-teichmuller-galois-category-etale',
+    cote: '142',
+    pages: '2–16',
+    kind: 'mathematical',
+    claim:
+      'The folder builds a single category whose objects are anabelian curves of all types (g, ν) and whose arrows are the profinite completions of isotopy classes of finite étale maps, by a general profinite completion of categories whose automorphism groups satisfy the finiteness condition (*) (the image H_u of the stabiliser of every arrow u has finite index in Aut(Y)); in it every automorphism group is the profinite Teichmüller group, the construction is algebraic and invariant under extension of algebraically closed fields of characteristic 0, and Aut(k) acts on it — a Galois–Teichmüller object linking different types by étale maps rather than by the subsurface and fusion maps of the Teichmüller tower; no published construction of this category was found, but no source was read.',
+    basis:
+      'Pages 2–7 prove that isotopy classes of finite étale maps between anabelian surfaces are A°_X-torsors with finitely many T_X-orbits and finite stabilisers; pages 8–13 state condition (*) (16), the completion (17) and the factorisation (19)–(22); pages 12, 14–16 make it algebraic, functorial in k, and call it the « catégorie de Teichmüller–Galois ». Page 11 (\\uncertain{} « sans », « pb ») and pages 12 and 14 (\\uncertain{} « anabéliennes », « modulaire », several \\ill{}) carry the passage; the end of page 15 is barely legible.',
+    ours:
+      'The identification of (17) with Hom ×^{Aut X} Âut(X), on which the composition rests, is asserted by the page and not proved; the reading notes that it needs a compatibility of profinite topologies along u that (*) alone does not give, and declines to take it over. The interpretation of a class of homeomorphisms as a path in the profinite fundamental groupoid of the moduli stack, and the characteristic-0 restriction (the page says « pas besoin qu’il soit de car. 0 ! »), are the reading’s. The contrast with the Teichmüller tower is this pass’s framing.',
+    literature: [
+      'Web search, 2026-10-10, for a profinite completion of a category of surfaces with finite étale maps and its Galois action: returned G. Horel, « Profinite completion of operads and the Grothendieck–Teichmüller group » (arXiv 1504.01605), M. Robertson and collaborators on GT symmetries of cyclic operads (arXiv 2511.05911), and lecture notes on modular ∞-operads and GT theory (arXiv 2210.13640); abstracts only, none read, none on étale maps between surfaces of different types.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read the Teichmüller-tower literature where categories rather than groupoids appear: P. Lochak and L. Schneps (eds.), Geometric Galois Actions 1 (LMS LN 242, 1997), in particular Hatcher–Lochak–Schneps and Lochak–Nakamura–Schneps; Nakamura–Schneps on the profinite Teichmüller modular groups; and any construction of a « profinite completion of a category with profinite Aut groups » (e.g. in the profinite-groupoid literature). If a category of hyperbolic curves with finite étale maps, completed profinitely and carrying a Galois action, appears, mark matched; independently, a proof or counterexample for the identification (17) under (*) decides whether the general completion holds as stated.',
+  },
+  {
+    id: '142-run-I-leaf-order',
+    cote: '142',
+    pages: '2–6, 10–14',
+    kind: 'codicological',
+    claim:
+      'In the first run (« Catégories de Galois–Teichmüller », his pp. 1–10) the text does not follow the scan order: it runs 3 → 5 → 4 → 6 and, further on, 11 → 13 and 12 → 14, the pages he numbered (2, 4, 8, 10, 12, 14, 16, 18, 20 bear his 1, 2, 4, 5, 6, 7, 8, 9, 10) alternating with unnumbered ones that carry continuations.',
+    basis:
+      'Transcription batch-01: page 3 breaks off on « peut-on la » and page 5 opens « factoriser canoniquement », with notes saying the sentence continues on page 5, not 4, and that page 4 (his p. 2) follows page 5; page 11 ends « Par construction, tout Ĉ₀-morphisme » and page 13 opens « (18) f̂ : X → Y »; page 12 (his p. 6) ends « Pour la » and page 14 (his p. 7) opens « voir ». The reading follows this order and says so.',
+    ours: 'The observation is the transcription’s; the reading adopts it. The pattern of numbered and unnumbered pages is this pass’s collation of the transcription’s « p. n de sa main » notes.',
+    literature: ['Transcription 142, batch 1 (batch-01.fr.tex), header and notes on pages 2–14'],
+    status: 'candidate',
+    settle:
+      'Look at the facsimile of pages 2–14: whether 4/5 and 12/13 are the two sides of single leaves scanned verso-first, or whether he wrote continuations on the versos of the preceding leaves; the second would make the order a habit of writing rather than a misbinding. Why his p. 3 (page 6) carries no number in the transcription is not checked.',
+  },
+  {
+    id: '142-run-II-missing-opening',
+    cote: '142',
+    pages: '21–23',
+    kind: 'codicological',
+    claim:
+      'The run « Opérations de Γ_{Q̄/Q} sur π₁ M_{0,3} » begins at his page 5 behind its own cover, and his pages 1–4 are not in the folder; the formula numbering nevertheless starts at (1) on his page 5.',
+    basis:
+      'Page 21 is a cover in his hand with the title; page 22 carries only a pencilled count; page 23 is numbered 5 in his hand and opens with formula (1) (transcription batch-02, header and note on the title). The reading reports the computations of the run as dependent on conventions fixed in the missing pages.',
+    ours:
+      'That pages 1–4 fixed the conventions is the reading’s inference from the run’s undefined notation; the restart of the numbering at (1) leaves open that pages 1–4 were a separate preamble without numbered formulas. No other folder was searched for them in this pass (a grep of the transcriptions of folders 143, 144, 146 and 148 for M_{0,3} turned up no matching run, which is not a search of the fonds).',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Search the transcriptions and inventory entries of the neighbouring folders (141, 143–148), especially folder 145’s drafts on the same relations, for four pages numbered 1–4 on the thrice-punctured sphere with base points R_i^ω, and check the facsimile of pages 21–23 for traces of removed leaves.',
+  },
+  // Folder 144, find-novelty pass on Opus 5.5 (claude-opus-5-5) over the Opus 5.5 reading of 2026-10-10.
+  // The rest of the pool was matches already footnoted in the reading (Belyi, real Belyi theory, Hecke-type
+  // groups, Deligne–Mumford strata, B3) or statements announced but never established on the pages
+  // (pp. 13, 17, 24, 26–27, 153). Those were dropped without entries.
+  {
+    id: '144-triangulation-weighting-obstruction',
+    cote: '144',
+    pages: '73–76',
+    kind: 'mathematical',
+    claim:
+      'For an oriented triangulated closed surface whose vertices all have even degree and whose faces are 2-coloured (adjacent faces differently), a class cl(X) ∈ H¹(X, ℤ/3) vanishes exactly when the triangulation admits a weighting, i.e. a proper vertex 3-colouring by {0, 1, ∞}; the weightings with the + faces direct correspond to the sections of the associated ℤ/3-torsor.',
+    basis:
+      'Page 76 states the obstruction and the correspondence with sections cleanly. The construction behind it, on pages 74–75, builds the principal 𝔖₃-cover X′ → X from the colours of the flags, notes that it ramifies only at vertices of odd order, and reduces the group to 𝔖₃⁺ ≅ ℤ/3 by the face colouring. Those two pages carry many \\ill{} and \\uncertain{} readings, among them the word « ramifiée » in the odd-order claim. No proof is given.',
+    ours:
+      'The reading states the result as the page gives it and supplies no proof. The match with Fisk and Izmestiev is this pass’s. The reading has no footnote on it.',
+    literature: [
+      'S. Fisk, Geometric coloring theory, Advances in Math. 24 (1977) 298–340, the « even obstruction map »',
+      'M. Joswig, Projectivities in simplicial complexes and colorings of simple polytopes, Math. Z. 240 (2002), the group of projectivities, with vertex-colourability equivalent to its triviality',
+      'I. Izmestiev, Color or cover, arXiv:1503.00605 (2015), Definition 2.1 (coloring monodromy π₁ → Sym₃; colourable iff trivial) and the statement after Theorem 5 that an even triangulation of an orientable surface is face-colourable iff the monodromy image is trivial or generated by a 3-cycle',
+    ],
+    status: 'matched',
+    settle:
+      'Matched. The monodromy into Sym₃, which drops to the 3-cycle group ℤ/3 once faces are 2-coloured, is the page’s 𝔖₃-cover and its 𝔖₃⁺-reduction. Its triviality is the vanishing of cl(X). The only open check is codicological: whether pages 74–75 really say that X′ is ramified only at odd-order vertices. That turns on the transcription, not the literature.',
+  },
+// 145: two entries. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (% Pass header of 145.modern.tex, 2026-09-24); no disagreement with the reading. Dropped as matches already footnoted in the reading: the S_3-commutation equations of pp. 6–11 and β = γ (forms of relations (I)–(II) of Drinfeld's GT^, 1990), E⁺ ≃ PSL₂(ℤ) and E ≃ PGL₂(ℤ) (pp. 19, 30), the cartographic group ℤ/2*ℤ/2*ℤ/2 (p. 22), the commensurator of p. 1, the non-lifting of the 2-Sylows to SE (p. 36: cusp stabilisers of PSL₂(ℤ) are torsion-free). Dropped as not established by the folder: whether Out_lac^!(π^) equals the centraliser of S_3 (p. 23, « j'ignore »).
+{
+  id: '145-unit-exponent-exercise',
+  cote: '145',
+  pages: '34–35',
+  kind: 'mathematical',
+  claim:
+    'In the free profinite group on l₀, l₁ with l_∞ l₁ l₀ = 1, a unit p ∈ Ẑ* satisfies l_∞^p l₁^p l₀^p = 1 only for p = 1; hence the « rectifier-free » systems (p, σ, 1, 1, 1) of SÊ^ are exactly the six (sg σ, σ) of Γ_P, as in the discrete SE.',
+  basis:
+    'Page 35 proves the discrete case (p = ±1: (13) holds iff (σ, p) ∈ Γ_P), conjectures the profinite one (« Sans doute il est vrai que le même résultat est valable dans SÊ^ »), reduces it to (14) l_∞^p l₁^p l₀^p = 1 ⇒ p = 1, and leaves it as « Exercice ! ». The sentence carrying the reduction is read with difficulty (\\uncertain{même}, \\uncertain{pense}, \\uncertain{quitte}, batch-02.fr.tex, page 35); the statement of (14) itself is read clearly.',
+  ours:
+    'The proof is entirely the edition’s: send l₀, l₁ to two reflections of a dihedral group of order 2N whose product has order N, with N ≥ 3 and p ≢ 1 mod N; p odd gives l₁^p l₀^p ↦ r and (l₁l₀)^p ↦ r^p ≠ r. The reading also corrects the order of the product in the page’s (13), which as written (l_σ(0)^p l_σ(1)^p l_σ(∞)^p = 1) is false for σ = 1, p = 1 under the relation l_∞ l₁ l₀ = 1. The page carries only the question and the reduction.',
+  literature: [
+    'Web search, 2026-10-10, « free profinite group x^λ y^λ z^λ = 1 xyz=1 implies λ = 1 Grothendieck-Teichmüller »: returned Schneps, notes on GT (math.arizona.edu, 05SchnepsNotes.pdf), arXiv 1407.3112, 1504.01605, 1604.04415, read only as search summaries; none stated the implication. Not a search of the literature in the sense of the skill.',
+  ],
+  status: 'unsearched',
+  settle:
+    'Read Drinfeld 1990 (§4), Ihara’s 1991 ICM address and Lochak–Schneps’ expositions of GT^ for the statement that (λ, 1) satisfies relation (II) only for λ = 1, i.e. that z^m y^m x^m = 1 with xyz = 1 forces m = 0 in F̂₂ — the same fact with a different exponent. If it is stated there, or as a standard exercise on F̂₂, mark matched; the elementary dihedral argument makes that the likely outcome.',
+},
+{
+  id: '145-page-20-after-21',
+  cote: '145',
+  pages: '19–22',
+  kind: 'codicological',
+  claim:
+    'Page 20 is out of the order of the argument: it carries formulas (13)–(16), which continue (11)–(12) of page 21, so the reading order is 19, 21, 20, 22.',
+  basis:
+    'The author’s numbering puts « 8 » on page 19 and « 9 » on page 21; page 20 has no number. Page 21 introduces the section φ (11) and its canonical lift σ ↦ σ̃ (12); page 20 opens « Donc aussi les relations (13) » on the σ̃_i, then (14) and τ_i = σ_i σ̃_i (15)–(16), and page 22 (his « 10 ») goes on to E_τ with (17).',
+  ours:
+    'The observation is the reading’s (header and the subsection « pages 21 et 20 »); the transcription records the author’s page numbers in its batch headers. The facsimile was not consulted by this pass.',
+  literature: [
+    'Transcription 145, batch 1 (batch-01.fr.tex), header and page 20',
+    'Transcription 145, batch 2 (batch-02.fr.tex), header and page 21',
+    'Modernised reading 145.modern.tex, header and subsection on pages 21 and 20',
+  ],
+  status: 'candidate',
+  settle:
+    'A person checks on the facsimile whether page 20 is the verso of the leaf whose recto is page 21 (his p. 9), scanned before it, or a separate leaf filed one place early.',
+},
+  // Folder 146, find-novelty pass on Opus 5.5 (claude-opus-5-5) over the Opus 5.5 reading of 2026-10-10 (% Pass header of 146.modern.tex); same model, no exception needed.
+  // Dropped as matches already footnoted in the reading: tangential base points (p. 62; Deligne 1989), plumbing / opening of nodes (pp. 105–111),
+  // the Lego–Teichmüller programme (p. 111; Hatcher–Lochak–Schneps 2000), the presentation of a group extension (p. 80; classical),
+  // π-fibrations as gerbes (pp. 88–94), the cartographic groups C₂, C₂⁰ (p. 66), Belyi maps of the monogon and bigon (p. 64), \bar M_{0,5}
+  // as the universal curve over \bar M_{0,4} (p. 67), ψ_i of degree 1 on \bar M_{0,4} (pp. 16–17), icosahedral and dodecahedral counts (pp. 61, 65, 76),
+  // stable-graph contraction (pp. 127–130). Dropped as the edition's: the 2-skeleton argument that relation (2) of p. 116 follows from (1);
+  // the pointed form of the correspondence (17) of p. 94 (the page's unpointed statement needed repair). Dropped as announced, never established:
+  // the groupoid-over-groupoid presentation of pp. 82–86 (stated without proof), the filtered colimit of p. 99, the relations of p. 123.
+  {
+    id: '146-variant-pi1-trinion',
+    cote: '146',
+    pages: '8–10',
+    kind: 'mathematical',
+    claim:
+      'For card I = 3, the « variant » fundamental group π₁(S₀𝒯_{0,I}, 𝔖_I; x) is an extension G(I) of 𝔖_I by ℤ^I, obtained from 0 → ℤ →(2) ℤ → μ₂ → 0 by pulling back along the signature and pushing out along the diagonal ℤ → ℤ^I; it does not depend on x, is not split (already over the subgroup generated by one transposition), and splits canonically over 𝔖_I⁺.',
+    basis:
+      'Page 8 writes (17) and (18) and identifies the group with pairs (α, n), the n_i of the parity fixed by sgn(α); page 9 states the Proposition, the non-splitting by projection onto one coordinate, and the canonical splitting (19) over 𝔖_I⁺; page 10 notes that the group does not depend on x. The statement itself is legible; only « variants » (p. 8) is uncertain, and several connecting words on p. 8 are \\ill{}.',
+    ours:
+      'The reading supplies the explicit surjection from the semidirect product with its kernel, and the squaring argument for non-splitting; the page projects onto one coordinate instead. The identification of G(I) with the mapping class group of the three-holed sphere, boundary components permutable, is this pass’s and was checked only at the level of the relations: rotation of order 3 against the canonical splitting over 𝔖_I⁺, braiding squared equal to a product of boundary twists against (σ, n)² = (1, n + σn).',
+    literature: [
+      'B. Bakalov, A. Kirillov Jr., « On the Lego–Teichmüller game », Transform. Groups 5 (2000), arXiv math/9809057: Proposition 6.6 (presentation of Γ_{0,n} = Γ(S_{0,n}), boundary components permutable, by braidings b_i, twists t_i and the rotation z with z^n = 1), Example 4.18 (T_α = T_β T_γ B_{γ,β} B_{β,γ} on a sphere with three holes), relation (4.11)',
+    ],
+    status: 'matched',
+    settle:
+      'Matched in substance. For n = 3, Bakalov–Kirillov’s Γ_{0,3} is an extension of 𝔖₃ by the boundary twists ℤ³, the rotation z of order 3 splits it over the 3-cycles, and Example 4.18 makes the square of a braiding a product of twists with the fixed hole’s twist to the power ±1, so no lift of a transposition has order 2: the page’s G(I), in other words. What is not in that paper is the page’s route, the half-turn parity description of the arrows between the two real base points ω(I). The one remaining check is to write the isomorphism G(I) ≅ Γ_{0,3} explicitly, with the sign of the braiding fixed, rather than comparing relations. A web search on 2026-10-10 found nothing else on this extension. Folder 145, p. 31, leaves the same extension SΓ to be made explicit, according to the reading’s footnote.',
+  },
+  {
+    id: '146-equivariant-trivialising-exponents',
+    cote: '146',
+    pages: '70, 72–73',
+    kind: 'mathematical',
+    claim:
+      'The folder tabulates, for n = card I = 4, 5, 6, the smallest exponent that makes the tangent line bundles L_i, and L = ⊗ L_i, trivial compatibly with the symmetric group on M_{0,I}: 3 for L and 6 for L_i when n = 4, and only queried values (« 12 ? », « 20 ? », « 60 ? ») for n = 5, 6.',
+    basis:
+      'Page 70 is a table with these entries, the n = 5, 6 columns followed by question marks and the last two rows left empty; page 72 builds sections ξ_A indexed by the 3-element subsets A, takes their product as a section of L^{⊗ν}, ν = (n−1)(n−2)/2, and writes « L^{⊗6} ≃ 1 » for both n = 4 and n = 5, with « on trouve » uncertain, which disagrees with the « 12 ? » of the table for n = 5; page 73 sets up the exact sequence through H¹(𝔖_K, H⁰(M_{0,K}, 𝔾_m)). No value is proved on the pages, and several exponents are overwritten or \\ill{}.',
+    ours:
+      'The reading supplies the reason the sequence of p. 73 is exact on the left (the units modulo constants carry no 𝔖_K-invariants) and says it does not verify the table. The question, as a claim about the literature, is this pass’s framing.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Compute the class of L and of L_i in H¹(M_{0,I}, 𝔖_I; 𝔾_m), respectively H¹(M_{0,I}, 𝔖_{I∖{i}}; 𝔾_m), for n = 4 by hand (M_{0,4} = ℙ¹ ∖ {0, 1, ∞}, units λ^a(1−λ)^b up to constants) and see whether the page’s 3 and 6 come out; then look for these 𝔖_n-equivariant orders in the literature on equivariant Picard groups and linearisations on M_{0,n} and \bar M_{0,n} (Hassett–Tschinkel–Zhang on 𝔖_n-actions, the S_n-invariant F-conjecture literature). Two web searches on 2026-10-10 found no paper on these orders; nothing was read, so the status stays unsearched. The entry rests on overwritten and uncertain figures and drops if the n = 4 values do not check.',
+  },
+  {
+    id: '146-pages-62-64-outside-numbering',
+    cote: '146',
+    pages: '62, 64, 74',
+    kind: 'codicological',
+    claim:
+      'Pages 62 and 64 (and probably 74) continue two different runs of formula numbers that begin outside the folder: page 62 numbers (53)–(55) with no (1)–(52) anywhere in 146, and page 64 opens mid-argument, refers back to a formula (25) that the folder does not hold, and numbers the monogon and bigon maps (26) and (27).',
+    basis:
+      'The transcription of batch 04 notes on p. 62 that (53)–(55) extend a numbering begun before the batch, and on p. 64 that the opening words (« les étaient 0, ∞ au lieu de 0, 1 ») and the reference to (25) assume an earlier argument; among the neighbouring leaves (55–77), the only other numbered formulas are the boxed (41) and (42) of p. 74, which also opens mid-statement (« dont la deuxième… ») and could belong to the same outside run as p. 62.',
+    ours:
+      'The comparison with folder 144 is this pass’s: 144 writes the same monogon map g(z) = −(z−1)²/4z as its formula (23) (batch 04) and reuses it on its p. 86 « (cf. (23)) », while its (25) is « U′^τ = ∅ » and its (53)–(55) concern the dihedral group and λ_a. Neither run of 146 therefore matches 144’s numbering as transcribed.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'A person checks on the facsimile that pages 62 and 64 are single leaves with nothing numbered on their versos. Then the other Teichmüller folders (143–145, 147–148) are searched for a manuscript whose formulas run to (52) before « points base à l’infini », or to (25) just before the monogon. That decides whether these are stray leaves of another redaction or drafts of 144’s pp. 7 ff.',
+  },
+// 147: two entries. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (% Pass header of 147.modern.tex, 2026-10-10); no disagreement with the reading. Dropped as matches already named in the reading: the Deligne–Mumford–Knudsen compactification and its stratification by stable graphs (pp. 21–30), codimension = number of edges (p. 27), the orbifold Euler characteristics χ(M_{0,4}) = −1, χ(M_{1,1}) = −1/12 (pp. 61–63), the Petersen graph as dual graph of the boundary of M̄_{0,5} (p. 67, the ten lines of the quintic del Pezzo surface), the « two-level » impression of p. 59 (Hatcher–Lochak–Schneps 2000), the Lego–Teichmüller Programme of p. 103 (Esquisse, 1984), Dehn twists as the ℤ^C of (101)–(103). Dropped as repairs or as not established: (37) as a closed immersion (false, the reading repairs it), the claim that every subgroup of S_4 is an image Γ_G → S_4 (p. 57, « sauf erreur », unverified by page and pass), the connectedness of the boundary for dim ≥ 2 (pp. 71–74: page 74 read with much uncertainty, and the statement is very probably standard via the connectedness of the curve complex; not searched), the structure of M̄_{1,2} at infinity (p. 71, « J'y renonce »), the Scholie of p. 176 (posed « heuristiquement »).
+{
+  id: '147-m11-stratified-class-over-z',
+  cote: '147',
+  pages: '62–64',
+  kind: 'mathematical',
+  claim:
+    'In the additive invariant that counts each locally closed piece of a Deligne–Mumford stack with constant automorphism group H as the class of its coarse space divided by card H, the stack of elliptic curves over Spec ℤ has class ½(L − 1) − 1/12 + ⅛ζ₂ + ⅙ζ₃, with ζ_p = [Spec 𝔽_p], and its compactification ½L − 1/12 + ⅛ζ₂ + ⅙ζ₃; over ℤ[1/6] these reduce to ½(L − 1) − 1/12 and ½(L − 1) + 5/12.',
+  basis:
+    'Pages 63–64 cut the j-line 𝔸¹_ℤ by the sections S₀ (automorphisms ℤ/4) and S₁ (ℤ/6), meeting only at a₂ and a₃ in characteristics 2 and 3 (automorphisms of order 24 and 12), write [M_{1,1}] = ½[U] + ¼[S′₀] + ⅙[S′₁] + (1/24)ζ₂ + (1/12)ζ₃ and arrive at (80); page 63 gives (79) over ℤ[1/2] by the Legendre gerbe over [U_{0,3}/S₃]. The computation of pages 63–64 is read clearly (the words « harmonique », « équianharmonique » are \\uncertain{} in batch-04.fr.tex, page 63, and an \\ill{} sits beside « groupes d’automorphismes d’ordre 24, et 12 »); the margin of page 62 that limits the formulas to ℤ[1/6] is largely \\ill{}.',
+  ours:
+    'The page says only « dans un groupe de Grothendieck convenable » and never defines the invariant; the rule stated in the claim (coarse class over constant-stabiliser strata, divided by card H) is the reading’s reconstruction, chosen because it makes all the page’s computations come out right (footnote to the « Classes » paragraph, p. 62). The reading also notes that this is neither the weighted point count (q for M_{1,1}) nor the class in Ekedahl’s Grothendieck group of stacks, corrects « ½[M_{0,4}] » to 2[M_{0,[4]}], and moves the validity of (79) from ℤ[1/2] to ℤ[1/6]. This pass re-did the arithmetic of (80) (constant −7/12, coefficient of ζ₂ ½ − 5/12 + 1/24 = ⅛, of ζ₃ ½ − 5/12 + 1/12 = ⅙) and found it right.',
+  literature: [
+    'Web search, 2026-10-10, « Ekedahl Grothendieck group of algebraic stacks class of M_{1,1} »: returned Ekedahl, « The Grothendieck group of algebraic stacks » (arXiv 0903.3143) and « A geometric invariant of a finite group » (arXiv 0903.3148), Bergh, « Motivic classes of some classifying stacks » (arXiv 1409.5404), read only as search summaries; none stated a class of M_{1,1} over Spec ℤ with ζ₂, ζ₃ terms. Not a search of the literature in the sense of the skill.',
+  ],
+  status: 'unsearched',
+  settle:
+    'Decide first whether the invariant is in print: look in the literature on orbifold / stringy Euler characteristics and « motivic » or inertia-weighted classes of Deligne–Mumford stacks (e.g. Ekedahl 2009, Bergh, and treatments of [M_{1,1}] over ℤ in K₀ of stacks) for a class defined by coarse spaces of constant-stabiliser strata divided by card H, and for its value on M_{1,1} over Spec ℤ. If the invariant appears with this value, mark matched; if the invariant itself is not in print, the entry is about the edition’s reconstruction as much as the page and should say so in its claim.',
+},
+{
+  id: '147-deleted-neighbourhood-codim-two',
+  cote: '147',
+  pages: '148–151',
+  kind: 'mathematical',
+  claim:
+    'For a smooth complex analytic space (or « multiplicité ») X with a normal-crossings divisor Θ, the folder states, without proof, that the deleted tubular neighbourhood V*_{Θ,X} is the homotopy colimit of the semi-simplicial system of deleted tubular neighbourhoods of the unfolded strata D_{d₀…d_r}, and deduces that its fundamental groupoid is the amalgamated sum Π̃₁ ← Π̃_{2,1} → Π̃₂ of the groupoids of the multinormal torus bundles over the open strata of codimension 1 and 2 (Corollary 2), hence the same for Π₁(X ∖ Θ) whenever X ∖ Θ and its end have equivalent fundamental groupoids (Corollary 3).',
+  basis:
+    'Page 149 states the « Th. de recollement » as an equivalence of topos and corrects it at once (« en fait, c’est une équivalence d’homotopie »); page 150 extends it to a stratum (Corollary 1); page 151 states Corollary 2 as (2.46) and Corollary 3 as (2.47), with a bracketed justification that Θ^{(3)} can be neglected by a purity argument. That justification rests on several \\uncertain{} words (« dans un voisinage », « voisins », « changement ») and an \\ill{} (batch-08.fr.tex, page 151); the « bijection » on π₀ and « rev. » on page 149 are \\uncertain{}; a left-margin note on page 151 about Π̃_i for i ≥ 3 is largely \\ill{}. Corollary 4 and a « Cor. Main 2 » are struck out. No proof is given anywhere in the folder.',
+  ours:
+    'The reading reads the theorem as a statement about the homotopy colimit (the page says « limite inductive » of topos), supplies the purity argument in the form « removing real codimension ≥ 3 does not change π₁ », renumbers (2.46)–(2.47) as (246)–(247), and corrects Corollary 3’s Π₁X to Π₁X* (the hypothesis is about X*; the page writes Π₁ X). The application to moduli — X* = M_{g,ν}, so that the mapping class group would be expressed through the strata of codimension 1 and 2, a form of the two-level principle — is the reading’s rapprochement; the page only remarks, on p. 178, that the open strata are K(π, 1) « dans la situation de Teichmüller ».',
+  literature: [
+    'Web search, 2026-10-10, « homotopy type deleted neighbourhood normal crossings divisor homotopy colimit strata tubular neighbourhoods fundamental group van Kampen codimension two »: returned Libgober, « Complements to ample divisors and singularities » (arXiv 2108.02812), Dimca’s survey on fundamental groups of divisor complements on surfaces, Ding–Saito on local fundamental groups near normal crossings, Zakharov on rational models of complements of submanifold arrangements (arXiv 2211.05033), read only as search summaries; none stated the gluing theorem or Corollary 2 in this form. Not a search of the literature in the sense of the skill.',
+    'Modernised reading 147.modern.tex, footnote on the two-level principle (Hatcher–Lochak–Schneps, J. reine angew. Math. 521, 2000) — cited by the reading for p. 59, not checked by this pass against Corollaries 2–3.',
+  ],
+  status: 'unsearched',
+  settle:
+    'Look for the statement that the boundary of the real oriented blow-up (equivalently the Kato–Nakayama space of the log structure, or the deleted neighbourhood) of a normal-crossings divisor is the homotopy colimit of torus bundles over the open strata, and for the resulting van Kampen presentation by codimension 1 and 2 — in the literature on real oriented blow-ups and Kato–Nakayama spaces, in Looijenga’s and Boggi’s work on the boundary of M̄_{g,n} and its fundamental groups, and in Hatcher–Lochak–Schneps 2000; and check whether, for M_{g,n}, the hypothesis of Corollary 3 (end and interior with the same Π₁) is the simple connectivity of the curve complex (Harer). If the general statement is in print, mark matched.',
+},
+  // Folder 148 (Teichmüller, 1983), find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5.5.
+  // Dropped as matches already footnoted in the reading: stable graphs (p. 47), Hatcher–Thurston pants complex (pp. 30–32),
+  // modular operads (pp. 51–59), Dehn–Thurston arc coordinates in a pair of pants (p. 65), Belyi / trivalent maps (p. 25),
+  // the classification of 5-point configurations with symmetry (pp. 33–35), and the p. 19 diagram, which is the edition's repair.
+  {
+    id: '148-multimarked-teichmuller-groupoid',
+    cote: '148',
+    pages: '40, 49–60',
+    kind: 'mathematical',
+    claim:
+      'The folder defines a Teichmüller groupoid of cut surfaces in which each cutting or boundary circle carries any number r(a) ≥ 0 of marked points, forming a torsor under the twisted group ℤ_a/r(a), and takes as elementary operations, beside cutting and gluing, the uniform partial erasure (restriction to the subgroup of order r′ dividing r) and the uniform over-marking (extension along ℤ/r → ℤ/dr) of those points; gluing two circles is defined up to unique isomorphism once they carry the same number of points and an anti-isomorphism of their torsors is given.',
+    basis:
+      'Page 40 (dated Oct. 1983) gives the data (RR, A⃗, S, g) with a D_∞-action on the « repères » and RR/D_∞ ≃ A; pages 49–50 make R_a a torsor under ℤ_a/r(a), ℤ_a = ℤ twisted by the orientations ω(a); pages 55–58 define surmarquage, the uniform operations and recollement via an element of R_a ∧_{ℤ/r} R_{a′}; page 60 recapitulates operations 0°–7° with their reversibility.',
+    ours:
+      'The reading supplies the realisation of the D_∞-set of repères as the flags of the polygons P_a, with ε(σ₀) = ε(σ₁) = −1; the justification that gluing is unique (orientation-reversing homeomorphisms realising a given anti-isomorphism form a contractible space); and the correction of « restriction de ℤ_a/r à ℤ_a/r′ » to restriction to the subgroup of order r′. The transcription has \\ill{} words inside the definition of uniform over-marking (batch 3, « surmarquage uniforme, \\ill{} de multiplic. par d(a) ») and in the sentence reducing gluing to r(a) = r(a′) (« uniformes \\ill{} \\ill{} »); the operations themselves are legible.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Read Bakalov–Kirillov, « On the Lego-Teichmüller game » (Transform. Groups 5, 2000; arXiv math/9809057), Hatcher–Lochak–Schneps, « On the Teichmüller tower of mapping class groups » (Crelle 521, 2000), and Funar–Kapoudjian on the universal mapping class groups, for whether a groupoid with r(a) marked points per circle and the uniform erasure / over-marking operations appears there; the versions this pass knows use one marked point per boundary circle. Also compare with surfaces with marked points on the boundary in Fomin–Shapiro–Thurston (Acta Math. 201, 2008), which carry several boundary points but not these operations. A web search of 2026-10-10 returned only the Bakalov–Kirillov abstract and was not a reading of any source, so it is not listed as searched.',
+  },
+  {
+    id: '148-m05-special-structures-chart',
+    cote: '148',
+    pages: '30–32, 35',
+    kind: 'mathematical',
+    claim:
+      'The folder proposes, as base points and generators for a presentation of the Teichmüller groupoid of five points on the sphere built from pieces of modular dimension ≤ 1, a chart of 542 « special » structures in nine 𝔖₅-orbits on three levels (12 pentagonal, 20 bitetrahedral, 30 pyramidal; 60 + 60 + 120; 60 + 120 + 60) joined by 1620 arrows in fourteen orbits (gommages, fractional twists and level-2 arrows f).',
+    basis:
+      'Page 30 is the chart of the nine types with their automorphism groups G and G̃ and the counts 120/|G|; page 32 counts the arrows by type, 5 × 60 + 11 × 120 = 1620, and sets the « Programme de travail »: find the fundamental relations, write every arrow as a composite of arrows coming from modular dimension ≤ 1, then eliminate level-0 vertices and the tetrahedral pieces II₁. Page 35 gives the counts 12, 60 + 120, 60 by stratum. The relations are announced and never written.',
+    ours:
+      'The edition places the three levels on the strata of the compactified M_{0,5} and over its 10 curves and 15 pants decompositions, and the comparison with the Hatcher–Thurston complex is the reading\'s. The line of γ^{1′}_r is read on the page as « 3 × 120 = 3 × 40 » over a blackened equality; 360 is restored by the edition from the total. For γ⁰_r, γ²_r and γ^{2′}_r the reading reports that the sources and targets drawn on the chart do not match the factors of the tally, so the page\'s count is reproduced, not verified. « 1620 » is written over a struck « 1580 ». The arrow sources and targets on page 30 are flagged by the transcription as the reading to check first.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'First recount the 1620 arrows from the chart on the facsimile of page 30, since the reading could not reconcile three arrow types. Then compare with presentations of the genus-0, five-point Teichmüller groupoid on special or tangential base points: Lochak–Schneps, « The universal Ptolemy–Teichmüller groupoid » (1997), Hatcher–Lochak–Schneps (Crelle 521, 2000), and Bakalov–Kirillov (2000). If one of them uses this set of 542 base points or an equivalent one, mark the entry matched. A web search of 2026-10-10 for « 542 » with M_{0,5} and tangential base points found nothing; that is not a reading of those papers.',
+  },
+  {
+    id: '148-pages-36-37-reversed',
+    cote: '148',
+    pages: '36–38',
+    kind: 'codicological',
+    claim:
+      'Pages 36 and 37 are filed in the reverse of the order of the argument: the reading order is 37, 36, 38.',
+    basis:
+      'Page 37 opens with the title « Autom d\'ordre deux d\'une sphère holomorphe », introduces T₁ = L₁*, T₂, e = ξ ∧ η ∈ T₄ and ξ + η, and stops in mid-sentence (« donc (ξ + η)² », struck). Page 36 begins with the invariant λ = (ξ + η)²/ξ ∧ η and introduces the base e₁ with e₁^{⊗4} = e; page 38 opens by changing e₁ into ζe₁. None of the three leaves carries a page number in his hand.',
+    ours:
+      'The observation is the transcription\'s (batch 2 header and the notes on pages 36–38), and the reading reads the pages in the order 37, 36, 38. The first words of page 36 are « \\uncertain{le} \\ill{} est », so the join with the end of page 37 rests on content, not on a sentence read across the break. The facsimile was not consulted by this pass.',
+    literature: ['Transcription 148, batch 2 (batch-02.fr.tex), header and pages 36–38'],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile whether pages 36 and 37 are the two faces of one listing sheet, in which case the « reversal » is just which face was scanned first, or two separate sheets filed in the wrong order.',
+  },
+// 149: three entries. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (% Pass header of 149.modern.tex, 2026-10-10); no disagreement with the reading. Dropped as matches already named in the reading: Thm 1 (trivial centralisers of open subgroups of G_K), Thm 2 (faithfulness of K ↦ G_K over G_Q), Thm 3 (injectivity of points into section classes for subvarieties of semi-abelian varieties), the cuspidal splittings as a torsor under K*^ (tangential base points), the Zariski–Riemann proposition, the dual complex, the « dominant » Hom form (Mochizuki 1999), Oda's good-reduction criterion. Dropped as not established by the folder: every conjecture of §§2–4, the injectivity of G_k → Out(Δ_K) (p. 20), the conormal identification of c_i (p. 80, sign undecided), presumptions 1°) and 2°) of p. 129. Dropped as repairs: the Lemma of p. 36 as stated (false for types (1,1), (1,2)), d) ⇒ a) of p. 100, p. 121, p. 123, p. 129 2°).
+{
+  id: '149-dominant-faithfulness-curves',
+  cote: '149',
+  pages: '21–26, 36–39',
+  kind: 'mathematical',
+  claim:
+    'Over an algebraically closed field of characteristic 0, if X is normal and connected, Y a hyperbolic curve, and f, g : X → Y with f dominant induce the same outer homomorphism of profinite étale fundamental groups, then f = g — proved geometrically, through the generalised Jacobian of Y, a Lefschetz fixed-point count in genus ≥ 2 and the loop subgroups of the cusps, without passing to a field of finite type over Q.',
+  basis:
+    'Pages 21–26 state Corollary 1 b) and reduce it, via Corollary 1 a) (maps to a semi-abelian variety are fixed by H_1 up to translation), to (∗): an open V ⊂ Y and u in the Jacobian with V + u ⊂ Y and π_1 of the inclusion and of the translate agreeing extérieurement on an open subgroup force u = 0; pages 27–33 prove it arithmetically (Kummer, Mordell–Weil), and the « Complément » of pages 36–39 proves the Lemma behind (∗) geometrically (« Ouf ! »). The sentences carrying the argument have a few \\uncertain{} and \\ill{} words (pages 23, 26, 36, 37), none on the statements themselves.',
+  ours:
+    'Substantial. The page’s Lemma (p. 36) drops the π_1 hypothesis of (∗) and is then false for types (1,1) and (1,2); the edition gives the counterexamples, corrects J \\ f(I) to J \\ f^{-1}(I) (p. 38), notes that shrinking V does not remove the exceptional case card I = 1, and writes the paragraph closing types (1,1) and (1,2) from the hypothesis of (∗) — that paragraph is the edition’s. The page also asserts the argument for hyperbolic polycurves of any dimension, resting on an embedding into a semi-abelian variety that fails in dimension ≥ 2 (universal elliptic curve minus zero section over Y(N)); the claim is therefore restricted to curves. Characteristic 0 is the page’s own restriction (pp. 33–35 leave characteristic p open).',
+  literature: [
+    'Web search, 2026-10-10, « dominant morphisms to hyperbolic curve determined by induced outer homomorphism of étale fundamental group algebraically closed field faithfulness »: returned Mochizuki, The Grothendieck Conjecture on the Fundamental Groups of Algebraic Curves (kurims), arXiv 1902.02058, arXiv 1211.4963, arXiv 2603.05968, read only as search summaries; none stated the faithfulness over an algebraically closed field. Not a search of the literature in the sense of the skill.',
+  ],
+  status: 'unsearched',
+  settle:
+    'Over ℂ the statement for the discrete fundamental group follows from the classical rigidity of non-constant holomorphic maps into hyperbolic Riemann surfaces (homotopic ⇒ equal; cf. the de Franchis–Severi circle, Imayoshi’s generalisations, harmonic-map uniqueness); check those sources, and Stix’s Rational Points and Arithmetic of Fundamental Groups (LNM 2054) and Mochizuki 1999 (§ on « Hom » forms), for the profinite form, i.e. for whether equality of outer maps into the profinite completion — a weaker hypothesis than homotopy — is already known to suffice. If either is stated, mark matched.',
+},
+{
+  id: '149-cusp-specialisation-index',
+  cote: '149',
+  pages: '72–77, 84–93',
+  kind: 'mathematical',
+  claim:
+    'For a relative hyperbolic curve U = X \\ T over a trait (or at a codimension-1 point s of a base, residue characteristic 0) and a rational section f meeting the cusp section g_{i_0} in the special fibre with intersection multiplicity n, the inertia at s maps to n times the cuspidal loop subgroup L_{i_0}, so that the section of the generic fibre specialises to a cuspidal (« second kind ») section of U_s whose decomposition group is an index-n subgroup of the normaliser of L_{i_0}; and inertia acts trivially exactly when f extends.',
+  basis:
+    'Page 73 states the local criterion (f extends ⇔ the section comes from π_1(U) over π_1(S) ⇔ it kills inertia); pages 76–77 define n = long V/g_{i_0}^*(J_f) = long A/(J_{i_0} + J_f) and « présume » that H_1 of the punctured trait maps to n times the canonical injection of index i_0 (« Il faudrait que je demande à Carlos de me le confirmer »), and that for ν = 1 the same holds on π_1 (« je vais admettre »); pages 84–93 draw the equivalences a)–f) and identify μ with the multiplicity of f^*T at s. The presumption and the definition of n are read clearly; the sentence on p. 77 saying n is intrinsic is mostly \\uncertain{}.',
+  ours:
+    'The proof of the presumption — f^*t = unit · ϖ^n for a local equation t of g_{i_0}(S), whence the loop around s goes to n times the loop around the cusp in the tame fundamental group of the punctured neighbourhood, on π_1 and not only on H_1 — is the edition’s footnote (p. 77). The page carries the statement, the definition of n and the equivalences, not their verification.',
+  literature: [
+    'Web search, 2026-10-10, « section conjecture rational point specializes to cusp inertia maps to multiple of cuspidal inertia intersection multiplicity good reduction relative curve »: returned Saïdi arXiv 1010.1313 and 1010.1314, Borne–Emsalem–Stix (lifting, preprint 2015), Porowski (RIMS preprints), arXiv 1301.4429, read only as search summaries; Nakamura’s characterisation of cuspidal sections as those cyclotomically normalising an inertia subgroup was cited there, the specialisation with index n was not. Not a search of the literature in the sense of the skill.',
+  ],
+  status: 'unsearched',
+  settle:
+    'Read Stix, LNM 2054 (chapters on cuspidal sections and on the specialisation of sections / good reduction), Nakamura’s papers on cuspidal sections and tangential base points, and Saïdi’s « Good sections » for the statement that the specialisation of a point-section at a place where the point meets a cusp is a cuspidal section through an index-(intersection multiplicity) subgroup of the cusp’s decomposition group. It is a local computation in tame ramification and is likely stated; if so, mark matched.',
+},
+{
+  id: '149-leaf-82-83-misplaced',
+  cote: '149',
+  pages: '69–72, 82–84',
+  kind: 'codicological',
+  claim:
+    'The leaf of pages 82–83, which bears his number 41, belongs by its text and its formula numbers between pages 71 and 72 (his 35 and 36): page 71 ends the genus ≥ 1 case « OK. », page 82 opens « Si le genre est zéro », page 83 ends on U_{O_x} and page 72 opens on diagram (9) built on U_{O_x}; its formulas (7), (8) fall between (6) of page 66 and (9) of page 72; while page 84 (his 42) continues page 81 directly.',
+  basis:
+    'The transcription records « p. 41 de l’auteur » on page 82, « p. 35 » on 70, « p. 36 » on 72, « p. 40 » on 80, « p. 42 » on 84; formulas (7) and (8) on page 83, (6) on page 66, (9) on page 72, (20)–(21) on page 81 and (22) on page 84; and at the foot of page 83 notes that the argument continues « sur un autre sujet » in page 84 and that a page may be missing. His continuous numbering 35, 36 across pages 70–72 leaves no gap for the leaf, so either the number 41 is not what it seems or the leaf was numbered where it was later filed.',
+  ours:
+    'The placement between 71 and 72 is the modernised reading’s, from the formula numbers; the join 83 → 72 through U_{O_x}, and the tension with his own numbering, are this pass’s observations from the transcription. The facsimile was not consulted.',
+  literature: [
+    'Transcription 149, batches 4 and 5 (batch-04.fr.tex, batch-05.fr.tex), pages 66, 69–72, 80–84',
+    'Modernised reading 149.modern.tex, header and « L’ordre des feuillets »',
+  ],
+  status: 'candidate',
+  settle:
+    'A person checks on the facsimile the number written on page 82 (41, or something read as 41), whether pages 82–83 are the recto and verso of one leaf, and whether the last two lines of page 83 (not read with assurance) lead into diagram (9) of page 72.',
+},
 ];
