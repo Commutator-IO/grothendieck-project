@@ -21,7 +21,7 @@ import { BOOKS } from '../content/books.ts';
  * one's own pages second — the choice the Hopper site made for its ledgers and
  * diaries. Every URL is what it was.
  */
-type Collection = 'fonds' | 'notebooks' | 'quillen';
+type Collection = 'fonds' | 'notebooks' | 'quillen' | 'bourbaki';
 
 const COLLECTIONS: { id: Collection; label: string; path: string }[] = [
   { id: 'fonds', label: 'Fonds', path: '/' },
@@ -30,8 +30,12 @@ const COLLECTIONS: { id: Collection; label: string; path: string }[] = [
   // A second corpus, Daniel Quillen's notebooks at the Clay (#36): the other
   // side of the 1968 and 1983 exchanges, with a reading room of its own.
   { id: 'quillen', label: 'Quillen', path: '/quillen/' },
+  // A third: the Bourbaki archive (AHP, Nancy), mostly typescripts — the
+  // rédactions he wrote for Bourbaki, and the ones he wrote on the back of.
+  { id: 'bourbaki', label: 'Bourbaki', path: '/bourbaki/' },
 ];
 const QUILLEN_PAGES: { path: string; label: string }[] = [{ path: '/quillen/', label: 'Research notebooks' }];
+const BOURBAKI_PAGES: { path: string; label: string }[] = [{ path: '/bourbaki/', label: 'Archive' }];
 
 // The readings of the whole fonds, and then — after a rule — the pages about
 // the project rather than about the folders.
@@ -55,6 +59,7 @@ const PROJECT_PAGES: { path: string; label: string }[] = [
 export const collectionOf = (path: string): Collection => {
   const h = path.endsWith('/') ? path : `${path}/`;
   if (h.startsWith('/quillen/')) return 'quillen';
+  if (h.startsWith('/bourbaki/')) return 'bourbaki';
   return h === '/notebooks/' || BOOKS.some((b) => b.path === h) ? 'notebooks' : 'fonds';
 };
 
@@ -140,6 +145,8 @@ export function Header({ path }: { path: string }) {
             </>
           ) : collection === 'quillen' ? (
             QUILLEN_PAGES.map((p) => <Tab key={p.path} {...p} here={path} />)
+          ) : collection === 'bourbaki' ? (
+            BOURBAKI_PAGES.map((p) => <Tab key={p.path} {...p} here={path} />)
           ) : (
             notebookLinks(false).map((p) => <Tab key={p.path} {...p} here={path} />)
           )}
@@ -162,7 +169,7 @@ export function Header({ path }: { path: string }) {
               <p className="px-2 py-1 text-[11px] font-semibold uppercase tracking-wider text-ink-400">
                 {c.label}
               </p>
-              {(c.id === 'fonds' ? [...FONDS_PAGES, ...PROJECT_PAGES] : c.id === 'quillen' ? QUILLEN_PAGES : notebookLinks(true)).map((p) => (
+              {(c.id === 'fonds' ? [...FONDS_PAGES, ...PROJECT_PAGES] : c.id === 'quillen' ? QUILLEN_PAGES : c.id === 'bourbaki' ? BOURBAKI_PAGES : notebookLinks(true)).map((p) => (
                 <a
                   key={p.path}
                   href={p.path}
@@ -197,12 +204,26 @@ function Mark() {
   );
 }
 
-export function Footer({ collection = 'fonds' }: { collection?: 'fonds' | 'quillen' }) {
+export function Footer({ collection = 'fonds' }: { collection?: 'fonds' | 'quillen' | 'bourbaki' }) {
   const quillen = collection === 'quillen';
+  const bourbaki = collection === 'bourbaki';
   return (
     <footer className="mt-16 border-t border-ink-200 bg-white">
       <div className="mx-auto max-w-6xl px-5 py-8 text-[12.5px] leading-relaxed text-ink-500">
-        {quillen ? (
+        {bourbaki ? (
+          <>
+            <p className="max-w-[52em]">
+              The documents are the{' '}
+              <strong className="font-semibold text-ink-700">Archives de l'Association des Collaborateurs de Nicolas Bourbaki</strong>,
+              digitised and published by the Archives Henri Poincaré (CNRS, Université de Lorraine) at
+              archives-bourbaki.ahp-numerique.fr.
+            </p>
+            <p className="mt-3 max-w-[52em]">
+              This site lists their catalogue only, read from the archive's public API, and links each
+              document to its page there. Nothing of the documents is copied.
+            </p>
+          </>
+        ) : quillen ? (
           <>
             <p className="max-w-[52em]">
               Facsimiles come from the{' '}
