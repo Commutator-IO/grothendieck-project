@@ -6722,4 +6722,665 @@ export const FINDINGS: Finding[] = [
     settle:
       'Nothing remains to settle for the unramified and étale cases: they are Murre’s Theorem 1 and Corollary 2. What could still differ is the exact form of the extension condition b) once the page’s bracket is read from the facsimile; that is /transcribe-grothendieck’s work, not a literature question.',
   },
+// Folder 82 — /find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading also made by Opus 5.5.
+// Candidate pool mostly matches (Bianchi/Milnor unimodular 3-dim Lie algebras, Cramer/adjugate, Killing form,
+// PGL2 = SO3 via the even Clifford algebra, Skolem–Noether, Giraud gerbes, Rosenlicht jacobians, subgroups of
+// odd prime order); those were dropped. Three entries survive.
+  {
+    id: '82-char2-sl2-forms-affine',
+    cote: '82',
+    pages: '26–27',
+    kind: 'mathematical',
+    claim:
+      'Over a base on which 2 = 0, forms of the Lie algebra sl(2) are equivalent to pairs (V, E) of a rank-2 bundle V and an extension E of V by det V (an affine bundle under V), forms of gp(1) = pgl(2) to extensions of O_S by a rank-2 V′, and dually paired couples of such forms to bundles of « symplectic affine planes », whose automorphism group scheme is SL(V) ⋉ V, smooth of relative dimension 5, against relative dimension 6 for the automorphisms of a single form.',
+    basis:
+      'Page 26 states the two equivalences of categories and the « couplées » construction with its diagram of extensions; page 27 gives SL(V) ⋉ V « lisse de dim 5 » and an affine group « lisse de dim rel. 6 » for the automorphisms of a form of sl(2) or gp(1). Several words carrying the statement are \\uncertain{} (« vectoriel », « d’où », « fait », « isomorphe », « groupe affine ») and the end of the first paragraph of page 27 is a run of \\ill{}, so the comparison with a form of GP(1) that page 27 makes cannot be read.',
+    ours:
+      'The reading identifies sl(2)/centre in characteristic 2 as the three-dimensional Heisenberg algebra, names the 6-dimensional group as a form of GL(V) ⋉ V, and draws the consequence that the Lie-algebra functor cannot be an equivalence in characteristic 2 (the restriction (*) of pages 57–59); none of these three is on the page.',
+    literature: [
+      'Web search, 2026-10-10 (« automorphism group scheme of sl_2 characteristic 2 Heisenberg Lie algebra forms of sl2 over base »): no source treating forms of sl(2) over a characteristic-2 base came up; results were Schröer–Tziolas on sl2-triples and SL2[F] in positive characteristic, and a survey of involutions of SL2(k) in characteristic 2. No book or paper was read.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Look in SGA 3 (Exp. XXIII–XXIV, on the automorphism scheme of a Lie algebra of a reductive group in small characteristic), in Conrad, « Reductive group schemes » (Autour des schémas en groupes I, 2014), on Lie(PGL2) and sl2 in characteristic 2, and in the literature on forms and deformations of 3-dimensional Lie algebras in characteristic 2 (e.g. Strade, Simple Lie Algebras over Fields of Positive Characteristic I, on sl2 in characteristic 2). If the description of forms of sl(2) over a char-2 base by affine bundles, or Aut ≃ form of GL(V) ⋉ V, is there, mark matched. First re-read page 27 on the facsimile, since the dimension count rests on uncertain words.',
+  },
+  {
+    id: '82-char2-conic-frobenius',
+    cote: '82',
+    pages: '77–78',
+    kind: 'mathematical',
+    claim:
+      'For a quaternion algebra over a base of characteristic 2, sending a Borel subgroup to its Lie algebra gives a morphism from the conic X to P(g̃/O_S), which is canonically isomorphic to X^(2), and that morphism is the relative Frobenius X → X^(2) — so it is finite, flat of rank 2 and radicial, not a monomorphism.',
+    basis:
+      'Page 77 sets (58) O_S·1 ⊂ g̃ and (59) X → P(g̃), a Borel going to the φ-orthogonal of its isotropic line; page 78 factors it as (60) through P(g̃/O_S), argues it cannot be a monomorphism since non-trivial P¹-bundles exist in characteristic 2, and states (61) P(g̃/O_S) ≃ X^(2) with (60) the canonical morphism. The statement of (61) is read without doubt; the page gives no proof.',
+    ours:
+      'The only verification is the edition’s, in the split case (the conic xy = z² parametrised by (s² : t² : st)); the canonicity of (61) over an arbitrary base, for a twisted conic, is asserted on the page and checked by nobody. Over a field the line O·1 is the nucleus (« strange point ») of the conic, through which all tangents pass, and projection from it being purely inseparable of degree 2 is classical; what remains in question is only the relative, canonical form.',
+    literature: [
+      'Web search, 2026-10-10 (« conic characteristic 2 nucleus projection from nucleus Frobenius morphism scheme »): found the nucleus/strange-point notion (H. Havlicek, survey « Veronese varieties over fields with non-zero characteristic », arXiv 1304.0172) and descriptions of a char-2 conic as a purely inseparable double cover of P¹; no statement of the projection as the relative Frobenius over a base was found in the result summaries. Nothing was read in full.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read Havlicek’s survey on the nucleus, and the treatment of Severi–Brauer conics and quadratic forms in characteristic 2 over a base in Knus, Quadratic and Hermitian Forms over Rings (1991), ch. IV–V; check whether the projection from the nucleus is identified there with the relative Frobenius X → X^(2) for twisted conics. If so, mark matched; over a field alone, it is matched already and the entry should say so.',
+  },
+  {
+    id: '82-leaves-out-of-order',
+    cote: '82',
+    pages: '4–5, 15–18, 37–41',
+    kind: 'codicological',
+    claim:
+      'Three runs of the folder are bound out of reading order: page 5 precedes page 4; the argument runs 15 → 17 → 16 → 18; and page 38 interrupts 37 → 39, its upper part seeming to finish the proof begun on page 41 (whose statement is on page 42).',
+    basis:
+      'Page 5 carries (11)–(15) and ends « et », page 4 opens mid-sentence and carries (16)–(19). Page 15 ends « on interprète (52) comme », page 17 opens « exprimant qu’un certain automorphisme… »; page 17 ends « La formule (56) s’écrit, en prenant le », which page 16 opens with, struck; page 16 ends on (52) rewritten, page 18 opens « qui n’est autre que la définition (58)… ». Page 39 continues the computation of page 37; the top of page 38 closes the N/N° ⊂ (Z/pZ)^× step left open at the end of page 41.',
+    ours:
+      'The seams at 4–5 and 15–18 are read off the sentences by the transcription; the attachment of the top of page 38 to page 41 is the transcription’s proposal, which the author does not mark.',
+    literature: [
+      'Transcription 82, batch 1 (batch-01.fr.tex), header « Order of the leaves » and notes at pages 4, 5, 15, 16, 17, 18',
+      'Transcription 82, batch 2 (batch-02.fr.tex), notes at pages 38 and 39; batch 3 (batch-03.fr.tex), pages 41–42',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile whether the reversed pairs are rectos and versos of the same sheets (an accident of turning the paper) or separate leaves misfiled, and whether the upper part of page 38 is in the same ink and on the same paper as pages 41–42.',
+  },
+  {
+    id: '76-semisimplicial-vertex-order',
+    cote: '76',
+    pages: '20–24',
+    kind: 'mathematical',
+    claim:
+      'Semi-simplicial sets whose simplices have pairwise distinct faces (condition (1)) and whose edge relation on vertices is transitive are equivalent to posets in which every principal ideal is a Boolean lattice of non-empty subsets (simplicial posets without the empty face), equipped with an order on the minimal elements that is total on each simplex and such that two comparable vertices lie under a common element.',
+    basis:
+      'Page 22 defines x ≺ y on D₀ by the existence of an edge from x to y, shows it is transitive under the horn-filling condition (2 bis) and an order by (1); pages 23–24 build the converse from (a), (b), (c) and check that the two constructions are inverse. The page then remarks that the opposite order gives a second semi-simplicial structure with canonically homeomorphic realisation.',
+    ours:
+      'The page labels the left-hand class « (1) et (2) », the second numeral \\uncertain{}; the reading takes it as the transitivity (2°) rather than the stronger (2 bis), with the boundary of a triangle as the reason, and corrects a δ₀ that should be δ₁ on page 24. The equivalence with (2°) is therefore the edition’s reading of an uncertain numeral; with (2 bis) the statement as written would be false.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for this correspondence in the literature on simplicial posets and Δ-complexes — Björner, Posets, regular CW complexes and Bruhat order (1984) and Garsia–Stanton (1984) on simplicial posets; Rourke–Sanderson, Δ-sets I (1971) — and in work on « ordered » or « regular » Δ-complexes, where a vertex order inducing the simplex orders is a standard device. If it is stated there, mark matched. An orienting web search on 2026-10-10 returned only general pages on semi-simplicial sets (nLab, Wikipedia « Delta set ») and nothing on the transitive vertex order; that is a reason to look, not a search of the sources.',
+  },
+  {
+    id: '76-flag-presheaf-gset-lemma',
+    cote: '76',
+    pages: '26–28',
+    kind: 'mathematical',
+    claim:
+      'For any group G with elements σ₀,…,σₙ such that σᵢ and σⱼ commute for |i − j| ≥ 2 — no involution condition — and any G-set X, the presheaf of « flags of type H », D(H) = X/⟨σᵢ : i ∉ H⟩, has D(H ∪ H′) → D(H) ×_{D(H∩H′)} D(H′) surjective whenever the largest element of H lies in H′ and H ∩ H′ is an initial segment of H′; hence D always yields a semi-simplicial set with distinct faces whose vertex relation is transitive.',
+    basis:
+      'Page 27 states the lemma with H ∩ H′ a final segment of H and an initial segment of H′; page 28 proves it by G_{K∪K′} = G_{K′₀}·G_{K₀} ⊂ G_{K′}·G_K, the two index sets being at distance ≥ 2, and a margin note records that only « a) le dernier él. de H est dans H′ ; b) H ∩ H′ est un segment initial de H′ » were used.',
+    ours:
+      'The weakened hypothesis is the page’s own margin note; the reading states the lemma under it. That the conclusion holds for every G-set and needs no σᵢ² = 1 is the reading’s summary of what the argument uses, and the page does not say so in words. The argument itself is elementary — a product of commuting parabolic subgroups — so the question is only whether the statement about the flag presheaf is written down.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Compare with Tits’s coset geometries and chamber systems, and with the theory of string C-groups and flag-transitive geometries (McMullen–Schulte, Abstract Regular Polytopes, ch. 2; Buekenhout–Cohen, Diagram Geometry), where the factorisation of parabolic subgroups for string-commuting generators is used. If the surjectivity of the flag-presheaf maps, for G-sets without the involution or intersection condition, is there, mark matched. An orienting web search on 2026-10-10 found surveys of C-groups and the intersection property (arXiv 2605.04646, arXiv 1411.6071) but not this statement; that is a reason to look, not a search of the sources.',
+  },
+// Candidate entries for folder 87 (find-novelty, Opus 5.5 on an Opus 5.5 reading, 2026-10-10). Not merged into src/content/findings.ts.
+// No mathematical entry. The candidate pool is matches the reading already footnotes: relative interiors and faces (Rockafellar), bipolar theorem and Hahn-Banach (pp. 5-7), Minkowski / finite-dimensional Krein-Milman (p. 4), Minkowski-Weyl (pp. 7-10), polar duality of face lattices and intervals as face lattices (pp. 10-12), the diamond property and abstract polytopes (Danzer, McMullen-Schulte; pp. 14, 29, 39), the hyperoctahedral group (p. 26), combinatorial maps and their flag involutions (folder 88, Esquisse; pp. 32-33), CW posets (Björner 1984; p. 37), thin posets (p. 39). The rest is elementary (the reconstruction of B -> I from partial sections, p. 25; the Sup/Inf lemma, p. 35), or is a statement the reading had to repair or that the edition supplied, which the skill excludes: the regrouping of axiom D, whose missing case d3) and torus counterexample are the edition's (p. 34); the topological-sphere Proposition and Lemma of p. 38, false as written (double suspension), true in homology; the diamond axiom c) of p. 29, read in the strong form; the closed-face description of p. 28. Nothing was looked up in the literature for this pass beyond those footnotes, which the reading says were cited from memory.
+  {
+    id: '87-cubes-cover-count-13',
+    cote: '87',
+    pages: '15, 17–19, 21–30',
+    kind: 'codicological',
+    claim:
+      'The circled pencil count « (13 p.) » on the « Cubes » cover (page 15) equals exactly the number of written pages between that cover and the next blank leaf — 17 to 19 and 21 to 30 — which suggests that, when the count was written, the second redaction of the facettes and the axiomatic « polyèdre combinatoire » (pp. 27–30) were filed under « Cubes », and the rank-3 maps and diamond pages (32–40) were not.',
+    basis:
+      'Batch 1 header and the \\note before page 17: page 15 is a tan cover with « Cubes » in ink and « (13 p.) » in pencil, circled; pages 16 and 20 are blank tan sheets. Batch 2 header: page 31 carries nothing in his hand. Pages 17–19 and 21–30 are transcribed and all carry writing: 3 + 10 = 13. The modernised reading (« Les stations ») makes the same count and adds that it may be a coincidence.',
+    ours:
+      'The count and the inference about how the leaves were grouped are the edition\'s; the page carries only the figure « (13 p.) », whose hand the transcription says is not obviously his. The inference assumes the count was made of written pages and that the blank tan page 20 was not counted; counting leaves rather than pages, or counting page 20, would break the match.',
+    literature: [
+      'Transcription 87, batch-01.fr.tex (header; \\note at the « Cubes » heading) and batch-02.fr.tex (header, page 31); modernised reading 87.modern.tex, « Les stations »',
+    ],
+    status: 'unsearched',
+    settle:
+      'A person checks against the facsimile (https://grothendieck.umontpellier.fr/87.pdf) whether pages 17–30 are physically gathered inside the page-15 cover, whether page 20 is a separate wrapper or a blank leaf of the same gathering, and whether page 31 begins a new unit; and asks the Montpellier archivists whether pencilled, circled page counts on covers are an inventory practice (which would make it a record of the binding at inventory, not of his filing).',
+  },
+// Folder 75: no entry. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (% Pass header of 75.modern.tex, 2026-10-10); no disagreement with the reading. Every statement the folder establishes is textbook material and is already named as such in the reading: torsors and Aut of a torsor up to inner automorphism (p. 2); graphs, rectilinear realisation in R^3 by general position (pp. 3-4, the moment-curve argument is the edition's); cycle graphs, two orientations, Aut = dihedral group (pp. 4-7); Z-sets and conjugacy classes of S_n (p. 8, table completed by the edition); semidirect products, the holomorph Aff(Z), reflections sigma_tg = g^2 sigma_t of a polygon (pp. 8-11); pull-back of extensions (pp. 11-12); exceptional isomorphisms S_4 = PGL(2,F_3), S_5 = PGL(2,F_5), A_5 = PGL(2,F_4) (pp. 12-13, 31); twisted forms / Tors(Aut E) equivalence, functors on a connected groupoid = G-objects, extension of structure group, Picard category of torsors under a commutative group (pp. 15-20; Giraud, Deligne SGA 4 XVIII); signed bases <-> fixed-point-free involutions, hyperoctahedral group (p. 21); torsors under a semidirect product (pp. 22-23, the commutativity hypothesis is the edition's); orientation torsors and the Koszul-sign associativity formula omega_E = omega_{I^-} ∧ ∧ omega_{E_i} (pp. 24-27; Knudsen-Mumford 1976 graded determinant, the edition's proof). The page's equivalence of conditions 1°/2° on p. 5 is false for the square and was repaired by the edition; repaired statements do not qualify. The flag isomorphism and the compatibilities of p. 27 are announced, not established. No codicological anomaly beyond those recorded in the transcription; nothing checked against the facsimile. No literature searched in this pass; the names above are the reading's, cited from memory.
+// Folder 90 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made on Opus 5.5.
+// Sources consulted: Nguyen Dai Duong and Phùng Hô Hai, « Tannakian duality over Dedekind rings and applications », arXiv:1311.1134 (read via ar5iv, §§ 1.1–1.2 and 3.1); two web searches for Thomason 1987 that did not reach the paper.
+  {
+    id: '90-components-criterion',
+    cote: '90',
+    pages: '9',
+    kind: 'mathematical',
+    claim:
+      'Page 9 asserts that, for a flat affine group G over a Dedekind ring, the algebra B satisfies the conditions of Lemma 1 (saturations of finitely generated submodules stay finitely generated) exactly when every irreducible component of G has non-empty fibres; as stated, without finite type, this fails.',
+    basis:
+      'A parenthesis in the Proposition on page 9 (« cela signifie que pour les composantes irréd. de G, leurs fibres sont non vides »), stated without proof; the Proposition assumes G flat and affine over A but not of finite type. The words are read without \\uncertain{} or \\ill{}.',
+    ours:
+      'The counterexample is this pass’s own step, not in the reading or the literature consulted: over a DVR R with fraction field K, B = {f ∈ K[T] : f(0) ∈ R} (the union of the iterated dilatations R[T/πⁿ] of G_a at the origin) is a flat Hopf algebra (B ⊗_R B = {g ∈ K[x,y] : g(0,0) ∈ R} contains f(x+y)); Spec B is irreducible with both fibres non-empty (special fibre a point, B/πB = k), yet the saturation of R·T is K·T, not finitely generated. The other direction is illustrated by the reading’s own example (Z_p × Q_p, footnote to page 9) and by Duong–Hai Example 3.1.8.',
+    literature: [
+      'Duong and Hai, « Tannakian duality over Dedekind rings and applications », arXiv:1311.1134, § 3.1: Definition 3.1.1 (specially locally finite), Prop. 3.1.7 (G of finite type with generic fibre reduced and connected ⇒ R[G] specially locally finite), Example 3.1.8 (R[T]/(πT^p − T), étale fibres, not specially locally finite), Question 3.1.6 (which flat affine R-groups of finite type are specially locally finite: stated as open there).',
+    ],
+    status: 'refuted',
+    settle:
+      'What still stands is the finite-type case: for G flat, affine and of finite type over a Dedekind ring, is « R[G] specially locally finite » (equivalently, Lemma 1 a) for R[G]) equivalent to every irreducible component of G meeting every closed fibre? That is the question Duong–Hai leave open in Question 3.1.6, and the page’s criterion would answer it; check the later literature citing arXiv:1311.1134 (dos Santos, « On the structure of affine flat group schemes over discrete valuation rings », arXiv:1701.06518, and Hai–dos Santos) before treating it as a candidate, and have a person verify the counterexample above.',
+  },
+  {
+    id: '90-equivariant-resolution-general-base',
+    cote: '90',
+    pages: '13–23',
+    kind: 'mathematical',
+    claim:
+      'For G flat affine over an arbitrary scheme S whose algebra is a filtered union of locally free finite-rank subcoalgebras with flat quotients, acting on a quasi-compact quasi-separated X → S with a G-linearised relatively ample L, every quasi-coherent G-submodule F of a quasi-coherent G-module E lies in a smallest G-stable quasi-coherent submodule, compatible with flat base change on S and of finite type when F is.',
+    basis:
+      'Pages 17–19 state 1)–3) (3: equivariant resolution by modules f*(H)(−n) when S has the resolution property); pages 19–23 prove 1) and 2) by passing to the graded module of sections Γ·(E) on S, where G acts trivially on the base, and stop mid-argument (« Rédiger mieux ce début »). Lines on pages 21 and 23 carry \\ill{} and \\uncertain{} words (« à priori », « s’identifie », « lui est ég. », « n », « F(n) »), none of them on the statement.',
+    ours:
+      'The reading supplies the explicit formula F′ = Σ_i U_i·(F ∩ E_i) that makes the page-13 statement over S work, reads « le sous-module G-invariant de Γⁿ(F) » as the smallest stable submodule of Γⁿ(E), adds S quasi-compact and E of finite type to 3), and sketches the proof of 3), which the page never proves. Only 1) and 2) on X are the page’s argument.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Read Thomason, « Equivariant resolution, linearization, and Hilbert’s fourteenth problem over arbitrary base schemes », Adv. Math. 65 (1987), §§ 1–2, and SGA 3, exposé VI_B § 11, for whether the smallest stable subsheaf and its finiteness are proved there for a non-noetherian base under this hypothesis on the coalgebra; if they are, mark matched.',
+  },
+  {
+    id: '90-saturated-subcoalgebras',
+    cote: '90',
+    pages: '1–9',
+    kind: 'mathematical',
+    claim:
+      'For G flat affine over a Dedekind ring with B satisfying Lemma 1, B is a filtered union of finitely generated saturated subcoalgebras, and every finitely generated G-module is a quotient of a finitely generated projective one.',
+    basis:
+      'Lemma 1 (p. 1), Lemma 2 (p. 3) and the corollaries of pages 5 and 9; the core of the proof of Lemma 2 is illegible, and « longueur », « Cor. Main » and « module » are \\uncertain{}.',
+    ours:
+      'The reading supplies the proofs of Lemma 1, the local-finiteness step of Lemma 2 (attributed to Serre 1968), « de type fini » in the statement of Lemma 2, and the dual-algebra argument of the page-9 corollary.',
+    literature: [
+      'Duong and Hai, arXiv:1311.1134, § 3.1, Def. 3.1.1 and Prop. 3.1.5 (specially locally finite coalgebras are Mittag-Leffler; projective if countably generated; projective coalgebras are specially locally finite) — Lemmas 1–2 in another vocabulary.',
+      'Duong and Hai, arXiv:1311.1134, § 1.1.10 and § 1.2, citing Serre, Publ. IHÉS 34 (1968), Cor. 2 and Prop. 3: comodules over a Dedekind ring are locally finite, and every finite comodule over a flat coalgebra is a quotient of a finite projective one — without the Lemma 1 hypothesis the page uses.',
+    ],
+    status: 'matched',
+    settle:
+      'Matched as far as the named sources go, the literature’s version being the more general. Check Serre 1968 § 1–2 directly (the attributions above are Duong–Hai’s) to confirm the reference.',
+  },
+// Folder 97 — /find-novelty pass, Opus 5.5 (claude-opus-5-5), 2026-10-10, on the Opus 5.5 reading
+// (97.modern.tex) and the Opus 5 transcription (batch-01.fr.tex). Dropped as matches already footnoted
+// in the reading: p. 4 (Chern classes of the regular representation; Atiyah 1961), pp. 6–12 (Milnor 1958
+// equality case, Goldman 1980), p. 16 (Whitehead with local coefficients), p. 17 (Borel's p-torsion
+// equivalences). The p. 16 reconstruction question is a question, not a statement, and is not entered.
+  {
+    id: '97-borel-cartan-simplicial-forms',
+    cote: '97',
+    pages: '15',
+    kind: 'mathematical',
+    claim:
+      'H*(B_G, ℝ) ≅ Sym*(T) for G compact connected, obtained from the bicomplex of forms on the simplicial manifold G^{p+1}/G, filtered by p: the columns reduce to invariant forms, the E₂ term is computed from the transgressive (primitive) elements, and the spectral sequence degenerates.',
+    basis:
+      'Page 15 writes the three bicomplexes C₍₀₎ ⊃ C₍₁₎ → C₍₂₎ of Ω^q, ω^(q), ω_inv^(q) on G^{p+1}/G, asserts that the differential in q is zero on the last, that the spectral sequence degenerates (d_r = 0 for r ≥ 2), and states the theorem through φ(t) = t ⊗ 1 − 1 ⊗ t; no proof of the degeneration is on the page.',
+    ours:
+      'The reading interprets ω_inv as bi-invariant forms on G^ν ≃ G^{ν+1}/G and identifies the complex in ν with the cobar construction on H*(G, ℝ); that interpretation is what makes the page’s « l’opérateur différentiel pour variable q est nul » true. In the transcription that sentence carries \\uncertain{pour variable}, a following \\ill{}, and the marginal note on E₁ is mostly \\ill{} and \\uncertain{}.',
+    literature: [
+      'R. Bott, « On the Chern–Weil homomorphism and the continuous cohomology of Lie groups », Adv. Math. 11 (1973), §1, around (1.3)–(1.4): forms on G × … × G as a double complex, filtered by p, E₁ = H*(G^p), d₁ the cobar construction on the coalgebra H*(G), E₂ the symmetric algebra on the primitive elements, all further differentials zero — attributed there to H. Shulman, On Characteristic Classes, thesis, Berkeley, 1972 (ref. [7]).',
+      'Rothenberg–Steenrod spectral sequence (E₂ = Ext_{H*(G)}(ℝ, ℝ) when H*(G) is free), seen only through search-result summaries, not read.',
+    ],
+    status: 'matched',
+    settle:
+      'Matched by Bott 1973 §1 (Shulman 1972): the same filtration, E₂ and degeneration. What a person could still check is only whether Shulman’s thesis also passes through a subcomplex of invariant forms with zero vertical differential, as the reading reconstructs page 15 — a detail of route, not a candidate.',
+  },
+  {
+    id: '97-brauer-iii-typescript-state',
+    cote: '97',
+    pages: '7, 9, 11, 13',
+    kind: 'codicological',
+    claim:
+      'The versos used for the Chern-class notes of pages 6–12 are four sheets (typed pp. 17, 19, 20, 23, bound out of order) of a corrected typescript state of § 4 of « Le groupe de Brauer III », whose hand-corrected definition of k(y)^i (« la plus petite extension galoisienne … de degré ν ») differs from a cancelled first draft (Z_y^i = Spec H⁰(X_y^i, 𝒪)).',
+    basis:
+      'The transcription reads the typed page numbers, the equation numbers (4.8)–(4.43) with (4.19)–(4.24) renumbered by hand from (4.18)–(4.23), the Tate–Shafarevich group typed as an overstruck III, his handwritten insertions (« ainsi que (4.16) … », « [24] H¹(k,G)=0 »), and the cancelled block on page 13; the manuscript pages 6, 8, 10, 12 are on the backs of these sheets.',
+    ours:
+      'The identification with Brauer III § 4 (Dix exposés, 1968) is the reading’s, from numbering, subject and style; the text has not been compared to the print. The reading’s remark that « plus petite extension galoisienne » is compatible with degree ν only when the separable closure is Galois is the edition’s mathematics, not the page’s.',
+    literature: [
+      'Web search (2026-10-10) for the passage in Brauer III § 4: found only the bibliographic record (Dix exposés sur la cohomologie des schémas, North-Holland 1968, pp. 88–188), not the text.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Compare the four sheets with the printed Brauer III § 4: whether (4.17)–(4.24) and (4.38)–(4.43) match the printed numbering, and whether the print keeps « plus petite extension galoisienne » or reverts to H⁰(X_y^i, 𝒪) for Z_y^i. Then a person checks the recto/verso pairing 6/7, 8/9, 10/11, 12/13 on the facsimile.',
+  },
+  {
+    id: '97-ega-iv-1102-margin',
+    cote: '97',
+    pages: '18',
+    kind: 'codicological',
+    claim:
+      'Typescript sheet IV-1102 of EGA IV ((21.6.5)–(21.6.6)) carries in his hand a move of the noetherian hypothesis to the head of the paragraph and a marginal note that the converse — a closed subscheme regularly immersed of codimension 1 is Y(D) for a unique positive divisor D — « devrait figurer dans 21.2 (sans noeth.) ».',
+    basis:
+      'Page 18 of the transcription: « X étant supposé noethérien » added, « Si X est noethérien » struck in the proposition, the marginal notes « devrait figurer dans 21.2 » and « réf ! ».',
+    ours:
+      'The reading adds that the converse indeed needs no noetherian hypothesis. The words « (sans noeth.) » are \\uncertain{} in the transcription.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check the printed EGA IV (Publ. Math. IHÉS 32, 1967), § 21.2 and § 21.6, for whether the converse appears in 21.2 without the noetherian hypothesis, as the margin asks, and whether 21.6.5–21.6.6 print the hypothesis where the correction puts it.',
+  },
+// Folder 102 (find-novelty pass, Opus 5.5 on an Opus 5.5 reading, 2026-10-10). One entry. Dropped as matches or
+// as outside the skill: the gluing of objects of a site along a class M and the category S~_M (pp. 2-6; the
+// étale case is Artin's algebraic spaces, and the general framework is the « geometric context » of later work,
+// e.g. Toën–Vezzosi HAG II §1.3, cited from memory); the « condition draconienne » proposition identifying
+// sheaves on the small étale site with algebraic spaces étale over X (p. 6, stated without proof, a known
+// statement); the questions for Artin (p. 8, questions, not statements); the plan and its verification principle
+// (p. 10); the Hilbert-scheme fragment of p. 11, whose theorem is missing and whose middle lines rest on many \ill{};
+// the remark that open immersions fail d) (p. 6), which is the reading's correction of the page, not a novelty.
+  {
+    id: '102-open-immersion-criterion',
+    cote: '102',
+    pages: '12',
+    kind: 'mathematical',
+    claim:
+      'Over a locally noetherian base S, a monomorphism u : G → F of functors on S-schemes that is formally étale is an open immersion as soon as F and G are fpqc sheaves commuting with filtered colimits of rings and with adic limits of artinian rings.',
+    basis:
+      'Page 12 states the criterion, hypotheses (i) and (ii), and the conclusion « Alors G → F est une immersion ouverte »; a third hypothesis (« u … épimorphisme ») is struck. The page gives no proof, and page 13 lists the hypotheses (i) as the boxed group « (A) ».',
+    ours:
+      'The whole proof is the edition’s: the reading reduces to T of finite type by the colimit condition, lifts a point of G_T through the artinian thickenings by formal étaleness, passes to the completion by the adic-limit condition, descends to the local ring by fpqc descent and the monomorphism, and spreads out by local finite presentation. The page’s « infinitésimalement étale » is read as « formally étale » (lifting along nilpotent thickenings), the reading noting that unramifiedness is automatic for a monomorphism. In hypothesis (i) the word « adiques » is \\uncertain{} on the page. This pass did not re-check the reading’s argument step by step.',
+    literature: [
+      'Stacks Project, Tag 025F (Étale Morphisms of Schemes, Theorem 41.14.1): for morphisms of schemes, open immersion ⇔ universally injective étale ⇔ flat monomorphism locally of finite presentation — the scheme case only, not the functor statement with conditions (i)',
+      'Web search (2026-10-10) for the functor form in Artin, Algebraization of formal moduli I (1969) and in Hall–Rydh, Artin’s criteria for algebraicity revisited (Algebra & Number Theory 13:4, 2019): bibliographic hits only, neither text read',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read Artin, Algebraization of formal moduli I (1969) §3–5 and Versal deformations and algebraic stacks (Invent. Math. 1974) §5, and the Stacks Project chapters « Artin’s Axioms » and « Criteria for Representability », for a statement that a formally étale monomorphism between limit-preserving fpqc sheaves with effective formal objects is an open immersion. It is likely to be there as a lemma on the way to Artin’s representability theorem, in which case mark matched; the scheme case (Tag 025F) is matched already and is not the claim.',
+  },
+  {
+    id: '94-representability-criterion',
+    cote: '94',
+    pages: '15–16',
+    kind: 'mathematical',
+    claim:
+      'For a noetherian ring A that is a quotient of a regular ring, a functor Mod(A) → Ens is Hom_A(P, −) with P finite iff it is left exact, commutes with filtered colimits, satisfies an m_p-adic and a g-adic completion condition on finite modules, sends finite modules to finite modules, has a constructible fibre-dimension function p ↦ dim F(k(p)), and, for every quotient B and finite B-module Ω, commutes generically with reduction of Ω modulo systems of parameters — preservation of products is not among the conditions.',
+    basis:
+      'Théorème 12 (pp. 15–16) assembles Prop. 3, Lemme 5, Rem. 5 bis and Cor. 10–11: the conditions give a strict pro-representing system (P_i), and condition (vi), tested against a generically defined canonical module Ω (« faisceau fondamental »), forces the system to stabilise on a dense open, after which Prop. 3 concludes by noetherian induction.',
+    ours:
+      'Several links are the edition’s: the proof of Cor. 10 (the page gives none), the Matlis-duality argument of Prop. 4, the gluing step of Lemme 5 (p. 6 largely illegible), the hypotheses « strict, of finite type » in Cor. 11, and the choice of D(g) dense and of gh′ in the proof. The sufficiency passes through Rem. 5 bis, whose hypothesis (the normal locus of every integral quotient contains a non-empty open) the reading could not verify for a mere quotient of a regular ring; the proof as written is safe for A excellent. In (vi) a word above « quotient » is unread (\\ill) and « non » in « non nilpotent » is \\uncertain.',
+    literature: [
+      'J. Hall, « Cohomology and base change for algebraic stacks », arXiv:1206.4179v2 (2013), introduction and §3, Examples 3.7–3.13: the criterion there is that a left exact coherent functor (equivalently, by Krause 2003 Prop. 3.2 as cited by Hall, one preserving small products) is corepresentable by Eilenberg–Watts, and finitely presented if it also preserves direct limits. Not the criterion of the folder, which replaces product preservation by completion, finiteness, constructibility and a canonical-module base-change test.',
+    ],
+    status: 'candidate',
+    settle:
+      'Read Auslander, « Coherent functors » (1966), Hartshorne, « Coherent functors », Adv. Math. 140 (1998) §§2–5, and Grothendieck’s Bourbaki exposé 195 for a representability criterion on Mod(A) without a products condition; also check whether the folder’s conditions in fact imply product preservation by a short argument, which would reduce Th. 12 to Hall’s Example 3.10. If either holds, mark matched. Independently, settle whether the normal-locus hypothesis of Rem. 5 bis holds for every quotient of a regular ring.',
+  },
+  {
+    id: '94-rank-constructibility',
+    cote: '94',
+    pages: '7',
+    kind: 'mathematical',
+    claim:
+      'For A noetherian with every integral quotient generically normal, and F left exact, commuting with filtered colimits, satisfying the local completion condition and local finiteness, the condition « F restricted to some non-empty open of each V(p) is representable by a finite module » is equivalent to the constructibility of p ↦ dim_{k(p)} F(k(p)).',
+    basis:
+      'Remarque 5 bis (p. 7) states the equivalence, calls (v) ⇒ (v bis) trivial, and sketches the converse: free lattices P_p of constant rank on an open U, placed in one finite module N, coincide with N_p in codimension 1 off a finite set, hence everywhere on a normal U.',
+    ours:
+      'The converse rests on the middle of p. 7, which is largely illegible: how N is obtained and why codimension-1 coincidence fails only finitely often are in \\ill passages, « codimension » and « normal » are \\uncertain, and « Nor(B) » in the hypothesis is an \\uncertain reading taken by the edition as the normal locus. The reading gives the structure of the converse, not a proof, and names the final step Hartogs extension.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'First re-read p. 7 against the facsimile (/transcribe-grothendieck) to see whether the converse can be recovered; then check whether a fibre-rank constructibility criterion for generic representability of such functors appears in Hartshorne, « Coherent functors » (1998), or in Hall–Rydh’s work on coherent functors.',
+  },
+  {
+    id: '94-generic-tor-regular-sequences',
+    cote: '94',
+    pages: '8–9, 19',
+    kind: 'mathematical',
+    claim:
+      'Over a noetherian, possibly non-reduced base S = Spec A, for any coherent sheaf R on an X of finite type over S there is a dense open U ⊂ S such that Tor_i^A(R, A_p/(t)) = 0 for all i > 0, all p ∈ U and every A_p-regular sequence t — a substitute for generic flatness, which fails over a non-reduced base.',
+    basis:
+      'Lemme 6 (pp. 8–9) proves the case X = S by passing to the J-adic gradeds (J the nilradical) once they are free over A/J; Lemme 16 (p. 19) extends it to X of finite type by asking that gr_J(A) and gr_J(R) be flat over A/J on U, which generic flatness provides.',
+    ours:
+      'The induction step of Lemme 6 is the edition’s (the page says « c’est bien standard si n = 1, et on continue par récurrence »). In Lemme 16 the page writes gr_J(O_X) where the argument needs gr_J(R), and keeps F in the formula; the reading corrects both. That the flat (not free) case still transports regularity to the module is the reading’s remark.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for this statement in EGA IV₂ §6 (around 6.9, generic flatness) and IV₃ §11, and in the Stacks project chapter « More on Flatness »; if it is there, or is an immediate consequence of a stated lemma there, mark matched.',
+  },
+// Folder 80 — candidate entries from /find-novelty (Opus 5.5, claude-opus-5-5, 2026-10-10), on the Opus 5.5 reading of the same date.
+  {
+    id: '80-skeleton-full-faithfulness',
+    cote: '80',
+    pages: '39–54',
+    kind: 'mathematical',
+    claim:
+      'The folder asserts that a combinatorial arrangement of pseudolines in the real projective plane without bigonal pseudolines is determined by its 1-skeleton together with the decomposition of the edges into pseudolines, functorially: the functor from bigon-free arrangements (maps) to bigon-free 1-dimensional arrangements is fully faithful, so every automorphism of the decomposed skeleton comes from the map.',
+    basis:
+      'Page 54, « En résumé », states the Théorème (clean, no \\uncertain{} in the statement); it is the page 39 « Th. » (full faithfulness once each non-concurrent triple carries an orientation ω, pp. 41–49, conditions (A1)–(A4)) composed with a canonical reconstruction of ω from the skeleton (pp. 49–54, (A5), (A6), with the complete quadrangle III_6 as residual case). The conditions (A1)–(A6) are asserted to hold for a map « bien entendu » and not proved; the page 49 note says the proof was not checked in the case of n concurrent lines and one transversal (which has bigons, hence lies outside the page 54 statement); the independence of choices in (34) is not checked.',
+    ours:
+      'The reading names the data (19)–(21) as generalised rotation systems and supplies the argument that c₂ ≤ c(K) (p. 42); neither enters the statement. This pass adds only a pointer, not a step: the bigon exception coincides with the case where the map has face-width 2 (a non-contractible curve through the pencil centre and one point of the transversal), which is where Whitney-type uniqueness of embedding theorems stop applying. That observation is the pass’s and is unchecked.',
+    literature: [
+      'S. Felsner, Geometric Graphs and Arrangements (2004), ch. 5–6 and Felsner–Goodman, « Pseudoline arrangements » (Handbook of Discrete and Computational Geometry, ch. 5) — local sequences; seen through a search summary only, not read for a reconstruction or automorphism statement in the projective case',
+      'P. Bose, H. Everett, S. Wismath, « Properties of arrangement graphs » (2003), via D. Eppstein, arXiv 1308.0066, Lemma 1 — a Euclidean pseudoline arrangement graph has a unique planar embedding and can be recognised in linear time; search summary only, the affine case without the line decomposition',
+      'N. Robertson, R. Vitray (1990) and B. Mohar, « Face-width of embedded graphs » (Combinatorica 15, 1995) — uniqueness of embeddings of 3-connected graphs of face-width > 2g+2; search summary only',
+      'Web search, 10 October 2026: « projective pseudoline arrangement determined by local sequences », « graph of a line arrangement determines the arrangement » — no source stating the projective, bigon-free full-faithfulness either way',
+    ],
+    status: 'candidate',
+    settle:
+      'Read Felsner–Goodman ch. 5 and Felsner 2004 ch. 6 for a statement that the local sequences (cyclic, unoriented) of a projective arrangement determine it up to isomorphism together with its automorphisms; then check whether the 1-skeleton of a bigon-free projective arrangement has face-width ≥ 3 and whether Mohar–Thomassen, Graphs on Surfaces (2001) ch. 5, gives uniqueness of the projective-plane embedding at that face-width. Either one stating the result makes the entry matched; independently, (A1)–(A6) for maps still need a proof before the folder’s argument can be said to establish it.',
+  },
+  {
+    id: '80-crucial-arrangements-theorem',
+    cote: '80',
+    pages: '22–24',
+    kind: 'mathematical',
+    claim:
+      'The folder asserts (Théorème, p. 24) that an arrangement of pseudolines not covered by two pencils and containing no five pseudolines in general position (II_5) is the complete quadrangle III_6 or the complete quadrilateral with its three diagonals IV_7; as stated this fails: the three sides of a triangle ABC together with one further line through each of A, B, C, in general position otherwise, is a counterexample.',
+    basis:
+      'Page 24: « Théorème : supposons qu’il n’existe pas deux sommets tels que les ps. droites passent par l’un d’eux, i.e. qu’on ne soit pas dans l’un des cas I_N, I_{p,q}, II′_{p,q}. Supposons de plus [struck: N ≥ 5 …] que K ne contienne pas de sous-arrangement [\\uncertain{}] du type II_5 ; elle est de l’un des types suivants : III_6, IV_7 ». A fragment below (« … N ≥ 5 qui ne contiennent pas l’arrangement I′_{3,2} ni II_5 ») suggests a hypothesis excluding II′_{3,2} was intended; the theorem as written does not carry it.',
+    ours:
+      'The counterexample is this pass’s own step, and it disagrees with the reading (same model, Opus 5.5), which states the theorem as « énoncé, non démontré » and corrects only its parenthetical consequence. Check: lines AB, BC, CA, a ∋ A, b ∋ B, c ∋ C, a, b, c not concurrent and otherwise generic (realisable by straight lines). Triple points A, B, C only, six double points, nine vertices; every line carries ≥ 3 vertices (no bigon); the three pencils at A, B, C pairwise share a line, so no two points cover all six lines; every 5-subset contains two sides together with the extra line through their common vertex, so there is no II_5; with six lines and three triple points it is neither III_6 (four triple points) nor IV_7 (seven lines). It contains II′_{3,2} (AB, CA, a through A; b, c), so the boxed corollary and the reading’s corrected parenthesis are untouched.',
+    literature: [],
+    status: 'refuted',
+    settle:
+      'What still stands is the version with the intended extra hypothesis: a bigon-free arrangement containing neither II_5 nor II′_{3,2} is II_4 or III_6 (the reading’s correction, since IV_7 contains II′_{3,2}). That version is unproved on the page and unsearched; see 80-bigon-free-five-line-dichotomy.',
+  },
+  {
+    id: '80-bigon-free-five-line-dichotomy',
+    cote: '80',
+    pages: '20, 24, 28',
+    kind: 'mathematical',
+    claim:
+      'Every arrangement of pseudolines in the real projective plane without bigonal pseudolines either is the simple arrangement of four (II_4) or contains a sub-arrangement of one of three types: five pseudolines in general position (II_5), a pencil of three and a pencil of two without the joining line (II′_{3,2}), or the complete quadrangle (III_6) — equivalently, since II_5 and II′_{3,2} are the only bigon-free arrangements of five, every bigon-free arrangement other than II_4 contains a bigon-free five-line sub-arrangement or a complete quadrangle; page 28 refines this into an ordering in which no added pseudoline is bigonal.',
+    basis:
+      'The boxed statement of page 24 (« Tout arrangement sans bigones … est soit du type II_4, soit contient un des types I′_{3,2}, II_5, III_6 »), announced already on page 20 with the same three configurations drawn, and the Lemme of page 28 (numbering D_1, …, D_N starting from II_4 or III_6 with each D_i non-bigonal in K_i), of which only an « Idée » with many \\ill{} is written. The page derives the boxed form from the p. 24 Théorème, which as written is false (80-crucial-arrangements-theorem); no independent proof is on the pages.',
+    ours:
+      'The name II′_{3,2} for the page’s undefined I′_{3,2} / II_{3,2} is the reading’s (the only bigon-free five-line arrangement other than II_5, which this pass rechecked); so is the observation that III_6 contains neither II_5 nor II′_{3,2}. The « equivalently » reformulation is this pass’s.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Prove or refute the dichotomy directly for pseudoline arrangements (the pass checked only that the counterexample to the p. 24 Théorème satisfies it), then search Grünbaum, Arrangements and Spreads (1972), and the literature on near-pencils and Sylvester–Gallai-type structure of arrangements without simple sub-arrangements of size five.',
+  },
+  {
+    id: '80-lattice-criterion',
+    cote: '80',
+    pages: '24, 26',
+    kind: 'mathematical',
+    claim:
+      'For an arrangement of pseudolines in the real projective plane, the closed cells of the induced cell decomposition intersect pairwise in the empty set or in a single closed cell (the « cas latticiel ») if and only if no pseudoline is bigonal and the arrangement is not the simple arrangement of four (II_4).',
+    basis:
+      'Page 26, « Prop. Pour qu’on soit dans le cas latticiel, il faut et suffit que a) Pas de ps. droites \\uncertain{bigonales}, et b) pas de type II_4 », stated without proof; « facettes » and « latticiels » on pp. 24 and 26 are \\uncertain{}. The companion Proposition on page 26 (adjacency of two vertices on an added non-bigonal pseudoline read off a closed face of the old arrangement) has an illegible end.',
+    ours:
+      'The reading of b) as « K is not of type II_4 » rather than « contains no II_4 » is the reading’s (II_5 contains II_4 and the page calls it latticial), and so is the check that II_4 fails the condition (two quadrilaterals sharing two opposite vertices). The necessity of a) is visible on three lines (any two of the four triangles share an edge and the opposite vertex); sufficiency is not checked by this pass.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check sufficiency on the small cases (III_6, II′_{3,2}, the six-line arrangement of 80-crucial-arrangements-theorem), then search for the intersection property of the cell complex of a projective (rank 3) oriented matroid — Björner, Las Vergnas, Sturmfels, White, Ziegler, Oriented Matroids, §4.3–4.5 on the face lattice and regular cell complexes, and Felsner–Goodman ch. 5.',
+  },
+  {
+    id: '101-sheaf-duality-dim-one',
+    cote: '101',
+    pages: '10–11',
+    kind: 'mathematical',
+    claim:
+      'On X = Spec A, A a complete discrete valuation ring with fraction field K, the local duality maps Ext^{1−i}(X; F, O_X) → Hom_A(H^i_x(F), K/A) are isomorphisms for every O_X-module F, quasi-coherent or not, and the proof uses the completeness of A through Ext^1_A(K, A) = 0.',
+    basis:
+      'Page 10 identifies O_X-modules on the two-point space with triples (M_0, M_1, u : M_0 → M_1), so that H^0_x(F) = Ker u and H^1_x(F) = Coker u; page 11 computes Ext^•(X; F, O_X) from the injective resolution O_X → K_X → K_X/O_X and proves φ^0 and φ^1 bijective by three facts a), b), c), with « Â complet » and « K̂ = K » written above b). Many of the linking words of a)–c) are \\uncertain{} and several are \\ill{}; the mathematical content of each step is legible.',
+    ours:
+      'The end of c) (injectivity of φ^1) is only partly legible and the reading restores the argument in logical order. The remark that, for a discrete valuation ring, Ext^1_A(K, A) = 0 is equivalent to completeness is the reading’s footnote, cited from memory. The page’s opening sentence claims the isomorphisms for every n; that claim is false for n = 2 (see 101-sheaf-duality-dim-two-fails), and this entry is restricted to n ≤ 1, where the page actually carries the proof.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for a statement of local duality for all O_X-modules (not only quasi-coherent ones, nor only complexes with coherent cohomology) on the spectrum of a complete discrete valuation ring: Hartshorne, Residues and Duality, Ch. IV–V (local duality, V.6); SGA 2, Exp. II–IV; Alonso, Jeremías and Lipman, « Local homology and cohomology on schemes » (1997). If it is there, or is an evident special case of a published statement, mark matched. A web search of 2026-10-10 (result titles only, no source read) returned only quasi-coherent treatments; that is a reason to search, not a search.',
+  },
+  {
+    id: '101-sheaf-duality-dim-two-fails',
+    cote: '101',
+    pages: '10, 14–15',
+    kind: 'mathematical',
+    claim:
+      'For A a complete regular local ring of dimension 2, f ∈ m non-zero, U = X_f and F = j_!O_U on X = Spec A, the local duality map A_f = Ext^0(X; F, O_X) → Hom_A(H^2_x(F), E(k)) is injective but not surjective, so local duality with algebraic Matlis duals fails for non-quasi-coherent O_X-modules in dimension 2.',
+    basis:
+      'Page 10 reduces the question by dévissage to the sheaves j_!O_U with U = X_f; page 14 computes H^0_x(F) = H^1_x(F) = 0, H^2_x(F) ≅ H^1(X′, F), the exact sequence 0 → A → ∏ O_{x_i} → H^2_x(F) → I → 0, its dual, and the map d_g : h ↦ [h][1/g], and concludes « φ est injection » and « φ n’est pas surjective » (the latter doubly underlined); page 15 says topological duals are needed. The sentence that carries non-surjectivity opens with two \\ill{} words before « l’image de d est ≠ Ker α^{0*} », and no proof of it is on the page.',
+    ours:
+      'The reading reports the non-surjectivity as the page’s assertion and adds no proof. The parenthesis justifying H^i(X, F) = 0 for i > 0 (Γ(X, −) is the stalk at x) is the reading’s. This pass’s own sketch, unchecked: the dual of the localisation O_{x_i} = A_{p_i} contains the completion of the discrete valuation ring A_{p_i}, which the image of A_f does not reach — so non-surjectivity is plausible, but it is not proved here either.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'First prove or refute the non-surjectivity (the page gives only the qualitative reason); then search the same sources as 101-sheaf-duality-dim-one — Hartshorne, Residues and Duality V.6; SGA 2, Exp. II–IV; Alonso, Jeremías and Lipman (1997) — for local duality stated for arbitrary O_X-modules, and for the topological-dual version page 15 announces. If a published statement already restricts local duality to quasi-coherent or coherent data because of such an example, mark matched.',
+  },
+  {
+    id: '101-plan-articles-five-six',
+    cote: '101',
+    pages: '16–34',
+    kind: 'codicological',
+    claim:
+      'Pages 18 to 34, under the cover « Notes antiques 1958 », are the drafts of articles 5 and 6 of § 2 of the plan on page 17, the sixth under its own heading.',
+    basis:
+      'Page 17’s plan lists for § 2 « 5. Module fondamental et th. de dualité locale » and « 6. Anneaux de Gorenstein »; page 30 is headed « 6. Caractérisation des modules fondamentaux d’anneaux Coh. Mac. Anneaux de Gorenstein. », and pages 18 to 29 define the module fondamental and prove the local duality theorem (Th. 4 and its corollaries).',
+    ours:
+      'The identification of pages 18–29 with article 5 is the reading’s inference from their content; no leaf carries the numeral 5. The theorems 1 and 3 and the § 1 that the pages cite are not in the folder.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'A person checks on the facsimile that the heading of page 30 begins with « 6. » and that nothing on pages 18–21 carries a section number; separately, whether the leaves’ order and paper are continuous from page 17 to page 34.',
+  },
+  // Folder 71 (find-novelty, Opus 5.5 on an Opus 5.5 reading, 2026-10-10). No mathematical entry: every
+  // statement of his on the Jordan theme (theta-curve step, regular open sets, pseudo-partitions,
+  // cutting and regluing, exterior and interior diagonals of a polygon, the Hurwitz action of page 10)
+  // is classical by the reading's own footnotes, and the links that make a proof of the polygonal
+  // Jordan theorem out of pages 13, 31 and 18 are the edition's, not the page's. Nothing was searched.
+  {
+    id: '71-numbered-run-reversed',
+    cote: '71',
+    pages: '5, 7, 9, 11',
+    kind: 'codicological',
+    claim:
+      'His numbered sequence 1)–6) on cutting and regluing runs through the folder back to front: items 1) and 3) are on page 9, 3) continued and 4) on page 11, 5) on page 7, and the end of 5) and 6) on page 5, so the reading order is 9, 11, 7, 5; item 2) is not in the folder.',
+    basis:
+      'The numbers are in his hand on the pages (transcription batch 1, pages 5, 7, 9, 11). Page 7 opens 5) and its last line reaches the bottom edge of the leaf; page 5 opens « 𝒳 peut aussi s’identifier à la somme amalgamée … », which continues 5). Pages 6, 8 and 10, between them, carry a cancelled computation, a printed bank leaflet of January 1978 and an unrelated algebra page. The words « peut aussi s’identifier à » and « somme amalgamée » that carry the 7 → 5 continuity are \\uncertain{} in the transcription.',
+    ours:
+      'The transcription records the run as « his numbering, pages out of order »; the reading follows his numbers and orders its section 9, 11, 7, 5. That 2) is absent from the folder, rather than illegible or struck, is the transcription’s statement; this entry adds nothing to it beyond putting it in one place.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'A person checks against the facsimile whether pages 5–7 and 9–12 are rectos and versos of the same sheets (in which case the reversal is in how the sheets were turned, not bound), whether page 7 does run on to page 5, and whether any trace of an item 2) survives on pages 6, 10 or 12 or elsewhere in the neighbouring folders (81, 89).',
+  },
+  // Folder 100 — /find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over transcripts/100/100.modern.tex (Pass: Opus 5.5) and batch-01..03.fr.tex. No literature search was carried out in this pass: every entry is unsearched.
+  {
+    id: '100-full-faithfulness-connected-components',
+    cote: '100',
+    pages: '2–3, 20',
+    kind: 'mathematical',
+    claim:
+      'Over a locally noetherian S with U ⊂ S open and every residue characteristic on S − U equal to p, the functor A ↦ (A_U, A[p^∞], id) from abelian schemes over S to triples is fully faithful as soon as U meets every connected component of S, with no normality, reducedness or schematic density assumed; page 20 sharpens this to: v : A[p^∞] → B[p^∞] is algebraic if the closure of every associated point of O_S meets the algebraicity locus S_v in a point of characteristic p.',
+    basis:
+      'Page 3 states the Lemma (a closed subscheme S_v through which exactly the base changes making v algebraic factor), the Complément (S_v contains an open neighbourhood of each of its points of residue characteristic p) and the Corollary, and argues that S_v is open and closed, hence a union of connected components, hence all of S. Page 20 restates the Lemma for p, adds that S_v commutes with base change, and states the associated-point Corollary without proof. The verb of the Complément, « majore », is \\uncertain{}, and the reference for the Lemma, « Cf Invariants 1.2 (\\ill{} démonstration \\uncertain{analogue}) », is partly illegible.',
+    ours:
+      'The Lemma (existence of S_v) is not proved on the page; it rests on « Invariants 1.2 », which the reading does not identify. The justification of the Complément by the Serre–Tate theorem and Krull’s intersection theorem is the reading’s. The page joins three inequivalent hypotheses (« U rencontre toutes les composantes connexes, i.e. U dense, i.e. prof_T(S) ≥ 1 »); the reading keeps the weakest, which is the one the page-3 argument uses. The proof of the page-20 Corollary is the reading’s.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for the statement « Hom_S(A, B) → Hom_S(A[p^∞], B[p^∞]) is bijective once it is bijective over an open U meeting every connected component, the residue characteristics off U being p » in Faltings–Chai, Degeneration of Abelian Varieties (ch. I and V), de Jong, Invent. Math. 134 (1998), Messing, LNM 264, and Grothendieck’s Nice 1970 address. If it is stated there, or is an immediate corollary of Serre–Tate as written there, mark matched. Separately, the existence of the closed subscheme S_v needs a source.',
+  },
+  {
+    id: '100-proper-epimorphism-hom-descent',
+    cote: '100',
+    pages: '22–24',
+    kind: 'mathematical',
+    claim:
+      'If f : S′ → S is proper between locally noetherian schemes and O_S → f_*O_{S′} is injective (no flatness, no universal hypothesis), then Hom_S(S, X) → Hom_S(S′, X) ⇉ Hom_S(S″, X) is exact for every unramified, locally finite type S-scheme X; hence pull-back along f is fully faithful on abelian schemes, X being the scheme of homomorphisms.',
+    basis:
+      'Page 22 states Lemma 1 (for X formally unramified), defines « épimorphisme » by the injectivity of O_S → f_*O_{S′}, factors g′ through Spec of the kernel algebra 𝒜 = Ker(f_*O_{S′} ⇉ h_*O_{S″}), and reduces to Corollary 1 (integral radicial epimorphisms induce bijections on Hom into X); page 24 states Corollary 2 (abelian schemes) and Corollary 3 (p-divisible groups). The word « propre » in Lemma 1 is an interlinear addition read \\uncertain{}, as are « fini » and « entier » in the reduction and in Corollary 1; the proof on page 24 is almost entirely struck or \\ill{}.',
+    ours:
+      'The reading supplies the radiciality of Spec 𝒜 → S, the whole proof of Corollary 1 (étale-local embedding of X and topological invariance of the étale site, EGA IV 18.1.2), the surjectivity of f, and the representability and non-ramification of Hom_gr(A, B). Through Corollary 1 the reading needs X unramified and locally of finite type, where the page writes « formellement non ramifié » (its own margin asks « inutile si X loc. de t.f. ? »). Corollary 3 needs Hom of p-divisible groups formally unramified, which the page does not prove.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Compare with descent for unramified and étale morphisms along non-flat maps: SGA 1 IX §§2–4, EGA IV 18.12, and Rydh, « Submersions and effective descent of étale morphisms », Bull. SMF 138 (2010), which works with universally subtrusive maps. The point to decide is whether exactness of Hom into unramified X is known for proper f under bare schematic dominance (O_S ⊂ f_*O_{S′}), which is not stable under base change. If Rydh or SGA 1 covers it, mark matched.',
+  },
+  {
+    id: '100-formal-abelian-curve-criterion',
+    cote: '100',
+    pages: '30–38',
+    kind: 'mathematical',
+    claim:
+      'A formal abelian scheme over Spf R, R a complete noetherian local ring, is algebraizable if and only if its pull-back to Spf B′ is algebraizable for every one-dimensional integral quotient B of R with normalisation B′ (equivalently, if and only if it becomes algebraizable after some proper surjective S′ → Spec R).',
+    basis:
+      'Page 30 states the theorem with conditions (i)–(iii) and proves (i) ⇒ (ii) ⇒ (iii). Pages 32–34 sketch (iii) ⇒ (ii′) by the formal scheme P̂ of polarisations, a countable union of finite unramified P^α, and the Proposition of page 36; then (ii′) ⇒ (i) by reduction to S reduced and gluing over irreducible components. Pages 36–38 give the S_red lemma by obstruction theory and the Baire argument. « schéma abélien formel » is an interlinear correction; the theorem writes « quotient intègre B de A » for R.',
+    ours:
+      'Substantial. The reading restores « lisse » struck in the S_red lemma, restores « complet » struck in the page-36 Proposition (false without it), supplies why each component S′_i → S is a closed immersion (P^α unramified, Nakayama), flags the gluing of page 34 as a Ferrand pinching that the page does not justify, and leaves unidentified the « Raynaud » descent used to trivialise residue extensions. What is on the page is a proof sketch with these gaps; the theorem as stated is the reading’s restatement.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check whether this curve criterion for algebraizing a formal abelian scheme (or for the existence of a formal polarisation) is in the literature: EGA III 5.4.5 and its uses for polarisations, Faltings–Chai ch. I and V, Moret-Bailly, « Pinceaux de variétés abéliennes » (Astérisque 129), and work on Néron–Severi jumping such as Maulik–Poonen (2012). Before that, someone should check the (ii′) ⇒ (i) step, the weakest link: it rests on an unidentified descent result and on a gluing the page waves through.',
+  },
+  {
+    id: '100-baire-dimension-one-points',
+    cote: '100',
+    pages: '36–38',
+    kind: 'mathematical',
+    claim:
+      'In the spectrum of a complete noetherian local ring, a countable family of closed subsets whose union contains every point x with dim closure(x) ≤ 1 has a finite subfamily covering the whole spectrum; equivalently, countably many nowhere-dense closed subsets of an integral such spectrum miss some point of dimension one.',
+    basis:
+      'Page 36 states the Proposition and treats dim S ≤ 1; page 38 states the Corollary and proves it by passing to V[[T_1,…,T_n]] (V a complete discrete valuation ring), parametrising V-homomorphisms to V by the complete metric space 𝔪^n and showing that each condition f(φ_1,…,φ_n) = 0 cuts out a nowhere-dense closed subset; the end of page 36 is \\ill{}, and « dénombrable », « rares » and « métrique » are \\uncertain{}.',
+    ours:
+      'The page strikes « anneau local noeth. complet » and writes « schéma local (noethérien) » over it; the reading restores completeness, which the proof uses and without which the statement fails (the local ring of ℚ[x,y] at the origin). So the statement as finally written on the page is false and the true one is the page’s first wording. The finiteness of R over V[[T_1,…,T_n]] (Cohen) is legible only in part; the name Baire, and the remark that a non-zero power series vanishes on no open subset of 𝔪^n, are the reading’s.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Most likely a match. Check Sharp and Vámos, « Baire’s category theorem and prime avoidance in complete local rings », Arch. Math. 44 (1985), and Burch’s countable prime avoidance for complete local rings: if the dimension-one avoidance follows directly from countable prime avoidance, mark matched with that reference.',
+  },
+  {
+    id: '100-neron-extension-p-divisible',
+    cote: '100',
+    pages: '47–52',
+    kind: 'mathematical',
+    claim:
+      'Over a trait S, for any Néron model G (smooth, separated, of finite type, with the Néron mapping property) and any p-divisible group M over S, every homomorphism M_K → G_K of generic fibres extends uniquely to M → G, with no assumption that G_K be an extension of an abelian variety by a torus — granted Tate’s full-faithfulness theorem for p-divisible groups over S.',
+    basis:
+      'The typescript of pages 47–50 proves the extension when G_K is an extension of an abelian variety by a torus (Lemmas 1–3, semistable case, then Weil restriction and smoothening), and says itself that Tate’s theorem is proved only when K has characteristic 0. The handwritten Lemma of page 51 factors any φ : M → G through such an extension H ⊂ G when char K = p, or K is perfect and G contains no 𝐆_a; page 52 applies it to the Néron model of H_K and concludes « On gagne ! ». The hypothesis of the Lemma is a boxed addition read as an alternative; the target of i on page 52 is written as K and read as G.',
+    ours:
+      'The reading supplies « commutatif » in Lemma 1 (asked for in a pencil margin), the existence of the quotient in Lemma 2 (Anantharaman 1973), the factorisation through the centre of Z rather than Centr(Z), the whole proof of the first case of the page-51 Lemma, the correction that only G_red is an extension in the second case, and why H_K has a Néron model of finite type (no 𝐆_m in G_K; BLR, Néron Models §10.2). Neither the author of the typescript nor the hand of its pencil notes is established; the folder’s own contribution is the Lemma of pages 51–52. When K has characteristic p the claim rests on Tate’s theorem in that case, which the reading attributes to de Jong (Invent. Math. 134, 1998).',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for the extension of homomorphisms from p-divisible groups into Néron models in SGA 7 I, exposé IX (Grothendieck, « Modèles de Néron et monodromie », §5 on p-divisible groups and good reduction) and in Bosch–Lütkebohmert–Raynaud, Néron Models (ch. 7 and 10). If the statement for an arbitrary Néron model is there, mark matched; if only the semi-abelian case is, the reduction of pages 51–52 is the point to check.',
+  },
+  {
+    id: '98-versos-bourbaki-redactions',
+    cote: '98',
+    pages: '3, 5, 7, 9, 14, 16, 18, 20, 22, 24',
+    kind: 'codicological',
+    claim:
+      'The typed versos of folder 98 match by number and subject two Bourbaki rédactions listed in the Delsarte inventory: n° 268, « Rapport sur les variétés abéliennes » (pages 16, 18, 20, 22, 24, typist’s pages 87–96), and n° 329, « Topologie générale. Chapitres I et II (Réédition) » (pages 3, 5, 7, 9, typist’s pages 35–39). Page 14 does not match the inventory as transcribed: it is read « n° 266 », which the inventory lists as « Lemme d’Artin-Rees et théorie de la dimension », although its subject is abelian varieties.',
+    basis:
+      'The batch 1 and 2 headers record leaves of a French typescript « n° 329 » on general topology (product and quotient spaces; typist’s pages 35, 36, 37, 39) and of one headed « n° 268 » on abelian and Picard varieties (theorem of the square, divisors, linear systems; typist’s pages 87, 89, 90, 95, 96), and record page 14 as « - 99 - » (n° 266) on the same subject. The note on page 18 summarises a theorem on divisors on A × V for a commutative group variety A, which fits the inventory’s chapter list for n° 268 (divisor classes on an abelian variety, Picard variety, algebraic systems of abelian varieties).',
+    ours:
+      'The identification is this pass’s. It rests only on the typed numbers and subjects as the transcription records them, compared with the Delsarte inventory. Neither the facsimile nor the rédactions themselves were looked at. The transcription calls the typescripts « not by him » and does not name Bourbaki. Page 18’s pencil marks (« Prouver ! », « utile au cas non singulier) ») are attributed to Grothendieck only because nothing on the leaf points elsewhere, and this entry does not change that.',
+    literature: [
+      'Rédactions Bourbaki se trouvant dans les archives Jean Delsarte (inventory of 15 March 2005, Institut Élie Cartan, Université de Lorraine): entries 266, 268 (BKI 13-1 DIVERS, with its chapter list) and 329 (BKI 03-5 TOPOLOGIE), read on 2026-10-10',
+      'Transcriptions 98, batch 1 (header and the note on page 18) and batch 2 (header)',
+    ],
+    status: 'candidate',
+    settle:
+      'A person puts the facsimile leaves beside rédactions 268 and 329 in the Bourbaki archive (Archives Henri Poincaré) and compares the typist’s page numbers and text. That person also re-reads the number on page 14: if it is 268, the page belongs to the same run. If it really is 266, it is a third document, or it is a typing variant the inventory does not record. A date for rédaction 268, if the Bourbaki archive gives one, would date the paper Grothendieck wrote pages 15–17 and 21–23 on, not the writing itself. Whatever is found, priority is not a claim this project makes, about anyone.',
+  },
+  {
+    id: '98-axiomatic-norms-can-section',
+    cote: '98',
+    pages: '10–13',
+    kind: 'mathematical',
+    claim:
+      'Norms can be axiomatised in any category with finite sums: a class 𝒩 of morphisms stable under identities, composition, base change and sums, closed under the quotients (X^n_Y)/H for H ⊂ 𝔖_n; a multiplicative, additive, base-change-invariant degree with deg((X^n_Y)/H → Y) = card(E^n/H); and canonical sections Can_{X/Y} : Y → Sym^r_Y(X) satisfying identity, transitivity, base change and additivity. G-sets with fibres of constant cardinality, finite locally free morphisms of schemes, and finite unramified coverings are proposed as models.',
+    basis:
+      'Page 10 states the axioms (i)–(v), (i bis)–(v bis) and (i ter)–(iv ter), with the transitivity diagram on page 11. Page 11 verifies Example I (G-sets), the bottom of the right-hand leaf being partly outside the image and several words \\ill{}. Page 12 asserts Example II, saying that the axioms are verified « très facilement » and giving no verification. Page 13 sketches Example III through Φ(E) = X ×^Γ E; its prose is almost all \\ill{} and it breaks off before showing that Φ preserves Can. The end of axiom (iv) is \\ill{}, and the end of (v) is \\ill{} and circled in red with a « ? ».',
+    ours:
+      'The completion of (v), that the quotient lies in 𝒩, is the reading’s. So are the reading of « conditions (i) à (iv) » as (i ter)–(iv ter) in Example II, the permutation-module argument that verifies Example II, and the hypotheses that Γ acts freely and properly in Example III. The transitivity of norms on pages 6–8 is stated « Je dis que », without proof, and the reading derives it from (ii ter). Nothing in the folder proves that any example satisfies (ii ter).',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for an axiomatic framework of « categories with norms » defined by canonical sections into symmetric powers, as opposed to the construction for finite locally free morphisms alone. For that construction: SGA 4 XVII 6.3 (Deligne, trace and norm through the symmetric power); D. Ferrand, « Un foncteur norme », Bull. SMF 126 (1998); D. Rydh on Γ^n, the Hilbert–Chow morphism and families of cycles. For axiomatic transfer and norm structures that cover G-sets: Tambara, « On multiplicative transfer » (1993), and Bachmann–Hoyois, « Norms in motivic homotopy theory » (2017–2021), which treat finite étale maps rather than finite locally free ones. All are cited from memory except Ferrand and Gille et al., « The norm functor over schemes » (arXiv 2401.15051), whose abstracts alone came back from a web search on 2026-10-10. Nothing was read, which is why the status stays unsearched. If one of them states these axioms with these models, mark matched. If the framework turns out to be only the finite locally free construction restated, drop the entry.',
+  },
+  {
+    id: '86-combinatorial-five-triedres',
+    cote: '86',
+    pages: '18–22, 25',
+    kind: 'mathematical',
+    claim:
+      'On the combinatorial icosahedron, the map sending an edge {s,t} to the direction of the side opposite t in the link pentagon of s descends to a permutation ρ of the 15 edge directions with ρ³ = id, whose five orbits partition the edges into five perfect matchings; G acts on them by even permutations, the n ≡ 1 (mod 4) parity of the pentagon gives an orientation of the five-element set fixed by G without any choice, and G → Alt_T is onto with kernel the antipodism.',
+    basis:
+      'Pages 18–19 define ρ and state ρ² and ρ³ = id without detail; page 20 shows orthogonal edges are disjoint and P(s) ≅ T; pages 20–22 give the parity argument (« type n ≡ 1 (4) », « canoniquement », read with doubt) and the canonical orientation; pages 23–25 bound the image order by 6, 10 and 4 and conclude G → Alt_T onto with kernel ⟨ι⟩. The word « trièdre » is an \\uncertain reading on pp. 18–19, secure on pp. 23, 25, 26.',
+    ours:
+      'The computation of ρ² and ρ³, the transposition count behind the parity of pentagon symmetries, the reading of the five classes as a 1-factorization, and the identification with the five inscribed octahedra / Euclidean orthogonal frames are the edition’s, checked by machine on the regular icosahedron. The first triple of p. 23 is corrected by the reading ({u,v₁} for the page’s {u,v}). The rotation group of the icosahedron ≅ A₅ via five inscribed octahedra (or cubes) is classical (Klein, Vorlesungen über das Ikosaeder, 1884) and is a match; the candidate is only the coordinate-free definition by ρ and the choice-free orientation ϖ.',
+    literature: [
+      'One generic web search (2026-10-10) on icosahedron edge partitions into five perfect matchings and orthogonal triples defined via the vertex-link pentagon: no relevant hit. Not a search of the literature in any real sense.',
+    ],
+    status: 'candidate',
+    settle:
+      'Look for a purely incidence-theoretic definition of the five orthogonal edge triples (opposite side in the vertex link) and for the canonical orientation of the five-set in Coxeter, Regular Polytopes §3.6–3.8 and §14; Conway–Burgiel–Goodman-Strauss, The Symmetries of Things; McMullen–Schulte, Abstract Regular Polytopes, on the hemi-icosahedron {3,5}_5; and Klein 1884, Part I ch. 1. If the definition is there, mark matched; the A₅ isomorphism itself is already a match.',
+  },
+  {
+    id: '86-hemi-icosahedron-five-set-model',
+    cote: '86',
+    pages: '26–32',
+    kind: 'mathematical',
+    claim:
+      'The hemi-icosahedron is reconstructed from an oriented five-element set (E, ω) alone: vertices are the 6 pentagon structures compatible with ω, edges the 15 partitions of type (2,2,1), faces the 10 three-element subsets, flags the 60 total orders compatible with ω, with σ₀, σ₁, σ₂ written as explicit double transpositions of places.',
+    basis:
+      'Pages 26–30 build the bijections S/ι ≅ Pent⁺(T,ϖ), A/ι ≅ 𝔸⁺(T,ϖ), F/ι ≅ 𝔓₂(T) and state flags = numberings compatible with ϖ; pages 31–32, in another ink, give the table of flag-type sets and the three involutions on (a₁,…,a₅). Page 31’s « pointés » for A↑ is read with doubt.',
+    ours:
+      'Substantial. The incidence condition b) on p. 28 is a palimpsest and its complete form is the edition’s, checked by machine; which packet is 𝔸⁺ is fixed by notation only; the page’s Tr₃(E) for A↑ is corrected to pointed triangles; the page’s σ₁ is not the one the p. 30 dictionary gives (the edition shows both triples give isomorphic Γ̂-sets); « σ = σ₀σ₁ » on p. 32 has the value of σ₀σ₂. The pages give the sets of p. 31 without incidences or proof. The reading of the lifts S̃, Ã, F̃ as the orientation double cover is the edition’s. The hemi-icosahedron itself (K₆ on the projective plane, group A₅) and the A₅-action on six points via the six pentagons / Sylow 5-subgroups of a five-set are classical and are matches.',
+    literature: [
+      'Wikipedia, « Hemi-icosahedron » (consulted 2026-10-10): 6 vertices, 15 edges, 10 faces, skeleton K₆, group A₅; no five-point model given.',
+      'One generic web search (2026-10-10) for a five-point model of the hemi-icosahedron: no hit giving one.',
+    ],
+    status: 'candidate',
+    settle:
+      'Check McMullen–Schulte, Abstract Regular Polytopes (2002), on {3,5}_5 and its presentation by A₅; Coxeter, « The abstract groups Gᵐ’ⁿ’ᵖ » and Coxeter–Moser, Generators and Relations, on A₅ as a {3,5} map group with generators as permutations of five letters; and the literature on the exceptional S₅ → S₆ (synthemes and totals) for the six pentagons-on-five-points ↔ six vertices dictionary. A permutation representation of the {3,5}_5 flag generators on five letters is very likely in Coxeter–Moser; if so, the remaining question is only whether the full incidence dictionary (edges as (2,2,1) partitions, faces as 3-subsets, flags as ω-compatible orders) is written anywhere.',
+  },
+  {
+    id: '73-ear-area-multiplier-classification',
+    cote: '73',
+    pages: '14–15, 23–28',
+    kind: 'mathematical',
+    claim:
+      'For a sequence of n non-zero plane vectors u_* not all on one line, the space N(u_*) of solutions of λ_i u_{i−1} − λ_{i+1}(u_i + u_{i+1}) + λ_{i+2} u_{i+2} = 0 — for a closed polygon, the Lagrange multipliers of the map sending it to the signed areas of its n ears (triangles s_{i−1}s_is_{i+1}) — has dimension at most 2, and dimension 2 exactly when n ≡ 0 mod 3 and the polygon is a triangle traversed n/3 times; over an infinite field every non-zero N(u_*) either meets the complement of all coordinate hyperplanes or lies in one of them, in which case it is a line.',
+    basis:
+      'Page 23 bounds the multipliers by their consecutive components and isolates the case where every u_i, u_{i+1}+u_{i+2}, u_{i+3} is collinear; page 24 computes that case down to u_{i+3} = u_i and n ≡ 0 mod 3; page 25 states the Proposition (a)–(d), pages 26–27 prove a) ⇒ b) ⇔ c) ⇔ d), and page 28 states the Théorème with the four marginal names « Cas général », « Cas spécial I », « Cas hyperspécial », « Cas spécial II ». Page 14 writes Σ λ_i df_i = μ Σ dx_i + ν Σ dy_i, the Lagrange form of the same relation.',
+    ours:
+      'Substantial. The reading supplies the non-collinearity hypothesis the Proposition and the Théorème omit (only the margin of p. 23 has « OPS u_0, u_1 lin. indép. »; the reading gives (e, −e, e, −e) as a counter-example without it), restores n ≡ 0 mod 3 in (d) where the page struck it, replaces the page’s injectivity of N(u_*) → k³ (argued for k infinite) by injectivity on two consecutive components, writes the proof of d) ⇒ a) that page 27 announces and leaves blank (it needs card k ≥ 3), and makes the identification of N(u_*) on p. 28 with the multipliers of p. 14 — no page makes that link. The gloss of case (a) as « φ is a submersion at u_* » is reconstructed over several \\ill{} on p. 28, and « mutuellement exclusifs » is \\uncertain{}. The remark that a quadrilateral is always in case I and the general case begins at n = 5 is the reading’s alone.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Search the literature on vertex-triangle (« ear ») areas of polygons for the rank of the area map on closed n-gons and its degeneracy locus: Harel & Rabin on polygons whose vertex triangles have equal area, Hazama on moduli of polygons with an area center (arXiv 1310.0523), and the pentagram-map corner-invariant literature (Schwartz; Ovsienko–Schwartz–Tabachnikov). A web search of 2026-10-10 surfaced the first two by title and abstract only; neither was read, so nothing was searched in the sense this field needs. If the dim ≤ 2 bound and the repeated-triangle characterisation appear there, mark matched.',
+  },
+  {
+    id: '73-zero-multiplier-criterion',
+    cote: '73',
+    pages: '15, 18, 28',
+    kind: 'mathematical',
+    claim:
+      'A plane n-gon admits an ear-area multiplier with λ_0 = 0, λ_1 = 1 if and only if it is closed and, for 2 ≤ i ≤ n−1, either s_i = s_0 or the pair of side directions {u_{i−1}, u_i} equals the pair {u_1, s_i − s_0}; the multiplier is then given by λ_i u_{i−1}·u_i = u_1·(s_i − s_0) in Sym²V, and vanishes exactly at the vertices that coincide with s_0.',
+    basis:
+      'Page 15 boxes the closed formula λ_i u_{i−1}u_i = −λ_0 u_{−1}u_{1i} + λ_1 u_1 u_{0i}; page 18 sets λ_0 = 0 and draws a star nine-gon whose odd sides are parallel to u_1 and whose even sides lie on lines through s_0; the foot of page 28 states the criterion for case (c) — a) Σu_i = 0, b) u_{i−1}, u_i ∥ u_1, u_{0i} — and the rule that λ_i = 0 exactly where s_i = s_{i0}.',
+    ours:
+      'The « il faut et il suffit » of p. 28 is \\uncertain{}, and the criterion sits in a crowded foot of page next to several \\ill{}; the proof is entirely the edition’s. Reading the page’s juxtaposition u v as the product in Sym²V (rather than a determinant, as the transcription’s header suggested) is the reading’s, and it carries the statement: the « pair of directions » form is the edition’s restatement of « u_{i−1}, u_i ∥ u_1, u_{0i} ». The geometric form in the margin (a point o, a direction Δ) is largely struck and illegible. That the nine-gon has a one-dimensional N(u_*) was checked numerically by the reading, not on the page.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'First have the « il faut et il suffit » of p. 28 re-read on the facsimile; if it holds, search the same sources as 73-ear-area-multiplier-classification for polygons with a degenerate ear-area map whose sides alternate between a fixed direction and lines through a fixed vertex.',
+  },
+  {
+    id: '73-quadrilateral-projective-frame',
+    cote: '73',
+    pages: '5–6, 16–17',
+    kind: 'mathematical',
+    claim:
+      'Non-collinear closed quadrilaterals of a plane, up to affine maps, are in bijection, through the ratios of their four ear areas, with the projective plane μ_0 + μ_2 = μ_1 + μ_3 in P³, in which the four quadrilaterals with one side reduced to a point form a projective frame; the plane is canonically P(k^A / k·(1,1,1,1)) for the edge set A.',
+    basis:
+      'Page 5 derives μ_0 + μ_2 = μ_1 + μ_3, writes « M_4 → P²_Z mono », « épi ? », then the inverse formulas and « M_4 ≃ P²_Z »; it boxes u_2 = 0 ⇔ μ_2 = μ_3 = 0. Page 6 speaks of « l’enveloppe projective de A ». Pages 16–17 recover the multiplier (1, −1, 1, −1) and give an affine chart (a, b).',
+    ours:
+      'The formula P(k^A / k·(1,1,1,1)), the verification that the four degenerate points are in general position, and the answer to « épi ? » are the reading’s; page 6 names only three of the four points, and « enveloppe », « rang 3 » and « coplanaires » are \\uncertain{} there. The page’s subscript Z claims the statement over Spec Z; the reading checked it over a field only.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Elementary enough that it is likely in the literature on affine invariants of quadrilaterals or on moduli of polygons modulo the affine group; a search there (e.g. the moduli-of-affine-polygons papers cited in arXiv 2406.02519) would most likely mark it matched. Over Spec Z, check whether the bijection still holds as an isomorphism of schemes.',
+  },
+  {
+    id: '73-missing-leaf-p7',
+    cote: '73',
+    pages: '19–20',
+    kind: 'codicological',
+    claim:
+      'His own pagination of the continuous draft, 1 to 16 on pages 14–28, skips 7 between page 19 (his 6) and page 20 (his 8), so a leaf of that draft may be missing from the folder.',
+    basis:
+      'The transcription records his numbers on every leaf of the run (batch 1 from p. 14, batch 2 from p. 21) and notes « la p. 7 manque » at page 20; page 19 ends on a line that breaks off (u_3∧u_4 − u_2∧u_3 = u_3∧(u_2+u_4)), and page 20 opens on an isolated quadratic form the reading cannot attach to anything.',
+    ours:
+      'Linking the broken last line of p. 19 and the unattached quadric of p. 20 to the gap is the reading’s inference; the folder does not say a leaf was lost, and he may simply have skipped a number.',
+    literature: [
+      'Transcription 73, batch 1 (batch-01.fr.tex), pages 14–20, his page numbers',
+      'Transcription 73, batch 2 (batch-02.fr.tex), header and pages 21–28, his page numbers',
+    ],
+    status: 'candidate',
+    settle:
+      'Look for a leaf numbered 7 in his hand, on polygons, among the neighbouring folders of the group « Géométrie et topologie combinatoire » (69–89), first 75 and 89, and in the leaves of this folder outside the run; check on the facsimile that page 20’s « 8 » is not a 7.',
+  },
 ];
