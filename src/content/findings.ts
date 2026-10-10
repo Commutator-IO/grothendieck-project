@@ -4495,4 +4495,307 @@ export const FINDINGS: Finding[] = [
     settle:
       'Check G. Maltsiniotis’s edition of Pursuing Stacks (introduction and editorial notes on the typescript and its circulation) and R. Brown’s published accounts of the Grothendieck correspondence for this distribution list and for the recto-verso pages 274–275; if either records them, mark matched. The recto-verso claim can also be settled by looking at the typescript leaf carrying pp. 274–275 wherever it is filed.',
   },
+  {
+    id: '156-1-segment-biorder',
+    cote: '156-1',
+    pages: '10–13',
+    kind: 'mathematical',
+    claim:
+      'A model of a one-dimensional form that is a single segment (axioms F1–F5, with F′3) is the same thing as a poset with distinct least and greatest elements that is dense and locally directed in both directions, segments being the intervals [x, y], x < y; the order need not be total.',
+    basis:
+      'Page 12 builds the order from the sub-segments issued from one extremity, lists « infiniment divisible » and « localement filtrante décroissante » with a filtrante croissante clause added between the lines, and states the converse; page 13 concludes that a segment structure is a biorder, the conditions being autodual.',
+    ours:
+      'Neither direction is proved on the page; the proofs sketched in the reading are the edition’s, and the filtering condition F′3 that the forward direction (property b) needs is the reading’s reconstruction of a mostly illegible note at the foot of page 6. The converse rests on a line of page 12 carrying several \\ill{} words and a struck word, and the « filtrante croissante » clause is read only in part; the marginal note keyed to it by an asterisk is fragmentary. That the order is not total in general is the reading’s emphasis, drawn from Cor. 3 c) on page 5.',
+    literature: [
+      'B. Courcelle, Betweenness of partial orders, RAIRO ITA 54 (2020) — abstract and introduction only, via a web search; characterises betweenness relations of posets, not this bounded, dense, locally directed class',
+      'Directed Transit Functions, arXiv:2407.07741 (2024) — abstract only, via a web search; first-order axioms for directed betweenness in posets',
+      'arXiv:1609.07519, On the strength of some topological lattices — abstract only; bounded dense betweenness, total-order case',
+    ],
+    status: 'unsearched',
+    settle:
+      'First settle the page: re-read the converse on page 12 against the facsimile (/transcribe-grothendieck), since it is carried by illegible words. Then read Courcelle 2020 and the betweenness literature it cites (Pitcher–Smiley 1942; Sholander 1952), and Prenowitz–Jantosciak, Join Geometries (1979), for an axiomatics of segments as intervals of a non-total, bounded, dense, locally directed order. The search so far went only to abstracts, so the status stays unsearched.',
+  },
+  {
+    id: '156-1-branching-without-branch-point',
+    cote: '156-1',
+    pages: '20–22',
+    kind: 'mathematical',
+    claim:
+      'The local axioms F1–F5 admit a regular connected model in which every lieu has exactly two branches and yet the form bifurcates — a trunk order with two or more upper branches glued above it — so a sixth axiom F6, saying that same-branch segments at a lieu are contained in a common segment, is needed to exclude it.',
+    basis:
+      'Page 20 states that a connected order, locally strictly directed both ways and with no extreme element, satisfies F1–F5 but need not be directed; page 21 gives the example L₀ ⨿ ∐ Lᵢ with every element of L₀ below every element of each Lᵢ (a first example on ℚ cut at an irrational, times a set E of cardinal ≥ 2, is struck); page 22 states F6 and compares it with F3.',
+    ours:
+      'The reading supplies card I ≥ 2, which the page does not state, reads « ∃ x′ < a < a″ » as « for every a there exist a′ < a < a″ », and shows that F6 excludes the example. The identification with the branching line of non-Hausdorff one-manifolds is this pass’s, not the reading’s. The phenomenon matched is topological; the page’s statement is about its own combinatorial axioms, and only the phenomenon is in the literature.',
+    literature: [
+      'A. Haefliger, G. Reeb, Variétés (non séparées) à une dimension et structures feuilletées du plan, Enseign. Math. 3 (1957) — known here through secondary sources only, not read',
+      'M. Baillif, A. Gabard, Manifolds: Hausdorffness versus homogeneity, arXiv:math/0609098 — the branching line (two copies of ℝ identified along the negative reals) as a standard non-Hausdorff one-manifold',
+      'Wikipedia, Non-Hausdorff manifold — the branching line',
+    ],
+    status: 'matched',
+    settle:
+      'Read Haefliger–Reeb 1957 to confirm that a one-dimensional space branching with no branch point is treated there. If so, this stays matched as a phenomenon. What remains open is narrower: whether F6, as a combinatorial « Hausdorff-type » condition on segments, appears in a published axiomatics of graphs or one-dimensional spaces — a separate search, not a reason to reopen this entry.',
+  },
+  {
+    id: '156-1-written-alongside-156-2',
+    cote: '156-1',
+    pages: '3, 23',
+    kind: 'codicological',
+    claim:
+      'Chapter I (folder 156-1) was still being written after chapter II (folder 156-2) had begun: a margin note on page 3 is dated « 7.6. » and page 23 opens « (7 juin) », one day after the « (6 Juin) » heading of 156-2, and the dated note on page 3 decides an identification that the corollary on page 6 justifies.',
+    basis:
+      'Page 1 carries « (5 juin) » and « (Juin 86) »; the transcription reads « 7.6. » at the head of the slanted note in the left margin of page 3 and « (7 juin) » at the start of page 23; folder 156-2’s transcription reads « (6 Juin) » in its margin. The author’s own pagination restarts at page 3 (his p. 2), so pages 1–2 are a separate first start.',
+    ours:
+      'The inference that the two chapters were written concurrently is the reading’s, from the three dates; the pages do not cross-refer on this point.',
+    literature: [
+      'Transcription 156-1, batch-01.fr.tex, pages 1, 3 and header; batch-02.fr.tex, page 23 and header',
+      'Transcription 156-2, batch-01.fr.tex, the « (6 Juin) » margin date',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks the three dates against the facsimiles — « 7.6. » on page 3 of 156-1, « (7 juin) » on page 23 of 156-1, « (6 Juin) » in 156-2 — and whether the page 3 note is in the same ink as the page 23 additions rather than the main text of page 3.',
+  },
+// Candidate entries for folder 156-3 (find-novelty, Opus 5.5 on an Opus 5.5 reading, 2026-10-10). Not merged into src/content/findings.ts.
+  {
+    id: '156-3-order-from-betweenness',
+    cote: '156-3',
+    pages: '11–13',
+    kind: 'mathematical',
+    claim:
+      'The order of a "tronçon ordonné" — a partially ordered set that is dense, directed upwards and downwards, has at least two elements, and whose strict up- and down-sets are filtered — is determined up to reversal by its strict betweenness relation (b strictly between a and c iff a < b < c or c < b < a).',
+    basis:
+      'Page 11 recovers the comparable pairs from betweenness by density, chooses a comparable pair a < b, and expresses L≥b, L≤a and ]a,b[ by betweenness; page 12 writes u ≤ v as the existence of x ≤ a, y ≥ b with x ≤ u ≤ v ≤ y, using directedness; page 13 proves the lemma that turns this into betweenness conditions, and its NB lists exactly the two hypotheses used (density, two-sided directedness). The step « a et b disjoints ssi ∃ c strictement entre a et b » rests on words read with doubt (\\uncertain{soit strictement entre}), though the mathematics it needs is unambiguous.',
+    ours:
+      'The reading corrects the lemma\'s « trois éléments » to four and replaces the margin\'s « or {a,b,c} of cardinal ≤ 2 » (false for a = c ≠ b) by the exact relation; it also supplies the observation that the result fails for an arbitrary poset. The reading\'s footnote credits the characterisation of poset betweenness to Altwegg (1950); Courcelle 2020 credits the axiomatisation to Lihová (2000). Altwegg was not opened by this pass, so that attribution is unchecked here.',
+    literature: [
+      'B. Courcelle, « Betweenness of partial orders », arXiv:2004.09777 (2020), §1(a)–(b) and Theorem 7 with its Lemma on B-minimality',
+      'J. Lihová, « Strict-order betweenness », Acta Univ. M. Belii Ser. Math. 8 (2000) — cited by Courcelle for the axiomatisation; not opened',
+    ],
+    status: 'matched',
+    settle:
+      'Settled as a special case: Courcelle 2020, Theorem 7, shows a poset is reconstructible up to reversal from its betweenness relation iff it is B-minimal (every comparable pair lies in a 3-chain) and connected (with one infinite exception). Density gives B-minimality and two-sided directedness gives connectedness, so every tronçon qualifies. Kept as a killed candidate; the page\'s explicit formula for ≤ via an anchor pair (a, b) is a direct route, not a different result.',
+  },
+  {
+    id: '156-3-betweenness-from-cuts',
+    cote: '156-3',
+    pages: '14–15',
+    kind: 'mathematical',
+    claim:
+      'For a tronçon ordonné, the comparability relation together with, for each comparable pair ε, only the partition (unlabelled) of the elements comparable to both members of ε into its connected pieces determines the strict betweenness relation, hence the order up to reversal: in a 3-chain J, the middle element is the unique one for which the pieces of C(ε) and C(ε′) containing the third element, ε and ε′ the two pairs through it, are disjoint.',
+    basis:
+      'Page 14 sets the problem (Drap₂ and the decompositions of C(ε) determine 𝓡); page 15 computes the three pieces X_{a,b} = L>b, X_{b,c} = L<b, X_{c,a} = ]a,c[ for a < b < c, finds X_{a,b} ∩ X_{b,c} = ∅ and the other two intersections non-empty by density, and concludes « On gagne ! »; combined with the lemma of pages 11–13 this recovers the order up to reversal. Comparability alone would not suffice for a totally ordered tronçon, where the comparability graph is complete.',
+    ours:
+      'The reading normalises the page-14 formula for C(ε), which the page writes with an indexed L and {ε, t} (read as t ∉ ε and ε ∪ {t}), and reads the page-10 pieces between consecutive cuts as open intervals where the brackets read closed. The pass adds the remark that comparability alone does not determine the order; the construction itself is the page\'s.',
+    literature: [
+      'B. Courcelle, « Betweenness of partial orders », arXiv:2004.09777 (2020), §1–2 — treats reconstruction from betweenness and (Remark 12, via modular decomposition) from the comparability graph, not from cut or component data',
+    ],
+    status: 'candidate',
+    settle:
+      'Only one source was read, and the statement is elementary once posed, so the search is thin. Check the cut-point characterisations of linear order (L. E. Ward 1936; Kok, Connected orderable spaces, 1973), M. Altwegg 1950 and J. Lihová 2000 on poset betweenness, and Gallai 1967 on unique transitive orientation, for a version taking as data the partitions of the common-comparability sets. If any of them states it for posets, mark matched; if it appears only for total orders, say so here, since the partial-order case is the one the page is about.',
+  },
+// Candidate entries for folder 156-4 (find-novelty, Opus 5.5 on an Opus 5.5 reading, 2026-10-10). Not merged into src/content/findings.ts.
+  {
+    id: '156-4-figures-as-configurations',
+    cote: '156-4',
+    pages: '53–61',
+    kind: 'mathematical',
+    claim:
+      'A poset of "figures" (𝔉, ≤) in which every bounded family has a supremum, every figure is the supremum of the sup-irreducible figures below it, and figures whose strata are pairwise compatible are compatible (C 1–C 3), with all figures finite, is the same thing as a poset (𝓜, ≤) with finite down-sets and a reflexive, symmetric relation R inherited downwards; the figures are then the finite down-closed subsets whose elements are pairwise R-related.',
+    basis:
+      'Page 53 poses C 1, page 54 C 2 (with the sup-primeness the reading supplies), page 57 the description by down-closed subsets, page 58 C 3, pages 59–60 the equivalence for figures of finite type, and page 61 the finite form: « les 𝓜_{≤X} finis », R « réfl. et sym. » inherited by X′ ≤ X, Y′ ≤ Y, the figures being « les parties fermées, finies » with (X, Y) ∈ R for all their elements. The conditions themselves are legible; illegible words on pages 59 and 61 sit in the wording around them, and « évident » in page 58’s NB is uncertain.',
+    ours:
+      'The reading supplies the sup-primeness hypothesis (strata of Sup F_i lie under some F_i) without which page 54’s « Sup ↦ ∪ » fails, and compares the result with Birkhoff (1937) and Raney (1952). The identification with event structures is this pass’s: taking # as the complement of R, R inherited downwards is the principle of conflict heredity (e # e′ ≤ e″ ⇒ e # e″), finite down-sets are the principle of finite causes, and the figures are the finite configurations (left-closed, conflict-free sets). The reading does not name this match.',
+    literature: [
+      'F. W. Vaandrager, « A simple definition for parallel composition of prime event structures », CWI report CS-R8903 (1989), Definitions 2.1 (prime event structure with binary conflict: finite causes, conflict heredity) and 2.3 (configuration: left-closed and conflict-free); §1 attributes prime event structures to Nielsen, Plotkin and Winskel and their relation to finitary prime algebraic domains',
+      'M. Nielsen, G. Plotkin, G. Winskel, « Petri nets, event structures and domains, Part I », Theoret. Comput. Sci. 13 (1981) 85–108: cited for the representation theorem, not opened',
+      'G. Winskel, « Event structures », LNCS 255 (1987) 325–392: fetched as a scanned PDF and not readable by this pass',
+    ],
+    status: 'matched',
+    settle:
+      'Matched on the (𝓜, ≤, R) side: page 61’s figures are exactly the finite configurations of a prime event structure with binary conflict (Vaandrager 1989, Defs 2.1, 2.3). For the other direction, open Nielsen–Plotkin–Winskel 1981 and check that its representation theorem (finitary prime algebraic coherent domains ↔ prime event structures) has the same hypotheses as C 1–C 3 with sup-primeness; if it does, the whole equivalence of pages 59–61 is matched. Kept as a killed candidate.',
+  },
+  {
+    id: '156-4-supports-boolean-presumption',
+    cote: '156-4',
+    pages: '65–68',
+    kind: 'mathematical',
+    claim:
+      'The folder presumes that the saturated sets of multistrates (fixed points of cosupp ∘ cosupp, where cosupp is « disjoint from every element ») form a Boolean algebra; as stated, under the axioms C 1–C 4 posed up to page 64 (and C 5–C 7 with ≼ the identity), this fails: the lattice of saturated sets can be a non-distributive hexagon.',
+    basis:
+      'Page 68: « Je présume qu’on a en fait une algèbre de Boole (« ultra-stonienne », à cause des Sup quelc.) » — « présume » is an insertion over a struck « dis », legible; the lines that follow on page 68 are mostly \\ill{}. Pages 66–67 define cosupp, supp, saturated sets and Σ, with arbitrary Inf and Sup. Page 74 itself notes that disjunction is not controlled by C 1–C 4.',
+    ours:
+      'The counterexample is this pass’s own, checked by exhaustive computation: 𝓜 has four minimal elements a, b, c, d and three elements v_ab, v_bc, v_cd above the pairs ab, bc, cd; R is the reflexive symmetric relation generated by all pairs inside each 𝓜_{≤v} (hence inherited downwards, and making each 𝓜_{≤v} a figure); 𝓜 is connected, so C 4 is vacuous. Disjoint pairs are exactly ab, bc, cd, and the saturated sets are ∅, {b}, {c}, {a,c}, {b,d}, 𝓜 — two chains between ∅ and 𝓜, where {b,d} ∧ ({b} ∨ {c}) = {b,d} but ({b,d} ∧ {b}) ∨ ({b,d} ∧ {c}) = {b}. The reading already notes that Σ is a complete orthocomplemented lattice, not distributive « en général pour une relation symétrique quelconque », and Boolean when R is total (regular open algebra of (𝓜, ≤)); it does not say whether the folder’s axioms exclude the general case. They do not.',
+    literature: [],
+    status: 'refuted',
+    settle:
+      'What still stands: Σ is a complete ortholattice for any such (𝓜, ≤, R), and a complete Boolean algebra when R is total. Open questions: whether the later disjunction axioms (C 5 of page 69, the « paquet d’axiomes de disjonction » of page 85, or those of folders 156-6 to 156-8) restore distributivity; and, in the literature on orthogonality spaces (Dacey 1968; Birkhoff, Lattice Theory, polarities), which condition on a symmetric irreflexive relation makes its lattice of closed sets Boolean. A person should re-run the hexagon check before relying on it.',
+  },
+// Candidate entries for folder 156-5 (find-novelty, Opus 5.5 on an Opus 5.5 reading, 2026-10-10). Not merged into src/content/findings.ts.
+// No mathematical entry: every candidate in the pool was a match the reading already footnotes (Alexandrov 1937 for figures as Alexandrov topologies, refinement as continuous inclusion; SGA 4 IV §9 recollement for the lemma of pp. 40-44 and its closing characterisation on p. 48; Quillen's Theorem A for the corollary of p. 46; Stone 1937 for regular opens), or a statement the reading had to repair or refute (connectedness of M, pp. 12-14; the corollary of p. 31; e) of p. 41), which the skill excludes.
+  {
+    id: '156-5-gf-viii-rereading',
+    cote: '156-5',
+    pages: '1, 3',
+    kind: 'codicological',
+    claim:
+      'Chapter V (folder 156-5, dated 14-18 June 1986) was reread and annotated after chapter VIII (folder 156-8, begun 26 June 1986) had reached its pages 37 and 44-45: two margins of 156-5 send the reader forward to « GF VIII p. 37 » and « GF VIII pp. 44, 45 », and 156-8 page 45 of the archivists opens « Je vais reprendre ici la prop. 1 p. 1 de [GF] V ».',
+    basis:
+      'Margin of page 1 (« voir variante in extenso, formellement plus forte, voir GF VIII p. 37 ») and margin of page 3 (« Exemple idiot — mais voir contre-exemple correct avec I infini, GF VIII pp. 44, 45 »), both checked against the facsimile by Michel Hua on 27 September 2026 per the apparatus of batch-01; the page-3 note is in a different ink from the page, the page-1 note in the same ink, so ink alone does not separate the layers. On the 156-8 side, the archivists\' page 45 is the start of « Figures indexées » and pages 52-53 carry an example « où on a 1\' et 2\' … sans avoir 3\') », which fits the page-3 margin. « avec I » (p. 3) and the « CF V » of 156-8 p. 45 are read with doubt.',
+    ours:
+      'The concordance of Grothendieck\'s chapter-VIII pagination (his 37, 44-45) with the archivists\' 45 and 52-53 is the reading\'s, taken from the offset of 156-8\'s own numbering; it was checked here against the 156-8 transcription only, not against the facsimile. The lower bound « not before 26 June » is the catalogue date of 156-8, not a date on these leaves.',
+    literature: [
+      'Transcription 156-5, batch 1 (batch-01.fr.tex), pages 1 and 3 and their \\note apparatus',
+      'Transcription 156-8, batch 3 (batch-03.fr.tex), pages 45, 52 and 53',
+      'Inventory title of 156-8 (src/content/catalogue.ts): « notes manuscrites (26/06-04/07/1986) »',
+    ],
+    status: 'candidate',
+    settle:
+      'A person reads Grothendieck\'s own page numbers on 156-8 facsimile pages 45 and 52-53 to confirm they are his 37 and 44-45, and checks whether any other margin of 156-5 (pp. 4, 7, 10, 11, 16-18, 20) is in the page-3 ink, which would delimit the rereading layer.',
+  },
+// Candidate entries for folder 156-6 (find-novelty, Opus 5.5 on an Opus 5.5 reading, 2026-10-10). Not merged into src/content/findings.ts.
+// No mathematical entry: the candidate pool is matches the reading already footnotes (Birkhoff 1937 for the representation by down-sets of irreducibles, pp. 14-18 and 41; Alexandrov 1937 for the generic-point remark, p. 30; Raney 1952 for the Lemma of p. 49; the sheaf condition for At 11, p. 67), definitions and axioms internal to his framework (At 1-At 14, the definition of subdivision p. 85), or statements the reading had to repair (pp. 11, 18, 56, 58, 62-63, 90, 93), which the skill excludes.
+  {
+    id: '156-6-dates-past-catalogue',
+    cote: '156-6',
+    pages: '1, 10, 20, 34, 64, 87',
+    kind: 'codicological',
+    claim:
+      'The folder was written from 18 to 22 June 1986, not 18-20 June as the inventory title has it: his own dates run « 18 juin 86 » (p. 1), « 19 juin » (p. 20), « 20 juin » (p. 34, and the additions of pp. 10 and 13), « 21. juin » (p. 64) and « 22. Juin » (p. 87), which closes the gap with chapter VII (156-7), whose page 1 is dated « 23 juin ».',
+    basis:
+      'Dates in his hand, each transcribed as a \\marginal with a \\note: batch-01 p. 1 (« 18 juin 86 », slanted, left margin), p. 10 (« (20 juin) » heading an addition), p. 13 (« le 20 », in a mostly illegible margin, read as a reference to 20 June), p. 20 (« 19 juin », underlined); batch-02 p. 34 (« 20 juin », underlined); batch-04 p. 64 (« 21. juin », underlined); batch-05 p. 87 (« 22. Juin », underlined). None is marked \\uncertain{}; only the « le 20 » of p. 13 sits in an \\ill{}-ridden note and is not needed for the claim. The 20 June additions on pp. 10 and 13 are later than the 19 June of p. 20, so the first pages carry a rereading layer.',
+    ours:
+      'The comparison with the inventory title and with the 156-7 date is the edition\'s; the transcription headers of batches 4 and 5 already note the discrepancy. Reading the 18-22 June span as the writing period assumes the dates mark the day of writing, which the pages do not say.',
+    literature: [
+      'Transcription 156-6, batches 1, 2, 4, 5 (batch-0N.fr.tex), the \\marginal dates and their \\note apparatus at pp. 1, 10, 13, 20, 34, 64, 87',
+      'Inventory titles of 156-6 (« notes manuscrites (18-20/06/1986) ») and 156-7 (« (23-26/06/1986) ») in src/content/catalogue.ts',
+      'Transcription 156-7, batch 1 (batch-01.fr.tex), page 1: « 23 juin »',
+    ],
+    status: 'candidate',
+    settle:
+      'A person reads « 21. juin » on facsimile page 64 and « 22. Juin » on page 87 of 156-6, confirming the day numerals; if they stand, the inventory range should read 18-22/06/1986.',
+  },
+// Candidate entries for folder 156-7 (find-novelty, Opus 5.5 on an Opus 5.5 reading, 2026-10-10). Not merged into src/content/findings.ts.
+// No mathematical entry: the candidate pool is matches the reading already footnotes (Birkhoff 1937 for the join-irreducible representation, p. 5; Nielsen-Plotkin-Winskel 1981 prime event structures, p. 5; Björner 1984 simplicial posets, p. 13; Birkhoff 1940 polarities and Dacey 1968 orthogonality spaces for the support lattice, pp. 61-63; Husimi 1937 orthomodular law for the graph counter-example of p. 98, and the non-distributivity of pp. 81-83, which is a standard property of orthocomplemented lattices of this kind; complete atomic Boolean algebras for the Proposition of p. 80), axiomatics internal to his framework (At, ML, MΛ, Prat, Mag), statements the reading had to repair (pp. 5, 13, 25-26, 29, 54-58, 91, 103), or statements the folder announces without proof (p. 22 b)-d), p. 42, p. 93 (b)-(c), p. 100, p. 104), which the skill excludes. Nothing was looked up in the literature for this pass beyond those footnotes.
+  {
+    id: '156-7-page1-index-later-layer',
+    cote: '156-7',
+    pages: '1, 86, 99, 110–113',
+    kind: 'codicological',
+    claim:
+      'The cross-reference on page 1, « cf. … p. 23, 50-58, 59, 110-113 », points to pages of this same folder up to its last leaf, so it was written after pages 110-113 existed: page 1 carries a rereading layer added at or after the end of the folder, like the « 26.6 » margin note of page 86, which sits beside text that precedes the « 26 juin » heading of page 99.',
+    basis:
+      'Batch 1, page 1 \\note: under « GF VII », a slanted reference in his hand « cf. \\ill{} p. 23, 50-58, 59, 110-113 », the last numbers circled and the « 50 » overwritten; the pages it names are the recapitulation of axioms (p. 23), the préateliers and ensemblistes (pp. 50-58), the Définition of p. 59 and the magasins / atelier spécial (pp. 110-113). Batch 5, page 86 \\marginal opens « 26.6 » (« read so »), page 99 opens its second paragraph with « 26 juin »; page 69 is dated « 25 juin ». The one \\ill{} on page 1 is the word before « p. » and does not carry the claim; the page numbers are not marked \\uncertain{}.',
+    ours:
+      'That the numbers on page 1 are pages of this folder rather than of another chapter is the edition\'s inference (the \\ill{} word before « p. » could in principle name another text), supported by the match of each number with a recapitulation or definition here. That pages 84-98 were written before 26 June is likewise inferred from the order of the dates, not stated.',
+    literature: [
+      'Transcription 156-7, batch 1 (batch-01.fr.tex), header and page 1 \\note',
+      'Transcription 156-7, batch 5 (batch-05.fr.tex), header, page 86 \\marginal and \\note, page 99 \\subsection{26 juin}',
+      'Transcription 156-7, batch 4 (batch-04.fr.tex), page 69 « (25 juin) »',
+      'Modernised reading 156-7.modern.tex, sections on pp. 50-60 and 101-113',
+    ],
+    status: 'candidate',
+    settle:
+      'A person reads the cross-reference on facsimile page 1 of 156-7: the illegible word before « p. » (« ici », « infra », or a chapter siglum such as « GF VIII ») and the numbers « 110-113 »; if the word names this folder and the numbers stand, the reference was added after the folder was finished.',
+  },
+// Candidate entries for folder 156-8 (find-novelty, Opus 5.5 on an Opus 5.5 reading, 2026-10-10). Not merged into src/content/findings.ts.
+// No mathematical entry: the candidate pool is matches the reading already footnotes (Serre 1977 graphs, pp. 3-5; the diamond property, p. 3; order ideals, p. 18; Birkhoff 1937 join-irreducibles, p. 19; polyhedral vs regular CW complexes, p. 26; Birkhoff 1940 polarities and Dacey 1968 orthogonality spaces for Σ_M, pp. 73-75; Chevalley constructible sets, p. 84; SGA 4 projection formula, p. 56; Fishburn 1970 interval orders, p. 106; order complex, p. 95), axiomatics internal to his framework (Mag, Mag', Mag L, Mag div, Mag quens, Magens, At, At M, Mag pol, supp 1, the theorem of p. 69, the Proposition of p. 39, the Scholie of pp. 86-87, which follows formally from injectivity of A ↦ |A|° under full faithfulness), elementary combinatorics of finite unions of intervals in an ordered set (pp. 94-126), statements the reading had to repair or verify itself (pp. 9, 10, 23, 30, 76-77, 88, 102, 126), or statements announced without proof (Prop. 4 and 5, pp. 12-13; p. 117 2)), which the skill excludes. Nothing was looked up in the literature for this pass beyond those footnotes.
+  {
+    id: '156-8-page2-table-later-layer',
+    cote: '156-8',
+    pages: '2, 30, 39, 75, 77, 86–87',
+    kind: 'codicological',
+    claim:
+      'The table of kinds of magasins on page 2 was written after page 77 at the earliest: it states results about the set of supports Σ_M, a notation the folder introduces only on page 75, and the identification Σ_M ≃ 𝔓(L) proved as the corollary of page 77, so the leaf placed second in the folder is a later recapitulation rather than an opening plan.',
+    basis:
+      'Batch 1, page 2: each box carries a Σ_M statement (« Σ_M ⊂ 𝔓(M) », « Σ_M ≃ 𝔓(L) » for the ponctuaires, « A ∩ B = ∅ ⇔ A |∘| B » for the fidèles) and cites his pages 9 to 31 (our 17 to 39, e.g. « Mag 1 -- Mag 4 (p. 22) » = our p. 30). Batch 4, page 75 introduces the notation: « Je désigne par Σ_M (notation standard) l\'ens. des supports ». The box names (locaux, ponctuaires, fidèles, maquettes, modérés) do not occur as such in the body. The \\uncertain{} and \\ill{} on page 2 sit in the qualifications of the « locaux » box and in the margin notes, not in the Σ_M statements or page numbers the claim rests on.',
+    ours:
+      'The correspondence between the table\'s page numbers and ours (his n = our n + 8) and between its box names and the body\'s notions is the reading\'s, established from the cited page numbers. That the « fidèles » box\'s « A ∩ B = ∅ ⇔ A |∘| B » echoes the Scholie of pp. 86-87 (which states it only for admissible families) is our observation and would push the date later still; it is not needed for the claim.',
+    literature: [
+      'Transcription 156-8, batch 1 (batch-01.fr.tex), page 2',
+      'Transcription 156-8, batch 4 (batch-04.fr.tex), page 75',
+      'Transcription 156-8, batch 5 (batch-05.fr.tex), pages 86-87',
+      'Modernised reading 156-8.modern.tex, header and section « La table de la page 2 »',
+    ],
+    status: 'candidate',
+    settle:
+      'A person compares ink and hand of page 2 with pages 73-88 and with page 7 (26 June) on the facsimile, and checks whether page 2 is a separate leaf or the verso of a later sheet; if its ink matches the late pages, the table is a recapitulation written at or after the end of the supports section (about 1 July 1986).',
+  },
+  {
+    id: '156-9-disposition-correspondences',
+    cote: '156-9',
+    pages: '87–99',
+    kind: 'mathematical',
+    claim:
+      'For sets with a symmetric relation (orthogonality spaces), the correspondences that admit a transpose — equivalently, relations whose rows and columns are all closed for the polarity — correspond bijectively to Sup-preserving maps between the complete ortholattices of closed sets, giving a category that is self-dual by transposition, identity on objects.',
+    basis:
+      'Proposition 3 (p. 89), Proposition 4 (p. 94) and the scholie of pp. 96–98 set up the bijections Corr(Σ, Σ′) ≅ Corr(E, E′) ≅ Corr*(E, E′); page 98 composes correspondences and page 99 states the equivalence with complete ortholattices and Sup-maps and its self-duality, with the Hilbert-space analogy written by the author. The words « complètes » and « systèmes » in that statement, and the date « 11.7 » above it, are \\uncertain{} in the transcription; the mathematics does not rest on them.',
+    ours:
+      'The reading supplies a direct proof that (iv) ⇔ (v) in Proposition 4 without the clause the page « dû ajouter après coup », and the remark that every Sup-map between complete ortholattices has a transpose (∁ ∘ g ∘ ∁, g its right adjoint). It also corrects the « Lemme » of p. 71, which as written claims a bijection where only an injection holds. The modern names (orthogonality space, complete ortholattice, dagger category) are the edition’s.',
+    literature: [
+      'S. Tull et al., « Monoidal Categories for Formal Concept Analysis », arXiv:2012.08268, abstract: the category of bonds / Chu correspondences between formal contexts is equivalent to the *-autonomous category of complete sup-lattices (read in the abstract only, not in full)',
+      'J. Paseka and T. Vetterlein, « Categories of orthosets and adjointable maps », arXiv:2501.04482v3 (Int. J. Theor. Phys. 2025): Definition 3.1 (adjointable maps of orthosets), Lemma 3.6 (adjointable maps between complete ortholattices are Sup-preserving), Section 6 (dagger category of complete ortholattices, dagger = adjoint) — read through a web summary, not the PDF',
+      'B. Jacobs, « Orthomodular lattices, Foulis semigroups and dagger kernel categories » (2010), as cited in the reading’s footnote — not consulted in this pass',
+    ],
+    status: 'matched',
+    settle:
+      'Matched in substance: Corr*(E, E′) for symmetric contexts is the notion of a bond between the contexts (E, E, non-|o|) and (E′, E′, non-|o|), and the bond–Sup-map correspondence is standard in formal concept analysis. A person should confirm against Ganter and Wille, Formal Concept Analysis (1999), the section on bonds (§7.1), which this pass did not open, and check that the transposition on Corr* is the bond-transpose there. Nothing here dates the folder relative to those sources, and no precedence follows either way.',
+  },
+  {
+    id: '156-9-crossref-156-8',
+    cote: '156-9',
+    pages: '13',
+    kind: 'codicological',
+    claim:
+      'The cross-reference « cf. p. 110, 111 » on page 13, for a classification of the vertices of a prefigure into five types, points to the author’s pages 110–111 of chapter VIII, which are pages 118–119 of folder 156-8 — not to pages missing from the fonds.',
+    basis:
+      'Page 13 of 156-9 announces a « petite digression » on the vertices of a prefigure, « cinq types : sommets-bord propres et impropres, sommets isolés, sommets intérieurs propres et impropres », cf. p. 110, 111. In folder 156-8, page 118 (author’s p. 110) defines ord(a, Φ), isolated vertices and sommets-bord propres/impropres, and page 119 (author’s p. 111) adds the internal vertices, redundant (« de morcellement ») and lacunary, and says « il y a un sommet de chacun des cinq types combinatoires ». In 156-9 the words « cinq », « impropres » and « ceux-là seront les redondants » are \\uncertain{}, but 156-8 states the count explicitly.',
+    ours:
+      'The identification is this pass’s, made from the two transcriptions. The 156-9 transcription calls the pages « extérieures à ce lot » and the modernised reading says they « ne sont pas dans ce dossier »; both are right, and neither names where the pages are.',
+    literature: [
+      'Transcription 156-9, batch 1 (batch-01.fr.tex), page 13',
+      'Transcription 156-8, batch 6 (batch-06.fr.tex), pages 118–119, with their « p. 110 / p. 111 de l’auteur » notes',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks the « 110, 111 » on the facsimile of 156-9 page 13 and the author’s page numbers on 156-8 pages 118–119. If they hold, the modernised reading of 156-9 (section on pages 7–15) can name folder 156-8 pages 118–119 instead of saying the pages are outside the folder.',
+  },
+  // Folder 25 — find-novelty pass, Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5.5 (pass header 2026-10-03). Only pp. 134-135 (a typed letter to Dieudonné) are transcribed; the rest of the folder is the EGA V typescript covered by another edition and was not read.
+  // Mathematical pool dropped: the struck paragraph of p. 135 is the standard limit argument of EGA IV § 8 applied to a fibre locus EGA IV § 12 proves open, which the reading names as a match; its statement as written (« prof ≥ n ») is false and was repaired by the edition, so neither version is a novelty. The plan of §§ 22-27 (p. 134) is a document about the treatise, not a mathematical statement.
+  // Kind of the second entry: it is a claim about what the letter refers to and about a published paper's origin; filed as codicological because it is not a mathematical statement, though it does make a claim about the literature and is held to that standard.
+  {
+    id: '25-letter-1965-before-folder-range',
+    cote: '25',
+    pages: '134–135',
+    kind: 'codicological',
+    claim:
+      'The two leaves 134–135 are a typed letter to Dieudonné dated in Grothendieck’s hand 29.9.1965, earlier than the lower bound of the folder’s inventory dating « [à partir de 1967-1987] », and they carry a second pencil numbering 37–38 showing the letter was filed inside a run of notes rather than added to the folder as a loose piece.',
+    basis:
+      'Transcription 25, batch 7: the date « 29.9.1965 » at the head of p. 134 and the signature on p. 135 are marked as his ink (\\add{}); the header records the pencil numbers 37–38 on the two leaves. The letter speaks of the 4th fascicule of EGA IV as still in preparation, which agrees with a 1965 date. No \\ill{} or \\uncertain{} touches the date.',
+    ours:
+      'The observation that the date falls outside the inventory range, and that this does not contradict the inventory (a folder assembled from 1967 can hold an older piece), is the reading’s. Whether the pencil 37–38 is the typist’s or his is left open by the transcription.',
+    literature: [
+      'Transcription 25, batch 7 (batch-07.fr.tex), header and pages 134–135',
+      'Modernised reading 25.modern.tex, section « Une date hors de l’intervalle du dossier » and its footnote on the pencil numbering',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks the handwritten date and the pencil numbers 37–38 on the facsimile, and finds which leaves of the folder carry 36 and 39 — that locates the run of notes the letter was filed in.',
+  },
+  {
+    id: '25-appendix-18-joint-paper',
+    cote: '25',
+    pages: '134–135',
+    kind: 'codicological',
+    claim:
+      'The letter records Grothendieck refusing to publish under his sole name a text Dieudonné had drafted as an « ex-Appendice au par. 18 » of EGA IV, on the ground that he had only said « il n’y a qu’à faire pareil que pour les anneaux complets », and asking that it become a joint paper; the edition proposes, without evidence in the folder, that this text became Dieudonné–Grothendieck, « Critères différentiels de régularité pour les localisés des algèbres analytiques », J. Algebra 5 (1967), 305–324.',
+    basis:
+      'Pages 134–135 of the transcription carry the refusal and the request in typescript; « manuscriptes » and « papar » are typing slips, the latter marked \\uncertain{} and read as « paper ». Nothing on the two pages names the subject of the appendix beyond the comparison with complete rings.',
+    ours:
+      'The identification with the 1967 J. Algebra paper is entirely the reading’s, from subject (differential criteria of regularity, done for complete rings in EGA 0_IV, « faire pareil » for analytic algebras), date and double signature; the reading itself calls it a plausible conjecture. The page carries only the refusal and the request.',
+    literature: [
+      'Web search, 2026-10-10 (two queries on the paper’s title and on its relation to EGA IV): confirmed the citation J. Algebra 5 (1967) 305–324 from reference lists only; found no abstract, full text or statement of the paper’s origin. This is not a reading of the paper.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read the introduction of the J. Algebra 5 (1967) paper and EGA IV § 18 (IHÉS 32) for any mention of an appendix or of the paper’s origin; if either says the paper was the former appendix to § 18, mark matched (the identification is then in print) — if the paper treats something other than what EGA IV § 18 would have needed, mark refuted.',
+  },
 ];
