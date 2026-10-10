@@ -3873,4 +3873,379 @@ export const FINDINGS: Finding[] = [
     settle:
       'Look at the facsimile of pages 122–127: check the sentence joins and whether 123/124 and 126/127 are the two sides of single leaves, which would explain the order as recto–verso rather than a misbinding. Whether the opening parenthesis of page 123 continues a sheet missing from the folder is not checked.',
   },
+// Folder 59 — candidate entries from /find-novelty (Opus 5.5 on an Opus 5.5 reading, 2026-10-10). Not merged into src/content/findings.ts.
+  {
+    id: '59-surface-even-chi-torsor',
+    cote: '59',
+    pages: '11–13',
+    kind: 'mathematical',
+    claim:
+      'For an abelian scheme A/S of relative dimension 2 and a section δ of NS_{A/S} with χ(δ) even, the torsor Pic^δ_{A/S} under the dual B is trivial. Over a field, this says the Poonen–Stoll class c_δ vanishes.',
+    basis:
+      'Page 11 gives the canonical isomorphism (*) Pic^{δ′}_{B/S} ≃ δ̃′_* Pic^δ_{A/S}. Page 13 composes it with its analogue for δ′, uses δ″ = χ(δ)^{n−2}δ and δ̃″δ̃′ = χ(δ)^{n−1}, and deduces that the χ(δ)^{n−2}(χ(δ)−1)-th power of Pic^δ_{A/S} is trivial. The power 2χ(δ)^{n−2} is also trivial. Since χ − 1 is odd when χ is even, the page’s « Exemple » at the foot of page 13 concludes that Pic^δ is trivial for n = 2 and χ(δ) even. That example line rests on an \\uncertain{si} and an \\ill{}. The λ-exponents on page 12 are read without certainty. Page 13 indexes Pic^δ by B/S where A/S is meant.',
+    ours:
+      'The reading (59.modern.tex, note on page 13) holds that this statement depends on compatibilities of trivialisations that the folder asks for in its margins and never proves, and says the reading could not confirm it. This pass reads it differently, and the step is the pass’s own. Mere triviality needs no compatibility. L ↦ det(L̂)^{±1}, where L̂ is the Fourier–Mukai transform, is a morphism of fppf sheaves Pic^δ_{A/S} → Pic^{φ(δ)}_{B/S} that is equivariant along φ(δ)~ by the square theorem. The same construction on B goes back to Pic^{φφ(δ)}_{A/S}, and for n = 2 one has φφ(δ) = δ (the reading’s own formula (−1)^n χ^{n−2}δ). The composite B → B is δ̃ ∘ φ(δ)~ = −χ(δ). So (χ(δ) ± 1)·[Pic^δ] = 0, with the sign depending on conventions the pages leave open, and 2·[Pic^δ] = 0 by L ↦ L ⊗ [−1]^*L. Both χ + 1 and χ − 1 are odd, so the conclusion does not depend on the signs the pages worry about. Whether the resulting trivialisation is the canonical one is a separate question, and it stays open.',
+    literature: [
+      'Poonen and Stoll, « The Cassels–Tate pairing on polarized abelian varieties », Ann. of Math. 150 (1999), §4 (definition of c_λ, 2c_λ = 0, Lemma 1, Corollary 2, Proposition 3, Corollary 4), read directly: no criterion in terms of χ(λ) or the dimension',
+      'Morgan and Smith, « The Cassels–Tate pairing for finite Galois modules », arXiv:2103.08530, §1.3 and §5 (Theorems 5.10 and 5.17, Remark 5.18), read only through an automated summary: no vanishing criterion in terms of χ(λ), deg λ or the dimension reported',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks the composition argument in the ours field: the equivariance of L ↦ det L̂ along φ(δ)~, and φφ(δ) = δ for surfaces. Then two tests. First, look for an abelian surface over a number field with a polarisation of even χ (type (1,2), say) and c_λ ≠ 0; one such surface refutes the claim. Second, check a sharp consequence. Since c is additive and killed by 2, the claim forces c_θ = 0 for any genus-2 curve C/k whose Jacobian has real multiplication by O_D, D ≡ 1 mod 8, defined over k: θ is then a sum of two classes of even χ, so Pic^1_C would have a k-point. Also read Moret-Bailly, « Pinceaux de variétés abéliennes » (Astérisque 129, 1985), and Polishchuk, « Abelian varieties, theta functions and the Fourier transform » (2003), for the statement.',
+  },
+  {
+    id: '59-determinant-canonical-section',
+    cote: '59',
+    pages: '1–5, 16–19, 22',
+    kind: 'mathematical',
+    claim:
+      'For X/S proper and flat with Pic^0_{X/S} = B an abelian scheme and A its dual, take a section δ of NS_{X/S}. The determinant of cohomology of the Poincaré sheaf yields a canonical trivialisation of the A-torsor Alb^{χ(δ)}_{X/S} ×^A Pic^{φ(δ)}_{B/S} ×^A (φ(δ)~_* Pic^δ_{X/S})^{(−1)}. Here φ : NS_{X/S} → NS_{B/S} is a polynomial map of degree n − 1, not additive.',
+    basis:
+      'Pages 1–2 define M_g = det Rf_{P*}(𝓛_g) and its change of section (*_b) with exponent χ. Pages 2–4 define φ by descent and the point ℓ(g) of the twisted torsor. Page 4 factors ℓ_δ through Alb^1 with group homomorphism −χ(δ) and boxes the section. Pages 16–19 recover ℓ_δ from det of a Fourier-type transform on X ×_S B, using (**) on page 18. Page 22 sets the sign convention for Alb^1.',
+    ours:
+      'The reading inserts the inverse (−1) on the pushed torsor, where the page has none, so that the convention matches (**) and Mukai. It also uses the universal property of Alb^1, which page 22 announces (« on prouve ») but never proves. The descent step is marked « détailler » in the margin. Statement and signs are therefore partly the edition’s.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check whether this trivialisation, or the map φ with its degree-(n−1) polynomiality, appears in Moret-Bailly (« Pinceaux de variétés abéliennes », Astérisque 129, and his work on the key formula), in Faltings–Chai, « Degeneration of abelian varieties », I.5, or in Polishchuk’s book on the determinant bundle and the Fourier transform. The abelian-scheme case (φ(δ)~ ∘ δ̃ = −χ(δ)) is in substance Mukai 1981 and the dual polarisation of Birkenhake–Lange §14.4. If the general form is there too, mark matched.',
+  },
+  // Folder 120 — find-novelty pass, Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5.5 (pass header 2026-10-03).
+  {
+    id: '120-axiomatic-pushouts-along-embeddings',
+    cote: '120',
+    pages: '8–13',
+    kind: 'mathematical',
+    claim:
+      'In a purely set-theoretic axiomatic setting — families 𝓜_n of subsets of Rⁿ stable under coordinate maps and projections, diagonal preimages, intersections, products and finite unions, with no complements, topology or order — the folder proves that pushouts X₁ ⊔_Z X₂ along tame embeddings exist and are computed as in sets once two axioms hold: every tame subset of a tame set is a fibre over a tame point of finitely many tame functions that separate the points off it (M6), and tame functions extend from tame subsets (M7); it also gives a criterion for such a pushout by finite families of compatible separating tame functions.',
+    basis:
+      'Page 9 adds stability under finite unions; page 10 states the criterion a)–c) and a NB generalising it to finite diagrams; page 11 proves that a set-theoretic colimit carrying a structure making the canonical maps tame is the colimit in Σ; page 12 states (M6), (M7) and the Proposition; page 13 builds the embedding of X₁ and X₂ in R^I × R^{A₁} × R^{A₂} on two levels {e₂} and {e₁} (diagram (*)). On p. 10 « paires de » is \\uncertain{}, and the NB carries an \\ill{} and three \\uncertain{} words; on p. 13 the direction of two arrows of diagram (*) is uncertain.',
+    ours:
+      'The page does not prove the criterion of p. 10; the proof in the reading is the edition’s. The reading adds « modérées » to the functions of the criterion (absent from the page’s statement, present in the NB), reads the page’s « M5 » there as stability under finite unions (M5′), which the page introduces after stating the colimit principle it needs, and restores the conclusion of p. 13 (the two images meet exactly along Z, their union is tame), where the page stops after the diagram. The pass takes no position on whether the reading’s restored conclusion is the one the page intended; it agrees that the construction as drawn yields it.',
+    literature: [
+      'van den Dries, Tame Topology and o-Minimal Structures (1998), ch. 10 « Definable spaces and quotients » — only the chapter summary on cambridge.org was read (2026-10-10): § 1 glues finitely many affine definable patches and proves the Robson-type affine embedding for regular definable spaces; § 2 treats quotients X/E by definably proper equivalence relations; no axiomatic, topology-free treatment of pushouts along embeddings is mentioned there',
+      'One general web search (2026-10-10) on gluing / pushouts / quotients of definable spaces surfaced only Nowak’s non-Archimedean definable spaces (arXiv:2103.01836) and Fujita’s definable quotients by definably compact groups (arXiv:2303.01644), neither read for this question',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read van den Dries ch. 10 (and ch. 6 on the zero-set and Tietze results the folder takes as axioms) to see whether pushouts along closed definable embeddings are derived there from zero-set + extension properties alone; then check axiomatic frameworks that drop complements and topology: Shiota, Geometry of Subanalytic and Semialgebraic Sets (1997), ch. II on 𝔛-sets; categorical treatments of definable sets as regular categories (Makkai–Reyes, First Order Categorical Logic, 1977; Johnstone, Elephant D1–A1.3) for pushouts along monomorphisms; and the Esquisse d’un programme § 5 and its commentators. A derivation of this pushout statement from (M6)+(M7)-type hypotheses in any of these marks the entry matched.',
+  },
+  {
+    id: '120-collapse-separation-over-a-field',
+    cote: '120',
+    pages: '22–23',
+    kind: 'mathematical',
+    claim:
+      'When R is a field with tame ring operations and tame inverses (M11), the second half of axiom (M6) follows from the first: if Y is the common zero set of tame functions f_α on a tame X embedded by tame g_β, the functions f_α and f_α·g_β still have Y as common zero set and separate the points of X ∖ Y, so X/Y exists in the strict sense.',
+    basis:
+      'Page 22 reduces to e_α = 0 by translation and introduces the f_α g_β; page 23 checks separation (λ = f_α(x) ≠ 0, g_β(x) ≠ g_β(y)) and states the Proposition « Si on a M1 : M7 et M11 … ». The statement line on p. 23 carries two \\ill{} words, one before « $X/Y$ »; the « Dém : » is empty, the argument standing above it.',
+    ours:
+      'The edition corrects « e_α ∈ R » (p. 22) to e_α ∈ R₀, which the translation needs, and « sépare les pts de X » (p. 23) to X ∖ Y, the only reading under which the statement is true; the closing gloss « X/Y est un espace modéré » is read through an \\ill{} word.',
+    literature: [
+      'Ferrand, « Conducteur, descente et pincement », Bull. SMF 131 (2003), 553–585 — located by web search (2026-10-10), not read: affine pinching of X′ along a closed subscheme Y′ → Y, with ring A′ ×_{B′} B, whose case Y = point is the ring k + I(Y′) generated by elements of the form f and f·g with f ∈ I(Y′)',
+    ],
+    status: 'unsearched',
+    settle:
+      'The argument is, on its face, the elementary fact that collapsing a closed affine Y to a point is realised by the subring k + I(Y) and that its elements separate points off Y; check whether this appears as such in Ferrand 2003 § 5 or in standard treatments of pinching/conductor squares (e.g. the Stacks Project chapter on pushouts of schemes), and, for the definable setting, van den Dries ch. 10 § 2 on collapsing. If so, mark matched; it is likely to be.',
+  },
+// Folder 127, /find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5.5 (header of 127.modern.tex). Web searches only, no source read by section.
+  {
+    id: '127-closure-flatness-artinian-or-trait',
+    cote: '127',
+    pages: '2–4, 15, 19',
+    kind: 'mathematical',
+    claim:
+      'For X → Y locally noetherian, F coherent on X, and a coherent quotient G_U of F|_U on a retrocompact open U, flat over Y: if the local rings of X at the points of X − U have geometrically normal formal fibres, then G = Im(F → i_*G_U) is flat over Y with U universally G-dense relative to Y if and only if this holds after every base change Y′ → Y with Y′ artinian or a trait. This is a valuative criterion for the flatness of a schematic closure over a base that need not be reduced.',
+    basis:
+      'Page 15 states this as the « Vrai théorème » / « Énoncé final », combining Remarque 1.4.2 (conditions (b)+(c) of Th. 1.4 ⟺ solutions after every artinian base change) and Remarque 1.4.3 (condition (a) follows from solutions after every base change to a trait). Pages 3–4 give Th. 1.4 and the outline of its proof (localisation, henselisation, completion, limit over the Spec Ô/m^n). Page 19 gives the Chevalley-type finite subfamily used in the limit step. No complete proof is written: page 4 is largely illegible, and the « Vrai théorème » is stated without proof. On page 15, « tout » and « artinien » in 1.4.2 are \\uncertain{} and « inutile » in the circled marginal note (« inutile si les O_{Y,y} réduits ») is \\uncertain{}. The statement turns on « artinien ».',
+    ours:
+      'The edition supplies a good deal. It writes condition (a) in a density form and asserts that this form is equivalent to the page’s specialisation form. It phrases universal injectivity by base change, in EGA IV 11.10 vocabulary. It takes the alternative in condition (c) from the fair copy in another hand (page 16) rather than from the overwritten page 3. It works out how page 19, Lemma 1.3 and (c) chain together in the limit step. The density-form restatement is ours.',
+    literature: [
+      'Web search, 10 October 2026: « valuative criterion flatness schematic closure universally schematically dense artinian base change traits non-reduced base ». It found the usual valuative criterion of flatness, stated for a reduced noetherian base (lecture notes of D. Bejleri, Math 259x, lecture 4; A. Fernández Herrero, « My favorite flatness results », citing Raynaud–Gruson), and Timofeeva, arXiv 1209.6279 (Hilbert-polynomial criterion over a non-reduced base). None of them bears on schematic closures or universal density. This was an orienting search, not a reading of the sources.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read EGA IV §11.8 (valuative criterion of flatness, reduced base) and §11.10 (universally schematically dense opens, the Ass criterion 11.10.9–10), and Raynaud–Gruson, « Critères de platitude et de projectivité » (Invent. Math. 13, 1971), Part I §§4–5 (pure modules, flattening, valuative criteria). Ask whether the two-sided criterion — artinian base changes and traits together — for the flatness and universal density of Im(F → i_*G_U) appears there, with or without the formal-fibre hypothesis. Before any search, settle « artinien » on page 15 against the facsimile; that is /transcribe-grothendieck’s work.',
+  },
+  {
+    id: '127-non-flat-descent-artinian-epimorphism',
+    cote: '127',
+    pages: '2–3',
+    kind: 'mathematical',
+    claim:
+      'Over an artinian base Y, the problem of a flat quotient G of F extending G_U, with G → i_*G_U universally injective relative to Y, descends along any epimorphism of schemes Y′ → Y, flat or not, provided Y′ → Y is finite or f and the solution are of finite presentation. The flat quotients in question are those of a sheaf already given, and the solution is unique when it exists.',
+    basis:
+      'Lemma 1.3 is stated at the foot of page 2 (« Suppo… ») and resumed at the top of page 3. The alternative hypothesis (finite, or of finite presentation) comes from a pencil note on page 2. The sentence introducing the lemma defines « descente non plate » as the descent of flat quotients of a given sheaf. The lemma is not proved in the folder.',
+    ours:
+      'The reading adds two things. It argues that, over a local artinian base, an epimorphism is the same as a surjective morphism with A → Γ(Y′, O) injective. It gives the example of two copies of Spec k[ε] mapped onto the axes of Spec k[x,y]/(x,y)², an epimorphism that is not flat. Neither is on the page. The lemma’s statement is the page’s, pieced together across a page break.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Decide first whether the lemma is true as stated; no proof is given. Then look for descent of flatness of a determined quotient along non-flat (universally injective or epimorphic) morphisms: Raynaud–Gruson 1971, Part I; Ferrand, « Conducteur, descente et pincement » (Bull. SMF 131, 2003); Mesablishvili on pure morphisms and effective descent for modules. Also look at the Stacks Project chapter on descent along non-flat morphisms. If the statement there is the same, with the uniqueness of Im(F → i_*G_U) doing the work, mark matched.',
+  },
+  {
+    id: '127-hironaka-reduced-base-openness',
+    cote: '127',
+    pages: '7, 9, 10, 12',
+    kind: 'mathematical',
+    claim:
+      'Let f : X → Y be of finite type, with Y noetherian and O_{Y,y} reduced with geometrically normal formal fibres. Suppose f is universally open at x and the fibres are equidimensional of the same dimension near x. Suppose further that X_y is reduced at the maximal generisations of x and (X_y)_red is geometrically normal. Then x has an open neighbourhood U such that U_red → Y is flat with geometrically normal fibres. This is Hironaka’s flatness-and-normality statement over a reduced, not necessarily regular, base.',
+    basis:
+      'Th. 1.8 is stated on page 7, and its conclusion there is struck and only partly read. Page 10 restates it, with the conclusion « plat à fibres géom. normales ». The proof is a sketch. Page 9 and page 10 show the separable locus open (EGA IV 12) and dense in the fibres (EGA IV 15.2.3, by equidimensionality). Page 12 gets normal fibres by Hironaka’s lemma after base change to a trait, and flatness from the folder’s own « critère valuatif de platitude d’une adhérence schématique » (Cor. 1.6–1.7). Page 9 carries a « Lemme à dégager » that is never written out. On page 12, the indices y′₀ and several words of the normality step (« remarqué », « appliquons », « plat ») are \\uncertain{}.',
+    ours:
+      'The statement follows the restatement on page 10, because the conclusion on page 7 is struck. The reading names Hironaka’s lemma in its EGA IV 5.12.8 form, cited from memory; the folder does not state it. The link to Cor. 1.6–1.7 with F = O_X and G_U = O_U is the page’s. Filling in the sketch is not.',
+    literature: [
+      'Web search, 10 October 2026: « universally open morphism reduced base fibre generically reduced normal reduction implies flat normal Hironaka lemma », then « Kollár "Simultaneous normalization and algebra husks" Hironaka ». The abstract of Kollár, « Simultaneous normalization and algebra husks » (Asian J. Math. 15, 2011; arXiv 0910.1076), attributes to Hironaka the case S regular: fibres generically reduced with normal reductions ⇒ red X → S flat with normal fibres. The paper itself was not read.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read Kollár 2011 (arXiv 0910.1076), §1 and the statement attributed to Hironaka with its reference. Read also EGA IV 5.12.8, 15.2.2–15.2.3 and 12.1–12.2, and Kollár, Families of varieties of general type (2023), on Hironaka-type flatness. The question is whether the version over a reduced base — universally open and equidimensional in place of regular, with geometrically normal formal fibres — is in print. If it is, mark matched. If only the regular-base case is, the status becomes candidate, but the sketch on page 12 rests on uncertain readings and on the unproved Cor. 1.6–1.7.',
+  },
+  {
+    id: '127-ega-iv-typescript-leaf',
+    cote: '127',
+    pages: '8–9',
+    kind: 'codicological',
+    claim:
+      'Page 8 is not a draft of this folder. It is a leaf of the EGA IV typescript (§21, n° 21.10 « Factorialité des anneaux locaux réguliers », typed page number read IV-1131 with doubt), carrying autograph corrections: « Créditer Kaplansky de la démonstration ici », « (Auslander-Buchsbaum) », the reference « (5.11.6) » changed to « I 9.4.5 », a struck clause, and the label (21.10.1.1) added by hand. The renumbering of page 9 (« 7 » over « 8 ») is consistent with the leaf having been slipped into the sequence.',
+    basis:
+      'The transcription’s header and its page-8 note identify the typed text and list the hand interventions. The page-9 note records the overwritten number.',
+    ours:
+      'The reading that the leaf was « glissé là », inferred from the page numbers, is the edition’s. The typed page number is read with doubt.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Compare the leaf with the published EGA IV 21.10–21.11 (Publ. Math. IHÉS 32, 1967). Check whether the credit to Kaplansky, the attribution to Auslander–Buchsbaum and the reference I 9.4.5 reached print as corrected. Check the typed page number against the facsimile.',
+  },
+  // Folder 129 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over the Opus 5.5 reading of 2026-10-03 (same model; no exception invoked).
+  // Read in full for this pass: E. Peterson’s English translation of Grothendieck, « Groupes de Barsotti–Tate et cristaux de Dieudonné » (Montréal 1974), matematicas.unex.es/~navarro/res/cristaux-eng.pdf, which prints the French section numbers in its margin; and L. Illusie, « Revisiting deformations of truncated Barsotti–Tate groups » (Chicago, 6 March 2023), imo.universite-paris-saclay.fr/~illusie/Illusie-Chicago-2023-1.pdf. The French original, Illusie’s Astérisque 127 (1985) and the 1970 Nice Actes were NOT read.
+  // Most of the folder turned out to be drafts of the Montréal volume itself, so the mathematical candidates are matches; they are kept as killed candidates.
+  {
+    id: '129-tate-object-one-index',
+    cote: '129',
+    pages: '97, 99, 101–103',
+    kind: 'mathematical',
+    claim:
+      'For an endomorphism f with fⁿ = 0 of an object of an abelian category, the conditions Ker fʲ = Im fⁿ⁻ʲ for all j, for one j, and the bijectivity of gr⁰[t] → gr•_f are equivalent; for a flat, finitely presented commutative group scheme the condition can be checked fibre by fibre. This is in the published literature for f = p.',
+    basis:
+      'Page 97 states the proposition (i)–(iv) and proves it with a chain of implications; pages 101–103 give the group-scheme version, (i) Ker fʲ flat and fⁿ⁻ʲ : G → Ker fʲ faithfully flat ⇔ (ii) every fibre is a Tate object, by the fibrewise flatness criterion.',
+    ours:
+      'The reading supplies the chain (i bis) ⇔ (ii) and the remark that the inclusion Ker fʲ ⊂ Im fⁿ⁻ʲ for one j suffices, which is equivalent to equality because the opposite inclusion always holds. It also supplies “non-negative” for the rank function (page: « à valeurs entières », \\uncertain{}), and treats the one-index condition (iv) of page 97 as the page’s own. « plat » in the hypothesis of page 101 is \\uncertain{}. Identifying these objects with truncated BT groups for f = p and n ≥ 2 is the reading’s link.',
+    literature: [
+      'Grothendieck, Groupes de Barsotti–Tate et cristaux de Dieudonné (Montréal 1974), ch. III Prop. 2.2 and 2.4, read in Peterson’s translation (Prop. 3.1.4 items (3), (4) “for some i”, (6) the graded map; Prop. 3.1.5, whose proof uses the fibre-by-fibre flatness criterion)',
+      'Illusie, « Revisiting deformations of truncated Barsotti–Tate groups » (Chicago 2023), Def. 1.1 and the comment after it (flatness over ℤ/pⁿ ⇔ exactness of G → G → G for pⁿ⁻¹, p; “these conditions can be checked on the fibers”)',
+    ],
+    status: 'matched',
+    settle:
+      'Matched for f = p in the Montréal volume, ch. III 2.2. What is left is the abstract form for an arbitrary nilpotent endomorphism in an abelian category. Its proof is formally the same, so it is not a candidate. To close the entry, read the French original of III 2.2 and confirm that the translation’s numbering is accurate.',
+  },
+  {
+    id: '129-colie-truncated-bt-package',
+    cote: '129',
+    pages: '92, 94–95',
+    kind: 'mathematical',
+    claim:
+      'The folder’s results on the co-Lie complex of a truncated BT group are published. These are the « formule remarquable » R𝐻𝑜𝑚(ℓ^G, 𝒥) ≅ τ≤1 R𝐻𝑜𝑚(G*, 𝒥), the proposition on ω and n of G(n) under inclusion and under multiplication by p^{n−n′} (with pᴺ = 0, n ≥ N), and Ext²_{ℤ/pⁿ}(G, M) ≅ Ext²_ℤ(G, M) with Ext¹_{ℤ/pⁿ}(G, M) = 0.',
+    basis:
+      'Page 92 has the boxed formula, page 94 (D) the proposition with its bounds, and page 95 the theorem. The page proves none of them.',
+    ours:
+      'For the formula, the reading supplies the hypothesis “G finite locally free”. It also corrects the marginal t_{G*} to t_G and reads the page’s H_i(L^{G(n)}) as H_i(ℓ^{G(n)}). The reading’s footnote attributes the formula to Illusie, Complexe cotangent et déformations II, ch. VII, from memory, and Illusie 2023 attributes it to Grothendieck via Mazur–Messing, LNM 370, 14.1. The two citations differ, and the reading’s footnote should be checked.',
+    literature: [
+      'Illusie, « Revisiting deformations of truncated Barsotti–Tate groups » (Chicago 2023), (1.7.1) and Lemma 1.8 (1)–(5), with the remark that only pᴺ𝒪_S = 0 and n ≥ N are needed (citing Astérisque 127, §2)',
+      'Grothendieck, Groupes de Barsotti–Tate et cristaux de Dieudonné (Montréal 1974), ch. VI §5 « Complexe cotangent relatif », in Peterson’s translation (§6.6)',
+    ],
+    status: 'matched',
+    settle:
+      'Matched. Check Illusie, Astérisque 127 (1985), §2, for the exact form of the bounds of page 94, which the reading did not verify. Check Mazur–Messing LNM 370 §14 against the reading’s footnote attributing the formula to Illusie CC II.',
+  },
+  {
+    id: '129-ext2-vanishing-p-odd',
+    cote: '129',
+    pages: '95',
+    kind: 'mathematical',
+    claim:
+      'The folder asserts that 𝐸𝑥𝑡²_ℤ(G, M) = 0 for every finite locally free commutative group scheme G and quasi-coherent M as soon as 2 is invertible, and remarks that this simplifies the deformation theory of BT groups for p ≠ 2.',
+    basis:
+      'Page 95 has a parenthetical NB after the theorem on Ext over Λₙ: « Ext²_ℤ(G, M) = 0 si 2 \\uncertain{inv.}, pour tt G fini loc. libre ». The word carrying the hypothesis is uncertain in the transcription, and the page gives no proof.',
+    ours:
+      'The reading leaves the statement as the page’s own and does not verify it. This pass adds one observation, which is its own step and not a source. Illusie 2023 places the obstruction to deforming a BTₙ in Ext²_ℤ(G₀, t_{G₀} ⊗ J), and says that proving directly that it vanishes is “out of reach”. On S₀ = Spec k the NB as read would make that obstruction vanish at once for p odd. So the NB, read this way, is in tension with Illusie’s account. This is not a refutation.',
+    literature: [
+      'Illusie, « Revisiting deformations of truncated Barsotti–Tate groups » (Chicago 2023), §1, pp. 2 and 6. The NB is not stated there.',
+    ],
+    status: 'unsearched',
+    settle:
+      'First have the transcription re-read the word « inv. » on page 95 against the facsimile. Then compute 𝐸𝑥𝑡²_ℤ(α_p, 𝔾_a) over a perfect field of odd characteristic. The tools are Breen, « Extensions du groupe additif » (Publ. IHÉS 48, 1978) and Illusie, Astérisque 127 §2–4. If it is non-zero, the NB as read is refuted. If not, look for the vanishing in Astérisque 127.',
+  },
+  {
+    id: '129-drafts-of-montreal-volume',
+    cote: '129',
+    pages: '1–75, 77, 79–95',
+    kind: 'codicological',
+    claim:
+      'The folder holds the working material of the 1974 Montréal volume « Groupes de Barsotti–Tate et cristaux de Dieudonné ». Pages 1–75 are typescripts of its chapters I–III. His typed and handwritten drafts at pages 83–87 and 89–95 correspond to its ch. III §§6–7 and ch. VI §§2, 4 and 5 (Théorème (4.1) on page 90 bears the volume’s own number).',
+    basis:
+      'The typescript titles and numbering recorded in the transcription match the French marginal numbering of the published volume. They are « Préliminaires sur Witt », ch. II Théorème 4.2 and the Annexe on a quasi-inverse, and ch. III « Platitude et critère de représentabilité » 2.2/2.4, Définitions 3.2, 4.1, 4.2, « Sorites » 5.2, « Exemples » §6, « Suite de composition » Prop. 7.4. Page 90’s « 4. Déformations de groupes de BT : énoncés », Théorème 4.1 a)–d), matches the volume’s ch. VI §4 « (énoncé) », Théorème (4.1) (1)–(4). Page 90 announces « 5. Rapport sur le complexe cotangent relatif », which is the volume’s ch. VI §5. Labute’s Avertissement credits Hakim and Delale with drafting most chapters, and says the F-crystal chapter was left out. This agrees with the pencilled « DELALE » on page 1 and with chapter VI of page 77’s plan, « F-cristaux », which has no pages in the folder.',
+    ours:
+      'The identification is this pass’s, made on the published volume. Only the chapter titles and numbers were compared, not the text. It corrects the reading on one point. The reading assigns pages 89 and following « vraisemblablement » to chapters IV–V of the plan, but the published volume puts that material in its chapter VI, « Propriétés infinitésimales des groupes de Barsotti–Tate ». It says nothing about who wrote which typescript.',
+    literature: [
+      'Grothendieck, Groupes de Barsotti–Tate et cristaux de Dieudonné (Montréal 1974), read in Peterson’s translation with its French marginal section numbers: Avertissement (Labute, October 1973), contents, ch. I–III, ch. VI §§2–6',
+      'Transcription 129, batches 1–5, headers and notes on pages 1, 28–75, 77, 89–90',
+    ],
+    status: 'candidate',
+    settle:
+      'A person compares the typescript leaves of pages 1–75 with the printed French volume, section by section, and checks pages 89–95 against its ch. VI. The rights question (RIGHTS.md) is separate: naming the published volume does not restate the typescripts.',
+  },
+  {
+    id: '129-page-101-continues-99',
+    cote: '129',
+    pages: '97–101',
+    kind: 'codicological',
+    claim:
+      'Page 101 continues page 99 across a foreign leaf. Pages 98 and 100 are the fronts of duplicator sheets (« n° 380 », pp. 48 and 51) whose backs carry pages 97 and 99. The argument on morphisms of Tate objects runs from the foot of page 99 to the head of page 101.',
+    basis:
+      'Page 99 ends with a list of equivalent conditions on u : A → B (u isomorphism, gr⁰(u) …), largely illegible. Page 101 opens « en cours de démonstration » with « \\ill{} que c’est un isom. » and then proves exactly those implications: u mono ⇒ gr⁰(u) mono, u épi ⇒ gr⁰(u) épi, gr⁰(u) isom ⇒ u isom.',
+    ours:
+      'The join is the reading’s. Batch 6’s note says only that the preceding page of the argument « n’est pas dans ce lot ».',
+    literature: ['Transcription 129, batch-05.fr.tex header and pages 97, 99; batch-06.fr.tex page 101'],
+    status: 'candidate',
+    settle:
+      'A person checks against the facsimile that the leaf of page 101 follows the sheet carrying page 99, and that page 101 is not the back of page 100.',
+  },
+  {
+    id: '129-leaves-81-82-missing',
+    cote: '129',
+    pages: '80–81',
+    kind: 'codicological',
+    claim:
+      'Two leaves may be missing after page 80. The archivists’ pencil numbers jump from 80 to 83 between consecutive leaves of the scan, page 80 stops mid-sentence, and page 81 begins in mid-exposition with a « ceci » that points to nothing in the folder.',
+    basis:
+      'Batch 5 records « 80 » on PDF page 80 and « 83 » on PDF page 81, with 82 + k on every later leaf checked. Page 80 breaks off at « On va introduire sur W_k une structure de schéma en groupes avec ». Page 81 is a handwritten leaf whose « ceci » refers back to text not in the folder.',
+    ours: null,
+    literature: ['Transcription 129, batch-05.fr.tex header (numbering) and page 81 note; batch-04.fr.tex page 80'],
+    status: 'candidate',
+    settle:
+      'A person checks the original folder at Montpellier, or the archive’s own scan, for leaves pencilled 81 and 82. The alternative is that the archivist skipped two numbers. The volume’s ch. I 1.2 (ind-schemes Ŵ) and ch. II 2.3–2.4 show what the missing text should cover.',
+  },
+  {
+    id: '129-nice-outline',
+    cote: '129',
+    pages: '112–114',
+    kind: 'codicological',
+    claim:
+      'Pages 112–114, headed « Conférence à Nice » in his hand, are the outline of his address to the 1970 Nice International Congress, « Groupes de Barsotti–Tate et cristaux » (Actes du Congrès international des mathématiciens 1970, t. 1, pp. 431–436).',
+    basis:
+      'The heading, the inventory’s date [1970], and the content: BT groups, Serre–Tate, divided powers, the crystalline site, crystals, and a programme I)–V) on the crystalline Dieudonné functor.',
+    ours:
+      'The identification is the reading’s, and it was not compared with the printed text. This pass found only the bibliographic reference (pp. 431–436), not the text.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Compare pages 112–114, point by point, with the printed address in the Nice Actes (Gauthier-Villars 1971, t. 1, 431–436). Check in particular whether the printed text keeps the restriction on page 114 to G₀ with toroidal or connected fibres, and the « il se pourrait » of point II).',
+  },
+  // Folder 132, find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, on the Opus 5.5 reading of 2026-10-03.
+  // Dropped, not written up: the base-change sequence of page 15 (an elementary consequence of the two homotopy sequences); the corrected statement of page 21 (the page marks its own claim « faux »; the proposition is the reading’s); the closing answer to page 13’s question (entirely the reading’s); the Ladegaillerie offprints (another author’s published Notes).
+  {
+    id: '132-nonconnected-extension-classification',
+    cote: '132',
+    pages: '16–20',
+    kind: 'mathematical',
+    claim:
+      'For a topological group H with discrete π₀(H) = 𝔊, given a chosen extension H̃ of H by π = π₁(H⁰) prolonging the universal cover of H⁰, the category of extensions of H by an arbitrary (not necessarily abelian) discrete group N is equivalent to the category of pairs (G̃₀, φ): an extension G̃₀ of 𝔊 by N and a 𝔊-equivariant morphism φ : π → 𝔷(N), with G recovered as a contracted product and π₀(G) ≅ G̃₀/φ(π).',
+    basis:
+      'Page 19 states the equivalence under α) H̃₀ connected and simply connected, β) π ⊂ H̃₀, γ) π, N, 𝔊 discrete; pages 16–17 set up the general frame (A) with strict trivialisations; page 20 gives the explicit construction by G_! and the push-out of H̃ along φ, and the formula for π₀(G). No proof beyond these reductions is written. In the transcription, the « 𝔊- » of « 𝔊-hom. » on page 19 is written over an overwrite, and the slanted NB that identifies G̃₀ with π₀G̃ is a partial reading (\\uncertain{} throughout); the statement itself is legible.',
+    ours:
+      'The reading supplies the standing hypotheses (groups locally path-connected and semi-locally simply connected, quotient maps Serre fibrations), without which the page’s homotopy sequences do not hold, and gives « trivialisation stricte » a definition (equivariant splitting centralising N) where the page’s gloss on page 16 is illegible. It also notes that page 17’s product Ext(𝔊, N) × Hom_𝔊(π, 𝔷(N)) is a product only once the outer action 𝔊 → Out(N) is fixed. The page-19 statement does not depend on these repairs beyond the standing hypotheses.',
+    literature: [
+      'R. Brown and O. Mucuk, « Covering groups of non-connected topological groups revisited », Math. Proc. Camb. Phil. Soc. 115 (1994), 97–110, read 2026-10-10 in the arXiv version math/0009021v2 (2006): Theorems 5.2, 5.4 and 6.3 classify covering morphisms X̃ → X of topological groups via crossed modules π₁(X, e) → X and extensions of type a crossed module, by data θ : Φ → π₀X, a π₀X-invariant N ⊂ π₁(X, e), an obstruction in H³_θ(Φ, π₁X) and a torsor under H²_θ(Φ, A). Not found there: a classification, for a fixed H̃, of the extensions of H by a given non-abelian discrete kernel by the pair (G̃₀, φ : π → 𝔷(N)).',
+      'D. Rumynin, D. Vakhrameev, M. Westaway, « Covering groups of nonconnected topological groups and 2-groups », arXiv 1709.09728 — abstract only (Taylor and Sinh cocycles); the body was not read.',
+    ],
+    status: 'candidate',
+    settle:
+      'Read R. L. Taylor, « Compound group extensions I », Trans. AMS 75 (1953), 106–135, and « Covering groups of nonconnected topological groups », Proc. AMS 5 (1954), 753–768 (cited from Brown–Mucuk’s bibliography and from memory), and K. Mackenzie’s account for Lie groupoids that Brown–Mucuk cite: Brown–Mucuk say results of this type were known to Taylor. If either gives the (G̃₀, φ) description, or if it is a direct translation of Brown–Mucuk 6.3 via the crossed module π → H̃, mark matched.',
+  },
+  {
+    id: '132-taylor-obstruction',
+    cote: '132',
+    pages: '19',
+    kind: 'mathematical',
+    claim:
+      'An extension H̃ of a non-connected topological group H by π = π₁(H⁰) prolonging the universal cover of H⁰ need not exist nor be unique; such extensions form a homogeneous space under H²(π₀H, π), the obstruction to existence lies in H³(π₀H, π), and one exists when H is a semi-direct product π₀H ⋉ H⁰.',
+    basis:
+      'The NB of page 19, which says « sauf erreur » of the H³ obstruction and « unique (i.e. mod. action de H²(𝔊, π)) comme extension de 𝔊 par π ». The words « à isom. près » are \\uncertain{} in the transcription; a struck \\ill{} sits before the parenthesis.',
+    ours:
+      'The reading writes « homogeneous space under H²(𝔊, π) » where the page says « unique … mod. action de H² »; the semi-direct product case is the page’s.',
+    literature: [
+      'R. Brown and O. Mucuk, Math. Proc. Camb. Phil. Soc. 115 (1994), arXiv math/0009021v2, read 2026-10-10: Theorem 5.4 and Corollary 5.5 (obstruction class in H³(π₀X, π₁(X, e)), coverings classified by H²), crediting R. L. Taylor, Proc. AMS 5 (1954).',
+    ],
+    status: 'matched',
+    settle:
+      'Settled: this is Taylor’s obstruction, restated by Brown–Mucuk 1994, Corollary 5.5. Kept as a killed candidate; the reading’s footnote already names both.',
+  },
+  {
+    id: '132-peripheral-gr-category',
+    cote: '132',
+    pages: '5–8',
+    kind: 'mathematical',
+    claim:
+      'For a compact orientable surface with n ≥ 1 boundary components, the 2-group of self-equivalences of the model (π₁, boundary loops ℓᵢ, tethers α(i)) has π₀ the mapping class group with free boundary and π₁ zero except for the disc (ℤ, canonically) and the cylinder (ℤ, not canonically), and its boundary-fixed version has π₀ the mapping class group relative to the boundary and π₁ always zero: an algebraic, groupoid-theoretic Dehn–Nielsen–Baer statement for several boundary components.',
+    basis:
+      'Pages 5–7 define the 2-category of triples (𝒞, 𝒟, φ), reduce to the normal form (G, (ℓᵢ)), compute π₀ as the subgroup of Out(G) preserving the boundary conjugacy classes and π₁ case by case (disc, cylinder, general), and define TS from the pairs (v, α) with v(ℓᵢ) = α(i) ℓᵢ α(i)⁻¹. The page computes only these groups; it never states the topological identification. « Aut(,) » on page 6 is \\uncertain{}.',
+    ours:
+      'Substantial. The page does not define « groupoïde 2-spécial » or « foncteur spécial »; the reading takes them to be the fundamental groupoids of a compact orientable surface and its boundary. The identification of T and TS with mapping class groups (free boundary, relative to the boundary) is the reading’s, as is the justification that each ℓᵢ is not a proper power, and the correction of page 7’s last term v₁(ℓᵢ) to ℓᵢ. As read in this pass, the boundary-fixed TS for n = 1 is the stabiliser of ℓ₁ in Aut(F), which agrees with the classical description of the mapping class group of a surface with one boundary component; for n ≥ 2 the identification was not checked.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Compare with Zieschang–Vogt–Coldewey, Surfaces and Planar Discontinuous Groups (LNM 835, 1980), ch. 5, and Farb–Margalit, A Primer on Mapping Class Groups, ch. 8 (Dehn–Nielsen–Baer with boundary, cited from memory), and with any treatment of the mapping class group rel boundary as automorphisms of the fundamental groupoid with one base point on each boundary component. If the multi-boundary, rel-boundary statement is there in groupoid form, mark matched; the computation of π₁ (disc, cylinder) is the algebraic shadow of the known homotopy types of their homeomorphism groups and is not itself a candidate.',
+  },
+  {
+    id: '132-teichmuller-boundary-sequence',
+    cote: '132',
+    pages: '8',
+    kind: 'mathematical',
+    claim:
+      'There is a sequence 0 → ℤ^I → TS → T → 𝔖_I → 1, exact except at ℤ^I for the disc (TS = 0) and the cylinder (kernel ℤ via the sum): in mapping-class terms, the boundary Dehn twists generate a free abelian kernel of rank n between the group relative to the boundary and the group with boundary free and permutable.',
+    basis:
+      'Page 8 writes the sequence and computes Ker Ψ, with the margin « exacte sauf pour la sphère à 1 ou 2 trous », whose first word is \\uncertain{}. Surjectivity onto 𝔖_I is not argued on the page.',
+    ours:
+      'The mapping-class reading, the identification of ℤ^I with boundary twists, and the topological justification of surjectivity onto 𝔖_I are the reading’s.',
+    literature: [
+      'Web search, 2026-10-10: Farb–Margalit, A Primer on Mapping Class Groups, §3.6 « Cutting, capping, and including » — the capping homomorphism with kernel generated by the boundary twists, quoted as Theorem 3.18 or Proposition 3.19 by secondary sources (e.g. arXiv 1410.5531); only the search snippets were read, not the book.',
+    ],
+    status: 'matched',
+    settle:
+      'Open Farb–Margalit §3.6 and confirm the numbering and the exceptions (disc, annulus); the sequence is standard and the entry is kept as a killed candidate.',
+  },
+  {
+    id: '132-fibre-product-pi2-defect',
+    cote: '132',
+    pages: '1–3',
+    kind: 'mathematical',
+    claim:
+      'For a Serre fibration f : X → S and any g : Y → S, the functor Π₁(X ×_S Y) → Π₁(X) ×²_{Π₁(S)} Π₁(Y) is bijective on π₀ and surjective on π₁, with kernel at the base component Coker(π₂X × π₂Y → π₂S); hence an equivalence for aspherical X, Y, S.',
+    basis:
+      'Pages 1–3 (his pagination (1)–(3)) compare the homotopy sequences of Z → Y and of the groupoid fibre Φ. On page 3 the word « id. » in « ext. de id. par » is \\uncertain{}, the F̃ of the second diagram may be a Φ, and the closing word (« X, Y, S sont des … ») is \\ill{}.',
+    ours:
+      'The reading reads « connexes » as path-connected (otherwise « f surjectif » fails), restricts the π₂ criterion to the component of z₀ (the page states it without restriction), and restores the illegible last word as « asphériques ».',
+    literature: [
+      'Web search, 2026-10-10, for the fundamental groupoid of a fibre product and Brown’s « Fibrations of groupoids »: returned Jacqmin–Mantovani–Metere–Vitale (arXiv 1707.00868) and Brown–Heath–Kamps (J. Pure Appl. Algebra 1983) on Mayer–Vietoris sequences for pullbacks of groupoid fibrations; only the search summaries were read.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read R. Brown, « Fibrations of groupoids », J. Algebra 15 (1970), and Topology and Groupoids (ch. 7 and 10), and Brown–Heath–Kamps 1983. The statement is almost certainly the low-degree part of the Mayer–Vietoris sequence of a homotopy pullback; if it is stated there, mark matched.',
+  },
+  {
+    id: '132-page-18-interleaved',
+    cote: '132',
+    pages: '18',
+    kind: 'codicological',
+    claim:
+      'Page 18, bound between paragraphs (A) and (B) of the run on extensions of topological groups (pages 13–23), belongs by its content to the run on surfaces and 1-complexes (pages 5–11).',
+    basis:
+      'Page 18 treats embeddings of 1-complexes in surfaces (PLO, TUBO, SOB, CO, Teichmüller groups T_{g,n}, « Le calcul des g_i n_i est donné par Yves »), with no reference to the notation of (A)–(C); page 17 and page 19 continue each other ((A) closes, (B) opens). Most annotations around page 18’s diagram are \\uncertain{}.',
+    ours:
+      'The assignment to pages 5–11 is the reading’s, by content only.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look at the facsimile for page 18: paper, ink, fold and any pagination, against pages 10–11 and 17–19. If the leaf matches 10–11 physically, the interleaving is a binding accident; if it matches 17–19, it was written in the course of the extensions run.',
+  },
 ];
