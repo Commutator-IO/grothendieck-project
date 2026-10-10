@@ -1,0 +1,565 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+% Charter and Menlo (macOS); elsewhere, XCharter and DejaVu Sans Mono, from which they derive.
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{\setmainfont{XCharter}}
+\IfFontExistsTF{Menlo}{\setmonofont{Menlo}[Scale=0.82]}{\setmonofont{DejaVu Sans Mono}[Scale=0.82]}
+\usepackage{polyglossia}\setmainlanguage{english}\setotherlanguage{french}
+\usepackage{microtype}
+\usepackage[a4paper,margin=27mm]{geometry}
+\usepackage{booktabs,longtable,array}
+\usepackage{setspace}\setstretch{1.1}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newcommand{\q}[1]{“#1”}
+% A folder, a batch, a page: the address of every claim.
+\newcommand{\cote}[1]{\mbox{no.\,#1}}
+\newcommand{\lot}[3]{\href{https://grothendieck.commutator.io/\##1/#2/p#3}{#1, batch #2, p.~#3}}
+% The file of the verified proof, once per section.
+\newcommand{\verifie}[1]{\footnote{Proof verified: \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/#1.lean}{\texttt{lean/Grothendieck/\detokenize{#1}.lean}}.}}
+% A statement linked to one of the numbered theorems of the timeline of the works
+% (Timeline tab of the site): a diamond and the number, linking to the timeline.
+\definecolor{frise}{HTML}{2F4DA8}
+% A lead: a statement of the folder that the Findings tab of the site holds to be
+% possibly absent from the literature, candidate or not yet searched --- not
+% proved here, and not established as new. The diamond links to its entry.
+\definecolor{piste}{HTML}{B53D1D}
+\newcommand{\piste}[1]{\,\href{https://grothendieck.commutator.io/findings/\##1}{\textcolor{piste}{\ensuremath{\blacklozenge}}}}
+% Under the title of each part: the letters of the fonds that date and place the part.
+\newcommand{\lettres}[1]{{\small #1\par}\medskip}
+% Under the letters, where relevant: formalisations outside the project touching the theme of the part.
+\newcommand{\ailleurs}[1]{{\small\textit{Elsewhere}: #1\par}\medskip}
+\newcommand{\lie}[1]{\,\href{https://grothendieck.commutator.io/timeline/\#works}{\textcolor{frise}{\ensuremath{\blacklozenge}\,\textup{#1}}}}
+\theoremstyle{plain}
+\newtheorem*{enonce}{Statement}
+\newtheorem{lemme}{Lemma}[section]
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem*{remarque}{Remark}
+\raggedbottom\emergencystretch=1.5em
+
+\title{\Large Category theory in Grothendieck's Montpellier manuscripts:\\ statements proved in Lean~4\\[4pt] \normalsize An extract of the annex \q{Statements of the modernised readings proved}}
+\author{Michel Hua\\ \small Independent researcher, Paris\\ \small \texttt{michel@commutator.io}}
+\date{\small October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent The modernised readings of the Grothendieck fonds in Montpellier restate his working notes in current language; derived from the transcription, they can be wrong. The annex \q{Statements of the modernised readings proved} proves statements of these readings in twenty-two folders; this extract gathers the five that concern category theory: folders~19, 133 and 161-1 (categories and functors), folder~161-2 (universal algebra and theories) and folder~113, which the site's map of the mathematics of the fonds files under functional analysis, through the tensor product of linear categories. For folders~19 and~161-2 the proved statement detaches itself from a larger theory --- comonads and topoi, locally presentable categories --- and only that statement is proved. Each proof follows a proof verified in the Lean~4 proof assistant, whose reference is given in a footnote to the title of each section; it establishes that the statement holds under the hypotheses as written, not that the reading is faithful to the page. For each statement it gives the context of the sheet, the proof, then the superfluous or necessary hypotheses and the corrections made to the reading or to the page. The extract closes with the list of what, in these folders, is not proved.
+\end{abstract}
+
+\noindent\emph{Conventions of the extract.} References of the form \q{19, batch~1, p.~4} link to the page of the fonds on the project's site (folder, batch, page). The diamond \lie{$n$} marks a statement linked to theorem~$n$ of the site's timeline of the works; the link is one of subject, not of proof. The red diamond \textcolor{piste}{\ensuremath{\blacklozenge}} marks the statements, proved or not, that the site's Findings tab keeps as leads: statements of the folder that might not appear in the published literature. A lead is neither an established result nor a claim of priority; the diamond links to its entry, which says what was searched and what would settle it. One lead is proved here (folder~133): the proof establishes that the statement holds as written, not that it is missing from the literature. Three questions are left to the reader: is the proved statement correct as written, given that the Lean verification only establishes its validity under the hypotheses as written? Does it lack a hypothesis, or carry one too many? Does it already appear in the literature, and where? For the lead, only the last arises.
+
+\tableofcontents
+
+\part{Categories and functors}
+\lettres{The letters on monoidal categories postdate the dating of folder 19. On 27 August 1974 he transposes for Deligne the Gr-categories of Hoàng Xuân Sính's thesis into the language of stacks (\lot{103}{1}{8}); on 5 February 1975 he writes to Lawrence Breen on strict Picard 2-categories, gerbes and bands (\textit{liens}) (\lot{134-2}{3}{38}).}
+
+\section[Folder 19: comonadicity theorem 1.12 and the Gabriel--Popescu theorem]{Folder 19: comonadicity theorem 1.12 and the Gabriel--Popescu theorem\protect\verifie{Folder19}}\label{sec:19}
+
+Folder 19, \emph{Topos : notes manuscrites (s.d.)} (Topoi: handwritten notes, undated), ninety-five pages that the inventory dates \q{[à partir de 1958-1973]} (from 1958--1973) and files in the group Theory of motives, is a working file in nine bundles. The first, \q{Tapis cartésiens} (Cartesian carpets, pages~3 to~11), studies the comonad of an adjunction and its coalgebras; page~4 states \q{Théorème 1.12}, followed by a proper name that the transcription reads, with doubt, as \q{Beck}, writes \q{il faut et il suffit} (it is necessary and sufficient) for~b), and carries in the margin the restriction \q{il suffit de regarder les doubles flèches $u, v$ de $A$ telles que $\mathrm{Ker}(f(u), f(v))$ existe \quad (condition C)} (it suffices to look at the double arrows $u, v$ of $A$ such that $\mathrm{Ker}(f(u), f(v))$ exists) (\lot{19}{1}{4}). The second, \q{Cohomologie relative} (Relative cohomology), opens on pages~14 and~15 with representability: for a category with a generator $U$, it asserts an equivalence with modules over $\mathrm{End}(U)$, \q{[détails laissés au lecteur]} (details left to the reader) (\lot{19}{1}{15}).
+
+\noindent\emph{Conventions.} We write, as the reading does, $f : A \to B$ for the left adjoint of $g : B \to A$, $\eta : \mathrm{id}_A \to gf$ for the unit, $\varepsilon : fg \to \mathrm{id}_B$ for the counit, and $\varphi = fg$ for the comonad, with comultiplication $\delta_X = f(\eta_{gX})$. A $\varphi$-coalgebra is a pair $(X, a)$, $a : X \to \varphi X$, such that $\varepsilon_X \circ a = 1_X$ and $\delta_X \circ a = \varphi(a) \circ a$; a morphism $(X, a) \to (X', a')$ is an arrow $t : X \to X'$ such that $a' \circ t = \varphi(t) \circ a$. The comparison functor $h : A \to \varphi\text{-}\mathbf{Coalg}$ sends $Y$ to $(fY, f(\eta_Y))$ and $\psi$ to $f(\psi)$. A \emph{double arrow} is a parallel pair of arrows. The \emph{kernel} $\mathrm{Ker}(u, v)$ of a double arrow is its equaliser, and $f$ \emph{commutes with it} if it sends a kernel of $(u, v)$ to a kernel of $(fu, fv)$. We use the triangle identities $\varepsilon_{fY} \circ f(\eta_Y) = 1$ and $g(\varepsilon_X) \circ \eta_{gX} = 1$, and the adjunction bijection $t \mapsto t^\flat = g(t) \circ \eta_Y$, from $\operatorname{Hom}_B(fY, X)$ onto $\operatorname{Hom}_A(Y, gX)$, with inverse $s \mapsto \varepsilon_X \circ f(s)$.
+
+\begin{definition}
+The functor $f$ satisfies \emph{condition~C} if, for every double arrow $(u, v)$ of $A$ such that $\mathrm{Ker}(fu, fv)$ exists, $\mathrm{Ker}(u, v)$ exists and $f$ commutes with it. A triple $(e, s, t)$ consisting of $e : E \to Y$, $s : Y \to E$ and $t : Z \to Y$ is a \emph{split kernel} (split equaliser) of $u, v : Y \rightrightarrows Z$ if $ue = ve$, $se = 1_E$, $tu = 1_Y$ and $tv = es$. A double arrow $(u, v)$ of $A$ is \emph{$f$-split} if $(fu, fv)$ has a split kernel.
+\end{definition}
+
+\begin{enonce}[Theorem 1.12, page 4]
+Let $f \dashv g$ be an adjunction, $\varphi = fg$, and $h$ the comparison functor.
+\begin{enumerate}
+\item[a)] If kernels of double arrows exist in $A$ and $f$ commutes with them, then $h$ is essentially surjective.
+\item[b)] $h$ is an equivalence if and only if $f$ is conservative and, for every double arrow $(u, v)$ of $A$ such that $\mathrm{Ker}(fu, fv)$ exists, $\mathrm{Ker}(u, v)$ exists and $f$ commutes with it.
+\end{enumerate}
+The restriction written in the margin --- it suffices to consider the double arrows $(u, v)$ whose image under $f$ has a kernel --- is condition~C.
+\end{enonce}
+
+\begin{lemme}\label{lem:19-scinde}
+If $(e, s, t)$ is a split kernel of $(u, v)$, then $e$ is a kernel of $(u, v)$, and the image of $(e, s, t)$ under any functor is a split kernel of the image of $(u, v)$.
+\end{lemme}
+
+\begin{proof}
+Let $z : T \to Y$ with $uz = vz$. Then $z = tuz = tvz = e(sz)$, so $z$ factors through $e$, and uniquely, since $ez' = ez''$ implies $z' = sez' = sez'' = z''$. The four conditions are equalities between composites, which a functor preserves.
+\end{proof}
+
+\begin{lemme}\label{lem:19-paire}
+For every coalgebra $(X, a)$, the double arrow $(\eta_{gX}, g(a)) : gX \rightrightarrows gfgX$ is $f$-split: $(a, \varepsilon_X, \varepsilon_{fgX})$ is a split kernel of $(f(\eta_{gX}), fg(a))$. It is moreover coreflexive: $g(\varepsilon_X)$ is a common retraction of $\eta_{gX}$ and of $g(a)$.
+\end{lemme}
+
+\begin{proof}
+We have $f(\eta_{gX}) \circ a = \delta_X \circ a = \varphi(a) \circ a = fg(a) \circ a$ by coassociativity; $\varepsilon_X \circ a = 1_X$ by the counit axiom; $\varepsilon_{fgX} \circ f(\eta_{gX}) = 1$ by the triangle identity at $gX$; and $\varepsilon_{fgX} \circ fg(a) = a \circ \varepsilon_X$ by naturality of $\varepsilon$. Finally $g(\varepsilon_X) \circ g(a) = g(\varepsilon_X \circ a) = 1$ and $g(\varepsilon_X) \circ \eta_{gX} = 1$.
+\end{proof}
+
+\begin{lemme}\label{lem:19-comp}
+Suppose that, for every coalgebra $(X, a)$, the double arrow $(\eta_{gX}, g(a))$ has a kernel $e_X : R(X, a) \to gX$ and that $f$ commutes with it.
+\begin{enumerate}
+\item For every $Y \in A$, $t \mapsto t^\flat$ induces a bijection between the coalgebra morphisms $hY \to (X, a)$ and the arrows $k : Y \to R(X, a)$, through $t^\flat = e_X \circ k$.
+\item For every coalgebra $(X, a)$, the arrow $\theta = \varepsilon_X \circ f(e_X)$ is a coalgebra isomorphism from $h(R(X, a))$ onto $(X, a)$; in particular $h$ is essentially surjective.
+\item If moreover $f$ is conservative, $h$ is an equivalence.
+\end{enumerate}
+\end{lemme}
+
+\begin{proof}
+(1) Let $t : fY \to X$. The transposes of the two sides of $a \circ t = \varphi(t) \circ f(\eta_Y)$ are $g(a) \circ t^\flat$ and, since $\varphi(t) \circ f(\eta_Y) = f(t^\flat)$, $gf(t^\flat) \circ \eta_Y = \eta_{gX} \circ t^\flat$ by naturality of $\eta$. Transposition being bijective, $t$ is a coalgebra morphism if and only if $t^\flat$ equalises $(\eta_{gX}, g(a))$, that is, factors, uniquely, through $e_X$.
+
+(2) Put $E = R(X, a)$. By~(1) applied to $k = 1_E$, the arrow $\theta$, whose transpose is $e_X$, is a coalgebra morphism $hE \to (X, a)$, and $a \circ \theta = \varphi(\theta) \circ f(\eta_E) = f(\theta^\flat) = f(e_X)$. Now $a$ is a kernel of $(f(\eta_{gX}), fg(a))$ by Lemmas~\ref{lem:19-scinde} and~\ref{lem:19-paire}, and $f(e_X)$ is one by hypothesis; hence $\theta$ is an isomorphism. Its inverse is a coalgebra morphism:
+\[
+\varphi(\theta^{-1}) \circ a = \varphi(\theta^{-1}) \circ a \circ \theta \circ \theta^{-1} = \varphi(\theta^{-1}) \circ \varphi(\theta) \circ f(\eta_E) \circ \theta^{-1} = f(\eta_E) \circ \theta^{-1}.
+\]
+
+(3) Let $Y' \in A$. The arrow $\eta_{Y'}$ equalises $(\eta_{gfY'}, gf(\eta_{Y'}))$, by naturality of $\eta$; this is the double arrow attached to the coalgebra $hY' = (fY', f(\eta_{Y'}))$, and therefore $\eta_{Y'} = e_{hY'} \circ k_{Y'}$ for an arrow $k_{Y'} : Y' \to R(hY')$. Apply $f$: $f(\eta_{Y'})$ is a kernel of the image of this double arrow (Lemmas~\ref{lem:19-scinde} and~\ref{lem:19-paire}, with $a = f(\eta_{Y'})$), so is $f(e_{hY'})$ by hypothesis, and $f(e_{hY'}) \circ f(k_{Y'}) = f(\eta_{Y'})$; hence $f(k_{Y'})$ is an isomorphism, and so is $k_{Y'}$, $f$ being conservative. For $\psi : Y \to Y'$, the transpose of $h(\psi) = f(\psi)$ is $gf(\psi) \circ \eta_Y = \eta_{Y'} \circ \psi = e_{hY'} \circ (k_{Y'} \circ \psi)$: under the bijection~(1), $h(\psi)$ corresponds to $k_{Y'} \circ \psi$. Since $\psi \mapsto k_{Y'} \circ \psi$ is bijective, $h$ is fully faithful; it is essentially surjective by~(2), hence an equivalence.
+\end{proof}
+
+\begin{proof}[Proof of a) and of the sufficiency in b)]
+If $f$ satisfies condition~C, each double arrow $(\eta_{gX}, g(a))$ has a kernel with which $f$ commutes, since its image has a kernel (Lemmas~\ref{lem:19-paire} and~\ref{lem:19-scinde}). Lemma~\ref{lem:19-comp}\,(2) then gives a) in the form of the margin, and the form of the text follows, for if all kernels exist in $A$ and $f$ commutes with them, condition~C holds. If moreover $f$ is conservative, $h$ is an equivalence by Lemma~\ref{lem:19-comp}\,(3).
+\end{proof}
+
+\begin{proof}[The necessity in b) is false]
+Let $B$ be the category of pairs of sets $(X, Y)$, and $A$ the full subcategory of the pairs such that $Y \neq \varnothing$ implies $X \neq \varnothing$; $f$ is the inclusion. Put $g(X, Y) = (X, Y)$ if $X \neq \varnothing$ and $g(X, Y) = (\varnothing, \varnothing)$ otherwise; $g(X, Y)$ is in $A$. For $(X', Y') \in A$, an arrow $(p, q) : (X', Y') \to (X, Y)$ of $B$ factors uniquely through $g(X, Y) \to (X, Y)$: if $Y' \neq \varnothing$, then $X' \neq \varnothing$, hence $X \neq \varnothing$; if $Y' = \varnothing$, $q$ is the empty map. Thus $f \dashv g$, and $f$ is a coreflective inclusion. Such an inclusion is fully faithful, hence conservative, and comonadic: this is classical --- the comonad is idempotent, and its coalgebras are, up to isomorphism, the objects of $A$. The functor $h$ is therefore an equivalence.
+
+But $f$ does not satisfy condition~C. Let $u, v : (\ast, \ast) \rightrightarrows (\{0, 1\}, \ast)$ be the arrows of $A$ that send the point of the first component to $0$ and to $1$ respectively and are the identity on the second. Their kernel in $B$ exists: it is $(\varnothing, \ast)$. If $K \to (\ast, \ast)$ were a kernel of $(u, v)$ in $A$ with which $f$ commutes, $K$ would be isomorphic to $(\varnothing, \ast)$, with non-empty second component; being in $A$, it would have a point $x$ in its first component, and $u$ and $v$ would send it to the same element, that is, $0 = 1$: a contradiction. The kernel of $(u, v)$ in $A$ is $(\varnothing, \varnothing)$, and $f$ does not commute with it.
+\end{proof}
+
+\begin{enonce}[Beck's theorem, exact form]
+The functor $h$ is an equivalence if and only if $f$ is conservative and, for every $f$-split double arrow $(u, v)$ of $A$, $\mathrm{Ker}(u, v)$ exists and $f$ commutes with it.
+\end{enonce}
+
+\begin{proof}
+The condition is sufficient by Lemmas~\ref{lem:19-paire} and~\ref{lem:19-comp}\,(3), which use only $f$-split double arrows. It is necessary. If $f(\psi)$ is invertible, $h(\psi)$ is a coalgebra morphism whose underlying arrow is invertible, hence a coalgebra isomorphism (the computation of~(2) above), and $\psi$ is invertible because $h$, being fully faithful, reflects isomorphisms. That the forgetful functor from coalgebras, hence $f$, creates kernels of $f$-split double arrows is the classical part of Beck's theorem, which the verified proof invokes.
+\end{proof}
+
+\begin{enonce}[Pages 14 and 15\lie{4}]
+Let $C$ be a Grothendieck category, $U$ a generator of $C$ and $R = \mathrm{End}_C(U)$. The functor $\operatorname{Hom}_C(U, -) : C \to \mathbf{Mod}_R$, with values in right $R$-modules, is fully faithful, and its left adjoint $- \otimes_R U$ is exact.
+\end{enonce}
+
+\begin{proof}
+Faithfulness of $\operatorname{Hom}_C(U, -)$ is the definition of a generator. Full faithfulness and left exactness of $- \otimes_R U$ are the Gabriel--Popescu theorem (1964), classical, which the verified proof invokes; right exactness comes from $- \otimes_R U$ being a left adjoint.
+\end{proof}
+
+\begin{remarque}
+In the form of the margin, a) uses only condition~C, and not conservativity; the sufficiency in b) is Beck's comonadicity theorem.
+\end{remarque}
+
+\begin{remarque}
+The necessity in b), which the page asserts with \q{il faut et il suffit}, is false: the example above is a comonadic adjunction whose left adjoint does not satisfy condition~C. The error is on the page, and the condition is not Beck's theorem in its precise form: the latter characterises comonadic adjunctions by a necessary and sufficient condition, which b) is not.
+\end{remarque}
+
+\begin{remarque}
+Every $f$-split double arrow is a double arrow whose image has a kernel (Lemma~\ref{lem:19-scinde}), and not conversely: condition~C is stronger than Beck's condition, sufficient without being necessary.
+\end{remarque}
+
+\begin{remarque}
+For a mere generator, the page asserts an equivalence $C \simeq \mathbf{Mod}_R$; only the fully faithful embedding holds, and this is the form the reading retains.
+\end{remarque}
+
+\noindent Not proved here: the Conclusion of pages~4 to~6 (adjunctions satisfying condition~C, and comonads), which the same reservation affects; the reconstruction of the adjunction from a comonad; the Morita statement (equivalence if and only if $U$ is small and projective); the matrix decomposition of the comonad of an adjunction over a product base (pages~7 to~11)\piste{19-comonad-matrix-product-base}; the chains of $n$ successive adjoints between presheaf topoi (pages~79 and~80)\piste{19-adjoint-chains-length-n}.
+
+\section[Folder 133: the centre and the derived group seen through two crossed modules]{Folder 133: the centre and the derived group seen through two crossed modules\protect\verifie{Folder133}}\label{sec:133}
+
+Folder 133, \emph{[Groupes de Witt et formes quadratiques, groupes formels] : notes manuscrites (s.d.), tirés à part (1974)} ([Witt groups and quadratic forms, formal groups]: handwritten notes, undated; offprints, 1974), which the inventory dates \q{1974-[à partir de 1975]} (1974--[from 1975]), gathers seven distinct sequences; the last, under a cover titled \q{Fourbis auxiliaires cohomologiques pour groupes formels} (auxiliary cohomological odds and ends for formal groups, page~44), occupies pages~45 to~53, which he numbers 1 to 7, pages~47 and~49 not being in his hand. It treats in general the problem that the \q{Solution} of pages~35 and~36 raises for a formal group: to describe a group $G$ by its centre and its derived group. Page~45 takes two crossed modules $\mathcal C = (N \to M)$ and $\mathcal C' = (N' \to M')$ with the same invariants $\pi_0$, $\pi_1$, and writes $K = G/\pi_1$ (\lot{133}{3}{45}). Page~46 defines $\mathfrak Z = [\mathrm{Cent}(K)/(N'/\pi_1)] \cap \operatorname{Ker}\Theta$, constructs $\varphi_G$, then $\Psi_G$, and boxes \q{$\Psi_G$ injectif} ($\Psi_G$ injective) as equivalent to $N' = \mathrm{Cent}(G)$ (\lot{133}{3}{46}). Page~48 defines the pairing $c_E$ of a central extension $E$ of $\pi_0$ by $\pi_1$ and writes \q{On doit trouver, au signe près} (one should find, up to sign) $\Psi_{G_1} = \Psi_G + \tilde c_E\,\alpha$ (\lot{133}{3}{48}); pages~51 and~52 define $\mathcal D = (N_{\mathrm{ab}})_M$ and $\lambda_G$, and write $N/DG \simeq \mathcal D/\lambda_G(\pi_0 \otimes \pi_0)$ and $\lambda_{G_1} = \lambda_G + \beta c_E$ (\lot{133}{3}{51}, \lot{133}{3}{52}). Despite the title, nothing there is specific to formal groups; the statements are proved here for abstract groups.
+
+\noindent\emph{Conventions.} The commutator is $[x, y] = xyx^{-1}y^{-1}$. Throughout, $G$ is a group and $N$ and $N'$ are two normal subgroups, with $N' \subset \mathrm{Cent}(G)$; then $[N, N'] = 1$, $\pi_1 = N \cap N'$ is central, $\pi_0 = G/NN'$, $K = G/\pi_1$, $M = G/N'$ acts on $N$ by conjugation, and $\Theta : M \to \mathrm{Aut}(N)$ is this action. The group $\mathfrak Z$ is taken through its inverse image $\overline{N'}$ in $G$: the $z \in G$ whose image in $K$ is central and which commute with every element of $N$, that is, such that $[g, z] \in \pi_1$ for every $g \in G$ and $nz = zn$ for every $n \in N$. We have $N' \subset \overline{N'}$ and $\mathfrak Z = \overline{N'}/N'$.
+
+\begin{lemme}\label{lem:133-central}
+If $c$ is central in a group, $[g, zc] = [g, z]$ and $[gc, z] = [g, z]$.
+\end{lemme}
+
+\begin{proof}
+$[g, zc] = gzcg^{-1}c^{-1}z^{-1} = gzg^{-1}cc^{-1}z^{-1} = [g, z]$, moving $c$ past $g^{-1}$. The second follows by $[x, y]^{-1} = [y, x]$.
+\end{proof}
+
+\begin{enonce}[Page 46, injectivity of $\Psi_G$\piste{133-centre-and-derived-group-from-two-crossed-modules}]
+For $z \in \overline{N'}$, the map $g \mapsto [g, z]$ defines a homomorphism $\varphi_G(z) : \pi_0 \to \pi_1$, which depends only on the class of $z$ in $\mathfrak Z$; the map $\Psi_G : \mathfrak Z \to \mathrm{Hom}(\pi_0, \pi_1)$ so defined is a homomorphism, and
+\[
+N' = \mathrm{Cent}(G) \iff \Psi_G \text{ is injective.}
+\]
+\end{enonce}
+
+\begin{proof}
+Let $z \in \overline{N'}$. By definition $[g, z] \in \pi_1$, so $[g, z]$ is central. We have $[gh, z] = g\,[h, z]\,zg^{-1}z^{-1}$; since $[h, z]$ is central, this is $[h, z]\,[g, z] = [g, z]\,[h, z]$, and $g \mapsto [g, z]$ is a homomorphism $G \to \pi_1$. It is trivial on $N$, since $z$ commutes with $N$, and on $N'$, which is central; it therefore factors through $\pi_0 = G/NN'$, which defines $\varphi_G(z)$. If $z$ and $w$ have the same class modulo $N'$, then $w = zc$ with $c \in N'$ central, and $[g, w] = [g, z]$ by Lemma~\ref{lem:133-central}: whence $\Psi_G$ on $\mathfrak Z$. It is multiplicative: $[g, zw] = gzg^{-1}\,[g, w]\,z^{-1} = [g, z]\,[g, w]$, since $[g, w]$ is central.
+
+Suppose $\Psi_G$ injective and let $c \in \mathrm{Cent}(G)$. Then $c \in \overline{N'}$, and $\Psi_G(\bar c)$ is trivial, as is $\Psi_G(1)$: so $\bar c = 1$ in $\mathfrak Z$, that is, $c \in N'$. Thus $\mathrm{Cent}(G) \subset N'$, and equality follows from $N' \subset \mathrm{Cent}(G)$.
+
+Conversely, suppose $N' = \mathrm{Cent}(G)$, and let $z, w \in \overline{N'}$ with $\Psi_G(\bar z) = \Psi_G(\bar w)$, that is, $[g, z] = [g, w]$ for every $g$. Applied to $g^{-1}$, the equality gives $zgz^{-1} = wgw^{-1}$, whence $g\,z^{-1}w = z^{-1}(zgz^{-1})w = z^{-1}(wgw^{-1})w = z^{-1}w\,g$: $z^{-1}w$ is central, hence in $N'$, and $\bar z = \bar w$.
+\end{proof}
+
+\begin{remarque}
+Only the hypothesis $N' \subset \mathrm{Cent}(G)$ is used; the hypothesis $[N, N'] = 1$ that the reading adds follows from it, and $N \supset D(G)$ plays no part here. The verification confirms the additivity and vanishing checks that the reading supplies, and that the page sums up as \q{triviale sur $N'$ et sur $\mathfrak Z$} (trivial on $N'$ and on $\mathfrak Z$). We have shown along the way that $\mathrm{Cent}(G)$ is the inverse image of $\operatorname{Ker}\Psi_G$, which the page calls \q{clair} (clear).
+\end{remarque}
+
+Suppose now in addition that $D(G) \subset N$. Let $\mathcal D = (N_{\mathrm{ab}})_M$; it is the quotient $N/[G, N]$, the subgroup $[G, N]$ generated by the $[g, n]$ containing the $[n, n']$. We write $\bar n$ for the class in $\mathcal D$ of an element $n \in N$.
+
+\begin{lemme}\label{lem:133-D}
+The group $\mathcal D$ is commutative, $G$ acts trivially on it, and $\pi_0$ is commutative.
+\end{lemme}
+
+\begin{proof}
+For $a, b \in N$, $(ab)^{-1}(ba) = [b^{-1}, a^{-1}] \in [G, N]$, so $\bar a\bar b = \bar b\bar a$. For $c \in N$ and $x \in G$, $(xcx^{-1})^{-1}c = [x, c^{-1}] \in [G, N]$, so $\overline{xcx^{-1}} = \bar c$. For $x, y \in G$, $(xy)^{-1}(yx) = [y^{-1}, x^{-1}] \in D(G) \subset N \subset NN'$, so $xy$ and $yx$ have the same image in $\pi_0$.
+\end{proof}
+
+\begin{enonce}[Pages 51 and 52, surjectivity of $\lambda_G$\piste{133-centre-and-derived-group-from-two-crossed-modules}]
+Suppose $D(G) \subset N$ and $N' \subset \mathrm{Cent}(G)$. The map $(x, y) \mapsto \overline{[x, y]}$ defines a form $\lambda_G : \pi_0 \times \pi_0 \to \mathcal D$, multiplicative in each variable and alternating, and
+\[
+N = D(G) \iff \lambda_G \text{ is surjective,}
+\]
+that is, if and only if the values of $\lambda_G$ generate $\mathcal D$.
+\end{enonce}
+
+\begin{proof}
+For fixed $y$, $x \mapsto \overline{[x, y]}$ is a homomorphism $G \to \mathcal D$: $[xx', y] = (x[x', y]x^{-1})[x, y]$, and Lemma~\ref{lem:133-D} gives $\overline{[xx', y]} = \overline{[x', y]}\;\overline{[x, y]} = \overline{[x, y]}\;\overline{[x', y]}$. It is trivial on $N$, because $[n, y] = [y, n]^{-1} \in [G, N]$, and on $N'$, because $[n', y] = 1$ for central $n'$; it therefore factors through $\pi_0$. Since $\overline{[x, y]} = \overline{[y, x]}^{-1}$, the same holds for the second variable, and $\lambda_G$ is well defined on $\pi_0 \times \pi_0$ and multiplicative in each variable; $[x, x] = 1$ makes it alternating.
+
+If $N = D(G)$, every $n \in N$ is a product of commutators and their inverses; its class $\bar n$ is the corresponding product of values of $\lambda_G$ and their inverses, and these values generate $\mathcal D$. Conversely, the values of $\lambda_G$ are classes of elements of $D(G)$, so the subgroup they generate is contained in the image of $D(G)$ in $\mathcal D$. If it equals $\mathcal D$, every $n \in N$ can be written $n = m\,(m^{-1}n)$ with $m \in D(G)$ and $m^{-1}n \in [G, N] \subset D(G)$; hence $N \subset D(G)$, and $N = D(G)$.
+\end{proof}
+
+\begin{remarque}
+Since $\mathcal D$ is commutative and $\lambda_G$ bimultiplicative, $\lambda_G$ defines a linear map $\pi_0 \otimes \pi_0 \to \mathcal D$, whose image is the subgroup generated by the values of $\lambda_G$: this is the surjectivity of the page. The hypothesis $N' \subset \mathrm{Cent}(G)$ is necessary for the very definition of $\lambda_G$ on $\pi_0$: the reading cites it (\q{puisque $N'$ est central}, since $N'$ is central). The weaker hypothesis $[N, N'] = 1$ does not suffice for the equivalence: in the quaternion group $Q_8$, with $N = D(Q_8) = \mathrm{Cent}(Q_8)$, of order~$2$, and $N' = Q_8$, we have $[N, N'] = 1$ and $\pi_0 = 1$, so every form on $\pi_0$ is zero, whereas $\mathcal D = N/[G, N] = N$ is not trivial (example not verified in Lean). Commutativity of $\pi_0$ is not an additional hypothesis: it follows from $D(G) \subset N$ (Lemma~\ref{lem:133-D}). The isomorphism $N/D(G) \simeq \mathcal D/\lambda_G(\pi_0 \otimes \pi_0)$ of the page is proved here only in the form of the equivalence.
+\end{remarque}
+
+Finally, let $E$ be a group, $\iota : \pi_1 \to E$ an injective homomorphism with central image, and $q : E \to \pi_0$ a homomorphism with kernel $\iota(\pi_1)$: a central extension of $\pi_0$ by $\pi_1$ if $q$ is surjective, which is not used. Let $G \times_{\pi_0} E$ be the fibre product and $G_1$ its quotient by the antidiagonal image $\{(a, \iota(a)^{-1})\}$ of $\pi_1$, which is central, taken in Lean through the normal subgroup it generates.
+
+\begin{enonce}[Pages 48 and 52, changing $G$ into $G_1$\piste{133-centre-and-derived-group-from-two-crossed-modules}]
+Suppose $D(G) \subset N$ and $N' \subset \mathrm{Cent}(G)$.
+\begin{enumerate}
+\item For $e, f \in E$, $[e, f] = \iota(c_E(e, f))$ for a unique $c_E(e, f) \in \pi_1$, which depends only on the images of $e$ and $f$ in $\pi_0$.
+\item In $G_1$, the commutator of the classes of $(g, e)$ and $(z, f)$ is the class of $([g, z]\,c_E(e, f), 1)$.
+\item In particular, if $z \in \overline{N'}$, this commutator is the image of $\Psi_G(\bar z)(\bar g)\,c_E(e, f) \in \pi_1$; and the class in $\mathcal D$ of $[x, y]\,c$, for $c \in \pi_1$, is $\lambda_G(\bar x, \bar y)\,\beta(c)$, where $\beta : \pi_1 \to \mathcal D$ is the quotient map.
+\end{enumerate}
+\end{enonce}
+
+\begin{proof}
+(1) The image of $[e, f]$ in $\pi_0$ is the commutator of the images, which is trivial since $\pi_0$ is commutative; $[e, f]$ therefore lies in $\operatorname{Ker} q = \iota(\pi_1)$, and $\iota$ is injective. If $e$ and $e'$ have the same image, $e' = e\,\iota(a)$, and likewise $f' = f\,\iota(b)$; since $\iota(a)$ and $\iota(b)$ are central, Lemma~\ref{lem:133-central} gives $[e', f'] = [e, f]$.
+
+(2) The commutator of $(g, e)$ and $(z, f)$ in the fibre product is $([g, z], [e, f]) = ([g, z], \iota(c))$, $c = c_E(e, f)$, and
+\[
+([g, z], \iota(c))^{-1}\,([g, z]\,c, 1) = (c, \iota(c)^{-1})
+\]
+lies in the antidiagonal image of $\pi_1$; the two elements therefore have the same class in $G_1$. The element $([g, z]\,c, 1)$ does lie in the fibre product, $[g, z]\,c$ being in $N$.
+
+(3) If $z \in \overline{N'}$, $[g, z] = \Psi_G(\bar z)(\bar g)$ by definition. The second assertion is $\overline{[x, y]\,c} = \overline{[x, y]}\;\bar c$.
+\end{proof}
+
+\begin{remarque}
+This is the computation that carries the two formulas of the page, $\Psi_{G_1} = \Psi_G + \tilde c_E\,\alpha$ and $\lambda_{G_1} = \lambda_G + \beta c_E$, written additively: in $G_1$, a commutator is the product of the commutator in $G$ and the value of $c_E$. The order of the factors fixes the sign that the page leaves open (\q{au signe près}, up to sign): with $[x, y] = xyx^{-1}y^{-1}$ and $\Psi_G(\bar z)(\bar g) = [g, z]$, the correction term is $c_E(\bar g, \bar z)$, that is, $\tilde c_E(\alpha(\bar z))$ evaluated at $\bar g$, up to a sign depending on the side on which one curries. What is not formalised is the identification of the two crossed modules of $G_1$ with those of $G$, which would turn this equality of elements into an equality of maps $\Psi_{G_1} = \Psi_G \cdot \tilde c_E\,\alpha$ on one and the same $\mathfrak Z$.
+\end{remarque}
+
+\noindent Not proved here: the obstruction in $H^3(B_{\pi_0}/X, \pi_1)$ and the indeterminacy under $H^2 = \mathrm{Extop}(\pi_0, \pi_1)$ of page~45, and the fact that every solution $G_1$ is obtained from $G$ by an extension $E$; the identification of the crossed modules of $G_1$ with those of $G$; the isomorphism $N/D(G) \simeq \mathcal D/\lambda_G(\pi_0 \otimes \pi_0)$ beyond the equivalence; the decompositions b) and c) of pages~50 to~53, including condition b) $N' = H \cap \mathrm{Cent}(G)$, which the reading substitutes for the page's $N' = \mathrm{Cent}(H)$, and the equivalence of $N/\pi_1 = D(K)$ and $d(N) = D(M)$; the final reduction to the linear algebra of alternating forms; the other sequences of the folder (quadratic forms and Witt groups, $\lambda$-rings and symmetric groups, the game of go, formal groups on pages~34 to~39, the Chevalley decomposition on pages~41 to~43\piste{133-affine-quotient-not-constructible}).
+
+\section[Folder 161-1: the fixed part of an adjunction, idempotent adjunctions, local objects]{Folder 161-1: the fixed part of an adjunction, idempotent adjunctions, local objects\protect\verifie{Folder161_1}}\label{sec:161-1}
+
+Folder 161-1, \emph{Catégories : notes manuscrites (s.d.)} (Categories: handwritten notes, undated), nineteen undated pages, belongs to the group of files gathered by Grothendieck on various themes, which the inventory dates \q{[après 1961-vers 1977]} (after 1961 -- about 1977). Pages~3 to~7 look at what a pair of adjoint functors $E \rightleftarrows F$ induces between the two categories. Page~3 opens with \q{Foncteurs adjoints [demander Schanuel]} (Adjoint functors [ask Schanuel]), writes criterion~(1) for full faithfulness on a full subcategory, and carries in the margin \q{donner un exemple montrant que cette condition n'est pas surabondante, avec $E'$ réduit à un élément} (give an example showing that this condition is not superfluous, with $E'$ reduced to one element) (\lot{161-1}{1}{3}); page~5 draws up the list of equivalent conditions that today define an idempotent adjunction (\lot{161-1}{1}{5}); page~7 asks whether a reflective subcategory can be recognised as the locus of the local objects for the arrows that the reflector inverts, and concludes \q{Or c'est vrai sauf erreur…} (Now this is true, unless I am mistaken…) (\lot{161-1}{1}{7}). We write, as the reading does, $u$ for the left adjoint of $v$, $\eta : \mathrm{id}_E \to vu$ for the unit and $\varepsilon : uv \to \mathrm{id}_F$ for the counit (the manuscript writes $i$ and $j$).
+
+\begin{enonce}[(1), page 3]
+Let $E' \subset E$ be a full subcategory and $\overline{E}'$ its closure under isomorphism. Then
+\[
+  \begin{gathered}
+  u|E' \text{ is fully faithful and } vu(E') \subset \overline{E}' \\
+  \iff \text{for every } Y \in E',\ \eta_Y : Y \to vu(Y) \text{ is an isomorphism.}
+  \end{gathered}
+\]
+The second condition on the left-hand side is not superfluous: full faithfulness of $u|E'$ does not force $vu$ to bring $E'$ back into $\overline{E}'$.
+\end{enonce}
+
+\begin{enonce}[Idempotent adjunctions, page 5]
+The conditions \q{$\eta v : v \to vuv$ est un isomorphisme} and \q{$\varepsilon u : uvu \to u$ est un isomorphisme} (is an isomorphism) of condition~2 of the manuscript are redundant: each of the four conditions ($\eta v$, $v\varepsilon$, $\varepsilon u$, $u\eta$ invertible) implies the other three.
+\end{enonce}
+
+\begin{enonce}[Local objects, pages 6 and 7]
+Let $\alpha : E_1 \to E$ be a fully faithful functor with a left adjoint $\alpha'$, and $\Sigma$ the class of arrows of $E$ that $\alpha'$ makes invertible. An arrow $f : X \to Y$ is in $\Sigma$ if and only if $\operatorname{Hom}_E(Y, \alpha Z_1) \to \operatorname{Hom}_E(X, \alpha Z_1)$ is bijective for every $Z_1 \in E_1$; and an object $\xi$ of $E$ such that $\operatorname{Hom}_E(-, \xi)$ turns the arrows of $\Sigma$ into bijections (a $\Sigma$-local object) is in the essential image of $\alpha$.
+\end{enonce}
+
+Recall that the adjunction bijection $\operatorname{Hom}_F(uX, P) \simeq \operatorname{Hom}_E(X, vP)$ sends $g$ to $\eta_X \circ v(g)$ (composing from left to right: $\eta_X$, then $v(g)$), and that we have the triangle identities $\eta_{vP}\,;v(\varepsilon_P) = \mathrm{id}_{vP}$ and $u(\eta_X)\,;\varepsilon_{uX} = \mathrm{id}_{uX}$. In the proofs that follow, we write $f\,;g$ for \q{$f$ then $g$}.
+
+\begin{lemme}\label{lem:161-1-hom}
+For $X, Y \in E$, the map $\operatorname{Hom}_E(X, Y) \to \operatorname{Hom}_F(uX, uY)$, $f \mapsto u(f)$, is bijective if and only if the map $f \mapsto f\,;\eta_Y$, from $\operatorname{Hom}_E(X, Y)$ to $\operatorname{Hom}_E(X, vuY)$, is.
+\end{lemme}
+
+\begin{proof}
+The second map is the composite of the first and the adjunction bijection: the latter sends $u(f)$ to $\eta_X\,;vu(f)$, which equals $f\,;\eta_Y$ by naturality of $\eta$. This is the sentence of page~3: the map \q{se déduit de l'application $i(Y) : Y \to vu(Y)$ au moyen de $\mathrm{Hom}(X, i(Y))$} (is deduced from the map $i(Y)$ by means of $\mathrm{Hom}(X, i(Y))$).
+\end{proof}
+
+\begin{proof}[Proof of (1)]
+Suppose that $\eta_Y$ is an isomorphism for every $Y \in E'$. For $X, Y \in E'$, composition with $\eta_Y$ is then bijective, and $u|E'$ is fully faithful by Lemma~\ref{lem:161-1-hom}; and $vu(Y)$, being isomorphic to $Y$, is in $\overline{E}'$.
+
+Conversely, let $Y \in E'$; by hypothesis there exist $Z \in E'$ and an isomorphism $e : vu(Y) \to Z$. Lemma~\ref{lem:161-1-hom}, applied to the pairs $(Z, Y)$ and $(Y, Y)$ of objects of $E'$, says that $f \mapsto f\,;\eta_Y$ is bijective from $\operatorname{Hom}(Z, Y)$ onto $\operatorname{Hom}(Z, vuY)$ and from $\operatorname{Hom}(Y, Y)$ onto $\operatorname{Hom}(Y, vuY)$. By surjectivity of the first, there is $g : Z \to Y$ with $g\,;\eta_Y = e^{-1}$. Put $s = e\,;g : vu(Y) \to Y$. On the one hand $s\,;\eta_Y = e\,;e^{-1} = \mathrm{id}_{vuY}$. On the other hand $(\eta_Y\,;s)\,;\eta_Y = \eta_Y\,;(s\,;\eta_Y) = \eta_Y = \mathrm{id}_Y\,;\eta_Y$, and injectivity of the second bijection gives $\eta_Y\,;s = \mathrm{id}_Y$. Hence $\eta_Y$ is an isomorphism, with inverse $s$.
+\end{proof}
+
+\begin{proof}[The example asked for in the margin]
+Take for $E$ the category of sets, for $F$ the one-point category, for $u$ the unique functor $E \to F$ and for $v$ the functor that picks out a one-element set $\{*\}$; then $u \dashv v$ because $\{*\}$ is terminal. Let $E' = \{\varnothing\}$, reduced to one object. Then $u|E'$ is fully faithful, since $\operatorname{Hom}(\varnothing, \varnothing)$ and $\operatorname{Hom}(u\varnothing, u\varnothing)$ each have a single element; but $vu(\varnothing) = \{*\}$ is not isomorphic to $\varnothing$, and $\eta_\varnothing : \varnothing \to \{*\}$ is not an isomorphism. The condition $vu(E') \subset \overline{E}'$ is therefore necessary for the equivalence~(1).
+\end{proof}
+
+\begin{proof}[Proof of the statement on idempotent adjunctions]
+Denote by (a) $\eta_{vP}$ invertible for every $P$, (b) $v(\varepsilon_P)$ invertible for every $P$, (c) $\varepsilon_{uX}$ invertible for every $X$, (d) $u(\eta_X)$ invertible for every $X$. We use the fact that if $f\,;g$ is an identity and one of $f$, $g$ is an isomorphism, then so is the other, and it is the inverse of the first.
+
+(a)~$\Leftrightarrow$~(b) and (c)~$\Leftrightarrow$~(d) follow from this and the triangle identities $\eta_{vP}\,;v(\varepsilon_P) = \mathrm{id}$ and $u(\eta_X)\,;\varepsilon_{uX} = \mathrm{id}$.
+
+(a)~$\Rightarrow$~(c). Let $X \in E$. By (a)~$\Rightarrow$~(b) at $P = uX$, $v(\varepsilon_{uX})$ is invertible. Now $vu(\eta_X)$ and $\eta_{vuX}$ are two sections of it: $vu(\eta_X)\,;v(\varepsilon_{uX}) = v\bigl(u(\eta_X)\,;\varepsilon_{uX}\bigr) = \mathrm{id}$, and $\eta_{vuX}\,;v(\varepsilon_{uX}) = \mathrm{id}$ by the triangle identity; they are therefore equal. Let us show that $u(\eta_X)$ is inverse to $\varepsilon_{uX}$. We already have $u(\eta_X)\,;\varepsilon_{uX} = \mathrm{id}$. Naturality of $\varepsilon$ applied to $u(\eta_X) : uX \to uvuX$ gives
+\[
+  \varepsilon_{uX}\,;u(\eta_X) = uv\bigl(u(\eta_X)\bigr)\,;\varepsilon_{uvuX} = u(\eta_{vuX})\,;\varepsilon_{uvuX} = \mathrm{id},
+\]
+the second equality by what precedes, the third by the triangle identity at $vuX$.
+
+(c)~$\Rightarrow$~(a) is the dual statement. Let $P \in F$. By (c)~$\Rightarrow$~(d) at $X = vP$, $u(\eta_{vP})$ is invertible; $uv(\varepsilon_P)$ and $\varepsilon_{uvP}$ are two retractions of it ($u(\eta_{vP})\,;uv(\varepsilon_P) = u(\eta_{vP}\,;v(\varepsilon_P)) = \mathrm{id}$, and the triangle identity), hence are equal. Then $\eta_{vP}\,;v(\varepsilon_P) = \mathrm{id}$, and naturality of $\eta$ applied to $v(\varepsilon_P)$ gives $v(\varepsilon_P)\,;\eta_{vP} = \eta_{vuvP}\,;vuv(\varepsilon_P) = \eta_{vuvP}\,;v(\varepsilon_{uvP}) = \mathrm{id}$.
+
+The four conditions are therefore equivalent; in particular condition~2 of the manuscript, $\eta v$ \emph{and} $\varepsilon u$ invertible, is equivalent to its first half.
+\end{proof}
+
+\begin{proof}[Proof of the statement on local objects]
+\emph{Characterisation of $\Sigma$.} This is a classical fact of the theory of reflective subcategories. By the adjunction $\alpha' \dashv \alpha$, $\operatorname{Hom}_E(Y, \alpha Z_1) \simeq \operatorname{Hom}_{E_1}(\alpha' Y, Z_1)$ naturally in $Y$, so that composition with $f$ at the source corresponds to composition with $\alpha'(f)$. By the Yoneda lemma, $\alpha'(f)$ is an isomorphism if and only if $\operatorname{Hom}_{E_1}(\alpha' Y, Z_1) \to \operatorname{Hom}_{E_1}(\alpha' X, Z_1)$ is bijective for every $Z_1$. In particular every object $\alpha Z_1$, and every object isomorphic to one, is $\Sigma$-local.
+
+\emph{A local object lies in the essential image.} Let $\xi$ be a $\Sigma$-local object and $\eta = \eta_\xi : \xi \to \alpha\alpha'\xi$ the unit. For every $Z_1$, composition with $\eta$, from $\operatorname{Hom}_E(\alpha\alpha'\xi, \alpha Z_1)$ to $\operatorname{Hom}_E(\xi, \alpha Z_1)$, is bijective: it is the adjunction bijection $\operatorname{Hom}_{E_1}(\alpha'\xi, Z_1) \simeq \operatorname{Hom}_E(\xi, \alpha Z_1)$ read through the full faithfulness of $\alpha$. By the preceding characterisation, $\eta \in \Sigma$. Since $\xi$ is local, composition with $\eta$, from $\operatorname{Hom}(\alpha\alpha'\xi, \xi)$ to $\operatorname{Hom}(\xi, \xi)$, is bijective; there is therefore $r : \alpha\alpha'\xi \to \xi$ with $\eta\,;r = \mathrm{id}_\xi$. Then $\eta\,;(r\,;\eta) = \eta = \eta\,;\mathrm{id}$, and since composition with $\eta$ is injective on arrows with values in the local object $\alpha\alpha'\xi$, $r\,;\eta = \mathrm{id}$. Thus $\xi \simeq \alpha(\alpha'\xi)$. Together with the last sentence of the preceding paragraph, this shows that the $\Sigma$-local objects are exactly those of the essential image of $\alpha$.
+\end{proof}
+
+\begin{enonce}[(2), page 3]
+Let $F' \subset F$ be a full subcategory and $\overline{F}'$ its closure under isomorphism. Then
+\[
+  \begin{gathered}
+  v|F' \text{ is fully faithful and } uv(F') \subset \overline{F}' \\
+  \iff \text{for every } P \in F',\ \varepsilon_P : uv(P) \to P \text{ is an isomorphism.}
+  \end{gathered}
+\]
+\end{enonce}
+
+\begin{proof}
+This is the proof of~(1) turned around. For $P, Q \in F$, the map $g \mapsto v(g)$, from $\operatorname{Hom}_F(P, Q)$ to $\operatorname{Hom}_E(vP, vQ)$, followed by the inverse adjunction bijection $h \mapsto u(h)\,;\varepsilon_Q$, gives $g \mapsto uv(g)\,;\varepsilon_Q = \varepsilon_P\,;g$ by naturality of $\varepsilon$: this is the page's \q{$\mathrm{Hom}(j(P), Q)$}, and $v$ is bijective on $\operatorname{Hom}(P, Q)$ if and only if $g \mapsto \varepsilon_P\,;g$ is. If $\varepsilon_P$ is invertible for every $P \in F'$, composition with $\varepsilon_P$ is bijective, and $uv(P) \simeq P$. Conversely, let $P \in F'$, $Z \in F'$ and $e : uv(P) \to Z$ an isomorphism; surjectivity of $g \mapsto \varepsilon_P\,;g$ on $\operatorname{Hom}(P, Z)$ gives $g$ with $\varepsilon_P\,;g = e$. Put $s = g\,;e^{-1}$. Then $\varepsilon_P\,;s = \mathrm{id}$, and $\varepsilon_P\,;(s\,;\varepsilon_P) = \varepsilon_P = \varepsilon_P\,;\mathrm{id}$; injectivity on $\operatorname{Hom}(P, P)$ gives $s\,;\varepsilon_P = \mathrm{id}$.
+\end{proof}
+
+\begin{enonce}[The five conditions, page 3]
+Let $E' \subset E$ and $F' \subset F$ be strictly full subcategories; write $u' : E' \to F'$ and $v' : F' \to E'$ for the induced functors when $u(E') \subset F'$ and $v(F') \subset E'$. The following conditions are equivalent:
+\begin{enumerate}
+\item $E'$ satisfies~(1), $F'$ satisfies~(2), and $F' = \overline{u(E')}$, $E' = \overline{v(F')}$;
+\item $u(E') \subset F'$, $v(F') \subset E'$, and $u'$, $v'$ are fully faithful;
+\item $u(E') \subset F'$, $v(F') \subset E'$, and $u'$ is an equivalence;
+\item $u(E') \subset F'$, $v(F') \subset E'$, and $v'$ is an equivalence.
+\end{enumerate}
+Moreover, if a strictly full $E'$ satisfies~(1), then $\alpha(E') = \overline{u(E')}$ satisfies~(2) and $\beta(\alpha(E')) = E'$; dually for $F'$.
+\end{enonce}
+
+\begin{proof}
+We read \q{$u'$ is an equivalence} as \q{$u'$ is fully faithful and every object of $F'$ is isomorphic to some $u(Y)$, $Y \in E'$}. We use two facts: if $\eta_Y$ is invertible, so is $\varepsilon_{uY}$, since $u(\eta_Y)\,;\varepsilon_{uY} = \mathrm{id}$; and if $\varepsilon_P$ is, so is $\eta_{vP}$, by the other triangle identity. The objects at which $\eta$ (resp.\ $\varepsilon$) is invertible form a strictly full subcategory, by naturality.
+
+If $u(E') \subset F'$, $v(F') \subset E'$, $\eta$ is invertible on $E'$ and $\varepsilon$ on $F'$, then 1.\ holds: a $P \in F'$ is isomorphic, through $\varepsilon_P$, to $u(vP)$ with $vP \in E'$, and every object isomorphic to some $u(Y)$, $Y \in E'$, is in $F'$, which is strictly full; likewise for $E'$, through $\eta_Y^{-1}$. Conversely, 1.\ gives $u(E') \subset F'$, $v(F') \subset E'$, and, by~(1) and~(2), the full faithfulness of $u'$ and $v'$ and the essential surjectivity of $u'$ and of $v'$; so 1.\ implies 2., 3.\ and~4.
+
+Under 2., $vu(E') \subset v(F') \subset E'$, and (1) gives $\eta$ invertible on $E'$; likewise (2) gives $\varepsilon$ invertible on $F'$; whence 1. Under 3., (1) likewise gives $\eta$ invertible on $E'$; a $P \in F'$ is isomorphic to some $u(Y)$, $Y \in E'$, where $\varepsilon$ is invertible by the first fact; hence $\varepsilon_P$ is invertible, whence 1. Case~4.\ is symmetric.
+
+For the bijection: if $Y \in E'$, then $Y \simeq vu(Y)$ through $\eta_Y$ and $uY \in \alpha(E')$; if $Y \simeq v(P)$ with $P \simeq u(Y')$, $Y' \in E'$, then $Y \simeq vu(Y') \simeq Y'$ and $Y \in E'$. And $\varepsilon$ is invertible on $\alpha(E')$ by the first fact.
+\end{proof}
+
+\begin{enonce}[The fixed points, page 4]
+Let $E_0 \subset E$ be the full subcategory of the $Y$ at which $\eta_Y$ is invertible and $F_0 \subset F$ that of the $P$ at which $\varepsilon_P$ is. They are the largest subcategories satisfying~(1) and~(2); we have $F_0 = \overline{u(E_0)}$, $E_0 = \overline{v(F_0)}$, and $u$, $v$ induce quasi-inverse equivalences $E_0 \simeq F_0$.
+\end{enonce}
+
+\begin{proof}
+Maximality is the form of~(1) and~(2) proved above: $E'$ satisfies~(1) if and only if $E' \subset E_0$. By the two facts of the preceding proof, $u(E_0) \subset F_0$ and $v(F_0) \subset E_0$; the equalities $F_0 = \overline{u(E_0)}$ and $E_0 = \overline{v(F_0)}$ follow as in case~1.\ above. The induced functors $u_0 : E_0 \to F_0$ and $v_0 : F_0 \to E_0$ are quasi-inverse, through the natural isomorphisms $\eta_Y : Y \to v_0u_0(Y)$ and $\varepsilon_P : u_0v_0(P) \to P$.
+\end{proof}
+
+\begin{enonce}[Conditions 1), 3) and~4), page 5; preservation of colimits]
+Condition~1), $\operatorname{Im} v \subset E_0$ and $\operatorname{Im} u \subset F_0$, is idempotence, and either half suffices. If $\operatorname{Im} u \subset F_0$, the inclusion $E_0 \subset E$ has $v_0 \circ u'$, $X \mapsto vu(X)$, as left adjoint; if $\operatorname{Im} v \subset E_0$, the inclusion $F_0 \subset F$ has $u_0 \circ v'$, $P \mapsto uv(P)$, as right adjoint. This reflector $E \to E_0$ commutes with colimits and the inclusion $E_0 \subset E$ with limits; $E_0$ has the colimits that $E$ has; dually, the coreflector $F \to F_0$ commutes with limits, the inclusion $F_0 \subset F$ with colimits, and $F_0$ has the limits that $F$ has. Finally, for an idempotent adjunction, $u \simeq \beta\, u_0\, \alpha'$ and $v \simeq \alpha\, v_0\, \beta'$, with $\alpha'$ the reflector, which is a passage to the category of fractions, $\beta' $ the coreflector, and $\alpha$, $\beta$ the inclusions; $\beta\, u_0 : E_0 \to F$ is fully faithful (condition~4)).
+\end{enonce}
+
+\begin{proof}
+\emph{Condition~1).} $Y = vP$ is in $E_0$ if and only if $\eta_{vP}$ is invertible, and $uX \in F_0$ if and only if $\varepsilon_{uX}$ is: this is the statement on idempotent adjunctions.
+
+\emph{The reflector.} If $\operatorname{Im} u \subset F_0$, then $vu(X) \in E_0$ for every $X$, by the second fact; the functor $X \mapsto vu(X)$ lands in $E_0$. Take as unit $\eta_X : X \to vu(X)$ and as counit, at $Y \in E_0$, $\eta_Y^{-1} : vu(Y) \to Y$, natural because $\eta$ is. The triangle identity on the side of $E_0$ is $\eta_Y\,;\eta_Y^{-1} = \mathrm{id}$. The one on the side of $E$ requires $vu(\eta_X)\,;\eta_{vuX}^{-1} = \mathrm{id}$, that is, $vu(\eta_X) = \eta_{vuX}$; this is the equality established in the proof of (a)~$\Rightarrow$~(c), the adjunction being idempotent by that statement. This is the Hom computation of page~5. The coreflector is handled in the same way, with the counit $\varepsilon_P$, the unit $\varepsilon_Q^{-1}$ at $Q \in F_0$, and the equality $uv(\varepsilon_P) = \varepsilon_{uvP}$; this is the bracketed computation of page~4.
+
+\emph{Limits.} A left adjoint commutes with colimits, a right adjoint with limits. A reflective subcategory has the colimits of the ambient category: one reflects the colimit computed in $E$.
+
+\emph{Condition~4).} For $X \in E$, $u_0(vu(X)) = uvu(X)$, and $\varepsilon_{uX} : uvu(X) \to u(X)$ is invertible and natural in $X$: whence $\beta\,u_0\,\alpha' \simeq u$. Likewise $\eta_{vP}^{-1} : vuv(P) \to v(P)$ gives $\alpha\,v_0\,\beta' \simeq v$. The functor $\beta\,u_0$ is fully faithful as the composite of an equivalence and a full inclusion. Finally, a left adjoint whose right adjoint is fully faithful is a localisation at the arrows it inverts; this is the case of $\alpha'$.
+\end{proof}
+
+\begin{enonce}[Descent of adjoints, page 6]
+Let $\alpha : E_1 \to E$ be fully faithful with left adjoint $\alpha'$, and $\psi : E_1^{\circ} \to \mathrm{Ens}$ such that $\psi \circ \alpha'$ is representable. Then $\psi$ is representable. Consequently, if $\beta : E_1 \to F$ is a functor such that $u = \beta\alpha'$ has a right adjoint, then $\beta$ has a right adjoint.
+\end{enonce}
+
+\begin{proof}
+Let $\xi \in E$ represent $\psi \circ \alpha'$: $\operatorname{Hom}_E(X, \xi) \simeq \psi(\alpha' X)$, naturally in $X$. If $f : X \to Y$ is in $\Sigma$, composition with $f$, from $\operatorname{Hom}(Y, \xi)$ to $\operatorname{Hom}(X, \xi)$, corresponds to $\psi(\alpha' f)$, which is bijective since $\alpha'(f)$ is invertible; $\xi$ is therefore $\Sigma$-local, and, by the statement on local objects, there exist $\xi_1 \in E_1$ and an isomorphism $\alpha \xi_1 \simeq \xi$. For $Z \in E_1$, we then compose the bijections
+\[
+  \operatorname{Hom}_{E_1}(Z, \xi_1) \simeq \operatorname{Hom}_E(\alpha Z, \alpha \xi_1) \simeq \operatorname{Hom}_E(\alpha Z, \xi) \simeq \psi(\alpha'\alpha Z) \simeq \psi(Z),
+\]
+the first by full faithfulness of $\alpha$, the last by $\psi$ applied to the counit $\alpha'\alpha Z \to Z$, which is invertible since $\alpha$ is fully faithful. Naturality in $Z$ follows from that of the counit. Hence $\psi$ is represented by $\xi_1$.
+
+For the second assertion, $\beta$ has a right adjoint if and only if, for every $P \in F$, the presheaf $Z \mapsto \operatorname{Hom}_F(\beta Z, P)$ on $E_1$ is representable. Composed with $\alpha'$, it is $X \mapsto \operatorname{Hom}_F(\beta\alpha' X, P)$, representable since $\beta\alpha'$ has a right adjoint. The first assertion concludes.
+\end{proof}
+
+\begin{remarque}
+The example above answers the question in the margin of page~3, with $E'$ reduced to one object; the reading's answer, \q{It is}, is correct.
+\end{remarque}
+
+\begin{remarque}
+The statement of pages~6 and~7 holds for every reflective subcategory. The characterisation of $\Sigma$ is classical, and the identification of the $\Sigma$-local objects with the essential image, the \q{Or c'est vrai} (Now this is true) of page~7, is a basic lemma of the theory of localisations.
+\end{remarque}
+
+\begin{remarque}
+The fifth condition of page~3, \q{—— et $u'$ et $v'$ pl. fid.} (—— and $u'$ and $v'$ fully faithful), repeats the second word for word; the statement above keeps four.
+\end{remarque}
+
+\begin{remarque}
+The descent of page~6 holds, and without the hypothesis that $\beta$ be fully faithful: the proof does not use it. For an arbitrary category $F$, the page's reduction to the case $\mathrm{Ob}\,F = \mathrm{Ob}\,E_1 \cup \{a\}$ amounts to treating one object $P$ of $F$ at a time, as was done above. The verification assumes that the hom-sets of $E$, $E_1$ and $F$ live in the same universe, as the notion of representable functor requires.
+\end{remarque}
+
+\begin{remarque}
+Page~5 constructs the reflector of $E_0$ under the sole hypothesis $\operatorname{Im} u \subset F_0$ and the coreflector of $F_0$ under $\operatorname{Im} v \subset E_0$; these two hypotheses are equivalent by the statement on idempotent adjunctions, and the triangle identity of the reflector goes through this equivalence.
+\end{remarque}
+
+\noindent Not proved here: the reconstruction of an idempotent adjunction from a reflective subcategory, a coreflective subcategory and an equivalence between them, in the direction that starts from these data (page~5); on pages~9 to~19, the universal property of the free symmetric monoidal category $\Phi(A)$ and the unparenthesised product, contractions and their graphical calculus\piste{161-1-contractions-string-calculus}, the sign $\varepsilon(L)$ and Picard categories, the theories of page~13, the Kan extension and its preservation of colimits (pages~17 and~19), Giraud's criterion and the density computation.
+
+\part{Universal algebra and theories}
+
+\section[Folder 161-2: monadicity, descent, the Gabriel--Ulmer characterisation]{Folder 161-2: monadicity, descent, the Gabriel--Ulmer characterisation\protect\verifie{Folder161_2}}\label{sec:161-2}
+
+Folder 161-2, \emph{Algèbre universelle [ou catégories] : notes manuscrites (s.d.)} (Universal algebra [or categories]: handwritten notes, undated), a hundred and eleven pages that the inventory dates \q{[vers 1963-1973]} (about 1963--1973) and places among the files gathered by Grothendieck on various themes, seeks what a species of algebraic structure in a category is, and in what way the models determine the theory. Two worksheets, pages~33 and~34, note the criterion for recognising a \q{tripleable} functor, with three names that the transcription reads with doubt, \q{Beck, Barr, Linton} (\lot{161-2}{2}{33}), then the descent criterion for a morphism of topoi, concluded by \q{$B_\pi \xrightarrow{\ \simeq\ } B$ (th)} (\lot{161-2}{2}{34}). Page~60 states a corollary on cocomplete categories, \q{Ce sont ces $E$ qu'il faudrait appeler « accessibles »} (it is these $E$ that ought to be called \textit{accessible}) (\lot{161-2}{3}{60}), which page~61 proves (\lot{161-2}{4}{61}); page~77 establishes, for theories defined by finite limits, the lemma $\mathrm{Ind}(\Sigma) \simeq S$ (\lot{161-2}{4}{77}).
+
+\noindent\emph{Conventions.} The notation of Section~\ref{sec:19} applies here: for an adjunction $f \dashv g$, $f : A \to B$, $h : A \to \varphi\text{-}\mathbf{Coalg}$ is the comparison functor to the coalgebras of $\varphi = fg$; dually, for $F \dashv U$, $U : A \to B$, the comparison functor goes from $A$ to the algebras of the monad $\mathbb T = UF$. A double arrow is \emph{reflexive} if its two arrows have a common section, \emph{coreflexive} if they have a common retraction.
+
+\begin{enonce}[Monadicity theorem, page 33]
+A functor $U : A \to B$ with a left adjoint $F$ is monadic ($A \simeq \mathrm{Alg}(\mathbb T)$, $\mathbb T = UF$) if $U$ is conservative and $A$ has, and $U$ preserves, coequalisers of reflexive pairs.
+\end{enonce}
+
+\begin{enonce}[Descent criterion, page 34]
+Let $f$ be a morphism of topoi, with inverse image $f^* : B' \to B$, and $\pi = f^* f_*$. If $f^*$ is conservative, the comparison functor $B' \to B_\pi$, $X \mapsto f^* X$, to the category of $\pi$-coalgebras, is an equivalence.
+\end{enonce}
+
+\begin{lemme}\label{lem:161-2-grossier}
+Let $f \dashv g$ be an adjunction, $f : A \to B$. If $f$ is conservative, if $A$ has kernels of coreflexive double arrows and if $f$ commutes with them, the comparison functor $h$ is an equivalence.
+\end{lemme}
+
+\begin{proof}
+For every coalgebra $(X, a)$, the double arrow $(\eta_{gX}, g(a))$ is coreflexive (Lemma~\ref{lem:19-paire}); it therefore has a kernel, with which $f$ commutes. Lemma~\ref{lem:19-comp}\,(3) concludes. This is Beck's \q{crude} comonadicity theorem, classical.
+\end{proof}
+
+\begin{proof}[Proof of the monadicity theorem]
+This is the dual statement. The functor $U^\circ : A^\circ \to B^\circ$ is left adjoint to $F^\circ$; the monad $UF$ on $B$ becomes the comonad $U^\circ F^\circ$ on $B^\circ$, whose coalgebras are the opposites of the $\mathbb T$-algebras, and the comparison functor becomes that of Lemma~\ref{lem:161-2-grossier}. Coequalisers of reflexive pairs in $A$ are kernels of coreflexive pairs in $A^\circ$, and $U^\circ$ is conservative. Lemma~\ref{lem:161-2-grossier} applies.
+\end{proof}
+
+\begin{proof}[Proof of the descent criterion]
+We prove more: let $f^* \dashv f_*$ be any adjunction, $f^* : B' \to B$, where $B'$ has finite limits and $f^*$ is left exact and conservative. Then $B'$ has kernels of all double arrows, in particular of coreflexive ones, and $f^*$, being left exact, commutes with them. Lemma~\ref{lem:161-2-grossier} gives the equivalence $B' \simeq B_\pi$. For a morphism of topoi, $B'$ has finite limits and $f^*$ is left exact by definition.
+\end{proof}
+
+\begin{definition}
+Let $E$ be a locally small category and $\kappa$ a regular cardinal. An object $X$ of $E$ is \emph{$\kappa$-presentable} if $\operatorname{Hom}_E(X, -)$ commutes with $\kappa$-filtered colimits, and \emph{presentable} if it is so for some $\kappa$; this is the page's \q{accessible}. A full subcategory $\mathcal C$ of $E$ is \emph{dense} if, for every $X$, the canonical arrow $\varinjlim_{\mathcal C_{/X}} Y \to X$ is an isomorphism; this is condition~a) by which page~56 defines a \q{strictement génératrice} (strictly generating) subcategory. The category $E$ is \emph{locally presentable} if it is cocomplete and there exist a regular cardinal $\kappa$ and a small set of $\kappa$-presentable objects such that every object is a $\kappa$-filtered colimit of them; this is what \q{$E$ est équivalente à un $\mathrm{Ind}_\pi(\mathcal C)$, $\mathcal C$ petite} ($E$ is equivalent to an $\mathrm{Ind}_\pi(\mathcal C)$, $\mathcal C$ small) says.
+\end{definition}
+
+\begin{enonce}[Corollary, pages 60 and 61]
+A locally small cocomplete category $E$ is locally presentable if and only if it has a small dense full subcategory consisting of presentable objects.
+\end{enonce}
+
+\begin{proof}
+Suppose $E$ locally $\kappa$-presentable. The full subcategory $P$ of $\kappa$-presentable objects is essentially small and dense: this is classical (Gabriel--Ulmer, Adámek--Rosický). Let $Q \subseteq P$ be a small full subcategory containing a representative of each isomorphism class; the inclusion $Q \to P$ is an equivalence, and the composite of an equivalence and a dense functor is dense, so $Q$ is dense in $E$. Its objects are $\kappa$-presentable, hence presentable.
+
+Conversely, let $P$ be a small dense full subcategory each object $X$ of which is $\kappa_X$-presentable for a regular cardinal $\kappa_X$. Since $P$ is small, the family of the $\kappa_X$ is bounded by a cardinal $c$. Let $\kappa_0$ be the successor of $\max(c, \aleph_0)$; it is a regular cardinal, as is every successor of an infinite cardinal. Every $\kappa_0$-filtered colimit being $\kappa_X$-filtered, each $X \in P$ is $\kappa_0$-presentable. A dense subcategory is strongly generating (classical). Now a cocomplete category with a small strongly generating set of $\kappa_0$-presentable objects is locally $\kappa_0$-presentable: this is Theorem~1.20 of Adámek and Rosický, classical. Hence $E$ is locally presentable.
+\end{proof}
+
+\begin{enonce}[Lemma, page 77]
+Let $R$ be a small category with finite limits, $S = \underline{\mathrm{Hom}}_{\mathrm{lex}}(R, \mathrm{Ens})$ and $\Sigma \simeq R^\circ \subset S$ the full subcategory of representable structures. The inclusion functor $\Sigma \to S$ induces an equivalence $\mathrm{Ind}(\Sigma) \simeq S$.
+\end{enonce}
+
+\begin{proof}
+We identify $S$ with the left exact presheaves $X : \Sigma^\circ \to \mathrm{Ens}$, the category $\Sigma = R^\circ$ having finite colimits, and $\mathrm{Ind}(\Sigma)$ with the full subcategory of presheaves on $\Sigma$ that are filtered colimits of representables. It suffices to show that these two full subcategories have the same objects. A representable is left exact, and filtered colimits commute with finite limits in $\mathrm{Ens}$; every ind-object is therefore left exact. Conversely, let $X$ be left exact. Every presheaf is the colimit of the representables over its category of elements $\Sigma_{/X}$, and the latter is filtered: it is non-empty, because $X$ sends the initial object of $\Sigma$ to a point; two elements $x \in X(a)$, $y \in X(b)$ come from $X(a \sqcup b) = X(a) \times X(b)$; two arrows $u, v : (a, x) \rightrightarrows (b, y)$ are equalised by the arrow to the coequaliser $c$ of $u, v$, since $X(c)$ is the kernel of $X(u), X(v) : X(b) \rightrightarrows X(a)$, which contains $y$. This is the classical fact that the ind-objects of a small category with finite colimits are its left exact presheaves (SGA~4, exposé~I, §~8), which the verified proof invokes.
+\end{proof}
+
+\begin{remarque}
+The descent criterion does not use the topos structure: it holds for every left exact and conservative functor that is a left adjoint and is defined on a category with finite limits. The equivalence has source $B'$, and not $B$ as the page writes; the reading has corrected this.
+\end{remarque}
+
+\begin{remarque}
+The corollary is Gabriel and Ulmer's characterisation theorem for locally presentable categories; it is proved here for the modern notion, not for the $\mathrm{Ind}_\pi(\mathcal C)$ of SGA~4 that the page uses. The lemma of page~77 is the finite-limit case of Gabriel--Ulmer duality.
+\end{remarque}
+
+\noindent Not proved here: the adjunction of page~33 between the models of a Lawvere theory and the algebras of a monad, which the page does not state; the theorem of page~54, the corollary of page~55 and the non-accessibility of $(\mathrm{Ens})^\circ$ and $(\mathrm{Ab})^\circ$; the list of page~56; the lemma of page~59 on $\mathrm{Ind}_\pi(\mathcal C)$ and cardinal filtrations; the corollary of page~77; the theorems on the $\Delta$-envelope (pages~3 to~31), algebraic theories and their classifying topoi (pages~17 to~24 and~36 to~52), including the non-coherent subtopoi of rings with irreducible spectrum or of dimension zero\piste{161-2-irreducible-and-zero-dimensional-not-coherent} and of rings of definite characteristic\piste{161-2-definite-characteristic-join-of-subtopoi}, the complements and examples of pages~62 to~76 and~78 to~91, the universal field and the site of absolutely flat rings (pages~41, 42 and~92 to~95)\piste{161-2-field-classifier-absolutely-flat-site}, the fair copy (pages~97 to~106) and pages~108 to~111.
+
+\part{Functional analysis}
+
+\section[Folder 113: the Karoubi envelope and Morita invariance]{Folder 113: the Karoubi envelope and Morita invariance\protect\verifie{Folder113}}\label{sec:113}
+
+Folder 113, \emph{Abelianization : notes manuscrites (s.d.)} (Abelianization: handwritten notes, undated), twelve pages that the inventory dates \q{[à partir de 1982]} (from 1982), constructs, under his own heading \q{$\otimes$ dans Cat} ($\otimes$ in Cat), the tensor product of small $k$-linear categories and shows that it computes that of their module categories. Page~3 lays the foundations: for $P$ a small $k$-additive category, $P^k$ is \emph{defined} as $\operatorname{Hom}_{\mathbf Z}(P^\circ, Ab)$, identified with $\operatorname{Hom}_k(P^\circ, Ab_k)$ with the parenthesis \q{ne dépend pas du choix de la str.\ $k$-additive} (does not depend on the choice of the $k$-additive structure); the embedding $P \hookrightarrow P^k$ is an \q{inclusion additive pl.\ fid.} (fully faithful additive inclusion), whence \q{$\operatorname{Kar} P \approx \mathrm{Ul}\operatorname{Proj}(P^{k})$}, the two letters before \q{Proj} being unidentified, and a note in the margin: \q{$P \to \operatorname{Kar} P$ induit $(\operatorname{Kar} P)^{k} \overset{\sim}{\to} P^{k}$} ($P \to \operatorname{Kar} P$ induces $(\operatorname{Kar} P)^{k} \overset{\sim}{\to} P^{k}$) (\lot{113}{1}{3}). The reading reads the first equivalence as $\operatorname{Kar}(P) \simeq \operatorname{Proj}_{\mathrm{tf}}(P^k)$, the projectives of finite type (finitely generated projectives), and calls the whole Morita invariance.
+
+\begin{definition}
+Let $P$ be a category. Its \emph{Karoubi envelope} (idempotent completion) $\operatorname{Kar} P$ has as objects the pairs $(X, e)$ consisting of an object $X$ of $P$ and an idempotent $e = e^2$ of $\operatorname{End}(X)$, and as arrows $(X, e) \to (Y, e')$ the $f : X \to Y$ such that $e' f = f = f e$; composition is that of $P$, and the identity of $(X, e)$ is $e$. The functor $\iota : P \to \operatorname{Kar} P$ sends $X$ to $(X, \mathrm{id}_X)$. A category is \emph{Karoubian} (idempotent-complete) if every idempotent in it splits. If $P$ is preadditive, so is $\operatorname{Kar} P$, its groups of arrows being subgroups of those of $P$.
+\end{definition}
+
+\begin{enonce}[Page 3, the marginal note]
+Let $P$ be a preadditive category and $\mathcal D$ a preadditive Karoubian category --- for instance $Ab$, or the category of $k$-modules. Restriction along $\iota^\circ : P^\circ \to (\operatorname{Kar} P)^\circ$ is an equivalence from the category of additive functors $(\operatorname{Kar} P)^\circ \to \mathcal D$ onto that of additive functors $P^\circ \to \mathcal D$. For $\mathcal D = Ab$, this is the equivalence $(\operatorname{Kar} P)^k \simeq P^k$, with the page's definition $P^k = \operatorname{Hom}_{\mathbf Z}(P^\circ, Ab)$.
+\end{enonce}
+
+\begin{lemme}\label{lem:113-univ}
+Let $P$ be a category and $\mathcal D$ a Karoubian category. Restriction along $\iota : P \to \operatorname{Kar} P$ is an equivalence from the category of functors $\operatorname{Kar} P \to \mathcal D$ onto that of functors $P \to \mathcal D$.
+\end{lemme}
+
+\begin{proof}
+This is the classical universal property of the Karoubi envelope, the free completion under retracts: a functor $G : P \to \mathcal D$ extends by sending $(X, e)$ to the object through which the idempotent $G(e)$ splits, and this extension is unique up to unique isomorphism. It is not proved again here.
+\end{proof}
+
+\begin{lemme}\label{lem:113-op}
+There is an isomorphism of categories $\operatorname{Kar}(P^\circ) \to (\operatorname{Kar} P)^\circ$, bijective on objects, compatible with the embeddings: the composite $P^\circ \xrightarrow{\iota_{P^\circ}} \operatorname{Kar}(P^\circ) \to (\operatorname{Kar} P)^\circ$ is $\iota_P^\circ$.
+\end{lemme}
+
+\begin{proof}
+An object of $\operatorname{Kar}(P^\circ)$ is a pair $(X, e)$ where $e$ is an idempotent of $\operatorname{End}_{P^\circ}(X) = \operatorname{End}_P(X)$; we send it to the object $(X, e)$ of $(\operatorname{Kar} P)^\circ$. An arrow $(X, e) \to (Y, e')$ of $\operatorname{Kar}(P^\circ)$ is an arrow $f : Y \to X$ of $P$ such that $f e' = f = e f$, that is, exactly an arrow $(Y, e') \to (X, e)$ of $\operatorname{Kar} P$, or again an arrow $(X, e) \to (Y, e')$ of $(\operatorname{Kar} P)^\circ$; we send it to itself. This functor respects identities and composition, and it is bijective on objects and on each set of arrows. On $X \in P$, both composites give $(X, \mathrm{id}_X)$, and on arrows the identity.
+\end{proof}
+
+\begin{lemme}\label{lem:113-restr}
+For Karoubian $\mathcal D$, restriction along $\iota_P^\circ : P^\circ \to (\operatorname{Kar} P)^\circ$ is an equivalence from the category of functors $(\operatorname{Kar} P)^\circ \to \mathcal D$ onto that of functors $P^\circ \to \mathcal D$.
+\end{lemme}
+
+\begin{proof}
+By Lemma~\ref{lem:113-op}, this restriction is the composite of restriction along the isomorphism $\operatorname{Kar}(P^\circ) \to (\operatorname{Kar} P)^\circ$, which is an equivalence, and of restriction along $\iota_{P^\circ}$, which is one by Lemma~\ref{lem:113-univ} applied to $P^\circ$.
+\end{proof}
+
+\begin{lemme}\label{lem:113-decomp}
+Every arrow $f : (X, e) \to (Y, e')$ of $\operatorname{Kar} P$ can be written $f = p' \circ \iota(f) \circ j$, where $j : (X, e) \to (X, \mathrm{id})$ and $p' : (Y, \mathrm{id}) \to (Y, e')$ are the arrows given by $e$ and by $e'$.
+\end{lemme}
+
+\begin{proof}
+These are indeed arrows of $\operatorname{Kar} P$, since $\mathrm{id} \cdot e = e = e \cdot e$ and $e' \cdot e' = e' = e' \cdot \mathrm{id}$; and the composite is $e' f e = f$.
+\end{proof}
+
+\begin{lemme}\label{lem:113-add}
+Let $P$ and $\mathcal D$ be preadditive and $F : (\operatorname{Kar} P)^\circ \to \mathcal D$ a functor. If $F \circ \iota^\circ$ is additive, so is $F$.
+\end{lemme}
+
+\begin{proof}
+By Lemma~\ref{lem:113-decomp}, for every arrow $h : (X, e) \to (Y, e')$ of $\operatorname{Kar} P$, we have $F(h) = F(j) \circ (F \circ \iota^\circ)(h) \circ F(p')$, the arrows $j$ and $p'$ depending only on the source and target of $h$, and $h$ being regarded on the right as an arrow $Y \to X$ of $P^\circ$. For two arrows $h_1, h_2$ with the same source and the same target, the sum in $\operatorname{Kar} P$ is the sum in $P$; additivity of $F \circ \iota^\circ$ and bilinearity of composition in $\mathcal D$ then give $F(h_1 + h_2) = F(h_1) + F(h_2)$.
+\end{proof}
+
+\begin{proof}[Proof of the statement]
+Additive functors form a full subcategory of the category of all functors. Since restriction along $\iota^\circ$ is fully faithful on all functors by Lemma~\ref{lem:113-restr}, it is so on additive functors, and it sends an additive functor to an additive functor. It is essentially surjective: let $G : P^\circ \to \mathcal D$ be additive; by Lemma~\ref{lem:113-restr}, there exist $F : (\operatorname{Kar} P)^\circ \to \mathcal D$ and an isomorphism $F \circ \iota^\circ \simeq G$; a functor isomorphic to an additive functor is additive, so $F \circ \iota^\circ$ is, and $F$ is additive by Lemma~\ref{lem:113-add}. The category $Ab$ and the category of $k$-modules are preadditive and Karoubian, since every idempotent in them has an image.
+\end{proof}
+
+\begin{remarque}
+The statement requires neither that $P$ be small nor that the target be abelian: it suffices that $P$ be preadditive and $\mathcal D$ preadditive and Karoubian. In particular it holds for additive functors with values in $k$-modules.
+\end{remarque}
+
+\begin{remarque}
+This is the classical invariance of the module category under passage to the Karoubi envelope, deduced from the universal property of the latter.
+\end{remarque}
+
+\noindent Not proved here: the $k$-linear form of the statement; the independence of $P^k$ from the $k$-additive structure, $\operatorname{Hom}_{\mathbf Z}(P^\circ, Ab) \simeq \operatorname{Hom}_k(P^\circ, Ab_k)$; the full faithfulness of the Yoneda embedding $P \hookrightarrow P^k$ and the equivalence $\operatorname{Kar}(P) \simeq \operatorname{Proj}_{\mathrm{tf}}(P^k)$; the recognition criterion for module categories (Freyd and Mitchell) and the 2-functorial statement of page~3; the free cocompletion; on pages~5 to~12, the tensor product $P \otimes_k Q$ and its 2-universal property, the identification of $(P \otimes_k Q)^k$ with the tensor product of $P^k$ and $Q^k$, the reading's counterexample to the full faithfulness of the comparison $(\circledast)$, the formulas of page~11 and the derived product of page~12.
+
+\part*{Assessment}\addcontentsline{toc}{part}{Assessment}
+
+\section{What is not proved}\label{sec:reste}
+
+Table~\ref{tab:reste} gives, for each folder of this extract, the statements not proved here: those at which the choice of the folder aimed, then the other statements of the reading. The red diamond \textcolor{piste}{\ensuremath{\blacklozenge}} marks the leads of the Findings tab, statements possibly absent from the literature and not established (see the conventions at the start of the extract).
+
+\begingroup\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{1.2cm}>{\raggedright\arraybackslash}p{6.4cm}>{\raggedright\arraybackslash}p{6.4cm}}
+\caption{Statements of the five folders not proved here.}\label{tab:reste}\\\toprule
+Folder & Targeted statements, not proved & Other statements of the reading\\\midrule\endfirsthead
+\toprule Folder & Targeted statements, not proved & Other statements of the reading\\\midrule\endhead
+19 & The Morita statement (equivalence if and only if $U$ is small and projective); the Conclusion of pp.~4--6 (adjunctions and comonads). & The reconstruction of the adjunction; the topoi of coalgebras (p.~6); the comonad over a product base (pp.~7--11)\piste{19-comonad-matrix-product-base}; the chains of $n$ adjoints (pp.~79--80)\piste{19-adjoint-chains-length-n}; pp.~7--95 (standard resolutions, relative cohomology, SGA~4, localisation, gluing, fibred categories). \\
+133 & The identification of the crossed modules of $G_1$ with those of $G$ (the formulas $\Psi_{G_1} = \Psi_G + \tilde c_E\alpha$, $\lambda_{G_1} = \lambda_G + \beta c_E$ are proved only as an identity of commutators in $G_1$); the isomorphism $N/D(G) \simeq \mathcal D/\lambda_G(\pi_0\otimes\pi_0)$ beyond the equivalence. & The $H^3$ obstruction and the $H^2$ indeterminacy (p.~45); conditions b) and c) of pp.~50--53; the reduction to alternating forms; the Witt, $\lambda$-ring and formal group sequences (pp.~34--39), Chevalley (pp.~41--43)\piste{133-affine-quotient-not-constructible}. \\
+161-1 & --- & The reconstruction of an idempotent adjunction from $(E_0, F_0, E_0 \simeq F_0)$ (p.~5); pp.~9--19, including the contractions (pp.~11--12)\piste{161-1-contractions-string-calculus}. \\
+161-2 & The Lawvere theory--monad adjunction (p.~33); the theorem of p.~54 and the corollary of p.~55; the lemma of p.~59 ($\mathrm{Ind}_\pi$, cardinal filtrations); the corollary of p.~77. & The list of p.~56; the $\Delta$-envelope (pp.~3--31); classifying topoi (pp.~17--24, 36--52)\piste{161-2-irreducible-and-zero-dimensional-not-coherent}\piste{161-2-definite-characteristic-join-of-subtopoi}; pp.~62--76 and~78--111, including the universal field (pp.~92--95)\piste{161-2-field-classifier-absolutely-flat-site}. \\
+113 & The $k$-linear form of Morita invariance. & The independence of the $k$-additive structure; $\mathrm{Kar}\,P \simeq \mathrm{Proj}_{\mathrm{tf}}(P^k)$; Freyd--Mitchell; the 2-functorial statement; pp.~5--12 (tensor product, counterexample~($\circledast$), derived product). \\\bottomrule
+\end{longtable}
+\endgroup
+
+Across the whole annex, the errors found in the statements of the readings bore on modern glosses and, once, on the page itself: the necessity in Theorem~1.12\,b) of folder~19. Page~3 of folder~161-1 repeats one of its conditions word for word. The lead proved here holds as written, under a weaker hypothesis: for page~46, folder~133 uses only $N' \subset \mathrm{Cent}(G)$. The remaining statements await, for the most part, classical theories, among them that of the $\mathrm{Ind}_\pi$ categories.
+
+\section*{Declaration on the use of artificial intelligence}\addcontentsline{toc}{section}{Declaration on the use of artificial intelligence}
+
+The statements proved here are taken from the modernised readings of the fonds, themselves derived from transcriptions produced by language models (Claude Opus~5, Opus~5.5, Fable~5 and Fable~5.1, from Anthropic) under editorial rules written by the author; these transcriptions have not been reviewed in full by a person. The formal proofs were written in the Lean~4 proof assistant by Claude Opus~5.5, under the direction of the author, and their correctness is checked mechanically by Lean against the mathlib library; the written proofs of this annex are drawn from them by the same model. The choice of statements, the corrections made to the readings and the text have been reviewed by the author, who takes full responsibility for them. Lean guarantees that a statement holds under the hypotheses as written; it guarantees neither that the statement faithfully renders the sheet, nor that it is new.
+
+\end{document}
