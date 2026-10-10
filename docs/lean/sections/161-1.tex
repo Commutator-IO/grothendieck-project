@@ -63,6 +63,77 @@ Les quatre conditions sont donc équivalentes ; en particulier la condition~2 du
 \emph{Un objet local est dans l'image essentielle.} Soit $\xi$ un objet $\Sigma$-local et $\eta = \eta_\xi : \xi \to \alpha\alpha'\xi$ l'unité. Pour tout $Z_1$, la composition avec $\eta$, de $\operatorname{Hom}_E(\alpha\alpha'\xi, \alpha Z_1)$ dans $\operatorname{Hom}_E(\xi, \alpha Z_1)$, est bijective : c'est la bijection d'adjonction $\operatorname{Hom}_{E_1}(\alpha'\xi, Z_1) \simeq \operatorname{Hom}_E(\xi, \alpha Z_1)$ lue à travers la pleine fidélité de $\alpha$. Par la caractérisation qui précède, $\eta \in \Sigma$. Comme $\xi$ est local, la composition avec $\eta$, de $\operatorname{Hom}(\alpha\alpha'\xi, \xi)$ dans $\operatorname{Hom}(\xi, \xi)$, est bijective ; il existe donc $r : \alpha\alpha'\xi \to \xi$ avec $\eta\,;r = \mathrm{id}_\xi$. Alors $\eta\,;(r\,;\eta) = \eta = \eta\,;\mathrm{id}$, et comme la composition avec $\eta$ est injective sur les flèches à valeurs dans l'objet local $\alpha\alpha'\xi$, $r\,;\eta = \mathrm{id}$. Ainsi $\xi \simeq \alpha(\alpha'\xi)$. Avec la dernière phrase du paragraphe précédent, on obtient que les objets $\Sigma$-locaux sont exactement ceux de l'image essentielle de $\alpha$.
 \end{proof}
 
+\begin{enonce}[(2), page 3]
+Soient $F' \subset F$ une sous-catégorie pleine et $\overline{F}'$ sa clôture par isomorphie. Alors
+\[
+  \begin{gathered}
+  v|F' \text{ est pleinement fidèle et } uv(F') \subset \overline{F}' \\
+  \iff \text{pour tout } P \in F',\ \varepsilon_P : uv(P) \to P \text{ est un isomorphisme.}
+  \end{gathered}
+\]
+\end{enonce}
+
+\begin{proof}
+C'est la démonstration de~(1) retournée. Pour $P, Q \in F$, l'application $g \mapsto v(g)$, de $\operatorname{Hom}_F(P, Q)$ dans $\operatorname{Hom}_E(vP, vQ)$, suivie de la bijection d'adjonction réciproque $h \mapsto u(h)\,;\varepsilon_Q$, donne $g \mapsto uv(g)\,;\varepsilon_Q = \varepsilon_P\,;g$ par naturalité de $\varepsilon$ : c'est le \q{$\mathrm{Hom}(j(P), Q)$} de la page, et $v$ est bijective sur $\operatorname{Hom}(P, Q)$ si et seulement si $g \mapsto \varepsilon_P\,;g$ l'est. Si $\varepsilon_P$ est inversible pour tout $P \in F'$, la composition avec $\varepsilon_P$ est bijective, et $uv(P) \simeq P$. Réciproquement, soient $P \in F'$, $Z \in F'$ et $e : uv(P) \to Z$ un isomorphisme ; la surjectivité de $g \mapsto \varepsilon_P\,;g$ sur $\operatorname{Hom}(P, Z)$ donne $g$ avec $\varepsilon_P\,;g = e$. Posons $s = g\,;e^{-1}$. Alors $\varepsilon_P\,;s = \mathrm{id}$, et $\varepsilon_P\,;(s\,;\varepsilon_P) = \varepsilon_P = \varepsilon_P\,;\mathrm{id}$ ; l'injectivité sur $\operatorname{Hom}(P, P)$ donne $s\,;\varepsilon_P = \mathrm{id}$.
+\end{proof}
+
+\begin{enonce}[Les cinq conditions, page 3]
+Soient $E' \subset E$ et $F' \subset F$ des sous-catégories strictement pleines ; on note $u' : E' \to F'$ et $v' : F' \to E'$ les foncteurs induits quand $u(E') \subset F'$ et $v(F') \subset E'$. Les conditions suivantes sont équivalentes :
+\begin{enumerate}
+\item $E'$ vérifie~(1), $F'$ vérifie~(2), et $F' = \overline{u(E')}$, $E' = \overline{v(F')}$ ;
+\item $u(E') \subset F'$, $v(F') \subset E'$, et $u'$, $v'$ sont pleinement fidèles ;
+\item $u(E') \subset F'$, $v(F') \subset E'$, et $u'$ est une équivalence ;
+\item $u(E') \subset F'$, $v(F') \subset E'$, et $v'$ est une équivalence.
+\end{enumerate}
+De plus, si $E'$ strictement pleine vérifie~(1), $\alpha(E') = \overline{u(E')}$ vérifie~(2) et $\beta(\alpha(E')) = E'$ ; dualement pour $F'$.
+\end{enonce}
+
+\begin{proof}
+On lit \q{$u'$ est une équivalence} comme \q{$u'$ est pleinement fidèle et tout objet de $F'$ est isomorphe à un $u(Y)$, $Y \in E'$}. On utilise deux faits : si $\eta_Y$ est inversible, $\varepsilon_{uY}$ l'est, puisque $u(\eta_Y)\,;\varepsilon_{uY} = \mathrm{id}$ ; et si $\varepsilon_P$ l'est, $\eta_{vP}$ l'est, par l'autre identité triangulaire. Les objets où $\eta$ (resp. $\varepsilon$) est inversible forment une sous-catégorie strictement pleine, par naturalité.
+
+Si $u(E') \subset F'$, $v(F') \subset E'$, $\eta$ est inversible sur $E'$ et $\varepsilon$ sur $F'$, alors 1.\ vaut : un $P \in F'$ est isomorphe, par $\varepsilon_P$, à $u(vP)$ avec $vP \in E'$, et tout objet isomorphe à un $u(Y)$, $Y \in E'$, est dans $F'$, strictement pleine ; de même pour $E'$, par $\eta_Y^{-1}$. Réciproquement 1.\ donne $u(E') \subset F'$, $v(F') \subset E'$, et, par~(1) et~(2), la pleine fidélité de $u'$ et $v'$ et l'essentielle surjectivité de $u'$ et de $v'$ ; donc 1.\ entraîne 2., 3.\ et~4.
+
+Sous 2., $vu(E') \subset v(F') \subset E'$, et (1) donne $\eta$ inversible sur $E'$ ; de même (2) donne $\varepsilon$ inversible sur $F'$ ; d'où 1. Sous 3., (1) donne de même $\eta$ inversible sur $E'$ ; un $P \in F'$ est isomorphe à un $u(Y)$, $Y \in E'$, où $\varepsilon$ est inversible par le premier fait ; donc $\varepsilon_P$ l'est, d'où 1. Le cas~4.\ est symétrique.
+
+Pour la bijection : si $Y \in E'$, $Y \simeq vu(Y)$ par $\eta_Y$ et $uY \in \alpha(E')$ ; si $Y \simeq v(P)$ avec $P \simeq u(Y')$, $Y' \in E'$, alors $Y \simeq vu(Y') \simeq Y'$ et $Y \in E'$. Et $\varepsilon$ est inversible sur $\alpha(E')$ par le premier fait.
+\end{proof}
+
+\begin{enonce}[Les points fixes, page 4]
+Soient $E_0 \subset E$ la sous-catégorie pleine des $Y$ où $\eta_Y$ est inversible et $F_0 \subset F$ celle des $P$ où $\varepsilon_P$ l'est. Ce sont les plus grandes sous-catégories vérifiant~(1) et~(2) ; on a $F_0 = \overline{u(E_0)}$, $E_0 = \overline{v(F_0)}$, et $u$, $v$ induisent des équivalences quasi-inverses $E_0 \simeq F_0$.
+\end{enonce}
+
+\begin{proof}
+La maximalité est la forme de~(1) et~(2) démontrée plus haut : $E'$ vérifie~(1) si et seulement si $E' \subset E_0$. Par les deux faits de la démonstration précédente, $u(E_0) \subset F_0$ et $v(F_0) \subset E_0$ ; les égalités $F_0 = \overline{u(E_0)}$ et $E_0 = \overline{v(F_0)}$ en résultent comme dans le cas~1.\ ci-dessus. Les foncteurs induits $u_0 : E_0 \to F_0$ et $v_0 : F_0 \to E_0$ sont quasi-inverses, par les isomorphismes naturels $\eta_Y : Y \to v_0u_0(Y)$ et $\varepsilon_P : u_0v_0(P) \to P$.
+\end{proof}
+
+\begin{enonce}[Conditions 1), 3) et~4), page 5 ; la préservation des colimites]
+La condition~1), $\operatorname{Im} v \subset E_0$ et $\operatorname{Im} u \subset F_0$, est l'idempotence, et chacune de ses moitiés suffit. Si $\operatorname{Im} u \subset F_0$, l'inclusion $E_0 \subset E$ admet pour adjoint à gauche $v_0 \circ u'$, $X \mapsto vu(X)$ ; si $\operatorname{Im} v \subset E_0$, l'inclusion $F_0 \subset F$ admet pour adjoint à droite $u_0 \circ v'$, $P \mapsto uv(P)$. Ce réflecteur $E \to E_0$ commute aux limites inductives et l'inclusion $E_0 \subset E$ aux limites projectives ; $E_0$ a les limites inductives qu'a $E$ ; dualement, le coréflecteur $F \to F_0$ commute aux limites projectives, l'inclusion $F_0 \subset F$ aux limites inductives, et $F_0$ a les limites projectives qu'a $F$. Enfin, pour une adjonction idempotente, $u \simeq \beta\, u_0\, \alpha'$ et $v \simeq \alpha\, v_0\, \beta'$, avec $\alpha'$ le réflecteur, qui est un passage à la catégorie des fractions, $\beta' $ le coréflecteur, et $\alpha$, $\beta$ les inclusions ; $\beta\, u_0 : E_0 \to F$ est pleinement fidèle (condition~4)).
+\end{enonce}
+
+\begin{proof}
+\emph{Condition~1).} $Y = vP$ est dans $E_0$ si et seulement si $\eta_{vP}$ est inversible, et $uX \in F_0$ si et seulement si $\varepsilon_{uX}$ l'est : c'est l'énoncé sur les adjonctions idempotentes.
+
+\emph{Le réflecteur.} Si $\operatorname{Im} u \subset F_0$, alors $vu(X) \in E_0$ pour tout $X$, par le second fait ; le foncteur $X \mapsto vu(X)$ arrive dans $E_0$. On prend pour unité $\eta_X : X \to vu(X)$ et pour coünité, en $Y \in E_0$, $\eta_Y^{-1} : vu(Y) \to Y$, naturelle parce que $\eta$ l'est. L'identité triangulaire du côté de $E_0$ est $\eta_Y\,;\eta_Y^{-1} = \mathrm{id}$. Celle du côté de $E$ demande $vu(\eta_X)\,;\eta_{vuX}^{-1} = \mathrm{id}$, c'est-à-dire $vu(\eta_X) = \eta_{vuX}$ ; c'est l'égalité établie dans la démonstration de (a)~$\Rightarrow$~(c), l'adjonction étant idempotente par cet énoncé. C'est le calcul de Hom de la page~5. Le coréflecteur se traite de même, avec la coünité $\varepsilon_P$, l'unité $\varepsilon_Q^{-1}$ en $Q \in F_0$, et l'égalité $uv(\varepsilon_P) = \varepsilon_{uvP}$ ; c'est le calcul entre crochets de la page~4.
+
+\emph{Limites.} Un adjoint à gauche commute aux limites inductives, un adjoint à droite aux limites projectives. Une sous-catégorie réflexive a les limites inductives de la catégorie ambiante : on réfléchit la limite inductive calculée dans $E$.
+
+\emph{Condition~4).} Pour $X \in E$, $u_0(vu(X)) = uvu(X)$, et $\varepsilon_{uX} : uvu(X) \to u(X)$ est inversible et naturel en $X$ : d'où $\beta\,u_0\,\alpha' \simeq u$. De même $\eta_{vP}^{-1} : vuv(P) \to v(P)$ donne $\alpha\,v_0\,\beta' \simeq v$. Le foncteur $\beta\,u_0$ est pleinement fidèle comme composé d'une équivalence et d'une inclusion pleine. Enfin, un adjoint à gauche dont l'adjoint à droite est pleinement fidèle est une localisation en les flèches qu'il inverse ; c'est le cas de $\alpha'$.
+\end{proof}
+
+\begin{enonce}[La descente d'adjoints, page 6]
+Soient $\alpha : E_1 \to E$ pleinement fidèle d'adjoint à gauche $\alpha'$, et $\psi : E_1^{\circ} \to \mathrm{Ens}$ tel que $\psi \circ \alpha'$ soit représentable. Alors $\psi$ est représentable. Par suite, si $\beta : E_1 \to F$ est un foncteur tel que $u = \beta\alpha'$ admette un adjoint à droite, $\beta$ admet un adjoint à droite.
+\end{enonce}
+
+\begin{proof}
+Soit $\xi \in E$ représentant $\psi \circ \alpha'$ : $\operatorname{Hom}_E(X, \xi) \simeq \psi(\alpha' X)$, naturellement en $X$. Si $f : X \to Y$ est dans $\Sigma$, la composition avec $f$, de $\operatorname{Hom}(Y, \xi)$ dans $\operatorname{Hom}(X, \xi)$, correspond à $\psi(\alpha' f)$, qui est bijective puisque $\alpha'(f)$ est inversible ; $\xi$ est donc $\Sigma$-local, et, par l'énoncé sur les objets locaux, il existe $\xi_1 \in E_1$ et un isomorphisme $\alpha \xi_1 \simeq \xi$. Pour $Z \in E_1$, on compose alors les bijections
+\[
+  \operatorname{Hom}_{E_1}(Z, \xi_1) \simeq \operatorname{Hom}_E(\alpha Z, \alpha \xi_1) \simeq \operatorname{Hom}_E(\alpha Z, \xi) \simeq \psi(\alpha'\alpha Z) \simeq \psi(Z),
+\]
+la première par la pleine fidélité de $\alpha$, la dernière par $\psi$ appliqué à la coünité $\alpha'\alpha Z \to Z$, inversible puisque $\alpha$ est pleinement fidèle. La naturalité en $Z$ résulte de celle de la coünité. Donc $\psi$ est représenté par $\xi_1$.
+
+Pour la seconde assertion, $\beta$ admet un adjoint à droite si et seulement si, pour tout $P \in F$, le préfaisceau $Z \mapsto \operatorname{Hom}_F(\beta Z, P)$ sur $E_1$ est représentable. Composé avec $\alpha'$, c'est $X \mapsto \operatorname{Hom}_F(\beta\alpha' X, P)$, représentable puisque $\beta\alpha'$ a un adjoint à droite. La première assertion conclut.
+\end{proof}
+
 \begin{remarque}
 L'exemple ci-dessus répond à la question de la marge de la page~3, avec $E'$ réduit à un objet ; la réponse de la lecture, \q{Elle l'est}, est juste.
 \end{remarque}
@@ -71,4 +142,16 @@ L'exemple ci-dessus répond à la question de la marge de la page~3, avec $E'$ r
 L'énoncé des pages~6 et~7 vaut pour toute sous-catégorie réflexive. La caractérisation de $\Sigma$ est classique, et l'identification des objets $\Sigma$-locaux à l'image essentielle, le \q{Or c'est vrai} de la page~7, est un lemme de base de la théorie des localisations.
 \end{remarque}
 
-\noindent Ne sont pas démontrés ici : l'énoncé dual~(2) sur les sous-catégories $F' \subset F$, qui se déduit de~(1) par passage aux catégories opposées ; la correspondance entre sous-catégories vérifiant~(1) et~(2) et les cinq conditions équivalentes de la page~3 ; l'équivalence $E_0 \simeq F_0$ entre les parties fixes (page~4) ; les conditions~1), 3) et~4) de la page~5 et la reconstruction d'une adjonction idempotente à partir d'une sous-catégorie réflexive, d'une coréflexive et d'une équivalence entre elles ; la question de descente d'adjoints de la page~6 ; aux pages~9 à~19, la propriété universelle de la catégorie monoïdale symétrique libre $\Phi(A)$ et le produit non parenthésé, les contractions et leur calcul graphique\piste{161-1-contractions-string-calculus}, le signe $\varepsilon(L)$ et les catégories de Picard, les théories de la page~13, l'extension de Kan et sa préservation des colimites (pages~17 et~19), le critère de Giraud et le calcul de densité.
+\begin{remarque}
+La cinquième condition de la page~3, \q{—— et $u'$ et $v'$ pl. fid.}, répète mot pour mot la deuxième ; l'énoncé ci-dessus en retient quatre.
+\end{remarque}
+
+\begin{remarque}
+La descente de la page~6 tient, et sans l'hypothèse que $\beta$ soit pleinement fidèle : la démonstration ne s'en sert pas. Pour une catégorie $F$ quelconque, la réduction de la page au cas $\mathrm{Ob}\,F = \mathrm{Ob}\,E_1 \cup \{a\}$ revient à traiter un objet $P$ de $F$ à la fois, comme on l'a fait. La vérification suppose que les ensembles de flèches de $E$, $E_1$ et $F$ vivent dans le même univers, ce que demande la notion de foncteur représentable.
+\end{remarque}
+
+\begin{remarque}
+La page~5 construit le réflecteur de $E_0$ sous la seule hypothèse $\operatorname{Im} u \subset F_0$ et le coréflecteur de $F_0$ sous $\operatorname{Im} v \subset E_0$ ; ces deux hypothèses sont équivalentes par l'énoncé sur les adjonctions idempotentes, et l'identité triangulaire du réflecteur passe par cette équivalence.
+\end{remarque}
+
+\noindent Ne sont pas démontrés ici : la reconstruction d'une adjonction idempotente à partir d'une sous-catégorie réflexive, d'une coréflexive et d'une équivalence entre elles, dans le sens qui part de ces données (page~5) ; aux pages~9 à~19, la propriété universelle de la catégorie monoïdale symétrique libre $\Phi(A)$ et le produit non parenthésé, les contractions et leur calcul graphique\piste{161-1-contractions-string-calculus}, le signe $\varepsilon(L)$ et les catégories de Picard, les théories de la page~13, l'extension de Kan et sa préservation des colimites (pages~17 et~19), le critère de Giraud et le calcul de densité.

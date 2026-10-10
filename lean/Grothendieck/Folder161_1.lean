@@ -2,6 +2,8 @@ import Mathlib.CategoryTheory.Localization.Bousfield
 import Mathlib.CategoryTheory.Types.Basic
 import Mathlib.CategoryTheory.Discrete.Basic
 import Mathlib.Tactic.TFAE
+import Mathlib.CategoryTheory.Monad.Limits
+import Mathlib.CategoryTheory.Adjunction.PartialAdjoint
 
 /-!
 # Folder 161-1: the fixed part of an adjunction, idempotent adjunctions, local objects
@@ -44,14 +46,31 @@ What is proved here, all as the reading states it:
   every `αZ₁`. This one is in mathlib, as `ObjectProperty.isLocal_iff_isIso_map`.
 * `local_mem_essImage` and `local_iff_mem_essImage` — « Or c'est vrai » : the
   `Σ`-local objects are exactly the essential image of `α`.
+* `condition2` — the dual equivalence (2), for `F' ⊂ F`.
+* `five_conditions_tfae` — page 3, c): for strictly full `E'`, `F'`, the
+  conditions 1.–4. are equivalent (the page's 5. repeats 2.); `beta_alpha`,
+  `alpha_beta` — the bijection `E' ↦ \overline{u(E')}`, `F' ↦ \overline{v(F')}`.
+* `E0_iff`, `F0_iff`, `fixedEquiv` — page 4: `E₀ = \overline{v(F₀)}`,
+  `F₀ = \overline{u(E₀)}`, and `u`, `v` induce quasi-inverse equivalences `E₀ ≃ F₀`.
+* `condition1_p5_iff`, `reflectorAdj`, `coreflectorAdj`, `condition4`,
+  `condition4'`, `reflector0_isLocalization` — page 5: conditions 1), 3), 4):
+  `E₀` reflective with reflector `v₀ ∘ u'`, `F₀` coreflective with coreflector
+  `u₀ ∘ v'`, and `u ≅ β u₀ α'`, `v ≅ α v₀ β'` with `α'` a localization.
+* `reflector0_preservesColimits`, `E0_ι_preservesLimits`, `E0_hasColimits` and
+  their duals — the reflector preserves colimits, `E₀` is closed under limits
+  and has the colimits of `E`; dually for `F₀`.
+* `descent`, `descent_isLeftAdjoint` — page 6: a presheaf `ψ` on `E₁` with
+  `ψ ∘ α'` representable is representable; hence if `β ∘ α'` has a right
+  adjoint, so has `β` — without the full faithfulness of `β` the page assumes.
 
-**What the formalisation finds.** Nothing false and no missing hypothesis. The
-equivalence (1) needs nothing beyond the adjunction; the idempotence conditions
-are redundant exactly as the footnote says; the local-object statement holds for
-an arbitrary reflective subcategory. The rest of the folder (the free symmetric
-monoidal category, the sign `ε(L)` of Picard categories, the Kan-extension and
-Giraud material of pages 15–19, and the fixed-point equivalence `E₀ ≃ F₀` of
-page 4) is not formalised here.
+**What the formalisation finds.** Nothing false. The equivalence (1) needs
+nothing beyond the adjunction; the idempotence conditions are redundant exactly
+as the footnote says; the local-object statement holds for an arbitrary
+reflective subcategory. The fifth condition of page 3 is the second one again.
+Page 6's descent of adjoints holds, and does not need `β` fully faithful. The
+rest of the folder (the free symmetric monoidal category, the sign `ε(L)` of
+Picard categories, the Kan-extension and Giraud material of pages 15–19) is not
+formalised here.
 
 What this certifies is that the reading holds together, not that it is what the
 pages say (issue #26).
@@ -200,6 +219,417 @@ theorem condition2_iff :
 
 end Idempotent
 
+section Dual
+
+/-- Dual of `map_bijective_iff`: composing `v.map` with the inverse adjunction
+bijection gives `g ↦ ε_P ≫ g`, the page's « se déduit des `j(P)` par
+`Hom(j(P), Q)` ». -/
+theorem map_bijective_iff_counit (P Q : F) :
+    Function.Bijective (v.map : (P ⟶ Q) → (v.obj P ⟶ v.obj Q)) ↔
+      Function.Bijective (fun g : P ⟶ Q => adj.counit.app P ≫ g) := by
+  have : (fun g : P ⟶ Q => adj.counit.app P ≫ g) = (adj.homEquiv (v.obj P) Q).symm ∘ v.map := by
+    funext g
+    simp [Adjunction.homEquiv_counit]
+  rw [this, Equiv.comp_bijective]
+
+/-- **(2).** For a full subcategory `F'` of `F` (given by the property `P`):
+`v` is fully faithful on `F'` and `uv` sends `F'` into its isomorphism closure
+if and only if `ε_P` is an isomorphism for every `P ∈ F'`. -/
+theorem condition2 (P : ObjectProperty F) :
+    ((∀ X Y, P X → P Y → Function.Bijective (v.map : (X ⟶ Y) → (v.obj X ⟶ v.obj Y))) ∧
+        ∀ Y, P Y → P.isoClosure (u.obj (v.obj Y))) ↔
+      ∀ Y, P Y → IsIso (adj.counit.app Y) := by
+  constructor
+  · rintro ⟨hff, huv⟩ Y hY
+    obtain ⟨Z, hZ, ⟨e⟩⟩ := huv Y hY
+    have bZ := (map_bijective_iff_counit adj Y Z).1 (hff Y Z hY hZ)
+    have bY := (map_bijective_iff_counit adj Y Y).1 (hff Y Y hY hY)
+    -- A retraction `g` of `ε_Y`, through `uv(Y) ≅ Z`.
+    obtain ⟨g, hg⟩ := bZ.2 e.hom
+    have hg' : adj.counit.app Y ≫ g = e.hom := hg
+    refine ⟨g ≫ e.inv, by simp [reassoc_of% hg'], ?_⟩
+    apply bY.1
+    simp [reassoc_of% hg']
+  · intro h
+    refine ⟨fun X Y hX _ => ?_, fun Y hY => ⟨Y, hY, ⟨(have := h Y hY; asIso (adj.counit.app Y))⟩⟩⟩
+    rw [map_bijective_iff_counit adj]
+    have := h X hX
+    exact ⟨fun a b hab => (cancel_epi (adj.counit.app X)).1 hab,
+      fun g => ⟨inv (adj.counit.app X) ≫ g, by simp⟩⟩
+
+end Dual
+
+section Fixed
+
+/-! ### The fixed parts `E₀` and `F₀` (page 4) -/
+
+/-- `E₀`: the objects of `E` where the unit is invertible. -/
+def E0 : ObjectProperty E := fun Y => IsIso (adj.unit.app Y)
+
+/-- `F₀`: the objects of `F` where the counit is invertible. -/
+def F0 : ObjectProperty F := fun P => IsIso (adj.counit.app P)
+
+/-- `E₀` is the largest full subcategory satisfying (1). -/
+theorem condition1_iff_le_E0 (P : ObjectProperty E) :
+    ((∀ X Y, P X → P Y → Function.Bijective (u.map : (X ⟶ Y) → (u.obj X ⟶ u.obj Y))) ∧
+        ∀ Y, P Y → P.isoClosure (v.obj (u.obj Y))) ↔ P ≤ E0 adj :=
+  condition1 adj P
+
+/-- `F₀` is the largest full subcategory satisfying (2). -/
+theorem condition2_iff_le_F0 (P : ObjectProperty F) :
+    ((∀ X Y, P X → P Y → Function.Bijective (v.map : (X ⟶ Y) → (v.obj X ⟶ v.obj Y))) ∧
+        ∀ Y, P Y → P.isoClosure (u.obj (v.obj Y))) ↔ P ≤ F0 adj :=
+  condition2 adj P
+
+theorem u_mem_F0 {Y : E} (h : E0 adj Y) : F0 adj (u.obj Y) := by
+  have : IsIso (adj.unit.app Y) := h
+  have := isIso_of_eq_id (adj.left_triangle_components Y)
+  exact IsIso.of_isIso_comp_left (u.map (adj.unit.app Y)) (adj.counit.app (u.obj Y))
+
+theorem v_mem_E0 {P : F} (h : F0 adj P) : E0 adj (v.obj P) := by
+  have : IsIso (adj.counit.app P) := h
+  have := isIso_of_eq_id (adj.right_triangle_components P)
+  exact IsIso.of_isIso_comp_right (adj.unit.app (v.obj P)) (v.map (adj.counit.app P))
+
+instance : (E0 adj).IsClosedUnderIsomorphisms where
+  of_iso {Y Y'} e h := by
+    have : IsIso (adj.unit.app Y) := h
+    have hη : adj.unit.app Y' = e.inv ≫ adj.unit.app Y ≫ v.map (u.map e.hom) := by simp
+    show IsIso (adj.unit.app Y')
+    rw [hη]
+    infer_instance
+
+instance : (F0 adj).IsClosedUnderIsomorphisms where
+  of_iso {P P'} e h := by
+    have : IsIso (adj.counit.app P) := h
+    have hε : adj.counit.app P' = u.map (v.map e.inv) ≫ adj.counit.app P ≫ e.hom := by simp
+    show IsIso (adj.counit.app P')
+    rw [hε]
+    infer_instance
+
+/-- **Page 4.** `F₀ = \overline{u(E₀)}`. -/
+theorem F0_iff (P : F) : F0 adj P ↔ ∃ Y, E0 adj Y ∧ Nonempty (u.obj Y ≅ P) := by
+  refine ⟨fun h => ⟨v.obj P, v_mem_E0 adj h, ⟨(have : IsIso (adj.counit.app P) := h;
+    asIso (adj.counit.app P))⟩⟩, ?_⟩
+  rintro ⟨Y, hY, ⟨e⟩⟩
+  exact (F0 adj).prop_of_iso e (u_mem_F0 adj hY)
+
+/-- **Page 4.** `E₀ = \overline{v(F₀)}`. -/
+theorem E0_iff (Y : E) : E0 adj Y ↔ ∃ P, F0 adj P ∧ Nonempty (v.obj P ≅ Y) := by
+  refine ⟨fun h => ⟨u.obj Y, u_mem_F0 adj h, ⟨(have : IsIso (adj.unit.app Y) := h;
+    (asIso (adj.unit.app Y)).symm)⟩⟩, ?_⟩
+  rintro ⟨P, hP, ⟨e⟩⟩
+  exact (E0 adj).prop_of_iso e (v_mem_E0 adj hP)
+
+/-- `η_Y` as an isomorphism, for `Y ∈ E₀`. -/
+noncomputable def unitIso0 (Y : (E0 adj).FullSubcategory) : Y.obj ≅ v.obj (u.obj Y.obj) :=
+  @asIso _ _ _ _ (adj.unit.app Y.obj) Y.2
+
+@[simp] theorem unitIso0_hom (Y : (E0 adj).FullSubcategory) :
+    (unitIso0 adj Y).hom = adj.unit.app Y.obj := rfl
+
+/-- `ε_P` as an isomorphism, for `P ∈ F₀`. -/
+noncomputable def counitIso0 (P : (F0 adj).FullSubcategory) : u.obj (v.obj P.obj) ≅ P.obj :=
+  @asIso _ _ _ _ (adj.counit.app P.obj) P.2
+
+@[simp] theorem counitIso0_hom (P : (F0 adj).FullSubcategory) :
+    (counitIso0 adj P).hom = adj.counit.app P.obj := rfl
+
+/-- `u` restricted and corestricted to `E₀ → F₀`. -/
+def u0 : (E0 adj).FullSubcategory ⥤ (F0 adj).FullSubcategory :=
+  (F0 adj).lift ((E0 adj).ι ⋙ u) fun Y => u_mem_F0 adj Y.2
+
+/-- `v` restricted and corestricted to `F₀ → E₀`. -/
+def v0 : (F0 adj).FullSubcategory ⥤ (E0 adj).FullSubcategory :=
+  (E0 adj).lift ((F0 adj).ι ⋙ v) fun P => v_mem_E0 adj P.2
+
+/-- **Page 4.** `u` and `v` induce quasi-inverse equivalences `E₀ ≃ F₀`, with
+the unit and counit of the adjunction as the two isomorphisms. -/
+noncomputable def fixedEquiv : (E0 adj).FullSubcategory ≌ (F0 adj).FullSubcategory :=
+  CategoryTheory.Equivalence.mk (u0 adj) (v0 adj)
+    (NatIso.ofComponents (fun Y => (E0 adj).isoMk (unitIso0 adj Y))
+      (fun f => ObjectProperty.hom_ext _ (by simp [u0, v0])))
+    (NatIso.ofComponents (fun P => (F0 adj).isoMk (counitIso0 adj P))
+      (fun f => ObjectProperty.hom_ext _ (by simp [u0, v0])))
+
+theorem fixedEquiv_functor : (fixedEquiv adj).functor = u0 adj := rfl
+
+theorem fixedEquiv_inverse : (fixedEquiv adj).inverse = v0 adj := rfl
+
+end Fixed
+
+section FiveConditions
+
+/-! ### Page 3, c): the correspondence and the five conditions
+
+`E' ⊂ E` and `F' ⊂ F` strictly full (closed under isomorphism). The restrictions
+`u' : E' → F'`, `v' : F' → E'` are stated through `u` and `v` themselves: `u'`
+fully faithful is bijectivity of `u.map` on `E'`, and `u'` an equivalence is
+`u'` fully faithful and essentially surjective onto `F'`. -/
+
+variable (E' : ObjectProperty E) (F' : ObjectProperty F)
+
+/-- `u(E') ⊂ F'` and `v(F') ⊂ E'`. -/
+def Stable : Prop := (∀ Y, E' Y → F' (u.obj Y)) ∧ ∀ P, F' P → E' (v.obj P)
+
+/-- `u'` fully faithful. -/
+def UFF : Prop := ∀ X Y, E' X → E' Y → Function.Bijective (u.map : (X ⟶ Y) → (u.obj X ⟶ u.obj Y))
+
+/-- `v'` fully faithful. -/
+def VFF : Prop := ∀ X Y, F' X → F' Y → Function.Bijective (v.map : (X ⟶ Y) → (v.obj X ⟶ v.obj Y))
+
+/-- `u'` essentially surjective onto `F'`. -/
+def UES : Prop := ∀ P, F' P → ∃ Y, E' Y ∧ Nonempty (u.obj Y ≅ P)
+
+/-- `v'` essentially surjective onto `E'`. -/
+def VES : Prop := ∀ Y, E' Y → ∃ P, F' P ∧ Nonempty (v.obj P ≅ Y)
+
+/-- Condition 1. of page 3: `E'` satisfies (1), `F'` satisfies (2), and
+`F' = \overline{u(E')}`, `E' = \overline{v(F')}`. -/
+def Corresp : Prop :=
+  (∀ Y, E' Y → IsIso (adj.unit.app Y)) ∧ (∀ P, F' P → IsIso (adj.counit.app P)) ∧
+    (∀ P, F' P ↔ ∃ Y, E' Y ∧ Nonempty (u.obj Y ≅ P)) ∧
+    ∀ Y, E' Y ↔ ∃ P, F' P ∧ Nonempty (v.obj P ≅ Y)
+
+theorem stable_of_corresp (h : Corresp adj E' F') : Stable (u := u) (v := v) E' F' :=
+  ⟨fun Y hY => (h.2.2.1 _).2 ⟨Y, hY, ⟨Iso.refl _⟩⟩, fun P hP => (h.2.2.2 _).2 ⟨P, hP, ⟨Iso.refl _⟩⟩⟩
+
+theorem unit_of_stable (hs : Stable (u := u) (v := v) E' F') (hu : UFF (u := u) E') :
+    ∀ Y, E' Y → IsIso (adj.unit.app Y) :=
+  (condition1 adj E').1 ⟨hu, fun Y hY => ⟨_, hs.2 _ (hs.1 Y hY), ⟨Iso.refl _⟩⟩⟩
+
+theorem counit_of_stable (hs : Stable (u := u) (v := v) E' F') (hv : VFF (v := v) F') :
+    ∀ P, F' P → IsIso (adj.counit.app P) :=
+  (condition2 adj F').1 ⟨hv, fun P hP => ⟨_, hs.1 _ (hs.2 P hP), ⟨Iso.refl _⟩⟩⟩
+
+variable [E'.IsClosedUnderIsomorphisms] [F'.IsClosedUnderIsomorphisms]
+
+theorem corresp_of (hs : Stable (u := u) (v := v) E' F') (hη : ∀ Y, E' Y → IsIso (adj.unit.app Y))
+    (hε : ∀ P, F' P → IsIso (adj.counit.app P)) : Corresp adj E' F' := by
+  refine ⟨hη, hε, fun P => ⟨fun hP => ?_, ?_⟩, fun Y => ⟨fun hY => ?_, ?_⟩⟩
+  · have := hε P hP
+    exact ⟨v.obj P, hs.2 P hP, ⟨asIso (adj.counit.app P)⟩⟩
+  · rintro ⟨Y, hY, ⟨e⟩⟩
+    exact F'.prop_of_iso e (hs.1 Y hY)
+  · have := hη Y hY
+    exact ⟨u.obj Y, hs.1 Y hY, ⟨(asIso (adj.unit.app Y)).symm⟩⟩
+  · rintro ⟨P, hP, ⟨e⟩⟩
+    exact E'.prop_of_iso e (hs.2 P hP)
+
+/-- **Page 3, c).** For strictly full `E'`, `F'`, the conditions
+1. `E'` satisfies (1), `F'` satisfies (2), and they correspond;
+2. `u(E') ⊂ F'`, `v(F') ⊂ E'`, and `u'`, `v'` fully faithful;
+3. — and `u'` is an equivalence;
+4. — and `v'` is an equivalence;
+are equivalent. The page's fifth condition, « —— et `u'` et `v'` pl. fid. »,
+repeats the second word for word. -/
+theorem five_conditions_tfae :
+    List.TFAE [Corresp adj E' F',
+      Stable (u := u) (v := v) E' F' ∧ UFF (u := u) E' ∧ VFF (v := v) F',
+      Stable (u := u) (v := v) E' F' ∧ UFF (u := u) E' ∧ UES (u := u) E' F',
+      Stable (u := u) (v := v) E' F' ∧ VFF (v := v) F' ∧ VES (v := v) E' F'] := by
+  tfae_have 1 → 2 := fun h =>
+    ⟨stable_of_corresp adj E' F' h, ((condition1 adj E').2 h.1).1, ((condition2 adj F').2 h.2.1).1⟩
+  tfae_have 2 → 1 := fun ⟨hs, hu, hv⟩ =>
+    corresp_of adj E' F' hs (unit_of_stable adj E' F' hs hu) (counit_of_stable adj E' F' hs hv)
+  tfae_have 1 → 3 := fun h =>
+    ⟨stable_of_corresp adj E' F' h, ((condition1 adj E').2 h.1).1, fun P hP => (h.2.2.1 P).1 hP⟩
+  tfae_have 3 → 1 := by
+    rintro ⟨hs, hu, hes⟩
+    have hη := unit_of_stable adj E' F' hs hu
+    refine corresp_of adj E' F' hs hη fun P hP => ?_
+    obtain ⟨Y, hY, ⟨e⟩⟩ := hes P hP
+    exact (F0 adj).prop_of_iso e (u_mem_F0 adj (hη Y hY))
+  tfae_have 1 → 4 := fun h =>
+    ⟨stable_of_corresp adj E' F' h, ((condition2 adj F').2 h.2.1).1, fun Y hY => (h.2.2.2 Y).1 hY⟩
+  tfae_have 4 → 1 := by
+    rintro ⟨hs, hv, hes⟩
+    have hε := counit_of_stable adj E' F' hs hv
+    refine corresp_of adj E' F' hs (fun Y hY => ?_) hε
+    obtain ⟨P, hP, ⟨e⟩⟩ := hes Y hY
+    exact (E0 adj).prop_of_iso e (v_mem_E0 adj (hε P hP))
+  tfae_finish
+
+/-- **Page 3, c), the bijection.** For `E'` strictly full satisfying (1), the
+subcategory `α(E') = \overline{u(E')}` satisfies (2), and `β(α(E')) = E'`. -/
+theorem beta_alpha (h : ∀ Y, E' Y → IsIso (adj.unit.app Y)) :
+    (∀ P, (∃ Y, E' Y ∧ Nonempty (u.obj Y ≅ P)) → IsIso (adj.counit.app P)) ∧
+      ∀ Y, E' Y ↔ ∃ P, (∃ Y', E' Y' ∧ Nonempty (u.obj Y' ≅ P)) ∧ Nonempty (v.obj P ≅ Y) := by
+  refine ⟨fun P ⟨Y, hY, ⟨e⟩⟩ => (F0 adj).prop_of_iso e (u_mem_F0 adj (h Y hY)),
+    fun Y => ⟨fun hY => ?_, ?_⟩⟩
+  · have := h Y hY
+    exact ⟨u.obj Y, ⟨Y, hY, ⟨Iso.refl _⟩⟩, ⟨(asIso (adj.unit.app Y)).symm⟩⟩
+  · rintro ⟨P, ⟨Y', hY', ⟨e⟩⟩, ⟨e'⟩⟩
+    have := h Y' hY'
+    exact E'.prop_of_iso (asIso (adj.unit.app Y') ≪≫ v.mapIso e ≪≫ e') hY'
+
+/-- Dually, for `F'` strictly full satisfying (2), `β(F') = \overline{v(F')}`
+satisfies (1), and `α(β(F')) = F'`. -/
+theorem alpha_beta (h : ∀ P, F' P → IsIso (adj.counit.app P)) :
+    (∀ Y, (∃ P, F' P ∧ Nonempty (v.obj P ≅ Y)) → IsIso (adj.unit.app Y)) ∧
+      ∀ P, F' P ↔ ∃ Y, (∃ P', F' P' ∧ Nonempty (v.obj P' ≅ Y)) ∧ Nonempty (u.obj Y ≅ P) := by
+  refine ⟨fun Y ⟨P, hP, ⟨e⟩⟩ => (E0 adj).prop_of_iso e (v_mem_E0 adj (h P hP)),
+    fun P => ⟨fun hP => ?_, ?_⟩⟩
+  · have := h P hP
+    exact ⟨v.obj P, ⟨P, hP, ⟨Iso.refl _⟩⟩, ⟨asIso (adj.counit.app P)⟩⟩
+  · rintro ⟨Y, ⟨P', hP', ⟨e⟩⟩, ⟨e'⟩⟩
+    have := h P' hP'
+    exact F'.prop_of_iso ((asIso (adj.counit.app P')).symm ≪≫ u.mapIso e ≪≫ e') hP'
+
+end FiveConditions
+
+section Reflective
+
+/-! ### Pages 4–5: `E₀` reflective, `F₀` coreflective, and what they preserve -/
+
+/-- **Page 5, condition 1).** `Im v ⊂ E₀` and `Im u ⊂ F₀` is idempotency: it is
+equivalent to either half alone (`idempotent_tfae`). -/
+theorem condition1_p5_iff :
+    ((∀ P, E0 adj (v.obj P)) ∧ ∀ X, F0 adj (u.obj X)) ↔ ∀ P, IsIso (adj.unit.app (v.obj P)) :=
+  condition2_iff adj
+
+/-- Under idempotency, `vu(η_X) = η_{vuX}`. -/
+theorem vu_unit_eq (h : ∀ P, IsIso (adj.unit.app (v.obj P))) (X : E) :
+    v.map (u.map (adj.unit.app X)) = adj.unit.app (v.obj (u.obj X)) := by
+  have := isIso_of_eq_id (adj.right_triangle_components (u.obj X))
+  have := h (u.obj X)
+  have : IsIso (v.map (adj.counit.app (u.obj X))) := IsIso.of_isIso_comp_left (adj.unit.app _) _
+  rw [← cancel_mono (v.map (adj.counit.app (u.obj X))), ← Functor.map_comp]
+  simp
+
+/-- Under idempotency, `uv(ε_P) = ε_{uvP}`. -/
+theorem uv_counit_eq (h : ∀ X, IsIso (adj.counit.app (u.obj X))) (P : F) :
+    u.map (v.map (adj.counit.app P)) = adj.counit.app (u.obj (v.obj P)) := by
+  have := isIso_of_eq_id (adj.left_triangle_components (v.obj P))
+  have := h (v.obj P)
+  have : IsIso (u.map (adj.unit.app (v.obj P))) := IsIso.of_isIso_comp_right _ (adj.counit.app _)
+  rw [← cancel_epi (u.map (adj.unit.app (v.obj P))), ← Functor.map_comp]
+  simp
+
+/-- The page's `v₀ ∘ u'`: `X ↦ vu(X)`, landing in `E₀` once `Im u ⊂ F₀`. -/
+def reflector0 (hu : ∀ X, F0 adj (u.obj X)) : E ⥤ (E0 adj).FullSubcategory :=
+  (E0 adj).lift (u ⋙ v) fun X => v_mem_E0 adj (hu X)
+
+/-- **Page 5.** If `Im u ⊂ F₀`, the inclusion `E₀ ⊂ E` has the left adjoint
+`v₀ ∘ u'`: `E₀` is reflective in `E`. -/
+noncomputable def reflectorAdj (hu : ∀ X, F0 adj (u.obj X)) :
+    reflector0 adj hu ⊣ (E0 adj).ι where
+  unit := { app := adj.unit.app, naturality := fun _ _ f => adj.unit.naturality f }
+  counit :=
+    { app := fun Y => (E0 adj).homMk (unitIso0 adj Y).inv
+      naturality := fun Y Y' f => by
+        apply ObjectProperty.hom_ext
+        dsimp [reflector0]
+        rw [Iso.comp_inv_eq, Category.assoc, Iso.eq_inv_comp]
+        simp }
+  left_triangle_components X := by
+    have h := ((idempotent_tfae adj).out 2 0).1 hu
+    apply ObjectProperty.hom_ext
+    dsimp [reflector0]
+    rw [Iso.comp_inv_eq, vu_unit_eq adj h]
+    simp
+  right_triangle_components Y := (unitIso0 adj Y).hom_inv_id
+
+/-- **The preservation of colimits.** The reflector `E ⥤ E₀` preserves all
+colimits. -/
+theorem reflector0_preservesColimits (hu : ∀ X, F0 adj (u.obj X)) :
+    Limits.PreservesColimitsOfSize (reflector0 adj hu) :=
+  (reflectorAdj adj hu).leftAdjoint_preservesColimits
+
+/-- The inclusion `E₀ ⊂ E` preserves all limits. -/
+theorem E0_ι_preservesLimits (hu : ∀ X, F0 adj (u.obj X)) :
+    Limits.PreservesLimitsOfSize (E0 adj).ι :=
+  (reflectorAdj adj hu).rightAdjoint_preservesLimits
+
+/-- `E₀` has the colimits `E` has, computed by reflecting those of `E`. -/
+theorem E0_hasColimits (hu : ∀ X, F0 adj (u.obj X)) [Limits.HasColimitsOfSize.{v₁, u₁} E] :
+    Limits.HasColimitsOfSize.{v₁, u₁} (E0 adj).FullSubcategory :=
+  let _ : Reflective (E0 adj).ι := { L := reflector0 adj hu, adj := reflectorAdj adj hu }
+  hasColimits_of_reflective (E0 adj).ι
+
+/-- **Page 5, condition 4), first half.** The reflector `u₁ : E ⥤ E₀` is a
+localization (« passage à catégorie des fractions »), at the arrows it inverts. -/
+theorem reflector0_isLocalization (hu : ∀ X, F0 adj (u.obj X)) :
+    (reflector0 adj hu).IsLocalization
+      ((MorphismProperty.isomorphisms _).inverseImage (reflector0 adj hu)) :=
+  (reflectorAdj adj hu).isLocalization
+
+/-- **Page 5, condition 4), second half.** `β = ι ∘ u₀ : E₀ ⥤ F` is fully faithful. -/
+noncomputable def beta0FullyFaithful : (u0 adj ⋙ (F0 adj).ι).FullyFaithful :=
+  (fixedEquiv adj).fullyFaithfulFunctor.comp (F0 adj).fullyFaithfulι
+
+/-- **Page 5, condition 4).** If `Im u ⊂ F₀`, then `u ≅ β ∘ u₁`, with `u₁` the
+localization `E ⥤ E₀` and `β : E₀ ⥤ F` fully faithful. -/
+noncomputable def condition4 (hu : ∀ X, F0 adj (u.obj X)) :
+    reflector0 adj hu ⋙ u0 adj ⋙ (F0 adj).ι ≅ u :=
+  NatIso.ofComponents (fun X => @asIso _ _ _ _ (adj.counit.app (u.obj X)) (hu X))
+    (fun f => adj.counit.naturality (u.map f))
+
+/-- The page's `u₀ ∘ v'`: `P ↦ uv(P)`, landing in `F₀` once `Im v ⊂ E₀`. -/
+def coreflector0 (hv : ∀ P, E0 adj (v.obj P)) : F ⥤ (F0 adj).FullSubcategory :=
+  (F0 adj).lift (v ⋙ u) fun P => u_mem_F0 adj (hv P)
+
+/-- **Page 4.** If `Im v ⊂ E₀`, the inclusion `F₀ ⊂ F` has the right adjoint
+`u₀ ∘ v'`: `F₀` is coreflective in `F`. -/
+noncomputable def coreflectorAdj (hv : ∀ P, E0 adj (v.obj P)) :
+    (F0 adj).ι ⊣ coreflector0 adj hv where
+  unit :=
+    { app := fun P => (F0 adj).homMk (counitIso0 adj P).inv
+      naturality := fun P P' f => by
+        apply ObjectProperty.hom_ext
+        dsimp [coreflector0]
+        rw [Iso.eq_inv_comp, ← Category.assoc, Iso.comp_inv_eq]
+        simp }
+  counit := { app := adj.counit.app, naturality := fun _ _ f => adj.counit.naturality f }
+  left_triangle_components P := (counitIso0 adj P).inv_hom_id
+  right_triangle_components P := by
+    have h := ((idempotent_tfae adj).out 0 2).1 hv
+    apply ObjectProperty.hom_ext
+    dsimp [coreflector0]
+    rw [Iso.inv_comp_eq, uv_counit_eq adj h]
+    simp
+
+/-- `η_Y` as an isomorphism, for `Y` with `η_Y` invertible. -/
+noncomputable def isoOfE0 {Y : E} (h : E0 adj Y) : Y ≅ v.obj (u.obj Y) :=
+  @asIso _ _ _ _ (adj.unit.app Y) h
+
+@[simp] theorem isoOfE0_hom {Y : E} (h : E0 adj Y) : (isoOfE0 adj h).hom = adj.unit.app Y := rfl
+
+/-- **Page 5, condition 4').** If `Im v ⊂ E₀`, then `v ≅ α ∘ v₁`, with `v₁` the
+coreflector `F ⥤ F₀` followed by `v₀`, and `α : E₀ ⊂ E`. With `condition4`, this
+is the page's `u = β u₀ α'`, `v = α v₀ β'` for an idempotent adjunction. -/
+noncomputable def condition4' (hv : ∀ P, E0 adj (v.obj P)) :
+    coreflector0 adj hv ⋙ v0 adj ⋙ (E0 adj).ι ≅ v :=
+  NatIso.ofComponents (fun P => (isoOfE0 adj (hv P)).symm)
+    (fun f => by
+      dsimp [coreflector0, v0]
+      rw [Iso.comp_inv_eq, Category.assoc, Iso.eq_inv_comp]
+      simp)
+
+/-- **Page 5, condition 3).** For an idempotent adjunction (`Im v ⊂ E₀`), the
+inclusion `E₀ ⊂ E` has a left adjoint and `F₀ ⊂ F` a right adjoint. -/
+theorem condition3_p5 (hv : ∀ P, E0 adj (v.obj P)) :
+    (E0 adj).ι.IsRightAdjoint ∧ (F0 adj).ι.IsLeftAdjoint :=
+  ⟨⟨_, ⟨reflectorAdj adj ((idempotent_tfae adj).out 0 2 |>.1 hv)⟩⟩, ⟨_, ⟨coreflectorAdj adj hv⟩⟩⟩
+
+/-- The coreflector `F ⥤ F₀` preserves all limits. -/
+theorem coreflector0_preservesLimits (hv : ∀ P, E0 adj (v.obj P)) :
+    Limits.PreservesLimitsOfSize (coreflector0 adj hv) :=
+  (coreflectorAdj adj hv).rightAdjoint_preservesLimits
+
+/-- The inclusion `F₀ ⊂ F` preserves all colimits. -/
+theorem F0_ι_preservesColimits (hv : ∀ P, E0 adj (v.obj P)) :
+    Limits.PreservesColimitsOfSize (F0 adj).ι :=
+  (coreflectorAdj adj hv).leftAdjoint_preservesColimits
+
+/-- `F₀` has the limits `F` has, computed by coreflecting those of `F`. -/
+theorem F0_hasLimits (hv : ∀ P, E0 adj (v.obj P)) [Limits.HasLimitsOfSize.{v₂, u₂} F] :
+    Limits.HasLimitsOfSize.{v₂, u₂} (F0 adj).FullSubcategory :=
+  let _ : Coreflective (F0 adj).ι := { R := coreflector0 adj hv, adj := coreflectorAdj adj hv }
+  hasLimits_of_coreflective (F0 adj).ι
+
+end Reflective
+
 section Local
 
 /-! ### Reflective subcategories and local objects (pages 6–7)
@@ -250,4 +680,67 @@ theorem local_iff_mem_essImage (ξ : E) :
 
 end Local
 
+section Descent
+
+/-! ### Page 6: the descent of adjoints
+
+`α : E₁ ⥤ E` fully faithful with left adjoint `α'`. The page asks whether, for
+`β : E₁ ⥤ F` fully faithful such that `u = β ∘ α'` has a right adjoint, `β` has
+one, and reduces it to a representability question. Here all hom-sets live in
+the same universe, as representability requires. -/
+
+variable {E₁ : Type u₂} [Category.{v₁} E₁] {α : E₁ ⥤ E} {α' : E ⥤ E₁} (adj' : α' ⊣ α)
+  [α.Full] [α.Faithful]
+
+include adj'
+
+/-- **Page 6, the reduced question.** A presheaf `ψ` on `E₁` such that
+`ψ ∘ α'` is representable is representable. -/
+theorem descent (ψ : E₁ᵒᵖ ⥤ Type v₁) [(α'.op ⋙ ψ).IsRepresentable] : ψ.IsRepresentable := by
+  obtain ⟨ξ, ⟨R⟩⟩ := (inferInstance : (α'.op ⋙ ψ).IsRepresentable).has_representation
+  have hloc : (Sigma' (α' := α')).isLocal ξ := fun X Y f hf => by
+    have : IsIso (α'.map f) := hf
+    have e : (fun g : Y ⟶ ξ => f ≫ g) =
+        ⇑(R.homEquiv.trans ((ψ.mapIso (asIso (α'.map f)).op).toEquiv.trans R.homEquiv.symm)) := by
+      funext g
+      apply R.homEquiv.injective
+      simp [R.homEquiv_comp]
+    rw [e]
+    exact Equiv.bijective _
+  obtain ⟨ξ₁, ⟨e⟩⟩ := local_mem_essImage adj' hloc
+  let hα := Functor.FullyFaithful.ofFullyFaithful α
+  let c : ∀ Z : E₁, ψ.obj (Opposite.op Z) ≃ ψ.obj (Opposite.op (α'.obj (α.obj Z))) :=
+    fun Z => (ψ.mapIso (asIso (adj'.counit.app Z)).op).toEquiv
+  have hc : ∀ Z x, c Z x = ψ.map (adj'.counit.app Z).op x := fun _ _ => rfl
+  exact Functor.RepresentableBy.isRepresentable
+    { homEquiv := fun {Z} => hα.homEquiv.trans (e.homToEquiv.trans (R.homEquiv.trans (c Z).symm))
+      homEquiv_comp := fun {Z Z'} f g => by
+        apply (c Z).injective
+        simp only [Equiv.trans_apply]
+        rw [Equiv.apply_symm_apply]
+        have h1 : e.homToEquiv (hα.homEquiv (f ≫ g)) = α.map f ≫ e.homToEquiv (hα.homEquiv g) := by
+          simp [Iso.homToEquiv]
+        rw [h1, R.homEquiv_comp]
+        generalize R.homEquiv (e.homToEquiv (hα.homEquiv g)) = y
+        obtain ⟨w, rfl⟩ := (c Z').surjective y
+        rw [Equiv.symm_apply_apply, hc, hc]
+        change ψ.map (α'.map (α.map f)).op (ψ.map (adj'.counit.app Z').op w) = _
+        simp only [← Functor.map_comp_apply, ← op_comp]
+        congr 3
+        exact congrArg Quiver.Hom.op (adj'.counit.naturality f) }
+
+/-- **Page 6, the question.** If `β ∘ α'` has a right adjoint, so has `β`.
+The full faithfulness of `β`, which the page assumes, is not used. -/
+theorem descent_isLeftAdjoint {G : Type*} [Category.{v₁} G] (β : E₁ ⥤ G)
+    [(α' ⋙ β).IsLeftAdjoint] : β.IsLeftAdjoint := by
+  apply Functor.isLeftAdjoint_of_rightAdjointObjIsDefined_eq_top
+  funext P
+  simp only [Pi.top_apply, Prop.top_eq_true, eq_iff_iff, iff_true]
+  have : (α'.op ⋙ (β.op ⋙ yoneda.obj P)).IsRepresentable :=
+    Functor.rightAdjointObjIsDefined_of_adjunction (Adjunction.ofIsLeftAdjoint (α' ⋙ β)) P
+  exact descent adj' (β.op ⋙ yoneda.obj P)
+
+end Descent
+
 end Grothendieck.Folder161_1
+
