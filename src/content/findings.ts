@@ -785,7 +785,7 @@ export const FINDINGS: Finding[] = [
     claim:
       'The fundamental group scheme — the pro-object classifying pointed torsors under finite group schemes, infinitesimal part included — is obtained by strict pro-representability of the pointed-torsor functor alone, with no Tannakian input, and computed on an abelian variety as lim← ₙX, Cartier-dual to the ind-algebraic lim→ ₙX*.',
     basis:
-      'The letter to Serre of 18 October 1959 (pages 124–129) sets the conditions (i)–(vi), proves Z(S,a;G) commutes with products and with kernels of pairs, and derives the filtered projective system from the minimal couples; the handwritten pages 136–142 prove the injectivity of u ↦ u_*(α) on which the uniqueness of the transition morphisms rests, and construct π₁^C(S,ξ) from the same two formal properties.',
+      'The letter to Serre of 18 August 1959 (pages 124–129; published in the Grothendieck–Serre correspondence) sets the conditions (i)–(vi), proves Z(S,a;G) commutes with products and with kernels of pairs, and derives the filtered projective system from the minimal couples; the handwritten pages 136–142 prove the injectivity of u ↦ u_*(α) on which the uniqueness of the transition morphisms rests, and construct π₁^C(S,ξ) from the same two formal properties.',
     ours:
       'The reading identifies the letter’s Z(S,a;G), the feuilles anciennes’ ℨ and the π¹(S,ξ;G) of pages 164–169 as one functor under three notations, which no single page states; and it corrects page 137’s ×_G G′ to ×_{G′} G, the extension of the structure group.',
     literature: [
@@ -859,7 +859,7 @@ export const FINDINGS: Finding[] = [
     pages: '1–11, 124–129, 141–160, 188–216',
     kind: 'codicological',
     claim:
-      'The shelfmark’s pagination is not its order of composition: the 1967 exchange with Murre is bound out of chronological order within itself, the earliest dated piece in the folder — a letter to Serre of 18 October 1959 — sits at page 124, and the synthesis the folder builds towards is undated and at the end, so a reader following the argument must cross the pagination in both directions.',
+      'The shelfmark’s pagination is not its order of composition: the 1967 exchange with Murre is bound out of chronological order within itself, the earliest dated piece in the folder — a letter to Serre of 18 August 1959 — sits at page 124, and the synthesis the folder builds towards is undated and at the end, so a reader following the argument must cross the pagination in both directions.',
     basis:
       'The letters date themselves. The archive order of pages 1–11 is: Murre 16 May 1967 (pages 2–3), Murre 29 March 1967 (4–5), Grothendieck’s undated reply (7–8), Grothendieck 29 April 1967 (9–11) — that is, the last letter of the exchange first. The 1959 letter is at pages 124–129, the chemise « Compléments SGA / 1960 » covers pages 144–160, the 1969 exchange is at pages 77–85, and the domaines de ramification run at 188–216 carries no date at all. Grothendieck paginates six of his own runs and restarts each time — I–VI (46–57), 1–4 (60–63), A–L (65–76), 1–6 (87–97), 1–10 then 11–16 (190–206), and 1–6 with inserted 1 bis and 1 ter (208–216) — so his own numbers, not the archivists’, are what a cross-reference such as « cf. p. 12 » follows.',
     ours:
