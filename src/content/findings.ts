@@ -5932,7 +5932,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'unsearched',
     settle:
-      'The formula is matched; the question is the frame. Read Quebbemann–Scharlau–Schulte, « Quadratic and hermitian forms in additive and abelian categories » (J. Algebra 1979), Knus, Quadratic and Hermitian Forms over Rings, Ch. II, Kleiman, « Algebraic cycles and the Weil conjectures » (1968) §§1–3, and Saavedra Rivano, Catégories tannakiennes VI, for an additive category with duality plus cone and integer intersection form from which ν, σᵢ and the trace formula are derived; if found, mark matched. Separately, decide whether the Corollaire can be got from (a)–(e) at all, or needs I(ξ^{r−1}, η) > 0 for ξ ∈ N^>, η ∈ N⁺ \ {0}.',
+      'The formula is matched; the question is the frame. Read Quebbemann–Scharlau–Schulte, « Quadratic and hermitian forms in additive and abelian categories » (J. Algebra 1979), Knus, Quadratic and Hermitian Forms over Rings, Ch. II, Kleiman, « Algebraic cycles and the Weil conjectures » (1968) §§1–3, and Saavedra Rivano, Catégories tannakiennes VI, for an additive category with duality plus cone and integer intersection form from which ν, σᵢ and the trace formula are derived; if found, mark matched. Separately, decide whether the Corollaire can be got from (a)–(e) at all, or needs I(ξ^{r−1}, η) > 0 for ξ ∈ N^>, η ∈ N⁺ ∖ {0}.',
   },
   {
     id: '50-leaf-order',
