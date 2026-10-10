@@ -31,9 +31,9 @@ alone for the TEI use XCharter, which is in TeX Live.
 ## Before submission
 
 The journal's guidelines, as read for the Hopper article (hopper-project #30,
-#31): abstract 150–250 words (this one: 235), at most seven keywords and not
+#31): abstract 150–250 words (this one: 227), at most seven keywords and not
 « TEI » (seven), a biography of at most 100 words, a body of 5,000–10,000
-words (about 6,500), Chicago author-date, the AI declaration under its
+words (about 6,100), Chicago author-date, the AI declaration under its
 prescribed heading, figures as PNG with a rights line (supplied by `tei.mjs`).
 
 ## Licence

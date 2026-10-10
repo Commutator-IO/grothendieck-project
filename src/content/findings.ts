@@ -5383,6 +5383,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Likely a short consequence of the Rees–Suschkewitsch structure of the kernel of a finite semigroup with the right-reversibility (Ore) condition: look in Clifford–Preston, The Algebraic Theory of Semigroups I (1961), §§1.10 and 3.1–3.3, and in Rhodes–Steinberg, The q-theory of Finite Semigroups (2009), for a finite right-reversible monoid with trivial maximal group image having a right zero; mark matched on any explicit statement.',
+    lean: { file: 'lean/Grothendieck/Folder158.lean', found: "Holds as stated: it is Proposition 1, proved in the file; with its converse it is offered to mathlib (leanprover-community/mathlib4#44702)." },
   },
 // Folder 159 — find-novelty pass, Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5 (claude-opus-5, 2026-09-19).
 // Searches were web searches; every source below was seen through a search summary, not read in full.

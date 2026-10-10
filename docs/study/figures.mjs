@@ -51,7 +51,7 @@ const today = new Date().toISOString().slice(0, 10);
     k += days.filter((d) => d === iso).length;
     cum.push([i, k]);
   }
-  const TOTAL = 618; // batches of twenty pages in the whole fonds (catalogue.ts)
+  const TOTAL = 618; // batches of twenty pages in the folders no edition covers (catalogue.ts)
   const labelDays = cum.filter(([i]) => i % 7 === 0).map(([i]) => i);
   const fmt = (i) => new Date(d0.getTime() + i * 864e5).toISOString().slice(5, 10).split('-').reverse().join('/');
   writeFileSync(
@@ -63,12 +63,12 @@ const today = new Date().toISOString().slice(0, 10);
   ylabel={batch files},grid=major,grid style={black!10},tick label style={font=\\footnotesize},
   label style={font=\\footnotesize},axis line style={black!50},clip=false]
 \\addplot[black!25,dashed,domain=0:${last + 1}] {${TOTAL}};
-\\node[font=\\scriptsize,text=black!55,anchor=south east] at (axis cs:${last + 1},${TOTAL}) {${TOTAL} batches of twenty pages: the whole fonds};
+\\node[font=\\scriptsize,text=black!55,anchor=south east] at (axis cs:${last + 1},${TOTAL}) {${TOTAL} batches: the folders no edition covers};
 \\addplot[const plot,thick,black!75] coordinates {${cum.map(([i, v]) => `(${i},${v})`).join(' ')}};
 \\node[font=\\scriptsize,anchor=south east] at (axis cs:${last},${k}) {${k}};
 \\end{axis}
 \\end{tikzpicture}
-\\caption{Batch files in the repository, day by day, from the first on ${days[0]} to ${days[days.length - 1]}: the date each \\texttt{batch-NN.fr.tex} was first committed, cumulated. Each file is one pass of the model over at most twenty pages. The dashed line is the whole fonds at that rate. From the repository's git history, drawn on ${today} by \\texttt{docs/study/figures.mjs}.}\\label{fig:pace}
+\\caption{Batch files in the repository, day by day, from the first on ${days[0]} to ${days[days.length - 1]}: the date each \\texttt{batch-NN.fr.tex} was first committed, cumulated. Each file is one pass of the model over at most twenty pages. The dashed line is the ${TOTAL} batches of the folders no edition covers; the curve ends ${k - TOTAL} above it because six edited folders also have a few batches. From the repository's git history, drawn on ${today} by \\texttt{docs/study/figures.mjs}.}\\label{fig:pace}
 \\end{figure}
 `,
   );
