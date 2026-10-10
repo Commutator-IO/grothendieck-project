@@ -33,4 +33,33 @@ export const NOTEBOOK_NOTES: Record<string, string> = {
   '1972/1972-5':
     "13–15 June 1972: « Fibration problem. Grothendieck's approach to the fundamental groupoid of a category ».",
   '1982/1982-7': "25 June 1982: « Grothendieck Riemann Roch. Hodge Index theorem ».",
+  // Windows dated by the fonds (#42, 2026-10-03): notebooks whose dates meet
+  // a dated letter or typescript of Grothendieck's; red for where to look, not
+  // for what Luke's index says they hold.
+  '1968/1968-1':
+    "Undated 1968 notebook: one of the three that could hold September 1968, when the « Tapis de Quillen » notes in folders 111 and 162-5 were typed (6–10 Sept.). A window from the fonds' dates (#42), not an entry of Luke's index.",
+  '1968/1968-15':
+    "Undated 1968 notebook: one of the three that could hold September 1968, when the « Tapis de Quillen » notes in folders 111 and 162-5 were typed (6–10 Sept.). A window from the fonds' dates (#42), not an entry of Luke's index.",
+  '1968/1968-16':
+    "Undated 1968 notebook: one of the three that could hold September 1968, when the « Tapis de Quillen » notes in folders 111 and 162-5 were typed (6–10 Sept.). A window from the fonds' dates (#42), not an entry of Luke's index.",
+  '1983/1983-2':
+    "January–March 1983: the weeks of the letter that opens À la poursuite des champs (folder 134-2, « Les Aumettes 19.2.1983 », continued to 25.2). A window for a reply (#42); Luke's index names neither Grothendieck nor stacks here.",
+  '1983/1983-3':
+    "March–April 1983: just after the letter of 19–25 February 1983 that opens À la poursuite des champs. A window for a reply (#42); Luke's index names neither Grothendieck nor stacks here.",
+  '1983/1983-4':
+    "April–May 1983: the last of the three notebooks after the letter of February 1983. A window for a reply (#42); Luke's index names neither Grothendieck nor stacks here.",
+  '1983/1983-14':
+    "End of 1983: the typescript of À la poursuite des champs went out in instalments, one « Sent 19/12/83 » (folder 109). A window (#42), not an entry of Luke's index.",
+  '1983/1983-15':
+    "End of 1983: the typescript of À la poursuite des champs went out in instalments, one « Sent 19/12/83 » (folder 109). A window (#42), not an entry of Luke's index.",
+  '1984/1984-1':
+    "Early 1984: the instalments of À la poursuite des champs, one « Sent 6/2/84 » (folder 109). A window (#42), not an entry of Luke's index.",
+  '1984/1984-2':
+    "Early 1984: the instalments of À la poursuite des champs, one « Sent 6/2/84 » (folder 109). A window (#42), not an entry of Luke's index.",
+  '1984/1984-3':
+    "Early 1984: the instalments of À la poursuite des champs, one « Sent 6/2/84 » (folder 109). A window (#42), not an entry of Luke's index.",
+  '1984/1984-4':
+    "Early 1984: the instalments of À la poursuite des champs, one « Sent 6/2/84 » (folder 109). A window (#42), not an entry of Luke's index.",
+  '1984/1984-5':
+    "Early 1984: the instalments of À la poursuite des champs, one « Sent 6/2/84 » (folder 109). A window (#42), not an entry of Luke's index.",
 };
