@@ -21,8 +21,9 @@ const folderState = (transcribedHere: boolean, hasEdition: boolean): FolderState
  * The folder list below answers "what is in the fonds"; it cannot answer "where
  * is the work", because 178 rows of equal height flatten a range that runs from
  * two pages to 695. A treemap restores the proportion, and the proportion is
- * the whole point: the thirteen folders transcribed so far are 263 pages of
- * 16,074, and no table makes that as plain as one block against the wall.
+ * the whole point: the 164 folders transcribed so far are some 9,400 pages of
+ * 16,074, the rest mostly the folders others have edited, and no table makes
+ * that as plain as blocks against the wall.
  *
  * Mondrian rather than a plain treemap because the grammar fits what is being
  * said. Flat blocks of one colour each, separated by heavy black rules, no

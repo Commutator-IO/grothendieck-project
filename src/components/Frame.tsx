@@ -10,7 +10,7 @@ import { BOOKS } from '../content/books.ts';
  */
 
 /**
- * The two ways into the site.
+ * The ways into the site.
  *
  * The site began as five notebooks — two inventory groups and three groupings
  * of our own — and the header was their row of tabs. It now reads the whole

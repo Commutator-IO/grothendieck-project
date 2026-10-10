@@ -31,20 +31,20 @@ const SKILLS: {
     name: 'transcribe-grothendieck',
     produces:
       'the transcription — twenty pages at a time, the mathematics in LaTeX with the critical apparatus that says which words were read and which were guessed',
-    lines: 399,
+    lines: 476,
     extra: 'references/specimen.tex',
   },
   {
     name: 'modernize-grothendieck',
     produces:
       'the modernised reading — a folder at a time: a résumé for someone new to the subject, then the mathematics in current notation and current names, held to being correct as it stands',
-    lines: 317,
+    lines: 386,
   },
   {
     name: 'tag-grothendieck',
     produces:
       "the folder's tags — three to six English keywords closing the résumé, which the manifest extracts and the archive search matches on",
-    lines: 83,
+    lines: 86,
   },
 ];
 
@@ -110,9 +110,9 @@ function Routes() {
     },
     {
       n: '3',
-      title: 'Transcribe a folder',
+      title: 'Take a second pass',
       cost: 'an afternoon',
-      body: 'Install the three skills, mirror a folder nobody has taken, and run the two passes. Roughly an hour of machine time per twenty-page batch, most of it spent reading page images. The result is a draft nobody has checked — which is exactly what the rest of the site is, and it is labelled that way.',
+      body: 'Every folder no edition covers now has a first pass. Install the skills and run a second one on a batch: re-read its doubtful and illegible words against the page, or the pages the first pass set aside. Roughly an hour of machine time per twenty-page batch, most of it spent reading page images. The result is still a draft until a person checks it, and it is labelled that way.',
       href: '#skills',
       hrefLabel: 'Install the skills ↓',
     },
@@ -169,12 +169,11 @@ function Skills() {
         >
           Claude Code
         </a>
-        . Each pins its model in its frontmatter, or says which it accepts. Modernisation and
-        tagging both pin <code>model: claude-opus-5</code> — the reading they are calibrated
-        against, folder 115's, was made on Opus 5, and a folder's tags are the same judgement as
-        its résumé, so they are made by the same reader. Transcription pins nothing, so that the
-        two models can be measured against each other: it accepts Fable 5 and Opus 5 and refuses
-        to run on any other. Every file records in its header the model that produced it.
+        . Each says at its head which models it accepts. Transcription and modernisation
+        accept Opus 5.5, the default, and Opus 5, and refuse to run on any other; the Fable
+        models some early batches were read on are no longer admitted. Tagging runs on whichever
+        of the two wrote the folder's modernised reading, since a folder's tags are the same
+        judgement as its résumé, so they are made by the same reader. Every file records in its header the model that produced it.
         Provenance is a fact about the file, not about whichever model happened to be selected
         that day.
       </p>
@@ -301,21 +300,22 @@ curl -o ~/.claude/skills/transcribe-grothendieck/references/specimen.tex \\
   );
 }
 
-/** The actual run, end to end, on a folder nobody has taken. */
+/** The actual run, end to end, on one batch. */
 function RunABatch() {
   return (
     <section className="mt-14 max-w-[52em]">
       <h2 className="titre text-[22px] text-ink-900">Running a batch</h2>
       <p className="prose-fonds mt-3">
-        Pick a folder with no blue rule on{' '}
+        Every folder no edition covers has a first pass, so pick a batch to take again from{' '}
         <a
           href="/#folders"
           className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
         >
           the list of folders
         </a>{' '}
-        — and check the green ones first: where a scholarly edition already exists it is better
-        than anything produced here, and re-transcribing it wastes your afternoon.
+        — one with many doubtful or illegible readings repays a second pass most. Leave the green
+        folders alone: where a scholarly edition already exists it is better than anything
+        produced here.
       </p>
 
       <Code>{`npm run archive -- 19          # mirror it, cut into 20-page batches

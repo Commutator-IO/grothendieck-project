@@ -45,7 +45,7 @@ const KIND_LABEL: Record<PublishedEdition['kind'], string> = {
 /**
  * The whole fonds, in Grothendieck's own filing order.
  *
- * The four notebooks are ways in; this page is the thing itself. It exists so
+ * The five notebooks are ways in; this page is the thing itself. It exists so
  * that nobody has to take our groupings on trust: every folder the inventory
  * lists is here, in its group, with its dating and its page count, whether or
  * not this site has anything to say about it.
@@ -240,7 +240,7 @@ export function ArchivePage() {
                             {/* The title opens the reader. Every folder does, whether
                                 or not anything has been transcribed: with no
                                 transcript the left pane says so and the facsimile is
-                                still there to read, which is the state 165 of these
+                                still there to read, which is the state 14 of these
                                 178 folders are in and the reason the archive needed
                                 the reader more than the notebooks did. */}
                             <button
@@ -347,7 +347,7 @@ export function ArchivePage() {
                 <h2 className="titre text-[17px] text-ink-900">Mirroring anything here</h2>
                 <p className="mt-2 text-[13.5px] leading-relaxed text-ink-600">
                   Any folder can be pulled and cut into {BATCH_SIZE}-page batches, whether or not it
-                  belongs to one of the four notebooks:
+                  belongs to one of the five notebooks:
                 </p>
                 <code className="mt-3 block rounded-lg border border-ink-200 bg-ink-50 px-3 py-2 font-mono text-[12.5px] text-ink-900">
                   npm run archive -- 63 91 161-3

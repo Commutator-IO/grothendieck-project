@@ -99,9 +99,8 @@ export function MethodPage() {
             <H3 id="microbatches">Microbatches, and why twenty</H3>
             <P id="why-twenty">
               Each transcription pass runs on <strong>Opus 5.5</strong> or{' '}
-              <strong>Opus 5</strong> — on nothing else, and the file's header says which; the
-              batches first read on Fable 5 and 5.1 stay as they were made — in a fresh context,
-              on one batch and never two. The limit is not arbitrary: past
+              <strong>Opus 5</strong> — on nothing else since the Fable models were set aside,
+              and the file's header says which — in a fresh context, on one batch and never two. The limit is not arbitrary: past
               roughly twenty handwritten pages the
               quality of machine reading degrades towards the end of the pass, and nothing in the
               output signals where it began to slip. A transcription whose weakening point is

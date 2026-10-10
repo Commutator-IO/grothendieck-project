@@ -26,7 +26,7 @@ export function FondsIntro({ manifest }: { manifest: Manifest | null }) {
   // batch's. Counting batch rows alone reported zero modernised batches while
   // three folders had been read end to end.
   //
-  // Counted over UNEDITED, not over the whole fonds: 24 folders are already
+  // Counted over UNEDITED, not over the whole fonds: 20 folders are already
   // transcribed by mathematicians, and re-doing them would be waste rather
   // than progress, so they are not work outstanding and do not belong in the
   // denominator. What that costs in honesty is paid back below, where the
@@ -132,9 +132,9 @@ function Disclaimer() {
  * rather than the whole fonds, because a folder Maltsiniotis has transcribed
  * is not work outstanding. But narrowing a denominator flatters a ratio for
  * free, so the figure against the whole fonds is printed beside it and the
- * pages set aside are named. Ten thousand pages against a handful transcribed
- * is still the true ratio, and a bar that rounded it up to a visible sliver
- * would be the first dishonest thing on the page.
+ * pages set aside are named. The figure against the whole fonds is the true
+ * ratio, and a bar that rounded either one up would be the first dishonest
+ * thing on the page.
  */
 function Progress({
   done,
