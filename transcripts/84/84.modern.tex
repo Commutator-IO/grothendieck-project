@@ -1,0 +1,1760 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 84, pages 1-192.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and moves everything the critical apparatus carried into
+% footnotes. It is held to being mathematically correct as it stands; where
+% the manuscript is loose or mistaken the true statement appears and the
+% footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck cites batch-01.fr.tex to
+% batch-10.fr.tex.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+%
+% Source: the ten batches as revised on the 700 dpi tiles on 2026-10-10 (each
+% batch header carries its « % Revised: » line). Read whole, twice, before any
+% of this was written.
+%
+% Scope. 192 facsimile pages, 152 transcribed. Absent from the transcription,
+% and from this reading: pp. 4, 6, 7 (unrelated typescript and a computer
+% listing), p. 44 (blank), p. 122 (blank), the even pages 124-140, 142-160 and
+% 182-192 (typescript pages of his own non-mathematical writing used as scrap
+% paper — the batch notes identify those of 142-160 as pages of Récoltes et
+% Semailles), and the even pages 162-180 (blank). Page 2 carries a short
+% personal note, not transcribed and not mentioned further here. Page 42 is a
+% cover sheet in his hand, on music paper, numbered « (79) »; page 25 carries
+% his own number « 30 ». Nothing of the typescripts is restated (RIGHTS.md).
+%
+% The group. Filed in « Géométrie et topologie combinatoire » (69-102); the
+% subject is algebra over a general base. It meets folder 82 (SO(3) ≃ GP(1),
+% dated [vers 1982]) on three points — the commutant of a non-scalar 2x2
+% endomorphism and its characteristic-2 automorphism u -> u + Tr u (82,
+% pp. 36-40; here pp. 14-15, 34, 38), the rank-4 Azumaya algebra with its
+% reduced norm and canonical involution (82, pp. 46-55; here pp. 27-33) — and
+% folder 98 on the norm of an invertible module along a finite locally free
+% morphism (here p. 24). Cross-references are made at those places only.
+%
+% Spine. Three parts and an opening. 0 (pp. 1-5): leaves that presuppose
+% Part II (a Z/2-graded monoid built from the functors of pp. 53-54; a
+% triquadratic algebra; norm-one elements). I (pp. 8-41) « Formes
+% quadratiques binaires et revêtements quadratiques »: similarity structures,
+% the ring of homotheties of a rank-2 module, the algebra A_Q, the
+% « Théorème récapitulatif » (binary forms ↔ quadratic algebra + invertible
+% module), the Azumaya reformulation, symmetries. II (pp. 42-121, under the
+% cover « χ-scindages, produits contractés … »): quadratic covers described
+% by (L, P_1, Q) and, when 2 is regular, by (L, δ, T_0); characteristic 2;
+% the contracted product X_1 * X_2 by way of χ-trivialised torsors; the
+% coinvariant criterion; δ = δ_1 δ_2; relative trace and norm of
+% A_1 ⊗ A_2 over A; quasi-quadratic and quasi-biquadratic algebras. III
+% (pp. 123-191): the χ-formalism for extensions 0 -> L -> E -> M -> 0,
+% pushout and pullback products, the symmetric operator F_11, and the pairing
+% A × E -> O on a product of quadratic algebras.
+%
+% Notation fixed for the whole folder. X a scheme or locally ringed topos,
+% O its structure sheaf. Quad(E) = Hom(Γ^2 E, O). A quadratic algebra A
+% (commutative, locally free of rank 2), Tr, N, x̄ = σ(x) = Tr(x) - x;
+% X' = Spec A its quadratic cover. Part II: E = A^∨, 0 -> L -> E -ψ-> O -> 0,
+% ψ(x) = x(1), P_λ = ψ^{-1}(λ), T ∈ Γ P_2 the trace, N ∈ Γ Sym^2 E the norm;
+% in a splitting x_0 ∈ Γ P_1, Q(x_0 + u) = u^2 + b u + c with
+% b = π(x_0) = 2x_0 - T. Discriminants: δ = b^2 - 4c = T^2 - 4N (his δ,
+% « le discriminant changé de signe », p. 43); d(Q) = det of the polar form
+% (his δ(Q) of p. 18), so δ = -d. The product of χ-trivialised extensions
+% (his ∧ p. 68, *, ⊛ p. 143, ∨ in Part III) is E_1 * E_2 throughout; the
+% pullback product of Part III (his ∧, pp. 167-169) is E_1 *^ϖ E_2. The
+% Azumaya algebra of § 4 is \mathcal{M} (his M), its anti-commutant
+% {θ : θu = ūθ} is \mathcal{J} (his M of p. 39).
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%  - p. 1: the « R_* = R ×_Z Z/2Z » of the box is read as the monoid of pairs
+%    (n, x), x ∈ R_{n mod 2}; p. 2's (LL', 2δδ') read (LL', δδ'), per p. 1's
+%    definition; the exponents of the Arf/c_1 formulas are uncertain and the
+%    remark « (si 2 inversible) » cannot be meant as written.
+%  - p. 3: « e_i inversibles i.e. A_i étales » needs 2e_i invertible.
+%  - p. 8: Quad(E) = Hom(Γ^2 E, O) (page: Hom(Γ^2 E, E)); pp. 9-10: Sym^2(E^∨)
+%    (page: Sym^2(E)).
+%  - p. 13: with the conventions stated, O -> End(E) is 1 -> -1_E; as
+%    submodules nothing changes.
+%  - p. 16: Δ' ≅ (A/O)^∨ ⊗ L (page: A/O ⊗ L^∨, which is Δ).
+%  - p. 17: Q_u(x) = x ∧ u(x) (box: u(x) ∧ x; his coordinates follow x ∧ u(x)).
+%  - p. 18: d(Q) ∈ Γ((Δ' ⊗ L^∨)^{⊗2}) (an earlier line: L^{⊗2}).
+%  - p. 21: « structure fidèle » in 3° d) read strictly faithful.
+%  - p. 26: étale topology suffices for U_A-torsors only when U_A is smooth.
+%  - p. 27: Azumaya algebra of rank 4 over O (page: « sur E »).
+%  - pp. 34-38: the uniqueness of the conjugation holds up to the identity
+%    near points where 2 = 0; stated precisely. Pages 35-38 are out of order;
+%    the reading follows the order of the argument (34, 38, 37, 36, 35, 39).
+%  - p. 37 « Norme 1 » vs pp. 39-40 det θ = -1: the reading follows 39-40.
+%  - p. 40 c): lines of E (page: of A).
+%  - p. 46 vs p. 52: Q(φ_N(x)) = -N(x)δ (p. 52 writes +; p. 97 has -).
+%  - p. 63: 4c_1c_1 read 4c_1c_2. p. 75: α(x_1, x_2) read f(x_1, x_2).
+%    p. 79 (margin): T = 2χx - b read χx_0 - b.
+%  - p. 91: « X_1 × X_2 -> X_1 ∧ X_2 fid. plat » is false without a
+%    hypothesis; a counter-example is given.
+%  - p. 93: the minimal equation is u^2 + <u,b> u + c(u) = 0.
+%  - pp. 111-112: T_1 read T_2, t_1(x_1) read n_1(x_1), k -> A_1 read k -> A_2.
+%    p. 114: x_i = σ_i(x) (page: T_i(x)). p. 119, Lemma b): the ring of 𝒳,
+%    not of X_J.
+%  - p. 131: b_2'' = b_2' + χu_2'; the signs b_i' = b_i ± χu_i fixed as +.
+%  - p. 165: F_12 = ψ_1 ⊗ ψ_2 (page φ_1 ⊗ ψ_2). p. 179: <λ, x> = λψ(x).
+%  - p. 189: e_1 ⊗ e_1 read e_1 ⊗ e_2.
+%
+% Announced and never established in the folder: the explicit transition
+% isomorphisms for A_Q (p. 23, « Je ne vais pas faire l'explicitation ici »);
+% an Arf invariant for forms of any rank, even and odd (p. 23, sketched p. 1);
+% the canonical isomorphism N_{A/O}(C) ≅ O of p. 32; the « invariants
+% d'Hasse-Stiefel-Whitney généralisés » of the cover (p. 42), never reached;
+% the modified product ∧^! without « 2 régulier » (p. 55, « exercice
+% catégorique universel »); the programme of p. 91 (constraints, twisting,
+% étaleness, flatness of X_1 × X_2 -> X_1 * X_2); the quasi-biquadratic
+% structure on π^{-1}(ε) without étaleness (pp. 120-121); the fourth
+% compatibility of p. 177; the computation of pp. 189-191, which stops.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{84}
+\pages{1}{192}
+\dating{[à partir de 1982-vers 1986]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Formes quadratiques] : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces feuillets parlent des formes quadratiques à deux variables,
+$ax^{2} + bxy + cy^{2}$, et de leurs compagnes naturelles, les « extensions
+quadratiques » : ce qu'on obtient en adjoignant à des nombres une racine
+carrée, comme $\mathbf{Z}[\sqrt{-5}]$, ou une racine d'une équation
+$x^{2} + bx + c = 0$, comme $\mathbf{Z}[\tfrac{1 + \sqrt{5}}{2}]$. Mais ils en
+parlent au-dessus d'une base quelconque --- un anneau comme $\mathbf{Z}$, ou
+une famille d'anneaux qui varie d'un point à l'autre d'un espace --- et ils
+s'obstinent sur ce qui rend la question difficile : le nombre $2$.
+
+Tant que $2$ est inversible, tout est simple. On « complète le carré » :
+$x^{2} + bx + c = (x + \tfrac{b}{2})^{2} - \tfrac{\delta}{4}$, avec
+$\delta = b^{2} - 4c$, et une extension quadratique n'est rien d'autre que le
+choix d'une racine carrée de $\delta$. Deux extensions se multiplient alors comme
+leurs racines : $\sqrt{\delta_1} \cdot \sqrt{\delta_2} = \sqrt{\delta_1\delta_2}$.
+Quand $2$ n'est pas inversible, on ne peut plus diviser par $2$, et la racine
+carrée ne suffit plus à décrire l'équation. Sur $\mathbf{Z}$, c'est le vieux
+fait que le discriminant d'un anneau quadratique est congru à $0$ ou à $1$
+modulo $4$, et qu'il faut le savoir pour retrouver l'anneau ; en
+caractéristique $2$, c'est pire, car « prendre une racine carrée » n'a plus
+rien à voir avec une équation du second degré séparable.
+
+La première partie montre qu'une forme binaire, à un facteur près, est la même
+chose qu'une algèbre de matrices $2 \times 2$ commutative --- l'anneau de ses
+« homothéties » --- et que donner la forme revient à donner une extension
+quadratique et un module de rang un sur elle. C'est, sur une base quelconque,
+la correspondance de Gauss et de Dedekind entre formes et idéaux. La deuxième
+partie construit le produit de deux extensions quadratiques, sans jamais
+diviser par $2$. L'outil est une petite géométrie affine où l'on ne connaît une
+origine qu'à un facteur $\chi$ près ; avec $\chi = 2$, elle redonne la
+multiplication des racines carrées là où $2$ est inversible, et elle continue de
+fonctionner là où il ne l'est pas. La troisième partie reprend cet outil pour
+des extensions de modules quelconques.
+
+Le dossier est un atelier. On l'y voit deviner une formule (« Je devine qu'on
+a »), la vérifier, s'avouer qu'une hypothèse de départ était fausse (« la
+supposition du début est erronée ») et « rectifier le tir », s'arrêter sur un
+signe qui revient trois fois sous trois déguisements, et saluer l'objet trouvé
+d'un « Plus de doute, c'est lui ! ». La couverture annonce des « invariants
+d'Hasse--Stiefel--Whitney généralisés » : le dossier ne les atteint pas.
+
+Les noms sous lesquels chercher la suite sont ceux de la composition de Gauss
+sur une base quelconque, de l'algèbre de Clifford paire, de l'invariant d'Arf
+et de l'algèbre discriminante, des théories de Kummer et d'Artin--Schreier,
+des schémas en groupes d'ordre $2$ de Tate et Oort, et du produit des algèbres
+quadratiques.
+
+\keywords{binary quadratic form, quadratic form with values in a line bundle, similarity class, even Clifford algebra, Gauss composition, quadratic algebra, invertible module, norm of an invertible module, Weil restriction, norm-one torus, Hilbert 90, Azumaya algebra, reduced norm, canonical involution, reflection, quadratic cover, discriminant, Stickelberger congruence, Kummer theory, Artin-Schreier theory, Tate-Oort group scheme, contracted product of torsors, extension of modules, product of quadratic algebras, Arf invariant, discriminant algebra, biquadratic algebra, Klein four-group, algebra with standard involution}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+\begin{enumerate}
+\item[0.] \emph{Feuillets d'ouverture} (pages 1 à 5) : un monoïde gradué par
+$\mathbf{Z}/2$ fait de classes de revêtements quadratiques et de couples
+$(L, \delta)$ (pages 1 et 2) ; une algèbre triquadratique et ses quatorze
+sous-algèbres (page 3) ; les automorphismes d'une algèbre quadratique et ses
+éléments de norme $1$ (page 5).
+\item[I.] \emph{Formes binaires et revêtements quadratiques} (pages 8 à 41) :
+structures de similitude (pages 8 à 11) ; en rang $2$, l'anneau des homothéties
+(pages 11 à 18) ; l'algèbre $A_Q$ d'une forme (pages 18 à 23) ; le théorème
+récapitulatif (pages 23 à 27) ; la reformulation par une algèbre d'Azumaya
+(pages 27 à 34) ; unicité de la conjugaison et symétries (pages 34 à 41).
+\item[II.] \emph{$\chi$-scindages et produits contractés} (pages 42 à 121) :
+description d'un revêtement quadratique par $(L, P_1, Q)$ et, quand $2$ est
+régulier, par $(L, \delta, T_0)$ (pages 43 à 53) ; torseurs sous $\mu_2$ et sous
+$\mathbf{Z}/2$ (pages 53 à 55) ; caractéristique $2$ (pages 56 et 57) ; quatre
+catégories équivalentes (pages 58 à 61) ; le produit, deviné en coordonnées
+(pages 62 à 65), puis construit par la « digression affine » (pages 65 à 79) ;
+le cas $\chi = 2$ et le critère des coinvariants (pages 79 à 87) ; la forme
+quadratique du produit, $\delta = \delta_1\delta_2$ (pages 88 à 92) ; dualité
+entre $A$ et $E$ (pages 93 à 97) ; trace et norme de $A_1 \otimes A_2$ sur
+$A_1 * A_2$ (pages 98 à 106) ; algèbres quasi-quadratiques et
+quasi-biquadratiques (pages 106 à 121).
+\item[III.] \emph{Extensions $\chi$-scindées quelconques} (pages 123 à 191) :
+coordonnées et cocycle (pages 123 à 131) ; $\lambda$-rétractions et produit des
+morphismes (pages 133 à 139) ; l'opérateur symétrique $F_{11}$ et la condition
+$\gamma\chi = 2$ (pages 141 à 157) ; produits poussé et tiré, dualité (pages 159
+à 169) ; retour aux algèbres quadratiques : l'accouplement $A \times E \to
+\mathcal{O}$ sur le produit (pages 171 à 191).
+\end{enumerate}
+
+\subsection*{Conventions, valables pour tout le dossier}
+
+$X$ est un schéma, ou plus généralement un topos localement annelé (c'est le
+cadre que pose la page 8), et $\mathcal{O} = \mathcal{O}_X$. Les Modules sont des
+$\mathcal{O}$-Modules ; $\Gamma$ désigne les sections, $\check{E} = E^{\vee}$ le dual.
+On note
+\[
+  \underline{\mathrm{Quad}}(E) = \underline{\mathrm{Hom}}(\Gamma^{2}E, \mathcal{O}),
+\]
+le faisceau des formes quadratiques sur $E$, où $\Gamma^{2}$ est la puissance
+divisée ; pour $E$ localement libre de type fini,
+$\underline{\mathrm{Quad}}(E) \simeq \underline{\mathrm{Sym}}^{2}(E^{\vee})$.
+
+Une \emph{algèbre quadratique} est une $\mathcal{O}$-algèbre commutative
+localement libre de rang $2$ ; on note $\mathrm{Tr}$ et $N$ sa trace et sa norme,
+$\sigma(x) = \bar{x} = \mathrm{Tr}(x) - x$ son involution canonique, et
+$X' = \operatorname{Spec} A$ le \emph{revêtement quadratique} correspondant. Le
+schéma en groupes des unités de $A$ (restriction de Weil de $\mathbb{G}_m$) est
+$\mathbb{W}(A)^{*}$, et $\mathcal{U}_A \subset \mathbb{W}(A)^{*}$ le noyau de la
+norme\footnote{La page écrit $W(A)^{*}$, $SW(A)$, $\mathcal{U}_A$ ou
+$\mathcal{U}(A)$ ; on garde $\mathbb{W}(A)^{*}$ et $\mathcal{U}_A$.}.
+
+À partir de la deuxième partie, $E = \check{A}$, et l'unité de $A$ donne une
+extension
+\[
+  0 \to L \to E \xrightarrow{\ \psi\ } \mathcal{O} \to 0, \qquad \psi(x) = x(1),
+\]
+où $L \simeq (A/\mathcal{O})^{\vee}$ est inversible ; $P_\lambda = \psi^{-1}(\lambda)$
+est un torseur sous $L$. La trace est une section $T$ de $P_2$, la norme une
+section $N$ de $\mathrm{Sym}^{2}E$. Le choix d'une section $x_0$ de $P_1$ (un
+\emph{scindage}) écrit tout en coordonnées :
+\[
+  Q(x_0 + u) = u^{2} + bu + c, \qquad b = 2x_0 - T \in \Gamma L, \quad c \in \Gamma L^{\otimes 2}.
+\]
+
+\emph{Discriminants.} On note $\delta = b^{2} - 4c = T^{2} - 4N$, section de
+$L^{\otimes 2}$ ; c'est le $\delta$ du dossier à partir de la page 43, qu'il
+appelle « le discriminant de $N$ changé de signe ». Pour une forme binaire $Q$ de
+la première partie, $\mathrm{d}(Q)$ désigne le déterminant de sa forme polaire
+(son $\delta(Q)$ de la page 18) ; pour $Q = \alpha\lambda^{2} + \beta\lambda\mu +
+\gamma\mu^{2}$, $\mathrm{d}(Q) = 4\alpha\gamma - \beta^{2}$. Ainsi
+$\delta = -\mathrm{d}$ partout.
+
+\emph{Produits.} Le produit de deux extensions munies d'une
+$\chi$-trivialisation, qu'il note tour à tour $\wedge$ (page 68), $*$, $\circledast$
+(page 143) et $\vee$ (troisième partie), est noté $E_1 * E_2$ partout ; le
+« produit tiré » de la troisième partie, son $\wedge$ des pages 167 à 169, est
+noté $E_1 *^{\varpi} E_2$. Le produit des revêtements quadratiques est
+$X_1 * X_2$, celui des algèbres $A_1 * A_2$ (il écrit $X_1 \wedge X_2$,
+$X_1 \star X_2$, $A_1 \wedge A_2$).
+
+\emph{Noms réservés.} Dans la première partie, $\Delta$ est le Module inversible
+d'une structure de similitude et $\Delta' = \Delta^{\vee}$ ; $\Lambda = \Delta \otimes L$.
+L'algèbre d'Azumaya de la section 4 est notée $\mathcal{M}$ (son $M$), comme au
+dossier 82, et l'ensemble des $\theta$ tels que $\theta u = \bar{u}\theta$ est noté
+$\mathcal{J}$ (son $M$ de la page 39).
+
+\subsection*{Ce que seule une lecture d'ensemble peut dire}
+
+\emph{Les premiers feuillets viennent après.} Les pages 1 et 2 manipulent deux
+applications $\alpha : (L, \delta, T_0) \mapsto (L, \delta)$ et
+$\beta : (L, \delta) \mapsto (L, 4\delta, 0)$, et constatent que $\beta$ n'est pas
+multiplicative. Ce sont exactement les foncteurs $\mathrm{Ass}'$ et
+$\mathrm{Oub}'$ des pages 53 et 54, et le constat est celui de la page 54. Les
+pages 1 et 2 supposent donc la description des revêtements quadratiques par des
+triplets $(L, \delta, T_0)$, qui n'est établie qu'aux pages 47 à 53 ; elles sont
+une seconde tentative, à côté de la « catégorie monoïdale mixte » de la page 55,
+pour réparer ce défaut.
+
+\emph{Trois régimes, un formalisme.} La deuxième partie traite successivement
+trois cas : $2$ inversible, où un revêtement quadratique est une racine carrée
+(pages 46 à 48, « la théorie est triviale », page 81) ; $2$ non diviseur de zéro,
+où il est un triplet $(L, \delta, T_0)$ (pages 48 à 53) ; caractéristique $2$, où
+il est un torseur sous un schéma en groupes d'ordre $2$ (pages 56 et 57). La
+« digression affine » (pages 65 à 79) est ce qui les traite tous à la fois, sans
+hypothèse sur $2$.
+
+\emph{Un même signe.} « Attention au signe » revient aux pages 17--18, 43, 96 et
+133--135 (« signe étrange ! »). Aux pages 17--18 et 43, c'est la convention du
+discriminant ($\delta = -\mathrm{d}$, ci-dessus). Aux trois autres endroits, il
+nous semble --- ce n'est pas dit sur les pages --- que c'est un seul et même
+signe : l'autodualité d'un Module $E$ de rang $2$, $E \simeq
+\underline{\mathrm{Hom}}(E, \det E)$, $x \mapsto (y \mapsto x \wedge y)$, induit
+$-\mathrm{id}$ sur un sous-module de rang $1$, parce que $x \wedge y = -y \wedge x$. On
+le rencontre page 13 dans $\mathcal{O} \to \underline{\mathrm{End}}(E)$, page 96
+comme le $-\mathrm{id}_L$ de l'isomorphisme $g$, pages 133 et 135 comme le
+$-\mathrm{id}$ de $\Phi$.
+
+\emph{L'ordre des feuillets.} Les pages 35 à 38 ne sont pas dans l'ordre de la
+rédaction : la page 38 achève la démonstration de la page 34, la page 37 ouvre
+le paragraphe 4.2, que continuent les pages 36 puis 35, et la page 39 suit. On
+lit dans cet ordre.
+
+\subsection*{Ce que le dossier annonce sans l'établir}
+
+L'explicitation des isomorphismes de transition de $A_Q$ (page 23, « Je ne vais
+pas faire l'explicitation ici ») ; un invariant d'Arf pour les formes de rang
+quelconque, pair ou impair (page 23, esquissé page 1) ; l'isomorphisme canonique
+$N_{A/\mathcal{O}}(C) \simeq \mathcal{O}$ de la page 32 ; les invariants
+d'Hasse--Stiefel--Whitney de la couverture (page 42) ; le produit modifié
+$\wedge^{!}$ sans l'hypothèse « $2$ régulier » (page 55) ; le programme de la
+page 91 ; la structure biquadratique sur $\pi^{-1}(\varepsilon)$ sans hypothèse
+d'étalité (pages 120 et 121) ; la quatrième compatibilité de la page 177 ; le
+calcul des pages 189 à 191, qui s'arrête.
+
+\pagerange{1}{5}
+\section*{0. Les feuillets d'ouverture (pages 1 à 5)}
+
+\pagerange{1}{2}
+\subsection*{Un monoïde gradué par $\mathbf{Z}/2$ (pages 1 et 2)}
+
+Soient $R_0$ l'ensemble des classes de triplets $(L, \delta, T_0)$ décrivant les
+revêtements quadratiques (pages 47 à 53 : $L$ inversible, $\delta \in \Gamma
+L^{\otimes 2}$, $T_0$ une section de $L$ sur $V(2)$ avec $T_0^{2} \equiv \delta$
+modulo $4$), et $R_1$ celui des classes de couples $(L, \delta)$, qui décrivent
+les $\mu_2$-torseurs quand $\delta$ est inversible (page 53). Tous deux sont des
+monoïdes commutatifs unitaires pour le produit
+\[
+  (L, \delta, T_0)(L', \delta', T'_0) = (LL', \delta\delta', T_0T'_0), \qquad
+  (L, \delta)(L', \delta') = (LL', \delta\delta').
+\]
+L'oubli $\alpha : R_0 \to R_1$, $(L, \delta, T_0) \mapsto (L, \delta)$, est un
+homomorphisme ; l'application $\beta : R_1 \to R_0$, $(L, \delta) \mapsto (L,
+4\delta, 0)$, qui fait d'un $\mu_2$-torseur $z^{2} = \delta$ le revêtement
+quadratique qu'il est, ne l'est pas\footnote{La page 1 écrit d'abord que
+$\alpha$ envoie $(L, \delta, T_0)$ sur « $(L, \Gamma)$ » ; on lit $(L, \delta)$. Elle
+qualifie $\beta$ de « multiplicat. », puis ajoute « non compat. avec produits »,
+d'une lecture incertaine ; la page 2 tranche : « $R_1 \to R_0$ n'est \emph{pas} un
+hom. de monoïde ».}.
+
+Il pose $R_* = R_0 \sqcup R_1$ et définit une loi $\wedge$ compatible à la
+graduation par $\mathbf{Z}/2$ :
+\[
+  x \wedge y = \begin{cases}
+    xy & x, y \in R_0, \\
+    \beta(xy) & x, y \in R_1, \\
+    x\,\alpha(y) & x \in R_1,\ y \in R_0 .
+  \end{cases}
+\]
+L'associativité se ramène, par l'examen des huit cas, à deux identités :
+\[
+  \text{(A)} \quad \beta(\alpha(x)u) = x\,\beta(u), \qquad
+  \text{(B)} \quad \alpha\beta(v) = v\,\eta, \quad \eta = \alpha(\zeta), \ \zeta = \beta(1) = (\mathcal{O}, 4, 0),
+\]
+pour $x \in R_0$, $u, v \in R_1$. Toutes deux se vérifient sur les formules :
+$\beta(\alpha(x)u) = (LL', 4\delta\delta', 0) = x\,\beta(u)$, et
+$\alpha\beta(L, \delta) = (L, 4\delta) = (L, \delta)(\mathcal{O}, 4)$. Elles donnent
+la mesure exacte du défaut de multiplicativité :
+\[
+  \beta(x)\,\beta(y) = \zeta\,\beta(xy).
+\]
+Avec la loi $\wedge$, le produit de $(L, \delta)$ par $(L', \delta', T'_0)$ est
+$(LL', \delta\delta')$\footnote{La page 2 écrit, pour ce cas, $(LL', 2\delta\delta')$,
+le « $2$ » surchargé et douteux. La définition de la page 1 donne
+$\delta\delta'$, et c'est ce qu'exige l'associativité.}.
+
+Dans un encadré, il en tire un homomorphisme. Notons $R_*^{\mathbf{Z}}$ le monoïde
+des couples $(n, x)$, $n \in \mathbf{N}$, $x \in R_{n \bmod 2}$, avec
+$(n, x)(m, y) = (n + m, x \wedge y)$ ; posons
+\[
+  w(2\nu, x) = x\,\zeta^{\nu}, \qquad w(2\nu + 1, x) = \beta(x)\,\zeta^{\nu} .
+\]
+Alors $w : R_*^{\mathbf{Z}} \to R_0$ est un homomorphisme : pour deux degrés
+impairs, $w(x \wedge y) = \beta(xy)\zeta^{\nu + \mu + 1} = \beta(x)\beta(y)\zeta^{\nu+\mu}$
+par la formule ci-dessus ; pour un degré pair et un impair, c'est (A)\footnote{La
+page écrit « $R_* = R \times_{\mathbf{Z}} \mathbf{Z}/2\mathbf{Z}$ » ; on lit le produit
+fibré $\mathbf{Z} \times_{\mathbf{Z}/2} R_*$, ce que demandent les formules, qui
+dépendent de $n$ et non seulement de sa parité. Le bord de la feuille est déchiré
+là où il annonce un second homomorphisme $w' : R_* \to \mathbf{Z} \times R_0$. La
+vérification de la multiplicativité est de l'édition.}.
+
+Pour une somme orthogonale $E = \bigoplus_{i \le n}(L_i, \delta_i)$ de $n$ formes de
+rang $1$, il compare deux candidats invariants dans $R_0$ :
+$w_1(E) = \prod_i \beta(L_i, \delta_i) = (\bigotimes L_i, 4^{n}\prod\delta_i, 0)$, et un
+« invariant d'Arf » $(\bigotimes L_i, 2^{\nu}\prod\delta_i, 0)$ avec $\nu$ pair
+voisin de $n$, qui en diffère par une puissance de $\zeta$. L'idée lisible est
+que, $\zeta$ n'étant pas inversible dans $R_0$ quand $2$ ne l'est pas, l'invariant
+d'Arf détermine $w_1$ sans réciproque\footnote{Les exposants ($\nu$, $\nu'$,
+$\nu''$) sont en partie incertains, et le $\xi$ de la page désigne tantôt
+$(\mathcal{O}_X, 2^{?}, 1)$, tantôt $(\mathcal{O}_X, 4, 0) = \zeta$. La remarque
+« $\mathrm{Arf}(E)$ est un invariant plus fin que $c_1(E)$ (si $2$ inversible sur
+$X$) » ne peut pas être lue telle quelle : si $2$ est inversible,
+$(\mathcal{O}, 4, 0) \simeq (\mathcal{O}, 1, 0)$ par $z \mapsto 2z$, $\zeta$ est la classe
+unité, et les deux invariants coïncident. Rien n'établit que l'« invariant d'Arf »
+ainsi défini ne dépende pas de la décomposition orthogonale ; c'est une
+proposition, non un résultat. La page s'arrête sur « Mais $c_1(E)$ ».}.
+
+\pagerange{3}{3}
+\subsection*{Une algèbre triquadratique (page 3)}
+
+Soient $A_i = \mathcal{O}[u_i]/(u_i^{2} + e_i)$, $i = 1, 2, 3$, et
+$A = A_1 \otimes A_2 \otimes A_3$, de base les huit monômes en $u_1, u_2, u_3$. Les
+involutions canoniques $\sigma_i$ engendrent une action de $\mathbf{F}_2^{3}$ sur
+$A$. Quand les $A_i$ sont étales, c'est-à-dire quand les $2e_i$ sont
+inversibles\footnote{La page dit « si les $e_i$ inv., i.e.\ les $A_i$ étales ». Le
+discriminant de $u^{2} + e$ est $-4e$ : il faut aussi $2$ inversible.}, la
+correspondance de Galois pour $\mathbf{F}_2^{3}$ s'écrit en deux tableaux :
+\begin{itemize}
+\item les sept sous-algèbres quadratiques $A_1, A_2, A_3$, $B_1 = \langle u_2u_3\rangle$,
+$B_2 = \langle u_3u_1\rangle$, $B_3 = \langle u_1u_2\rangle$, $B_0 = \langle u_1u_2u_3\rangle$,
+fixées chacune par un sous-groupe d'ordre $4$, c'est-à-dire par un hyperplan de
+$\mathbf{F}_2^{3}$ ;
+\item les sept sous-algèbres de rang $4$, $A'_1 = A_2 \otimes A_3$, \ldots,
+$B'_0 = \langle u_2u_3, u_3u_1\rangle$, fixées chacune par une involution, c'est-à-dire
+par un élément non nul de $\mathbf{F}_2^{3}$\footnote{La page hésite : le texte
+écrit « correspondant aux sept droites vect.\ », la marge corrige en « sept
+hyperplans ». Les deux sont justes, l'un pour chaque tableau : les sous-algèbres
+quadratiques correspondent aux hyperplans, celles de rang $4$ aux droites, ou aux
+éléments non nuls.}.
+\end{itemize}
+On a $B_1 \simeq A_2 * A_3$, $B_2 \simeq A_3 * A_1$, $B_3 \simeq A_1 * A_2$,
+$B_0 \simeq A_1 * A_2 * A_3$ --- le produit des revêtements quadratiques, au sens
+de la deuxième partie, qui est ici celui des classes de Kummer :
+$(u_2u_3)^{2} = e_2e_3$ --- et $A_i \otimes A'_i \simeq A$, $B_0 \otimes B'_0 \simeq A$. D'où
+« $7 + 7 = 14$ situations biquadratiques typiques », chacune une sous-algèbre de
+rang $4$ avec les trois sous-algèbres quadratiques qu'elle contient. Ce tableau
+est la situation modèle que les pages 110 à 121 axiomatiseront.
+
+\pagerange{5}{5}
+\subsection*{Automorphismes et éléments de norme $1$ (page 5)}
+
+Soit $A$ quadratique de base $(1, u)$. Un automorphisme qui induit $-\mathrm{id}$
+sur $A/\mathcal{O}$ envoie $u$ sur $\bar{u} + \alpha$ ; conserver trace et norme
+impose $2\alpha = 0$ et $\alpha(\mathrm{Tr}\,\bar{u} + \alpha) = 0$, donc $\alpha = 0$ si
+$2$ est inversible. La question sans hypothèse sur $2$ est reprise pages 34 et
+38.
+
+Les éléments de norme $1$ sont les $u\bar{u}^{-1}$ (théorème 90 de Hilbert pour
+l'algèbre $A$), et il le met en diagramme :
+
+\begin{tikzcd}
+1 \arrow[r] & \mu_2 \arrow[r] \arrow[d] & \mathbb{G}_m \arrow[r, "(\ )^{2}"] \arrow[d] & \mathbb{G}_m \arrow[r] \arrow[d, no head, "=" description] & 1 \\
+1 \arrow[r] & \mathcal{U}_A \arrow[r] & \mathbb{W}(A)^{*} \arrow[r, "N"] & \mathbb{G}_m \arrow[r] & 1
+\end{tikzcd}
+
+d'où, par le lemme du serpent, $\mathcal{U}_A/\mu_2 \simeq \mathbb{W}(A)^{*}/\mathbb{G}_m$,
+comme faisceaux pour la topologie fppf\footnote{Les deux lignes sont exactes pour
+la topologie fppf (l'élévation au carré est fppf-surjective, et la norme aussi).
+La page dessine les flèches de bas en haut et biffe en partie la ligne du
+quotient ; une flèche porte « cas \ldots », illisible.}. La composée
+$\mathcal{U}_A \to \mathcal{U}_A/\mu_2 \simeq \mathbb{W}(A)^{*}/\mathbb{G}_m \xrightarrow{u \mapsto
+u\bar{u}^{-1}} \mathcal{U}_A$ est $u \mapsto u^{2}$ ; on la retrouvera page 41.
+
+\pagerange{8}{41}
+\section*{I. Formes quadratiques binaires et revêtements quadratiques (pages 8 à 41)}
+
+\pagerange{8}{11}
+\subsection*{1. Formes à un scalaire près : structures de similitude (pages 8 à 11)}
+
+Soit $E$ un Module. Le groupe $\mathcal{O}^{*}$ opère sur
+$\underline{\mathrm{Quad}}(E)$\footnote{La page écrit
+$\underline{\mathrm{Quad}}(E) \simeq \underline{\mathrm{Hom}}(\Gamma^{2}(E), E)$ ; le but est
+$\mathcal{O}$. L'homomorphisme canonique $\underline{\mathrm{Sym}}^{2}(E^{\vee}) \to
+\underline{\mathrm{Quad}}(E)$, $fg \mapsto (x \mapsto f(x)g(x))$, est un isomorphisme
+pour $E$ localement libre de type fini, comme elle le dit.}, et une section du
+faisceau quotient
+\[
+  \underline{\mathrm{Sim}}(E) = \underline{\mathrm{Quad}}(E)/\mathcal{O}^{*}
+\]
+est une \emph{structure de similitude} sur $E$ : localement une forme $Q$, deux
+formes $Q$ et $Q' = aQ$, $a$ inversible, définissant la même. Elle est
+\emph{fidèle} si $a \mapsto aQ$, $\mathcal{O} \to \underline{\mathrm{Quad}}(E)$, est
+injective --- le scalaire $a$ est alors unique, et la condition ne dépend que
+de la structure.
+
+Une structure de similitude $\Sigma$ est déterminée par le sous-Module $\Delta_\Sigma
+\subset \underline{\mathrm{Quad}}(E)$ qu'elle engendre, et $\Sigma \mapsto \Delta_\Sigma$
+est une bijection sur les sous-Modules localement monogènes\footnote{C'est ici
+que sert l'hypothèse d'un topos \emph{localement} annelé : deux générateurs d'un
+module monogène $\mathcal{O}_x Q$ sur un anneau local diffèrent par une unité. La
+page ne le dit pas.}. Les structures fidèles correspondent aux sous-Modules
+inversibles ; les structures \emph{strictement} (ou universellement) fidèles,
+celles pour lesquelles $\Delta \to \underline{\mathrm{Quad}}(E)$ reste injectif sur
+chaque fibre résiduelle, aux sous-fibrés en droites de
+$\underline{\mathrm{Quad}}(E)$, c'est-à-dire aux sections du fibré projectif des
+droites de $\underline{\mathrm{Quad}}(E)$\footnote{Pages 9 et 10, on suppose $E$
+localement libre de type fini. La page 9 écrit
+$\underline{\mathrm{Quad}}(E) \simeq \underline{\mathrm{Sym}}^{2}(E)$, la page 8
+$\underline{\mathrm{Sym}}^{2}(E^{\vee})$ ; c'est la seconde. Le paragraphe 1.3 est
+très surchargé, et un « NB » interlinéaire y est en partie illisible.}.
+
+\emph{La forme canonique} (1.4). Soient $\Delta$ inversible et $i : \Delta \to
+\underline{\mathrm{Quad}}(E)$ un homomorphisme quelconque. La forme
+$Q_E : E \to \underline{\mathrm{Quad}}(E)^{\vee}$, $\langle f, Q_E(x)\rangle = f(x)$, est
+quadratique, et sa composée avec ${}^{t}i$ est une forme
+\[
+  Q_i : E \longrightarrow \Delta^{\vee} = \Delta'
+\]
+\emph{à valeurs dans un Module inversible}. Pour une structure fidèle, $(\Delta, i)$
+est déterminé par $\Sigma$ à isomorphisme unique près, d'où la notation
+$Q_\Sigma$. Si l'on choisit une base de $\Delta$, $Q_\Sigma$ redevient une forme
+ordinaire. D'où (1.5, en marge) : une structure de similitude strictement fidèle
+équivaut à la donnée d'un Module inversible $\Delta'$ et d'une forme quadratique
+$Q : E \to \Delta'$ qui n'est nulle sur aucune fibre résiduelle\footnote{Une forme
+quadratique non nulle sur un espace vectoriel prend une valeur non nulle, sur
+tout corps, $\mathbf{F}_2$ compris ; « $Q(E)$ engendre $\Delta'$ » et « $Q$ non nulle
+sur toute fibre » sont donc équivalents. La marge écrit « fidèle », surchargé de
+« strictement ».}. C'est la notion de forme quadratique à valeurs dans un fibré
+en droites, sous laquelle on la trouve aujourd'hui.
+
+\pagerange{11}{16}
+\subsection*{2. En rang $2$ : l'anneau des homothéties (pages 11 à 16)}
+
+Désormais $E$ est localement libre de rang $2$, et $L = \det E = \bigwedge^{2}E$.
+L'accouplement $(x, y) \mapsto x \wedge y$ donne $E \simeq \check{E} \otimes L$, d'où
+\[
+  \underline{\mathrm{Quad}}(E) \simeq \underline{\mathrm{Quad}}(\check{E}) \otimes L^{\otimes -2}
+\]
+et un isomorphisme canonique $\underline{\mathrm{Sim}}(E) \simeq
+\underline{\mathrm{Sim}}(\check{E})$, involutif, qui respecte fidélité, stricte
+fidélité et non-dégénérescence (2.1).
+
+\emph{La clef} (2.2). La suite exacte $0 \to \bigwedge^{2}E \to E \otimes E \to
+\mathrm{Sym}^{2}E \to 0$, $x \wedge y \mapsto x \otimes y - y \otimes x$, tensorisée par
+$L^{\vee}$, s'écrit, puisque $E \otimes L^{\vee} \simeq \check{E}$ et $E \otimes
+\check{E} \simeq \underline{\mathrm{End}}(E)$ :
+
+\begin{tikzcd}[column sep=small]
+0 \arrow[r] & L \otimes L^{\vee} \arrow[r] \arrow[d, "\wr"] & E \otimes E \otimes L^{\vee} \arrow[r] \arrow[d, "\wr"] & \mathrm{Sym}^{2}E \otimes L^{\vee} \arrow[r] \arrow[d, "\wr"] & 0 \\
+0 \arrow[r] & \mathcal{O} \arrow[r] & \underline{\mathrm{End}}(E) \arrow[r] & \underline{\mathrm{End}}(E)/\mathcal{O} \arrow[r] & 0
+\end{tikzcd}
+
+Le sous-module $L \otimes L^{\vee}$ va sur les homothéties $\mathcal{O}\cdot 1_E$\footnote{La
+page écrit la flèche de gauche $\mathrm{id}_{\mathcal{O}}$. Avec les conventions
+écrites ($x \mapsto (y \mapsto x \wedge y)$, $x \otimes f \mapsto f(\cdot)\,x$), un
+calcul en base donne $1 \mapsto -1_E$. Comme sous-modules, rien ne change ; c'est
+le signe du « Ce que seule une lecture d'ensemble peut dire ».}, et l'on obtient
+\[
+  \underline{\mathrm{End}}(E)/\mathcal{O}\cdot 1_E \simeq \mathrm{Sym}^{2}E \otimes L^{\vee}
+  \simeq \underline{\mathrm{Quad}}(E) \otimes L .
+\]
+\emph{Une structure de similitude sur $E$ est donc la même chose qu'un sous-Module
+localement monogène de $\underline{\mathrm{End}}(E)/\mathcal{O}$}, c'est-à-dire qu'un
+sous-Module $A \subset \underline{\mathrm{End}}(E)$ contenant $\mathcal{O}\cdot 1_E$ avec
+$A/\mathcal{O}$ localement monogène ; les structures strictement fidèles
+correspondent aux sous-fibrés de rang $2$ contenant $\mathcal{O}\cdot 1_E$.
+
+\textbf{Lemme 1.} Un tel $A$ est localement de la forme $\mathcal{O} + \mathcal{O}u$ ;
+c'est une sous-algèbre commutative de $\underline{\mathrm{End}}(E)$, finie sur
+$\mathcal{O}$, puisque $u^{2} - \mathrm{Tr}(u)u + \det(u) = 0$ (Cayley--Hamilton).
+On l'appelle \emph{l'anneau des homothéties} (directes) de $\Sigma$, et on le note
+$A_\Sigma$\footnote{La condition a') du lemme est illisible. La marge renvoie la
+finitude à l'équation $u^{2} - \mathrm{Tr}(u)u + N(u) = 0$.}.
+
+\textbf{Lemme 2.} Pour $\Sigma$ de la forme $A = \mathcal{O} + \mathcal{O}u$, sont
+équivalentes : $\Sigma$ strictement fidèle ; $A$ localement libre de rang $2$ et
+$A(s) \to \underline{\mathrm{End}}(E(s))$ injectif en tout point ; $u(s)$ n'est
+scalaire en aucun point ; $E$ est un $A$-Module inversible ; $E$ est un $A$-Module
+localement monogène ; $\underline{\mathrm{End}}(E)$ est un $A$-Module localement
+libre de rang $2$\footnote{Le passage de « $u(s)$ non scalaire » à « $E$ localement
+monogène sur $A$ » est le fait qu'une matrice $2 \times 2$ non scalaire admet un
+vecteur cyclique, suivi de Nakayama ; la page ne détaille pas. Le dossier 82,
+pages 36 à 40, étudie le même commutant $\mathcal{O} + \mathcal{O}u$ d'un
+endomorphisme nulle part scalaire, côté $\mathrm{PGL}_2$.}.
+
+\textbf{Corollaire 1.} Alors $\Delta \simeq (A/\mathcal{O}) \otimes L^{\vee}$, et la forme
+de définition est
+\[
+  Q_\Sigma : E \longrightarrow \Delta' \simeq (A/\mathcal{O})^{\vee} \otimes L.
+\]\footnote{La
+  page écrit $\Delta' \simeq A/\mathcal{O} \otimes L^{\vee}$, ce qui est $\Delta$ et non
+  son dual.}
+Pour une forme $Q : E \to \Delta'$ et une section $x$ de $E$, sont équivalentes :
+$a \mapsto ax$, $A \to E$, est surjectif ; c'est un isomorphisme ; $Q(x)$ est une
+base de $\Delta'$ ; en tout point, $x(s)$ n'est pas vecteur propre de $u(s)$.
+
+\pagerange{17}{18}
+\subsection*{La forme $Q_u$ et le discriminant (pages 17 et 18)}
+
+L'image d'un endomorphisme $u$ dans $\underline{\mathrm{End}}(E)/\mathcal{O} \simeq
+\underline{\mathrm{Quad}}(E, L)$ est la forme
+\[
+  Q_u(x) = x \wedge u(x),
+\]
+nulle si et seulement si $u$ est une homothétie. En coordonnées, pour
+$u = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$,
+$Q_u(\lambda, \mu) = c\lambda^{2} + (d - a)\lambda\mu - b\mu^{2}$, et les $u$ tels que
+$Q_u = \alpha\lambda^{2} + \beta\lambda\mu + \gamma\mu^{2}$ sont les
+\[
+  u_a = \begin{pmatrix} a & -\gamma \\ \alpha & a + \beta \end{pmatrix}, \qquad a \text{ quelconque}
+\]
+--- parmi lesquels $u_0$, de trace $\beta$ et de déterminant $\alpha\gamma$\footnote{La
+formule encadrée de la page écrit $Q_u(x) = u(x) \wedge x$, « il faut vérifier le
+signe ! » ; ses coordonnées, et les matrices $u_a$, suivent $x \wedge u(x)$, qu'on
+retient. Le signe devant $b\mu^{2}$ est couvert d'une tache ; le calcul donne $-$.}.
+
+Pour une forme $Q : E \to \Delta'$, la forme polaire $\varphi_Q$ donne
+$E \to \check{E} \otimes \Delta'$, dont le déterminant est une section
+\[
+  \mathrm{d}(Q) \in \Gamma\bigl((\Delta' \otimes L^{\vee})^{\otimes 2}\bigr),
+\]
+section de $\mathcal{O}$ quand $\Delta' = L$\footnote{Une ligne antérieure écrit
+$\Gamma(\Delta'^{\otimes 2} \otimes L^{\otimes 2})$ ; le calcul qui suit donne
+$L^{\vee \otimes 2}$.}. Et l'on a
+\[
+  \boxed{\ (\mathrm{Tr}\,u)^{2} - 4\det u = -\,\mathrm{d}(Q_u)\ }
+\]
+--- « attention au signe » : avec $\mathrm{d}(Q) = 4\alpha\gamma - \beta^{2}$, les deux
+membres valent $(a - d)^{2} + 4bc$. Dans les conventions de ce texte, le
+discriminant $\delta$ de l'algèbre engendrée par $u$ est celui, $\beta^{2} -
+4\alpha\gamma$, de la forme.
+
+\pagerange{18}{23}
+\subsection*{L'algèbre $A_Q$ d'une forme (pages 18 à 23)}
+
+Soit $Q : E \to \Delta'$ quelconque, nulle ou non. Elle équivaut à
+$u_Q : \Lambda = \Delta \otimes L \to \underline{\mathrm{End}}(E)/\mathcal{O}$, et l'on
+définit $A_Q$ comme l'image réciproque de l'extension des endomorphismes :
+
+\begin{tikzcd}
+0 \arrow[r] & \mathcal{O} \arrow[r] \arrow[d, no head, "=" description] & A_Q \arrow[r] \arrow[d, "u^{!}_Q"] & \Lambda \arrow[r] \arrow[d, "u_Q"] & 0 \\
+0 \arrow[r] & \mathcal{O} \arrow[r] & \underline{\mathrm{End}}(E) \arrow[r] & \underline{\mathrm{End}}(E)/\mathcal{O} \arrow[r] & 0
+\end{tikzcd}
+
+$A_Q$ est localement libre de rang $2$, muni de la section $1_Q$ et de la forme
+$N_Q = \det \circ\, u^{!}_Q$, qui vaut $1$ en $1_Q$. Or un Module localement libre
+de rang $2$ muni d'une section $e$ et d'une forme quadratique $N$ avec $N(e) = 1$
+porte une unique structure d'algèbre commutative d'unité $e$ et de norme $N$ :
+$x^{2} = \varphi_N(x, e)\,x - N(x)\,e$ (c'est l'équivalence (1') $\Leftrightarrow$ (2) de
+la page 58). $A_Q$ est donc une algèbre quadratique, et $u^{!}_Q$ un homomorphisme
+d'algèbres qui respecte trace, norme et involution canonique
+$v \mapsto \bar{v} = \mathrm{Tr}(v) - v$ de $\underline{\mathrm{End}}(E)$.
+
+La construction est fonctorielle pour les isomorphismes et commute aux
+changements de base ; $A_Q \simeq A_{\lambda Q}$ pour $\lambda$ inversible, non pour
+$\lambda = 0$. Sont équivalents : $u^{!}_Q$ universellement injectif ; $Q$ non nulle
+sur toute fibre résiduelle ; $\Delta \to \underline{\mathrm{Quad}}(E)$ universellement
+injectif ; $\Sigma_Q$ strictement fidèle --- et alors $A_Q = A_\Sigma$\footnote{La
+page écrit « structure fidèle » au point d) ; c'est la stricte fidélité que
+demande l'équivalence, et que donne le lemme 2 qu'elle invoque.}. Pour $Q = 0$,
+$A_Q = \mathcal{O} \oplus \Lambda$ avec $\Lambda^{2} = 0$, l'algèbre des nombres duaux,
+et $u^{!}_Q$ tue $\Lambda$\footnote{Le nom de l'algèbre n'est pas lu à la page 22 ;
+la phrase qui précède le donne.}.
+
+\emph{En coordonnées} (2.6). Pour $Q = \alpha\lambda^{2} + \beta\lambda\mu + \gamma\mu^{2}$,
+\[
+  A_Q = \mathcal{O}[u]/(u^{2} - \beta u + \alpha\gamma), \qquad
+  u \longmapsto u_0 = \begin{pmatrix} 0 & -\gamma \\ \alpha & \beta \end{pmatrix}.
+\]
+C'est l'\emph{algèbre de Clifford paire} de $Q$ : dans $C(Q)$, $w = e_1e_2$ vérifie
+$w^{2} = e_1(\beta - e_1e_2)e_2 = \beta w - \alpha\gamma$\footnote{L'identification
+est de l'édition ; le mot n'est pas sur les pages. Pour les formes à valeurs dans
+un fibré en droites, l'algèbre de Clifford paire a été définie par Bichsel et
+Knus (1994) ; la correspondance entre formes binaires et couples (algèbre
+quadratique, module) sur une base quelconque est chez Kneser (\emph{J. Number
+Theory}, 1982) et M.~M. Wood (\emph{Adv. Math.}, 2011). Références de l'édition,
+citées de mémoire ; rien n'indique que l'auteur connût ces travaux, dont le
+premier lui est contemporain.}. Les isomorphismes de transition quand on change
+de bases de $E$ et de $\Delta$ ne sont pas explicités : « Je ne vais pas faire
+l'explicitation ici ».
+
+Le revêtement quadratique associé à $A_Q$ « mérite de s'appeler \emph{l'invariant
+d'Arf} de la forme binaire $Q$ ». Il annonce un invariant d'Arf pour les formes
+scalaires de rang quelconque, en distinguant rang pair et rang impair ; le dossier
+ne le construit pas\footnote{Deux paragraphes portent le numéro 2.6 (pages 22 et
+23). Le nom est conforme à l'usage actuel : pour une forme régulière de rang pair,
+le centre de l'algèbre de Clifford paire est l'algèbre discriminante, dont la
+classe est l'invariant d'Arf, et en rang $2$ l'algèbre de Clifford paire est
+elle-même commutative.}.
+
+\pagerange{23}{27}
+\subsection*{3. Le théorème récapitulatif (pages 23 à 27)}
+
+\textbf{Théorème.} Les catégories fibrées en groupoïdes suivantes, sur la catégorie
+des schémas, sont équivalentes :
+\begin{enumerate}
+\item[(1)] les couples $(E, \Delta)$, $E$ localement libre de rang $2$, $\Delta \subset
+\underline{\mathrm{Quad}}(E)$ un sous-fibré en droites (structures de similitude
+strictement fidèles) ;
+\item[(1')] les triplets $(E, \Delta', Q)$, $Q : E \to \Delta'$ nulle sur aucune fibre
+résiduelle ;
+\item[(2)] les couples $(A, E)$, $A$ algèbre quadratique, $E$ un $A$-Module inversible ;
+\item[(2')] les couples $(X', \Lambda')$, $X'$ revêtement quadratique de $X$, $\Lambda'$
+inversible sur $X'$.
+\end{enumerate}
+
+(1) $\Leftrightarrow$ (1') est la section 1 ; (2) $\Leftrightarrow$ (2') est le dictionnaire des
+spectres ; (1) $\Rightarrow$ (2) est la section 2. Dans l'autre sens, pour $p : X' \to X$,
+\[
+  E = p_{*}\Lambda', \qquad \Delta' = N_{X'/X}(\Lambda'), \qquad Q : p_{*}\Lambda' \to N_{X'/X}(\Lambda') \ \text{l'application norme},
+\]
+la norme d'un Module inversible le long d'un morphisme fini localement
+libre\footnote{Sur la norme le long d'un tel morphisme, voir le dossier 98, pages
+2 à 8 ; aujourd'hui EGA~IV, 21.5, ou SGA~4, XVII, 6.3. Le théorème est, sur une
+base quelconque, la correspondance de Gauss et Dedekind entre formes binaires
+primitives et modules inversibles sur les ordres quadratiques ; voir la note sur
+Kneser et Wood ci-dessus.}.
+
+\textbf{Corollaire 1.} Ces catégories équivalent aussi à celle des couples $(A, P)$,
+$P$ un torseur sous $\mathbb{W}(A)^{*}$, schéma en groupes lisse de dimension
+relative $2$. En termes de $(E, Q)$, $P$ est le schéma des sections locales $x$ de
+$E$ telles que $Q(x)$ soit une base de $\Delta'$ ; inversement $\Delta'$ est le fibré
+en droites déduit de $P$ par la norme $\mathbb{W}(A)^{*} \to \mathbb{G}_m$. Il revient au
+même de prendre des torseurs pour la topologie de Zariski ou fpqc, un module
+inversible sur une algèbre finie sur un anneau local étant libre.
+
+\textbf{Corollaire 2.} Les couples $(E, Q)$, $Q : E \to \mathcal{O}$ \emph{à valeurs
+scalaires} et nulle sur aucune fibre, équivalent aux couples $(A, \Pi)$, $\Pi$ un
+torseur sous $\mathcal{U}_A$ ; $\Pi$ est le schéma des $x$ tels que $Q(x) = 1$. Ici
+la topologie de Zariski ne suffit plus\footnote{La marge dit que fpqc et étale
+« reviennent au même ». C'est vrai quand $\mathcal{U}_A$ est lisse, par exemple si $A$
+est étale ou si $2$ est inversible ; pour $A = \mathcal{O}[\varepsilon]$, $\varepsilon^{2} =
+0$, en caractéristique $2$, $\mathcal{U}_A$ n'est pas lisse et il faut la topologie
+fppf.}.
+
+\emph{Les racines de la forme.} Le revêtement quadratique de $Q$ est le
+sous-schéma $Q = 0$ du fibré projectif des droites de $E$ : à une section de
+$\operatorname{Spec} A$, c'est-à-dire à un homomorphisme $A \to \mathcal{O}$ de noyau $J$,
+répond la droite $D = J\cdot E$, sur laquelle $Q$ est nulle, et toute droite
+isotrope est de cette forme. (On peut supposer $E = A$ et $Q$ la norme, et
+c'est immédiat.)
+
+\pagerange{27}{34}
+\subsection*{4. Le point de vue de l'algèbre d'Azumaya (pages 27 à 34)}
+
+La notion de structure de similitude, et ses variantes, « ne dépend que de $E$ à
+tensorisation près par un Module inversible », donc seulement de l'algèbre
+d'Azumaya $\mathcal{M} = \underline{\mathrm{End}}(E)$, de rang $4$\footnote{La page écrit
+« de rang $4$ sur $E$ » ; c'est sur $\mathcal{O}$.}. Pour une algèbre d'Azumaya
+$\mathcal{M}$ de rang $4$ quelconque (une algèbre de quaternions), une structure de
+similitude est un sous-Module localement monogène de
+$\mathcal{M}/\mathcal{O}\cdot 1$, qui « joue le rôle du Module des formes
+quadratiques » ; dans le cas strictement fidèle, le revêtement quadratique associé
+est l'intersection de $\mathbb{P}(A) \subset \mathbb{P}(\mathcal{M})$ avec la quadrique
+de la norme réduite, $\mathrm{Nrd}_{\mathcal{M}}(x) = 0$ --- tautologiquement, puisque
+la norme réduite induit sur $A$ sa norme\footnote{Le dossier 82, pages 46 à 55,
+développe la même géométrie : algèbre de quaternions, norme réduite, involution
+canonique, et la conique des éléments de trace et de norme nulles.}.
+
+\emph{Que devient le $A$-Module $E$ ?} Il n'est plus défini qu'à un facteur près
+venu de la base, $\Lambda \mapsto \Lambda \otimes p^{*}\Theta$ sur $X'$. Mais
+$\Lambda \otimes \sigma^{*}\Lambda^{-1}$ ne change pas, et sa norme est triviale. On
+s'attend donc à trouver un $A$-Module canonique, ou, ce qui revient au même, une
+réduction à $\mathcal{U}_A$ du groupe structural $\mathbb{W}(A)^{*}$.
+
+\emph{Une hypothèse fausse} (pages 29 à 31). Le candidat évident est
+$\mathcal{M}/A$, inversible sur $A$ dans le cas strictement fidèle. Pour
+$\mathcal{M} = \underline{\mathrm{End}}(E)$, il cherche un isomorphisme canonique,
+à scalaire près, $E \simeq \underline{\mathrm{End}}(E)/A$. Le calcul des déterminants
+sur $A$ des deux structures, gauche et droite, de $\underline{\mathrm{End}}(E) \simeq E
+\otimes \check{E}$ donne
+\[
+  \underline{\mathrm{End}}(E)/A \simeq \det\nolimits_A \underline{\mathrm{End}}(E) \simeq
+  E^{\otimes_A 2} \otimes \check{L} \simeq \check{E}^{\otimes_A 2} \otimes L .
+\]
+Un isomorphisme $E \simeq \underline{\mathrm{End}}(E)/A$ reviendrait à une base de
+$E \otimes \check{L}$ sur $A$, c'est-à-dire à une droite canonique dans $E$ ; il n'y
+en a pas. « Donc la supposition du début est erronée. »\footnote{La page 29 se
+termine sur un passage barré (une identification de $\check{\mathbb{P}}(E)$ avec les
+droites de norme nulle des endomorphismes de trace nulle) ; la page 30 note que
+le membre de droite cherché est une conique $C$ dans $\mathbb{P}(\mathcal{M}^{+})$,
+qui n'est pas en général le projectivisé d'un fibré de rang $2$. La première
+formule de la page 31 porte une surcharge ; on suit la page 30.}
+
+\emph{En rectifiant le tir} (pages 32 et 33). Il pose, localement sur une base
+$(1, u)$ de $A$,
+\[
+  \varphi_u : \mathcal{M} \to \mathcal{M}, \qquad \theta \longmapsto u\theta - \theta\bar{u},
+\]
+$A$-linéaire pour la structure gauche, qui ne dépend que de l'image de $u$ dans
+$A/\mathcal{O}$ ; d'où une suite exacte de $A$-Modules à gauche
+$\mathcal{M} \otimes \check{\Lambda} \to \mathcal{M} \to C \to 0$, $C = \operatorname{Coker}
+\varphi_u$, et le Module cherché $E \otimes_A \check{E}^{\otimes_A -1} \simeq C$\footnote{La
+page écrit $\mathcal{M}/\mathcal{M}^{\natural}$, avec un signe lu comme un bécarre, et
+note le conoyau $\Delta$ ; on l'appelle $C$ pour ne pas le confondre avec le
+$\Delta$ de la section 1.}. Il faudrait maintenant un isomorphisme canonique
+$N_{A/\mathcal{O}}(C) \simeq \mathcal{O}$ ; il n'est pas construit. L'autodualité
+$\langle\theta, \theta'\rangle = \mathrm{Trd}(\theta\bar{\theta}')$ de $\mathcal{M}$
+donne ${}^{t}\varphi_u = \varphi_{\bar{u}} = -\varphi_u$, donc le dual de
+$\operatorname{Coker}\varphi_u$ est $\operatorname{Ker}\varphi_u$, et à un Module inversible de
+la base près, $C$ est le dual sur $A$ de $\operatorname{Ker}\varphi_u$.
+
+Or les sections inversibles de ce noyau ont un sens clair :
+\[
+  \{\theta \in \mathcal{M}^{*} \mid \theta u = \bar{u}\theta\}
+  = \{\theta \text{ qui normalise } A \text{ et y induit } \sigma\},
+\]
+pseudo-torseur sous le centralisateur $A^{*}$ de $A$, et torseur puisque, dans
+$\mathbb{M}_2(\mathcal{O})$, $u$ et $\bar{u}$, de même trace et même norme et nulle
+part scalaires, sont localement conjugués.
+
+\pagerange{34}{38}
+\subsection*{L'unicité de la conjugaison (pages 34 et 38)}
+
+\textbf{Proposition} (le corollaire de la page 35, précisé). Soit $A$ une algèbre
+quadratique, étale en tout point de
+$X_0 = V(2\cdot 1_X)$. Tout automorphisme d'algèbre $\theta$ de $A$ induisant
+$-\mathrm{id}$ sur $A/\mathcal{O}$ coïncide, au voisinage de chaque point, avec
+l'involution canonique $\sigma$ ou avec l'identité, et le second cas ne se produit
+qu'au voisinage de points où $2 = 0$. En particulier $\sigma$ est le seul tel
+automorphisme qui ne soit l'identité au voisinage d'aucun point.
+
+\emph{Démonstration} (pages 34 et 38). Localement $A = \mathcal{O}[u]/(u^{2} + bu + c)$
+et $\theta(u) = \bar{u} + \alpha$ ; trace et norme conservées donnent $2\alpha = 0$ et
+$\alpha(\alpha - b) = 0$. Hors de $X_0$, $\alpha = 0$. En $s \in X_0$, $b_s$ est
+inversible (étalité). Si $\alpha_s$ est inversible, $\alpha = b$ près de $s$, donc
+$2b = 0$, donc $2 = 0$ près de $s$, et $\theta(u) = -b - u + b = u$ : $\theta$ est
+l'identité près de $s$. Sinon $\alpha_s \in \mathfrak{m}_s$, $\alpha_s - b_s$ est
+inversible, et $\alpha = 0$ près de $s$\footnote{La page 34 affirme d'abord, dans un
+passage barré, l'alternative $\alpha(s) = 0$ ou $\alpha(s) = b(s)$ ; la suite,
+reliée par un trait, la remplace, et la page 38 l'achève (« cqfd »). Le corollaire
+de la page 35 énonce l'unicité sans la restriction ; or en caractéristique $2$
+l'identité induit aussi $-\mathrm{id} = \mathrm{id}$ sur $A/\mathcal{O}$, et la
+proposition de la même page ajoute bien une condition, « l'identité au voisinage
+\ldots », que sa marge dit nécessaire seulement en certains points. On énonce ce
+que la démonstration établit. Le même phénomène, $gug^{-1} = u + \mathrm{Tr}\,u$ en
+caractéristique $2$, est au dossier 82, page 40.}.
+
+Sans étalité, l'unicité tombe : pour $A = \mathcal{O}[u]/(u^{2})$, les
+automorphismes induisant $-\mathrm{id}$ sur $A/\mathcal{O}$ sont les $u \mapsto -u +
+\alpha$ avec $2\alpha = 0$, $\alpha^{2} = 0$, et en caractéristique $2$ les
+$u \mapsto u + \alpha$, $\alpha^{2} = 0$ --- nombreux sur une base non réduite,
+réduits à l'identité sur une base réduite.
+
+\pagerange{35}{41}
+\subsection*{4.2. Symétries (pages 37, 36, 35, 39 à 41)}
+
+Soient $(E, \Delta', Q)$ strictement fidèle et $D \subset E$ un sous-fibré en droites
+\emph{totalement non isotrope} : $Q|D$ non nulle sur chaque fibre. Quitte à
+tensoriser par $D^{-1}$, on suppose $D = \mathcal{O}e$, $Q$ scalaire et $Q(e) = 1$.
+Alors $f : A \to E$, $a \mapsto ae$, est un isomorphisme de modules quadratiques,
+puisque $Q(ax) = N(a)\,Q(x)$ ; il transporte la structure d'algèbre de $A$ en
+l'unique structure d'unité $e$ et de norme $Q$. On \emph{définit} la symétrie
+$\sigma_D$ en transportant l'involution canonique :
+\[
+  \sigma_D(ae) = \bar{a}\,e, \qquad \text{c'est-à-dire} \qquad \sigma_D(x) = \varphi_Q(e, x)\,e - x .
+\]
+Elle induit $\mathrm{id}$ sur $D$, $-\mathrm{id}$ sur $E/D$, et $\det\sigma_D = -1$. Si
+$2$ est inversible, $\sigma_D(x) = 2(e\cdot x)\,e - x$ : c'est la symétrie
+orthogonale d'axe $D$ du plan, l'opposée de la réflexion d'hyperplan
+$e^{\perp}$\footnote{En général $D^{\perp}$ n'est pas un supplémentaire de $D$, d'où
+la définition par $E/D$. La page écrit « symétrie p.r.\ à la \emph{droite} $D$ ».}.
+
+\textbf{Proposition} (page 35). Si $A$ est étale en tout point de $X_0$, $\sigma_D$ est
+l'unique automorphisme de la structure de similitude qui induise $\mathrm{id}$ sur
+$D$, $-\mathrm{id}$ sur $E/D$, et ne soit l'identité au voisinage d'aucun point.
+C'est la proposition précédente, transportée par $f$.
+
+\textbf{Lemme} (page 39). $\sigma_D$ normalise $A \subset \underline{\mathrm{End}}(E)$ et y
+induit l'involution canonique : $\sigma_D\,u\,\sigma_D^{-1} = \bar{u}$. Pour $E = A$,
+$D = \mathcal{O}\cdot 1$, c'est $\overline{u\bar{x}} = \bar{u}x$.
+
+\textbf{Proposition} (pages 39 et 40). Soient
+\[
+  \mathcal{J} = \{\theta \in \underline{\mathrm{End}}(E) \mid \theta u = \bar{u}\theta \ \text{pour } u \in A\}, \qquad
+  \Pi = \{\theta \in \mathcal{J} \mid \det\theta = -1\}.
+\]
+\begin{enumerate}
+\item[a)] $\mathcal{J}$ est un sous-fibré de rang $2$ de $\underline{\mathrm{End}}(E)$,
+sous-$A$-Module à gauche et à droite, les deux structures liées par $u\theta =
+\theta\bar{u}$ ; c'est un $A$-Module inversible.
+\item[b)] $\Pi$ est un torseur sous $\mathcal{U}_A$ pour la multiplication, localement
+trivial pour Zariski, puisqu'il contient les $\sigma_D$\footnote{La page 37 définit
+le même torseur par la condition « Norme $1$ » ; les pages 39 et 40 prennent
+$\det\theta = -1$, qui est la bonne normalisation : elle contient les symétries.
+Un essai de démonstration est barré page 40.}.
+\item[c)] Soit $P^{*} = \mathbb{P}(E) - X'$ le schéma des droites totalement non
+isotropes de $E$\footnote{La page dit « de $A$ ».}. $\mathbb{W}(A)^{*}$ y opère, à
+travers $\mathbb{W}(A)^{*}/\mathbb{G}_m$, et $D \mapsto \sigma_D$ est une application
+$f : P^{*} \to \Pi$ telle que
+\[
+  f(u\cdot D) = u\bar{u}^{-1} f(D) \qquad (u \in \mathbb{W}(A)^{*}),
+\]
+compatible avec l'homomorphisme $u \mapsto u\bar{u}^{-1}$ de la page 5 ; sur
+$\mathcal{U}_A$, celui-ci est $u \mapsto u^{2}$ (page 41). En effet $\sigma_{uD} =
+u\sigma_Du^{-1} = u\bar{u}^{-1}\sigma_D$ par le lemme.
+\end{enumerate}
+Le module $\mathcal{J}$, inversible sur $A$, et son torseur $\Pi$ sous $\mathcal{U}_A$,
+sont la réponse à la question de la page 28 que les pages 32 et 33 avaient
+approchée : $\mathcal{J}$ est, au signe près de l'involution, le noyau de
+$\varphi_u$\footnote{Ce rapprochement est de l'édition ; les pages ne le font
+pas.}. La page 41 s'arrête sur l'équivariance.
+
+\pagerange{42}{121}
+\section*{II. $\chi$-scindages, produits contractés, revêtements quadratiques (pages 42 à 121)}
+
+La feuille de couverture, sur papier à musique, numérotée « (79) », porte le
+titre : « $\chi$-scindages, produits contractés d'extensions $\chi$-scindées,
+produits contractés de revêtements quadratiques, invariants
+d'Hasse--Stiefel--Whitney généralisés, etc. »\footnote{La transcription lit
+« $X$-scindages » ; c'est la lettre $\chi$ des pages 65 et suivantes. Les invariants
+d'Hasse--Stiefel--Whitney n'apparaissent nulle part dans le dossier.}
+
+\pagerange{43}{47}
+\subsection*{Un revêtement quadratique comme fonction polynôme (pages 43 à 47)}
+
+Avec les conventions posées plus haut, $N(1) = 1$ et $T(1) = 2$ ; $\mathrm{Sym}^{2}E$
+a une suite de composition de quotients $\mathcal{O}$, $L$, $L^{\otimes 2}$, et
+\[
+  \boxed{\ T^{2} - 4N = \delta\ }, \qquad \delta \in \Gamma L^{\otimes 2}.
+\]
+Dans le cas décomposé $A = \mathcal{O} \times \mathcal{O}$, les deux projections
+$x', x''$ donnent $T = x' + x''$, $N = x'x''$, $\delta = (x' - x'')^{2}$\footnote{Le
+signe de la seconde formule encadrée est couvert d'une tache ; on le donne tel que
+le calcul l'exige. La marge, « attention au signe », rappelle que $\delta$ est le
+discriminant de $N$ changé de signe. Elle note aussi $\varphi_N(x, y) =
+\mathrm{Tr}(x)\mathrm{Tr}(y) - \mathrm{Tr}(xy)$.}.
+
+Ce cas suggère la fonction $x \mapsto (x - x')(x - x'')$ sur $P_1$, c'est-à-dire
+$x \mapsto x^{2} - Tx + N$, et la forme quadratique sur $E$
+\[
+  Q(x) = x^{2} - \psi(x)\,Tx + \psi(x)^{2}N ,
+\]
+définie sans supposer $x', x''$, à valeurs dans $\mathrm{Sym}^{2}E$ mais en fait dans
+$L^{\otimes 2}$ (« argument universel »), et dont la restriction à $L$ est
+$u \mapsto u^{2}$. D'où une équivalence de catégories fibrées entre revêtements
+quadratiques et triplets $(L, P_1, Q)$, $P_1$ un $L$-torseur et
+$Q : P_1 \to L^{\otimes 2}$ une fonction polynôme de degré $2$ de partie homogène
+$u \mapsto u^{2}$ ; le revêtement est le schéma des zéros de $Q$ dans le fibré
+affine $P_1$.
+
+La forme polaire de $N$ donne $\varphi_N : A \to E$, et
+\[
+  \boxed{\ Q(\varphi_N(x)) = -N(x)\,\delta\ }
+\]
+(vérifiable sur le cas décomposé, ou sur les formules de la page 52)\footnote{Le
+signe est couvert page 46 ; page 52 il écrit $+N(x)\delta$, mais le calcul
+qu'il y fait donne $-$, et la page 97 encadre $-N(x)\delta$.}. Sont équivalents :
+$X'$ étale sur $X$ ; $\varphi_N$ isomorphisme ; $\delta$ inversible. Si $\delta = 0$,
+$Q \circ \varphi_N = 0$.
+
+\emph{Le cas où $2$ est inversible.} L'application $x \mapsto z = 2x - T$, $P_1 \to L$,
+est un isomorphisme si $2$ est inversible, et
+\[
+  Q(T + z) = z^{2} - \delta, \qquad 4Q(x) = Q(2x) = Q(T + z).
+\]
+Une section $x$ de $X'$ donne donc une racine carrée $z$ de $\delta$, et
+réciproquement quand $2$ est inversible : c'est la théorie de Kummer. L'involution
+du revêtement est $x \mapsto \bar{x} = \psi(x)T - x$, et $\bar{z} = -z$\footnote{La
+page 47 écrit « $\psi(T) = T$, $\psi(N) = N$ » ; la lettre est douteuse, et l'on lit
+l'invariance de $T$ et $N$ par l'involution.}.
+
+\emph{Ce qui reste quand $2$ ne l'est pas.} Sur $X_0 = V(2)$, $\psi(T) = 2 = 0$, donc
+$T$ y est une section $T_0$ de $L_0$, et $T_0^{2} = \delta_0$. Mieux : tout relèvement
+local $\tau$ de $T_0$ en une section de $L$ vérifie $\tau^{2} \equiv \delta$ modulo
+$4L^{\otimes 2}$, indépendamment du relèvement, puisque $(\tau + 2a)^{2} \equiv \tau^{2}$
+modulo $4$. Il l'écrit
+\[
+  \boxed{\ T_0^{2} \equiv \delta \pmod 4\ }.
+\]
+Si $x$ est une section de $X'$ et $z = 2x - T$, alors $z^{2} = \delta$ et $z_0 = T_0$ :
+$z$ est une racine carrée de $\delta$ qui prolonge celle, $T_0$, déjà donnée sur
+$X_0$.
+
+\pagerange{48}{53}
+\subsection*{Quand $2$ est régulier : les triplets $(L, \delta, T_0)$ (pages 48 à 53)}
+
+Le foncteur $\mathfrak{X}'$ des racines carrées $z$ de $\delta$ telles que $z_0 = T_0$
+est un faisceau fpqc, non représentable en général ; il est torseur, si $\delta$ est
+inversible, sous $\mu'_2 = \{\lambda : \lambda^{2} = 1,\ \lambda_0 = 1\}$, et $f : X' \to
+\mathfrak{X}'$, $x \mapsto 2x - T$, est compatible à $(\mathbf{Z}/2)_X \to \mu'_2$ :
+$f(\bar{x}) = -f(x)$\footnote{La marge précise : non représentables s'il existe un
+point où $2 \in \mathfrak{m}_x$ sans être nul dans $\mathcal{O}_{X,x}$.}.
+
+\textbf{Théorème.} Supposons $2$ non diviseur de zéro dans $\mathcal{O}_X$. La donnée
+d'un revêtement quadratique de $X$ équivaut à celle d'un triplet
+\[
+  (L, \delta, T_0), \qquad L \text{ inversible}, \quad \delta \in \Gamma L^{\otimes 2}, \quad
+  T_0 \in \Gamma(X_0, L_0), \qquad T_0^{2} \equiv \delta \pmod 4 .
+\]
+Puisque $X - X_0$ est schématiquement dense, une section $x$ est connue par
+$z = 2x - T$, et l'on reconstruit tout en divisant par $2$ ou $4$ là où c'est
+permis. Pour $\tau$ un relèvement local de $T_0$ :
+\[
+  \Gamma E = \{(\lambda, \zeta) \mid \lambda \in \Gamma\mathcal{O},\ \zeta \in \Gamma(\lambda\tau + 2L)\},
+  \qquad \lambda = \psi(x),\ \zeta = 2x - \psi(x)T ,
+\]
+\[
+  \Gamma A = \{(b, \gamma) \in \Gamma\mathcal{O} \times \Gamma\check{L} \mid b_0 = \gamma_0 T_0\},
+  \qquad b = \mathrm{Tr}(x),
+\]
+avec l'unité $(2, 0)$, la trace $T(b, \gamma) = b$, la norme et le produit
+\[
+  N(b, \gamma) = \frac{b^{2} - \gamma^{2}\delta}{4}, \qquad
+  (b, \gamma)(b', \gamma') = \Bigl(\frac{bb' + \gamma\gamma'\delta}{2}, \frac{b\gamma' + \gamma b'}{2}\Bigr),
+\]
+le couplage $\langle (b, \gamma), (\lambda, \zeta)\rangle = \tfrac{1}{2}(\lambda b +
+\gamma\zeta)$, l'application $\varphi_N(b, \gamma) = (b, -\gamma\delta)$, et la forme
+\[
+  Q(\lambda, \zeta) = \frac{\zeta^{2} - \lambda^{2}\delta}{4} .
+\]
+Chaque division est légitime : $b \equiv \gamma T$ et $\zeta \equiv \lambda T$ modulo $2$,
+d'où $b^{2} - \gamma^{2}\delta \equiv \gamma^{2}(T^{2} - \delta) \equiv 0$ modulo $4$, et de
+même pour $\zeta$ ; il le vérifie à chaque étape. La forme $Q$ est proportionnelle à
+celle de la page 45, puisqu'elles ont les mêmes zéros sur $P_1$, et le facteur est
+$1$ : en $y = T = (2, 0)$, les deux valent $-\delta$\footnote{La première lecture,
+« $\xi \in \Gamma(\tfrac{\lambda\tau}{2} + L)$ », est remplacée par la description encadrée
+en $\zeta = 2\xi$ ; la marge dit « ne dépend pas du choix de $L$ », pour « de
+$\tau$ ». La lettre lue $\varphi$ page 50 est douteuse. Les signes de deux lignes de la
+page 52 sont couverts ; on les donne d'après la formule encadrée.}.
+
+Sur $\mathbf{Z}$, où $L = \mathcal{O}$, $X_0 = \operatorname{Spec}\mathbf{F}_2$ et
+$T_0 \in \mathbf{F}_2$, la condition $T_0^{2} \equiv \delta$ modulo $4$ dit exactement
+que $\delta \equiv 0$ ou $1$ modulo $4$, et que $T_0$ est déterminé par $\delta$ : le
+théorème généralise la classification classique des anneaux quadratiques par leur
+discriminant, avec la congruence de Stickelberger\footnote{Rapprochement de
+l'édition.}.
+
+\pagerange{53}{55}
+\subsection*{Torseurs sous $\mu_2$ et sous $\mathbf{Z}/2$ (pages 53 à 55)}
+
+L'homomorphisme $(\mathbf{Z}/2)_X \to \mu_{2,X}$ donne, si $2$ est régulier, le
+diagramme
+
+\begin{tikzcd}[column sep=small, nodes={font=\small}]
+\mathrm{Tors}(\mathbf{Z}/2) \arrow[r, "\mathrm{Ass}"] \arrow[d, "\wr"] & \mathrm{Tors}(\mu_2) \arrow[r, "\mathrm{Oub}"] \arrow[d, "\wr"] & \mathrm{RevQuad}(X) \arrow[d, "\wr"] \\
+\{(L, \delta, T_0),\ \delta \text{ inv.}\} \arrow[r, "\mathrm{Ass}'"] & \{(L, \theta),\ \theta \text{ inv.}\} \arrow[r, "\mathrm{Oub}'"] & \{(L, \delta, T_0)\}
+\end{tikzcd}
+
+avec $\mathrm{Ass}'(L, \delta, T_0) = (L, \delta)$ et $\mathrm{Oub}'(L, \theta) = (L, 4\theta, 0)$ :
+le $\mu_2$-torseur $z^{2} = \theta$ vu comme revêtement quadratique, de discriminant
+$4\theta$ et de trace nulle. $\mathrm{Oub}'$ ne commute pas aux produits, même si $2$
+est inversible : $(LL', 16\theta\theta')$ n'est pas en général isomorphe à
+$(LL', 4\theta\theta')$ --- sur $\mathbf{Z}$, avec $\theta = \theta' = 1$, il faudrait une
+unité de carré $4$.
+
+Les revêtements quadratiques forment au contraire une catégorie monoïdale
+symétrique pour
+\[
+  (L, \delta, T_0) * (L', \delta', T'_0) = (L \otimes L', \delta\delta', T_0T'_0),
+\]
+qui prolonge le produit contracté des $(\mathbf{Z}/2)$-torseurs ; la condition
+$(T_0T'_0)^{2} \equiv \delta\delta'$ modulo $4$ se vérifie aussitôt. C'est ce produit que
+la suite du dossier construit sans l'hypothèse « $2$ régulier ».
+
+\emph{Une catégorie mixte.} Soit $\mathrm{RevQuad}^{!}(X)$ la sous-catégorie pleine des
+revêtements de $T_0 = 0$ : trace nulle sur $X_0$, norme additive sur $X_0$. Il
+définit une catégorie monoïdale des couples $(n, \mathfrak{X})$, $n \in \mathbf{Z}/2$ une
+parité, $\mathfrak{X} \in \mathrm{RevQuad}^{!}$ si $n = 1$, avec le produit usuel si
+l'une des parités est paire, et, pour deux impaires,
+\[
+  (L, \delta, 0) *^{!} (L', \delta', 0) = (L \otimes L', \tfrac{1}{4}\delta\delta', 0) :
+\]
+$T_0 = 0$ force $\delta = 4\Delta$ localement, et $\tfrac{1}{4}\delta\delta' := 4\Delta\Delta'$ ne
+dépend pas du choix de $\Delta$ à un $h$ près avec $4h = 0$\footnote{Si $2$ est
+régulier, $h = 0$ et $\Delta$ est unique ; la latitude en $h$ prépare le cas
+général. La marge de la page 54 dit que ce qui suit « doit être repris de façon
+plus fine », en remplaçant les revêtements quadratiques par des
+$\mu_2$-revêtements ; la fin en est illisible.}. Il reste à « lui donner un sens
+indépendamment de la condition $2$ régulier, exercice catégorique universel » ;
+le dossier ne le fait pas. C'est la même intention que celle des pages 1 et 2.
+
+\pagerange{56}{57}
+\subsection*{En caractéristique $2$ (pages 56 et 57)}
+
+Si $2 = 0$ sur $X$, l'application $f_T : L \to L^{\otimes 2}$, $u \mapsto u^{2} + Tu$,
+est additive (et semi-linéaire pour le Frobenius) ; elle est étale si et seulement
+si $T$ est inversible, et s'identifie alors à l'application d'Artin--Schreier
+$u \mapsto u^{2} + u$. Son noyau $G_T$ est un schéma en groupes fini localement
+libre d'ordre $2$, étale si et seulement si $T$ est inversible\footnote{C'est un
+des schémas en groupes d'ordre $2$ de la classification de Tate et Oort (1970) ;
+le nom n'est pas sur la page.}. Si $x$ est une section de $X'$, $Q(x + u) = Q(x) +
+u^{2} + Tu$ ; donc $X'$ est un torseur sous $G_T$.
+
+\textbf{Théorème.} Sur les schémas de caractéristique $2$ (ou les topos localement
+annelés de caractéristique $2$), les revêtements quadratiques équivalent aux
+données $(L, P_1, T, \alpha)$ : $L$ inversible, $P_1$ un $L$-torseur, $T \in \Gamma L$,
+$\alpha$ une section du $L^{\otimes 2}$-torseur $f_{T*}P_1$ déduit de $P_1$ par $f_T$.
+Le revêtement est la fibre en $\alpha$ de l'application canonique
+$P_1 \to f_{T*}P_1$, torseur sous $G_T$ : « Plus de doute, c'est lui ! »\footnote{En
+marge : l'application $P_1 \to P_1^{(2)}$, $x \mapsto Tx + N$, compatible à $u \mapsto
+Tu$, et l'équation $Q(x) = 0$ s'écrit $x^{2} = Tx + N$.}
+
+Le produit contracté s'y lit sans peine : $(u, u') \mapsto uT' + Tu'$ est un
+homomorphisme $G_T \times G_{T'} \to G_{TT'}$, puisque $f_{TT'}(uT') = T'^{2}f_T(u)$, et
+l'extension du groupe structural donne $\mathfrak{X} * \mathfrak{X}'$, torseur sous
+$G_{TT'}$.
+
+\pagerange{58}{61}
+\subsection*{Quatre catégories équivalentes (pages 58 à 61)}
+
+Sur les schémas, ou sur les topos localement annelés, sont canoniquement
+équivalentes :
+\begin{enumerate}
+\item[(1)] les revêtements quadratiques $X'/X$ ; (1') les $\mathcal{O}$-algèbres
+commutatives localement libres de rang $2$ ;
+\item[(2)] les triplets $(A, N, e)$, $(A, N)$ un module quadratique localement libre de
+rang $2$, $e$ une section avec $N(e) = 1$ ;
+\item[(3)] les triplets $(L, P, Q)$, $Q : P \to L^{\otimes 2}$ polynomiale de partie
+homogène $u \mapsto u^{2}$, c'est-à-dire $Q(x + u) = Q(x) + u^{2} + \ell_x(u)$ avec
+$\ell_x$ affine en $x$ ;
+\item[(3')] les couples formés d'une extension $0 \to L \to E \xrightarrow{\psi}
+\mathcal{O} \to 0$, $L$ inversible, et d'une forme $Q : E \to L^{\otimes 2}$ de
+restriction $u \mapsto u^{2}$ à $L$.
+\end{enumerate}
+La fonction $Q(x) - x^{2}$ sur $P$ est affine (sa partie quadratique est nulle).
+Dans un scindage $e \in \Gamma P_1$, $Q(e + u) = u^{2} + bu + c$, et
+\[
+  Q(x) = x^{2} - xT + N, \qquad \boxed{T = 2e - b, \quad N = e^{2} + c - be}, \qquad \psi(T) = 2,\ N(e) = 1,
+\]
+indépendants du scindage. Le couple $(T, N)$ est un point d'un torseur sous
+$L^{\otimes 2} \otimes \check{E} \simeq L \otimes E$ (pour $E$ de rang $2$,
+$E \simeq \check{E} \otimes \det E$), l'espace des applications affines $P_1 \to
+L^{\otimes 2}$, celle définie par $\xi \in L \otimes E$ étant $x \mapsto x \wedge \xi$.
+Inversement, $(T, N)$ provient d'une $Q$ si et seulement si $\psi(T) = 2$, $N(e) = 1$, et
+$T(x) = \varphi_N(x, e)$ : « $N$ détermine $T$ ». La condition $4N - T^{2} \in
+L^{\otimes 2}$ ne suffit pas ; en coordonnées, $T = 2x_0 + t$ et $N = x_0^{2} - bx_0 + c$
+exigent $t = -b$, et alors
+\[
+  Q(x_0 + u) = u^{2} + bu + c, \qquad \delta = T^{2} - 4N = b^{2} - 4c .
+\]
+
+\pagerange{62}{65}
+\subsection*{Le produit contracté, deviné (pages 62 à 65)}
+
+On veut un produit $X_1 * X_2$ avec $L(X_1 * X_2) = L_1 \otimes L_2$, $\delta = \delta_1\delta_2$,
+et une application $(x_1, x_2) \mapsto x_1 * x_2$, $P_{X_1} \times P_{X_2} \to P_{X_1 *
+X_2}$, qui envoie $X_1 \times X_2$ dans $X_1 * X_2$. Dans des scindages, il pose
+$b = b_1b_2$ (« sauf erreur ») et en tire $c$ par $4c = b^{2} - \delta$ :
+\[
+  \boxed{\ c = c_1\delta_2 + c_2\delta_1 + 4c_1c_2 = b_2^{2}c_1 + b_1^{2}c_2 - 4c_1c_2\ }
+\]
+--- expression qui, sous sa seconde forme, n'a plus de dénominateur\footnote{L'encadré
+de la page 63 écrit « $4c_1c_1$ » ; le calcul et le membre de droite donnent
+$4c_1c_2$. Le tableau de la page 62 mêle les indices ; on lit $b_i \in \Gamma L_i$,
+$c_i \in \Gamma L_i^{\otimes 2}$.}. Puis : « Je devine qu'on a »
+\[
+  (x_1 + u_1) * (x_2 + u_2) = x_1 * x_2 + (u_1b_2 + u_2b_1 + 2u_1u_2).
+\]
+Il le vérifie par l'identité, valable pour tous $u_i \in \Gamma L_i$, où
+$Q_i(u_i) = u_i^{2} + b_iu_i + c_i$ et $u = u_1b_2 + u_2b_1 + 2u_1u_2$ :
+\[
+  u^{2} + bu + c = b_2^{2}Q_1(u_1) + b_1^{2}Q_2(u_2) + 4\bigl[Q_1(u_1)Q_2(u_2) - c_1Q_2(u_2) - c_2Q_1(u_1)\bigr],
+\]
+qui s'annule quand $Q_1(u_1) = Q_2(u_2) = 0$\footnote{On a refait le développement :
+il est exact. La page porte des essais biffés ; l'accolade « $-4c_1c_2$ » sous
+$4(c_1c_2 - c_1c_2 - c_1c_2)$ est la sienne.}. Il en retient, sous forme
+intrinsèque,
+\[
+  \boxed{\ Q(x_1 * x_2) = Q_1(x_1)\,\delta_2 + Q_2(x_2)\,\delta_1 + 4\,Q_1(x_1)Q_2(x_2)\ } .
+\]
+L'identité ci-dessus montre que cette formule, si elle vaut pour un couple de
+points de base, vaut pour tous : son second membre se réécrit
+$Q_1\delta_2 + Q_2\delta_1 + 4Q_1Q_2$ avec $Q_i = Q_i(x_i + u_i)$.
+
+\pagerange{65}{79}
+\subsection*{Digression affine : les torseurs $\chi$-trivialisés (pages 65 à 79)}
+
+Soit $\chi \in \Gamma\mathcal{O}$ fixé. Il considère les extensions
+$0 \to L \to E \xrightarrow{\psi} \mathcal{O} \to 0$ (c'est-à-dire les $L$-torseurs
+$P = \psi^{-1}(1)$) munies d'une \emph{$\chi$-trivialisation}, donnée sous l'une des
+trois formes équivalentes :
+\begin{itemize}
+\item une section $T$ de $E$ avec $\psi(T) = \chi$ (une trivialisation de
+$P \wedge^{L}(L \xrightarrow{\chi} L)$) ;
+\item une « $\chi$-section » $\mathcal{O} \to E$, $\lambda \mapsto \lambda T$ ;
+\item une « $\chi$-rétraction » $\pi : E \to L$, $\pi|_L = \chi\,\mathrm{id}_L$.
+\end{itemize}
+Elles se correspondent par
+\[
+  \boxed{\ \pi(x) = \chi x - \psi(x)\,T\ } ;
+\]
+en effet $\psi(\chi x - \psi(x)T) = 0$, et réciproquement $\chi x - \pi(x)$, nul sur $L$,
+se factorise par $E/L = \mathcal{O}$\footnote{À partir de la page 66, le module noté
+$M$ page 65 devient $L$ ; plusieurs $M$ sont surchargés en $L$. Page 67, « section
+locale $x$ de $U$ » se lit « de $E$ ».}. Pour $\chi = 2$ et $E = \check{A}$, $T$ est la
+trace, et $b = \pi(x_0) = 2x_0 - T$ est le $b$ des scindages.
+
+\emph{Le produit.} Pour deux telles extensions, soit $E_1 \otimes_0 E_2 = L_1 \otimes E_2 +
+E_1 \otimes L_2 \subset E_1 \otimes E_2$, noyau de $\psi_1 \otimes \psi_2$, et
+$\mu : E_1 \otimes_0 E_2 \to L_1 \otimes L_2$ défini par $\mathrm{id} \otimes \pi_2$ sur
+$L_1 \otimes E_2$ et $\pi_1 \otimes \mathrm{id}$ sur $E_1 \otimes L_2$ --- qui coïncident,
+égaux à $\chi$, sur $L_1 \otimes L_2$. Le produit $E_1 * E_2$ est la somme amalgamée :
+
+\begin{tikzcd}
+0 \arrow[r] & E_1 \otimes_0 E_2 \arrow[r] \arrow[d, "\mu"] & E_1 \otimes E_2 \arrow[r, "\psi_1 \otimes \psi_2"] \arrow[d] & \mathcal{O} \arrow[r] \arrow[d, no head, "=" description] & 0 \\
+0 \arrow[r] & L_1 \otimes L_2 \arrow[r] & E_1 * E_2 \arrow[r, "\psi"] & \mathcal{O} \arrow[r] & 0
+\end{tikzcd}
+
+et sa $\chi$-rétraction est
+\[
+  \boxed{\ \pi(x_1 * x_2) = \pi_1(x_1) \otimes \pi_2(x_2)\ } ,
+\]
+bien définie sur la somme amalgamée parce que $\pi_1 \otimes \pi_2$ et
+$\chi\,\mathrm{id}_{L_1 \otimes L_2}$ coïncident sur $E_1 \otimes_0 E_2$ à travers $\mu$
+(page 70 : « On y gagne ! »). Aucune division n'est nécessaire. Si $\chi$ est
+régulier sur $L_1 \otimes L_2$, la section correspondante est $T = \tfrac{1}{\chi}\,T_1 *
+T_2$ ; en général on a $\chi T = T_1 * T_2$, et, pour $x_i \in \Gamma P_i$,
+\[
+  T = \chi\,(x_1 * x_2) - b_1 \otimes b_2, \qquad b_i = \pi_i(x_i).
+\]\footnote{Les pages 71 et 72
+  hésitent sur le signe de $b$ (« attention au signe ! ») et le fixent par
+  $b_{T, x} = \chi x - T = \pi(x)$, convention suivie ici. La note de la page 79
+  écrit $T = 2\chi x - b$ ; c'est $\chi x_0 - b$.}
+
+\emph{Formulaire} (pages 72 à 74). L'application $(x_1, x_2) \mapsto x_1 * x_2$ est
+bilinéaire, $\psi(x_1 * x_2) = \psi_1(x_1)\psi_2(x_2)$, donc elle envoie $P_1 \times P_2$
+dans $P$, et
+\[
+  u_1 * x_2 = u_1 \otimes \pi_2(x_2), \qquad x_1 * u_2 = \pi_1(x_1) \otimes u_2, \qquad
+  u_1 * u_2 = \chi\, u_1 \otimes u_2,
+\]
+\[
+  (x_1 + u_1) * (x_2 + u_2) = x_1 * x_2 + u_1 \otimes \pi_2(x_2) + \pi_1(x_1) \otimes u_2 + \chi\, u_1 \otimes u_2 .
+\]
+Pour $\chi = 2$, c'est la formule devinée page 63.
+
+\emph{Propriété universelle} (pages 75 et 76). Une application « bi-affine »
+compatible aux $\chi$-trivialisations, de $P_1 \times P_2$ dans un torseur $\Pi$ sous
+$M$, est un couple $(f, \alpha)$, $\alpha : L_1 \times L_2 \to M$ bilinéaire, avec
+\[
+  f(x_1 + u_1, x_2) = f(x_1, x_2) + \alpha(u_1, \pi_2(x_2)), \qquad
+  f(x_1, x_2 + u_2) = f(x_1, x_2) + \alpha(\pi_1(x_1), u_2) ;
+\]\footnote{La page écrit
+  $\alpha(x_1, x_2)$ pour premier terme, où l'on attend $f(x_1, x_2)$ ; chaque autre
+  $\alpha$ est écrit sur une majuscule biffée.}
+la donnée de $\alpha$ n'est pas superflue, car $(E_1 \otimes L_2) \oplus (L_1 \otimes E_2)
+\to L_1 \otimes L_2$ n'est pas surjectif en général. $(P_1 * P_2, *)$ est universel
+pour ces applications, et le reste si l'on exige aussi $\pi_\Pi(f(x_1, x_2)) =
+\pi_1(x_1) \otimes \pi_2(x_2)$. Un morphisme de torseurs $\chi$-trivialisés est un
+morphisme affine $f$, de partie linéaire $f_0$, avec $\pi'(f(x)) = f_0(\pi(x))$ ;
+en termes d'extensions, $f(T) = T'$.
+
+\emph{Le cas scindé} (pages 77 à 79). Un scindage est une section $x_0$ de $P$ ; la
+$\chi$-trivialisation équivaut alors à $b = \pi(x_0) \in \Gamma L$, avec
+$T = (-b, \chi)$ et $\pi(u, \lambda) = \lambda b + \chi u$ dans $E \simeq L \oplus
+\mathcal{O}$. Pour des scindages $x_1, x_2$, $P_1 * P_2$ est scindé par $x_1 * x_2$ et
+\[
+  b = b_1 \otimes b_2
+\]
+--- « Il n'y a pas plus simple ! ». Les contraintes de commutativité et
+d'associativité sont caractérisées par $x_1 * x_2 \mapsto x_2 * x_1$, $(x_1 * x_2) * x_3
+\mapsto x_1 * (x_2 * x_3)$ et les isomorphismes correspondants des $L_i$. L'unité est
+$E_0 = \mathcal{O} \times \mathcal{O}$, $x_0 = (0, 1)$, $\pi(u, \lambda) = \lambda + \chi u$,
+$T = (-1, \chi)$ : un scindage est \emph{unitaire} si $b$ est une base de $L$, et
+$P_0 * P_1 \simeq P_1$ par $x_1 \mapsto x_0 * x_1$, $u_1 \mapsto b_0 \otimes u_1$. Un objet
+est inversible pour $*$ si et seulement si $L$ est inversible et, sur $X_0 =
+V(\chi)$, la section $T_0 = -b_0$ de $L_0$ est une base\footnote{Cette
+caractérisation est dans une longue note marginale, oblique, en partie illisible ;
+on donne ce qui s'en lit, qui est juste : si $b_0$ engendre $L_0$, $b$ engendre $L$
+près de $X_0$, et hors de $X_0$, où $\chi$ est inversible, on rend $b$ unitaire par
+$b \mapsto b + \chi u$. La nécessité : $b \otimes b'$ unitaire force $b_0$ à être une
+base sur $X_0$, où $b'$ ne change pas.}. Pour $\chi = 2$ : l'extension
+$2$-trivialisée d'un revêtement quadratique est inversible si et seulement si le
+revêtement est étale en tout point de caractéristique $2$.
+
+\pagerange{79}{87}
+\subsection*{Le cas $\chi = 2$ : involution et coinvariants (pages 79 à 87)}
+
+« Les revêtements quadratiques : à partir de maintenant $\chi = 2$. » L'involution
+$\sigma_E(x) = \bar{x} = \psi(x)T - x$ respecte $\psi$, induit $-\mathrm{id}$ sur $L$ et
+$\mathrm{id}$ sur $\mathcal{O}$. Si $2$ est inversible, $x_0 = \tfrac{1}{2}T$ scinde
+canoniquement, $b = 0$, et le produit $*$ se réduit au produit tensoriel des $L_i$ :
+« La théorie est tt.\ triviale pour $2$ inversible ! […] Le cas intéressant est
+celui où $2$ n'est pas inversible. » On a
+\[
+  \overline{x_1 * x_2} = \bar{x}_1 * x_2 = x_1 * \bar{x}_2, \qquad \bar{x}_1 * \bar{x}_2 = x_1 * x_2,
+\]
+par exemple $\bar{x}_1 * x_2 = x_1 * x_2 - b_1 \otimes b_2 = T - x_1 * x_2$.
+
+L'application $E_1 \otimes E_2 \to E_1 * E_2$ se factorise donc par les coinvariants de
+$\sigma_1 \otimes \sigma_2$. Quand est-ce un isomorphisme ?
+
+\textbf{Proposition} (page 85). Supposons $L_1$, $L_2$ inversibles. Pour que $E_1 \otimes E_2
+\to E_1 * E_2$ induise un isomorphisme
+\[
+  (E_1 \otimes E_2)/\operatorname{Im}(\sigma_1 \otimes \sigma_2 - \mathrm{id}) \xrightarrow{\ \sim\ } E_1 * E_2,
+\]
+il faut et il suffit qu'en tout point de $X_0 = V(2)$, $T_{1,0}$ ou $T_{2,0}$ engendre
+$L_{1,0}$, resp.\ $L_{2,0}$ --- c'est-à-dire que $X_1$ ou $X_2$ y soit étale. Avec
+des bases et des scindages, la condition s'écrit $2\mathcal{O} + b_1\mathcal{O} +
+b_2\mathcal{O} = \mathcal{O}$.
+
+La condition est celle de la surjectivité : l'image de $\pi_i$ est
+$\mathcal{O}b_i + 2L_i$, et le conoyau de $E_1 \otimes E_2 \to E_1 * E_2$ est
+$\operatorname{Coker}\pi_1 \otimes \operatorname{Coker}\pi_2$. L'égalité du noyau et de
+l'image de $\sigma_1 \otimes \sigma_2 - \mathrm{id}$ s'en déduit. La page le vérifie au-dessus
+de $X_0$ par un décompte de rangs ; on peut aussi le faire directement.
+Localement, $L_i = \mathcal{O}e_i$, $b_i = \beta_i e_i$, et près d'un point où $\beta_1$ est
+inversible : dans la base $(e_1 \otimes e_2, e_1 \otimes x_2, x_1 \otimes e_2, x_1 \otimes x_2)$,
+le noyau est $\{(a, a', a'', 0) : 2a + \beta_2a' + \beta_1a'' = 0\}$, de base
+$(1, 0, -2/\beta_1, 0)$ et $(0, 1, -\beta_2/\beta_1, 0)$, et l'image de $\sigma_1 \otimes
+\sigma_2 - \mathrm{id}$ contient $(\beta_1, 0, -2, 0)$ et
+$(\beta_1\beta_2, -\beta_1, -\beta_2, 0)$, qui en sont, à des unités près, une
+base\footnote{Ce calcul est de l'édition ; il évite la réduction au cas où
+$2 = 0$ sur $X$, que la page annonce sans la justifier et qui demanderait un
+argument sur une base non réduite. Les générateurs sont ceux de la page 84. La
+page 85 appelle $n$ le rang de $L_1 \otimes L_2$, qui vaut $1$. Sans la condition,
+par exemple si $T_1 = T_2 = 0$, $\sigma_i = \mathrm{id}$ et l'image est nulle alors que
+le noyau est de rang $3$ (le crochet de la page 84).}.
+
+\textbf{Corollaire} (page 86). Sous la même condition, et pour tout Module $M$,
+$\underline{\mathrm{Hom}}(E_1 * E_2, M) \simeq \underline{\mathrm{Hom}}(E_1 \otimes
+E_2, M)^{\sigma_1 \otimes \sigma_2}$ ; en particulier, avec $A_i = \check{E}_i$ et
+$A = (E_1 * E_2)^{\vee}$,
+\[
+  A_1 * A_2 \xrightarrow{\ \sim\ } (A_1 \otimes A_2)^{\sigma_1 \otimes \sigma_2},
+\]
+et réciproquement si cela reste vrai après tout changement de base. C'est la
+définition classique du produit des algèbres quadratiques étales ; elle reste
+valable dès qu'en chaque point de caractéristique $2$ l'un des facteurs est
+étale\footnote{Pour le produit des algèbres quadratiques étales, voir M.-A. Knus,
+\emph{Quadratic and Hermitian Forms over Rings} (1991), chap.~III ; pour des algèbres
+quadratiques quelconques, la question a été reprise par d'autres moyens dans les
+travaux sur l'« algèbre discriminante » (Deligne, Rost, Loos, Biesel--Gioia) ;
+on ne prétend pas qu'ils retrouvent exactement cette construction. Références de
+l'édition.}.
+
+\emph{Au-dessus de $V(\chi)$} (pages 86 à 88). Si $\chi = 0$ sur $X$, une
+$\chi$-trivialisation n'est plus qu'une section $T$ de $L$, et $\pi(x) = -T$ est
+constant. Alors $u_1 * u_2 = 0$, $E_1 \otimes E_2 \to E_1 * E_2$ se factorise par
+$E_1 \otimes E_2/L_1 \otimes L_2 \simeq E_1 \times_{\mathcal{O}} E_2$, l'extension du torseur
+produit $P_1 \times P_2$, et $E_1 * E_2$ s'en déduit par $(u_1, u_2) \mapsto u_1 \otimes b_2
++ b_1 \otimes u_2$ : $P_1 * P_2$ est poussé de $P_1 \times P_2$ par cet homomorphisme,
+comme $G_T \times G_{T'} \to G_{TT'}$ page 57\footnote{La page note le premier membre
+d'un $\otimes$ surmonté de deux demi-flèches.}.
+
+\pagerange{88}{92}
+\subsection*{La forme quadratique du produit (pages 88 à 92)}
+
+Soient maintenant sur $E_1, E_2$ des formes $Q_i : E_i \to L_i^{\otimes 2}$, de restriction
+$u \mapsto u^{2}$ et de trace $T_i$ (des revêtements quadratiques $X_1, X_2$), de
+discriminants $\delta_i = b_i^{2} - 4c_i$, avec, dans des scindages,
+$Q_i(\lambda x_i + u_i) = u_i^{2} + \lambda b_iu_i + \lambda^{2}c_i$.
+
+\textbf{Théorème} (page 89). Il existe sur $E = E_1 * E_2$ une unique forme
+quadratique $Q$ à valeurs dans $L^{\otimes 2}$, $L = L_1 \otimes L_2$, admissible ---
+de restriction $u \mapsto u^{2}$ à $L$ et de trace la section $T$ de la
+$2$-trivialisation de $E$ --- telle que, pour $x_i \in \Gamma P_i$,
+\[
+  Q(x_1 * x_2) = Q_1(x_1)\,\delta_2 + Q_2(x_2)\,\delta_1 + 4\,Q_1(x_1)Q_2(x_2),
+\]
+et, pour $x_i \in \Gamma E_i$ quelconques, avec des facteurs $\psi_2(x_2)^{2}$,
+$\psi_1(x_1)^{2}$ devant les deux premiers termes. Dans les scindages $x_1, x_2$,
+$x_1 * x_2$ :
+\[
+  \boxed{\ b = b_1b_2, \qquad c = c_1b_2^{2} + c_2b_1^{2} - 4c_1c_2\ } .
+\]
+\textbf{Corollaire.} $\delta = \delta_1\delta_2$ : $b_1^{2}b_2^{2} - 4(c_1b_2^{2} + c_2b_1^{2} -
+4c_1c_2) = (b_1^{2} - 4c_1)(b_2^{2} - 4c_2)$.
+
+Les deux formules simples sont $b = b_1b_2$ et $\delta = \delta_1\delta_2$ ; celle de $c$
+s'en déduit « heuristiquement » en divisant $4c = b^{2} - \delta$ par $4$, et se
+démontre localement par l'identité de la page 64, « un petit calcul délicat, que
+j'ai pratiquement déjà fait plus haut »\footnote{La page définit « admissible » par
+la seule condition sur $L$ ; l'unicité demande aussi que la trace de $Q$ soit le
+$T$ de $E$, ce qu'il utilise en posant $b = b_1b_2$. La note marginale de la page
+88, qui récapitule la notion de forme sur une extension $2$-trivialisée, n'est lisible
+qu'en débris ; le texte courant de cette page l'est en partie seulement.}. En
+termes de la page 46 : $b = \pi(x) = 2x - T$ est la « racine carrée » $z$ de
+$\delta$ attachée au point $x$ ; la formule $b = b_1 \otimes b_2$ dit que le produit des
+revêtements multiplie les racines carrées, $z = z_1z_2$, et le reste est l'arithmétique
+qui rend cela vrai sans diviser par $2$\footnote{Cette lecture est de l'édition.}.
+
+\emph{Un programme} (pages 91 et 92). Définir $X_1 * X_2$ et $X_1 \times X_2 \to X_1 * X_2$ ;
+les contraintes de commutativité, d'associativité, d'unité ; décrire $X_1 * X_2$
+quand $X_1$ est étale comme $X_2$ « tordu » par le $(\mathbf{Z}/2)$-torseur $X_1$ ;
+étudier quand $X_1 * X_2$ est étale ; et l'énoncé « $X_1 \times X_2 \to X_1 * X_2$ est
+fid.\ plat », dont la suite est illisible. Tel quel, ce dernier est faux : en
+caractéristique $2$, pour $X_1 = X_2 = \operatorname{Spec}\mathcal{O}[u]/(u^{2})$, on a
+$b_1 = b_2 = 0$, l'application est $u \mapsto 2u_1u_2 = 0$, et
+$\mathcal{O}[u_1, u_2]/(u_1^{2}, u_2^{2})$ n'est pas plat sur $\mathcal{O}[u]/(u^{2})$ ;
+il est vrai sous la condition de la proposition de la page 85\footnote{Le
+contre-exemple est de l'édition. La page 92, barrée, commence un calcul en
+coordonnées et évoque des revêtements « où $X_1 * X_2$ est non étale ».}.
+
+\pagerange{93}{97}
+\subsection*{Dualité entre l'algèbre et l'extension (pages 93 à 97)}
+
+Un scindage $x_0$ donne $E \simeq L \oplus \mathcal{O}x_0$ et $A \simeq \mathcal{O} \oplus
+L^{\vee}$, où $L^{\vee} = \operatorname{Ker}(x_0)$. Pour $u \in L^{\vee}$, $\langle u, b\rangle
+= -\mathrm{Tr}(u)$, $N(u) = \langle u^{\otimes 2}, c\rangle$, d'où l'équation minimale
+$u^{2} + \langle u, b\rangle u + \langle u^{\otimes 2}, c\rangle = 0$\footnote{La page
+écrit $u^{2} + \langle u, b\rangle + \langle u^{\otimes 2}, c\rangle = 0$, sans le facteur
+$u$ du terme du milieu.}, et $N = x_0^{2} - x_0b + c$. Une section $x = x_0 + v$ de
+$P_1$ est un homomorphisme d'algèbres $A \to \mathcal{O}$ si et seulement si
+$v^{2} + bv + c = 0$, c'est-à-dire $Q(v) = 0$.
+
+\emph{L'isomorphisme $g$.} Pour $E$ de rang $2$, $x \mapsto (y \mapsto x \wedge y)$ donne
+$E \simeq \underline{\mathrm{Hom}}(E, \det E)$, et $\alpha(u) = x_0 \wedge u$, $L \simeq \det E$,
+ne dépend pas de $x_0$. D'où $g : E \xrightarrow{\sim} A \otimes L$, $g(x) = f_x$,
+\[
+  f_x(y) = \psi(x)\,y - \psi(y)\,x ,
+\]
+vérifié en évaluant sur $x = u$, $y = x_0$. Et $g$ est un isomorphisme d'extensions
+
+\begin{tikzcd}
+0 \arrow[r] & L \arrow[r] \arrow[d, "-\mathrm{id}_L"'] & E \arrow[r, "\psi"] \arrow[d, "g"] & \mathcal{O} \arrow[r] \arrow[d, no head, "=" description] & 0 \\
+0 \arrow[r] & L \arrow[r] & A \otimes L \arrow[r] & \mathcal{O} \arrow[r] & 0
+\end{tikzcd}
+
+--- « attention au signe » : sur $L$, $g$ induit $-\mathrm{id}_L$. Par $g$,
+$\underline{\mathrm{Quad}}(E, L^{\otimes 2}) \simeq \underline{\mathrm{Quad}}(A, \mathcal{O})$,
+et \emph{$Q$ et $N$ se correspondent} ; le signe de $-\mathrm{id}_L$ change celui du
+terme en $b$ : $Q(u + \lambda x_0) = u^{2} + \lambda\langle u, b\rangle + \lambda^{2}c$ et
+$N(v + \lambda) = \lambda^{2} - \lambda\langle v, b\rangle + \langle v^{2}, c\rangle$. La
+formule $Q(\varphi_N(x)) = -N(x)\,\delta$ est une identité entre formes sur le module
+générique de rang $2$ muni d'une forme quadratique\footnote{Le signe de
+$-\lambda\langle v, b\rangle$ est repris sur une rature, d'une lecture conjecturale ; c'est
+celui que donne la page 93.}.
+
+\pagerange{98}{106}
+\subsection*{Trace et norme de $A_1 \otimes A_2$ sur $A_1 * A_2$ (pages 98 à 106)}
+
+Transposé, $E_1 \otimes E_2 \to E_1 * E_2$ donne $i : A = A_1 * A_2 \to A_1 \otimes A_2$, et
+la somme amalgamée devient, côté algèbres :
+\[
+  A = (A_1 \otimes A_2) \amalg_{A_1 \oplus_{\mathcal{O}} A_2} \mathcal{O}, \qquad
+  \tau = (\mathrm{Tr}_1, \mathrm{Tr}_2) : A_1 \oplus_{\mathcal{O}} A_2 \to \mathcal{O},
+\]
+extension de $L_1^{\vee} \otimes L_2^{\vee}$ par $\mathcal{O}$ ($\mathrm{Tr}_1(1) = \mathrm{Tr}_2(1)
+= 2$ rend $\tau$ bien défini). En bases $(1, U_i)$, $U_i^{2} + b_iU_i + c_i = 0$ :
+\[
+  A \simeq \mathcal{O}[\mathcal{U}]/(\mathcal{U}^{2} + b\,\mathcal{U} + c), \qquad
+  i(\mathcal{U}) = 2U_1U_2 + b_1U_2 + b_2U_1,
+\]
+avec $b, c$ comme au théorème de la page 89 ; que $i(\mathcal{U})$ vérifie l'équation
+est l'identité de la page 64, dans l'anneau $A_1 \otimes A_2$.
+
+\textbf{Proposition} (pages 104 et 105). 1) L'homomorphisme canonique
+$\mathrm{Tr}_{A_1 \otimes A_2/A} : A_1 \otimes A_2 \to A$ (le transposé de $i$), qu'il note
+aussi $x_1 \otimes x_2 \mapsto x_1 * x_2$, vérifie
+\[
+  i\bigl(\mathrm{Tr}_{A_1 \otimes A_2/A}(\xi)\bigr) = \xi + \bar{\xi}, \qquad \bar{\xi} = (\sigma_1 \otimes \sigma_2)(\xi);
+\]
+sur la base : $1 \mapsto 2$, $U_i \mapsto -b_i$, $x_1 * 1 = \mathrm{Tr}_1(x_1)$, et
+$U_1 * U_2 = \mathcal{U} + b_1b_2$, puisque $U_1U_2 + \bar{U}_1\bar{U}_2 = i(\mathcal{U}) + b_1b_2$.
+2) Il existe une unique application quadratique $N_{A_1 \otimes A_2/A} : A_1 \otimes A_2 \to
+A$ avec $N(x_1 \otimes x_2) = N_1(x_1)N_2(x_2)$ et $\varphi_N(\xi, \eta) =
+\mathrm{Tr}_{A_1 \otimes A_2/A}(\xi\bar{\eta})$ ; elle vérifie $i(N(\xi)) = \xi\bar{\xi}$,
+$N(\bar{\xi}) = N(\xi)$, $N((\sigma_1 \otimes \mathrm{id})\xi) = N((\mathrm{id} \otimes
+\sigma_2)\xi) = \overline{N(\xi)}$, $N(i(\eta)) = \eta^{2}$, et la transitivité
+\[
+  N_{A/\mathcal{O}} \circ N_{A_1 \otimes A_2/A} = N_{A_1 \otimes A_2/\mathcal{O}}, \qquad
+  \mathrm{Tr}_{A/\mathcal{O}} \circ \mathrm{Tr}_{A_1 \otimes A_2/A} = \mathrm{Tr}_{A_1 \otimes A_2/\mathcal{O}}.
+\]\footnote{Page
+  105, le second terme de la deuxième ligne s'écrit avec $\mathrm{id}_{A_2}$ ; on lit
+  $\mathrm{id}_{A_1}$. L'existence de $N$ « universellement » est affirmée, non
+  démontrée : on la définit sur la base et l'on vérifie les propriétés.}
+Pour la transitivité de la norme, avec $\sigma_1 = \sigma_{A_1} \otimes \mathrm{id}$,
+$\sigma_2 = \mathrm{id} \otimes \sigma_{A_2}$, $\sigma_3 = \sigma_1\sigma_2$ et $\xi_j =
+\sigma_j(\xi)$, on a $N_{A_1 \otimes A_2/\mathcal{O}}(\xi) = \xi\xi_1\xi_2\xi_3$ (norme de
+$A_1 \otimes A_2$ sur $A_1$, puis de $A_1$ sur $\mathcal{O}$), et ce produit est
+$N\bar{N}$ pour $N = N_{A_1 \otimes A_2/A}(\xi)$. Si $A \to A_1 \otimes A_2$ n'est pas
+injectif, l'argument est générique\footnote{La page note $\xi^{\natural} = \xi + \bar{\xi}$
+(un signe en crochet, lu comme un bécarre), et remarque (page 101) que si, en tout
+point de $X_0$, l'une des deux structures est étale, $A \to A_1 \otimes A_2$ est
+universellement injectif d'image $(A_1 \otimes A_2)^{\sigma_1 \otimes \sigma_2}$ : c'est le
+corollaire de la page 86. Le début de la page 101 est en partie illisible.}.
+
+\pagerange{106}{109}
+\subsection*{Algèbres quasi-quadratiques (pages 106 à 109)}
+
+« Quand on axiomatise la situation » de $\mathrm{Tr}_{A_1 \otimes A_2/A}$ et
+$N_{A_1 \otimes A_2/A}$, on aboutit à une $k$-algèbre $A$ « qui se comporte comme si
+c'était une algèbre quadratique sur $k$ », sans être supposée localement libre de
+rang $2$, ni même avoir $\alpha : k \to A$ injectif. Une \emph{algèbre
+quasi-quadratique} sur $k$ est la donnée de $A$, $\alpha$, d'une application
+$k$-linéaire $t : A \to k$ et d'une application $n : A \to k$, avec, en posant
+$\tau = \alpha \circ t$, $\nu = \alpha \circ n$, $\bar{x} = \tau(x) - x$ :
+\begin{enumerate}
+\item[(1)] $t(1_A) = 2$ ;
+\item[(2)] $x \mapsto \bar{x}$ est un automorphisme d'algèbre, c'est-à-dire
+$2xy = \tau(xy) - \tau(x)\tau(y) + \tau(y)x + \tau(x)y$ ;
+\item[(3)] $n$ est quadratique, de forme polaire $\varphi_n(x, y) = t(x\bar{y})$ ;
+\item[(4)] $n(1) = 1$, ce qui, avec (3), redonne $t(1) = 2$ ;
+\item[(5)] $\nu(x) = x\bar{x}$, ce qui implique (3) et (4) si $\alpha$ est injectif ;
+\item[(6)] facultatif : si $k$ est fini localement libre de rang $n$ sur $k_0$ et $A$
+de rang $2n$, $\mathrm{Tr}_{k/k_0} \circ t = \mathrm{Tr}_{A/k_0}$ et $N_{k/k_0} \circ n =
+N_{A/k_0}$.
+\end{enumerate}
+L'involution est involutive par (1) ; $n(\bar{x}) = n(x)$ par (3). La page 107 inscrit
+aussi la multiplicativité $n(xy) = n(x)n(y)$, que le récapitulatif de la page 109
+omet ; avec (5) et $\alpha$ injectif, elle en découle\footnote{Page 108, au point
+4°, la page dit « $k_0 \to A$ injectif mais $k \to A$ injectif » ; le sens est
+« mais non nécessairement $k \to A$ ». Le facteur $2$ de (2), remarque-t-il, n'est
+gênant que si $2$ n'est pas régulier : la structure d'algèbre est alors connue par
+$1_A$, $\alpha$, $t$ et $n$. La notion est voisine de celle d'algèbre munie d'une
+involution standard (Voight) ; rapprochement de l'édition.}.
+
+\pagerange{110}{121}
+\subsection*{La situation quasi-biquadratique (pages 110 à 121)}
+
+Données : $k$ ; des $k$-algèbres quasi-quadratiques $A_1, A_2, A_3$ ; une
+$k$-algèbre $A$ avec des homomorphismes $\alpha_i : A_i \to A$, non nécessairement
+injectifs ; et sur $A$ des structures quasi-quadratiques $(T_i, N_i)$ au-dessus de
+chaque $A_i$, d'involutions $\sigma_i(x) = T_i(x) - x$. Compatibilités :
+\begin{enumerate}
+\item[(1)] la situation est, pour les traces, celle d'un changement de base :
+$T_2$ est $t_1 \otimes \mathrm{id}_{A_2}$ sur l'image de $A_1 \otimes_k A_2$, ce qui exige
+que $t_1 \otimes \mathrm{id}$ s'annule sur le noyau de $A_1 \otimes A_2 \to A$ ; donc
+$\sigma_2$ et $\sigma_3$ induisent sur $A_1$ son involution ;
+\item[(2)] de même pour les normes, $N_2 \circ \alpha_1 = n_1$, ce qui entraîne que $N_2$
+est $n_1 \otimes \mathrm{id}_{A_2}$ sur l'image de $A_1 \otimes A_2$ (vérifié sur les
+$x_1 \otimes x_2$, où les deux membres valent $n_1(x_1)x_2^{2}$, puis sur les formes
+polaires) ; et (2) entraîne (1)\footnote{Page 111, la flèche du diagramme est lue
+$T_1$, et page 112 le premier facteur se lit $t_1(x_1)$, le changement de base
+« $k \to A_1$ » ; on lit $T_2$, $n_1(x_1)$ et $k \to A_2$, comme l'exige le texte.} ;
+\item[(3)] $\sigma_1\sigma_2\sigma_3 = 1$, qui force les $\sigma_i$ à commuter (deux
+involutions commutent si et seulement si leur produit est une involution) et à
+former un groupe de Klein. Explicitement, $2x = T_1(x) + T_2(x) + T_3(x) -
+t_1T_1(x)$, et, par symétrie, $t_1T_1 = t_2T_2 = t_3T_3 =: T_{A/k}$ quand $k \to A$
+est injectif, d'où
+\[
+  2x = T_1(x) + T_2(x) + T_3(x) - T_{A/k}(x).
+\]
+\end{enumerate}
+Les relations entre normes en découlent : avec $x_0 = x$, $x_j = \sigma_j(x)$,
+$n_i(N_i(x)) = x_0x_1x_2x_3 = N_{A/k}(x)$ pour chaque $i$, et
+$N_1(x)N_2(x)N_3(x) = x^{2}N_{A/k}(x)$\footnote{Page 114, on lit $x_j = \sigma_j(x)$
+où la page écrit $T_j(x)$. Le haut de la page, barré, énonce ces formules comme
+attentes.}.
+
+\emph{L'action du groupe pair.} Sur $A_1 \otimes A_2 \otimes A_3$ opère $\mathbf{F}_2^{3}$,
+mais il n'y a pas en général d'action compatible sur $A$ : un $\tau_1$ qui fixe $A_2$
+et $A_3$ fixe $A$ tout entier si $A_2$, $A_3$ l'engendrent. Le sous-groupe
+$\Gamma = \operatorname{Ker}(\mathbf{F}_2^{3} \xrightarrow{\Sigma} \mathbf{F}_2)$, lui, opère, $\tau_i$
+agissant sur $A$ par $\sigma_i$. Si les $A_i$ sont les algèbres de revêtements
+$X_i$, de produit $B = A_1 * A_2 * A_3$, on a $B \to (A_1 \otimes A_2 \otimes A_3)^{\Gamma}$,
+isomorphisme hors des points de caractéristique $2$ où deux au moins des $A_i$ ne
+sont pas étales. La composée $f : B \to A_1 \otimes A_2 \otimes A_3 \to A$ tombe dans
+$A^{\Gamma}$ ; si $A^{\Gamma} = k\cdot 1_A$, elle définit une \emph{section} $\varepsilon$
+de $X_1 * X_2 * X_3$. Et si $2$ est inversible, $A^{\Gamma} = k$ : $\sigma_i(x) = x$
+pour tout $i$ donne $6x = 2x + T_{A/k}(x)$, donc $x = \tfrac{1}{4}T_{A/k}(x)$. C'est la
+version intrinsèque du fait que, dans $k(\sqrt{a}, \sqrt{b})$, les trois
+sous-extensions $k(\sqrt{a})$, $k(\sqrt{b})$, $k(\sqrt{ab})$ ont un produit trivial.
+
+\textbf{Proposition} (page 118). Si les $A_i$ sont étales, $k \to A$ injectif,
+$A_1 \otimes A_2 \otimes A_3 \to A$ surjectif et $A^{\Gamma} = k$, alors
+$\mathcal{X} = \operatorname{Spec} A \to X_i \times X_j$ est un isomorphisme pour chaque
+couple, $\mathcal{X}$ est fini étale sur $X$, et la situation se déduit par torsion
+de la situation standard : trois ensembles à deux éléments $I_1, I_2, I_3$, une
+trivialisation $\varepsilon$ de $I_1 * I_2 * I_3$, et $J = \{(a_i) : a_1 * a_2 * a_3 =
+\varepsilon\}$. Réciproquement une telle situation tordue est biquadratique étale,
+avec $A^{\Gamma} = k$.
+
+\textbf{Lemme} (pages 119 et 120). Soient $\Gamma$ opérant transitivement sur un ensemble
+$J$, et $\mathcal{X} \subset X_J$ un sous-schéma fermé stable par $\Gamma$ tel que
+$k \to \Gamma(\mathcal{X}, \mathcal{O}_{\mathcal{X}})$ soit injectif. Alors $\mathcal{X} =
+X_J$. En effet $\mathcal{X} \cap X_j$ est défini par un idéal $\mathfrak{J}_j$ de $k$,
+indépendant de $j$ par transitivité, et $\bigcap_j \mathfrak{J}_j$ est le noyau de
+$k \to \Gamma(\mathcal{X}, \mathcal{O})$, nul\footnote{La page écrit la condition b)
+avec l'anneau de $X_J$, $k^{J}$ ; l'application $k \to k^{J}$ est toujours injective,
+et la démonstration utilise l'anneau de $\mathcal{X}$.}.
+
+« Ce résultat vaut sans restrictions de caractéristiques, mais il concerne la
+situation standard étale, \emph{très} restrictive. » Il veut montrer que pour trois
+revêtements quadratiques quelconques et une section $\varepsilon$ de $X_1 * X_2 * X_3$,
+$\mathcal{X} = \pi^{-1}(\varepsilon) \subset X_1 \times_X X_2 \times_X X_3$ porte une structure
+biquadratique au-dessus des $X_i$, ce qui généraliserait celle de $X_1 \times X_2$
+au-dessus de $X_1$, $X_2$ et $X_3 = X_1 * X_2$. La page 121 en esquisse la variante
+universelle --- au-dessus de $\mathfrak{X}_0 = X_1 * X_2 * X_3$, l'algèbre
+$A_1 \otimes A_2 \otimes A_3$ est de rang $4$ sur $B_0 = A_1 * A_2 * A_3$ --- et bute :
+la multiplication n'est ni finie localement libre ni plate. Le dossier n'y revient
+pas\footnote{Les lettres de la page 121 sont incohérentes ($a_1, a_2, a_3 \mapsto x_1
+\wedge \alpha_2 \wedge x_3$), et l'indice du produit fibré se lit $\mathfrak{X}$ ou
+$\mathfrak{X}_0$.}.
+
+\pagerange{123}{191}
+\section*{III. Extensions $\chi$-scindées quelconques (pages 123 à 191)}
+
+La troisième partie reprend le formalisme pour des extensions
+$0 \to L \xrightarrow{\alpha} E \xrightarrow{\psi} M \to 0$ dont le quotient $M$ n'est
+plus $\mathcal{O}$. Ce sont des calculs rapides, sur les rectos de feuillets dont les
+versos sont dactylographiés ; la prose de liaison est rare et souvent illisible,
+les formules portent l'argument.
+
+\pagerange{123}{131}
+\subsection*{$\chi$-scindages et coordonnées (pages 123 à 131)}
+
+Un \emph{$\chi$-scindage} d'une telle extension est un couple $(\pi, \varpi)$,
+$\pi : E \to L$, $\varpi : M \to E$, avec
+\[
+  \pi\alpha = \chi\,\mathrm{id}_L, \qquad \psi\varpi = \chi\,\mathrm{id}_M, \qquad
+  \alpha\pi + \varpi\psi = \chi\,\mathrm{id}_E
+\]
+(page 169) ; pour $M = \mathcal{O}$, c'est la $\chi$-trivialisation de la deuxième
+partie. Un scindage ordinaire $p : E \to L$ donne $E \simeq M \oplus L$, et
+$b = \pi - \chi p$, nul sur $L$, est un homomorphisme $b : M \to L$. Pour deux
+extensions, le produit est $\mathcal{E}_p = (M_1 \otimes M_2) \oplus (L_1 \otimes L_2)$ en
+coordonnées, avec la $\chi$-rétraction $(\eta, \xi) \mapsto \chi\xi + (b_1 \otimes b_2)(\eta)$.
+Changer de scindage, $p'_i = p_i - u_i$ avec $u_i : M_i \to L_i$, change $b_i$ en
+$b_i + \chi u_i$, et l'identification $\mathcal{E}_p \to \mathcal{E}_{p'}$ est la
+transvection $(\eta, \xi) \mapsto (\eta, \xi - u\eta)$ avec
+\[
+  u = b_1 \otimes u_2 + u_1 \otimes b_2 + \chi\, u_1 \otimes u_2 ;
+\]
+on a bien $b'_1 \otimes b'_2 = b_1 \otimes b_2 + \chi u$. Pour que ces identifications se
+recollent, il faut la relation de cocycle $u'' = u + u'$ pour deux changements
+successifs, $u'$ étant calculé avec les $b'_i$. La page 131 l'entreprend et
+s'arrête ; elle est vraie :
+\[
+  u'' = u + (b_1 + \chi u_1) \otimes u'_2 + u'_1 \otimes (b_2 + \chi u_2) + \chi\, u'_1 \otimes u'_2 = u + u'.
+\]\footnote{La
+  vérification est de l'édition. Les signes de $b'_i = b_i \pm \chi u_i$ varient d'une
+  ligne à l'autre des pages 129 à 133, et la page 131 écrit $b''_2 = b_2 + \chi u'_2$ ;
+  on fixe $b'_i = b_i + \chi u_i$, $b''_i = b'_i + \chi u'_i$, avec lesquels la relation
+  est exacte.}
+Le produit $E_1 * E_2$ existe donc par recollement.
+
+\emph{Le produit tiré} (pages 125 et 127). Une seconde construction, duale, donne
+en coordonnées la même extension, mais avec le $\chi$-scindage défini par $-b$ au
+lieu de $b$ ; un isomorphisme de l'une sur l'autre est une transvection $T_v$ avec
+$b + \chi v = -b$, c'est-à-dire $v = -\tfrac{2}{\chi}b$. Il existe donc, canonique,
+dès qu'il y a $\gamma \in k$ avec $\gamma\chi = 2$ : $v = -\gamma b$, et le carré de la page
+125 commute (« commute ! »). Pour $\chi = 2$, $\gamma = 1$\footnote{La page 125 note
+$\vee$ et $\wedge$ les deux produits ; on les note $E_1 * E_2$ et $E_1 *^{\varpi} E_2$. La
+page 127 note $\sigma$ l'élément qu'on appelle $\gamma$, comme le font les pages 141 et
+suivantes.}.
+
+\pagerange{133}{139}
+\subsection*{$\lambda$-rétractions et produit des morphismes (pages 133 à 139)}
+
+Les signes « étranges » qui apparaissent page 133 ($u_1 * u_2 = -\chi\, u_1 \otimes u_2$
+quand on passe aux morphismes) « sont dus au signe $-\mathrm{id}$ » de l'autodualité.
+Notons $\underline{\mathrm{Hom}}^{!}(E, L)$ le Module des $f : E \to L$ dont la
+restriction à $L$ est une homothétie $\lambda\,\mathrm{id}_L$ --- des
+« $\lambda$-rétractions » ; c'est une extension de $\mathcal{O}$ par $L$, et pour $M =
+\mathcal{O}$,
+\[
+  \Phi : E \xrightarrow{\ \sim\ } \underline{\mathrm{Hom}}^{!}(E, L), \qquad
+  \Phi(x)(y) = \psi(x)\,y - \psi(y)\,x ,
+\]
+est l'isomorphisme $g$ de la page 95, qui induit $-\mathrm{id}_L$ (pages 133 et 135).
+Le produit s'étend aux $\lambda$-rétractions : pour $f_i$ une $\lambda_i$-rétraction de
+$E_i$, la $\lambda_1\lambda_2$-rétraction $f_1 * f_2$ de $E_1 * E_2$ est donnée par
+\[
+  \boxed{\ (f_1 * f_2)(x_1 * x_2) = \lambda_1\pi_1(x_1) \otimes f_2(x_2) + f_1(x_1) \otimes \lambda_2\pi_2(x_2)
+  - \chi\, f_1(x_1) \otimes f_2(x_2)\ }
+\]
+et $(f_1 * f_2)|_{L_1 \otimes L_2} = \lambda_1\lambda_2\,\mathrm{id}$. Pour $f_i = \pi_i$
+($\lambda_i = \chi$), on retrouve $\pi_1 * \pi_2 = \chi\,\pi$ ; sur $x_i = u_i \in L_i$, le
+second membre vaut $\chi\lambda_1\lambda_2\, u_1 \otimes u_2$, ce qui est bien la valeur de
+$f_1 * f_2$ sur $u_1 * u_2 = \chi\, u_1 \otimes u_2$\footnote{La page 135 écrit
+$f_1(x_2)$ dans le deuxième terme ; la page 137 corrige en $f_1(x_1)$. Le dernier
+calcul de la page 139, où apparaît « $2 - \chi = 1$ », est surchargé à l'endroit
+décisif ; on ne le reproduit pas. La vérification sur $L_1 \otimes L_2$ est de
+l'édition.}. La page 139 retrouve aussi la rétraction $p$ de $E_1 * E_2$ déduite de
+scindages $p_1, p_2$ : $p(x_1 * x_2) = x_1 * p_2(x_2) + p_1(x_1) * x_2 - p_1(x_1) * p_2(x_2)$.
+
+\pagerange{141}{157}
+\subsection*{L'opérateur $F_{11}$ et la condition $\gamma\chi = 2$ (pages 141 à 157)}
+
+Il cherche à identifier les deux produits par un endomorphisme $F$ de
+$E_1 \otimes E_2$, dont il connaît deux restrictions : sur $E_1 \otimes_0 E_2$, $F_{11}$ doit
+se factoriser par $\pi : E_1 \otimes_0 E_2 \to L_1 \otimes L_2$ ; et sa composée avec la
+projection sur $E_1 \otimes^{\circ} E_2$ doit se factoriser par $\psi_1 \otimes \psi_2$. Il
+pose $\pi'_1 = \pi_1 \otimes \mathrm{id}$, $\pi'_2 = \mathrm{id} \otimes \pi_2$ (relevés dans
+$E_1 \otimes E_2$), cherche $F_{11}$ de la forme
+\[
+  F_{11} = \alpha + \beta(\pi'_1 + \pi'_2) + \gamma\,\pi'_1 \pi'_2,
+\]
+et trouve, par la table de $\pi'_i$ sur les quatre morceaux $L_1 \otimes L_2$,
+$L_1 \otimes M_2$, $M_1 \otimes L_2$, $M_1 \otimes M_2$ (pages 153 et 163), les conditions
+\[
+  \beta = 1 - \gamma\chi, \qquad \alpha = -\chi(1 - \gamma\chi)
+\]
+(pages 157 et 163, où la constante s'appelle tour à tour $\gamma$ et $\delta$). Les deux
+conditions connues sont compatibles et laissent une indétermination, un
+homomorphisme $M_1 \otimes M_2 \to L_1 \otimes L_2$ : « C'est normal […] on a
+l'indétermination des choix ». La normalisation qui fait de
+$\sigma_i = \mathrm{id} - \gamma\pi_i$ une involution est $\gamma\chi = 2$ : comme
+$\pi_i^{2} = \chi\pi_i$ (page 149), $(\mathrm{id} - \gamma\pi_i)^{2} = \mathrm{id} + \gamma(\gamma\chi -
+2)\pi_i$. Alors $\beta = -1$, $\alpha = \chi$, et pour $\chi = 2$, $\gamma = 1$ :
+\[
+  F_{11}(x_1 \otimes x_2) = 2\,x_1 \otimes x_2 - \pi_1(x_1) \otimes x_2 - x_1 \otimes \pi_2(x_2) + \pi_1(x_1) \otimes \pi_2(x_2)
+  = x_1 \otimes x_2 + \bar{x}_1 \otimes \bar{x}_2 ,
+\]
+avec $\bar{x}_i = x_i - \pi_i(x_i)$ : c'est l'opérateur $\xi \mapsto \xi + \bar{\xi}$ des pages
+98 à 104, « o.k. » (page 155)\footnote{Pages 147 à 151, il essaie aussi
+$\sigma_i = \lambda + \mu\pi_i$, d'où $\lambda^{2} + 1 = \chi$, $\lambda\mu = -1$, $\mu^{2} =
+\gamma$ ; l'essai n'est pas poursuivi. La page 143 esquisse, pour des
+endomorphismes $f_i$ de $E_i$ qui stabilisent $L_i$, l'endomorphisme induit sur le
+produit ; la page 145 reprend en matrices les scindages de la page 129. La page 151
+écrit « ok si $\chi = \pm 2$ » et s'interrompt.}.
+
+\pagerange{159}{169}
+\subsection*{Produits poussé et tiré ; dualité (pages 159 à 169)}
+
+La page 169 met en place les deux constructions. Le \emph{produit poussé}
+$E_1 * E_2$ est la somme amalgamée de $E_1 \otimes E_2$ et de $L_1 \otimes L_2$ le long de
+$(\pi_1 \otimes \mathrm{id}, \mathrm{id} \otimes \pi_2) : E_1 \otimes_0 E_2 \to L_1 \otimes L_2$, où
+$E_1 \otimes_0 E_2$ est la somme amalgamée de $E_1 \otimes L_2$ et $L_1 \otimes E_2$ le long de
+$L_1 \otimes L_2$. Le \emph{produit tiré} $E_1 *^{\varpi} E_2$ est le produit fibré de
+$E_1 \otimes E_2$ et de $M_1 \otimes M_2$ au-dessus de $E_1 \otimes^{\circ} E_2 = (E_1 \otimes M_2)
+\times_{M_1 \otimes M_2} (M_1 \otimes E_2)$, le long de $(\varpi_1 \otimes \mathrm{id}, \mathrm{id} \otimes
+\varpi_2)$. Ce sont deux extensions de $M_1 \otimes M_2$ par $L_1 \otimes L_2$, munies de
+$\chi$-scindages, et il y a un isomorphisme canonique de l'une sur l'autre, sous la
+condition $\gamma\chi = 2$ de la page 127 :
+
+\begin{tikzcd}[column sep=small, nodes={font=\small}]
+0 \arrow[r] & E_1 \otimes_0 E_2 \arrow[r] \arrow[d] & E_1 \otimes E_2 \arrow[r] \arrow[d] & M_1 \otimes M_2 \arrow[r] \arrow[d, no head, "=" description] & 0 \\
+0 \arrow[r] & L_1 \otimes L_2 \arrow[r] \arrow[d, no head, "=" description] & E_1 * E_2 \arrow[r] \arrow[d, "\wr"] & M_1 \otimes M_2 \arrow[r] \arrow[d, no head, "=" description] & 0 \\
+0 \arrow[r] & L_1 \otimes L_2 \arrow[r] \arrow[d, no head, "=" description] & E_1 *^{\varpi} E_2 \arrow[r] \arrow[d] & M_1 \otimes M_2 \arrow[r] \arrow[d] & 0 \\
+0 \arrow[r] & L_1 \otimes L_2 \arrow[r] & E_1 \otimes E_2 \arrow[r] & E_1 \otimes^{\circ} E_2 \arrow[r] & 0
+\end{tikzcd}
+
+La composée verticale du milieu est l'opérateur $F_{11}$\footnote{Le diagramme de la
+page 167 porte « ? » sur la flèche du milieu, et un trait barre la page entre ses
+deux premières lignes. On le lit avec la flèche que les pages 141 à 157
+construisent. La page 169 dit l'isomorphisme « de façon évidente » ; l'hypothèse
+$\gamma\chi = 2$ est de l'édition, d'après la page 127.}. Les deux constructions se
+correspondent par transposition (page 159) : le dual d'une extension
+$0 \to L \to E \to M \to 0$ est $0 \to M^{\vee} \to E^{\vee} \to L^{\vee} \to 0$, la
+transposée d'une $\chi$-rétraction est une $\chi$-section, et, pour $M_i$ localement
+libres de rang fini, $E_1^{\vee} *^{\varpi} E_2^{\vee} \simeq (E_1 * E_2)^{\vee}$. Pour
+$M = \mathcal{O}$ et $\chi = 2$, c'est la dualité entre l'algèbre $A_1 * A_2$, poussée
+le long de la trace (pages 99 et 100), et l'extension $E_1 * E_2$\footnote{La page 159
+note $L'$ le quotient, et un exposant de $L$, en forme de « $4$ », est transcrit
+« ! » ; la page 161 pose $\pi' = \pi - (\chi - 1)\,\mathrm{id}$, nul ou presque sur
+$L$, dans un calcul qui se termine par un point d'interrogation.}.
+
+\pagerange{171}{191}
+\subsection*{Retour aux algèbres quadratiques : l'accouplement (pages 171 à 191)}
+
+Pour des algèbres quadratiques $A_i$ et leurs duaux $E_i$, il récrit les deux
+constructions côte à côte :
+\[
+  A = (A_1 \otimes A_2) \amalg_{A_1 \otimes_0 A_2} \mathcal{O}, \qquad
+  E = (E_1 \otimes E_2) \amalg_{E_1 \otimes_0 E_2} (L_1 \otimes L_2),
+\]
+la première le long de $(\mathrm{Tr}_1, \mathrm{Tr}_2)$, la seconde le long de
+$(\pi_1 \otimes \mathrm{id}, \mathrm{id} \otimes \pi_2)$, avec les flèches $A_1 \otimes A_2 \to A
+\to A_1 \otimes A_2$ et $E_1 \otimes E_2 \to E \to E_1 \otimes E_2$ dont les composées sont
+$f \mapsto f + \bar{f}$, $x \mapsto x + \bar{x}$, transposées l'une de l'autre :
+${}^{t}(\mathrm{id} + \sigma_1 \otimes \sigma_2) = \mathrm{id} + {}^{t}\sigma_1 \otimes {}^{t}\sigma_2$.
+L'application $A \to A_1 \otimes A_2$ est injective sauf en caractéristique $2$ là où
+$b_1 = b_2 = 0$ (page 171).
+
+\emph{L'accouplement} $A \times E \to \mathcal{O}$ sur les deux sommes amalgamées est
+donné (pages 179 et 183) par
+\[
+  \langle\lambda, u\rangle = 0, \qquad \langle f, u\rangle = \varphi(f)\cdot u, \qquad
+  \langle\lambda, x\rangle = \lambda\,\psi(x),
+\]
+pour $\lambda \in \mathcal{O}$, $u \in L_1 \otimes L_2$, $f \in A_1 \otimes A_2$ d'image $\varphi(f)$
+dans $L_1^{\vee} \otimes L_2^{\vee}$, $x \in E_1 \otimes E_2$, et par l'accouplement produit
+sur $(A_1 \otimes A_2) \times (E_1 \otimes E_2)$ ; il faut quatre compatibilités pour qu'il
+passe aux sommes amalgamées. La page 177 en écrit trois et conclut « OK » ; la
+quatrième n'est pas écrite\footnote{La page 179 écrit $\langle\lambda, x\rangle =
+\lambda\,\pi(x)$ ; la page 183 écrit $\lambda\,\psi(x_1 \otimes x_2)$, qui est le bon. Les
+pages 181 à 187 essaient plusieurs écritures de $A$ et de $A^{\vee}$ comme
+quotients, en partie barrées.}.
+
+\emph{Le générateur} (pages 175 et 191). Avec les bases duales $(1, u)$ de $A$ et
+$(x, e)$ de $E$, $x = x_1 * x_2$, $e = e_1 \otimes e_2$, $\langle 1, x\rangle = \langle u,
+e\rangle = 1$, $\langle 1, e\rangle = \langle u, x\rangle = 0$, les coordonnées de
+$u_1 * u_2$ sont $\langle u_1 * u_2, x\rangle = b_1b_2$ et $\langle u_1 * u_2, e\rangle = 1$,
+d'où
+\[
+  \boxed{\ u_1 * u_2 = u + b_1b_2\ }, \qquad i(u) = 2u_1u_2 + b_2u_1 + b_1u_2 ,
+\]
+ce qui est la formule de la page 102, retrouvée par la dualité. Les pages 189 à 191
+recommencent le calcul en coordonnées --- $e_i$ base de $L_i$, $b_i = \beta_ie_i$,
+$c_i = \gamma_ie_i^{\otimes 2}$, $u_i^{2} + \beta_iu_i + \gamma_i = 0$ ---, notent $\mathrm{Tr}(\lambda u
++ \mu) = -\lambda\beta + 2\mu$ et $N(\lambda u + \mu) = \lambda^{2}c - \lambda\mu\beta + \mu^{2}$, et
+posent l'équation $u^{2} + \beta u + \gamma = 0$ du générateur du produit. Le dossier
+s'arrête là, sans conclusion visible\footnote{Page 189, $\lambda$ et $\mu$ sont les
+coefficients de $u$ et de $1$, l'inverse de la page 175 ; et $u$ est défini par
+$\langle u, e_1 \otimes e_1\rangle = 1$, pour $e_1 \otimes e_2$. Page 191, « $u = 2uu' +$ »
+s'interrompt après le signe $+$.}.
+
+\end{document}

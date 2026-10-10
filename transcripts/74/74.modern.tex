@@ -1,0 +1,2023 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 74
+% (pages 1-135, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. It is held to being mathematically correct as it stands; where
+% the manuscript is loose or mistaken, the true statement is what appears here
+% and the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pp. 1-20), batch-02.fr.tex (pp. 21-40), batch-03.fr.tex (pp. 41-60),
+% batch-04.fr.tex (pp. 61-80), batch-05.fr.tex (pp. 81-100), batch-06.fr.tex
+% (pp. 101-120) or batch-07.fr.tex (pp. 121-135).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its seven batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5). The literature named
+% in the footnotes is cited from memory and was not checked against the
+% sources. Model followed: the reading of folder 69 (same objects, same
+% dating), cross-referenced throughout; folder 75 for torsors and omega(I).
+% Checked by machine (Python, on the standard model of the 27 lines a_i, b_i,
+% c_ij, on the duads of a 6-set, and on the 3x3 grid): 45 triangles, 720
+% triads, 72 sixes, 120 pavés and the intersection pattern of p. 62 (1, 2,
+% 27, 54, 36); the distribution 6/9/6/3 of p. 64; the models of pp. 51-52
+% are srg(27,10,1,5); T_1(B) of p. 59 (6 independent 5-sets, each point in
+% 2); the four orbits (18, 162, 216, 324) of the group of order 1296 on the
+% triads (p. 60); |G°| = 36, 720, 25920 for c = 1, 2, 4 and G° transitive on
+% ordered edges for c = 2, 4 (p. 107); the 45 double transpositions of S_6
+% fixing exactly a line (p. 106); phi : Y -> E bijective for c = 1, 2-to-1 onto
+% 4 points for c = 2, injective for c = 4 (pp. 127-129); the sign of the
+% commutator formula of p. 33 (Heisenberg model); the arithmetic of pp.
+% 115-120.
+%
+% Scope. Every transcribed page is used. Absent from the transcription as
+% blank or without mathematics: pp. 2, 4, 7, 9, 11, 17, 19, 24, 31, 34, 36,
+% 40, 42, 45 (covers with a pencilled number), 67 (typed Bourbaki seminar
+% programme), 71 (blank separator), 91 (cover « (33 p) »), 126 (cover
+% « (9p) »); p. 122 is a printed USTL examination cover, of which only his
+% arithmetic counts; the upper half of p. 41 (household accounts) is not
+% described. The leaves are partly out of order (p. 5 continues p. 6).
+%
+% Spine. A family of graphs — vertices, edges, triangles; every edge in one
+% triangle; every vertex off a triangle linked to exactly one of its
+% vertices — of which the graph of the 27 lines is the largest member:
+%   pp. 1-16    ternary relations with unique completion (Latin squares),
+%               bitorsors; the homomorphism lemma (pp. 5-6); the loop of a
+%               pointed relation (pp. 8-12); associativity, a Moufang-type
+%               identity (pp. 13-15); loops of order <= 4 (p. 16).
+%   pp. 18-30   a graph built on a group (p. 18); the 27 in Schläfli's
+%               notation xi_i, xi'_i, xi_ij: triads, hexagons, the counts 27,
+%               36, 40, 45, 72, 120, 720; E_6 (p. 27); p. 28's Prop.
+%   pp. 32-39   central extensions of Gamma = Ker(V^I -> V): z_rho, quadratic
+%               maps, the universal module, the canonical extension for
+%               dim V = 2 over F_2.
+%   pp. 41-44   scratch on pentagons and the dodecahedron (720 = 6!).
+%   pp. 46-60   the cubic graph: discrete and bi-discrete parts, triads
+%               (linked, W-linked, bilinked), hexagons of triads, bitriangles,
+%               the decomposition into three bitriangles (pp. 51-52), the
+%               15-vertex graph T_1(B) (p. 59), the four types of triads.
+%   pp. 61-70   bitriangles renamed « pavés »; the 120 pavés relative to one;
+%               triad <-> hexagon; nu_tau; the pavé and its complement.
+%   pp. 72-80   the diagram of coverings Tria' -> Hex -> triHex; hexagons as
+%               (tau, eps, eps', phi); polygons n = 3, 4, 6 and the subgroup
+%               lattices of D_4, D_6.
+%   pp. 81-90   squares and hexagons in a pavé; products, coproducts and the
+%               opposite graph; the pavé is self-opposite.
+%   pp. 92-105  « complexes cubiques généralisés »: the axioms, the structure
+%               around a triangle t_0, the Scholie, the reduction to (I) a
+%               Latin square of order c and (II) double covers; counts in c.
+%   pp. 106-116 automorphisms: the symmetries sigma_t, G°, the transitivity
+%               theorem, lemmas, |G| for c = 1, 2; p. 116: elementary abelian.
+%   pp. 117-123 the tower T_{-1} < T_0 < T_1 < T_2 (c = 0, 1, 2, 4): counts
+%               of embedded and pinned substructures; categories of pairs.
+%   pp. 121, 124-125 relations between the sigma_t; « short-cut ».
+%   pp. 127-129, 135 a marked point: V = F_2^I, the map phi : Y -> E.
+%   pp. 130-131 the same axioms in terms of triangles; configurations, duality.
+%   pp. 132-135 « diagrams A_n », prisms, bicarrés, squares centred at a point.
+%
+% Notation fixed for the document.
+%  - Delta = (S, A, T): vertices, edges, triangles; « liés » kept (for the 27
+%    lines: the lines meet). Folder 69 writes C for the cubic graph; here
+%    Delta, as on most of these pages.
+%  - triangle = three pairwise linked vertices; triade = three pairwise
+%    non-linked vertices; base (hexaplet) = six pairwise non-linked; bibase =
+%    double-six. Pavé = bitriangle = the 3x3 grid (product of two triangles).
+%  - c = card E_a (the number of triangles through a vertex, minus one);
+%    T_nu for the graph with c = 2^nu (nu = 0, 1, 2) and T_{-1} the triangle
+%    (c = 0). The pages write T, tau, T (cursive), always with this index.
+%  - The 27: xi_i, xi'_i (i = 1..6), xi_ij, Schläfli's a_i, b_i, c_ij; eta the
+%    class of a line of the plane, xi = sum xi_i; intersection form signs as
+%    in folder 69 (xi_i.xi_i = -1).
+%  - omega(I): the two circular orders on a 3-set (as in folders 69, 75).
+%  Homonymies, stated in the spine section: « bitriade » (p. 28: 36 objects,
+%  double-sixes; p. 46: a hexagon); « triades liées » (p. 46: union is a
+%  base; p. 68: « parallèles » in a pavé); Gamma (a ternary relation, pp.
+%  1-16; Ker(V^I -> V), pp. 32-39; c^2 points, pp. 101-103); I (a 3-set; the
+%  basis of p. 38; the triangles at a, p. 127).
+%
+% Substantive departures, each footnoted where it occurs:
+%  p. 10   sigma_2 sigma_1 = id etc. do not follow from a)-c); they are the
+%          hypothesis u_1 u_2 u_3 = id admitted p. 8.
+%  p. 14   margin « sigma(xy) = sigma x sigma y »: anti-automorphism (p. 13).
+%  p. 15   the boxed identity at z = 1 is the left Moufang identity (ours).
+%  p. 16   loops of order <= 4 are groups; the first non-associative loop has
+%          order 5 (ours).
+%  p. 18   « i in V_lambda » read I_lambda (transcription's doubt).
+%  p. 26   (2 eta - xi).xi_j = 1 with the intersection form (page: 2).
+%  p. 27   r_456 = r_1+2r_2+3r_3+2r_4+r_5+r_6 (page: 3(r_1+r_2+r_3)+...);
+%          « indice 3 » holds for the lattice, not in W (index 240).
+%  p. 33   z(x+y) - z(x) - z(y) = [psi_i(x), psi_{rho i}(y)] (page: the
+%          opposite sign).
+%  p. 35   over Z/n an extra condition (lambda(n e_i) = 0) is needed.
+%  p. 38   « V + Gamma^2(V) » is the universal module of degree-<=2 maps
+%          (Passi's I/I^3), an extension, not a direct sum; the result for
+%          V = F_2^n is right.
+%  p. 52   |Aut| = 6^4 = 1296 (page: « 3.6^4 », uncertain).
+%  p. 72   Hex has 120 elements (page: 720).
+%  p. 87   with p. 86's definition the coproduct of two segments is K_4; the
+%          square drawn is their product.
+%  p. 92   T ⊂ P_3(S) (page: P_3(A)).
+%  p. 106  b) is false as stated (transpose of the grid; double transpositions
+%          for c = 2); corrected characterisation.
+%  p. 107  G° = G for c = 2 only; index 2 for c = 1 and for c = 4 (ours, by
+%          machine for c = 4).
+%  p. 119  c_{0,gamma} without the factor (c-1); p. 120's closed formulas
+%          lack a factor c (both).
+%  p. 123  the (0,2) entry: (Ens)_3 x (Ens)_{3,3} (order 432, as p. 52); the
+%          second table's entries are doubtful and three disagree with the
+%          counts.
+%  p. 128  u is injective iff card I is even, i.e. nu = 0 (page: nu ≠ 0).
+%
+% Links the pages do not write (ours, said so in the body): the axioms of p.
+% 92 are those of a generalised quadrangle of order (2, c), and c in {1, 2,
+% 4} is the classical list; axiom I of p. 1 and beta_Gamma of p. 102 are the
+% same Latin-square condition, so pp. 1-16 are problem (I) of p. 102; the
+% extensions of pp. 32-39 and the diagram of p. 121 are problem (II); p. 116
+% forces the F_2-vector space that p. 39 then extends; the 15-vertex T_1 is
+% the Cremona-Richmond configuration; pavé = Steiner trihedral pair; the
+% triangle stabiliser « Trialité » (p. 123) has order 1152 = |W(F_4)|.
+% Folder 69 has the same family seen from the 27 (its pp. 2-16, 100-118).
+%
+% Announced and never established: p. 1's category C and the question « le
+% foncteur phi est-il une équivalence ? » (p. 5); case c) of p. 18; p. 28's
+% Prop (fragmentary); the extension of p. 37 « déterminé à isom. unique
+% près » (stated); p. 63's programme a), b); the Prop of p. 86 (stated with
+% « ? »); the Résolution of p. 100 (stops); the classification I), II) of
+% pp. 102-103; the « corollaire plus fort » of p. 114 (struck); p. 129 b)
+% (stops); the bracket of p. 135 (not closed).
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{74}
+\pages{1}{135}
+\dating{[à partir de 1976]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Complexes cubiques : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Prenez trois points deux à deux reliés : c'est un triangle. Imaginez
+maintenant un dessin fait de points et de traits où chaque trait appartient
+à un seul triangle, et où tout point placé hors d'un triangle est relié à un
+sommet de ce triangle et à un seul. La règle paraît anodine ; elle est en
+réalité si contraignante qu'il n'existe qu'une poignée de tels dessins finis
+non triviaux. Le plus petit a neuf points rangés en carré de trois sur trois,
+deux points étant reliés quand ils sont sur une même ligne ou une même
+colonne : Grothendieck l'appelle d'abord « bitriangle », puis « pavé ». Le
+suivant a quinze points. Le plus grand en a vingt-sept, et c'est un objet du
+XIX\textsuperscript{e} siècle : les vingt-sept droites d'une surface cubique,
+deux droites étant reliées quand elles se coupent. Le dossier, intitulé
+« Complexes cubiques », tourne tout entier autour de cette famille. Les
+pages ne parlent jamais de la surface elle-même ; c'est le dessin des droites,
+qu'elles appellent « graphe cubique », qui les occupe.
+
+Le chemin n'est pas droit. Les premières pages sont de l'algèbre pure : trois
+ensembles et une relation entre eux telle que deux éléments pris dans deux des
+ensembles en déterminent un unique troisième --- autrement dit un carré latin,
+une table où chaque valeur apparaît une fois par ligne et par colonne. Quand
+une telle table est-elle celle d'un groupe ? Il montre qu'entre tables de
+groupes les seules correspondances sont les homomorphismes, puis cherche ce
+qui force l'associativité, et tombe sur une identité qu'on reconnaît
+aujourd'hui comme une identité de Moufang. Viennent ensuite des pages de
+dénombrements sur les vingt-sept droites --- 45 triangles, 72 « bases » de six
+droites disjointes, 36 doubles-six, 120 pavés, 720 triplets de droites
+disjointes --- avec le groupe de symétries d'ordre $51\,840$ et le système de
+racines $E_6$ en arrière-plan, puis une étude minutieuse des configurations
+qu'on trouve dans le graphe : triades, hexagones, pavés, et la façon dont
+chacune en détermine d'autres.
+
+Le tournant est au milieu du dossier. Il pose la règle du premier paragraphe
+comme axiome, sans supposer qu'il y ait vingt-sept points, et regarde ce que
+devient le graphe autour d'un triangle. Tout se ramène à deux questions, et
+ce sont exactement les deux sujets des premières pages : un carré latin
+(c'est l'algèbre du début) et un revêtement double de ce carré, qui relève de
+la théorie des extensions de groupes, présente elle aussi dans le dossier. On
+voit là, comme souvent chez lui, des pages d'apparence décousue qui se
+laissent lire après coup comme les deux moitiés d'un même problème. Il calcule
+alors, pour chaque taille possible, le nombre de triangles, de pavés, et
+l'ordre du groupe des symétries, qu'il engendre par des « symétries » attachées
+aux triangles ; les tableaux de la fin donnent $6$, $72$, $720$, $51\,840$.
+
+Le dossier ne referme pas la classification qu'il annonce, mais tout y est
+disposé pour elle. Les noms modernes à chercher sont ceux des quadrangles
+généralisés d'ordre $(2, t)$ --- c'est le nom actuel de ces graphes, et l'on
+sait qu'il n'y en a que pour $t = 1, 2, 4$ ---, des vingt-sept droites et des
+doubles-six de Schläfli, des paires de trièdres de Steiner, du groupe de Weyl
+de $E_6$, des carrés latins, quasigroupes et boucles de Moufang, des
+extensions centrales et des formes quadratiques sur $\mathbb{F}_2$.
+
+\keywords{generalized quadrangle, collinearity graph, 27 lines on a cubic surface, double-six, Steiner trihedral pair, Paley graph of order 9, Cremona-Richmond configuration, Weyl group W(E6), E6 root lattice, Latin square, 3-net, quasigroup, isotopy, Moufang loop, bitorsor, central extension, quadratic map, polynomial map of degree 2, Passi module, generated involutions, dihedral group subgroup lattice, complement of a graph, self-complementary graph}
+\end{resume}
+
+\pagerange{1}{135}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les feuillets}
+
+Le dossier compte cent trente-cinq pages au fac-similé. Plusieurs sont des
+chemises ou des intercalaires qui ne portent qu'un nombre au crayon (pages 42,
+45, 91 « (33 p) », 126 « (9p) ») ; d'autres sont blanches ou sans
+mathématiques (2, 4, 7, 9, 11, 17, 19, 24, 31, 34, 36, 40, 71) ; la page 67
+est un programme dactylographié du séminaire Bourbaki, la page 122 une copie
+d'examen imprimée de l'Université des Sciences et Techniques du Languedoc, dont
+seul compte un calcul écrit en travers ; le haut de la page 41 porte des
+comptes domestiques. On ne décrit rien de tout cela davantage. Les feuillets
+du début sont en partie dans le désordre : la page 5 continue une phrase
+ouverte au bas de la page 6. La datation « à partir de 1976 » est celle des
+archivistes ; elle s'accorde avec le dossier 69, qui traite des mêmes objets
+et porte la même.
+
+Le dossier ne contient presque aucun texte rédigé. C'est une suite de notes de
+travail, souvent d'écriture très rapide, où les formules se lisent mieux que
+la prose qui les relie ; on le signale chaque fois que la lecture qu'on
+propose dépend d'un mot incertain.
+
+\subsection*{Les stations}
+
+\begin{itemize}
+\item \textbf{Pages 1 à 16 : relations ternaires et carrés latins.} Trois
+  ensembles et une partie $\Gamma$ de leur produit, deux coordonnées
+  déterminant la troisième ; les bitorseurs ; le lemme d'homomorphisme
+  (pages 5 et 6) ; la loi de composition d'une relation pointée (pages 8 à
+  12) ; l'associativité et une identité de Moufang (pages 13 à 15) ; les
+  petits ensembles (page 16).
+\item \textbf{Pages 18 à 30 : premiers dénombrements.} Un graphe construit
+  sur un groupe (page 18) ; les vingt-sept droites dans la notation de
+  Schläfli, triades et hexagones, les nombres $27$, $36$, $40$, $45$, $72$,
+  $120$, $720$ ; le diagramme $E_6$ (page 27).
+\item \textbf{Pages 32 à 39 : extensions centrales.} Les relèvements
+  $\psi_i$, la fonction $z_\rho$, les applications quadratiques, le module
+  universel, l'extension canonique en dimension 2 sur $\mathbb{F}_2$.
+\item \textbf{Pages 41 à 44 : un brouillon} sur les pentagones et le
+  dodécaèdre.
+\item \textbf{Pages 46 à 60 : le graphe cubique.} Parties discrètes et
+  bi-discrètes, triades liées, hexagones de triades, bitriangles, la
+  décomposition en trois bitriangles et ses modèles (pages 51 et 52), le graphe
+  à quinze sommets (page 59), les quatre types de triades (page 60).
+\item \textbf{Pages 61 à 70 : les pavés.} Les 120 pavés vus d'un pavé
+  donné, la bijection triade--hexagone, la fonction $\nu_\tau$, le pavé et son
+  complémentaire.
+\item \textbf{Pages 72 à 80 : le diagramme des revêtements et les polygones.}
+\item \textbf{Pages 81 à 90 : carrés et hexagones dans un pavé ; produits et
+  coproduits de graphes.}
+\item \textbf{Pages 92 à 105 : les complexes cubiques généralisés.} Les
+  axiomes, la structure autour d'un triangle, la Scholie, la réduction de la
+  classification à deux problèmes, les nombres en fonction de $c$.
+\item \textbf{Pages 106 à 116 : automorphismes.} Les symétries
+  $\sigma_{\underline t}$, le groupe $\mathcal{G}^\circ$ qu'elles engendrent,
+  le théorème de transitivité.
+\item \textbf{Pages 117 à 123 : la tour $\mathcal{T}_{-1} \subset
+  \mathcal{T}_0 \subset \mathcal{T}_1 \subset \mathcal{T}_2$} et ses tableaux.
+\item \textbf{Pages 121, 124, 125 : relations entre symétries.}
+\item \textbf{Pages 127 à 129 et 135 : un point marqué}, l'espace
+  $\mathbb{F}_2^I$.
+\item \textbf{Pages 130 et 131 : les mêmes axiomes en termes de triangles.}
+\item \textbf{Pages 132 à 135 : diagrammes $A_n$, prismes, carrés.}
+\end{itemize}
+
+Le dossier a donc trois couches : une algèbre (pages 1 à 16 et 32 à 39), une
+géométrie combinatoire du graphe des vingt-sept droites (pages 18 à 90), et, à
+partir de la page 92, une théorie axiomatique qui contient les deux premières.
+Les pages 101 à 103 le disent presque en toutes lettres : classer les graphes
+de la famille revient à classer (I) certains carrés latins et (II) leurs
+revêtements doubles. Que le problème (I) soit celui des pages 1 à 16 et le
+problème (II) celui des pages 32 à 39, les pages ne l'écrivent pas ; le
+diagramme de la page 121, qui remet côte à côte $V$, $\Gamma$,
+$\widetilde\Gamma$, $\lbrace \pm 1\rbrace$ et les $\widetilde E_i$, est ce qui
+s'en approche le plus.
+
+\subsection*{Conventions, valables pour tout le dossier}
+
+\begin{itemize}
+\item Un graphe est noté $\Delta = (S, A)$, ou $(S, A, T)$ quand on veut
+  nommer l'ensemble $T$ de ses triangles ; $S$ est l'ensemble des sommets,
+  $A \subset \mathfrak{P}_2(S)$ celui des arêtes. On garde le mot « liés » des
+  pages. Le dossier 69, qui étudie le même graphe, le note $C$ ; on suit ici
+  les pages de ce dossier-ci, qui l'écrivent $\Delta$ ou $S$.
+\item Un \emph{triangle} est une partie de trois sommets deux à deux liés ;
+  une \emph{triade}, une partie de trois sommets deux à deux non liés ; une
+  \emph{base} (ou « hexaplet »), six sommets deux à deux non liés ; une
+  \emph{bibase}, une paire de bases associées. Le \emph{pavé} (d'abord appelé
+  « bitriangle ») est le graphe à neuf sommets $I \times J$, $\operatorname{card} I
+  = \operatorname{card} J = 3$, où deux sommets distincts sont liés quand ils ont
+  une coordonnée commune ; ses six triangles sont les trois lignes et les trois
+  colonnes. Un \emph{hexagone} (« petit hexagone ») est un cycle induit de
+  longueur 6.
+\item Dans le graphe des vingt-sept droites, « liés » veut dire que les droites
+  se coupent ; les triangles sont les 45 plans tritangents, les triades les
+  triplets de droites deux à deux disjointes, les bases et bibases les « six »
+  et les doubles-six de Schläfli, les pavés les paires de trièdres de Steiner.
+  Ces noms classiques sont de nous ; le dossier ne nomme jamais la surface
+  cubique, et l'identification repose sur les nombres qu'il calcule et sur le
+  diagramme $E_6$ de la page 27\footnote{On a vérifié tous les nombres cités
+  dans ce document sur le modèle standard (les droites $a_i$, $b_i$, $c_{ij}$,
+  $a_i$ coupant $b_j$ pour $i \neq j$, $c_{ij}$ coupant $a_i, a_j, b_i, b_j$ et
+  les $c_{kl}$ avec $\lbrace k, l\rbrace \cap \lbrace i, j\rbrace = \emptyset$).
+  C'est aussi le modèle du dossier 69, vérifié de la même façon.}.
+\item Les vingt-sept sont écrits, aux pages 20 à 30 et 124, $\xi_i$,
+  $\xi'_i$ (ou $\hat\xi_i$, $\xi_i^*$, $\xi_i^\wedge$) et $\xi_{ij}$ ($1 \leq
+  i, j \leq 6$), qui sont les $a_i$, $b_i$, $c_{ij}$ de Schläfli ; $\eta$ est
+  la classe d'une droite du plan\footnote{Ces pages ne définissent ni $\eta$
+  ni la forme ; on les lit avec les conventions du dossier 69 (pages 41 à
+  44), où la surface est réalisée comme le plan éclaté en six points.}, $\xi = \sum \xi_i$, et la forme est la forme
+  d'intersection, $\xi_i \cdot \xi_i = -1$, comme au dossier 69.
+\item Dans la théorie générale (pages 92 et suivantes), $c$ désigne le cardinal
+  de $\widetilde E_a / \sigma_a$, c'est-à-dire le nombre de triangles passant
+  par un sommet, moins un. Les quatre graphes de la famille sont notés
+  $\mathcal{T}_\nu$ avec $c = 2^\nu$ : $\mathcal{T}_0$ le pavé ($c = 1$, 9
+  sommets), $\mathcal{T}_1$ le graphe à 15 sommets ($c = 2$), $\mathcal{T}_2$
+  le graphe cubique ($c = 4$, 27 sommets), et $\mathcal{T}_{-1}$ le triangle
+  seul ($c = 0$)\footnote{Les pages écrivent $\mathcal{T}_\nu$ (une capitale
+  cursive de lecture douteuse, pages 57, 58, 63, 70, 75), $\tau_\beta$ (pages
+  117 à 123) et $T_\nu$ (page 127), toujours avec cet indice. La page 123
+  ajoute $\tau_{-\infty}$, le graphe vide, et écrit $c = 0 = 2^{-\infty}$ en
+  regard du triangle, indexé pourtant $-1$ : l'indice et l'exposant ne
+  coïncident qu'à partir de $\nu = 0$.}.
+\item $\omega(I)$ est l'ensemble à deux éléments des ordres circulaires d'un
+  ensemble $I$ à trois éléments, torseur sous $\lbrace \pm 1\rbrace$, comme aux
+  dossiers 69 et 75 ; $X \wedge \omega$ le produit contracté.
+\end{itemize}
+
+Plusieurs homonymies traversent le dossier, et il faut les avoir en tête. Le
+mot « bitriade » désigne page 28 des objets au nombre de 36, les bibases, et
+page 46 un hexagone (deux triades dont la relation de non-liaison est une
+bijection). « Deux triades liées » veut dire page 46 que leur réunion est une
+base, et page 68 qu'elles sont « parallèles » dans un même pavé ; la page 68
+le marque elle-même en renommant le bitriangle « pavé ». La lettre $\Gamma$
+désigne une relation ternaire (pages 1 à 16), le groupe
+$\operatorname{Ker}(V^I \to V)$ (pages 32 à 39) et l'ensemble à $c^2$
+éléments des pages 101 à 103 --- trois objets qui, on le verra, sont trois
+aspects d'une même chose. Enfin $I$ est un ensemble à trois éléments, sauf
+page 38 (une base d'espace vectoriel) et page 127 (l'ensemble des triangles
+passant par un sommet).
+
+\pagerange{1}{3}
+\section*{1. Relations ternaires et bitorseurs (pages 1 et 3)}
+
+Soit $I$ un ensemble à trois éléments, $(E_i)_{i \in I}$ une famille
+d'ensembles et $\Gamma \subset \prod_{i\in I} E_i$.
+
+\textbf{Axiome I.} Si $I = \lbrace i, j, k\rbrace$, pour tous $x_i \in E_i$,
+$x_j \in E_j$ il existe un unique $x_k \in E_k$ tel que $(x_i, x_j, x_k)
+\in \Gamma$.
+
+Autrement dit, les trois projections $\Gamma \to E_i \times E_j$ sont
+bijectives : $\Gamma$ est un \emph{carré latin} (la table d'un quasigroupe,
+ou, en géométrie, un \emph{3-réseau}), écrit symétriquement en ses trois
+directions\footnote{Noms de nous. C'est la même condition que la condition (1)
+du dossier 69 (page 107), et --- on le verra --- que l'axiome $\beta_\Gamma$
+de la page 102 de ce dossier.}. Ces objets forment une catégorie
+$\mathcal{C}$, $I$ variant, pour les isomorphismes au-dessus des bijections de
+$I$\footnote{« ($I$ variable ; pour iso sur $I$) » : les deux derniers mots
+sont incertains.}.
+
+La seconde définition (\textbf{II}) donne la source des exemples. Soit
+$(G_i)_{i\in I}$ une famille de groupes, et pour chaque $i$ un ensemble $E_i$
+qui soit un \emph{bitorseur} sous les deux autres groupes : si $I = \lbrace
+i, j, k\rbrace$, $G_j$ opère à gauche et $G_k$ à droite sur $E_i$, chacun
+simplement transitivement, les deux actions commutant\footnote{La page
+précise qu'on peut « renverser » l'une des actions en passant à l'inverse ;
+une première ligne, biffée, parlait d'un système transitif d'isomorphismes
+extérieurs entre les $G_i$, idée qui revient plus bas.}. Le produit $\prod_i
+G_i$ opère alors diagonalement sur $P = \prod_i E_i$ par
+\[
+(g_i, g_j, g_k) \cdot (x_i, x_j, x_k) = (g_j x_i g_k^{-1},\ g_k x_j
+g_i^{-1},\ g_i x_k g_j^{-1}).
+\]
+Pour $x \in P$, les trois conditions
+\[
+(\mathrm{a}_i) \quad \delta(G_i) x \subset \delta(G_j \times G_k) x
+\]
+(et leurs permutées circulaires) sont équivalentes\footnote{La ligne qui les
+introduit est surchargée ; seul « équivalentes » se lit sûrement.}. Un point
+$x$ définit, par $g_j x_i = x_i \tau(g_j)$, des isomorphismes
+$\tau_{k,j}(x_i) : G_j \to G_k$, et la condition s'écrit
+\[
+\tau_{j,i}(x_k)\, \tau_{i,k}(x_j)\, \tau_{k,j}(x_i) = \mathrm{id}_{G_j},
+\]
+condition invariante par permutation circulaire. Sous cette condition l'orbite
+$\Gamma$ de $x$ sous $\prod G_i$ est un torseur sous chacun des trois produits
+$\prod_{j \neq i} G_j$, et elle vérifie l'axiome I : connaissant $a \in
+\Gamma$ et $x_i$, $x_j$, on détermine successivement les éléments du groupe qui
+mènent de $a$ à $x$, puis $x_k$. L'\emph{existence} d'un tel $x$ équivaut à ce
+que les isomorphismes extérieurs (modulo les automorphismes intérieurs)
+$\tilde\tau_{ij}$ définis par les bitorseurs forment un système transitif. On
+obtient ainsi une catégorie $\mathcal{C}'$ et un foncteur $\varphi :
+\mathcal{C}' \to \mathcal{C}$\footnote{Les lignes qui entourent l'encadré de
+la page 3 sont d'une écriture très rapide et seuls les symboles s'y lisent ;
+on rend le sens que les formules imposent. C'est la théorie des bitorseurs du
+dossier 69 (page 112) ; elle relève de la cohomologie non abélienne de Giraud
+(1971), que la page n'invoque pas.}.
+
+\pagerange{5}{6}
+\section*{2. Le lemme d'homomorphisme (pages 6 et 5)}
+
+\textbf{Proposition} (page 6). Le foncteur $\varphi : \mathcal{C}' \to
+\mathcal{C}$ est pleinement fidèle : il identifie $\mathcal{C}'$ à une
+sous-catégorie pleine de $\mathcal{C}$.
+
+On se ramène, les deux catégories étant fibrées sur le groupoïde des
+ensembles à trois éléments, aux fibres en $I = \lbrace 1, 2, 3\rbrace$. La
+fidélité est claire. Pour la plénitude, un point de $\Gamma$ identifie les
+$G_i$ entre eux et aux $E_i$, donc l'objet au triple $(G, G, G)$ avec
+\[
+\Gamma = \lbrace (x, y, z) \in G^3 \mid xyz = 1\rbrace ;
+\]
+de même pour un second objet, avec un groupe $G'$, en prenant pour point
+base l'image de $(1, 1, 1)$. Un morphisme de $\mathcal{C}$ est alors un
+triple d'applications $u_1, u_2, u_3 : G \to G'$ avec $u_i(1) = 1$ et
+\[
+(*) \qquad xyz = 1 \ \Longrightarrow\ u_1(x)\, u_2(y)\, u_3(z) = 1 .
+\]
+
+\textbf{Lemme} (page 5). Sous ces conditions, $u_1 = u_2 = u_3$, et c'est un
+homomorphisme de groupes.
+
+En effet, $x = 1$ donne $u_2(y) u_3(y^{-1}) = 1$, et $y = 1$ donne $u_1(x)
+u_3(x^{-1}) = 1$ ; donc $u_1(y) = u_2(y) = u_3(y^{-1})^{-1}$ pour tout $y$.
+Avec $z = 1$, $u_1(x) u_2(x^{-1}) = 1$, d'où $u(x^{-1}) = u(x)^{-1}$ pour $u =
+u_1 = u_2$, puis $u_3 = u$. Enfin $(*)$ avec $z = (xy)^{-1}$ donne $u(x)u(y) =
+u((xy)^{-1})^{-1} = u(xy)$\footnote{La page fait le même calcul dans un ordre
+légèrement différent (« $u_3(y) = u_2(y^{-1})^{-1}$, pareil $u_1(y) =
+u_2(y^{-1})^{-1}$ ») ; il est correct. La phrase qui énonce les $u_i$ commence
+au bas de la page 6 et finit en tête de la page 5 : les feuillets sont classés
+dans le désordre.}.
+
+C'est le théorème classique selon lequel les isotopies entre tables de groupes
+normalisées en l'unité sont des isomorphismes ; le dossier 69 (page 116) en
+fait le même calcul pour décrire les autotopies de la table d'un
+groupe\footnote{Rattaché en général à Albert (1943) ; cité de mémoire, nom
+d'« isotopie » de nous.}. La page 5 pose alors la question qui restera ouverte :
+\emph{le foncteur $\varphi$ est-il une équivalence ?} --- c'est-à-dire : tout
+carré latin vérifiant l'axiome I vient-il d'un système de bitorseurs ? La
+réponse est non en général (il y a des quasigroupes qui ne sont isotopes à
+aucun groupe) ; la condition qui caractérise l'image est aujourd'hui la
+condition de Reidemeister, ou de clôture des quadrilatères\footnote{Noms et
+réponse de nous ; les pages ne tranchent pas la question.}. Les pages 8 à 16
+cherchent cette condition.
+
+\pagerange{8}{12}
+\section*{3. La loi de composition d'une relation pointée (pages 8 à 12)}
+
+Partons d'un objet de $\mathcal{C}$ et d'un point $a = (a_1, a_2, a_3)$ de
+$\Gamma$. L'axiome I fournit des applications $\alpha_1 : E_1 \to
+\operatorname{Isom}(E_2, E_3)$, $\alpha_2 : E_2 \to \operatorname{Isom}(E_3,
+E_1)$, $\alpha_3 : E_3 \to \operatorname{Isom}(E_1, E_2)$ ($\alpha_1(x)$
+envoie $y$ sur l'unique $z$ avec $(x, y, z) \in \Gamma$, et ainsi de suite) ;
+on a $\alpha_3(a_3) : a_1 \mapsto a_2$, etc. Posons
+\[
+\begin{aligned}
+u_3 &= \alpha_2(a_2)\, \alpha_1(a_1) : E_2 \to E_1, \\
+u_1 &= \alpha_3(a_3)\, \alpha_2(a_2) : E_3 \to E_2, \\
+u_2 &= \alpha_1(a_1)\, \alpha_3(a_3) : E_1 \to E_3 ,
+\end{aligned}
+\]
+et \emph{admettons} la condition
+\[
+u_1 u_2 u_3 = \mathrm{id} .
+\]
+Les $u_i$ forment alors un système transitif d'isomorphismes entre les $E_i$
+(on a $u_3(a_2) = a_1$, etc.), qui permet de les identifier à un même
+ensemble $G$ pointé par $e$. On a donc $\Gamma \subset G^3$ avec $(e, e, e)
+\in \Gamma$, et, pour tous $x, y$, une unique solution en chaque place
+(conditions a) et b) de la page 10). Soit $\sigma_1, \sigma_2, \sigma_3$ les
+bijections de $G$ définies par
+\[
+(e, x, \sigma_1 x) \in \Gamma, \qquad (\sigma_2 x, e, x) \in \Gamma, \qquad
+(x, \sigma_3 x, e) \in \Gamma .
+\]
+La page en tire $\sigma_2\sigma_1 = \sigma_3\sigma_2 = \sigma_1\sigma_3 =
+\mathrm{id}$, donc $\sigma_1 = \sigma_2 = \sigma_3 = \sigma$ et $\sigma^2 =
+\mathrm{id}$\footnote{Ces relations ne découlent pas des seuls axiomes a) et
+b) : elles traduisent, après l'identification des $E_i$, l'hypothèse $u_1 u_2
+u_3 = \mathrm{id}$ admise page 8, et c'est d'elle seule qu'elles viennent. Une
+première relation, $(\sigma_3\sigma_2\sigma_1)^2 = \mathrm{id}$, est biffée ;
+un premier énoncé b), barré de hachures, définissait déjà les $\sigma_i$. Le
+début de la page 10 continue, selon toute apparence, la dernière ligne de la
+page 8.}. On définit enfin une loi de composition par
+\[
+(x, y, z) \in \Gamma \iff z = \sigma(x \cdot y).
+\]
+
+\textbf{La structure obtenue} (page 12). Les conditions se traduisent ainsi :
+les translations $z \mapsto zx$ et $z \mapsto xz$ sont bijectives ; $\sigma e =
+e$ ; $e$ est unité à gauche et à droite ; $x \cdot \sigma x = e$, et comme
+$\sigma^2 = \mathrm{id}$, $\sigma x \cdot x = e$. Autrement dit $(G, \cdot, e)$
+est une \emph{boucle} (un quasigroupe à élément neutre) où tout élément a un
+inverse bilatère $\sigma x$\footnote{Le mot « boucle » (en anglais
+\emph{loop}) est de nous. La page a d'abord écrit « $\sigma x$ est l'inverse à
+droite de $x$ », biffé puis rétabli sous une autre forme ; l'alinéa est marqué
+d'un double trait en marge.}. La relation devient
+\[
+(x, y, z) \in \Gamma \iff (x \cdot y) \cdot z = e \iff z \cdot (x \cdot y) = e,
+\]
+et la page s'arrête sur la question qui reste : « $(xy)z = x(yz)$ ?? ».
+
+\pagerange{13}{16}
+\section*{4. L'associativité, et une identité de Moufang (pages 13 à 16)}
+
+\textbf{Le cas d'un groupe} (page 13, « (A) »). Pour $E_1 = E_2 = E_3 = G$
+un groupe, $\Gamma = \lbrace xyz = 1\rbrace$ et un point $(a, b, c)$ de $\Gamma$,
+les applications $f_1$, $f_2$, $f_3$ définies par $(a, x, f_1(x)) \in \Gamma$,
+$(f_2(x), b, x) \in \Gamma$, $(x, f_3(x), c) \in \Gamma$ valent
+\[
+f_1(x) = x^{-1}a^{-1}, \qquad f_2(x) = x^{-1}b^{-1}, \qquad f_3(x) =
+x^{-1}c^{-1},
+\]
+leurs composés $g_1 = f_3 f_2 : x \mapsto b x c^{-1}$, $g_2 = f_1 f_3 : x \mapsto
+c x a^{-1}$, $g_3 = f_2 f_1 : x \mapsto a x b^{-1}$, et
+\[
+g_1 g_2 g_3 (x) = (bca)\, x\, (cab)^{-1} = x
+\]
+puisque $abc = 1$ entraîne $bca = cab = 1$. C'est la condition admise page 8,
+vérifiée pour un groupe ; on a aussi $g_1 g_2 g_3 = (f_3 f_2 f_1)^2$ et
+$f_3f_2f_1(x) = b x^{-1} b$. L'involution $\sigma$ de la page 10 est alors $x
+\mapsto x^{-1}$, et elle vérifie
+\[
+\sigma(xy) = \sigma y\, \sigma x,
+\]
+relation encadrée sur la page\footnote{En marge de la page 14, la même relation
+est écrite $\sigma(xy) = \sigma x\, \sigma y$ ; dans un groupe non commutatif
+c'est l'ordre de la page 13 qui est juste : l'inversion est un
+anti-automorphisme.}.
+
+\textbf{Sans associativité} (pages 14 et 15). La page 14 refait le calcul en
+écrivant toutes les parenthèses, pour une boucle comme celle de la page 12. La
+condition $g_1 g_2 g_3 = \mathrm{id}$ y devient une identité entre produits
+parenthésés, que la page met sous la forme
+\[
+c\bigl((ax)b^{-1}\bigr) = \bigl(b^{-1}(xc)\bigr)a \qquad (abc = 1),
+\]
+puis, page 15, après plusieurs substitutions à deux encres, sous la forme
+encadrée
+\[
+\bigl((bz)(xb)\bigr)c = b\bigl((zx)(bc)\bigr).
+\]
+Pour $z = 1$ elle se réduit à $\bigl(b(xb)\bigr)c = b\bigl(x(bc)\bigr)$, ce que
+la page écrit aussi. C'est, à la flexibilité $b(xb) = (bx)b$ près, l'\emph{identité
+de Moufang à gauche} $((bx)b)c = b(x(bc))$\footnote{Le rapprochement est de
+nous. La page 15 est très surchargée ; la ligne « $z = 1$, $c = \ldots$ », dans
+laquelle des lettres sont entourées, est d'une lecture d'ensemble douteuse, et
+deux facteurs d'une formule intermédiaire sont illisibles. On ne reproduit pas
+les calculs intermédiaires, dont la transcription donne l'état.}. Les boucles
+de Moufang ne sont pas toutes des groupes (les octaves de Cayley de norme 1 en
+donnent une) ; les pages ne disent pas si la condition de la page 8, appliquée
+à tous les points de $\Gamma$, force l'associativité, et elles ne concluent
+pas.
+
+\textbf{Les petits ensembles} (page 16). La page, barrée de deux diagonales,
+essaie les lois sur des ensembles à deux, trois, quatre éléments : sur $\lbrace
+e, a\rbrace$ on trouve $aa = e$ ; sur $\lbrace e, a, b\rbrace$, $aa = b$, $ab =
+ba = e$, $bb = a$ ; sur $\lbrace e, a, b, c\rbrace$ deux tables commencées, celle du
+groupe de Klein ($aa = e$, $ab = c$, $ac = b$) et celle d'un groupe cyclique
+($aa = b$, $ab = c$, $ac = e$). Ce sont bien les seules possibilités : toute
+boucle d'ordre au plus 4 est un groupe, et la plus petite boucle non
+associative a cinq éléments\footnote{Fait classique, de nous. Le bas de la page
+revient aux relations $(ab)c = 1$, $(ax)y = 1$, \ldots, avec $f_1(x) =
+\sigma(ax)$, $f_2(x) = (\sigma x)b^{-1}$ ; tête-bêche, à l'encre brune, quelques
+formules reprennent l'associativité.}.
+
+\pagerange{18}{22}
+\section*{5. Un graphe sur un groupe, et un premier hexagone (pages 18 à 22)}
+
+\textbf{Page 18.} Une construction nouvelle, sur un feuillet blanc, sans lien
+écrit avec ce qui précède : un groupe $V$, une partie $I \subset V$, des
+homomorphismes $\varphi_\lambda : V \to V_\lambda$ ($\lambda \in \Lambda$) avec
+des parties $I_\lambda \subset V_\lambda$, un $V$-ensemble $Y$ et les
+ensembles induits $X_\lambda = Y \wedge_V V_\lambda$, avec $t_\lambda : Y \to
+X_\lambda$. Sur $S = \lbrace e\rbrace \amalg Y \amalg \coprod_\lambda
+X_\lambda$ on met le graphe où $e$ est lié aux éléments des $X_\lambda$, $y \in
+Y$ à $iy$ ($i \in I$), $x \in X_\lambda$ à $ix$ ($i \in I_\lambda$), et $y$ à
+$t_\lambda(y)$\footnote{Au premier item le complément de « lié à tous les él.\
+de » est surchargé et l'indice de $X$ illisible ; on lit les $X_\lambda$. Au
+troisième la page porte « $i \in V_\lambda$ » ; on suit la transcription, qui
+attend $I_\lambda$.}. « À quelles conditions est-ce là un graphe triadique ? »
+Il annonce qu'il n'y a que les cas a) $V \simeq \mathbb{F}_2^{r+1}$, un
+cardinal (illisible) valant $2^r$ avec $r \in \lbrace 0, 1, 2\rbrace$ ; b) $I$
+est une base de $V$ ; et c), laissé vide. On reconnaît, sans que la page le
+dise, la description d'un graphe de la famille autour d'un sommet $e$ : ses
+voisins groupés par triangles, ses non-voisins $Y$ munis d'une action d'un
+$\mathbb{F}_2$-espace vectoriel, et les trois valeurs $c = 2^r \in \lbrace 1,
+2, 4\rbrace$ que les pages 120 et 127 retrouveront\footnote{Rapprochement de
+nous ; la page n'en dit pas davantage et l'énoncé n'est pas démontré. La
+description exacte autour d'un sommet est celle des pages 127 à 129 et 135
+(section 24 ci-dessous) ; pour $c = 4$ les non-voisins forment un torseur sous un
+espace de dimension 4 et l'ensemble $I$ des « translations voisines » n'y est
+pas une base mais un système de cinq vecteurs de somme nulle.}.
+
+\textbf{Pages 20 à 22.} Les vingt-sept apparaissent, dans la notation de
+Schläfli : $\xi_1, \ldots, \xi_6$, les $\xi'_i$ et les quinze $\xi_{ij}$. La
+page 20 dessine un hexagone dont les sommets sont des triplets ($\xi_1 \xi_2
+\xi_3$, $\xi_4 \xi_5 \xi_6$, \ldots), « hexagone distingué ou triplets
+typiques », et décompte, pour une telle configuration, les sommets liés à
+aucun, un, deux des éléments fixés ($6$, $9$, $6$, \ldots) ; elle décrit aussi
+l'ensemble comme fibré de degré 3 sur un ensemble $\varepsilon$ à deux
+éléments, $E = \coprod_{\alpha \in \varepsilon} E_\alpha$, avec $E \times I$
+fibré sur l'hexagone $I \times \varepsilon$\footnote{Les indices des triplets
+aux sommets de l'hexagone ne se lisent pas tous ; les esquisses du bas de la
+page (grilles $3 \times 3$, « $9\,6\,6\,6$ », « $9\,9\,9$ », « $40$ ») sont sans
+légende.}. La page 21 note la correspondance « triades $\leftrightarrow$
+hexagones », et les nombres $6^4 = 1296 = 2^4 3^4$ et $720 = 2^4 \cdot 3^2
+\cdot 5$ ; la page 22 dessine les trois blocs de neuf
+\[
+\lbrace \xi_1, \xi_2, \xi_3, \xi'_1, \xi'_2, \xi'_3, \xi_{23}, \xi_{31},
+\xi_{12}\rbrace, \quad \lbrace \xi_4, \ldots, \xi_{45}\rbrace, \quad \lbrace
+\xi_{ij} \mid i \leq 3 < j\rbrace ,
+\]
+qui partagent les vingt-sept en trois pavés --- l'une des 40 décompositions
+qu'on retrouvera page 25.
+
+\pagerange{23}{30}
+\section*{6. Dénombrements et racines (pages 23 à 30)}
+
+La page 23 étudie un polyèdre (un octaèdre de sommets $p, p', q, q', r, r', s,
+s'$ autour d'un point $a$) et la façon dont deux points sont liés ; la lecture
+de la prose y est trop incertaine pour qu'on en tire un énoncé\footnote{On y
+lit que $x, y$ « sont liés exactement par deux », l'une passant par $(r, a,
+r')$, l'autre par $(s, a, s')$, et que deux points d'une partie $T'$ sont liés
+si et seulement s'ils ont « des arêtes distinctes et convergentes à des sommets
+distincts de $T$ » ; plusieurs mots illisibles.}. Les pages 25 à 29 sont des
+dénombrements, en colonnes. Tous les nombres qui suivent sont justes :
+
+\begin{itemize}
+\item 27 sommets, 36 bibases, 40 « trihexagones », 45 triangles (tableaux des
+  pages 28 et 29, où les bibases sont appelées « bitriades » puis
+  « bibases »\footnote{À la page 28 le mot est « \emph{bitriades} », lu avec
+  doute ; le tableau de la page 29 écrit « bibases ». Les « trois-neufs » de la
+  page 29 sont les trihexagones.}) ;
+\item 72 bases, $72 \cdot 6! / (72 \cdot 6) = 120$, $\binom{6}{3} = 20$ ;
+\item 720 triades, « groupées en 120 hexagones qui se groupent par triples en
+  40 trihexagones de triades » ; le stabilisateur d'une triade est
+  $\mathfrak{S}_3 \times \mathfrak{S}_3 \times \mathfrak{S}_2$, d'ordre 72, et
+  $51\,840/72 = 720$ ;
+\item le stabilisateur d'un hexagone de triades est $(\mathfrak{S}_3 \times
+  \mathfrak{S}_3 \times \mathfrak{S}_3) \cdot \mathfrak{S}_2$, d'ordre $6^3
+  \cdot 2 = 432$, et il y en a $120 = 51\,840/432$ ; celui d'un trihexagone,
+  décomposition des vingt-sept en trois blocs de neuf, est $\mathfrak{S}_3
+  \cdot (\mathfrak{S}_3 \times \mathfrak{S}_3 \times \mathfrak{S}_3)$, d'ordre
+  $1296$, et il y en a $40$ ;
+\item $27 \cdot 16 \cdot 10 / 6 = 720$ (le dénominateur et le $16$ sont lus
+  avec doute ; le calcul est juste : une droite, une droite disjointe, une
+  troisième disjointe des deux).
+\end{itemize}
+
+Ces nombres sont les classiques : 72 « six », 36 doubles-six, 45 plans
+tritangents, 120 paires de trièdres de Steiner, 40 triples de paires de
+trièdres partageant les vingt-sept droites\footnote{Noms de nous. Les
+vingt-sept dans la notation $\xi_{ij}$ apparaissent page 26 comme $E \times E'
+\amalg E' \times E'' \amalg E'' \times E$ pour trois ensembles à trois éléments,
+avec deux règles de liaison incomplètes ; c'est le modèle que les pages 51 et
+52 mèneront à bien (section 11).}.
+
+\textbf{Les racines} (pages 26 et 27). Avec $\eta$ la classe d'une droite du
+plan, la page écrit $r_6 = \eta - \xi_1 - \xi_2 - \xi_3$ et $r_0 = 2\eta -
+\xi$, et calcule $(2\eta - \xi) \cdot \xi_j$\footnote{La page écrit « $= 2$ ».
+Avec la forme d'intersection ($\eta^2 = 1$, $\xi_i^2 = -1$, $\eta \cdot \xi_i =
+0$) on trouve $(2\eta - \xi) \cdot \xi_j = 1$ ; la lecture de $\eta$ et $\xi$
+est d'ailleurs incertaine à cet endroit.}. La page 27 dessine trois hexagones
+dont les côtés portent des racines, et le diagramme de Dynkin de type $E_6$ :
+$r_1 - r_2 - r_3 - r_4 - r_5$, avec $r_6$ attaché à $r_3$, où $r_i = \xi_i -
+\xi_{i+1}$ ($i \leq 5$). Les racines des côtés sont $r_{i,j} = \xi_i - \xi_j$
+(par exemple $r_{1,3} = r_1 + r_2$, $r_{4,6} = r_4 + r_5$), et
+\[
+r_{456} = \eta - \xi_4 - \xi_5 - \xi_6 = r_1 + 2r_2 + 3r_3 + 2r_4 + r_5 +
+r_6 .
+\]\footnote{La page écrit $r_{456} = 3(r_1 + r_2 + r_3) + 2r_4 + r_5 + r_6$, en
+lisant avec doute le coefficient de $r_4$ et le signe devant $r_3$. Le calcul
+direct donne $\xi_1 + \xi_2 + \xi_3 - \xi_4 - \xi_5 - \xi_6 = r_1 + 2r_2 + 3r_3
++ 2r_4 + r_5$ ; c'est la même correction que le dossier 69 fait à sa page 63.
+On a alors $r_0 = r_6 + r_{456} = r_1 + 2r_2 + 3r_3 + 2r_4 + r_5 + 2r_6$, la
+plus grande racine.}
+Les six racines $r_1, r_2$ ; $r_4, r_5$ ; $r_0, r_6$ forment trois systèmes
+$A_2$ deux à deux orthogonaux, et « engendrent un sous-groupe d'indice 3 » :
+c'est vrai du \emph{réseau} qu'elles engendrent, d'indice 3 dans le réseau des
+racines de $E_6$ (les discriminants valent $27$ et $3$) ; le sous-groupe de
+$W(E_6)$ engendré par les six réflexions, $W(A_2)^3$ d'ordre 216, est
+d'indice 240\footnote{La page écrit « dans $W$ », lu avec doute. Les trois
+hexagones de la page 27 correspondent aux trois blocs de neuf de la page 22 :
+la décomposition $A_2 \times A_2 \times A_2$ est un trihexagone, ce que le cadre
+de la page 29 résume (« décomposition triple $A_2 \leftrightarrow$ triple bloc
+de triades »).}.
+
+\textbf{La proposition de la page 28.} Elle est trop fragmentaire pour être
+énoncée en entier. Elle affirme que certaines parties ordonnées (« vrais
+3-bisons », corrigé de « bitriades ») sont conjuguées sous le groupe, qu'une
+telle partie est contenue dans exactement deux bases $I$, $I'$, et décrit
+l'ensemble $K \cup K'$ de six sommets obtenu en retirant une partie $J$ ; dans
+l'exemple, $K = \lbrace \xi_1, \xi_2, \xi_3\rbrace$, $K' = \lbrace \xi'_1,
+\xi'_2, \xi'_3\rbrace$\footnote{Plusieurs mots en sont lus avec doute
+(« bitriade », « respectivement », « intersections », « automorphisme ») et la
+fin est illisible ; on n'en retient que ce que les exemples confirment.}. Le
+bas de la page note, sans les développer, des pistes : $\mathfrak{S}_4$ et
+$\mathbb{F}_2^4$, « quadriques affines de dim.~3 sur $\mathbb{F}_2$ », un
+ensemble $A(i)$ à quatre éléments et un torseur $P(i)$ sous
+$\mathbb{F}_2^{A(i)}$, une suite exacte $0 \to k \to V'(i) \to V(i) \to 0$, et
+un « $2^3 \cdot 3 \cdot 5 = 120$ !!! ». La page 30 aligne les neuf paires de
+triplets qui forment, trois par trois, les trois hexagones de la page 27.
+
+\pagerange{32}{33}
+\section*{7. Extensions centrales et la fonction $z_\rho$ (pages 32 et 33)}
+
+Soit $V$ un groupe commutatif noté additivement, $I$ un ensemble à trois
+éléments,
+\[
+\Gamma = \operatorname{Ker}(V^I \xrightarrow{\ \Sigma\ } V),
+\]
+$\omega$ l'ensemble des deux ordres circulaires sur $I$, torseur sous $\mathbb{Z}/2$,
+et $V^\omega = V \wedge \omega$, $\mathbb{Z}/2$ opérant sur $V$ par le
+signe\footnote{La page écrit d'abord $\mathbb{Z}$, corrigé en
+$\mathbb{Z}/2$ (lecture incertaine des deux fois).}. Pour $i \in I$ on
+définit $\varphi_i : V^\omega \to \Gamma$ par
+\[
+\varphi_i(x \wedge \rho)_i = 0, \qquad \varphi_i(x \wedge \rho)_{\rho i} = x,
+\qquad \varphi_i(x \wedge \rho)_{\rho^2 i} = -x ,
+\]
+ce qui est bien défini puisque $(-x) \wedge \rho = x \wedge \bar\rho$ avec
+$\bar\rho = \rho^{-1}$. On a $\sum_i \varphi_i = 0$ et la suite exacte
+\[
+0 \to V^\omega \xrightarrow{\ \mathrm{diag}\ } (V^\omega)^I \to \Gamma \to 0 .
+\]
+C'est, pour $V$ quelconque, le groupe $\Gamma = \lbrace (x, y, z) \mid x + y + z
+= 0\rbrace$ des pages 1 à 16 dans le cas commutatif ; les $\varphi_i(V^\omega)$
+sont les trois sous-groupes $\operatorname{Ker} p_i$.
+
+On cherche les systèmes formés d'une extension centrale $0 \to Z \to
+\widetilde\Gamma \xrightarrow{u} \Gamma \to 0$ et d'homomorphismes $\psi_i :
+V^\omega \to \widetilde\Gamma$ relevant les $\varphi_i$. Fixons $\rho \in
+\omega$ et $i_0 \in I$, $i_1 = \rho i_0$, $i_2 = \rho i_1$. Puisque $\sum
+\varphi_i = 0$, le produit
+\[
+z(x, \rho, i_0) = \psi_{i_0}(x \wedge \rho)\, \psi_{i_1}(x \wedge \rho)\,
+\psi_{i_2}(x \wedge \rho)
+\]
+est dans $Z$ ; comme $Z$ est central, il ne dépend pas de $i_0$ (une
+permutation circulaire d'un produit égal à un élément central ne le change
+pas). On note $z_\rho(x) = z(x, \rho)$, $x \in V$. En inversant le produit on
+trouve
+\[
+z_{\bar\rho} = -z_\rho ,
+\]
+de sorte que la paire $(z_\rho)_{\rho \in \omega}$ est un élément de $Z^V
+\wedge_{\pm 1} \omega$.
+
+\textbf{Proposition} (page 33). Si $j = \rho i$, alors pour $x, y \in V$
+\[
+\bigl[\psi_i(x \wedge \rho), \psi_j(y \wedge \rho)\bigr] = z_\rho(x + y) -
+z_\rho(x) - z_\rho(y),
+\]
+où $[g, h] = ghg^{-1}h^{-1}$\footnote{La page écrit le second membre avec le
+signe opposé, $z_\rho(x) + z_\rho(y) - z_\rho(x + y)$, et le premier avec des
+$\varphi$ que la transcription lit peut-être comme des $\psi$. On a refait le
+calcul : en faisant passer $\psi_{i_0}(y)$ et $\psi_{i_1}(y)$ à travers
+$\psi_{i_1}(x)\psi_{i_2}(x)$ dans $\psi_{i_0}(x+y)\psi_{i_1}(x+y)\psi_{i_2}(x+y)$,
+les trois commutateurs qui apparaissent se réduisent à $[\psi_{i_0}(x),
+\psi_{i_1}(y)]$, avec le signe indiqué ; on l'a contrôlé sur un modèle de type
+Heisenberg. Le signe dépend de l'ordre des facteurs dans la définition de $z$,
+pas de la convention de commutateur (les deux conventions usuelles coïncident
+ici). Il est sans effet sur la suite, qui n'utilise que la bi-additivité.}.
+En particulier le membre de droite, qui est le « défaut d'additivité » de
+$z_\rho$, est bi-additif en $(x, y)$ (le commutateur dans une extension
+centrale d'un groupe commutatif l'est) et symétrique (puisque $z_\rho(x+y) =
+z_\rho(y+x)$).
+
+La page 33 en tire, pour $\lambda = z_\rho$, les deux relations
+\[
+(*) \qquad \lambda(0) = 0, \qquad \lambda(x) + \lambda(y+u) + \lambda(y+v) +
+\lambda(x+u+v) = \lambda(y) + \lambda(x+u) + \lambda(x+v) + \lambda(y+u+v)
+\]
+pour tous $x, y, u, v$\footnote{La seconde équation est très surchargée et
+sa lecture d'ensemble incertaine ; c'est la forme que donne la page 35, où
+elle est récrite, et c'est celle qui résulte de la proposition.}.
+
+\pagerange{35}{39}
+\section*{8. Applications quadratiques et le module universel (pages 35 à 39)}
+
+La seconde relation $(*)$ dit que la différence seconde
+\[
+(\Delta_{u,v}\lambda)(x) = \lambda(x+u+v) - \lambda(x+u) - \lambda(x+v) +
+\lambda(x)
+\]
+ne dépend pas de $x$ ; en la prenant en $x = 0$ elle vaut $\mu(u, v) =
+\lambda(u+v) - \lambda(u) - \lambda(v)$, et la relation équivaut donc à :
+\emph{$\mu$ est bi-additive}. Une application $\lambda : V \to Z$ avec
+$\lambda(0) = 0$ et $\mu$ bi-additive est ce qu'on appelle une application
+polynomiale de degré au plus 2 sans terme constant (ou application
+« quadratique » au sens large)\footnote{Une ligne biffée la disait d'abord
+« bilinéaire symétrique ».}.
+
+Pour $\mu$ fixée, ces $\lambda$ forment un torseur sous le groupe des $f$
+vérifiant $f(0) = 0$ et $\Delta_{u,v} f = 0$, c'est-à-dire sous les
+homomorphismes $V \to Z$. La page ajoute que, pour $V$ libre de base $(e_i)$,
+une forme bi-additive symétrique $\mu$ provient d'une $\lambda$ si et seulement
+si les $\mu(e_i, e_i)$ sont dans $2Z$\footnote{La phrase, sur une page écrite au
+crayon d'un trait pâle, est en partie illisible et s'arrête sur « \ldots ».
+L'énoncé est juste pour un $\mathbb{Z}$-module libre (on prend $\lambda(e_i) =
+\mu(e_i, e_i)/2$). Pour un module libre sur $\mathbb{Z}/n\mathbb{Z}$, comme la
+page le pose, il faut en plus $\lambda(n e_i) = 0$, soit $n\lambda(e_i) +
+\binom{n}{2}\mu(e_i, e_i) = 0$ ; pour $n = 2$, c'est $2\lambda(e_i) = -\mu(e_i,
+e_i)$, la relation de la page 38.}.
+
+\textbf{L'extension universelle} (page 37). Pour toute $z_\rho : V \to Z$
+vérifiant les deux relations, il existe une extension $\widetilde\Gamma$ de
+$\Gamma$ par $Z$ et des relèvements $\psi_i$ qui la redonnent, le tout
+« déterminé à isomorphisme unique près »\footnote{Énoncé sans démonstration
+sur la page. Une note marginale écrite verticalement, en partie illisible,
+précise que l'extension universelle ne dépend pas, à isomorphisme canonique
+près, du choix de $\rho$ : on y écrit $z_\rho(x) = \lambda(x \wedge \rho)$
+avec $\lambda : V^\omega \to \mathfrak{Z}^\omega = \mathfrak{Z} \wedge_{\pm 1}
+\omega$, et l'on vérifie $z_{\bar\rho} = -z_\rho$.}. Il y a donc un groupe
+« universel » $\mathfrak{Z}_V$, quotient de $\mathbb{Z}^{(V)}$ par les
+relations $(*)$, et une extension universelle de $\Gamma$ par
+$\mathfrak{Z}_V$. La page 38 l'identifie au $\mathbb{Z}$-module universel qui
+reçoit $V$ par une application polynomiale de degré au plus 2 sans terme
+constant, qu'elle écrit $V + \Gamma^2_{\mathbb{Z}}(V)$\footnote{Ce module est
+aujourd'hui noté $P_2(V)$ ; c'est le quotient $I_V / I_V^3$ de l'idéal
+d'augmentation de l'anneau $\mathbb{Z}[V]$ (Passi). Le « $+$ » de la page doit
+se lire comme une extension et non comme une somme directe : pour $V =
+\mathbb{Z}/2$, $P_2(V) = \mathbb{Z}/4$ alors que $V \oplus \Gamma^2(V) =
+\mathbb{Z}/2 \oplus \mathbb{Z}/4$. Noms de nous.}.
+
+\textbf{Exemple} (page 38) : $V$ un espace vectoriel sur $\mathbb{F}_2$, de
+base $I$\footnote{Ici $I$ désigne une base de $V$, et non plus l'ensemble à
+trois éléments ; un premier essai, avec l'ensemble $D = V \smallsetminus
+\lbrace 0\rbrace$ des droites, est barré et encadré.}. Toute $\lambda$ comme
+plus haut est polynomiale : $\lambda(2x) = 2\lambda(x) + \mu(x, x)$ et $2x = 0$
+donnent $\mu(x, x) = -2\lambda(x) \in 2Z$. D'où
+\[
+\mathfrak{Z}_V \simeq (\mathbb{Z}/4\mathbb{Z})^I \oplus
+(\mathbb{Z}/2\mathbb{Z})^{\mathfrak{P}_2(I)} ,
+\]
+ce qui est juste : une telle $\lambda$ est déterminée par les $\lambda(e_i)$,
+d'ordre divisant 4, et les $\mu(e_i, e_j)$, $i < j$, d'ordre divisant
+2\footnote{Après $(\mathbb{Z}/4\mathbb{Z})^I$, un « $+\,\mathbb{Z}/4\mathbb{Z}$ »
+est biffé.}.
+
+\textbf{La forme canonique en dimension 2} (page 39). Si $V$ est de
+dimension 2 sur $\mathbb{F}_2$, il y a sur $V$ une forme quadratique
+canonique,
+\[
+q(x) = 0 \text{ si } x = 0, \qquad q(x) = 1 \text{ si } x \neq 0 ,
+\]
+c'est-à-dire la forme anisotrope $x^2 + xy + y^2$, dont la forme polaire est la
+forme alternée non dégénérée de $V$. Elle donne une extension centrale
+canonique de $\Gamma(V)$ par $\mathbb{Z}/2$ telle que
+\[
+\psi_{i_0}(x)\, \psi_{i_1}(x)\, \psi_{i_2}(x) = z \neq 0 \qquad (x \neq 0).
+\]
+C'est l'extension que le dossier 69 (pages 14 et 26) construit à partir du
+groupe des quaternions $Q_8$ et dont il montre qu'elle n'existe, avec cette
+propriété d'anisotropie, que pour $\dim V \leq 2$. Pour $\dim V = 2$, $\Gamma =
+V^2$ a 16 éléments et $\widetilde\Gamma$ en a 32 : ce sont les cardinaux de
+l'ensemble $\Gamma$ et du revêtement $\widetilde\Gamma$ des pages 101 à 104
+pour le graphe cubique ($c = 4$)\footnote{Rapprochement de nous ; la page 39
+s'arrête sur « (et un triplet $(i_0, i_1, i_2)$ sur $I$ \ldots) ».}.
+
+\pagerange{41}{44}
+\section*{9. Un brouillon sur les pentagones (pages 41 à 44)}
+
+La moitié inférieure de la page 41, écrite tête-bêche, parle d'un
+« dodécaèdre combinatoire » et de ses douze faces, vues comme les douze
+structures de polygone d'un ensemble\footnote{Lectures incertaines
+(« dodécaèdre », « icosaèdre », le symbole de l'ensemble).}. La page 43 est un
+diagramme de flèches entre des ensembles construits sur un hexagone
+(« Tritria », « Hex », « (tria$'$) », $S = \tau \times \varepsilon$,
+$\widetilde S = \tau \times \varepsilon \times \omega(\tau)$\ldots), ébauche du
+diagramme des revêtements de la page 72. La page 44 compte les pentagones sur
+un ensemble à cinq éléments et les paires $\lbrace i, i+2\rbrace$ : $15 \cdot 6
+\cdot 4 \cdot 2 \cdot 1 = 720 = 6!$, $10\,P = 720$, $P = 72$, $P_0 = 12$, ce
+dernier étant le nombre des structures de pentagone sur un ensemble à cinq
+éléments ($4!/2 = 12$).
+
+\pagerange{46}{50}
+\section*{10. Triades, hexagones et bitriangles dans le graphe cubique (pages 46 à 50)}
+
+\textbf{Définitions} (page 46). Une partie d'un graphe est \emph{discrète} si
+elle ne contient aucune arête ; les parties discrètes de cardinal 2, 3,
+\ldots, 6 sont les doublets, triades, quadruplets, pentuplets, hexaplets. Un
+graphe \emph{bi-discret} est un graphe $\Gamma = A \amalg A'$, réunion de deux
+parties discrètes, tel que la relation « $x \in A$, $x' \in A'$ non liés » soit
+une bijection de $A$ sur $A'$. La décomposition est unique, sauf si
+$\operatorname{card} \Gamma = 4$ (le graphe est alors la somme de deux segments,
+et une décomposition équivaut à une bijection entre ces segments) ; la
+catégorie des graphes bi-discrets d'ordre $2n$ ($n \geq 3$) est équivalente à
+$(\mathrm{Ens})_2 \times (\mathrm{Ens})_n$\footnote{La page écrit « d'ordre $n$
+(card \ldots) », le cardinal étant illisible ; l'équivalence n'est juste que si
+$n$ est le cardinal de chaque partie. On a ajouté l'hypothèse $n \geq 3$, qui
+écarte le cas exceptionnel $n = 2$ que la page vient de signaler.}. Dans le
+graphe cubique, les bases et bibases sont les hexaplets et les
+bihexaplets ; une « bitriade » au sens de cette page est un graphe bi-discret à
+six sommets, c'est-à-dire un hexagone (un 6-cycle), et la note marginale le dit
+(« les bitriades sont exactement les hexagones »).
+
+Deux triades $\tau$, $\tau'$ sont dites \emph{liées} si elles sont disjointes
+et que leur réunion est discrète, c'est-à-dire une base. Deux parties
+discrètes sont dites « W-liées » si elles sont disjointes et que leur réunion,
+avec sa décomposition naturelle, est un graphe bi-discret\footnote{Le mot est
+une capitale en forme de \emph{W} (ou \emph{V}) suivie de « -liées » ; « W-liées »
+n'est qu'une approximation du tracé, gardée telle quelle par la transcription
+et ici. La définition, telle qu'elle se lit, ne s'accorde pas avec l'usage qui
+suit : deux triades dont la réunion est un hexagone sont, dans la proposition
+ci-dessous, « biliées », et les triades « W-liées » sont les triades
+\emph{opposées} (tout élément de l'une est lié à tout élément de l'autre),
+comme le confirment les pages 49 et 53. On suit l'usage.}.
+
+\textbf{Proposition} (pages 46 à 49). Soit $\Delta = (S, A)$ le graphe cubique
+et $\mathrm{Tri}$ l'ensemble de ses 720 triades.
+
+\begin{enumerate}
+\item[(1)] Pour la relation « liées », $\mathrm{Tri}$ est une somme disjointe de
+  120 hexagones.
+\item[(2)--(3)] Deux triades distinctes d'un même hexagone sont liées
+  (consécutives), W-liées (opposées) ou \emph{biliées} (à distance 2) ; deux
+  triades sont biliées si et seulement si elles ne sont ni égales, ni liées,
+  ni W-liées et qu'une troisième triade est liée aux deux\footnote{La page
+  numérote deux points (3), et la phrase sur les triades « opposées » est en
+  partie couverte de ratures ; on donne l'énoncé que les points (4) à (7)
+  utilisent.}.
+\item[(4)] Si $\tau'$, $\tau''$ sont les deux triades liées à $\tau$, alors
+  $\tau' \amalg \tau'' = L(\tau)$, l'ensemble des sommets liés à aucun élément
+  de $\tau$ ; c'est un hexagone (une bitriade), dont $\tau'$, $\tau''$ sont les
+  deux parties.
+\item[(5)] L'ensemble $\bar\tau = E(\tau)$ des sommets liés à tous les
+  éléments de $\tau$ est une triade, l'\emph{opposée} de $\tau$.
+\item[(6)] Les deux triades biliées à $\tau$ sont $\overline{\tau'} =
+  L(\tau'') \smallsetminus \tau$ et $\overline{\tau''} = L(\tau')
+  \smallsetminus \tau$, et l'hexagone des triades contenant $\tau$ est, dans
+  l'ordre circulaire, $\tau, \tau'', \overline{\tau'}, \bar\tau,
+  \overline{\tau''}, \tau'$.
+\item[(7)] Pour la relation « biliées », $\mathrm{Tri}$ est une somme de 240
+  triangles (« Tritria ») ; la relation « W-liés » entre triangles est une
+  involution sans point fixe, dont les orbites correspondent aux hexagones.
+\item[(8)] La réunion des triades d'un hexagone a 18 éléments, et son
+  complémentaire (9 éléments) est un bitriangle ; l'application hexagone
+  $\mapsto$ bitriangle ainsi obtenue est bijective.
+\end{enumerate}
+
+Dans le modèle de Schläfli, pour $\tau = \lbrace a_1, a_2, a_3\rbrace$ :
+$L(\tau) = \lbrace a_4, a_5, a_6, c_{45}, c_{46}, c_{56}\rbrace$, hexagone
+$a_4 - c_{45} - a_5 - c_{56} - a_6 - c_{46}$, de parties $\tau' = \lbrace a_4,
+a_5, a_6\rbrace$ et $\tau'' = \lbrace c_{45}, c_{46}, c_{56}\rbrace$ ; $\bar\tau
+= \lbrace b_4, b_5, b_6\rbrace$ ; et le bitriangle de (8) est $\lbrace c_{ij}
+\mid i \leq 3 < j\rbrace$, à neuf droites, où $c_{ij}$ et $c_{kl}$ sont liés si
+et seulement si $i \neq k$ et $j \neq l$\footnote{Exemple de nous, vérifié.
+Tous les énoncés (1) à (8) le sont aussi sur le modèle.}.
+
+\textbf{Le triangle de triades} (pages 48 à 50). (8) bis : si
+$(\tau_i)_{i\in I}$ est un triangle de triades biliées et $x_i \in \tau_i$,
+l'unique élément $x_j$ de $\tau_j$ non lié à $x_i$ et l'unique élément $x_k$ de
+$\tau_k$ non lié à $x_i$ ne sont pas liés ; autrement dit la partie $\Gamma
+\subset \prod \tau_i$ des triplets deux à deux non liés a ses trois projections
+bijectives --- c'est l'axiome I de la page 1, et un système transitif
+d'isomorphismes entre les $\tau_i$. (9) La réunion $X$ des trois triades est un
+bitriangle, les $\tau_i$ sont l'une de ses deux familles de triades disjointes,
+et $X \to I \times J$ est bijectif, $J$ indexant l'autre famille. (10) Se
+donner un triangle de triades biliées équivaut à se donner un bitriangle et
+le choix de l'une de ses deux familles de triades (une « coorientation »).
+(11) Deux triades sont biliées si et seulement si elles sont disjointes et
+contenues dans un même bitriangle, et celui-ci est unique. (12) Le
+complémentaire $\widetilde X = S \smallsetminus X \smallsetminus \overline X$
+du bitriangle et de son « W-lié » est encore un bitriangle ; le groupe
+$\widetilde G$ engendré par les symétries $\sigma_t$ attachées aux triangles $t$
+de $\widetilde X$ (voir la section 21) s'envoie isomorphiquement sur le groupe
+des automorphismes « intérieurs » de $\widetilde X$, et ses orbites sur $S
+\smallsetminus \widetilde X$ sont trois ensembles à six éléments de la forme
+$\tau \cup \bar\tau$ ; le sous-groupe des produits pairs a pour orbites les six
+triades de l'hexagone\footnote{Les points (12) b) et c) sont écrits dans une
+prose surchargée (« bihexaH », « $\mathfrak{S}_{\mathbb{F}} \times
+\mathfrak{S}_{\mathbb{Q}}$ » pour les deux familles de triangles de $\widetilde
+X$) ; on en donne ce qui se lit sûrement. La numérotation (11) revient deux
+fois, pages 49 et 50 ; c'est celle du feuillet.}.
+
+\pagerange{50}{53}
+\section*{11. Trois bitriangles disjoints, et deux modèles (pages 50 à 53)}
+
+\textbf{Proposition} (pages 50 et 51). Soit $(X_\alpha)_{\alpha \in \Lambda}$
+une famille de trois bitriangles deux à deux disjoints (ils partagent donc les
+vingt-sept sommets). Pour chaque $\alpha$, le groupe des automorphismes
+intérieurs de $X_\alpha$ a trois orbites sur $S \smallsetminus X_\alpha$ ;
+leur ensemble $I_\alpha$ a trois éléments, et l'on a des applications $p_{\alpha
+\beta} : X_\beta \to I_\alpha$ ($\beta \neq \alpha$) dont les fibres sont l'une
+des deux familles de triades de $X_\beta$. Alors :
+
+\begin{enumerate}
+\item[a)] pour $\Lambda = \lbrace \alpha, \beta, \gamma\rbrace$, les deux familles
+  de fibres de $X_\alpha \to I_\beta$ et $X_\alpha \to I_\gamma$ sont distinctes,
+  et $X_\alpha \xrightarrow{\sim} I_\beta \times I_\gamma$ ; d'où une bijection
+  naturelle
+  \[
+  S \simeq \coprod_{\alpha \in \Lambda} \prod_{\beta \neq \alpha} I_\beta =
+  (I_2 \times I_3) \amalg (I_3 \times I_1) \amalg (I_1 \times I_2) ;
+  \]
+\item[c)] deux sommets distincts de $X_\alpha$ sont non liés si et seulement
+  s'ils ont une coordonnée commune ;
+\item[d)] $x_\alpha \in X_\alpha$ et $y_\beta \in X_\beta$ ($\alpha \neq \beta$)
+  sont liés si et seulement s'ils ont même coordonnée dans $I_\gamma$, $\gamma$
+  le troisième indice.
+\end{enumerate}
+
+\textbf{Un modèle} (page 52). De façon équivalente, soit $p : I \to \Lambda$
+une application d'un ensemble à neuf éléments sur un ensemble à trois, à fibres
+$I_\alpha$ de cardinal 3. Les sommets sont les parties $A \subset I$ de
+cardinal 2 sur lesquelles $p$ est injective (27 parties), $X_\alpha$ étant
+formé de celles pour lesquelles $p(A) = \Lambda \smallsetminus \lbrace
+\alpha\rbrace$ ; deux sommets $A \neq B$ sont liés si et seulement si
+\[
+\text{ou bien } p(A) = p(B) \text{ et } A \cap B = \emptyset, \qquad \text{ou
+bien } p(A) \neq p(B) \text{ et } A \cap B \neq \emptyset .
+\]
+Les deux descriptions donnent bien le graphe cubique\footnote{Vérifié : dans
+les deux cas le graphe est fortement régulier de paramètres $(27, 10, 1, 5)$, ce
+qui le caractérise (dossier 69, section 1). C'est un modèle voisin de celui de
+la page 13 du dossier 69, construit sur deux ensembles à trois éléments.}.
+
+\textbf{(12)} La catégorie des graphes cubiques munis d'une décomposition en
+trois bitriangles disjoints est équivalente à celle des ensembles à neuf
+éléments munis d'une partition de type $(3, 3, 3)$, et le groupe
+d'automorphismes d'une telle structure est
+\[
+\mathfrak{S}_3 \cdot (\mathfrak{S}_3 \times \mathfrak{S}_3 \times
+\mathfrak{S}_3), \qquad \text{d'ordre } 6^4 = 1296 = 2^4 \cdot 3^4 .
+\]\footnote{La page
+écrit « d'ordre $3 \cdot 6^4$ », lu avec doute ; c'est $6 \cdot 6^3 = 6^4$. La
+note marginale porte « $3^4 2^4$ ».}
+Comme $|W(E_6)| = 2^7 \cdot 3^4 \cdot 5$, ce groupe contient un 3-sous-groupe
+de Sylow de $\operatorname{Aut}(\Delta)$, ce que la page exprime par « c'est
+donc presque un sous-groupe de Sylow »\footnote{La note marginale qui
+développe ce point, sur le normalisateur, n'est lue que par fragments.}. La
+catégorie des couples $(\Delta, X)$, $X$ un bitriangle, est équivalente à
+$(\mathrm{Ens})_3 \times (\mathrm{Ens})_{3,3}$ : l'ensemble des trois orbites
+associé à $X$, et l'ensemble des six sommets d'une famille de triades de $X$
+avec sa partition naturelle (ordre $6 \cdot 72 = 432$, et $51\,840 / 432 =
+120$).
+
+\textbf{Triades et hexagones dans le modèle} (page 53). Les 18 triades
+contenues dans l'un des $X_\alpha$ correspondent aux couples $(i, \alpha) \in I
+\times \Lambda$ avec $p(i) \neq \alpha$ : à $(i, \alpha)$ la triade
+$\tau_{i,\alpha}$ des $A$ avec $p(A) = \Lambda \smallsetminus \lbrace
+\alpha\rbrace$ et $A \ni i$. La triade W-liée à $\tau_{i\alpha}$ est
+$\tau_{i\beta}$, $\beta$ l'autre élément de $\Lambda \smallsetminus \lbrace
+p(i)\rbrace$ ; les deux triades liées sont les $\tau_{j\beta}$, $\tau_{k\beta}$,
+$j, k$ les deux autres éléments de la fibre de $i$. Ces 18 triades forment
+trois hexagones, en bijection avec $\Lambda$ (à l'hexagone correspond le
+complémentaire de sa réunion, l'un des $X_\alpha$).
+
+\pagerange{53}{60}
+\section*{12. Triangles de triades, la tour, et les types de triades (pages 53 à 60)}
+
+(14) Les triangles de triades biliées correspondent aux repères $(\alpha,
+\beta, \gamma)$ de $\Lambda$, l'hexagone $H \simeq I_\gamma \times \Lambda_\gamma$
+($\Lambda_\gamma = \lbrace \alpha, \beta\rbrace$), $\tau_{i\alpha}$ et
+$\tau_{j\beta}$ étant liées si et seulement si $i \neq j$ et $\alpha \neq
+\beta$. Les deux opérations « passer au triangle W-lié » ($-$) et « passer à
+l'autre triangle du même bitriangle » ($\sim$) vérifient $\overline{T_{\alpha
+\beta\gamma}} = T_{\beta\alpha\gamma}$ et $\widetilde{T_{\alpha\beta\gamma}} =
+T_{\alpha\gamma\beta}$, et engendrent sur les triangles de triades un groupe
+isomorphe à $\mathfrak{S}_3$ (page 56). (15) Les triangles de $X_\alpha$
+correspondent aux bijections $I_\beta \to I_\gamma$, et la symétrie associée
+agit sur $\Lambda$ en fixant $\alpha$ et en échangeant $\beta$, $\gamma$
+(page 57)\footnote{Le milieu de la page 57 n'est pas lu de près par la
+transcription ; on en donne le début et la fin.}.
+
+\textbf{La tour} (pages 57 à 59). (16)--(17) Pour un bitriangle $X$, les
+sous-graphes « de type $\mathcal{T}_1$ » contenant $X$ sont les $X \cup
+\mathcal{X}_i$, $\mathcal{X}_i$ l'une des trois orbites de $S \smallsetminus X$ ;
+pour un $\mathcal{T}_1$ $\mathcal{X}$, le complémentaire $S \smallsetminus
+\mathcal{X}$ est une bibase, d'où une bijection entre les $\mathcal{T}_1$ du
+graphe cubique et ses 36 bibases. Les systèmes $S \supset \mathcal{X}
+\supset X$ forment une catégorie équivalente à $(\mathrm{Ens})_{3,3} \times
+(\mathrm{Ens})_2$, et les systèmes $S \supset \mathcal{X} \supset X \supset t$
+($t$ une triade de $X$) à $(\mathrm{Ens})_3 \times (\mathrm{Ens})_2 \times
+(\mathrm{Ens})_2$\footnote{La page 58 décrit les foncteurs (« l'ensemble des
+points de l'une des triades de $X$ par la relation d'équivalence définie par
+$t$, l'ensemble des deux coorientations, l'ensemble des deux orbites ») ; on ne
+les reprend pas en détail. Le dernier membre de la phrase de (17) est
+illisible.}.
+
+\textbf{Le graphe à quinze sommets} (page 59). Pour un ensemble $B$ à six
+éléments, soit $\mathcal{T}_1(B)$ le graphe de sommets $\mathfrak{P}_2(B)$, deux
+paires étant liées si et seulement si elles sont disjointes. C'est un
+$\mathcal{T}_1$, et $B \mapsto \mathcal{T}_1(B)$ est une équivalence de
+$(\mathrm{Ens})_6$ sur la catégorie des $\mathcal{T}_1$ ; un quasi-inverse
+associe à $\mathcal{X}$ l'ensemble de ses six parties discrètes à cinq
+éléments, chaque sommet étant dans exactement deux d'entre elles\footnote{On l'a
+vérifié : les parties discrètes à cinq éléments de $\mathcal{T}_1(B)$ sont les
+six « étoiles » $\lbrace \lbrace i, j\rbrace \mid j \neq i\rbrace$. Les triangles de
+$\mathcal{T}_1(B)$ sont les quinze partitions de $B$ en trois paires (les
+« synthèmes » de Sylvester) ; le graphe est le quadrangle généralisé $W(2)$,
+c'est-à-dire la configuration de Cremona--Richmond. Noms de nous.}. Un
+bitriangle dans $\mathcal{X}$ équivaut à une partition de type $(3, 3)$ de $B$ :
+ses neuf sommets sont les paires qui rencontrent les deux parties.
+
+\textbf{Les types de triades} (page 60). Soit $\Delta$ muni d'une partition
+$S = \coprod_\alpha X_\alpha$ en trois bitriangles, et $G$ son groupe
+d'automorphismes (d'ordre 1296). $G$ a quatre orbites sur les triades : celle
+des 18 triades contenues dans un $X_\alpha$, et trois autres, de types I, II,
+III, que la page décrit par des dessins (trois colonnes de trois points)\footnote{La
+page avait écrit « trois orbites », corrigé en « quatre » ; la correction est
+juste. On a calculé les cardinaux : $18$, $162$, $216$, $324$ (total 720) ; on ne
+peut attribuer sûrement les trois derniers aux types I, II, III, les dessins
+n'étant pas reproduits.}. Les triades contiguës à une triade de type I sont l'une
+de type I, l'autre de type II, de sorte qu'un hexagone de ce genre est de type
+(I, II, II, I, II, II) en partant d'un sommet de type I ; la phrase sur le type
+III se poursuit au-delà de la page 60, sur des feuillets qui ne la reprennent
+pas.
+
+\pagerange{61}{66}
+\section*{13. Les 120 pavés vus de l'un d'eux (pages 61 à 66)}
+
+La page 61 dessine un hexagone de triades qui n'est contenu dans aucun des
+$X_\alpha$ (de deux types I et quatre types II, ou l'inverse)\footnote{Les
+étiquettes des sommets de l'hexagone dessiné sont en grande partie douteuses.}
+et note que tout triangle de triades biliées est formé, soit de triades d'un
+même $X_\alpha$, soit de deux triades de type I et une de type II, soit de
+triades de type III. Page 62 : les bitriangles correspondent aux couples formés
+d'un sommet $a$ et d'une bijection convenable, et, pour un bitriangle $X$
+donné, les 120 bitriangles se répartissent ainsi :
+
+\begin{itemize}
+\item $X$ lui-même : 1 ;
+\item les deux bitriangles disjoints de $X$ : 2 ;
+\item ceux qui coupent $X$ suivant deux triangles de même sommet (5 sommets) :
+  27 ;
+\item ceux qui coupent $X$ suivant un doublet : 54 ;
+\item ceux qui coupent $X$ suivant un triangle : 36 ;
+\end{itemize}
+soit 120 au total.
+
+C'est exact\footnote{Vérifié. La page a d'abord écrit « $3 \times 10$ », corrigé en
+« $3 \times 18$ », pour les 54, et « $6 \times 6$ » pour les 36 ; le premier essai,
+entre crochets, est barré.}. Page 63 : ceux qui coupent $X$ suivant un
+triangle dans chaque $X_\alpha$ correspondent à un système transitif
+d'isomorphismes entre les $I_\alpha$, six pour un triangle donné. Il note un
+programme : étudier la position relative de deux $\mathcal{T}_1$, puis d'une
+base et d'un $\mathcal{T}_1$ ; il n'est pas suivi.
+
+\textbf{Triades et hexagones} (pages 63 à 65). (20) Une triade $\tau$ est
+contenue dans un unique bitriangle, formé de $\tau$ et des six sommets liés à
+exactement deux éléments de $\tau$ ; son complémentaire dans ce bitriangle est
+un hexagone, d'où une bijection triades $\to$ hexagones\footnote{« Exactement » est
+ajouté en interligne ; sans lui l'énoncé serait faux (les trois sommets liés
+aux trois éléments de $\tau$ n'y sont pas). Dans le modèle, pour $\tau =
+\lbrace a_1, a_2, a_3\rbrace$, ce bitriangle est $\tau \cup \lbrace b_1, b_2,
+b_3\rbrace \cup \lbrace c_{12}, c_{13}, c_{23}\rbrace$.}. La bijection inverse associe à un hexagone $Y$ les sommets hors
+de $Y$ liés à exactement quatre de ses sommets, deux à deux opposés, et qui
+correspondent ainsi aux trois diagonales. Plus finement, pour une triade $\tau$
+et $x \notin \tau$, soit $\nu_\tau(x)$ le nombre d'éléments de $\tau$ liés à $x$ ;
+on a
+\[
+\begin{array}{lll}
+\nu_\tau(x) = 0 : & 6 \text{ sommets,} & \text{un hexagone } h(\tau) ; \\
+\nu_\tau(x) = 1 : & 9 \text{ sommets,} & \text{un bitriangle } \operatorname{bit}(\tau) ; \\
+\nu_\tau(x) = 2 : & 6 \text{ sommets,} & \text{un hexagone } \bar h(\tau),
+\text{ « opposé » à } h(\tau) ; \\
+\nu_\tau(x) = 3 : & 3 \text{ sommets,} & \text{la triade opposée } \bar\tau .
+\end{array}
+\]
+(page 64), et $\operatorname{bit}(\tau) = \operatorname{bit}(\bar\tau) =
+\operatorname{bit}(\tau') = \operatorname{bit}(\tau'') = \operatorname{bit}(\bar\tau')
+= \operatorname{bit}(\bar\tau'')$ pour les six triades de l'hexagone de triades
+de $\tau$ (page 65)\footnote{Vérifié sur le modèle. Le symbole lu
+$\mathrm{\acute Et}(x)$ (les éléments de $\tau$ liés à $x$) est douteux ; la marge de
+la page 65 porte « détailler tout ça dans énoncés en forme ».}.
+
+\textbf{Comptes} (page 66). La page vérifie $27 \cdot 16 \cdot 10 = 6 \cdot 720$
+(les triades ordonnées) et $45 \times 16 = 720$, nombre des bitriangles munis
+d'un triangle (chaque triangle est dans 16 bitriangles) et nombre des triades.
+Elle note les équivalences « $A_4 \Leftrightarrow A_5 \Leftrightarrow P_6
+\Leftrightarrow$ bitriangle épinglé », reprises page 133\footnote{Deux autres
+nombres de la page, « $2^7 \cdot 3^3 \cdot 5 =$ Nb de hexagones épinglés » et
+« $2^6 \cdot 3 \cdot 5 =$ Nb de hexagones $=$ Nb de bitriades », ne
+s'accordent pas avec les comptes : il y a 720 hexagones et $720 \cdot 12 =
+2^6 \cdot 3^3 \cdot 5$ hexagones épinglés (munis d'un sommet et d'un sens). On
+ne les retient pas.}.
+
+\pagerange{68}{70}
+\section*{14. Le pavé et son complémentaire (pages 68 à 70)}
+
+À partir de la page 68 le bitriangle s'appelle \emph{pavé} (« anciennement :
+bitriangle »), et le graphe est noté $\Delta = (S, A, T)$. Soit $X \subset S$
+un pavé.
+
+\begin{enumerate}
+\item[1)] Pour $x \in S \smallsetminus X$, l'« ombre » $\operatorname{Omb}_X(x)$
+  des sommets de $X$ liés à $x$ est une triade de $X$ ; $\varphi_X : S
+  \smallsetminus X \to \operatorname{Tria}(X)$ est surjective.
+\item[2)] La fibre de $\varphi_X$ en une triade $t$ est une triade $\bar{\bar
+  t}$, l'unique triade disjointe de $t$ dont tous les éléments sont liés à tous
+  ceux de $t$ (l'opposée de $t$).
+\item[3)] Les deux triades $t'$, $t''$ de $X$ parallèles à $t$ (de la même
+  famille) ont pour réunion l'ensemble des sommets hors de $t$ liés à exactement
+  deux éléments de $t$\footnote{La page parle ici de triades « liées » à $t$, au
+  sens nouveau ; le texte entre parenthèses est en partie biffé et l'ancien sens
+  du mot (page 46) s'y mêle. On donne l'énoncé que vérifie le modèle.}.
+\item[4)] Les six triades $\tau, \tau', \tau''$ et $\bar\tau, \bar\tau',
+  \bar\tau''$ forment un hexagone de triades.
+\item[5)] Si $\rho, \rho', \rho''$ sont les trois triades de l'autre famille de
+  $X$, les opposées $\bar\rho$, \ldots\ forment un second pavé $X_2$ ; $X_1$
+  (formé des $\bar\tau$) et $X_2$ sont les seuls pavés contenus dans $S
+  \smallsetminus X$, ils le partagent, et ils sont en bijection avec l'ensemble
+  $\varepsilon$ des deux familles de triades de $X$.
+\item[6)--7)] Les triades restantes de $X_1$ et $X_2$ se correspondent par
+  opposition et forment encore un hexagone, dont l'ensemble $I_0$ des trois
+  diagonales donne des bijections $X_1 \simeq I_1 \times I_0$, $X_2 \simeq I_2
+  \times I_0$ ; pour $i \in I_0$, $X \cup \pi^{-1}(i)$ est un $\mathcal{T}_1$,
+  et l'on obtient ainsi les trois $\mathcal{T}_1$ contenant $X$.
+\item[8)] Ces fibres sont aussi les orbites, sur $S \smallsetminus X$, du
+  groupe engendré par les symétries des triangles de $X$.
+\end{enumerate}
+
+C'est la décomposition de la page 51 vue depuis l'un des trois pavés\footnote{La
+fin de 6), qui se poursuit en tête de la page 70, est en partie illisible.}.
+
+\pagerange{72}{77}
+\section*{15. Le diagramme des revêtements (pages 72 à 77)}
+
+La page 72 dresse la liste des ensembles en jeu, avec leurs cardinaux, et un
+diagramme d'applications dont les fibres ont toutes deux ou trois éléments :
+\[
+\begin{array}{ll}
+\mathrm{Hex} & \text{hexagones de triades (« grands hexagones ») } \simeq
+\text{ pavés : } 120 ; \\
+\mathrm{hex} & \text{hexagones de sommets (« petits ») } \simeq \text{ triades
+} (\mathrm{tria}) : 720 ; \\
+\mathrm{triHex} & \text{triples distingués de grands hexagones : } 40 ; \\
+\mathrm{Tria}' & \text{paires de triades opposées (diagonales des grands
+hexagones) : } 360 ; \\
+\mathrm{Trtria} & \text{triangles de triades biliées } \simeq \text{ pavés
+orientés : } 240 .
+\end{array}
+\]
+\begin{tikzcd}
+\mathrm{Tria}' \arrow[d, "3"'] & \mathrm{tria} \simeq \mathrm{hex} \arrow[l, "2"'] \arrow[d, "3"] \\
+\mathrm{Hex} \arrow[d, "3"'] & \mathrm{Trtria} \arrow[l, "2"] \\
+\mathrm{triHex} &
+\end{tikzcd}
+
+Le carré est cartésien\footnote{La page porte « 720 » en regard de
+$\mathrm{Hex}$ ; c'est 120, comme le donnent les degrés du diagramme ($360/3$)
+et la page 46. La mention « (cart) » est au milieu du carré ; au-dessus de la
+flèche supérieure, un petit mot « bib » lu avec doute.}. Les revêtements de
+degré 2 sont les passages à la triade opposée et au triangle opposé ; et tout
+le diagramme se déduit de $\mathrm{Tria}' \xrightarrow{3} \mathrm{Hex}
+\xrightarrow{3} \mathrm{triHex}$, $\mathrm{Trtria}$ étant le revêtement double
+des orientations associé au revêtement de degré 3 $\mathrm{Hex} \to
+\mathrm{triHex}$.
+
+\textbf{L'hexagone combinatoire} (pages 73 à 76). Un petit hexagone $h$ est
+formé de deux triades parallèles $t = \lbrace a, b, c\rbrace$, $t' = \lbrace a',
+b', c'\rbrace$ (sommets $a, b', c, a', b, c'$ dans l'ordre) ; il y a un unique
+pavé $P \supset h$, et $t'' = P \smallsetminus h$ est la troisième triade
+parallèle, son élément $a''$ correspondant à la diagonale $\lbrace a,
+a'\rbrace$. Un hexagone abstrait équivaut à un couple $(\tau, \varepsilon)$
+d'un ensemble à trois éléments (ses diagonales) et d'un ensemble à deux
+éléments (ses deux triangles inscrits), de sommets $\tau \times \varepsilon$,
+$(a, \alpha)$ et $(b, \beta)$ étant voisins si et seulement si $a \neq b$ et
+$\alpha \neq \beta$ ; ses orientations sont celles de $\tau$. Pour une triade
+$t$ décrite dans le modèle de la page 52 par $(i, \beta)$, $p(i) = \alpha$, le
+petit hexagone correspond à $(I_\gamma, I_\alpha \smallsetminus \lbrace
+i\rbrace)$ et le grand à $(I_\alpha, \lbrace 0, 1\rbrace)$, et la page note qu'il
+n'y a pas de relation universelle entre leurs deux ensembles d'orientations.
+
+La « présentation symétrique » de la page 75 : un hexagone détermine
+l'ensemble $\tau$ de ses diagonales (canoniquement isomorphe à celui de ses
+codiagonales, paires de côtés opposés), l'ensemble $\varepsilon$ de ses triangles
+inscrits, l'ensemble $\varepsilon'$ de ses triangles « coinscrits » (triples de
+côtés deux à deux non adjacents), et un isomorphisme $\varphi : \varepsilon
+\wedge \varepsilon' \simeq \omega(\tau)$ ; sommets $\tau \times \varepsilon$,
+côtés $\tau \times \varepsilon'$, et $(s, \alpha)$ incident à $(t, \beta)$ si et
+seulement si $t = \varphi(\alpha \wedge \beta)$\footnote{Formulation de la page,
+le premier terme de la règle d'incidence étant surchargé. Le « $1_{\mathcal{T}_2}$ »
+qu'elle écrit pour l'élément trivial est peut-être un $1_{\mathbb{Z}/2}$.}. Le
+passage à l'hexagone dual échange $\varepsilon$ et $\varepsilon'$ et change
+$\varphi$ en $-\varphi \circ \sigma$. Le groupe des automorphismes est le
+sous-groupe de $\operatorname{Aut}(\tau) \times \operatorname{Aut}(\varepsilon)
+\times \operatorname{Aut}(\varepsilon')$ formé des $(u, \alpha, \beta)$ avec
+$\alpha\beta\,\mathrm{sg}(u) = 1$, d'ordre 12 : c'est $D_6$.
+
+Les pages 76 et 77 dessinent le « cube » des revêtements entre ensembles
+attachés à un hexagone (sommets, côtés, diagonales, triangles inscrits et
+coinscrits, orientations, repères), puis le grand diagramme reliant les
+ensembles de configurations du graphe cubique, avec leurs groupes
+($\mathfrak{S}_3 \times \mathfrak{S}_2$ pour les repères d'un grand hexagone,
+etc.) ; la transcription les décrit et ne les restitue pas, et l'on fait de
+même. La page 77 note enfin les sous-groupes de $\mathfrak{S}_3 \times
+\mathfrak{S}_2$ : trois sous-groupes d'indice 2, trois d'indice 3
+(conjugués), et des sous-groupes d'indice 6 répartis en trois classes,
+dénombrement que la page 80 précise\footnote{Les sous-groupes d'ordre 2 sont
+sept, en trois classes de conjugaison (le centre, et deux classes de trois) ;
+c'est ce que dit la page 80.}.
+
+\pagerange{78}{80}
+\section*{16. Les polygones de trois à six côtés (pages 78 à 80)}
+
+\begin{enumerate}
+\item[1)] $n = 3$ : $\mathrm{Pol}_3 \simeq (\mathrm{Ens})_3$, et la dualité
+  (sommets $\leftrightarrow$ côtés) est canoniquement isomorphe à l'identité,
+  un côté correspondant au sommet opposé ; de même pour tout $n$ impair. Groupe
+  $\mathfrak{S}_3$.
+\item[2)] $n = 4$ : $\mathrm{Pol}_4 \simeq (\mathrm{Ens})_{2,2}$ (un carré est
+  l'ensemble de ses sommets avec sa partition en diagonales), et plus généralement
+  $\mathrm{Cube}_d \simeq (\mathrm{Ens})_{2, \ldots, 2}$ ($d$ fois). L'ensemble
+  $C_r$ des repères d'un carré est un torseur sous $D_4$ (d'ordre 8) ; les
+  ensembles du diagramme (sommets, côtés, diagonales, codiagonales, repères
+  modulo la symétrie centrale, orientations) en sont des quotients, et la page
+  constate qu'ils représentent chacune des huit classes de conjugaison de
+  sous-groupes de $D_4$ exactement une fois\footnote{Huit classes : le groupe
+  trivial, le centre, deux classes de symétries non centrales, le sous-groupe
+  cyclique d'ordre 4, deux sous-groupes de Klein, $D_4$. La phrase qui le dit
+  est en partie illisible, et l'attribution de quelques flèches du diagramme
+  autour de $C_\omega$ et $C_{d^*}$ est douteuse.}.
+\item[3)] $n = 6$ : $P_6 \simeq P_3 \times (\mathrm{Ens})_2 \simeq
+  (\mathrm{Ens})_3 \times (\mathrm{Ens})_2$ (et de même pour $n = 2m$, $m$
+  impair) : c'est l'hexagone $t \times \omega$ de la page 74. Les diagonales et
+  les codiagonales sont canoniquement en bijection ; on a $H_\omega \simeq
+  \omega(H_d) \simeq H_{tr} \wedge H_{tr^*}$, et les ensembles attachés à
+  l'hexagone sont les espaces homogènes de
+  \[
+  D_6 \simeq \mathfrak{S}_2 \cdot \mathbb{Z}/6\mathbb{Z} \simeq \mathfrak{S}_2
+  \times \mathfrak{S}_3
+  \]
+  (d'ordre 12) correspondant à ses classes de sous-groupes : trois sous-groupes
+  conjugués d'indice 3 (stabilisateurs des diagonales), trois sous-groupes
+  d'indice 2 non conjugués (stabilisateurs des points de $H_{tr}$,
+  $H_{tr^*}$, $H_\omega$), un sous-groupe d'indice 4, et trois classes de
+  sous-groupes d'ordre 2 (le centre, stabilisateur des points de $H_{p'}$, et
+  deux classes de trois, stabilisateurs des sommets et des côtés).
+\end{enumerate}
+
+La page 80 s'arrête sur l'observation que les automorphismes de ces espaces
+homogènes sont, eux aussi, lisibles sur le diagramme. C'est la
+même manière de faire que pour les polygones du dossier 75 : un objet
+combinatoire est remplacé par la liste des ensembles qu'il détermine, et ces
+ensembles par les sous-groupes de son groupe d'automorphismes.
+
+\pagerange{81}{85}
+\section*{17. Carrés et hexagones dans un pavé (pages 81 à 85)}
+
+Soit $X$ un pavé ($3 \times 3$). Un \emph{carré} de $X$ est un 4-cycle induit :
+deux lignes et deux colonnes. (I) Les carrés de $X$ sont en bijection avec les
+sommets de $X$, à un carré $C$ correspondant son \emph{centre} $a$, l'unique
+sommet de $X$ lié à aucun sommet de $C$ (à l'intersection de la ligne et de la
+colonne restantes). Deux sommets non liés sont dans une unique triade ; deux
+paires de sommets non liés forment un carré si et seulement si elles ont même
+« centre », et l'une détermine l'autre : la donnée d'un carré à diagonale
+marquée équivaut à celle d'une paire non liée, ou d'une triade pointée. D'où
+les isomorphismes
+\[
+\mathrm{Car}_d(X) \simeq \mathrm{tria\,pt}(X), \qquad \mathrm{Car}_s(X) \simeq
+\mathrm{tria\,ép}(X),
+\]
+entre carrés à diagonale (resp.\ à sommet) marqué(e) et triades pointées (resp.\
+épinglées)\footnote{Les indices $d$, $s$ sont lus d'après la page suivante.}.
+Les quatre sommets de $Y = X \smallsetminus (C \cup \lbrace a\rbrace)$ sont liés
+à $a$ et chacun à exactement deux sommets de $C$, formant un côté ; deux points
+de $Y$ sont liés si et seulement s'ils correspondent à des côtés opposés, et
+les deux paires de côtés opposés de $C$ correspondent aux deux triangles de
+sommet $a$ (pages 81 et 82)\footnote{La page écrit « l'ombre sur $C$ d'un pt de
+$Y$ est un côté de $C$ ». La phrase de la page 81, « est lié exactement à un
+point de $C$ diag $\lbrace x, x'\rbrace$ », se poursuit page 82 par l'autre
+diagonale : un point de chaque diagonale, donc deux sommets formant un côté.}. La page 82
+écrit en travers un diagramme d'ensembles d'hexagones qu'on ne restitue pas.
+
+Page 83, une question : quels graphes finis ont une « enveloppe » pavée ?
+Exemples dessinés : le point, le segment, le carré, l'hexagone, le pentagone,
+deux segments, le sablier. Pages 84 et 85 : un \emph{anti-carré} (somme de deux
+segments) ; $C \mapsto X \smallsetminus (C \cup \lbrace \text{centre}\rbrace)$ est une
+bijection des carrés sur les anti-carrés ; et le pavé engendré par un carré
+vérifie une propriété universelle évidente pour les plongements dans un complexe
+de la famille,
+\[
+\mathrm{Pl}(\mathrm{Pav}(C), \mathcal{X}) \xrightarrow{\ \sim\ }
+\mathrm{Pl}(C, \mathcal{X}),
+\]
+de sorte que la donnée d'un carré de $\mathcal{X}$ équivaut à celle d'un pavé
+pointé ; $\mathrm{Pav}(C)^\circ \simeq \mathrm{Pav}(C^*)$, $C^*$ le carré
+dual\footnote{Une partie notable des pages 84 et 85 est illisible ; on ne
+garde que les énoncés écrits en formules.}.
+
+\pagerange{86}{90}
+\section*{18. Produits, coproduits et graphe opposé (pages 86 à 90)}
+
+Le \emph{produit} de graphes $(\Gamma_i)$ a pour sommets $\prod \Gamma_i$, deux
+sommets étant liés s'ils diffèrent en une seule coordonnée, où ils sont liés
+(c'est le produit cartésien des graphes, et non leur produit catégorique). Le
+graphe \emph{opposé} $\Gamma^\circ$ a les mêmes sommets, deux sommets distincts
+étant liés si et seulement s'ils ne le sont pas dans $\Gamma$ (le graphe
+complémentaire) ; $\Gamma$ est \emph{auto-opposé} s'il est isomorphe à
+$\Gamma^\circ$. Le \emph{coproduit} est $\overset{\circ}{\coprod} \Gamma_i =
+\bigl(\prod \Gamma_i^\circ\bigr)^\circ$.
+
+\textbf{Proposition} (page 86). Un pavé est auto-opposé ; de façon équivalente,
+le coproduit de deux triades est un pavé. C'est vrai : le pavé est le produit
+de deux triangles, son opposé est le coproduit de deux triades (les triades
+étant les opposés des triangles), et le pavé est isomorphe à son
+complémentaire\footnote{La page l'énonce avec un point d'interrogation. Le
+pavé est le graphe de Paley d'ordre 9, ou le graphe de la grille $3 \times 3$,
+qui est auto-complémentaire ; le dossier 69 (pages 73 à 75) établit le même
+fait. Noms de nous.}.
+
+Pages 87 et 88 : le coproduit d'un doublet et d'un graphe discret est un graphe
+bi-discret ; le coproduit de deux doublets est la somme de deux segments (le
+carré dessiné réduit à ses diagonales), et le produit de deux segments est le
+carré\footnote{La page dessine le carré sous « Coproduit des deux segments ».
+Avec la définition de la page 86, le coproduit de deux segments est le graphe
+complet à quatre sommets ; c'est leur \emph{produit} qui est le carré. La
+suite de la page (« le graphe complété semble \ldots ») paraît s'en apercevoir.}.
+En mettant sur l'un des facteurs une structure de doublet et sur l'autre une
+structure de segment, on obtient au total les trois structures de carré sur
+l'ensemble à quatre éléments $\lbrace a, b\rbrace \times \lbrace a', b'\rbrace$,
+qui correspondent à ses trois partitions de type $(2, 2)$. Un carré est donc la
+donnée d'un ensemble à quatre éléments et d'une telle partition $(C_\alpha)_{\alpha
+\in D}$ (ses diagonales) ; une orientation est donnée par des bijections
+$\varphi_\alpha : C_\alpha \to C_\beta$ (« passer au sommet suivant ») avec
+$\varphi_\beta \varphi_\alpha = -\mathrm{id}$, $-$ désignant l'involution qui
+échange les deux sommets d'une diagonale ; d'où $\mathrm{or}(C) \simeq D^* \times
+D$\footnote{Lecture incertaine du symbole devant $C_\alpha$ et de la légende
+« carré dual » sous l'accolade.}.
+
+Les pages 89 et 90, au crayon et en largeur, dressent le grand diagramme des
+ensembles de carrés et d'hexagones d'un pavé, avec les groupes ($\mathfrak{S}_3$,
+$\mathfrak{S}_2$, $D_3$, $D_6$, $\mathbb{F}_2 \times \mathbb{F}_2$) ; une marge
+y note « invariants cube et hypercube dans polyèdres et polytopes ; prismes
+triangulaires, pentagonaux, hexagonaux », programme que reprendront les pages
+134 et 135. On ne restitue pas ces diagrammes.
+
+\pagerange{92}{100}
+\section*{19. Complexes cubiques généralisés (pages 92 à 100)}
+
+La liasse qui commence page 92 porte un titre : « Complexes cubiques
+généralisés (complexes \emph{triadiques} ou \emph{trilatères} ?) ». C'est le
+tournant du dossier.
+
+Soit $S$ un graphe (sans boucles ni arêtes multiples), $A \subset
+\mathfrak{P}_2(S)$ ses arêtes, $T \subset \mathfrak{P}_3(S)$ l'ensemble de ses
+triangles\footnote{La page écrit $t \in \mathfrak{P}_3(A)$ ; il faut
+$\mathfrak{P}_3(S)$, comme la transcription le note.}.
+
+\textbf{Axiome 1.} Toute arête est contenue dans un unique triangle.
+
+\textbf{Axiome 2.} Pour tout triangle $t$ et tout sommet $s \notin t$, $s$ est lié à
+un sommet de $t$ (unique d'après l'axiome 1).
+
+Leur conjonction est l'\emph{axiome (C)}. Ce sont exactement les axiomes d'un
+\emph{quadrangle généralisé} dont les droites ont trois points : les sommets
+sont les points, les triangles les droites ; « un point hors d'une droite est
+collinéaire à un unique point de cette droite »\footnote{Nom de nous. Les
+quadrangles généralisés ont été introduits par Tits (1959) ; ceux d'ordre $(2,
+t)$ n'existent, à part les cas dégénérés, que pour $t = 1, 2, 4$, et chacun est
+unique : la grille $3 \times 3$, le quadrangle $W(2)$ à 15 points, et le
+quadrangle à 27 points des droites de la surface cubique. Le résultat est
+classique (on le trouve dans la monographie de Payne et Thas, \emph{Finite
+generalized quadrangles}, 1984) ; cité de mémoire. Ici $t = c$.}.
+
+\textbf{Autour d'un triangle} (pages 92 à 97). Supposons l'axiome 1, $A \neq
+\emptyset$, et fixons un triangle $t_0 = \lbrace a, b, c\rbrace$ pour lequel
+l'axiome 2 est vrai. Pour $\alpha \in t_0$, soit $\widetilde E_\alpha$
+l'ensemble des sommets hors de $t_0$ liés à $\alpha$. Alors
+\[
+(1) \qquad S \simeq t_0 \amalg \coprod_{\alpha \in t_0} \widetilde E_\alpha .
+\]
+Les arêtes sont \emph{basiques} (dans $t_0$), \emph{verticales} (de $\alpha$ à
+$\widetilde E_\alpha$) ou \emph{horizontales supérieures} (dans $S \smallsetminus
+t_0$). L'axiome 1 donne successivement :
+
+\begin{itemize}
+\item \textbf{Prop.~1.} Pour $s \in \widetilde E_\alpha$, il y a un unique $s' \in
+  \widetilde E_\alpha$ lié à $s$ (le troisième sommet du triangle de l'arête
+  $\lbrace \alpha, s\rbrace$). D'où une involution sans point fixe $\sigma_\alpha$
+  de $\widetilde E_\alpha$, et l'involution $\sigma = \sigma_{t_0}$ de $S$ égale à
+  l'identité sur $t_0$ et à $\sigma_\alpha$ sur $\widetilde E_\alpha$\footnote{La
+  page numérote d'abord cet énoncé « 2 » (lecture incertaine) puis y renvoie
+  comme « Prop.~1 » ; elle écrit $\alpha \to \alpha'$ pour $s \mapsto s'$.}.
+\item \textbf{Prop.~2.} Si $s, s' = \sigma_\alpha s$ et $t \in \widetilde
+  E_\beta$, $\beta \neq \alpha$, alors $t$ n'est pas lié à la fois à $s$ et à
+  $s'$.
+\item \textbf{Prop.~3.} Un triangle contenant une arête « transverse » (entre
+  $\widetilde E_\alpha$ et $\widetilde E_\beta$, $\alpha \neq \beta$) a un sommet
+  dans chacun des trois $\widetilde E_\alpha$. Ces triangles \emph{supérieurs}
+  forment un ensemble $\widetilde T$, avec $\tilde\varphi : \widetilde T \to
+  \prod_\alpha \widetilde E_\alpha$.
+\item \textbf{Prop.~4.} Pour toute arête basique $u = \lbrace \alpha,
+  \beta\rbrace$, la projection $\widetilde T \to \widetilde E_\alpha \times
+  \widetilde E_\beta$ est injective, d'image l'ensemble des couples liés.
+\end{itemize}
+
+\textbf{Scholie} (page 96). Moyennant l'axiome 1 et l'axiome 2 pour $t_0$, le
+graphe se résume à la donnée de a) un ensemble $t_0$ à trois éléments, b) une
+famille $(\widetilde E_\alpha)_{\alpha \in t_0}$ d'ensembles munis d'involutions
+sans point fixe $\sigma_\alpha$, c) une partie $\widetilde T \subset \widetilde P
+= \prod_\alpha \widetilde E_\alpha$, soumise aux conditions (*) les projections
+sur les produits de deux facteurs sont injectives, (**) si $(s, t)$ est dans
+l'image, $(\sigma_\alpha s, t)$ n'y est pas\footnote{Une troisième condition,
+(***), écrite en travers de la marge et tournée de 90°, n'est lue qu'en
+partie ; c'est l'axiome que la page 101 appellera (Ka).} ; les liaisons sont
+celles qu'on devine (2°) $\alpha$)--$\delta$)), et les triangles sont
+\[
+T \simeq \lbrace t_0\rbrace \amalg \coprod_{\alpha \in t_0} E_\alpha \amalg
+\widetilde T, \qquad E_\alpha = \widetilde E_\alpha / \sigma_\alpha
+\]
+(le triangle de base, les triangles verticaux $\lbrace \alpha\rbrace \cup u$,
+$u$ une orbite de $\sigma_\alpha$, et les triangles supérieurs). « Rien
+n'empêche pour l'instant qu'on ait $\widetilde T = \emptyset$ ! »
+
+\textbf{L'axiome 2 pour les autres triangles} (pages 98 à 100). Pour un
+triangle vertical $\lbrace \alpha, s, s'\rbrace$ il donne la \textbf{Prop.~5} :
+tout $t \in \widetilde E_\beta$ ($\beta \neq \alpha$) est lié à exactement l'un
+de $s$, $s'$. D'où trois corollaires : si $s, t$ sont liés, $s'$ et $t' =
+\sigma_\beta t$ le sont ; $\widetilde T$ est stable par l'involution $\prod
+\sigma_\alpha$ de $\widetilde P$ ; l'ensemble $\widetilde E_\beta(s)$ des
+voisins de $s$ dans $\widetilde E_\beta$ est une section de $\widetilde E_\beta
+\to E_\beta$, et « être liés » est une bijection $\widetilde E_\beta(s) \to
+\widetilde E_\gamma(s)$. Par suite, si $\widetilde E_\alpha \neq \emptyset$,
+$\widetilde E_\beta$ et $\widetilde E_\gamma$ ont même cardinal, et si de plus
+celui-ci n'est pas nul les trois $\widetilde E_\alpha$ ont même cardinal $2c$.
+Les cas où certains $\widetilde E_\alpha$ sont vides donnent des graphes
+dégénérés (un triangle seul, une « étoile » de triangles en un sommet), que
+l'\textbf{axiome 3} exclut : les $\widetilde E_\alpha$ sont non vides. Sous
+l'axiome 3, l'axiome 2 pour les triangles supérieurs est alors automatique : la
+\textbf{Prop.~6}, barrée sur la page mais lisible, le démontre (si $s_1 \in
+\widetilde E_a$ n'était lié à aucun des sommets $t, u$ d'un triangle supérieur
+$\lbrace s, t, u\rbrace$, $\sigma_a s_1$ serait lié aux deux, contredisant la
+Prop.~2)\footnote{L'énoncé de l'axiome 3 sur la page (« on n'est pas dans le
+cas \ldots\ où un sommet est dans au moins 2 triangles ») est d'une lecture
+incertaine ; on donne la forme « les $\widetilde E_\alpha$ sont non vides », qui
+le précède. La « Résolution » qui suit, « la donnée d'un complexe satisfaisant
+les axiomes (1), (2) \ldots\ équivaut à celle de », s'interrompt au bas de la
+page 100.}.
+
+\pagerange{101}{105}
+\section*{20. La réduction à deux problèmes (pages 101 à 105)}
+
+La page 101 reformule la Scholie : un ensemble $t_0$ à trois éléments, un
+ensemble non vide $\widetilde\Gamma$ (les triangles supérieurs) avec une
+involution sans point fixe $\sigma_{\widetilde\Gamma}$, et trois quotients
+$\widetilde\Gamma \to \widetilde E_\alpha$ compatibles aux involutions, avec
+
+\begin{enumerate}
+\item[$\alpha$)] les involutions induites $\sigma_\alpha$ sont sans point fixe ;
+\item[$\beta_{\widetilde\Gamma}$)] pour $\alpha \neq \beta$, $\widetilde\Gamma
+  \to \widetilde E_\alpha \times \widetilde E_\beta$ est injective, et pour toute
+  orbite $u$ de $\sigma_\alpha$ et tout $t \in \widetilde E_\beta$, un et un seul
+  $s \in u$ a $(s, t)$ dans l'image ;
+\item[$\gamma$)] l'axiome (Ka), énoncé plus haut sur des familles $(s_\alpha)$,
+  $(t_\alpha)$ et qu'on ne peut restituer\footnote{L'axiome (Ka) est la condition
+  (***) de la marge de la page 96, lue en partie seulement.}.
+\end{enumerate}
+
+Passons aux quotients : $\Gamma = \widetilde\Gamma/\sigma$, $E_\alpha =
+\widetilde E_\alpha/\sigma_\alpha$. Alors $\widetilde\Gamma$ s'identifie, pour
+chaque $\alpha$, à l'image inverse du revêtement double $\widetilde E_\alpha \to
+E_\alpha$ par $\Gamma \to E_\alpha$, et la donnée équivaut à : un ensemble
+$\Gamma$ et trois quotients $\varphi_\alpha : \Gamma \to E_\alpha$, trois
+revêtements doubles $\widetilde E_\alpha \to E_\alpha$, et un système transitif
+d'isomorphismes entre leurs trois images inverses sur $\Gamma$. L'axiome
+$\beta_{\widetilde\Gamma}$ équivaut alors à
+
+\textbf{$\beta_\Gamma$)} pour $\lbrace \alpha, \beta\rbrace \in \mathfrak{P}_2(t_0)$,
+$\Gamma \to E_\alpha \times E_\beta$ est \emph{bijective}.
+
+C'est mot pour mot l'axiome I de la page 1 : $\Gamma \subset \prod_\alpha
+E_\alpha$ est un carré latin d'ordre $c$, et $\operatorname{card}\Gamma = c^2$,
+$\operatorname{card}\widetilde\Gamma = 2c^2$\footnote{Le rapprochement avec la
+page 1 est de nous ; les pages 101 à 103 ne renvoient pas en arrière.}. La page
+102 l'écrit : « la classification des cas "complexes cubiques généralisés" se
+décompose en deux questions exactement » :
+
+\begin{enumerate}
+\item[I)] décrire les systèmes de trois quotients $\Gamma \to \Gamma_\alpha$
+  d'un ensemble non vide vérifiant $\beta_\Gamma$ --- les carrés latins ;
+\item[II)] pour un tel système, classer ses « revêtements d'ordre 2 », puis
+  ceux qui vérifient l'axiome (Ka).
+\end{enumerate}
+
+Le problème I) est celui des pages 1 à 16 ; le problème II), dans le cas où le
+carré latin est la table d'un groupe commutatif $V$ (c'est-à-dire $\Gamma =
+\operatorname{Ker}(V^3 \to V)$), est celui des extensions centrales des pages 32
+à 39. La page 116 montrera que $V$ est nécessairement un
+$\mathbb{F}_2$-espace vectoriel, et la page 39 donne l'extension pour $\dim V =
+2$\footnote{Ce double rapprochement est notre lecture ; c'est aussi celle que
+suggère le diagramme de la page 121 (section 23). Le dossier 69 fait le même
+chemin depuis le graphe cubique : lemme 7, puis ses pages 14 et 15, puis
+107 à 113.}.
+
+\textbf{Les nombres} (page 104). Avec $c = \operatorname{card} E_a$ :
+\[
+\begin{aligned}
+&\operatorname{card} S = 3(1 + 2c), && \operatorname{card} E_S(s) = 2(1 + c), \\
+&\operatorname{card} A = 3(1+c)(1+2c), && \operatorname{card} T = (1+c)(1+2c),
+\end{aligned}
+\]
+chaque sommet étant sur $1 + c$ triangles, et $\operatorname{card}\widetilde
+\Gamma = 2c^2$, $\operatorname{card}\Gamma = c^2$, $\operatorname{card}\widetilde
+E_a = 2c$. Tout est juste. La page 105 classe les cas dégénérés (points isolés,
+un triangle, une étoile de triangles en un sommet), et s'arrête sur « Si un
+sommet porte au moins 2 triangles »\footnote{Plusieurs mots entourés y sont
+illisibles.}.
+
+\pagerange{106}{116}
+\section*{21. Automorphismes des graphes trialitaires (pages 106 à 116)}
+
+Le titre est de sa main : « Automorphismes des graphes trialitaires » (le mot
+« complexes » y est biffé et remplacé par « graphes »). Soit $(S, A)$ un graphe
+vérifiant les axiomes 1 à 3, $c \geq 1$.
+
+Pour un triangle $\underline t = \lbrace a, b, c\rbrace$, la \emph{symétrie}
+$\sigma_{\underline t}$ est la bijection de $S$ égale à l'identité sur
+$\underline t$ et qui envoie $x \in \widetilde E_a$ sur l'unique élément de
+$\widetilde E_a$ lié à $x$ (c'est l'involution $\sigma_{t_0}$ de la section
+19).
+
+\textbf{Proposition} (page 106). a) $\sigma_{\underline t}$ est un automorphisme
+de $(S, A)$, dont l'ensemble des points fixes est $\underline t$. b)
+L'application $\underline t \mapsto \sigma_{\underline t}$ est injective, et son
+image est formée des automorphismes involutifs $u$ dont l'ensemble des points
+fixes est un triangle et qui stabilisent chaque triangle passant par un de ces
+points fixes\footnote{La page énonce b) avec la seule condition « $u$ involutif et
+$\operatorname{card} S^u = 3$ », et ajoute « C'est évident ». Ainsi énoncé, b) est
+faux. Pour $c = 1$, la transposition du pavé $3 \times 3$ est une involution
+dont les points fixes sont les trois points de la diagonale, qui forment une
+triade et non un triangle. Pour $c = 2$, dans le modèle des paires de $\lbrace
+1, \ldots, 6\rbrace$, la double transposition $(34)(56)$ fixe exactement les trois
+paires $12$, $34$, $56$, qui forment un triangle, sans être la symétrie de ce
+triangle (qui est la triple transposition $(12)(34)(56)$) : il y a 45 telles
+involutions pour 15 triangles. La condition supplémentaire qu'on a ajoutée
+suffit : un tel $u$ préserve chaque paire $\lbrace s, s'\rbrace$ d'un triangle
+$\lbrace \alpha, s, s'\rbrace$, et, sans point fixe hors de $\underline t$, il
+l'échange ; il coïncide donc avec $\sigma_{\underline t}$.}. Pour $g \in
+\mathcal{G} = \operatorname{Aut}(S, A)$ on a $g \sigma_{\underline t} g^{-1} =
+\sigma_{g(\underline t)}$, de sorte que le groupe $\mathcal{G}^\circ$ engendré par
+les symétries est distingué dans $\mathcal{G}$.
+
+\textbf{Théorème} (page 107). $\mathcal{G}^\circ$ est transitif sur l'ensemble des
+arêtes orientées (couples de sommets liés), donc sur les sommets et sur les
+triangles. \textbf{Corollaire} : les $\sigma_{\underline t}$ forment une seule
+classe de conjugaison de $\mathcal{G}^\circ$. La marge excepte le cas $c = 1$ :
+pour le pavé, $\mathcal{G}^\circ \simeq \mathfrak{S}_3 \times \mathfrak{S}_3$
+est d'indice 2 dans $\mathcal{G} \simeq \mathfrak{S}_2 \cdot (\mathfrak{S}_3
+\times \mathfrak{S}_3)$, transitif sur les sommets mais non sur les arêtes (les
+symétries des lignes et celles des colonnes ne sont pas conjuguées dans
+$\mathcal{G}^\circ$)\footnote{La fin de l'énoncé du théorème est perdue dans des
+insertions. On a vérifié par machine la transitivité sur les arêtes orientées
+pour $c = 2$ et $c = 4$, et les ordres de $\mathcal{G}^\circ$ : 36, 720 et
+25\,920 pour $c = 1, 2, 4$. Pour $c = 4$, $\mathcal{G}^\circ$ est donc
+d'indice 2 dans $\mathcal{G} = W(E_6)$ ; les pages ne le disent pas, et ce que
+dit la page 115 (« $\mathcal{G} = \mathcal{G}^\circ$ ») ne concerne que $c =
+2$.}.
+
+La démonstration repose sur deux lemmes. \textbf{Lemme 1} : a) si $s, t$ sont
+liés, $t = \sigma_{\underline t} s$ pour un triangle $\underline t$ (n'importe
+quel autre triangle passant par le troisième sommet $u$ du triangle $\lbrace s,
+t, u\rbrace$ ; il en existe dès que $c \geq 1$) ; b) si $s, t$ ne sont pas liés,
+ils ont un voisin commun, et $t$ est image de $s$ par un produit de deux
+symétries. \textbf{Lemme 2} : si $s, t$ sont deux voisins distincts et non liés d'un
+même sommet $a$, il existe un produit de deux symétries qui fixe $a$ et échange
+$s$ et $t$ ; et (page 108) si $c \geq 2$ on peut le choisir induisant
+l'identité sur un triangle $\underline t_0 = \lbrace a, b, c\rbrace$ ne contenant ni
+$s$ ni $t$. La « recette » des pages 108 et 109 construit ce produit : avec $u$ un
+voisin commun de $s$ et $t$ hors de $a$, lié à $b$, les triangles $\lbrace s, u,
+v\rbrace$ et $\lbrace t, u, w\rbrace$, et les triangles $\underline\sigma = \lbrace c, v,
+v'\rbrace$ et $\underline\tau = \lbrace c, w, w'\rbrace$, on a $\sigma_{\underline\sigma}
+s = u$, $\sigma_{\underline\tau} u = t$, les deux symétries échangent $a$ et $b$
+et fixent $c$, et
+\[
+W = \sigma_{\underline\tau} \sigma_{\underline\sigma}
+\]
+envoie $(a, s)$ sur $(a, t)$ en induisant l'identité sur $\lbrace a, b,
+c\rbrace$\footnote{La lettre $\underline\sigma$ nommant un triangle est d'une
+lecture incertaine. Une première version de la recette (page 108) et un NB
+(page 109, continué page 112) sont barrés.}.
+
+\textbf{Transitivité sur les triangles supérieurs} (pages 110 à 114). Le
+corollaire de la page 110 (barré dans sa moitié inférieure) affirme que les
+produits pairs de symétries de triangles verticaux, qui fixent $a$, $b$, $c$,
+opèrent transitivement sur $\widetilde\Gamma$. Le \textbf{Lemme 1} de la page 111,
+valable pour $c$ fini $\geq 3$ (« c'est faux si $c = 1, 2$ »), affirme que deux
+éléments $s, t$ de $\widetilde E_a$ se joignent par un $s_1 \in \widetilde E_a$ et
+des $u, v \in \widetilde E_b$ avec $u$ lié à $s$ et $s_1$, $v$ à $s_1$ et $t$ ;
+la démonstration, par l'absurde et par cardinalité, sépare $\widetilde E_a$ en
+deux parties $A'$, $A''$ et aboutit (page 113) à $\widetilde E_c(r_i) =
+\complement\widetilde E_c(r_i)$, absurde. Le \textbf{Lemme 2} et son corollaire
+(pages 113 et 114) introduisent, pour un sommet $b$ de $\underline t_0$, le groupe
+$\mathcal{G}_b$ engendré par les produits $\sigma_{v_1}\sigma_{v_2}$ de deux
+symétries de triangles verticaux en $b$ : c'est un $\mathbb{F}_2$-espace vectoriel
+qui respecte $a$, $b$, $c$, et il est transitif sur $\widetilde E_a$ (par des
+produits de quatre symétries) ; un « corollaire plus fort », barré, l'affirmait
+transitif sur $\widetilde\Gamma$\footnote{Les indices de $\pi =
+\sigma_{w_1}\sigma_{v_2}$ dans le lemme 2 sont surchargés ; lecture incertaine.}.
+
+\textbf{Ordres} (page 115). Le nombre de triangles épinglés (triangle muni d'un
+ordre total sur ses sommets) est le nombre d'arêtes orientées, $6(1+c)(1+2c)$ ;
+celui des bitriangles épinglés est $2c^2$ fois plus grand, $12c^2(1+c)(1+2c)$.
+Pour $c = 2$, un automorphisme qui induit l'identité sur un bitriangle épinglé
+est l'identité, et $\mathcal{G} = \mathcal{G}^\circ$ est simplement transitif sur
+les bitriangles épinglés : il est d'ordre $12 \cdot 4 \cdot 5 \cdot 3 = 720$. Pour
+$c = 1$, $\mathcal{G}$ est d'ordre $12 \cdot 1 \cdot 3 \cdot 2 = 72$. En
+général le nombre de bitriangles est $\frac{1}{72}$ du nombre des bitriangles
+épinglés, $\frac16 c^2(1+c)(1+2c)$. Tout cela est juste.
+
+\textbf{Le cas commutatif} (page 116). Pour la relation $xyz = 1$ sur un groupe
+$G$ et un élément $a$, l'application
+\[
+\varphi_a : (x, y, z) \longmapsto (x,\ a^{-1}z^{-1},\ a^{-1}y^{-1})
+\]
+préserve la relation pour tous $(x, y, z)$ seulement si $a^2 = 1$ (prendre $y = z
+= 1$), puis $(z^{-1}a)^2 = 1$ pour tout $z$ : tout élément est d'ordre 2, $G$ est
+commutatif, c'est un espace vectoriel sur $\mathbb{F}_2$, et la condition est
+alors satisfaite. Écrit additivement, $\varphi_c : (x, y, z) \mapsto (x, z + c, y +
+c)$ et $\varphi_a \varphi_b : (x, y, z) \mapsto (x, y + c, z + c)$ avec $c = a +
+b$\footnote{Ici $c$ est un élément du groupe, non le cardinal $c$ ; la page
+réutilise la lettre.}. Ce sont les symétries des triangles verticaux, vues sur le
+carré latin $\Gamma$ : le sous-groupe distingué $\mathcal{G}_a$ engendré par les
+produits pairs en $a$ opère trivialement sur $\widetilde E_a$, transitivement sur
+$\widetilde E_b$ et $\widetilde E_c$, et il est isomorphe au groupe des parties
+paires de $E_a$ ; $\mathcal{G}$ opère transitivement sur $\widetilde\Gamma \simeq
+\mathcal{G}/\mathfrak{g}$. Voilà pourquoi le carré latin du problème I) doit être la
+table d'un $\mathbb{F}_2$-espace vectoriel, et $c$ une puissance de 2.
+
+\pagerange{117}{123}
+\section*{22. La tour et ses tableaux (pages 117 à 123)}
+
+Soit $\mathcal{T}_\beta$, $\beta \in \lbrace -1, 0, 1, 2\rbrace$, les graphes de la
+famille, avec $c_\beta = 0, 1, 2, 4$. Pour $\beta \leq \gamma$ on note
+$c_{\beta\gamma}$ le nombre de sous-structures $\mathcal{T}_\beta$ dans un
+$\mathcal{T}_\gamma$, $c'_{\beta\gamma}$ le nombre de sous-structures
+\emph{épinglées}, et $N_\beta = c'_{\beta\beta}$ l'ordre du groupe des
+automorphismes de $\mathcal{T}_\beta$ ; on a
+\[
+c'_{\beta\gamma} = N_\beta\, c_{\beta\gamma}, \qquad c'_{\beta\gamma} =
+c'_{\alpha\gamma}\, \nu_{\alpha\beta\gamma},
+\]
+$\nu_{\alpha\beta\gamma}$ étant le nombre de prolongements d'une structure
+épinglée $\mathcal{T}_\alpha$ en une structure épinglée $\mathcal{T}_\beta$.
+On trouve (page 118)
+\[
+\nu_{-1,0,\gamma} = 2c_\gamma^2, \qquad \nu_{0,1,\gamma} = c_\gamma - 1, \qquad
+\nu_{1,2,\gamma} = c_\gamma - 2,
+\]
+d'où, pour $\gamma$ convenable,
+\[
+\begin{aligned}
+c'_{-1,\gamma} &= 6(1+c_\gamma)(1+2c_\gamma), &
+c'_{0,\gamma} &= 12c_\gamma^2(1+c_\gamma)(1+2c_\gamma), \\
+c'_{1,\gamma} &= 12c_\gamma^2(c_\gamma^2-1)(2c_\gamma+1), &
+c'_{2,\gamma} &= 12c_\gamma^2(c_\gamma^2-1)(c_\gamma-2)(2c_\gamma+1),
+\end{aligned}
+\]
+et les deux tableaux, qui sont justes :
+\[
+\begin{array}{c|cccc}
+c'_{\beta\gamma} & \gamma = -1 & 0 & 1 & 2 \\ \hline
+\beta = -1 & 6 & 36 & 90 & 270 \\
+0 & & 72 & 720 & 8640 \\
+1 & & & 720 & 25\,920 \\
+2 & & & & 51\,840
+\end{array}
+\qquad
+\begin{array}{c|cccc}
+c_{\beta\gamma} & \gamma = -1 & 0 & 1 & 2 \\ \hline
+\beta = -1 & 1 & 6 & 15 & 45 \\
+0 & & 1 & 10 & 120 \\
+1 & & & 1 & 36 \\
+2 & & & & 1
+\end{array}
+\]
+avec
+\[
+c_{0,\gamma} = \tfrac{1}{72}\,c'_{0,\gamma} = \tfrac16\, c_\gamma^2 (c_\gamma+1)
+(2c_\gamma+1), \qquad c_{1,\gamma} = \tfrac{1}{720}\, c'_{1,\gamma} =
+\tfrac{1}{60}\, c_\gamma^2 (c_\gamma^2 - 1)(2c_\gamma+1) .
+\]\footnote{La page 119
+écrit $c_{0,\gamma} = \frac{1}{72} c_{0,\gamma}$ (sans prime) et y ajoute un
+facteur $(c_\gamma - 1)$, qui donnerait 360 au lieu de 120 pour $c = 4$ ; le
+tableau suit la bonne formule. Les formules fermées de la page 120,
+$\frac16 c(c+1)(2c+1)$ et $\frac{1}{30}c(c+1)(2c+1)(c-1)$, perdent chacune un
+facteur $c$ : la première donnerait 5 au lieu de 10 pour $c = 2$, la seconde 18
+au lieu de 36 pour $c = 4$ (la transcription le note pour la seconde).}
+Les ordres $N_\beta$ sont $6$, $72$, $720$, $51\,840 = 2^7 \cdot 3^4 \cdot 5$,
+que la page 122 recalcule en travers d'une copie d'examen ($128 \times 405 =
+51\,840$).
+
+\textbf{Le tableau de la page 120.} Il récapitule, pour $c = 0, 1, 2, 4$ :
+triangles par sommet $c + 1 = 1, 2, 3, 5$ ; voisins $2(c+1) = 2, 4, 6, 10$ ;
+sommets $3 + 6c = 3, 9, 15, 27$ ; arêtes $3, 18, 45, 135$ ; triangles $1, 6, 15,
+45$, dont $3c$ verticaux et $2c^2 = 0, 2, 8, 32$ transversaux ; sommets non liés à
+un sommet donné $4c = 0, 4, 8, 16$, qu'il écrit $2^{\nu+2}$ ; et l'ordre du groupe
+d'automorphismes, $6$, $72$, $720$, $51\,840$\footnote{La case $c = 2$ de l'ordre
+est surchargée (un « 360 » recouvert). La dernière ligne du dernier tableau de la
+page (72, 360, 2160) ne s'accorde pas avec les $c'_{0,\gamma}$ de la page 118
+(72, 720, 8640) ; on suit la page 118, que confirment les comptes directs.}.
+Il note enfin « $c = 2^\nu$ » : $2c^2 = 2^{2\nu+1}$ pour $\nu = -\infty, 0, 1,
+2$.
+
+\textbf{Catégories de paires} (page 123). La catégorie des $\mathcal{T}_\alpha$
+munis d'une sous-structure $\mathcal{T}_\beta$ est équivalente à :
+\[
+\begin{array}{c|cccc}
+\beta \backslash \alpha & -1 & 0 & 1 & 2 \\ \hline
+\text{rien} & (\mathrm{Ens})_3 & (\mathrm{Ens})_{3,3} & (\mathrm{Ens})_6 &
+\ast \\
+-1 & (\mathrm{Ens})_3 & (\mathrm{Ens})_3 \times (\mathrm{Ens})_2 &
+(\mathrm{Ens})_{2,2,2} & \text{« Trialité »} \\
+0 & & (\mathrm{Ens})_{3,3} & (\mathrm{Ens})_{3,3} & (\mathrm{Ens})_3 \times
+(\mathrm{Ens})_{3,3} \\
+1 & & & (\mathrm{Ens})_6 & (\mathrm{Ens})_6 \times (\mathrm{Ens})_2
+\end{array}
+\]
+On a contrôlé chaque case sur les ordres : le groupe d'automorphismes de la
+catégorie doit être d'ordre $N_\alpha / c_{\beta\alpha}$, et c'est le
+cas\footnote{La case $(0, 2)$ porte sur la page $(\mathrm{Ens})_{3,3} \times
+(\mathrm{Ens})_{3,3}$, d'ordre $72^2$ ; il faut $51\,840/120 = 432 = 6 \cdot 72$,
+soit $(\mathrm{Ens})_3 \times (\mathrm{Ens})_{3,3}$, ce que donne la page 52
+(section 11). La case $\ast$ ($\mathcal{T}_2$ seul) est laissée sans
+équivalent : $W(E_6)$ n'est pas le groupe d'une structure aussi simple.}. Le mot
+« Trialité » pour un graphe cubique muni d'un triangle est remarquable : le
+stabilisateur d'un triangle est d'ordre $51\,840/45 = 1152$, l'ordre du groupe de
+Weyl de $F_4$, extension par $\mathfrak{S}_3$ (les permutations des trois sommets
+du triangle) de $W(D_4)$, et c'est la trialité de $D_4$ qui opère\footnote{Le
+dossier 69 (section 9) établit l'isomorphisme avec $W(F_4)$. Le rapprochement
+avec la trialité est de nous ; la page n'écrit que le mot.}. Le second tableau de la
+page, pour les chaînes $\mathcal{T}_\alpha \subset \mathcal{T}_\beta \subset
+\mathcal{T}_\gamma$, est lu sur un aperçu insuffisant et toutes ses entrées sont
+douteuses\footnote{Avec les comptes ci-dessus, les groupes des chaînes $(-1, 0,
+1)$, $(-1, 0, 2)$, $(-1, 1, 2)$, $(0, 1, 2)$ et $(-1, 0, 1, 2)$ sont d'ordres 12,
+72, 96, 144 et 24. Les entrées lues $(\mathrm{Ens})_{2,2,2} \times
+(\mathrm{Ens})_2$ (96) et $(\mathrm{Ens})_{3,3} \times (\mathrm{Ens})_2$ (144)
+s'accordent ; les trois autres lectures ($(\mathrm{Ens})_3$, $(\mathrm{Ens})_3
+\times (\mathrm{Ens})_3$, $(\mathrm{Ens})_3 \times (\mathrm{Ens})_2$) non.}.
+
+\pagerange{121}{125}
+\section*{23. Revêtements, torseurs et relations entre symétries (pages 121, 124, 125)}
+
+La page 121, de brouillon, dessine le diagramme qui réunit les deux moitiés du
+dossier : $V \xrightarrow{\varphi_i} \Gamma \xrightarrow{p_i} E_i/2 = V$, le relèvement
+$\psi_i : V \to \widetilde\Gamma$, l'extension $\lbrace \pm 1\rbrace \to
+\widetilde\Gamma \to \Gamma$, et le revêtement $\widetilde\Gamma \to \widetilde
+E_i$\footnote{Lecture du diagramme incertaine : la flèche $p_i$ et le but $E_i/2$
+sont surchargés, $\psi_i$ est en pointillé.}. C'est la situation des pages 32 à
+39 appliquée au problème II) des pages 101 à 103. On y lit aussi les relations
+$\tau_2\tau_1 = \tau_3\tau_2 = \tau_1\tau_3 = \mathrm{id}$ de la page 10, et des
+calculs de commutateurs de symétries, $\sigma_x \sigma_y \sigma_x^{-1}\sigma_y^{-1}
+= \sigma_{\sigma_x y}\sigma_y^{-1}$, conséquence de $g\sigma_{\underline t}g^{-1}
+= \sigma_{g \underline t}$.
+
+Page 124 : pour trois triangles $t_0$, $t$, $t'$ convenablement placés, les
+symétries agissent sur six sommets $x, y, z, x', y', z'$ par
+\[
+\sigma_{t_0} : x \leftrightarrow x', \ y \leftrightarrow y', \ z \leftrightarrow
+z' ; \quad \sigma_t : x \leftrightarrow y', \ y \leftrightarrow z', \ z
+\leftrightarrow x' ; \quad \sigma_{t'} : x \leftrightarrow z', \ y
+\leftrightarrow x', \ z \leftrightarrow y' ,
+\]
+et $\sigma_{t_0}\sigma_t = \sigma_t\sigma_{t'} = \sigma_{t'}\sigma_{t_0} = \pi$ est
+d'ordre 3 : les trois symétries engendrent un $\mathfrak{S}_3$. Page 125 : avec
+un triangle supérieur $\lbrace s, t, u\rbrace$, l'identité encadrée
+\[
+\sigma_t \sigma_s \sigma_u = \sigma_{t_0} \quad \text{sur } \widetilde E_a
+\smallsetminus \lbrace s, s'\rbrace ,
+\]
+où $\sigma_s$ désigne la symétrie du triangle vertical passant par $s$, et ses
+réécritures, dont $\sigma_t \sigma_s \sigma_t^{-1} = \sigma_{\sigma_t s}$ ; la marge
+dit « short-cut !! »\footnote{La page 124 évoque aussi l'action de
+$\mathfrak{S}_I$ et de $\mathfrak{S}_I \times \mathfrak{S}_J$ sur les trois blocs
+$\xi_1\xi_2\xi_3 / \xi^*_4\xi^*_5\xi^*_6$, etc. ; le passage est en grande partie
+illisible. La page 125 note aussi $\frac12(3+6c)(2+2c) = 3(1+2c)(1+c)$, le nombre
+d'arêtes.}.
+
+\pagerange{127}{129}
+\section*{24. Un sommet marqué et l'espace $\mathbb{F}_2^I$ (pages 127 à 129)}
+
+Soit $(S, A)$ un graphe $T_\nu$, $\nu \in \lbrace 0, 1, 2\rbrace$, $c = 2^\nu$, et $a
+\in S$. Soit $I$ l'ensemble des $c + 1$ triangles de sommet $a$, $X =
+\coprod_{i \in I} X_i$ l'ensemble des voisins de $a$ ($X_i$ les deux autres
+sommets du triangle $i$, torseur sous $\mathbb{F}_2$), et $E = \prod_{i \in I}
+X_i$, torseur sous $V = \mathbb{F}_2^I$. Soit $Y$ l'ensemble des $4c$ sommets non
+liés à $a$. Tout $x \in Y$ est lié à un unique élément $\varphi_i(x)$ de chaque
+$X_i$, d'où $\varphi : Y \to E$.
+
+Les symétries $\sigma_i$ des triangles $i \in I$ opèrent sur $E$ : $\sigma_{i_0}$
+échange les deux points de chaque $X_i$, $i \neq i_0$, et fixe $X_{i_0}$. Si
+$\eta : V \to \mathbb{F}_2$ est la somme des coordonnées, $\delta$ la diagonale et
+$z = \delta(1)$, on a donc $(\sigma_g)_E = \rho(g + \delta\eta(g))$, où $\rho$ est
+l'action naturelle de $V$ sur $E$. Soit $u(x) = x + \delta\eta(x)$. Son noyau est
+$\lbrace 0\rbrace$ si $\operatorname{card} I$ est pair et $\lbrace 0, z\rbrace$ si
+$\operatorname{card} I$ est impair ; or $\operatorname{card} I = 1 + 2^\nu$ est
+pair pour $\nu = 0$ et impair pour $\nu = 1, 2$. Donc :
+
+\begin{itemize}
+\item pour $\nu = 0$ ($c = 1$, le pavé), $u$ est un isomorphisme ; $\varphi$
+  commute aux actions, elle est injective, et comme $\operatorname{card} Y = 4 =
+  2^{c+1} = \operatorname{card} E$, elle est bijective ;
+\item pour $\nu = 1, 2$, $u$ a pour noyau $\lbrace 0, z\rbrace$ et pour image le
+  sous-espace $V' = \operatorname{Ker}\eta$ des vecteurs pairs, de dimension
+  $c$\footnote{La page conclut au contraire « si $\nu \neq 0$, $u$ est
+  injectif », après avoir bien établi que $z$ est dans le noyau exactement quand
+  $\operatorname{card} I$ est impair ; c'est un lapsus, et la suite de la page
+  (« $\operatorname{card} E = 2^{c+1} = 2^2 = 4$, donc $\varphi$ est bijectif »)
+  ne vaut que pour $c = 1$. Elle écrit en outre « cas du point » pour $\nu = 0$.
+  Le b) qui suit, pour $\nu = 1, 2$, s'interrompt sur « $\operatorname{Ker}\eta =
+  V$ \ldots », qu'on lit $V'$.}.
+\end{itemize}
+
+Les pages s'arrêtent là pour $\nu \geq 1$. Ce qu'on peut dire, et qu'on a
+vérifié : pour $c = 4$, $\varphi$ est injective et son image est une orbite de
+$V'$, de sorte que les seize non-voisins de $a$ forment un torseur sous $V'$, de
+dimension 4 --- c'est ce qu'affirme la page 135 ; pour $c = 2$, en revanche,
+$\varphi$ est deux-à-un sur quatre points (dans le modèle des paires de
+$\lbrace 1, \ldots, 6\rbrace$, avec $a = 12$, les non-voisins $13$ et $23$ ont les mêmes
+projections), et la description ne s'étend pas telle quelle\footnote{Pour $c
+= 4$, dans le modèle de Schläfli avec $a = a_1$, un non-voisin est codé par la
+partie de $\lbrace 2, \ldots, 6\rbrace$ des plans tritangents $\lbrace a_1, b_j,
+c_{1j}\rbrace$ où il rencontre $c_{1j}$ plutôt que $b_j$ : $a_k \mapsto \lbrace
+k\rbrace$, $c_{jk} \mapsto \lbrace 2, \ldots, 6\rbrace \smallsetminus \lbrace j,
+k\rbrace$, $b_1 \mapsto \lbrace 2, \ldots, 6\rbrace$ ; ce sont exactement les seize
+parties de cardinal impair. Le dossier 69 (pages 16 et 17) code de la même
+façon les non-voisins par des sections.}.
+
+\pagerange{130}{131}
+\section*{25. Les mêmes axiomes en termes de triangles (pages 130 et 131)}
+
+Titre de sa main : « Graphes pseudotrialitaires en termes de triangles ». On se
+donne un ensemble $X$ de « sommets » et $T \subset \mathfrak{P}_3(X)$, et l'on
+définit une arête comme une paire contenue dans un triangle. Axiomes : a) deux
+triangles distincts ont au plus un point commun (toute arête est dans un unique
+triangle) ; b) trois sommets deux à deux joints par des arêtes forment un triangle
+de $T$ ; c) pour $\underline t \in T$ et $a \notin \underline t$, il existe un
+unique triangle passant par $a$ et rencontrant $\underline t$. C'est l'axiome (C)
+de la page 92 dans le langage des points et des droites. La condition d)
+« chaque sommet est sur trois triangles » fait de $X$ une \emph{configuration}
+(chaque droite a trois points et chaque point est sur trois droites) ; avec
+$X'$ l'ensemble des droites et $R$ l'incidence, $X' \to \mathfrak{P}_3(X)$ et $X
+\to \mathfrak{P}_3(X')$ sont injectives, et la page entreprend de vérifier que le
+dual $X'$ satisfait à son tour a) à d) : d) est immédiat, a) est clair, b) se
+démontre par l'absurde, c) est énoncé\footnote{La lecture « conf. » est
+incertaine. Avec d), on est dans le cas $c = 2$ : la configuration est le
+quadrangle $W(2)$ (configuration de Cremona--Richmond $15_3$), qui est
+effectivement auto-dual. Nom de nous.}.
+
+\pagerange{132}{135}
+\section*{26. Diagrammes $A_n$, prismes et carrés (pages 132 à 135)}
+
+Les dernières pages décrivent des configurations du graphe cubique, chacune
+par la catégorie des données équivalentes, dans le style des pages 17 à 39 du
+dossier 69 ; on vérifie chaque fois la cohérence avec $|W(E_6)| = 51\,840$.
+
+\begin{itemize}
+\item \textbf{Page 132.} Un cube dont les sommets portent des $\lambda_{ij}$ ;
+  « cube $\leftrightarrow$ cube ponctué » ; $(\mathrm{Ens})_{2,2,2}$ et
+  $(\mathrm{Ens})_2 \times (\mathrm{Ens})_4$ ; $\mathfrak{S}_3 \cdot (\pm 1)^3
+  \simeq \mathfrak{S}_2 \times \mathfrak{S}_4$, isomorphisme exact (groupe
+  hyperoctaédral d'ordre 48).
+\item \textbf{Diagramme $A_2$} (page 133), qui équivaut à un « triangle
+  ponctué » (une arête, et son triangle) : la catégorie des graphes cubiques
+  munis d'un tel diagramme est équivalente à celle des ensembles à huit éléments
+  munis d'une involution sans point fixe, ou des 4-cubes, ou des torseurs sous
+  $\mathfrak{S}_4 \cdot (\pm 1)^4 \simeq W(B_4)$, le groupe de Weyl de $SO(9)$,
+  d'ordre 384 ; et $51\,840/384 = 135$, le nombre d'arêtes.
+\item \textbf{Diagramme $A_3$} : $(\mathrm{Ens})_2 \times (\mathrm{Ens})_4$,
+  d'ordre 48, soit $1080$ diagrammes (les chemins induits $x - y - z$, $x$ et $z$
+  non liés : $27 \cdot 10 \cdot 8 / 2 = 1080$).
+\item \textbf{Diagramme $A_4$} : « pavé $+$ triade et triangle sécants »,
+  « hexagone $+$ clou centré », $(\mathrm{Ens})_2 \times (\mathrm{Ens})_3$, d'ordre
+  12, soit 4320 ; \textbf{diagramme $A_5$} : « hexagone ponctué », « triade
+  épinglée », groupe d'ordre 12 ($720 \cdot 6 = 4320$ triades
+  épinglées)\footnote{L'indice de « $\mathrm{Ens}_{2,4}$ » est surchargé, un 4
+  repris en 2 ; avec $(\mathrm{Ens})_2 \times (\mathrm{Ens})_3$ l'ordre est le
+  bon. La page 66 annonçait déjà « $A_4 \Leftrightarrow A_5 \Leftrightarrow P_6
+  \Leftrightarrow$ bitriangle épinglé ». Le sens précis de « diagramme $A_n$ »
+  n'est pas défini sur ces feuillets ; les nombres sont ceux des configurations
+  que le dossier 69 appelle balises et préprismes.}.
+\item \textbf{Prismes triangulaires} (page 134) : « pavé $+$ triangle »,
+  $(\mathrm{Ens})_2 \times (\mathrm{Ens})_3 \times (\mathrm{Ens})_3$, d'ordre 72,
+  soit 720 prismes (le nombre du dossier 69). \textbf{Bicarrés} : $(\mathrm{Ens})_2
+  \times (\mathrm{Ens})_2 \times (\mathrm{Ens})_2 \simeq \mathrm{Tors}((\pm 1)^3)$,
+  et $\frac12 (720 \times 6 \times 3) = 2^4 \cdot 3^4 \cdot 5 = 51\,840/8$.
+\item \textbf{Page 135.} Une bande de trois carrés n'existe pas dans un graphe
+  cubique (le troisième sommet de deux triangles serait forcé d'être égal à un
+  autre) ; d'où : pas de prismes à base pentagonale ou hexagonale, mais des
+  prismes à base carrée, c'est-à-dire des cubes. Enfin, la catégorie des graphes
+  cubiques à sommet marqué $a$ équivaut à celle des couples formés d'un ensemble
+  $I$ à cinq éléments (les triangles en $a$) et d'un torseur $T$ sous $V_I =
+  (\mathbb{F}_2^I)'$, l'espace de dimension 4 engendré par des $e_i$ de seule
+  relation $\sum e_i = 0$ ; $T$ est l'ensemble des sommets non liés à $a$
+  (groupe d'ordre $120 \cdot 16 = 1920 = |W(D_5)|$, et $51\,840/1920 = 27$). Les
+  carrés de centre $a$ correspondent aux parties $I' \subset I$ de cardinal 2 et
+  aux points de $T/V_{(I')}$, et la catégorie des graphes cubiques munis d'un
+  carré équivaut à $(\mathrm{Ens})_{2,2} \times (\mathrm{Ens})_3$\footnote{Le
+  crochet ouvert à cet endroit n'est pas refermé : l'argument continue au-delà du
+  dossier. L'ordre $8 \cdot 6 = 48$ donne $1080$ carrés, le nombre de 4-cycles
+  induits que compte le dossier 69.}.
+\end{itemize}
+
+C'est sur cette description autour d'un sommet --- un ensemble à cinq éléments et
+un torseur sous un espace de dimension 4 sur $\mathbb{F}_2$ --- que le dossier
+s'arrête : elle rejoint le graphe de la page 18, construit sur un
+$\mathbb{F}_2$-espace vectoriel, par lequel les notes sur les vingt-sept avaient
+commencé.
+
+\end{document}
