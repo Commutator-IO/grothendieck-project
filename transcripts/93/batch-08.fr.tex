@@ -1,0 +1,678 @@
+% Folder 93, batch 08 — archivists' pages 141–160.
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+%
+% Manuscript notes in Grothendieck's hand throughout. Connections on affine
+% torsors, de Rham cohomology with coefficients, interpretation of H^1_DR by
+% torsors with integrable connection; then stratifications.
+%
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{93}
+\batch{8}
+\pages{141}{160}
+\foldertitle{Connexions de Gauss-Manin et équations de Picard-Fuchs. Opération de Cartier : copies de tapuscrit annoté (s.d.), tiré à part (1981), notes manuscrites (s.d.).}
+\dating{[1972]-1981}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\section{1) Connexions sur torseurs affines}
+
+\page{141}
+\note{le titre, souligné, est de sa main ; « 1) » ouvre une suite numérotée qui commence sur cette page.}
+
+$S/T$ schéma relatif \add{($q : S \to T$)}, $E$ module quasi-cohérent sur $S$, d'où :
+\[
+(1)\qquad 0 \longrightarrow E \otimes \Omega^1_{S/T} \longrightarrow P^1_{S/T}(E) \longrightarrow E \longrightarrow 0
+\]
+extension de $\mathcal{O}_S$-modules. On a un splitting $q^{-1}(\mathcal{O}_T)$-linéaire
+(mais pas $\mathcal{O}_S$-linéaire)
+\[
+(2)\qquad d^1_E : E \longrightarrow P^1_{S/T}(E)
+\]
+qui permet d'identifier $P^1_{S/T}(E)$ \emph{additivement} à
+$E \oplus E \otimes \Omega^1_{S/T}$, en écrivant donc \struck{\ill{}} \add{les sections}
+de $P^1_{S/T}(E)$ \add{(sur \ill{})} \uncertain{de façon unique} comme
+\[
+(3)\qquad \xi = d^1_E x + \omega \qquad
+\begin{cases} \omega \in \Gamma(\ ,E \otimes \Omega^1_{S/T}) \\ x \in \Gamma(\ ,E) \end{cases}
+\]
+\note{sous le premier membre, une formule biffée et illisible, terminée par un indice ${}_{S/T}$.}
+
+Comme, si $f$ est \uncertain{une section de} $\mathcal{O}_S$,
+\[
+f\xi = f\omega + f\,d^{(1)}_E x = f\omega + d^{(1)}_E(fx) + [f - d^{(1)}(f)]\,d^1_E(x)
+\]
+\note{sous $d^{(1)}_E(fx)$, il écrit (avec un signe d'égalité vertical) $d^1(f)\,d^1_E(x)$ ; sous le crochet, « $-df$ ».}
+i.e.
+
+\struck{(4) $f(\omega + d^{(1)}_E x) = f\omega$}
+\[
+(4)\qquad f(d^1_E x + \omega) = d^1_E fx + (f\omega - x \otimes df) .
+\]
+\note{le signe entre $f\omega$ et $x \otimes df$ est surchargé : un « $-$ » repassé, que la p.~142 confirme.}
+
+Une \emph{connexion} $\delta_E$ de $E$ rel. à $T$ est un splitting \add{$\mathcal{O}_S$-linéaire}
+de (1) ; \uncertain{donc tout splitting additif}, comme dans (2), il est donné par un
+homomorphisme additif
+\[
+(5)\qquad d^0_E : E \longrightarrow E \otimes \Omega^1_{S/T}
+\]
+\ill{}
+\[
+(6)\qquad \delta_E x = d^1_E(x) - d^0_E(x) ,
+\]
+il faut expliciter la condition sur $d^0_E$ de (5) pour que $\delta_E$ \uncertain{soit}
+$\mathcal{O}_S$-linéaire,
+
+\page{142}
+i.e. qu'on ait $\delta f x = f \delta x$, i.e. compte tenu de (4),
+\[
+d^1_E(fx) + (-f d^0_E x - x \otimes df) = d^1_E(fx) - d^0_E(fx) ,
+\]
+ce qui s'écrit
+\[
+(7)\qquad d^0_E(fx) = f d^0_E(x) + x \otimes df .
+\]
+On a aussi, utilisant la structure de $\Omega^\bullet_{S/T}$-module à droite de
+$E \otimes \Omega^\bullet_{S/T}$ :
+\[
+(7')\qquad d^0_E(xf) = d^0_E(x) f + x\,df .
+\]
+\note{dans (7'), $xf$ est écrit sur un $fx$ biffé.}
+
+NB On dit souvent que $d^0_E$ (5) satisfaisant (7) est une \emph{connexion} sur $E$ rel. à $T$.
+\struck{On sait alors \ill{}}
+
+On sait alors qu'il $\exists$ prolongement unique de $d^0_E$
+\struck{en une dérivation \ill{}} en un endomorphisme additif
+\[
+(8)\qquad d^\bullet_E : E \otimes \Omega^\bullet_{S/T} \longrightarrow E \otimes \Omega^\bullet_{S/T}
+\]
+qui \struck{\ill{}} satisfasse la relation suivante rel. à la structure de
+$\Omega^\bullet_{S/T}$-module à droite :
+\[
+(9)\qquad d^\bullet_E(\varphi\omega) = d_E(\varphi)\,\omega + (-1)^{\deg\varphi}\,\varphi\, d(\omega) ,
+\]
+et où $d^\bullet_E$ est un \uncertain{opérateur} de degré 1. Pour que l'on ait
+\[
+(10)\qquad d^\bullet_E \circ d^\bullet_E = 0 ,
+\]
+il faut et il suffit que l'on ait
+
+(10') le composé $d^1_E d^0_E : E \to E \otimes \Omega^1_{S/T} \to E \otimes \Omega^2_{S/T}$
+est nul.
+
+Le composé en question, considéré comme section de
+$\mathcal{H}om(E, E \otimes \Omega^2_{S/T})$, est appelé la \emph{courbure} de la connexion.
+La connexion est dite \emph{intégrable} si la courbure est nulle, i.e. si $d^\bullet_E$ (8)
+fait
+
+\page{143}
+de $E \otimes \Omega^\bullet_{S/T}$ un complexe. Supposons qu'il en soit ainsi.
+\struck{\ill{}}
+\[
+(11)\qquad H^*_{DR}(S,E) = \mathbb{H}^*(S, E \otimes \Omega^\bullet_{S/T}) .
+\]
+\note{sous $E$, une flèche renvoie à : « sous-entendu : $E$ muni de $\delta_E$, i.e. de $d^0_E$ ».}
+
+On a une suite spectrale
+\[
+(12)\qquad H^*_{DR}(S,E) \Longleftarrow E_1^{pq} = H^q(S, E \otimes \Omega^p_{S/T})
+\]
+\note{devant $H^q$, une première écriture biffée et illisible.}
+associée à la filtration triviale du complexe $E \otimes \Omega^\bullet_{S/T}$.
+
+On a aussi des homomorphismes \ill{}
+\[
+(13)\qquad H^*(\Gamma(S, E \otimes \Omega^\bullet_{S/T})) \Longrightarrow H^*_{DR}(S,E)
+\]
+qui sont des isom. si p.ex. $S$ affine, et
+\[
+(14)\qquad H^i_{DR}(S,E) \longrightarrow H^i(S,E) ,
+\]
+qui \ill{} \uncertain{provient} des homomorphismes de complexes \uncertain{évidents} (troncation) :
+\[
+(15)\qquad E \otimes \Omega^\bullet_{S/T} \longrightarrow E .
+\]
+
+NB Pour $E$ \ill{} : conn. intégrable \uncertain{variable},
+$H^*_{DR}(S,E)$ est un $\partial$-foncteur en $E$ (cat. \ill{} aussi : cat. abélienne). Les
+suites spectrales \ill{} et les hom. écrits plus haut sont fonctoriels en $E$.
+
+Re NB \struck{I} Images inverses \add{(pour un diagramme commutatif}
+\begin{tikzcd}[column sep=small, row sep=small]
+S \arrow[d] & S' \arrow[l] \arrow[d] \\
+T & T' \arrow[l]
+\end{tikzcd}
+\add{\ill{})} tout suit \ill{} !
+
+En particulier : \struck{\ill{}} a) Image inverse par $T' \to T$ (on prend $S' = S \times_T T'$).
+b) Si $S \to T' \to T$, une connexion rel. à $T$ en définit une rel. à $T'$, et
+
+\page{144}
+\note{la phrase de la p.~143 reste en suspens ; la page reprend sur un nouvel alinéa.}
+
+Nous allons étudier (14) pour $i = 0, 1$.
+
+1) $H^0_{DR}(S,E)$ \uncertain{est formé} des sections de $E$ qui sont
+\struck{\ill{}} « horizontales pour la connexion $\delta$ », ce qui \uncertain{signifie}
+\struck{$d^0_E \ldots = 0$}
+\[
+(16)\qquad d^0_E(x) = 0 \qquad\text{i.e.}\qquad \delta_E x = d^1_E x
+\]
+Alors (14) est l'injection canonique. \struck{\ill{}}
+
+\marginal{\ill{} cf. \uncertain{additions} 1.8.}
+2) Soit $K^\bullet : 0 \to K^0 \xrightarrow{d^0} K^1 \xrightarrow{d^1} K^2 \to \cdots$ un complexe
+\struck{\ill{}} de faisceaux abéliens sur un \uncertain{topos} $S$.
+\struck{On constate que $\mathbb{H}^1 S$} On constate que $\mathbb{H}^1(S,K^\bullet)$
+s'interprète comme le groupe des classes d'isomorphie d'objets de la catégorie suivante
+$C(K^\bullet)$ :
+
+$\mathrm{Ob}\,C(K^\bullet) =$ couples $(P^\bullet, \xi)$, avec $P$ un torseur sous $K^0$,
+$\xi$ une section de $P^1 = P \times^{K^0} K^1$, telle que la section
+\struck{\ill{}} $d^1_*(\xi)$ de $P^2 = P \times^{K^0} K^2 \simeq P^1 \times^{K^1} K^2$
+soit la section canonique, \uncertain{déduite} du fait que $d^1 d^0 = 0$.
+
+$\mathrm{Fl}\,C(K^\bullet)$ : on devine.
+
+\struck{Cette description de $\mathbb{H}^1(S,K) \to \mathbb{H}^1(S\ldots$}
+\struck{L'homom. canonique} Cette description de $\mathbb{H}^1(S,K^\bullet)$ \ill{}
+en \uncertain{tous} les complexes $K^\bullet$. Par suite,
+l'hom. \add{can.} \struck{$\mathbb{H}(S,K^\bullet$}
+\[
+\mathbb{H}^1(S,K^\bullet) \longrightarrow H^1(S,K^0)
+\]
+déduit de l'\struck{\ill{}} troncation $K^\bullet \to K^0$ correspond au foncteur
+$(P^0,\xi) \longmapsto P^0$ « oubli de $\xi$ ».
+
+Notons que \struck{\ill{}} \add{\ill{}} $P^0$ donné (torseur sous $K^0$), la donnée d'une
+trivialisation $\xi$ de $P^1$ \uncertain{équivaut} à un isom. \struck{\ill{}} \add{\ill{}}
+$P^1 \simeq K^1$, donc les $\xi$ correspondent
+
+\page{145}
+aux homom.
+\[
+\bar d^0 : P^0 \longrightarrow K^1
+\]
+satisfaisant
+\[
+\bar d^0(xf) = \bar d^0(x)\, d^0(f) \qquad x \in P^0(\cdot),\ f \in K^0(\cdot) .
+\]
+\note{ainsi sur la page, sans signe entre $\bar d^0(x)$ et $d^0(f)$ : la loi de groupe de $K^1$ est notée multiplicativement.}
+La condition mise ci-dessus sur $\xi$ signifie simplement que $\bar d^0$ prend ses valeurs
+dans $Z^1K = \mathrm{Ker}(d^1)$.
+
+Ceci s'applique \uncertain{tel quel} à la description de $H^1_{DR}(S,E)$, comme
+\uncertain{classifiant} les objets suivants : Un torseur $P$ sous $E$, un hom. de faisceaux
+d'ensembles
+\[
+(17)\qquad d_P : P \longrightarrow (E \otimes \Omega^1_{S/T}) ,
+\]
+\note{devant $(E \otimes \Omega^1_{S/T})$, un $Z$ biffé par hachures.}
+satisfaisant aux conditions
+\[
+(18)\qquad
+\begin{cases}
+d_P(xf) = d_P(x)\, d^0_E(f) & x \in P(\cdot),\ f \in \mathcal{O}_S(\cdot) . \\
+d_P(P) \subset Z^1(E \otimes \Omega_{S/T}) & \text{i.e. } d^1_E d_P = 0 .
+\end{cases}
+\]
+\note{« $f \in \mathcal{O}_S(\cdot)$ » est lu tel quel ; on attendrait $f \in E(\cdot)$.}
+Un tel $d_P$ s'appellera une \emph{connexion} \add{\emph{intégrable}} sur le torseur $P$,
+\emph{compatible avec la connexion} \add{\emph{intégrable}} $d^0_E$ sur $E$.
+
+\emph{NB} Si $d^0_E$ est une connexion sur $E$ (pas nécess. intégrable),
+\struck{\ill{}} on peut se \uncertain{proposer} de \uncertain{trouver}, pour un torseur $P$ sous $E$,
+quelles sont les connexions compatibles avec $d^0_E$, et \uncertain{plus}
+généralement \struck{\ill{}} de \ill{} \uncertain{voisinages infinitésimaux}
+d'indice 1. Je \uncertain{dis} que si $S$ est affine, il existe
+de \uncertain{telles} connexions, donc il en existe toujours localement,
+et que les connexions forment un torseur sous
+$E \otimes \Omega$, qui en fait est isomorphe à $P \times^E (E \otimes \Omega)$
+(grâce à $d^0_E : E \to E \otimes \Omega$). Donc les connexions
+
+\page{146}
+On trouve en particulier une interprétation de $H^1_{DR}(S,E)$, comme classifiant les
+torseurs $P$ sous $E$, munis d'une
+\note{la page s'arrête là ; le reste du feuillet est blanc. La phrase de la p.~145 (« Donc les connexions ») se poursuit en tête de la p.~147.}
+
+\page{147}
+s'interprètent comme les hom (17) satisfaisant la \emph{première relation} (18).
+\struck{C'est \ill{}} C'est la deuxième relation qui précise que l'on se restreint aux
+connexions \emph{intégrables} sur $P$.
+
+Les \struck{faisceaux des} automorphismes de $P$ \emph{compatibles avec} $d_P$
+\struck{\ill{}} et \struck{\ill{}} sont \uncertain{donnés} par \struck{$x \in \Gamma(S,E$}
+\ill{} du gpe $\Gamma(S,E)$ des \uncertain{automorphismes} \uncertain{fournis} par les sections
+\emph{horizontales} de $E$, i.e. $H^0_{DR}(S,E)$.
+
+Les descriptions qui précèdent \add{fonctorielles en $E$, et} \add{compatibles}
+aux images inverses \uncertain{envisagées} (cf.) plus haut.
+
+\section{2) Stratifications sur torseurs affines}
+
+Supposons donné sur $E$ une \uncertain{stratification} rel. à $T$. \add{d'où un faisceau
+$E_{\mathrm{strat}}$} sur $(S/T)_{\mathrm{strat}}$, donc \ill{} \uncertain{par} \ill{}
+\[
+(19)\qquad H^*_{\mathrm{strat}}(S,E) \overset{\mathrm{déf}}{=} H^*((S/T)_{\mathrm{strat}}, E_{\mathrm{strat}}) .
+\]
+\struck{La stratification de $E$} \struck{On a défini des $[\ ]$ \ill{} naturel}
+
+Une donnée de \uncertain{voisinages} différentiels d'ordre \uncertain{$\infty$} sur $E$ revient
+à la donnée d'un homomorphisme
+\[
+(20)\qquad \delta^\infty_E : E \longrightarrow P^\infty_{S/T}(E)
+\]
+\marginal{On dit parfois \uncertain{que} « $\delta^\infty_E$ » \uncertain{connexion}.}
+satisfaisant la condition \uncertain{que} $P^\infty_{S/T}(E) \xrightarrow{\varepsilon_E} E$ \uncertain{donne} l'identité :
+$\varepsilon_E \delta^\infty_E : E \to P^\infty_{S/T}(E) \to E$.
+
+(21) On peut \ill{} \struck{\ill{}}
+$d^+_E : E \to P^\infty_{S/T}(E)^+$, $d^+_E(x) = d^\infty(x) - \delta^\infty_E(x)$,
+\struck{\ill{}}
+
+\struck{(21) La condition \ill{} stratification \ill{} une condition sur $\delta_E$ qui}
+\marginal{$P^\infty_{S/T}(E)^+$, idéal d'augmentation.}
+\marginal{(plus bas dans no 3.)}
+
+\page{148}
+\struck{implique que} le composé de (21) avec
+\struck{$P^\infty_{S/T}$}
+\[
+P^\infty_{S/T}(E)^+ \longrightarrow P^1_{S/T}(E)^+ \simeq E \otimes \Omega^1_{S/T} ,
+\]
+\struck{\ill{}} noté $d^0_E$
+\[
+(23)\qquad d^0_E : E \longrightarrow E \otimes \Omega^1_{S/T} , \qquad d^0_E = d^+_E \bmod \ldots
+\]
+\note{le numéro lu « (23) » pourrait être « (22) » ; sous le $d^0_E$ de droite, un signe surchargé.}
+est l'hom. (5) associé à la connexion de $E$ définie par la donnée de voisinages
+\uncertain{infinitésimaux}. \struck{Si} \emph{On vérifie que si} \struck{infinitésimale \ill{}} $\delta_E$ est une
+stratification, \uncertain{alors} la donnée de voisinages \struck{infinitésimaux}
+dans la connexion associée est intégrable, i.e. (23)
+définit un complexe de De Rham.
+On sait bien [ ] le \ill{} \ill{} des hom. canoniques
+\[
+(24)\qquad H^*_{\mathrm{strat}}(S,E) \longrightarrow H^*_{DR}(S,E) ,
+\]
+\uncertain{compatibles} \uncertain{aux changements de base}.
+\note{les deux lignes « compatibles … base » sont reliées par un crochet à (24).}
+
+\struck{\uncertain{Intervenant} en $F$,} Nous voulons une interprétation de $H^1_{\mathrm{strat}}(S,E)$
+analogue : \uncertain{celle} \uncertain{donnée} \uncertain{plus haut} pour $H^1_{DR}(S,E)$.
+
+\note{la suite de la page est biffée par des hachures obliques et une grande croix ; on la transcrit comme biffée.}
+\struck{Pour ceci, \ill{} Soit, \ill{} $C^\bullet(E)$ \ill{} \ill{} de $E$ \ill{}
+\ill{} le faisceau sur $S$ \ill{} \ill{} \ill{} le $X$ \ill{} de la \ill{} de $(S/T)^{\ill{}}$ de l'\ill{}
+formel \ill{} $E$ \ill{} \ill{} (\ill{}) \ill{}. La stratification de}
+\struck{(24) $C^0(E) = E$, $C^1(E) = P^\infty_{S/T}(E)$.}
+\struck{La stratification de $E$ met sur $C^\bullet(E)$ une structure de faisceau
+cosimplicial \ill{} [en \uncertain{faisceaux} en comodules sur $C^\bullet(\mathcal{O}_S)$] :}
+\note{la suite biffée porte encore : (25) $C^0(E) \rightrightarrows C^1(E) \Rrightarrow C^2(E) \ldots$, avec dessous $C^0(E) = E \rightrightarrows P^\infty_{S/T}(E)$ par les deux flèches $\delta^\infty_E$ et $d^\infty_E$ ; à gauche, un essai de flèche $E \to P^\infty_{S/T}(E)$, raturé.}
+
+\page{149}
+\marginal{$U \subset U'$ au-dessus de $S \to T$, petit diagramme.}
+Or un torseur sous $S_{\mathrm{strat}}$ \add{sur} $E_{\mathrm{strat}}$ peut être interprété
+comme la donnée, pour tout objet \add{$(U,U')$ de} $S_{\mathrm{strat}}$, d'un
+torseur sous $(E_{\mathrm{strat}})_{(U,U')} = E_{U'}$, \struck{\ill{}} plus \ill{} de façon
+contravariante en $(U,U')$. On voit que ceci équivaut
+à la donnée d'un torseur ordinaire $P$ sous $E$, et
+d'une \emph{stratification} sur $P$, compatible avec celle de $E$.
+
+\struck{Nous regardons} Nous regardons $P^\infty_{S/T}(E)$ comme un \emph{pro-faisceau}
+\add{A.R.} sur $S$, et comme tel il est muni d'une stratification
+canonique (\uncertain{indépendante} de celle de $E$, cf.~[ ]).
+Nous \uncertain{avons} là \struck{\ill{}}, suite exacte
+\[
+(25)\qquad 0 \longrightarrow E \xrightarrow{\ \delta = \delta^\infty_E\ } P^\infty_{S/T}(E) \xrightarrow{\ p\ } P^\infty_{S/T}(E)/\delta(E) \longrightarrow 0 ,
+\]
+où le dernier terme est défini comme le \uncertain{support}
+\uncertain{rigide} des \struck{\ill{}} \add{\uncertain{conoyaux}} des \uncertain{composés}
+$E \xrightarrow{\delta_E} P^\infty_{S/T}(E) \to P^n_{S/T}(E)$.
+Notons \struck{\ill{}} que l'hom. $\delta$ est compatible avec les
+stratifications. La donnée d'un torseur stratifié $P_{\mathrm{strat}}$
+sous $E$ s'identifie donc : à la donnée d'un
+torseur stratifié sous le pro-faisceau $P^\infty_{S/T}(E)$, et
+d'une trivialisation \struck{\ill{}} du \struck{\ill{}} torseur stratifié associé
+du groupe $P^\infty_{S/T}(E)$. On constate qu'un torseur
+stratifié sous $P^\infty_{S/T}(E)$, c'est « la même chose » qu'un
+torseur ordinaire sous $E$ (cf.~[ ] 6.4), à un
+tel $P$ étant associé le pro-faisceau \add{$P^\infty_{S/T}(P)$} \struck{des \ill{}}
+\uncertain{jets} de $P$ sur $S/T$ d'ordre $\infty$ (\ill{}). Alors
+la trivialisation $P^\infty_{S/T}(P) \to P^\infty_{S/T}(E)/\delta E$ revient à la
+
+\page{150}
+donnée d'un hom. de faisceaux
+\[
+(26)\qquad P \xrightarrow{\ \lambda\ } P^\infty_{S/T}(E)/\delta E
+\]
+\note{l'indice de $\lambda$ en (26) est raturé.}
+satisfaisant la condition
+\[
+\text{\struck{$\lambda(x + \xi) = \lambda(x) + d^\infty_{S/T}(\xi)$}}
+\]
+\[
+(27)\qquad \lambda(x + \xi) = \lambda(x) + p(d^\infty_{S/T}(\xi)) \qquad x \in P(\cdot),\ \xi \in E(\cdot) .
+\]
+Il faut encore exprimer que la trivialisation du
+$P^\infty_{S/T}(E)/E$-torseur obtenu est compatible avec les
+stratifications. Comme $P$ est \struck{les} torseur des
+sections horizontales de $P^\infty_{S/T}(P)$, on voit que
+\struck{cette condition} cette condition signifie que
+\[
+(28)\qquad \lambda(P) \subset \bigl(P^\infty_{S/T}(E)/E\bigr)^{\natural} ,
+\]
+où le \struck{\ill{}} signe $\natural$ désigne le sous-faisceau
+des sections horizontales.
+\marginal{\uncertain{petite} \uncertain{remarque} : \ill{} \uncertain{donc} $P^\infty_{S/T}(P)$ \uncertain{dans} un torseur stratifié quelc.}
+\note{le signe noté $\natural$ est un petit éclair ou zigzag en exposant ; on ne lui connaît pas d'équivalent sûr.}
+
+\struck{En} \emph{En résumé}, \struck{\ill{}} si $P$ est un $E$-torseur,
+\begin{quote}
+une stratification sur $E$ rel. à $T$, compatible avec
+la stratification $\delta = \delta^\infty_E$ donnée sur $E$, équivaut à
+un hom. de faisceaux (26), satisfaisant
+(27) et (28) ; cette dernière condition permet d'ailleurs
+d'exprimer en \uncertain{précisant} la donnée (26) \uncertain{par}
+\[
+(26')\qquad P \xrightarrow{\ \lambda\ } \bigl(P^\infty_{S/T}(E)/\delta E\bigr)^{\natural} .
+\]
+\end{quote}
+\note{le « une stratification sur $E$ » de l'énoncé encadré : on attendrait « sur $P$ ».}
+
+Cette description est fonctorielle en $E$, et
+compatible aux changements de base.
+
+\section{3) Relations entre stratifications et connexions intégrables sur torseurs affines}
+
+\page{151}
+Si $P$ est un torseur sous $E$, $E$ muni d'une
+stratification $\delta^\infty_E = \delta$ rel. à $T$, \struck{\ill{}} toute stratification de $P$
+\add{compatible à $\delta$} définit évidemment une connexion (compatible à $d^0_E$).
+\struck{Je dis évidemment que l'hom. canonique (24), \ill{} compatible avec cette association}
+Il convient encore de préciser quelle est l'hom.
+$d^0_P : P \to E \otimes \Omega^1_{S/T}$ correspondant à la description (17).
+Pour l'expliciter, notons que l'inclusion
+\[
+P^\infty_{S/T}(E)^+ \hookrightarrow P^\infty_{S/T}(E)
+\]
+fournit, par composition, un isomorphisme additif
+\[
+(29)\qquad P^\infty_{S/T}(E)^+ \simeq P^\infty_{S/T}(E)/\delta E ,
+\]
+l'hom. correspondant
+\[
+(29')\qquad P^\infty_{S/T}(E) \xrightarrow{\ p\ } P^\infty_{S/T}(E)/\delta E \xrightarrow{\ \sim\ } P^\infty_{S/T}(E)^+
+\]
+\note{une accolade sous la composée de (29').}
+étant donné par
+\[
+\text{\struck{$d^+_E$}}\qquad \varphi \longmapsto \varphi - \delta_E(\varphi) .
+\]
+\note{ainsi sur la page ; on attendrait $\varphi - \delta_E(\varepsilon_E\varphi)$.}
+Donc l'hom. $\lambda$ de (26) s'interprète comme un
+\[
+(30)\qquad \lambda^+ : P \longrightarrow P^\infty_{S/T}(E)^+ ,
+\]
+\struck{la condition $\lambda^+$} la condition (27) s'écrivant alors
+\[
+(31)\qquad \lambda^+(x + \xi) = \lambda^+(x) + \underbrace{\bigl[d^\infty_{S/T}(\xi) - \delta^\infty_E(\xi)\bigr]}_{d^+_{S/T}(\xi)} .
+\]
+\marginal{Définir les sections \emph{intégrables} de $P^\infty_{S/T}(E)^+$ comme celles correspondant aux sections
+\struck{\ill{}} de $(P^\infty_{S/T}(E)/\delta E)^{\natural}$, et introduire le \uncertain{sous-faisceau} \ill{} de
+$P^\infty_{S/T}(E)^+$. [Mais attention, $P^\infty_{S/T}(E)^+ \hookrightarrow P^\infty_{S/T}(E)$
+\struck{\ill{}} n'est \emph{pas} compatible avec stratifications.]}
+
+\page{152}
+Réduisant à valeurs dans $P^1_{S/T}(E)^+ = E \otimes \Omega^1_{S/T}$, on
+trouve un hom.
+\[
+(32)\qquad d^0_P : P \longrightarrow E \otimes \Omega^1_{S/T} , \qquad d^0_P(x) = \lambda^+(x) \bmod \ldots
+\]
+satisfaisant
+\[
+d^0_P(x + \xi) = d^0_P(x) + d^0_E(\xi) ,
+\]
+compte tenu de (23).
+\note{le renvoi « (23) » est écrit sur un autre chiffre ; dans (32), l'indice du $d^0$ de droite est lu $E$ sur la page, on attendrait $P$.}
+
+\begin{quote}
+On vérifie que (32) n'est autre que l'hom.
+qui définit la connexion de $P$ associée à sa stratification, \struck{\ill{}} que cette connexion est intégrable, enfin que
+si $\xi$ classe \uncertain{dans} $H^1_{DR}(S,E)$ n'est autre que
+l'image de celle de \struck{\ill{}} $(P,\lambda)$ dans $H^1_{\mathrm{strat}}(S,E_{\mathrm{strat}})$
+par l'homomorphisme canonique (24).
+\end{quote}
+\marginal{faire la vérification}
+\note{l'alinéa est marqué d'un double trait vertical dans la marge.}
+
+\emph{Corollaire} Supposons que $T$ soit de car. nulle et
+\begin{quote}
+$\Omega^1_{S/T}$ plat [p.ex. $S$ formellement lisse sur $T$] ; on sait
+que (24) est un \emph{isomorphisme} [ ]. \struck{\ill{}} Soit
+$E$ quasi-coh. sur $S$ avec stratification $\delta = \delta^\infty_E$, $P$
+un torseur sous $E$. Alors il y a correspondance
+biunivoque entre les stratifications de $P$ compatibles
+avec celle de $E$, et les connexions intégrables
+sur $P$ compatibles avec celle de $E$. Donc
+aussi, entre les applications (26) $P \xrightarrow{\lambda} P^\infty_{S/T}(E)/\delta E$ \struck{\ill{}}
+[i.e. encore $\lambda^+ : P \to (P^\infty_{S/T}(E)^+)^{\natural}$] satisfaisant les
+conditions (27), (28) [\struck{\ill{}} \add{équivalent}, (31)] \struck{\ill{}} \add{et à valeurs} \add{dans $P^\infty_{S/T}(E)^{+\natural}$}
+\end{quote}
+\marginal{NB Sous les hyp. faites, les stratifications sur $E$ correspondant bijectivement aux conn. intégrables sur $E$ \ldots}
+\note{après « coh. sur $S$ », un « $P$ un torseur » biffé. La phrase du corollaire se poursuit p.~153.}
+
+\page{153}
+\begin{quote}
+\struck{\uncertain{fait} $\lambda = p\lambda^+$}], et les hom. (17) $P \xrightarrow{d_P} E \otimes \Omega^1_{S/T}$
+satisfaisant les conditions (18), en associant à $\lambda^+$
+sa réduction dans $P^1_{S/T}(E)^+ \simeq E \otimes \Omega^1_{S/T}$.
+\end{quote}
+
+\emph{NB} Prenant \struck{$P$} triviale sur $E$, ceci \uncertain{prouve} que
+l'hom. \struck{de réduction} de réduction $P^\infty_{S/T}(E)^+ \to P^1_{S/T}(E)^+$
+induit un \struck{bijection} \emph{isomorphisme de faisceaux}
+\[
+P^\infty_{S/T}(E)^{+\natural} \xrightarrow{\ \sim\ } Z^1(E \otimes \Omega^\bullet_{S/T}) ,
+\]
+où \uncertain{prenant} \ill{} la deuxième \uncertain{avec} \uncertain{comme} stratification
+sur $P^\infty_{S/T}(E)^+$ celle déduite de la strat. can. de
+$P^\infty_{S/T}(E)/\delta E$ par transport de structure : l'aide de
+(29). Ainsi, \emph{une} 1-\emph{forme fermée sur $S/T$}
+\add{(\emph{coeff. dans} $E$)} \emph{définit un \uncertain{jet} d'ordre $\infty$} \add{$\lambda^+$} \emph{de $E$ sur $S/T$},
+satisfaisant la condition (28). À la forme
+exacte $d^0_E(\xi)$ est associé ainsi \struck{\ill{}}
+\struck{\ill{}} $\lambda(\xi) = d^\infty_E(\xi)$ i.e. $\lambda^+(\xi) = d^\infty_E(\xi) - \delta^\infty_E(\xi) = d^+_E(\xi)$.
+\note{dans la dernière formule, $\lambda$ est écrit sur un autre signe, et « $= d^\infty_E(\xi)$ » est lu sur un signe surchargé.}
+
+\section{4) Équations de Picard-Fuchs}
+
+Supposons encore qu'on ait $E$ sur $S$, avec
+stratification $\delta^\infty_E = \delta$. Supposons donnée de plus
+une suite exacte de modules quasi-coh.
+\[
+(33)\qquad 0 \longrightarrow E' \xrightarrow{\ u\ } E \xrightarrow{\ v\ } E'' \longrightarrow 0 .
+\]
+On ne suppose pas que $E'$ soit un sous-module
+stratifié. \struck{\ill{}} Supposons donné un
+\note{la phrase se poursuit en tête de la p.~155.}
+
+\page{155}
+torseur $P'$ sous $E'$, posons
+\[
+(34)\qquad P = P' \times^{E'} E .
+\]
+La donnée d'une stratification sur $P$ compatible avec
+celle de $E$, grâce au \uncertain{n° 2}, équivaut à la donnée
+d'un hom.
+\[
+(35)\qquad \lambda' : P' \longrightarrow \bigl(P^\infty_{S/T}(E)/\delta E\bigr)^{\natural}
+\]
+satisfaisant
+\[
+(36)\qquad \lambda'(x' + \xi') = \lambda'(x') + p\,d^\infty_E(u\xi') \qquad x' \in P'(\cdot),\ \xi' \in E'(\cdot) .
+\]
+\note{dans (36), « $p\,d^\infty_E$ » est récrit sur un premier essai surchargé.}
+On peut aussi interpréter $\lambda'$ comme un
+\[
+(35')\qquad \lambda'^{+} : P' \longrightarrow \bigl(P^\infty_{S/T}(E)^+\bigr)^{\natural} , \qquad \text{(cf. transport de structure)}
+\]
+satisfaisant
+\[
+(36')\qquad \lambda'^{+}(x' + \xi') = \lambda'^{+}(x') + \underbrace{d^+_E(u\xi')}_{= d^\infty_E(u\xi') - \delta^\infty_E(u\xi')} .
+\]
+
+\struck{\ill{} la condition d'intégrabilité, signifiant} \add{de $p$-faisceaux}
+
+\struck{Notons donc} Notons alors la suite exacte
+\[
+(37)\qquad \cdots \longrightarrow P^\infty_{S/T}(E') \xrightarrow{\ u\ } P^\infty_{S/T}(E) \xrightarrow{\ v\ } P^\infty_{S/T}(E'') \longrightarrow 0 ,
+\]
+compatible aux stratifications, \add{de $p$-faisceaux}.
+Ceci posé, grâce à (35) \add{et (36)}, \uncertain{une} section canonique
+\[
+(38)\qquad \varphi = \varphi(\lambda') \in \Gamma\bigl(S, P^\infty_{S/T}(E'')/v\delta(E)\bigr)
+\]
+\[
+\simeq \Gamma\bigl(S, P^\infty_{S/T}(E'')^+/v\delta u(E')\bigr) .
+\]
+\note{la place de « de $p$-faisceaux », écrit en marge droite avec un trait de renvoi, est incertaine ; dans (38) le dénominateur est surchargé et la lecture $v\delta u(E')$ n'est pas sûre.}
+\struck{En outre}, $\varphi$ est \struck{\ill{}} même
+\[
+(38')\qquad \varphi \in \Gamma\Bigl(S, \bigl(P^\infty_{S/T}(E'')/v\delta(E)\bigr)^{\natural}\Bigr) \simeq \Gamma\bigl(S, P^\infty_{S/T}(E'')^{+\natural}/\delta u(E')\bigr) .
+\]
+
+\page{156}
+On l'appelle la \struck{section} \emph{jet de Picard-Fuchs}
+\emph{défini par} $P'$ \struck{\ill{}} et la \emph{stratification} \add{$\sigma$} \emph{donnée}.
+\struck{\ill{}} $P = P' \times^{E'} E$. Ce n'est pas \uncertain{H} : \uncertain{faux} un
+jet \add{intégrable} \struck{de} $E''$, mais \uncertain{seulement} \ill{} \uncertain{à} \ill{} \add{\uncertain{l'image} $v\delta^\infty_E u$}
+c'est-à-dire un tel jet, défini \uncertain{modulo} \struck{\ill{}} \add{l'image} \add{d'une}
+section de \struck{\ill{}} $E'$.
+
+Soit $F$ un module \add{\uncertain{quasi-coh.}} sur \struck{$E$} $S$, et
+\[
+(39)\qquad D : E'' \longrightarrow F
+\]
+un opérateur différentiel \add{\uncertain{linéaire}} rel.~$/T$, définissant donc un
+hom. \add{\uncertain{linéaire}} \struck{\ill{}} : \struck{\ill{}}
+\[
+(40)\qquad u_D : P^\infty_{S/T}(E'') \longrightarrow F .
+\]
+On dit que $u_D$ \struck{$D$} est un \emph{opérateur de Picard-Fuchs}, \emph{relativement} à la suite exacte
+(33), \uncertain{à} l'application linéaire correspondante
+(40) s'annule sur $v\delta(E)$, i.e. si $u_D$ se
+factorise en un homomorphisme
+\[
+(41)\qquad \bar u_D : P^\infty_{S/T}(E'')/v\delta(E) \longrightarrow F .
+\]
+\struck{Soit alors} Si alors $(P',\sigma)$ est comme
+ci-dessus, d'où un $\varphi$ (38), on peut
+former $\bar u_D(\varphi) \in \Gamma(S,F)$ ; on pose
+\[
+(42)\qquad \text{\struck{$\ldots$}}\ \mu_D(P,\sigma) = \bar u_D\bigl(\varphi(P,\sigma)\bigr) \in \Gamma(S,F) ,
+\]
+\note{« On dit que $u_D$ » : $u_D$ est écrit sur un $D$, et le second « est » est lu tel quel. Dans (42), le premier membre biffé est illisible ; il écrit $(P,\sigma)$ là où l'on attendrait $(P',\sigma)$. La phrase se poursuit p.~157.}
+
+\page{157}
+on l'appellera la \emph{section de Manin de $F$} associée
+à l'op. de Picard-Fuchs $D$ et aux données $(P',\sigma)$.
+\emph{Équations de Pic.-Fuchs universelles} : à valeurs dans le pro-faisceau
+$P^\infty_{S/T}(E'')/v\delta u(E')$ ; elle \uncertain{redonne} la section $\varphi$ dont il s'agit.
+\note{deux traits horizontaux séparent ce qui précède de ce qui suit.}
+
+Lorsque $E$ est seulement muni d'une connexion
+intégrable \add{rel. à $T$}, \struck{\ill{}} (au lieu d'une stratification), on voit
+que les connexions intégrables sur $P = P' \times^{E'} E$
+correspondent aux hom.
+\[
+(43)\qquad P' \xrightarrow{\ d_{P'}\ } E \otimes \Omega^1_{S/T}
+\]
+\note{le but de $d_{P'}$ est écrit sur un premier symbole raturé.}
+satisfaisant
+\[
+(44)\qquad
+\begin{cases}
+d_{P'}(x' + \xi') = d_{P'}(x') + d^0_E\bigl(u(\xi')\bigr) \\
+d_{P'}(P') \subset Z^1(E \otimes \Omega^\bullet_{S/T}) , \ \text{i.e. } d^1_E \circ d_{P'} = 0 .
+\end{cases}
+\]
+
+Dans ce cas, \uncertain{il y a} une variante de la
+notion d'équation \add{de}/Picard-Fuchs, \add{\uncertain{pour} (30)} \struck{\ill{}} nous dirons les
+opérateurs différentiels
+\[
+(45)\qquad E \otimes \Omega^1_{S/T} \xrightarrow{\ \Delta\ } F
+\]
+\note{l'indice de $\Delta$ est raturé.}
+nuls sur \struck{l'image de $E' \otimes \Omega^1_{S/T}$}, \struck{i.e. les opérateurs}
+\add{$d^0_E(u(E'))$}, ceux de la
+[qui se factorisent \struck{\ill{}} \uncertain{pour} \uncertain{module} \struck{$E'' \otimes \Omega^1_{S/T} \to$}
+forme $\Delta' \circ d^1_E$, \uncertain{où} $E \otimes \Omega^2_{S/T} \xrightarrow{\Delta'} F$ un
+autre op. diff.]. Comme $d_{P'}$ (43) fournit
+\add{\uncertain{localement}} une section de $E \otimes \Omega^1_{S/T}$ modulo une section
+\note{la phrase se poursuit p.~158.}
+
+\page{158}
+de la forme $d^0_E(u(\xi'))$, $\xi' \in E'(\cdot)$, on voit que
+$\Delta$ définit une section
+\[
+(46)\qquad \nu_\Delta(P', d_{P'}) \in \Gamma(S,F) .
+\]
+Ici la situation universelle est obtenue en
+prenant pour $F$ le pro-faisceau
+\[
+F = P^\infty_{S/T}(E \otimes \Omega^1_{S/T})/I\bigl(P^\infty_{S/T}(E')\bigr) ,
+\]
+\note{la lecture « $I$ » devant $P^\infty_{S/T}(E')$ est incertaine.}
+où $P^\infty_{S/T}(E')$ \uncertain{s'envoie} \uncertain{dans} $P^\infty_{S/T}(E \otimes \Omega_{S/T})$ provient de l'op.
+diff. composé \add{$d^0_E u$ :} \add{(\uncertain{de degré} 1)} $E' \xrightarrow{u} E \xrightarrow{d^0_E} E \otimes \Omega^1_{S/T}$.
+
+Revenons au cas où $E$ admet une stratification, \struck{\ill{}} \struck{et $P$ muni d'une stratification compatible avec}
+\add{\uncertain{soit} $(P',\sigma)$} \struck{\ill{} pour \ill{}}
+et prenons $d^0_E$ déduit d'icelle ; \struck{\ill{}} \struck{\ill{}}
+\struck{(comme on \ill{}} \struck{\ill{} les sections de} \struck{\ill{} que \ill{}}. On compare la
+section $\nu_\Delta$ avec $\mu_D$ de la façon suivante.
+À tout $\Delta$ \struck{$\ldots$} est associé un opérateur de Picard-Fuchs,
+\struck{\ill{}} pour (30), en prenant le composé
+\[
+(47)\qquad D_0 : E \xrightarrow{\ d^0_E\ } E \otimes \Omega^1_{S/T} \xrightarrow{\ \Delta\ } F ,
+\]
+et on prouve aisément que \add{en $D : E'' \to F$,} \struck{\ill{}} \uncertain{ce qui est}
+possible puisque par hyp. sur $\Delta$, $\Delta \circ d^0_E$ est nulle
+sur $E'$. Ceci posé, on trouve que
+\[
+(48)\qquad \nu_\Delta = \mu_D ,
+\]
+ce qui donne la réduction annoncée.
+\marginal{faire la vérification}
+\note{dans le renvoi « pour (30) », on attendrait plutôt (33) ; le numéro est lu tel quel.}
+
+\page{159}
+Dans le cas favorable envisagé à la fin du n° 3,
+($T$ de car. nulle, $\Omega^1_{S/T}$ plat), on peut donc
+exprimer les $\mu_D$ en termes des $\nu_\Delta$. Pour
+ceci, il suffit de voir que, pour $S$ affine, chaque
+$D$ provient bien d'un $\Delta$. Ceci résulte du
+fait suivant (lui-même cas particulier d'un fait
+bien plus général sur les op. diff.) : \struck{\ill{}}.
+
+\emph{Lemme}. Sous les conditions précédentes ($S$ car.
+\begin{quote}
+nulle, $\Omega^1_{S/T}$ plat), \struck{les} op. diff. \struck{$E$} $E \to F$
+qui sont tels que $P^\infty_{S/T}(E) \to F$ s'annule sur
+$\delta(E)$, sont exactement ceux qui \struck{\ill{}} de la
+forme $\Delta \circ d^0_E$, avec $\Delta : E \otimes \Omega_{S/T} \to F$ un
+\struck{\ill{}} op. différentiel. L'indétermination est exactement par un
+\struck{$\Delta' \circ d^1_E : E \otimes \Omega_{S/T}$} \add{$\Delta' \circ d^1_E$}, où $\Delta' : E \otimes \Omega^2_{S/T} \to F$
+\uncertain{est un} op. diff.
+\end{quote}
+\struck{Ceci résulte du fait que \ill{} $E \to \Omega$}
+\note{« $S$ car. nulle » est sur la page ; plus haut il écrit « $T$ de car. nulle ». Le lemme est marqué d'un trait vertical dans la marge. Dans la dernière phrase, $\Delta'$ est écrit sur un $\Delta$, et la lecture du premier membre biffé ($\Delta' \circ d^1_E$, $E \otimes \Omega_{S/T}$) est incertaine.}
+
+\note{La page 160 est la couverture brune du dossier ; elle porte de sa main : « Modules stratifiés et \struck{Connexions intégrables et} équations de Picard-Fuchs ». Elle n'est pas transcrite comme page ; la suite des notes, si elle existe, est hors de ce lot.}
+
+\end{document}
