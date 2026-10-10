@@ -1,0 +1,1527 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 87
+% (pages 1-40, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pp. 1-20) or batch-02.fr.tex (pp. 21-40).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its two batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5). The literature named in
+% the footnotes is cited from memory and was not checked against the sources.
+%
+% Scope. Page 1 is a blank wrapper, pages 16, 20 and 31 are blank; page 15 is
+% a cover carrying « Cubes » (his) and « (13 p.) » (not obviously his). None
+% of these carries mathematics.
+%
+% Spine.
+%   pp. 2-14   I. Geometry of convex sets: programme (2); facettes = relative
+%              interiors of faces, Fac(C), order, sups, extreme points,
+%              Minkowski, finiteness (3-5); polars and Hahn-Banach (5-7);
+%              « secteurs polyédraux » = polyhedra, Minkowski-Weyl (7-10);
+%              polarity reverses the face order (10-12); « polyèdre
+%              combinatoire strict », dimension function, diamond (12-14).
+%   pp. 15-26  II. Cubes: intrinsic characterisation by the set of affine
+%              spans of faces, axioms a)-e), product of 1-cubes, barycentric
+%              model (17-19); « épures de n-cubes » (B with a free involution)
+%              and the module they define, orientation torsor (21-22); faces of
+%              the cube = partial sections (23-25); the real cube, W_n, the
+%              equivalence convex cubes = épures (26).
+%   pp. 27-30  III. Second mouture of the facettes (27-29), axiomatic
+%              « polyèdre combinatoire » (lattice, chains, diamond) and the
+%              census in dimensions -1 to 3 (29-30).
+%   pp. 32-36  IV. Dimension 2 in rank 3: the « carte lisse combinatoire »,
+%              flags and their involutions, oriented vertices/edges/faces;
+%              axiom D unpacked; Sup/Inf lemma; degree >= 3 corollaries.
+%   pp. 37-38  V. Finite posets whose lower intervals realise to spheres:
+%              the dimension function delta, intervals.
+%   pp. 39-40  VI. The diamond condition (Sigma), repères (flags), the
+%              involutions sigma_i.
+%
+% Notation fixed for the whole document.
+%  - « Facette » is kept, in his sense: the relative interior of a face (a
+%    « face ouverte »), NOT a facet in today's sense (codimension one), which
+%    is called « facette de codimension 1 » or « facette sous-maximale » here.
+%    A « facette fermée » is a face. Fac(C) is the ordered set of facettes of C,
+%    the empty one included (as on pp. 3-14; p. 27 excludes it, see there).
+%  - 0 and 1 are the least and greatest elements of an ordered set.
+%  - The polar is his: A° = {x' | <x,x'> >= -1 on A}, the opposite of today's
+%    usual one. The correspondence of affine subspaces of p. 10, which he marks
+%    with a small open ring distinct from °, is written F^vee here.
+%  - « Polyèdre convexe » (his) = convex polytope; « secteur polyédral » (his)
+%    = convex polyhedron, possibly unbounded. Both his words are kept.
+%  - Cube: B a set of 2n elements with the free involution sigma (b |-> -b),
+%    I = B/sigma; épure = (B, sigma).
+%  - Rank-3 map (pp. 32-36): S, A, F vertices, edges, faces; vec A the
+%    vertex-edge incidences, A^up the edge-face incidences; Dr the flags (he
+%    writes A with a corner-and-arrow exponent); sigma_1, epsilon, sigma_2
+%    change the vertex, the edge, the face of a flag.
+%  - Fraktur X for the ordered sets of pp. 32-40, as in the transcription.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%  - p. 2: the three formulas for interior, boundary and closure are unions
+%    over the lines through x, not intersections.
+%  - p. 4, (5): « C' closed iff Phi is a down-set » holds when Fac(C) is finite
+%    (polyhedral case), not in general (the disc).
+%  - p. 6: the two corollary formulas are (Env(A1,A2))° = A1° n A2° and
+%    (A1 n A2)° = Env(A1°, A2°); hypotheses supplied for the compactness
+%    criteria.
+%  - p. 11: the facettes paired by polarity are those with 0 not in E_F; the
+%    page's « i.e. » writes 0 in E_F.
+%  - p. 12: « polyèdre combinatoire strict » is undefined on the leaves; read
+%    as « ordered set isomorphic to Fac(C), C a convex polytope ».
+%  - p. 17: the injectivity in c) comes from a); b) gives the partial
+%    sections.
+%  - p. 26: B_n = {±e_i} is the set of extreme points of the POLAR of C_n
+%    (the centres of the facets of C_n), not of C_n.
+%  - p. 27: the definition of facette as written gives unions of facettes;
+%    facettes are the minimal ones, i.e. the classes of R. The margin's
+%    « finite intersection of half-spaces » needs compactness for (4)-(5).
+%  - p. 28: closed faces of dim <= d-i are among the F n C, but not all such
+%    F n C are faces (transversal line at the midpoint of an edge of a cube).
+%  - p. 29: d) on p. 29-30 fails for atoms and coatoms; the diamond c) as
+%    written (« there exists j' ») is too weak for the census of p. 30, which
+%    needs exactly two middle elements, as Cor. 7 (p. 14) and (Sigma) (p. 39)
+%    have.
+%  - p. 32: the open intervals are spheres S^{delta-2}, not S^{delta-1}.
+%  - p. 33: the labels of the arrows S~ -> S and F~ -> F seem exchanged.
+%  - p. 34: the regrouping D = d1 + d2 + d'1 + d'2 loses one case (two faces
+%    sharing two vertices and no edge); counterexample: a torus of 12 squares,
+%    Z^2 / <(2,2),(3,-3)>. Checked by the edition with a short computation.
+%  - p. 38: Lemma a) reads d - delta(x) - 2 for d - delta(x) - 1. More
+%    seriously, the Proposition and Lemma are false for topological spheres
+%    and manifolds in general (double suspension of a homology 3-sphere); what
+%    holds is the homology version, and the sphere version for face lattices
+%    of polytopes (by p. 12) and in low dimension.
+%
+% Modern names given and footnoted as ours: relative interior / face, face
+% lattice, polar (dual) polytope, bipolar theorem, Hahn-Banach (his own),
+% Minkowski (finite-dimensional Krein-Milman), Minkowski-Weyl, hyperoctahedral
+% group, cross-polytope, diamond property, abstract polytope, thin poset,
+% flag, combinatorial map, CW poset, homology sphere, double suspension.
+%
+% Announced and never established in the folder: the definition of
+% « polyèdre combinatoire strict » (pp. 12, 14); the sequel to « Si J c I, on
+% considère » (p. 19); the proof of the Prop. of p. 26 (« laissée comme
+% exercice »); items (5)-(6) of p. 27, mostly illegible; the connectedness
+% axioms wanted in dimension 3 (p. 30) and dimension 4 (heading only); the
+% generalisation to « polyèdres lisses de dim quelconque » (p. 32); the proof
+% of the Lemma of p. 38; the relations between sigma_i and sigma_{i+1} on the
+% repères (pp. 39-40).
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{87}
+\pages{1}{40}
+\dating{s.d. — le groupe « Géométrie et topologie combinatoire » (69 à 102) est daté 1976-[vers 1986]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Polyèdres convexes : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Un cube, une pyramide, un ballon de football à facettes : ce sont des
+\emph{polyèdres convexes}, des solides sans creux, bordés de faces planes. Leur
+bord se décompose en morceaux de toutes les dimensions --- des sommets, des
+arêtes, des faces --- et l'on peut oublier la géométrie pour ne garder que la
+façon dont ces morceaux s'emboîtent : tel sommet est au bout de telle arête,
+telle arête borde telle face. Ces quarante pages demandent ce qui reste d'un
+polyèdre quand on ne garde que cela, et si l'on peut reconnaître, dans un
+tableau d'emboîtements écrit sur le papier, l'ombre d'un vrai polyèdre.
+
+La première partie est un petit cours, très classique d'allure, sur les parties
+convexes d'un espace réel. Grothendieck y découpe tout convexe en
+« facettes » --- l'intérieur d'une face, sans son bord --- et range ces
+facettes par l'ordre « l'une est dans l'adhérence de l'autre ». Il y introduit
+l'outil décisif, la \emph{polarité} : à un polyèdre contenant l'origine en son
+intérieur on associe un polyèdre dual, où les sommets deviennent des faces et
+les faces des sommets, comme le cube et l'octaèdre s'échangent. La polarité
+renverse l'ordre des facettes. Il en tire une propriété très simple et très
+rigide, qu'on appelle aujourd'hui la propriété du \emph{losange} : entre une
+facette et une autre de deux dimensions plus grande, il y a toujours exactement
+deux facettes intermédiaires --- parce qu'un polyèdre de dimension 1 est un
+segment, qui a deux bouts.
+
+La deuxième partie s'arrête sur le cube. Un cube de dimension $n$ a $2n$ faces
+de dimension $n-1$, rangées par paires de faces opposées, et Grothendieck
+montre que c'est là toute sa structure : se donner un cube revient à se donner
+un ensemble de $2n$ éléments muni d'une façon de les apparier --- ce qu'il
+appelle une « épure de cube ». Les faces du cube se lisent alors comme des
+choix partiels, dans certaines paires, d'un des deux éléments, et ses symétries
+comme les permutations de l'ensemble qui respectent l'appariement.
+
+La troisième partie retourne la question : quelles propriétés d'un ensemble
+ordonné fini font qu'il « ressemble » à l'ensemble des facettes d'un polyèdre ?
+Des bornes inférieures et supérieures, des chaînes de longueur constante, le
+losange. Grothendieck essaie ces axiomes en petite dimension, voit qu'ils
+laissent passer des objets qui ne sont pas des polyèdres --- deux triangles
+disjoints, par exemple --- et étudie à fond le cas où le bord est une surface :
+une \emph{carte}, avec ses sommets, ses arêtes, ses faces et ses drapeaux,
+c'est-à-dire ses triplets sommet--arête--face emboîtés, sur lesquels opèrent
+trois involutions. C'est la notion de carte des dossiers voisins 81 et 88,
+et c'est dans le second que ces involutions engendrent le groupe
+cartographique. Le dossier finit par
+une version topologique --- un ensemble ordonné dont les intervalles, réalisés
+géométriquement, sont des sphères --- et par une version purement
+combinatoire, où la seule propriété du losange suffit à faire opérer des
+involutions sur les drapeaux de toute longueur.
+
+Ce qu'on voit à l'œuvre : un même résultat, la propriété du losange, est
+obtenu trois fois, par la géométrie (page 14), par la topologie (page 38) et
+posé comme axiome (page 39) ; et chaque fois qu'un axiome est écrit, il est
+aussitôt mis à l'épreuve sur les plus petits exemples, jusqu'à ce que ceux-ci
+disent ce qui manque. Ces notions ont aujourd'hui des noms --- treillis des
+faces, polytopes abstraits, ensembles ordonnés CW --- que les pages ne
+nomment pas.
+
+\keywords{convex polytope, relative interior, face lattice, polar duality, bipolar theorem, Hahn-Banach theorem, Minkowski-Weyl theorem, diamond property, hypercube, hyperoctahedral group, cross-polytope, abstract polytope, graded lattice, combinatorial map, flag, CW poset, homology sphere}
+\end{resume}
+
+\pagerange{2}{40}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+\begin{enumerate}
+\item[I.] \emph{Géométrie des convexes} (pages 2 à 14), sous ce titre de sa
+main. Le programme (page 2) ; les facettes d'un convexe, leur ordre, les
+points extrémaux (pages 3 à 5) ; les polaires et le théorème de Hahn--Banach
+(pages 5 à 7) ; les secteurs polyédraux (pages 7 à 10) ; polarité et facettes
+(pages 10 à 12) ; la fonction dimension et le losange (pages 12 à 14).
+\item[II.] \emph{Cubes} (pages 15 à 26), sous le titre de la couverture de la
+page 15. Caractérisation intrinsèque d'un cube et reconstruction comme produit
+de segments (pages 17 à 19) ; épures de $n$-cubes (pages 21 et 22) ; facettes
+du cube (pages 23 à 25) ; le cube réel et son groupe (page 26).
+\item[III.] \emph{Facettes, seconde rédaction, et polyèdres combinatoires}
+(pages 27 à 30) : les facettes reprises sans la facette vide (pages 27 à 29),
+puis une définition axiomatique du polyèdre combinatoire et le recensement des
+petites dimensions (pages 29 et 30).
+\item[IV.] \emph{La dimension 2} (pages 32 à 36) : le bord d'un polyèdre
+combinatoire de dimension 3 comme « carte lisse combinatoire », ses drapeaux,
+l'axiome D.
+\item[V.] \emph{Ensembles ordonnés à intervalles sphériques} (pages 37 et 38).
+\item[VI.] \emph{Le losange et les repères} (pages 39 et 40).
+\end{enumerate}
+
+La couverture de la page 15 porte aussi, au crayon et entourée, la mention
+« (13 p.) », qui n'est pas sûrement de sa main ; c'est le nombre des feuillets
+écrits 17 à 19 et 21 à 30, ce qui peut n'être qu'une coïncidence. Il n'y a
+nulle part de pagination de sa main.
+
+\subsection*{Deux rédactions des facettes, gardées distinctes}
+
+Les facettes d'un convexe sont définies deux fois : page 3, comme classes d'une
+relation d'équivalence, la facette vide étant admise et servant de plus petit
+élément ; page 27, comme parties \emph{non vides}, avec une relation
+d'équivalence formulée autrement. Les énoncés de la page 29 sur l'ensemble
+ordonné des facettes, et les axiomes qui suivent, demandent de nouveau la
+facette vide. On garde les deux rédactions séparées, et l'on dit à chaque fois
+laquelle est en jeu ; $\mathrm{Fac}(C)$ contient toujours la facette vide.
+
+\subsection*{Conventions}
+
+\emph{Facettes.} Le mot est le sien, et on le garde, mais il faut le lire avec
+soin : une \emph{facette} d'un convexe $C$ est ici l'intérieur relatif d'une
+face de $C$ --- une « face ouverte » ---, de n'importe quelle dimension, et non
+une face de codimension 1, que la langue d'aujourd'hui appelle
+facette.\footnote{Le mot « facette » est celui de Bourbaki pour les
+arrangements d'hyperplans (\emph{Groupes et algèbres de Lie}, chapitre V),
+avec le même sens de partie ouverte dans son sous-espace affine ; le
+rapprochement est le nôtre.} Une face de codimension 1 est dite ici
+\emph{facette sous-maximale}, comme il le fait page 24. Une \emph{facette
+fermée} est l'adhérence d'une facette dans $C$, c'est-à-dire une face.
+
+\emph{Polyèdres.} Un \emph{polyèdre convexe}, chez lui, est compact : c'est ce
+qu'on appelle aujourd'hui un polytope convexe. Un \emph{secteur polyédral} est
+une intersection finie de demi-espaces fermés, bornée ou non : un polyèdre
+convexe au sens d'aujourd'hui. On garde ses deux mots.
+
+\emph{Ensembles ordonnés.} $0$ et $1$ désignent le plus petit et le plus grand
+élément ; $y$ est un \emph{successeur} de $x$ si $x < y$ sans élément
+intermédiaire (on dit aujourd'hui que $y$ couvre $x$) ; $\Phi_{x,y}$ est
+l'intervalle fermé $\{z \mid x \leq z \leq y\}$ et $\mathfrak{X}_{x < \cdot < y}$
+l'intervalle ouvert.
+
+\emph{Polarité.} Le polaire est le sien,
+$A^{\circ} = \{x' \mid \langle x, x' \rangle \geq -1 \ \forall x \in A\}$,
+opposé de celui qu'on utilise d'ordinaire ($\leq 1$) ; les deux conventions
+donnent les mêmes énoncés. La correspondance entre sous-espaces affines de la
+page 10, qu'il marque d'un petit rond ouvert distinct du $^{\circ}$, est notée
+ici $F \mapsto F^{\vee}$.
+
+\emph{Cubes.} $B$ est un ensemble à $2n$ éléments muni d'une involution sans
+point fixe $\sigma$, notée aussi $b \mapsto -b$, et $I = B/\sigma$ ; pour
+$i \in I$, $B_i$ est la fibre, à deux éléments.
+
+\emph{Cartes.} Aux pages 32 à 36, $S$, $A$, $F$ sont les sommets, arêtes et
+faces ; $\vec{A} \subset S \times A$ et $A^{\uparrow} \subset A \times F$ les
+incidences sommet--arête et arête--face ; $\mathrm{Dr} = \vec{A} \times_{A}
+A^{\uparrow}$ l'ensemble des drapeaux\footnote{La page écrit $A$ avec un
+exposant qui réunit la flèche verticale de $A^{\uparrow}$ et la flèche
+horizontale de $\vec{A}$. La lettre $\mathfrak{X}$ des pages 32 à 40 rend un $X$
+cursif.} ; $\sigma_{1}$, $\varepsilon$, $\sigma_{2}$ changent respectivement le
+sommet, l'arête, la face d'un drapeau.
+
+\subsection*{Ce que seule une lecture d'ensemble peut dire}
+
+\begin{itemize}
+\item Le « polyèdre combinatoire strict » des pages 12 et 14 n'est défini sur
+aucun feuillet. La page 29 définit, sans le mot « strict », un polyèdre
+combinatoire par des axiomes, et la page 30 montre aussitôt qu'en dimension 2
+ces axiomes admettent des réunions disjointes de polygones, qui ne viennent
+d'aucun polyèdre convexe. On lit donc « strict » comme « isomorphe à
+l'ensemble ordonné des facettes d'un polyèdre convexe » --- la seule lecture
+sous laquelle la démonstration de la page 12 a un sens --- et le polyèdre
+combinatoire de la page 29 comme la notion plus large.
+\item La propriété du losange --- exactement deux éléments entre deux éléments
+de dimensions distantes de 2 --- est démontrée pour les polyèdres convexes
+page 14 et page 29, déduite d'une hypothèse topologique page 38, et posée en
+axiome page 39 sous le nom ($\Sigma$). L'axiome c) de la page 29 n'en est que
+la moitié (« il existe »), et le recensement de la page 30 a besoin de l'autre.
+\item Le modèle du cube par les coordonnées barycentriques, page 19, et le
+module de la marge de la page 21 sont un même objet : le noyau de
+$k^{B} \to k^{I}$.
+\item Pour $n = 2$, l'épure de la page 21 est le « carré combinatoire » du
+dossier 89 (page 13), lu sur les côtés plutôt que sur les sommets --- le carré
+étant son propre dual. Les « contours » et « polygones » des pages 30 à 33 sont
+les polygones combinatoires du dossier 89 (pages 19 et 20), connexité comprise
+ou non ; les drapeaux et leurs involutions, pages 32, 33, 39 et 40, sont ceux du
+dossier 88 (pages 6 à 8 et 10), où ils engendrent le groupe cartographique.
+\end{itemize}
+
+\pagerange{2}{14}
+\section*{I. Géométrie des convexes (pages 2 à 14)}
+
+\pagerange{2}{2}
+\subsection*{Le programme (page 2)}
+
+La page 2 est une table des matières : parties convexes d'un espace affine réel,
+stabilité par intersection, enveloppe convexe décrite par les combinaisons
+barycentriques ou par les simplexes, comparée au sous-espace affine engendré ;
+stabilité par images directes et réciproques affines et par sommes ; sur une
+droite, les convexes sont les intervalles, et une partie est convexe si et
+seulement si sa trace sur toute droite est un intervalle ; dimension d'un
+convexe. Puis l'intérieur. Soit $C$ un convexe de dimension finie qui
+engendre $E$ affinement. Alors :
+
+\begin{enumerate}
+\item[a)] $\mathring{C} \neq \emptyset$ ;
+\item[b)] si $x \in \mathring{C}$, et si $D$ parcourt les droites passant par
+$x$,
+\[
+  \mathring{C} = \bigcup_{D} \operatorname{int}_{D}(D \cap C), \qquad
+  \partial C = \bigcup_{D} \partial_{D}(D \cap C), \qquad
+  \overline{C} = \bigcup_{D} \overline{D \cap C} ;
+\]
+\item[c)] si $C$ et $C'$ sont des convexes compacts qui engendrent $E$, et
+$x \in \mathring{C}$, $x' \in \mathring{C}'$, il existe un unique
+homéomorphisme $h : C \to C'$ tel que $h(x) = x'$, qui envoie chaque
+demi-droite issue de $x$ sur la demi-droite parallèle et de même sens issue de
+$x'$, et qui soit affine sur chacune.\footnote{Les trois formules de b) portent
+sur la page le signe d'intersection ; ce sont des réunions --- une intersection
+de parties de droites distinctes passant par $x$ se réduirait à $\{x\}$ ou à
+rien. Pour la première, si $y$ est intérieur au segment $D \cap C$ de la droite
+$D = (xy)$, $y$ est dans un segment ouvert $]x, z[$ avec $z \in C$, donc
+intérieur à $C$ puisque $x$ l'est. Dans c), « parallèles » est une lecture
+incertaine ; l'homéomorphisme est l'homéomorphisme radial défini par les
+jauges de $C - x$ et $C' - x'$, et son unicité vient de ce qu'un homéomorphisme
+envoie le bord sur le bord (invariance du domaine).}
+\end{enumerate}
+
+\pagerange{3}{5}
+\subsection*{Facettes d'un convexe (pages 3 à 5)}
+
+Soit $C$ un convexe d'un espace affine réel $E$. Pour $x, y \in C$, notons
+$D_{x,y}$ la droite qui les joint et posons
+\[
+  R(x,y) \iff x = y \ \text{ou} \ x \text{ et } y \text{ sont intérieurs à }
+  D_{x,y} \cap C \text{ dans } D_{x,y},
+\]
+c'est-à-dire : $x$ et $y$ appartiennent à un même segment ouvert contenu dans
+$C$. C'est une relation d'équivalence. Une \emph{facette} de $C$ est une partie
+$F$ telle que $F = \{y \in C \mid R(x,y)\}$ pour tout $x \in F$ : les facettes
+sont les classes de $R$, et la partie vide, qui satisfait vacuement la
+condition.\footnote{Une incise biffée et incertaine, « on exclut donc les $F \neq
+\emptyset$ », suit la définition. La facette vide est utilisée aux pages 13 et
+14 comme plus petit élément ($d(\emptyset) = -1$), et on la garde.} Les facettes
+non vides sont exactement les intérieurs relatifs des faces non vides de
+$C$ ; elles forment une partition de $C$.\footnote{Ce dictionnaire, et le mot
+« face » au sens de Rockafellar (une partie convexe $G$ de $C$ telle que tout
+segment de $C$ dont un point intérieur est dans $G$ y soit tout entier), sont
+les nôtres.} On note $F_{x}$ la facette de $x$, $E_{F}$ le sous-espace affine
+engendré par $F$, et $\mathrm{Fac}(C)$ l'ensemble des facettes.\footnote{Sur la
+page, une abréviation lue « $\mathrm{Fac}(C)$ » dans tout le dossier ; l'indice
+de $E_{C}$ est un $C$ appuyé.}
+
+Un point $x$ est \emph{extrémal} si $\{x\}$ est une facette, c'est-à-dire si $x$
+n'est intérieur à $D \cap C$ pour aucune droite $D$ passant par
+$x$.
+
+\begin{enumerate}
+\item[(1)] Si $C$ est de dimension finie $d$, il a une unique facette de
+dimension $d$, son intérieur relatif $\operatorname{int}_{E_{C}}(C)$.
+\item[(2)] Pour $F \in \mathrm{Fac}(C)$, $E_{F} \cap C$ est une réunion de
+facettes de $C$, qui sont les facettes du convexe $E_{F} \cap C$. En dimension
+finie, $E_{F} \cap C = \overline{F} \cap C$ --- c'est la face de $C$ dont $F$
+est l'intérieur relatif --- et $F = \operatorname{int}_{E_{F}}(E_{F} \cap C)$.
+\item[(3)] Pour deux facettes $F$, $F'$, les conditions suivantes sont
+équivalentes : $E_{F'} \subset E_{F}$ ; $E_{F'} \cap C \subset E_{F} \cap C$ ;
+$F' \subset E_{F}$ ; et, en dimension finie, $F' \subset \overline{F}$ ;
+$\overline{F'} \subset \overline{F}$. On note alors $F' \leq F$ : c'est une
+relation d'ordre sur $\mathrm{Fac}(C)$, et pour $x, y \in C$,
+\[
+  F_{x} \leq F_{y} \iff x = y \ \text{ou} \ y \in
+  \operatorname{int}_{D_{x,y}}(D_{x,y} \cap C).
+\]
+\end{enumerate}
+En effet, $y$ intérieur au segment $D_{x,y} \cap C$ signifie $y \in \,]x,z[$
+pour un $z \in C$, et alors $x$ est dans la face de $y$.\footnote{Un mot noirci
+précède $F_{x}$ dans cette ligne ; la page écrit $\prec$.}
+
+\begin{enumerate}
+\item[(4)] Si $x = \sum \lambda_{i} x_{i}$ est une combinaison barycentrique
+d'un nombre fini de points de $C$, à coefficients $\lambda_{i} > 0$, alors
+$F_{x} = \sup_{i} F_{x_{i}}$ dans $\mathrm{Fac}(C)$. Les bornes supérieures
+finies existent donc ; en fait toute famille a une borne supérieure, et
+$\mathrm{Fac}(C)$ est un treillis complet, puisque les faces sont stables par
+intersections quelconques.\footnote{La page conclut aux sup quelconques
+« pourvu que $\dim C < +\infty$ » (deux mots incertains) ; l'hypothèse n'est
+pas nécessaire. La stabilité des facettes fermées par intersections
+quelconques est dite elle-même un peu plus bas sur la page.}
+\item[(5)] Soit $C' \subset C$ une réunion de facettes, et
+$\Phi = \{F \in \mathrm{Fac}(C) \mid F \subset C'\}$. Alors $C'$ est convexe si
+et seulement si $\Phi$ est stable par sup finis. Si $C'$ est fermé dans $C$,
+$\Phi$ contient, avec une facette, toutes celles qui sont plus petites ; la
+réciproque est vraie quand $\mathrm{Fac}(C)$ est fini.\footnote{La page énonce
+l'équivalence sans restriction (« car $\dim E < \infty$ », les mots « relat. »
+et « majorées » étant incertains). Elle est fausse en général : dans un disque
+fermé, la réunion des points d'un arc ouvert du cercle est une réunion de
+facettes (des points extrémaux), $\Phi$ est stable par descente, et l'arc n'est
+pas fermé. Elle est vraie si $\mathrm{Fac}(C)$ est fini, $C'$ étant alors une
+réunion finie de faces, qui sont fermées dans $C$.}
+\item[(6)] (En dimension finie.) $C'$ est de la forme $\overline{F} \cap C$,
+$F \in \mathrm{Fac}(C)$, si et seulement si c'est une réunion de facettes,
+convexe et fermée dans $C$ ; en termes de $\Phi$ : si et seulement si $\Phi$ a
+un plus grand élément $F$ et est l'ensemble des facettes $\leq F$. Les facettes
+fermées sont stables par intersections quelconques.\footnote{La page écrit
+« que $\Phi$ soit fermé, convexe et réunion de facettes », mêlant $\Phi$ et
+$C'$, et la numérotation hésite entre (5) et (6). La démonstration de
+l'équivalence est la suivante : si $C'$ est une telle réunion et $x$ un point de
+son intérieur relatif, tout $y \in C'$ est le bout d'un segment de $C'$ dont $x$
+est un point intérieur, donc $C' \subset \overline{F_{x}} \cap C$ ; l'inclusion
+inverse vient de ce que $C'$ est fermé dans $C$ et contient $F_{x}$. La même
+caractérisation revient page 29, c).}
+\item[(7)] Si $C$ est compact de dimension finie, $C$ est l'enveloppe convexe de
+l'ensemble de ses points extrémaux.\footnote{C'est le théorème de Minkowski,
+cas de la dimension finie du théorème de Krein--Milman, où l'adhérence est
+inutile ; les noms ne sont pas sur la page.}
+\item[(8)] Si $C$ est une partie convexe polyédrale de $E$ de dimension finie
+--- réunion finie de simplexes, ou, ce qui revient au même, d'enveloppes
+convexes de parties finies --- alors $\mathrm{Fac}(C)$ est fini.
+\end{enumerate}
+
+\textbf{Corollaire.} Les \emph{polyèdres convexes} sont les convexes compacts
+$C$ tels que $\mathrm{Fac}(C)$ soit fini, ou, ce qui revient au même, tels que
+l'ensemble $\mathrm{Fac}_{0}(C)$ de leurs points extrémaux soit fini.
+
+\pagerange{5}{7}
+\subsection*{Polaires et théorème de Hahn--Banach (pages 5 à 7)}
+
+Soient $E$ et $E'$ deux espaces vectoriels réels de dimension finie en dualité
+par $\langle\, ,\rangle$.\footnote{La page dit seulement « espaces vectoriels
+duals l'un de l'autre » ; toute la suite est en dimension finie, et c'est
+l'hypothèse sous laquelle le théorème de Hahn--Banach est démontré page 7. En
+dimension infinie, il faudrait des topologies compatibles avec la dualité.}
+Pour $A \subset E$, posons
+\[
+  A^{\circ} = \{x' \in E' \mid \langle x, x' \rangle \geq -1 \ \ \forall x \in A\}
+  = \bigcap_{x \in A} H(x), \qquad
+  H(x) = \{x' \mid \langle x, x' \rangle \geq -1\},
+\]
+et de même pour les parties de $E'$.
+
+\textbf{Théorème 1 (des bipolaires).} Pour $A \subset E$, $A^{\circ\circ}$ est
+l'enveloppe convexe fermée de $A \cup \{0\}$.
+
+\textbf{Corollaires.} $A \mapsto A^{\circ}$ est une bijection, qui renverse
+l'ordre, de l'ensemble des convexes fermés de $E$ contenant $0$ sur l'ensemble
+analogue de $E'$, d'inverse $A' \mapsto A'^{\circ}$. Pour de tels convexes,
+\[
+  \bigl(\overline{\mathrm{Env}}(A_{1} \cup A_{2})\bigr)^{\circ} = A_{1}^{\circ}
+  \cap A_{2}^{\circ}, \qquad
+  (A_{1} \cap A_{2})^{\circ} = \overline{\mathrm{Env}}(A_{1}^{\circ} \cup
+  A_{2}^{\circ}),
+\]
+où $\overline{\mathrm{Env}}$ désigne l'enveloppe convexe fermée ; et
+\[
+  0 \in \operatorname{int}(A) \iff A^{\circ} \text{ est compact}, \qquad
+  A \text{ est compact} \iff 0 \in \operatorname{int}(A^{\circ}).
+\]
+Ces deux critères supposent $A$ convexe fermé contenant $0$.\footnote{Sur la page, aucun signe de polaire sur le membre de gauche de la
+première formule ni sur les arguments du second membre de la seconde. Les
+deux critères de compacité sont énoncés sans hypothèse ; l'hypothèse est
+fournie par nous.}
+
+Le théorème 1 équivaut au suivant :\footnote{La ligne, marquée d'un grand
+crochet, est en partie biffée et un mot en est illisible : « Le théorème est
+conséquence [\ldots] est équivalent ».}
+
+\textbf{Théorème 1'.} Une partie de $E$ est convexe et fermée si et seulement si
+elle est intersection de demi-espaces fermés.
+
+Il résulte du
+
+\textbf{Théorème 1'' (Hahn--Banach).} Soient $U$ une partie convexe ouverte de
+$E$ et $F \subsetneq E$ un sous-espace vectoriel tel que $F \cap U =
+\emptyset$. Il existe un hyperplan $H \supset F$ tel que $H \cap U =
+\emptyset$.
+
+\emph{Démonstration (page 7).} Remplaçant $U$ par le cône $\bigcup_{\lambda > 0}
+\lambda U$, qui est encore convexe, ouvert et disjoint de $F$, on peut supposer
+que $U$ est un cône ouvert. Il suffit, si $F$ n'est pas un hyperplan, de trouver
+$F' \supset F$ avec $\dim F' = \dim F + 1$ et $F' \cap U = \emptyset$, puis
+d'itérer. Pour cela on se place dans un sous-espace $G \supset F$ de dimension
+$\dim F + 2$, et, passant au quotient par $F$, on est ramené au cas où
+$\dim E = 2$ et $F = 0$, avec $U \neq \emptyset$. Un cône convexe ouvert du
+plan qui ne contient pas l'origine est alors ou bien un demi-plan ouvert, ou
+bien un secteur $\{\lambda_{1} e_{1} + \lambda_{2} e_{2} \mid \lambda_{1},
+\lambda_{2} > 0\}$ pour une base $(e_{1}, e_{2})$ ; dans les deux cas une droite
+de son bord convient.\footnote{La page saute de « il suffit de prouver que
+$\exists F' \supset F$ […] $\dim F' = \dim F + 1$ » à la suite sans écrire
+$F' \cap U = \emptyset$, qu'on rétablit, et ne dit pas comment on trouve la
+droite (« Dans les deux cas on gagne… »). Le même mot, illisible, ouvre deux
+phrases de la démonstration.}
+
+\pagerange{7}{10}
+\subsection*{Secteurs polyédraux (pages 7 à 10)}
+
+\textbf{Proposition.} Soit $C$ une partie d'un espace affine $E$ de dimension
+finie. Conditions équivalentes :
+\begin{enumerate}
+\item[a)] $C$ est une intersection finie de demi-espaces fermés ;
+\item[b)] $C$ est l'enveloppe convexe fermée d'un ensemble fini de points et de
+demi-droites fermées, qu'on peut prendre toutes issues d'un point $x \in C$
+donné à l'avance ;
+\item[b')] (si $C$ est compact) $C$ est un polyèdre convexe.
+\end{enumerate}
+
+C'est le théorème de Minkowski--Weyl.\footnote{Le nom est le nôtre. La
+précision « issues d'une origine » est d'une lecture incertaine. L'adhérence
+est nécessaire dans b) quand les demi-droites ont une même origine :
+l'enveloppe convexe de $\{v\}$ et d'une demi-droite issue de $x \neq v$ ne
+contient pas la demi-droite parallèle issue de $v$, que contient son
+adhérence.}
+
+\emph{Démonstration (pages 8 et 9).} Si $C = \emptyset$, il n'y a rien à
+démontrer. Les deux conditions ne changent pas quand on remplace $E$ par le
+sous-espace affine $E_{C}$ engendré par $C$ ; on peut donc supposer que $C$ est
+convexe fermé et engendre $E$, et prendre pour origine un point de
+$\mathring{C}$. On pose $C' = C^{\circ}$ ; alors $C = C'^{\circ}$, et $C'$ est
+compact.\footnote{Un premier essai, encadré et barré, où se lisent « a)
+$\Rightarrow$ b) », « b) $\Rightarrow$ a) » et « on gagne par polarité », est
+remplacé par ce qui suit. « $C$ engendre $E$ » est une lecture incertaine.}
+
+\emph{b) $\Rightarrow$ a).} Le polaire d'un point $x$ est le demi-espace $H(x)$,
+celui d'une demi-droite $\mathbf{R}_{+} d$ issue de l'origine le demi-espace
+$\{x' \mid \langle d, x'\rangle \geq 0\}$, et le polaire d'une réunion est
+l'intersection des polaires. Donc $C'$ est une intersection finie de
+demi-espaces fermés ; étant compact, c'est un polyèdre convexe par le lemme
+ci-dessous, c'est-à-dire l'enveloppe convexe d'un ensemble fini de $E'$, et
+$C = C'^{\circ}$ est l'intersection finie des polaires de ses points : a).
+
+\emph{a) $\Rightarrow$ b).} Par polarité, $C'$ est l'enveloppe convexe fermée d'un
+ensemble fini de points ; par ce qui précède, appliqué dans $E'$ à $C'$ avec une
+origine prise dans son intérieur relatif, c'est une intersection finie de
+demi-espaces fermés, qu'on peut écrire, puisque $0 \in C'$, sous les formes
+$\langle y_{j}, x'\rangle \geq -1$ et $\langle d_{k}, x'\rangle \geq 0$. Donc
+$C = C'^{\circ}$ est l'enveloppe convexe fermée des points $y_{j}$ et des
+demi-droites $\mathbf{R}_{+} d_{k}$ issues de l'origine : b), sous la forme
+précisée.\footnote{La page dit seulement « d'après ce qui précède » ; le
+recentrage de l'origine, nécessaire pour appliquer b) $\Rightarrow$ a) à $C'$,
+est explicité par nous.}
+
+\textbf{Lemme (page 9).} Une intersection finie de demi-espaces fermés n'a
+qu'un nombre fini de points extrémaux ; c'est donc un polyèdre convexe si elle
+est compacte.\footnote{La page met « compact » dans l'hypothèse (lecture
+incertaine) ; l'énoncé et la démonstration n'en ont pas besoin.}
+
+Par récurrence sur $\dim E$, puis sur le nombre $\nu$ de demi-espaces, le cas
+$\nu \leq 1$ étant trivial. On est ramené à $C = C_{1} \cap H$, où $C_{1}$ n'a
+qu'un nombre fini de points extrémaux et $H$ est un demi-espace fermé limité par
+l'hyperplan $H_{0}$. Pour $x \in C$ : si $x \notin H_{0}$, $x$ est extrémal dans
+$C$ si et seulement s'il l'est dans $C_{1}$, la propriété étant locale ; si
+$x \in H_{0}$, $x$ est extrémal dans $C$ si et seulement s'il l'est dans
+$H_{0} \cap C$, car un segment de $C$ qui a un point intérieur sur $H_{0}$ est
+contenu dans $H_{0}$. Or $H_{0} \cap C$ est une intersection finie de
+demi-espaces de $H_{0}$, de dimension plus petite.\footnote{La page note $\nu$
+d'après une ligne biffée, « sur $\nu = n + \dim E$ » ; un croquis en marge
+montre une bande entre deux droites parallèles.}
+
+\textbf{Définition.} Un \emph{secteur polyédral} est une partie satisfaisant aux
+conditions équivalentes de la proposition --- un polyèdre convexe au sens
+d'aujourd'hui, borné ou non.
+
+\textbf{Proposition (page 10).} Si $E$ et $E'$ sont de dimension finie et en
+dualité, $A \mapsto A^{\circ}$ et $A' \mapsto A'^{\circ}$ sont des bijections
+inverses l'une de l'autre entre secteurs polyédraux de $E$ contenant l'origine
+et secteurs polyédraux de $E'$ contenant l'origine.
+
+\pagerange{10}{12}
+\subsection*{Polarité et facettes (pages 10 à 12)}
+
+Soient $E$, $E'$ de dimension $n$ en dualité. À un sous-espace affine non vide
+$F$ de $E$ ne contenant pas l'origine on associe
+\[
+  F^{\vee} = \{x' \in E' \mid \langle x, x'\rangle = -1 \ \ \forall x \in F\},
+\]
+sous-espace affine de $E'$ ne contenant pas l'origine, et l'on a
+\[
+  \dim F + \dim F^{\vee} = n - 1.
+\]
+C'est une bijection involutive, caractérisée par deux propriétés : elle renverse
+l'inclusion, et à un point $x \neq 0$ elle associe l'hyperplan
+$\{x\}^{\vee} = \partial H(x)$, bord du demi-espace polaire de
+$x$.\footnote{L'exposant de $F^{\vee}$ est sur la page un petit rond ouvert,
+tracé autrement que le $^{\circ}$ des polaires, et le bord est noté par un point
+en exposant, comme $\dot{C}$ page 2.}
+
+Une \emph{variété d'appui} d'un convexe $C$ est un sous-espace affine de la forme
+$E_{F}$, $F \in \mathrm{Fac}(C)$ ; les variétés d'appui sont en bijection avec
+les facettes, et cette bijection respecte l'ordre.
+
+\textbf{Théorème.} Soient $C \subset E$ et $C' \subset E'$ deux secteurs
+polyédraux polaires l'un de l'autre. Il existe une unique application
+$\varphi$ de l'ensemble des facettes non vides $F$ de $C$ telles que
+$0 \notin \overline{F}$ --- c'est-à-dire, puisque $0 \in C$, telles que
+$0 \notin E_{F}$ --- dans l'ensemble analogue pour $C'$, telle que
+\[
+  E_{\varphi(F)} = (E_{F})^{\vee}.
+\]
+Elle est bijective et renverse l'ordre.\footnote{Les deux « i.e. » de la page
+écrivent $0 \in E_{F}$ et $0' \in E_{F'}$ ; c'est $\notin$ qu'il faut, pour que
+$(E_{F})^{\vee}$ soit défini. L'équivalence entre $0 \notin \overline{F}$ et
+$0 \notin E_{F}$ vient de $E_{F} \cap C = \overline{F} \cap C$ (page 3, (2)).
+Exemple : pour $C = [-1, +\infty[$ dans $\mathbf{R}$, $C' = [0, 1]$, et
+$\varphi$ envoie $\{-1\}$ sur $\{1\}$ ; la facette $\{0\}$ de $C'$, dont la
+variété d'appui contient l'origine, traduit le fait que $C$ n'est pas borné.}
+
+\textbf{Corollaire 1.} Un secteur polyédral n'a qu'un nombre fini de facettes :
+prendre l'origine dans son intérieur relatif, et appliquer la dualité, le
+polaire étant alors compact.
+
+\textbf{Corollaire 2.} Si $C$ et $C'$ sont compacts, c'est-à-dire si l'origine
+est intérieure à l'un et à l'autre, $\varphi$ se prolonge, en échangeant la
+facette vide et la facette maximale, en un anti-isomorphisme d'ensembles
+ordonnés $\mathrm{Fac}(C) \simeq \mathrm{Fac}(C')$.
+
+C'est la dualité des polytopes : le polaire d'un polytope contenant l'origine
+en son intérieur est un polytope, et son treillis des faces est l'opposé de
+celui du premier.\footnote{Les noms « polytope dual », « treillis des faces »
+sont les nôtres.}
+
+\pagerange{12}{14}
+\subsection*{Polyèdres combinatoires stricts et fonction dimension (pages 12 à 14)}
+
+Appelons \emph{polyèdre combinatoire strict} un ensemble ordonné isomorphe à
+$\mathrm{Fac}(C)$ pour un polyèdre convexe $C$, et notons $\Phi^{\circ}$
+l'ensemble ordonné opposé de $\Phi$.\footnote{La notion n'est définie sur aucun
+feuillet du dossier ; la définition est notre lecture. Elle est la seule sous
+laquelle « a) résulte du Cor.~2 » a un sens, et la page 29 donne, sans le mot
+« strict », une définition axiomatique qui laisse passer des objets qui ne sont
+pas de cette forme (page 30).}
+
+\textbf{Corollaire 3.} Soit $\Phi$ un polyèdre combinatoire strict.
+\begin{enumerate}
+\item[a)] $\Phi^{\circ}$ est un polyèdre combinatoire strict.
+\item[b)] Pour $x \leq y$ dans $\Phi$, l'intervalle $\Phi_{x,y}$ est un polyèdre
+combinatoire strict ; si $\Phi = \mathrm{Fac}(C)$, c'est $\mathrm{Fac}(K)$ pour
+un polyèdre convexe $K$ de dimension $\dim y - \dim x - 1$.
+\end{enumerate}
+
+a) résulte du corollaire 2. Pour b) : $\Phi_{0,x} = \mathrm{Fac}(\overline{x})$
+est strict ; donc aussi, par dualité, $\Phi_{x,1} = \bigl((\Phi^{\circ})_{0,x}
+\bigr)^{\circ}$ ; et $\Phi_{x,y}$ est l'intervalle $[x, 1]$ de $\Phi_{0,y}$. La
+dimension se lit sur la formule $\dim F + \dim F^{\vee} = n - 1$.\footnote{La
+dimension de $K$ n'est pas sur la page 12 ; elle est donnée page 29, 2°, où
+$\delta = \dim F'' - \dim F' - 1$. C'est le résultat classique selon lequel les
+intervalles d'un treillis des faces de polytope sont des treillis des faces de
+polytopes (figures de faces).}
+
+Suivent deux essais, encadrés et barrés, d'un corollaire sur l'existence de
+facettes de toutes dimensions, dont l'énoncé revient comme corollaire 6.
+
+\textbf{Corollaire 4.} Soient $C$ un polyèdre convexe et $F_{1} < F_{2}$ dans
+$\mathrm{Fac}(C)$. Pour que $F_{2}$ soit un successeur de $F_{1}$, il faut et il
+suffit que $\dim F_{2} = \dim F_{1} + 1$.
+
+La dimension étant strictement croissante sur $\mathrm{Fac}(C)$, la condition
+est suffisante. Pour la nécessité, on se ramène par le corollaire 3 à
+$F_{1} = 0$ (la facette vide) et $F_{2} = 1$ (la facette maximale), et
+l'assertion devient : un polyèdre convexe non vide sans autre facette que la
+vide et la maximale est un point. En effet, s'il est de dimension $\geq 1$, ses
+points extrémaux, qui existent par le théorème de Minkowski, sont des facettes
+intermédiaires.\footnote{Plusieurs mots de cet argument sont incertains :
+« dualité », le signe $=$ dans « $\dim C = 0$ ou $-1$ », « vide »,
+« trivial ». La page passe aussi par la facette maximale avant de passer aux
+polaires.}
+
+\textbf{Corollaire 5.} La fonction $d : F \mapsto \dim F$ sur $\mathrm{Fac}(C)$
+est l'unique fonction telle que $d(F_{2}) = d(F_{1}) + 1$ quand $F_{2}$ est un
+successeur de $F_{1}$, et $d(\emptyset) = -1$. Elle est strictement croissante.
+
+\textbf{Corollaire 6.} Pour $F \in \mathrm{Fac}(C)$ et $-1 \leq i \leq \dim F$,
+il existe $F' \leq F$ de dimension $i$.
+
+C'est formel à partir du corollaire 5 : une chaîne de successeurs
+$\emptyset = x_{0} < x_{1} < \cdots < x_{m} = F$, qui existe dans un ensemble
+ordonné fini, vérifie $d(x_{i}) = i - 1$.\footnote{Une démonstration par
+récurrence sur $\dim F$ est encadrée et barrée ; « Formel » est une lecture
+incertaine.}
+
+\textbf{Corollaire 7 (le losange).} Soient $\Phi$ un polyèdre combinatoire
+strict, $d$ sa fonction dimension, et $x < y$ avec $d(y) = d(x) + 2$. Alors il y
+a exactement deux éléments $z$ tels que $x < z < y$.
+
+En effet, $\Phi_{x,y}$ est l'ensemble des facettes d'un polyèdre convexe de
+dimension 1, c'est-à-dire d'un segment, qui a exactement deux extrémités. C'est
+ce qu'on appelle aujourd'hui la propriété du losange (\emph{diamond
+property}).\footnote{Le nom est le nôtre ; il est d'usage dans la théorie des
+polytopes abstraits (Danzer, McMullen et Schulte), qui prend précisément pour
+axiomes des ensembles ordonnés gradués ayant cette propriété.}
+
+\pagerange{17}{19}
+\section*{II. Cubes (pages 15 à 26)}
+
+\subsection*{Caractérisation intrinsèque d'un cube (pages 15 à 19)}
+
+La couverture de la page 15 porte le seul mot « Cubes ». Les pages 17 à 19
+cherchent à caractériser un $n$-cube d'un espace affine $E$ sur un corps $k$ par
+l'ensemble $\Phi$ des sous-espaces affines engendrés par ses
+faces.\footnote{« $n$-cube » et la notation $\mathrm{Espaff}(E)$ de l'ensemble
+des sous-espaces affines sont des lectures incertaines.} On note $\Phi^{**}$
+l'ensemble $\Phi$ privé de son plus petit et de son plus grand
+élément,\footnote{L'exposant est fait de deux petits signes, lus $**$.} et $B$
+l'ensemble des éléments maximaux de $\Phi^{**}$. Les axiomes :
+
+\begin{enumerate}
+\item[a)] $\Phi$ contient $\emptyset$ et $E$, qui sont donc son plus petit et son
+plus grand élément, et tout élément de $\Phi^{**}$ est intersection d'éléments
+de $B$.
+\item[b)] Pour tout $b \in B$ il existe un unique $b' \in B$ tel que $b$ et $b'$
+n'aient pas de minorant commun dans $\Phi^{**}$, c'est-à-dire que $b \cap b'$
+ne contienne aucun élément non vide de $\Phi$. On obtient ainsi une involution
+$\sigma : b \mapsto b'$ de $B$, sans point fixe ; soit $I = B/\sigma$.
+\item[c)] Pour $V \in \Phi \setminus \{\emptyset\}$, l'ensemble $B_{V}$ des
+$b \in B$ qui majorent $V$ ne contient jamais à la fois $b$ et $\sigma b$ (par
+b)) : c'est une section partielle de $B \to I$. L'application
+\[
+  \Phi \setminus \{\emptyset\} \longrightarrow \Gamma_{\mathrm{part}}(B/I),
+  \qquad V \longmapsto B_{V},
+\]
+qui est injective par a), est bijective.
+\item[d)] $n = \frac{1}{2}\operatorname{card} B$ est la dimension combinatoire de
+$\Phi$ et la dimension de $E$, et pour tout $V \in \Phi$ la dimension
+combinatoire de $V$ dans $\Phi$ est sa dimension affine.
+\item[e)] Si $b \in B$, alors $b \cap \sigma b = \emptyset$ : par d), $b$ et
+$\sigma b$ sont deux hyperplans parallèles.
+\end{enumerate}
+
+Une note en marge dit que a), b), c) expriment que l'ensemble ordonné $\Phi$ est
+un \emph{cube combinatoire} : l'ensemble des sections partielles de $B$ sur $I$,
+ordonné par l'inverse du prolongement, augmenté d'un plus petit
+élément.\footnote{La page écrit « injective par b) » ; l'injectivité vient de
+a), puisque $V$ est l'intersection des éléments de $B_{V}$, et b) donne que
+$B_{V}$ est une section partielle. Le dernier tiers de la page 17, serré et en
+surcharge, n'est lu que par fragments.} Une remarque entre crochets explique
+pourquoi e) est nécessaire : a) implique que la borne inférieure dans $\Phi$
+d'une partie minorée de $\Phi \setminus \{\emptyset\}$ est son intersection,
+mais non qu'une partie dont la borne inférieure est $\emptyset$ ait une
+intersection vide. Exemple : un quadrilatère qui n'est pas un parallélogramme,
+dont deux côtés opposés se coupent hors de lui.\footnote{« Quadrilatère » est
+une lecture incertaine, appuyée sur le croquis.}
+
+\emph{Reconstruction.} Pour $i \in I$, les deux hyperplans de la fibre de
+$B \to I$ en $i$ ont une même direction $\mathbb{H}_{i}$, hyperplan de l'espace
+des translations $T$ de $E$. Ces $n$ hyperplans sont indépendants --- un sommet
+du cube, élément minimal non vide de $\Phi$, est de dimension $0$ par d) et
+s'écrit comme intersection de $n$ hyperplans, un par fibre ---, d'où une
+décomposition de $T$ en produit de droites
+\[
+  T \simeq \prod_{i \in I} T_{i}, \qquad T_{i} = T/\mathbb{H}_{i},
+\]
+et une décomposition du $T$-torseur $E$ en produit de $T_{i}$-torseurs
+$E_{i} = E/\mathbb{H}_{i}$, droites affines. Chaque $E_{i}$ contient l'image
+$B_{i}$ de la fibre en $i$, deux points distincts.\footnote{La page écrit
+« l'espace des translations $T$ de $V$ » ; c'est $E$. La lettre rendue
+$\mathbb{H}$ est un $H$ barré de traits verticaux. L'indépendance des
+directions n'est pas justifiée sur la page.} Or, $i$ étant fixé, la donnée d'un
+triplet $(T_{i}, E_{i}, B_{i} \subset E_{i})$ --- une droite affine et deux
+points distincts --- équivaut à celle de l'ensemble à deux éléments $B_{i}$, vu
+comme torseur sous $\{\pm 1\}$ : on prend
+\[
+  T_{i} = \operatorname{Ker}\bigl(k^{B_{i}} \xrightarrow{\ \varepsilon\ } k\bigr),
+  \qquad E_{i} = \varepsilon^{-1}(1),
+\]
+où $\varepsilon$ est la somme des coordonnées, $B_{i}$ s'envoyant sur les deux
+fonctions de Dirac. Ce sont les coordonnées barycentriques sur une droite
+relativement à deux points. Le $n$-cube est ainsi le produit de $n$ cubes de
+dimension 1, et l'on a globalement
+\[
+  T = \operatorname{Ker}\bigl(k^{B} \xrightarrow{\ \mathrm{tr}\ } k^{I}\bigr),
+  \qquad E = \mathrm{tr}^{-1}(1),
+\]
+où $\mathrm{tr}$ somme les coordonnées sur chaque fibre et $1$ est la fonction
+constante. La donnée d'une famille $(T_{i}, E_{i}, B_{i})_{i \in I}$ équivaut
+donc à celle de l'ensemble $B$ muni de $\sigma$.\footnote{La page dit qu'elle
+équivaut « à la donnée d'une [mot illisible] de $n$-cube » ; c'est l'objet que
+la page 21 appellera épure de $n$-cube, mais on ne prétend pas lire le mot.}
+La page s'interrompt sur « Si $J \subset I$, on considère ».
+
+\pagerange{21}{22}
+\subsection*{Épures de $n$-cubes (pages 21 et 22)}
+
+Soit $k$ un anneau commutatif où $2$ est inversible.\footnote{« comm. » est
+récrit au-dessus de la ligne ; la lecture est incertaine.} On considère deux
+groupoïdes.
+\begin{itemize}
+\item $\mathcal{C}_{n}$ : les $k$-modules $E$ munis d'une décomposition en somme
+directe $E = \bigoplus_{i \in I} E_{i}$, $\operatorname{card} I = n$, et, pour
+chaque $i$, d'une partie $B_{i} \subset E_{i}$ à deux éléments, telle que chaque
+$b \in B_{i}$ soit une base de $E_{i}$ et que $B_{i} = -B_{i}$.
+\item $\mathcal{D}_{n}$ : les ensembles $B$ à $2n$ éléments munis d'une
+involution sans point fixe --- d'une action libre de $\{\pm 1\}$ ---, que la
+marge appelle \emph{épures de $n$-cubes}.
+\end{itemize}
+On passe de $\mathcal{C}_{n}$ à $\mathcal{D}_{n}$ par $B = \bigcup_{i} B_{i}$,
+$\sigma(b) = -b$, et en sens inverse par
+\[
+  E = \bigoplus_{i \in I} B_{i} \wedge_{\{\pm 1\}} k ,
+\]
+où $\{\pm 1\}$ opère sur $k$ par homothéties et $\wedge$ désigne le produit
+contracté : $B_{i} \wedge_{\{\pm 1\}} k$ est un module libre de rang 1 dont $B_{i}$
+est l'ensemble de deux générateurs opposés. Les deux groupoïdes sont donc
+équivalents.\footnote{La condition $\operatorname{card} B_{i} = 2$ demande
+seulement $b \neq -b$, c'est-à-dire $2 \neq 0$ dans $k$ ; l'inversibilité de $2$
+sert au paragraphe suivant. La page note les deux catégories $C_{n}$ et
+$\mathcal{D}_{n}$ ; on écrit $\mathcal{C}_{n}$ pour éviter la confusion avec le
+cube $C_{n}$ de la page 26. Le mot « cube » de la marge est incertain, et
+« combinatoire » y est biffé.}
+
+La marge donne une autre description : $E$ est le sous-module de $k^{(B)}$ formé
+des $\sum_{b} \lambda_{b} e_{b}$ avec $\lambda_{-b} = -\lambda_{b}$, d'où la suite
+exacte
+\[
+  0 \to E \to k^{B} \xrightarrow{\ \mathrm{tr}\ } k^{I} \to 0 ,
+\]
+$b \in B$ correspondant à $e_{b} - e_{-b}$. C'est exactement l'espace $T$ des
+translations du cube de la page 19 ; et quand $2$ est inversible, la bijection
+$\lambda \mapsto \mu$, $\mu_{b} = \lambda_{b} - \lambda_{-b}$, d'inverse
+$\lambda_{b} = \frac{1}{2}(1 + \mu_{b})$, identifie le modèle barycentrique
+$\mathrm{tr}^{-1}(1)$ de la page 19 au modèle antisymétrique des pages 23 et
+26.\footnote{Ce rapprochement des deux modèles est le nôtre ; il explique
+l'hypothèse « $2$ inversible ».}
+
+\emph{Structure euclidienne et orientation (page 22).} $E$ porte une forme
+bilinéaire canonique, somme orthogonale des formes $(x, y) \mapsto xy$ sur les
+$B_{i} \wedge k$, pour laquelle chaque $b \in B$ est de carré 1.\footnote{« de
+produit scalaire » est un ajout interlinéaire incertain, et « bilinéaire » une
+lecture incertaine.} Sur $k = \mathbf{R}$, notons $\omega_{E}$ l'ensemble à deux
+éléments des orientations de $E$ et $\omega_{I}$ celui des orientations de
+l'ensemble fini $I$ (ses ordres totaux à permutation paire près). On a un
+isomorphisme canonique de $\{\pm 1\}$-torseurs
+\[
+  \omega_{E} \simeq \omega_{I} \wedge \bigwedge_{i \in I} B_{i} .
+\]
+En effet, la formule d'associativité donne $\omega_{E} \simeq \omega_{I} \wedge
+\bigwedge_{i} \omega_{E_{i}}$, et $B_{i}$, ensemble de deux bases opposées de la
+droite $E_{i}$, s'envoie injectivement, donc bijectivement, dans
+$\omega_{E_{i}}$.\footnote{Le mot « sur $\mathbf{R}$ » est un petit « $R$ » écrit
+sous la ligne après « bases » ; c'est lui qui fixe le cadre réel de ce
+paragraphe. La marge porte « [\ldots] vérifier : ». En bas de page, souligné comme
+un titre : « épure de $n$-cube orienté ».} Une \emph{épure orientée} est une
+épure munie d'un élément de ce torseur.
+
+\pagerange{23}{25}
+\subsection*{Facettes du cube (pages 23 à 25)}
+
+Le \emph{polyèdre combinatoire} associé à un polyèdre convexe $C$ de dimension
+$n$ est l'ensemble de ses facettes, ordonné par $F \leq F' \iff F \subset
+\overline{F'}$.\footnote{Un ajout interlinéaire, « $\neq$ l'unique facette
+maxim. ? », semble exclure la facette maximale, ce que fait la liste
+$\Phi_{0}, \ldots, \Phi_{n-1}$ qui suit.} La dimension d'une facette s'y lit
+comme dimension combinatoire : la longueur commune des chaînes maximales
+$F_{0} < F_{1} < \cdots < F_{m} = F$ partant d'un sommet. Si $\Phi_{i}$ est
+l'ensemble des facettes de dimension $i$, l'ordre se reconstitue à partir des
+seules relations d'incidence entre $\Phi_{i}$ et $\Phi_{i+1}$, puisque toute
+relation $F < F'$ se raffine en une chaîne de successeurs.\footnote{La page
+écrit $0 \leq i \leq n$ pour les relations d'incidence, alors que la liste
+s'arrête à $\Phi_{n-1}$.}
+
+Le cube réel associé à une épure est
+\[
+  C(B, \sigma) = \Bigl\{ \lambda = \sum_{b \in B} \lambda_{b} e_{b} \Bigm|
+  \lambda_{-b} = -\lambda_{b},\ |\lambda_{b}| \leq 1 \Bigr\}
+\]
+dans le module $E$ ci-dessus, pour $k = \mathbf{R}$.
+
+\textbf{Proposition.} Les facettes non vides du cube $C(B, \sigma)$ sont en
+bijection avec les sections partielles $s : J \to B$ de $B$ sur des parties
+$J \subset I$. La facette fermée (ouverte) associée à $s$ est l'ensemble des
+$\lambda \in C(B, \sigma)$ tels que $\lambda_{s(j)} = 1$ pour $j \in J$ et
+$|\lambda_{b}| \leq 1$ (resp. $< 1$) pour $b$ au-dessus de $I \setminus J$.
+
+\emph{Démonstration (page 24).} Soient $\lambda \neq \mu$ dans le cube. Ils sont
+intérieurs à un même segment de $C$ si et seulement si la droite qui les joint
+se prolonge un peu au-delà de chacun dans le cube, c'est-à-dire si, pour tout
+$b$, $|t\lambda_{b} + (1-t)\mu_{b}| \leq 1$ pour $t$ un peu plus grand que 1 et
+un peu plus petit que 0. Aucune coordonnée ne fait obstacle si
+$\lambda_{b} = \mu_{b}$, ni si $|\lambda_{b}|, |\mu_{b}| < 1$ ; si
+$\lambda_{b} \neq \mu_{b}$ et que l'un vaut $\pm 1$, la droite sort du cube de
+ce côté. Donc $R(\lambda, \mu)$ équivaut à : $J(\lambda) = \{b \mid \lambda_{b}
+= 1\}$ est égal à $J(\mu)$. La proposition s'ensuit : c'est le fait qu'un
+produit de segments a pour facettes les produits de facettes des
+segments.\footnote{Ce dernier énoncé est le nôtre. La page note
+$\mathcal{R}$ et $\mathcal{B}$ par moments pour $R$ et $B$.}
+
+\textbf{Corollaire.} L'ordre des facettes de $C(B, \sigma)$ est l'inverse de la
+relation de prolongement entre sections partielles. La facette maximale
+correspond à la section vide, les facettes sous-maximales aux éléments de $B$,
+et les adhérences de deux facettes sous-maximales distinctes sont disjointes
+--- parallèles --- si et seulement si elles correspondent à deux éléments
+conjugués $b$, $-b$.\footnote{La page dit que deux facettes sous-maximales
+distinctes « ne se rencontrent pas » ; deux facettes distinctes ne se
+rencontrent jamais, et l'énoncé porte sur leurs adhérences. Le « ne » est un
+ajout interlinéaire.}
+
+\textbf{Exercice (page 25).} Soient $p : B \to I$ une surjection quelconque et
+$\mathcal{P}$ l'ensemble des sections partielles de $p$, ordonné par
+prolongement. Ses éléments maximaux forment l'ensemble
+$C = \prod_{i} p^{-1}(i)$ des sections, et les successeurs de la section vide
+s'identifient à $B$. Pour $b \in B$, soit $C_{b}$ l'ensemble des sections qui
+prolongent $b$, c'est-à-dire telles que $s(p(b)) = b$. Pour $b \neq b'$,
+\[
+  C_{b} \cap C_{b'} = \emptyset \iff p(b) = p(b'),
+\]
+de sorte que $p(b) = p(b')$ si et seulement si $b = b'$ ou
+$C_{b} \cap C_{b'} = \emptyset$. On reconstruit ainsi $B$, la relation
+d'équivalence définie par $p$, donc $I$ et $p$, à isomorphisme près, à partir de
+l'ensemble ordonné $\mathcal{P}$.\footnote{Une hypothèse biffée demandait des
+fibres d'au moins deux éléments ; elle est en effet inutile. La surjectivité
+sert à ce que $b$ et $b'$ de fibres distinctes soient prolongés par une même
+section.}
+
+\textbf{Corollaire.} Le groupoïde des surjections $B \to I$ est équivalent, par
+$p \mapsto \mathcal{P}(p)$, à une sous-catégorie pleine du groupoïde des
+ensembles ordonnés.\footnote{La pleine fidélité tient à ce qu'un isomorphisme
+de $\mathcal{P}(p)$ est déterminé par son action sur les successeurs de la
+section vide, toute section partielle étant la borne supérieure de ceux
+qu'elle prolonge ; la page ne le dit pas.}
+
+\pagerange{26}{26}
+\subsection*{Le cube réel et son groupe (page 26)}
+
+Du point de vue de la géométrie des convexes sur $\mathbf{R}$ :
+\begin{enumerate}
+\item[(a)] le cube standard est $C_{n} = \{x \in \mathbf{R}^{n} \mid |x_{i}| \leq 1
+\ \forall i\}$ ;
+\item[(b)] un cube d'un espace affine réel $E$ de dimension $n$ est une partie
+$C$ telle qu'il existe un isomorphisme affine $u : \mathbf{R}^{n} \to E$ avec
+$u(C_{n}) = C$ ;
+\item[(c)] les $n$-cubes convexes forment un groupoïde connexe, pointé par
+$(\mathbf{R}^{n}, C_{n})$, donc équivalent au groupoïde des torseurs sous
+\[
+  W_{n} = \operatorname{Aut}_{\mathrm{aff}}(\mathbf{R}^{n}, C_{n}).
+\]
+\end{enumerate}
+
+\textbf{Proposition.} Soit $B_{n} = \{\pm e_{i} \mid 1 \leq i \leq n\}$. Alors
+\[
+  \operatorname{Aut}_{\mathrm{aff}}(\mathbf{R}^{n}, C_{n}) =
+  \operatorname{Aut}_{\mathrm{vect}}(\mathbf{R}^{n}, B_{n}) \xrightarrow{\ \sim\ }
+  \operatorname{Aut}(B_{n}, \sigma_{n}),
+\]
+où $\sigma_{n}$ est l'involution $b \mapsto -b$.
+
+La démonstration est « laissée comme exercice ». Un automorphisme affine du cube
+fixe son centre de symétrie, donc est linéaire ; il permute les facettes
+sous-maximales $\{x_{i} = \pm 1\}$, dont les centres sont les $\pm e_{i}$ ; et
+les automorphismes de $(B_{n}, \sigma_{n})$ sont les permutations signées, dont
+les matrices sont orthogonales. $W_{n}$ est le groupe hyperoctaédral, d'ordre
+$2^{n} n!$, groupe de Weyl des types $B_{n}$ et $C_{n}$.\footnote{La page
+remarque que « $B_{n}$ est l'ens. des \emph{pts extrémaux} du convexe
+$C_{n}$ » : c'est inexact, les points extrémaux de $C_{n}$ étant les $2^{n}$
+points $(\pm 1, \ldots, \pm 1)$. $B_{n}$ est l'ensemble des centres des facettes
+sous-maximales de $C_{n}$, c'est-à-dire, au signe de la convention près,
+l'ensemble des points extrémaux du polaire $C_{n}^{\circ}$, l'hyperoctaèdre
+$\{\sum |x_{i}| \leq 1\}$. La démonstration ci-dessus et les noms
+« hyperoctaédral », « groupe de Weyl » sont les nôtres --- la notation $W_{n}$ est
+la sienne ; pour les groupes de Weyl dans ces dossiers, voir le dossier 88.
+$\sigma_{n}$ est une lecture incertaine.} En marge, la même chose en termes
+d'une épure quelconque : $E = \operatorname{Hom}_{\{\pm 1\}}(B, \mathbf{R})$ et
+$C = \{\lambda \mid |\lambda(b)| \leq 1 \ \forall b \in B\}$.
+
+\textbf{Corollaires.} Le groupoïde des $n$-cubes convexes est équivalent à
+celui des épures de $n$-cubes ; le groupoïde des $n$-cubes convexes orientés est
+équivalent à celui des épures de $n$-cubes orientées.
+
+Les deux groupoïdes sont connexes, et leurs groupes d'automorphismes sont
+$W_{n}$ et $\operatorname{Aut}(B_{n}, \sigma_{n})$, identifiés par la
+proposition. Pour les objets orientés, le sous-groupe des rotations du cube
+correspond au sous-groupe des automorphismes de l'épure qui opèrent
+trivialement sur $\omega_{I} \wedge \bigwedge_{i} B_{i}$ : le déterminant d'une
+permutation signée est le produit de la signature de la permutation et des
+signes.
+
+\pagerange{27}{30}
+\section*{III. Facettes, seconde rédaction, et polyèdres combinatoires (pages 27 à 30)}
+
+\pagerange{27}{29}
+\subsection*{Les facettes reprises (pages 27 à 29)}
+
+La page 27 reprend la définition des facettes d'un convexe $C$ d'un espace
+vectoriel réel, cette fois comme parties \emph{non vides}. Le critère qu'elle
+écrit --- tout intervalle ouvert contenu dans $C$ qui rencontre $F$ est contenu
+dans $F$ --- caractérise les réunions de facettes ; les facettes sont les plus
+petites parties non vides qui le vérifient, et ce sont les classes de la
+relation
+\[
+  R(x,y) : \ x = y \ \text{ou} \ x \text{ et } y \text{ sont dans un même
+  intervalle ouvert contenu dans } C,
+\]
+la relation de la page 3. La réflexivité et la symétrie sont évidentes, la
+transitivité facile, et l'on obtient que $C$ est la réunion disjointe de ses
+facettes, qui sont convexes, la facette de $x$ étant la classe de
+$x$.\footnote{La première rédaction de la définition, entre crochets, est
+encadrée et barrée. Dans la seconde, la page écrit « si $x$ est une extrémité de
+$C \cap D_{xy}$ (i.e. s'il existe $x', y'$ \ldots{} tels que $x, y$ soient
+intérieurs entre $x'$ et $y'$) » : la parenthèse dit le contraire de ce qui
+précède, et c'est elle qu'on suit. Telle quelle, la définition admettrait
+toute réunion de facettes ; la fin de la page, « l'ens. des $y$ tels que
+$R(x,y)$ est l'unique facette qui contient $x$ », montre que ce sont les classes
+qui sont visées. Un croquis de triangle illustre la transitivité.}
+
+\textbf{Proposition.} Soit $C$ un polyèdre convexe, c'est-à-dire un convexe
+réunion finie d'enveloppes convexes de parties finies. Alors :
+\begin{enumerate}
+\item[(1)] l'ensemble des facettes est fini ;
+\item[(2)] il existe une unique facette maximale, l'intérieur de $C$ dans le
+sous-espace affine qu'il engendre ;
+\item[(3)] pour toute facette $F$, $\overline{F}$ est une réunion de facettes, et
+$F$ est l'unique facette contenue dans $\overline{F}$ de dimension maximale ;
+\item[(4)] si $\dim F = d \geq 1$, $\overline{F}$ contient une facette de
+dimension $d - 1$ ; et $\overline{F} = \overline{F'}$ entraîne $F = F'$ ;
+\item[(5)] $C$ est l'enveloppe convexe de la réunion des facettes minimales,
+c'est-à-dire de ses points extrémaux.
+\end{enumerate}
+Ce sont les propriétés de la page 3, pour un polytope.\footnote{Les numéros sont entourés sur la page. L'article (6), comme la fin de
+(5), est écrit en oblique dans un coin et ne se lit pas au-delà de quelques
+mots. En (4), la page écrit « si $\dim F = d$ » ; la facette vide étant exclue
+dans cette rédaction, il faut $d \geq 1$. Une marge propose « ou encore : int. \emph{finie} de demi-espaces
+fermés » comme autre définition de polyèdre ; c'est celle des secteurs
+polyédraux de la page 10, et elle ne convient qu'avec la compacité : une droite
+entière est une intersection finie (vide) de demi-espaces, et ne vérifie ni
+(4) ni (5).}
+
+\emph{Les facettes fermées (page 28).} Soient $C$ polyédral de dimension $d$,
+$A_{C}$ le sous-espace affine qu'il engendre, $C^{0}$ son intérieur dans
+$A_{C}$ --- la facette maximale ---, de sorte que $C = \overline{C^{0}}$. Les
+autres facettes fermées sont les $H \cap C$, $H$ hyperplan de $A_{C}$ ne
+rencontrant pas $C^{0}$ ; celles de dimension $d - 1$ correspondent
+bijectivement aux $H$ tels que $H \cap C$ soit d'intérieur non vide dans $H$, et
+ces intérieurs sont les facettes de dimension $d - 1$. Soit $C^{1}$ leur
+réunion, et ainsi de suite. Toute facette fermée de dimension $\leq d - i$ est
+de la forme $L \cap C$, $L$ sous-espace affine de $A_{C}$ de dimension $d - i$ ne
+rencontrant pas $C^{0} \cup \cdots \cup C^{i-1}$ ; et parmi ces $L$, ceux pour
+lesquels $L \cap C$ est d'intérieur non vide dans $L$ correspondent
+bijectivement aux facettes de dimension $d - i$, qui sont ces
+intérieurs.\footnote{La page affirme que les facettes fermées de dimension
+$\leq d - i$ \emph{sont} les $L \cap C$ ; pour $i \geq 2$, la réciproque est
+fausse. Dans un cube de dimension 3, une droite qui passe par le milieu d'une
+arête, transversalement et hors du cube, ne rencontre ni l'intérieur ni les
+faces carrées ouvertes, et coupe le cube en un point qui n'est pas un sommet.
+La correspondance avec les facettes de dimension exactement $d - i$, elle, est
+juste. On note $L$ ce que la page note $F$, réservé ici aux facettes.}
+
+L'intersection de deux facettes fermées est une facette fermée, et :
+
+\textbf{Proposition.} Les facettes fermées de $C$ sont les réunions de facettes
+qui sont convexes et fermées.
+
+C'est l'énoncé (6) de la page 4. La page 29 rassemble : pour une facette $F$,
+\begin{enumerate}
+\item[a)] $F = \operatorname{int}_{A_{F}} \overline{F}$ et $\overline{F} = A_{F}
+\cap C$, où $A_{F} = A_{\overline{F}}$ ;
+\item[b)] une partie $F' \subset C$ est une facette de $\overline{F}$ si et
+seulement si c'est une facette de $C$ contenue dans $\overline{F}$ ;
+\item[c)] $K \subset C$ est une facette fermée si et seulement si $K$ est
+convexe, fermé, et réunion de facettes --- d'où la stabilité par intersection ;
+\item[d)] soit $\Pi = \mathrm{Fac}(C)$, facette vide comprise. Alors 1° l'ensemble
+ordonné opposé $\Pi^{\circ}$ est isomorphe à $\mathrm{Fac}(C')$ pour un polyèdre
+convexe $C'$ de même dimension ; 2° pour $F' < F''$ dans $\Pi$, l'intervalle
+$\Pi_{F',F''}$ est isomorphe à $\mathrm{Fac}(K)$ pour un polyèdre convexe $K$ de
+dimension $\dim F'' - \dim F' - 1$.
+\end{enumerate}
+Ce sont les corollaires 2 et 3 des pages 11 et 12.\footnote{En b), la page écrit « facette de $F$ » pour « facette de
+$\overline{F}$ ». En d), elle écrit « partie polyédrale » pour $C'$, et
+« $\Pi_{F}$ » pour $\Pi_{F',F''}$. La facette vide, exclue page 27, doit être
+comptée pour que 1° et 2° soient vrais : sans elle, $\Pi$ n'a pas de plus petit
+élément et $\Pi^{\circ}$ pas de plus grand. Ce sont les corollaires 2 et 3 des
+pages 11 et 12.}
+
+\textbf{Corollaire.} Si $\dim F'' - \dim F' = 2$, il y a exactement deux
+facettes $F$ telles que $F' < F < F''$ --- le losange du corollaire 7 de la
+page 14.
+
+\pagerange{29}{30}
+\subsection*{Le polyèdre combinatoire : axiomes et recensement (pages 29 et 30)}
+
+\textbf{Définition.} Un \emph{polyèdre combinatoire} est un ensemble ordonné fini
+$\Pi$ qui vérifie :
+\begin{enumerate}
+\item[a)] $\Pi$ est un treillis : il a un plus petit et un plus grand élément,
+et deux éléments ont une borne inférieure et une borne supérieure ;
+\item[b)] $\Pi$ vérifie la condition des chaînes : deux chaînes maximales entre
+deux mêmes éléments ont même longueur ;
+\item[c)] si $i < j < k$, $j$ successeur de $i$ et $k$ successeur de $j$, il
+existe $j' \neq j$ tel que $j'$ soit successeur de $i$ et $k$ successeur de
+$j'$.
+\end{enumerate}
+La condition b) est la condition de Jordan--Dedekind.\footnote{La lecture de b) comme condition de Jordan--Dedekind, c'est-à-dire
+comme graduation, est la nôtre ; c'est elle qu'utilise le recensement. Un petit
+croquis en marge montre quatre segments issus d'un point, dans un cercle.}
+
+Le recensement qui suit demande davantage que c) : il faut que $j'$ soit
+\emph{unique}, c'est-à-dire qu'un intervalle de longueur 2 ait exactement deux
+éléments intermédiaires --- le losange de la page 14, et la condition
+($\Sigma$) de la page 39. Avec c) seul, un polyèdre combinatoire de dimension 1
+pourrait avoir trois éléments incomparables ou plus entre $0$ et $1$. On lit
+donc c) sous cette forme forte.\footnote{La page écrit « il existe $j'$ »,
+sans unicité, et compte aussitôt « quatre éléments » en dimension 1.}
+
+Il en résulte : d) tout élément $i$ de dimension $\geq 1$ est la borne
+supérieure des éléments qui lui sont strictement inférieurs, et dualement tout
+élément de codimension $\geq 2$ est la borne inférieure des éléments qui lui
+sont strictement supérieurs. En effet, si $s = \sup\{j \mid j < i\}$ était
+$< i$, $s$ serait l'unique prédécesseur de $i$, et, $s$ n'étant pas $0$, c) appliqué
+à un prédécesseur de $s$ fournirait un second prédécesseur de
+$i$.\footnote{La page énonce d) pour « $i$ non minimal » et « $i$ non
+maximal », ajouts qui remplacent une incise biffée ; une flèche la relie à c).
+Pour un sommet (successeur de $0$), les éléments strictement inférieurs se
+réduisent à $0$, dont la borne supérieure n'est pas le sommet : il faut
+exclure les sommets, et dualement les éléments dont $1$ est successeur.}
+
+\emph{Recensement}, la dimension étant celle de $1$, avec $\dim 0 = -1$ :
+\begin{itemize}
+\item dimension $-1$ : un seul élément, $0 = 1$ ;
+\item dimension $0$ : deux éléments, $0 \neq 1$ ;
+\item dimension $1$ : quatre éléments, $0$, $1$ et deux éléments incomparables
+$x$, $y$ --- le segment ;
+\item dimension $2$ : $0$, des sommets, des arêtes, $1$ ; les sommets et les
+arêtes forment un « contour » --- chaque sommet sur deux arêtes, chaque arête
+sur deux sommets --- dont les composantes connexes ont au moins trois sommets ;
+\item dimension $3$ : $0$, sommets, arêtes, faces, $1$. On voudrait que, pour un
+sommet $x$, les éléments $y > x$, $y \neq 1$, forment un polygone, c'est-à-dire un
+contour connexe, et de même, pour une face $x$, les éléments $y < x$,
+$y \neq 0$ ;
+\item dimension $4$ : le titre seul.
+\end{itemize}
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  & 1 & \\
+  x \arrow[ur, no head] & & y \arrow[ul, no head] \\
+  & 0 \arrow[ul, no head] \arrow[ur, no head] &
+\end{tikzcd}
+
+En dimension 2, les axiomes interdisent le digone --- deux sommets sur les deux
+mêmes arêtes n'auraient pas de borne supérieure --- mais pas la réunion
+disjointe de deux triangles : celle-ci est un polyèdre combinatoire qui n'est
+l'ensemble des facettes d'aucun polyèdre convexe, et c'est ce qui sépare cette
+notion de celle de polyèdre combinatoire strict. Les contours sont les
+polygones combinatoires du dossier 89 (pages 19 et 20), non nécessairement
+connexes.\footnote{À droite de la page, un hexagone dont un sommet est marqué et
+un pentagone. Pour la dimension 3, la page écrit « un contour \emph{convexe} »
+pour les éléments au-dessus d'un sommet, puis « un \emph{contour} » suivi de
+« ($\pi_{0} = 0$) », lecture incertaine ; c'est la connexité que demandent les
+conditions c) et c') de la page 32, et on l'écrit.}
+
+\pagerange{32}{36}
+\section*{IV. La dimension 2 : cartes lisses combinatoires (pages 32 à 36)}
+
+\pagerange{32}{33}
+\subsection*{Drapeaux et involutions (pages 32 et 33)}
+
+Les pages 32 à 36 étudient un polyèdre combinatoire de dimension 3 par son
+bord : les ensembles $S = \mathfrak{X}_{0}$ des sommets, $A = \mathfrak{X}_{1}$
+des arêtes, $F = \mathfrak{X}_{2}$ des faces, et les incidences
+$\vec{A} \subset S \times A$ (les « arcs tangents », un sommet et une arête qui
+en part) et $A^{\uparrow} \subset A \times F$ (les « arcs transverses », une
+arête et une face qu'elle borde).
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  & \vec{A} \arrow[dl] \arrow[dr] & & A^{\uparrow} \arrow[dl] \arrow[dr] & \\
+  S & & A & & F
+\end{tikzcd}
+
+Les axiomes :
+\begin{enumerate}
+\item[a)] $\vec{A} \to A$ est un revêtement à deux feuillets : toute arête a deux
+extrémités ;
+\item[a')] $A^{\uparrow} \to A$ est un revêtement à deux feuillets : toute arête
+borde deux faces ;
+\item[b)] l'application $\mathrm{Dr} = \vec{A} \times_{A} A^{\uparrow} \to S \times
+F$ est à deux feuillets sur son image : entre un sommet et une face incidents,
+il y a exactement deux arêtes ;
+\item[c)] pour $s \in S$, l'ensemble $\mathfrak{X}_{\geq s}$ des arêtes et des
+faces incidentes à $s$ --- un graphe, de sommets les arêtes et d'arêtes les
+faces grâce à b), et un contour grâce à a') --- est un polygone, c'est-à-dire un
+contour non vide et connexe ;
+\item[c')] dualement, pour $f \in F$, l'ensemble $\mathfrak{X}_{\leq f}$ des
+sommets et des arêtes incidents à $f$ est un polygone.
+\end{enumerate}
+
+\emph{Version commune.} Adjoignons $\mathfrak{X}_{-1} = \{0\}$ et
+$\mathfrak{X}_{3} = \{1\}$. Les axiomes disent alors : pour $-1 \leq i < j \leq
+3$, $j - i \geq 2$, $(i,j) \neq (-1, 3)$, $x \in \mathfrak{X}_{i}$,
+$y \in \mathfrak{X}_{j}$, $x < y$, la réalisation topologique de l'intervalle
+ouvert $\mathfrak{X}_{x < \cdot < y}$ est homéomorphe à la sphère
+$S^{\,j - i - 2}$ --- deux points pour $j - i = 2$, un cercle pour
+$j - i = 3$.\footnote{La page écrit $S^{\delta - 1}$, $\delta = j - i$ ; c'est
+$S^{\delta - 2}$ : entre $0$ et une arête, $\delta = 2$, il y a deux sommets,
+soit $S^{0}$. La formule de la page 38, $\delta(y) - \delta(x) - 2$, est la
+bonne. « $\delta =$ » est entouré sur la page ; l'indice de $\mathfrak{X}$ est lu
+d'après la définition qui le suit.} Le cas exclu $(-1, 3)$ est le bord tout
+entier, qui n'est pas supposé être une sphère : les conditions disent que sa
+réalisation est une surface fermée, sans point singulier --- d'où, peut-on
+penser, le mot « lisse ». La page annonce que cela se généralise « aux polyèdres
+lisses de dimension quelconque ».\footnote{L'interprétation de « lisse » est la
+nôtre.}
+
+\emph{Les involutions.} Par a), a') et b), un drapeau $(s, a, f)$ a un unique
+voisin qui ne diffère que par le sommet, par la face, par l'arête ; d'où trois
+involutions sans point fixe de $\mathrm{Dr}$, $\sigma_{1}$ (changer le sommet),
+$\sigma_{2}$ (changer la face) et $\varepsilon$ (changer l'arête), avec
+$\sigma_{1}\sigma_{2} = \sigma_{2}\sigma_{1} =: \sigma$, elle aussi sans point
+fixe. Les conditions c) et c') assurent que $S$ et $F$ sont bien les sommets et
+les faces de la carte ainsi définie sur l'ensemble $\mathrm{Dr}$.\footnote{Ce
+sont les opérations $\sigma_{0}$, $\sigma_{1}$, $\sigma_{2}$ du dossier 88
+(page 10) et de l'\emph{Esquisse d'un programme} : $\sigma_{1}$, $\varepsilon$,
+$\sigma_{2}$ ici sont respectivement $\sigma_{0}$, $\sigma_{1}$, $\sigma_{2}$
+là, et la relation $\sigma_{1}\sigma_{2} = \sigma_{2}\sigma_{1}$ est
+$(\sigma_{0}\sigma_{2})^{2} = 1$. Le dictionnaire est le nôtre ; la page ne dit
+pas laquelle des trois opérations change quoi, et on le lit sur les flèches
+étiquetées du diagramme de la page 33.}
+
+Soient $\rho_{s} = \varepsilon\sigma_{2}$ et $\rho_{f} = \sigma_{1}\varepsilon$,
+les rotations autour d'un sommet et d'une face. On trouve (page 33) :
+\begin{itemize}
+\item $\widetilde{S} = \mathrm{Dr}/\langle\rho_{s}\rangle$, l'ensemble des
+couples $(s, \omega)$, $s \in S$, $\omega$ l'un des deux ordres circulaires sur
+les arêtes issues de $s$ qui définissent la structure de polygone de
+$\mathfrak{X}_{\geq s}$ --- les \emph{sommets orientés} ;
+\item $\widetilde{F} = \mathrm{Dr}/\langle\rho_{f}\rangle$, de même, les
+\emph{faces orientées} ;
+\item $\widetilde{A} = \mathrm{Dr}/\sigma$, l'ensemble des couples $(a, u)$,
+$a \in A$, $u \in \vec{A}(a) \wedge A^{\uparrow}(a)$, où $\vec{A}(a)$ et
+$A^{\uparrow}(a)$ sont les ensembles à deux éléments des arcs tangents et
+transverses portés par $a$ --- les \emph{arêtes orientées}, au sens d'une
+orientation locale de la surface le long de $a$.
+\end{itemize}
+Ce sont des revêtements doubles de $S$, $F$ et $A$.\footnote{La page note les quotients $A^{\llcorner\!\to}/\rho_{s}$ et
+$A^{\llcorner\!\to}/\rho_{f}$ sans définir $\rho_{s}$, $\rho_{f}$ ; on les prend au
+sens du dossier 88 et de l'\emph{Esquisse}. « Portés » est une lecture
+incertaine.} Soit enfin $A^{\wedge} = \operatorname{Im}(\mathrm{Dr} \to S \times
+F)$, la relation d'incidence entre sommets et faces --- les coins.
+
+\begin{tikzcd}[column sep=large, row sep=large, nodes={font=\scriptsize}]
+  & & \mathrm{Dr} \arrow[dll, "\rho_{s}"'] \arrow[dl, "\sigma_{2}"'] \arrow[d, "\sigma"] \arrow[dr, "\sigma_{1}"] \arrow[drr, "\rho_{f}"] & & \\
+  \widetilde{S} \arrow[d, "\sigma_{2}"'] & \vec{A} \arrow[dl] \arrow[dr, "\sigma_{1}"] & \widetilde{A} & A^{\uparrow} \arrow[dl, "\sigma_{2}"'] \arrow[dr] & \widetilde{F} \arrow[d, "\sigma_{1}"] \\
+  S & & A & & F
+\end{tikzcd}
+
+Chaque flèche étiquetée est le quotient par l'involution, ou le groupe, qui la
+porte.\footnote{Sur la page, la flèche $\widetilde{S} \to S$ porte $\sigma_{1}$
+et la flèche $\widetilde{F} \to F$ porte $\sigma_{2}$. Avec le sens que les
+quatre autres flèches étiquetées donnent à $\sigma_{1}$ (changer le sommet) et
+à $\sigma_{2}$ (changer la face), ce n'est pas possible : le passage de
+$\widetilde{S}$ à $S$ oublie l'orientation en un sommet fixé, que renverse
+$\sigma_{2}$ ou $\varepsilon$, non $\sigma_{1}$, qui change le sommet. On
+échange les deux étiquettes. Le $\sigma_{2}$ de la flèche
+$\mathrm{Dr} \to \vec{A}$ est lui-même une lecture incertaine. Sous
+$\widetilde{A}$ la page écrit « $\sigma_{1} \updownarrow \sigma_{2}$ », sans
+flèche vers $A$, et on n'en ajoute pas.}
+
+\begin{tikzcd}[column sep=normal, row sep=normal]
+  & \mathrm{Dr} \arrow[dl] \arrow[d] \arrow[dr] & \\
+  \widetilde{S} \arrow[d] & A^{\wedge} \arrow[dl] \arrow[dr] & \widetilde{F} \arrow[d] \\
+  S & & F
+\end{tikzcd}
+
+Un drapeau se projette ainsi sur un sommet orienté, un coin et une face orientée.\footnote{Le trait de $\widetilde{F}$ à $F$ n'a pas de pointe sur la page ; c'est
+la projection, comme à gauche.}
+
+On a des isomorphismes canoniques
+\[
+  \mathrm{Dr} \simeq \widetilde{S} \times_{S} \vec{A} \simeq A^{\uparrow}
+  \times_{F} \widetilde{F} \simeq \vec{A} \times_{A} A^{\uparrow} \simeq \vec{A}
+  \times_{A} \widetilde{A} \simeq \widetilde{A} \times_{A} A^{\uparrow} \simeq
+  \widetilde{S} \times_{S} A^{\wedge} \simeq A^{\wedge} \times_{F} \widetilde{F}.
+\]
+Par exemple, un sommet orienté et une arête qui en part déterminent la face qui
+suit l'arête dans l'orientation ; un coin $(s, f)$ et une orientation en $s$
+déterminent celle des deux arêtes du coin qui vient la première. Un drapeau
+est ainsi la même chose qu'un système d'incidences compatibles entre sommet,
+arête et face orientés.
+
+\pagerange{34}{35}
+\subsection*{L'axiome D (pages 34 et 35)}
+
+\textbf{Axiome D.} Toute partie non vide minorée de $\mathfrak{X}_{**} =
+\mathfrak{X}_{0} \cup \mathfrak{X}_{1} \cup \mathfrak{X}_{2}$ a une borne
+inférieure ; de façon équivalente (lemme ci-dessous), toute partie non vide
+majorée a une borne supérieure. C'est dire que $\mathfrak{X}$, augmenté de $0$
+et de $1$, est un treillis : l'axiome a) de la page 29.
+
+L'ensemble étant fini, il suffit que deux éléments minorés aient une borne
+inférieure. C'est automatique si l'un est un sommet, ou s'ils sont
+comparables. Restent trois cas.
+\begin{enumerate}
+\item[1°)] \emph{Deux arêtes} ayant un sommet commun : elles n'en ont qu'un, ou
+sont égales ; le graphe $(S, A)$ est simple.
+\item[2°)] \emph{Deux faces} distinctes ayant un sommet commun : leurs minorants
+communs ont un plus grand élément, c'est-à-dire qu'elles ont en commun soit un
+seul sommet et aucune arête, soit une seule arête et ses seules extrémités.
+\item[3°)] \emph{Une arête $a$ et une face $f$} non incidentes ayant un sommet
+commun : la seconde extrémité de $a$ n'est pas dans $f$ ; autrement dit, une
+face incidente aux deux extrémités d'une arête est incidente à l'arête.
+\end{enumerate}
+
+Regroupés, ces cas donnent les quatre conditions de la page :
+\begin{enumerate}
+\item[d$_{1}$)] une arête est déterminée par l'ensemble de ses extrémités ;
+\item[d$_{2}$)] une face qui contient les deux extrémités d'une arête contient
+celle-ci ;
+\item[d$'_{1}$)] une arête est déterminée par l'ensemble de ses deux faces ;
+\item[d$'_{2}$)] les deux faces d'une arête n'ont pas d'autre sommet commun que
+ses extrémités ;
+\end{enumerate}
+d$_{1}$) et d$_{2}$) disent que toute arête est la borne supérieure de ses deux
+extrémités, d$'_{1}$) et d$'_{2}$) qu'elle est la borne inférieure de ses deux
+faces. À quoi il faut ajouter la partie du cas 2° que ces quatre conditions ne
+couvrent pas :
+\begin{enumerate}
+\item[d$_{3}$)] deux faces distinctes qui ont deux sommets communs ont une arête
+commune.
+\end{enumerate}
+L'axiome D équivaut à d$_{1}$), d$_{2}$), d$'_{1}$), d$'_{2}$) et
+d$_{3}$).\footnote{La page arrête la liste à d$'_{2}$), et la page 36 appelle
+« $D = $ d) + d') » leur conjonction. La condition d$_{3}$) n'en découle pas : sur
+le tore $\mathbf{R}^{2}/\Lambda$, $\Lambda$ engendré par $(2,2)$ et $(3,-3)$,
+le quadrillage entier donne une carte de 12 sommets, 24 arêtes et 12 faces
+carrées qui vérifie a) à c') et les quatre conditions de la page, mais où les
+carrés de coins $(0,0)$ et $(1,1)$ ont en commun les sommets $(1,1)$ et
+$(2,2) \equiv (0,0)$, sans arête commune ; ces deux faces n'ont pas de borne
+inférieure. (Vérification de l'édition, faite par un calcul.) Le cas 2° de la
+page dit d'ailleurs, en partie illisible, que deux faces « qui ont en commun deux
+sommets » les ont « liés par l'arête qui les joint » : c'est d$_{3}$), que le
+regroupement a perdu. Le paragraphe qui précède les trois cas est encadré et
+barré ; il réduisait D à « au moins trois arêtes en chaque sommet ».}
+
+\textbf{Lemme (page 35).} Soient $\mathfrak{X}$ un ensemble ordonné, $A \subset
+\mathfrak{X}$, et $B$ l'ensemble des majorants de $A$. Par définition,
+$\sup A$ existe si et seulement si $B$ a un plus petit élément.
+\begin{enumerate}
+\item[1.] Si $A$ a un plus grand élément $\alpha$, $\sup A = \alpha$.
+\item[2.] $\sup A$ existe si et seulement si $\inf B$ existe, et alors $\inf B =
+\sup A$.
+\end{enumerate}
+La nécessité vient de 1, dualisé. Pour la suffisance, soit $\widetilde{A}$
+l'ensemble des minorants de $B$ ; $A \subset \widetilde{A}$, et
+$\alpha = \inf B$ est le plus grand élément de $\widetilde{A}$ ; il majore
+$\widetilde{A}$, donc $A$, donc $\alpha \in B$, et il minore $B$ : c'est le plus
+petit élément de $B$.\footnote{« néc. » est une lecture incertaine. Pour
+$A = \emptyset$, $B = \mathfrak{X}$, et $\sup \emptyset$ existe si et seulement
+si $\mathfrak{X}$ a un plus petit élément, comme la page le note.}
+
+\textbf{Corollaire.} Pour que toute partie minorée non vide de $\mathfrak{X}$
+ait une borne inférieure, il faut et il suffit que toute partie majorée non vide
+ait une borne supérieure. (Si $A$ est non vide et majorée, $B$ est non vide et
+minorée par les éléments de $A$.)
+
+\pagerange{36}{36}
+\subsection*{Conséquences de l'axiome D (page 36)}
+
+\textbf{Corollaire 1.} Sous l'axiome D, tout sommet est extrémité d'au moins
+trois arêtes, et toute face a au moins trois arêtes.
+
+Soit $p(s)$ le nombre d'arêtes issues de $s$. Par c), $p(s) \neq 0$. Si
+$p(s) = 1$, il n'y aurait entre $s$ et une face incidente qu'une arête, contre
+b). Si $p(s) = 2$, les deux arêtes issues de $s$ seraient incidentes aux deux
+mêmes faces, contre d$'_{1}$). De même pour les faces. L'inégalité $p(s) \geq 2$
+ne dépend pas de D.
+
+\textbf{Corollaire 2.} Sous l'axiome D, toute face est la borne supérieure de
+l'ensemble de ses sommets, et de celui de ses arêtes ; tout sommet est la borne
+inférieure de l'ensemble des faces qui y aboutissent, et de celui des arêtes
+qui en partent.\footnote{Ces deux corollaires n'utilisent que d$_{1}$),
+d$_{2}$), d$'_{1}$), d$'_{2}$) : une autre face contenant les sommets d'une face
+$f$, au moins trois, en contiendrait les arêtes par d$_{2}$), et partagerait avec
+$f$ au moins trois arêtes, contre d$'_{1}$). La démonstration est la nôtre ; la
+page n'en donne pas pour le corollaire 2.}
+
+\pagerange{37}{38}
+\section*{V. Ensembles ordonnés à intervalles sphériques (pages 37 et 38)}
+
+Soit $\mathfrak{X}$ un ensemble ordonné fini, sans hypothèse de plus petit ou de
+plus grand élément, et $|\mathfrak{X}|$ sa réalisation topologique --- le
+complexe simplicial des chaînes ---, avec sa décomposition canonique en les
+parties fermées $|\mathfrak{X}_{\leq x}|$, qui identifie $\mathfrak{X}$ à un
+ensemble ordonné de parties fermées recouvrant $|\mathfrak{X}|$. Hypothèse :
+
+(R) pour tout $x \in \mathfrak{X}$, $|\mathfrak{X}_{< x}|$ est une sphère
+topologique,
+
+l'espace vide comptant pour la sphère de dimension $-1$. Posons
+$\delta(x) = \dim |\mathfrak{X}_{<x}| + 1 = \dim |\mathfrak{X}_{\leq x}|$, la
+seconde réalisation étant le cône sur la première.\footnote{(R) est la
+condition qui définit aujourd'hui les ensembles ordonnés CW de Björner (1984),
+ensembles des cellules des complexes CW réguliers, $|\mathfrak{X}_{\leq x}|$
+étant alors une boule. Le nom est le nôtre.}
+
+\textbf{Proposition.} $\delta$ est strictement croissante, et
+$\delta(y) = \delta(x) + 1$ si et seulement si $y$ est un successeur de $x$.
+
+Si $x < y$, $|\mathfrak{X}_{\leq x}| \subset |\mathfrak{X}_{<y}|$, d'où
+$\delta(x) < \delta(y)$ ; il en résulte que $\delta(y) = \delta(x) + 1$ force $y$
+à être un successeur de $x$. Inversement, si $y$ est un successeur de $x$, $x$ est
+un élément maximal de $\mathfrak{X}_{<y}$ ; une chaîne maximale de
+$\mathfrak{X}_{\leq x}$ est alors une chaîne maximale de $\mathfrak{X}_{<y}$, donc
+un simplexe maximal de la sphère $|\mathfrak{X}_{<y}|$, de dimension
+$d = \delta(y) - 1$ ; il est contenu dans $|\mathfrak{X}_{\leq x}|$, d'où
+$\delta(x) \geq d$, et $\delta(x) = \delta(y) - 1$. L'argument n'utilise que la
+pureté des triangulations des variétés topologiques : il suffit que
+$|\mathfrak{X}_{<y}|$ soit une variété.\footnote{La page conclut de même entre
+crochets, avec en marge « vérifier en général pour variété » ; la vérification
+est faite : une variété topologique triangulée est pure, par l'invariance du
+domaine.}
+
+\textbf{Corollaire.} Sous (R), $\mathfrak{X}$ vérifie la condition des chaînes,
+et $\delta$ est l'unique fonction $\mathfrak{X} \to \mathbf{N}$ qui augmente de 1
+d'un élément à un successeur et vaut $0$ sur les éléments minimaux.
+
+\textbf{Proposition.} Sous (R), pour $x < y$, la réalisation de l'intervalle
+ouvert $\mathfrak{X}_{x < \cdot < y}$ a l'homologie d'une sphère de dimension
+$\delta(y) - \delta(x) - 2$.
+
+Elle résulte du
+
+\textbf{Lemme.} Soit $\mathfrak{Y}$ un ensemble ordonné fini dont la
+réalisation est une variété topologique de dimension $d$. Pour tous $z < x$ de
+$\mathfrak{Y}$, $|\mathfrak{Y}_{>x}|$, $|\mathfrak{Y}_{<x}|$ et
+$|\mathfrak{Y}_{z < \cdot < x}|$ ont l'homologie de sphères de dimensions
+respectives $d - \delta(x) - 1$, $\delta(x) - 1$ et $\delta(x) - \delta(z) - 2$.
+
+En effet, le link du sommet $x$ dans le complexe des chaînes est le joint
+$|\mathfrak{Y}_{<x}| * |\mathfrak{Y}_{>x}|$, qui a l'homologie d'une sphère de
+dimension $d - 1$, et un joint n'a l'homologie d'une sphère que si ses deux
+facteurs l'ont ; on applique ensuite le lemme à $\mathfrak{Y} = \mathfrak{X}_{<y}$,
+de dimension $\delta(y) - 1$. L'énoncé en sphères topologiques, celui de la
+page, demande davantage.\footnote{La page énonce la proposition et le lemme avec « sphère
+topologique », sans démonstration du lemme, et donne pour $|\mathfrak{Y}_{>x}|$
+la dimension $d - \delta(x) - 2$ : c'est $d - \delta(x) - 1$ (sur le bord d'un
+triangle, $d = 1$, un sommet est sous deux arêtes, soit $S^{0}$). Surtout,
+l'énoncé avec des sphères topologiques est faux en général. Par le théorème de
+la double suspension (Edwards, Cannon, années 1970), la double suspension
+$\Sigma^{2} P$ d'une sphère d'homologie $P$ de dimension 3 non simplement
+connexe est homéomorphe à $S^{5}$ ; si l'on triangule $\Sigma^{2} P$, et qu'on
+prend pour $\mathfrak{X}$ l'ensemble de ses simplexes augmenté d'un plus grand
+élément, (R) est vérifiée, mais l'intervalle ouvert entre un point de
+suspension et le plus grand élément se réalise en $\Sigma P$, qui n'est pas une
+variété. Ce qui reste vrai est l'énoncé en homologie, écrit ici, ou l'énoncé
+avec des sphères pour les ensembles de facettes de polyèdres convexes, dont les
+intervalles sont encore de tels ensembles (corollaire 3 de la page 12), et dans
+les petites dimensions de la page 32. La démonstration du lemme est la nôtre.}
+
+\pagerange{39}{40}
+\section*{VI. Le losange et les repères (pages 39 et 40)}
+
+Soit $\mathfrak{X}$ un ensemble ordonné fini, et $\overline{\mathfrak{X}}$
+l'ensemble obtenu en lui adjoignant un plus petit élément. On suppose :
+
+($\Sigma$) Si $x \in \overline{\mathfrak{X}}$, $y$ est un successeur de $x$ et $z$
+un successeur de $y$, il existe un unique $y' \in \mathfrak{X}$, $y' \neq y$, tel
+que $x < y' < z$.
+
+C'est la propriété du losange, sous sa forme forte : l'intervalle ouvert
+$]x, z[$ est exactement $\{y, y'\}$.\footnote{Deux lignes et demie barrées
+suivent l'énoncé, avec un ajout interlinéaire lui-même barré. Les ensembles
+ordonnés gradués dont tous les intervalles de longueur 2 sont des losanges sont
+appelés aujourd'hui \emph{minces} (Björner) ; le mot est le nôtre.} L'élément
+$y'$, noté $\sigma_{x,z}(y)$, est un successeur de $x$, et $z$ en est un
+successeur : si l'on avait $x < y'' < y'$, on aurait $x < y'' < z$ et
+$y'' \neq y'$, donc $y'' = y$, et $y < y' < z$, contre l'hypothèse que $z$ est
+un successeur de $y$ ; de même de l'autre côté.
+
+\begin{tikzcd}[column sep=small, row sep=small]
+  & y' \arrow[dr] & \\
+  x \arrow[ur] \arrow[dr] & & z \\
+  & y \arrow[ur] &
+\end{tikzcd}
+
+\emph{Repères.} Supposons de plus que les chaînes maximales issues d'un même
+élément aient toutes même longueur.\footnote{Hypothèse écrite en long dans la
+marge gauche ; « issues de $x$ » est une lecture incertaine.} Un
+\emph{$n$-repère} de $\mathfrak{X}$ est une suite $x_{0}, x_{1}, \ldots, x_{n}$
+où $x_{0}$ est un élément minimal et $x_{i+1}$ un successeur de $x_{i}$ ; soit
+$R_{n}(\mathfrak{X})$ leur ensemble --- ce sont des drapeaux. On a :
+\begin{enumerate}
+\item[a)] l'application d'oubli $p_{n} : R_{n} \to R_{n-1}$, pour $n \geq 1$ ;
+\item[b)] des opérations $\sigma_{0}, \ldots, \sigma_{n-1}$ sur $R_{n}$, où
+$\sigma_{i}$ remplace $x_{i}$ par $\sigma_{x_{i-1}, x_{i+1}}(x_{i})$, avec la
+convention que $x_{-1}$ est l'élément adjoint.
+\end{enumerate}
+Ce sont des drapeaux munis de leurs opérations élémentaires.\footnote{La définition de $\sigma_{i}$ n'est pas écrite sur la page ; c'est la
+seule que ($\Sigma$) permette, et c'est elle qui rend nécessaire l'élément
+adjoint de $\overline{\mathfrak{X}}$, pour $\sigma_{0}$.}
+
+\textbf{Propositions.}
+\begin{enumerate}
+\item[a)] Les $\sigma_{i}$ sont des involutions.
+\item[b)] Si $0 \leq i < j \leq n - 1$ et $j \neq i + 1$, $\sigma_{i}$ et
+$\sigma_{j}$ commutent.
+\item[c)] Si $0 \leq i_{1} < \cdots < i_{\nu} \leq n - 1$, $\nu \geq 1$, sans deux
+indices consécutifs, l'involution $\sigma_{i_{1}} \cdots \sigma_{i_{\nu}}$ est
+sans point fixe.
+\item[d)] Pour $p < n$, la projection $R_{n} \to R_{p}$ commute à
+$\sigma_{0}, \ldots, \sigma_{p-1}$, et rend $\sigma_{p+1}, \ldots, \sigma_{n-1}$
+triviales sur $R_{p}$.
+\end{enumerate}
+Ces énoncés sont ceux de la page.\footnote{En b), la page suppose $n \geq 3$, qui est ce qu'il faut pour que de
+tels couples existent. Pour d), la fin est la ligne non barrée de la page 40,
+« … en faisant que $\sigma_{n-1}, \ldots, \sigma_{p+1}$ triviales sur $R_{p}$ ».}
+Les trois premiers énoncés viennent de ce que $\sigma_{i}$ ne change que la
+$i$-ième place, et la change effectivement. Pour un polyèdre convexe et
+$\mathfrak{X} = \mathrm{Fac}(C)$ privé de la facette vide, $\sigma_{i}$ change la
+facette de dimension $i$ du drapeau : ce sont les opérations du dossier 88
+(pages 6 à 8) sur les repères du complexe de Coxeter, où les produits
+$\sigma_{i}\sigma_{i+1}$ ont des ordres que les pages calculent ; ici rien n'est
+dit de ces produits. Pour retrouver la troisième involution $\sigma_{2}$ des
+cartes de la page 32, qui change la face, il faut que $\mathfrak{X}$ contienne
+son plus grand élément : les drapeaux de la carte sont alors les $3$-repères,
+qui finissent tous en $1$, comme dans la « version commune » de la page 32.
+
+La moitié supérieure de la page 40, barrée, revient aux cartes de dimension 2 :
+une arête a exactement deux sommets, entre un sommet et une face il y a
+exactement deux arêtes, et une condition de connexité ; en marge, des suites
+$x_{0}, \ldots, x_{n}$ et quelques croquis de sommets et d'arêtes. Le dossier
+s'arrête là.
+
+\end{document}

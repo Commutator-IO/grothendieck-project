@@ -1,0 +1,1110 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 71
+% (pages 1-47, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. It is held to being mathematically correct as it stands; where
+% the manuscript is loose or mistaken, the true statement is what appears here
+% and the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pp. 1-20), batch-02.fr.tex (pp. 21-40) or batch-03.fr.tex (pp. 41-47).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its three batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5). The literature named
+% in the footnotes is cited from memory and was not checked against the
+% sources.
+%
+% Scope. Pages 1, 4, 15, 17, 19 are blank separators; 3 and 14 typed USTL
+% « avis de soutenance » (19 avril 1977); 8 a printed bank leaflet (janvier
+% 1978); 25, 34, 40, 45 versos of the mémoire (false starts, two pencil
+% drawings on 45). None carries mathematics of his; none is described beyond
+% the spine section. Pages 20, 22, 24, 26, 28, 30, 32, 33, 35-39, 41-44, 46,
+% 47 are a mémoire in another hand (signed, « 15 juillet 1976, Montpellier »).
+% Following RIGHTS.md and the transcription's own rule (folder 100's), the
+% mémoire is NOT restated beyond what the transcription's notes say: its
+% statements are named as the notes name them, its proofs are not given, its
+% author is not named. What this reading comments on is his marks and the
+% mathematics of the statements.
+%
+% Spine. Three strands of his own, around the Jordan curve theorem, and his
+% reading of the mémoire:
+%   pp. 2, 13, 16  theta-graphs: three arcs joining x, y; three regions;
+%                  a) <=> a') <=> b) <=> c) (page 13), c) => a) proved,
+%                  a) => b) begun; page 16 the same with an index set, and
+%                  three equivalent forms of « C separates the surface E ».
+%   pp. 9, 11, 7, 5  his numbered sequence 1)-6) (2) absent): complementary
+%                  open pairs (regular open sets); a closed K with two
+%                  relatively open pieces; pseudo-partitions of X into three
+%                  open sets and three walls; X cut open along the inner walls
+%                  and reglued (the space 𝒳 -> X); an « immersion lemma »
+%                  announced.
+%   pp. 6, 12      a cancelled computation: a filtration of a realised poset
+%                  by an ordered set I, spaces Σ_d indexed by flags, and the
+%                  combinatorial cutting Σ(K, L) of a simplicial complex.
+%   p. 10          unrelated: an automorphism t of a group on λ_0, λ_1, λ_2.
+%   p. 18          two J-polygons meeting along an arc: exterior or nested; the
+%                  glued J-polygon Γ'' and its interior and exterior.
+%   pp. 20-47      the mémoire (Théorème 1, polygonal Jordan; Théorème 2,
+%                  three good vertices), with his notes on separate leaves
+%                  (21, 29, 31) and his marks in the margins.
+%
+% Notation fixed for the document.
+%  - « J-courbe » (ours) for a simple closed curve satisfying the conclusion of
+%    the Jordan theorem in the strong local form; the pages say « courbe de
+%    Jordan », which today means any simple closed curve. « J-polygone » is
+%    the mémoire's word (Définition 1) and is kept.
+%  - Frontier of an open set U: U̇ = Ū \ U, his dotted letter. Frontier of a
+%    closed K: K̇ = K \ int K. Int, Ext of a J-polygon as on the pages.
+%  - Theta-graph: arcs Γ'_1, Γ'_2, Γ'_3, ∂ = {x, y}, Γ''_i = Γ'_i \ ∂ (page 2;
+%    page 16 writes Γ°_i), Γ_k = Γ'_i ∪ Γ'_j ({i,j,k} = {1,2,3}), regions
+%    V_k, sectors v_k at x, U_k = V_i ∪ V_j ∪ Γ''_k.
+%  - Pages 7 and 5: X_i := W ∪ Ū_i (the gluing piece) is kept apart from the
+%    complement X \ U_i, written out; the page calls both X_i.
+%
+% Substantive departures, each footnoted where it occurs:
+%  p. 2    « Γ_1 = Γ_2 ∪ Γ_3 » and the last member Γ''_1 ∪ Γ''_2 ∪ ∂ of the
+%          first line read Γ_1 = Γ'_2 ∪ Γ'_3 = Γ''_2 ∪ Γ''_3 ∪ ∂.
+%  p. 9    1) d) is not equivalent to a)-c) without « U ∪ V dense »
+%          (counterexample ours). 3): the conclusions need B ⊂ Ū (true when
+%          K is the closure of its interior); counterexample ours (disc with a
+%          hair). « relativement fermé dans X » read: B closed in X iff
+%          B̄ ∩ C = ∅, as the Cor. then says.
+%  p. 11   « pseudo-partition » is not defined on the page; definition ours,
+%          from the relations the page lists; a) <=> b) checked under it; the
+%          converse « Je reviens... » made explicit (ours).
+%  p. 7    X̄_i = X_i ∪ B'_i corrected to (X \ U_i) ∪ B_i; « U_i \ C_i » read
+%          U_i \ B_i = Int U_i; the hypothesis B_i ⊂ closure(U_i \ B_i)
+%          supplied; the two uses of X_i separated.
+%  p. 5    the check asked (« vérifier si ... C_i ∩ K̇ = ∅ ») answered: it is
+%          implied by K̇ ⊂ ∪ U_i (ours). The étale / closed-embedding claim
+%          stated as checked; the immersion lemma 6) breaks off.
+%  p. 6    « φ(M(e)) ≤ i » read max φ(M(e)) ≤ i, as page 12's μ says. Σ_d is
+%          never defined; the bijection D(d) ≅ E(d) is reported, not checked.
+%  p. 10   the computation headed t^3 computes t∘t; with λ_0λ_1λ_2 = 1
+%          (inferred, not written) t² = int(λ_1λ_2) = int(λ_0^{-1}).
+%  p. 13   « courbe de Jordan » = J-courbe; arcs supposed polygonal (tame at
+%          x); a) => b) supplied from the formulas of pages 2 and 16.
+%  p. 16   « U ⊂ C », « V = U - Ū », « Ū ≠ E \ C », « V_1 = U_1 ∩ U_2 » and
+%          the U_j, V_j under ∪, ∩ read U ⊂ E, V = E - Ū, U ≠ E \ C,
+%          V_1 = U_2 ∩ U_3, V_j, U_j; the « y » of c) read x''.
+%  p. 18   Γ ≠ Γ' needed (else Γ'' is not a polygon); the dichotomy proved
+%          (ours).
+%  p. 29   (i): « Γ ∩ T̊ = [s,s'] ∪ [s,s''] » read Γ ∩ T; the « t ≠ s » of
+%          Cor Main read « [s,t] a diagonal »; vertices on ]s',s''[ added to
+%          make Cor Main hold when Φ = ∅ (ours).
+%  p. 43   the transcription's note glosses § 4 « Preuve du théorème 2 » as
+%          « tout polygone est un J-polygone », which is Théorème 1; the
+%          reading follows page 20 and the batch-3 header.
+%
+% Links the pages do not write (ours, and said so in the body): the theta
+% lemma of page 13, applied to Γ ∪ [s,s'] for a diagonal [s,s'], is the
+% inductive step of the polygonal Jordan theorem, with no condition on the
+% diagonal; page 31 provides an exterior diagonal for every non-convex
+% polygon without the J- hypothesis (his « (J-) » on Lemme VIII, « inutile »);
+% page 18's cases a) and b) are the interior and exterior diagonal of the
+% mémoire's §§ 3-4; the pseudo-partition of page 11 is what the theta
+% configuration becomes once ∂ is removed; the X cut open of pages 7 and 5 and
+% the Σ(K, L) of page 12 are one operation, topological and combinatorial;
+% folder 81's Version I (pp. 13-24) is the same theme of « découpage »;
+% folder 89's combinatorial polygons (pp. 19-20) are the mémoire's « polygone
+% abstrait ».
+%
+% Announced and never established: a) => b) of page 13 (« Prouvons que
+% Γ_3 ... », stops); the meaning of the index set on page 16; the end of
+% page 7; the immersion lemma 6) of page 5; what Σ_d is and the bijection
+% α_d (pages 6 and 12, cancelled); the question « |K̃| ≅? Σ(|K|,|L|) »
+% (page 12, struck); cases (ii) of page 29's lemma.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{71}
+\pages{1}{47}
+\dating{[à partir de 1976]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Théorème de Jordan : notes manuscrites (1976, s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Une ficelle fermée posée sur une table, sans se croiser elle-même, sépare la
+table en deux : un dedans et un dehors. C'est le théorème de Jordan, l'un des
+énoncés les plus évidents de la géométrie et l'un des plus difficiles à
+démontrer proprement. Le dossier en garde deux approches. L'une est de sa
+main, éparse, sur une douzaine de feuillets ; l'autre est un mémoire soigné
+d'une autre main, daté de Montpellier le 15 juillet 1976, qui démontre le
+théorème pour les polygones, et qu'il a lu plume en main.
+
+Sa propre approche commence par une figure plus riche que la ficelle : deux
+points reliés par trois chemins qui ne se croisent pas, comme la lettre grecque
+thêta. Trois chemins font trois boucles, en en prenant deux à la fois, et trois
+régions du plan. Il montre que si deux des trois boucles séparent le plan
+comme il faut, la troisième aussi. C'est un mécanisme de récurrence : un
+polygone qu'on coupe par une diagonale devient un thêta dont les deux autres
+boucles ont moins de sommets, et le théorème se transmet de proche en proche.
+Les pages ne le disent pas en ces termes ; c'est ce que leurs pièces, mises
+bout à bout, permettent de dire.
+
+À côté, il prépare un cadre général, de la topologie la plus élémentaire : deux
+ouverts dont chacun est exactement l'extérieur de l'autre, trois régions qui se
+touchent deux à deux le long de trois murs, et l'opération qui consiste à
+découper un espace le long de murs intérieurs puis à recoller les morceaux.
+C'est la langue du découpage, qu'on retrouve ailleurs dans ce groupe de
+dossiers (le dossier 81 découpe des espaces par des coupures). Un calcul
+abandonné fait la même chose pour des complexes simpliciaux, sommet par
+sommet.
+
+Le mémoire, enfin, est l'occasion de voir Grothendieck lecteur. Ses marges
+disent « style », « vague », « jargon ? », « C'est une salade… », mais aussi,
+précisément, ce qui manque : un « non vides ! » dans une définition, un
+« faux pour $n = 3$ ! » sous un lemme, la remarque que c'est la \emph{paire}
+de deux arcs et non le \emph{couple} qui est déterminée. Sur des feuillets
+séparés, il refait à sa façon deux étapes du mémoire, en enlevant une
+hypothèse inutile. On y voit une exigence qui ne tient pas à la difficulté de
+l'énoncé : le théorème est élémentaire, et c'est justement pour cela que chaque
+hypothèse doit être à sa place.
+
+Les noms modernes à chercher sont ceux du théorème de Jordan polygonal, du
+théorème du thêta, des ouverts réguliers et du recollement, et, pour le second
+théorème du mémoire, ceux des « oreilles » d'un polygone.
+
+\keywords{Jordan curve theorem, polygonal Jordan theorem, theta-curve theorem, regular open set, locally closed set, cutting and gluing, local homeomorphism, polygon diagonal, convex hull, two ears theorem, Hurwitz action}
+\end{resume}
+
+\pagerange{2}{47}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les feuillets}
+
+Le dossier compte quarante-sept pages, sans pagination de sa main. Les pages
+1, 4, 15, 17 et 19 sont des intercalaires blancs ; les pages 3 et 14 des avis
+de soutenance dactylographiés de l'université de Montpellier (19 avril 1977),
+la page 8 un dépliant bancaire imprimé (janvier 1978), sans rien de sa main :
+ces versos s'accordent avec la datation « à partir de 1976 » et n'en disent
+pas plus. Les feuillets de sa main sont les pages 2, 5 à 7, 9 à 13, 16, 18,
+21, 23, 27, 29 et 31. Les pages 20 à 47 sont, pour le reste, un mémoire d'une
+autre main, paginé de I à XIX ; ses versos 25, 34, 40 et 45 ne portent que des
+faux départs et, page 45, deux croquis au crayon.
+
+\subsection*{Les stations}
+
+\begin{itemize}
+  \item \textbf{Pages 2, 13 et 16 : le thêta.} Trois arcs joignant deux points,
+    trois courbes fermées, trois régions ; l'équivalence de la page 13 et sa
+    démonstration partielle ; page 16, le même dispositif indexé par un
+    ensemble quelconque, et trois formes équivalentes de « $C$ sépare la
+    surface ».
+  \item \textbf{Pages 9, 11, 7, 5 : une suite numérotée 1) à 6)}, dans cet
+    ordre (le 2) manque). Ouverts complémentaires ; un fermé $K$ partagé en
+    deux pièces ; pseudo-partitions ; découpage le long de murs intérieurs et
+    recollement ; un « lemme d'immersion » annoncé.
+  \item \textbf{Pages 6 et 12 : un calcul barré}, sur une filtration d'un
+    ensemble ordonné réalisé et sur le découpage d'un complexe simplicial le
+    long d'un sous-complexe.
+  \item \textbf{Page 10 : une page d'algèbre} sans rapport avec le reste.
+  \item \textbf{Page 18 : recoller deux J-polygones} le long d'un arc commun.
+  \item \textbf{Pages 20 à 47 : le mémoire}, avec ses notes à lui sur des
+    feuillets séparés (21, 29, 31) et ses marques en marge.
+\end{itemize}
+
+\subsection*{Conventions}
+
+$E$ désigne le plan $\mathbb{R}^2$ (page 16 : une surface connexe). Pour un
+ouvert $U$ d'un espace $X$, $\dot{U} = \overline{U} \smallsetminus U$ est sa
+frontière, la lettre pointée des pages ; pour un fermé $K$, $\dot{K} = K
+\smallsetminus \operatorname{int} K$. Le complémentaire est noté
+$\complement$.
+
+Les pages disent « courbe de Jordan » pour une courbe fermée simple
+\emph{qui vérifie la conclusion du théorème de Jordan} ; aujourd'hui
+l'expression désigne n'importe quelle courbe fermée simple. On écrit donc
+\emph{J-courbe} : une courbe fermée simple $C \subset E$ est une J-courbe si $E
+\smallsetminus C$ a exactement deux composantes connexes et si, en chaque point
+de $C$, les deux côtés locaux de $C$ sont dans des composantes
+différentes\footnote{Le terme est de cette lecture ; il est calqué sur le
+« J-polygone » de la définition 1 du mémoire (page 22), qui demande exactement
+cela, plus l'assertion qu'une composante est bornée et l'autre non — ce qui,
+dans le plan, est automatique dès qu'il y a deux composantes, le complémentaire
+d'un grand disque étant connexe.}. Le mémoire dit \emph{J-polygone}, et l'on
+garde son mot.
+
+Pour le thêta, on fixe : deux points $x \neq y$, $\partial = \{x, y\}$ ; trois
+arcs simples $\Gamma'_1, \Gamma'_2, \Gamma'_3$ de $x$ à $y$, deux à deux
+disjoints hors de $\partial$ ; leurs intérieurs $\Gamma''_i = \Gamma'_i
+\smallsetminus \partial$ ; pour $\{i, j, k\} = \{1, 2, 3\}$, la courbe fermée
+$\Gamma_k = \Gamma'_i \cup \Gamma'_j$ ; $\Gamma = \Gamma'_1 \cup \Gamma'_2 \cup
+\Gamma'_3$ ; en $x$, le secteur $v_k$ compris entre $\Gamma'_i$ et
+$\Gamma'_j$, et, quand elles existent, les régions $V_k \supset v_k$ de $E
+\smallsetminus \Gamma$.
+
+\subsection*{Ce que seule une lecture d'ensemble peut dire}
+
+Les pièces de sa main s'emboîtent en une démonstration du théorème de Jordan
+pour les polygones, qu'aucune page n'écrit d'un tenant. Si $[s, s']$ est une
+\emph{diagonale} d'un polygone $\Gamma$ — un segment joignant deux sommets
+non adjacents et ne rencontrant $\Gamma$ qu'en ses extrémités, qu'il passe à
+l'intérieur ou à l'extérieur —, alors $\Gamma \cup [s, s']$ est un thêta, dont
+les deux autres courbes fermées $\Lambda^1, \Lambda^2$ ont moins de sommets que
+$\Gamma$. Par la page 13, si $\Lambda^1$ et $\Lambda^2$ sont des J-courbes,
+$\Gamma$ en est une. La page 31 fournit une diagonale \emph{extérieure} à tout
+polygone non convexe, sans rien supposer de lui ; un polygone convexe a des
+diagonales évidentes ; le triangle est le cas de départ. La page 18 dit ensuite
+qui est l'intérieur de $\Gamma$, selon que la diagonale passe dehors (cas b) :
+$\Lambda^1, \Lambda^2$ emboîtés) ou dedans (cas a) : extérieurs l'un à
+l'autre). C'est, dans un autre ordre, la structure du mémoire, dont le § 3
+coupe selon une diagonale extérieure et le § 4 selon une diagonale intérieure ;
+et c'est ce qui donne sens aux deux marques de la page 32, où il met entre
+parenthèses le « J- » de l'énoncé du lemme VIII et qualifie ce lemme
+d'« inutile ». Le rapprochement est de cette lecture.
+
+Deux autres liens, de cette lecture aussi. La pseudo-partition de la page 11
+— trois ouverts deux à deux adjacents le long de trois murs sans point triple —
+est exactement ce que devient le thêta quand on lui retire ses deux sommets.
+Et l'espace $\mathcal{X}$ des pages 7 et 5, obtenu en découpant $X$ le long de
+murs intérieurs, est la version topologique de l'opération combinatoire
+$\Sigma(K, L)$ de la page 12.
+
+\subsection*{Ce que le dossier annonce sans l'établir}
+
+L'implication a) $\Rightarrow$ b) de la page 13, commencée (« Prouvons que
+$\Gamma_3$… ») ; le rôle de l'ensemble d'indices de la page 16 ; la fin de la
+page 7 ; le « lemme d'immersion » 6) de la page 5 ; ce que sont les espaces
+$\Sigma_d$ et la bijection $\alpha_d$ des pages 6 et 12, barrées ; la question
+« $|\tilde{K}| \simeq \Sigma(|K|, |L|)$ ? » de la page 12, barrée ; le cas (ii)
+du lemme de la page 29.
+
+\pagerange{2}{16}
+\section*{I. Le thêta (pages 2, 13 et 16)}
+
+\pagerange{2}{2}
+\subsection*{Trois arcs, trois courbes, trois régions (page 2)}
+
+La page 2 dresse l'inventaire du thêta. Chaque région $V_k$ est bordée par les
+deux arcs $\Gamma'_i, \Gamma'_j$ qui l'enserrent, et chaque arc ouvert
+$\Gamma''_i$ borde les deux régions $V_j, V_k$ :
+\[
+\Gamma_k = \Gamma'_i \cup \Gamma'_j = \Gamma''_i \cup \Gamma''_j \cup \partial,
+\qquad
+U_k = V_i \cup V_j \cup \Gamma''_k, \qquad \dot{U}_k = \Gamma_k ,
+\]
+pour $\{i, j, k\} = \{1, 2, 3\}$\footnote{La page écrit d'abord $\Gamma_1 =
+\Gamma_2 \cup \Gamma_3$, sans accents, ce qui n'a pas de sens pour des courbes
+fermées ; la page 13 écrit $\Gamma_1 = \Gamma'_2 \cup \Gamma'_3$, qu'on suit.
+Le dernier membre de la première ligne, $\Gamma''_1 \cup \Gamma''_2 \cup
+\partial$, d'indices de lecture incertaine, doit être $\Gamma''_2 \cup
+\Gamma''_3 \cup \partial$ ; la troisième ligne, et le $\Gamma^{*}_3 =
+\Gamma''_1 \cup \Gamma''_2 \cup \partial$ qui suit, sont justes. Les lettres
+$\Gamma''_i$ de la page 2 sont les $\Gamma^{\circ}_i$ de la page 16.}. Ces
+formules disent ce qu'on attend : $E \smallsetminus \Gamma_k$ a deux
+composantes, $V_k$ d'un côté, $U_k$ de l'autre, cette dernière formée des deux
+autres régions soudées le long de l'arc $\Gamma''_k$ qui les sépare. Un croquis
+de deux cercles sécants et les lettres « $U, C, V$ » rappellent la situation
+de la courbe seule.
+
+\pagerange{13}{13}
+\subsection*{L'équivalence de la page 13}
+
+On suppose les arcs \emph{polygonaux}\footnote{La page ne dit rien de la
+nature des arcs. L'énoncé a) parle de trois secteurs en $x$, ce qui demande
+qu'un petit disque centré en $x$ soit coupé par $\Gamma$ en trois secteurs, et
+la démonstration fait passer un côté d'un arc d'un point à un autre le long de
+l'arc : les deux sont immédiats pour des arcs polygonaux, comme ceux du
+mémoire. Pour des arcs quelconques du plan, ils le sont encore, mais par le
+théorème de Schoenflies, qui est plus fort que ce qu'on cherche à démontrer.}.
+Les conditions suivantes sont équivalentes :
+\begin{enumerate}
+  \item[a)] les trois secteurs $v_1, v_2, v_3$ en $x$ sont dans trois
+    composantes distinctes de $E \smallsetminus \Gamma$ ;
+  \item[a')] $E \smallsetminus \Gamma$ a trois composantes ;
+  \item[b)] $\Gamma_1, \Gamma_2, \Gamma_3$ sont des J-courbes ;
+  \item[c)] $\Gamma_1$ et $\Gamma_2$ sont des J-courbes.
+\end{enumerate}
+
+\textbf{a) $\Leftrightarrow$ a').} Le côté d'un arc se transporte le long de
+l'arc : les deux côtés de $\Gamma''_k$ sont, près de $x$, les secteurs $v_i$ et
+$v_j$, et restent dans la même composante tout le long. Toute composante de $E
+\smallsetminus \Gamma$ a un point adhérent à $\Gamma$, donc contient un côté
+d'un arc, donc l'un des trois secteurs. Il y a ainsi au plus trois composantes,
+et exactement trois si et seulement si les secteurs sont dans des composantes
+deux à deux distinctes.
+
+\textbf{b) $\Rightarrow$ c)} est trivial.
+
+\textbf{c) $\Rightarrow$ a).} Deux points proches de $x$, de part et d'autre
+de $\Gamma'_3$, sont dans $v_1$ et $v_2$. Comme $\Gamma'_3 \subset \Gamma_1$ et
+que $\Gamma_1$ est une J-courbe, ils sont dans des composantes distinctes de $E
+\smallsetminus \Gamma_1$, et a fortiori de $E \smallsetminus \Gamma$, dont les
+composantes sont plus fines. De même $\Gamma'_1 \subset \Gamma_2$ sépare $v_2$
+de $v_3$, et $\Gamma'_2 \subset \Gamma_1$ sépare $v_1$ de $v_3$\footnote{C'est
+l'argument de la page, dont plusieurs mots sont illisibles ; l'indice de
+« $E - \Gamma_2$ » dans la première phrase est d'une lecture incertaine. La
+page dit « régions » pour composantes connexes.}.
+
+\textbf{a) $\Rightarrow$ b).} La page s'arrête sur « Prouvons que $\Gamma_3$
+(p.\ ex.) est courbe de Jordan » ; les formules de la page 2 contiennent la
+suite\footnote{La rédaction de cette implication est de cette lecture ; elle
+n'utilise que les formules des pages 2 et 16.}. Sous a), soient $V_1, V_2, V_3$
+les trois composantes, $V_k \supset v_k$. Chaque $\Gamma''_k$ a $V_i$ d'un côté
+et $V_j$ de l'autre, donc $U_k = V_i \cup \Gamma''_k \cup V_j$ est un ouvert
+connexe, et
+\[
+E \smallsetminus \Gamma_k = U_k \sqcup V_k
+\]
+est la réunion disjointe de deux ouverts connexes non vides : ce sont ses deux
+composantes. En tout point de $\Gamma''_i$ ($i \neq k$), les deux côtés sont
+dans $V_k$ et dans $V_j \subset U_k$ ; en $x$ et $y$ de même. Donc $\Gamma_k$
+est une J-courbe, et l'on a les relations de la page 16\footnote{La page 16 écrit $V_1 = U_1 \cap U_2$, comme pour $V_3$ ; c'est $U_2
+\cap U_3$.} :
+\[
+V_k = U_i \cap U_j, \qquad U_k = V_i \cup V_j \cup \Gamma''_k
+\qquad (\{i, j, k\} = \{1, 2, 3\}).
+\]
+
+
+Lue dans le plan, l'équivalence est une forme du \emph{théorème du thêta} : le
+complémentaire d'un thêta plan a trois composantes, de frontières les trois
+courbes $\Gamma_k$\footnote{Le nom est d'usage dans les exposés du théorème de
+Jordan et dans la littérature sur les graphes plongés (« theta-curve
+theorem ») ; les pages ne l'emploient pas.}. Mais elle est écrite pour servir de
+\emph{pas} : elle transmet la propriété de deux courbes à la troisième. Sur la
+façon dont ce pas démontre le théorème de Jordan pour les polygones, voir la
+section sur le fil du dossier et la page 18.
+
+\pagerange{16}{16}
+\subsection*{Un ensemble d'indices, et une courbe dans une surface (page 16)}
+
+Le haut de la page reprend le thêta avec des arcs $\Gamma'_\alpha$ indexés par
+un ensemble $I$, tous joignant les deux points de $\partial$, un ensemble
+$B_\alpha$ à deux éléments attaché à chaque arc, $B = \coprod_i B_i \simeq I
+\times \{0, 1\}$, et, pour chaque $i$, $U_i$ la région de $\Gamma_i$ qui
+contient $\Gamma''_i$, avec\footnote{La page écrit $U_j$ sous la réunion et
+$V_j$ sous l'intersection ; on lit $V_j$ et $U_j$, ce qui redonne pour $I =
+\{1, 2, 3\}$ les formules qui suivent sur la même page. Les mots qui disent ce
+qu'est $B_\alpha$ sont en partie illisibles (« l'une des 2 origines, des pts
+$x$ ») ; « ensemble » et « déterminent » sont d'une lecture incertaine.}
+\[
+U_i = \Gamma''_i \cup \bigcup_{j \neq i} V_j, \qquad
+V_i = \bigcap_{j \neq i} U_j .
+\]
+
+Pour plus de trois arcs, $\Gamma_i$ n'est plus une courbe fermée, et la page ne
+dit pas ce qu'elle désigne ; elle revient aussitôt au cas $I = \{1, 2, 3\}$.
+Les lettres $B_i$, $U_i$, $V_i$ sont celles du cadre général des pages 7 et 5,
+où $\dot{K} = \coprod_i B_i$ ; c'est sans doute pour ce cas que le cadre est
+fait, mais la page ne le dit pas.
+
+Le bas de la page énonce, pour une courbe fermée simple $C$ dans une surface
+connexe $E$, l'équivalence de :
+\begin{enumerate}
+  \item[a)] $\operatorname{card} \pi_0(E \smallsetminus C) = 2$ ;
+  \item[b)] il existe un ouvert $U \subset E$ tel que $\dot{U} = C$ et $V = E
+    \smallsetminus \overline{U} \neq \emptyset$, c'est-à-dire $U \neq E
+    \smallsetminus C$ ;
+  \item[c)] pour un petit disque $D_x$ centré en un point $x \in C$, et deux
+    points $x', x''$ de $D_x \smallsetminus C$ de part et d'autre de $C$,
+    $x'$ et $x''$ ne sont pas dans la même composante de $E \smallsetminus
+    C$\footnote{La page écrit « $U \subset C$ », « $V = U - \overline{U}$ »,
+    « $\overline{U} \neq E \smallsetminus C$ » et, dans c), « $x'$ et $y$ » ;
+    on lit $U \subset E$, $V = E \smallsetminus \overline{U}$, $U \neq E
+    \smallsetminus C$ et $x''$. La parenthèse « $\{x, y\} \to \pi_0(X - C)$
+    est surjectif » dit c) sous la forme : les deux côtés locaux atteignent
+    toutes les composantes. La page écrit aussi $X$ pour $E$.}.
+\end{enumerate}
+La page note qu'on a toujours $\operatorname{card} \pi_0(E \smallsetminus C)
+\leq 2$, et en marge qu'alors $U$ est une composante de $E \smallsetminus C$.
+Tout cela est juste, par l'argument de la page 13 : $C$ a localement deux
+côtés\footnote{Pour une courbe polygonale c'est immédiat ; pour une courbe
+fermée simple quelconque dans une surface, c'est le théorème de Schoenflies,
+local.} ; un côté se transporte le long de $C$ ; toute composante contient un
+côté. D'où au plus deux composantes, et deux exactement si et seulement si les
+deux côtés en un point sont séparés, ce qui est c). Sous b), $U$ et $V$ sont
+deux ouverts disjoints non vides recouvrant $E \smallsetminus C$, d'où a) ;
+sous a), l'une des composantes convient pour $U$. Sur une bande de Möbius,
+l'âme est une courbe à un seul côté global, et $E \smallsetminus C$ est
+connexe : la majoration est atteinte ou non selon la courbe\footnote{L'exemple
+est de cette lecture.}.
+
+\pagerange{5}{11}
+\section*{II. Ouverts complémentaires, pseudo-partitions, recollement (pages 9, 11, 7, 5)}
+
+Ces quatre feuillets portent une suite numérotée de sa main, 1) et 3) page 9,
+la suite de 3) et 4) page 11, 5) page 7, la fin de 5) et 6) page 5 ; le 2)
+n'est pas dans le dossier. On suit ses numéros. Dans toute la section, $X$ est
+un espace topologique.
+
+\pagerange{9}{9}
+\subsection*{1) Deux ouverts dont chacun est l'extérieur de l'autre (page 9)}
+
+Pour deux ouverts $U, V$ de $X$, les conditions suivantes sont équivalentes :
+\begin{enumerate}
+  \item[a)] $U = \complement \overline{V}$ et $V = \complement \overline{U}$ ;
+  \item[b)] $U \cap V = \emptyset$ et $\complement(U \cup V) \subset
+    \overline{U} \cap \overline{V}$, avec alors égalité ;
+  \item[c)] $U \cap V = \emptyset$, $\overline{U \cup V} = X$ et $\dot{U} =
+    \dot{V}$ ;
+  \item[d)] $\overline{U} \cap \overline{V} = \dot{U} = \dot{V}$ et $U \cup V$
+    est dense dans $X$\footnote{La page ne demande pas la densité dans d), et
+    sans elle d) n'équivaut pas aux autres : dans la somme disjointe de
+    $\mathbb{R}$ et d'un point isolé $p$, les ouverts $U = \left]-\infty,
+    0\right[$ et $V = \left]0, +\infty\right[$ vérifient $\overline{U} \cap
+    \overline{V} = \dot{U} = \dot{V} = \{0\}$, mais $\complement\overline{V}$
+    contient $p$. L'exemple est de cette lecture.}.
+\end{enumerate}
+Deux ouverts disjoints sont disjoints de leurs adhérences mutuelles, ce qui
+donne l'égalité de b) et, de proche en proche, les équivalences. Sous ces
+conditions $U$ et $V$ se déterminent l'un l'autre ; et, $U$ étant donné, un
+tel $V$ existe si et seulement si $\complement \overline{U}$ est dense dans
+$\complement U$, c'est-à-dire si et seulement si $U = \operatorname{int}
+\overline{U}$. Ce sont les \emph{ouverts réguliers}, et $V$ est le
+pseudo-complément de $U$ dans l'algèbre de Boole qu'ils forment\footnote{Les
+noms (ouvert régulier, algèbre de Boole des ouverts réguliers) sont classiques
+bien avant 1976 ; la page n'en emploie aucun.}. Le modèle est celui d'une
+courbe de Jordan : $U$ et $V$ sont le dedans et le dehors, et $\dot{U} =
+\dot{V}$ est la courbe.
+
+\subsection*{3) Un fermé partagé en deux pièces (page 9)}
+
+Soient $K$ un fermé de $X$ et $U_K, U'_K$ deux ouverts relatifs de $K$ formant
+dans $K$ une paire comme en 1) :
+\[
+\overline{U_K} = K \smallsetminus U'_K, \qquad \overline{U'_K} = K
+\smallsetminus U_K, \qquad C = \overline{U_K} \cap \overline{U'_K}
+\]
+(les adhérences dans $K$ et dans $X$ coïncident, $K$ étant fermé), de sorte
+que $K = U_K \sqcup C \sqcup U'_K$ et que $C$, fermé, est la frontière commune
+des deux pièces dans $K$. Soit $B = U_K \cap \dot{K}$ la partie de la pièce
+$U_K$ qui est sur le bord de $K$ ; elle est ouverte dans $\dot{K}$ et disjointe
+de $C$. Posons
+\[
+U = U_K \smallsetminus B = \operatorname{Int}(U_K), \qquad
+V = X \smallsetminus \overline{U_K} = \operatorname{Int}(X_1), \quad X_1 = X
+\smallsetminus U_K .
+\]
+On a toujours $U = \complement \overline{V}$ : un point de $C$ ou de $B$ n'est
+pas intérieur à $\overline{U_K}$, puisqu'il adhère à $U'_K$ ou à $\complement
+K$. Pour avoir la paire complète, il faut de plus que \emph{tout point de $B$
+soit adhérent à $U$} — ce qui a lieu si $K$ est l'adhérence de son
+intérieur\footnote{L'hypothèse n'est pas sur la page, et sans elle la
+conclusion est fausse. Dans le plan, soit $K$ le disque unité fermé augmenté du
+segment $[1, 2] \times \{0\}$, $U_K$ la partie de $K$ où $y > 0$ ou $x > 1$,
+$U'_K$ celle où $y < 0$ ; alors $C = [-1, 1] \times \{0\}$, $B$ contient le
+segment $\left]1, 2\right] \times \{0\}$, qui est dans $\complement
+\overline{U}$ mais pas dans $V$. L'exemple est de cette lecture.}. Alors
+\[
+V = \complement \overline{U}, \qquad
+\dot{U} = \dot{V} = \overline{U} \cap \overline{V} = \complement(U \cup V) = B
+\sqcup C, \qquad V \subset X_1 \subset \overline{V} ,
+\]
+et $(U, V)$ est une paire au sens de 1).
+
+\emph{Corollaire.} $X_1 = \complement U_K$ est localement fermé si et
+seulement si $B$ est fermé dans $X$, c'est-à-dire $\overline{B} \cap C =
+\emptyset$ ; il suffit pour cela que $\dot{K} \cap C = \emptyset$, autrement dit
+que $\dot{K} \subset U_K \cup U'_K$. En effet $\overline{X_1} \smallsetminus X_1
+= B$, et une partie est localement fermée si et seulement si son adhérence
+moins elle-même est fermée ; et $\overline{B} \subset \dot{K} \cap (B \cup
+C)$\footnote{La page dit d'abord $B$ « relativement fermé dans $X$ », lecture
+incertaine, puis, après plusieurs ratures, que $B$ doit être fermé dans $B \cup
+C$, et suppose $\overline{B} \cap C = \emptyset$ ; la fin de la page, très
+raturée, n'est lue qu'en partie. Le « $V_K$ » de sa dernière ligne est
+$U'_K$.}.
+
+\pagerange{11}{11}
+\subsection*{3, suite) et 4) Trois ouverts et trois murs (page 11)}
+
+Supposons $\dot{K} \cap C = \emptyset$, faisons de même pour l'autre pièce,
+$B' = U'_K \cap \dot{K}$, $U' = \operatorname{Int}(U'_K)$, $V' = X
+\smallsetminus \overline{U'_K}$, et supposons $B' \subset \overline{U'}$ comme
+$B \subset \overline{U}$. Soit $W = V \cap V' = \complement K$. Alors $X$ est
+réunion disjointe
+\[
+X = U \sqcup U' \sqcup W \sqcup B \sqcup B' \sqcup C ,
+\]
+de trois ouverts et de trois fermés, avec\footnote{La première égalité de la
+deuxième ligne commence sur la page par $\overline{U^{*}} \cap
+\overline{W}$, lapsus probable.}
+\[
+\left\{
+\begin{array}{l}
+\overline{U} \cap \overline{U'} = C, \quad \overline{U} \cap \overline{W} = B,
+\quad \overline{W} \cap \overline{U'} = B', \\
+\dot{U} = B \cup C, \quad \dot{U}' = B' \cup C, \quad \dot{W} = B \cup B', \\
+K = \overline{U \cup U'} = \complement W, \quad \operatorname{int} K = U \cup
+U' \cup C.
+\end{array}
+\right.
+\]
+La figure de la page
+est celle d'un disque $K$ coupé en deux par un mur intérieur $C$ qui ne touche
+pas le bord, dans une couronne : on peut penser à $X$ privé de quelques points,
+le mur $C$ allant d'un trou à l'autre.
+
+La page appelle cela une \emph{pseudo-partition} sans définir le mot. On le
+définit ainsi\footnote{La définition est de cette lecture, tirée des relations
+que la page vient d'écrire ; c'est sous elle que l'équivalence 4) est
+vérifiée.} : six parties $U, U', W, B, B', C$ forment une pseudo-partition de
+$X$ si elles le partagent, si $U, U', W$ sont ouverts, et si
+\[
+\overline{U} = U \sqcup B \sqcup C, \qquad \overline{U'} = U' \sqcup B' \sqcup
+C, \qquad \overline{W} = W \sqcup B \sqcup B' .
+\]
+
+\textbf{4).} Pour trois ouverts $U, U', W$ de $X$, sont équivalentes :
+\begin{enumerate}
+  \item[a)] ils sont deux à deux disjoints, de réunion dense,
+    $\dot{U} \subset \overline{U' \cup W}$, $\dot{U}' \subset \overline{U \cup
+    W}$, $\dot{W} \subset \overline{U \cup U'}$, et $\overline{U} \cap
+    \overline{U'} \cap \overline{W} = \emptyset$ ;
+  \item[b)] avec $C = \overline{U} \cap \overline{U'}$, $B = \overline{U} \cap
+    \overline{W}$, $B' = \overline{W} \cap \overline{U'}$, les six parties
+    forment une pseudo-partition de $X$.
+\end{enumerate}
+Sous a), les trois murs sont deux à deux disjoints (leurs intersections sont
+dans le point triple, vide), disjoints des trois ouverts, et ils recouvrent
+le reste : un point de $\overline{U} \smallsetminus U$ est dans
+$\overline{U'}$ ou dans $\overline{W}$. Réciproquement b) donne a) en lisant
+les adhérences. C'est le dessin de trois pays deux à deux voisins dont les
+trois frontières ne se rencontrent pas.
+
+Le thêta de la page 2, privé de ses deux sommets, en est l'exemple : dans $X = E
+\smallsetminus \partial$, les trois régions $V_1, V_2, V_3$ et les trois arcs
+ouverts $\Gamma''_1, \Gamma''_2, \Gamma''_3$ forment une pseudo-partition, le
+point triple $\partial$ ayant été retiré\footnote{Le rapprochement est de
+cette lecture ; il suppose a) de la page 13.}.
+
+La page revient enfin (« Je reviens aux données ») sur le lien entre les deux
+situations. Elles se déterminent l'une l'autre : d'une pseudo-partition on tire
+$K = \complement W$, $U_K = U \cup B$, $U'_K = U' \cup B'$, qui vérifient les
+hypothèses de 3), avec $C \cap \dot{K} = \emptyset$ puisque $\dot{K} = \dot{W}
+= B \cup B'$, et la page le note sous la forme $C = K \smallsetminus (U_K \cup
+U'_K)$\footnote{La première phrase de ce paragraphe est en partie illisible ;
+la réciprocité est rédigée ici par cette lecture.}.
+
+\pagerange{7}{7}
+\subsection*{5) Découper le long des murs intérieurs (page 7)}
+
+On généralise à un nombre quelconque de pièces. Soient $K$ un fermé de $X$ et
+$(U_i)_{i \in I}$ une famille d'ouverts relatifs de $K$, deux à deux disjoints,
+tels que $\dot{K} \subset \bigcup_i U_i$. Posons $B_i = \dot{K} \cap U_i$, de
+sorte que $\dot{K} = \coprod_i B_i$ est une somme topologique, chaque $B_i$
+étant ouvert, donc aussi fermé, dans $\dot{K}$. Soit $C_i = \overline{U_i}
+\smallsetminus U_i$ la frontière relative de $U_i$ dans $K$ ; on suppose
+$C_i \subset \overline{K \smallsetminus \overline{U_i}}$ (le mur $C_i$ est
+adhérent à ce qui est de l'autre côté), et, comme en 3), que $B_i$ est adhérent
+à $U_i \smallsetminus B_i$\footnote{Cette seconde hypothèse n'est pas sur la
+page ; c'est celle qui manquait déjà en 3).}. Enfin $W = X \smallsetminus K$.
+
+\textbf{Le complémentaire d'une pièce.} $X \smallsetminus U_i$ est localement
+fermé, et
+\[
+\operatorname{Int}(X \smallsetminus U_i) = X \smallsetminus \overline{U_i} = (X
+\smallsetminus U_i) \smallsetminus C_i, \qquad \overline{X \smallsetminus U_i}
+= (X \smallsetminus U_i) \sqcup B_i ;
+\]
+les deux ouverts $\operatorname{Int}(X \smallsetminus U_i)$ et
+$\operatorname{Int}(U_i) = U_i \smallsetminus B_i$ forment une paire au sens de
+1)\footnote{La page écrit $\overline{X_i} = X_i \cup B'_i$ avec $B'_i = \dot{K}
+\smallsetminus B_i$ : mais $B'_i$ est déjà dans $X \smallsetminus U_i$, et ce
+que l'adhérence ajoute est $B_i$. Elle écrit aussi « $U_i \smallsetminus C_i$ »,
+qui est $U_i$ et n'est pas ouvert dans $X$ ; on lit $U_i \smallsetminus B_i$.
+L'indice de $U_i$ est surchargé à chaque occurrence de la page, un accent
+($U'_i$) étant lisible par endroits.}.
+
+\textbf{La pièce recollée.} Posons maintenant $X_i = W \cup \overline{U_i}$ :
+l'extérieur de $K$ et la seule pièce $i$, avec son mur. L'inclusion $W \subset
+X_i$ est une immersion ouverte, la frontière de $W$ dans $X_i$ est $B_i$, et
+$X_i$ est la somme amalgamée de deux fermés le long de leur intersection\footnote{La page désigne par la
+même lettre $X_i$ le complémentaire $X \smallsetminus U_i$ et cette pièce
+recollée ; les deux ne coïncident pas en général. Quand il n'y a que deux
+pièces, $K = U_1 \sqcup C \sqcup U_2$ comme en 3), on a $X \smallsetminus U_1
+= W \cup \overline{U_2}$ : la double notation est un échange des deux indices.
+L'égalité $\overline{W} \cap X_i = W \cup B_i$ demande que $C_i \cap \dot{K} =
+\emptyset$, voir plus bas. La dernière ligne de la page n'est lue qu'en
+partie.} :
+\[
+X_i = (W \cup B_i) \amalg_{B_i} \overline{U_i} .
+\]
+
+
+\pagerange{5}{5}
+\subsection*{5, suite) L'espace découpé, et 6) un lemme annoncé (page 5)}
+
+On recolle alors toutes les pièces le long de l'extérieur, sans les recoller
+entre elles : soit
+\[
+\mathcal{X} = \overline{W} \amalg_{\coprod_i B_i} \Bigl(\coprod_i
+\overline{U_i}\Bigr) \simeq \coprod_{i\,(W)} X_i ,
+\]
+somme amalgamée des $X_i$ au-dessus de $W$\footnote{« peut aussi s'identifier
+à » et « somme amalgamée » sont des lectures incertaines ; la formule, elle,
+est nette.}. C'est $X$ découpé le long des murs intérieurs $C_i$ : deux pièces
+qui se touchent dans $X$ le long d'un mur sont séparées dans $\mathcal{X}$. La
+flèche évidente $\pi : \mathcal{X} \to X$ est l'identité sur chaque morceau.
+L'image $\mathcal{X}_i$ de $X_i$ est ouverte dans $\mathcal{X}$, et $X_i \to
+\mathcal{X}_i$ est un homéomorphisme. On en tire :
+\begin{itemize}
+  \item $\pi$ est un homéomorphisme local en tout point de $\mathcal{X}
+    \smallsetminus \coprod_i C_i$ : un point de $B_i$ a dans $X$ un voisinage
+    contenu dans $W \cup U_i$ ;
+  \item en un point de $C_i$, $\pi$ est localement un plongement fermé, $X_i$
+    coïncidant près de ce point avec $\overline{U_i}$\footnote{La page dit :
+    « $\mathcal{X} \to X$ est étale en les pts de $\mathcal{X} - \coprod_i C_i$,
+    i.e.\ une [illisible] \emph{fermée} en les pts de $\coprod C_i$ », ce
+    dernier mot étant d'une lecture incertaine. Le « i.e. » ne relie pas deux
+    énoncés équivalents ; on rédige les deux. Les vérifications sont de cette
+    lecture.}.
+\end{itemize}
+
+La page se clôt sur une inquiétude : « vérifier si dans les développements
+précédents, il n'y avait pas lieu d'exiger $\bigcup C_i \subset
+\operatorname{int} K$, i.e.\ $C_i \cap \dot{K} = \emptyset$ ». L'hypothèse est
+bien nécessaire — c'est elle qui fait de $B_i$ la frontière de $W$ dans $X_i$ —
+mais elle est déjà contenue dans $\dot{K} \subset \bigcup_i U_i$ : un point de
+$\dot{K}$ est dans un $U_j$, et $U_j$, ouvert relatif disjoint de $U_i$, est
+disjoint de $\overline{U_i}$ et donc de $C_i$\footnote{La réponse est de cette
+lecture. La marge porte « vérifier », suivi de deux mots illisibles.}.
+
+\textbf{6) Lemme d'immersion de $\mathcal{X}$.} La page annonce un lemme sous
+ce titre, puis remplace $K$, près de son bord, par un fermé plus petit $K^{*}
+\subset K$, avec $U^{*}_i = U_i \cap K^{*}$, $U'^{*}_i = U'_i \cap K^{*}$, en
+demandant que $\dot{K}^{*}$ soit dans les $U_i$ et que $C_i \subset
+\overline{U^{*}_i} \cap \overline{U'^{*}_i}$, ce qui a lieu si
+$\operatorname{int} K^{*} \supset \bigcup C_i$. Plusieurs conditions sont
+barrées, le lemme n'est pas énoncé\footnote{« Lemme », « remplaçant » et « on
+suppose » sont des lectures incertaines ; un mot illisible suit « de
+$\mathcal{X}$ ». La parenthèse ouverte avant « $\operatorname{int} K'$ » n'est
+pas fermée, et le $K'$ y est probablement le $K^{*}$ des lignes
+précédentes.}.
+
+Tout ce cadre est celui du « découpage », qu'on retrouve dans le dossier 81 :
+la Version I de ce dossier (pages 13 à 24) découpe un espace connexe par des
+coupures fermées à deux côtés et compte les morceaux, et elle observe que
+l'exemple du disque coupé par des arcs est une forme du théorème de Jordan.
+
+\pagerange{6}{12}
+\section*{III. Un calcul abandonné : filtrations et découpage d'un complexe (pages 6 et 12)}
+
+\pagerange{6}{6}
+\subsection*{Une filtration indexée par un ensemble ordonné (page 6)}
+
+Les deux pages sont barrées. Soit $E$ un ensemble ordonné, $E_0 = M(E)$
+l'ensemble de ses éléments minimaux (les sommets), et pour $e \in E$, $E_e =
+\{x \in E \mid x \leq e\}$, $M(e) = M(E_e)$ les sommets de $e$ ; $X = |E|$ est
+la réalisation géométrique, réunion des cellules fermées $|E_e|$. On se donne
+une application $\varphi : E_0 \to I$ dans un ensemble ordonné, et l'on filtre
+$X$ par
+\[
+X_i = \bigcup_{\max \varphi(M(e)) \leq i} |E_e|, \qquad \partial X_i =
+\bigcup_{j < i} X_j\footnote{La page 6 écrit « $\varphi(M(e)) \leq i$ » ; la
+page 12 précise $\mu(\varphi(M(e)))$, qu'on lit comme le plus grand
+élément.}.
+\]
+Pour un drapeau $d = (i_0 > \cdots > i_k)$ de $I$, la page considère des
+espaces $\Sigma_d(\mathcal{X})$, avec $\Sigma_{\{i\}} = \Sigma(X_i, \partial
+X_i)$, des flèches $\Sigma_d \to \Sigma_{d'}$ pour $d' \subset d$, et
+l'ensemble $D(d) = \pi_0 \Sigma_d$ de leurs composantes connexes.
+
+\pagerange{12}{12}
+\subsection*{Les composantes, et le découpage d'un complexe (page 12)}
+
+La page 12 énonce, pour $d' \subset d$, un carré commutatif de bijections
+\[
+\alpha_d : D(d) = \pi_0 \Sigma_d(\mathcal{X}) \xrightarrow{\ \sim\ } E(d) = \{e
+\in E \mid \varphi(M(e)) = d\},
+\]
+compatibles aux restrictions $D(d) \to D(d')$ et $E(d) \to E(d')$. Ce que sont
+$\Sigma$ et $\Sigma_d$, aucune des deux pages ne le dit ; la bijection ne peut
+donc pas être vérifiée ici\footnote{La flèche verticale de gauche porte une
+étiquette surchargée, lue $\mathrm{P}_{d',d}$ ; le sens d'une flèche du
+diagramme de la page 6 est incertain.}.
+
+Le bas de la page donne en revanche une définition, qui éclaire sans doute ce
+que $\Sigma$ veut dire. Pour un complexe simplicial $K$, vu comme un ensemble
+de sommets $K_0$ et un ensemble de simplexes, et un sous-complexe $L$, on pose
+\[
+\tilde{K} = \Sigma(K, L), \qquad \tilde{K}_0 = \varinjlim_{\sigma \in K
+\smallsetminus L} \sigma \xrightarrow{\ \pi\ } K_0 ,
+\]
+la limite inductive des ensembles de sommets des simplexes qui ne sont pas dans
+$L$, indexée par l'ensemble ordonné $K \smallsetminus L$ (stable par passage à
+un simplexe plus grand). Deux simplexes hors de $L$ ne sont recollés que le
+long de faces qui sont elles aussi hors de $L$ : c'est $K$ \emph{découpé le
+long de} $L$. Par exemple, si $K$ est formé de deux arêtes $ab$ et $bc$ et $L =
+\{b\}$, le sommet $b$ se dédouble et $\tilde{K}$ est formé de deux arêtes
+disjointes\footnote{L'exemple est de cette lecture.}. La page se demande, sur
+une ligne barrée et avec un « ? » au-dessus du signe $\sim$, si la réalisation
+de $\tilde{K}$ est le découpage topologique $\Sigma(|K|, |L|)$, présenté comme
+une limite inductive de simplexes. C'est l'analogue combinatoire de l'espace
+$\mathcal{X}$ des pages 7 et 5.
+
+\pagerange{10}{10}
+\section*{IV. Une page d'algèbre (page 10)}
+
+Feuillet plié, sans rapport avec le reste du dossier, écrit tête-bêche. Dans un
+groupe engendré par $\lambda_0, \lambda_1, \lambda_2$, on considère
+l'automorphisme
+\[
+t(\lambda_0) = \lambda_0, \qquad t(\lambda_1) = \lambda_1 \lambda_2
+\lambda_1^{-1}, \qquad t(\lambda_2) = \lambda_1 .
+\]
+La page écrit aussi $t(\lambda_1) = \lambda_0^{-1}\lambda_2\lambda_0$, ce qui
+vaut si $\lambda_0 \lambda_1 \lambda_2 = 1$, relation qu'on suppose
+désormais\footnote{La relation n'est pas écrite ; on la déduit de cette
+égalité et de « $\operatorname{int}(\lambda_1\lambda_2) =
+\operatorname{int}(\lambda_0^{-1})$ ». C'est la présentation du groupe
+fondamental du plan privé de deux points, libre sur $\lambda_1, \lambda_2$.}.
+Alors $t$ préserve le produit $\lambda_1 \lambda_2$, et
+\[
+t^2(\lambda_1) = \operatorname{int}(\lambda_1 \lambda_2)(\lambda_1), \qquad
+t^2(\lambda_2) = \lambda_1 \lambda_2 \lambda_1^{-1} =
+\operatorname{int}(\lambda_1 \lambda_2)(\lambda_2),
+\]
+d'où $t^2 = \operatorname{int}(\lambda_1\lambda_2) =
+\operatorname{int}(\lambda_0^{-1})$, où $\operatorname{int}(g)(h) = g h
+g^{-1}$\footnote{La page intitule ce calcul $t^3$ et écrit « $t^3 =
+\operatorname{int}(\lambda_0)$ » ; mais la ligne « $t^3(\lambda_2) =
+t(\lambda_1)$ » montre que c'est $t \circ t$ qui est calculé, et le résultat
+de la page est $\operatorname{int}(\lambda_0^{-1})$. Le premier facteur de la
+deuxième ligne de la page, lu $t(q_\nu)$, est incertain.}. C'est l'action d'un
+générateur du groupe de tresses à deux brins (l'action de Hurwitz), dont le
+carré, le « tour complet », agit par conjugaison\footnote{Les noms sont de
+cette lecture.}. À droite, un croquis au crayon pâle évoque l'induction
+$G \times_H E$ d'un $H$-espace et une flèche $B_H \to B_G$ d'espaces
+classifiants, avec $f^{*}$ et $f_{!}$ ; la lecture en est incertaine dans le
+détail.
+
+\pagerange{18}{18}
+\section*{V. Recoller deux J-polygones (page 18)}
+
+\textbf{Proposition.} Soient $\Gamma, \Gamma'$ deux J-polygones distincts du
+plan $E$ tels que $\Gamma \cap \Gamma' = I$ soit un arc polygonal non réduit à
+un point\footnote{« Distincts » n'est pas sur la page ; si $\Gamma = \Gamma'$,
+l'arc $I$ n'en est pas un et $\Gamma''$ ci-dessous est vide. Deux polygones
+distincts ne sont jamais contenus l'un dans l'autre (lemme de la page 31). Le
+mot « du » devant « plan » est d'une lecture incertaine.}. On est dans l'un
+des deux cas suivants, qui s'excluent :
+\begin{enumerate}
+  \item[a)] $\Gamma \smallsetminus I \subset \operatorname{Ext}\Gamma'$ et
+    $\Gamma' \smallsetminus I \subset \operatorname{Ext}\Gamma$ ; de façon
+    équivalente $\operatorname{Int}\Gamma' \subset \operatorname{Ext}\Gamma$ et
+    $\operatorname{Int}\Gamma \subset \operatorname{Ext}\Gamma'$ ;
+  \item[b)] $\Gamma \smallsetminus I \subset \operatorname{Ext}\Gamma'$ et
+    $\Gamma' \smallsetminus I \subset \operatorname{Int}\Gamma$, ou l'inverse ;
+    de façon équivalente $\operatorname{Int}\Gamma' \subset
+    \operatorname{Int}\Gamma$ et $\operatorname{Ext}\Gamma \subset
+    \operatorname{Ext}\Gamma'$, ou l'inverse.
+\end{enumerate}
+Soit $\Gamma'' = (\Gamma \cup \Gamma') \smallsetminus (I \smallsetminus
+\partial I) = \overline{\Gamma \smallsetminus I} \cup \overline{\Gamma'
+\smallsetminus I}$, réunion de deux arcs qui ne se rencontrent qu'en leurs
+extrémités $\partial I$ : c'est un polygone. C'est un J-polygone, et :
+\begin{itemize}
+  \item dans le cas a), $\operatorname{Int}\Gamma'' = \operatorname{Int}\Gamma
+    \cup \operatorname{Int}\Gamma' \cup (I \smallsetminus \partial I)$ et
+    $\operatorname{Ext}\Gamma'' = \operatorname{Ext}\Gamma \cap
+    \operatorname{Ext}\Gamma'$ ;
+  \item dans le cas b), $\operatorname{Int}\Gamma'' = \operatorname{Int}\Gamma
+    \cap \operatorname{Ext}\Gamma'$ et $\operatorname{Ext}\Gamma'' =
+    \operatorname{Ext}\Gamma \cup \operatorname{Int}\Gamma' \cup (I
+    \smallsetminus \partial I)$.
+\end{itemize}
+Chaque fois, la page écrit la partition de $E$ en sept parties qui le
+justifie : dans le cas a), $\operatorname{Int}\Gamma$,
+$\operatorname{Int}\Gamma'$, $\Gamma \smallsetminus I$, $\Gamma'
+\smallsetminus I$, $I \smallsetminus \partial I$, $\partial I$ et
+$\operatorname{Ext}\Gamma \cap \operatorname{Ext}\Gamma'$ ; dans le cas b), la
+même avec $\operatorname{Ext}\Gamma$ et $\operatorname{Int}\Gamma \cap
+\operatorname{Ext}\Gamma'$ à la place des deux parties qui changent. Les deux
+ouverts proposés pour $\operatorname{Int}\Gamma''$ et
+$\operatorname{Ext}\Gamma''$ sont connexes, la partie $I \smallsetminus
+\partial I$ soudant les deux régions qu'elle sépare.
+
+La dichotomie, que la page énonce sans la démontrer, vient de ce que $\Gamma
+\smallsetminus I$ est connexe et disjoint de $\Gamma'$, donc dans
+$\operatorname{Int}\Gamma'$ ou dans $\operatorname{Ext}\Gamma'$, et de même pour
+$\Gamma' \smallsetminus I$ ; le quatrième cas est impossible, car si $\Gamma'
+\smallsetminus I \subset \operatorname{Int}\Gamma$, alors
+$\operatorname{Ext}\Gamma$, connexe, non borné et disjoint de $\Gamma'$, est
+dans $\operatorname{Ext}\Gamma'$, et $\Gamma \smallsetminus I$, adhérent à
+$\operatorname{Ext}\Gamma$, y est aussi\footnote{L'argument est de cette
+lecture.}.
+
+C'est l'énoncé qu'il faut pour achever la récurrence décrite dans le fil du
+dossier : si l'on coupe un polygone $\Gamma$ par une diagonale $[s, s']$ en deux
+polygones $\Lambda^1, \Lambda^2$ qui se rencontrent le long de $I = [s, s']$,
+alors $\Gamma = \Lambda''$, et la proposition dit qui sont son intérieur et son
+extérieur. Le cas b) est celui d'une diagonale extérieure — l'un des deux
+polygones contient l'autre —, le cas a) celui d'une diagonale intérieure. Ce
+sont exactement les deux situations des §§ 3 et 4 du mémoire (lemmes XIV et XV,
+lemmes XVIII et XIX, ci-dessous)\footnote{Le rapprochement est de cette
+lecture.}.
+
+\pagerange{20}{47}
+\section*{VI. Le mémoire du 15 juillet 1976, et sa lecture (pages 20 à 47)}
+
+Les pages 20 à 47 sont, pour l'essentiel, un mémoire d'une autre main, à
+l'encre bleue, paginé de I à XIX, signé et daté « le 15 juillet 1976,
+Montpellier » à sa dernière page. Il n'est pas recomposé dans cette édition, et
+cette lecture n'en dit pas plus que les notes de la transcription : ses énoncés
+sont nommés comme elles les nomment, ses démonstrations ne sont pas données,
+son auteur n'est pas nommé\footnote{C'est la règle de la transcription pour le
+texte d'autrui, reprise du dossier 100, et celle de RIGHTS.md.}. Ce qui est lu
+ici, ce sont les marques de Grothendieck, ses feuillets intercalés, et la
+mathématique des énoncés.
+
+\pagerange{20}{22}
+\subsection*{Les deux théorèmes, et les définitions (pages 20 à 22)}
+
+Le titre est « Le théorème de Jordan et l'existence de trois bons sommets pour
+un polygone de $\mathbb{R}^2$ ». \emph{Théorème 1} (Jordan) : tout polygone
+est un J-polygone. \emph{Théorème 2}, attribué avec un point d'interrogation à
+Dehn, « non publié » : tout polygone a au moins trois bons sommets, dont deux au
+moins à triangle intérieur. Un polygone est la réalisation dans le plan d'un
+polygone abstrait connexe, de sommets $S(\Gamma)$ et d'arêtes $A(\Gamma)$ — ce
+que le dossier 89 (pages 19 et 20) appelle un polygone combinatoire, réalisé.
+La \emph{définition 1} (page 22) dit ce qu'est un J-polygone : $\mathbb{R}^2
+\smallsetminus \Gamma$ est réunion de deux ouverts connexes, l'un relativement
+compact, l'autre non ; et un petit disque centré sur $\Gamma$ est coupé en deux
+parties connexes, l'une à l'intérieur, l'autre à l'extérieur. La
+\emph{définition 2} : un bon sommet est un sommet non aligné avec ses deux
+voisins, dont le triangle ne contient aucun autre sommet de $\Gamma$.
+
+Aujourd'hui, un sommet dont le triangle est intérieur au polygone et ne
+contient pas d'autre sommet est une \emph{oreille}, et un sommet dont le
+triangle est extérieur une \emph{bouche}. Le théorème des deux oreilles est de
+G.~Meisters (1975) ; l'existence d'une bouche pour un polygone non convexe est
+attribuée à G.~Toussaint (1991). Le théorème 2 du mémoire est la conjonction des
+deux, un polygone convexe ayant au moins trois oreilles. Un manuscrit inédit de
+Max Dehn sur le théorème de Jordan pour les polygones a été publié par
+H.~Guggenheimer en 1977\footnote{G.~Meisters, « Polygons have ears »,
+\emph{Amer. Math. Monthly} 82 (1975) ; G.~Toussaint, « Anthropomorphic
+polygons », \emph{Amer. Math. Monthly} 98 (1991) ; H.~Guggenheimer, « The
+Jordan curve theorem and an unpublished manuscript by Max Dehn », \emph{Arch.
+Hist. Exact Sci.} 17 (1977). Références de mémoire, non vérifiées. Ni le mémoire
+ni ses marges ne citent Meisters ; on n'a pas vérifié si le manuscrit de Dehn
+contient l'énoncé que le mémoire lui attribue.}.
+
+Ses marques sur ces pages sont des exigences de précision. Dans la définition
+1, il ajoute « non vides ! » aux deux parties du disque — sans quoi la
+condition ne dirait rien — et note que l'extérieur est « non rel.\ compact ».
+Il ajoute « et non vide » à la définition du polygone, « de $\mathbb{R}^2$ »
+où l'ambiant manquait. À la remarque 2 (il suffit qu'un tel disque vérifie la
+condition), il donne la raison : si $D_x \subset D'_x$, l'application $\pi_0(D_x
+\smallsetminus D_x \cap \Gamma) \to \pi_0(D'_x \smallsetminus D'_x \cap
+\Gamma)$ est bijective. Au pied de la page 20, il écrit « faux » en face de la
+fin de la remarque 1, qui affirme que deux points $x, y$ d'un polygone le
+coupent en « un seul couple d'arcs » ; la feuille suivante dit
+pourquoi\footnote{La remarque 1 se poursuit page 22, que la transcription
+résume sans en citer la fin ; que le « faux » vise l'unicité du couple est une
+lecture, appuyée sur le NB de la page 21. Les marques en pointillé et le mot
+« plan » au crayon, page 20, sont d'une main non identifiée ; le « or.\ ? »
+à l'encre noire, en face de « 1-complexe connexe », peut demander si les arcs
+sont orientés.}.
+
+\textbf{Ses notes, page 21.} Pour $x \neq y$ sur $\Gamma$, les deux arcs
+$\Gamma^1_{xy}, \Gamma^2_{xy}$ vérifient
+\[
+\Gamma^1_{xy} \cap \Gamma^2_{xy} = \{x, y\}, \qquad \Gamma^1_{xy} \cup
+\Gamma^2_{xy} = \Gamma, \qquad S'(\Gamma^1_{xy}) \sqcup S'(\Gamma^2_{xy}) =
+S(\Gamma) \smallsetminus \{x, y\},
+\]
+où $S'$ désigne les sommets intérieurs d'un arc\footnote{La troisième égalité
+suppose $x, y$ sommets, ou rendus tels par l'opération a) ; quelques signes
+serrés au bout de la ligne ne sont pas déchiffrés.}. \textbf{NB} : ce n'est pas
+le couple $(\Gamma^1_{xy}, \Gamma^2_{xy})$ qui est déterminé, mais la paire
+$\{\Gamma^1_{xy}, \Gamma^2_{xy}\}$. Suivent les deux opérations dont tout le
+reste est fait : a) ajouter des sommets ; b) diviser un polygone par deux
+sommets distincts en deux lignes polygonales, l'opération inverse étant de
+recoller deux lignes polygonales de mêmes extrémités\footnote{« rajouter » et
+« mêmes » sont des lectures incertaines.}.
+
+\pagerange{23}{28}
+\subsection*{Voisinages d'un arc, ensembles convexes (pages 23 à 28)}
+
+Le \emph{lemme I} (page 24) donne, pour un arc d'un J-polygone, un système
+fondamental de voisinages ouverts $V$ tels que $V \cap \operatorname{int}\Gamma$
+et $V \cap \operatorname{ext}\Gamma$ soient connexes. Il précise l'énoncé
+(« $x \neq y$ », « ouverts »), relève d'un « ! » l'appel à l'axiome du choix,
+et d'un « ? » l'aveu « on utilise le fait, sans le dire, que deux points d'un
+ouvert connexe du plan peuvent être reliés par un arc de polygone ».
+
+Le § 2 (pages 26 et 28) rappelle les ensembles convexes : le \emph{lemme II}
+sur le bord de l'enveloppe convexe d'une partie (il ajoute « finie »), une
+\emph{convention} qui réserve le mot « ensemble convexe » à l'enveloppe convexe
+d'un ensemble fini de points, les \emph{lemmes III, IV, V} sur les droites
+d'appui et la visibilité, la \emph{définition 3} (un polygone convexe est le
+bord d'un ensemble convexe) et le \emph{lemme VI} (un polygone convexe est un
+J-polygone, et tout sommet non aligné avec ses voisins y est un bon sommet). Ses
+marges : « jargon ? », « !!! » devant la convention, « C'est une salade… » sur
+l'intervention du lemme II dans la compacité, « vis.\ ? », et, au lemme V, la
+précision que $s, s'$ sont sur une arête de $C$ et que $x$ et $C$ sont de part
+et d'autre de leur droite. Les pages 23 et 27 ne portent que des dessins de sa
+main : un polygone étoilé doublé d'un contour parallèle, et un croquis qui
+paraît illustrer la démonstration du lemme IV.
+
+\pagerange{29}{36}
+\subsection*{Diagonales extérieure et intérieure (pages 29 à 36)}
+
+La démonstration du théorème 1 repose sur l'existence d'une diagonale. Il y a
+deux façons d'en trouver une, et le mémoire et ses feuillets à lui les
+traitent toutes deux.
+
+\textbf{Une diagonale extérieure, sans hypothèse (page 31).} Le mémoire établit
+(page 30) que l'enveloppe convexe $E(\Gamma)$ d'un polygone est celle de ses
+sommets et que les sommets de son bord $\partial E(\Gamma)$ sont des sommets de
+$\Gamma$ ; puis (page 32) le \emph{lemme VII}, $\operatorname{ext}\partial
+E(\Gamma) \subset \operatorname{ext}\Gamma$ pour un J-polygone, et le
+\emph{lemme VIII} : un J-polygone non convexe a deux sommets $s, s'$ avec $s'$
+visible de $s$ par l'extérieur. Grothendieck met le « J- » entre parenthèses et
+écrit « inutile » en face. Sa page 31 dit pourquoi.
+
+\emph{Lemme.} Deux polygones distincts $\Gamma, \Gamma'$ ne sont pas contenus
+l'un dans l'autre, et $\Gamma \cap \Gamma'$ est une réunion finie d'arcs
+disjoints, éventuellement réduits à un point. Si $\Gamma$ n'est pas convexe et
+$\Gamma' = \partial E(\Gamma)$, l'ensemble $\Phi$ des extrémités des
+composantes de $\Gamma \cap \Gamma'$ est contenu dans $S(\Gamma)$, et pour tout
+$s \in \Phi$ il existe $t \in \Phi$, $t \neq s$, tel que $]s, t[\, \subset
+\Gamma' \smallsetminus \Gamma$ ; alors $]s, t[\, \subset
+\operatorname{Ext}\Gamma$. Un tel $t$ est unique, sauf si $s$ est un point isolé
+de $\Gamma \cap \Gamma'$, auquel cas il y en a exactement deux.
+
+\emph{Corollaire.} Un polygone non convexe a deux sommets distincts $s, s'$
+tels que $]s, s'[\, \subset \operatorname{Ext}\Gamma \cap \partial E(\Gamma)$.
+
+\textbf{NB} : $\operatorname{Ext}\Gamma$, la composante non bornée de
+$\mathbb{R}^2 \smallsetminus \Gamma$, est défini pour tout polygone, et pas
+seulement pour un J-polygone.
+
+Tout cela est juste, et se voit ainsi. Un point de $\Gamma \cap \Gamma'$ qui
+n'est pas un sommet de $\Gamma$ est sur un segment de $\Gamma$ contenu dans
+$E(\Gamma)$ et passant par un point de son bord : ce segment est dans une droite
+d'appui, donc dans $\Gamma'$ de part et d'autre du point, qui n'est pas une
+extrémité. Une composante de $\Gamma' \smallsetminus \Gamma$ est un arc ouvert
+de $\Gamma'$ ; elle ne contient aucun sommet de $\Gamma'$, puisque ceux-ci sont
+des sommets de $\Gamma$, et c'est donc un segment ouvert $]s, t[$, dont les
+extrémités sont dans $\Phi$. Enfin $]s, t[$ est connexe, disjoint de $\Gamma$, et
+adhérent au complémentaire de $E(\Gamma)$, qui est connexe, non borné et
+disjoint de $\Gamma$ : il est dans $\operatorname{Ext}\Gamma$. Rien n'y fait
+appel au théorème de Jordan\footnote{Les vérifications sont de cette lecture.
+Sur la page, « non convexe » et « l'ens.\ $\Phi$ des » sont d'une lecture
+incertaine, et « tt » et « néc. » dans le NB aussi. La formule de la
+transcription « $s$ $]s, s'[$ » du corollaire porte un mot illisible barré.}.
+C'est aussi ce que le mémoire, page 36, énonce comme « corollaire à la
+démonstration du lemme VIII », pour tout polygone ; ses marges en face disent
+« !! ».
+
+Combinée avec le pas du thêta de la page 13, cette diagonale suffit au
+théorème 1 : si $[s, s']$ est une diagonale extérieure, $\Gamma \cup [s, s']$
+est un thêta dont les deux autres courbes fermées ont moins de sommets que
+$\Gamma$\footnote{Le rapprochement est de cette lecture ; voir le fil du
+dossier.}.
+
+\textbf{Une diagonale intérieure (pages 29, 33, 35 et 36).} Le mémoire, page
+33, établit qu'en un sommet d'un polygone convexe l'angle intérieur est au plus
+$\pi$ (\emph{lemme IX}, « l'analogue de la positivité de la courbure »), et
+qu'un J-polygone a au moins trois sommets d'angle intérieur $< \pi$
+(\emph{lemme X}) — les sommets de $\partial E(\Gamma)$ en fournissent. Le
+\emph{lemme XI} (page 35) affirme qu'un J-polygone a deux sommets $s, s'$ avec
+$s'$ visible de $s$ par l'intérieur ; on prend un sommet $s$, ses voisins $s',
+s''$ et le triangle $T$ de sommets $s, s', s''$.
+
+Ses objections sont précises, et toutes fondées. Au crayon : « faux pour $n = 3$
+! » — un triangle n'a pas de diagonale. À l'encre : il ajoute « à $n \geq 3$
+côtés », « OPS $\Gamma$ non convexe (sinon c'est clair) ». En face de « soit
+$s$ un sommet satisfaisant la propriété énoncée au lemme VIII », il écrit
+« Lemme X », et au crayon : « il faut prendre $s$ comme dans la \emph{dém.} du
+lemme VIII (pas son énoncé !) » — il faut que l'angle intérieur en $s$ soit $<
+\pi$, ce que l'énoncé du lemme VIII ne donne pas. Il marque « faux » la
+conclusion $]s', s''[\, \subset \operatorname{int}\Gamma$, et « ambigu » la
+condition qui la précède. Page 36, au crayon, en face de « l'enveloppe convexe
+$C$ de $(\mathring{T} \cup\, ]s', s''[) \cap \Gamma$ » : « ce n'est pas un
+“ens.\ convexe” ! » ; en effet cette partie de $\Gamma$ est infinie, et la
+convention du § 2 réserve le mot aux enveloppes d'ensembles finis, de sorte que
+les lemmes IV et V ne s'appliquent pas tels quels\footnote{Les marques au
+crayon des pages 35 et 36 sont d'une main que la transcription ne distingue pas
+avec certitude de celle de l'encre noire.}.
+
+Sa page 29, au crayon, au verso du feuillet de la page 28, esquisse la bonne
+version. Soit $s$ un sommet en lequel le secteur d'angle $> \pi$ découpé par
+les deux arêtes est extérieur à $\Gamma$ — un sommet d'angle intérieur $< \pi$,
+qui existe toujours —, $s', s''$ ses voisins, $T$ leur triangle, et supposons
+$n \geq 4$.
+\begin{itemize}
+  \item[(i)] Si $\Gamma \cap T = [s, s'] \cup [s, s'']$, alors $]s', s''[\,
+    \subset \operatorname{Int}\Gamma$, et $[s', s'']$ est une diagonale.
+  \item[(ii)] Sinon, soit $\Phi$ l'ensemble des sommets de $\Gamma$ dans
+    $\mathring{T}$ ; s'il n'est pas vide et si $t \in \Phi$ est à distance
+    maximale de la droite $s's''$, alors $]s, t[\, \subset
+    \operatorname{Int}\Gamma$.
+\end{itemize}
+\emph{Cor Main.} Ou bien $]s', s''[\, \subset \operatorname{Int}\Gamma$, ou
+bien il existe un sommet $t$, non voisin de $s$, tel que $]s, t[\, \subset
+\operatorname{Int}\Gamma$ : tout polygone à au moins quatre côtés a une
+diagonale intérieure\footnote{Sur la page, (i) écrit « $\Gamma \cap \mathring{T}
+= [s, s'] \cup [s, s'']$ », le $\mathring{T}$ récrit sur un mot noirci ; c'est
+$\Gamma \cap T$ qui est visé, comme dans (ii). Le Cor Main dit « $t \neq s$ » ;
+il faut $t$ non voisin de $s$, puisque $]s, s'[$ est une arête. Enfin, il
+manque un cas : si $\Phi = \emptyset$ mais que $\Gamma$ touche $]s', s''[$, on
+prend pour $t$ un sommet de $\Gamma$ sur $]s', s''[$ (il y en a, une arête ne
+pouvant traverser ni $[s, s']$ ni $[s, s'']$), et la conclusion tient. Le
+complément est de cette lecture ; la page s'arrête au début de (ii), et le
+passage barré du haut n'est lu qu'en partie.}.
+La raison de (ii) est qu'aucune arête ne peut traverser $]s, t[$ sans avoir une
+extrémité dans le petit triangle découpé dans $T$ par la parallèle à $s's''$
+menée par $t$, où il n'y a pas de sommet. C'est le lemme classique qui sert à
+trianguler les polygones, et dont on tire le théorème des deux
+oreilles\footnote{Sous cette forme on le trouve par exemple chez N.~J.~Lennes
+(1911) pour la triangulation, et dans la démonstration de Meisters ; références
+de mémoire.}.
+
+\pagerange{37}{47}
+\subsection*{La récurrence, et le second théorème (pages 37 à 47)}
+
+Le § 3 du mémoire, « Preuve du théorème 1 » (pages 37 à 43), prend $s, s'$
+comme au corollaire de la page 36 — une diagonale extérieure, portée par
+$\partial E(\Gamma)$ —, coupe $\Gamma$ en deux arcs $\Gamma^1_{ss'},
+\Gamma^2_{ss'}$, et forme les polygones $\Lambda^1, \Lambda^2$ en leur
+recollant $[s, s']$. Par récurrence sur $\operatorname{card} S(\Gamma) - 2$,
+$\Lambda^1$ et $\Lambda^2$ sont des J-polygones ; les \emph{lemmes XII à XV}
+établissent que l'un contient l'autre ($\operatorname{int}\Lambda^2 \subset
+\operatorname{int}\Lambda^1$), et les \emph{lemmes XVI et XVII} construisent
+les deux composantes de $\mathbb{R}^2 \smallsetminus \Gamma$ et vérifient la
+condition locale. C'est le cas b) de la page 18. Ses marques : « $a = s$ ? $b =
+s'$ » sur une notation flottante du lemme XII, et, au lemme XIII, la
+simplification $\operatorname{Ext}(\partial E(\Gamma)) = \mathbb{R}^2
+\smallsetminus E(\Gamma) \subset \operatorname{Ext}(\Lambda^i)$ — juste, et
+sans disque : le complémentaire de $E(\Gamma)$ est connexe, non borné, disjoint
+de $\Lambda^i$\footnote{Ces deux marques sont au crayon. Les pages 38, 39, 41,
+42 et 44 ne portent aucune annotation en mots.}.
+
+Le § 4, « Preuve du théorème 2 » (pages 43 à 47), coupe cette fois selon une
+diagonale intérieure (lemme XI) ; les \emph{lemmes XVIII et XIX} établissent
+que $\Lambda^1$ et $\Lambda^2$ sont extérieurs l'un à l'autre — le cas a) de la
+page 18 —, le \emph{lemme XX} donne deux bons sommets à triangle intérieur, le
+\emph{lemme XXI} un bon sommet à triangle extérieur pour un polygone non
+convexe, et le théorème 2 en résulte\footnote{La note de la transcription sur
+la page 43 glose le § 4 par « tout polygone est un J-polygone », qui est le
+théorème 1 ; on suit la page 20 et l'en-tête de la transcription, pour lesquels
+le § 4 démontre le théorème 2.}. Les pages 46 et 47 portent des annotations au
+crayon d'une main que la transcription n'établit pas : au lemme XX,
+l'insertion « (non consécutifs si $n \geq 4$ » — deux oreilles d'un polygone
+à au moins quatre côtés peuvent en effet être choisies non adjacentes, ce qui
+est la forme « sans chevauchement » du théorème de Meisters —, un « ? » sur un
+$s''$ que le texte ne définit pas, « so what », « ou bien, », et une note en
+biais lue en partie, « faux, si on … choisit … »\footnote{La page 45, verso de
+la page 44, porte deux croquis au crayon de polygones non convexes, de sommets
+$s', s, s''$, sans texte ; elle n'a pas de marqueur de page dans la
+transcription.}.
+
+Ce que la lecture de Grothendieck dégage du mémoire tient en peu de mots :
+le lemme VIII n'a pas besoin de son hypothèse, le lemme XI est faux tel qu'il
+est énoncé et vrai pour un sommet bien choisi et $n \geq 4$, et le sommet
+choisi doit l'être par la démonstration, non par l'énoncé, d'un lemme
+antérieur. Ses feuillets 29 et 31 en donnent les versions justes.
+
+\end{document}
