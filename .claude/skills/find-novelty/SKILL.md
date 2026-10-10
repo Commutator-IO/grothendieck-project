@@ -26,8 +26,9 @@ than prevented: where the pass reads the folder differently from the reading
 — a statement it thinks the reading gets wrong, a match the reading missed —
 it says so in the entry's `ours` field, and the commit names both models. It
 does not silently override the reading. The exception runs one way only:
-Opus 5 does not run on an Opus 5.5 reading, and no model runs on a Fable
-reading (folders 1 and 47) until someone decides what should.
+Opus 5 does not run on an Opus 5.5 reading. The two Fable readings (folders 1
+and 47) are passed by Opus 5.5, as decided on 2026-10-10, under the same terms:
+disagreements go in `ours`, and the commit names both models.
 
 ## The thing this skill is for, and the thing it must not do
 
