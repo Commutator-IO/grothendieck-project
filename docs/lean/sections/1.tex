@@ -1,0 +1,99 @@
+\section[Cote 1 : le système d'inégalités des valeurs singulières, cas $m \leq 1$]{Cote 1 : le système d'inégalités des valeurs singulières, cas $m \leq 1$\protect\verifie{Folder1}}\label{sec:1}
+
+La cote 1, \emph{Analyse fonctionnelle : notes manuscrites (s.d.), lettre (1953)}, compte cent quarante-neuf pages, que l'inventaire date de 1953. Les pages~70 à~73 sont une mise au net sur les puissances extérieures des opérateurs à trace. La page~71 démontre, pour $u$, $v$ à trace, l'inégalité $\alpha_n(|u+v|) \leq \sum_{p} \alpha_p(|u|)\,\alpha_{n-p}(|v|)$ (corollaire~2, formule~(14), encadrée), par le développement de $\Lambda^n(u+v)$ en produits $(\Lambda^p u) \wedge (\Lambda^{n-p} v)$. Elle énonce ensuite le théorème~2 pour $u$, $v$ compacts : la forme produit~(15), encadrée, et \q{plus précisément} le système~(16), encadré lui aussi,
+\[
+  \sigma_n^m(u+v) \leq \sum_{p=0}^{m} \sigma_n^p(u)\,\sigma_n^{m-p}(v), \qquad 0 \leq m \leq n,
+\]
+où $\sigma_n^m(w)$ est la fonction symétrique élémentaire de degré $m$ des $n$ premières valeurs singulières de $w$ (formule~(17)). La marge gauche porte \q{à réviser} le long du théorème (\lot{1}{4}{71}). La page~72 démontre~(16) par la proposition~3, $\sigma_n^m(u) = \sup |\alpha_m(v_n u)|$ sur les contractions $v_n$ de rang $\leq n$, et par~(14) appliquée à $wu$ et $wv$ (\lot{1}{4}{72}). La page~73 juge le système, en mots lus avec doute, \q{les plus fortes possibles} des inégalités qui majorent les $\rho_i(u+v)$ en fonction des $\rho_i(u)$ et des $\rho_i(v)$ (\lot{1}{4}{73}).
+
+La piste porte sur le système~(16) tout entier. Elle est démontrée ici en dimension finie pour $m \leq 1$ et pour tout $n$ : pour $m = 0$ les deux membres valent~$1$, et pour $m = 1$ c'est l'inégalité de Ky Fan. On démontre aussi que le système, s'il vaut pour tous les $m \leq n$, entraîne la forme produit~(15), d'où~(15) pour $n = 1$.
+
+\noindent\emph{Conventions.} Les espaces $E$ et $F$ sont des espaces préhilbertiens de dimension finie sur $\mathbb R$ ou $\mathbb C$, et $d = \dim E$. Pour $T : E \to F$ linéaire, les valeurs singulières $s_0(T) \geq s_1(T) \geq \cdots$ sont les racines carrées des valeurs propres de $T^*T$, rangées par ordre décroissant et répétées selon leur multiplicité, prolongées par $0$ au-delà de l'indice $d - 1$. C'est la définition de la bibliothèque, qui indexe à partir de $0$ ; les $\rho_1, \ldots, \rho_n$ de la page sont $s_0, \ldots, s_{n-1}$. On note $(e_j)_{j < d}$ une base orthonormée de vecteurs propres de $T^*T$, rangée dans le même ordre, de sorte que $T^*T e_j = s_j(T)^2 e_j$, et l'on pose $f_j = s_j(T)^{-1}\, T e_j$, avec $f_j = 0$ lorsque $s_j(T) = 0$. Enfin
+\[
+  \sigma_n^m(T) = \sum_{\substack{t \subseteq \{0, \ldots, n-1\} \\ |t| = m}} \ \prod_{i \in t} s_i(T).
+\]
+
+\begin{enonce}[Pages 71 et 72, le système (16) pour $m \leq 1$\piste{1-sigma-nm-system}]
+Soient $u, v : E \to F$ linéaires et $n \geq 0$.
+\begin{enumerate}
+\item (Ky Fan) $\displaystyle\sum_{j < n} s_j(u+v) \leq \sum_{j < n} s_j(u) + \sum_{j < n} s_j(v)$.
+\item Pour $m \in \{0, 1\}$, $\sigma_n^m(u+v) \leq \sum_{p=0}^{m} \sigma_n^p(u)\,\sigma_n^{m-p}(v)$.
+\end{enumerate}
+\end{enonce}
+
+\begin{enonce}[Page 71, du système (16) à la forme produit (15)]
+Soient $u, v : E \to F$ linéaires et $n \geq 0$. Si $\sigma_n^m(u+v) \leq \sum_{p=0}^{m} \sigma_n^p(u)\,\sigma_n^{m-p}(v)$ pour tout $m \leq n$, alors pour tout $r \geq 0$
+\[
+  \prod_{i < n} \bigl(1 + r\,s_i(u+v)\bigr) \leq \prod_{i < n} \bigl(1 + r\,s_i(u)\bigr) \prod_{i < n} \bigl(1 + r\,s_i(v)\bigr).
+\]
+En particulier $1 + r\,s_0(u+v) \leq (1 + r\,s_0(u))(1 + r\,s_0(v))$.
+\end{enonce}
+
+\begin{lemme}\label{lem:1-bessel}
+Soient $(y_i)_{i \in I}$ une famille finie de vecteurs deux à deux orthogonaux, de normes $\leq 1$, et $z$ un vecteur. Alors $\sum_i |\langle y_i, z\rangle|^2 \leq \|z\|^2$.
+\end{lemme}
+
+\begin{proof}
+Posons $c_i = \langle y_i, z\rangle$, $p = \sum_i c_i y_i$ et $S = \sum_i |c_i|^2$. On a $\langle p, z\rangle = \sum_i \bar c_i c_i = S$. Par l'orthogonalité, $\langle y_i, p\rangle = c_i \|y_i\|^2$, d'où $\|p\|^2 = \sum_i |c_i|^2 \|y_i\|^2 \leq S$. L'inégalité de Cauchy-Schwarz donne $S \leq \|p\|\,\|z\|$, donc $S^2 \leq \|p\|^2 \|z\|^2 \leq S\,\|z\|^2$. Si $S > 0$, on divise par $S$ ; si $S = 0$, il n'y a rien à démontrer.
+\end{proof}
+
+\begin{lemme}\label{lem:1-poids}
+Soient $(s_j)_{j \geq 0}$ une suite réelle positive et décroissante, et $c_0, \ldots, c_{d-1}$ des réels de $[0,1]$ de somme $\leq n$. Alors $\sum_{j < d} s_j c_j \leq \sum_{j < n} s_j$.
+\end{lemme}
+
+\begin{proof}
+Posons $\varepsilon_j = 1$ si $j < n$ et $\varepsilon_j = 0$ sinon. Pour tout $j < d$, on a $s_j c_j \leq \varepsilon_j s_j + s_n(c_j - \varepsilon_j)$. Si $j < n$, cela s'écrit $s_j(c_j - 1) \leq s_n(c_j - 1)$, qui vient de $s_j \geq s_n$ et $c_j \leq 1$ ; si $j \geq n$, cela s'écrit $s_j c_j \leq s_n c_j$, qui vient de $s_j \leq s_n$ et $c_j \geq 0$. En sommant, $\sum_j s_j c_j \leq \sum_{j < \min(n,d)} s_j + s_n\bigl(\sum_j c_j - \min(n,d)\bigr)$. La somme des $c_j$ est $\leq n$ par hypothèse et $\leq d$ puisque chaque $c_j$ est $\leq 1$ ; le second terme est donc $\leq 0$, et le premier est $\leq \sum_{j<n} s_j$ puisque les $s_j$ sont positifs.
+\end{proof}
+
+\begin{lemme}\label{lem:1-schmidt}
+Soit $T : E \to F$ linéaire. Pour tous $j$, $k < d$, $\langle Te_j, Te_k\rangle = s_k(T)^2 \langle e_j, e_k\rangle$. En conséquence $\|Te_j\| = s_j(T)$, $Te_j = s_j(T)\, f_j$, les $f_j$ sont deux à deux orthogonaux et de normes $\leq 1$, et $\langle f_j, Te_j\rangle = s_j(T)$.
+\end{lemme}
+
+\begin{proof}
+On a $\langle Te_j, Te_k\rangle = \langle e_j, T^*Te_k\rangle = s_k(T)^2 \langle e_j, e_k\rangle$. Pour $j = k$, cela donne $\|Te_j\|^2 = s_j(T)^2$. Si $s_j(T) = 0$, alors $Te_j = 0 = s_j(T) f_j$ ; sinon $s_j(T) f_j = Te_j$ par définition. Pour $j \neq k$, $\langle f_j, f_k\rangle$ est un multiple de $\langle Te_j, Te_k\rangle = 0$. La norme de $f_j$ vaut $s_j(T)^{-1} s_j(T)$, c'est-à-dire $1$, ou $0$ si $s_j(T) = 0$. Enfin $\langle f_j, Te_j\rangle = s_j(T)^{-1} \|Te_j\|^2 = s_j(T)$, les deux membres étant nuls si $s_j(T) = 0$.
+\end{proof}
+
+\begin{lemme}[principe de Ky Fan, majoration]\label{lem:1-kyfan}
+Soient $T : E \to F$ linéaire, $I$ un ensemble fini à au plus $n$ éléments, $(x_i)_{i \in I}$ dans $E$ et $(y_i)_{i \in I}$ dans $F$ deux familles chacune formée de vecteurs deux à deux orthogonaux de normes $\leq 1$. Alors
+\[
+  \Bigl| \sum_{i \in I} \langle y_i, T x_i\rangle \Bigr| \leq \sum_{j < n} s_j(T).
+\]
+\end{lemme}
+
+\begin{proof}
+Écrivons $s_j = s_j(T)$. En développant $x_i = \sum_j \langle e_j, x_i\rangle e_j$ et en utilisant $Te_j = s_j f_j$ (lemme~\ref{lem:1-schmidt}),
+\[
+  \sum_{i} \langle y_i, Tx_i\rangle = \sum_{j < d} \sum_i \langle e_j, x_i\rangle\, s_j\, \langle y_i, f_j\rangle .
+\]
+Posons $a_j = \sum_i |\langle x_i, e_j\rangle|^2$ et $b_j = \sum_i |\langle y_i, f_j\rangle|^2$. Par l'inégalité $\alpha\beta \leq (\alpha^2 + \beta^2)/2$, le module du membre de droite est au plus $\sum_j s_j c_j$, où $c_j = (a_j + b_j)/2$. Le lemme~\ref{lem:1-bessel}, appliqué à la famille $(x_i)$ et à $z = e_j$, donne $a_j \leq 1$, et appliqué à $(y_i)$ et à $z = f_j$, donne $b_j \leq \|f_j\|^2 \leq 1$. Appliqué à la famille orthonormée $(e_j)$ et à $z = x_i$, il donne $\sum_j |\langle e_j, x_i\rangle|^2 \leq \|x_i\|^2 \leq 1$, d'où $\sum_j a_j \leq |I| \leq n$ ; appliqué à la famille $(f_j)$ et à $z = y_i$, il donne de même $\sum_j b_j \leq n$. Les $c_j$ sont donc dans $[0,1]$, de somme $\leq n$, et le lemme~\ref{lem:1-poids} conclut, la suite $(s_j)$ étant positive et décroissante.
+\end{proof}
+
+\begin{proof}[Démonstration du premier énoncé]
+(1) Appliquons le lemme~\ref{lem:1-schmidt} à $w = u + v$, et soit $I$ l'ensemble des $j < d$ tels que $j < n$ ; il a $\min(n, d)$ éléments. Comme $s_j(w) = 0$ pour $j \geq d$, $\sum_{j < n} s_j(w) = \sum_{j \in I} s_j(w) = \sum_{j \in I} \langle f_j, w e_j\rangle$, et cette somme est égale à
+\[
+  \sum_{j \in I} \langle f_j, u e_j\rangle + \sum_{j \in I} \langle f_j, v e_j\rangle .
+\]
+Les familles $(e_j)$ et $(f_j)$, indexées par $I$, vérifient les hypothèses du lemme~\ref{lem:1-kyfan}. Appliqué à $T = u$ puis à $T = v$, il majore les deux sommes en module par $\sum_{j<n} s_j(u)$ et $\sum_{j<n} s_j(v)$.
+
+(2) On a $\sigma_n^0 = 1$, la seule partie à $0$ élément étant vide, et $\sigma_n^1(T) = \sum_{j<n} s_j(T)$. Pour $m = 0$, l'inégalité est $1 \leq 1$. Pour $m = 1$, son second membre est $\sigma_n^1(v) + \sigma_n^1(u)$, et c'est~(1).
+\end{proof}
+
+\begin{proof}[Démonstration du second énoncé]
+En développant le produit,
+\[ \textstyle\prod_{i<n}(1 + r a_i) = \sum_{m=0}^{n} r^m e_m(a_0, \ldots, a_{n-1}), \]
+où $e_m$ est la fonction symétrique élémentaire de degré $m$ ; appliqué aux valeurs singulières, cela donne $\prod_{i<n}(1 + r s_i(T)) = \sum_{m \leq n} r^m \sigma_n^m(T)$. Posons $A_m = \sigma_n^m(u)$, $B_m = \sigma_n^m(v)$ et $C_m = \sigma_n^m(u+v)$, tous positifs. L'hypothèse donne
+\[
+  \sum_{m \leq n} r^m C_m \leq \sum_{m \leq n} \ \sum_{p \leq m} r^p A_p\, r^{m-p} B_{m-p} .
+\]
+En échangeant les sommations et en posant $k = m - p$, le second membre est la somme des $r^p A_p\, r^k B_k$ sur les couples $(p, k)$ tels que $p + k \leq n$. Les termes étant positifs, elle est au plus la somme sur tous les couples $p, k \leq n$, qui vaut $\bigl(\sum_{p \leq n} r^p A_p\bigr)\bigl(\sum_{k \leq n} r^k B_k\bigr)$. Pour $n = 1$, l'hypothèse porte sur $m \in \{0, 1\}$ et c'est le premier énoncé.
+\end{proof}
+
+\begin{remarque}
+Pour $m = 1$, le système~(16) est l'inégalité de Ky Fan (1951), dont la démonstration suit ici la voie classique par le principe du maximum. La bibliothèque utilisée définit les valeurs singulières d'une application linéaire entre espaces de dimension finie et en démontre la décroissance, mais elle ne contient ni le principe de Ky Fan ni son inégalité. Le lemme~\ref{lem:1-kyfan} ne demande pas que les familles soient orthonormées : il suffit qu'elles soient orthogonales et de normes $\leq 1$, ce qui permet d'y mettre la famille $(f_j)$, dont certains termes peuvent être nuls. La démonstration ne suit pas celle des pages~71 et~72, qui passe par les puissances extérieures, le corollaire~2 et la proposition~3. Pour $m = 1$, celle de la page revient au même principe : $\alpha_1(|wu|) = \operatorname{Tr}|wu|$ avec $w$ de rang $\leq n$ et de norme $\leq 1$.
+\end{remarque}
+
+\begin{remarque}
+Le second énoncé est l'implication que la page énonce par \q{et plus précisément} : le système~(16) donne~(15) coefficient par coefficient, sans autre hypothèse que la positivité des valeurs singulières. La réciproque n'est pas démontrée ici ; la piste affirme que le système est strictement plus fort que~(15), et ce point n'est pas vérifié. Pour $n = 1$, (15) se réduit à $s_0(u+v) \leq s_0(u) + s_0(v)$, qui est l'inégalité triangulaire pour la norme d'opérateur. La ligne coupée au bas de la page~71 mentionne~(16) et $n = 1$ ; le reste de la ligne est illisible.
+\end{remarque}
+
+Ne sont pas démontrés ici : le système~(16) pour $2 \leq m \leq n$, qui demande les puissances extérieures hilbertiennes et la norme trace sur elles (proposition~2 et corollaire~2 de la page~71, avec la borne $p!\,q!/(p+q)!$), ainsi que la proposition~3 ; la forme produit~(15) pour $n \geq 2$ ; le passage de la dimension finie aux opérateurs compacts entre espaces de Hilbert ; l'assertion de la page~73 sur l'optimalité du système.

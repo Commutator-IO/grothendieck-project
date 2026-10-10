@@ -487,7 +487,7 @@ function Pager({
  */
 function ProvedInLean() {
   const link = 'text-brand-700 underline decoration-brand-200 underline-offset-2';
-  // Ten cards at a time, as the list below: twenty-five folders already.
+  // Ten cards at a time, as the list below: twenty-seven folders already.
   const [page, setPage] = useState(0);
   const shown = PROOFS.slice(page * PAGE, (page + 1) * PAGE);
   const turn = (p: number) => {

@@ -312,40 +312,66 @@ export const PROOFS: Proof[] = [
   {
     folder: '77',
     batch: 4,
-    page: '68–71, 87',
-    name: 'The universal discriminant',
+    page: '68–71, 87, 117–124',
+    name: 'The universal discriminant; the canonical symmetry',
     statement:
-      'For the universal quadratic form of odd rank, the determinant of the polar form is divisible by 2 in ℤ[Y], so the half-discriminant δ′ is defined over any base. In even rank 2n, (−1)ⁿΔ = B² − 4C with B the sum over perfect matchings of the products of the off-diagonal coefficients.',
+      'For the universal quadratic form of odd rank, 2 divides the determinant of the polar form in ℤ[Y], so δ′ is defined over any base; in every even rank 2n, (−1)ⁿΔ ≡ B² mod 4, B the hafnian of the off-diagonal coefficients. For (T, q, a) with q(a) = 1, σ = id − π ⊗ a is an involutive isometry fixing ker π.',
     found:
-      'The odd case holds for every odd rank: modulo 2 the polar matrix equals an antisymmetric matrix over ℤ[Y], whose determinant vanishes, a shorter route than the page’s count of graphs. The even case is proved in ranks 2 and 4, where the opposite sign is refuted and the coefficients of p. 87 are confirmed; the general even rank needs a Pfaffian, which mathlib lacks.',
-    verdict: 'partly proved',
+      'Both discriminant statements hold for every rank, without a Pfaffian: the odd case lifts to an antisymmetric matrix over ℤ[Y]; in even rank det K ≡ (1 − 2n) det P mod 4 and det K is a square in ℤ[Y] by integral closure. The opposite sign is refuted in ranks 2 and 4. The uniqueness of σ on p. 123 needs a connected base: in general the isometries fixing ker π are id − eπ ⊗ a, e idempotent. σ² = id needs π(a) = 2, where the page writes π(a) = 1.',
+    verdict: 'holds, more generally',
     lean: 'lean/Grothendieck/Folder77.lean',
-    theorems: ['two_dvd_det_polar', 'det_polar_eq', 'disc_rank_two', 'disc_rank_four', 'not_dvd_rank_four'],
+    theorems: ['two_dvd_det_polar', 'disc_rank_four', 'four_dvd_disc_sub_hafnian_sq', 'disc_even_rank', 'canSym_isometry', 'canSym_canSym', 'eq_of_isometry_fix', 'eq_id_or_canSym'],
   },
   {
     folder: '84',
     batch: 4,
-    page: '63–64, 85–86',
-    name: 'Product of quadratic algebras',
+    page: '47–53, 63–64, 77–79, 85–86, 123–131',
+    name: 'Product of quadratic algebras; the 2-regular classification; χ-split extensions',
     statement:
-      'In split coordinates, over any commutative ring and without dividing by 2, 2U₁U₂ + b₁U₂ + b₂U₁ satisfies the quadratic equation with b = b₁b₂, c = c₁b₂² + c₂b₁² − 4c₁c₂, so δ = δ₁δ₂. The map from E₁ ⊗ E₂ modulo Im(σ₁⊗σ₂ − id) to E₁ * E₂ is bijective iff 2R + b₁R + b₂R = R.',
+      'In split coordinates over any commutative ring, 2U₁U₂ + b₁U₂ + b₂U₁ satisfies the equation with b = b₁b₂, c = c₁b₂² + c₂b₁² − 4c₁c₂, and the coinvariants map is bijective iff 2R + b₁R + b₂R = R. Free quadratic algebras are isomorphic iff their data differ by V = εU + t; with 2 regular, iff δ′ = ε²δ and b′ ≡ εb mod 2. χ-split extensions form a commutative, associative, unital product.',
     found:
-      'Both hold over the ring itself, with no base change and no rank argument; the reading’s correction of « 4c₁c₁ » to 4c₁c₂ is confirmed. For the invariants, the page’s « universally » is needed: over ℤ[X] with b₁ = X, b₂ = 0 the map is an isomorphism while (2, X) is a proper ideal. The pointwise and intrinsic forms are not proved.',
-    verdict: 'holds',
+      'All hold over the ring itself; « 4c₁c₁ » read 4c₁c₂ is confirmed. The page’s « universally » is needed on p. 86 (ℤ[X], b₁ = X, b₂ = 0), « 2 regular » is needed on p. 48 (over 𝔽₂, 𝔽₂ × 𝔽₂ and 𝔽₄ share δ and T₀), and γχ = 2 is necessary already for the unit objects. The cases with L not trivial and the intrinsic construction over a general base are not proved.',
+    verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder84.lean',
-    theorems: ['identity_page64', 'tensor_root', 'disc_mul', 'coinvariants_bijective_iff', 'invariants_universally_iff', 'invariants_not_iff'],
+    theorems: ['identity_page64', 'tensor_root', 'disc_mul', 'coinvariants_bijective_iff', 'invariants_universally_iff', 'qalg_iso_iff_moves', 'qalg_iso_iff_disc', 'int_qalg_iso_iff', 'two_regular_needed', 'prod_assoc', 'uProd_cocycle', 'invertible_iff', 'push_pull_unit_iff'],
   },
   {
     folder: '85',
     batch: 2,
-    page: '10, 30, 40',
-    name: 'The invariant of a rotation of order 5',
+    page: '4–10, 29–31, 40',
+    name: 'Rotations of order 5; representations of G₂ in PGL₂',
     statement:
-      'For g ∈ GL₂(R) nowhere scalar, with A(g) = Tr(g)²/det g − 2, g⁵ is scalar iff A(g)² + A(g) − 1 = 0; then A(g²) = −1 − A(g). An explicit (2,3,5) model exists over ℤ[ζ₅].',
+      'For g ∈ GL₂(R) nowhere scalar, with A(g) = Tr(g)²/det g − 2, g⁵ is scalar iff A(g)² + A(g) − 1 = 0, with an explicit (2,3,5) model over ℤ[ζ₅]. For G₂ → PGL₂, (*) at every point holds iff the τᵢ are traceless and (α₀ + 2)(α₁ + 2)(α₀ + α₁) is a unit; such representations are rigid, and realised by an explicit normal form over R[T]/(T² − α₀T + 1).',
     found:
-      'The computation holds over every base, characteristics 2, 3 and 5 included; the exclusion of characteristic 5 on p. 30 is needed only without the hypothesis « nowhere scalar ». An explicit split model needs ℤ[ζ₅], which is why p. 40 speaks of forms of PGL₂. Rigidity and representability by Spec ℤ[T]/(T² + T − 1) are not proved.',
+      'Everything holds over every base, characteristics 2, 3 and 5 included; each factor of the discriminant matches one condition of (*). An explicit split model needs the quadratic extension, which is why the pages speak of forms of PGL₂. In PGL₂, order 6 needs 6 invertible. Conjugacy is proved over a field containing a root of T² − α₀T + 1; representability and descent are not proved.',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder85.lean',
-    theorems: ['invA_smul', 'sq_add_sub_of_pow_five', 'pow_five_of_sq_add_sub', 'invA_sq_of_root', 'exists_model_adjoinRoot'],
+    theorems: ['sq_add_sub_of_pow_five', 'exists_model_adjoinRoot', 'discr_isUnit_of_star', 'star_of_discr_isUnit', 'rigid', 'conj_of_same_invariants', 'exists_normalForm_adjoinRoot', 'order_six_iff'],
+  },
+  {
+    folder: '1',
+    batch: 4,
+    page: '71–73',
+    name: 'The σ_n^m system of singular values',
+    statement:
+      'For linear maps u, v between finite-dimensional inner product spaces, σ_n^m(u + v) ≤ Σ_{p ≤ m} σ_n^p(u) σ_n^{m−p}(v), σ_n^m the elementary symmetric functions of the first n singular values; the system implies ∏(1 + r s_i(u + v)) ≤ ∏(1 + r s_i(u)) ∏(1 + r s_i(v)).',
+    found:
+      'Proved for m ≤ 1 and every n, which is Ky Fan’s inequality, absent from mathlib; the maximum principle needs only orthogonal families of norm ≤ 1. The implication from the system to the product form holds. The cases 2 ≤ m ≤ n go through Hilbert exterior powers, which mathlib lacks, and compact operators are not attempted.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder1.lean',
+    theorems: ['sum_singularValues_add_le', 'sigma_system_of_le_one', 'prod_le_of_sigma_system', 'one_add_singularValues_zero_le'],
+  },
+  {
+    folder: '74',
+    batch: 5,
+    page: '92–103, 116',
+    name: 'Reduction to a Latin square and its double covers',
+    statement:
+      'A graph in which every edge lies in one triangle and every vertex off a triangle is adjacent to one of its vertices, with no empty fibre over a triangle t₀, gives a Latin square Γ on the quotients E_α with three double covers whose pull-backs to Γ are identified by a transitive system; conversely such data, with axiom (Ka), give such a graph.',
+    found:
+      'Holds under a reconstructed form of the marginal axiom (Ka), whose end is illegible. Under (*), axiom 1 holds iff (Ka) does, and page 97’s claim fails without it: an order-2 Latin square with trivial covers satisfies the other conditions and breaks axiom 1. Axiom 3 is not needed for the reduction. Page 116 proves only the case of a group table.',
+    verdict: 'the reading dropped a hypothesis',
+    lean: 'lean/Grothendieck/Folder74.lean',
+    theorems: ['Config.latin', 'Config.pullback', 'Config.scholieIso', 'Scholie.scholie_converse', 'Scholie.axiom1_iff_ka', 'ka_needed', 'p116'],
   },
 ];

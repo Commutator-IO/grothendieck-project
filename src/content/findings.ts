@@ -7639,6 +7639,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Decide whether the coefficientwise system, and not just its consequences for concave f, is in Rotfel\'d (1967, 1969), Thompson ("Convex and concave functions of singular values of matrix sums", 1976), Marshall–Olkin–Arnold ch. 9–10 (elementary symmetric functions and weak majorisation), Bhatia, Matrix Analysis, ch. IV, or Simon, Trace Ideals, ch. 3. Two web searches made in this pass (2026-10-10) turned up Seiler–Simon and the Thompson–Freede and Bourin–Uchiyama line, and no statement of this system. Those results were not read, so they are not a search of the sources.',
+    lean: { file: 'lean/Grothendieck/Folder1.lean', found: "Partly, in finite dimension: the case m = 1 (Ky Fan’s inequality, for every n) and the implication from the system to the product form are proved; the cases 2 ≤ m ≤ n, which go through exterior powers, and compact operators are not." },
   },
   {
     id: '1-mixed-schwarz-fredholm-coefficients',
@@ -7772,6 +7773,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'The classification of generalized quadrangles of order (2, t) (t ∈ {1, 2, 4}, each unique) is classical and is not the question; the question is whether the coordinatisation relative to a fixed line — the lines disjoint from it, modulo the symmetry about it, forming a 3-net of order t, with the quadrangle recovered as a double cover — is set out in Payne and Thas, Finite Generalized Quadrangles (1984, 2nd ed. 2009), §1.3, §5.2 and ch. 8 on symmetries about a line, in Dixmier and Zara (1976) on quadrangles studied around two non-collinear points, or in the coordinatisation of quadrangles by Hanssens and Van Maldeghem; all cited from memory. If it is there, mark matched. Two web searches on 2026-10-10 returned only background pages (Thas on axes of symmetry, Wikipedia-derived definitions) and nothing that was read on this question, so nothing counts as searched. Before searching, the transcription of the margin of page 96 should be rechecked against the facsimile, since the axiom (Ka) is part of the statement.',
+    lean: { file: 'lean/Grothendieck/Folder74.lean', found: "Holds under a reconstructed form of the marginal axiom (Ka), whose end is illegible: the graph gives a Latin square with three double covers and a transitive system, and conversely; under (*) axiom 1 holds iff (Ka) does, and page 97’s claim fails without it (an order-2 Latin square with trivial covers). Axiom 3 is not needed." },
   },
   {
     id: '74-leaves-6-before-5',
@@ -7861,6 +7863,7 @@ export const FINDINGS: Finding[] = [
     status: 'matched',
     settle:
       'Matched on isomorphism classes. Voight states it for free algebras over an affine base and through an Artin–Schreier action; the folder states an equivalence of fibred categories over a scheme or locally ringed topos. If a reader judges that globalisation not routine, re-open as candidate and check Loos 1996 § 1.2 and Knus, Quadratic and Hermitian Forms over Rings, III.3–4, before anything else.',
+    lean: { file: 'lean/Grothendieck/Folder84.lean', found: "Partly, for free algebras with basis (1, U): two of them are isomorphic iff V = εU + t, and when 2 is regular iff δ′ = ε²δ and b′ ≡ εb mod 2; every δ ≡ τ² mod 4 occurs; over ℤ this is the classification by a discriminant ≡ 0, 1 mod 4. « 2 regular » is needed: over 𝔽₂, 𝔽₂ × 𝔽₂ and 𝔽₄ share δ and T₀. The case of L not trivial is not proved." },
   },
   {
     id: '84-chi-trivialised-extension-product',
@@ -7877,6 +7880,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Decide whether this χ-formalism, for χ other than 2, is in the literature: look in Loos 1996 (unital quadratic forms and their tensor product), in Deligne’s 2005 letter to Rost and Bhargava as described by Voight and by Biesel–Gioia, and in work on generalised effective Cartier divisors / line bundles with a section modulo χ (Deligne–Faltings log structures). Neither Voight 2016 nor Biesel–Gioia § 8, read in this pass, treat a general χ, but that is not a search for this statement.',
+    lean: { file: 'lean/Grothendieck/Folder84.lean', found: "Partly, in coordinates for split extensions: the product is associative, commutative and unital, the cocycle relation of p. 131 holds, an object is invertible iff bR + χR = R when L = 𝒪, and pushout and pullback agree when γχ = 2 — a condition already necessary for the unit objects (none over ℤ with χ = 4). The intrinsic construction over a general base is not proved." },
   },
   {
     id: '84-leaves-35-38-reversed',
@@ -7913,7 +7917,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'The numerical consequence — (−1)ⁿ det ≡ 0 or 1 mod 4 for an even ℤ-lattice of rank 2n — is believed classical (not verified in this pass) and would not by itself match the claim. Read Knus, Quadratic and Hermitian Forms over Rings (1991), IV §§ 3–4 (the discriminant module and the quadratic discriminant algebra), Kneser’s work on the half-discriminant, and Bass, « Clifford algebras and spinor norms over a commutative ring » (1974), for an explicit universal B with (−1)ⁿΔ ≡ B² mod 4; if B is the matching sum there, or if the norm form of Z_q yields it, mark matched.',
-    lean: { file: 'lean/Grothendieck/Folder77.lean', found: "Partly: proved in ranks 2 and 4, where the opposite sign is refuted; the general even rank is not proved (it needs a Pfaffian, absent from mathlib)." },
+    lean: { file: 'lean/Grothendieck/Folder77.lean', found: "Holds as stated, for every even rank: 4 divides (−1)ⁿΔ − B² in ℤ[Y]. The proof needs no Pfaffian: det K ≡ (1 − 2n) det P mod 4, det K is a square in ℤ[Y] by integral closure, and its root is the hafnian mod 2. C is written out only in ranks 2 and 4." },
   },
   {
     id: '77-odd-rank-half-discriminant',
@@ -8035,6 +8039,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check Knus 1991 (quadratic spaces with a distinguished vector, IV) and the literature on affine quadrics over rings for the (T, q, a) dictionary and the canonical symmetry in characteristic 2. Because the hypothesis that makes the statement true is struck twice on the pages, decide first, against the facsimile through /transcribe-grothendieck, whether the page abandons it.',
+    lean: { file: 'lean/Grothendieck/Folder77.lean', found: "The linear-algebra core holds over any ring: σ = id − π ⊗ a is an involutive isometry, the point symmetry of centre a/2 when 2 is invertible and a transvection when 2 = 0. Its uniqueness (p. 123) needs a connected base: in general the isometries fixing ker π are id − eπ ⊗ a, e idempotent. The equivalence with (T, q, a) is not proved." },
   },
   {
     id: '77-leaves-13-19-and-129-130-order',
@@ -8070,6 +8075,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Vinberg, « Discrete linear groups generated by reflections » (1971) §§1–3 and McMullen–Schulte, Abstract Regular Polytopes ch. 5 for the field case, then look in the literature on SL₂ / PGL₂ character varieties of triangle and Coxeter groups over ℤ (trace coordinates of Fricke–Klein–Vogt type) for the integral, relative statement; mark matched if the open set of 𝔸²_ℤ with the invertible discriminant appears as a fine moduli space.',
+    lean: { file: 'lean/Grothendieck/Folder85.lean', found: "Partly: over any ring, (*) at every point holds iff the τᵢ are traceless and (α₀ + 2)(α₁ + 2)(α₀ + α₁) is a unit, each factor matching one condition; rigidity holds over any ring; an explicit normal form exists over R[T]/(T² − α₀T + 1), and over a field containing such a root two triples with the same invariants are conjugate. Representability by the complement of three lines in 𝔸²_ℤ is not proved." },
   },
   {
     id: '85-a5-pgl2-moduli-spec-z-phi',

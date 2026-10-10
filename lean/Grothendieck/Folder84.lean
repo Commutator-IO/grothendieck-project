@@ -49,6 +49,22 @@ by `2`:
 * `invariants_not_iff`: the converse needs the base change. Over `ℤ[X]`, with
   `b₁ = X` and `b₂ = 0`, the map `A → (A₁ ⊗ A₂)^{σ₁⊗σ₂}` is an isomorphism,
   though `2, X, 0` generate a proper ideal.
+* the theorem of page 48 in the free case (finding
+  `84-two-regular-triplet-classification`): `qalg_iso_iff_moves` (over any `R`,
+  `R[U]/(U² + bU + c) ≅ R[V]/(V² + b'V + c')` iff `V = εU + t`),
+  `qalg_iso_iff_disc` (if `2` is a non-zero-divisor, iff `δ' = ε²δ` and
+  `b' ≡ εb mod 2`), `translates_iff` and `translates_unique` (`L` with its basis
+  fixed), `lift_indep` and `exists_of_congr` (every `δ ≡ τ² mod 4` occurs, any
+  `R`), `int_disc_iff` and `int_qalg_iso_iff` (over `ℤ`), and
+  `two_regular_needed` (over `𝔽₂`, `𝔽₂ × 𝔽₂` and `𝔽₄` share `δ` and `T₀`);
+* `χ`-split extensions in coordinates (finding
+  `84-chi-trivialised-extension-product`): `isChiSplitting_of`,
+  `chiSplitting_eq`, `iso_iff` (morphisms are transvections, `b = b' + χw`),
+  `prod_change` and `uProd_cocycle` (pages 129 and 131), `prod_comm`,
+  `prod_assoc`, `prod_unit`, `chiRel_mul`, `invertible_iff` and
+  `span_eq_top_iff_isUnit` (page 79, `L = 𝒪`), `push_pull`,
+  `push_pull_square` and `push_pull_unit_iff` (pages 125 to 169: the comparison
+  of pushout and pullback needs and uses `γχ = 2`).
 -/
 
 universe u
@@ -465,5 +481,524 @@ theorem invariants_not_iff :
     omega
 
 end Coordinates
+
+/-! ## The theorem of page 48 in the free case: quadratic algebras and `(δ, T₀)` -/
+
+section TwoRegular
+
+variable {R : Type*} [CommRing R]
+
+/-- The polynomial `U² + bU + c`. -/
+noncomputable def qpoly (b c : R) : R[X] := X ^ 2 + C b * X + C c
+
+lemma qpoly_monic (b c : R) : (qpoly b c).Monic := by
+  unfold qpoly; monicity!
+
+lemma qpoly_natDegree [Nontrivial R] (b c : R) : (qpoly b c).natDegree = 2 := by
+  unfold qpoly; compute_degree!
+
+lemma qpoly_eval₂ {S : Type*} [CommRing S] (f : R →+* S) (x : S) (b c : R) :
+    (qpoly b c).eval₂ f x = x ^ 2 + f b * x + f c := by
+  simp [qpoly]
+
+/-- The quadratic algebra `R[U]/(U² + bU + c)`. -/
+abbrev QAlg (b c : R) := AdjoinRoot (qpoly b c)
+
+lemma root_sq (b c : R) :
+    AdjoinRoot.root (qpoly b c) ^ 2 + algebraMap R (QAlg b c) b * AdjoinRoot.root _
+      + algebraMap R (QAlg b c) c = 0 := by
+  have : AdjoinRoot.mk (qpoly b c) (X ^ 2 + C b * X + C c) = 0 := AdjoinRoot.mk_self
+  simpa using this
+
+/-- `(1, U)` is free in `R[U]/(U² + bU + c)`. -/
+lemma coords_zero {b c a e : R}
+    (h : algebraMap R (QAlg b c) a + algebraMap R (QAlg b c) e * AdjoinRoot.root _ = 0) :
+    a = 0 ∧ e = 0 := by
+  have hm : AdjoinRoot.mk (qpoly b c) (C e * X + C a) = 0 := by
+    rw [← h]; simp [add_comm]
+  rw [AdjoinRoot.mk_eq_zero] at hm
+  rcases subsingleton_or_nontrivial R with hR | hR
+  · exact ⟨Subsingleton.elim _ _, Subsingleton.elim _ _⟩
+  by_cases hp : C e * X + C a = 0
+  · have h0 := congrArg (coeff · 0) hp
+    have h1 := congrArg (coeff · 1) hp
+    simp at h0 h1
+    exact ⟨h0, h1⟩
+  · exfalso
+    refine (qpoly_monic b c).not_dvd_of_natDegree_lt hp ?_ hm
+    rw [qpoly_natDegree]
+    exact lt_of_le_of_lt natDegree_linear_le (by norm_num)
+
+/-- `(1, U)` generates `R[U]/(U² + bU + c)`. -/
+lemma coords_exist {b c : R} (y : QAlg b c) :
+    ∃ a e : R, y = algebraMap R _ a + algebraMap R _ e * AdjoinRoot.root _ := by
+  rcases subsingleton_or_nontrivial R with hR | hR
+  · have h10 : (1 : R) = 0 := Subsingleton.elim _ _
+    refine ⟨0, 0, ?_⟩
+    have : (1 : QAlg b c) = 0 := by rw [← map_one (algebraMap R (QAlg b c)), h10, map_zero]
+    rw [← mul_one y, this]; simp
+  obtain ⟨p, rfl⟩ := AdjoinRoot.mk_surjective y
+  have hm := qpoly_monic b c
+  have h1 : qpoly b c ≠ 1 := by
+    intro h; have := congrArg natDegree h; rw [qpoly_natDegree] at this; simp at this
+  have hq : (p %ₘ qpoly b c).natDegree ≤ 1 := by
+    have := natDegree_modByMonic_lt p hm h1
+    rw [qpoly_natDegree] at this; omega
+  refine ⟨(p %ₘ qpoly b c).coeff 0, (p %ₘ qpoly b c).coeff 1, ?_⟩
+  have e : AdjoinRoot.mk (qpoly b c) p = AdjoinRoot.mk (qpoly b c) (p %ₘ qpoly b c) := by
+    rw [AdjoinRoot.mk_eq_mk]
+    exact ⟨p /ₘ qpoly b c, by
+      have := modByMonic_add_div p (qpoly b c); linear_combination -this⟩
+  rw [e, eq_X_add_C_of_natDegree_le_one hq]
+  simp [add_comm]
+
+/-- The change of variables `V = εU + t` of the quadratic data:
+`(b, c) ↦ (εb − 2t, ε²c − εbt + t²)`. -/
+def Moves (b c b' c' : R) : Prop :=
+  ∃ (ε : Rˣ) (t : R), b' = ε * b - 2 * t ∧ c' = ε ^ 2 * c - ε * b * t + t ^ 2
+
+/-- If `(b', c')` comes from `(b, c)` by `V = εU + t`, the algebras are isomorphic. -/
+noncomputable def movesHom {b c b' c' : R} (ε : Rˣ) (t : R)
+    (hb : b' = ε * b - 2 * t) (hc : c' = ε ^ 2 * c - ε * b * t + t ^ 2) :
+    QAlg b' c' →ₐ[R] QAlg b c :=
+  AdjoinRoot.liftAlgHom _ (Algebra.ofId R _)
+    (algebraMap R _ (ε : R) * AdjoinRoot.root _ + algebraMap R _ t) (by
+      have r := root_sq b c
+      show (qpoly b' c').eval₂ (algebraMap R (QAlg b c)) _ = 0
+      rw [qpoly_eval₂, hb, hc]
+      simp only [map_add, map_sub, map_mul, map_pow, map_ofNat]
+      linear_combination (algebraMap R (QAlg b c) (ε : R)) ^ 2 * r)
+
+lemma moves_symm {b c b' c' : R} (ε : Rˣ) (t : R)
+    (hb : b' = ε * b - 2 * t) (hc : c' = ε ^ 2 * c - ε * b * t + t ^ 2) :
+    b = ((ε⁻¹ : Rˣ) : R) * b' - 2 * (-((ε⁻¹ : Rˣ) : R) * t) ∧
+      c = ((ε⁻¹ : Rˣ) : R) ^ 2 * c' - ((ε⁻¹ : Rˣ) : R) * b' * (-((ε⁻¹ : Rˣ) : R) * t)
+        + (-((ε⁻¹ : Rˣ) : R) * t) ^ 2 := by
+  have u : ((ε⁻¹ : Rˣ) : R) * ε = 1 := by simp
+  constructor
+  · rw [hb]; linear_combination (-b) * u
+  · rw [hc, hb]; linear_combination (-c * (((ε⁻¹ : Rˣ) : R) * ε + 1)) * u
+
+/-- **The free case of the classification, any base.** `R[U]/(U² + bU + c)` and
+`R[V]/(V² + b'V + c')` are isomorphic `R`-algebras if and only if
+`(b', c')` comes from `(b, c)` by a change of variables `V = εU + t`,
+`ε` a unit. -/
+theorem qalg_iso_iff_moves (b c b' c' : R) :
+    Nonempty (QAlg b c ≃ₐ[R] QAlg b' c') ↔ Moves b c b' c' := by
+  constructor
+  · rintro ⟨φ⟩
+    obtain ⟨t, ε, hV⟩ := coords_exist (φ.symm (AdjoinRoot.root (qpoly b' c')))
+    obtain ⟨s, η, hU⟩ := coords_exist (φ (AdjoinRoot.root (qpoly b c)))
+    -- `ηε = 1`
+    have hηε : η * ε = 1 := by
+      have e := φ.symm_apply_apply (AdjoinRoot.root (qpoly b c))
+      rw [hU, map_add, map_mul, AlgEquiv.commutes, AlgEquiv.commutes, hV] at e
+      have : algebraMap R (QAlg b c) (s + η * t) + algebraMap R (QAlg b c) (η * ε - 1)
+          * AdjoinRoot.root _ = 0 := by
+        simp only [map_add, map_mul, map_sub, map_one]; linear_combination e
+      have := (coords_zero this).2
+      linear_combination this
+    have key := congrArg φ.symm (root_sq b' c')
+    simp only [map_add, map_mul, map_pow, AlgEquiv.commutes, map_zero, hV] at key
+    have r := root_sq b c
+    have : algebraMap R (QAlg b c) (t ^ 2 + b' * t + c' - ε ^ 2 * c)
+        + algebraMap R (QAlg b c) (2 * t * ε + b' * ε - ε ^ 2 * b) * AdjoinRoot.root _ = 0 := by
+      simp only [map_add, map_sub, map_mul, map_pow, map_ofNat]
+      linear_combination key - (algebraMap R (QAlg b c) ε) ^ 2 * r
+    obtain ⟨h0, h1⟩ := coords_zero this
+    have hb' : b' = ε * b - 2 * t := by
+      linear_combination η * h1 - (2 * t + b' - ε * b) * hηε
+    refine ⟨Units.mkOfMulEqOne ε η (by rw [mul_comm]; exact hηε), t, hb', ?_⟩
+    simp only [Units.val_mkOfMulEqOne]
+    linear_combination h0 - t * hb'
+  · rintro ⟨ε, t, hb, hc⟩
+    obtain ⟨hb₁, hc₁⟩ := moves_symm ε t hb hc
+    refine ⟨AlgEquiv.ofAlgHom (movesHom _ _ hb₁ hc₁) (movesHom ε t hb hc) ?_ ?_⟩
+    · apply AdjoinRoot.algHom_ext
+      simp only [movesHom, AlgHom.coe_comp, Function.comp_apply, AdjoinRoot.liftAlgHom_root,
+        map_add, map_mul, AlgHom.commutes, AlgHom.id_apply]
+      rw [← sub_eq_zero]
+      have u : ((ε⁻¹ : Rˣ) : R) * ε = 1 := by simp
+      have := congrArg (algebraMap R (QAlg b' c')) u
+      simp only [map_mul, map_one] at this
+      simp only [map_neg]
+      linear_combination (AdjoinRoot.root (qpoly b' c') - algebraMap R _ t) * this
+    · apply AdjoinRoot.algHom_ext
+      simp only [movesHom, AlgHom.coe_comp, Function.comp_apply, AdjoinRoot.liftAlgHom_root,
+        map_add, map_mul, AlgHom.commutes, AlgHom.id_apply]
+      rw [← sub_eq_zero]
+      have u : (ε : R) * ((ε⁻¹ : Rˣ) : R) = 1 := by simp
+      have := congrArg (algebraMap R (QAlg b c)) u
+      simp only [map_mul, map_one] at this
+      simp only [map_neg]
+      linear_combination AdjoinRoot.root (qpoly b c) * this
+
+/-- The discriminant `δ = b² − 4c`. -/
+def disc (b c : R) : R := b ^ 2 - 4 * c
+
+/-- Page 47: `δ ≡ b² (mod 4)`, over any base. -/
+theorem disc_congr (b c : R) : b ^ 2 - disc b c = 4 * c := by unfold disc; ring
+
+/-- Page 47: the congruence `T₀² ≡ δ (mod 4)` does not depend on the lift `τ` of
+`T₀ ∈ R/2R`, since `(τ + 2a)² ≡ τ² (mod 4)`. -/
+theorem lift_indep (τ a δ : R) (h : ∃ k, τ ^ 2 - δ = 4 * k) :
+    ∃ k, (τ + 2 * a) ^ 2 - δ = 4 * k := by
+  obtain ⟨k, hk⟩ := h
+  exact ⟨k + a * τ + a ^ 2, by linear_combination hk⟩
+
+/-- Under `V = εU + t`, `δ' = ε²δ` and `b' ≡ εb (mod 2)`, over any base. -/
+theorem moves_invariants {b c b' c' : R} (h : Moves b c b' c') :
+    ∃ ε : Rˣ, disc b' c' = (ε : R) ^ 2 * disc b c ∧ ∃ s, b' = ε * b + 2 * s := by
+  obtain ⟨ε, t, hb, hc⟩ := h
+  exact ⟨ε, by rw [disc, disc, hb, hc]; ring, -t, by rw [hb]; ring⟩
+
+lemma cancel_four (h2 : ∀ x : R, 2 * x = 0 → x = 0) {x y : R} (h : 4 * x = 4 * y) : x = y := by
+  rw [← sub_eq_zero]
+  apply h2; apply h2
+  linear_combination h
+
+/-- **Théorème (page 48), the free affine case.** If `2` is a non-zero-divisor
+in `R`, `(b, c)` and `(b', c')` differ by a change of variables `V = εU + t`
+if and only if `δ' = ε²δ` and `b' ≡ εb (mod 2)` for some unit `ε`. -/
+theorem moves_iff_disc (h2 : ∀ x : R, 2 * x = 0 → x = 0) (b c b' c' : R) :
+    Moves b c b' c' ↔
+      ∃ ε : Rˣ, disc b' c' = (ε : R) ^ 2 * disc b c ∧ ∃ s, b' = ε * b + 2 * s := by
+  refine ⟨moves_invariants, ?_⟩
+  rintro ⟨ε, hd, s, hs⟩
+  refine ⟨ε, -s, by rw [hs]; ring, cancel_four h2 ?_⟩
+  unfold disc at hd
+  rw [hs] at hd
+  linear_combination -hd
+
+/-- The isomorphism classes of free quadratic algebras over `R`, `2` regular, are
+classified by `(δ, b mod 2)` up to `(ε²δ, εb)`. -/
+theorem qalg_iso_iff_disc (h2 : ∀ x : R, 2 * x = 0 → x = 0) (b c b' c' : R) :
+    Nonempty (QAlg b c ≃ₐ[R] QAlg b' c') ↔
+      ∃ ε : Rˣ, disc b' c' = (ε : R) ^ 2 * disc b c ∧ ∃ s, b' = ε * b + 2 * s := by
+  rw [qalg_iso_iff_moves, moves_iff_disc h2]
+
+/-- With `L` and its basis fixed (`ε = 1`), the translations `V = U + t`. -/
+def Translates (b c b' c' : R) (t : R) : Prop := b' = b - 2 * t ∧ c' = c - b * t + t ^ 2
+
+/-- **Théorème (page 48), with `L` trivialised.** If `2` is regular, a
+translation from `(b, c)` to `(b', c')` exists iff `δ' = δ` and
+`b' ≡ b (mod 2)`, and it is unique: the groupoid of free quadratic algebras with
+`L = R` is equivalent to the discrete set of pairs `(δ, T₀)`. -/
+theorem translates_iff (h2 : ∀ x : R, 2 * x = 0 → x = 0) (b c b' c' : R) :
+    (∃ t, Translates b c b' c' t) ↔ disc b' c' = disc b c ∧ ∃ s, b' = b + 2 * s := by
+  constructor
+  · rintro ⟨t, hb, hc⟩
+    exact ⟨by rw [disc, disc, hb, hc]; ring, -t, by rw [hb]; ring⟩
+  · rintro ⟨hd, s, hs⟩
+    refine ⟨-s, by rw [hs]; ring, cancel_four h2 ?_⟩
+    unfold disc at hd; rw [hs] at hd
+    linear_combination -hd
+
+theorem translates_unique (h2 : ∀ x : R, 2 * x = 0 → x = 0) {b c b' c' t t' : R}
+    (h : Translates b c b' c' t) (h' : Translates b c b' c' t') : t = t' := by
+  rw [← sub_eq_zero]; apply h2; linear_combination h.1 - h'.1
+
+/-- **Théorème (page 48), essential surjectivity.** Over any base, every `δ` with
+a `τ` such that `τ² ≡ δ (mod 4)` is the discriminant of `(τ, c)` for some `c`;
+conversely `b² ≡ δ (mod 4)` for every `(b, c)`. -/
+theorem exists_of_congr (δ τ : R) (h : ∃ k, τ ^ 2 - δ = 4 * k) :
+    ∃ c, disc τ c = δ := by
+  obtain ⟨k, hk⟩ := h
+  exact ⟨k, by unfold disc; linear_combination hk⟩
+
+/-- Page 53, over `ℤ`: the discriminants are the integers `≡ 0, 1 (mod 4)`. -/
+theorem int_disc_iff (δ : ℤ) : (∃ b c : ℤ, disc b c = δ) ↔ δ % 4 = 0 ∨ δ % 4 = 1 := by
+  constructor
+  · rintro ⟨b, c, rfl⟩
+    rcases Int.even_or_odd b with ⟨k, rfl⟩ | ⟨k, rfl⟩
+    · have e : disc (k + k) c = 4 * (k ^ 2 - c) := by unfold disc; ring
+      rw [e]; generalize k ^ 2 - c = m; omega
+    · have e : disc (2 * k + 1) c = 4 * (k ^ 2 + k - c) + 1 := by unfold disc; ring
+      rw [e]; generalize k ^ 2 + k - c = m; omega
+  · rintro (h | h)
+    · exact ⟨0, -(δ / 4), by unfold disc; omega⟩
+    · exact ⟨1, (1 - δ) / 4, by unfold disc; omega⟩
+
+/-- Page 53, over `ℤ`: `T₀` is determined by `δ`, and two quadratic rings
+`ℤ[U]/(U² + bU + c)` are isomorphic iff they have the same discriminant. -/
+theorem int_qalg_iso_iff (b c b' c' : ℤ) :
+    Nonempty (QAlg b c ≃ₐ[ℤ] QAlg b' c') ↔ disc b c = disc b' c' := by
+  have h2 : ∀ x : ℤ, 2 * x = 0 → x = 0 := fun x hx => by omega
+  rw [qalg_iso_iff_disc h2]
+  constructor
+  · rintro ⟨ε, hd, -⟩
+    have : (ε : ℤ) ^ 2 = 1 := by rcases Int.units_eq_one_or ε with h | h <;> simp [h]
+    rw [hd, this, one_mul]
+  · intro hd
+    refine ⟨1, by rw [hd]; simp, ?_⟩
+    have hev : Even ((b' - b) * (b' + b)) := ⟨2 * (c' - c), by
+      unfold disc at hd; linear_combination -hd⟩
+    have hsub : Even (b' - b) := by
+      rcases Int.even_mul.1 hev with h | h
+      · exact h
+      · rwa [Int.even_sub, ← Int.even_add]
+    obtain ⟨s, hs⟩ := hsub
+    exact ⟨s, by simp; linear_combination hs⟩
+
+/-- The hypothesis « 2 regular » is needed: over `𝔽₂`, `(b, c) = (1, 0)` and
+`(1, 1)` have the same `δ = 1` and the same `b mod 2`, but `𝔽₂[U]/(U² + U)` and
+`𝔽₂[U]/(U² + U + 1)` (that is `𝔽₂ × 𝔽₂` and `𝔽₄`) are not isomorphic. -/
+theorem two_regular_needed :
+    disc (1 : ZMod 2) 0 = disc (1 : ZMod 2) 1 ∧
+      ¬ Nonempty (QAlg (1 : ZMod 2) 0 ≃ₐ[ZMod 2] QAlg (1 : ZMod 2) 1) := by
+  refine ⟨by unfold disc; decide, ?_⟩
+  rw [qalg_iso_iff_moves]
+  rintro ⟨ε, t, -, hc⟩
+  have hε : (ε : ZMod 2) = 1 := by
+    clear hc
+    have := ε.ne_zero
+    generalize (ε : ZMod 2) = e at this ⊢
+    fin_cases e <;> first | rfl | exact (this rfl).elim
+  rw [hε] at hc
+  fin_cases t <;> revert hc <;> decide
+
+end TwoRegular
+
+/-! ## `χ`-split extensions and their product, in coordinates -/
+
+section ChiSplit
+
+variable {R : Type*} [CommRing R] (χ : R)
+variable {M L : Type*} [AddCommGroup M] [Module R M] [AddCommGroup L] [Module R L]
+
+/-- The `χ`-retraction of `E = M ⊕ L` given by `b : M → L`:
+`π(η, ξ) = b(η) + χξ` (pages 77 and 129). -/
+def piOf (b : M →ₗ[R] L) : M × L →ₗ[R] L :=
+  b ∘ₗ LinearMap.fst R M L + χ • LinearMap.snd R M L
+
+/-- The `χ`-section `ϖ(η) = (χη, −b(η))`. -/
+def varpiOf (b : M →ₗ[R] L) : M →ₗ[R] M × L :=
+  LinearMap.prod (χ • LinearMap.id) (-b)
+
+/-- A `χ`-scindage `(π, ϖ)` of `0 → L → M ⊕ L → M → 0` (page 169):
+`πα = χ`, `ψϖ = χ`, `απ + ϖψ = χ`. -/
+structure IsChiSplitting (π : M × L →ₗ[R] L) (ϖ : M →ₗ[R] M × L) : Prop where
+  retr : π ∘ₗ LinearMap.inr R M L = χ • LinearMap.id
+  sect : LinearMap.fst R M L ∘ₗ ϖ = χ • LinearMap.id
+  sum : LinearMap.inr R M L ∘ₗ π + ϖ ∘ₗ LinearMap.fst R M L = χ • LinearMap.id
+
+theorem isChiSplitting_of (b : M →ₗ[R] L) : IsChiSplitting χ (piOf χ b) (varpiOf χ b) where
+  retr := by ext; simp [piOf]
+  sect := by ext; simp [varpiOf]
+  sum := by
+    apply LinearMap.prod_ext <;> ext <;> simp [piOf, varpiOf]
+
+/-- Page 129: on a split extension, a `χ`-scindage is determined by
+`b = π|_M : M → L`, and it is `(piOf b, varpiOf b)`. -/
+theorem chiSplitting_eq {π : M × L →ₗ[R] L} {ϖ : M →ₗ[R] M × L}
+    (h : IsChiSplitting χ π ϖ) :
+    π = piOf χ (π ∘ₗ LinearMap.inl R M L) ∧ ϖ = varpiOf χ (π ∘ₗ LinearMap.inl R M L) := by
+  constructor
+  · apply LinearMap.prod_ext
+    · ext; simp [piOf]
+    · ext ξ
+      have := LinearMap.congr_fun h.retr ξ
+      simp only [LinearMap.coe_comp, Function.comp_apply, LinearMap.smul_apply,
+        LinearMap.id_apply, LinearMap.inr_apply] at this
+      simp [piOf]
+      rw [show ((0 : M), (0 : L)) = 0 from rfl, map_zero, zero_add, this]
+  · ext η
+    · have := LinearMap.congr_fun h.sect η
+      simpa [varpiOf] using this
+    · have := congrArg Prod.snd (LinearMap.congr_fun h.sum (η, 0))
+      simp only [LinearMap.add_apply, LinearMap.coe_comp, Function.comp_apply,
+        LinearMap.inr_apply, LinearMap.fst_apply, Prod.snd_add, LinearMap.smul_apply,
+        LinearMap.id_apply, Prod.smul_snd, smul_zero] at this
+      simp [varpiOf]
+      linear_combination (norm := module) this
+
+/-- The transvection `(η, ξ) ↦ (η, ξ + w(η))` of `M ⊕ L`. -/
+def transv (w : M →ₗ[R] L) : M × L →ₗ[R] M × L :=
+  LinearMap.id + LinearMap.inr R M L ∘ₗ w ∘ₗ LinearMap.fst R M L
+
+theorem transv_comp (w w' : M →ₗ[R] L) : transv w ∘ₗ transv w' = transv (w + w') := by
+  refine LinearMap.ext fun p => Prod.ext ?_ ?_
+  · simp [transv]
+  · simp [transv]; abel
+
+/-- A transvection carries the scindage of `b' + χw` to that of `b'`. -/
+theorem piOf_comp_transv (b' w : M →ₗ[R] L) :
+    piOf χ b' ∘ₗ transv w = piOf χ (b' + χ • w) := by
+  apply LinearMap.prod_ext <;> ext <;> simp [piOf, transv]
+
+theorem transv_comp_varpiOf (b' w : M →ₗ[R] L) :
+    transv w ∘ₗ varpiOf χ (b' + χ • w) = varpiOf χ b' := by
+  ext <;> simp [varpiOf, transv]
+
+/-- **Morphisms in coordinates (pages 77 and 129).** An endomorphism `f` of
+`M ⊕ L` inducing the identity on `L` and on `M` carries the scindage of `b` to
+that of `b'` if and only if it is a transvection `T_w` with `b = b' + χw`; there
+is such an `f` iff `b ≡ b' (mod χ)`. Every such `f` is invertible, `T_w⁻¹ = T_{−w}`. -/
+theorem iso_iff (b b' : M →ₗ[R] L) :
+    (∃ f : M × L →ₗ[R] M × L, LinearMap.fst R M L ∘ₗ f = LinearMap.fst R M L ∧
+        f ∘ₗ LinearMap.inr R M L = LinearMap.inr R M L ∧ piOf χ b' ∘ₗ f = piOf χ b) ↔
+      ∃ w : M →ₗ[R] L, b = b' + χ • w := by
+  constructor
+  · rintro ⟨f, h1, h2, h3⟩
+    set w := LinearMap.snd R M L ∘ₗ f ∘ₗ LinearMap.inl R M L with hw
+    have hf : f = transv w := by
+      refine LinearMap.ext fun p => ?_
+      obtain ⟨η, ξ⟩ := p
+      have hp : ((η, ξ) : M × L) = (η, 0) + (0, ξ) := by simp
+      have h1' := LinearMap.congr_fun h1 (η, 0)
+      have h2' := LinearMap.congr_fun h2 ξ
+      simp only [LinearMap.coe_comp, Function.comp_apply, LinearMap.fst_apply,
+        LinearMap.inr_apply] at h1' h2'
+      rw [hp, map_add, map_add, h2']
+      refine Prod.ext ?_ ?_
+      · simp [transv, h1']
+      · simp [transv, hw]
+        rw [show ((0 : M), (0 : L)) = 0 from rfl, map_zero]; rfl
+    refine ⟨w, ?_⟩
+    have e := h3.symm.trans (by rw [hf, piOf_comp_transv])
+    ext η
+    have := LinearMap.congr_fun e (η, 0)
+    simpa [piOf] using this
+  · rintro ⟨w, rfl⟩
+    refine ⟨transv w, ?_, ?_, piOf_comp_transv χ b' w⟩
+    · ext <;> simp [transv]
+    · ext <;> simp [transv]
+
+variable {M₁ M₂ M₃ L₁ L₂ L₃ : Type*} [AddCommGroup M₁] [Module R M₁] [AddCommGroup M₂]
+  [Module R M₂] [AddCommGroup M₃] [Module R M₃] [AddCommGroup L₁] [Module R L₁]
+  [AddCommGroup L₂] [Module R L₂] [AddCommGroup L₃] [Module R L₃]
+
+/-- The transvection datum of page 129: `u = b₁ ⊗ u₂ + u₁ ⊗ b₂ + χ u₁ ⊗ u₂`. -/
+noncomputable def uProd (b₁ u₁ : M₁ →ₗ[R] L₁) (b₂ u₂ : M₂ →ₗ[R] L₂) :
+    M₁ ⊗[R] M₂ →ₗ[R] L₁ ⊗[R] L₂ :=
+  TensorProduct.map b₁ u₂ + TensorProduct.map u₁ b₂ + χ • TensorProduct.map u₁ u₂
+
+/-- **Page 129.** Changing the scindages, `bᵢ ↦ bᵢ + χuᵢ`, changes the product
+datum `b = b₁ ⊗ b₂` by `χu`: `b′₁ ⊗ b′₂ = b₁ ⊗ b₂ + χu`. -/
+theorem prod_change (b₁ u₁ : M₁ →ₗ[R] L₁) (b₂ u₂ : M₂ →ₗ[R] L₂) :
+    TensorProduct.map (b₁ + χ • u₁) (b₂ + χ • u₂)
+      = TensorProduct.map b₁ b₂ + χ • uProd χ b₁ u₁ b₂ u₂ := by
+  simp only [uProd, TensorProduct.map_add_left, TensorProduct.map_add_right,
+    TensorProduct.map_smul_left, TensorProduct.map_smul_right, smul_add]
+  abel
+
+/-- **Page 131, the cocycle relation `u″ = u + u′`.** Two successive changes,
+`uᵢ` then `u′ᵢ` (the second computed with `b′ᵢ = bᵢ + χuᵢ`), compose to the
+change `uᵢ + u′ᵢ`. -/
+theorem uProd_cocycle (b₁ u₁ u₁' : M₁ →ₗ[R] L₁) (b₂ u₂ u₂' : M₂ →ₗ[R] L₂) :
+    uProd χ b₁ u₁ b₂ u₂ + uProd χ (b₁ + χ • u₁) u₁' (b₂ + χ • u₂) u₂'
+      = uProd χ b₁ (u₁ + u₁') b₂ (u₂ + u₂') := by
+  simp only [uProd, TensorProduct.map_add_left, TensorProduct.map_add_right,
+    TensorProduct.map_smul_left, TensorProduct.map_smul_right, smul_add]
+  abel
+
+/-- **Page 78, commutativity.** Under `M₁ ⊗ M₂ ≅ M₂ ⊗ M₁` and
+`L₁ ⊗ L₂ ≅ L₂ ⊗ L₁`, `b₁ ⊗ b₂` is `b₂ ⊗ b₁`. -/
+theorem prod_comm (b₁ : M₁ →ₗ[R] L₁) (b₂ : M₂ →ₗ[R] L₂) :
+    (TensorProduct.comm R L₁ L₂).toLinearMap ∘ₗ TensorProduct.map b₁ b₂
+      = TensorProduct.map b₂ b₁ ∘ₗ (TensorProduct.comm R M₁ M₂).toLinearMap :=
+  (TensorProduct.map_comp_comm_eq b₂ b₁).symm
+
+/-- **Page 78, associativity.** -/
+theorem prod_assoc (b₁ : M₁ →ₗ[R] L₁) (b₂ : M₂ →ₗ[R] L₂) (b₃ : M₃ →ₗ[R] L₃) :
+    (TensorProduct.assoc R L₁ L₂ L₃).toLinearMap ∘ₗ TensorProduct.map (TensorProduct.map b₁ b₂) b₃
+      = TensorProduct.map b₁ (TensorProduct.map b₂ b₃) ∘ₗ
+          (TensorProduct.assoc R M₁ M₂ M₃).toLinearMap :=
+  (TensorProduct.map_map_comp_assoc_eq b₁ b₂ b₃).symm
+
+/-- **Page 78, unit.** The unit object is `M = L = R` with `b = id`
+(`π(u, λ) = λ + χu`); under `R ⊗ M ≅ M`, `R ⊗ L ≅ L`, `id ⊗ b` is `b`. -/
+theorem prod_unit (b : M →ₗ[R] L) :
+    (TensorProduct.lid R L).toLinearMap ∘ₗ TensorProduct.map LinearMap.id b
+      = b ∘ₗ (TensorProduct.lid R M).toLinearMap := by
+  ext; simp
+
+/-! ### `M = L = R`: the monoid of classes and its units -/
+
+/-- Two scalar data `b`, `b'` (for `M = L = R`) give isomorphic objects, allowing
+an automorphism `ε` of `L = R`: `εb ≡ b' (mod χ)`. -/
+def ChiRel (b b' : R) : Prop := ∃ (ε : Rˣ) (w : R), ε * b = b' + χ * w
+
+/-- The product `b = b₁b₂` is compatible with the relation. -/
+theorem chiRel_mul {b₁ b₁' b₂ b₂' : R} (h₁ : ChiRel χ b₁ b₁') (h₂ : ChiRel χ b₂ b₂') :
+    ChiRel χ (b₁ * b₂) (b₁' * b₂') := by
+  obtain ⟨ε₁, w₁, e₁⟩ := h₁
+  obtain ⟨ε₂, w₂, e₂⟩ := h₂
+  refine ⟨ε₁ * ε₂, b₁' * w₂ + w₁ * b₂' + χ * w₁ * w₂, ?_⟩
+  push_cast
+  linear_combination (ε₂ * b₂) * e₁ + (b₁' + χ * w₁) * e₂
+
+/-- **Page 79, the invertibility criterion, for `L = 𝒪` trivial.** The class of
+`b` is invertible for the product (`bb' ≡ ε (mod χ)` for some `b'`) iff
+`T₀ = −b₀` generates `L₀ = R/χR` on `V(χ)`, that is iff `b` and `χ` generate the
+unit ideal. -/
+theorem invertible_iff (b : R) :
+    (∃ b', ChiRel χ (b * b') 1) ↔ Ideal.span {b, χ} = ⊤ := by
+  rw [Ideal.eq_top_iff_one, Ideal.mem_span_pair]
+  constructor
+  · rintro ⟨b', ε, w, e⟩
+    exact ⟨ε * b', -w, by linear_combination e⟩
+  · rintro ⟨g, h, e⟩
+    exact ⟨g, 1, -h, by simp; linear_combination e⟩
+
+/-- The same criterion, as the page states it: `b` is a unit in `R/χR`. -/
+theorem span_eq_top_iff_isUnit (b : R) :
+    Ideal.span {b, χ} = ⊤ ↔ IsUnit (Ideal.Quotient.mk (Ideal.span {χ}) b) := by
+  rw [Ideal.eq_top_iff_one, Ideal.mem_span_pair, isUnit_iff_exists_inv]
+  constructor
+  · rintro ⟨g, h, e⟩
+    refine ⟨Ideal.Quotient.mk _ g, ?_⟩
+    rw [← map_mul, ← map_one (Ideal.Quotient.mk _), Ideal.Quotient.eq,
+      Ideal.mem_span_singleton]
+    exact ⟨-h, by linear_combination e⟩
+  · rintro ⟨y, hy⟩
+    obtain ⟨g, rfl⟩ := Ideal.Quotient.mk_surjective y
+    rw [← map_mul, ← map_one (Ideal.Quotient.mk _), Ideal.Quotient.eq,
+      Ideal.mem_span_singleton] at hy
+    obtain ⟨k, hk⟩ := hy
+    exact ⟨g, -k, by linear_combination hk⟩
+
+/-! ### Pushout and pullback products (pages 125, 127, 167 and 169) -/
+
+/-- **Pages 125 and 127.** In coordinates the pullback product carries the
+scindage `−b`, `b = b₁ ⊗ b₂`. If `γχ = 2`, the transvection `T_{γb}` carries the
+pushout scindage `b` to the pullback scindage `−b`. -/
+theorem push_pull {γ : R} (hγ : γ * χ = 2) (b : M →ₗ[R] L) :
+    piOf χ (-b) ∘ₗ transv (γ • b) = piOf χ b := by
+  rw [piOf_comp_transv, smul_smul, mul_comm, hγ, two_smul]
+  congr 1; abel
+
+/-- **Page 125, « commute ! ».** The comparison `T_{γb}` is compatible with the
+changes of scindage: for `b ↦ b + χu` on the pushout side and `−b ↦ −b − χu` on
+the pullback side, `T_{γb} ∘ T_u = T_{−u} ∘ T_{γ(b + χu)}`. -/
+theorem push_pull_square {γ : R} (hγ : γ * χ = 2) (b u : M →ₗ[R] L) :
+    transv (γ • b) ∘ₗ transv u = transv (-u) ∘ₗ transv (γ • (b + χ • u)) := by
+  rw [transv_comp, transv_comp, smul_add, smul_smul, hγ, two_smul]
+  congr 1; abel
+
+/-- The hypothesis `γχ = 2` is necessary: for the unit objects (`M = L = R`,
+`b₁ = b₂ = id`, so `b = id`), an isomorphism from the pushout to the pullback
+inducing the identity on `L` and `M` exists iff `2 ∈ χR`. -/
+theorem push_pull_unit_iff :
+    (∃ f : R × R →ₗ[R] R × R, LinearMap.fst R R R ∘ₗ f = LinearMap.fst R R R ∧
+        f ∘ₗ LinearMap.inr R R R = LinearMap.inr R R R ∧
+        piOf χ (-LinearMap.id) ∘ₗ f = piOf χ LinearMap.id) ↔ ∃ γ : R, γ * χ = 2 := by
+  rw [iso_iff]
+  constructor
+  · rintro ⟨w, hw⟩
+    refine ⟨w 1, ?_⟩
+    have := LinearMap.congr_fun hw 1
+    simp at this
+    linear_combination -this
+  · rintro ⟨γ, hγ⟩
+    refine ⟨γ • LinearMap.id, ?_⟩
+    rw [smul_smul, mul_comm, hγ, two_smul]
+    abel
+
+/-- Over `ℤ` with `χ = 4`, there is no such `γ`. -/
+theorem no_gamma_four : ¬ ∃ γ : ℤ, γ * 4 = 2 := by
+  rintro ⟨γ, h⟩; omega
+
+end ChiSplit
 
 end Grothendieck.Folder84
