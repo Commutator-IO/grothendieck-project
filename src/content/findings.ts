@@ -3156,4 +3156,392 @@ export const FINDINGS: Finding[] = [
     settle:
       'Check whether the automorphisms (or simplicial-ring endomorphisms) of the simplicial algebra of polynomial forms — Sullivan’s ∇(•, •), A_PL — have been computed rationally (Bousfield–Gugenheim, Memoirs AMS 179, 1976; Félix–Halperin–Thomas, Rational Homotopy Theory, § 10) or for the divided-power version (Kageyama, arXiv:2211.03289). A rational computation would match only the case 2 invertible; the ₂𝐆_a factors are the part to look for. If found, mark matched.',
   },
+  {
+    id: '7-catalogue-date-1967',
+    cote: '7',
+    pages: '2, 20, 35, 56',
+    kind: 'codicological',
+    claim:
+      'The talk notes of pages 20–71 are dated November–December 1966 on the leaves themselves, not « novembre-décembre 1967 » as the catalogue title has it; only pages 2–18, a later write-up bound first, carry 1967.',
+    basis:
+      'Page 20 reads « Nov. Déc. 1966 » (last digit corrected in red), page 35 « 15.11.66 » (first written « 25 »), page 56 « 6.12.1966 »; the transcription records the three as checked on the facsimile by Michel Hua. Page 2 reads « Juillet-Août 1967 », its third digit barely formed and read 1967 by elimination. The published notes of the talks open: « a rough summary of five talks given at I.H.E.S in November and December 1966 ».',
+    ours:
+      'The identification of pages 20–71 with the preparatory notes for those IHÉS talks is the reading’s, by agreement of dates and contents; no leaf names the talks. The 1967 on page 2 is an elimination, not a reading.',
+    literature: [
+      'Transcription 7, batch 1 (batch-01.fr.tex), pages 2 and 20; batch 2, page 35; batch 3, page 56',
+      'Catalogue entry for cote 7 in src/content/catalogue.ts, which reads « Notes laïus novembre-décembre 1967 (Cristaux) »',
+      'A. Grothendieck, « Crystals and the De Rham cohomology of schemes » (notes by I. Coates and O. Jussila), Dix exposés sur la cohomologie des schémas (1968), Introduction, p. 306 — read in the scan at download.uni-mainz.de (WS23.Padische.1966.Grothendieck.CRCSscan.pdf)',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks the third digit of the date on page 2 against the facsimile, and reports the 1966/1967 discrepancy to the Montpellier inventory. Nothing here dates the mathematics beyond the leaves.',
+  },
+  {
+    id: '7-strat-invariance-problem',
+    cote: '7',
+    pages: '70–71',
+    kind: 'mathematical',
+    claim:
+      'The folder leaves open whether stratifying cohomology is invariant under a nilpotent immersion X₀ → X (X flat, locally of finite presentation over S), and says this is equivalent to H_inf ≅ H_strat; the published exposé states that this invariance fails, by the case of X₀ = X ×_S S₀ lying over a nilpotent S₀ ⊂ S.',
+    basis:
+      'Page 70 asks « A-t-on H*(X_cris, F) ≅ H*(X_strat, F) ? » for X « plat » (uncertain reading) of finite presentation; page 71 says « C’est aussi équivalent au pb suivant : … a-t-on H*(X_strat, F) ≅ H*(X₀ strat, F) » and stops. The hypothesis on X₀ sits next to an \\ill{} and an uncertain « Y de prés. finie sur S ». The published text (§5.3, p. 340) notes that every object of the stratifying site of X₀/S lies over S₀ = Spec(A/J), so its cohomology is killed by J, which the cohomology for X in general is not.',
+    ours:
+      'The reading’s footnote argues that the two forms of the problem are equivalent. This pass reads the folder differently on that point: for X = S and X₀ = S₀ the first form holds trivially (S is formally smooth over itself) and the second fails by the published argument, so the equivalence holds only under some further hypothesis on X₀, perhaps the word on page 71 that cannot be read. Applying p. 340 to the page’s second form is the pass’s own step.',
+    literature: [
+      'A. Grothendieck, « Crystals and the De Rham cohomology of schemes » (notes by I. Coates and O. Jussila), Dix exposés (1968), §5.3, p. 340, and Conjecture 4.2, p. 335 — read in the scan at download.uni-mainz.de',
+    ],
+    status: 'matched',
+    settle:
+      'Read the \\ill{} after « imm. nilp. » on page 71 on the facsimile. If it puts a hypothesis on X₀, such as flatness over S, that excludes X₀ = X ×_S S₀, the published counterexample no longer applies and the second form becomes an open question again. In that case, look for it in Berthelot (LNM 407, 1974) and in Ogus, « The cohomology of the infinitesimal site » (1975). The first form, H_inf ≅ H_strat for singular X, is the published Conjecture 4.2 over ℂ.',
+  },
+  {
+    id: '7-noninfinitesimal-site',
+    cote: '7',
+    pages: '16–18',
+    kind: 'mathematical',
+    claim:
+      'For X₀ over a perfect field k of characteristic p, the folder proposes as a p-adic cohomology the cohomology of a site whose objects are p-adically complete affine formal W-schemes Spf B with a surjection B → A₀ (A₀ the ring of an affine open U₀ ⊂ X₀) whose kernel is nilpotent mod p. The site has no divided powers and no overconvergence, and it is to pass two tests: Washnitzer–Monsky cohomology for X₀ smooth affine, and H_DR(X/W) modulo torsion for X₀ with a proper smooth lift.',
+    basis:
+      'Page 17 defines the triples (U₀, 𝒲, i) and the ring condition (« un W-hom. surjectif B → A₀ tel que B/pB → A₀ soit à noyau nilpotent »), with a Zariski-type topology read on the traces in X₀; page 18 states tests a) and b). Several words of the definition are \\ill{} (after « formel complet », « une \\ill{} de W-alg. »), but the parenthesis carrying the ring condition is legible. The tail of page 18 is almost entirely illegible.',
+    ours:
+      'The reading interprets « isomorphisme nilpotent » as a closed immersion defined by a nilpotent ideal, on the strength of the parenthesis. The comparison with Ogus’s convergent site is the reading’s. The doubt about test a) below is the pass’s own and is cited from memory.',
+    literature: [
+      'A. Grothendieck, « Crystals and the De Rham cohomology of schemes » (notes by I. Coates and O. Jussila), Dix exposés (1968), §7.1–7.5, pp. 351–356 — read in the scan at download.uni-mainz.de. §7.1 is the folder’s page 16 (the ordinary abelian variety); §7.5 proposes instead a « Monsky–Washnitzer topos » built from Monsky–Washnitzer (weakly complete) algebras A → A₀ with a topologically nilpotent divided-power structure on the augmentation ideal, and notes that p-adically complete liftings give modules of infinite rank',
+    ],
+    status: 'candidate',
+    settle:
+      'Compare with A. Ogus, « F-isocrystals and de Rham cohomology II — Convergent isocrystals » (Duke Math. J. 51, 1984), whose enlargements are p-adic formal schemes T with a map from (T₀)_red to X₀. Up to flatness and the closed-immersion condition, these look like the objects of page 17. If they coincide, mark matched. Then decide test a). From memory, convergent cohomology of a smooth affine X₀ is not Washnitzer–Monsky cohomology (for the affine line it is the de Rham cohomology of the closed disc, of infinite rank), which is the obstruction the folder’s own pages 38–40 show for W{t} and the one §7.5 of the published text avoids by passing to weakly complete algebras. If that holds, the site as proposed fails its own test a).',
+  },
+  {
+    id: '37-ind-topos-exercise',
+    cote: '37',
+    pages: '22',
+    kind: 'mathematical',
+    claim:
+      'For a small category C with Karoubi envelope C′, Ind(C) is a topos if and only if C′ has finite colimits and its canonical functor to sheaves for the finitary topology (covers refined by finite epimorphic families) preserves them — when C has finite limits, iff C has finite colimits and satisfies condition ST) of SGA 4 I 8.8 f) — and that topos is then perfect exactly when C′ has finite limits.',
+    basis:
+      'Page 22 is a typed « Exercice 2 », pencilled « SGA 4 VI 2 », listing conditions (i), (i bis), (i ter), (ii), (iii), (iv) as equivalent, with ink additions (the Karoubi envelope, « petite ») and the parenthesis meant to define E_PF left blank. It is stated without proof. The transcription found no such exercise, and no « enveloppe de Karoubi », in Exposé VI of the Orgogozo re-edition of SGA 4, t. 2 (consulted 2026-09-27).',
+    ours:
+      'The page’s (i bis) asks for a RIGHT adjoint that is left exact; the reading corrects it to a left-exact LEFT adjoint (Ind(C) reflective in Ĉ), which is what Giraud’s criterion needs. The reading reads E_PF as the finitely presentable objects, since the page leaves the defining parenthesis empty, and it checked in detail only (i) ⇔ corrected (i bis) and (i) ⇔ (iv); (ii), (iii) and the « parfait » clause were not checked by the edition. (i) ⇔ (iv) is in substance Gabriel–Ulmer (Ind(E_fp) ≃ E for a locally finitely presentable E); the candidate is the intrinsic conditions (ii)/(iii) on C.',
+    literature: [
+      'Web search (2026-10-10) for a criterion for Ind(C) to be a topos: returned only the nLab page « ind-object », which states no such criterion',
+      'Orgogozo re-edition of SGA 4, t. 2, Exposé VI (exercises 1.28, 2.16–2.18, 3.11, 3.12 …): searched by the transcription for the exercise itself, not for the mathematics',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read Johnstone, Sketches of an Elephant, D3.3 (locally finitely presentable toposes) and C2.2, Gabriel–Ulmer, Lokal präsentierbare Kategorien (LNM 221, 1971), and Adámek–Rosický, Locally Presentable and Accessible Categories, for a characterisation of the small C with Ind(C) a topos in terms of finite colimits in C (or its Karoubi envelope) and the finitary topology. If (ii) or (iii) is there, mark matched; if not, verify (ii) ⇔ (i) before calling it a candidate, since the edition has not.',
+  },
+  {
+    id: '37-sga4-viii-section-10',
+    cote: '37',
+    pages: '38–39, 44',
+    kind: 'codicological',
+    claim:
+      'The folder holds a typed § 10 of SGA 4 Exposé VIII, « Compléments : espaces algébriques et étendues algébriques » (10.1–10.4, with 10.5 numbered and empty), which is in neither the published Exposé VIII nor the original IHÉS typescript of VIII, both of which stop at § 9; the folder’s own terminology list cites it as « VIII 10.2 » and « VIII 10.4 ».',
+    basis:
+      'Pages 38–39 are the typescript, pencilled « SGA 4 VIII », with his ink and pencil marks and a handwritten footnote crediting the term « espace algébrique » to M. Artin. Page 44, the handwritten close of the bilingual terminology list, adds « étendue algébrique VIII 10.2 » and « espace algébrique VIII 10.4 ».',
+    ours:
+      'The comparison with the published and IHÉS texts is the transcription’s. The mathematical content is not claimed as new: the reading identifies 10.2–10.4 with Deligne–Mumford stacks and the trivial-inertia criterion for algebraic spaces, and 10.1 with M. Hakim, Topos annelés et schémas relatifs (1972) — identifications that are the edition’s and hold up to equivalence of ringed topoi. The typist is not established.',
+    literature: [
+      'SGA 4, t. 2, Exposé VIII, Orgogozo re-edition (consulted by the transcription 2026-09-27): §§ 1–9 only, no « étendue algébrique »',
+      'Original IHÉS typescript of SGA 4 VIII (orgogozo.perso.math.cnrs.fr, SGA4-VIIIo.pdf): ends at 9.4, no « étendue algébrique »',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks pages 38–39 against the facsimile and looks for § 10 in the Springer LNM 270 printing itself (not only the re-edition) and in the IHÉS mimeographed fascicles; if any printing carries it, mark matched.',
+  },
+  {
+    id: '37-ega-i-10-10-5-counterexample',
+    cote: '37',
+    pages: '92',
+    kind: 'mathematical',
+    claim:
+      'With B = k[X₀, X₁, …], A = B[[T]], A_n = B[T]/(T^{n+1}) and J_n = (X₀, X₁T, …, X_nTⁿ), the modules M_n = A_n/J_n form a compatible system of finitely presented A_n-modules that does not come from any finitely presented A-module, because J_n needs n+1 generators — so condition b) of EGA I 10.10.5 does not imply a) and c) without noetherian hypotheses.',
+    basis:
+      'The typed letter to Dieudonné dated 27.8.1967 (page 92) gives the construction and a minimality proof by reducing modulo (X_j)_{j≠i}; it proposes stating 10.10.5 as two equivalent conditions implying a third, and printing the counterexample. The missing brackets and signs were inked by hand and are legible; nothing in the statement rests on an \\uncertain{} or \\ill{}.',
+    ours:
+      'The letter claims the generators are linearly independent over B in J_n/TJ_n; that is false (X₀·X₁T ∈ TJ_n). The reading rewrites the proof: the letter’s reduction shows each aᵢ lies in 𝔪 = (Xᵢ), so the images are independent over k in J_n/(TJ_n + 𝔪J_n), which suffices. It also supplies the Schanuel step (a finitely presented M would bound the number of generators of J_n uniformly), which the letter leaves implicit. The conclusion is the letter’s; that proof is the edition’s.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Read EGA I, 2nd ed. (Grundlehren 166, 1971), I 10.10.5 and its remarks: if this counterexample, or another showing b) ⇏ a), is printed there, mark matched. Otherwise check the non-noetherian treatments of adic modules — Fujiwara–Kato, Foundations of Rigid Geometry I, ch. 0 § 8 and ch. I, and the Stacks Project chapters on formal schemes. The question the correspondence leaves open, a) ⇒ c) without noetherian hypotheses, is not part of this entry.',
+  },
+  {
+    id: '37-smooth-base-change-stacks',
+    cote: '37',
+    pages: '29–30',
+    kind: 'mathematical',
+    claim:
+      'The folder proposes, as « 2.1.1 » of a correspondent’s chapter VII, smooth base change in degrees ≤ 1 with non-commutative coefficients: for f universally locally L-1-aspherical and G an ind-L-stack, G(X) → G′(X′) is an equivalence over strictly local bases, and f*g_*G → g′_*f′*G is an equivalence for g coherent.',
+    basis:
+      'Page 29 is an undated, unsigned typed letter asking a correspondent addressed as « tu » to restate « 2.1.1 » and to cite SGA 4 XVI; page 30 is the proposed statement, Theorem 2.1.1 and Corollary 2.1.2, with « ind-L- » inked over « champ ».',
+    ours:
+      'The reading supplies that L consists of primes invertible on S (on k in 2.1.2), without which the statement is false (Artin–Schreier). It interprets « ind-L-champ » from a line struck at the machine. The page does not name the correspondent and the edition does not; the numbering match below is not an identification.',
+    literature: [
+      'P. Haine, « Nonabelian basechange theorems & étale homotopy theory » (arXiv 2304.00938), introduction and Corollary 2.30: cites J. Giraud, Cohomologie non abélienne (Grundlehren 179, 1971), chapitre VII, Théorème 2.1.2, as smooth base change for sheaves of groupoids',
+    ],
+    status: 'matched',
+    settle:
+      'Matched on a secondary citation only: read Giraud, Cohomologie non abélienne, VII § 2.1, check that Théorème 2.1.2 there is this statement (hypotheses on L, ind-L-stacks, the strictly local case a)), and whether the chapter layout fits the letter’s « 2.1.1, 2.1.5, 2.1.7 » and « Chap. VII ». If the statements differ, reopen as unsearched.',
+  },
+  {
+    id: '37-dieudonne-letter-sent-copy',
+    cote: '37',
+    pages: '96–97',
+    kind: 'codicological',
+    claim:
+      'Pages 96–97, the letter to Dieudonné of 15.9.1967, are an uncompleted copy: a typed top copy of the same letter, with the machine’s blanks filled by hand and signed « Bien cordialement A. Grothendieck », survives elsewhere, and its hand-inked « m = Σ m_i » in the Lemma confirms the reading’s restitution of the blank the folder copy leaves.',
+    basis:
+      'The transcription records that on pages 96–97 the arrows, ∈, ≤ and the tilde were left blank and never completed, that a blank stands between « m » and « m_i » in the Lemma, and that the second leaf has no signature. The Grothendieck Circle hosts a two-page scan (csg.igrothendieck.org, L88u.pdf) of the same typed text, dated « 15.9.67 », marked « 3H/DIEU I/241 » at the top right, with the blanks inked, « engendré par m = Σ m_i générateurs » and a signature.',
+    ours:
+      'The comparison is this pass’s own, made on the scan at screen resolution on 2026-10-10; that the scan is the dispatched copy and the folder’s a retained copy is inferred, not established, and the reading of the mark « 3H/DIEU I/241 » (and of « I 10.11.3 » where the folder copy reads « I 10.11 ») is uncertain.',
+    literature: [
+      'Grothendieck Circle scan csg.igrothendieck.org/wp-content/uploads/2025/01/L88u.pdf, pages 1–2, read directly',
+      'Transcription 37, batch 5 (batch-05.fr.tex), pages 96–97',
+    ],
+    status: 'candidate',
+    settle:
+      'A person compares the two documents line by line, checks whether the folder’s leaves are a carbon of the scanned sheets, identifies the holding behind « 3H/DIEU I/241 », and records the scan’s Σ and its « 10.11.3 » (if that is what it reads) in the transcription’s apparatus.',
+  },
+// Folder 58 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over 58.modern.tex (Opus 5.5 reading, 2026-10-04) and batch-01..04.fr.tex.
+// SGA 2 was read in the retyped edition (arXiv math/0511279, text extracted from the PDF); nothing else was read in full.
+  {
+    id: '58-lef-permanence-projective-flat',
+    cote: '58',
+    pages: '40–43',
+    kind: 'mathematical',
+    claim:
+      'If X is quasi-projective over a noetherian ring and the pair (X, Y) satisfies (LG)_n, that is, H^i(X, F) → H^i(X_{/Y}, F_{/Y}) is bijective for i ≤ n and injective for i = n+1 for every locally free F, then for every W projective and flat over X the pair (W, f⁻¹(Y)) satisfies (LG)_n, and likewise for LG, the condition Lef of SGA 2 X. The hypothesis is put only on the pair (X, Y) and nothing is asked of the fibres of W → X.',
+    basis:
+      'Page 41 states the Theorem (i)–(iii) for a coherent F on W, with proper support over X and flat. Page 42 draws Corollaire 1, with « ($X$ quasi-projectif) » framed: if (X, Y) satisfies (LG)_n [resp. LG, resp. LG strict], so does (X′, f⁻¹(Y)) for every X′ projective and flat over X. Page 40 carries an earlier, cancelled form. On page 41, « morphisme », « projectif » and « monom. » are \\uncertain{}, but « projectif et plat » is legible in Corollaire 1. The manuscript gives no proof.',
+    ours:
+      'Every proof is the edition’s. The reading sketches (i) through a perfect complex representing Rf_*F, the comparison theorem (EGA III 4.1) and the five lemma, and passes from (LG)_0 to LG by its own « conclusion pratique ». It does not verify (iii), so the LG-strict (Leff) case of Corollaire 1 is left out of this claim. The page’s « plat sur $Y$ » is read « plat sur $X$ ». « Quasi-projectif » and « à support propre sur $X$ » are the page’s own additions. The sketch was not checked in detail for this entry.',
+    literature: [
+      'SGA 2 (arXiv math/0511279), Exposé X, § 2: definitions of Lef and Leff, Exemples 2.1–2.2, Proposition 2.3, Corollaires 2.4–2.6 — no permanence under a projective flat morphism',
+      'SGA 2, Exposé XII, Corollaires 2.4, 3.4 and 4.9: Lef and Leff for a projective flat f : X → S with Y a relatively ample divisor, proved from depth conditions on the fibres X_s, not inherited from a pair on the base',
+      'SGA 2, Exposé XI, § 2 (Pic under Lef and Leff) — no permanence statement',
+      'Web search (2026-10-10) for Lef / Leff preserved under projective flat morphisms — nothing found',
+    ],
+    status: 'candidate',
+    settle:
+      'Read M. Raynaud, « Théorèmes de Lefschetz en cohomologie des faisceaux cohérents et en cohomologie étale » (Ann. Sci. ÉNS 7, 1974), which SGA 2’s editorial notes cite for improvements of X 2.1 and XII 3.1, and R. Hartshorne, Ample Subvarieties of Algebraic Varieties (LNM 156, 1970), ch. IV and V. If either proves that Lef or (LG)_n passes from (X, Y) to a projective flat W, mark matched. Otherwise, check the reading’s proof sketch of (i) in full, in particular the hypercohomology five-lemma step at degree n+1.',
+  },
+  {
+    id: '58-local-hom-comparison-depth-off-y',
+    cote: '58',
+    pages: '45–51',
+    kind: 'mathematical',
+    claim:
+      'For A local noetherian, a quotient of a regular ring and t-adically complete, X′ the punctured spectrum and Y′ = V(t) ∩ X′, the folder asserts Hom(F, G) ≅ Hom(F̂, Ĝ) along Y′ for coherent F, G on X′ whenever G has depth ≥ 2 at the closed points of X′ − Y′. No depth is asked at the points of Y′, whereas SGA 2 X, Exemple 2.1 (i) asks depth ≥ 2 at every closed point of X′, so the folder’s hypothesis is weaker.',
+    basis:
+      'Page 45 states the Theorem and reduces, through H = Hom(F, G), to Γ(X′, H) ≅ Γ(X̂′, Ĥ) for H of depth ≥ 2 « en les pts [fermés] de X′ − Y ». « pts » is \\uncertain{}. The adjective before « de X′ − Y′ » in the first statement is \\ill{}, and the formula Γ F ≃ Γ F̂ is written over other letters. Page 47 sets up a dévissage 0 → P → H → H̄ → Q → 0, with P and Q supported in Y′, and a comparison for the t-power torsion K. It marks the t-regular step with his own « ? » and stops. Pages 49–51 treat the essential image: i_*(F|_U) is coherent by the finiteness criterion, and the page ends « on a gagné ».',
+    ours:
+      'The t-adic completeness is supplied by the reading; the page’s second line is overwritten. The reading restricts the page’s « ρ pleinement fidèle » to the objects represented by such Modules, and gives a counterexample to the unrestricted statement. The proof is unfinished on the page and in the reading, so the statement is the manuscript’s and is unproved as it stands. The comparison with SGA 2 is made for this entry.',
+    literature: [
+      'SGA 2 (arXiv math/0511279), Exposé X, Exemple 2.1 and its proof (u_*E coherent by VIII 2.1, then IX 1.5): the same setting with depth ≥ 2 at all closed points of X′, for locally free E. The editorial note there says M. Raynaud (1974), Cor. I.1.4 and I.5, improves (i), and that note was not followed up',
+      'SGA 2, Exposé IX, 1.5 and Exposé VIII, 2.1 (finiteness), as cited in X 2.1',
+    ],
+    status: 'candidate',
+    settle:
+      'Read Raynaud 1974 (Ann. Sci. ÉNS 7), Corollaires I.1.4 and I.5. If they drop the depth condition along Y′, mark matched. If not, complete or refute the t-regular step that page 47 leaves at « ? ». A test case is a coherent G that is the ideal of a height-two prime containing t, which has depth 1 at a closed point of Y′, in A = k[[x, y, z]] with t = x.',
+  },
+  {
+    id: '58-typed-leaf-sga2-xii-3-1',
+    cote: '58',
+    pages: '56, 60',
+    kind: 'codicological',
+    claim:
+      'The two copies of one typed leaf on pages 56 and 60 carry the end of the statement and the lead-in « Cet énoncé va résulter du suivant : Corollaire 3.2. » of what is printed as SGA 2, Exposé XII, Théorème 3.1 (existence of a coherent Module with given formal completion along X₀) in a wording that differs from the print. His notes on the blank parts compute with the module ∐_{p,q≥0} F₀(q−p) and the sums Σ_p R^i f_{0*} F₀(q−p), which have the shape of the graded module ⊕_m R^i f_{0*}(F₀(−m)) used in the printed proof of 3.2 (i).',
+    basis:
+      'Batch 3 describes the typed text on page 56 as the end of a statement whose hypotheses are a) t_s is O_{X_s}- and F_s-regular, b) F and O_X are flat over S, c) F_{0s} and O_{X_{0s}} have depth ≥ 2 at closed points, concluding that a coherent Module on X with the given formal completion exists. It is followed by « Cet énoncé va résulter du suivant : Corollaire 3.2. Sous les conditions de 3.1. ( », with a typed correction at « et O_X ». Page 60 is a second copy of the same leaf, head to tail. The print (XII 3.1–3.2) has a) F flat, b) t_s F_s-regular and c) F_{0s} of depth ≥ 2 at closed points of X_{0s}. There the conditions on O_X are a′), b′), c′), obtained by a reduction, and 3.2 opens « Sous les conditions a), b), c) ci-dessus ».',
+    ours:
+      'The identification is the edition’s, made for this entry from the transcription’s summary of the typed text against the 2005 retyped edition. No facsimile was read, and the full typed wording is not transcribed. That the handwritten double sums belong to the proof of 3.2 is a resemblance of shape only; the reading had not tied them to any question of the folder. The print says 3.2 was first done « par un expédient un peu pénible » through the punctured projecting cone and replaced by the graded argument, and Exposé XII is said to have been « rédigé en Janvier 1963 ». Neither fact dates the leaf.',
+    literature: [
+      'Transcription 58, batch 3 (batch-03.fr.tex), header and notes on pages 56 and 60',
+      'Modernised reading 58, « Deux brouillons (pages 56 et 60) »',
+      'SGA 2 (arXiv math/0511279), Exposé XII, Théorème 3.1, Corollaire 3.2 and the proof of 3.2 (i), Lemme 3.3; footnote (∗) of Exposé XII',
+    ],
+    status: 'candidate',
+    settle:
+      'A person transcribes the typed half of page 56 in full from the facsimile and compares it word for word with SGA 2 XII 3.1 in the 1968 North-Holland edition, and if possible with the IHÉS mimeographed fascicles of 1962–63. A match settles which state of Exposé XII the leaf is. The handwritten pages 56 and 60 are then compared with the proof of 3.2 (i) and Lemme 3.3.',
+  },
+// Folder 63 — find-novelty pass, Opus 5.5 (claude-opus-5-5), 2026-10-10, on the Opus 5.5 reading of 2026-10-03.
+// Pool: nearly every footnote of 63.modern.tex names a match (Tate's algorithm, Deligne's formulaire, G_2^* and the Hodge splitting
+// [Katz 1973/1976], W[[t]] as universal deformation ring [Lubin–Tate, Serre–Tate], Pic of M_{1,1}, the 72 and 32 twists over Z[1/6],
+// class number one and genus theory) and was dropped as a match. The relation 4ρσ = AĀ − 1 and the closed form of (A/|A|)^6 are the
+// edition's repairs and answers, not the page's, and were dropped. What remains: one refutation and two codicological entries.
+  {
+    id: '63-level3-tangents-at-2',
+    cote: '63',
+    pages: '97–99',
+    kind: 'mathematical',
+    claim:
+      'The folder asserts that the four irreducible components of M_3 ∩ V(c_4) — the j = 0 locus in the full level-3 moduli over μ_3^* — all meet at one point a over F_4 and have the same tangent there; as stated, this fails: in the Hesse model the four branches have four pairwise distinct tangents at a.',
+    basis:
+      'Page 97 sets up the question « À examiner si les 4 composantes de (M′_3)_2 ont “tangentes distinctes” » and argues by contradiction (« … on aurait une contradiction. Donc les quatre… »); page 99 opens « … aux composantes irréductibles sont égales » and states that the Zariski tangent space at a « splitte canoniquement en V_1 × V_2 » with G′ = SL(2, F_3) acting trivially on V_2 and via F_4^* on V_1. Both pages are palimpsests (226 \\ill{} in the batch, nearly all on pp. 97 and 99): the word « tangentes » before « égales » is not legible, « rigidification » and « Sylow » are \\uncertain{}, and the reading’s orbit argument, which the page does not write, is what yields « same tangent ».',
+    ours:
+      'The refutation is this pass’s own step, and it disagrees with the reading (same model, Opus 5.5), which endorses the conclusion with its own orbit argument (footnotes on pp. 97–99). Check: over Z[1/3, ζ_3], M_3 is the Hesse line x³ + y³ + z³ = 3t·xyz minus t³ = 1; c_4 is, up to units, t(t³ + 8), so V(c_4) is the four sections t = 0, t = −2, −2ζ, −2ζ², which coincide mod 2 at t = 0 (the point a, over F_4). The local ring there is W(F_4)[[t]], with cotangent space spanned by t and 2; the branches have tangent forms t, t + 2, t + 2ζ, t + 2ζ², pairwise non-proportional. Where the page’s argument breaks: the splitting V_1 × V_2 is not G′-stable — the Hesse involution t ↦ (t + 2)/(t − 1), which comes from Q_8 ⊂ G′, fixes a and acts on the cotangent space by t ↦ t + 2 mod m², a transvection, so the four non-vertical tangent lines form one G′-orbit of size 4, not {0}. The multiplicity 4 and the non-regularity of M′ at p = 2 (p. 95) are unaffected.',
+    literature: [
+      'M. Artebani and I. Dolgachev, « The Hesse pencil of plane cubic curves » (arXiv math/0611590) — j-numerator ∝ u₀³(u₀³ + 8u₁³)³; seen through a search summary, not read in full',
+      'arXiv 2408.04117 (« The dynamics of the Hesse derivative on the j-invariant ») — short Weierstrass form of the Hesse curve with a(t) = −27t(t³ + 8); search summary only',
+      'K. Gunji, UTMS preprint 2003-47 — Hesse cubics as the level-3 family, excluded parameters ∞, 1, ω, ω²; search summary only',
+      'arXiv 1603.09018 (« On Real and Complex Cubic Curves ») — the order-12 tetrahedral Möbius group on the Hesse parameter; search summary only',
+      'Web search for the tangency statement on the level-3 moduli at the supersingular point in characteristic 2: no source found stating it either way',
+    ],
+    status: 'refuted',
+    settle:
+      'What still stands: four components, meeting only over 2 and all at a single point a over F_4, M′_3 connected — the page’s statements before the tangent question are consistent with the Hesse model. To close the refutation, a person checks two things: that the minimal-model c_4 of the Hesse family over W(F_4)[[t]] is a unit times t(t³ + 8) (Katz–Mazur, Arithmetic Moduli of Elliptic Curves, ch. 2 and 12, or a direct computation), and, against the facsimile of p. 99, whether « égales » really has « tangentes » as its subject. If the page says something else there, rewrite the claim; the edition’s footnoted orbit argument and the sentence « Les quatre branches ont en a la même tangente » in 63.modern.tex need correcting either way.',
+  },
+  {
+    id: '63-pages-97-99-order',
+    cote: '63',
+    pages: '97–99',
+    kind: 'codicological',
+    claim:
+      'The level-3 notes do not read in archive order: their logical sequence is 98, 97, 99, yet page 98 ends « TSVP » as if page 99 were its verso, so either page 97 is a sheet inserted between a recto and its verso or page 99 does not continue page 97.',
+    basis:
+      'Page 98 establishes that M_3[1/6] ∩ V(c_4) is four copies of μ_3^*[1/6] and ends « TSVP »; page 97 begins « Donc il s’ensuit que M_3 ∩ V(c_4) a exactement 4 composantes irréductibles », which presupposes page 98, and breaks off on « Donc les quatre… »; page 99 opens « … aux composantes irréductibles sont égales », which the reading takes as the end of page 97’s sentence. The transcription notes page 99 as « Suite de la page 98 (TSVP) ».',
+    ours:
+      'The reading orders the section « pages 98, 97 et 99 » and joins 97’s last sentence to 99’s first line; that join rests on words that are \\ill{} at the head of page 99. The transcription keeps archive order, as it should.',
+    literature: ['Transcription 63, batch 5 (batch-05.fr.tex), pages 97, 98, 99 and the header note on « TSVP »'],
+    status: 'unsearched',
+    settle:
+      'A person checks on the facsimile whether pages 98 and 99 are recto and verso of one leaf and whether page 97 is a separate leaf (or the verso of the 9 March 1968 letter, page 96), and whether the first legible words of page 99 can complete « Donc les quatre… ».',
+  },
+  {
+    id: '63-level3-notes-after-march-1968',
+    cote: '63',
+    pages: '96–99',
+    kind: 'codicological',
+    claim:
+      'If the level-3 notes of pages 97 and following are written on the back of the letter at page 96, dated « Wattignies 9/III/68 », those leaves were written no earlier than March 1968 — a terminus post quem for the leaves, not for the mathematics.',
+    basis:
+      'Page 96 is a letter addressed to him, dated 9/III/68, not transcribed; the transcription of page 97 states the inference conditionally, and the reading keeps the conditional. Pages 95, 97, 98 and 99 are noted as being in the same blue-black ink.',
+    ours: null,
+    literature: ['Transcription 63, batch 5 (batch-05.fr.tex), notes on pages 96 and 97; 63.modern.tex, section V'],
+    status: 'unsearched',
+    settle:
+      'A person checks on the facsimile which of pages 97–99 is the verso of the letter of page 96. If none is, the entry is withdrawn as a dating and the letter only says when the folder was assembled, not when the notes were written.',
+  },
+  // Folder 126 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, against a reading made on Opus 5.5 (2026-10-03).
+  {
+    id: '126-fpqc-generated-topology',
+    cote: '126',
+    pages: '9–14',
+    kind: 'mathematical',
+    claim:
+      'The topology on schemes generated by the Zariski pretopology and, on affine schemes, finite jointly surjective families of flat morphisms has as coverings exactly the families that are refined, over each affine open, by finitely many flat affine maps whose images cover it; and a presheaf is a sheaf for it iff it is a Zariski sheaf satisfying the equaliser condition for every faithfully flat map of affine schemes.',
+    basis:
+      'Page 9 sets up a pretopology T on C and T′ on a full subcategory C′ under conditions (a), (b), (c); pages 10, 11 and 13 prove Proposition 1 (description of the generated topology) and Corollary 2 (sheaf criterion); pages 11–12 and 14 specialise to schemes as Proposition 2 (i)–(iii).',
+    ours:
+      'Condition (c) is struck through on page 9 and its reading is very uncertain; the reading reconstructs it from its use on page 13. The page does not verify (a), (b), (c) for schemes; the reading does, in a footnote. The proof of (iii) is announced and does not follow.',
+    literature: [
+      'The Stacks Project, Definition 34.9.1 (Tag 022B): fpqc coverings, defined as families of flat morphisms such that every affine open of the target is the union of the images of finitely many affine opens of the sources',
+      'The Stacks Project, Lemma 59.15.6 (Tag 03O1): a presheaf on Sch/S is an fpqc sheaf iff it is a Zariski sheaf and satisfies the sheaf axiom for every faithfully flat Spec(B) → Spec(A)',
+    ],
+    status: 'matched',
+    settle:
+      'Proposition 2 (i) and (ii) are, in substance, the Stacks definition of fpqc coverings and its sheaf criterion; the match is for the schemes case. The general Proposition 1 — the topology generated by a pretopology on C and one on a full subcategory C′ under (a)–(c) — was not searched as such; if anyone pursues it, the place to look is SGA 4 II (topologies engendrées) and Stacks, Sites and Sheaves, but its condition (c) is a reconstruction from a struck passage, so the page cannot carry a separate candidate until the transcription of page 9 is revisited.',
+  },
+  {
+    id: '126-radicial-etale-factorisation',
+    cote: '126',
+    pages: '17–23',
+    kind: 'mathematical',
+    claim:
+      'A finite, universally open morphism f : X → Y with Y locally noetherian whose fibres all have the same number n of geometric points factors as a finite surjective radicial morphism X → X^ét followed by a finite étale cover X^ét → Y, universal among Y-morphisms from X to étale Y-schemes — under universal openness rather than flatness.',
+    basis:
+      'Page 17 states the Proposition; pages 18 and 20 build the scheme of numberings Y″ ⊂ X^n; page 19 proves that a section of such an f is open and closed, splitting X = X_(1) ⊔ X^(1); pages 21–22 (Lemmas 2 and 3) descend the trivial cover Y′ × I along a finite surjective Y′ → Y to an étale cover of Y.',
+    ours:
+      'The proof is only sketched in the folder and the reading says it does not certify the statement in full generality. The reading supplies the justification on page 19 (that a common point would drop the geometric-point count, using universal openness), the closed-immersion criterion of the Lemma of pages 18/20, and the appeal to effective descent of étale covers along finite surjective maps (SGA 1 IX §4, cited from memory). It also shows the page’s remark that « d constant » can be dropped for Y connected is false as it stands (y² = t over k[t]), so constancy stays a hypothesis. On the page, « univ. ouvert » — the hypothesis that would make this weaker than the flat case — is an interlinear addition marked \\uncertain, and « factorisation » in the heading is \\uncertain too; most of the prose of pages 21–23 is \\ill.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'The statement rests on an uncertain interlinear « univ. ouvert », so the transcription of page 17 should be checked against the facsimile first. Then look for the factorisation (the « étale part » of a finite morphism, π₀ of X/Y) in EGA IV 18.2 and 18.12, SGA 1 IX, and the Stacks Project chapters on étale morphisms and fundamental groups (pione), and see whether it is stated under universal openness or only for finite flat (locally free) morphisms. Two general web searches on 2026-10-10 did not surface the statement in either form; that is not a reading of those sources, hence the status.',
+  },
+  {
+    id: '126-nilpotent-deformation-quotient',
+    cote: '126',
+    pages: '4–7',
+    kind: 'mathematical',
+    claim:
+      'If R ⇉ X is a flat equivalence relation and its reduction R₀ ⇉ X₀ modulo a nilpotent ideal is effective with fpqc, quasi-separated quotient X₀ → Y₀, then R is effective, with quotient Y a nilpotent thickening of Y₀ and X → Y flat — proved by the vanishing of Ȟ⁰(X₀/Y₀, ℋ¹) for fpqc quasi-separated covers of an affine.',
+    basis:
+      'Page 4 states the conclusion (« R est M-effective »); pages 5–6 construct 𝒜 = Ker(𝒪_X ⇉ 𝒪_R), use Remark 2 of page 3 to lift sections and Theorem 1 in degree 1 to correct the lift; page 7 concludes flatness and R ≃ X ×_Y X.',
+    ours:
+      'The hypotheses are largely illegible and are reconstructed by the reading: flatness of p₁, p₂ and R₀ = R ×_X X₀ are not on the page; « (M) » is unresolved. The reading fixes a sign the page leaves uncertain, supplies the reduction to 𝒥² = 0, the fact that a square-zero thickening by a quasi-coherent ideal is a scheme, and the use of the local flatness criterion. So the statement is largely the edition’s; the page carries the strategy (Čech vanishing used to lift and correct invariant functions).',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for deformation of quotients by flat equivalence relations in SGA 3, exposés V and VI_A (quotients by flat groupoids), and in the Stacks Project chapters on groupoids and deformation theory. Given how much of the hypothesis is reconstructed, a match for the reconstructed statement would settle it; if none is found, the transcription of pages 4–5 should be re-read before the entry is promoted to candidate.',
+  },
+  {
+    id: '126-generic-descent',
+    cote: '126',
+    pages: '26–29',
+    kind: 'mathematical',
+    claim:
+      'For S noetherian, T → S flat of finite type and a fibred category F on finite-type S-schemes for which flat surjective morphisms are of F-descent (full faithfulness only), an isomorphism φ : p₁*X ≅ p₂*X defined over a dense open of T ×_S T and satisfying the cocycle condition over a dense open of T ×_S T ×_S T extends, after shrinking T to a dense open, to a genuine descent datum agreeing with φ where both are defined.',
+    basis:
+      'Page 26 states the data and the reductions; page 27 defines ψ through a middle point and checks compatibility on the five-point scheme W′; page 28 descends ψ to φ′; pages 28–29 check the cocycle condition on the six-point scheme W‴ and that φ′ extends φ.',
+    ours:
+      'The reading takes X in F_T where the page writes F_S, takes U, V open from the start, reorders the shrinkings so that V need not be re-shrunk (the page’s own order is circular), corrects « W ×_{T×T} W ≃ T⁴ » to an open subset of T⁴, and exchanges t″ and t‴ in the list defining W‴ to match the computation of page 29. The flatness and surjectivity of W′ → W ×_{T×T} W is asserted by the page « sauf erreur ». The reading relates the method, from memory, to Weil’s theorem on birational group laws and field of definition (1956) and to M. Artin’s exposé in SGA 3 XVIII; the page names neither.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Read A. Weil, « The field of definition of a variety » (Amer. J. Math. 78, 1956), and SGA 3, exposé XVIII (M. Artin, birational group laws), for a descent statement for a rational descent datum in this generality — an arbitrary fibred category with flat surjective maps of descent; also EGA IV § 9 and § 20 on generic properties. If the general form is there, mark matched; if only the case of varieties or group laws is, the fibred-category form is the candidate.',
+  },
+  {
+    id: '126-interposed-leaves-13-19',
+    cote: '126',
+    pages: '10–14, 18–20',
+    kind: 'codicological',
+    claim:
+      'Twice in the folder a text runs across an interposed leaf: the sentence cut off at the foot of page 12 continues in the struck lines at the top of page 14, with page 13 (the resumed proof of Proposition 1 from page 10) in between; and the Lemma of page 18 continues on page 20, with page 19 (the open-and-closed section argument) in between.',
+    basis:
+      'The transcription notes on page 14 « suite de la phrase interrompue au bas de la page 12 », on page 13 « suite de la démonstration de la page 10 », and on page 20 « suite, semble-t-il, du lemme de la page 18 »; page 18 is struck through with two diagonals.',
+    ours:
+      'The two continuations are the transcription’s and the reading’s observations, not marks on the leaves; the « semble-t-il » for page 20 is the transcription’s. No explanation (verso numbered in sequence, misbound leaf, insertion) has been checked.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look at the facsimile for whether pages 12/13 and 18/19 are recto and verso of single leaves (in which case the sequence is a reading of the versos, not a binding error) or separate leaves, and compare paper and ink of 13 with 10–12 and 14, and of 19 with 18 and 20.',
+  },
+// 137: two candidates. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (% Pass header of 137.modern.tex, 2026-10-10). Dropped as matches the reading already names: the Dold–Kan splitting and rank formula (pp. 6–12), the Smith-normal-form dévissage over a principal ring (pp. 15–21), the additive envelope and additive Yoneda (pp. 27–33), Isbell duality (p. 31), ends and coends (p. 34), Dold–Kan in karoubian categories (pp. 45–46), Quillen exact categories (p. 49), lax symmetric monoidal functors (p. 65), the cup product by acyclic models (p. 71), Roby's theorem and the Friedlander–Suslin definition of strict polynomial functors (pp. 84–85, a match, not a novelty). Dropped as repaired by the edition: Proposition 2 of pp. 9–11 (stability of special modules under Λ, Γ, Sym, false over ℤ), the d)/e) « ssi » of p. 13, the struck weight lemma of p. 75 (struck by him, counterexample in his margin). Not entered: the theorem of p. 3 / p. 72 (u_n an isomorphism), asserted without proof and overlapping 136-pd-de-rham-shadows.
+  {
+    id: '137-perfect-complexes-universal-sigma-exact',
+    cote: '137',
+    pages: '39–44, 48–56',
+    kind: 'mathematical',
+    claim:
+      'Let 𝒫 be the k-linear category of bounded chain complexes of finitely generated free k-modules, with Σ the degreewise-split short exact sequences and ℂ^• the cochain complex of discs (k → k in degrees i+1, i). For any k-additive karoubian category ℬ with a class Σ of exact sequences in which every morphism has a Σ-kernel, evaluation F ↦ F(ℂ^•) is an equivalence from the k-linear functors 𝒫 → ℬ that send Σ to left-exact sequences onto all cochain complexes of ℬ, with inverse C^• ↦ (L ↦ Hom^•_k(Hom(L, ℂ^•), C^•)); under it the Σ-exact functors correspond to the Σ-resolutions.',
+    basis:
+      'Page 40 (Proposition 1) shows that the full subcategory on the discs is the k-additive category freely generated by a cochain complex; page 42 (Proposition 2) gives the perfect pairing Hom(ℂ^n, x) × Hom(x, ℂ^{n+1}) → k; pages 43–44 (Proposition 3) give the reconstruction formula F(x) ≅ Hom^•_k(α^•(x), F(ℂ^•)). Page 50 states the theorem; pages 52–55 build the adjunction ρ ⊣ σ, show σ fully faithful, and prove the unit an isomorphism by induction on length, exhibiting L as the kernel of a Σ-epi (ℂ^p)^r ⊕ L′ → (Ψ^{p+1})^r. The formulas on pp. 52–55 are legible; much of the connecting prose is \\uncertain{} or \\ill{}, including the hypothesis added on p. 50 (« où tout \\uncertain{projecteur} a un noyau ») and the description of the essential image in a).',
+    ours:
+      'The reading states a) in the form proved on p. 55, not the hesitant form of p. 50 (where « est une équivalence » is struck for « est pleinement fidèle »). It sets aside the margin doubt of p. 52, « Non, il faut condition de platitude ? », judging that the proof uses only the existence of kernels; that judgement is the edition’s, and is the first thing to check. The intrinsic characterisation of 𝒫 by conditions a)–e) on pp. 57–60 is not part of this claim: there the reading itself doubts what the page describes as the essential image.',
+    literature: [
+      'Two general web searches (2026-10-10) for a universal property of bounded complexes of finitely generated free modules with the degreewise-split exact structure, and for the additive category freely generated by a cochain complex, found no statement of either; they surfaced only background (term-split exact structures on bounded complexes, arXiv:2001.05380; free additive categories on a linear category, arXiv:2402.12251), neither read in full. That is not a search of the sources named in settle',
+    ],
+    status: 'unsearched',
+    settle:
+      'Look for the statement that cochain complexes in ℬ are the left-exact functors out of bounded complexes of free modules (or, equivalently through Dold–Kan, out of strictly perfect simplicial modules) in: Mitchell, « Rings with several objects » (Adv. Math. 8, 1972), on complexes as additive functors on a ringoid; Keller, « Chain complexes and stable categories » (Manuscripta Math. 67, 1990) and « Deriving DG categories » (1994); Bühler, « Exact categories » (Expo. Math. 28, 2010); Illusie, Complexe cotangent I, ch. I, on Dold–Puppe in additive categories; and, in ∞-categorical form, Lurie, Higher Algebra 1.3.3 and 1.2.4 (universal property of D⁻ and of the Dold–Kan correspondence). If it is in any of these, even as an exercise, mark matched.',
+  },
+  {
+    id: '137-polynomial-categories-pd-tensor-categories',
+    cote: '137',
+    pages: '74–83',
+    kind: 'mathematical',
+    claim:
+      'The folder axiomatises « polynomial categories » — a category 𝐏 with finite products, a wide additive subcategory 𝐏₁ of degree-one maps, and a grading 𝐏(X, Y) = ⊕ 𝐏_n(X, Y) by homogeneity under scalars, with composition additive in the outer variable only and degrees multiplying — and asserts that the strict ones are equivalent to « ⊗-pd-categories »: additive symmetric monoidal categories with an exponential graded functor Γ* (Γ*(X ⊕ Y) ≅ Γ*X ⊗ Γ*Y) and maps α_{p,q} : Γ^{pq} → Γ^p Γ^q satisfying associativity and unit conditions, the passage back being 𝐏_p(X, Y) = Hom(Γ^p X, Y).',
+    basis:
+      'Pages 74–76 give axioms a)–g) and take the degree decomposition as structure after a struck lemma; pages 77–80 define strict tensor products, Γ^n by representability, derive the exponential formula and the α_{p,q} with their associativity square; pages 81–82 build 𝐏 from a ⊗-pd-category with composition g ∘ Γ^q(f) ∘ α_{q,p}; page 83 says « On vérifie alors les axiomes a) à f) » and « Les deux notions sont donc équivalentes ». The phrase on p. 83 saying what is verified about strict tensor products carries \\ill{} and \\uncertain{} words; page 76 has two nearly illegible margin notes, one beginning « Oublié : ».',
+    ours:
+      'The equivalence is asserted on p. 83 and not proved; the reading says so. The edition corrects id_Y to id_X in the action μ_n (p. 74), the index of the vertical arrow in the associativity square (p. 80), and reads « applications bil. » (p. 82, \\uncertain{}) as linear in the outer variable only. The reading also notes that the page refers to axioms a)–f) while p. 76 lists a)–g). The match of the folder’s final question with the Friedlander–Suslin definition of strict polynomial functors is a match, recorded in the reading, and is not this claim.',
+    literature: [
+      'Two general web searches (2026-10-10) for categories graded by polynomial degree with composition additive in one variable, and for monoidal categories with an exponential divided-power functor defining polynomial morphisms, found no such axiomatisation; they surfaced the categories Γ^d P of strict polynomial functor theory (Krause, « Koszul, Ringel and Serre duality for strict polynomial functors », arXiv:1203.0311; « Generalized polynomial functors », arXiv:2308.16442) and Roby-style polynomial maps (arXiv:1112.0991), none read for this question',
+    ],
+    status: 'unsearched',
+    settle:
+      'Decide whether either notion, or the equivalence, is in print: Roby, « Lois polynomes et lois formelles » (Ann. ENS 80, 1963) and « Lois polynômes multiplicatives » (1980); Friedlander–Suslin (Invent. Math. 127, 1997) § 2; Bousfield, « Operations on derived functors of non-additive functors » (1967); Joyal’s analytic functors and the theory of Γ-rings / Tambara functors for exponential structures; and the literature on categories with polynomial (non-additive) hom-structures, such as Blute–Cockett–Seely differential categories and Ehrhard’s models of differential linear logic, where Hom(!X, Y) plays the role of Hom(Γ X, Y). A match would most likely be a « !-coalgebra / Seely category » formulation; check that its morphisms and composition coincide with 𝐏_p(X, Y) = Hom(Γ^p X, Y) and g ∘ Γ^q(f) ∘ α_{q,p} before marking matched.',
+  },
 ];
