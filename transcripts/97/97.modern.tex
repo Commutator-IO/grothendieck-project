@@ -1,0 +1,959 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 97, pages 1-18
+% (the whole folder, one batch).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states what the manuscript leaves implicit,
+% and moves everything the critical apparatus carried into footnotes. It is
+% held to being mathematically correct as it stands; where the pages are loose
+% or mistaken, the true statement is what appears here and a footnote says
+% what the page has. In any dispute of substance the transcription governs:
+% whoever cites Grothendieck must cite batch-01.fr.tex.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% The folder was read whole: one batch, pages 1-18, of which pages 2, 3, 5
+% and 14 are not transcribed (a list of names; the abandoned opening of a
+% letter to Atiyah on IHES letterhead; a blank; a blank verso). Nothing is
+% said of pages 2 and 3 beyond what the transcription's header says.
+%
+% What the folder is. Under the catalogue title « Classes de Chern des
+% représentations », three strands of his own and three sheets he wrote on:
+%   p. 1        Serre's letter of 4 Nov. 1966 (sends a « Notice » and points
+%               to a paper of Milnor on flat SL_2 bundles over a surface);
+%               described, not restated.
+%   p. 4        Chern classes of the regular representation of a finite
+%               group, and H^{Nk}(G,Z)(p) != 0.
+%   pp. 6-12    the flat bundle Sigma_0 on a compact hyperbolic surface X
+%               given by a lift of the Fuchsian group to SL(2,R): Euler class
+%               1-g, T_X = Sigma_0^{(x)2}, gamma_1^X = 2-2g; the lifting
+%               obstruction in H^2(Gamma,Z/2); T_X + 2 flat.
+%   p. 15       H^*(B_G,R) for G compact connected, via forms on the
+%               simplicial manifold G^{p+1}/G, and Sym(T) = H^*(B_G,R).
+%   p. 17       conditions « sans p-torsion » for a connected Lie group and
+%               the implications between them (Hopf, Borel, Leray).
+%   versos      pp. 7, 9, 11, 13: four sheets of a typescript on the Brauer
+%               group of a fibration over a curve (typed pp. 23, 17, 19, 20);
+%               p. 16: one sheet of a typed letter on the categories C(X,A);
+%               p. 18: EGA IV typescript sheet IV-1102, (21.6.5)-(21.6.6).
+%
+% Notation fixed for the whole document. G = PSL(2,R) = SL(2,R)/{+-1} on
+% pages 6-12 (he writes « GP(2,R) »), G~ = SL(2,R), S = PSO(2), S~ = SO(2);
+% B_H the classifying space of a group H, as on the pages; gamma_1 the
+% generator of H^2(B_S,Z), c_1 that of H^2(B_S~,Z); e( ) the Euler class;
+% chi(X) for his EP(X). On page 17, B is a Borel subgroup and T a maximal
+% torus. The typescript's Tate-Shafarevich group is written \mathrm{III}, as
+% the transcription sets it.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — p. 4: the product of the lambda in F_p^* is -1 (Wilson), not 1; so
+%   c_{p-1}(r_G) = -xi_0^{p-1} and c_{N(p-1)}(N r_G) = (-1)^N xi^{N(p-1)}.
+%   The conclusion is unaffected. The last lines drop the factor N; restored.
+% — pp. 6-12: « GP(2,R) » read as PSL(2,R); the sign of gamma_1^X depends on
+%   orientation conventions, fixed here. The argument by a covering of degree
+%   d (p. 10) is stated as what it proves: compatibility, and reduction of
+%   the formula for X to the formula for X'. Page 12 is almost illegible;
+%   the reading of the extension class and of H^2(Gamma,Z/2) is ours.
+%   Remark (4): T_X + 2 is already trivial as a real bundle; the content is
+%   the flat structure it gets from Sigma_0 (x) Sigma_0.
+% — p. 13 (typed 20): « la plus petite extension galoisienne ... de degré
+%   nu » is replaced by the separable closure of k(y) in the function field
+%   of the component, of degree nu; the two agree when it is Galois (always
+%   for k(y) finite). « Pseudo-fini au sens de Serre » is Serre's
+%   « quasi-fini ».
+% — p. 16: the question « tout foncteur exact ... proviendrait d'un unique
+%   morphisme » is false as posed (the zero functor, the shift); footnoted.
+% — p. 17: (ii bis) => (ii) by Betti numbers needs the degrees of the
+%   generators to be the rational ones; footnoted.
+%
+% Cross-references in the group « Géométrie et topologie combinatoire »:
+% folder 88, pages 11-14 (the hyperbolic plane as homogeneous space of
+% SL(2,R)/{+-1}, Fuchsian groups); folder 72, pages 107-112 (transcription
+% only: Stiefel-Whitney classes and the Brauer class of a quadratic form,
+% the same kind of mod 2 obstruction as on page 12 here).
+%
+% What the folder announces and never establishes: the computation the
+% typescript begins at the foot of p. 13 (« on trouve ... »); the end of the
+% EGA proof at the foot of p. 18; the reconstruction question of p. 16; the
+% proofs of the degeneration and of the theorem of p. 15 (stated, not
+% proved); Serre's « Notice » itself, which is not in the folder.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{97}
+\pages{1}{18}
+\dating{[vers 1966]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Classes de Chern des représentations : lettre (1966), notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Une représentation d'un groupe --- une façon de le faire agir par matrices
+--- fabrique des objets géométriques : des \emph{fibrés vectoriels}, familles
+d'espaces vectoriels posés au-dessus de chaque point d'un espace, comme les
+plans tangents posés en chaque point d'une surface. Un fibré peut être
+« tordu » d'une façon qu'aucune déformation ne défait --- le ruban de Möbius
+est un fibré en droites tordu au-dessus du cercle --- et ses \emph{classes
+caractéristiques}, en particulier les classes de Chern, sont les entiers ou
+les classes de cohomologie qui mesurent cette torsion. Ces feuillets
+demandent ce que ces mesures valent sur les fibrés qui viennent d'une
+représentation.
+
+Deux cas sont traités. Pour un groupe fini, la représentation la plus
+naturelle --- le groupe agissant sur lui-même par permutations --- a des
+classes de Chern qu'on calcule exactement ; elles ne s'annulent jamais en
+certains degrés, et cela suffit à montrer que la cohomologie d'un groupe fini
+dont l'ordre est divisible par un nombre premier $p$ a de la $p$-torsion en
+une infinité de degrés.
+
+Le second cas est plus surprenant. Sur une surface compacte de genre
+$g \geq 2$ --- une bouée à $g$ trous ---, la géométrie hyperbolique fournit
+une représentation du groupe fondamental dans les matrices réelles $2 \times
+2$ de déterminant $1$, et donc un fibré en plans sur la surface. Ce fibré est
+\emph{plat} : on peut le transporter le long des chemins sans qu'il tourne,
+comme si l'on n'avait jamais quitté un point. Pour des fibrés complexes
+ordinaires, être plat force les classes de Chern à être négligeables ---
+c'est ce que dit la théorie de Chern--Weil, qui calcule ces classes par la
+courbure. Ici non : le fibré plat obtenu a une classe d'Euler égale à
+$1 - g$, qui n'est pas nulle, et son « carré » est le fibré tangent de la
+surface, de classe $2 - 2g$, la caractéristique d'Euler. L'analogie est celle
+d'un escalier en colimaçon : localement chaque marche est plate, et pourtant
+l'ensemble monte. La lettre de Serre qui ouvre le dossier renvoie à Milnor,
+qui avait étudié en 1958 exactement ces fibrés plats ; la surface hyperbolique
+réalise le cas extrême de son inégalité.
+
+Autour de ces deux calculs, deux feuillets sur la cohomologie des espaces
+classifiants des groupes de Lie, où ces classes vivent : à coefficients
+réels, on la calcule par des formes différentielles invariantes, et elle est
+une algèbre de polynômes ; modulo $p$, elle l'est encore exactement quand le
+groupe n'a pas de $p$-torsion. Le reste du dossier est le papier sur lequel
+il écrivait : des feuillets d'un tapuscrit sur le groupe de Brauer d'une
+surface fibrée sur une courbe, une page d'EGA IV, et une page d'une lettre
+dactylographiée. Cette dernière vaut d'être lue pour elle-même : elle
+propose de regarder un espace non pas directement, mais à travers la
+catégorie de tous les coefficients qu'il peut porter, et se demande si
+cette catégorie suffit à le reconstituer --- « je crois que quelqu'un devrait
+bien un jour regarder ces choses systématiquement ». C'est un programme
+qu'il reprendra vingt ans plus tard dans \emph{À la poursuite des champs}.
+
+\keywords{Chern classes of representations, regular representation, cohomology of finite groups, Fuchsian group, flat bundle, Euler class, Milnor-Wood inequality, spin structure, Adams operation, classifying space, simplicial de Rham complex, Koszul duality, torsion in Lie groups, Borel transgression theorem, Brauer group of a fibred surface, Tate-Shafarevich group, local systems and homotopy type, Weil divisor of a Cartier divisor}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier n'a pas une argumentation, mais trois brins de même sujet, posés
+sur des feuillets de remploi.
+
+\begin{enumerate}
+\item[1.] \emph{La lettre de Serre} (page 1), datée du 4 novembre 1966.
+\item[2.] \emph{Classes de Chern de la représentation régulière} (page 4) :
+groupes finis.
+\item[3.] \emph{Le fibré plat d'une surface hyperbolique} (pages 6, 8, 10 et
+12, quatre feuillets numérotés par lui 1, --, 2, 3) : groupes discrets dans
+$\mathrm{PSL}(2,\mathbb{R})$.
+\item[4.] \emph{Les espaces classifiants des groupes de Lie} (pages 15 et 17) :
+coefficients réels, puis la $p$-torsion.
+\end{enumerate}
+
+Les versos des feuillets manuscrits portent d'autres textes, qui n'ont pas de
+rapport avec les classes de Chern et qu'on lit à leur place dans l'ordre des
+pages : un tapuscrit sur le groupe de Brauer d'une fibration (pages 7, 9, 11
+et 13, qu'on lit dans l'ordre de leur pagination dactylographiée, 17, 19, 20,
+23), une page de lettre dactylographiée sur les catégories $C(X,A)$
+(page 16), une page du tapuscrit d'EGA IV (page 18). Les pages 2 (une liste
+de noms), 3 (le début abandonné d'une lettre à Atiyah sur papier de l'IHÉS),
+5 (blanche) et 14 (verso blanc) ne sont pas transcrites et ne sont pas lues
+ici.
+
+\emph{Conventions.} Pour un groupe topologique $H$, $B_{H}$ est son espace
+classifiant, comme sur les pages. Aux pages 6 à 12, $G = \mathrm{PSL}(2,
+\mathbb{R}) = \mathrm{SL}(2,\mathbb{R})/\{\pm 1\}$ opère sur le disque $D$
+(ou le demi-plan de Poincaré) avec stabilisateur $S = \mathrm{PSO}(2)$ ;
+$\widetilde{G} = \mathrm{SL}(2,\mathbb{R})$ et $\widetilde{S} =
+\mathrm{SO}(2)$ sont leurs revêtements \emph{doubles} --- et non universels ---
+et $\Gamma \subset G$ est un sous-groupe discret sans torsion, cocompact, de
+quotient $X = D/\Gamma$ de genre $g \geq 2$. La caractéristique d'Euler
+qu'il note $EP(X)$ est notée $\chi(X) = 2 - 2g$, et $e(\,\cdot\,)$ est la
+classe d'Euler d'un fibré réel orienté de rang 2, identifiée à $c_{1}$ du
+fibré en droites complexes associé. On identifie $H^{2}(X,\mathbb{Z})$ à
+$\mathbb{Z}$ par la classe fondamentale de l'orientation complexe. À la
+page 17, $B$ est un sous-groupe de Borel et $T \subset B$ un tore maximal.
+
+\pagerange{1}{1}
+\section*{La lettre de Serre (page 1)}
+
+La page 1 est une lettre de J.-P.\ Serre à Grothendieck, sur papier à en-tête
+du Collège de France, datée du 4 novembre 1966. Serre n'a pas regardé le
+problème que Grothendieck lui avait posé, mais lui envoie une « Notice » qui
+démontre la même chose, et qui renvoie à un papier de Milnor sur les fibrés
+plats de groupe $\mathrm{SL}_{2}$ au-dessus d'une surface.\footnote{La lettre
+est transcrite entière dans \texttt{batch-01.fr.tex} ; on ne la redonne pas
+ici, n'étant pas de Grothendieck. « La même chose » est une lecture
+incertaine. Ni le problème posé ni la « Notice » ne sont dans le dossier.
+Le papier de Milnor est très vraisemblablement « On the existence of a
+connection with curvature zero », \emph{Comment.\ Math.\ Helv.}\ 32 (1958),
+qui montre qu'un fibré réel orienté de rang 2 sur une surface de genre $g
+\geq 1$ admet une structure plate de groupe $\mathrm{GL}^{+}(2,\mathbb{R})$
+si et seulement si sa classe d'Euler $e$ vérifie $|e| \leq g - 1$ ; l'inégalité
+a été étendue aux fibrés plats en cercles par J.\ Wood (1971). L'identification
+est la nôtre : la lettre ne donne pas de titre.} Le seul énoncé mathématique
+de la lettre nomme le sujet des feuillets 6 à 12 ; c'est par eux que le
+dossier se rattache à 1966.
+
+\pagerange{4}{4}
+\section*{Classes de Chern de la représentation régulière (page 4)}
+
+Le titre est de sa main : « Classe de Chern de la représentation régulière et
+ses multiples ».
+
+\emph{Le groupe cyclique.} Soit $G$ cyclique d'ordre $n$ et $\check{G} =
+\mathrm{Hom}(G, \mathbb{Q}/\mathbb{Z})$ son dual. Le cobord de la suite
+$0 \to \mathbb{Z} \to \mathbb{Q} \to \mathbb{Q}/\mathbb{Z} \to 0$ donne
+$H^{2}(G,\mathbb{Z}) \simeq H^{1}(G,\mathbb{Q}/\mathbb{Z}) =
+\check{G}$,\footnote{Le « $\mathrm{Hom}$ » de la page est une lecture
+incertaine : le signe ressemble à un $H$ surmonté d'une étoile. L'énoncé est
+juste sous l'une ou l'autre lecture.} et l'on a, en degrés strictement
+positifs,
+\[
+  H^{*}(G,\mathbb{Z})^{+} \simeq \mathrm{Sym}_{\mathbb{Z}/n\mathbb{Z}}(\check{G})^{+}
+  \simeq (\mathbb{Z}/n\mathbb{Z})[\xi]^{+},
+\]
+où $\xi$ est un générateur de $H^{2}(G,\mathbb{Z})$, de degré 2 ; les degrés
+impairs sont nuls. La représentation régulière complexe $r_{G}$ est la somme
+des caractères $\chi \in \check{G}$, et la classe de Chern d'un caractère est
+son image dans $H^{2}$ ; la formule de Whitney donne donc, pour un générateur
+$\xi_{0}$ de $\check{G}$,
+\[
+  c(r_{G}) = \prod_{\chi \in \check{G}} (1 + \chi)
+  = \prod_{\lambda \in \mathbb{Z}/n\mathbb{Z}} (1 + \lambda \xi_{0}) .
+\]
+
+\emph{Le cas $n = p$ premier.} Le facteur $\lambda = 0$ vaut 1, d'où
+$c_{p}(r_{G}) = 0$, et
+\[
+  c_{p-1}(r_{G}) = \Bigl(\prod_{\lambda \in \mathbb{F}_{p}^{*}} \lambda\Bigr)
+  \xi_{0}^{p-1} = -\,\xi_{0}^{p-1},
+\]
+indépendamment du choix de $\xi_{0}$, puisque $\lambda^{p-1} = 1$ pour
+$\lambda \in \mathbb{F}_{p}^{*}$.\footnote{La page écrit $c_{p-1}(r_{G}) =
+\xi_{0}^{p-1}$, le produit des éléments de $\mathbb{F}_{p}^{*}$ étant compté
+pour 1. Par le théorème de Wilson il vaut $(p-1)! \equiv -1$. Le signe ne
+change rien à ce qui suit, qui ne demande que la non-nullité.} Comme $c(N
+r_{G}) = c(r_{G})^{N}$,
+\[
+  c_{i}(N r_{G}) = 0 \quad \text{pour } i > N(p-1), \qquad
+  c_{N(p-1)}(N r_{G}) = (-1)^{N} \xi_{0}^{N(p-1)} \neq 0 ,
+\]
+cette dernière classe engendrant $H^{2N(p-1)}(G,\mathbb{Z}) =
+\mathbb{Z}/p\mathbb{Z}$.
+
+\emph{Le cas général.} Soit $G$ un groupe fini d'ordre $n$ divisible par $p$,
+$H \subset G$ un sous-groupe d'ordre $p$ et $n' = n/p$. La restriction de
+$r_{G}$ à $H$ est $n' r_{H}$, donc $(N r_{G})|_{H} = N n' r_{H}$ et
+\[
+  c_{N n'(p-1)}(N r_{G})|_{H} = c_{N n'(p-1)}(N n' r_{H}) \neq 0 .
+\]
+A fortiori $c_{N n'(p-1)}(N r_{G}) \neq 0$.\footnote{La page écrit ici
+$c_{i}(r_{G})$ et $c_{N n'(p-1)}(r_{G})$, sans le facteur $N$ des lignes
+précédentes, et une fois un $n$ minuscule qui est vraisemblablement ce $N$ ;
+on le rétablit, l'énoncé sans $N$ étant faux pour $N > 1$ par raison de
+degré ($c_{i}(r_{G}) = 0$ pour $i > n$).} Comme $H^{*}(H,\mathbb{Z})$ est de
+$p$-torsion en degrés positifs, la restriction tue la partie première à $p$ ;
+la composante $p$-primaire de cette classe est donc non nulle :
+\[
+  \boxed{H^{Nk}(G,\mathbb{Z})(p) \neq 0 \quad \text{pour tout entier } N \geq 1,
+  \qquad k = 2n'(p-1).}
+\]
+En particulier la cohomologie entière d'un groupe fini a de la $p$-torsion en
+une infinité de degrés pour tout premier $p$ divisant son ordre, et ces
+classes sont des classes de Chern de représentations.\footnote{Les classes de
+Chern des représentations d'un groupe fini avaient été introduites et
+étudiées par Atiyah, « Characters and cohomology of finite groups »,
+\emph{Publ.\ Math.\ IHÉS} 9 (1961) ; la page 3 du dossier porte le début
+abandonné d'une lettre à Atiyah, dont rien n'est lisible au-delà de
+l'en-tête et de l'adresse. Que la cohomologie d'un groupe fini ait de la
+$p$-torsion en une infinité de degrés est classique ; la page ne cite
+personne. Le rang $k$ obtenu n'est qu'une borne commode : pour $G$ cyclique
+d'ordre $p$ il y a de la $p$-torsion en tout degré pair.}
+
+\pagerange{6}{12}
+\section*{Le fibré plat d'une surface hyperbolique (pages 6, 8, 10 et 12)}
+
+Quatre feuillets à l'encre noire, numérotés par lui 1, --, 2, 3, écrits au dos
+des feuillets du tapuscrit qui les suivent dans le dossier. Les pages 8 et 12
+sont de l'écriture la plus rapide du dossier, et une grande partie de leur
+prose ne se lit pas ; les formules se lisent. Ce qui suit est la mise au net
+d'un argument dont les formules sont sur la page ; les phrases qui les
+relient sont, en partie, les nôtres, et les notes disent où.
+
+\pagerange{6}{6}
+\subsection*{La situation, et le dictionnaire (page 6)}
+
+Le disque $D$ est l'espace homogène $G/S = \widetilde{G}/\widetilde{S}$,
+$S = G_{x}$ et $\widetilde{S} = \widetilde{G}_{x}$ étant les stabilisateurs
+d'un point $x$. Le groupe $\Gamma$ se relève isomorphiquement en
+$\widetilde{\Gamma} \subset \widetilde{G}$ (on le verra page 12), et l'on a le
+diagramme
+\begin{tikzcd}[column sep=small, row sep=small]
+\widetilde{S} = \mathrm{SO}(2) \arrow[rr] \arrow[d, hook] & & S = \mathrm{PSO}(2) \arrow[d, hook] \\
+\widetilde{G} = \mathrm{SL}(2,\mathbb{R}) \arrow[rr] & &
+G = \mathrm{PSL}(2,\mathbb{R}) \\
+\widetilde{\Gamma} \arrow[rr, "\sim"] \arrow[u, hook] & & \Gamma \arrow[u, hook]
+\end{tikzcd}
+dont les flèches horizontales sont de degré 2.\footnote{La page note $G =
+\mathrm{GP}(2,\mathbb{R}) = \widetilde{G}/(+1,-1)$ ; « GP » est lu tel
+qu'écrit, lecture incertaine, et ce qu'il désigne est sans ambiguïté
+$\mathrm{PSL}(2,\mathbb{R})$. Le diagramme de la page place $\widetilde{S}
+\to S$ au-dessus de $\widetilde{G} \to G$ sans flèches verticales, et des
+traits sans pointe lisible entre $\widetilde{G}$, $G$ et $\widetilde{\Gamma}$,
+$\Gamma$ ; on les rend par les inclusions. C'est le même plan hyperbolique,
+espace homogène de $\mathrm{SL}(2,\mathbb{R})/\{\pm 1\}$, que le dossier 88
+décrit aux pages 11 à 13 comme l'une des trois surfaces standard, et dont il
+range les pavages réguliers à la page 14.}
+
+\emph{Le dictionnaire.} Toute représentation linéaire réelle $W$ de
+$\widetilde{S}$ définit un fibré vectoriel $\widetilde{G}$-équivariant
+$\widetilde{G} \times^{\widetilde{S}} W$ sur $D$, donc, par restriction de
+l'action à $\widetilde{\Gamma}$ et passage au quotient, un fibré vectoriel
+réel $\mathcal{F}(W)$ sur $X$. La correspondance $W \mapsto \mathcal{F}(W)$
+respecte sommes, produits tensoriels, puissances extérieures et dualité :
+c'est un homomorphisme d'anneaux $\lambda$ de $RO(\widetilde{S})$ dans
+$KO(X)$.\footnote{La page dit qu'elle « respecte les opérations tensorielles,
+l'opération de conjugaison » ; la suite est illisible. Le nom d'anneau
+$\lambda$ et la notation $\mathcal{F}$ sont les nôtres. En marge, à l'encre
+brune, un mot biffé lu « Lusin », sans rapport visible avec le texte.} Deux
+exemples :
+
+\begin{itemize}
+\item[--] la représentation de $\widetilde{S}$ sur $T_{x}D$, qui se factorise
+par $S$, donne le fibré tangent $T_{X}$ ;
+\item[--] si $W$ est la restriction d'une représentation $V$ de $\widetilde{G}$
+tout entier, $\widetilde{G} \times^{\widetilde{S}} V \simeq D \times V$ avec
+l'action diagonale $\gamma \cdot (z, v) = (\gamma z, \gamma v)$, et
+$\mathcal{F}(V)$ est le fibré \emph{plat} associé à la représentation
+$\widetilde{\Gamma} \to \widetilde{G} \to \mathrm{GL}(V)$ du groupe
+fondamental.
+\end{itemize}
+
+Soit $V = \mathbb{R}^{2}$ la représentation standard de $\mathrm{SL}(2,
+\mathbb{R})$, et $\Sigma_{0} = \mathcal{F}(V)$ le fibré plat de rang 2 qu'elle
+définit. Restreinte à $\widetilde{S} = \mathrm{SO}(2) = \{e^{i\theta}\}$, $V$
+est la rotation d'angle $\theta$, de caractère complexifié $e_{1} + e_{-1}$ ;
+$T_{x}D$ est la rotation d'angle $2\theta$, de caractère $e_{2} + e_{-2}$.
+D'où, dans l'anneau des représentations,
+\[
+  [T_{x}D] = \psi^{2}[V] = [V]^{2} - 2,
+\]
+où $\psi^{2}$ est la deuxième opération d'Adams ; et, par le dictionnaire,
+\[
+  \Sigma_{0} \otimes_{\mathbb{R}} \Sigma_{0} \simeq T_{X} \oplus
+  2 \cdot \mathbf{1}_{\mathbb{R}} .
+\]
+\footnote{La page écrit $X = X_{0}^{(2)}$ et $X = X_{0}^{2} - 2$, avec
+$X_{0}$, $X$ pour les représentations $V$ et $T_{x}D$ de $\widetilde{S}$, et
+leurs caractères $e_{1} + e_{-1}$, $e_{2} + e_{-2}$. Lire $X_{0}^{(2)}$ comme
+l'opération d'Adams $\psi^{2}$ est notre interprétation ; elle est conforme
+à la formule $\psi^{2}(x) = x^{2} - 2\lambda^{2}(x)$, $\lambda^{2}V =
+\det V$ étant trivial. La lettre $X$ désigne aussi la surface ; on ne la
+reprend pas pour la représentation. L'isomorphisme de fibrés est écrit dans
+la marge de la page 8, verticalement.} En termes de représentations de
+$\mathrm{SL}(2,\mathbb{R})$, $V \otimes V = \mathrm{Sym}^{2} V \oplus
+\Lambda^{2} V$, où $\Lambda^{2}V$ est triviale et $\mathrm{Sym}^{2}V$ est la
+représentation adjointe, de restriction $e_{2} + e_{-2} + 1$ à
+$\widetilde{S}$.
+
+\emph{Réel, non complexe.} Les fibrés réels orientés de rang 2 sont aussi des
+fibrés en droites complexes, $\mathrm{SO}(2) = \mathrm{U}(1)$ ; à ce titre
+$T_{X}$ est le fibré tangent holomorphe et $\Sigma_{0}$ un fibré en droites
+complexes $L_{0}$, avec
+\[
+  T_{X} \simeq L_{0}^{\otimes 2} \quad \text{(fibrés en droites complexes)},
+\]
+puisque le caractère $e_{2}$ est le carré de $e_{1}$. Mais la structure plate
+de $\Sigma_{0}$ est réelle et non complexe : $\mathrm{SL}(2,\mathbb{R})$ ne
+préserve aucune structure complexe de $\mathbb{R}^{2}$, et c'est ce qui va
+permettre à $\Sigma_{0}$ d'avoir une classe caractéristique non
+nulle.\footnote{La page insiste : « représentation réelle (pas complexe !) »
+(page 8) et, page 6, « rep.\ complexe --- mais pas nécessairement \ldots »,
+le dernier mot illisible. Un fibré en droites complexes muni d'une connexion
+plate \emph{complexe} a une classe de Chern de torsion, par Chern--Weil ;
+une connexion plate de groupe $\mathrm{SL}(2,\mathbb{R})$ ne se prête pas à
+ce calcul, la classe d'Euler n'étant pas un polynôme de Chern--Weil pour le
+groupe non compact $\mathrm{SL}(2,\mathbb{R})$.}
+
+\pagerange{8}{8}
+\subsection*{Le calcul : $e(\Sigma_{0}) = 1 - g$ (page 8)}
+
+Écrivons $\gamma_{1}$ pour la classe de $T_{X}$ et $c_{1}$ pour celle de
+$\Sigma_{0}$. De $T_{X} \simeq L_{0}^{\otimes 2}$ on tire
+\[
+  \gamma_{1} = 2 c_{1}.
+\]
+Or la classe d'Euler du fibré tangent est la caractéristique d'Euler,
+$\gamma_{1} = e(T_{X}) = \chi(X) = 2(1-g)$, d'où
+\[
+  \boxed{c_{1} = e(\Sigma_{0}) = 1 - g \neq 0.}
+\]
+\footnote{La page note d'abord $\widetilde{c}_{1}$ et $c_{1}$ les classes de
+$\Sigma = T_{X}$ et de $\Sigma_{0}$, puis écrit $\gamma_{1}$ pour la
+première, qui est la notation du feuillet 10 ; on la garde. Les deux fibrés
+y sont dits « inversibles », d'abord « réels », corrigé en « complexes ».
+Le reste du feuillet --- sept lignes --- ne se lit que par mots isolés, parmi
+lesquels « sur $D$ », « de $\Gamma$ », « de $\widetilde{S}$ », « les fibrés
+$\Sigma_{0}$ », « $T_{X}$ », « d'une connexion intégrable » : il décrivait,
+semble-t-il, la construction de $\Sigma_{0}$ par passage au quotient d'un
+fibré sur $D$, et la conséquence qu'on lit en marge et à la page 12.}
+
+Ainsi $\Sigma_{0}$ est un fibré plat de rang 2 dont la classe d'Euler n'est
+pas nulle : c'est le cas d'égalité $|e| = g - 1$ de l'inégalité de Milnor, et
+c'est ce qui rend la lettre de Serre pertinente.\footnote{Le rapprochement
+avec Milnor et la lettre de Serre est le nôtre ; la page ne cite personne.
+Topologiquement $L_{0}$ est une racine carrée du fibré tangent, c'est-à-dire
+l'inverse d'une caractéristique thêta $K_{X}^{1/2}$ ; les relèvements de
+$\Gamma$ à $\mathrm{SL}(2,\mathbb{R})$ correspondent aux $2^{2g}$ structures
+spin de $X$. Le fibré tangent lui-même, de classe $|2 - 2g| = 2g - 2 \geq
+g$, n'admet pas de structure plate (Milnor). Que la classe d'Euler d'une
+représentation de $\pi_{1}(X)$ dans $\mathrm{PSL}(2,\mathbb{R})$ ne vaille
+$\pm(2 - 2g)$ que pour les représentations fuchsiennes est un théorème de
+Goldman (1980), bien postérieur.}
+
+\emph{En marge.} Comme $\Sigma_{0} \otimes \Sigma_{0}$ est plat, $T_{X}
+\oplus 2 \cdot \mathbf{1}_{\mathbb{R}}$ admet une connexion
+intégrable ; on retrouve l'énoncé à la page 12.
+
+\pagerange{10}{10}
+\subsection*{La même chose dans les espaces classifiants (page 10)}
+
+L'inclusion $\Gamma \subset G$ donne, puisque $D$ est contractile, une
+application $X = B_{\Gamma} \to B_{G}$, et les inclusions des compacts
+maximaux sont des équivalences d'homotopie $B_{S} \to B_{G}$, $B_{\widetilde{S}}
+\to B_{\widetilde{G}}$. En cohomologie :
+\begin{tikzcd}
+H^{*}(B_{G},\mathbb{Z}) \arrow[r, "\sim"] \arrow[d] \arrow[rd] &
+H^{*}(B_{S},\mathbb{Z}) = \mathbb{Z}[\gamma_{1}] \arrow[d, "\gamma_{1} \mapsto 2c_{1}"] \\
+H^{*}(B_{\Gamma},\mathbb{Z}) = H^{*}(X,\mathbb{Z}) &
+H^{*}(B_{\widetilde{S}},\mathbb{Z}) = \mathbb{Z}[c_{1}] \simeq H^{*}(B_{\widetilde{G}},\mathbb{Z})
+\end{tikzcd}
+où $\gamma_{1}$ est la première classe de Chern du caractère de $S$ sur
+$T_{x}D$ et $c_{1}$ celle de la représentation standard de $\widetilde{S} =
+\mathrm{U}(1)$ ; l'image de $\gamma_{1}$ est $2c_{1}$ parce que $\widetilde{S}
+\to S$ est l'élévation au carré.\footnote{Le diagramme de la page dispose
+$H^{*}(B_{G})$ en haut, $H^{*}(B_{\widetilde{G}})$ et $H^{*}(B_{S})$ en
+dessous, $H^{*}(B_{\widetilde{S}})$ en bas à gauche, et une flèche ondulée de
+$\mathbb{Z}[\gamma_{1}]$ vers $\gamma_{1}^{X}$ ; on l'a redressé en carré, la
+flèche diagonale étant la composée $H^{*}(B_{G}) \to H^{*}(B_{\widetilde{G}})$.
+Le « Car » qui précède $\gamma_{1} = 2c_{1}$ est une lecture incertaine.}
+Notons $\gamma_{1}^{X} \in H^{2}(X,\mathbb{Z}) \simeq \mathbb{Z}$ l'image de
+$\gamma_{1}$. Comme le $G$-fibré principal plat de $X$, réduit à $S$, a pour
+fibré associé $T_{X}$, $\gamma_{1}^{X} = e(T_{X})$.
+
+Le relèvement $\widetilde{\Gamma}$ donne un relèvement $X \to
+B_{\widetilde{G}}$ de $X \to B_{G}$ :
+\begin{tikzcd}
+& B_{\widetilde{G}} \arrow[d] \\
+X = B_{\Gamma} \arrow[r] \arrow[ru, dashed] & B_{G}
+\end{tikzcd}
+et l'image $c_{1}^{X}$ de $c_{1}$ est la classe d'Euler du fibré de rang 2
+qu'il classifie, qui est $\Sigma_{0}$. D'où
+\[
+  \tfrac{1}{2}\gamma_{1}^{X} = c_{1}^{X} = e(\Sigma_{0}) = 1 - g, \qquad
+  \boxed{\gamma_{1}^{X} = 2 - 2g = \chi(X) \neq 0.}
+\]
+\footnote{Les signes dépendent de l'orientation de $X$ et du choix du
+générateur $\gamma_{1}$ ; on les fixe par la structure complexe de $D$,
+pour laquelle $\gamma_{1}^{X}$ est la classe de Chern du fibré tangent
+holomorphe. La page écrit « À calculer $\gamma_{1}^{X}$ ?? », puis, après
+quelques mots illisibles, donne le résultat ; la phrase qui introduit $c_{1}$
+comme « classe de Chern $c_{1}^{\mathbb{R}}$ d'un fibré vectoriel réel
+$\Sigma$ sur $B_{\widetilde{G}}$, de rang 2 » est en partie illisible et en
+partie incertaine.}
+
+\emph{Le contrôle par un revêtement.} Soit $\Gamma' \subset \Gamma$ un
+sous-groupe d'indice fini $d$ --- il en existe, $\Gamma$ étant résiduellement
+fini ---, et $p : X' = B_{\Gamma'} \to X$ le revêtement étale de degré $d$
+correspondant. La classe $\gamma_{1}^{X'}$ est $p^{*}\gamma_{1}^{X}$, et
+$p^{*}$ est la multiplication par $d$ sur $H^{2}(\,\cdot\,,\mathbb{Z}) \simeq
+\mathbb{Z}$ ; d'autre part $\chi(X') = d\,\chi(X)$. Les deux membres de
+$\gamma_{1}^{X} = \chi(X)$ se multiplient donc par $d$ quand on passe à $X'$ :
+la formule est compatible aux revêtements, et, $H^{2}(X,\mathbb{Z})$ étant
+sans torsion, il suffit de l'établir pour un seul revêtement fini de $X$
+pour l'avoir sur $X$.\footnote{La page conclut « on conclut $\gamma_{1}^{X} =
+EP(X)$. OK. » ; les mots qui relient les formules sont en partie devinés par
+la transcription, en particulier « comme $\gamma_{1}^{X'} = EP(X')$ », qui,
+lu littéralement, présupposerait ce qu'on veut établir. On énonce ce que
+l'argument prouve.}
+
+\pagerange{12}{12}
+\subsection*{La classe comme classe d'extension ; le relèvement (page 12)}
+
+\emph{La classe d'extension.} Le revêtement universel $\widehat{G}$ de $G =
+\mathrm{PSL}(2,\mathbb{R})$ est une extension centrale de $G$ par $\pi_{1}(G)
+= \mathbb{Z}$ ; son image réciproque sur $\Gamma$ est une extension centrale
+\[
+  0 \to \mathbb{Z} \to \widehat{\Gamma} \to \Gamma \to 1,
+\]
+dont la classe vit dans $H^{2}(\Gamma,\mathbb{Z}) \simeq H^{2}(X,\mathbb{Z})$ :
+c'est, au signe près, $\gamma_{1}^{X}$. Plus généralement, pour un groupe de
+Lie connexe $G$ de groupe fondamental $H$, la fibration $B_{H} \to
+B_{\widehat{G}} \to B_{G}$ et l'isomorphisme $H^{2}(B_{G}, H) \simeq
+\mathrm{Hom}(\pi_{2}B_{G}, H) = \mathrm{Hom}(H,H)$ définissent une classe
+canonique, image de l'identité, qui classifie le revêtement universel ; pour
+$G = S$ un cercle, $H = \mathbb{Z}$, c'est la classe de Chern $\gamma_{1}$
+de $H^{2}(B_{S},\mathbb{Z})$, et l'image réciproque à $\Gamma$ de la classe
+canonique est la classe de l'extension.
+
+\emph{Le relèvement.} De même le revêtement double $\widetilde{G} =
+\mathrm{SL}(2,\mathbb{R}) \to G$ définit une classe dans $H^{2}(\Gamma,
+\mathbb{Z}/2\mathbb{Z}) = \mathbb{Z}/2\mathbb{Z}$, qui est l'obstruction à
+relever $\Gamma$ dans $\mathrm{SL}(2,\mathbb{R})$, et qui est la réduction
+modulo 2 de $\gamma_{1}^{X}$. Comme $\gamma_{1}^{X} = \chi(X) = 2(1-g)$ est
+pair, l'obstruction est nulle : $\Gamma$ se relève, ce qu'on a utilisé page
+6.\footnote{La page 12 ne se lit presque que par ses formules :
+« Le rev.\ universel de $G$ est de noyau $\mathbb{Z}$ », « extension de
+$\Gamma$ par $\mathbb{Z}$ », $H^{2}(\Gamma,\mathbb{Z}) \simeq
+H^{2}(X,\mathbb{Z})$, « que c'est $\gamma_{1}$ », $H^{2}(B_{G}, H)$,
+$B_{H} \to B_{E} \to B_{G}$, « Chern », $H^{2}(\Gamma,\mathbb{Z}/2\mathbb{Z})
+= \mathbb{Z}/2\mathbb{Z}$, « $\widetilde{G} \to G$ », « Comme $EP(X) =
+2(1-g)$ ». L'articulation qu'on en donne est la nôtre ; elle est conforme à
+ces fragments et elle est juste. La page note $E$ le revêtement universel,
+qu'on note $\widehat{G}$ pour ne pas le confondre avec $\widetilde{G}$, qui
+n'en est qu'un quotient. Le dossier 72, pages 107 à 112, calcule une
+obstruction de même nature, en caractéristique arithmétique : la classe de
+Brauer qui dit si un fibré en droites projectives vient d'un fibré vectoriel
+de rang 2.}
+
+\emph{Remarque (4).} Dans la situation (1) --- $X$ de genre $g \geq 2$, de
+fibré tangent $T_{X}$ ---, le fibré vectoriel réel $T_{X} \oplus 2 \cdot
+\mathbf{1}_{\mathbb{R}}$ sur $X$ est muni d'une connexion intégrable, celle
+de $\Sigma_{0} \otimes \Sigma_{0}$, de groupe d'holonomie l'image de $\Gamma$
+par $\mathrm{SL}(2,\mathbb{R}) \to \mathrm{GL}(V \otimes V)$.\footnote{En tant
+que fibré réel, $T_{X} \oplus 2 \cdot \mathbf{1}_{\mathbb{R}}$ est déjà
+trivial --- une surface orientable se plonge dans $\mathbb{R}^{3}$, d'où
+$T_{X} \oplus \mathbf{1} \simeq \mathbf{3}$ --- et admet donc la connexion
+triviale. Ce que la remarque apporte est une structure plate non triviale,
+venue de la représentation : $\mathrm{Sym}^{2}\Sigma_{0}$, fibré plat de la
+représentation adjointe, est $T_{X} \oplus \mathbf{1}$, alors que $T_{X}$
+lui-même n'est pas plat. La page écrit d'abord « complexe », corrigé en
+« réel » ; la fin de la phrase est illisible.}
+
+\pagerange{7}{13}
+\section*{Tapuscrit : le groupe de Brauer d'une fibration sur une courbe (pages 9, 11, 13, 7)}
+
+Quatre feuillets d'un tapuscrit français, paginés 23, 17, 19 et 20 et rangés
+aux pages 7, 9, 11 et 13 ; on les lit dans l'ordre de leur pagination, qui est
+celui de l'argument. Ils portent des corrections de sa main --- lettres
+grecques, tildes, schémas de Picard ajoutés, insertions interlinéaires, un
+bloc biffé ---, et sont sans rapport avec les classes de Chern : c'est le
+papier sur lequel il a écrit les feuillets 6 à 12.\footnote{La numérotation
+(4.6)--(4.43), l'objet --- le groupe de Brauer d'un schéma régulier fibré en
+courbes sur une courbe, le groupe de Tate--Chafarévitch --- et le style
+indiquent un état dactylographié du § 4 de « Le groupe de Brauer III »
+(publié dans \emph{Dix exposés sur la cohomologie des schémas}, 1968) ;
+l'identification est la nôtre, et le texte n'a pas été comparé à l'imprimé.
+Les définitions de $P$, $\underline{A}$, $\delta$, $\delta'$, $\delta''$,
+$\Delta$, $\mathrm{III}'$ et les conditions (4.13), (4.15), (4.16) sont sur
+des pages du tapuscrit qui ne sont pas dans le dossier ; on ne les devine
+pas. $\mathrm{III}$ est le Ш de Tate--Chafarévitch, tapé comme un III barré.}
+
+\emph{Cadre}, tel qu'il ressort des pages. $f : X \to Y$ est un morphisme
+propre, $X$ régulier, $Y$ une courbe régulière de point générique $\eta$ ;
+$P$ est le faisceau de Picard relatif $R^{1}f_{*}\mathbb{G}_{m}$ (étale) ; un
+tilde désigne la localisation stricte en un point géométrique $\bar{y}$ au
+dessus d'un point fermé $y$, une barre la localisation hensélienne.
+
+\pagerange{9}{9}
+\subsection*{Les faisceaux $\underline{E}$ et $\underline{F}$ (page 9, tapuscrit p.\ 17)}
+
+La page s'ouvre sur la fin d'un corollaire ($H^{3}(Y,\mathbb{G}_{m}) \simeq
+\mathbb{Q}/\mathbb{Z}$). Soit $i : \eta \to Y$ l'inclusion du point
+générique et
+\[
+  \underline{B} = i_{*}i^{*}P, \qquad P \to \underline{B}, \qquad
+  \underline{E} = \mathrm{Ker}(P \to \underline{B}), \quad
+  \underline{F} = \mathrm{Coker}(P \to \underline{B}). \tag{4.8--4.10}
+\]
+Les faisceaux $\underline{E}$ et $\underline{F}$ sont concentrés aux points
+fermés (faisceaux gratte-ciel), et leurs fibres géométriques en $\bar{y}$
+sont le noyau et le conoyau de $\mathrm{Pic}(\widetilde{X}) \to
+\mathrm{Pic}_{\widetilde{X}_{\tilde{\eta}}/\tilde{\eta}}(\tilde{\eta})$. Cette
+flèche se factorise par $\mathrm{Pic}(\widetilde{X}_{\tilde{\eta}})$, et
+$\mathrm{Pic}(\widetilde{X}) \to \mathrm{Pic}(\widetilde{X}_{\tilde{\eta}})$
+est surjectif parce que $\widetilde{X}$ est régulier (tout diviseur de la
+fibre générique s'étend par adhérence). D'où
+\[
+  \underline{F}_{\bar{y}} = \mathrm{Pic}_{\widetilde{X}_{\tilde{\eta}}/\tilde{\eta}}(\tilde{\eta})
+  / \mathrm{Pic}(\widetilde{X}_{\tilde{\eta}}), \qquad
+  \underline{E}_{\bar{y}} = \mathrm{Ker}\bigl(\mathrm{Pic}(\widetilde{X}) \to
+  \mathrm{Pic}(\widetilde{X}_{\tilde{\eta}})\bigr). \tag{4.11--4.12}
+\]
+\footnote{Le tapuscrit écrit $\mathrm{Pic}(\widetilde{X}/\widetilde{Y})$ et
+$\mathrm{Pic}(\widetilde{X}_{\tilde{\eta}}/\tilde{\eta})$ pour les sections
+du faisceau de Picard relatif ; la main a ajouté « $\mathrm{Pic}(\widetilde{X})
+=$ » devant le premier. Dans (4.11) le numérateur est tapé
+$\mathrm{Pic}(\widetilde{X}_{\eta}/\tilde{\eta})$ ; on lit
+$\tilde{\eta}$ partout.} Le quotient $\underline{F}_{\bar{y}}$ s'injecte dans
+$\mathrm{Br}(\tilde{\eta})$, qui est nul si $k(y)$ est parfait (le corps des
+fractions d'un anneau de valuation discrète strictement hensélien à corps
+résiduel parfait est $C_{1}$) et de $p(y)$-torsion en général, $p(y)$ étant
+l'exposant caractéristique de $k(y)$. Donc $\underline{F}_{\bar{y}}$ est de
+$p(y)$-torsion, nul si $k(y)$ est parfait, et nul aussi si $\delta_{y} = 1$,
+par exemple si $\widetilde{X} \to \widetilde{Y}$ a une section.
+
+\pagerange{11}{11}
+\subsection*{Le groupe de Tate--Chafarévitch (page 11, tapuscrit p.\ 19)}
+
+Sous l'hypothèse (4.15), l'image de $H^{1}(Y,P)$ dans
+$H^{1}(Y,\underline{B})$ est le sous-groupe des éléments dont l'image dans
+chacun des $H^{1}(\overline{Y}_{y},\underline{B})$, $\overline{Y}_{y}$ hensélisé
+de $Y$ en $y$, est nulle --- le \emph{groupe de Tate--Chafarévitch}
+$\mathrm{III}(Y,\underline{B})$ : les éléments localement triviaux
+partout. On en tire la suite exacte
+\[
+  \cdots \to \mathrm{Pic}_{X_{\eta}/\eta}(\eta) \to \bigoplus_{y}
+  H^{1}(y,\underline{E}_{y}) \to H^{1}(Y,P) \to
+  \mathrm{III}(Y,\underline{B}) \to 0, \tag{4.17}
+\]
+qui présente $H^{1}(Y,P)$ comme extension de $\mathrm{III}(Y,\underline{B})$
+par un quotient de $\bigoplus_{y} H^{1}(y,\underline{E}_{y}) =
+H^{1}(Y,\underline{E})$.\footnote{Un bloc d'un tiers de page, encadré et
+barré, déduisait (4.15) de conditions (4.16) par un diagramme comparant les
+suites du type (4.5) pour $\bar{f} : \bar{X} \to \bar{Y}$ et pour $f_{y} :
+X_{y} \to y$ ; la main y avait encore corrigé (4.16) en
+$\mathrm{Ker}(H^{3}(y,\mathbb{G}_{m}) \to H^{3}(X_{y},\mathbb{G}_{m}))$.
+Le tapuscrit écrit $\bar{Y}$ pour le hensélisé, sans indice ; il annonce
+« plus bas » la relation avec la définition originelle de Tate et
+Chafarévitch, qui n'est pas dans le dossier. En marge, « (P) ».}
+
+\emph{La structure de $\underline{E}_{y}$.} $\underline{E}_{y}$ est nul si
+la fibre $X_{y}$ est géométriquement intègre ; si $X_{\eta}$ est lisse sur
+$\eta$, le support de $\underline{E}$ est donc contenu dans l'ensemble fini
+des $y$ dont la fibre n'est pas géométriquement intègre (le tapuscrit ajoute
+« en fait, égal à »). On écrit l'égalité de diviseurs sur $X$
+\[
+  X_{y} = \textstyle\sum_{i} a_{y}^{i} C_{y}^{i}, \tag{4.18}
+\]
+les $C_{y}^{i}$ étant les composantes irréductibles de $X_{y}$ et les
+$a_{y}^{i}$ leurs multiplicités.
+
+\pagerange{13}{13}
+\subsection*{L'annulation de $H^{1}(y,\underline{E}_{y})$ (page 13, tapuscrit p.\ 20)}
+
+Soit $\mu_{y}^{i}$ et $\nu_{y}^{i}$ les multiplicités radicielle et séparable
+de $C_{y}^{i}$ sur $k(y)$ ; $\mu_{y}^{i} = 1$ si $k(y)$ est parfait. Soit
+$k(y)^{i}$ la fermeture séparable de $k(y)$ dans le corps des fonctions de
+$C_{y}^{i}$, extension de degré $\nu_{y}^{i}$, et
+\[
+  Z_{y}^{i} = \mathrm{Spec}\,k(y)^{i}, \qquad Z_{y} = \textstyle\coprod_{i}
+  Z_{y}^{i}, \qquad p_{y} : Z_{y} \to y. \tag{4.20}
+\]
+Les composantes géométriques de $C_{y}^{i}$ sont alors indexées, de façon
+compatible à Galois, par les $k(y)$-plongements de $k(y)^{i}$ dans une
+clôture séparable.\footnote{Le tapuscrit corrigé définit $k(y)^{i}$ comme « la
+plus petite extension galoisienne de $k(y)$ telle que les composantes
+irréductibles de $X_{y}^{i} \otimes_{k(y)} k(y)^{i}$ soient géométriquement
+irréductibles », et lui donne le degré $\nu_{y}^{i}$. Les deux exigences ne
+sont compatibles que si la fermeture séparable de $k(y)$ dans
+$k(C_{y}^{i})$ est galoisienne --- ce qui est toujours le cas pour $k(y)$
+fini ; sinon la plus petite extension galoisienne est sa clôture
+galoisienne, de degré plus grand, et (4.21) demande la fermeture séparable
+elle-même. C'est elle que donnait la première rédaction, biffée :
+$Z_{y}^{i} = \mathrm{Spec}(H^{0}(X_{y}^{i},\mathcal{O}))$, au degré
+inséparable près. On la garde. Le renvoi est à EGA IV 4.7 ; les numéros
+(4.19) à (4.24) sont corrigés à la main sur (4.18) à (4.23).} Le faisceau
+$\underline{E}_{y}$ sur $y$ s'insère dans la suite exacte
+\[
+  0 \to \mathbb{Z}_{y} \to p_{y*}\mathbb{Z}_{Z_{y}} \to \underline{E}_{y}
+  \to 0, \tag{4.21}
+\]
+où la première flèche est l'adjointe de $p_{y}^{*}\mathbb{Z}_{y} =
+\mathbb{Z}_{Z_{y}} \to \mathbb{Z}_{Z_{y}}$, multiplication par $a_{y}^{i}$
+sur $Z_{y}^{i}$ : géométriquement, $\underline{E}_{\bar{y}}$ est le groupe
+libre sur les composantes de la fibre modulo la fibre elle-même. Comme
+$H^{1}$ d'un corps à coefficients dans $\mathbb{Z}$ est nul, la suite
+de cohomologie donne
+\[
+  H^{1}(y,\underline{E}_{y}) = \mathrm{Ker}\Bigl(H^{2}(y,\mathbb{Z}) \to
+  \textstyle\prod_{i} H^{2}(Z_{y}^{i},\mathbb{Z})\Bigr)
+  = \mathrm{Ker}\Bigl(H^{1}(y,\mathbb{Q}/\mathbb{Z}) \to
+  \textstyle\prod_{i} H^{1}(Z_{y}^{i},\mathbb{Q}/\mathbb{Z})\Bigr), \tag{4.23}
+\]
+la flèche d'indice $i$ étant la restriction multipliée par $a_{y}^{i}$. La
+corestriction composée avec la restriction étant la multiplication par
+$\nu_{y}^{i}$, chacun de ces noyaux est annulé par $a_{y}^{i}\nu_{y}^{i}$, et
+$H^{1}(y,\underline{E}_{y})$ est annulé par
+\[
+  d_{y} = \mathrm{pgcd}_{i}\,(a_{y}^{i}\nu_{y}^{i}). \tag{4.24}
+\]
+Le feuillet s'arrête sur le cas où $k(y)$ est fini, ou plus généralement de
+groupe de Galois absolu $\widehat{\mathbb{Z}}$ : « alors on trouve
+\ldots ».\footnote{Le tapuscrit dit « pseudo-fini au sens de Serre » ; le
+terme de Serre (\emph{Corps locaux}, 1962) est « quasi-fini », et
+« pseudo-fini » désigne aujourd'hui la notion d'Ax (1968), plus forte. La
+suite n'est pas dans le dossier. Le calcul se termine sans peine, et c'est
+nous qui l'ajoutons : $H^{1}(y,\mathbb{Q}/\mathbb{Z}) = \mathbb{Q}/\mathbb{Z}$,
+la restriction à une extension de degré $\nu$ est la multiplication par
+$\nu$, donc $H^{1}(y,\underline{E}_{y}) \simeq \mathbb{Z}/d_{y}\mathbb{Z}$.}
+
+\pagerange{7}{7}
+\subsection*{Deux cas particuliers (page 7, tapuscrit p.\ 23)}
+
+La page s'ouvre sur la fin d'une suite exacte
+\[
+  0 \to \mathbb{Z}/\delta''\mathbb{Z} \to \mathrm{III}'(Y,\underline{A}) \to
+  \mathrm{III}'(Y,\underline{B}) \to 0 . \tag{4.38}
+\]
+
+\emph{(4.6) : $Y$ est une courbe algébrique sur un corps algébriquement
+clos.} La condition (4.13) est automatique et l'on a
+\[
+  \mathrm{Br}(X) \xrightarrow{\ \sim\ } H^{1}(Y,\underline{B}) ; \tag{4.39}
+\]
+si de plus $X$ n'a pas de fibre multiple ($\delta_{y} = 1$ pour tout $y$),
+on a $\delta = \delta' = \delta''$ et
+\[
+  0 \to \mathbb{Z}/\delta\mathbb{Z} \to H^{1}(Y,\underline{A}) \to
+  H^{1}(Y,\underline{B}) \to 0 . \tag{4.40}
+\]
+
+\emph{(4.7) : $Y$ est une courbe propre sur un corps fini $k$.} Les conditions
+(4.13) et (4.16) sont automatiques, la première parce que $k$ est parfait,
+la seconde parce que $k(y)$, fini, est de dimension cohomologique $\leq 1$,
+d'où $H^{3}(k(y),\mathbb{G}_{m}) = 0$ ; on a $\delta = \delta'$, et de même
+pour les invariants hensélisés et strictement hensélisés. Comme
+$\mathrm{Br}(Y) = 0$ (théorie du corps de classes),
+\[
+  0 \to \mathrm{Br}(X) \to \mathrm{III}(Y,\underline{B}) \to
+  \mathbb{Z}/\Delta\mathbb{Z} \to 0, \qquad \Delta \mid \delta . \tag{4.41}
+\]
+Si le morphisme déduit de $f$ par extension à la clôture algébrique de $k$
+n'a pas de fibre multiple, on a
+\[
+  0 \to \mathbb{Z}/\delta''\mathbb{Z} \to \mathrm{III}(Y,\underline{A}) \to
+  \mathrm{III}(Y,\underline{B}) \to 0, \tag{4.42}
+\]
+cas particulier de (4.37), compte tenu de l'égalité $\bar{\delta}_{y} =
+\delta_{y}$ (4.43) pour tout point fermé $y$, qui donne ici
+$\bar{\delta}_{y} = 1$, donc $\mathrm{III}' = \mathrm{III}$. L'égalité (4.43)
+est une conséquence du théorème de Lang, $H^{1}(k(y), G) = 0$ pour un groupe
+algébrique connexe $G$ sur un corps fini, appliqué à $G =
+\underline{\mathrm{Pic}}^{0}_{X_{y}/y}$ ; le tapuscrit la laisse « au lecteur
+comme un exercice plaisant et délectable ».\footnote{La référence « [24]
+$H^{1}(k,G) = 0$ » et « ainsi que (4.16), puisque $k(y)$ est de dimension
+$\leq 1$ \ldots » sont des insertions de sa main. Les deux cas particuliers
+étaient d'abord numérotés « 1 », etc. (4.41) est la forme que prend, pour
+une surface fibrée sur une courbe sur un corps fini, la comparaison du groupe
+de Brauer de la surface et du groupe de Tate--Chafarévitch de la jacobienne de
+la fibre générique, qui est au cœur de la conjecture d'Artin--Tate ; le nom
+n'est pas sur ces feuillets.}
+
+\pagerange{15}{15}
+\section*{La cohomologie réelle de $B_{G}$ (page 15)}
+
+Soit $G$ un groupe de Lie compact connexe. L'espace classifiant est la
+réalisation de la variété simpliciale $[p] \mapsto G^{p+1}/G$ (quotient par
+l'action diagonale, $G^{p+1}/G \simeq G^{p}$), et sa cohomologie réelle est
+celle du bicomplexe des formes différentielles
+\[
+  C_{(0)}^{p,q} = \Omega^{q}(G^{p+1}/G),
+\]
+de différentielles la différentielle de de Rham (en $q$) et la somme alternée
+des faces (en $p$). On le remplace successivement par deux sous-bicomplexes de
+formes invariantes, $C_{(1)} \subset C_{(0)}$ puis $C_{(2)}$, chacun ayant, à
+$p$ fixé, la même cohomologie que le précédent --- c'est le terme $E_{1}$ de
+la suite spectrale de la filtration par $p$, calculé par moyenne sur le groupe
+compact. Dans le dernier, $C_{(2)}^{p,q} = \omega_{\mathrm{inv}}^{q}
+(G^{p+1}/G)$, les formes sont fermées : la différentielle de de Rham y est
+\emph{nulle}. D'où des isomorphismes canoniques
+\[
+  H^{*}(B_{G},\mathbb{R}) \simeq H^{*}(C_{(1)}) \simeq
+  \bigoplus_{p+q = *} H^{p}\bigl(\nu \mapsto \omega_{\mathrm{inv}}^{q}(G^{\nu+1}/G)\bigr)
+  = \bigoplus_{p+q = *} E_{2}^{p,q},
+\]
+et la suite spectrale dégénère : $d_{r} = 0$ pour $r \geq 2$.\footnote{La page
+distingue $\Omega$, $\omega$ et $\omega_{\mathrm{inv}}$ sans les définir, et
+dessine une inclusion de $C_{(1)}$ dans $C_{(0)}$ et une flèche de $C_{(1)}$
+vers $C_{(2)}$ ; une note marginale, en partie illisible, parle de
+« cohomologie pour $\nu$ fixe » et de $E_{1}$. Lire $\omega_{\mathrm{inv}}$
+comme les formes bi-invariantes sur $G^{\nu} \simeq G^{\nu+1}/G$, qui sont
+fermées et représentent la cohomologie de de Rham (Cartan, Chevalley--Eilenberg),
+est notre interprétation ; c'est elle qui rend juste l'affirmation que la
+différentielle en $q$ est nulle. Le complexe en $\nu$ est alors la
+construction cobar de l'algèbre de Hopf $H^{*}(G,\mathbb{R})$. La page
+affirme la dégénérescence sans la démontrer. Le bicomplexe des formes sur la
+variété simpliciale $G^{\bullet+1}/G$ est aujourd'hui associé aux noms de
+Bott, Shulman et Stasheff (1973) et de Dupont (1976), bien postérieurs à la
+date que l'inventaire donne au dossier.}
+
+Soit $T \subset \omega_{\mathrm{inv}}^{*}(G)$ l'espace des éléments
+transgressifs --- de degrés impairs, ce sont les éléments primitifs de
+l'algèbre de Hopf $H^{*}(G,\mathbb{R}) = \Lambda^{*}(T)$ --- et
+\[
+  \varphi : T \to E_{2}^{1,*} = \omega_{\mathrm{inv}}^{*}(G \times G/G)
+  \subset \omega_{\mathrm{inv}}^{*}(G \times G) = \omega_{\mathrm{inv}}^{*}(G)
+  \otimes \omega_{\mathrm{inv}}^{*}(G), \qquad
+  \varphi(t) = t \otimes 1 - 1 \otimes t ,
+\]
+qui place un élément de degré $2k - 1$ en degré total $2k$.
+
+\textbf{Théorème.} \emph{L'homomorphisme $\mathrm{Sym}^{*}(T) \to
+H^{*}(B_{G},\mathbb{R})$ déduit de $\varphi$ est un isomorphisme.}
+
+C'est le théorème de Borel--Cartan : $H^{*}(B_{G},\mathbb{R})$ est une algèbre
+de polynômes, sur des générateurs de degrés $2k_{j}$ si $H^{*}(G,\mathbb{R})$
+est extérieure sur des générateurs de degrés $2k_{j} - 1$. Le calcul de la
+page en donne une démonstration par la dualité de Koszul : la cohomologie
+de la construction cobar d'une algèbre extérieure $\Lambda(T)$ est l'algèbre
+symétrique sur $T$ décalé d'un cran.\footnote{Le signe de $\varphi$ dépend de
+l'identification de $G \times G/G$ à $G$ ($(a,b) \mapsto ab^{-1}$ donne celui
+de la page). Les noms --- Borel, Cartan, Koszul --- ne sont pas sur la page,
+qui écrit seulement « Th. » ; une parenthèse incertaine, « OK \ldots{} des
+degrés impairs », suit la définition de $T$.}
+
+\pagerange{16}{16}
+\section*{Une lettre dactylographiée : les catégories $C(X,A)$ (page 16)}
+
+Un feuillet de lettre dactylographiée, sans en-tête ni signature, barré de
+trois traits obliques ; le destinataire est tutoyé, une lettre antérieure « du
+26.3 », que le destinataire vient de renvoyer en photocopie, est citée, et une
+insertion est de la main de Grothendieck.\footnote{Ni l'auteur, ni le
+destinataire, ni la date ne sont sur ce feuillet ; on n'en propose pas. La
+lettre parle à la première personne de « ma lettre du 26.3 » et des
+« hypothèses de finitude que j'ai dites ».}
+
+À un espace $X$ et un anneau $A$ est associée une catégorie triangulée
+$C(X,A)$ --- vraisemblablement une catégorie dérivée de faisceaux localement
+constants de $A$-modules, sous des conditions de finitude posées plus haut
+dans la lettre.\footnote{La définition précède ce feuillet. L'interprétation
+par les systèmes locaux est la nôtre ; c'est elle que suggère la mention des
+« $A$-modules tordus de type fini ».} Elle détermine l'ensemble des
+composantes connexes de $X$, le groupe fondamental de chacune et leur
+cohomologie à coefficients dans les $A$-modules tordus de type fini. Pour $A =
+\mathbb{Z}$, un morphisme $f : X \to Y$ est une équivalence d'homotopie si et
+seulement si $f^{*} : C(Y,\mathbb{Z}) \to C(X,\mathbb{Z})$ est une
+équivalence.\footnote{La lettre attribue ce critère, prudemment (« il semble
+bien »), à Hurewicz « ou une variante mise au point par Artin--Mazur ». Pour
+des CW-complexes, c'est le théorème de Whitehead à coefficients locaux : une
+application qui induit des bijections sur les $\pi_{0}$ et les $\pi_{1}$ et des
+isomorphismes en homologie à coefficients dans tous les systèmes locaux est
+une équivalence d'homotopie. Que $f^{*}$ soit une équivalence force ces
+conditions (la restriction le long de $\mathbb{Z}[\pi_{1}X] \to
+\mathbb{Z}[\pi_{1}Y]$ n'est une équivalence que si cet homomorphisme est un
+isomorphisme).}
+
+La lettre demande alors si l'on peut reconstituer $X$ à partir de
+$C(X,\mathbb{Z})$, du moins pour des $X$ de type fini en chaque dimension, et
+si tout foncteur exact $C(Y,\mathbb{Z}) \to C(X,\mathbb{Z})$ provient, à
+isomorphisme près, d'un unique morphisme $X \to Y$.\footnote{Telle qu'elle est
+posée, la seconde question a une réponse négative : le foncteur nul et le
+décalage $[1]$ sont exacts et ne proviennent d'aucun morphisme. Il faut au
+moins demander que le foncteur respecte le produit tensoriel et l'objet
+unité. Sous de telles formes, la question de reconstituer un type d'homotopie
+à partir de ses coefficients a été reprise bien plus tard, par lui (\emph{À la
+poursuite des champs}, 1983) et par d'autres (types d'homotopie
+schématiques de Toën, théorème de Mandell sur les cochaînes entières) ; ces
+rapprochements sont les nôtres.} Même si c'est trop optimiste, ces catégories
+lui paraissent des invariants « rupinants », très bonnes approximations du
+type d'homotopie de $X$, et il faudrait traduire en leurs termes les
+constructions familières aux homotopistes : groupes d'homotopie supérieurs,
+espaces de lacets, et en sens inverse espaces classifiants, suspensions,
+produits, squelettes, images des groupes d'homotopie supérieurs. La question,
+écrit-il, est « manifestement très liée » à celle de la lettre du 26.3, et
+« quelqu'un devrait bien un jour regarder ces choses systématiquement ».
+
+\pagerange{17}{17}
+\section*{Groupes de Lie sans $p$-torsion (page 17)}
+
+Soit $G$ un groupe de Lie complexe réductif connexe --- ou, ce qui revient au
+même pour la cohomologie, son sous-groupe compact maximal ---, $B$ un
+sous-groupe de Borel, $\hat{B}$ son groupe des caractères, de rang $r$, et
+$p$ un nombre premier.\footnote{« compact » est biffé et remplacé par une
+insertion lue « complexe réductif », lecture incertaine. $G/B$ est la variété
+des drapeaux, difféomorphe à $K/T$ pour $K$ compact maximal et $T$ tore
+maximal ; $B_{B} \simeq B_{T}$. La page écrit $\mathbb{B}_{B}$,
+$\mathbb{B}_{G}$ pour les espaces classifiants dans la ligne sur Leray.}
+Considérons les conditions :
+
+\begin{itemize}
+\item[(i)] $H^{*}(G,\mathbb{Z})$ est sans $p$-torsion ;
+\item[(ii)] $H^{*}(B_{G},\mathbb{Z})$ est sans $p$-torsion ;
+\item[(iii)] l'image de $\mathrm{Sym}_{\mathbb{Z}}^{*}(\hat{B}) \to
+H^{*}(G/B,\mathbb{Z})$ est d'indice premier à $p$ ; de façon équivalente,
+$\mathrm{Sym}_{\mathbb{F}_{p}}(\hat{B} \otimes \mathbb{F}_{p}) \to
+H^{*}(G/B,\mathbb{F}_{p})$ est surjectif ;
+\item[(i bis)] $H^{*}(G,\mathbb{F}_{p}) \simeq \Lambda^{*}V$, où $V$ est un
+$\mathbb{F}_{p}$-espace de dimension $r$ formé d'éléments primitifs ;
+\item[(ii bis)] $H^{*}(B_{G},\mathbb{F}_{p})$ est une algèbre de polynômes
+sur $\mathbb{F}_{p}$ à $r$ générateurs.
+\end{itemize}
+
+Les implications notées :
+\begin{itemize}
+\item[--] (i) $\Rightarrow$ (i bis), par le théorème de Hopf (sous sa forme
+modulo $p$, due à Borel) ;
+\item[--] (i bis) $\Rightarrow$ (ii bis), par la suite spectrale de la
+fibration universelle, ou le théorème de transgression de Borel ;
+\item[--] (ii bis) $\Leftrightarrow$ (iii) : la suite spectrale de Leray de
+la fibration $G/B \to B_{B} \to B_{G}$ est triviale ;
+\item[--] (ii bis) $\Rightarrow$ (ii), par égalité des nombres de Betti à
+coefficients dans $\mathbb{Q}$ et dans $\mathbb{F}_{p}$.
+\end{itemize}
+
+\begin{tikzcd}
+(\mathrm{i}) \arrow[r, Rightarrow] \arrow[d, Rightarrow] &
+(\mathrm{i\ bis}) \arrow[dl, Rightarrow] \\
+(\mathrm{ii\ bis}) \arrow[r, leftrightarrow] \arrow[d, Rightarrow] &
+(\mathrm{iii}) \\
+(\mathrm{ii}) &
+\end{tikzcd}
+\footnote{La page renvoie à des « notes de Borel ». La dernière implication
+demande que les générateurs de $H^{*}(B_{G},\mathbb{F}_{p})$ aient les degrés
+des générateurs rationnels --- ce que donne la transgression, ou la
+comparaison avec $B_{T}$ ; sous cette précision, les séries de Poincaré mod
+$p$ et rationnelle coïncident, ce qui exclut la $p$-torsion par le théorème
+des coefficients universels. Les cinq conditions sont en fait équivalentes
+(Borel) ; la page n'écrit que les implications du diagramme. La flèche
+horizontale du bas est dessinée à deux pointes.}
+
+\pagerange{18}{18}
+\section*{EGA IV, feuillet IV-1102 annoté (page 18)}
+
+Un feuillet du tapuscrit d'EGA IV, numéroté IV-1102, portant des corrections
+de sa main ; le passage est celui du cycle associé à un diviseur positif,
+(21.6.5)--(21.6.6).\footnote{La numérotation est celle du § 21.6 d'EGA IV,
+quatrième partie (1967) ; on n'a pas comparé le feuillet au texte imprimé.}
+Les corrections déplacent l'hypothèse noethérienne en tête de l'alinéa
+(« $X$ étant supposé noethérien », ajouté ; « Si $X$ est noethérien », biffé
+dans l'énoncé de la proposition) et ajoutent les renvois.
+
+Soit $D$ un diviseur \emph{positif} sur $X$ : l'Idéal $I_{X}(D)$ est un
+Idéal inversible de $\mathcal{O}_{X}$, et définit un sous-schéma fermé
+$Y(D)$. Localement $I_{X}(D) = \mathcal{O}_{U}\,t$ avec $t$ régulier
+(21.2.7) : l'immersion $Y(D) \to X$ est régulière (19.1.4) de codimension 1
+en tout point. Inversement, un sous-schéma fermé régulièrement immergé de
+codimension 1 en tout point est $Y(D)$ pour un unique diviseur positif $D$.
+\footnote{En marge de cette réciproque : « devrait figurer dans 21.2.
+\ldots{} (sans noeth.) », la dernière lecture incertaine ; elle ne demande en
+effet pas d'hypothèse noethérienne.}
+Pour $X$ noethérien, $Y(D)$ n'a qu'un nombre fini de points maximaux, qui
+sont de codimension 1 dans $X$ (théorème de l'idéal principal) et où
+$\mathcal{O}_{Y(D),x}$ est artinien ; en tout autre point $x \in X^{(1)}$,
+$\mathcal{O}_{Y(D),x} = 0$. On pose
+\[
+  \mathrm{cyc}(D) = \sum_{x \in X^{(1)}} \mathrm{long}(\mathcal{O}_{Y(D),x})
+  \cdot \overline{\{x\}} \in Z^{1}(X). \tag{21.6.5.1}
+\]
+
+\textbf{Proposition (21.6.6).} \emph{$D \mapsto \mathrm{cyc}(D)$ est un
+homomorphisme du monoïde $\mathrm{Div}^{+}(X)$ dans $Z^{1}(X)$.}
+
+Comme $I_{X}(D + D') = I_{X}(D)I_{X}(D')$ (21.2.5), il suffit de voir que,
+pour $A = \mathcal{O}_{X,x}$, $x \in X^{(1)}$, et $t$, $t'$ réguliers dans $A$,
+$\mathrm{long}(A/tt'A) = \mathrm{long}(A/tA) + \mathrm{long}(A/t'A)$ ; or
+$tA/tt'A \simeq A/t'A$ puisque $t$ est régulier, et la suite $0 \to tA/tt'A
+\to A/tt'A \to A/tA \to 0$ conclut. Le feuillet s'arrête sur la phrase
+suivante (« pour tout ouvert $U \subset X$, on \ldots »).\footnote{Une
+seconde note marginale, « réf ! », est placée à hauteur de la définition de
+$\mathrm{cyc}(D)$.}
+
+\end{document}
