@@ -3544,4 +3544,333 @@ export const FINDINGS: Finding[] = [
     settle:
       'Decide whether either notion, or the equivalence, is in print: Roby, « Lois polynomes et lois formelles » (Ann. ENS 80, 1963) and « Lois polynômes multiplicatives » (1980); Friedlander–Suslin (Invent. Math. 127, 1997) § 2; Bousfield, « Operations on derived functors of non-additive functors » (1967); Joyal’s analytic functors and the theory of Γ-rings / Tambara functors for exponential structures; and the literature on categories with polynomial (non-additive) hom-structures, such as Blute–Cockett–Seely differential categories and Ehrhard’s models of differential linear logic, where Hom(!X, Y) plays the role of Hom(Γ X, Y). A match would most likely be a « !-coalgebra / Seely category » formulation; check that its morphisms and composition coincide with 𝐏_p(X, Y) = Hom(Γ^p X, Y) and g ∘ Γ^q(f) ∘ α_{q,p} before marking matched.',
   },
+  // Folder 9 — find-novelty pass, Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5.5 (pass header 2026-10-03).
+  {
+    id: '9-det-etale-tate-iso',
+    cote: '9',
+    pages: '22–28',
+    kind: 'mathematical',
+    claim:
+      'For an ordinary, locally polarisable abelian scheme A over a connected base of characteristic p, α_A = det T_p(φ̃)_ét / √deg φ̃ is independent of the polarisation φ and is an isomorphism of lattices det T_p(A)_ét ≃ det T_p(A*)_ét, compatible with base change; for an isogeny it satisfies only det T_p(u)_ét · det T_p(u*)_ét = deg u, not naturality.',
+    basis:
+      'Pages 23–24 define β_p(φ) and α_p(φ) on the ℓ-adic model α_ℓ = β_ℓ(φ)/deg φ̃; pages 24 and 26 prove independence by reducing to Δ(u) = δ(u) for symmetric positive u (next entry); pages 26–27 prove the lattice statement from the self-duality of Ker φ̃ and the absence of a local-local part, and box the resulting isomorphism. Pages 27–28 box the automorphism and endomorphism identities. The step Δ(u)Δ(u*) = deg u on page 24 is introduced by « Or par \\ill{} on a »: its justification is illegible, and page 25, which attributed it to a « théorème p-adique ou th. caractéristique de Weil », is cancelled. Pages 27–28 carry several \\ill{} and an \\uncertain{identifiant} in the automorphism paragraph, and the margin extending the boxed identity to isogenies of equal dimension is very uncertain. Points c) (α_{A*} = α_A⁻¹, « signe (?) ») and d) (agreement mod p with the de Rham isomorphism ω_A ≃ ω_{A*} of page 21) are left « à vérifier ».',
+    ours:
+      'The edition supplies: the hypotheses of local polarisability and a connected base; the proof of Δ(u)Δ(u*) = deg u (étale and multiplicative parts of the Dieudonné module of an ordinary A, determinant of u on the whole being deg u) — the page uses the identity without a legible justification; the restriction of the rationality argument of page 26 to symmetric elements, without which it fails; the reading of ⊗Q_ℓ as ⊗Q_p and of the target of page 23 as det T_p(A*)_ét; the general isogeny form det T_p(f*)_ét ∘ α_B ∘ det T_p(f)_ét = (deg f) α_A and the computation of c) up to sign. The definitions, the statements a) and b), and the arguments for them are the page’s.',
+    literature: [
+      'Web search, 2026-10-10 (two queries on a canonical isomorphism between determinants of the étale parts of T_p(A) and T_p(A^t) for ordinary abelian schemes): no statement of it surfaced. This is not a reading of any source.',
+      'Chai, « Families of ordinary abelian varieties: canonical coordinates, p-adic monodromy, Tate-linear subvarieties and Hecke orbits » — located as the most likely place, not read (download refused, HTTP 403).',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read Chai’s « Families of ordinary abelian varieties » (Serre–Tate coordinates and p-adic monodromy sections), Katz « Serre–Tate local moduli » (LNM 868, 1981) and Faltings–Chai, Degeneration of Abelian Varieties, V.1–V.3 (ordinary locus, Igusa tower, det of the étale quotient vs. ω^{p−1}) for an isomorphism det T_p(A)_ét ≃ det T_p(A^t)_ét, or equivalently a trivialisation of det T_p(A)_ét ⊗ det T_p(A^t)_ét^∨ over the ordinary locus. If it is there, or follows in a line from the Weil pairing plus the standard description of the unit-root crystal, mark matched.',
+  },
+  {
+    id: '9-symmetric-positive-det-sqrt-degree',
+    cote: '9',
+    pages: '24, 26',
+    kind: 'mathematical',
+    claim:
+      'For an ordinary polarised abelian variety A and u ∈ End(A) ⊗ Q symmetric and positive for the Rosati involution, the determinant of u on the étale part of the p-adic Tate module equals +√deg u, the positive root — while for a general endomorphism (e.g. Frobenius over F_q) it does not.',
+    basis:
+      'Page 24 reduces to Δ(u)² = δ(u)² from Δ(u)Δ(u*) = deg u and u* = φ̃uφ̃⁻¹, and states the sign as the remaining point (« exorciser le signe », \\uncertain{} on that word only); page 26 removes the sign by a positivity argument: Δ is a polynomial with Q-coefficients on the symmetric part, extends to End(A) ⊗ R, and on the positive cone every element is a square v², so Δ(u) = Δ(v)² ≥ 0. The general lemma det T_p(u)_ét = √deg u for every endomorphism, on page 23, is struck through and marked « faux » in the margin.',
+    ours:
+      'As in 9-det-etale-tate-iso: the input identity Δ(u)Δ(u*) = deg u rests on an illegible citation and its proof is the edition’s; the page asserts rationality of Δ on all of End(A) and the edition restricts it to symmetric elements, where it holds; the Frobenius counterexample to the struck lemma is the edition’s. The positivity step v² ↦ Δ(v)² ≥ 0 is the page’s.',
+    literature: [
+      'Web search, 2026-10-10 (one query on det of an endomorphism on the étale part of the p-divisible group of an ordinary abelian variety and √deg for Rosati-symmetric positive elements): no statement of it surfaced. This is not a reading of any source.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Check Mumford, Abelian Varieties §21 (Rosati involution, positivity, deg u as a norm) together with the unit-root factorisation of the characteristic polynomial for ordinary A (Deligne, « Variétés abéliennes ordinaires sur un corps fini », Invent. Math. 8, 1969; Serre–Tate canonical lift): if the identity follows there from the norm form of the totally real symmetric subalgebra in a line, mark matched; otherwise it is a candidate.',
+  },
+// Folder 40 — find-novelty pass, Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading, 2026-10-10.
+// Pool from 40.modern.tex: Hopf-algebra dictionary (pp. 1-4), pseudo-torsor criteria (pp. 9-15),
+// alpha_p actions as p-nilpotent derivations (pp. 16-18), H^1(A, alpha_p) = A/A^p (pp. 19-23),
+// Frobenius sequence (pp. 24-26) — all textbook matches (SGA 3, Demazure–Gabriel, Milne III.4), dropped.
+// The k[[X]] list with n <= p-1 (p. 26) is a statement the reading had to repair; dropped.
+  {
+    id: '40-operator-criterion',
+    cote: '40',
+    pages: '9, 12–15',
+    kind: 'mathematical',
+    claim:
+      'For B and C free of finite type, Spec C is formally principal homogeneous under Spec B exactly when the map C ⊗ 𝒰 → End_A(C), x ⊗ u ↦ (y ↦ x·(u·y)), with 𝒰 = Hom_A(B, A), is bijective — the operators of the dual Hopf algebra, with coefficients in C, give all A-linear endomorphisms of C.',
+    basis:
+      'Page 9 announces the equivalence (with a marginal « ? »); pages 12–13 prove the direction φ iso ⇒ ψ iso by two columns of diagrams with an explicit inverse ψ′; pages 14–15 attempt the converse through a map ρ and stop at « Pour ceci, ---- » with « ??? ».',
+    ours:
+      'The converse (ψ iso ⇒ φ iso) is not on the page: the reading proves it by observing that ψ is the C-transpose of φ, which needs C finite projective. The transposition argument, and the remark that C ≠ 0 is needed for the invariants condition, are the edition’s.',
+    literature: [
+      'S. Montgomery, Hopf Algebras and Their Actions on Rings (CBMS 82, 1993), §8.3 — located only through the secondary sources below, not read directly',
+      'H. F. Kreimer and M. Takeuchi, « Hopf algebras and Galois extensions of an algebra », Indiana Univ. Math. J. 30 (1981) — cited for finite projectivity of H-Galois extensions in arXiv:1903.06358 (survey on subrings of invariants of finite-dimensional Hopf actions); not read directly',
+      'arXiv:math/0207187 (Hopf Galois extensions, triangular structures and Frobenius Lie algebras in prime characteristic), which uses A # H ≅ End A for an H-Galois extension',
+      'arXiv:0912.0291 (Galois theory of Hopf Galois extensions), definition via the canonical map A ⊗_B A → Hom(H, A), attributed to Kreimer–Takeuchi extending Chase–Sweedler (LNM 97, 1969)',
+    ],
+    status: 'matched',
+    settle:
+      'Open Montgomery §8.3 (the theorem characterising H-Galois extensions by A # H* ≅ End(A_{A^coH}) plus finite projectivity) and Chase–Sweedler LNM 97 §9, and record the exact theorem numbers; the match is to that equivalence with A^coH = A, which the page’s setting supplies once C is free and non-zero. If the hypotheses differ in a way that matters, reopen.',
+  },
+  {
+    id: '40-alpha-p-regular-sum',
+    cote: '40',
+    pages: '26–27',
+    kind: 'mathematical',
+    claim:
+      'Over A = k[[X]], k algebraically closed of characteristic p, the α_p-torsors whose rings are regular are not closed under the group law of H¹(A, α_p) = A/A^p: the torsors of p-th roots of X and of −X + X² are regular, their sum (p-th root of X²) is not, and already their fibre product over A is non-reduced.',
+    basis:
+      'Page 26 states regularity of A[T]/(T^p − X^n) iff n = 1 and gives the cusp for p = 3, n = 2; page 27 writes that this covering is the sum of the two regular ones and that their fibre product is ≅ C₁[T]/(T^p), which has nilpotents. Page 26’s lead-in to the sum rests on uncertain and illegible words (« \\ill{} point \\ill{} vue des 𝓑-revêtements »); the statement itself on page 27 is clearly read.',
+    ours:
+      'The page asserts C₁ ⊗_A C₂ ≅ C₁[T]/(T^p) without proof; the computation (−X + X² = (−s + s²)^p in C₁) is the reading’s. That the sum in H¹ is the sum in A/A^p — which page 22 says is not proved — is supplied by the reading through the Frobenius coboundary.',
+    literature: [
+      'arXiv:1911.02267 (Maximal models of torsors over a local field) — gives, as seen in a search summary only, regularity of R[X]/(X^p − uπ^i) exactly for i = 1; nothing found there about sums',
+      'Two web searches (2026-10-10) for regularity of sums of α_p-torsors over k[[x]]: nothing found; no paper read in full',
+    ],
+    status: 'candidate',
+    settle:
+      'The single-torsor criterion is in the literature; the question is only whether the failure of regularity under the group law is recorded — look in work on models of α_p-torsors over DVRs (arXiv:1911.02267 §7, and the literature on inseparable covers of surfaces) and in Milne, Étale Cohomology III.4. Given how elementary it is, expect a match or an exercise; if found, mark matched.',
+  },
+  {
+    id: '64-legendre-pinning-moduli',
+    cote: '64',
+    pages: '74–79, 84–91',
+    kind: 'mathematical',
+    claim:
+      'Over Z[1/2], elliptic curves with an ordered 2-torsion (a Jacobi pinning of level 2) and a « Legendre pinning » — a tangent vector at the origin, twisted by a fixed μ₄-torsor, whose square matches the tangent space of E/±1 at the image of the origin through an identification of μ₄* with the two cyclic orders of the 2-torsion — form a rigid groupoid represented by U_{0,3} × μ₄*, and μ₄ × 𝔖₃ acts on that scheme, 𝔖₃ tautologically on U_{0,3} and through the sign on μ₄*.',
+    basis:
+      'Pages 74–79 define the Legendre pinning over a field and state the groupoid equivalence with triples (J, t, α); page 84 adds the level-2 Jacobi pinning and says the fibred category becomes rigid, equivalent to pairs (t, α) with t a section of U_{0,3} and α a section of μ₄*; page 85 says it is « représentable par le schéma U₀₃ × μ₄* » and identifies the tangent bundle along the zero section with 𝒪_{U_{0,3}}(1); pages 86–91 give the μ₄ × 𝔖₃ action and the subgroup 𝔖₃ ×_{μ₂} μ₄ acting trivially on μ₄*. No proof of representability is written. The words carrying the statement are read; the uncertain « hexagonale » (p. 84) and the half-read parenthesis « (par Legendre–[ill.]) » (p. 85) do not carry it.',
+    ours:
+      'The reading supplies an explicit μ₄-torsor Q₀ over Z[1/2] (the roots of x⁴ = −4) for the square the page fixes « une fois pour toutes » without constructing it, and names the order-12 subgroup as the dicyclic group. The comparison with Antieau–Meier below is this pass’s. Written on Opus 5.5 against a reading made on Opus 5.5.',
+    literature: [
+      'B. Antieau and L. Meier, The Brauer group of the moduli stack of elliptic curves (arXiv 1608.00851), §4: Definition 4.4, Proposition 4.5 and Lemma 4.7, read 2026-10-10. Over Z[1/2] the Legendre parameter space X = A¹ − {0, 1} gives M(2) ≃ B C₂,X; X → M(2) is the C₂-torsor of square roots of p·ω^{⊗2}, p = e₂ − e₁; and the 𝔖₃-action does not lift strictly to X, so it is described by twisting with torsors T_{f,g}. Neither the μ₄*-twisted pinning nor a scheme with a strict μ₄ × 𝔖₃ action appears there.',
+      'Web search, 10 October 2026: « Legendre family fine moduli space level 2 structure differential Katz Mazur rigidification sqrt(-1) Z[1/2] » and « Legendre elliptic curve moduli level 2 stack Bμ₂ gerbe lambda line rigidification tangent vector ». These turned up Antieau–Meier and papers on the μ₂-gerbe over the level-2 or j-line, not the pinning.',
+    ],
+    status: 'candidate',
+    settle:
+      'Read Katz–Mazur, Arithmetic Moduli of Elliptic Curves (1985), on the Legendre family and level-2 structures, and Deligne–Rapoport (LNM 349) on Γ(2). Look for a rigidification of M(2) over Z[1/2] by a tangent vector at the origin together with a choice of √−1, represented by A¹ − {0, 1} over Z[1/2, i]. If it is there, mark matched. Antieau–Meier’s torsor X → M(2) already kills the generic μ₂ by a square root, without √−1. What the folder adds is the price of i and the strict 𝔖₃-equivariance, and that is the question.',
+  },
+  {
+    id: '64-octahedral-configurations-relative',
+    cote: '64',
+    pages: '44–52',
+    kind: 'mathematical',
+    claim:
+      'For a projective-line bundle X over a scheme S with residue characteristics ≠ 2, three things correspond bijectively: subgroup schemes of Aut_S(X) locally isomorphic to (Z/2)², subgroup schemes locally isomorphic to 𝔖₄, and regular octahedral configurations (étale degree-6 divisors with antipody). Moreover, pairs (X, Δ) whose orientation torsor is identified with μ₄* are equivalent to finite étale covers of degree 4 of S.',
+    basis:
+      'Page 46 gives the étale-local normal form σ₁(z) = −z, σ₂(z) = 1/z; pages 48–49 compute the fixer of two non-opposite vertices; the Théorème of page 51 states the three sets and page 52 the four maps between them; Corollaire 2 on page 52 states the equivalence with degree-4 étale covers via faces modulo antipody, with the conic x² + y² + z² = 0 over Z[1/2] as the standard structure. No proof of Corollaire 2 is written. The qualifier that makes it an equivalence, « munis d’un isom. Or_{Δ/S} ≃ μ*_{4S} », is a marginal addition. In it, Or is overwritten and « μ₄*-orientation » is marked uncertain in the transcription.',
+    ours:
+      'The reading adds the hypothesis « 5 invertible » wherever the page identifies Aut_S(X, Δ) with the octahedral rotation group: over F₅ the configuration is P¹(F₅) and Aut is PGL₂(F₅) ≃ 𝔖₅, as the reading checks. The page’s own margin bounds the computation by « car. ≠ 3 et 5 ». It also reads « icosaédrale » as octaédrale in c), Corollaire 1 and page 59. The bijections a)–b)–c) are claimed here without the char-5 restriction, following the reading’s footnote; that step is the reading’s.',
+    literature: [
+      'A. Beauville, Finite subgroups of PGL₂(K) (arXiv 0909.3942), Proposition 1.1 and Theorem 4.2 with its proof, read 2026-10-10. It covers a field K with group order prime to the characteristic: 𝔖₄ ⊂ PGL₂(K) iff −1 is a sum of two squares, with a single conjugacy class; Klein subgroups are classified through K*/K*², and the normaliser of a Klein subgroup over K_s is 𝔖₄. That is the field case on a fixed P¹_K, with no base scheme, no forms of P¹, no octahedral divisor and no equivalence with quartic étale covers.',
+      'Web search, 10 October 2026: « Beauville Finite subgroups of PGL2(K) octahedral forms conic S4 subgroup classification over a field ».',
+    ],
+    status: 'candidate',
+    settle:
+      'Check whether the relative statement, and above all Corollaire 2 ((X, Δ, Or ≃ μ₄*) ↔ quartic étale covers, i.e. H¹(S, 𝔖₄) with 𝔖₄ acting on the conic x² + y² + z² = 0 by signed permutations), is in the literature on forms of P¹ with finite group actions: Serre, Topics in Galois Theory, § 2.5 on embeddings into PGL₂; Klein’s Vorlesungen über das Ikosaeder for the classical field case; work on the relative Brauer–Severi and conic-bundle side. Before any search, a person should settle from the facsimile what the marginal qualifier of page 52 says, since the equivalence depends on it.',
+  },
+  {
+    id: '64-gl2-z4-combinatorial-model',
+    cote: '64',
+    pages: '25–31',
+    kind: 'mathematical',
+    claim:
+      'Free rank-2 Z/4Z-modules are canonically equivalent, as a groupoid, to triples (I, Q, k): a four-element set I, a combinatorial square Q, and a bijection k from the orientations of I to the codiagonals of Q. Hence GL₂(Z/4Z) ≃ 𝔖₄ ×_{±1} D₄ canonically, as the fibre product of the sign of 𝔖_I and the character of 𝔇_Q on the codiagonals.',
+    basis:
+      'The Théorème of page 27 (18) gives M ↦ (M₀, I_M, S_M). Corollaire 2 (21) and Corollaire 3 (22) on page 28 give the triples and the cartesian square. Pages 29–31 give the derived subgroups, abelianisations and the lattice of subgroups. The statements read cleanly. The margin of page 27, on the semidirect decomposition, carries five \\ill{} words, but its formulas are legible and the entry does not rest on it.',
+    ours:
+      'The reading corrects the page’s direct product (GL(M₀)·M₀) × F₂^ω to a semidirect product (page 31). The deduction that the abstract fibre product agrees with the GroupNames description below is this pass’s: the kernel of χ_C is a Klein subgroup of D₄, and D₄ acts on 𝔖_I⁺ ≃ A₄ through D₄/V_S ≃ C₂.',
+    literature: [
+      'T. Dokchitser, GroupNames, page « A4⋊D4 » (SmallGroup(96,195)), consulted 2026-10-10. It lists GL₂(Z/4Z) as an alias and describes the group as A₄ ⋊ D₄ with D₄ acting through D₄/C₂² ≃ C₂, which is the abstract group of Corollaire 3.',
+      'Groupprops, page « General linear group:GL(2,Z4) », found by search 2026-10-10, not read beyond the search summary.',
+    ],
+    status: 'matched',
+    settle:
+      'The abstract isomorphism is in GroupNames, so the group-theoretic content is matched. The status would be revisited only if someone finds that the canonical groupoid equivalence (21), with its dictionary C_Q ↔ sg, D_Q ↔ sg·det, ω_Q ↔ det, is itself unpublished and worth listing separately. That is a question about a functorial form, not about the group.',
+  },
+  {
+    id: '64-pages-146-147-reversed',
+    cote: '64',
+    pages: '145–148',
+    kind: 'codicological',
+    claim:
+      'Pages 146 and 147 are bound in the reverse of the order of the argument: the reading order is 145, 147, 146, 148.',
+    basis:
+      'The author’s formula numbers run (10) on page 145, (11)–(13) on page 147, (14) on page 146 and (15) on page 148. Page 147 opens by continuing page 145 (« on trouve »), introducing τ_∞ and the action g·τ = (aτ + b)/(cτ + d). Page 146 uses that action in (14), T_g(τ, z) = (gτ, z/(cτ + d)), and page 148 extends it to T_{g,m,n} in (15).',
+    ours:
+      'The observation is the transcription’s (batch 8 header and its note on page 147), and the reading reads the two pages in the order of the argument. The facsimile was not consulted by this pass.',
+    literature: ['Transcription 64, batch 8 (batch-08.fr.tex), header and pages 145–148'],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile whether pages 146 and 147 are the two faces of one leaf, in which case the « reversal » is just which face was scanned first, or two separate leaves filed in the wrong order.',
+  },
+  {
+    id: '64-page-156-june-1981-notice',
+    cote: '64',
+    pages: '154–156',
+    kind: 'codicological',
+    claim:
+      'The jottings on page 156 are written in the blanks of a printed administrative notice stamped « 9 JUIN 1981 » and « 16 JUIN 1981 ». They take up the form T² + 2αT + b of page 154, so at least those jottings were not written before the notice existed.',
+    basis:
+      'The batch-8 transcription notes that page 156 is a printed convocation carrying both stamps, with only the calculations transcribed: T² + 2αT + b, x² + αxy + βy², T² + απT + βπ² over F₂[T, π], 4T − 1. Page 154 introduces T = S − α and B ≃ A[T]/(T² + 2αT + b) in the study of the normality of A[S]/(S² − a).',
+    ours:
+      'The link between the jottings and page 154 is drawn by the transcription and the reading. That this bounds the date of the jottings, and of nothing else in the folder, is this pass’s. It is consistent with the inventory’s « [à partir de 1980-1982] » and does not narrow it for pages 1–155.',
+    literature: ['Transcription 64, batch 8 (batch-08.fr.tex), header and pages 154, 156'],
+    status: 'candidate',
+    settle:
+      'A person reads the notice on the facsimile: its nature, its sender and whether the stamps are dates of dispatch or of a meeting. They also check whether page 156 is the verso of pages 154–155 or a separate sheet. Note what this dates: the jottings on that sheet, not the appendix they repeat, and not the folder.',
+  },
+// Folder 123 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over the Opus 5.5 reading of 2026-10-03.
+// Three entries, all unsearched: the only search was three general web queries, not a reading of the named books.
+  {
+    id: '123-steinberg-no-resolution-picard',
+    cote: '123',
+    pages: '10–13',
+    kind: 'mathematical',
+    claim:
+      'Over a base S, a resolution of the Steinberg map G → T/W that is an isomorphism over G^reg with exceptional locus of codimension ≥ 2 fibre by fibre cannot exist, because its Picard group would be finite modulo Pic(S) while that of the Grothendieck–Springer space G̃ contains the weight lattice with its ample cone. The necessity of the base change T → T/W is obtained here from a Picard-group comparison, not from monodromy.',
+    basis:
+      'Pages 10–11 prove Pic(Bor) ↪ Pic(G̃) ≅ Pic(G̃^reg) ≅ Pic(G′^reg) by depth and EGA IV 21.4.13. Page 13 d) proves Pic(S) ↪ Pic(G) ↪ Pic(G^reg) with finite cokernel, then concludes « Cela montre qu’on ne peut trouver une résolution X̃ … sans toucher à G^reg ». The words « ne peut » are \\uncertain{} in the transcription, and the sentence breaks off on « … ».',
+    ours:
+      'The reading adds the hypothesis that S is regular for the finiteness of Coker(Pic(S) → Pic(G^reg)). The page strikes « si S régulier » and infers finiteness from injectivity alone. The reading also writes out the contradiction (rank 0 against the rank-r weight lattice with its ample cone), which the page leaves at « … ». As written, the argument needs X̃ regular, so that Pic(X̃) = Pic(X̃ minus the exceptional locus), and X̃ → G projective, so that it has a relatively ample bundle. Neither assumption is stated on the page.',
+    literature: [
+      'General web search, 2026-10-10, for a Picard-group proof that the adjoint quotient has no simultaneous resolution without base change: no relevant hit. Slodowy and Brieskorn were not opened.',
+    ],
+    status: 'unsearched',
+    settle:
+      'The statement itself, that simultaneous resolution needs the base change by W, is classical (the reading’s footnote cites Brieskorn, Nice 1970, and Slodowy 1980), so only the route is in question. Read Slodowy, Simple Singularities and Simple Algebraic Groups (LNM 815, 1980), ch. 4, and Brieskorn, ICM Nice 1970, for the argument used. If a Picard-group or ample-cone argument appears there, or in Springer’s or Steinberg’s treatment of the group case, mark matched.',
+  },
+  {
+    id: '123-grothendieck-springer-pic-twisted-torus',
+    cote: '123',
+    pages: '10–12',
+    kind: 'mathematical',
+    claim:
+      'For a reductive group scheme over a normal integral base S whose abstract maximal torus T is not split, Pic(Bor) → Pic(G̃) is injective with cokernel inside H¹(Γ, X*(T)), where Γ is the image of π₁(S) in Aut X*(T). The map is bijective when this H¹ vanishes, and for regular S only then. A line bundle on Bor is ample if and only if its pull-back to G̃ is, with no normality assumption on S.',
+    basis:
+      'Page 11 proves the lemma Pic(B) = Pic(T) = H¹(Γ, X*(T)) by the torsor B → T, Hochschild–Serre and Hilbert 90, and applies it to the generic fibre of G̃ over Bor. Page 12 a) writes the exact sequence 0 → Pic(Bor) → Pic(G̃) → H¹(Γ, M_ξ̄), and b) extends injectivity and the ampleness criterion to non-normal S. The sufficient condition and « on a une réciproque si S régulier » sit in a margin read with several \\uncertain{} and \\ill{}. On page 12, « flèche » (completing the sequence by → 0 for S regular) is \\uncertain{}, and the reading calls the passage « criblé de mots illisibles ».',
+    ours:
+      'The page’s theorem states Pic(Bor) ≅ Pic(G̃) without condition. The reading puts the H¹(Γ, X*(T)) = 0 condition into the statement, taking it from the margin and from page 12. It corrects the ample cone from P⁺ to the strictly dominant weights, and reads « T = ∏_{k′/k} T′ » as « T splits over k′ ». The iff for regular S rests on uncertain readings.',
+    literature: [
+      'General web search, 2026-10-10, for the Picard group of the Grothendieck–Springer space with a non-split torus: hits treat only the split case over a field. No book was opened.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Check SGA 3 (Exp. XXII–XXVI) and Demazure’s thesis for Pic of the scheme of Borels over a base in the non-split case. Then check Sansuc, « Groupe de Brauer et arithmétique des groupes algébriques linéaires » (Crelle 327, 1981), §6, where Pic of a torus and of a group is H¹(Γ, X*) by the same route, for whether the comparison with G̃ is stated. Also check whether the iff for regular S is really on page 12 by re-reading the facsimile with /transcribe-grothendieck. If the statement is found, mark matched.',
+  },
+  {
+    id: '123-kostant-rigidifications-count',
+    cote: '123',
+    pages: '21, 28, 30, 34',
+    kind: 'mathematical',
+    claim:
+      'For a simple adjoint group G with (h, p) = 1, G acts freely on quadruples (T, B, T′, B′) with T, T′ maximal tori in apposition (Kostant) and B ⊃ T, B′ ⊃ T′ Borel subgroups. The quotient RigKos/G is finite étale of rank card(W)²/(h·z·φ(h)), and of rank card(W)²/(h·z) once a generator of T ∩ N(T′) ≅ μ_h is also given.',
+    basis:
+      'The letter to Kostant (page 21, 22 Oct. 1969) and page 34 assert the count without proof. The letter’s foot-note gives N(T) ∩ N(T′) as an extension of (ℤ/hℤ)* by ℤ/hℤ × 𝔷, of order h·z·φ(h). Page 30 writes T ∩ T′ = 0, and page 28’s grid gives the subgroup lattice. On page 34, « librement » and « rang » are \\uncertain{}.',
+    ours:
+      'The reading marks the count as asserted, not proved. It checks that the number is an integer for A₁, A₂, B₂ and G₂ (1, 2, 4, 12). This pass’s own step, not on the page: an element fixing (T, B, T′, B′) lies in N(T) ∩ B = T and in T′, so the action is free once T ∩ T′ = 1. The count then reduces to the order of N(T) ∩ N(T′), which the folder asserts and does not prove.',
+    literature: [
+      'General web search, 2026-10-10, for counts of Borel pairs over tori in apposition: no count found. Kostant 1959 (Amer. J. Math. 81) was not opened.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Prove or refute |N(T) ∩ N(T′)| = h·z·φ(h) (the image in W should be W_K ≅ P∨/Q∨ extended by (ℤ/hℤ)*). Then look for the count in Kostant 1959 §§6–9, Springer, « Regular elements of finite reflection groups » (1974), and the literature on Coxeter tori and Kostant–Coxeter pairs. A small-rank computer check (A₂, B₂, G₂) of orbit counts would settle the number independently.',
+  },
+  // Folder 128 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over the Opus 5.5 reading of 2026-10-03.
+  // Web searches (search-engine snippets only, no source read in full) located Ferrand 2003 and Ferrand–Olivier 1970 as the places to check; neither was read, so nothing below is beyond `unsearched`.
+  {
+    id: '128-nilpotent-conductor-flat-descent',
+    cote: '128',
+    pages: '4–9',
+    kind: 'mathematical',
+    claim:
+      'If I is a nilpotent ideal of A mapping isomorphically onto an ideal of A′ (a Milnor square A, A′, A/I, A′/I) and Spec A′/IA′ → Spec A/I is an effective descent morphism for flat modules, then Spec A′ → Spec A is an effective descent morphism for flat modules, and stays one after flat base change.',
+    basis:
+      'Page 1’s exact sequence 0 → I_cst → C•(A′/A) → C•(A′₀/A₀) → 0 gives H^i(A′/A) ≅ H^i(A′₀/A₀) for i ≠ 0 (pp. 2–4); Prop. 2 (pp. 4–7) lifts effectivity from E′₀ to E′ in the square-zero case and inducts on the nilpotency order; Cor. 1–3 (pp. 7–9) globalise it.',
+    ours:
+      'The last step on page 6 (E ⊗ A′ → E′ an isomorphism, by Nakayama and flatness of E′) is almost wholly illegible and is reconstructed by the reading; the reading also names the local flatness criterion for a nilpotent ideal, which the page uses unnamed, writes out the induction on the nilpotency order, and notes that the hypothesis H¹(A′/A) = 0 is not used. The page’s Cor. 3 says « Y quelconque »; the reading restricts it to flat Y and gives its own counterexample for arbitrary Y.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Read D. Ferrand, « Conducteur, descente et pincement », Bull. SMF 131 (2003), §2 (modules over a fibre product of rings, Th. 2.2) and its descent sections: if flat modules over the Milnor square glue as Ferrand shows, the statement may follow formally, without nilpotence — then mark matched. Also check the Stacks Project chapters on descent and on pushouts/pinchings, and Mesablishvili’s results on effective descent for modules (pure morphisms).',
+  },
+  {
+    id: '128-colength-one-equivalence-criterion',
+    cote: '128',
+    pages: '12–18',
+    kind: 'mathematical',
+    claim:
+      'For A local artinian and A′ a finite A-algebra with trivial residue extensions, if some equivalence ideal J makes A → A′ ⇉ (A′ ⊗_A A′)/J exact and δ(x′) = p₂(x′) − p₁(x′) generates the ideal Δ for every x′ ∉ A, then length(A′/A) ≤ 1; and when A′/A ≅ A/𝔪, Spec A′ carries exactly two equivalence relations over Spec A.',
+    basis:
+      'Page 12–13 Prop. 1 (A′/A ≅ k gives 𝔪A′ = 𝔪, reduces to a rank-2 k-algebra); pages 14–18 Prop. 2, split into the non-radicial case (reduced to A′₀ ≅ kⁿ, « on trouve n = 2 ») and the radicial case (Ω = Δ/Δ², 𝔪′² ⊂ 𝔪, reduction to A′ = k ⊕ V with V² = 0).',
+    ours:
+      'Much of the proof is the edition’s: the case k[ε] of Prop. 1 (i) (the page breaks off after « ε² = 0 »), the count 2(n−1) = n² − n behind « n = 2 », the justification that J is nilpotent, and the whole end of page 18 (dim V = 1), where the page stops at « il faut prouver ». The hypothesis on residue extensions is a marginal addition the reading folds into the statement; the case-split word « n’est pas [radiciel] » on page 14 is \\uncertain{} in the transcription.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Read D. Ferrand and J.-P. Olivier, « Homomorphismes minimaux d’anneaux », J. Algebra 16 (1970), Th. 2.2–2.3: colength one here is a minimal extension with crucial ideal 𝔪 = conductor, and the two-relation statement may be a reformulation of their decomposed/ramified/inert classification. Then check the later minimal/FCP-extension literature (Dobbs–Shapiro; Picavet and Picavet-L’Hermitte) for a criterion phrased through T ⊗_R T and the diagonal ideal. Page 31, in another hand (the « Notes Murre-Levelt » of the title), treats the same k ⊕ V case; if those notes are identified in print, check them too.',
+  },
+  {
+    id: '128-infinitesimal-descent-theorem',
+    cote: '128',
+    pages: '19–29',
+    kind: 'mathematical',
+    claim:
+      'For A semi-local noetherian with radical 𝔪 and A′ finite over A, with A_n = A/𝔪^{n+1}, the folder states — but does not establish — that vanishing of H¹(A′_n/A_n) for all n, triviality of H¹(A′_n/A_n, Gl_r) for all n, and effective descent of flat quasi-coherent modules along Spec A′_n → Spec H⁰(A′_n/A_n) for all n are equivalent, and that they imply effective descent for flat modules of finite type along Spec A′ → Spec H⁰(A′/A).',
+    basis:
+      'The Théorème of page 25 and its proof on pages 26–29, by induction on n through square-zero ideals using Lemme 1 (p. 19–20: Ker H¹(G_m) ≅ Ker H¹(G_a) under B̃₀ = B̃₀* + B̄), its Cor. 2–3 (pp. 21–22) and Lemme 2 (pp. 23–24), then Mittag-Leffler for the limit.',
+    ours:
+      'The reading finds that the square of page 20 does not commute (the multiplicative coboundary is the logarithmic derivative u⁻¹∂(u), not ∂(u)), so Lemme 1, its corollaries and the steps of a) that use them are unproved in the folder; the Mittag-Leffler condition, the Artin–Rees remark for b)(iii) and the observation that Lemme 2 (i) is implied by (ii) are the edition’s. Large parts of pages 23–27 are illegible, part c) is not proved, and the « qu. cohér. / plats » of (iii) is \\uncertain{}.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'First decide Lemme 1: either prove Ker(H¹(A′/A, G_m) → H¹(A′₀/A₀, G_m)) ≅ Ker(… G_a …) under the stated hypothesis or find an Amitsur-complex counterexample. Only if it holds, compare the theorem with SGA 1 VIII and IX (descent, formal and infinitesimal), EGA III §5 and EGA IV §18, and Ferrand 2003, where descent along finite non-flat morphisms is decided on infinitesimal neighbourhoods.',
+  },
+  {
+    id: '138-operations-belyi-extending',
+    cote: '138',
+    pages: '122–124, 127',
+    kind: 'mathematical',
+    claim:
+      'An « operation » on oriented maps given by a subset A of the reference sphere (A pulled back along each map’s cover f : X → S) is, apart from one exceptional case, composition with a cover φ : S → S ramified only over 0, 1, ∞, with φ⁻¹{0, 1, ∞} ⊃ {0, 1, ∞} and ramification 2 over 1, so that A = φ⁻¹([0, 1]) and A_X = (φf)⁻¹([0, 1]): the converse of the construction of operations from Belyi-extending maps.',
+    basis:
+      'Page 122 identifies the operations for F = 𝔓 with subsets of the reference sphere up to isotopy; page 123 asserts, once vertices, face centres and edge midpoints of A have been chosen by the rules of page 124, that A is deduced from such a φ by taking the inverse image of [0, 1], and page 127 completes the sentence (« φ⁻¹{0, ∞} ⊃ {0, 1, ∞} ») and asks « Que se passe-t-il dans le cas exceptionnel ? ». No proof is written. The word « application » before φ and « non » in « tous distincts non de 0, 1, ∞ » are \\uncertain{} in the transcription; the statement does not turn on them. The exceptional case (rule 3°, s = 1 an end of A) is not resolved on the pages.',
+    ours:
+      'The reading order 122 → 124 and 123 → 127 is the transcription’s, and the reading follows it; the claim depends on it. The name Belyi-extending map (Wood 2006, after Ellenberg) and the framing as a converse are ours. The page’s condition is written φ⁻¹{0, 1, ∞} ⊃ {0, 1, ∞}, which is Wood’s β({0, 1, ∞}) ⊂ {0, 1, ∞}; the extra requirement of ramification 2 over 1 (clean dessin) is the page’s and is not in Wood’s definition.',
+    literature: [
+      'M. M. Wood, « Belyi-extending maps and the Galois action on dessins d’enfants », Publ. RIMS 42 (2006), 721–737 (arXiv math/0304489) — §3.1 (definition: β Belyi over ℚ with β({0, 1, ∞}) ⊂ {0, 1, ∞}) and §3.2 (β(Γ) built from the « extending pattern » of β in each diamond of X_Γ), read 2026-10-10 through a fetched HTML rendering, not the printed paper. The construction there goes from β to an operation; no statement that every operation defined by a subset of the sphere arises from such a β was found.',
+      'Web search, 2026-10-10, for operations on dessins by composition with Belyi maps: returned papers on compositions of Belyi maps (arXiv 2203.00912, arXiv 1610.08075 Vidunas–He) whose abstracts do not bear; none was read.',
+    ],
+    status: 'candidate',
+    settle:
+      'Read J. Ellenberg, « Galois invariants of dessins d’enfants » (in Arithmetic Fundamental Groups and Noncommutative Algebra, Proc. Sympos. Pure Math. 70, 2002), which Wood credits with defining these maps; G. A. Jones and D. Pinto, « Hypermap operations of finite order » (Discrete Math. 155, 1996); and G. A. Jones and J. S. Thornton, « Operations on maps, and outer automorphisms » (J. Combin. Theory B 35, 1983) — all cited from memory. If any of them proves that an operation given by an isotopy class of graphs on the reference sphere, functorial along all ramified covers, is composition with a Belyi-extending map, mark matched. Jones–Thornton treats only invertible operations (Out of the cartographic group), so it is unlikely to bear on subdivision-type operations.',
+  },
+  {
+    id: '138-operations-subset-criterion',
+    cote: '138',
+    pages: '122, 124',
+    kind: 'mathematical',
+    claim:
+      'The folder states a criterion for a subset A of the reference sphere to define, by pull-back along every map, a new map structure on every surface (X ∖ A_X a union of discs): as read, a) A is connected and b) A contains at most one of the points 0, 1, ∞.',
+    basis:
+      'Page 124, continuing page 122: « il faut et il suffit que a) A soit connexe … b) A ne peut contenir pas plus qu’un seul des points 0, 1, ∞ ». The passage between a) and b) is a palimpsest — several struck lines with \\ill{}, a box, and a boxed addition (« plus des points 0, 1, ∞ qui sont ∉ A, i.e. définit une carte sur S¹ ») whose place in the sentence is uncertain. The page writes « On prouve » and gives no proof.',
+    ours:
+      'This pass reads the folder differently from the reading, which reports a)–b) without comment: as read, b) excludes A = [0, 1], which gives the identity operation and plainly defines a map, so either the reading of b) or the page is wrong. What the topology appears to require is that A be connected and that each component of S ∖ A contain at most one of 0, 1, ∞ (a face containing two branch points can pull back to a non-disc). That is the pass’s own step, and it is close to the boxed addition, which may be the intended condition. The statement therefore rests on an unread passage and is not yet a claim the edition can make.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'First re-read page 124 against the facsimile (/transcribe-grothendieck) to fix where the boxed addition goes and what b) says; if b) concerns the components of S ∖ A rather than A, rewrite the claim accordingly. Then search the same sources as 138-operations-belyi-extending (Wood 2006 §3, Ellenberg 2002, Jones–Pinto 1996) for a criterion on graphs in the reference sphere that define operations on all dessins.',
+  },
+  {
+    id: '138-pages-122-127-order',
+    cote: '138',
+    pages: '122–127',
+    kind: 'codicological',
+    claim:
+      'The leaves of the « Opérations » section are out of order: the text runs 122 → 124 and 123 → 127, page 123 opens inside a parenthesis whose beginning is in none of the pages, and pages 125 and 126 (a theorem page and a sheet of calculations) interrupt the argument.',
+    basis:
+      'Page 122 breaks off on « il faut et il suffit » and page 124 opens « que A ∪ [0, 1] soit un 1-complexe »; page 123 breaks off on « car φ⁻¹{0, 1, ∞} ⊃ {0, 1, ∞} et » and page 127 opens « = φ⁻¹{0, ∞} ⊃ {0, 1, ∞}) ». Both joins are recorded in notes of the transcription (batch-07, pages 122, 123, 127).',
+    ours:
+      'The reading follows this order and says so in a footnote; the observation is the transcription’s.',
+    literature: ['Transcription 138, batch 7 (batch-07.fr.tex), pages 122–127 and its header note'],
+    status: 'candidate',
+    settle:
+      'Look at the facsimile of pages 122–127: check the sentence joins and whether 123/124 and 126/127 are the two sides of single leaves, which would explain the order as recto–verso rather than a misbinding. Whether the opening parenthesis of page 123 continues a sheet missing from the folder is not checked.',
+  },
 ];
