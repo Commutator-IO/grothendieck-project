@@ -1,0 +1,2050 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 70
+% (pages 1-125, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. It is held to being mathematically correct as it stands; where
+% the manuscript is loose or mistaken, the true statement is what appears here
+% and the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pp. 1-20), batch-02.fr.tex (pp. 21-40), batch-03.fr.tex (pp. 41-60),
+% batch-04.fr.tex (pp. 61-80), batch-05.fr.tex (pp. 81-100), batch-06.fr.tex
+% (pp. 101-120) or batch-07.fr.tex (pp. 121-125).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its seven batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5). The literature named
+% in the footnotes is cited from memory and was not checked against the
+% sources. Checked by machine (sympy, exact arithmetic; finite fields by hand-
+% written code): the invariance of the quadratic function f of p. 68 under
+% sigma_0, sigma_1, sigma_2 for general alpha, beta; the discriminants delta'
+% and delta of p. 68 and the table of p. 69; the centre and f(centre) of
+% pp. 68-69; the relations and the characteristic polynomials of
+% sigma_{i-1} sigma_i for the normal form of pp. 18-25 (n = 2, 3, 4); for the
+% icosahedron over Q(sqrt 5): the group has order 120, the orbit of s_0 is the
+% twelve points listed, (sigma_0 sigma_1 sigma_2)^5 is x -> 2o - x, the
+% quadrics through the twelve vertices form a line (rank 9), D_2 of p. 111;
+% over Z[alpha]/(alpha^2+alpha-1): the twelve points are distinct, no three
+% are collinear and no vertex lies in the plane of a face not containing it,
+% in EVERY characteristic (all the relevant minors are units of Z[alpha]);
+% Delta = alpha Delta' and Phi' = (2 alpha - 1) Phi of p. 76.
+%
+% Scope. Covers (no \pagerange of their own; their words head the parts):
+% p. 1 « n-polyèdres et n-hyperpolyèdres », p. 2 « n-polyèdres réguliers en
+% coordonnées affines universelles (vieilles rédactions) (23 p) » [= pp. 3-25],
+% p. 28 « n-quasi-polyèdres (vieilles rédactions) », p. 38 « “étude locale” des
+% n-polyèdres et des n-cartes (vieilles rédactions) », p. 49 « 2 – Polyèdres
+% réguliers. (Vieille rédaction) », p. 50 « (18) 2-Polyèdres repérés en
+% coordonnées universelles (vieille rédaction) », p. 73 « (32) Calculs en
+% coordonnées universelles (icosaèdre) — vieilles rédactions », p. 113
+% « Position du pb des 2-polyèdres réguliers / vieille rédaction (10 p) ».
+% No mathematics: 26, 27, 37, 48, 60, 63, 72, 112, 125 (blank or separators),
+% 57 (a draft letter in his hand, cancelled — not described), 77, 79, 124
+% (typed versos; 124 a USTL letter stamped 17 June 1976 per the transcription's
+% header, not restated). Page 81 is not transcribed; the transcription does not
+% say why. Pages 100 (homotopies), 103 and 105 (mu_n, Sym^2 F) are sheets of
+% another subject or paper, described briefly.
+%
+% Spine.
+%   pp. 3-25    regular n-polyhedra: universal regular polytope of type
+%               {p_1..p_n} (string Coxeter group); regular affine realisation
+%               over a ring; the frame of vertices s_0..s_{n+1}; parameters;
+%               requiring reflections leaves n parameters alpha_0..alpha_{n-1};
+%               normal form sigma_i = id + l_i (x) (s_{i+1} - s_i).
+%   pp. 29-36   n-quasi-polyhedra: same frame without sigma_i^2 = 1;
+%               2n+1 parameters; orders (n = 1).
+%   pp. 39-47   local study: boundary and co-face of a facet, sections
+%               [f_i, f_j], the invariants p_i; geometric representation by
+%               maximal flags; induced realisations.
+%   pp. 51-59   2-polyhedra realised by points, lines, planes; the four first
+%               vertices are independent; regular realisation = (phi_G, a
+%               flag); p. 56 which standard maps are incidence geometries /
+%               polyhedra; p. 58 an isolated sheet on groupoids.
+%   pp. 61-62   PSL(2,Z) and its quotients mod n (n <= 5: Platonic groups).
+%   pp. 64-71   n = 2 in coordinates: alpha (vertex), beta (face); the
+%               invariant quadratic function; table for the Platonic solids
+%               and the pentagrammic ones; beta = 2: a hyperboloid.
+%   pp. 74-111  the icosahedron in « universal coordinates » over
+%               Z[alpha]/(alpha^2+alpha-1): reflections, rho_f^3, rho_s^5,
+%               twelve vertices, centre and antipodism (char 2: a translation),
+%               the circumscribed quadric (char 5: a cone), remarkable vectors,
+%               regular and faithful realisations.
+%   pp. 114-119 the problem of regular 2-polyhedra in a scheme X/S: universal
+%               flags, axioms [11]-[20], [32]-[33'], N, Gamma/N, questions.
+%   p. 120      « cocubes »: the cube and the cross-polytope from a set with
+%               involution.
+%   pp. 121-123 « Programme provisoire d'une théorie arithmétique des
+%               polyèdres réguliers »: k-realisations of a real type tau in a
+%               projective space; a sheet of counting notation.
+%
+% Notation fixed for the document.
+%  - G_n (written \mathfrak{G}_n, his gothic G) = <sigma_0..sigma_n | sigma_i^2,
+%    (sigma_i sigma_j)^2 for |i-j| >= 2>, the cartographic group with n+1
+%    generators (folder 76's G_n; for n = 2 folder 88's hat-Gamma, which p. 114
+%    writes Gamma). sigma_i changes the i-dimensional member of a flag.
+%  - N the stabiliser of a flag (p. 3 writes H), Gamma_{p_*} the Coxeter
+%    group [p_1..p_n], p_i = order of sigma_{i-1} sigma_i (p. 3's indexing;
+%    p. 42 indexes from 0). For J in {0..n}: G_J = <sigma_i, i not in J>
+%    (p. 4 writes G_{n,H}), D_J flags of type J.
+%  - s_0 .. s_{n+1} the frame of vertices, e_i = s_i - s_0, x_1..x_{n+1}
+%    affine coordinates, Sigma_i = x_{i+2} + ... + x_{n+1} (Sigma_0 =
+%    x_2 + ... + x_{n+1}); alpha_0..alpha_{n-1} as on pp. 15-25.
+%  - n = 2: beta = alpha_0 (face), alpha = alpha_1 (vertex), as on pp. 64-111;
+%    rho_f = sigma_0 sigma_1 (about a face, order q), rho_s = sigma_1 sigma_2
+%    (about a vertex, order p), as on p. 67 and in folder 88 (p. 61 swaps the
+%    names; p. 84 writes u, v). alpha' = -1 - alpha.
+%  - Psi_m the minimal polynomial of 2 cos(2 pi / m), his « polynôme
+%    semi-cyclotomique » F_m.
+%  - Icosahedron: s'_3 = sigma_1 s_3, s''_3 = rho_f s_3 (pp. 74-111; p. 64
+%    names sigma_1 s_3 s''_3 and sigma_0 s_2, sigma_0 s_3 s'_2, s'_3, here
+%    t_2, t_3). iota the antipodism (his underlined a, as in folder 86), o the
+%    centre, q the quadratic function, q_0 its homogeneous part.
+%  - « réflexion »: an affine involution whose fixed locus is, in every fibre,
+%    an affine hyperplane (projective: a projective hyperplane), as the pages
+%    use the word; in characteristic 2 such a map is a transvection.
+%  - The base scheme of pp. 110 and 115 is written Y (the pages write S, the
+%    letter of the vertex set).
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%  p. 4    R_{p_*} = G_n / Gamma_{p_*} read G_n / N (= Gamma_{p_*} as a set).
+%  p. 9    sigma_1 s_4 in f_4 \ f_2 read f_4 \ f_3.
+%  p. 11   the boxed sigma_i s_j = s_0 + lambda_i (e_i + e_{i+1}) + e_j has the
+%          wrong sign: the involution condition forces lambda_{ii} =
+%          -lambda_{i,i+1}; the form is s_0 + lambda_i (e_{i+1} - e_i) + e_j
+%          (as pp. 18 and 25 have).
+%  pp. 13-18 the reflection requirement is his addition to the definition;
+%          sigma_i^2 = 1 alone allows lambda_{i,i+2} = -1. Over a ring the
+%          page argues through nilpotents and residue characteristic 2; the
+%          comparison of coefficients given here is ours.
+%  p. 18   x_{n+2} read x_{n+1}; « lambda_{i,i+1} + lambda_{i,i+1} » read
+%          lambda_{ii} + lambda_{i,i+1}.
+%  p. 19   the commutation of sigma_i, sigma_j (j >= i+2) needs that sigma_j
+%          preserves x_j + x_{j+1}; supplied.
+%  pp. 19-22 the orders of sigma_{i-1} sigma_i are not finished on the page;
+%          the characteristic polynomial (t-1)^{n-1}(t^2 - alpha_{i-1} t + 1)
+%          and the criterion « alpha_{i-1} = zeta + zeta^{-1}, zeta primitive
+%          p_i-th root » are ours (machine-checked for n <= 4, proved in
+%          general).
+%  p. 33   X_i lacks the term (1 - lambda_i) mu_i Sigma_i and X_{i+1} has
+%          coefficient lambda_i^2 - lambda_i + 1 for x_{i+1} (the page: 1);
+%          the conclusions (21) and (22) stand.
+%  p. 34   cases a), b) of sigma_{0v}^n = 1 corrected: a) 1 + eta + ... +
+%          eta^{n-1} = 0, i.e. (eta != 1, eta^n = 1) or (eta = 1, p | n);
+%          b) eta = 1, alpha_0 = 0, p does not divide n.
+%  p. 35   « alpha_0 = 1: sigma_0 = id » is impossible (sigma_0 s_0 = s_1);
+%          for eta_0 = 1 sigma_0 is (x,y) -> (x + 1 + alpha_0 y, y), of order p
+%          (p > 0) or infinite, whatever alpha_0.
+%  p. 36   the alpha_i of p. 36 is not that of p. 18 (1 + alpha_i of p. 36 is
+%          -(1 + alpha_i) of p. 18); eigenvalue 1 has multiplicity n, not n-1.
+%  p. 39   the signs ± on Gamma_n(i), E(i) read as the definitions require
+%          (quotient by the upper group, the lower one acts).
+%  p. 42   « true at least for incidence geometries »: the equality p_k =
+%          order of sigma_k sigma_{k+1} holds under the intersection property.
+%  p. 45   Drap aff(Pi) read Drap aff(E).
+%  p. 52   « phi_S(S) generates E » needs dim E = 3; supplied.
+%  p. 54   sigma_1(a_0) = a_0 read sigma_1(f_0) = f_0.
+%  p. 56   the bracketed statements (which correct a) and b)) are followed.
+%  p. 58   « centralisateur de C » read « de G ».
+%  p. 61   rho'_s = sigma_2 rho_f sigma_2^{-1} read sigma_2 rho_s sigma_2^{-1}
+%          (in p. 61's names).
+%  p. 64   s''_3 = s_3 + xi e_1 + eta e_2 + zeta e_3 has third coordinate
+%          1 + zeta, not 1 - zeta; then sigma_1^2 = 1 gives zeta(zeta + 2) = 0,
+%          not zeta^2 = 0; with det = -1 (or a fixed hyperplane) zeta = 0, as
+%          the page concludes.
+%  p. 66   sigma_0 is a reflection iff mu = 1; for mu = -1 it is the central
+%          symmetry about the midpoint of s_0 s_1.
+%  p. 68   the doubtful factor (alpha - beta) of delta' is (alpha + beta)
+%          (checked).
+%  p. 74   « H_2 parallel to H_0 in char. 2 » holds on the equations as
+%          transcribed (the transcription's note doubts it).
+%  p. 75   iota s''_3 = (alpha', 1 - 2 alpha', -alpha') is (alpha', 1,
+%          -alpha') (checked); iota s'_3 = (0, 1, -alpha') is right, and so
+%          the expectation in the note at p. 92 is not.
+%  p. 84   the second matrix of sigma_1 has alpha', -alpha' in its third
+%          column; the cycle of rho_f on s_0 ends at s_0.
+%  p. 85   sigma_0 sigma_2 = sigma_2 sigma_1 read sigma_2 sigma_0.
+%  p. 91   in char. 2 iota is the translation by (alpha', alpha, alpha)
+%          = (alpha', 1 - alpha', 1 - alpha') (the page reads (alpha', 1, 1)).
+%  p. 93   « four distinct vertices are coplanar only if on a face » is false
+%          in every characteristic (the five neighbours of a vertex are
+%          coplanar — p. 85 says so for four of them —, and so are two opposite
+%          edges); the restricted form the page then proves suffices, and
+%          holds in every characteristic (checked).
+%  p. 102  the third row of the 4x4 matrix is (1, -alpha, 2, -1); its
+%          determinant is -alpha - 3 (checked), not the alpha' of p. 104.
+%  p. 108  lambda^2 + lambda - 1 = 0 does not express rho_f^3 = id (which is
+%          automatic, p. 85) but rho_s^5 = id.
+%  p. 117  (23)-(24) define an ANTI-isomorphism Gamma_P -> Aut(X, P).
+%  p. 123  N = prod s_i over 0 <= i <= n (the bounds read 1, n-1 do not give
+%          card G); the meaning of s_i, s'_i is our reading.
+%
+% Links the pages do not write (ours, said so in the body): the realisations
+% of pp. 3-25 are reflection representations of the Coxeter group [p_1..p_n]
+% (for a finite group: Tits's geometric representation or a Galois conjugate);
+% the « semi-cyclotomic » condition of p. 67 is the c of p. 103 (Phi_n(c) = 0,
+% c = zeta + zeta^{-1}); beta = 2 on p. 70 is the hyperboloid model of the
+% hyperbolic plane carrying the tessellation {infinity, p}; pp. 74-111 carry
+% out the « icosaèdre régulier général sur un anneau fini sur Z » announced by
+% the course of folder 75 (1977-78); the faithfulness asked on p. 21 and
+% p. 109 holds for the icosahedron in every characteristic; p. 105's
+% Sym^2(F) (x) (det F)^{-1} with its discriminant is folder 82's PGL_2 = SO_3;
+% p. 120's cube is folder 76's cube of a set with involution, and its
+% « cocube » the cross-polytope of folder 87; pp. 114-119 are the
+% scheme-theoretic form of folder 86's part II.
+%
+% Announced and never established: the computation of (sigma_0 sigma_1)^p
+% (p. 19) and the « ? » of p. 20; whether D_i -> Grass_i is injective (p. 21);
+% the realisation of the co-face (p. 47, breaks off); the « à vérifier » of
+% pp. 53 and 56; the meaning of the exact sequences of p. 58; v^5 = id <=>
+% alpha^2 + alpha - 1 = 0 (p. 85, « un calcul commode »; true, checked); that
+% G has order 120 (p. 87, « si nous admettons »; true, classical); the
+% Proposition « régulière => fidèle » (p. 109, proof breaks off); the
+% classification programme in the margin of p. 111; questions (25)-(29)
+% (pp. 117-118); conditions 1)-4) of p. 122 are a definition with no result.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{70}
+\pages{1}{125}
+\dating{[à partir de 1976]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Réalisations géométriques de structures combinatoires (n-polyèdres, n-hyperpolyèdres [2-polyèdres réguliers]…) (Vieilles rédactions) : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Le cube, l'octaèdre, l'icosaèdre sont des polyèdres « réguliers » : toutes
+leurs faces sont pareilles, tous leurs sommets aussi, et ils ont autant de
+symétries qu'on peut en avoir. Les Grecs les définissaient par des longueurs et
+des angles égaux. Ces cent vingt-cinq pages partent de l'autre bout. On se
+donne d'abord le polyèdre sans aucune géométrie --- une liste de sommets,
+d'arêtes et de faces, qui touche qui, et le groupe de ses symétries --- et l'on
+demande de combien de façons on peut le \emph{réaliser} : le dessiner dans un
+espace par des points, des droites et des plans, de façon que toutes ses
+symétries combinatoires deviennent des transformations de l'espace. Et l'espace
+n'est pas forcément celui des nombres réels : ce peut être un espace sur un
+corps fini, ou sur un anneau quelconque.
+
+L'image qui guide tout est celle du kaléidoscope. Trois miroirs bien placés
+et un petit motif suffisent à fabriquer une figure symétrique entière ; ici
+le motif est un \emph{drapeau} --- un sommet, une arête qui en part, une face
+que borde l'arête --- et les miroirs sont trois symétries élémentaires, qui
+changent l'un des trois éléments du drapeau en gardant les deux autres. Pour un
+polyèdre de dimension supérieure, il y a un miroir de plus par dimension.
+Grothendieck place les sommets du premier drapeau aux points les plus simples
+possibles --- l'origine et les extrémités des vecteurs de base --- et calcule
+les miroirs dans ces « coordonnées universelles ». La surprise est que tout se
+réduit à une poignée de nombres, un par rotation élémentaire du polyèdre, et
+que chacun est imposé par la forme des faces : pour une face triangulaire, le
+nombre vaut $-1$ ; pour un pentagone, il doit vérifier $\alpha^2 + \alpha = 1$,
+l'équation du nombre d'or. Ces équations sont à coefficients entiers, et ont
+donc un sens en toute caractéristique.
+
+Le cœur du dossier est l'icosaèdre ainsi traité. On le voit exister sur tout
+anneau où l'équation du nombre d'or a une solution, et l'on suit ce qu'il
+devient en chemin. En caractéristique $2$, le centre de l'icosaèdre part à
+l'infini et la symétrie centrale devient une translation. En caractéristique
+$5$, la « sphère » circonscrite dégénère en un cône : l'icosaèdre est inscrit
+dans une sphère de rayon nul. Pourtant, en aucune caractéristique trois
+sommets ne deviennent alignés, et aucun sommet ne tombe dans le plan d'une face
+qui ne le contient pas : l'icosaèdre reste partout un icosaèdre. Chemin
+faisant, une forme quadratique apparaît dont le discriminant vaut exactement
+$1$, et la page s'exclame « merveille ! » ; plus loin, une vérification qui
+aboutit est saluée d'un « et on est heureux ! ».
+
+Le dossier porte, sur ses chemises, la mention « vieilles rédactions », et
+c'en est bien : la même question est reprise six ou sept fois, chaque fois
+d'un autre côté --- en dimension quelconque, puis sans supposer que les
+miroirs soient des symétries, puis par l'étude locale des faces, puis en
+dimension trois, puis sur une base quelconque, enfin, dans un « programme
+provisoire d'une théorie arithmétique des polyèdres réguliers », en partant du
+modèle réel et en lui cherchant des réalisations sur tout anneau. On y voit
+une façon de travailler : refaire le même calcul jusqu'à ce qu'il ne dépende
+plus d'aucun choix, et poser la question dans le cadre le plus large où elle a
+encore un sens. Un aparté rattache les groupes des polyèdres de Platon au
+groupe modulaire $\mathrm{PSL}(2, \mathbf{Z})$, réduit modulo $2, 3, 4, 5$.
+
+Les noms d'aujourd'hui sont ceux de polytope abstrait régulier, de groupe de
+Coxeter et de sa représentation géométrique, de groupe cartographique, de
+réalisation d'un polytope, de sous-groupe de congruence, et, pour la dernière
+page, de polytope croisé.
+
+\keywords{abstract regular polytope, string Coxeter group, intersection property, Schläfli symbol, cartographic group, flag, realization of polytopes, affine reflection, transvection, Tits geometric representation, minimal polynomial of 2cos(2π/n), invariant quadratic form, discriminant, modular group, principal congruence subgroup, icosahedron, golden ratio, characteristic 2, characteristic 5, Kepler-Poinsot polyhedra, hyperboloid model, regular tessellation of the hyperbolic plane, 1-cocycle, scheme-theoretic polyhedron, cross-polytope}
+\end{resume}
+
+\pagerange{1}{123}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les chemises et les stations}
+
+Huit feuilles de chemise, de sa main, découpent le dossier ; quatre portent un
+nombre de pages, et l'un au moins se vérifie exactement (« (23 p) » pour les
+pages 3 à 25). Elles donnent ses titres aux parties de cette lecture. Le mot
+« $n$-hyperpolyèdres » de la première chemise n'est repris nulle part ailleurs.
+
+\begin{itemize}
+  \item \textbf{Pages 1 à 25 : « $n$-polyèdres réguliers en coordonnées affines
+    universelles ».} Le polyèdre régulier universel de type $\{p_1, \dots,
+    p_n\}$ ; ses réalisations affines régulières sur un anneau ; le repère des
+    sommets ; l'exigence que les générateurs soient des réflexions laisse $n$
+    paramètres ; une forme normale.
+  \item \textbf{Pages 28 à 36 : « $n$-quasi-polyèdres ».} Le même repère sans
+    supposer que les générateurs soient des involutions : $2n+1$ paramètres.
+  \item \textbf{Pages 38 à 47 : « étude locale » des $n$-polyèdres et des
+    $n$-cartes.} Bord et étoile d'une facette, sections, invariants ;
+    représentation géométrique par des drapeaux, réalisations induites.
+  \item \textbf{Pages 49 à 59 : « 2-polyèdres repérés en coordonnées
+    universelles ».} Le cas de la dimension trois, avec ses points, droites et
+    plans ; un feuillet isolé sur les groupoïdes (page 58).
+  \item \textbf{Pages 61 et 62 : le groupe modulaire} et ses quotients
+    modulo $n$.
+  \item \textbf{Pages 64 à 71 : les trois réflexions en coordonnées, et la
+    quadrique invariante}, pour tous les types à la fois ; le tableau des
+    solides de Platon et des polyèdres étoilés ; un cas hyperbolique.
+  \item \textbf{Pages 73 à 111 : « calculs en coordonnées universelles
+    (icosaèdre) ».} Trois passes sur l'icosaèdre au-dessus de l'anneau
+    $\mathbf{Z}[\alpha]/(\alpha^2 + \alpha - 1)$ : les réflexions, les douze
+    sommets, le centre et l'antipodisme, la quadrique circonscrite et ses
+    discriminants, les réalisations régulières et fidèles. Trois feuilles
+    intercalées traitent d'autre chose (pages 100, 103, 105).
+  \item \textbf{Pages 113 à 119 : « position du problème des 2-polyèdres
+    réguliers ».} Drapeaux universels, polyèdre régulier dans un schéma,
+    axiomes, questions.
+  \item \textbf{Page 120 : les « cocubes ».}
+  \item \textbf{Pages 121 à 123 : « programme provisoire d'une théorie
+    arithmétique des polyèdres réguliers ».}
+\end{itemize}
+
+Aucune de ces rédactions ne renvoie à une autre. Elles sont rangées ici dans
+l'ordre des feuillets, qui n'est pas forcément celui de leur écriture : la
+dernière chemise porte « (10 p) », ce qui la ferait courir jusqu'à la
+page 123, mais les pages 120 à 123 ont leurs propres sujets.
+
+\textbf{Les dossiers voisins.} Le groupe cartographique à $n+1$ générateurs
+est celui de la lecture du dossier 76, qui le note $G_n$ ; pour $n = 2$, c'est
+le $\widehat{\Gamma}$ des dossiers 86 et 88, dont on reprend les rotations
+$\rho_f$, $\rho_s$ et les cartes standards $C_{p,q}$. Les drapeaux, les trois
+involutions et l'antipodisme de l'icosaèdre sont ceux du dossier 86, qui
+traite le même icosaèdre sans coordonnées. Les annonces de cours de
+1977--1978 du dossier 75 décrivent exactement ce que font les pages 74 à
+111 : réaliser l'icosaèdre « sur les réels et sur d'autres corps », la
+caractéristique $2$ et la caractéristique $5$ « jouant un rôle particulier »,
+et construire « l'icosaèdre régulier général sur un anneau de base fini
+sur $\mathbf{Z}$ ». La forme quadratique de la page 105 est celle de
+l'isomorphisme $\mathrm{PGL}_2 \simeq \mathrm{SO}_3$ du dossier 82 ; le cube
+de la page 120 est celui du dossier 76, et le « cocube » le polytope croisé du
+dossier 87.
+
+\subsection*{Conventions, valables pour tout le dossier}
+
+\textbf{Le groupe cartographique.} Pour $n \geq 0$,
+\[
+\mathfrak{G}_n = \bigl\langle \sigma_0, \dots, \sigma_n \bigm| \sigma_i^2 = 1,\
+(\sigma_i \sigma_j)^2 = 1 \text{ si } |i - j| \geq 2 \bigr\rangle ,
+\]
+noté par lui d'un $G$ gothique (page 114 : $\Gamma$, pour $n = 2$). Un
+$\mathfrak{G}_n$-ensemble est une \emph{$n$-carte} ; ses éléments sont les
+\emph{repères}, ou drapeaux maximaux $(f_0, f_1, \dots, f_n)$, et $\sigma_i$
+change la composante $f_i$ en gardant les autres. Une $n$-carte a des facettes
+de dimensions $0$ à $n$ ; ses réalisations vivent dans un espace de dimension
+$n + 1$, dont elle est, en quelque sorte, le bord : les « $2$-polyèdres » sont
+les polyèdres usuels de l'espace à trois dimensions.
+
+\textbf{Types.} $p_i$ est l'ordre de $\sigma_{i-1}\sigma_i$ ($1 \leq i \leq n$),
+comme à la page 3 ; $\{p_1, \dots, p_n\}$ est alors le symbole de Schläfli.
+Pour $n = 2$ on suit le dossier 88 : $\rho_f = \sigma_0\sigma_1$ tourne autour
+d'une face, d'ordre $q = p_1$ (le nombre de côtés), $\rho_s = \sigma_1\sigma_2$
+tourne autour d'un sommet, d'ordre $p = p_2$ (le nombre d'arêtes en un
+sommet)\footnote{La page 67 nomme ainsi $\rho_s$ et $\rho_f$ ; la page 61 les
+échange, et la page 84 les appelle $u$ et $v$. L'icosaèdre, de symbole
+$\{3, 5\}$, a donc $q = 3$ et $p = 5$.}. $\Psi_m$ désigne le polynôme minimal
+de $2\cos(2\pi/m)$ sur $\mathbf{Q}$, c'est-à-dire de $\zeta + \zeta^{-1}$ pour
+$\zeta$ racine primitive $m$-ième de l'unité : c'est son « polynôme
+semi-cyclotomique » $F_m$ (page 67). Ainsi $\Psi_3(\alpha) = \alpha + 1$,
+$\Psi_4(\alpha) = \alpha$, $\Psi_5(\alpha) = \alpha^2 + \alpha - 1$.
+
+\textbf{Le repère des sommets.} Un drapeau $f_0 \subset \cdots \subset f_n$ de
+sous-espaces affines étant donné, $s_0 = f_0$ et $s_{i+1} = \sigma_i s_i$ ;
+$e_i = s_i - s_0$ ; $(x_1, \dots, x_{n+1})$ sont les coordonnées affines dans le
+repère $(s_0; e_1, \dots, e_{n+1})$, et
+\[
+\Sigma_0 = x_2 + \cdots + x_{n+1}, \qquad
+\Sigma_i = x_{i+2} + \cdots + x_{n+1} \quad (1 \leq i \leq n-1) .
+\]
+Les paramètres $\alpha_0, \dots, \alpha_{n-1}$ sont ceux des pages 15 à 25.
+Pour $n = 2$, les pages 64 à 111 écrivent $\beta = \alpha_0$ (la face) et
+$\alpha = \alpha_1$ (le sommet) ; on les suit. Pour l'icosaèdre, $\alpha' = -1
+- \alpha$ est la racine conjuguée de $\alpha^2 + \alpha - 1$.
+
+\textbf{L'icosaèdre.} $s'_3 = \sigma_1 s_3$ et $s''_3 = \rho_f s_3$, comme
+aux pages 74 à 111\footnote{La page 64 appelle $s''_3$ le point $\sigma_1 s_3$
+et $s'_2$, $s'_3$ les points $\sigma_0 s_2$, $\sigma_0 s_3$ ; on les note ici
+$s'_3$, $t_2$, $t_3$.} ; $\iota$ est l'antipodisme, qu'il note d'un $a$
+souligné (on garde la lettre du dossier 86) ; $o$ est le centre ; $q$ la
+fonction quadratique invariante et $q_0$ sa partie homogène.
+
+\textbf{Réflexion.} Les pages appellent \emph{réflexion} une involution
+affine dont l'ensemble des points fixes est, dans chaque fibre, un hyperplan
+affine ; « réflexion projective » quand cet hyperplan peut être à l'infini. On
+garde le mot. En caractéristique $2$, une telle involution est une
+transvection.
+
+\subsection*{Ce que seule une lecture d'ensemble peut dire}
+
+\textbf{Le même calcul, refait.} La forme normale des générateurs est établie
+trois fois : en dimension quelconque (pages 9 à 25), sans l'hypothèse
+d'involution (pages 30 à 36), et en dimension trois (pages 64 à 66, puis 82 à
+84) ; ces trois versions ne nomment pas leurs points ni leurs paramètres de la
+même façon, et les notes le signalent où il le faut. Le paramètre
+« invariant modulaire du polygone régulier » de la page 15, le
+« polynôme semi-cyclotomique » de la page 67 et le $c = \zeta + \zeta^{-1}$
+avec « $\Phi_n(c) = 0$ » de la page 103 sont une seule et même chose : la
+trace de la rotation élémentaire.
+
+\textbf{Une hypothèse ajoutée.} Que les générateurs soient des réflexions
+n'est pas dans la définition d'une réalisation (pages 5 et 6, 43, 51) ; il
+l'impose à chaque fois au moment du calcul (pages 13, 15, 31, 66, 83). Les
+pages 29 à 36 sont la tentative de s'en passer.
+
+\textbf{Une question, et sa réponse pour l'icosaèdre.} La question de la
+page 21 --- une réalisation régulière envoie-t-elle des facettes distinctes sur
+des sous-espaces distincts ? --- et la « fidélité » des pages 109 et 110 ont,
+pour l'icosaèdre, une réponse positive en toute caractéristique : les pages
+93 et 94 la démontrent en partie, et la vérification complète est faite dans
+cette lecture.
+
+\textbf{Deux points de vue sur le même objet.} Les pages 114 à 119 cherchent à
+définir un polyèdre régulier dans un schéma par des axiomes, puis montrent
+qu'il revient à un morphisme $\varphi : \mathfrak{G}_2 \to \mathrm{Aut}(X)$ et à un
+drapeau ; c'est exactement la donnée que les pages 74 à 111 construisent pour
+l'icosaèdre. Le programme des pages 121 et 122 renverse la perspective : il
+part du modèle réel et lui cherche des réalisations sur un anneau.
+
+\subsection*{Ce que le dossier annonce sans l'établir}
+
+Le calcul de $(\sigma_0\sigma_1)^p$ (page 19) et les deux « $\overset{?}{=}$ »
+de la page 20 restent ouverts (on les complète) ; la question d'injectivité
+de la page 21 n'est pas tranchée en général ; la réalisation induite de
+l'étoile d'une facette s'arrête à la page 47 ; deux « à vérifier » (pages 53
+et 56) ; les suites exactes de la page 58 ; « un calcul commode » (page 85) et
+« si nous admettons que $G$ est d'ordre $120$ » (page 87), tous deux exacts ;
+la proposition « une représentation régulière est fidèle » (page 109), dont la
+démonstration s'interrompt ; le programme de classification esquissé en marge
+de la page 111 ; les questions (25) à (29) des pages 117 et 118.
+
+\pagerange{1}{25}
+\section*{I. Les $n$-polyèdres réguliers en coordonnées affines universelles (pages 1 à 25)}
+
+La chemise de la page 1 porte « $n$-polyèdres et $n$-hyperpolyèdres » ; celle de
+la page 2, « $n$-polyèdres réguliers en coordonnées affines universelles
+(vieilles rédactions) » et « (23 p) » : ce sont les pages 3 à 25.
+
+\pagerange{3}{5}
+\subsection*{Le polyèdre régulier universel (pages 3 à 5)}
+
+Soit $R$ une $n$-carte \emph{régulière} : un $\mathfrak{G}_n$-ensemble transitif
+dont le stabilisateur $N$ d'un repère $r$ est distingué dans $\mathfrak{G}_n$ ---
+il est alors le même pour tous les repères --- ; le groupe $\Gamma =
+\mathfrak{G}_n / N$ opère simplement transitivement sur $R$\footnote{La page
+appelle $H$ ce stabilisateur ; elle réemploie la lettre $H$ à la page 4 pour
+une partie de $\{0, \dots, n\}$. On l'appelle ici $N$, et $J$ la partie.}. On
+suppose que pour toute partie $I \subset \{0, \dots, n\}$ sans deux entiers
+consécutifs, le produit $\sigma_I = \prod_{i \in I} \sigma_i$ est $\neq 1$ dans
+$\Gamma$, et l'on pose $p_i = $ ordre de $\sigma_{i-1}\sigma_i$, avec $3 \leq p_i
+\leq \infty$ (« les $p_i$ peuvent être infinis ! »). On se place dans le cas
+où $\Gamma$ n'a pas d'autres relations que celles qu'impose ce qui précède :
+\[
+\Gamma = \Gamma_{p_*} = \bigl\langle \sigma_0, \dots, \sigma_n \bigm|
+\sigma_i^2,\ (\sigma_i\sigma_j)^2 \ (|i-j| \geq 2),\ (\sigma_{i-1}\sigma_i)^{p_i}
+\bigr\rangle .
+\]
+C'est le \emph{groupe de Coxeter} de type $[p_1, \dots, p_n]$, à diagramme
+linéaire\footnote{Le nom n'est pas sur la page, ni celui de « symbole de
+Schläfli » ; la page écrit $p_* = (p_1, \dots, p_n) \in ([3, +\infty] \cap
+\mathbf{N})^n$.}. Dans un groupe de Coxeter, un produit de générateurs
+distincts n'est jamais trivial, de sorte que les conditions $\sigma_I \neq 1$
+sont satisfaites, comme l'affirme la page 4. Toutes les cartes $R$ de ce type
+sont isomorphes, et canoniquement isomorphes une fois choisi un repère : $R
+\simeq \Gamma_{p_*}$, le repère étant l'élément neutre\footnote{La page écrit
+$\underline{R}_{p_*} = \mathfrak{G}_n / \Gamma_{p_*}$, ce qui n'a pas de sens
+($\Gamma_{p_*}$ est un quotient de $\mathfrak{G}_n$, non un sous-groupe) ; on lit
+$\mathfrak{G}_n / N$, qui est $\Gamma_{p_*}$ comme ensemble.}.
+
+Pour $J \subset \{0, \dots, n\}$, soit $\mathfrak{G}_J$ le sous-groupe engendré
+par les $\sigma_i$, $i \notin J$, et $D_J = R / \mathfrak{G}_J$ l'ensemble des
+\emph{drapeaux de type $J$} ; $J \subset K$ entraîne $\mathfrak{G}_K \subset
+\mathfrak{G}_J$, d'où $D_K \to D_J$, et $D_i = D_{\{i\}}$ est l'ensemble des
+$i$-facettes. La page 5 affirme, « sauf erreur », que la carte ainsi définie
+est une \emph{géométrie d'incidence} dont $D_i$ est l'ensemble des facettes de
+dimension $i$, c'est-à-dire un polyèdre combinatoire régulier. C'est exact :
+un groupe de Coxeter linéaire vérifie la « propriété d'intersection »
+$\mathfrak{G}_J \cap \mathfrak{G}_K = \mathfrak{G}_{J \cup K}$ (dans $\Gamma$),
+et $R$ est l'ensemble des drapeaux du \emph{polytope régulier universel}
+$\{p_1, \dots, p_n\}$, dont tout polytope régulier de ce type est un
+quotient\footnote{Propriété d'intersection et polytope universel : Tits pour
+les groupes de Coxeter, McMullen et Schulte, \emph{Abstract Regular
+Polytopes} (2002), pour la théorie des polytopes abstraits ; cité de mémoire.
+La condition $p_i \geq 3$ écarte les cas dégénérés ; la page 56 y revient.}.
+
+\pagerange{5}{6}
+\subsection*{Réalisations affines régulières (pages 5 et 6)}
+
+Soit $k$ un anneau. Une \emph{réalisation affine régulière} de $\Pi$ (le
+polyèdre défini par $R$) est la donnée
+\begin{enumerate}
+  \item[a)] d'un espace affine $E$ sur $\operatorname{Spec} k$ : un torseur
+    sous un $k$-module localement libre $V$ de rang $n+1$ ;
+  \item[b)] d'applications $\varphi_i$ de $D_i$ dans l'ensemble des
+    sous-espaces affines de dimension relative $i$ de $E$ ($0 \leq i \leq n$),
+    qui respectent l'incidence ;
+\end{enumerate}
+telle que pour tout $g \in \operatorname{Aut}(\Pi)$ il existe un unique
+automorphisme affine $\bar g$ de $E$ avec $\bar g \circ \varphi_i = \varphi_i
+\circ g$ pour tout $i$ --- « cette unicité reste vraie fibre par
+fibre »\footnote{Un troisième alinéa, « c) d'un homomorphisme de groupes
+$\operatorname{Aut}(\Pi) \to \mathrm{Aut\,aff}(E)$ compatible avec\ldots »,
+est biffé et remplacé par cette condition. La fin de la phrase qui annonce la
+définition (« sur un anneau \ldots\ comme le \ldots ») n'est pas lue.}.
+
+Il revient au même (page 6, « vérifier ») de se donner une application
+$\Gamma$-équivariante $\varphi_R : R \to \operatorname{Drap}_n(E)$ dans les
+drapeaux affines maximaux, et un homomorphisme $\varphi_\Gamma : \Gamma \to
+\operatorname{Aff}(E)$ compatible, les sommets des drapeaux images engendrant
+affinement $E$ --- ce qui rend $\varphi_\Gamma$ unique. Un repère origine $r$
+étant fixé, il suffit de se donner $\varphi_\Gamma$ et le drapeau
+$\varphi_R(r) = (f_0 \subset f_1 \subset \cdots \subset f_n)$, avec pour
+seules conditions
+\begin{enumerate}
+  \item[a)] $\sigma_j f_i = f_i$ si $j \neq i$ ;
+  \item[b)] les transformés $g f_0$, $g \in \Gamma$, engendrent affinement $E$
+    fibre par fibre.
+\end{enumerate}
+En effet, a) dit que le stabilisateur $\mathfrak{G}_{\{i\}}$ de la facette
+$i$-dimensionnelle de $r$ fixe $f_i$, de sorte que $\varphi_i(g\,\mathfrak{G}_{\{i\}})
+= g f_i$ est bien défini, et b) donne l'unicité\footnote{La page identifie
+$\operatorname{Aut}(\Pi)$ à $\Gamma$ (« $\mathfrak{G} = \Gamma$ ») ; cette
+identification dépend du repère choisi et renverse l'ordre des produits, comme
+le remarque la lecture du dossier 86 (page 14) et comme on le verra page 117.
+La marge gauche de la page 6 porte une addition de quatre lignes, non lue.}.
+
+\pagerange{7}{9}
+\subsection*{Le repère des sommets (pages 7 à 9)}
+
+\textbf{Proposition} (pages 7 et 8). \emph{Soit $s_0 = f_0$ et $s_{i+1} =
+\sigma_i s_i$ ($0 \leq i \leq n$). Alors $(s_0, \dots, s_{n+1})$ est un repère
+affine de $E$ fibre par fibre, $f_i$ est l'enveloppe affine de $s_0, \dots,
+s_i$, et $\sigma_k s_i = s_i$ pour $0 \leq i < k \leq n$.}
+
+On raisonne par récurrence sur $i$. Supposons $s_0, \dots, s_i$ affinement
+libres, $f_i = \operatorname{Env}(s_0, \dots, s_i)$ et $\sigma_k s_j = s_j$ pour
+$j \leq i < k$ --- c'est vrai pour $i = 0$, puisque les $\sigma_k$, $k \geq 1$,
+fixent $f_0$. Comme $s_i \in f_i \subset f_{i+1}$ et que $\sigma_i$ fixe
+$f_{i+1}$, on a $s_{i+1} = \sigma_i s_i \in f_{i+1}$ ; il suffit de voir que
+$s_{i+1} \notin f_i$. Sinon, $\sigma_i f_i = \operatorname{Env}(\sigma_i f_{i-1},
+\sigma_i s_i) = \operatorname{Env}(f_{i-1}, s_{i+1}) \subset f_i$, donc $\sigma_i
+f_i = f_i$ ; comme les autres $\sigma_j$ fixent $f_i$ par a), $f_i$ serait
+stable par $\Gamma$ et contiendrait l'orbite de $s_0$, contre b) (on a $f_i
+\neq E$ pour $i \leq n$). Enfin, pour $k > i + 1$, $\sigma_k$ commute à
+$\sigma_i$ et $\sigma_k s_{i+1} = \sigma_i \sigma_k s_i = \sigma_i s_i =
+s_{i+1}$.
+
+Il en découle $\sigma_i s_i = s_{i+1}$, $\sigma_i s_{i+1} = s_i$ (car
+$\sigma_i^2 = 1$), et, pour $j \geq i + 2$, $\sigma_i s_j \in f_j \smallsetminus
+f_{j-1}$ : $\sigma_i$ fixe $f_j$ et $f_{j-1}$, et $s_j \notin f_{j-1}$. Les
+relations $\sigma_j f_i = f_i$ pour $j > i$ en résultent formellement ; pour
+$j < i$ elles restent une condition, que la page note sans la
+traiter\footnote{Dans le tableau de la page 9, $\sigma_1 s_4$ est dit dans $f_4
+\smallsetminus f_2$ ; c'est $f_4 \smallsetminus f_3$, comme le schéma des autres
+lignes. L'exposant de $\lambda_3^{0\,3}$ est lu avec doute.}.
+
+\pagerange{9}{13}
+\subsection*{Les paramètres (pages 9 à 13)}
+
+Par les relations de commutation, les $\sigma_i$ sont déterminés par les
+« valeurs critiques »
+\[
+\sigma_i s_{i+2} = s_0 + \lambda_{i1} e_1 + \cdots + \lambda_{i,i+2}\, e_{i+2}
+\qquad (0 \leq i \leq n-1) ,
+\]
+qui forment une matrice à $n$ lignes et $n + 1$ colonnes, triangulaire, de
+$2 + 3 + \cdots + (n+1) = n(n+3)/2$ coefficients. En effet, pour $j \geq i + 3$,
+$s_j = \sigma_{j-1} \cdots \sigma_{i+2}\, s_{i+2}$, les $\sigma_k$ avec $k \geq
+i + 2$ commutent à $\sigma_i$ et fixent $s_0, \dots, s_{i+1}$, d'où
+\[
+\sigma_i s_j = s_0 + \lambda_{i1} e_1 + \cdots + \lambda_{i,i+1} e_{i+1} +
+\lambda_{i,i+2}\, e_j \qquad (j \geq i + 2) .
+\]
+Sur l'espace des translations $V$, cela donne, pour $1 \leq i \leq n-1$,
+\[
+\sigma_i e_j =
+\begin{cases}
+e_j & j < i \\
+e_{i+1} & j = i \\
+e_i & j = i + 1 \\
+\lambda_{i1} e_1 + \cdots + \lambda_{i,i+1} e_{i+1} + \lambda_{i,i+2}\, e_j & j \geq i + 2 ,
+\end{cases}
+\]
+\[
+\sigma_0 e_j =
+\begin{cases}
+-e_1 & j = 1 \\
+(\lambda_{01} - 1) e_1 + \lambda_{02}\, e_j & j \geq 2 ,
+\end{cases}
+\]
+et $\sigma_n$ échange $s_n$ et $s_{n+1}$ en fixant les autres sommets. Les
+déterminants sont $\det(\sigma_i|_V) = -(\lambda_{i,i+2})^{n-i}$ et
+$\det(\sigma_0|_V) = -(\lambda_{02})^n$. Les conditions $\sigma_i^2 = 1$
+s'écrivent
+\[
+\sigma_0^2 = 1 \iff (1 - \lambda_{01})(1 - \lambda_{02}) = 0,\ \lambda_{02}^2 = 1 ;
+\]
+\[
+\sigma_i^2 = 1 \iff
+\lambda_{ik}(1 + \lambda_{i,i+2}) = 0\ (k < i),\quad
+\lambda_{i,i+1} + \lambda_{i,i+2}\lambda_{ii} = \lambda_{ii} + \lambda_{i,i+2}
+\lambda_{i,i+1} = 0,\quad \lambda_{i,i+2}^2 = 1 ,
+\]
+et $\sigma_n^2 = 1$ toujours\footnote{La page 11 encadre déjà une forme réduite,
+« $\sigma_i s_j = s_0 + \lambda_i(e_i + e_{i+1}) + e_j$ ». Le signe est faux :
+avec $\lambda_{i,i+2} = 1$, l'involution exige $\lambda_{ii} = -\lambda_{i,i+1}$,
+et la forme est $s_0 + \lambda_i(e_{i+1} - e_i) + e_j$, comme aux pages 18 et
+25.}. Ce sont des calculs directs, qu'on a refaits.
+
+\pagerange{13}{18}
+\subsection*{Exiger des réflexions (pages 13 à 18)}
+
+Ici intervient une exigence qui n'est pas dans la définition : chaque
+$\sigma_i$ doit être une \emph{réflexion}\footnote{« Exprimons que $\sigma_0$ est
+une réflexion », page 13 ; « Exprimons que $\sigma_i$ est une réflexion »,
+page 15. Les conditions $\sigma_i^2 = 1$ seules laissent d'autres solutions :
+$\lambda_{i,i+2} = -1$ donne, en caractéristique $\neq 2$, une involution dont
+les points fixes forment un sous-espace de codimension $n - i + 1$. Pour un
+polyèdre convexe réel, les générateurs sont des réflexions ; c'est sans doute
+ce qui guide le choix.}. En coordonnées,
+\[
+\sigma_0(x) = \bigl(1 - x_1 + (\lambda_{01} - 1)\Sigma_0,\ \lambda_{02} x_2,\
+\dots,\ \lambda_{02} x_{n+1}\bigr),
+\]
+dont les points fixes sont $2x_1 + (1 - \lambda_{01})\Sigma_0 = 1$,
+$(\lambda_{02} - 1)x_j = 0$ ($j \geq 2$). Si $\lambda_{02} - 1$ est inversible,
+c'est un point (ou le vide en caractéristique $2$), non un hyperplan ; sur un
+corps, $\lambda_{02}^2 = 1$ force donc $\lambda_{02} = 1$. On pose
+\[
+\lambda_{02} = 1, \qquad \lambda_{01} = 1 + \alpha_0 ,
+\]
+et $\alpha_0$ est « l'invariant modulaire du polygone régulier induit par $\Pi$
+dans $f_2$ ». De même, pour $1 \leq i \leq n-1$,
+\[
+\sigma_i(x) = \bigl(x_1 + \lambda_{i1}\Sigma_i,\ \dots,\ x_{i-1} +
+\lambda_{i,i-1}\Sigma_i,\ x_{i+1} + \lambda_{ii}\Sigma_i,\ x_i +
+\lambda_{i,i+1}\Sigma_i,\ \lambda_{i,i+2} x_{i+2},\ \dots,\ \lambda_{i,i+2}
+x_{n+1}\bigr) .
+\]
+Si $\lambda_{i,i+2} = -1 \neq 1$, les points fixes vérifient $x_{i+2} = \cdots =
+x_{n+1} = 0$ et $x_i = x_{i+1}$ : codimension $n - i + 1 \geq 2$. Donc
+$\lambda_{i,i+2} = 1$. Si alors l'un des $\lambda_{ik}$, $k < i$, n'est pas nul,
+les points fixes vérifient $\Sigma_i = 0$ et $x_i = x_{i+1}$ : codimension $2$.
+Donc $\lambda_{ik} = 0$ pour $k < i$, et il reste $\lambda_{ii}\Sigma_i = x_i -
+x_{i+1} = -\lambda_{i,i+1}\Sigma_i$, qui est un hyperplan si et seulement si
+$\lambda_{ii} + \lambda_{i,i+1} = 0$ --- c'est aussi ce que demande $\sigma_i^2
+= 1$. On pose $\lambda_{i,i+1} = 1 + \alpha_i$. Sur un anneau quelconque, la
+même conclusion vaut dès qu'on demande que le lieu fixe soit un hyperplan
+relatif, défini par une seule équation de partie linéaire unimodulaire : chaque
+autre équation doit en être multiple, et la comparaison des coefficients de
+$x_1$ (pour $\sigma_0$) ou de $x_i$ (pour $\sigma_i$) donne $\lambda_{02} = 1$,
+$\lambda_{ik} = 0$, $\lambda_{i,i+2} = 1$ et $\lambda_{ii} = -\lambda_{i,i+1}$
+\footnote{La page traite les anneaux autrement : « ces résultats marchent
+aussi sur un anneau réduit » ; sur un anneau quelconque elle pose
+$\lambda_{i,i+2} = 1 + \nu$, $\nu$ nilpotent, distingue la caractéristique
+résiduelle $\neq 2$ et $= 2$ (système II, page 19), et conclut « manifestement »
+pour le second cas. L'argument par comparaison des coefficients est de
+l'édition. Une ligne de la page 18 porte $\lambda_{i,i+1} + \lambda_{i,i+1}$,
+pour $\lambda_{ii} + \lambda_{i,i+1}$. Pour $\sigma_0$, si la caractéristique
+est $2$ et $\alpha_0 = 0$, l'équation $2x_1 - \alpha_0\Sigma_0 = 1$ est vide :
+$\sigma_0$ est la translation de vecteur $e_1$, et son hyperplan fixe est
+l'hyperplan à l'infini (« l'hyperplan : l'infini »).}.
+
+\textbf{Forme normale} (pages 15 et 18). \emph{Une réalisation affine régulière
+de $\Pi$ dont les générateurs sont des réflexions s'écrit, dans le repère des
+sommets,}
+\[
+\begin{aligned}
+\sigma_0(x) &= \bigl(1 - x_1 + \alpha_0\Sigma_0,\ x_2,\ \dots,\ x_{n+1}\bigr), \\
+\sigma_i(x) &= \bigl(x_1, \dots, x_{i-1},\ x_{i+1} - (1 + \alpha_i)\Sigma_i,\
+x_i + (1 + \alpha_i)\Sigma_i,\ x_{i+2}, \dots, x_{n+1}\bigr) \quad (1 \leq i
+\leq n-1), \\
+\sigma_n(x) &= \bigl(x_1, \dots, x_{n-1},\ x_{n+1},\ x_n\bigr),
+\end{aligned}
+\]
+\emph{de miroirs}
+\[
+H_0 : 2x_1 - \alpha_0\Sigma_0 = 1, \qquad
+H_i : x_i - x_{i+1} + (1 + \alpha_i)\Sigma_i = 0, \qquad
+H_n : x_n = x_{n+1} .
+\]
+\emph{Elle dépend de $n$ paramètres $\alpha_0, \dots, \alpha_{n-1}$.}\footnote{La
+page écrit l'équation de $H_i$ avec $x_{n+2}$, pour $x_{n+1}$. Le signe devant
+$\alpha_0$ dans $H_0$, page 15, est lu avec doute ; le calcul donne $-$.}
+
+\pagerange{19}{22}
+\subsection*{Les rotations élémentaires, et une question (pages 19 à 22)}
+
+\emph{Relations.} Inversement, les $\sigma_i$ de la forme normale vérifient les
+relations de $\mathfrak{G}_n$ quels que soient les $\alpha_i$. Ce sont des
+involutions, et la page 19 observe que $\sigma_0$ ne change que la première
+coordonnée et $\sigma_i$ que la $i$-ième et la $(i+1)$-ième, ce qui
+« implique » que $\sigma_i$ et $\sigma_j$ commutent pour $j \geq i + 2$. Il faut
+y ajouter que $\sigma_j$ conserve la somme $x_j + x_{j+1}$, donc $\Sigma_i$ et
+$\Sigma_0$, dont dépend $\sigma_i$\footnote{L'ajout est de l'édition ; on a
+vérifié les relations sur machine pour $n \leq 4$.}.
+
+\emph{Les rotations.} La page calcule $\sigma_0\sigma_1(x) = \bigl(1 + \alpha_0
+x_1 - x_2 + (1 + \alpha_1 + 2\alpha_0 + \alpha_0\alpha_1)\Sigma_1,\ x_1 + (1 +
+\alpha_1)\Sigma_1,\ x_3, \dots\bigr)$, écrit $(\sigma_0\sigma_1)^p = (F_p, G_p,
+x_3, \dots)$ et s'arrête sur « Donc $(\sigma_0\sigma_1)^p = \mathrm{id} \iff$ ».
+La page 20 reprend la question par les quotients successifs du drapeau :
+$\sigma_i$ est l'identité sur $f_{i-1}$ et sur $E / f_{i+1}$, et échange deux
+coordonnées sur $f_{i+1} / f_{i-1}$ ; pour $\sigma_i\sigma_{i+1}$ sur $f_{i+2} /
+f_{i-1}$ et pour $\sigma_0\sigma_1$ sur $f_2$, la page laisse le membre de droite
+en blanc. La page 22 calcule $\pi = \sigma_0\sigma_1$, $\pi^2$, $\pi^3$ sur
+$f_2$ et trouve, pour un triangle, $\alpha_0 = -1$. Voici la réponse
+complète, qui est de l'édition.
+
+\textbf{Proposition.} \emph{La partie linéaire de $\sigma_{i-1}\sigma_i$ ($1 \leq i
+\leq n$) a pour polynôme caractéristique}
+\[
+(t - 1)^{n-1}\,(t^2 - \alpha_{i-1} t + 1) .
+\]
+\emph{Sur un corps $k$, si $3 \leq p_i < \infty$ et si $p_i$ est inversible dans
+$k$, $\sigma_{i-1}\sigma_i$ est d'ordre exactement $p_i$ si et seulement si
+$\alpha_{i-1} = \zeta + \zeta^{-1}$ avec $\zeta$ racine primitive $p_i$-ième de
+l'unité (dans $k$ ou dans une extension quadratique), c'est-à-dire si
+$\alpha_{i-1}$ est racine de $\Psi_{p_i}$.}
+
+Sur $V(f_{i+1}) / V(f_{i-2})$, de base les images de $e_{i-1}, e_i, e_{i+1}$,
+$\sigma_{i-1}\sigma_i$ envoie $e_{i-1} \mapsto e_i$, $e_i \mapsto -(1 +
+\alpha)e_{i-1} + (1 + \alpha)e_i + e_{i+1}$, $e_{i+1} \mapsto e_{i-1}$ ($\alpha =
+\alpha_{i-1}$), de polynôme caractéristique $(t - 1)(t^2 - \alpha t + 1)$ ; il est
+l'identité sur $V(f_{i-2})$ et sur $V / V(f_{i+1})$ (pour $i = 1$ : la matrice
+$\bigl(\begin{smallmatrix} \alpha_0 & -1 \\ 1 & 0 \end{smallmatrix}\bigr)$ sur
+$\langle e_1, e_2 \rangle$). Comme $\sigma_{i-1}\sigma_i - 1$ est de rang $\leq
+2$, la valeur propre $1$ a un sous-espace propre de dimension $\geq n - 1$ ; si
+$\alpha \neq \pm 2$, les racines $\zeta^{\pm 1}$ sont distinctes et $\neq 1$,
+la partie linéaire est diagonalisable, et son ordre est celui de $\zeta$. Pour
+$i \geq 2$, $\sigma_{i-1}\sigma_i$ fixe $s_0$ ; pour $i = 1$, il a un point fixe
+dans $f_2$, parce que $1$ n'est pas valeur propre sur $\langle e_1, e_2 \rangle$.
+Si l'ordre est $p_i$, premier à la caractéristique, la partie linéaire est
+semi-simple et ses valeurs propres sont des racines $p_i$-ièmes de l'unité ;
+$\zeta = \pm 1$ donnerait un ordre $\leq 2$\footnote{Machine : le polynôme
+caractéristique pour $n = 2, 3, 4$ et tout $i$. L'énoncé pour $n = 2$ est celui
+de la page 67, « $\rho_s^p = \mathrm{id} \iff F_p(\alpha) = 0$ », sans
+démonstration.}.
+
+Ainsi, \emph{à choix du repère près, les réalisations affines régulières par
+réflexions du polytope $\{p_1, \dots, p_n\}$ sur un corps où les $p_i$ sont
+inversibles correspondent aux suites $(\alpha_0, \dots, \alpha_{n-1})$ telles
+que $\Psi_{p_i}(\alpha_{i-1}) = 0$.} Sur les réels, le choix $\alpha_{i-1} =
+2\cos(2\pi/p_i)$ donne le polytope convexe ; les autres racines, $2\cos(2\pi
+k/p_i)$, donnent les polytopes étoilés (page 69). Pour $p_i = \infty$, la page 71
+demande $\alpha_{i-1} = 2$ : la rotation est alors unipotente. La partie
+linéaire est une représentation du groupe de Coxeter engendrée par des
+réflexions ; pour un groupe fini, c'est, à un changement de base près, la
+représentation géométrique de Tits ou l'une de ses conjuguées
+galoisiennes\footnote{Le rapprochement est le nôtre ; dans la représentation de
+Tits, la forme invariante a pour coefficients $-\cos(\pi / m_{ij})$, et l'on a
+$\alpha + 2 = 4\cos^2(\pi / p)$ pour $\alpha = 2\cos(2\pi / p)$.}.
+
+\textbf{Une question} (page 21). Supposons $k$ un corps et soit $G$ l'image de
+$\Gamma$ dans $\operatorname{Aut}_{\mathrm{aff}}(E)$. La représentation de $G$ est fidèle,
+et $\varphi_R : R \to \operatorname{Drap}(E)$ injective. Les applications $D_i(\Pi)
+\to \operatorname{Grass}_i^{\mathrm{aff}}(E)$ le sont-elles aussi ? Autrement
+dit, si $g, g' \in G$ vérifient $g f_i = g' f_i$, $g^{-1} g'$ est-il dans le
+sous-groupe engendré par les $\sigma_j$, $j \neq i$ ? « Ce n'est pas évident du
+tout », et la page soupçonne un lien avec des résultats sur les longueurs dans
+la réalisation riemannienne\footnote{La fin de la phrase est en partie
+incertaine (« des \emph{Longueurs} \emph{associés} à la réal.\
+\emph{riemannienne} »). Deux lignes biffées ne se lisent que par morceaux. Le
+$\Pi$ de la page est une « $n$-carte », avec un mot incertain.}. La question
+n'est pas tranchée ; pour l'icosaèdre, la réponse est oui en toute
+caractéristique (pages 93 et 94, et ci-dessous).
+
+\pagerange{23}{25}
+\subsection*{La forme normale, en coordonnées barycentriques (pages 23 à 25)}
+
+Les pages 23 à 25 récrivent la forme normale de façon homogène. Soit $\ell_i$
+la forme affine
+\[
+\ell_0 = 1 - 2x_1 + \alpha_0\Sigma_0, \qquad
+\ell_i = x_i - x_{i+1} + (1 + \alpha_i)\Sigma_i \quad (1 \leq i \leq n-1),
+\qquad \ell_n = x_n - x_{n+1} ,
+\]
+c'est-à-dire, en coordonnées barycentriques $(t_0, \dots, t_{n+1})$ relatives à
+$(s_0, \dots, s_{n+1})$, $\ell_i = t_i - t_{i+1} + (1 + \alpha_i)(t_{i+2} +
+\cdots + t_{n+1})$ pour tout $i$ (la somme est vide pour $i = n$). Alors
+\[
+\sigma_i(P) = P + \ell_i(P)\,(s_{i+1} - s_i) \qquad (0 \leq i \leq n) ,
+\]
+et, comme $\ell_i(s_{i+1}) - \ell_i(s_i) = -2$, $\sigma_i$ est une involution
+de miroir $H_i = \{\ell_i = 0\}$ et de « centre » $\delta_i$, le point à
+l'infini de la direction $s_{i+1} - s_i$ : une réflexion projective, au sens
+de la géométrie projective classique. La page écrit
+$\sigma_i - \mathrm{id} = \ell_i \otimes (s_{i+1} - s_i)$ en termes de la base
+duale $(s'_j)$, et, en homogénéisant par une variable $z$, $\bar\sigma_0(\bar
+x) = \bar x + [e'_0 - 2e'_1 + \alpha_0(e'_2 + \cdots + e'_{n+1})] \otimes
+e_1$\footnote{La page 25 écrit $\sigma_0 s_i = -(1 + \alpha_i)s_0 + (1 +
+\alpha_i)s_1 + s_i$ ; l'indice de $\alpha$ est $0$, comme le donne le tableau
+encadré qui suit, valable pour $0 \leq i \leq n$ : $\sigma_i s_j = -(1 +
+\alpha_i)s_i + (1 + \alpha_i)s_{i+1} + s_j$ pour $j \geq i + 2$. Le coefficient
+$2$ de $e'_1$, page 23, est une surcharge lue d'après $H_0$.}.
+La page 23 commence aussi d'écrire une forme quadratique générale en $x_1,
+\dots, x_{n+1}$, sous le titre « Invariants ? », et la biffe : la question est
+reprise, pour $n = 2$, à la page 67.
+
+\pagerange{28}{36}
+\section*{II. Les $n$-quasi-polyèdres (pages 28 à 36)}
+
+La chemise de la page 28 porte « $n$-quasi-polyèdres (vieilles rédactions) ».
+On abandonne les relations $\sigma_i^2 = 1$.
+
+\pagerange{29}{29}
+\subsection*{Le repère, sans involutions (page 29)}
+
+Soient $\sigma_0, \dots, \sigma_n \in \operatorname{Aff}(E)$, $E$ affine de rang
+$n+1$, avec $\sigma_i\sigma_j = \sigma_j\sigma_i$ pour $j \geq i + 2$, et un
+drapeau $E_0 = \{s_0\} \subset E_1 \subset \cdots \subset E_n$ tel que $\sigma_i
+E_j = E_j$ pour $j \neq i$ et $\sigma_i E_i \neq E_i$. On pose $s_{i+1} =
+\sigma_i s_i$.
+
+\textbf{Proposition} (page 29). \emph{$(s_0, \dots, s_{n+1})$ est un repère
+affine de $E$, $E_i = \operatorname{Env}(s_0, \dots, s_i)$ et $\sigma_k s_i = s_i$
+pour $0 \leq i < k \leq n$.}
+
+La démonstration est celle de la page 7, l'hypothèse $\sigma_{i-1}E_{i-1} \neq
+E_{i-1}$ remplaçant la génération par l'orbite de $s_0$ : si $s_i =
+\sigma_{i-1}s_{i-1}$ était dans $E_{i-1}$, on aurait $\sigma_{i-1}E_{i-1} \subset
+E_{i-1}$, donc l'égalité\footnote{La page lit l'enveloppe affine « Env »,
+sans certitude sur les dernières lettres. Ici $E$ est sur un corps, ou fibre
+par fibre.}.
+
+\pagerange{30}{33}
+\subsection*{Les $2n + 1$ paramètres (pages 30 à 33)}
+
+Il suffit de connaître $u_i = \sigma_i s_{i+1} = \sigma_i^2 s_i \in E_{i+1}$ et
+$v_i = \sigma_i s_{i+2} \in E_{i+2}$, puisque $\sigma_i s_j = \sigma_{j-1}\cdots
+\sigma_{i+2}(v_i)$ pour $j > i + 2$. Avec $u_i = s_0 + \sum_{k \leq i+1}
+u_{ik}e_k$ et $v_i = s_0 + \sum_{k \leq i+2} v_{ik}e_k$,
+\[
+\sigma_i s_j = s_0 + \sum_{k \leq i+1} v_{ik}e_k + v_{i,i+2}\,e_j \quad (j \geq i
++ 2),
+\]
+et l'on écrit les matrices. Pour $\sigma_0$ :
+\[
+\sigma_0(x) = \bigl(1 + (u_{01} - 1)x_1 + (v_{01} - 1)\Sigma_0,\ v_{02}x_2,\
+\dots,\ v_{02}x_{n+1}\bigr),
+\]
+dont le lieu fixe est un hyperplan (projectif) si et seulement si $v_{02} =
+1$\footnote{Sans l'involution, « réflexion projective » veut dire ici : une
+transformation qui fixe point par point un hyperplan --- une homologie ou une
+élation, dirait-on en géométrie projective classique. Le mot de la page est
+« réflexion projective ».} ; on pose $u_{01} = \lambda_0$, $v_{01} = \mu_0$.
+Pour $1 \leq i \leq n - 1$,
+\[
+\sigma_i(x) = \bigl(x_1 + u_{i1}x_{i+1} + v_{i1}\Sigma_i,\ \dots,\ u_{ii}x_{i+1} +
+v_{ii}\Sigma_i,\ x_i + u_{i,i+1}x_{i+1} + v_{i,i+1}\Sigma_i,\
+v_{i,i+2}x_{i+2},\ \dots\bigr),
+\]
+et le lieu fixe est un hyperplan si et seulement si les autres équations sont
+conséquences de la $i$-ième, soit
+\[
+u_{ii} + u_{i,i+1} = 1,\quad v_{ii} + v_{i,i+1} = 0,\quad v_{i,i+2} = 1,\quad
+u_{ik} = v_{ik} = 0\ (k < i) .
+\]
+Avec $\lambda_i = u_{ii}$, $\mu_i = v_{ii}$ :
+\[
+\sigma_i(x) = \bigl(x_1, \dots, x_{i-1},\ \lambda_i x_{i+1} + \mu_i\Sigma_i,\
+x_i + (1 - \lambda_i)x_{i+1} - \mu_i\Sigma_i,\ x_{i+2}, \dots, x_{n+1}\bigr) ;
+\]
+$\sigma_n$ n'a que $\lambda_n$ ($\Sigma_n = 0$). Le cas général a donc $2n + 1$
+paramètres, $\lambda_0, \dots, \lambda_n$ et $\mu_0, \dots, \mu_{n-1}$. Enfin
+\[
+\sigma_i^2 = \mathrm{id} \iff \lambda_i = 1 \ (i \geq 1), \qquad
+\sigma_0^2 = \mathrm{id} \iff \lambda_0 = 0 ,
+\]
+et l'on retrouve le cas polyédral, à $n$ paramètres $\mu_i$\footnote{Le calcul
+de $\sigma_i^2$ de la page 33 omet le terme $(1 - \lambda_i)\mu_i\Sigma_i$ de
+$X_i$ et donne à $x_{i+1}$, dans $X_{i+1}$, le coefficient $1$ au lieu de
+$\lambda_i^2 - \lambda_i + 1$ ; la conclusion « sss $\lambda_i = 1$ » n'en est pas
+affectée. Pour $\sigma_0$, $X_1 = \lambda_0 + (\lambda_0 - 1)^2x_1 +
+\lambda_0(\mu_0 - 1)\Sigma_0$, exact. Dans le cas polyédral, $\mu_0 - 1 =
+\alpha_0$ et $\mu_i = -(1 + \alpha_i)$ ($i \geq 1$) en termes de la page 18.}.
+
+\pagerange{34}{36}
+\subsection*{Les ordres (pages 34 à 36)}
+
+Pour $n = 1$ (un « quasi-polygone » du plan), avec $\eta_0 = \lambda_0 - 1$,
+$\alpha_0 = \mu_0 - 1$ :
+\[
+\sigma_0(x, y) = (1 + \eta_0 x + \alpha_0 y,\ y), \qquad \sigma_1(x, y) =
+\bigl(\lambda_1 y,\ x + (1 - \lambda_1)y\bigr),
+\]
+sur un corps $k$ de caractéristique $p \geq 0$. La partie linéaire de
+$\sigma_0$ a pour valeurs propres $1$ et $\eta_0$ ; ses puissances sont
+$\bigl(\begin{smallmatrix} \eta_0^m & \alpha_0 S_m \\ 0 & 1 \end{smallmatrix}\bigr)$
+avec $S_m = 1 + \eta_0 + \cdots + \eta_0^{m-1}$, et $\sigma_0^m(x, 0) = (S_m +
+\eta_0^m x, 0)$. Donc
+\[
+\sigma_0^m = \mathrm{id} \iff S_m(\eta_0) = 0 ,
+\]
+et l'ordre de $\sigma_0$ est celui de $\eta_0$ dans $k^*$ si $\eta_0 \neq 1$. Si
+$\eta_0 = 1$, $\sigma_0(x, y) = (x + 1 + \alpha_0 y, y)$, de partie linéaire la
+transvection $\bigl(\begin{smallmatrix} 1 & \alpha_0 \\ 0 & 1
+\end{smallmatrix}\bigr)$ : $\sigma_0$ est d'ordre $p$ si $p > 0$, infini si $p =
+0$, quel que soit $\alpha_0$\footnote{La page distingue a) « $1 + \eta_0 +
+\cdots + \eta_0^{n-1} = 0$, i.e.\ $\eta_0^n = 1$ et ($\eta_0 \neq 1$ ou $p \nmid
+n$) » et b) « $\eta_0 = 1$, $\alpha_0 = 0$ \ldots\ et $p \mid n$ ». Les
+divisibilités sont échangées : a) est « ($\eta_0 \neq 1$ et $\eta_0^n = 1$) ou
+($\eta_0 = 1$ et $p \mid n$) », et le cas restant où la partie linéaire est
+l'identité est b) $\eta_0 = 1$, $\alpha_0 = 0$, $p \nmid n$ ; la lecture de la
+parenthèse de a) est d'ailleurs incertaine. Page 35, sous « $\eta_0 = 1$ », la
+page écrit « a) $\alpha_0 = 1$ : $\sigma_0 = \mathrm{id}$, cas impropre » : c'est
+impossible, $\sigma_0$ envoie $s_0$ sur $s_1$ ; la ligne précédente dit
+« d'ordre $1$ sss $\alpha_0 = 0$ », ce qui concerne la partie linéaire.}.
+De même $\sigma_1$ a pour valeurs propres $1$ et $\delta_1 = -\lambda_1$ ; son
+ordre est celui de $\delta_1$ sauf si $\delta_1 = 1$, où $\sigma_1(x, y) = (-y, x
++ 2y)$ est unipotent non trivial, d'ordre infini si $p = 0$, $p$ sinon.
+
+En dimension $n$ (page 36), avec $\eta_i = -\lambda_i$ ($i \geq 1$), la partie
+linéaire de chaque $\sigma_i$ a la valeur propre $1$ avec multiplicité $n$ et
+la valeur propre $\eta_i$ ; $\sigma_i - \mathrm{id}$ étant de rang $1$, elle est
+diagonalisable si $\eta_i \neq 1$, et l'ordre de $\sigma_i$ est alors celui de
+$\eta_i$, comme la page le demande avec un point
+d'interrogation\footnote{La page écrit « $1$ de multiplicité $n - 1$ » ;
+l'espace est de dimension $n + 1$. Elle récrit aussi $\sigma_i$ avec un
+paramètre qu'elle nomme $\alpha_i$, $\mu_i = 1 + \alpha_i$, qui n'est pas celui
+de la page 18 : dans le cas polyédral, le $1 + \alpha_i$ de la page 36 est le
+$-(1 + \alpha_i)$ de la page 18. On n'emploie pas cette lettre ici.}.
+
+\pagerange{38}{47}
+\section*{III. « Étude locale » des $n$-polyèdres et des $n$-cartes (pages 38 à 47)}
+
+La chemise de la page 38 porte « “étude locale” des $n$-polyèdres et des
+$n$-cartes (vieilles rédactions) ».
+
+\pagerange{39}{42}
+\subsection*{Bord, étoile, sections (pages 39 à 42)}
+
+Soit $C$ une $n$-carte. Pour $0 \leq i \leq n$, notons $\mathfrak{G}^{<i} =
+\langle \sigma_0, \dots, \sigma_{i-1} \rangle$ et $\mathfrak{G}^{>i} = \langle
+\sigma_{i+1}, \dots, \sigma_n \rangle$ ; ils commutent, et $D_i = C /
+(\mathfrak{G}^{<i} \times \mathfrak{G}^{>i})$.
+\begin{itemize}
+  \item Sur $C / \mathfrak{G}^{>i} \to D_i$ opère $\mathfrak{G}^{<i} \simeq
+    \mathfrak{G}_{i-1}$, dans les fibres : c'est une $(i-1)$-carte dont les
+    composantes connexes correspondent aux $i$-facettes. La composante de $f_i$
+    est le \emph{bord} $\partial f_i$ ; ses $j$-facettes sont les drapeaux de
+    type $(j, i)$ de composante $f_i$, et plus généralement ses drapeaux de
+    type $(j_1 < \cdots < j_p)$ sont les drapeaux de type $(j_1, \dots, j_p,
+    i)$ de $C$ au-dessus de $f_i$.
+  \item Dualement, sur $C / \mathfrak{G}^{<i} \to D_i$ opère $\mathfrak{G}^{>i}
+    \simeq \mathfrak{G}_{n-i-1}$ : une $(n-i-1)$-carte, l'\emph{étoile}
+    $\delta f_i$, dont les facettes de dimension $j$ sont les drapeaux de type
+    $(i, i + j + 1)$ au-dessus de $f_i$\footnote{La page note $E^{-}(i)$,
+    $E^{+}(i)$, $\Gamma_n^{\pm}(i)$ avec des signes repassés ; telle qu'elle
+    est lue, elle quotiente par le groupe inférieur et fait opérer
+    $\Gamma_n^{+}(i) \simeq \Gamma_{i-1}$, ce que la note de la transcription
+    signale. On suit les définitions : on quotiente par le groupe supérieur, le
+    groupe inférieur opère. La carte est appelée « $n$-quelette », mot lu avec
+    doute.}.
+  \item Plus généralement (pages 40 et 41), pour $0 \leq i$, $i + 2 \leq j \leq
+    n + 1$ (avec les conventions $f_{-1}$, $f_{n+1}$), $C / (\mathfrak{G}^{<i}
+    \times \mathfrak{G}^{>j}) = D_{\{i, i+1, \dots, j\}} \to D_{\{i, j\}}$, sur
+    lequel opère $\langle \sigma_{i+1}, \dots, \sigma_{j-1} \rangle \simeq
+    \mathfrak{G}_{j-i-2}$ : la \emph{section} $\Pi(d_{ij})$ au-dessus d'un
+    drapeau $d_{ij} = (f_i < f_j)$, une $(j - i - 2)$-carte dont les facettes de
+    dimension $h$ sont les drapeaux de type $(i, i + h + 1, j)$. Pour $j = i
+    + 2$, c'est un ensemble à deux éléments sous $\sigma_{i+1}$ quand la carte
+    est un polyèdre ; pour $j = i + 3$, un polygone, de nombre de côtés
+    $\nu(d_{ij}) \in [1, +\infty]$\footnote{Le cas $j = i + 2$ porte deux mots
+    lus « un pas idiot », lecture très incertaine ; on comprend « cas idiot ».
+    Le bord et l'étoile sont les sections $\Pi(d_{-1,i})$ et $\Pi(d_{i,n+1})$,
+    comme le dit la page 41.}.
+\end{itemize}
+Aujourd'hui, ce sont les \emph{sections} $F/G$ d'un polytope abstrait ; le bord
+est la section $f_i/f_{-1}$, l'étoile la « figure de facette » $f_{n+1}/f_i$.
+
+\textbf{Les invariants} (page 42). Ce sont le nombre de côtés des $2$-faces,
+$\nu(\partial f_2)$, ceux des sections $\Pi(d_{k-1,k+2})$ ($1 \leq k \leq n-2$),
+et celui de l'étoile des $(n-2)$-facettes. Pour $\Pi$ régulier, ce sont des
+constantes, et la page affirme qu'elles valent les ordres des
+$\sigma_k\sigma_{k+1}$ --- « vrai tout au moins dans le cas des géométries
+d'incidence »\footnote{La page numérote ces invariants $p_0, \dots, p_{n-1}$ ;
+dans la convention de la page 3, suivie ici, ce sont $p_1, \dots, p_n$. Son
+début de démonstration écrit $(\sigma_0\sigma_1)^p x = g_x x$ avec $g_x \in
+G_n^{+}(2)$.}. La réserve est juste : pour une carte régulière $C = \Gamma$,
+le nombre de côtés de la section est l'ordre de $\sigma_k\sigma_{k+1}$ agissant
+sur l'orbite correspondante, qui est l'ordre dans $\Gamma$ dès que $\langle
+\sigma_k, \sigma_{k+1}\rangle$ rencontre trivialement le stabilisateur ; c'est
+une conséquence de la propriété d'intersection, qui vaut pour les polytopes et
+peut manquer pour une carte quelconque.
+
+\pagerange{43}{45}
+\subsection*{Représentation géométrique (pages 43 à 45)}
+
+Soit $\Pi$ une $n$-carte, $R = \operatorname{Rep}(\Pi)$ son $\mathfrak{G}_n$-ensemble
+de repères. Une \emph{représentation géométrique} de $\Pi$ dans un espace affine
+$E$ sur un corps est une application
+\[
+\varphi_R : R \to \mathrm{Drap\,max}(E)
+\]
+dans l'ensemble des drapeaux $(E_0 \subset E_1 \subset \cdots \subset E_n
+\subset E)$, $E_i$ de rang $i$, telle que $\pi_j \varphi_R(\sigma_i r) = \pi_j
+\varphi_R(r)$ pour $i \neq j$, où $\pi_j$ prend la composante de dimension $j$.
+Par passage au quotient, $\pi_j\varphi_R$ se factorise en $\varphi_j : D_j(\Pi) \to
+\operatorname{Grass}^{\mathrm{aff}}_j(E)$\footnote{Le corps est dit « ordonné »,
+lecture incertaine. La page 44, barrée, est un premier essai, avec un
+diagramme $\varphi_G : G \to \operatorname{Aff}(E)$, $\varphi_R : R \to
+\mathrm{Drap\,max}(E)$, $\varphi_{D_i} : D_i(\Pi) \to
+\operatorname{Grass}_i(E)$, où $R$ est un « $G$-torseur » et $\varphi_R$ un
+« $G$-homomorphisme ». La version de la page 43 n'exige pas de groupe : c'est
+une réalisation, régulière ou non.}.
+
+Lorsque $\Pi$ est un polyèdre (une géométrie d'incidence), se donner $\varphi_R$
+revient à se donner les $\varphi_j$, compatibles à l'incidence. En général, il
+faut tous les
+\[
+\varphi_J : D_J(\Pi) \to \mathrm{Drap\,aff}_J(E), \qquad J \subset \Delta_n
+= \{0, \dots, n\},
+\]
+compatibles aux restrictions pour $J' \subset J$ : un morphisme de « géométries
+de drapeaux » de base $\Delta_n$, de $D(\Pi)$ dans $\mathrm{Drap\,aff}(E)$
+--- et c'est la donnée de $\varphi_R$\footnote{La page écrit le but
+$\mathrm{Drap\,aff}_J(\Pi)$ ; on lit $(E)$. Les géométries de drapeaux
+sont l'objet des pages 15 à 33 du dossier 76.}. En effet, $R = D_{\Delta_n}$,
+et $D_J$ est le quotient de $R$ par $\mathfrak{G}_J$.
+
+\pagerange{46}{47}
+\subsection*{Réalisations induites (pages 46 et 47)}
+
+Soit $f_i \in D_i(\Pi)$, $1 \leq i \leq n$, et $E_i = \varphi_i(f_i)$. Le bord
+$\partial f_i$ a pour ensemble de repères l'image réciproque de $\{f_i\}$ par
+$D_{\{0, \dots, i\}}(\Pi) \to D_i(\Pi)$, et les données de $\varphi$ en
+définissent une réalisation canonique, dite induite, dans $E_i$. « Légèrement
+moins évident » est le cas de l'étoile $\delta f_i$ : ses sommets sont les
+drapeaux $(f_i < f_{i+1})$, qui s'envoient sur des couples $E_i \subset
+E_{i+1}$, et si $V_i$ est l'espace des translations de $E_i$, ces $E_{i+1}$
+correspondent aux droites de $E / V_i$ passant par le point image de $E_i$ ---
+c'est-à-dire aux points de l'espace projectif $\mathbb{P}(V / V_i)$. La page
+s'arrête là\footnote{La première moitié de la page 46 est barrée ; elle
+définissait la carte quotient $R_{ij} = R / (\sigma_0, \dots, \sigma_{i-1},
+\sigma_{j+1}, \dots, \sigma_n)$, avec $\sigma'_0 = \sigma_{i+1}, \dots,
+\sigma'_{j-i-2} = \sigma_{j-1}$. Le mot de liaison en tête de la page 47 n'est
+pas lu ; la phrase finale sur $\mathbb{P}(V / V_i)$ est une conclusion de
+l'édition.} : l'étoile se réalise naturellement non dans un espace affine, mais
+dans un espace projectif --- comme la figure de sommet d'un polyèdre convexe,
+vue depuis le sommet.
+
+\pagerange{49}{59}
+\section*{IV. Les $2$-polyèdres repérés (pages 49 à 59)}
+
+Deux chemises : « 2 -- Polyèdres réguliers. (Vieille rédaction) » (page 49), et
+« (18) 2-Polyèdres repérés en coordonnées universelles (vieille rédaction) »
+(page 50).
+
+\pagerange{51}{53}
+\subsection*{Réalisation géométrique d'un polyèdre combinatoire (pages 51 à 53)}
+
+Soit $X = (\mathrm{S}, \mathrm{A}, \mathrm{F}, \mathrm{R}, \mathrm{R}',
+\mathrm{R}'')$ un polyèdre combinatoire, $\mathrm{R}$ l'ensemble de ses repères,
+et $E$ un espace affine (ou projectif) sur un corps $k$. Une
+\emph{réalisation géométrique} de $X$ est la donnée de $\varphi_S : \mathrm{S} \to
+E$, $\varphi_A : \mathrm{A} \to \operatorname{Dr}(E)$ (droites), $\varphi_F :
+\mathrm{F} \to \operatorname{Pl}(E)$ (plans), compatibles aux incidences, telles
+que
+\begin{enumerate}
+  \item[a)] les deux sommets d'une arête ont des images distinctes, et de même
+    les deux faces qui la bordent ;
+  \item[b)] si $s < f$, les deux arêtes entre $s$ et $f$ ont des images
+    distinctes.
+\end{enumerate}
+Alors l'une quelconque des trois applications détermine les deux autres.
+
+\textbf{Proposition} (pages 51 et 52). \emph{Soit $r_0 = (s_0, a_0, f_0)$ un
+repère, $s_1$ le second sommet de $a_0$, $a_1$ la seconde arête entre $s_0$ et
+$f_0$, $s_2$ son second sommet, $f_1$ la seconde face qui borde $a_0$, $a_2$ la
+seconde arête entre $s_0$ et $f_1$, et $s_3$ son second sommet. Les images de
+$s_0, s_1, s_2, s_3$ sont affinement indépendantes.}
+
+$s_1 \neq s_0$ et $s_2 \neq s_0$ par a) ; $a_1 \neq a_0$ par b), donc $s_2$
+n'est pas sur la droite $a_0$, et $f_0$ est le plan $(s_0, s_1, s_2)$. De même
+$f_1$ est le plan $(s_0, s_1, s_3)$ ; comme $f_1 \neq f_0$ par a), $s_3 \notin
+f_0$. D'où (corollaire) : $a_0 = \operatorname{dr}(s_0, s_1)$, $f_0 =
+\operatorname{pl}(s_0, s_1, s_2)$, et $\varphi_S$ détermine $\varphi_A$,
+$\varphi_F$ ; dualement $a_0 = f_0 \cap f_1$, $s_0 = f_0 \cap f_1 \cap f_2$ ($f_2$
+la seconde face qui borde $a_1$), et $\varphi_F$ détermine les autres ; enfin
+$s_0 = a_0 \cap a_1$, $f_0 = \operatorname{pl}(a_0, a_1)$. Si $E$ est de
+dimension $3$, $\varphi_S(\mathrm{S})$ engendre $E$\footnote{La page conclut
+« $\varphi_S(\mathrm{S})$ engendre aff.\ $E$ » sans dire que $E$ est de
+dimension $3$ ; on l'ajoute. L'énoncé dual (trois plans indépendants) est
+projectif. La page 59, sans texte, redessine la figure de la page 52 :
+le sommet $s_0$, les arêtes $a_0, a_1, a_2$ vers $s_1, s_2, s_3$, les faces
+$f_0, \dots, f_3$.}.
+
+\textbf{Réalisation régulière.} $X$ étant régulier, de groupe $\mathrm{G} =
+\operatorname{Aut}(X)$, la réalisation est \emph{régulière} si pour tout
+$\mathrm{g} \in \mathrm{G}$ il existe $g \in \operatorname{Aut}(E)$ (affine ou
+projectif) avec $g \circ \varphi_S = \varphi_S \circ \mathrm{g}$, et de même pour
+$\varphi_A$, $\varphi_F$ --- l'une de ces relations entraînant les autres. Dans le
+cas affine, $g$ est unique et $\mathrm{g} \mapsto g$ est un
+homomorphisme\footnote{Ou un anti-homomorphisme, selon qu'on fait opérer
+$\mathrm{G}$ à gauche ou à droite sur les repères ; voir la page 117.}. Dans le
+cas projectif, c'est encore vrai pourvu qu'il existe un sommet dont l'image
+n'est dans aucun des quatre plans engendrés par trois des points $s_0, s_1,
+s_2, s_3$, car alors les images contiennent un repère projectif ; l'exception
+est celle où $\mathrm{S} = \{s_0, s_1, s_2, s_3\}$, le tétraèdre, dont les
+automorphismes projectifs fixant les quatre sommets forment un tore (« à
+vérifier »)\footnote{La page écrit « non coplanaire avec trois des quatre
+pts », avec un mot incertain ; la précision sur le tore est de l'édition.}.
+
+\pagerange{53}{55}
+\subsection*{Les données d'une réalisation régulière (pages 53 à 55)}
+
+Un repère $r_0 = (s_0, a_0, f_0)$ étant choisi, $\mathrm{G}$ est engendré par
+$\sigma_0, \sigma_1, \sigma_2$, où $\sigma_0$ change le sommet, $\sigma_1$
+l'arête, $\sigma_2$ la face. Une réalisation régulière équivaut à la donnée de
+$\varphi_G : \mathrm{G} \to \operatorname{Aut}(E)$ --- c'est-à-dire de $\sigma_0,
+\sigma_1, \sigma_2 \in \operatorname{Aut}(E)$ satisfaisant certaines conditions,
+« qu'on explicitera » --- et du drapeau $\varphi_R(r_0) = (s_0, a_0, f_0) \in
+\operatorname{Drap}_{012}(E)$ : comme $\mathrm{R}$ est un $\mathrm{G}$-torseur,
+une application $\mathrm{G}$-équivariante $\varphi_R$ est déterminée par
+$\varphi_R(r_0)$\footnote{La page écrit « $\varphi_R(r_0) \in r_0 = (s_0, a_0,
+f_0)$ », peut-être pour « $= $ ». À la page 54, la deuxième ligne de la
+définition des $\sigma_i$ porte $\sigma_1(a_0) = a_0$ en troisième position ;
+c'est $\sigma_1(f_0) = f_0$.}. La condition pour que $\pi^{(i)}_E \circ
+\varphi_R$ passe au quotient en $\operatorname{Fac}_i(X) \to
+\operatorname{Fac}_i(E)$ ($i = 0, 1, 2$) est que le stabilisateur de la
+$i$-facette de $r_0$ fixe son image :
+\[
+\sigma_0 a_0 = a_0,\ \sigma_0 f_0 = f_0 ; \qquad
+\sigma_1 s_0 = s_0,\ \sigma_1 f_0 = f_0 ; \qquad
+\sigma_2 s_0 = s_0,\ \sigma_2 a_0 = a_0 .
+\]
+C'est la condition a) de la page 6, pour $n = 2$.
+
+\pagerange{56}{56}
+\subsection*{Cartes homogènes (page 56)}
+
+Sous « à vérifier », la page énonce, pour les « cartes homogènes de type $(p,
+q)$ » --- les cartes standards $C_{p,q}$ du dossier 88, $p$ l'ordre des
+sommets, $q$ celui des faces : \emph{$C_{p,q}$ est une géométrie d'incidence si
+et seulement si $p, q \geq 2$, et un polyèdre combinatoire si et seulement si
+$p, q \geq 3$.} Pour $p = 1$, une arête a ses deux extrémités confondues en
+un sommet ; pour $p = 2$, deux arêtes ont les mêmes extrémités, et deux faces se
+touchent le long de deux arêtes, ce que l'axiome de treillis du dossier 86
+(page 2) interdit\footnote{La page écrit d'abord a) « est géométrie
+d'incidence ssi $(p, q) = (1, 2)$ ou $(2, 1)$ » et b) « est polyèdre
+combinatoire ssi $p = 2$ ou $q = 2$ », qui énumèrent les exceptions plutôt
+qu'elles ne caractérisent ; puis, entre crochets, les énoncés qu'on donne. Elle
+n'a pas biffé a) et b). L'explication par le dossier 86 est de l'édition.}.
+
+\pagerange{58}{58}
+\subsection*{Un feuillet isolé : groupes opérant sur un groupoïde (page 58)}
+
+D'une autre encre, sans lien visible avec ce qui l'entoure : $\mathcal{C}$ un
+groupoïde, $G \subset \operatorname{Aut}(\mathcal{C})$ transitif sur les objets,
+$H = G_e$ le stabilisateur d'un objet $e$, $\operatorname{Ob}\mathcal{C} \simeq
+G / H$ ; $\Gamma$ le normalisateur de $G$, $\Gamma^0$ son
+centralisateur\footnote{La page écrit « centralisateur de $\mathcal{C}$ » ; on
+lit « de $G$ ».}, avec $1 \to \Gamma^0 \to \Gamma \to \operatorname{Aut}(G)$ ;
+un élément $\gamma$ de $\Gamma^0$ est connu sur les objets par $\gamma(e)$, d'où
+une flèche $\Gamma^0 \to N(H)/H$, de noyau $\Gamma^1$, qui s'envoie dans
+$\operatorname{Aut}_H(\pi_e)$, $\pi_e$ le groupe des automorphismes de $e$. La
+même chose est esquissée pour un graphe $K$ sur lequel $G$ opère
+transitivement sur les arêtes, $K_1 \simeq G / H_1 \to K_0 = G / H_0$. Le fait
+sous-jacent est classique : les automorphismes d'un $G$-ensemble homogène $G/H$
+forment le groupe $N_G(H)/H$. Les suites exactes du bas de la page, superposées
+et en partie barrées, ne s'interprètent pas avec sûreté.
+
+\pagerange{61}{62}
+\section*{V. Le groupe modulaire et les solides de Platon (pages 61 et 62)}
+
+La page 61 s'ouvre au milieu d'un calcul. Pour $n = 2$, soit $\Gamma^+_{p,q}$
+le sous-groupe d'indice $2$ des rotations, engendré par $\rho_s$ et $\rho_f$, du
+groupe $\Gamma_{p,q} = \mathfrak{G}_2 / \langle\langle \rho_s^p, \rho_f^q
+\rangle\rangle$ ; avec $\sigma = \sigma_0\sigma_2$ (d'ordre $2$), on a $\rho_f\rho_s
+= \sigma$ (convention ci-dessus). Quand l'un des ordres vaut $3$ et l'autre est
+infini, ce groupe est le produit libre $\mathbf{Z}/2 * \mathbf{Z}/3$, et
+\[
+\Gamma^+_{3,\infty} \simeq \mathrm{SL}(2, \mathbf{Z}) / \{\pm 1\} =
+\mathrm{PSL}(2, \mathbf{Z}),
+\]
+le groupe modulaire\footnote{La page note ce groupe $\Gamma^0_{\infty,3}$, dans
+sa convention de la page 61 où $\rho_s = \sigma_0\sigma_1$ et $\rho_f =
+\sigma_1\sigma_2$ ; par dualité, $\Gamma^+_{p,q} \simeq \Gamma^+_{q,p}$, et l'ordre
+des indices n'importe pas pour les groupes. La première ligne, $1 \to R_n \to
+\mathrm{SL}(2, \mathbf{Z})/\pm 1 \to \mathrm{SL}(2, \mathbf{Z}_2) \to 0$, avec un
+indice $n$ douteux, dit que le noyau de la réduction modulo $2$ est engendré,
+comme sous-groupe distingué, par le carré d'un élément parabolique.}. Pour le
+voir, la page cherche les stabilisateurs des points fixes des homographies
+$z \mapsto (az + b)/(cz + d)$ : un point fixe $z = x + iy$, $y \neq 0$, impose
+$d = a - c\operatorname{Tr}(z)$, $b = -cN(z)$, et $\det = N(a - cz) = 1$. Pour $z =
+i$, le stabilisateur est $\{\bigl(\begin{smallmatrix} a & -c \\ c & a
+\end{smallmatrix}\bigr)\}$, et $\sigma = \bigl(\begin{smallmatrix} 0 & -1 \\ 1 &
+0 \end{smallmatrix}\bigr)$, avec $\sigma^2 = -1$ ; pour $z = \zeta = e^{i\pi/3}$,
+c'est $\{\bigl(\begin{smallmatrix} a & -c \\ c & a - c
+\end{smallmatrix}\bigr)\}$, et l'élément d'ordre $3$ (modulo $\pm 1$) est
+$\bigl(\begin{smallmatrix} 0 & 1 \\ -1 & 1 \end{smallmatrix}\bigr)$, de cube
+$-1$. Leur produit est la translation $\bigl(\begin{smallmatrix} 1 & -1 \\ 0 & 1
+\end{smallmatrix}\bigr)$, dont la puissance $n$-ième est $\bigl(\begin{smallmatrix}
+1 & -n \\ 0 & 1 \end{smallmatrix}\bigr)$\footnote{La page écrit ce produit
+$\rho'_s = \sigma\rho_f = \sigma_2\rho_f\sigma_2^{-1}$ ; dans ses notations,
+$\sigma\rho_f = \sigma_0\sigma_2\sigma_1\sigma_2 = \sigma_2\rho_s\sigma_2^{-1}$,
+conjugué de $\rho_s$, non de $\rho_f$. Les signes de la matrice de $\rho_f$ sont
+repassés.}.
+
+Réduisant modulo $n$, on obtient un épimorphisme
+\[
+\Gamma^+_{3,n} \longrightarrow \mathrm{SL}(2, \mathbf{Z}/n) / \{\pm 1\} \qquad (n
+\geq 2),
+\]
+puisque l'élément parabolique devient d'ordre $n$ ; c'est un isomorphisme si et
+seulement si $n \leq 5$, c'est-à-dire si et seulement si $\Gamma^+_{3,n}$ est
+fini. La page dresse le tableau :
+\[
+\begin{array}{c|c|c|l}
+n & \Gamma^+_{3,n} & \mathrm{SL}(2, \mathbf{Z}/n)/\pm 1 & \\ \hline
+2 & \mathfrak{S}_3,\ 6 & 6 & \text{diédral d'ordre } 6 \\
+3 & \mathfrak{A}_4,\ 12 & 12 & \text{tétraèdre} \\
+4 & \mathfrak{S}_4,\ 24 & 24 & \text{cube (ou octaèdre)} \\
+5 & \mathfrak{A}_5,\ 60 & 60 & \text{icosaèdre (ou dodécaèdre)} \\
+6 & \mathbf{Z}^2 \rtimes \mathbf{Z}/6,\ \infty & 72 & \text{pavage du plan par des triangles}
+\end{array}
+\]
+avec $\operatorname{card}\mathrm{SL}(2, \mathbf{F}_q) = q(q^2 - 1)$ et
+$\operatorname{card}\mathrm{SL}(2, \mathbf{Z}/p^\nu) = \operatorname{card}
+\mathrm{SL}(2, \mathbf{F}_p)\cdot p^{3(\nu - 1)}$. Tout cela est exact. C'est le
+fait classique que le sous-groupe de congruence principal $\Gamma(n)$ est
+engendré, comme sous-groupe distingué de $\mathrm{PSL}(2, \mathbf{Z})$, par la
+puissance $n$-ième de la translation si et seulement si $n \leq 5$ ; pour $n
+\geq 6$, le quotient $\Gamma^+_{3,n}$ est infini et la carte correspondante
+n'est plus une carte de congruence\footnote{Fait classique, connu de Klein et
+Fricke ; cité de mémoire. La dernière case du tableau, « pavage par triangles
+orienté du plan », est très serrée ; « cas 3-diédral » pour $n = 2$ est une
+lecture probable. Les noms de solides sont ceux de la page ; un solide et son
+dual ont le même groupe.}.
+
+\pagerange{64}{71}
+\section*{VI. Les trois réflexions en coordonnées, et la quadrique invariante (pages 64 à 71)}
+
+\pagerange{64}{66}
+\subsection*{Les trois réflexions (pages 64 à 66)}
+
+Pour $n = 2$, on refait le calcul des pages 9 à 18 directement. Le repère $r =
+(s_0, a_0, f_0)$ donne $s_1 = \sigma_0 s_0$, $s_2 = \sigma_1 s_1$, $s_3 = \sigma_2
+s_2$, $e_i = s_i - s_0$. Les points $t_2 = \sigma_0 s_2$ et $t_3 = \sigma_0 s_3$
+sont dans les plans $(s_0, s_1, s_2)$ et $(s_0, s_1, s_3)$, $\sigma_2$ les échange
+(puisque $\sigma_0\sigma_2 = \sigma_2\sigma_0$), et l'on écrit $t_2 = (\lambda,
+\mu, 0)$, $t_3 = (\lambda, 0, \mu)$, d'où
+\[
+\sigma_0(x, y, z) = \bigl(1 - x + (\lambda - 1)(y + z),\ \mu y,\ \mu z\bigr), \qquad
+\sigma_0^2 = 1 \iff \mu^2 = 1,\ (\lambda - 1)(\mu - 1) = 0 .
+\]
+De même $s'_3 = \sigma_1 s_3 = s_0 + \xi e_1 + \eta e_2 + (1 + \zeta)e_3$ donne
+$\sigma_1(x, y, z) = (y + \xi z,\ x + \eta z,\ (1 + \zeta)z)$, et $\sigma_1^2 = 1$
+équivaut à $(1 + \zeta)^2 = 1$ et $\xi + \eta + \xi\zeta = \xi + \eta + \eta\zeta = 0$.
+Comme $\det\sigma_{1V} = -(1 + \zeta)$, et que le lieu fixe de $\sigma_1$ est un
+plan si et seulement si $\zeta = 0$ et $\xi = -\eta$, on prend $\zeta = 0$,
+$\xi = -\eta$\footnote{La page écrit la troisième coordonnée de $s'_3$ (son
+$s''_3$) « $1 - \zeta$ » au lieu de $1 + \zeta$, et en tire « $\zeta^2 = 0$,
+$\eta + \xi = \xi\zeta = \eta\zeta$ » ; avec $1 + \zeta$, l'involution donne
+$\zeta(\zeta + 2) = 0$. La conclusion $\zeta = 0$, $\xi = -\eta$, qu'imposent le
+déterminant $-1$ ou le plan fixe, est la même. Les points d'interrogation de la
+page sous « $\mu = 1$ ? », « $\xi = -\eta$ ? », « $\zeta = 0$ ? » sont levés à la
+page 66.}. Quant à $\sigma_0$, c'est une réflexion si et seulement si $\mu =
+1$ ; pour $\mu = -1$ (et alors $\lambda = 1$), c'est la symétrie par rapport au
+milieu de $s_0 s_1$\footnote{La ligne de la page 66 se lit « $\sigma_0$ est une
+\emph{symétrie par rapport à un hyperplan} sauf si $\mu = 1$ », lecture
+incertaine d'une ligne rapide ; ce qu'on donne est le calcul.}. Avec $\zeta =
+0$, $\mu = 1$, $\lambda = 1 + \beta$, $\eta = 1 + \alpha$ :
+\[
+\begin{aligned}
+\sigma_0(x, y, z) &= \bigl(1 - x + \beta(y + z),\ y,\ z\bigr), \\
+\sigma_1(x, y, z) &= \bigl(y - (1 + \alpha)z,\ x + (1 + \alpha)z,\ z\bigr), \\
+\sigma_2(x, y, z) &= (x, z, y),
+\end{aligned}
+\]
+qui est la forme normale de la page 18 pour $n = 2$, avec $\beta = \alpha_0$,
+$\alpha = \alpha_1$.
+
+\pagerange{67}{69}
+\subsection*{La fonction quadratique invariante (pages 67 à 69)}
+
+$\rho_s = \sigma_1\sigma_2$ est d'ordre $p$ si et seulement si $\Psi_p(\alpha) =
+0$, et $\rho_f = \sigma_0\sigma_1$ d'ordre $q$ si et seulement si $\Psi_q(\beta) =
+0$ (page 67 ; c'est la proposition de la section I). On cherche les fonctions
+quadratiques $f = ax^2 + by^2 + cz^2 + uyz + vzx + wxy + px + qy + rz + d$
+invariantes par $\sigma_0, \sigma_1, \sigma_2$ ; on peut supposer $d = 0$. La
+page trouve, à un facteur près,
+\[
+f(x, y, z) = x^2 + y^2 + z^2 - \gamma\, yz - \beta\, zx - \beta\, xy - (x + y + z),
+\qquad \gamma = 2 + 2(\alpha + \beta) + \alpha\beta = (\alpha + 2)(\beta + 2) - 2 .
+\]
+Les fonctions quadratiques invariantes sont les combinaisons de $f$ et de $1$ ;
+celles qui s'annulent en $s_0$ --- donc sur tous les sommets --- sont les
+multiples de $f$\footnote{Vérifié sur machine : $f$ est invariante par les trois
+générateurs pour $\alpha, \beta$ quelconques. L'unicité découle du calcul de
+la page : l'invariance par $\sigma_0$ et $\sigma_1$ dans le plan $z = 0$ donne
+$a = b = -p = -q$, $w = -\beta a$, celle par $\sigma_2$ donne $c = b$, $v = w$,
+$r = q$, et $u$ est déterminé par $\sigma_1$.}. Sa partie quadratique $f_0$ a
+pour matrice
+\[
+\begin{pmatrix} 2 & -\beta & -\beta \\ -\beta & 2 & -\gamma \\ -\beta & -\gamma & 2
+\end{pmatrix}, \qquad
+\delta' = \tfrac12 \det = -(\alpha + 2)(\alpha + \beta)(\beta + 2)^2 ,
+\]
+et $f$, homogénéisée, a pour discriminant $\delta(f) = (\alpha - 2)(\alpha +
+2)(\beta + 2)^2$\footnote{La page écrit $\delta' = 4 - \beta^2(\gamma + 2) -
+\gamma^2 = -(\alpha + 2)(\beta + 2)^2(\alpha - \beta)$, le dernier facteur lu avec
+doute ; le calcul donne $(\alpha + \beta)$. $\delta(f)$ est exact, ainsi que
+$(\gamma + 2)(\gamma - 4\beta - 6)$, l'autre forme qu'en donne la page. La
+condition d'inversibilité est dite « $\alpha \neq \pm 2$, $\beta \neq -2$,
+$\alpha + \beta \neq 0$ », avec des mots incertains.}. Si $\alpha + \beta$ est
+inversible, le groupe a un unique point fixe, le \emph{centre}
+\[
+c = \Bigl(\frac{\alpha}{2(\alpha + \beta)},\ \frac{-1}{2(\alpha + \beta)},\
+\frac{-1}{2(\alpha + \beta)}\Bigr), \qquad f(c) = \frac{2 - \alpha}{4(\alpha + \beta)} ,
+\]
+et l'antipodisme est la symétrie $x \mapsto 2c - x$, qui conserve $f$. $f(c)$
+s'annule si et seulement si $\alpha = 2$ : la quadrique circonscrite est alors
+un cône\footnote{Tout ceci vérifié sur machine. La page note le centre
+$\sigma$, lettre déjà prise, et l'antipodisme d'un $a$ souligné.}. Puis vient
+le tableau (page 69), dont toutes les valeurs ont été vérifiées :
+\[
+\begin{array}{l|c|c|c|c}
+& \alpha\ (\text{sommet}) & \beta\ (\text{face}) & \delta' & \delta \\ \hline
+\text{tétraèdre} & -1 & -1 & 2 & -3 \\
+\text{cube} & -1 & 0 & 4 & -12 \\
+\text{octaèdre} & 0 & -1 & 2 & -4 \\
+\text{icosaèdre} & \alpha^2 + \alpha = 1 & -1 & 1 & -\alpha - 3,\ N = 5 \\
+\text{dodécaèdre} & -1 & \beta^2 + \beta = 1 & \beta + 2,\ N = 1 & -9\beta - 15,\ N = 9 \\
+\text{« pentagrammes »} & \alpha^2 + \alpha = 1 & \beta = \alpha' & \beta + 2,\ N = 1 & 4\alpha - 3,\ N = 5
+\end{array}
+\]
+($N$ la norme de $\mathbf{Q}(\sqrt 5)$ à $\mathbf{Q}$). On en lit les
+caractéristiques exceptionnelles : le centre est à l'infini si et seulement si
+la caractéristique est $2$ (dans les six cas, $2(\alpha + \beta)$ est, au signe
+près, une puissance de $2$ multipliée par une unité) ; $f_0$ est dégénérée en
+caractéristique $2$ pour les trois premiers, jamais pour les trois derniers ;
+$f$ est dégénérée en caractéristique $3$ (tétraèdre), $2$ et $3$ (cube), $2$
+(octaèdre), $5$ (icosaèdre et pentagrammes), $3$ (dodécaèdre). Les
+« pentagrammes » --- $\alpha$ et $\beta$ les deux racines distinctes de
+$x^2 + x - 1$ --- sont les polyèdres réguliers étoilés de type
+$\{5, 5/2\}$ et $\{5/2, 5\}$, le grand dodécaèdre et le petit dodécaèdre
+étoilé de Kepler--Poinsot\footnote{Les noms sont les nôtres ; dans le symbole $\{q, p\}$, $q$ est la face et $p$ la figure de sommet. Les lignes de l'icosaèdre et du dodécaèdre, prises avec l'autre racine de $x^2 + x - 1$, donnent les deux autres, le grand icosaèdre $\{3, 5/2\}$ et le grand dodécaèdre étoilé $\{5/2, 3\}$. La page ajoute pour
+chaque cas une ligne « $Q_E$ bisingulière ssi car.\ $\neq \ldots$ », où
+« bisingulière » est lu avec doute et dont le sens n'est pas sûr ; on ne la
+reprend pas. Le paragraphe qui clôt la page 69, marqué d'un « ? », est en
+grande partie illisible.}.
+
+\pagerange{70}{71}
+\subsection*{Un cas hyperbolique (pages 70 et 71)}
+
+La page 71, barrée en haut, dit ce qu'il faut pour une réalisation réelle qui
+soit un vrai dessin : pour $p$, $q$ finis $\geq 3$, $\alpha$ et $\beta$ de la
+forme $\zeta + \zeta^{-1}$, $\zeta = e^{2i\pi/m}$ ; $\alpha = -2$ ou $\beta = -2$
+« donne des croisements » ; et pour $p = \infty$ (resp.\ $q = \infty$) il faut
+$\alpha = 2$ (resp.\ $\beta = 2$). Elle traite $\beta = 2$, $\alpha \neq -2$ :
+$\gamma = 2(2\alpha + 3)$, $\delta' = -16(\alpha + 2)^2$, et
+\[
+f_0(x, y, z) = (-x + y + z)^2 - 4(\alpha + 2)\,yz, \qquad f(c) = \frac{2 -
+\alpha}{4(\alpha + 2)} .
+\]
+Pour $-2 < \alpha < 2$, $f(c) = \lambda > 0$, et, en coordonnées centrées $X =
+x - c$, les sommets vérifient $f_0(X) = -\lambda$. Avec $4YZ = (Y + Z)^2 - (Y -
+Z)^2$ et $U = (-X + Y + Z)/\sqrt\lambda$, $V = \sqrt{\alpha + 2}\,(Y -
+Z)/\sqrt\lambda$, $W = \sqrt{\alpha + 2}\,(Y + Z)/\sqrt\lambda$, cela devient
+\[
+W^2 = U^2 + V^2 + 1 ,
+\]
+la dernière ligne de la page 70 : un hyperboloïde à deux nappes\footnote{Les
+lettres $U, V, W$ sont surchargées sur la page, et plusieurs lignes
+intermédiaires sont barrées ; on a refait le changement de variables pour qu'il
+aboutisse à l'équation finale de la page.}. C'est le modèle de l'hyperboloïde
+du plan hyperbolique, et le groupe, qui conserve la forme de signature $(2,
+1)$, y agit par isométries : les faces y sont des « apeirogones » et l'on
+obtient le pavage régulier $\{\infty, p\}$ du plan hyperbolique, avec $\alpha =
+2\cos(2\pi/p)$ --- l'une des réalisations « géodésiques » que le dossier 88
+attribue aux cartes standards\footnote{L'identification est de l'édition ; la
+page s'arrête sur l'équation.}.
+
+\pagerange{73}{111}
+\section*{VII. L'icosaèdre en coordonnées universelles (pages 73 à 111)}
+
+La chemise de la page 73 porte « (32) Calculs en coordonnées universelles
+(icosaèdre) --- vieilles rédactions ». Dans toute la section, $\beta = -1$
+(faces triangulaires) et $\alpha^2 + \alpha - 1 = 0$ (cinq faces en chaque
+sommet), $\alpha' = -1 - \alpha$, de sorte que $\alpha\alpha' = -1$. Les calculs
+ont lieu sur l'anneau $\mathbf{Z}[\alpha] = \mathbf{Z}[x]/(x^2 + x - 1)$, ou sur
+toute base où $\alpha$ est défini. La page 89 note les identités utiles :
+\[
+(1 + \alpha)\alpha = 1, \quad (1 - \alpha)(1 - \alpha') = 1, \quad (1 + \alpha)(1 +
+\alpha') = -1,
+\]
+\[
+(\alpha + 2)(\alpha' + 2) = 1, \quad (2\alpha - 1)(2\alpha' - 1) = -1 ;
+\]
+en particulier $\alpha$, $1 \pm \alpha$, $\alpha + 2$, $2\alpha - 1$ sont des
+unités, et $\alpha - 2$ en est une si et seulement si $5$ est inversible, car
+$(\alpha - 2)(\alpha + 3) = -5$ (page 90 ; l'identité est de l'édition).
+
+\pagerange{74}{75}
+\subsection*{Première passe : les réflexions et les douze sommets (pages 74 et 75)}
+
+Les trois générateurs sont
+\[
+\sigma_0(x, y, z) = \bigl(1 - (x + y + z),\ y,\ z\bigr), \quad
+\sigma_1(x, y, z) = (y + \alpha' z,\ x - \alpha' z,\ z), \quad
+\sigma_2(x, y, z) = (x, z, y),
+\]
+de miroirs $H_0 : 2x + y + z = 1$, $H_1 : x - y - \alpha' z = 0$, $H_2 : y = z$,
+et de centres les directions $\Delta_0 = \langle e_1 \rangle$, $\Delta_1 =
+\langle e_1 - e_2 \rangle$, $\Delta_2 = \langle e_2 - e_3 \rangle$. En
+caractéristique $2$, $H_0$ devient $y + z = 1$ et $H_2$ s'écrit $y + z = 0$ :
+ils sont parallèles\footnote{La note de la transcription doute que cela se lise
+sur les équations transcrites ; cela s'y lit.}. Les intersections deux à deux
+des miroirs sont les axes : $D_0 = H_1 \cap H_2$, la droite $y = z = \alpha' x$,
+de direction $(1, \alpha', \alpha') = \alpha'(-\alpha, 1, 1)$, qui passe par
+$s_0$ ; $D_1 = H_2 \cap H_0$, $y = z = \tfrac12 - x$ si $2$ est inversible ;
+$D_2 = H_0 \cap H_1$, $y = \alpha + (1 - 3\alpha)x$, $z = (1 - \alpha)(1 - 3x)$
+(page 111, vérifié). Le centre et l'antipodisme sont
+\[
+o = \tfrac12(\alpha',\ 1 - \alpha',\ 1 - \alpha'), \qquad
+\iota(x, y, z) = \bigl(\alpha' - x,\ 1 - \alpha' - y,\ 1 - \alpha' - z\bigr) ,
+\]
+et les douze sommets
+\[
+\begin{array}{ll}
+s_0 = (0, 0, 0) & \iota s_0 = (\alpha', 1 - \alpha', 1 - \alpha') \\
+s_1 = (1, 0, 0) & \iota s_1 = (\alpha' - 1, 1 - \alpha', 1 - \alpha') \\
+s_2 = (0, 1, 0) & \iota s_2 = (\alpha', -\alpha', 1 - \alpha') \\
+s_3 = (0, 0, 1) & \iota s_3 = (\alpha', 1 - \alpha', -\alpha') \\
+s'_3 = (\alpha', -\alpha', 1) & \iota s'_3 = (0, 1, -\alpha') \\
+s''_3 = (0, -\alpha', 1) & \iota s''_3 = (\alpha', 1, -\alpha')
+\end{array}
+\]
+sont l'orbite de $s_0$ sous le groupe engendré, d'ordre $120$\footnote{Vérifié
+sur machine sur $\mathbf{Q}(\sqrt 5)$. La page 75 donne $\iota s''_3 = (\alpha',
+1 - 2\alpha', -\alpha')$ ; le calcul donne $(\alpha', 1, -\alpha')$. Les restes de
+calcul « $\tfrac12(-1 + \sqrt 5)$ » et « $\lambda = -2 + \sqrt 8$ » sous la
+ligne de l'antipodisme ne se rattachent à rien.}.
+
+La fonction quadratique de la page 68 devient
+\[
+q(x, y, z) = x^2 + y^2 + z^2 - \alpha\,yz + zx + xy - (x + y + z) ,
+\]
+de partie homogène $q_0$, de matrice $\bigl(\begin{smallmatrix} 2 & 1 & 1 \\ 1 & 2
+& -\alpha \\ 1 & -\alpha & 2 \end{smallmatrix}\bigr)$ et de demi-discriminant
+$\delta'(q_0) = 1$. Elle est normalisée par $q_0(e) = 1$ pour un vecteur arête
+$e = s_1 - s_0$ ; pour un vecteur « coarête » $f = s_3 - s_2$, joignant deux
+sommets à distance $2$, $q_0(f) = \alpha + 2 = \alpha'^2$. Dans les coordonnées
+classiques, où les sommets sont les permutations circulaires de $(\pm x, \pm y,
+0)$, cela donne $(y/x)^2 = \alpha'^2$, et, pour l'icosaèdre convexe réel ($\alpha
+= \tfrac12(-1 + \sqrt 5)$), $y/x = -\alpha' = \tfrac12(1 + \sqrt 5)$ : le
+rectangle d'or. En caractéristique $2$, la forme polaire de $q_0$ est
+dégénérée, de noyau engendré par $u = (\alpha', \alpha, \alpha)$, mais $q_0(u) =
+\alpha' \neq 0$, ce qui exprime que $q_0$ reste non dégénérée comme forme
+quadratique\footnote{La page écrit le noyau $(\alpha', 1 - \alpha', 1 - \alpha')
+= (\alpha', \alpha, \alpha) = (1 + \alpha, \alpha, \alpha)$, égalités valables en
+caractéristique $2$. Le crochet de la page 75 récrit $q$ en caractéristique
+$\neq 2$ sous une autre forme, que l'on ne reprend pas.}.
+
+\pagerange{76}{78}
+\subsection*{Vecteurs et directions remarquables ; la caractéristique 5 (pages 76 à 78)}
+
+Le centre étant pris pour origine en caractéristique $\neq 2$, la forme
+quadratique identifie $V$ à son dual, donc les directions de droites et de
+plans. La page dresse la liste : $12$ vecteurs « doubles sommets » $S$ ; $30$
+vecteurs arêtes $\Delta$ (quinze paires de vecteurs opposés) ; $30$ vecteurs
+coarêtes $\Delta'$ ; les $30$ milieux d'arêtes $\mathcal{A}$ et de coarêtes
+$\mathcal{A}'$ ; les $20$ barycentres (triplés) des faces $\Phi$ et des
+« cofaces » $\Phi'$, triangles de sommets deux à deux à distance $2$ ; les
+$20$ sommets $\Psi$ et $\Psi'$ de dodécaèdres circonscrits ; les $12$
+barycentres $\Sigma$ des pentagones de sommets voisins. Elle écrit
+\[
+\Delta = \alpha\Delta', \quad \Delta = \mathcal{A}', \quad \Delta' = \mathcal{A},
+\quad \Phi' = (2\alpha - 1)\Phi ,
+\]
+où $\mathcal{A}$, $\mathcal{A}'$ sont les sommes $s_i + s_j$ (centrées) ; ces
+relations ont été vérifiées sur machine, avec $20$ cofaces. Les relations sur
+$\Psi$ et $\Sigma$ --- « $\Psi = \mu\Phi$, $\mu = 1 + 2\alpha$, $\mu^2 = 5$ »,
+« $\Sigma = \rho S$ » --- sont rapportées sans vérification : leurs légendes
+sont trop incertaines pour qu'on sache quels points elles désignent\footnote{La
+page est d'une écriture très rapide ; la note de la transcription dit les
+listes « sûres dans leur structure, beaucoup moins dans leurs légendes ».
+$\Phi$ et $\Phi'$ sont les sommets des dodécaèdres inscrits dans $\Pi$ et dans
+le « cofacettoïde associé » $\Pi'$, lecture incertaine.}.
+
+\textbf{Directions, et la caractéristique 5} (page 78). Il y a $6$ directions
+de sommets, $15$ d'arêtes et $10$ de plans de faces : $31 = 5^2 + 5 + 1$, le
+nombre de points du plan projectif sur $\mathbf{F}_5$. Ce n'est pas un hasard.
+En caractéristique $5$, $\alpha^2 + \alpha - 1 = (\alpha - 2)^2$, donc $\alpha =
+2$ et $f(o) = (2 - \alpha)/(4(\alpha - 1)) = 0$ : les sommets sont des vecteurs
+isotropes de $q_0$, et les six directions de sommets sont les six points de la
+conique $q_0 = 0$ sur $\mathbf{F}_5$. Les quinze directions d'arêtes
+correspondent aux points extérieurs à la conique (intersections de deux
+tangentes), les dix directions de faces aux points intérieurs, comme le dit la
+page en termes de « sécantes » et de « diviseurs conjugués ». Pour les
+vecteurs, $125 = 1 + 24 + 60 + 40$ : le vecteur nul, $24 = 2 \times 12$
+vecteurs isotropes non nuls --- les sommets de « deux icosaèdres » ---, $60$
+et $40$ vecteurs sur les points extérieurs et intérieurs\footnote{L'explication
+par les points extérieurs et intérieurs est de l'édition ; c'est la géométrie
+d'une conique sur $\mathbf{F}_q$, $q$ impair, qui a $q + 1$ points,
+$q(q+1)/2$ points extérieurs et $q(q-1)/2$ points intérieurs. La page écrit
+d'abord $1 + 12 + 60 + 40 = 113$, total surchargé. C'est l'isomorphisme
+exceptionnel $\mathfrak{A}_5 \simeq \mathrm{PSL}(2, \mathbf{F}_5)$, que les
+annonces de cours du dossier 75 mettent en tête du programme.}.
+
+\pagerange{80}{80}
+\subsection*{Un départ par les cocycles (page 80)}
+
+Une représentation affine est une représentation linéaire $\Gamma \to
+\mathrm{SO}(q)$ accompagnée d'un $1$-cocycle $f : \Gamma \to V$, $f(gg') = f(g)
++ g f(g')$. Avec $s_0$ pour origine, $f(\sigma_1) = f(\sigma_2) = 0$, et tout
+revient à $e = f(\sigma_0)$ : $\sigma_0^2 = 1$ donne $\sigma_0 e = -e$, la
+commutation de $\sigma_0$ et $\sigma_2$ donne $\sigma_2 e = e$, et, pour $u =
+\rho_f$, $f(u^3) = (1 + u + u^2)e = 0$. La page s'arrête sur ces conditions
+encadrées\footnote{La page est coupée à droite dans la numérisation. Elle
+contient aussi une vérification de $\alpha' = -\alpha - 1$ et le calcul de $\bar
+s_1 - \bar s_0 = (2\alpha - 1, 0, 0)$ pour des points $\bar s_0 = (-\alpha, 1,
+1)$, $\bar s_1 = \sigma_0 \bar s_0$ de l'axe $D_0$ ; « $s_2 - s_0 = e_2 - e_3$ »
+est tel quel.}.
+
+\pagerange{82}{88}
+\subsection*{La rédaction suivie : relations et nombre de sommets (pages 82 à 88)}
+
+Les pages 82 à 99 reprennent tout, posément, en numérotant les formules. On
+part de $\sigma_0$, $\sigma_2$ connus et de $\sigma_1$ inconnu, $\sigma_1 s_3 =
+s'_3 = s_0 + \lambda e_1 + \mu e_2 + \nu e_3$. $\sigma_1^2 = 1$ s'écrit $\nu^2 =
+1$, $\mu = -\nu\lambda$, $\lambda = -\nu\mu$ ; sur un corps, $\nu = 1$, $\mu =
+-\lambda$ ou $\nu = -1$, $\mu = \lambda$ ; et $\det\sigma_1 = -\nu$, de sorte
+qu'une réflexion demande $\nu = 1$. On pose $\lambda = -(1 + \alpha) = \alpha'$
+(1), d'où
+\[
+s'_3 - s_3 = (1 + \alpha)(s_2 - s_1) \quad (2), \qquad
+\sigma_1 = \begin{pmatrix} 0 & 1 & \alpha' & 0 \\ 1 & 0 & -\alpha' & 0 \\ 0 & 0 & 1
+& 0 \\ 0 & 0 & 0 & 1 \end{pmatrix} \quad (3) .
+\]
+La page écrit la seconde forme de cette matrice avec un signe
+douteux\footnote{Elle porte $-\alpha'$, $-\alpha'$ dans la troisième colonne,
+le premier signe douteux ; avec $\alpha' = -(1 + \alpha)$, c'est $\alpha'$,
+$-\alpha'$. Le signe de $\lambda(e_2 - e_1)$ dans le calcul de $s'_3 - s_3$ est
+lu tel quel ; c'est $\lambda(e_1 - e_2)$.}.
+Avec $\rho_f = \sigma_0\sigma_1$ et $\rho_s = \sigma_1\sigma_2$\footnote{La page
+les appelle $u$ et $v$ ; elle écrit le cycle de $u$ sur les sommets du triangle
+« $s_0 \mapsto s_1 \mapsto s_2 \mapsto s_1$ ? », pour $s_0$ en dernier.}, on
+trouve $s''_3 = \rho_f s_3 = s_3 + (1 + \alpha)e_2$ (5), $s''_3 - s_3 = (1 +
+\alpha)(s_2 - s_0)$ (6), et
+\[
+\rho_f : s_3 \mapsto s''_3 \mapsto s'_3 \mapsto s_3 \quad (7), \qquad \rho_f^3 =
+\mathrm{id} \quad (8) .
+\]
+Les points $s_1, s_2, s_3, s'_3$ sont dans le plan $x + y + z = 1$, stable par
+$\sigma_1$ et $\sigma_2$, donc par $\rho_s$, et « un calcul commode » montre
+\[
+\rho_s^5 = \mathrm{id} \iff \alpha^2 + \alpha - 1 = 0 \quad (9) ,
+\]
+ce qui est exact\footnote{C'est la proposition de la section I pour $p = 5$ ;
+vérifié sur machine.}.
+Le groupe $G = \langle \sigma_0, \sigma_1, \sigma_2 \mid \sigma_i^2,
+(\sigma_0\sigma_2)^2, \rho_f^3, \rho_s^5 \rangle$ (10) --- le groupe de Coxeter
+$H_3$, groupe des automorphismes de l'icosaèdre combinatoire épinglé --- opère
+donc sur l'espace dès que $\alpha^2 + \alpha = 1$\footnote{Dans (10), la
+relation de commutation se lit $\sigma_0\sigma_2 = \sigma_2\sigma_1$ ; c'est
+$\sigma_2\sigma_0$. Le nom $H_3$ n'est pas sur la page.}.
+
+Les transformés de $s_0$, de $\operatorname{Dr}(s_0, s_1)$ et de
+$\operatorname{Pl}(s_0, s_1, s_2)$ forment-ils un icosaèdre géométrique ---
+c'est-à-dire, sur tout corps, n'ont-ils entre eux que les incidences de
+l'icosaèdre combinatoire ? (pages 85 à 87). « Si nous admettons que $G$ est
+fini d'ordre $120$ » --- c'est vrai, et classique --- le stabilisateur de $s_0$
+contient le groupe diédral $\langle \sigma_1, \rho_s \rangle$ d'ordre $10$, donc
+le nombre de sommets divise $12$. Les six points $s_0, s_1, s_2, s_3, s'_3,
+s''_3$ sont distincts : $s'_3$ et $s''_3$ ont pour dernière coordonnée $1$, et
+ils coïncident entre eux ou avec $s_3$ si et seulement si $1 + \alpha = 0$, ce
+qui, avec $\alpha^2 + \alpha = 1$, donnerait $0 = 1$ (« sur une base non vide
+! »). Il y a donc $6$ ou $12$ sommets. S'il y en avait $6$, le stabilisateur de
+$s_0$ serait d'ordre $20$ et contiendrait ce diédral ; or $G \simeq
+\mathfrak{A}_5 \times \{1, \iota\}$, $\mathfrak{A}_5$ n'a pas de sous-groupe
+d'ordre $20$, et le seul sous-groupe d'ordre $20$ qui contienne le diédral est
+son produit par le centre $\{1, \iota\}$. Cela voudrait dire $\iota s_0 = s_0$
+; le calcul des antipodes donne donc la liste des douze
+sommets\footnote{L'argument est celui de la page 88, avec « il n'y en a qu'un
+seul » ; la justification par $\mathfrak{A}_5$ est de l'édition. La page 86 ne
+porte que la fin de phrase « de l'icosaèdre ». La page 81 n'est pas
+transcrite.}.
+
+\pagerange{89}{94}
+\subsection*{Centre, antipodisme, incidences (pages 89 à 94)}
+
+Le \emph{centre} est l'unique point fixe de $G$ (s'il existe) : sur les miroirs
+(12)--(14), $o = \tfrac12(\alpha', 1 - \alpha', 1 - \alpha') = \tfrac12(-(1 +
+\alpha), 2 + \alpha, 2 + \alpha)$ (15). En caractéristique $\neq 2$ c'est un
+point ; en caractéristique $2$, c'est le point à l'infini dans la direction
+$(-1, 1/\alpha, 1/\alpha)$.
+
+\textbf{Proposition} (page 91). \emph{L'antipodisme $\iota$ --- l'élément central
+non trivial de $G$, $(\sigma_0\sigma_1\sigma_2)^5$ --- est donné en toute
+caractéristique par}
+\[
+\iota(x, y, z) = \bigl(\alpha' - x,\ (1 - \alpha') - y,\ (1 - \alpha') - z\bigr)
+\quad (17) ;
+\]
+\emph{si $2$ est inversible, c'est la symétrie de centre $o$, et $o$ est son
+unique point fixe ; en caractéristique $2$, c'est la translation de vecteur
+$(\alpha', \alpha, \alpha)$, sans point fixe à distance finie.}\footnote{La
+page n'identifie pas $\iota$ à un mot en les générateurs ; on a vérifié sur
+machine que $(\sigma_0\sigma_1\sigma_2)^5$ est $x \mapsto 2o - x$. Elle lit le
+vecteur de translation « $(\alpha', 1, 1)$ », les deux dernières composantes
+surchargées ; c'est $(\alpha', 1 - \alpha', 1 - \alpha') = (\alpha', \alpha,
+\alpha)$ en caractéristique $2$.} En caractéristique $2$, l'équation $\alpha^2 +
+\alpha - 1 = 0$ n'a de solutions que dans $\mathbf{F}_4 \smallsetminus
+\mathbf{F}_2$ : se donner $\alpha$ sur une base $Y$ au-dessus de $\mathbf{F}_2$,
+c'est se donner une structure de $\mathbf{F}_4$-schéma, $Y \to \operatorname{Spec}
+\mathbf{F}_4$, et $1/\alpha = \alpha + 1$ est l'autre élément de $\mathbf{F}_4
+\smallsetminus \mathbf{F}_2$\footnote{La page note de la même lettre $K$ la
+clôture algébrique et l'extension quadratique de $\mathbf{F}_2$ qu'elle
+contient.}. Les antipodes des six premiers sommets (18) sont ceux du tableau
+de la page 75 ci-dessus\footnote{Les deux dernières lignes de (18), page 92,
+ont leur deuxième coordonnée noircie après le « $1$ » ; les valeurs exactes
+sont $(0, 1, -\alpha')$ et $(\alpha', 1, -\alpha')$, et non celles qu'attend la
+note de la transcription. La page 93 en donne d'abord une autre version,
+barrée, calculée avec un autre centre.}.
+
+\textbf{Incidences} (pages 93 et 94). La page veut prouver, « sur un corps de
+base quelconque », que trois sommets distincts ne sont pas alignés, et que
+quatre sommets distincts ne sont coplanaires que s'ils sont sur une même face
+--- d'où il suivrait qu'un sommet ou une arête n'est incident géométriquement
+à une face que s'il l'est combinatoirement. Une note marginale ajoute :
+« c'est en fait \emph{faux} en car.\ $2$ ! ». La seconde affirmation est en
+fait fausse en toute caractéristique : les cinq voisins d'un sommet sont
+coplanaires (la page 85 le dit de quatre d'entre eux, $s_1, s_2, s_3, s'_3$),
+et les extrémités de deux arêtes opposées aussi, sur un plan passant par le
+centre --- le rectangle d'or ; il y a $75$ quadruplets coplanaires de sommets,
+dont aucun ne contient une face. La page se replie sur ce qui suffit :
+\begin{enumerate}
+  \item[a)--c)] la droite qui joint $s_0$ à son antipode, à un voisin $s_1$, ou
+    à un sommet $s''_3$ à distance $2$ ne contient pas d'autre sommet (« c'est
+    vrai ») ; par homogénéité, aucun triplet de sommets n'est aligné ;
+  \item aucun des neuf autres sommets n'est dans le plan $z = 0$ de la face
+    $(s_0, s_1, s_2)$, c'est-à-dire n'a de coordonnée $z$ nulle --- « et on est
+    heureux ! ».
+\end{enumerate}
+Ces deux faits valent en toute caractéristique, $2$ et $5$ comprises : les
+coordonnées $z$ des neuf sommets sont $1$, $1 - \alpha' = 2 + \alpha$ ou
+$-\alpha' = 1 + \alpha$, qui sont des unités de $\mathbf{Z}[\alpha]$ ; et pour
+chaque triplet de sommets, les mineurs d'ordre $2$ qui expriment le non-alignement
+engendrent l'idéal unité\footnote{Vérifié sur machine, pour tous les
+triplets, toutes les paires (les douze points sont distincts en toute
+caractéristique) et tous les couples (face, sommet) : les normes en jeu sont
+$\pm 1$, ou de p.g.c.d.\ $1$. On a aussi contrôlé directement sur
+$\mathbf{F}_4$, $\mathbf{F}_9$, $\mathbf{F}_5$, $\mathbf{F}_{49}$, $\mathbf{F}_{11}$
+(deux racines), $\mathbf{F}_{169}$, $\mathbf{F}_{19}$, $\mathbf{F}_{29}$,
+$\mathbf{F}_{31}$ : $12$ points distincts, aucun triplet aligné, $75$
+quadruplets coplanaires, aucun contenant une face. Ce que vise la marge
+« faux en car.\ $2$ » n'est pas clair ; en caractéristique $2$, $\iota$ étant
+une translation, $s_0, s_1, \iota s_0, \iota s_1$ forment un parallélogramme,
+mais ces quatre points sont déjà coplanaires en caractéristique $0$.}. La
+réalisation est donc \emph{fidèle} au sens de la page 110 en toute
+caractéristique : l'icosaèdre reste un icosaèdre.
+
+\pagerange{95}{99}
+\subsection*{La quadrique circonscrite (pages 95 à 99)}
+
+Les fonctions quadratiques invariantes (page 95, puis page 97) : l'invariance
+par $\sigma_2$ donne $b = c$, $v = w$, $\mu = \nu$ ; par $\sigma_0$, $v = a$ et
+$\lambda = -a$ ; par $\sigma_1$ (formule (13)), $b = a$, $u = -\alpha a$, $\mu =
+-a$. D'où
+\[
+\begin{aligned}
+f &= a\,q, \\
+q(x, y, z) &= x(x + y + z - 1) + (y^2 + z^2) - \alpha\,yz - (y + z) \\
+&= x^2 + y^2 + z^2 - \alpha\,yz + zx + xy - (x + y + z) \qquad (19) .
+\end{aligned}
+\]
+Les fonctions quadratiques invariantes sont les $a\,q + d$, et celles qui sont
+nulles sur les sommets les $a\,q$\footnote{La page 95 encadre « $2a = 0$ ? »,
+lecture douteuse, et garde un terme $\mu(y + z)$ qu'une ligne précédente
+biffe ; la page 97 conclut proprement. La page 98, barrée, est une première
+version du calcul de $f\sigma_1$, faite avec $\alpha$ là où il fallait
+$\alpha'$, et aboutit à une autre forme, $x^2 + y^2 + z^2 - 2(1 + \alpha)yz - (x
++ y + z)$, que la page abandonne. La page 96, barrée aussi, commence le calcul
+des quadriques passant par les sommets.}.
+
+Les pages 99 et 101 font le calcul inverse, sans supposer l'invariance : une
+fonction quadratique nulle en $s_0, s_1, s_2, s_3$ s'écrit $a(x^2 - x) + b(y^2 -
+y) + c(z^2 - z) + uyz + vzx + wxy$ ; l'annulation en $s''_3$ donne $u = -\alpha
+b$, puis, en $s'_3$, $b = c$ et $v = \alpha' w - (\alpha' - 1)a$, en $\iota s''_3$
+donne $w = \alpha' v - (\alpha' - 1)a$, d'où $v = w = a$ (page 101), puis, en
+$\iota s_2$, $b = a$. Donc \emph{les douze sommets sont sur une quadrique et une
+seule, $q = 0$}, et la vérification en $\iota s_0$, $\iota s_1$ est inutile, $q$
+étant invariante (« c'est clair »)\footnote{Vérifié sur machine : les
+conditions d'annulation aux douze sommets sont de rang $9$ dans l'espace de
+dimension $10$ des fonctions quadratiques. La page 101 encadre $w = a$ avec un
+calcul intermédiaire en partie biffé.}.
+
+\pagerange{100}{100}
+\subsection*{Un feuillet étranger (page 100)}
+
+Au crayon puis à l'encre, barré, un brouillon de topologie générale sans lien
+avec l'icosaèdre : on construit une homotopie $h : X \times I \to Y$, égale à
+$(f|F') \circ \mathrm{pr}_1$ sur $F' \times I$ et à $(b, t) \mapsto
+c(t\varphi(b))$ sur $F \times I$, à l'aide d'une fonction continue égale à $1$
+en un point $x$ et à $0$ sur le bord $B = F \cap F'$, avec $X = F \cup F'$ ;
+une condition a) demande l'existence d'une telle fonction (« p.\ ex.\ si $F$
+compact régulier », lecture douteuse). On n'en dit pas plus.
+
+\pagerange{101}{106}
+\subsection*{Discriminants ; deux feuillets intercalés (pages 101 à 106)}
+
+La forme homogène $q_0$ a pour matrice $\bigl(\begin{smallmatrix} 2 & 1 & 1 \\ 1
+& 2 & -\alpha \\ 1 & -\alpha & 2 \end{smallmatrix}\bigr)$, de déterminant $8 -
+2\alpha - 2 - 2\alpha^2 - 2 = 4 - 2(\alpha^2 + \alpha) = 2$ : $\delta = 2$, donc
+$\delta' = 1$ (20)--(21). « Forme quadratique très parfaite, \emph{merveille}
+! » La forme $q$ homogénéisée par une variable $t$ a pour matrice
+\[
+\begin{pmatrix} 2 & 1 & 1 & -1 \\ 1 & 2 & -\alpha & -1 \\ 1 & -\alpha & 2 & -1 \\ -1
+& -1 & -1 & 0 \end{pmatrix}, \qquad \det = -\alpha - 3, \quad N(-\alpha - 3) = 5 ,
+\]
+« sauf erreur de calcul » --- il n'y en a pas\footnote{La troisième ligne de
+la matrice (22) est écrite $(-\alpha, -1, 2, -1)$, non symétrique ; on la
+rétablit. La valeur $-\alpha - 3$ est celle du tableau de la page 69,
+vérifiée. Le calcul de la page 104 par les mineurs $\Delta_1 = -\alpha'$,
+$\Delta_2 = \alpha + 2$, $\Delta_3 = -2 - \alpha$, qui aboutit à $\alpha'$,
+contient des erreurs de mineurs ; le résultat retenu à la page 102 est le
+bon.}. La quadrique projective est donc lisse sauf en caractéristique $5$, où
+--- ajout à l'encre noire --- « l'icosaèdre est inscrit dans une \ldots\ de
+rayon nul, des quadriques \emph{sing.}\ ! » : le cône de sommet $o$ que l'on a
+vu à la page 78. En toute autre caractéristique, l'icosaèdre est inscrit dans
+une « quadrique \emph{lisse} » (fin de la phrase, en tête de la page
+106)\footnote{Une première version, en bleu, biffée, disait « Vérifier ! Donc
+l'icosaèdre est inscrit dans une quadrique lisse en toute dimension ! » ; elle
+se poursuit page 106. Le mot après « 5- » n'est pas lu.}.
+
+Deux feuillets d'un autre papier sont intercalés. La page 103 considère le
+groupe $\mu_n$ opérant sur un module quadratique de rang $2$, $V_T \simeq D \oplus
+D^{-1}$, par $\zeta.(x, y) = (\zeta x, \zeta^{-1}y)$ ; elle pose $c = \zeta +
+\zeta^{-1}$, $\zeta^2 - c\zeta + 1 = 0$, et note qu'une section $c$ de
+$\mathcal{O}_S$ racine du polynôme cyclotomique « réel » définit un revêtement
+quadratique $\operatorname{Spec}\mathcal{O}_S[X]/(X^2 - cX + 1)$ sur lequel vit
+$\zeta$, avec $\sigma\zeta = \zeta^{-1}$ pour l'involution du revêtement. C'est,
+dans la langue des schémas, le passage du paramètre $\alpha = \zeta +
+\zeta^{-1}$ des rotations à la racine de l'unité $\zeta$ elle-même\footnote{La
+page écrit « $c$ satisfaisant $\Phi_n(c) = 0$ » ; c'est le polynôme qu'on a noté
+$\Psi_n$ (pour $\Phi_n$ cyclotomique, $\Phi_n(\zeta) = 0$). Le rapprochement
+avec le paramètre $\alpha$ est de l'édition. Une liste numérotée 1) à 3) des
+données équivalentes (module quadratique de rang $2$, section de
+$\Sigma^{(q)}/\mu_n^{(q)}$, revêtement étale quadratique $\Omega$ et
+isomorphisme) est en partie illisible.}. La page 105 note que pour un module
+localement libre $F$ de rang $2$, $\mathbb{V} = \operatorname{Sym}^2(F) \otimes
+(\det F)^{-1}$ porte une forme quadratique canonique, le discriminant $Q :
+\mathbb{V} \to \mathcal{O}_S$, qui en base s'écrit $b^2 - ac$ : c'est la
+construction de l'isomorphisme $\mathrm{PGL}_2 \simeq \mathrm{SO}_3$ que la
+lecture du dossier 82 développe\footnote{Feuille de listing, plusieurs lignes
+barrées ; on ne donne que ce qui se lit. La normalisation exacte (« $-xx' +
+b(xy' + x'y) + c\,yy'$ ») est incertaine.}. La page 104 calcule les mineurs du
+déterminant (22).
+
+\pagerange{107}{111}
+\subsection*{Suffisance ; réalisations régulières et fidèles (pages 107 à 111)}
+
+« Est-il clair que la condition $\alpha^2 + \alpha - 1 = 0$ est \emph{suffisante}
+pour avoir une représentation de l'icosaèdre ? » (page 107). On a une
+représentation affine du groupe de Coxeter $\Gamma' = \langle \sigma_0,
+\sigma_1, \sigma_2 \mid \sigma_i^2, (\sigma_0\sigma_1)^3, (\sigma_1\sigma_2)^5,
+(\sigma_0\sigma_2)^2\rangle$, qui a pour quotient le groupe $\Gamma$ de
+l'icosaèdre combinatoire ; si l'on sait que $\Gamma' \simeq \Gamma$, c'est
+fini, sinon il faut vérifier, « de pure routine », que les douze points sont
+stables par les générateurs et que ceux-ci y opèrent comme sur les douze
+sommets de l'icosaèdre combinatoire. On sait aujourd'hui que $\Gamma' \simeq
+\Gamma$ (les deux sont d'ordre $120$) ; et la vérification de routine a été
+faite ici sur machine\footnote{La page 108 résume : pour $\sigma_1$, des
+« modules » $\lambda, \mu, \nu$ avec $\nu^2 = 1$, $\mu = -\nu\lambda$, puis $\nu = 1$
+« exprimant $u^3 = \mathrm{id}$ » et $\lambda^2 + \lambda - 1 = 0$. Ce n'est pas
+$\rho_f^3 = \mathrm{id}$, automatique (page 85), mais $\rho_s^5 = \mathrm{id}$
+qui donne l'équation ; $\lambda = \alpha'$ vérifie la même équation que $\alpha$.
+Le dernier paragraphe de la page 108, barré, voulait traiter le cas $\nu = -1$.}.
+
+\textbf{Définitions} (pages 109 et 110). Soit $\Pi = (S, A, F; r)$ l'icosaèdre
+combinatoire épinglé par le repère $r = (s_0, \operatorname{Dr}(s_0, s_1),
+\operatorname{Pl}(s_0, s_1, s_2))$, et $\Gamma$ son groupe d'automorphismes. Une
+\emph{représentation} (ou réalisation) affine de $\Pi$ dans un fibré affine $E$
+de dimension relative $3$ sur un schéma $Y$ est la donnée d'applications
+$\rho_S$, $\rho_A$, $\rho_F$ de $S$, $A$, $F$ dans les sections de $E$, ses
+sous-fibrés en droites affines, ses sous-fibrés en plans affines, qui
+respectent l'incidence\footnote{La page note $S$ la base, comme les
+sommets ; on l'appelle $Y$.}. Elle est
+\begin{itemize}
+  \item \emph{acceptable} si les sommets d'une face ont des images deux à deux
+    distinctes --- alors $\rho_A$, $\rho_F$ sont connues par $\rho_S$, qui
+    peut être donnée arbitrairement ;
+  \item \emph{fidèle} si deux facettes dont les réalisations sont incidentes
+    sur une fibre sont incidentes ; cela entraîne qu'elle est acceptable et que
+    $\rho_S$, $\rho_A$, $\rho_F$ sont injectives ;
+  \item \emph{régulière} si elle est acceptable et si tout $g \in \Gamma$ se
+    prolonge en un automorphisme affine $g_E$ de $E$ ; c'est une propriété de
+    $\rho_S$, qui entraîne que $\rho_S(S)$ engendre affinement $E$.
+\end{itemize}
+
+\textbf{Proposition} (page 109). \emph{Une représentation régulière est fidèle.}
+La démonstration commence comme celle de la page 51 --- $s_0, s_1, s_2, s_3$ sont
+affinement indépendants, car sinon le plan $P = \operatorname{Pl}(s_0, s_1, s_2)$,
+déjà stable par $\sigma_0$ et $\sigma_1$, le serait aussi par $\sigma_2$ --- et
+s'interrompt. Pour l'icosaèdre, la conclusion est vraie, et c'est le résultat
+des pages 93 et 94 complété plus haut : la seule réalisation régulière à repère
+près (celle des pages 82 à 99) est fidèle en toute caractéristique.
+
+\textbf{Réalisations régulières et représentations} (page 111). Se donner une
+réalisation régulière de $\Pi$ revient à se donner une représentation affine de
+rang $3$ de $\Gamma$ dans $E$ et un point $s_0 \in E^{\sigma_1} \cap
+E^{\sigma_2}$, c'est-à-dire sur l'axe $D_0$, tel que $s_0$, $s_1 = \sigma_0 s_0$,
+$s_2 = \sigma_1 s_1$, $s_3 = \sigma_2 s_2$ soient affinement indépendants. Deux
+tels points $s_0, s'_0$ se correspondent par un unique automorphisme de $E$
+commutant à $\Gamma$ --- l'homothétie de centre $o$ qui envoie l'un sur
+l'autre, quand $2$ est inversible\footnote{L'homothétie est de l'édition : la
+représentation linéaire est absolument irréductible, son commutant est formé
+des scalaires, et un automorphisme commutant à $\Gamma$ fixe $o$. La marge de
+la page 111, en partie illisible, esquisse un programme : représentations
+affines fidèles, conditions d'existence, « classification des représentations
+affines \ldots\ des formes de l'icosaèdre ».}.
+
+\pagerange{113}{119}
+\section*{VIII. Position du problème des 2-polyèdres réguliers (pages 113 à 119)}
+
+La chemise rose de la page 113 porte « Position du pb des 2-polyèdres réguliers
+/ vieille rédaction » et « (10 p) ».
+
+\pagerange{114}{115}
+\subsection*{Drapeaux universels (pages 114 et 115)}
+
+Soit $\mathfrak{G}_2 = \langle \sigma_0, \sigma_1, \sigma_2 \mid \sigma_i^2,
+(\sigma_0\sigma_2)^2 \rangle$ (1)--(2) le groupe cartographique\footnote{La page
+le note $\Gamma$.}. Pour toute partie non vide $H \subset \{0, 1, 2\}$, soit
+$\mathfrak{G}_H$ le sous-groupe engendré par les $\sigma_i$, $i \notin H$, et
+$\mathfrak{F}_H = \mathfrak{G}_2 / \mathfrak{G}_H$ l'ensemble des \emph{drapeaux
+universels de type $H$} (3). Pour $H \subset K$, $\mathfrak{G}_K \subset
+\mathfrak{G}_H$ donne $\varphi_{HK} : \mathfrak{F}_K \to \mathfrak{F}_H$ (4), et
+$\mathfrak{F}_{**} = \coprod_H \mathfrak{F}_H$ est ordonné par $x \preccurlyeq y$
+si et seulement si $H \subset K$ et $x = \varphi_{HK}(y)$ (5)--(6). Les éléments
+minimaux, $\mathfrak{F}_0$, $\mathfrak{F}_1$, $\mathfrak{F}_2$, sont les
+sommets, arêtes et faces universels ; sur leur réunion $\mathfrak{F}_*$, on a la
+dimension (8) et la relation d'\emph{incidence} : $x \leq y$ si $\dim x \leq
+\dim y$ et s'il existe $z \in \mathfrak{F}_{**}$ avec $x, y \preccurlyeq z$
+(9)\footnote{La page écrit $z \in \mathfrak{F}_*$ ; on lit
+$\mathfrak{F}_{**}$, comme le demande le sens. Pour que ce soit une relation
+d'ordre, il faut que l'incidence soit transitive, ce qui vaut pour la carte
+universelle, et que la page tient pour acquis.}. C'est la carte universelle,
+dont toute $2$-carte est un quotient.
+
+\pagerange{115}{117}
+\subsection*{Un polyèdre régulier dans un schéma (pages 115 à 117)}
+
+Soit $X$ un schéma affine (ou quasi-projectif) sur une base $Y$, et
+$\mathfrak{F}_H(X/Y)$ ses drapeaux de type $H$, au sens habituel. Un
+\emph{polyèdre régulier scindé} $P$ dans $X$ est la donnée de trois ensembles
+finis
+\[
+S \subset \mathfrak{F}_0(X/Y) = X(Y), \qquad A \subset \mathfrak{F}_1(X/Y), \qquad F
+\subset \mathfrak{F}_2(X/Y) \quad (10)
+\]
+satisfaisant [11] : (a) chaque arête est incidente à exactement deux
+sommets, (b) chaque couple sommet--face incidents l'est à exactement deux
+arêtes, (c) chaque arête à exactement deux faces --- et chaque condition reste
+vraie après tout changement de base $Y' \to Y$, $Y' \neq \varnothing$. Alors
+$\Psi_* = S \amalg A \amalg F$ (12) est un ensemble ordonné du type voulu, on en
+forme les drapeaux de tout type $H$ (12 bis), et $\operatorname{Rep}(P) =
+\Psi_{\{0,1,2\}}$ (13), sur lequel $\mathfrak{G}_2$ opère par (14), $\sigma_i$
+changeant la $i$-ième composante. Les restrictions $\operatorname{Rep}(P) \to
+\Psi_H(P)$ (15) se factorisent par $\operatorname{Rep}(P)/\mathfrak{G}_H$ (16). On
+demande de plus :
+\begin{enumerate}
+  \item[{[17]}] les applications (15) sont surjectives ;
+  \item[{[18]}] $S$ engendre affinement $X$ fibre par fibre ;
+  \item[{[19]}] une condition de connexité sur $\Psi_*(P)$, qui assure que
+    $\mathfrak{G}_2$ opère transitivement sur $\operatorname{Rep}(P)$ et qu'un
+    automorphisme de $P$ fixant un repère est l'identité ;
+  \item[{[20]}] $\operatorname{Aut}(X, P)$ opère transitivement sur
+    $\operatorname{Rep}(P)$\footnote{En marge de [19], « redondant ? », avec une
+    condition équivalente proposée, $\operatorname{Rep}(P) / \mathfrak{G}_H
+    \xrightarrow{\sim} \Psi_H(P)$ pour tout $H$. Le texte de [17] est en partie
+    illisible au-delà de la première ligne.}.
+\end{enumerate}
+Alors le stabilisateur $N$ d'un repère est distingué --- les automorphismes de
+$P$ commutent à $\mathfrak{G}_2$ et sont transitifs, de sorte que tous les
+repères ont le même stabilisateur --- et $\operatorname{Rep}(P)$ est un torseur sous $\Gamma_P =
+\mathfrak{G}_2 / N$ (21) ; $\operatorname{Aut}(X, P) \simeq
+\operatorname{Aut}_{\mathrm{comb}}(P)$ (22), et le choix d'un repère $r$ définit
+une bijection $\varphi : \Gamma_P \to \operatorname{Aut}(X, P)$, $\varphi(\gamma)$
+étant l'unique automorphisme tel que $\varphi(\gamma)(r) = \gamma.r$ (23)--(24).
+Ce $\varphi$ est un \emph{anti}-isomorphisme : $\varphi(\gamma\gamma')(r) =
+\gamma\gamma'.r$, tandis que $\varphi(\gamma)\varphi(\gamma')(r) =
+\varphi(\gamma)(\gamma'.r) = \gamma'.\varphi(\gamma)(r) = \gamma'\gamma.r$\footnote{La
+page écrit « isomorphisme ». La même inversion de l'ordre est relevée par la
+lecture du dossier 86, page 14.}.
+
+\pagerange{117}{119}
+\subsection*{Questions (pages 117 à 119)}
+
+$r$ étant fixé, $\gamma \mapsto \gamma.r$ est surjective par [19], et les
+surjections induites $N \backslash \mathfrak{F}_H = \mathfrak{G}_2 / N\mathfrak{G}_H
+\to \Psi_H(P)$ (26) sont-elles bijectives ? Que dire des sous-groupes
+distingués $N$ et des espaces homogènes $\mathfrak{G}_2 / N \simeq \Psi_{**}(P)$ ?
+« On voudrait que ce soit l'ensemble des $5$ cartes correspondant aux polyèdres
+\emph{réguliers} connus --- en particulier, on voudrait que ce soit
+\emph{orientable} ! Et il faudrait, pour une carte combinatoire donnée,
+déterminer les polyèdres réguliers épinglés par ce $\mathfrak{F}$ --- ce qui est
+un pb modulaire\ldots »\footnote{« orientable » est une lecture incertaine.}.
+
+Si (26) est bijective --- et sinon, il faudrait renforcer la définition --- on
+récupère $P$ à partir de $\varphi : \mathfrak{G}_2 \to \operatorname{Aut}(X)$ (27) et
+de $r = (s_0, a_0, f_0)$ (28) satisfaisant les conditions de stabilisateur (29),
+qui sont celles de la page 55, en prenant pour $S, A, F$ les orbites. Pour
+que de telles données définissent un polyèdre régulier (sur un corps), il faut
+que $N = \ker\varphi$ (30) soit d'indice fini ; [17] est alors automatique,
+mais [11] demande, avec $s'_0 = \sigma_0 s_0$, $a'_0 = \sigma_1 a_0$, $f'_0 =
+\sigma_2 f_0$ (31), distincts de $s_0, a_0, f_0$ :
+\begin{enumerate}
+  \item[{[32]}] a) si $\gamma s_0 \prec a_0$, alors $\gamma s_0 \in \{s_0, s'_0\}$
+    ; b) si $s_0 \prec \gamma a_0 \prec f_0$, alors $\gamma a_0 \in \{a_0,
+    a'_0\}$ ; c) si $a_0 \prec \gamma f_0$, alors $\gamma f_0 \in \{f_0, f'_0\}$ ;
+  \item[{[33]}] les $\gamma s_0$ engendrent affinement $X$ ;
+  \item[{[33']}] si $\gamma s_0 \prec \gamma' a_0 \prec \gamma'' f_0$, il existe
+    $\gamma'''$ avec $\gamma''' s_0 = \gamma s_0$, $\gamma''' a_0 = \gamma' a_0$,
+    $\gamma''' f_0 = \gamma'' f_0$ --- ce qui exprime [19].
+\end{enumerate}
+Ce sont, pour l'icosaèdre, exactement les vérifications des pages 85 à 94 :
+[32] et [33'] sont des énoncés d'incidence géométrique, et la fidélité établie
+plus haut les contient\footnote{Le rapprochement est de l'édition. La page
+renvoie à « [12] » pour [33], numéro surchargé ; la condition est [18].}.
+
+\pagerange{120}{120}
+\section*{IX. Les « cocubes » (page 120)}
+
+D'une encre noire et d'une écriture posée. Soit $B \to I$ un revêtement double
+d'ensembles finis, c'est-à-dire un ensemble $B$ muni d'une involution sans point
+fixe $b \mapsto \bar b$, $I = B/\sigma$, $n = \operatorname{card} I$. Dans $k^B$,
+soit $E$ l'espace affine des $\varphi = (\varphi_b)$ tels que $\varphi_b +
+\varphi_{\bar b} = 1$ pour tout $b$ --- l'image réciproque de $(1, \dots, 1)$
+par la trace $k^B \to k^I$ ---, de dimension $n$, et $H_b = \{\varphi_b = 1\}$.
+Pour une section partielle $B' \in \Gamma_p(B/I)$, $F_{B'} = \bigcap_{b \in B'}
+H_b$ ; l'ensemble $\mathfrak{F} = \{F_{B'}\} \cup \{\varnothing\}$ est celui des
+faces du cube $[0, 1]^I$ : les sections totales donnent les sommets, la section
+vide l'espace entier, et $H_b \cap H_{\bar b} = \varnothing$. C'est le cube
+d'un ensemble à involution du dossier 76 (pages 49 et 50), où les faces sont
+indexées, en renversant l'ordre, par les sections partielles\footnote{Le
+dossier 76 prend $\varphi(\bar b) = -\varphi(b)$, d'où le cube $[-1, 1]^I$ ; ici
+$\varphi_b + \varphi_{\bar b} = 1$ donne $[0, 1]^I$.}.
+
+Dualement, soit $N \subset k^B$ le sous-module, facteur direct de rang $n - 1$,
+engendré par les $(b + \bar b) - (b' + \bar b')$, et $V = k^B / N$, de rang $n +
+1$, avec $0 \to W \to V \to k \to 0$. Les images des $b$ sont $2n$ points d'un
+hyperplan affine de $V$ ; c'est le \emph{cocube}, que la page caractérise ainsi.
+Un ensemble $\mathfrak{F}$ de sous-espaces affines d'un espace $E$ de dimension
+$n$ est un cocube si
+\begin{enumerate}
+  \item[a)] pour tout point $s \in \mathfrak{F}_0$, il existe un unique $s' \neq
+    s$ dans $\mathfrak{F}_0$ tel que la droite $ss'$ ne soit pas dans
+    $\mathfrak{F}$ ; $s \mapsto s'$ est une involution sans point fixe de $B =
+    \mathfrak{F}_0$, et $I = B/\sigma$ ;
+  \item[b)] pour toute section partielle $B'$, $B'$ est affinement libre et son
+    enveloppe affine est dans $\mathfrak{F}$, et l'on obtient ainsi tous les
+    éléments de $\mathfrak{F}$ autres que $E$ ;
+  \item[c)] pour toute section totale $B'$ et tout $b \notin B'$, $B' \cup
+    \{b\}$ est affinement libre et engendre $E$ ;
+  \item[d)] $b + \bar b = b' + \bar b'$ pour tous $b, b'$ : les milieux des
+    diagonales coïncident.
+\end{enumerate}
+C'est le \emph{polytope croisé} --- l'octaèdre en dimension $3$ ---, dont les
+faces sont les simplexes sur les ensembles de sommets sans paire opposée ; le
+cube et lui sont duaux, et le dossier 87 les traite par la polarité
+convexe\footnote{Les noms « polytope croisé », « hyperoctaèdre » ne sont pas sur
+la page. Elle écrit « de dim.\ $n$ » après « sous-var.\ linéaires affines »,
+pour l'espace $E$.}.
+
+\pagerange{121}{123}
+\section*{X. Programme provisoire d'une théorie arithmétique des polyèdres réguliers (pages 121 à 123)}
+
+Le titre, souligné, est le sien, et la page commence un texte neuf.
+
+Soit $\tau$ un type de polyèdre régulier dans l'espace affine réel de dimension
+$n$. Il a un représentant « canonique » $X_\tau$, défini à isomorphisme
+canonique près par le choix d'un repère $R_\tau$ ; l'espace $E_\tau$ qui le
+porte a pour origine le barycentre des sommets et devient un espace vectoriel.
+Soit $\mathcal{F}_\tau$ l'ensemble ordonné des facettes de $X_\tau$, y compris
+celles de dimension $-1$ et $n$, et
+\[
+G_\tau \simeq \operatorname{Aut}_{\mathrm{aff}}(X_\tau) \simeq \operatorname{Aut}_{\mathrm{ord}}(\mathcal{F}_\tau) .
+\]
+La catégorie des polyèdres réguliers de type $\tau$ équivaut à celle des
+torseurs sous $G_\tau$ --- par $X \mapsto \operatorname{Isom}(X_\tau, X)$\footnote{Le
+foncteur est de l'édition ; la page énonce l'équivalence. L'indice du second
+$\operatorname{Aut}$ se lit « ord » ou « ad ».}.
+
+Soit $k$ un anneau commutatif (« plus gén., on pourrait se placer sur un schéma,
+ou sur un topos loc.\ annelé »). Une \emph{$k$-réalisation} de $\tau$ est la
+donnée
+\begin{enumerate}
+  \item[a)] d'un $k$-espace projectif $P$ de dimension $n$, « splitté » ---
+    associé à un module projectif de type fini, défini à tensorisation près par
+    un module inversible ---, muni d'une section $s_0$ et d'un hyperplan « à
+    l'infini » $H_\infty$ ;
+  \item[b)] d'un ensemble $\mathcal{F}$ de sous-espaces projectifs de $P$ tel
+    que :
+\end{enumerate}
+\begin{enumerate}
+      \item[1)] $(\mathcal{F}, \subset)$ soit isomorphe à $\mathcal{F}_\tau$, la
+        dimension combinatoire de chaque $V \in \mathcal{F}$ (le plus petit
+        élément étant de dimension $-1$) étant égale à sa dimension projective,
+        et $P \in \mathcal{F}$ ;
+      \item[2)] pour tout $V \in \mathcal{F}$, $s_0 \notin V$ et $V \not\subset
+        H_\infty$, fibre par fibre ;
+      \item[3)] les éléments de $\mathcal{F}_0$ engendrent $P$, et ceux de
+        $\mathcal{F}_{n-1}$ engendrent le dual $\check P$ ; plus précisément,
+        pour $V \subsetneq W$ dans $\mathcal{F}$, $W$ est engendré par les $V' \in
+        \mathcal{F}$ avec $V \subset V' \subset W$, $\dim V' = \dim V + 1$, et
+        dualement ;
+      \item[4)] tout automorphisme de l'ensemble ordonné $\mathcal{F}$ est
+        induit par un automorphisme de $P$ qui conserve $\mathcal{F}$.
+\end{enumerate}
+« Raisonnable si $\operatorname{Spec} k$ connexe ».\footnote{La condition 2)
+est entre crochets, son numéro noirci, et une flèche la contourne : elle est
+peut-être retirée. La précision de 3) est en marge et remplace une parenthèse
+barrée. Dans 1), la page écrit « la dimension combinatoire de $\mathcal{F}$ »,
+pour $V$.} C'est le renversement annoncé : on ne part plus d'une carte
+combinatoire pour chercher ses réalisations, mais du polyèdre réel, et l'on
+demande sur quels anneaux il « s'écrit » --- la question que les pages 74 à 111
+résolvent pour l'icosaèdre, $\mathbf{Z}[\alpha]/(\alpha^2 + \alpha - 1)$ étant
+l'anneau où il vit, avec $s_0$ le centre et $H_\infty$ l'hyperplan à l'infini
+qui, en caractéristique $2$, contient ce centre. Aucun énoncé ne suit la
+définition.
+
+La page 123 est une feuille de notations, sans texte suivi, avec un cube et un
+polygone où un drapeau est repassé en gras, et la chaîne $F_0, \dots, F_{n-1}$
+d'un drapeau. On y lit des suites $(s_i)$, $(s'_i)$, $(\delta_i)$, $(f_i)$ avec
+$s_{n-1} = 2$, $s_n = 1$, $s'_0 = 2$, $s'_{-1} = 1$, $f_{-1} = f_n = 1$, la
+relation $s'_i f_{i+1} = f_i s_{i+1}$ et $N = \operatorname{card} G = \prod s_i =
+\prod s'_i$. La lecture la plus naturelle : $f_i$ est le nombre de
+$i$-facettes, $s_i$ le nombre de $i$-facettes contenant une $(i-1)$-facette
+donnée, $s'_i$ le nombre de $i$-facettes contenues dans une $(i+1)$-facette
+donnée ; la relation compte de deux façons les couples incidents de dimensions
+$i$, $i+1$, et le nombre de drapeaux, qui est l'ordre du groupe, est
+$s_0 s_1 \cdots s_n$ (pour le cube, $8 \cdot 3 \cdot 2 \cdot 1 = 48$)\footnote{Cette
+interprétation est de l'édition ; elle rend compte des valeurs aux bords. Les
+bornes du produit se lisent $1$ et $n - 1$, qui ne donnent pas l'ordre du
+groupe. Les $\delta_i$ ($0 \leq i \leq n - 2$) ne sont pas définis ; ce sont
+peut-être les $p_i$ de la page 3.}.
+
+\end{document}
