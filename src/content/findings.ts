@@ -4798,4 +4798,73 @@ export const FINDINGS: Finding[] = [
     settle:
       'Read the introduction of the J. Algebra 5 (1967) paper and EGA IV § 18 (IHÉS 32) for any mention of an appendix or of the paper’s origin; if either says the paper was the former appendix to § 18, mark matched (the identification is then in print) — if the paper treats something other than what EGA IV § 18 would have needed, mark refuted.',
   },
+// 141: no entry. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5 reading (% Pass header of 141.modern.tex, 2026-09-13), under the 2026-09-23 exception; no disagreement with the reading. Every statement is a match or rests on the edition's repair. Kummer theory on a henselian DVR, tame π₁ and the Kummer sequence (pp. 1–5): textbook; the reading had to supply henselian, n invertible and the tame quotient. Thm 1/2 on Bπ = K(π,1) and the Borel construction (pp. 7–8): Milnor 1956, Eilenberg–MacLane; the 1)⇔2) equivalence is cut off and never proved. Cartographic groups Γ_{p,q}, PSL(2,ℤ) ≅ ℤ/2*ℤ/3 (p. 9): Grothendieck's own Esquisse (1984) and the modular group; p. 10's « carte trouée » stops at its first line. Schreier index formula, free cocompletion, Ens(π)-equivalences = bitorsors, π₀Bit(π',π) = Isomext(π',π) (pp. 11–15): Schreier; Morita theory for groups; Giraud 1971 and Breen, « Bitorseurs et cohomologie non abélienne » (1990), cited from memory, not read. Bit.invol(π) ≃ Invol(Ens(π)) ≃ Ext(ℤ/2,π) (p. 13): stated, not proved; it is the case G = ℤ/2 of the classification of extensions by 2-group maps G → AUT(π) (Breen 1990), from memory; a web search on 2026-10-10 found Aldrovandi–Noohi, « Butterflies II » (arXiv 0909.3350), on extensions via bitorsors, but not this case, and nothing was read. π₁(X,Γ,a) with (γ',ℓ')(γ,ℓ) = (γ'γ, ℓ'∘γ'(ℓ)) (p. 14): Rhodes's fundamental group of a transformation group (1966), an extension of Γ by π₁(X,a), found by a 2026-10-10 web search through secondary papers (arXiv 0712.3039; Korean Math. Soc. papers by Park, Han and Woo on koreascience.kr); Rhodes's own paper was not read.
+// 143: no entry. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (% Pass header of 143.modern.tex, 2026-10-10); no disagreement with the reading. The folder establishes nothing that survives as a candidate: it is an inventory, a programme, formalism and conjectures. Σ_X as extension of the absolute automorphism group G-script by π₁, and the point-germ φ_ξ as a section of the fundamental exact sequence (pp. 1–4): SGA 1, equivariant π₁; injectivity of points → sections under a semi-abelian embedding (p. 4) is asserted on the page and proved by the edition (Kummer map, Mordell–Weil), and is the known injectivity half of the section conjecture (Stix, LNM 2054, from memory, not read). Inertia/cusp data Φ and the Kummer structure (pp. 4–7): textbook tame inertia. Reformulation α/β, extension-with-free-Σ-set ↔ connected groupoid with universal cover and G-action (pp. 16–18): the gauge groupoid and covering/orbit-groupoid theory; a 2026-10-10 web search found Brown–Higgins 1985 and Brown, Topology and Groupoids (1988), via arXiv math/0212271 and math/0412230 (Luo), none read, no exact statement of the equivalence found — classical by every indication, the page checks it object by object only. Pseudo-partition = unique path lifting, covering of the groupoid ⟨π⟩ (pp. 23–24): Gabriel–Zisman, Brown. T-groupoid = gerbe banded by T (p. 21): Giraud 1971; the page stops (« Arrêtons »). Conjecture π₁(M_{g,ν}) ≅ Out°_lac(π̂_{g,ν}) (pp. 28–30): Grothendieck's own later Esquisse (1984); Belyi 1979 for injectivity at (0,3); Γ = GT^ open (Drinfeld 1990, Ihara 1991). Question Γ → Out(T̂_{g,ν}) injective? (p. 30): the same 2026-10-10 search found Iijima (2015, Hiroshima Math. J., projecteuclid hmj/1439219709) on faithfulness of the outer Galois action on profinite mapping class groups, and Harbater–Schneps notes (genus 0, via Belyi), abstracts only; bijectivity fails at (0,4) by the edition's own example, the page already expecting an extra condition. Out(T_g) = 1? (p. 31): answered no by Ivanov/McCarthy. Pp. 26–27 (genus-0 modular stacks) and p. 32 (Birman sequence, profinite) are matches. No codicological entry: nothing was checked against the facsimile.
+// Candidate entries for folder 150 (find-novelty, Opus 5.5 on an Opus 5.5 reading, 2026-10-10). Not merged into src/content/findings.ts. No literature was searched in this pass: every mathematical entry is unsearched.
+  {
+    id: '150-unfolding-as-ordered-space',
+    cote: '150',
+    pages: '47–63, 64–66, 70',
+    kind: 'mathematical',
+    claim:
+      'The unfolded data of an equisingular stratification indexed by a finite poset I (unfolded strata Σ_i, connecting tubes Σ_ij with a fibration to Σ_i and a closed collared embedding into Σ_j) are equivalent to a single ordered topological space Σ, whose order graph is the union of the tubes, satisfying: target map proper and locally a collared immersion, each Σ_{<x} finite and totally ordered, the collared germs at each point mutually transverse, the source transverse to the target and a proper fibration, together with a strictly increasing map π₀(Σ) → I that need not be surjective.',
+    basis:
+      'Pages 55–60 restate the conditions on an ordered space Σ after the author abandons pages 47–54 (« Je reprends »), separating the order-theoretic part (Σ_{<x} totally ordered, chains of length d over x ↔ d-subsets) from the topological one; pages 57–59 recover the order from a source map s and a cartesian square Σ*(2) → Σ*(1); pages 60–62 give the scholie and the hexagon; pages 64–66 recapitulate the indexed data; page 70 states the equivalence as « Conséquence » and proves the disjointness condition b) from the total order on Σ_{<x}. Page 70 carries five \\ill{} and an illegible marginal note on finite dimensionality facing condition (a); the equivalence itself is legible. Pages 55–58 carry 13 \\uncertain{} and 27 \\ill{} in all, mostly in struck or marginal matter.',
+    ours:
+      'The reading supplies the hypotheses of the dimension argument on pages 67–69 that the equivalence of page 70 rests on (local triviality of the source fibration, Σ_i of pure dimension and manifold-like, so that a rare closed subset has strictly lower dimension); the page assumes only finite-dimensional components. It also corrects « b fibrant » to s on page 67, N(x) = card Σ_{≤x} to card Σ_{<x} on page 56, and b_ij⁻¹ to s_jk⁻¹ in condition c) of page 65. No proof of the equivalence is written out on the pages beyond the order-recovery step and condition b).',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check whether the unfolding (resolution) of a Thom–Mather or conically smooth stratified space into manifolds with corners is anywhere presented as one ordered space with proper collared target map and fibred source, with the index poset recovered as a quotient of π₀ rather than given. Sources to try: Albin–Leichtnam–Mazzeo–Piazza, The signature package on Witt spaces (Ann. Sci. ÉNS 2012), on resolution to manifolds with iterated fibration structure; Ayala–Francis–Tanaka, Local structures on stratified spaces (Adv. Math. 2017), the « unzip » construction; Verona, Stratified mappings — structure and triangulability (LNM 1102, 1984); Mather, Notes on topological stability (1970; Bull. AMS 2012). If the index-free ordered-space form is there, mark matched; the indexed form alone is almost certainly matched by ALMP and AFT and is not the claim.',
+  },
+  {
+    id: '150-flag-fibration-smoothness',
+    cote: '150',
+    pages: '1, 45–47',
+    kind: 'mathematical',
+    claim:
+      'In the unfolding of a non-singular equisingular stratification presented as a functor on the flags of I, the boundary of the fibres of Σ_{d′} → Σ_d (d = (i_1,…,i_p) an initial segment of d′ = (i_1,…,i_n)) is cylindrically stratified by the non-empty flags of the ordinal sum I_{]i_p,i_{p+1}[} ⊔ … ⊔ I_{]i_{n−1},i_n[}, so the fibration has boundaryless fibres exactly when each of i_p, i_{p+1}, …, i_n covers the preceding one in I, the condition not involving i_1, …, i_{p−1}.',
+    basis:
+      'Page 1 announces the statement as part b) of the programme; pages 45–46 derive it from the conditions (a)–(f) of paragraph 10, first for Σ_ij → Σ_i (boundary stratified by Drap(I_{]i,j[}), empty iff j is a successor of i), then for general initial segments; page 47 states the criterion with the author\'s emphasis « à partir de i_p, pas de i_1 ! ». The word qualifying « successeur » on page 47 is an \\uncertain{} addition (« le plus proche, au sens de I »), and the parenthesis after « lissité » is three \\ill{}; the criterion is fixed by page 46, which is legible. A struck first version on page 46 also required j maximal in I; it is not the page\'s final statement.',
+    ours:
+      'Nothing of the statement; the reading restores the page-1 orientation of the fibration (to Σ_i, not Σ_k), which the rest of the folder uses.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check whether the boundary-face combinatorics of the fibres of the iterated boundary fibrations of a resolved stratified space — faces indexed by flags of the open intervals of the stratum poset, smooth fibres iff consecutive strata are adjacent — is stated in Albin–Leichtnam–Mazzeo–Piazza (2012, §2 on iterated fibration structures), Ayala–Francis–Tanaka (2017) on links of unzipped strata, or Debord–Lescure–Rochon (2015) on manifolds with fibred corners. If stated there, mark matched; this is the more likely outcome, since the link of stratum i in stratum j is classically stratified by the strata between them.',
+  },
+  {
+    id: '150-leaves-swapped',
+    cote: '150',
+    pages: '28–31, 91–93',
+    kind: 'codicological',
+    claim:
+      'Two pairs of leaves are bound out of reading order: pages 29 and 30 are interchanged (the reading order is 28, 30, 29, 31), and so are pages 92 and 93 (the reading order is 91, 93, 92).',
+    basis:
+      'Page 30 bears the author\'s sheet number « 10 » and opens on the end of condition c) of paragraph 6, which page 28 leaves unfinished; page 29, unnumbered, opens paragraph 7 (« Stratifications et voisinages côniques »), and page 31, numbered « 11 », continues it. Page 92 bears « 43 » and opens on (94) after a struck line « X*_J = X_{J̄} », while page 93, unnumbered, carries (92) and (93), the definition of X*_J that page 92 uses, and continues the « si i, j ∈ J » on which page 91 stops.',
+    ours: null,
+    literature: ['Transcription 150, batch 2 (batch-02.fr.tex), notes to pages 28–31; batch 5 (batch-05.fr.tex), notes to pages 91–93'],
+    status: 'candidate',
+    settle:
+      'A person checks the four leaves against the facsimile: the author\'s sheet numbers on pages 30, 31 and 92, and whether 29/30 and 92/93 are rectos and versos of single leaves (scanning order) or separate leaves (binding order).',
+  },
+// Folder 152: no entry — every statement the folder establishes is a match (rotation systems, Heffter 1891 / Edmonds 1960; the darts-involution-rotation description of combinatorial maps with faces as cycles of the product, Jacques 1968 / Cori 1975; plane trees as one-face genus-0 maps, i.e. a polygon with a non-crossing side-pairing, with the dual tree of a chord dissection), all already footnoted in 152.modern.tex as modern names; the only statement beyond these, the page 2 equivalence for « types de mots », leaves its terms (type de mot, S_0) undefined and rests on \uncertain/\ill readings, and the page 9 criterion's closing words are illegible, so neither can be written as a checkable claim. Pass on Opus 5.5 over an Opus 5 reading (2026-09-23 exception); no disagreement with the reading's dictionary rho_C = rho_Gamma sigma_Gamma, sigma_C = sigma_Gamma; no literature searched in this pass.
+  {
+    id: '153-relative-int-coproducts',
+    cote: '153',
+    pages: '3, 9',
+    kind: 'mathematical',
+    claim:
+      'For an inclusion of commutative rings k₀ ⊂ K₀, not assumed to be a domain and its fraction field, the ring Int(k₀) = {F ∈ K₀[T] | F(k₀) ⊂ k₀} carries well-determined co-addition and co-multiplication in Int(k₀) ⊗_{k₀} Int(k₀), and so the composition rules of an analyseur (a plethory), once Int(k₀) is a free k₀-module and K₀[X,Y] = K₀[X] ⊗_{k₀} K₀[Y].',
+    basis:
+      'Page 3 strikes out « k₀ anneau intègre, K₀ son corps des fractions », replaces it by an inclusion of commutative rings (itself read with doubt), states a lemma identifying the K₀[T] ⊗ M-polynomials with values in a free M as Int ⊗ M, writes F(X+Y) and F(XY) as elements of Ω ⊗ Ω with a « ? » over each equals sign, and adds in the margin « OK si Ω est un k₀-module libre »; page 9 lists the relative Int as Example 2 of an analyseur.',
+    ours:
+      'The freeness hypothesis is the page’s own (margin); the hypothesis K₀ ⊗_{k₀} K₀ = K₀ (e.g. K₀ a localisation of k₀), without which K₀[X,Y] = K₀[X] ⊗ K₀[Y] fails, is the reading’s (Opus 5). The word « Lemme » and « d’anneaux commutatifs » are \\uncertain{} in the transcription. This pass (Opus 5.5, on an Opus 5 reading) adds a step the reading also leaves implicit: to apply the lemma with M = Ω one needs F(X+Y) to lie in K₀[X] ⊗ Ω, i.e. K₀ ⊗_{k₀} Ω = K₀[T]; this holds when K₀ is a localisation S⁻¹k₀ (each F ∈ K₀[T] has sF ∈ k₀[T] ⊂ Ω), and then the coordinates in a k₀-basis of Ω are in Ω by evaluation. That check is the pass’s, not the page’s. The page states only co-operations; plethory axioms beyond them are not verified there.',
+    literature: [
+      'J. Elliott, « Birings and plethories of integer-valued polynomials », arXiv:1109.3848v3 (2014; v1 2011 « Biring and plethory structure on integer-valued polynomial rings »), abstract and §1 (Proposition 3, Theorem 4, Corollary 5, Proposition 7, Theorem 8), read by text extraction: works throughout with an integral domain D and its quotient field K, under flatness of Int(D) or D-torsion-freeness of Int(D)^{⊗n}, n ≤ 4 — the non-domain pair k₀ ⊂ K₀ is not treated there',
+    ],
+    status: 'candidate',
+    settle:
+      'Search the literature on integer-valued polynomials over rings with zero divisors (Cahen–Chabert, Integer-Valued Polynomials, 1997, and its sequels; Frisch; Elliott’s later papers and the CIRM 2010 note, acirm.34) and Borger–Wieland 2005 for a biring/plethory structure on Int(k₀) relative to a non-domain extension; and decide whether the generalisation is more than routine, since for a domain the freeness hypothesis is stronger than Elliott’s flatness. If found, mark matched.',
+  },
 ];
