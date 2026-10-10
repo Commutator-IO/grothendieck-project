@@ -1,0 +1,1173 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 73, pages 1-28
+% (the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. It is held to being mathematically correct as it stands; where
+% the manuscript is loose or mistaken, the true statement is what appears here
+% and the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck cites batch-01.fr.tex
+% (pp. 1-20) or batch-02.fr.tex (pp. 21-28).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% The folder was read whole, both batches together; this is one document for
+% the shelfmark. It was made on Opus 5.5 and has not been measured against the
+% reference reading of folder 115 (made on Opus 5). The literature named in the
+% footnotes (Gauss's pentagon formula, Lagrange multipliers) is cited from
+% memory and was not checked against the sources. Every identity the reading
+% asserts beyond the page (Gauss's equation, the corrected discriminant, the
+% P, Q, R recurrence and its range, the symmetric-square identity, the
+% dimensions of N(u_*) for closed n-gons, n = 3..7, the collinear
+% counter-example, the multiplier of the nine-gon of p. 18) was checked by a
+% symbolic computation outside the file.
+%
+% Scope. Pages 2, 7, 11 and 13 are blank (the transcription skips them, and
+% the blank pages were checked on the facsimile). The inventory's « lettre
+% (s.d.) » is on no scanned leaf; nothing of it is described. Page 8 carries a
+% short non-mathematical list in the margin, left out by the transcription and
+% here.
+%
+% Spine. The map that sends a plane n-gon to the signed areas of its n « ears »
+% (the triangles s_{i-1} s_i s_{i+1}), and its critical points:
+%   p. 1        the functor Polg_n of n-gons in an affine plane (vertices and
+%               side-lines), degenerations;
+%   pp. 3-4     the multiplier relation in its first, « Lagrange » form
+%               lambda_i u_{i-1} - lambda_{i+1} u_{i+1} = w (constant), and its
+%               differences M_i (the four-term relation of pp. 20-28);
+%   pp. 5-6     quadrilaterals: one linear relation among the ear areas, and
+%               M_4 = P^2 with the four degenerate quadrilaterals as a frame;
+%   pp. 8-10    an unrelated piece, written backwards: configurations,
+%               operations, residual sets, tests, « cribles » (adaptive
+%               questioning strategies);
+%   p. 12       relations among lambda, mu, alpha for a closed n-gon;
+%   pp. 14-15   the Lagrange formulation written out (sum lambda_i df_i =
+%               mu sum dx_i + nu sum dy_i), and the closed formula, boxed;
+%   pp. 16-17   quadrilaterals again: lambda_0 + lambda_1 = 0, an explicit
+%               chart, the two diagonals;
+%   p. 18       lambda_0 = 0: a star nine-gon;
+%   p. 19       pentagons: a quadratic equation, which is Gauss's;
+%   pp. 20-22   the four-term relation, u_i in the basis u_0, u_1, u_2, the
+%               recurrence for P_i, Q_i, R_i, the closing equations (0)-(3);
+%   pp. 23-27   the degenerate case, the Proposition and its proof;
+%   p. 28       the Theorem: the four cases for N(u_*).
+%
+% Notation fixed for the whole document.
+%  - k a field, V a vector plane over k, E an affine plane of direction V;
+%    vertices s_i, sides u_i = s_{i+1} - s_i, i in Z/nZ; u_{ab} = u_a + ... +
+%    u_{b-1} = s_b - s_a (the page's own notation, p. 15).
+%  - mu_i = u_{i-1} ^ u_i in Lambda^2 V, identified with k by a choice of
+%    volume form: twice the signed area of the ear at s_i. The pages write
+%    mu_i on pp. 5 and 12 and f_i on pp. 14-19; mu_i throughout here, since
+%    the page's f_i is in the same pages the name of nothing else. phi the map
+%    u_* |-> (mu_i)_i.
+%  - w for the constant vector of the Lagrange form (the page's u on pp. 3, 4
+%    and 12, (nu, -mu) in coordinates on p. 14), so that u stays free.
+%  - (L) and (*) for the two forms of the multiplier relation; N(u_*) the
+%    space of multipliers (the page's, p. 25). (*) is used with the indexing of
+%    pp. 25-28; p. 20 writes the same family shifted by one.
+%  - The juxtaposition u v of two vectors on pp. 3, 4, 15, 18 and 28 is read
+%    as the product in the symmetric algebra Sym(V) and written u.v. The
+%    transcription's header likens it to the determinant; that reading is
+%    shown false (p. 15, i = 2: the sign of the lambda_0 term) in a footnote.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%  - p. 16: the first displayed result for the vertex s_2 has the wrong sign;
+%    the vertex is s_2, not the page's s_1. The boxed lambda_0 + lambda_1 = 0
+%    stands.
+%  - p. 19: the last expansion of the discriminant reads + 4 f_2 f_3; it is
+%    - 4 mu_2 mu_3. The middle line (read with doubt) is not an identity.
+%  - pp. 21-23: the coefficient polynomials of the closure relation (0) lie in
+%    Z[Lambda_1, ..., Lambda_{n-1}], not Z[Lambda_1, ..., Lambda_{n-2}]; the
+%    third closing equation (3) is written with the minus sign the page leaves
+%    as « (-) ».
+%  - p. 24: the indices of u_7, u_8, u_9 do not follow the rule written above
+%    them; the argument is restated, not the list.
+%  - pp. 25-27 (Proposition): the hypothesis that the u_i do not all lie on one
+%    line (the margin of p. 23, « OPS u_0, u_1 lin. indép. ») is supplied: the
+%    segment run back and forth, (e, -e, e, -e), has dim N = 2 with all
+%    multipliers non-zero and satisfies (b) but not (c), (d). n = 0 mod 3 is
+%    put into (d), where the page struck it. The injectivity of N(u_*) -> k^3
+%    is replaced by that of N(u_*) -> k^2 on two consecutive components, which
+%    needs only u_i != 0 and no hypothesis on k; the page's route is footnoted.
+%    The proof of d) => a), announced and not written, is supplied, and needs
+%    card k >= 3.
+%  - p. 28 (Theorem): the equivalence (b_2) <=> (d) needs the same
+%    non-collinearity; the exhaustiveness of the cases needs k infinite (the
+%    « Lemme » of the margin of p. 26). The half-illegible gloss of (a) is
+%    reconstructed as « phi is a submersion at u_* »; the criterion for (c)
+%    (« il faut et il suffit », read with doubt) is proved here and holds.
+%
+% Modern names given and footnoted as ours: Lagrange multipliers and critical
+% points, conormal space, symmetric square, projective frame, Gauss's pentagon
+% formula, decision trees. None is on the pages; nothing on them cites anyone.
+%
+% Announced and never established: the open U of p. 1 (its condition is
+% struck and unreadable); the dimension counts of p. 4 (prose lost); « épi ? »
+% (p. 5), answered here from the formulas of the same page; the system (0)-(3)
+% of p. 22, never solved; the meaning of CI_n^* on p. 12; the purpose of the
+% quadric at the top of p. 20; the proof of d) => a) (p. 27); the marginal note
+% of p. 28, largely lost. The « cribles » of pp. 8-10 are not applied to
+% anything in the folder.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{73}
+\pages{1}{28}
+\dating{[à partir de 1976]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Polygones : notes manuscrites (s.d.), lettre (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces feuillets parlent de polygones du plan, et d'une question qui paraît
+d'abord naïve : que sait-on d'un polygone quand on connaît les aires de ses
+« oreilles » ? À chaque sommet on associe le triangle qu'il forme avec ses deux
+voisins. Si l'on déforme le plan par une transformation affine --- une
+application qui garde les droites et le parallélisme, mais ni les longueurs ni
+les angles ---, toutes ces aires sont multipliées par un même nombre. Leurs
+rapports sont donc des invariants du polygone en géométrie affine, où il n'y a
+plus de distances mais où les rapports d'aires gardent un sens. Combien
+d'information portent-ils, et où en perdent-ils ?
+
+On peut penser aux polygones articulés, faits de tiges rigides reliées par des
+charnières : on connaît les longueurs des côtés, et l'on se demande quelles
+formes le polygone peut prendre. Ici les longueurs sont remplacées par les
+aires des oreilles, et la géométrie euclidienne par la géométrie affine.
+
+Pour le quadrilatère la réponse est complète. Les quatre aires vérifient une
+seule relation --- l'aire du quadrilatère se lit aussi bien sur les deux
+oreilles opposées d'une diagonale que sur celles de l'autre ---, et à cette
+relation près elles déterminent le quadrilatère : les quadrilatères, à
+transformation affine près, forment exactement un plan projectif, dans lequel
+les quatre quadrilatères dégénérés, ceux dont un côté est réduit à un point,
+sont quatre points en position générale. Pour le pentagone, le calcul aboutit à
+une équation du second degré : deux pentagones ont en général les mêmes
+oreilles. Cette équation est, sous un déguisement, une formule ancienne qui
+relie l'aire d'un pentagone à celles de ses cinq oreilles.
+
+Le cœur du dossier est ailleurs : dans les polygones où l'application
+« polygone $\mapsto$ aires des oreilles » perd de l'information même
+infinitésimalement, c'est-à-dire où l'on peut déformer le polygone sans que les
+aires bougent au premier ordre dans certaines directions. L'outil est celui des
+multiplicateurs de Lagrange, et Grothendieck l'écrit lui-même : on cherche les
+combinaisons des aires dont la variation est nulle pour toute déformation qui
+garde le polygone fermé. Ces combinaisons forment un espace vectoriel, et la
+condition s'écrit comme une relation entre quatre côtés consécutifs, une par
+sommet. Le théorème de la dernière page classe les cas : en général cet espace
+est nul ; il peut être une droite, engendrée par une combinaison où tous les
+sommets comptent ; il est un plan exactement quand le polygone est un triangle
+parcouru plusieurs fois ; et il peut être une droite engendrée par une
+combinaison qui ignore un sommet, ce qui arrive pour des polygones en étoile
+d'une forme très particulière, dont une page dessine un exemple à neuf sommets.
+Tout cela est conduit en essayant les cas un à un --- triangle, quadrilatère,
+pentagone, ennéagone --- avant l'énoncé général, qui arrive à la fin.
+
+Trois pages, écrites à rebours au milieu du dossier, n'ont rien à voir avec les
+polygones : elles formalisent une suite de questions posées à une configuration
+inconnue, chacune choisie selon les réponses aux précédentes. La première page,
+enfin, définit les polygones dans le langage des schémas, comme un espace dont
+les points sont des polygones, dégénérés compris.
+
+Les noms à chercher ensuite : multiplicateurs de Lagrange et points critiques,
+espaces de modules de polygones, géométrie affine équi-aire, formule de Gauss
+pour le pentagone, carré symétrique d'un plan, arbres de décision.
+
+\keywords{plane polygon, signed area, affine geometry, moduli space of polygons, projective frame, Lagrange multipliers, critical points, symmetric square, Gauss pentagon formula, decision tree}
+\end{resume}
+
+\pagerange{1}{28}
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier n'a pas de titre de sa main ; celui de l'inventaire, « Polygones »,
+lui convient. La « lettre » que l'inventaire mentionne n'est sur aucun des
+feuillets numérisés, et les pages 2, 7, 11 et 13 sont blanches. Une
+pagination de sa main, cerclée, court de 1 à 16 sur les pages 14 à 28 (le 7
+manque) : c'est une rédaction suivie, précédée de feuillets d'essais.
+
+\subsection*{Les stations}
+
+\begin{itemize}
+  \item \emph{Page 1.} Le foncteur $\mathrm{Polg}_n(E)$ des $n$-gones d'un plan
+    affine, sommets et droites des côtés ; dégénérescences.
+  \item \emph{Pages 3 et 4.} La relation des multiplicateurs sous sa première
+    forme, $\lambda_i u_{i-1} - \lambda_{i+1} u_{i+1} = w$ constant, et ses
+    différences $M_i$ ; le calcul des côtés de proche en proche.
+  \item \emph{Pages 5 et 6.} Le quadrilatère : une relation linéaire entre les
+    aires des oreilles, et l'espace des quadrilatères identifié à un plan
+    projectif.
+  \item \emph{Pages 8 à 10.} Un morceau étranger : configurations, opérations,
+    ensembles résiduels, tests, « cribles ».
+  \item \emph{Page 12.} Les relations entre multiplicateurs, aires et le
+    vecteur $w$.
+  \item \emph{Pages 14 et 15.} La formulation lagrangienne écrite en
+    coordonnées, et la formule close de $\lambda_i$.
+  \item \emph{Pages 16 et 17.} Le quadrilatère à nouveau : son multiplicateur,
+    une carte explicite, les diagonales.
+  \item \emph{Page 18.} Un multiplicateur nul en un sommet : l'ennéagone étoilé.
+  \item \emph{Page 19.} Le pentagone, et une équation du second degré.
+  \item \emph{Pages 20 à 22.} La relation à quatre termes ; $u_i$ dans la base
+    $u_0, u_1, u_2$ ; les polynômes $P_i, Q_i, R_i$ ; les équations de
+    fermeture.
+  \item \emph{Pages 23 à 27.} Le cas dégénéré, la Proposition et sa preuve.
+  \item \emph{Page 28.} Le Théorème : les quatre cas.
+\end{itemize}
+
+\subsection*{Conventions}
+
+$k$ est un corps, $V$ un plan vectoriel sur $k$, $E$ un plan affine de
+direction $V$. Un $n$-gone a pour sommets $s_i$ et pour côtés
+$u_i = s_{i+1} - s_i$, $i \in \mathbf{Z}/n\mathbf{Z}$ ; il est \emph{fermé}
+quand $\sum u_i = 0$, ce qui est automatique si on le donne par ses sommets,
+et ne l'est plus si on le donne par la suite $u_* = (u_i)$ de ses côtés. On
+note, comme la page 15,
+\[
+  u_{ab} = u_a + u_{a+1} + \cdots + u_{b-1} = s_b - s_a .
+\]
+On fixe une forme volume sur $V$, et l'on pose
+\[
+  \mu_i = u_{i-1} \wedge u_i \in k ,
+\]
+le double de l'aire algébrique de l'\emph{oreille} en $s_i$, le triangle
+$s_{i-1} s_i s_{i+1}$\footnote{Les pages 5 et 12 écrivent $\mu_i$, les pages 14
+à 19 $f_i$ ; on garde $\mu_i$ partout. Le nom d'« oreille » est le nôtre ; les
+pages ne nomment pas ces triangles. Une transformation affine de partie linéaire
+$g$ multiplie tous les $\mu_i$ par $\det g$ : la classe de $(\mu_i)$ dans
+$\mathbf{P}^{n-1}$ est un invariant affine.}. On note $\varphi$ l'application
+$u_* \mapsto (\mu_i)_i$.
+
+La relation des multiplicateurs a deux formes, et le dossier passe de l'une à
+l'autre. La \emph{forme lagrangienne} (pages 3, 4, 12, 14 et 15) :
+\[
+  (L) \qquad \lambda_i u_{i-1} - \lambda_{i+1} u_{i+1} = w
+  \quad \text{indépendant de } i ;
+\]
+la \emph{forme à quatre termes} (pages 20 à 28), qui en est la différence de
+deux lignes consécutives :
+\[
+  (\ast) \qquad \lambda_i u_{i-1} - \lambda_{i+1}(u_i + u_{i+1})
+  + \lambda_{i+2} u_{i+2} = 0 \qquad \forall\, i \in \mathbf{Z}/n\mathbf{Z} .
+\]
+Les deux sont équivalentes : $(\ast)$ dit exactement que le membre de gauche de
+$(L)$ ne dépend pas de $i$. L'espace des $(\lambda_i) \in
+k^{\mathbf{Z}/n\mathbf{Z}}$ qui les satisfont est noté $N(u_*)$, comme à la
+page 25\footnote{La page 20 écrit la même relation décalée d'un cran,
+$\lambda_{i-1} u_{i-2} - \lambda_i (u_{i-1} + u_i) + \lambda_{i+1} u_{i+1} = 0$ ;
+on suit l'indexation des pages 25 à 28. Le vecteur constant $w$ s'appelle $u$
+aux pages 3, 4 et 12 et a pour coordonnées $(\nu, -\mu)$ à la page 14 ; on le
+renomme pour garder $u$ libre.}.
+
+\subsection*{Ce que seule une lecture d'ensemble peut dire}
+
+Trois raccords, qu'aucune page ne fait.
+
+Le $N(u_*)$ du théorème final est l'espace des multiplicateurs de Lagrange de
+la page 14 : la relation à quatre termes des pages 20 à 28 est la différence
+$M_i = L_{i-1} - L_i$ que la page 3 forme déjà. Ce qui est classé à la fin est
+donc l'ensemble des points où $\varphi$, restreinte aux polygones fermés, n'est
+pas une submersion, et de combien elle ne l'est pas.
+
+Le quadrilatère est toujours dans ce cas : la relation entre ses aires
+(page 5) a pour coefficients $(1, -1, 1, -1)$, et c'est exactement le
+multiplicateur $\lambda_0 + \lambda_1 = 0$ que les pages 16 et 17 retrouvent
+par le calcul.
+
+Le critère du cas spécial II, au bas de la page 28, est la formule close des
+pages 15 et 18 avec $\lambda_0 = 0$, et l'ennéagone étoilé de la page 18 en
+est un exemple : son espace de multiplicateurs est une droite, engendrée par
+un vecteur nul en $0$ et en $0$ seulement.
+
+\subsection*{Ce que le dossier annonce sans l'établir}
+
+La condition qui définit l'ouvert $\mathcal{U}$ de la page 1 est biffée ; les
+comptes de dimensions de la page 4 ne se lisent plus ; le système des équations
+de fermeture (page 22) n'est jamais résolu ; le sens de $CI_n^*$ (page 12)
+n'est pas fixé ; la quadrique du haut de la page 20 n'est rattachée à rien ;
+la démonstration de d) $\Rightarrow$ a) (page 27) est annoncée et la page est
+blanche ensuite ; la note de marge de la page 28 est en grande partie perdue.
+Les « cribles » des pages 8 à 10 ne servent nulle part dans le dossier.
+
+\pagerange{1}{1}
+\section*{Le foncteur des polygones (page 1)}
+
+Soit $S$ un schéma, $E$ un plan affine sur $S$, et $n \geqslant 3$. Pour un
+$S$-schéma $S'$, on pose
+\[
+  \mathrm{Polg}_n(E)(S') = \bigl\{ (s_0, \ldots, s_{n-1}, d_0, \ldots,
+  d_{n-1}) \bigm| s_i \in E(S'),\ d_i \in \mathrm{Dr}(E_{S'}),\
+  s_i \in d_i,\ s_{i+1} \in d_i \bigr\},
+\]
+où $\mathrm{Dr}(E_{S'})$ est l'ensemble des droites de $E_{S'}$ et les indices
+sont pris modulo $n$\footnote{Le nom « Polg » est lu avec doute ; son
+initiale est doublée comme une capitale ajourée. La page écrit l'incidence par
+un signe $\prec$ pour les premiers couples et par $\in$ pour le dernier.}. Un
+point est un $n$-gone muni des droites de ses côtés. Les conditions d'incidence
+sont fermées, si bien que $\mathrm{Polg}_n(E)$ est représentable par un
+sous-schéma fermé de $E^n \times \mathrm{Dr}(E)^n$, le schéma des droites d'un
+plan affine étant un ouvert du plan projectif dual\footnote{La représentabilité
+est notre remarque ; la page ne dit rien de ce genre.}.
+
+Garder les droites $d_i$ à côté des sommets, c'est ce qui permet de suivre les
+dégénérescences. Les croquis de la page en montrent trois : des côtés
+consécutifs portés par une même droite, $d_0 = d_1 = \cdots = d_i \neq d_{i+1}$,
+les sommets $s_0, \ldots, s_{i+1}$ étant alors alignés ; deux sommets
+consécutifs confondus, $s_{i+1} = s_{i+2}$, où le côté nul garde la droite qui
+le porte ; un triangle vu comme un hexagone dégénéré, de sommets
+$s_0 = s_1$, $s_2 = s_3$, $s_4 = s_5$ et de côtés $d_0 = d_1$, $d_2 = d_3$,
+$d_4 = d_5$.
+
+La page définit encore un ouvert $\mathcal{U}$, indexé par un ensemble
+$\underline{S}$ de sommets et un ensemble $\underline{A}$ d'arêtes --- un
+polygone combinatoire $(S, A)$ au sens que le dossier 89 (pages 19 et 20)
+précise ---, dont la condition est biffée\footnote{On lit encore sous la
+rature « $P_s \notin \ldots d_{s-2}$ », peut-être un sommet hors de la droite
+d'un côté non adjacent ; on ne reconstitue pas la condition. L'indice de
+$\mathcal{U}$ est lu avec doute.}.
+
+\pagerange{3}{4}
+\section*{La relation des multiplicateurs, première forme (pages 3 et 4)}
+
+Ces deux pages sont des essais. On y lit la relation sous la forme $(L)$ :
+pour un $n$-gone donné par ses côtés, des scalaires $\lambda_i$ tels que
+\[
+  L_i := \lambda_i u_{i-1} - \lambda_{i+1} u_{i+1}
+\]
+ne dépende pas de $i$ : $L_0 = L_1 = \cdots = L_{n-1} = w$. Les différences
+\[
+  M_i = L_{i-1} - L_i = \lambda_{i-1} u_{i-2} - \lambda_i (u_{i-1} + u_i)
+  + \lambda_{i+1} u_{i+1}
+\]
+sont les premiers membres de la relation à quatre termes $(\ast)$, qui
+reviendra seule aux pages 20 à 28\footnote{La page écrit
+$M_{n-1} = L_{n-2} - L_{n-1}$ sous une accolade ; les deux lignes qui suivent,
+qui développent $M_1 u_1$ et $M_2 u_2$, s'interrompent sur un « mod » en
+suspens. Le produit $u_{-1} u_{12}$ qui y figure est celui de l'algèbre
+symétrique, voir la section des pages 14 et 15.}.
+
+Sous le titre « Calcul intrinsèque »\footnote{Lecture incertaine.}, la
+page 4 calcule les côtés de proche en proche. Si les $\lambda_i$ sont non nuls,
+$(L)$ en $i$ donne $u_{i+1} = (\lambda_i u_{i-1} - w)/\lambda_{i+1}$ : les
+données $u_0, u_1, w$ et $\lambda_*$ déterminent tous les $u_i$, et les deux
+dernières lignes, $u_n = u_0$ et $u_{n+1} = u_1$, sont deux relations entre
+$u_0, u_1, w, \lambda_*$. C'est le schéma que les pages 20 à 22 reprendront
+avec la forme à quatre termes. La page écrit aussi la ligne
+$\lambda_2 \, u_1 u_2 = -\lambda_0 \, u_{-1} u_1 + \lambda_1 \, u_1 (u_0 + u_1)$,
+qui est le cas $i = 2$ de la formule close de la page 15\footnote{La prose du
+milieu de la page, qui comptait des dimensions --- « $n-2$
+($\subset \mathbf{P}^{n-1}$) », « dans le cas $\sum u_i = 0$ », « codim.~3 »
+---, est presque entièrement illisible, de même qu'une note de marge sur des
+$(c_1, \ldots, c_{n-2})$ de sommes alternées nulles. Pour ce que valent ces
+comptes : les $n$-gones fermés non alignés à transformation affine près forment
+un espace de dimension $2n - 6$, et la classe de $(\mu_i)$ vit dans
+$\mathbf{P}^{n-1}$ ; les deux dimensions coïncident pour $n = 5$, ce qui est la
+situation de la page 19. Ce compte est le nôtre.}.
+
+\pagerange{5}{6}
+\section*{Les quadrilatères forment un plan projectif (pages 5 et 6)}
+
+Soit un quadrilatère fermé, $u_0 + u_1 + u_2 + u_3 = 0$, et
+$\mu_0 = u_3 \wedge u_0$, $\mu_1 = u_0 \wedge u_1$, $\mu_2 = u_1 \wedge u_2$,
+$\mu_3 = u_2 \wedge u_3$. En remplaçant $u_3$ par $-(u_0 + u_1 + u_2)$ on
+trouve
+\[
+  u_0 \wedge u_2 = \mu_0 - \mu_1 = \mu_3 - \mu_2 ,
+  \qquad
+  u_1 \wedge u_3 = \mu_0 - \mu_2 ,
+\]
+d'où la relation
+\[
+  \mu_0 + \mu_2 = \mu_1 + \mu_3 .
+\]
+Les deux membres sont le double de l'aire du quadrilatère, coupé par l'une ou
+l'autre diagonale ; la page 17 vérifie qu'ils valent aussi
+$(u_0 + u_1) \wedge (u_1 + u_2)$, le produit extérieur des deux
+diagonales\footnote{Page 5, la deuxième ligne du calcul de $u_0 \wedge u_2$
+doit se lire $-u_0 \wedge (u_1 + u_3)$ ; le signe est surchargé. Page 17, le
+point d'interrogation de « $\overset{?}{=}$ » est levé par le calcul qui
+suit, que la page conclut d'un « ok ».}.
+
+Soit $\mathbf{M}_4$ l'ensemble des quadrilatères fermés non contenus dans une
+droite, à transformation affine près. L'application
+\[
+  \mathbf{M}_4 \longrightarrow \bigl\{ \mu_0 + \mu_2 = \mu_1 + \mu_3 \bigr\}
+  \subset \mathbf{P}^3, \qquad
+  (u_0, u_1, u_2, u_3) \longmapsto (\mu_0 : \mu_1 : \mu_2 : \mu_3)
+\]
+est bien définie (un quadrilatère non aligné a un $\mu_i$ non nul) et c'est une
+bijection sur ce plan projectif. Sur l'ouvert $\mu_1 \neq 0$, en effet,
+$u_0, u_1$ forment une base de $V$, qu'une transformation affine envoie sur une
+base fixée ; écrivant $u_2 = \alpha u_0 + \beta u_1$, on trouve
+$\mu_1 = 1$, $\mu_2 = -\alpha$, $\mu_3 = \beta - \alpha$, $\mu_0 = 1 + \beta$
+dans la base $e = u_0 \wedge u_1$, d'où
+\[
+  u_2 = -\frac{\mu_2}{\mu_1}\, u_0 + \frac{\mu_3 - \mu_2}{\mu_1}\, u_1 ,
+  \qquad
+  u_3 = \Bigl( \frac{\mu_2}{\mu_1} - 1 \Bigr) u_0 - \frac{\mu_0}{\mu_1}\, u_1 ,
+\]
+et tout point du plan avec $\mu_1 \neq 0$ est atteint une fois. Les autres
+cartes s'en déduisent par permutation circulaire\footnote{La page écrit
+« $\mathbf{M}_4 \to \mathbf{P}^2_{\mathbf{Z}}$ mono », « injectif » étant
+biffé, puis « épi ? », et conclut « $\mathbf{M}_4 \simeq \mathbf{P}^2_{\mathbf{Z}}$ »
+après les formules ci-dessus : la question est réglée par ces formules
+elles-mêmes, ce qu'on dit ici. L'indice $\mathbf{Z}$ indique qu'il pense
+l'énoncé sur $\mathrm{Spec}\,\mathbf{Z}$ ; on ne l'a vérifié que sur un corps.
+Il ne précise pas ce qu'il exclut ; les quadrilatères alignés ont tous leurs
+$\mu_i$ nuls et n'ont pas d'image.}.
+
+\emph{Les quadrilatères dégénérés.} Un côté est nul si et seulement si les deux
+aires qui le contiennent le sont : $u_i = 0$ équivaut à
+$\mu_i = \mu_{i+1} = 0$ (la page encadre le cas $u_2 = 0 \iff \mu_2 = \mu_3 =
+0$). Les quatre quadrilatères dégénérés sont donc les points
+\[
+  (0,0,1,1), \quad (1,0,0,1), \quad (1,1,0,0), \quad (0,1,1,0)
+\]
+du plan, pour $u_0, u_1, u_2, u_3$ nuls respectivement. Les trois premiers
+sont indépendants (la matrice qu'ils forment est de rang 3) et le quatrième est
+leur somme alternée, à coefficients tous non nuls : ces quatre points sont en
+position générale, ils forment un \emph{repère projectif} du plan. Par
+conséquent, si $\Pi = (S, A)$ est un quadrilatère combinatoire --- quatre
+sommets, quatre arêtes, au sens du dossier 89 (pages 19 et 20) ---, l'espace
+$\mathbf{M}(\Pi)$ des quadrilatères de type $\Pi$ s'identifie canoniquement au
+plan projectif engendré par $A$, c'est-à-dire au plan
+$\mathbf{P}\bigl(k^{A} / k\cdot(1,1,1,1)\bigr)$ dont les quatre points de
+repère sont les arêtes, chaque arête correspondant au quadrilatère où elle est
+réduite à un point\footnote{La page dit « l'enveloppe projective de $A$ »,
+« enveloppe » étant lu avec doute ; la formule
+$\mathbf{P}(k^{A}/k\cdot(1,1,1,1))$ est la nôtre. La page 6 ne nomme que trois
+des quatre points ; leur « rang 3 » et le mot « coplanaires » sont des lectures
+douteuses, la phrase étant en partie illisible. Le dossier 75 (pages 17 à 19)
+associe de même à un polygone combinatoire un plan canonique, euclidien
+celui-là, où il est réalisé régulièrement ; les deux constructions ne se
+rejoignent pas.}. Cinq croquis de quadrilatères --- ouvert, croisé, aplati,
+avec ou sans leurs diagonales --- terminent la page.
+
+\pagerange{8}{10}
+\section*{Un morceau étranger : opérations, tests et cribles (pages 8 à 10)}
+
+Ces trois pages ne parlent pas de polygones, et ne disent pas à quoi elles
+servent. Elles sont écrites à rebours : la page 10 pose les définitions, la
+page 9 construit l'objet, la page 8 le récrit. On les lit dans l'ordre logique.
+
+\emph{Les données} (page 10). Un ensemble $C$ de « configurations », un
+ensemble $\Omega$ d'« opérations » (virtuelles), et pour chaque
+$\omega \in \Omega$ un ensemble $V_\omega$ de « résultats » possibles et une
+application $f_\omega : C \to V_\omega$, notée $x \mapsto \omega(x)$ : le
+résultat de l'opération $\omega$ sur la configuration $x$. Une
+\emph{opération effectuée} est une opération avec son résultat,
+\[
+  \widetilde{\Omega} = \coprod_{\omega \in \Omega} V_\omega
+  \xrightarrow{\ \pi\ } \Omega ,
+  \qquad \widetilde{\omega} = (\omega, v) .
+\]
+Son \emph{ensemble résiduel} est $C(\widetilde{\omega}) = f_\omega^{-1}(v)$,
+l'ensemble des configurations compatibles avec ce résultat, et pour une suite,
+$C(\widetilde{\omega}_1, \ldots, \widetilde{\omega}_\nu) = \bigcap_i
+C(\widetilde{\omega}_i)$. Chaque configuration $x$ est une section de $\pi$,
+$\omega \mapsto (\omega, \omega(x))$, d'où des applications
+$C \times \Omega^\nu \to \widetilde{\Omega}^\nu$. Les \emph{tests effectués de
+longueur $\nu$} forment l'image
+\[
+  T_\nu = \mathrm{Im}\bigl( C \times \Omega^\nu \to \widetilde{\Omega}^\nu
+  \bigr) \subset \widetilde{\Omega}^\nu ,
+\]
+c'est-à-dire les suites de résultats que produit effectivement une même
+configuration --- autrement dit, celles dont l'ensemble résiduel n'est pas
+vide\footnote{Cette dernière reformulation est la nôtre. Les mots
+« opérations », « résiduel » et « effectués » sont lus avec doute ; un NB de la
+page 10 est illisible.}.
+
+\emph{Les cribles} (page 9). Un \emph{crible de longueur $\nu$} est une suite
+de choix : une partie non vide $\mathcal{F}_1 \subset \Omega$ des premières
+opérations permises ; puis, pour chaque première opération effectuée possible,
+$\widetilde{\omega}_1 \in \widetilde{\mathcal{F}}_1 = \pi^{-1}(\mathcal{F}_1)
+\cap T_1$, une partie $f_2(\widetilde{\omega}_1) \subset \Omega$ des secondes
+opérations permises ; et ainsi de suite,
+\[
+  \widetilde{\mathcal{F}}_i = \bigl\{ (\widetilde{\omega}_1, \ldots,
+  \widetilde{\omega}_i) \in T_i \bigm| (\widetilde{\omega}_1, \ldots,
+  \widetilde{\omega}_{i-1}) \in \widetilde{\mathcal{F}}_{i-1},\
+  \omega_i \in f_i(\widetilde{\omega}_1, \ldots, \widetilde{\omega}_{i-1})
+  \bigr\},
+  \qquad
+  f_i : \widetilde{\mathcal{F}}_{i-1} \to \mathfrak{P}(\Omega),
+\]
+jusqu'à $\widetilde{\mathcal{F}}_\nu \subset T_\nu$. Certains
+$\widetilde{\mathcal{F}}_i$ peuvent être vides\footnote{« Crible de longueur
+$\nu$ » est écrit au-dessus d'un mot biffé, et lu avec doute. La page encadre
+$f_2 : \widetilde{\mathcal{F}}_1 \to \mathfrak{P}^*(\Omega)$, l'astérisque
+désignant sans doute les parties non vides, puis écrit $\mathfrak{P}(\Omega)$
+pour les $f_i$ suivants. Elle écrit
+« $\widetilde{\omega}_2 \in f_2(\widetilde{\omega}_1)$ » là où c'est
+l'opération sous-jacente $\omega_2$ qui doit être permise.}.
+
+\emph{Les graphes} (page 8). La même donnée se récrit en remplaçant chaque
+$f_i$ par son graphe, une partie de $T_{i-1} \times \Omega \subset
+\widetilde{\Omega}^{i-1} \times \Omega$, et l'on a
+$\mathcal{F}_i \subset T_i \subset \widetilde{\Omega}^i$, la projection de
+$\mathcal{F}_i$ sur les $i-1$ premiers facteurs tombant dans
+$\mathcal{F}_{i-1}$.
+
+C'est ce qu'on appelle aujourd'hui une stratégie adaptative de questionnement,
+ou un arbre de décision : on interroge une configuration inconnue, chaque
+question étant choisie selon les réponses précédentes, et les ensembles
+résiduels mesurent ce qui reste à savoir. Le crible est ici non déterministe
+--- un ensemble de questions permises à chaque étape plutôt qu'une seule ---, et
+rien n'est encore dit de son but\footnote{Les noms sont les nôtres.}.
+
+\pagerange{12}{12}
+\section*{Relations entre multiplicateurs et aires (page 12)}
+
+Sous les hypothèses
+\[
+  \lambda_i u_{i-1} - \lambda_{i+1} u_{i+1} = w \quad (i \in \mathbf{Z}/n\mathbf{Z}),
+  \qquad \sum u_i = 0 ,
+\]
+posons $\mu_i = u_{i-1} \wedge u_i$ et $\alpha_i = w \wedge u_i$. En faisant
+le produit extérieur de $(L)$ avec $u_i$, avec $w$, et en sommant :
+\[
+  \lambda_i \mu_i + \lambda_{i+1} \mu_{i+1} = \alpha_i ,
+  \qquad
+  \lambda_i \alpha_{i-1} - \lambda_{i+1} \alpha_{i+1} = 0 ,
+  \qquad
+  \sum \alpha_i = 0 ,
+\]
+et donc, sommant la première sur $i$,
+\[
+  \sum_i \lambda_i \mu_i = 0 .
+\]
+Cette dernière identité dit qu'un multiplicateur s'annule sur le vecteur
+$\varphi(u_*)$ lui-même : c'est la trace de l'homogénéité de $\varphi$, qui est
+de degré 2\footnote{L'interprétation est la nôtre ; la page écrit
+« $2 \sum \lambda_i \mu_i = 0$ ».}.
+
+La page note que $u_0, u_1, w$ et $(\lambda_i)$ déterminent tous les $u_i$
+(c'est le calcul de la page 4), puis que $\alpha_0, \alpha_1$ et $(\lambda_i)$
+les déterminent à transformation affine près si $\mu_1 \neq 0$ : décomposant
+$w$ dans la base $u_0, u_1$,
+\[
+  w = \frac{\alpha_1}{\mu_1}\, u_0 - \frac{\alpha_0}{\mu_1}\, u_1
+  = \Bigl( \lambda_1 + \lambda_2 \frac{\mu_2}{\mu_1} \Bigr) u_0
+  - \Bigl( \lambda_0 \frac{\mu_0}{\mu_1} + \lambda_1 \Bigr) u_1 ,
+\]
+et $(L)$ en $i = 1$ donne
+\[
+  u_2 = -\frac{\mu_2}{\mu_1}\, u_0 + \frac{1}{\lambda_2}
+  \Bigl( \lambda_0 \frac{\mu_0}{\mu_1} + \lambda_1 \Bigr) u_1 ,
+\]
+et ainsi de suite jusqu'à $u_{n-1} = A_{n-1}\, u_0 + B_{n-1}\, u_1$, les
+coefficients étant des fonctions de $(\lambda)$ et $(\mu)$. Les couples
+$(\lambda_i, \mu_i)_i$ sont considérés à un scalaire près, et la page esquisse
+une application
+\[
+  CI_n^* \longrightarrow \mathbf{P}^{n-1} \times \mathbf{P}^{n-1} ,
+  \qquad (\lambda), (\mu) ,
+\]
+où $CI_n^*$ désigne des « $n$-polygones cycliques (mod Aff) »\footnote{Le
+reste de la définition de $CI_n^*$ est illisible. Ce qui précède suggère qu'il
+s'agit des $n$-gones munis d'un multiplicateur, envoyés sur le couple formé du
+multiplicateur et des aires ; on ne l'affirme pas. La colonne de droite,
+séparée par un trait et très raturée, énumère des hypothèses :
+$(\mu_i)_i \neq 0$ et $w \neq 0$ si et seulement si $(\alpha_i)_i \neq 0$ ;
+$u_i \neq 0$, $\lambda_i \neq 0$ pour tout $i$ ; $(\lambda_i, \alpha_i)_i \neq 0$ ;
+et un « $\mathbf{P}(k^n \times L^n)$ », la lettre $L$ étant douteuse.}.
+
+\pagerange{14}{15}
+\section*{Les multiplicateurs de Lagrange, et la formule close (pages 14 et 15)}
+
+La page 14, première de la rédaction suivie, dit d'où vient la relation.
+Écrivons les côtés en coordonnées, $u_i = (x_i, y_i)$, de sorte que
+$\mu_i = x_{i-1} y_i - y_{i-1} x_i$. Alors
+\[
+  \sum_i \lambda_i \, d\mu_i
+  = \sum_i \bigl( -\lambda_i y_{i-1} + \lambda_{i+1} y_{i+1} \bigr)\, dx_i
+  + \sum_i \bigl( \lambda_i x_{i-1} - \lambda_{i+1} x_{i+1} \bigr)\, dy_i ,
+\]
+et cette forme est une combinaison $a \sum dx_i + b \sum dy_i$ des
+différentielles de la condition de fermeture si et seulement si les
+coefficients de $dx_i$ et de $dy_i$ ne dépendent pas de $i$, c'est-à-dire si et
+seulement si $(L)$ a lieu. Autrement dit :
+
+\textbf{La relation $(L)$, ou $(\ast)$, dit que $(\lambda_i)$ est un
+multiplicateur de Lagrange.} $N(u_*)$ est l'espace des formes linéaires sur
+$k^{\mathbf{Z}/n\mathbf{Z}}$ qui annulent l'image de la différentielle de
+$\varphi$ en $u_*$, restreinte aux déformations $(du_i)$ telles que
+$\sum du_i = 0$ : l'espace conormal à l'image, en ce point, de l'application
+« aires des oreilles » sur l'espace des polygones fermés. En particulier
+$N(u_*) = 0$ si et seulement si cette application est une submersion en
+$u_*$\footnote{La page écrit l'égalité
+$\sum \lambda_i df_i = \mu \sum dx_i + \nu \sum dy_i$ et en tire les deux
+systèmes de relations ; les mots « multiplicateur de Lagrange », « conormal »
+et « submersion » sont les nôtres. Le calcul ne suppose pas $\sum u_i = 0$ :
+pour une suite $u_*$ quelconque, $N(u_*)$ est le conormal de la restriction de
+$\varphi$ à l'hyperplan affine $\sum u_i = \mathrm{cste}$ qui passe par $u_*$.}.
+
+\emph{La formule close.} Supposons $\sum u_i = 0$ et toutes les coordonnées
+$x_i, y_i$ non nulles\footnote{« OPS $x_i, y_i$ tous $\neq 0$ (par choix de
+coordonnées) » : c'est possible dès que $k$ a assez d'éléments, par exemple
+s'il est infini. L'hypothèse ne sert qu'à diviser ; l'identité finale ne la
+demande pas.}. La première coordonnée de $(L)$ donne
+$\lambda_{i+1} y_{i+1} = \lambda_i y_{i-1} - c$ avec $c$ constant, et une
+récurrence immédiate sur $i$ donne, pour $2 \leqslant i \leqslant n-1$,
+\[
+  (y_{i-1} y_i)\, \lambda_i = (-\lambda_0 y_{-1})(y_1 + \cdots + y_{i-1})
+  + (\lambda_1 y_1)(y_0 + \cdots + y_{i-1}) ,
+\]
+et la même formule pour les $x$. Pour $i = n$ elle se réduit à l'identité
+$\lambda_0 y_{-1} y_0 = \lambda_0 y_0 y_{-1}$, grâce à
+$y_1 + \cdots + y_{n-1} = -y_0$ et $y_0 + \cdots + y_{n-1} = 0$ ; la page
+conclut « ok »\footnote{La page 14 commence le calcul avec des produits de
+plus en plus longs, $(y_2 y_3 y_4)\lambda_4$, $(y_2 y_3 y_4 y_5)\lambda_5$,
+dont les indices sont surchargés ; la forme encadrée de la page 15, à deux
+facteurs seulement, est celle que la récurrence établit, et c'est la seule
+qu'on garde.}.
+
+Comme la même identité vaut pour toute forme linéaire $\ell$ sur $V$ à la place
+de la coordonnée $y$ --- la récurrence est la même ---, elle est une identité
+entre formes quadratiques sur $V^*$, c'est-à-dire dans le carré symétrique
+$\operatorname{Sym}^2 V$ :
+\[
+  \lambda_i \; u_{i-1} \cdot u_i
+  = -\lambda_0 \; u_{-1} \cdot u_{1i} + \lambda_1 \; u_1 \cdot u_{0i} ,
+  \qquad u_{ab} = s_b - s_a ,
+\]
+où $\cdot$ est le produit de l'algèbre symétrique\footnote{La page écrit cette
+forme vectorielle, encadrée, avec une simple juxtaposition
+« $\lambda_i u_{i-1} u_i = -\lambda_0 u_{-1} u_{1i} + \lambda_1 u_1 u_{0i}$ ».
+L'en-tête de la transcription rapproche cette juxtaposition du déterminant ;
+elle ne peut pas l'être : avec $u_{i-1} \wedge u_i$, la relation $(L)$ en
+$i = 1$ donne pour $i = 2$ le terme $+\lambda_0\, u_{-1} \wedge u_1$, de signe
+opposé à celui de la formule. Ce que la page établit, coordonnée par
+coordonnée, est l'identité dans $\operatorname{Sym}^2 V$ qu'on écrit ici ; le
+nom est le nôtre.}. Éliminant $\lambda_i$ entre la formule en $x$ et la formule
+en $y$, la page en tire, pour $2 \leqslant i \leqslant n-1$, une relation
+linéaire entre $\lambda_0$ et $\lambda_1$ seuls :
+\begin{align*}
+  &\lambda_0 \bigl[ -x_{i-1} x_i y_{-1} (y_1 + \cdots + y_{i-1})
+  + y_{i-1} y_i x_{-1} (x_1 + \cdots + x_{i-1}) \bigr] \\
+  &\quad + \lambda_1 \bigl[ x_{i-1} x_i y_1 (y_0 + \cdots + y_{i-1})
+  - y_{i-1} y_i x_1 (x_0 + \cdots + x_{i-1}) \bigr] = 0 .
+\end{align*}
+Un essai sur le triangle, très raturé, suit\footnote{On n'en restitue rien. En
+marge, pour le triangle $u, v, w = -(u+v)$, la page note que
+$u \wedge v = v \wedge w = w \wedge u$ : les trois oreilles d'un triangle sont
+le triangle lui-même.}.
+
+\pagerange{16}{17}
+\section*{Le quadrilatère, deuxième passage (pages 16 et 17)}
+
+Pour $n = 4$ ($y_{-1} = y_3$, $x_{-1} = x_3$), la relation de la page 15 en
+$i = 2$ s'écrit, les deux crochets étant égaux,
+\[
+  (\lambda_0 + \lambda_1) \cdot \bigl( -x_1 y_1\, (u_2 \wedge u_3) \bigr) = 0 ,
+\]
+et en $i = 3$
+\[
+  (\lambda_0 + \lambda_1) \cdot x_3 y_3\, (u_1 \wedge u_2) = 0 .
+\]
+Donc $\lambda_0 + \lambda_1 = 0$ dès que le sommet $s_3$, ou le sommet $s_2$,
+n'est pas aplati\footnote{« Aplati » est lu avec doute. Pour $i = 3$ la page
+écrit le crochet en $\lambda_0$ avec le signe opposé, $-x_3 y_3 (x_1 y_2 - y_1
+x_2)$ (le signe du second résultat est surchargé), et rattache la condition au
+sommet $s_1$, avec un croquis de l'angle entre $u_1$ et $u_2$ ; cet angle est
+celui du sommet $s_2$. La conclusion encadrée, $\lambda_0 + \lambda_1 = 0$, est
+juste dans les deux cas.}. Par permutation circulaire, si le quadrilatère n'est
+pas aligné, $\lambda_i + \lambda_{i+1} = 0$ pour tout $i$ : $N(u_*)$ est la
+droite engendrée par $(1, -1, 1, -1)$, qui est bien dans $N(u_*)$ puisque
+$(\ast)$ se réduit alors à $\lambda_i \sum_j u_j = 0$. C'est exactement la
+relation $\mu_0 - \mu_1 + \mu_2 - \mu_3 = 0$ de la page 5 : l'image de
+$\varphi$ est contenue dans cet hyperplan, et son équation est le
+multiplicateur.
+
+\emph{Une carte explicite} (page 17). Le quadrilatère de sommets
+\[
+  s_0 = (a - 1, 0), \quad s_1 = (0, b - 1), \quad
+  s_2 = (a + 1, 0), \quad s_3 = (0, b + 1)
+\]
+a ses deux diagonales sur les axes, chacune de longueur 2. On trouve
+\[
+  \mu_0 = 2(1 - a), \quad \mu_1 = 2(1 - b), \quad
+  \mu_2 = 2(1 + a), \quad \mu_3 = 2(1 + b),
+\]
+donc $\mu_1 + \mu_3 = \mu_0 + \mu_2 = 4$, $\mu_3 - \mu_1 = 4b$,
+$\mu_2 - \mu_0 = 4a$\footnote{La page écrit $v$ par-dessus un « 4 » pour la
+valeur commune des deux sommes, et « $(b)\,v$ », « $(a)\,v$ » pour les deux
+différences.}. Tout quadrilatère dont les diagonales ne sont pas parallèles se
+ramène à celui-là par une transformation affine, et $(a, b)$ se lit sur ses
+aires : c'est une carte affine $\mathbf{A}^2$ de $\mathbf{M}_4$, le
+complémentaire de la droite $\mu_0 + \mu_2 = 0$ des quadrilatères d'aire
+nulle\footnote{Cette interprétation est la nôtre ; la page donne le calcul. Sous
+une ligne ondulée, elle dessine un pentagone avec toutes ses diagonales, qui
+annonce la page 19.}.
+
+\pagerange{18}{18}
+\section*{Un multiplicateur nul en un sommet : l'ennéagone étoilé (page 18)}
+
+Si $\lambda_0 = 0$, et en normalisant $\lambda_1 = 1$, la formule close de la
+page 15 devient
+\[
+  \lambda_i \; u_{i-1} \cdot u_i = u_1 \cdot u_{0i} \qquad
+  \text{dans } \operatorname{Sym}^2 V .
+\]
+Dans un plan, le produit de deux vecteurs non nuls de
+$\operatorname{Sym}^2 V$ détermine la paire de droites qui les portent ; la
+formule dit donc que la paire de directions $\{u_{i-1}, u_i\}$ est la paire
+$\{u_1, s_i - s_0\}$, chaque fois que $s_i \neq s_0$. Le dessin de la page en
+donne un exemple, un ennéagone étoilé dont on joint le sommet $s_0$ à tous les
+autres, en coordonnées :
+\[
+  \begin{array}{lll}
+  s_0 = (0,0), & s_1 = (1,0), & s_2 = (1,1), \\
+  s_3 = (\beta_1, \beta_1), & s_4 = (\beta_1, y_4), &
+  s_5 = (\beta_2 \beta_1, \beta_2 y_4), \\
+  s_6 = (\beta_2 \beta_1, y_6), & s_7 = (\beta_3 \beta_2 \beta_1, \beta_3 y_6), &
+  s_8 = (\beta_3 \beta_2 \beta_1, y_8),
+  \end{array}
+\]
+avec $\beta_j \neq 0, 1$ et $y_4 \neq \beta_1$, $y_6 \neq \beta_2 y_4$,
+$y_8 \neq \beta_3 y_6$, et $s_9 = s_0$ (ce qui revient à poser $\beta_4 = 0$).
+Les côtés d'indice impair sont parallèles à $u_1$, verticaux ; ceux d'indice
+pair sont portés par la droite qui joint $s_0$ à leur origine. On vérifie que
+$N(u_*)$ est une droite, engendrée par un multiplicateur nul en $0$ et non nul
+ailleurs, pour des valeurs génériques des paramètres\footnote{La vérification est la nôtre, par le critère de la page 28
+démontré plus bas, et par le calcul sur des valeurs numériques des
+paramètres. La page écrit « Aucun des $\lambda_i$ nuls », suivi d'un
+« $\iff$ les $s_i$ tous distincts » qu'elle biffe : la bonne condition, on le
+verra page 28, est $s_i \neq s_0$ pour $i \neq 0$.}.
+
+La page commence ensuite le calcul général des $u_i$ par la forme à quatre
+termes :
+\[
+  \lambda_3 u_3 = -\lambda_1 u_0 + \lambda_2 u_1 + \lambda_2 u_2 , \quad
+  \lambda_4 u_4 = -\lambda_1 u_0 + (\lambda_2 + \lambda_3) u_2 ,
+\]
+\[
+  \lambda_3 \lambda_5 u_5 = -\lambda_1 (\lambda_3 + \lambda_4)\, u_0
+  + \lambda_2 \lambda_4\, u_1 + \lambda_2 (\lambda_3 + \lambda_4)\, u_2 ,
+\]
+que les pages 20 et 21 généralisent\footnote{La page n'écrit pas la valeur de
+$\lambda_4 u_4$ au-delà de son premier terme ; on la complète par la relation
+qu'elle vient d'écrire, et elle concorde avec le calcul de $\lambda_3 \lambda_5
+u_5$ qui suit sur la page.}.
+
+\pagerange{19}{19}
+\section*{Le pentagone, et la formule de Gauss (page 19)}
+
+Pour $n = 5$, l'espace des pentagones à transformation affine près et
+$\mathbf{P}^4$ ont même dimension. La page normalise
+\[
+  s_0 = (0,0), \quad s_1 = (1,0), \quad s_2 = (x, y), \quad
+  s_3 = (x', y'), \quad s_4 = (0, \mu_0),
+\]
+ce qui donne $\mu_1 = y$, $\mu_4 = \mu_0 x'$,
+$\mu_2 = (x y' - y x') - (y' - y)$ et $\mu_3 = (x y' - y x') + \mu_0 (x' - x)$.
+D'où $y = \mu_1$, $x' = \mu_4/\mu_0$, puis
+\[
+  y' = \mu_0 x + (\mu_1 - \mu_2 + \mu_3 - \mu_4)
+\]
+et, en reportant, l'équation du second degré
+\[
+  \mu_0 x^2 - X x + \Bigl( \mu_4 - \mu_3 - \frac{\mu_1 \mu_4}{\mu_0} \Bigr) = 0 ,
+  \qquad X = \mu_0 - \mu_1 + \mu_2 - \mu_3 + \mu_4 ,
+\]
+de discriminant
+\[
+  \Delta = X^2 - 4\mu_0\mu_4 + 4\mu_0\mu_3 + 4\mu_1\mu_4
+  = \sum_i \mu_i^2 - 2 \sum_i \mu_i \mu_{i+1} + 2 \sum_i \mu_i \mu_{i+2}
+\]
+(indices modulo 5), qu'on peut aussi écrire
+\[
+  \Delta = (\mu_0 - \mu_1 + \mu_2 + \mu_3 - \mu_4)^2
+  + 4 (\mu_1 \mu_3 - \mu_2 \mu_3 + \mu_2 \mu_4) .
+\]
+Deux pentagones ont donc en général les mêmes aires d'oreilles ; sur
+$\mathbf{R}$, ils sont réels tous deux si $\Delta > 0$\footnote{La page
+écrit $X = 1 - X_1^4$, avec $X_1^4 = \mu_1 - \mu_2 + \mu_3 - \mu_4$, comme si
+$\mu_0 = 1$, puis $X = \mu_0 - X_1^4$, qu'on garde. Les signes des dix doubles
+produits de $\Delta$, encadrés un à un, sont surchargés ; la forme
+cycliquement symétrique est celle qu'on écrit en premier, sans doute de
+lecture, et elle est juste. La ligne médiane,
+« $\sum f_i^2 + 2 \sum f_{i+1}(f_i - f_{i+1})$ », lue avec doute, n'est pas
+une identité. Dans la dernière ligne la page a $+4 f_2 f_3$ ; il faut
+$-4\mu_2\mu_3$.}.
+
+Le calcul cache une formule classique. Notant $A = \sum_i s_i \wedge s_{i+1}$
+le double de l'aire du pentagone, on a, dans cette normalisation,
+$\mu_0 x = A - \mu_1 - \mu_3$, et l'équation de la page équivaut à
+\[
+  A^2 - \Bigl( \sum_i \mu_i \Bigr) A + \sum_i \mu_i \mu_{i+1} = 0 ,
+\]
+dont $\Delta$ est le discriminant : c'est la relation entre l'aire d'un
+pentagone et celles de ses cinq oreilles qu'on attribue à Gauss\footnote{Le
+rapprochement est le nôtre ; la page ne cite personne, et cette formule n'y
+apparaît pas sous cette forme. L'attribution à Gauss est donnée de mémoire. La
+dernière ligne de la page, séparée par un trait,
+$u_3 \wedge u_4 - u_2 \wedge u_3 = u_3 \wedge (u_2 + u_4)$, s'interrompt.}.
+
+\pagerange{20}{22}
+\section*{La forme à quatre termes, et les équations de fermeture (pages 20 à 22)}
+
+La page 20 s'ouvre sur un calcul isolé,
+\[
+  x^2 + y^2 + z^2 + 2yz + 2zx - 2xy
+  = \xi^2 + \eta^2 - 2\xi\eta + 2(\xi + \eta) + 1
+  = (\xi - \eta)^2 + 2(\xi + \eta) + 1 ,
+\]
+où l'on a fait $z = 1$, $x = \xi$, $y = \eta$ : une conique qui, dans la carte
+$z = 1$, est la parabole $U^2 + 2V + 1 = 0$, $U = \xi - \eta$,
+$V = \xi + \eta$\footnote{La page ne dit pas d'où vient cette forme
+quadratique, ni à quoi elle sert ; on ne le devine pas.}. Puis elle encadre la
+relation à quatre termes et prend $u_0, u_1$ pour base, $u_2 = \xi u_0 + \eta
+u_1$.
+
+\emph{Les côtés dans la base $u_0, u_1, u_2$.} Pour des $\lambda_i$ non nuls,
+$(\ast)$ permet de calculer $u_{i+1}$ à partir de $u_{i-2}, u_{i-1}, u_i$ :
+\[
+  \lambda_{i+1} u_{i+1} = \lambda_i (u_{i-1} + u_i) - \lambda_{i-1} u_{i-2} .
+\]
+On écrit
+\[
+  u_3 = \lambda_3^{-1} (P_3 u_0 + Q_3 u_1 + R_3 u_2), \qquad
+  P_3 = -\lambda_1,\ Q_3 = R_3 = \lambda_2 ,
+\]
+\[
+  u_i = \frac{\lambda_{i-1}}{\lambda_3 \lambda_4 \cdots \lambda_i}
+  \bigl( P_i u_0 + Q_i u_1 + R_i u_2 \bigr) \qquad (i \geqslant 4),
+\]
+où $P_i, Q_i, R_i \in \mathbf{Z}[\lambda_1, \ldots, \lambda_{i-1}]$ sont des
+formes de degré $i - 3$ ; ainsi $(P_4, Q_4, R_4) = (-\lambda_1, 0, \lambda_2 +
+\lambda_3)$ et $(P_5, Q_5, R_5) = (-\lambda_1(\lambda_3 + \lambda_4),
+\lambda_2\lambda_4, \lambda_2(\lambda_3 + \lambda_4))$, comme à la page 18. En
+reportant dans la relation, elles satisfont, chacune, la récurrence à trois
+termes
+\[
+  P_{i+1} = \lambda_{i-1} P_i + \lambda_i \lambda_{i-2} P_{i-1}
+  - \lambda_{i-1}^2 \lambda_{i-3} P_{i-2} \qquad (i \geqslant 6),
+\]
+et de même pour $Q$ et $R$\footnote{Les trois récurrences sont encadrées. La
+page écrit d'abord « $5 \leqslant i$ » et le corrige en $i \geqslant 6$ : c'est
+juste, la récurrence demande que $u_{i-2}$ soit déjà de la forme générale, donc
+$i - 2 \geqslant 4$ ; en $i = 5$ elle est fausse. L'exposant $-1$ de
+$\lambda_3$ est lu avec doute ; la page 20 écrivait une première forme, avec
+$1/(\lambda_3 \cdots \lambda_i)$ en facteur, que la page 21 remplace.}.
+
+\emph{La fermeture.} Si de plus $\sum u_i = 0$, multiplier par
+$\lambda_3 \cdots \lambda_{n-1}$ donne
+\[
+  (0) \qquad \widetilde{P}_{n-1}\, u_0 + \widetilde{Q}_{n-1}\, u_1
+  + \widetilde{R}_{n-1}\, u_2 = 0 ,
+\]
+où
+\[
+  \widetilde{P}_{n-1} = \lambda_3 \cdots \lambda_{n-1}
+  + \lambda_4 \cdots \lambda_{n-1}\, P_3
+  + \sum_{i=4}^{n-1} \lambda_{i-1} \Bigl( \prod_{j=i+1}^{n-1} \lambda_j \Bigr) P_i ,
+\]
+et de même pour $\widetilde{Q}, \widetilde{R}$, polynômes à coefficients
+entiers en $\lambda_1, \ldots, \lambda_{n-1}$\footnote{La page écrit la somme
+terme à terme, « $\lambda_4 \lambda_5 \cdots \lambda_{n-1} P_3 + \lambda_3
+\lambda_5 \lambda_6 \cdots \lambda_{n-1} P_4 + \lambda_4 \lambda_6 \lambda_7
+\cdots \lambda_{n-1} P_5 + \cdots$ », après avoir biffé un début de somme
+$\sum_{i=3}^{n-1} \lambda_{i-1} \lambda_{i+1} \cdots$, qui donnerait au terme
+$i = 3$ un facteur $\lambda_2$ de trop ; le $\lambda_4$ du troisième terme,
+écrit sur un $\lambda_5$, est le bon. Elle écrit d'abord les arguments
+$(\lambda_1, \ldots, \lambda_{n-2})$, puis $(\lambda_1, \ldots,
+\lambda_{n-1})$ ; c'est la seconde liste qui est juste, $\lambda_{n-1}$
+figurant dans les produits. La relation (0), encadrée, porte un numéro lu avec
+doute.}. Les trois conditions de périodicité $u_n = u_0$, $u_{n+1} = u_1$,
+$u_{n+2} = u_2$, les indices des $\lambda$ étant pris modulo $n$
+($\lambda_n = \lambda_0$, $\lambda_{n+1} = \lambda_1$, $\lambda_{n+2} =
+\lambda_2$), donnent
+\[
+  \begin{array}{ll}
+  (1) & \bigl[ \lambda_{n-1} P_n - \lambda_3 \cdots \lambda_n \bigr] u_0
+    + \lambda_{n-1} Q_n\, u_1 + \lambda_{n-1} R_n\, u_2 = 0 , \\[2pt]
+  (2) & \lambda_n P_{n+1}\, u_0
+    + \bigl[ \lambda_n Q_{n+1} - \lambda_3 \cdots \lambda_{n+1} \bigr] u_1
+    + \lambda_n R_{n+1}\, u_2 = 0 , \\[2pt]
+  (3) & \lambda_{n+1} P_{n+2}\, u_0 + \lambda_{n+1} Q_{n+2}\, u_1
+    + \bigl[ \lambda_{n+1} R_{n+2} - \lambda_3 \cdots \lambda_{n+2} \bigr] u_2 = 0 ,
+  \end{array}
+\]
+soit un système
+\[
+  A_j^n\, u_0 + B_j^n\, u_1 + C_j^n\, u_2 = 0 \qquad (j = 0, 1, 2, 3),
+\]
+avec $A_0^n, B_0^n, C_0^n \in \mathbf{Z}[\Lambda_1, \ldots, \Lambda_{n-1}]
+\subset \mathbf{Z}[\Lambda_0, \ldots, \Lambda_{n-1}] \ni A_j^n, B_j^n, C_j^n$
+pour $j = 1, 2, 3$, les $\Lambda_i$ étant des indéterminées\footnote{Les trois
+relations sont encadrées. Dans (3) la page n'écrit entre $R_{n+2}$ et le
+produit qu'un « $(-)$ » ; on rétablit la forme que (1) et (2) imposent. Les
+exposants $n$ ne sont nets qu'à la première ligne du système. Page 23, la
+page écrit l'inclusion verticalement, par un $\cup$, et donne pour $A_0^n$ les
+variables $\Lambda_1, \ldots, \Lambda_{n-2}$ ; voir la note précédente.}. Ce
+système, qui exprime qu'une suite de multiplicateurs non nuls existe pour un
+polygone fermé donné par $u_0, u_1, u_2$, n'est pas résolu : la page 23 prend
+une autre voie.
+
+\pagerange{23}{25}
+\section*{Le cas dégénéré, et la Proposition (pages 23 à 25)}
+
+\emph{Le nombre de multiplicateurs.} La relation $(\ast)$ en $i$ fait intervenir
+$\lambda_i, \lambda_{i+1}, \lambda_{i+2}$ et donne $\lambda_{i+2} u_{i+2}$ en
+fonction des deux autres. Si tous les $u_i$ sont non nuls, deux composantes
+consécutives d'un multiplicateur déterminent donc toutes les autres, et
+\[
+  N(u_*) \longrightarrow k^2, \qquad (\lambda_i) \longmapsto (\lambda_1, \lambda_2)
+\]
+est injective : $\dim N(u_*) \leqslant 2$\footnote{La page fait le compte avec
+trois composantes : « si $\lambda_1, \lambda_2, \lambda_3$ fixés \ldots\ et si
+de plus on impose les $\lambda_i \neq 0$, alors les $\lambda_i$
+($4 \leqslant i \leqslant n-1$) sont déterminés de façon unique ». C'est vrai,
+et le reste pour deux, sans hypothèse sur les $\lambda_i$ : il suffit que les
+$u_i$ soient non nuls. On garde l'énoncé le plus fort, dont la démonstration
+des pages 26 et 27 se simplifie.}. La relation en $i = 1$,
+\[
+  \lambda_1 u_0 - \lambda_2 (u_1 + u_2) + \lambda_3 u_3 = 0 ,
+\]
+montre de plus que si $u_0$, $u_1 + u_2$, $u_3$ ne sont pas colinéaires, les
+$(\lambda_1, \lambda_2, \lambda_3)$ possibles forment un espace de dimension 1,
+donc $N(u_*)$ aussi, au plus. Par permutation circulaire il en est de même dès
+qu'il existe $i$ tel que $u_i$, $u_{i+1} + u_{i+2}$, $u_{i+3}$ ne soient pas
+colinéaires. « Mais quand [ils sont] coll.\ $\forall i$ ! »\footnote{La phrase
+finale est en partie illisible ; « à la multiplication près » est lu avec
+doute. Les crochets de la citation sont de l'édition.}
+
+\emph{Le cas où tous ces triplets sont colinéaires.} Supposons $u_0, u_1$
+linéairement indépendants\footnote{« OPS $u_0, u_1$ lin.\ indép. », en marge de
+la page 23. On le suppose pour tout le reste de la section, sous la forme
+équivalente : les $u_i$ ne sont pas tous sur une même droite (deux côtés
+consécutifs sont alors indépendants, et l'on renumérote). La Proposition qui
+suit l'omet, et elle est fausse sans lui : voir plus bas.}, et que pour tout
+$i$, $u_i$, $u_{i+1} + u_{i+2}$ et $u_{i+3}$ soient colinéaires. Pour $i = 0$ :
+$u_1 + u_2 = -\alpha_0 u_0$ et $u_3 = \beta_0 u_0$ ; pour $i = 1$ :
+$u_2 + u_3 = \gamma u_1$. Éliminant $u_2$ et $u_3$ dans la base $u_0, u_1$, on
+trouve $\gamma = -1$ et $\beta_0 = \alpha_0$, soit
+\[
+  u_2 = -\alpha_0 u_0 - u_1, \qquad u_3 = \alpha_0 u_0 ,
+\]
+avec $\alpha_0 \neq 0$ puisque $u_3 \neq 0$. En particulier $u_1, u_2$ sont
+indépendants, et de proche en proche tous les couples $(u_i, u_{i+1})$ le sont,
+avec $u_{i+3} = \alpha_i u_i$ et $u_{i+2} = -\alpha_i u_i - u_{i+1}$.
+Comparant les deux expressions de $u_{i+3}$ dans la base $u_i, u_{i+1}$,
+\[
+  u_{i+3} = -\alpha_{i+1} u_{i+1} - u_{i+2}
+  = \alpha_i u_i + (1 - \alpha_{i+1})\, u_{i+1}
+  \quad \text{et} \quad u_{i+3} = \alpha_i u_i ,
+\]
+d'où $\alpha_{i+1} = 1$ pour tout $i$. Ainsi $u_{i+3} = u_i$ et
+$u_{i+1} + u_{i+2} = -u_i$ : le polygone est un triangle parcouru plusieurs
+fois, et $n \equiv 0 \pmod 3$, car si $3$ ne divisait pas $n$ tous les $u_i$
+seraient égaux, donc alignés\footnote{La page 24 fait ce calcul avec des
+$\alpha_i$ puis des $\beta_i$ ; la liste $u_5, \ldots, u_9$ qu'elle écrit ne
+suit pas la règle $u_{i+3} = \alpha_i u_i$ inscrite au-dessus (les indices de
+$u_7, u_8, u_9$ sont ceux de la page, non corrigés par la transcription), et
+l'on ne la reproduit pas. Elle conclut « $\beta_1 = 1$, i.e.\ $u_1 = u_4$ »,
+« donc $u_i = u_{i+3}$ », « donc $n \equiv 0$ (3) », le cas
+« $u_i = u_{i+1} = \cdots\ \forall i$ » étant écarté. Le haut de la page 25
+refait le cas du triangle : $u_1 + u_2 \parallel u_0$, $u_2 + u_0 \parallel u_1$,
+$u_0 + u_1 \parallel u_2$ donnent $u_2 = -u_0 - u_1$.}.
+
+\textbf{Proposition} (page 25). Soit $V$ un plan vectoriel sur $k$ et
+$u_* = (u_i)_{i \in \mathbf{Z}/n\mathbf{Z}}$ une suite de vecteurs non nuls de
+$V$, non tous portés par une même droite. Soit $N(u_*)$ l'espace des
+$(\lambda_i) \in k^{\mathbf{Z}/n\mathbf{Z}}$ qui satisfont $(\ast)$. Considérons
+\begin{enumerate}
+  \item[(a)] il existe $(\lambda_i) \in N(u_*)$ dont tous les $\lambda_i$ sont
+    non nuls, et $\dim_k N(u_*) \geqslant 2$ ;
+  \item[(b)] pour tout $i$, $u_i$, $u_{i+1} + u_{i+2}$ et $u_{i+3}$ sont
+    colinéaires ;
+  \item[(c)] pour tout $i$, $u_{i+3} = u_i$ et $u_{i+1} + u_{i+2} = -u_i$ ;
+  \item[(d)] $n \equiv 0 \pmod 3$, $u_i = u_{i+3}$ pour tout $i$, et
+    $u_0 + u_1 + u_2 = 0$.
+\end{enumerate}
+Alors (b), (c) et (d) sont équivalentes, (a) les entraîne, et elles entraînent
+(a) si $k$ a au moins trois éléments. Dans ce cas $\dim N(u_*) = 2$, et
+$N(u_*)$ est formé des $(\lambda_i)$ de période 3 tels que
+$\lambda_0 + \lambda_1 + \lambda_2 = 0$\footnote{La Proposition est réécrite
+trois fois sur place, et ses couches biffées sont en grande partie illisibles ;
+on la donne comme elle se lit en dernier, avec trois changements. (1)
+L'hypothèse de non-alignement est ajoutée : la suite $(e, -e, e, -e)$, un
+segment parcouru deux fois dans les deux sens, a $N(u_*)$ de dimension 2,
+formé des $(a, b, a, b)$, avec des multiplicateurs tous non nuls ; elle
+satisfait (a) et (b), mais ni (c) ni (d). (2) La condition $n \equiv 0$ (3) est
+mise dans (d) : la page l'y écrivait et l'a biffée, et sans elle la période 3 des
+$\lambda_i$ n'a pas de sens sur $\mathbf{Z}/n\mathbf{Z}$. (3) La page suppose
+$k$ infini pour la démonstration ; on dit ce qui sert, et où. Les lettres (a)
+à (d) sont cerclées.}.
+
+\pagerange{26}{27}
+\section*{La démonstration (pages 26 et 27)}
+
+\emph{(a) entraîne (b).} D'après l'injectivité de
+$(\lambda_i) \mapsto (\lambda_1, \lambda_2, \lambda_3)$, $N(u_*)$ s'identifie à
+son image dans le noyau de
+\[
+  k^3 \longrightarrow V, \qquad (\lambda_1, \lambda_2, \lambda_3) \longmapsto
+  \lambda_1 u_0 - \lambda_2 (u_1 + u_2) + \lambda_3 u_3 ,
+\]
+donc
+\[
+  \dim N(u_*) \leqslant 3 - \operatorname{rg}(u_0,\ u_1 + u_2,\ u_3) .
+\]
+Si $\dim N(u_*) \geqslant 2$, ce rang est au plus 1 ; il vaut 1 puisque
+$u_0 \neq 0$. Par permutation circulaire, $u_i$, $u_{i+1} + u_{i+2}$, $u_{i+3}$
+sont colinéaires pour tout $i$. Cette implication ne se sert ni de la
+non-nullité des $\lambda_i$, ni de l'hypothèse de non-alignement\footnote{La
+page établit d'abord l'injectivité de $N(u_*) \to k^3$ par un détour : un
+élément de $N(u_*)$ à composantes toutes non nulles est déterminé par trois
+composantes consécutives ; le noyau a donc des translatés dans $N(u_*)$ qui ne
+rencontrent le complémentaire de la réunion des hyperplans
+$H_i = \{\lambda_i = 0\}$ qu'en un point ; « le corps $k$ étant infini », le
+noyau est nul. L'argument est correct sous l'hypothèse (a) et pour $k$ infini,
+et c'est pour lui que la marge porte « OPS $k$ infini » ; la phrase n'est
+reconstituée qu'au prix de plusieurs lectures douteuses. L'argument direct
+donné plus haut (deux composantes suffisent dès que les $u_i$ sont non nuls)
+le rend inutile. La page montre aussi que l'image ne contient pas
+$(1, 0, 0)$, sans quoi $u_0 = 0$, d'où $\dim N(u_*) \neq 3$ ; c'est
+désormais immédiat. Elle écrit « $\operatorname{rg} N(u_*) = 2$ » pour
+$\dim N(u_*) = 2$, et « $\operatorname{rg}$ » en surcharge de « dim ».}.
+
+\emph{(b), (c) et (d) sont équivalentes.} (b) entraîne (c) : c'est le calcul
+de la section précédente, qui suppose les $u_i$ non tous alignés. (c) entraîne
+(d) en faisant $i = 0$, et $3 \mid n$ comme on l'a vu ; (d) entraîne (c) parce
+que $u_i + u_{i+1} + u_{i+2}$, de période 3 en $i$, est une permutation
+circulaire de $u_0 + u_1 + u_2$ ; (c) entraîne (b) trivialement\footnote{« Un
+calcul facile plus haut montre b) $\Leftrightarrow$ c) et on voit de suite que
+ceci équivaut à d) » : trois mots sont lus avec doute.}.
+
+\emph{(d) entraîne (a).} Pour $(\lambda_i)$ de période 3, la relation $(\ast)$
+devient, puisque $u_i + u_{i+1} = -u_{i-1}$, $u_{i+2} = u_{i-1}$ et
+$\lambda_{i+2} = \lambda_{i-1}$,
+\[
+  (\lambda_{i-1} + \lambda_i + \lambda_{i+1})\, u_{i-1} = 0 ,
+\]
+c'est-à-dire $\lambda_0 + \lambda_1 + \lambda_2 = 0$. Ces suites forment un
+plan, contenu dans $N(u_*)$, qui est de dimension au plus 2 : c'est
+$N(u_*)$. Il contient un élément à composantes toutes non nulles dès que $k$ a
+au moins trois éléments --- $(1, 1, -2)$ en caractéristique différente de 2,
+$(1, \omega, \omega + 1)$ avec $\omega \notin \{0, 1\}$ en caractéristique 2 ;
+sur $\mathbf{F}_2$ il n'y en a pas\footnote{La page calcule le plan des
+$(\lambda_i)$ de période 3 et s'exclame : « Ils forment un vectoriel de
+dim~2 ! » Elle écrit ensuite « Dém.\ d) $\Rightarrow$ a) » et le reste de la
+page est blanc ; la démonstration est de l'édition.}.
+
+\pagerange{28}{28}
+\section*{Le Théorème (page 28)}
+
+\textbf{Théorème.} Soit $V$ un plan vectoriel sur un corps infini $k$,
+$n \geqslant 3$, et $u_* = (u_i) \in V^{\mathbf{Z}/n\mathbf{Z}}$ une suite de
+vecteurs non nuls. Soit
+\[
+  N(u_*) = \bigl\{ (\lambda_i) \in k^{\mathbf{Z}/n\mathbf{Z}} \bigm|
+  \lambda_i u_{i-1} - \lambda_{i+1} (u_i + u_{i+1}) + \lambda_{i+2} u_{i+2} = 0
+  \ \ \forall\, i \bigr\},
+\]
+et $H_i \subset k^{\mathbf{Z}/n\mathbf{Z}}$ l'hyperplan de coordonnées
+$\lambda_i = 0$. On est dans un et un seul des cas suivants.
+\begin{enumerate}
+  \item[(a)] \emph{Cas général} : $N(u_*) = 0$. Si $\sum u_i = 0$, cela
+    signifie que l'application $\varphi$, des polygones fermés vers les aires
+    de leurs oreilles, est une submersion en $u_*$.
+  \item[(b)] $N(u_*) \not\subset \bigcup_i H_i$ ; alors
+    $\dim N(u_*) \in \{1, 2\}$, et l'on distingue :
+  \item[(b$_1$)] \emph{Cas spécial I} : $\dim N(u_*) = 1$ ;
+  \item[(b$_2$)] \emph{Cas hyperspécial} : $\dim N(u_*) = 2$, ce qui, si
+    les $u_i$ ne sont pas tous alignés, équivaut à : $n \equiv 0
+    \pmod 3$, $u_i = u_{i+3}$ pour tout $i$, et $u_0 + u_1 + u_2 = 0$.
+  \item[(c)] \emph{Cas spécial II} : $N(u_*) \neq 0$ et il existe $i$ tel
+    que $N(u_*) \subset H_i$ ; alors $\dim N(u_*) = 1$.
+\end{enumerate}
+Les noms des cas sont de sa main, dans la marge\footnote{Entre guillemets et
+en oblique ; « Cas hyperspécial » est souligné. La page écrit d'abord
+« $n$ entier $\geqslant 1$ », le 1 sur un autre chiffre, peut-être un 3 ; on
+garde $n \geqslant 3$. La relation qui définit $N(u_*)$ est serrée et
+surchargée, et ses indices sont lus d'après la page 25.}.
+
+\emph{Démonstration.} Si $N(u_*) \neq 0$, ou bien $N(u_*)$ n'est pas contenu
+dans la réunion des $H_i$, ou bien il l'est, et alors il est contenu dans l'un
+d'eux : un espace vectoriel sur un corps infini n'est pas réunion finie de
+sous-espaces stricts. C'est le « Lemme ($N(u_*) \not\subset \bigcup H_i$) » de
+la marge de la page 26, et c'est là, et là seulement, que sert l'hypothèse
+$k$ infini. On a toujours $\dim N(u_*) \leqslant 2$ (page 23). Si
+$\dim N(u_*) = 2$, l'injection $N(u_*) \to k^2$,
+$\lambda \mapsto (\lambda_i, \lambda_{i+1})$, est bijective pour tout $i$, et
+$N(u_*)$ n'est contenu dans aucun $H_i$ : en (c), la dimension est 1. Enfin
+(b$_2$) est la Proposition\footnote{Comme dans la Proposition, l'équivalence de
+(b$_2$) avec la condition de droite demande que les $u_i$ ne soient pas tous
+alignés ; la page ne le dit pas. La glose de (a) est reconstituée : la page
+écrit « [i.e., si $\sum u_i = 0$, l'application can.\
+$\varphi : X(V) \to (\det V)^{\mathbf{Z}/n\mathbf{Z}}$ \ldots\ lin.\ \ldots\
+$u_*$] », avec plusieurs mots illisibles, « lin. » lu avec doute et la lettre
+devant « $(V)$ » surchargée ; la lecture « submersion », qui est ce que dit la
+section des pages 14 et 15, est la nôtre.}.
+
+\emph{Ce qui se passe pour les polygones fermés.} Si $\sum u_i = 0$ et que les
+$u_i$ engendrent $V$, le groupe $SL(V)$ agit sur les polygones fermés en
+préservant les $\mu_i$ ; son orbite, de dimension 3, est dans une fibre de
+$\varphi$, si bien que le rang de $\varphi$ en $u_*$ est au plus $2n - 5$ et
+$\dim N(u_*) \geqslant 5 - n$. Un triangle est donc toujours hyperspécial, un
+quadrilatère non aligné toujours dans le cas spécial I, avec le multiplicateur
+$(1, -1, 1, -1)$ des pages 16 et 17, et le cas général ne se rencontre qu'à
+partir du pentagone --- où il est, de fait, le cas d'un polygone pris au
+hasard\footnote{Ce paragraphe est le nôtre ; la page n'en dit rien. Le
+dernier point a été vérifié par le calcul sur des polygones fermés pris au
+hasard, pour $n = 5, 6, 7$.}.
+
+\emph{Le critère du cas spécial II.} Supposons qu'un $\lambda \in N(u_*)$ non
+nul ait une composante nulle, et numérotons pour qu'elle soit $\lambda_0$.
+Alors $\lambda_1 \neq 0$ (deux composantes consécutives nulles annulent tout),
+et l'on normalise $\lambda_1 = 1$. Le vecteur constant de $(L)$ est
+$w = \lambda_0 u_{-1} - \lambda_1 u_1 = -u_1$, et l'on a :
+
+\textbf{Proposition.} Il existe $\lambda \in N(u_*)$ avec $\lambda_0 = 0$ et
+$\lambda_1 = 1$ si et seulement si
+\begin{enumerate}
+  \item[a)] $\sum u_i = 0$, et
+  \item[b)] pour $2 \leqslant i \leqslant n-1$, ou bien $s_i = s_0$, ou bien
+    la paire de directions de $\{u_{i-1}, u_i\}$ est celle de
+    $\{u_1, u_{0i}\}$.
+\end{enumerate}
+Les $\lambda_i$ sont alors définis par $u_1 \cdot u_{0i} = \lambda_i\, u_{i-1}
+\cdot u_i$ dans $\operatorname{Sym}^2 V$, et les indices $i$ tels que
+$\lambda_i = 0$ sont exactement ceux pour lesquels $s_i = s_0$.
+
+En effet, notons $(S_i)$ l'identité $\lambda_i\, u_{i-1} \cdot u_i = u_1 \cdot
+u_{0i}$. $(S_1)$ est vraie. Si $(S_i)$ est vraie, la relation $(L)$ en $i$,
+$\lambda_{i+1} u_{i+1} = \lambda_i u_{i-1} + u_1$, multipliée par $u_i$, donne
+$(S_{i+1})$ ; inversement, $(S_i)$ et $(S_{i+1})$ donnent $(L)$ en $i$ en
+simplifiant par $u_i$, car $\operatorname{Sym} V$ est intègre. Ainsi $(L)$ pour
+tout $i$ équivaut à $(S_2), \ldots, (S_n)$. Or $(S_n)$ s'écrit
+$\lambda_0\, u_{n-1} \cdot u_0 = 0 = u_1 \cdot \sum_i u_i$, c'est-à-dire a) ; et
+$(S_i)$, pour $2 \leqslant i \leqslant n-1$, a une solution $\lambda_i$ si et
+seulement si b) a lieu, puisque dans un plan deux produits de vecteurs non nuls
+sont proportionnels exactement quand ils portent la même paire de droites.
+Enfin $\lambda_i = 0$ si et seulement si $u_1 \cdot u_{0i} = 0$, si et
+seulement si $u_{0i} = 0$\footnote{La page écrit le critère sous la forme
+« a) $\sum u_i = 0$ ; b) $\forall\, 1 \leqslant i \leqslant n-1$, on ait
+$u_{i-1}, u_i \parallel u_1, u_{0i}$ », et « si on normalise ($\lambda_1 = 1$),
+on aura $\lambda_i$ défini par $u_1 u_{0i} = \lambda_i u_i u_{i-1}$ » ; le
+« il faut et il suffit » est lu avec doute, et la démonstration est de
+l'édition. Le cas $i = 1$ de b) est vide. La phrase sur les zéros,
+« les $i$ tels que $\lambda_i = 0$ sont ceux pour lesquels $s_i = s_{i_0}$
+(i.e.\ $u_{i_0} + \cdots + u_{i-1} = 0$) », est sur la page. Le critère
+caractérise l'existence d'un multiplicateur nul en $0$ : on est alors dans le
+cas (c), ou dans le cas hyperspécial, où tous les $H_i$ coupent $N(u_*)$
+suivant une droite.}.
+
+L'ennéagone de la page 18 en est l'exemple : ses côtés d'indice impair ont la
+direction de $u_1$, ceux d'indice pair celle de $s_i - s_0$, et aucun sommet
+autre que $s_0$ ne revient en $s_0$. Une note de marge, reliée au critère par
+une double flèche, en donnait une forme géométrique --- un point $o$, une
+direction $\Delta$, des côtés parallèles à $\Delta$ ou passant par $o$ ---,
+mais elle est en grande partie biffée et la fin en est
+illisible\footnote{On y lit « $\exists\, o \in E$ », « $\Delta$ »,
+« $u_{i-1} \parallel \Delta$ », « $u_i \parallel$ », et une numérotation
+1°), 2°), 3°) lue avec doute. Ce qu'on en dit est une lecture d'ensemble, que
+le critère démontré confirme pour l'exemple de la page 18, où $o = s_0$ et
+$\Delta$ est la direction de $u_1$.}.
+
+\end{document}
