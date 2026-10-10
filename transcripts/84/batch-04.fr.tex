@@ -1,0 +1,904 @@
+% Folder 84, batch 04 — archivists' pages 61–80.
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-09 — first pass, unchecked against the pages by a human.
+%
+% Notation fixed for this batch: the section he writes as a cursive « χ »
+% (often close to a π or an x) is \chi throughout; his product of torsors and
+% extensions is * (sometimes ∧ on pp. 62–64, kept where written); \Gamma for
+% sections, \mathcal{O} for the structure sheaf.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{84}
+\batch{4}
+\pages{61}{80}
+\foldertitle{[Formes quadratiques] : notes manuscrites (s.d.).}
+\dating{[à partir de 1982-vers 1986]}
+\watermark{Édition de démonstration}
+
+\begin{document}
+
+\page{61}
+\note{la page reprend un calcul commencé avant le lot : les conditions 1), 2), 3) invoquées p.~62 et les notations $E$, $P_1$, $L$, $\psi$ viennent des pages précédentes.}
+
+J'avais, du côté $E$, la condition que
+\[
+  Q_{T,N}(x) \overset{\mathrm{def}}{=} x^2 - xT + N \qquad (x \in \Gamma P_1)
+\]
+à valeurs dans $L^{\otimes 2}$, ou encore
+\[
+  Q_{T,N}(x) = x^2 - \psi(x)\,xT + \psi(x)^2 N \qquad (x \in \Gamma E)
+\]
+à valeurs dans $L^{\otimes 2}$. Faisant $x = T$, on trouve la condition
+\uncertain{facile} (compte tenu de $\psi(T) = 2$)
+\[
+  4N - T^2 \in \Gamma L^{\otimes 2} \subset \Gamma\,\mathrm{Sym}^2 E
+\]
+mais elle ne suffit pas. En termes d'un scindage $E \simeq L \oplus \mathcal{O}$,
+par choix d'un $x_0 \in \Gamma P_1$,
+\[
+  \mathrm{Sym}^2 E \simeq L^2 \oplus L \oplus \mathcal{O},
+  \qquad
+  L = x_0 \cdot L, \quad \mathcal{O} = x_0^2\,\mathcal{O}_X,
+\]
+on aura
+\[
+  x_0 = (0,1), \qquad T = (t,2) = 2x_0 + t, \quad t \in \Gamma L,
+\]
+\[
+  N = c - x_0 b + x_0^2 \qquad (\text{car } \psi_2(N) = 1),
+  \qquad
+  \left\{\begin{array}{l} t \in \Gamma L \\ b \in \Gamma L \\ c \in \Gamma L^{\otimes 2} \end{array}\right.
+\]
+\note{la lecture de « $\psi_2(N) = 1$ » est douteuse.}
+
+Soit alors $x = (u,1) = u + x_0$, $u \in L$, on aura
+\[
+  Q_{T,N}(x_0+u) = Q_{T,N}(x) = (x_0+u)^2 - (x_0+u)(2x_0+t) + c - bx_0 + x_0^2
+\]
+\[
+  \text{\struck{$= \ldots u^2 - (\ldots)$}}
+\]
+\[
+  = u^2 - ut + (-bx_0 + c - x_0 t),
+  \qquad u^2,\ ut \in L^{\otimes 2},
+\]
+et la condition est que
+\[
+  \text{\struck{$x_0^2 - x_0(x_0$}}\quad
+  \underbrace{x_0(-b - t)}_{\in\, \Gamma(E \otimes L)} + c \in \Gamma L^{\otimes 2},
+  \qquad c \in \Gamma L^{\otimes 2} \subset \Gamma(E \otimes L).
+\]
+Cela signifie $\boxed{t = -b}$, i.e.\ la condition est \struck{\ill{}}
+\[
+  \boxed{N = x_0^2 - bx_0 + c
+  \quad (b \in \Gamma L,\ c \in \Gamma L^{\otimes 2})
+  \Longrightarrow T = 2x_0 - b}
+\]
+d'où
+\[
+  \boxed{Q(x_0+u) = u^2 + bu + c},
+  \qquad
+  \text{d'où } \delta = T^2 - 4N = b^2 - 4c .
+\]
+
+\marginal{Ceci \uncertain{indépendant} \struck{\ill{}} \ill{} sur le \ill{} du scindage \ill{} $\mathcal{O}$ par $L$, $b$ est \ill{}}
+\note{note marginale oblique, en bas à gauche, rattachée par une flèche à l'encadré ; on y devine encore « pour $\Gamma L$ » et « ext. », le reste ne se lit pas.}
+
+\page{62}
+Ainsi on trouve équivalence \uncertain{1)} $\Leftrightarrow$ 2), $\wr$ 3), d'où (via 3) $\Rightarrow$ 1)) la flèche 2) $\to$ 1).
+\note{le premier « 1) » est écrit sur un autre chiffre ; sous lui, un $\wr$ renvoie à « 3) ».}
+
+\marginal{Produit contracté de rev. quadratiques}
+
+On voudrait maintenant définir le foncteur « produit contracté » sur la catégorie des revêtements quadratiques. On veut
+\[
+  \mathbb{L}(X_1 \wedge X_2) \simeq \mathbb{L}(X_1) \otimes \mathbb{L}(X_2)
+\]
+(les modules discriminants des revêt. (ou plutôt, \ill{} $L$ \ill{} $E$ -- \uncertain{dessus}))
+\[
+  \delta_{X_1 \wedge X_2} = \delta_{X_1} \cdot \delta_{X_2}
+  \qquad \in \Gamma\,\mathbb{L}(X_1 \wedge X_2).
+\]
+
+De plus, on veut que tout scindage de $X_1$, défini par $x_1 \in E_1$ avec $\psi_{X_1}(x_1) = 1$, et tout scindage de $X_2$, défini par $x_2 \in E_2$ avec $\psi_{X_2}(x_2) = 1$, en définisse un de $X_1 \wedge X_2$, via une application
+\[
+  (x_1, x_2) \longmapsto x_1 \wedge x_2 : P_{X_1} \times P_{X_2} \to P_{X_1 \wedge X_2}
+\]
+qui induise
+
+\begin{tikzcd}
+P_{X_1} \times P_{X_2} \arrow[r] & P_{X_1 \wedge X_2} \\
+X_1 \times X_2 \arrow[r] \arrow[u, hook] & X_1 \wedge X_2 \arrow[u, hook]
+\end{tikzcd}
+
+Si $X_1$, $X_2$ sont munis des scindages $x_1$, $x_2$, et si les modules discriminants sont $L_1$, $L_2$, alors les structures sont définies par
+\[
+  \begin{array}{lll}
+  b_1 \in \Gamma L_1 & c_1 \in \Gamma L_1^{\otimes 2} & b_1 = 2x_1 - T_1 \\
+  b_2 \in \Gamma L_2 & c_2 \in \Gamma L_2^{\otimes 2} & b_2 = 2x_2 - T_2
+  \end{array}
+\]
+\note{les lettres en tête des deux premières colonnes sont mal formées ; l'ordre $b_1, b_2$ / $c_1, c_2$ est celui que demandent les exposants.}
+
+\page{63}
+et on doit aussi alors (sauf erreur)
+\[
+  \boxed{b \overset{\mathrm{def}}{=} b_{X_1 \wedge X_2} = b_1 b_2}
+\]
+(car le discriminant \uncertain{ce que ça aurait dû être}, au signe près …), d'où pratiquement aussi $c$, via
+\[
+  4c = b^2 - \delta = (b_1 b_2)^2 - \delta_1 \delta_2 = 4(c_1\delta_2 + c_2\delta_1 + 4c_1c_2)
+\]
+\[
+  (b_1b_2)^2 = b_1^2 b_2^2 = (\delta_1 + 4c_1)(\delta_2 + 4c_2)
+\]
+et on en tire
+\[
+  \boxed{c = c_1\delta_2 + c_2\delta_1 + 4c_1c_1}
+  = b_2^2 c_1 + b_1^2 c_2 - 4c_1c_2,
+  \qquad \delta_2 = b_2^2 - 4c_2,\ \delta_1 = b_1^2 - 4c_1.
+\]
+\note{« $4c_1c_1$ » sic dans l'encadré ; le calcul demande $4c_1c_2$, que donne le membre de droite.}
+
+Mais quelles sont les formules que
+\[
+  (x_1+u_1) \wedge (x_2+u_2) \overset{?}{=} x_1 \wedge x_2 + \underbrace{f_{x_1,x_2}(u_1,u_2)}_{?},
+  \qquad u_1 \in \Gamma L_1,\ u_2 \in \Gamma L_2,
+\]
+où $f_{x_1,x_2} : L_1 \times L_2 \to L_1 \otimes L_2$.
+\struck{On a \ill{} $L_1 \times \ldots$ dans $L_1 \otimes L_2$}
+
+On a trois applications \struck{\ill{}}
+\[
+  \begin{array}{lll}
+  f_{x_2} : L_1 \to L_1 \otimes L_2 & & u_1 \mapsto u_1 b_2 \\
+  f_{x_1} : L_2 \to L_1 \otimes L_2 & & u_2 \mapsto u_2 b_1 \\
+  f_{x_1,x_2} : L_1 \times L_2 \to L_1 \otimes L_2 & & (u_1,u_2) \mapsto u_1 \otimes u_2
+  \end{array}
+\]
+
+Je devine qu'on a
+\[
+  \boxed{(x_1+u_1) \wedge (x_2+u_2) = x_1 \wedge x_2
+  + \underbrace{(u_1b_2 + u_2b_1 + 2u_1u_2)}_{\in\, \Gamma(L_1 \otimes L_2)}}
+\]
+
+\page{64}
+Vérifions que (pour $x_1$, $x_2$ fixés, i.e.\ pour $(L_1, b_1, c_1)$ et $(L_2, b_2, c_2)$ fixés) cette application
+\[
+  P_1 \times P_2 \to P \quad \text{i.e.} \quad L_1 \times L_2 \to L_1 \otimes L_2
+\]
+\struck{\ill{}} envoie bien $X_1 \times X_2$ dans $X$, i.e.
+\[
+  \left.\begin{array}{l}
+  \overbrace{u_1^2 + b_1u_1 + c_1}^{Q_1(u_1)} = 0 \\
+  \underbrace{u_2^2 + b_2u_2 + c_2}_{Q_2(u_2)} = 0
+  \end{array}\right\}
+  \Longrightarrow
+  \underbrace{u^2 + bu + c}_{Q(u)} = 0
+\]
+avec
+\[
+  \left\{\begin{array}{l}
+  u = u_1b_2 + u_2b_1 + 2u_1u_2 \\
+  b = b_1b_2 \\
+  c = b_2^2 c_1 + b_1^2 c_2 - 4c_1c_2
+  \end{array}\right.
+\]
+\[
+  [u_1b_2 + u_2b_1 + 2u_1u_2]^2 + b_1b_2(u_1b_2 + u_2b_1 + 2u_1u_2)
+  + b_2^2c_1 + b_1^2c_2 - 4c_1c_2 \overset{?}{=} 0 .
+\]
+
+Le premier membre s'écrit ($\forall\, u_1 \in \Gamma L_1$, $u_2 \in \Gamma L_2$)
+\[
+  b_2^2(u_1^2 + b_1u_1 + c_1) + b_1^2(u_2^2 + b_2u_2 + c_2) + 4u_1^2u_2^2
+  + 4b_1b_2u_1u_2
+\]
+\[
+  + 4u_1^2b_2u_2 + 4u_2^2b_1u_1 - 4c_1c_2
+  \quad \text{\struck{$+ 4u_1u_2b_1b_2$}}
+\]
+\[
+  = b_2^2 Q_1(u_1) + b_1^2 Q_2(u_2) + 4(Q(u_1) - c_1)(Q(u_2) - c_2)
+\]
+\[
+  \text{\struck{$- 4b_1b_2u_1u_2$}} \quad - 4c_1c_2
+\]
+\[
+  = b_2^2 Q_1(u_1) + b_1^2 Q_2(u_2)
+  + 4[Q(u_1)Q(u_2) - c_1Q(u_2) - c_2Q(u_1)]
+  \quad \text{\struck{$-4b_1b_2u_1u_2$}}
+\]
+\note{dans la marge droite, un essai biffé sur $4u_1^2u_2^2$ ; au-dessous, deux lignes de calcul raturées.}
+\[
+  \boxed{\begin{array}{l}
+  Q(u_1 * u_2) = b_2^2 Q_1(u_1) + b_1^2 Q_2(u_2) \\
+  \qquad + 4[Q_1(u_1)Q_2(u_2) - c_1Q_2(u_2) - c_2Q_1(u_1)]
+  \end{array}}
+\]
+\note{le premier membre de l'encadré est surchargé : « $Q((x_1+u_1)\wedge(x_2+u_2))$ » biffé, puis une forme en $*$ ; une accolade à gauche porte « $u^2 - bu + c =$ ».}
+
+Faisant $u_1 = 0$, $u_2 = 0$, on trouve $u = 0$ d'où
+\[
+  \underbrace{Q(x_1 * x_2)}_{= c} = b_1^2 c_2 + b_2^2 c_1
+  + 4\underbrace{(c_1c_2 - c_1c_2 - c_1c_2)}_{-4c_1c_2}
+\]
+la formule déjà donnée.
+\note{le facteur 4 devant la parenthèse et l'accolade « $-4c_1c_2$ » sont tels qu'il les écrit.}
+
+\page{65}
+Retenons donc
+\[
+  \boxed{\underbrace{Q(x_1 * x_2)}_{c} = \underbrace{Q_1(x_1)}_{c_1}\delta_2
+  + \underbrace{Q_2(x_2)}_{c_2}\delta_1 + 4Q_1(x_1)Q_2(x_2)}
+\]
+\[
+  c_1\delta_2 + c_2\delta_1 + 4c_1c_2
+\]
+
+\subsection{Digression affine.}
+
+Soit $(X, \mathcal{O})$ \uncertain{espace} ou topos annelé, muni d'une section
+\[
+  \chi \in \Gamma\mathcal{O}.
+\]
+On s'intéresse à la catégorie des triples $(L, P, T)$, où
+\begin{itemize}
+  \item $L$ un $\mathcal{O}$-Module,
+  \item $P$ un $L$-torseur,
+  \item $T$ une trivialisation de ${}_{\chi}P \overset{\mathrm{def}}{=} P \wedge^{L} (L \xrightarrow{\chi} L)$,
+\end{itemize}
+ou encore la catégorie des \struck{\ill{}} systèmes
+\[
+  (M, E, i, \psi, T)
+\]
+où $M$, $E$ des $\mathcal{O}$-modules,
+\[
+  (*) \qquad 0 \to M \xrightarrow{i} E \xrightarrow{\psi} \mathcal{O} \to 0
+\]
+une suite exacte, i.e.\ $E$ est donné comme une extension de $\mathcal{O}$ par $M$, et enfin $T \in E$ tel que
+\[
+  \psi(T) = \chi
+\]
+(NB on a ${}_{\chi}P = \psi^{-1}(\chi) \subset E$).
+
+\marginal{NB On va identifier $M \subset E$}
+
+On veut définir un « produit contracté » $\wedge$ sur cette catégorie,
+\[
+  (L_1, P_1, T_1) \wedge (L_2, P_2, T_2) = (L_1 \otimes L_2,\ P_1 \wedge P_2,\ T),
+  \qquad T \overset{?}{=} T_1 \wedge T_2,
+\]
+qui fasse de cette catégorie une catégorie monoïdale (contraintes d'associativité, d'unité, de commut.).
+
+\page{66}
+Notons que pour une ext. $(*)$ donnée, il revient au même de se donner $T$ tel que $\psi(T) = \chi$, ou une « section de $\psi$ $\chi$-relèvement »
+\[
+  \mathcal{O} \xrightarrow{\ \psi' \ (= \psi'_T)\ } E
+  \qquad (\text{nécess.\ de la forme } \lambda \mapsto \lambda T, \text{ où } T \in \Gamma E,\ T = \psi'(1))
+\]
+tel que
+\[
+  \psi\psi'(\lambda) = \chi\lambda
+\]
+(ce qui équivaut en effet à $\psi\psi'(1) = \chi$ i.e.\ $\psi(T) = \chi$).
+Je remarque aussi qu'il revient au même de se donner une \uncertain{flèche}
+\[
+  E \xrightarrow{\ \pi\ (= \pi_T)\ } M
+\]
+qui soit une $\chi$-rétraction pour $i$, i.e.\ telle que
+\[
+  \pi \circ i = \chi\, \mathrm{id}_M .
+\]
+\note{le but de $\pi$ est surchargé : une lettre biffée, puis $M$.}
+
+Une relation entre $\pi_T$ et $T$ est la suivante
+\[
+  i(\pi(x)) = \underset{\psi(T)}{\chi}\, x - T\psi(x) \quad \text{i.e.} \quad \pi = \chi\,\mathrm{id} - \psi \otimes T
+\]
+\[
+  \bigl(= \psi(T)x - T\psi(x) \overset{\mathrm{def}}{=} x \underset{\psi}{\wedge} T\bigr)
+\]
+En effet, pour $T$ fixé tel que $\psi(T) = \chi$, et pour tout $x$,
+\[
+  \psi(\chi x - T\psi(x)) = \chi\psi(x) - \psi(T)\psi(x) = 0 \quad \text{car } \psi(T) = \chi,
+\]
+i.e.\ \uncertain{$\pi(x) \in i(M)$}, et si \uncertain{$x \in i(M)$} i.e.\ $\psi(x) = 0$, on a bien
+\[
+  i\,\pi(x) = \chi x \qquad \text{\struck{$i\,\pi(x) = \chi$}}
+\]
+\note{la lettre dans « $i(M)$ » peut se lire $L$.}
+
+Inversement, si $\pi$ est donnée, considérons
+\[
+  x \longmapsto \chi x - \pi x : E \to \text{\struck{$M$}}\ E ;
+\]
+elle est nulle sur $M$, donc se factorise en
+\[
+  E/M \simeq \mathcal{O} \xrightarrow{\psi'} E, \qquad \lambda \mapsto \lambda T,
+\]
+cette flèche $\psi'$ donnée par un $T \in E$, et on aura
+\[
+  \chi x - \pi x = \psi(x) T \quad \text{i.e.} \quad \boxed{\pi(x) = \chi x - \psi(x) T}
+\]
+
+\page{67}
+Prenant le $\psi$ des deux membres, et comme $\pi(x) \in L$ donc $\psi(\pi(x)) = 0$, on trouve
+\[
+  \chi\psi(x) - \psi(x)\psi(T) = 0 \quad \text{i.e.} \quad \psi(x)(\chi - \psi(T)) = 0
+\]
+pour toute section locale $x$ de \uncertain{$E$}. Prenant $x$ telle que $\psi(x) = 1$, on trouve $\chi - \psi(T) = 0$ i.e.\ $\psi(T) = \chi$.
+
+Soient
+\[
+  \begin{array}{lll}
+  0 \to L_1 \xrightarrow{i_1} E_1 \xrightarrow{\psi_1} \mathcal{O} \to 0 & \quad T_1 \in E_1 & \psi_1(T_1) = \chi \\
+  0 \to L_2 \xrightarrow{i_2} E_2 \xrightarrow{\psi_2} \mathcal{O} \to 0 & \quad T_2 \in E_2 & \psi_2(T_2) = \chi
+  \end{array}
+\]
+on veut définir
+\[
+  0 \to L_1 \otimes L_2 \xrightarrow{i} E \xrightarrow{\psi} \mathcal{O} \to 0,
+  \qquad T \in E,\ \psi(T) = \chi,
+\]
+\[
+  E \overset{\mathrm{def}}{=} (E_1, T_1) \underset{\chi}{\wedge} (E_2, T_2).
+\]
+
+Considérons
+
+\begin{tikzcd}[column sep=small]
+ & L_1 \otimes L_2 \arrow[dl] \arrow[dr] & \\
+L_1 \otimes E_2 \arrow[dr] & & E_1 \otimes L_2 \arrow[dl] \\
+ & E_1 \otimes E_2 &
+\end{tikzcd}
+
+\uncertain{qui convergent} : une suite de \uncertain{comp.} dans $E_1 \otimes E_2$,
+\[
+  0 \subset \underbrace{L_1 \otimes L_2}_{L_1 \otimes L_2}
+  \subset \underbrace{L_1 \otimes E_2 + E_1 \otimes L_2}_{L_1 \oplus L_2}
+  \subset \underbrace{E_1 \otimes E_2}_{\mathcal{O}},
+\]
+\note{les accolades donnent les quotients successifs de la filtration.}
+On a sur $E_1 \otimes E_2$ une structure d'ext.
+\[
+  0 \to E_1 *_0 E_2 \to E_1 \otimes E_2 \to \mathcal{O} \to 0
+\]
+\[
+  E_1 *_0 E_2 \overset{\mathrm{def}}{=} L_1 \otimes E_2 + E_1 \otimes L_2 \supset L_1 \otimes L_2
+\]
+\marginal{NB dans la notation $E_1$, $E_2$, la structure d'ext.\ est sous-entendue}
+
+\page{68}
+avec
+\[
+  0 \to L_1 \otimes L_2 \to E_1 * E_2 \to L_1 \oplus L_2 \to 0 .
+\]
+On va définir une flèche
+\[
+  E_1 * E_2 \xrightarrow{\ \mu = \mu_{E_1,E_2}\ } L_1 \otimes L_2
+\]
+i.e.\ un diagramme commutatif d'homom.\ linéaires
+
+\begin{tikzcd}[column sep=small]
+ & L_1 \otimes L_2 \arrow[dl] \arrow[dr] & \\
+L_1 \otimes E_2 \arrow[dr, "\alpha_1"'] & & E_1 \otimes L_2 \arrow[dl, "\alpha_2"] \\
+ & L_1 \otimes L_2 &
+\end{tikzcd}
+
+On définit
+\[
+  \alpha = \mathrm{id}_{L_1} \otimes \pi_{T_2}, \qquad \beta = \pi_{T_1} \otimes \mathrm{id}_{L_2},
+\]
+i.e.
+\[
+  \alpha(u_1 \otimes x_2) = u_1 \otimes \pi_{T_2}(x_2) = u_1 \otimes (\chi x_2 - T_2\psi(x_2)),
+  \qquad u_1 \in \Gamma L_1,\ x_2 \in \Gamma E_2,
+\]
+\[
+  \text{\struck{$\beta$}}\ \alpha_2(x_1 \otimes u_2) = \pi_{T_1}(x_1) \otimes u_2
+  = (\chi x_1 - T_1\psi(x_1)) \otimes u_2,
+\]
+\[
+  x_1 \in \Gamma E_1,\ u_2 \in \Gamma L_2 ;
+\]
+on a
+\[
+  \alpha_1(u_1 \otimes u_2) = \chi\, u_1 \otimes u_2, \qquad
+  \alpha_2(u_1 \otimes u_2) = \chi\, u_1 \otimes u_2 \qquad \text{OK !}
+\]
+
+On posera
+$E_1 \wedge E_2$ = extension de $\mathcal{O}$ par $L_1 \otimes L_2$ déduite de l'ext.\ de $\mathcal{O}$ par \uncertain{$E_1 * E_2$} $E_1 \otimes E_2$ grâce à
+$\mu : E_1 * E_2 \to L_1 \otimes L_2$ ci-dessus.
+\note{le signe entre $E_1$ et $E_2$ dans « par $E_1 * E_2$ » est surchargé ($*$ et $\otimes$).}
+
+\page{69}
+On a donc un homom.\ de suites exactes
+\note{au-dessus de la première flèche : $x_1 \otimes x_2 \mapsto \psi_1(x_1)\psi_2(x_2)$ ; sous $E_1 *_0 E_2$ et $E_1 \otimes E_2$, des étiquettes de flèches verticales biffées.}
+
+\begin{tikzcd}[column sep=small]
+0 \arrow[r] & E_1 *_0 E_2 \arrow[r, "i"] \arrow[d] & E_1 \otimes E_2 \arrow[r] \arrow[d] & \mathcal{O} \arrow[r] \arrow[d, "\mathrm{id}"] & 0 \\
+0 \arrow[r] & L_1 \otimes L_2 \arrow[r, "i"] & E_1 * E_2 \arrow[r, "\psi"] & \mathcal{O} \arrow[r] & 0
+\end{tikzcd}
+
+Il faut définir un $\chi$-scindage de l'ext.\ $E_1 \wedge E_2$.
+\struck{$E_1 * E_2$}
+Il revient au même de se donner
+\[
+  E_1 * E_2 \to L_1 \otimes L_2
+\]
+qui sur $L_1 \otimes L_2$ se réduise à la mult.\ par $\chi$. Comme
+\[
+  E_1 * E_2 = E_1 \otimes E_2 \underset{E_1 *_0 E_2}{\amalg} (L_1 \otimes L_2),
+\]
+se donner une flèche de $E_1 * E_2$ dans un module $M$ revient à se donner un diagramme commutatif
+
+\begin{tikzcd}[column sep=small, row sep=small]
+ & E_1 *_0 E_2 \arrow[dl, "\mathrm{inc}"'] \arrow[dr, "\mu"] & \\
+E_1 \otimes E_2 \arrow[dr, dashed] \arrow[ddr, "{\rho = \pi}"'] & & L_1 \otimes L_2 \arrow[dl, dashed] \arrow[ddl, "{\sigma = \chi\,\mathrm{id}_{L_1 \otimes L_2}}"] \\
+ & E_1 * E_2 \arrow[d, "\pi_T"] & \\
+ & M &
+\end{tikzcd}
+
+Ici on a $M = L_1 \otimes L_2$. Considérons
+\[
+  \rho : E_1 \otimes E_2 \to L_1 \otimes L_2, \qquad \rho = \pi_{E_1} \otimes \pi_{E_2},
+\]
+i.e.
+\[
+  \rho(x_1 \otimes x_2) = (\underbrace{\chi x_1 - \psi_1(x_1)T_1}_{\pi_{T_1}(x_1)})
+  \otimes (\underbrace{\chi(x_2) - \psi_2(x_2)T_2}_{\pi_{T_2}(x_2)}).
+\]
+Si $x_1 = u_1 \in L_1$, on trouve (comme $\psi_1(x_1) = 0$) $\chi u_1$
+
+\page{70}
+\[
+  \text{\struck{$\rho(u_1 \otimes x_2 + x_1 \otimes u_2) = \chi u_1 \otimes \chi(x_2)$}}
+\]
+\[
+  \rho(u_1 \otimes x_2) = \chi u_1 \otimes (\chi(x_2) - \psi_2(x_2)T_2)
+\]
+Mais on voit qu'il faut prendre
+\[
+  \mu_{E_1,E_2}(u_1 \otimes x_2) \overset{\mathrm{def}}{=} u_1 \otimes (\chi x_2 - \psi_2(x_2)T_2)
+\]
+(${}^{*}$) il faut prendre donc $\sigma = \chi\,\mathrm{id}_{L_1 \otimes L_2}$ pour avoir commutativité du côté $L_1 \otimes E_2 \subset E_1 * E_2$, et de même $E_1 \otimes L_2$. On y gagne !
+
+\marginal{Mais \ill{} $\pi_T$ soit}
+\marginal{${}^{*}$ C'est ce qu'il fallait pour que \ill{} soit une $\chi$-trivialis.\ \struck{\ill{}} \ill{}}
+
+Si $\chi$ est régulier sur \struck{\ill{}} $L_1 \otimes L_2$ (p.ex.\ $\chi$ régulier dans $\mathcal{O}$ et $L_1$, $L_2$ plats sur $\mathcal{O}$, donc $L_1 \otimes L_2$ plat aussi …) alors on peut définir $T$ par
+\[
+  \chi T = \mu'(T_1 \otimes T_2) \overset{\mathrm{def}}{=} T_1 * T_2
+\]
+i.e.
+\[
+  T = \frac{1}{\chi}\, T_1 * T_2 \qquad (!)
+\]
+
+\struck{Considérons} En effet considérons
+\[
+  \pi_T : E \to L_1 \otimes L_2, \qquad x \mapsto \chi x - T\psi(x),
+  \qquad \text{d'où } T\psi(x) = \chi x - \pi_T(x).
+\]
+\note{suivent trois lignes biffées (« posons $x = T_1$ … », « $\chi\pi_T$ … ») ; à droite :}
+Faisons $x = T_1 * T_2$, d'où $\psi(x) = \psi(T_1)\psi(T_2) = \chi^2$, d'où
+\[
+  \chi^2 T = \chi T_1 * T_2 - \underbrace{\pi_T(T_1 * T_2)}_{\pi_{T_1}(T_1) \otimes \pi_{T_2}(T_2) = 0}
+\]
+\note{le bas de la page est barré de grands traits obliques :}
+\struck{Soient $x_1 \in \Gamma P_1$, $x_2 \in \Gamma P_2$, i.e.\ $\psi_1(x_1) = 1$, $\psi_2(x_2) = 1$, posons $x = x_1 * x_2$, on trouve}
+\[
+  \text{\struck{$T = \chi\, x_1 * x_2 - \pi_T(x_1 * x_2)$,}}
+  \qquad
+  \text{\struck{$\pi_T(x_1 * x_2) = (\chi x_1 - T_1)(\chi x_2 - T_2)$}}
+\]
+
+\page{71}
+\struck{Faisons $x_1 = \frac{1}{\chi}T_1$, $x_2 = \frac{1}{\chi}T_2$ (!), on trouve}
+\[
+  \text{\struck{$T = \chi\bigl(\tfrac{1}{\chi}T_1\bigr) * \bigl(\tfrac{1}{\chi}T_2\bigr) - \ldots$}}
+  \qquad
+  \text{\struck{$= \tfrac{1}{\chi}\, T_1 * T_2$}}
+\]
+Faisons $x = T_1 * T_2$, d'où
+\[
+  \chi^2 T = \chi\, T_1 * T_2
+\]
+d'où en divisant par $\chi$
+\[
+  \boxed{\chi T = T_1 * T_2}
+\]
+
+\emph{NB} L'application
+\[
+  E_1 \times E_2 \to E_1 \otimes E_2 \to E_1 * E_2,
+  \qquad (x_1, x_2) \mapsto x_1 \otimes x_2,\ x_1 \otimes x_2 \mapsto x_1 * x_2
+\]
+applique
+\[
+  P_1 \times P_2 \to P = \psi^{-1}(1).
+\]
+
+On aura si $x_1 \in \Gamma P_1$, $u_1 \in \Gamma L_1$, $x_2 \in \Gamma P_2$, $u_2 \in \Gamma L_2$ :
+\[
+  (x_1 + u_1) * (x_2 + u_2) = \underbrace{x_1 * x_2}_{\in\, \Gamma P}
+  + \underbrace{u_1 * x_2 + x_1 * u_2 + u_1 * u_2}_{\in\, \Gamma(L_1 \otimes L_2)},
+  \qquad u_1 * u_2 = \chi\, u_1 \otimes u_2,
+\]
+\[
+  = x_1 * x_2 + \bigl[u_1 \otimes (\overbrace{\chi x_2 - \psi(x_2)T_2}^{-b_2})
+  + (\overbrace{\chi x_1 - \psi(x_1)T_1}^{-b_1}) \otimes u_2
+  + \chi\, u_1 \otimes u_2\bigr]
+\]
+\[
+  \boxed{\begin{array}{l}
+  (x_1 + u_1) * (x_2 + u_2) = x_1 * x_2 + (-u_1 \otimes b_2 - b_1 \otimes u_2 + \chi\, u_1 \otimes u_2) \\
+  \qquad = x_1 * x_2 + (-u_1 \otimes b_2 - b_1 \otimes u_2 + \chi\, u_1 \otimes u_2)
+  \end{array}}
+\]
+où $b_1$, $b_2$ sont les éléments de $L_1$, $L_2$ qui définissent $T_1$, $T_2$ en termes de $x_1$, $x_2$ :
+\[
+  T_1 = \chi x_1 + b_1, \qquad T_2 = \chi x_2 + b_2 .
+\]
+
+\marginal{NB $x_1 = (0,1)$, $\chi x_1 = (0,\chi)$, $T_1 = (b_1,\chi)$, \struck{$\chi x_1 - T_1$} $\chi x_1 - T_1 = (-b_1, 0)$}
+\marginal{NB Si \ill{} une base de $L_1$ \ill{}}
+\note{plusieurs notes obliques, à gauche et à droite de l'encadré, y renvoient par des flèches ; on n'en lit que des bribes (« conjugués », « coïncident »).}
+
+\page{72}
+identifiant $E$ à $L_1 \otimes L_2 \oplus \mathcal{O}_X$ grâce au scindage $x_1 * x_2$, on trouve, par un calcul immédiat${}^{(*)}$,
+\[
+  T = \text{\struck{$\ldots$}}\ \chi(x_1 * x_2) - b_1 \otimes b_2
+\]
+
+\marginal{${}^{*}$ NB $\pi_T(x_1 * x_2) = \chi x_1 * x_2 - T$, donc $T = \chi x_1 * x_2 - \pi_T(x_1 * x_2)$. Or $\pi_T(x_1 * x_2) = \pi_{T_1}(x_1) \otimes \pi_{T_2}(x_2)$ $\forall\, x_1 \in E_1$, $x_2 \in E_2$}
+
+Re NB : on vérifie \uncertain{aussitôt} que \ill{} \ill{} (en remplaçant $x_1$ par $x_1 + u_1$, $x_2$ par $x_2 + u_2$, $u_1 \in \Gamma L_1$, $u_2 \in \Gamma L_2$) — \uncertain{attention au} signe ! Pour éliminer le signe, il faudrait poser
+\[
+  \left\{\begin{array}{lll}
+  b_{T_1,x_1} = -b_1 & \text{i.e.} & b_{T_1,x_1} = \chi x_1 - T_1 = \pi_{T_1}(x_1) \\
+  b_{T_2,x_2} = -b_2 & \text{i.e.} & b_{T_2,x_2} = \chi x_2 - T_2 = \pi_{T_2}(x_2) \\
+  b_{T,x_1 * x_2} = -b & \text{i.e.} & b = \chi x_1 * x_2 - T = \pi_T(x) \quad (x = x_1 \otimes x_2)
+  \end{array}\right.
+\]
+et on trouve
+\[
+  \text{\struck{$b$}}\ b = -b_{T,x_1 * x_2} = -b_1 \otimes b_2 = -b_{T_1,x_1} \otimes b_{T_2,x_2}
+\]
+d'où
+\[
+  \boxed{b_{T,x_1 * x_2} = b_{T_1,x_1} \otimes b_{T_2,x_2}}
+\]
+On trouve donc
+\[
+  T = \chi \cdot (x_1 * x_2) - \underbrace{b_{T,x_1 * x_2}}_{b_{T_1,x_1} \otimes b_{T_2,x_2}}
+\]
+
+\subsection{Formulaire récapitulatif pour ce formalisme}
+
+\[
+  (x_1, x_2) \mapsto x_1 * x_2 : E_1 \times E_2 \to E_1 * E_2,
+\]
+où $E_i$ ($i = 1, 2$) est l'enveloppe affine universelle d'un torseur $P_i$ sous un module \struck{\ill{}} $L_i$, muni d'une donnée de $\chi$-trivialisation ($\chi \in \Gamma(X, \mathcal{O})$ donné !)
+\[
+  \pi_i : P_i \to L_i
+\]
+(satisfaisant la définition de « $\chi$-trivialisation »)
+\[
+  \pi_i(x_i + u_i) = \pi_i(x_i) + \chi u_i, \qquad x_i \in \Gamma P_i,\ u_i \in \Gamma L_i .
+\]
+
+\page{73}
+On peut aussi considérer l'extension linéaire de $\pi_i$ :
+\[
+  E_i \to L_i
+\]
+et alors la condition précédente signifie simplement que
+\[
+  \pi_i(u_i) = \chi \cdot u_i \qquad \text{si } u_i \in L_i \subset E_i .
+\]
+
+Ceci posé, on a les formules fondamentales suivantes.
+
+① \emph{bilinéarité} de $x_1 * x_2$ (i.e.\ correspond à une appli.\ lin.\ $\boxed{E_1 \otimes E_2 \to E}$)
+
+② $\boxed{\psi(x_1 * x_2) = \psi_1(x_1)\psi_2(x_2)}$ (compatibilité aux augmentations), où
+\[
+  E_1 \xrightarrow{\psi_1} \mathcal{O}, \qquad
+  E_2 \xrightarrow{\psi_2} \mathcal{O}, \qquad
+  E = E_1 * E_2 \xrightarrow{\psi} \mathcal{O}
+\]
+sont les augmentations. En particulier, $*$ induit
+\[
+  P_1 \times P_2 \to P, \quad (x_1, x_2) \mapsto x_1 * x_2
+  \qquad (\text{où } P_i = \psi_i^{-1}(\{1\}),\ P = \psi^{-1}(\{1\}))
+\]
+induit par $*$.
+
+③
+\[
+  \boxed{\begin{array}{l}
+  (x_1 + u_1) * x_2 = x_1 * x_2 + u_1 \otimes \pi_2(x_2) \\
+  x_1 * (x_2 + u_2) = x_1 * x_2 + \pi_1(x_1) \otimes u_2
+  \end{array}}
+  \qquad x_i \in \Gamma E_i,\ u_i \in \Gamma L_i
+\]
+d'où
+\[
+  \boxed{\begin{array}{l}
+  (x_1 + u_1) * (x_2 + u_2) = x_1 * x_2 + u_1 \otimes \pi_2(x_2) + \pi_1(x_1) \otimes u_2 \\
+  \qquad + \chi\, u_1 \otimes u_2
+  \end{array}}
+\]
+\marginal{\ill{} ③ \ill{} $x_1 \in \Gamma P_1$ \ill{}}
+\note{note oblique en marge gauche, reliée à ③ par une flèche ; presque entièrement illisible.}
+
+Ces formules résultent de la bilinéarité +
+\[
+  \boxed{\begin{array}{l}
+  u_1 * x_2 = u_1 \otimes \pi_2(x_2) \\
+  x_1 * u_2 = \pi_1(x_1) \otimes u_2
+  \end{array}}
+\]
+\struck{lesquelles} lesquelles donnent chacune (une fois $x_2 = u_2$ ou $x_1 = u_1$)
+\[
+  \boxed{u_1 * u_2 = \chi\, u_1 \otimes u_2},
+\]
+compte tenu de $\pi_1(u_1) = \chi u_1$, $\pi_2(u_2) = \chi u_2$.
+
+\page{74}
+④ Relation entre $\pi_i$, $T_i$ :
+\[
+  \boxed{\pi_i(x) = \chi x - T_i}
+\]
+\marginal{remarque \ill{} équivalence des $\chi$-trivialisations \ill{} ${}^{*}$}
+
+⑤ Description de la $\chi$-trivialisation de $E$
+\[
+  \boxed{\pi_E(x_1 * x_2) = \pi_1(x_1) \otimes \pi_2(x_2)}
+\]
+Si $x_2 = u_2 \in \Gamma L_2$, on a ($x \overset{\mathrm{def}}{=} x_1 * x_2 =$) $x_1 * u_2 = \pi_1(x_1) \otimes u_2 \in \Gamma(L_1 \otimes L_2)$, et le premier membre doit donner
+\[
+  \chi x = \chi\, \pi_1(x_1) \otimes u_2,
+\]
+le \struck{\ill{}} second donne $\pi_1(x_1) \otimes \chi u_2$ puisque $\pi_2(u_2) = \chi u_2$, et c'est OK. Idem pour $x_1 = u_1$, $x_2$ quelc.
+
+Cas où on a, pour $x_1 \in \Gamma P_1$, $x_2 \in \Gamma P_2$
+\[
+  \pi_E(x_1 * x_2) = (\underbrace{\chi x_1 - T_1}_{b_1}) \otimes (\underbrace{\chi x_2 - T_2}_{b_2})
+  = \chi\, x_1 \otimes x_2 - T
+\]
+donc
+\[
+  \boxed{T = \chi(x_1 * x_2) - b_1 \otimes b_2}
+\]
+où
+\[
+  b_i = \pi_E(x_i) = \chi x_i - T_i .
+\]
+
+Vérifions
+\[
+  \boxed{\chi T = T_1 * T_2}, \qquad T_1 = \chi x_1 - b_1,\quad T_2 = \chi x_2 - b_2 .
+\]
+Le 2\supplied{e} membre est
+\[
+  \chi^2 x_1 * x_2 - \chi\,\underbrace{\pi_1(x_1)}_{(\chi x_1 - T_1) = b_1} \otimes b_2
+  - \chi\, b_1 \otimes \underbrace{\pi_2(x_2)}_{(\chi x_2 - T_2) = b_2}
+  + \underbrace{b_1 * b_2}_{\chi\, b_1 \otimes b_2}
+\]
+\[
+  = \chi^2 x_1 * x_2 - \chi\, b_1 \otimes b_2
+  = \chi(\overbrace{\chi\, x_1 * x_2 - b_1 \otimes b_2}^{T}),
+\]
+c'est donc bien \struck{le produit par $\chi$ de} $\chi T$, OK.
+
+\marginal{NB Si on définit $E_i \simeq L_i \oplus \mathcal{O}$ \ill{} $(u_1,\lambda_1) * (u_2,\lambda_2) = \ldots\, u_1 \otimes \ldots + \chi\, u_1 \otimes u_2$ \ill{}}
+\note{note oblique dans la marge droite, très serrée ; seules ces bribes se lisent.}
+
+\page{75}
+$P = P_1 * P_2$ (comme solution d'un pb universel) ($P_i$ torseur $\chi$-trivialisé, sous module $L_i$).
+
+On s'intéresse aux torseurs $\Pi$ sous un module $M$, et aux applications
+\[
+  P_1 \times P_2 \xrightarrow{f} \Pi
+\]
+(qui ne soient \uncertain{que} « bi-affines » compatibles avec les $\chi$-trivialisations données $\pi_1$, $\pi_2$ de $P_1$, $P_2$) qui satisfont la condition suivante :
+\[
+  (*) \qquad \exists\ L_1 \times L_2 \xrightarrow{\alpha} M, \text{ application bilinéaire,}
+\]
+telle qu'on ait
+\[
+  \left\{\begin{array}{l}
+  f(x_1 + u_1, x_2) = \alpha(x_1, x_2) + \alpha(u_1, \pi_2(x_2)) \\
+  f(x_1, x_2 + u_2) = \alpha(x_1, x_2) + \alpha(\pi_1(x_1), u_2)
+  \end{array}\right.
+\]
+(d'où
+\[
+  f(x_1 + u_1, x_2 + u_2) = \alpha(x_1, x_2) + \alpha(u_1, \pi_2(x_2)) + \alpha(\pi_1(x_1), u_2)
+  + \chi\, \alpha(u_1, u_2)\text{)}
+\]
+\ill{} \uncertain{(uniquement de $B$)}.
+\note{le premier terme des seconds membres se lit $\alpha(x_1, x_2)$, où l'on attend $f(x_1, x_2)$ ; chaque autre $\alpha$ est écrit sur une majuscule ($B$ ?) biffée.}
+
+Cela signifie aussi que $\alpha$ est connu pourvu qu'on connaisse $f$ sur \emph{un} \struck{\ill{}} couple $(x_1, x_2)$ de sections, et qu'il est donné par la formule précédente.
+\struck{On trouve que $\alpha$, $B$ \ill{}}\ \add{$E_1 \otimes L_2$, $\alpha$, $B$} \ill{} unique (car $(E_1 \otimes L_2) \oplus (L_1 \otimes E_2) \to L_1 \otimes L_2$ n'est pas \uncertain{uniq.}\ surjectif), et on a défini une « application bi-affine » comme un couple $(f, \alpha)$, satisfaisant les conditions des relations ci-dessus.
+
+\page{76}
+Ceci posé,
+\[
+  (P_1 * P_2,\ P_1 \times P_2 \xrightarrow{*} P_1 * P_2)
+\]
+est une solution du pb universel défini par cette notion (pour $M$, $\Pi$ variables …).
+Si on veut de plus définir $P_1 * P_2$ comme un torseur $\chi$-trivialisé, on \emph{\ill{}} exiger, dans la notion des « applications bi-affines compatibles avec les $\chi$-trivialisations » (non seulement de $P_1$, $P_2$, mais aussi de $\Pi$), que l'on ait
+\[
+  \pi_{\Pi}(f(x_1, x_2)) = \pi_1(x_1) \otimes \pi_2(x_2)
+\]
+et on trouve encore une solution de ce problème universel par le torseur $\chi$-trivialisé $P_1 * P_2$.
+
+Mais on avait oublié d'expliciter la notion de morphisme de torseurs $\chi$-trivialisés,
+\[
+  P \xrightarrow{f} P', \qquad M \xrightarrow{f_0} M' .
+\]
+On exige
+\[
+  \left\{\begin{array}{ll}
+  f(x + m) = f(x) + f_0(m) & (x \in \Gamma P,\ m \in \Gamma M) \\
+  \pi_{P'}(f(x)) = f_0(\pi_P(x))
+  \end{array}\right.
+\]
+
+\page{77}
+Quand on interprète $P$, $P'$ en termes d'ext.\ de $\mathcal{O}$ par des Modules $L$, $L'$, munies de $T$, $T'$ telles que $\psi(T) = \chi$, $\psi'(T') = \chi$, la condition de compatibilité avec les $\chi$-trivialisations s'écrit simplement
+\[
+  f(T) = T' .
+\]
+
+\emph{Cas scindé.} Un scindage d'un torseur $\chi$-trivialisé $(P, \pi)$ est, par déf., une section \struck{\ill{}} $x_0$ (\uncertain{ou trivialisation}) de $P$. Alors
+\[
+  P \simeq L, \qquad u \mapsto x_0 + u
+\]
+\struck{et la donnée de la $\pi$-tri\ldots}
+d'où
+\[
+  E \simeq L + \mathcal{O}, \qquad (u, \lambda) \mapsto \lambda x_0 + u,
+\]
+la $\chi$-trivialisation équivaut à la donnée de l'élément
+\[
+  b\ (= b_{x_0}) = \pi(x_0) = \chi x_0 - T
+\]
+de $L$, de \struck{\ill{}} sorte qu'en termes de $b$ on trouve
+\[
+  T = \chi x_0 - b,
+\]
+ou en termes de l'iso $E \simeq L + \mathcal{O}$,
+\[
+  T = (-b, \chi).
+\]
+On aura donc, en termes de $b$,
+\[
+  \pi(\underbrace{\lambda x_0 + u}_{(u, \lambda)}) = \lambda b + \chi u .
+\]
+[Vérifions que c'est OK : $\chi x - \psi(x)T = \chi\lambda x_0 + \chi u - \lambda \underbrace{T}_{\chi x_0 - b}$, on trouve bien $\chi u + \lambda b$ OK]
+
+\page{78}
+Si $P_i$ sous $L_i$, avec $\pi_i$, est scindé par $x_i$ ($i = 1, 2$), alors $P_1 * P_2$ est scindé par $x_1 * x_2$. Sa $\chi$-trivialisation est donnée par un élément $b$ de $L_1 \otimes L_2$, et on aura
+\[
+  b = b_1 \otimes b_2 .
+\]
+Il n'y a pas plus simple !
+
+Ceci permet d'expliciter les données d'associativité, de commutativité, d'unité pour l'opération $*$. Mais en fait c'est \uncertain{tautologique} :
+
+1) \emph{Commutativité.} L'isom.\ \uncertain{canon.}\ de commutativité
+\[
+  E_1 * E_2 \simeq E_2 * E_1
+\]
+transforme $x_1 * x_2$ en $x_2 * x_1$, et $u_1 \otimes u_2$ en $u_2 \otimes u_1$, ce qui suffit à le caractériser.
+
+2) \emph{Associativité.} L'iso d'ass.
+\[
+  (E_1 * E_2) * E_3 \simeq E_1 * (E_2 * E_3)
+\]
+transforme $(x_1 * x_2) * x_3$ en $x_1 * (x_2 * x_3)$ et $(u_1 \otimes u_2) \otimes u_3$ en $u_1 \otimes (u_2 \otimes u_3)$, ce qui suffit à le caractériser.
+
+3) \emph{Unité} : On \struck{appelle} dit qu'un
+
+\page{79}
+scindage $x_0$ d'un $P$ muni d'une $\chi$-trivialisation est « \emph{unitaire} », si l'élément
+\[
+  b_0 = \pi(x_0)
+\]
+de $L$ est tel que \struck{\ill{}} $\{b\}$ soit une \emph{base} de $L$. Dans ce cas : cette base, $L \simeq \mathcal{O}_X$, $b = 1$, et on aura donc
+\[
+  P_0 \simeq \mathcal{O}_X, \quad x_0 = 1, \qquad
+  E_0 = \mathcal{O} \times \mathcal{O} = \{(u, \lambda) \mid u, \lambda \in \Gamma\mathcal{O}\} \xrightarrow{\psi} \lambda
+\]
+et
+\[
+  \left|\begin{array}{l}
+  \pi(u, \lambda) = \lambda + \chi u \\
+  T = (-1, \chi)
+  \end{array}\right.
+\]
+
+Ceci posé, si $P_1$ est un torseur $\chi$-trivialisé, alors on a
+\[
+  \begin{array}{rcl}
+  P_0 * P_1 & \simeq & P_1 \\
+  \mathcal{O}_0 \otimes L_1 & \simeq & L_1
+  \end{array}
+  \qquad
+  \begin{array}{l}
+  x_1 \longmapsto x_0 * x_1 \\
+  u_1 \longmapsto b_0 \otimes u_1
+  \end{array}
+\]
+… les compatibilités entre les contraintes d'unité, d'assoc., de commutativité …
+
+\marginal{\emph{NB} Un $(E, \psi, T)$ est \emph{inversible} pour $*$ ssi a) $L$ inversible b) Sur $X_0 = V(\chi) \subset X$ (\uncertain{schéma des zéros de $\chi$}), la section $T_0 = T|X_0$ de $(\chi P)_0 \simeq \chi_0 P_0 \simeq L_0$ est inversible \ill{}. Si $(E, \psi, T)$ est scindé, et si $b \in \Gamma L$ \ill{} i.e.\ scindage $x_0$, \ill{} on a $T = 2\chi x - b$, donc $T_0 = -b_0$, et la condition \ill{} que $b_0$ soit une section inversible de $L_0$ i.e.\ une base. \ill{} \uncertain{Remarque} \ill{} condition \ill{} équivaut aussi à a) $L_0$ inversible b) $\exists$ localement des scindages \ill{} tels que les $b$ \ill{} soient une base de $L$ \ill{}}
+\note{longue note oblique dans la marge gauche et le bas de la page, écrite en travers du texte ; lecture très partielle. Le « $2\chi$ » de « $T = 2\chi x - b$ » est douteux.}
+
+Les revêtements quadratiques : à partir de maintenant
+\[
+  \chi = 2 .
+\]
+
+\page{80}
+Soit
+\[
+  0 \to L \to E \xrightarrow{\psi} \mathcal{O} \to 0
+\]
+une extension 2-trivialisée par $T \in \Gamma E$ telle que $\psi(T) = 2$, on va définir une \uncertain{involution} \ill{} de la structure, par
+\[
+  \sigma_E : x \longmapsto \bar{x} = T\psi(x) - x
+  \qquad (= T - x \text{ si } x \in \Gamma P_1, \text{ i.e. } \psi(x) = 1).
+\]
+On aura
+\[
+  \psi(\bar{x}) = \underbrace{\psi(T)}_{2}\psi(x) - \psi(x) = \psi(x),
+\]
+i.e.\ compatibilité avec l'augmentation $\psi$. On a bien aussi
+\[
+  \bar{\bar{x}} = x \qquad \text{i.e.} \quad \sigma^2 = \mathrm{id}_E,
+\]
+d'autre part
+\[
+  \bar{u} = -u \qquad \text{si } u \in L,
+\]
+donc $\sigma$ induit $-\mathrm{id}_L$ sur $L$, $\mathrm{id}_{\mathcal{O}}$ sur $\mathcal{O} \simeq E/L$.
+Si 2 inversible (dans $\mathcal{O}$, plus génér.\ si $2\,\mathrm{id}_M$ est inversible), alors on a un scindage canonique
+\[
+  E \simeq L + \text{\struck{$M$}}\ E_0, \qquad E_0 \subset E,
+\]
+où
+\[
+  E_0 = E^{\sigma} = \mathrm{Ker}(1 - \sigma) = \{x \in E \mid x = \bar{x}\}
+  = \mathrm{Im}(1 + \sigma) = \{x + \bar{x} \mid x \in E\}
+\]
+\[
+  E_0 \simeq \mathcal{O}_X \quad \text{\struck{via $\psi$}}
+\]
+\marginal{NB. L'élément $x_0 \in E$ tel que $\psi(x_0) = 1$ est caractérisé par $2x_0 = T$ i.e.\ $x_0 = \frac{1}{2}T$}
+
+\struck{Dans ce cas, \ill{}}
+Dans un scindage donné
+\[
+  \overline{(u, \lambda)} = (-u, \lambda)
+\]
+et
+\[
+  T = \text{\struck{$\ldots$}}\ x + \bar{x} \quad \text{pour } \psi(x) = 1,
+  \quad \text{d'où} \quad \boxed{T = (0, 2)},
+\]
+on aura
+\[
+  \boxed{\pi(u, \lambda) = (2u, 0)}
+\]
+\note{l'argument se poursuit au-delà du lot.}
+
+\end{document}
