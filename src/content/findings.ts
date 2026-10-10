@@ -4248,4 +4248,251 @@ export const FINDINGS: Finding[] = [
     settle:
       'Look at the facsimile for page 18: paper, ink, fold and any pagination, against pages 10–11 and 17–19. If the leaf matches 10–11 physically, the interleaving is a binding accident; if it matches 17–19, it was written in the course of the extensions run.',
   },
+// Candidate findings for folder 4, written by /find-novelty on Opus 5.5 (claude-opus-5-5), 2026-10-10,
+// on a reading made by Opus 5.5 (4.modern.tex, 2026-10-03) and a transcription made by Opus 5 (batch-01.fr.tex, 2026-09-14).
+// Not merged into src/content/findings.ts: other agents edit that file in parallel.
+  {
+    id: '4-vanishing-unit-root-bound',
+    cote: '4',
+    pages: '1, 4–7',
+    kind: 'mathematical',
+    claim:
+      'Granting crystalline weak Lefschetz with torsion, for a smooth hypersurface section Y of a smooth projective X of dimension n over a perfect field of characteristic p there is an exact sequence 0 → Ker v → (ₚTorsⁿ(X))_ss → (E(Y) ⊗ k)_ss → E(Y, O_Y)_ss → 0, so the number of p-adic unit Frobenius eigenvalues on the vanishing crystalline cohomology is at least the F-semisimple rank of the coherent vanishing cohomology Coker(H^{n−1}(X, O_X) → H^{n−1}(Y, O_Y)), with the defect measured by the p-torsion of H^n_cris(X).',
+    basis:
+      'Page 5 states « Théorème » 8.5 under admitted crystalline hypotheses; page 6 carries (8.5.1) as rewritten by hand, with the second term replaced by (ₚTorsⁿ(X))_ss boxed, and (8.5.5)–(8.5.6); page 4’s margin gives (Ker u₂)_ss = (ₚTorsⁿ(X))_ss and (Coker u₂)_ss = 0 « en vertu de 8.4.4 », which rests on the nilpotence of F above the dimension stated on page 1 (8.4.4 a). The title calls the whole estimate « heuristique ».',
+    ours:
+      'The reading supplies the proof of 8.4.4 (a), which page 1 states without argument, and the description of w as the restriction of H^{n−1}_DR(X)_ss → (ₚTorsⁿ(X))_ss: the page labels the arrow w but its only typed definition of w, (8.5.3), is struck. The reading also notes that Poincaré duality, listed among the theorem’s hypotheses, is not used by the revised argument. The terms of (*) on page 1 are flagged uncertain in the transcription (read over an erased first attempt), as is « Tor » in line a); the theorem does not rest on (*) but on line a) itself. The statement is conditional on crystalline weak Lefschetz with torsion, which the folder admits and whose current status the reading does not assert.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check whether this exact sequence, or the inequality (8.5.6) for the vanishing part, follows from or appears in the de Rham–Witt treatment of slopes and unit-root parts (Illusie, « Complexe de de Rham–Witt et cohomologie cristalline », 1979, II.7; Bloch, Illusie), in Katz, SGA 7 exposé XXII, or in Illusie, « Ordinarité des intersections complètes générales » (1990); and whether crystalline weak Lefschetz with torsion is established (Berthelot, LNM 407), since without it the statement is conditional. If it is there, mark matched.',
+  },
+  {
+    id: '4-revision-reverses-surjectivity',
+    cote: '4',
+    pages: '1, 4–6, 9–10',
+    kind: 'codicological',
+    claim:
+      'The manuscript leaf bound as page 1 is the « feuille jointe (marquée 8.4.4) » that the margin of page 5 cites, and the hand revision it supports contradicts the typescript it annotates: the typed text derives conditions for φ to be non-surjective and builds examples of it (pages 9–10), while the revision makes φ always surjective and those passages are struck.',
+    basis:
+      'Page 5’s margin reads « Cor. 8.4.4 ter (utilisé dans 8.1.?) les résultats de la feuille jointe (marquée 8.4.4) » and page 4’s margin « en vertu de 8.4.4 »; page 1 is headed « 8.4.4 » and carries the nilpotence statements those margins use; on page 6 the end of the typed (8.5.1) is blacked out up to « → 0 »; on pages 9–10 the « resp. » surjectivity clauses, the three-condition equivalence and the X × Z example are struck.',
+    ours:
+      'The identification of page 1 with the « feuille jointe » is the transcription’s, by its heading and content; « ter » and the reference « 8.1.? » in the page 5 margin are uncertain or illegible. Whether the strike on page 10 covers condition c) is not certain. The reason given for the reversal — that Poincaré duality transposes F, so the F-semisimple part of a dual is semisimple for V, not F — is the reading’s, not the page’s; the page says only that duality is « malcommode » (underlined word uncertain).',
+    literature: ['Transcription 4, batch 1 (batch-01.fr.tex), pages 1, 4, 5, 6, 9, 10'],
+    status: 'candidate',
+    settle:
+      'Look at the facsimile of pages 1, 5 and 10: confirm the « 8.4.4 » heading and the margin reference on page 5, and the extent of the strike on page 10 (whether condition c) is included).',
+  },
+  // Folder 5 — find-novelty pass, Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5.5 (pass header 2026-10-03); transcriptions by Fable 5.1 (2026-09-19), batch 3 revised by Opus 5.5. No literature was read in this pass: every mathematical entry is unsearched.
+  // Dropped as matches (they are in the reading's footnotes, where they belong): Roby's Γ(M) (p. 22); the PD envelope and its presentation (pp. 23, 31; Berthelot–Ogus 3.19); e ≤ p − 1 for the maximal ideal of a DVR (pp. 12, 46); the PD criterion on a principal ideal (p. 44, which as written is wrong — the repaired condition is the edition's); Legendre (p. 10); the Čech–Alexander complex (pp. 28–30); the inserter/co-inserter topos Q(α, β) (pp. 15–17), a lax colimit of topoi; the Poincaré-lemma list (p. 36), quasi-homogeneous cases (Reiffen 1967, K. Saito 1971); κ′_n ≡ (∏ a_i!)⁻¹ mod p (p. 40), the edition's answer, from the classical congruence for n!/p^{v_p(n!)}. Not proposed: the questions the pages leave open (p. 40, extending γ_p; pp. 18–19, derived functors), since the folder establishes nothing there.
+  {
+    id: '5-universal-artinian-pd-normal-form',
+    cote: '5',
+    pages: '4–8',
+    kind: 'mathematical',
+    claim:
+      'The universal artinian local W(k)-algebra whose maximal ideal carries divided powers killed in degrees ≥ p^{ν+1} is W[Λ_0,…,Λ_ν]/(Λ_i^p − q_iΛ_{i+1}, Λ_ν^p, Λ_0 − p), with q_i = (p^{i+1})!/((p^i)!)^p, and in the coordinates Θ_i = Λ_i − p^{p^i}/(p^i)! it has an explicit normal form: coefficient of Θ^a taken mod p^i where a_i is the first non-zero exponent, constant term mod p^{c(ν)}, c(ν) = ν + p[p^ν − (p^{ν−1}+…+1)]; and likewise for the quotients W^{(ν,r)} with p^{i−r} and p^{c(ν)−r}.',
+    basis:
+      'Page 4 writes the presentation and asserts universality between brackets, without proof; page 5 states the lemma a)–b) on the ideal (Θ_0), page 6 proves sufficiency (p^iΘ_i ∈ I by induction, p^{c(ν)} ∈ I) and leaves necessity « facile et laissée au lecteur », with a « ! » in the margin; page 6 states the corollary, page 7 the lemma and normal form for W^{(ν,r)}, page 8 the independent bound Λ^a = 0 for Σ a_i p^i ≥ p^{ν+1}. The induction start reads « si i = ν » (sic, for i = 0) next to an \\ill{}; « sont » and « Cohen » on page 4 are \\uncertain{} but do not carry the statement.',
+    ours:
+      'The edition supplies: the meaning of « ν-nilpotentes » (the page does not define it); the proof that W^{(ν)} carries the divided powers and is initial (as the PD envelope of pW modulo γ_n(p), n ≥ p^{ν+1}); the necessity half of both lemmas, checked by machine only for (p, ν) ∈ {(2,1),(2,2),(2,3),(3,1),(3,2),(5,1)} and not by hand; the « no condition if i ≤ r » clause of page 7; and the length formula c(ν) + Σ_{i=1}^{ν} i(p−1)p^{ν−i}, which is not on the page. The general statement therefore rests on a step neither the page nor the edition proves. This pass also reads one footnote of the reading differently: the reading says the weaker condition γ_{p^ν}(x)^p = 0 would give the same initial object, but γ_{p^ν}(x)^p = q_ν γ_{p^{ν+1}}(x) with v_p(q_ν) = 1, so in the presence of p-torsion that condition does not obviously force γ_{p^{ν+1}}(p) = 0; the pass has not settled this and does not override the reading.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'First prove necessity (that the set I′ cut out by a)–b) is stable under multiplication by each Θ_i) for all p and ν. Then look for an explicit W-module description of the PD envelope D_{W}(pW) = W⟨X⟩/(X − p) and its truncations in Berthelot, Cohomologie cristalline (LNM 407, 1974) ch. I, Berthelot–Ogus, Notes on crystalline cohomology §3, and the Stacks Project chapter « Divided Power Algebra »; if a normal form or the length formula is there, mark matched.',
+  },
+  {
+    id: '5-deligne-letter-ringed-duality',
+    cote: '5',
+    pages: '49–50',
+    kind: 'mathematical',
+    claim:
+      'The letter of 10.12.1965 states étale duality for a smooth compactifiable morphism f : (X, B) → (Y, A) of ringed sites, A any sheaf of rings on Y killed by an integer n prime to the residue characteristics and B any sheaf of rings with f⁻¹(A) → B, with f^!(K) = RHom_{f⁻¹(A)}(B, f⁻¹(K) ⊗ T_{X/Y}[2d]), reduced to the cases f⁻¹(A) ≅ B and f = id.',
+    basis:
+      'Page 49, a typed carbon dated by hand: the definition of f^!, the decomposition into two cases, the recommendation to include « cette forme générale du théorème de dualité » in the write-up, and the doubt that it follows from A = (Z/nZ)_Y « comme simple corollaire »; page 50 extends the remark to global duality. The same paragraph proposes the simplification of the proof avoiding relative purity (reduction to relative dimension 1, induction on dimension, Y strictly local). The statement is a sketch: no proof is written. The shift [2d] is supplied (\\supplied{}), the carbon having no brackets.',
+    ours:
+      'Pass’s own remark, not in the reading: the B-half of the reduction looks formal (Hom–tensor adjunction along f⁻¹(A) → B), so the substance lies in allowing a non-constant A; this is offered as a reading, not checked. The reading supplies the remark that it is the dimension of Y − y, not of X, that drops.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Read SGA 4 XVIII (Deligne, « La formule de dualité globale »), §§ 3.1–3.2: whether duality is stated there for a sheaf of rings A on Y and B on X as in the letter, and whether its proof avoids relative purity by the induction the letter proposes. If either is there, mark matched (the letter is addressed to the author of that exposé).',
+  },
+  {
+    id: '5-ega-iv-typescript-versos',
+    cote: '5',
+    pages: '44–47',
+    kind: 'codicological',
+    claim:
+      'The versos of the two « Cristaux » leaves (44, 46) are pages IV-977-23 and IV-977-22 of a typescript of EGA IV § 18.13, read in reverse of the binding (47 then 45), annotated in his hand — including a marginal query on the « semi-local noethérien » hypothesis of 18.13.4 and the striking of « déterminés de façon uniques » in Proposition 18.13.5(iii).',
+    basis:
+      'Page 47 ends « co- » and page 45 opens « ïncide »; the typescript numbers 977, 22 and 23 are in hand. The marginal query reads « à quoi sert \\uncertain{l’hypothèse} \\ill{} ? Prendre \\ill{} topologie plus \\uncertain{générale} ? »; a second marginal note by the struck words is only half read.',
+    ours:
+      'The reading order and the identification are the transcription’s; neither the transcription nor the reading compared the typescript with the printed EGA IV.',
+    literature: ['Transcription 5, batch 3 (batch-03.fr.tex), header and pages 45, 47'],
+    status: 'candidate',
+    settle:
+      'A person checks the hand and the page numbers on the facsimile, then compares with printed EGA IV, Publ. Math. IHÉS 32 (1967), 18.13.4–18.13.5: whether the semi-local noetherian hypothesis and the words « déterminés de façon unique » survive in print. That would show whether these annotations reached the published text.',
+  },
+  {
+    id: '5-berthelot-correspondence-absent',
+    cote: '5',
+    pages: '1–52',
+    kind: 'codicological',
+    claim:
+      'The inventory title announces « correspondances Deligne et Berthelot », but among the 52 pages only the letter to Deligne is correspondence; no transcribed leaf is a letter to or from Berthelot or names him.',
+    basis:
+      'The three batch headers describe every leaf in his hand and the letter of pages 49–52; Berthelot’s name occurs only in the copied folder title. Pages 3, 9, 11, 33 (typescripts) and 13 (a list of corrections to a typescript, in his hand) are skipped without description, so their content is not recorded.',
+    ours:
+      'The observation is the reading’s header note; the transcriptions do not make it.',
+    literature: [
+      'Transcription 5, batches 1–3 (batch-01.fr.tex, batch-02.fr.tex, batch-03.fr.tex), headers',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks the skipped leaves 3, 9, 11, 13 and 33 on the facsimile — in particular whether page 13’s list of corrections is addressed to a Berthelot typescript — and whether Montpellier’s PDF of folder 5 has any leaf beyond 52.',
+  },
+  // Folder 32 — find-novelty pass, Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5.5 (pass header 2026-10-09).
+  // The rest of the candidate pool was dropped as matches already named in the reading's footnotes: Dold–Puppe bounds (p. 4), SGA 4 XVIII 1.2 drafts (pp. 15–27), the SL_2 lift and theta characteristics (p. 28), the Deligne pairing (p. 32), the tame symbol (p. 33), the induction formula and sheafified/local duality (pp. 38–47), or as repairs made by the edition (pp. 4, 9, 12–13, 41, 46, 47).
+  {
+    id: '32-pullback-kernel-index',
+    cote: '32',
+    pages: '10–11',
+    kind: 'mathematical',
+    claim:
+      'For f : X → Y proper over a field k, Y irreducible (and smooth, as the paragraph assumes) with generic point η and X_η non-empty, and N the gcd of the degrees of the 0-cycles of X_η, there is a map H*(X, G_X) → H*(Y, G), functorial in the étale coefficient complex G, whose composite with f* is N·id — so Ker f* is killed by the index of the generic fibre, with no hypothesis on the relative dimension.',
+    basis:
+      'Page 11 states it in brackets, in his hand, with « d et d′ quelconques » added in ink; page 10 is the pencil computation: closed points x_i of X_η of degrees n_i, Bézout coefficients with Σ d_i n_i = N, closures Z_i with u_i : Z_i → X and f_i = f u_i, and (Σ d_i f_{i*} u_i*) f* = Σ d_i f_{i*} f_i* = Σ d_i n_i id, using Tr_f(1_X) = N·1_Y for proper f of virtual dimension 0. No \\ill{} under it; the label of the arrow H^r(Y) → H^r(X) is overwritten and read as f*, and the last equality is written « Σ d_i (f_{i*}f_i*) n_i id ».',
+    ours:
+      'The reading supplies the smoothness of Y (from q smooth in the surrounding § 4, not restated in the bracket), the identification of N as the gcd of the n_i over closed points, and the corrected last equality. The step f_{i*}f_i* = n_i rests on the Gysin formalism of § 4 for f_i : Z_i → Y with Z_i possibly singular, which the folder lists and does not prove; the statement depends on that formalism existing as proposed.',
+    literature: [
+      'Web search, 2026-10-10 (one query on the kernel of pullback in étale cohomology killed by the index of the generic fibre): surfaced only the Brauer-group analogue via restriction–corestriction (arXiv 2012.01324, « On the Brauer groups of fibrations »; arXiv 2410.15125), no statement for arbitrary étale cohomology. This is not a reading of any source.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Look for the statement for étale cohomology with arbitrary torsion coefficients in SGA 4½ « Cycle » (§ 2, Gysin and degree) and SGA 4 XVIII 2–3, Fulton, Intersection Theory § 1.4 and Ex. 19.1 (cycle-class compatibility of proper push-forward), and Colliot-Thélène–Skorobogatov, The Brauer–Grothendieck Group (index arguments). The mechanism is the standard restriction–corestriction one; if any of these states it, or it follows in a line from the trace formula f_*f* = deg for generically finite proper maps to a smooth target, mark matched.',
+  },
+  {
+    id: '119-foliation-quotient-topos-equivalence',
+    cote: '119',
+    pages: '144–145',
+    kind: 'mathematical',
+    claim:
+      'The folder states, without proof, an equivalence between the category of pairs (X, R) — X a topological space, R a local equivalence relation on X, locally open with locally connected fibres — and the category of triples (X, 𝒴, f) with f : Top(X) → 𝒴 a locally open geometric morphism with locally connected fibres to a « multiplicité topologique », the latter a 2-category whose Hom-categories are discrete.',
+    basis:
+      'Page 145, under « Th », dated « Mars 1986 » on page 144: « On a C ⇄ C′ » with both arrows marked ≈. No proof is written. The statement rests on unread words: a third condition on f (« à fibres loc. connexes et \\ill{} ») and struck \\ill{} words in the conditions on R are not read, and « mult. top. » and « flèches » are \\uncertain{} in the transcription (batch-08.fr.tex, page 145). The variants for C^(r) foliated manifolds and the question « Quelles variétés obtient-on comme quotients des feuilletages ??? » are the page’s and are not part of the claim.',
+    ours:
+      'The reading (119.modern.tex) spells out the functor C → C′ (send (X, R) to the quotient morphism to the quotient topos) and the inverse (read R on f as « same local connected component of a fibre »); neither is on the page. It also identifies the quotient with the classifying topos of the holonomy groupoid; this pass notes that Kock–Moerdijk 1996 distinguish the topos of R-invariant sheaves (equivalent to sheaves on a monodromy groupoid) from the holonomy quotient, so which topos the page means by « topos quotient » is not settled by the page, and the reading’s identification with holonomy may be the wrong one. The condition the page leaves illegible is not restored.',
+    literature: [
+      'A. Kock and I. Moerdijk, « Every étendue comes from a local equivalence relation », J. Pure Appl. Algebra 82 (1992), 155–174 — pp. 155–156 read (abstract, introduction, §1 opening), from a scan fetched 2026-10-10. They cite Grothendieck–Verdier, SGA 4 IV, p. 478 ff., for local equivalence relations and étendues in the context of foliations, and say that every locally connected geometric morphism from sheaves on a locale M into an étendue gives rise to a canonical local equivalence relation on M — one direction of the page’s correspondence. No equivalence of categories between pairs (X, R) and morphisms Top(X) → 𝒴 was seen in the pages read; the rest of the paper was not read.',
+      'A. Kock and I. Moerdijk, « Spaces with local equivalence relations, and their monodromy », Topology Appl. 72 (1996), 47–78 — pp. 47–48 read (abstract, introduction), same date. Elaborates « a suggestion of Grothendieck » from SGA 4; proves sh(M, r) ≃ sheaves on an étale groupoid under connectedness assumptions, and that every étale groupoid arises this way. No statement of the page’s equivalence seen in the pages read.',
+      'Web search, 2026-10-10, for SGA 4 exposé IV on local equivalence relations and quotient toposes of foliations: returned tables of contents only; SGA 4 IV p. 478 ff. was not read.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read SGA 4 IV around p. 478 (the Grothendieck–Verdier passage on local equivalence relations), and the full texts of Kock–Moerdijk 1992 (§§2–7) and 1996, for a 2-categorical or categorical equivalence between spaces with (locally open, locally connected) local equivalence relations and locally open, locally connected geometric morphisms out of Top(X); if found, mark matched. Before that, the illegible third condition on page 145 must be re-read against the facsimile (/transcribe-grothendieck), since the statement may be false or trivial without it — which is why the status stays unsearched although sources were read.',
+  },
+  {
+    id: '119-page-157-interleaved-leaf',
+    cote: '119',
+    pages: '157',
+    kind: 'codicological',
+    claim:
+      'Page 157, inside the photocopied « Digressions combinatoires (pour Réflexions t. 4) » (pp. 154–160), is a leaf of another text: a typed list of complementary pairs (« Avenir — Passé », « Espace — temps », …) under renumbered headings V″₄ « Devenir » and V″₅ « Espace-temps », followed by handwritten drafts of footnotes numbered 98–107 that refer to « note n° 162 » and « p. 779 « conviction et connaissance » ».',
+    basis:
+      'The transcription (batch-08.fr.tex, header and note to page 157) records the leaf’s nature and the archivists’ number written upside down; the headings IV″₅ → V″₄ and IV″₆ → V″₅ are corrections in his hand. Several words of the footnote drafts are \\ill{}. The sketches of tetrahedra and octahedra with vertex lists at the foot of the page may belong to the combinatorial plan, so the leaf may not be wholly foreign to it.',
+    ours:
+      'The observation is the transcription’s, which disagrees on this point with the survey map of issue #45; the reading repeats it. Nothing has been checked against the facsimile by this pass, and the text the footnotes belong to is not identified.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look at the facsimile of pages 156–158 to see whether page 157 is a separate sheet photocopied with the set or the verso of a combinatorial sheet. Then look for the list of pairs and a « note n° 162 » with a « p. 779 » cross-reference in his texts of 1984–1987 that carry long numbered note apparatus — Récoltes et Semailles (its yin–yang part) and La Clef des songes are the obvious places, named from memory and not consulted.',
+  },
+// Folder 130 — find-novelty pass, Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (130.modern.tex, 2026-10-03).
+// Dropped as matches already footnoted in the reading: p. 6 (Raynaud, closure of Pic^0 as Néron model), pp. 9-13
+// (Shioda-Tate shape), p. 14 (Shioda's height formula, asked not proved), pp. 16-18 (Beilinson-Bloch local pairing,
+// programme only), pp. 25-29 (Albanese reduction, standard functoriality of Néron functions).
+  {
+    id: '130-neron-symbol-component-correction',
+    cote: '130',
+    pages: '3–5',
+    kind: 'mathematical',
+    claim:
+      'For an abelian variety A over the fraction field of a DVR, the folder splits Néron’s local symbol (X, a)_v into an intersection number on the Néron model plus a correction v(X, a) characterised by four axioms (bilinearity, translation invariance, a normalisation by the vertical part of div f̄, boundedness), with m·v(X, a) ∈ ℤ for m the order of the component group, giving a pairing A^∨(K) × A(K) → ℤ/mℤ that factors through A(K)/A^0(K).',
+    basis:
+      'Page 3 lists the four properties of v(X, a); page 4 states (iv bis)–(vi) without proof and boxes (X, a)_v = v(X, a) + i(X̄, ā); a margin says v vanishes when m = 1 and asks, circled, « À examiner : cas d’une polarisation principale, jacobienne ».',
+    ours:
+      'The reading takes the 0-cycles to be of degree 0 and reads Z_ℓ as the kernel of the sum map (the page writes Z_0^*(A)_K with a doubtful exponent); (iv bis) carries an \\ill{} in the transcription (batch-01, l. 150) and the m = 1 margin is partly illegible. The existence of v satisfying the four axioms is not proved on the page, and the identification of the ℤ/mℤ pairing with SGA 7 IX’s pairing is explicitly not established by the reading.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Read Bosch–Lorenzini, « Grothendieck’s pairing on component groups of Jacobians » (Invent. Math. 2002), §4, and Néron, « Quasi-fonctions et hauteurs sur les variétés abéliennes » (Ann. of Math. 1965), for the decomposition of the local symbol as intersection on the Néron model plus a component-group term with denominator dividing m; if either has it for abelian varieties (not only Jacobians via regular models of curves), mark matched. An orienting web search surfaced Bosch–Lorenzini and Pépin, « Néron’s pairing and relative algebraic equivalence » (arXiv 1103.0570), as the neighbourhood; no section was read, so the status stays unsearched.',
+  },
+  {
+    id: '130-quasi-function-sheaf',
+    cote: '130',
+    pages: '39–48',
+    kind: 'mathematical',
+    claim:
+      'The folder organises Weil functions as a Zariski sheaf QF_X, the pushout of the sheaf of admissible functions Φ_X and of ℛ*_X over 𝒪*_X, in an exact sequence 0 → Φ_X → QF_X → Div_X → 0 whose other kernel is the constant sheaf U_X of M_K-units, and states that for quasi-projective X the maps to H^1(X, Φ_X) vanish, so that every Cartier divisor is the divisor of a global quasi-function.',
+    basis:
+      'Pages 41–44 define QF_X by θ(f) = (−φ_f, f), prove Φ_X → QF_X injective and compute the kernel of ℛ*_X → QF_X; pages 44, 46, 48 take global sections and reduce the surjectivity to O(1) on P^r.',
+    ours:
+      'The sign in θ is the edition’s (the exponent of f on p. 42 is illegible); the sheaf property of Φ_X is « admis » on p. 41 and proved only in a footnote of the reading; the P^r case is the reading’s, the page stops before it; the prose of p. 43 computing the kernel is partly illegible. In substance the global statement is the existence of Weil functions for Cartier divisors (Lang); what may not be in print is only the sheaf extension and its H^1 formulation, which is close to a matter of presentation.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check Lang, Fundamentals of Diophantine Geometry (1983) ch. 10, and Vojta’s CIME notes « Diophantine approximation and Nevanlinna theory » (2011) §8, for Weil functions presented as a sheaf extension of Div_X by locally M_K-bounded functions. If it is there, or if the sheaf form adds nothing beyond Lang’s existence theorem, mark matched. An orienting web search found no such sequence stated, which is not a search of those texts.',
+  },
+  {
+    id: '130-interleaved-44-48',
+    cote: '130',
+    pages: '44–48',
+    kind: 'codicological',
+    claim:
+      'The last leaves of the « Quasi-fonctions » run are two interleaved threads: the reading order is 44 → 46 → 48, while the cancelled pages 45 and 47 form a separate thread 45 → 47.',
+    basis:
+      'The last sentence of p. 44 continues at the head of p. 46 with the global-sections diagram, and that of p. 46 at the head of p. 48; pp. 45 and 47 are struck through with long diagonal strokes and p. 45’s last sentence continues on p. 47, on another formulation of admissibility on rational points.',
+    ours:
+      'The observation is the transcription’s (batch-03.fr.tex, header and notes to pp. 44–48); the reading keeps the threads apart. Nothing on the page says which thread was written first.',
+    literature: ['Transcription 130, batch 3 (batch-03.fr.tex), header and pages 44–48'],
+    status: 'candidate',
+    settle:
+      'A person checks against the facsimile whether 44/45, 46/47 are rectos and versos of the same sheets (an accident of scanning) or separate leaves filed out of order.',
+  },
+  // /find-novelty 134-8 — Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading, 2026-10-10. Only p. 63 is transcribed; it carries no mathematics, so both entries are codicological.
+  {
+    id: '134-8-copying-leaf-misfiled',
+    cote: '134-8',
+    pages: '63',
+    kind: 'codicological',
+    claim:
+      'The folder catalogued as the typescript of chapter VII of Pursuing Stacks (typescript pp. 555–593) contains a typed, signed leaf of copying instructions for a different slice of the typescript, pp. 259–381 (« Modelizing Story »), so at least this leaf does not belong to the chapter the folder title names.',
+    basis:
+      'Page 63 asks for three copies of « Modelizing Story », pages 259 to 381 plus three pages of table of contents; the inventory title reproduced in the transcription is « [Chapitre VII (pages 555 à 593) : Linearization of homotopy types] ». The leaf is scanned upside down. Nothing in the claim rests on an \\ill{} or \\uncertain{} (the only \\uncertain{} is « aoùt » in the PS; the \\ill{} are struck words replaced by additions).',
+    ours:
+      'The reading states the mismatch and declines to explain it (wrapper, reused sheet, later filing are all left open); this entry claims only the mismatch. The other pages of batch 4 and the rest of the folder were not transcribed, so whether other leaves of the folder are also foreign to chapter VII is not known.',
+    literature: [
+      'Transcription 134-8, batch 4 (batch-04.fr.tex), header and page 63',
+      'Modernised reading 134-8.modern.tex, section « Ce que couvre cette lecture » and its footnotes',
+    ],
+    status: 'unsearched',
+    settle:
+      'A person checks page 63 against the facsimile (and its verso), and checks whether the Montpellier inventory or G. Maltsiniotis’s edition of Pursuing Stacks says where the typescript pp. 259–381 and its covering papers are filed. If the edition or the inventory already records the leaf, mark matched.',
+  },
+  {
+    id: '134-8-modelizing-story-distribution',
+    cote: '134-8',
+    pages: '63',
+    kind: 'codicological',
+    claim:
+      'The leaf records one distribution of the typescript slice pp. 259–381 of Pursuing Stacks: three copies, one posted to Ronnie Brown (Bangor), one to Zoghman Mebkhout (Paris), one handed to Contou-Carrère, the original returned to the author; and it records that typescript pages 274 and 275 were typed on the two sides of a single sheet by mistake.',
+    basis:
+      'Page 63, typed with an autograph closing and signature: items 2) and 3), the two addresses, « Remettre la troisième copie à Monsieur Contou-Carrère », and the PS about returning the original « vers le quatre ou le cinq » August. The leaf carries no year; the reading’s « été 1983 » is an inference and is not part of this claim.',
+    ours:
+      'The reading adds, from memory and unchecked, that Brown was among the correspondents through whom Pursuing Stacks circulated and that Mebkhout is the mathematician of the Riemann–Hilbert correspondence; neither is part of this entry. The identification of « Contou-Carrère » with a Montpellier colleague is also the reading’s, not the page’s.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check G. Maltsiniotis’s edition of Pursuing Stacks (introduction and editorial notes on the typescript and its circulation) and R. Brown’s published accounts of the Grothendieck correspondence for this distribution list and for the recto-verso pages 274–275; if either records them, mark matched. The recto-verso claim can also be settled by looking at the typescript leaf carrying pp. 274–275 wherever it is filed.',
+  },
 ];
