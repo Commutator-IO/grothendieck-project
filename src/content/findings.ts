@@ -7393,4 +7393,230 @@ export const FINDINGS: Finding[] = [
     settle:
       'Look for a leaf numbered 7 in his hand, on polygons, among the neighbouring folders of the group « Géométrie et topologie combinatoire » (69–89), first 75 and 89, and in the leaves of this folder outside the run; check on the facsimile that page 20’s « 8 » is not a 7.',
   },
+  // Folder 69 — /find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over transcripts/69/69.modern.tex (Pass: Opus 5.5) and batch-01..06.fr.tex. No literature search was carried out in this pass: every entry is unsearched. Dropped as matches already named in the reading's footnotes: the characterisation of pp. 2–10 (uniqueness of GQ(2,4) / srg(27,10,1,5), Seidel 1968), the stabilisers W(D5), W(F4), W(B3) and |W(E6)| = 51 840, the self-complementarity of the bitriangle (Paley graph of order 9, AG(2,3)), the minuscule weights of pp. 95–98, the autotopy group of a group's Latin square (pp. 108, 116; Albert 1943), the Reidemeister-type closure of p. 103 and the E7 quartic of p. 105.
+  {
+    id: '69-triangle-q8-baer-torsor',
+    cote: '69',
+    pages: '7–8, 14–15, 25–26, 113',
+    kind: 'mathematical',
+    claim:
+      'A Schläfli graph (the graph of the 27 lines) with a marked triangle t is equivalent to the data of a 3-element set t, a 2-dimensional F₂-vector space V, and a torsor P̃ under the central extension Ψ̃(V, t) = ∧_{i∈t} p_i^*(Ṽ) of Ψ(V, t) = Ker(V^t → V) by F₂, where Ṽ is the extension of V by F₂ split over no subgroup of order 2 (the quaternion group Q₈) and ∧ is the Baer product; the graph is rebuilt as t ⊔ ∐_i P̃/N′_i, and Aut(C, t) is an extension of S_t × S_{V*} by Ψ̃, of order 32 · 36 = 1152.',
+    basis:
+      'Pages 7–8 (Lemma 7) show the 16 classes of triangles disjoint from t form a torsor under Ψ(V) inside P_u × P_v × P_w; pages 14–15 prove that a system (Ψ̃, ρ₁, ρ₂, ρ₃) satisfying the anisotropy conditions (i)–(iv) exists for ε = F₂ iff dim V ≤ 2, uniquely up to unique isomorphism; pages 25–26 state the equivalence and the adjacency rules a)–d) and the corollary on W_t; page 113 restates the gluing axiom that returns to Lemmas 3–4. The existence clause on page 15 rests on a sign read as \\uncertain{≠} (« ε ≠ F₂ », which only makes sense as ε = F₂); the indices of condition (ii) are uncertain; page 26 has several \\ill{} words in the lines on the splittings Ñ′_i, and the kernel in the exact sequence is read Γ̃ or P̃.',
+    ours:
+      'The reading restricts the proposition of page 14 to 2G = 0 (the page states it for any abelian G, and the reading did not verify the general version), reports part b) (every system comes from some E₀; rigidity) without having checked it, supplies the name Q₈ and the Chevalley–Warning argument for dim V ≤ 2, and identifies P̃ with the 32 outer triangles and P̃_i with E(i)*. The equivalence of categories on page 26 is the page’s statement and is not proved there; the reading checked the adjacency rules only through the model and the order 1152 = |W(F₄)|. The page’s further remark that this category is equivalent to that of D₄ root systems (« sauf erreur ») is not part of the claim.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'The group-theoretic shape is known (the stabiliser of a tritangent plane in W(E₆) is W(F₄) ≅ 2^{1+4}_+ : (S₃ × S₃)); what is to be checked is whether the reconstruction of the graph around a triangle as a torsor under the Baer product of three pull-backs of Q₈ — rather than by coordinates — appears in the treatments of GQ(2,4) and the 27 lines: Payne–Thas, Finite Generalized Quadrangles (ch. 5–6, the uniqueness of GQ(2,4)); Brouwer–Cohen–Neumaier, Distance-Regular Graphs (§10 on the Schläfli graph); Hirschfeld, Finite Projective Spaces of Three Dimensions (ch. 20); Manin, Cubic Forms (ch. IV); Dolgachev, Classical Algebraic Geometry (ch. 9). If the torsor description is there in substance, mark matched.',
+  },
+  {
+    id: '69-pencil-numbers-94-95-absent',
+    cote: '69',
+    pages: '93–94, 95–119',
+    kind: 'codicological',
+    claim:
+      'The archivists’ pencilled numbering of folder 69 runs to 121 against 119 pages in the facsimile: the numbers 94 and 95 are absent between facsimile pages 93 and 94, and every later leaf is pencilled two ahead; separately, the « lettre (s.d.) » named in the folder’s inventory title is not found in the facsimile.',
+    basis:
+      'The header of batch-05.fr.tex records that pencil numbers agree with the facsimile on pages 81–93 and then read « 96 » … « 102 » on pages 94–100, with no « 94 », « 95 » on any leaf; pages 95–100 each carry a \\note with their pencil number; batch-06.fr.tex records « 103 » … « 121 » on pages 101–119. Page 83, the only non-autograph item, is a typed USTL course announcement of 1976, which the transcription judges is not a letter.',
+    ours:
+      'Linking the two observations — that the two unaccounted pencil numbers might be the leaves of the missing letter — is this pass’s conjecture, nothing in the transcription supports it beyond the coincidence; a skipped number in the archivists’ sequence would explain the gap equally well.',
+    literature: ['Transcription 69, batch 5 (batch-05.fr.tex), header and pages 95–100', 'Transcription 69, batch 6 (batch-06.fr.tex), header'],
+    status: 'unsearched',
+    settle:
+      'A person checks the facsimile around pages 93–94 for a gap in the pencil sequence, and asks Montpellier whether folder 69 holds two leaves pencilled 94 and 95 that were not digitised, and whether one of them is the letter the inventory lists.',
+  },
+  // Folder 70, pass by Opus 5.5 (claude-opus-5-5) on a reading made by Opus 5.5 (claude-opus-5-5), 2026-10-10. Same model; no exception needed.
+  // Dropped as matches (already footnoted in the reading): the universal regular polytope / string Coxeter group and intersection property (pp. 3-5);
+  // the reflection representation of [p_1..p_n] as Tits's geometric representation (pp. 15-25); the invariant form and its discriminants (pp. 67-69, a Gram-matrix computation);
+  // Gamma^+_{3,n} = PSL(2,Z/n) iff n <= 5 (pp. 61-62, Klein-Fricke); the cross-polytope (p. 120); the definitions of pp. 109-110 and 121-122 (no result follows them).
+  // Dropped as the page's errors, not novelties: « four vertices coplanar only on a face » (p. 93, false in every characteristic); the general Proposition « régulière => fidèle » (p. 109, proof breaks off).
+  {
+    id: '70-icosahedron-integral-faithful',
+    cote: '70',
+    pages: '74–75, 82–94, 101–102, 106',
+    kind: 'mathematical',
+    claim:
+      'The folder writes an affine realisation of the regular icosahedron over Z[α]/(α² + α − 1) by three reflections in a vertex frame, and (with the edition’s completion) it stays a faithful icosahedron after reduction at every prime, 2 and 5 included: twelve distinct vertices, no three collinear, no vertex in the plane of a face not containing it; the central symmetry becomes a translation in characteristic 2, and the unique invariant quadric through the vertices (quadratic part of half-discriminant 1, full discriminant −α − 3 of norm 5) is smooth except at 5, where it is a cone.',
+    basis:
+      'Generators and the twelve vertices on pp. 74–75 and 82–92; the antipodism (17) and its characteristic-2 form on p. 91; the checks a)–c) and the face-plane check on pp. 93–94 (« C’est vrai », « et on est heureux ! »); q, δ′ = 1 (« merveille ! ») and det = −α − 3 on pp. 101–102, the char-5 « quadriques sing. » remark on pp. 102 and 106.',
+    ours:
+      'The page announces « sur un corps de base quelconque » in an interlinear addition, checks a)–c) and the face plane without saying over which base, and carries a marginal « c’est en fait faux en car. 2 ! » whose target is unclear; that the non-collinearity and the face-plane statement hold in every characteristic, including 2 and 5, is the edition’s machine check (all minors units or of gcd 1 in Z[α]; direct checks over F_4, F_5, F_9, F_11, F_19, F_29, F_31, F_49, F_169). The page’s own coplanarity claim on p. 93 is false and is not part of this entry. The translation vector in char. 2 is read (α′, α, α), not the page’s (α′, 1, 1); the identification of ι with (σ₀σ₁σ₂)⁵ is the edition’s.',
+    literature: [
+      'C. Ji, « A note on regular polyhedra over finite fields », arXiv:2304.03345 (2023), §§2–3 — full text read in this pass: with formulas over Z[cos θ, cos γ] the icosahedron’s reduction is undefined at p = 2, 5; Prop. 3.1 shows only that the automorphism group stays A5 at the other primes, and the closing remark says Grothendieck « seems to claim this in all cases »; no incidence (collinearity, face-plane) or quadric is checked',
+      'A. Grothendieck, Esquisse d’un Programme (1984), §4 — the statement that the icosahedron specialised to a finite field remains an icosahedron and the mention of F_4 and F_5 as the « most singular » characteristics, seen only as quoted in Ji 2023; the Esquisse itself not re-read in this pass',
+      'B. Monson and E. Schulte, « Reflection groups and polytopes over finite fields », I–III, Adv. Appl. Math. 33 (2004) 290–317 and sequels — abstracts of II (arXiv math/0601502) and III (arXiv 0707.4007) seen by web search: reduction of crystallographic Coxeter groups modulo odd primes; H3 and p = 2 outside the stated scope; full texts not read',
+    ],
+    status: 'candidate',
+    settle:
+      'Read Monson–Schulte I–III and their « Modular reduction in abstract polytopes » for any treatment of H3 over Z[τ] including p = 2 and 5 and of the geometric incidences of the reduced orbit, and search the literature on finite (Galois) geometries for an icosahedron in AG(3, 4) or AG(3, 5) with the incidence check; independently, have a person re-run the minors over Z[α].',
+  },
+  {
+    id: '70-icosahedron-char5-conic',
+    cote: '70',
+    pages: '76–78, 101–102',
+    kind: 'mathematical',
+    claim:
+      'In the reduction of the folder’s icosahedron modulo 5 the vertices are isotropic for the invariant quadratic form centred at the centre, so the six vertex directions are the six points of the conic q₀ = 0 in P²(F_5), and the 6 + 15 + 10 vertex, edge and face directions fill the 31 points of P²(F_5); the 24 nonzero isotropic vectors are the vertices of « deux icosaèdres ».',
+    basis:
+      'The table « Directions remarquables » on p. 78 (6, 15, 10, 31 = 5² + 5 + 1, « les 6 directions de sommets correspondent à la conique », 125 = 1 + 24 + 60 + 40 with « deux icos. »), together with f(o) = 0 in char. 5 from the formulas of pp. 68 and 101–102.',
+    ours:
+      'The correspondence of the 15 edge directions with exterior points and of the 10 face directions with interior points of the conic is the edition’s explanation: the page’s words there (« sécantes divisant un diviseur discriminant », « diviseurs conjugués ») are \\uncertain readings, so that part is not claimed. That the six vertex directions fill the conic, and that the edge and face directions are distinct points, follows from the edition’s computation, not from a check on the page; the page writes a first total 1 + 12 + 60 + 40 = 113, overwritten.',
+    literature: [
+      'C. Ji, « A note on regular polyhedra over finite fields », arXiv:2304.03345 (2023), §3.3 — full text read: quotes the Esquisse on the « combinatorial paradigm » read off the icosahedron over F_4 and F_5 and states that its interpretation does not account for it; no char-5 geometry given',
+      'A. Grothendieck, Esquisse d’un Programme (1984), §4 — the « combinatorial paradigm » passage, seen only as quoted in Ji 2023',
+      'A5 ≅ PSL(2, 5) acting on the six icosahedral axes as on P¹(F_5) ≅ a conic in P²(F_5), and the orbit sizes q + 1, q(q+1)/2, q(q−1)/2 of PGL(2, q) on the plane — classical (Klein, Lectures on the Icosahedron), from knowledge; not re-read in this pass; a web search for the icosahedron as a conic in PG(2, 5) found no explicit source',
+    ],
+    status: 'candidate',
+    settle:
+      'Find whether any account (Klein, Coxeter, Conway–Sloane, finite-geometry literature, or work following the Esquisse §4) obtains the identification as the mod-5 reduction of a realisation of the icosahedron with the circumscribed sphere degenerating to the isotropic cone; the abstract fact A5 ≅ PSL(2,5) on six points is certainly classical, so the entry stands or falls on the geometric route alone.',
+  },
+  {
+    id: '70-universal-formulae-double-cosines',
+    cote: '70',
+    pages: '9–25, 64–69',
+    kind: 'mathematical',
+    claim:
+      'The folder gives the « universal formulae » of a regular affine realisation by reflections of the polytope {p₁, …, p_n} in its vertex frame, σ_i = id + ℓ_i ⊗ (s_{i+1} − s_i), with n parameters α_{i−1} that must be roots of the minimal polynomial of 2cos(2π/p_i) (doubles of cosines), so that tetrahedron, cube and octahedron are written over Z and icosahedron and dodecahedron over Z[α]/(α² + α − 1).',
+    basis:
+      'The normal form on pp. 15 and 18 and its barycentric form on pp. 23–25; the three reflections for n = 2 on pp. 64–66; « ρ_s^p = id ⇔ F_p(α) = 0 » and the table of α, β for the Platonic solids and the « pentagrammes » on pp. 67–69.',
+    ours:
+      'The page states the order criterion only for n = 2 and without proof (p. 67), and leaves (σ₀σ₁)^p unfinished on p. 19; the characteristic polynomial (t − 1)^{n−1}(t² − α_{i−1}t + 1) and the criterion in general are the edition’s. The reflection requirement is the page’s addition to its own definition; the argument over an arbitrary ring and several sign corrections (pp. 11, 15, 18, 64) are the edition’s.',
+    literature: [
+      'C. Ji, « A note on regular polyhedra over finite fields », arXiv:2304.03345 (2023), §2 and §3.3 — full text read: derives formulas in cos θ, cos γ in a vertex/edge-midpoint/face-centre basis, notes that the Esquisse speaks of « doubles of the cosines » and says « We have been unable to resolve this discrepancy »; with its conventions the octahedron is not defined over F_2',
+      'A. Grothendieck, Esquisse d’un Programme (1984), §4 — the « universal formulae » in n parameters « doubles of the cosines of the fundamental angles », seen only as quoted in Ji 2023',
+      'J. E. Humphreys, Reflection Groups and Coxeter Groups (1990), §5.3 — Tits’s geometric representation, entries −cos(π/m) in the bilinear form; the nearest match, from knowledge, not re-read in this pass',
+    ],
+    status: 'candidate',
+    settle:
+      'Check whether the vertex-frame affine form with parameters 2cos(2π/p_i), defined over Z for the tetrahedron, cube and octahedron, appears in the literature on realisations of regular polytopes (McMullen–Schulte, Abstract Regular Polytopes, ch. 5; McMullen, Geometric Regular Polytopes, 2020) or in the Monson–Schulte series; if it does, this entry is matched and Ji’s discrepancy is resolved there rather than here.',
+  },
+  {
+    id: '72-invariant-subspaces-string',
+    cote: '72',
+    pages: '79–82',
+    kind: 'mathematical',
+    claim:
+      'Over a field, for a non-degenerate projective realisation of the universal regular n-carte by pseudo-reflections τ₀,…,τₙ (eigenvalues λᵢ arbitrary, characteristic 2 allowed), the invariant projective subspaces are exactly ∅, X, the centre {c}, the hyperplane at infinity C, and, for each i with βᵢ = 0, the two spaces H₀ ∩ … ∩ Hᵢ and Lin(hᵢ₊₁,…,hₙ).',
+    basis:
+      'Page 79 states the theorem with both chains of subspaces; pages 81–82 prove it by showing that the indices i with Z ⊂ Hᵢ form an initial segment and that hⱼ ∈ Z for all later j, so Z is squeezed between Z*ᵢ and Z′ᵢ, which differ by one dimension. The statement itself is read without \\uncertain{} or \\ill{}; only the counting remarks after it (page 79, page 80) are partly illegible.',
+    ours:
+      'The reading corrects « hᵢ₊₁ ∉ Hᵢ » to « ∈ » on page 81 (the margin of page 79 has the right equivalence), follows the chain rather than the page’s swapped definitions of Z*₋₁ and Z′₋₁, adds ρ ≠ 0 to the irreducibility criterion on C of page 82 and moves its characteristic condition from n odd to n even, and leaves undecided the weaker « il faut et suffit » of page 80 (c), which the theorem as written does not support. The identification with the Tits / Vinberg reflection representation of the string Coxeter group is the reading’s.',
+    literature: [
+      'Web search (2026-10-10), result summaries only, no source read: lecture notes on the geometric representation (E. Marberg, HKUST Math 6150F, 2017, lecture 13) — every proper invariant subspace of an irreducible Coxeter system lies in the radical of the form; not a list of all invariant subspaces, and only for reflections with a symmetric form.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read Bourbaki, Groupes et algèbres de Lie ch. V §4 and its exercises, Vinberg, « Discrete linear groups generated by reflections » (Izv. 1971) §§1–2, and McMullen–Schulte, Abstract Regular Polytopes (2002) ch. 5, for a classification of all invariant subspaces of a (possibly degenerate) reflection or pseudo-reflection representation of a linear diagram. If the list « the radical/co-radical chains for each vanishing βᵢ, plus the centre and C » is there, mark matched; if only the irreducible / non-degenerate case is, mark candidate.',
+  },
+  {
+    id: '72-pinned-realisations-over-base',
+    cote: '72',
+    pages: '91–105',
+    kind: 'mathematical',
+    claim:
+      'Over an arbitrary ring (or base scheme), pinned non-degenerate realisations of the universal regular n-carte by strict pseudo-reflections on a locally free module of rank n+2 are rigid and classified by 2n+1 parameters (λ₀, β₀, λ₁, …, βₙ₋₁, λₙ), the λᵢ invertible and the βᵢ arbitrary, with an explicit criterion (A) ⇔ (B) for a start vector s₀ to exist.',
+    basis:
+      'Pages 96–100 prove the equivalence of the commutation-and-freeness conditions (A) with the pairing conditions (B), including νₙ = ⟨s₀,a′₀⟩⟨a₀,a′₁⟩⋯⟨aₙ₋₁,a′ₙ⟩ invertible; pages 91–93 give the universal coordinates; pages 102–105 prove that a start vector exists locally under conditions a), a′), b), c). The page-13 margin announces the 2n+1-parameter classification without proof.',
+    ours:
+      'The classification as stated is the reading’s consequence of the theorem and the universal coordinates (footnote at page 93: conditions (B) hold for all parameters); the page never puts the two together. The reading also corrects the index in (14), reconciles the two inconsistent formulas for ⟨aᵢ₊₁,a′ᵢ⟩ on page 93, redoes the proof of (24) on page 101, and adds the remark that local existence of s₀ holds even over 𝔽₂. Freeness is read in the strong sense (direct-summand basis) that page 103 makes explicit only late.',
+    literature: [
+      'Web search (2026-10-10), result summaries only, no source read: secondary accounts of Vinberg 1971 (e.g. arXiv 2102.02757, « Convex cocompactness for Coxeter groups ») report that a Cartan matrix is determined up to diagonal conjugation and that cyclic products classify semisimple linear Coxeter groups up to conjugacy. For a string diagram there are no cycles, so over ℝ and for reflections the invariants reduce to the products βᵢ — which would make the field case a match; the summaries say nothing of rings, pseudo-reflections, the degenerate case βᵢ = 0 or the start vector.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read Vinberg 1971 §§1–3 on the classification of reflection groups by Cartan matrices, and look for a treatment over rings or base schemes with pseudo-reflections (e.g. in the literature on representations of Coxeter and Artin groups over commutative rings, or McMullen’s realisation theory of regular polytopes). If the field case with arbitrary λᵢ and βᵢ is there, record it as matched for fields; the entry survives only if the relative version over a base, with νₙ invertible as the exact criterion, is not.',
+  },
+  {
+    id: '72-automorphisms-deform-gm-to-ga',
+    cote: '72',
+    pages: '37–38, 87–88',
+    kind: 'mathematical',
+    claim:
+      'The automorphism group scheme of a non-degenerate projective realisation (X, (τᵢ)) of the universal regular n-carte is the one-dimensional group 𝒰_ρ = Spec 𝒪_S[T]_{(1+ρT)} with law λ + λ′ + ρλλ′, ρ the continuant giving the position of the centre — a torus where the centre is at finite distance and 𝔾_a where it is at infinity — and the non-degenerate flags (equivalently the start points) form a torsor under it.',
+    basis:
+      'Page 37 defines 𝒰_ρ and its action uλ = id + λ π ⊗ c̃; page 38 states the « Théorème » that 𝒰_ρ → Aut(X, (τᵢ)) is an isomorphism and that D₀ ∖ {c, d} is a torsor; pages 87–88 restate it as Aut(X,(τᵢ)) ≅ Aut(D₀; c + d), identity on the divisor c + d.',
+    ours:
+      'Both statements are given without proof on the pages. The torsor argument is the reading’s; the identification of the page-38 group with the page-87 group, and of c = d with ρ = 0, is the reading’s. Neither the isomorphism onto the full automorphism group scheme nor its smoothness is proved anywhere in the folder or the reading. The group scheme 𝒰_ρ itself is in the literature (Sekiguchi–Oort–Suwa, cited from memory in the reading); the candidate is only its appearance as the automorphism group of the realisation.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'First prove the page-38 isomorphism (centraliser of the τᵢ in PGL(E) over a base); then look in McMullen–Schulte ch. 5 and the literature on degenerations of reflection representations (spherical to affine as ρ → 0) for the centraliser described as a family deforming 𝔾_m to 𝔾_a. Sekiguchi–Oort–Suwa and Waterhouse–Weisfeiler on one-dimensional affine group schemes give the group, not this action.',
+  },
+  // Folder 78 — /find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over transcripts/78/78.modern.tex (Pass: Opus 5.5) and batch-01..07.fr.tex. Literature consulted: Korchmáros & Szőnyi, « Affinely regular polygons in an affine plane », Contrib. Discrete Math. 3 (2008) 20–38 (read in full, §§1–3 and bibliography); Bachmann–Schmidt and Korchmáros 1974/1976 only as that survey reports them. Lángi, arXiv:1706.03036, abstract only. Nizette 1977 not found.
+  {
+    id: '78-strip-2p-gon',
+    cote: '78',
+    pages: '3, 84–85, 94–95, 98–99, 115–116',
+    kind: 'mathematical',
+    claim:
+      'In characteristic p odd, the definition by symmetries (every automorphism of the combinatorial n-gon extends uniquely to an affinity, three consecutive vertices not collinear) admits regular 2p-gons whose vertices lie alternately on two parallel lines: a unimodular one with invariant α = −2, whose invariant conic is that pair of lines, and a non-unimodular « improper » one, the only finite regular polygon that is not unimodular.',
+    basis:
+      'Pages 84–85 derive the improper case (σ₀ the point symmetry, u² the translation by (1, −1), order 2p, faithful « on vérifie aisément »); page 94 treats α = −2 (u_V² a transvection of order p, u of order 2p) and page 95 writes s_{2n} = s₀ + na, s_{2n+1} = (−s₀ − ½a) − na; page 99 factors the conic for α = −2; page 116 makes Ψ_{2p}(α) = 0 the condition for a 2p-gon in every characteristic ≠ 2. The two minus signs of page 95’s last line are blots read from the calculation, and the word qualifying « anomalie » on page 85 is \\ill{}.',
+    ours:
+      'The reading writes out the faithfulness check for the improper case (the 2p points (m, −m), (m+1, −m) are distinct), restates the α = −2 vertices in the original coordinates as two parallel lines traversed in opposite directions, and supplies the statement that the improper 2p-gon is the only non-unimodular finite regular polygon; page 3 says something close to the reverse next to an illegible word, which the reading does not restore. The comparison with Kárteszi’s definition below is this pass’s own.',
+    literature: [
+      'Korchmáros & Szőnyi, Contrib. Discrete Math. 3 (2008), §2 (Theorem 2.1, Lemma 2.2, Theorem 2.3: affinely regular polygons over any field are inscribed in an irreducible conic — ellipse, hyperbola, or parabola with n = p) and §3 (Bachmann–Schmidt’s c = −2 case, stated for n prime to the characteristic, where the even and odd vertices coincide). No two-line 2p-gon appears there.',
+      'Lángi, « A characterization of affinely regular polygons », arXiv:1706.03036, abstract only: works over ℂ.',
+    ],
+    status: 'candidate',
+    settle:
+      'The surveyed definitions demand no three collinear vertices (Kárteszi) or exclude p | n (Bachmann–Schmidt §12.3 as reported), so these 2p-gons are excluded by definition there rather than overlooked; the question is whether any source adopts a flag-transitive or symmetry-based definition over fields of characteristic p and lists them. Read Coxeter, « Affinely regular polygons », Abh. Math. Sem. Hamburg 34 (1969/70); Fisher & Jamison, Geom. Dedicata 69 (1998), which gives seven equivalent definitions; Nizette, Acad. Roy. Belg. Bull. Cl. Sci. (5) 63 (1977) 844–851; and Bachmann–Schmidt, n-Ecke, ch. 12. If one of them has the strip polygon, mark matched.',
+  },
+  {
+    id: '78-parabola-p-gon',
+    cote: '78',
+    pages: '87–88, 95, 100, 118–119, 123–124',
+    kind: 'mathematical',
+    claim:
+      'In characteristic p ≥ 3 the invariant α = 2 gives a regular p-gon with no centre, inscribed in a parabola on which the rotation acts as the translation v ↦ v + 1, and in characteristic p the p-gon has only this one invariant (Ψ_p ≡ (U − 2)^{(p−1)/2} mod p).',
+    basis:
+      'Page 95 (case III, u_E = id + w with w³ = 0, order p for p ≥ 3), page 100 (u(v, v²) = (v + 1, (v + 1)²), « v ↦ v+1 ! »), the corollary of pages 118–119 and the reductions of pages 123–124. Page 100 stops at the translation; that the vertices are the p rational points (m, m²) is the reading’s.',
+    ours:
+      'The reading draws the conclusion about the p rational points of the parabola, and corrects page 124’s « (T − 1)^{p′} » to (U − 2)^{p′} and the corollary’s « order p » to order 4 when p = 2.',
+    literature: [
+      'Korchmáros & Szőnyi, Contrib. Discrete Math. 3 (2008), §2: the parabola example A_i = (a + i, (a + i)²), i = 1…p, and Theorem 2.3 (from Korchmáros, Atti Accad. Naz. Lincei Rend. (8) 56 (1974) 690–697): in AG(2, q) an affinely regular p-gon exists and is inscribed in a parabola.',
+      'Same survey, §3 after (3.8): any two non-degenerate affinely regular p-gons, p ≥ 5, are affinely equivalent, and the algebraic (Bachmann–Schmidt) and synthetic definitions part ways in characteristic p ≥ 5 exactly because of these p-gons.',
+    ],
+    status: 'matched',
+    settle:
+      'Matched through the survey, which reports Korchmáros 1974 and 1976; the originals were not read. What remains the folder’s own is the route — the polygon as a non-faithful quotient of the universal ∞-polygon with parameter α, and the parabola as its invariant conic — which is exposition, not a new statement.',
+  },
+  {
+    id: '78-closure-criterion-over-rings',
+    cote: '78',
+    pages: '109–113',
+    kind: 'mathematical',
+    claim:
+      'Over any commutative ring k and any α ∈ k, the affine map u_α(x, y) = (1 − y + αx, x) satisfies u_α^n = id if and only if F_n(α) = 0, where F_n ∈ ℤ[U] is the polynomial with F_n(T + T⁻¹) = (T^n − 1)/(T − 1)·T^{−(n−1)/2} (n odd) or (T^n − 1)/(T² − 1)·T^{−(n−2)/2} (n even); the vertices are u_α^n(0, 0) = (F_nF_{n+1}(α), F_{n−1}F_n(α)), and the identity F_nF_{n+1} − U F_{n−1}F_n + F_{n−2}F_{n−1} = 1 gives the Bézout relation that makes the converse hold even with zero divisors.',
+    basis:
+      'Page 109 states and proves the identity X_n − U X_{n−1} + X_{n−2} = 1; page 111 gives the vertices and the matrix of u^n; page 112 states the theorem « Soient k un anneau » with conditions a), b), b_i), d) and proves d) ⇒ b) by the vertex formula and b) ⇒ d) by Bézout. Page 112 ends « la relation F_n(α) = 1, cqfd », and page 113’s first Bézout coefficient has a doubtful index.',
+    ours:
+      'The reading reads page 112’s conclusion as F_n(α) = 0, takes the struck first version of the third column of the matrix on page 111, and replaces page 113’s A_n = F_{n−2} − U F_{n−1} (which fails at n = 4) by A_n = F_{n−2} − U F_n. This pass checked the identity for 2 ≤ n ≤ 10 and the equivalence u_α^n = id ⇔ F_n(α) = 0 by brute force over ℤ/N for N = 4, 8, 9, 25, 27 and n ≤ 11; that check is the pass’s own and is not a proof.',
+    literature: [
+      'Korchmáros & Szőnyi, Contrib. Discrete Math. 3 (2008), §3, (3.4): Bachmann–Schmidt’s criterion over a field — the linear circular system v_i + c v_{i+1} + v_{i+2} = 0 has a non-trivial solution iff c = ±2 or x² − cx + 1 divides x^n − 1. Nothing there over rings or for the affine (translation-carrying) map.',
+    ],
+    status: 'candidate',
+    settle:
+      'This is elementary and likely to be in the literature on Chebyshev and Dickson polynomials or on linear recurrences modulo m, under other names (F_n is a Chebyshev polynomial of the second kind for n even, of the fourth kind for n odd). Search Mason & Handscomb, Chebyshev Polynomials, ch. 1–2; Lidl, Mullen & Turnwald, Dickson Polynomials; and work on the period of Lucas sequences modulo m (Wall 1960, Lehmer 1930). If the ring-level equivalence for this affine map, or for the Lucas sequence U_n(α, 1), is there, mark matched — the likeliest outcome.',
+  },
+// 140-1: one entry. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (% Pass header of 140-1.modern.tex, 2026-09-24); same model, no disagreement with the reading. Dropped as matches: ST_{1,1} = preimage of SL(2,Z) in the universal cover of SL(2,R) = <rho, sigma | rho^3 = sigma^2> = B_3 (Artin 1925; Schreier 1924 for the trefoil) and its realisation as pi_1 of the complement of the cuspidal cubic (pp. 17, 33-35); M_{1,1} = [U_{0,3}/D'_3] over C and SL(2,Z) = PSL(2,Z) x_{Z/2} Z/4 (p. 15); the boundary exact sequence 1 -> pi_1 Aut+(X) -> Z^n -> ST -> T -> S_n -> 1 (p. 20; Earle-Eells, Earle-Schatz); maps as (A, sigma, rho) and the cartographic group (pp. 16, 29, 31; the Esquisse d'un programme). Dropped as elementary or as the edition's: the normalised lifts rho~^n = sigma~^2 = omega~^nu with nu = (n^2+1)/2 mod 2n for Z/n * Z/2, n odd (pp. 11-13), a group-theory exercise; the sigma-invariance of Pi~°_n for n odd (p. 5), which is the reading's argument, not the page's; the identification of page 9's E with D'''_3 (reading's); the Ext^1 computation of p. 32, a textbook calculation. Codicological: p. 17's upside-down struck fragment « 8. Groupes et groupoïdes fondamentaux » and p. 33's red-ink note dated 27-11-81 in another hand are already in the transcription's notes; the fragment's source draft was not looked for and is too short to claim anything.
+  {
+    id: '140-1-equivariant-pic-u03',
+    cote: '140-1',
+    pages: '22, 24, 29',
+    kind: 'mathematical',
+    claim:
+      'For S regular integral with Pic(S) = 0 and generic characteristic ≠ 2, the Picard group of the quotient stack [(P¹ − {0, 1, ∞})_S / S₃], S₃ acting by the anharmonic substitutions, is Z/6, generated by O(1) on P(V_J); in generic characteristic 2 it is Z/3.',
+    basis:
+      'Page 22 states the lemma in a box with its hypotheses and a marginal Hochschild–Serre bound (H¹(S₃, O(S)*) and H¹(S₃, V(J)) through the units of U_{0,3}); the S₃-invariant section ∏_{i≠j}(e_i − e_j) of O(6) shows the order divides 6, and page 24 shows no invariant unit section of O(n) exists for 0 < n < 6 from the vanishing of γ₂ and γ₃. On page 22 the words « et » and « car. … générique » in the hypotheses, and « car. » and « générique » in the characteristic-2 parenthesis, are \\uncertain{}; the Z/3 clause rests on them.',
+    ours:
+      'The reading computes H¹(S₃, O(S)*) = μ₂(S) and H¹(S₃, V(J)) = Z/3, which the page does not write; corrects page 24\'s « n ≤ 6 » to n < 6; corrects page 22\'s invariant ring (polynomial, γ₂³ − 2γ₃² = 54Δ is the discriminant, not a relation); identifies the zeros of γ₂, γ₃ with the points of stabiliser order 3 and 2; and adds the argument by exponents of ∏(e_j − e_k) that covers characteristic 3 and gives Z/3 in characteristic 2. Over C (or over Z[1/2]-bases) the Z/6 statement follows from Pic(M_{1,1}) = Z/12 (Mumford 1965; Fulton–Olsson) by passing to the μ₂-rigidification — the reading makes that comparison itself — so the candidate, if any, is the version over a base with points of characteristic 2 and the Z/3 clause, where the stack is no longer a rigidified M_{1,1}.',
+    literature: [
+      'One web search on 2026-10-10 (« Picard group quotient stack [P^1 − {0,1,∞}/S_3] Z/6 rigidification M_{1,1} μ_2 »): it returned « The Grothendieck group of algebraic stacks » (arXiv 0903.3143, which treats [U/Σ₃] for the S₃-action on P¹ but not its Picard group), arXiv 2310.20045 (Picard group of stacks of cyclic covers of P¹) and arXiv 2306.08227 (Picard groups of stacky curves); none was read beyond the search summary.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read Fulton–Olsson, « The Picard group of M_{1,1} » (Algebra & Number Theory 2010) and the stacky-curves Picard computations (arXiv 2306.08227) for the S₃-quotient of P¹ − {0, 1, ∞} over a general base, in particular over Z and F₂; if Pic = Z/6 (Z/3 in characteristic 2) is stated there or is an immediate corollary, mark matched. A single unread web query is not a search, so the status stays unsearched. Separately, the Z/3 clause should be checked against the facsimile of page 22, since « car. générique » is uncertain in the transcription.',
+  },
 ];
