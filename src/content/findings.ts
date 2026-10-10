@@ -7892,4 +7892,233 @@ export const FINDINGS: Finding[] = [
     settle:
       'Look at the facsimile of pages 34–39: whether 35/36 and 37/38 are rectos and versos of the same leaves or a reversed gathering, and whether the archivists’ numbering follows the physical stack. That would say whether the inversion is the author’s or the filing’s.',
   },
+  // Folder 77 — /find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over transcripts/77/77.modern.tex (Pass: Opus 5.5, same model) and batch-01..08.fr.tex. Literature opened in this pass: B. Conrad, « Reductive group schemes » (Luminy SGA3 notes, 2014), Appendix C, full text (C.1.4, C.1.5, C.2.2, C.2.11, C.3.1, C.3.3, C.3.15); the arXiv abstract page of J. Voight, arXiv:1504.05228 (abstract only); three general web searches, which returned nothing relevant. Voight 2016 in full text is cited only as the folder-84 pass read it. SGA 7 XII, Knus 1991, Kneser and Bass are named in `settle` from memory and were not opened.
+  {
+    id: '77-universal-even-rank-discriminant-mod-4',
+    cote: '77',
+    pages: '65–71, 87',
+    kind: 'mathematical',
+    claim:
+      'For the universal quadratic form Σ Yᵢxᵢ² + Σ Yᵢⱼxᵢxⱼ of even rank 2n over ℤ, (−1)ⁿΔ = B² − 4C in the polynomial ring, where Δ is the determinant of the polar form and B is the sum over perfect matchings of I of the products of the Yᵢⱼ (the hafnian of the off-diagonal coefficients); that is, the signed discriminant is congruent mod 4 to the square of this explicit polynomial.',
+    basis:
+      'Pages 65–67 expand Δ as a sum over graphs (fixed points, double edges, polygons) with coefficient (−1)^{ν₂+ν₊*} 2^{ν₁+ν*}; page 68 reduces mod 2 to perfect matchings and poses B² − εΔ ≡ 0 (4), « prévoit » ε = (−1)ⁿ; pages 69 and 71 compare B² with Δ mod 4 through pairs of fixed-point-free involutions, with a brown-ink false alarm corrected by the next two lines; page 87 (struck) checks the coefficients in rank 4. The final congruence is legible; the counting argument of pp. 69 and 71 has several \\ill{} and \\uncertain{} words (« invol. », « dès », « toutes ») in the sentence identifying a monomial with its pair of matchings.',
+    ours:
+      'The reading corrects the page’s sum over ordered pairs (factor 2 over-counting) to unordered pairs, fixes the cycle-length bounds (≥ 3, ≥ 4 for even), names B the hafnian and its reduction the Pfaffian, and checked the identity by machine for ranks 2, 4, 6 (ε = −(−1)ⁿ fails in each). The link to the Arf cover and to Stickelberger is the reading’s and is not on the pages.',
+    literature: [
+      'B. Conrad, Reductive group schemes (Luminy 2014), Appendix C: Prop. C.1.4 treats only odd rank (universal discriminant divisible by 2), proved via the defect over F₂(Aᵢⱼ); C.2.2 and the remark after C.3.3 attach to even rank the discriminant algebra Z_q (centre of C₀) and cite Knus IV 4.1.1, 5.3.2, 4.7 for explicit formulas. No mod-4 polynomial identity for the universal even-rank discriminant, and no hafnian or matching-sum lift, was found there.',
+      'Two web searches (« universal quadratic form even rank discriminant mod 4 hafnian/Pfaffian », « even lattice rank 2n (−1)ⁿ determinant ≡ 0, 1 mod 4 ») returned nothing bearing on the statement.',
+    ],
+    status: 'candidate',
+    settle:
+      'The numerical consequence — (−1)ⁿ det ≡ 0 or 1 mod 4 for an even ℤ-lattice of rank 2n — is believed classical (not verified in this pass) and would not by itself match the claim. Read Knus, Quadratic and Hermitian Forms over Rings (1991), IV §§ 3–4 (the discriminant module and the quadratic discriminant algebra), Kneser’s work on the half-discriminant, and Bass, « Clifford algebras and spinor norms over a commutative ring » (1974), for an explicit universal B with (−1)ⁿΔ ≡ B² mod 4; if B is the matching sum there, or if the norm form of Z_q yields it, mark matched.',
+  },
+  {
+    id: '77-odd-rank-half-discriminant',
+    cote: '77',
+    pages: '65–68, 127',
+    kind: 'mathematical',
+    claim:
+      'The determinant of the polar form of the universal quadratic form of odd rank is divisible by 2 in ℤ[Y], so the half-discriminant δ′ = δ/2 is defined over any base, and q is regular iff δ′(q) is invertible.',
+    basis:
+      'Page 68: « On voit donc que Δ mod 2 = 0 si card I est impair », from the graph expansion (only fixed-point-free involutions survive mod 2); page 127 uses δ′ (« discriminant divisé ») as the regularity criterion.',
+    ours: null,
+    literature: [
+      'B. Conrad, Reductive group schemes (Luminy 2014), Appendix C, Prop. C.1.4 (half-discriminant disc′ = disc/2 ∈ ℤ[Aᵢⱼ] for odd n, and disc′(q) ∈ R^× iff q non-degenerate), introduced there as « a modification of the discriminant that was independently discovered by Grothendieck and M. Kneser ».',
+    ],
+    status: 'matched',
+    settle:
+      'Matched. The folder’s route (graph expansion mod 2) differs from Conrad’s (defect of a form over a field of characteristic 2), which is not a novelty of statement. Conrad’s attribution concerns the notion, not this folder or a date.',
+  },
+  {
+    id: '77-two-regular-classification-matched',
+    cote: '77',
+    pages: '52–63',
+    kind: 'mathematical',
+    claim:
+      'On a scheme where 2 is a non-zero-divisor, quadratic covers are equivalent (fully faithfully) to triples (L, 𝔇, b₀), b₀ ∈ Γ(V(2), L₀), with essential image cut out by 𝔇₁ = γ(b₀) (the square mod 4 of any lift of b₀), in three successive drafts.',
+    basis:
+      'Page 56 states the theorem with conditions a) b₀² = 𝔇₀ and b) a₁(𝔇) = 0; pages 58–60 restate it as full faithfulness plus 𝔇₁ = γ(b₀); pages 61–63 give the corollaries. Several words of the reconstruction of F from (L, b₀) on p. 53 are uncertain.',
+    ours:
+      'The reading shows b) implies a), makes the page’s H¹ conditions precise (F trivial iff b₀ lifts to Γ(S, L)), and supplies the proof of Corollary 3 (p. 63), stated by the page without proof.',
+    literature: [
+      'J. Voight, Discriminants and the monoid of quadratic rings, Pacific J. Math. 283 (2016), arXiv:1504.05228, Theorem C / Theorem 4.3 — not re-read in this pass; cited as the folder-84 pass read it for 84-two-regular-triplet-classification (fibre of disc over d indexed by t with t² ≡ d mod 4 when 2 is a non-zero-divisor, free affine case).',
+    ],
+    status: 'matched',
+    settle:
+      'Matched on isomorphism classes, by the same source and with the same reservation as 84-two-regular-triplet-classification (Voight is affine and free; the folder works over a scheme). Folder 84 pp. 48–53 states the same theorem as (L, δ, T₀). If that globalisation is judged not routine, reopen both entries together.',
+  },
+  {
+    id: '77-discriminant-extension-across-2',
+    cote: '77',
+    pages: '63, 73–86',
+    kind: 'mathematical',
+    claim:
+      'For A noetherian with 2 regular, A/2A a normal domain and Δ ∉ 2A, Δ = b² − 4c with b, c ∈ A if and only if A_{2Δ}[U]/(U² − Δ) extends to a finite étale algebra over A_Δ (and that extension is unique up to unique isomorphism); globally, for S₀ = V(2) reduced and normal, (L, 𝔇) comes from a quadratic cover iff it does at the maximal points of S₀.',
+    basis:
+      'Page 85 states the Proposition with three equivalent conditions and the uniqueness clause; page 63 states Corollary 3 (« il f. et s. qu’il en soit ainsi aux points maximaux de S₀ ») without proof; pages 73–84 attempt the proof by another route (Pic A_Δ = 0, units of A_Δ) under extra hypotheses, much of p. 83 struck and partly illegible; page 86 sketches a global version and stops.',
+    ours:
+      'Large. The proof of c) ⇒ a) (localising at the prime 2A, a DVR) and the proof of Corollary 3 are the edition’s; uniqueness of B_Δ is asserted by the page and not proved. On p. 85 the page’s condition c) reads « extension [quadratique] finie », with « étale » struck; the reading states c) with « finie étale ». As the page writes it, c) does not imply a): A = ℤ, Δ = 3, B_Δ = ℤ[1/3][√3] is finite with the required localisation, yet 3 is not of the form b² − 4c (this pass’s own check). The claim above is the reading’s version, not the page’s.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Over ℤ and rings of integers this is the classical statement that K(√Δ) is unramified above 2 iff Δ is a square mod 4 (Hecke); check whether the ring-theoretic version (2 regular, A/2A normal) is in Knus 1991 III, in Voight 2016 § 4, or in the literature on quadratic algebras with given discriminant, before treating it as anything more than that. Also decide whether « étale » struck on p. 85 is a slip the page meant to keep.',
+  },
+  {
+    id: '77-affine-quadric-weil-restriction',
+    cote: '77',
+    pages: '89–116',
+    kind: 'mathematical',
+    claim:
+      'Over a base where 2 is invertible, the affine quadric q = −1 of a special quadratic module of rank 3 is canonically the complement of the conic X in the Weil restriction X^{S[i]}, S[i] = Spec 𝒪_S[T]/(T² + 1), via x + iy ↦ [x, y]/2q(x); and, without the special structure, the projective closure Σ̂ is canonically X^Ω for Ω the μ₂-torsor of square roots of δ′(q), with an explicit sign fixed by computation.',
+    basis:
+      'Pages 94–97 prove f : U → Σ an isomorphism (mono and epi); page 98 boxes Σ ≃ X^{S[i]} − X and proves the lemma on the complement; pages 102–110 set up the twisted version by descent along Ω through the rank-1 endomorphism quadric of a quaternion algebra; pages 111–115 fix the sign (« −[α, β]/tr(αβ), et non + »). The characteristic-2 attempt of p. 99 is struck.',
+    ours:
+      'The reading corrects (1) on p. 89 to δ′(q) = −ω^{⊗−2}, removes the tildes from the p. 98 box, shows that the page’s bilinear F_M vanishes on the diagonal (so gives the isomorphism off it only) and supplies F_M(α, β) = 2βα, and corrects the boxed identity of p. 116 (signs wrong as written). The interpretation as the real-sphere / Riemann-sphere identification is the reading’s.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'A smooth quadric surface is classically the Weil restriction of a conic along its discriminant double cover (the exceptional isomorphism D₂ = A₁ × A₁); check Knus–Merkurjev–Rost–Tignol, The Book of Involutions, § 15, and Knus 1991 V, for the scheme-theoretic statement and for the affine complement Σ = X^Ω − X. If both are there, mark matched; the explicit formula and sign are then a computation, not a finding.',
+  },
+  {
+    id: '77-so-even-rank-smooth-connected-matched',
+    cote: '77',
+    pages: '127–132, 153–157',
+    kind: 'mathematical',
+    claim:
+      'For a regular quadratic module of rank N over any base, O(q) = μ₂ × SO(q) in odd rank, and in even rank SO(q), the kernel of a homomorphism O(q) → (ℤ/2)_S, is smooth with connected fibres, the homomorphism agreeing with det through ℤ/2 → μ₂ when 2 is invertible.',
+    basis:
+      'Page 128 states the odd-rank theorem; page 131 the even-rank one; pages 155–157 define SO(q) as the kernel of the action on Arf (« On ne va pas définir SO(q) comme O(q) ∩ SL(E), à cause de car. 2 ») and prove smoothness and connectedness via a stabiliser of a maximal isotropic F.',
+    ours:
+      'The reading removes the page’s « simple si n ≥ 7 » in odd rank and names the homomorphism the Dickson invariant (the name is not on the page).',
+    literature: [
+      'B. Conrad, Reductive group schemes (Luminy 2014), Appendix C: (C.2.2) Dickson invariant D_q : O(q) → (ℤ/2)_S via the centre of C₀(V, q); Theorem C.2.11 (SO(q) smooth with connected fibres of dimension n(n − 1)/2); Remark C.2.12 (O(q) = μ₂ × SO(q) for odd n); Prop. C.3.1 (connected fibres in even rank). Conrad refers to Knus IV § 5 for the Dickson invariant.',
+    ],
+    status: 'matched',
+    settle:
+      'Matched for the statements. What Conrad’s Appendix C does not contain is the folder’s route to the homomorphism — see 77-arf-cover-stein-factorisation.',
+  },
+  {
+    id: '77-arf-cover-stein-factorisation',
+    cote: '77',
+    pages: '132–143, 155–157',
+    kind: 'mathematical',
+    claim:
+      'Over any base, characteristic 2 included, the isotropic flag schemes Δ_H(E, q) of a regular quadratic module are smooth and projective with geometrically connected fibres except when N = 2n and n ∈ H, the Stein factorisation of the maximal isotropic Grassmannian defines the Arf double cover, Arf′ ≃ Arf ∧^{ℤ/2} μ₂, and the Dickson homomorphism is the action of O(q) on that cover — without Clifford algebras.',
+    basis:
+      'Page 132 announces the two components; pages 133–141 prove smoothness by the infinitesimal criterion and connectedness by dévissage (Lemmas 1–6), with the case N = 2n, H = {n} through ω_F and Theorem 2 for 2 invertible; pages 142–143 recapitulate (a)–(e) and the isomorphism (7); pages 155–157 use the action on Arf to define SO(q). A first lifting argument (pp. 134–135) is struck; pp. 142–143 carry a few \\ill{} and \\uncertain{} words (« sous-schéma », « simplexe »); the transitivity statement in the margin of p. 155 has no proof.',
+    ours:
+      'The reading corrects ω_F² = (−1)ⁿδ(q)^{−1} (the page first writes the inverse, then boxes the right form), F′ ⊂ F on p. 141, and adds that Corollaries 1–3 hold étale-locally only if 2 is invertible or rank Q is even (fppf in general). The passage from fields to a general base « par spécialisation et factorisation de Stein » is the page’s, in one line, not carried out.',
+    literature: [
+      'B. Conrad, Reductive group schemes (Luminy 2014), Appendix C: the Dickson invariant and the discriminant algebra Z_q are built from the even Clifford algebra (C.2.2, C.3.3); the scheme of maximal isotropic subspaces and its Stein factorisation were not found there.',
+      'One web search (« scheme of maximal isotropic subspaces … Stein factorization étale double cover … characteristic 2 ») returned only papers on quadric bundles over bases of characteristic 0 or unspecified.',
+    ],
+    status: 'candidate',
+    settle:
+      'Read Deligne, SGA 7 II, Exposé XII (« Quadriques »), which from memory treats quadrics over an arbitrary base, their maximal isotropic subspaces and characteristic 2; and Knus 1991 IV § 5 and VIII. If either defines the Arf/Dickson double cover as the Stein factorisation of the maximal isotropic Grassmannian over a general base, mark matched — which this pass expects.',
+  },
+  {
+    id: '77-biregular-affine-quadric-symmetry',
+    cote: '77',
+    pages: '117–125',
+    kind: 'mathematical',
+    claim:
+      'A projectively smooth affine quadric that is also smooth at infinity, in an affine bundle of odd rank, is equivalent to (T, q, a) with q regular on T of even rank and q(a) = 1, and carries a unique reflection fixing the hyperplane at infinity and preserving it — σ = id − π ⊗ a, a central symmetry in residue characteristic ≠ 2 and a transvection in characteristic 2.',
+    basis:
+      'Pages 117–120 normalise (a, q) by q(a) = 1 and π = φ(a, ·), give π(a) = 2 and the Scholie; pages 122–125 derive (19)–(21) and the marginal Proposition on the canonical symmetry, with the example T = M₂, q = det, a = 1 on the cut leaf p. 124. Page 125 announces G ≃ G⁰ × ℤ/2 (« on va montrer ») and stops.',
+    ours:
+      'Substantial. The normalisation π(x) = φ(a, x) is struck by hatching on p. 117 and its restatement (11) is struck on p. 120; the reading adopts it because it makes (10) and uniqueness hold. The reading also corrects σ² = id to follow from π(a) = 2 (page: « π(a) = 1 », which gives σ² = σ), the N.B. equation on p. 120, and the polar form of det on p. 124.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check Knus 1991 (quadratic spaces with a distinguished vector, IV) and the literature on affine quadrics over rings for the (T, q, a) dictionary and the canonical symmetry in characteristic 2. Because the hypothesis that makes the statement true is struck twice on the pages, decide first, against the facsimile through /transcribe-grothendieck, whether the page abandons it.',
+  },
+  {
+    id: '77-leaves-13-19-and-129-130-order',
+    cote: '77',
+    pages: '7–19, 129–130',
+    kind: 'codicological',
+    claim:
+      'Part II interleaves two drafts: pages 7–12 and 17 form the first (diagonal coordinates), and the second (universal coordinates) reads 18, 13, 14, 15, 16, 19; in Part VI, page 130 precedes page 129 in the order of composition.',
+    basis:
+      'Formula numbers of p. 13 do not continue those of pp. 7–12, its q₀ is the q₀ of p. 18, p. 14 restarts at (7) after p. 13, and p. 19 continues pp. 14–15; p. 129 uses the classification stated on p. 130. All from the transcription, as the reading argues it.',
+    ours:
+      'The order is the reading’s inference from formula numbering and content; nothing about the binding was checked.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look at the facsimile leaves 13–19 and 129–130: whether they are versos of the same sheets, folded together, or differ in paper or ink. If the physical evidence agrees, the order stands; nothing in this pass looked.',
+  },
+  // Folder 85 — /find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over transcripts/85/85.modern.tex (Pass: Opus 5.5) and batch-01..05.fr.tex. Same model as the reading; no disagreement with it to record. Literature: two web searches (2026-10-10), result summaries only, no source read. Dropped as matches already footnoted in the reading: Klein's list (p. 33), Beauville's criterion (pp. 36–37), Coxeter / Shephard–Todd regular complex polygons (pp. 58–73), Kepler–Poinsot / Cauchy (pp. 75–80), Nielsen / Neumann T-systems and P. Hall's 19 classes (pp. 42, 82–93). Dropped as repaired by the edition: the order criteria of pp. 29–31 (n invertible, « nulle part central »).
+  {
+    id: '85-g2-pgl2-moduli-over-z',
+    cote: '85',
+    pages: '4–7',
+    kind: 'mathematical',
+    claim:
+      'Over an arbitrary scheme, homomorphisms of the string Coxeter group G₂ = ⟨τ₀, τ₁, τ₂ | τᵢ², (τ₀τ₂)²⟩ into forms of PGL₂ with ρ₀², ρ₁² ≠ 1 and ρ₀ρ₁ ≠ ρ₁ρ₀ on every fibre are rigid and classified by the pair of trace invariants (α₀, α₁) with (α₀ + 2)(α₁ + 2)(α₀ + α₁) invertible, so their moduli is the complement of three lines in 𝔸²_ℤ; prescribing exact orders ν₀, ν₁ cuts it down by Ψ_{νᵢ}(αᵢ) = 0, with νᵢ invertible when νᵢ is not prime.',
+    basis:
+      'Page 4 states the theorem (categories C and C′, full faithfulness, equivalence for Γ = G₂), read without \\ill{} in the statement; pages 6–7 state the corollary on Γ_{ν₀,ν₁}. The proof (pages 5–6) appeals to « les généralités » on pinned regular 2-polyhedra that are not in the folder, and the author writes « On a un peu salopé la présentation »; the first paragraph of page 6 is largely illegible and the extension-to-characteristic-0 principle is reported « tel qu’on le devine ».',
+    ours:
+      'The moduli-space reformulation is the edition’s. Condition c) of the corollary is the reading’s interpretation of a three-case table set against a struck draft, and it depends on the order criterion of page 31, which the edition repaired (« nulle part central ») and checked only on reduced bases. The page-6 product (α₀ + 2)(α₀ − 2)(α₀ + α₁) is corrected to the page-4 form. The underlying classification over a base is that of folder 72 (entry 72-pinned-realisations-over-base), still unproved as a combined statement.',
+    literature: [
+      'Web search (2026-10-10), result summaries only, no source read: queries on representations of [p, q] Coxeter groups in PGL₂ / SO(3) over commutative rings classified by trace parameters returned character-variety and representation-variety papers (e.g. arXiv dg-ga/9703007 on Artin groups and PO(3, ℂ)), none reported to treat this classification.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read Vinberg, « Discrete linear groups generated by reflections » (1971) §§1–3 and McMullen–Schulte, Abstract Regular Polytopes ch. 5 for the field case, then look in the literature on SL₂ / PGL₂ character varieties of triangle and Coxeter groups over ℤ (trace coordinates of Fricke–Klein–Vogt type) for the integral, relative statement; mark matched if the open set of 𝔸²_ℤ with the invertible discriminant appears as a fine moduli space.',
+  },
+  {
+    id: '85-a5-pgl2-moduli-spec-z-phi',
+    cote: '85',
+    pages: '10, 40',
+    kind: 'mathematical',
+    claim:
+      'For any scheme S, the groupoid of pairs (G, φ), G a form of PGL₂ over S and φ : 𝔄₅ → G a monomorphism of group schemes, is rigid, and φ ↦ A(φ(π)) (π a standard 5-cycle) makes its functor of isomorphism classes representable by Spec ℤ[T]/(T² + T − 1) — in particular icosahedral subgroups exist and are unique up to unique isomorphism over residue characteristics 2, 3 and 5 once a root of T² + T − 1 is given.',
+    basis:
+      'Page 40 states the theorem, read cleanly (« mono », « catégorie-groupoïde », « représentable par M = Spec ℤ[T]/(T²+T−1) »), with a struck earlier version stated on isomorphism classes; page 10 states the same with a ℤ/2 factor and the margin « laisser tomber ℤ/2 dans l’énoncé ». Neither page gives a proof beyond the page-4 theorem applied to (ν₀, ν₁) = (3, 5), where the discriminant is a unit.',
+    ours:
+      'The deduction from the page-4 theorem (α₀ = −1, α₁ + 2 and α₁ − 1 of norm 1) is the reading’s arrangement of pages 8–10; the examples in characteristics 2, 3, 5 are the edition’s. The statement inherits the reserve on page 4 (proof resting on generalities outside the folder) and the page-31 order criterion in characteristic 5, where the 5-cycle is unipotent.',
+    literature: [
+      'Web search (2026-10-10), result summaries only, no source read: a query on the moduli of 𝔄₅ embeddings in PGL₂ over ℤ[(1+√5)/2] returned work on moduli of degree-2 representations (arXiv 1405.2788, constructed after inverting 2) and on icosahedral Galois representations; none reported to treat embeddings over ℤ including 2 and 5.',
+      'Beauville, « Finite subgroups of PGL₂(K) » (2010), cited from memory in the reading (footnote, pages 36–37) for the field case; not read in this pass.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read Beauville 2010 and Serre’s notes on finite subgroups of PGL₂ / SO(3) over fields, then look for a scheme-theoretic treatment of the icosahedral subgroup of PGL₂ over ℤ[φ] (e.g. in work on the icosahedral Galois representations or on finite subgroup schemes of PGL₂, Dickson’s classification in families). If the fine moduli Spec ℤ[T]/(T²+T−1) over all of ℤ, characteristics 2 and 5 included, is there, mark matched.',
+  },
+  {
+    id: '85-dinfty-torsor-classification',
+    cote: '85',
+    pages: '16–20',
+    kind: 'mathematical',
+    claim:
+      'Homomorphisms φ of the infinite dihedral group into forms of PGL₂ over a scheme S with u = φ(τ₀τ₁) satisfying u_s² ≠ 1 on every fibre are classified by pairs (α, R), α = A(u) with α + 2 invertible and R a torsor under the one-dimensional group 𝒰_{2−α} (law λ + λ′ + (2 − α)λλ′, a torus where α ≠ 2 and 𝔾_a where α = 2), with automorphism group the 2-torsion ₂𝒰_{2−α}.',
+    basis:
+      'Page 17 states the theorem (privileged representation (G_α, φ_α), twisting by R, quasi-inverse R = H₁ ∖ {c, d}); page 19 gives Aut(G, φ) ≅ ₂𝒰_ρ and Corollaries 1–2; page 20 Corollary 3 for 𝔻_∞ × γ. The pages are written under several layers of erasure: the definition of the points c, d is not read, « représentation privilégiée » and the centraliser notation are \\uncertain{}, and the torsor structure lies in the lost part of page 18.',
+    ours:
+      'The reading corrects « torseur sous G_α » to 𝒰_{2−α}, and ρ = α − 2 on page 20 to 2 − α; it notes that Corollary 2 c) (characteristic 2, α = 2) is empty in C. The torsor statement is reported, not proved, by the reading. This is the n = 1 case of folder 72’s automorphism statement (entry 72-automorphisms-deform-gm-to-ga), and the group 𝒰_ρ itself is in the literature (Sekiguchi–Oort–Suwa, cited from memory in folder 72’s reading).',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Prove the page-17 equivalence (centraliser of φ(𝔻_∞) and transitivity on the data (a₀, a₁)), then search the literature on dihedral subgroups of PGL₂ over rings and on degenerations of a torus normaliser to a Borel for a classification of 𝔻_∞-representations by an invariant and a 𝒰_ρ-torsor; if found, mark matched. Settle it together with 72-automorphisms-deform-gm-to-ga.',
+  },
+  {
+    id: '85-leaves-out-of-order',
+    cote: '85',
+    pages: '45–47, 54–56',
+    kind: 'codicological',
+    claim:
+      'Two runs of the folder are not in reading order: page 46 is an inserted leaf interrupting a sentence that runs from the foot of page 45 (« de sorte ») to the head of page 47 (« que H₃⁻ = … »); and the proof of d) on the octahedron runs 54 → 56 → 55, page 55 carrying the end of case 3) begun at the foot of page 56.',
+    basis:
+      'Page 45 ends « soit H₃⁺ son image, de sorte » and page 47 opens « que H₃⁻ = H₃ ∖ H₃⁺ … »; page 46 is a self-contained remark on the 𝔖₃-action on Tr(H). Page 54 ends « Montrons d’abord … », page 56 carries points 1), 2) and the start of 3) (« le cas où … a un seul él. d’ordre 4, un d’ordre 3 »), and page 55 opens « ρ = ρ_s, ρ′ = ρ_f » and ends « cqfd », its lower half blank.',
+    ours:
+      'Both seams are read off the sentences by the transcription (batch 3, header and notes) and the reading (footnotes at pages 47–48 and 54–56); the author marks neither. Several words at the seam of page 56 are \\uncertain{} or \\ill{}.',
+    literature: [
+      'Transcription 85, batch 3 (batch-03.fr.tex), header (« Page 46 (an inserted leaf, the argument of 45 resuming on 47) ») and pages 45–47, 54–56',
+      'Modernised reading 85 (85.modern.tex), footnotes to sections VI (pages 45–48) and the proof of d) (pages 54–56)',
+    ],
+    status: 'candidate',
+    settle:
+      'A person checks on the facsimile whether pages 55 and 56 are recto and verso of one sheet (written verso first, or the sheet turned) or separate leaves misfiled, and whether page 46 is on a different paper or in a different ink from pages 45 and 47.',
+  },
 ];
