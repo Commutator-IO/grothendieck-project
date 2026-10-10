@@ -5208,4 +5208,341 @@ export const FINDINGS: Finding[] = [
   settle:
     'A person checks on the facsimile the number written on page 82 (41, or something read as 41), whether pages 82–83 are the recto and verso of one leaf, and whether the last two lines of page 83 (not read with assurance) lead into diagram (9) of page 72.',
 },
+  {
+    id: '154-dihedral-monodromy-half-turn',
+    cote: '154',
+    pages: '55–63, 85–86',
+    kind: 'mathematical',
+    claim:
+      'For a system Σ of n pseudolines in a real projective plane, the 2n-gons Pol(D) cut on the double cover of an added pseudoline D form a local system on the cellular surface of relative positions, the transport along a half-turn around a position D = D_i of Σ is the rotation t ↦ t − (n − 1) of ℤ/2nℤ, and the monodromy π₁ → 𝔻_{2n} (dihedral, of order 4n) is surjective on the surface where crossing the positions D_i is allowed.',
+    basis:
+      'Page 55 writes the transport across an edge as a reflection t ↦ l_i − t and the alternating sum χ_{2n} = Σ(ν(s) − 1) = n − 1 for the chain of 2n faces around D_i; page 57 boxes λ(t) = t − (n − 1) and draws the gcd(n − 1, 2n) consequence; page 63 b) obtains every symmetry from half-circuits around a point of X and writes « u_D : π₁(𝒳, F_D) → Aut(F_D) est surjectif ouf ! », the word underlined twice. The further claim that π₁(𝒳̃) → 𝔻_{2n} is surjective even when crossing the D_i is forbidden (pages 85–86) rests on prose the transcription marks densely with \\uncertain{} and \\ill{}, including the n even / n odd distinction, and is not part of this claim.',
+    ours:
+      'The reading corrects two slips on the page (the rotation subgroup is ℤ/2nℤ, not ℤ/nℤ, on pages 57 and 85) and supplies the remark that pages 59–60 give surjectivity by themselves only for n even, a side reflection being needed for n odd; it did not redo the identification of the chain of 2n faces on page 55. The framing as a local system on a cellular model of the extension space of the rank-3 oriented matroid of Σ is the reading’s; nothing in the folder refers to oriented matroids. Page 63’s companion statement that the parity character χ_c is trivial (« Il semble que ») is contradicted by the cancelled table of page 81, and is left out.',
+    literature: [
+      'Web search, 2026-10-10, for monodromy / dihedral group / local system on extension spaces of rank-3 oriented matroids and pseudoline arrangements: returned work on extension spaces (Sturmfels–Ziegler 1993; G. Liu, arXiv 1606.05033; arXiv 2211.14083; arXiv 2303.04079) whose result snippets do not mention monodromy, a dihedral group or a local system of polygons; none was read.',
+      'B. Sturmfels and G. M. Ziegler, « Extension spaces of oriented matroids », Discrete Comput. Geom. 10 (1993), 23–45 — only the abstract as reported by the search (extension spaces of rank-3 oriented matroids are spherical); the ZIB preprint SC-91-11 was fetched but is a scan with no extractable text, and was not read.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read Sturmfels–Ziegler 1993 and Björner, Las Vergnas, Sturmfels, White, Ziegler, Oriented Matroids (2nd ed.), ch. 7 (single-element extensions, Las Vergnas’s localisation theorem), together with Goodman–Pollack on allowable sequences (« Semispaces of configurations, cell complexes of arrangements », JCTA 37, 1984), for any statement about the cyclic order of the elements along a moving extension and its monodromy. Independently, check the half-turn value n − 1 in the realisable case, where positions are points of the dual plane off the lines δ_iδ_j and Pol(D) is the doubled cyclic order of the lines from that point to the δ_j. Until a source is read the status stays unsearched.',
+  },
+  {
+    id: '154-generisation-cube',
+    cote: '154',
+    pages: '153',
+    kind: 'mathematical',
+    claim:
+      'For a position D of an added pseudoline passing through ν ≥ 2 vertices of Σ, the stable generisations of D are the 2^ν vertices of a ν-cube whose ν·2^(ν−1) edges are the generisations through exactly one vertex, incidence being specialisation — whereas a straight line through ν vertices of a line arrangement has only 2ν stable perturbations.',
+    basis:
+      'Page 153 states it in words (« Les générisations stables de D correspondent aux sommets d’un cube de dimension ν, dont les arêtes sont les générisations sous-stables ») and gives the two counts 2^ν and ν2^(ν−1). The exponent of the first 2 is overwritten in the transcription; the counts fix it.',
+    ours:
+      'The justification — the side on which D is unstuck at each vertex can be chosen independently, two vertices of D never lying on a common pseudoline of Σ — is the reading’s; the page gives none. The contrast with straight lines (2ν sectors around a point of the dual plane on ν dual lines) is this pass’s, and so is the observation that the cube is in tension with page 150, which gives a vertex ρ of the surface X* of positions the order 2·card S_ρ: the two counts of incident sub-stable positions, 2ν and ν·2^(ν−1), agree only for ν = 2, so for ν ≥ 3 the positions near D do not form a surface vertex if all of them are kept. Neither the reading nor the page draws that consequence.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check against Las Vergnas’s characterisation of single-element extensions by signatures on cocircuits (Björner et al., Oriented Matroids, §7.1): if the independence of the signs at the cocircuits on the new element is stated or immediate there, mark matched. Then decide, from Sturmfels–Ziegler 1993, how the extension poset is made into a cell complex near a non-generic extension, which settles whether page 150’s surface can contain the positions of specialty ≥ 3.',
+  },
+  {
+    id: '154-cyclic-order-determines-position',
+    cote: '154',
+    pages: '18',
+    kind: 'mathematical',
+    claim:
+      'The folder asserts, without proof, that a relative position of an added pseudoline, other than the D_i themselves, is determined by the antipody-compatible cyclic order in which its double cover meets the oriented pseudolines of Σ.',
+    basis:
+      'Page 18 defines the map from P ∖ Σ to the antipody-compatible polygonal structures on Ĩ and says « il ne devrait pas être difficile de montrer que cette application est l’injection »; nothing in the folder proves it.',
+    ours:
+      'The reading says it does not know whether the order determines the position. This pass reads it differently and records why, as its own unchecked step: the cyclic order of i, j, −i, −j on the double cover decides on which side of D the vertex D_i ∩ D_j lies (for an orientation of D), and a single-element extension is determined by its signature on the cocircuits, i.e. by those sides. The double cover Ĩ in place of the page’s I ∖ {i₀} on the same page is a correction of the reading, not used here.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check the pass’s sketch against Björner et al., Oriented Matroids, §7.1 (extensions determined by their localisations) and the topological representation theorem (§5.2), keeping track of the passage from the sphere to the projective plane. If it holds as sketched, mark matched: the statement is then a standard consequence, and the entry stays only to correct the reading’s footnote.',
+  },
+  {
+    id: '154-rectification-b-page-159',
+    cote: '154',
+    pages: '117, 159',
+    kind: 'codicological',
+    claim:
+      'The « rectification b) » invoked on page 117, which the reading says is on no page of the folder, may be alinea b) of page 159: both leaves are cancelled by a large green cross, both complete the exceptional facets of the déploiement (𝒳, K), and page 159’s b) gives an exceptional facet multiple vertices of L, which is what page 117’s f) says the rectification now allows.',
+    basis:
+      'Page 117 (batch 6) opens in the middle of a sentence, has alineas read d)? e) f), and f) says that « à cause de la rectification b) » exceptional lines of K can no longer be characterised as containing no vertex of L′, « c’est plutôt qu’elles peuvent en contenir plusieurs »; it stops on « d’- ». Page 159 (batch 8), dated 1.1.84 and headed « Complément … sur les facettes exceptionnelles de (𝒳, K) », has alineas a)–d), and its b) describes « branches principales » of L through a « sommet multiple » on an exceptional facet. Much of 159 b) is \\uncertain{} or \\ill{}, and page 117’s first letter reads c) or d), so page 117 does not simply follow 159’s d).',
+    ours:
+      'The link between the two leaves is this pass’s; neither the transcriptions nor the reading draws it, and the reading states the opposite. That page 117 is a fragment of a longer redaction — its opening sentence and its earlier alineas on another leaf — is the transcription’s.',
+    literature: [
+      'Transcription 154, batch 6 (batch-06.fr.tex), header and page 117',
+      'Transcription 154, batch 8 (batch-08.fr.tex), page 159',
+    ],
+    status: 'unsearched',
+    settle:
+      'A person compares pages 117 and 159 on the facsimile: ink (both green crosses), paper, and whether 159 b) can be read as a correction of an earlier characterisation of exceptional lines. If it can, the reading’s « ne figure sur aucune page du dossier » should be revised; if not, the missing leaf carrying page 117’s a)–c) is still to be looked for.',
+  },
+  // Folder 155 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over a reading made by Opus 5 (claude-opus-5), under the 2026-09-23 exception; a commit adding this must name both models.
+  // Dropped as matches: the Tannakian dictionary over k' (Deligne, Catégories tannakiennes, 1990, §1); rigidity ⇒ antipode for Hopf algebroids (the classical finite-dimensional Hopf-algebra statement and its groupoid form in Deligne 1990); the descent example U = k' ⊗_k k', A = End_k(k') (Galois descent / Morita); the « ? ? ? » question (Deligne 1990, §7). Searched: nothing beyond what the reading cites.
+  // Disagreement with the reading, recorded and not acted on: section IV and IX say the positive-characteristic case « reste ouverte » / « n'est pas connue ». Coulembier, Etingof and Ostrik have since given positive-characteristic criteria (moderate growth, Verlinde categories) — cited from memory, not checked; the reading's footnote may need a person to revise it. Not a finding of the folder.
+  {
+    id: '155-takeuchi-idealiser',
+    cote: '155',
+    pages: '1',
+    kind: 'mathematical',
+    claim:
+      'The ring in which the comultiplication of a Hopf algebroid over a non-central base k′ takes its values is presented as the idealiser quotient 𝒥̃/𝒥 of the right ideal 𝒥 = J·(A ⊗̂_k A), J = Ker(k′ ⊗_k k′ → k′) — a presentation of the Takeuchi product that the sources searched do not give.',
+    basis:
+      'Page 1, condition (ii): the map A → A ⊗̂_{k′} A is written, then said to take its values in 𝒥̃/𝒥 with 𝒥̃ = {λ | λ𝒥 ⊂ 𝒥}, and to be a ring homomorphism A → 𝒥̃/𝒥. The formulas are read; the connective words around them are not (« \\ill{} dont \\uncertain{comp.} par », « \\ill{} hom. d’anneaux »), and the article’s structure word is \\uncertain{} under a strike.',
+    ours:
+      'The identification with the Takeuchi product is the reading’s, « au dual près ». That 𝒥̃/𝒥 coincides with Takeuchi’s balanced subspace — λ𝒥 ⊂ 𝒥 unwinds to Σ aᵢr ⊗ bᵢ = Σ aᵢ ⊗ bᵢr in A ⊗_{k′} A, by the standard isomorphism I(L)/L ≅ End(S/L) for a one-sided ideal L — is this pass’s own check (Opus 5.5), not on the page. The page writes the object and never names it or says why the first formula fails; that explanation is the reading’s.',
+    literature: [
+      'nLab, « Takeuchi product » (read 2026-10-10): gives the balanced-subspace definition and the end-of-coend description, no idealiser or endomorphism-ring presentation. It cites Takeuchi 1977, Sweedler 1974, Brzeziński–Militaru 2002 and Schauenburg 1998, none of which were read.',
+    ],
+    status: 'candidate',
+    settle:
+      'Read M. Takeuchi, « Groups of algebras over A ⊗ Ā », J. Math. Soc. Japan 29 (1977), §§1–3, and M. E. Sweedler, « Groups of simple algebras », Publ. IHÉS 44 (1974), where ×_R was introduced: if either presents A ×_R A as an idealiser quotient or as End(A ⊗_R A) of a cyclic module, mark matched. Because I(L)/L ≅ End(S/L) is textbook ring theory, the presentation is likely folklore even if unprinted; the entry should be dropped to matched on any explicit statement of it.',
+  },
+// Candidate entries for folder 156-2 (find-novelty, Opus 5.5 on an Opus 5 reading — the 2026-09-23 exception; 2026-10-10). Not merged into src/content/findings.ts.
+// Dropped as matches already footnoted in the reading: conical neighbourhoods (Whitehead, Siebenmann), faille composition as topological cobordism (Thom), the arc characterisation by non-cut points (R. L. Moore), bicollared lieux (M. Brown), Godement II.3.3.1, the maille's node as a two-sided non-separating hypersurface. The dated « (6 Juin) » / « 7 Juin » headings are already covered by 156-1-written-alongside-156-2.
+  {
+    id: '156-2-rives-cut-along-closed-set',
+    cote: '156-2',
+    pages: '14–17',
+    kind: 'mathematical',
+    claim:
+      'For a closed subset A of an arbitrary space X, the folder defines the « rives » (sides) of A as the Boolean algebra Riv(A,X) = colim over neighbourhoods V of A of the clopen subsets of V ∖ A, the space Ã of local sides over A as the spectrum of the sheaf of Boolean rings j_*F_2 (j : X ∖ A → X), a canonical map Riv(A,X) → Comp(Ã) that is injective and, for X paracompact, bijective, and the space X̄ cut along A by a two-element partition {ρ, ρ′} of the sides — a general-topological, sheaf-theoretic construction of « cutting X along A » requiring no manifold or polyhedral structure.',
+    basis:
+      'Page 14 writes Rives(A,X) = lim→_V Comp(V ∖ A) = lim→_V Γ(V, i_*F_{2,U}), Riv(A,X) ≃ Comp(S_{A,X}) for A regularly immersed, the paracompact formula Γ(A, F|A) = lim→ F(V), and Ã = Spec(i_*F_{2,U}) with Comp(Ã) ≃ Γ(A, i_*F_{2,U}); page 15 gives (*) Riv(A,X) → Comp(Ã), « injective, et » added above « bijective si X paracompact », and defines bi-rives ρ + ρ′ = 1; pages 16–17 define X̄ = Dec_β(A,X) and the maille. The words « d\'où » (p. 15) and « A fermé » (p. 14) are \\uncertain{}, the page-14 paragraph ends on struck and \\ill{} words, and the page-15 NB describing the algebra of rives is largely \\ill{}.',
+    ours:
+      'The reading (Opus 5) supplies the interpretation of Spec(i_*F_{2,U}) as the relative Stone spectrum of (j_*F_2)|_A, which is what makes Comp(Ã) ≃ Γ(A, (j_*F_2)|_A) true; the page does not restrict to A nor say which spectrum. The reading also supplies the proof of injectivity, the correction « A non ouvert » for the page\'s « A ≠ ∅ », and the Möbius-band example; the space X̃ (X cut along A before contracting the halves) is used on page 16 without definition, and neither the page nor the reading defines its topology, so the construction of X̄ is incomplete as it stands. This pass (Opus 5.5) agrees with the reading\'s statements and adds one caution: the bijection Comp(Ã) ≃ Γ(A, (j_*F_2)|_A) depends on the topology put on the relative spectrum, which the reading names but does not specify. The comparison with Freudenthal-type ends of X ∖ A at A, and with local separation in Wilder\'s sense, is this pass\'s, not the page\'s.',
+    literature: [
+      'Web search, 2026-10-10: « ends of the complement of a closed subset, germs of clopen sets, sides, local separation, Stone space, cutting a space along a closed subset » — no source stating the construction; nothing opened beyond result titles',
+      'Web search, 2026-10-10: « cutting along closed subset, two-sided, locally separates, sheaf j_* Z/2 » — surfaced arXiv:2308.12365 (two-sided closed sets via components of S ∖ B, bicollared closed sets) and arXiv:2007.02158 (separation by quasicomponents); neither read beyond the search summary, neither seen to define the sheaf j_*F_2 or a cut space',
+    ],
+    status: 'unsearched',
+    settle:
+      'No monograph was opened, so this stays unsearched. Check H. Freudenthal 1931 and later relative-end constructions (ends of X ∖ A converging to A, e.g. B. Hughes and A. Ranicki, Ends of Complexes, 1996), R. L. Wilder, Topology of Manifolds (1949), on local separation and ulc properties, G. E. Bredon, Sheaf Theory, on j_* and stalks of complements, and P. T. Johnstone, Stone Spaces (1982), V, on Stone spaces of sheaves of Boolean algebras: if any defines the sides of a closed subset as germs of clopens of its deleted neighbourhoods together with a space of local sides over it and a cut space, mark matched with the reference; if only the pointwise or compact-A version exists, say so and keep the sheaf-over-A form as the candidate.',
+  },
+  // Folder 158 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over a reading made by Opus 5 (claude-opus-5), under the 2026-09-23 exception; a commit adding this must name both models.
+  // Dropped as matches (named from memory, not consulted): the π₁ presentation of a pseudo-cofiltrant category with least object via fractions of End(e) (pp. 17–20; calculus of fractions, Gabriel–Zisman 1967, ch. I); Ep(E) and Mon(E), E infinite, have trivial group completion (pp. 55–56; an Eilenberg-swindle argument); cofiltered ⇒ every connected presheaf ∞-connected (p. 52, the easy direction). Conditional or abandoned, not entered: the Lemme (?) of p. 10, Prop. 2 (??) of p. 46, the repudiated corollary of p. 49, and the T ≠ ∅ / S² argument of pp. 61–83, which the folder leaves open.
+  // Disagreements with the reading, recorded and not acted on: (1) the résumé says the answer is « oui dans le cas fini, non en général » and calls pp. 21–41 a counterexample to « (H) ⇒ cofiltrant »; on the pages the Ep(E)/Mon(E) construction refutes only « B_M 1-connexe (+ pseudo-cofiltrant) ⇒ cofiltrant » — it exhibits an F violating (H) — and p. 39 proves (H) ⇒ cofiltrant for monoids with a minimal element. (2) p. 52's corollary reads « X^0 tot. W-asphérique … i.e. X^0 est filtrante »; the second X^0 can only be the opposite category X°, so the first is X° too (cf. p. 70), not the open X_0 of least objects as §5.3 of the reading has it. (3) The reading repeats p. 39's « ou même seulement si leur H¹(−,Q) est nul » without flag; this pass finds it false (see the first entry).
+  {
+    id: '158-minimal-monoid-cofiltered',
+    cote: '158',
+    pages: '21–41',
+    kind: 'mathematical',
+    claim:
+      'A monoid M having an element ψ with ψ ∈ uM for every u is cofiltered as soon as every connected right M-set has a simply connected category of elements; when M is not cofiltered the folder produces such an M-set explicitly — M/R_φ, whose category of elements has π₁ mapping onto Z, or the point, when the image of M in the maps of its minimal elements is a non-trivial group.',
+    basis:
+      'Proposition 2 (pp. 31–33) with hypotheses (A)–(D) and the degree δ: M₀ → Z of pp. 22–30; the quotient M̄ ⊂ Ep(M₀) and the two-case alternative of pp. 35–37; the Corollaire of p. 39, and case b) completed on p. 41. P. 37 carries several \\ill{} around « u λ = λ » and « Y_{/F} est 0-connexe (tous ses objets sont \\uncertain{équivalents}) »; p. 39’s Théorème breaks off and p. 41, numbered « 7 », does not continue its pagination.',
+    ours:
+      'The existential quantifier of p. 22, the additive reading of δ (p. 23) and the corrected relation of p. 28 are the reading’s repairs. The p. 39 Corollaire adds « ou simplement, que leur H¹(X,Q) = 0 »: this pass (Opus 5.5, own step) finds that variant false — for M = Z/2, every ψ is minimal, the connected M-sets are Z/2 and the point, with categories of elements contractible and BZ/2, both with H¹(−,Q) = 0, and M is not cofiltered. The loss is in case b) (p. 41), where Γ may be finite; the claim above keeps only the simply-connected form, which survives that example.',
+    literature: [
+      'Web search (2026-10-10) for a characterisation of filtered/cofiltered monoids by the categories of elements X//M of their connected M-sets: hits on Rogers, « Toposes of monoid actions » (arXiv 2112.10198) and « Monoid properties as invariants of toposes of monoid actions » (arXiv 2004.10513), not read. No source was read; the status stays unsearched.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read Rogers’ two papers (arXiv 2004.10513, 2112.10198) for a statement linking cofilteredness of M (flatness of the terminal M-set) to the homotopy of X//M for connected X, and McDuff, « On the classifying spaces of discrete monoids », Topology 18 (1979); check also that p. 41’s case b), applied with the minimal-element hypothesis alone, gives Γ = 1 ⇒ uφ = φ for all u — the step under the \\ill{} of p. 41.',
+  },
+  {
+    id: '158-finite-category-cofiltered',
+    cote: '158',
+    pages: '50–53',
+    kind: 'mathematical',
+    claim:
+      'A finite category X such that every connected presheaf on X has a simply connected category of elements is cofiltered — so for finite categories the homotopical condition, which p. 70 relates to total asphericity of X°, is equivalent to cofilteredness.',
+    basis:
+      'Proposition 1 (pp. 50–51): for X pseudo-cofiltrant with least object e and the minimal condition on sub-M-sets of Hom(e,x), the H_x = ⋂ fM form a local system, constant when X is 1-connected, giving fu = gu for u ∈ H_e. Proposition 2 and Corollaire (p. 52), and p. 53’s three lines. The step « (H) ⇒ X pseudo-cofiltrante » is asserted on p. 53 with an \\ill{} and no argument; « localisateur fondamental » and « W(δ) » on p. 52 are \\uncertain{}; 3°–4° on p. 51 carry \\uncertain{} on « aussi », « forment », « constante ».',
+    ours:
+      'The page’s Prop. 2 assumes X_0 (least objects) 1-connected while p. 51 4° uses X 1-connected; passing through X_0, where e is least and greatest, and back to X is not written and is the reading’s gloss. That (H) implies pseudo-cofilteredness is not proved on the page. The identification of p. 52’s X^0 with X° rather than with X_0 is this pass’s (Opus 5.5), against the reading. A sanity check by this pass: for M = {1,e,f} with e, f left zeros of {e,f} (not pseudo-cofiltrant), the M-set {x,y,i,j} with x·e = i, x·f = j, y·e = j, y·f = i has a category of elements equivalent (Quillen A) to a 4-cycle, π₁ = Z, so (H) fails there, as the claim requires.',
+    literature: [
+      'Web search (2026-10-10) for « cofiltered iff every connected presheaf aspheric / totalement asphérique / Maltsiniotis »: hits on Maltsiniotis, « Structures d’asphéricité, foncteurs lisses et fibrations » (arXiv 0912.2432), not read. No source was read; the status stays unsearched.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Look in Maltsiniotis, La théorie de l’homotopie de Grothendieck (Astérisque 301, 2005), and Cisinski, Les préfaisceaux comme modèles des types d’homotopie (Astérisque 308, 2006), at the sections on totally aspheric categories for any statement that a finite totally (1-)aspheric category is filtered, or a finite counterexample. Independently, a person supplies the missing step (H) ⇒ pseudo-cofiltrant for finite X: the p. 61 lemma (products B × C = ∅ and β × γ = ∅ ⇒ not 1-connected) is the likely route, but its last eight lines are the least certain of the transcription.',
+  },
+  {
+    id: '158-finite-monoid-right-zero',
+    cote: '158',
+    pages: '44–46',
+    kind: 'mathematical',
+    claim:
+      'A finite monoid in which any u, v admit u′, v′ with uu′ = vv′ and whose group completion is trivial has an element p with up = p for all u, hence is cofiltered (p need not be unique).',
+    basis:
+      'Proposition 1 of p. 44 with its proof on pp. 44–46: a common p = u v(u) for all u, the faithful action on a finite E, E₀ = Im p stable under every u, and M → Aut(E₀) trivial by hypothesis a). « automorphisme » is \\uncertain{} twice on p. 45; « fini » before E is struck on p. 45, and finiteness of E comes from the regular representation of the finite M.',
+    ours:
+      'The non-uniqueness example {1, a, b} and the Lean formalisation (lean/Grothendieck/Folder158.lean) are the edition’s, from the reading’s correction of 2026-09-26; the page’s own uniqueness paragraph is struck.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Likely a short consequence of the Rees–Suschkewitsch structure of the kernel of a finite semigroup with the right-reversibility (Ore) condition: look in Clifford–Preston, The Algebraic Theory of Semigroups I (1961), §§1.10 and 3.1–3.3, and in Rhodes–Steinberg, The q-theory of Finite Semigroups (2009), for a finite right-reversible monoid with trivial maximal group image having a right zero; mark matched on any explicit statement.',
+  },
+// Folder 159 — find-novelty pass, Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5 (claude-opus-5, 2026-09-19).
+// Searches were web searches; every source below was seen through a search summary, not read in full.
+  {
+    id: '159-no-reduction-monodromy-dense',
+    cote: '159',
+    pages: '20–22',
+    kind: 'mathematical',
+    claim:
+      'On a smooth projective curve of genus ≥ 2 in characteristic 0, no projective connection lets the PGL₂ structure group reduce to a Borel subgroup or to the normaliser of a maximal torus; over ℂ the monodromy therefore has Zariski-dense image.',
+    basis:
+      'Page 21 computes deg L = g − 1 from det E ≃ det F ⊗ L^⊗2 and kills the composite ω → E → L as a section of a negative-degree bundle; it then treats the torus normaliser by passing to the double cover, and page 22 draws the Zariski-density conclusion in three lines.',
+    ours:
+      'The reading supplies the third case the page omits — the finite subgroups A₄, S₄, A₅, by an étale cover and Riemann–Hurwitz — and links the result to the non-degeneracy criterion of page 14, which the folder never does. On the page, « lorsque », « normalisateur » and « passage au revêtement double » are uncertain readings, the adjective in « Le [...] argument montre » and the symbol before « fibrés » are illegible, and the group name PGL(1)_S is uncertain.',
+    literature: [
+      'R. C. Gunning, « Special coordinate coverings of Riemann surfaces », Math. Ann. 170 (1967), 67–86 — located as a reference only, contents not seen',
+      'D. Gallo, M. Kapovich, A. Marden, « The monodromy groups of Schwarzian equations on closed Riemann surfaces » (arXiv math/9511213) — non-elementary monodromy of projective structures',
+      'T. Serandour, slides (COFECUB, Rennes), attributing irreducibility of the monodromy for g ≥ 2 to Hejhal, Earle and Hubbard — secondary',
+    ],
+    status: 'matched',
+    settle:
+      'Nothing to settle as a novelty: irreducibility and non-elementary monodromy for projective structures in genus ≥ 2 are in the cited literature, and the reading itself calls the result standard. A person may still check Gunning 1967 for the degree argument in the algebraic form the page gives it.',
+  },
+  {
+    id: '159-formal-rigidity-quadratic-torsor',
+    cote: '159',
+    pages: '24–33',
+    kind: 'mathematical',
+    claim:
+      'A complete augmented algebra with invertible J/J² and a connection whose symbol Ω → Ω¹_{X/S} is an isomorphism is, in characteristic 0, isomorphic to the formal completion of a P¹-bundle along a section with its canonical connection, uniquely once the isomorphism is fixed to order 3; the order-3 ambiguity is a torsor under Γ(X, Ω^⊗2), so projective connections on a curve form an affine space under quadratic differentials.',
+    basis:
+      'Pages 25–26 state the theorem with items a) (order 2 determines the extension) and b) (order 3 determines the rest), pages 27, 28 and 30 compute that a change of parameter contributes (n+1)α_n ω₀ⁿ ϖ₀, page 29 proves G₀ × G(c) → G bijective, page 31 abstracts it to a lemma on a group acting on a set, and pages 32–33 define regularity and close on G(c) ≃ G/G₀ ≃ Γ(X, Ω^⊗2).',
+    ours:
+      'The reading supplies the computation G/G₀ ≃ Hom(Ω, Ω^⊗3) ≃ Γ(Ω^⊗2) by the q_i, which the page asserts without proof, and rewrites the page-31 proof with distinct letters. Item b) of page 25 breaks off and ends on page 26; item c) of page 26 is almost entirely illegible; « régulière » on page 33 is an uncertain reading settled by the gloss below it. This pass (Opus 5.5) adds one observation the reading does not make: the existence part can only hold locally on S (page 32 says « Loc. (sur X, affine) »), since for a family of curves of genus ≥ 2 the projective connections form an f_*(ω^⊗2)-torsor over S that need not have a global section; the reading states existence without that qualification.',
+    literature: [
+      'D. Dumas, « Complex projective structures » (arXiv 0902.1951) — projective structures on a fixed surface as an affine space over holomorphic quadratic differentials',
+      'Projective structures and projective bundles over compact Riemann surfaces (arXiv 0706.3608) — Gunning’s parametrisation by the 3g−3-dimensional space of quadratic differentials',
+      'E. Frenkel, D. Ben-Zvi, Vertex Algebras and Algebraic Curves — named as the place for the formal-coordinate (Aut 𝒪-torsor) formulation; not found by the search and not consulted',
+    ],
+    status: 'matched',
+    settle:
+      'The conclusion is matched. What remains unsearched is the route — rigidity of a complete augmented algebra with a regular connection over an arbitrary X/S, with the abstract lemma of page 31 — against Frenkel–Ben-Zvi (projective connections and Aut 𝒪), Deligne, LNM 163, and Mochizuki’s indigenous bundles; if the route gives nothing beyond the classical statement, leave this entry matched.',
+  },
+  {
+    id: '159-monodromy-injectivity-question',
+    cote: '159',
+    pages: '17',
+    kind: 'mathematical',
+    claim:
+      'The folder defines the space M_ann(X) of projective structures on a fixed compact Riemann surface, maps it to the PGL₂ character variety of π₁(X), and asks whether that monodromy map is injective, without answering.',
+    basis:
+      'Page 17 writes the morphism M_ann(X) → M_g^𝔷(X) and the question « est-il injectif ? »; the same page introduces the description of the Teichmüller locus by « on suppose ».',
+    ours:
+      'The reading names the map as the monodromy map of projective structures. The sentence describing M_ann(X) is mutilated on the page; only the module H⁰(X, ω^⊗2) is certain. The symbol written here as 𝔷 is an editorial placeholder for an unidentified glyph.',
+    literature: [
+      'D. Dumas, « Complex projective structures » (arXiv 0902.1951) — on a fixed Riemann surface the holonomy map is a proper holomorphic embedding; injectivity attributed to Poincaré, image analytic to Gallo–Kapovich–Marden',
+      'K. Matsuzaki (Ann. Acad. Sci. Fenn. 32, 2007) — injectivity on each Bers fibre attributed to Kra, properness to Kapovich and Tanigawa',
+    ],
+    status: 'matched',
+    settle:
+      'Nothing to settle as a novelty: the question has a positive answer in the cited literature. A person may check whether the mutilated sentence on page 17 states anything beyond the question.',
+  },
+  {
+    id: '159-filed-under-derivateurs',
+    cote: '159',
+    pages: '1–33',
+    kind: 'codicological',
+    claim:
+      'Folder 159 is filed in the group 157-1 to 160 that the inventory titles « Dérivateurs » and dates 1990-[1991], yet none of its thirty-three pages concerns derivators, derived categories or homotopical algebra: the content is projective connections on curves in EGA/SGA vocabulary.',
+    basis:
+      'Both transcriptions note it independently on their own batches, and the reading checks it across the whole folder. Pages 30, 32 and 33 are reported on printed music-staff paper and other leaves on fan-fold computer listing.',
+    ours:
+      'The observation is about content only and dates nothing; the reading says so and keeps Montpellier’s dating. The paper observations were made on a digital facsimile and are fragile.',
+    literature: [
+      'Transcription 159, batch 1 (batch-01.fr.tex) and batch 2 (batch-02.fr.tex), headers',
+      'Modernised reading 159 (159.modern.tex), section « Ce que le contenu montre, et ce qu’il ne date pas »',
+    ],
+    status: 'unsearched',
+    settle:
+      'A person checks the Montpellier inventory for how folder 159 came into the « Dérivateurs » group (a chemise, a box, the archivists’ grouping), and checks the music-staff and listing paper on the original leaves against other folders on the same paper.',
+  },
+  {
+    id: '160-ga-subgroups-additive-kernels',
+    cote: '160',
+    pages: '2–6',
+    kind: 'mathematical',
+    claim:
+      'Over any base S of characteristic p, every finite locally free subgroup of rank pⁿ of 𝔾_{a,S} is the kernel of a unique monic additive polynomial xᵖⁿ + aₙ₋₁xᵖⁿ⁻¹ + … + a₀x, so that the scheme Xₙ of such subgroups is 𝔸ⁿ, and the subgroup is étale exactly when a₀ is invertible.',
+    basis:
+      'Page 6 states the theorem; pages 2–4 prove surjectivity on algebraically closed fields, monomorphy by deformation over square-zero extensions and properness by the valuative criterion, whence 𝔸ⁿ ≅ Xₙ,réd only. Page 5 asks whether Xₙ is reduced and answers only for n = 1 at the origin, through a tangent-space computation whose six lines are mostly \\ill{} in the transcription.',
+    ours:
+      'The folder establishes the isomorphism only onto Xₙ,réd. The full statement is completed in the reading’s footnote (characteristic polynomial of x, then additivity), not on the page; the final dimension count of the tangent space at n = 1 is also the reading’s. This pass checked the footnote’s step in the row: P(x+y) − P(x) − P(y) has degree < pⁿ in each variable, so membership in (P(x), P(y)) forces it to vanish.',
+    literature: [
+      'M. Brion, « Homogeneous varieties under split solvable algebraic groups », arXiv 2101.12452v2 (2021), Lemmas 4.1–4.2 — read 2026-10-10: for X locally noetherian, a finite flat subgroup H ⊂ 𝔾_{a,X} is Ker(P, id) for a unique monic additive P ∈ O(X)[t], by exactly the characteristic-polynomial-then-additivity argument; the proof is said to adapt Demazure–Gabriel IV §2 1.1.',
+      'M. Brion, « Some structure theorems for algebraic groups », arXiv 1509.03059v3, Example 2.1.7 — read 2026-10-10: the field case, every subgroup scheme of 𝔾_a is the kernel of an additive polynomial.',
+      'M. Demazure, P. Gabriel, Groupes algébriques I (1970), IV §2 1.1 and II §3 4.4 — cited through Brion, not read.',
+    ],
+    status: 'matched',
+    settle:
+      'Settled as a match: Brion 2021, Lemma 4.2 (locally noetherian base, which the uniqueness lets one remove by the same local argument). Kept so that the next reader does not search again; the étale criterion f′ = a₀ is immediate. Reading Demazure–Gabriel IV §2 would give the earlier printed source.',
+  },
+  {
+    id: '160-dickson-geometric-route',
+    cote: '160',
+    pages: '7–12',
+    kind: 'mathematical',
+    claim:
+      'The folder proves Dickson’s theorem 𝔽ₚ[X₁,…,Xₙ]^{GL(n,𝔽ₚ)} = 𝔽ₚ[A₀,…,Aₙ₋₁] (and the SL variant with Δₙ in place of A₀) geometrically: 𝔸ⁿ/GL(n,𝔽ₚ) → 𝔸ⁿ is birational, quasi-finite and surjective onto a normal target, hence an isomorphism by Zariski’s Main Theorem — a route whose ingredients are those of the Galois-theoretic proof.',
+    basis:
+      'Page 7 factors the Moore determinant (« reste à déterminer c »), page 8 gives the Aᵢ by Cramer, page 9 sets Δᵢ = AᵢΔₙ and A₀ = ±Δₙ^{p−1}, pages 9–11 argue birationality, finite fibres and surjectivity (via étale subgroups and a restriction lemma for Xₙ = 0), and pages 11–12 deduce the SL case.',
+    ours:
+      'The reading supplies the constant c = 1, the exact sign (−1)ⁿ, the reason Δₙ divides Δᵢ, and the Frobenius twist in the restriction lemma Aᵢ(X₁,…,Xₙ₋₁,0) = Aᵢ₋₁(X₁,…,Xₙ₋₁)ᵖ, which the page writes without the p-th power.',
+    literature: [
+      'L. E. Dickson, « A fundamental system of invariants of the general modular linear group with a solution of the form problem », Trans. AMS 12 (1911) — the theorem, including the SL case; cited, not read.',
+      'S. V. Sam, « Dickson invariants », notes (2011), following C. Wilkerson, « A primer on the Dickson invariants » (1983) — read 2026-10-10: Moore-determinant definition of the invariants, integrality over 𝔽_q[c_{n,i}], Galois group of the splitting field equal to GL(V), and normality of the polynomial ring. These are the algebraic counterparts of the folder’s finiteness, birationality and normality.',
+      'R. Steinberg, « On Dickson’s theorem on invariants », J. Fac. Sci. Univ. Tokyo 34 (1987) — known from a web search result only, not read.',
+    ],
+    status: 'matched',
+    settle:
+      'Settled as a match for the theorem and, in substance, for the route: the folder replaces integrality by quasi-finiteness plus surjectivity and the Galois equality by birationality, which yields nothing the Wilkerson proof does not. The one feature not seen in the sources read is that surjectivity is obtained from the classification of subgroups of 𝔾_a (160-ga-subgroups-additive-kernels); a reader who thinks that worth recording can check Steinberg 1987 and Wilkerson 1983 for it.',
+  },
+  {
+    id: '160-special-linear-structures-sign',
+    cote: '160',
+    pages: '9, 13',
+    kind: 'mathematical',
+    claim:
+      'Page 13 asserts that for an étale M = Ker f_a ⊂ 𝔾_{a,S} of rank pⁿ the trivialisations of Λⁿ_{𝔽ₚ}M correspond bijectively to the (p−1)-th roots of a₀; as stated this fails for p and n odd, and what holds is the correspondence with the (p−1)-th roots of (−1)ⁿa₀.',
+    basis:
+      'Page 13, Corollaire, written right after page 9’s A₀ = ±Δₙ^{p−1} with the sign left floating; « aura » and « l’image inverse » are \\uncertain{} in the transcription, but the statement does not turn on them.',
+    ours:
+      'The refutation is this pass’s own step, and it disagrees with the reading (made on Opus 5), which keeps « racines (p−1)-ièmes de a₀ » and glosses a root of a₀ as « au signe près, une valeur de Δₙ ». Counterexample: S = Spec 𝔽₃, n = 1, M = 𝔽₃ = Ker(x³ − x), so a₀ = −1; Λ¹M = M has two trivialisations over 𝔽₃, while −1 has no square root in 𝔽₃. In general, with A₀ = (−1)ⁿΔₙ^{p−1}, a (p−1)-th root y of a₀ satisfies (y/Δₙ)^{p−1} = (−1)ⁿ, and −1 is not a (p−1)-th power in 𝔽ₚ for p odd; the two μ_{p−1}-torsors differ by the torsor of (p−1)-th roots of −1.',
+    literature: [
+      'Over a field the identity “constant coefficient = (−1)ⁿ Δₙ^{q−1}” for the subspace polynomial is standard (Moore determinant literature; a web search of 2026-10-10 returned it in an EMS Press article and in Wikipedia, « Moore matrix »). The relative torsor form of page 13 was not searched.',
+    ],
+    status: 'refuted',
+    settle:
+      'What still stands is the corrected statement: (Λⁿ_{𝔽ₚ}M)^× is the μ_{p−1}-torsor of (p−1)-th roots of (−1)ⁿa₀. A person confirms the counterexample and the reading’s Corollary on page 13 is amended accordingly (/modernize-grothendieck). Whether the corrected relative form is in print is the open question of 160-relative-moore-determinant.',
+  },
+  {
+    id: '160-relative-moore-determinant',
+    cote: '160',
+    pages: '13–16',
+    kind: 'mathematical',
+    claim:
+      'For a locally free E of rank n with u : E⁽ᵖ⁾ ⥲ E (an étale 𝔽ₚ-local system), the folder defines a Moore determinant Δₙᴱ : V(E) → V(ΛⁿE), homogeneous of degree (pⁿ−1)/(p−1), and Dickson-type coefficients Aᵢᴱ that extend from the complement of its zero divisor to all of V(E), with A₀ᴱ = ±(Δₙᴱ)^{p−1} made meaningful by the trivialisation (ΛⁿĚ)^{⊗(p−1)} ≅ 𝒪_S coming from Λⁿǔ.',
+    basis:
+      'Pages 13–15 set up the dictionary M ↔ (E, u), define ξ⁽ᵖ⁾ and the wedge ξ ∧ ξ⁽ᵖ⁾ ∧ … ∧ ξ⁽ᵖⁿ⁻¹⁾, state that the Aᵢᴱ are sections of Sym(E) (« on trouve que », no proof), and give the trivialisation in a bracket; page 15–16 write ǔ in the basis ξ⁽ᵖⁱ⁾ as a companion matrix. Several words (« ouvert », « déterminés », « tout entier ») are \\uncertain{} and the last column of the companion matrix is partly under erasures.',
+    ours:
+      'The reading fixes the variance (sections of Ě, structure ǔ), where the page writes u(ξ⁽ᶠ⁾). The extension of the Aᵢᴱ to V(E) is asserted on the page without proof; it follows by reducing étale-locally to the trivial local system, where the Aᵢᴱ are the absolute Dickson invariants — that reduction is this pass’s remark, not the page’s. The sign in A₀ᴱ is left as ± by both page and reading.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for Dickson invariants or the Moore determinant attached to an 𝔽_q-local system / unit-root F-crystal over a base, with the trivialisation of (det)^{⊗(q−1)}: first « Modular characteristic classes for representations over finite fields » (arXiv 1607.01052), which a web search of 2026-10-10 returned but which was not read; then Katz, « p-adic properties of modular schemes and modular forms » (1973) §4 for unit-root F-crystals, and the Drinfeld-module literature (Goss, Basic Structures, ch. 1). If any of them builds Δₙᴱ and the Aᵢᴱ for a sheaf with Frobenius, mark matched.',
+  },
+  {
+    id: '160-content-not-derivators',
+    cote: '160',
+    pages: '1–22',
+    kind: 'codicological',
+    claim:
+      'The folder is filed in the group the inventory titles « Dérivateurs » and dates 1990-[1991], but none of its twenty-one written pages concerns derivators, derived categories or homotopical algebra: pages 2–22 are on finite subgroup schemes of 𝔾_a in characteristic p and page 1 on algebraisation along a closed subset.',
+    basis:
+      'Both batch transcriptions (batch-01.fr.tex, batch-02.fr.tex) and the reading’s section « Ce que le contenu montre, et ce qu’il ne date pas »; no leaf carries a date, a heading or a reused verso.',
+    ours:
+      'The observation on content is checkable from the transcription. Nothing here dates the leaves: a remark by one transcriber on the hand (fountain pen, EGA-era abbreviations) was made on a digital facsimile and is not relied on, and the archivists’ dating stands.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'A person examines the physical folder at Montpellier — paper, ink, any watermark, and how the leaves sit within the « Dérivateurs » group 157-1 to 160 — to say whether the folder belongs with that group or was filed there by position only. Until then this records a mismatch of subject, not a date.',
+  },
 ];
