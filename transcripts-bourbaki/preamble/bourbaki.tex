@@ -1,0 +1,34 @@
+% Preamble for transcriptions of documents of the Bourbaki archive
+% (Archives Henri Poincaré, archives-bourbaki.ahp-numerique.fr), issue #50.
+%
+% The fonds' preamble, whole: the same apparatus macros, tikz-cd set-up and
+% watermark, so that one renderer can read both one day. Only the head changes:
+% it names the rédaction and the archive whose facsimile it was read from.
+%
+% A transcription sits one directory below transcripts-bourbaki/, as
+% transcripts-bourbaki/<number>/batch-NN.fr.tex, and opens with
+%   \input{../preamble/bourbaki}
+
+\input{../../transcripts/preamble/grothendieck}
+
+\newcommand{\redaction}[1]{\folder{#1}}
+
+\renewcommand{\grothTitleBlock}{%
+  \begin{center}
+    {\large\bfseries Archives Bourbaki --- rédaction n\textsuperscript{o}\,\grothFolder}\\[2pt]
+    \ifx\grothFoldertitle\empty\else{\itshape\grothFoldertitle}\\[4pt]\fi
+    {\small pages \grothFirst--\grothLast
+      \ifx\grothBatch\empty\else\ (lot \grothBatch)\fi}\\[2pt]
+    \ifx\grothDating\empty\else
+      {\small\color{gray!60!black}Datation de l'archive : \grothDating}\\[2pt]
+    \fi
+    \ifx\grothWatermark\empty\else
+      {\small\bfseries\color{red!45!gray}\grothWatermark}\\[2pt]
+    \fi
+    {\footnotesize\color{gray!60!black}Transcrit du fac-similé publié par les Archives Henri Poincaré
+     (archives-bourbaki.ahp-numerique.fr).\\
+     Lectures douteuses soulignées, passages illisibles marqués [\,\ldots\,], ajouts entre crochets.}
+  \end{center}
+  \vspace{1em}}
+
+\endinput
