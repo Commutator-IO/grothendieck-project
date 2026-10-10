@@ -1,0 +1,1063 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 86 (pages 1-32,
+% the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pp. 1-20) or batch-02.fr.tex (pp. 21-32).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its two batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5). The literature named in
+% the footnotes is cited from memory and was not checked against the sources.
+% Every count and every identity on the icosahedron asserted below (rho^3 = id,
+% the five trièdres, the fixed trièdres of a face, the edge census of (C), the
+% dictionary of pp. 28-30, the permutations of pp. 31-32) was checked by
+% machine on the regular icosahedron with golden-ratio coordinates.
+%
+% Scope. Pages 1, 9 and 17 are covers whose words head the three parts here
+% (« Polyèdres réguliers I », « II » with « géométrie d'incidence et ens. à
+% opérateurs », « Cours / Polyèdres réguliers III »); no \pagerange claims
+% them. Pages 31-32 are in another ink.
+%
+% Spine.
+%   pp. 2-4    I: combinatorial polyhedra as ordered sets S u A u F, axioms
+%              1)-4); 4) is the lattice condition; Phi -> P(S) an order
+%              embedding; every face has >= 3 sides.
+%   p. 5       plan of a course on the icosahedron.
+%   pp. 6-8    three descriptions of the icosahedron adapted to an axis through
+%              two opposite vertices, faces, edges; stabilisers of order 20,
+%              12, 8.
+%   pp. 10-16  II: flags, Rep, the involutions sigma_0, sigma_1, sigma_2; the
+%              functor to sets under the cartographic group is fully faithful;
+%              connectedness, regularity, stabilisers D_p, D_q, (Z/2)^2.
+%   pp. 18-25  III: the antipodism iota, the 15 edge directions, rho of order
+%              3, the five « trièdres distingués » T; P(s) = T; G -> Alt_T onto
+%              with kernel <iota>; G = Z/2 x G+, G+ = A_5.
+%   pp. 26-30  reconstruction of the « icosaèdre gauche » Pi/iota (today's
+%              hemi-icosahedron) from the oriented five-element set (T, varpi):
+%              sets, incidences, flags = numberings compatible with varpi.
+%   pp. 31-32  other ink: table of the flag-type sets of the icosaèdre gauche
+%              over an oriented five-element set E; sigma_i as permutations.
+%
+% Notation fixed for the document. Phi = S u A u F ordered; Rep(Pi) = E the set
+% of flags (his « repères »); hat-Gamma the group <sigma_0, sigma_1, sigma_2 |
+% sigma_i^2, (sigma_0 sigma_2)^2>, which the pages write with a gothic S_2
+% (not the symmetric group) and the reading of folder 88 writes hat-Gamma;
+% G = Aut(Pi); bar-sigma_i the automorphisms of p. 14. D_n is dihedral of
+% order 2n. The antipodism, an underlined a on the pages, is iota here, to keep
+% a for edges; the trièdres and the map tr keep his names. On pp. 7-8 his T,
+% T_1, T'_1, T' (the layers of (B)) are Delta, Delta_1, Delta'_1, Delta', and
+% his sigma, sigma' (the two opposite edges of (C)) are e, e', to keep T and
+% sigma free. « Orientation » of a finite set X (card >= 2) is an
+% Alt_X-orbit of numberings; for a polygon it is NOT the choice of a cyclic
+% direction of folder 89 — stated in the spine section.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%  - p. 2: axiom 4) and its unpacking a)-b), the NB and the box (b) are
+%    replaced by the clean equivalent (i) A -> P_2(S) injective and (ii) two
+%    distinct faces meet in nothing, a vertex, or an edge with its two
+%    vertices; proved here. « sup majorés <=> inf minorés » is true for finite
+%    ordered sets; said so.
+%  - pp. 2-4: Cor. 1 (p. 2) is proved from Cor. Main 2 (p. 4); the order of
+%    proof is reversed.
+%  - p. 6: « delta(t, s') = 1 » is 2 when s -> s' is the antipodism (the only
+%    reading under which the parenthesis = delta(t', s) holds); no bijection
+%    makes 1 true.
+%  - p. 8: the count 4 for the edges {Pi_{s,u}, Pi_{s,v}} is 2 (the primed
+%    pairs are the same edges); with it the census sums to 30.
+%  - p. 14: g -> bar-g is an ANTI-homomorphism (the page: « hom. », rest
+%    illegible).
+%  - p. 15: 3 <= p, q needs axiom 4) (Cor. 3), which a mere incidence geometry
+%    does not have.
+%  - p. 23: the first triple of directions read {u,v}, {v,w_1}, {w,u_1} is
+%    {u,v_1}, {v,w_1}, {w,u_1}: {u,v} is an edge of f.
+%  - p. 27: which packet of A(T) is called A+(T, varpi) is a convention the
+%    page fixes by notation only.
+%  - p. 28: b) completed (palimpsest on the page): a and f incident iff
+%    t not in Omega and Omega is a side of gamma not in alpha. Ours.
+%  - p. 31: A^up is the set of POINTED triangles (30), not Tr_3(E) (10); the
+%    page's own comment says « pointés ». The sigma_1 of p. 31 is not the one
+%    the dictionary of p. 30 gives ((a5,a4,a3,a2,a1)); both triples satisfy
+%    the relations and give isomorphic flag actions.
+%  - p. 32: « sigma = sigma_0 sigma_1 » has the value of sigma_0 sigma_2.
+%
+% Announced and never established in the folder: the proofs of Cor. Main 2
+% for faces (p. 4, « … ») and of Corollaire 4 (p. 4, mostly illegible); the
+% list of the regular polyhedra realisable as convex polyhedra (p. 5, breaks
+% off); the « interprétation concrète en termes de coloriage » (p. 19, breaks
+% off); the description of S~, A~, F~ in terms of (T, varpi) and of Pi-bar as
+% a quotient polyhedron (p. 30, « Il reste »), of which the table of p. 31
+% gives the sets but no incidences and no proof.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{86}
+\pages{1}{32}
+\dating{[à partir de 1977]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Polyèdres réguliers] : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+L'icosaèdre est le solide de Platon à vingt faces triangulaires, douze sommets
+et trente arêtes. Ces trente-deux pages se demandent ce qu'il en reste quand on
+oublie tout de la géométrie --- les longueurs, les angles, l'espace où il est
+posé --- et qu'on ne garde que la liste de ses sommets, de ses arêtes, de ses
+faces, et de qui touche qui. La réponse est : à peu près tout, et même un peu
+plus, car on y voit alors une structure que la géométrie cache.
+
+Le premier problème est de dire ce qu'est un polyèdre sans coordonnées. On ne
+peut pas parler de « solide convexe » ; on dispose seulement d'une relation
+d'incidence. Grothendieck écrit les axiomes qui font d'une telle relation un
+polyèdre : chaque arête a deux bouts et borde deux faces, autour d'une face on
+fait un tour complet, et deux faces ne se touchent que le long d'une arête ou
+en un sommet. Puis il change de point de vue. Au lieu de compter les sommets,
+arêtes et faces, il compte les \emph{drapeaux} : un sommet, une arête qui en
+part, une face que borde cette arête. Sur les drapeaux agissent trois gestes
+élémentaires --- changer le sommet, changer l'arête, changer la face, en
+gardant les deux autres --- et ces trois gestes suffisent à reconstituer le
+polyèdre entier. C'est comme décrire une ville non par son plan, mais par
+l'ensemble des positions d'un piéton et les trois pas qu'il peut faire.
+
+L'idée centrale arrive dans la troisième partie, intitulée « Cours ». Les
+trente arêtes de l'icosaèdre vont par paires parallèles : il y a quinze
+directions. Grothendieck définit, par une construction purement combinatoire,
+une permutation de ces quinze directions dont le cube est l'identité ; elle
+les regroupe en cinq « trièdres distingués », trois directions chacun. Dans
+l'icosaèdre réel, ce sont cinq repères orthogonaux de l'espace. Toute
+symétrie de l'icosaèdre permute ces cinq trièdres, et l'on obtient ainsi,
+sans un seul calcul de coordonnées, le fait classique que les rotations de
+l'icosaèdre forment le groupe des permutations paires de cinq objets. Il va
+plus loin : il reconstitue l'icosaèdre « replié » sur lui-même par la symétrie
+centrale --- un polyèdre à six sommets, quinze arêtes et dix faces, qui ne
+vit plus dans l'espace mais sur le plan projectif --- à partir des seuls cinq
+trièdres et d'un choix de sens : les sommets deviennent des pentagones dessinés
+sur cinq points, les faces des paires de points, les drapeaux des façons de
+numéroter les cinq points.
+
+Ce qu'on y voit de sa manière : l'objet le plus classique est repris comme s'il
+était inconnu, et chaque construction est faite pour ne dépendre d'aucun choix.
+Les trièdres sont définis sans parler d'angle droit, et l'orientation de
+l'ensemble des cinq trièdres n'est pas choisie : elle est lue sur l'icosaèdre,
+où elle était déjà. On cherchera ensuite, sous les noms d'aujourd'hui, les
+polytopes abstraits réguliers, le groupe cartographique, l'hémi-icosaèdre, et
+l'isomorphisme entre le groupe de l'icosaèdre et le groupe alterné $A_5$.
+
+\keywords{abstract polytope, flag, lattice, incidence geometry, regular polyhedron, icosahedron, cartographic group, alternating group A5, compound of five octahedra, 1-factorization, hemi-icosahedron, orientation of a finite set}
+\end{resume}
+
+\pagerange{2}{32}
+\section*{Le fil du dossier, et les conventions}
+
+Trois chemises (pages 1, 9 et 17) portent les titres de sa main,
+« Polyèdres réguliers I », « II » et « Cours --- Polyèdres réguliers
+III » ; le titre de l'inventaire en vient vraisemblablement. Il n'y a pas de
+pagination de sa main ; la page 10 renvoie à une « p.~1 » qui est
+vraisemblablement la page 2.
+
+\begin{itemize}
+  \item \textbf{Pages 2 à 4 (I) : polyèdres combinatoires.} Un ensemble ordonné
+    $S \sqcup A \sqcup F$, quatre axiomes ; le quatrième est une condition de
+    treillis. Toute facette est la borne supérieure de ses sommets ; toute face
+    a au moins trois côtés.
+  \item \textbf{Page 5 : un plan de cours} sur l'icosaèdre.
+  \item \textbf{Pages 6 à 8 : trois descriptions de l'icosaèdre}, adaptées à
+    un axe passant par deux sommets, deux faces, deux arêtes opposés.
+  \item \textbf{Pages 10 à 16 (II) : géométries d'incidence et ensembles à
+    opérateurs.} Drapeaux, trois involutions, un théorème de pleine fidélité ;
+    connexité, régularité, stabilisateurs.
+  \item \textbf{Pages 18 à 25 (III) : les trièdres distingués et le groupe
+    alterné.} La permutation $\rho$, les cinq trièdres, l'isomorphisme
+    $G^{+} \simeq \operatorname{Alt}_T$.
+  \item \textbf{Pages 26 à 30 : reconstruction de l'icosaèdre gauche} à partir
+    de l'ensemble orienté des cinq trièdres.
+  \item \textbf{Pages 31 et 32}, d'une autre encre : un tableau des ensembles
+    de drapeaux de l'icosaèdre gauche, et les trois involutions écrites comme
+    permutations de cinq lettres.
+\end{itemize}
+
+\textbf{Les dossiers voisins.} La partie II est le cadre dans lequel la
+lecture du dossier 88 (« Cartes standards ») est écrite : les mêmes
+involutions $\sigma_0, \sigma_1, \sigma_2$ sur les repères, le même groupe,
+noté là $\widehat{\Gamma}$, les mêmes rotations $\sigma_1\sigma_2$ autour d'un
+sommet et $\sigma_0\sigma_1$ autour d'une face, et l'icosaèdre y est la carte
+standard $C_{5,3}$. Les polygones combinatoires dont les pages 2 et 15 font les
+« entourages » des sommets et des faces sont ceux des pages 19 et 20 du
+dossier 89.
+
+\textbf{Conventions, valables pour tout le dossier.} $\Phi = S \sqcup A \sqcup
+F$ est l'ensemble ordonné des \emph{facettes} (sommets, arêtes, faces),
+$E = \operatorname{Rep}(\Pi)$ l'ensemble des drapeaux maximaux --- ses
+« repères » ---, et
+\[
+\widehat{\Gamma} = \bigl\langle \sigma_0, \sigma_1, \sigma_2 \bigm|
+\sigma_0^2 = \sigma_1^2 = \sigma_2^2 = (\sigma_0\sigma_2)^2 = 1 \bigr\rangle ,
+\]
+qu'il note d'un grand $\mathfrak{S}$ gothique d'indice $2$, qui n'est pas le
+groupe symétrique\footnote{On adopte la lettre de la lecture du dossier 88,
+où le groupe porte ce nom sur la page. Le nom de \emph{groupe cartographique}
+est celui de l'\emph{Esquisse d'un programme} (1984) ; il n'est pas dans ce
+dossier.}. $G = \operatorname{Aut}(\Pi)$ ; $D_n$ est le groupe diédral
+d'ordre $2n$. L'antipodisme de l'icosaèdre, qu'il note d'un $a$ souligné, est
+noté ici $\iota$, pour laisser la lettre $a$ aux arêtes.
+
+\textbf{Deux sens du mot « orientation ».} Dans la troisième partie, une
+\emph{orientation} d'un ensemble fini $X$ de cardinal $\geq 2$ est une orbite
+du groupe alterné $\operatorname{Alt}_X$ sur les numérotations de $X$ ; il y en
+a deux. Pour un polygone, ce n'est pas la même chose que l'orientation des
+pages 19 et 20 du dossier 89, qui est le choix de l'un des deux sens de
+parcours : les deux sens de parcours d'un pentagone définissent la
+\emph{même} orientation de l'ensemble de ses sommets (page 21). Pour un
+triangle, les deux notions coïncident, et la page 23 écrit
+$\operatorname{Or}(f)$ pour l'ensemble des deux ordres circulaires.
+
+\pagerange{2}{4}
+\section*{I. Polyèdres combinatoires (pages 2 à 4)}
+
+\pagerange{2}{2}
+\subsection*{Les axiomes}
+
+On se donne des ensembles finis $S$, $A$, $F$ (sommets, arêtes, faces) et des
+relations d'incidence $R \subset S \times A$, $R' \subset A \times F$. Elles
+font de $\Phi = S \sqcup A \sqcup F$ un ensemble ordonné, où $s < a$ signifie
+$(s, a) \in R$, $a < f$ signifie $(a, f) \in R'$, et $s < f$ signifie qu'il
+existe $a$ avec $s < a < f$ : $R'' = R \circ R'$. Les axiomes sont :
+\begin{enumerate}
+  \item[1)] toute arête a exactement deux sommets et est bordée par exactement
+    deux faces ;
+  \item[2)] (propriété du losange) si $s < f$, il y a exactement deux arêtes
+    $a$ avec $s < a < f$ ;
+  \item[3)] pour toute face $f$, l'ensemble ordonné $\Phi_{<f}$ est connexe ;
+  \item[3')] pour tout sommet $s$, l'ensemble ordonné $\Phi_{>s}$ est connexe ;
+  \item[4)] dans $\Phi$, deux éléments qui ont un majorant commun ont une borne
+    supérieure.
+\end{enumerate}
+Par 1) et 2), $\Phi_{<f}$ est un graphe biparti où chaque sommet et chaque arête
+sont de degré $2$, c'est-à-dire une réunion disjointe de polygones ; 3) dit
+que c'est un seul polygone combinatoire, à $q(f) \geq 2$ côtés. De même,
+$\Phi_{>s}$ est un polygone à $p(s) \geq 2$ côtés, dont les « sommets » sont
+les arêtes issues de $s$ et les « côtés » les faces qui contiennent
+$s$\footnote{Ces polygones sont ceux des pages 19 et 20 du dossier 89, sous
+sa première description (un ensemble ordonné de sommets et d'arêtes, chacun
+de degré $2$). La page qualifie $\Phi_{<f}$ de « contour ». Une note verticale,
+le long de l'accolade qui embrasse 1) à 3'), n'est pas lue, sauf peut-être son
+dernier mot, « connexité ».}. Aujourd'hui, 1) à 3') définissent un
+\emph{polyèdre abstrait} --- un polytope abstrait de rang $3$, au sens par
+exemple du livre de McMullen et Schulte (2002) ---, et 4) demande que
+$\Phi$, augmenté d'un plus petit et d'un plus grand élément, soit un
+treillis\footnote{Les noms ne sont pas sur la page. La page écrit les axiomes
+pour un polyèdre fini.}.
+
+\textbf{L'axiome 4), symétrique et explicité.} Pour un ensemble ordonné fini,
+4) équivaut à l'énoncé dual, « deux éléments qui ont un minorant commun ont
+une borne inférieure » : l'un et l'autre disent que $\widehat{\Phi} = \Phi \sqcup
+\{\hat 0, \hat 1\}$ est un treillis, et un ensemble ordonné fini qui a toutes
+les bornes supérieures de deux éléments et un plus petit élément a aussi toutes
+les bornes inférieures. Explicitement, \emph{sous 1) à 3'), l'axiome 4)
+équivaut à la conjonction de}
+\begin{enumerate}
+  \item[(i)] une arête est déterminée par ses deux sommets : $A \to
+    \mathfrak{P}_2(S)$ est injective ;
+  \item[(ii)] deux faces distinctes ont en commun, comme facettes inférieures,
+    soit rien, soit un sommet, soit une arête et ses deux sommets.
+\end{enumerate}
+En effet, deux éléments distincts qui ont un minorant commun sont deux arêtes,
+une arête et une face, ou deux faces, et leurs minorants communs sont leurs
+sommets communs (et, pour deux faces, leurs arêtes communes). La borne
+inférieure existe si et seulement si cet ensemble a un plus grand élément :
+pour deux arêtes, il faut qu'elles aient au plus un sommet commun, ce qui est
+(i) ; pour deux faces, c'est (ii). Reste le cas d'une arête $a = \{s, s'\}$ et
+d'une face $f$ qui ne la contient pas, dont les sommets communs doivent être
+au plus un : s'ils étaient $s$ et $s'$, la face $f'$ qui borde $a$ rencontrerait
+$f$ en $s, s'$, donc, par (ii), en une arête de sommets $s, s'$, distincte de
+$a$, contre (i)\footnote{La page procède autrement. Elle déplie 4) en a) « une
+arête est déterminée par l'ensemble de ses extrémités, et les faces qui
+majorent [celles-ci] majorent l'arête » et b) « une face est connue par une
+arête et un sommet non incident, [ou] par deux sommets non incidents à une
+même arête », lecture en partie incertaine. Un NB, aux alinéas numérotés 1°)
+à 3°) (deux fois 3°)), analyse correctement, cas par cas, quand
+$\operatorname{Sup}(s, s')$, $\operatorname{Sup}(s, a)$,
+$\operatorname{Sup}(a, a')$ existent : c'est quand le majorant évident est le
+seul. Un encadré en tire la forme (ii), suivie de « $A \hookrightarrow
+\mathfrak{P}_2(S)$ », l'ordre des deux membres étant incertain ; une note
+oblique de la marge en écrit le dual, $A \hookrightarrow \mathfrak{P}_2(F)$,
+et un 4') dual de a)-b). L'équivalence telle qu'on l'énonce, et sa preuve,
+sont de l'édition.}.
+
+\pagerange{2}{4}
+\subsection*{Les premières conséquences}
+
+\textbf{Corollaire 3} (page 4). \emph{Toute face a au moins trois côtés} ;
+dualement, \emph{de tout sommet partent au moins trois arêtes} (page 3). Une
+face à deux côtés aurait deux arêtes de mêmes extrémités, contre (i).
+
+\textbf{Corollaire 2} (page 4, « Cor.~Main 2 »). \emph{Toute facette est la
+borne supérieure des sommets qu'elle majore.} C'est clair pour un sommet. Pour
+une arête $a = \{s, s'\}$ : $a$ majore $s$ et $s'$, et tout autre majorant
+commun est une face qui contient $s$ et $s'$, donc l'arête de sommets $s, s'$
+par (ii), c'est-à-dire $a$ par (i) ; donc $a = \operatorname{Sup}(s,s')$. Pour
+une face $f$ : la borne supérieure de deux arêtes distinctes de $f$ est une
+face majorée par $f$, donc $f$, et, $f$ ayant au moins deux arêtes\footnote{La page écrit cette chaîne d'égalités, « cqfd », avec « cor.~2 »
+au-dessus de la deuxième, après un début de justification en partie illisible
+qui invoque la connexité ; la preuve pour une face, page 4, s'arrête sur
+« pour face cela résulte de … ». Les justifications sont de l'édition.},
+\[
+\operatorname*{Sup}_{s < f} s \;=\; \operatorname*{Sup}_{a<f}\,
+\operatorname*{Sup}_{s<a} s \;=\; \operatorname*{Sup}_{a<f} a \;=\; f
+\]
+.
+
+\textbf{Corollaire 1} (pages 2 à 4). \emph{L'application $\alpha : \Phi \to
+\mathfrak{P}(S)$, qui envoie une facette sur l'ensemble des sommets qu'elle
+majore, est un plongement d'ensembles ordonnés : $\alpha(x) \subset \alpha(y)$
+si et seulement si $x \leq y$. Son image, augmentée de $\varnothing$, est
+stable par intersection.} Si $\alpha(x) \subset \alpha(y)$, $y$ majore tous
+les sommets de $x$, donc leur borne supérieure, qui est $x$ par le corollaire 2.
+Si $x$ et $y$ ont un minorant commun, ils ont un sommet commun, et
+$\alpha(x) \cap \alpha(y) = \alpha(\operatorname{Inf}(x, y))$ ; sinon
+$\alpha(x) \cap \alpha(y) = \varnothing$\footnote{La page énonce ce corollaire
+page 2, avant le corollaire 2 dont sa preuve dépend, et l'achève page 4 ; la
+fin de la démonstration de a) est en blanc (« résulte dans … »). On a remis
+la preuve dans l'ordre logique.}. Dualement (Corollaire 4, page 4), un sommet
+est la borne inférieure des faces qui le contiennent, et $S \to
+\mathfrak{P}(F)$ est injective\footnote{Le corollaire 4 est en grande partie
+illisible ; on en donne l'énoncé que dicte le mot « Dualement » qui le
+précède, et les mots lus : « des faces qui l'entourent », « une injection
+$S \to \mathfrak{P}(F)$ ».}.
+
+\textbf{Remarque} (page 3). Pour l'icosaèdre, tout se lit sur le graphe
+$(S, A)$, $A \subset \mathfrak{P}_2(S)$ : les faces sont exactement les
+triangles du graphe, $F = \{f \in \mathfrak{P}_3(S) \mid \mathfrak{P}_2(f)
+\subset A\}$, et $\operatorname{Aut}(\Pi)$ est le groupe des permutations de
+$S$ qui envoient arêtes sur arêtes, c'est-à-dire qui conservent la distance
+combinatoire\footnote{Que tout triangle du graphe soit une face tient à ce que
+les voisins d'un sommet forment un pentagone, sans corde : il y a $12 \cdot 5
+/ 3 = 20$ triangles. Justification de l'édition. Une note en diagonale dans
+la marge n'est pas lue.}.
+
+\pagerange{5}{5}
+\section*{Un plan de cours sur l'icosaèdre (page 5)}
+
+La page 5 est un plan, sous le titre « Icosaèdre ». 1. Une description concrète,
+par un modèle ou un dessin. 2. Le dénombrement : $12$ sommets, $30$ arêtes,
+$20$ faces, $p = 5$ arêtes en chaque sommet, $q = 3$ côtés à chaque face, et
+$2 \cdot 30 = 5 \cdot 12 = 3 \cdot 20$. Les propriétés polyédrales, comme
+géométrie d'incidence et comme polyèdre combinatoire. 3. Les distances
+combinatoires et l'existence des bornes\footnote{La ligne 3 est très
+surchargée ; seuls « Distances combinatoires » et « Sup et Inf » sont sûrs.}.
+4. Les « perspectives », dont la première, par un couple de sommets opposés,
+a pour groupe de symétrie $D_5$ ou $\mathbf{Z}/2 \times D_5$ ; une parenthèse
+sur les groupes d'automorphismes des polygones combinatoires --- les groupes
+diédraux. Puis la transitivité de $G$ sur les sommets, sur les couples
+$s < a$, sur les triplets $s < a < f$ : l'icosaèdre est un \emph{polyèdre
+combinatoire régulier}. Un NB ajoute qu'il y en a une infinité d'autres, mais
+que parmi eux seuls quelques-uns sont réalisables comme polyèdres convexes de
+l'espace de dimension $3$ ; une note marginale propose d'interpréter
+l'antipodisme comme automorphisme combinatoire\footnote{Après « seuls » la page
+est illisible. Les polyèdres réguliers convexes sont les cinq solides de
+Platon ; ce nombre n'est pas lu sur la page.}.
+
+\pagerange{6}{8}
+\section*{Trois descriptions de l'icosaèdre (pages 6 à 8)}
+
+Chacune est adaptée à un axe passant par deux éléments opposés ; elle donne
+l'ensemble des sommets, les arêtes par types avec leur nombre, et le groupe des
+symétries qui conservent l'axe, d'ordre $120$ divisé par le nombre d'axes du
+type. Les figures qui les accompagnent --- vues le long de l'axe, projections,
+un icosaèdre inscrit dans un cube --- ne sont pas reproduites.
+
+\pagerange{6}{6}
+\subsection*{(A) Par deux sommets opposés}
+
+$S = \{o\} \sqcup \Pi \sqcup \Pi' \sqcup \{o'\}$, où $\Pi$ et $\Pi'$ sont les
+pentagones des voisins de $o$ et de $o'$, et $s \mapsto s'$ l'antipodisme, qui
+échange $\Pi$ et $\Pi'$. Les arêtes sont les $\{o, s\}$, $s \in \Pi$, et
+$\{o', s'\}$ ($10$) ; les côtés des deux pentagones ($10$) ; et les $\{s, t\}$,
+$s \in \Pi$, $t \in \Pi'$, avec $\delta(t, s') = 2$, $\delta$ étant la distance
+combinatoire ($10$) : chaque sommet d'un pentagone est relié aux deux sommets de
+l'autre qui ne sont ni l'antipode du sien ni ses voisins\footnote{La page écrit
+« $\delta(t, s') = 1$ ($= \delta(t', s)$) », la lettre $s'$ étant d'une
+lecture incertaine. Avec $\delta(t,s') = \delta(t',s)$, que donne une isométrie
+involutive comme l'antipodisme, la valeur est $2$ : dans l'icosaèdre,
+$\delta(x, \iota y) = 3 - \delta(x, y)$. Aucune bijection $\Pi \simeq \Pi'$ ne
+rend la valeur $1$ correcte, car les deux voisins de $s$ dans $\Pi'$ sont
+adjacents entre eux, et les deux sommets à distance $1$ d'un même sommet ne le
+sont pas.}. Groupe de symétrie $\mathbf{Z}/2 \times D_5$, d'ordre $20 = 120/6$,
+$6 = 12/2$ étant le nombre d'axes par deux sommets.
+
+\pagerange{7}{8}
+\subsection*{(B) Par deux faces opposées}
+
+$S = \Delta \sqcup \Delta_1 \sqcup \Delta'_1 \sqcup \Delta'$ : deux faces
+opposées $\Delta$ et $\Delta'$, et deux couches de trois sommets, avec des
+bijections $t \mapsto t_1 \mapsto t'_1$ et $t \mapsto t'$, où $t_1$ est le
+troisième sommet de la face qui borde le côté de $\Delta$ opposé à
+$t$\footnote{La page note les quatre couches $T$, $T_1$, $T'_1$, $T'$ ; on
+garde $T$ pour les trièdres de la troisième partie. La règle qui fixe $t_1$ est
+de l'édition ; la page écrit les bijections dans un tableau.}. Arêtes :
+$\mathfrak{P}_2(\Delta)$ et $\mathfrak{P}_2(\Delta')$ ($6$) ; $\{t, u\}$,
+$t \in \Delta$, $u \in \Delta_1$, $u \neq t_1$, et de même en primant ($12$) ;
+$\{t_1, u\}$, $u \in \Delta'_1$, $u \neq t'_1$ ($6$) ; $\{t, t'_1\}$ et
+$\{t', t_1\}$ ($6$) ; au total $30$\footnote{Les indices et accents des deux
+dernières lignes sont d'une lecture incertaine ; la lecture retenue est celle
+qui donne à chaque sommet ses cinq voisins.}. Groupe de symétrie
+$\mathbf{Z}/2 \times \mathfrak{S}_3$, d'ordre $12 = 120/10$, $10 = 20/2$.
+
+\pagerange{8}{8}
+\subsection*{(C) Par deux arêtes opposées}
+
+Soit $e = \{s, t\}$ une arête, $\varphi = \{u, v\}$ les troisièmes sommets des
+deux faces qui la bordent, et $e'$, $\varphi'$ leurs antipodes. Pour $x \in e$,
+$y \in \varphi$, notons $\Pi_{x,y}$ le voisin de $x$ qui est adjacent à $y$ et
+distinct de l'autre extrémité de $e$. Les quatre sommets restants sont les
+$\Pi_{x,y}$, et la même construction faite à partir de $e'$ donne les mêmes :
+$\Pi_{s',u'} = \Pi_{t,v}$, $\Pi_{s',v'} = \Pi_{t,u}$, etc. D'où
+\[
+S = e \sqcup \varphi \sqcup e' \sqcup \varphi' \sqcup \bigl[(e \times \varphi)
+\sqcup (e' \times \varphi')\bigr] / (\mathbf{Z}/2) ,
+\]
+où l'élément non trivial de $\mathbf{Z}/2$ envoie $(x, y)$ sur
+$((\varepsilon x)', (\varepsilon y)')$, $\varepsilon$ échangeant les deux
+éléments de $e$ et de $\varphi$ ; l'antipodisme agit sur les $\Pi_{x,y}$ par
+$(x, y) \mapsto (\varepsilon x, \varepsilon y)$\footnote{La page note les deux
+arêtes $\sigma$, $\sigma'$, et l'élément de $\mathbf{Z}/2$ encore $\sigma$ ; on
+les renomme. La ligne est surchargée, une première identification est biffée,
+et le $\mathbf{Z}/2\mathbf{Z}$ est d'une lecture incertaine ; la description
+qu'on donne est celle que confirment les égalités de la figure
+($\Pi_{t,v} = \Pi_{s',u'}$, $\Pi_{s,u} = \Pi_{t',v'}$, …).}. Les arêtes :
+\[
+\begin{array}{lr}
+e,\ e' & 2 \\
+\{x, y\},\ \{x', y'\} \quad (x \in e,\ y \in \varphi) & 8 \\
+\{\Pi_{s,u}, \Pi_{s,v}\},\ \{\Pi_{t,u}, \Pi_{t,v}\} & 2 \\
+\{y, \Pi_{x,y}\},\ \{y', \Pi_{x',y'}\} & 8 \\
+\{x, \Pi_{x,y}\},\ \{x', \Pi_{x',y'}\} & 8 \\
+\{u, v'\},\ \{v, u'\} & 2
+\end{array}
+\]
+au total $30$\footnote{La page compte $4$ pour la troisième ligne, et le total
+fait alors $32$ : les paires $\{\Pi_{s',u'}, \Pi_{s',v'}\}$ et
+$\{\Pi_{t',u'}, \Pi_{t',v'}\}$ sont les deux arêtes déjà comptées. Le « $2$ »
+de la première ligne est d'une lecture incertaine ; c'est le bon nombre. Le
+recensement a été vérifié sur l'icosaèdre régulier.}. Groupe de symétrie
+$\mathbf{Z}/2 \times (\mathbf{Z}/2 \times \mathbf{Z}/2)$, d'ordre $8 = 120/15$,
+$15 = 30/2$.
+
+La notation $\Pi_{x,y}$ reviendra pages 18 à 20 : $\{\Pi_{s,u},
+\Pi_{s,v}\}$ y sera l'image de l'arête $e$ par la permutation $\rho$.
+
+\pagerange{10}{16}
+\section*{II. Géométries d'incidence et ensembles à opérateurs (pages 10 à 16)}
+
+\pagerange{10}{12}
+\subsection*{Drapeaux, repères, et le théorème de pleine fidélité}
+
+Soit $\Pi = (S, A, F ; R, R')$ une géométrie d'incidence de dimension $2$,
+c'est-à-dire, ici, des données comme à la page 2 satisfaisant au moins les
+axiomes 1) et 2)\footnote{La page renvoie à « p.~1 » pour l'ensemble ordonné
+$\Phi$ ; c'est vraisemblablement la page 2. Elle cite elle-même « axiomes 1),
+2) » pour les degrés qui suivent.}. Un \emph{drapeau} est une partie non vide
+totalement ordonnée de $\Phi$, de \emph{longueur} son cardinal moins un ; la
+longueur maximale est $2$, et les drapeaux de longueur $2$ sont les
+\emph{repères}
+\[
+E = \operatorname{Rep}(\Pi) = \{(s, a, f) \in S \times A \times F \mid s < a < f\}.
+\]
+Les drapeaux de longueur $0$ sont les facettes, ceux de longueur $1$ les
+éléments de $R$, $R'$, $R''$. Les trois applications d'oubli
+$E \to R'$, $E \to R''$, $E \to R$, qui oublient respectivement le sommet,
+l'arête, la face, sont de degré $2$ par les axiomes 1) et 2) ; elles définissent
+trois involutions sans point fixe $\sigma_0, \sigma_1, \sigma_2$ de $E$, où
+$\sigma_i$ change la composante de dimension $i$ du repère et garde les deux
+autres. On a
+\[
+\sigma_0\sigma_2(s, a, f) = \sigma_2\sigma_0(s, a, f) = (s', a, f'),
+\]
+$s'$ étant l'autre sommet et $f'$ l'autre face de $a$, de sorte que $\sigma_0$
+et $\sigma_2$ commutent et que $\sigma_0\sigma_2$ est aussi sans point fixe.
+L'ensemble $E$ devient ainsi un ensemble à opérateurs sous le groupe
+$\widehat{\Gamma}$ des conventions\footnote{Le diagramme de la page 11 ajoute,
+entre crochets, la construction en deux étages $E = R \times_A R'$
+au-dessus de $S \leftarrow R \to A \leftarrow R' \to F$, toutes les flèches
+de degré $2$.}.
+
+\textbf{Théorème} (page 12). \emph{Sur les géométries d'incidence qui
+satisfont 1) à 3'), le foncteur $\Pi \mapsto \operatorname{Rep}(\Pi)$, des
+géométries avec leurs isomorphismes vers les $\widehat{\Gamma}$-ensembles où
+$\sigma_0, \sigma_1, \sigma_2, \sigma_0\sigma_2$ opèrent sans point fixe avec
+leurs isomorphismes, est pleinement fidèle.} On reconstitue en effet $\Pi$
+à partir de $E$ :
+\[
+E/\langle \sigma_1, \sigma_2 \rangle \xrightarrow{\ \sim\ } S, \qquad
+E/\langle \sigma_0, \sigma_2 \rangle \xrightarrow{\ \sim\ } A, \qquad
+E/\langle \sigma_0, \sigma_1 \rangle \xrightarrow{\ \sim\ } F .
+\]
+La flèche médiane est bijective parce que $\langle \sigma_0, \sigma_2 \rangle
+\simeq \mathbf{Z}/2 \times \mathbf{Z}/2$ opère librement sur la fibre d'une
+arête, qui a quatre éléments. La fibre d'un sommet $s$ est l'ensemble des
+drapeaux du polygone $\Phi_{>s}$, et ses orbites sous $\langle \sigma_1,
+\sigma_2 \rangle$ sont les composantes connexes de ce polygone : la première
+flèche est bijective exactement par 3'), et la dernière par 3). Enfin $R$ et
+$R'$ sont les images de $E$ dans $S \times A$ et $A \times F$\footnote{La page
+dit que 3) et 3') expriment « respectivement que la dernière et la première
+flèches sont bijectives » --- dans cet ordre, ce qui est juste --- et conclut
+par une phrase d'une lecture douteuse, « on peut donc exprimer $S, A, F$ à
+partir de $R$ ». Elle ne démontre pas la pleine fidélité au-delà de ces
+reconstructions : un isomorphisme de $\widehat{\Gamma}$-ensembles induit des
+bijections sur les trois quotients qui respectent les incidences, et
+l'isomorphisme de géométries obtenu induit le premier, car $E \to S \times A
+\times F$ est injective.}.
+
+Ce codage d'un polyèdre par l'action de trois involutions sur ses drapeaux est
+celui qu'utilisent aujourd'hui la théorie des cartes et celle des polytopes
+abstraits\footnote{Le foncteur n'est pas essentiellement surjectif, et la page
+ne le prétend pas : un $\widehat{\Gamma}$-ensemble transitif quelconque est
+l'ensemble des drapeaux d'une carte, où deux faces peuvent par exemple se
+toucher le long de plusieurs arêtes, et non toujours d'une géométrie
+d'incidence.}.
+
+\pagerange{13}{14}
+\subsection*{Automorphismes, connexité, régularité}
+
+\textbf{Corollaire.} $\operatorname{Aut}(\Pi) =
+\operatorname{Aut}_{\widehat{\Gamma}}(\operatorname{Rep}(\Pi))$.
+
+\textbf{Corollaire.} Pour $\Pi$ non vide, conditions équivalentes : a) deux
+sommets sont toujours reliés par une chaîne d'arêtes ; a') deux faces sont
+toujours reliées par une chaîne de faces adjacentes le long d'arêtes ; b) $\Pi$
+n'est pas somme disjointe de deux géométries non vides ; c) $\widehat{\Gamma}$
+opère transitivement sur $E$. On dit alors que $\Pi$ est
+\emph{connexe}\footnote{La page écrit en c) « espace homogène sous $G_2$ »,
+avec un $G$ gras qui diffère du $\mathfrak{S}_2$ de la même ligne ; c'est le
+même groupe $\widehat{\Gamma}$. Les équivalences utilisent 3) et 3').}.
+
+\textbf{Corollaire.} Si $\Pi$ est connexe, $\operatorname{Aut}(\Pi)$ opère
+\emph{librement} sur $\operatorname{Rep}(\Pi)$ : un automorphisme d'un espace
+homogène qui fixe un point est l'identité. Donc, $\Pi$ étant fini,
+$\operatorname{Card}\operatorname{Aut}(\Pi)$ divise
+$\operatorname{Card}\operatorname{Rep}(\Pi)$. C'est ce que la lecture du
+dossier 81 appelle la rigidité d'un objet repéré.
+
+\textbf{Re-corollaire.} Soit $\Pi$ connexe, $r \in E$, $H \subset
+\widehat{\Gamma}$ son stabilisateur et $G = \operatorname{Aut}(\Pi)$.
+Conditions équivalentes :
+\begin{enumerate}
+  \item[a)] $G$ est transitif sur $E$ ;
+  \item[b)] $H$ est distingué dans $\widehat{\Gamma}$ ;
+  \item[c)] ($\Pi$ fini) $\operatorname{Card} G = \operatorname{Card} E$ ;
+  \item[d)] pour tout $g \in \widehat{\Gamma}$, il existe $\bar g \in G$ avec
+    $g \cdot r = \bar g \cdot r$ ;
+  \item[d')] pour $i = 0, 1, 2$, il existe $\bar\sigma_i \in G$ avec
+    $\sigma_i \cdot r = \bar\sigma_i \cdot r$.
+\end{enumerate}
+Pour $E = \widehat{\Gamma}/H$, le groupe des automorphismes est $N(H)/H$, d'où
+a) $\Leftrightarrow$ b) ; c) $\Leftrightarrow$ a) parce que l'action est
+libre ; d) n'est que a) puisque $E = \widehat{\Gamma} r$ ; et d') entraîne d)
+parce que les automorphismes commutent aux $\sigma_i$ : si $h r = \bar h r$,
+alors $\sigma_i h r = \bar h \sigma_i r = \bar h \bar\sigma_i r$. On dit alors
+que $\Pi$ est \emph{régulière}, ou que c'est un \emph{polyèdre combinatoire
+régulier}.
+
+\textbf{Corollaire.} Si $(\Pi_0, r_0)$ est un polyèdre régulier muni d'un
+repère et $\Pi$ un polyèdre isomorphe, $\operatorname{Isom}(\Pi_0, \Pi) \to
+\operatorname{Rep}(\Pi)$, $\varphi \mapsto \varphi(r_0)$, est bijective : un
+polyèdre régulier repéré est défini à isomorphisme \emph{unique} près.
+
+\textbf{Le groupe.} Dans un polyèdre régulier, $\bar g$ est unique, et
+$g \mapsto \bar g$ est un \emph{anti}-homomorphisme surjectif
+$\widehat{\Gamma} \to G$ de noyau $H$ : $\overline{hg} = \bar g\,\bar h$, car
+$\bar g \bar h r = \bar g h r = h \bar g r = h g r$. Composé avec $x \mapsto
+x^{-1}$, c'est un homomorphisme ; ainsi $G \simeq \widehat{\Gamma}/H$, et les
+$\bar\sigma_i$ engendrent $G$\footnote{La page, après avoir barré un corollaire
+$E/\sigma_0 \simeq \operatorname{Drap}_{12}(\Pi)$, etc., écrit en marge
+« $g \mapsto \bar g$ est un hom.\ […] $\to G$ », la suite étant perdue au bas
+de la feuille. Le renversement de l'ordre est de l'édition ; il disparaît si
+l'on fait opérer $\widehat{\Gamma}$ à droite.}.
+
+\pagerange{15}{16}
+\subsection*{Les stabilisateurs d'un polyèdre régulier}
+
+Deux blocs barrés précèdent l'énoncé. Le premier définit une
+\emph{orientation} d'une géométrie comme une partie $R^{+} \subset E$ telle que
+chaque $\sigma_i$ l'échange avec son complémentaire $R^{-}$ --- de façon
+équivalente, $R^{+}$ s'envoie bijectivement sur chacun des trois ensembles de
+drapeaux de longueur $1$ ---, ses éléments étant les repères directs. Le
+second annonce que le stabilisateur d'un sommet est diédral\footnote{La page
+écrit en b) $R^{+} \simeq \prod_{j \neq i} \Phi_j$ ; c'est le produit fibré,
+l'ensemble des drapeaux de type complémentaire de $i$. Les deux blocs restent
+lisibles sous les diagonales qui les barrent.}.
+
+\textbf{Proposition} (pages 15 et 16, marquée « Exer »). \emph{Soit $\Pi$ un
+polyèdre combinatoire régulier connexe, $E = \operatorname{Rep}(\Pi)$, $G =
+\operatorname{Aut}(\Pi)$.}
+\begin{enumerate}
+  \item[a)] \emph{Soit $p$ l'ordre de $\sigma_1\sigma_2$ et $q$ celui de
+    $\sigma_0\sigma_1$ sur $E$. Par tout sommet passent exactement $p$ arêtes,
+    et toute face a exactement $q$ côtés.} En effet, $\langle \sigma_1, \sigma_2
+    \rangle$ opère sur les $2p(s)$ repères de sommet $s$ comme le groupe diédral
+    du polygone $\Phi_{>s}$, où $\sigma_1\sigma_2$ est une rotation d'ordre
+    $p(s)$ ; la régularité rend $p(s)$ constant. Par le corollaire 3 et son
+    dual, $3 \leq p, q$, et $p, q \leq \infty$ si l'on admet des polyèdres
+    infinis\footnote{La page écrit « NB $3 \leq p, q \leq +\infty$ ». La borne
+    $3$ demande l'axiome 4) ; pour une géométrie d'incidence qui ne satisfait que
+    1) à 3'), $p$ ou $q$ peut valoir $2$.}.
+  \item[b)] \emph{Pour $s \in S$, l'homomorphisme $G_s \to
+    \operatorname{Aut}(\Phi_{\geq s})$ est un isomorphisme ; en particulier
+    $G_s \simeq D_p$.}
+  \item[b')] \emph{Pour $f \in F$, $G_f \to \operatorname{Aut}(\Phi_{\leq f})$
+    est un isomorphisme ; $G_f \simeq D_q$.}
+  \item[c)] \emph{Pour $a \in A$, soit $\sigma$ l'ensemble de ses deux sommets
+    et $\varphi$ celui de ses deux faces. Alors $G_a \to \mathfrak{S}_\sigma
+    \times \mathfrak{S}_\varphi \simeq \mathbf{Z}/2 \times \mathbf{Z}/2$ est un
+    isomorphisme.}
+\end{enumerate}
+Dans les trois cas, le stabilisateur opère librement et transitivement sur les
+repères qui contiennent la facette, et le groupe d'arrivée aussi : l'injection
+est une bijection\footnote{Ces justifications sont de l'édition. Ce sont,
+dans le langage du dossier 88, les ordres $p$ et $q$ des rotations $\rho_s =
+\sigma_1\sigma_2$ et $\rho_f = \sigma_0\sigma_1$. Deux lignes biffées commencent
+au bas de la page 16 une autre proposition.}.
+
+\pagerange{18}{25}
+\section*{III. Les trièdres distingués et le groupe alterné (pages 18 à 25)}
+
+\pagerange{18}{19}
+\subsection*{La permutation $\rho$ des directions d'arêtes}
+
+Sous la chemise « Cours », $\Pi$ est l'icosaèdre combinatoire, et
+$\iota \in G$ son antipodisme --- l'automorphisme qui envoie chaque sommet sur
+l'unique sommet à distance $3$ ---, sans point fixe sur $S$, $A$, $F$. Les
+quinze paires $\bar a = \{a, \iota a\}$ sont les \emph{directions d'arêtes} :
+$\bar A = A/\iota$.
+
+Soit $a = \{s, t\}$ une arête, et $u, v$ les troisièmes sommets des deux faces
+qui la bordent. Les cinq voisins de $s$ forment un pentagone
+$t, u, \Pi_{s,u}, \Pi_{s,v}, v$, où $\Pi_{s,u}$ est le voisin de $s$ adjacent
+à $u$ autre que $t$ (comme page 8) ; le côté de ce pentagone opposé à $t$ est
+l'arête $\{\Pi_{s,u}, \Pi_{s,v}\}$. Partant de $t$ au lieu de $s$, on trouve
+$\{\Pi_{t,u}, \Pi_{t,v}\}$, qui en est l'antipode. D'où une application
+$\rho_0 : A \to \bar A$, compatible avec les automorphismes, en particulier
+avec $\iota$, qui opère trivialement sur $\bar A$ ; elle passe donc au quotient
+en
+\[
+\rho : \bar A \longrightarrow \bar A .
+\]
+On calcule $\rho^2(\bar a) = \overline{\{u, \iota v\}} = \overline{\{v, \iota
+u\}}$, puis $\rho^3(\bar a) = \bar a$\footnote{Le calcul de $\rho^2$ et de
+$\rho^3$ n'est pas détaillé sur la page ; on l'a vérifié sur l'icosaèdre
+régulier. La page écrit $\{u, v'\}$ pour $\{u, \iota v\}$. Les indices des
+$\Pi$ de la figure marginale sont serrés et parfois surchargés.}. Donc
+$\rho^3 = \mathrm{id}$, $\rho$ est une permutation sans point fixe, toutes ses
+orbites ont trois éléments, et il y en a cinq. Une orbite s'appelle un
+\emph{trièdre distingué}\footnote{« Trièdre » est la lecture retenue, dans les
+deux lots de la transcription, d'un mot écrit sans accent visible, en cinq ou
+six lettres, et d'abord lu « tridron » ; elle est sûre aux pages 23, 25 et 26.} ;
+deux directions sont \emph{orthogonales} si elles sont distinctes et dans le
+même trièdre, c'est-à-dire si $\beta = \rho\alpha$ ou $\alpha = \rho\beta$.
+Chaque direction a exactement deux directions orthogonales ; la relation
+d'orthogonalité est symétrique, la relation $\beta = \rho\alpha$ ne l'est pas.
+On note $T$ l'ensemble des cinq trièdres, $\operatorname{tr} : \bar A \to T$
+la projection, et l'on voit $T$ aussi comme une partition de $A$ en cinq parties
+de six arêtes, stables par $\iota$.
+
+Dans l'icosaèdre régulier, $\{\Pi_{s,u}, \Pi_{s,v}\}$ est orthogonale à
+$\{s, t\}$ au sens euclidien, et un trièdre distingué est un repère orthogonal
+de l'espace formé de trois axes d'arêtes ; ce sont les axes des cinq octaèdres
+dont les sommets sont les milieux de six arêtes de l'icosaèdre, ou encore les axes de coordonnées des cinq façons
+d'écrire ses sommets $(0, \pm 1, \pm \phi)$ et permutations circulaires, $\phi$
+étant le nombre d'or\footnote{Cette interprétation métrique est de l'édition ;
+la page définit l'orthogonalité combinatoirement et ne dit pas qu'elle
+coïncide avec l'orthogonalité euclidienne. Une note marginale, « terminologie :
+arêtes orthogonales … », est en partie illisible.}.
+
+\pagerange{20}{21}
+\subsection*{Les cinq arêtes d'un sommet}
+
+\textbf{Proposition.} \emph{Deux arêtes orthogonales n'ont pas de sommet
+commun.} Les quatre arêtes orthogonales à $\{s, t\}$ sont $\{\Pi_{s,u},
+\Pi_{s,v}\}$, $\{\Pi_{t,u}, \Pi_{t,v}\}$, $\{u, \iota v\}$ et $\{v, \iota u\}$ ;
+aucune ne rencontre $\{s, t\}$.
+
+Ainsi chaque classe de $T$ est un ensemble de six arêtes deux à deux sans
+sommet commun, couvrant les douze sommets : la partition $T$ est une
+coloration propre des arêtes en cinq couleurs, chaque sommet voyant les cinq
+couleurs\footnote{La page 19 s'arrête sur « Interprétation concrète en termes
+de coloriage, » au bas de la feuille ; la page 20 commence par la Proposition.
+L'interprétation donnée ici --- aujourd'hui, une $1$-factorisation du graphe
+de l'icosaèdre --- est de l'édition.}.
+
+\textbf{Corollaire.} \emph{Pour tout $s \in S$, si $P(s)$ est l'ensemble des
+cinq arêtes issues de $s$, $a \mapsto \operatorname{tr}(\bar a)$ est une
+bijection $P(s) \xrightarrow{\sim} T$} : deux arêtes issues de $s$ ne sont ni
+de même direction ni orthogonales, et les deux ensembles ont cinq éléments.
+
+\textbf{Corollaire.} \emph{Le groupe $G_s^{+} \simeq \mathbf{Z}/5$ des
+rotations fixant $s$ --- les automorphismes fixant $s$ qui induisent une
+rotation du pentagone $\Phi_{\geq s}$ --- fait de $T$ un torseur ; un générateur
+opère sur $T$ par une permutation circulaire, et $G_s^{+}$ opère par
+permutations paires}, un cycle de longueur impaire étant pair.
+
+\textbf{Le cas de tout $G_s$} (pages 20 et 21). Plus généralement, les
+automorphismes d'un polygone combinatoire à $n \equiv 1 \pmod 4$ côtés
+induisent des permutations paires de ses sommets et de ses côtés : pour $n$
+impair, une rotation est une puissance d'un $n$-cycle, et une symétrie fixe un
+sommet et un côté et échange les autres par $(n-1)/2$ transpositions, nombre
+pair exactement quand $n \equiv 1 \pmod 4$. Par conséquent, pour un tel
+polygone, toutes les numérotations de ses sommets obtenues en le parcourant à
+partir d'un repère définissent \emph{la même} orientation de l'ensemble de ses
+sommets : un pentagone oriente canoniquement ses cinq sommets\footnote{La page
+21 écrit « type $n \equiv 1$ (4) », « canoniquement » et « via épinglage »,
+lectures en partie incertaines ; l'épinglage est le choix d'un repère du
+polygone. La justification par le décompte des transpositions est de
+l'édition.}. Appliqué au pentagone $\Phi_{\geq s}$ et transporté par
+$P(s) \simeq T$, cela munit $T$ d'une structure pentagonale $\pi_s$, invariante
+par $G_s \simeq D_5$, et d'une orientation $\omega_s$ ; $G_s$ opère fidèlement
+sur $T$, par permutations paires.
+
+\pagerange{21}{22}
+\subsection*{L'orientation canonique de $T$}
+
+Fixons un repère $r = (s, a, f)$ ; les automorphismes $\bar\sigma_0,
+\bar\sigma_1, \bar\sigma_2$ de la page 14 engendrent $G$. Les deux derniers
+fixent $s$, donc opèrent sur $T$ par permutations paires ; $\bar\sigma_0$ fixe
+$a$ et $f$ en échangeant les extrémités de $a$, donc fixe le troisième sommet
+$w$ de $f$, et opère aussi par une permutation paire\footnote{La figure de la
+page 22 marque $\sigma_0$, $\sigma_1$, $\sigma_2$ sur les côtés d'un triangle
+fondamental hachuré. La fin de la phrase sur $\sigma_0$ est en partie
+illisible ; la page note encore $\sigma_i$ les automorphismes $\bar\sigma_i$.}.
+
+\textbf{Corollaire.} \emph{$G$ opère sur $T$ par permutations paires : on a
+un homomorphisme $G \to \operatorname{Alt}_T$.}
+
+\textbf{Corollaire.} \emph{Les orientations $\omega_s$, $s \in S$, sont
+toutes égales.} En effet $\omega_{g(s)} = g(\omega_s)$ pour $g \in G$, $G$ est
+transitif sur $S$, et une permutation paire conserve chaque orientation. On
+obtient une \emph{orientation canonique} $\varpi$ de $T$, conservée par $G$.
+
+\pagerange{23}{25}
+\subsection*{Une face, une arête, et l'image de $G$}
+
+\textbf{Proposition} (page 23)\footnote{La page lit la première direction du premier triple
+« $\overline{\{u, v\}}$ », avec doute sur les lettres et les indices : c'est
+$\overline{\{u, v_1\}}$, car $\{u, v\}$ est un côté de $f$, dont le trièdre
+$t_w$ est distinct de $t_\omega$ par b). Le second triple est lu comme on
+l'écrit. Les deux triples ont été vérifiés sur l'icosaèdre régulier.}. \emph{Soit $f = \{u, v, w\}$ une face, et
+$u_1$, $v_1$, $w_1$ les troisièmes sommets des faces qui bordent
+respectivement les côtés $\{v, w\}$, $\{w, u\}$, $\{u, v\}$.}
+\begin{enumerate}
+  \item[a)] \emph{Les directions $\overline{\{u, v_1\}}$, $\overline{\{v,
+    w_1\}}$, $\overline{\{w, u_1\}}$ forment un trièdre distingué
+    $t_\omega$, et $\overline{\{u, w_1\}}$, $\overline{\{v, u_1\}}$,
+    $\overline{\{w, v_1\}}$ un autre, $t_{\omega'}$ ; la rotation d'ordre $3$
+    autour de $f$ les permute circulairement. Ils correspondent aux deux
+    ordres circulaires $\omega = (u\,v\,w)$ et $\omega' = (u\,w\,v)$ de $f$ :
+    $t_\omega$ est formé des directions $\overline{\{x, \omega(x)_1\}}$.}
+  \item[b)] \emph{Les trièdres $t_u = \operatorname{tr}\overline{\{v, w\}}$,
+    $t_v = \operatorname{tr}\overline{\{w, u\}}$, $t_w =
+    \operatorname{tr}\overline{\{u, v\}}$, $t_\omega$ et $t_{\omega'}$ sont
+    distincts.}
+\end{enumerate}
+Pour b), $t_u, t_v, t_w$ sont distincts par le corollaire de la page 20
+appliqué aux sommets de $f$, et $t_u \neq t_\omega = \operatorname{tr}
+\overline{\{w, u_1\}}$, $t_u \neq t_{\omega'} = \operatorname{tr}\overline{\{v,
+u_1\}}$ par le même corollaire appliqué à $w$ et à $v$ ; de même pour $t_v$,
+$t_w$.
+
+\textbf{Corollaire.} \emph{On a une bijection canonique}
+\[
+T \simeq f \sqcup \operatorname{Or}(f),
+\]
+\emph{qui envoie un sommet $x$ de $f$ sur le trièdre du côté opposé et un ordre
+circulaire $\omega$ sur $t_\omega$.} Elle est compatible à l'action de $G_f
+\simeq D_3 = \mathfrak{S}_3$, qui opère sur $f$ tautologiquement et sur
+$\operatorname{Or}(f)$ par la signature. Donc $G_f$ opère fidèlement sur $T$ ---
+une transposition de $f$ y devient un produit de deux transpositions, ce qui
+redonne la parité --- et son image dans $\operatorname{Alt}_T$ est un
+sous-groupe diédral d'ordre $6$. L'image de $G$ dans $\operatorname{Alt}_T$ a
+donc un ordre multiple de $6$, et, par $G_s$, de $10$ : multiple de $30$.
+
+\textbf{Proposition} (page 24). \emph{Soit $a = \{s, t\}$ une arête et
+$\varphi = \{u, v\}$ les troisièmes sommets des faces qui la bordent. Les cinq
+trièdres $\operatorname{tr}\overline{\{x, y\}}$ ($x \in a$, $y \in \varphi$)
+et $\operatorname{tr}\bar a$ sont distincts}, d'où une bijection canonique
+\[
+T \simeq \{\operatorname{tr}\bar a\} \sqcup (a \times \varphi).
+\]
+C'est le corollaire précédent appliqué à la face $\{s, t, u\}$ : ses côtés
+donnent $\operatorname{tr}\overline{\{t,u\}}$, $\operatorname{tr}
+\overline{\{s,u\}}$, $\operatorname{tr}\bar a$, et ses deux trièdres
+$t_\omega$, $t_{\omega'}$ contiennent $\overline{\{s, v\}}$ et $\overline{\{t,
+v\}}$, $v$ étant le troisième sommet de la face voisine le long de
+$a$\footnote{La page dit « résulte des deux prop.\ précédentes » ; la
+justification est de l'édition.}. Le groupe $G_a \simeq \mathfrak{S}_a \times
+\mathfrak{S}_\varphi \simeq (\mathbf{Z}/2)^2$ (page 16) opère fidèlement sur
+$a \times \varphi$, donc sur $T$, par des doubles transpositions : l'ordre de
+l'image de $G$ est aussi multiple de $4$, donc de $60 =
+\operatorname{Card}\operatorname{Alt}_T$.
+
+\textbf{Théorème} (page 25). \emph{L'homomorphisme canonique $G =
+\operatorname{Aut}(\Pi) \to \mathfrak{S}_T$, de l'ensemble des trièdres
+distingués de l'icosaèdre, a pour image $\operatorname{Alt}_T$ et pour noyau
+le sous-groupe $\mathfrak{z}$ d'ordre $2$ engendré par l'antipodisme.} Le
+noyau a $120/60 = 2$ éléments et contient $\iota$, qui fixe chaque direction.
+
+Soit $G^{+}$ le sous-groupe d'indice $2$ des automorphismes qui conservent
+l'orientation de l'icosaèdre, c'est-à-dire chacune des deux classes $R^{+}$,
+$R^{-}$ de repères de la page 15. L'antipodisme est central et renverse
+l'orientation ; donc $G = \mathfrak{z} \times G^{+}$, et :
+
+\textbf{Corollaire} (page 26). \emph{$G^{+} \to \operatorname{Alt}_T$ est un
+isomorphisme : le groupe des rotations de l'icosaèdre est le groupe alterné
+de ses cinq trièdres distingués.}\footnote{La page écrit d'abord
+$G^{+} \xrightarrow{\sim} \mathfrak{A}_5$, la lettre étant d'une lecture
+douteuse, puis le corollaire sous la forme qu'on donne. Que $\iota$ renverse
+l'orientation est affirmé, non démontré ; dans l'icosaèdre réel, c'est
+$-\mathrm{id}$, de déterminant $-1$. L'isomorphisme du groupe des rotations de
+l'icosaèdre avec $A_5$ est classique --- c'est le point de départ des
+\emph{Leçons sur l'icosaèdre} de Klein (1884) ---, et on le voit d'ordinaire
+par l'action sur les cinq octaèdres ou les cinq cubes inscrits. Les feuillets
+ne citent rien ; ce qui leur est propre est la définition purement
+combinatoire des cinq objets, par la permutation $\rho$, et la construction de
+l'orientation $\varpi$ sans choix.}
+
+\pagerange{26}{30}
+\section*{Reconstruction de l'icosaèdre gauche par l'ensemble orienté $T$ (pages 26 à 30)}
+
+Le titre de la page 26 annonce la reconstruction de l'icosaèdre
+\emph{orienté} ; ce qui est fait est celle de l'\emph{icosaèdre gauche}
+$\bar\Pi = \Pi/\iota$, quotient de l'icosaèdre par l'antipodisme : $6$ sommets,
+$15$ arêtes, $10$ faces, $60$ repères\footnote{« Icosaèdre gauche » est son
+nom, page 28. C'est ce qu'on appelle aujourd'hui l'\emph{hémi-icosaèdre}, carte
+régulière de type $\{3, 5\}$ sur le plan projectif réel, dont le graphe est le
+graphe complet à six sommets et le groupe $A_5$. Aucun nom de ce genre n'est
+sur la page. Comme $\iota$ déplace chaque sommet à distance $3$, le quotient
+satisfait encore les axiomes 1) à 4) de la page 2, et $G/\mathfrak{z} \simeq
+\operatorname{Alt}_T$ opère simplement transitivement sur ses $60$ repères :
+il est régulier.}. Dans tout ce qui suit, $(T, \varpi)$ est l'ensemble des cinq
+trièdres muni de son orientation canonique, et $G$ opère sur tout à travers
+$\operatorname{Alt}_T$.
+
+\pagerange{26}{27}
+\subsection*{Les sommets, les arêtes, les faces}
+
+\textbf{Sommets.} Il y a $\frac12 \cdot 4! = 12$ structures pentagonales sur
+$T$. Chacune oriente canoniquement $T$ (page 21) ; les permutations impaires
+échangent les deux paquets, et $\operatorname{Alt}_T$, qui contient le
+stabilisateur $D_5$ de chacune, opère transitivement sur chaque paquet de
+$6$. Soit $\operatorname{Pent}^{+}(T, \varpi)$ le paquet associé à $\varpi$.
+L'application $s \mapsto \pi_s$ est compatible avec $G$ et ne change pas quand
+on remplace $s$ par $\iota s$ ; son image est dans $\operatorname{Pent}^{+}(T,
+\varpi)$ par définition de $\varpi$. Elle est surjective par transitivité, donc
+bijective, les deux ensembles ayant $6$ éléments :
+\[
+S/\iota \xrightarrow{\ \sim\ } \operatorname{Pent}^{+}(T, \varpi).
+\]
+
+\textbf{Arêtes.} Soit $\mathbb{A}(T)$ l'ensemble des triplets $(t, \gamma,
+\alpha)$, où $t \in T$, $\gamma$ est une structure de carré sur $T
+\smallsetminus \{t\}$, et $\alpha$ l'une des deux paires de côtés opposés de
+$\gamma$ ; il a $5 \cdot \frac12 (4-1)! \cdot 2 = 30$ éléments\footnote{La page
+note d'abord $\mathbb{A}'(T)$, avec un exposant lu comme un accent qui disparaît
+ensuite, et définit $\alpha$ comme un élément de « $\operatorname{Ar}(\gamma)/$
+antipod. », les côtés de $\gamma$ modulo l'antipodie du carré ; une note de la
+marge, « $=$ Ens des $2$ diagonales du … », est en partie illisible. Dans le
+triple, la lettre $\gamma$ surcharge un $\pi$.}. Si $\varphi$ est l'autre
+paire de côtés opposés, chaque sommet du carré est sur un côté de $\alpha$ et un
+côté de $\varphi$, d'où une bijection $T \smallsetminus \{t\} \simeq \alpha
+\times \varphi$, donc
+\[
+T \simeq \{t\} \sqcup (\alpha \times \varphi),
+\]
+comme pour une arête page 24. Cette bijection oriente $T$ : on numérote $t$,
+puis $\alpha \times \varphi$ dans l'ordre lexicographique, et changer l'ordre
+de $\alpha$ ou celui de $\varphi$ revient à une double transposition. Ainsi
+$\mathbb{A}(T)$ se partage en deux paquets de $15$, échangés par les
+permutations impaires, sur chacun desquels $\operatorname{Alt}_T$ opère
+transitivement. L'application qui envoie une arête $a$ de $\Pi$ sur le
+triplet $(\operatorname{tr}\bar a, \gamma, \alpha)$ obtenu par la bijection de
+la page 24, $\alpha$ étant la paire de côtés de $a \times \varphi$ le long
+desquels l'extrémité dans $a$ est fixe, est compatible avec $G$ et invariante
+par $\iota$ ; son image est donc un des deux paquets, que l'on note
+$\mathbb{A}^{+}(T, \varpi)$\footnote{La page écrit l'application sans dire comment $\alpha$ est choisi ;
+le choix qu'on fait est celui que demande la proposition de la page 28. Que le
+paquet obtenu soit « celui de $\varpi$ » plutôt que l'autre dépend de cette
+convention et de l'ordre des facteurs de $\alpha \times \varphi$ ; la page le
+fixe par la notation, sans vérification.}, et, comme pour les sommets,
+\[
+A/\iota \xrightarrow{\ \sim\ } \mathbb{A}^{+}(T, \varpi).
+\]
+
+\textbf{Faces.} La face $f$ s'envoie sur la paire $\Omega_f = \{t_\omega,
+t_{\omega'}\}$ de la page 23, et $\iota f$ sur la même. Comme
+$\operatorname{Alt}_T$ est transitif sur les dix parties à deux éléments,
+\[
+F/\iota \xrightarrow{\ \sim\ } \mathfrak{P}_2(T).
+\]
+Le complémentaire $T \smallsetminus \Omega_f = \{t_u, t_v, t_w\}$ est l'image
+des sommets de $f$ : c'est sous cette forme, par des parties à trois éléments,
+que la page 31 décrira les faces.
+
+\pagerange{28}{30}
+\subsection*{Les incidences et les repères}
+
+On écrit $\bar s \leftrightarrow \pi$, $\bar a \leftrightarrow (t, \gamma,
+\alpha)$, $\bar f \leftrightarrow \Omega$.
+
+\textbf{Proposition} (pages 28 et 29).
+\begin{enumerate}
+  \item[a)] \emph{$\bar s$ et $\bar a$ sont incidents si et seulement si $\gamma$
+    se déduit de $\pi$ en $t$} : si $u, v$ sont les voisins de $t$ dans $\pi$,
+    $\tilde u \neq t$ le voisin de $u$ et $\tilde v \neq t$ celui de $v$,
+    $\gamma$ est le carré de diagonales $\{u, \tilde u\}$, $\{v, \tilde v\}$,
+    de côtés $\{u, v\}$, $\{v, \tilde u\}$, $\{\tilde u, \tilde v\}$,
+    $\{\tilde v, u\}$, et $\alpha = \bigl\{\{u, v\}, \{\tilde u, \tilde
+    v\}\bigr\}$. \emph{Par suite, les couples sommet-arête incidents
+    s'identifient aux couples $(\pi, t)$ : $\vec A(\bar\Pi) \simeq S(\bar\Pi)
+    \times T$.}
+  \item[b)] \emph{$\bar a$ et $\bar f$ sont incidents si et seulement si
+    $t \notin \Omega$ et $\Omega$ est un côté de $\gamma$ qui n'est pas dans
+    $\alpha$.} Une arête est ainsi sur deux faces, et une face a trois côtés,
+    un par élément $\tau \notin \Omega$. \emph{Les couples arête-face
+    incidents s'identifient aux couples $(\Omega, \Omega')$ de parties à deux
+    éléments disjointes}, $\Omega'$ étant le côté opposé à $\Omega$ dans
+    $\gamma$.
+  \item[c)] \emph{$\bar s$ et $\bar f$ sont incidents si et seulement si
+    $\Omega$ est une diagonale --- une « anti-arête » --- de $\pi$} ; les
+    couples sommet-face incidents sont les structures pentagonales munies
+    d'une diagonale.
+  \item[d)] \emph{Les repères de $\bar\Pi$ correspondent aux triplets
+    $(\pi, \tau, \Omega)$ avec $\pi \in \operatorname{Pent}^{+}(T, \varpi)$,
+    $\tau \in T$, $\Omega$ une diagonale de $\pi$ ne contenant pas $\tau$ et
+    contenant exactement un voisin de $\tau$} : pour $\pi$ et $\tau$ donnés
+    ($6 \cdot 5$ choix), il y a deux telles $\Omega$, d'où les $60$ repères.
+    L'arête est $(\tau, \gamma, \alpha)$, avec $\gamma$ et $\alpha$ déduits de
+    $\pi$ en $\tau$ comme en a).
+\end{enumerate}
+Pour b), étant donnés $\Omega$ et $\tau \notin \Omega$, il y a exactement deux
+structures de carré sur $T \smallsetminus \{\tau\}$ ayant $\Omega$ et son
+complémentaire $\Omega'$ pour côtés opposés --- elles correspondent aux deux
+bijections de non-adjacence entre $\Omega$ et $\Omega'$ ---, et les deux
+orientations qu'elles définissent, avec pour $\alpha$ l'autre paire de côtés,
+sont opposées : une seule donne un élément de $\mathbb{A}^{+}(T,
+\varpi)$\footnote{La page écrit en b) « $\bar a$ et $\bar f$ incidents ssi
+$t \in T \smallsetminus \Omega$ », condition nécessaire mais non suffisante
+(elle laisse six faces pour deux), et la suite de b) est un palimpseste de
+quatre ou cinq lignes biffées où l'on distingue « $\Omega$ sont des arêtes
+consécutives » et « donc $\alpha$ est déterminé par ». La condition complète
+qu'on donne est de l'édition, et a été vérifiée sur l'icosaèdre régulier ;
+c'est elle que suppose le NB de la page 29, qu'on suit ici, et le d). Les
+crochets de la page, $\bar R \simeq S(\bar\Pi) \times T(\bar\Pi)$ et $R' =
+A^{\uparrow}(\bar\Pi) \simeq \{(\Omega, \Omega') \mid \Omega \cap \Omega' =
+\varnothing\}$, sont ceux qu'on a mis dans l'énoncé.}.
+
+\textbf{Les repères comme numérotations} (page 30). Un repère $(\pi, \tau,
+\Omega)$ définit une numérotation $T = \{t_0, t_1, t_2, t_3, t_4\}$ : $t_0 =
+\tau$, $t_1$ l'élément de $\Omega$ adjacent à $\tau$, et l'on parcourt $\pi$
+dans ce sens, de sorte que $\Omega = \{t_1, t_3\}$. Elle est compatible avec
+$\varpi$, puisque $\pi \in \operatorname{Pent}^{+}(T, \varpi)$ et que tout
+parcours d'un pentagone définit son orientation canonique. Réciproquement, une
+numérotation compatible avec $\varpi$ donne $\pi = (t_0\,t_1\,t_2\,t_3\,t_4)$,
+$\tau = t_0$, $\Omega = \{t_1, t_3\}$. \emph{Les $60$ repères de l'icosaèdre
+gauche sont ainsi les $60$ numérotations de $T$ compatibles avec
+$\varpi$}\footnote{La bijection est affirmée par la page ; on a vérifié sur
+l'icosaèdre régulier que les $60$ repères de $\bar\Pi$ donnent $60$
+numérotations distinctes, toutes de la même orientation. La phrase de la page
+30 est inachevée (« définissant un élément de $\operatorname{Rep}(\bar\Pi)$
+… »).}.
+
+\textbf{Ce qui reste.} La page 30 s'achève sur un programme : expliciter, en
+termes de $(T, \varpi)$ et pour $\Pi$ orienté, les ensembles
+$\tilde S(\bar\Pi) \simeq S(\Pi)$, $\tilde A(\bar\Pi) \simeq A(\Pi)$,
+$\tilde F(\bar\Pi) \simeq F(\Pi)$ --- c'est-à-dire remonter de l'icosaèdre
+gauche à l'icosaèdre ---, et décrire directement $\bar\Pi$ comme polyèdre
+quotient. Le premier point reçoit, pour les ensembles, la réponse du tableau
+de la page 31 ; les incidences de $\Pi$ ne sont pas écrites.
+
+\pagerange{31}{32}
+\section*{Le tableau des drapeaux de l'icosaèdre gauche (pages 31 et 32)}
+
+Ces deux pages, d'une autre encre et d'une main plus posée, reprennent le
+résultat dans un cadre abstrait : $E$ est un ensemble à cinq éléments, $\omega$
+une orientation de $E$\footnote{Ce $E$ n'est pas l'ensemble des repères de la
+deuxième partie ; c'est le $T$ des pages 18 à 30. On garde la lettre de la
+page, qui ne sert ici qu'à ce tableau.}. Un diagramme range les ensembles de
+drapeaux par type, $D^{0} = S$, $D^{1} = A$, $D^{2} = F$, $D^{01} = \vec A$,
+$D^{12} = A^{\uparrow}$, $D^{02} = A^{\wedge}$, $D^{012} = A^{\uparrow\to}$,
+avec au-dessus $\tilde S$, $\tilde A$, $\tilde F$ ; le tableau en donne les
+descriptions, dont on vérifie les cardinaux\footnote{Pour $A^{\uparrow}$ la page écrit $\operatorname{Tr}_3(E)$, qui n'a
+que dix éléments, avec le commentaire « triangles pointés », lu avec doute ;
+c'est ce dernier qui est juste. Pour $F$, $A^{\uparrow}$ et $\tilde F$, le
+symbole $\operatorname{Tr}_3$ surcharge un premier symbole, peut-être
+$\mathfrak{P}_3$, et des commentaires biffés disent « parties à trois
+éléments ». La page ajoute pour $A$ « $\simeq$ structures carrées sur une partie à $4$ él. », par la bijection qui fait des deux paires d'une partition les diagonales du carré, et pour $A^{\wedge}$ « $\simeq \operatorname{Pent}^{s}_\omega(E)$ », une arête d'un pentagone étant opposée à un sommet. Une face correspond à la
+partie à trois éléments $T \smallsetminus \Omega$ des pages 27 et 28 ; une
+diagonale marquée d'un pentagone (page 29) équivaut à une arête marquée, celle
+qui lui est opposée.} :
+\[
+\begin{array}{lll}
+S \simeq \operatorname{Pent}_\omega(E) & \text{pentagones compatibles avec } \omega & 6 \\
+A \simeq \operatorname{Car}(E) & \text{partitions de type } (2,2,1) & 15 \\
+F \simeq \operatorname{Tr}_3(E) & \text{parties à trois éléments} & 10 \\
+\vec A \simeq \operatorname{Pent}^{s}_\omega(E) & \text{pentagones à sommet marqué} & 30 \\
+A^{\uparrow} & \text{triangles pointés} & 30 \\
+A^{\wedge} \simeq \operatorname{Pent}^{a}_\omega(E) & \text{pentagones à arête marquée} & 30 \\
+A^{\uparrow\to} \simeq \operatorname{Rep}_\omega(E) & \text{ordres totaux compatibles avec } \omega & 60 \\
+\tilde S & \text{permutations circulaires compatibles avec } \omega & 12 \\
+\tilde A & \text{carrés orientés} & 30 \\
+\tilde F & \text{triangles orientés} & 20
+\end{array}
+\]
+ Les trois dernières lignes ont les cardinaux de $S(\Pi)$,
+$A(\Pi)$, $F(\Pi)$ : elles décrivent l'icosaèdre lui-même. On peut lire
+$\tilde S$, $\tilde A$, $\tilde F$ comme les quotients de l'ensemble des
+repères de $\bar\Pi$ par les rotations $\sigma_2\sigma_1$, $\sigma_0\sigma_2$,
+$\sigma_1\sigma_0$ --- un sommet de $\Pi$ est un sommet de $\bar\Pi$ muni d'un
+sens de rotation autour de lui ---, ce qui fait de $\Pi$ le revêtement
+d'orientation de $\bar\Pi$\footnote{Cette lecture est de l'édition ; la page
+donne les flèches du diagramme et les descriptions, sans commentaire.}.
+
+\textbf{Les involutions.} Un repère étant un ordre total $(a_1, \ldots, a_5)$
+compatible avec $\omega$, la page donne
+\[
+\begin{aligned}
+\sigma_0(a_1, a_2, a_3, a_4, a_5) &= (a_1, a_4, a_5, a_2, a_3), \\
+\sigma_1(a_1, a_2, a_3, a_4, a_5) &= (a_2, a_1, a_5, a_4, a_3), \\
+\sigma_2(a_1, a_2, a_3, a_4, a_5) &= (a_1, a_5, a_4, a_3, a_2),
+\end{aligned}
+\]
+trois doubles transpositions des places, et, page 32, en composant de droite à
+gauche,
+\[
+\begin{aligned}
+\rho_f = \sigma_1\sigma_0 &: (a_1, \ldots, a_5) \mapsto (a_4, a_1, a_3, a_2, a_5), \\
+\rho_s = \sigma_2\sigma_1 &: (a_1, \ldots, a_5) \mapsto (a_2, a_3, a_4, a_5, a_1), \\
+\sigma_0\sigma_2 &: (a_1, \ldots, a_5) \mapsto (a_1, a_3, a_2, a_5, a_4),
+\end{aligned}
+\]
+d'ordres $3$, $5$ et $2$ : ce sont les relations du groupe $\widehat{\Gamma}$
+et le type $(p, q) = (5, 3)$. Les trois permutations engendrent une action
+simplement transitive sur les $60$ ordres compatibles avec $\omega$, isomorphe
+à l'action des $\sigma_i$ sur les repères de l'icosaèdre
+gauche\footnote{La page écrit la troisième ligne « $\sigma = \sigma_0\sigma_1$ »
+; la valeur donnée est celle de $\sigma_0\sigma_2$, d'ordre $2$, alors que
+$\sigma_0\sigma_1$ est d'ordre $3$, inverse de $\rho_f$. Les lettres $\rho$ sont
+lues avec doute. La page ne dit pas quel dictionnaire relie les ordres aux
+repères. Avec celui de la page 30 ($\tau = a_1$, $\Omega = \{a_2, a_4\}$,
+$\pi = (a_1 \ldots a_5)$), $\sigma_0$ et $\sigma_2$ sont bien ceux de la page,
+mais $\sigma_1$ est $(a_1, \ldots, a_5) \mapsto (a_5, a_4, a_3, a_2, a_1)$ ;
+celui de la page change aussi la face. Les deux triples satisfont les mêmes
+relations et définissent des $\widehat{\Gamma}$-ensembles isomorphes, ce qu'on
+a vérifié par machine : celui de la page correspond à un autre dictionnaire.}.
+Le dossier s'arrête là ; le reste de la page 32 est blanc.
+
+\end{document}

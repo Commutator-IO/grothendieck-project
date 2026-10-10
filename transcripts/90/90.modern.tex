@@ -1,0 +1,734 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 90 (pages 1-24,
+% the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. It is held to being mathematically correct as it stands; where
+% the manuscript is loose or mistaken the true statement appears and the
+% footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck cites batch-01.fr.tex
+% (pp. 1-20) or batch-02.fr.tex (pp. 21-24).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its two batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured
+% against the reference reading of folder 115 (made on Opus 5). The
+% literature named in the footnotes (SGA 3, Serre 1968, Thomason 1987, EGA)
+% is cited from memory and was not checked against the sources.
+%
+% Scope. The odd pages (1-23) are his notes; the even pages (2-24) are their
+% versos, typed leaves of EGA IV §§ 18.6-18.9, published text, described
+% only as the transcription's notes describe them (one section, no
+% restatement). The hand of the ink corrections on the typed leaves is not
+% established; said once.
+%
+% Spine. Equivariant modules, from a Dedekind ring to a scheme with an
+% ample linearised line bundle:
+%   p. 1        Lemma 1: saturation in a torsion-free module over a Dedekind
+%               ring; a) <=> d) (filtered union of saturated f.g.
+%               submodules); e) (linear forms separate) sufficient; necessary
+%               for countably generated M. b), c) largely illegible.
+%   p. 3        Lemma 2: every f.g. M in B lies in a f.g. saturated N with
+%               Delta N in N (x) N.
+%   p. 5        two corollaries: faithful linear representation over a
+%               Dedekind ring; over a field, affine groups are strict
+%               projective limits of affine groups of finite type.
+%   pp. 7, 9    B = union of B_i (B/B_i flat, Delta B_i in B_i (x) B_i, B_i
+%               f.g. projective): f.g. G-modules = union of the categories of
+%               f.g. modules over U_i = dual of B_i; every f.g. G-module is a
+%               quotient of a projective one.
+%   pp. 9, 11   the same over a scheme S' with the resolution property.
+%   pp. 13, 15  general statement 1)-4) for O_X-G-modules (read here with G
+%               acting trivially on X).
+%   pp. 17, 19  restatement with G acting on X and a G-linearised ample L;
+%   pp. 19-23   proof of 1) and 2) through the graded module of sections.
+%
+% Notation fixed for the whole folder. Delta f(g,h) = f(gh) (comultiplication);
+% a G-module is a comodule delta : E -> B (x) E, as on p. 7; U_i = \check B_i
+% the dual of B_i; E_i the i-admissible part of E; N~ the saturation (pp.
+% 1-5), M~ the sheaf of a graded module (pp. 19-23) — two different tildes,
+% kept apart in the text; Gamma^.(E) = (+)_n f_*(E(n)) (written Gamma_* then
+% Gamma^. on p. 19); A^. = Gamma^.(O_X).
+%
+% Substantive departures from the page, with pages.
+%  - p. 3: « N of finite type » is supplied in Lemma 2 (without it N = B
+%    works); the core of the proof is illegible, and the local-finiteness step
+%    is supplied and attributed.
+%  - p. 3: with Delta f(g,h) = f(gh), stability under G x e corresponds to
+%    Delta N in B (x) N, not N (x) B; the page's « resp. » is swapped;
+%    harmless, only the conjunction is used.
+%  - p. 3: the tildes missing on the last three N of the final formula are
+%    restored.
+%  - pp. 13-15: no action of G on X is stated; read with trivial action (the
+%    construction F (x) \check B_i of 3) needs it). The explicit formula
+%    F' = sum_i U_i (F cap E_i) is this reading's.
+%  - pp. 9, 15: « S (or X) noetherian regular » needs separated; X
+%    quasi-compact supplied where a single index i is needed.
+%  - p. 19: « il suffit de prouver 1) et 3) »: the proof of pp. 19-23 proves
+%    1) and 2); 3) is never proved; a proof is sketched and marked ours.
+%  - p. 23: « sous-module G-invariant de Gamma^n(F) » read as the smallest
+%    G-stable submodule of Gamma^n(E) containing the phi_i.
+%
+% Announced and never established in the folder: conditions b), c) of Lemma
+% 1 (illegible); the claim of p. 9 that Lemma 1's conditions on B mean that
+% the irreducible components of G have non-empty fibres; the cancelled
+% Proposition of p. 13; part 3) of p. 19; anything about K-groups — despite
+% the title « KG (X) », no K-group, no Riemann-Roch appears.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{90}
+\pages{1}{24}
+\dating{[à partir de 1964]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{KG (X) : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Un groupe agit sur un objet ; on voudrait ramener cette action à des
+matrices, c'est-à-dire à une action sur des espaces de dimension finie. Sur
+un corps, c'est une vieille idée : toute action « raisonnable » d'un groupe
+algébrique sur un espace vectoriel est réunion de petites actions de
+dimension finie, comme une fonction sur un groupe fini se décompose suivant
+ses translatées. Ces douze pages manuscrites demandent ce qui reste de ce
+principe quand le corps est remplacé par un anneau comme $\mathbf{Z}$, puis
+par une base géométrique quelconque, et quand le groupe agit non plus sur un
+module mais sur des faisceaux au-dessus d'un espace $X$ sur lequel il agit
+lui-même.
+
+La difficulté propre à $\mathbf{Z}$ est la torsion. Dans un espace vectoriel,
+un sous-espace de dimension finie est fermé sur lui-même ; dans un groupe
+abélien sans torsion, le sous-groupe engendré par un élément $x$ n'est pas
+« saturé » : il faut lui adjoindre tous les $y$ dont un multiple $ny$ lui
+appartient, et ce saturé peut cesser d'être de type fini (pensez à
+$\mathbf{Z} \subset \mathbf{Q}$). Le premier lemme dit exactement quand ce
+phénomène ne se produit pas, et le second s'en sert pour trouver, dans
+l'algèbre des fonctions d'un groupe, des morceaux de type fini saturés et
+stables par les translations. Deux corollaires en sortent : un groupe de
+type fini sur un anneau de Dedekind a une représentation linéaire fidèle,
+et sur un corps tout groupe affine est limite de groupes de type fini.
+
+L'idée qui organise la suite est un changement de point de vue : une action
+d'un groupe $G$ sur un module équivaut à une action d'une \emph{algèbre}, le
+dual d'un morceau de l'algèbre des fonctions de $G$ — de même que, pour un
+groupe fini, les représentations sont les modules sur l'algèbre du groupe.
+Dès lors, tout ce qu'on sait sur les modules (être quotient d'un module
+libre, par exemple) se transporte aux modules munis d'une action de $G$.
+Grothendieck l'énonce sur une base $S$ quelconque, puis pour un schéma $X$
+muni d'un fibré en droites ample compatible avec l'action : là, il ramène
+les faisceaux sur $X$ à des modules gradués sur $S$, où l'action ne bouge
+plus la base, et la question redevient algébrique. Le but est visible : tout
+faisceau cohérent muni d'une action de $G$ est quotient d'un fibré vectoriel
+muni d'une action de $G$, ce qui est la condition pour qu'une théorie $K$
+équivariante — le $K_G(X)$ du titre — se calcule avec des fibrés. Mais le
+dossier ne parle jamais de groupes $K$ : il pose les fondations et s'arrête
+au milieu d'une démonstration, avec en marge « rédiger mieux ce début ».
+
+Les noms d'aujourd'hui : comodules, sous-comodules et finitude locale ;
+faisceaux $G$-équivariants et fibrés $G$-linéarisés ; propriété de
+résolution équivariante, étudiée sous ce nom par Thomason.
+
+\keywords{Dedekind domain, saturated submodule, Mittag-Leffler module, comodule, local finiteness of comodules, faithful linear representation, pro-algebraic group, dual algebra of a coalgebra, equivariant quasi-coherent sheaf, G-linearized ample line bundle, equivariant resolution property, graded module of sections}
+\end{resume}
+
+\pagerange{1}{24}
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier a vingt-quatre pages. Les pages impaires portent les notes, sans
+pagination de sa main ; les pages paires en sont les versos : des feuillets
+dactylographiés d'EGA IV, §§ 18.6 à 18.9, sans rapport avec les notes, dont
+on dit un mot à la fin. L'ordre de lecture est celui des pages impaires.
+
+\begin{itemize}
+  \item \textbf{Page 1 : Lemme 1.} Saturation dans un module sans torsion
+    sur un anneau de Dedekind ; quand les saturés des sous-modules de type
+    fini restent de type fini.
+  \item \textbf{Page 3 : Lemme 2.} Dans l'algèbre $B$ d'un groupe affine,
+    tout sous-module de type fini est contenu dans un sous-module de type
+    fini, saturé, stable par la comultiplication.
+  \item \textbf{Page 5 : deux corollaires.} Représentation linéaire fidèle
+    sur un anneau de Dedekind ; groupes affines sur un corps comme limites
+    projectives strictes de groupes de type fini.
+  \item \textbf{Pages 7 et 9 : les algèbres $U_i$.} Si $B$ est réunion de
+    sous-cogèbres $B_i$ projectives de type fini, les $G$-modules de type
+    fini sont les modules de type fini sur les duaux $U_i$ ; tout $G$-module
+    de type fini est quotient d'un $G$-module projectif de type fini.
+  \item \textbf{Pages 9 et 11 : sur un schéma $S'$.} Même conclusion, avec
+    « localement libre », sur un schéma où les faisceaux de type fini sont
+    quotients de localement libres.
+  \item \textbf{Pages 13 et 15 : énoncé général 1) à 4)} pour un
+    $\mathcal{O}_X$-$G$-module quasi-cohérent ; lu ici avec $G$ agissant
+    trivialement sur $X$.
+  \item \textbf{Pages 17 et 19 : reprise} avec $G$ agissant sur $X$ et un
+    faisceau inversible ample $G$-linéarisé ; \textbf{pages 19 à 23}, la
+    démonstration de 1) et 2) par le module gradué des sections, qui
+    s'arrête là.
+\end{itemize}
+
+La progression est cohérente : chaque étape réduit la suivante à la
+précédente. Le Lemme 1 sert le Lemme 2, qui fournit les hypothèses des pages
+7 et 13 ; et la démonstration des pages 19 à 23 ramène l'action sur $X$ à
+une action sur la base $S$, où l'énoncé des pages 13 et 15 s'applique.
+
+Le titre de l'inventaire, « KG (X) », désigne le groupe de Grothendieck des
+faisceaux $G$-équivariants sur $X$. Aucune page ne le nomme : le dossier en
+est le préalable — l'existence de résolutions équivariantes —, non la
+théorie\footnote{Le classement du dossier dans le groupe « Géométrie et
+topologie combinatoire » (69 à 102) ne tient pas à son contenu. Il ne
+rencontre pas les dossiers voisins déjà modernisés — 81 (cartes et
+découpages), 88 (cartes standards), 89 (ensembles 3-3) —, qui sont
+combinatoires ; il est de la géométrie algébrique, comme le 94 selon sa
+transcription.}.
+
+Sur la date : les notes sont écrites au dos de feuillets dactylographiés
+d'EGA IV, § 18. Si, comme d'ordinaire, le papier dactylographié a servi de
+brouillon, elles sont postérieures à la frappe de ces feuillets (la partie
+d'EGA IV qui les contient a paru en 1967) ; les pages elles-mêmes ne le
+disent pas, et la datation « à partir de 1964 » est celle de l'inventaire.
+
+\textbf{Conventions, valables pour tout le dossier.} $A$ est un anneau
+commutatif, $G$ un $A$-groupe affine d'algèbre $B$, de comultiplication
+$\Delta \colon B \to B \otimes_A B$, $\Delta f(g,h) = f(gh)$, et de coünité
+$\varepsilon$. Un $G$-module (un « $A$-$G$-module ») est un $A$-module $E$
+muni d'une coaction $\delta \colon E \to B \otimes E$, comme à la page 7 ;
+c'est un comodule sur $B$. Pour une sous-cogèbre $B_i$ projective de type
+fini, $U_i = \check{B}_i = \mathrm{Hom}_A(B_i, A)$ est son algèbre duale. Le
+tilde a deux sens dans le dossier, et on les garde séparés : aux pages 1 à 5,
+$\widetilde{N}$ est le saturé d'un sous-module ; aux pages 19 à 23,
+$\widetilde{M}$ est le faisceau sur $X$ associé à un module gradué $M$. Sur
+un schéma, $\underline{\Gamma}^{\cdot}(E) = \bigoplus_n f_{*}(E(n))$ et
+$A^{\cdot} = \underline{\Gamma}^{\cdot}(\mathcal{O}_X)$.
+
+\pagerange{1}{1}
+\section*{Saturation sur un anneau de Dedekind (page 1)}
+
+Soit $A$ un anneau de Dedekind et $M$ un $A$-module plat, c'est-à-dire sans
+torsion. Pour un sous-module $N \subset M$, soit $\widetilde{N}$ l'image
+inverse dans $M$ de la torsion de $M/N$ : c'est le \emph{saturé} de $N$, le
+plus petit sous-module $N' \supset N$ tel que $M/N'$ soit sans torsion, et
+$\widetilde{N}/N$ est de torsion\footnote{La ligne qui le dit commence par
+« D.--- », lecture incertaine (définition ? démonstration ?).}. On dit $N$
+\emph{saturé} si $\widetilde{N} = N$.
+
+\textbf{Lemme 1.} Les conditions suivantes sont équivalentes :
+\begin{itemize}
+  \item[a)] pour tout sous-module de type fini $N$ de $M$, $\widetilde{N}$
+    est de type fini (de façon équivalente, $\widetilde{N}/N$ est de
+    longueur finie\footnote{« longueur » est une lecture incertaine. Elle
+    donne l'énoncé juste : $\widetilde{N}/N$ est de torsion, et un module de
+    torsion de type fini sur un anneau de Dedekind est de longueur finie.}) ;
+  \item[d)] $M$ est réunion filtrante de sous-modules $M_i$ de type fini et
+    saturés ; pour $M_i \subset M_j$, $M_i$ est alors facteur direct de
+    $M_j$.
+\end{itemize}
+Elles sont satisfaites si
+\begin{itemize}
+  \item[e)] les formes linéaires sur $M$ séparent ses éléments,
+    c'est-à-dire s'il existe une injection $M \hookrightarrow A^{I}$ ; c'est
+    le cas en particulier si $M$ est projectif ;
+\end{itemize}
+et, si $M$ admet un ensemble dénombrable de générateurs, e) est aussi
+nécessaire — et équivaut alors à « $M$ projectif »\footnote{La page annonce
+quatre conditions équivalentes a) à d) et deux autres, b) et c), en
+dépendent. Elles sont presque entièrement illisibles et refaites plusieurs
+fois. Ce qu'on en lit : b) fait intervenir, pour un idéal maximal
+$\mathfrak{p}$, l'anneau $A(\mathfrak{p}) = \bigcup_n \mathfrak{p}^{-n} =
+\Gamma(S - \{\mathfrak{p}\}, \mathcal{O}_S)$, $S = \mathrm{Spec}\,A$, dans un
+passage biffé ; c) porte sur les localisés $M_{\mathfrak{p}}$ et le corps
+des fractions $K$ ; les deux sont précédés de « si $A$ n'est pas un corps »
+(sur un corps, toutes les conditions sont trivialement vraies). On ne les
+reconstitue pas. Une remarque, qui est de cette lecture, montre qu'une
+condition purement locale ne peut être que nécessaire : pour $A =
+\mathbf{Z}$, le sous-groupe $M$ de $\mathbf{Q}$ engendré par les $1/p$,
+$p$ premier, a tous ses localisés $M_{(p)} = p^{-1}\mathbf{Z}_{(p)}$ de
+type fini et ne contient aucun $\mathbf{Z}[1/p]$, et pourtant le saturé de
+$\mathbf{Z}$ dans $M$ est $M$ entier, qui n'est pas de type fini. Le texte
+de « d) » (« de type fini et "saturés", i.e.\ \ldots\ facteur direct dans
+$M_j$ ») est ajouté en interligne, et la fin, « les applications de
+transition injectives », est d'une lecture incertaine. « Moins fine », pour
+« $M$ projectif », est aussi incertain ; la page le donne comme condition
+plus forte que e), ce qui est juste.}.
+
+\emph{Démonstration} (la page n'en donne pas ; celle-ci est de cette
+lecture). a)~$\Rightarrow$~d) : les $\widetilde{N}$, $N$ de type fini,
+forment un système filtrant de sous-modules saturés de type fini dont la
+réunion est $M$. Si $M_i \subset M_j$ sont saturés, $M_j/M_i \subset M/M_i$
+est sans torsion de type fini, donc projectif, et $M_i$ est facteur direct
+de $M_j$. d)~$\Rightarrow$~a) : un $N$ de type fini est contenu dans un
+$M_i$ ; $M/M_i$, réunion filtrante des $M_j/M_i$ sans torsion, est sans
+torsion, donc $\widetilde{N} \subset M_i$, qui est noethérien.
+e)~$\Rightarrow$~a) : si $N$ est de type fini, $N \otimes K$ est de
+dimension finie, donc un nombre fini de coordonnées $A^{I} \to A^{k}$ sont
+injectives sur $N \otimes K \supset \widetilde{N}$, et $\widetilde{N}$ est
+un sous-module de $A^{k}$. Enfin, si $M$ est dénombrablement engendré et
+satisfait d), on extrait une suite croissante $M_1 \subset M_2 \subset
+\cdots$ de saturés de type fini de réunion $M$ ; chaque $M_{n+1}/M_n$ est
+projectif, donc $M \simeq \bigoplus_n M_{n+1}/M_n$ est projectif et se
+plonge dans un $A^{I}$.
+
+On retiendra que, sous d), $M$ est limite inductive de modules projectifs
+de type fini à transitions scindées : un module plat et de Mittag-Leffler,
+dirait-on aujourd'hui\footnote{Le nom est moderne (Raynaud et Gruson, 1971)
+et n'est pas sur la page ; il n'est employé ici que parce qu'il désigne
+exactement la propriété dont la suite du dossier se sert : la
+formation des sous-comodules commute aux intersections.}.
+
+\pagerange{3}{3}
+\section*{Sous-modules stables de l'algèbre d'un groupe (page 3)}
+
+\textbf{Lemme 2.} Soit $A$ un anneau de Dedekind et $G$ un $A$-groupe
+affine d'algèbre $B$ plate, satisfaisant aux conditions du Lemme 1. Pour tout
+sous-module de type fini $M$ de $B$, il existe un sous-module $N \supset M$
+de $B$, \emph{de type fini}\footnote{« de type fini » n'est pas dans
+l'énoncé de la page ; sans lui, $N = B$ convient et le lemme est vide. La
+démonstration le vise (« $\widetilde{N}$ \ldots\ de t.f. »).}, tel que
+\begin{itemize}
+  \item[a)] $N$ est saturé — ce qui entraîne que $N \otimes_A N \to B
+    \otimes_A B$ est injectif ;
+  \item[b)] $\Delta N \subset N \otimes N$.
+\end{itemize}
+Un tel $N$, sans torsion et de type fini, est projectif ; b) en fait une
+sous-cogèbre de $B$.
+
+\emph{Démonstration.} On fait opérer $G \times G$ sur $B$ par
+\[
+  \bigl((g,h)f\bigr)(s) = f(g^{-1} s h) .
+\]
+Un sous-module $N$ à quotient $B/N$ plat est stable par $G \times e$ (resp.\
+$e \times G$) si et seulement si $\Delta N \subset B \otimes N$ (resp.\
+$\Delta N \subset N \otimes B$)\footnote{La page écrit la correspondance
+dans l'autre sens ($G \times e$ avec $N \otimes B$) ; c'est affaire de
+convention sur $\Delta$, et seule la conjonction des deux conditions sert.}.
+L'argument a trois temps, dont le premier est presque illisible sur la
+page\footnote{Le milieu de la démonstration, une dizaine de lignes, est
+réduit à quelques mots lus (« le passage de $N$ à $\widetilde{N}$ », « la
+condition d'être invariant par $G \times G$ », « de t.f. ») ; l'ordre
+proposé ici les respecte, mais l'énoncé de finitude locale qui ouvre
+l'argument est restitué par cette lecture.} :
+\begin{enumerate}
+  \item $M$ est contenu dans un sous-module de type fini $N_0$ stable par
+    $G \times G$ : c'est la finitude locale des comodules sur un anneau de
+    Dedekind quand $B$ est plat\footnote{On trouve cet énoncé chez Serre,
+    « Groupes de Grothendieck des schémas en groupes réductifs déployés »
+    (Publ.\ IHÉS 34, 1968), § 1 ; citation de mémoire, non vérifiée, et sans
+    rien dire de l'ordre des deux textes, que les pages ne permettent pas de
+    fixer.} ;
+  \item le saturé $N = \widetilde{N_0}$ est de type fini par le Lemme 1 a),
+    et il reste stable : si $x \in N$ et $ax \in N_0$, $a \neq 0$, alors
+    $a\,\Delta x \in N \otimes B$, et $(B \otimes B)/(N \otimes B) = (B/N)
+    \otimes B$ est sans torsion, donc $\Delta x \in N \otimes B$ ; de même
+    de l'autre côté ;
+  \item comme $B/N$ est plat,
+    \[
+      \Delta N \subset (N \otimes B) \cap (B \otimes N) = N \otimes N
+    \]
+    (un élément de $N \otimes B$ nul dans $B \otimes (B/N)$ est nul dans
+    $N \otimes (B/N)$, qui s'y injecte).
+\end{enumerate}
+C'est la formule finale de la page\footnote{Sur la page, les tildes sont
+portés sur les deux premiers $N$ de la formule et manquent aux trois
+derniers ; ils sont rétablis ici, puisque l'égalité n'est vraie que pour
+le saturé. Une insertion marginale, en partie illisible, se termine par
+« $N = \widetilde{N}$ ».}.
+
+\pagerange{5}{5}
+\section*{Deux corollaires (page 5)}
+
+\textbf{Corollaire (représentation fidèle).} Soient $A$ et $G$ comme au
+Lemme 2, et $G$ de plus de type fini sur $A$. Alors $G$ admet une
+représentation linéaire fidèle sur un $A$-module projectif de type
+fini\footnote{Les deux corollaires de la page 5, et celui de la page 9,
+portent un titre souligné lu « Cor.\ Main » sous réserve ; ce peut être
+« Corollaire ». « de plus » est ajouté en interligne.}.
+
+En effet, $B$ est une $A$-algèbre de type fini ; appliquons le Lemme 2 à
+un sous-module de type fini qui l'engendre. On obtient $N$ qui a) engendre
+l'algèbre $B$, b) est saturé, donc projectif de type fini, c) vérifie
+$\Delta N \subset N \otimes B$ : $N$ est un sous-comodule de $B$ pour la
+représentation régulière. Un point $g$ de $G$ à valeurs dans une
+$A$-algèbre $A'$ qui opère trivialement sur $N \otimes A'$ opère
+trivialement sur l'algèbre $B \otimes A'$ qu'il engendre, donc est
+l'unité\footnote{La phrase qui introduit la représentation (« Alors \ldots\
+de $G$ ») est illisible ; on la lit comme la représentation de $G$ dans
+$N$.}. On a même davantage : les coefficients matriciels de $N$ contiennent
+$N$ (puisque $n = (\varepsilon \otimes \mathrm{id})\Delta n$), donc
+engendrent $B$, et $G \to \mathrm{GL}(N)$ est une immersion
+fermée\footnote{Remarque de cette lecture ; la page dit seulement
+« fidèle ».}.
+
+\textbf{Corollaire (groupes sur un corps).} Si $A$ est un corps $k$, tout
+groupe affine sur $k$ est limite projective d'un système projectif strict
+— à morphismes de transition fidèlement plats — de groupes affines
+\emph{de type fini}\footnote{Le début de l'énoncé est illisible, et
+« fid.\ plats » est d'une lecture incertaine. La démonstration n'est pas
+écrite.}. C'est un résultat classique : $B$ est réunion filtrante de ses
+sous-algèbres de Hopf de type fini (celle qu'engendrent un $N$ du Lemme 2 et
+son image par l'antipode), et une algèbre de Hopf est fidèlement plate sur
+toute sous-algèbre de Hopf.
+
+\pagerange{7}{9}
+\section*{Les modules sur les algèbres duales (pages 7 et 9)}
+
+\textbf{Proposition.} Soit $A$ un anneau\footnote{Le début de l'énoncé est
+illisible ; rien dans la suite n'exige plus qu'un anneau commutatif.}, $G$
+un $A$-groupe affine d'algèbre $B$. On suppose que $B$ est réunion
+filtrante de sous-modules $B_i$ tels que
+\begin{itemize}
+  \item[a)] $B/B_i$ est plat sur $A$, donc $B_i \otimes B_i \subset B
+    \otimes B$ ;
+  \item[b)] $\Delta B_i \subset B_i \otimes B_i$ ;
+  \item[c)] les $B_i$ sont projectifs de type fini.
+\end{itemize}
+Par a), $B_i \otimes E \subset B \otimes E$ pour tout $A$-module $E$. Un
+$G$-module $E$ est dit \emph{$i$-admissible} si sa coaction se factorise
+en $\delta_i \colon E \to B_i \otimes E$. Alors :
+\begin{enumerate}
+  \item la catégorie des $G$-modules de type fini est la réunion, pour $i$
+    croissant, de ses sous-catégories pleines $C_i(G)_f$ formées des
+    $i$-admissibles ;
+  \item par b) et c), $B_i$ est une cogèbre et $U_i = \check{B}_i$ une
+    algèbre associative unitaire ; les $U_i$ forment un système projectif
+    strict d'algèbres ;
+  \item $C_i(G)_f$ est canoniquement équivalente à la catégorie des
+    $U_i$-modules de type fini, et les foncteurs de transition $C_i \subset
+    C_j$ correspondent à la restriction des scalaires le long de $U_j \to
+    U_i$\footnote{« strict » et « de t.f. » sont ajoutés en interligne. Une
+    première rédaction de 2 et 3 est barrée au bas de la page 7.}.
+\end{enumerate}
+
+Tout tient en peu de mots. Les images par $\delta$ d'un système fini de
+générateurs sont des sommes finies, contenues dans un $B_i \otimes E$, d'où
+1. La coünité se restreint à $B_i$, et la coassociativité aussi, puisque
+$B_i \otimes B_i \otimes E \to B \otimes B \otimes E$ est injectif par a)
+et c) ; une $B_i$-coaction sur $E$ est la même chose, par dualité des
+projectifs de type fini, qu'une structure de $U_i$-module, $u \cdot e = (u
+\otimes \mathrm{id})\,\delta_i(e)$. Pour $i \leq j$, $B_j/B_i$ est plat de
+type fini, donc projectif, $B_i$ est facteur direct de $B_j$ et $U_j \to
+U_i$ est surjectif : c'est le sens de « strict ».
+
+\textbf{Corollaire.} Sous ces hypothèses, tout $G$-module $E$ de type fini
+est quotient d'un $G$-module \emph{projectif} de type fini\footnote{« de
+t.f.\ $E$ » est ajouté en interligne et « projectif », souligné, au-dessus
+d'un mot biffé ; le mot « module » est d'une lecture incertaine.}.
+
+Car $E$ est un $U_i$-module de type fini pour un $i$, donc quotient de
+$U_i^{n}$, qui est un $U_i$-module projectif de type fini sur $A$, donc un
+$G$-module dans $C_i(G)_f$. Autrement dit, si $A^{n} \to E$ est surjectif,
+$A^{n} \otimes \check{B}_i \to E$, $x \otimes u \mapsto u \cdot x$, est
+un épimorphisme de $G$-modules ; c'est la forme que prend l'énoncé 3) de la
+page 15.
+
+\pagerange{9}{11}
+\section*{Sur un schéma de base (pages 9 et 11)}
+
+\textbf{Proposition.} Soit $A$ un anneau de Dedekind, $S = \mathrm{Spec}\,A$,
+$G$ un groupe affine plat sur $A$ d'algèbre $B$ satisfaisant aux conditions
+du Lemme 1\footnote{La page ajoute entre parenthèses : « cela signifie que
+pour les composantes irréductibles de $G$, \emph{leurs} fibres sont non
+vides ». L'équivalence n'est pas démontrée et cette lecture ne l'a pas
+vérifiée en général. Un exemple en montre le sens : sur $\mathbf{Z}_p$, le
+groupe obtenu en ôtant du groupe constant $\mathbf{Z}/2$ le point non
+neutre de la fibre spéciale a pour algèbre $\mathbf{Z}_p \times
+\mathbf{Q}_p$ ; sa composante $\mathrm{Spec}\,\mathbf{Q}_p$ a une fibre
+spéciale vide, et le saturé de $\mathbf{Z}_p \cdot (0,1)$ est $0 \times
+\mathbf{Q}_p$, qui n'est pas de type fini.}. Soit $S'$ un schéma
+quasi-compact sur $S$ sur lequel tout module quasi-cohérent de type fini
+est quotient d'un module localement libre de type fini — par exemple $S'$
+muni d'un faisceau inversible ample, ou noethérien régulier et
+séparé\footnote{La page écrit « $S$ noeth.\ régulier », et un autre
+exemple illisible. Pour un schéma noethérien régulier, la propriété vaut
+s'il est séparé (Kleiman ; SGA 6, II, 2.2.7.1, de mémoire) ; la
+séparation, comme la quasi-compacité qui permet de prendre un seul indice
+$i$, est ajoutée ici. « schéma », « localement libre » et « p.\ ex. » sont
+des lectures incertaines, et plusieurs mots de l'hypothèse sur $S'$ sont
+illisibles.}. Alors tout $G_{S'}$-module quasi-cohérent de type fini est
+quotient d'un $G_{S'}$-module quasi-cohérent de type fini qui est de plus
+\emph{localement libre}.
+
+La démonstration n'est pas écrite. Elle tient aux deux sections
+précédentes : par le Lemme 2, $B$ est réunion filtrante de sous-cogèbres
+$B_i$ saturées de type fini (on sature et on stabilise chaque sous-module
+de type fini), qui satisfont a), b), c) de la page 7. Si $F \to E$ est un
+épimorphisme d'un localement libre de type fini (sans action), $F \otimes
+\check{B}_i \to E$ est un épimorphisme de $G$-modules dès que $E$ est
+$i$-admissible, comme dans le corollaire de la page 9.
+
+\pagerange{13}{15}
+\section*{L'énoncé général (pages 13 et 15)}
+
+La page 13 s'ouvre sur une Proposition barrée : pour $A$ de Dedekind et $G$
+plat affine de type fini sur $A$, $N$ comme dans le Lemme 2 et la
+représentation de $G$ dans $N$ induite par la représentation régulière
+gauche, le morphisme $G \to \underline{\mathrm{Aut}}(N)$ aurait une
+propriété dont le nom est perdu\footnote{La fin se lit sous réserve
+« morphisme \ldots\ plat », peut-être « fidèle et plat ». Tout l'énoncé est
+barré de six traits ; ce qu'on peut en dire de juste est l'immersion fermée
+du premier corollaire de la page 5.}. Il l'abandonne pour un énoncé sur une
+base quelconque.
+
+Soit $S$ un schéma, $G$ un $S$-groupe affine d'algèbre $\mathcal{B}$
+(quasi-cohérente sur $S$), réunion filtrante de sous-Modules
+$\mathcal{B}_i$ tels que
+\begin{itemize}
+  \item[1)] $\mathcal{B}/\mathcal{B}_i$ est plat, donc $\mathcal{B}_i
+    \otimes \mathcal{B}_i \subset \mathcal{B} \otimes \mathcal{B}$ ;
+  \item[2)] $\Delta \mathcal{B}_i \subset \mathcal{B}_i \otimes
+    \mathcal{B}_i$ ;
+  \item[3)] les $\mathcal{B}_i$ sont localement libres de type fini.
+\end{itemize}
+Soit $X$ un $S$-schéma, et $E$ un $\mathcal{O}_X$-$G$-module
+quasi-cohérent, $G$ agissant trivialement sur $X$\footnote{La page ne dit
+rien d'une action de $G$ sur $X$. L'énoncé 3), où apparaît
+$F \otimes \check{\mathcal{B}}_i$, n'a de sens tel quel que pour une
+action triviale, et la reprise de la page 17 introduit l'action sur $X$ ;
+on lit donc les pages 13 et 15 ainsi. C'est d'ailleurs le cas auquel la
+démonstration des pages 19 à 23 ramène le cas général. Une hypothèse
+« Supposons $X$ quasi-proj.\ \ldots » est biffée après 3).}. Alors :
+\begin{itemize}
+  \item[1)] tout sous-module quasi-cohérent $F$ de $E$ est contenu dans un
+    plus petit sous-module quasi-cohérent $F'$ stable par $G$ ; sa
+    formation commute à tout changement de base plat ; si $F$ est de type
+    fini, $F'$ aussi ;
+  \item[2)] si $X$ est quasi-compact et quasi-séparé, $E$ est réunion
+    filtrante de sous-modules quasi-cohérents de type fini stables par $G$ ;
+  \item[3)] si $X$ est quasi-compact, $F$ quasi-cohérent de type fini et
+    $F \to E$ un morphisme dont l'image engendre $E$ comme $G$-module, il
+    existe un épimorphisme de $G$-modules $F \otimes \check{\mathcal{B}}_i
+    \to E$ — localement libre de type fini si $F$ l'est\footnote{Le début
+    de 3) est illisible (« Soit $F \to E$ un \ldots ») ; « l'image
+    engendre $E$ » est ce qu'on lit. La quasi-compacité de $X$, qui permet
+    un seul $i$, est ajoutée. Un passage biffé entre 2) et 3) mentionne
+    « $X$ quasi-compact et \ldots ».} ;
+  \item[4)] si tout module quasi-cohérent de type fini sur $X$ est quotient
+    d'un localement libre de type fini (par exemple si $X$ admet un faisceau
+    inversible ample, ou s'il est noethérien régulier et séparé) et $X$
+    quasi-compact, tout $\mathcal{O}_X$-$G$-module quasi-cohérent de type
+    fini est quotient d'un $\mathcal{O}_X$-$G$-module localement libre de
+    type fini\footnote{« quasi-proj. », « admet » et « régulier » sont des
+    lectures incertaines ; « de type fini » pour le module de départ est
+    restitué sous un mot illisible. Sur la séparation, voir la note de la
+    page 9.}.
+\end{itemize}
+
+Aucune démonstration n'est écrite ; voici celle que les pages 7 et 9
+contiennent en germe — la formule est de cette lecture. Soit $E_i \subset
+E$ la partie $i$-admissible, noyau de $E \to (\mathcal{B}/\mathcal{B}_i)
+\otimes E$ ; c'est un sous-$G$-module (avec une base duale locale $(b_k,
+b_k^{*})$ de $\mathcal{B}_i$, $\delta e = \sum b_k \otimes b_k^{*} \cdot e$),
+un $U_i$-module, et $E = \bigcup_i E_i$. Alors
+\[
+  F' = \sum_i U_i \cdot (F \cap E_i) .
+\]
+C'est un sous-$G$-module contenant $F$ (la coünité est dans $U_i$) ; et
+tout sous-$G$-module $E''$ contenant $F$ est stable par chaque $U_i$, car la
+platitude de $\mathcal{B}/\mathcal{B}_i$ donne $(\mathcal{B}_i \otimes E)
+\cap (\mathcal{B} \otimes E'') = \mathcal{B}_i \otimes E''$. La formation de
+$E_i$ et des images commute aux changements de base plats. Si $F$ est de
+type fini, localement $F \subset E_{i_0}$ et $F' = U_{i_0} \cdot F$, image
+de $\check{\mathcal{B}}_{i_0} \otimes F$, est de type fini — ce qui donne
+3) ; 2) suit de 1), puisqu'un module quasi-cohérent sur un schéma
+quasi-compact quasi-séparé est réunion de ses sous-modules de type fini ;
+4) suit de 3).
+
+\pagerange{17}{19}
+\section*{Avec une action sur $X$ (pages 17 et 19)}
+
+L'énoncé est repris, cette fois avec $G$ agissant sur $X$.
+
+Soit $G$ un groupe plat et affine sur $S$, d'algèbre $\mathcal{B}$
+satisfaisant 1), 2), 3) de la page 13 ; par 2) et 3), les
+$\check{\mathcal{B}}_i$ sont des faisceaux d'algèbres associatives
+unitaires, localement libres de type fini. Soit $f \colon X \to S$
+quasi-compact et quasi-séparé\footnote{Hypothèse posée au cours de la
+démonstration, page 19 (« $f$ qu.-cpt et (qu.-)sép. »).}, sur lequel $G$
+opère, et $L$ un faisceau inversible ample relativement à $S$ sur lequel
+$G$ opère de façon compatible à son action sur $X$ — un faisceau
+inversible $G$-linéarisé, dit-on aujourd'hui\footnote{Le mot n'est pas sur
+la page. La notion de linéarisation est dans la théorie géométrique des
+invariants de Mumford (1965) ; on n'en tire rien sur ce que Grothendieck
+connaissait en écrivant. Une première rédaction, « muni de $L$ ample
+rel$/S$ », est biffée et remplacée par celle-ci.}. Soit $E$ un
+$\mathcal{O}_X$-$G$-Module quasi-cohérent.
+\begin{itemize}
+  \item[1)] Pour tout sous-module quasi-cohérent $F$ de $E$, il existe un
+    plus petit sous-module quasi-cohérent $F'$ de $E$ stable par $G$ et
+    contenant $F$ ; sa formation commute à tout changement de base plat
+    $S' \to S$.
+  \item[2)] Si $F$ est de type fini, $F'$ l'est aussi\footnote{Écrit en
+    interligne au-dessus d'un 2) barré : « si $S$ \ldots\ quasi-compact
+    quasi-séparé, $E$ est limite de sous-modules quasi-cohérents de type
+    fini stables par $G$ ». L'énoncé barré découle de 1) et 2), comme à la page 13.}.
+  \item[3)] Si $S$ est quasi-compact, $E$ de type fini, et si tout module
+    quasi-cohérent de type fini sur $S$ est quotient d'un localement libre
+    de type fini, $E$ est quotient d'un $\mathcal{O}_X$-$G$-Module
+    localement libre de type fini de la forme $f^{*}(H)(-n)$, $H$ un
+    $G$-module localement libre de type fini sur $S$\footnote{La condition
+    sur $S$ est écrite en interligne au-dessus d'une ligne biffée et
+    commence par un mot lu « quasi-proj. » sous réserve. « $E$ de type
+    fini » et « $S$ quasi-compact » sont ajoutés : sans eux la conclusion
+    est fausse ou n'a pas d'indice uniforme. La version barrée de 3)
+    affirmait sans condition l'existence d'un épimorphisme $F \to E$ avec
+    $F$ localement libre $G$-équivariant ; au-dessus, ajouté puis biffé
+    avec elle : « et est quotient d'un module loc.\ libre (sans op.\,!) »
+    — c'est la condition qui manquait, et que la nouvelle version met sur
+    $S$.}.
+\end{itemize}
+
+\pagerange{19}{23}
+\section*{La démonstration par le module gradué des sections (pages 19 à 23)}
+
+« Il suffit de prouver 1) et 3) » ; la démonstration écrite prouve 1) et
+2), et s'arrête\footnote{La phrase annonce 1) et 3), peut-être selon une
+numérotation antérieure à l'insertion du 2) de la page 17. 3) n'est
+démontré nulle part dans le dossier ; une démonstration est esquissée à
+la fin de cette section, et elle est de cette lecture.}.
+
+\pagerange{19}{19}
+\subsection*{Le dictionnaire gradué}
+
+Posons
+\[
+  \underline{\Gamma}^{\cdot}(E) = \bigoplus_{n} f_{*}(E(n)), \qquad
+  E(n) = E \otimes L^{\otimes n} .
+\]
+La page écrit d'abord $\underline{\Gamma}_{*}$ et un coproduit, puis
+$\underline{\Gamma}^{\cdot}$ pour le même objet\footnote{« $\underline{\Gamma}_{*}(E)
+= \coprod_n f_{*}(E(n))$ » ; on garde la seconde notation.}.
+Comme $G$ est plat sur $S$ et $f$ quasi-compact et quasi-séparé,
+$f_{*}$ commute au changement de base plat $G \to S$, et
+$\underline{\Gamma}^{\cdot}(E)$ est un $\mathcal{O}_S$-Module gradué
+quasi-cohérent sur lequel $G$ opère — \emph{trivialement sur la base} $S$.
+De même $A^{\cdot} = \underline{\Gamma}^{\cdot}(\mathcal{O}_X)$ est une
+$\mathcal{O}_S$-Algèbre graduée sur laquelle $G$ opère, et $E \mapsto
+\underline{\Gamma}^{\cdot}(E)$ est un foncteur exact à gauche à valeurs dans
+les $A^{\cdot}$-$G$-modules gradués. En sens inverse, $M \mapsto
+\widetilde{M}$ est exact, adjoint à gauche de $\underline{\Gamma}^{\cdot}$,
+et comme $L$ est ample, la coünité $\widetilde{\underline{\Gamma}^{\cdot}(E)}
+\to E$ est un isomorphisme\footnote{EGA II, §§ 3 et 4 (référence de
+mémoire) : pour $L$ ample relativement à $S$, $X$ s'envoie par une immersion
+ouverte dans $\mathrm{Proj}(A^{\cdot})$ et $E \simeq
+\widetilde{\underline{\Gamma}^{\cdot}(E)}$. « (ils sont adjoints \ldots) »
+est ajouté en interligne, et « isom. » est d'une lecture incertaine.} ;
+$\underline{\Gamma}^{\cdot}$ est donc pleinement fidèle. Tout se passe
+désormais sur $S$, où l'action de $G$ ne déplace pas la base et où l'énoncé
+des pages 13 et 15 s'applique.
+
+\pagerange{21}{23}
+\subsection*{Le plus petit sous-module stable (pages 21 et 23)}
+
+Un sous-module quasi-cohérent $F \subset E$ correspond au sous-$A^{\cdot}$-module
+$\underline{\Gamma}^{\cdot}(F)$ de $\underline{\Gamma}^{\cdot}(E)$, et si
+$F \subset F_1 \subset E$ avec $F_1$ stable par $G$, alors
+$\underline{\Gamma}^{\cdot}(F) \subset \underline{\Gamma}^{\cdot}(F_1)
+\subset \underline{\Gamma}^{\cdot}(E)$ avec $\underline{\Gamma}^{\cdot}(F_1)$
+stable par $G$\footnote{La page note $F'$ à la fois un sous-module stable
+quelconque et le plus petit, qu'elle cherche ; on écrit ici $F_1$ pour le
+premier. Plusieurs mots du passage sont illisibles, dont un mot inséré
+au-dessus de « sous- » ; « à priori » et « s'identifie » sont incertains.}.
+
+Par l'énoncé de la page 13, appliqué sur $S$, il y a un plus petit
+sous-module $N$ de $\underline{\Gamma}^{\cdot}(E)$ contenant
+$\underline{\Gamma}^{\cdot}(F)$ et stable par $G$. Il est \emph{gradué} :
+l'action de $G$ respecte la graduation, chaque $U_i$ opère degré par degré,
+et la formule $N = \sum_i U_i \cdot (\underline{\Gamma}^{\cdot}(F) \cap E_i)$
+le montre\footnote{La page l'établit entre crochets, avec un point
+d'interrogation final : $N \cap \underline{\Gamma}^{i}(E)$ contient
+$\underline{\Gamma}^{i}(F)$ et est stable, donc contient le plus petit
+sous-module stable $M^{i}$ de $\underline{\Gamma}^{i}(E)$ contenant
+$\underline{\Gamma}^{i}(F)$ ; donc $N \supset \sum M^{i}$, et « par
+minimalité lui est égal » (lecture incertaine). L'argument est juste,
+pourvu que l'intersection de deux sous-modules stables le soit, ce que la
+formule assure.}. C'est un sous-$A^{\cdot}$-module : la multiplication
+$A^{\cdot} \otimes \underline{\Gamma}^{\cdot}(E) \to
+\underline{\Gamma}^{\cdot}(E)$ est $G$-équivariante et
+$\underline{\Gamma}^{\cdot}(F)$ est un $A^{\cdot}$-module, de sorte que,
+pour des points, $a \cdot g x = g\bigl((g^{-1}a) \cdot x\bigr)$ reste dans
+$N$ (« par fonctorialité de la construction de $N$ », dit la page).
+
+Alors $\widetilde{N}$ est un $\mathcal{O}_X$-$G$-module quasi-cohérent, et
+pour tout $F_1$ stable contenant $F$,
+\[
+  F = \widetilde{\underline{\Gamma}^{\cdot}(F)} \subset \widetilde{N}
+  \subset \widetilde{\underline{\Gamma}^{\cdot}(F_1)} = F_1 .
+\]
+C'est donc le faisceau cherché, $F' = \widetilde{N}$. Par construction, sa
+formation commute à toute extension plate $S' \to S$ de la base : c'est 1).
+
+\emph{Finitude} (c'est 2)). Si $F$ est de type fini, $F'$ l'est : on peut
+supposer $S$ affine, la question étant locale sur $S$ et la construction
+compatible aux localisations. Comme $L$ est ample, il existe $n$ tel que
+$F(n)$ soit engendré par un nombre fini de sections
+$\varphi_1, \ldots, \varphi_r \in \Gamma(S, \underline{\Gamma}^{n}(F))$.
+Soit $N^{n}$ le plus petit sous-module de $\underline{\Gamma}^{n}(E)$ stable
+par $G$ et contenant les $\varphi_i$ ; il est de type fini par l'énoncé
+1) de la page 13. Le sous-Module de $E$ qu'il définit, image de
+$f^{*}(N^{n})(-n) \to E$, est stable par $G$, contient $F$ (engendré par
+les $\varphi_i$) et est contenu dans $F'$ ; c'est donc $F'$, qui est de
+type fini\footnote{La page dit « le sous-module $G$-invariant de
+$\underline{\Gamma}^{n}(F)$ engendré par les $\varphi_i$ » : il faut lire
+le plus petit sous-module stable de $\underline{\Gamma}^{n}(E)$, car
+$\underline{\Gamma}^{n}(F)$ n'est pas stable. Une première tentative,
+encadrée et barrée, prenait le sous-module engendré par les $\varphi_i$
+sans le stabiliser. « $n$ » et « $F(n)$ » sont des lectures incertaines.
+La page s'achève sur « On vérifie quand même que c'est $F'$, ce qui montre
+que $F'$ est de type fini\ldots\ldots ».}.
+
+En marge : « Rédiger mieux ce début de la démonstration, pour pouvoir y
+\ldots »\footnote{Les deux derniers mots sont illisibles.} Le dossier
+s'arrête là.
+
+\emph{Ce que 3) demandait} (esquisse de cette lecture, non sur la page).
+Si $E$ est de type fini, $E(n)$ est engendré par ses sections pour $n$
+grand ; par 2) appliqué sur $S$, elles sont contenues dans un sous-$G$-module
+$N^{n} \subset \underline{\Gamma}^{n}(E)$ de type fini, et par la page 9 (ou
+le 4) de la page 15, sur $S$) $N^{n}$ est quotient d'un $G$-module $H$
+localement libre de type fini. Alors $f^{*}(H)(-n) \to f^{*}(N^{n})(-n)
+\to E$ est l'épimorphisme annoncé. C'est, sous le nom de « résolution
+équivariante », un théorème de Thomason\footnote{R.~W.~Thomason,
+« Equivariant resolution, linearization, and Hilbert's fourteenth problem
+over arbitrary base schemes », Adv.\ in Math.\ 65 (1987) ; citation de
+mémoire, non vérifiée. L'énoncé de la page 5 sur la représentation fidèle
+se lit aussi, pour les groupes plats sur un anneau de Dedekind, dans SGA 3,
+exposé VI$_B$, § 11 (de mémoire). Les pages ne citent rien, et l'on ne peut
+pas dire d'après elles lesquels de ces textes elles précèdent ou suivent.}.
+
+\pagerange{2}{24}
+\section*{Les versos dactylographiés (pages paires)}
+
+Les pages paires sont des feuillets de la frappe d'EGA IV, chapitre 18,
+lus retournés ; le texte est publié et n'est pas repris ici. La
+transcription les décrit un à un, avec les corrections à l'encre dont la
+main n'est pas établie\footnote{Une marge de la page 22 emploie le signe
+« ½ » pour \emph{semi-}, que l'on rencontre sous sa plume ; cela rapproche
+ces corrections de lui sans les lui attribuer.}. Pour s'y retrouver :
+\begin{itemize}
+  \item pages 4 et 2 : « EGA IV 18.9. (Rabiots) », le Théorème 18.9.7 et les
+    Corollaires 18.9.8 et 18.9.9, puis la fin d'une démonstration de 18.9.7
+    (« caténaire » corrigé en un mot lu « japonais ») ;
+  \item pages 6 et 14, paginées « -3- » et « -4- » : une rédaction reprise
+    du Corollaire 18.9.5 ;
+  \item page 8 (IV-965) : le Corollaire 18.9.4, une première rédaction
+    barrée de 18.9.5, avec en marge « "séparés" inutile ! », et le début de
+    la Remarque 18.9.6 ;
+  \item page 10 (IV-964) : la Proposition 18.8.15, le Théorème 18.9.1, les
+    Corollaires 18.9.2 et 18.9.3 ;
+  \item page 12 : les Corollaires 18.8.12 et 18.8.13, la Proposition
+    18.8.14, le début de 18.8.15, renumérotés à l'encre ;
+  \item page 16 (IV-962) : la fin de 18.8.7, la Remarque 18.8.10, le début
+    de la Proposition 18.8.11, avec un diagramme tracé à la main ;
+  \item page 18 (IV-953) : les Corollaires 18.6.10 et 18.6.11 et la
+    Proposition 18.6.12 ;
+  \item page 20 : la fin du Théorème 18.6.9 et les Lemmes 18.6.9.1 et
+    18.6.9.2, avec en marge « précisions mélangées ! » (lecture incertaine) ;
+  \item pages 24 (IV-950) et 22 (IV-951) : la fin de 18.6.6, 18.6.7, la
+    Proposition 18.6.8 et le début de 18.6.9 ; en marge de la page 22, une
+    critique : « la forme hybride ici ne mérite pas le nom de "propr.\
+    universelle" ».
+\end{itemize}
+
+\end{document}

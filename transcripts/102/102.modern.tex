@@ -1,0 +1,661 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 102 (pages 1-13).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. It is held to being mathematically correct as it stands; where
+% the manuscript is loose or mistaken the true statement appears and the
+% footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck cites batch-01.fr.tex.
+%
+% Scope: a single document for the whole folder. The shelfmark holds one
+% batch (pages 1-13), read whole before any of this was written. Page 1 is an
+% orange cover carrying « Recollements »; pages 7 (blank) and 9 (a printed
+% verso with no hand on it) are not transcribed.
+%
+% Spine. Five pieces around one programme, the « étude générale des
+% foncteurs (Sch)° -> (Ens) » of the inventory's title: pages 2-6, a
+% typescript « Pour EGA VI » on gluing objects of a site along a class M of
+% morphisms (schemes and Artin's algebraic spaces as the two examples);
+% page 8, four questions for Artin on descent; page 10, a plan in eight items
+% for the study of properties of morphisms of functors; page 11, a fragment
+% of a proof through the Hilbert scheme; pages 12-13, a criterion for a
+% morphism of functors to be an open immersion, and a sheet of keywords. The
+% links between the pieces (the « variétés » of page 8 as the objects of
+% pages 2-6; condition (i) of page 12 as the « (A) » of page 13 and the
+% marginal of page 8) are THIS READING'S.
+%
+% Notation fixed for the whole folder. S is the site of pages 2-6 (and, on
+% pages 8 and 12, a base scheme: kept apart by context, said once in the
+% spine section); S~ its topos of sheaves, M the class of arrows, M~ its
+% extension, S~_M the glued objects, S(X,M) the small site of X. « fpqc »,
+% « lfp » (localement de présentation finie). A morphism of functors is said
+% to have a property P stable under base change when every base change to a
+% scheme has P (principle of page 10).
+%
+% Substantive departures from the pages, with pages.
+%  - Page 2, d): read as locality on the source for M-coverings (the
+%    parenthesis « i.e. par a) et c) » makes the pr_1 condition equivalent to
+%    u_i in M). Stated so.
+%  - Page 6: open immersions do NOT satisfy d) (X u X -> X is a
+%    counterexample), so the first example works only in the variant the
+%    margin of page 2 proposes (no d), saturate in M~); S~_M is then still
+%    the category of schemes. Ours, footnoted.
+%  - Pages 2-3: the reduction of case 2 to case 1 is known only through the
+%    transcription's summary; a subsheaf of a representable sheaf is not
+%    representable in general, and the footnote says what the reduction needs.
+%  - Page 4: « le plus petit sous-ensemble de Ob S » read Ob S~ (as the
+%    transcription already notes).
+%  - Page 11: « plat de prés. finie sur Y » read over Y'.
+%  - Page 12: the proof sketched for the open-immersion criterion is ours;
+%    the page states it without proof.
+%
+% Announced and never established in the folder: the existence half of the
+% Proposition of page 2 (« laissé au lecteur »); (v) of page 4 (« au
+% rédacteur »); the Proposition of page 6 (no proof); answers to the four
+% questions of page 8; all eight items of the plan of page 10 except the
+% criterion of page 12; the theorem whose proof page 11 continues (its
+% statement is not in the folder).
+%
+% Group. The folder is filed among « Géométrie et topologie combinatoire »
+% (69-102), but nothing in it meets the combinatorial folders 81, 88, 89. It
+% meets folder 91, whose page 4 checks the same conditions (fpqc sheaf,
+% commutation with filtered colimits and with adic limits of artinian rings)
+% for a representability theorem; cross-referenced by its pages.
+%
+% Literature named in footnotes (EGA plan, SGA 3 XI, SGA 4 VIII, Artin,
+% Knutson, the Stacks Project) is cited from memory, not checked against the
+% sources. This reading was made on Opus 5.5 and has not been measured
+% against the reference reading of folder 115 (made on Opus 5).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{102}
+\pages{1}{13}
+\dating{[après 1967]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Etude générale des foncteurs (Sch)° → (Ens) : tapuscrit annoté (s.d.), notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Une carte routière d'un pays se fait en recollant des cartes de régions :
+chacune est simple, et toute l'information est dans la façon dont elles se
+recouvrent. La géométrie algébrique de Grothendieck fabrique ses objets de la
+même manière. Les morceaux simples sont les spectres d'anneaux — des objets
+définis par un anneau commutatif — et un schéma est ce qu'on obtient en les
+recollant le long de parties ouvertes. Ces treize pages posent la question
+dans sa généralité : qu'obtient-on si l'on recolle les mêmes morceaux le long
+d'une autre classe de flèches que les inclusions d'ouverts ?
+
+La réponse du tapuscrit des pages 2 à 6, prévu pour un chapitre d'EGA qui n'a
+jamais paru, tient en un procédé et deux exemples. On se place dans la
+catégorie de \emph{tous} les « espaces généralisés » — les faisceaux sur un
+site, c'est-à-dire des foncteurs qui à chaque morceau simple associent
+l'ensemble de ses applications vers l'espace —, on y prolonge la classe de
+flèches choisie, et l'on retient les objets qui se laissent couvrir par des
+morceaux simples à l'aide de flèches de cette classe. Avec les immersions
+ouvertes on retrouve les schémas ; avec les morphismes étales — des flèches
+qui sont des « revêtements locaux », comme un revêtement en topologie mais
+sans exiger qu'il soit trivial au-dessus d'un ouvert — on trouve les
+\emph{espaces algébriques} que Michael Artin venait d'introduire, objets plus
+souples que les schémas et dans lesquels certaines constructions, impossibles
+pour les schémas, deviennent possibles.
+
+Le reste du dossier est manuscrit et rapide. Quatre questions pour Artin
+demandent quand une « donnée de descente » — la recette pour fabriquer un
+objet sur une base à partir d'un objet sur une base plus grande — est
+effective. Un plan en huit points dresse la liste des propriétés des
+morphismes de schémas (être une immersion, être lisse, étale, propre, séparé…)
+qu'il faudrait étendre aux foncteurs, avec un principe pour le faire : une
+propriété doit être locale, et coïncider avec la définition reçue quand le
+foncteur est un schéma. Une page de démonstration, dont le théorème manque,
+utilise le schéma de Hilbert pour rendre réduites les fibres d'une famille.
+Enfin un critère : un sous-foncteur qui se comporte bien vis-à-vis des
+limites et des épaississements infinitésimaux est une immersion ouverte.
+
+Ce qui se dégage de la manière : ne jamais construire un objet à la main
+quand on peut le définir par ce qu'il représente. Le schéma, l'espace
+algébrique, l'immersion ouverte sont ici des propriétés de foncteurs, que
+l'on vérifie une à une comme on coche une liste — et la feuille de mots
+encadrés de la page 13 en est littéralement la liste.
+
+\keywords{gluing, subcanonical site, local property of morphisms, algebraic space, étale morphism, small étale site, fpqc descent, effective descent datum, Artin approximation, representable morphism, valuative criterion, formally étale morphism, limit-preserving functor, Hilbert scheme, geometrically reduced fibre, open immersion criterion, Artin's representability criteria}
+\end{resume}
+
+\pagerange{2}{13}
+\section*{Le fil du dossier, et les conventions}
+
+La chemise (page 1) porte le seul mot « Recollements ». Les pages 7 et 9 ne
+portent rien de sa main. Le reste se répartit en cinq morceaux :
+
+\begin{itemize}
+  \item \textbf{Pages 2 à 6 : tapuscrit « Pour EGA VI ».} Recollement d'objets
+    d'un site $S$ le long d'une classe $M$ de flèches ; prolongement $\widetilde{M}$
+    de $M$ au topos ; la catégorie $\widetilde{S}_M$ des objets recollés, ses
+    propriétés de stabilité ; schémas et espaces algébriques ; le topos
+    localisé au-dessus d'un objet. Annoté à la main.
+  \item \textbf{Page 8 : « Questions pour Artin ».} Effectivité de la descente
+    pour des schémas propres sur une base hensélienne, descente fpqc des
+    « variétés » et des petits faisceaux étales.
+  \item \textbf{Page 10 : un plan.} Huit rubriques de propriétés des morphismes
+    de foncteurs, et le principe de vérification.
+  \item \textbf{Page 11 : fragment d'une démonstration.} Le théorème démontré
+    n'est pas dans le dossier.
+  \item \textbf{Pages 12 et 13 : immersions ouvertes.} Un critère, puis une
+    feuille de mots-clés encadrés.
+\end{itemize}
+
+Le titre de l'inventaire, « Étude générale des foncteurs
+$(\mathrm{Sch})^{\circ} \to (\mathrm{Ens})$ », est celui de la page 10 et
+couvre l'ensemble : les objets recollés des pages 2 à 6 sont des foncteurs de
+ce type, et les pages suivantes cherchent comment parler de leurs morphismes.
+Le lien entre le tapuscrit et la page 8 est de cette lecture : les
+« variétés au sens généralisé, sans exiger que la diagonale soit une
+immersion » de la page 8 sont les objets que le tapuscrit obtient avec les
+morphismes étales.
+
+\textbf{Conventions, valables pour tout le dossier.} Dans les pages 2 à 6, $S$
+désigne un site ; aux pages 8 et 12, la même lettre désigne un schéma de base,
+comme sur les pages, et le contexte suffit à les distinguer. $\widetilde{S}$
+est le topos des faisceaux d'ensembles sur le site $S$ ; « fpqc » est la
+topologie fidèlement plate et quasi-compacte ; « lfp » abrège « localement de
+présentation finie ». Un foncteur $(\mathrm{Sch})^{\circ} \to (\mathrm{Ens})$
+— un préfaisceau sur la catégorie des schémas, contravariant comme tout
+préfaisceau — est identifié au schéma qu'il représente quand il en représente
+un ; un morphisme de foncteurs $f : G \to F$ est dit avoir une propriété $P$
+\emph{stable par changement de base} si, pour tout schéma $T$ et tout
+$T \to F$, le morphisme $G \times_F T \to T$ est un morphisme de schémas ayant $P$
+— c'est le principe de la page 10.
+
+\textbf{Le dossier dans son groupe.} Il est classé parmi les dossiers 69 à 102,
+« Géométrie et topologie combinatoire », mais n'a rien de commun avec les cartes,
+hexagones et découpages des dossiers 81, 88 et 89, et sa datation propre,
+« après 1967 », le place avant la période du groupe. Il rencontre en revanche
+le dossier 91 : la page 4 de celui-ci vérifie, pour un théorème de
+représentabilité, les conditions mêmes qu'énonce la page 12 ci-dessous
+(faisceau fpqc, commutation aux limites inductives filtrantes d'anneaux et aux
+limites projectives adiques d'anneaux artiniens).
+
+\pagerange{2}{6}
+\section*{Recollements d'objets d'un site (pages 2 à 6)}
+
+Le tapuscrit est titré « Pour EGA VI »\footnote{Le plan des \emph{Éléments de
+géométrie algébrique} annoncé en 1960 prévoyait, sauf erreur de mémoire, un
+chapitre VI consacré à la descente et aux méthodes générales de construction
+des schémas ; il n'a jamais paru. Le rattachement du tapuscrit à ce chapitre
+est la page ; le contenu prévu du chapitre est cité de mémoire.}. Comme pour
+les tapuscrits d'autres dossiers, la transcription donne les énoncés et les
+interventions de sa main, et résume les démonstrations tapées ; la présente
+lecture ne peut donc rien affirmer de ces démonstrations au-delà de ce résumé.
+
+\pagerange{2}{2}
+\subsection*{Le site et la classe de flèches}
+
+Soit $S$ un site dont la topologie est moins fine que la topologie canonique
+— un site \emph{sous-canonique}, ce qu'il appelle « standard »\footnote{La
+précision « standard (i.e.\ à topologie moins fine que la canonique) » est une
+insertion interlinéaire. Elle garantit que les foncteurs représentables sont
+des faisceaux, de sorte que le plongement de Yoneda identifie $S$ à une
+sous-catégorie pleine de $\widetilde{S}$ ; tout ce qui suit en dépend.}. Soit
+$M$ une classe de flèches de $S$ telle que :
+
+\begin{itemize}
+  \item[a)] les flèches de $M$ sont quarrables (leurs produits fibrés avec
+    toute flèche de $S$ existent dans $S$), et $M$ est stable par changement de
+    base ;
+  \item[b)] $M$ contient les identités et est stable par composition ;
+  \item[c)] $M$ est \emph{locale sur le but} : si $u : X \to Y$ est une flèche
+    de $S$ et $(Y_j \to Y)$ une famille couvrante telle que chaque
+    $X \times_Y Y_j \to Y_j$ soit dans $M$, alors $u$ est dans $M$ ;
+  \item[d)] $M$ est \emph{locale sur la source pour les recouvrements par
+    $M$} : si $(u_i : X_i \to X)$ est une famille couvrante de flèches de $M$
+    et si les composés $u u_i : X_i \to Y$ sont dans $M$, alors $u : X \to Y$ est
+    dans $M$.
+\end{itemize}
+
+La forme donnée à d) est une reformulation\footnote{La condition d) est
+entièrement réécrite à la main sur la page 2. La version tapée demandait que les
+$X_i \to Y$ soient dans $M$ pour des « $Y$-morphismes » $u_i$ ; la version
+retenue demande les $u u_i$ dans $M$ et les projections
+$X_i \times_X X_j \to X_i$ dans $M$, cette dernière clause étant introduite par
+« i.e.\ par a) et c) ». Nous lisons la parenthèse ainsi : les projections
+$X_i \times_X X_j \to X_i$ sont les changements de base de $u_j$ le long de la
+famille couvrante $(u_i)$, de sorte que, par a) et c), demander qu'elles soient
+dans $M$ revient à demander $u_j \in M$. Le « $S$ » qui suit « morphismes dans »
+est surchargé d'un trait et a pu être changé.}. C'est ce qu'on appelle
+aujourd'hui une propriété \emph{locale sur la source} : elle vaut pour les
+morphismes étales dans la topologie étale, et c'est elle qui permettra plus loin
+de dire « étale » d'un morphisme d'espaces algébriques sans ambiguïté.
+
+En marge, il envisage de s'en passer : ne pas imposer d) à $M$, mais saturer
+plus tard dans le prolongement $\widetilde{M}$, en décrétant qu'une flèche est
+dans $\widetilde{M}$ si et seulement si elle devient dans $M$ après composition
+avec un recouvrement par des flèches de $M$\footnote{Note écrite de biais dans la
+marge gauche de la page 2, reliée à d) par une accolade, en regard aussi du
+début de la proposition suivante, dont elle propose de reformuler la condition
+$\tilde{e}$).}. On verra à la page 6 que cette variante est exactement ce que
+demande son premier exemple.
+
+\pagerange{2}{3}
+\subsection*{Le prolongement de $M$ au topos}
+
+\textbf{Proposition.} Il existe une unique classe $\widetilde{M}$ de flèches du
+topos $\widetilde{S}$ qui satisfait aux analogues $\tilde{a}$) à $\tilde{d}$)
+de a) à d), et de plus :
+\begin{itemize}
+  \item[$\tilde{e}$)] une flèche de $S$ est dans $\widetilde{M}$ si et
+    seulement si elle est dans $M$ ;
+  \item[$\tilde{f}$)] si $u : F \to X$ est dans $\widetilde{M}$ avec $X$
+    représentable, il existe une famille couvrante $(u_i : X_i \to F)$ de
+    flèches de $\widetilde{M}$ avec les $X_i$ représentables\footnote{Le
+    « $S$ » de « $X \in S$ » est surchargé à la main et se lit mal. À la fin de
+    $\tilde{f}$), quelques mots tapés sont biffés, où l'on devine
+    « $uu_i$ … $\widetilde{M}$ ». Les étiquettes $\tilde{a}$ à $\tilde{f}$ sont
+    remarquées d'un tilde à la main, sur les pages 2 et 3.}.
+\end{itemize}
+
+Le tapuscrit démontre l'unicité en montrant que l'appartenance d'une flèche
+$u : F \to G$ à $\widetilde{M}$ est déterminée par les conditions. Par
+$\tilde{c}$), on se ramène au cas où $G = X$ est représentable. Si la diagonale
+$F \to F \times_X F$ est représentable, $u$ est dans $\widetilde{M}$ si et
+seulement s'il existe une famille couvrante $(u_i : X_i \to F)$, $X_i \in S$,
+telle que les $u u_i$ et les projections $X_i \times_F X_j \to X_i$ soient dans
+$M$ ; les $X_i \times_F X_j$ sont représentables comme images inverses de la
+diagonale de $F$ dans les $X_i \times_X X_j$, de sorte que la condition a un
+sens. Le cas général est ramené au précédent\footnote{D'après le résumé de la
+transcription, le cas 2º) observe que $Z_{ij} = X_i \times_F X_j$ est un
+sous-faisceau du faisceau représentable $X_i \times_X X_j$, image inverse de la
+diagonale. Un sous-faisceau d'un faisceau représentable n'est pas représentable
+en général ; la réduction demande donc que l'on sache déjà, par récurrence, que
+$Z_{ij} \to X_i$ est dans $\widetilde{M}$, ce qui, par $\tilde{f}$), le couvre
+par des objets de $S$. Dans le cas étale, c'est le point où la théorie des
+espaces algébriques « s'amorce » : la représentabilité de la diagonale se
+démontre après coup au lieu d'être supposée. Faute du texte tapé, nous ne
+pouvons dire comment le tapuscrit règle ce point.}. Le tapuscrit laisse au
+lecteur la vérification que la classe ainsi décrite satisfait bien à
+$\tilde{a}$) à $\tilde{f}$) : l'existence n'est pas démontrée dans le
+dossier.
+
+\pagerange{3}{3}
+\subsection*{Les objets recollés}
+
+\textbf{Définition.} Un faisceau $F \in \widetilde{S}$ \emph{s'obtient par
+recollement d'objets de $S$ à l'aide de morphismes dans $M$} s'il existe une
+famille couvrante $(u_i : X_i \to F)$ avec $X_i \in S$ et
+$u_i \in \widetilde{M}$\footnote{Les mots « par recollement d'objets de $S$ à
+l'aide de morphismes dans $M$ » sont soulignés à la main.}. On note
+$\widetilde{S}_M$ la sous-catégorie pleine de $\widetilde{S}$ formée de ces
+faisceaux.
+
+Un tel $F$ est le quotient de $\coprod_i X_i$ par la relation d'équivalence
+$R = \coprod_{i,j} X_i \times_F X_j$, dont les deux projections sont dans
+$\widetilde{M}$ : c'est la forme la plus générale d'une « carte par
+recollement », les $X_i$ étant les cartes et $R$ les changements de cartes.
+
+\pagerange{4}{5}
+\subsection*{Stabilité}
+
+\textbf{Proposition.}\footnote{Une première rédaction, « Proposition 1) »,
+commencée au bas de la page 3 et poursuivie par deux lignes au haut de la
+page 5 (verso de la page 4), est biffée ; elle portait sur une famille couvrante
+$F_i \to F$ à projections dans $\widetilde{M}$, et la conclusion « il faut et il
+suffit que pour tout $i$ … » s'interrompt. La version retenue est celle de la
+page 4.}
+\begin{itemize}
+  \item[(i)] Tout objet de $S$ est dans $\widetilde{S}_M$.
+  \item[(ii)] Si $u : F \to G$ est dans $\widetilde{M}$ et $G \in \widetilde{S}_M$,
+    alors $F \in \widetilde{S}_M$. La réciproque vaut si $u$ est couvrant
+    (épimorphisme de faisceaux).
+  \item[(iii)] Si $u : F \to G$ est couvrant et si
+    $\mathrm{pr}_1 : F \times_G F \to F$ est dans $\widetilde{M}$, alors
+    $G \in \widetilde{S}_M$ si et seulement si $F \in \widetilde{S}_M$.
+  \item[(iv)] Une somme $\coprod F_i$ est dans $\widetilde{S}_M$ si et seulement
+    si tous les $F_i$ le sont.
+  \item[(v)] Si $S$ a les produits de deux objets (resp.\ les produits fibrés,
+    resp.\ un objet final, resp.\ les limites projectives finies), il en est de
+    même de $\widetilde{S}_M$\footnote{Le numéro (iv) surcharge un « (iii) »
+    tapé ; « $\mathrm{pr}_1$ » dans (iii) est ajouté à la main ; (v) est retapé
+    en interligne sur une première rédaction biffée (« Soit $I$ une catégorie
+    finie, telle que … »).}.
+\end{itemize}
+
+Pour (ii) : on couvre $G$ par des $Y_j \to G$ de $\widetilde{M}$, on change de
+base, on couvre chaque $F \times_G Y_j$ par $\tilde{f}$), et l'on compose par
+$\tilde{b}$). Le point (iii) en résulte, $u$ étant dans $\widetilde{M}$ par
+$\tilde{c}$) puisque son changement de base le long de lui-même, couvrant,
+l'est. Pour (iv), la transcription résume l'argument tapé : si $X \to \coprod F_i$
+est dans $\widetilde{M}$, les $X \times_F F_i$ se couvrent par $\tilde{f}$), et
+ces morceaux couvrent les $F_i$. Le point (v) est « laissé au rédacteur », avec
+une mise en garde : le noyau d'un double flèche ne se comporte sans doute pas
+de même, car un morphisme de doublets de $\widetilde{S}$, ou même de $S$, qui
+induit des morphismes de $\widetilde{M}$ sur les sommets n'induit pas
+nécessairement un morphisme de $\widetilde{M}$ sur les noyaux.
+
+\textbf{Corollaire.} $\mathrm{Ob}\,\widetilde{S}_M$ est la plus petite classe
+d'objets de $\widetilde{S}$ qui contient $\mathrm{Ob}\,S$ et est stable par
+sommes et par passage au quotient par une relation d'équivalence dont la
+première projection est dans $\widetilde{M}$\footnote{Le tapuscrit porte « le plus
+petit sous-ensemble de $\mathrm{Ob}\,S$ », sans tilde ; le sens veut
+$\widetilde{S}$. « sommes et par » est ajouté à la main.}. Par suite,
+$\widetilde{S}_M$ ne change pas si l'on remplace $S$ par une sous-catégorie
+$S'$ de $\widetilde{S}$ contenue dans $\widetilde{S}_M$, et $M$ par
+$M' = \widetilde{M} \cap \mathrm{Fl}\,S'$\footnote{L'énoncé s'entend avec $S'$ munie de la topologie induite par celle
+de $\widetilde{S}$, les objets recollés étant pris dans le même topos
+$\widetilde{S}$. Pour les prendre dans le topos des faisceaux sur $S'$, il faut
+que celui-ci s'identifie à $\widetilde{S}$ — c'est le cas, par le lemme de
+comparaison de SGA 4, dès que $S'$ contient $S$, ce qui est la situation de
+l'exemple suivant (schémas affines dans schémas). Précision ajoutée par cette
+lecture.}.
+
+Le corollaire résulte de la description d'un objet recollé comme quotient de
+$\coprod X_i$ (section précédente), et de (iii) et (iv). C'est l'énoncé qui dit
+qu'un recollement de recollements est encore un recollement.
+
+\pagerange{6}{6}
+\subsection*{Schémas et espaces algébriques}
+
+\textbf{Exemples.} Soit $S$ la catégorie des schémas affines, munie d'une
+topologie sous-canonique plus fine que la topologie de Zariski.
+
+\emph{Immersions ouvertes.} Avec pour $M$ les immersions ouvertes, ou seulement
+les immersions $\mathrm{Spec}(A_f) \to \mathrm{Spec}(A)$, la catégorie
+$\widetilde{S}_M$ est équivalente à celle des schémas. Il faut pour cela
+utiliser la variante que propose la marge de la page 2, sans la condition d) :
+les immersions ouvertes ne satisfont pas à d)\footnote{La page dit « $M$
+l'ensemble des immersions ouvertes (ou, en l'absence de d), les immersions de
+la forme $\mathrm{Spec}(A_f) \to \mathrm{Spec}(A)$) », ce qui suggère que les
+immersions ouvertes satisfont à d). Elles ne le font pas : si $Y$ est affine et
+$X = Y \sqcup Y$, les deux inclusions $Y \to X$ forment une famille couvrante
+d'immersions ouvertes dont les composés avec $u : X \to Y$ sont l'identité, et
+$u$ n'est pas une immersion ouverte. Avec d) imposé et la description de
+$\widetilde{M}$ de la page 2, la flèche $u$ serait même dans $\widetilde{M}$,
+contredisant $\tilde{e}$). La remarque est de cette lecture ; la conclusion
+« on retrouve les schémas » reste juste, puisqu'elle ne dépend que de la
+définition de $\widetilde{S}_M$ : un faisceau recouvert par des sous-foncteurs
+ouverts affines est un schéma.}. Les morphismes de $\widetilde{M}$ sont alors
+les immersions ouvertes de faisceaux.
+
+\emph{Morphismes étales.} Avec une topologie plus fine que la topologie étale
+(et sous-canonique, par exemple fppf ou fpqc) et pour $M$ les morphismes étales,
+qui satisfont à d), on trouve les \emph{espaces algébriques} d'Artin, obtenus
+« en recollant des spectres d'anneaux par des morphismes étales »\footnote{Les
+espaces algébriques sont introduits par M.~Artin à la fin des années 1960 et
+exposés par D.~Knutson (\emph{Algebraic spaces}, 1971), avec une condition de
+quasi-compacité sur la diagonale ; la définition sans condition de séparation
+est celle qu'on trouve aujourd'hui par exemple dans le Stacks Project. Le
+tapuscrit n'impose aucune condition de séparation, et c'est la seconde qu'il
+faut entendre. Références citées de mémoire. La page nomme Artin et met
+l'expression entre guillemets.}. Par le corollaire, on obtient le même résultat
+en partant des schémas au lieu des schémas affines. Les flèches de
+$\widetilde{M}$ s'appellent alors morphismes \emph{étales} d'espaces
+algébriques, la topologie étant la topologie étale\footnote{Cette dernière
+phrase est ajoutée à la main, à l'encre bleue, à la suite de la ligne tapée.}.
+
+\textbf{Proposition.} Supposons que $M$ satisfasse la condition, qu'il appelle
+« draconienne » : si $u : X \to Y$ et $v : Y \to Z$ sont des flèches de $S$ avec
+$v \in M$ et $vu \in M$, alors $u \in M$. Pour $X \in S$, soit $S(X,M)$ la
+sous-catégorie pleine de $S_{/X}$ formée des $X' \to X$ dans $M$ — toutes ses
+flèches sont alors dans $M$ —, munie de la topologie induite. Alors la
+sous-catégorie pleine de $\widetilde{S}_{/X}$ formée des $F \to X$ qui sont dans
+$\widetilde{M}$ est un topos, équivalent, par restriction à $S(X,M)$, au topos
+$S(X,M)^{\sim}$. Un tel $F$ est d'ailleurs dans $\widetilde{S}_M$, par (ii) de
+la page 4\footnote{La remarque entre crochets « d'où résulte
+$F \in \mathrm{Ob}\,\widetilde{S}_M$ ! » est de sa main, à l'encre bleue. Une
+première rédaction de la conclusion, rayée et encadrée, énonçait que le composé
+$(\widetilde{S}_M)_{/X} \to \widetilde{S}_{/X} \simeq (S_{/X})^{\sim} \to
+S(X,M)^{\sim}$ est une équivalence ; elle était fausse telle quelle, puisque
+$(\widetilde{S}_M)_{/X}$ contient des $F \to X$ qui ne sont pas dans
+$\widetilde{M}$, et la correction restreint justement aux flèches de
+$\widetilde{M}$. Le dernier terme y était tapé « $S(M,X)$ ».}.
+
+La condition draconienne est satisfaite par les immersions ouvertes et par les
+morphismes étales. Dans le second cas, $S(X,M)$ est le \emph{petit site étale}
+de $X$, et la proposition dit que les faisceaux sur le petit site étale sont
+exactement les espaces algébriques étales sur $X$ : c'est un énoncé connu
+aujourd'hui sous cette forme. Le dossier n'en contient pas de
+démonstration\footnote{Aucune démonstration ne suit l'énoncé sur la page 6, qui
+est la dernière du tapuscrit.}.
+
+\pagerange{8}{8}
+\section*{Questions pour Artin (page 8)}
+
+La page est une liste de questions, sans réponses\footnote{Le titre, souligné,
+est de sa main. Le dossier ne contient aucune réponse d'Artin.}. Dans les trois
+premières, $S$ est le spectre d'un anneau local noethérien
+\emph{hensélien}\footnote{« hens. » est doublement souligné ; « strictement »
+et « noeth. » sont biffés devant. La transcription laisse incertaine la lecture
+« plat » pour l'hypothèse sur $S' \to S$, précédée d'un mot biffé illisible.} et
+$s$ son point fermé.
+
+\begin{itemize}
+  \item[1º)] Soit $S' \to S$ surjectif, et sans doute plat, avec $S'$
+    noethérien, et $X'$ un $S'$-schéma \emph{propre} muni d'une donnée de
+    descente relativement à $S' \to S$\footnote{« propre » remplace « loc.\ de
+    t.f. », biffé.}. Si la donnée de descente induite sur la fibre $X'_s$ est
+    effective, l'est-elle sur $X'$ ? Et dans le cas $S' = \widehat{S}$, le
+    complété ?
+  \item[2º)] Peut-on faire la descente fpqc des « variétés », ou des faisceaux
+    relativement de présentation finie\footnote{L'insertion se lit « ou
+    relation loc.\ de prés.\ finie » ; « relativement » est une autre lecture.},
+    par exemple de parties d'un complété d'un anneau local ? Autrement dit, pour
+    un faisceau fpqc lfp, la propriété d'être une variété est-elle locale pour
+    la topologie fpqc sur $S$ ?
+  \item[3º)] Si $X$ est une variété propre sur $S$ dont la fibre fermée $X_s$
+    est représentable, $X$ est-il représentable ? Si la réponse à 2º) était
+    affirmative, les questions 1º) et 3º) seraient équivalentes.
+  \item[4º)] Descente fpqc des petits faisceaux étales — question liée à la
+    caractérisation des foncteurs $(\mathrm{Sch})^{\circ}_{/S} \to (\mathrm{Ens})$
+    qui proviennent de petits faisceaux étales sur $S$. Une réponse affirmative
+    à 2º), pour des variétés au sens généralisé où l'on n'exige pas que la
+    diagonale soit une immersion, en entraînerait une à 4º).
+\end{itemize}
+
+En marge, deux groupes de questions : chercher des exemples de $X$ propre sur
+$S$ local complet avec $X_s$ représentable et $X$ non représentable ; et une
+remarque, en partie illisible, liant le problème à la commutation aux limites
+projectives adiques d'anneaux artiniens\footnote{Notes écrites de biais dans la
+marge gauche, en regard de 2º), puis de 3º) et 4º) ; plusieurs mots en sont
+incertains ou illisibles, en particulier « le comm. », « adiques artiniennes »,
+« propres » et « repr. ». « 4º » est entouré et relié à la marge.} — la
+condition même qui reparaît à la page 12.
+
+Lecture. Les « variétés » sont ici des foncteurs du type que construit le
+tapuscrit : la précision « sans exiger que la diagonale soit une immersion »
+est ce qui sépare les espaces algébriques des schémas, dont la diagonale est
+toujours une immersion. La question 4º) rejoint alors la proposition de la
+page 6 : un petit faisceau étale sur $S$ est un espace algébrique étale sur $S$,
+de sorte que sa descente est un cas particulier de 2º). Le contexte de 1º) et
+3º) est que la descente fpqc des schémas, même propres, n'est pas toujours
+effective\footnote{Un exemple célèbre est celui de Hironaka : une variété
+propre munie d'une action libre d'un groupe d'ordre $2$ dont le quotient n'est
+pas un schéma, ce qui donne une donnée de descente étale non effective. Le
+passage d'une base complète à une base hensélienne, demandé à la fin de 1º), est
+la question à laquelle répond le théorème d'approximation d'Artin (1969).
+Références citées de mémoire ; la page ne cite ni l'un ni l'autre.} ; on
+sait aujourd'hui que les faisceaux étales, eux, se descendent le long des
+morphismes fidèlement plats et quasi-compacts\footnote{SGA 4, exposé VIII,
+cité de mémoire et non vérifié.}.
+
+\pagerange{10}{10}
+\section*{Un plan pour l'étude des foncteurs (page 10)}
+
+La page ne porte pas de titre ; c'est un plan numéroté, où une flèche ramène la
+rubrique 7 entre 5 et 6. On le donne dans l'ordre que la flèche indique\footnote{La
+page garde l'ordre 1, 2, 3, 4, 5, 7, 6, 8 ; la flèche de la marge le corrige.
+La frontière entre 5 et 7 est incertaine : la ligne est surchargée, et
+« Morphismes », d'une encre plus sombre, est écrit par-dessus.}, en
+nommant à côté ce que chaque rubrique est devenue.
+
+\begin{enumerate}
+  \item[1.] \emph{Morphismes représentables} et \emph{$P$-représentables}
+    (représentables par des morphismes de schémas ayant la propriété $P$) ;
+    l'abus de langage qui dit « immersion ouverte, lisse, étale » d'un morphisme
+    de foncteurs représentable par de tels morphismes ; le critère de
+    représentabilité par recollement de morceaux, avec un renvoi à SGA 3,
+    exposé XI, 3.5\footnote{La page écrit « SGAD XI 3.5 ». SGAD est le
+    séminaire Demazure–Grothendieck, SGA 3 ; nous n'avons pas vérifié le
+    contenu du numéro cité.}.
+  \item[2.] Faisceaux et morphismes quasi-compacts, quasi-séparés ; morphismes
+    lfp et de présentation finie\footnote{Les crochets de la rubrique 2
+    signalent, d'après la marge, de « petits compléments » (lecture incertaine ;
+    « conditions » est possible).}. Pour un foncteur, être lfp revient à
+    commuter aux limites inductives filtrantes d'anneaux — c'est la
+    caractérisation qu'utilise la page 12.
+  \item[3.] Morphismes formellement lisses, formellement nets, formellement
+    étales, et variantes infinitésimales ; les critères standard.
+  \item[4.] Critères pour qu'un morphisme soit un monomorphisme, un
+    bimorphisme (à la fois mono et épi), une immersion, une immersion ouverte.
+  \item[5.] Conditions de séparation : diagonale représentable par des
+    immersions, par des immersions quasi-compactes, par des immersions de
+    présentation finie ; diagonale représentable par des immersions fermées ;
+    relations avec les critères valuatifs.
+  \item[7.] Foncteurs sur une catégorie de schémas au-dessus d'une base, et
+    « espaces induits »\footnote{« induits » est une lecture incertaine, et le
+    mot qui suit « foncteurs » est biffé et illisible, de même que la base de
+    $(\mathrm{Sch})_{/\cdot}$.}. Morphismes surjectifs, morphismes
+    radiciels — ceux dont la diagonale est surjective, caractérisation exacte
+    pour les morphismes de schémas. Une immersion ouverte surjective est un
+    isomorphisme.
+  \item[6.] Conditions de propreté.
+  \item[8.] Conditions de connexité.
+\end{enumerate}
+
+\textbf{Principe des vérifications.} Pour définir une propriété $P$ des
+morphismes de faisceaux sur $(\mathrm{Sch})$, deux exigences : a) $P$ doit être
+locale ; b) si $f : F \to G$ est représentable, $P$ doit coïncider avec la
+définition déjà admise pour les morphismes de schémas, c'est-à-dire : pour tout
+schéma $X$ et tout $X \to G$, le morphisme de schémas $X \times_G F \to X$ a la
+propriété $P$. C'est la règle qu'on suit aujourd'hui pour étendre aux espaces
+algébriques et aux champs les propriétés des morphismes de schémas. Elle n'est
+cohérente que pour des propriétés stables par changement de base et locales
+sur le but pour la topologie choisie\footnote{Condition que la page laisse
+implicite et que cette lecture ajoute : sans elle, b) ne définirait pas une
+propriété des morphismes de faisceaux indépendante de la présentation.}.
+
+\pagerange{11}{11}
+\section*{Fragment d'une démonstration (page 11)}
+
+La page reprend au milieu d'une phrase ; le théorème démontré et le début de
+la démonstration ne sont pas dans le dossier\footnote{La page est parmi les plus
+difficiles du dossier : de nombreux mots y sont illisibles, des insertions
+interlinéaires et des biffures se chevauchent au milieu, et l'ordre des mots
+rendus n'y est pas assuré. Un bloc encadré, où se lisent « $Y$ intègre »,
+« extension radicielle finie $Y'$ de $Y$ » et « normalisant », est biffé.
+Ce qui suit reconstitue le mécanisme ; les liaisons logiques sont de cette
+lecture.}. Ce qu'on en lit suffit à reconnaître une technique : rendre réduites
+les fibres d'une famille, après une extension radicielle, à l'aide du schéma de
+Hilbert. On y suppose, sans que la page le dise, $X \to Y$ assez régulier pour
+que le schéma de Hilbert $\underline{\mathrm{Hilb}}_{X/Y}$ existe (par exemple
+projectif et de présentation finie)\footnote{Hypothèse ajoutée.}.
+
+\emph{Première étape.} Pour un point $y$ de $Y$, il existe une extension
+radicielle finie $k'$ de $k(y)$ telle que $((X_y)_{k'})_{\mathrm{red}}$ soit
+géométriquement réduit sur $k'$ (« séparable »\footnote{Lecture incertaine,
+ainsi que « $k(y)$ ».}) ; quitte à faire ce changement de base et à remplacer $X$
+par $X_{\mathrm{red}}$, on se ramène au cas où $(X_y)_{\mathrm{red}}$ est
+géométriquement réduit, les hypothèses du théorème étant conservées.
+
+\emph{Deuxième étape.} Une deuxième assertion du théorème se déduit d'une
+troisième par réduction au cas noethérien. Pour celle-ci, on suppose $Y$ réduit.
+Soit $M = \underline{\mathrm{Hilb}}_{X/Y}$, et $\varphi$ la section
+\emph{ensembliste} de $M$ au-dessus de $Y$ qui envoie $y$ sur le point de la
+fibre $M_y$ défini par le sous-schéma fermé $(X_y)_{\mathrm{red}} \subset X_y$.
+Soit $Y'$ le sous-ensemble $\varphi(Y)$ de $M$. La page affirme, en
+l'admettant, que $Y'$ est fermé dans $M$ et que $Y' \to Y$ est fini ; muni de sa
+structure réduite, $Y'$ est alors un $Y$-schéma, et l'inclusion $Y' \to M$
+correspond à un sous-schéma fermé $Z$ de $X' = X \times_Y Y'$, plat et de
+présentation finie sur $Y'$\footnote{La page écrit « sur $Y$ » ; le sens demande
+$Y'$.}, dont la fibre en $y'$ au-dessus de $y$ est
+$(X_y)_{\mathrm{red}} \otimes_{k(y)} k(y')$. Ces fibres sont réduites — c'est
+pour cela que la première étape rendait $(X_y)_{\mathrm{red}}$ géométriquement
+réduit. Un morphisme plat, à fibres réduites, sur une base réduite a une source
+réduite (EGA IV, dans le cas localement noethérien, cité de mémoire) ; donc $Z$ est réduit, et comme il a même
+ensemble sous-jacent que $X'$, il est égal à $X'_{\mathrm{red}}$.
+
+Le résultat est que, sur $Y'$, la réduction de $X'$ est plate à fibres
+géométriquement réduites. C'est un énoncé du type « aplatissement de la
+réduction après un changement de base fini radiciel » ; le dossier ne dit pas
+dans quel théorème il s'insère.
+
+\pagerange{12}{13}
+\section*{Un critère d'immersion ouverte (pages 12 et 13)}
+
+Soit $S$ un schéma localement noethérien et
+
+\begin{tikzcd}
+G \arrow[r, "u"] & F \arrow[d] \\
+ & S
+\end{tikzcd}
+
+un morphisme de foncteurs $(\mathrm{Sch})^{\circ}_{/S} \to (\mathrm{Ens})$.
+Supposons :
+\begin{itemize}
+  \item[(i)] $F$ et $G$ sont des faisceaux pour la topologie fpqc, commutent aux
+    limites inductives filtrantes d'anneaux et aux limites projectives adiques
+    d'anneaux artiniens ;
+  \item[(ii)] $u$ est un monomorphisme, et formellement étale\footnote{La page
+    dit « infinitésimalement étale ». Pour un monomorphisme, la condition de
+    non-ramification est automatique, et il s'agit du relèvement le long des
+    épaississements nilpotents. Une troisième hypothèse, « $u$ … épimorphisme »,
+    est biffée ; « Si » est biffé et remplacé par « Supposons ».}.
+\end{itemize}
+Alors $u$ est une immersion ouverte : pour tout schéma $T$ et tout $T \to F$,
+le sous-foncteur $G_T = G \times_F T$ de $T$ est représentable par un ouvert de
+$T$.
+
+La page énonce le critère sans démonstration. On peut le justifier
+ainsi\footnote{Cette démonstration est de cette lecture.}. Par la commutation aux
+limites inductives filtrantes, on se ramène à $T$ de type fini sur $S$, donc
+localement noethérien. Soit $t \in T$ dont le point $\mathrm{Spec}\,k(t) \to T$
+se factorise par $G_T$. Comme $u$ est formellement étale, ce point se relève de
+façon unique aux $\mathrm{Spec}\,\mathcal{O}_{T,t}/\mathfrak{m}^n$, qui sont
+artiniens ; par la commutation aux limites adiques, il se relève à
+$\mathrm{Spec}\,\widehat{\mathcal{O}}_{T,t}$ ; comme $G$ est un faisceau fpqc et
+$u$ un monomorphisme, il descend à $\mathrm{Spec}\,\mathcal{O}_{T,t}$, et, $G$
+étant lfp, à un voisinage ouvert de $t$. La réunion $U$ des ouverts de $T$ qui se
+factorisent par $G_T$ est donc un ouvert contenant tous ces points, et contenu
+dans $G_T$ puisque $G_T$ est un faisceau ; inversement, tout $T' \to G_T$ envoie
+les points de $T'$ dans $U$ (encore par descente fpqc le long des extensions
+de corps), donc se factorise par l'ouvert $U$. D'où $G_T = U$.
+
+Les deux énoncés qui suivent, séparés par des traits : une immersion ouverte
+surjective de foncteurs est un isomorphisme (il suffit de le voir après
+changement de base à un schéma, où c'est clair) ; et, annoncée seulement, la
+caractérisation des morphismes étales de foncteurs.
+
+Les conditions (i) sont celles qu'Artin a mises à la base de ses critères de
+représentabilité — foncteur « limité » et effectivité des déformations
+formelles\footnote{Nom moderne ; la page ne cite pas Artin ici. Les conditions
+sont aussi celles que vérifie la page 4 du dossier 91 pour un théorème de
+représentabilité « par morphismes non nécessairement séparés ».}. La marge de
+la page 8 les annonçait déjà.
+
+\textbf{La feuille de mots-clés.} La page 13 dresse, en cadres non reliés, la
+carte des notions à traiter\footnote{Les cadres ne portent pas de flèches entre
+eux, sauf une accolade ; la transcription les donne dans l'ordre de lecture.
+« formellement » surcharge un « affine » biffé ; « immersion ouverte » est
+biffé dans la liste des immersions et repris à côté ; « relatif » est une
+lecture incertaine.} : l'immersion ouverte $X \to Y$ ; les morphismes
+formellement lisses, non ramifiés, étales, et leurs versions relatives ; les
+monomorphismes (« Mon ») et les immersions, fermées et ouvertes ; puis les
+rubriques séparé, propre, connexe du plan de la page 10. Le carré de changement
+de base
+
+\begin{tikzcd}
+G \arrow[r] & F \\
+G_T \arrow[r] \arrow[u] & F_T \arrow[u]
+\end{tikzcd}
+
+rappelle le principe de vérification de la page 10, et une famille
+$F_i \to F$ d'immersions ouvertes le recollement des pages 2 à 6. Enfin un
+groupe de trois cadres réunis par une accolade et marqué « (A) » —
+« faisceaux », « loc.\ de prés.\ finie », « adiques » — est la liste des
+hypothèses (i) de la page 12.
+
+\end{document}
