@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import catalogueRaw from './content/bourbaki.json';
+import skimRaw from './content/bourbaki-skim.json';
 
 /**
  * The Bourbaki archive, listed beside the fonds.
@@ -40,6 +41,13 @@ interface Doc {
 }
 const CATALOGUE = catalogueRaw as unknown as { built: string; source: string; records: Doc[] };
 const DOCS = CATALOGUE.records;
+
+/** The skim of #50, priority 3: where he appears in a document, in our words. */
+interface Skim {
+  present: boolean | null;
+  passages: { pages: string; kind: string; context: string }[];
+}
+const SKIM = (skimRaw as unknown as { built: string; skimmed: Record<string, Skim> }).skimmed;
 
 const TYPES: { id: string; label: string }[] = [
   { id: 'Rédactions', label: 'Rédactions' },
@@ -89,7 +97,8 @@ export function BourbakiPage() {
           <p className="mt-3 text-[14px] leading-relaxed text-ink-600">
             <span className="mr-1 inline-block h-3 w-3 rounded-sm align-[-1px] ring-2 ring-alerte-500" aria-hidden="true" />
             A red ring marks the {hits} documents that meet the fonds, and says how. Each title opens the
-            document on the archive's site.
+            document on the archive's site. For {Object.keys(SKIM).length} of them, a skim of the facsimile
+            gives the pages where he appears, in a few words of ours (#50; machine-read, unchecked).
           </p>
         </header>
 
@@ -166,6 +175,22 @@ export function BourbakiPage() {
                       </li>
                     ))}
                   </ul>
+                )}
+                {SKIM[String(d.id)] && (
+                  <details className="mt-2 text-[12.5px] text-ink-700">
+                    <summary className="cursor-pointer text-ink-500 hover:text-brand-700">
+                      Where he appears ({SKIM[String(d.id)].passages.length})
+                      {SKIM[String(d.id)].present === true ? ' · present' : SKIM[String(d.id)].present === false ? ' · not present' : ''}
+                    </summary>
+                    <ul className="mt-1.5 grid gap-1 pl-1">
+                      {SKIM[String(d.id)].passages.map((p, i) => (
+                        <li key={i}>
+                          <span className="tabular font-semibold text-ink-800">p. {p.pages}</span>{' '}
+                          <span className="text-ink-400">({p.kind})</span> {p.context}
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
                 )}
               </li>
             );
