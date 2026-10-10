@@ -1,0 +1,884 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 156-1, pages 1-26.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pages 1-20) and batch-02.fr.tex (pages 21-26).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against
+% the pages by a human. The folder was read whole: two batches, pages 1-26, all
+% mathematics, dated 5 June 1986 (page 1), 7 June (margin of page 3, page 23).
+% Not measured against the Opus 5 reference reading of folder 115.
+%
+% What the folder is. Chapter I (« GF I ») of Vers une géométrie des formes: a
+% purely combinatorial axiomatics of one-dimensional « formes » — a set of
+% « lieux » and a set of « segments », each with its set of lieux and its two
+% extremities — in three successive moutures (pages 1-2, 3-4, 5-26), kept apart
+% on the spine. The third mouture reaches axioms F1-F6, the « modèle-segment »
+% (= a bounded, dense, locally filtering order, page 13), orientation of
+% regular connected models (pages 15-17), and the « réseaux » (page 23), whose
+% reduced case is a simple graph. Chapter II (folder 156-2), begun on 6 June,
+% realises the same notions topologically; its page 9 lists for the lieux of a
+% faille exactly the order properties of page 13 here. Page 23 here is dated
+% 7 June, so chapter I was still being written after chapter II had begun.
+%
+% Notation fixed for the whole document. L the set of lieux, S the set of
+% segments, I~ the set of lieux on I, ∂I ∈ P_2(L) its extremities, I° = I~ ∖ ∂I.
+% From Cor. 4 (page 6) on, a segment is identified with I~ and written I, as
+% the page does from page 21. I_{x,z} the sub-segment of I with extremities
+% x, z (F1). L_r, L_s regular and singular lieux. S_x, R_x, B_x = S_x/R_x the
+% segments issued from x, the relation « même branche », the branches;
+% br_x(I) the branch of I at x. [x,y] = {z : x ≤ z ≤ y}. ω the set of
+% orientations. « Disjoints » for two lieux keeps the page's sense
+% (comparable, « emboîtés »), never mere distinctness.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — page 6: R_x is transitive only with a filtering condition at x that F1-F3
+%   do not give; the margin of page 6 begins to write it (« Il manque … F'3 »);
+%   we state it as F'3, the reconstruction ours.
+% — page 7: « on a … l'égalité ! » in F4 is not taken as I = I' ∪ I'': it fails
+%   in every model whose order is not total (page 4's margin warns against it);
+%   only the inclusion is asserted.
+% — page 7, Cor. 1: the sketch needs K with K ∩ I = {x}; F3 gives one meeting
+%   only I_{x,u} in {x}. The gap is said, not filled.
+% — page 9, Remarque 2: F4 passes to (L', S') only if the glued segment stays in
+%   L'; said. F1-F3, F5 pass.
+% — page 18: « si x ≤ y, z, ∃ u, x ≤ u ≤ y, z » is trivial as written; read
+%   strictly.
+% — page 21: « x' < a < a'' » read as ∀ a, ∃ a' < a < a''.
+% — page 22: F6 is stated with interiors, consequence a) with closed segments;
+%   the step is not on the page; the argument of pages 20 and 25 needs the
+%   closed form; said.
+% — page 23: a « réseau réduit » (I° = ∅) contradicts F2 as stated on page 5
+%   (I° ≠ ∅); réseaux are read with that clause of F2 dropped and the branch
+%   axiom in its margin form (u ∈ I ∖ {x}), which is what makes « les axiomes
+%   sont vides ! » (page 24) true.
+%
+% Modern names given and footnoted as ours: ordre dense, ensemble ordonné
+% filtrant (directed set), ordre borné, intervalle, relation d'intermédiarité
+% (betweenness, Pasch 1882, Huntington, Hilbert), graphe simple, degré d'un
+% sommet, torseur des orientations / revêtement d'orientation.
+%
+% What the folder announces and never establishes: the transitivity of R_x
+% from F1-F3; the equivalence F5 ⇔ F'5 (page 8); the theorem of page 15 that
+% the orientation relation has exactly two classes (« si c'était faux, il
+% faudrait le mettre en axiome »); the proof that the order of the linear case
+% is filtering (pages 19-20), which leads to F6 instead; the study of two
+% segments with the same extremities (pages 25-26), which stops mid-sentence;
+% the equivalence relation on singular lieux announced on page 9 (and posited
+% as E1 on page 2); the recursion on dimension n announced on page 1.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{156-1}
+\pages{1}{26}
+\dating{1986}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Chapitre] I. Vers une géométrie des formes (topologiques) : notes manuscrites (05/06/1986) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Qu'est-ce qu'une courbe, si l'on oublie les nombres réels, les distances et
+même les ouverts ? Ces vingt-six feuillets, écrits du 5 au 7 juin 1986,
+essaient de le dire avec deux mots seulement : des \emph{lieux}, et des
+\emph{segments}. Un segment a deux extrémités et porte des lieux ; un lieu
+intérieur à un segment le coupe en deux segments plus petits ; deux segments
+qui se touchent bout à bout en un lieu ordinaire se recollent en un seul. Tout
+le reste --- points de branchement, branches issues d'un lieu, orientation,
+réseaux --- doit sortir de quelques axiomes portant sur ces deux mots.
+
+C'est le premier chapitre d'un texte que Grothendieck intitule « Vers une
+géométrie des formes (topologiques) », et la première page annonce un
+programme plus vaste : construire par récurrence sur $n$ une géométrie des
+formes de dimension $\leq n$. Seule la dimension $1$ est abordée. On peut
+penser à la manière dont Pasch et Hilbert décrivent la droite par la
+relation « $z$ est entre $x$ et $y$ » ; mais ici le segment n'est pas
+supposé totalement ordonné. Le chapitre suivant (dossier 156-2) montrera
+pourquoi : les « lieux » d'une bande topologique, ce sont les courbes qui la
+coupent en deux, et deux telles courbes peuvent se croiser sans que l'une soit
+au-dessus de l'autre.
+
+Les feuillets reprennent trois fois leur départ. La première mouture (pages 1
+et 2) se donne trop de choses --- lieux critiques, relations « disjoints »,
+« adjacents », « spécialisation » --- et constate aussitôt que certaines
+découlent des autres. La deuxième (pages 3 et 4) réduit les données à deux
+ensembles et deux applications, et est barrée d'une grande croix. La troisième
+(à partir de la page 5) tient : axiomes de divisibilité, des branches, de
+recollement, des lieux réguliers. Elle démontre qu'un segment est la même
+chose qu'un ensemble ordonné muni d'un plus petit et d'un plus grand élément,
+dense et localement filtrant, puis cherche à orienter les modèles connexes
+sans branchement. Là, une démonstration bute : un contre-exemple (page 21)
+montre que les axiomes ne suffisent pas, et un sixième axiome est ajouté. Le
+7 juin, l'objet ainsi défini reçoit un nom, \emph{réseau}, et dans le cas
+extrême où les segments n'ont pas de lieux intérieurs, ce n'est rien d'autre
+qu'un graphe.
+
+On voit sur ces pages comment un axiome naît chez Grothendieck. Il écrit « Je
+présume », « Je ne sais s'il faut supposer », puis tranche deux jours plus
+tard dans la marge ; et devant un énoncé qu'il ne sait pas encore démontrer :
+« Si c'était faux, il faudrait le mettre en axiome. S'il est vrai, il doit
+être immédiat. » L'axiomatique n'est pas posée d'avance : elle est ce que les
+exemples réclament, et elle change quand un exemple la défait.
+
+\keywords{betweenness relation, bounded poset, dense order, directed set, locally directed order, axiomatic one-dimensional geometry, branch of a curve, valence, orientation double cover, simple graph, combinatorial graph}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+\begin{enumerate}
+\item[1.] \emph{Le projet, et la première mouture} (pages 1 et 2).
+\item[2.] \emph{Deuxième mouture} (pages 3 et 4).
+\item[3.] \emph{Troisième mouture : données, divisibilité} (pages 5 et 6) ---
+axiomes F1, F2 et corollaires 1 à 4.
+\item[4.] \emph{Branches} (pages 6 et 7) --- axiome F3.
+\item[5.] \emph{Lieux réguliers et recollement} (pages 7 et 8) --- F4, F5.
+\item[6.] \emph{Restriction à une partie} (pages 8 et 9).
+\item[7.] \emph{Le modèle-segment est un biordre} (pages 10 à 14).
+\item[8.] \emph{Modèles réguliers connexes, orientation} (pages 14 à 17).
+\item[9.] \emph{Le cas linéaire, et la filtration relative} (pages 17 à 21).
+\item[10.] \emph{L'axiome F6} (page 22).
+\item[11.] \emph{Réseaux} (pages 23 et 24), daté du 7 juin.
+\item[12.] \emph{Deux segments consécutifs} (pages 24 à 26), inachevé.
+\end{enumerate}
+
+La page 1 porte « GF I » en angle, le titre, « (Juin 86) » et, en tête du
+texte, « (5 juin) ». La pagination de l'auteur recommence avec la deuxième
+mouture : notre page 3 est sa page 2, et nos pages 4 à 26 sont ses pages 3 à
+24. Quand le texte renvoie à « cor.~2 p.~7 », c'est donc notre page 8. Une note
+marginale de la page 3 est datée « 7.6. », comme la page 23 : ce chapitre a
+été complété le lendemain du jour où commençait le chapitre II (dossier
+156-2, daté du 6 juin).
+
+\emph{Trois moutures.} Les pages 1--2, 3--4 et 5--26 sont trois départs
+successifs de la même définition. On ne les fusionne pas : chacune est
+présentée pour elle-même, et l'on dit, au passage, ce que la suivante reprend
+ou abandonne. La numérotation des axiomes n'est pas la même d'une mouture à
+l'autre (le F2 de la page 4 devient le F4 de la page 7) ; dans tout le
+document, « F$n$ » sans autre précision désigne l'axiome de la troisième
+mouture.
+
+\emph{Conventions.} $\mathcal{L}$ est l'ensemble des lieux, $S$ celui des
+segments. Pour $I \in S$, $\widetilde{I} \subset \mathcal{L}$ est l'ensemble
+des lieux « sur » $I$, $\partial I \in \mathfrak{P}_{2}(\mathcal{L})$ ses deux
+extrémités (une partie à deux éléments), $\partial I \subset \widetilde{I}$,
+et $I^{\circ} = \widetilde{I} \smallsetminus \partial I$ ses lieux intérieurs.
+À partir du corollaire 4 (page 6), qui montre qu'un segment est déterminé par
+ses lieux, on identifie $I$ à $\widetilde{I}$ et l'on écrit simplement $I$,
+comme le font les pages 21 à 26 ; c'est le seul changement de notation du
+document. $I_{x,z}$ est le sous-segment de $I$ d'extrémités $x$ et $z$
+(axiome F1). Le mot « disjoints », appliqué à deux lieux, a le sens de la page
+6 et de la page 8 du dossier 156-2 : comparables, emboîtés --- jamais
+simplement distincts.
+
+\emph{Ce que le dossier annonce et n'établit pas} : la récurrence sur la
+dimension promise à la page 1 ; la relation d'équivalence sur les lieux
+singuliers annoncée à la page 9 ; la transitivité de la relation « même
+branche » à partir des seuls F1 à F3 ; l'équivalence F5 $\Leftrightarrow$
+F$'$5 ; le théorème d'orientation des pages 15 à 17 ; le caractère filtrant
+de l'ordre dans le cas linéaire, que les pages 19 et 20 cherchent et qui
+conduit à F6 ; l'étude de deux segments de mêmes extrémités, interrompue au
+milieu d'une phrase (page 26).
+
+\pagerange{1}{2}
+\section*{Le projet, et la première mouture (pages 1 et 2)}
+
+Le texte s'ouvre sur une intention : une « approche vers une construction
+récurrente (sur l'entier naturel $n$) d'une géométrie des formes de dimension
+$\leq n$ ». Une forme de dimension $0$ serait un ensemble discret, dont les
+éléments sont les \emph{lieux}\footnote{Une note oblique dans la marge, en
+grande partie illisible, ébauche la notion de modèle d'une forme de
+dimension~$0$ : un ensemble $\mathcal{L}$ muni d'une relation, lue avec doute
+« équivalence », et d'une relation « disjoints ». On n'en tire rien.}. La
+récurrence n'est jamais écrite : tout le dossier traite la dimension~$1$.
+
+Un \emph{modèle de dimension $1$}, dans cette première mouture, comporte :
+\begin{enumerate}
+\item[(1)] un ensemble $\mathcal{L}$ de lieux ;
+\item[(2)] une partie $\mathcal{L}_{0}$ de lieux \emph{critiques}, ou \emph{de
+branchement} ;
+\item[(3)] une relation symétrique « $x$ et $y$ sont \emph{disjoints} », qui
+entraîne $x \neq y$ ;
+\item[(4)] une relation symétrique plus fine, « $x$ et $y$ sont
+\emph{adjacents} » ;
+\item[(5)] une relation plus fine encore, non symétrique, « $x$ est
+\emph{spécialisation} de $y$ », qui entraîne que $x$ est critique et $y$ ne
+l'est pas ;
+\item[(6)--(8)] un ensemble $S$ de \emph{segments}, et pour chaque $I \in S$
+une paire $\delta I$ de lieux adjacents, ses extrémités, et une partie
+$\widetilde{I} \supset \delta I$, les lieux sur le segment\footnote{Les
+numéros (6) et (7) se chevauchent d'ajouts interlinéaires barrés ; l'ordre de
+lecture est incertain, mais le contenu des données ne l'est pas. Le bord est
+noté $\delta I$ sur ces deux pages, $\partial I$ ensuite.}.
+\end{enumerate}
+
+Trois remarques suivent, qui préparent les deux moutures suivantes. D'abord,
+l'adjacence est redondante : $x$ et $y$ sont adjacents si et seulement s'il
+existe un segment d'extrémités $\{x,y\}$. Ensuite --- « je présume » --- deux
+lieux adjacents sont les extrémités d'au plus deux segments, et de deux
+exactement lorsqu'ils sont sur un « anneau », une composante qui est un
+cercle : c'est la situation que les pages 25 et 26 essaieront, à la fin du
+dossier, de déduire des axiomes. Enfin, la question de savoir si un segment
+est déterminé par $\delta I$ et $\widetilde{I}$ reste ouverte ; elle sera
+tranchée à la page 3 (en marge, le 7 juin) et démontrée à la page 6.
+
+Le seul axiome écrit, E$_{1}$, demande que sur $\mathcal{L}_{0}$ la relation
+« $x$ et $y$ ne sont pas disjoints » soit une relation
+d'équivalence\footnote{Entre « sont » et « disjoints », un signe barré qui
+ressemble à $\neq$ ; la lecture « ne sont pas disjoints » est celle qui donne
+un sens à la phrase suivante.} ; l'ensemble quotient est l'ensemble des
+\emph{points} de la forme, et plusieurs lieux critiques peuvent définir le
+même point critique. L'idée --- un point singulier vu comme une classe de
+lieux qui « se touchent » --- est abandonnée par les moutures suivantes, qui
+ne gardent comme données que les lieux et les segments ; elle reparaît en une
+ligne à la page 9. Les pages 1 et 2 sont barrées chacune d'un long trait.
+
+\pagerange{3}{4}
+\section*{Deuxième mouture (pages 3 et 4)}
+
+Les données se réduisent à deux ensembles $\mathcal{L}$ et $S$, une
+application $S \to \mathfrak{P}(\mathcal{L})$, $I \mapsto \widetilde{I}$, et
+une application $\partial : S \to \mathfrak{P}_{2}(\mathcal{L})$ avec
+$\partial I \subset \widetilde{I}$. Une note datée du 7 juin décide, en
+marge, d'identifier $I$ à $\widetilde{I}$ et $S$ à une partie de
+$\mathfrak{P}(\mathcal{L})$\footnote{Le « $\widetilde{I}$ » de cette note est
+lu avec doute. La date montre que la note est postérieure au corollaire 4 de
+la page 6, qui la justifie.}.
+
+Un lieu est \emph{régulier} s'il est intérieur à au moins un segment,
+\emph{singulier} (critique, de branchement) sinon :
+\[
+\mathcal{L}_{r} = \bigcup_{I \in S} I^{\circ}, \qquad \mathcal{L}_{s} =
+\mathcal{L} \smallsetminus \mathcal{L}_{r}, \qquad \widetilde{I} \cap
+\mathcal{L}_{s} \subset \partial I .
+\]
+Un lieu singulier $y$ est une \emph{spécialisation} de $x$ s'il existe un
+segment $I$ avec $x \in I^{\circ}$ et $y \in \partial I$ ; la donnée (5) de la
+première mouture devient ainsi une notion définie, et le lieu critique reste
+celui qui se spécialise.
+
+Viennent des axiomes, sur une page presque entièrement annulée par une
+grande croix\footnote{On résume ce qui se lit sous les traits. Deux axiomes
+portent le numéro F$_{2}$, le second sur un numéro barré.} :
+\emph{décomposition des segments} (tout lieu intérieur $z$ d'un segment
+d'extrémités $x$, $y$ le coupe en deux sous-segments uniques $I_{x,z}$,
+$I_{y,z}$ qui ne se rencontrent qu'en $z$) ; un axiome qui place tout lieu
+intérieur dans l'intérieur d'un segment contenu dans $I^{\circ}$, d'où l'on
+tire que $\widetilde{I}$ est infini et que $S$ l'est s'il n'est pas vide ;
+\emph{recollement des segments}, réciproque de la décomposition, en un lieu
+régulier ; enfin, toute partie finie de $I^{\circ}$ est contenue dans un
+segment inclus dans $I^{\circ}$. Ce sont, sous d'autres numéros, les F1--F2,
+F4 et F$'$5 de la troisième mouture. Deux notes de marge méritent d'être
+retenues. L'une avertit : « Mais attention, il [\dots] dire $\widetilde{I} =
+\widetilde{I}_{x,z} \cup \widetilde{I}_{y,z}$ !!! »\footnote{Deux mots sont
+illisibles, et c'est d'eux que dépend le sens. La suite du dossier (voir la
+section sur le recollement, pages 7 et 8) montre que l'égalité ne découle pas
+des axiomes et est fausse dans les modèles qu'on a en vue ; nous lisons donc
+la note comme une mise en garde contre cette égalité. C'est notre lecture.}.
+L'autre --- lue « Apparemment » --- énonce que tout sous-segment de $I$ ayant
+$z$ pour extrémité est contenu dans $\widetilde{I}_{x,z}$ ou dans
+$\widetilde{I}_{y,z}$ : ce sera la seconde moitié de F2.
+
+\pagerange{5}{6}
+\section*{Troisième mouture : données et divisibilité (pages 5 et 6)}
+
+Sous le titre « Modèle d'une forme $1$-dimensionnelle », les données sont
+celles de la deuxième mouture : $\mathcal{L}$, $S$, $I \mapsto \widetilde{I}$,
+$I \mapsto \partial I \in \mathfrak{P}_{2}(\mathcal{L})$, avec $\partial I
+\subset \widetilde{I}$.
+
+\begin{quote}
+\textbf{F1} (axiome de divisibilité\footnote{Le mot « divisibilité », en
+marge, est lu avec doute ; c'est celui que la page 12 emploie pour une
+propriété voisine.}). \emph{Soient $I \in S$ et $\partial I = \{x,y\}$. Pour
+tout $z \in \widetilde{I} \smallsetminus \{x\}$ il existe un unique $J \in S$,
+noté $I_{x,z}$, tel que $\widetilde{J} \subset \widetilde{I}$ et $\partial J =
+\{x,z\}$.}
+
+\textbf{F2}. \emph{Pour tout $I \in S$, $I^{\circ} \neq \emptyset$ ; si
+$\partial I = \{x,y\}$ et $z \in I^{\circ}$, alors $\widetilde{I}_{x,z} \cap \widetilde{I}_{y,z} = \{z\}$, et
+tout $J \in S$ tel que $\widetilde{J} \subset \widetilde{I}$ et $z \in
+\partial J$ vérifie $\widetilde{J} \subset \widetilde{I}_{x,z}$ ou
+$\widetilde{J} \subset \widetilde{I}_{y,z}$.}
+\end{quote}
+
+L'unicité dans F1 donne $I_{x,y} = I_{y,x} = I$. F1 dit, de façon équivalente
+(c'est la forme entre crochets de la page) : l'application qui envoie un
+sous-segment $J$ de $I$ issu de $x$ sur son autre extrémité est une bijection
+sur $\widetilde{I} \smallsetminus \{x\}$.
+
+\begin{quote}
+\textbf{Corollaires} (pages 5 et 6). \emph{Soit $I \in S$, $\partial I =
+\{x,y\}$, et $S_{I} = \{J \in S \mid \widetilde{J} \subset \widetilde{I}\}$.}
+\end{quote}
+
+\begin{enumerate}
+\item[1.] \emph{$I^{\circ}$ est infini.}
+\item[2.] \emph{Dans F2, les deux inclusions s'excluent.}
+\item[3.] \emph{L'application $S_{I} \to \mathfrak{P}_{2}(\widetilde{I})$, $J
+\mapsto \partial J$, est injective ; son image contient toutes les paires qui
+rencontrent $\partial I$ ; une paire $\{u,v\} \subset I^{\circ}$ est dans
+l'image si et seulement si $v \in \widetilde{I}_{x,u} \cup
+\widetilde{I}_{y,u}$, si et seulement si $u \in \widetilde{I}_{x,v} \cup
+\widetilde{I}_{y,v}$.}
+\item[4.] \emph{Si $\widetilde{I} = \widetilde{J}$, alors $I = J$.}
+\end{enumerate}
+
+La page ne démontre que le premier, d'un mot (« découle de la condition de
+divisibilité »). Les quatre sont justes\footnote{Démonstrations, qui ne sont
+pas sur la page. (1) Si $z \in I^{\circ}$, F2 appliqué à $I_{x,z}$ donne $z'
+\in I_{x,z}^{\circ}$ ; l'unicité dans F1 montre que $I_{x,z'}$ est le
+sous-segment de $I_{x,z}$ d'extrémités $x$, $z'$, donc
+$\widetilde{I}_{x,z'} \subsetneq \widetilde{I}_{x,z}$, et $z \notin
+\widetilde{I}_{x,z'}$ par F2 dans $I_{x,z}$ : on construit ainsi une suite
+infinie de lieux distincts de $I^{\circ}$. (2) $\widetilde{J}$ contient les
+deux éléments de $\partial J$, et $\widetilde{I}_{x,z} \cap
+\widetilde{I}_{y,z} = \{z\}$. (3) Si $\partial J = \partial J' = \{u,v\}$ avec
+$u \in I^{\circ}$, F2 place $J$ et $J'$ dans le même $I_{x,u}$ ou $I_{y,u}$
+(sinon $v$ serait dans les deux, donc égal à $u$), et l'unicité de F1 dans ce
+sous-segment donne $J = J'$ ; si $u \in \partial I$, c'est F1. Les
+équivalences de c) suivent de F2 et de F1. (4) Si $\partial J$ rencontre
+$\partial I$, en $x$ disons, $J = I_{x,z}$ ; si $z \neq y$, F2 donne $y \notin
+\widetilde{I}_{x,z} = \widetilde{J} = \widetilde{I}$, absurde. Si $\partial J
+\subset I^{\circ}$, F2 place $\widetilde{J}$ dans $\widetilde{I}_{x,u}$ ou
+$\widetilde{I}_{y,u}$, qui ne contiennent pas tout $\widetilde{I}$.}.
+
+Le point c) mérite qu'on s'y arrête, parce qu'il dit ce que le modèle
+\emph{n'est pas}. Deux lieux intérieurs $u$, $v$ d'un segment ne sont pas
+toujours les extrémités d'un sous-segment : il faut que l'un soit « du côté
+de $x$ » ou « du côté de $y$ » de l'autre. La page ajoute : « on sait donc que
+$u$ et $v$ sont des lieux \emph{disjoints} sur le segment $I$ », et promet
+d'y revenir\footnote{« y reviendra » est lu avec doute ; le « ou » de la
+condition 2), souligné deux fois, aussi.}. C'est le sens que le mot
+« disjoints » a dans le dossier 156-2 (page 8) : deux lieux d'une faille sont
+disjoints quand ils sont emboîtés, l'un du côté de $A$ par rapport à l'autre.
+Rien n'oblige deux lieux d'un même segment à l'être.
+
+Le corollaire 4 autorise ce que la marge de la page 3 avait décidé :
+\emph{désormais on identifie un segment à l'ensemble de ses lieux, et l'on
+écrit $I$ pour $\widetilde{I}$}, $I^{\circ} = I \smallsetminus \partial I$.
+
+\pagerange{6}{7}
+\section*{Branches (pages 6 et 7)}
+
+\begin{quote}
+\textbf{F3} (axiome des branches). \emph{Soient $I, J \in S$ et $x \in
+\partial I \cap \partial J$. Il existe $u \in I \smallsetminus \{x\}$ et $v
+\in J \smallsetminus \{x\}$ tels que, ou bien $I_{x,u} = J_{x,v}$ (et alors
+$u = v$), ou bien $I_{x,u} \cap J_{x,v} = \{x\}$.}
+\end{quote}
+
+Les deux cas s'excluent. La page écrit d'abord $u \in I^{\circ}$, $v \in
+J^{\circ}$, et la marge corrige en $u \in I \smallsetminus \{x\}$, $v \in J
+\smallsetminus \{x\}$\footnote{« devrait plutôt [être] $u \in I
+\smallsetminus \{x\}$ » ; la fin de la note, qui renvoie à la divisibilité, est
+illisible. Lorsque $I^{\circ}$ et $J^{\circ}$ ne sont pas vides, les deux
+formes sont équivalentes (on rétrécit par F1) ; la forme de la marge est la
+seule qui ait un sens pour les réseaux réduits de la page 23, et c'est elle
+que nous retenons.}. Un segment issu de $x$ et un autre, ou bien commencent
+par un même morceau, ou bien partent de $x$ dans des directions qui ne se
+recouvrent pas près de $x$.
+
+Soit $S_{x}$ l'ensemble des segments dont $x$ est une extrémité. On dit que
+$I, J \in S_{x}$ définissent la \emph{même branche} en $x$, et l'on écrit $I
+\mathrel{R_{x}} J$, s'il existe $z \in I^{\circ} \cap J^{\circ}$ avec $I_{x,z}
+= J_{x,z}$. La page affirme que c'est une relation d'équivalence ; elle est
+réflexive et symétrique, mais sa transitivité demande une condition que F1 à
+F3 ne donnent pas :
+\begin{quote}
+\textbf{F$'$3} (filtration en une extrémité). \emph{Si $I \in S$, $x \in
+\partial I$ et $u, v \in I^{\circ}$, il existe $w \in I^{\circ}$ avec $I_{x,w}
+\subset I_{x,u} \cap I_{x,v}$.}
+\end{quote}
+Une note serrée au bas de la page 6 commence justement : « Il manque [\dots]
+à partir de (F$'_{3}$) : Soit $I \in S$, $u, v \in I^{\circ}$, alors [\dots]
+$\exists\, w$ [\dots] $I_{x,w}$ »\footnote{La note est en grande partie
+illisible ; l'énoncé F$'$3 ci-dessus est notre reconstruction, guidée par ce
+qui s'en lit et par ce dont la transitivité a besoin. Avec F$'$3 : si $I
+\mathrel{R_{x}} J$ par $z$ et $J \mathrel{R_{x}} K$ par $z'$, on prend $w$
+dans $J^{\circ}$ avec $J_{x,w} \subset J_{x,z} \cap J_{x,z'}$ ; l'unicité de
+F1 donne $I_{x,w} = J_{x,w} = K_{x,w}$, et $w$ est intérieur à $I$ et à $K$.}.
+Avec F$'$3, $R_{x}$ est une équivalence. L'ensemble quotient
+\[
+B_{x} = S_{x} / R_{x}
+\]
+est l'ensemble des \emph{branches} en $x$, et l'on note $\mathrm{br}_{x}(I)$
+la branche de $I$. Le cardinal de $B_{x}$ est l'\emph{ordre} de $x$ : un lieu
+d'ordre $0$ est \emph{isolé}, un lieu d'ordre $1$ est un \emph{bout}. C'est,
+pour un graphe, le degré d'un sommet\footnote{Le rapprochement est le nôtre ;
+la page 23 parlera d'« ordre ou multiplicité d'un nœud ». La page écrit
+ensuite « Ordre fini », seul sur sa ligne : peut-être une exigence laissée en
+suspens ; on ne l'impose pas.}.
+
+\pagerange{7}{8}
+\section*{Lieux réguliers et recollement (pages 7 et 8)}
+
+Les lieux réguliers, singuliers, sont définis comme à la page 3.
+
+\begin{quote}
+\textbf{F4} (axiome de recollement). \emph{Soient $I', I'' \in S$ et $z$ un
+lieu \emph{régulier} tels que $I' \cap I'' = \partial I' \cap \partial I'' =
+\{z\}$ ; posons $\partial I' = \{x,z\}$, $\partial I'' = \{y,z\}$. Il existe
+un unique $I \in S$ tel que $I \supset I' \cup I''$ et $\partial I =
+\{x,y\}$ ; alors $I' = I_{x,z}$ et $I'' = I_{y,z}$.}
+\end{quote}
+
+La page ajoute entre parenthèses une remarque sur l'égalité, dont un mot
+manque\footnote{« (on \uncertain{a} [\dots] l'égalité !) », le verbe lu avec
+doute et le mot suivant illisible. Lu « on a l'égalité », ce serait faux en
+général, et nous ne l'affirmons pas.}. Il ne faut pas lire $I = I' \cup I''$ :
+on verra aux pages 10 à 13 qu'un segment est un ensemble ordonné, et que
+$I_{x,z} \cup I_{z,y}$ est l'ensemble des lieux de $I$ comparables à $z$ ;
+l'égalité revient donc à demander que l'ordre soit total, ce que ni les
+axiomes ni les modèles du chapitre II n'imposent. Seule l'inclusion est vraie,
+et c'est elle qu'on énonce.
+
+\begin{quote}
+\textbf{Corollaire 1} (page 7). \emph{Soient $I \in S$, $\partial I =
+\{x,y\}$, avec $x$ régulier. Il existe $J \in S$ tel que $J \supset I$,
+$\partial J \cap \partial I = \{y\}$ et $x \in J^{\circ}$.}
+\end{quote}
+
+Le segment se prolonge au-delà d'une extrémité régulière. L'esquisse de la
+page : F1 et F2 montrent que $x$ est d'ordre $\geq 2$ ; F3 fournit alors un
+segment $K$ issu de $x$ avec $K \cap I = \partial K \cap \partial I = \{x\}$ ;
+F4 recolle $K$ et $I$\footnote{Le premier pas est juste : si $x \in
+L^{\circ}$, les sous-segments $L_{a,x}$ et $L_{b,x}$ ne se rencontrent qu'en
+$x$, donc ne définissent pas la même branche. Le deuxième ne l'est pas tel
+quel : appliqué à $I$ et à un segment d'une autre branche, F3 donne un $K$ qui
+ne rencontre que $I_{x,u}$ en $\{x\}$, non $I$ tout entier ; un segment issu
+de $x$ peut revenir rencontrer $I$ loin de $x$, comme sur un cercle. Il faut
+pouvoir rétrécir $K$ jusqu'à éviter $I \smallsetminus \{x\}$ ; c'est vrai dans
+les modèles qu'on a en vue, mais cela ne découle pas visiblement des axiomes
+et la page ne le fait pas. La fin de la ligne, « avec $y' \neq x$ », est lue
+avec doute.}.
+
+\begin{quote}
+\textbf{Corollaire 2} (page 8). \emph{Si les deux extrémités de $I$ sont
+régulières, il existe $J \in S$ tel que $I \subset J^{\circ}$.}
+\end{quote}
+
+C'est le corollaire 1 appliqué deux fois, et il en hérite la réserve.
+
+\begin{quote}
+\textbf{F5} (axiome des lieux réguliers). \emph{Un lieu régulier est d'ordre
+$2$.}
+
+\textbf{F$'$5}. \emph{Pour $x$ régulier, les $I^{\circ}$ qui contiennent $x$
+forment une base de filtre : si $x \in I'^{\circ} \cap I''^{\circ}$, il
+existe $I$ tel que $x \in I^{\circ} \subset I'^{\circ} \cap I''^{\circ}$.}
+\end{quote}
+
+On sait déjà que l'ordre d'un lieu régulier est au moins $2$ ; F5 interdit le
+branchement en un lieu régulier, ce qui justifie a posteriori que les
+lieux singuliers s'appellent aussi « de branchement ». La page affirme que F5
+et F$'$5 sont équivalents, sans démonstration\footnote{Nous ne reproduisons
+pas l'équivalence comme acquise. Une note marginale de six ou sept lignes, en
+face des deux énoncés, est presque entièrement illisible ; on y lit F$'_{5}$,
+F$_{2}$, F$_{5}$ et « $[0,1]$ ». Le NB qui suit F$'$5 (« $\Longrightarrow I
+\subset I'^{\circ} \cap I''^{\circ}$ ») se lit au mieux : quitte à rétrécir
+$I$, on peut supposer le segment fermé $I$ lui-même contenu dans
+$I'^{\circ} \cap I''^{\circ}$.}. Dans un modèle, F$'$5 dit que les
+voisinages de $x$ formés d'intérieurs de segments sont filtrants, comme les
+intervalles ouverts autour d'un point de la droite.
+
+\pagerange{8}{9}
+\section*{Restriction à une partie (pages 8 et 9)}
+
+Une première remarque (page 8), barrée, demande si les axiomes passent à la
+réunion $\mathcal{L}'$ des lieux d'une famille de segments. La page 9 reprend
+plus généralement :
+
+\emph{Remarque 1.} Les axiomes sont trivialement satisfaits si $S =
+\emptyset$, c'est-à-dire si tous les lieux sont singuliers ; un modèle se
+réduit alors à un ensemble. La page annonce qu'on enrichira la structure en
+introduisant une relation d'équivalence sur $\mathcal{L}_{s}$ --- l'idée de
+l'axiome E$_{1}$ de la page 2, un point singulier comme classe de lieux. Elle
+n'y revient pas.
+
+\emph{Remarque 2.} Pour une partie quelconque $\mathcal{L}' \subset
+\mathcal{L}$, posons $S' = \{I \in S \mid I \subset \mathcal{L}'\}$. La page
+affirme que $(\mathcal{L}', S')$ satisfait F1 à F5. C'est juste pour F1, F2,
+F3 (et F$'$3), F5 et F$'$5 ; pour F4, il faut que le segment recollé reste
+dans $\mathcal{L}'$\footnote{Démonstration, qui n'est pas sur la page : les
+sous-segments d'un segment de $S'$ sont dans $S'$, ce qui règle F1 à F3 ; une
+branche en $x$ pour $S'$ est contenue dans une branche pour $S$, d'où un ordre
+$\leq 2$ en un lieu régulier de $\mathcal{L}'$, et $\geq 2$ par l'argument du
+corollaire 1 ; le segment $I$ fourni par F$'$5 est contenu dans $I'$. Pour
+F4, le recollé $I$ de $I', I'' \in S'$ contient $I' \cup I''$ mais peut
+contenir d'autres lieux, extérieurs à $\mathcal{L}'$ : l'hérédité de F4 est
+vraie si $I = I' \cup I''$, c'est-à-dire, d'après la section précédente,
+quand les ordres sont totaux. C'est une hypothèse que la page ne fait pas.}.
+Le cas qui servira est celui où $\mathcal{L}' = I$ est un segment : alors $S'
+= S_{I}$, qu'on identifie par le corollaire 3 à une partie de
+$\mathfrak{P}_{2}(I)$\footnote{La page écrit « les segments tels que
+$\widetilde{I} \subset I$ » pour $\widetilde{J} \subset \widetilde{I}$. Dans
+ce cas F4 est hérité : on le vérifie avec l'ordre de la section suivante, où
+le recollé de $[x,z]$ et $[z,y]$ est $[x,y] \subset I$.}.
+
+\pagerange{10}{14}
+\section*{Le modèle-segment est un biordre (pages 10 à 14)}
+
+Un modèle est un \emph{modèle-segment} s'il existe $I \in S$ avec $I =
+\mathcal{L}$. Ce segment est unique (corollaire 4), et $\mathcal{L}_{r} =
+I^{\circ}$. Choisissons une extrémité $x_{0}$ et notons $x_{1}$ l'autre. Une
+première tentative de définir un ordre (page 10) est cernée et
+barrée\footnote{Elle définit $x \preccurlyeq y$ par $y \in [x,x_{1}]$, prouve
+la transitivité (« c'est immédiat ») et commence une proposition qui
+s'interrompt. La page 11 la reprend avec une meilleure présentation.
+« mutuellement » est lu avec doute.} ; la page 11 pose
+\[
+[x_{0},x] = \begin{cases} \{x_{0}\} & x = x_{0}, \\ I_{x_{0},x} & x \neq x_{0},
+\end{cases}
+\]
+et de même $[x,x_{1}]$ en échangeant $x_{0}$ et $x_{1}$.
+
+\begin{quote}
+\textbf{Proposition} (page 11). \emph{Pour $x, y \in \mathcal{L}$, les
+conditions suivantes sont équivalentes : (i) $[x_{0},x] \subset [x_{0},y]$ ;
+(ii) $x \in [x_{0},y]$ ; (i bis) $[x,x_{1}] \supset [y,x_{1}]$ ; (ii bis) $y
+\in [x,x_{1}]$. La relation $x \preccurlyeq y$ ainsi définie est un ordre sur
+$\mathcal{L}$.}
+\end{quote}
+
+C'est un préordre, évidemment sur (i) ; c'est un ordre parce que $[x_{0},x] =
+[x_{0},y]$ entraîne, par le corollaire 4 et en passant aux extrémités, $x =
+y$\footnote{L'équivalence de (ii) et (ii bis), qui n'est pas sur la page, vient
+du corollaire 3 c) et de F2 : si $x \in I_{x_{0},y}$, il y a un sous-segment
+d'extrémités $x$, $y$ ; F2 en $x$ le place dans $I_{x_{0},x}$ ou dans
+$I_{x_{1},x}$, et le premier cas donnerait $I_{x_{0},x} = I_{x_{0},y}$, donc $x
+= y$.}. Désormais on écrit $\leq$ et $<$, comme la page à partir de la page 12.
+
+\begin{quote}
+\textbf{Proposition} (pages 12 et 13). \emph{L'ordre $\leq$ a un plus petit
+élément $x_{0}$ et un plus grand élément $x_{1}$, distincts. Les segments du
+modèle sont exactement les $[x,y] = \{z \mid x \leq z \leq y\}$ pour $x < y$,
+avec $\partial [x,y] = \{x,y\}$. L'ordre est}
+\end{quote}
+
+\begin{enumerate}
+\item[a)] \emph{dense : si $x < y$, il existe $z$ avec $x < z < y$ ;}
+\item[b)] \emph{localement filtrant décroissant : si $x < y_{1}$ et $x <
+y_{2}$, il existe $y$ avec $x < y \leq y_{1}, y_{2}$ ;}
+\item[b$'$)] \emph{localement filtrant croissant : si $y_{1} < x$ et $y_{2} <
+x$, il existe $y$ avec $y_{1}, y_{2} \leq y < x$.}
+\end{enumerate}
+
+\begin{quote}
+\emph{Réciproquement, un ensemble ordonné ayant un plus petit et un plus grand
+élément distincts, et vérifiant a), b), b$'$), définit, avec ces segments, un
+modèle-segment.}
+\end{quote}
+
+La page énonce ces propriétés et la réciproque sans
+démonstration\footnote{L'énumération de la page 12 est surchargée
+d'ajouts ; « filtrante croissante » et l'astérisque qui renvoie à la marge
+sont lus en partie. Esquisse : que les segments soient les $[x,y]$ vient de
+F2, du corollaire 3 et de F4 (si $x < z < y$, les segments $[x,z]$ et $[z,y]$
+ne se rencontrent qu'en $z$, régulier, et leur recollé est le segment
+d'extrémités $x$, $y$) ; a) est F2 ; b) est F$'$3 appliqué au segment
+$[x,x_{1}]$ en son extrémité $x$, et b$'$) de même avec $[x_{0},x]$. Pour la réciproque, F1 à
+F5 se vérifient directement sur les intervalles, F3 et F$'$3 grâce à b) et
+b$'$).}. Ce qu'elle n'énonce pas, et qu'il faut souligner, c'est que l'ordre
+soit total : il ne l'est pas en général, et c'est le point c) de la page 5 vu
+autrement. Le cardinal de $\mathcal{L}$ est infini, par la densité.
+
+Échanger $x_{0}$ et $x_{1}$ remplace l'ordre par l'ordre opposé, et les
+conditions a), b), b$'$) sont autoduales. D'où la conclusion de la page 13 :
+\emph{une structure de modèle-segment équivaut à une structure de biordre} ---
+une paire d'ordres opposés --- dont chacun a un plus petit et un plus grand
+élément distincts, et qui est dense et localement filtrant dans les deux sens.
+Une \emph{orientation} du segment (page 14) est le choix d'une extrémité,
+c'est-à-dire de l'un des deux ordres.
+
+Ce sont mot pour mot les propriétés a) à c) que la page 9 du dossier 156-2,
+écrite le lendemain, énonce pour l'ensemble des lieux d'une faille
+topologique orientée : le chapitre II fournit au chapitre I son modèle
+géométrique\footnote{Le rapprochement est le nôtre ; aucun des deux dossiers
+ne renvoie à l'autre sur ce point. Le cas où les lieux sont des points, donc
+où l'ordre est total, est celui du segment $[0,1]$ ; mais sur une bande
+$S^{1} \times [0,1]$, deux cercles ondulés qui se croisent sont deux lieux
+non comparables, et l'ensemble des lieux n'est pas totalement ordonné. La
+caractérisation d'un intervalle par des axiomes d'ordre ou
+d'« intermédiarité » (\emph{betweenness}) remonte à M.~Pasch (1882),
+E.~V.~Huntington et D.~Hilbert ; un ordre dense non nécessairement total,
+localement filtrant (en anglais \emph{locally directed}), n'a pas de nom
+consacré.}.
+
+\pagerange{14}{17}
+\section*{Modèles réguliers connexes, orientation (pages 14 à 17)}
+
+Un modèle est \emph{régulier} si $\mathcal{L} = \mathcal{L}_{r}$. Sur
+$\mathcal{L}$, la relation « il existe un segment contenant $x$ et $y$ » est
+réflexive et symétrique ; ses classes pour l'équivalence engendrée sont les
+\emph{composantes connexes}, et leur ensemble est noté
+$\pi_{0}(\mathfrak{X})$\footnote{La page invoque le corollaire 2 pour dire
+que, dans un modèle régulier, on peut demander $x, y \in I^{\circ}$ ; c'est
+vrai sous la réserve faite sur le corollaire 1. La définition de
+$\pi_{0}$ n'en dépend pas.}. Tout modèle est la somme disjointe de ses
+composantes, et les composantes d'un modèle régulier sont régulières : on se
+ramène aux modèles réguliers connexes.
+
+\begin{quote}
+\textbf{Théorème} (énoncé pages 15 à 17). \emph{Soit $\mathfrak{X}$ un modèle
+régulier connexe. Il existe, de façon unique, un ensemble $\omega$ à deux
+éléments et des bijections $\omega \simeq \partial I$ ($I \in S$) et $\omega
+\simeq B_{x}$ ($x \in \mathcal{L}$) telles que :}
+\end{quote}
+
+\begin{enumerate}
+\item[a)] \emph{si $J \subset I$ sont deux segments, la bijection $\partial I
+\simeq \partial J$ qui en résulte envoie le plus petit élément de $I$ sur le
+plus petit élément de $J$, pour l'un quelconque des deux ordres de $I$ (et
+l'ordre qu'il induit sur $J$) ;}
+\item[b)] \emph{si $x$ est le plus petit élément de $I$ pour l'un de ses
+ordres, l'élément $x \in \partial I$ correspond à la branche
+$\mathrm{br}_{x}(I)$.}
+\end{enumerate}
+
+Autrement dit : sur la réunion disjointe
+\[
+\coprod_{I \in S} \partial I \;\amalg\; \coprod_{x \in \mathcal{L}} B_{x},
+\]
+soit $R$ la relation d'équivalence engendrée par $(I,x) \sim (J,y)$ lorsque
+$J \subset I$ et que $x$, $y$ se correspondent comme en a), et par $(I,x) \sim
+(x, \mathrm{br}_{x}(I))$. Le théorème affirme que $R$ a exactement deux
+classes, et que les deux extrémités d'un même segment tombent dans des classes
+différentes. La page ne le démontre pas : « [\dots] vérifier ici. Si c'était
+faux, il faudrait le mettre en axiome. S'il est vrai, il doit être immédiat
+que le nombre de classes est $1$ ou $2$. »\footnote{Le début de la phrase est
+illisible, et l'ajout de deux lignes en tête de la page 17 n'est lu qu'en
+partie. La page écrit $\omega_{\mathfrak{X}}$ puis $\omega_{\mathcal{L}}$ pour
+le même quotient ; nous écrivons $\omega$. Que le nombre de classes soit au
+plus $2$ découle de la connexité ; qu'il soit exactement $2$ --- que le modèle
+soit orientable --- est la partie qui reste à établir ou à poser en axiome. Le
+croquis de marge montre un arc portant un point épais et deux flèches dans le
+même sens.}
+
+L'ensemble $\omega$ est l'ensemble des \emph{orientations} de $\mathfrak{X}$.
+En termes actuels, les bijections $\omega \simeq \partial I$, $\omega \simeq
+B_{x}$ trivialisent le torseur des orientations, et le théorème dit que le
+revêtement d'orientation est trivial\footnote{Le vocabulaire est le nôtre.
+Pour une variété de dimension $1$ connexe --- une droite ou un cercle --- le
+revêtement d'orientation à deux feuillets est toujours trivial ; c'est ce que
+le théorème transporte dans le cadre combinatoire, où il n'est pas
+évident.}. Une orientation choisie, chaque segment a une \emph{origine}
+$\mathrm{or}(I)$ et une \emph{extrémité} $\mathrm{ex}(I)$, et chaque lieu une
+branche sortante\footnote{« ainsi », « orienté » et « sortant » sont lus avec
+doute.}. On pose
+\[
+x \prec y \iff \text{il existe } I \in S \text{ avec } \mathrm{or}(I) = x,\
+\mathrm{ex}(I) = y,
+\]
+et l'on distingue le \emph{cas linéaire}, où $\prec$ est transitive, du
+\emph{cas circulaire}, où elle ne l'est pas. Seul le premier est étudié.
+
+\pagerange{17}{21}
+\section*{Le cas linéaire, et la filtration relative (pages 17 à 21)}
+
+Dans le cas linéaire, $x \preccurlyeq y \iff (x = y \text{ ou } x \prec y)$
+est un préordre, et c'est un ordre : $x \prec y \prec x$ donnerait $x \prec
+x$, impossible puisque les deux extrémités d'un segment sont distinctes. Les
+segments sont les $[x,y]$ pour $x \prec y$, d'origine $x$ ; la structure de
+modèle connexe orienté régulier est donc connue quand on connaît l'ordre.
+La page affirme que cet ordre est
+\begin{enumerate}
+\item[--] \emph{strictement filtrant croissant} : pour tous $x, y$, il existe
+$z$ avec $x, y < z$ ; et strictement filtrant décroissant ;
+\item[--] localement strictement filtrant dans les deux sens : si $x < y$ et
+$x < z$, il existe $u$ avec $x < u \leq y, z$, et dualement\footnote{La page
+écrit « si $x \leq y, z$, $\exists\, u$ tel que $x \leq u \leq y, z$ », ce qui
+est trivial ($u = x$) ; nous lisons la version stricte, qui est celle des
+pages 12 et 20. Les formules de la parenthèse sont surchargées.} ;
+\end{enumerate}
+et note en marge qu'il n'a donc ni plus grand ni plus petit élément, et qu'il
+est dense.
+
+\emph{La démonstration qui bute} (pages 19 et 20). Pour montrer que l'ordre
+est filtrant croissant, la page relie deux lieux $x$, $y$ par une chaîne
+$x = x_{0}, x_{1}, \dots, x_{n} = y$ avec $x_{i}, x_{i+1} \in I_{i}^{\circ}$ ;
+en posant $y_{i} = \mathrm{or}(I_{i})$ on a $x_{i} \geq y_{i} \leq
+x_{i+1}$\footnote{Les signes d'inégalité sont repassés ; l'alternance est lue
+avec doute, mais c'est la seule qui suive de la définition.}, de sorte que
+$\mathcal{L}$ est connexe en tant qu'ensemble ordonné. On raisonne par
+récurrence sur la longueur de la chaîne. Pour $n \leq 1$, il suffit qu'il y
+ait un lieu au-dessus de $y$, ce qu'assure la régularité de $y$. Au pas de
+récurrence, on a $x'$ au-dessus de $x$ et de $z$, et $y$ voisin de $z$ ; si
+$z \geq y$ c'est fini, et si $z \leq y$, il faut trouver $t > x', y$ sachant
+seulement que $z < x'$ et $z < y$. La page isole ce qui manque sous le nom de
+\emph{filtration relative} :
+\[
+u < v \ \text{ et } \ u < w \quad \Longrightarrow \quad \text{il existe } t
+\text{ avec } v, w < t,
+\]
+deux croquis montrant le « V » $v > u < w$ qu'on veut fermer en losange.
+
+Ce n'est pas une conséquence des propriétés locales, et la page le dit
+aussitôt : un ordre connexe, localement strictement filtrant dans les deux
+sens et sans plus grand ni plus petit élément définit un modèle régulier
+connexe --- on vérifie F1 à F5 --- mais n'est pas nécessairement filtrant
+croissant\footnote{La phrase se termine sur un mot lu « (dites) », d'une
+lecture incertaine.}. Le contre-exemple est à la page 21.
+
+\begin{quote}
+\textbf{Exemple} (page 21). \emph{Soient $\mathcal{L}_{0}$ et
+$(\mathcal{L}_{i})_{i \in I}$, $\operatorname{card} I \geq 2$, des ensembles
+ordonnés non vides, localement strictement filtrants dans les deux sens, et
+tels que tout élément $a$ ait un $a' < a$ et un $a'' > a$. Sur $\mathcal{L} =
+\mathcal{L}_{0} \amalg \coprod_{i} \mathcal{L}_{i}$, on pose $x < y$ si $x, y$
+sont dans un même $\mathcal{L}_{i}$ ($i \in I$ ou $i = 0$) et $x < y$ dans
+celui-ci, ou si $x \in \mathcal{L}_{0}$ et $y \in \mathcal{L}_{i}$, $i \in
+I$.}
+\end{quote}
+
+C'est un arbre qui se ramifie vers le haut : un tronc $\mathcal{L}_{0}$
+au-dessus duquel partent plusieurs rameaux. L'ordre satisfait les mêmes
+conditions locales, mais deux lieux pris dans deux rameaux différents n'ont
+aucun majorant : il n'est pas filtrant croissant\footnote{La page écrit
+« $\exists\, x' < a < a''$ », que nous lisons « pour tout $a$, il existe $a' <
+a < a''$ » ; « non vide » est inséré au-dessus de la ligne et lu avec doute.
+Il faut $\operatorname{card} I \geq 2$, que la page ne dit pas, pour que
+l'exemple en soit un ; il faut aussi $\mathcal{L}_{0}$ sans plus grand
+élément, ce que donne $a''$. Un premier exemple, sur $\mathbb{Q}$ coupé en un
+irrationnel $r$ avec une partie supérieure multipliée par un ensemble $E$ de
+cardinal $\geq 2$, est barré de quatre traits et s'interrompt.}. Dans le
+modèle correspondant, le tronc se dédouble sans qu'aucun lieu marque la
+bifurcation : chaque lieu est régulier, d'ordre $2$, et pourtant la forme
+bifurque. F1 à F5 ne voient pas cette bifurcation, parce qu'elle a lieu
+« entre » des lieux, en un endroit où il n'y a pas de lieu.
+
+\pagerange{22}{22}
+\section*{L'axiome F6 (page 22)}
+
+\begin{quote}
+\textbf{F6}. \emph{Soient $I, J \in S$ et $x \in \partial I \cap \partial J$
+définissant la même branche en $x$. Il existe $K \in S$ tel que $x \in
+\partial K$ et $I^{\circ} \cup J^{\circ} \subset K^{\circ}$.}
+\end{quote}
+
+En d'autres termes, les intérieurs des segments issus de $x$ dans une branche
+donnée forment une famille filtrante croissante pour l'inclusion ; la page
+renvoie à F3, dont c'est le pendant « vers l'extérieur ». C'est exactement ce
+qui exclut l'exemple de la page 21 : deux segments $[x,v]$ et $[x,w]$ issus
+d'un lieu $x$ du tronc et montant dans deux rameaux définissent la même
+branche en $x$, et aucun segment ne les contient tous deux.
+
+La page en tire, pour $I, J \in S$ et $x \in \partial I \cap \partial J$ :
+\begin{enumerate}
+\item[a)] \emph{$\mathrm{br}_{x}(I) = \mathrm{br}_{x}(J)$ si et seulement s'il
+existe $K \in S$ tel que $x \in \partial K$ et $I \cup J \subset K$ ;}
+\item[b)] \emph{sinon, il existe $u \in I^{\circ}$, $v \in J^{\circ}$ tels que
+$I_{x,u} \cap J_{x,v} = \{x\}$.}
+\end{enumerate}
+
+b) est F3\footnote{La page écrit $I_{x,u} \cap I_{x,v}$, pour $J_{x,v}$.}. Dans
+a), la réciproque est juste (avec F$'$3) ; mais F6 ne donne $K$ qu'avec
+$I^{\circ} \cup J^{\circ} \subset K^{\circ}$, et rien n'assure que les
+extrémités autres que $x$ soient dans $K$\footnote{La note de marge, très
+raturée, porte justement là-dessus : « On n'exige pas [\dots] que les
+intersections $I \cap J$ [\dots] soient dans $K$. Mais [\dots] celles de ces
+extrémités [qui sont] régulières [\dots] (cor.~2 p.~7) » --- c'est-à-dire,
+dans notre pagination, le corollaire 2 de la page 8. On y lit l'idée
+d'utiliser ce corollaire pour faire entrer dans $K$ les extrémités régulières.
+« On a donc », qui introduit a) et b), est lu avec doute.}. C'est cette forme
+fermée qu'il faut pour achever la filtration relative de la page 20 (avec $K
+= [u,k]$, on veut $v, w \leq k$) et pour l'argument de la page 25. Nous
+retenons donc F6 tel qu'il est écrit, et a) sous la réserve que la forme
+fermée soit démontrée par la voie qu'indique la marge, ou prise comme axiome.
+
+\pagerange{23}{24}
+\section*{Réseaux (pages 23 et 24)}
+
+Le 7 juin, l'objet reçoit son nom : un modèle de $1$-forme satisfaisant F1 à
+F6 est un \emph{réseau}. Ses lieux singuliers sont ses \emph{nœuds} ; les
+composantes connexes de $\mathcal{L}_{r}$ sont ses \emph{lignes} --- « de
+préférence : arêtes »\footnote{La page écrit « $\mathcal{L}_{r} \smallsetminus
+\mathcal{L}_{s}$ », qui est $\mathcal{L}_{r}$ puisque les deux ensembles sont
+disjoints ; l'indice $r$ est d'ailleurs lu avec doute. On entend les
+composantes du sous-modèle $(\mathcal{L}_{r}, S')$ de la page 9.} ; ses
+composantes connexes sont ses \emph{composantes}. L'ordre, ou
+\emph{multiplicité}, d'un nœud est le nombre de ses branches, égal à $2$ en
+un lieu régulier.
+
+Un réseau est \emph{divisible} si $I^{\circ} \neq \emptyset$ pour tout
+segment, \emph{réduit} si $I^{\circ} = \emptyset$ pour tout segment,
+c'est-à-dire $I = \partial I$, ou encore $\mathcal{L}_{r} = \emptyset$ : tous
+ses lieux sont des nœuds. Ces deux définitions supposent tacitement qu'on a
+retiré de F2 sa première clause, $I^{\circ} \neq \emptyset$, sans quoi tout
+réseau serait divisible et aucun ne serait réduit (à moins que $S$ soit
+vide)\footnote{La page ne le dit pas. Nous lisons donc « réseau » avec F2
+privé de cette clause, et F3 sous la forme de la marge de la page 6 ;
+« divisible » restitue la clause. Le mot qui suit « divisible » est
+illisible.}.
+
+\begin{quote}
+\emph{La donnée d'une structure de réseau réduit sur $\mathcal{L}$ revient à
+celle d'une partie $S$ de $\mathfrak{P}_{2}(\mathcal{L})$} --- « les axiomes
+F1 à F6 sont vides ! » --- \emph{donc à une structure de graphe réduit.}
+\end{quote}
+
+C'est juste sous la lecture qu'on vient de dire\footnote{Avec $I^{\circ} =
+\emptyset$, F2, F4, F5 et F6 ne portent que sur des lieux intérieurs ou
+réguliers, et sont vides ; F1 se réduit à $I_{x,y} = I$ ; F3, sous la forme de
+la marge, est satisfait avec $u$, $v$ les autres extrémités, car deux
+segments distincts issus de $x$ n'ont que $x$ en commun. C'est l'identification
+de $S$ à une partie de $\mathfrak{P}(\mathcal{L})$ qui exclut les arêtes
+multiples.}. En termes actuels, un graphe réduit est un \emph{graphe simple}
+: pas de boucle, puisqu'un segment a deux extrémités distinctes, pas d'arête
+multiple, puisqu'un segment est déterminé par ses lieux. Le cercle à un ou
+deux sommets, qui demanderait une boucle ou deux arêtes parallèles, n'est donc
+pas un réseau réduit ; il en faut au moins trois nœuds. Le lien avec les
+graphes est le but visible de la notion : un réseau général est un graphe
+dont les arêtes sont des segments divisibles.
+
+\pagerange{24}{26}
+\section*{Deux segments consécutifs (pages 24 à 26)}
+
+« Je reviens », dit la page, à l'étude des réseaux réguliers, connexes et non
+vides. Soient deux segments consécutifs $I$, d'extrémités $x$, $y$, et $J$,
+d'extrémités $y$, $z$, avec $y$ régulier et $\mathrm{br}_{y}(I) \neq
+\mathrm{br}_{y}(J)$\footnote{Un « Lemme » est commencé puis barré. La
+première lettre de la note de marge « $\in \partial I \cap \partial J$ » peut
+se lire $x$ ou $y$ ; la figure suggère $y$.}.
+
+\emph{Cas I : $I \cap J = \{y\}$.} Alors $x \neq z$, et l'axiome de
+recollement donne un unique $K \supset I \cup J$, d'extrémités $x$, $z$, avec
+$I = K_{x,y}$, $J = K_{y,z}$. « Situation bien comprise. »
+
+\emph{Cas II : $I \cap J \neq \{y\}$.} Un premier traitement est barré (page
+24) et repris (page 25). Si $w \in I \cap J$, $w \neq y$, les sous-segments
+$I_{w,y}$ et $J_{y,w}$ ont les mêmes extrémités $\{w,y\}$ et des branches
+différentes en $y$\footnote{La marge note que $w$ est régulier, sauf si $w =
+x = z$. Les croquis de ces deux pages sont des cercles : deux arcs de mêmes
+extrémités. Les figures barrées ne sont pas reprises.}. La page étudie donc
+d'abord la situation où $\partial I = \partial J = \{x,y\}$ et
+$\mathrm{br}_{y}(I) \neq \mathrm{br}_{y}(J)$, sans plus supposer $y$ régulier,
+et demande ce qu'est $I \cap J$.
+
+\emph{Les branches diffèrent aussi en $x$.} Sinon, F6 fournirait $K$ issu de
+$x$ contenant $I$ et $J$, et l'unicité de F1 dans $K$ donnerait $I = K_{x,y} =
+J$, contre l'hypothèse\footnote{L'argument utilise la forme fermée a) de la
+page 22, avec $I \cup J \subset K$ ; F6 tel qu'il est écrit ne met dans $K$
+que les intérieurs. Voir la réserve de la section précédente.}.
+
+\emph{Puis $I \cap J = \{x,y\}$.} Si $t \in I \cap J$ n'était pas une
+extrémité, il serait intérieur aux deux, et l'on appliquerait ce qui précède
+à $I_{x,t}$ et $J_{x,t}$, qui ont les mêmes extrémités et des branches
+différentes en $x$ : leurs branches en $t$ différeraient aussi. L'axiome des
+lieux réguliers F5 doit alors fournir la contradiction --- le texte s'arrête
+sur « on aurait $\mathrm{br}_{t}$ »\footnote{Ce qui manque n'est pas sur la
+page, et nous ne le restituons pas. On devine l'intention : en $t$, régulier,
+il n'y a que deux branches, et les quatre germes $I_{x,t}$, $I_{t,y}$,
+$J_{x,t}$, $J_{t,y}$ doivent s'y répartir d'une manière qu'on espère
+contradictoire.}.
+
+Ce qui se dessine, c'est la remarque de la page 2 : deux lieux sont les
+extrémités d'au plus deux segments, et de deux exactement quand ils sont sur
+un cercle --- deux arcs d'un même cercle, qui ne se rencontrent qu'en leurs
+extrémités. C'est le cas circulaire laissé de côté à la page 17. Le dossier
+s'arrête là ; le lendemain, 8 juin, le chapitre III (dossier 156-3) reprend
+les réseaux « via découpages ».
+
+\end{document}

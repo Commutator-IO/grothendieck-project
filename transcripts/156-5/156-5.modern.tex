@@ -1,0 +1,1152 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 156-5, pages 1-48.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-NN.fr.tex.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against
+% the pages by a human. The folder was read whole: three batches, pages 1-48,
+% all mathematics, dated 14 June 1986 (page 1), 15 June (page 17) and 18 June
+% (page 36). Not measured against the Opus 5 reference reading of folder 115.
+%
+% What the folder is. Chapter V (« GF V ») of Vers une géométrie des formes,
+% « Algèbre des figures », written between the first mouture of Analysis situs
+% (GF IV = 156-4, whose last date is 14 June) and the second (GF VI = 156-6,
+% begun 18 June). It builds a set-theoretic model of the axioms C 1-C 8 of the
+% first mouture: a « figure ensembliste » is an admissible family of subsets of
+% a set L, equivalently a part S of L with an Alexandrov (« ultra- ») topology.
+% Sub-figure, raffinement and subdivision become closed subspace, continuous
+% inclusion and finer topology; the axioms are checked one by one; the
+% extension of a subdivision (C 7) becomes a gluing of topologies, whose
+% characterisation is attempted, found false (pp. 42, 47, 48), and corrected.
+%
+% Notation fixed for the whole document. L the ambient set. F, G, H, F', G'
+% figures (pages 1-10 write 𝔏, Ψ, Σ for them; pages 24-40 write 𝓛 for the
+% ambient set). |F| the support, ∂A and A° (A° = A ∖ ∂A, the open stratum),
+% A_F(x) the least member of F containing x, R_F the partition into open
+% strata. 𝔉 the set of figures (𝒥 on page 24), 𝓜 the multiplicities. ≤
+% sub-figure, ≪ raffinement, ≼ subdivision, F.G the intersection figure.
+% Topologies are written τ throughout (pages 36-40 write T, 𝒯); the
+% specialisation preorder is x ≤ y ⇔ x ∈ closure(y), so closed = down-closed.
+% In the gluing: S = |F|, T = |G| closed, U = S ∖ T, τ'_0 on T, τ' the glued
+% topology, τ'' a competitor.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — p. 3: the struck counter-example is wrong (B = L contains A); his margin
+%   sends to GF VIII his pp. 44-45 (= 156-8 pp. 52-53) for a correct one.
+% — p. 5: for infinite families « the boolean algebra generated » must be the
+%   complete one (arbitrary unions).
+% — p. 11: « irreducible ⇔ greatest element » holds for complete
+%   join-irreducibility in 𝔉; the topological aside fails for infinite down-sets.
+% — pp. 12-14: « 𝓜 is connected » is FALSE as soon as card L ≥ 2 ({L} is
+%   isolated; {L∖{x}} and {L∖{x}, L} form a component), and C 4 fails ({L},
+%   {{x}} incompatible). The multiplicities of pp. 12, 13, 14 are not
+%   admissible and the formula (A ∪ B)° = A° ∪ B° for ⊠ is false. True when the
+%   members are finite subsets of an infinite L. Our analysis, footnoted.
+% — p. 15: « disjoint » is GF IV's (compatible, no common member).
+% — p. 17: the density margin is an equivalence only for closed members.
+% — p. 23: the margin's d) without the closedness clause is not enough.
+% — p. 24: commutativity of the square supplied.
+% — p. 28: (𝔉, ≪) is even a complete lattice ({L} is its top); for an infinite
+%   family the inf carries the Alexandrov topology of the meet preorder, not
+%   the initial topology of p. 38's margin.
+% — pp. 31-33: the « lemma » used in d ⇒ b is false in both directions; b ⇔ c
+%   holds, d is independent of them; the crossed-out a) is TRUE (F' is the
+%   greatest subdivision inducing G'), and F' is characterised by c) + d).
+% — p. 34: the words « croissante » / « ensembliste » for g_J, h_J swapped.
+% — pp. 41-48: e) is false, as he finds; counter-example of p. 48 made
+%   explicit; his closing condition is right and is proved here; the closure
+%   formula has ∪ (p. 44 margin), not ∩ (p. 48); p. 43's ≠ is =; p. 45's
+%   « partie de T » is a part of S.
+%
+% Modern names given and footnoted as ours: topologie d'Alexandrov et préordre
+% de spécialisation (Alexandroff 1937), espace stratifié au-dessus d'un
+% ensemble ordonné (Lurie, after 1986), ouverts réguliers (Stone 1937),
+% condition de frontière (Whitney, Mather), complexe CW régulier et ensemble
+% de ses faces (Björner 1984), treillis complet, recollement (SGA 4, exposé IV),
+% théorème A de Quillen (1973) and « foncteur asphérique ».
+%
+% What the folder announces and never establishes: e) of p. 41 (false); the
+% equivalence (b, c, d) ⇔ a) hoped for on p. 36 (false as stated); the
+% axioms C 8 (« trivial », p. 26, never stated here); the passage to
+% topological spaces of p. 16 (fragmentary).
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{156-5}
+\pages{1}{48}
+\dating{1986}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Chapitre] V. Algèbre des figures : notes manuscrites (14/06/1986) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Une carte de géographie découpe un territoire en pays ; une triangulation
+découpe une surface en sommets, arêtes et faces. Dans les deux cas on a des
+morceaux, chacun bordé par des morceaux plus petits : une face est bordée par
+des arêtes, une arête par deux sommets. Ces quarante-huit feuillets, écrits du
+14 au 18 juin 1986, cherchent ce qui reste d'un tel découpage quand on oublie
+tout de la géométrie et qu'on ne garde que des ensembles.
+
+Le chapitre précédent (dossier 156-4, première « mouture » d'une
+\emph{Analysis situs}) avait posé des axiomes pour trois manières de comparer
+deux découpages, qu'il appelle des \emph{figures} : l'un peut être un morceau
+de l'autre (sous-figure), l'un peut être plus fin que l'autre sur le même
+territoire (subdivision), et, entre les deux, l'un peut être un découpage plus
+fin d'un morceau de l'autre (raffinement). Le présent chapitre construit le
+modèle le plus pauvre possible de ces axiomes : une figure n'est plus qu'une
+famille de parties d'un ensemble, soumise à une condition simple --- chaque
+point a un plus petit morceau qui le contient, et chaque morceau a un
+« intérieur » non vide, ce qui n'est pas recouvert par les morceaux plus
+petits. On vérifie les axiomes un à un.
+
+L'idée qui arrive en route, le 18 juin, est qu'une telle famille n'est rien
+d'autre qu'une topologie d'un genre très particulier, où toute réunion de
+fermés est fermée : les morceaux sont les adhérences des points. Les trois
+comparaisons deviennent alors des notions de topologie de première année ---
+sous-espace fermé, inclusion continue, topologie plus fine --- et les preuves
+laborieuses du début se raccourcissent. Le dernier problème, prolonger à toute
+une figure la subdivision d'un de ses morceaux, devient celui de recoller deux
+topologies le long d'un fermé.
+
+Les dernières pages montrent un auteur qui se corrige à vue. Une
+caractérisation énoncée à la page 41 est déclarée « fausse » en marge de la page
+42, puis « c'est faux !! » à la page 47, « ultra faux » à la page 48, où un
+contre-exemple à trois points la défait ; deux lignes plus bas vient la
+condition juste. Une marge de la page 42 ajoute que c'est « une condition que
+j'avais d'abord oubliée à la page 31 ». La présente lecture va un peu plus loin
+dans le même sens : la connexité affirmée aux pages 12 à 14 est fausse, et la
+caractérisation de la page 31 l'est aussi, sauf la condition qu'il a barrée.
+
+Les noms à chercher : topologies d'Alexandrov et préordres, espaces stratifiés
+au-dessus d'un ensemble ordonné, recollement.
+
+\keywords{Alexandrov topology, specialization preorder, poset-stratified set, closed subspace, complete lattice, regular open set, frontier condition, regular CW complex, face poset, refinement of stratifications, gluing of topologies, recollement, Quillen's Theorem A}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+\begin{enumerate}
+\item[1.] \emph{Familles admissibles} (pages 1 à 5) : la condition, et le
+dictionnaire avec les ensembles ordonnés.
+\item[2.] \emph{Sous-figures et compatibilité} (pages 6 à 11).
+\item[3.] \emph{L'ensemble ordonné des figures et les axiomes C 1 à C 4}
+(pages 10 à 14), dont la connexité des multiplicités, qui est fausse.
+\item[4.] \emph{Supports, complément, et vers les espaces} (pages 15 et 16).
+\item[5.] \emph{Sous-classes de figures} (pages 17 à 19), le 15 juin.
+\item[6.] \emph{Raffinement et subdivision} (pages 19 à 26), et les axiomes
+C 5 à C 8.
+\item[7.] \emph{La figure intersection} (pages 27 à 29), et l'axiome C 6.
+\item[8.] \emph{Prolonger une subdivision} (pages 29 à 36), l'axiome C 7.
+\item[9.] \emph{Le point de vue des ultra-topologies} (pages 36 à 40), le
+18 juin.
+\item[10.] \emph{Recollement de topologies, et une caractérisation fausse}
+(pages 41 à 48).
+\end{enumerate}
+
+Sa pagination 1 à 48 coïncide avec celle des archivistes. La page 1 porte en
+angle « GF V » : chapitre V de \emph{Vers une géométrie des formes}. Le
+chapitre IV (dossier 156-4), première mouture de l'\emph{Analysis situs}, porte
+en dernier la date du 14 juin, celle de la page 1 d'ici ; le chapitre VI
+(dossier 156-6), deuxième mouture, s'ouvre le 18 juin, date que porte aussi la
+marge de la page 36 d'ici, là où le point de vue change. Le chapitre VI
+s'intitule d'ailleurs, à sa première page, « Algèbre de figures ». Deux marges
+d'ici (pages 1 et 3) renvoient au chapitre VIII (dossier 156-8) : elles ont été
+ajoutées à une relecture postérieure d'au moins dix jours\footnote{Les renvois
+sont à sa propre pagination du chapitre VIII, « pp.~37 » et « pp.~44, 45 » ;
+dans le dossier 156-8 ce sont les pages 45 et 52-53 des archivistes, où il écrit
+« Je vais reprendre ici la prop.~1 p.~1 de GF V, dans un contexte indiciel ».}.
+
+\emph{Ce que le dossier vérifie.} Les axiomes de la première mouture sont
+nommés C 1 à C 8 ; ce sont ceux des pages 53 à 78 du dossier 156-4 (C 1 à C 3
+pages 53 à 58, C 4 page 64, C 5 à C 7 pages 69 à 72, un C 8 barré page 78). On
+les retrouve ici pages 10 et 11 (C 1 à C 3), 13 (C 4), 26 (C 5 à C 8), 29 (C 6
+et C 7). Le dossier les tient tous pour vrais dans le modèle ensembliste ; C 4
+ne l'est pas (pages 12 à 14).
+
+\emph{Conventions.} $L$ est l'ensemble ambiant\footnote{Les pages 24 à 40
+l'écrivent $\mathcal{L}$.}. Une \emph{figure} est une famille admissible de
+parties de $L$ (page 3), notée $F$, $G$, $H$\footnote{Les pages 1 à 10 notent
+les familles $\mathfrak{L}$, $\Psi$, $\Sigma$ ; à partir de la page 11 elles
+deviennent des figures $F$, $G$. On prend la seconde notation partout, pour ne
+pas confondre $L$ et $\mathfrak{L}$.} ; ses éléments sont ses \emph{strates
+fermées} (ou membres), et pour $A \in F$
+\[
+\partial A = \bigcup_{B \in F,\ B \subsetneq A} B, \qquad A^{\circ} = A
+\smallsetminus \partial A
+\]
+est la \emph{strate ouverte} de $A$. $|F|$ est le support, $A_{F}(x)$ le plus
+petit membre de $F$ contenant $x$, $R_{F}$ la partition de $|F|$ en strates
+ouvertes. $\mathfrak{F}$ est l'ensemble des figures\footnote{La page 24 l'écrit
+d'une lettre lue $\mathcal{J}$.}, $\mathcal{M} \subset \mathfrak{F}$ celui des
+multiplicités. $F \leq G$ (sous-figure), $F \ll G$ (raffinement), $F
+\preccurlyeq G$ (subdivision). Les topologies sont notées $\tau$\footnote{Les
+pages 36 à 40 écrivent $T$ puis $\mathcal{T}$ pour une topologie, alors que $T$
+y désigne aussi un ensemble ; on unifie.} ; le \emph{préordre de
+spécialisation} est $x \leq y \iff x \in \overline{\{y\}}$, de sorte que les
+fermés sont les parties stables vers le bas --- c'est la convention de la
+page 4.
+
+\emph{Ce que le dossier annonce et n'établit pas} : la caractérisation e) de la
+page 41, qu'il déclare lui-même fausse ; l'équivalence entre les conditions de
+la page 31 et la maximalité, espérée page 36 ; l'énoncé de C 8, dit
+« trivial » page 26 sans être écrit ; le passage aux espaces topologiques de la
+page 16, qui n'est lisible que par fragments.
+
+\pagerange{1}{5}
+\section*{Familles admissibles (pages 1 à 5)}
+
+\subsection*{La condition}
+
+Soit $F$ un ensemble de parties de $L$. Le paragraphe s'ouvre, le
+14 juin 1986, sous le titre « Sorite ensembliste »\footnote{« Sorite » est lu
+avec doute. Dans la définition de $\partial A$, la page écrit $B \subset A$ sous
+la réunion ; l'inclusion doit être stricte, faute de quoi $A^{\circ}$ serait
+vide.}.
+
+\textbf{Proposition 1} (pages 1 et 2). \emph{Les conditions suivantes sont
+équivalentes :}
+\begin{enumerate}
+\item[1°)] \emph{pour tout $x \in |F|$, l'ensemble $F_{x} = \{A \in F \mid x \in
+A\}$ a un plus petit élément $A_{F}(x)$ ;}
+\item[2°)] \emph{($\alpha$) pour $A, B \in F$, $A \cap B$ est réunion des
+membres de $F$ qu'il contient ; ($\beta$) tout $x \in |F|$ appartient à la
+strate ouverte d'un membre ;}
+\item[3°)] \emph{($\gamma$) les strates ouvertes non vides forment une
+partition de $|F|$ ; ($\delta$) tout $A \in F$ est saturé pour cette
+partition ; ($\eta$) si $A^{\circ} \neq \emptyset$ et $A^{\circ} \subset B$,
+avec $A, B \in F$, alors $A \subset B$.}
+\end{enumerate}
+
+Le point est que $x \in A^{\circ}$ signifie exactement que $A$ est un élément
+\emph{minimal} de $F_{x}$\footnote{La page écrit dans ($\beta$) « $\forall x \in
+\mathfrak{L}$ » ; il faut lire $x \in |\mathfrak{L}|$.} : 1°) demande un plus
+petit élément, 2°) un élément minimal plus la condition ($\alpha$), qui force
+le minimal à être le plus petit. La démonstration de la page 2 est complète :
+si $x \in A^{\circ}$ et $x \in B$, ($\alpha$) donne $C \in F$ avec $x \in C
+\subset A \cap B$, la minimalité de $A$ donne $C = A$, donc $A \subset B$ ; de
+là ($\gamma$), ($\delta$), ($\eta$) ; et 3°) $\Rightarrow$ 1°) parce que, si
+$x \in A^{\circ}$ et $x \in B$, ($\delta$) donne $A^{\circ} \subset B$ et
+($\eta$) $A \subset B$.
+
+Une marge propose de remplacer ($\delta$) et ($\eta$) par une seule condition :
+($\delta'$) tout $A \in F$ est la réunion des $B^{\circ}$ pour $B \in F$, $B
+\subset A$. C'est juste\footnote{Avec ($\gamma$) : si $x \in A^{\circ}$ et $x
+\in B$, ($\delta'$) appliqué à $B$ donne $C \subset B$ avec $x \in C^{\circ}$,
+et ($\gamma$) donne $C = A$, donc $A \subset B$ ; c'est 1°). La marge, de sa
+main à la même encre, ajoute « voir variante \emph{in extenso}, formellement
+plus forte, voir GF VIII p.~37 », renvoi à une relecture postérieure.}.
+
+\emph{Remarques} (page 3). La condition ($\beta$) est automatique si $F$ est
+finie, et plus généralement si $F$ est artinienne pour l'inclusion. Elle ne
+l'est pas sans cela : une suite strictement décroissante $A_{1} \supsetneq
+A_{2} \supsetneq \cdots$ d'intersection non vide satisfait ($\alpha$) mais non
+($\beta$) aux points de l'intersection. Une seconde remarque, qui voulait
+montrer que ($\eta$) ne découle pas d'une forme affaiblie de ($\delta'$) (avec
+$B^{\circ} \subset A$ au lieu de $B \subset A$), est barrée avec son
+exemple\footnote{L'exemple barré ne prouve rien : il y prend $B = \{x, y, z,
+t\} = L$, qui contient $A$, et conclut « on a $A^{\circ} \subset B$ mais non
+que $A \subset B$ ». La marge le dit elle-même : « Exemple idiot --- mais voir
+contre-exemple correct avec $I$ infini, GF VIII pp.~44, 45 » ; ce sont les
+pages 52 et 53 du dossier 156-8, qui en donnent deux, construits sur une suite
+décroissante infinie. Une autre marge, « Idem si $A \in \mathfrak{L} \Rightarrow
+A \neq \emptyset$ ?? », reste une question.}.
+
+\begin{quote}
+\textbf{Définition} (pages 3 et 4). $F$ est \emph{préadmissible} si elle
+satisfait les conditions de la proposition 1, \emph{admissible} si de plus
+$A^{\circ} \neq \emptyset$ pour tout $A \in F$.
+\end{quote}
+
+Une famille admissible ne contient pas $\emptyset$, et ses membres sont
+exactement les $A_{F}(x)$ : si $x \in A^{\circ}$, $A = A_{F}(x)$.
+
+\subsection*{Le dictionnaire avec les ensembles ordonnés}
+
+Se donner une famille admissible $F$ revient à se donner (page 4)
+\begin{enumerate}
+\item[a)] un ensemble ordonné $I$ (une copie de $F$, ordonnée par inclusion),
+\item[b)] une partie $S$ de $L$ (le support $|F|$),
+\item[c)] une application surjective $\varphi : S \to I$ ($x \mapsto
+A_{F}(x)$),
+\end{enumerate}
+à isomorphisme près de $I$\footnote{La précision est nôtre. Dans l'autre
+sens, on pose $A_{i} = \varphi^{-1}(I_{\leq i})$ ; comme $\varphi$ est
+surjective, $A_{j} \subset A_{i}$ équivaut à $j \leq i$, d'où $\partial A_{i} =
+\varphi^{-1}(I_{<i})$ et $A_{i}^{\circ} = \varphi^{-1}(i) \neq \emptyset$.}.
+Une note de marge, en grande partie illisible, décrit de même une famille
+préadmissible : le même système, plus un ensemble de parties fermées de $I$
+correspondant aux membres d'intérieur vide\footnote{Ce qui se lit de la marge
+s'accorde avec l'énoncé suivant, que l'on vérifie aisément et qui est la
+lecture retenue : les membres d'intérieur vide d'une famille préadmissible
+sont des $\varphi^{-1}(J)$, $J$ partie de $I = F'$ stable vers le bas qui n'a
+pas de plus grand élément. Une « Proposition 2 » commencée juste au-dessus est
+barrée.}.
+
+Munissons $I$ de la topologie associée à l'ordre : les fermés sont les parties
+stables vers le bas --- les réunions quelconques de $I_{\leq i}$ ---, les
+ouverts les parties stables vers le haut ; et $S$ de la topologie image
+réciproque. Alors
+\[
+F = \bigl\{ \overline{\varphi^{-1}(i)} = \varphi^{-1}(I_{\leq i})
+\bigr\}_{i \in I} :
+\]
+les membres de $F$ sont les adhérences des strates ouvertes. Les fermés de $S$
+sont les réunions quelconques de membres,
+\[
+A_{J} = \bigcup_{i \in J} A_{i} = \coprod_{i \in J} A_{i}^{\circ} =
+\varphi^{-1}(J), \qquad J \subset I \text{ stable vers le bas},
+\]
+les ouverts sont les $\varphi^{-1}(J)$ pour $J$ stable vers le haut --- et cette
+fois, prévient la page, on ne peut pas remplacer $A_{i}^{\circ}$ par $A_{i}$
+---, et les parties localement fermées sont les $\varphi^{-1}(J)$ pour $J$
+\emph{convexe} : $i \leq j \leq k$, $i, k \in J \Rightarrow j \in J$.
+
+Une topologie où toute réunion de fermés est fermée --- où chaque point a un
+plus petit voisinage --- est ce qu'on appelle aujourd'hui une \emph{topologie
+d'Alexandrov}, et elle est la même chose qu'un préordre, le préordre de
+spécialisation\footnote{P.~Alexandroff, « Diskrete Räume », 1937. La page 36
+appellera ces topologies « ultra-topologies ». Le couple $\varphi : S \to I$,
+continu pour la topologie d'Alexandrov de $I$, est ce que la littérature récente
+appelle un ensemble (ou un espace) \emph{stratifié au-dessus de l'ensemble
+ordonné $I$} --- par exemple J.~Lurie, \emph{Higher Algebra}, appendice A.5 ---,
+avec la même convention que les ouverts sont stables vers le haut. Ces
+références sont nôtres ; la seconde est postérieure de trente ans.}. Ce qui
+s'écrit ici page 4 en termes d'ensembles d'indices sera, le 18 juin, le point
+de départ de la page 36.
+
+\emph{Parties constructibles} (page 5). Les parties de $S$ saturées pour $R_{F}$
+--- réunions quelconques de strates ouvertes --- correspondent bijectivement aux
+parties quelconques de $I$ par $J \mapsto \varphi^{-1}(J)$. La page les appelle
+\emph{$F$-modérées} ou \emph{$F$-constructibles}, et ajoute, pour $F$ finie,
+que ce sont exactement les parties obtenues à partir des membres par réunions,
+intersections et complémentaires dans $S$, les $A^{\circ}$ étant les atomes de
+l'algèbre de Boole ainsi engendrée\footnote{Pour $F$ infinie, c'est vrai de
+l'algèbre de Boole \emph{complète} engendrée (réunions et intersections
+quelconques) ; l'algèbre engendrée par des opérations finies est en général
+plus petite. La page restreint bien l'énoncé à $F$ finie, par une addition au
+dessus de la ligne. Elle écrit « parties $\mathfrak{L}$-constructibles de
+$\mathfrak{L}$ » : ce sont des parties de $S$.}.
+
+\pagerange{6}{11}
+\section*{Sous-figures et compatibilité (pages 6 à 11)}
+
+\subsection*{Sous-figures}
+
+Une \emph{sous-famille admissible} de $F$ est une partie $G \subset F$
+\emph{fermée}, c'est-à-dire stable vers le bas pour l'inclusion. Pour $A \in G$
+on a alors $\partial_{G} A = \partial_{F} A$, donc les strates ouvertes sont les
+mêmes, $G$ est admissible, et $|G| = A_{G}$ est une partie fermée et saturée
+de $|F|$\footnote{Les segments de cette démonstration sont écrits en surcharge
+les uns des autres ; on les donne dans l'ordre qu'impose l'argument.}.
+
+\textbf{Proposition} (pages 6 et 7). \emph{Soient $F$ admissible et $G$ un
+ensemble de parties de $L$. Les conditions suivantes sont équivalentes :}
+\begin{enumerate}
+\item[a)] \emph{$G \subset F$ et $G$ est fermée dans $F$ ;}
+\item[b)] \emph{$G \subset F$, $G$ est admissible, et la partition $R_{G}$ de
+$|G|$ est celle induite par $R_{F}$.}
+\end{enumerate}
+
+Pour b) $\Rightarrow$ a), soient $A \in G$ et $B \in F$, $B \subset A$ : la
+$R_{F}$-classe $B^{\circ}$ est contenue dans $|G|$, c'est donc une $R_{G}$-classe
+$C^{\circ (G)}$, et l'on en tire $C = B$, donc $B \in G$\footnote{La page ajoute
+dans a), au-dessus de la ligne, « $|\Psi|$ est saturé dans $|\mathfrak{L}|$ »,
+et s'en sert dans la preuve. C'est automatique : $|G|$ est réunion de membres de
+$F$, qui sont saturés par ($\delta$). Le pas « cela implique $B = C$ » est
+elliptique ; il se justifie en regardant un point de $C^{\circ (F)}$ si $B
+\subsetneq C$, dont la $R_{G}$-classe serait à la fois $C^{\circ(G)}$ et
+$C^{\circ(F)}$, disjointe de $B^{\circ}$.}.
+
+\emph{Scholie} (page 7). Les sous-figures de $F$ correspondent aux parties
+fermées de $I$, ou de $|F|$ ; elles sont stables par réunions et intersections
+quelconques.
+
+\subsection*{Figures compatibles}
+
+\textbf{Proposition} (pages 7 à 9, complétée page 11). \emph{Soient $F$ et $G$
+deux figures. Les conditions suivantes sont équivalentes :}
+\begin{enumerate}
+\item[a)] \emph{$F \cup G$ est admissible, et $F$, $G$ en sont des sous-figures
+;}
+\item[a')] \emph{$F$ et $G$ sont deux sous-figures d'une même figure ;}
+\item[b)] \emph{$F \cap G$ est fermée dans $F$ et dans $G$, et $|F| \cap |G| =
+|F \cap G|$ ;}
+\item[c)] \emph{$|F| \cap |G|$ est fermé dans $|F|$ et dans $|G|$, et pour une
+partie $A \subset |F| \cap |G|$, on a $A \in F \iff A \in G$ ;}
+\item[d)] \emph{pour $A \in F$ et $B \in G$, $A \cap B$ est fermé dans $A$ pour
+$F_{A}$ et dans $B$ pour $G_{B}$, et les membres de $F$ et de $G$ contenus dans
+$A \cap B$ sont les mêmes.}
+\end{enumerate}
+\emph{On dit alors que $F$ et $G$ sont \emph{compatibles}.}
+
+La page démontre a') $\Leftrightarrow$ a) $\Rightarrow$ b) $\Rightarrow$ c)
+$\Rightarrow$ a)\footnote{Dans b) $\Rightarrow$ c), la page écrit « comme
+$\Psi$ fermé dans $\Psi$ » là où l'argument demande « $\mathfrak{L} \cap \Psi$
+fermé dans $\mathfrak{L}$ », et dans l'énoncé de c) « $\Psi$-fermé dans $\Psi$ »
+pour « dans $|\Psi|$ ». La fin de la page 8 est chargée de ratures ; le
+raisonnement se reconstitue sans ambiguïté à la page 9. La répartition entre a)
+et a'), écrits l'un dans l'autre à la page 7, est incertaine ; on donne celle
+qui rend a') $\Leftrightarrow$ a) évident.}. Le cœur est c) $\Rightarrow$ a) :
+pour $x \in T = |F| \cap |G|$, les plus petits membres $A_{F}(x)$ et $A_{G}(x)$
+sont contenus dans le fermé $T$, donc appartiennent aux deux familles, donc
+sont égaux ; et un membre de $G$ contenu dans un membre de $F$ est contenu dans
+$T$, donc appartient à $F$, si bien que $F$ est fermée dans $F \cup G$.
+
+La condition d) est ajoutée page 11 comme « remarque à la prop.\ p.~7 », sans
+démonstration\footnote{Elle est juste. c) $\Rightarrow$ d) se lit dans $F \cup
+G$. d) $\Rightarrow$ c) : $T$ est réunion des $A \cap B$, fermés, donc fermé
+(une réunion quelconque de fermés l'est ici) ; et si $C \in F$ est contenu dans
+$T$, un point $x \in C^{\circ}$ est dans un $B \in G$, le fermé $C \cap B$ de
+$F_{C}$ contient $x$ donc $C$, d'où $C \in F_{C \cap B} = G_{C \cap B}$.}. Son
+intérêt est d'être \emph{locale} : elle ne fait intervenir que les
+multiplicités $F_{A}$ et $G_{B}$. C'est elle qui démontre l'axiome C 3
+ci-dessous.
+
+\textbf{Corollaires} (pages 9 et 10). \emph{Si $F$ et $G$ sont compatibles,}
+\begin{enumerate}
+\item[1)] \emph{$|F| \cap |G|$ est saturé dans $|F|$ et dans $|G|$, et les deux
+partitions qu'il hérite coïncident ;}
+\item[2)] \emph{$|F| \subset |G| \iff F \subset G$, et $|F| = |G| \iff F = G$ ;}
+\item[3)] \emph{pour $F' \leq F$ et $G' \leq G$, $F'$ et $G'$ sont compatibles
+et $F' \cup G'$ est une sous-figure de $F \cup G$.}
+\end{enumerate}
+
+La réciproque de 1) est fausse, prévient la page : $F$ et la famille $F^{\circ}
+= \{A^{\circ}\}$ ont même support et même partition, mais ne sont compatibles
+que si elles sont égales, c'est-à-dire si les membres de $F$ sont deux à deux
+disjoints\footnote{C'est le corollaire 2. Que $F = F^{\circ}$ force les membres
+à être disjoints vient de ($\alpha$). La phrase qui suit « En effet » s'arrête
+sur une rature.}.
+
+\pagerange{10}{14}
+\section*{L'ensemble ordonné des figures et les axiomes C 1 à C 4 (pages 10 à 14)}
+
+Soit $\mathfrak{F}$ l'ensemble des figures de $L$, ordonné par $F \leq G$ si $F$
+est une sous-figure de $G$. La marge les appelle « figures
+ensemblistes »\footnote{Le mot « figures » est souligné. Le reste de la page 10
+est barré : il montrait que $\emptyset$ est la seule figure de support vide, et
+qu'une figure compatible avec deux figures compatibles l'est avec leur
+réunion.}. On a :
+
+\begin{quote}
+\textbf{C 1} (page 10). \emph{Toute famille majorée de $\mathfrak{F}$ a une
+borne supérieure} : si les $F_{i}$ sont des sous-figures d'une même $G$, leur
+réunion est une sous-figure de $G$, et c'est le sup.
+
+\textbf{C 2} (page 11). \emph{Toute figure $F$ est la borne supérieure des
+$F_{X} = \{Y \in F \mid Y \subset X\}$, $X \in F$.}
+
+\textbf{C 3} (page 11). \emph{$F$ et $G$ sont compatibles --- c'est-à-dire
+majorées --- si et seulement si $F_{X}$ et $G_{Y}$ le sont pour tous $X \in F$,
+$Y \in G$.}
+\end{quote}
+
+Les $F_{X}$ sont les figures qui ont un plus grand élément ; la page les
+appelle \emph{multiplicités ensemblistes}, et leur ensemble est noté
+$\mathcal{M}$. Ce sont les éléments irréductibles de $\mathfrak{F}$, au sens où
+une figure qui n'est pas borne supérieure de figures strictement plus petites
+est une multiplicité, et réciproquement\footnote{La page justifie par une
+parenthèse topologique : « un ensemble fermé est irréductible ssi il a un plus
+grand élément ». C'est vrai pour un ensemble ordonné fini, non en général : dans
+$\mathbf{N}$ muni de la topologie d'Alexandrov, $\mathbf{N}$ lui-même est un
+fermé irréductible sans plus grand élément. L'énoncé sur $\mathfrak{F}$, lui,
+est juste si « irréductible » s'entend : qui n'est la borne supérieure d'aucune
+famille de figures strictement plus petites.}. C 3 résulte de la condition d)
+de compatibilité, qui est locale.
+
+\subsection*{Composantes connexes de $\mathcal{M}$}
+
+L'axiome C 4 de la première mouture demande que deux multiplicités situées dans
+des composantes connexes différentes de $\mathcal{M}$ soient compatibles. Les
+pages 12 à 14 veulent montrer qu'ici $\mathcal{M}$ est connexe, ce qui rendrait
+C 4 vide ; les composantes s'entendent pour l'ensemble ordonné $(\mathcal{M},
+\leq)$, deux multiplicités étant reliées dès qu'elles ont un majorant
+commun.
+
+Les éléments minimaux de $\mathcal{M}$ sont les $\{A\}$, $A \neq \emptyset$, et
+toute multiplicité qui a un membre minimal $A$ est dans la composante de
+$\{A\}$. Jusque-là la page est juste. Mais l'énoncé principal --- \emph{si
+$\operatorname{card} L > 1$, les multiplicités ayant un élément minimal sont
+dans une même composante, et $\mathcal{M}$ est connexe au moins pour les
+figures finies} (page 13), \emph{et même sans restriction} (page 14) --- est
+faux.
+
+\emph{Ce qui est vrai.} Pour $L \neq \emptyset$, la multiplicité $\{L\}$ est
+isolée dans $\mathcal{M}$ : elle n'a pour sous-figures que $\emptyset$ et
+elle-même, et une figure qui la contient comme sous-figure ne peut rien
+contenir d'autre. Pour $x \in L$, si $L \smallsetminus \{x\} \neq \emptyset$, les
+deux multiplicités $\{L \smallsetminus \{x\}\}$ et $\{L \smallsetminus \{x\},
+L\}$ forment à elles seules une composante. Si $\operatorname{card} L \geq 3$,
+toutes les autres multiplicités sont dans une même composante\footnote{Démonstration
+(nôtre). Si $X$ a pour plus grand élément $G$ et que $L \smallsetminus G$
+contient deux points $y \neq z$, alors $X \cup \{\{y\}, G \cup \{y, z\}\}$ est
+une multiplicité, qui majore $X$ et $\{\{y\}\}$ ; et $\{\{y\}\}$, $\{\{y'\}\}$ sont
+majorées par $\{\{y\}, \{y'\}, \{y, y', z\}\}$ pour un troisième point $z$. Une
+multiplicité de plus grand élément $L$ ou $L \smallsetminus \{x\}$ qui n'est pas
+l'une des trois exceptions a un membre $A$ avec $\operatorname{card}(L
+\smallsetminus A) \geq 2$, et majore $F_{A}$. Enfin une multiplicité contenant
+$L \smallsetminus \{x\}$ comme membre minimal ne peut avoir d'autre membre que
+$L$ : un membre contenant $x$ et différent de $L$ serait $\{x\}$, et
+l'intérieur de $L$ serait vide. Pour $\operatorname{card} L = 2$, $L = \{x,
+y\}$, on trouve trois composantes : $\{\{L\}\}$, $\{\{\{x\}\}, \{\{x\},L\}\}$,
+$\{\{\{y\}\}, \{\{y\},L\}\}$.}. Et C 4 est en défaut : $\{L\}$ et $\{\{x\}\}$
+sont dans des composantes différentes et ne sont pas compatibles, puisque
+$\{x\}$ est contenu dans $L$ sans être un membre de $\{L\}$.
+
+\emph{Où l'argument se trompe.} Trois constructions ne donnent pas des familles
+admissibles. La multiplicité $\{A, \{x\}, A \cup \{x\}\}$ de la page 12 a un
+plus grand membre d'intérieur vide\footnote{Les accolades sont celles de la page,
+$\{\{A\}, \{\{x\}\}, A \cup \{x\}\}$ ; on lit la famille évidente. Un point
+supplémentaire $y \notin A \cup \{x\}$ la répare : $\{A, \{x\}, A \cup \{x,
+y\}\}$. C'est ce qu'utilise la démonstration ci-dessus.}. La famille $\{\{x\}, L
+\smallsetminus \{x\}\}$ de la page 13, censée relier $\{L\}$ aux autres, n'a pas
+de plus grand élément et ne contient pas $L$. Enfin le produit de la page 14,
+pour deux figures de supports disjoints,
+\[
+F \boxtimes G = \{A \cup B \mid A \in F \cup \{\emptyset\},\ B \in G \cup
+\{\emptyset\}\},
+\]
+n'est pas admissible : $A \cup B$, pour $A$ et $B$ non vides, est la réunion de
+$A$ et de $B$, qui sont des membres strictement plus petits, et son intérieur
+est vide. Les formules qu'il écrit,
+\[
+(A \cup B)^{\circ} = A^{\circ} \cup B^{\circ}, \qquad \partial(A \cup B) =
+(\partial A \cup B) \cup (A \cup \partial B),
+\]
+sont celles d'un \emph{produit} de cellules, $(A \times B)^{\circ} = A^{\circ}
+\times B^{\circ}$ et $\partial(A \times B) = \partial A \times B \cup A \times
+\partial B$, transcrites pour une réunion disjointe, où elles ne valent
+plus\footnote{La même construction, avec $Z = \{B, B \cup \{x\}, \{x\} \mid B
+\in X_{A}\}$, sert au haut de la page 14 et a le même défaut. La page note par
+ailleurs $\operatorname{card} L \geq 1$ là où le cas traité est
+$\operatorname{card} L > 1$, et $\{A\} \leq F$ pour $\{A\} \leq
+\mathfrak{X}$.}.
+
+\emph{Ce qui se sauve.} Les exceptions viennent toutes de membres trop gros,
+égaux à $L$ ou à $L$ privé d'un point. Si $L$ est infini et qu'on se borne aux
+figures finies \emph{dont les membres sont finis} --- c'est l'un des sens de
+« figure finie » à la page 18 ---, il reste toujours deux points hors du plus
+grand membre, et l'argument ci-dessus montre que $\mathcal{M}$ est connexe ; C 4
+est alors vide, comme il le voulait. La page 13 parie d'ailleurs que les figures
+finies « suffiront, j'imagine ».
+
+\pagerange{15}{16}
+\section*{Supports, complément, et vers les espaces (pages 15 et 16)}
+
+Deux figures $F$ et $G$ sont \emph{disjointes} si et seulement si $|F| \cap |G|
+= \emptyset$\footnote{« Disjointes » au sens de la première mouture (dossier
+156-4, page 38) : compatibles, et sans membre commun. Avec ce sens l'énoncé est
+juste, par c). Au sens plus faible « sans sous-figure non vide commune », il ne
+l'est pas : $\{\{x, y\}\}$ et $\{\{y, z\}\}$ n'en ont aucune.}. Les figures
+disjointes d'une famille $(G_{i})$ sont donc celles dont le support est contenu
+dans $L' = L \smallsetminus \bigcup |G_{i}|$, et comme toute partie de $L$ est
+un support, « la notion de complémentarité est la notion ensembliste ». Les
+figures de support contenu dans $L'$ sont les figures de $L'$ :
+$\mathfrak{F}(L') \subset \mathfrak{F}(L)$ est une partie saturée.
+
+La page 16 dit qu'on retrouve ainsi $\mathfrak{P}(L)$ et son ordre à partir de
+$(\mathcal{M}, \leq, \text{compatibilité})$, mais pas tout\footnote{Le reste
+de la page, surchargé et taché d'encre, n'est lisible que par fragments. On y
+devine la question de passer d'un ensemble $L$ à un espace topologique $X$, et
+une distinction entre figures finies et infinies ; on ne reconstitue rien.}.
+Une marge observe que $\mathfrak{F}$ est formé des parties fermées de
+$\mathcal{M}$ dont les éléments sont deux à deux compatibles\footnote{C'est
+juste : une réunion de figures deux à deux compatibles est encore admissible,
+puisque les conditions de compatibilité sont locales.}.
+
+Lisible enfin, la dernière ligne : dans un espace topologique $X$, les couples
+d'ouverts $(U, V)$ dont chacun est l'extérieur de l'autre, $U =
+\operatorname{int}(X \smallsetminus V)$ et $V = \operatorname{int}(X
+\smallsetminus U)$, s'identifient aux ouverts $U$ tels que $U =
+\operatorname{int}(\overline{U})$, et l'on a
+\[
+X \smallsetminus (U \cup V) = \overline{U} \cap \overline{V} = \partial U =
+\partial V .
+\]
+Ce sont les \emph{ouverts réguliers}, qui forment une algèbre de Boole
+complète\footnote{Résultat classique depuis M.~H.~Stone (1937) ; le
+rapprochement est nôtre. La page écrit $\overline{\mathcal{U}} \cap
+\overline{\mathcal{V}}$ avec des traits qui peuvent être des barres doubles.
+L'idée qui se dessine --- un morceau d'espace et son complément, découpés
+proprement --- ne revient pas dans ce dossier.}.
+
+\pagerange{17}{19}
+\section*{Sous-classes de figures (pages 17 à 19)}
+
+Le 15 juin, la page 17 observe qu'on peut remplacer $\mathfrak{F}$ par divers
+sous-ensembles stables par passage aux sous-figures et par borne supérieure.
+Si $L$ est un espace, toute condition sur les membres $A$ pris comme parties de
+$L$ en définit un : être fermés, compacts, fermés et connexes. De même toute
+condition qui ne dépend que de la multiplicité $F_{A}$, comme une condition sur
+$A^{\circ}$ ou sur $\partial A$ : $A^{\circ}$ connexe, ou $i$-connexe pour un
+$0 \leq i \leq \infty$, $\partial A$ sphère topologique. Une marge ajoute la
+condition de \emph{densité} $A = \overline{A^{\circ}}$, qu'elle dit équivalente
+à : $A \subset B \Rightarrow A^{\circ} \subset \overline{B^{\circ}}$\footnote{Les
+deux sont équivalentes pour une figure dont les membres sont fermés dans $L$,
+non en général. La seconde est, à peu près, la \emph{condition de frontière}
+des stratifications (H.~Whitney, J.~Mather) : une strate qui rencontre
+l'adhérence d'une autre y est contenue. Rapprochement nôtre.}. Si $L$ porte une
+structure « modérée », on ne retient que les familles de parties modérées.
+
+Il y a aussi des conditions globales : être \emph{localement finie} (page 18),
+condition stable par sup finis mais non par sup quelconques ; être
+\emph{finie}, c'est-à-dire être un ensemble fini de parties ; être \emph{de type
+fini}, contenue dans une réunion finie de multiplicités $F_{A}$. Une figure est
+finie si et seulement si elle est de type fini et que ses strates sont
+finies\footnote{« Strates » est le mot de la page ; on le comprend des
+multiplicités $F_{A}$.}.
+
+\emph{Réalisations cellulaires} (pages 18 et 19). Soit $L$ un ensemble ordonné,
+réalisé par des cellules fermées $X_{x}$ ($x \in L$) d'un espace compact
+triangulable $X$ : les intérieurs $X_{x}^{\circ}$ partitionnent $X$, et la
+famille des $X_{x}$ est admissible --- c'est une figure de $X$. On se borne aux
+parties \emph{fermées} (stables vers le bas) $A$ de $L$, pour que $A \mapsto
+X_{A} = \bigcup_{x \in A} X_{x}$ soit une bijection sur les parties fermées de
+$X$ saturées pour la partition en cellules ouvertes. Les figures de $L$ dont
+les membres sont fermés s'interprètent alors comme des familles admissibles de
+parties fermées de $X$ réunions de cellules : des modèles combinatoires de
+« subdivisions » de $X$\footnote{C'est la situation d'un complexe CW régulier et
+de l'ensemble ordonné de ses faces ; A.~Björner (1984) a caractérisé les
+ensembles ordonnés qui en proviennent. Rapprochement nôtre. Plusieurs mots de ce
+passage sont incertains, et l'adjectif « maximales » de la page 19 est
+douteux.}.
+
+\pagerange{19}{26}
+\section*{Raffinement et subdivision (pages 19 à 26)}
+
+\subsection*{Raffinement}
+
+\textbf{Proposition} (pages 19 à 22). \emph{Soient $F$ et $G$ deux figures. Les
+conditions suivantes sont équivalentes :}
+\begin{enumerate}
+\item[a)] \emph{pour tout $A \in F$, l'ensemble $G^{A} = \{B \in G \mid A
+\subset B\}$ a un plus petit élément $\varphi(A)$ ; et pour $A \in F$, $B \in
+G$, $A \cap B$ est réunion de membres de $F$ ;}
+\item[b)] \emph{pour tout $A \in F$ il existe $B \in G$ avec $A^{\circ} \subset
+B^{\circ}$ --- unique, noté $\varphi(A)$ ---, et $\varphi : F \to G$ est
+croissante ;}
+\item[b')] \emph{pour tout $A \in F$ il existe $B \in G$ avec $A^{\circ} \subset
+B^{\circ}$, et pour $A \in F$, $B \in G$, $A^{\circ} \subset B \Rightarrow A
+\subset B$.}
+\end{enumerate}
+
+Dans a), $\varphi$ est évidemment croissante, et a) entraîne $|F| \subset
+|G|$\footnote{Une marge de la page 19 propose d'exiger $|F| \subset |G|$ ; c'est
+superflu, puisque $G^{A}$ est non vide. Dans a), la page 20 écrit « $A \cap F$ »
+pour $A \cap B$.}. a) $\Rightarrow$ b) : si $x \in A^{\circ}$ et $x \in B'
+\subset \varphi(A)$, $B' \cap A$ est réunion de membres de $F$, l'un contient
+$x$, c'est donc $A$, et $A \subset B'$ force $B' = \varphi(A)$ ; donc $x \in
+\varphi(A)^{\circ}$. b) $\Rightarrow$ a), commencé page 20 et achevé page 21 :
+$A = \bigcup_{A' \subset A} A'^{\circ}$ et chaque $A'^{\circ}$ est dans
+$\varphi(A') \subset \varphi(A)$, donc $A \subset \varphi(A)$ ; si $A \subset
+B'$, $A^{\circ}$ rencontre $\varphi(A)^{\circ}$ et $B'$, donc $\varphi(A)
+\subset B'$ ; enfin $A \cap B$ est saturé pour $R_{F}$, et le lemme « $A^{\circ}
+\subset B \Rightarrow A \subset B$ », écrit en marge de la page 20, permet d'y
+remplacer chaque $A'^{\circ}$ par $A'$. Le corollaire b') vient de ce même
+lemme (page 22)\footnote{Le signe que porte $A$ dans la ligne d'implication de
+la page 22 est un astérisque ou un rond appuyé ; on le lit comme le rond de la
+strate ouverte, qui n'y joue aucun rôle.}.
+
+\begin{quote}
+\textbf{Définition} (page 22). \emph{On dit alors que $F$ est un
+\emph{raffinement} de $G$, et l'on écrit $F \ll G$.}
+\end{quote}
+
+C'est une relation d'ordre, et toute sous-figure est un raffinement. Une marge
+de la page 21 en donne la forme la plus parlante : $F \ll G$ si et seulement si
+$|F| \subset |G|$ et le préordre de $F$ sur $|F|$ est plus fin que celui que
+$G$ induit\footnote{En termes de topologies d'Alexandrov --- ceux de la page 37
+---, $F \ll G$ signifie que $|F| \subset |G|$ et que l'inclusion est continue.
+C'est juste : la continuité dit que la trace d'un membre de $G$ est réunion de
+membres de $F$, et que l'adhérence de $x$ pour $F$, qui est $A_{F}(x)$, est
+contenue dans son adhérence pour $G$, qui est $A_{G}(x)$.}.
+
+La première mouture définissait déjà le raffinement, comme deuxième ordre sur
+les figures topologiques, et se heurtait à « un pb, qui a l'air intéressant »
+de topologie des espaces stratifiés (dossier 156-4, pages 13 à 16). Dans le
+modèle ensembliste ce problème disparaît, et la troisième mouture se souviendra
+de la condition de fermeture de a) : « Dans GF V p.~19, 20, il fallait
+supposer\ldots{} que pour $A \in F$, $B \in G$, $A \cap B$ soit ou bien vide, ou
+une sous-strate de $A$ » (dossier 156-7, page 12).
+
+\subsection*{Subdivision}
+
+\textbf{Proposition} (pages 22 et 23). \emph{Pour $F \ll G$, les conditions
+suivantes sont équivalentes :}
+\begin{enumerate}
+\item[a)] \emph{$F$ est maximal, pour $\leq$, parmi les raffinements de $G$ ;}
+\item[b)] \emph{$|F| = |G|$ ;}
+\item[c)] \emph{toute strate ouverte de $G$ est réunion de strates ouvertes de
+$F$.}
+\end{enumerate}
+\emph{On dit alors que $F$ est une \emph{subdivision} de $G$, et l'on écrit $F
+\preccurlyeq G$.}
+
+b) $\Rightarrow$ a) parce qu'une sous-figure de même support est la figure
+elle-même ; a) $\Rightarrow$ b) parce que, si $x \in |G| \smallsetminus |F|$,
+$F \cup \{\{x\}\}$ est un raffinement de $G$ qui contient $F$ comme sous-figure
+stricte --- on utilise que la réunion de deux raffinements compatibles en est un,
+le raffinement se vérifiant sur les multiplicités. La condition c) est ajoutée
+en marge ; une variante d) y est donnée aussi, qui demande que toute strate de
+$G$ soit réunion de strates de $F$ et que chaque $G^{A}$ ait un plus petit
+élément\footnote{Si l'on n'y suppose pas $F \ll G$, d) ne suffit pas : sur $L =
+\{p, q\}$, $G = \{\{p\}, \{p,q\}\}$ et $F = \{\{q\}, \{p,q\}\}$ la satisfont,
+mais $\{p,q\} \cap \{p\} = \{p\}$ n'est pas réunion de membres de $F$. Ce sont
+les deux ordres opposés sur deux points. La marge est en partie illisible et
+pourrait supposer $F \ll G$.}.
+
+\subsection*{Le dictionnaire}
+
+Se donner $F \ll G$, c'est se donner (page 24) un diagramme commutatif
+\[
+\begin{array}{ccccc}
+S = |F| & \hookrightarrow & T = |G| & \hookrightarrow & L \\
+\downarrow p & & \downarrow q & & \\
+I & \xrightarrow{\ \varphi\ } & J & &
+\end{array}
+\]
+où $p$, $q$ sont surjectives et $\varphi$ croissante, non nécessairement
+surjective\footnote{La commutativité $q|_{S} = \varphi \circ p$ n'est pas écrite ;
+elle est nécessaire, et c'est elle qui fait de $\varphi$ l'application $A \mapsto
+\varphi(A)$. Toute telle donnée définit un raffinement, puisque l'image
+réciproque par $\varphi$ d'une partie stable vers le bas l'est aussi.}. Les
+images réciproques des parties fermées, ouvertes, localement fermées de $T$
+sont fermées, ouvertes, localement fermées dans $S$ (pages 24 et 25). Une
+subdivision est le cas $S = T$ : $q = \varphi p$ avec $\varphi$ surjective.
+Même bijective, $\varphi$ n'est pas forcément un isomorphisme : deux ordres sur
+un même ensemble, l'un plus fin que l'autre, donnent $F \preccurlyeq G$, $F \neq
+G$, avec la même partition $R_{F} = R_{G}$ (marge de la page 25).
+
+En langage actuel, une figure est un ensemble stratifié au-dessus d'un ensemble
+ordonné, et le raffinement est un morphisme stratifié dont l'application
+sous-jacente est une inclusion.
+
+\begin{quote}
+\textbf{Proposition} (page 25). \emph{$F \ll G$ si et seulement si $F$ est une
+sous-figure d'une subdivision de $G$ : $F \leq G' \preccurlyeq G$.}
+\end{quote}
+
+On prend $G' = F \amalg \coprod_{x \in |G| \smallsetminus |F|} \{\{x\}\}$, qui
+ajoute à $F$ les points manquants comme strates isolées\footnote{Une partie b),
+qui caractérisait la subdivision comme raffinement maximal, est barrée : elle
+redisait la proposition des pages 22 et 23.}. Ainsi $\ll$ et $\preccurlyeq$ se
+déterminent mutuellement par $\leq$. La question inverse --- retrouver $\leq$ à
+partir de $\ll$ et $\preccurlyeq$ --- reste posée avec deux points
+d'interrogation (page 26) ; on a du moins
+\[
+F \leq G \ \text{et}\ F \preccurlyeq G \Longrightarrow F = G,
+\]
+que la page déduit dans le cadre axiomatique de C 5 et de l'existence, pour $F
+\leq G$, $F \neq G$, d'une figure non vide disjointe de $F$ qui raffine $G$.
+
+\subsection*{Les axiomes C 5 à C 8}
+
+La page 26 les passe en revue. \textbf{C 5} --- si $F \preccurlyeq G$, une
+figure est disjointe de $F$ si et seulement si elle l'est de $G$ --- est
+trivial, les supports étant égaux. \textbf{C 6}, la subdivision induite sur une
+sous-figure, est vérifié page 29 ; \textbf{C 7}, le prolongement d'une
+subdivision, aux pages 29 à 36. \textbf{C 8} est dit « trivial » sans être
+énoncé\footnote{Le seul C 8 de la première mouture est barré (dossier 156-4,
+page 78) : si une multiplicité $X$ raffine $F$, elle raffine une multiplicité
+sous-figure de $F$. Dans le modèle ensembliste c'est immédiat, avec la
+multiplicité $F_{\varphi(A)}$ où $A$ est le plus grand membre de $X$.}.
+
+\pagerange{27}{29}
+\section*{La figure intersection (pages 27 à 29)}
+
+Après un essai barré, la page 27 construit, pour deux figures $F$ et $G$, la
+figure
+\[
+F.G = \{A \cap B \mid A \in F,\ B \in G,\ A^{\circ} \cap B^{\circ} \neq
+\emptyset\},
+\]
+indexée par l'image $K$ de $|F| \cap |G| \to I \times J$\footnote{La page écrit
+$I \times J$ là où l'on attend $I \times I'$, avec ses notations du moment. Le
+passage barré qui précède décrivait déjà la partition de $|F| \cap |G|$ par les
+$A^{\circ} \cap B^{\circ}$, borne supérieure des deux partitions induites.}.
+Ses strates ouvertes sont les $A^{\circ} \cap B^{\circ}$ non vides.
+
+\begin{quote}
+\textbf{Proposition} (page 28). \emph{$F.G$ est la borne inférieure de $F$ et
+$G$ pour $\ll$ ; plus généralement toute famille $(F_{i})$ a une borne
+inférieure $\bigwedge F_{i}$ pour $\ll$, de support $\bigcap |F_{i}|$.}
+\end{quote}
+
+C'est en général différent de $F \cap G$ ; mais si $F$ et $G$ sont
+compatibles, les deux coïncident. La page rapproche cette existence d'un inf
+d'une propriété de « demi-treillis »\footnote{Lecture incertaine. C'est même un
+treillis complet : la figure $\{L\}$ est le plus grand élément pour $\ll$, car
+toute inclusion dans un espace grossier est continue, et un ensemble ordonné
+où toute famille a un inf est un treillis complet. En termes de préordres,
+$\bigwedge F_{i}$ est $\bigcap |F_{i}|$ muni de l'intersection des préordres ;
+pour une famille infinie, c'est la topologie d'Alexandrov de ce préordre, plus
+fine en général que la topologie initiale dont parle la marge de la page 38.}.
+Une proposition barrée annonçait la « subdivision induite par un raffinement » ;
+elle est reprise ainsi :
+
+\textbf{Proposition} (page 29). \emph{Soient $F'$, $F$, $G$ trois figures.}
+\begin{enumerate}
+\item[a)] \emph{$F' \ll F \Rightarrow F'.G \ll F.G$ ;}
+\item[b)] \emph{$F' \preccurlyeq F \Rightarrow F'.G \preccurlyeq F.G$ ;}
+\item[c)] \emph{$F' \leq F \Rightarrow F'.G \leq F.G$, et alors $F'.G = \{C \in
+F.G \mid C \subset |F'|\}$.}
+\end{enumerate}
+
+a) est la monotonie d'un inf ; b) s'en déduit, les supports étant égaux ; c) se
+démontre en notant qu'un membre de $F'$ a la même strate ouverte dans $F'$ et
+dans $F$, et que $A' \cap B' \subset A \cap B$ avec $A'^{\circ} \cap B'^{\circ}
+\neq \emptyset$ force $A' \subset A$.
+
+\begin{quote}
+\textbf{Corollaire} (page 29). \emph{L'axiome C 6 est vrai : si $F'
+\preccurlyeq F$ et $G \leq F$, il existe une unique subdivision $G'$ de $G$ qui
+soit une sous-figure de $F'$, à savoir $G' = F'.G = \{A \in F' \mid A \subset
+|G|\}$.}
+\end{quote}
+
+\noindent La page ne détaille pas le corollaire\footnote{On le tire de b) et de
+c) appliqué à $G \leq F$ : $F.G = G$, et $|G|$, fermé pour $F$, l'est pour la
+topologie plus fine de $F'$. Une marge encadrée formule en outre deux conditions
+qu'elle appelle C 7${}_{0}$ : a) $P \ll Q \ll R$ et $P \preccurlyeq R$
+entraînent $P \preccurlyeq Q$ et $Q \preccurlyeq R$ ; b) $P \ll Q \ll R$, $P
+\leq R$ et $Q \leq R$ entraînent $P \leq Q$. Les deux sont vraies ici : a) parce
+que les supports sont pris en étau, b) parce qu'un membre de $R$ contenu dans
+$|Q|$ appartient à $Q$.}.
+
+\pagerange{29}{36}
+\section*{Prolonger une subdivision (pages 29 à 36)}
+
+\subsection*{La subdivision prolongée}
+
+Soient $G \leq F$ et $G' \preccurlyeq G$. L'axiome C 7 demande une subdivision
+de $F$ qui induise $G'$ sur $G$. La page 29 prend
+\[
+F' = G' \cup (F \smallsetminus G),
+\]
+réunion disjointe : on remplace les membres de $G$ par ceux de $G'$, et l'on
+garde les autres. C'est, mot pour mot, la formule de C 4 dans la première
+version des axiomes de la première mouture (dossier 156-4, page 47).
+
+Il faut vérifier que $F'$ est une figure, qu'elle subdivise $F$, et qu'elle
+induit $G'$ (pages 30 et 31). On a $|F'| = |F|$. Pour $x \in |G|$, le membre
+$A$ de $G'$ dont la strate ouverte contient $x$ est le plus petit membre de $F'$
+qui contient $x$ : si $x \in B \in F \smallsetminus G$, la trace $B \cap |G|$
+est réunion de membres de $G$, donc de $G'$, et contient $x$, donc $A$. Pour $x
+\notin |G|$, c'est $A_{F}(x)$, qui n'est pas dans $G$\footnote{La page ne
+vérifie pas que les strates ouvertes de $F'$ sont non vides. Elles le sont : un
+membre de $F$ contenu dans $|G|$ est dans $G$, donc $\partial_{F'} A =
+\partial_{G'} A$ pour $A \in G'$, et $\partial_{F'} A = \partial_{F} A$ pour $A
+\in F \smallsetminus G$. Le signe sur $A$, page 30, est le même astérisque qu'à
+la page 22.}. Le raffinement se vérifie membre à membre ; enfin $F'.G = G'$ par
+la formule de c) ci-dessus.
+
+\subsection*{Comment caractériser $F'$}
+
+\textbf{Corollaire} (page 31), \emph{tel qu'énoncé.} \emph{Parmi les
+subdivisions $F''$ de $F$ qui induisent $G'$ sur $G$, $F'$ est caractérisée
+par chacune des propriétés équivalentes :}
+\begin{enumerate}
+\item[a)] \emph{$F'$ est le plus grand élément, pour $\preccurlyeq$, de cet
+ensemble ;}
+\item[b)] \emph{l'application $\varphi : F' \to F$ induit une bijection $F'
+\smallsetminus G' \simeq F \smallsetminus G$ ;}
+\item[c)] \emph{pour tout $A \in F \smallsetminus G$, $A^{\circ}$ est une strate
+ouverte de $F'$ ;}
+\item[d)] \emph{$F' \supset F \smallsetminus G$.}
+\end{enumerate}
+
+La page barre a) d'une grande croix, prouve d) $\Rightarrow$ b) (page 32) et b)
+$\Leftrightarrow$ c) $\Leftrightarrow$ d) (page 33), et commence a)
+$\Leftrightarrow$ (b, c, d) avant de le barrer.
+
+\emph{Ce qui est vrai}\footnote{Analyse nôtre. On lit le corollaire comme une
+liste de conditions sur une subdivision $F''$ de $F$ induisant $G'$, à
+comparer avec « $F'' = F'$ ». Posons $U = |F| \smallsetminus |G|$, ouvert ; les
+strates ouvertes de $F''$ contenues dans $U$ sont celles des membres de $F''
+\smallsetminus G'$, et chacune est contenue dans une strate de $F$.} :
+\begin{enumerate}
+\item[--] a) est \emph{vrai}, et caractérise donc $F'$ : toute subdivision $F''$
+de $F$ qui induit $G'$ est une subdivision de $F'$, parce que les membres de
+$F'$ --- ceux de $G'$ et ceux de $F \smallsetminus G$ --- sont fermés pour
+$F''$. C'est ce que les pages 36 à 40 retrouveront sous la forme « la moins fine
+des topologies ».
+\item[--] b) $\Leftrightarrow$ c) est vrai, par l'argument de la page 33 :
+$F''$-strates et $F$-strates dans $U$ sont les fibres de deux surjections
+$U \to I''^{*} \to I^{*}$, et b), c) disent toutes deux que la seconde est
+bijective.
+\item[--] d) n'est équivalente ni à b) ni à c). Sur $L = \{p, q\}$, avec $F =
+\{\{p, q\}\}$ et $G = G' = \emptyset$, la subdivision $F'' = \{\{p\}, \{p,q\}\}$
+satisfait d) et non b). Avec $F = \{\{p\}, \{p,q\}\}$ et $G = G' = \{\{p\}\}$, la
+subdivision discrète $F'' = \{\{p\}, \{q\}\}$ satisfait b) et c), non d).
+\item[--] c) et d) \emph{ensemble} caractérisent $F'$ : d) donne $F'' \supset
+F'$, et c) interdit à un membre de $F \smallsetminus G$ d'avoir dans $F''$ une
+strate ouverte plus petite que dans $F$.
+\end{enumerate}
+
+L'erreur est dans le « lemme » invoqué pages 32 et 33 : pour $F' \ll F$ et $A
+\in F$, « $A \in F'$ si et seulement si $A^{\circ (F)}$ est une strate ouverte
+de $F'$ ». Les deux exemples précédents le contredisent, l'un dans chaque
+sens\footnote{Il est annoncé « plus bas » et n'est jamais écrit. La note
+verticale de la page 32, « va se simplifier, cf plus [loin] », et la marge de la
+page 33, « Attention, $\varphi^{*}$ bijectif, $\varphi^{*}$ pas néc.\ iso !!! »,
+montrent qu'il sentait la difficulté ; c'est sans doute l'oubli dont parle la
+marge de la page 42.}.
+
+\subsection*{La même chose en termes d'ensembles d'indices}
+
+Les pages 34 à 36 reprennent la situation avec $f : S \to I$ pour $F$, une
+partie fermée $J \subset I$ pour $G$, $T = f^{-1}(J)$. Se donner $G'
+\preccurlyeq G$, c'est factoriser $f_{J} = f|_{T}$ en $T \xrightarrow{g_{J}} J'
+\xrightarrow{h_{J}} J$, avec $g_{J}$ surjective et $h_{J}$ croissante
+surjective ; se donner $F' \preccurlyeq F$, c'est factoriser $f$ en $S
+\xrightarrow{g} I' \xrightarrow{h} I$ ; et $F'$ induit $G'$ s'il existe $i' : J'
+\hookrightarrow I'$ rendant le diagramme commutatif, avec $J' =
+h^{-1}(J)$\footnote{Pour $g_{J}$ et $h_{J}$, la page écrit d'abord « appl.\
+croiss.\ surjective d'ens.\ ordonnés » et « application ensembliste surjective »
+dans l'ordre inverse ; la phrase suivante, pour $g$ et $h$, les remet dans le
+bon ordre.}.
+
+Il construit alors (page 35) l'ensemble ordonné
+\[
+K = J' \amalg (I \smallsetminus J),
+\]
+ordonné par l'ordre de $J'$, celui de $I \smallsetminus J$, et, pour $\alpha \in
+J'$, $\beta \in I \smallsetminus J$, $\alpha \leq \beta \iff h_{J}(\alpha) \leq
+\beta$ dans $I$. C'est l'ensemble d'indices de $F'$. L'application $h_{K} :
+K \to I$, égale à $h_{J}$ sur $J'$ et à l'identité ailleurs, induit un
+isomorphisme $K \smallsetminus J' \simeq I \smallsetminus J$, et $J' =
+h_{K}^{-1}(J)$. La page 36 affirme que $K$ est objet final parmi les carrés
+commutatifs de ce type, ce qui est juste\footnote{Pour $h'' : I'' \to I$
+croissante avec $h''^{-1}(J) = J'$, l'application $I'' \to K$ égale à l'identité
+sur $J'$ et à $h''$ ailleurs est croissante, et c'est la seule possible. C'est
+la forme indicielle de a).}, et conclut : « Ça devrait impliquer (b, c, d)
+$\Leftrightarrow$ a) ». Ce n'est pas le cas, on l'a vu : ce qu'il faut à côté de
+b), ce sont les relations croisées $\alpha \leq \beta$ de $K$, et c'est
+précisément ce qui sera trouvé page 48.
+
+\pagerange{36}{40}
+\section*{Le point de vue des ultra-topologies (pages 36 à 40)}
+
+Le 18 juin, la page 36 change de langage : « le point de vue des
+ultra-topologies est peut-être le plus pratique, sans prendre la peine des
+types d'explicitation laborieuse en termes d'ensembles d'indices ordonnés ».
+Une \emph{ultra-topologie} est une topologie où toute réunion de fermés est
+fermée, autrement dit où tout point a un plus petit voisinage : une topologie
+d'Alexandrov, c'est-à-dire un préordre.
+
+Une figure est alors un couple $(S, \tau)$ formé d'une partie $S \subset L$ et
+d'une ultra-topologie sur $S$ --- les membres sont les adhérences des points ---,
+et tout ce qui précède se relit :
+\begin{enumerate}
+\item[--] $(S, \tau)$ et $(S', \tau')$ sont \emph{compatibles} si $\tau$ et $\tau'$
+induisent la même topologie sur $S \cap S'$, fermé dans les deux ; il y a alors
+une unique topologie sur $S \cup S' = S \amalg_{S \cap S'} S'$ qui induise les
+deux et où $S$, $S'$ sont fermés : la topologie finale, « opération
+topologique bien familière » (pages 36 et 37) ;
+\item[--] les \emph{sous-figures} de $(S, \tau)$ sont ses parties fermées, avec la
+topologie induite ;
+\item[--] $(S', \tau') \ll (S, \tau)$ signifie $S' \subset S$ et l'inclusion
+continue ;
+\item[--] $(S', \tau') \preccurlyeq (S, \tau)$ signifie $S' = S$ et $\tau'$ plus fine
+que $\tau$ (page 38) ;
+\item[--] la borne inférieure $\bigwedge (S_{i}, \tau_{i})$ est $\bigcap S_{i}$ muni
+du préordre intersection (marge de la page 38)\footnote{La marge dit
+« topologie initiale », et précise aussitôt qu'elle « correspond à la notion de
+relation de préordre induite par une famille de relations de préordres ». Pour
+une famille finie les deux coïncident ; pour une famille infinie, la topologie
+initiale n'est pas toujours d'Alexandrov, et c'est le préordre qui donne
+l'inf.}.
+\end{enumerate}
+Les preuves des pages 6 à 33 deviennent, dans ce langage, des remarques de
+topologie générale.
+
+\subsection*{La subdivision prolongée comme topologie}
+
+Revenant à $G \leq F$, $G' \preccurlyeq G$ (page 38), on pose $S = |F|$, $T =
+|G|$, fermé dans $(S, \tau)$, et $\tau'_{0}$ la topologie de $G'$ sur $T$, plus
+fine que celle induite par $\tau$. Les subdivisions de $F$ qui induisent $G'$
+sont les topologies $\tau''$ sur $S$ plus fines que $\tau$ et induisant
+$\tau'_{0}$ : la composée $(T, \tau'_{0}) \to (S, \tau'') \to (S, \tau)$ est
+continue et l'on cherche le terme du milieu, « situation mixte » entre
+topologies initiales et finales. Les fermés $A \cup B$, $A$ fermé pour $\tau$
+et $B$ fermé de $(T, \tau'_{0})$, forment une ultra-topologie qui convient
+(page 39) ; elle induit $\tau$ sur $S \smallsetminus T$\footnote{La page 39
+vérifie la stabilité par intersections quelconques par une formule de
+distributivité. Un paragraphe qui voulait montrer que toute $\tau''$ convenable
+a cette forme est barré, sur les pages 39 et 40 ; il ne pouvait aboutir,
+puisque c'est faux. La marge de la page 39 donne déjà la description des
+fermés du lemme qui suit.}. D'où :
+
+\textbf{Lemme} (page 40). \emph{Soient $(S, \tau)$ un espace topologique, $T
+\subset S$ un fermé, $U = S \smallsetminus T$, et $\tau'_{0}$ une topologie sur
+$T$ plus fine que la topologie induite. Soit $\mathfrak{T}$ l'ensemble des
+topologies sur $S$ plus fines que $\tau$ et induisant $\tau'_{0}$ sur
+$T$\footnote{La lettre rendue $\mathfrak{T}$ est un $\mathcal{T}$ bouclé et
+souligné ; les pages 42 à 48 l'écrivent $\underline{\mathcal{C}}$.}.}
+\begin{enumerate}
+\item[(a)] \emph{$\mathfrak{T}$ a un plus petit élément $\tau'$ (la moins fine) ;}
+\item[(b)] \emph{une partie $X$ de $S$ est fermée pour $\tau'$ si et seulement si
+1°) $X \cap U$ est fermé dans $(U, \tau|_{U})$, 2°) $X \cap T$ est fermé dans
+$(T, \tau'_{0})$, 3°) $\overline{X \cap U}^{(\tau)} \cap T \subset X \cap T$ ;}
+\item[(c)] \emph{les fermés de $\tau'$ correspondent bijectivement aux couples
+$(B, A_{U})$, $B$ fermé de $(T, \tau'_{0})$, $A_{U}$ fermé de $(U, \tau|_{U})$,
+tels que $\overline{A_{U}}^{(\tau)} \cap T \subset B$ ;}
+\item[(d)] \emph{si $\tau$ et $\tau'_{0}$ sont des ultra-topologies, $\tau'$ en
+est une, de préordre : pour $x, y \in T$, $x \leq_{\tau'} y \iff x
+\leq_{\tau'_{0}} y$ ; pour $y \in U$, $x \leq_{\tau'} y \iff x \leq_{\tau} y$ ;
+jamais $x \leq_{\tau'} y$ pour $x \in U$, $y \in T$.}
+\end{enumerate}
+
+\noindent Les points (c) et (d) sont en haut de la page 41, où la page
+s'ouvre au milieu de l'énumération\footnote{(c) s'interrompt une première fois
+au bas de la page 40, barré. Dans (d), l'indice du premier cas est lu avec
+doute $\tau'_{0}$ ; c'est le seul qui ait un sens.}. La démonstration
+(pages 42 et 43) est complète : les conditions de (b) définissent une topologie,
+plus fine que $\tau$, qui induit $\tau'_{0}$ ; et tout fermé pour $\tau'$
+s'écrit $X = (X \cap T) \cup \overline{X \cap U}^{(\tau)}$, réunion d'un fermé
+de $T$ --- donc de $S$ pour toute $\tau'' \in \mathfrak{T}$, $T$ étant fermé ---
+et d'un fermé de $\tau$, donc fermé pour toute $\tau''$. On en tire la formule
+d'adhérence, écrite en marge de la page 44 :
+\[
+\overline{X}^{(\tau')} = \overline{X \cap U}^{(\tau)} \cup \overline{X \cap
+T}^{(\tau'_{0})} ,
+\]
+et en particulier, pour $A \subset U$, $\overline{A}^{(\tau')} =
+\overline{A}^{(\tau)}$ (corollaire de la page 44)\footnote{Page 43, la ligne
+« Comme $\tau'|_{\mathcal{U}} \neq \tau|_{\mathcal{U}}$ » porte un signe lu
+$\neq$ ; l'argument demande l'égalité, que (b) donne.}.
+
+C'est, pour des ensembles préordonnés, la situation du \emph{recollement} d'un
+ouvert et d'un fermé complémentaire : une topologie sur $S$ dans laquelle $T$
+est fermé est déterminée par ses traces sur $T$ et sur $U$ et par la façon dont
+l'adhérence envoie les fermés de $U$ dans $T$ ; $\tau'$ est le recollement de
+$\tau'_{0}$ et de $\tau|_{U}$ le long de l'application $A \mapsto
+\overline{A}^{(\tau)} \cap T$\footnote{Le mot et la notion, pour les topos,
+sont dans SGA 4 (exposé IV, § 9), dont Grothendieck est l'un des auteurs ; la
+page ne fait pas le rapprochement, qui est nôtre. En termes d'ensembles
+d'indices, $\tau'$ est l'ensemble ordonné $K$ de la page 35.}.
+
+\pagerange{41}{48}
+\section*{Recollement, et une caractérisation fausse (pages 41 à 48)}
+
+\subsection*{L'énoncé e)}
+
+Sous les hypothèses de (d), la page 41 passe aux ensembles ordonnés quotients :
+$I$, $I'$ ceux de $\tau$, $\tau'$, $J \subset I$ la partie fermée qui correspond
+à $T$, $\varphi : I' \to I$, $J' = \varphi^{-1}(J)$, $U' = I' \smallsetminus J'$.
+Elle énonce :
+
+\begin{quote}
+\textbf{e)} (pages 41 et 42). \emph{La topologie de $I'$ est caractérisée par :
+(i) elle est plus fine que l'image réciproque $\widetilde{\tau}$ de celle de
+$I$, et induit sur $J'$ la topologie donnée ; (ii) elle coïncide avec
+$\widetilde{\tau}$ sur $U'$ ; (iii) $\varphi$ induit un isomorphisme d'ensembles
+ordonnés $U' \simeq I \smallsetminus J$ ; (iv) la topologie de $I$ est quotient
+pour $I' \to I$ et $J \to I$.}
+\end{quote}
+
+\noindent et la marge de la page 42, écrite après coup, dit aussitôt « C'est
+faux », avec un renvoi à la page 48\footnote{La marge est en grande partie
+illisible : « C'est faux, sauf (iii), (iv) [\ldots] ! --- i.e.\
+$\overline{\tau}' \in \mathcal{C}$ », et au-dessus « v.~48 », lu avec doute.
+Dans (iii) la page écrit $\mathcal{U} = S \smallsetminus T$ là où l'on attend
+$I \smallsetminus J$. Une autre marge, à la même hauteur : « C'est une condition
+que j'avais d'abord oubliée à la page 31 ! ». Le paragraphe qui précède
+l'énoncé, à la page 41, n'est lu que par fragments.}. La propriété (iv), dans
+sa forme sur $S$ --- une partie de $S$ est fermée pour $\tau$ si et seulement
+si elle l'est pour $\tau'$ et que sa trace sur $T$ l'est pour $\tau$ ---, est
+vraie de $\tau'$ ; c'est le corollaire de la page 45, démontré par la formule
+d'adhérence\footnote{La page écrit « une partie de $T$ » ; la suite (« sa trace
+sur $T$ ») demande une partie de $S$. La démonstration est barrée de deux longs
+traits, mais elle est juste.}.
+
+\subsection*{Deux corollaires homotopiques}
+
+La page 46 en tire des corollaires sur les ensembles ordonnés, notant ici
+$\varphi^{*} = h_{J} : J' \to J$ et $\varphi = h_{K} : K \to I$. Si $\varphi^{*}$
+est surjective, $\varphi$ l'est ; si les fibres de $\varphi^{*}$ sont
+0-connexes, celles de $\varphi$ aussi\footnote{Le premier corollaire de la
+page 46 s'arrête sur un mot illisible ; on le complète de la seule manière
+évidente. « 0-connexes » est lu avec doute.}. Et surtout :
+
+\begin{quote}
+\textbf{Corollaire} (page 46). \emph{Si les $\varphi^{*-1}(J_{\leq x})$, $x \in
+J$, sont faiblement contractiles, les $\varphi^{-1}(I_{\leq x})$, $x \in I$, le
+sont aussi.}
+\end{quote}
+
+\noindent Pour $x \in J$ c'est l'hypothèse ; pour $x \notin J$, la page montre
+que $\varphi^{-1}(I_{\leq x})$ a un plus grand élément, l'unique antécédent $x'$
+de $x$, et un ensemble ordonné qui a un plus grand élément est contractile.
+« OK ! » L'argument utilise les relations croisées de $K$ --- $\alpha \leq x'$
+dès que $h_{J}(\alpha) \leq x$ --- et vaut donc pour la topologie $\tau'$, non
+pour une topologie quelconque satisfaisant (i)--(iv). La condition sur les
+$\varphi^{-1}(I_{\leq x})$ est l'hypothèse du \emph{théorème A} de Quillen, et
+la page la qualifie d'« homotopiquement propre » ; d'où, ajoute-t-elle, une
+équivalence d'homotopie faible universelle\footnote{D.~Quillen, « Higher
+algebraic K-theory I », 1973. Grothendieck connaissait cette situation : \emph{À
+la poursuite des champs} (1983) en fait la notion de foncteur asphérique. La page
+ne nomme ni l'une ni l'autre ; le rapprochement est nôtre.}.
+
+\subsection*{« C'est ultra faux »}
+
+La page 47 s'aperçoit que e) n'est pas démontré : « Mais je n'ai pas démontré
+\ldots{} pour prouver e), il faut montrer que $\tau'$ a les conditions dites »,
+avec en marge « vrai ? c'est faux !! ». Elle reformule sur $S$ : si $\tau''$
+vérifie (i) $\tau''$ plus fine que $\tau$, (ii) $\tau''|_{T} = \tau'_{0}$, (iii)
+$\tau''|_{U} = \tau|_{U}$, (iv) $\tau$ est finale pour $(S, \tau'') \to S$ et
+$(T, \tau|_{T}) \to S$, a-t-on $\tau'' = \tau'$ ? On sait $\tau''$ plus fine que
+$\tau'$ ; pour la réciproque il faudrait la condition 3°), donc que
+$\overline{A}^{(\tau'')} = \overline{A}^{(\tau)}$ pour $A \subset U$, et (iv) ne
+le donne pas. Page 48 : « C'est ultra faux ».
+
+Le contre-exemple est dessiné : $I'$ a trois éléments, $I$ deux, $J$ un, $J'$
+deux. On le rend explicite ainsi\footnote{Le croquis montre deux ovales, l'un
+au-dessus de l'autre ; on le décrit, on ne le redessine pas. La page écrit que
+l'adhérence de $\{b\}$ est $\{a, b\}$ « pour $\tau'$ » ; c'est pour la topologie
+concurrente, notée ici $\tau''$, puisque pour $\tau'$ elle est égale à
+l'adhérence pour $\tau$.} : $S = \{a, b, c\}$, $T = \{a, c\}$, $U = \{b\}$ ;
+$\tau$ est le préordre où $a$ et $c$ sont équivalents et inférieurs à $b$, de
+sorte que $I = \{j < u\}$ ; $\tau'_{0}$ est l'ordre discret sur $\{a, c\}$. La
+topologie recollée $\tau'$ est l'ordre $a < b$, $c < b$. La topologie $\tau''$
+d'ordre $a < b$ seul, $c$ isolé, vérifie (i), (ii), (iii), et (iv) --- le
+préordre engendré par celui de $\tau''$ et par $a \sim c$ est bien celui de
+$\tau$ ---, mais l'adhérence de $\{b\}$ est $S$ pour $\tau$ et $\{a, b\}$ pour
+$\tau''$. Donc $\tau'' \neq \tau'$, et e) est faux.
+
+Sous un trait horizontal, marquée d'un double trait en marge, vient la
+conclusion :
+
+\begin{quote}
+\emph{La condition à imposer pour caractériser $\tau'$ dans $\mathfrak{T}$ est
+la condition évidente : pour $A \subset U$, l'adhérence de $A$ pour $\tau$ et
+pour $\tau'$ est la même} --- ce qui entraîne déjà $\tau'|_{U} = \tau|_{U}$.
+\end{quote}
+
+C'est juste\footnote{Démonstration (nôtre) : si $\tau'' \in \mathfrak{T}$ et
+$\overline{A}^{(\tau'')} = \overline{A}^{(\tau)}$ pour tout $A \subset U$, un
+fermé $X$ de $\tau''$ vérifie 1°) et 3°) avec $A = X \cap U$, et 2°) parce que
+$\tau''$ induit $\tau'_{0}$ ; il est donc fermé pour $\tau'$, et $\tau'' =
+\tau'$. Pour des ultra-topologies il suffit de le demander pour les points $y
+\in U$ : c'est exactement la relation croisée $x \leq y \iff x \leq_{\tau} y$
+de (d), et, en termes de figures, les conditions c) et d) de la page 31
+ensemble.}, et cela referme la question ouverte page 31. La dernière formule de
+la page, l'adhérence d'une partie quelconque pour $\tau'$, est celle de la
+marge de la page 44 :
+\[
+\overline{A}^{(\tau')} = \overline{A \cap U}^{(\tau)} \cup \overline{A \cap
+T}^{(\tau'_{0})} .
+\]
+La page 48 écrit le signe du milieu $\cap$\footnote{La marge de la page 44
+écrit $\cup$ ; seul $\cup$ est juste.}.
+
+Le dossier s'arrête là. Le chapitre suivant, daté du même 18 juin que la
+page 36, recommence l'\emph{Analysis situs} sous le titre d'« Algèbre de
+figures ou Atelier » (dossier 156-6), où la relation $\preccurlyeq$ est dite
+« formellement la plus délicate ».
+
+\end{document}

@@ -1,0 +1,1655 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 156-4, pages 1-88.
+%
+% This is an INTERPRETATION, not a transcription. Everything the critical
+% apparatus carried moves into footnotes. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite the files
+% batch-01.fr.tex to batch-05.fr.tex of this folder.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against
+% the pages by a human. The folder was read whole: five batches, pages 1-88,
+% all mathematics, dated in his hand 10 June 1986 (p. 1), 11 June (p. 18),
+% 12 June (p. 31), 13 June (p. 52), 14 June (p. 80).
+%
+% What the folder is. Chapter IV (« GF IV ») of Vers une géométrie des formes,
+% « Analysis situs (première mouture) »: an attempt to axiomatise a « contrée »,
+% a combinatorial model of a tame stratified space, from figures, their strata
+% (multistrates), compatibility, refinement ≪ and subdivision ≼, down to the
+% lieux (points) and the ombres of figures on them. The folder restarts its own
+% framework five times (pp. 1, 25, 31-33, 45, 52); page 52 calls its own start
+% « quatrième mouture ». These internal restarts are called « départs » here,
+% and « mouture » is kept for the chapter-level drafts (156-4 the first, 156-6,
+% 156-7, 156-8 the second to fourth).
+%
+% Notation fixed for the whole document. 𝕏 the ambient space; a figure F, its
+% closed strata X_i, open strata U_i = X_i ∖ ∂X_i; Σ_F the ordered set of
+% strata. « Multistrate » (his word from p. 19 on) for « figure élémentaire »
+% (pp. 3-18) and « multiplicité » (pp. 21-37), the set 𝓜 for his 𝔉_él. ≤
+% sub-figure / sub-multistrate, ≪ refinement, ≼ subdivision, R compatibility.
+% 𝓛 the lieux; the ombre of X is 𝓛_X and its open ombre 𝓛°_X throughout (his
+% X̃, X̃° on pp. 35-44, |X| on p. 87); 𝓜_{≪F} the multistrates refining F (his
+% F̃ on p. 80); in the fifth start F̄ = 𝓜_{≤F} the set of strata. Axioms are
+% always cited with their page, since « Cont 3 », « C 4 », « C 8 » each name
+% several different statements.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — p. 3: a sub-figure is DEFINED as a down-closed set of strata; the NB does not
+%   follow from F' ⊂ F (his own counter-example, p. 27).
+% — p. 6: a) ⇒ b) is proved directly (∂X_i = ∂X'_j) without the induction.
+% — p. 9: « antifiltre » read as an ideal of sets; b) is illegible.
+% — p. 14: ≪ is implied by ≤, i.e. weaker as a relation; « plus forte/fine ».
+% — p. 18: the chain formula for geometric dimension counts one too many.
+% — pp. 21, 35: existence of minimal strata needs Fig_2 / Cont'_3; supplied.
+% — p. 26: the open strata cover |F| only for well-founded figures; example.
+% — p. 28: the four conditions are not all equivalent: b') ⇔ d), and a) ⇔ b)
+%   strictly weaker; example.
+% — p. 33: the content of Cont 1 is the transitivity of ≤.
+% — p. 41: F' ∪ F_X for his F ∪ F_X; c) ⇒ a) needs Cont 6 and Cont 7.
+% — p. 47: C 4 as written (G' ∪ (F ∖ G)) is not closed; the margin's
+%   correction is stated. Cor. 2 (≪ an order) is not proved there.
+% — p. 51: the last step of the proof is not written.
+% — p. 54: « Sup ↦ ∪ » and Cor. 2 a) need the strata to be sup-PRIME; the
+%   diamond lattice M_3 satisfies C 1-C 2 otherwise. Supplied for pp. 54-68.
+% — p. 68: the cosupport formula uses disjointness, not R.
+% — p. 69: « modérée » read as « two subdivisions have a common one ».
+% — p. 73: transitivity of ≪ is proved with C7_0, not C 6.
+% — p. 76: G' for his F'. p. 78: the sign in b) inverted.
+% — p. 80: the statement of the 14 June corollary is reconstructed from its
+%   paraphrase and its proof (as read it is trivial).
+% — p. 87: « contrées sans bords » is undefined; the converse fails for a circle.
+%
+% Modern names given and footnoted as ours: espace stratifié and condition de
+% frontière (Whitney 1965, Thom 1969, Mather 1970), topologie d'Alexandrov
+% (1937), topologie modérée / structures o-minimales (van den Dries; Pillay-
+% Steinhorn 1986), idéal d'ensembles / bornologie, hauteur d'un ensemble
+% ordonné, sous-polyèdre comme sous-complexe d'une subdivision, élément
+% sup-irréductible et sup-premier, représentation de Birkhoff (1937) and Raney
+% (1952), connexion de Galois / polarité (Birkhoff 1940), algèbre des ouverts
+% réguliers d'un ensemble ordonné (forcing), espace extrêmement discontinu
+% (Stone 1937, Gleason 1958).
+%
+% What the folder announces and never establishes: the converse of p. 8; that
+% subdivisions are the maximal refinements in the topological model (p. 16
+% stalls); the map F' → F of p. 42 (obtained only on p. 80, in the fifth
+% start); that ≪ is an order on p. 47; the end of the proof of p. 51; that the
+% supports form a Boolean algebra (p. 68, « je présume »); the Inf property
+% of the induced refinement in the fifth start (Lemme 2, p. 78, abandoned);
+% (*) of p. 83 for figures that are not multistrates; (ii)-(iii) of p. 85;
+% the converse of p. 87; the Proposition of p. 88, on which the folder ends.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{156-4}
+\pages{1}{88}
+\dating{1986}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Chapitre] IV. Analysis situs (première mouture) : notes manuscrites (10/06/1986) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Une carte de géographie découpe un pays en régions ; chaque région a des
+frontières, les frontières se rencontrent en des points, et l'on peut toujours
+redessiner la carte plus finement, en coupant une région en cantons, sans rien
+changer au territoire. Ces quatre-vingt-huit feuillets, écrits du 10 au 14 juin
+1986, cherchent à dire ce qu'est une telle carte quand on oublie le papier : à
+décrire une « forme » géométrique uniquement par la façon dont ses morceaux
+s'emboîtent, se touchent et se laissent recouper. Le mot qu'il choisit pour
+l'objet ainsi décrit est justement celui d'un pays : une \emph{contrée}.
+
+Le point de départ est un espace découpé en \emph{strates} : des morceaux
+fermés dont l'intérieur est une variété connexe --- un sommet, une arête
+ouverte, une face ouverte --- et dont le bord est fait de strates plus petites.
+Un tel découpage est une \emph{figure} ; un morceau pris avec son bord est une
+\emph{multistrate}. Deux opérations rendent une figure plus fine, et toute la
+difficulté du dossier vient de ce qu'elles sont de nature différente. On peut
+en prendre une partie (une \emph{sous-figure}, comme on ne garde que le contour
+d'un triangle), ou la redécouper sans changer ce qu'elle recouvre (une
+\emph{subdivision}, comme on coupe une arête par son milieu). Combiner les deux
+donne le \emph{raffinement} : une sous-figure d'une subdivision --- c'est ainsi
+qu'un petit segment tracé à l'intérieur d'un triangle « raffine » ce triangle.
+Les plus fins de tous les objets sont les \emph{lieux}, qui ne se laissent plus
+raffiner : dans l'exemple d'un espace, ce sont ses points. Toute figure jette
+alors sur l'ensemble des lieux une \emph{ombre}, l'ensemble des points qu'elle
+recouvre, et le dossier finit sur l'énoncé que cette ombre, avec la trace de
+chaque strate, a précisément la forme d'une figure.
+
+Il faut prévenir que le chemin n'est pas droit. En cinq jours, le cadre est
+repris cinq fois --- « On reprend tout ! », « Donc, nouveau départ ! »,
+« quatrième mouture ! » --- parce qu'à chaque fois un exemple (celui des
+pseudo-disques, deux fois) montre que la notion prise pour primitive n'est pas
+la bonne. Ce qui reste à la fin est une structure à deux ordres sur l'ensemble
+des figures, l'un pour « être une partie de », l'autre pour « être un
+redécoupage de », avec une liste d'axiomes qui disent comment ils se
+répondent. Les marges notent « à vérifier », « il semblerait qu'il manque
+quelque chose », « ouf ! », « J'abandonne ici ! ». Une phrase du 12 juin
+dit la méthode mieux qu'aucun commentaire : plutôt que de dégager d'abord
+l'axiomatique, dégager une terminologie géométrique, noter les axiomes au
+passage, et n'axiomatiser qu'ensuite. Le dossier est cette terminologie en
+train de se faire.
+
+Ce que l'on y rencontre porte aujourd'hui d'autres noms : espaces stratifiés et
+leur condition de frontière, ensembles ordonnés de strates, représentation d'un
+treillis distributif par ses éléments irréductibles, connexions de Galois et
+algèbres de Boole d'ouverts réguliers. Le chapitre suivant, « Algèbre des
+figures » (dossier 156-5), commencé le 14 juin, reprend l'étude des familles de
+parties sur lesquelles celui-ci s'arrête ; trois autres moutures de la même
+Analysis situs suivent du 18 juin au 4 juillet (dossiers 156-6 à 156-8).
+
+\keywords{stratified space, frontier condition, poset of strata, Alexandrov topology, subdivision, subcomplex of a subdivision, combinatorial dimension, join-irreducible element, Birkhoff representation theorem, compatibility relation, Galois connection, regular open algebra}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier part d'un modèle --- un espace topologique stratifié --- et s'en
+détache par étapes pour axiomatiser la structure qu'il y lit. Il le fait en
+cinq départs successifs, qu'on garde distincts : chacun corrige le précédent,
+et c'est ce mouvement qui est le contenu du dossier.
+
+\begin{enumerate}
+\item[I.] \emph{Premier départ : du modèle topologique à la contrée} (pages 1
+à 24, 10 et 11 juin). Figures et strates d'un espace (pages 1 à 4) ;
+compatibilité et configurations (pages 5 à 10) ; dimension combinatoire (pages
+10 à 12) ; raffinement et subdivision (pages 13 à 16) ; la contrée abstraite et
+ses lieux (pages 17 à 19) ; les ombres sur les lieux (pages 20 à 24).
+\item[II.] \emph{Deuxième départ : les figures comme familles de parties des
+lieux} (pages 25 à 31), ouvert par « On reprend tout ! ».
+\item[III.] \emph{Troisième départ : multistrates, raffinement et compatibilité
+primitifs} (pages 31 à 44, 12 juin), qui se clôt sur l'objection des
+pseudo-disques.
+\item[IV.] \emph{Quatrième départ : la subdivision primitive} (pages 45 à 51),
+ouvert par « Donc, nouveau départ ! ».
+\item[V.] \emph{Cinquième départ : l'ensemble ordonné des figures et ses deux
+ordres} (pages 52 à 88, 13 et 14 juin), qu'il intitule « Contrée (quatrième
+mouture !) »\footnote{Le mot « quatrième » est lu avec doute. Sa numérotation
+ne compte vraisemblablement pas l'un des départs qu'on distingue ici ; on ne
+cherche pas à deviner lequel.} : l'ordre $\leq$ seul (pages 52 à 68), puis la
+subdivision $\preccurlyeq$ et le raffinement (pages 69 à 85), enfin les lieux
+et les ombres (pages 86 à 88).
+\end{enumerate}
+
+\emph{Deux mots à ne pas confondre.} Le titre du dossier, « Analysis situs
+(première mouture) », désigne le chapitre IV de \emph{Vers une géométrie des
+formes} ; les chapitres VI, VII et VIII (dossiers 156-6, 156-7, 156-8) en sont
+la deuxième, la troisième et la quatrième mouture. La « quatrième mouture » de
+la page 52 est autre chose : un départ interne au présent dossier. On réserve
+ici « mouture » aux chapitres et l'on dit « départ » pour les reprises
+internes. De même, le \emph{lieu} de ce dossier --- une figure qu'on ne peut
+plus raffiner, un point dans le modèle --- n'a rien à voir avec le lieu du
+chapitre II (dossier 156-2), partie fermée qui coupe une faille en deux.
+
+\emph{Conventions.} $\mathbb{X}$ est l'espace ambiant. Une figure $F$ a des
+strates fermées $X_{i}$ et des strates ouvertes $U_{i} = X_{i} \smallsetminus
+\partial X_{i}$ ; $\Sigma_{F}$ est l'ensemble ordonné de ses strates. On dit
+\emph{multistrate} pour ce que les pages 3 à 18 appellent « figure
+élémentaire » et les pages 21 à 37 « multiplicité » --- le mot est celui que la
+page 19 adopte --- et l'on note $\mathcal{M}$ leur ensemble (son
+$\mathfrak{F}_{\text{él}}$). Les relations sont notées : $\leq$ (sous-figure,
+sous-multistrate), $\ll$ (raffinement), $\preccurlyeq$ (subdivision), $R$
+(compatibilité). $\mathcal{L}$ est l'ensemble des lieux ; l'\emph{ombre} d'une
+multistrate $X$, ensemble des lieux qui la raffinent, est notée
+$\mathcal{L}_{X}$, et son \emph{ombre ouverte} $\mathcal{L}^{\circ}_{X}$, dans
+tous les départs\footnote{Il les note $\mathcal{L}_{X}$ aux pages 20 à 24,
+$\widetilde{X}$ et $\widetilde{X}^{\circ}$ aux pages 35 à 44, $|X|$ à la page
+87.}. Les axiomes sont toujours cités avec leur page : « Cont 3 », « C 4 » ou
+« C 8 » désignent chacun plusieurs énoncés différents selon le départ.
+
+\emph{Ce que le dossier annonce et n'établit pas} : la réciproque de la page
+8 ; que, dans le modèle topologique, les subdivisions soient exactement les
+raffinements maximaux (la tentative de la page 16 s'arrête sur un problème de
+topologie) ; l'application $F' \to F$ de la page 42, qui n'est obtenue qu'à la
+page 80 ; que le raffinement soit une relation d'ordre au quatrième départ
+(page 47) ; la dernière étape de la démonstration de la page 51 ; que les
+supports forment une algèbre de Boole (page 68) ; la propriété d'Inf du
+raffinement induit au cinquième départ (abandonnée page 78) ; les énoncés
+(ii) et (iii) de la page 85 ; et la Proposition de la page 88, sur laquelle le
+dossier s'arrête.
+
+\pagerange{1}{4}
+\section*{I. Le modèle topologique : figures et strates (pages 1 à 4)}
+
+La page 1, datée du 10 juin 1986 et marquée « GF IV », annonce un modèle
+« ensembliste topologique » de l'axiomatique d'un « modèle de formes
+topologiques », dans le cas d'une contrée. L'espace ambiant $\mathbb{X}$ est
+séparé, ou modéré pour une « théorie modérée » donnée, et dans ce cas « partie
+fermée » s'entend « partie fermée modérée »\footnote{La « topologie modérée »
+est celle que réclamait l'\emph{Esquisse d'un programme} (1984) ; voir la
+lecture du chapitre II (dossier 156-2), pages 1 et 2. Elle a trouvé une forme
+précise dans les structures o-minimales, développées dans les mêmes années
+(L.~van den Dries ; A.~Pillay et C.~Steinhorn, 1986), sans lien avec ces
+feuillets. Le rapprochement est le nôtre.}.
+
+\textbf{Définition} (pages 1 et 2). Une \emph{figure} $F$ de $\mathbb{X}$ est
+une partie fermée $X$, son \emph{support} $|F|$, munie d'une famille de parties
+$X_{i}$, les \emph{strates fermées}, de réunion $X$, telles que :
+\begin{enumerate}
+\item[a)] les $X_{i}$ sont fermées, non vides et localement connexes ;
+\item[b)] la famille des $X_{i}$ est localement finie ;
+\item[c)] si $X_{i} \subsetneq X_{j}$, alors $X_{i}$ est rare dans $X_{j}$ ;
+\item[d)] posant $\partial X_{i} = \bigcup_{X_{j} \subsetneq X_{i}} X_{j}$,
+fermé par a), b), c), l'\emph{intérieur} $\mathrm{int}(X_{i}) = X_{i}
+\smallsetminus \partial X_{i}$ est une variété connexe ;
+\item[f)] $X_{i} \cap X_{j}$ est réunion de strates.
+\end{enumerate}
+
+On ordonne les strates par inclusion\footnote{Une condition e), écrite en
+oblique dans la marge, en partie biffée, porte sur des dimensions ; elle n'est
+lue que par fragments. La lettre f) suit donc d) sur la page.}. Comme
+$\partial X_{i}$ est une réunion localement finie de fermés rares, elle est
+rare, et la strate ouverte $U_{i} = \mathrm{int}(X_{i})$ est dense dans
+$X_{i}$ : chaque strate fermée est l'adhérence de sa strate ouverte. Dans le cas
+modéré, « variété » s'entend au sens modéré\footnote{Dans le cas purement
+topologique, rien n'exige qu'une strate soit plongée de façon modérée : la
+sphère cornue d'Alexander, avec la boule qu'elle borde, satisferait les
+conditions. C'est une raison de plus pour l'hypothèse de modération de la page
+1.}. Les strates ouvertes forment une partition de $|F|$ ; en termes actuels,
+une figure est une \emph{stratification} localement finie d'un fermé de
+$\mathbb{X}$ dont chaque strate fermée est réunion de strates --- ce qu'on
+appelle la \emph{condition de frontière}\footnote{Les stratifications de
+H.~Whitney (1965), R.~Thom (1969) et J.~Mather (1970) ajoutent des conditions
+de régularité qui n'ont pas de sens ici, où rien n'est lisse. La condition
+qu'une adhérence de strate soit réunion de strates est la « frontier
+condition » de cette littérature. Les feuillets ne citent personne.}.
+
+Une figure se reconstitue à partir de l'ensemble de ses strates : $F$ est un
+élément de $\mathfrak{P}(\mathfrak{P}_{f}(\mathbb{X}))$, où
+$\mathfrak{P}_{f}$ désigne les parties fermées, et l'ensemble $\mathfrak{F}$
+des figures une partie de $\mathfrak{P}(\mathfrak{P}_{f}(\mathbb{X}))$. À
+chaque figure est attaché l'ensemble ordonné $\Sigma_{F}$ de ses
+strates\footnote{La page écrit « décomposition de $Y$ », « $\{X_{i}\} \in
+\mathfrak{P}(Y)$ » pour la partie qu'elle vient d'appeler $X$.}.
+
+\subsection*{Sous-figures et multistrates}
+
+\begin{quote}
+\textbf{Définition} (page 3). Une \emph{sous-figure} $F'$ de $F$ est une
+partie de l'ensemble des strates de $F$ telle que, si $X_{i} \in F'$ et si
+$X_{j}$ est une strate de $F$ contenue dans $X_{i}$, alors $X_{j} \in F'$. On
+écrit $F' \leq F$.
+\end{quote}
+
+La page définit la sous-figure par la seule inclusion $F' \subset F$ et donne
+la condition de clôture comme une conséquence ; elle n'en est pas
+une\footnote{La page 27 donne elle-même le contre-exemple : un cercle $X_{1}$
+muni d'un point $X_{0}$ forme une figure $F = \{X_{0}, X_{1}\}$, et $\{X_{1}\}$
+est une figure contenue dans $F$, mais ce n'en est pas une sous-figure ---
+l'intérieur de $X_{1}$ n'est pas le même dans les deux. On fait donc de la
+clôture une partie de la définition.}. Ainsi définies, les sous-figures de $F$
+sont en bijection avec les parties de $\Sigma_{F}$ fermées vers le bas ---
+c'est-à-dire, comme le dit la page, avec les fermés de $\Sigma_{F}$ pour la
+topologie dont les fermés sont les parties décroissantes\footnote{C'est la
+topologie d'Alexandrov (P.~Alexandroff, 1937) de l'ensemble ordonné
+$\Sigma_{F}$, à l'ordre près : le nom est le nôtre.} --- et $|F'| \subset
+|F|$. La relation $\leq$ est un ordre sur $\mathfrak{F}$.
+
+Une \emph{multistrate} est une figure qui a une strate maximale, c'est-à-dire
+dont $\Sigma_{F}$ a un plus grand élément\footnote{La page dit « figure
+élémentaire » ; une note de marge, avec la date « 11.6. », renvoie au mot
+« multistrate » que la page 19 lui substituera. $\mathcal{M}$ rend son
+$\mathfrak{F}_{\text{él}}$, cerclé sur la page.}. Les sous-multistrates d'une
+figure $F$ correspondent à ses strates : à $X_{i}$ répond la multistrate
+$F_{X_{i}}$ formée des strates de $F$ contenues dans $X_{i}$. Soit
+$\Sigma'_{F} \subset \mathcal{M}$ l'ensemble de ces sous-multistrates ; on a
+$\Sigma'_{F} \simeq \Sigma_{F}$, $F$ se reconstitue à partir de
+$\Sigma'_{F}$, et l'inclusion des figures devient l'inclusion de ces parties de
+$\mathcal{M}$. Ordonné par $\leq$, $\mathcal{M}$ est un ensemble ordonné, et
+chaque $\Sigma'_{F}$ en est une partie fermée vers le bas.
+
+\pagerange{5}{10}
+\section*{II. Compatibilité et configurations (pages 5 à 10)}
+
+Une partie de $|F|$ est \emph{$F$-saturée} si elle est réunion de strates
+ouvertes de $F$ --- de façon équivalente, pour une partie fermée, réunion de
+strates fermées\footnote{Le haut de la page 5, une première tentative de
+caractériser les parties de $\mathcal{M}$ de la forme $\Sigma'_{F}$, est barré ;
+une longue note de marge n'est lue que par fragments.}.
+
+\textbf{Proposition} (pages 5 et 6). \emph{Pour deux figures $F$ et $F'$, les
+conditions suivantes sont équivalentes :}
+\begin{enumerate}
+\item[a)] \emph{pour toutes strates $X \in \Sigma_{F}$, $X' \in \Sigma_{F'}$,
+$X \cap X'$ est $F_{X}$-saturée et $F'_{X'}$-saturée ;}
+\item[b)] \emph{deux strates ouvertes $U_{i}$ de $F$ et $U'_{j}$ de $F'$ sont
+disjointes ou égales.}
+\end{enumerate}
+\emph{On dit alors que $F$ et $F'$ sont \textbf{compatibles}.}
+
+b) $\Rightarrow$ a) : $X \cap X'$ est la réunion des $U_{k} \cap U'_{l}$, pour
+$U_{k} \subset X$, $U'_{l} \subset X'$, chacune vide ou égale à $U_{k} =
+U'_{l}$ ; c'est donc une réunion de strates ouvertes de l'une et de l'autre.
+a) $\Rightarrow$ b) : soit $x \in U_{i} \cap U'_{j}$. La partie $X_{i} \cap
+X'_{j}$ est fermée, $F_{X_{i}}$-saturée et contient $x$, donc $U_{i}$, donc son
+adhérence $X_{i}$ ; ainsi $X_{i} \subset X'_{j}$, et symétriquement $X_{i} =
+X'_{j}$. Reste à voir que $\partial X_{i} = \partial X'_{j}$ : si $Y$ est une
+strate de $F$ strictement contenue dans $X_{i}$, a) appliqué à $(Y, X'_{j})$
+dit que $Y$ est un fermé $F'_{X'_{j}}$-saturé distinct de $X'_{j}$ ; il ne
+rencontre donc pas $U'_{j}$, sans quoi il contiendrait son adhérence $X'_{j}$,
+et $Y \subset \partial X'_{j}$. D'où $\partial X_{i} \subset \partial X'_{j}$,
+et l'inclusion inverse par symétrie\footnote{La page annonce une récurrence sur
+$\sup(\dim F, \dim F')$, se ramenant aux figures $F_{X_{i}}$, $F'_{X'_{j}}$, et
+s'interrompt ; le raisonnement est écrit vite et très corrigé. L'argument
+direct ci-dessus est le nôtre ; il n'utilise que la densité des strates
+ouvertes.}.
+
+Deux figures sont compatibles si et seulement si leurs sous-multistrates le
+sont deux à deux, et deux sous-figures d'une même figure le sont toujours
+(page 7). On obtient sur $\mathcal{M}$ une relation réflexive et symétrique
+$R$, « être compatibles ». Une \emph{configuration} est un ensemble de figures
+deux à deux compatibles.
+
+\subsection*{Les figures comme configurations}
+
+Pour une figure $F$, la partie $\Phi = \Sigma'_{F}$ de $\mathcal{M}$ est
+fermée vers le bas, c'est une configuration, et elle est localement finie : la
+famille des supports de ses éléments est localement finie dans $\mathbb{X}$.
+La page 8 affirme la réciproque : toute partie $\Phi$ de $\mathcal{M}$ ayant
+ces trois propriétés provient d'une figure et d'une seule\footnote{Énoncée sans
+démonstration. On la vérifie avec la Proposition des pages 5 et 6 : les strates
+des éléments de $\Phi$, deux à deux compatibles, ont des strates ouvertes
+disjointes ou égales, ce qui donne les conditions d) et f).}. D'où la
+structure que la page 9 dégage, et qu'on numérote comme elle :
+\begin{enumerate}
+\item[(1)] l'ensemble $\mathcal{M}$ des multistrates ;
+\item[(2)] l'ordre $\leq$ sur $\mathcal{M}$ ;
+\item[(3)] la relation réflexive et symétrique $R$ de compatibilité ;
+\item[(4)] parmi les configurations, celles qui sont « localement finies »,
+$\mathrm{Conf}_{\mathrm{l.f.}} \subset \mathfrak{P}(\mathcal{M})$.
+\end{enumerate}
+La famille (4) contient les singletons, est stable par passage à une partie et
+par réunion finie de configurations ; la page l'appelle un
+\emph{antifiltre}\footnote{Le mot désigne ce qu'on appelle un idéal
+d'ensembles, le dual d'un filtre ; une famille qui contient de plus les
+singletons est une \emph{bornologie} (le nom est postérieur, H.~Hogbe-Nlend,
+1977). La propriété b) de la page 9, qui lie la locale finitude d'une
+configuration à celle de la partie fermée qu'elle engendre, est illisible en
+son milieu.}. Les figures sont alors les parties de $\mathcal{M}$ qui sont des
+configurations, fermées vers le bas et localement finies ; les \emph{figures
+finies}, les parties finies qui sont des configurations fermées.
+
+\pagerange{10}{12}
+\section*{III. Dimension combinatoire (pages 10 à 12)}
+
+Deux propriétés de la relation entre (2) et (3) :
+
+\begin{quote}
+\textbf{Fig}$_{1}$ (page 10). \emph{Deux sous-multistrates d'une même
+multistrate $X$ sont compatibles}, de sorte que $\mathcal{M}_{\leq X}$ est une
+configuration, donc une figure.
+
+\textbf{Fig}$_{2}$ (page 11). \emph{Pour tout $X \in \mathcal{M}$, les chaînes
+de $\mathcal{M}_{\leq X}$ ont un cardinal borné.}
+\end{quote}
+
+La \emph{dimension combinatoire} de $X$ est la borne supérieure des cardinaux
+de ces chaînes, diminuée de un : c'est la hauteur de l'ensemble ordonné
+$\mathcal{M}_{\leq X}$\footnote{Le nom de « hauteur » est le nôtre. Elle
+compte les sauts de strate en strate, non la dimension des variétés : un
+triangle fermé, décomposé en sommets, arêtes et face, a une dimension
+combinatoire égale à $2$, mais un disque fermé dont le bord est une seule
+strate circulaire a une dimension combinatoire égale à $1$.}. Elle est nulle
+si et seulement si $X$ est minimal dans $\mathcal{M}$, et la dimension
+combinatoire d'une figure est la borne supérieure de celles de ses éléments.
+Dans le modèle, les multistrates minimales sont les fermés de $\mathbb{X}$ qui
+sont des variétés connexes (une seule strate), et les figures de dimension
+combinatoire nulle sont les configurations non vides et localement finies de
+multistrates minimales, c'est-à-dire les fermés de $\mathbb{X}$ qui sont des
+variétés, décomposés en leurs composantes connexes\footnote{La page écrit
+« minimaux de $\mathfrak{F}$ » pour $\mathfrak{F}_{\text{él}}$, et
+« décomposées » est lu avec doute. Ces sous-variétés ne sont pas supposées de
+dimension constante, et, dans le cas topologique, aucune condition de
+plongement n'est demandée.}. La figure vide correspond à la sous-variété
+vide.
+
+\pagerange{13}{16}
+\section*{IV. Raffinement et subdivision (pages 13 à 16)}
+
+\begin{quote}
+\textbf{Définition} (page 14). Une figure $F'$ \emph{raffine} $F$, et l'on
+écrit $F' \ll F$, si toute strate ouverte de $F'$ est contenue dans une strate
+ouverte de $F$, nécessairement unique.
+\end{quote}
+
+On a alors $|F'| \subset |F|$, sans égalité nécessaire. C'est une relation
+d'ordre --- deux figures qui se raffinent mutuellement ont même support et des
+partitions en strates ouvertes plus fines l'une que l'autre, donc égales ---
+et elle est impliquée par $\leq$, puisque les strates ouvertes d'une
+sous-figure sont des strates ouvertes de la figure\footnote{La page dit de
+$\ll$ qu'elle est « plus fine », puis « plus forte », que l'inclusion : elle
+la contient, c'est-à-dire qu'elle relie plus de couples.}. Elle se lit sur les
+multistrates : $F' \ll F$ si et seulement si toute sous-multistrate de $F'$
+raffine une sous-multistrate de $F$. C'est la donnée
+\begin{enumerate}
+\item[(5)] l'ordre $\ll$ sur $\mathcal{M}$, impliqué par $\leq$,
+\end{enumerate}
+qui s'ajoute aux données (1) à (4), avec la relation (page 15)
+\[
+X \leq X' \iff X \ll X' \ \text{et}\ (X, X') \in R ,
+\]
+vraie dans le modèle : si chaque strate ouverte de $X$ est dans une strate
+ouverte de $X'$ et lui est égale ou disjointe, elle lui est égale. Cette
+équivalence --- sous-figure égale raffinement plus compatibilité --- revient
+dans chacun des départs suivants.
+
+\begin{quote}
+\textbf{Définition} (pages 13 et 15). Une \emph{subdivision} de $F$ est un
+raffinement $F'$ de même support.
+\end{quote}
+
+La page 15 annonce que cela revient à demander que $F'$ soit maximal, pour
+$\leq$, parmi les raffinements de $F$, et en fait la définition
+retenue\footnote{La phrase de la page 15 écrit « elle raffine $F'$ » pour
+$F$. Une première version d'un point (6), biffée, cherchait à définir la
+subdivision entre figures de $\mathcal{M}$.}. Une subdivision d'une
+multistrate n'est pas nécessairement une multistrate : une arête coupée en son
+milieu en a deux maximales.
+
+La page 16, intitulée « Justification (?) », tente de montrer qu'un raffinement
+$F'$ de support plus petit n'est pas maximal : elle forme la figure $F''$ dont
+les strates ouvertes sont celles de $F'$ et les composantes connexes
+$V_{i\alpha}$ des $U_{i} \smallsetminus X'$, où $X' = |F'|$. Il faut alors que
+l'adhérence de chaque $V_{i\alpha}$ soit réunion de strates, et la page
+s'arrête sur ce qu'elle appelle « un pb, qui a l'air intéressant, de topologie
+d'un espace stratifié dans une variété »\footnote{C'est bien un problème : dans
+un espace topologique quelconque, le complémentaire d'un fermé stratifié dans
+une variété peut avoir une infinité de composantes, ou des composantes dont
+l'adhérence n'est pas réunion de strates. Dans une structure o-minimale, toute
+stratification définissable se raffine en une stratification compatible avec
+un fermé définissable donné et satisfaisant la condition de frontière
+(L.~van den Dries, \emph{Tame topology and o-minimal structures}, 1998) ; c'est
+ce que la page demande. La longue note de marge de la page 16 n'est lue que par
+fragments.}. L'équivalence reste ainsi annoncée et non établie.
+
+\pagerange{17}{19}
+\section*{V. La contrée abstraite et ses lieux (pages 17 à 19)}
+
+La page 17 isole la structure. Une \emph{contrée} est donnée par :
+\begin{enumerate}
+\item[1°)] un ensemble $\mathcal{M}$ de multistrates ;
+\item[2°)] un ordre $\ll$ sur $\mathcal{M}$, le raffinement ;
+\item[3°)] une relation réflexive et symétrique $R$, la compatibilité ;
+\item[4°)] un idéal de parties de $\mathcal{M}$, dites localement finies, qui
+pour une contrée finie sont simplement les configurations finies,
+\end{enumerate}
+avec des axiomes « à dégager »\footnote{Le numéro 4°) est dans une note de marge
+et n'est pas sûr ; plusieurs insertions obliques au-dessus de 1°) et 2°) ne sont
+lues qu'en partie.}. Le premier : \textbf{Contr}$_{1}$ (page 17), \emph{la
+relation « $X' \ll X$ et $X'$ compatible à $X$ » est un ordre} ; on la note
+$\leq$, et Fig$_{1}$ se lit alors : deux multistrates qui raffinent $X$ et lui
+sont compatibles sont compatibles entre elles. Le second :
+\textbf{Contr}$_{2}$ (page 18), \emph{pour tout $X$, les dimensions
+combinatoires des $X' \ll X$ sont bornées}\footnote{Une première version de
+Contr$_{2}$, en haut de la page 18, est barrée.} ; leur borne supérieure est la
+\emph{dimension géométrique} de $X$, et celle d'une figure est la borne
+supérieure de celles de ses éléments. C'est donc le plus grand $n$ pour lequel
+il existe une chaîne
+\[
+X_{0} < X_{1} < \cdots < X_{n}, \qquad X_{n} \ll X \in F
+\]
+(page 18)\footnote{La page écrit la chaîne $(X_{0}, \ldots, X_{n})$ avec $X_{0}
+< \cdots < X_{n-1} \ll X_{n} \in F$ et en prend la longueur $n$. Comptée
+ainsi, un segment serait de dimension $2$ (une extrémité, un sous-segment, le
+segment) ; on compte les maillons de la chaîne stricte, ce qui redonne la
+définition de la ligne précédente.}. Pour un segment, elle vaut $1$ ; pour
+le disque dont le bord est une seule strate, la dimension combinatoire $1$ est
+corrigée en dimension géométrique $2$ par ses subdivisions en cellules.
+
+Le 11 juin, après un passage très raturé où il envisage de partir plutôt de
+parties « constructibles », il annonce qu'il va « pousser un peu dans la
+direction $\ll$, compatibilité »\footnote{Le bas de la page 18 est un palimpseste
+d'insertions obliques ; on n'en donne que le fil principal, lui-même
+fragmentaire.}, et arrive à la notion de lieu.
+
+\begin{quote}
+\textbf{Définition} (page 19). Un \emph{lieu} est une multistrate minimale pour
+$\ll$, c'est-à-dire qui n'a d'autre raffinement qu'elle-même. On note
+$\mathcal{L} \subset \mathcal{M}$ l'ensemble des lieux.
+\end{quote}
+
+Un lieu est a fortiori minimal pour $\leq$. Dans le modèle, les lieux sont
+exactement les points de $\mathbb{X}$ : un point de $|X|$, pris comme figure à
+une strate, raffine $X$, de sorte qu'une multistrate qui a plus d'un point
+n'est pas minimale\footnote{La page conclut sur « les sous-variétés
+$0$-connexes qui n'ont pas de raffinement autre qu'elles-mêmes » ; la lecture
+du chiffre est sûre, celle du sens ne l'est pas. Ce sont les points.}. Les
+figures sont désormais « des ensembles de multistrates mutuellement
+compatibles, fermés pour $\leq$, localement finis ».
+
+\pagerange{20}{24}
+\section*{VI. Les ombres sur les lieux (pages 20 à 24)}
+
+Pour une multistrate $X$, son \emph{ombre} $\mathcal{L}_{X}$ est l'ensemble
+des lieux qui la raffinent, et $\widehat{\mathcal{L}}_{X} = \{\mathcal{L}_{Y}
+\mid Y \leq X\} \subset \mathfrak{P}(\mathcal{L})$ ; pour une figure $F$,
+$\mathcal{L}_{F} = \bigcup_{X \in F} \mathcal{L}_{X}$ et
+$\widehat{\mathcal{L}}_{F} = \{\mathcal{L}_{X} \mid X \in F\}$. Le programme,
+posé à la page 20, est de reconstituer $\ll$ et la compatibilité à partir de
+$X \mapsto \widehat{\mathcal{L}}_{X}$\footnote{La page écrit
+$\mathfrak{P}(\mathfrak{P}(X))$ là où l'on attend
+$\mathfrak{P}(\mathfrak{P}(\mathcal{L}))$, et un « Contr$_{3}$ » y est commencé
+puis barré ; à partir de la page 21, l'abréviation se lit « Cont ».}. Dans le
+modèle, $\mathcal{L}_{X}$ est le support de $X$.
+
+L'application $X_{i} \mapsto \mathcal{L}_{X_{i}}$ est croissante sur
+$\mathcal{M}_{\leq X}$, et l'on veut qu'elle le soit strictement. On pose
+l'\emph{ombre ouverte}
+\[
+\mathcal{L}^{\circ}_{X} = \mathcal{L}_{X} \smallsetminus \bigcup_{Y < X}
+\mathcal{L}_{Y},
+\]
+et l'on demande :
+
+\begin{quote}
+\textbf{Cont 3} (page 21). \emph{Pour tout $X \in \mathcal{M}$,
+$\mathcal{L}^{\circ}_{X} \neq \emptyset$.}
+
+\textbf{Cont 4} (page 22). \emph{Si $X \neq Y$ sont compatibles,
+$\mathcal{L}^{\circ}_{X} \cap \mathcal{L}^{\circ}_{Y} = \emptyset$.}
+\end{quote}
+
+Pour $x \in \mathcal{L}_{X}$, un élément $X_{i} \leq X$ minimal parmi ceux dont
+l'ombre contient $x$ vérifie $x \in \mathcal{L}^{\circ}_{X_{i}}$, de sorte que
+$\mathcal{L}_{X}$ est la réunion des $\mathcal{L}^{\circ}_{X_{i}}$ pour $X_{i}
+\leq X$\footnote{L'existence d'un tel élément minimal n'est pas justifiée sur la
+page ; elle résulte de Fig$_{2}$ (page 11), qui borne les chaînes de
+$\mathcal{M}_{\leq X}$. On l'ajoute.}. Cont 4 dit que cette réunion est
+disjointe.
+
+\textbf{Scholie} (page 23). \emph{Soit $F$ une figure.}
+\begin{enumerate}
+\item[a)] \emph{Les ombres ouvertes $\mathcal{L}^{\circ}_{X}$, $X \in F$, sont
+non vides et forment une partition de $\mathcal{L}_{F}$ ; en particulier
+$X \mapsto \mathcal{L}^{\circ}_{X}$ est injective sur $F$.}
+\item[b)] \emph{$X \mapsto \mathcal{L}_{X}$ est injective sur $F$, et pour
+$X, Y \in F$ les conditions (i) $X \leq Y$, (ii) $\mathcal{L}_{X} \subset
+\mathcal{L}_{Y}$, (iii) $\mathcal{L}^{\circ}_{X} \subset \mathcal{L}_{Y}$,
+(iv) $\mathcal{L}^{\circ}_{X} \cap \mathcal{L}_{Y} \neq \emptyset$ sont
+équivalentes.}
+\item[c)] \emph{Pour $X, Y \in F$, $\mathcal{L}_{X} \cap \mathcal{L}_{Y} =
+\bigcup_{Z \in F,\ Z \leq X,\ Z \leq Y} \mathcal{L}_{Z}$.}
+\end{enumerate}
+
+Pour (iv) $\Rightarrow$ (i) : $\mathcal{L}_{Y}$ est réunion des
+$\mathcal{L}^{\circ}_{Y_{i}}$, $Y_{i} \leq Y$, et $\mathcal{L}^{\circ}_{X}$ en
+rencontre un ; par a), $X = Y_{i}$. Les autres implications sont immédiates, et
+seul sert le fait que $X$ et $Y$ sont compatibles, comme le note la marge.
+
+Viennent les réciproques, posées en axiome :
+
+\begin{quote}
+\textbf{Cont 5} (page 24). \emph{$X \ll Y$ si et seulement si toute strate
+ouverte de $X$ --- toute $\mathcal{L}^{\circ}_{X'}$, $X' \leq X$ --- est
+contenue dans une strate ouverte de $Y$ ; $X$ et $Y$ sont compatibles si et
+seulement si leurs strates ouvertes sont deux à deux disjointes ou égales.}
+\end{quote}
+
+On en déduit $\widehat{\mathcal{L}}_{X} = \widehat{\mathcal{L}}_{Y} \iff X = Y$,
+et $X \leq Y$ si et seulement si $\widehat{\mathcal{L}}_{X}$ est une partie
+fermée de $\widehat{\mathcal{L}}_{Y}$\footnote{Les signes d'égalité du a) du
+Corollaire sont surchargés.}. La contrée $(\mathcal{M}, \ll, R)$ se reconstitue
+donc à partir de $\mathcal{L}$ et de l'ensemble $\widehat{\mathcal{M}}$ des
+$\widehat{\mathcal{L}}_{X}$, partie de
+$\mathfrak{P}(\mathfrak{P}(\mathfrak{P}(\mathcal{L})))$ : c'est la conclusion du
+premier départ, et la critique qu'en fera le 12 juin (page 31) porte
+précisément sur elle.
+
+\pagerange{25}{31}
+\section*{VII. Deuxième départ : les figures comme familles de parties (pages 25 à 31)}
+
+« On reprend tout ! » La conclusion de la page 24 est prise pour définition.
+
+\begin{quote}
+\textbf{Définition} (page 25). Une \emph{contrée} $C$ est un ensemble $L$, ses
+\emph{lieux}, muni d'un ensemble $\mathfrak{F} \subset
+\mathfrak{P}(\mathfrak{P}(L))$ de familles de parties de $L$, les
+\emph{figures}. Les éléments d'une figure $F$ sont ses \emph{strates fermées},
+leur réunion est son \emph{support} $|F|$.
+\end{quote}
+
+\begin{quote}
+\textbf{Cont 1} (page 25). \emph{La famille vide est une figure, et pour tout
+$x \in L$, $\{\{x\}\}$ est une figure, la figure ponctuelle.}
+
+\textbf{Cont 2} (page 26). \emph{Pour toute figure $F$ et tout $X \in F$,
+posant $\partial X = \bigcup_{Y \in F,\ Y \subsetneq X} Y$ et $X^{\circ} = X
+\smallsetminus \partial X$, on a $X^{\circ} \neq \emptyset$ ; et pour $X, Y \in
+F$, $X \cap Y$ est la réunion des $Z \in F$ contenus dans $X \cap Y$.}
+\end{quote}
+
+Une famille qui satisfait Cont 2 est dite \emph{admissible}\footnote{La note de
+marge de la page 26 le dit, en partie lisible. C'est la notion que le chapitre
+V, « Algèbre des figures » (dossier 156-5), commencé le 14 juin, prend pour
+objet, avec sa variante « préadmissible ».}. Les strates ouvertes de deux
+éléments distincts d'une famille admissible sont disjointes : si $x \in
+X^{\circ} \cap Y^{\circ}$, un $Z \subset X \cap Y$ de $F$ contient $x$, et ne
+peut être strictement contenu ni dans $X$ ni dans $Y$, d'où $X = Z = Y$. La
+page en déduit que $X \mapsto X^{\circ}$ met $F$ en bijection avec les classes
+d'une partition de $|F|$. Il faut pour cela que tout point de $|F|$ appartienne
+à un élément minimal de $F$ parmi ceux qui le contiennent, ce que Cont 2
+n'assure pas\footnote{Sur $L = \mathbf{N} \cup \{\omega\}$, la famille des
+$X_{n} = \{\omega\} \cup \{n, n+1, \ldots\}$ satisfait Cont 2, avec $X_{n}^{\circ}
+= \{n\}$, mais $\omega$ n'est dans aucune strate ouverte. L'hypothèse
+manquante est automatique pour une figure finie, et plus généralement dès que
+les chaînes décroissantes de $F$ sont stationnaires ; le chapitre V en fait la
+condition $\beta$ de sa Proposition 1. On l'ajoute.}.
+
+\begin{quote}
+\textbf{Cont 3} (page 27). \emph{Toute partie d'une figure fermée vers le bas
+pour l'inclusion est une figure} --- une \emph{sous-figure}, notée $F' \leq F$.
+\end{quote}
+
+C'est ici que la page note qu'une figure contenue dans une autre n'en est pas
+nécessairement une sous-figure (voir la note de la page 3).
+
+\subsection*{Compatibilité}
+
+Pour deux figures $F$, $G$, la page 28 énumère des conditions qu'elle dit
+équivalentes :
+\begin{enumerate}
+\item[a)] $|F| \cap |G|$ est saturée dans $|F|$ et dans $|G|$, et les deux
+partitions qu'elle en reçoit coïncident ;
+\item[b)] deux strates ouvertes de $F$ et de $G$ sont disjointes ou égales ;
+\item[b')] pour $X \in F$, $Y \in G$, $X^{\circ} \cap Y^{\circ} = \emptyset$ ou
+$X = Y$ ;
+\item[d)] $F \cup G$ est admissible, et $F$, $G$ y sont fermées\footnote{Une
+condition c), qui demande que les $X \cap Y$ soient saturés pour les
+multistrates $\widehat{X}$, $\widehat{Y}$, n'est lue qu'en partie, et d)
+elle-même est en partie illisible ; on la lit dans le sens que la suite de la
+page lui donne.}.
+\end{enumerate}
+Ce n'est vrai qu'en partie. On a a) $\Leftrightarrow$ b), et b')
+$\Leftrightarrow$ d) pour des figures dont tout point est dans une strate
+ouverte (la note précédente) ; b') entraîne b), mais non la
+réciproque\footnote{Sur $L = \{a, b, c\}$, les figures $F = \{\{a\}, \{a, b\}\}$
+et $G = \{\{c\}, \{b, c\}\}$ satisfont a) et b) --- leurs strates ouvertes sont
+$\{a\}, \{b\}$ et $\{c\}, \{b\}$ --- mais $\{a,b\} \cap \{b,c\} = \{b\}$ n'est
+réunion d'aucun élément, et $F \cup G$ n'est pas admissible. Dans le modèle
+topologique une strate fermée est l'adhérence de sa strate ouverte, et b) et
+b') coïncident ; ici il n'y a pas de topologie, et une strate ouverte ne
+détermine pas sa strate fermée. Les démonstrations de b') $\Leftrightarrow$ d)
+reprennent l'argument du paragraphe précédent.}. On appelle donc
+\emph{compatibles} deux figures qui satisfont d) ; deux sous-figures d'une même
+figure le sont, et leur réunion en est une sous-figure\footnote{La page écrit
+« sous-figures de $F \cup C$ » pour $F \cup G$.}. Une \emph{configuration} est
+un ensemble de figures deux à deux compatibles.
+
+\begin{quote}
+\textbf{Cont 4} (page 29). \emph{Si toute multistrate de $F$ est compatible à
+toute multistrate de $G$, alors $F$ et $G$ sont compatibles.}
+\end{quote}
+
+Ici la multistrate $\widehat{X}$ définie par $X \in F$ est la sous-figure des
+éléments de $F$ contenus dans $X$. Par récurrence, une famille finie de figures
+dont les multistrates sont deux à deux compatibles a pour réunion une figure,
+dont elles sont des sous-figures\footnote{L'énoncé du corollaire de la page 29
+est très surchargé ; seules les formules sont sûres.}.
+
+La contrée est \emph{ensembliste}, ou \emph{contrée de points}, si deux figures
+compatibles « ensemblistement » --- au sens de d) --- le sont, ce qui rend Cont
+4 tautologique. Pour les autres, la page 30 propose :
+
+\begin{quote}
+\textbf{Cont}$'_{4}$ (pages 30 et 31). \emph{Deux figures sont compatibles si et
+seulement si deux strates ouvertes $U$ de l'une et $V$ de l'autre sont égales
+ou $C$-disjointes,}
+\end{quote}
+où deux lieux $x \neq y$ sont \emph{disjoints} quand $\{\{x\}, \{y\}\}$ est une
+figure --- une $0$-sphère de $C$ ---, et deux parties $A$, $B$ de $L$ sont
+\emph{$C$-disjointes} quand tout point de l'une est disjoint de tout point de
+l'autre\footnote{L'énoncé de Cont$'_{4}$ à la page 30 est très surchargé, son
+numéro aussi (un « 4 » et un « 1 » l'un sur l'autre) ; la forme citée est celle
+de la reformulation du haut de la page 31.}. Dans une contrée de points, deux
+lieux distincts sont toujours disjoints ; ailleurs, deux points distincts
+peuvent être « trop proches » pour former une figure à eux deux --- c'est la
+possibilité que ce départ ménage.
+
+\pagerange{31}{34}
+\section*{VIII. 12 juin : troisième départ (pages 31 à 40)}
+
+« Depuis hier j'ai pas mal réfléchi à la construction des pseudo-disques
+topologiques. » Il en ressort que si $(D, \partial D)$ est un pseudo-disque, les
+lieux de $D \smallsetminus \partial D$ ne sont pas seulement des parties de
+l'intérieur satisfaisant certaines conditions, mais doivent être accompagnés
+d'une donnée supplémentaire liée au bord $\partial D$\footnote{La seconde moitié
+de l'alinéa est écrite vite ; seuls les termes mathématiques sont sûrs. Le
+pseudo-disque n'est pas défini dans le dossier, et l'on ne précise pas ici la
+donnée supplémentaire, que la page ne dit pas.}. Une contrée ne peut donc pas
+être une donnée de lieux et de familles de parties de lieux, du moins pour une
+contrée « topologique combinatoire », et il faut prendre plutôt
+\[
+C = (\mathcal{M}, \ll, R_{\mathcal{M}}, \mathfrak{F}),
+\]
+multistrates, raffinement, compatibilité, et un ensemble $\mathfrak{F}$ de
+parties de $\mathcal{M}$, les figures --- deux multistrates étant compatibles
+quand elles appartiennent à une même figure, dit la marge.
+
+Suit la phrase de méthode : plutôt que de dégager l'axiomatique, dégager une
+terminologie géométrique des contrées, noter au passage les axiomes, et
+n'axiomatiser qu'ensuite\footnote{Deux lignes très rapides ; la lecture n'en
+retient que l'intention, qui est sûre.}. Une \emph{sous-contrée} est une partie
+$\mathcal{M}'$ de $\mathcal{M}$ fermée pour $\ll$, munie des relations
+induites, et la page prévient que la stabilité des axiomes par passage à une
+sous-contrée n'est pas évidente.
+
+\subsection*{Les axiomes « particulièrement cruciaux »}
+
+\begin{quote}
+\textbf{Cont 1} (page 33). \emph{La relation $X \leq Y$, définie par « $X \ll
+Y$ et $X$ compatible à $Y$ », est une relation d'ordre.}
+\end{quote}
+
+Elle est réflexive et antisymétrique d'elle-même ; ce que l'axiome demande, c'est
+la transitivité, c'est-à-dire que $X \leq Y \leq Z$ entraîne la compatibilité
+de $X$ et de $Z$. Puis, pour les figures :
+\begin{enumerate}
+\item[Fig 1] pour $X \in \mathcal{M}$, $\mathcal{M}_{\leq X}$ est une figure,
+la \emph{figure élémentaire} de $X$ ;
+\item[Fig 2] les éléments d'une figure sont deux à deux compatibles, et une
+figure est fermée vers le bas pour $\leq$ ;
+\item[Fig 3] une partie fermée d'une figure est une figure ; la partie vide en
+est une ;
+\item[Fig 4] si tout élément de $F$ est compatible à tout élément de $G$,
+$F \cup G$ est une figure, la \emph{figure réunion}\footnote{Les quatre axiomes
+sont d'abord numérotés « Cont », numéros biffés et remplacés par « Fig » ; la
+page écrit, dans Fig 1, « des $Y \in X$ » pour $Y \leq X$.}.
+\end{enumerate}
+Une contrée est \emph{finitiste} si ses figures finies sont exactement les
+parties finies de $\mathcal{M}$, fermées pour $\leq$ et formées de multistrates
+deux à deux compatibles ; elle est alors connue par $\ll$ et $R_{\mathcal{M}}$
+seules, et la page 34 pose la question des conditions sur ces deux relations
+pour que ces configurations satisfassent les axiomes\footnote{Que de telles
+parties soient des figures se déduit de Fig 1 et Fig 4 par récurrence, dès que
+la compatibilité passe aux sous-multistrates ; c'est le cas quand elle est
+définie, comme dans la marge de la page 32, par l'appartenance à une même
+figure. Un corollaire de la page 34 qui l'affirmait pour des raffinements
+$X' \ll X$, $Y' \ll Y$ est barré : il serait faux.}.
+
+\pagerange{35}{37}
+\subsection*{Dimension, lieux, ombres (pages 35 à 37)}
+
+\begin{quote}
+\textbf{Cont}$'_{3}$ (page 35). \emph{Pour tout $X$, $\mathcal{M}_{\leq X}$ est
+fini.}
+
+\textbf{Cont 3} (page 35). \emph{Pour tout $X$, la dimension géométrique
+$\sup_{X' \ll X} \dim \mathrm{comb}\, \mathcal{M}_{\leq X'}$ est finie.}
+\end{quote}
+
+Les \emph{lieux} sont les éléments de $\mathcal{M}$ minimaux pour $\ll$ ;
+l'ombre $\mathcal{L}_{X}$ et l'ombre ouverte $\mathcal{L}^{\circ}_{X}$ sont
+définies comme à la page 21, et l'ombre d'une figure est $\mathcal{L}_{F} =
+\bigcup_{X \in F} \mathcal{L}_{X}$. Les axiomes Cont 3 et Cont 4 des pages 21
+et 22 reviennent sous le nom de \textbf{Cont 4} (page 35) : a) les ombres
+ouvertes sont non vides ; b) celles de deux multistrates compatibles distinctes
+sont disjointes.
+
+\textbf{Scholie} (pages 36 et 37). \emph{Soit $F$ une figure.}
+\begin{enumerate}
+\item[a)] \emph{$X \mapsto \mathcal{L}_{X}$ est injective sur $F$, et son image
+est une famille admissible de parties de $\mathcal{L}$ au sens de Cont 2 (page
+26) ;}
+\item[b)] \emph{les $\mathcal{L}^{\circ}_{X}$, $X \in F$, forment une partition
+de $\mathcal{L}_{F}$ indexée par $F$ ;}
+\item[c)] \emph{les conditions (i) à (iv) de la page 23 sont équivalentes ;}
+\item[d)] \emph{$F' \mapsto \mathcal{L}_{F'}$ met les sous-figures de $F$ en
+bijection avec les parties de $\mathcal{L}_{F}$ fermées pour la famille
+admissible des $\mathcal{L}_{X}$.}
+\end{enumerate}
+
+C'est le Scholie de la page 23, avec cette précision que l'ombre ouverte de $X$
+est la strate ouverte de $\mathcal{L}_{X}$ dans la famille admissible --- d'où
+les noms d'\emph{ombre ouverte} et de \emph{bord d'ombre} que la page leur
+donne. Pour que tout lieu de $\mathcal{L}_{X}$ soit dans une ombre ouverte, il
+faut un élément minimal, que Cont$'_{3}$ fournit\footnote{Comme à la page 21 ;
+on l'ajoute. La formule du d) est surchargée et sa lecture douteuse.}. La
+Proposition de la page 37 vérifie qu'une sous-contrée $\mathcal{M}'$, munie des
+figures de $\mathcal{M}$ contenues dans $\mathcal{M}'$, satisfait encore Cont 1
+à Cont 4, Fig 1 à Fig 4 et Cont$'_{3}$, avec les mêmes dimensions et les mêmes
+ombres, et qu'une sous-contrée d'une contrée finitiste l'est aussi.
+
+\pagerange{38}{40}
+\subsection*{Disjonction, contrées induites, subdivision (pages 38 à 40)}
+
+Deux multistrates $X$, $Y$ sont \emph{disjointes} si elles sont compatibles
+et n'ont aucune sous-multistrate commune ; deux figures, si elles sont
+compatibles et d'intersection vide. Une figure $F$ \emph{raffine} une figure
+$G$ si tout élément de $F$ raffine un élément de $G$\footnote{La page note
+cette relation entre figures par un triple chevron, $F \lll G$ ; on garde $\ll$,
+qui coïncide avec elle sur les figures élémentaires.}.
+
+\begin{quote}
+\textbf{Proposition} (page 38). \emph{$F$ est une sous-figure de $G$ si et
+seulement si $F$ raffine $G$ et lui est compatible.}
+\end{quote}
+
+En effet, pour $X \in F$ il existe $Y \in G$ avec $X \ll Y$, et $X$, $Y$ sont
+compatibles, donc $X \leq Y$ et $X \in G$ par Fig 2.
+
+\begin{quote}
+\textbf{Cont 5} (page 39). \emph{Si $X$ et $Y$ sont disjointes, tout
+raffinement de $X$ est disjoint de tout raffinement de $Y$.}
+
+\textbf{Cont 6} (page 39). \emph{Si $\mathcal{L}_{X} \cap \mathcal{L}_{Y} =
+\emptyset$ et si tout lieu de $\mathcal{L}_{X}$ est compatible à tout lieu de
+$\mathcal{L}_{Y}$, alors $X$ et $Y$ sont disjointes.}
+\end{quote}
+
+Cont 5 dit en particulier que deux multistrates disjointes n'ont aucun
+raffinement commun, et il s'étend aux figures : deux raffinements de figures
+disjointes sont disjoints (Corollaire, page 39). Cont 6 dit que la disjonction
+se lit sur les lieux. Les deux
+passent aux sous-contrées. Pour une figure $F$, la \emph{contrée induite}
+$C_{F}$ est formée des multistrates qui raffinent $F$, la \emph{contrée
+résiduelle} $C_{\complement F}$ de celles qui sont disjointes de $F$, fermée
+pour $\ll$ grâce à Cont 5\footnote{La page définit encore une contrée
+résiduelle « de $F$ dans $G$ », $C_{F} \cap C_{\complement G}$, dont les lettres
+sont surchargées ; l'exposant de $\mathcal{M}^{\sharp}_{\ll}$ est douteux.}.
+
+\begin{quote}
+\textbf{Définition} (page 40). Une \emph{subdivision} de $F$ est un raffinement
+de $F$ maximal pour l'inclusion parmi les raffinements de $F$.
+\end{quote}
+
+C'est la définition de la page 15, transportée dans la contrée abstraite.
+
+\pagerange{41}{44}
+\section*{IX. Ce que le raffinement ne permet pas (pages 41 à 44)}
+
+\textbf{Proposition} (page 41). \emph{Supposons Cont 6 et Cont 7 ci-dessous.
+Pour un raffinement $F'$ de $F$, sont équivalents :}
+\begin{enumerate}
+\item[a)] \emph{$F'$ est une subdivision de $F$ ;}
+\item[b)] \emph{aucune multistrate qui raffine $F$ n'est disjointe de $F'$ ;}
+\item[c)] \emph{aucun lieu de $\mathcal{L}_{F}$ n'est disjoint de $F'$.}
+\end{enumerate}
+
+a) $\Rightarrow$ b) : si $X \ll F$ est disjointe de $F'$, la figure $F' \cup
+\mathcal{M}_{\leq X}$ raffine $F$ et contient strictement $F'$\footnote{La page
+écrit $F \cup F_{X}$.}. b) $\Rightarrow$ c) est immédiat, les lieux étant des
+multistrates. c) $\Rightarrow$ a) : si $F' \subsetneq F'' \ll F$, choisissons
+$X \in F'' \smallsetminus F'$ et $x \in \mathcal{L}^{\circ}_{X}$ ; alors $x \in
+\mathcal{L}_{F}$, et il faut voir que $x$ est disjoint de $F'$. La page s'arrête
+là-dessus --- « il faut un axiome pour l'assurer » --- et pose :
+
+\begin{quote}
+\textbf{Cont 7} (page 41). \emph{Si $X \neq Y$ sont compatibles, tout lieu de
+$\mathcal{L}^{\circ}_{X}$ est disjoint de tout lieu de
+$\mathcal{L}^{\circ}_{Y}$.}
+\end{quote}
+
+Avec lui, $x$ est disjoint de tous les lieux des ombres ouvertes des éléments
+de $F'$, qui recouvrent $\mathcal{L}_{F'}$, et Cont 6 conclut que $x$ est
+disjoint de $F'$. C'est aussi le Corollaire 1 de la page 41 : si $F'$ est une
+sous-figure de $F$ et $X \in F \smallsetminus F'$, tout lieu de
+$\mathcal{L}^{\circ}_{X}$ est disjoint de $F'$\footnote{La page invoque Cont 6 entre parenthèses et note « à
+vérifier » en marge ; l'enchaînement est le nôtre. La page 52 résume Cont 7 en
+une phrase : « deux lieux de strates ouvertes différentes sont disjoints ». Dans le Corollaire 1, « disjoint » est écrit au-dessus de « compatible » biffé, et lu avec doute.}.
+
+\subsection*{Une application qui manque, et le raffinement induit}
+
+La page 42 veut associer à chaque élément $X'$ d'un raffinement $F'$ de $F$
+l'unique $X \in F$ dont l'ombre ouverte contient celle de $X'$ --- la version,
+dans la contrée, de la définition topologique de la page 14 ---, prend pour
+$X$ un élément minimal de $F$ raffiné par $X'$, et ne parvient pas à montrer
+que $\mathcal{L}^{\circ}_{X'} \subset \mathcal{L}^{\circ}_{X}$ : « Il semblerait
+qu'il manque quelque chose. » Ce qui manque est posé à la page 43 :
+
+\begin{quote}
+\textbf{Cont 8} (page 43). \emph{Soient $Y \ll X$ et $X' < X$. Les $Y' \leq Y$
+qui raffinent $X'$ forment une sous-figure $R_{X'}$ de $\mathcal{M}_{\leq Y}$,
+le \textbf{raffinement de $X'$ induit par $Y$}, et tout raffinement commun de
+$Y$ et de $X'$ raffine $R_{X'}$ : $R_{X'}$ est la borne inférieure de
+$\mathcal{M}_{\leq Y}$ et de $\mathcal{M}_{\leq X'}$ pour $\ll$.}
+\end{quote}
+
+En particulier $\mathcal{L}_{Y} \cap \mathcal{L}_{X'} = \bigcup_{Y' \in R_{X'}}
+\mathcal{L}_{Y'}$, et, s'il n'existe pas de $X_{1}$ avec $Y \ll X_{1} < X$, on
+a $\mathcal{L}^{\circ}_{Y} \subset \mathcal{L}^{\circ}_{X}$ : un lieu $x$ de
+$\mathcal{L}^{\circ}_{Y}$ qui serait dans $\mathcal{L}_{X'}$, $X' < X$, serait
+dans l'ombre d'un $Y' \in R_{X'}$, donc $Y' = Y$ par définition de l'ombre
+ouverte, et $Y \ll X' < X$. D'où, en prenant pour chaque strate de $Y$ la plus
+petite strate de $X$ qu'elle raffine :
+
+\begin{quote}
+\textbf{Corollaire} (page 44). \emph{Si $F'$ raffine $F$, toute ombre ouverte
+d'un élément de $F'$ est contenue dans l'ombre ouverte d'un unique élément de
+$F$.}
+\end{quote}
+
+\subsection*{L'objection des pseudo-disques}
+
+« Je viens de m'apercevoir » que, dans le cas des pseudo-disques, deux lieux
+disjoints $x$, $y$ de l'intérieur ne doivent pas être des \emph{nœuds} d'une
+même subdivision --- les nœuds d'une figure étant ses éléments qui sont des
+lieux, $F \cap \mathcal{L}$. La figure $\{x, y\}$, dont chaque élément raffine
+le disque, ne doit donc pas compter comme un raffinement, ou en tout cas ne
+définit pas de subdivision\footnote{La construction de la première phrase est
+celle de la page, et sa lecture est en partie douteuse ; on en garde la
+conclusion, qui est sûre.}. Il est alors inapproprié de dire que $F'$ raffine
+$F$ quand chaque élément de $F'$ raffine un élément de $F$ : il vaut mieux
+prendre pour primitive la \emph{subdivision} d'une figure et définir un
+\emph{raffinement} comme une sous-figure d'une subdivision\footnote{C'est la
+caractérisation classique des sous-polyèdres en topologie linéaire par morceaux
+: une partie d'un polyèdre $|K|$ en est un sous-polyèdre si et seulement si
+c'est un sous-complexe d'une subdivision de $K$ (voir C.~Rourke et
+B.~Sanderson, 1972). Le rapprochement est le nôtre.}. Toute la suite du dossier
+est bâtie sur ce renversement.
+
+\pagerange{45}{51}
+\section*{X. Quatrième départ : la subdivision primitive (pages 45 à 51)}
+
+« Donc, nouveau départ ! » Une contrée est un triple $(\mathcal{M}, \mathfrak{F},
+\Sigma)$ : un ensemble de multistrates, un ensemble $\mathfrak{F} \subset
+\mathfrak{P}(\mathcal{M})$ de figures, et une relation $\Sigma$ sur
+$\mathfrak{F}$, « $F'$ subdivise $F$ ».
+
+\begin{quote}
+\textbf{C 1} (page 45). \emph{Toute $X \in \mathcal{M}$ appartient à une plus
+petite figure $F_{X}$, et $X \neq Y$ entraîne $F_{X} \neq F_{Y}$.} On pose
+$X \leq Y$ si $F_{X} \subset F_{Y}$, c'est-à-dire $X \in F_{Y}$, et l'on veut
+que ce soit un ordre.
+\end{quote}
+
+Toute figure est alors fermée vers le bas pour $\leq$. Deux figures sont
+\emph{compatibles} si leur réunion est une figure, deux multistrates si leurs
+figures élémentaires le sont.
+
+\begin{quote}
+\textbf{C 2} (page 46). \emph{$F$ et $G$ sont compatibles si et seulement si
+tout élément de $F$ est compatible à tout élément de $G$.}
+
+\textbf{C 3} (page 46). \emph{Toute partie d'une figure fermée pour $\leq$ est
+une figure.}
+\end{quote}
+
+En particulier la figure vide existe dès que $\mathcal{M} \neq \emptyset$, et
+on la suppose aussi quand $\mathcal{M} = \emptyset$ (la \emph{contrée vide}).
+
+\begin{quote}
+\textbf{Définition} (page 47). $G$ \emph{raffine} $F$, $G \ll F$, s'il existe une
+subdivision $F'$ de $F$ dont $G$ est une sous-figure.
+\end{quote}
+
+Pour que ce soit un ordre, la page pose un axiome C 4 sous une forme qu'elle
+corrige aussitôt en marge (« Corriger », puis « OK ») :
+
+\begin{quote}
+\textbf{C 4} (page 47, forme corrigée). \emph{Soient $G$ une sous-figure de $F$
+et $G'$ une subdivision de $G$. Il existe une subdivision de $F$ qui induit
+$G'$ sur $G$, et $G' \cap F \subset G$.}
+\end{quote}
+
+La forme écrite dans le corps de la page --- « $G' \cup (F \smallsetminus G)$
+est une subdivision de $F$ » --- ne peut pas être gardée : $F \smallsetminus G$
+n'est pas fermée en général\footnote{Si $F$ est un triangle et $G$ l'une de ses
+arêtes, coupée en deux par $G'$, la multistrate « face » de $F \smallsetminus
+G$ a pour bord l'arête entière, qui n'est plus dans $G' \cup (F \smallsetminus
+G)$. Une subdivision de $F$ qui induit $G'$ doit remplacer aussi la face par
+une face dont le bord est subdivisé ; c'est ce que dit la correction de la
+marge.}. Les corollaires notés « OK » en marge sont : toute subdivision d'une
+sous-figure est induite par une subdivision de $F$, et $\ll$ est une relation
+d'ordre. Le second n'est pas démontré, et ne peut pas l'être avec ce qui
+précède : l'antisymétrie de $\ll$ demandera un axiome (pages 73 à 83).
+
+\begin{quote}
+\textbf{Corollaire 3} (page 48). \emph{$G$ est une sous-figure de $F$ si et
+seulement si $G$ est compatible à $F$ et la raffine.}
+\end{quote}
+
+Si $G \subset F'$, subdivision de $F$, et $H = F \cup G$ est une figure, la
+forme corrigée de C 4, appliquée à la sous-figure $F$ de $H$ et à sa subdivision
+$F'$, donne $G \subset F' \cap H \subset F$. Pour une multistrate, on retrouve
+l'équivalence des pages 15, 17 et 33 : $X \leq Y$ si et seulement si $X \ll Y$
+et $X$ compatible à $Y$.
+
+Deux figures sont \emph{disjointes} si elles sont compatibles et d'intersection
+vide, deux multistrates si leurs figures élémentaires le sont. Les axiomes
+suivants règlent les rapports de la subdivision avec le reste :
+
+\begin{quote}
+\textbf{C 5} (page 49). \emph{Si $F'$ subdivise $F$, une figure est disjointe
+de $F$ si et seulement si elle l'est de $F'$.}
+
+\textbf{C 6} (page 49). \emph{Si $F'$ subdivise $F$ et $G \leq F$, il existe
+une unique subdivision $G'$ de $G$ contenue dans $F'$, la \textbf{subdivision
+induite} $F'|G$, formée des $X \in F'$ qui raffinent $G$.}
+
+\textbf{C 7} (pages 49 et 50). \emph{Si $F = \bigcup F_{i}$ est réunion de
+sous-figures et si les subdivisions $F'_{i}$ de $F_{i}$ induisent les mêmes
+subdivisions sur les $F_{i} \cap F_{j}$, il existe une unique subdivision $F'$
+de $F$ avec $F'|F_{i} = F'_{i}$ pour tout $i$.}
+\end{quote}
+
+Par C 5 et C 4, la réunion d'une subdivision de $F$ et d'une figure disjointe
+$G$ subdivise $F \cup G$, et des raffinements de figures disjointes sont
+disjoints\footnote{La page écrit $G' \ll F$ pour $G' \ll G$.} ; par C 7, deux
+subdivisions de $F$ qui induisent la même subdivision sur chaque multistrate
+sont égales.
+
+\begin{quote}
+\textbf{Proposition} (page 50). \emph{Soient $G \leq F$ et $F' \ll F$. Alors
+$G' = \{X \in F' \mid X \ll G\}$ est une sous-figure de $F'$ qui raffine $G$,
+et c'est la plus grande sous-figure de $F'$ qui raffine $G$.}
+
+\textbf{Corollaire} (page 51). \emph{$G'$ est la borne inférieure de $F'$ et
+de $G$ pour $\ll$ : toute figure qui raffine $F'$ et $G$ raffine $G'$.}
+\end{quote}
+
+Pour la Proposition, il y a quelque chose à prouver, puisque des éléments qui
+raffinent $G$ ne forment pas pour autant un raffinement de $G$. Soit
+$\overline{F}'$ une subdivision de $F$ contenant $F'$, et $\overline{G}' =
+\overline{F}'|G$ (C 6) ; alors $G' = F' \cap \overline{G}'$ est une
+sous-figure de $\overline{G}'$, donc raffine $G$\footnote{La page écrit « la plus
+grande sous-figure de $F'$ qui raffine $G'$ » pour $G$.}. Le Corollaire est
+démontré à la page 51 au moyen de quatre schémas de subdivisions successives
+et de C 4 « revu et corrigé », et se termine par « qed, ouf ! (C'était
+l'ancien Cont 8) » --- c'est en effet l'axiome Cont 8 de la page 43, devenu
+théorème\footnote{La démonstration établit qu'une figure $\Phi$ qui raffine
+$F'$ et $G$ est contenue dans la subdivision $\overline{G}'$ de $G$ ; le pas
+qui en tire $\Phi \ll G'$ n'est pas écrit, et on ne le refait pas ici. Les
+schémas de la page ne sont pas redessinés.}.
+
+\pagerange{52}{55}
+\section*{XI. 13 juin : cinquième départ, l'ensemble ordonné des figures (pages 52 à 60)}
+
+Le 13 juin, il fait le compte des anciens axiomes qui restent à exprimer --- la
+dimension finie (Cont 3), l'admissibilité (Cont 4), la disjonction lue sur les
+lieux (Cont 6), Cont 7 --- puis : « avant de continuer, je vais encore une fois
+changer d'optique ! »
+
+\begin{quote}
+\textbf{Définition} (page 52). Une \emph{contrée} est un ensemble
+$\mathfrak{F}$ de \emph{figures} muni de deux relations d'ordre, $\leq$
+(\emph{sous-figure}, notée aussi $\subset$) et $\preccurlyeq$
+(\emph{subdivision}) :
+\[
+\mathcal{C} = (\mathfrak{F}, \leq, \preccurlyeq).
+\]
+\end{quote}
+
+On commence par $\leq$ seul.
+
+\begin{quote}
+\textbf{C 1} (page 53). a) $\mathfrak{F} \neq \emptyset$ ; b) \emph{toute
+famille majorée de figures a une borne supérieure.}
+\end{quote}
+
+La famille vide est majorée, d'où un plus petit élément, la \emph{figure vide}
+$\emptyset_{\mathfrak{F}}$. Deux figures sont \emph{compatibles} si elles sont
+majorées, et leur borne supérieure est leur \emph{réunion} $F \cup G$ ; une
+\emph{configuration} est une famille majorée. Une figure est
+\emph{irréductible} si $F = \mathrm{Sup}_{i} F_{i}$ entraîne $F = F_{i}$ pour un
+$i$ ; la figure vide, borne supérieure de la famille vide, ne l'est pas. Les
+figures irréductibles sont les \emph{multistrates}, leur ensemble est
+$\mathcal{M}$, et les multistrates majorées par $F$ sont ses \emph{strates},
+d'ensemble $\overline{F}$\footnote{En termes actuels : les éléments
+complètement sup-irréductibles de l'ensemble ordonné $(\mathfrak{F}, \leq)$.
+Le nom est le nôtre.}.
+
+\begin{quote}
+\textbf{C 2} (page 54). \emph{Toute figure est la borne supérieure de ses
+strates.}
+\end{quote}
+
+L'application $F \mapsto \overline{F}$, de $\mathfrak{F}$ dans
+$\mathfrak{P}(\mathcal{M})$, est alors injective et identifie $(\mathfrak{F},
+\leq)$ à l'ensemble $\Phi$ des $\overline{F}$ ordonné par inclusion. La page
+ajoute qu'elle transforme les bornes supérieures en réunions, et que $\Phi$ est
+donc stable par réunion de familles majorées. Pour cela il faut une hypothèse
+que C 1 et C 2 ne donnent pas : qu'une strate de $\mathrm{Sup}_{i} F_{i}$ soit
+majorée par l'un des $F_{i}$, autrement dit que les multistrates soient
+\emph{sup-premières}\footnote{Le treillis « diamant » $M_{3}$ --- un plus petit
+élément, trois atomes $a$, $b$, $c$, un plus grand élément $1$ --- satisfait C 1
+et C 2, ses irréductibles étant $a$, $b$, $c$ ; mais $\overline{a \vee b} =
+\{a, b, c\} \neq \{a\} \cup \{b\}$. Avec l'hypothèse, $(\mathfrak{F}, \leq)$ est
+de la forme décrite à la page 57 ; c'est l'analogue, pour ces ensembles
+ordonnés, de la représentation d'un treillis distributif fini par l'ensemble
+ordonné de ses sup-irréductibles (G.~Birkhoff, 1937 ; G.~Raney, 1952, pour le
+cas infini). L'hypothèse vaut dans le modèle topologique, où sous-figures et
+réunions sont ensemblistes. Les feuillets ne citent personne.}. On la suppose
+dans tout ce qui suit, jusqu'à la page 68.
+
+Réciproquement (page 55), si $\mathcal{M}$ est un ensemble et $\Phi \subset
+\mathfrak{P}(\mathcal{M})$ une famille non vide, stable par réunion de familles
+majorées, telle que tout $X$ appartienne à un plus petit $A_{X} \in \Phi$, alors
+$(\Phi, \subset)$ satisfait C 1 et C 2, ses irréductibles sont les $A_{X}$, et
+$X \mapsto A_{X}$ identifie $\mathcal{M}$ à l'ensemble de ses multistrates ; une
+figure s'identifie alors à l'ensemble de ses strates. On ordonne
+$\mathcal{M}$ par $\leq$, « jamais par $\preccurlyeq$ ! ».
+
+\pagerange{56}{60}
+\subsection*{Sous-figures, lieux, disjonction, compatibilité (pages 56 à 60)}
+
+\begin{quote}
+\textbf{Proposition} (page 56). a) \emph{Les sous-figures de $F$
+s'identifient, par $F' \mapsto \overline{F}'$, aux parties de $\overline{F}$
+fermées vers le bas.} b) \emph{Deux figures, et plus généralement une famille
+non vide de figures, ont une borne inférieure, et $\overline{F \wedge G} =
+\overline{F} \cap \overline{G}$.}
+\end{quote}
+
+Les \emph{lieux} sont les figures minimales parmi les figures non vides ; ils
+sont irréductibles, et ce sont aussi les éléments minimaux de $\mathcal{M}$.
+Deux figures sont \emph{disjointes} si elles sont compatibles et si $F \wedge G
+= \emptyset_{\mathfrak{F}}$.
+
+\begin{quote}
+\textbf{Proposition} (pages 56 et 57). \emph{Si $F$ et $G$ sont disjointes,
+$(F', G') \mapsto F' \cup G'$ est une bijection}
+\[
+\mathfrak{F}_{\leq F} \times \mathfrak{F}_{\leq G} \xrightarrow{\ \sim\ }
+\mathfrak{F}_{\leq F \cup G},
+\]
+\emph{d'inverse $H' \mapsto (H' \wedge F, H' \wedge G)$, et de même pour une
+configuration de figures deux à deux disjointes.}
+\end{quote}
+
+C'est clair en termes de $\Phi$, dit la page : $\overline{F \cup G}$ est la
+réunion disjointe de $\overline{F}$ et $\overline{G}$, entre lesquelles il n'y
+a aucune relation d'ordre, et ses parties fermées sont les couples de parties
+fermées\footnote{La page écrit $H \cap F$, $H \cap G$ pour $H' \cap F$, $H' \cap
+G$.}. D'où la forme définitive (page 57) : la donnée de $(\mathfrak{F}, \leq)$
+équivaut à celle d'un ensemble ordonné $\mathcal{M}$ et d'un ensemble $\Phi$ de
+parties fermées vers le bas, a) stable par passage aux parties fermées,
+b) contenant les $\mathcal{M}_{\leq X}$, c) contenant la partie vide. Et les
+parties fermées vers le bas de $\mathcal{M}$ correspondent bijectivement aux
+parties de $\mathfrak{F}$ fermées vers le bas et stables par les bornes
+supérieures qui existent, par $\mathfrak{F}' \mapsto \mathfrak{F}' \cap
+\mathcal{M}$ et $\mathcal{M}' \mapsto \{F \mid \overline{F} \subset
+\mathcal{M}'\}$.
+
+\begin{quote}
+\textbf{C 3} (page 58). \emph{Si toute strate de $F$ est compatible à toute
+strate de $G$, alors $F$ et $G$ sont compatibles.}
+\end{quote}
+
+La réciproque est évidente ; une figure est compatible à la réunion d'une
+configuration si et seulement si elle l'est à chacun de ses
+termes\footnote{Une première version de C 3, sur trois figures deux à deux
+compatibles, est barrée en haut de la page 58.}. La structure est alors portée
+par $(\mathcal{M}, \leq, R)$, où $R$ est la compatibilité des multistrates,
+réflexive, symétrique et héréditaire : $(X, Y) \in R$, $X' \leq X$, $Y' \leq Y$
+entraînent $(X', Y') \in R$. Une figure est \emph{finie} si elle a un nombre
+fini de strates, \emph{de type fini} si elle est la borne supérieure d'un nombre
+fini de strates ; les strates maximales d'une figure finie non vide sont ses
+\emph{composantes irréductibles}.
+
+\begin{quote}
+\textbf{Proposition} (pages 59 à 61). \emph{La donnée de $(\mathfrak{F}, \leq)$
+satisfaisant C 1, C 2, C 3, toutes les figures étant de type fini, équivaut à
+celle de $(\mathcal{M}, \leq, R)$, où $R$ est réflexive, symétrique et
+héréditaire et où toute partie fermée majorée de $\mathcal{M}$ est de type fini
+--- par exemple si les $\mathcal{M}_{\leq X}$ sont finis. Les figures sont
+alors les parties de $\mathcal{M}$ fermées, de type fini, et formées
+d'éléments deux à deux compatibles.}
+\end{quote}
+
+La page 61 en donne la forme finie : les $\mathcal{M}_{\leq X}$ finis, les
+figures étant les parties fermées finies dont les éléments sont deux à deux
+compatibles\footnote{La page 60 écrit « $A \in \mathcal{M}$ » pour $A \subset
+\mathcal{M}$, et la marge renvoie à « Cont 2 de p. 33 », c'est-à-dire à Fig 2.
+Le chapitre VI (dossier 156-6, page 16) se référera à ces conditions C 1 à C 3
+comme à ce que GF IV avait « explicité en long et en large ».}.
+
+\pagerange{61}{65}
+\section*{XII. Composantes connexes (pages 61 à 65)}
+
+Une figure $F$ est \emph{connexe} si $F = F' \amalg F''$, avec $F'$, $F''$
+disjointes, entraîne $F' = F$ ou $F'' = F$ ; \emph{$0$-connexe} si de plus elle
+n'est pas vide. Une \emph{composante connexe} de $F$ est une sous-figure
+$0$-connexe $F_{0}$ telle que $F = F_{0} \amalg F_{1}$. Par la bijection de la
+page 57, une sous-figure connexe de $F' \amalg F''$ est contenue dans l'une
+des deux, et deux composantes connexes sont égales ou disjointes\footnote{Le
+lemme est d'abord énoncé pour « une sous-figure connexe de $G$ », pour $F$. Un
+Corollaire 2 sur les familles de composantes, et l'aveu qui le suit --- « Je
+n'ai pas pu déduire que [toute] figure soit [réunion de ses] comp.\
+connexes » sauf pour les figures finies ---, sont barrés.}.
+
+\begin{quote}
+\textbf{Proposition} (pages 62 et 63). \emph{$F_{0} \leq F$ est une composante
+connexe de $F$ si et seulement si $\overline{F_{0}}$ est une composante
+connexe de l'ensemble ordonné $\overline{F}$, et $F$ est la réunion disjointe
+de ses composantes connexes.}
+\end{quote}
+
+Une décomposition $F = F' \amalg F''$ est en effet une partition de
+$\overline{F}$ en deux parties fermées sans relation d'ordre entre elles,
+c'est-à-dire en deux réunions de composantes du graphe de comparabilité de
+$\overline{F}$, et réciproquement. La Proposition donne ainsi ce que le
+corollaire biffé n'obtenait pas.
+
+Soit $\mathcal{M} = \coprod_{i \in I} \mathcal{M}_{i}$ la décomposition de
+l'ensemble ordonné $\mathcal{M}$ en composantes connexes, et, pour une figure
+$F$, $F_{i}$ la borne supérieure de ses strates situées dans
+$\mathcal{M}_{i}$. Alors $F$ est la somme disjointe des $F_{i}$, presque toutes
+vides si $F$ est de type fini ; l'ensemble $\mathfrak{F}_{i}$ des figures
+contenues dans $\mathcal{M}_{i}$ satisfait C 1, C 2, et C 3 si $\mathfrak{F}$
+le fait ; et $F \mapsto (F_{i})$ est une injection $\mathfrak{F} \to \prod_{i}
+\mathfrak{F}_{i}$ qui respecte l'ordre, les bornes supérieures et les bornes
+inférieures non vides. Pour que les familles presque nulles soient atteintes, il
+faut et il suffit de poser :
+
+\begin{quote}
+\textbf{C 4} (page 64). \emph{Deux multistrates situées dans deux composantes
+connexes distinctes de $\mathcal{M}$ sont compatibles.}
+\end{quote}
+
+L'image est alors formée des familles presque nulles (Corollaire 1), c'est tout
+$\prod \mathfrak{F}_{i}$ si $I$ est fini (Corollaire 2), et, si toutes les
+figures sont de type fini (resp.\ finies), il en est de même des
+$\mathfrak{F}_{i}$ et l'image est exactement l'ensemble des familles presque
+nulles (Corollaire 3 et Lemme de la page 65). La page propose aussi un
+\textbf{C 4 bis} renforcé, où toute famille $(F_{i}) \in \prod \mathfrak{F}_{i}$
+provient d'une figure\footnote{C 4 bis et l'hypothèse que toutes les figures
+sont de type fini s'excluent dès que $I$ est infini ; ce sont deux options, non
+deux axiomes à cumuler.}. On note $\pi_{0}(F)$, $\pi_{0}(\mathcal{M})$, et
+$\pi_{0}(\mathcal{C})$ pour la contrée, en avertissant que ce dernier n'est pas
+le $\pi_{0}$ de l'ensemble ordonné $(\mathfrak{F}, \leq)$, qui est connexe
+puisqu'il a un plus petit élément, mais celui qui tient compte des bornes
+supérieures\footnote{L'exposant de $\pi_{0}(\mathfrak{F})$ est douteux, et le
+troisième terme du triplet $(\mathfrak{F}, \leq, \ldots)$ n'est pas lu.}.
+
+\pagerange{65}{68}
+\section*{XIII. Supports et cosupports (pages 65 à 68)}
+
+Une figure est disjointe de chaque élément d'une famille $\Phi$ de figures si
+et seulement si ses strates le sont (C 3). On pose
+\[
+\mathrm{cosupp}_{\mathfrak{F}}(\Phi) = \{F \in \mathfrak{F} \mid F \
+\text{disjointe de tout}\ H \in \Phi\}, \qquad
+\mathrm{cosupp}_{\mathcal{M}}(\Phi) = \mathcal{M} \cap
+\mathrm{cosupp}_{\mathfrak{F}}(\Phi),
+\]
+qui se déterminent l'un l'autre ($F$ est dans le premier si et seulement si
+$\overline{F}$ est contenu dans le second), et
+$\mathrm{supp}(\Phi) = \mathrm{cosupp}(\mathrm{cosupp}(\Phi))$, le
+\emph{support}. Une partie est \emph{saturée} si elle est égale au cosupport de
+son cosupport ; toute partie est contenue dans une plus petite partie saturée,
+son support ; les parties saturées de $\mathfrak{F}$ et de $\mathcal{M}$ se
+correspondent par $\mathcal{M}_{0} = \mathfrak{F}_{0} \cap \mathcal{M}$, et le
+cosupport échange les parties saturées en renversant l'inclusion\footnote{En
+termes actuels : la relation symétrique « être disjoints » définit une
+connexion de Galois de $\mathfrak{P}(\mathcal{M})$ avec lui-même --- une
+\emph{polarité} au sens de G.~Birkhoff (\emph{Lattice Theory}, 1940) ---, et
+les parties saturées en sont les fermés. Le nom est le nôtre.}.
+
+L'ensemble $\Sigma$ des parties saturées, les \emph{supports virtuels}, a des
+bornes inférieures quelconques (les intersections) et des bornes supérieures
+quelconques (le saturé de la réunion). « Je présume qu'on a en fait une algèbre
+de Boole (\emph{ultra-stonienne}, à cause des Sup quelconques) », dont l'espace
+de Stone serait totalement discontinu et ultra-stonien\footnote{Comme aucune
+multistrate n'est disjointe d'elle-même, le cosupport est une orthocomplémentation
+de $\Sigma$, qui est donc un treillis complet orthocomplémenté ; il n'est pas
+distributif en général pour une relation symétrique quelconque. Quand $R$ est
+la relation toujours vraie, « disjointes » signifie « sans minorant commun »,
+et $\Sigma$ est l'algèbre des ouverts réguliers de l'ensemble ordonné
+$(\mathcal{M}, \leq)$ --- celle qu'on attache à un ensemble ordonné en théorie
+du forcing ---, qui est bien une algèbre de Boole complète. L'espace de Stone
+d'une algèbre de Boole complète est extrêmement discontinu (M.~H.~Stone, 1937 ;
+A.~Gleason, 1958) ; c'est vraisemblablement ce que la page appelle
+« ultra-stonien », plutôt que les espaces « hyperstoniens » de J.~Dixmier
+(1951), qui sont autre chose. La présomption reste non démontrée.}.
+
+Tout cela ne dépend que de $(\mathcal{M}, \leq, R)$, et non de l'ensemble des
+figures : le cosupport d'une partie $\mathcal{M}'$ de $\mathcal{M}$ est
+\[
+\mathrm{cosupp}_{\mathcal{M}}(\mathcal{M}') = \{X \in \mathcal{M} \mid (X, X')
+\in R \ \text{et}\ \mathcal{M}_{\leq X} \cap \mathcal{M}_{\leq X'} = \emptyset \
+\text{pour tout}\ X' \in \mathcal{M}'\}.
+\]
+La page écrit seulement $(X, X') \in R$\footnote{Ce qui définirait l'ensemble
+des multistrates compatibles à $\mathcal{M}'$, et non son cosupport. La
+disjonction s'exprime bien en termes de $(\mathcal{M}, \leq, R)$, ce que la page
+veut montrer, mais demande les deux conditions.}.
+Exemple : par C 4, une réunion de composantes connexes de $\mathcal{M}$ est
+saturée, son cosupport étant la réunion des autres composantes.
+
+\pagerange{69}{75}
+\section*{XIV. La subdivision et le raffinement (pages 69 à 75)}
+
+« J'en viens à la relation d'ordre $\preccurlyeq$ (subdivision), de nature très
+différente. » Elle n'a ni plus petit ni plus grand élément, deux subdivisions
+d'une même figure n'ont pas toujours de borne supérieure, mais parfois une
+borne inférieure. Deux subdivisions de $F$ qui admettent une subdivision
+commune reçoivent un nom (non pas « compatibles », le mot étant pris), et la
+contrée est dite \emph{modérée} quand deux subdivisions d'une même figure en
+admettent toujours une commune\footnote{Le mot souligné est surchargé et la
+page dit, pour « modérée », que deux subdivisions sont toujours « comparables »,
+lu avec doute. La note de marge, avec son schéma $F''' \preccurlyeq F'
+\preccurlyeq F$, $F''' \preccurlyeq F'' \preccurlyeq F$, et l'exemple des
+complexes simpliciaux, où deux subdivisions d'un même complexe ont toujours une
+subdivision commune, font lire la condition de subdivision commune ; deux
+subdivisions ne sont presque jamais comparables.}. Les propriétés qu'il a en
+vue portent sur les rapports de $\preccurlyeq$ avec $\leq$.
+
+\begin{quote}
+\textbf{C 5} (page 69). \emph{Si $F' \preccurlyeq F$, une figure est disjointe de
+$F$ si et seulement si elle l'est de $F'$} (il suffit de le demander pour les
+multistrates).
+\end{quote}
+
+Autrement dit, une subdivision a même support et même cosupport ; en
+conséquence, toute partie saturée de $\mathfrak{F}$ est fermée pour
+$\preccurlyeq$ aussi, donc une sous-contrée au sens suivant :
+
+\begin{quote}
+\textbf{Définition 1} (page 71). Une \emph{sous-contrée} de $\mathcal{C} =
+(\mathfrak{F}, \leq, \preccurlyeq)$ est une partie fermée pour $\leq$ et stable
+par bornes supérieures --- donc de la forme $\{F \mid \overline{F} \subset
+\mathcal{M}'\}$ pour une partie fermée $\mathcal{M}'$ de $\mathcal{M}$ --- et
+fermée pour $\preccurlyeq$.
+
+\textbf{C 6} (page 71). \emph{Soient $F' \preccurlyeq F$ et $G \leq F$.} (a)
+\emph{Il existe une unique figure $G'$ avec $G' \preccurlyeq G$ et $G' \leq
+F'$ ;} (b) \emph{les strates de $G'$ sont les strates de $F'$ qui raffinent
+$G$} ; (c) \emph{$G \mapsto G'$ commute aux bornes supérieures.}
+\end{quote}
+\[
+\begin{array}{ccc}
+G & \leq & F \\
+\succcurlyeq & & \succcurlyeq \\
+G' & \leq & F'
+\end{array}
+\]
+$G'$ est la \emph{subdivision de $G$ induite} par $F'$, ou la sous-figure de
+$F'$ induite par $G$\footnote{L'énoncé nomme $H$ la figure que son carré appelle
+$G'$ ; (c) est dans la marge, reliée à C 6 par une flèche. Le (b) fait appel au
+raffinement $\ll$, qui ne sera défini qu'à la page 73 ; il s'entend avec la
+définition de la page 73.}.
+
+\begin{quote}
+\textbf{C 7}$_{0}$ (page 72). \emph{Si $G \leq F$ et $G' \preccurlyeq G$, il
+existe $F' \preccurlyeq F$ qui induit $G'$.}
+\end{quote}
+
+L'énoncé symétrique, où l'on échange $\leq$ et $\preccurlyeq$, est faux : les
+sous-figures d'une subdivision ne sont pas toutes induites par des sous-figures
+de $F$. D'où la dissymétrie que la page relève : « $G$ est sous-figure d'une
+subdivision de $F$ » est conséquence de « $G$ est subdivision d'une sous-figure
+de $F$ » (par C 7$_{0}$), mais non l'inverse --- un petit segment intérieur à
+un triangle est sous-figure d'une subdivision du triangle sans être subdivision
+d'aucune de ses sous-figures\footnote{Ce passage de la page 72 est barré, mais
+l'énoncé en est juste ; l'exemple est le nôtre. Un C 7 qui choisirait $F'$
+canoniquement est annoncé et non écrit.}.
+
+\begin{quote}
+\textbf{Définition} (page 73). $G$ \emph{raffine} $F$, et l'on écrit $G \ll F$,
+s'il existe $F'$ avec $G \leq F' \preccurlyeq F$.
+\end{quote}
+
+La relation $\ll$ est réflexive et impliquée par $\leq$ et par $\preccurlyeq$.
+Elle est transitive : si $F \leq G' \preccurlyeq G$ et $G \leq H'
+\preccurlyeq H$, C 7$_{0}$ appliqué à $G \leq H'$ et $G' \preccurlyeq G$ donne
+$H'' \preccurlyeq H'$ avec $G' \leq H''$, d'où $F \leq H'' \preccurlyeq
+H$\footnote{La page dit que la démonstration « utilise C 6, ni C 5 ni C 7 », et
+son schéma, tel qu'il est lu, passe par une décomposition $G \preccurlyeq
+\overline{H} \leq H$ que le passage barré de la page 72 déclarait non
+toujours disponible. La démonstration par C 7$_{0}$ est la nôtre ; c'est
+d'ailleurs celle que la page 83 emploie.}. Pour l'antisymétrie, la page se
+ramène au
+
+\begin{quote}
+\textbf{Lemme} (page 73). \emph{Si $F \preccurlyeq K \leq F$, alors $K = F$.}
+\end{quote}
+
+et le déduit de C 5 et d'un corollaire : si $K < F$, il existe une multistrate
+disjointe de $K$ et non de $F$, de sorte que $K$ et $F$ n'ont pas même support,
+alors qu'une subdivision a même support. Mais ce corollaire n'est pas
+« formel » en termes de C 1 à C 4 (page 74) : si $\mathfrak{F}$ est l'ensemble
+de toutes les parties fermées d'un ensemble ordonné $\mathcal{M}$ qui a un plus
+petit élément, deux figures non vides ne sont jamais disjointes, et toutes ont
+le même support. Avec $\preccurlyeq$ discrète, C 6 et C 7 sont alors
+tautologiques (page 75). « On voit donc qu'il manque un axiome »\footnote{La page
+75 renvoie à Cont 4 (page 35) et à Cont 7 (page 41) comme à la forme cherchée ;
+un premier essai sur le raffinement induit y est barré.}.
+
+\pagerange{75}{80}
+\section*{XV. Raffinement induit et plus petite strate (pages 75 à 80)}
+
+« Il faut développer la notion de raffinement induit. »
+
+\begin{quote}
+\textbf{Proposition} (page 76). \emph{Soient $G \ll F$ et $F' \leq F$. Il
+existe une plus grande sous-figure $G'$ de $G$ qui raffine $F'$, le
+\textbf{raffinement de $F'$ induit} par $G$ ; ses strates sont les strates de
+$G$ qui raffinent $F'$, et $G'$ est la borne inférieure de $G$ et de $F'$ pour
+$\ll$.}
+\end{quote}
+\[
+\begin{array}{ccc}
+G & \ll & F \\
+\geq & & \geq \\
+G' & \ll & F'
+\end{array}
+\]
+
+La marge ajoute qu'on posera $G' = \emptyset$ si et seulement si $G$ est
+disjointe de $F'$, seul le sens direct n'étant pas évident\footnote{La page
+écrit « une plus grande sous-figure $F'$ de $G$ » pour $G'$. Une première
+démonstration, barrée, contient deux autres confusions de lettres.}. Écrivant
+$G \leq \overline{F} \preccurlyeq F$ et appliquant C 6 à $\overline{F}
+\preccurlyeq F$ et $F' \leq F$, on obtient $\overline{F}' \preccurlyeq F'$,
+$\overline{F}' \leq \overline{F}$, et $G' = G \wedge \overline{F}'$, qui
+raffine $F'$. Pour la propriété de borne inférieure, il faut montrer que $K \ll
+G$ et $K \ll F'$ entraînent $K \ll G'$, et l'on se ramène aux deux cas $G
+\preccurlyeq F$ et $G \leq F$. Le \textbf{Lemme 1} (page 77) traite le premier
+par C 6 (b)\footnote{En utilisant, sans le dire, la transitivité de
+l'induction que la page 49 notait au quatrième départ.} ; le \textbf{Lemme 2}
+(page 78), le second, commence par $K \leq \overline{G} \preccurlyeq G$ et
+s'arrête : « J'abandonne ici ! Il [vaut] mieux se reporter page 51 »\footnote{La
+lecture de « J'abandonne ici » est douteuse. La page 51 est le Corollaire du
+quatrième départ, qui établissait la même propriété dans l'autre cadre. Une
+note de marge affirme encore que $F' \mapsto G'$ commute aux bornes supérieures
+et aux bornes inférieures quelconques.}. La propriété d'Inf reste ainsi non
+démontrée dans ce départ.
+
+\begin{quote}
+\textbf{Proposition} (pages 78 et 79). \emph{Soient $F$ une figure et $X \in
+\mathcal{M}$ avec $X \ll F$.} a) \emph{Il existe une strate $Y$ de $F$ avec
+$X \ll Y$.} b) \emph{Parmi ces strates, il y en a une plus petite : celle dont
+aucune sous-multistrate stricte n'est raffinée par $X$.}
+\end{quote}
+
+a) Comme $F = \mathrm{Sup}_{i} Y_{i}$ sur ses strates, C 6 (c) donne $X =
+\mathrm{Sup}_{i} G_{i}$, où $G_{i}$ est la sous-figure de $X$ induite par
+$Y_{i}$ ; $X$ étant irréductible, $X = G_{i}$ pour un $i$, et $X \ll Y_{i}$.
+b) Un élément minimal existe si les multistrates sont de dimension
+combinatoire finie, « on y reviendra » ; il est le plus petit, parce que si
+$X \ll Y$ et $X \ll Y'$, la sous-figure de $X$ induite par $Y \wedge Y'$ est
+encore $X$, de sorte que $X$ raffine une strate de $Y \wedge Y'$, majorée par
+$Y$ et donc égale à $Y$ par minimalité\footnote{La page caractérise $Y$ par
+« la sous-figure de $X$ induite par $Y$ est $\neq X$ » ; la page 79 dit le
+contraire, et c'est elle qu'on suit : la sous-figure induite par $Y$ est $X$,
+celle qu'induit le bord de $Y$ ne l'est pas. L'argument d'unicité invoque « les
+propriétés fonctorielles des Inf pour $\ll$ », c'est-à-dire la commutation de
+l'induction aux bornes inférieures, affirmée en marge de la page 78 et non
+démontrée. La page conclut $Y = Y'$ pour un $Y'$ minimal ; pour un $Y'$
+quelconque on obtient $Y \leq Y'$.}.
+
+\begin{quote}
+\textbf{Corollaire} (page 80). \emph{Si $F \ll G$, l'application $\varphi :
+\overline{F} \to \overline{G}$ qui associe à une strate $X$ de $F$ la plus
+petite strate de $G$ qu'elle raffine est croissante.}
+\end{quote}
+
+C'est l'application que la page 42 cherchait sans pouvoir l'obtenir, et
+l'analogue de celle que le chapitre V construit le même jour pour les familles
+admissibles\footnote{Dossier 156-5, pages 19 et 20, daté du 14 juin.}.
+« Jusqu'à maintenant », remarque la page, les axiomes C 5, C 6, C 7 sont
+tautologiques quand $\preccurlyeq$ est l'égalité : « Il serait temps d'en venir
+à des propriétés plus spécifiques ! »
+
+\pagerange{80}{85}
+\section*{XVI. 14 juin : l'antisymétrie du raffinement (pages 80 à 85)}
+
+Le 14 juin, il renomme $\mathcal{M}_{\ll F}$ l'ensemble des multistrates qui
+raffinent $F$, « pour éviter confusion avec notion d'adhérence »\footnote{Il
+note cet ensemble $\widetilde{F}$, au lieu de $\overline{F}$ dans l'« ancien
+C 4 » de la page 47.}, et énonce un corollaire de la Proposition de la page 78
+qui reprend, dans ce départ, la relation encadrée $G' \cap F \subset G$ de la
+page 47 :
+
+\begin{quote}
+\textbf{Corollaire} (pages 80 à 82). \emph{Si $G \leq F$, toute strate de $F$
+qui raffine $G$ est une strate de $G$ :} $\overline{F} \cap \mathcal{M}_{\ll G} =
+\overline{G}$.
+\end{quote}
+
+La formule de la page est « soient $G' \preccurlyeq G \preccurlyeq F$, alors
+$\widetilde{G}' \cap \widetilde{F} \subset \widetilde{G}$ » ; lue ainsi, elle
+est triviale, puisque $\ll$ est transitive, et les deux signes sont repassés à
+l'encre. On suit la paraphrase qui la suit et la démonstration, qui partent
+d'une strate $X$ de $F$\footnote{La reconstitution est la nôtre. Pour deux
+figures $X \leq F$ et $G \leq F$, elles sont compatibles, et le corollaire est
+alors la forme, dans ce départ, du Corollaire 3 de la page 48 : une
+multistrate compatible à $G$ qui la raffine en est une strate.}. La
+démonstration (pages 80 à 82) passe par les sous-figures induites sur $X$ par
+$G$ et par une subdivision de $F$, se ramène à prouver $X \leq G_{X}$, et
+achève par l'axiome que voici, marqué « provisoire ! » :
+
+\begin{quote}
+\textbf{C 8 (0)} (page 82). \emph{Pour $X \in \mathcal{M}$ et $\Phi, \Psi \in
+\mathfrak{F}$ :} (a) \emph{$X \leq \Phi \preccurlyeq X$ entraîne $X = \Phi$ ;}
+(b) \emph{$X \preccurlyeq \Psi \leq X$ entraîne $X = \Psi$.}
+\end{quote}
+
+Il est nécessaire si $\ll$ doit être un ordre : dans les deux cas, chacun des
+deux termes raffine l'autre\footnote{Le haut de la page 81 et un premier énoncé
+de C 8, au bas, sont barrés ; plusieurs relations verticales des schémas de la
+page 81 sont de lecture douteuse. La page 82 ajoute que C 8 est aussi
+« suffisant », mot lu avec doute.}.
+
+\begin{quote}
+\textbf{Corollaire} (pages 82 et 83). \emph{Si $F \ll G$ et $G \ll F$, alors
+$F = G$.}
+\end{quote}
+
+On a $F \leq G' \preccurlyeq G \leq F' \preccurlyeq F$. C 7$_{0}$, appliqué à
+$G \leq F'$ et $G' \preccurlyeq G$, donne $H \preccurlyeq F'$ avec $G' \leq H$,
+d'où
+\[
+(*) \qquad F \leq H \preccurlyeq F .
+\]
+De $F = H$ viendraient $G' = F$ et $F' = F$, puis
+\[
+(**) \qquad F \preccurlyeq G \leq F ,
+\]
+et de là $F \leq G$ par le corollaire de la page 80 appliqué aux strates de $F$
+--- chacune raffine $G$, puisque $F \preccurlyeq G$ ---, donc $F = G$. Mais
+l'égalité $F = H$ dans $(*)$ est tirée de C 8 (a), qui ne vaut que pour une
+multistrate ; pour une figure quelconque elle n'est pas
+établie\footnote{La note de marge de la page 83, lue par fragments, semble le
+relever : « … de $F$ et $H$ … $H \preccurlyeq F \leq H$ ! ». « On a essayé ici
+de se débrouiller aussi bien que possible, sans axiomes et raisonnements de
+disjonction, genre C 5. »}.
+
+\subsection*{La structure dégagée}
+
+La page 84 en tire une structure abstraite.
+
+\textbf{Remarque} (pages 84 et 85). \emph{Soit $\mathfrak{F}$ un ensemble muni de
+deux ordres $\leq$ et $\preccurlyeq$ tels que :}
+\begin{enumerate}
+\item[a)] \emph{si $G \leq F$ et $F' \preccurlyeq F$, il existe un unique $G'$
+avec $G' \preccurlyeq G$ et $G' \leq F'$ ;}
+\item[b)] \emph{si $G \leq F$ et $G' \preccurlyeq G$, il existe un $F'$, non
+nécessairement unique, avec $F' \preccurlyeq F$ et $G' \leq F'$ ;}
+\item[c)] \emph{$F \leq G \preccurlyeq F$ entraîne $F = G$.}
+\end{enumerate}
+\emph{Alors (i) la relation $G \ll F$, « il existe $F'$ avec $G \leq F'
+\preccurlyeq F$ », est un ordre ; (ii) le carré de a) est cartésien pour $\ll$,
+c'est-à-dire $G' = \mathrm{Inf}_{\ll}(F', G)$ ; (iii) un carré cartésien pour
+$\geq$ l'est pour $\ll$.}
+
+a) est C 6, b) est C 7$_{0}$, c) est la forme de C 8 pour toutes les figures ;
+la condition c) s'écrit aussi $G \preccurlyeq F \leq G \Rightarrow F = G$, qui
+est la même aux noms près. (i) est démontré par ce qui précède : la
+transitivité par b), l'antisymétrie par b) et c), comme aux pages 82 et 83.
+(ii) et (iii) sont affirmés sans démonstration --- c'est la propriété d'Inf
+abandonnée à la page 78 ---, et une note de marge doute encore de la bonne
+définition\footnote{Les relations de (iii) sont surchargées et de lecture
+douteuse ; la note de marge n'est lue que par fragments.}.
+
+Il faudrait, conclut la page 85, séparer les axiomes des contrées en paquets :
+un paquet sur $\leq$ seul (C 1 à C 4) ; un paquet de propriétés « formelles »
+de $\leq$ et $\preccurlyeq$, sans questions de support ni de disjonction, qui
+assurent que les bornes supérieures commutent à l'induction sur une
+subdivision ; des axiomes de recollement des subdivisions ; un paquet d'axiomes
+de disjonction.
+
+\pagerange{86}{88}
+\section*{XVII. Recollement, lieux, ombres (pages 86 à 88)}
+
+\begin{quote}
+\textbf{C 8 --- Axiome de recollement des subdivisions} (page 86). \emph{Soit $F
+= \mathrm{Sup}_{i} F_{i}$, et pour tout $i$ une subdivision $F'_{i}$ de $F_{i}$,
+telles que $F'_{i}|F_{i} \wedge F_{j} = F'_{j}|F_{i} \wedge F_{j}$. Alors
+$\mathrm{Sup}_{i} F'_{i}$ existe et subdivise $F$.}
+\end{quote}
+
+C'est le C 7 de la page 49 transporté dans ce départ, qui « complète C 6 (c) »,
+et le nom « C 8 » est réemployé pour lui\footnote{Le C 8 (0) de la page 82, le
+C 8 barré de la page 78, et le Cont 8 de la page 43 sont trois autres énoncés ;
+d'où la règle, suivie ici, de toujours citer un axiome avec sa page.}. Pour une
+somme disjointe $F = \coprod F_{i}$, il donne
+\[
+\mathrm{Subdiv}(F) \simeq \prod_{i} \mathrm{Subdiv}(F_{i}).
+\]
+
+Puis le titre « Axiomes de disjonction et de support », et : « pour formuler
+les axiomes sous forme aussi forte et sensible que possible, c'est le moment
+d'introduire les lieux »\footnote{Une tentative, barrée au bas de la page 86 et
+en haut de la page 87, montrait l'équivalence, pour une figure non vide, de la
+minimalité pour $\preccurlyeq$ et de la minimalité pour $\ll$ parmi les figures
+non vides.}.
+
+\begin{quote}
+\textbf{Définition} (page 87). Un \emph{lieu} de la contrée est une figure non
+vide minimale pour $\ll$ parmi les figures non vides. On note $\mathcal{L}$
+l'ensemble des lieux.
+\end{quote}
+
+Un lieu $x$ est une multistrate --- ses strates sont des figures non vides qui
+le raffinent, donc lui sont égales --- et c'est un élément minimal de
+$\mathcal{M}$ pour $\leq$. La page note que la réciproque n'est pas vraie avec
+les axiomes posés jusqu'ici, et le sera pour les « contrées sans
+bords »\footnote{La notion n'est pas définie dans le dossier. Dans le modèle
+topologique des pages 1 à 19, la réciproque est fausse même pour un espace sans
+bord : un cercle, une seule strate, est minimal pour $\leq$, mais chacun de ses
+points le raffine (page 19). « Sans bords » doit donc vouloir dire autre chose
+que l'absence de bord des variétés.}.
+
+L'\emph{ombre} d'une figure $F$ est $\mathcal{L}_{F} = \{x \in \mathcal{L} \mid
+x \ll F\}$, et sa \emph{multiombre} est la famille de parties de $\mathcal{L}$
+\[
+\widehat{\mathcal{L}}_{F} = \{\mathcal{L}_{X} \mid X \in \overline{F}\} \subset
+\mathfrak{P}(\mathcal{L}).
+\]
+Ce sont les objets du premier et du troisième départ, et l'on garde leurs
+notations\footnote{La page note l'ombre $|F|$ et la multiombre
+$\widehat{F}$.}.
+On a $\mathcal{L}_{F} = \bigcup_{X \in \overline{F}} \mathcal{L}_{X}$ : c'est
+la Proposition de la page 78, qui fournit même une plus petite strate de $F$
+raffinée par un lieu donné.
+
+\begin{quote}
+\textbf{Proposition} (page 88). \emph{La multiombre d'une figure est une famille
+admissible de parties de $\mathcal{L}$ :} a) \emph{pour $A \in
+\widehat{\mathcal{L}}_{F}$, posant $\partial A = \bigcup_{B \subsetneq A} B$, on
+a $A^{\circ} = A \smallsetminus \partial A \neq \emptyset$ ;} b) \emph{pour $A,
+B \in \widehat{\mathcal{L}}_{F}$, $A \cap B$ est la réunion des $C \in
+\widehat{\mathcal{L}}_{F}$ contenus dans $A \cap B$.}
+\end{quote}
+
+C'est, dans le cinquième départ, le Scholie des pages 23 et 36 ; mais ici la
+démonstration ne suit pas, et une note de marge prévient qu'elle utilise
+quelque chose qui n'est pas lu. Le dossier s'arrête sur cet énoncé\footnote{La
+deuxième mouture de l'Analysis situs (chapitre VI, dossier 156-6) en fera un
+axiome, « At 8 » de sa page 45, et y reprendra la définition des lieux comme
+éléments minimaux pour $\ll$ (sa page 54) ; c'est ce qu'en disent les notes de
+sa transcription.}. La boucle est bouclée sans être fermée : la page 24
+retrouvait la contrée à partir des ombres de ses multistrates ; la page 88
+voudrait montrer que ces ombres ont encore la forme d'une figure, cette fois à
+partir d'un cadre où les lieux ne sont plus primitifs, mais les derniers venus.
+
+\end{document}
