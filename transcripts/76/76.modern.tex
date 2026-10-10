@@ -1,0 +1,1799 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 76
+% (pages 1-62, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pp. 1-20), batch-02.fr.tex (pp. 21-40), batch-03.fr.tex (pp. 41-60) or
+% batch-04.fr.tex (pp. 61-62).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its four batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5). The four
+% transcriptions were themselves made in parallel, unchecked by a human, and
+% pages 15-20 were checked against the facsimile only at whole-sheet
+% resolution. The literature named in the footnotes is cited from memory and
+% was not checked against the sources; no priority is inferred from it.
+%
+% Scope. Pages 1, 10, 14, 34, 44, 46, 48 are blank; page 43 is a cover
+% (« 2-cartes cellulaires » struck, « cube combinatoire ») whose words head
+% the cube section. Every other page is read here.
+%
+% Spine. One question, asked three ways, then a model case:
+%   pp. 2-13    first draft, « Cartes coniques, cartes cellulaires, et ens. à
+%               opérateurs »: a cell complex as a graded poset F_* with the
+%               diamond axioms; its maximal flags as a set acted on by the
+%               cartographic group; filtered spaces; the « n-variété
+%               combinatoire » and the « n-complexe combinatoire » (the
+%               cascade of p. 38); n-cartes coniques; flag lattices,
+%               multicones, paracartes. Page 5 is cancelled.
+%   pp. 15-33   « géométries de drapeaux »: posets whose lower ideals are
+%               simplices (simplicial posets); dimension functions; total
+%               orders on simplices = semi-simplicial sets with condition (1);
+%               when the orders come from one order on the vertices; Ex 1
+%               (order complexes), Ex 2 (G-sets, flags of type H, the Lemme);
+%               presheaves on finite subsets of N.
+%   pp. 35-42   second draft, « Cartes cellulaires n-dim et groupes
+%               cartographiques »: n-admissible filtrations, categories F_n and
+%               F_n°, the functors E_n, E_n°, Th. 1-7 (stated, not proved),
+%               cascades, the multicone psi_n.
+%   pp. 45, 47  asides: small sets as finite geometries and orders of
+%               Chevalley groups; four « Sujets DEA ».
+%   pp. 49-62   « cube combinatoire »: the cube of a set with free involution,
+%               its face poset, flags, antipody, orientation, regular
+%               polytopes, conjugacy classes of Aut(C_n), the 3-cube and its
+%               four diagonals, the « cube gauche » (hemicube) and its
+%               automorphisms.
+%
+% Notation fixed for the whole document. G_n is the n-dimensional
+% cartographic group <sigma_0, ..., sigma_n | sigma_i^2, (sigma_i sigma_j)^2
+% for |i-j| >= 2> (n+1 generators), as on pp. 7 and 36; page 3's G_n (n
+% generators) is G_{n-1} here, page 13's G_i is G_{i-1}. sigma_i changes the
+% i-dimensional member of a flag. « Drapeau » is any chain; a complete flag is
+% « drapeau complet » (his « repère » on pp. 54-56). P*(I) the non-empty finite
+% subsets of I. For a 1-simplex z of a semi-simplicial set, s(z) and t(z) are
+% its first and last vertex; on a 2-simplex u, d_0 u, d_1 u, d_2 u are the faces
+% opposite vertices 0, 1, 2 (his delta_i on pp. 22-24 are not the standard
+% faces on D_1). On pp. 39-40 the page uses psi_n for two functors; here
+% rho_n : G_n-sets -> (Casc)_n (p. 39, and p. 40's rho_{n-1}) and psi_n :
+% (Casc)_n -> F_n (p. 40). Partial sections of B over I are Sp(B).
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% - p. 3: G_n is presented without sigma_alpha^2 = 1; it is not a Coxeter group
+%   of type A (consecutive generators satisfy no relation).
+% - p. 2: « condition des chaînes » with chains of length <= n is not enough
+%   for the poset to come from (F_alpha, I_alpha); the correct condition is
+%   that every covering raises the height by one (example given).
+% - p. 6: the « il faut et il suffit » for |F_*| to be a manifold is false as
+%   written (suspension of a torus); the upper links must be spheres too.
+% - p. 7: full faithfulness only on the isotopy category.
+% - p. 13, p. 16: functors written covariant are contravariant (restriction).
+% - p. 23: the correspondence is with (1) + transitivity (2°), not (2 bis).
+% - p. 24: delta_0 for delta_1. p. 25: (a)-(d) characterise more than Ex 1
+%   (boundary of a triangle); (a') + (d) does not give (a) (example).
+% - p. 35: « n-admissible » for (n-1)-admissible. p. 37: sigma_1 ... sigma_{n-2}
+%   for sigma_0 ... sigma_{n-2}.
+% - p. 38, Th. 1: the essential image as stated is right only for n <= 2; for
+%   n >= 3 cell boundaries and vertex links must be spheres (p. 42 says so).
+% - p. 45: the formula for P_{G/B} is inverted.
+% - p. 50: Isom_proj = Isom_aff fails for n = 1. p. 53: the centre of Aut(C) is
+%   {1, sigma} for every n >= 1. p. 54: sigma_i, 0 <= i <= n-1 (not 1..n).
+% - p. 55-56: « homogène » read with d_i counted downward, so that card Rep =
+%   d_0 ... d_{n-1}.
+% - p. 60: the injection is into Aut(Phi_0(C)/sigma).
+% - p. 61: the intersection formula read p(F ∩ F') ∪ p(F ∩ sigma F').
+% - p. 62: p(F) ⊂ p(F') iff F ⊂ F' or F ⊂ sigma F'. The « ? » on the composite
+%   Aut(C)/sigma -> Aut_ord(Phi(C~)) is answered (yes, for all n >= 3) by this
+%   reading, which says so.
+%
+% Announced and never established in the folder: Th. 1-4 and 7 (stated, no
+% proof), Th. 5-6 (named only); the essential image of p. 4 and p. 7; whether
+% the axioms imply bijectivity of A/G^(delta) -> A_delta (p. 3); the question
+% of p. 19 (when the |F| form a cell decomposition); programme a), b) of p.
+% 29; the case n even of p. 62.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{76}
+\pages{1}{62}
+\dating{[vers 1977]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{n-cartes cellulaires : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Un cube, un ballon de football, un pavage de la sphère par des triangles :
+ce sont des espaces découpés en morceaux simples --- des points, des arêtes,
+des faces, des cellules de dimension supérieure --- recollés le long de leurs
+bords. Ces feuillets cherchent à dire, de façon purement combinatoire, ce
+qu'est un tel découpage, et à quel point la combinatoire suffit à retrouver
+l'espace.
+
+L'idée centrale est celle des \emph{drapeaux}. Dans un cube, un drapeau
+complet est un choix d'un sommet, d'une arête qui le contient, d'une face qui
+contient l'arête. Il y en a quarante-huit. Sur l'ensemble des drapeaux
+agissent des opérations très simples : changer le sommet en gardant l'arête et
+la face (il n'y a qu'une autre possibilité), changer l'arête en gardant le
+sommet et la face, changer la face en gardant le sommet et l'arête. Chacune
+est une involution, et deux opérations qui ne touchent pas des dimensions
+voisines commutent. Le groupe ainsi défini, que Grothendieck appelle
+\emph{groupe cartographique}, ne dépend que de la dimension ; un découpage
+devient un ensemble sur lequel ce groupe agit, et l'on peut retrouver les
+sommets, les arêtes et les faces comme les orbites de certains sous-groupes.
+C'est l'analogue, en dimension quelconque, de ce que les dossiers 88 et 81
+font pour les cartes tracées sur une surface.
+
+Le dossier pose trois fois la même question, chaque fois plus nettement.
+Une première rédaction donne des axiomes à l'ensemble ordonné des cellules ---
+entre deux cellules dont les dimensions diffèrent de deux, il y en a toujours
+exactement deux --- et montre comment les drapeaux le reconstituent. Une
+longue étude intermédiaire porte sur les ensembles ordonnés dont chaque
+élément « est » un simplexe : comment les décrire par des foncteurs, comment
+les ordonner, comment passer d'une triangulation à une décomposition en
+cellules. La seconde rédaction énonce un programme de sept théorèmes : les
+variétés munies d'une bonne décomposition cellulaire, à déformation près,
+sont exactement certains ensembles à opérateurs sous le groupe cartographique ;
+une construction par cônes emboîtés, le « multicône », va dans l'autre sens.
+Aucun de ces théorèmes n'est démontré, et Grothendieck voit lui-même où est
+la difficulté : savoir si un objet combinatoire décrit une sphère, ce qui
+touche à l'hypothèse de Poincaré.
+
+Le dossier se termine sur un cas modèle traité à fond : le cube. Un cube de
+dimension $n$ est décrit par un ensemble de $2n$ éléments --- ses faces de
+codimension un --- muni de l'involution qui échange deux faces opposées. Tout
+s'en déduit : les faces, les drapeaux, le groupe des symétries, qui agit
+simplement transitivement sur les drapeaux, l'orientation, les classes de
+conjugaison des symétries (dix pour le cube ordinaire), et le fait que les
+rotations du cube ordinaire sont exactement les permutations de ses quatre
+grandes diagonales. En recollant chaque face du bord avec la face opposée, on
+obtient un découpage de l'espace projectif réel, et la question de ses
+symétries ferme le dossier.
+
+On voit dans ces pages une manière de procéder : plutôt que de choisir une
+orientation, un ordre, un point de départ, garder l'ensemble de tous les
+choix et faire agir sur lui le groupe qui les échange. Un cube « est » alors
+un torseur sous son groupe, et une variété découpée « est » un ensemble à
+opérateurs. Les noms modernes à chercher sont ceux de polytope abstrait, de
+carte généralisée, d'ensemble ordonné simplicial et d'ensemble
+semi-simplicial, de géométrie de classes à la Tits, et de groupe
+hyperoctaédral.
+
+\keywords{abstract polytope, diamond condition, flag graph, cartographic group, generalized map, order complex, simplicial poset, semi-simplicial set, category of elements, coset geometry, CW complex, Alexander trick, sphere recognition, hyperoctahedral group, signed cycle type, hemicube, Bruhat decomposition, exceptional isomorphisms of small groups}
+\end{resume}
+
+\pagerange{2}{62}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+Le dossier n'est pas paginé de sa main. L'inventaire le date « vers 1977 » et
+le range dans le groupe « Géométrie et topologie combinatoire », avec les
+dossiers 81, 88 et 89, qui ont déjà leur lecture modernisée et qu'on cite là
+où ils rencontrent celui-ci.
+
+\begin{enumerate}
+  \item \emph{Pages 2 à 13}, première rédaction, sous le titre « Cartes
+  coniques, cartes cellulaires, et ensembles à opérateurs » : l'ensemble
+  ordonné gradué $F_*$ des cellules et ses axiomes (pages 2 à 4) ; une page
+  barrée de suites exactes (page 5) ; réalisation géométrique, variétés,
+  « $n$-variété combinatoire » et « $n$-complexe combinatoire » (pages 6 à 8) ;
+  « $n$-cartes coniques » (page 9) ; treillis de drapeaux, multicônes et
+  « paracartes » (pages 11 à 13).
+  \item \emph{Pages 15 à 33}, les « géométries de drapeaux » : ensembles
+  ordonnés dont chaque idéal principal est un simplexe, fonctions dimension,
+  ensembles semi-simpliciaux et ordres sur les sommets, deux exemples, et les
+  préfaisceaux sur les parties finies de $\mathbf{N}$.
+  \item \emph{Pages 35 à 42}, seconde rédaction, sous le titre « Cartes
+  cellulaires $n$-dim et groupes cartographiques » : filtrations admissibles,
+  les foncteurs $E_n$, $E_n^\circ$, et un programme de théorèmes numérotés 1 à
+  7, énoncés et non démontrés.
+  \item \emph{Pages 45 et 47}, deux apartés : les petits ensembles comme
+  géométries finies et l'ordre des groupes de Chevalley ; quatre « Sujets
+  DEA ».
+  \item \emph{Pages 49 à 62}, le « cube combinatoire », sous une chemise
+  (page 43) où « 2-cartes cellulaires » est biffé.
+\end{enumerate}
+
+Les deux rédactions des stations 1 et 3 ne se confondent pas. La première
+part d'un ensemble ordonné et lui impose des axiomes ; la seconde part d'un
+espace filtré et construit les ensembles à opérateurs par récurrence sur la
+dimension. Elles se rejoignent sur deux objets, qu'on signale à chaque fois :
+la tour d'ensembles à opérateurs des pages 7 et 8 est la « cascade » de la
+page 38, et les quotients de la page 8 sont le théorème 3 de la page 39. On
+garde les deux rédactions distinctes.
+
+\subsection*{Conventions, valables pour tout le dossier}
+
+\begin{itemize}
+  \item \emph{Le groupe cartographique.} $G_n$ est le groupe engendré par
+  $n+1$ éléments $\sigma_0, \ldots, \sigma_n$ soumis aux relations
+  $\sigma_i^2 = 1$ et $(\sigma_i\sigma_j)^2 = 1$ pour $|i - j| \geqslant 2$,
+  et à aucune autre ; $G_{-1} = \{1\}$. C'est la convention des pages 7 et 36.
+  La page 3 note $G_n$ le groupe à $n$ générateurs $\sigma_0, \ldots,
+  \sigma_{n-1}$, et la page 13 $G_i$ celui qu'engendrent $\sigma_0, \ldots,
+  \sigma_{i-1}$ : ce sont ici $G_{n-1}$ et $G_{i-1}$.\footnote{Le nom
+  « groupe cartographique » est le sien (page 35) ; c'est aussi celui de
+  l'\emph{Esquisse d'un programme} (1984) pour $n = 2$, et le groupe
+  $\widehat{\Gamma}$ de la page 10 du dossier 88 est $G_2$. C'est un groupe de
+  Coxeter, de matrice $m_{ij} = 2$ pour $|i - j| \geqslant 2$ et $m_{i,i+1} =
+  \infty$.}
+  \item \emph{Drapeaux.} Un drapeau est une chaîne non vide d'un ensemble
+  ordonné ; un \emph{drapeau complet} est une chaîne maximale. Les pages 54 à
+  56 appellent « repères » les drapeaux complets d'un polyèdre, et la page 51
+  les note $\mathrm{Drap}(C)$ ; on garde les deux notations, qui désignent la
+  même chose. $\sigma_i$ change toujours le membre de dimension $i$ d'un
+  drapeau complet en gardant les autres.
+  \item \emph{Ensembles de parties.} $\mathfrak{P}^*(I)$ est l'ensemble des
+  parties finies non vides de $I$, ordonné par inclusion.
+  \item \emph{Semi-simplicial.} $\Delta_{\mathrm{inj}}$ est la catégorie des
+  ensembles finis non vides totalement ordonnés et des applications
+  strictement croissantes, $\Delta_n = [0, n]$ ; un \emph{ensemble
+  semi-simplicial} est un préfaisceau sur $\Delta_{\mathrm{inj}}$. C'est ce que
+  les pages appellent « ensemble quasi-simplicial » et notent
+  « $\frac{1}{2}$simpl ».\footnote{On disait aussi « $\Delta$-ensemble »
+  (Rourke et Sanderson, 1971). La page 20 note $\Delta$ cette catégorie ; on
+  ajoute l'indice pour ne pas la confondre avec la catégorie simpliciale
+  usuelle, qui a aussi les applications croissantes non injectives.} Pour un
+  $1$-simplexe $z$, $s(z)$ et $t(z)$ sont son premier et son dernier sommet ;
+  pour un $2$-simplexe $u$, $d_0u$, $d_1u$, $d_2u$ sont les arêtes opposées aux
+  sommets $0$, $1$, $2$.
+  \item \emph{Les deux foncteurs des pages 39 et 40.} La page 39 appelle
+  $\psi_n$ un foncteur des $G_n$-ensembles vers les cascades, la page 40 un
+  foncteur des cascades vers les espaces filtrés. On appelle ici $\rho_n$ le
+  premier --- c'est la lettre que la page 40 elle-même emploie pour lui ---
+  et $\psi_n$ le second.
+  \item \emph{Le cube.} $(\mathbb{B}, \sigma)$ est un ensemble fini muni d'une
+  involution sans point fixe, $I = \mathbb{B}/\sigma$, $n = \mathrm{card}\, I$,
+  et $\mathrm{Sp}(\mathbb{B})$ l'ensemble des sections partielles de
+  $\mathbb{B} \to I$, c'est-à-dire des parties $J \subset \mathbb{B}$ telles
+  que $J \cap \sigma J = \emptyset$.
+\end{itemize}
+
+\emph{Ce que le dossier annonce et n'établit pas.} Les théorèmes 1 à 4 et 7
+sont énoncés sans démonstration, les théorèmes 5 et 6 seulement nommés ;
+« l'image essentielle » est à déterminer aux pages 4 et 7, et le reste ; la
+question de la page 19 et le programme de la page 29 restent ouverts ; le
+« cas $n$ pair » de la page 62 est « à examiner ».
+
+\pagerange{2}{4}
+\section*{Complexes cellulaires et ensembles à opérateurs (pages 2 à 4)}
+
+\emph{Les données.} Des ensembles $F_0, \ldots, F_n$ --- les cellules de
+dimension $0, \ldots, n$ --- et des relations d'incidence $I_\alpha \subset
+F_\alpha \times F_{\alpha+1}$. Sur $F_* = \coprod_\alpha F_\alpha$ on définit
+$x \preceq y$ si $x = y$, ou si $x \in F_\alpha$, $y \in F_\beta$, $\alpha <
+\beta$, et s'il existe une chaîne $x = z_\alpha, z_{\alpha+1}, \ldots,
+z_\beta = y$ d'éléments consécutivement incidents. Les axiomes, dans la
+numérotation finale de la page 4 :\footnote{La numérotation est visiblement
+remaniée sur la page : un « Axiome 3 » est surchargé en « 2 », « Axiome 4 »
+est écrit sur un mot lourdement biffé, et la liste finale « $1, 1', 2, 2', 3,
+4$ » est celle de la page 4. Le titre de la page 2 était « Complexes
+cellulaires, et ens.\ à opérateurs » ; « Complexes » y est deux fois corrigé
+en « Cartes », et « cellulaires » biffé au profit de « coniques ». La page 6
+cite aussi un axiome « $3'$ » qui n'est défini nulle part.}
+
+\begin{enumerate}
+  \item[1.] $I_\alpha \to F_{\alpha+1}$ est surjectif : toute cellule a une
+  cellule de dimension immédiatement inférieure dans son bord ;
+  \item[1'.] (facultatif) $I_\alpha \to F_\alpha$ est surjectif ;
+  \item[2.] pour $2 \leqslant \alpha \leqslant n$, $x_\alpha \in F_\alpha$ et
+  $x_{\alpha-2} \preceq x_\alpha$ de dimension $\alpha - 2$, il y a exactement
+  deux $x_{\alpha-1}$ entre eux ;
+  \item[2'.] (facultatif) toute $x_{n-1}$ est incidente à exactement deux
+  $x_n$ ;
+  \item[3.] toute arête $x_1$ a exactement deux sommets ;
+  \item[4.] voir plus bas.
+\end{enumerate}
+
+Les axiomes 2 et 3 forment ce qu'on appelle aujourd'hui la \emph{condition du
+diamant} : tout intervalle de longueur deux, en ajoutant un plus petit élément
+formel sous $F_0$, a exactement quatre éléments. L'axiome $2'$ est la même
+condition en haut, et exprime l'absence de bord.\footnote{Ce sont, à la
+connexité forte près (notre axiome 4), les axiomes des \emph{polytopes
+abstraits} --- Danzer et Schulte (1982), puis McMullen et Schulte,
+\emph{Abstract Regular Polytopes} (2002) ---, qui ajoutent aussi un plus
+grand élément. Les feuillets ne citent rien de tel, et l'on ne tire de la
+comparaison aucune conclusion d'antériorité : la datation de l'inventaire est
+approximative.}
+
+\emph{Quels ensembles ordonnés ?} Le système $(F_\alpha, I_\alpha)$ se
+retrouve à partir de $(F_*, \preceq)$ : $F_0$ est l'ensemble des éléments
+minimaux, $F_1$ celui des éléments minimaux de $F_* \smallsetminus F_0$, et
+ainsi de suite, et $I_\alpha$ est la restriction de l'ordre. Les ensembles
+ordonnés ainsi obtenus sont exactement ceux dont les chaînes ont au plus
+$n+1$ éléments et dans lesquels \emph{tout recouvrement $x \lessdot y$ fait
+monter la hauteur d'exactement un} --- la hauteur d'un élément étant le
+nombre d'éléments, moins un, de la plus longue chaîne qui finit en lui ; de
+façon équivalente, toutes les chaînes maximales de chaque idéal principal
+ont la même longueur.\footnote{La page dit « exactement ceux satisfaisant la
+condition des chaînes, et où les chaînes sont de longueur $\leqslant n$ », et
+écrit « Vérifier » en marge. La condition de Jordan--Dedekind (dans chaque
+intervalle, les chaînes maximales ont même longueur) ne suffit pas :
+l'ensemble $\{a, b, d, c\}$ avec $a < c$ et $b < d < c$ la satisfait, mais
+$c$ recouvre $a$ en montant de deux, et la reconstruction par niveaux
+oublierait $a \preceq c$. Il faut la condition sur les idéaux principaux
+qu'on énonce. Le même raisonnement montre que l'axiome 1 est alors
+automatique, comme le dit le crochet de la page : « Cela montre pourquoi
+$I_\alpha \to F_{\alpha+1}$ surjectif ».}
+
+\emph{Drapeaux et opérateurs.} Un drapeau est une chaîne non vide de $F_*$ ;
+son \emph{type} est l'ensemble $\delta \subset [0, n]$ des dimensions de ses
+membres.\footnote{La page écrit d'abord « type $\in \mathfrak{P}[0,n]$ »,
+puis entre parenthèses « une partie non vide de $[1,n]$ » ; le $0$ de
+$[0,n]$ est repassé à l'encre noire. Le type d'un drapeau est une partie non
+vide de $[0, n]$.} Soit $\mathcal{A}$ l'ensemble des drapeaux complets $d =
+(x_0, x_1, \ldots, x_n)$, $x_i \in F_i$. Par les axiomes 2 et 3, pour $0
+\leqslant \alpha \leqslant n-1$, il existe un unique $x'_\alpha \neq
+x_\alpha$ tel que $\sigma_\alpha(d) = (x_0, \ldots, x'_\alpha, \ldots, x_n)$
+soit encore un drapeau ; sous l'axiome $2'$, de même pour $\alpha = n$. Ce
+sont des involutions sans point fixe, et
+\[
+  \sigma_\alpha\sigma_\beta = \sigma_\beta\sigma_\alpha \qquad \text{si }
+  |\alpha - \beta| \geqslant 2 ,
+\]
+puisqu'elles modifient alors des membres non voisins du drapeau. Ainsi
+$\mathcal{A}$ est un ensemble à opérateurs sous $G_{n-1}$, et sous $G_n$ si
+l'axiome $2'$ est satisfait.\footnote{La page définit « $G_n$ le groupe
+engendré par les gén.\ $\sigma_\alpha$ ($0 \leqslant \alpha \leqslant n-1$)
+avec les relations précédentes », c'est-à-dire avec les seules relations de
+commutation. Il faut y joindre $\sigma_\alpha^2 = 1$ pour que l'action se
+factorise, et c'est le groupe des pages 7 et 36. On l'appelle $G_{n-1}$,
+conformément à la convention fixée plus haut. Ce n'est pas un groupe de
+Coxeter de type $A$ : deux générateurs consécutifs n'y satisfont aucune
+relation, alors que dans le groupe symétrique $(\sigma_\alpha
+\sigma_{\alpha+1})^3 = 1$.}
+
+\emph{L'axiome 4.} Pour $\delta \subset [0, n]$ non vide, soit
+$G^{(\delta)}$ le sous-groupe engendré par les $\sigma_i$, $i \notin
+\delta$ : il agit sur $\mathcal{A}$ sans toucher aux membres de dimension
+dans $\delta$, d'où une application
+\[
+  \mathcal{A}/G^{(\delta)} \longrightarrow \mathcal{A}_\delta
+  \qquad (\text{drapeaux de type } \delta),
+\]
+surjective par l'axiome 1 et sa conséquence que tout drapeau se complète.
+L'axiome 4 demande qu'elle soit bijective pour $\delta = \{\alpha\}$ :
+\[
+  \mathcal{A}/G^{(\alpha)} \xrightarrow{\ \sim\ } F_\alpha ,
+\]
+c'est-à-dire que deux drapeaux complets qui ont le même membre de dimension
+$\alpha$ se déduisent l'un de l'autre par des $\sigma_\beta$, $\beta \neq
+\alpha$. La page demande si la bijectivité pour tout $\delta$ en est
+conséquence.\footnote{« conséquence \ldots\ de l'axiome 4 et des
+précédents ? », avec un point d'interrogation. Elle l'est si l'axiome 4 vaut
+pour chaque \emph{section} $[x, y]$ de $F_*$, et non seulement pour $F_*$ :
+c'est la \emph{connexité forte par drapeaux} des polytopes abstraits. La page
+note d'ailleurs que les $F(x) = \{y \prec x\}$ satisfont les mêmes axiomes,
+avec $n$ remplacé par la dimension de $x$ moins un, ce qui donne les sections
+inférieures ; les sections supérieures ne sont pas évoquées. Remarque de
+notre part.} Comme $G^{(\delta)} \subset G^{(\delta')}$ pour $\delta' \subset
+\delta$, les inclusions entre ces sous-groupes redonnent alors les relations
+entre drapeaux de types divers, donc $F_*$ tout entier :
+
+\textbf{Proposition} (page 4). Le foncteur $F_* \mapsto \mathcal{A}$, des
+complexes satisfaisant les axiomes 1 à 4 vers les ensembles à opérateurs sous
+le groupe cartographique, est pleinement fidèle ; son image essentielle reste
+à déterminer.\footnote{La page porte « (confirmé ?) » à côté de la liste des
+axiomes. Les morphismes de complexes ne sont pas définis ; l'énoncé est
+juste si l'on prend pour morphismes les applications croissantes qui
+respectent la dimension et induisent des bijections sur les drapeaux
+complets de chaque section --- les revêtements --- puisque $F_\alpha$ se lit
+alors comme $\mathcal{A}/G^{(\alpha)}$ de façon fonctorielle. C'est notre
+précision. Les ensembles à opérateurs obtenus sont des « cartes
+généralisées » au sens de la note de la page 7.}
+
+\emph{Réalisation géométrique.} Celle de $F_*$ --- sous le seul axiome 1 ---
+est la réalisation de la triangulation dont les simplexes sont les parties
+finies totalement ordonnées de $F_*$ : le \emph{complexe des chaînes} (ou
+complexe d'ordre) de $F_*$.
+
+\pagerange{5}{5}
+\section*{Une page barrée (page 5)}
+
+La page 5 est barrée d'un long trait et ne porte aucun texte : des suites
+exactes empilées de groupes d'automorphismes d'un espace $X$ à bord. On y
+lit
+\[
+  1 \to \mathrm{Aut}(X, \mathrm{id}_{\partial X}) \to \mathrm{Aut}(X) \to
+  \mathrm{Aut}(\partial X) \to 1 ,
+\]
+un revêtement $p : \widetilde{\partial X} \to \partial X$ et le groupe
+$\widetilde{\mathrm{Aut}}(X)$ des couples $(u, \tilde v)$ où $\tilde v$
+relève au revêtement la restriction de $u$ au bord, et un facteur
+$\mathbf{Z}^I$, $I = \pi_0(\partial X)$, qui revient dans trois lignes
+successives. Rien ne dit ce que sont les groupes notés $S\mathcal{A}$,
+$S\mathcal{A}^\circ$, $ST$, ni si les « Aut » sont des groupes
+d'homéomorphismes ou leurs classes d'isotopie ; on ne leur donne pas de
+sens.\footnote{Le facteur $\mathbf{Z}^I$, un entier par composante du bord,
+évoque les twists de Dehn le long des composantes du bord dans un groupe de
+classes d'isotopie ; c'est une conjecture de lecture, que rien sur la page ne
+confirme. La page porte aussi deux annotations, « $\simeq S\mathcal{A}(X)
+\times \mathbf{Z}^I$ » et « $\simeq ST(X) \times \mathbf{Z}^I$ », sous les
+groupes relevés.}
+
+\pagerange{6}{8}
+\section*{Réalisation, variétés, et la première « variété combinatoire » (pages 6 à 8)}
+
+\emph{Les cellules dans la réalisation.} Chaque $x \in F_\alpha$ se réalise
+dans $|F_*|$ comme la réunion des simplexes ouverts des chaînes formées
+d'éléments $\preceq x$, et l'incidence devient l'inclusion. La page annonce
+une équivalence de catégories « à dégager » entre ces objets topologiques et
+les objets combinatoires.
+
+\textbf{Proposition} (page 6). Si $|F_*|$ est une variété topologique de
+dimension $n$, sans bord, alors $F_*$ satisfait les axiomes $1, 1', 2, 2', 3,
+4$.\footnote{C'est vrai et se vérifie sur les links : une variété est une
+pseudo-variété pure, donc toutes les chaînes maximales ont $n+1$ éléments ;
+une chaîne à laquelle il manque exactement une dimension est une face de
+codimension un du complexe des chaînes, contenue dans exactement deux
+simplexes maximaux, ce qui donne les axiomes $2$, $2'$ et $3$ ; l'axiome 4
+vient de ce que le link d'un sommet, une sphère homologique de dimension
+$n-1$, est fortement connexe. Le « pointée » ajouté en interligne après
+« variété top. » est d'une lecture douteuse ; on ne le reprend pas.}
+
+La page affirme plus précisément que $|F_*|$ est une variété de dimension $n$
+si et seulement si $F_*$ satisfait ces axiomes et que, pour tout $x$, la
+réalisation de $F(x) = \{y \prec x\}$ est une sphère ; et, « modulo
+l'hypothèse de Poincaré », qu'il suffirait de demander $|F(x)|$ simplement
+connexe et de l'homologie d'une sphère. Ce n'est pas suffisant tel quel. La
+condition sur les $|F(x)|$ fait de chaque cellule une boule, mais elle ne
+dit rien de ce qui entoure une cellule : il faut aussi que les réalisations
+des sections supérieures $\{y \succ x\}$, les links des cellules, soient des
+sphères de la bonne dimension.\footnote{Contre-exemple : la suspension d'un
+tore triangulé est un complexe simplicial de dimension 3 qui satisfait tous
+les axiomes de la page 3, et dont toutes les cellules sont des simplexes,
+donc des boules ; mais le link de chacun des deux points de suspension est un
+tore, et l'espace n'est pas une variété. La page cite un axiome « $3'$ »
+qu'elle ne définit pas ; si c'était l'énoncé dual sur les sections
+supérieures, l'équivalence redeviendrait juste dans sa forme « sphère ».
+Quant à la forme homologique : une sphère d'homologie simplement connexe qui
+est une variété est une sphère, en toute dimension --- c'est l'hypothèse de
+Poincaré généralisée, démontrée par Smale en dimension $\geqslant 5$ (1961),
+Freedman en dimension 4 (1982), Perelman en dimension 3 (2003) ; vers 1977
+seuls les cas $\geqslant 5$ l'étaient, et la page corrige justement
+« $\alpha \geqslant 3$ » en « $\alpha \geqslant 5$ » dans son addition. Mais il
+faut encore savoir que $|F(x)|$ est une variété, ce qui n'est pas
+automatique. Le détail des surcharges de la page n'est pas sûr.}
+
+\emph{Espaces filtrés.} Soit $X$ un espace --- compact, ajoute-t-il avec deux
+points d'interrogation --- filtré par $X_0 \subset X_1 \subset \cdots \subset
+X_n = X$, chaque différence $X_i \smallsetminus X_{i-1}$ étant une réunion
+disjointe de boules ouvertes de dimension $i$. Les drapeaux relatifs à la
+filtration, « à définir avec soin », forment un ensemble sur lequel agit
+$G_n$ si $X$ est une variété de dimension $n$, les $\sigma_i$ opérant sans
+point fixe.\footnote{La fin de la page 6 est serrée et surchargée ; « la
+différence de $X_i$ moins $X_{i-1}$ » est suivie de mots illisibles, puis de
+« de boules $B^i$ ». On lit, comme à la page 35, des boules ouvertes de
+dimension $i$.}
+
+\textbf{Proposition} (page 7). Le foncteur des variétés de dimension $n$
+ainsi filtrées vers les $G_n$-ensembles finis où les $\sigma_i$ opèrent sans
+point fixe est pleinement fidèle --- à condition de remplacer les morphismes
+par leurs classes d'isotopie. Il reste à déterminer son image essentielle,
+dont la page prévoit qu'elle est plus grande que celle des complexes de la
+page 4.\footnote{La page dit « pl.\ fidèle » sans parler d'isotopie. Sans
+passer aux classes d'isotopie le foncteur n'est pas fidèle : un homéomorphisme
+isotope à l'identité à travers des homéomorphismes respectant la filtration
+fixe tous les drapeaux. La seconde rédaction (page 38) passe en effet à la
+« catégorie isotopique ». Pour l'image essentielle, voir la note au
+théorème 1.}
+
+\emph{La $n$-variété combinatoire.} Une \emph{$n$-variété combinatoire finie}
+est un ensemble fini $D_n$ muni de $n+1$ involutions sans point fixe
+$\sigma_0, \ldots, \sigma_n$, deux involutions non consécutives commutant :
+c'est un $G_n$-ensemble fini où les générateurs opèrent sans point
+fixe.\footnote{C'est exactement ce qu'on appelle aujourd'hui une
+\emph{$n$-carte généralisée} sans bord (P.~Lienhardt, 1989--1994), ou une
+carte combinatoire au sens de A.~Vince (1983) ; on peut aussi le voir comme un
+graphe régulier de degré $n+1$ à arêtes colorées, voisin des
+« cristallisations » de M.~Pezzana et de l'école de Modène (années 1970), qui
+n'imposent pas les relations de commutation. Le $D_n$ de la page joue le rôle
+de l'ensemble des drapeaux complets. Les pages ne citent aucun de ces
+travaux.}
+
+\emph{Le $n$-complexe combinatoire.} Un \emph{$n$-complexe combinatoire
+fini} est une tour d'ensembles finis
+\[
+  D_n \longrightarrow D_{n-1} \longrightarrow \cdots \longrightarrow D_1
+  \longrightarrow D_0 ,
+\]
+où chaque $D_i$, $1 \leqslant i \leqslant n$, est un $G_{i-1}$-ensemble dont
+les générateurs opèrent sans point fixe, où chaque $D_i \to D_{i-1}$ est un
+morphisme de $G_{i-2}$-ensembles, et où, pour $i \geqslant j + 2$, la
+composée $D_i \to D_j$ est invariante par $\sigma_{j+1}, \ldots,
+\sigma_{i-1}$. Pensez à $D_i$ comme à l'ensemble des drapeaux complets
+$(x_0, \ldots, x_i)$ des cellules de dimension $i$, et à $D_i \to D_{i-1}$
+comme à l'oubli de $x_i$. C'est la « cascade » que la seconde rédaction
+définira à la page 38 ; on y revient.
+
+\emph{Les bords successifs.} Si $D_n$ est une $n$-variété combinatoire, le
+bord de la $i$-ème décomposition, $\partial(\mathrm{Déc}(X_i/X_{i-1}))$, est
+la $(i-1)$-variété combinatoire
+\[
+  \delta_{i-1} = \bigl(D_n/\langle \sigma_n, \ldots, \sigma_{i+1} \rangle
+  ;\ \sigma_0, \ldots, \sigma_{i-1}\bigr) ,
+  \qquad \delta_{n-1} = (D_n ;\ \sigma_0, \ldots, \sigma_{n-1}) .
+\]
+Les $\sigma_j$, $j \leqslant i - 1$, passent au quotient parce qu'ils
+commutent à $\sigma_{i+1}, \ldots, \sigma_n$. C'est la forme première du
+théorème 3 de la page 39. La suite de la page 8, qui commençait à définir par
+récurrence une catégorie $\mathcal{C}_n$ de « $n$-cartes » et un foncteur vers
+les $n$-variétés combinatoires, est barrée.\footnote{Dans la partie barrée :
+$\mathcal{C}_0$ = ensembles finis (« 0-sphères »), un objet de
+$\mathcal{C}_n$ comme un triple $(X_{n-1}, S_{n-1}, \varphi)$ avec
+$\varphi : i_{n-1}(S_{n-1}) \to X_{n-1}$ --- une cellule attachée par son bord
+---, et le foncteur $i_n$ écrit tantôt dans un sens, tantôt dans l'autre.
+C'est le schéma de la récurrence des pages 35 à 40.}
+
+\pagerange{9}{9}
+\section*{Cartes coniques (page 9)}
+
+La page reprend le titre, corrigé : « Cartes coniques, cartes cellulaires, et
+ensembles à opérateurs ». Une \emph{$n$-carte conique} finie est un espace
+compact $X$ muni d'une filtration croissante par des fermés
+$X_0 \subset \cdots \subset X_n = X$ telle que :
+\begin{enumerate}
+  \item[a)] $X_0$ est fini ;
+  \item[b)] pour $1 \leqslant i \leqslant n$, soit $\overline{Z}_i =
+  \mathrm{Déc}(X_i/X_{i-1})$ le \emph{découpage} de $X_i$ le long de
+  $X_{i-1}$ et $\dot Z_i \subset \overline{Z}_i$ l'image inverse de $X_{i-1}$,
+  de sorte que $\overline{Z}_i \to X_i$ induise un homéomorphisme
+  $\overline{Z}_i \smallsetminus \dot Z_i \simeq X_i \smallsetminus X_{i-1}$ ;
+  alors $\overline{Z}_i$ a un nombre fini de composantes connexes
+  $\overline{Z}_i^\alpha$, chacune homéomorphe au cône sur $\dot Z_i^\alpha =
+  \overline{Z}_i^\alpha \cap \dot Z_i$, non vide ;
+  \item[c)] $\dot Z_i \to X_{i-1}$ est un morphisme fini ;
+  \item[d)] la filtration est équisingulière.
+\end{enumerate}
+Le découpage n'est pas défini ; on le comprend comme l'espace des cellules
+fermées, avec leurs applications d'attachement, ce qui est le sens que lui
+donne la page 35.\footnote{La condition d) est récrite en surcharge à droite :
+« soit $X_{i-1}^!$ l'image de $\dot Z_i$ dans $X_{i-1}$ ; alors $X_{i-2}^! =
+X_{i-1}^! \cap X_{i-2}$ », lecture incertaine des indices. Dans c), un
+complément entre crochets est illisible.}
+
+La différence avec les cartes \emph{cellulaires} est dans b) : chaque
+« cellule » est un cône sur son bord, et non une boule ; le bord n'a pas à
+être une sphère. On retrouvera ces cônes dans le multicône de la page 40, et
+c'est ce qui donne son titre à la rédaction. Pour $n = 0$ ce sont les espaces
+finis discrets, pour $n = 1$ les graphes finis --- boucles et arêtes
+multiples admises ---, dont la page dessine quelques exemples.
+
+\pagerange{11}{13}
+\section*{Treillis de drapeaux, multicônes, paracartes (pages 11 à 13)}
+
+\emph{Treillis de drapeaux.} Pour une décomposition de dimension $\leqslant
+n$, notons $D_I$ l'ensemble des drapeaux de type $I \subset [0, n]$ ; pour $J
+\subset I$, l'oubli des membres de dimension hors de $J$ donne une
+restriction $D_I \to D_J$. Les pages 11 et 13 dessinent ces treillis pour $n
+= 1, 2, 3$ et marquent « épi » certaines flèches. La règle qui s'en dégage :
+\[
+  D_{[0,i]} \longrightarrow D_I \quad \text{est surjective si } i = \sup I ,
+\]
+tout drapeau se complétant vers le bas jusqu'au sommet, et plus généralement
+$D_I \to D_J$ l'est si $J \subset I$ a le même plus grand élément. La flèche
+$D_{02} \to D_1$ est barrée d'une croix sur le dessin : il n'y a pas de
+restriction de $D_{\{0,2\}}$ vers $D_{\{1\}}$.\footnote{La page 11 écrit
+aussi « $D_\sigma \to D_{\sigma'}$ épi si $\sigma' \subset \sigma$ et
+\ldots, i.e.\ $\sigma = \sigma'' \cup \sigma'$, $\sigma'' < \sigma'$ » : $J$ doit
+être un segment final de $I$, ce qui est la même règle. La formule $n_i =
+\sum_{j<i} n_j + 1$ qui termine la page, à côté d'un dessin d'arcs hachurés,
+reste sans contexte ; on ne l'interprète pas.} La page 12 donne le cas d'un
+graphe : trois sortes de drapeaux, les sommets $F_0$, les arêtes $F_1$, et les
+couples incidents $R_1$, avec $F_0 \leftarrow R_1 \to F_1$, la seconde flèche
+surjective.
+
+\emph{Le multicône.} Pour une catégorie $\mathcal{C}$, soit $\Phi(\mathcal{C})$
+la catégorie des familles finies $(f_i : X_i \to X)_{i \in I}$ de morphismes
+de même but. Un foncteur $\varphi : \mathcal{C} \to \mathrm{Top}$ en induit
+un, $\Phi(\varphi) : \Phi(\mathcal{C}) \to \mathrm{Top}$,
+\[
+  (X_i \xrightarrow{f_i} X)_{i \in I} \longmapsto
+  \Bigl(\coprod_i \mathrm{Cône}\, \varphi(X_i)\Bigr)
+  \ \amalg_{\coprod_i \varphi(X_i)}\ \varphi(X) ,
+\]
+qui colle à $\varphi(X)$ un cône sur chaque $\varphi(X_i)$ le long de
+$\varphi(f_i)$. Si les $\varphi(f)$ sont finis, les $\Phi(\varphi)(f)$ le
+sont ; la page ajoute que la fidélité --- et la pleine fidélité, avec un
+doute --- passe de $\varphi$ à $\Phi(\varphi)$ vers les espaces filtrés,
+« mod isotopie », et qu'on peut itérer : $\Phi(\Phi(\mathcal{C})) \to
+\mathrm{Top}$. Itéré $n$ fois, c'est exactement la construction des
+$n$-cartes coniques de la page 9, et c'est le « multicône » de la page
+40.\footnote{Le rapprochement avec la page 40 est le nôtre ; la page 12 ne
+nomme pas la construction. Sur ce que deviennent les morphismes de
+$\Phi(\mathcal{C})$, la page ne dit rien ; une flèche $(X_i \to X) \to (Y_j
+\to Y)$ doit comporter une application d'ensembles d'indices et des
+morphismes compatibles, et l'énoncé de fidélité dépend de ce choix.}
+
+\emph{Paracartes} (page 13). Une \emph{paracarte} est un préfaisceau $D$ sur
+$\mathfrak{P}^*(\mathbf{N})$ --- un ensemble $D(\sigma)$ de « drapeaux de
+type $\sigma$ » pour chaque partie finie non vide $\sigma$ de $\mathbf{N}$,
+avec des restrictions $D(\sigma) \to D(\sigma')$ pour $\sigma' \subset
+\sigma$ --- dont certaines restrictions sont surjectives.\footnote{La page
+écrit « foncteurs $\mathfrak{P}_f^*(\mathbf{N}) \xrightarrow{D} (\mathrm{Ens})$
+tels que $\sigma \subset \sigma'$ [segments finis] $\Rightarrow D(\sigma) \to
+D(\sigma')$ épi », la flèche allant de la plus petite partie vers la plus
+grande. Un drapeau de type $\sigma$ se restreint en un drapeau de type $\sigma'
+\subset \sigma$, et non l'inverse ; le foncteur est contravariant, comme il
+l'est aux pages 15 et 30, et on rétablit le sens des flèches. Le premier
+$\sigma$ de la formule est surchargé, peut-être sur un $\Delta$.} La page en
+distingue trois sortes :
+\begin{itemize}
+  \item les \emph{stratifications équidimensionnelles} : $D(\sigma) \to
+  D(\sigma')$ est surjective dès que $\sup \sigma = \sup \sigma'$,
+  c'est-à-dire que $D([0, i]) \to D(\sigma)$ l'est si $i = \sup \sigma$ ---
+  la règle des treillis ci-dessus ;
+  \item les paracartes \emph{de dimension $n$} : les restrictions sont
+  bijectives au-dessus de $\Delta_n$ et $D(\{i\}) = \emptyset$ pour $i > n$ ;
+  \item les paracartes \emph{spéciales} : équidimensionnelles, et telles que
+  pour tout $j < i$ la restriction $D(0, \ldots, i) \to D(0, \ldots,
+  \widehat{j}, \ldots, i)$ soit de degré 2 --- la condition du diamant.
+\end{itemize}
+Dans une paracarte spéciale, $R_i = D(0, \ldots, i)$ porte donc $i$
+involutions $\sigma_0, \ldots, \sigma_{i-1}$ : c'est un
+$G_{i-1}$-ensemble.\footnote{La page écrit « groupe $G_i$ engendré par
+$\sigma_0, \ldots, \sigma_{i-1}$ opérant sur $R_i$ » ; c'est notre $G_{i-1}$,
+conformément à la convention. Il n'y a pas de $\sigma_i$ sur $R_i$ : changer
+le membre de dimension $i$ demande qu'une cellule de dimension $i - 1$ soit
+dans exactement deux cellules de dimension $i$, ce qu'une paracarte spéciale
+n'exige pas. La page demande aussi si la restriction $D(\ldots, j-1, j, j+1,
+\ldots) \to D(\ldots, j-1, j+1, \ldots)$, pour un type qui n'est pas un
+segment initial, est toujours de degré 2 (« p.\ ex.\ $D_{123} \to D_{13}$ ») ;
+la question reste ouverte.} La page veut des conditions pour que $D(0,
+\ldots, i)$, avec l'action de $G_{i-1}$ et les applications $R_{i+1} \to R_i
+\to \cdots$, « récupère » tous les $D(i_0, \ldots, i_p)$ : c'est la tour de la
+page 7, et la question à laquelle répondra le théorème 3.
+
+\pagerange{15}{19}
+\section*{Géométries de drapeaux (pages 15 à 19)}
+
+\emph{Définition.} Un ensemble ordonné $D$ est une \emph{géométrie de
+drapeaux} si, pour tout $d \in D$, l'idéal $D(d) = \{d' \leqslant d\}$ est
+isomorphe à $\mathfrak{P}^*(I_d)$ pour un ensemble fini non vide $I_d$. On
+peut prendre pour $I_d$ l'ensemble des éléments minimaux de $D$ majorés par
+$d$ ; on appelle $\Phi$ l'ensemble des éléments minimaux de $D$ --- les
+« drapeaux de longueur 1 » --- et $\mathrm{card}\, I_d$ la longueur de
+$d$.\footnote{On dit aujourd'hui \emph{ensemble ordonné simplicial}
+(A.~Björner, 1984 ; Garsia et Stanton, 1984), en ajoutant d'ordinaire un plus
+petit élément, la face vide : chaque idéal principal est un treillis
+booléen. Un élément est un simplexe, mais deux simplexes peuvent avoir les
+mêmes sommets. Les pages ne citent pas ces travaux, postérieurs à la
+datation de l'inventaire.}
+
+Pour $\sigma \in \mathfrak{P}^*(\Phi)$, soit $D(\sigma)$ l'ensemble des $d$
+tels que $I_d = \sigma$. Si $\tau \subset \sigma$, chaque $d \in D(\sigma)$ a
+un unique minorant dans $D(\tau)$, d'où une restriction $D(\sigma) \to
+D(\tau)$. On obtient :
+
+\textbf{Proposition} (page 15). Les géométries de drapeaux sont
+équivalentes aux couples $(\Phi, D)$ formés d'un ensemble $\Phi$ et d'un
+préfaisceau $D : \mathfrak{P}^*(\Phi)^{\mathrm{op}} \to \mathrm{Ens}$ tel que
+$\mathrm{card}\, D(\{i\}) = 1$ pour tout $i$ ; on retrouve $D$ comme
+$\coprod_\sigma D(\sigma)$, avec $d \leqslant d'$ si $d$ est une restriction
+de $d'$.
+
+Une géométrie de drapeaux est \emph{stricte} si tout $d$ est la borne
+supérieure de ses sommets. Il faut et il suffit pour cela que $\mathrm{card}\,
+D(\sigma) \leqslant 1$ pour tout $\sigma$, c'est-à-dire que $D$ soit un
+sous-foncteur du foncteur final ; $D$ est alors un ensemble de parties finies
+non vides de $\Phi$ stable par passage aux parties non vides, et :
+\[
+  \{\text{géométries de drapeaux strictes}\} \simeq
+  \{\text{complexes simpliciaux abstraits}\} .
+\]
+\footnote{La page écrit « ensembles simpliciaux » (lecture incertaine du
+premier mot) ; dans l'usage d'aujourd'hui un ensemble simplicial est tout
+autre chose, et ce sont les complexes simpliciaux abstraits --- les
+« multiplicités simpliciales » de la page 25 --- qui conviennent. Une note de
+marge ajoute que $\Phi$ est aussi l'ensemble des sommets d'un ensemble
+semi-simplicial, mais que $D$ n'est pas déterminé par celui-ci.}
+
+\emph{Fonctions dimension} (pages 16 et 17). Partons maintenant d'un
+préfaisceau quelconque $D' : \mathfrak{P}^*(I)^{\mathrm{op}} \to
+\mathrm{Ens}$, sans condition sur les $D'(\{i\})$. L'ensemble $D =
+\coprod_\sigma D'(\sigma)$, ordonné comme plus haut, est une géométrie de
+drapeaux, d'ensemble de sommets $\Phi = \coprod_{i \in I} D'(\{i\})$, et la
+projection $\delta : \Phi \to I$ est injective sur chaque $I_d$.
+Réciproquement, d'une géométrie de drapeaux $D$ et d'une application
+$\delta : \Phi \to I$ injective sur chaque $I_d$, on tire
+\[
+  D'(\sigma) = \coprod_{\substack{\sigma' \in \mathfrak{P}^*(\Phi) \\
+  \delta|\sigma' : \sigma' \xrightarrow{\sim} \sigma}} D(\sigma') ,
+\]
+et l'on a une équivalence
+\[
+  \bigl(D, \ \delta : \Phi \to I\bigr) \quad \longleftrightarrow \quad
+  \bigl(D' : \mathfrak{P}^*(I)^{\mathrm{op}} \to \mathrm{Ens}\bigr) .
+\]
+\footnote{La page 16 écrit $D' : \mathfrak{P}_f^*(I) \to (\mathrm{Ens})$ sans le
+signe d'opposé qu'elle met partout ailleurs ; c'est le même préfaisceau. La
+page 17 ajoute que $I_0 = \delta(\Phi)$, l'ensemble des $i$ tels que
+$D'(\{i\}) \neq \emptyset$, porte une structure d'ensemble semi-simplicial
+« \ldots\ $\sigma$ tel que $D(\sigma) \neq \emptyset$ », dont la fin est
+illisible.} Le cas qui intéresse la suite est $I = \mathbf{N}$, ou $I = [0,
+n]$ : $\delta$ est alors une \emph{fonction dimension}, et $\sup \delta(\Phi)$,
+si elle est finie, la dimension de $D$. Ainsi, une géométrie de drapeaux munie
+d'une fonction dimension n'est rien d'autre qu'une paracarte au sens de la
+page 13.
+
+\emph{Ordres sur les simplexes} (pages 17 et 18). Supposons donné sur chaque
+simplexe $I_d$ un ordre total, ces ordres s'induisant mutuellement --- c'est
+le cas s'ils viennent d'une fonction dimension à valeurs dans un ensemble
+totalement ordonné. Posons $D[m] = \{d \mid \mathrm{card}\, I_d = m + 1\}$.
+Alors $m \mapsto D[m]$ est un ensemble semi-simplicial : une application
+strictement croissante $u : \Delta_k \to \Delta_m$ choisit, dans le simplexe
+ordonné $I_d$, une face, et $u^*(d)$ est la restriction de $d$ à cette
+face.\footnote{La page écrit « un foncteur sur la catégorie $\Delta$ » ; le
+« contra » est restitué dans la transcription. La phrase entre crochets sur la
+façon dont un ordre de $I$ induit ces ordres totaux est en partie
+illisible.} Cet ensemble semi-simplicial satisfait :
+
+\begin{enumerate}
+  \item[(1)] pour $k < m$ et $d \in D[m]$, l'application
+  $\mathrm{Hom}(\Delta_k, \Delta_m) \to D[k]$, $u \mapsto u^*(d)$, est
+  injective : les faces d'un simplexe sont deux à deux distinctes.
+\end{enumerate}
+
+La condition (1) équivaut à ce que la catégorie des éléments
+$\Delta_{\mathrm{inj}}/D$ soit un ensemble ordonné, et cet ensemble ordonné
+est $D$.\footnote{La page écrit « la catégorie $\widehat{\Delta}/D[\,]$ est
+ordonnée (i.e.\ équivalente \ldots) ». La catégorie des éléments est
+$\Delta/D$, sous-catégorie pleine de $\widehat{\Delta}/D$ par Yoneda ; c'est
+d'elle qu'il s'agit. La page 20 ajoute qu'« ordonnée » et « préordonnée »
+reviennent ici au même : c'est exact, parce que les seuls endomorphismes de
+$\Delta_{\mathrm{inj}}$ sont les identités, de sorte que deux objets
+isomorphes de $\Delta_{\mathrm{inj}}/D$ sont égaux.} D'où :
+\[
+  \left\{
+  \begin{array}{l}
+    \text{géométries de drapeaux munies d'ordres}\\
+    \text{totaux compatibles sur les simplexes}
+  \end{array}
+  \right\}
+  \ \simeq\
+  \left\{
+  \begin{array}{l}
+    \text{ensembles semi-simpliciaux}\\
+    \text{satisfaisant (1)}
+  \end{array}
+  \right\} .
+\]
+
+\emph{Cellules duales} (page 19). Soit $D$ une géométrie de drapeaux munie
+d'ordres compatibles, et $X = |D|$, avec ses simplexes fermés $X(d)$ et ses
+simplexes ouverts $X^\circ(d)$, qui forment une partition de $X$. Pour un
+sommet $F \in \Phi$, soit
+\[
+  |F| = \bigcup_{\sup I_d = F} X(d) , \qquad
+  |F|^\circ = \bigcup_{\sup I_d = F} X^\circ(d) ,
+\]
+la réunion des simplexes dont $F$ est le \emph{dernier} sommet. Quand $D$ est
+le complexe des chaînes d'un complexe cellulaire, ordonné par la dimension,
+$|F|$ est la cellule fermée de $F$ subdivisée, et $|F|^\circ$ la cellule
+ouverte. La page demande quand les $|F|$ sont les cellules fermées d'une
+stratification de $X$ dont les $|F|^\circ$ sont les cellules ouvertes, et
+établit :
+\begin{enumerate}
+  \item[a)] les $|F|^\circ$ forment une partition de $X$, puisque chaque
+  simplexe ouvert a un seul dernier sommet, et chaque $|F|^\circ$ contient le
+  sommet $F$ ;
+  \item[b)] $|F|$ est l'adhérence de $|F|^\circ$, puisque $X(d)$ est celle de
+  $X^\circ(d)$.
+\end{enumerate}
+Il reste la question qu'elle pose en marge, $|F| \smallsetminus |F|^\circ =
+\bigcup_{F' < F} |F'|$ ? L'inclusion $\subset$ est vraie : un point de $|F|$
+hors de $|F|^\circ$ est dans un simplexe ouvert dont le dernier sommet précède
+$F$. L'égalité demande que tout simplexe de dernier sommet $F' < F$ soit face
+d'un simplexe de dernier sommet $F$, ce qui n'est pas
+automatique.\footnote{Cette discussion de l'égalité est la nôtre ; la page la
+marque d'un point d'interrogation. Ce que sont les $|F|$ --- des boules ou
+non --- est la question b) de la page 29.}
+
+\pagerange{20}{24}
+\section*{Ensembles semi-simpliciaux et ordre sur les sommets (pages 20 à 24)}
+
+\emph{Le point de départ} (pages 20 et 21). Soit $D_*$ un ensemble
+semi-simplicial, $D_n = D_*(\Delta_n)$. La catégorie fibrée qu'il définit sur
+$\Delta_{\mathrm{inj}}$, à fibres discrètes, est ordonnée si et seulement si
+$D_*$ satisfait (1). L'ensemble ordonné $D_* = \coprod_m D_m$ a alors la
+propriété
+\begin{enumerate}
+  \item[(a)] pour tout $d \in D_m$, l'idéal $D_*(d) = \{\delta \leqslant d\}$
+  est isomorphe à $\mathfrak{P}^*(\Delta_m)$,
+\end{enumerate}
+c'est donc une géométrie de drapeaux, et sa réalisation est
+\[
+  |D_*| = \varinjlim_{d \in D_*} |d| = \varinjlim_{(\Delta_m, d) \in
+  \Delta_{\mathrm{inj}}/D_*} |\Delta_m| ,
+\]
+la réalisation de l'ensemble semi-simplicial ; chaque simplexe $|d|$ s'y
+plonge, et $d \mapsto |d|$ est injective et croissante.\footnote{La page 21
+dit que $|D_*|$ est « aussi la réalisation topologique de l'ensemble
+quasi-simplicial $D_*$ ». La réalisation de l'ensemble ordonné $D_*$, au sens
+de la page 4, est la subdivision barycentrique de celle de l'ensemble
+semi-simplicial : les deux sont homéomorphes, canoniquement, sans être
+égales. Le plongement de chaque simplexe tient à (1).}
+
+\emph{La question.} La donnée d'ordres totaux compatibles sur les $I_d$
+équivaut à la structure semi-simpliciale. Quand ces ordres viennent-ils d'un
+seul ordre sur $D_0$ ?
+
+\emph{L'ordre des sommets} (page 22). Sur $D_0$, posons
+\[
+  x \prec y \iff \text{il existe } z \in D_1 \text{ avec } s(z) = x,\ t(z) = y .
+\]
+\begin{enumerate}
+  \item[(2°)] Cette relation est transitive si
+  \item[(2 bis)] l'application $D_2 \to D_1 \times_{D_0} D_1$, $u \mapsto
+  (d_2u, d_0u)$, le produit fibré étant pris au-dessus de $t$ et de $s$, est
+  surjective.
+\end{enumerate}
+En effet, si $x \prec y$ par $z$ et $y \prec w$ par $z'$, un $u$ tel que $d_2 u
+= z$ et $d_0 u = z'$ donne l'arête $z'' = d_1 u$, de $x$ à $w$. La condition
+(2 bis) dit que tout couple d'arêtes composables est bordé par un
+$2$-simplexe.\footnote{C'est la condition de remplissage des cornets internes
+$\Lambda^2_1$, en existence seulement --- la forme en dimension 2 de la
+condition des quasi-catégories, ici pour un ensemble semi-simplicial. Le nom
+est le nôtre. La page note $\partial_0, \partial_1$ à la page 21 puis
+$\delta_0, \delta_1, \delta_2$ ; sur $D_1$, son $\delta_0$ est le premier
+sommet et son $\delta_1$ le second, sur $D_2$ son $\delta_i$ est l'arête
+opposée au sommet $i$ ; les identités $\delta_0\delta_1 = \delta_0\delta_2$
+et $\delta_1\delta_1 = \delta_1\delta_0$ qu'elle écrit sont justes dans cette
+convention mixte, et ne le seraient pas avec les faces usuelles. On écrit $s$
+et $t$ pour éviter l'ambiguïté. Une note en diagonale, au crayon bleu, propose
+d'exiger aussi d'une fonction dimension $\delta(x) < \delta(y)$ quand $x \prec
+y$ ; elle est en grande partie illisible.} La relation $x \prec x$ est
+impossible par (1), puisque les deux sommets d'une arête sont distincts ;
+sous (2°), $x \preccurlyeq y \iff (x = y \text{ ou } x \prec y)$ est donc un
+ordre sur $D_0$. Il induit sur chaque $I_d$ l'ordre total donné, et satisfait
+\begin{enumerate}
+  \item[(b)] si $x \prec y$, il existe $z \in D_*$ qui majore $x$ et $y$ ;
+  \item[(c)] il induit un ordre total sur chaque $I_d$.
+\end{enumerate}
+
+\emph{La réciproque} (pages 23 et 24). Soit $D_*$ un ensemble ordonné
+satisfaisant (a), et $\preccurlyeq$ un ordre sur $D_0$ satisfaisant (b) et
+(c). L'ordre total induit sur $I_d$ est fonctoriel en $d$, donc définit un
+foncteur fibrant à fibres discrètes $D_* \to \Delta_{\mathrm{inj}}$, c'est-à-dire
+un ensemble semi-simplicial, qui satisfait (1) ; et l'ordre $\prec_*$ que la
+page 22 lit sur ses arêtes est l'ordre de départ --- c'est ce que (b)
+assure. Les deux constructions sont inverses l'une de l'autre, et donnent :
+
+\textbf{Proposition.}
+\[
+  \begin{array}{c}
+  \left\{
+  \begin{array}{l}
+    \text{ensembles semi-simpliciaux satisfaisant (1)}\\
+    \text{et la transitivité (2°)}
+  \end{array}
+  \right\}
+  \\[1ex] \Big\updownarrow \\[1ex]
+  \left\{
+  \begin{array}{l}
+    \text{ensembles ordonnés satisfaisant (a), munis}\\
+    \text{d'un ordre sur } D_0 \text{ satisfaisant (b) et (c)}
+  \end{array}
+  \right\}
+  \end{array}
+\]
+\footnote{La page écrit, à gauche, « satisfaisant (1) et (2) », le second
+chiffre d'une lecture incertaine. C'est (2°), la transitivité, qui convient,
+et non (2 bis), plus forte : l'ensemble semi-simplicial associé à $(D_*,
+\preccurlyeq)$ n'a pas de raison de remplir les cornets, comme le montre le
+bord d'un triangle $\{0 < 1 < 2\}$, où $0 \prec 2$ est une arête mais aucun
+$2$-simplexe ne borde $(01, 12)$. À la page 24, la page écrit « $x_0 =
+\delta_0(z_1)$, $y_0 = \delta_0(z_1)$ » ; le second est $\delta_1$, comme à la
+page 23.}
+
+\textbf{Remarque} (page 24). Si $\omega$ est un ordre sur $D_0$ satisfaisant
+(b) et (c), l'ordre opposé les satisfait aussi, et donne une autre structure
+semi-simpliciale sur les mêmes $D_n$, distincte de la première dès que $D_1
+\neq \emptyset$. Les deux réalisations sont néanmoins canoniquement
+homéomorphes, à travers la réalisation de l'ensemble ordonné $D_*$, qui ne
+dépend d'aucun choix.
+
+\pagerange{25}{25}
+\section*{Premier exemple : les drapeaux d'un ensemble ordonné (page 25)}
+
+Soit $\mathfrak{X}$ un ensemble ordonné, et $D_*$ l'ensemble de ses chaînes
+finies non vides --- ses drapeaux ---, ordonné par inclusion. Alors $D_0 =
+\mathfrak{X}$, (a), (b), (c) sont satisfaits, et l'ensemble semi-simplicial
+obtenu est le nerf de $\mathfrak{X}$ privé de ses dégénérescences ; ses
+réalisations sont canoniquement homéomorphes à celle de $\mathfrak{X}$.
+
+Ces exemples satisfont de plus
+\begin{enumerate}
+  \item[(d)] tout $d$ est la borne supérieure de $I_d$,
+\end{enumerate}
+c'est-à-dire que $D_*$ est l'ensemble des simplexes d'un complexe
+simplicial --- d'une « multiplicité simpliciale », dit la page. Mais (a) à (d)
+ne caractérisent pas les drapeaux d'un ensemble ordonné : ils caractérisent
+les complexes simpliciaux munis d'un ordre sur les sommets, total sur chaque
+simplexe, et tel que deux sommets comparables soient joints par une arête. Les
+drapeaux de $\mathfrak{X}$ sont ceux où, de plus, toute partie totalement
+ordonnée est un simplexe.\footnote{La page commence par « les $(D_*, \prec)$
+obtenus sont ceux pour lesquels on a, en plus de (a), (b), (c), la condition
+(d) », puis se reprend : « Donc il faut prendre les multiplicités simpliciales
+avec une structure d'ordre sur l'ensemble des sommets, induisant un ordre
+total sur chaque simplexe, et \ldots\ (sur les simplexes seulement\ldots ».
+Le bord d'un triangle $\{0 < 1 < 2\}$ satisfait (a) à (d) et ne vient d'aucun
+ensemble ordonné. Le crochet final affirme que (a) + (d) équivaut à (a') +
+(d), où (a') dit que dans $D_*$ toute famille finie majorée a une borne
+supérieure ; l'implication de gauche à droite est juste, la réciproque non :
+trois éléments minimaux sous un même élément, et rien d'autre, satisfont (a')
+et (d) sans satisfaire (a). Il faut ajouter que la borne supérieure d'une
+partie $S$ de sommets n'a pas d'autre sommet que ceux de $S$.}
+
+\pagerange{26}{29}
+\section*{Second exemple : ensembles à opérateurs et drapeaux de type $H$ (pages 26 à 29)}
+
+Soit $G$ un groupe et $\sigma_0, \ldots, \sigma_n \in G$ tels que $\sigma_i$
+et $\sigma_j$ commutent pour $|i - j| \geqslant 2$. Pour $K \subset \Delta_n$,
+soit $G_K$ le sous-groupe engendré par les $\sigma_i$, $i \in K$, et, pour
+$H \subset \Delta_n$ non vide, $N_H = G_{\Delta_n \smallsetminus H}$. Soit $X$
+un $G$-ensemble ; posons
+\[
+  D(H) = X / N_H \qquad (\text{drapeaux de type } H) .
+\]
+Si $H \subset H'$, $N_{H'} \subset N_H$ donne une restriction $D(H') \to D(H)$,
+et $H \mapsto D(H)$ est un préfaisceau sur $\mathfrak{P}^*(\Delta_n)$. Le
+modèle est l'ensemble $X$ des drapeaux complets d'une décomposition, avec
+l'action du groupe cartographique : $X/N_H$ est l'ensemble de ses drapeaux de
+type $H$, comme le voulait l'axiome 4 de la page 3.\footnote{C'est la
+construction des géométries de classes de Tits, $G/N_H$ quand $X = G$, et des
+« systèmes de chambres ». Le dossier 88 (pages 4 et 5) fait la même
+construction pour le groupe de Weyl et ses sous-groupes paraboliques, et
+obtient le complexe de Coxeter. La page 26 prend $H \in \mathfrak{P}(\Delta_n)$,
+vide compris ; on se limite aux parties non vides, les seules qui donnent des
+drapeaux.} L'ensemble ordonné $D_* = \coprod_H D(H)$, avec $d \leqslant d'$ si
+$H \subset H'$ et $d$ est la restriction de $d'$, satisfait (a), avec $I_d
+\simeq H$ pour $d \in D(H)$ ; ses éléments minimaux forment $D_0 =
+\coprod_i X/N_{\{i\}}$.
+
+\emph{L'ordre sur $D_0$.} Pour $x \in D(\{i\})$, $y \in D(\{j\})$, posons $x
+\prec y$ si $i < j$ et si $x$ et $y$ ont un majorant commun. Cette relation
+satisfait (b) et (c) ; elle est transitive dès que
+\[
+  D(\{i, j, k\}) \longrightarrow D(\{i, j\}) \times_{D(\{j\})} D(\{j, k\})
+  \qquad (i < j < k)
+\]
+est surjective, et c'est le cas par le lemme suivant.
+
+\textbf{Lemme} (pages 27 et 28). Soient $H, H' \subset \Delta_n$ tels que le
+plus grand élément de $H$ soit dans $H'$, et que $H \cap H'$ soit un segment
+initial de $H'$. Alors
+\[
+  D(H \cup H') \longrightarrow D(H) \times_{D(H \cap H')} D(H')
+\]
+est surjective.\footnote{La page énonce le lemme sous l'hypothèse « $H \cap H'$
+segment final de $H$ et segment initial de $H'$ », plus forte, et note en
+marge de la démonstration n'avoir utilisé que les deux propriétés qu'on
+énonce. Les segments s'entendent dans l'ordre induit sur $H$ et $H'$.}
+
+\emph{Démonstration.} Avec $K = \Delta_n \smallsetminus H$ et $K' = \Delta_n
+\smallsetminus H'$, la flèche est $X/G_{K \cap K'} \to X/G_K \times_{X/G_{K
+\cup K'}} X/G_{K'}$, et il suffit que $G_{K \cup K'} = G_{K'} \cdot G_K$ :
+si $(G_Kx, G_{K'}y)$ est dans le produit fibré, $y = k'kx$ avec $k' \in
+G_{K'}$, $k \in G_K$, et $z = kx$ a les deux images voulues. Soit $i$ le plus
+grand élément de $H$ ; il est dans $H \cap H'$, donc hors de $K \cup K'$, et
+\[
+  K \cup K' = K'_0 \sqcup K_0, \qquad K'_0 = (K \cup K') \cap [0, i-1],
+  \quad K_0 = (K \cup K') \cap [i+1, n] .
+\]
+On a $K_0 \subset K$, car $[i+1, n]$ ne rencontre pas $H$ ; et $K'_0 \subset
+K'$, car un $j < i$ qui serait dans $H'$ serait dans le segment initial $H
+\cap H'$. Les indices de $K'_0$ et de $K_0$ diffèrent d'au moins deux, donc
+$G_{K'_0}$ et $G_{K_0}$ commutent, et $G_{K \cup K'} = G_{K'_0} G_{K_0}
+\subset G_{K'} G_K$.
+
+Ainsi, pour \emph{tout} $G$-ensemble $X$, $(D_*, \prec)$ satisfait (a), (b),
+(c) et la transitivité, et définit un ensemble semi-simplicial satisfaisant
+(1), avec $D_m = \coprod_{\mathrm{card}\, H = m+1} X/N_H$. La page n'exige pas
+des $\sigma_i$ qu'ils soient des involutions.
+
+\emph{Programme} (page 29). La page s'arrête sur deux tâches : a) trouver,
+en termes de l'ensemble ordonné $(D_*, \prec)$, des conditions pour que (2
+bis) soit satisfaite, et plus généralement pour la surjectivité de $D(\Delta_n)
+\to D(H) \times_{D(H \cap H')} D(H')$ quand $\Delta_n = H \cup H'$ ; b)
+décrire la décomposition cellulaire de $|D_*|$ associée à l'ordre sur $D_0$ ---
+la question de la page 19 --- et reconstituer $(D_*, <, \prec)$ à partir de la
+structure d'espace décomposé en cellules et de ses structures coniques. Le
+reste de la page est blanc.
+
+\pagerange{30}{33}
+\section*{Préfaisceaux sur les parties finies de $\mathbf{N}$ (pages 30 à 33)}
+
+Soit $D$ un préfaisceau d'ensembles sur l'ensemble ordonné
+$\mathfrak{P}^*(\mathbf{N})$ --- une paracarte au sens de la page 13 --- et
+\[
+  \Theta(D) = \coprod_{A} D(A), \qquad \Theta_n(D) =
+  \coprod_{\mathrm{card}\, A = n+1} D(A) ,
+\]
+ordonné par $d \leqslant d'$ si $A \subset A'$ et $d$ est la restriction de
+$d'$ : c'est l'ensemble ordonné associé à la catégorie fibrée de $D$, avec une
+application croissante $\Theta(D) \to \mathfrak{P}^*(\mathbf{N})$. On
+s'intéresse surtout au cas où les $D(A)$ sont finis et nuls hors des parties
+de $[0, N]$ : $\Theta(D)$ est fini, et sa réalisation $|D|$ est un espace à
+triangulation finie où $\Theta(D)$ se réalise comme un ensemble de parties.
+
+L'ordre de $\mathbf{N}$ donne aussitôt une structure semi-simpliciale : si
+$A$ a $m+1$ éléments, $u_A : \Delta_m \xrightarrow{\sim} A$ est la bijection
+croissante, et pour $\sigma : \Delta_n \to \Delta_m$ strictement croissante,
+$\sigma^* : D(A) \to D(u_A\sigma(\Delta_n))$ est la restriction. Faisant
+varier $A$, on obtient $\sigma^* : \Theta_m(D) \to \Theta_n(D)$, et les
+$\Theta_n(D)$ forment un ensemble semi-simplicial. C'est le cas $I =
+\mathbf{N}$ des pages 16 à 18, l'ordre de $\mathbf{N}$ fournissant les ordres
+totaux compatibles sur les simplexes.
+
+Tout ceci vaut pour un ensemble ordonné $N$ quelconque, en remplaçant
+$\mathfrak{P}^*(\mathbf{N})$ par l'ensemble $\mathrm{Dr}(N)$ des drapeaux de
+$N$ --- ses parties finies non vides totalement ordonnées ---, qui est
+l'ensemble ordonné associé au foncteur $\varphi_N(\Delta_n) =
+\{\text{applications strictement croissantes } \Delta_n \to N\}$, c'est-à-dire
+au nerf non dégénéré de $N$. Un préfaisceau $D$ sur $\mathrm{Dr}(N)$ donne
+alors des applications croissantes
+\[
+  \Theta(D) \longrightarrow \mathrm{Dr}(N) \longrightarrow \Delta_{\mathrm{inj}} ,
+\]
+la seconde au sens des catégories fibrées. La page 33 s'arrête là, aux deux
+tiers vide.
+
+\pagerange{35}{37}
+\section*{Cartes cellulaires de dimension $n$ et groupe cartographique (pages 35 à 37)}
+
+La page 35 ouvre une nouvelle suite, sous un titre encadré : « Cartes
+cellulaires $n$-dim et groupes cartographiques ».
+
+\emph{Filtrations admissibles.} Une filtration $\emptyset = X_{-1} \subset X_0
+\subset \cdots \subset X_n = X$ est \emph{$n$-admissible} --- ou
+\emph{régulière}, dit la page 36 --- si, pour $0 \leqslant i \leqslant n$ :
+\begin{enumerate}
+  \item[a)] le découpage $\widetilde{X}_i = \mathrm{Déc}(X_i, X_{i-1})$ est une
+  somme topologique de boules fermées de dimension $i$, dont la partie
+  au-dessus de $X_{i-1}$ est le bord $\partial\widetilde{X}_i$, et
+  $p_i : \widetilde{X}_i \to X_i$ est fini --- de sorte que $X_i \smallsetminus
+  X_{i-1}$ est une somme de boules ouvertes de dimension $i$ ;
+  \item[b)] pour $i \geqslant 1$, la filtration de $\partial\widetilde{X}_i$
+  image inverse de $X_0 \subset \cdots \subset X_{i-1}$ par $q_{i-1} :
+  \partial\widetilde{X}_i \to X_{i-1}$ est $(i-1)$-admissible, et les
+  applications $q_{i-1}^{-1}(X_j) \smallsetminus q_{i-1}^{-1}(X_{j-1}) \to X_j
+  \smallsetminus X_{j-1}$ sont étales.
+\end{enumerate}
+Autrement dit, par récurrence : une filtration $0$-admissible est un espace
+discret, une filtration $1$-admissible un graphe topologique dont les arêtes
+sont des segments attachés par leurs extrémités, et une filtration
+$n$-admissible s'obtient d'une filtration $(n-1)$-admissible en attachant à
+$X_{n-1}$ une réunion disjointe de boules fermées de dimension $n$ par une
+application finie $q : \partial\widetilde{X}_n \to X_{n-1}$ telle que l'image
+inverse de la filtration soit $(n-1)$-admissible et que $q$ soit étale sur
+chaque strate.\footnote{La page écrit, dans cette dernière forme, « une
+filtr.\ $n$-admissible de $\partial\widetilde{X}_n$ » ; par b), c'est
+$(n-1)$-admissible. Le cas $0$ porte « nécessaire et \emph{suffisant} si
+déf », sans doute pour un espace fini. Un premier essai de la définition, en
+colonne de droite, est barré.} Ce sont des complexes CW dont les applications
+d'attachement sont des homéomorphismes locaux sur chaque strate ; elles ne
+sont pas injectives en général --- une boucle est un graphe $1$-admissible
+---, de sorte que ce ne sont pas des complexes CW réguliers.\footnote{On ne
+connaît pas de nom établi pour cette classe ; les réalisations des cartes
+généralisées de Lienhardt (voir la note de la page 7) en sont proches. Le
+rapprochement est le nôtre.}
+
+\emph{Morphismes.} Un morphisme $f : X \to Y$ d'espaces à $n$-filtration
+régulière est une application finie telle que $f^{-1}(Y_i) = X_i$ et que $X_i
+\smallsetminus X_{i-1} \to Y_i \smallsetminus Y_{i-1}$ soit étale --- donc un
+revêtement fini, $f$ étant propre. On note $\mathcal{F}_n$ leur catégorie et
+$\mathcal{F}_n^\circ$ la sous-catégorie pleine des objets dont l'espace est
+une variété topologique de dimension $n$, sans bord.\footnote{La page dit
+« ss-catégorie pleine $\mathcal{F}_n^\circ$ des espaces \ldots\ à
+$n$-filtration régulière », le mot manquant étant lu, avec doute,
+« vérifiés ». On le comprend comme « variétés » : c'est ce qu'exigent la
+construction de $\sigma_n$ à la page 37 (« si $X_n$ est une $n$-variété ») et
+le théorème 1. Une note de marge, en grande partie illisible, parle de
+foncteurs entre les $\mathcal{F}_i$ et les $\mathcal{F}_i^\circ$.}
+
+\emph{Les foncteurs $E_n$.} Par récurrence sur $n \geqslant 1$, on construit
+deux foncteurs qui rendent commutatif le carré
+
+\begin{tikzcd}
+  \mathcal{F}_n^\circ \arrow[r, "E_n^\circ"] \arrow[d, hook] & G_n\text{-ens}
+  \arrow[d, "\text{oubli}"] \\
+  \mathcal{F}_n \arrow[r, "E_n"] & G_{n-1}\text{-ens}
+\end{tikzcd}
+
+\begin{enumerate}
+  \item[(1)] $n = 1$. $E_1(X_1) = \partial\widetilde{X}_1$, l'ensemble des
+  extrémités des segments --- les demi-arêtes. L'application
+  $\partial\widetilde{X}_1 \to \pi_0(\widetilde{X}_1)$, vers l'ensemble des
+  arêtes, a ses fibres de cardinal 2 ; sa \emph{permutation caractéristique}
+  $\sigma_0$ échange les deux bouts d'une arête. Si $X_1$ est une variété de
+  dimension 1, $\partial\widetilde{X}_1 \to X_0$ a aussi ses fibres de
+  cardinal 2, d'où $\sigma_1$, qui échange les deux demi-arêtes en un sommet.
+  \item[(2)] $n \geqslant 2$. $\partial\widetilde{X}_n$, muni de la filtration
+  image inverse, est une somme de sphères de dimension $n-1$ filtrées, donc un
+  objet de $\mathcal{F}_{n-1}^\circ$, et l'on pose
+  \[
+    E_n(X_n) = E_{n-1}^\circ(\partial\widetilde{X}_n) ,
+  \]
+  muni de $\sigma_0, \ldots, \sigma_{n-1}$, c'est-à-dire de l'action de
+  $G_{n-1}$ ; c'est la composée de $\partial : \mathcal{F}_n \to
+  \mathcal{F}_{n-1}^\circ$ et de $E_{n-1}^\circ$. Si $X_n$ est une variété, le
+  morphisme de $G_{n-2}$-ensembles $E_{n-1}(\partial\widetilde{X}_n) \to
+  E_{n-1}(X_{n-1})$ a ses fibres de cardinal 2 --- une cellule de dimension
+  $n-1$ est dans exactement deux cellules de dimension $n$ ---, et sa
+  permutation caractéristique est $\sigma_n$ ; elle commute à $\sigma_0,
+  \ldots, \sigma_{n-2}$.\footnote{La page écrit « il commute à $\sigma_1,
+  \ldots, \sigma_{n-2}$ » ; il commute à tous les $\sigma_j$, $j \leqslant n -
+  2$, $\sigma_0$ compris, puisque l'application est un morphisme de
+  $G_{n-2}$-ensembles, et c'est ce que demande la présentation de $G_n$. Un
+  premier essai du cas $n = 1$, au bas de la page 36, est barré ; il passait
+  par le revêtement d'orientation des arcs.}
+\end{enumerate}
+Ainsi $E_n^\circ(X)$ est l'ensemble des drapeaux complets $(x_0, \ldots, x_n)$
+de la décomposition, avec les opérations des pages 3 et 7 ; $E_n(X)$, pour un
+$X$ qui n'est pas une variété, garde les opérations $\sigma_0, \ldots,
+\sigma_{n-1}$ qui ont un sens à l'intérieur d'une cellule.
+
+\pagerange{38}{40}
+\section*{Le programme : théorèmes 1 à 4 (pages 38 à 40)}
+
+\textbf{Théorème 1} (énoncé). Soit $n \geqslant 1$. Le foncteur
+$E_n^\circ$ passe à la catégorie isotopique déduite de $\mathcal{F}_n^\circ$
+et induit un foncteur pleinement fidèle
+\[
+  \mathcal{F}_n^\circ \longrightarrow (G_n\text{-ens}) ,
+\]
+dont l'image essentielle est formée de $G_n$-ensembles finis où les $\sigma_i$
+opèrent sans point fixe.\footnote{« Isotypique » se lit à la page 38,
+« isotopique » à la page 39 ; c'est la catégorie dont les morphismes sont les
+classes d'isotopie. La page affirme que l'image essentielle est formée
+\emph{des} $G_n$-ensembles où les $\sigma_i$ opèrent sans point fixe. C'est
+juste pour $n \leqslant 2$ --- toute carte généralisée sans bord de dimension 2
+se réalise sur une surface fermée ---, faux à partir de $n = 3$ : une orbite
+de $\langle \sigma_0, \sigma_1, \sigma_2 \rangle$ décrit le bord d'une cellule
+de dimension 3, qui peut être un tore aussi bien qu'une sphère, et une orbite
+de $\langle \sigma_1, \sigma_2, \sigma_3 \rangle$ le link d'un sommet, qui doit
+lui aussi être une sphère. La page 42 le reconnaît : caractériser l'image
+essentielle « revient au même » que reconnaître les sphères. Le théorème doit
+donc se lire, pour $n \geqslant 3$, comme une inclusion, l'égalité étant
+l'objet du théorème 7. La finitude des $G_n$-ensembles, écrite à la page 7,
+est omise ici.}
+
+\emph{Cascades.} À $X_n \in \mathcal{F}_n$ on associe une cascade d'ensembles
+à opérateurs
+\[
+  R_n(X_n) \to R_{n-1}(X_n) \to \cdots \to R_1(X_n) \to R_0(X_n),
+  \qquad R_i(X_n) = E_i(X_i) ,
+\]
+$R_i$ étant un $G_{i-1}$-ensemble et $R_0(X_n) = X_0$ un simple ensemble ; la
+flèche $R_i \to R_{i-1}$ s'obtient en appliquant $E_{i-1}$ à
+$\partial\widetilde{X}_i \to X_{i-1}$, et c'est un morphisme de
+$G_{i-2}$-ensembles. Soit $(\mathrm{Casc})_n$ la catégorie de ces cascades :
+ce sont exactement les $n$-complexes combinatoires de la page 7, la condition
+d'invariance de la page 7 étant celle qu'on vérifie sur les cascades d'espaces
+filtrés.\footnote{L'identification est la nôtre ; la page 38 ne rappelle pas
+la page 7, et ne précise pas les conditions de la catégorie (lue
+« (Casca) »).}
+
+\textbf{Théorème 2} (énoncé). Le foncteur $\varphi_n : \mathcal{F}_n \to
+(\mathrm{Casc})_n$, de la catégorie isotopique déduite de $\mathcal{F}_n$, est
+pleinement fidèle.
+
+Il faut aussi un foncteur $\rho_n : (G_n\text{-ens}) \to (\mathrm{Casc})_n$
+qui prolonge $\varphi_n$ sur $\mathcal{F}_n^\circ$ :
+
+\textbf{Théorème 3} (énoncé). Pour $X_n \in \mathcal{F}_n^\circ$, de
+$G_n$-ensemble $E = E_n^\circ(X_n)$,
+\[
+  R_n(X_n) \simeq E \ (\text{en oubliant } \sigma_n), \quad
+  R_{n-1}(X_n) \simeq E/\langle \sigma_n \rangle, \quad \ldots, \quad
+  R_0(X_n) \simeq E/\langle \sigma_n, \ldots, \sigma_1 \rangle ,
+\]
+les flèches de transition étant les passages au quotient, et
+$R_{n-k}(X_n)$ gardant l'action de $\sigma_0, \ldots, \sigma_{n-k-1}$, qui
+commutent à $\sigma_{n-k+1}, \ldots, \sigma_n$. On pose donc $\rho_n(E) = (E
+\to E/\langle\sigma_n\rangle \to \cdots)$.\footnote{C'est la formule des bords
+$\delta_{i-1}$ de la page 8. Elle tient à ce que, dans une variété, les
+drapeaux complets qui prolongent un drapeau $(x_0, \ldots, x_j)$ sont ceux du
+link de $x_j$, une sphère de dimension $n-j-1$, et sont permutés
+transitivement par $\langle \sigma_{j+1}, \ldots, \sigma_n \rangle$ --- la
+connexité forte des polytopes abstraits. La page appelle ce foncteur
+$\psi_n$, comme celui de la page 40 ; on le note $\rho_n$, lettre qu'elle
+emploie elle-même à la page 40.}
+
+\emph{Le multicône} (page 40). En sens inverse, on cherche des foncteurs ---
+adjoints ? --- $(\mathrm{Casc})_n \to \mathcal{F}_n$ et $(G_n\text{-ens}) \to
+\mathcal{F}_n^\circ$. On définit $\psi_n : (\mathrm{Casc})_n \to \mathcal{F}_n$
+par récurrence. Pour $n = 0$, $\psi_0(E_0)$ est $E_0$ muni de la topologie
+discrète. En général, une cascade $C_n = (E_n \to E_{n-1} \to \cdots \to E_0)$
+contient la cascade tronquée $C_{n-1} = (E_{n-1} \to \cdots \to E_0)$, qui
+définit $X_{n-1} = \psi_{n-1}(C_{n-1})$. Les cellules de dimension $n$ seront
+les orbites, $\pi_0(\widetilde{X}_n) \simeq E_n/G_{n-1}$ ; leur bord est
+\[
+  \partial\widetilde{X}_n = \psi_{n-1}\bigl(\rho_{n-1}(E_n)\bigr) ,
+\]
+et l'application d'attachement $\partial\widetilde{X}_n \to X_{n-1}$ s'obtient
+en appliquant $\psi_{n-1}$ au morphisme de cascades $\rho_{n-1}(E_n) \to
+C_{n-1}$ --- qui existe précisément grâce à la condition d'invariance de la
+page 7. Alors
+\[
+  \psi_n(C_n) = \text{multicône de } \psi_{n-1}\bigl(\rho_{n-1}(E_n) \to
+  C_{n-1}\bigr) :
+\]
+on attache à $X_{n-1}$ un cône sur chaque composante de
+$\partial\widetilde{X}_n$, comme à la page 12.\footnote{« Multicône » est une
+lecture douteuse, écrite au-dessus d'un mot biffé, et la lettre $\rho$ aussi.
+La page note en marge « préciser ce point » ; l'existence du morphisme
+$\rho_{n-1}(E_n) \to C_{n-1}$ à partir de l'invariance de la page 7 est
+notre précision. Un cône sur une composante de $\partial\widetilde{X}_n$
+n'est une boule que si cette composante est une sphère : en général,
+$\psi_n(C_n)$ est une carte \emph{conique} au sens de la page 9, et non
+cellulaire. C'est la même difficulté que dans la note au théorème 1.}
+
+\textbf{Théorème 4} (annoncé). Description de $\psi_n$, et le cas échéant
+propriété d'adjonction.
+
+\pagerange{41}{42}
+\section*{Théorèmes 5 à 7, et d'autres points (pages 41 et 42)}
+
+\textbf{Théorème 5} (annoncé). Subdivisions barycentriques de
+$\psi_n(C_n)$, et leur description par des ensembles
+pseudo-simpliciaux.\footnote{« Pseudo-simpliciaux » est une lecture
+incertaine.}
+
+\emph{Remarque.} Se donner un homéomorphisme $X_n \simeq \psi_n\varphi_n(X_n)$
+revient à se donner, pour toute cellule $\widetilde{X}_i^\alpha$, un
+homéomorphisme $\widetilde{X}_i^\alpha \simeq
+\mathrm{Cône}(\partial\widetilde{X}_i^\alpha)$ induisant l'identité sur le
+bord.\footnote{Pour une boule, un tel homéomorphisme existe et il est unique à
+isotopie près relativement au bord : c'est le « truc d'Alexander » (1923), qui
+explique qu'on travaille dans la catégorie isotopique. Le nom n'est pas sur
+la page.} La subdivision barycentrique se fait au-dessus d'une telle
+structure ; itérée deux fois, elle donne une triangulation, dont il faudrait
+décrire le complexe simplicial --- un ensemble et des parties finies stables
+par inclusion --- en termes de la cascade $C_n$ : ce serait un théorème 6.
+
+\textbf{Théorème 7} (annoncé, sans énoncé). Caractériser l'image essentielle
+de $\mathcal{F}_n^\circ$ dans les $G_n$-ensembles, et par là celle de
+$\mathcal{F}_n$ dans les cascades, « en termes combinatoires ! Voire, ce qui
+revient au même : étudier si un espace triangulé est homéomorphe à une
+sphère --- cela semble lié : l'hypothèse de Poincaré ! ».\footnote{On sait
+depuis S.~P.~Novikov (années 1950--1960) qu'aucun algorithme ne reconnaît la
+sphère de dimension $n \geqslant 5$ parmi les complexes simpliciaux finis ; en
+dimension 3 la reconnaissance est décidable (Rubinstein, 1992 ; Thompson,
+1994). Une caractérisation combinatoire de l'image essentielle ne peut donc
+pas, pour $n \geqslant 5$, être une condition qu'on vérifie mécaniquement.
+Références de mémoire, non vérifiées ; la page ne cite rien.}
+
+\emph{Autres points à examiner} : les relations avec les ensembles ordonnés,
+« polyèdres combinatoires », par les drapeaux ; la dualité dans
+$\mathcal{F}_n^\circ$ ; les filtrations admissibles d'un produit d'espaces ;
+les fibrations.\footnote{Pour la dualité, on observera que $\sigma_i \mapsto
+\sigma_{n-i}$ est un automorphisme de $G_n$ ; sur les cartes généralisées il
+échange une décomposition et sa décomposition duale. La remarque est la
+nôtre.}
+
+\pagerange{45}{45}
+\section*{Aparté : petits ensembles et géométries finies (page 45)}
+
+Une page de listing, sans lien apparent avec ce qui l'entoure, dit qu'un
+petit ensemble fini « est » une géométrie finie : que se donner un ensemble à
+$k$ éléments revient à se donner une telle géométrie, les isomorphismes se
+correspondant. On lit, avec ce qu'on sait aujourd'hui :
+\begin{itemize}
+  \item 2 éléments : un torseur sous $\mathbf{F}_2$, ou une droite affine sur
+  $\mathbf{F}_2$ ;
+  \item 3 éléments : une droite affine sur $\mathbf{F}_3$, les vecteurs non
+  nuls d'un plan sur $\mathbf{F}_2$, une droite projective sur $\mathbf{F}_2$
+  --- de groupes $\mathrm{Aff}(1, \mathbf{F}_3) \simeq \mathrm{GL}(2,
+  \mathbf{F}_2) \simeq \mathfrak{S}_3$ ;
+  \item 4 éléments : un plan affine sur $\mathbf{F}_2$, une droite projective
+  sur $\mathbf{F}_3$ --- $\mathrm{Aff}(2, \mathbf{F}_2) \simeq
+  \mathrm{PGL}(2, \mathbf{F}_3) \simeq \mathfrak{S}_4$ ; et, avec une
+  orientation, une droite affine sur $\mathbf{F}_4$, $\mathrm{Aff}(1,
+  \mathbf{F}_4) \simeq \mathfrak{A}_4$ ;
+  \item 5 éléments orientés : une droite projective sur $\mathbf{F}_4$,
+  $\mathrm{PGL}(2, \mathbf{F}_4) \simeq \mathfrak{A}_5$ ;
+  \item 5 éléments, sans orientation : par $\mathfrak{S}_5 \simeq
+  \mathrm{PGL}(2, \mathbf{F}_5)$, un ensemble $E$ à 5 éléments définit une
+  droite projective sur $\mathbf{F}_5$, à 6 points, que la page rapproche
+  de l'icosaèdre.
+\end{itemize}
+\footnote{« Orientation » d'un ensemble fini s'entend comme le choix d'une
+des deux classes d'ordres totaux modulo les permutations paires ; sur un
+ensemble à 4 (resp.\ 5) éléments, il y a exactement deux structures de droite
+affine sur $\mathbf{F}_4$ (resp.\ projective sur $\mathbf{F}_4$), échangées
+par une transposition, ce qui justifie l'énoncé. La ligne sur 5 éléments est
+très serrée ; on y lit « droite projective sur $\mathbf{F}_5$, les 6 pts
+\ldots\ icosaèdre \ldots\ à $E$ », et c'est l'isomorphisme exceptionnel
+$\mathfrak{S}_5 \simeq \mathrm{PGL}(2, \mathbf{F}_5)$ --- celui qui fait de
+$\mathfrak{S}_5$ un sous-groupe transitif de $\mathfrak{S}_6$ --- qui donne
+un sens à la phrase ; les six points correspondent aux six grandes diagonales
+de l'icosaèdre, sur lesquelles agit $\mathfrak{A}_5$. Interprétation de notre
+part. Le dossier 89 identifie de même les ensembles à trois éléments orientés
+et les plans sur $\mathbf{F}_3$.}
+
+La seconde moitié de la page compte les points des groupes de Chevalley sur
+un corps fini. Pour $G$ réductif déployé de rang $r$, à $N$ racines
+positives, de degrés $d_\lambda$,
+\[
+  \mathrm{card}\, G(\mathbf{F}_q) = q^N (q-1)^r \,\mathrm{card}\,
+  (G/B)(\mathbf{F}_q) = q^N (q-1)^r \prod_\lambda \frac{q^{d_\lambda} -
+  1}{q - 1} ,
+\]
+et $\mathrm{card}\,(G/B)(\mathbf{F}_q) = \sum_w q^{\ell(w)} =
+P_{G/B}(\sqrt{q})$, la somme portant sur les cellules de Bruhat, où
+\[
+  P_{G/B}(T) = \frac{\prod_\lambda (1 - T^{2d_\lambda})}{(1 - T^2)^r}
+\]
+est le polynôme de Poincaré de la variété des drapeaux, ce qu'exprime aussi
+$P_{BG} \cdot P_{G/B} = P_{BT}$.\footnote{La page écrit $P_{G/B} = (1 -
+T^2)^r / \prod_\lambda (1 - T^{2d_\lambda})$, la fraction renversée ; la
+ligne suivante, « $(1 : P_{G/B}(\sqrt{q})) = (q-1)^r/\prod_\lambda
+(q^{d_\lambda} - 1)$ », est juste, et le contrôle sur $\mathrm{SL}_2$, $1 +
+T^2$, tranche. Les indices $BG$, $BT$ (espaces classifiants) sont d'une
+lecture incertaine.} Pour $\mathrm{PGL}_3$ --- « $GP(2)$ », $N = 3$, $r = 2$,
+$d_\lambda = 2, 3$ --- cela donne $q^3(q-1)^2(q+1)(q^2+q+1)$. Un tableau
+dressé à la main donne les ordres de $\mathrm{GL}(1)$, $\mathrm{Aff}(1)$,
+$\mathrm{SL}(2)$, $\mathrm{PGL}(2)$, $\mathrm{GL}(2)$, $\mathrm{Aff}(2)$ sur
+$\mathbf{F}_q$ pour $q = 2, 3, 4, 5$ ; toutes les valeurs sont justes, et ce
+sont celles qu'il faut pour vérifier les identifications de la première
+moitié : $6 = \mathrm{card}\, \mathrm{GL}(2, \mathbf{F}_2)$, $24 =
+\mathrm{card}\, \mathrm{Aff}(2, \mathbf{F}_2) = \mathrm{card}\, \mathrm{PGL}(2,
+\mathbf{F}_3)$, $12$, $60$, $120$.
+
+\pagerange{47}{47}
+\section*{Sujets de DEA (page 47)}
+
+\begin{enumerate}
+  \item[1)] La catégorie isotopique des $1$-complexes topologiques compacts
+  à groupe fini d'automorphismes, avec plus de morphismes que les seuls
+  isomorphismes.
+  \item[2)] La catégorie isotopique des cartes cellulaires --- le programme
+  des pages 35 à 42.
+  \item[3)] La convexité du point de vue de la géométrie projective : pour
+  $A$ convexe dans un espace projectif réel, existe-t-il un hyperplan qui ne
+  le rencontre pas ?\footnote{La réponse dépend de la définition de la
+  convexité projective, que la page ne donne pas : pour un convexe
+  « propre », contenu avec son adhérence dans une carte affine, c'est oui par
+  définition ; une droite projective entière, qu'on peut tenir pour convexe,
+  rencontre tout hyperplan.}
+  \item[4)] La géométrie des cubes et les espaces homogènes de
+  $\mathfrak{S}_4$ --- que la fin du dossier aborde : le groupe des rotations
+  du cube est $\mathfrak{S}_4$ (page 61).
+\end{enumerate}
+
+\pagerange{49}{50}
+\section*{Cube combinatoire : le cube d'un ensemble à involution (pages 49 et 50)}
+
+La chemise de la page 43 porte « cube combinatoire », au-dessus de
+« 2-cartes cellulaires » biffé.
+
+\emph{La maquette.} Soit $(\mathbb{B}, \sigma)$ un ensemble fini muni d'une
+involution sans point fixe, $I = \mathbb{B}/\sigma$, $n = \mathrm{card}\, I$.
+Posons
+\[
+  E = \mathrm{Hom}_{\{\pm 1\}}(\mathbb{B}, \mathbf{R}) = \{\varphi :
+  \mathbb{B} \to \mathbf{R} \mid \varphi(\sigma b) = -\varphi(b)\} , \qquad
+  C = \{\varphi \in E \mid |\varphi(b)| \leqslant 1 \ \forall b\} .
+\]
+Le choix d'une section de $\mathbb{B} \to I$ identifie $E$ à $\mathbf{R}^I$ et
+$C$ au cube $[-1, 1]^I$ ; mais $C$ est défini sans ce choix. Un élément $b$
+de $\mathbb{B}$ définit la facette $\{\varphi(b) = 1\}$, et $\sigma b$ la
+facette opposée.\footnote{La page écrit $\mathbb{B} \hookrightarrow C
+\hookrightarrow E$ sans dire comment $\mathbb{B}$ s'envoie dans $C$. Une
+lecture naturelle envoie $b$ sur le centre de sa facette, la fonction qui vaut
+$1$ en $b$, $-1$ en $\sigma b$ et $0$ ailleurs ; c'est la nôtre. La marge
+de la page 49 dit que les éléments de $\mathbb{B}$ correspondent aux facettes
+de codimension 1, et que $\sigma F$ est l'unique facette de codimension 1 qui
+ne rencontre pas $F$.}
+
+\textbf{Proposition} (page 49). Pour $J \in \mathrm{Sp}(\mathbb{B})$, soit
+\[
+  F(J) = \{\varphi \in C \mid \varphi(b) = 1 \ \forall b \in J, \
+  \varphi(b) \neq \pm 1 \ \forall b \notin J \cup \sigma J\} ,
+\]
+une face ouverte de $C$. Alors $J \mapsto F(J)$ est une bijection de
+$\mathrm{Sp}(\mathbb{B})$ sur l'ensemble des faces non vides de $C$, qui
+renverse l'ordre --- les faces étant ordonnées par l'inclusion de leurs
+adhérences. Le treillis des faces de $C$ est donc l'opposé de
+$\mathrm{Sp}(\mathbb{B})$, auquel on ajoute un plus petit élément, la face
+vide. La section vide donne $C$ lui-même, les sections totales les
+sommets.\footnote{La page note $\mathrm{Spd}(\mathbb{B}/I)$ les sections
+partielles et $\mathrm{Fac}(C)$, ou $\mathrm{Comb}(C)$, l'ensemble ordonné des
+faces, le « polyèdre combinatoire » de $C$ ; elle appelle « facettes » toutes
+les faces. On garde « face » pour une face quelconque et « facette » pour une
+face de codimension 1.}
+
+\textbf{Proposition} (page 49). Soit $p : \mathbb{B} \to I$ une surjection et
+$\mathcal{P}(p)$ l'ensemble de ses sections partielles, ordonné par
+inclusion. Le foncteur $p \mapsto \mathcal{P}(p)$, du groupoïde des
+surjections vers les ensembles ordonnés, est pleinement fidèle. En effet, on
+retrouve $\mathbb{B}$ comme l'ensemble des éléments minimaux de
+$\mathcal{P}(p) \smallsetminus \{\emptyset\}$, et la relation $p(b) = p(b')$
+comme : $b = b'$, ou aucune section totale ne contient à la fois $b$ et $b'$.
+
+\textbf{Corollaire} (page 50). Pour deux maquettes $(\mathbb{B}, \sigma)$,
+$(\mathbb{B}', \sigma')$ de cubes $C$, $C'$, les applications
+\[
+  \mathrm{Isom}\bigl((\mathbb{B}, \sigma), (\mathbb{B}', \sigma')\bigr)
+  \xrightarrow{\ \alpha\ } \mathrm{Isom}_{\mathrm{aff}}(C, C')
+  \xrightarrow{\ \beta\ } \mathrm{Isom}_{\mathrm{ord}}\bigl(\mathrm{Fac}(C),
+  \mathrm{Fac}(C')\bigr)
+\]
+sont des bijections. En particulier
+\[
+  \mathrm{Aut}(C) \simeq \mathrm{Aut}(\mathbb{B}, \sigma) = \{\pm 1\}^I
+  \rtimes \mathfrak{S}_I ,
+\]
+le centralisateur de $\sigma$ dans le groupe des permutations de
+$\mathbb{B}$, d'ordre $2^n n!$.\footnote{C'est le \emph{groupe hyperoctaédral},
+groupe de Weyl de type $B_n$ ; le nom n'est pas sur la page.}
+
+\emph{Démonstration.} $\beta\alpha$ est bijective par les deux propositions ;
+$\beta$ est injective, une application affine étant déterminée par son effet
+sur les sommets ; donc $\beta$, surjective, est bijective, et $\alpha$ aussi.
+La page ajoute qu'on peut remplacer les isomorphismes affines par les
+isomorphismes projectifs.\footnote{C'est vrai pour $n \geqslant 2$, les
+sommets du cube contenant alors un repère projectif, faux pour $n = 1$ : les
+homographies de la droite qui fixent les deux extrémités d'un segment forment
+un groupe à un paramètre qui préserve le segment.}
+
+\textbf{Corollaire.} Les faces d'un cube sont des cubes.
+
+\pagerange{51}{53}
+\section*{Drapeaux du cube, antipodie, nombre de faces (pages 51 à 53)}
+
+\textbf{Proposition} (page 51). $\mathrm{Aut}(C)$ opère simplement
+transitivement sur l'ensemble $\mathrm{Drap}(C)$ des drapeaux complets $F_0
+\subset F_1 \subset \cdots \subset F_n = C$ de faces ; c'est ce qu'on
+appellera un polyèdre \emph{régulier}.
+
+En effet, une face de dimension $d$ est contenue dans exactement $n - d$
+faces de dimension $d+1$, de sorte que
+\[
+  \mathrm{card}\, \mathrm{Drap}(C) = 2^n \cdot n \cdot (n-1) \cdots 1 = 2^n
+  n! = \mathrm{card}\, \mathrm{Aut}(C) ,
+\]
+et il suffit que l'action soit libre, ce qui vaut pour tout polyèdre convexe :
+
+\textbf{Lemme} (page 51). Un automorphisme affine $u$ d'un polyèdre convexe
+$C$ qui fixe un drapeau complet est l'identité.
+
+\emph{Démonstration.} Par récurrence sur la dimension. Si $u$ fixe $(F_0,
+\ldots, F_{n-1}, C)$, il est l'identité sur la facette $F_{n-1}$ par
+hypothèse de récurrence, donc sur l'hyperplan $H$ qu'elle engendre. Un
+automorphisme affine d'ordre fini --- $\mathrm{Aut}(C)$ est fini --- qui fixe
+$H$ point par point est l'identité ou une symétrie par rapport à $H$ ; une
+symétrie échange les deux demi-espaces que borde $H$ et ne peut respecter
+$C$, qui est d'un seul côté.
+
+\textbf{Corollaire.} Pour un cube $C_0$ de dimension $n$ muni d'un drapeau
+$D_0$ et tout cube $C$ de dimension $n$, $u \mapsto u(D_0)$ est une bijection
+$\mathrm{Isom}(C_0, C) \simeq \mathrm{Drap}(C)$. Ainsi $\mathrm{Drap}(C)$ est
+un torseur à droite sous $G_0 = \mathrm{Aut}(C_0)$, et un torseur à gauche
+sous $\mathrm{Aut}(C)$, qui est le centralisateur de l'action de $G_0$ ; et
+\[
+  C \longmapsto \mathrm{Drap}(C) , \qquad \{n\text{-cubes}\}
+  \xrightarrow{\ \sim\ } \{G_0\text{-torseurs à droite}\} ,
+\]
+est une équivalence de groupoïdes. On peut prendre pour $(C_0, D_0)$ le cube
+standard, de maquette $[1, n] \times \{\pm 1\}$, avec le drapeau défini par
+les sections partielles $[1, i] \times \{+1\}$, $0 \leqslant i \leqslant n$,
+d'où $G_0 \simeq \{\pm 1\}^n \rtimes \mathfrak{S}_n$.\footnote{« Produit ½
+direct » : il écrit ½ pour « semi- ». Le mot « commutant » de la page 52 est
+d'une lecture incertaine ; le centralisateur de l'action à droite de $G_0$
+dans les permutations de $\mathrm{Drap}(C)$ est bien $\mathrm{Aut}(C)$.}
+
+\emph{L'antipodie} (page 53). La symétrie centrale $-\mathrm{id}$ du cube
+est, du point de vue combinatoire, $J \mapsto \sigma J$ sur les sections
+partielles, et, du point de vue de la maquette, l'automorphisme $\sigma$ de
+$(\mathbb{B}, \sigma)$. Pour toute face propre $F$, $F$ et $\sigma F$ sont
+disjointes ; pour une facette, $\sigma F$ est l'unique facette qui ne la
+rencontre pas. Le centre de $\mathrm{Aut}(C)$ est $\{1, \sigma\}$, de sorte
+que $\sigma$ est son unique élément central non trivial.\footnote{La page
+appuie ce dernier point sur le fait que le centre de $\mathfrak{S}_I$ est
+trivial pour $n \geqslant 3$ ; l'énoncé vaut en fait pour tout $n \geqslant
+1$ --- pour $n = 2$, $\mathrm{Aut}(C)$ est le groupe diédral d'ordre 8, de
+centre $\{\pm 1\}$. Une proposition encadrée et barrée commençait à
+énoncer : pour deux faces fermées non vides $F$, $F'$, $F \cap F' \neq
+\emptyset$ ou $F \cap \sigma F' \neq \emptyset$, en demandant si cela
+caractérise $\sigma$.}
+
+\emph{Nombre de faces.} Le cube a $c_d = \binom{n}{d} 2^{n-d}$ faces de
+dimension $d$, et
+\[
+  \sum_{d=0}^n (-1)^d c_d = \sum_{d=0}^n (-1)^d \binom{n}{d} 2^{n-d} = (2 -
+  1)^n = 1 ,
+\]
+formule d'Euler--Poincaré qui vaut, souligne la page, pour tout polyèdre
+convexe de dimension $n$, la face $C$ comptée.
+
+\pagerange{54}{56}
+\section*{Orientations, polyèdres réguliers (pages 54 à 56)}
+
+\emph{L'orientation du cube.} L'ensemble à deux éléments des orientations de
+$C$ est, par définition provisoire, celui de l'espace affine qu'il engendre,
+et
+\[
+  \omega_C = \omega_E \simeq \omega_I \wedge \bigwedge_{i \in I}
+  \mathbb{B}_i ,
+\]
+produit contracté de $\{\pm 1\}$-torseurs : une orientation de $E \simeq
+\mathbf{R}^I$ est la donnée d'une orientation de l'ensemble $I$ --- un ordre
+total à permutation paire près --- et d'un signe dans chaque fibre
+$\mathbb{B}_i$, modulo un changement pair. L'antipodie $\sigma$ agit sur
+chaque fibre, donc sur $\omega_C$ par $(-1)^n$.
+
+\textbf{Proposition.} L'antipodie conserve l'orientation si et seulement si
+$n$ est pair. \textbf{Corollaire.} Pour $n$ impair, $\mathrm{Aut}(C) \simeq
+\mathrm{Aut}^+(C) \times \{\pm 1\}$.
+
+\emph{Orientation combinatoire.} Pour un polyèdre convexe $C$ engendrant $E$,
+l'ensemble $\omega_E$ se décrit en termes du seul ensemble ordonné
+$\mathrm{Fac}(C)$. Un drapeau complet détermine une orientation --- celle de
+la base $p_1 - p_0, \ldots, p_n - p_0$, pour des points $p_i$ choisis à
+l'intérieur relatif de $F_i$, qui ne dépend que du drapeau ---, et une
+orientation de $E$ revient à la partie $D^+$ des drapeaux « directs ». La
+solution combinatoire : parmi les partitions $\mathrm{Drap}(C) = D^+ \sqcup
+D^-$, ce sont celles que chaque $\sigma_i$, $0 \leqslant i \leqslant n-1$,
+échange ; il y en a exactement deux.\footnote{La page écrit « les $\sigma_i$
+($1 \leqslant i \leqslant n$) » ; sur les drapeaux d'un polyèdre de
+dimension $n$, dont le dernier membre $C$ est fixe, ce sont $\sigma_0, \ldots,
+\sigma_{n-1}$. Qu'il y ait exactement deux telles partitions demande que le
+graphe des drapeaux soit connexe et biparti ; c'est le cas pour un polyèdre
+convexe, puisque l'orientation géométrique change sous chaque $\sigma_i$.
+Le dossier 89 (pages 19 et 20) énonce de même qu'un polygone combinatoire
+connexe a exactement deux orientations. La page remplace partout
+« drapeaux » par « repères » ; c'est le même objet.}
+
+\textbf{Proposition} (page 55). Pour un polyèdre convexe $C$, les
+homomorphismes
+\[
+  \mathrm{Aut}(C) \xrightarrow{\ \alpha\ } \mathrm{Aut}_{\mathrm{ord}}
+  (\mathrm{Fac}(C)) \xrightarrow{\ \beta\ } \mathrm{Aut}_{\mathrm{ens}}\,
+  \mathrm{Drap}(C)
+\]
+sont injectifs, et $\mathrm{Aut}_{\mathrm{ord}}(\mathrm{Fac}(C))$ agit
+librement sur $\mathrm{Drap}(C)$. Pour $\alpha$ : un automorphisme est connu
+sur les points extrémaux. Pour la liberté, soit $u$ un automorphisme de
+$\Phi = \mathrm{Fac}(C)$ fixant un drapeau complet ; par récurrence, $u$ est
+l'identité sur $\Phi_{\leqslant F_{n-1}}$. S'il est l'identité sur
+$\Phi_{\leqslant x}$, $x$ une facette, et si $y$ est une facette qui partage
+avec $x$ une face de dimension $n - 2$, il fixe $y$ --- seule autre facette
+contenant cette face --- et un drapeau de $\Phi_{\leqslant y}$, donc est
+l'identité sur $\Phi_{\leqslant y}$. Il reste à voir que la relation
+« partager une face de dimension $n-2$ » engendre la relation grossière sur
+les facettes, ce que la page renvoie à un « argument topologique de
+connexité ».\footnote{C'est la connexité du graphe du polytope dual
+(théorème de Balinski, 1961, qui la donne même $n$-fois connexe) ; le nom
+n'est pas sur la page.}
+
+\emph{Polyèdres réguliers et homogènes.} $C$ est \emph{régulier} si
+$\mathrm{Aut}(C)$ est transitif --- donc simplement transitif --- sur
+$\mathrm{Drap}(C)$, et \emph{homogène} si, pour $0 \leqslant i \leqslant n -
+1$, toute face de dimension $i+1$ contient le même nombre $d_i$ de faces de
+dimension $i$. Alors $\mathrm{card}\, \mathrm{Drap}(C) = d_0 d_1 \cdots
+d_{n-1}$.\footnote{La définition de la page est embrouillée --- « $\forall F
+\in \mathrm{Fac}_{i+1}(C)$, le cardinal de l'ens.\ des $y \in
+\mathrm{Fac}_i(C)$ qui majorent $x$ soit $d_i$ » --- et suivie de « (car $d_n
+= 1$) ». On compte $d_i$ vers le bas, ce qui rend la formule du nombre de
+drapeaux juste : on choisit une facette parmi $d_{n-1}$, une face de
+codimension 2 dans celle-ci parmi $d_{n-2}$, et ainsi de suite. Pour le cube,
+$d_i = 2(i+1)$ et le produit vaut $2^n n!$.} Évidemment régulier implique
+homogène. Avec
+\[
+  N = \mathrm{card}\, \mathrm{Aut}(C), \quad N_c = \mathrm{card}\,
+  \mathrm{Aut}(\mathrm{Fac}(C)), \quad R = \mathrm{card}\, \mathrm{Drap}(C) ,
+\]
+on a $N \mid N_c \mid R$ --- un sous-groupe, puis une action libre --- et $C$
+est régulier si et seulement si $N = R$, auquel cas $N = N_c = R = d_0 \cdots
+d_{n-1}$.
+
+\emph{Orientation d'un polyèdre convexe} (page 56) : une orientation de
+l'espace affine $E_C$ qu'il engendre. Par ce qui précède, l'ensemble
+$\omega(C)$ ne dépend, à isomorphisme canonique près, que de
+$\mathrm{Fac}(C)$, d'où des applications $\mathrm{Isom}_{\mathrm{ord}}(\mathrm{Fac}(C),
+\mathrm{Fac}(C')) \to \mathrm{Isom}(\omega(C), \omega(C'))$ et un
+homomorphisme $\mathrm{Aut}_{\mathrm{ord}}(\mathrm{Fac}(C)) \to \{\pm 1\}$.
+Si $C$ a une antipodie --- un centre de symétrie ---, sa signature est
+$(-1)^n$.
+
+\pagerange{57}{60}
+\section*{Les classes de conjugaison de $\mathrm{Aut}(C_n)$ (pages 57 à 60)}
+
+\emph{Réduction.} Un automorphisme $u$ du cube est un automorphisme de la
+maquette ; il induit $u_I$ sur $I$, qui décompose $I$ en orbites $I_\alpha$,
+et $u_I$ est connu à conjugaison près par les cardinaux de ces orbites. Avec
+$\mathbb{B}_\alpha$ l'image inverse de $I_\alpha$, la situation est la somme
+des $(\mathbb{B}_\alpha, u|\mathbb{B}_\alpha)$ : géométriquement, $C =
+\prod_\alpha C_\alpha$ et $u = \prod_\alpha u_\alpha$. On est ramené au cas où
+$u_I$ est un cycle sur $I$, de longueur $n$. Il y a alors deux cas :
+\begin{enumerate}
+  \item[a)] $\mathbb{B}$ est réunion de deux orbites de $u$, chacune une
+  section de $\mathbb{B} \to I$ ; si $\varepsilon$ est l'ensemble de ces deux
+  orbites, $\mathbb{B} \simeq \varepsilon \times I$ et $u = \mathrm{id}_\varepsilon
+  \times u_I$ ;
+  \item[b)] le « cas tordu » : $\mathbb{B}$ est une seule orbite, de longueur
+  $2n$, et $u^n = \sigma$. La situation est déterminée à isomorphisme près
+  par $n$.
+\end{enumerate}
+Dans des coordonnées, a) est un cycle de signe total $+1$ et b) un cycle de
+signe total $-1$.
+
+\textbf{Proposition} (page 58). Les classes de conjugaison de $\mathrm{Aut}(C_n)
+= \{\pm 1\}^n \rtimes \mathfrak{S}_n$ sont paramétrées par deux suites
+d'entiers $(\alpha_i^+)$, $(\alpha_i^-)$, $\alpha_i^+$ (resp.\
+$\alpha_i^-$) étant le nombre de cycles de longueur $i$ de $u_I$ au-dessus
+desquels $u$ a deux cycles de longueur $i$ (resp.\ un cycle de longueur
+$2i$), soumises à
+\[
+  \sum_i i\,(\alpha_i^+ + \alpha_i^-) = n .
+\]
+\footnote{C'est la description classique par couples de partitions (« type
+cyclique signé »), qu'on attribue à A.~Young (1930) ; le nom n'est pas sur la
+page. La page lit « au-dessus desquels il y a un cycle de long.\ $i$ (resp.\
+$2i$) » ; dans le cas non tordu il y en a deux.}
+
+\emph{Faces fixes.} Les faces non vides fixées par $u$ correspondent aux
+sections partielles stables par $u$. Au-dessus d'un cycle tordu, une telle
+section est vide, puisque l'orbite contient les deux points de chaque fibre ;
+au-dessus d'un cycle non tordu, elle est vide ou l'une des deux orbites. Il y
+a donc $3^{\sum_i \alpha_i^+}$ faces fixes, $C$ comprise, et, si $f_d$ est le
+nombre de faces fixes de codimension $d$ --- celles des sections à $d$
+éléments ---,
+\[
+  \sum_{d=0}^n f_d\, t^d = \prod_{i \geqslant 1} (1 + 2t^i)^{\alpha_i^+} .
+\]
+\footnote{La page écrit « stables par $I$ » pour « stables par $u$ », et
+indexe la somme par $i$ au lieu de $d$.}
+
+\emph{Le cas $n = 3$} (pages 59 et 60). La page énumère les classes, avec en
+marge le signe du déterminant et le cardinal de la classe :
+
+\begin{itemize}
+  \item un 3-cycle, non tordu : rotation d'ordre 3 autour d'une grande diagonale ($+$, 8) ;
+  \item un 3-cycle, tordu : la précédente composée avec l'antipodie, ordre 6 ($-$, 8) ;
+  \item 1 + 2, non tordus : symétrie par rapport à un plan diagonal ($-$, 6) ;
+  \item 1 tordu, 2 non tordu : demi-tour autour d'un axe passant par deux milieux d'arêtes ($+$, 6) ;
+  \item 1 non tordu, 2 tordu : quart de tour autour d'un axe passant par deux centres de faces ($+$, 6) ;
+  \item 1 + 2, tordus : le précédent composé avec l'antipodie, ordre 4 ($-$, 6) ;
+  \item 1 + 1 + 1, $\alpha_1^+ = 3$ : identité ($+$, 1) ;
+  \item 1 + 1 + 1, $\alpha_1^+ = 2$ : symétrie par rapport à un plan de coordonnées ($-$, 3) ;
+  \item 1 + 1 + 1, $\alpha_1^+ = 1$ : demi-tour autour d'un axe de coordonnées ($+$, 3) ;
+  \item 1 + 1 + 1, $\alpha_1^+ = 0$ : antipodie ($-$, 1).
+\end{itemize}
+
+« En tout il y a 10 classes ? » : oui. C'est le nombre de couples de
+partitions de poids total 3, et les cardinaux font $8 + 8 + 4 \cdot 6 + 1 + 3
++ 3 + 1 = 48$. Les cinq classes de signe $+$, de cardinaux $1, 8, 3, 6, 6$,
+sont celles de $\mathfrak{S}_4$.\footnote{Le décompte de contrôle et le
+rapprochement avec $\mathfrak{S}_4$ sont les nôtres ; la page met un point
+d'interrogation après « 10 classes ». Pour le 3-cycle, la page note que la
+relation entre cas tordu et non tordu, par composition avec l'antipodie, vaut
+« chaque fois que la dimension $n$ est impaire » : pour un cycle de longueur
+impaire, changer tous les signes change le signe total. Dans le cas
+« 1 tordu, 2 non tordu », la page écrit « symétrie autour, composée du
+précédent avec l'antipodie » : c'est bien un demi-tour.}
+
+\pagerange{60}{61}
+\section*{Le cube de dimension 3 et ses quatre diagonales (pages 60 et 61)}
+
+\textbf{Proposition} (page 60). Soit $n \geqslant 3$, et $u$ un automorphisme
+de $C$ tel que $u x = \pm x$ pour tout sommet $x$. Alors $u = \pm
+\mathrm{id}$.\footnote{L'hypothèse $n \geqslant 3$, ajoutée en interligne, est
+nécessaire : pour le carré, l'échange des deux coordonnées fixe deux sommets
+et envoie les deux autres sur leurs opposés.}
+
+Donc $\mathrm{Aut}(C)/\{\pm 1\}$ s'injecte dans le groupe des permutations de
+$\Phi_0(C)/\sigma$, l'ensemble des $2^{n-1}$ grandes diagonales, et, pour $n$
+impair, $\mathrm{Aut}^+(C) \simeq \mathrm{Aut}(C)/\{\pm 1\}$ aussi.\footnote{La
+page écrit, pour la seconde injection, $\mathrm{Aut}^+(C) \hookrightarrow
+\mathrm{Aut}(\Phi_0(C))$, sans le quotient par $\sigma$ ; l'injection dans
+les permutations des sommets est vraie mais triviale, et c'est celle dans les
+permutations des diagonales que la proposition donne, et que les corollaires
+utilisent.}
+
+\textbf{Corollaire} (page 61). Pour un cube de dimension 3,
+$\mathrm{Aut}^+(C) \xrightarrow{\ \sim\ } \mathrm{Aut}_{\mathrm{ens}}
+(\Phi_0(C)/\sigma)$, groupe des permutations des quatre grandes diagonales :
+les deux ont 24 éléments.
+
+\textbf{Corollaire.} $C \mapsto \Phi_0(C)/\sigma$ est une équivalence de la
+catégorie des cubes orientés de dimension 3, avec leurs isomorphismes
+directs, vers celle des ensembles à 4 éléments, avec leurs bijections. C'est
+le quatrième sujet de DEA de la page 47, et le pendant des identifications de
+la page 45 : un ensemble à 4 éléments « est » aussi un cube orienté.
+
+\pagerange{61}{62}
+\section*{Le cube gauche (pages 61 et 62)}
+
+\emph{L'espace projectif découpé.} Soit $C = C(\mathbb{B}, \sigma)$ dans $E$.
+Le quotient du bord $\partial C$ par l'antipodie est l'espace projectif réel
+de dimension $n - 1$,
+\[
+  \partial C/\sigma \simeq (E \smallsetminus \{0\})/\mathbf{R}^* = P(E) ,
+\]
+chaque demi-droite issue du centre coupant $\partial C$ en un
+point.\footnote{La page note $E^*/\mathbf{R}^*$, $E^*$ désignant $E$ privé de
+l'origine et non le dual. Elle met sur le $C$ de $\partial C$ un petit signe,
+chapeau ou flèche, qu'on ne reprend pas.} Soit $p : \partial C \to P(E)$ la
+projection et $\Phi^{**}$ l'ensemble des faces propres non vides de $C$. La
+décomposition de $\partial C$ en faces ouvertes passe au quotient :
+\[
+  \widetilde{C} = \partial C/\sigma = \coprod_{F \in \Phi^{**}/\sigma} p(F) .
+\]
+Chaque face fermée $\overline{F}$ s'injecte dans $P(E)$, puisque $\overline{F}
+\cap \sigma\overline{F} = \emptyset$ (page 53), et
+\[
+  p(\overline{F}) \cap p(\overline{F'}) = p(\overline{F} \cap \overline{F'})
+  \cup p(\overline{F} \cap \sigma\overline{F'}) ,
+\]
+réunion de deux fermés disjoints. Elle est vide si et seulement si les deux
+intersections le sont ; elle n'est pas nécessairement connexe, et l'est si
+l'une des deux est vide.\footnote{La seconde ligne de la formule de la page
+61 est très surchargée et se lit $[p(\overline{F}) \cap p(\overline{F'})] \cup
+[p(\overline{F}) \cap p(\overline{F'})]$, deux crochets identiques, avec un
+trait qui pourrait être un $\sigma$ ; on écrit la formule juste. Le mot
+« sinon » est d'une lecture douteuse, et une troisième ligne est biffée. Les
+deux morceaux sont disjoints parce qu'un point commun serait dans $\overline{F'}
+\cap \sigma\overline{F'} = \emptyset$, et leurs images le sont parce que $p$
+est injectif sur $\overline{F}$.} Enfin
+\[
+  p(\overline{F}) \subset p(\overline{F'}) \iff \overline{F} \subset
+  \overline{F'} \ \text{ ou } \ \overline{F} \subset \sigma\overline{F'} .
+\]
+\footnote{La page 62 écrit $p(\overline{F}) \subset p(\overline{F'}) \iff
+\overline{F} \subset \overline{F'}$, qui est faux pour deux faces données :
+une arête du carré est dans l'image de l'arête opposée. C'est vrai pour les
+classes modulo $\sigma$, qui sont les cellules de $\widetilde{C}$ : $\overline{F}$,
+connexe, est dans la réunion disjointe de $\overline{F'}$ et de
+$\sigma\overline{F'}$ si et seulement s'il est dans l'une d'elles.}
+
+On obtient une décomposition de $P_{\mathbf{R}}(E)$ en cellules
+topologiques dont les cellules fermées sont plongées, deux cellules fermées
+se rencontrant, si elles se rencontrent, en une cellule ou en la réunion de
+deux cellules disjointes --- ce n'est donc pas un complexe polyédral, mais
+c'est un complexe CW régulier. L'ensemble ordonné de ses cellules est
+$\Phi^{**}/\sigma$, opposé de $\Phi^*/\sigma$, où $\Phi^*$ est l'ensemble des
+sections partielles non vides de $\mathbb{B}$. La page dessine le cas $n = 2$ :
+le carré de côtés $a, b, c, d$ devient une droite projective faite de deux
+arcs, $\{a, c\}$ et $\{b, d\}$, qui se rencontrent en deux points.\footnote{Pour
+$n = 3$ c'est l'\emph{hémi-cube}, polytope abstrait non sphérique que
+McMullen et Schulte notent $\{4,3\}/2$ ; le nom n'est pas sur la page.}
+
+\emph{Automorphismes des cubes gauches} ($n \geqslant 3$). La page considère
+\[
+  \mathrm{Aut}(C)/\{1, \sigma\} \longrightarrow \mathrm{Aut}_{\mathrm{proj}}
+  (\widetilde{C}) \longrightarrow \mathrm{Aut}_{\mathrm{ord}}
+  \bigl(\Phi(\widetilde{C})\bigr)
+\]
+et note que la première flèche est injective, la seconde évidemment aussi,
+et demande si la composée est surjective. Pour $n$ impair, on récupère
+$(\mathbb{B}, \sigma)$, avec sa décomposition cellulaire, comme le revêtement
+d'orientation canonique de $\widetilde{C}$ --- $P(E)$ est alors de dimension
+paire, donc non orientable, et son revêtement d'orientation est la sphère
+$\partial C$ ---, et tout automorphisme de $\Phi(\widetilde{C})$ est induit
+par un automorphisme direct de $C$. « Cas $n$ pair : à examiner\ldots », et le
+dossier s'arrête là.\footnote{La réponse est oui pour tout $n \geqslant 3$, et
+le revêtement universel remplace le revêtement d'orientation : un
+automorphisme de l'ensemble ordonné des cellules d'un complexe CW régulier se
+réalise par un homéomorphisme cellulaire ; pour $n \geqslant 3$, $\partial C
+\to \widetilde{C}$ est le revêtement universel, l'homéomorphisme s'y relève,
+et le relevé est un automorphisme combinatoire de $\partial C$, donc de $C$,
+donc affine par le corollaire de la page 50. Ce raisonnement est le nôtre, et
+la page ne le contient pas. Pour $n$ impair, $\mathrm{Aut}(C)/\{1, \sigma\}
+\simeq \mathrm{Aut}^+(C)$, d'où la formulation de la page ; la lettre
+$\mathcal{H}$ qu'elle emploie pour l'objet récupéré n'est pas définie et
+désigne vraisemblablement le bord du cube.}
+
+\end{document}

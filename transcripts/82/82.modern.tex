@@ -1,0 +1,1703 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 82
+% (pages 1-78, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pp. 1-20), batch-02.fr.tex (pp. 21-40), batch-03.fr.tex (pp. 41-60) or
+% batch-04.fr.tex (pp. 61-78).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its four batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5). The literature named
+% in the footnotes is cited from memory and was not checked against the
+% sources. The computations of pp. 2-25 (Jacobi identity, Cramer, Casimir
+% forms, the example) were re-done symbolically for this reading.
+%
+% Scope. Three runs, each opened by a pink cover: p. 1 « Algèbres de Lie de
+% rang 3 associées aux formes bil. symétriques de rang 3 », « (29 p) »
+% (pp. 2-31); p. 32, no title, « (21 p) » (pp. 33-55, i.e. 21 written pages
+% once the blanks 35 and 45 are set aside); p. 56 « Dictionnaire lié à
+% GP(1) ≃ SO(3) » (pp. 57-78). Pages 35 and 45 are blank and not described.
+%
+% Spine. The exceptional isomorphism PGL_2 ≃ SO(3), over an arbitrary base
+% scheme, Spec Z included, and in all its twisted forms:
+%   pp. 2-27   a bilinear form phi on a rank-3 module E with a basis omega of
+%              det E gives a bracket on the dual E'; symmetric phi gives Lie
+%              algebras; f : E -> E', its cofactor map f' = Lambda^2 f, the
+%              bracket on E, the action of E' on E; the example xy + z^2
+%              gives sl(2) -> gp(1); Casimir forms; rescaling; char. 2.
+%   pp. 28-31  G = SO(q), its simply connected cover G~ (kernel mu_2), and
+%              E' ≃ Lie G proved; E ≃ Lie G~ announced, « il faut ouvrir une
+%              parenthèse ».
+%   pp. 33-55  second notebook: the rotation of a regular n-gon and F_n;
+%              special subalgebras of a quaternion algebra = lines of the
+%              plane = degree-2 divisors of the conic = smooth commutative
+%              one-dimensional subgroups; centralisers (pp. 36-43, char. 2
+%              counterexamples); X ≃ P(V), the quadric of rank-one
+%              endomorphisms ≃ X x X, the canonical involution, the
+%              « jacobian » subgroups (pp. 46-55).
+%   pp. 57-78  the Dictionnaire: nine fibred categories (gerbes), typical
+%              objects over Z, actions of G_0 = PGL_2, the functors between
+%              them, then the quaternion algebra M as the key: G, G~, g, g~
+%              from M, the trace form, q = -det on g~, omega, f and f',
+%              Borel subgroups, and in char. 2 the Frobenius X -> X^(2).
+%
+% Notation fixed for the whole folder. S a scheme; E, E' locally free of rank
+% 3 in duality; omega a basis of det E, omega' the dual basis of det E';
+% alpha : Lambda^2 E ≃ E', alpha' : Lambda^2 E' ≃ E (his (6)-(7)); phi a
+% bilinear form on E, f : E -> E' with <y, f(x)> = phi(x, y); [ , ]_phi the
+% bracket on E', f' = alpha' o Lambda^2 f o alpha^{-1} : E' -> E, phi' its
+% form, [ , ]_phi' the bracket on E; Delta the scalar with delta(phi) = Delta
+% omega^{-2}. rho_E' = ad on E', rho_E its contragredient on E, rho~_E = ad
+% on E. q a quadratic form with phi(x,x) = 2q(x); (q, omega) special
+% orthogonal when delta'(q) = -omega^{-2}. G = SO(q), G~ its simply connected
+% cover, g = Lie G, g~ = Lie G~. P-check(F) = line subbundles of F, P(F) =
+% hyperplanes of F (his convention, kept). M a quaternion algebra, M^x its
+% unit group (his V(M)^* and round L(M)), Nrd = det, Trd = Tr. X the conic,
+% P the plane, Y a degree-2 divisor of X, A a special subalgebra (rank 2,
+% containing 1), T = A^x/G_m the jacobian subgroup, h = Lie T. The pages'
+% H for a one-dimensional subgroup (pp. 36-43) is written T here, since it
+% is the same object and since H is also a basis vector of gp(1). The form
+% -det on M is Q_M, the quadric of rank-one endomorphisms is the calligraphic
+% Q. X, Y, H also name the basis of gp(1) in section I, as on the pages; the
+% conic X and the divisor Y appear only from p. 34 on.
+%
+% Substantive departures from the pages, with page numbers:
+%  - p. 6, (23 bis): c = 1 should be c = 2 (the matrix beside it has 2).
+%  - p. 9, (38): f' = alpha' o Lambda^2 f o alpha^{-1}; the page has alpha.
+%  - p. 10: the brackets' attributions « sur E », « sur E' » are swapped
+%    relative to (12) and (40 bis).
+%  - p. 13: the example (21) has Delta = -2, not 2 (p. 18 has -2).
+%  - pp. 15, 17: the bracket on E' is [ , ]_phi (12); the subscript in
+%    (55), (57), (59 bis) is phi' or unclear. (52) => (53) also needs
+%    Tr rho_E = 0, the (60) of the margin of p. 18; supplied.
+%  - p. 19, (66)-(69): sign. f'(X) = -2X~, f'(Y) = -2Y~, f'(H) = -H~, so
+%    phi' and q' are the negatives of the page's. Confirmed by (54)-(55),
+%    p. 75, ff' = -2. Consequences: p. 21 « f' = 2 id » is -2 id; p. 22
+%    (74) first line is Cas_E'(x', y') = -2 phi'(x', y'), and (77) likewise;
+%    p. 23 phi'(H,H) = -1. The second line of (74), (75), (76) are right.
+%  - p. 21: « groupe dérivé » of sl(2) is the derived algebra.
+%  - p. 25: in the proof of (80) det f' = det g' gives Delta(f)^2 =
+%    Delta(g)^2; (80) and (81) need Delta invertible; in (81) lambda must be
+%    the inverse of a square.
+%  - p. 37: « g = GP(V) » is g = Lie GP(V). p. 39: « alpha lambda ≡ 1 »
+%    read lambda alpha = alpha.
+%  - p. 42, b): needs p invertible on S; at a fibre of characteristic p,
+%    N/H is all of F_p^x, which is {±1} only for p = 3.
+%  - p. 46: « rg 2 » is rank 3. p. 48: g-bar is g~. p. 49: Gamma(u) is the
+%    form of (5).
+%  - p. 55: « T~ is the centraliser of h » holds when 2 is invertible; in
+%    char. 2 the centraliser is bigger (p. 40).
+%  - p. 64: the stabiliser (11) is the transpose of (10); s_0 and « ∞ » name
+%    the same point; footnoted, conventions explained.
+%  - pp. 66: the « ∼ » of (23)-(24) are equivalences over Z[1/2] only.
+%  - p. 71: the pairing induced by Phi_1 is equal to (41), not only up to
+%    sign. p. 72, (47): det(V-check ⊗ V) ≃ (det V-check)^2 ⊗ (det V)^2.
+%    p. 73, (48)-(49): omega^{⊗2} read omega^{⊗(-2)} as in (33), (82).
+%  - p. 76, (57): the Borel of M^x is the unit group of the rank-3
+%    subalgebra L_1; the page writes L~.
+%
+% Announced and never established in the folder: the construction of G~ and
+% the isomorphism E ≃ g~ with its properties for a general special quadratic
+% module (p. 31, « ouvrir une parenthèse ») — in substance supplied by
+% section VI (pp. 68-75) for E = g~, with the sign of (52) « sans
+% garantie »; the equivalences M |-> G, G~, (E, q, omega), (P, X), X (p. 46)
+% and the isomorphisms (7) G_0 ≃ Aut(X_0) (p. 62, « nous admettrons »); the
+% 72 equivalences and 504 transitivity isomorphisms (p. 58); the full proof
+% of the proposition on subgroups of order p (pp. 41-43); whether every
+% smooth one-dimensional subgroup is commutative over a base, and the
+% normaliser (pp. 43-44, breaks off); the question in the margin of p. 77.
+% The folder ends at p. 78 in the middle of section VI.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{82}
+\pages{1}{78}
+\dating{[vers 1982]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{SO(3) ≃ GP(1) : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces pages traitent d'une coïncidence : deux groupes qui n'ont, à première vue,
+rien à voir sont le même. L'un est le groupe des rotations de l'espace à trois
+dimensions, plus précisément le groupe des transformations qui préservent une
+forme quadratique en trois variables, comme $xy + z^2$ ; on le note
+$\mathrm{SO}(3)$. L'autre est le groupe des transformations d'une droite
+projective, celles qu'on écrit $t \mapsto (at + b)/(ct + d)$ ; Grothendieck le
+note $\mathrm{GP}(1)$, on l'écrit aujourd'hui $\mathrm{PGL}_2$. Sur les nombres
+complexes la coïncidence est connue depuis longtemps ; l'enjeu ici est de la
+rendre vraie partout à la fois — sur les entiers, en toute caractéristique,
+caractéristique $2$ comprise, et sur une base quelconque, où les objets peuvent
+être « tordus », c'est-à-dire localement standard sans l'être globalement.
+
+L'image classique est celle des quaternions de Hamilton. Un quaternion de norme
+$1$ agit sur l'espace des quaternions purs, qui est de dimension $3$, par une
+rotation, et deux quaternions opposés donnent la même rotation. Les rotations
+sont ainsi des « moitiés » de quaternions, et l'ambiguïté du signe est un
+groupe à deux éléments, que Grothendieck note $\mu_2$. Tout le dossier est une
+version de cette image où l'on ne divise jamais par $2$ sans le dire.
+
+Le premier cahier part de très peu : un espace de dimension $3$, une forme
+bilinéaire, et le choix d'un élément de volume. Avec cela on fabrique un
+crochet — un produit du genre du produit vectoriel — sur l'espace dual, et
+Grothendieck montre que ce crochet vérifie l'identité de Jacobi dès que la
+forme est symétrique. Pour la forme $xy + z^2$, il trouve d'un côté l'algèbre
+de Lie de $\mathrm{PGL}_2$, de l'autre celle de $\mathrm{SL}_2$, et entre elles
+l'application qui, sur les groupes, est le passage de $\mathrm{SL}_2$ à son
+quotient par $\pm 1$. En caractéristique $2$, cette application cesse d'être un
+isomorphisme, et les pages en suivent la dégénérescence avec soin.
+
+Le deuxième cahier et le « Dictionnaire » qui clôt le dossier donnent la
+version tordue. Neuf sortes d'objets — les formes de $\mathrm{PGL}_2$ et de
+$\mathrm{SL}_2$, leurs algèbres de Lie, les algèbres de quaternions, les
+coniques, les formes quadratiques de rang $3$ munies d'un volume, les torseurs —
+se correspondent toutes, et la clef de toutes les correspondances est
+l'algèbre de quaternions : son groupe des unités modulo les scalaires,
+ses éléments de norme $1$, ses éléments de trace nulle, la conique de ses
+éléments de carré nul. Les deux algèbres de Lie du premier cahier y
+reparaissent comme les éléments de trace nulle et les éléments modulo les
+scalaires, et la question laissée en suspens à la page 31 y trouve sa réponse.
+
+Il y a aussi un geste qui dit quelque chose de sa manière. Ayant aligné ses
+neuf catégories, il compte ce qu'un dictionnaire complet devrait contenir —
+$72$ équivalences, $504$ isomorphismes de compatibilité — et écrit : « On fera un
+peu moins, mais on essaiera de donner une image claire de la situation. » Le
+but n'est pas l'exhaustivité ; c'est que la situation devienne visible.
+
+Les mots à chercher ensuite : isomorphisme exceptionnel
+$\mathrm{PGL}_2 \simeq \mathrm{SO}_3$, algèbre de Clifford paire d'une forme
+ternaire, algèbres d'Azumaya de rang $4$, gerbes et formes tordues, schéma des
+sous-groupes de Borel.
+
+\keywords{exceptional isomorphism PGL2 = SO3, ternary quadratic form, half-discriminant, adjugate matrix, Bianchi classification, Casimir element, Killing form, Heisenberg Lie algebra, affine symplectic group, Spin group, quaternion algebra, Azumaya algebra, even Clifford algebra, reduced norm, canonical involution, Severi-Brauer conic, generalized Jacobian, centralizer of a torus, twisted form, gerbe, nonabelian cohomology, scheme of Borel subgroups, relative Frobenius}
+\end{resume}
+
+\pagerange{2}{78}
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier est fait de trois suites, ouvertes chacune par une couverture rose,
+et il n'y a de sa main aucune pagination. Les nombres au crayon des couvertures
+sont des comptes de pages : « (29 p) » sur la première couvre, à une page près,
+les pages 2 à 31 ; « (21 p) » sur la deuxième (page 32) tombe juste pour les
+pages 33 à 55 une fois écartées les deux pages blanches 35 et 45. Les numéros de
+formules sont repris tels que les pages les donnent ; ils forment trois suites :
+(1) à (93) aux pages 2 à 29, (1) à (25) aux pages 36 et 46 à 54 (la page 36
+ouvre sa propre suite (1)--(2)), (1) à (61) aux pages 60 à 78.
+
+\subsection*{Les stations}
+
+\begin{itemize}
+  \item \textbf{I. Algèbres de Lie de rang $3$ (pages 2 à 31).} Une forme
+    bilinéaire $\varphi$ sur un module $E$ de rang $3$ muni d'une base $\omega$ de
+    $\det E$ définit un crochet sur le dual $E'$ ; $\varphi$ symétrique donne une
+    algèbre de Lie. L'application cofacteur $f' = \Lambda^2 f$ donne un crochet
+    sur $E$, $f : E \to E'$ est un homomorphisme, $E'$ opère sur $E$. L'exemple
+    $xy + z^2$ donne $\mathfrak{sl}_2 \to \mathfrak{pgl}_2$. Formes de Casimir,
+    changements d'échelle, caractéristique $2$. Puis $G = \mathrm{SO}(q)$, son
+    revêtement $\widetilde{G}$, et l'isomorphisme $E' \simeq \mathrm{Lie}\, G$.
+    La suite s'arrête sur une parenthèse qu'elle n'ouvre pas.
+  \item \textbf{II. Le deuxième cahier (pages 33 à 55).} Une rotation d'un
+    polygone régulier (page 33) ; la chaîne algèbres spéciales $=$ droites du plan
+    $=$ diviseurs de degré $2$ de la conique $=$ sous-groupes commutatifs lisses
+    de dimension $1$ (page 34) ; commutants et centralisateurs dans
+    $\mathrm{PGL}(V)$, avec les contre-exemples de caractéristique $2$ (pages 36
+    à 44) ; algèbres de quaternions, la conique $X \simeq \check{\mathbb{P}}(V)$,
+    l'involution canonique, les sous-groupes « jacobiens » (pages 46 à 55).
+  \item \textbf{III. Dictionnaire lié à $\mathrm{GP}(1) \simeq \mathrm{SO}(3)$
+    (pages 57 à 78).} Neuf catégories fibrées, qui sont des gerbes ; leurs
+    représentants typiques sur $\mathbf{Z}$ ; les opérations de
+    $G_0 = \mathrm{PGL}_2$ ; les foncteurs du dictionnaire (III à V) ; enfin (VI)
+    l'algèbre de quaternions comme clef de tous les objets. Le dossier s'arrête
+    au milieu de VI, sur le morphisme de Frobenius.
+\end{itemize}
+
+\subsection*{Conventions, valables pour tout le dossier}
+
+$S$ est un schéma ; « Module » veut dire $\mathcal{O}_S$-module localement libre
+de rang fini, et un fibré vectoriel est identifié à son Module de sections.
+$E$ et $E'$ sont de rang $3$, en dualité par $\langle\ ,\ \rangle$ ; $\omega$ est
+une base de $\det E = \Lambda^3 E$, $\omega'$ la base duale de $\det E'$.
+Une forme bilinéaire $\varphi$ sur $E$ et l'application $f : E \to E'$ se
+déterminent l'une l'autre par $\langle y, f(x) \rangle = \varphi(x, y)$. Le
+crochet construit sur $E'$ est noté $[\ ,\ ]_{\varphi}$, celui construit sur $E$
+est noté $[\ ,\ ]_{\varphi'}$, comme sur les pages. Une forme quadratique $q$ et
+sa forme polaire $\varphi$ sont liées par $q(x + y) = q(x) + q(y) + \varphi(x, y)$,
+d'où $\varphi(x, x) = 2q(x)$.
+
+Pour un Module $F$, $\check{\mathbb{P}}(F)$ est le schéma des sous-fibrés de rang $1$
+de $F$ et $\mathbb{P}(F)$ celui de ses hyperplans (sous-fibrés de corang $1$),
+de sorte que $\mathbb{P}(F) = \check{\mathbb{P}}(F^{\vee})$ ; c'est la convention des
+pages, que celles-ci ne tiennent pas toujours (page 34). En rang $2$ les deux
+coïncident.
+
+$\mathrm{GP}(1)$ est le groupe projectif $\mathrm{PGL}_2$, $\mathfrak{gp}(1)$ son
+algèbre de Lie $\mathfrak{pgl}_2 = \mathfrak{gl}_2/\mathcal{O}\cdot 1$ ; on garde la
+notation des pages quand on les cite. $G = \mathrm{SO}(q)$ est le groupe des
+automorphismes de $(E, q, \omega)$, $\widetilde{G}$ son revêtement simplement connexe,
+$\mathfrak{g}$ et $\widetilde{\mathfrak{g}}$ leurs algèbres de Lie. Pour une algèbre de
+quaternions $\mathcal{M}$, $\mathcal{M}^{\times}$ est son groupe des unités (les pages
+écrivent $\check{\mathbb{V}}(\mathcal{M})^{*}$ ou $\mathcal{L}(\mathcal{M})$), $\det$ et
+$\mathrm{Tr}$ ses norme et trace réduites.
+
+\textbf{Deux homonymies.} Les lettres $X, Y, H$ désignent, dans la première
+suite et à la page 40, une base de $\mathfrak{gp}(1)$ ; à partir de la page 34, $X$
+est une conique et $Y$ un diviseur de degré $2$ sur elle. Les deux usages ne se
+croisent jamais dans une même section. D'autre part, les pages 36 à 43 nomment
+$H$ un sous-groupe commutatif lisse de dimension relative $1$ ; c'est le même
+objet que le sous-groupe « jacobien » $\mathcal{T}$ de la page 54, et on l'écrit
+$\mathcal{T}$ partout ici. De même $\Delta$ est, dans la première suite, le scalaire
+déterminant de $f$ ; la forme $u \mapsto -\det u$ sur une algèbre de quaternions,
+que la page 47 nomme aussi $\Delta$, est écrite ici $Q_{\mathcal{M}}$, et la quadrique
+qu'elle définit $\mathcal{Q}$.
+
+\subsection*{Ce que seule une lecture d'ensemble peut dire}
+
+\begin{itemize}
+  \item La page 31 annonce un isomorphisme $E \simeq \widetilde{\mathfrak{g}}$ et dit
+    qu'il faut pour cela « redéfinir avec précision, en termes élémentaires, la
+    construction de $\widetilde{G}$ ». La section VI du Dictionnaire (pages 68 à
+    75) le fait en substance : $\widetilde{G}$ est le noyau de la norme réduite d'une
+    algèbre de quaternions, $\widetilde{\mathfrak{g}}$ ses éléments de trace nulle,
+    $q = -\det$, et $(E, q, \omega) = (\widetilde{\mathfrak{g}}, q, \omega)$ par
+    définition (50), le signe de $\omega$ étant fixé par (52).
+  \item Le signe de la page 19 ($f'(X) = 2\widetilde{X}$, etc.) est contredit par le
+    dossier lui-même : la page 75 trouve $ff' = -2$, ce que donne aussi la formule
+    de Cramer avec $\Delta = -2$. La relation de Casimir (74), qui en dépendait, se
+    corrige en conséquence, et sa seconde moitié est la relation avec la forme de
+    Killing que la page 72 énonce indépendamment.
+  \item La dimension $6$ du groupe des automorphismes d'une forme de
+    $\mathfrak{sl}(2)$ en caractéristique $2$ (page 27) est la raison de la restriction
+    $(*)$ des pages 57 à 59 : le foncteur « algèbre de Lie » n'est une équivalence
+    qu'au-dessus de $\mathbf{Z}[\tfrac{1}{2}]$.
+  \item Le sous-groupe $H$ des pages 36 et 37, image de
+    $(\mathcal{O}_S + \mathcal{O}_S u)^{\times}$, est le sous-groupe jacobien $\mathcal{T}$
+    attaché à l'algèbre spéciale $\mathcal{A} = \mathcal{O}_S + \mathcal{O}_S u$ à la page 54 ;
+    et le contre-exemple de caractéristique $2$ de la page 40 limite
+    l'affirmation de la page 55 selon laquelle $\mathcal{T}$ est le centralisateur de
+    son algèbre de Lie.
+  \item La chaîne d'isomorphismes de la page 34 est le Corollaire (21)--(22) des
+    pages 52 et 53, écrit avant sa démonstration dans l'ordre des feuillets.
+\end{itemize}
+
+\subsection*{Ce que le dossier annonce sans l'établir}
+
+L'isomorphisme $E \simeq \widetilde{\mathfrak{g}}$ pour un module spécial quadratique
+quelconque, avec ses propriétés (page 31) ; les équivalences de la page 46 et
+les isomorphismes (7) de la page 62, admis « pour ne pas nous éterniser » ; le
+dictionnaire complet de la page 58 ; la démonstration de l'énoncé sur les
+sous-groupes d'ordre premier (pages 41 à 43) ; la question de savoir si un
+sous-groupe lisse de dimension $1$ sur une base est automatiquement commutatif,
+et le normalisateur (pages 43 et 44, qui s'interrompent) ; la question en marge
+de la page 77. Le dossier s'arrête à la page 78, au milieu de VI.
+
+\pagerange{2}{31}
+\section*{I. Algèbres de Lie de rang $3$ associées aux formes bilinéaires (pages 1 à 31)}
+
+\pagerange{2}{3}
+\subsection*{La donnée, et les deux isomorphismes $\alpha$, $\alpha'$ (pages 2 et 3)}
+
+Soient $E$, $E'$ deux Modules de rang $3$ sur $S$ en dualité parfaite
+$E \times E' \to \mathcal{O}_S$ ; d'où $\det E \otimes \det E' \simeq \mathcal{O}_S$. Les
+accouplements $E \times \Lambda^2 E \to \det E$ et $E' \times \Lambda^2 E' \to \det E'$
+sont parfaits, d'où des isomorphismes
+$\Lambda^2 E \simeq E' \otimes \det E$ et $\Lambda^2 E' \simeq E \otimes \det E'$. On
+suppose $E$ \emph{spécial}, c'est-à-dire muni d'une base $\omega$ de $\det E$ ; soit
+$\omega'$ la base duale de $\det E'$. Les isomorphismes précédents deviennent
+\[
+  \alpha : \Lambda^2 E \xrightarrow{\ \sim\ } E', \qquad
+  \alpha' : \Lambda^2 E' \xrightarrow{\ \sim\ } E,
+\]
+caractérisés par
+\[
+  (7) \qquad \langle x, \alpha(\psi) \rangle\, \omega = x \wedge \psi , \qquad
+  \langle \alpha'(\psi'), x' \rangle\, \omega' = \psi' \wedge x'
+\]
+pour $x \in E$, $\psi \in \Lambda^2 E$, $x' \in E'$, $\psi' \in \Lambda^2 E'$\footnote{La
+page écrit le couple $(x, \omega)$ et son image $x \wedge \varphi$ : la lettre
+$\omega$, réservée ensuite à la base de $\det E$, est un lapsus, de même que
+$\varphi$ pour un élément de $\Lambda^2 E$. On écrit $\psi$. La lecture
+« $\omega' = \omega^{-1}$ » de (4') est douteuse sur la page ; c'est la base duale.}.
+Si $(e_1, e_2, e_3)$ est une base de $E$ avec $\omega = e_1 \wedge e_2 \wedge e_3$, et
+$(e'_i)$ la base duale, on pose $\bar{e}_1 = e_2 \wedge e_3$,
+$\bar{e}_2 = e_3 \wedge e_1$, $\bar{e}_3 = e_1 \wedge e_2$, de même $\bar{e}'_i$, et
+\[
+  (10) \qquad \alpha(\bar{e}_i) = e'_i , \qquad \alpha'(\bar{e}'_i) = e_i .
+\]
+En coordonnées, $\alpha$ et $\alpha'$ ne sont autres que le produit vectoriel :
+$\alpha(x \wedge y) = x \times y$ quand on identifie $E$ et $E'$ à
+$\mathcal{O}_S^3$ par des bases duales.
+
+\textbf{Observation.} On a des bijections canoniques entre les formes
+bilinéaires $\varphi$ sur $E$, les applications linéaires $f : E \to E'$ (par
+$\langle y, f(x) \rangle = \varphi(x, y)$) et les structures d'algèbre alternée
+sur $E'$, la dernière associant à $f$ le crochet
+\[
+  (12) \qquad [x', y']_{\varphi} = f\bigl(\alpha'(x' \wedge y')\bigr) .
+\]
+La bijection est celle de $\mathrm{Hom}(E, E') \simeq \mathrm{Hom}(\Lambda^2 E', E')$
+déduite de $\alpha'$ : toute algèbre alternée sur un module de rang $3$ s'écrit
+ainsi, et c'est l'énoncé moderne qu'une algèbre de Lie de dimension $3$ est
+codée par un tenseur de type $(1,1)$\footnote{Les pages dessinent ces bijections
+comme un triangle passant par $\mathrm{Hom}_{\mathcal{O}_S}(E, E')$. La formule (11) qui
+définit $f$ porte à la page 3 un numéro douteux, et le numéro (11) sert de
+nouveau à la page 5.}.
+
+\pagerange{5}{6}
+\subsection*{L'identité de Jacobi (pages 5, 4 et 6)}
+
+Les pages 4 et 5 se lisent à rebours : la page 5 précède la page 4, qui commence
+au milieu de sa dernière phrase. Dans les bases précédentes, notons
+$\varphi_{ij} = \varphi(e_i, e_j)$ ; la matrice de $f$ est la transposée de
+$(\varphi_{ij})$, et (12) donne
+\[
+  (12) \qquad [e'_2, e'_3]_{\varphi} = \sum_j \varphi_{1j}\, e'_j , \quad
+  [e'_3, e'_1]_{\varphi} = \sum_j \varphi_{2j}\, e'_j , \quad
+  [e'_1, e'_2]_{\varphi} = \sum_j \varphi_{3j}\, e'_j .
+\]
+Les symétries apparaissent en écrivant
+\[
+  (15) \qquad (\varphi_{ij}) = \begin{pmatrix} a & r & q' \\ r' & b & p \\ q & p' & c \end{pmatrix},
+\]
+de sorte que la transposition échange $p \leftrightarrow p'$, $q \leftrightarrow q'$,
+$r \leftrightarrow r'$ et qu'une permutation circulaire de la base permute
+circulairement $(a, b, c)$, $(p, q, r)$, $(p', q', r')$. On trouve
+\[
+  (17) \qquad
+  \sum_{\text{circ}} [[e'_1, e'_2], e'_3]
+  = \bigl[a(p' - p) + q'r' - qr\bigr] e'_1
+  + \bigl[b(q' - q) + r'p' - rp\bigr] e'_2
+  + \bigl[c(r' - r) + p'q' - pq\bigr] e'_3 ,
+\]
+et $E'$ est une algèbre de Lie si et seulement si les trois coefficients sont
+nuls — conditions (18) —, c'est-à-dire si trois différences de mineurs d'ordre
+$2$ de $(\varphi_{ij})$ et de sa transposée s'annulent (19)\footnote{Calcul refait
+pour cette lecture ; il donne exactement (16) et (17) de la page 4. La
+disposition des indices des mineurs dans (19) est incertaine sur la page.}.
+
+\textbf{Proposition (page 6).} \emph{Si $\varphi$ est symétrique, $[\ ,\ ]_{\varphi}$
+est une structure d'algèbre de Lie sur $E'$.} En effet $p = p'$, $q = q'$,
+$r = r'$ annulent (17)\footnote{La réciproque est fausse, et la page ne la
+prétend pas (« on trouve en particulier ») : une forme alternée vérifie aussi
+(18). Lorsque $2$ est inversible et qu'on écrit $\varphi = \sigma + \beta$, partie
+symétrique et partie alternée, $\beta$ correspondant à un vecteur $v$, le
+jacobien (17) vaut $-2\,\sigma(v)$ (calcul de cette lecture) ; la condition de
+Jacobi est $\sigma(v) = 0$. C'est, sur $\mathbf{R}$, la classification de Bianchi
+(1898) des algèbres de Lie de dimension $3$, dont les « unimodulaires » sont
+exactement celles de $\varphi$ symétrique.}.
+
+\pagerange{6}{6}
+\subsection*{L'exemple : $xy + z^2$ et l'algèbre de Lie de $\mathrm{PGL}_2$ (page 6)}
+
+Prenons $E = \mathcal{O}_S^3$, $\omega = e_1 \wedge e_2 \wedge e_3$ et
+\[
+  (21) \qquad q(x, y, z) = xy + z^2 , \qquad
+  \varphi\bigl((x, y, z), (x', y', z')\bigr) = xy' + yx' + 2zz' ,
+\]
+donc $a = b = 0$, $c = 2$, $p = p' = q = q' = 0$, $r = r' = 1$\footnote{La page
+écrit $c = 1$ dans (23 bis), alors que la matrice qu'elle donne à côté porte
+$\varphi_{33} = 2$, ce qu'impose (22). On corrige.}, et $f(e_1) = e'_2$,
+$f(e_2) = e'_1$, $f(e_3) = 2e'_3$. Les formules (12) donnent
+$[e'_2, e'_3] = e'_2$, $[e'_3, e'_1] = e'_1$, $[e'_1, e'_2] = 2e'_3$, c'est-à-dire,
+avec $X = e'_1$, $Y = e'_2$, $H = e'_3$,
+\[
+  (26) \qquad [H, X] = X , \qquad [H, Y] = -Y , \qquad [X, Y] = 2H ,
+\]
+les formules de l'algèbre de Lie de $\mathrm{GP}(1) = \mathrm{PGL}_2$ sur $\mathbf{Z}$,
+« universelle » au sens où elle est définie sur $\mathbf{Z}$\footnote{Avec
+$X = E_{12}$, $Y = E_{21}$ et $H$ la classe de $E_{11}$ dans
+$\mathfrak{gl}_2/\mathcal{O}\cdot 1$, on retrouve (26) : $[X, Y] = E_{11} - E_{22}$, qui est
+congru à $2E_{11}$ modulo les scalaires. Ce n'est pas l'algèbre
+$\mathfrak{sl}_2$ : en caractéristique $2$, les deux diffèrent, et c'est tout
+l'objet des pages 21 et 26.}.
+
+\pagerange{7}{8}
+\subsection*{Discriminant et structure spéciale orthogonale (pages 7 et 8)}
+
+Le discriminant d'une forme bilinéaire $\varphi$ sur $E$ est
+$\delta(\varphi) = \det(\varphi_{ij})\, \omega'^{\otimes 2}$, section de
+$(\det E^{\vee})^{\otimes 2} = (\det E)^{\otimes -2}$, indépendante de la base\footnote{Un
+trait précède « det » dans (27) ; ce n'est pas un signe moins, comme le montre
+le calcul de (30).}. Pour la forme polaire d'une forme quadratique
+$q = ax^2 + by^2 + cz^2 + pyz + qzx + rxy$, de matrice
+$\begin{pmatrix} 2a & r & q \\ r & 2b & p \\ q & p & 2c \end{pmatrix}$,
+\[
+  (30) \qquad \delta(\varphi) = 2\,(4abc + pqr - ap^2 - bq^2 - cr^2)\, \omega'^{\otimes 2} ,
+\]
+et l'on pose $\delta'(q) = (4abc + pqr - ap^2 - bq^2 - cr^2)\, \omega'^{\otimes 2}$, le
+\emph{discriminant divisé} (aujourd'hui : demi-discriminant), qui garde un sens
+en caractéristique $2$. Pour $q = xy + z^2$, $\delta'(q) = -\omega'^{\otimes 2}$.
+
+D'où la définition : une \emph{structure spéciale orthogonale} sur un Module $E$
+de rang $3$ est un couple $(q, \omega)$, $q$ forme quadratique et $\omega$ base de
+$\det E$, tel que
+\[
+  (33) \qquad \delta'(q) = -\,\omega^{\otimes(-2)} .
+\]
+En rang $2n$ ou $2n + 1$, on demanderait $\delta'(q) = (-1)^n \omega^{\otimes(-2)}$
+(où $\delta'$ est le discriminant en rang pair), normalisation choisie pour que la
+forme standard $\sum_{i=1}^{n} x_{2i-1}x_{2i}$, resp. cette forme plus
+$x_{2n+1}^2$, l'admette avec $\omega = e_1 \wedge \cdots \wedge e_N$\footnote{La page
+indexe la somme par $x_{2i}x_{2i+1}$, $i = 1, \ldots, n$, ce qui décale les indices ;
+le sens est clair.}. Une structure spéciale orthogonale associée à $q$ existe
+localement si et seulement si $q$ est lisse, c'est-à-dire $\delta'(q)$ inversible,
+et ces structures forment un torseur sous $\mu_2$ ($\omega \mapsto -\omega$)\footnote{
+« Localement » doit s'entendre pour la topologie fppf : il faut extraire une
+racine carrée de l'unité $-\delta'(q)$, ce qui n'est possible étale-localement
+que si $2$ est inversible. C'est aussi pour la topologie fppf que $\mu_2$ est
+un faisceau en groupes non trivial en caractéristique $2$. La fin de la phrase
+sur la page est en partie illisible.}.
+
+La construction précédente s'applique en échangeant $E$ et $E'$ : une forme
+bilinéaire sur $E'$, c'est-à-dire une application $E' \to E$, définit une algèbre
+alternée sur $E$.
+
+\pagerange{9}{13}
+\subsection*{L'application cofacteur $f'$ et le crochet sur $E$ (pages 9 à 13)}
+
+À $f : E \to E'$ on associe $\Lambda^2 f$, d'où
+\[
+  (38) \qquad f' = \alpha' \circ \Lambda^2 f \circ \alpha^{-1} : E' \longrightarrow E ,
+  \qquad f'\bigl(\alpha(x \wedge y)\bigr) = \alpha'\bigl(f(x) \wedge f(y)\bigr)
+\]
+\footnote{La page écrit $\alpha \circ \Lambda^2 f \circ \alpha^{-1}$ ; (6) et (39) imposent
+$\alpha'$ à gauche.}. Dans des bases duales, la matrice de $f'$ est formée des
+neuf mineurs d'ordre $2$ de celle de $f$ : c'est la \emph{comatrice}, et $f'$ est
+symétrique avec $f$. La forme $\varphi'$ sur $E'$ associée à $f'$ définit donc,
+par la construction échangée, une structure d'\emph{algèbre de Lie} sur $E$ :
+\[
+  (40\ \text{bis}) \qquad [x, y]_{\varphi'} = f'\alpha(x \wedge y) = \alpha'\bigl(f(x) \wedge f(y)\bigr),
+  \qquad \bigl\langle [x, y]_{\varphi'}, x' \bigr\rangle\, \omega' = f(x) \wedge f(y) \wedge x' .
+\]
+
+\textbf{Cramer.} Écrivons $\delta(\varphi) = \Delta\, \omega^{\otimes -2}$, $\Delta \in
+\Gamma(S, \mathcal{O}_S)$ ; $\Delta$ est le déterminant de $f$ relativement à
+$\omega$, $\omega'$. Les formules de Cramer donnent
+\[
+  (42) \qquad f'f = \Delta\, \mathrm{id}_E , \qquad ff' = \Delta\, \mathrm{id}_{E'} .
+\]
+La relation entre $f$ et $f'$ n'est pas symétrique : $f' = 0$ si et seulement si
+$f$ est de rang $\leq 1$ en chaque point, alors que $f$ de rang $2$ donne $f'$ de
+rang $1$\footnote{La fin de la phrase de la page 10 est illisible ; on en donne
+le contenu mathématique, qui est l'asymétrie annoncée.}. Plus précisément, avec
+$\delta(\varphi') = \Delta' \omega'^{\otimes 2}$, on a $f'f'' = \Delta'\,\mathrm{id}$,
+$f''f' = \Delta'\,\mathrm{id}$, et lorsque $\Delta$ est inversible
+\[
+  (45) \qquad f' = \Delta f^{-1} , \qquad \det f' = \Delta^2 , \qquad \Delta' = \Delta^2 ,
+\]
+d'où
+\[
+  (48) \qquad f'' = \Delta\, f ,
+\]
+identité qui, par le « principe de conservation des identités algébriques »,
+vaut pour tout $f$ : c'est l'identité classique $\mathrm{adj}(\mathrm{adj}\, M) =
+(\det M)^{n-2} M$ en dimension $n = 3$\footnote{Les numéros de la page 12 sont
+surchargés ((46) ou (47)) ; on garde (45) et (48).}. Si $\Delta = 1$, $f$ et $f'$
+sont inverses l'un de l'autre et la relation redevient symétrique. Mais ce qui
+intéressera, dit la page 13, c'est l'exemple (21), où $\Delta = -2$, sans
+s'interdire de spécialiser en caractéristique $2$, où $\Delta = 0$\footnote{La
+page 13 écrit $\Delta = 2$ ; la matrice (23 bis) a pour déterminant $-2$, valeur
+que la page 18 retrouve.}.
+
+\textbf{Changements d'échelle (pages 10 et 11).} Si $\omega$ est remplacé par
+$\lambda\omega$, $\lambda$ inversible, $\varphi$ fixé, alors $\alpha$ est divisé et
+$\alpha'$ multiplié par $\lambda$ ; $\Delta$ et $f'$ sont multipliés par $\lambda^2$,
+le crochet $[\ ,\ ]_{\varphi}$ sur $E'$ par $\lambda$ ; le crochet sur $E$ défini par
+une $\varphi'$ \emph{fixée} serait multiplié par $\lambda^{-1}$, mais comme $\varphi'$
+est elle-même multipliée par $\lambda^2$, le crochet $[\ ,\ ]_{\varphi'}$ sur $E$ est
+multiplié par $\lambda$. Les deux crochets attachés à $(\varphi, \omega)$ varient donc
+du même facteur $\lambda$\footnote{La page attribue $[\ ,\ ]_{\varphi}$ à $E$ et
+$[\ ,\ ]_{\varphi'}$ à $E'$, au rebours de (12) et (40 bis) ; on rétablit.}. À
+$\omega$ fixé, $\varphi \mapsto \mu\varphi$ multiplie $[\ ,\ ]_{\varphi}$ par $\mu$ et
+$[\ ,\ ]_{\varphi'}$ par $\mu^2$ : le premier crochet dépend linéairement de $\varphi$,
+le second quadratiquement.
+
+\pagerange{13}{14}
+\subsection*{$f$ est un homomorphisme ; $f'$ ne l'est pas (pages 13 et 14)}
+
+\textbf{Programme (page 13).} On va montrer que $f : E \to E'$ est un
+homomorphisme d'algèbres, faire opérer (si $\varphi$ est symétrique) l'algèbre de
+Lie $E'$ sur $E$ par dérivations qui préservent $\varphi$, de façon que $f$ commute
+aux actions de $E'$ sur $E$ et sur $E'$, et, lorsque $\varphi$ provient d'une forme
+quadratique lisse spéciale, interpréter le tout par un homomorphisme de schémas
+en groupes lisses $\widetilde{G} \to G$ et une opération de $G$ sur $\widetilde{G}$.
+
+\textbf{$f$ est un homomorphisme.} Pour tout $\varphi$, symétrique ou non,
+\[
+  (49) \qquad f[x, y]_{\varphi'} = [f(x), f(y)]_{\varphi} :
+\]
+le second membre vaut $f\alpha'(f(x) \wedge f(y))$ par (12), et
+$[x, y]_{\varphi'} = \alpha'(f(x) \wedge f(y))$ est (40 bis).
+
+\textbf{$f'$ n'en est pas un, sauf si $\Delta = 1$.} Supposons $\Delta$ inversible.
+Alors $f^{-1}$ est un isomorphisme d'algèbres, et $f' = \Delta f^{-1}$ ; si $f'$
+était un homomorphisme, on aurait à la fois
+$f^{-1}[x', y'] = [f^{-1}x', f^{-1}y']$ et
+$\Delta f^{-1}[x', y'] = \Delta^2 [f^{-1}x', f^{-1}y']$, donc
+$(\Delta^2 - \Delta)[f^{-1}x', f^{-1}y'] = 0$ ; comme les crochets engendrent $E$
+(le crochet $[\ ,\ ]_{\varphi'}$ est surjectif, $f'$ et $\alpha$ l'étant), $\Delta^2 = \Delta$,
+soit $\Delta = 1$\footnote{La page conclut « dès que $\Delta \neq 1$, $\Delta$
+inversible, $f'$ n'est pas un hom. d'algèbres » ; sur une base non connexe, il
+faut lire : $f'$ est un homomorphisme si et seulement si $\Delta = 1$. Une
+lecture de la page 14 donne $\Delta' b$ au lieu de $\Delta^2 b$.}.
+
+\pagerange{15}{18}
+\subsection*{L'action de $E'$ sur $E$ (pages 15, 17, 16 et 18)}
+
+L'argument court de la page 15 à la page 17, puis 16, puis 18 : chaque page
+commence au milieu de la phrase qui achève la précédente dans cet ordre. On
+suppose désormais $\varphi$ symétrique.
+
+\textbf{L'énoncé (page 15).} À tout $\xi' \in E'$ on veut associer un endomorphisme
+$\rho_E(\xi')$ de $E$ qui préserve $\varphi$ infinitésimalement,
+\[
+  (52) \qquad \varphi\bigl(\rho_E(\xi')x, y\bigr) + \varphi\bigl(x, \rho_E(\xi')y\bigr) = 0 ,
+\]
+qui soit une dérivation du crochet $[\ ,\ ]_{\varphi'}$ de $E$ (53), tel que
+$\rho_E : E' \to \underline{\mathrm{End}}(E)$ soit un homomorphisme d'algèbres de Lie,
+\[
+  (55) \qquad \rho_E\bigl([\xi', \eta']_{\varphi}\bigr) = [\rho_E(\xi'), \rho_E(\eta')] ,
+\]
+et que $f$ entrelace $\rho_E$ et la représentation adjointe de $E'$ :
+\[
+  (56) \qquad f\bigl(\rho_E(\xi')x\bigr) = [\xi', f(x)]_{\varphi}
+\]
+\footnote{Dans (55), (57) et (59 bis), l'indice du crochet de $E'$ est écrit
+$\varphi'$, ou d'un signe épais qui peut être un astérisque ; le crochet de $E'$
+est $[\ ,\ ]_{\varphi}$ (12), comme le confirme l'accolade de (59 bis),
+$f\alpha'(\xi' \wedge x')$.}. Que (52) entraîne (53) est un « transport de
+structure » : $1 + \varepsilon\rho_E(\xi')$ est un automorphisme de $E$ sur les nombres
+duaux $S[\varepsilon]$, et le crochet $[\ ,\ ]_{\varphi'}$ est fonctoriel en
+$(\varphi, \omega)$. Il faut pour cela que cet automorphisme préserve aussi $\omega$,
+c'est-à-dire
+\[
+  (60) \qquad \mathrm{Tr}\, \rho_E(\xi') = 0 ,
+\]
+que la page ne note qu'en marge de la page 18 ; c'est vrai ici, parce qu'une
+algèbre de Lie de la forme (12) avec $\varphi$ symétrique est unimodulaire
+($\mathrm{Tr}\, \mathrm{ad}\, \xi' = 0$)\footnote{Hypothèse fournie par l'édition :
+la page 15 dit que (52) « pour toute base » implique (53). En caractéristique
+$\neq 2$, la nullité de la trace découle de (52) pour $\varphi$ non dégénérée ; en
+général elle découle du calcul.}.
+
+\textbf{La construction (page 17).} $E'$ opère sur lui-même par la représentation
+adjointe $\rho_{E'}(\xi')x' = [\xi', x']_{\varphi}$ ; on la fait opérer sur
+$E = (E')^{\vee}$ par la contragrédiente,
+\[
+  (58) \qquad \rho_E(\xi') = -\,{}^{t}\rho_{E'}(\xi'),
+\]
+c'est-à-dire
+\[
+  (59\ \text{bis}) \qquad \bigl\langle \rho_E(\xi')x, x' \bigr\rangle
+  = -\bigl\langle x, f\alpha'(\xi' \wedge x') \bigr\rangle
+  = -\varphi\bigl(\alpha'(\xi' \wedge x'), x\bigr).
+\]
+La contragrédiente d'une représentation est une représentation : c'est (55).
+
+\textbf{La formule précise (page 16).} On a
+\[
+  (56\ \text{bis}) \qquad \rho_E(\xi')x = \alpha'\bigl(\xi' \wedge f(x)\bigr).
+\]
+En effet, multipliant (59 bis) par $\omega'$ et utilisant (7) et la symétrie de
+$\varphi$, il s'agit de voir $-\,\xi' \wedge x' \wedge f(x) = \xi' \wedge f(x) \wedge x'$,
+ce qui est vrai — « hurrah ! », écrit la page. Appliquant $f$, on obtient (56).
+Enfin (52) s'écrit
+$\langle y, f(\rho_E(\xi')x) \rangle + \langle \rho_E(\xi')y, f(x) \rangle = 0$, soit,
+grâce à (56), $\langle y, \rho_{E'}(\xi')f(x) \rangle + \langle \rho_E(\xi')y, f(x) \rangle = 0$,
+ce qui est la définition (58)--(59) appliquée à $x' = f(x)$ (page 18).
+
+\textbf{La formule « oubliée » (marge de la page 15).} Soit $\tilde{\rho}_E$ la
+représentation adjointe de $E$ sur lui-même,
+$\tilde{\rho}_E(x)y = [x, y]_{\varphi'}$. Alors
+\[
+  \rho_E\bigl(f(x)\bigr) = \tilde{\rho}_E(x) ,
+\]
+c'est-à-dire que l'action de $E'$, restreinte à $E$ à travers $f$, est l'action
+adjointe : par (56 bis) et (40 bis),
+$\rho_E(f(x))y = \alpha'(f(x) \wedge f(y)) = [x, y]_{\varphi'}$\footnote{La note
+marginale porte aussi le numéro (56 bis) ; elle est écrite en remontant le long
+du bord, et la place des accents dans « $\rho_E(f(x')) = \tilde{\rho}_E(x')$ » est
+incertaine. Ce qu'on énonce est ce que (56 bis) de la page 16 entraîne.}.
+
+\textbf{La forme quadratique (marge de la page 18).} Faisant $x = y$ dans (52), on
+trouve $2\varphi(x, \rho_E(\xi')x) = 0$ ; en fait $\varphi(x, \rho_E(\xi')x) = 0$
+(52 bis), par prolongement à partir du cas universel sur $\mathbf{Z}$, où $2$ n'est
+pas diviseur de zéro. Cela signifie que $\rho_E(\xi')$ préserve infinitésimalement
+la \emph{forme quadratique} $q$, et non seulement sa forme polaire — distinction
+qui n'a de contenu qu'en caractéristique $2$\footnote{La marge de la page 18 est
+en grande partie illisible ; l'indice de $\rho$ y est écrit $E'$. On donne la
+seule lecture qui ait un sens.}.
+
+\pagerange{18}{21}
+\subsection*{L'exemple explicité : $\mathfrak{sl}_2 \to \mathfrak{pgl}_2$ (pages 18 à 21)}
+
+Revenons à (21) : $E'$ a la base $X, Y, H$ de (26), et
+$\omega' = e'_1 \wedge e'_2 \wedge e'_3 = -X \wedge H \wedge Y$\footnote{La page note
+qu'on aurait pu prendre l'autre signe « sans inconvénient » : $(q, -\omega)$ est
+encore une structure spéciale orthogonale, les deux crochets changeant alors
+de signe.}. Posons
+\[
+  (62) \qquad \widetilde{X} = e_2 , \quad \widetilde{Y} = e_1 , \quad \widetilde{H} = e_3 ,
+  \qquad \text{d'où} \qquad \omega = \widetilde{X} \wedge \widetilde{H} \wedge \widetilde{Y}
+\]
+(« il y a un signe ici ! »), et
+\[
+  (65) \qquad f(\widetilde{X}) = X , \quad f(\widetilde{Y}) = Y , \quad f(\widetilde{H}) = 2H ,
+  \qquad \Delta = -2 .
+\]
+Alors
+\[
+  (66) \qquad f'(X) = -2\widetilde{X} , \quad f'(Y) = -2\widetilde{Y} , \quad f'(H) = -\widetilde{H} ,
+\]
+conformément à $f'f = \Delta = -2$\footnote{La page écrit $f'(X) = 2\widetilde{X}$,
+$f'(Y) = 2\widetilde{Y}$, $f'(H) = \widetilde{H}$, soit $f'f = +2$, en contradiction
+avec (42) et $\Delta = -2$. Le calcul direct, $f'(H) = \alpha'(f(e_1) \wedge f(e_2)) =
+\alpha'(e'_2 \wedge e'_1) = -e_3$, donne le signe moins, et la page 75 du dossier
+le retrouve : $ff' = -2$ (54). Les formules (67) à (69) qui en découlent changent
+de signe avec elle.}. La forme $\varphi'$ sur $E'$ est donc, pour
+$\xi = xX + hH + yY$ et $\xi' = x'X + h'H + y'Y$,
+\[
+  (68) \qquad \varphi'(\xi, \xi') = -\bigl(hh' + 2(xy' + yx')\bigr) , \qquad
+  \varphi'(\xi, \xi) = -(h^2 + 4xy) .
+\]
+Comme $\varphi'(H, H) = -1$ est impair, $\varphi'$ n'est la forme polaire d'aucune
+forme quadratique quand $2$ n'est pas inversible : en caractéristique $2$,
+$\varphi'(\xi, \xi) = h^2$ n'est pas nul, alors qu'une forme polaire y est alternée.
+La page ajoute que, dans ces coordonnées, $q$, $\varphi$ et $\varphi'$ sont à
+coefficients entiers premiers entre eux, donc non nulles sur tout corps.
+
+Le crochet de $E$ est
+\[
+  (70) \qquad [\widetilde{H}, \widetilde{X}] = 2\widetilde{X} , \quad
+  [\widetilde{H}, \widetilde{Y}] = -2\widetilde{Y} , \quad
+  [\widetilde{X}, \widetilde{Y}] = \widetilde{H} ,
+\]
+celui de $\mathfrak{sl}(2)$, algèbre de Lie de $\mathrm{SL}(2)_S$, et $f$ est
+l'homomorphisme d'algèbres de Lie de l'isogénie
+\[
+  (71) \qquad \mathrm{SL}(2)_S \longrightarrow \mathrm{GP}(1)_S
+\]
+de noyau $\mu_2$, centre de $\mathrm{SL}(2)$. L'action de $E'$ sur $E$ est la
+différentielle de l'action de $\mathrm{GP}(1)$ sur $\mathrm{SL}(2)$ déduite par
+passage au quotient de l'action adjointe, qui est triviale sur le centre. Avec
+(56 bis), le plus commode :
+\[
+  (72) \qquad
+  \begin{cases}
+    \rho_E(X) = \tilde{\rho}_E(\widetilde{X}) : & \widetilde{X} \mapsto 0 ,\ \widetilde{Y} \mapsto \widetilde{H} ,\ \widetilde{H} \mapsto -2\widetilde{X} \\
+    \rho_E(Y) = \tilde{\rho}_E(\widetilde{Y}) : & \widetilde{X} \mapsto -\widetilde{H} ,\ \widetilde{Y} \mapsto 0 ,\ \widetilde{H} \mapsto 2\widetilde{Y} \\
+    \rho_E(H) : & \widetilde{X} \mapsto \widetilde{X} ,\ \widetilde{Y} \mapsto -\widetilde{Y} ,\ \widetilde{H} \mapsto 0
+  \end{cases}
+\]
+où $\rho_E(H)$ est « $\tfrac{1}{2}\tilde{\rho}_E(\widetilde{H})$ (sic) » : la moitié d'un
+endomorphisme à coefficients pairs, bien défini sur $\mathbf{Z}$.
+
+\textbf{Remarque (page 21).} Si $2$ est inversible, $f$ est un isomorphisme
+d'algèbres de Lie, qui identifie $E$ à $E'$ (l'identification usuelle d'un espace
+quadratique avec son dual), $\rho_E$ à l'action adjointe, et $f' = \Delta f^{-1}$ à
+$-2\,\mathrm{id}_E$, sans grand intérêt\footnote{La page écrit $2\,\mathrm{id}_E$,
+suite du signe de (66).} ; de même chaque fois que $\Delta$ est inversible. Si $2$
+est nul sur $S$, $f$ a pour noyau $\mathcal{O}_S\widetilde{H}$, qui est le centre de
+$\mathfrak{sl}(2)$ et aussi son algèbre dérivée\footnote{La page écrit « groupe
+dérivé » ; il s'agit de l'algèbre dérivée $[E, E]$. Le groupe dérivé de
+$\mathrm{SL}_2$ est $\mathrm{SL}_2$ tout entier.} ; $f'$ a pour noyau
+$\mathcal{O}_S X \oplus \mathcal{O}_S Y$, qui est l'algèbre dérivée de $\mathfrak{gp}(1)$ et
+l'image de $f$, et l'image de $f'$ est le noyau $\mathcal{O}_S\widetilde{H}$ de $f$. Le
+centre de $\mathfrak{gp}(1)$ est nul sur toute base. Il faudrait, dit la page,
+expliciter les formes de $\mathfrak{sl}(2)$ et de $\mathfrak{gp}(1)$ en
+caractéristique $2$ — ce que fait la page 26 — « contrairement aux formes de
+$\mathrm{SL}(2)_S$ ou $\mathrm{GP}(1)_S$, qui sont équivalentes et équivalent aux formes
+de $\mathbb{P}^1_S$ ».
+
+\pagerange{22}{24}
+\subsection*{Formes de Casimir (pages 22 à 24)}
+
+Posons
+\[
+  (73) \qquad \mathrm{Cas}_{E'}(x', y') = \mathrm{Tr}\bigl(\rho_{E'}(x')\rho_{E'}(y')\bigr), \qquad
+  \mathrm{Cas}_E(x, y) = \mathrm{Tr}\bigl(\tilde{\rho}_E(x)\tilde{\rho}_E(y)\bigr),
+\]
+les formes de Killing de $E'$ et de $E$\footnote{Un premier essai, définissant
+des formes quadratiques $\mathrm{Tr}\,\rho(x)^2$, est barré en tête de la page 22.}.
+Alors
+\[
+  (74) \qquad \mathrm{Cas}_{E'}(x', y') = -2\,\varphi'(x', y') , \qquad
+  \mathrm{Cas}_E(x, y) = -2\Delta\, \varphi(x, y) .
+\]
+\footnote{La page écrit $\mathrm{Cas}_{E'} = 2\varphi'$, en cohérence avec son signe de
+(66) ; avec le signe correct, c'est $-2\varphi'$. Les deux identités ont été
+vérifiées pour une forme symétrique générale (calcul de cette lecture). La
+seconde est juste sur la page.}
+La page en donne une démonstration par réduction : les deux membres de chaque
+identité ont le même comportement quand $\omega \mapsto \lambda\omega$ et
+$\varphi \mapsto \mu\varphi$ (facteurs $\lambda^2\mu^2$ et $\lambda^2\mu^4$) ; par
+conservation des identités polynomiales il suffit de les vérifier sur un corps
+algébriquement clos de caractéristique $0$ pour une forme non dégénérée, que l'on
+ramène, au prix de ces changements d'échelle, à (21) ; là, les deux membres sont
+des formes symétriques invariantes sous le groupe spécial orthogonal, donc
+proportionnelles, et il suffit de les comparer en un point :
+$\mathrm{Cas}_{E'}(H, H) = 1 + 1 + 0 = 2$ et $\varphi'(H, H) = -1$ ;
+$\mathrm{Cas}_E(\widetilde{H}, \widetilde{H}) = 4 + 4 + 0 = 8$ et
+$-2\Delta\,\varphi(\widetilde{H}, \widetilde{H}) = -2 \cdot (-2) \cdot 2 = 8$\footnote{Les
+quatre premières lignes de la page 24, qui font la réduction au cas (21), se
+lisent mal ; seules les formules sont sûres.}.
+
+Pour une structure spéciale orthogonale $(q, \omega)$, $\Delta = -2$ et
+$\varphi(x, x) = 2q(x)$, d'où
+\[
+  (75)\text{--}(76) \qquad \mathrm{Cas}_E(x, x) = -4\Delta\, q(x) = 8\, q(x) .
+\]
+Donc, si $2$ est inversible (ou seulement non diviseur de zéro), $q$ \emph{se
+déduit} de la structure d'algèbre de Lie de $E$ : c'est la forme de Killing
+divisée par $8$. De même, la première formule redonne $\varphi'$ à partir du
+crochet de $E'$, $\mathrm{Cas}_{E'}(x', x') = -2\varphi'(x', x')$ (77). C'est la
+relation que la page 72 énonce, dans le langage des quaternions, entre $q = -\det$
+et la forme de Killing de $\widetilde{\mathfrak{g}}$.
+
+\pagerange{25}{25}
+\subsection*{Quand deux données donnent les mêmes crochets (page 25)}
+
+La page se présente comme un complément à la discussion de (42). On note
+$[\ ,\ ]_{\omega, \varphi}$ le crochet (12) sur $E'$ et $[\ ,\ ]_{\omega, \varphi'}$ le
+crochet (40 bis) sur $E$. D'après ce qui précède,
+\[
+  (78) \qquad [\ ,\ ]_{\lambda\omega, \mu\varphi} = \lambda\mu\, [\ ,\ ]_{\omega, \varphi} ,
+  \qquad [\ ,\ ]_{\lambda\omega, (\mu\varphi)'} = \lambda\mu^2\, [\ ,\ ]_{\omega, \varphi'} .
+\]
+Comme, à $\omega$ fixé, $\varphi \mapsto [\ ,\ ]_{\varphi}$ est bijectif,
+\[
+  (79) \qquad [\ ,\ ]_{\omega, \varphi} = [\ ,\ ]_{\omega_1, \varphi_1}
+  \iff \omega_1 = \lambda\omega ,\ \varphi_1 = \lambda^{-1}\varphi \ \text{pour un}\ \lambda \in \Gamma(S, \mathcal{O}_S^{\times}).
+\]
+Pour le crochet de $E$, on suppose $\Delta$ inversible. Alors, à $\omega$ fixé,
+\[
+  (80) \qquad f' = g' \iff g = \varepsilon f , \quad \varepsilon \in \Gamma(S, \mu_2) :
+\]
+si $f' = g'$, $\det f' = \det g'$ donne $\Delta(f)^2 = \Delta(g)^2$, donc
+$\Delta(g) = \varepsilon\Delta(f)$ avec $\varepsilon^2 = 1$, et $f = \Delta(f)^{-1}f''$,
+$g = \Delta(g)^{-1}g''$ donnent $g = \varepsilon f$\footnote{La page écrit d'abord
+« $\Delta(f) = \Delta(g)$ i.e. $\Delta(f)^2 = \Delta(g)^2$ » ; c'est l'égalité des
+déterminants de $f'$ et $g'$, $\det f' = \Delta^2$ par (45), qui donne celle des
+carrés. L'hypothèse $\Delta$ inversible, implicite, est celle sous laquelle la
+page vient de poser $f$ isomorphisme.}. On en déduit, toujours pour $\Delta$
+inversible,
+\[
+  (81) \qquad [\ ,\ ]_{\omega_1, \varphi_1'} = [\ ,\ ]_{\omega, \varphi'}
+  \iff \omega_1 = \mu^{-2}\omega ,\ \varphi_1 = \mu\varphi \ \text{pour un}\ \mu \in \Gamma(S, \mathcal{O}_S^{\times}),
+\]
+$\mu$ étant alors uniquement déterminé par $\varphi_1$\footnote{La page énonce :
+$\omega_1 = \lambda\omega$, $\varphi_1 = \mu\varphi$ avec $\lambda\mu^2 = 1$, « $\mu$ une
+racine carrée de $\lambda^{-1}$ ». C'est la même chose, à condition de lire que
+$\lambda$ doit être l'inverse d'un carré : si $\omega_1 = \lambda\omega$ avec $\lambda$
+non carré, aucun $\varphi_1$ ne donne le même crochet.}.
+
+\pagerange{26}{27}
+\subsection*{Caractéristique $2$ : algèbres couplées et plans affines symplectiques (pages 26 et 27)}
+
+Supposons $2 = 0$ sur $S$. D'après la page 21, $\mathfrak{sl}(2)$ a un centre
+$\mathfrak{z} = \mathcal{O}\widetilde{H}$ égal à son algèbre dérivée, le quotient
+$V = \mathfrak{sl}(2)/\mathfrak{z}$ est de rang $2$ et le crochet induit un isomorphisme
+$\Lambda^2 V \simeq \mathfrak{z}$ : c'est l'\emph{algèbre de Heisenberg} de dimension
+$3$. Une forme de $\mathfrak{sl}(2)$ est donc la même chose qu'un couple $(V, E)$,
+$V$ de rang $2$ et $E$ une extension de $V$ par $\det V$, le crochet étant
+$[x, y] = \bar{x} \wedge \bar{y}$ ; pour $V$ fixé, une telle extension revient à une
+extension de $\mathcal{O}_S$ par $(\det V) \otimes V^{\vee} \simeq V$, c'est-à-dire à un
+fibré affine sous $V$. De même $\mathfrak{gp}(1)$ a l'idéal abélien
+$V' = \mathcal{O}X \oplus \mathcal{O}Y$, de quotient $\mathcal{O}_S$, et tout relèvement de $1$
+opère sur $V'$ par l'identité ; une forme de $\mathfrak{gp}(1)$ est un couple
+$(V', E')$, $E'$ extension de $\mathcal{O}_S$ par $V'$\footnote{Sur la page, au-dessus
+de $V'$, un $\check{V}'$ est écrit en interligne, qui peut le corriger ; la
+lecture « Module vectoriel » est celle de la page 36.}.
+
+Disons que deux telles algèbres $E$, $E'$ sont \emph{couplées} s'il y a entre elles
+une dualité parfaite pour laquelle $\det V \subset E$ est l'orthogonal de
+$V' \subset E'$. Alors $V' \simeq V^{\vee}$ et $\det V \simeq \mathcal{O}_S$ : $V$ reçoit une
+structure symplectique et $V' \simeq V$. Les couples couplés équivalent donc aux
+triples $(V, \varphi, E)$, $\varphi$ forme symplectique sur $V$ et $E$ fibré affine
+sous $V$ : un fibré en \emph{plans affines symplectiques}. Le schéma en groupes de
+leurs automorphismes est le groupe affine symplectique
+$\mathrm{SL}(V) \ltimes V$, lisse de dimension relative $5$, tandis que le groupe
+des automorphismes d'une forme de $\mathfrak{sl}(2)$, ou de $\mathfrak{gp}(1)$, est
+une forme du groupe affine $\mathrm{GL}(V) \ltimes V$, lisse de dimension relative
+$6$\footnote{La fin du premier paragraphe de la page 27 se lit mal, et ce qu'elle
+compare à une forme de $\mathrm{GP}(1)$ reste incertain. La conséquence qu'on en
+tire est de l'édition : comme $\mathrm{GP}(1)$ est de dimension $3$, le foncteur
+« algèbre de Lie » ne peut être une équivalence au-dessus d'une base de
+caractéristique $2$ ; c'est la restriction $(*)$ des pages 57 à 59.}.
+
+Les applications $f$ et $f'$ s'en déduisent : $f$ est le composé
+$E \to V \xrightarrow{\varphi} V' \to E'$, et $f'$ le composé
+$E' \to \mathcal{O}_S \simeq \det V \to E$. Une description de $\rho_{E'}$ est commencée
+puis barrée.
+
+\pagerange{28}{31}
+\subsection*{Le groupe $G = \mathrm{SO}(q)$, son revêtement, et $E' \simeq \mathfrak{g}$ (pages 28 à 31)}
+
+Soient $q$ une forme quadratique lisse sur $E$, $\varphi$ sa forme polaire, et
+$\omega$ une base de $\det E$ avec $\delta'(q) = -\omega^{\otimes(-2)}$ (82). Posons
+\[
+  (83) \qquad G = \mathrm{SO}(q) = \underline{\mathrm{Aut}}(E, q, \omega) ,
+\]
+et soit $\widetilde{G} \xrightarrow{F} G$ son revêtement simplement connexe, de noyau
+canoniquement isomorphe à $\mu_2$ :
+\[
+  (84) \qquad 1 \longrightarrow \mu_2 \longrightarrow \widetilde{G} \xrightarrow{\ F\ } G \longrightarrow 1 .
+\]
+Aujourd'hui, $\widetilde{G}$ est le groupe $\mathrm{Spin}(q)$, le groupe des éléments
+de norme $1$ de l'algèbre de Clifford paire de $q$, qui est une algèbre de
+quaternions\footnote{Noms modernes, donnés par l'édition. Les pages écrivent
+« revêtement simplement connexe » entre guillemets et ne nomment ni l'algèbre de
+Clifford ni Spin ; la section VI (pages 68 et suivantes) construit $\widetilde{G}$
+directement à partir d'une algèbre de quaternions. Pour $\mathrm{SO}(q)$ en rang
+impair sur une base quelconque, $\underline{\mathrm{Aut}}(E, q, \omega)$ est la bonne
+définition : $\mathrm{O}(q) = \mathrm{SO}(q) \times \mu_2$.}. Le noyau étant central,
+l'action adjointe de $\widetilde{G}$ sur lui-même passe au quotient en une action
+\[
+  (87) \qquad \rho : G \longrightarrow \underline{\mathrm{Aut}}_{S\text{-}\mathrm{gr}}(\widetilde{G}) ,
+\]
+caractérisée par $\rho(F(a))(b) = aba^{-1}$ et $F(\rho(g)(b)) = g\,F(b)\,g^{-1}$
+(diagrammes (88) et (89)). Sur les algèbres de Lie on obtient un homomorphisme
+$\mathfrak{f} : \widetilde{\mathfrak{g}} \to \mathfrak{g}$ (90) et une action
+$\rho_{\mathfrak{g}} : \mathfrak{g} \to \underline{\mathrm{Der}}(\widetilde{\mathfrak{g}})$ (91),
+avec $\rho_{\mathfrak{g}}(\mathfrak{f}(a)) = \mathrm{ad}(a)$ et
+$\mathfrak{f}(\rho_{\mathfrak{g}}(x)b) = [x, \mathfrak{f}(b)]$ (92).
+
+\textbf{L'énoncé.} Il existe des isomorphismes canoniques
+\[
+  (93) \qquad i : E \xrightarrow{\ \sim\ } \widetilde{\mathfrak{g}} , \qquad
+  j : E' \xrightarrow{\ \sim\ } \mathfrak{g}
+\]
+qui transportent les crochets de $\widetilde{\mathfrak{g}}$ et $\mathfrak{g}$ en
+$[\ ,\ ]_{\varphi'}$ sur $E$ et $[\ ,\ ]_{\varphi}$ sur $E'$, l'homomorphisme
+$\mathfrak{f}$ en $f$, et $\rho_{\mathfrak{g}}$ en $\rho_E$ ; et le composé
+$\mathfrak{g} \to \underline{\mathrm{Der}}(\widetilde{\mathfrak{g}}) \simeq
+\underline{\mathrm{Der}}(E) \subset \underline{\mathrm{End}}(E)$ est la
+représentation de $\mathfrak{g}$ déduite de la représentation linéaire de $G$ sur
+$E$.
+
+\textbf{La moitié démontrée : $j$.} $\rho_E$ envoie $E'$ dans les endomorphismes de
+$E$ qui préservent infinitésimalement $q$ (marge de la page 18) et $\omega$ (60),
+lesquels forment exactement $\mathfrak{g} = \mathrm{Lie}\, \mathrm{SO}(q)$ ; d'où
+$j : E' \to \mathfrak{g}$, compatible aux crochets par (55). C'est un isomorphisme :
+$E'$ et $\mathfrak{g}$ étant localement libres de rang $3$, il suffit que $j$ soit
+injectif sur chaque fibre, ce qui se voit après extension à un corps $k$
+algébriquement clos. Là, on trouve une base où $q = xy + z^2$ et
+$\omega = e_1 \wedge e_2 \wedge e_3$ (quitte à changer $e_3$ en $-e_3$), et (72) donne
+\[
+  \rho_E(xX + hH + yY) :
+  \widetilde{X} \mapsto h\widetilde{X} - y\widetilde{H} , \quad
+  \widetilde{Y} \mapsto x\widetilde{H} - h\widetilde{Y} , \quad
+  \widetilde{H} \mapsto -2x\widetilde{X} + 2y\widetilde{Y} ,
+\]
+qui n'est nul que pour $x = y = h = 0$, en toute caractéristique\footnote{Le signe
+devant $h\widetilde{Y}$ est surchargé sur la page 31 ; (72) donne $-$.}.
+
+\textbf{La moitié annoncée : $i$.} « Il faut encore définir l'isom.
+$E \simeq \widetilde{\mathfrak{g}}$ et prouver ses propriétés. Pour ceci il faut
+redéfinir avec précision, en termes élémentaires, la construction de $\widetilde{G}$
+sur $G$ — il nous faut pour ceci ouvrir une parenthèse. » La page s'arrête là, au
+premier tiers de la feuille. La parenthèse n'est pas ouverte dans cette suite ;
+elle l'est, en substance, par la section VI du Dictionnaire (pages 68 à 75), où
+$\widetilde{G}$ est le noyau de la norme réduite d'une algèbre de quaternions et
+où l'on pose $E = \widetilde{\mathfrak{g}}$.
+
+\pagerange{33}{55}
+\section*{II. Le deuxième cahier (pages 32 à 55)}
+
+La couverture (page 32) ne porte que « (21 p) ». Le cahier n'est pas une suite
+continue : une page de calcul sur les polygones, une page de résumé, une étude
+des commutants dans $\mathrm{PGL}(V)$ en rang $2$, enfin les algèbres de quaternions.
+
+\pagerange{33}{33}
+\subsection*{La rotation d'un polygone régulier (page 33)}
+
+En tête, à l'encre noire :
+\[
+  F_3 = T , \quad F_4 = T - 1 , \quad F_5 = T^2 - T - 1 , \quad F_6 = T - 2 ,
+\]
+$F_n$ étant le polynôme minimal sur $\mathbf{Q}$ de $1 + 2\cos(2\pi/n) = 1 + \zeta +
+\zeta^{-1}$, $\zeta$ racine primitive $n$-ième de l'unité. Puis un polygone régulier
+à $n$ sommets $\zeta_0, \zeta_1, \ldots$ inscrit dans un cercle, ses côtés
+$e_1 = \zeta_1 - \zeta_0$, $e_2 = \zeta_2 - \zeta_1$, et la rotation affine $u$ qui
+envoie $\zeta_i$ sur $\zeta_{i+1}$ :
+\[
+  u(\zeta_0) = \zeta_0 + e_1 , \qquad u(e_1) = e_2 , \qquad u(e_2) = -e_1 + (\alpha - 1)e_2 .
+\]
+La partie linéaire de $u$ a pour polynôme caractéristique $T^2 - 2\cos(2\pi/n)\,T +
+1$, donc $\alpha - 1 = 2\cos(2\pi/n)$ ; et la flèche marquée $\alpha$ que la figure
+trace de $\zeta_0$ à $\zeta_3$ s'explique : $\zeta_3 - \zeta_0 = e_1 + e_2 + u(e_2) =
+\alpha\, e_2$. Ainsi $\alpha = 1 + 2\cos(2\pi/n)$ est le rapport de la diagonale
+$\zeta_0\zeta_3$ au côté, racine de $F_n$ — le nombre d'or pour le pentagone, $2$
+pour l'hexagone — et c'est aussi la trace de la rotation d'angle $2\pi/n$ de
+l'espace à trois dimensions\footnote{Ces deux interprétations sont de l'édition ;
+la page ne donne que les polynômes, la figure et les trois formules. Le
+dossier 85 (pages 5 à 7, puis 23 à 31) travaille avec l'invariant
+$2\cos\theta = \xi + \xi^{-1}$ d'une rotation et des polynômes
+« ½cyclotomiques » $\Psi_n$ ; si $\Psi_n$ est, comme ce nom et les cas cités
+($\alpha = -1, 0, 1$ et $\alpha^2 + \alpha - 1 = 0$ pour les ordres $3, 4, 6, 5$) le
+suggèrent, le polynôme minimal de $2\cos(2\pi/n)$, alors le $F_n$ d'ici est
+$\Psi_n(T - 1)$. Le même dossier 85 nomme aussi $F_n$ d'autres polynômes ;
+l'homonymie est fortuite.}.
+
+\pagerange{34}{34}
+\subsection*{Algèbres spéciales, droites, diviseurs, sous-groupes (page 34)}
+
+La page aligne :
+\[
+  \begin{aligned}
+  \text{AlgSpéc}(\mathcal{M}) &\simeq \mathbb{P}(\widetilde{\mathfrak{g}}) \simeq
+  \check{\mathbb{P}}(\mathfrak{g}) \simeq \check{P} = \mathrm{Dr}(P) \simeq \mathrm{Div}_2^{+}(X) \\
+  &\simeq \{\text{sous-groupes commutatifs lisses de dimension } 1 \text{ de } G\} ,
+  \end{aligned}
+\]
+c'est-à-dire : les sous-algèbres spéciales d'une algèbre de quaternions, les
+droites du plan $P$, les diviseurs effectifs de degré $2$ de la conique $X \subset P$,
+et les sous-groupes commutatifs lisses de dimension relative $1$ de $G$. C'est
+l'énoncé que les pages 50 à 55 démontrent, auxquelles on renvoie\footnote{La page
+écrit $\mathbb{P}(\mathfrak{g}) \simeq \check{\mathbb{P}}(\widetilde{\mathfrak{g}})$, avec
+peut-être un tilde sur le premier $\mathbb{P}$ ; la page 52, (21), a les tildes
+dans l'ordre qu'on suit ici, conforme à la convention des pages.}. Pour un tel
+sous-groupe $\mathcal{T}$, la page note : $\mathcal{T}$ est son propre centralisateur ;
+$X - Y$ ($Y$ le diviseur de degré $2$ correspondant) est un torseur sous
+$\mathcal{T}$ ; $N(\mathcal{T})/\mathcal{T}$ s'injecte dans $\underline{\mathrm{Aut}}(\mathcal{T})$ et
+contient $-\mathrm{id}_{\mathcal{T}}$\footnote{Les quatre lignes, la note de droite et la
+marge sont en grande partie illisibles ; on ne garde que ce qui se lit. Sur
+« son propre centralisateur », voir les pages 40 et 55 : en caractéristique
+$2$ c'est faux pour le centralisateur de l'algèbre de Lie.}.
+
+\pagerange{36}{40}
+\subsection*{Commutant d'un endomorphisme en rang $2$ (pages 36 à 40)}
+
+Soient $V$ un Module de rang $2$ sur $S$ et $u \in \underline{\mathrm{End}}(V)$ nulle part
+scalaire : $u_s \notin k(s)\cdot 1$ pour tout $s \in S$. Le commutant de $u$ dans
+$\underline{\mathrm{End}}(V)$ est le sous-fibré $\mathcal{O}_S + \mathcal{O}_S u$ : c'est le noyau
+de $v \mapsto [u, v]$, dont le rang est $2$ en tout point (page 38), et il
+contient $\mathcal{O}_S + \mathcal{O}_S u$, qui est de rang $2$. Le commutant dans
+$\mathrm{GL}(V)$ est formé des $\alpha + \beta u$ avec
+\[
+  (2) \qquad \det(\alpha + \beta u) = \alpha^2 + \alpha\beta\, \mathrm{Tr}\, u + \beta^2 \det u
+\]
+inversible, et son image $\mathcal{T}$ dans $\mathrm{GP}(V) = \mathrm{PGL}(V)$ est
+\[
+  \mathcal{T} = C_{\mathrm{PGL}(V)}(u) \simeq \mathbb{P}^1 - Q_{\mathrm{Tr}\,u,\ \det u} ,
+\]
+où $Q_{\tau, \delta} \subset \mathbb{P}^1$ est le diviseur de degré $2$ d'équation
+$\alpha^2 + \tau\alpha\beta + \delta\beta^2 = 0$, étale si et seulement si
+$\tau^2 - 4\delta$ est inversible, c'est-à-dire si les valeurs propres de $u$ sont
+distinctes en chaque point. $\mathcal{T}$ est un tore si ce diviseur est étale, une
+forme de $\mathbb{G}_a$ en un point où il est double\footnote{Le début de la
+phrase de la page 36 sur $Q_{\tau,\delta}$ est illisible ; on donne le sens attendu.
+La dernière précision est de l'édition.}.
+
+$\mathcal{T}$ ne dépend que de $\mathcal{O}_S + \mathcal{O}_S u$, ou de son image
+$\mathfrak{h}$ dans $\underline{\mathrm{End}}(V)/\mathcal{O}_S = \mathrm{Lie}\,\mathrm{PGL}(V)$,
+sous-fibré de rang $1$ qui est $\mathrm{Lie}\,\mathcal{T}$. D'où une correspondance
+entre sous-fibrés $\mathfrak{h}$ de rang $1$ de $\mathfrak{g} = \mathrm{Lie}\,\mathrm{PGL}(V)$
+et sous-groupes commutatifs lisses de dimension relative $1$ de
+$\mathrm{PGL}(V)$\footnote{La page écrit « $\mathfrak{g} = \underline{\mathrm{GP}}(V) = G$ »,
+là où l'on attend $\mathrm{Lie}$. Elle nomme $H$ le sous-groupe ; voir les
+conventions.}.
+
+\textbf{$\mathcal{T}$ est-il le centralisateur de $\mathfrak{h}$ ?} Deux questions se
+mêlent sur les pages 37, 39 et 40.
+
+\emph{Le centralisateur d'un élément $h$ de $\mathcal{T}$ (pages 37 et 39).} Si
+$g h g^{-1} = \lambda h$ dans $\mathrm{GL}(V)$, le déterminant donne $\lambda^2 = 1$,
+donc $g h^2 g^{-1} = h^2$ et $g$ commute à $h^2$ ; si $h^2$ n'est pas scalaire,
+c'est-à-dire si $h$ n'est pas une « réflexion », $g \in \mathcal{T}$. Mais en
+caractéristique $2$ il peut arriver que $h^2 = 1$ pour tout $h \in \mathcal{T}$ (le cas
+unipotent : $h = 1 + tv$, $v^2 = 0$). La page passe alors à la section
+universelle $\alpha + \beta u_0$, $\alpha, \beta$ indéterminées : si
+$g u_0 g^{-1} = \lambda_0 u_0$ et $g(\alpha + \beta u_0)g^{-1} = \lambda(\alpha,
+\beta)(\alpha + \beta u_0)$, la comparaison des coefficients de $1$ donne
+$\lambda(\alpha, \beta)\alpha = \alpha$ dans l'anneau localisé
+$\mathcal{O}_S[\alpha, \beta]_{\det(\alpha + \beta u_0)}$, d'où
+$\lambda = 1$\footnote{La page écrit « $\alpha\lambda(\alpha, \beta) \equiv 1$ » ;
+c'est $\lambda\alpha = \alpha$ que donne la comparaison, et la conclusion $\lambda = 1$
+est celle de la page.}.
+
+\emph{Le centralisateur de $\mathfrak{h}$ (page 40).} Si $g$ centralise $\mathfrak{h}$,
+alors $gug^{-1} = u + \lambda$ ; la trace donne $2\lambda = 0$. Si $2$ est inversible,
+$\lambda = 0$ et $g \in \mathcal{T}$ : « gagné ». En caractéristique $2$, non : le
+déterminant donne $\lambda(\mathrm{Tr}\,u + \lambda) = 0$, et $\lambda = \mathrm{Tr}\,u$
+convient. Par exemple $u = \mathrm{diag}(\zeta, \zeta + 1)$ avec
+$\zeta^2 + \zeta + 1 = 0$ est conjugué à $u + 1 = \mathrm{diag}(\zeta + 1, \zeta)$ sans
+lui être égal : le centralisateur de $\mathfrak{h}$ contient l'élément qui échange
+les deux droites propres, et contient strictement $\mathcal{T}$, tout en restant
+lisse de dimension relative $1$ (c'est le normalisateur du tore)\footnote{Ce
+paragraphe de la page 40 est barré sur la page, mais l'exemple est juste et la
+page le reprend aussitôt sous forme positive (« la translation par
+$\zeta + \zeta'$ le transforme en $(\zeta', \zeta)$, qui lui est conjugué ») avant de
+finir sur un point d'interrogation. La parenthèse finale est de l'édition.}.
+La même chose se lit dans l'algèbre de Lie : en caractéristique $2$, dans
+$\mathfrak{gp}(1)$ où $[H, X] = X$, $[H, Y] = Y$, $[X, Y] = 0$, le centralisateur de
+$X$ est $\{h = 0\}$, de dimension $2$, « trop grande », celui de $H$ est
+$\mathcal{O}H$.
+
+\pagerange{41}{44}
+\subsection*{Sous-groupes d'ordre premier impair (pages 41 à 44, et le haut de la page 38)}
+
+La page 41 commence au milieu d'une démonstration dont l'énoncé est à la page
+42, et le haut de la page 38 semble en être la fin\footnote{Rattachement proposé
+par la transcription (note de la page 38), non marqué par l'auteur.}.
+
+\textbf{Énoncé (page 42).} \emph{Soient $G$ une forme de $\mathrm{PGL}_2$ sur $S$, $p$ un
+nombre premier impair, $\mu \subset G$ un sous-groupe fini étale de rang $p$.}
+\begin{itemize}
+  \item[a)] \emph{Le centralisateur $\mathcal{T}$ de $\mu$ est lisse, commutatif, de
+    dimension relative $1$.}
+  \item[b)] \emph{Si $p$ est inversible sur $S$, soit $N$ le normalisateur de $\mu$ ;
+    alors $\mathcal{T} = N^{\circ}$, et $N/\mathcal{T} \simeq \{\pm 1\}_S$ opère sur $\mathcal{T}$
+    par $h \mapsto h^{-1}$.}
+\end{itemize}
+\footnote{L'hypothèse « $p$ inversible » dans b) est de l'édition. Sur une fibre
+de caractéristique $p$, $\mu$ est engendré par un unipotent $u = 1 + v$, le
+centralisateur est $\mathbb{G}_a$, et le normalisateur contient
+$\mathrm{diag}(a, 1)$ pour tout $a \in \mathbf{F}_p^{\times}$, qui envoie $u$ sur $u^a$ :
+$N/\mathcal{T} \simeq \mathbf{F}_p^{\times}$ tout entier, égal à $\{\pm 1\}$ seulement pour
+$p = 3$. La page traite bien le cas $p = \mathrm{car}\,k$ à la page 41, mais
+seulement pour le commutant. Quant à la connexité des fibres de $\mathcal{T}$, que la
+page restreint de façon peu lisible aux caractéristiques résiduelles $\neq p$,
+elle vaut partout : tore maximal en caractéristique $\neq p$, $\mathbb{G}_a$ en
+caractéristique $p$. Un c), sur une section de $N/\mathcal{T}$ d'image $-1$ dans
+$(\mathbf{Z}/p\mathbf{Z})^{\times}$, est barré.}
+
+\textbf{Démonstration (pages 42, 41, 38).} Localement $G = \widetilde{G}/\mu_2$ avec
+$\widetilde{G} = \mathrm{SL}(V)$ ; comme $p$ est impair, $\mu$ se relève de façon
+unique en $\widetilde{\mu} \simeq \mu$ dans $\widetilde{G}$, et il suffit de voir que
+l'image du centralisateur de $\widetilde{\mu}$ est le centralisateur de $\mu$. Sur un
+corps $k$ algébriquement clos de caractéristique $\neq p$, un générateur de
+$\widetilde{\mu}$ a des valeurs propres $\zeta, \zeta^{-1}$, $\zeta$ racine primitive
+$p$-ième, distinctes puisque $p$ est impair ; le commutant est le tore diagonal,
+le normalisateur est formé des matrices diagonales et de leurs produits par une
+« symétrie », d'où $N/\mathcal{T} \simeq \{\pm 1\} \subset (\mathbf{Z}/p\mathbf{Z})^{\times}$. En
+caractéristique $p$, $u = 1 + v$, $v^2 = 0$, $v \neq 0$, et le commutant dans
+$\mathrm{SL}$ est formé des $\alpha + \beta v$ avec $\alpha^2 = 1$, $\alpha = \pm 1$ ;
+son image dans $\mathrm{PGL}$ est $\mathbb{G}_a$, lisse et connexe. Dans le cas général,
+l'image inverse par $N \to \underline{\mathrm{Aut}}(\mu) = (\mathbf{Z}/p\mathbf{Z})^{\times}_S$ de la
+section unité est un sous-groupe ouvert de $N$ qui coïncide fibre à fibre avec
+$N^{\circ}$, donc lui est égal ; et $N/N^{\circ}$ est un sous-groupe étale ouvert de
+$(\mathbf{Z}/p\mathbf{Z})^{\times}_S$ qui coïncide fibre à fibre avec $\{\pm 1\}$, donc lui est
+égal (haut de la page 38) — sous l'hypothèse de b)\footnote{La lissité est dite
+« connue pour tout sous-groupe de type multiplicatif dans un groupe lisse »
+lorsque $p$ est premier à la caractéristique ; la page ne va pas plus loin, et
+le cas de caractéristique résiduelle $p$ sur une base n'est pas traité.}.
+
+\textbf{Une question (page 43).} Tout sous-groupe lisse $\mathcal{T}$ de dimension
+relative $1$ de $G$ est-il de la forme $C(\mathfrak{h})$, déterminé par son algèbre de
+Lie ? Oui s'il est commutatif et si les caractéristiques résiduelles sont
+$\neq 2$, car il est contenu dans $C(\mathfrak{h})$, qui a les mêmes fibres. Mais la
+commutativité est-elle automatique ? Sur un corps oui — tout groupe lisse connexe
+de dimension $1$ est commutatif — ; sur une base, c'est une question de
+déformation de sous-groupes, « liée à un $H^2$ de Hochschild ». Le normalisateur
+de $\mathcal{T}$, qui est aussi celui de $\mathfrak{h}$, n'est pas en général de
+dimension relative $1$ : sur un corps, quand $\mathcal{T}$ est unipotent, c'est un
+Borel. La phrase s'arrête au haut de la page 44 sur « une structure décrite par
+\ldots{} rigidifiée »\footnote{Lecture incertaine ; le reste de la page 44 est
+blanc, la page 45 aussi.}.
+
+\pagerange{46}{55}
+\subsection*{Algèbres de quaternions (pages 46 à 55)}
+
+\textbf{Le programme (page 46).} À une algèbre de quaternions $\mathcal{M}$ sur $S$ — une
+algèbre d'Azumaya de rang $4$ — on associe une forme $G$ de $\mathrm{PGL}_2$, une
+forme $\widetilde{G}$ de $\mathrm{SL}_2$, leurs algèbres de Lie $\mathfrak{g}$ et
+$\widetilde{\mathfrak{g}}$, un module spécial quadratique $(E, q, \omega)$ de rang $3$
+avec $E = \widetilde{\mathfrak{g}}$, une conique lisse $X$ dans un fibré en plans
+projectifs $P = \check{\mathbb{P}}(E)$, $X = \mathrm{Var}(q)$, et $X$ seule, fibré en
+droites projectives\footnote{La page lit « rg 2 » pour le module spécial
+quadratique, qui est de rang $3$ ; le modèle de $\widetilde{\mathfrak{g}}$ dans la liste
+est illisible, et l'on attend $\mathfrak{sl}(2)$ (page 59).}. Les foncteurs
+$\mathcal{M} \mapsto G, \widetilde{G}, (E, q, \omega), (P \supset X), X$ sont des
+équivalences de catégories fibrées, et $\mathcal{M} \mapsto \mathfrak{g},
+\widetilde{\mathfrak{g}}$ en sont au-dessus de $\operatorname{Spec}\mathbf{Z}[\tfrac{1}{2}]$.
+C'est affirmé, non démontré ; c'est aujourd'hui le dictionnaire classique entre
+algèbres de quaternions, formes quadratiques ternaires (par l'algèbre de Clifford
+paire) et coniques\footnote{Références de l'édition, citées de mémoire : M.-A.
+Knus, \emph{Quadratic and Hermitian Forms over Rings} (1991), pour l'algèbre de
+Clifford paire sur une base ; et, pour les ordres de quaternions et les formes
+ternaires sur un anneau, des travaux postérieurs (Gross--Lucianovic, 2009 ;
+J. Voight, \emph{Quaternion Algebras}, 2021). Rien sur les pages ne cite de
+littérature. Le dossier 77 (page 89) part du même dictionnaire : un module
+spécial quadratique de rang $3$ y est identifié aux éléments de trace réduite
+nulle d'une algèbre de quaternions tordue, avec $q = -\det$.}.
+
+On se place dans le cas trivial $\mathcal{M} = V^{\vee} \otimes V \simeq
+\underline{\mathrm{End}}(V)$, $V$ de rang $2$ (1).
+
+\textbf{La conique (page 46).} À un sous-fibré en droites $L \subset V$ on associe
+$L^{\perp} \otimes L \subset V^{\vee} \otimes V = \mathcal{M}$ : ce sont les endomorphismes
+d'image dans $L$ et nuls sur $L$, de trace et de déterminant nuls, et
+$L^{\perp} \otimes L$ est une droite isotrope de $\widetilde{\mathfrak{g}}$. D'où un
+isomorphisme canonique
+\[
+  (2) \qquad \check{\mathbb{P}}(V) \xrightarrow{\ \sim\ } X , \qquad L \longmapsto L^{\perp} \otimes L ,
+\]
+où $\check{\mathbb{P}}(V) \simeq \mathbb{P}(V)$, puisque $V$ est de rang $2$\footnote{Le
+dossier 89 (pages 15 à 18) reconstitue un module libre de rang $2$ à partir de
+ses droites et de son déterminant ; c'est la même géométrie de la droite
+projective, vue de l'autre côté.}.
+
+\textbf{La quadrique des endomorphismes de rang $1$ (pages 47 et 48).} Soient
+$Q_{\mathcal{M}}(u) = -\det u$, forme quadratique non dégénérée sur $\mathcal{M}$, et
+$\mathcal{Q} = \mathrm{Var}(Q_{\mathcal{M}}) \subset \check{\mathbb{P}}(\mathcal{M})$\footnote{La page note
+$\Delta$ cette forme et $Q$ la quadrique ; on renomme pour ne pas confondre avec
+le $\Delta$ de la première suite.}. Les points de $\mathcal{Q}$ sont les droites
+$\mathcal{O}_S u$ engendrées par un $u$ nulle part nul de déterminant nul, c'est-à-dire
+strictement de rang $1$ : $u$ se factorise en $V \twoheadrightarrow I \hookrightarrow V$,
+$I$ inversible, et se donner $\mathcal{O}_S u$ revient à se donner indépendamment
+$\mathrm{Ker}\,u$ et $\mathrm{Im}\,u$. D'où l'isomorphisme
+\[
+  (6)\text{--}(7) \qquad \mathcal{Q} \xrightarrow{\ \sim\ } \check{\mathbb{P}}(V) \times \check{\mathbb{P}}(V)
+  \simeq X \times X , \qquad u \longmapsto (\mathrm{Ker}\,u, \mathrm{Im}\,u) ,
+\]
+d'inverse $(L, M) \mapsto L^{\perp} \otimes M$ : c'est le plongement de Segre de
+$\mathbb{P}^1 \times \mathbb{P}^1$ comme quadrique de $\mathbb{P}^3$. Les droites
+$\underline{L} = L^{\perp} \otimes L$, $\underline{M} = M^{\perp} \otimes M$ sont dans
+$\widetilde{\mathfrak{g}}$ et isotropes, et la droite $J = \mathcal{O}_S u$ vérifie
+$J \circ \underline{L} = 0$ et $\underline{M} \circ J = 0$ (8)--(9)\footnote{Le
+premier $\mathfrak{g}$ de (8) porte une barre sur la page ; c'est
+$\widetilde{\mathfrak{g}}$ dans les deux lignes.}.
+
+\textbf{Algèbres spéciales (page 48).} Pour $J \in \mathcal{Q}(S)$, de générateur local
+$u$, on a $u^2 = (\mathrm{Tr}\,u)\,u$, donc $\mathcal{A} = \mathcal{O}_S \oplus J$ est une
+sous-algèbre de rang $2$ de $\mathcal{M}$, contenant $1$ — une sous-algèbre
+\emph{spéciale} —, et $J$ en est un idéal de quotient $\mathcal{O}_S$. Se donner $J$
+revient à se donner $\mathcal{A}$ et un homomorphisme d'algèbres
+$\rho : \mathcal{A} \to \mathcal{O}_S$, celui de noyau $J$. D'où
+\[
+  (12) \qquad \mathcal{Q} \simeq \bigl\{ (\mathcal{A}, \rho) : \mathcal{A} \subset \mathcal{M} \ \text{sous-algèbre spéciale},\
+  \rho : \mathcal{A} \to \mathcal{O}_S \ \text{homomorphisme d'algèbres} \bigr\}
+\]
+\footnote{Réciproque, de l'édition : si $\mathcal{A} = \mathcal{O}_S[u]$ et
+$\rho(u) = c$, le noyau est engendré par $u - c$, et
+$\det(u - c) = c^2 - c\,\mathrm{Tr}\,u + \det u = 0$ par Cayley--Hamilton.}.
+
+\textbf{L'involution canonique (page 49).} La symétrie des deux facteurs de
+$X \times X$ est induite par un anti-automorphisme canonique de $\mathcal{M}$ : le choix
+d'une base de $\det V$ donne $\alpha : V \simeq V^{\vee}$, et
+$u' = \alpha^{-1}\,{}^{t}u\,\alpha$ ne dépend pas de ce choix. On a $(uv)' = v'u'$ et
+\[
+  (16)\text{--}(17) \qquad u' = (\mathrm{Tr}\,u)\cdot 1 - u , \qquad u + u' = \mathrm{Tr}\,u , \qquad uu' = \det u :
+\]
+c'est la conjugaison des quaternions, l'adjugée en termes de matrices. Elle
+échange noyau et image des $u$ de rang $1$ ($Q_{\mathcal{M}}(u) = 0$, $u$ nulle part
+nul)\footnote{L'encre donne « $\Gamma(u) = 0$ » ; c'est la forme de (5).}. En termes
+de (12), elle envoie $(\mathcal{A}, \rho)$ sur $(\mathcal{A}, \rho')$, $\rho'(u) = \rho(u')$ :
+$\mathcal{A}' = \mathcal{A}$, et sur $\mathcal{A}$ commutative l'involution est un
+automorphisme, l'automorphisme non trivial de l'algèbre de rang $2$.
+
+\textbf{Le schéma des algèbres spéciales (page 50).} Une algèbre spéciale
+$\mathcal{A}$ est déterminée par la droite $\mathcal{A}/\mathcal{O}_S$ de $\mathfrak{g} = \mathcal{M}/\mathcal{O}_S$ ;
+le schéma $\Sigma$ des algèbres spéciales est donc $\check{\mathbb{P}}(\mathfrak{g}) =
+\mathbb{P}(\widetilde{\mathfrak{g}})$, et $(\mathcal{A}, \rho) \mapsto \mathcal{A}$ est un épimorphisme
+$\mathcal{Q} \to \Sigma$ qui identifie $\mathcal{Q}$ au spectre de l'algèbre spéciale universelle
+$\mathcal{A}_{\Sigma}$ (20). La page esquisse ensuite, puis barre, une liste de
+conditions équivalentes, reprise à la page suivante.
+
+\textbf{Proposition (page 51).} \emph{Soient $\mathcal{A}$ une sous-algèbre spéciale,
+$L \subset V$ un sous-fibré en droites, $\underline{L} = L^{\perp} \otimes L$. Sont
+équivalentes :}
+\begin{itemize}
+  \item[a)] \emph{$\underline{L} \subset \mathcal{A}^{\perp}$ (orthogonal pour
+    $\mathrm{Tr}(uv)$) ;}
+  \item[b)] \emph{$\mathcal{A}$ stabilise $L$ ;}
+  \item[c)] \emph{il existe un idéal $J$ de $\mathcal{A}$, sous-fibré de rang $1$, avec
+    $J \cdot L = 0$ ;}
+  \item[d)] \emph{il existe un sous-fibré en droites $M \subset V$ avec
+    $L^{\perp} \otimes M \subset \mathcal{A}$.}
+\end{itemize}
+\emph{Alors $J$ et $M$ sont uniques, $J = L^{\perp} \otimes M$ est le noyau de
+l'homomorphisme $\mathcal{A} \to \underline{\mathrm{End}}(L) = \mathcal{O}_S$ déduit de b), et,
+pour $\mathcal{A}$ fixée, $L \mapsto (\mathcal{A} \to \mathcal{O}_S)$ est une bijection entre les $L$
+vérifiant a) et les homomorphismes d'algèbres $\mathcal{A} \to \mathcal{O}_S$.}
+
+\emph{Démonstration (pages 51 et 52).} Si $L = \mathcal{O}x$ et $L^{\perp} = \mathcal{O}x'$,
+$\mathrm{Tr}(u \cdot x' \otimes x) = \langle ux, x' \rangle$, nul si et seulement si
+$u(L) \subset L$ : a) $\Leftrightarrow$ b). Le noyau $J$ de
+$\mathcal{A} \to \underline{\mathrm{End}}(L)$ annule $L$ : b) $\Rightarrow$ c) ; réciproquement,
+$\mathcal{A}/J \simeq \mathcal{O}_S$, donc $\mathcal{A} = \mathcal{O}_S + J$ stabilise $L$, et $J$ est
+déterminé comme ce noyau. Sous ces conditions, un générateur local $u$ de $J$
+est de rang $1$ avec $\mathrm{Ker}\,u = L$ ; posant $M = \mathrm{Im}\,u$, on a
+$L^{\perp} \otimes M = J \subset \mathcal{A}$ : d). Réciproquement, si
+$L^{\perp} \otimes M \subset \mathcal{A}$, c'est un idéal de rang $1$ qui annule $L$, donc
+$J$, et $M = \mathrm{Im}\,u$ est déterminé ; et d) $\Rightarrow$ b) directement.
+
+\textbf{Corollaire (pages 52 et 53).} Se donner une sous-algèbre spéciale
+$\mathcal{A}$ — un sous-fibré de rang $2$ contenant $\mathcal{O}_S\cdot 1$, nécessairement
+commutatif — revient à se donner son orthogonal
+$\mathcal{A}^{\perp} = \mathcal{H} \subset \widetilde{\mathfrak{g}}$, hyperplan de $\widetilde{\mathfrak{g}}$ :
+\[
+  (21) \qquad \text{AlgSpéc}(\mathcal{M}) \simeq \mathbb{P}(\widetilde{\mathfrak{g}}) \simeq
+  \check{\mathbb{P}}(\mathfrak{g}) .
+\]
+Comme $P = \check{\mathbb{P}}(\widetilde{\mathfrak{g}})$, un hyperplan $\mathcal{H}$ de
+$\widetilde{\mathfrak{g}}$ est une droite $D$ du plan $P$, et
+\[
+  (22) \qquad \check{P} = \mathrm{Dr}(P) \xrightarrow{\ \sim\ } \mathrm{Div}_2^{+}(X), \qquad D \longmapsto D \cap X = Y ,
+\]
+est un isomorphisme : une droite du plan coupe la conique lisse en un diviseur
+de degré $2$, et tout diviseur de degré $2$ s'obtient ainsi d'une seule
+façon\footnote{Vrai en toute caractéristique : le plongement de $X \simeq \mathbb{P}^1$
+dans $P$ est le plongement par $\mathcal{O}(2)$, et les diviseurs de degré $2$ sont les
+sections de $\mathcal{O}(2)$ à scalaire près.}. Le diviseur $Y$ est formé des droites
+isotropes $\underline{L}$ contenues dans $\mathcal{H}$, et l'on trouve un isomorphisme
+canonique
+\[
+  (23) \qquad Y \simeq \operatorname{Spec} \mathcal{A} .
+\]
+Dans $X \simeq \check{\mathbb{P}}(V)$, $Y$ est formé des $L$ stables par $\mathcal{A}$, ou, si
+$\mathcal{A} = \mathcal{O}_S + \mathcal{O}_S u$, par $u$ : si $u$ est inversible, $Y = X^{u}$, le
+sous-schéma des points fixes de $u$ (24).
+
+\textbf{Le stabilisateur, et les sous-groupes jacobiens (pages 53 à 55).}
+$G = \mathcal{M}^{\times}/\mathbb{G}_m$ opère sur tout cela. \emph{Proposition (page 54) :
+$g \in G(S)$ stabilise $Y$ si et seulement si $g\mathcal{A} g^{-1} = \mathcal{A}$ ; alors son
+action sur $Y$ est, via (23), son action sur $\operatorname{Spec}\mathcal{A}$, triviale si et
+seulement si $g$ est (localement l'image d'un élément) de $\mathcal{A}^{\times}$.} À
+$\mathcal{A}$ on associe
+\[
+  (25) \qquad \mathcal{T} = \mathcal{A}^{\times}/\mathbb{G}_m \subset G ,
+\]
+sous-groupe commutatif, lisse, à fibres connexes, de dimension relative $1$ — un
+tore si $\mathcal{A}$ est étale, $\mathbb{G}_a$ là où $\mathcal{A}$ est
+$\mathcal{O}[\varepsilon]/(\varepsilon^2)$. La correspondance $\mathcal{A} \mapsto \mathcal{T}$ est
+injective, $\mathcal{A}$ étant engendrée par les sections de $\mathcal{A}^{\times}$, image
+inverse de $\mathcal{T}$ dans $\mathcal{M}^{\times}$. La page appelle ces sous-groupes
+« \emph{jacobiens} »\footnote{Le mot est de la page. Une explication possible, qui
+est de l'édition : $\mathcal{A}^{\times}/\mathbb{G}_m$ est la jacobienne généralisée de
+Rosenlicht de la droite projective $X$ pour le module $Y$ de degré $2$ — $\mathbb{G}_m$
+si $Y$ est formé de deux points, $\mathbb{G}_a$ si $Y$ est un point double (J.-P.
+Serre, \emph{Groupes algébriques et corps de classes}, 1959).} : ce sont les
+$\mathcal{T}$ des pages 36 et 37.
+
+Enfin (page 55), si $\mathfrak{h} = \mathrm{Lie}\,\mathcal{T}$ et si $\widetilde{\mathcal{T}}$ est le
+centralisateur de $\mathfrak{h}$ dans $G$, alors $\mathcal{T} \subset \widetilde{\mathcal{T}}$ puisque
+$\mathcal{T}$ est commutatif ; la page conclut à l'égalité, $\widetilde{\mathcal{T}}$ étant
+connexe et les deux lisses de dimension relative $1$. C'est juste lorsque $2$ est
+inversible sur $S$ ; en caractéristique $2$, la page 40 a montré que le
+centralisateur de $\mathfrak{h}$ peut contenir strictement $\mathcal{T}$ et n'être pas
+connexe\footnote{La page identifie ici « le sous-groupe jacobien que
+$\mathfrak{h}$ définit » au centralisateur de $\mathfrak{h}$. Une note marginale
+oblique, « cor. p. 52 » (lecture incertaine), signale peut-être une correction à
+faire.}.
+
+\section*{III. Dictionnaire lié à $\mathrm{GP}(1) \simeq \mathrm{SO}(3)$ (pages 56 à 78)}
+
+Le titre est inscrit sur la couverture rose de la page 56.
+
+\pagerange{57}{59}
+\subsection*{Les neuf catégories (pages 57 à 59)}
+
+Soit $S$ un schéma. On va définir des équivalences entre les catégories
+suivantes, qui, pour $S$ variable, sont des catégories fibrées sur
+$\mathrm{Sch}_{/S}$, en fait des \emph{gerbes} pour la topologie fppf, formant « un
+système transitif d'équivalences » :
+\begin{itemize}
+  \item[$C_0$] $\mathrm{Tors}(\mathrm{PGL}_{2,S})$, les torseurs à droite sous $\mathrm{PGL}_2$ ;
+  \item[$C_1$] $\mathrm{Fo}(\mathrm{PGL}_{2,S})$, les formes $G$ de $\mathrm{PGL}_2$ ;
+  \item[$C'_1$] $\mathrm{Fo}(\mathrm{SL}_{2,S})$, les formes $\widetilde{G}$ de $\mathrm{SL}_2$ ;
+  \item[$C_2$] $(*)$ $\mathrm{Fo}(\mathfrak{pgl}_{2,S})$, les formes $\mathfrak{g}$ de
+    l'algèbre de Lie $\mathfrak{gp}(1)$ ;
+  \item[$C'_2$] $(*)$ $\mathrm{Fo}(\mathfrak{sl}_{2,S})$, les formes $\widetilde{\mathfrak{g}}$ de
+    $\mathfrak{sl}(2)$ ;
+  \item[$C_3$] $\mathrm{Quat}(S)$, les algèbres d'Azumaya $\mathcal{M}$ de rang $4$ ;
+  \item[$C_4$] $\mathrm{Modspquad}(S)$, les modules spéciaux quadratiques
+    $(E, q, \omega)$ de rang $3$ ;
+  \item[$C_5$] $\mathrm{Drpr}(S)$, les fibrés en droites projectives $X$ ;
+  \item[$C'_5$] $\mathrm{Quad}(S)$, les couples $(P, X)$ d'un fibré en plans projectifs
+    et d'une conique lisse $X \subset P$.
+\end{itemize}
+\footnote{Deux lignes, $C''_1 = \mathrm{Fo}(\mathrm{GL}(2))$ et
+$C''_2 = \mathrm{Fo}(\mathfrak{gl}(2))$ (avec $(**)$), sont barrées ; elles expliquent
+que la page 59 parle de « 11 catégories » alors qu'il en reste neuf, et que la
+page 58 parle de « 3 » catégories marquées $(*)$ et de « 6 autres » (lecture
+incertaine), là où il en reste deux et sept. La liste est disposée en deux
+colonnes avec des accolades ; on la donne dans l'ordre de la page.}
+
+Le signe $(*)$ marque les deux catégories dont l'équivalence avec les autres ne
+vaut que si $2$ est inversible sur $S$ ; en général on n'a que des foncteurs des
+autres vers elles, qui ne sont pas pleinement fidèles — ce que la dimension $6$
+de la page 27 rendait inévitable. Un dictionnaire complet comprendrait la
+description explicite des $9 \times 8 = 72$ équivalences et des $9 \cdot 8 \cdot 7 =
+504$ isomorphismes de transitivité. « On fera un peu moins, mais on essaiera de
+donner une image claire de la situation. »
+
+\textbf{Principe général.} Sur $S_0 = \operatorname{Spec}\mathbf{Z}$, on choisit dans chaque
+catégorie un objet typique $\mathfrak{X}_0$ et une opération de
+$G_0 = \mathrm{PGL}_2$ sur lui, et l'on établit que $G_0 \to
+\underline{\mathrm{Aut}}(\mathfrak{X}_0)$ est un isomorphisme — sauf dans les deux cas $(*)$,
+où l'opération est fidèle mais l'homomorphisme n'est pas un épimorphisme, et
+où l'on se borne à $\operatorname{Spec}\mathbf{Z}[\tfrac{1}{2}]$. Comme les catégories
+envisagées sont des gerbes, chacune est alors canoniquement équivalente à celle
+des torseurs sous $\underline{\mathrm{Aut}}(\mathfrak{X}_0)$, donc sous $G_0$ : c'est
+l'\emph{existence} d'un « multi-dictionnaire », qui ne dispense pas de le
+développer\footnote{En termes d'aujourd'hui : chacune de ces gerbes est
+neutre, de lien $\mathrm{PGL}_2$, et les objets à isomorphisme près sur $S$ sont
+classés par $H^1(S, \mathrm{PGL}_2)$ — c'est le langage de la cohomologie non
+abélienne de J. Giraud (1971).}.
+
+\pagerange{59}{62}
+\subsection*{Représentants typiques et opérations de $G_0$ (pages 59 à 62)}
+
+\textbf{I. Représentants typiques.} Sur $S_0 = \operatorname{Spec}\mathbf{Z}$ : le torseur
+trivial $G_0$ ; $G_0 = \mathrm{PGL}_2$ et $\widetilde{G}_0 = \mathrm{SL}_2$ ;
+$\mathfrak{g}_0 = \mathfrak{pgl}_2$ et $\widetilde{\mathfrak{g}}_0 = \mathfrak{sl}_2$ ;
+$\mathcal{M}_0 = \mathrm{M}_2(\mathcal{O})$ ; $E_0 = \mathcal{O}^3$ avec $q_0 = xy + z^2$ et
+$\omega = e_1 \wedge e_2 \wedge e_3$ ; $X_0 = \mathbb{P}^1$ ; $P_0 = \mathbb{P}^2 =
+\check{\mathbb{P}}(E_0)$ avec la conique $C_0 = \mathrm{Var}(q_0)$.
+
+\textbf{II. Opérations de $G_0$.} 1) Les translations (la ligne s'arrête sur
+« gauche… »). 2) $G_0$ opère sur lui-même par automorphismes intérieurs ; ceux de
+$\widetilde{G}_0$ passent au quotient par le centre $\mu_2$, et
+$\mathrm{SL}_2/\mu_2 \simeq \mathrm{PGL}_2$ (1) donne une action de $G_0$ sur
+$\widetilde{G}_0$. 3) D'où des actions sur $\mathfrak{g}_0$ et $\widetilde{\mathfrak{g}}_0$.
+4) L'action de $\mathrm{GL}_2 = \mathcal{M}_0^{\times}$ sur $\mathcal{M}_0$ par conjugaison est
+triviale sur le centre $\mathbb{G}_m$ et passe au quotient
+$\mathrm{GL}_2/\mathbb{G}_m = \mathrm{PGL}_2$ (2).
+
+5) (page 61) La forme $\xi \mapsto -\det\xi$ sur $\mathcal{M}_0$, restreinte aux matrices
+de trace nulle
+\[
+  (3)\text{--}(4) \qquad \xi = \begin{pmatrix} z & x \\ y & -z \end{pmatrix}, \qquad
+  q_0(\xi) = -\det\xi = xy + z^2 ,
+\]
+est invariante par conjugaison, et l'identification
+\[
+  (6) \qquad E_0 = \mathcal{O}^3 \xrightarrow{\ \sim\ } \widetilde{\mathfrak{g}}_0 = \mathfrak{sl}_2 , \qquad
+  (x, y, z) \longmapsto \begin{pmatrix} z & x \\ y & -z \end{pmatrix}
+\]
+donne une action de $G_0$ sur $(E_0, q_0)$. Elle préserve aussi $\omega$, car $G_0$
+opère trivialement sur tout Module inversible, $\underline{\mathrm{Hom}}(\mathrm{PGL}_2,
+\mathbb{G}_m) = 0$ (page 62). 6) $\mathrm{GL}_2$ opère sur $\mathbb{P}^1$, $\mathbb{G}_m$
+trivialement, d'où l'action de $G_0$ ; et l'action sur $(E_0, q_0)$ en donne une
+sur $(P_0, C_0)$.
+
+« Nous admettrons (pour ne pas nous éterniser…) que tous les homomorphismes
+\[
+  (7) \qquad G_0 = \mathrm{PGL}_2 \longrightarrow \underline{\mathrm{Aut}}(\mathfrak{X}_0)
+\]
+sont des isomorphismes », en dehors des cas $(*)$, et en marge : « Expliciter le
+théorème d'isomorphie »\footnote{Tous ces énoncés sont connus aujourd'hui sur
+$\mathbf{Z}$ : $\underline{\mathrm{Aut}}(\mathbb{P}^1) = \mathrm{PGL}_2$,
+$\underline{\mathrm{Aut}}(\mathrm{M}_2) = \mathrm{PGL}_2$ (Skolem--Noether), $\mathrm{SO}(xy + z^2)
+\simeq \mathrm{PGL}_2$, $\underline{\mathrm{Aut}}(\mathrm{SL}_2) = \underline{\mathrm{Aut}}(\mathrm{PGL}_2) =
+\mathrm{PGL}_2$ (pas d'automorphisme extérieur pour le type $A_1$), et
+$\underline{\mathrm{Aut}}(\mathbb{P}^2, C_0) \simeq \underline{\mathrm{Aut}}(C_0)$, la conique étant
+plongée par un système linéaire intrinsèque.}.
+
+\pagerange{63}{65}
+\subsection*{Les foncteurs : torsion, torseur des isomorphismes, automorphismes (pages 63 à 65)}
+
+\textbf{III. De $C_0$ vers les autres.} C'est la \emph{torsion}
+\[
+  (8) \qquad R \longmapsto R \overset{\mathrm{PGL}_{2,S}}{\wedge} \mathfrak{X}_{0,S} ,
+\]
+et le théorème d'isomorphie (7) dit que ces foncteurs sont des équivalences (sur
+$\mathbf{Z}[\tfrac{1}{2}]$ pour les cas $(*)$). Vers $C_5$ :
+\[
+  (9) \qquad R \longmapsto R/B_{0,S} ,
+\]
+où $B_0 \subset G_0$ est le Borel type, image dans $\mathrm{PGL}_2$ du groupe
+$\widetilde{B}_0$ des matrices $\begin{pmatrix} \lambda & \mu \\ 0 & \lambda^{-1} \end{pmatrix}$
+de $\mathrm{SL}_2$, stabilisateur de la droite $\mathcal{O} e_1$ de $\mathcal{O}^2$ (10). Le
+point correspondant $s_0$ de $X_0 = \mathbb{P}^1$ a pour stabilisateur $B_0$, et
+$g \mapsto g\cdot s_0$ induit un isomorphisme $G_0/B_0 \simeq X_0$ compatible aux
+translations (13) ; tordant par $R$, on obtient
+$R \wedge X_{0,S} \simeq R/B_{0,S}$ (14)\footnote{La page 64 nomme d'abord ce point
+« la section nulle $s_0$ », puis « la section $\infty$, correspondant à la droite
+$\mathcal{O}_S e_1$ », et lui donne pour stabilisateur (11) les matrices
+\emph{triangulaires inférieures}, transposées de (10). Les deux lectures se
+concilient selon que $\mathbb{P}(\mathcal{O}^2)$ paramètre des droites (action naturelle :
+le stabilisateur de $\mathcal{O} e_1$ est triangulaire supérieur) ou des quotients de
+rang $1$, comme dans la convention des pages (action contragrédiente : il est
+triangulaire inférieur). Les deux sous-groupes sont conjugués, et (13) vaut avec
+l'un ou l'autre.}.
+
+\textbf{Des autres vers $C_0$.} C'est
+\[
+  (15)\text{--}(17) \qquad \mathfrak{X} \longmapsto \underline{\mathrm{Isom}}(\mathfrak{X}_{0,S}, \mathfrak{X}) ,
+\]
+torseur à droite sous $\underline{\mathrm{Aut}}(\mathfrak{X}_{0,S}) \simeq \mathrm{PGL}_{2,S}$ par
+(7)\footnote{Dans (15), le premier $\mathfrak{X}$ porte un indice $0$ de trop.}.
+
+\textbf{IV. Vers $C_1$.} C'est $\mathfrak{X} \mapsto \underline{\mathrm{Aut}}(\mathfrak{X})$ (18),
+avec deux descriptions plus terre à terre : $\widetilde{G} \mapsto
+\widetilde{G}/\mathrm{Cent}(\widetilde{G})$ (19), le centre étant toujours isomorphe à
+$\mu_2$, de façon unique car $\underline{\mathrm{Aut}}(\mu_2) = 1$ ; et
+$\mathcal{M} \mapsto \mathcal{M}^{\times}/\mathbb{G}_m$ (20).
+
+\pagerange{66}{68}
+\subsection*{Revêtement, algèbres de Lie, sous-groupes de Borel (pages 66 à 68)}
+
+\textbf{De $C_1$ vers les autres.} Ou bien l'on tord $\mathfrak{X}_{0,S}$ par le
+torseur $\underline{\mathrm{Isom}}(G_{0,S}, G)$ (21) — torseur sous
+$\underline{\mathrm{Aut}}(G_0) = G_0$, puisque $\mathrm{PGL}_2$ est adjoint —, ou bien
+l'on a des descriptions directes :
+\begin{itemize}
+  \item $G \mapsto \widetilde{G}$, le revêtement simplement connexe, schéma en
+    groupes lisse à fibres géométriquement connexes et simplement connexes muni
+    d'une isogénie centrale $\widetilde{G} \to G$, unique à isomorphisme unique près
+    (22) ;
+  \item $G \mapsto \mathfrak{g} = \underline{\mathrm{Lie}}(G)$ et $G \mapsto
+    \widetilde{\mathfrak{g}} = \underline{\mathrm{Lie}}(\widetilde{G})$, équivalences
+    $\mathrm{Fo}(\mathrm{PGL}_2) \to \mathrm{Fo}(\mathfrak{pgl}_2)$, $\mathrm{Fo}(\mathfrak{sl}_2)$
+    au-dessus de $\mathbf{Z}[\tfrac{1}{2}]$ (23)--(24)\footnote{La page surmonte les
+    flèches de (23) et (24) du signe $\sim$ sans restriction ; ce sont les cas
+    $(*)$, et l'on rétablit la restriction de la page 58.} ;
+  \item $G \mapsto (E, q, \omega)$, qui se factorise par $G \mapsto \widetilde{\mathfrak{g}}$
+    (« cf plus bas » : c'est (50), page 74) ;
+  \item $G \mapsto X = \underline{\mathrm{Bor}}(G)$, le schéma des sous-groupes de Borel
+    de $G$, c'est-à-dire des $B$ tels que $(G, B)$ soit localement isomorphe à
+    $(G_0, B_0)$ (25) ; si $G$ et $X$ se correspondent,
+    $X \xrightarrow{\sim} \underline{\mathrm{Bor}}(G)$ associe à une section locale de $X$ son
+    stabilisateur (26).
+\end{itemize}
+
+\textbf{V. Vers les formes de $\mathrm{SL}_2$.} Ou bien par $C_0$ (27), ou bien, plus
+naturellement, $\mathfrak{X} \mapsto \underline{\mathrm{Aut}}(\mathfrak{X}) \mapsto$ son
+revêtement simplement connexe (28) ; depuis $C_3$,
+\[
+  (29) \qquad \mathcal{M} \longmapsto \widetilde{G} = \mathrm{Ker}\bigl(\mathcal{M}^{\times}
+  \xrightarrow{\ \det\ } \mathbb{G}_m\bigr),
+\]
+$\det$ étant la norme réduite. Inversement, $\widetilde{G} \mapsto \widetilde{\mathfrak{g}}$ (30)
+et $\widetilde{G} \mapsto X \simeq \underline{\mathrm{Bor}}(\widetilde{G})$ (31). Pour
+comprendre ensemble $G$, $\widetilde{G}$, $\mathfrak{g}$, $\widetilde{\mathfrak{g}}$,
+$(E, q, \omega)$, $X$ et $(P, C)$, « c'est $\mathcal{M}$ qui donne peut-être la meilleure
+clef » ; on verra en particulier que $\mathfrak{g}$ et $\widetilde{\mathfrak{g}}$ sont
+duaux l'un de l'autre, et que $E \simeq \widetilde{\mathfrak{g}}$ canoniquement.
+
+\pagerange{69}{73}
+\subsection*{VI. L'algèbre de quaternions comme clef (pages 69 à 73)}
+
+Soit $\mathcal{M}$ une algèbre de quaternions sur $S$, localement (fppf) isomorphe à
+$\mathrm{M}_2(\mathcal{O}_S)$\footnote{Le titre de VI n'est pas écrit.}. Son centre est
+$\mathcal{O}_S$, celui de $\mathcal{M}^{\times}$ est $\mathbb{G}_m$ (32), et l'on a la norme
+réduite $\det$ et la trace réduite $\mathrm{Tr}$, définies par localisation à partir de
+$\mathrm{M}_2$, où elles sont invariantes par automorphismes (33). En marge :
+$\det(uv) = \det u \det v$, $\mathrm{Tr}$ est linéaire, $\det$ quadratique,
+$\det(u + \lambda) = \lambda^2 + \lambda\,\mathrm{Tr}\,u + \det u$, et la différentielle de
+$\det$ en $1$ est $\mathrm{Tr}$. On a des suites exactes
+\[
+  (34) \qquad 1 \to \mathbb{G}_m \to \mathcal{M}^{\times} \to G \to 1 , \qquad
+  (35) \qquad 1 \to \widetilde{G} \to \mathcal{M}^{\times} \xrightarrow{\ \det\ } \mathbb{G}_m \to 1 ,
+\]
+\[
+  (34') \qquad 0 \to \mathcal{O}_S \xrightarrow{\ \lambda \mapsto \lambda\cdot 1\ } \mathcal{M} \to \mathfrak{g} \to 0 , \qquad
+  (35') \qquad 0 \to \widetilde{\mathfrak{g}} \to \mathcal{M} \xrightarrow{\ \mathrm{Tr}\ } \mathcal{O}_S \to 0 ,
+\]
+qui déterminent $G$, $\widetilde{G}$, $\mathfrak{g} = \mathcal{M}/\mathcal{O}_S$ et
+$\widetilde{\mathfrak{g}} = \mathcal{M}^{\mathrm{Tr} = 0}$ directement à partir de $\mathcal{M}$ ; les
+homomorphismes canoniques sont les composés
+\[
+  (37)\text{--}(38) \qquad \widetilde{G} \hookrightarrow \mathcal{M}^{\times} \to G , \qquad
+  f : \widetilde{\mathfrak{g}} \hookrightarrow \mathcal{M} \to \mathfrak{g} .
+\]
+
+\textbf{La forme trace (pages 70 et 71).} La forme
+\[
+  (39) \qquad \Phi(u, v) = \mathrm{Tr}(uv)
+\]
+est symétrique et non dégénérée en chaque point — y compris en caractéristique
+$2$ —, d'où $\mathcal{M} \simeq \mathcal{M}^{\vee}$ (40). L'orthogonal de $\mathcal{O}_S\cdot 1$ est
+$\widetilde{\mathfrak{g}}$, d'où un accouplement parfait
+$\widetilde{\mathfrak{g}} \times \mathfrak{g} \to \mathcal{O}_S$ (41) et
+\[
+  (42) \qquad \widetilde{\mathfrak{g}} \simeq \mathfrak{g}^{\vee} , \qquad \mathfrak{g} \simeq \widetilde{\mathfrak{g}}^{\vee} .
+\]
+La forme quadratique $Q_{\mathcal{M}}(u) = -\det u$ sur $\mathcal{M}$ est lisse (hyperbolique de
+rang $4$), de forme polaire
+\[
+  (43) \qquad \Phi_1(u, v) = \det u + \det v - \det(u + v) = \mathrm{Tr}(uv) - \mathrm{Tr}\,u\,\mathrm{Tr}\,v ,
+\]
+elle aussi parfaite. $\Phi_1(1, u) = -\mathrm{Tr}\,u$, donc l'orthogonal de
+$\mathcal{O}_S\cdot 1$ pour $\Phi_1$ est encore $\widetilde{\mathfrak{g}}$, et $\Phi$, $\Phi_1$
+ont la même restriction $\varphi$ à $\widetilde{\mathfrak{g}}$,
+$\varphi(u, v) = \mathrm{Tr}(uv)$. L'accouplement
+$\mathfrak{g} \times \widetilde{\mathfrak{g}} \to \mathcal{O}_S$ déduit de $\Phi_1$ est égal à (41),
+puisque $\mathrm{Tr}\,v = 0$ pour $v \in \widetilde{\mathfrak{g}}$\footnote{La page dit, sous
+une lecture incertaine, « égal au signe près ». Le numéro (42) sert deux fois à
+la page 71, et (43) de nouveau à la page 72 ; on garde les numéros de la page.}.
+
+\textbf{La forme $q$ et la forme de Killing (page 72).} Sur $\widetilde{\mathfrak{g}}$,
+\[
+  (43) \qquad q(u) = -\det u , \qquad
+  (44) \qquad q(x + y) = q(x) + q(y) + \varphi(x, y) , \quad \varphi(x, x) = 2q(x) ;
+\]
+$q$ est lisse, $\varphi$ parfaite sauf en caractéristique $2$. En coordonnées (6),
+$q = xy + z^2$ : c'est $q_0$. Et
+\[
+  (45) \qquad \mathrm{Tr}\bigl(\mathrm{ad}(u)\,\mathrm{ad}(v)\bigr) = 4\varphi(u, v) , \qquad
+  \mathrm{Tr}\bigl(\mathrm{ad}(u)^2\bigr) = 8\,q(u) ,
+\]
+la forme de Killing de $\widetilde{\mathfrak{g}}$ ; c'est (74)--(76) de la page 24,
+avec $\Delta = -2$.
+
+\textbf{La base $\omega$ (pages 72 et 73).} Localement $\mathcal{M} \simeq V^{\vee} \otimes V$,
+et
+\[
+  (47) \qquad \det(V^{\vee} \otimes V) \simeq (\det V^{\vee})^{\otimes 2} \otimes (\det V)^{\otimes 2} \simeq \mathcal{O}_S
+\]
+\footnote{La page écrit $\det V^{\vee} \otimes \det V$, sans les carrés ; le
+déterminant d'un produit tensoriel de deux modules de rang $2$ porte l'exposant
+$2$. La conclusion, une trivialisation canonique, ne change pas.} ; cet
+isomorphisme est stable par $\mathrm{GL}(V)$, donc par $\mathrm{PGL}(V)$, et descend :
+d'où une base de $\det\mathcal{M}$, donc, par (35'), une base $\omega$ de
+$\det\widetilde{\mathfrak{g}}$. Il y a dans ces identifications une convention de
+\emph{signe} à faire — sur $\mathbf{Z}$, un Module inversible trivial a exactement deux
+bases, opposées —, mais $\omega^{\otimes 2}$ n'en dépend pas, et
+\[
+  (48)\text{--}(49) \qquad \delta'(q) = -\,\omega^{\otimes(-2)} , \qquad \delta(\varphi) = -2\,\omega^{\otimes(-2)}
+\]
+\footnote{La page écrit $\omega^{\otimes 2}$ ; $\delta'(q)$ vit dans
+$(\det\widetilde{\mathfrak{g}})^{\otimes(-2)}$, et l'on suit (33) et (82).} : $(\widetilde{\mathfrak{g}},
+q, \omega)$ est un module spécial quadratique.
+
+\pagerange{74}{75}
+\subsection*{$(E, q, \omega) = (\widetilde{\mathfrak{g}}, q, \omega)$ ; les applications $f$ et $f'$ (pages 74 et 75)}
+
+On pose
+\[
+  (50) \qquad (E, q, \omega) = (\widetilde{\mathfrak{g}}, q, \omega) .
+\]
+C'est, en substance, l'isomorphisme $i : E \simeq \widetilde{\mathfrak{g}}$ que la page 31
+laissait à faire, pris ici comme définition. L'homomorphisme
+$f : \widetilde{\mathfrak{g}} \to \mathfrak{g}$ de (38) n'est autre que l'application
+$\widetilde{\mathfrak{g}} \to \widetilde{\mathfrak{g}}^{\vee}$ associée à $\varphi$, compte tenu
+de $\widetilde{\mathfrak{g}}^{\vee} \simeq \mathfrak{g}$ (42) : $\langle u, f(v) \rangle =
+\mathrm{Tr}(uv) = \varphi(u, v)$. C'est le $f$ de la première suite. Les crochets de
+$\widetilde{\mathfrak{g}}$ et de $\mathfrak{g}$ se déduisent alors de $(\varphi, \omega)$ par
+les constructions des pages 2 à 9 ; c'est ici que la convention de signe compte,
+et l'on prend
+\[
+  (52) \qquad \omega = \widetilde{X} \wedge \widetilde{H} \wedge \widetilde{Y} ,
+\]
+avec $\widetilde{X} = E_{12}$, $\widetilde{Y} = E_{21}$,
+$\widetilde{H} = \mathrm{diag}(1, -1)$ — en marge : « Sans garantie — il faut
+vérifier… ». C'est le bon signe : c'est celui de (64), page 18, et avec lui le
+crochet (40 bis) construit à partir de $(\varphi, \omega)$ est exactement le
+commutateur de $\mathfrak{sl}_2$, (70), tandis que le crochet (12) sur
+$E' = \mathfrak{g}$ est le commutateur de $\mathfrak{gl}_2/\mathcal{O}$\footnote{Vérification
+de l'édition, à partir des calculs des pages 18 à 20 : avec $X$, $Y$, $H$ les
+classes de $E_{12}$, $E_{21}$, $E_{11}$ dans $\mathfrak{g}$, l'accouplement
+$\mathrm{Tr}(uv)$ fait des bases $(\widetilde{Y}, \widetilde{X}, \widetilde{H})$ et
+$(X, Y, H)$ des bases duales, comme $(e_1, e_2, e_3)$ et $(e'_1, e'_2, e'_3)$
+à la page 18. La page 74 écrit aussi $\omega = -\widetilde{X} \wedge \widetilde{Y} \wedge
+\widetilde{H}$ en indiquant sous les lettres $e_1, e_2, e_3$, base de $E_0$ par (6) :
+dans les coordonnées (6), qui envoient $e_1$ sur $E_{12}$, (52) est donc
+$\omega = -e_1 \wedge e_2 \wedge e_3$, l'opposé de la base choisie pour le représentant
+typique de la page 60 ; pour que (6) respecte aussi $\omega$, il faut la composer
+avec $z \mapsto -z$, qui préserve $q_0$. L'étiquetage (62) de la page 18, où
+$\widetilde{X} = e_2$, donne au contraire $\omega = e_1 \wedge e_2 \wedge e_3$ : les
+étiquetages diffèrent, la base $\omega$ de (52) et de (64) est la même. Le dossier 77 (page 89) fixe au contraire $\omega$ par
+$\varphi([u, v], w)\,\omega = 2\,u \wedge v \wedge w$, ce qui donne la base opposée : avec
+les conventions d'ici, $\varphi([u, v], w)\,\omega = -2\,u \wedge v \wedge w$, puisque
+$\varphi([x, y], z)$ vaut $\Delta = -2$ fois le rapport de $x \wedge y \wedge z$ à
+$\omega$. C'est exactement l'ambiguïté de signe de la page 73.}.
+
+L'application cofacteur s'explicite :
+\[
+  (53)\text{--}(55) \qquad f' : \mathfrak{g} \longrightarrow \widetilde{\mathfrak{g}} , \qquad
+  f'(\bar{u}) = (\mathrm{Tr}\,u)\cdot 1 - 2u , \qquad ff' = -2\,\mathrm{id}_{\mathfrak{g}} , \quad f'f = -2\,\mathrm{id}_{\widetilde{\mathfrak{g}}} ,
+\]
+où $\bar{u}$ est l'image dans $\mathfrak{g}$ de $u \in \mathcal{M}$ : comme $\mathrm{Tr}\,1 = 2$,
+$u \mapsto \mathrm{Tr}(u) - 2u$ est à valeurs dans $\widetilde{\mathfrak{g}}$ et nulle sur
+$\mathcal{O}_S\cdot 1$ ; pour $u \in \widetilde{\mathfrak{g}}$, $f'f(u) = -2u$, et
+$ff'(\bar{u}) = -2\bar{u}$. On retrouve $\Delta = -2$ et le signe corrigé de (66) :
+$f'(\bar{E}_{12}) = -2E_{12}$, $f'(\bar{E}_{11}) = 1 - 2E_{11} = -\widetilde{H}$.
+La page dit $f'$ « s'identifiant à $\Lambda^2 f$ » ; avec le signe (52), c'est
+exact.
+
+Enfin le plan et la conique :
+\[
+  (56) \qquad P = \check{\mathbb{P}}(\widetilde{\mathfrak{g}}) \simeq \mathbb{P}(\mathfrak{g}) , \qquad
+  X = \mathrm{Var}(q) \subset P .
+\]
+
+\pagerange{76}{77}
+\subsection*{La conique et les sous-groupes de Borel (pages 76 et 77)}
+
+La description $X = \mathrm{Var}(q)$ et la description
+$X \simeq \underline{\mathrm{Bor}}(G) \simeq \underline{\mathrm{Bor}}(\widetilde{G})$ se raccordent
+ainsi.
+
+\textbf{Proposition (page 76).} \emph{Les sous-groupes de Borel $B$ de $G$, $B_1$ de
+$\mathcal{M}^{\times}$ et $\widetilde{B}$ de $\widetilde{G}$ se correspondent bijectivement par
+image inverse. Un sous-groupe de Borel est connu par son algèbre de Lie : celle
+$\mathfrak{L}$ de $B$, sous-fibré de corang $1$ de $\mathfrak{g}$, ou celle
+$\mathfrak{L}_1$ de $B_1$, sous-fibré de corang $1$ de $\mathcal{M}$, image inverse de
+$\mathfrak{L}$, qui est une sous-algèbre ; et, si $2$ est inversible, celle
+$\widetilde{\mathfrak{L}} = \mathfrak{L}_1 \cap \widetilde{\mathfrak{g}}$ de $\widetilde{B}$, puisque
+$f$ est alors un isomorphisme. Explicitement}
+\[
+  (57) \qquad B_1 = \mathfrak{L}_1^{\times} = \mathbb{V}(\mathfrak{L}_1) \cap \mathcal{M}^{\times} , \qquad
+  B = B_1/\mathbb{G}_m , \qquad \widetilde{B} = B_1 \cap \widetilde{G} .
+\]
+\footnote{La page écrit $\widetilde{B} = \check{\mathbb{V}}(\widetilde{\mathfrak{L}}) \cap
+\mathcal{M}^{\times}$ et $B = \widetilde{B}/\mathbb{G}_m$ : le groupe qu'elle a en vue est $B_1$,
+le groupe des unités de la sous-algèbre $\mathfrak{L}_1$ de rang $3$ (localement,
+les matrices triangulaires supérieures). Les inversibles du module
+$\widetilde{\mathfrak{L}}$, de rang $2$, ne forment pas un groupe. La lettre lue
+$\widetilde{B}$ porte peut-être une barre sur la page.}
+
+\textbf{Critère (page 77).} Si $2$ est inversible, un sous-fibré
+$\mathfrak{L} \subset \widetilde{\mathfrak{g}}$ de corang $1$ est l'algèbre de Lie d'un Borel
+si et seulement si son orthogonal $\mathfrak{L}^{\perp}$ (pour $\varphi$), de rang $1$,
+est isotrope pour $q$ : localement, le Borel triangulaire supérieur a pour
+algèbre de Lie les $\begin{pmatrix} a & b \\ 0 & -a \end{pmatrix}$, d'orthogonal
+$\mathcal{O} E_{12}$, d'élément de carré nul. La droite isotrope $\mathfrak{L}^{\perp}$ est
+le point de la conique qui correspond au Borel : c'est le raccord cherché. La
+page ajoute que cela caractérise $q$ à un scalaire inversible près, et pose en
+marge la question : « suffit-il, pour $\mathfrak{L}$, d'être une sous-algèbre ? »,
+qu'elle laisse ouverte\footnote{La fin de la parenthèse de la page 77, chargée
+d'insertions, se lit mal ; une seconde note marginale parle d'éléments de « carré
+nul » de $\mathcal{M}$. L'hypothèse « $2$ inversible » est de l'édition : c'est celle
+sous laquelle $\varphi$ est parfaite sur $\widetilde{\mathfrak{g}}$, et la page passe
+aussitôt au cas de caractéristique $2$.}.
+
+\pagerange{77}{78}
+\subsection*{Caractéristique $2$ : le Frobenius (pages 77 et 78)}
+
+Supposons $2 = 0$ sur $S$. Alors $\mathrm{Tr}\,1 = 2 = 0$, donc
+\[
+  (58) \qquad \mathcal{O}_S\cdot 1 \subset \widetilde{\mathfrak{g}} ,
+\]
+et c'est le noyau de $\varphi$, c'est-à-dire de $f$. Le morphisme
+\[
+  (59) \qquad X \longrightarrow \mathbb{P}(\widetilde{\mathfrak{g}}) ,
+\]
+qui envoie un Borel sur son algèbre de Lie — c'est-à-dire une droite isotrope
+$L \subset \widetilde{\mathfrak{g}}$ sur son orthogonal pour $\varphi$ —, prend ses
+valeurs dans les hyperplans qui contiennent $\mathcal{O}_S\cdot 1$, et se factorise donc
+par un morphisme de fibrés en droites projectives
+\[
+  (60) \qquad X \longrightarrow \mathbb{P}(\widetilde{\mathfrak{g}}/\mathcal{O}_S) .
+\]
+Ce n'est pas un monomorphisme : s'il l'était, ce serait un isomorphisme, et $X$
+serait banal dès qu'on est en caractéristique $2$, alors qu'il existe des fibrés
+en droites projectives non banals en caractéristique $2$. En fait il y a un
+isomorphisme canonique
+\[
+  (61) \qquad \mathbb{P}(\widetilde{\mathfrak{g}}/\mathcal{O}_S) \simeq X^{(2)}
+\]
+avec le « frobénisé » de $X$, et (60) est le morphisme de Frobenius relatif
+$X \to X^{(2)}$, épimorphisme radiciel, fini et localement libre de rang
+$2^d = 2$, nullement un monomorphisme\footnote{Vérification de l'édition dans le
+cas standard : la conique $xy = z^2$ (caractéristique $2$) est paramétrée par
+$(s : t) \mapsto (s^2, t^2, st)$ ; l'orthogonal de la droite isotrope
+$\mathcal{O}(s^2\widetilde{X} + t^2\widetilde{Y} + st\,\widetilde{H})$ est l'hyperplan
+$t^2 x + s^2 y = 0$, qui contient $\widetilde{H} = 1$ et ne dépend que de
+$(s^2 : t^2)$.}. La page, et le dossier, s'arrêtent là.
+
+\end{document}
