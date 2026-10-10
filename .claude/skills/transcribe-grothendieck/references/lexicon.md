@@ -32,17 +32,17 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | d'un | 2536 | l'application | 463 | formé | 283 |
 | deux | 2357 | l'on | 455 | l'opération | 281 |
 | groupe | 2042 | objets | 455 | diviseur | 277 |
-| catégorie | 1925 | famille | 450 | localement | 277 |
+| catégorie | 1924 | famille | 450 | localement | 277 |
 | d'une | 1826 | connexes | 449 | prenant | 276 |
 | structure | 1739 | choix | 448 | l'homomorphisme | 275 |
-| c'est | 1691 | formule | 448 | s'il | 273 |
-| nb | 1672 | premier | 448 | veut | 273 |
+| c'est | 1691 | formule | 448 | veut | 275 |
+| nb | 1672 | premier | 448 | s'il | 273 |
 | fini | 1637 | étale | 445 | noyau | 272 |
 | trouve | 1604 | local | 445 | suivant | 272 |
 | conditions | 1562 | prop | 440 | sorte | 270 |
-| type | 1526 | diagramme | 436 | compatibles | 269 |
-| foncteur | 1491 | exacte | 436 | dépend | 269 |
-| condition | 1482 | revient | 436 | l'un | 269 |
+| type | 1526 | exacte | 436 | compatibles | 269 |
+| foncteur | 1491 | revient | 436 | dépend | 269 |
+| condition | 1482 | diagramme | 435 | l'un | 269 |
 | non | 1481 | notons | 434 | prend | 269 |
 | d'où | 1436 | supposer | 430 | filtration | 267 |
 | donnée | 1307 | fidèle | 429 | vide | 266 |
@@ -66,8 +66,8 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | suffit | 923 | maintenant | 397 | restriction | 253 |
 | considérons | 921 | propre | 393 | topologie | 253 |
 | partie | 919 | via | 393 | provient | 252 |
-| canonique | 918 | algébrique | 385 | réunion | 252 |
-| base | 910 | déjà | 385 | contient | 251 |
+| canonique | 918 | déjà | 386 | réunion | 252 |
+| base | 911 | algébrique | 385 | contient | 251 |
 | n'est | 888 | surjectif | 385 | propriétés | 251 |
 | hom | 884 | aura | 383 | d'abord | 250 |
 | termes | 858 | dire | 379 | ok | 250 |
@@ -114,17 +114,17 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | pts | 549 | finies | 327 | propriété | 223 |
 | affine | 545 | flèches | 326 | montre | 222 |
 | sous-groupe | 538 | homomorphisme | 326 | relative | 221 |
-| application | 537 | classes | 325 | descente | 220 |
-| quotient | 536 | inv | 325 | savoir | 220 |
+| application | 537 | classes | 325 | savoir | 221 |
+| quotient | 536 | inv | 325 | descente | 220 |
 | signifie | 536 | valeurs | 324 | aurait | 218 |
 | th | 536 | donner | 322 | projective | 218 |
 | morphismes | 534 | grand | 322 | triviale | 217 |
 | droite | 533 | cohomologie | 320 | équivalente | 216 |
 | pt | 533 | finis | 320 | associée | 215 |
 | unique | 529 | engendré | 319 | vectoriel | 214 |
-| parties | 525 | sommet | 319 | permet | 213 |
-| alg | 524 | nulle | 315 | compte | 212 |
-| donne | 524 | mod | 314 | sga | 212 |
+| donne | 525 | sommet | 319 | permet | 213 |
+| parties | 525 | nulle | 315 | compte | 212 |
+| alg | 524 | mod | 314 | sga | 212 |
 | question | 524 | l'hom | 312 | sous-catégorie | 212 |
 | ait | 521 | moins | 309 | évidemment | 211 |
 | part | 521 | prendre | 309 | suivantes | 211 |
@@ -132,12 +132,12 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | faisceau | 514 | commute | 302 | haut | 209 |
 | stable | 514 | fermée | 301 | seul | 209 |
 | relations | 510 | correspondent | 299 | variété | 209 |
-| fermé | 508 | vérifier | 298 | connexion | 208 |
+| fermé | 508 | vérifier | 299 | connexion | 208 |
 | particulier | 502 | ensemble | 297 | linéaire | 208 |
 | suppose | 502 | voisinage | 297 | clair | 207 |
-| cor | 498 | reste | 295 | liés | 207 |
-| fibres | 498 | l'action | 291 | espaces | 205 |
-| induit | 498 | construction | 290 | complexes | 204 |
+| induit | 500 | reste | 295 | liés | 207 |
+| cor | 498 | l'action | 291 | espaces | 205 |
+| fibres | 498 | construction | 290 | complexes | 204 |
 | catégories | 497 | opérations | 290 | couple | 204 |
 | isomorphisme | 490 | ordonné | 290 | d'autres | 204 |
 | définition | 485 | données | 289 | fermés | 203 |
@@ -155,7 +155,7 @@ Half of how he writes, and what most defeats a reader coming to the hand cold.
 
 | abbr. | n | abbr. | n | abbr. | n |
 |---|---|---|---|---|---|
-| i.e. | 5052 | gén. | 103 | bil. | 38 |
+| i.e. | 5053 | gén. | 103 | bil. | 38 |
 | ens. | 1896 | corr. | 101 | près. | 38 |
 | loc. | 807 | str. | 101 | O. | 37 |
 | isom. | 788 | fid. | 100 | P. | 37 |
@@ -194,7 +194,7 @@ Half of how he writes, and what most defeats a reader coming to the hand cold.
 | f. | 112 | conj. | 39 | J. | 24 |
 | cqfd. | 107 | op. diff. | 39 | ps. dr. | 24 |
 | autom. | 106 | re. | 39 | S. | 24 |
-| can. | 104 | aussi. | 38 | ainsi. | 23 |
+| can. | 105 | aussi. | 38 | ainsi. | 23 |
 
 ## Notation
 
@@ -202,11 +202,11 @@ Macros counted inside mathematics — what the notation of this fonds actually c
 
 | macro | n | macro | n | macro | n |
 |---|---|---|---|---|---|
-| \mathrm | 20825 | \xrightarrow | 3243 | \longmapsto | 1092 |
-| \mathcal | 17645 | \delta | 3167 | \lbrace | 1076 |
+| \mathrm | 20826 | \xrightarrow | 3243 | \longmapsto | 1092 |
+| \mathcal | 17647 | \delta | 3167 | \lbrace | 1076 |
 | \in | 15721 | \bar | 3010 | \leqslant | 1071 |
 | \mathbb | 14628 | \cap | 3007 | \Bigl | 1035 |
-| \text | 13117 | \ell | 2873 | \boxed | 1028 |
+| \text | 13116 | \ell | 2873 | \boxed | 1028 |
 | \to | 11314 | \infty | 2824 | \Bigr | 1016 |
 | \underline | 10937 | \varepsilon | 2795 | \page | 1005 |
 | \alpha | 10742 | \Lambda | 2784 | \exists | 975 |
@@ -215,12 +215,12 @@ Macros counted inside mathematics — what the notation of this fonds actually c
 | \mathfrak | 8761 | \gamma | 2630 | \prod | 940 |
 | \lambda | 7648 | \mu | 2563 | \mid | 938 |
 | \sigma | 7144 | \mathbf | 2411 | \vee | 903 |
-| \otimes | 7118 | \bullet | 2405 | \dots | 887 |
+| \otimes | 7119 | \bullet | 2405 | \dots | 887 |
 | \begin | 7108 | \Omega | 2331 | \Theta | 872 |
 | \end | 7102 | \Phi | 2322 | \underset | 869 |
 | \operatorname | 6853 | \Pi | 2282 | \pm | 866 |
-| \varphi | 6772 | \ldots | 2102 | \geqslant | 863 |
-| \pi | 6393 | \eta | 1972 | \rbrace | 851 |
+| \varphi | 6772 | \ldots | 2101 | \geqslant | 863 |
+| \pi | 6392 | \eta | 1972 | \rbrace | 851 |
 | \simeq | 6256 | \cdot | 1938 | \det | 825 |
 | \quad | 5650 | \hat | 1931 | \Longrightarrow | 818 |
 | \times | 5118 | \overset | 1854 | \dot | 815 |
@@ -229,7 +229,7 @@ Macros counted inside mathematics — what the notation of this fonds actually c
 | \omega | 5018 | \sum | 1689 | \setminus | 686 |
 | \Gamma | 4879 | \forall | 1677 | \varprojlim | 684 |
 | \xi | 4714 | \widehat | 1539 | \dim | 648 |
-| \longrightarrow | 4607 | \underbrace | 1535 | \Longleftrightarrow | 627 |
+| \longrightarrow | 4608 | \underbrace | 1535 | \Longleftrightarrow | 627 |
 | \Sigma | 4592 | \ll | 1527 | \varinjlim | 625 |
 | \circ | 4433 | \emptyset | 1510 | \vec | 625 |
 | \subset | 4308 | \mapsto | 1483 | \theta | 620 |
@@ -240,7 +240,7 @@ Macros counted inside mathematics — what the notation of this fonds actually c
 | \tilde | 3545 | \geq | 1357 | \colon | 571 |
 | \bigl | 3533 | \partial | 1284 | \supset | 569 |
 | \bigr | 3508 | \zeta | 1184 | \smallsetminus | 557 |
-| \nu | 3379 | \chi | 1112 | \parallel | 541 |
+| \nu | 3379 | \chi | 1113 | \parallel | 541 |
 | \overline | 3324 | \Psi | 1106 | \tfrac | 535 |
 
 ## Read only as doubtful, never plainly
@@ -251,36 +251,36 @@ candidate list is a reason to look harder at the page, not a reason to accept it
 
 | word | n | word | n | word | n |
 |---|---|---|---|---|---|
-| pólya | 15 | conjugue | 2 | mutatis | 2 |
-| neumann | 10 | contractions | 2 | normique | 2 |
-| bising | 5 | contravariantes | 2 | orthonormales | 2 |
-| hypersingulière | 5 | contrôler | 2 | paraboloïde | 2 |
-| semi-finie | 5 | couplage | 2 | permutable | 2 |
-| spectralement | 5 | décalé | 2 | pointes | 2 |
-| affinables | 4 | déconnectant | 2 | présumé | 2 |
-| concentrée | 4 | déri | 2 | pseudo-booléens | 2 |
-| antérieures | 3 | dév | 2 | quadrilatères | 2 |
-| contrexemple | 3 | diagonalisation | 2 | quasi-commutation | 2 |
-| fidélisabilité | 3 | diffère | 2 | quasi-noethérien | 2 |
-| harmonique | 3 | dilemme | 2 | quot | 2 |
-| igusa | 3 | discordante | 2 | répétition | 2 |
-| inégales | 3 | discours | 2 | retrouve-t-on | 2 |
-| métrisables | 3 | dualisation | 2 | rigoureux | 2 |
-| noms | 3 | efigures | 2 | s-schémas | 2 |
-| quasi-projectives | 3 | entrant | 2 | séparante | 2 |
-| réalisables | 3 | erroné | 2 | simplifions | 2 |
-| typiquement | 3 | étoilé | 2 | sommables | 2 |
-| viendraient | 3 | finissant | 2 | sous-coalgèbre | 2 |
-| atmag | 2 | gaffe | 2 | spatialité | 2 |
-| augmentant | 2 | géminé | 2 | tenons | 2 |
-| baies | 2 | hamiltoniens | 2 | tits | 2 |
-| basée | 2 | heure | 2 | trilinéaires | 2 |
-| beck | 2 | hypersingulières | 2 | tripode | 2 |
-| birégulier | 2 | incluse | 2 | tritétraèdre | 2 |
-| biseau | 2 | indiciellement | 2 | trouve-t-on | 2 |
-| bordés | 2 | isotriviaux | 2 | ul | 2 |
-| campbell | 2 | jacobson | 2 | unitairement | 2 |
-| cancelé | 2 | l'hermitien | 2 | univoquement | 2 |
-| cofini | 2 | magmas | 2 | vgr | 2 |
-| combinée | 2 | multisection | 2 | voulais | 2 |
-| compliquées | 2 | mutandis | 2 |  |  |
+| pólya | 15 | conjugue | 2 | normique | 2 |
+| neumann | 10 | contractions | 2 | orthonormales | 2 |
+| bising | 5 | contravariantes | 2 | paraboloïde | 2 |
+| hypersingulière | 5 | contrôler | 2 | permutable | 2 |
+| semi-finie | 5 | décalé | 2 | pointes | 2 |
+| spectralement | 5 | déconnectant | 2 | présumé | 2 |
+| affinables | 4 | déri | 2 | pseudo-booléens | 2 |
+| concentrée | 4 | dév | 2 | quadrilatères | 2 |
+| antérieures | 3 | diagonalisation | 2 | quasi-commutation | 2 |
+| contrexemple | 3 | diffère | 2 | quasi-noethérien | 2 |
+| fidélisabilité | 3 | dilemme | 2 | quot | 2 |
+| harmonique | 3 | discordante | 2 | répétition | 2 |
+| igusa | 3 | discours | 2 | retrouve-t-on | 2 |
+| inégales | 3 | dualisation | 2 | rigoureux | 2 |
+| métrisables | 3 | efigures | 2 | s-schémas | 2 |
+| noms | 3 | entrant | 2 | séparante | 2 |
+| quasi-projectives | 3 | erroné | 2 | simplifions | 2 |
+| réalisables | 3 | étoilé | 2 | sommables | 2 |
+| typiquement | 3 | finissant | 2 | sous-coalgèbre | 2 |
+| viendraient | 3 | gaffe | 2 | spatialité | 2 |
+| atmag | 2 | géminé | 2 | tenons | 2 |
+| augmentant | 2 | hamiltoniens | 2 | tits | 2 |
+| baies | 2 | heure | 2 | trilinéaires | 2 |
+| basée | 2 | hypersingulières | 2 | tripode | 2 |
+| beck | 2 | incluse | 2 | tritétraèdre | 2 |
+| birégulier | 2 | indiciellement | 2 | trouve-t-on | 2 |
+| biseau | 2 | isotriviaux | 2 | ul | 2 |
+| bordés | 2 | jacobson | 2 | unitairement | 2 |
+| campbell | 2 | l'hermitien | 2 | univoquement | 2 |
+| cancelé | 2 | magmas | 2 | vgr | 2 |
+| cofini | 2 | multisection | 2 | voulais | 2 |
+| combinée | 2 | mutandis | 2 |  |  |
+| compliquées | 2 | mutatis | 2 |  |  |
