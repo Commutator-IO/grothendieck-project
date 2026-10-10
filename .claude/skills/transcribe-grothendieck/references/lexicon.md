@@ -2,7 +2,7 @@
 
 # His lexicon, counted from the transcriptions
 
-Built from **632 batch files across 164 folders, 9316 transcribed pages**, by `scripts/lexicon.mjs`. Words appearing fewer than 3 times are omitted here; `lexicon.json` carries the full counts.
+Built from **632 batch files across 164 folders, 9317 transcribed pages**, by `scripts/lexicon.mjs`. Words appearing fewer than 3 times are omitted here; `lexicon.json` carries the full counts.
 
 > **This is a witness to vocabulary, not to ink.** It is derived from first-pass
 > machine transcriptions, **none of which has been checked against the leaves by
@@ -30,7 +30,7 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 |---|---|---|---|---|---|
 | cas | 3361 | objet | 465 | l'autre | 284 |
 | d'un | 2534 | l'application | 461 | formé | 283 |
-| deux | 2353 | l'on | 455 | l'opération | 281 |
+| deux | 2354 | l'on | 455 | l'opération | 281 |
 | groupe | 2042 | objets | 455 | diviseur | 277 |
 | catégorie | 1925 | famille | 450 | l'homomorphisme | 276 |
 | d'une | 1828 | connexes | 449 | localement | 276 |
@@ -78,7 +78,7 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | schéma | 806 | lieu | 373 | fixé | 246 |
 | corollaire | 797 | sections | 373 | ext | 245 |
 | module | 780 | faisceaux | 369 | posons | 245 |
-| d'ordre | 737 | général | 368 | picard | 243 |
+| d'ordre | 738 | général | 368 | picard | 243 |
 | dim | 725 | figure | 364 | topologique | 243 |
 | élément | 724 | algèbre | 363 | coh | 242 |
 | modules | 709 | satisfait | 363 | droites | 242 |
@@ -89,7 +89,7 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | sommets | 650 | déduit | 357 | courbe | 239 |
 | lisse | 648 | espace | 355 | quelconque | 239 |
 | opère | 646 | notion | 354 | simple | 239 |
-| resp | 642 | forment | 352 | ayant | 238 |
+| resp | 643 | forment | 352 | ayant | 238 |
 | l'image | 640 | réduit | 351 | formes | 238 |
 | foncteurs | 637 | sait | 349 | lorsque | 238 |
 | voit | 637 | correspond | 345 | clos | 237 |
@@ -126,8 +126,8 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | alg | 524 | nulle | 315 | compte | 212 |
 | question | 524 | mod | 313 | sga | 212 |
 | ait | 521 | l'hom | 311 | sous-catégorie | 212 |
-| part | 521 | moins | 308 | suivantes | 211 |
-| donne | 520 | prendre | 307 | semble | 210 |
+| donne | 521 | moins | 308 | suivantes | 211 |
+| part | 521 | prendre | 307 | semble | 210 |
 | anneau | 515 | exemple | 304 | évidemment | 209 |
 | stable | 514 | commute | 302 | seul | 209 |
 | faisceau | 513 | fermée | 301 | variété | 209 |
@@ -202,31 +202,31 @@ Macros counted inside mathematics — what the notation of this fonds actually c
 
 | macro | n | macro | n | macro | n |
 |---|---|---|---|---|---|
-| \mathrm | 20768 | \xrightarrow | 3243 | \longmapsto | 1092 |
-| \mathcal | 17640 | \delta | 3164 | \lbrace | 1072 |
+| \mathrm | 20825 | \xrightarrow | 3243 | \longmapsto | 1092 |
+| \mathcal | 17640 | \delta | 3164 | \lbrace | 1076 |
 | \in | 15710 | \bar | 3007 | \leqslant | 1071 |
 | \mathbb | 14626 | \cap | 3007 | \Bigl | 1035 |
-| \text | 13110 | \ell | 2873 | \boxed | 1024 |
-| \to | 11311 | \infty | 2824 | \Bigr | 1016 |
-| \underline | 10934 | \varepsilon | 2795 | \page | 1005 |
+| \text | 13112 | \ell | 2873 | \boxed | 1028 |
+| \to | 11312 | \infty | 2824 | \Bigr | 1016 |
+| \underline | 10936 | \varepsilon | 2795 | \page | 1005 |
 | \alpha | 10742 | \Lambda | 2784 | \exists | 974 |
-| \arrow | 10456 | \frac | 2713 | \left | 969 |
-| \qquad | 10450 | \neq | 2655 | \right | 969 |
+| \arrow | 10456 | \frac | 2732 | \left | 973 |
+| \qquad | 10453 | \neq | 2655 | \right | 973 |
 | \mathfrak | 8761 | \gamma | 2630 | \prod | 940 |
 | \lambda | 7634 | \mu | 2563 | \mid | 938 |
-| \sigma | 7121 | \mathbf | 2411 | \vee | 903 |
+| \sigma | 7144 | \mathbf | 2411 | \vee | 903 |
 | \otimes | 7113 | \bullet | 2405 | \dots | 887 |
-| \begin | 7102 | \Omega | 2331 | \Theta | 872 |
-| \end | 7096 | \Phi | 2322 | \underset | 869 |
-| \operatorname | 6853 | \Pi | 2282 | \pm | 864 |
+| \begin | 7107 | \Omega | 2331 | \Theta | 872 |
+| \end | 7101 | \Phi | 2322 | \underset | 869 |
+| \operatorname | 6853 | \Pi | 2282 | \pm | 866 |
 | \varphi | 6772 | \ldots | 2106 | \geqslant | 863 |
-| \pi | 6391 | \eta | 1961 | \rbrace | 851 |
+| \pi | 6391 | \eta | 1972 | \rbrace | 851 |
 | \simeq | 6254 | \cdot | 1937 | \det | 825 |
-| \quad | 5647 | \hat | 1931 | \Longrightarrow | 818 |
+| \quad | 5651 | \hat | 1931 | \Longrightarrow | 818 |
 | \times | 5118 | \overset | 1854 | \dot | 815 |
 | \widetilde | 5078 | \wedge | 1757 | \cup | 762 |
 | \rho | 5023 | \cdots | 1742 | \Rightarrow | 733 |
-| \omega | 4954 | \sum | 1689 | \setminus | 686 |
+| \omega | 5018 | \sum | 1689 | \setminus | 686 |
 | \Gamma | 4873 | \forall | 1677 | \varprojlim | 684 |
 | \xi | 4713 | \widehat | 1539 | \dim | 648 |
 | \longrightarrow | 4606 | \underbrace | 1535 | \Longleftrightarrow | 627 |
@@ -238,8 +238,8 @@ Macros counted inside mathematics — what the notation of this fonds actually c
 | \tau | 3608 | \psi | 1393 | \hookrightarrow | 589 |
 | \Delta | 3599 | \check | 1381 | \item | 575 |
 | \tilde | 3545 | \geq | 1357 | \colon | 571 |
-| \bigl | 3532 | \partial | 1284 | \supset | 569 |
-| \bigr | 3507 | \zeta | 1184 | \smallsetminus | 557 |
+| \bigl | 3533 | \partial | 1284 | \supset | 569 |
+| \bigr | 3508 | \zeta | 1184 | \smallsetminus | 557 |
 | \nu | 3375 | \chi | 1109 | \parallel | 541 |
 | \overline | 3324 | \Psi | 1106 | \tfrac | 533 |
 
