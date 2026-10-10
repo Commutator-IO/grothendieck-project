@@ -1,0 +1,1916 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 137, pages 1-85.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote.
+%
+% It is held to being mathematically correct as it stands, not merely faithful
+% to the page. Where the manuscript is loose or mistaken, the true statement is
+% what appears here, and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite the
+% batch-NN.fr.tex files (five batches: 1-20, 21-40, 41-60, 61-80, 81-85).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+%
+% Scope: ONE document for the whole shelfmark. The folder is one argument in
+% six stations — the dévissage of simplicial modules with perfect normalised
+% complex (pp. 1-27), the reconstruction of a category from a full subcategory
+% (pp. 28-35), the programme on cochains (pp. 35-38), the universal cochain
+% complex and its exact structure (pp. 39-64), multiplicative structures
+% (pp. 64-73), polynomial categories (pp. 74-85) — and the first station's
+% objects (Lambda^i Phi_*, Lambda^j Psi_*, Phi(i,n)) are the last stations'
+% raw material. The leaves are not in his order of writing (p. 6 cites p. 8).
+% Pages 2 and 4 are typed leaves of an English typescript carrying nothing in
+% his hand, 5 and 47 are blank; none is read here.
+%
+% NOTATION fixed once for the folder (the pages shift indices between
+% stretches; each shift is footnoted where it occurs):
+%   « ½simplicial » -> « simplicial » (with degeneracies; footnoted once).
+%   N(L_*) for his L^! (the normalised Dold-Puppe chain complex).
+%   Phi_*, Psi_* : the two basic simplicial modules (never defined in the
+%     folder; fixed here by the properties the pages use, model footnoted).
+%   Psi^j := Lambda^j Psi_* = K(k,j)   (his own convention from p. 51 on;
+%     p. 22 writes Psi^i for Lambda^{i+1} Psi_*).
+%   C^i (blackboard) := Lambda^{i+1} Phi_*  (his C^i_* of p. 40; p. 22 writes
+%     Phi^i for it). The augmented complex Psi^0 -> C^• of pp. 57-64, which he
+%     writes Phi^•, is written \widetilde{C}^• here, to keep Phi for Phi_*.
+%   Phi(i,n) : the simplicial module with N = (k --n--> k) in degrees i, i-1;
+%     Phi(i,1) = Lambda^i Phi_* = C^{i-1}.
+%   K (blackboard) : the k-additive category of finite sums of the C^i;
+%     cal P : bounded complexes of finite free modules with degreewise-split
+%     sequences Sigma (pp. 48-73); cal Q : his P_1 of p. 62 (L, Z, B, H free).
+%   bold P, bold P_1, bold P_n(X,Y) : the polynomial categories of pp. 74-85
+%     (the page reuses script P and P_1; the bold letters keep them apart
+%     from the cal P, cal Q above).
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - p. 1: the Corollaire needs i >= 1 (page: i >= 0);
+%   - p. 3: Lemme 2 needs no hypothesis on L for q > q'; flasqueness enters
+%     only for q = q';
+%   - p. 6: « j >= 1 » corrected to j >= 0;
+%   - pp. 9-11: Proposition 2 (stability of « spéciaux » under Lambda^k,
+%     Gamma^k, Sym^k) is FALSE in general: pi_3 Lambda^2(K(Z,2)) = Z/2,
+%     pi_1 Gamma^2(K(Z,1)) = Z/2. Restated: always for tensor products; for
+%     Lambda, Gamma, Sym on acyclic special modules, and on all special
+%     modules when Q is contained in k;
+%   - p. 13: d) and e) « ssi » weakened to « si » (pseudo-coherence depends
+%     only on homology); p. 14's NB example ours (k[e]/e^2);
+%   - p. 16: rank N_i formula missing mu_i; « (str.) parfait ssi nb fini de
+%     facteurs » holds for strictly perfect only;
+%   - p. 18: L is determined by the multiplicities rho_{i,l}, not by their
+%     number; binom(n,i) corrected to binom(n+1,i);
+%   - p. 22: re-indexed (his Phi^i, Psi^i = our C^i, Psi^{i+1}); his
+%     « Psi^0 = Phi^0 » contradicts acyclicity and is not kept;
+%   - p. 28: « every object a colimit of objects of A » does not give full
+%     faithfulness; density (canonical colimit) is what is needed;
+%   - p. 31: the second equivalence is stated with limits in [A, Set];
+%   - p. 60: the essential image is read as all of cal P (the page's
+%     « L, Z, B, H libres » describes cal Q);
+%   - p. 61: « est-il vrai que N -> A est un Sigma-mono ? » answered (yes,
+%     over a principal ring);
+%   - p. 75: the struck Lemme is false (2-torsion: all positive weights
+%     coincide); his own margin gives the p-torsion case;
+%   - p. 80: exponent Gamma^r(X) in the square corrected to X;
+%   - p. 82: composition is linear in the outer variable only, not bilinear.
+%
+% Announced and not established in the folder: the iso u_n of p. 3 (stated);
+% Proposition 4 of p. 45 (illegible); the end of p. 46; the factorisation of
+% p. 70 (his « ? »); the equivalence « strict polynomial category <=>
+% ⊗-pd-category » (p. 83, asserted); the pd structure on F (p. 72); the
+% reconstruction of the homotopy type (p. 38).
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{137}
+\pages{1}{85}
+\dating{[vers 1975-1976]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Dévissage des complexes ½ simpliciaux ∂ - parfaits et structures multiplicatives… (1975 ou 1976) : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces quatre-vingts pages, de 1975 ou 1976, posent une question simple à
+formuler : que faut-il savoir des \emph{cochaînes} d'un espace pour pouvoir
+reconstituer l'espace lui-même ?
+
+Les cochaînes d'un espace $X$ à coefficients dans un anneau $k$ forment un
+complexe — une suite de modules reliés par une différentielle — dont la
+cohomologie est un invariant classique. Sur la cohomologie il y a un produit,
+le cup-produit, qui en fait une algèbre commutative ; mais au niveau des
+cochaînes elles-mêmes ce produit n'est commutatif qu'« à homotopie près », et
+c'est justement là que se cache l'information fine. En caractéristique zéro,
+Sullivan avait trouvé le remède : remplacer les cochaînes par des formes
+différentielles à coefficients polynomiaux sur les simplexes, qui forment une
+algèbre honnêtement commutative — le complexe de De Rham–Sullivan. En
+caractéristique quelconque, les dénominateurs $x^{n}/n!$ des formules de
+Taylor interdisent ce remède ; Grothendieck propose de garder ces
+dénominateurs comme des opérations à part entière, les \emph{puissances
+divisées}. C'est le sujet de la conférence de 1976 que le dossier voisin
+(136) prépare ; celui-ci en est l'atelier.
+
+L'idée maîtresse est de regarder les cochaînes non comme un complexe donné,
+mais comme les valeurs d'un foncteur. On fixe une petite famille de modules
+« modèles », et l'on regarde comment $X$ s'envoie dans chacun : les cochaînes
+de degré $i$ sont exactement les applications de $X$ dans un modèle
+$\mathbb{C}^{i}$, et les cocycles les applications dans un autre modèle
+$\Psi^{i}$. Les modèles $\mathbb{C}^{0} \to \mathbb{C}^{1} \to \cdots$
+forment eux-mêmes un complexe, et ce complexe est \emph{universel} : tout
+complexe de cochaînes, dans n'importe quelle catégorie linéaire, en est
+l'image par un foncteur et un seul — comme un vecteur est déterminé par ses
+coordonnées dans une base. Dès lors, munir un complexe d'un produit, ou de
+puissances divisées, revient à demander que le foncteur correspondant
+respecte les produits tensoriels des modèles : la structure cherchée est
+déplacée du complexe vers le foncteur, où elle s'énonce sans ambiguïté.
+
+Le dossier construit cela en six temps. Il classe d'abord, par une liste
+explicite de « briques » indécomposables, les modules simpliciaux dont le
+complexe normalisé est parfait — c'est le « dévissage » du titre. Il
+développe ensuite une théorie générale de la reconstruction d'une catégorie à
+partir d'une sous-catégorie pleine, puis caractérise par une propriété
+universelle la catégorie des complexes parfaits munie de son complexe
+universel. Il en tire une définition des structures multiplicatives, et
+retrouve le produit sur la cohomologie. Il s'arrête enfin pour axiomatiser ce
+qui manque encore : la notion de \emph{catégorie polynomiale}, où les
+morphismes ont un degré comme des polynômes, et où l'on peut parler de
+puissances divisées sans modules sous-jacents. L'analogie est celle-ci : une
+forme quadratique sur un espace $V$ n'est rien d'autre qu'une forme
+\emph{linéaire} sur un autre espace, $\Gamma^{2}V$ ; de même, une application
+polynomiale de degré $p$ entre deux objets n'est qu'un morphisme linéaire
+partant de $\Gamma^{p}$ du premier.
+
+Les pages laissent voir le travail en train de se faire. Un lemme est écrit,
+démontré, puis barré : la marge contient le contre-exemple qui le ruine, de
+sa main. Ailleurs : « il le faudrait ! », « à vérifier », « je l'avais oublié
+dans les axiomes préliminaires, il me semble », et, au bout du programme,
+« Enfin, bien sûr, faisceautiser et relativiser\ldots\ !!! ». Le programme
+n'est pas achevé ici : la question de savoir si les cochaînes munies de
+toutes ces structures déterminent le type d'homotopie reste posée.
+
+Les noms modernes à chercher : correspondance de Dold–Kan, complexes
+parfaits, catégories exactes, densité et dualité d'Isbell, foncteurs
+monoïdaux lax, cochaînes $E_{\infty}$ (dont le théorème de Mandell, bien
+postérieur, répond en partie à la question finale), lois polynomes de Roby
+et foncteurs polynomiaux stricts de Friedlander et Suslin.
+
+\keywords{Dold–Kan correspondence, simplicial module, Eilenberg–MacLane object, perfect complex, pseudo-coherent complex, elementary divisors, additive envelope, dense subcategory, Isbell duality, tensor product of functors, cochain functor, Sullivan polynomial forms, universal cochain complex, Quillen exact category, relative homological algebra, lax monoidal functor, cup product, divided powers, divided power de Rham complex, polynomial law, strict polynomial functor}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+\begin{itemize}
+\item[1.] \emph{Pages 1 à 21 : le dévissage.} Classification des modules
+simpliciaux $L_{*}$ dont le complexe normalisé $N(L_{*})$ est « parfait »,
+sur un anneau quelconque d'abord (pages 1 à 12), puis, après une seconde
+rédaction qui reprend la numérotation (page 13), sur un anneau principal, où
+apparaissent des briques nouvelles $\Phi(i,n)$ et où l'on calcule tous les
+morphismes entre briques (pages 15 à 21).
+\item[2.] \emph{Pages 22 à 27 : l'axiomatisation.} Les calculs de morphismes
+sont refaits en ne supposant qu'un complexe $\mathbb{C}^{\bullet}$ dans une
+catégorie additive satisfaisant trois axiomes ; on conclut que la catégorie
+est connue dès qu'on connaît la sous-catégorie pleine des briques.
+\item[3.] \emph{Pages 28 à 35 : reconstruction d'une catégorie.} Théorie
+générale : une catégorie est déterminée par une sous-catégorie pleine dense ;
+équivalences avec des catégories de préfaisceaux et de copréfaisceaux ;
+produit tensoriel de foncteurs.
+\item[4.] \emph{Pages 35 à 38 : le programme.} Les cochaînes d'un ensemble
+simplicial $X$ comme foncteur $M \mapsto \operatorname{Hom}(X, M)$ ;
+retrouver leur structure multiplicative et leurs puissances divisées ;
+complexes de De Rham–Sullivan et de De Rham à puissances divisées ; type
+d'homotopie.
+\item[5.] \emph{Pages 39 à 64 : le complexe universel.} La catégorie
+$\mathbb{K}$ engendrée par un complexe universel $\mathbb{C}^{\bullet}$
+(pages 39 à 46) ; les classes de suites exactes et la propriété universelle
+de la catégorie $\mathcal{P}$ des complexes parfaits (pages 48 à 56) ; une
+caractérisation intrinsèque de $\mathcal{P}$ et l'algèbre homologique
+relative qui s'y fait (pages 57 à 64).
+\item[6.] \emph{Pages 64 à 73 : structures multiplicatives.} Foncteurs
+monoïdaux ; structures multiplicatives « demi-simpliciales » sur un complexe ;
+le cup-produit à homotopie près ; le complexe de De Rham à puissances
+divisées comme résolution tronquée.
+\item[7.] \emph{Pages 74 à 85 : catégories polynomiales.} Axiomes, produits
+tensoriels stricts, foncteurs $\Gamma^{n}$, et la notion équivalente de
+$\otimes$-catégorie à puissances divisées ; questions ouvertes.
+\end{itemize}
+
+Les feuillets ne sont pas tous dans l'ordre où ils furent écrits : le lemme
+de la page 6 cite des corollaires de la page 8. Les pages 2 et 4 sont deux
+feuillets dactylographiés en anglais, sur les modèles minimaux et les formes
+de De Rham, qui ne portent rien de sa main ; les pages 5 et 47 sont
+blanches ; elles ne sont pas lues ici.
+
+\subsection*{Conventions, valables pour tout le dossier}
+
+$k$ est un anneau commutatif. Ce que Grothendieck appelle module
+« ½simplicial » est ce qu'on appelle aujourd'hui un \emph{module
+simplicial}\footnote{Dans l'usage des années 1950 (Eilenberg–Zilber,
+Dold–Puppe), « semi-simplicial » désignait les objets munis de faces
+\emph{et} de dégénérescences, c'est-à-dire nos objets simpliciaux. Que ce
+soit le sens ici ne fait pas de doute : le dossier utilise constamment la
+correspondance de Dold–Puppe, qui n'existe pas sans dégénérescences, et ses
+fonctions de rang (page 10) sont celles d'objets simpliciaux. Le mot « semi-simplicial » a pris depuis le sens contraire (faces seulement) ; nous
+l'évitons.} : un foncteur $\Delta^{\circ} \to \operatorname{Mod}_{k}$, noté
+$L_{*}$, de composantes $L_{n}$. Son complexe normalisé (le « complexe de
+chaînes associé par Dold-Puppe », que les pages notent $L^{!}$) est noté
+$N(L_{*})$ ; la correspondance de Dold–Kan (que Grothendieck appelle de
+Dold–Puppe) est l'équivalence $N$ entre modules simpliciaux et complexes de
+chaînes en degrés $\geqslant 0$, d'inverse $\mathrm{DP}$ ; elle respecte les
+suites exactes, et $\pi_{n}(L_{*}) = H_{n}(N(L_{*}))$. On a
+$L_{n} \simeq \bigoplus_{m \leqslant n} N_{m}(L_{*})^{\binom{n}{m}}$, de
+sorte que $L_{n}$ est projectif (resp. de type fini) pour tout $n$ si et
+seulement si $N_{n}$ l'est. Un module simplicial est dit \emph{flasque} si
+tous ses $\pi_{n}$, $n \geqslant 0$, sont nuls ; nous dirons aussi
+acyclique\footnote{Le mot est celui des pages. À composantes projectives,
+un module simplicial acyclique est contractile, puisque son complexe
+normalisé est un complexe acyclique de projectifs borné à droite, donc
+scindé.}.
+
+\emph{Les deux briques $\Phi_{*}$ et $\Psi_{*}$.} Le dossier ne les définit
+nulle part\footnote{Elles viennent sans doute des notes de la conférence
+(dossier 136). Nous les fixons par les seules propriétés que les pages
+utilisent. Un modèle : $\Phi_{*} = \widetilde{k}[\Delta^{1}]$, le module
+simplicial libre sur le 1-simplexe réduit par un sommet, et
+$\Psi_{*} = \widetilde{k}[\Delta^{1}/\partial\Delta^{1}]$, les chaînes
+réduites du cercle simplicial ; $T$ est la classe de l'autre sommet. Ce
+modèle est le nôtre, non celui des pages.} ; nous les fixons ainsi.
+$\Phi_{*}$ est un module simplicial à composantes libres, $\Phi_{n}$ de rang
+$n+1$, dont le complexe normalisé est $k \xrightarrow{\mathrm{id}} k$ en
+degrés $1$ et $0$ ; il contient un sous-module constant $k \cdot T \simeq
+k_{*}$, et $\Psi_{*} = \Phi_{*}/kT$ a pour complexe normalisé $k$ placé en
+degré $1$. On en prend les puissances extérieures degré par degré :
+\begin{itemize}
+\item $\Lambda^{j}\Psi_{*}$ ($j \geqslant 0$) a pour complexe normalisé $k$
+placé en degré $j$ : c'est l'objet d'Eilenberg–MacLane $K(k, j)$, de rangs
+$\operatorname{rg} \Lambda^{j}\Psi_{n} = \binom{n}{j}$ ;
+\item $\Lambda^{i}\Phi_{*}$ ($i \geqslant 1$) a pour complexe normalisé
+$k \xrightarrow{\mathrm{id}} k$ en degrés $i$ et $i-1$ : il est contractile,
+de rangs $\binom{n+1}{i}$ ;
+\item le produit extérieur par $T$ donne des suites exactes
+$0 \to \Lambda^{i-1}\Psi_{*} \xrightarrow{\wedge T} \Lambda^{i}\Phi_{*}
+\to \Lambda^{i}\Psi_{*} \to 0$, et des morphismes
+$\wedge T : \Lambda^{i}\Phi_{*} \to \Lambda^{i+1}\Phi_{*}$ de carré nul.
+\end{itemize}
+Que $N(\Lambda^{j}\Psi_{*})$ soit exactement $k[j]$, et non seulement
+quasi-isomorphe, se voit sur les rangs\footnote{Le décalage d'Illusie et
+Quillen donne $\pi_{*}(\Lambda^{j}\Psi_{*}) = \Gamma^{j}(k)[j] = k[j]$ ; le
+rang $\binom{n}{j}$ de $\Lambda^{j}\Psi_{n}$ force alors $N_{m} = 0$ pour
+$m \neq j$, par la formule
+$\operatorname{rg} L_{n} = \sum_{m} \binom{n}{m} \operatorname{rg} N_{m}$.
+Les pages tiennent ces faits pour acquis.}.
+
+\emph{Le complexe universel et les sphères.} Nous posons, pour tout le
+dossier,
+\[
+  \mathbb{C}^{i} := \Lambda^{i+1}\Phi_{*} \quad (i \geqslant 0), \qquad
+  \Psi^{j} := \Lambda^{j}\Psi_{*} = K(k, j) \quad (j \geqslant 0),
+\]
+de sorte que $\mathbb{C}^{0} \xrightarrow{\wedge T} \mathbb{C}^{1}
+\xrightarrow{\wedge T} \cdots$ est un complexe de cochaînes de modules
+simpliciaux, augmenté par $\Psi^{0} = k_{*} \hookrightarrow \mathbb{C}^{0}$,
+et qu'on a les suites exactes
+\[
+  0 \to \Psi^{i} \to \mathbb{C}^{i} \to \Psi^{i+1} \to 0 \qquad (i \geqslant 0).
+\]
+C'est la convention des pages elles-mêmes à partir de la page 51 ; la page 22
+décale les indices d'une unité, et la page 40 écrit $C^{i}_{*}$ pour notre
+$\mathbb{C}^{i}$. Côté complexes de chaînes, $N(\mathbb{C}^{i})$ est le
+« disque » $k \xrightarrow{\mathrm{id}} k$ en degrés $i+1$, $i$, et
+$N(\Psi^{i}) = k[i]$ la « sphère ». Pour $n \in k$ non nul et $i \geqslant 1$,
+$\Phi(i,n)$ est le module simplicial de complexe normalisé
+$k \xrightarrow{\,n\,} k$ en degrés $i$ et $i-1$ ; ainsi
+$\Phi(i,1) = \Lambda^{i}\Phi_{*} = \mathbb{C}^{i-1}$.
+
+Le complexe augmenté $\Psi^{0} \to \mathbb{C}^{0} \to \mathbb{C}^{1} \to
+\cdots$, que les pages 57 à 64 notent $\Phi^{\bullet}$, est noté ici
+$\widetilde{\mathbb{C}}^{\bullet}$, pour garder la lettre $\Phi$ à la brique
+$\Phi_{*}$.
+
+\emph{Deux homonymies.} La lettre $\mathcal{P}$ désigne aux pages 48 à 73 une
+catégorie de complexes parfaits, et aux pages 74 à 85 une « catégorie
+polynomiale » abstraite ; la seconde est écrite ici $\mathbf{P}$, et sa
+sous-catégorie des morphismes de degré $1$, $\mathbf{P}_{1}$. De même, la
+catégorie que la page 62 note $\mathcal{P}_{1}$ est toujours écrite ici
+$\mathcal{Q}$, comme il le fait lui-même aussitôt. Enfin, pour une catégorie
+additive $\mathcal{B}$, $\mathcal{B}^{\bullet}$ et $\mathcal{B}_{\bullet}$
+sont les catégories de complexes de cochaînes et de chaînes (en degrés
+$\geqslant 0$), $\mathcal{B}^{*}$ et $\mathcal{B}_{*}$ celles d'objets
+cosimpliciaux et simpliciaux.
+
+\subsection*{Ce que le dossier annonce sans l'établir}
+
+L'isomorphisme $u_{n}$ du théorème de la page 3 est énoncé sans
+démonstration ; la « Proposition 4 » de la page 45 est illisible ; la page 46
+s'interrompt sur un énoncé commencé ; à la page 70, la factorisation qui
+étend une structure multiplicative est suivie d'un point d'interrogation ;
+l'équivalence entre catégories polynomiales strictes et
+$\otimes$-catégories à puissances divisées (page 83) est affirmée ; la
+« structure p.d. » sur un foncteur, dont la page 72 a besoin, n'est jamais
+définie ; la reconstruction du type d'homotopie (page 38) reste un
+programme.
+
+\pagerange{1}{3}
+\section*{Préliminaires : projectivité, annulation, et une comparaison (pages 1 et 3)}
+
+Ces deux feuillets, au crayon très pâle, ouvrent le dossier ; leurs formules
+se lisent, une bonne part de la prose qui les relie non\footnote{Une dizaine
+de lignes au milieu de la page 1 sont presque effacées ; ce qui suit ne
+s'appuie que sur les énoncés et les formules, qui se lisent.}.
+
+\textbf{Lemme 1.} \emph{Soit $L_{*}$ un module simplicial sur $k$ dont toutes
+les composantes $L_{n}$ sont des $k$-modules projectifs. Si
+$\pi_{n}(L_{*}) = 0$ pour $n > 0$ et si $\pi_{0}(L_{*})$ est projectif — en
+particulier si $L_{*}$ est flasque —, alors $L_{*}$ est un objet projectif de
+la catégorie des modules simpliciaux.}
+
+Par Dold–Kan, il s'agit de voir que $N = N(L_{*})$ est projectif dans la
+catégorie des complexes de chaînes en degrés $\geqslant 0$. Or $N$ est un
+complexe de projectifs, acyclique en degrés $> 0$, à $H_{0}$ projectif : il
+est somme directe de « disques » $P \xrightarrow{\mathrm{id}} P$ et du
+module $H_{0}$ placé en degré $0$, et chacun de ces complexes est projectif
+— $\operatorname{Hom}$ d'un disque en degrés $n, n-1$ vers $C$ est
+$\operatorname{Hom}(P, C_{n})$, et $\operatorname{Hom}(H_{0}[0], C)$ est
+$\operatorname{Hom}(H_{0}, C_{0})$, deux foncteurs exacts en
+$C$\footnote{L'énoncé de la page suppose $L_{*}$ flasque ; le \emph{NB} qui
+suit l'affaiblit, comme ici, en « $\pi_{n} = 0$ pour $n > 0$ et $\pi_{0}$
+projectif ». La démonstration de la page est presque entièrement illisible ;
+celle-ci est la nôtre.}.
+
+\textbf{Corollaire.} \emph{Pour $i \geqslant 1$ et $j \geqslant 0$, les
+modules simpliciaux $\Gamma^{i}\Phi_{*} \otimes_{k} \Lambda^{j}\Psi_{*}$ et
+$\Lambda^{i}\Phi_{*} \otimes_{k} \Lambda^{j}\Psi_{*}$ sont projectifs.} En
+effet $\Phi_{*}$ est contractile, donc aussi $\Gamma^{i}\Phi_{*}$ et
+$\Lambda^{i}\Phi_{*}$ pour $i \geqslant 1$ (un foncteur appliqué degré par
+degré préserve les homotopies simpliciales), donc aussi leur produit
+tensoriel par n'importe quoi\footnote{La page porte « pour $i \geqslant 0$ »,
+suivi d'un mot illisible. Pour $i = 0$ l'énoncé est faux :
+$\Gamma^{0}\Phi_{*} \otimes \Lambda^{j}\Psi_{*} = K(k, j)$ a
+$\pi_{j} = k \neq 0$ et n'est pas projectif si $j \geqslant 1$. La page écrit
+aussi $\Lambda\Psi_{*}$ (l'algèbre extérieure entière) dans le premier
+produit ; nous l'avons décomposée en ses composantes homogènes.}.
+
+\textbf{Lemme 2.} \emph{Soient $L_{*}$ un module simplicial, $M$ un
+$k$-module et $q > q' \geqslant 0$. Alors
+\[
+  \operatorname{Hom}\bigl(L_{*} \otimes_{k} \Lambda^{q}\Psi_{*},\
+  \Lambda^{q'}\Psi_{*} \otimes_{k} M\bigr) = 0 .
+\]
+Si de plus $\pi_{0}(L_{*}) = 0$, le même $\operatorname{Hom}$ est nul pour
+$q' = q$.}
+
+Le but a pour complexe normalisé $M[q']$, de sorte qu'un morphisme
+$X \to \Lambda^{q'}\Psi_{*} \otimes M$ est une application
+$N_{q'}(X) \to M$ nulle sur les bords. Or $\Lambda^{q}\Psi_{n} = 0$ pour
+$n < q$, donc $X = L_{*} \otimes \Lambda^{q}\Psi_{*}$ est nul en degrés
+$< q$ : cela règle le cas $q' < q$, sans hypothèse sur $L_{*}$. Pour
+$q' = q$, il faut que $N_{q}(X) \to M$ s'annule sur les bords, donc se
+factorise par $H_{q}(N(X)) = \pi_{q}(X)$, qui vaut $\pi_{0}(L_{*})$ par
+Eilenberg–Zilber et Künneth ; c'est nul si $\pi_{0}(L_{*}) =
+0$\footnote{La page fait l'hypothèse « quasi-flasque » (lecture incertaine,
+écrite au-dessus de « flasque » biffé) et précise entre parenthèses qu'on
+n'utilise que la nullité « en degrés $< q$ ». Sa démonstration traite les
+deux cas à la suite : « il est évident que
+$\operatorname{Hom}(L'_{\bullet}, M[q']) = 0$ » pour $q' < q$, puis, dans un
+diagramme, $\pi_{q} = 0 \Rightarrow L'_{q+1} \to L'_{q}$ surjectif, donc
+$L'_{q} \to M$ nul, pour $M[q]$. Nous séparons les deux cas et précisons
+l'hypothèse que chacun demande.}.
+
+\textbf{Théorème (énoncé).} \emph{Soit $n \geqslant 0$, et
+$K_{n}^{i} = \Gamma^{n-i}\Phi_{*} \otimes \Lambda^{i}\Psi_{*}$
+($0 \leqslant i \leqslant n$). Il existe un morphisme de complexes de
+cochaînes $u : K_{n}^{\bullet} \to \mathbb{C}^{\bullet}$ en degrés
+$0, \ldots, n$, soit $u_{i} : \Gamma^{n-i}\Phi_{*} \otimes
+\Lambda^{i}\Psi_{*} \to \Lambda^{i+1}\Phi_{*}$, tel que $u_{n}$ soit un
+isomorphisme de $\Lambda^{n}\Psi_{*} = \Psi^{n}$ sur
+$\operatorname{Ker}(\mathbb{C}^{n} \to \mathbb{C}^{n+1})$.}
+
+La différentielle de $K_{n}^{\bullet}$ n'est pas écrite sur la
+page\footnote{Seule la ligne du bas, $\Lambda^{\bullet+1}\Phi_{*}$ avec les
+$\wedge T$, porte des flèches étiquetées ; les exposants de cette ligne sont
+en partie effacés et restitués par le décalage d'une unité que portent
+$u_{0}$ et $u_{1}$. La fin de l'énoncé, au bas du feuillet, se lit avec
+doute.}. Nous la lisons comme celle du complexe de Koszul à puissances
+divisées de la surjection $\Phi_{*} \to \Psi_{*}$, de noyau $kT$ ; ce
+complexe est exact sauf en degré $0$, où sa cohomologie est
+$\Gamma^{n}(kT) \simeq k$, de sorte que $K_{n}^{\bullet}$ est une résolution
+de $k_{*}$ de longueur $n$, dont tous les termes sont contractiles sauf le
+dernier, $\Psi^{n}$. C'est exactement l'objet que la page 72 appelle le
+complexe de De Rham à puissances divisées tronqué, et le morphisme $u$ est
+celui dont la page 72 affirme l'existence et l'unicité à homotopie près :
+voir plus bas, « Le complexe de De Rham à puissances divisées ». Que $u_{n}$
+soit un isomorphisme, et non seulement un multiple d'un isomorphisme, est
+affirmé sans démonstration\footnote{Nous ne l'avons vérifié que pour
+$n = 1$, où $K_{1}^{\bullet} = (\Phi_{*} \to \Psi_{*})$ et où $u$ est
+l'identité suivie de l'inclusion $\Psi^{1} \hookrightarrow \mathbb{C}^{1}$.
+En général l'application induite sur $\Psi^{n}$ est la multiplication par un
+scalaire qui mesure la classe de Yoneda de $K_{n}^{\bullet}$ ; que ce
+scalaire soit une unité est ce que les puissances divisées doivent assurer,
+mais les pages ne le montrent pas.}.
+
+\pagerange{6}{12}
+\section*{Le théorème de structure sur un anneau quelconque (pages 6 à 12)}
+
+\subsection*{Décomposition}
+
+\textbf{Proposition (page 7).} \emph{Pour un module simplicial $L_{*}$ sur
+$k$, les conditions suivantes sont équivalentes :}
+\begin{itemize}
+\item[a)] \emph{les $L_{n}$ et les $\pi_{n}(L_{*})$ sont projectifs ;}
+\item[a')] \emph{les $N_{n}(L_{*})$ et les $H_{n}(N(L_{*}))$ sont
+projectifs ;}
+\item[b)] \emph{$L_{*}$ est isomorphe à un produit
+\[
+  \prod_{i \geqslant 1} \Lambda^{i}\Phi_{*} \otimes_{k} M_{i} \ \times\
+  \prod_{j \geqslant 0} \Lambda^{j}\Psi_{*} \otimes_{k} N_{j}
+\]
+où les $M_{i}$, $N_{j}$ sont des $k$-modules projectifs ;}
+\item[b')] \emph{$N(L_{*})$ est isomorphe au produit des complexes
+$M_{i} \xrightarrow{\mathrm{id}} M_{i}$ (en degrés $i$, $i-1$) et $N_{j}$
+(en degré $j$).}
+\end{itemize}
+\emph{Les $M_{i}$ et $N_{j}$ sont alors déterminés à isomorphisme près :
+$N_{j} \simeq \pi_{j}(L_{*})$ et $M_{i} \simeq N_{i}/Z_{i} \simeq B_{i-1}$.}
+
+Le produit est fini en chaque degré, puisque $\Lambda^{i}\Phi_{n} = 0$ pour
+$i > n+1$ et $\Lambda^{j}\Psi_{n} = 0$ pour $j > n$ : c'est donc aussi une
+somme directe. L'équivalence a) $\Leftrightarrow$ a') vient de ce que
+$L_{n}$ et $N_{n}$ sont simultanément projectifs ; a') $\Leftrightarrow$ b')
+est le scindage d'un complexe de projectifs à homologie projective, borné à
+droite (on montre de proche en proche que $B_{n}$ et $Z_{n}$ sont facteurs
+directs) ; b') $\Leftrightarrow$ b) est Dold–Kan, avec
+$N(\Lambda^{i}\Phi_{*} \otimes M) = (M \to M)$ et
+$N(\Lambda^{j}\Psi_{*} \otimes N) = N[j]$.
+
+\textbf{Corollaire 1 (page 8).} On obtient des conditions équivalentes en
+exigeant de plus que les $L_{n}$, les $N_{n}$, les $M_{i}$ et $N_{j}$ soient
+de type fini, et alors
+\[
+  L_{n} \simeq \prod_{1 \leqslant i \leqslant n+1} \Lambda^{i}\Phi_{n}
+  \otimes M_{i} \ \times \prod_{0 \leqslant j \leqslant n}
+  \Lambda^{j}\Psi_{n} \otimes N_{j} .
+\]
+
+\textbf{Définition (page 8).} $L_{*}$ est \emph{spécial} si $N(L_{*})$ est
+borné, à composantes et homologie projectives de type fini — autrement dit
+(Corollaire 2) si $L_{*}$ est une somme \emph{finie} de
+$\Lambda^{i}\Phi_{*} \otimes M_{i}$ ($i \geqslant 1$) et
+$\Lambda^{j}\Psi_{*} \otimes N_{j}$ ($j \geqslant 0$), à $M_{i}$, $N_{j}$
+projectifs de type fini ; \emph{strictement spécial} si de plus les $M_{i}$
+et $N_{j}$ sont libres\footnote{Le mot écrit au-dessus de « parfait » biffé
+est peu lisible ; la page suivante emploie « spéciaux » et « strict.\
+spéciaux », d'où la lecture. Les pages 11, 12 et 15 disent aussi « très
+spécial », que nous identifions à « strictement spécial » : c'est ce
+qu'exige la condition d'existence de la page 12, où les multiplicités sont
+des entiers naturels. Un début de définition de modules « (strictly)
+chain-perfect », page 12, est barré.}. Dans ce second cas, $L_{*}$ provient
+par extension des scalaires d'un module simplicial spécial sur $\mathbb{Z}$.
+
+\subsection*{La fonction de rang}
+
+\textbf{Lemme (page 6).} \emph{Supposons $k$ connexe, de sorte que le rang
+d'un projectif de type fini est un entier, et les $L_{n}$, $\pi_{n}(L_{*})$
+projectifs de type fini ; posons $\mu_{i} = \operatorname{rg} M_{i}$,
+$\nu_{j} = \operatorname{rg} N_{j}$. Les conditions suivantes sont
+équivalentes :}
+\begin{itemize}
+\item[a)] \emph{$N(L_{*})$ est borné ;}
+\item[b)] \emph{les $M_{i}$, $N_{j}$ sont nuls sauf un nombre fini, i.e.
+$L_{*}$ est spécial ;}
+\item[b')] \emph{(si tout projectif de type fini sur $k$ est libre, par
+exemple si $k$ est principal) $L_{*}$ est somme finie de
+$\Lambda^{i}\Phi_{*}$ ($i \geqslant 1$) et de $\Lambda^{j}\Psi_{*}$
+($j \geqslant 0$) ;}
+\item[c)] \emph{$\operatorname{rg} L_{n}$ est une fonction polynomiale de $n$
+pour $n$ grand ;}
+\item[d)] \emph{il existe $N$ et $c > 0$ tels que
+$\operatorname{rg} L_{n} \leqslant c\, n^{N}$ pour $n$ grand.}
+\end{itemize}
+\emph{De plus, $\operatorname{rg} L_{n} = O(n^{N})$ si et seulement si
+$M_{i} = N_{i} = 0$ pour $i > N$, et le coefficient de $n^{N}/N!$ est alors
+$\mu_{N} + \nu_{N}$.}\footnote{La page écrit dans b) « $j \geqslant 1$ » ;
+la proposition de la page 7 et b') ont $j \geqslant 0$, qui est correct (le
+facteur $\Lambda^{0}\Psi_{*} \otimes N_{0} = N_{0}$ constant est permis). La
+dernière phrase réunit le crochet de la page et sa note marginale, en partie
+illisible, qui relie le terme dominant à « $\mu_{N} + \nu_{N}$ ». En marge de
+l'hypothèse de connexité : « on peut éviter cette hypothèse ! » (lecture
+incertaine) — en raisonnant composante par composante de
+$\operatorname{Spec} k$.}
+
+Un lemme barré de la page 9, interrompu, en commençait une autre rédaction. Tout repose sur la formule
+\[
+  \rho(n) := \operatorname{rg}_{k} L_{n} = \sum_{1 \leqslant i \leqslant n+1}
+  \mu_{i} \binom{n+1}{i} + \sum_{0 \leqslant j \leqslant n} \nu_{j}
+  \binom{n}{j},
+\]
+où chaque terme est un polynôme de degré $i$ (resp. $j$) en $n$ : si une
+infinité de $\mu_{i}$ ou de $\nu_{j}$ sont non nuls, $\rho(n)$ est minoré par
+des polynômes de degré arbitrairement grand.
+
+\subsection*{Stabilité par produits tensoriels et puissances}
+
+\textbf{Proposition 2 (pages 9 à 11), sous la forme où elle est vraie.}
+\emph{Les modules simpliciaux spéciaux (resp. strictement spéciaux) sont
+stables par produit tensoriel. Les puissances $\Lambda^{m}$, $\Gamma^{m}$,
+$\operatorname{Sym}^{m}$ d'un module spécial \emph{flasque} sont spéciales ;
+si $k$ contient $\mathbb{Q}$, celles de tout module spécial le sont.}
+
+Pour le produit tensoriel on se ramène aux produits de deux briques, à
+composantes libres de type fini ; par Eilenberg–Zilber et Künneth, leurs
+$\pi_{n}$ sont libres de type fini ; leur fonction de rang, produit de deux
+polynômes, est polynomiale, et le lemme de la page 6 donne la finitude. Pour
+$\Lambda^{m}$ (et de même $\Gamma^{m}$, $\operatorname{Sym}^{m}$), la formule
+de la puissance d'une somme directe, et le fait que $\Lambda^{i}\Phi_{*} \otimes M$ est facteur direct de $\Lambda^{i}\Phi_{*} \otimes P$ avec $P$ libre,
+ramènent à $\Lambda^{m}(\Lambda^{i}\Phi_{*})$, contractile puisque
+$\Lambda^{i}\Phi_{*}$ l'est, et aux termes mixtes, contractiles pour la même
+raison.
+
+La page énonce davantage : stabilité de tous les modules spéciaux par
+$\Lambda^{m}$, $\Gamma^{m}$ et (lecture incertaine)
+$\operatorname{Sym}^{m}$\footnote{Pages 9 à 11. La démonstration traite
+$\Lambda^{m}(\Lambda^{i}\Phi_{*})$, puis annonce que les $\pi_{n}$ de
+$\Lambda^{m}(\Lambda^{j}\Psi_{*})$ sont « projectifs de t.f. » sans
+argument (le crochet se ferme là), en ajoutant « bien sûr, ils seront même
+très spéciaux ! ».}. C'est faux en général : sur $\mathbb{Z}$, le décalage
+donne $\pi_{3}\Lambda^{2}(\Lambda^{2}\Psi_{*}) = \pi_{3}\Lambda^{2}K(\mathbb{Z},2)
+\simeq \pi_{1}\Gamma^{2}K(\mathbb{Z},1) \simeq \mathbb{Z}/2$, et déjà
+$\Gamma^{2}\Psi_{*} = \Gamma^{2}K(\mathbb{Z},1)$ a $\pi_{1} =
+\mathbb{Z}/2$\footnote{Le calcul est le nôtre. La suite exacte de foncteurs
+$0 \to \Gamma^{2} \to \otimes^{2} \to \Lambda^{2} \to 0$ (exacte sur les
+modules libres), appliquée à $K(\mathbb{Z},1)$, donne sur $\pi_{2}$
+l'application $\mathbb{Z} \otimes \mathbb{Z} \to \Gamma^{2}(\mathbb{Z})$,
+$a \otimes b \mapsto ab$, qui est la multiplication par $2$ ; d'où
+$\pi_{1}\Gamma^{2}K(\mathbb{Z},1) = \mathbb{Z}/2$. Le décalage
+$\Lambda^{2}(\Sigma X) \simeq \Sigma^{2}\Gamma^{2}(X)$ (Illusie, Quillen)
+donne ensuite $\pi_{3}\Lambda^{2}K(\mathbb{Z},2) = \mathbb{Z}/2$. Ces
+modules ont des composantes libres et des $\pi_{n}$ non projectifs : ils ne
+sont pas spéciaux.}. En revanche, si $\mathbb{Q} \subset k$, les dérivés de
+$\Lambda^{m}$, $\Gamma^{m} = \operatorname{Sym}^{m}$ en $k[j]$ sont libres
+(nuls ou égaux à $k$ placé en degré $mj$), et l'énoncé de la page est
+correct.
+
+\subsection*{Les invariants numériques}
+
+\textbf{Remarque (pages 11 et 12).} \emph{Un module simplicial spécial sur
+$k$ connexe est déterminé à isomorphisme près par sa fonction de rang
+$f_{L}(n) = \operatorname{rg} L_{n}$ et les rangs $\nu_{j} =
+\operatorname{rg} \pi_{j}(L_{*})$}, du moins lorsque les projectifs de type
+fini sont libres. En effet
+\[
+  \sum_{i \geqslant 1} \mu_{i} \binom{n+1}{i} = f_{L}(n) - \sum_{j \geqslant 0}
+  \nu_{j} \binom{n}{j} \qquad (n \geqslant -1),
+\]
+et les polynômes $P_{i}(n) = \binom{n}{i}$ forment une base du
+$\mathbb{Z}$-module des polynômes à valeurs entières sur les entiers.
+Inversement, étant donnés des entiers $\nu_{j} \geqslant 0$ presque tous nuls
+et une fonction polynomiale $f$ à valeurs entières, écrivons
+$g = f - \sum_{j} \nu_{j} \binom{n}{j} = \sum_{i \geqslant 0} \mu_{i}
+\binom{n+1}{i}$, les $\mu_{i} \in \mathbb{Z}$ étant uniques. Il existe un
+$L_{*}$ strictement spécial de rangs $\nu_{j}$ et de fonction de rang $f$ si
+et seulement si $\mu_{0} = 0$ et $\mu_{i} \geqslant 0$ pour $i \geqslant 1$.
+Comme $\binom{-1}{j} = (-1)^{j}$ et $\binom{0}{i} = \delta_{i0}$, on a
+$\mu_{0} = g(-1)$, et
+\[
+  \mu_{0} = 0 \iff f(-1) = \sum_{j} (-1)^{j} \nu_{j} ,
+\]
+le second membre étant la caractéristique d'Euler — une jolie forme de
+l'égalité entre caractéristique d'Euler des composantes et de l'homologie.
+
+\pagerange{13}{21}
+\section*{Seconde rédaction : la $\partial$-perfection, et le cas principal (pages 13 à 21)}
+
+\subsection*{Définitions}
+
+La page 13 reprend tout sur un papier différent, en recommençant la
+numérotation. Les notions sont celles de SGA 6 (complexes pseudo-cohérents,
+parfaits, strictement parfaits) transportées par Dold–Kan.
+
+\textbf{Définition 1.} \emph{$L_{*}$ est $\partial$-pseudo-cohérent (resp.
+strictement $\partial$-pseudo-cohérent, $\partial$-parfait, strictement
+$\partial$-parfait) si $N(L_{*})$ est pseudo-cohérent (resp. un complexe de
+projectifs de type fini, parfait, un complexe borné de projectifs de type
+fini).}
+
+\textbf{Proposition 1 (page 13).}
+\begin{itemize}
+\item[a), b)] \emph{$L_{*}$ est strictement $\partial$-pseudo-cohérent si et
+seulement si les $L_{n}$ (ou les $N_{n}$) sont projectifs de type fini ;
+strictement $\partial$-parfait si de plus $N_{n} = 0$ sauf pour un nombre
+fini de $n$.}
+\item[c)] \emph{$L_{*}$ est strictement $\partial$-parfait si et seulement
+s'il est extension successive finie de modules
+$\Lambda^{i}\Psi_{*} \otimes_{k} M_{i}$, à $M_{i}$ projectifs de type fini,
+et l'on peut ranger ces extensions par $i$ croissant} : c'est la filtration
+bête de $N(L_{*})$ par les degrés $\leqslant i$, de gradués
+$N_{i}[i]$\footnote{La page écrit $\Lambda^{i}\Psi_{\bullet}
+\otimes_{\mathbb{Z}} M_{i}$, avec $\Psi$ sur $\mathbb{Z}$ ; c'est le même
+objet que $\Lambda^{i}\Psi_{*k} \otimes_{k} M_{i}$.}. \emph{Si $k$ est
+connexe, il revient au même de demander que les $L_{n}$ soient projectifs de
+type fini et que $n \mapsto \operatorname{rg} L_{n}$ soit polynomiale pour
+$n$ grand}\footnote{Complément écrit en oblique dans la marge, relié à « ou
+encore » ; la page ajoute « si on veut $k$ noeth. ou simplement \ldots », mot
+illisible. L'hypothèse de connexité est la nôtre ; la noethérianité n'est
+pas utile, puisque $\operatorname{rg} L_{n} = \sum_{m} \binom{n}{m}
+\operatorname{rg} N_{m}$.}.
+\item[d)] \emph{Si $k$ est noethérien, $L_{*}$ est $\partial$-pseudo-cohérent
+si et seulement si les $\pi_{n}(L_{*})$ sont de type fini ; c'est le cas en
+particulier si les $L_{n}$ sont de type fini.}
+\item[e)] \emph{Si $k$ est noethérien régulier de dimension finie, et si les
+$L_{n}$ sont de type fini et la fonction $n \mapsto \operatorname{rg}_{K}
+(L_{n} \otimes_{k} K)$ est polynomiale pour tout corps résiduel $K$, de degré
+borné, alors $L_{*}$ est $\partial$-parfait.} Le degré du polynôme est alors
+le plus grand $N$ tel que $N_{N}(L_{*}) \otimes K \neq 0$ ; ses coefficients
+dans la base des $\binom{n}{i}$ sont les $\operatorname{rg}_{K}
+N_{i}(L_{*}) \otimes K$, fonctions constructibles sur $\operatorname{Spec}
+k$.\footnote{La page énonce d) et e) avec « ssi ». La pseudo-cohérence et la
+perfection ne dépendent que de la classe de quasi-isomorphisme de
+$N(L_{*})$ : le module simplicial de complexe normalisé $F
+\xrightarrow{\mathrm{id}} F$, $F$ libre de rang infini, est
+$\partial$-parfait sans que ses composantes soient de type fini. Nous avons
+gardé les deux implications vraies. La condition « de degré borné » est
+ajoutée : sans elle, $N(L_{*})$ pourrait n'être borné en aucun point
+uniforme ; les pages disent que les coefficients sont constructibles, ce qui
+la donne sur un noethérien. La fin de la page 14 est en partie illisible.}
+\end{itemize}
+
+\emph{NB (page 14).} Sur un anneau noethérien non régulier, la condition de
+e) ne suffit plus : sur $k = k_{0}[\varepsilon]/(\varepsilon^{2})$, le
+module simplicial constant de valeur $k_{0}$ satisfait la condition de rangs
+mais $k_{0}$ n'est pas un $k$-module parfait\footnote{L'exemple est le nôtre ;
+la page dit seulement que la condition est « nécessaire, mais pas suffisante ».
+Elle n'est d'ailleurs pas non plus nécessaire, pour la raison dite à la
+note précédente.}. La condition nécessaire et suffisante, plus subtile, est
+l'existence d'un quasi-isomorphisme $L'_{*} \to L_{*}$ de source strictement
+$\partial$-parfaite ; on peut le prendre surjectif lorsque $N(L_{*})$ est
+borné à composantes de type fini\footnote{La page affirme « De plus, alors
+$L'_{\bullet} \to L_{\bullet}$ épi » sans restriction ; une source bornée ne
+peut se surjecter sur un complexe non borné.}.
+
+En marge, verticalement : « Stabilité des notions par extensions, produits
+\ldots ».
+
+\subsection*{Le cas d'un anneau principal}
+
+Une théorie de dévissage des $L_{*}$ strictement $\partial$-pseudo-cohérents
+n'est possible que si l'on en a une pour les complexes de chaînes, « ce qui
+n'est guère le cas que si $k$ est principal (ou Dedekind à la
+rigueur\ldots) ». Supposons donc $k$ principal ; notons $\mathfrak{B}$
+l'ensemble des diviseurs non nuls de $k$, i.e. des idéaux propres non nuls.
+
+\textbf{Théorème (pages 15 et 16).} \emph{Tout $L_{*}$ strictement
+$\partial$-pseudo-cohérent sur $k$ principal est isomorphe à un produit
+\[
+  L_{*} \simeq \prod_{i \geqslant 1} (\Lambda^{i}\Phi_{*})^{\mu_{i}} \times
+  \prod_{j \geqslant 0} (\Lambda^{j}\Psi_{*})^{\nu_{j}} \times
+  \prod_{\substack{i \geqslant 1 \\ \ell \in \mathfrak{B}}}
+  \Phi(i,\ell)^{\rho_{i,\ell}},
+\]
+où, pour chaque $i$, les $\rho_{i,\ell}$ sont presque tous nuls, et
+$\Phi(i,\ell) = \Phi(i,n)$ pour un générateur $n$ de $\ell$. Si l'on exige
+que, pour chaque $i$, les $\ell$ tels que $\rho_{i,\ell} \neq 0$ forment une
+chaîne pour la divisibilité, les entiers sont uniquement déterminés :}
+\begin{itemize}
+\item[a)] \emph{les $\ell$ avec leurs multiplicités $\rho_{i,\ell}$ sont les
+facteurs invariants de la torsion de $\pi_{i-1}(L_{*})$ ;}
+\item[b)] \emph{$\nu_{i} = \operatorname{rg} \pi_{i}(L_{*})$ ;}
+\item[c)] \emph{$\mu_{i} = \operatorname{rg} B_{i-1} - \rho_{i}$, où
+$\rho_{i} = \sum_{\ell} \rho_{i,\ell}$ ;}
+\item[d)] \emph{$\operatorname{rg} Z_{i} = \mu_{i+1} + \rho_{i+1} + \nu_{i}$
+et $\operatorname{rg} N_{i} = \mu_{i+1} + \rho_{i+1} + \nu_{i} + \mu_{i} +
+\rho_{i}$} ($B$, $Z$, $N$ désignant ceux de $N(L_{*})$)\footnote{La page
+omet $\mu_{i}$ dans la seconde formule de d) ; c) l'impose, puisque
+$\operatorname{rg} N_{i} = \operatorname{rg} Z_{i} + \operatorname{rg}
+B_{i-1}$. La normalisation par une chaîne est essentielle à l'unicité :
+pour $a$, $b$ premiers entre eux, $\Phi(i,a) \times \Phi(i,b) \simeq
+\Lambda^{i}\Phi_{*} \times \Phi(i,ab)$, la forme de Smith de
+$\operatorname{diag}(a,b)$ étant $\operatorname{diag}(1,ab)$. La page écrit
+« multiplicités des diviseurs élémentaires » ; ce sont, dans cette
+normalisation, les facteurs invariants.}.
+\end{itemize}
+\emph{$L_{*}$ est strictement $\partial$-parfait si et seulement si le nombre
+total de facteurs est fini ; il est $\partial$-parfait si et seulement si les
+facteurs $\Lambda^{j}\Psi_{*}$ et $\Phi(i,\ell)$ sont en nombre
+fini}\footnote{La page écrit « (str.) $\partial$-parfait ssi le nb de
+facteurs non nuls est fini ». Pour « parfait » sans « strictement », les
+facteurs contractiles $\Lambda^{i}\Phi_{*}$ peuvent être en nombre infini.}.
+
+\emph{Démonstration.} Par Dold–Kan, c'est un énoncé sur un complexe de
+chaînes $N$ à composantes libres de type fini. Les $B_{i-1}$, sous-modules de
+libres, sont libres, donc $N_{i} \simeq Z_{i} \oplus B_{i-1}$ et $N$ est
+produit de complexes $K_{i} : B_{i-1} \hookrightarrow Z_{i-1}$ en degrés $i$,
+$i-1$. Soit $\overline{B}_{i-1} \subset Z_{i-1}$ l'image réciproque de la
+torsion de $H_{i-1}$ ; $Z_{i-1}/\overline{B}_{i-1}$ est sans torsion de type
+fini, donc libre, d'où $K_{i} \simeq (B_{i-1} \hookrightarrow
+\overline{B}_{i-1}) \oplus (\text{libre de rang } \nu_{i-1} \text{ en degré }
+i-1)$. Enfin l'inclusion $B_{i-1} \hookrightarrow \overline{B}_{i-1}$, de
+même rang et de conoyau $\operatorname{Tors} H_{i-1}$, se met sous forme de
+Smith : somme de complexes $k \xrightarrow{m_{\alpha}} k$, les $m_{\alpha}$
+définis à une unité près et pris croissants pour la divisibilité ; ceux qui
+sont des unités donnent les $(\Lambda^{i}\Phi_{*})^{\mu_{i}}$, les autres les
+$\Phi(i,\ell)$\footnote{Pages 16 à 18. La page écrit
+« $Q_{i}/B_{i} \simeq H_{i-1}$ » pour $Z_{i-1}/B_{i-1}$ ; nous avons rétabli
+les indices.}.
+
+\textbf{Les briques de torsion.} $\Phi(i,n)$ est une extension
+\[
+  0 \to \Lambda^{i-1}\Psi_{*} \to \Phi(i,n) \to \Lambda^{i}\Psi_{*} \to 0,
+\]
+déduite de l'extension $\Lambda^{i}\Phi_{*}$ par la multiplication par $n$
+sur $\Lambda^{i-1}\Psi_{*}$ (page 21) :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+0 \arrow[r] & \Lambda^{i-1}\Psi_{*} \arrow[r] \arrow[d, "n"] & \Lambda^{i}\Phi_{*} \arrow[r] \arrow[d] & \Lambda^{i}\Psi_{*} \arrow[r] \arrow[d, "\mathrm{id}"] & 0 \\
+0 \arrow[r] & \Lambda^{i-1}\Psi_{*} \arrow[r] & \Phi(i,n) \arrow[r] & \Lambda^{i}\Psi_{*} \arrow[r] & 0
+\end{tikzcd}
+
+et $\pi_{j}(\Phi(i,n))$ est $k/(n)$ pour $j = i-1$, nul sinon.
+
+\textbf{Remarques (pages 18 et 19).}
+1) La fonction de rang de $\Phi(i,n)$ est celle de $\Lambda^{i}\Phi_{*}$,
+$\binom{n+1}{i}$. Donc, si $L_{*}$ est strictement $\partial$-parfait,
+\[
+  \operatorname{rg} L_{n} = \sum_{i \leqslant n+1} (\mu_{i} + \rho_{i})
+  \binom{n+1}{i} + \sum_{0 \leqslant j \leqslant n} \nu_{j} \binom{n}{j} .
+\]
+2) $L_{*}$ est donc connu, à isomorphisme non unique près, quand on connaît
+les $\pi_{i}(L_{*})$ à isomorphisme près — c'est-à-dire les $\nu_{i}$ et les
+$\rho_{i+1,\ell}$ — et la fonction $f_{L}$ pour $n$ grand, qui donne les
+$\mu_{i} + \rho_{i}$\footnote{La page dit « le nombre $\rho_{i+1}$ de ses
+diviseurs de torsion » ; le nombre seul ne suffit pas ($\Phi(i,2)$ et
+$\Phi(i,3)$ sur $\mathbb{Z}$ ont mêmes invariants numériques), il faut les
+$\rho_{i+1,\ell}$. Dans la formule de $f_{L}$ qu'elle écrit ensuite, la page
+a $\binom{n}{i}$ au lieu du $\binom{n+1}{i}$ de 1), et la parenthèse n'est pas
+refermée.}.
+2 bis) $L_{*}$ est projectif (dans la catégorie des modules simpliciaux) si et
+seulement s'il n'a que des facteurs $(\Lambda^{i}\Phi_{*})^{\mu_{i}}$ et
+$(\Lambda^{0}\Psi_{*})^{\nu_{0}} = k^{\nu_{0}}$ — c'est le lemme 1 ; et
+$L_{*} \otimes_{k} K$ ($K$ corps des fractions) est flasque, i.e. les
+$\pi_{n}(L_{*})$ sont de torsion, si et seulement s'il n'a aucun facteur
+$\Lambda^{j}\Psi_{*}$\footnote{La page numérote deux fois « 2) ». Elle écrit
+« plat (projectif) », « plat » étant une lecture incertaine. Dans l'ajout
+entouré sur $L_{*} \otimes K$, le mot qui dit ce qu'on demande est
+illisible ; « flasque » est notre restitution, la seule qui rende
+l'équivalence vraie.}.
+
+3) La catégorie additive des $L_{*}$ strictement $\partial$-parfaits est donc
+déterminée par les morphismes entre indécomposables, qu'on peut réduire à
+deux types en admettant $n$ unité : $\Phi(i,n)$ ($i \geqslant 1$) et
+$\Lambda^{j}\Psi_{*}$ ($j \geqslant 0$).
+
+\subsection*{Les morphismes entre briques}
+
+En repassant aux complexes de chaînes : un morphisme $\Phi(i,n) \to L_{*}$
+est un couple $(x, y) \in N_{i} \times N_{i-1}$ avec $dx = ny$ ; si
+$N_{i-1}$ est sans torsion, $y$ est déterminé par $x$, et
+\[
+  \operatorname{Hom}(\Phi(i,n), L_{*}) \simeq \{ x \in N_{i}(L_{*}) \mid
+  dx \in n\, N_{i-1}(L_{*}) \}, \qquad
+  \operatorname{Hom}(\Lambda^{i}\Psi_{*}, L_{*}) \simeq Z_{i}(N(L_{*})) .
+\]
+D'où le tableau (pages 20 et 21), pour $n$, $m$ non nuls :
+\[
+\begin{aligned}
+\operatorname{Hom}(\Phi(i,n), \Phi(j,m)) &\simeq
+  \begin{cases}
+    n'k \simeq k, \ n' = n/(m,n) & \text{si } j = i, \\
+    k & \text{si } j = i+1, \\
+    0 & \text{sinon} ;
+  \end{cases} \\
+\operatorname{Hom}(\Phi(i,n), \Lambda^{j}\Psi_{*}) &\simeq k \text{ si } j = i,
+  \ 0 \text{ sinon} ; \\
+\operatorname{Hom}(\Lambda^{i}\Psi_{*}, \Phi(j,n)) &\simeq k \text{ si } j = i+1,
+  \ 0 \text{ sinon} ; \\
+\operatorname{Hom}(\Lambda^{i}\Psi_{*}, \Lambda^{j}\Psi_{*}) &\simeq k \text{ si }
+  j = i, \ 0 \text{ sinon}.
+\end{aligned}
+\]
+Pour $j = i+1$, le générateur est le composé $\Phi(i,n) \to
+\Lambda^{i}\Psi_{*} \to \Phi(i+1,m)$ ; $\operatorname{End}(\Phi(i,n)) =
+k \cdot \mathrm{id}$ ; $\operatorname{Hom}(\Lambda^{i}\Phi_{*},
+\Lambda^{i+1}\Phi_{*}) = k \cdot (\wedge T)$ ; $\operatorname{Hom}(\Lambda^{i}\Phi_{*},
+\Lambda^{i}\Psi_{*})$ est engendré par la projection canonique, et
+$\operatorname{Hom}(\Lambda^{i}\Psi_{*}, \Lambda^{i+1}\Phi_{*})$ par
+l'inclusion canonique. Pour $L_{*}$ strictement $\partial$-parfait,
+$\operatorname{Hom}(\Lambda^{i}\Psi_{*}, L_{*}) \simeq k^{\mu_{i+1} +
+\rho_{i+1} + \nu_{i}}$\footnote{Le cas $j = i$ de la première ligne : « $\{\xi
+\in k \mid m\xi \in nk\} = n'k$ », avec « où $n' = n/(m,n)$ » ajouté à droite,
+lecture incertaine — c'est bien la valeur exacte. Le générateur de
+$\operatorname{Hom}(\Lambda^{i}\Phi_{*}, \Lambda^{i+1}\Phi_{*})$ est lu
+« $T_{\wedge}$ » avec doute.}.
+
+\pagerange{22}{27}
+\section*{L'axiomatisation (pages 22 à 27)}
+
+« En résumé », la page 22 refait ces calculs sans modules : dans la catégorie
+$k$-linéaire de tous les modules simpliciaux, les strictement
+$\partial$-parfaits forment une sous-catégorie additive $\mathcal{C}_{0}$,
+qui contient le complexe $\mathbb{C}^{\bullet}$ et satisfait :
+\begin{itemize}
+\item[(a)] \emph{$\mathbb{C}^{\bullet}$, augmenté par $\Psi^{0}$, est
+acyclique dans la catégorie abélienne ambiante ;}
+\item[(b)] \emph{$\operatorname{Hom}(\mathbb{C}^{i}, \mathbb{C}^{j})$ est
+libre de rang $1$, de base $\mathrm{id}$, si $j = i$, de base $d^{i}$ si
+$j = i+1$, et nul sinon ;}
+\item[(c)] \emph{la classe $e_{i}$ de l'extension
+$0 \to \Psi^{i-1} \to \mathbb{C}^{i-1} \to \Psi^{i} \to 0$ est une base de
+$\operatorname{Ext}^{1}_{\mathcal{C}_{0}}(\Psi^{i}, \Psi^{i-1})$.}
+\end{itemize}
+Ici $\Psi^{i} = \operatorname{Ker}(\mathbb{C}^{i} \to \mathbb{C}^{i+1})
+\simeq \operatorname{Coker}(\mathbb{C}^{i-2} \to \mathbb{C}^{i-1})$ pour
+$i \geqslant 1$\footnote{La page 22 indexe autrement : elle écrit $\Phi^{i}$
+pour notre $\mathbb{C}^{i}$ et $\Psi^{i}$ pour notre $\Psi^{i+1}$, avec la
+suite $0 \to \Psi^{i-1} \to \Phi^{i} \to \Psi^{i} \to 0$ ; nous avons tout
+réindexé selon la convention que les pages adoptent elles-mêmes à partir de
+la page 51. Elle pose aussi « $\Psi^{0} \simeq \Phi^{0}$ » et, en conséquence,
+$\operatorname{Hom}(\Psi^{0}, \Phi^{0}) = k$ de base $\mathrm{id}$ : cela
+reviendrait à n'avoir rien en degré $-1$ et contredit l'acyclicité (a), et
+dans le modèle simplicial c'est faux ($\operatorname{Hom}(\Lambda^{1}\Psi_{*},
+\Lambda^{1}\Phi_{*}) = 0$). Nous ne l'avons pas gardé. Les deux hypothèses
+cerclées (c), de la page 22 et de la page 23, sont réunies ici ; la
+première est inachevée.}. On en tire $\operatorname{Hom}(\Psi^{i},
+\Psi^{j}) = k\,\mathrm{id}$ ou $0$, $\operatorname{Hom}(\mathbb{C}^{i},
+\Psi^{j}) = k$ si $j = i+1$ (la projection) et $0$ sinon,
+$\operatorname{Hom}(\Psi^{i}, \mathbb{C}^{j}) = k$ si $j = i$ (l'inclusion)
+et $0$ sinon.
+
+On définit alors $\Phi(i,n)$, pour $n \in k$ non nul et $i \geqslant 1$,
+comme l'extension de $\Psi^{i}$ par $\Psi^{i-1}$ déduite de
+$\mathbb{C}^{i-1}$ par $n \cdot \mathrm{id}_{\Psi^{i-1}}$, de classe
+$e_{i,n} = n e_{i}$ ; $\Phi(i,1) = \mathbb{C}^{i-1}$. Le calcul de
+$\operatorname{Hom}(\Phi(i,n), \Phi(i,m))$ (pages 22 et 23) est le plus
+instructif. Un morphisme $\alpha$ induit des homothéties $p$ sur le
+sous-objet $\Psi^{i-1}$ et $q$ sur le quotient $\Psi^{i}$, puisque tout
+morphisme $\Psi^{i-1} \to \Psi^{i}$ est nul ; un couple $(p, q)$ provient d'un
+$\alpha$ si et seulement si $p_{*}(e_{i,n}) = q^{*}(e_{i,m})$ dans
+$\operatorname{Ext}^{1}(\Psi^{i}, \Psi^{i-1})$, i.e. $(pn - qm)\, e_{i} = 0$,
+i.e., par (c), $pn = qm$. Si $k$ est principal et $m' = m/(m,n)$,
+$n' = n/(m,n)$, les solutions sont $p = t m'$, $q = t n'$, $t \in k$, et
+$\alpha$ est unique puisque $\operatorname{Hom}(\Psi^{i}, \Psi^{i-1}) = 0$ :
+\[
+  \operatorname{Hom}(\Phi(i,n), \Phi(i,m)) \simeq k ,
+\]
+ce qui redonne le $n'k$ de la page 20, la composante de degré $i$ étant
+$q = tn'$\footnote{La page lit « $q = t\,m'$ » ; la relation $q/p = n'/m'$
+qu'elle vient d'écrire demande $t\,n'$, comme le transcripteur l'a relevé.
+Les lettres $m$ et $n$ glissent l'une sur l'autre sur toute la page 23.}.
+Les pages 24 à 26 établissent de même, à partir de (a) à (c) seuls,
+$\operatorname{Hom}(\Phi(i,n), \Phi(i-1,m)) = 0$,
+$\operatorname{Hom}(\Phi(i,n), \Psi^{j}) = k$ si $j = i$ et $0$ sinon,
+$\operatorname{Hom}(\Psi^{i}, \Phi(j,n)) = k$ si $j = i+1$ et $0$ sinon —
+le tableau des pages 20 et 21\footnote{Ces trois pages sont surchargées ; les
+diagrammes ont été retouchés et les indices récrits, et la prose qui les
+relie se lit mal. Nous ne donnons que les résultats, qui coïncident avec le
+calcul direct.}. Enfin (d), page 26 : si $k$ est principal, tout objet est
+somme finie de $\Phi(i,n)$ et de $\Psi^{j}$.
+
+La conclusion, page 27 : si $\mathcal{A}$ est la sous-catégorie pleine des
+$\Phi(i,n)$ et des $\Psi^{j}$, la catégorie $\mathcal{C}_{0}$ est connue à
+équivalence près dès qu'on connaît $\mathcal{A}$ avec sa structure
+« ½ additive » — c'est-à-dire préadditive, enrichie en groupes abéliens :
+$\mathcal{C}_{0}$ en est l'enveloppe additive, la catégorie des sommes
+formelles finies avec des matrices pour morphismes. « La chose intéressante :
+faire \ldots\ la $\otimes$-structure et les opérations $\Gamma^{i}$ » — c'est
+le programme du reste du dossier.
+
+\pagerange{28}{35}
+\section*{Reconstruire une catégorie à partir d'une sous-catégorie pleine (pages 28 à 35)}
+
+Soient $\mathcal{C}$ une catégorie, $\mathcal{A}$ une sous-catégorie pleine,
+et $\rho : \mathcal{C} \to \widehat{\mathcal{A}} =
+\operatorname{Fonct}(\mathcal{A}^{\circ}, \mathrm{Ens})$ le foncteur
+$X \mapsto \operatorname{Hom}(-, X)|_{\mathcal{A}}$ (Yoneda restreint).
+
+\textbf{Densité.} \emph{Si tout objet $X$ de $\mathcal{C}$ est la colimite
+canonique $\varinjlim_{(Y \to X) \in \mathcal{A}/X} Y$ — si $\mathcal{A}$ est
+dense dans $\mathcal{C}$ —, $\rho$ est pleinement fidèle} (et
+réciproquement). Si $\mathcal{C}$ est additive, $\rho$ se factorise par la
+catégorie $\widehat{\mathcal{A}}_{ab}$ des foncteurs additifs
+$\mathcal{A}^{\circ} \to \mathrm{Ab}$, et comme l'oubli
+$\widehat{\mathcal{A}}_{ab} \to \widehat{\mathcal{A}}$ est fidèle, $\rho_{ab}$
+est encore pleinement fidèle. C'est le cas en particulier si tout objet de
+$\mathcal{C}$ est somme finie d'objets de $\mathcal{A}$ : c'est alors le
+lemme de Yoneda additif\footnote{La page énonce l'hypothèse sous la forme
+« tout objet $X$ est $\varinjlim$ dans $\mathcal{C}$ d'un diagramme de
+$\mathcal{A}$ (ce qui revient au même, $X \simeq \varinjlim_{\mathcal{A}/X}
+Y$) ». Ce n'est pas la même chose, et la première forme ne suffit pas : tout
+groupe abélien est colimite de copies de $\mathbb{Z}$, mais le foncteur
+$\mathrm{Ab} \to \widehat{\{\mathbb{Z}\}}$ (l'ensemble sous-jacent muni de
+l'action multiplicative des entiers) n'est pas plein — il y a des
+applications homogènes non additives $\mathbb{Z}^{2} \to \mathbb{Z}$. C'est
+la colimite canonique qu'il faut. Le crochet qui suit dit « somme d'objets
+de $\mathcal{C}$ », pour « de $\mathcal{A}$ ».}.
+
+\textbf{Image essentielle.} $\rho$ préserve toutes les limites existantes.
+Si $\mathcal{A}$ est dense, si tout objet de $\mathcal{C}$ est une limite
+d'un type donné $\mathcal{T}$ d'objets de $\mathcal{A}$, et si
+$\mathcal{C}$ a les limites de ce type, alors $\rho$ est une équivalence de
+$\mathcal{C}$ sur la sous-catégorie pleine de $\widehat{\mathcal{A}}$ (resp.
+$\widehat{\mathcal{A}}_{ab}$) formée des limites de type $\mathcal{T}$ de
+représentables. Exemple : $\mathcal{C}$ additive, tout objet somme finie
+d'objets de $\mathcal{A}$ ; alors $\mathcal{C}$ est équivalente à la
+catégorie des foncteurs additifs $\mathcal{A}^{\circ} \to \mathrm{Ab}$
+isomorphes à une somme finie de représentables. Si $\mathcal{A}$ n'a qu'un
+objet $A$, d'anneau d'endomorphismes $k$, on retrouve, par $X \mapsto
+\operatorname{Hom}(A, X)$, les $k$-modules à droite libres de type fini
+(pages 29 et 30).
+
+\textbf{Le cas dual, et une équivalence remarquable.} Dualement,
+$r : \mathcal{C}^{\circ} \to \operatorname{Fonct}(\mathcal{A}, \mathrm{Ens})$,
+$X \mapsto \operatorname{Hom}(X, -)|_{\mathcal{A}}$, est pleinement fidèle si
+$\mathcal{A}$ est codense, et transforme colimites en limites. D'où la
+
+\textbf{Proposition (page 31).} \emph{Soient $\mathcal{C}$ une catégorie
+(resp. additive), $\mathcal{A}$ une sous-catégorie pleine dense et codense,
+$\mathcal{T}$, $\mathcal{T}'$ deux ensembles de petites catégories. On
+suppose $\mathcal{C}$ stable par limites de type $\mathcal{T}$ et colimites
+de type $\mathcal{T}'$, et tout objet de $\mathcal{C}$ à la fois limite de
+type $\mathcal{T}$ et colimite de type $\mathcal{T}'$ d'objets de
+$\mathcal{A}$. Alors $\mathcal{C}$ est équivalente à la sous-catégorie pleine
+$\widehat{\mathcal{A}}_{\mathcal{T}}$ de $\widehat{\mathcal{A}}$ (resp.
+$\widehat{\mathcal{A}}_{ab}$) des limites de type $\mathcal{T}$ de
+représentables, et $\mathcal{C}^{\circ}$ à la sous-catégorie pleine de
+$\operatorname{Fonct}(\mathcal{A}, \mathrm{Ens})$ (resp. des foncteurs
+additifs vers $\mathrm{Ab}$) des limites indexées par les
+$\tau^{\circ}$, $\tau \in \mathcal{T}'$, de coreprésentables.}\footnote{La
+page ne suppose pas explicitement $\mathcal{A}$ dense et codense ; voir la
+note précédente. Pour le second membre, elle écrit « la cat.\ opposée de la
+sous-catégorie pleine de $\widehat{\mathcal{A}^{\circ}}$ qui sont
+$\varinjlim$ de type $\mathcal{T}'$ de foncteurs représentables » : la
+colimite est alors à prendre dans la catégorie opposée, ce qui est une
+limite dans $\operatorname{Fonct}(\mathcal{A}, \mathrm{Ens})$ ; nous l'avons
+écrit ainsi pour lever l'ambiguïté.}
+
+On obtient en particulier une équivalence
+$\widehat{\mathcal{A}}_{\mathcal{T}} \simeq
+(\widehat{\mathcal{A}^{\circ}}_{\mathcal{T}'})^{\circ}$ qui « exige d'être
+définie intrinsèquement » en termes de $\mathcal{A}$, $\mathcal{T}$,
+$\mathcal{T}'$. Quand $\mathcal{A}$ n'a qu'un objet, d'anneau $k$, et que
+$\mathcal{T} = \mathcal{T}'$ est l'ensemble des catégories discrètes finies,
+c'est l'antiéquivalence entre $k$-modules libres de type fini à gauche et à
+droite, $M \mapsto M^{\vee}$ : la dualité des modules libres comme cas
+d'une dualité générale entre préfaisceaux et copréfaisceaux. On reconnaît la
+dualité d'Isbell\footnote{Isbell (\emph{Adequate subcategories}, 1960) a
+introduit la densité (« adequacy ») et l'adjonction entre préfaisceaux et
+copréfaisceaux qui porte son nom ; Grothendieck pouvait connaître ce
+travail, mais les pages ne le citent pas, et l'équivalence de la page 32
+est obtenue ici par une voie propre, en passant par $\mathcal{C}$.}.
+
+\textbf{Foncteurs sur $\mathcal{C}$.} Si $\mathcal{C}$ est additive et tout
+objet somme finie d'objets de $\mathcal{A}$, alors pour toute catégorie
+additive $\mathcal{C}'$
+\[
+  \operatorname{Fonct}_{add}(\mathcal{C}, \mathcal{C}') \xrightarrow{\ \sim\ }
+  \operatorname{Fonct}_{\frac{1}{2}add}(\mathcal{A}, \mathcal{C}')
+\]
+(propriété universelle de l'enveloppe additive)\footnote{Page 33. La page
+énonce d'abord, plus généralement, que la restriction des foncteurs qui
+commutent aux colimites de type $\mathcal{T}'$ est pleinement fidèle, avec
+en marge « à vérifier » ; c'est vrai dès que ces colimites sont celles qui
+exhibent la densité, ce qui est le cas des sommes finies dans le cas
+additif. La page écrit « $\underline{\mathrm{Hom}}(C', C')$ » pour
+$\underline{\mathrm{Hom}}(\mathcal{C}, \mathcal{C}')$.}. Appliquée au
+plongement de $\mathcal{C}$ dans les foncteurs additifs
+$\mathcal{A}^{\circ} \to \mathrm{Ab}$, d'image essentielle $D$, elle donne un
+accouplement
+\[
+  D \times \operatorname{Fonct}_{\frac{1}{2}add}(\mathcal{A}, \mathcal{C}')
+  \to \mathcal{C}', \qquad (F, G) \mapsto F \otimes_{\mathcal{A}} G ,
+\]
+le produit tensoriel de foncteurs (la cofin $\int^{a} F(a) \otimes G(a)$) :
+si $\mathcal{A}$ n'a qu'un objet, $F$ est un $k$-module à droite libre de
+type fini, $G$ un objet de $\mathcal{C}'$ muni d'une action de $k$, et
+$F \otimes G$ le produit tensoriel ordinaire. Le plongement dual dans les
+foncteurs additifs $\mathcal{A} \to \mathrm{Ab}$, d'image $D'$, donne de même
+$D'^{\circ} \times \operatorname{Fonct}_{\frac{1}{2}add}(\mathcal{A},
+\mathcal{C}') \to \mathcal{C}'$, noté $\underline{\operatorname{Hom}}_{\mathcal{A}}(F,
+G)$ — la fin $\int_{a} \underline{\operatorname{Hom}}(F(a), G(a))$\footnote{La
+page note ces deux accouplements $F \otimes_{C} G$ et
+$\underline{\mathrm{Hom}}_{C}(F, G)$, avec l'indice $\mathcal{C}$ ; ils ne
+dépendent que de $\mathcal{A}$. Les noms de cofin et de fin sont modernes.}.
+
+\pagerange{35}{38}
+\section*{Le programme : les cochaînes comme foncteur (pages 35 à 38)}
+
+Soit $\mathcal{S}$ une catégorie, $\mathcal{C}$ une sous-catégorie pleine de
+la catégorie des groupes abéliens de $\mathcal{S}$, stable par sommes
+directes, et $\mathcal{A} \subset \mathcal{C}$ telle que tout objet de
+$\mathcal{C}$ soit somme finie d'objets de $\mathcal{A}$. À un objet $X$ de
+$\mathcal{S}$ on associe le foncteur additif
+\[
+  F_{X} : \mathcal{C} \to \mathrm{Ab}, \qquad M \mapsto
+  \operatorname{Hom}_{\mathcal{S}}(X, M),
+\]
+d'où $\mathcal{S}^{\circ} \to \operatorname{Fonct}_{add}(\mathcal{C},
+\mathrm{Ab}) \simeq \operatorname{Fonct}_{\frac{1}{2}add}(\mathcal{A},
+\mathrm{Ab})$ : $F_{X}$ est connu dès qu'on connaît sa restriction à
+$\mathcal{A}$.
+
+Le cas visé est $\mathcal{S} = \widehat{\Delta}$, les ensembles simpliciaux,
+avec deux choix (page 36) : 1°) $\mathcal{C}$ formée des modules simpliciaux
+$\partial$-parfaits, $\mathcal{A}$ des $\Phi(i,n)$ et des
+$\Psi^{j}$\footnote{En marge de 1°) : « $\mathcal{C}$ abélienne ». Le dernier
+symbole de la ligne, lu « $\Lambda T_{\bullet}$ », est surchargé ; la page
+36 est d'une lecture très incertaine dans toute sa prose.} ; 2°)
+$\mathcal{C}_{0}$, additive mais non abélienne, formée de ceux dont les
+$\pi_{n}$ sont sans torsion (« apériodiques », lecture incertaine), et
+$\mathcal{A}_{0}$ des $\mathbb{C}^{i}$ et des $\Psi^{j}$. Le cadre doit être
+étudié sur un anneau de Dedekind, puis sur un anneau $k$ quelconque (page
+37).
+
+Pour un ensemble simplicial $X$, on a $F_{X}(M) = \operatorname{Hom}(k[X],
+M)$, et par Dold–Kan
+\[
+  F_{X}(\mathbb{C}^{i}) \simeq C^{i}(X; k), \qquad F_{X}(\Psi^{i}) \simeq
+  Z^{i}(X; k),
+\]
+cochaînes et cocycles normalisés ; $F_{X}(\mathbb{C}^{\bullet})$ est le
+complexe de cochaînes normalisées $C^{\bullet}(X; k)$\footnote{La page dit
+seulement que la connaissance des homomorphismes de $X$ dans les modules
+parfaits « connaît le complexe de cochaînes « non dég. » $C^{*}(X, k)$ ». Le
+calcul est le nôtre : un morphisme de complexes de $N(k[X])$ vers le disque
+$k \xrightarrow{\mathrm{id}} k$ en degrés $i+1$, $i$ est une forme linéaire
+sur $N_{i}(k[X])$, la composante de degré $i+1$ s'en déduisant.}. Le propos
+principal est de reconstituer sur ce foncteur la structure multiplicative,
+c'est-à-dire les homomorphismes
+\[
+  F(M) \otimes_{k} F(N) \to F(M \otimes N), \qquad \Gamma^{i}F(M) \to
+  F(\Gamma^{i}M),
+\]
+en tant que structures sur le complexe $C^{\bullet}(X; k)$. Les premiers
+viennent de la diagonale de $X$ et du produit tensoriel degré par degré ; les
+seconds de ce que $f \mapsto (x \mapsto f(x)^{[i]})$ est une application
+polynomiale de degré $i$ de $F(M)$ dans $F(\Gamma^{i}M)$, donc une
+application linéaire de $\Gamma^{i}F(M)$\footnote{Explication nôtre ; la
+page ne dit pas d'où viennent ces homomorphismes. C'est exactement le
+mécanisme — une loi polynome de degré $i$ est une application linéaire
+partant de $\Gamma^{i}$ — que les pages 74 à 85 axiomatisent.}.
+
+Il faudrait voir, poursuit la page 38, si en caractéristique $0$ cette
+structure est déterminée par le complexe de De Rham–Sullivan de $X$, et dans
+le cas d'un $k$ quelconque par les complexes de De Rham à puissances
+divisées ; « il est clair » que $C^{\bullet}$ muni des structures envisagées
+« rectifie » ces complexes. « Enfin, il faut voir dans quelle mesure
+$C^{*}$ avec ses structures multiplicatives à p.d.\ permet de reconstituer le
+type d'homotopie du $X_{\bullet}$ dont il provient. (Enfin, bien sûr,
+faisceautiser et relativiser\ldots\ !!!) »\footnote{Les formes polynomiales
+de Sullivan ont été publiées dans \emph{Infinitesimal computations in
+topology} (1977), après des prépublications des années précédentes. La
+question finale a reçu une réponse bien plus tard, sous une autre forme :
+Mandell (\emph{Cochains and homotopy type}, 2006) montre que les cochaînes
+entières, comme $E_{\infty}$-algèbre, déterminent le type d'homotopie des
+espaces nilpotents de type fini. Grothendieck ne pouvait évidemment pas le
+connaître ; rapprocher sa « structure multiplicative à p.d. » d'une
+structure $E_{\infty}$ est notre lecture, non la sienne.}
+
+\pagerange{39}{46}
+\section*{Le complexe universel (pages 39 à 46)}
+
+\subsection*{La catégorie engendrée par un complexe}
+
+Soient $\mathbb{K}$ une catégorie $k$-additive (additive, avec
+$k \to \operatorname{End}(\mathrm{id}_{\mathbb{K}})$) et
+$\mathbb{C}^{0} \xrightarrow{d^{0}} \mathbb{C}^{1} \xrightarrow{d^{1}}
+\cdots$ un complexe de cochaînes de $\mathbb{K}$. On suppose :
+\begin{itemize}
+\item[a)] $\operatorname{Hom}(\mathbb{C}^{i}, \mathbb{C}^{j})$ est libre de
+rang $1$ de base $\mathrm{id}$ si $j = i$, de base $d^{i}$ si $j = i+1$, et
+nul sinon ;
+\item[b)] tout objet de $\mathbb{K}$ est somme finie de $\mathbb{C}^{i}$.
+\end{itemize}
+La sous-catégorie pleine $\mathcal{A}$ des $\mathbb{C}^{i}$ n'est pas
+additive mais est $k$-linéaire ; $\mathbb{K}$ en est l'enveloppe additive.
+Un tel couple existe « par construction abstraite », et se réalise de deux
+façons (pages 39 et 40) :
+\begin{itemize}
+\item comme la catégorie des complexes de chaînes bornés de $k$-modules,
+acycliques, dont les $L_{n}$ et $Z_{n}$ sont libres de type fini, avec pour
+$\mathbb{C}^{i}$ le disque $k \xrightarrow{\mathrm{id}} k$ en degrés $i+1$,
+$i$ ; $d^{i}$ est caractérisé par sa composante de degré $i+1$,
+$\mathrm{id}_{k}$ ;
+\item comme la catégorie $\mathcal{C}$ des modules simpliciaux flasques et
+strictement $\partial$-parfaits, sommes finies des $\mathbb{C}^{i} =
+\Lambda^{i+1}\Phi_{*}$, avec $d^{i} = \wedge T$ ; il revient au même de
+demander que les $L_{n}$ soient libres de type fini de rang constant, de
+fonction de rang polynomiale, et $L_{*}$ flasque, du moins si les
+projectifs de type fini sont libres\footnote{La page 40 (moitié supérieure
+barrée, mais lisible) ne pose pas l'hypothèse ; une note oblique de la marge,
+très incertaine, dit « On suppose $k$ anneau de Dedekind (proj.\ de type
+fini sur $k$ libres par le principal) ». C'est elle qui donne
+l'équivalence de a) et b).}.
+\end{itemize}
+Le complexe $\mathbb{C}^{\bullet}$ « jouera le rôle du complexe de cochaînes
+\emph{universel} ».
+
+\textbf{Proposition 1 (page 40).} \emph{Pour toute catégorie $k$-additive
+$\mathcal{B}$, la restriction et l'évaluation en $\mathbb{C}^{\bullet}$
+donnent des équivalences
+\[
+  \operatorname{Fonct}_{k}(\mathbb{K}, \mathcal{B}) \xrightarrow{\ \sim\ }
+  \operatorname{Fonct}_{k}(\mathcal{A}, \mathcal{B}) \xrightarrow{\ \sim\ }
+  \mathcal{B}^{\bullet}, \qquad F \mapsto F(\mathbb{C}^{\bullet}).
+\]}
+La première est la propriété de l'enveloppe additive ; la seconde dit qu'un
+foncteur $k$-linéaire sur $\mathcal{A}$ est une suite d'objets $B^{i}$ et de
+flèches $B^{i} \to B^{i+1}$, de composés nuls puisque
+$\operatorname{Hom}(\mathbb{C}^{i}, \mathbb{C}^{i+2}) = 0$. Autrement dit,
+$\mathbb{K}$ est la catégorie $k$-additive \emph{librement engendrée par un
+complexe de cochaînes}.
+
+\subsection*{Les réalisations de $\mathbb{K}$}
+
+\textbf{Exemple 1 (pages 40 et 41).} Pour $\mathcal{B} = \operatorname{Mod}_{k}$,
+les foncteurs représentables donnent un foncteur pleinement fidèle
+\emph{contravariant}
+\[
+  \alpha^{\bullet} : \mathbb{K}^{\circ} \hookrightarrow
+  \operatorname{Mod}_{k}^{\bullet}, \qquad x \mapsto
+  \operatorname{Hom}(x, \mathbb{C}^{\bullet}),
+\]
+avec $\alpha^{\bullet}(\mathbb{C}^{i}) = (k \xrightarrow{\mathrm{id}} k)$ en
+degrés $i$, $i+1$ ; son image essentielle est formée de complexes de
+cochaînes bornés, libres de type fini en chaque degré, acycliques, à
+cocycles libres de type fini\footnote{La fin de la description, page 41, est
+en écriture très rapide et n'est lue qu'en partie ; nous l'avons complétée
+par l'image évidente des $\mathbb{C}^{i}$.}.
+
+\textbf{Exemple 2, et sa correction (pages 41 et 42).} Le foncteur covariant
+$x \mapsto (\operatorname{Hom}(\mathbb{C}^{i}, x))_{i}$ ne donne pas un
+complexe de chaînes acyclique : $\operatorname{Hom}(\mathbb{C}^{i},
+\mathbb{C}^{0})$ n'est non nul que pour $i = 0$, et l'image de
+$\mathbb{C}^{0}$ est $k$ en degré $0$ seul. « Ceci n'est pas bon \ldots\
+l'irrégularité $i \geqslant 0$ », note la marge\footnote{Un paragraphe de la
+page 42 qui présentait ce foncteur comme exemple est annulé de longs traits
+obliques, et la note marginale citée est lue en partie.}. La correction est
+dans une autre note marginale : on pose
+\[
+  \alpha_{n}(x) = \operatorname{Hom}(\mathbb{C}^{n-1}, x) \quad (n \geqslant 1),
+  \qquad \alpha_{0}(x) = \operatorname{Hom}(x, \mathbb{C}^{0})^{\vee},
+\]
+ce qui fait de $\alpha_{\bullet}(x)$ un complexe de chaînes, avec
+$\alpha_{\bullet}(\mathbb{C}^{i})$ le disque en degrés $i+1$, $i$ pour tout
+$i \geqslant 0$. La justification est la
+
+\textbf{Proposition 2 (page 42).} \emph{Pour $n \geqslant 0$, l'accouplement
+\[
+  \operatorname{Hom}(\mathbb{C}^{n}, x) \times \operatorname{Hom}(x,
+  \mathbb{C}^{n+1}) \to \operatorname{Hom}(\mathbb{C}^{n}, \mathbb{C}^{n+1})
+  \simeq k, \qquad (u, v) \mapsto vu,
+\]
+est une dualité parfaite, fonctorielle en $x \in \mathbb{K}$.} Par additivité
+il suffit de le voir pour $x = \mathbb{C}^{j}$, où les deux membres sont nuls
+sauf pour $j \in \{n, n+1\}$, et où l'accouplement envoie $(\mathrm{id},
+d^{n})$, resp. $(d^{n}, \mathrm{id})$, sur $d^{n}$. Ainsi
+$\alpha_{\bullet}(x) \simeq \alpha^{\bullet}(x)^{\vee}$, et la dualité
+$M \mapsto M^{\vee}$ des modules libres de type fini échange les deux
+réalisations : $\alpha_{\bullet}$ est une équivalence de $\mathbb{K}$ sur une
+catégorie $\mathbb{K}_{\bullet}$ de complexes de chaînes, et
+$\mathbb{K}_{\bullet} \simeq (\mathbb{K}^{\bullet})^{\circ}$ par
+$\vee$\footnote{La page 42 porte aussi « $M \in \operatorname{Ob}
+\mathbb{K}$ » dans l'énoncé de la proposition 2, la variable s'appelant $x$
+ailleurs ; et les exposants des $\mathbb{C}$ y sont petits et incertains.
+La lettre $\mathbb{K}$ (un K à haste doublée) tient, à partir de la page 42,
+la place du $\mathcal{C}$ de la page 41 ; nous écrivons $\mathbb{K}$
+partout.}.
+
+\textbf{Proposition 3 (pages 43 et 44) : la formule de reconstruction.}
+Pour un complexe de cochaînes $K^{\bullet}$ de $k$-modules libres de type
+fini et $C^{\bullet} \in \mathcal{B}^{\bullet}$, notons
+$\underline{\operatorname{Hom}}^{\bullet}_{k}(K^{\bullet}, C^{\bullet})$
+l'objet de $\mathcal{B}$ (s'il existe) qui représente
+$b \mapsto \operatorname{Hom}_{\mathcal{B}^{\bullet}}(b \otimes_{k}
+K^{\bullet}, C^{\bullet})$ ; c'est le noyau de $\delta : \prod_{i}
+\operatorname{Hom}_{k}(K^{i}, C^{i}) \to \prod_{i}
+\operatorname{Hom}_{k}(K^{i}, C^{i+1})$, $\delta(u) = du - ud$. \emph{Pour
+tout foncteur $k$-linéaire $F : \mathbb{K} \to \mathcal{B}$ et tout
+$x \in \mathbb{K}$, cet objet existe pour $K^{\bullet} = \alpha^{\bullet}(x)$
+et l'on a un isomorphisme bifonctoriel
+\[
+  F(x) \xrightarrow{\ \sim\ } \underline{\operatorname{Hom}}^{\bullet}_{k}
+  \bigl(\alpha^{\bullet}(x),\, F(\mathbb{C}^{\bullet})\bigr).
+\]}
+La flèche provient de l'évaluation $F(x) \otimes \operatorname{Hom}(x,
+\mathbb{C}^{\bullet}) \to F(\mathbb{C}^{\bullet})$ ; les deux membres sont
+additifs en $x$, et pour $x = \mathbb{C}^{i}$ un morphisme
+$b \otimes \alpha^{\bullet}(\mathbb{C}^{i}) \to C^{\bullet}$ est une flèche
+$b \to C^{i}$, la composante de degré $i+1$ s'en déduisant ; d'où
+$\underline{\operatorname{Hom}}^{\bullet}_{k}(\alpha^{\bullet}(\mathbb{C}^{i}),
+C^{\bullet}) = C^{i} = F(\mathbb{C}^{i})$. C'est l'inverse explicite de
+l'équivalence de la proposition 1 — une formule de Yoneda, ou d'extension de
+Kan, pour la catégorie librement engendrée par un complexe\footnote{La page
+écrit $F \in \underline{\operatorname{Hom}}_{k\text{-lin}}(\mathcal{C},
+\mathcal{B})$ et $x \in \operatorname{Ob} \mathbb{K}$, les deux lettres
+désignant la même catégorie. La conclusion de la démonstration, page 44,
+est en partie illisible (« on voit de suite que \ldots\ est \ldots,
+évidemment, cqfd »).}.
+
+\textbf{Exemple 3 et proposition 5 (pages 45 et 46) : la version
+cosimpliciale.} La correspondance de Dold–Kan vaut dans toute catégorie
+additive karoubienne $\mathcal{B}$ : $\mathcal{B}_{\bullet} \simeq
+\mathcal{B}_{*}$ et, dualement, $\mathcal{B}^{\bullet} \simeq
+\mathcal{B}^{*}$ (objets cosimpliciaux)\footnote{En marge : « NB le
+foncteur DP \ldots\ (additives karoubiennes) », « $\mathrm{ND} =$ normalisé
+\ldots\ ; $\mathrm{DP} =$ Dold-Puppe ». C'est bien l'hypothèse qu'il faut :
+sans idempotents scindés, le foncteur $\mathrm{DP}$ reste pleinement fidèle
+mais cesse d'être essentiellement surjectif.}. On a donc quatre réalisations
+de $\mathbb{K}$, reliées par $\mathrm{DP}$, sa quasi-inverse
+$\mathrm{ND}$ (normalisation) et la dualité :
+
+\begin{tikzcd}[column sep=large]
+\mathbb{K}_{\bullet} \arrow[rr, "\mathrm{DP}"] \arrow[dd, leftrightarrow, "\vee"'] & & \mathbb{K}_{*} \arrow[dd, leftrightarrow, "\vee"] \\
+& \mathbb{K} \arrow[ul, "\alpha_{\bullet}"] \arrow[ur, "\alpha_{*}"'] \arrow[dl, "\alpha^{\bullet}"] \arrow[dr, "\alpha^{*}"'] & \\
+\mathbb{K}^{\bullet} \arrow[rr, "\mathrm{DP}"'] & & \mathbb{K}^{*}
+\end{tikzcd}
+
+où $\alpha^{\bullet}$, $\alpha^{*}$ et les dualités sont
+contravariantes\footnote{Sur la page, les flèches $\mathrm{ND}$ retour sont
+dessinées, et les flèches contravariantes marquées d'un petit rond ; nous
+n'avons gardé que les flèches $\mathrm{DP}$, qui sont des équivalences, et
+signalons ici la variance. Une longue note marginale fixe une convention
+d'écriture, $C_{\bullet}$, $C_{*}$, $C^{\bullet}$, $C^{*}$ pour les quatre
+images d'un objet $C$, dont la fin n'est pas sûre.}. Ainsi
+$\alpha_{*}(\mathbb{C}^{i}) = \mathrm{DP}(\mathbb{C}^{i}_{\bullet}) \simeq
+\Lambda^{i+1}\Phi_{*}$ — c'est la réalisation simpliciale de la page 40 — et
+$\alpha^{*}(\mathbb{C}^{i}) \simeq \Lambda^{i+1}\check{\Phi}^{*}$, son dual
+cosimplicial. Appliquant $\mathrm{DP}$ à $\mathbb{C}^{\bullet}$ dans
+$\mathbb{K}$ lui-même, on obtient un \emph{objet cosimplicial universel}
+$\mathbb{C}^{*} = \mathrm{DP}(\mathbb{C}^{\bullet})$ de $\mathbb{K}$, et :
+
+\textbf{Proposition 5.} \emph{Si $\mathcal{B}$ est $k$-additive karoubienne,
+$F \mapsto F(\mathbb{C}^{*})$ est une équivalence
+$\operatorname{Fonct}_{k}(\mathbb{K}, \mathcal{B}) \xrightarrow{\sim}
+\mathcal{B}^{*}$ ; sans l'hypothèse karoubienne, c'est encore un foncteur
+pleinement fidèle.}
+
+La page 46 s'arrête sur « On a un isom.\ canonique bifonctoriel en $F$ et
+$x$ », sans suite, et la « Proposition 4 » de la page 45 est illisible au-delà
+de son numéro\footnote{On attend, par la proposition 3, l'isomorphisme
+$F(x) \simeq$ « $\underline{\operatorname{Hom}}$ cosimplicial » de
+$\alpha^{*}(x)$ dans $F(\mathbb{C}^{*})$ ; c'est une conjecture de notre part
+sur ce que la page allait écrire. La page 47 est blanche.}.
+
+\pagerange{48}{56}
+\section*{Classes de suites exactes et propriété universelle (pages 48 à 56)}
+
+\subsection*{Les définitions}
+
+Soit $\mathcal{P}$ la catégorie des complexes de chaînes $L_{\bullet}$ de
+$k$-modules libres de type fini en chaque degré, nuls sauf en un nombre fini
+de degrés\footnote{La page 48 dit « complexes de chaînes $L_{\bullet}$ de
+$\mathcal{C}$ » ; il ne peut s'agir que de $k$-modules. Les pages 48 à 56
+notent $\mathcal{P}_{\bullet}$ et $\Sigma_{\bullet}$ ; nous omettons
+l'indice.}, et $\Sigma$ la classe des suites $0 \to L' \to L \to L'' \to 0$
+exactes en chaque degré — donc scindées en chaque degré, puisque les $L''_{n}$
+sont libres. $\mathcal{P}$ est muni du complexe $\mathbb{C}^{\bullet}$ (les
+disques) et de $\Sigma$, et l'on va voir qu'il résout un problème universel.
+
+Sur une catégorie additive $\mathcal{B}$, une \emph{classe de suites exactes}
+est un ensemble $\Sigma$ de suites $0 \to A' \xrightarrow{q} A
+\xrightarrow{p} A'' \to 0$ telles que :
+\begin{itemize}
+\item[Sex 1)] $q$ est un noyau de $p$ et $p$ un conoyau de $q$ ;
+\item[Sex 2)] $\Sigma$ est stable par isomorphismes et sommes finies, et
+contient les suites $0 \to A \xrightarrow{\mathrm{id}} A \to 0 \to 0$ et
+$0 \to 0 \to A \xrightarrow{\mathrm{id}} A \to 0$, donc les suites scindées.
+\end{itemize}
+D'où les $\Sigma$-monomorphismes et $\Sigma$-épimorphismes (ceux qui
+s'insèrent dans une suite de $\Sigma$), les morphismes $\Sigma$-stricts
+(composés d'un $\Sigma$-épi et d'un $\Sigma$-mono), les objets
+$\Sigma$-projectifs et $\Sigma$-injectifs, les complexes $\Sigma$-spéciaux
+(dont chaque segment $A \xrightarrow{u} B \xrightarrow{v} C$ se découpe en
+suites de $\Sigma$ par noyaux, images et cohomologie), $\Sigma$-acycliques,
+et les $\Sigma$-résolutions : complexes de cochaînes $\Sigma$-spéciaux en
+degrés $\geqslant 0$, à $H^{i} = 0$ pour $i > 0$\footnote{Page 49, de lecture
+pâle à la fin ; la page écrit « $H^{i} = 0$ pour $i \geqslant 0$ », pour un
+complexe augmenté sans doute ; la page 50 dit « $H^{i}(C^{\bullet}) = 0$ si
+$i > 0$ », que nous suivons.}. Ce sont, à deux axiomes près, les catégories
+exactes de Quillen : manquent la stabilité des $\Sigma$-monos par
+composition — « il faut peut-être exiger qu'un composé de $\Sigma$-monos
+(resp. $\Sigma$-épis) en soit itou », note la page 49 — et la stabilité par
+images directes et réciproques, que la page 59 ajoutera comme axiome
+d)\footnote{Quillen, \emph{Higher algebraic K-theory I} (1973). Grothendieck
+pouvait le connaître ; les pages ne le citent pas, et la notion y est
+construite pour un autre usage.}.
+
+\subsection*{Le théorème}
+
+\textbf{Théorème (page 50).} \emph{Soient $\mathcal{B}$ une catégorie
+$k$-additive karoubienne et $\Sigma$ une classe de suites exactes sur
+$\mathcal{B}$.}
+\begin{itemize}
+\item[a)] \emph{Le foncteur $F \mapsto F(\mathbb{C}^{\bullet})$, de la
+catégorie des foncteurs $k$-linéaires $\mathcal{P} \to \mathcal{B}$ qui
+transforment les suites de $\Sigma$ en suites exactes à gauche (« $\Sigma$-exacts à gauche ») vers $\mathcal{B}^{\bullet}$, est pleinement fidèle ;
+si tout morphisme de $\mathcal{B}$ a un $\Sigma$-noyau, c'est une
+équivalence.}
+\item[b)] \emph{Il induit une équivalence entre les foncteurs qui
+transforment $\Sigma$ en $\Sigma$ et les $\Sigma$-résolutions.}
+\end{itemize}
+
+« Il faudrait prouver le Th », écrit-il ; les pages 51 à 55 le
+font\footnote{La page 50 hésite sur la formulation : « est une équivalence
+de catégories » biffé et remplacé par « est pleinement fidèle », la
+description de l'image essentielle dans a), en écriture très pâle, se lit
+« tels que les $d^{i}$ admettent des $\Sigma$-noyaux ». Nous énonçons a)
+sous la forme que démontre la page 55. La page 51 est barrée d'un long
+trait, mais ses « indications sur dém.\ » sont reprises aux pages 52 à 55.
+En marge de la page 52 : « Non, il faut condition de platitude ? » — doute
+que les pages suivantes ne reprennent pas, et que la démonstration
+ci-dessous, qui n'utilise que l'existence des noyaux, ne nous paraît pas
+rencontrer.}. Trois faits sur $\mathcal{P}$ :
+\begin{itemize}
+\item $\mathbb{C}^{\bullet}$ est une $\Sigma$-résolution de
+$\Psi^{0} = k[0]$, découpée par les suites $0 \to \Psi^{i} \to
+\mathbb{C}^{i} \to \Psi^{i+1} \to 0$, $\Psi^{i} = k[i]$ ;
+\item tout $L \in \mathcal{P}$ est extension successive, par des suites de
+$\Sigma$, d'objets $(\Psi^{i})^{f_{i}}$ : la filtration bête
+$\operatorname{Fil}_{i}(L)_{j} = L_{j}$ pour $j \leqslant i$, $0$ sinon, a
+pour gradués $L_{i}[i] \simeq \Psi^{i} \otimes L_{i}$ ;
+\item les $\mathbb{C}^{i}$ sont $\Sigma$-projectifs (et
+$\Sigma$-injectifs).
+\end{itemize}
+On définit $\rho(F) = F(\mathbb{C}^{\bullet})$ et, pour $C^{\bullet} \in
+\mathcal{B}^{\bullet}$,
+\[
+  \sigma(C^{\bullet})(L) = \underline{\operatorname{Hom}}^{\bullet}_{k}(L^{\bullet},
+  C^{\bullet}), \qquad L^{\bullet} := \operatorname{Hom}(L,
+  \mathbb{C}^{\bullet}) = \alpha^{\bullet}(L),
+\]
+où $L^{i} = \operatorname{Hom}(L, \mathbb{C}^{i}) = L_{i}^{\vee}$ : c'est la
+formule de la proposition 3, définie grâce aux noyaux de $\mathcal{B}$. Le
+foncteur $\sigma(C^{\bullet})$ est exact à gauche sur les suites de $\Sigma$,
+et l'on a une adjonction
+\[
+  \operatorname{Hom}(\rho F, C^{\bullet}) \simeq \operatorname{Hom}(F,
+  \sigma C^{\bullet}),
+\]
+puisqu'un morphisme $F(\mathbb{C}^{\bullet}) \to C^{\bullet}$ s'étend de
+façon unique en des morphismes $L^{\bullet} \otimes F(L) \to C^{\bullet}$
+fonctoriels en $L$. La coünité $\rho\sigma C^{\bullet} \to C^{\bullet}$ est
+un isomorphisme, car $\sigma(C^{\bullet})(\mathbb{C}^{i}) = C^{i}$ : $\sigma$
+est pleinement fidèle (page 53). L'image essentielle de $\sigma$ est formée
+des $F$ pour lesquels l'unité $u : F \to \sigma\rho F$ est un isomorphisme.
+C'est vrai pour $L = \mathbb{C}^{i}$ ; pour $L = \Psi^{i}$, noyau dans
+$\Sigma$ de $\mathbb{C}^{i} \to \mathbb{C}^{i+1}$, l'exactitude à gauche de
+$F$ donne $F(\Psi^{i}) \simeq Z^{i}(F(\mathbb{C}^{\bullet})) \simeq
+\sigma\rho F(\Psi^{i})$ (page 54). Pour $L$ général, on raisonne par
+récurrence sur la longueur : si $L$ est concentré en degrés $[p, p+n]$ et
+$L_{p} \simeq k^{r}$, il y a un diagramme de suites de $\Sigma$
+
+\begin{tikzcd}[column sep=small, row sep=small]
+0 \arrow[r] & (\Psi^{p})^{r} \arrow[r] \arrow[d, no head, "="] & L \arrow[r] \arrow[d] & L' \arrow[r] \arrow[d] & 0 \\
+0 \arrow[r] & (\Psi^{p})^{r} \arrow[r] & (\mathbb{C}^{p})^{r} \arrow[r] & (\Psi^{p+1})^{r} \arrow[r] & 0
+\end{tikzcd}
+
+qui exprime $L$ comme produit fibré de $L'$ (le tronqué, plus court) et de
+$(\mathbb{C}^{p})^{r}$ au-dessus de $(\Psi^{p+1})^{r}$, c'est-à-dire comme
+noyau d'un $\Sigma$-épi $(\mathbb{C}^{p})^{r} \oplus L' \to
+(\Psi^{p+1})^{r}$ ; l'exactitude à gauche de $F$ et de $\sigma\rho F$ et
+l'hypothèse de récurrence concluent. D'où (page 55)
+\[
+  \operatorname{Fonct}_{k, \Sigma\text{-sex}}(\mathcal{P}, \mathcal{B})
+  \xrightarrow{\ \sim\ } \mathcal{B}^{\bullet}
+\]
+si tout morphisme de $\mathcal{B}$ admet un $\Sigma$-noyau. Si l'on suppose
+seulement les noyaux dans $\mathcal{B}^{\bullet}$, l'argument donne encore
+que $\rho$ est pleinement fidèle, $\sigma$ prenant ses valeurs dans les
+foncteurs vers $\widehat{\mathcal{B}}$, et l'on a toujours
+$F(L) \simeq \underline{\operatorname{Hom}}^{\bullet}_{k}(L^{\bullet},
+F(\mathbb{C}^{\bullet}))$. On vérifie enfin que $F$ est $\Sigma$-exact si et
+seulement si $F(\mathbb{C}^{\bullet})$ est une $\Sigma$-résolution : c'est
+b). Exemple : pour $\lambda_{\bullet}$ un complexe de $k$-modules, $L \mapsto
+\operatorname{Hom}(\lambda_{\bullet}, L)$ est exact à gauche, et la formule
+se réduit à l'isomorphisme évident $\operatorname{Hom}(\lambda_{\bullet},
+L) \simeq \operatorname{Hom}(L^{\bullet}, \check{\lambda}_{\bullet})$ (pages
+55 et 56).
+
+\pagerange{57}{64}
+\section*{Caractérisation intrinsèque, et algèbre homologique relative (pages 57 à 64)}
+
+\subsection*{Les conditions a) à e)}
+
+La page 57 recommence : « Construction canonique de $\mathcal{P}$
+($k$-lin.) ». On part d'une catégorie $k$-additive $\mathcal{P} \supset
+\mathbb{K}$, et l'on cherche des conditions qui la déterminent.
+\begin{itemize}
+\item[a)] \emph{Le foncteur covariant $L \mapsto \operatorname{Hom}(L,
+\mathbb{C}^{0})^{\vee}$ est représentable, par un objet $\Psi^{0}$.} Le
+morphisme $\varepsilon : \Psi^{0} \to \mathbb{C}^{0}$ transposé de
+l'accouplement $\operatorname{Hom}(\mathbb{C}^{0}, L) \times
+\operatorname{Hom}(L, \mathbb{C}^{0}) \to k$ vérifie $d^{0}\varepsilon = 0$
+(car pour $u = u' \circ d^{0}$, $vu = (vu')d^{0}$, et $vu' \in
+\operatorname{Hom}(\mathbb{C}^{1}, \mathbb{C}^{0}) = 0$) : $\mathbb{C}^{\bullet}$
+est augmenté, et l'on note $\widetilde{\mathbb{C}}^{\bullet} = (\Psi^{0} \to
+\mathbb{C}^{0} \to \mathbb{C}^{1} \to \cdots)$ le complexe augmenté\footnote{La
+page note $\Phi^{\bullet}$ ce complexe ; voir les conventions. À la page 59,
+les lettres $\Phi$ sont récrites à l'encre foncée sur des $\mathbb{C}$. Dans
+la chaîne de complexes, $\Psi^{0}$ représente bien
+$\operatorname{Hom}(L, \mathbb{C}^{0})^{\vee} = (L_{0}^{\vee})^{\vee} =
+L_{0}$, et c'est $k[0]$.}. $\mathcal{P}_{0}$ est la sous-catégorie des
+sommes $L \oplus (\Psi^{0})^{r}$, $L \in \mathbb{K}$.
+\item[b)] \emph{$\Sigma$ est la classe des suites $0 \to L' \to L \to L''
+\to 0$ qui deviennent exactes par $\operatorname{Hom}(P, -)$ pour $P \in
+\mathcal{P}_{0}$}\footnote{Restitution : la phrase de la page est mutilée
+(« telles que les \ldots\ $\rho \in \mathcal{P}_{0}$ sont exactes \ldots »).
+Avec $P$ parcourant $\mathbb{C}^{i}$ et $\Psi^{0}$, l'exactitude des
+$\operatorname{Hom}(P, -)$ est l'exactitude degré par degré, ce qui donne
+bien la classe $\Sigma$ des pages 48 à 56.}.
+\item[c)] \emph{$\widetilde{\mathbb{C}}^{\bullet}$ est $\Sigma$-acyclique,
+i.e. $\mathbb{C}^{\bullet}$ est une $\Sigma$-résolution de $\Psi^{0}$.}
+\end{itemize}
+Cela donne la « kyrielle » de suites $\Sigma$-exactes $0 \to \Psi^{i} \to
+\mathbb{C}^{i} \to \Psi^{i+1} \to 0$, et tous les morphismes entre $\Psi^{j}$
+et $\mathbb{C}^{i}$ ; si $\mathcal{P}_{1}$ est la sous-catégorie pleine des
+sommes de $\mathbb{C}^{i}$ et de $\Psi^{j}$, le foncteur $L \mapsto
+L_{\bullet} = \operatorname{Hom}(\widetilde{\mathbb{C}}^{\bullet}, L)$ — un
+complexe de chaînes, puisque $\operatorname{Hom}(\mathbb{C}^{n-1}, L) = L_{n}$
+et $\operatorname{Hom}(\Psi^{0}, L) = L_{0}$ dans le modèle — en est un
+plongement pleinement fidèle (page 59). On suppose de plus :
+\begin{itemize}
+\item[d)] \emph{l'image directe d'une suite de $\Sigma$ par un morphisme de
+son premier terme, et son image réciproque par un morphisme vers son dernier
+terme, existent et sont dans $\Sigma$} ; variante : un $\Sigma$-épi, i.e. un
+$u$ tel que les $\operatorname{Hom}(\mathbb{C}^{i}, u)$ soient surjectifs,
+a un noyau ;
+\item[e)] \emph{tout objet de $\mathcal{P}$ est extension successive
+d'objets $\Psi^{i}$}, la filtration devant être canonique.
+\end{itemize}
+Avec d) on construit par extensions successives assez d'objets pour que
+$L \mapsto L_{\bullet}$ soit essentiellement surjectif, et avec e) on conclut
+que $L \mapsto \operatorname{Hom}(\widetilde{\mathbb{C}}^{\bullet}, L)$ est
+une équivalence de $\mathcal{P}$ sur la catégorie des complexes bornés de
+modules libres de type fini\footnote{Page 60. La page décrit l'image
+essentielle comme « les $L_{\bullet}$ tels que les $L_{i}$, $Z_{i}$, $B_{i}$,
+$H_{i}$ soient libres », et la fin de la phrase est illisible. C'est la
+description de la catégorie $\mathcal{Q}$ de la page 62 ; or les extensions
+successives de $\Psi^{i}$ par des suites de $\Sigma$ sont tous les complexes
+bornés de libres de type fini, $\Phi(i,n)$ compris, dont l'homologie n'est
+pas libre. Nous lisons donc $\mathcal{P}$ tout entier ; c'est un doute.}.
+Les notes éparses de la page 58 résument le but : $\operatorname{Fonct}_{\Sigma\text{-ex}}(\mathcal{P},
+\mathcal{B}) \simeq \operatorname{Fonct}_{\Sigma\text{-ex}}(\mathcal{P}_{0},
+\mathcal{B})$ si $\mathcal{B}$ a des $\Sigma$-noyaux, et ces foncteurs
+correspondent aux $\Sigma$-résolutions de $\mathcal{B}$.
+
+\textbf{Remarque (page 61).} \emph{Si $k$ est principal, $\mathcal{P}$ a des
+noyaux et des conoyaux, et le noyau $N \to A$ de tout $A \to B$ est un
+$\Sigma$-mono ; mais un monomorphisme n'est pas en général un $\Sigma$-mono,
+et un bimorphisme n'est pas un isomorphisme.} Le noyau degré par degré est un
+complexe de libres de type fini, et $A_{n}/N_{n}$, sous-module de $B_{n}$, est
+libre, d'où le scindage\footnote{La page pose la question : « est-il vrai
+que si $N$ est le noyau de $A \to B$, alors $N \to A$ est un $\Sigma$-mono
+\ldots ? » ; la réponse est oui, pour la raison dite. Le monomorphisme
+$\mathbb{Z} \xrightarrow{2} \mathbb{Z}$ en degré $0$ n'est pas un
+$\Sigma$-mono.}. Aussi $(\mathcal{P}, \mathbb{C}^{\bullet}, \Sigma)$ n'est
+pas universel tel quel ; il l'est parmi les catégories $k$-additives munies
+d'un complexe $C^{\bullet}$ et d'une classe $\Sigma_{C}$ de suites exactes
+telle que tout morphisme $u : A \to B$ ait un noyau $K$ avec $K \to A$ un
+$\Sigma_{C}$-mono, les morphismes de tels systèmes étant les foncteurs
+$\Sigma$-exacts qui envoient un complexe sur l'autre.
+
+\subsection*{Algèbre homologique relative}
+
+On travaille désormais dans $\mathcal{Q}$ (pages 62 à 64) : la catégorie des
+complexes de chaînes finis de $k$-modules dont les $L_{i}$, $Z_{i}$, $B_{i}$,
+$H_{i}$ sont libres de type fini — les sommes de disques et de sphères —,
+munie de $\Sigma \cap \mathcal{Q}$. Ses $\Sigma$-projectifs sont les objets de
+$\mathcal{P}_{0}$ (sommes de $\mathbb{C}^{i}$ et de $\Psi^{0}$), ses
+$\Sigma$-injectifs ceux de $\mathbb{K}$ (sommes de $\mathbb{C}^{i}$), et il
+y en a assez des deux sortes\footnote{En effet $\operatorname{Hom}(\Psi^{0},
+L) = L_{0}$ est exact sur $\Sigma$, alors que $\operatorname{Hom}(L, \Psi^{0})
+= H_{0}(L)^{\vee}$ ne l'est pas : $\Psi^{0}$ est projectif mais non injectif.
+La page met en garde : $\mathbb{K}$ ne contient pas « assez » de
+$\Sigma$-projectifs, « il faut y rajouter $\Psi^{0}$ ».}. L'algèbre
+homologique relative s'y applique : deux résolutions droites
+$\Sigma$-injectives d'un objet sont homotopes, par une unique classe
+d'homotopie. Les résolutions $\Sigma$-injectives de $\Psi^{0}$ — en termes
+simpliciaux, les résolutions flasques de $k_{*}$ — « donneront, dans un topos
+algébrique, des méthodes de calcul remarquables de la cohomologie à
+coefficients dans $k$ ». Les $\operatorname{Ext}^{i}_{\Sigma}$ calculés par
+résolutions injectives ou projectives coïncident ; pour $i \geqslant 1$ ce
+sont les hyperext usuels, et pour $i = 0$ les morphismes de complexes, i.e.
+les $Z^{0}$ du complexe des $\operatorname{Hom}$\footnote{Page 63, phrase de
+lecture incertaine. L'identification aux hyperext est juste parce que les
+objets de $\mathcal{P}$ sont des complexes bornés de libres, donc
+K-projectifs.}.
+
+Pour $F : \mathcal{Q} \to \mathcal{B}$ $k$-additif, on note
+$\mathcal{H}^{i}(F) = \mathrm{R}^{i}F(\Psi^{0})$ ; comme
+$\mathbb{C}^{\bullet}$ est une résolution $\Sigma$-injective de $\Psi^{0}$,
+\[
+  \mathcal{H}^{i}(F) = H^{i}(F(\mathbb{C}^{\bullet})), \qquad
+  \mathrm{R}F(\Psi^{0}) \simeq F(\mathbb{C}^{\bullet}) \quad \text{(dans la
+  catégorie dérivée)}.
+\]
+Sur les foncteurs $\Sigma$-exacts à gauche, qui correspondent aux complexes
+de $\mathcal{B}^{\bullet}$ par le théorème de la page 50, $F \mapsto
+F(\Psi^{0})$ devient $C^{\bullet} \mapsto Z^{0}(C^{\bullet}) =
+H^{0}(C^{\bullet})$, dont les dérivés « sauf erreur » sont les
+$H^{i}(C^{\bullet})$ : le calcul ci-dessus le confirme.
+
+\pagerange{64}{73}
+\section*{Structures multiplicatives (pages 64 à 73)}
+
+\subsection*{Le produit tensoriel des modèles}
+
+Sur les réalisations simpliciales $\mathcal{P}_{*} \supset \mathcal{Q}_{*}
+\supset \mathcal{P}_{0*} \supset \mathbb{K}_{*}$ il y a le produit
+tensoriel degré par degré, $(L_{*} \otimes M_{*})_{n} = L_{n} \otimes
+M_{n}$, avec ses contraintes d'associativité, de commutativité, et l'unité
+$\Psi^{0}_{*} = k_{*}$. $\mathbb{K}_{*}$ en est un idéal : le produit d'un
+module flasque par un autre est flasque. $\mathcal{P}_{0*}$ et
+$\mathcal{Q}_{*}$ sont stables, car $\Psi^{0} \otimes \Psi^{0} \simeq
+\Psi^{0}$ et
+\[
+  \Psi^{i} \otimes \Psi^{j} \simeq \Psi^{i+j} \oplus (\text{un objet de }
+  \mathbb{K}) ,
+\]
+puisque $K(k,i) \otimes K(k,j)$ est spécial, à homotopie $k$ en degré $i+j$
+seulement (Eilenberg–Zilber)\footnote{Ceci suppose que les projectifs de type
+fini soient libres, pour que la partie flasque soit dans $\mathbb{K}$ ; c'est
+le cas sur un anneau principal, cadre de ces pages.}. On transporte ces
+structures aux autres réalisations ; sur les complexes de chaînes on note
+$*$ le produit transporté, $\mathbb{C}^{i}_{\bullet} * \mathbb{C}^{j}_{\bullet}
+= N(\mathbb{C}^{i}_{*} \otimes \mathbb{C}^{j}_{*})$, « pour éviter des
+confusions » : ce n'est pas le produit tensoriel usuel des complexes, auquel
+il n'est relié que par les applications d'Eilenberg–Zilber et
+d'Alexander–Whitney\footnote{Le nom moderne est la structure monoïdale
+transportée par Dold–Kan, $N$ étant monoïdal lax par Eilenberg–Zilber et
+oplax par Alexander–Whitney (Schwede–Shipley, 2003). La page 67 écrit
+$\mathbb{C}^{i}_{*} \otimes \mathbb{C}^{j}_{*} = \Lambda^{i}\Phi_{*} \otimes
+\Lambda^{j}\Phi_{*}$, lecture incertaine des exposants ; avec
+$\mathbb{C}^{i} = \Lambda^{i+1}\Phi_{*}$ ce sont $\Lambda^{i+1}$,
+$\Lambda^{j+1}$.}.
+
+\subsection*{Foncteurs multiplicatifs}
+
+Soient $\mathcal{B}$, $\mathcal{B}'$ deux catégories $k$-additives munies d'un
+produit tensoriel $k$-bilinéaire avec contraintes d'associativité, d'unité et
+de commutativité. Une \emph{structure multiplicative} sur un foncteur
+$k$-additif $F : \mathcal{B}' \to \mathcal{B}$ est la donnée de morphismes
+fonctoriels $u_{X,Y} : F(X) \otimes F(Y) \to F(X \otimes Y)$ et d'un
+isomorphisme $\mathbf{1}_{\mathcal{B}} \to F(\mathbf{1}_{\mathcal{B}'})$,
+compatibles aux trois contraintes (page 65, trois diagrammes) : c'est un
+foncteur monoïdal symétrique lax, à unité forte\footnote{Les trois
+diagrammes de la page sont ceux qu'on écrit aujourd'hui : hexagone
+d'associativité, triangle d'unité, carré de symétrie. La page demande que
+le morphisme d'unité soit un isomorphisme ; la définition moderne de
+« lax » ne le demande pas.}. $F(\mathbf{1})$ devient une $k$-algèbre
+commutative de $\mathcal{B}$, et $F$ transforme anneaux en anneaux ; les
+$\otimes$-catégories $k$-additives forment une 2-catégorie.
+
+Prenons $\mathcal{B}' = \mathbb{K}$. Un foncteur $k$-linéaire $F :
+\mathbb{K} \to \mathcal{B}$ « s'identifie à » un complexe $C^{\bullet} =
+F(\mathbb{C}^{\bullet})$ de $\mathcal{B}$ (proposition 1 de la page 40) ;
+une structure multiplicative sur $F$ est donc ce qu'il faut entendre par
+structure multiplicative sur $C^{\bullet}$ — on dira « demi-simpliciale »,
+pour ne pas prêter à confusion. Par bilinéarité, il suffit de la donner sur
+les $\mathbb{C}^{i}$ : par la proposition 3, ce sont des morphismes
+\[
+  C^{i} \otimes_{\mathcal{B}} C^{j} \longrightarrow
+  \underline{\operatorname{Hom}}^{\bullet}_{k}\bigl(\alpha^{\bullet}(\mathbb{C}^{i}
+  * \mathbb{C}^{j}),\, C^{\bullet}\bigr), \quad \text{i.e.} \quad
+  (C^{i} \otimes_{\mathcal{B}} C^{j}) \otimes_{k} \alpha^{\bullet}(\mathbb{C}^{i}
+  * \mathbb{C}^{j}) \longrightarrow C^{\bullet}
+\]
+dans $\mathcal{B}^{\bullet}$, compatibles aux différentielles quand $i$ et
+$j$ varient ; sous forme cosimpliciale, des morphismes
+$(C^{i} \otimes C^{j}) \otimes (\Lambda^{i+1}\check{\Phi}^{*} \otimes
+\Lambda^{j+1}\check{\Phi}^{*}) \to \mathrm{DP}(C^{\bullet})$ compatibles aux
+opérations cosimpliciales pour $i$, $j$ fixés et aux différentielles quand
+$i$, $j$ varient (pages 67 et 68), plus les compatibilités d'unité,
+d'associativité et de commutativité, qui « devraient s'expliciter de façon
+particulièrement triviale »\footnote{La page 67 note $\mathbb{F}^{ij}$ ces
+morphismes (préfixe de lecture douteuse) et écrit
+$(\mathbb{C}^{i}_{\bullet} * \mathbb{C}^{j}_{\bullet})^{\vee}$ là où nous
+écrivons $\alpha^{\bullet}(\mathbb{C}^{i} * \mathbb{C}^{j})$, qui est le
+même objet par la proposition 2. La page 66 qualifie $\mathbb{K}$ de
+« catégorie des coquilles de chaînes des résolutions injectives »,
+lecture incertaine.}. Pour $\mathcal{B} = \operatorname{Mod}_{k}$ et
+$F = F_{X}$, c'est le produit des cochaînes de $X$ avant toute formule
+d'Alexander–Whitney\footnote{Remarque nôtre : $F_{X}(\mathbb{C}^{i}) \otimes
+F_{X}(\mathbb{C}^{j}) \to F_{X}(\mathbb{C}^{i} \otimes \mathbb{C}^{j})$ est le
+produit des cochaînes via la diagonale de $X$, à valeurs dans un module
+simplicial et non encore ramené à $C^{i+j}$. Une structure de ce genre,
+« toutes les formules à la fois », est ce qu'on code aujourd'hui par une
+action d'opérade $E_{\infty}$ sur les cochaînes ; le rapprochement est le
+nôtre.}.
+
+\subsection*{L'unité, et l'extension aux foncteurs exacts à gauche}
+
+\emph{Remarque (page 68) : $\mathbb{K}$ n'a pas d'unité pour $*$ !} On ne
+peut donc exprimer, en restant dans $\mathbb{K}$, la compatibilité aux
+unités. On passe à $\mathcal{P}_{0}$ ou $\mathcal{Q}$, dont les foncteurs
+$k$-additifs $\Sigma$-exacts à gauche vers $\mathcal{B}$ correspondent, par
+$F \mapsto F(\mathbb{C}^{\bullet})$, aux complexes de $\mathcal{B}$ dont les
+$d^{i}$ ont des noyaux. Tout $L$ de $\mathcal{Q}$ (ou $\mathcal{P}_{0}$) se
+plonge par des suites de $\Sigma$ dans des objets de $\mathbb{K}$, $0 \to L
+\to I \to J$, et $F(L) \simeq \mathrm{R}^{0}F(L) \simeq \operatorname{Ker}(F(I)
+\to F(J))$. Pour étendre la structure multiplicative de $\mathbb{K}$, on veut
+factoriser
+\[
+  F(X) \otimes_{\mathcal{B}} F(Y) \to F(I) \otimes F(J') \to F(I * J')
+\]
+par $F(X * Y) \hookrightarrow F(I * J')$ — c'est un monomorphisme, car $*$
+transforme un couple de $\Sigma$-monos en un $\Sigma$-mono, et $F$ les
+$\Sigma$-monos en monos. La page met un « ? » sur cette factorisation, et
+avec raison : il faut que le composé s'annule après $F(I * J') \to F(\cdot)$,
+ce qui demande que $\otimes_{\mathcal{B}}$ préserve les noyaux en jeu, une
+condition de platitude sur $\mathcal{B}$\footnote{Page 70, d'écriture rapide
+et en partie illisible ; le diagnostic est le nôtre. La page affirme ensuite
+que, la factorisation obtenue, elle est fonctorielle et satisfait
+l'associativité et la commutativité dès que la restriction à $\mathbb{K}$ y
+satisfait. Les deux suites de $\Sigma$ de la page 69 et le diagramme de la
+page 70 ont des termes surchargés.}. Reste la donnée d'unité,
+$\mathbf{1}_{\mathcal{B}} \to F(\Psi^{0}) \simeq Z^{0}(C^{\bullet})$ : une
+augmentation $\mathbf{1}_{\mathcal{B}} \to C^{0}$ de composé nul avec
+$d^{0}$, qui fait de $F(\Psi^{0})$ une $k$-$\otimes$-algèbre commutative ;
+une note verticale de la marge ajoute qu'on peut se passer de l'existence de
+$\operatorname{Ker}(d^{0})$ en le disant ainsi.
+
+\subsection*{Le cup-produit}
+
+\emph{Applications (page 71).} Toute construction universelle dans
+$\mathcal{P}_{*}$ qui n'utilise que la structure $k$-linéaire et les
+produits tensoriels se transporte à un complexe $C^{\bullet}$ muni d'une
+structure multiplicative. Ainsi : $\operatorname{Tot}(\mathbb{C}^{\bullet} *
+\mathbb{C}^{\bullet})$ est, comme $\mathbb{C}^{\bullet}$, une résolution
+$\Sigma$-injective de $\Psi^{0}$ dans $\mathcal{P}_{0}$, d'où un morphisme
+$\operatorname{Tot}(\mathbb{C}^{\bullet} * \mathbb{C}^{\bullet}) \to
+\mathbb{C}^{\bullet}$ unique à homotopie près, et en composant
+\[
+  C^{\bullet} \otimes_{\mathcal{B}} C^{\bullet} = F(\mathbb{C}^{\bullet})
+  \otimes F(\mathbb{C}^{\bullet}) \to F(\operatorname{Tot}(\mathbb{C}^{\bullet}
+  * \mathbb{C}^{\bullet})) \to F(\mathbb{C}^{\bullet}) = C^{\bullet}
+\]
+un produit défini à homotopie près, associatif, commutatif (« attention aux
+signes ! ») et unitaire à homotopie près. Si $\mathcal{B}$ est abélienne,
+$H^{*}(C^{\bullet})$ devient une $\otimes$-algèbre graduée commutative au
+sens gradué\footnote{L'hypothèse « $\mathcal{B}$ abélienne » est ajoutée :
+il faut des noyaux et des conoyaux pour parler de $H^{*}(C^{\bullet})$, et le
+produit induit passe par l'application de Künneth $H^{*} \otimes H^{*} \to
+H^{*}(C^{\bullet} \otimes C^{\bullet})$. La page dit « $\otimes$-$\mathcal{B}$-alg.\ graduée (lecture incertaine) sur $H^{*}(C^{\bullet})$, avec les propriétés
+habituelles ».} : pour $C^{\bullet} = C^{\bullet}(X; k)$, c'est l'anneau de
+cohomologie et son cup-produit, retrouvés par l'argument des modèles
+acycliques — à ceci près que les « modèles » sont ici les
+$\mathbb{C}^{i}$.
+
+\subsection*{Le complexe de De Rham à puissances divisées}
+
+\emph{Ex 2 (pages 72 et 73).} Le complexe de De Rham à puissances divisées
+est un objet bigradué de $\mathcal{Q}_{*}$, avec une structure d'algèbre
+bigraduée ; $F$ le transforme en un objet de $\mathcal{B}$, mais on ne peut
+dire encore que le complexe de De Rham associé à $F$ est stable par les
+opérations « sans introduire la structure p.d.\ sur $F$ ». Sa composante de
+poids $n$, $\mathrm{DR}^{n}_{*}$ — en degré $i$, $\Gamma^{n-i}\Phi_{*} \otimes
+\Lambda^{i}\Psi_{*}$ —, est une résolution de $k_{*} = \Psi^{0}_{*}$, flasque
+(i.e. $\Sigma$-injective) sauf en son degré maximum $n$, où l'on trouve
+$\Psi^{n}_{*} = \Lambda^{n}\Psi_{*}$ : une résolution $\Sigma$-injective
+tronquée. Il y a un unique morphisme à homotopie près $\mathrm{DR}^{n}_{*}
+\to \mathbb{C}^{\bullet}_{*}$ en degrés $\leqslant n$ — c'est le théorème de
+la page 3 —, et le transformé de $\mathrm{DR}^{n}_{*}$ par $F$ est homotope,
+par une homotopie canonique, au tronqué naïf de $C^{\bullet}$ en degrés
+$\leqslant n$\footnote{La page 72 est d'une écriture rapide, et la syntaxe de
+la longue phrase qui commence par « Le fait que » ne se laisse pas établir ;
+nous n'en donnons que ce que les formules et les mots lisibles assurent.
+Le rapprochement avec le théorème de la page 3 est le nôtre : les termes
+$\Gamma^{n-i}\Phi_{*} \otimes \Lambda^{i}\Psi_{*}$ et l'isomorphisme $u_{n}$
+sur $\Lambda^{n}\Psi_{*}$ sont les mêmes.}. « Il y a donc un complexe de De
+Rham-Sullivan si $k$ de car.\ $0$ » : c'est la dernière ligne de la page 73,
+dont le reste est blanc.
+
+\pagerange{74}{85}
+\section*{Catégories polynomiales (pages 74 à 85)}
+
+\subsection*{Axiomes}
+
+Une \emph{catégorie polynomiale} est une catégorie $\mathbf{P}$ munie d'une
+sous-catégorie $\mathbf{P}_{1}$, non pleine en général, ayant les mêmes
+objets — ses flèches sont dites « de degré $1$ » —, avec :
+\begin{itemize}
+\item[a)] $\mathbf{P}$ a des produits finis ;
+\item[b)] les produits de $\mathbf{P}$ sont des produits dans
+$\mathbf{P}_{1}$ : $(v, w) : Z \to X \times Y$ est de degré $1$ si et
+seulement si $v$ et $w$ le sont ; l'objet final $0$ de $\mathbf{P}$ est dans
+$\mathbf{P}_{1}$, et $X \to 0$ est de degré $1$ ;
+\item[c)] $\mathbf{P}_{1}$ est additive.
+\end{itemize}
+Alors chaque objet est un objet groupe abélien de $\mathbf{P}$, et
+$\mathbf{P}(X, Y) = \operatorname{Hom}_{\mathbf{P}}(X, Y)$ est un groupe
+abélien, fonctoriel en $X$ par des homomorphismes, mais pas en $Y$ :
+\[
+  (f + g) \circ h = f \circ h + g \circ h, \qquad \text{mais en général}
+  \qquad f \circ (g + h) \neq f \circ g + f \circ h .
+\]
+Le monoïde multiplicatif $(\mathbb{Z}, \cdot)$ opère sur $\mathbf{P}(X, Y)$
+par $\mu_{n}(f) = f \circ (n\, \mathrm{id}_{X})$\footnote{La page écrit
+$\mathrm{id}_{Y}$ ; c'est $\mathrm{id}_{X}$, la source, qu'il faut. Elle note
+$\mathbb{Z}^{\times}$ le monoïde multiplicatif, non le groupe des unités.}.
+\begin{itemize}
+\item[d)] Il y a une décomposition $\mathbf{P}(X, Y) = \bigoplus_{n
+\geqslant 0} \mathbf{P}_{n}(X, Y)$ telle que $f \circ (\lambda\,
+\mathrm{id}_{X}) = \lambda^{n} f$ pour $f \in \mathbf{P}_{n}$, $\lambda \in
+\mathbb{Z}$ ; plus généralement, des décompositions
+\[
+  \mathbf{P}(X_{1} \times \cdots \times X_{r}, Y) = \bigoplus_{\nu \in
+  \mathbb{N}^{r}} \mathbf{P}_{\nu}(X_{1}, \ldots, X_{r}; Y), \qquad
+  f \circ (\lambda_{1}\mathrm{id}, \ldots, \lambda_{r}\mathrm{id}) =
+  \lambda_{1}^{\nu_{1}} \cdots \lambda_{r}^{\nu_{r}} f .
+\]
+\end{itemize}
+
+« Cette décomposition est unique, en vertu de considérations
+“arithmétiques” — il le faudrait ! » Le lemme qui devait l'établir — sur un
+groupe abélien muni d'une action de $(\mathbb{Z}, \cdot)^{r}$, les
+composantes de poids $\nu$ sont les $\{f \mid u(\lambda)f = \lambda^{\nu} f \text{ pour tout } \lambda\}$, parce que les $\lambda^{\nu} - \lambda^{\nu'}$ engendrent
+l'idéal unité — est écrit, démontré jusqu'au dernier pas, puis barré : la
+marge porte le contre-exemple, un groupe annulé par un nombre premier $p$, où
+$\lambda \mapsto \lambda^{p}$ et $\lambda \mapsto \lambda$
+coïncident\footnote{Le lemme est faux dès que $\nu \neq \nu'$ sont tous deux
+non nuls (cas $r = 1$) : $\lambda^{\nu} - \lambda^{\nu'}$ est toujours pair,
+de sorte que sur un groupe annulé par $2$ tous les poids positifs se
+confondent. Seul le poids $0$ se sépare des autres, par $\lambda = 0$.}.
+D'où la décision (page 76) : on pourrait exiger la décomposition après tout
+changement de base $k$, pour $\lambda \in (k^{\times})^{r}$, mais on prend
+plutôt la décomposition d) comme \emph{structure}, avec :
+\begin{itemize}
+\item[e)] le degré se multiplie par composition : si $f$ est de multidegré
+$(\nu_{1}, \ldots, \nu_{r})$ et chaque $g_{i}$ de multidegré
+$(m^{i}_{1}, \ldots, m^{i}_{s_{i}})$, $f \circ (g_{1}, \ldots, g_{r})$ est de
+degré $\nu_{i} m^{i}_{j}$ en la variable $Z^{i}_{j}$ ;
+\item[f)] compatibilité aux permutations des facteurs ;
+\item[g)] l'application $\mathbf{P}_{0}(0, Y) \to \mathbf{P}_{0}(X, Y)$
+déduite de $X \to 0$ est bijective : « les applications constantes ne
+dépendent pas de $X$ ».
+\end{itemize}
+Si $k \to \operatorname{End}(\mathrm{id}_{\mathbf{P}_{1}})$ rend
+$\mathbf{P}_{1}$ $k$-linéaire et que d) vaut pour $\lambda \in k^{r}$, on dit
+que $\mathbf{P}$ est $k$-polynomiale\footnote{La page 83 renvoie aux
+« axiomes a) à f) » ; la liste de la page 76 va jusqu'à g). Deux notes
+marginales de la page 76 sont presque illisibles ; l'une commence par
+« Oublié : ».}.
+
+\subsection*{Produits tensoriels et puissances divisées}
+
+Dans une catégorie polynomiale (pages 77 à 80), le foncteur
+$(X, Y; Z) \mapsto \mathbf{P}_{(1,1)}(X, Y; Z)$ des applications
+« bilinéaires », s'il est représentable en $Z$, définit $X \otimes Y$,
+fonctoriel en $X$, $Y$ dans $\mathbf{P}_{1}$ seulement ; et $Y \mapsto
+\mathbf{P}_{n}(X, Y)$ sur $\mathbf{P}_{1}$, s'il est représentable, définit
+$\Gamma^{n}X$, avec l'application universelle $\gamma_{n} : X \to \Gamma^{n}X$
+de degré $n$. Par g), $\Gamma^{0}X$ existe si et seulement si
+$\Gamma^{0}(0)$ existe ; on le note $\mathbf{1}$.
+
+Pour avoir associativité et unité, on renforce la propriété universelle : un
+morphisme $X \times Y \to T$ de bidegré $(1,1)$ est un \emph{produit
+tensoriel strict} si les applications $\mathbf{P}_{1,n}(T, Z; M) \to
+\mathbf{P}_{1,1,n}(X, Y, Z; M)$ sont bijectives pour tous $n$, $Z$, $M$ ; en
+faisant $n = 0$, $Z = 0$, c'est un produit tensoriel. De même on suppose que,
+pour $X = X_{1} \times \cdots \times X_{r}$, la composition avec les
+$\gamma_{\nu_{i}}$ donne des bijections
+$\mathbf{P}_{1, \ldots, 1}(\Gamma^{\nu_{1}}X_{1}, \ldots,
+\Gamma^{\nu_{r}}X_{r}; M) \simeq \mathbf{P}_{\nu}(X_{1}, \ldots, X_{r}; M)$.
+Il en résulte la formule exponentielle
+\[
+  \Gamma^{n}(X_{1} \times \cdots \times X_{r}) \simeq
+  \bigoplus_{\nu_{1} + \cdots + \nu_{r} = n} \Gamma^{\nu_{1}}X_{1} \otimes
+  \cdots \otimes \Gamma^{\nu_{r}}X_{r},
+\]
+et, avec $X \times 0$, $X \otimes \mathbf{1} \simeq X$\footnote{Page 79.
+Le dernier argument du premier membre est écrit $\alpha_{r}$ (ou
+$\mathcal{X}_{r}$) ; l'exposant de $\mathcal{P}$ dans
+« $\mathcal{P}^{\mathfrak{g}}_{\nu}$ » est d'une lecture douteuse et nous
+l'avons omis. La page 78 note : « On sait qu'un objet unité \ldots\ s'il
+existe, est unique. Il faut examiner pourquoi ce devrait être
+$\Gamma^{0}(0)$ », avec un point d'interrogation en marge.}. Ainsi
+$X \mapsto \Gamma^{*}(X) = (\Gamma^{i}X)_{i}$ est un foncteur non additif
+$\mathbf{P}_{1} \to \operatorname{Grad}(\mathbf{P}_{1})$ qui transforme
+sommes en produits tensoriels ; chaque $X$ étant un groupe commutatif pour
+$\oplus$, chaque $\Gamma^{*}(X)$ est une $\otimes$-algèbre graduée
+commutative.
+
+Enfin, le composé $X \xrightarrow{\gamma_{q}} \Gamma^{q}X
+\xrightarrow{\gamma_{p}} \Gamma^{p}\Gamma^{q}X$, de degré $pq$ par e), se
+factorise par $\Gamma^{pq}X$ : d'où des morphismes canoniques
+$\alpha_{p,q}^{X} : \Gamma^{pq}X \to \Gamma^{p}(\Gamma^{q}X)$, qui satisfont
+la condition d'associativité (page 80)
+
+\begin{tikzcd}[column sep=large, row sep=large]
+\Gamma^{pqr}X \arrow[r, "\alpha^{X}_{p,qr}"] \arrow[d, "\alpha^{X}_{pq,r}"'] & \Gamma^{p}\Gamma^{qr}X \arrow[d, "\Gamma^{p}(\alpha^{X}_{q,r})"] \\
+\Gamma^{pq}\Gamma^{r}X \arrow[r, "\alpha^{\Gamma^{r}X}_{p,q}"'] & \Gamma^{p}\Gamma^{q}\Gamma^{r}X
+\end{tikzcd}
+
+et des conditions d'unité pour $\Gamma^{1} = \mathrm{id}$, $\Gamma^{0} =
+\mathbf{1}$\footnote{La page note la flèche verticale de droite
+$\Gamma^{p}(\alpha^{\Gamma^{r}(X)}_{q,r})$ ; la source $\Gamma^{qr}X$ demande
+$\alpha^{X}_{q,r}$. Elle présente les $\alpha_{p,q}$ d'abord comme des
+données (« On se donne des homs »), puis, « ce qui revient au même », comme
+le composé ci-dessus ; dans une catégorie polynomiale ils sont donc
+canoniques. Pour les $k$-modules, $\alpha_{p,q}$ envoie $x^{[pq]}$ sur
+$(x^{[q]})^{[p]}$.}.
+
+\subsection*{La réciproque : les $\otimes$-catégories à puissances divisées}
+
+Inversement (pages 81 à 83), soit $\mathbf{P}_{1}$ une catégorie additive
+munie d'un produit tensoriel avec contraintes d'associativité, de
+commutativité et d'unité (« ACU »), et d'un $\otimes$-foncteur
+\[
+  \Gamma^{*} : (\mathbf{P}_{1}, \oplus) \to (\operatorname{Grad}
+  \mathbf{P}_{1}, \otimes), \qquad \Gamma^{*}(X \oplus Y) \simeq
+  \Gamma^{*}X \otimes \Gamma^{*}Y,
+\]
+avec $\Gamma^{0} = \mathbf{1}$, $\Gamma^{1} = \mathrm{id}$, $\Gamma^{i} = 0$
+pour $i < 0$, $\Gamma^{i}(0) = 0$ pour $i > 0$, et de morphismes
+$\alpha_{p,q} : \Gamma^{pq} \to \Gamma^{p} \circ \Gamma^{q}$ satisfaisant
+l'associativité ci-dessus et les conditions d'unité
+\[
+  (**)\quad \alpha_{1,q} = \alpha_{q,1} = \mathrm{id}_{\Gamma^{q}}, \qquad
+  (***)\quad \alpha_{0,q} = \mathrm{id}_{\mathbf{1}}, \quad \alpha_{q,0} :
+  \mathbf{1} \xrightarrow{\ \sim\ } \Gamma^{q}(\mathbf{1}).
+\]
+On définit
+\[
+  \mathbf{P}_{p}(X, Y) = \operatorname{Hom}(\Gamma^{p}X, Y), \qquad
+  \mathbf{P}(X, Y) = \bigoplus_{p} \mathbf{P}_{p}(X, Y),
+\]
+de sorte que $\mathbf{P}_{1}(X, Y) = \operatorname{Hom}(X, Y)$ et
+$\mathbf{P}_{0}(X, Y) = \operatorname{Hom}(\mathbf{1}, Y)$, et la composition
+$\mathbf{P}_{p}(X, Y) \times \mathbf{P}_{q}(Y, Z) \to \mathbf{P}_{pq}(X, Z)$
+par
+\[
+  g \circ f = g \circ \Gamma^{q}(f) \circ \alpha^{X}_{q,p} : \ \Gamma^{pq}X
+  \to \Gamma^{q}\Gamma^{p}X \to \Gamma^{q}Y \to Z .
+\]
+Elle est additive en $g$, non en $f$, comme l'exige la page
+74\footnote{La page 82 dit « applications bil.\ » (lecture incertaine) ;
+$\Gamma^{q}(f)$ n'est pas additif en $f$, et la règle de la page 74 —
+distributivité à droite seulement — est ce qui convient.}. L'associativité
+vient de (*), (**) dit que pour $p = 1$ ou $q = 1$ la composition est la
+bifonctorialité de $\operatorname{Hom}$, et (***) que $g \circ f = g$ si $g$
+est de degré $0$ — et la seconde moitié de (***), $\mathbf{1} \simeq
+\Gamma^{q}(\mathbf{1})$, « je l'avais oublié dans les axiomes préliminaires,
+il me semble ». Pour $X = \bigoplus X_{i}$, la décomposition de
+$\Gamma^{n}X$ en $\bigotimes \Gamma^{\nu_{i}}X_{i}$ donne celle de
+$\mathbf{P}_{n}(\prod X_{i}, Y)$ en $\mathbf{P}_{\nu}$, et « on vérifie
+alors les axiomes a) à f) », que les produits tensoriels sont stricts et que
+les $\Gamma^{\nu}$ satisfont la condition voulue.
+
+\textbf{Définition (page 83).} \emph{Une catégorie polynomiale est
+\emph{stricte} si elle satisfait aux conditions permettant de définir
+$\otimes$ et $\Gamma^{*}$ avec toutes les propriétés envisagées ; une
+catégorie additive $\mathbf{P}_{1}$ munie de $\otimes$ et $\Gamma^{*}$ avec
+les structures décrites est une $\otimes$-pd-catégorie.} « Les deux notions
+sont donc équivalentes » — c'est affirmé, à partir des deux constructions
+ci-dessus, non démontré en détail. Les versions $k$-linéaires demandent
+$k \to \operatorname{End}(\mathrm{id}_{\mathbf{P}_{1}})$ et l'homogénéité
+$f \circ (\lambda_{1}, \ldots, \lambda_{r}) = \lambda_{1}^{\nu_{1}} \cdots
+\lambda_{r}^{\nu_{r}} f$ pour $f \in \mathbf{P}_{\nu}$, $\lambda \in k^{r}$
+(page 84).
+
+\emph{Exemple.} Les $k$-modules forment une $\otimes$-pd-catégorie, avec les
+puissances divisées usuelles ; $\mathbf{P}_{p}(X, Y) = \operatorname{Hom}(\Gamma^{p}X,
+Y)$ est alors l'ensemble des lois polynomes homogènes de degré $p$ de $X$
+dans $Y$ (théorème de Roby), et $\mathbf{P}(X, Y)$ celui des sommes finies de
+telles lois\footnote{Roby, \emph{Lois polynomes et lois formelles en théorie
+des modules} (1963) ; Grothendieck pouvait le connaître, la page ne le
+nomme pas. La catégorie dont les morphismes sont les
+$\operatorname{Hom}(\Gamma^{p}X, Y)$ est celle qu'utiliseront Friedlander
+et Suslin (\emph{Cohomology of finite group schemes over a field}, 1997)
+pour définir les foncteurs polynomiaux stricts — vingt ans plus tard.}. De
+même (« (D) $\Rightarrow$ ») pour les $K$-Modules sur un topos muni d'une
+$k$-algèbre $K$, et pour les $K$-Modules gradués, $\Gamma^{n}(M^{i})$ étant
+placé en degré $ni$\footnote{Page 84, lignes en partie biffées ; le « (D) »
+est un D majuscule cerclé dont le sens n'est pas expliqué.}.
+
+\subsection*{Questions ouvertes}
+
+Le dossier finit sur des questions (pages 84 et 85). Quand peut-on munir
+$\Gamma^{*}(M)$, pour un objet $M$ d'une $\otimes$-pd-catégorie, d'une
+structure « à puissances divisées », i.e. de morphismes $\Gamma^{p}(\Gamma^{q}M)
+\to \Gamma^{pq}M$ satisfaisant les axiomes des p.d. ? Y en a-t-il une
+canonique, dans l'exemple ou dans le cas abstrait ?\footnote{Pour les
+modules, oui pour $q \geqslant 1$ : $y \mapsto y^{[p]}$ est une loi polynome
+de degré $p$ de $\Gamma^{q}M$ dans $\Gamma^{pq}M$, donc une application
+linéaire $\Gamma^{p}\Gamma^{q}M \to \Gamma^{pq}M$. Réponse nôtre.} Quand
+peut-on voir la composition $\mathbf{P}(X, Y) \times \mathbf{P}(Y, Z) \to
+\mathbf{P}(X, Z)$, linéaire en la seconde variable, comme une application
+linéaire
+\[
+  \mathbf{P}(Y, Z) \to (\text{applications } k\text{-polynomiales})
+  (\mathbf{P}(X, Y), \mathbf{P}(X, Z)) \ ?
+\]
+C'est acquis dans l'exemple principal, et la construction devrait se ramener
+à définir sur les foncteurs $\Gamma^{p}$ une structure supplémentaire :
+\[
+  f \mapsto \Gamma^{p}(f) : \operatorname{Hom}_{1}(X, Y) \to
+  \operatorname{Hom}_{1}(\Gamma^{p}X, \Gamma^{p}Y)
+\]
+doit être une « application polynomiale de degré $p$ » entre $k$-modules,
+« et non seulement comme application ensembliste ». C'est mot pour mot la
+définition qu'adopteront Friedlander et Suslin pour un foncteur polynomial
+strict. La page s'arrête au premier tiers ; c'est la dernière du dossier.
+
+\end{document}
