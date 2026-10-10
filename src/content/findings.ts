@@ -2599,4 +2599,190 @@ export const FINDINGS: Finding[] = [
     settle:
       'Look for a published proof of X 8.7 outside SGA 3 — SGA 7 IX (Néron models and semi-stable reduction), Bosch–Lütkebohmert–Raynaud, Néron Models, chapter 7, and the literature on Chevalley decompositions over a base (Conrad, Brion) — and check whether the Gille–Polo re-edition answers its own note (71) elsewhere. If a proof is there, mark matched and say whether it takes this route; if not, what an expert should judge is the argument on pages 32–36, and in particular the constructibility the reduction to a trait takes for granted.',
   },
+// find-novelty pass on folder 8, Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (8.modern.tex, Pass 2026-10-03). Three entries, all unsearched.
+// Dropped as matches already footnoted in the reading: n_G = ω_G for BT_1 (p. 12), the Hodge–Tate weights of the Lubin–Tate character (pp. 51–55), ℓ^{D(M)} ≃ M ⊗^L O_S and the Postnikov class ξ as a mod-p² lifting obstruction (pp. 77–80; the page itself cites Illusie).
+// Not entered: the triangle (III) / Frobenius-descent programme (pp. 1–21), the category C (p. 24), and the lattice question α = 0 (p. 49). The folder poses them as programmes or questions and does not establish them.
+  {
+    id: '8-lubin-tate-via-hodge-filtration',
+    cote: '8',
+    pages: '43–49',
+    kind: 'mathematical',
+    claim:
+      'When πA has divided powers, the Lubin–Tate lift of G₀(A, π) to A can be obtained from crystalline deformation theory alone: the Hodge filtration of Ω ⊗_{ℤ_p} A has to consist of A ⊗_{ℤ_p} A-modules, and the condition that A act naturally on t_G forces t_G to be the base change of Ω̌ ⊗ A along the multiplication map A ⊗ A → A, so that the lift exists and is unique; without divided powers, the same argument still gives uniqueness up to isogeny.',
+    basis:
+      'Page 43 states the lifting problem and cites Lubin–Tate for the result. Page 45 assumes that πA is stable under divided powers and reduces the lift to lifting the filtration of M ⊗_W k to M_A as A ⊗ A-modules. Page 47 derives t_G ≃ Ω̌ and ω_G ≃ Ω through p₀ and says that this recovers Lubin–Tate « sous une forme moins forte » for uniqueness. Pages 47–49 give the isogeny version over K. The sentence on page 45 that turns « A acts naturally on t_G » into the condition on p₀ is largely \\ill{} and \\uncertain{}.',
+    ours:
+      'The reading translates « πA stable par puissances divisées » into e ≤ p − 1 and names the deformation theory Grothendieck–Messing; the page names neither. It also reconstructs the p₀ step, whose key sentence is mostly illegible on page 45. This pass adds one point the reading does not raise: lifting over A = lim A/πⁿ normally needs topologically nilpotent divided powers, which may require e < p − 1 rather than e ≤ p − 1 (as in the case p = 2, A = ℤ₂). That point is the pass’s own and is not checked.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for this route to Lubin–Tate, lifting the Hodge filtration as A ⊗ A-modules by Grothendieck–Messing, in Messing, The crystals associated to Barsotti–Tate groups (LNM 264, 1972), Fontaine, Groupes p-divisibles sur les corps locaux (Astérisque 47–48, 1977), and Hopkins–Gross on Lubin–Tate spaces. If it appears there, mark the entry matched. Also settle whether the hypothesis must be e < p − 1. A web search (2026-10-10) did not turn up a direct treatment. That search opened no source, so it does not count as a search of the literature.',
+  },
+  {
+    id: '8-dim-one-A-module-homs',
+    cote: '8',
+    pages: '39–41',
+    kind: 'mathematical',
+    claim:
+      'Let G₀ and G′₀ be one-dimensional Barsotti–Tate groups of height [K : ℚ_p] over 𝔽_q with an A-action, given by triples (Ω, ν, ϖ) and (Ω′, ν′, ϖ′), where ν records the twist between the two k-structures on ω. They are isogenous if and only if ϖ = ϖ′, and then Hom_A(G₀, G′₀) is Hom(Ω′, Ω) when ν ≤ ν′ and π·Hom(Ω′, Ω) when ν > ν′.',
+    basis:
+      'Page 39 states the proposition (i)⇔(ii)⇔(iii), with M = Ω ⊗ W and F_M = id ⊗ σ + pr_ν[(ϖ − 1) ⊗ σ]. It then gives the general Hom criterion val(v₀) + Σ₀^ν r_i − Σ₀^ν r′_i ≥ 0. Page 41 specialises this to dimension 1. On page 39 the primes on the r_i are \\uncertain{}. On page 41 the comparison sign between ν and ν′ is under an ink stain, recorded as illegible, with ≤ expected.',
+    ours:
+      'The edition fixes the hidden sign as ≤ by redoing the computation, and places the primes in the sums of page 39 the same way. It also supplies the argument that moves the unit u from F_{f−1} to F_{ν₀}. The case split, which is the substance of the claim, therefore rests on a sign that nobody has read.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'First, a person reads the stained sign on page 41 in the facsimile. Then compare with the classification of one-dimensional formal A-modules and their homomorphisms over 𝔽_q in Hazewinkel, Formal groups and applications (1978, chapters on formal A-modules), and in Drinfeld, Coverings of p-adic symmetric domains (1976). The non-strict cases ν ≠ 0, where A acts on Lie through a Frobenius twist, are the part to check: the strict case ν = 0 is very likely a restatement of Lubin–Tate.',
+  },
+  {
+    id: '8-interleaved-typescripts',
+    cote: '8',
+    pages: '6, 8, 10, 14, 31, 61–73',
+    kind: 'codicological',
+    claim:
+      'The crystal notes are interleaved with leaves from at least two, and probably three, unrelated French typescripts on étale cohomology and semi-stable reduction. They carry handwritten corrections and SGA-style cross-references, and their leaf numbers collide with one another.',
+    basis:
+      'Pages 6, 8, 10 and 14 are typescript leaves numbered 32, 33, 35 and 37.1, ending the proof of a proper base change theorem (5.1) and giving Lemmas 8.3 and 8.4, with a reference « IX 1.2 ». Page 31 is a leaf numbered 34, on semi-stable reduction of abelian varieties (« critère galoisien 3.5 », Remarque 5.13.1), with « (pro-ℓ-) » and « (C’est vrai pour ℓ ≠ p.) » added by hand. Pages 61–73 are six leaves numbered 28–35, on smooth S-pairs, Kummer theory, Theorem 3.10 and Hochschild–Serre, with references « (IX 3.2) », « (VIII 5.5) » and « (cf. XII 6.5) ». Their numbering collides with the first group, and page 31 is numbered 34 like one of them.',
+    ours:
+      'The reading suggests SGA 4 for the first group and SGA 7 IX for page 31, and says it has not checked either. The grouping into three typescripts rests on leaf numbers and subject, not on paper or typeface. The correcting hand is not identified.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Compare the leaves with the printed SGA 4 XII–XIII (proper base change), SGA 4 XVI/XIX (cohomological purity, smooth pairs) and SGA 7 I, exposé IX (3.5, 5.13.1). Check typeface and paper in the facsimile to decide whether there are two typescripts or three. A web search (2026-10-10) could not confirm the SGA 7 IX numbering, and it is not a reading of the printed text.',
+  },
+  {
+    id: '60-inertia-average-duality',
+    cote: '60',
+    pages: '38–58',
+    kind: 'mathematical',
+    claim:
+      'For an ℓ-adic sheaf E_η at the generic point of a curve over 𝔽_p, replacing each ramified fibre E^{I_x} by the average of E over inertia modulo an open subgroup acting unipotently gives a virtual sheaf E_η^♮ whose L-function is additive and local in (E, x), unlike that of i_*E_η; the folder computes its Verdier dual as Ě_η^♮(1)[2] plus local terms μ_x(E) = α_x(E_η)^∨ − α_x(Ě_η)(1), and asks (p. 52, « ?? ») whether δ^♮(E_η)² = q^{χ^♮(E_η)} for self-dual E_η of weight ρ.',
+    basis:
+      'Page 36 shows L* is not additive; pages 38–46 define the averaging functor E ↦ E^I = Im π, π = (1/N)Σ g over I/I₁, with its trace formula, and the virtual sheaf E_η^♮ = u_!(E°) + Σ_x j_{x*}(E_η^{♮(x)}); pages 48–50 give the boxed duality with μ_x and the NB that α_x is not additive but μ_x is; page 52 states the question; page 58 reduces problem c) to b) « moyennant un signe » and stops.',
+    ours:
+      'Three things are the edition’s, not the page’s. (i) The reading proves μ_x(E) = 0 for every E_η (via [H⁰(I_x, G)] − [H¹(I_x, G)] = [G^♮] − [G^♮(−1)] and the ℓ-adic monodromy theorem, which the page assumes without naming), so the page’s correction terms vanish, λ_x = 1, and its question is answered yes; the page itself carries μ_x as a non-trivial term. (ii) The identification E_η^{♮(x)} = inertia invariants of the Weil–Deligne representation with N forgotten, i.e. of the semisimplification of E restricted to D_x, is the reading’s translation. (iii) The arguments pt, qt of λ_x are restored. On the page, the reading « ℚ_ℓ − ℚ_ℓ(1) » in μ_x (p. 48) is marked \\uncertain{douteuse}, and pp. 40–46 around the definition carry many \\ill{}, though the averaging operator, Im π and the virtual sheaf are read.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check whether the identity α_x(Ě) = α_x(E)^∨(−1) — equivalently, an unadjusted functional equation for the L-function built from the semisimplified local representations — is stated in Deligne, « Les constantes des équations fonctionnelles des fonctions L » (Antwerp II, LNM 349, 1973) §8, or in Tate, « Number theoretic background » (Corvallis 1979) §4.1–4.2, where L and ε of a Weil–Deligne representation are compared with those of its N-forgotten part (Tate 4.1.6). If it is there, mark matched; the averaging construction would then be a different route to a known object, and the entry should say which.',
+  },
+  {
+    id: '62-bourbaki-versos',
+    cote: '62',
+    pages: '19, 21, 23, 28–40 (even), 42–54 (even)',
+    kind: 'codicological',
+    claim:
+      'The typed versos of the folder are leaves of two Bourbaki drafts: the Archives Bourbaki catalogue lists rédaction n° 276 as « Algèbre commutative. Chapitre II. Filtrations et topologies (état 3) », by R. Godement, dated 1957-06, and n° 272 as « Algèbre Commutative. Chapitre V. Valuations (état 5) », by J.-P. Serre, whose ENS copy is annotated « Archives, Serre, Juin 1957 ».',
+    basis:
+      'The batch headers record typed leaves numbered « n° 276 » (filtered modules, m-adic topologies, completions, Zariski rings; page 19 is its typed p. 20, headed « §2 Anneaux m-adiques noethériens », with Artin–Rees) and « n° 272 » (valuations; typed pp. 39, 43–47). The catalogue gives n° 276 the sections § 1 « Généralités sur les anneaux et les modules filtrés », § 2 « Anneaux m-adiques noethériens », § 3 « Compléments » over 37 numbered pages, and n° 272 52 pages. Number, subject, section title and page ranges all agree. The pencilled marginalia on pp. 21, 23 and 42 are attributed to him only tentatively by the transcription.',
+    ours:
+      'The identification is this pass’s, from the catalogue. The transcriptions only give the number and the subject, calling them « Bourbaki-style ». No typed leaf has been compared with the scanned drafts. The consequence is that the sheets he wrote on carry text typed in or after mid-1957. That is a lower bound for the rectos and is weaker than the archivists’ « [à partir de 1963] », so it neither confirms nor narrows it.',
+    literature: [
+      'Archives Bourbaki (archives-bourbaki.ahp-numerique.fr), item 733: Rédaction n° 276, Godement, 1957-06, catalogue page and table of contents read 2026-10-10; scan not compared',
+      'Archives Bourbaki, item 731: Rédaction n° 272, Serre, catalogue page read 2026-10-10 (no catalogue date; ENS copy annotated « Archives, Serre, Juin 1957 »)',
+      'Archives Bourbaki, search « Filtrations et topologies »: the other drafts of that chapter are n° 218 (1955), 280, 282 (1958), 338 (1960), 356, 360 (1961), so n° 276 is the only one with that number',
+    ],
+    status: 'candidate',
+    settle:
+      'A person compares the typed page 19 (typed p. 20, § 2) and pages 21, 23 (typed pp. 9, 10) with the corresponding pages of the n° 276 scan on the Archives Bourbaki site, and one n° 272 leaf (typed p. 39 or 43–47) with the n° 272 scan. If the text matches line for line, the identification stands. The marginalia on pp. 21, 23 and 42 could then be read against the printed text they annotate.',
+  },
+  {
+    id: '62-triples-rigidified-moduli',
+    cote: '62',
+    pages: '41–53',
+    kind: 'mathematical',
+    claim:
+      'Over a base with 6 invertible, the folder describes triples (X, X′, s), with X a genus-0 curve, X′ an étale trisection and s a section disjoint from X′, in three equivalent ways. They are an S₃-torsor T with a function t on T, t and t − 1 invertible, satisfying g·t = g(t); or an invertible sheaf with a zero-sum étale trisection of its vector bundle (barycentre); or, through the degree-6 quotient q : X → P¹, an invariant j ∈ Γ(S, O_S) that determines the triple where j(j − 1) is invertible. These descriptions were not found stated in this form in the sources listed.',
+    basis:
+      'Page 49 states the torsor description, with « fonctoriel » in the margin against « non fonctoriel » for the coordinate description over a complete local ring. Pages 51–53 give the barycentric section and the « somme nulle » statement. Pages 41–47 give q, j and the reductions to Z/2 and Z/3 at j = 0 and j = 1. The transcription is heavily illegible exactly here: page 49’s opening, the « Dém. » of the example and most of pages 51 and 53 are \\ill{} or \\uncertain{}, and the statement of page 53 has illegible words in its subject (« La donnée d’un système \\ill{} portés sur S \\ill{} \\uncertain{équivalente} … »).',
+    ours:
+      'The reading supplies the identification with the quotient stack [(P¹ ∖ {0, 1, ∞})/S₃]. It also supplies the link to elliptic curves (X = C/±1, X′ the image of the non-zero 2-torsion points, s the image of the origin, the curve recovered only up to quadratic twist) and the translation into cubics. This pass disagrees with the reading on one point. For an arbitrary invertible sheaf 𝓜, rescaling the coordinate by u acts on x³ + bx + c by weights (2, 3), (b, c) ↦ (u²b, u³c), and not (u⁴b, u⁶c) as the reading says. Weights (4, 6) hold only when 𝓜 = 𝓛^⊗2 comes from a curve. Read with weights (2, 3), the triples form the μ₂-rigidification of M_{1,1}[1/6], the weighted projective stack P(2, 3) minus the discriminant, rather than M_{1,1}[1/6] itself.',
+    literature: [
+      'Web search (2026-10-10) for the μ₂-rigidification of the moduli stack of elliptic curves and for genus-0 curves with a section and an étale trisection. Result snippets state that M_{1,1} is a μ₂-gerbe over a rigidification isomorphic to P(2, 3). Those sources were not opened, and none of them mentions the trisection description.',
+      'T. Phillips, « Points of bounded height in images of morphisms of weighted projective stacks … », arXiv:2201.10624 v5, § 5.1 (Prop. 5.1.7, rigidification of modular curves along μ₂, citing [AGV08, App. C]). Read: it does not state the triple, torsor or barycentre description.',
+    ],
+    status: 'candidate',
+    settle:
+      'This search was thin, and the pass expects a match. Look in Katz–Mazur, Arithmetic Moduli of Elliptic Curves, ch. 2 and the Legendre-family discussion of level-2 structures; in Deligne–Rapoport (1973) for M_{1,1}[1/2] and its coarse space; in Abramovich–Graber–Vistoli (2008) App. C and Abramovich–Corti–Vistoli (2003) on μ₂-rigidification; and in Fulton–Olsson, « The Picard group of M_{1,1} » (2010). All are cited from memory. Mark the entry matched if any of them states that genus-0 curves with an étale trisection and a disjoint section are classified by [(P¹ ∖ {0, 1, ∞})/S₃], or by zero-sum étale trisections of a line bundle (weights 2, 3). Before relying on the page-53 statement, re-read pages 49–53 on the facsimile (/transcribe-grothendieck).',
+  },
+  // Folder 121, find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, on the Opus 5.5 reading of 2026-10-03.
+  {
+    id: '121-coarsest-cell-decomposition',
+    cote: '121',
+    pages: '3–8, 13–16',
+    kind: 'mathematical',
+    claim:
+      'For a Boolean algebra 𝓕 of subsets of a topological space that is closed under closure, whose members each contain a dense open subset of their closure, and in which every descending chain of closed members, each nowhere dense in the one before, terminates at ∅, every finite subfamily 𝓛 ⊂ 𝓕 admits a finite partition into members of 𝓕 that satisfies the frontier condition and makes each element of 𝓛 a union of pieces, and among such partitions there is one coarser than all the others (with connected pieces when components of locally closed members are finite in number and in 𝓕).',
+    basis:
+      'Page 14 states the existence and the coarsest one and proves existence by induction, removing the nowhere-dense union of boundaries and using condition e) to stop; page 8 proves that boundaries are nowhere dense; page 16 gives the connected-pieces version, with « plus grossière » written plainly (on page 14 the word replacing a struck « fine » is hard to read, and « grossière » is the transcription’s reading from the sense).',
+    ours:
+      'The page asserts that the result is the coarsest without justifying it. The argument for coarsest-ness is the edition’s: a cell meeting ∂Y lies in ∂Y. The reading also completes the page-8 proof that boundaries are nowhere dense, whose end is heavily crossed out, and reads condition d) with the interior taken relative to the closure rather than in X as the literal line says.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check whether a coarsest frontier-condition partition compatible with a finite family is in the o-minimal literature (van den Dries, Tame topology and o-minimal structures, ch. 4; Coste, An introduction to o-minimal geometry; Loi on definable stratifications) or in the PL and stratified-space literature: King–Sullivan’s intrinsic stratification of CS sets, which coarsens all others, is the nearest known statement, though there regularity is imposed and not a bare frontier condition. Then check whether the abstract axioms a) to e) on a single space appear anywhere. One web search on this pass (2026-10-10) found no statement of the coarsest version. That is not a reading of these sources, so the status stays unsearched.',
+  },
+  {
+    id: '121-cell-decomposition-open-quotient',
+    cote: '121',
+    pages: '10–13',
+    kind: 'mathematical',
+    claim:
+      'The finite partitions of a space X that satisfy the frontier condition and have pairwise distinct closures correspond exactly to the finite T₀ quotients X → I whose quotient map is open: the incidence order is the specialisation order of I, and the frontier condition is the openness of the map.',
+    basis:
+      'Page 13 shows that condition (1), the closure of each cell being a union of cells, means that the quotient map is open, and that condition (2) means that the finite quotient is « primitif », defined on the page as \\overline{\\{i\\}} = \\overline{\\{j\\}} ⇒ i = j. Pages 10–11 show that the cells are then locally closed, and that (1) together with local closedness gives back (2).',
+    ours:
+      'The word « primitif » is an uncertain reading, but the page writes out its definition, which is the T₀ condition. The reading writes out the proof that (1) is equivalent to the map being open, where the page only states the conclusion.',
+    literature: [
+      'L. Waas, J. Woolf, S. Yokura, On stratifications and poset-stratified spaces, arXiv:2407.17690 (2024): Prop. 4.1 (frontier condition ⇔ decomposition map open, for Alexandrov decompositions), Lemma 2.7 and Cor. 4.3 (locally closed strata ⇔ poset)',
+      'D. Tamaki (2017), Lemma 2.3, as cited in Remark 4.2 of the paper above (openness of a poset-stratified space characterised by X_i ⊂ closure(X_j) ⇔ i ≼ j)',
+      'L. Waas, Decomposition spaces and poset-stratified spaces, arXiv:1912.00339 (open decomposition map: proset is a poset iff pieces are locally closed)',
+    ],
+    status: 'matched',
+    settle:
+      'Settled as a match: this is the known equivalence between the frontier condition and openness of the map to the Alexandrov space of strata (Waas–Woolf–Yokura 2024, Prop. 4.1, which traces it to Tamaki 2017). Proposition 4.1 was checked through the arXiv HTML text. The Tamaki lemma was not opened and is cited at second hand. Kept as a killed candidate.',
+  },
+  // 134-2, find-novelty pass on Opus 5.5 (claude-opus-5-5), the model the reading names, 2026-10-10.
+  // No mathematical entry: every statement of pp. 38–77 that the reading situates is either a match it
+  // already footnotes (Giraud, Deligne SGA 4 XVIII, Breen 1994, Lurie HTT/HA, Hoyois 2018, Artin–Milne,
+  // Bégueri, Barwick–Glasman–Haine), a programme the letters sketch without establishing, or a
+  // statement the reading had to correct by one degree (pp. 48, 54). Two codicological entries follow.
+  {
+    id: '134-2-breen-letters-printed',
+    cote: '134-2',
+    pages: '37–77',
+    kind: 'codicological',
+    claim:
+      'The 1983 note to the Appendix and the three 1975 letters to Breen (pp. 37–77), which the modernised reading treats as left out of the printed Pursuing Stacks, are printed as the Appendix to Chapter I in an available edition of the 1983 typescript.',
+    basis:
+      'The reading’s header and résumé say Maltsiniotis’s vol. I “ne contient pas” the Breen letters and read them for that reason. The same pages, from “In this appendix, I am including three letters to Larry Breen” through “Villecun 5.2.1975”, “Villecun le 17.2.1975” and “Villecun 17/19 July 1975 / Dear Larry”, appear as “Appendix: Three letters to Larry Breen” in the Scrivener edition extended by Carmona and Buchholtz.',
+    ours:
+      'The pass disagrees here with the reading, made on the same model: the reading says the printed volume does not include these letters. The pass checked the Carmona–Buchholtz edition only. It did not see the SMF volume, so the reading’s statement about that volume itself is unverified, not refuted. The Künzer–Brown–Maltsiniotis note says vol. I “comportera les cinq premiers chapitres du tapuscrit”, and the p. 14 slip places the Appendix inside Chapter I. Both make it likely that vol. I prints it too.',
+    literature: [
+      'A. Grothendieck, Pursuing Stacks, Scrivener edition extended by M. Carmona with U. Buchholtz, arXiv:2111.01000v2 (2021), Appendix: Three letters to Larry Breen (text searched for “Breen”, “Villecun”, “Dear Larry”)',
+      'M. Künzer (ed.), with R. Brown and G. Maltsiniotis, Correspondance Alexandre Grothendieck – Ronald Brown, preprint (agrb_web.pdf, Maltsiniotis’s web page), “Note des éditeurs” and letters of 25.3.1982, 15.4.1982, 24.5.1982',
+    ],
+    status: 'matched',
+    settle:
+      'Open the table of contents of Maltsiniotis (ed.), À la poursuite des champs, vol. I, SMF Documents mathématiques 20 (2022). If the Appendix to Chapter I is there, the reading’s scope statement and résumé need correcting, which is /modernize-grothendieck’s work. That correction would not make the reading’s commentary on these pages wrong.',
+  },
+  {
+    id: '134-2-july-letter-junction',
+    cote: '134-2',
+    pages: '56–57',
+    kind: 'codicological',
+    claim:
+      'In the 1983 typescript as printed, the July 1975 letter runs without a break from the last line of folder p. 56 to the first line of p. 57. The jump in the letter’s own pagination (1 to “-12-”) and in Grothendieck’s 1983 pagination (40 to 42) therefore does not, on this evidence, mark text lost from this folder.',
+    basis:
+      'In the transcription, p. 56 ends “Thus I am entirely in agreement with your observations on p. 5.” and p. 57 begins “On the other hand, I am still intrigued by the following question”. In the arXiv:2111.01000v2 edition the two sentences are consecutive in one paragraph sequence of App. 9, with nothing between them. The transcription notes “-12-” overwritten to 42 on p. 57 and says “La suite de la p. 56 n’est donc pas immédiate”.',
+    ours:
+      'This disagrees with both the transcription note on p. 57 and the reading’s section “Ce que le dossier n’établit pas”, which say pp. 2–11 of the letter are missing from the folder and infer that they held the replies to Breen’s questions 1–6. The pass compared the text with one printed edition, not with the facsimile. If that edition was set from a copy that also lacked a leaf 41, the agreement proves nothing, so the explanation is still open: Grothendieck may have cut the letter in 1983, or a leaf may have been lost before the edition’s copy was made.',
+    literature: [
+      'A. Grothendieck, Pursuing Stacks, arXiv:2111.01000v2 (Carmona–Buchholtz edition), Appendix, opening of the letter of 17/19 July 1975 and App. 9',
+      'Correspondance Grothendieck – Brown (Künzer ed., preprint), letter of R. Brown, 24.5.1982, on the difficulty of reading the copy of the “final long letter” and his informal translation',
+    ],
+    status: 'candidate',
+    settle:
+      'Look at the facsimile of pp. 56–57 for the struck or overwritten 1983 page numbers and any trace of a leaf 41. Then compare with Brown’s 1982 translation of the July letter (its pp. 2–11) or with the SMF vol. I edition’s note on this letter. If those pages hold mathematics answering Breen’s questions, the 1983 typescript omits them by design, and the transcription note and reading should say “omitted in 1983” rather than “missing from the folder”.',
+  },
 ];
