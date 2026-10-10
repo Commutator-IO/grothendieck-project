@@ -10,7 +10,7 @@ formalised misreading.
 cd lean && lake exe cache get && lake build   # fails on any warning, so on any sorry
 ```
 
-Twenty-two folders: the eighteen of issue #26 (tier 1, and the five rows of tier 2), and four findings of the Findings tab (67, 133, 156-1, 156-3), proved as stated — which says nothing about whether they are in the literature. Each statement, its written-out proof and
+Twenty-five folders: the eighteen of issue #26 (tier 1, and the five rows of tier 2), and seven findings of the Findings tab (67, 77, 84, 85, 133, 156-1, 156-3), proved as stated — which says nothing about whether they are in the literature. Each statement, its written-out proof and
 what the verification found are in the appendix
 [`docs/lean/article.pdf`](../docs/lean/article.pdf), served at
 <https://grothendieck.commutator.io/article/grothendieck-lean.pdf>, and on the
@@ -41,3 +41,6 @@ of every theorem and fails on any beyond Lean's three standard ones.
 | 156-1 | `Folder156_1.lean` | segment model ⇔ bounded dense locally bi-directed poset (pp. 10–13), both directions; non-total example | forward needs only F1, F2, F′3, F4 (not F3, F5); F4 holds without regularity in the converse |
 | 156-3 | `Folder156_3.lean` | betweenness from the cuts of C(ε) (p. 15), order up to reversal (pp. 11–13) | only density and directedness b) used; reading's R̄ ⇔ R ∨ b∈{a,c} fails for incomparable a, c; comparability alone insufficient |
 | 133 | `Folder133.lean` | Page 46 (N′ = Cent G ⇔ Ψ_G injective), pp. 51–52 (N = D G ⇔ λ_G surjective), pp. 48/52 commutator formula in G₁ = (G ×_{π₀} E)/π₁, partial | only N′ ⊂ Cent G needed for page 46; π₀ commutative follows from N ⊃ D G; the page's open sign is fixed: the correction term is c_E(ḡ, z̄) |
+| 77 | `Folder77.lean` | Odd-rank universal discriminant divisible by 2 (all odd n), half-discriminant δ′ over any base; (−1)ⁿΔ = B² − 4C with B the matching sum, ranks 2 and 4 | the odd case lifts to an antisymmetric matrix over ℤ[Y] instead of the page's graph count; sign (−1)ⁿ confirmed and −(−1)ⁿ refuted in ranks 2 and 4; p. 87 coefficients confirmed; general even rank not proved (no Pfaffian in mathlib) |
+| 84 | `Folder84.lean` | Product of quadratic algebras in split coordinates: identity p. 64, b = b₁b₂, c = c₁b₂² + c₂b₁² − 4c₁c₂, δ = δ₁δ₂, the map R[𝒰]/(…) → A₁⊗A₂; coinvariants iso ⇔ (2, b₁, b₂) = R; invariants iso under the condition, universally iff | « 4c₁c₁ » read 4c₁c₂ confirmed; p. 85 holds over R with no base change or rank argument; the converse of p. 86 needs the base change (ℤ[X], b₁ = X, b₂ = 0) |
+| 85 | `Folder85.lean` | A(g)² + A(g) − 1 = 0 for g ∈ GL₂(R) nowhere scalar with g⁵ scalar, and the converse; A(g²) = −1 − A(g); explicit (2,3,5) model over ℤ[ζ₅] | holds over every base, characteristics 2, 3, 5 included; rigidity and representability over Spec ℤ[φ] not proved |

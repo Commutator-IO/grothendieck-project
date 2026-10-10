@@ -309,4 +309,43 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder156_3.lean',
     theorems: ["middle_iff", "order_of_cuts", "cmp_alone_insufficient", "btwLe_reading_fails"],
   },
+  {
+    folder: '77',
+    batch: 4,
+    page: '68–71, 87',
+    name: 'The universal discriminant',
+    statement:
+      'For the universal quadratic form of odd rank, the determinant of the polar form is divisible by 2 in ℤ[Y], so the half-discriminant δ′ is defined over any base. In even rank 2n, (−1)ⁿΔ = B² − 4C with B the sum over perfect matchings of the products of the off-diagonal coefficients.',
+    found:
+      'The odd case holds for every odd rank: modulo 2 the polar matrix equals an antisymmetric matrix over ℤ[Y], whose determinant vanishes, a shorter route than the page’s count of graphs. The even case is proved in ranks 2 and 4, where the opposite sign is refuted and the coefficients of p. 87 are confirmed; the general even rank needs a Pfaffian, which mathlib lacks.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder77.lean',
+    theorems: ['two_dvd_det_polar', 'det_polar_eq', 'disc_rank_two', 'disc_rank_four', 'not_dvd_rank_four'],
+  },
+  {
+    folder: '84',
+    batch: 4,
+    page: '63–64, 85–86',
+    name: 'Product of quadratic algebras',
+    statement:
+      'In split coordinates, over any commutative ring and without dividing by 2, 2U₁U₂ + b₁U₂ + b₂U₁ satisfies the quadratic equation with b = b₁b₂, c = c₁b₂² + c₂b₁² − 4c₁c₂, so δ = δ₁δ₂. The map from E₁ ⊗ E₂ modulo Im(σ₁⊗σ₂ − id) to E₁ * E₂ is bijective iff 2R + b₁R + b₂R = R.',
+    found:
+      'Both hold over the ring itself, with no base change and no rank argument; the reading’s correction of « 4c₁c₁ » to 4c₁c₂ is confirmed. For the invariants, the page’s « universally » is needed: over ℤ[X] with b₁ = X, b₂ = 0 the map is an isomorphism while (2, X) is a proper ideal. The pointwise and intrinsic forms are not proved.',
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder84.lean',
+    theorems: ['identity_page64', 'tensor_root', 'disc_mul', 'coinvariants_bijective_iff', 'invariants_universally_iff', 'invariants_not_iff'],
+  },
+  {
+    folder: '85',
+    batch: 2,
+    page: '10, 30, 40',
+    name: 'The invariant of a rotation of order 5',
+    statement:
+      'For g ∈ GL₂(R) nowhere scalar, with A(g) = Tr(g)²/det g − 2, g⁵ is scalar iff A(g)² + A(g) − 1 = 0; then A(g²) = −1 − A(g). An explicit (2,3,5) model exists over ℤ[ζ₅].',
+    found:
+      'The computation holds over every base, characteristics 2, 3 and 5 included; the exclusion of characteristic 5 on p. 30 is needed only without the hypothesis « nowhere scalar ». An explicit split model needs ℤ[ζ₅], which is why p. 40 speaks of forms of PGL₂. Rigidity and representability by Spec ℤ[T]/(T² + T − 1) are not proved.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder85.lean',
+    theorems: ['invA_smul', 'sq_add_sub_of_pow_five', 'pow_five_of_sq_add_sub', 'invA_sq_of_root', 'exists_model_adjoinRoot'],
+  },
 ];

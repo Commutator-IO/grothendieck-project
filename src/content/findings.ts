@@ -7822,6 +7822,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read O. Loos, « Tensor products and discriminants of unital quadratic forms over commutative rings », Monatsh. Math. 122 (1996), and « Discriminant algebras of finite rank algebras and quadratic trace modules », Math. Z. 257 (2007), § 6.1; A. Hahn, Quadratic algebras, Clifford algebras, and arithmetic Witt groups (1994), Exercises 14–20, pp. 42–43; and Small 1972, for a fixed-subring description of the product under « one factor étale at each point of characteristic 2 », and for the converse. If any states it, mark matched.',
+    lean: { file: 'lean/Grothendieck/Folder84.lean', found: "Holds in split coordinates over the ring itself: the coinvariants map is bijective iff (2, b₁, b₂) is the unit ideal. For the invariants the « universally » is needed: over ℤ[X] with b₁ = X, b₂ = 0 the map is an isomorphism while (2, X) is proper. The pointwise form is not proved." },
   },
   {
     id: '84-product-quadratic-algebras-formula',
@@ -7841,6 +7842,7 @@ export const FINDINGS: Finding[] = [
     status: 'matched',
     settle:
       'Matched for the product of quadratic algebras and its formula. What the matched sources do not, by this pass’s reading, contain is the folder’s route to it: the product of χ-trivialised extensions for arbitrary χ (see 84-chi-trivialised-extension-product). Nothing here bears on dates; the folder is undated beyond the inventory’s « [à partir de 1982-vers 1986] ».',
+    lean: { file: 'lean/Grothendieck/Folder84.lean', found: "Holds as stated over any commutative ring, without dividing by 2, in split coordinates: b = b₁b₂, c = c₁b₂² + c₂b₁² − 4c₁c₂, δ = δ₁δ₂, and the generator satisfies the equation in A₁ ⊗ A₂." },
   },
   {
     id: '84-two-regular-triplet-classification',
@@ -7911,6 +7913,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'The numerical consequence — (−1)ⁿ det ≡ 0 or 1 mod 4 for an even ℤ-lattice of rank 2n — is believed classical (not verified in this pass) and would not by itself match the claim. Read Knus, Quadratic and Hermitian Forms over Rings (1991), IV §§ 3–4 (the discriminant module and the quadratic discriminant algebra), Kneser’s work on the half-discriminant, and Bass, « Clifford algebras and spinor norms over a commutative ring » (1974), for an explicit universal B with (−1)ⁿΔ ≡ B² mod 4; if B is the matching sum there, or if the norm form of Z_q yields it, mark matched.',
+    lean: { file: 'lean/Grothendieck/Folder77.lean', found: "Partly: proved in ranks 2 and 4, where the opposite sign is refuted; the general even rank is not proved (it needs a Pfaffian, absent from mathlib)." },
   },
   {
     id: '77-odd-rank-half-discriminant',
@@ -7928,6 +7931,7 @@ export const FINDINGS: Finding[] = [
     status: 'matched',
     settle:
       'Matched. The folder’s route (graph expansion mod 2) differs from Conrad’s (defect of a form over a field of characteristic 2), which is not a novelty of statement. Conrad’s attribution concerns the notion, not this folder or a date.',
+    lean: { file: 'lean/Grothendieck/Folder77.lean', found: "Holds as stated, for every odd rank: modulo 2 the polar matrix equals an antisymmetric matrix over ℤ[Y], whose determinant vanishes, so 2 divides the discriminant and δ′ is defined over any base." },
   },
   {
     id: '77-two-regular-classification-matched',
@@ -8085,6 +8089,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Beauville 2010 and Serre’s notes on finite subgroups of PGL₂ / SO(3) over fields, then look for a scheme-theoretic treatment of the icosahedral subgroup of PGL₂ over ℤ[φ] (e.g. in work on the icosahedral Galois representations or on finite subgroup schemes of PGL₂, Dickson’s classification in families). If the fine moduli Spec ℤ[T]/(T²+T−1) over all of ℤ, characteristics 2 and 5 included, is there, mark matched.',
+    lean: { file: 'lean/Grothendieck/Folder85.lean', found: "Partly: the computation holds over every base — for g nowhere scalar, g⁵ is scalar iff A(g)² + A(g) − 1 = 0 — with an explicit model over ℤ[ζ₅]; rigidity and representability by Spec ℤ[T]/(T² + T − 1) are not proved." },
   },
   {
     id: '85-dinfty-torsor-classification',

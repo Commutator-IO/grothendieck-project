@@ -1,0 +1,51 @@
+\section[Cote 77 : le discriminant universel modulo 2 et modulo 4]{Cote 77 : le discriminant universel modulo $2$ et modulo $4$\protect\verifie{Folder77}}\label{sec:77}
+
+La cote 77, \emph{Quadriques affines, extensions quadratiques : notes manuscrites (s.d.)}, compte cent cinquante-sept pages, que l'inventaire place après 1977. La partie IV, dont la couverture de la page~64 porte \q{discriminant des formes quadratiques}, prend la forme quadratique universelle $\sum_i Y_i x_i^2 + \sum_{i<j} Y_{ij} x_i x_j$ sur l'anneau $\mathbf Z[Y]$ et le déterminant $\Delta$ de sa forme polaire, matrice qui porte $2Y_i$ sur la diagonale et $Y_{ij}$ ailleurs. Les pages~65 à~67 développent $\Delta$ en une somme sur des graphes : sommets isolés pour les points fixes, arêtes doubles pour les transpositions, polygones pour les autres cycles. La page~68 réduit cette somme modulo~$2$ : il n'y reste que les involutions sans point fixe, et la page conclut \q{On voit donc que $\Delta \bmod 2 = 0$ si $\operatorname{card} I$ est impair} (\lot{77}{4}{68}). En rang pair $m = 2n$, elle pose $B$, somme sur les couplages parfaits de $I$ des produits des $Y_{ij}$, cherche $\varepsilon = \pm 1$ tel que $B^2 - \varepsilon\Delta \equiv 0 \pmod 4$, et \q{prévoit} $\varepsilon = (-1)^n$. Les pages~69 et~71 comparent $B^2$ et $\Delta$ modulo~$4$ par les paires de couplages, avec une fausse alarme à l'encre brune corrigée deux lignes plus bas. La page~87, barrée, contrôle les coefficients du développement en rang~$4$ (\lot{77}{5}{87}). La page~127 prend le discriminant divisé $\delta' = \delta/2$ du rang impair comme critère de régularité (\lot{77}{7}{127}).
+
+\noindent\emph{Conventions.} Pour $n \geq 0$, les indéterminées sont indexées par les parties $J \subset \{1, \dots, n\}$ de cardinal $1$ ou $2$, notées $Y_i$ et $Y_{ij}$ ; on note $\mathbf Z[Y]$ l'anneau de polynômes correspondant. La matrice polaire universelle $P_n$ a pour coefficients $2Y_i$ en $(i, i)$ et $Y_{ij}$ en $(i, j)$ et $(j, i)$ pour $i \neq j$. Sur un anneau commutatif $R$, une famille $y = (y_i, y_{ij})$ d'éléments de $R$ définit la forme $\sum y_i x_i^2 + \sum_{i<j} y_{ij} x_i x_j$, de matrice polaire $P(y)$, image de $P_n$ par le morphisme $Y \mapsto y$.
+
+\begin{enonce}[Page 68, rang impair\piste{77-odd-rank-half-discriminant}]
+Si $n$ est impair, $\det P_n$ est divisible par $2$ dans $\mathbf Z[Y]$. Le quotient $\delta'_n = \det P_n / 2$ est l'unique polynôme tel que $\det P_n = 2\delta'_n$, et pour tout anneau commutatif $R$ et toute famille $y$ d'éléments de $R$, $\det P(y) = 2\,\delta'_n(y)$.
+\end{enonce}
+
+\begin{proof}
+Soit $K_n$ la matrice de $\mathbf Z[Y]$ qui porte $Y_{ij}$ en $(i, j)$ pour $i < j$, $-Y_{ij}$ en $(i, j)$ pour $i > j$ et $0$ sur la diagonale. Elle est antisymétrique : ${}^tK_n = -K_n$. On a donc $\det K_n = \det {}^tK_n = \det(-K_n) = (-1)^n \det K_n = -\det K_n$, d'où $2 \det K_n = 0$ ; comme $\mathbf Z[Y]$ est intègre de caractéristique nulle, $\det K_n = 0$.
+
+Soit $\rho : \mathbf Z[Y] \to \mathbf F_2[Y]$ la réduction des coefficients modulo~$2$. Les matrices $P_n$ et $K_n$ ont même image par $\rho$ : sur la diagonale, $\rho(2Y_i) = 0$ ; au-dessus, les coefficients sont égaux ; au-dessous, $\rho(-Y_{ij}) = \rho(Y_{ij})$ en caractéristique~$2$. Le déterminant commutant aux morphismes d'anneaux, $\rho(\det P_n) = \det \rho(P_n) = \det \rho(K_n) = \rho(\det K_n) = 0$. Le noyau de $\rho$ est formé des polynômes dont tous les coefficients sont pairs, c'est-à-dire de l'idéal engendré par~$2$ ; donc $2$ divise $\det P_n$.
+
+L'unicité du quotient vient de ce que $2$ n'est pas diviseur de zéro dans $\mathbf Z[Y]$. Pour $R$ et $y$ donnés, le morphisme $Y \mapsto y$ envoie $P_n$ sur $P(y)$ et commute au déterminant ; il envoie $2\delta'_n$ sur $2\,\delta'_n(y)$.
+\end{proof}
+
+\begin{remarque}
+L'énoncé tient pour tout $n$ impair. La démonstration ne suit pas le développement en graphes de la page : elle remplace, modulo~$2$, la matrice symétrique par la matrice antisymétrique $K_n$, dont le déterminant est nul sur $\mathbf Z[Y]$ en taille impaire. Sur $\mathbf F_2[Y]$ l'argument $\det = -\det$ ne donne rien, et c'est pourquoi il faut relever $\rho(P_n)$ en une matrice antisymétrique sur $\mathbf Z[Y]$. La seconde partie de la piste, \q{$q$ est régulière si et seulement si $\delta'(q)$ est inversible}, est la définition de la régularité que la lecture adopte (page~127). Les équivalences de la page~127 avec la lissité de $V(q)$ et l'isomorphie locale à la forme standard ne sont pas formalisées.
+\end{remarque}
+
+\begin{enonce}[Pages 68 à 71 et 87, rangs $2$ et $4$\piste{77-universal-even-rank-discriminant-mod-4}]
+Soit $R$ un anneau commutatif.
+\begin{enumerate}
+\item (Rang $2$, $n = 1$.) Pour $a_1, a_2, b_{12} \in R$, $-\det\begin{pmatrix} 2a_1 & b_{12} \\ b_{12} & 2a_2\end{pmatrix} = B^2 - 4C$ avec $B = b_{12}$ et $C = a_1a_2$.
+\item (Rang $4$, $n = 2$.) Soit $P$ la matrice polaire de la forme $\sum_{i \leq 4} a_i x_i^2 + \sum_{i<j} b_{ij} x_i x_j$ et $B = b_{12}b_{34} + b_{13}b_{24} + b_{14}b_{23}$, somme sur les trois couplages parfaits de $\{1, 2, 3, 4\}$. Alors $\det P = B^2 - 4C$ avec
+\begin{multline*}
+C = -4a_1a_2a_3a_4 + a_1a_2b_{34}^2 + a_1a_3b_{24}^2 + a_1a_4b_{23}^2 + a_2a_3b_{14}^2 + a_2a_4b_{13}^2 + a_3a_4b_{12}^2 \\
+- a_1b_{23}b_{24}b_{34} - a_2b_{13}b_{14}b_{34} - a_3b_{12}b_{14}b_{24} - a_4b_{12}b_{13}b_{23} \\
++ b_{12}b_{13}b_{24}b_{34} + b_{12}b_{14}b_{23}b_{34} + b_{13}b_{14}b_{23}b_{24}.
+\end{multline*}
+\item Le signe $\varepsilon = -(-1)^n$ ne convient dans aucun des deux rangs : sur $\mathbf Z$, pour $a_1 = a_2 = 0$ et $b_{12} = 1$, $B^2 - \det P = 2$ ; pour $b_{12} = b_{34} = 1$ et les autres coefficients nuls, $B^2 + \det P = 2$. Aucun des deux n'est divisible par~$4$.
+\end{enumerate}
+\end{enonce}
+
+\begin{proof}
+En rang~$2$, $\det = 4a_1a_2 - b_{12}^2$. En rang~$4$, on développe $\det P$ selon la première ligne, puis chaque mineur d'ordre~$3$ par la règle de Sarrus. On obtient
+\begin{multline*}
+\det P = 16a_1a_2a_3a_4 - 4\,(a_1a_2b_{34}^2 + a_1a_3b_{24}^2 + a_1a_4b_{23}^2 + a_2a_3b_{14}^2 + a_2a_4b_{13}^2 + a_3a_4b_{12}^2) \\
++ 4\,(a_1b_{23}b_{24}b_{34} + a_2b_{13}b_{14}b_{34} + a_3b_{12}b_{14}b_{24} + a_4b_{12}b_{13}b_{23}) + b_{12}^2b_{34}^2 + b_{13}^2b_{24}^2 + b_{14}^2b_{23}^2 \\
+- 2\,(b_{12}b_{13}b_{24}b_{34} + b_{12}b_{14}b_{23}b_{34} + b_{13}b_{14}b_{23}b_{24}).
+\end{multline*}
+Ce sont les coefficients de la page~87 : $2^4$ pour les quatre sommets isolés, $-2^2$ pour une arête double et deux sommets isolés, $2^2$ pour un triangle et un sommet isolé, $1$ pour deux arêtes doubles, $-2$ pour un carré. Le carré $B^2$ a pour termes carrés les $b_{12}^2b_{34}^2$, $b_{13}^2b_{24}^2$, $b_{14}^2b_{23}^2$ et pour termes croisés $2\,(b_{12}b_{13}b_{24}b_{34} + b_{12}b_{14}b_{23}b_{34} + b_{13}b_{14}b_{23}b_{24})$ ; la différence $B^2 - \det P$ est donc $4C$, terme à terme. Les deux contre-exemples se calculent sur ces formules : en rang~$2$, $B^2 - \det P = 1 - (-1)$ ; en rang~$4$, $\det P = b_{12}^2b_{34}^2 = 1$ et $B^2 + \det P = 2$.
+\end{proof}
+
+\begin{remarque}
+L'identité est démontrée sur tout anneau commutatif, donc en particulier sur $\mathbf Z[Y]$, avec un $C$ écrit en entier. Elle confirme en rangs $2$ et $4$ le signe $(-1)^n$ que la page \q{prévoit}, et le choix opposé échoue dans ces deux rangs, ce que la lecture avait contrôlé par machine pour $m = 2, 4, 6$. En rang~$4$, la vérification confirme les coefficients et les nombres de graphes de la page~87. L'identité pour un rang pair quelconque n'est pas démontrée ici. L'argument des pages~69 et~71 compte les paires de couplages, et sa formalisation demanderait le développement de $\Delta$ en graphes et un pfaffien, qui manque à mathlib.
+\end{remarque}
+
+Ne sont pas démontrés ici : l'identité $(-1)^n\Delta = B^2 - 4C$ en rang pair $2n \geq 6$ ; le développement de $\Delta$ en graphes des pages~65 à~67 ; les équivalences de la page~127 entre l'inversibilité de $\delta'(q)$, la lissité de $V(q)$ et l'isomorphie locale à la forme standard.

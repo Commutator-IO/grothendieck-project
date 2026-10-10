@@ -1,0 +1,55 @@
+\section[Cote 85 : l'invariant d'une rotation d'ordre 5]{Cote 85 : l'invariant d'une rotation d'ordre 5\protect\verifie{Folder85}}\label{sec:85}
+
+La cote 85, \emph{2-polyèdres et 1-polygônes : notes manuscrites (s.d.)}, du groupe \q{Géométrie et topologie combinatoire}, étudie les polygones et polyèdres réguliers réalisés dans une forme de $\mathrm{PGL}_2$ sur une base quelconque, au moyen d'un seul invariant $A$. Pour $\mathrm{PGL}_2$, la lecture le donne par $A(v) = (\mathrm{Tr}\, v)^2/\det v - 2$ pour un relèvement $v \in \mathrm{GL}_2$ (pages~23 et~27, \lot{85}{2}{23}, \lot{85}{2}{27}). La page~30 dit qu'un élément est d'ordre~$5$ en tout point si et seulement si $\alpha^2 + \alpha - 1 = 0$, hors caractéristique~$5$ (\lot{85}{2}{30}). La page~10 énonce le cas de l'icosaèdre avec un facteur $\mathbf Z/2$ et la marge \q{laisser tomber $\mathbf Z/2$ dans l'énoncé} (\lot{85}{1}{10}). La page~40 énonce le théorème sans ce facteur : pour une forme $G$ de $\mathrm{PGL}_2$ sur un schéma $S$ et un monomorphisme $\varphi : \mathfrak A_5 \to G$, $\alpha(\varphi) = A(\varphi(\pi))$, $\pi$ un $5$-cycle, satisfait $\alpha^2 + \alpha - 1 = 0$, la catégorie des $(G, \varphi)$ est rigide, et le foncteur des classes d'isomorphisme est \q{représentable par $M = \mathrm{Spec}\,\mathbf Z[T]/(T^2 + T - 1)$} (\lot{85}{2}{40}). Le calcul qui porte ce théorème est démontré ici, sur tout anneau commutatif, ainsi qu'un modèle explicite des relations de l'icosaèdre.
+
+\noindent\emph{Conventions.} $R$ est un anneau commutatif et $g = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$ une matrice de $M_2(R)$ de déterminant $\delta$ inversible ; on note $t = \mathrm{Tr}\, g$ et $A(g) = t^2\delta^{-1} - 2$. On dit que $g$ est \emph{nulle part scalaire} si $b$, $c$ et $a - d$ engendrent l'idéal unité. Un idéal est l'idéal unité si et seulement s'il n'est contenu dans aucun idéal premier ; la condition dit donc que l'image de $g$ dans $\mathrm{PGL}_2(k(s))$ est différente de $1$ en tout point $s$ de $\operatorname{Spec} R$. Comme $5$ est premier, l'image de $g$ est alors d'ordre~$5$ en tout point si et seulement si $g^5$ est scalaire.
+
+\begin{enonce}[Pages 10, 30 et 40, l'invariant d'une rotation d'ordre~$5$\piste{85-a5-pgl2-moduli-spec-z-phi}]
+Soit $g \in M_2(R)$ de déterminant inversible.
+\begin{enumerate}
+\item $A(\mu g) = A(g)$ pour tout $\mu \in R^\times$ : $A$ ne dépend que de l'image de $g$ dans $\mathrm{PGL}_2(R)$.
+\item Si $g$ est nulle part scalaire et $g^5$ scalaire, alors $A(g)^2 + A(g) - 1 = 0$.
+\item Réciproquement, si $A(g)^2 + A(g) - 1 = 0$, alors $g^5$ est scalaire.
+\item $A(g^2) = A(g)^2 - 2$ ; en particulier, si $A(g)^2 + A(g) - 1 = 0$, alors $A(g^2) = -1 - A(g)$ (corollaire de la page~40).
+\end{enumerate}
+\end{enonce}
+
+\begin{lemme}\label{lem:85-puissance}
+Pour toute matrice $g \in M_2(R)$, $g^5 = x_5\, g + y_5$, avec $x_5 = t^4 - 3\delta t^2 + \delta^2$ et $y_5 = -\delta(t^3 - 2\delta t)$. Si $\delta$ est inversible, $x_5 = \delta^2\,(A(g)^2 + A(g) - 1)$.
+\end{lemme}
+
+\begin{proof}
+Par Cayley--Hamilton, $g^2 = t g - \delta$. Si $g^n = x_n g + y_n$, alors $g^{n+1} = (t x_n + y_n) g - \delta x_n$. Partant de $x_1 = 1$, $y_1 = 0$, on trouve $x_2 = t$, $x_3 = t^2 - \delta$, $x_4 = t^3 - 2\delta t$, $y_4 = -\delta(t^2 - \delta)$, puis $x_5 = t^4 - 3\delta t^2 + \delta^2$ et $y_5 = -\delta x_4$. La vérification en Lean se fait coefficient par coefficient. Posons $u = t^2\delta^{-1}$, de sorte que $A(g) = u - 2$. Alors $A(g)^2 + A(g) - 1 = u^2 - 3u + 1$, et $\delta^2(u^2 - 3u + 1) = t^4 - 3\delta t^2 + \delta^2$.
+\end{proof}
+
+\begin{proof}[Démonstration de l'énoncé]
+(1) $\mathrm{Tr}(\mu g) = \mu t$ et $\det(\mu g) = \mu^2 \delta$, donc $(\mu t)^2 (\mu^2\delta)^{-1} = t^2 \delta^{-1}$.
+
+(2) Écrivons $g^5 = \gamma \cdot 1$. Par le lemme~\ref{lem:85-puissance}, $x_5 g = (\gamma - y_5)\cdot 1$. En lisant les coefficients hors diagonale et la différence des coefficients diagonaux, $x_5 b = x_5 c = x_5 (a - d) = 0$. L'ensemble des $r \in R$ tels que $x_5 r = 0$ est un idéal ; il contient $b$, $c$, $a - d$, donc l'idéal unité, et $x_5 = 0$. Comme $\delta^2$ est inversible, le lemme donne $A(g)^2 + A(g) - 1 = 0$.
+
+(3) Si $A(g)^2 + A(g) - 1 = 0$, le lemme donne $x_5 = 0$ et $g^5 = y_5$.
+
+(4) $\mathrm{Tr}(g^2) = t^2 - 2\delta$ et $\det(g^2) = \delta^2$, d'où $A(g^2) = (t^2 - 2\delta)^2\delta^{-2} - 2 = (u - 2)^2 - 2 = A(g)^2 - 2$. Si $A(g)^2 = 1 - A(g)$, cela vaut $-1 - A(g)$.
+\end{proof}
+
+\begin{enonce}[Page 40, un modèle des relations de l'icosaèdre]
+Soit $\zeta \in R$ tel que $\zeta^4 + \zeta^3 + \zeta^2 + \zeta + 1 = 0$, et posons
+\[
+  s = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}, \qquad p = \begin{pmatrix} \zeta & 1 \\ 0 & \zeta^4 \end{pmatrix}.
+\]
+Alors $s^2 = -1$, $(sp)^3 = -1$ et $p^5$ est scalaire ; $s$, $p$ et $sp$ sont nulle part scalaires ; $\det p = 1$ et $A(p) = \zeta^2 + \zeta^3$ est racine de $T^2 + T - 1$. C'est le cas en particulier pour $R = \mathbf Z[\zeta_5] = \mathbf Z[X]/(X^4 + X^3 + X^2 + X + 1)$ et $\zeta$ la classe de $X$.
+\end{enonce}
+
+\begin{proof}
+On a $\zeta^5 - 1 = (\zeta - 1)(\zeta^4 + \zeta^3 + \zeta^2 + \zeta + 1) = 0$, donc $\zeta$ est inversible d'inverse $\zeta^4$, et $\det p = \zeta^5 = 1$. Le calcul direct donne $s^2 = -1$. Le produit $sp = \begin{pmatrix} 0 & -\zeta^4 \\ \zeta & 1 \end{pmatrix}$ a pour trace $1$ et pour déterminant $\zeta^5 = 1$, donc $(sp)^2 = sp - 1$, puis $(sp)^3 = sp(sp - 1) = (sp - 1) - sp = -1$. Ensuite $\mathrm{Tr}\, p = \zeta + \zeta^4$ et $A(p) = (\zeta + \zeta^4)^2 - 2 = \zeta^2 + 2\zeta^5 + \zeta^8 - 2 = \zeta^2 + \zeta^3$. On a $(\zeta^2 + \zeta^3)^2 + \zeta^2 + \zeta^3 - 1 = \zeta^4 + 2\zeta^5 + \zeta^6 + \zeta^2 + \zeta^3 - 1 = \zeta^4 + \zeta^3 + \zeta^2 + \zeta + 1 = 0$, et le point~(3) de l'énoncé précédent donne $p^5$ scalaire. Le coefficient $(0,1)$ vaut $-1$ pour $s$, $1$ pour $p$ et $-\zeta^4$ pour $sp$ ; c'est chaque fois un inversible, et les trois matrices sont nulle part scalaires. Dans $\mathbf Z[X]/(X^4 + X^3 + X^2 + X + 1)$, la classe de $X$ est racine du polynôme par construction.
+\end{proof}
+
+\begin{remarque}
+Le point~(2) vaut sur tout anneau commutatif, sans hypothèse sur $2$, $3$ ou $5$, ni de réduction. L'exclusion de la caractéristique~$5$ à la page~30 concerne le sens réciproque, l'ordre exact $5$ : en caractéristique~$5$, $T^2 + T - 1 = (T - 2)^2$, et $A(g) = 2$ vaut aussi pour $g = 1$. Avec l'hypothèse \q{nulle part scalaire} et $5$ premier, les points~(2) et~(3) disent qu'un élément nulle part scalaire de déterminant inversible est d'ordre~$5$ en tout point si et seulement si $A(g)^2 + A(g) - 1 = 0$, en toute caractéristique. Dans le modèle, en caractéristique~$5$, $\zeta = 1$ convient, $p$ est unipotent et $A(p) = 2$ : c'est la rotation unipotente que la lecture signale pour $\mathfrak A_5 \simeq \mathrm{PSL}_2(\mathbf F_5)$.
+\end{remarque}
+
+\begin{remarque}
+Les relations $s^2$, $(sp)^3$, $p^5$ scalaires sont celles du groupe triangulaire de type $(2, 3, 5)$, qui est $\mathfrak A_5$. En tout point, le sous-groupe de $\mathrm{PGL}_2(k(s))$ engendré par les images de $s$ et $p$ est un quotient de $\mathfrak A_5$ différent de $1$, donc isomorphe à $\mathfrak A_5$, ce groupe étant simple. Ce passage n'est pas formalisé. Le modèle est dans le $\mathrm{PGL}_2$ déployé sur $\mathbf Z[\zeta_5]$, et non sur $\mathbf Z[T]/(T^2 + T - 1)$. Sur $\mathbf Q(\sqrt 5)$, corps réel où $-1$ n'est pas somme de deux carrés, le $\mathrm{PGL}_2$ déployé ne contient pas $\mathfrak A_5$ d'après le critère que la lecture cite de mémoire (note des pages~36 et~37) ; un modèle sur $\mathbf Z[\varphi]$ demande donc une forme non déployée, et c'est pourquoi le théorème de la page~40 porte sur les formes de $\mathrm{PGL}_2$.
+\end{remarque}
+
+Ne sont pas démontrés ici : la rigidité de la catégorie des $(G, \varphi)$ et la représentabilité de son foncteur des classes d'isomorphisme par $\operatorname{Spec} \mathbf Z[T]/(T^2 + T - 1)$ (page~40), ni l'existence d'un plongement de $\mathfrak A_5$ dans une forme de $\mathrm{PGL}_2$ sur cette base ; le passage des formes de $\mathrm{PGL}_2$ aux matrices de $\mathrm{GL}_2$, qui n'a lieu que localement ; l'équivalence entre \q{nulle part scalaire} et \q{différent de $1$ en tout point} pour une forme quelconque ; l'homomorphisme $\mathfrak A_5 \to \mathrm{PGL}_2(\mathbf Z[\zeta_5])$ défini par le modèle et son injectivité sur les fibres ; le théorème de la page~4 dont la lecture déduit celui de la page~10 ; les autres énoncés de la cote.
