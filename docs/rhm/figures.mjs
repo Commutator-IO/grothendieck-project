@@ -63,7 +63,7 @@ const BINS = [
 ];
 const bin = (y) => BINS.findIndex((b) => y <= b.max);
 
-const W = 14; // cm
+const W = 13.6; // cm
 const s = W / map.width;
 const X = (x) => (x * s).toFixed(2);
 const Y = (y) => ((map.height - y) * s).toFixed(2);
@@ -86,14 +86,19 @@ const nodes = map.nodes
 // Étiquette au-dessus du disque par défaut, sur le bord droit à gauche ; les
 // autres placements défont les chevauchements que la disposition laisse.
 const PLACE = {
-  'Commutative algebra': 'below',
+  'Commutative algebra': 'above',
   'Functional analysis': 'below',
   'Topoi and sites': 'left',
   'Group schemes and algebraic groups': 'right',
   'Weil conjectures and zeta functions': 'below',
-  'Abelian varieties and Picard schemes': 'left',
+  'Abelian varieties and Picard schemes': 'below',
   'Homotopy theory and test categories': 'left',
-  'Categories and functors': 'left',
+  'Categories and functors': 'below',
+  'Number theory and arithmetic': 'below',
+  'Fundamental groups and Galois theory': 'below',
+  'Games and combinatorics': 'left',
+  'Formal geometry, moduli and representability': 'below',
+  'Duality theory': 'left',
 };
 const labels = map.nodes
   .map((n) => {
@@ -125,7 +130,7 @@ ${nodes}
 ${labels}
 ${legend}
 \\end{tikzpicture}
-\\caption{Carte des mathématiques du fonds : les trente sujets sous lesquels se rangent les mots-clés des ${map.coverage.folders} lectures modernisées (${map.coverage.mapped} des ${map.coverage.keywords} mots-clés sont rattachés). Deux sujets sont proches quand ils partagent des cotes, et reliés quand ils en partagent plus que ne le voudrait le hasard (force d'association au moins égale à 1) ; un disque plus grand, plus de cotes. La couleur donne la datation moyenne des cotes du sujet, calculée sur les milieux des fourchettes de l'inventaire : un ordre de grandeur, non une date. Les mots-clés sont ceux des lectures modernisées, une interprétation, et la disposition est calculée une fois, à graine fixe. D'après \\texttt{src/content/math-map.json} (${map.built}), comme la carte du site, onglet « Maps ».}\\label{fig:carte}
+\\caption{Carte des mathématiques du fonds : les trente sujets sous lesquels se rangent les mots-clés de ${map.coverage.folders} lectures modernisées (${map.coverage.mapped} des ${map.coverage.keywords} mots-clés sont rattachés). Deux sujets sont proches quand ils partagent des cotes, et reliés quand ils en partagent plus que ne le voudrait le hasard (force d'association au moins égale à 1) ; un disque plus grand, plus de cotes. La couleur donne la datation moyenne des cotes du sujet, calculée sur les milieux des fourchettes de l'inventaire : un ordre de grandeur, non une date. Les mots-clés sont une interprétation, et la disposition est calculée une fois, à graine fixe. D'après \\texttt{src/content/math-map.json}, comme la carte du site (onglet « Maps »).}\\label{fig:carte}
 \\end{figure}
 `,
 );
