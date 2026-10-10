@@ -26,15 +26,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '42',
     batch: 1,
-    page: '4',
-    name: 'Lemme 2',
+    page: '3–5',
+    name: "Proposition, Lemme 1, Corollaire 1, Lemme 2",
     statement:
-      'Let A be a Noetherian ring and 𝔭 a prime ideal. (1) Some f ∉ 𝔭 makes A_f → A_𝔭 injective. (2) If moreover A → A_𝔭 is injective, then A_𝔮 → A_𝔭 is injective for every prime 𝔮 ⊇ 𝔭.',
+      "On a Noetherian sober space, a sheaf satisfying (H) has open coherence loci (Lemme 1) and its sections are the coherent families of germs (Proposition, p. 3); for A Noetherian, Lemme 1 and Corollaire 1 on Spec A; Lemme 2 (1), (2) and the page’s form (A_f)_𝔔 → A_𝔭.",
     found:
-      'Both parts hold as the reading states them; no hypothesis is missing. Part (2) does not need the Noetherian hypothesis: it holds over any commutative ring. Part (1) uses it only to make the kernel of A → A_𝔭 finitely generated, and needs that kernel described exactly — the elements killed by some element outside 𝔭 — which is the correction the reading’s footnote makes to the page’s « l’annulateur de A − 𝔭 ».',
+      "Nothing false. The step « constructible, donc … ouvert » never uses constructibility: stability under generization plus a non-empty open in each x̄ is enough, proved directly. (H) is used in a weaker form than the page states; injectivity needs neither (H) nor the Noetherian hypothesis; Corollaire 1 needs from Lemme 2 only one f killing ker(A → A_𝔭); Lemme 2 (2) holds over any commutative ring. Not proved: Corollaire 1 off the affine case, Lemme 3, Corollaires 2–3, the two counterexamples.",
     verdict: 'holds, more generally',
     lean: 'lean/Grothendieck/Folder42.lean',
-    theorems: ['lemme2_1', 'lemme2_2'],
+    theorems: ["lemme2_1", "lemme2_2", "isOpen_of_stableUnderGeneralization", "lemme1_faisceau", "proposition", "lemme2_page", "lemme1", "corollaire1"],
   },
   {
     folder: '158',
@@ -52,15 +52,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '153',
     batch: 1,
-    page: '3',
-    name: 'Lemme',
+    page: '2–7',
+    name: "Lemme; co-operations; Pólya, Vandermonde; Ω = Ω₀ ⊕ Ω⁰",
     statement:
-      'For a free k₀-module M, Ω ⊗ M → K₀[T] ⊗ M is injective, its image is the set of F with F(x) ∈ M for every x, and membership is decided coordinate by coordinate in a basis (Ω the integer-valued polynomials).',
+      "The lemma on integer-valued polynomials and free modules; the co-addition and co-multiplication of Int(k₀) exist, are unique and obey the composition rules (K₀ a localisation of k₀, Ω free); the Pólya basis and Vandermonde for Int(ℤ); the decomposition Ω = Ω₀ ⊕ Ω⁰; the examples and counterexamples of p. 7 (Appl, k[T], 𝔽_q, k[[T]]⁺).",
     found:
-      'Holds as stated. The inclusion k₀ ⊂ K₀ is never used: any k₀-algebra K₀ will do. Freeness is used twice, for flatness and for the coordinates.',
+      "Holds. The inclusion k₀ ⊂ K₀ is never used; what is used is that K₀ is a localisation, not K₀ ⊗ K₀ = K₀, and whether the latter alone suffices is left open. The decomposition needs neither axiom 3) nor the unit T. Appl(A, A) fails 3a) for every infinite non-zero unital A. The reading’s footnote on k[[T]]⁺: the matrix is Pascal’s without its (0, 0) entry; the counterexample holds in every characteristic.",
     verdict: 'holds, more generally',
     lean: 'lean/Grothendieck/Folder153.lean',
-    theorems: ['lemme_injective', 'lemme_range', 'lemme_coordonnees'],
+    theorems: ["lemme_injective", "lemme_range", "Phi_injective", "coaddition_existsUnique", "polya", "vandermonde", "isCompl_constants_zeroPart", "appl_not_coaddition", "geom_not_finite_coaddition"],
   },
   {
     folder: '152',
@@ -104,15 +104,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '104',
     batch: 1,
-    page: '6',
-    name: 'Categories of models',
+    page: '6–10',
+    name: "Categories of models; well-foundedness; simplicial identities",
     statement:
-      'In a category of models, (*) Hom(D′, D) → subobjects is injective, the classes form an order, u_d = id; and the three examples — semi-simplicial, cubical, hemispherical — have 2ⁿ⁺¹ − 1, 3ⁿ and 2n + 1 cells.',
+      "In a category of models, (*) is injective, the classes form an order, u_d = id, and the three examples have 2ⁿ⁺¹ − 1, 3ⁿ and 2n + 1 cells; a skeletal category of models whose strict relation is well-founded is a direct (Reedy) category, and conversely; in Example 1, the simplicial identities hold, every arrow factors through a face, and the category is direct.",
     found:
-      'Nothing wrong; both of the reading’s corrections to Example 3 are confirmed, and hypothesis (i) is not needed for the order or for u_d = id. Not proved: the simplicial identities, the Reedy condition, M ≃ M₀.',
+      "Nothing wrong. Well-foundedness is a real extra hypothesis, as the reading’s « dès que » says: ℤ as a category satisfies (i) and (ii) and is not direct. The Reedy statement needs the category skeletal (« rigide », p. 9); (i) is not used. Not proved: the full decomposition of an arrow into faces, M ≃ M₀.",
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder104.lean',
-    theorems: ['etoile_injective', 'isIso_of_aller_retour', 'id_of_idempotent_bijective'],
+    theorems: ["etoile_injective", "isIso_of_aller_retour", "id_of_idempotent_bijective", "reedyDirecte", "wf_of_degre", "entiers_relatifs_non_directe", "deltaInjReedy"],
   },
   {
     folder: '125',
@@ -130,15 +130,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '161-1',
     batch: 1,
-    page: '3',
-    name: 'Condition (1); idempotent adjunctions',
+    page: '2–6',
+    name: "Idempotent adjunctions",
     statement:
-      'u restricted to E′ is fully faithful and vu(E′) ⊂ Ē′ if and only if η is invertible on E′; the four idempotency conditions are equivalent; the Σ-local objects are the essential image of the reflective subcategory.',
+      "Conditions (1) and (2), the five conditions of p. 3, the fixed parts E₀ ≃ F₀, the conditions 1), 3), 4) of p. 5; under idempotency E₀ is reflective with a colimit-preserving reflector and F₀ coreflective; the descent of p. 6.",
     found:
-      'Nothing wrong. The margin asks for an example showing the second condition is needed; one is given (E′ = {∅} in sets, over a point), as the reading says. The manuscript’s paired idempotency conditions are redundant: any one implies the others.',
-    verdict: 'holds',
+      "Nothing wrong. The fifth condition of p. 3 repeats the second word for word. The descent of p. 6 holds without β fully faithful, which the page assumes. Not proved: the reconstruction of an idempotent adjunction from (E₀, F₀, E₀ ≃ F₀), pp. 9–19.",
+    verdict: 'holds, more generally',
     lean: 'lean/Grothendieck/Folder161_1.lean',
-    theorems: ['condition1', 'condition1_non_surabondante', 'idempotent_tfae', 'local_iff_mem_essImage'],
+    theorems: ["condition1", "condition2", "five_conditions_tfae", "fixedEquiv", "reflectorAdj", "reflector0_preservesColimits", "condition4", "descent"],
   },
   {
     folder: '22',
@@ -256,5 +256,57 @@ export const PROOFS: Proof[] = [
     verdict: 'the reading dropped a hypothesis',
     lean: 'lean/Grothendieck/Folder114.lean',
     theorems: ['W₀_localisateurFondamental', 'totalementAspherique_W₀_iff', 'Wmin_inclus', 'proposition4_ii_iii', 'contreExemple_proposition4'],
+  },
+  {
+    folder: '67',
+    batch: 5,
+    page: '90',
+    name: "Involutions and triples (finding)",
+    statement:
+      "For any ring k and any k-module M on which 2 is injective, involutions σ of M correspond to triples (P, Q, m) — P = M₊, Q = M₋, m ⊂ P/2P ⊕ Q/2Q meeting each summand trivially — by an equivalence of categories, with no finiteness hypothesis.",
+    found:
+      "Holds as stated, for non-commutative k too, since 2 is central. 2-regularity is the only hypothesis used; fullness needs no finiteness, a σ-map being determined on 2P × 2Q. Not proved: the two Corollaries (pp. 90, 99). The finding’s literature question stays open.",
+    verdict: 'holds, more generally',
+    lean: 'lean/Grothendieck/Folder67.lean',
+    theorems: ["equivalence", "inverse_obj_iso", "essSurj_witness"],
+  },
+  {
+    folder: '133',
+    batch: 3,
+    page: '46–52',
+    name: "Centre and derived group by two crossed modules (finding)",
+    statement:
+      "For N ⊃ D(G) and N′ ⊂ Cent(G): N′ = Cent(G) iff Ψ_G is injective (p. 46); N = D(G) iff the values of λ_G generate (pp. 51–52); under a central extension E of π₀ by π₁, the commutators of G₁ change by c_E (pp. 48, 52).",
+    found:
+      "Holds. Page 46 needs only N′ ⊂ Cent(G), from which [N, N′] = 1 follows; π₀ commutative follows from N ⊃ D(G); the page’s open sign is fixed, the correction term being c_E(ḡ, z̄). Partly proved: the change of Ψ and λ is proved as an identity of commutators in G₁, not as equality of maps.",
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder133.lean',
+    theorems: ["injective_Psi_iff", "eq_commutator_iff_lam_surjective", "commutator_G1", "Psi_G1", "lam_G1"],
+  },
+  {
+    folder: '156-1',
+    batch: 1,
+    page: '10–13',
+    name: "The segment model is a biorder (finding)",
+    statement:
+      "A model of a one-dimensional form that is a single segment (F1–F5 with F′3) is the same as a poset with distinct least and greatest elements, dense and locally directed both ways, segments being the intervals; the order need not be total.",
+    found:
+      "Holds in both directions, with a non-total example in ℚ². The forward direction uses only F1, F2, F′3 and F4; F′3 is exactly the two directedness conditions; in the converse F4 holds without its regularity hypothesis.",
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder156_1.lean',
+    theorems: ["biorder", "le_swap", "intervals_axioms", "intervals_segModel", "example_segModel"],
+  },
+  {
+    folder: '156-3',
+    batch: 1,
+    page: '11–15',
+    name: "Betweenness from the cuts (finding)",
+    statement:
+      "For a tronçon ordonné, comparability and the unlabelled partitions of the C(ε) determine strict betweenness, hence the order up to reversal; comparability alone does not.",
+    found:
+      "Holds; only density and directedness are used. The reading’s footnote on p. 11 is false when the extremities are incomparable: R̄(a, b, c) ⇔ R(a, b, c) ∨ b ∈ {a, c} needs a and c comparable (counterexample: the product order on ℕ²); the lemma of p. 13 never meets that case.",
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder156_3.lean',
+    theorems: ["middle_iff", "order_of_cuts", "cmp_alone_insufficient", "btwLe_reading_fails"],
   },
 ];

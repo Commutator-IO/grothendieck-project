@@ -314,6 +314,12 @@ export interface Finding {
   status: 'unsearched' | 'candidate' | 'matched' | 'refuted' | 'confirmed';
   /** The one check that would decide it. */
   settle: string;
+  /**
+   * When the claim is proved as stated in Lean (lean/), the file and what the
+   * proof found. A proof says the statement holds; it says nothing about the
+   * literature, so it never changes `status`.
+   */
+  lean?: { file: string; found: string };
 }
 
 /**

@@ -98,10 +98,10 @@ export function MethodPage() {
             </P>
             <H3 id="microbatches">Microbatches, and why twenty</H3>
             <P id="why-twenty">
-              Each transcription pass runs on <strong>Fable 5</strong> — or, since August 2026
-              and for the standing question of whether it reads a hard hand better, on{' '}
-              <strong>Opus 5</strong>; on nothing else, and the file's header says which — in a
-              fresh context, on one batch and never two. The limit is not arbitrary: past
+              Each transcription pass runs on <strong>Opus 5.5</strong> or{' '}
+              <strong>Opus 5</strong> — on nothing else, and the file's header says which; the
+              batches first read on Fable 5 and 5.1 stay as they were made — in a fresh context,
+              on one batch and never two. The limit is not arbitrary: past
               roughly twenty handwritten pages the
               quality of machine reading degrades towards the end of the pass, and nothing in the
               output signals where it began to slip. A transcription whose weakening point is
@@ -151,8 +151,9 @@ export function MethodPage() {
               is short enough to read with the care the whole page would otherwise consume.
             </P>
             <P id="derived-editions-pin-opus">
-              The two derived passes — the modernised reading and the folder's tags — pin{' '}
-              <strong>Opus 5</strong> instead of leaving the choice open. They are not reading
+              The two derived passes — the modernised reading and the folder's tags — run on{' '}
+              <strong>Opus 5.5</strong> or <strong>Opus 5</strong> and on nothing else, and the
+              tags on whichever of the two wrote the folder's reading. They are not reading
               handwriting, so there is nothing to compare; what they need is to be comparable
               with each other and with the reading they are calibrated against. A folder's tags
               are the same judgement as its résumé, sharpened, so the same reader makes both.
@@ -245,7 +246,7 @@ export function MethodPage() {
               Where a modernised reading states something crisp in commutative algebra, finite
               combinatorics, elementary category theory or homotopical algebra, the statement is
               proved in the Lean proof assistant against mathlib, as the reading gives it, with no
-              hypothesis added: eighteen folders so far, every theorem checked by the kernel on
+              hypothesis added: twenty-two folders so far, every theorem checked by the kernel on
               each change and resting on Lean's standard axioms only. A proof checks the reading's
               mathematics, never its fidelity to the page. It has found what it is for — a gloss
               that was false (158), a hypothesis a reading had dropped (114), and once a statement
@@ -288,9 +289,9 @@ export function MethodPage() {
               only that it exists, and that a second pass has been over it.
             </LI>
             <LI id="not-claimed-our-groupings">
-              <strong>Two of the four notebooks are our groupings.</strong> “Cahier de Topos” and
-              “Cahiers tardifs” do not exist in the inventory; each says so at the head of its
-              page. “Cahier de Motifs” and “La Longue Marche” reproduce inventory groups exactly.
+              <strong>Three of the five notebooks are our groupings.</strong> “Cahier de Topos”,
+              “Cahiers tardifs” and “Notes techniques dispersées” do not exist in the inventory;
+              each says so at the head of its page. “Cahier de Motifs” and “La Longue Marche” reproduce inventory groups exactly.
             </LI>
             <LI id="not-claimed-authoritative">
               <strong>No transcription is authoritative.</strong> A machine pass over
@@ -394,7 +395,7 @@ export function MethodPage() {
 
           <P id="article-lean" className="prose-fonds mt-6">
             <em>Annexe. Énoncés des lectures modernisées démontrés</em> — its appendix, in French:
-            for each of the eighteen folders proved in Lean, the leaf in context, the statement as
+            for each of the twenty-two folders proved in Lean, the leaf in context, the statement as
             the reading gives it, a proof written out for a mathematician, remarks, and what is not
             proved; the parts follow the themes of the fonds in chronological order.
           </P>
@@ -418,7 +419,7 @@ export function MethodPage() {
   );
 }
 
-/** Progress across the four notebooks, batch by batch. */
+/** Progress across the five notebooks, batch by batch. */
 function Progress4({ manifest }: { manifest: ReturnType<typeof useManifest> }) {
   return (
     <section className="mt-10">
@@ -665,19 +666,15 @@ function Contributors() {
 const FIRST_BATCH = '2026-08-08';
 
 const PILOT = {
-  /** Transcribed so far, counted off `public/manifest.json` and excluding the
-      specimen: ninety-eight folders, 4,054 pages (25 September 2026). The batch list that used to stand
-      here was rewritten at every pass and went stale between them; the
-      manifest is the record, and this figure is read off it. */
-  batchesTranscribed: 244,
+  /** Transcribed, counted off transcripts/ and excluding the specimen:
+      164 folders, 632 batches, 9,422 pages (10 October 2026). */
+  batchesTranscribed: 632,
   /** Batches belonging to a folder that has a modernised reading. The reading
       is written per folder, taken whole, and covers every batch of it, so a
-      folder is either wholly in this count or wholly out. Seventy-two folders
-      are read; twenty-six transcribed folders are not — 4, 5, 32, 53, 56, 71,
-      75, 87, 97, 98, 100, 101, 102, 103, 105, 109, 111, 118, 122, 123, 126,
-      130, 139, 143, 156-3 and 156-5. The one that will stay out is 139: it is
-      two photographs of a medal, and there is no mathematics to restate. */
-  batchesModernised: 188,
+      folder is either wholly in this count or wholly out. 152 folders are
+      read; twelve transcribed folders are not — 69, 70, 72, 74, 77, 78, 79,
+      83, 84, 85, 91 and 93 (10 October 2026). */
+  batchesModernised: 529,
   /** Per batch. `contextM` is every token the pass sent or received, cache
       reads included; `writtenK` is output alone. Transcription is the mean of
       twelve passes (25 September 2026): hours are model-active time, gaps
@@ -764,10 +761,10 @@ function CostAndHorizon({ manifest }: { manifest: ReturnType<typeof useManifest>
     <section className="mt-14 max-w-[52em]">
       <H2 id="cost">Cost, and the horizon</H2>
       <P id="cost-measured" className="prose-fonds mt-3">
-        <strong>{PILOT.batchesTranscribed} batches</strong> have been transcribed, across
-        ninety-eight folders, and <strong>{PILOT.batchesModernised}</strong> of them have their
-        modernised reading — twenty-six transcribed folders are not yet read, and folder 139 never
-        will be: it is two photographs of a medal. At the per-batch means below that comes to
+        <strong>{PILOT.batchesTranscribed} batches</strong> have been transcribed, across 164
+        folders and some 9,400 pages, and <strong>{PILOT.batchesModernised}</strong> of them have
+        their modernised reading; twelve transcribed folders are not yet read. At the per-batch
+        means below that comes to
         about{' '}
         <strong>{hoursDone.toFixed(1)} h</strong> of model-active time,{' '}
         <strong>{fmtM(contextDoneM)} tokens</strong> of context and{' '}
@@ -776,19 +773,22 @@ function CostAndHorizon({ manifest }: { manifest: ReturnType<typeof useManifest>
         sixteen passes of 24–25 September, metered end to end, and the rest are assumed to
         resemble them.
       </P>
+      <P id="cost-plan" className="prose-fonds mt-3">
+        In subscription terms, which is how the work is actually paid for: one twenty-page
+        transcription uses about <strong>1 % of a week</strong> of a Claude Max 20× plan. The
+        632 batches transcribed have therefore cost on the order of six such weeks; the
+        modernised readings much less, since they read text rather than page images.
+      </P>
       <P id="cost-pace" className="prose-fonds mt-3">
         The figure a reader actually wants is not hours but weeks, so here it is, observed the
         same way: <strong>{transcribedNow} batches</strong> in the{' '}
         <strong>{daysElapsed} days</strong> since the first was committed, which is{' '}
         <strong>{perWeek.toFixed(1)} a week</strong> counted flat across every day, working or
-        not. At that pace the folders nobody has edited — {openBatches} batches — would be
-        finished in about <strong>{weeksLeft(openBatches)} weeks</strong>, and the whole
-        open-access fonds in <strong>{weeksLeft(allBatches)}</strong>. Both numbers move on
-        their own as the manifest and the calendar do, which is the only way a claim like this
-        stays true. Two things they do not know: the pace has better than doubled since the
-        tooling landed, so the average understates the recent weeks; and the folders left are
-        larger than the ones done, the median having risen from 78 pages to 85 as the small
-        end was cleared.
+        not. The folders nobody has edited — {openBatches} batches — are all transcribed. What
+        is left of the open-access fonds is the folders that published editions already cover;
+        transcribing them as well would take about <strong>{weeksLeft(allBatches)} weeks</strong>
+        more at the same pace. The figure moves on its own as the manifest and the calendar do,
+        which is the only way a claim like this stays true.
       </P>
       <P id="cost-context-vs-written" className="prose-fonds mt-3">
         Those last two numbers are the same work counted twice, and keeping them apart is the

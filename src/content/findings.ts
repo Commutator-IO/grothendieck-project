@@ -1624,6 +1624,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'The case k = ℤ is classical — two conjugacy classes of involutions ≠ ±1 in GL₂(ℤ), equivalently the three indecomposable ℤ[C₂]-lattices (I. Reiner, « Integral representations of cyclic groups of prime order », Proc. AMS 8, 1957; Curtis–Reiner, Methods of Representation Theory I, §34) — so the question is only the general Proposition. Since k[C₂] is the fibre product k ×_{k/2k} k when 2 is regular, look first in L. S. Levy, « Modules over pullbacks and subdirect sums » (J. Algebra 71, 1981), whose separated modules over a pullback are described by triples of this shape; then in J. Milnor, Introduction to Algebraic K-theory (1971), §2, for the projective case. All three references are cited from memory. If the Proposition is there, or is a direct instance of Levy’s description, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+    lean: { file: 'lean/Grothendieck/Folder67.lean', found: "An equivalence of categories, for any ring k, even non-commutative; 2-regularity is the only hypothesis used." },
   },
   {
     id: '67-canonical-metrics-leaf-order',
@@ -1790,6 +1791,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'The obstruction in H³ and the torsor under H² are Eilenberg and Mac Lane’s (« Cohomology theory in abstract groups. II », Ann. of Math. 48, 1947) and Mac Lane and Whitehead’s (1950), so the question is only the part about the centre and the derived group. Look first at isoclinism, whose invariant is G/Cent(G), D(G) and the commutator map: P. Hall, « The classification of prime-power groups » (J. reine angew. Math. 182, 1940); F. R. Beyl and J. Tappe, Group Extensions, Representations, and the Schur Multiplicator (LNM 958, 1982), on central extensions and their commutator forms; N. S. Hekster, « On the structure of n-isoclinism classes of groups » (J. Pure Appl. Algebra 40, 1986). Then look in the crossed-module literature, R. Brown, P. J. Higgins and R. Sivera, Nonabelian Algebraic Topology (EMS, 2011), and in Hoàng Xuân Sính’s thesis, Gr-catégories (Paris VII, 1975; folder 135). All are cited from memory. If a group is described in any of them by these two crossed modules, with the conditions for its centre and derived group to be exactly N′ and N, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+    lean: { file: 'lean/Grothendieck/Folder133.lean', found: "Both equivalences; page 46 needs only N′ ⊂ Cent(G), and the sign the page leaves open is fixed. The change under a central extension is proved as an identity of commutators." },
   },
   {
     id: '133-affine-quotient-not-constructible',
@@ -4514,6 +4516,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'First settle the page: re-read the converse on page 12 against the facsimile (/transcribe-grothendieck), since it is carried by illegible words. Then read Courcelle 2020 and the betweenness literature it cites (Pitcher–Smiley 1942; Sholander 1952), and Prenowitz–Jantosciak, Join Geometries (1979), for an axiomatics of segments as intervals of a non-total, bounded, dense, locally directed order. The search so far went only to abstracts, so the status stays unsearched.',
+    lean: { file: 'lean/Grothendieck/Folder156_1.lean', found: "Both directions, with a non-total example; the forward direction uses only F1, F2, F′3 and F4." },
   },
   {
     id: '156-1-branching-without-branch-point',
@@ -4591,6 +4594,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Only one source was read, and the statement is elementary once posed, so the search is thin. Check the cut-point characterisations of linear order (L. E. Ward 1936; Kok, Connected orderable spaces, 1973), M. Altwegg 1950 and J. Lihová 2000 on poset betweenness, and Gallai 1967 on unique transitive orientation, for a version taking as data the partitions of the common-comparability sets. If any of them states it for posets, mark matched; if it appears only for total orders, say so here, since the partial-order case is the one the page is about.',
+    lean: { file: 'lean/Grothendieck/Folder156_3.lean', found: "Holds, from density and directedness alone; the reading’s footnote on p. 11 fails for incomparable extremities." },
   },
 // Candidate entries for folder 156-4 (find-novelty, Opus 5.5 on an Opus 5.5 reading, 2026-10-10). Not merged into src/content/findings.ts.
   {

@@ -222,6 +222,16 @@ function Row({ n, withCote }: { n: Finding; withCote?: boolean }) {
           {n.ours ? notation(n.ours) : 'Nothing — the page carries the statement alone.'}
         </Field>
 
+        {n.lean && (
+          <Field label="Proved in Lean">
+            {notation(n.lean.found)}{' '}
+            <a href={`https://github.com/Commutator-IO/grothendieck-project/blob/main/${n.lean.file}`} className="text-brand-700 hover:underline">
+              {n.lean.file.replace('lean/', '')}
+            </a>
+            {' '}— the statement holds as written; whether it is in the literature is still the question below.
+          </Field>
+        )}
+
         <Field label="Searched" muted={n.literature.length === 0}>
           {n.literature.length ? (
             <ul className="space-y-0.5">
