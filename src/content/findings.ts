@@ -7757,4 +7757,139 @@ export const FINDINGS: Finding[] = [
     settle:
       'Look for the integrality of binom(χ, k)·δ′^k/χ^k (equivalently, of the Chern classes of the Fourier transform of a non-degenerate line bundle expressed through the dual polarisation) in Mukai 1981 §3, Birkenhake–Lange, Complex Abelian Varieties, ch. 14 (dual polarisation and Fourier–Mukai), and Beauville 1983. If it is stated there, or is read off Mukai 3.11 in a published remark, mark matched. Separately, someone should check the page’s overwritten argument of φ_L against the facsimile before anything rests on the exponent.',
   },
+  {
+    id: '74-gq2t-latin-square-reduction',
+    cote: '74',
+    pages: '92–103, 116',
+    kind: 'mathematical',
+    claim:
+      'A graph in which every edge lies in a unique triangle and every vertex off a triangle is linked to exactly one of its vertices (the collinearity graph of a generalized quadrangle with three points per line), with no empty fibre over a fixed triangle t₀, is equivalent to a Latin square Γ of order c on the three quotients E_α together with three double covers Ẽ_α → E_α whose pull-backs to Γ are identified by a transitive system of isomorphisms, subject to a further axiom (Ka); and when the Latin square is a group table on which the vertical triangle symmetries act as on p. 116, the group is an elementary abelian 2-group.',
+    basis:
+      'Pages 92–97 build the decomposition around t₀ (Props 1–4) and the Scholie of page 96; pages 98–100 give Prop. 5, axiom 3 and the struck but legible Prop. 6; pages 101–103 pass to the quotient Γ = Γ̃/σ, state that β_Γ̃ is equivalent to β_Γ (Γ → E_α × E_β bijective) and write « la classification … se décompose en deux questions exactement », I) the systems satisfying β_Γ and II) their double covers satisfying (Ka); page 116 shows, for the relation xyz = 1 on a group G, that the maps φ_a preserve it only if every element has order 2.',
+    ours:
+      'The identification of these axioms with generalized quadrangles of order (2, c), of β_Γ with the Latin-square axiom I of page 1, and of problem II with the central extensions of pages 32–39 are the reading’s, not the page’s. The reading’s sentence that page 116 explains « pourquoi le carré latin du problème I) doit être la table d’un F₂-espace vectoriel » goes further than the page, which assumes from the start that the Latin square is the table of a group; this pass reads page 116 as proving the narrower statement given in the claim, and records the disagreement here without overriding the reading. The axiom (Ka) itself is only partly legible: the marginal condition (***) of page 96 is transcribed with \\uncertain{} and two \\ill{}, and pages 101 and 103 only refer back to it, so the equivalence as the page intends it cannot be stated in full.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'The classification of generalized quadrangles of order (2, t) (t ∈ {1, 2, 4}, each unique) is classical and is not the question; the question is whether the coordinatisation relative to a fixed line — the lines disjoint from it, modulo the symmetry about it, forming a 3-net of order t, with the quadrangle recovered as a double cover — is set out in Payne and Thas, Finite Generalized Quadrangles (1984, 2nd ed. 2009), §1.3, §5.2 and ch. 8 on symmetries about a line, in Dixmier and Zara (1976) on quadrangles studied around two non-collinear points, or in the coordinatisation of quadrangles by Hanssens and Van Maldeghem; all cited from memory. If it is there, mark matched. Two web searches on 2026-10-10 returned only background pages (Thas on axes of symmetry, Wikipedia-derived definitions) and nothing that was read on this question, so nothing counts as searched. Before searching, the transcription of the margin of page 96 should be rechecked against the facsimile, since the axiom (Ka) is part of the statement.',
+  },
+  {
+    id: '74-leaves-6-before-5',
+    cote: '74',
+    pages: '5–6',
+    kind: 'codicological',
+    claim:
+      'Pages 5 and 6 are filed in the reverse of their writing order: the sentence « Donc on a trois applications u₁, u₂, u₃ : G → G′ » at the foot of page 6 continues at the head of page 5 with « satisfaisant u_i(1) = 1 », so the proof that φ : 𝒞′ → 𝒞 is fully faithful (p. 6) comes before the homomorphism lemma that finishes it (p. 5).',
+    basis:
+      'Batch 1 notes at the head of page 5 that the page begins in mid-sentence and at the foot of page 6 that the sentence goes on at the head of page 5 (« les feuillets sont classés dans le désordre »); the mathematics confirms it, since page 5 uses the u_i and the relation (*) that page 6 sets up, and page 5 ends on the question « le foncteur φ est-il une équivalence ? » about the functor page 6 introduces.',
+    ours: null,
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check the facsimile for whether pages 5 and 6 are the two sides of one leaf (with page 4 blank) or two leaves: if one leaf, it was turned over when filed; if two, they were swapped. This pass worked from the transcription and did not reopen the facsimile.',
+  },
+  {
+    id: '74-nb-109-continues-112',
+    cote: '74',
+    pages: '109–112',
+    kind: 'codicological',
+    claim:
+      'The struck-through NB at the foot of page 109 continues at the head of page 112, also struck through and written upside down relative to the pages around it, with pages 110 and 111 (a corollary and a lemma on transitivity over the upper triangles) filed between.',
+    basis:
+      'Batch 6 notes on page 109 that the NB « se poursuit en tête de la p. 112, elle aussi barrée », on page 112 that it « continue le NB biffé de la p. 109 », and in its header that page 112 was read turned through 180 degrees.',
+    ours: null,
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look at the facsimile to see whether page 112 is the back of the leaf carrying page 111, used upside down, or a leaf filed out of place; that decides whether the run 109–112 was written in this order. This pass did not reopen the facsimile.',
+  },
+  // Folder 84 — /find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over transcripts/84/84.modern.tex (Pass: Opus 5.5) and batch-01..10.fr.tex. Literature searched in this pass: J. Voight, « Discriminants and the monoid of quadratic rings », Pacific J. Math. 283 (2016), arXiv:1504.05228, full text; O. Biesel and A. Gioia, « A new discriminant algebra construction », arXiv:1503.05318, § 8. Nothing else was opened; Hahn, Loos, Small, Knus and Deligne’s 2005 letter are cited here only as Voight cites them.
+  {
+    id: '84-product-coinvariants-one-etale',
+    cote: '84',
+    pages: '83–86',
+    kind: 'mathematical',
+    claim:
+      'For quadratic algebras A₁, A₂ over any base, the canonical map A₁ * A₂ → A₁ ⊗ A₂ identifies the product with the invariants (A₁ ⊗ A₂)^{σ₁⊗σ₂}, universally, if and only if at every point of residue characteristic 2 at least one of A₁, A₂ is étale (dually: E₁ ⊗ E₂ modulo Im(σ₁⊗σ₂ − id) → E₁ * E₂ is an isomorphism iff 2𝒪 + b₁𝒪 + b₂𝒪 = 𝒪 in split coordinates).',
+    basis:
+      'Page 84 computes generators of Im(σ₁⊗σ₂ − id); page 85 states the Proposition (« il faut et il suffit que partout sur X₀ = V(2.1_X), T_{1,0} ou T_{2,0} engendre L_{1,0} resp. L_{2,0} ») with a rank count over X₀; page 86 states the Corollary for Hom(−, M) and for the algebras, with the converse « si on sait que ceci reste vrai après toute changement de base ». The words carrying the statement are read; only struck words beside it are \\ill{}.',
+    ours:
+      'The page assumes L₁, L₂ « localement libres de type fini » and proves the equality of kernel and image by a rank count over X₀, announcing without justification a reduction to the case 2 = 0; the reading replaces that with its own local computation in a basis (necessity through the cokernel Coker π₁ ⊗ Coker π₂, sufficiency through explicit generators). That proof is the edition’s; the statement and the condition are the page’s.',
+    literature: [
+      'J. Voight, Discriminants and the monoid of quadratic rings, Pacific J. Math. 283 (2016), arXiv:1504.05228: Theorem A(iii) and Theorem 3.24(iii) state S * T = (S ⊗ T)^{σ⊗τ} only when both S and T are separable, citing C. Small, J. Pure Appl. Algebra 2 (1972), Prop. 1; the remark after Construction 3.12 notes that w = x⊗y + σ(x)⊗τ(y) need not generate a rank-2 algebra (char 2, σ = τ = id). No statement with only one factor étale at each point of characteristic 2, and no if-and-only-if, was found there.',
+      'O. Biesel and A. Gioia, A new discriminant algebra construction, arXiv:1503.05318, § 8: restates Voight’s characterisation with the fixed-subring property for étale S, T only.',
+    ],
+    status: 'candidate',
+    settle:
+      'Read O. Loos, « Tensor products and discriminants of unital quadratic forms over commutative rings », Monatsh. Math. 122 (1996), and « Discriminant algebras of finite rank algebras and quadratic trace modules », Math. Z. 257 (2007), § 6.1; A. Hahn, Quadratic algebras, Clifford algebras, and arithmetic Witt groups (1994), Exercises 14–20, pp. 42–43; and Small 1972, for a fixed-subring description of the product under « one factor étale at each point of characteristic 2 », and for the converse. If any states it, mark matched.',
+  },
+  {
+    id: '84-product-quadratic-algebras-formula',
+    cote: '84',
+    pages: '62–79, 88–90, 98–105',
+    kind: 'mathematical',
+    claim:
+      'Over any base, without dividing by 2, quadratic algebras carry a commutative product with L(X₁ * X₂) = L₁ ⊗ L₂ and, in split coordinates, b = b₁b₂, c = c₁b₂² + c₂b₁² − 4c₁c₂, hence δ = δ₁δ₂, the generator mapping to 2U₁U₂ + b₁U₂ + b₂U₁ in A₁ ⊗ A₂.',
+    basis:
+      'Page 63 guesses b = b₁b₂ (« sauf erreur ») and the boxed formula for c; pages 65–79 construct the product of χ-trivialised extensions as an amalgamated sum; page 89 states the uniqueness theorem for the quadratic form on E₁ * E₂; page 102 gives i(𝒰) = 2U₁U₂ + b₁U₂ + b₂U₁. The page-63 box writes « 4c₁c₁ », read 4c₁c₂.',
+    ours:
+      'The reading corrects 4c₁c₁ to 4c₁c₂, re-derives the identity of page 64, and adds that uniqueness on page 89 needs the trace of Q to be the T of E₁ * E₂, which the page uses but does not put in its definition of « admissible ».',
+    literature: [
+      'J. Voight, Discriminants and the monoid of quadratic rings, Pacific J. Math. 283 (2016), arXiv:1504.05228, Construction 3.12 and Theorem 3.24: for x² = tx − n, y² = sy − m, S * T = R ⊕ Rw with w² = (st)w − (mt² + ns² − 4nm), which is the folder’s formula under b = −t, c = n and w ↦ −w; w = x⊗y + σ(x)⊗τ(y) is the folder’s generator. Voight attributes the formula to A. Hahn (1994, Exercises 14–20, pp. 42–43), the general monoid to O. Loos (Monatsh. Math. 122, 1996) and its existence to a letter of P. Deligne to Rost and Bhargava (2 March 2005).',
+      'O. Biesel and A. Gioia, arXiv:1503.05318, § 8: the same monoid, in the setting of discriminant algebras.',
+    ],
+    status: 'matched',
+    settle:
+      'Matched for the product of quadratic algebras and its formula. What the matched sources do not, by this pass’s reading, contain is the folder’s route to it: the product of χ-trivialised extensions for arbitrary χ (see 84-chi-trivialised-extension-product). Nothing here bears on dates; the folder is undated beyond the inventory’s « [à partir de 1982-vers 1986] ».',
+  },
+  {
+    id: '84-two-regular-triplet-classification',
+    cote: '84',
+    pages: '45–53',
+    kind: 'mathematical',
+    claim:
+      'If 2 is a non-zero-divisor on the base, quadratic covers are equivalent to triples (L, δ, T₀) with L invertible, δ ∈ Γ L^{⊗2}, T₀ ∈ Γ(V(2), L₀) and T₀² ≡ δ mod 4, generalising the classification of quadratic rings over ℤ by a discriminant ≡ 0, 1 mod 4.',
+    basis:
+      'Page 47 boxes T₀² ≡ δ (mod 4); pages 48–53 state the theorem and reconstruct E, A, trace, norm, product and Q(λ, ζ) = (ζ² − λ²δ)/4 by explicit divisions checked at each step. Two signs on page 52 are covered by a stain and supplied from the boxed formula; the letter read φ on page 50 is uncertain.',
+    ours:
+      'The comparison with the classical ℤ case and Stickelberger’s congruence is the reading’s. The statement is the page’s.',
+    literature: [
+      'J. Voight, Discriminants and the monoid of quadratic rings, Pacific J. Math. 283 (2016), arXiv:1504.05228: Prop. 3.11 (a global t ∈ L^∨/2L^∨ with t ⊗ t = d mod 4 for every quadratic algebra), Theorem C / Theorem 4.3 (the fibre of disc over d is indexed by {t : t² ≡ d mod 4R} × R[4]/dR[4] under an action of AS(R) = R[4]/℘(R)[4]). When 2 is a non-zero-divisor, R[4] = 0 and the algebra is determined by (d, t mod 2), which is the folder’s statement on isomorphism classes, in the free affine case.',
+    ],
+    status: 'matched',
+    settle:
+      'Matched on isomorphism classes. Voight states it for free algebras over an affine base and through an Artin–Schreier action; the folder states an equivalence of fibred categories over a scheme or locally ringed topos. If a reader judges that globalisation not routine, re-open as candidate and check Loos 1996 § 1.2 and Knus, Quadratic and Hermitian Forms over Rings, III.3–4, before anything else.',
+  },
+  {
+    id: '84-chi-trivialised-extension-product',
+    cote: '84',
+    pages: '65–79, 123–131, 141–169',
+    kind: 'mathematical',
+    claim:
+      'For any fixed χ ∈ Γ(𝒪), extensions 0 → L → E → M → 0 equipped with a χ-splitting (π, ϖ) form a symmetric monoidal category under a product built by amalgamated sum without division, with b = b₁ ⊗ b₂ in split coordinates; for M = 𝒪 an object is invertible iff its section T₀ generates L on V(χ), and the pushout and pullback products agree canonically when some γ satisfies γχ = 2.',
+    basis:
+      'Pages 65–79 set up χ-trivialisations of L-torsors, the product, the universal property for bi-affine maps and the split case (« Il n’y a pas plus simple ! »); pages 123–131 extend to arbitrary M in coordinates with the transvection u = b₁ ⊗ u₂ + u₁ ⊗ b₂ + χ u₁ ⊗ u₂; pages 141–169 construct F₁₁ and the pushout/pullback pair. Third-part pages are rapid calculations whose linking prose is rare and often \\ill{}; the invertibility criterion sits in an oblique, partly illegible marginal note on page 79; page 167’s middle arrow carries a « ? ».',
+    ours:
+      'Substantial. The cocycle relation u″ = u + u′ that makes the coordinate products glue is verified by the reading, the page stopping before it (p. 131), with the signs b′ᵢ = bᵢ + χuᵢ fixed by the edition; the hypothesis γχ = 2 for the pushout/pullback isomorphism of page 169 is the edition’s, taken from page 127; the proof of the invertibility criterion is the edition’s reading of the illegible note. The page’s own fourth compatibility (p. 177) is never written.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Decide whether this χ-formalism, for χ other than 2, is in the literature: look in Loos 1996 (unital quadratic forms and their tensor product), in Deligne’s 2005 letter to Rost and Bhargava as described by Voight and by Biesel–Gioia, and in work on generalised effective Cartier divisors / line bundles with a section modulo χ (Deligne–Faltings log structures). Neither Voight 2016 nor Biesel–Gioia § 8, read in this pass, treat a general χ, but that is not a search for this statement.',
+  },
+  {
+    id: '84-leaves-35-38-reversed',
+    cote: '84',
+    pages: '34–39',
+    kind: 'codicological',
+    claim:
+      'Pages 35–38 are in the reverse of the order of composition: page 38 completes the proof begun on page 34, page 37 opens § 4.2, which pages 36 and then 35 continue, and page 39 follows.',
+    basis:
+      'Batch 2 notes that the end of page 37 (« telle que Q(e) = 1 ») is taken up at the head of page 36 and that page 38 ends the proof of page 34 with « cqfd »; the reading follows the order 34, 38, 37, 36, 35, 39.',
+    ours:
+      'The order is inferred from textual continuity in the transcription; no facsimile, foliation or bifolium structure was examined in this pass.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look at the facsimile of pages 34–39: whether 35/36 and 37/38 are rectos and versos of the same leaves or a reversed gathering, and whether the archivists’ numbering follows the physical stack. That would say whether the inversion is the author’s or the filing’s.',
+  },
 ];
