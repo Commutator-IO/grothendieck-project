@@ -1,0 +1,1718 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 146, pages 1-133.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken the true statement appears and the footnote
+% says what the page has. In any dispute of substance the transcription
+% governs: whoever cites Grothendieck cites batch-01.fr.tex ... batch-07.fr.tex.
+%
+% Scope: seven batches (1-20, 21-40, 41-60, 61-80, 81-100, 101-120, 121-133),
+% all transcribed, read whole before any of this was written, and written as
+% ONE file for the whole shelfmark. Many pages are blank versos or unrelated
+% administrative paper; the transcriptions' headers list them.
+%
+% The spine. The folder builds discrete models S_0T_G of the "Teichmüller
+% groupoids" S T_G = Pi_1(SP_G) — fundamental groupoids of the torsors of unit
+% tangent directions (at the marked points and at the nodes) over the strata
+% M_G of the compactified moduli spaces — by inducing them on finite sets of
+% real "base points at infinity", and relates the strata by generalisation
+% morphisms S T_G -> S T_{G'}. Stations:
+%   - pp. 1-14: S_0T_G for an MD graph of modular dimension 0, via the
+%     groupoids E(eps) attached to an extension and a torsor;
+%   - pp. 15-17: card I = 4, the tangent bundles over M^_{0,4} = P^1_J;
+%   - pp. 18-54: the line P(V_C) marked by a regular polygon, its tautological
+%     C*-bundle minus n lines (the fair draft pp. 42-54 is read FIRST, then
+%     the computations of pp. 19-39 that use it);
+%   - pp. 55-77: working sheets (icosahedral census for (0,5), base points at
+%     infinity, Belyi maps of the monogon and bigon, M^_{0,5}, line bundles
+%     L_i, platonic groups);
+%   - pp. 78-98: "Groupoïdes" — presentations of extensions and of groupoids
+%     over groupoids, pi-fibrations, (pi, mu)-fibrations;
+%   - pp. 99-124: S_0T_G in general, generalisation morphisms by holomorphic
+%     surgery, modular dimensions 0 and 1;
+%   - pp. 125-132: "Graphes MD", the combinatorics used from page 2 on.
+%
+% Notation fixed for the whole folder. Arcs (half-edges) hat-vec-A, involution
+% sigma, origin map "or" (pages 127-130 write sigma for the origin and
+% sigma-bar for the involution); free edges I, bound edges A, all edges hat-A.
+% Teichmüller groupoids written \mathcal{T} (pages 102-124 trace a Gothic T).
+% U is the circle group; base-point sets are eps (pages 89-96 write E, pages
+% 122-123 a calligraphic E); extensions are \mathcal{E}; the 2-groups acting
+% on base points are gamma. TWO base-point sets share the name S_0 on the
+% pages: eps(G) (one orientation per vertex, pp. 10-14, 2^{|S|} points) and
+% S eps_G (one real direction per edge, pp. 111-116, 2^{|hat A|} points); the
+% groupoid induced on the second is written S_0T'_G here.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - p. 13: prod_{Delta in diag Q} Delta is the set of SIDES of the square,
+%     not of its vertices;
+%   - pp. 16-17: \hat T_i = O(1) is right in EGA's convention V(E); the
+%     tangent line has degree -1 (psi_i has degree 1);
+%   - p. 35: Lemma 1 is false without its (illegible) orientation hypothesis;
+%     counterexample given;
+%   - p. 37: sin(pi t), not sin t; p. 39: Lemma 4 needs Delta a vector line,
+%     and the right-hand vertical arrow is L_{-x, -phi(x)};
+%   - p. 64: the page's normalisations are checked, g_1 and g_2 are Belyi maps;
+%   - p. 66: a scribbled ratio is not reproduced (its sign does not check);
+%   - p. 80: the proof that one-sided conjugation relations suffice is ours;
+%   - p. 86: the system defines T~, not T;
+%   - p. 88: the last group of the exact sequence is Aut_C; fullness needed;
+%   - p. 94: (17) is an equivalence for POINTED groupoids (or on iso classes);
+%   - p. 109: ]0,1]^C, as the page's own addition says;
+%   - p. 114: S eps_G has 2^{card hat-A} elements, not 2^{card A};
+%   - p. 116: relation (2) follows from (1);
+%   - p. 121: a square structure is a (2,2) partition, not (1,2);
+%   - p. 122: T_{J_II} = U^{J_II/sigma};
+%   - p. 127: (6) nu = card I; (9) is the dimension of the TYPE, the modular
+%     dimension of the graph is 3g-3+nu-c(G) (what (10) and pp. 111, 117 use).
+%
+% Announced and never established in the folder: the expression of
+% S_0T_{0,I}, card I = 4, by generators and relations (pp. 26-32 eliminate
+% generators and stop); the end of the argument "Alors on sait qu'on a" (p.
+% 62); the inverse construction of p. 97; the proof that (12)-(14) define T~
+% (p. 86); the transition condition between fibres (p. 95); the filtered
+% colimit of p. 99; the explicit relations for S_0T^Q_G (p. 123, "j'y
+% reviendrai"); the equianharmonic case (p. 124 stops on "On").
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{146}
+\pages{1}{133}
+\dating{[à partir de 1978]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Groupoïdes de Teichmüller et les S0 Tg,!ν, S0 TG : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Une surface — une sphère, un tore, une surface à plusieurs anses — peut être
+déformée de mille façons, et l'ensemble de toutes ses formes possibles est
+lui-même un espace, l'\emph{espace des modules}. Un chemin fermé dans cet
+espace ramène la surface à sa forme de départ, mais en l'ayant tordue en
+route : c'est ainsi qu'apparaissent les symétries profondes d'une surface,
+celles que forment les \emph{groupes modulaires} (ou groupes de Teichmüller).
+Ces cent trente-trois pages cherchent une façon de décrire ces groupes, et les
+« groupoïdes » qui les rassemblent, par des données finies et explicites.
+
+L'idée qui les gouverne est de regarder les surfaces au bord de leur espace
+des modules, là où elles dégénèrent. Une surface très dégénérée se casse en
+morceaux élémentaires, des sphères à trois trous — des « pantalons », dit-on
+aujourd'hui —, recollés deux à deux ; le plan de ce recollement est un graphe,
+que le dossier appelle \emph{graphe MD}. Un pantalon n'a presque aucune forme
+propre : trois points sur une sphère sont toujours dans la même position.
+Il ne lui reste qu'une donnée, une petite boussole en chacun de ses trois
+points, la direction tangente. Le dossier fait de ces boussoles le cœur du
+calcul : en chaque point, deux directions réelles privilégiées, et pour aller
+de l'une à l'autre un demi-tour de l'aiguille. Faire tourner l'aiguille d'un
+tour complet, c'est exactement le « twist » qui tord la surface autour de ce
+point. Les pages 1 à 14 décrivent ainsi, par une algèbre d'entiers pairs et
+impairs, le groupoïde attaché à une surface entièrement découpée en pantalons.
+
+Viennent ensuite les surfaces un peu moins dégénérées, qui ont un seul degré
+de liberté : la sphère à quatre points, dont l'espace des formes est lui-même
+une sphère privée de trois points. Les pages 15 à 54 l'étudient avec un soin
+presque artisanal — un hexagone régulier, ses symétries, les deux pôles où la
+configuration est la plus symétrique — pour choisir des points de base que
+toutes les symétries respectent, et écrire les chemins entre eux par
+générateurs et relations. Les pages 99 à 124 expliquent enfin comment passer
+d'une surface dégénérée à ses voisines moins dégénérées : on enlève de petits
+disques autour des nœuds et l'on recolle les bords en les tournant d'un angle
+choisi — une « chirurgie holomorphe ». Entre-temps, un cahier intitulé
+« Groupoïdes » met au point l'outil général (pages 78 à 98) : comment
+présenter un groupe ou un groupoïde construit par extension, et comment un
+petit ensemble de points de base, stable par un groupe de symétries, suffit à
+reconstituer tout le groupoïde par une recette purement algébrique.
+
+Des feuillets de travail s'intercalent : un recensement des configurations de
+cinq points sur la sphère, qui fait surgir l'icosaèdre et ses 12 sommets, 30
+arêtes et 20 faces ; les équations du « monogone » et du « bigône »,
+$-\frac14\bigl(z - \frac1z\bigr)^2$, saluées d'un « de merveille ! » ; une
+première formulation des « points base à l'infini » sur un corps quelconque.
+La datation vient des versos : un sujet d'examen de juin 1978, des imprimés de
+1979, une circulaire du 12 février 1982 ; le dossier s'étend donc au moins
+jusqu'en 1982.
+
+Où cela mène-t-il ? C'est le chantier de la « tour de Teichmüller » que
+l'\emph{Esquisse d'un programme} (1984) présentera comme un jeu de Lego : tout
+s'engendrerait à partir des surfaces de dimension modulaire $0$ et $1$, avec
+des relations venues de la dimension $2$ — la page 111 désigne déjà ces cas
+comme « les plus intéressants ». La notion de point base tangentiel a été
+formalisée par Deligne en 1989 ; que la tour des groupes modulaires
+s'engendre ainsi à partir des dimensions $1$ et $2$ a été démontré par
+Hatcher, Lochak et Schneps en 2000.
+
+\keywords{Teichmüller groupoid, mapping class group, tangential base point, Deligne–Mumford compactification, stable graph, boundary stratum, plumbing construction, Dehn twist, action groupoid, central extension of groupoids, group presentation, pure braid group, hyperplane arrangement, Belyi map, dessin d'enfant, cartographic group, icosahedral group, equivariant Picard group, Lego–Teichmüller game, pants decomposition}
+\end{resume}
+
+\pagerange{1}{133}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+\begin{itemize}
+\item \textbf{Calcul des $S_0\mathcal{T}_G$ en dimension modulaire nulle
+(pages 1 à 14)}, sous une chemise titrée de sa main (page 1) : les groupoïdes
+$\mathcal{E}(\varepsilon)$ d'une extension et d'un torseur ; le cas d'un
+sommet, $S_0\mathcal{T}_{0,I}$ avec $\operatorname{card} I = 3$ ; le groupe
+fondamental « variant » ; le cas d'un graphe ; l'exemple du carré.
+\item \textbf{Le cas $\operatorname{card} I = 4$ (pages 15 à 17)} : les fibrés
+tangents aux points marqués au-dessus de $\widehat{M}_{0,I} \simeq
+\mathbb{P}^1_J$.
+\item \textbf{La droite projective marquée par un polygone régulier (pages 18
+à 54)}, sous une chemise (page 18) : « Étude de $P\Sigma_J^{*}$ (et de
+$P\Sigma_n^{*}$\ldots) ». Une rédaction au propre, numérotée de 1 à 7 de sa
+main (pages 42 à 54), fixe le cadre ; les calculs des pages 19 à 39
+(générateurs et relations, lemmes d'homotopie) s'en servent. On lit donc la
+rédaction d'abord.
+\item \textbf{Feuillets de travail (pages 55 à 77)} : configurations de cinq
+points et icosaèdre ; points base à l'infini ; monogone et bigône ;
+$\widehat{M}_{0,5}$ ; fibrés en droites $L_i$ ; groupes des polyèdres réguliers.
+\item \textbf{« Groupoïdes » (pages 78 à 98)}, sous une chemise (page 78) :
+présentations d'extensions de groupes et de groupoïdes ; $\pi$-fibrations ;
+$(\pi, \mu)$-fibrations et groupoïdes induits sur des points de base.
+\item \textbf{$S_0\mathcal{T}_G$ en général, et les morphismes de
+généralisation (pages 99 à 124)} : réductions ; chirurgie holomorphe ;
+dimension modulaire $0$, puis $1$.
+\item \textbf{« Graphes MD » (pages 125 à 132)}, sous une chemise (page 125) :
+le tableau des graphes de petits types, les définitions, les opérations.
+\end{itemize}
+
+Les définitions combinatoires dont tout le dossier se sert ne viennent qu'à la
+fin (pages 127 à 132) ; on les rappelle ci-dessous, et la dernière section les
+reprend dans l'ordre des pages.
+
+\subsection*{Les conventions}
+
+\emph{Graphes MD.} Un graphe est donné par un ensemble fini $S$ de sommets, un
+ensemble fini $\hat{\vec A}$ d'\emph{arcs} (demi-arêtes), une application
+origine $\mathrm{or} : \hat{\vec A} \to S$, une involution $\sigma$ de
+$\hat{\vec A}$, et un genre $g : S \to \mathbb{N}$\footnote{Les pages 127 à 130
+notent $\sigma$ l'application origine et $\bar\sigma$ l'involution ; les pages
+1 à 14 et 99 à 124 notent $\sigma$ l'involution et « or » l'origine (page 14).
+On suit ces dernières. Les pages 1 à 14 écrivent $\vec{\hat A}$ pour
+$\hat{\vec A}$.}. Les points fixes de $\sigma$ sont les arêtes \emph{libres},
+$I = \hat{\vec A}^{\sigma}$ — les points marqués ; les autres arcs forment
+$\vec A$, et $A = \vec A/\sigma$ est l'ensemble des arêtes \emph{liées} — les
+nœuds ; $\hat A = \hat{\vec A}/\sigma = I \amalg A$. On note $\hat{\vec A}_s$
+les arcs d'origine $s$ et $\hat\nu_s = \operatorname{card} \hat{\vec A}_s$
+l'ordre du sommet. Le graphe est \emph{MD} (stable au sens de Deligne et
+Mumford) si $2g_s + \hat\nu_s \geq 3$ pour tout $s$. Une courbe stable de type
+$G$ a pour normalisée la réunion des courbes lisses $\widetilde{X}_s$ de genre
+$g_s$ marquées par $\hat{\vec A}_s$, recollées selon $\sigma$.
+
+\emph{Espaces de modules.} $M_{g,I}$ est l'espace (le champ) des modules des
+courbes lisses de genre $g$ marquées par $I$, $\widehat{M}_{g,I}$ sa
+compactification de Deligne--Mumford\footnote{Les pages écrivent $\hat M$ pour
+la compactification, la notation de l'époque, $\overline{M}$ aujourd'hui.},
+$M_G$ la strate des courbes de type $G$. La \emph{dimension modulaire} de $G$
+est $\dim M_G = \sum_s (3g_s - 3 + \hat\nu_s)$ ; elle est nulle exactement
+quand tous les sommets sont de genre $0$ et d'ordre $3$, et alors $M_G$ est un
+point.
+
+\emph{Torseurs tangents.} $\mathbb{U} = \{ z \in \mathbb{C} \mid |z| = 1\}$.
+Pour une courbe $X$ et un point lisse $x$, $T_x$ est le
+$\mathbb{U}$-torseur des directions tangentes en $x$, $(T_xX \smallsetminus
+0)/\mathbb{R}^{*}_{+}$ ; pour un nœud $a$, de branches $a', a''$, $T_a =
+T_{a'} \wedge T_{a''}$ (produit contracté). Au-dessus d'une strate, ils
+forment des fibrés principaux : $SP_G = \prod_{a \in \hat A} T_a$, de groupe
+$\mathbb{U}^{\hat A}$ ; $P_G = \prod_{a \in A} T_a$ ; et plus généralement
+$P_{G,K} = \prod_{a \in K} T_a$ pour $K \subset \hat A$ (page 103). Les
+groupoïdes fondamentaux correspondants sont
+\[
+S\mathcal{T}_G = \Pi_1(SP_G), \qquad \mathcal{T}_G = \Pi_1(P_G), \qquad
+R\mathcal{T}_G = \Pi_1(M_G),
+\]
+le dernier au sens des orbifoldes ; $S\mathcal{T}_G$ est une extension de
+$R\mathcal{T}_G$ par $\mathbb{Z}^{\hat A}$, les générateurs du noyau étant
+les tours complets des directions tangentes — en termes d'aujourd'hui, les
+twists de Dehn autour des points marqués et des nœuds\footnote{Le titre du
+dossier note $\mathcal{T}^{!}_{g,\nu}$ ce que la page 102 identifie à
+$S\mathcal{T}_{g,I}$ : pour une courbe lisse, c'est le groupoïde dont les
+groupes sont les groupes modulaires de la surface de genre $g$ à $\nu$
+composantes de bord, extension du groupe modulaire pur par
+$\mathbb{Z}^{\nu}$. Les pages 102 à 124 tracent la lettre $\mathcal{T}$ en
+gothique ; ce sont les mêmes objets.}.
+
+\emph{Points de base.} Les indices $0$ à gauche ($S_0\mathcal{T}$,
+${}_0\mathcal{T}$) désignent toujours un sous-groupoïde \emph{plein}, induit
+sur un ensemble fini de points de base réels, noté $\varepsilon$ ; le
+$2$-groupe qui agit simplement transitivement sur lui est noté $\gamma$.
+Deux choix de points de base portent le même nom sur les pages, et on les
+distingue : l'ensemble $\varepsilon(G)$ des pages 10 à 12, une orientation par
+sommet ($2^{\operatorname{card} S}$ éléments), et l'ensemble $S\varepsilon_G$
+des pages 113 à 116, une direction réelle par arête ($2^{\operatorname{card}
+\hat A}$ éléments). On garde $S_0\mathcal{T}_G$ pour le groupoïde induit sur le
+premier, et l'on écrit $S_0\mathcal{T}'_G$ pour celui induit sur le second.
+
+\emph{Extensions.} $\mathcal{E}$ désigne toujours une extension de groupes, et
+$\mathcal{E}_z$ sa fibre au-dessus d'un élément $z$ du quotient. L'ensemble à
+deux éléments des orientations d'un ensemble fini $I$ est $\omega(I)$ ; $\mu_2
+= \{\pm 1\}$.
+
+\pagerange{1}{14}
+\section*{Calcul des $S_0\mathcal{T}_G$ en dimension modulaire nulle (pages 1
+à 14)}
+
+\pagerange{2}{5}
+\subsection*{Le groupoïde d'une extension et d'un torseur (pages 2 à 5)}
+
+Soit $G$ un graphe MD de dimension modulaire nulle. Coupons-le en tous ses
+nœuds : on obtient un graphe $G^{b}$ dont chaque sommet $s$, isolé, porte trois
+arcs libres, et pour lequel $S_0\mathcal{T}_{G^b} = \prod_{s \in S}
+S_0\mathcal{T}_{0, \hat{\vec A}_s}$. Le groupoïde de $G$ s'en déduit par le
+changement de groupe d'opérateurs
+\[
+(1)\qquad S_0\mathcal{T}_G = S_0\mathcal{T}_{G^b} \wedge^{\mathbb{Z}^{\hat{\vec
+A}}} \mathbb{Z}^{\hat A},
+\]
+le long de l'homomorphisme $\mathbb{Z}^{\hat{\vec A}} \to \mathbb{Z}^{\hat A}$
+qui somme les coordonnées des deux arcs d'une même arête — la traduction, au
+niveau des groupes fondamentaux, de $T_a = T_{a'} \wedge T_{a''}$\footnote{La
+page dit « changement de groupes interne », associé à $\vec{\hat A} \to \hat
+A$. Une note marginale, au-dessus, n'est lisible que par fragments.}. Tout se
+ramène donc au cas d'un seul sommet : une droite projective $\mathbb{P}^1_I$
+marquée par un ensemble $I$ à trois éléments.
+
+\emph{Les points de base.} Trois points de $\mathbb{P}^1(\mathbb{C})$ sont sur
+un unique cercle ; une orientation $\alpha \in \omega(I)$ de $I$ (un ordre
+cyclique) oriente ce cercle, et donne en chaque $i \in I$ un vecteur tangent
+unitaire, d'où un isomorphisme de $\mathbb{U}$-torseurs $\varphi_{\alpha,i} :
+T_i \simeq \mathbb{U}$, et un point $\bar\alpha$ du $\mathbb{U}^I$-torseur
+$P\mathbb{U}_{0,I} = \prod_{i \in I} T_i$. D'où une injection
+\[
+(3)\qquad \omega(I) \hookrightarrow P\mathbb{U}_{0,I},
+\]
+compatible avec l'homomorphisme diagonal $\{\pm 1\} \to \{\pm1\}^I \subset
+\mathbb{U}^I$ : renverser l'orientation retourne chacun des trois vecteurs.
+Tout est compatible avec l'action de $\mathfrak{S}_I$, qui agit sur
+$\omega(I)$ par la signature. On \emph{définit} $S_0\mathcal{T}_{0,I}$ comme le
+sous-groupoïde plein du groupoïde fondamental de $P\mathbb{U}_{0,I}$ induit sur
+$\omega(I)$.
+
+\emph{Le groupoïde d'une extension.} Pour un $\mathbb{U}$-torseur $P$ et $x, y
+\in P$, les classes de chemins de $x$ à $y$ sont la fibre
+$\widetilde{\mathbb{U}}_{y-x}$ du revêtement universel $\mathbb{R} \to
+\mathbb{U}$, la composition étant l'addition. La formule a un sens purement
+algébrique. Soit
+\[
+(8)\qquad 0 \to \pi \to \mathcal{E} \to \Gamma \to 0
+\]
+une extension de groupes abéliens et $\varepsilon$ un $\Gamma$-torseur. Le
+groupoïde $\mathcal{E}(\varepsilon)$ a pour objets $\varepsilon$, pour flèches
+\[
+(9)\qquad \mathrm{Hom}(x, y) = \mathcal{E}_{y-x},
+\]
+et se compose par l'addition dans $\mathcal{E}$ ; chaque
+$\mathrm{Hom}(x,y)$ est un $\pi$-torseur. C'est le \emph{groupoïde d'action}
+de $\mathcal{E}$ agissant sur $\varepsilon$ à travers $\Gamma$ : son ensemble de
+flèches est $\mathcal{E} \times \varepsilon$, la source est la seconde
+projection, le but l'action\footnote{Le nom n'est pas sur la page, qui écrit
+$\mathrm{Fl}\,\mathcal{E}(\varepsilon) = \mathcal{E} \times \varepsilon$ et la
+loi $(u, vx) \circ (v, x) = (uv, x)$.}. Si $\varepsilon' \to \varepsilon$ est un
+morphisme de torseurs au-dessus d'un homomorphisme $\Gamma' \to \Gamma$, le
+groupoïde induit sur $\varepsilon'$ est $\mathcal{E}'(\varepsilon')$, où
+$\mathcal{E}' = \mathcal{E} \times_{\Gamma} \Gamma'$ est l'extension image
+inverse (11) : en effet $\mathrm{Hom}(x', y') = \mathcal{E}_{f(y')-f(x')}$, et
+$f(y') - f(x')$ est l'image de $y' - x'$.
+
+Appliqué à l'injection (3), cela donne un isomorphisme de
+$\mathbb{Z}^I$-groupoïdes
+\[
+(12)\qquad S_0\mathcal{T}_{0,I} \simeq \mathcal{E}_I\bigl(\omega(I)\bigr),
+\]
+où $\mathcal{E}_I$ est l'image inverse de l'extension $0 \to \mathbb{Z}^I \to
+\mathbb{R}^I \to \mathbb{U}^I \to 0$ par l'homomorphisme diagonal $\mu_2 \to
+\mathbb{U}^I$.
+
+\pagerange{6}{10}
+\subsection*{L'extension $\mathcal{E}_I$ et le groupe fondamental variant
+(pages 6 à 10)}
+
+Explicitement, $\mathcal{E}_I$ est formé des $v \in (\frac12\mathbb{Z})^I$ dont
+les coordonnées sont toutes entières ou toutes demi-entières. Mesurons les
+chemins en \emph{demi-tours} : en multipliant par $2$,
+\[
+\mathcal{E}_I \simeq \{\, n \in \mathbb{Z}^I \mid \text{les } n_i \text{ ont
+tous la même parité} \,\},
+\]
+le noyau $\mathbb{Z}^I$ (les tours complets) s'y plongeant comme $2\mathbb{Z}^I$
+et la projection sur $\mu_2$ étant la parité commune. C'est l'extension
+obtenue à partir de
+\[
+(14)\qquad 0 \to \mathbb{Z} \xrightarrow{\;2\;} \mathbb{Z} \to
+\mathbb{Z}/2\mathbb{Z} \simeq \mu_2 \to 0
+\]
+par l'homomorphisme diagonal $\mathbb{Z} \to \mathbb{Z}^I$ (diagramme (15)).
+Ainsi, pour $x, y \in \omega(I)$,
+\[
+(16)\qquad \mathrm{Hom}_{S_0\mathcal{T}_{0,I}}(x, y) =
+\begin{cases}
+\{\, n \in \mathbb{Z}^I : \text{tous les } n_i \text{ pairs} \,\} & \text{si } x = y,\\
+\{\, n \in \mathbb{Z}^I : \text{tous les } n_i \text{ impairs} \,\} & \text{si } x \neq y,
+\end{cases}
+\]
+la composition étant l'addition : c'est la « description algébrique
+complète » de $S_0\mathcal{T}_{0,I}$ en termes du seul ensemble $I$\footnote{La
+page écrit $\mathrm{Hom}(x,y) = T_{x-y} \wedge^{\mathbb{Z}} \mathbb{Z}^I$, où
+$T_{x-y}$ est le $\mathbb{Z}$-torseur des entiers pairs ou impairs, et
+l'identifie à $\mathbb{Z}^I$ ou à $\mathrm{Imp}^I$ (entiers impairs) ; le
+$\mathbb{Z}^I$ y agit par $n \mapsto n + 2m$. C'est la même chose.}.
+
+\emph{Le groupe fondamental variant.} $\mathfrak{S}_I$ agit sur
+$S_0\mathcal{T}_{0,I}$, et l'on forme, pour $x \in \omega(I)$,
+\[
+(17)\qquad \pi_1(S_0\mathcal{T}_{0,I}, \mathfrak{S}_I; x) =
+\{\, (\alpha, l) \mid \alpha \in \mathfrak{S}_I,\ l : \alpha x \to x \,\},
+\]
+avec la loi
+\[
+(18)\qquad (\alpha, l)(\alpha', l') = \bigl(\alpha\alpha',\ l \circ
+\alpha(l')\bigr).
+\]
+C'est exactement la construction $\pi_1(X, \Gamma, a)$ que le dossier 141
+(page 14) donne pour un groupe agissant sur un espace, le groupe fondamental
+orbifold d'aujourd'hui, ici pour l'action de $\mathfrak{S}_I$ sur le
+groupoïde\footnote{Le rapprochement est de cette édition ; les deux lois de
+composition coïncident.}. Un automorphisme $\alpha$ de $\mathbb{P}^1_I$
+envoie $T_i$ sur $T_{\alpha(i)}$ et le vecteur de l'orientation $x$ sur celui
+de $\alpha x$, en respectant le sens de rotation ; dans les coordonnées (16),
+il agit donc sur $\mathbb{Z}^I$ en permutant les coordonnées. D'où
+\[
+\pi_1(S_0\mathcal{T}_{0,I}, \mathfrak{S}_I; x) \simeq G(I) = \bigl\{\,
+(\alpha, n) \in \mathfrak{S}_I \times \mathbb{Z}^I \bigm| n_i \equiv
+\tfrac{1 - \mathrm{sgn}(\alpha)}{2} \bmod 2 \text{ pour tout } i \,\bigr\},
+\]
+avec $(\alpha, n)(\alpha', n') = (\alpha\alpha', n + \alpha\cdot n')$.
+
+\textbf{Proposition (pages 8 à 10).} $G(I)$ est l'extension de
+$\mathfrak{S}_I$ par $\mathbb{Z}^I$ obtenue en prenant l'image inverse de (14)
+par la signature $\mathfrak{S}_I \to \mu_2$, puis l'image directe par
+l'homomorphisme diagonal $\mathbb{Z} \to \mathbb{Z}^I$ ($\mathfrak{S}_I$
+agissant sur $\mathbb{Z}^I$ par permutation). Elle n'est pas scindée ; sa
+restriction à $\mathfrak{S}_I^{+}$, le stabilisateur de $x$, est canoniquement
+scindée par $\alpha \mapsto (\alpha, 0)$.
+
+En effet, l'application $\bigl(v, (\alpha, m)\bigr) \mapsto (\alpha, 2v +
+m\mathbf{1})$, où $m \equiv \frac{1-\mathrm{sgn}(\alpha)}{2}$, est un
+homomorphisme surjectif du produit semi-direct de $\mathbb{Z}^I$ par l'image
+inverse de (14) sur $G(I)$, de noyau les $(-k\mathbf{1}, (1, 2k))$ : c'est la
+première assertion. Si $\sigma$ est une transposition fixant $k$, et $(\sigma,
+n) \in G(I)$, alors $(\sigma, n)^2 = (1, n + \sigma n)$ a pour coordonnée $k$
+l'entier $2n_k$, non nul puisque $n_k$ est impair : aucun relèvement de
+$\sigma$ n'est d'ordre $2$, et l'extension, déjà restreinte au sous-groupe
+d'ordre $2$ engendré par $\sigma$, n'est pas scindée\footnote{La page le
+montre en projetant sur la coordonnée $k$, ce qui redonne (14), visiblement non
+scindée ; c'est le même argument.}. Enfin, pour $\alpha$ pair, $n = 0$ est
+permis.
+
+La page s'étonne : « Il est un peu étrange » que ce groupe ne dépende pas du
+choix de $x$. Il se construit sans référence à $x$ ; $\mathfrak{S}_I$ agit
+donc sur lui de façon compatible, bien qu'aucun scindage ne décrive cette
+action — sur $\mathfrak{S}_I^{+}$ elle est celle du scindage canonique. C'est,
+pour la partie $\mathfrak{S}_3$ du groupe $\Gamma_{0,3}$, l'extension
+$S\Gamma$ de $\Gamma_{0,3}$ par $\mathbb{Z}^{\{0,1,\infty\}}$ que le dossier
+145 (page 31) laisse à expliciter\footnote{Rapprochement de cette édition ;
+le dossier 145 adjoint en outre la conjugaison complexe, absente ici.}.
+
+\pagerange{10}{14}
+\subsection*{Un graphe de dimension modulaire nulle ; l'exemple du carré
+(pages 10 à 14)}
+
+Pour $G$ de dimension modulaire nulle, posons
+\[
+\varepsilon(G) = \prod_{s \in S} \omega(\hat{\vec A}_s), \qquad
+\gamma(G) = \{\pm 1\}^S,
+\]
+et soit $\mathcal{E}(G^b)$ l'extension de $\gamma(G)$ par $\mathbb{Z}^{\hat{\vec
+A}}$ déduite de la puissance $S$-ième de (14) par l'homomorphisme
+$\mathbb{Z}^S \to \mathbb{Z}^{\hat{\vec A}}$, $n \mapsto (n_{\mathrm{or}(h)})_h$,
+puis $\mathcal{E}(G)$ l'extension de $\gamma(G)$ par $\mathbb{Z}^{\hat A}$
+déduite de celle-ci par la somme $\mathbb{Z}^{\hat{\vec A}} \to
+\mathbb{Z}^{\hat A}$ (24)--(26). Alors
+\[
+(27)\qquad S_0\mathcal{T}_G \simeq \mathcal{E}(G)\bigl(\varepsilon(G)\bigr) :
+\qquad \mathrm{Ob} = \varepsilon(G), \quad \mathrm{Hom}(x,y) =
+\mathcal{E}(G)_{y-x},
+\]
+et la page propose de prendre (28) pour \emph{définition} de
+$S_0\mathcal{T}_G$\footnote{Les numéros (22) à (26) sont récrits et lus avec
+peine ; (21) n'apparaît pas.}.
+
+\emph{L'exemple du carré.} Le graphe à deux sommets reliés par une arête $a$,
+chacun portant deux arêtes libres, correspond à un ensemble $I$ de quatre
+points muni d'une partition de type $(2,2)$, qu'on peut voir comme les deux
+diagonales d'un carré combinatoire $Q$ de sommets $I$. Alors $S \simeq
+\mathrm{diag}\,Q$, l'arc de la diagonale $\Delta_s$ vers l'arête $a$ étant
+noté $\tilde s$ ; $\hat{\vec A}_s = \Delta_s \amalg \{\tilde s\}$, et une
+orientation de cet ensemble à trois éléments équivaut au choix du successeur
+de $\tilde s$, d'où $\omega(\hat{\vec A}_s) \simeq \Delta_s$ et
+\[
+\varepsilon(G) \simeq \prod_{\Delta \in \mathrm{diag}\,Q} \Delta,
+\]
+torseur sous $\gamma(G) = \{\pm1\}^{\mathrm{diag}\,Q}$. Un élément de ce
+produit est un couple de sommets pris sur les deux diagonales, c'est-à-dire
+deux sommets adjacents : $\varepsilon(G)$ est l'ensemble des quatre
+\emph{côtés} de $Q$. L'élément diagonal $(-1,-1)$ fait passer au côté opposé,
+et le quotient, $\bigwedge_{\Delta} \Delta$, est l'ensemble à deux éléments des
+paires de côtés opposés\footnote{La page écrit « $A(Q)$ l'ens. des quatre
+sommets, s'identifiant à $\prod_{\Delta \in \mathrm{diag}\,Q} \Delta$ », puis
+« $I = A^{\mathrm{lib}} = A(Q)$ ens. des sommets de $Q$ », et nomme ce quotient
+« codiag$(Q)$ ». Le produit des deux diagonales est l'ensemble des côtés, pas
+celui des sommets ; la lettre $A$ (arêtes) le suggère d'ailleurs. Identifier
+$\varepsilon(G)$ à $I$ demanderait un choix.}. On obtient $S_0\mathcal{T}_G$ à
+partir de l'extension $0 \to \mathbb{Z}^S \xrightarrow{2} \mathbb{Z}^S \to
+\{\pm1\}^S \to 0$ et du torseur $\varepsilon(G)$, puis par l'homomorphisme
+$\mathbb{Z}^S \to \mathbb{Z}^{\hat A} \simeq \mathbb{Z}^I \times \mathbb{Z}$,
+dont les deux composantes sont l'homomorphisme $\mathbb{Z}^S \to \mathbb{Z}^I$
+déduit par contravariance de l'application $I \to S$ (de degré $2$) et la somme
+$\mathbb{Z}^S \to \mathbb{Z}$, le facteur $\mathbb{Z}$ étant celui de l'arête
+$a$ (page 14).
+
+\pagerange{15}{17}
+\section*{Le cas $\operatorname{card} I = 4$ (pages 15 à 17)}
+
+Soit $I$ à quatre éléments, $J$ l'ensemble à trois éléments de ses partitions
+de type $(2,2)$, $\Sigma = \Sigma_I = \mathbb{P}^1_J$ la droite projective
+marquée par $J$ et $\omega = \omega(J)$. On a canoniquement
+\[
+(4)\qquad M_{0,I} \simeq \Sigma^{*} = \Sigma \smallsetminus J, \qquad
+\widehat{M}_{0,I} \simeq \Sigma :
+\]
+les trois points du bord de $\widehat{M}_{0,I}$ sont les trois façons de
+grouper les quatre points deux par deux. $\mathfrak{S}_I$ agit à travers
+$\mathfrak{S}_I \to \mathfrak{S}_J$, de noyau le groupe de Klein $V(I)$, dont
+les trois éléments non triviaux correspondent aux éléments de $J$. Les deux
+points de $\Sigma$ fixés par $\mathfrak{S}_J^{+}$ (les configurations
+équianharmoniques) sont dans les deux hémisphères que découpe le cercle réel
+$\Sigma_{\mathbb{R}}$ passant par $J$ ; d'où un isomorphisme
+\[
+(2)\qquad \omega \simeq \Sigma^{\mathfrak{S}_J^{+}},
+\]
+qui associe à un ordre cyclique sur $J$ l'hémisphère dont le bord, orienté par
+cet ordre, est $\Sigma_{\mathbb{R}}$\footnote{La page dessine la sphère, son
+pôle $P$, l'équateur et un parallèle ; les légendes et une note marginale sont
+en partie illisibles.}.
+
+La question des pages 16 et 17 est de savoir comment les fibrés tangents
+$T_i$ aux points marqués se prolongent à $\widehat{M}_{0,I}$. La page écrit
+$\Sigma_J = \mathbb{P}(V(J))$, où $0 \to V(J) \to \mathcal{O}^J
+\xrightarrow{\text{somme}} \mathcal{O} \to 0$, et trouve, après avoir comparé
+les deux possibilités en un point où la courbe a une structure de carré,
+\[
+\widehat{T}_i \simeq \mathcal{O}_\Sigma(1) \qquad \text{pour chaque } i \in I,
+\]
+sans torsion par $\omega$. Il faut le lire dans la convention de l'époque, où
+un fibré vectoriel $\mathbb{V}(\mathcal{F})$ est nommé par le faisceau de ses
+formes linéaires : le faisceau conormal de la section $i$ est
+$\mathcal{O}(1)$, et le fibré tangent, comme faisceau de sections, est de
+degré $-1$. C'est ce qu'on sait aujourd'hui : la classe $\psi_i$ est de degré
+$1$ sur $\overline{M}_{0,4}$\footnote{La page écrit $\widehat{T}_i \simeq
+\mathcal{O}(1)^{\otimes\,?} \otimes_{\mathbb{Z}} L(\omega)$, l'exposant incertain,
+avec l'alternative $L(\omega) = \mathbb{Z}$ ou $\mathbb{Z}(\omega)$, et conclut
+$L(\omega) = \mathbb{Z}$ par comparaison en la section $\alpha'$. La lecture
+« conormal de degré $1$ » est de cette édition ; elle est confirmée par la
+page 51 et la marge de la page 52, où le $\mathbb{C}^{*}$-torseur de
+$\mathcal{O}_\Sigma(1)$ est identifié au plan privé de l'origine, mais avec
+l'action \emph{opposée} des homothéties.}.
+
+Comme les quatre torseurs sont canoniquement un même torseur, leur produit est
+déduit de lui par l'homomorphisme diagonal $\mathbb{G}_m \to
+\mathbb{G}_m^I$ :
+\[
+SP_I \simeq \bigl(\mathbb{V}^{*}(\mathcal{O}(1)) \,\big|\, \Sigma^{*}\bigr)
+\wedge^{\mathbb{G}_m} \mathbb{G}_m^I, \qquad
+S\mathcal{T}_{0,I} \simeq \Pi_1\bigl(\mathbb{V}^{*}(\mathcal{O}(1)) \,\big|\,
+\Sigma^{*}\bigr) \wedge^{\mathbb{Z}} \mathbb{Z}^I,
+\]
+où $\mathbb{V}^{*}$ désigne le fibré privé de sa section nulle\footnote{La
+première formule de la page porte $\check{\mathbb{V}}^{*}(\mathcal{O}(1))^I$,
+l'exposant $I$ lu avec doute.}. Tout se ramène donc au groupoïde fondamental
+d'un seul $\mathbb{C}^{*}$-torseur au-dessus de la sphère privée de trois
+points. Ce torseur est le plan $V^{*}$ privé de trois droites par l'origine
+(pages 51 et 52 ci-dessous) ; son groupe fondamental est le groupe de tresses
+pures $P_3 \simeq F_2 \times \mathbb{Z}$, le facteur central $\mathbb{Z}$
+étant le tour de la fibre, et l'on retrouve que le groupe modulaire pur de la
+sphère à quatre composantes de bord est $F_2 \times
+\mathbb{Z}^4$\footnote{Ces identifications sont de cette édition. Le plan
+$V(J)$ des vecteurs de somme nulle de $\mathbb{C}^J$ est l'espace des
+configurations de trois points de $\mathbb{C}$ à translation près, et les
+trois droites ôtées sont les diagonales $z_j = z_k$.}.
+
+La chemise de la page 18 annonce la suite : « Étude de $P\Sigma_J^{*}$ (et de
+$P\Sigma_n^{*}$\ldots) $S_0\mathcal{T}_{0,4}$, $S_0\mathcal{T}_{0,I}$
+($\operatorname{card} I = 4$) ».
+
+\pagerange{41}{54}
+\section*{La droite projective marquée par un polygone régulier (pages 41 à
+54)}
+
+Cette rédaction, numérotée 1 à 7 de sa main, est le cadre au propre de ce que
+les pages 19 à 39 calculent ; on la lit en premier. La page 41 n'est qu'un
+décalque pâle de la page 42.
+
+\pagerange{42}{45}
+\subsection*{Le polygone et son groupe diédral (pages 42 à 45)}
+
+Soient $n \geq 3$, $m = 2n$, et un polygone régulier à $m$ côtés dans un plan
+vectoriel réel $V$, d'ensemble de sommets $\tilde J$\footnote{Une note
+marginale dit que $n \geq 2$ suffirait, le cas $n = 2$ étant « très
+dégénéré ».}. La donnée de $(V, \tilde J)$ équivaut à celle d'un torseur sous
+le groupe diédral $D_m = \mu_m \rtimes \mathbb{Z}/2$, groupe d'automorphismes
+du modèle $(\mathbb{C}, \mu_m)$, où $\mu_m$ agit par homothéties et
+$\mathbb{Z}/2$ par conjugaison. On pose $D = \mathrm{Aut}(V, \tilde J)$,
+$\underline{\omega}$ l'ensemble des deux orientations de $V$, $D^{+}$ le
+sous-groupe des rotations, noyau de $D \to \mathrm{Aut}(\underline{\omega})$.
+Les deux rotations d'angle $2\pi/m$ dans l'un et l'autre sens forment une
+copie de $\underline{\omega}$ dans $D^{+}$ ; ce sont deux générateurs inverses
+l'un de l'autre, $\omega' = \omega^{-1}$. Les sommets sont notés
+$\widetilde{R}_i$, $i \in \tilde J$.
+
+Comme $m$ est pair, $\tilde J$ est stable par $a_0 : x \mapsto -x$, seul
+élément d'ordre $2$ du groupe cyclique $D^{+}$. Pour $j \in \tilde J$, la
+réflexion $r_j$ fixant $\widetilde{R}_j$ fixe aussi $\widetilde{R}_{a_0(j)}$ :
+il y a $n$ telles réflexions, la moitié de $D \smallsetminus D^{+}$, les $n$
+autres étant les réflexions par les milieux des côtés opposés. Il y a sur $V$
+une unique forme quadratique $D$-invariante valant $1$ sur les sommets, qui
+fait de $V$ un plan euclidien.
+
+Soit $\Sigma = \mathbb{P}(V_{\mathbb{C}})$ la droite projective complexe
+associée au complexifié. $D$ y agit à travers $D/\{1, a_0\}$, groupe diédral
+d'ordre $2n$. Les images $R_i$ des sommets vérifient $R_i = R_{a_0(i)}$ et
+forment un ensemble $J = \tilde J/\{1, a_0\}$ de $n$ points sur le cercle réel
+$\Sigma_{\mathbb{R}} = \mathbb{P}(V)$, régulièrement répartis\footnote{Le
+paragraphe est écrit en oblique, entremêlé d'une note marginale dont seuls
+quelques mots se lisent ; on n'en retient que les formules.}.
+
+\pagerange{46}{48}
+\subsection*{Les pôles et la décomposition isotrope (pages 46 à 48)}
+
+Les points de $\Sigma$ fixés par $D^{+}$ sont au nombre de deux, un dans
+chacun des hémisphères que découpe $\Sigma_{\mathbb{R}}$. Ces hémisphères sont
+indexés par $\underline{\omega}$ — l'hémisphère $\Sigma_\omega$ est celui dont
+le bord, avec l'orientation de bord, a l'orientation $\omega$ — et les pôles
+sont notés
+\[
+(15)\qquad P_\omega = \Sigma^{D^{+}} \cap \Sigma_\omega \qquad (\omega \in
+\underline{\omega}).
+\]
+La page justifie (14), $\pi_0(\Sigma \smallsetminus \Sigma_{\mathbb{R}})
+\simeq \underline{\omega}$, par ce qu'on lit « couvr. de Stokes » :
+l'orientation induite sur le bord par l'orientation canonique de
+$\Sigma$\footnote{Lecture incertaine du mot abrégé.}.
+En algèbre linéaire, ce sont les droites propres de $D^{+}$ dans
+$V_{\mathbb{C}}$. La forme quadratique s'étend en une forme bilinéaire complexe
+non dégénérée, et $V_{\mathbb{C}}$ se décompose en ses deux droites isotropes,
+\[
+(16)\qquad V_{\mathbb{C}} = \bigoplus_{\omega \in \underline{\omega}}
+V_{\mathbb{C}}^{\omega},
+\]
+qui sont aussi les droites propres du groupe $O^{+}(V)$ des rotations, et que
+les éléments de $O^{-}(V)$ échangent. Une orientation $\omega$ définit le quart
+de tour $u_\omega \in O^{+}(V)$, $u_\omega^2 = -1$, donc une structure complexe
+$V_{(\omega)}$ sur $V$ ($i \cdot x = u_\omega x$) ; l'application
+$\mathbb{C}$-linéaire $p_\omega : V_{\mathbb{C}} \to V_{(\omega)}$ qui prolonge
+l'identité donne un isomorphisme $p = (p_\omega) : V_{\mathbb{C}} \simeq
+\prod_\omega V_{(\omega)}$, et
+\[
+(19)\qquad V_{\mathbb{C}}^{\omega} = \ker p_{\omega'} = \{\, z \in
+V_{\mathbb{C}} \mid u_\omega z = i z \,\} = \{\, x - i\,u_\omega x \mid x \in V
+\,\}.
+\]
+On note $\varphi_\omega : V \xrightarrow{\sim} V_{\mathbb{C}}^{\omega}$,
+$x \mapsto x - i\,u_\omega x$, l'isomorphisme $\mathbb{R}$-linéaire induit, et
+encore $\varphi_\omega$ son prolongement $\mathbb{C}$-linéaire à
+$V_{\mathbb{C}}$ ; on a $\operatorname{Re} \varphi_\omega(x) = x$ pour $x \in
+V$, et c'est ce qui sert aux pages 35 à 39\footnote{Vérification : $u_\omega(x
+- i u_\omega x) = u_\omega x + i x = i(x - i u_\omega x)$, et
+$p_{\omega'}(x - i u_\omega x) = x - u_{\omega'} u_\omega x = 0$ puisque
+$u_{\omega'} = u_\omega^{-1}$.}.
+
+\pagerange{48}{51}
+\subsection*{Le fibré $\mathcal{O}_\Sigma(1)$ et son torseur (pages 48 à 51)}
+
+Soit $P\Sigma$ le $\mathbb{C}^{*}$-torseur associé à $\mathcal{O}_\Sigma(1)$.
+En un point $x$ de $\Sigma$, correspondant à une droite $F$, les isomorphismes
+canoniques (18)--(20) de la page — fibre de $\mathcal{O}(1)$ égale au quotient
+par $F$, $F \otimes \mathcal{O}_F(1) \simeq \det V \simeq
+\mathbb{R}(\underline{\omega})$, $\mathcal{O}_F(1) \simeq \check
+F(\underline{\omega}) \simeq F^{\perp}$ — identifient $P\Sigma$ au plan privé de
+l'origine,
+\[
+(21)\quad P\Sigma \simeq V^{*}, \qquad \text{au-dessus de} \qquad
+(22)\quad \sigma : \Sigma \to \Sigma, \quad F \mapsto F^{\perp},
+\]
+avec, sur $V^{*}$, l'action opposée de $\mathbb{C}^{*}$\footnote{La page
+réutilise les numéros (18), (19) et (21) ; on garde ses numéros. Elle écrit
+« une droite $F$ de $V$ » sans préciser qu'il s'agit d'une droite complexe ;
+le détail des torsions par $\underline{\omega}$ est en partie illisible, en
+particulier dans la note marginale de la page 50.}. L'involution $\sigma$
+fixe les deux pôles (les droites isotropes sont leurs propres orthogonales) et
+fait sur le cercle réel un demi-tour (deux droites réelles orthogonales sont
+diamétralement opposées sur $\mathbb{P}(V)$) : c'est le demi-tour autour de
+l'axe des pôles, la « symétrie par rapport à l'axe polaire » de la page. Avec la
+conjugaison complexe $\tau$, réflexion par le plan de l'équateur, on a
+\[
+\tau\sigma = \underline{a}, \qquad \text{l'antipodie de } \Sigma,
+\]
+puisque le demi-tour autour d'un axe composé avec la réflexion par le plan
+orthogonal est la symétrie centrale.
+
+On s'intéresse à
+\[
+(26)\qquad \Sigma^{*} = \Sigma \smallsetminus \{ R_i \mid i \in J \}, \qquad
+(27)\qquad P\Sigma^{*} = P\Sigma|_{\Sigma^{*}} \simeq V^{**} = V^{*}
+\smallsetminus \bigcup_{i \in J} \Delta_i,
+\]
+où les $\Delta_i$ sont les $n$ droites complexes des diagonales du
+polygone. Pour $n = 3$, $\Sigma^{*}$ est la sphère privée de trois points,
+c'est-à-dire $M_{0,4}$ (page 15), et $V^{**}$ le plan privé de trois droites.
+
+\pagerange{52}{54}
+\subsection*{Le programme, et les symétries (pages 52 à 54)}
+
+Le but est de décrire des groupoïdes équivalents aux groupoïdes fondamentaux
+\[
+(28)\qquad \Pi_1 P\Sigma^{*} \simeq \Pi_1 V^{**}, \qquad \Pi_1 \Sigma^{*},
+\]
+et le morphisme (29) $\Pi_1 V^{**} \to \Pi_1 \Sigma^{*}$, par générateurs et
+relations, avec des points de base stables par $D$ et par $\tau$. Sur la
+situation agit le groupe $D \times \mathbb{C}^{*} \times \{1, \tau\}$, non
+fidèlement : $(a_0, -1)$ agit trivialement. Son sous-groupe fini $D \times
+\mu_m \times \{1, \tau\}$ est d'ordre $2m \cdot m \cdot 2 = 4m^2 = 16 n^2$, et
+le quotient qui agit fidèlement, $(D \times \mu_m)/\{\pm1\} \times \{1,
+\tau\}$, d'ordre $8n^2$ ($144$ et $72$ pour $n = 3$).
+
+Sur $V_{\mathbb{C}} = \bigoplus_\omega V_{\mathbb{C}}^{\omega}$, le groupe
+$\mu_m^{\underline{\omega}}$ agit coordonnée par coordonnée, et une rotation
+$\zeta$ (comptée dans le sens $\omega$) agit par $\zeta$ sur
+$V_{\mathbb{C}}^{\omega}$ et par $\zeta^{-1}$ sur $V_{\mathbb{C}}^{\omega'}$.
+L'homomorphisme
+\[
+(34)\qquad D^{+} \times \mu_m \longrightarrow \mu_m^{\underline{\omega}},
+\qquad (\zeta, \lambda) \longmapsto (\zeta\lambda,\ \zeta^{-1}\lambda),
+\]
+entre groupes d'ordre $m^2$, a pour noyau $\{(1,1), (a_0, -1)\}$, et pour
+image, d'indice $2$, les couples tels que
+\[
+(35)\qquad (\lambda_\omega \lambda_{\omega'})^{n} = 1 :
+\]
+le produit des deux coordonnées est $\lambda^2$, un carré de $\mu_{2n}$, et
+inversement tout couple dont le produit est un carré $\lambda^2$ s'écrit ainsi
+avec $\zeta = \lambda_\omega/\lambda$. Les automorphismes de $V_{\mathbb{C}}$
+qui stabilisent $V^{**}$, c'est-à-dire qui induisent sur $\Sigma$ un
+automorphisme stabilisant $J$, proviennent de $D \times \mathbb{C}^{*}$ — le
+stabilisateur de $n \geq 3$ points régulièrement répartis sur un cercle est le
+groupe diédral d'ordre $2n$ — et ceux qui fixent chaque pôle, de $D^{+} \times
+\mathbb{C}^{*}$, dont l'image dans $\mathbb{C}^{*\,\underline{\omega}}$ est
+définie par $(\lambda_\omega \lambda_{\omega'}^{-1})^{n} = 1$ (37), condition
+qui équivaut à (35) sur $\mu_m^{\underline{\omega}}$. La rédaction s'arrête
+sur le choix de points de base stables par $D \times \{1, \tau\}$, et
+« éventuellement » par le groupe d'ordre $72$ quand $n = 3$.
+
+\pagerange{19}{32}
+\section*{Générateurs et relations pour $n = 3$ (pages 19 à 32)}
+
+Les pages 19 à 32 sont les calculs, pour l'hexagone ($n = 3$), que la
+rédaction précédente encadre. Ils sont fragmentaires ; on en donne la
+structure, et l'on dit ce qui s'y vérifie.
+
+\emph{Les vecteurs.} Dans le plan $V = V(J)$ des vecteurs de somme nulle de
+$\mathbb{R}^J$, $J = \{i, j, k\}$, la page 21 pose $\widetilde{R}_i = (e_j -
+e_k) \wedge \omega_{jk}$, où $\omega_{jk}$ est l'orientation qui envoie $k$ sur
+$j$ (la torsion par $\wedge\,\omega$ rend le vecteur indépendant de l'ordre
+écrit), et $\widetilde{Q}^\omega_i = \widetilde{R}_{\omega^2 i} -
+\widetilde{R}_{\omega i} = (e_j + e_k - 2e_i) \wedge \omega$ : les six vecteurs
+$\pm\widetilde{R}_i$ sont les sommets d'un hexagone, les six
+$\pm\widetilde{Q}_i$ les directions des milieux des côtés, et $i_\omega
+\widetilde{Q}^\omega_i = \widetilde{R}_i$, $i_\omega \widetilde{R}_i =
+-\widetilde{Q}^\omega_i$, où $i_\omega = u_\omega$ est le quart de tour. Le
+dessin de la page 19 — un cylindre dont le cercle du haut porte
+$V^{\omega}_{\mathbb{C}}$, celui du bas $V^{\omega'}_{\mathbb{C}}$, et
+l'équateur $V$ — place les points de base : des points $\widetilde{P}^{\omega}_a$
+au-dessus des pôles, $\widetilde{Q}_a$ et $\widetilde{R}_r$ sur l'équateur,
+indexés par des ensembles $A$, $S$ et $R \simeq A \times \underline{\omega}
+\simeq S \times \underline{\omega}$, sur lesquels agissent deux involutions
+$\tau_0, \tau_1$ de produit $\omega = \tau_1\tau_0$\footnote{La page 19 est un
+dessin d'une page entière, avec une légende : $r = (s,a)$, $r_1 = \tau_1 r$,
+$r_2 = \omega^{-1}(r_1) = \tau_0\tau_1 r$, $r' = \tau_0 r$, $r'' = \tau_1\tau_0
+r = \omega(r)$ ; la page 26 note $\sigma_0, \sigma_1$ ce que la page 19 note
+$\tau_0, \tau_1$. L'ensemble à trois éléments $\{i,j,k\}$ est lu $J$ avec doute.
+Les pages 23 (figures) et 21 reprennent un dessin d'avant ces pages, qu'on
+n'a pas.}.
+
+\emph{Les générateurs (page 26).} Des flèches « obliques »
+\[
+\tilde a_r : \widetilde{R}_r \to \widetilde{R}_{r'}, \qquad \tilde b_r :
+\widetilde{Q}_a \to \widetilde{R}_r, \qquad \tilde c_r :
+\widetilde{P}^{\omega}_a \to \widetilde{Q}_a,
+\]
+et des flèches « fibres » : les lacets $\lambda$ en chaque point de base (le
+tour complet de la fibre $\mathbb{C}^{*}$), les demi-tours $\mu :
+\widetilde{Q}_a \to \widetilde{Q}_a^{\vee}$, $\widetilde{R}_r \to
+\widetilde{R}_r^{\vee}$ vers le point opposé $x^{\vee} = -x$, et les pas
+$\tilde d$ entre points de base consécutifs au-dessus d'un même pôle.
+
+\emph{Les relations.} Une relation « oblique » (1), $\tilde a_r \tilde b_r
+\tilde c_r \tilde d_r = \tilde b_{r_1} \tilde c_{r_2}$, qui exprime qu'un
+triangle de la figure se remplit ; des relations « fibres » : le produit de $m$
+pas $\tilde d$ consécutifs est le lacet $\lambda$ (5), deux demi-tours
+successifs font un tour, $\mu_{x^{\vee}}\mu_x = \lambda_x$ (6), (7) ; et des
+relations « de transport » (8)--(10), qui disent que les flèches obliques
+transportent le lacet de la fibre au lacet de la fibre\footnote{Les numéros des
+relations fibres sont surchargés : (2) corrigé en (5), (5) en (6), (6) en (7).}.
+Les relations fibres et de transport sont justes : le lacet de la fibre est
+l'image du générateur de $\pi_1(\mathbb{C}^{*})$ par l'application orbite,
+naturelle en le point, et il est donc central ; le demi-tour est le chemin
+$t \mapsto e^{i\pi t} x$.
+
+\emph{L'élimination (pages 28 à 32).} Posant $\widetilde{A}_r = \tilde
+b_r^{-1} \tilde a_r^{-1} \tilde b_{r_1}$ et $\widetilde{B}_r = \tilde
+a_{r''}^{-1} \tilde b_{r'} \tilde b_r^{-1}$, la page exprime, à l'aide de (1),
+les demi-tours comme des produits
+\[
+\mu_{\widetilde{Q}_a} = \widetilde{A}_{\omega^{m} r''} \cdots
+\widetilde{A}_{r''}, \qquad \mu_{\widetilde{R}_r} = \widetilde{B}_{\omega^{m} r}
+\cdots \widetilde{B}_r,
+\]
+puis prend ces formules, et (5)--(7), pour \emph{définitions} des $\mu$ et des
+$\lambda$. Il reste
+\[
+(1)\quad \tilde a_r \tilde b_r \tilde c_r \tilde d_r = \tilde b_{r_1} \tilde
+c_{r_2}, \qquad (2')\quad \widetilde{A}_{\omega^{m} r''} \cdots
+\widetilde{A}_{r''} = \widetilde{A}_{\omega^{m} r_1} \cdots \widetilde{A}_{r_1},
+\]
+et la page note que la relation (2''), $\tilde c^\omega_a(\lambda) = \tilde
+c^\omega_a(\lambda')$ entre les lacets au-dessus des deux pôles, est, en
+présence de (1), conséquence de (2') portée au carré. Le calcul de la page 32
+sur deux paires de flèches $\mu, \mu' : Q \to Q^{\vee}$ et $\check\mu,
+\check\mu'$ en retour — de $\check\mu\mu = \check\mu'\mu'$ on tire
+$\check\mu'^{-1}\check\mu = \mu'\mu^{-1}$ — est juste. Les lignes qui
+diraient si le système obtenu est une présentation complète de $\Pi_1
+V^{**}$ sont illisibles (« ces deux relations \ldots{} équivalentes et $\pm$
+triviales »), et le dossier n'énonce pas de présentation finale ; nous ne
+l'affirmons pas\footnote{L'exposant des produits, $m$ ou $n$, change d'une
+ligne à l'autre sur la page ; on écrit $m$, le nombre de pas d'un tour.
+Les indices $0$ et $a$ des $\widetilde{Q}$ sont mêlés ; la marge de la page
+28 parle de « 2 groupes de relations » une fois les $\mu$ éliminés.}. Pour
+$n = 3$, le groupe à présenter est connu : $\pi_1(V^{**}) \simeq P_3 \simeq
+F_2 \times \mathbb{Z}$ (page 17 ci-dessus).
+
+\pagerange{35}{39}
+\section*{Lemmes d'homotopies linéaires (pages 35 à 39)}
+
+Ces lemmes servent à comparer, dans $\Pi_1 V^{**}$, un chemin et son image
+par $\varphi_\omega$ (pages 46 à 48) : ils fournissent des homotopies
+explicites qui évitent les droites ôtées. Pour $x, y \in V$, on pose
+\[
+\ell_{y,x}(t) = \tfrac{x+y}{2} + e(t)\,\tfrac{x-y}{2}, \quad e(t) = e^{i\pi
+t}, \qquad L_{y,x}(t) = (1-t)x + t y,
+\]
+un demi-cercle complexe de $x$ à $y$ au-dessus du segment $[x,y]$, et le
+segment lui-même. Dans ce qui suit, $\Delta$ est une droite réelle de $V$ et
+$\Delta_{\mathbb{C}}$ son complexifié. Pour les droites ôtées de $V^{*}$,
+$\Delta$ passe par l'origine.
+
+\textbf{Lemme 2} (« trivial »). Soit $\ell$ un chemin dans $V$ ne rencontrant
+pas $\Delta$, et $g(s,t) = (1-s)\varphi_\omega\ell(t) + s\,\ell(t)$. Alors $g$
+évite $\Delta_{\mathbb{C}}$ : $\operatorname{Re} g(s,t) = \ell(t)$, puisque
+$\operatorname{Re}\varphi_\omega(x) = x$, et $\operatorname{Re}
+\Delta_{\mathbb{C}} = \Delta$. \emph{Corollaire} : si $\ell : x \to y$ est un
+chemin de $V$ évitant les $\Delta_i$, le carré formé de $\varphi_\omega(\ell)$,
+$\ell$ et des segments verticaux $L_{x, \varphi_\omega(x)}$, $L_{y,
+\varphi_\omega(y)}$ commute dans $\Pi_1 V^{**}$.
+
+\textbf{Lemme 3} (« $\pm$ trivial »). Si $\Delta \cap \{x, y\} = \emptyset$,
+le demi-cercle $\ell_{y,x}$ évite $\Delta_{\mathbb{C}}$. En effet, $\ell_{y,x}(t)$
+a pour partie imaginaire $\sin(\pi t)\,\frac{x-y}{2}$ et pour partie réelle un
+point du segment $[x,y]$. S'il était dans $\Delta_{\mathbb{C}}$ pour $0 < t <
+1$, la direction $x - y$ serait celle de $\Delta$, la droite $(xy)$ serait
+parallèle à $\Delta$ et la rencontrerait, donc lui serait égale, et $x, y \in
+\Delta$ ; pour $t = 0, 1$, le point est $x$ ou $y$\footnote{La page écrit
+$\sin t$ et $\frac{y-x}{2}$ ; avec $e(t) = e^{i\pi t}$ de la page 35, c'est
+$\sin(\pi t)\frac{x-y}{2}$. L'argument de la page, fragmentaire, est celui-ci.}.
+
+\textbf{Lemme 4.} Soit $\ell_x(t) = e(t)\,x$, le demi-tour de $x$ à $-x$, et
+$h(s,t) = e(t)\bigl((1-s)\varphi_\omega(x) + s x\bigr)$. Si $\Delta$ passe par
+l'origine et $x \notin \Delta$, $h$ évite $\Delta_{\mathbb{C}}$ : comme
+$\Delta_{\mathbb{C}}$ est stable par les homothéties complexes, $h(s,t) \in
+\Delta_{\mathbb{C}}$ forcerait $(1-s)\varphi_\omega(x) + s x \in
+\Delta_{\mathbb{C}}$, dont la partie réelle est $x$. \emph{Corollaire} : dans
+$\Pi_1 V^{**}$, pour $x \in V^{**} \cap V$,
+
+\begin{tikzcd}[column sep=huge, row sep=large]
+\varphi_\omega(x) \arrow[r, "\ell_{\varphi_\omega(x)}"] \arrow[d, "L_{x,\varphi_\omega(x)}"'] & -\varphi_\omega(x) \arrow[d, "L_{-x,-\varphi_\omega(x)}"] \\
+x \arrow[r, "\ell_x"] & -x
+\end{tikzcd}
+
+commute\footnote{La page énonce le lemme pour « toute droite $\Delta$ de $V$
+telle que $x \notin \Delta$ » ; il faut que $\Delta$ passe par l'origine,
+ce qui est le cas des droites ôtées. Elle étiquette la flèche verticale de
+droite $L_{-x, \varphi_\omega(x)}$ ; c'est le segment de $-\varphi_\omega(x)$ à
+$-x$, $h(s, 1) = -\bigl((1-s)\varphi_\omega(x) + sx\bigr)$.}.
+
+\textbf{Lemme 1.} La page considère $f_{x,y}(s,t) = (1-s)\varphi_\omega
+\ell_{y,x}(t) + s\,\ell_{y,x}(t)$ et affirme que, sous une hypothèse
+d'orientation reliant le segment orienté $\overrightarrow{[x,y]}$, la droite
+$\Delta$ et $\omega$, $f_{x,y}$ évite $\Delta_{\mathbb{C}}$ ; d'où, avec le
+lemme 3, le carré commutatif
+\[
+\varphi_\omega(\ell_{y,x}) = \ell_{\varphi_\omega(y), \varphi_\omega(x)}
+\quad\text{(linéarité de } \varphi_\omega\text{)}, \qquad
+\ell_{y,x} \circ L_{x,\varphi_\omega(x)} = L_{y,\varphi_\omega(y)} \circ
+\ell_{\varphi_\omega(y), \varphi_\omega(x)} .
+\]
+L'hypothèse est formulée et raturée plusieurs fois, et ne se lit pas. Elle est
+indispensable : pour $x = (1,1)$, $y = (1,-1)$ dans une base orthonormée
+directe pour $\omega$, et $\Delta$ l'axe des abscisses, on a $\ell_{y,x}(\frac12)
+= (1, i)$, qui est dans $V_{\mathbb{C}}^{\omega'} = \ker\varphi_\omega$, donc
+$f_{x,y}(0, \frac12) = 0 \in \Delta_{\mathbb{C}}$. Le lemme vaut donc pour une
+seule des deux orientations du demi-cercle par rapport à $\omega$, et nous ne
+reconstituons pas l'énoncé exact\footnote{Le contre-exemple est de cette
+édition. Les premières lignes du lemme (« Soit $\overrightarrow{[x,y]}$ un
+segment orienté \ldots{} tel que l'orientation de $\Delta$ induite \ldots{}
+aille de $x$ vers $y$ ») et une note marginale oblique sont en partie
+illisibles ; les flèches verticales du carré ont une tête à chaque bout sur la
+page.}.
+
+\pagerange{55}{77}
+\section*{Feuillets de travail (pages 55 à 77)}
+
+Ces pages ne forment pas une suite ; on les prend dans l'ordre, en n'énonçant
+que ce qui se lit et se vérifie.
+
+\pagerange{55}{65}
+\subsection*{Cinq points sur la sphère et l'icosaèdre (pages 55 à 61, 63 et 65)}
+
+Sous le titre « ${}_0\mathcal{T}_{0,5}$ et $S_0\mathcal{T}_{0,5}$ » (page 55),
+les pages 57 à 61 recensent des configurations de points marqués et de
+cercles sur la sphère — « $4$ sommets, deux faces », « $1$ cercle marqué, $6$
+sommets, $4$ faces », des types I à IV — et comptent, pour chacune, les
+« possibilités pour $K$ » : $60 = 12 \cdot 5$ (« pentagone $+$ sommet », «
+pentagone $+$ arête »), $60 = 10 \times 3 \times 2$, $12$, $20$, $30$. Elles
+nomment ces données par l'icosaèdre : un sommet et une arête incidente (type
+$D_{01}$), un sommet et une face incidente ($D_{02}$), avec des flèches
+d'oubli $D_{01} \to D_0$, $D_{01} \to D_1$, $D_{02} \to D_0$, $D_{02} \to D_2$,
+$D_1 \to D_2$ — des drapeaux partiels de l'icosaèdre\footnote{« $12.5 = 60$ »
+sous II se lit aussi « $66$ » ; le calcul donne $60$. Les croquis du bas de la
+page 59 sont largement raturés.}.
+
+La page 61 et le tableau de la page 65 donnent les stabilisateurs, dans le
+groupe des rotations de l'icosaèdre ($\mathfrak{A}_5$, d'ordre $60$) puis dans
+le groupe complet ($\mathfrak{A}_5 \times \mathbb{Z}/2$, « non orienté »), et
+les nombres d'orbites correspondants :
+\[
+\begin{array}{l|cc|cc}
+ & \text{stab.\ orienté} & \text{nombre} & \text{stab.\ non orienté} & \text{nombre}\\ \hline
+\text{sommets} & \mathbb{Z}/5,\ \text{paires : } D_5 & 12,\ 6 & D_5 \times \mathbb{Z}/2 & 6\\
+\text{arêtes} & \mathbb{Z}/2,\ \text{paires : } D_2 & 30,\ 15 & D_2 \times \mathbb{Z}/2 & 15\\
+\text{faces} & \mathbb{Z}/3,\ \text{paires : } \mathfrak{S}_3 & 20,\ 10 & \mathfrak{S}_3 \times \mathbb{Z}/2 & 10
+\end{array}
+\]
+Les nombres se vérifient : $60/5 = 12$, $60/10 = 6$, $60/2 = 30$, $60/4 = 15$,
+$60/3 = 20$, $60/6 = 10$, et dans le groupe d'ordre $120$ les stabilisateurs
+des paires antipodales sont deux fois plus gros\footnote{Le tableau de la page
+65 a quatre colonnes de groupes et quatre colonnes de nombres, « NB des cas »
+et « Nb de feuillets » ; on l'a recomposé selon ce qu'il compte. Une entrée de
+la deuxième ligne pourrait se lire $\mathbb{Z}/4$. La feuille porte au verso un
+imprimé daté du 31 mai 1979.}. La page 63 dessine l'icosaèdre, un patron
+déplié aux arêtes marquées $a, \ldots, e$, et un « pentagone orienté ».
+Le lien avec $M_{0,5}$ — sur lequel le groupe $\mathfrak{S}_5$ agit, et dont
+$\mathfrak{A}_5$ est le sous-groupe d'indice $2$ — n'est pas écrit.
+
+\pagerange{62}{62}
+\subsection*{Points base à l'infini (page 62)}
+
+« Avant de me lancer vers une exploitation des principes dégagés, il me faut
+encore développer la formulation des \emph{points base à l'infini}. » Le point
+de départ est la dimension $1$, un retour en dimension quelconque, pour un
+diviseur à croisements normaux, étant annoncé. Soit $X$ le spectre d'un anneau
+de valuation discrète hensélien, $x$ son point fermé, $k = k(x)$, $\mathcal{U}
+= X \smallsetminus \{x\}$ son point générique, $T_x =
+\mathbb{V}(\mathfrak{m}_x/\mathfrak{m}_x^2)$ l'espace tangent et $T_x^{*} = T_x
+\smallsetminus \{0\}$. Il y a un morphisme canonique de groupoïdes
+fondamentaux
+\[
+(55)\qquad \widehat{\Pi}_1(T_x^{*}) \longrightarrow \widehat{\Pi}_1(\mathcal{U}),
+\]
+et la page s'arrête sur « Alors on sait qu'on a ». Ce qu'on sait aujourd'hui :
+en caractéristique résiduelle nulle, les deux membres sont des extensions de
+$\mathrm{Gal}(\bar k/k)$ par $\widehat{\mathbb{Z}}(1)$, et le morphisme
+canonique est une équivalence ; en général, il en est une sur les quotients
+modérés. Un point de
+$T_x^{*}$ — un vecteur tangent non nul — sert ainsi de point base pour le
+point générique : c'est le \emph{point base tangentiel} que Deligne
+formalisera en 1989\footnote{L'énoncé sur (55) et le nom sont de cette
+édition ; la page ne dit pas comment (55) est défini et passe par le complété
+$\widehat{\mathcal{U}}$, l'isomorphisme $\widehat{\Pi}_1(\widehat{\mathcal{U}})
+\to \widehat{\Pi}_1(\mathcal{U})$ étant lu avec doute. Les numéros (53) à (55)
+prolongent une numérotation qui n'est pas dans le dossier.}. C'est le
+fondement, sur un corps quelconque, des points de base $\varepsilon$ du
+dossier.
+
+\pagerange{64}{66}
+\subsection*{Le monogone et le bigône (pages 64 et 66)}
+
+La page 64 compose $\varphi(z) = \frac{z-1}{z+1}$ ($1 \mapsto 0$, $-1 \mapsto
+\infty$, $0 \mapsto -1$, $\infty \mapsto 1$), le carré, et $\psi(w) =
+\frac{w}{w-1}$ ($0, 1, \infty \mapsto 0, \infty, 1$) :
+\[
+(26)\qquad g_1(z) = \psi\bigl(\varphi(z)^2\bigr) = -\frac14 \frac{(z-1)^2}{z},
+\qquad
+(27)\qquad g_2(z) = g_1(z^2) = -\frac14\Bigl(z - \frac1z\Bigr)^2,
+\]
+« équation du monogone » et « équation du \emph{bigône}, de merveille ! ».
+Les calculs sont justes, et ce sont des fonctions de Belyi. $g_1$, de degré
+$2$, a pour points critiques $z = 1$ (valeur $0$) et $z = -1$ (valeur $1$), et
+$g_1^{-1}(\infty) = \{0, \infty\}$ : l'image réciproque du segment $[0,1]$ est
+une boucle issue de $z = 1$, passant par $z = -1$, qui sépare la sphère en
+deux faces centrées en $0$ et $\infty$ — le monogone, carte à un sommet, une
+arête, deux faces. $g_2$, de degré $4$, a deux sommets $\pm 1$, deux milieux
+d'arêtes $\pm i$ et deux faces centrées en $0$ et $\infty$ : le bigône. La
+page 66 vérifie la valeur $g_1(i) = -\frac{1}{4i}(i-1)^2 = \frac12$, ($(i-1)^2 =
+-2i$), et tabule les images de $0, \pm 1, \infty$ par $X_2 \xrightarrow{z^2}
+X_1 \to X_0$\footnote{La première ligne de la page 64 suppose une
+normalisation antérieure (« les étaient $0, \infty$ au lieu de $0, 1$ ») et
+renvoie à une formule (25) absente du dossier. La page 66, écrite dans les
+deux sens, porte aussi un quotient griffonné dont le signe et le dénominateur
+ne se vérifient pas tels qu'on les lit ; on ne le reproduit pas.}.
+
+La moitié tête-bêche de la page 66 nomme les deux catégories : « Cartes,
+$\mathcal{C}_2$-ens » et « Cartes orientées, $\mathcal{C}_2^0$-ens », avec
+\[
+\mathcal{C}_2 = \langle \sigma_0, \sigma_1, \sigma_\infty \mid \sigma_0^2 =
+\sigma_1^2 = \sigma_\infty^2 = (\sigma_0\sigma_\infty)^2 = 1 \rangle, \qquad
+\mathcal{C}_2^0 = \langle \rho_0, \rho_1, \rho_\infty \mid \rho_\infty\rho_1\rho_0
+= \rho_1^2 = 1 \rangle .
+\]
+C'est le groupe cartographique des cartes, celui de la page 9 du dossier 141
+(qui l'écrit avec les indices $0, 1, 2$) et de la page 22 du dossier 145, et
+son sous-groupe orienté $\mathbb{Z} * \mathbb{Z}/2$ ; la relation
+$\rho_\infty\rho_1\rho_0 = 1$ est dans l'ordre de la seconde rédaction du
+dossier 145. Une carte orientée finie est un ensemble fini sur lequel agit
+$\mathcal{C}_2^0$, et les cartes de $g_1$ et $g_2$ en sont les plus
+petits exemples\footnote{Les présentations sont sur la page ; leur
+identification au groupe cartographique est de cette édition.}.
+
+\pagerange{67}{67}
+\subsection*{L'espace $\widehat{M}_{0,5}$ (page 67)}
+
+$M_{0,5} \subset \widehat{M}'_{0,5} \subset \widehat{M}_{0,5}$, où
+$\widehat{M}'_{0,5}$ est l'ouvert des courbes stables de type $(0,5)$ qui
+restent stables quand on oublie le cinquième point. On a
+\[
+\widehat{M}'_{0,5} \simeq \widehat{\mathcal{X}}^{*}_{0,4} =
+\widehat{\mathcal{X}}_{0,4} \smallsetminus (\tilde\Delta_0 \cup \tilde\Delta_1
+\cup \tilde\Delta_\infty \cup \tilde\Delta),
+\]
+où $\widehat{\mathcal{X}}_{0,4} \to \widehat{M}_{0,4}$ est la courbe
+universelle, éclatée de $\mathbb{P}^1 \times \mathbb{P}^1$ en les trois points
+$(0,0), (1,1), (\infty,\infty)$ de la diagonale, et les $\tilde\Delta$ les
+transformées strictes des quatre sections. C'est juste : $\overline{M}_{0,5}$
+est la courbe universelle sur $\overline{M}_{0,4}$, et l'on retire les
+diviseurs où le cinquième point rencontre l'un des quatre autres. La page se
+demande ce qui manque — les courbes qui ne restent pas stables — et en dessine
+les configurations.
+
+\pagerange{70}{73}
+\subsection*{Les fibrés $L_i$ et le groupe de Picard équivariant (pages 70 à
+73)}
+
+Sur $M_{0,I}$, les fibrés en droites $L_i$ (attachés aux points marqués) et
+$L = \bigotimes_i L_i$ vérifient $L_i \simeq L_K \otimes p^{*}_{K
+\smallsetminus\{i\}, K} L_{K \smallsetminus \{i\}}$. Un tableau cherche, pour
+$n = \operatorname{card} I = 4, 5, 6$, le plus petit exposant qui trivialise
+$L$, resp.\ $L_i$, de façon compatible à $\mathfrak{S}_I$ : $3$ et $6$ pour
+$n = 4$, des valeurs suivies de points d'interrogation pour $n = 5, 6$, en
+regard de $(n-1)(n-2) = 6, 12, 20$\footnote{Les deux dernières lignes du
+tableau, « exposant pour trivialiser $H^1(M_{0,I}, \mathfrak{S}_I;
+\mathbb{G}_m)$ » (biffée) et « dividende (?) », sont vides. La page 72 est
+écrite sous un sujet d'examen de juin 1978 sur les classes de conjugaison de
+$\mathfrak{A}_5$ et l'icosaèdre.}. La page 72 en donne la source : des
+sections $\xi_A$ indexées par les parties $A$ à trois éléments, et leur
+produit, section de $L^{\otimes\nu}$, $\nu = (n-1)(n-2)/2$, d'où « $L^{\otimes
+6} \simeq 1$ » pour $n = 4$ et $n = 5$. Ces affirmations ne sont pas
+démontrées sur les pages et ne sont pas vérifiées ici.
+
+Le cadre est la cohomologie équivariante. Comme $M_{0,K}$ est le complémentaire
+d'un arrangement d'hyperplans dans un espace affine, $\mathrm{Pic}(M_{0,K}) = 0$
+(« $H^1(M_{0,5}; \mathbb{G}_m) \simeq 0$ »), et la suite spectrale de
+$\mathfrak{S}_K$ donne $H^1(M_{0,K}, \mathfrak{S}_K; \mathbb{G}_m) \simeq
+H^1(\mathfrak{S}_K, H^0(M_{0,K}, \mathbb{G}_m))$. De la suite exacte $0 \to
+\mathbb{G}_m \to H^0(M_{0,K}, \mathbb{G}_m) \to U' \to 0$, où $U'$ est le
+groupe des unités modulo les constantes (noté $(\mathbb{Z}^{\mathbb{P}_3(K)})'$),
+on tire
+\[
+0 \to \underbrace{H^1(\mathfrak{S}_K, \mathbb{C}^{*})}_{\pm 1} \to
+H^1(M_{0,K}, \mathfrak{S}_K; \mathbb{G}_m) \to H^1(\mathfrak{S}_K, U') \to
+H^2(\mathfrak{S}_K, \mathbb{C}^{*}),
+\]
+exacte à gauche parce que $U'$ n'a pas d'invariant non nul sous
+$\mathfrak{S}_K$\footnote{Cette justification est de cette édition :
+$U' \otimes \mathbb{Q}$ est la représentation de $\mathfrak{S}_K$ indexée par
+la partition $(n-2, 2)$, sans invariant. La page écrit la dernière flèche
+verticalement, et indexe une fois $\mathfrak{S}_5$ pour $\mathfrak{S}_K$. Elle
+porte aussi le plongement $M_{0,I} \hookrightarrow \prod_i \Sigma_{I
+\smallsetminus\{i\}}$ par les applications d'oubli, juste, et $\Omega^1 \simeq
+\mathcal{O}(-2)$ sur $\mathbb{P}^1$.}.
+
+\pagerange{74}{77}
+\subsection*{Groupes des polyèdres réguliers (pages 74, 76 et 77)}
+
+La page 74 commence au milieu d'un énoncé, avec deux automorphismes encadrés
+(41), (42) d'un groupe à générateurs $\rho_0, \rho_1, \rho_\infty$, $\tau_0,
+\tau_\infty$, dont une image est laissée en blanc ; puis une liste de groupes
+$\pi_{D_n}$, $\pi_{\mathfrak{S}_4^{+}}$, $\pi_{\mathfrak{S}_4}$,
+$\pi_{\mathfrak{S}_5^{+}}$, et $\pi_X$ pour « $X$ une carte : on enlève les
+sommets », avec $\pi_{\mathrm{icos}}$, $\pi_{\text{dodéc}}$,
+$\pi_{\text{tétr}}$, $\pi_{\mathrm{cube}}$, $\pi_{\mathrm{oct}}$. Ce sont
+vraisemblablement les groupes fondamentaux de la sphère privée des sommets
+d'un polyèdre régulier, sur lesquels agissent les groupes de rotations
+$D_n$, $\mathfrak{A}_4 = \mathfrak{S}_4^{+}$, $\mathfrak{S}_4$, $\mathfrak{A}_5 =
+\mathfrak{S}_5^{+}$\footnote{Lecture de cette édition. Les groupes orbifolds
+correspondants sont les groupes de triangles $(2,2,n)$, $(2,3,3)$, $(2,3,4)$,
+$(2,3,5)$.}. La page 76 recense le dodécaèdre : $120$ repères (drapeaux),
+$12$ faces, $30$ arêtes, $20$ sommets, et $2 \times (6 + 15 + 10) = 62 = 12 + 30
++ 20$, le nombre total de cellules\footnote{La page écrit « bidodécagones » ;
+le nombre $12$ des faces est surchargé.}. La page 77, des croquis de cartes
+et de rubans sans texte, est dessinée sur une circulaire du 12 février 1982.
+
+\pagerange{78}{98}
+\section*{« Groupoïdes » (pages 78 à 98)}
+
+\pagerange{80}{80}
+\subsection*{Présentation d'une extension de groupes (page 80)}
+
+\textbf{Lemme 1.} Soit $1 \to L \to \tilde\pi \to \pi \to 1$ une suite exacte
+de groupes, $(x_i)_{i \in I}$ des générateurs de $\pi$ de relations
+définissantes $R_\alpha((x_i)) = 1$ ($\alpha \in A$), $(a_j)_{j \in J}$ des
+générateurs de $L$ de relations définissantes $S_\beta((a_j)) = 1$ ($\beta \in
+B$). On relève les $x_i$ en des $\tilde x_i \in \tilde\pi$, et l'on choisit des
+mots $M_\alpha$, $M_{ij}$ en les $a_j$ tels que
+\[
+(1)\quad R_\alpha((\tilde x_i)) = M_\alpha((a_j)), \qquad (2)\quad \tilde
+x_{i}\, a_{j}\, \tilde x_{i}^{-1} = M_{ij}((a_j)).
+\]
+Alors (1), (2) et (3) $S_\beta((a_j)) = 1$ sont des relations définissantes de
+$\tilde\pi$ en les $\tilde x_i$, $a_j$. Si $L$ est central, (2) devient
+$[\tilde x_i, a_j] = 1$ (2').
+
+C'est le lemme classique de présentation d'une extension, et il est juste tel
+quel, sans relation de conjugaison par les $\tilde x_i^{-1}$. Soit $\Pi$ le
+groupe présenté et $N$ le sous-groupe engendré par les $a_j$. Par (3), $a_j
+\mapsto a_j$ définit $L \to N$, et sa composée avec $\Pi \to \tilde\pi$ est
+l'identité de $L$ : $N \simeq L$. Par (2), la conjugaison par $\tilde x_i$
+envoie $N$ dans $N$, et elle correspond à la conjugaison par $\tilde x_i$ dans
+$\tilde\pi$, qui est un automorphisme de $L$ ; elle est donc surjective, et
+$N$ est distingué. Enfin $\Pi/N$ a pour présentation $\langle x_i \mid
+R_\alpha \rangle$, c'est $\pi$, et $\Pi \to \tilde\pi$ est un
+isomorphisme\footnote{La démonstration est de cette édition ; la page n'en a
+pas. Les trois annotations marginales, « relèvements » des $R_\alpha$,
+relations « d'action », relations de $L$, sont lues avec doute.}.
+
+\pagerange{81}{86}
+\subsection*{Présentation d'un groupoïde au-dessus d'un groupoïde (pages 81 à
+86)}
+
+La même chose pour un morphisme de groupoïdes $p : \widetilde{\mathcal{T}}
+\to \mathcal{T}$ (la page 81, barrée, est un premier départ de la page 82).
+On se donne des flèches $\tilde u_i$ de $\widetilde{\mathcal{T}}$ dont les
+projections $u_i$ engendrent $\mathcal{T}$, avec des relations définissantes
+de $\mathcal{T}$ écrites comme des lacets composables $u'_{i'_1} \cdots
+u'_{i'_n} = 1$, où $u'_{(i,\varepsilon)} = u_i^{\varepsilon}$ (8). Les relevés
+$\tilde u'$ ne sont pas composables, mais les extrémités consécutives sont
+dans une même fibre ; on suppose donnée une famille de flèches fibres $a_j$
+engendrant chaque groupoïde fibre $\widetilde{\mathcal{T}}_s$, et les fibres
+connexes, de sorte que des mots $M_{\alpha,\nu}((a_j))$ relient ces extrémités
+(11). On écrit alors :
+\begin{itemize}
+\item les relations « remontées » (12) : $M_{\alpha,1}\, \tilde u'_{i'_1}\,
+M_{\alpha,2}\, \tilde u'_{i'_2} \cdots M_{\alpha,n}\, \tilde u'_{i'_n} = 1$ ;
+\item des relations (13) $N'_\beta((a_j)) = 1$ qui définissent chaque fibre ;
+\item pour chaque lacet fibre $a_{j_0}$ et chaque $\tilde u_i$ de même
+origine, une relation de transport (14) $\tilde u_i(a_{j_0}) =
+M''_{i,j_0}((a_j))$, le transporté étant un lacet de la fibre de
+l'extrémité.
+\end{itemize}
+« Cela posé, je dis que (12) (13) (14) est un système de relations
+définissant » $\widetilde{\mathcal{T}}$\footnote{La page écrit $\mathcal{T}$,
+sans tilde ; c'est $\widetilde{\mathcal{T}}$ qui est présenté. Elle suppose
+aussi que les lacets $a_j$ en chaque objet engendrent son groupe
+d'automorphismes dans la fibre.}. La page s'arrête là, sans démonstration ;
+c'est l'analogue en groupoïdes du lemme de la page 80, et c'est le cadre
+exact de l'élimination des pages 26 à 32, où les $\lambda$, $\mu$, $\tilde d$
+sont des flèches fibres et (8)--(10) des relations de transport.
+
+\pagerange{88}{94}
+\subsection*{$\pi$-fibrations de groupoïdes (pages 88 à 94)}
+
+Sous le titre « Généralités sur les groupoïdes ». Soit $f : C' \to C$ un
+morphisme de groupoïdes et $\pi$ un groupe. Une \emph{$\pi$-fibration} est un
+$f$ surjectif sur les objets et plein, dont les fibres sont des groupoïdes
+connexes munis d'un isomorphisme naturel de $\pi$ sur leurs groupes
+d'automorphismes : on a donc un homomorphisme $\pi \to
+\mathrm{End}(\mathrm{id}_{C'})$ — $\pi$ agit naturellement sur chaque objet
+de $C'$ —, une suite exacte
+\[
+1 \to \pi \to \mathrm{Aut}_{C'}(x) \to \mathrm{Aut}_{C}(f(x)) \to 1,
+\]
+et $\pi_0(f)$ bijectif. $C'$ est une \emph{extension centrale} de $C$ par
+$\pi$ (« l'extension est ici nécessairement centrale ») ; pour une extension
+non centrale il faudrait remplacer $\pi$ par un système local de groupes sur
+$C$, comme le dit la marge. En termes d'aujourd'hui, $C'$ est une gerbe liée
+par $\pi$ au-dessus de $C$\footnote{La page écrit
+$\mathrm{Aut}_{C'}(f(x))$ pour le dernier terme : c'est
+$\mathrm{Aut}_C(f(x))$. La surjectivité à droite demande que $f$ soit plein,
+ce que la page ajoute dans l'interligne (« et (sur les flèches) »). « Gerbe
+liée » est de cette édition.}.
+
+\emph{L'exemple (page 88).} Soit $U$ un groupe topologique connexe et
+localement simplement connexe, $\pi = \pi_1(U, 1)$ (abélien), $P \to T$ un
+$U$-torseur. La suite exacte d'homotopie $\pi \to \pi_1(P_i) \to \pi_1(T_i) \to
+1$ fait de $\Pi_1(P) \to \Pi_1(T)$ une $\pi$-fibration quand les $\pi \to
+\pi_1(P_i)$ sont injectifs, une $\pi/N$-fibration si leur noyau $N$ ne dépend
+pas de la composante. Soit $\mu$ un groupe, $\mu \to U$ un homomorphisme,
+$\varepsilon$ un ensemble à action de $\mu$ et $\varepsilon \to P$ une
+application équivariante\footnote{Les pages 89 à 96 notent cet ensemble $E$,
+d'une lettre appuyée qu'elles distinguent du $\mathcal{E}$ de l'extension ; on
+écrit $\varepsilon$, comme aux pages 4 et 97.} ; soit $C'$ le groupoïde induit
+par $\Pi_1(P)$ sur $\varepsilon$, et $C$ celui induit par $\Pi_1(T)$ sur
+$\varepsilon_0 = \varepsilon/\mu$. Le carré
+\[
+C' \to \Pi_1(P), \qquad C \to \Pi_1(T)
+\]
+commute, ses flèches horizontales sont des équivalences quand $\varepsilon$
+rencontre toutes les composantes, et $\mu$ agit sur $C'$ par transport de
+structure. Soit $\mathcal{E}$ l'image inverse de $0 \to \pi \to \widetilde{U}
+\to U \to 0$ par $\mu \to U$ (13). Si $\mu$ agit librement sur $\varepsilon$
+et que $x, y$ sont dans une même fibre $C'_\xi$, on a un isomorphisme
+canonique de $\pi$-torseurs
+\[
+(14)\qquad \mathrm{Isom}_{C'_\xi}(x, y) \simeq \mathcal{E}_{y - x},
+\]
+compatible aux compositions, c'est-à-dire $C'_\xi \simeq
+\mathcal{E}(\varepsilon_\xi)$ (15) : c'est, en famille, la formule (9) des
+pages 4 et 5.
+
+\emph{Les $(\pi, \mu)$-fibrations (pages 92 à 94).} D'où la définition : une
+$(\pi, \mu)$-fibration subordonnée à une extension centrale $1 \to \pi \to
+\mathcal{E} \to \mu \to 1$ est une $\pi$-fibration $f : C' \to C$ munie d'une
+action de $\mu$ sur $C'$ compatible aux opérations internes de $\pi$, telle que
+$f$ soit $\mu$-équivariante pour l'action triviale sur $C$, que $\mu$ agisse
+librement sur $\mathrm{Ob}\,C'$ avec $\mathrm{Ob}\,C'/\mu \simeq
+\mathrm{Ob}\,C$, et qu'une condition sur les fibres, « à examiner », soit
+remplie. Pour la formuler, la page analyse une fibre : un $\pi$-groupoïde
+connexe $\Phi$, avec une action de $\mu$ dont l'ensemble des objets est un
+$\mu$-torseur. Les $\pi$-torseurs $\mathrm{Hom}(x, y)$ sont identifiés entre
+eux par l'action de $\mu$ quand la « différence » $u$ de $x$ et $y$ est fixée,
+d'où des $H_u$, et la composition donne $H_u \wedge H_v \simeq H_{uv}$ avec
+associativité et unité : une extension $\mathcal{E}_\Phi$ de $\mu$ par $\pi$.
+Inversement $\mathcal{E}$ et un $\mu$-torseur $\varepsilon$ donnent
+$\mathcal{E}(\varepsilon)$. D'où la correspondance
+\[
+(17)\qquad
+\left\{\begin{array}{l}
+\pi\text{-groupoïdes connexes } \Phi \text{ avec action de } \mu\\
+\text{dont l'ensemble des objets est un } \mu\text{-torseur}
+\end{array}\right\}
+\longleftrightarrow
+\{ \text{extensions de } \mu \text{ par } \pi \},
+\]
+que la page dit être une équivalence de catégories. Elle l'est si l'on munit
+$\Phi$ d'un objet de base et qu'on demande aux morphismes de le
+respecter ; sans cela, le membre de gauche a davantage de morphismes (le
+choix de l'image d'un objet), et l'on n'a qu'une bijection entre classes
+d'isomorphisme\footnote{Cette précision est de cette édition ; la page ne dit
+pas quels sont les morphismes. Elle note qu'on n'a « pas utilisé la
+commutativité de $\mu$ ».}. Une $\mathcal{E}(\pi, \mu)$-structure sur $C'$
+au-dessus de $C$ est alors la donnée, pour chaque $\xi \in \mathrm{Ob}\,C$,
+d'un isomorphisme $\mathcal{E}_{C'_\xi} \simeq \mathcal{E}$, avec une condition
+de passage d'un $\xi$ à l'autre le long des flèches de $C$, « je présume »,
+que le dossier ne formule pas.
+
+\pagerange{95}{98}
+\subsection*{Le quotient par $\mu$ (pages 95 à 98)}
+
+Pour préciser cette condition, la page revient à l'exemple, avec $\mu \subset
+U$ discret et distingué (18). $P_0 = P/\mu$ est un torseur sous $U_0 = U/\mu$,
+le revêtement universel de $U_0$ est encore $\widetilde{U}$, et
+\[
+(20)\qquad \mathcal{E} \simeq \pi_1(U_0, 1),
+\]
+ce qui montre au passage que $\mathcal{E}$ est commutative, comme tout groupe
+fondamental d'un groupe topologique. $\Pi_1(P_0)$ porte donc une
+$\mathcal{E}$-structure (21), et les deux actions de $\mathcal{E}$ sur
+$\mathrm{Hom}(x_0, y_0)$ se correspondent par $\ell\cdot\gamma_{x_0} =
+{}^{\ell}\gamma_{y_0} \cdot \ell$. L'image inverse de $\Pi_1(P_0)$ par $P \to
+P_0$ est $\Pi_1(P) \wedge^{\pi} \mathcal{E}$, et celle par $\varepsilon \to P
+\to P_0$ est $C' \wedge^{\pi} \mathcal{E}$. Comme $\mu$ agit sur
+$\mathcal{E}$ (trivialement ici sur $\pi$), il agit sur $C' \wedge^\pi
+\mathcal{E}$, librement sur les objets, et le quotient est un
+$\mathcal{E}$-groupoïde sur $\varepsilon_0$ — « plus de doute, c'est $C_0$ ! »,
+le groupoïde induit par $\Pi_1(P_0)$ sur $\varepsilon_0$, ainsi construit
+algébriquement à partir de $C'$ et de ses structures. La construction inverse
+(« Inversement, partons d'un $\mathcal{E}$-groupoïde $C_0$ ») est commencée et
+laissée.
+
+La page 98, de notes, en donne les données : 1°) un $\mathcal{E}$-groupoïde
+central $C_0$ sur $\varepsilon_0$ ; 2°) un revêtement principal $\varepsilon \to
+\varepsilon_0$ de groupe $\mu$, donné par un système local sur $C_0$, c'est-à-dire
+un homomorphisme $\pi_1(C_0, x_0) \to \mu$ qui prolonge $\mathcal{E} \to \mu$ ;
+au niveau des groupes, $1 \to \mathcal{E} \to \pi_1(P_0) \to \pi_1(T) \to 1$ et
+$1 \to \pi \to \ker\varphi \to \pi_1(T) \to 1$ pour $\varphi : \pi_1(P_0) \to
+\mu$. Elle esquisse enfin la généralisation à un torseur sous un faisceau de
+groupes topologiques $U_T$, de système local de groupes fondamentaux
+$\Pi_T$, avec un sous-faisceau $\gamma_T$ et $0 \to \Pi_T \to \mathcal{E}_T \to
+\gamma_T \to 1$\footnote{La page 97 écrit « sur le quotient $\varepsilon =
+\varepsilon'/\mu$ », la lettre petite et ambiguë ; c'est $\varepsilon_0 =
+\varepsilon/\mu$. Les marges des pages 89 et 95 sont en partie illisibles.}.
+
+Ces pages sont l'outil du dossier sous sa forme générale : un groupoïde
+fondamental induit sur un ensemble fini de points de base stable par un
+groupe d'opérateurs $\mu$ — les $\varepsilon$ des pages 2 à 14 et 111 à 124,
+avec $\mu = \{\pm1\}^{\ldots}$ et $U = \mathbb{U}^{\ldots}$ — se reconstruit
+algébriquement à partir d'une extension et d'un torseur.
+
+\pagerange{99}{124}
+\section*{$S_0\mathcal{T}_G$ en général et les morphismes de généralisation
+(pages 99 à 124)}
+
+\pagerange{99}{100}
+\subsection*{Graphes à sommets de genre $0$ et d'ordre au plus $4$ (pages 99 et
+100)}
+
+Pour un graphe MD dont tous les sommets sont de genre $0$ et d'ordre $3$ ou
+$4$, la page 99 écrit $S_0\mathcal{T}_G$ comme le produit des
+$S_0\mathcal{T}_{0, \hat{\vec A}_s}$, groupoïdes à opérateurs
+$(\mathbb{Z}^{\hat{\vec A}_s}, \mu_2^{\hat{\vec A}_s})$, poussé le long de
+$(\mathbb{Z}^{\hat{\vec A}}, \mu_2^{\hat{\vec A}}) \to (\mathbb{Z}^{\hat A},
+\mu_2^{\hat A})$ : un groupoïde à opérateurs $(\mathbb{Z}^{\hat A},
+\mu_2^{\hat A})$, sur les objets duquel $\mu_2^{\hat A}$ agit librement, et
+dont le quotient par tous les opérateurs est
+\[
+R_0\mathcal{T}_G = \prod_{s \in S} \mathcal{T}_{0, \hat{\vec A}_s},
+\]
+où seuls comptent les sommets d'ordre $4$, ceux d'ordre $3$ donnant le
+groupoïde ponctuel. Pour un graphe quelconque, de genre virtuel nul, la page
+annonce $S_0\mathcal{T}_G$ comme limite inductive filtrante de tels groupoïdes,
+indexée par un ensemble ordonné d'arbres finis sans sommet d'ordre $2$, et
+s'arrête sur des points de suspension\footnote{Le premier membre est écrit sur
+un symbole biffé, et l'exposant du produit contracté porte des signes en partie
+biffés ; on ne restitue que la structure. La page 100 ne porte que le titre
+« Hom de généralisation $SP_G \to SP_{G^\natural}$ ».}.
+
+\pagerange{102}{103}
+\subsection*{Réductions (pages 102 et 103)}
+
+Le fibré $SP_G$ et tous ses quotients $P_{G,K}$ se déduisent d'un fibré plus
+fin $SP_{G^b}$, de groupe $\mathbb{G}_m^{\vec A}$, par $\mathbb{G}_m^{\vec A}
+\to \mathbb{G}_m^{A}$ ; donc $S\mathcal{T}_G$ se déduit de
+$S\mathcal{T}_{G^b}$ par $\mathbb{Z}^{\vec A} \to \mathbb{Z}^A$. Comme
+$\mathcal{T}_G$ est une extension de $R\mathcal{T}_G$ par $\mathbb{Z}^A$,
+connue dès qu'on connaît les extensions par $\mathbb{Z}$ attachées à chaque
+arc, tout se ramène à construire les $S\mathcal{T}_{g,I} \simeq
+\mathcal{T}^{!}_{g,\nu}$, extensions de $\mathcal{T}_{g,I}$ par $\mathbb{Z}^I$
+— ou les extensions par $\mathbb{Z}$ attachées à chaque $i \in I$\footnote{La
+page qualifie $\mathcal{T}_G$ de « “cat.” de groupoïdes $R\mathcal{T}_G$ par
+$\mathbb{Z}^A$ » ; « ext. » irait mieux avec la suite.}. De même, les
+morphismes de généralisation $S\mathcal{T}_G \to S\mathcal{T}_{G'}$ se
+ramènent au cas où $G' = G^{\natural}$ est la généralisation maximale de $G$
+(toutes les arêtes liées contractées : la courbe lisse).
+
+Pour une contraction $G \to G' = G/C$, $C \subset A$ (la section « Graphes
+MD » ci-dessous), la page 103 dessine les tours de fibrés
+\[
+SP_G \xrightarrow{\ \mathbb{G}_m^{I}\ } P_G \xrightarrow{\ \mathbb{G}_m^{A'}\ }
+P_{G,C} \xrightarrow{\ \mathbb{G}_m^{C}\ } RP_G = M_G,
+\]
+où $A' = A \smallsetminus C$ sont les arêtes de $G'$, et leurs images vers
+celles de $G'$ et de $G^{\natural}$, les carrés étant cartésiens ; les flèches
+horizontales ne sont définies que dans la catégorie homotopique, et commutent
+aux groupes d'opérateurs. Par passage aux groupoïdes fondamentaux :
+\[
+S\mathcal{T}_G \xrightarrow{\ \mathbb{Z}^{I}\ } \mathcal{T}_G
+\xrightarrow{\ \mathbb{Z}^{A'}\ } \mathcal{T}_{G,C} \xrightarrow{\
+\mathbb{Z}^{C}\ } R\mathcal{T}_G, \qquad S\mathcal{T}_G \to S\mathcal{T}_{G'}
+\to S\mathcal{T}_{G^\natural},
+\]
+avec $P_{G,K} = \prod_{a \in K} P_{G,a}$, $SP_G = P_{G,\hat A}$, $P_G =
+P_{G,A}$, $SRP_G = P_{G,I}$, $RP_G = P_{G,\emptyset}$, et le carré cartésien
+$SP_G \to SRP_G$, $P_G \to RP_G$ (groupes $\mathbb{G}_m^{A}$ horizontalement,
+$\mathbb{G}_m^{I}$ verticalement)\footnote{Un premier état du grand diagramme,
+en tête de la page 103, est barré en zigzag. La formule
+$\mathcal{T}_{G,C} = \Pi_1 P_{G,\ldots}$ est coupée au bord de la feuille. La
+page écrit ces fibrés avec $\mathbb{G}_m$ ; les pages 105 et suivantes, en
+topologie, avec $\mathbb{U}$, ce qui ne change pas les groupoïdes
+fondamentaux.}.
+
+\pagerange{105}{111}
+\subsection*{La chirurgie holomorphe (pages 105 à 111)}
+
+Soit $G \to G' = G/C$ une contraction, et $X$ une courbe sur $\mathbb{C}$ de
+type $G$ ; $C \subset A = \mathrm{Sing}(X)$, $B = A \smallsetminus C$. Soit
+$\widetilde{X}$ la normalisée de $X$ en les points de $C$, et $\widetilde{C}$
+l'image inverse de $C$. On choisit autour de chaque $x \in \widetilde{C}$ un
+disque fermé $D_x$ à bord analytique réel (ou seulement $C^1$), ces disques
+deux à deux disjoints et évitant les autres nœuds. L'espace de ces choix
+devrait être contractible, c'est-à-dire que l'espace $M^C_G$ des courbes de
+type $G$ munies de disques devrait se projeter sur $M_G$ par une équivalence
+d'homotopie\footnote{« Il doit être vrai que » : la page ne le démontre pas,
+et nous non plus ; c'est le seul point non démontré de la construction.}.
+Alors $X_1 = \widetilde{X} \smallsetminus \bigcup D_x^{\circ}$ est une
+surface holomorphe à bord, et chaque cercle $\partial D_x$ est un
+$\mathbb{U}$-torseur, d'orientation opposée à celle de bord de $X_1$ ; il
+s'identifie au torseur $T_x = (T_x\widetilde{X} \smallsetminus
+0)/\mathbb{R}^{*}_{+}$ des directions tangentes, indépendamment du choix du
+disque. On récupère $X$ en recollant à $X_1$ les cônes sur ces cercles.
+
+Pour un nœud $x \in C$, de branches $x', x''$, l'espace des
+anti-isomorphismes de torseurs
+\[
+\mathrm{Isom}^{-}_{\mathbb{U}}(T_{x'}, T_{x''}) \simeq
+\mathrm{Isom}_{\mathbb{U}}(T_{x'}^{-1}, T_{x''}) \simeq T_{x'} \wedge T_{x''} =
+T_x
+\]
+est un $\mathbb{U}$-torseur, et $P_C = \prod_{x \in C} T_x$ un
+$\mathbb{U}^{C}$-torseur. Pour $t = (t_x) \in P_C$, on obtient une courbe
+$X'_t$ de type $G'$ en recollant, pour chaque $x \in C$, les deux bords
+$\partial D_{x'}$ et $\partial D_{x''}$ de $X_1$ selon l'anti-isomorphisme
+$t_x$. C'est la construction qu'on appelle aujourd'hui l'\emph{ouverture des
+nœuds} par recollement (« plumbing »), et $T_{x'} \wedge T_{x''}$ est le
+torseur unitaire de $T_{x'} \otimes T_{x''}$, la droite où vit le paramètre de
+lissage du nœud\footnote{Les noms et la dernière identification sont de cette
+édition.}. Quand $(X, (D_x))$ varie, les $P_C$ forment un
+$\mathbb{U}^C$-torseur $\widetilde{M}^C_G$ sur $M^C_G$, et l'on obtient un
+morphisme $\widetilde{M}^C_G \to M_{G'}$, avec
+\[
+1 \to \mathbb{Z}^C \to \pi_1(\widetilde{M}^C_G) \to \pi_1(M^C_G) \simeq
+\pi_1(M_G) \to 1, \qquad \pi_1(\widetilde{M}^C_G) \to \pi_1(M_{G'}).
+\]
+
+Pour relever aux fibrés tangents, soit $P_B$ le fibré principal des directions aux nœuds non ouverts et aux
+points marqués, de groupe $\mathbb{U}^{B}$ où $B$ est ici $\hat A
+\smallsetminus C$\footnote{La page pose $B = A \smallsetminus C$ à la page 105
+mais écrit à la page 108 un isomorphisme de $\mathbb{U}^{\hat A}$-torseurs ;
+les points marqués sont donc comptés dans $B$.}, de sorte que $SP_G = P_C \times_{M_G}
+P_B$. Le changement de base par l'équivalence d'homotopie $M^C_G \to M_G$
+donne $\widetilde{P}^B_G$ et $S\mathcal{T}_G = \pi_1(SP_G) \xleftarrow{\sim}
+\pi_1(\widetilde{P}^B_G)$ ; et le carré
+
+\begin{tikzcd}
+\widetilde{P}^B_G \arrow[r] \arrow[d] & SP_{G'} \arrow[d] \\
+\widetilde{M}^C_G \arrow[r] & M_{G'}
+\end{tikzcd}
+
+est cartésien : pour $X'$ construite à partir de $(X, (D_x))$, les directions
+en $B$ ne changent pas. D'où le morphisme cherché
+\[
+S\mathcal{T}_G \simeq \pi_1(\widetilde{P}^B_G) \longrightarrow
+\pi_1(SP_{G'}) = S\mathcal{T}_{G'} .
+\]
+
+Le monoïde multiplicatif $]0,1]^{C}$ agit sur $\widetilde{M}^C_G$ par
+homothétie des disques, le même rayon aux deux branches d'un nœud, et le
+morphisme $]0,1]^C \times \widetilde{M}^C_G \to M_{G'}$ joue le rôle de
+l'inclusion dans $M_{G'}$ du voisinage tubulaire épointé de $M_G$ dans
+$\widehat{M}_{G'}$\footnote{La page pose d'abord $\mu_{\vec C} =\,
+]0,1]^{\vec C}$, puis ajoute « il vaut mieux prendre $]0,1]^{C}$ », ce que
+confirme la marge ($\rho_{x'} = \rho_{x''}$).}. Si $M^C_G \to M_G$ a une
+section (« y en a-t-il toujours ?? — je pense que oui… »), on a un carré
+cartésien $SP_G \times\, ]0,1]^C \to SP_{G'}$ au-dessus de $P_C \times\,
+]0,1]^C \to M_{G'}$, et $P_C \times\, ]0,1]^C$ s'identifie, « dans un sens
+très fort », à une forme du voisinage tubulaire : le fibré en polydisques
+épointés $\prod_{x \in C} (T_{x'} \otimes T_{x''})^{*}$.
+
+Les cas les plus intéressants, conclut la page 111, sont $G' = G^\natural$, et
+ceux où $G$ est de dimension modulaire $0$ ou $1$ et $G'$ de dimension
+modulaire au plus $2$, notamment les généralisations immédiates
+($\operatorname{card} C = 1$).
+
+\pagerange{111}{116}
+\subsection*{Dimension modulaire nulle : les points de base réels (pages 111 à
+116)}
+
+Si $G$ est de dimension modulaire nulle, $X$ est déterminée par $G$ à
+isomorphisme unique près, et $M_G$ est un point. On choisit les disques
+canoniquement. Sur $\mathbb{P}^1$ marquée par $0, 1, \infty$, de groupe
+d'automorphismes $\mathfrak{S}_3$, on prend la métrique de la sphère ronde de
+rayon $1$ invariante par $\mathfrak{S}_3$, les trois points formant un
+triangle équilatéral sur un grand cercle $\Sigma_{\mathbb{R}}$, et autour de
+chaque $i$ le cercle $\Gamma_{i\rho}$ de centre $i$ et de rayon rectiligne
+$\rho$, assez petit pour que les trois disques soient disjoints\footnote{La
+page dit $0 < \rho \leq 1$ puis demande le cercle « petit » ; la page 113
+appelle $\Sigma_0$ le grand cercle nommé $\Sigma_{\mathbb{R}}$ à la page 112.
+L'invariance du cercle par la transposition qui échange les deux autres
+points est « automatique ».}. Le cercle $\Gamma_{i\rho}$ coupe
+$\Sigma_{\mathbb{R}}$ en deux points diamétralement opposés, en bijection
+canonique avec $I \smallsetminus \{i\}$ (le plus proche), d'où
+\[
+\Gamma_{i\rho} \simeq \mathbb{U} \wedge_{\{\pm1\}} (I \smallsetminus \{i\}).
+\]
+En chaque point marqué, on a donc deux directions réelles, celles qui
+pointent vers les deux autres points.
+
+Pour la courbe $X_G$, de normalisée $\coprod_s \Sigma_{\hat{\vec A}_s}$ recollée
+selon $\sigma$, on a pour chaque arête $a$ un ensemble à deux éléments
+$\varepsilon_a$ et $T_a \simeq \mathbb{U} \wedge_{\{\pm1\}} \varepsilon_a$ :
+\[
+\varepsilon_a = \hat{\vec A}_s \smallsetminus \{a\} \ \text{ si } a \in I, \qquad
+\varepsilon_a = \bigwedge_{\tilde a \text{ sur } a} \bigl(\hat{\vec
+A}_{\mathrm{or}(\tilde a)} \smallsetminus \{\tilde a\}\bigr) \ \text{ si } a \in A,
+\]
+le second étant canoniquement trivial quand $a$ est une boucle\footnote{Pour
+une boucle en $s$, d'arcs $a', a''$, et de troisième arc $b$, les deux
+ensembles $\{a'', b\}$ et $\{a', b\}$ ont une bijection canonique ($b \mapsto
+b$), d'où la trivialisation $T_a \simeq \mathbb{U}$ de la page 113.}. D'où
+\[
+SP_G = \prod_{a \in \hat A} T_a = \mathbb{U}^{\hat A} \wedge_{\{\pm1\}^{\hat A}}
+S\varepsilon_G, \qquad S\varepsilon_G = \prod_{a \in \hat A} \varepsilon_a ,
+\]
+et $S\varepsilon_G \subset SP_G$ est un ensemble de $2^{\operatorname{card}
+\hat A}$ points de base\footnote{La page écrit « $\varepsilon_G$ (de cardinal
+$2^{\operatorname{card} A}$) est contenu dans $SP_G$ », puis $S\varepsilon_G
+\subset SP_G$ : le produit sur $\hat A$ a $2^{\operatorname{card} \hat A}$
+éléments, celui sur $A$ (page 116) $2^{\operatorname{card} A}$.}. La
+chirurgie, avec des rayons dans $]0,1[^{\vec A}$, donne un morphisme
+$]0,1[^{\vec A} \times SP_G \to SP_{G^\natural}$, donc
+$S\mathcal{T}_G = \pi_1(SP_G) \simeq \mathbb{Z}^{\hat A} \to
+S\mathcal{T}_{G^\natural}$, et mieux un morphisme de groupoïdes fondamentaux ;
+comme $]0,1[^{\vec A}$ est contractile, chaque point de $S\varepsilon_G$ donne
+un point de base de $S\mathcal{T}_{G^\natural}$ — un point base « à l'infini »
+de l'espace des courbes lisses\footnote{La page écrit $SPM_{G^\natural}$, les
+lettres serrées ; c'est $SP_{G^\natural}$, comme sa parenthèse le dit.}. Soit
+$S_0\mathcal{T}'_G$ le sous-groupoïde plein de $S\mathcal{T}_G$ induit sur
+$S\varepsilon_G$ ; on a $S_0\mathcal{T}'_G \to S\mathcal{T}_{G^\natural}$.
+
+\emph{Présentation.} Pour $\xi \in S\varepsilon_G$ et $\alpha \in
+\{\pm1\}^{\hat A}$, soit $u_{\alpha, \xi} : \xi \to \alpha\xi$ le chemin qui
+fait faire un demi-tour, $t \mapsto e^{i\pi t}\xi_a$, aux coordonnées où
+$\alpha_a = -1$ et fixe les autres. Alors $u_{\beta, \alpha\xi}\, u_{\alpha,
+\xi} = u_{\alpha\beta, \xi} + n(\alpha, \beta)$, où $n(\alpha,\beta)_a = 1$ si
+$\alpha_a = \beta_a = -1$ et $0$ sinon (deux demi-tours font un tour, qui est
+l'unité de $\mathbb{Z}^{\hat A}$). Sans utiliser la
+$\mathbb{Z}^{\hat A}$-structure : générateurs $u_{a, \xi} : \xi \to \sigma_a
+\xi$, pour $a \in \hat A$, où $\sigma_a$ change la seule coordonnée $a$, et
+relations
+\begin{enumerate}
+\item[(1)] les carrés $u_{b, \sigma_a\xi}\, u_{a, \xi} = u_{a, \sigma_b\xi}\,
+u_{b, \xi}$ pour $a \neq b$ ;
+\item[(2)] les tours complets $v^a_\xi = u_{a, \sigma_a \xi}\, u_{a, \xi}$
+commutent entre eux, $\xi$ fixé.
+\end{enumerate}
+Le groupoïde ainsi présenté est $S_0\mathcal{T}'_G$. C'est juste, et (2) est
+même conséquence de (1) : les objets, les générateurs et les carrés (1) sont
+les cellules de dimension $0$, $1$ et $2$ de la décomposition cellulaire
+produit du tore $(\mathbb{U})^{\hat A}$ où chaque cercle a deux sommets
+$\pm 1$, et le groupoïde fondamental d'un complexe cellulaire ne dépend que de
+son $2$-squelette\footnote{Cette remarque et sa justification sont de cette
+édition.}.
+
+En prenant les seules arêtes liées, $\varepsilon_G = \prod_{a \in A}
+\varepsilon_a \subset P_G$, on obtient de même ${}_0\mathcal{T}_G$, et le
+carré commutatif
+\[
+S_0\mathcal{T}'_G \to S\mathcal{T}_{G^\natural}, \qquad {}_0\mathcal{T}_G \to
+\mathcal{T}_{G^\natural}
+\]
+(flèches verticales d'oubli des points marqués). Le lien avec les
+$\varepsilon(G)$ des pages 10 à 12 : une orientation de $\hat{\vec A}_s$
+désigne, pour chaque arc en $s$, l'arc qui le suit, d'où une application
+$\varepsilon(G) \to S\varepsilon_G$ compatible à $\{\pm1\}^S \to \{\pm1\}^{\hat
+A}$, et un foncteur pleinement fidèle $S_0\mathcal{T}_G \to
+S_0\mathcal{T}'_G$\footnote{Ce lien n'est pas écrit sur les pages ; il est de
+cette édition. L'application $\varepsilon(G) \to S\varepsilon_G$ est injective
+quand $G$ est connexe et a au moins un point marqué.}.
+
+\pagerange{117}{124}
+\subsection*{Dimension modulaire $1$ (pages 117 à 124)}
+
+Tous les sommets sont de genre $0$ et d'ordre $3$, sauf un, $s_0$, qui est de
+genre $0$ et d'ordre $4$, ou de genre $1$ et d'ordre $1$. La page traite le
+premier cas. Soit $J = \hat{\vec A}_{s_0}$, à quatre éléments ; alors $M_G
+\simeq M_{0,J} \simeq \mathbb{P}^1 \smallsetminus \{0, 1, \infty\}$ (après
+numérotation), et $M_{0,J} = \mathrm{Rep}(J) \wedge_{\mathfrak{S}_4}
+M^{!}_{0,4}$, où $\mathfrak{S}_4$ agit sur $M^{!}_{0,4} \simeq
+\mathbb{P}^1 \smallsetminus \{0,1,\infty\}$ à travers $\mathfrak{S}_4 \to
+\mathfrak{S}_3$, le groupe des permutations des trois partitions de type
+$(2,2)$\footnote{$\mathrm{Rep}(J) = \mathrm{Bij}(\{1,2,3,4\}, J)$ ; la page
+numérote les partitions par $P_i = \{\{i,4\}, \{1,2,3\} \smallsetminus
+\{i\}\}$. Elle écrit $\mathbb{U}_{0,3}$ pour $\mathbb{P}^1 \smallsetminus
+\{0,1,\infty\}$, et note $J$ d'une majuscule cursive à la page 117.}. Une
+courbe de type $G$ équivaut à une droite projective $Y$ marquée par $J$.
+
+Les arêtes qui ne touchent pas $s_0$, $\hat A_1$, ont leurs torseurs comme en
+dimension nulle. Celles qui touchent $s_0$ sont de trois sortes, selon l'arc
+$i \in J$ qui les porte : (I) une arête libre en $s_0$ ; (II) une boucle en
+$s_0$, d'où une involution sans point fixe sur la partie $J_{\mathrm{II}}$ ;
+(III) une arête de $s_0$ vers un autre sommet $s$, d'où, pour chaque $i \in
+J_{\mathrm{III}}$, un ensemble à deux éléments $\tilde J_{\mathrm{III},i} = \hat{\vec
+A}_s \smallsetminus \{\bar\imath\}$. Avec $J = J_{\mathrm{I}} \amalg
+J_{\mathrm{II}} \amalg J_{\mathrm{III}}$,
+\[
+T^Y_{J_{\mathrm{I}}} = \prod_{i \in J_{\mathrm{I}}} T_i, \qquad
+T^Y_{J_{\mathrm{II}}} = \prod_{\alpha \in J_{\mathrm{II}}/\sigma}
+\ \bigwedge_{i \text{ sur } \alpha} T_i, \qquad
+T^Y_{J_{\mathrm{III}}} = \prod_{i \in J_{\mathrm{III}}} T_i \wedge_{\{\pm1\}}
+\tilde J_{\mathrm{III},i},
+\]
+où $T_i$ est le torseur tangent de $Y$ en $i$ ; ce sont des
+$\mathbb{U}$-torseurs sur $M_{0,J}$, et
+\[
+SP_G \simeq T_{\hat A_1} \times T_{A_2}, \qquad A_2 = \hat A \smallsetminus
+\hat A_1 \simeq J_{\mathrm{I}} \amalg J_{\mathrm{II}}/\sigma \amalg
+J_{\mathrm{III}},
+\]
+$T_{\hat A_1}$ étant un $\mathbb{U}^{\hat A_1}$-torseur constant et
+$T_{A_2}$ un $\mathbb{U}^{A_2}$-torseur sur $M_{0,J}$\footnote{La page passe de
+$J_1, J_2$ (arcs liés non boucles, et les autres) à $J_{\mathrm{I}},
+J_{\mathrm{II}}, J_{\mathrm{III}}$, et écrit tantôt $A_1$, tantôt $\hat A_1$ ; on
+a unifié. Chaque $T_i$ figure une fois et une seule dans le produit, « sous
+forme tordue » pour les arcs de type III.}.
+
+\emph{Les points de base.} On les prend au-dessus des points de $M_{0,J}$ où
+$(Y, J)$ a plus d'automorphismes que le groupe de Klein d'ordre $4$ qu'a toute
+configuration de quatre points : les points de ramification de $M_{0,J} \to
+M_{0,J}/\mathfrak{S}_3$, au nombre de cinq\footnote{« $5$ » est lu avec doute ;
+c'est le compte juste, $3 + 2$. La page dit « des automorphismes d'ordre $> 4$
+», c'est-à-dire un groupe d'automorphismes d'ordre $> 4$.}. Il y en a de deux
+sortes.
+
+a) Les trois configurations \emph{harmoniques}, où $J$ est l'ensemble des
+sommets d'un carré, les automorphismes du carré étant induits par des
+automorphismes projectifs (groupe d'ordre $8$). Une structure de carré $Q$ sur
+$J$ équivaut à une partition de type $(2,2)$, celle des diagonales\footnote{La
+page lit « partition de type $(1,2)$ », lecture incertaine ; c'est $(2,2)$.}.
+Le groupe des rotations du carré agit simplement transitivement sur $J$ et
+identifie les $T_i$ entre eux ; une orientation $\omega_Q$ du carré donne en
+chaque sommet la direction vers le suivant, d'où $T_i \simeq \mathbb{U}
+\wedge_{\{\pm1\}} \omega_Q$, et
+\[
+T^Y_{J_{\mathrm{I}}} = \mathbb{U}^{J_{\mathrm{I}}} \wedge_{\{\pm1\}} \omega_Q
+\ (\text{diagonalement}), \qquad T^Y_{J_{\mathrm{II}}} \simeq
+\mathbb{U}^{J_{\mathrm{II}}/\sigma}, \qquad T^Y_{J_{\mathrm{III}}} \simeq
+\prod_{i \in J_{\mathrm{III}}} \mathbb{U} \wedge_{\{\pm1\}} (\omega_Q \wedge
+\tilde J_{\mathrm{III},i}),
+\]
+le deuxième parce que le produit contracté de deux copies de $\mathbb{U}
+\wedge \omega_Q$ est canoniquement $\mathbb{U}$\footnote{La page écrit
+$T^Y_{J_{\mathrm{II}}} \simeq \mathbb{U}^{J_2}$ ; il y a un facteur par paire.}.
+Si $J_{\mathrm{I}} \neq \emptyset$, on pose
+\[
+\varepsilon_{G,Q} = \Bigl(\prod_{a \in \hat A_1} \varepsilon_a\Bigr) \times
+\omega_Q \times \prod_{i \in J_{\mathrm{III}}} (\omega_Q \wedge \tilde
+J_{\mathrm{III},i}),
+\]
+torseur sous $\gamma_G = \{\pm1\}^{\hat A_1} \times \{\pm1\} \times
+\{\pm1\}^{J_{\mathrm{III}}}$, qui s'envoie dans $\mathbb{U}^{\hat A}$ par les
+inclusions évidentes et, sur le facteur du milieu, diagonalement dans
+$\mathbb{U}^{J_{\mathrm{I}}}$ ; et l'on a $SP^Y_G \simeq \mathbb{U}^{\hat A}
+\wedge_{\gamma_G} \varepsilon_{G,Q}$ ; si $J_{\mathrm{I}} = \emptyset$, on omet
+le facteur $\omega_Q$\footnote{La page note ces ensembles $\mathcal{E}_{G,Q}$ ;
+on garde $\varepsilon$ pour les ensembles de points de base.}. Le groupoïde
+$S_0\mathcal{T}^Q_G$ est le sous-groupoïde plein du groupoïde fondamental basé
+en $\varepsilon_{G,Q}$ ; ses formules explicites par générateurs et relations
+sont renvoyées à plus tard (« j'y reviendrai »).
+
+b) Les deux configurations \emph{équianharmoniques} (page 124), où les
+automorphismes de $(Y, J)$ fixant un point $i_0$ forment un groupe d'ordre $3$
+(le groupe total, $\mathfrak{A}_4$, est d'ordre $12$). Les permutations
+circulaires des trois autres points forment un $\mu_3$-torseur $\eta_{i_0}$, et
+le torseur tangent en $i_0$ est $\mathbb{U} \times_{\mu_3} \eta_{i_0}$, par
+l'inclusion $\mu_3 \hookrightarrow \mathbb{U}$\footnote{La page écrit « $J_i
+\simeq \mathbb{U} \times_{\mu_3} \eta_i$ ($i \in I$) » ; il s'agit du torseur
+tangent en $i$. Le paragraphe qui précède est très raturé.}. La page s'arrête
+sur « On ».
+
+\pagerange{125}{132}
+\section*{Graphes MD (pages 125 à 132)}
+
+La chemise de la page 125 ouvre six pages qui fixent la combinatoire utilisée
+depuis la page 2.
+
+\emph{Le tableau (page 126).} Pour chaque type $(g, \nu)$ de petite
+dimension, les graphes MD du type, reliés par des flèches de spécialisation
+vers les plus dégénérés, certaines affectées d'une multiplicité ($2$, $3$), et
+en regard la dimension $3g - 3 + \nu$ : $0$ pour $(0,3)$, $1$ pour $(0,4)$ et
+$(1,1)$, $2$ pour $(0,5)$ et $(1,2)$, $3$ pour $(0,6)$, $(1,3)$ et $(2,0)$, $4$
+pour $(2,1)$, ce dernier inachevé.
+
+\emph{Les définitions (pages 127 et 128).} Un graphe pondéré est un quintuple
+$(S, \hat{\vec A}, \mathrm{or}, \sigma, g)$ comme dans les conventions ci-dessus ;
+la condition de stabilité est
+\[
+(4)\qquad 2g_s + \hat\nu_s \geq 3 \quad \text{pour tout } s \in S,
+\]
+soit $\hat\nu_s \geq 3$ si $g_s = 0$, $\hat\nu_s \geq 1$ si $g_s = 1$, rien
+si $g_s \geq 2$. On pose $\nu(G) = \operatorname{card} I$, l'ordre marqué ;
+$c(G) = \operatorname{card} A$, le nombre d'arêtes liées, \emph{codimension
+modulaire} ; et le \emph{genre virtuel}
+\[
+(8)\qquad g = \sum_{s \in S} g_s + h^1(G),
+\]
+qui est $\dim H^1(X, \mathcal{O}_X)$ pour une courbe de type $G$, $G$ connexe.
+La dimension du type est $3g - 3 + \nu$, et celle de la strate est
+\[
+\delta(G) = \dim M_G = \sum_{s} (3g_s - 3 + \hat\nu_s) = 3g - 3 + \nu - c(G),
+\]
+d'où
+\[
+(10)\qquad \delta(G) + c(G) = 3g - 3 + \nu .
+\]
+La formule (9) de la page est donc la dimension du type\footnote{La page définit (9)
+$\delta(G) = 3g - 3 + \nu$, « dimension modulaire », puis écrit (10) $\delta(G)
++ c(G) = \delta(\mathbf{G})$, le second membre d'une autre lettre, le type. La
+formule (9) est donc celle du type, et la dimension modulaire du graphe, celle
+que (10) et les pages 111 et 117 utilisent, est $3g - 3 + \nu - c(G)$ : le
+calcul de la somme utilise $h^1(G) = c(G) - \operatorname{card} S + 1$. Les
+équations (5) à (7) confondent $\nu_s$ et $\vec\nu_s$ ; (6) donne $\nu =
+\operatorname{card}(\vec A^{\bar\sigma})$, c'est $\operatorname{card} I$.}.
+
+\emph{La contraction.} Un morphisme $u : G \to G'$ (que la page appelle
+homomorphisme de spécialisation, et les pages 103 et 105 de généralisation :
+une courbe de type $G$ est une dégénérescence des courbes de type $G'$) est un
+couple $u_s : S \to S'$, $u_a : \hat{\vec A} \to \hat{\vec A}' \amalg S'$ tel
+que $\vec B = u_a^{-1}(\hat{\vec A}')$ contienne $I$ et soit stable par
+$\sigma$, que $u_a|_{\vec B}$ commute aux involutions et aux origines, que les
+arcs contractés $\vec C = u_a^{-1}(S')$ aillent sur le sommet image de leur
+origine, que $S/R \to S'$ et $\vec B \to \hat{\vec A}'$ soient bijectifs ($R$
+la relation d'équivalence engendrée par les arêtes contractées), et que le
+genre de $s'$ soit le genre virtuel du sous-graphe contracté sur $s'$. Le
+graphe $G'$ se déduit alors de $G$ et de $C = \vec C/\sigma$ à isomorphisme
+unique près :
+\[
+S' = \pi_0(G_{0C}), \quad \hat{\vec A}' = \hat{\vec A} \smallsetminus \vec C,
+\quad \mathrm{or}' = \text{la composée } \hat{\vec A}' \to S \to S', \quad
+\sigma' = \sigma|, \quad g_{s'} = g(G_{0C,s'}),
+\]
+où $G_{0C}$ est le sous-graphe pondéré de sommets $S$ et d'arcs $\vec C$ ; on
+a $I \simeq I'$ et $\pi_0(G) \simeq \pi_0(G')$, avec les mêmes genres
+virtuels par composante. C'est la contraction des graphes stables
+d'aujourd'hui, celle qui décrit l'adhérence des strates\footnote{La page
+répète « est une bijection » dans d) ; la condition d) équivaut, selon la
+marge, à la connexité des $G(s')$.}.
+
+\emph{Les opérations (pages 130 et 132).} 1) Le « décampage » d'arêtes et le
+recollement d'arêtes libres correspondent à la normalisation partielle et au
+recollement ; $S$, les genres et les ordres totaux sont conservés, et $M_G
+\simeq M_{G'}$ : c'est ce qui sert à écrire $M_G$ comme le produit des
+$M_{g_s, \hat{\vec A}_s}$ (pages 2 et 10). 2) Les homomorphismes ordinaires de
+graphes pondérés, compatibles aux genres, et les morphismes $M_G \to M_{G'}$
+qu'ils induisent — ceux de transition entre les $M_{g,\nu}$\footnote{La page
+barre d'une croix les variantes pour les compactifiés, avec « ne fait pas
+sens ».}. 3) Les homomorphismes d'\emph{induction} $u : G' \to G$, compatibles
+aux origines et aux genres, injectifs sur les arcs de chaque sommet, envoyant
+$\vec A'$ dans $\vec A$ en commutant aux involutions, mais sans
+compatibilité aux extrémités : d'une courbe $X$ de type $G$, de normalisée
+$\coprod_s \widetilde{X}_s$, on tire une courbe $X'$ de type $G'$ en posant
+$\widetilde{X}'_{s'} = \widetilde{X}_{u(s')}$, marquée par les arcs de $s'$, et en
+recollant selon $\sigma'$ ; on a un morphisme fini et net (non ramifié) $X'
+\to X$, qui envoie $I'$ dans $I \amalg \mathrm{Sing}\,X$. Le dossier s'arrête
+sur la réciproque : « Inversement \ldots{} un tel morphisme ».
+
+\end{document}
