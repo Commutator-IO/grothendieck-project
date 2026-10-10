@@ -31,7 +31,7 @@ export const PROOFS: Proof[] = [
     statement:
       "On a Noetherian sober space, a sheaf satisfying (H) has open coherence loci (Lemme 1) and its sections are the coherent families of germs (Proposition, p. 3); for A Noetherian, Lemme 1 and Corollaire 1 on Spec A; Lemme 2 (1), (2) and the page’s form (A_f)_𝔔 → A_𝔭.",
     found:
-      "Nothing false. The step « constructible, donc … ouvert » never uses constructibility: stability under generization plus a non-empty open in each x̄ is enough, proved directly. (H) is used in a weaker form than the page states; injectivity needs neither (H) nor the Noetherian hypothesis; Corollaire 1 needs from Lemme 2 only one f killing ker(A → A_𝔭); Lemme 2 (2) holds over any commutative ring. Not proved: Corollaire 1 off the affine case, Lemme 3, Corollaires 2–3, the two counterexamples.",
+      "Nothing false. The step « constructible, donc … ouvert » never uses constructibility: stability under generization plus a non-empty open in each x̄ is enough, proved directly. (H) is used in a weaker form than the page states; injectivity needs neither (H) nor the Noetherian hypothesis; Corollaire 1 needs from Lemme 2 only one f killing ker(A → A_𝔭); Lemme 2 (2) holds over any commutative ring. Not proved: Corollaire 1 off the affine case, Lemme 3, Corollaires 2–3, the two counterexamples. Two of these are already in mathlib: the f killing ker(A → A_𝔭) follows from Module.mem_support_iff_of_finite and Module.notMem_support_iff′, and Lemme 2 (2) from IsLocalization.injective_of_map_algebraMap_zero. The openness criterion is proposed to mathlib without constructibility (leanprover-community/mathlib4#44707).",
     verdict: 'holds, more generally',
     lean: 'lean/Grothendieck/Folder42.lean',
     theorems: ["lemme2_1", "lemme2_2", "isOpen_of_stableUnderGeneralization", "lemme1_faisceau", "proposition", "lemme2_page", "lemme1", "corollaire1"],
@@ -44,7 +44,7 @@ export const PROOFS: Proof[] = [
     statement:
       'A finite monoid M, pseudo-cofiltering (for all u, v there are u′, v′ with uu′ = vv′) and whose group completion is trivial, has an element p with up = p for every u — so p² = p and M is cofiltering.',
     found:
-      'The Proposition holds as the leaf states it, and finiteness is used exactly where the page says « comme E₀ est fini ». The reading’s modern gloss was false: it called p a left zero and the Rees kernel a point. In {1, a, b} with xa = a and xb = b, both a and b qualify and the kernel is {a, b}; p is a right zero, and not unique. The reading is corrected.',
+      'The Proposition holds as the leaf states it, and finiteness is used exactly where the page says « comme E₀ est fini ». The reading’s modern gloss was false: it called p a left zero and the Rees kernel a point. In {1, a, b} with xa = a and xb = b, both a and b qualify and the kernel is {a, b}; p is a right zero, and not unique. The reading is corrected. Proposition 1 with its converse is proposed to mathlib (leanprover-community/mathlib4#44702).',
     verdict: 'holds; the gloss was false',
     lean: 'lean/Grothendieck/Folder158.lean',
     theorems: ['etape1', 'proposition1', 'contre_noyau_non_ponctuel'],
@@ -226,7 +226,7 @@ export const PROOFS: Proof[] = [
     statement:
       "On a primitive vector of weight μ, ΛL^{k+1}x = (k+1)(μ−k)L^k x, and the sl₂ Λ satisfies (6.7) only when μ = 1; in a graded ring, one-sided inverses of L^{n−i} put every grading projector in the ring, over ℤ, with no module (no. 5, (6.3)); any algebraic isomorphism H^{2n−i} → H^i makes the inverse of L^{n−i} algebraic, by Cayley–Hamilton (pp. 47–48).",
     found:
-      "Confirms the reading’s correction of p. 13. Finds the reading wrong on one point: its universal ring Φ₀ = ℤ[L₀, Λ₀], with Λ₀ in the sense of (6.15), does not exist over ℤ for n ≥ 2, since ξ₀ⁿ is divisible by n! and no y has ξ₀ⁿ ∧ y = vol; over ℚ the obstruction disappears. Not proved: Λ and the primitive projectors in the ring, the universal property of Φ₀, Hard Lefschetz.",
+      "Confirms the reading’s correction of p. 13. Finds the reading wrong on one point: its universal ring Φ₀ = ℤ[L₀, Λ₀], with Λ₀ in the sense of (6.15), does not exist over ℤ for n ≥ 2, since ξ₀ⁿ is divisible by n! and no y has ξ₀ⁿ ∧ y = vol; over ℚ the obstruction disappears. Not proved: Λ and the primitive projectors in the ring, the universal property of Φ₀, Hard Lefschetz. The Cayley–Hamilton lemma is proposed to mathlib in a more general form, for integral units of a subalgebra over an Artinian ring (leanprover-community/mathlib4#44708).",
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder16.lean',
     theorems: ["sl2_normalisation", "identification_seulement_si", "lambda0_L0_un_ne_un", "projecteurs_mem_lefschetz", "inverse_Lefschetz_algebrique", "not_exists_xi₀_pow_mul_eq_vol"],
