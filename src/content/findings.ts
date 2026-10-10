@@ -7619,4 +7619,142 @@ export const FINDINGS: Finding[] = [
     settle:
       'Read Fulton–Olsson, « The Picard group of M_{1,1} » (Algebra & Number Theory 2010) and the stacky-curves Picard computations (arXiv 2306.08227) for the S₃-quotient of P¹ − {0, 1, ∞} over a general base, in particular over Z and F₂; if Pic = Z/6 (Z/3 in characteristic 2) is stated there or is an immediate corollary, mark matched. A single unread web query is not a search, so the status stays unsearched. Separately, the Z/3 clause should be checked against the facsimile of page 22, since « car. générique » is uncertain in the transcription.',
   },
+// Folder 1 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over the Fable 5.1 (claude-fable-5-1) modernised reading, as the user decided for folders 1 and 47. Candidate entries in the Finding shape of src/content/findings.ts; not merged there.
+// Dropped as matches (the reading's footnotes already name them): the Fack–Kosaki generalised singular numbers and Horn inequality in a semifinite algebra (pp. 18–33), the Pólya-function representation (Lorentz–Luxemburg, pp. 11–15), Weyl, Horn, Ky Fan, Schatten duality, the Lidskii trace formula, det(1+|A+B|) ≤ det(1+|A|)det(1+|B|) itself (Seiler–Simon), McCarthy–Rotfel'd for p < 1, the C*-multiplier theorem (pp. 3–5), and the ℓ¹ function of pp. 119–121.
+// Also not written up: the multiplicativity of Δ on 1 + 𝔞 for a semifinite, non-finite trace (Prop. 8, pp. 28–30). Nearly every word of its argument is \uncertain{} on the page, and the claim is probably in L. G. Brown's work on the type II determinant. Disagreement with the Fable reading, recorded here: its footnote says the "par raison de continuité" reduction needs only the semicontinuity of A ↦ Δ(A) (cor. 4 of prop. 6). Opus 5.5 reads that as giving one inequality, not the equality, so the reduction still has a gap.
+// Numerical checks run in this pass on random complex matrices (dimensions 2–6, 4000 draws) found no violation of the inequalities in the first two entries. That is evidence for the statements, not a search of the literature.
+
+  {
+    id: '1-sigma-nm-system',
+    cote: '1',
+    pages: '71–73',
+    kind: 'mathematical',
+    claim:
+      'For compact u, v between Hilbert spaces and all 0 ≤ m ≤ n, the elementary symmetric functions of the first n singular values satisfy σ_n^m(u+v) ≤ Σ_{p=0}^{m} σ_n^p(u) σ_n^{m−p}(v), coefficient by coefficient — a system that implies, and is stronger than, ∏_{i≤n}(1 + r s_i(u+v)) ≤ ∏_{i≤n}(1 + r s_i(u)) ∏_{i≤n}(1 + r s_i(v)) for all r ≥ 0.',
+    basis:
+      'Page 71 states (16) boxed, with σ_n^m defined in (17), and proves the trace-class case α_n(|u+v|) ≤ Σ α_p(|u|)α_{n−p}(|v|) through Λ^n(u+v) = Σ binom(n,p)(Λ^p u)∧(Λ^{n−p} v) and the bound p!q!/(p+q)! on ‖(Λ^p u)∧(Λ^q v)‖₁. Page 72 passes to compact u, v through Prop. 3, σ_n^m(u) = sup |α_m(v_n u)| over contractions v_n of rank ≤ n. Page 73 calls the system (in \\uncertain{} words) "les plus fortes possibles". The formulas are legible, but much of the prose of page 72 is \\ill{} or \\uncertain{}, and the margin of page 71 has "à réviser" against Théorème 2.',
+    ours:
+      'The page carries the statement and the steps. The reading supplied nothing to make it true, and only rewrote the p!q!/(p+q)! bookkeeping. Opus 5.5 adds an observation the Fable reading does not make: the right-hand side is e_m of the 2n-tuple (s_1(u),…,s_n(u), s_1(v),…,s_n(v)). So the claim reads e_m(s_{≤n}(u+v)) ≤ e_m(s_{≤n}(u) ∪ s_{≤n}(v)), which is strictly stronger than the product form (15). The Fable reading footnotes only the product form, as a case of Rotfel\'d/Thompson for f = log(1 + rs). That match does not cover the coefficientwise system.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Decide whether the coefficientwise system, and not just its consequences for concave f, is in Rotfel\'d (1967, 1969), Thompson ("Convex and concave functions of singular values of matrix sums", 1976), Marshall–Olkin–Arnold ch. 9–10 (elementary symmetric functions and weak majorisation), Bhatia, Matrix Analysis, ch. IV, or Simon, Trace Ideals, ch. 3. Two web searches made in this pass (2026-10-10) turned up Seiler–Simon and the Thompson–Freede and Bourin–Uchiyama line, and no statement of this system. Those results were not read, so they are not a search of the sources.',
+  },
+  {
+    id: '1-mixed-schwarz-fredholm-coefficients',
+    cote: '1',
+    pages: '123–124',
+    kind: 'mathematical',
+    claim:
+      'For trace-class A, B on a Hilbert space, the Fredholm coefficients of A + B satisfy |α_n(A+B)|² ≤ α_n(|A|+|B|) · α_n(|A*|+|B*|) for every n, and hence |det(1+A+B)| ≤ ½[det(1+|A|+|B|) + det(1+|A*|+|B*|)] — a coefficientwise, determinantal form of the mixed Schwarz inequality that uses the left and right moduli together.',
+    basis:
+      'Page 123 proves ‖u₁∧…∧u_n‖₁² ≤ α_n(|u₁|,…,|u_n|) α_n(|u₁|′,…,|u_n|′), with |u|′ = |u*|, by Cauchy–Schwarz on Schmidt expansions. Corollaire 2 (boxed) expands α_n(A+B) multilinearly and applies Cauchy–Schwarz over k. Corollaire 3 (boxed, p. 124) gives the determinant. The statement of Cor. 2 is legible. The exponents 2 and ½ in its proof are overwritten and read with doubt, and the first term on the right of Cor. 3 can also be read det(1+|A+B|).',
+    ours:
+      'The page carries Cor. 2 and Cor. 3 (arithmetic-mean form). The geometric-mean form |det(1+A+B)|² ≤ det(1+|A|+|B|) det(1+|A*|+|B*|), which follows from Cor. 2 by Cauchy–Schwarz over n, is Opus 5.5\'s and is not on the page. The Fable reading treats Cor. 2–3 only as steps toward Cor. 4–5 (Seiler–Simon) and does not footnote them as statements. Opus 5.5 lists them separately because they do not follow from Seiler–Simon: |A|+|B| and |A*|+|B*| are not comparable with |A+B|.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Search for the inequality with |A|+|B| and |A*|+|B*| on the right in Simon, Trace Ideals, ch. 3, Bhatia, Matrix Analysis, IX (mixed Schwarz and Kato\'s inequality), Gohberg–Krein ch. II–IV, and the determinantal-inequality papers of M. Lin and F. Zhang (2010s). A web search in this pass (2026-10-10) surfaced only Seiler–Simon and a determinantal Cauchy–Schwarz for A*MB (Sidi 2024). That is a different statement, and neither was read.',
+  },
+  {
+    id: '1-schatten-p-via-fredholm-determinant',
+    cote: '1',
+    pages: '126–139',
+    kind: 'mathematical',
+    claim:
+      'The three parts of the S_p theorem for 0 < p ≤ ∞ are proved here through Fredholm determinants and Jensen\'s formula, without Weyl\'s majorant lemma: subadditivity of S_p for p < 1, Σ|λ_i|^p ≤ S_p(A), and ‖AB‖_r ≤ ‖A‖_p‖B‖_q for all exponents. Subadditivity comes from det(1+v|A+B|) ≤ det(1+v|A|)det(1+v|B|) through the representation S_p(A) = (p sin πp/π)∫₀^∞ log det(1+v|A|) v^{−1−p} dv. Weyl comes from s_p(A) ≤ (pπ/sin pπ)S_p(A) and A ↦ A^n. Hölder comes from α_n(L^m) ≤ α_n(H^m)α_n(K^m) and a limit m → ∞.',
+    basis:
+      'Page 129 says "je ne connais qu\'une méthode analytique", which is legible. Lemma 1 and its corollary (9) are on pp. 127–129, the bound (10) M_{|A+B|} ≤ M_{|A|}M_{|B|} on p. 129, the Jensen bound and the power trick on pp. 130–131, Lemma 2 (12) on p. 135, and (13)–(14) and the Lagrange step on pp. 136–139. Nearly every page from 127 on carries struck passages. The formulas are legible.',
+    ours:
+      'The Fable reading supplies the computation for Lemma 1, which the page leaves unproved. It also supplies the truncation that reduces to finite rank, which the page does not justify, and it corrects letters on p. 134. The theorems themselves are matches (McCarthy 1967, Rotfel\'d 1967, Weyl 1949), as the reading says. The candidate is the route only. The Fable footnote describes it as "the reverse order of the literature", which deduces McCarthy–Rotfel\'d from Seiler–Simon. That is a statement about the literature that this pass has not checked, so it is not repeated as a claim here.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check whether the log-det integral representation of S_p for p < 1, and the deduction of S_p subadditivity from the determinant inequality, appear in Simon, Trace Ideals (ch. 3, 5 and the notes to ch. 3), Gohberg–Krein ch. II and IV, McCarthy (Israel J. Math. 1967), or Rotfel\'d (1967/1969). If one of them proves it this way, mark matched.',
+  },
+  {
+    id: '1-chronology-123-149-before-37-104',
+    cote: '1',
+    pages: '37–104, 123–149',
+    kind: 'codicological',
+    claim:
+      'The leaves bound as pages 123–149 were written before pages 37–104, so the folder\'s order is not the order of composition.',
+    basis:
+      'Internal evidence only. Page 129 says that only an analytic method is known for Σ|λ_i|^p ≤ S_p, and this is legible. Page 88 derives the same inequality from Weyl\'s lemma in two lines. Page 93 announces Schatten theory "simplifiée" by Weyl\'s convexity inequalities, but every word of that sentence is \\uncertain{}. A note on page 132 points to a "plus bas" that the reading takes to be pp. 81–92. The transcriptions also describe pp. 123–125 as written in "une main plus lente".',
+    ours:
+      'The argument is the Fable reading\'s (its "L\'ordre du carton" section). Opus 5.5 reads the evidence the same way, with two caveats. The "plus bas" of p. 132 could equally point to later pages of the same old layer. And the page-93 sentence rests on \\uncertain{} words. So the legible pair p. 129 / p. 88 carries the argument alone.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Compare paper stock, ink and hand of pp. 123–149 and pp. 37–104 on the facsimile. This pass did not look at the facsimile.',
+  },
+  // Folder 47 — /find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over transcripts/47/47.modern.tex (Pass: Fable 5.1, claude-fable-5-1) and batch-01.fr.tex, as decided for folders 1 and 47 on 2026-10-10. Where this pass reads the folder differently from the Fable 5.1 reading it says so in `ours`, naming both models. Sources actually opened in this pass: Mukai 1987 (§1) and Kleiman 1968 (appendix 2A). Everything else is unsearched.
+  {
+    id: '47-relative-fourier-inversion',
+    cote: '47',
+    pages: '3–7',
+    kind: 'mathematical',
+    claim:
+      'For abelian schemes A, B over an arbitrary base S, of relative dimension n, with L a birigidified line bundle making them dual, Φ_{ˢL} ∘ Φ_L ≅ s_A^*(−) ⊗ τ_A[−n] on perfect complexes, τ_A the determinant of the Lie algebra of A; so Φ_L is an equivalence.',
+    basis:
+      'Page 3 states the theorem (first as « Proposition 2 ») in K-theory, page 4 « plus précisément » as functors with the twist τ_A[−n]; pages 4–5 reduce the kernel of the composite to the pull-back of the Weil sheaf along Ψ = φ ∘ m_A and to Lemma 1 (p_*W ≅ e_*τ_{B*}[−n]); pages 6–7 deduce Lemma 1 from a vanishing lemma attributed to Mumford and admitted, and the last step at points of the zero section ends in dots. The corollary on page 4 is « Corollaire \\uncertain{2} », the kernel formula of page 5 is partly \\uncertain{}, and « modulo dém. du Lemme 1 » is read with doubt.',
+    ours:
+      'Lemma 2 is admitted on the page and the compatibility check closing Lemma 1 is not written; neither the Fable 5.1 reading nor this pass supplies it. The Fable 5.1 reading puts the twist τ_A into the K-theory statement too, where the page writes only (−1)^n s_A^*, and corrects « C^* » to B^* on page 5. Opus 5.5 differs from the Fable 5.1 reading on the literature only: the reading names Laumon 1996 as the relative version, whereas Mukai 1987, Theorem 1.1, already states the abelian-scheme case with the twist by the dual of the relative canonical bundle and attributes it to Moret-Baily.',
+    literature: [
+      'S. Mukai, « Fourier functor and its application to the moduli of bundles on an abelian variety », Adv. Stud. Pure Math. 10 (1987), §1, Theorem 1.1 and its proof (RŜ ∘ RS ≅ (−1_A)^* ∘ (⊗ ω_{A/T}^∨)[−g] for an abelian scheme A/T, attributed there to Moret-Baily)',
+    ],
+    status: 'matched',
+    settle:
+      'Matched in Mukai 1987, Theorem 1.1, whose twist ω_{A/T}^∨ is pulled back from T and is τ_A. What remains is only the normalisation of the twist (Mukai uses the normalised Poincaré bundle on A × Â), which a reader can compare line by line with page 4; it does not change the match. The folder is undated and no precedence is claimed either way.',
+  },
+  {
+    id: '47-chow-fourier-todd-over-base',
+    cote: '47',
+    pages: '9–10',
+    kind: 'mathematical',
+    claim:
+      'Over a base S, Grothendieck–Riemann–Roch for m_A and pr_2 gives ch(x * y) = (ch x * ch y)·Todd(t_A) on A and, for Ψ_D = pr_{2*}(pr_1^*(−)·exp D), Ψ_D(a * b) = Ψ_D(a)Ψ_D(b) with no correction, while the cup-to-Pontrjagin formula acquires a factor pulled back from S.',
+    basis:
+      'Page 9 derives (*) by « R.R. pour A × A → A » and Ψ_D(a * b) = Ψ_D(a)Ψ_D(b) (boxed) from Proposition 1; page 10 derives, from the corollary of the theorem, Ψ_D(ab) = Ψ_D(a) * Ψ_D(b)·(−1)^n T ch ω_A with T = Todd(t_A) (boxed). The group written « Cw » is read as glyphs and flagged \\uncertain{} at its first occurrence; a marginal note of page 10 is partly \\ill{}.',
+    ours:
+      'The Fable 5.1 reading identifies « Cw » with CH^·(−)_Q and replaces the page’s single factor T by Todd(t_A)·Todd(t_B)·ch(ω_A), because the second application of (*) takes place on B; Opus 5.5 rechecked that derivation and agrees with the Fable 5.1 reading against the page. Opus 5.5 adds a point the reading does not make: applying GRR to Lemma 1 (p_*W ≅ e_*τ[−n], normal bundle of e equal to t_{B*}) gives p_*(exp ℓ) = (−1)^n e_*(1)·ch(τ_{B*})·Todd(t_{B*})^{−1}·Todd(t_B)^{−1}; so if p_*(exp ℓ) = (−1)^n [e(S)] holds exactly in CH_Q over the base, then Todd(t_A)·Todd(t_B)·ch(ω_A) = 1 in CH^·(S)_Q, the reading’s corrected formula is the field formula unchanged, and the page’s single-T formula is off by Todd(t_B)^{−1}. That conditional step is this pass’s, unchecked by anyone.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Read Deninger–Murre, « Motivic decomposition of abelian schemes and the Fourier transform », J. reine angew. Math. 422 (1991), §2, and Künnemann’s follow-ups, for the Fourier transform on CH_Q of an abelian scheme over a smooth quasi-projective base: whether they state F(x * y) = F(x)F(y) and F(xy) = (−1)^g F(x) * F(y) with no Todd factor, and whether they prove pr_*(exp ℓ) = (−1)^g[e(S)] exactly. If they do, the over-base formulas are matched and the factor of the reading equals 1; if a Todd-type correction appears there, compare it with the reading’s.',
+  },
+  {
+    id: '47-cup-to-pontrjagin-sign-kleiman',
+    cote: '47',
+    pages: '10',
+    kind: 'mathematical',
+    claim:
+      'The folder writes the cup-to-Pontrjagin Fourier formula on cycle classes with a sign, Ψ_D(ab) = (−1)^n Ψ_D(a) * Ψ_D(b) over a field, and says the formulas in Kleiman’s « Dix exposés » account omit the factors (−1)^n.',
+    basis:
+      'Page 10, boxed formula and the sentence « Ce sont les formules (\\ill{} \\uncertain{affirmations}) par Kleiman dans « 10 Exposés … », sur un corps alg. clos et en travaillant avec une théorie \\uncertain{cohomologique} …, à cela près que Kleiman n’a pas tenu compte des facteurs (−1)^n ! ». The verb attributing the formulas to Kleiman is \\ill{} or \\uncertain{}.',
+    ours:
+      'The Fable 5.1 reading reports the remark about Kleiman without checking it and cites Beauville 1983, Proposition 3, for the signed formula. Opus 5.5 opened Kleiman: appendix 2A12 states only the Pontrjagin-to-cup direction for exp(u), u the (1,1) Künneth component of a class on X × Y, which carries no sign and agrees with the page’s first formula; 2A13 (attributed to Lieberman) says exp(u) is an algebraic isomorphism of the Pontrjagin algebra onto the cup-product algebra, and no cup-to-Pontrjagin formula is written there. So the omission the page names is not visible in an explicit formula of that passage; this is Opus 5.5’s reading of Kleiman, not a reading of the folder, and Beauville 1983 was not reopened in this pass.',
+    literature: [
+      'S. Kleiman, « Algebraic cycles and the Weil conjectures », in Dix exposés sur la cohomologie des schémas (1968), appendix 2, 2A11–2A13 (Lieberman’s results; Pontrjagin to cup product by exp(u))',
+    ],
+    status: 'matched',
+    settle:
+      'The signed formula is matched by Beauville, « Quelques remarques sur la transformation de Fourier dans l’anneau de Chow d’une variété abélienne » (1983), Proposition 3, as cited by the reading; reopen it to confirm the statement and section. What remains is the page’s remark about Kleiman: check the rest of Kleiman’s article and Lieberman, « Numerical and homological equivalence of algebraic cycles on Hodge manifolds » (1968), for a cup-to-Pontrjagin formula stated without (−1)^n; if none is there, the remark refers to an implicit inverse, and the entry should say so rather than repeat it.',
+  },
+  {
+    id: '47-dual-polarisation-divisibility',
+    cote: '47',
+    pages: '7–8',
+    kind: 'mathematical',
+    claim:
+      'For a line bundle of Néron–Severi class δ with χ = χ(δ) ≠ 0 on an abelian variety, and δ′ the class determined by det Φ_L(L), the folder proposes that the classes binom(χ, k)·δ′^k / χ^m are integral, as consequences of c(Φ_L(cl L)) = (1 − D′/χ)^χ.',
+    basis:
+      'Page 8 gives the heuristic φ_L(cl L) = χ·« L′^{−1/χ} », its Chern character χ·exp(−D′/χ) and total Chern class (1 − D′/χ)^χ, asks « Ces formules sont-elles bien vraies mod torsion ? », says they hold over an algebraically closed field modulo homological equivalence, and writes the divisibility with m = k − 2 (and the Chern-class expansion with χ^{k−1}). The argument of φ_L in both formulas is overwritten, D′ ∈ « Cw¹ » is \\uncertain{}, and the parenthesis « donc le ≠ car. h » is read with doubt; the page states it conditionally (« Ceci donnerait »).',
+    ours:
+      'The Fable 5.1 reading takes m = k, citing the Chern-character line, and supplies a proof over an algebraically closed field: Mukai 1981, 3.11, pull-back by the isogeny φ_L, injectivity of isogeny pull-back on CH_Q; the sign of δ′ is put in Mukai’s normalisation, where the page writes −χ. Opus 5.5 agrees that m = k is what the page’s own ch line forces, but reads the page’s m = k − 2 differently from the Fable 5.1 reading: it is not an independent error, since integrality with denominator χ^k implies it with χ^{k−2}; the page’s divisibility statement is the weaker one, and true if the reading’s is. Whichever exponent is taken, the proof is the edition’s.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for the integrality of binom(χ, k)·δ′^k/χ^k (equivalently, of the Chern classes of the Fourier transform of a non-degenerate line bundle expressed through the dual polarisation) in Mukai 1981 §3, Birkenhake–Lange, Complex Abelian Varieties, ch. 14 (dual polarisation and Fourier–Mukai), and Beauville 1983. If it is stated there, or is read off Mukai 3.11 in a published remark, mark matched. Separately, someone should check the page’s overwritten argument of φ_L against the facsimile before anything rests on the exponent.',
+  },
 ];
