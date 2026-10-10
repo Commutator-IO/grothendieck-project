@@ -1,0 +1,2461 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 136, pages 1-375.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried — a doubtful
+% reading, a notation he used differently, a missing passage — moves into a
+% footnote.
+%
+% It is held to being mathematically correct as it stands, not merely faithful
+% to the page. Where the manuscript is loose or mistaken, the true statement is
+% what appears here, and the footnote says what the page has. In any dispute of
+% substance the transcription governs: whoever cites Grothendieck must cite the
+% batch-NN.fr.tex files.
+%
+% Scope: ONE document for the whole shelfmark, nineteen batches read as one
+% dossier. The folder is not one argument but a bundle of strands around the
+% 1976 IHES lecture; the spine section after the résumé names them and their
+% page ranges. Pages 356-375 are notes on Steenrod operations, Eilenberg-MacLane
+% spaces and Ext(G_a, G_a) whose author the pages do not name; they are read as
+% notes, and attributed to nobody.
+%
+% NOTATION fixed for the whole folder:
+%   sSet (his Ss, \widehat\Delta) the topos of simplicial sets; X_* an object,
+%     X_{[n]} its n-simplices. His « ½simplicial » is read « simplicial »
+%     throughout (the old sense), footnoted once;
+%   k a commutative ring, S_k = k{T} the divided-power polynomial algebra,
+%     T^{(i)} its divided powers, c_{i,j} = (i+j)!/(i! j!);
+%   \Phi_* = \Phi_{*k} : [n] -> k^{n+1} (= i_{0*}k); the pages also call it
+%     \mathfrak{G}_* (pp. 101-107) and \mathfrak{L}_* (pp. 224-232);
+%     k_* the constant object, \Psi_* = \Phi_*/k_*;
+%   C^{p,q}_* = \Gamma^p\Phi_* (x) \Lambda^q\Psi_*, with p the COMPLEMENTARY
+%     (divided-power) degree and q the EXTERIOR degree, total degree n = p+q.
+%     The pages index by (p,q) on pp. 7-9 and by (total, exterior) on pp. 80
+%     and 230-232; every statement here is converted to (p,q);
+%   \mathcal{D}^{p,q}_* = \Gamma^p\Phi_* (x) \Lambda^q\Phi_*, the larger
+%     resolution of k_* of pp. 16 and 73 (his D and C^{**});
+%   \omega_N, \tau_N, \varphi_N the shadow, truncation and coreflection
+%     functors on graded S-modules; \mathcal{M}_N the modules in degrees >= N;
+%     \tau_\omega the passage to the quotient by negligible modules;
+%   \mathcal{A}_*(S, S^+, t) the simplicial divided-power differential algebra
+%     of pp. 5, 124, 161, 203; \Omega the group scheme of automorphisms (p. 177);
+%   V(M) : A -> Hom_k(M, A) the « vector bundle » functor of a k-module.
+%   M[i] is the shift (M[i])_j = M_{i+j}; the pages also write T for it
+%     (p. 243) and t (p. 286), letters this reading keeps for other things.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - p. 44: the « largest divisible submodule » is not \bigcap nN in general;
+%     the argument gives the largest p-divisible submodule, k a Z_(p)-algebra;
+%   - p. 40: the last vanishing condition is c_{d,\beta-d-1} u = 0;
+%   - p. 140: Dirichlet's integral makes the constant \gamma_{i} equal to 1
+%     (ours), so the Stokes integral of a divided-power monomial over the
+%     simplex of side t is t^{(n + \sum i)};
+%   - p. 165: the Leibniz rule of the \delta_i carries binomial coefficients;
+%   - p. 191: \varphi(dX_0) = dX_0 + df, not 1 + df;
+%   - p. 214: the divided powers of the free alternating algebra live on the
+%     even part (Cartan's convention); on odd elements they are consistent
+%     only for strictly commuting pairs, as p. 216 itself finds;
+%   - p. 221: the operator d\delta + \delta d kills cohomology degree by
+%     TOTAL degree;
+%   - p. 228: \Gamma^i\Psi_* and Sym^i\Psi_* are NOT K(k,i) in general
+%     (the décalage of p. 361 gives LSym^i(k[1]) = 0 for i >= 2);
+%   - p. 240: v_p(p^{(i)}) <= v_p(p^{(i+1)}) iff p^2 does not divide i+1;
+%   - pp. 262-264: the vanishing of R^n\varphi_N on M (x) S is drawn from the
+%     exactness of \tau i alone, which does not suffice; recorded as a gap;
+%   - p. 364: Adem gives Sq^1 Sq^2 = Sq^3;
+%   - p. 369: K_2(R) = H_2(E(R)) = \pi_2(BGL(R)^+), not \pi_1(E(R)); the
+%     Bloch formula is in codimension i;
+%   - p. 371: Cartan's symmetry holds in the stable range, with a degree shift.
+%
+% Announced in the folder and never established: that the divided-power De Rham
+% complex with all its structures determines the homotopy type (pp. 11-12,
+% 16-17); that the groupoid of admissible theories is connected and simply
+% connected (p. 120); the second of the « two groups » of p. 105; the
+% reconstruction of K^\bullet in D(C) rests on the gap of pp. 262-264; the
+% splitting s of p. 77 is never defined; the Künneth formula (p. 13) is not
+% developed; the Steenrod squares hoped for in characteristic 2 (p. 181) are
+% not found.
+%
+% Third-party material that the transcriptions only note — a personal letter
+% (p. 117), letters (pp. 119, 244), typescripts by other hands (pp. 215, 217,
+% 348-352) — is not restated beyond saying that it is there (RIGHTS.md).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against
+% the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{136}
+\pages{1}{375}
+\dating{[à partir de 1975-1976]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Complexe de De Rham à puissance divisée [conférence de 1976 à l’IHÉS] : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Trois cent soixante-quinze feuillets, réunis sous une couverture orange qui
+porte « Complexe DR à p.d.\ et ombres », préparent et prolongent une conférence
+donnée à l'IHÉS en 1976. La question est simple à dire : peut-on écrire, pour
+un espace quelconque, des « formes différentielles » qui calculent sa
+cohomologie à coefficients \emph{entiers} — sans perdre la torsion ?
+
+Depuis De Rham, les formes différentielles calculent la cohomologie, mais à
+coefficients réels ; Sullivan, au début des années 1970, avait montré qu'en
+remplaçant les variétés par des simplexes et les fonctions lisses par des
+polynômes à coefficients rationnels, on récupère même tout le type d'homotopie
+rationnel d'un espace. Mais tout cela vit en caractéristique nulle, là où les
+nombres $2, 3, 5, \ldots$ sont inversibles et où la torsion — le fait qu'un
+cycle puisse être nul une fois répété $p$ fois sans l'être lui-même — devient
+invisible. « Du point de vue de Weil, c'était un défaut impardonnable »,
+note-t-il dans la marge de la première page. L'obstacle est presque scolaire :
+intégrer $x^n\,dx$ demande de diviser par $n+1$.
+
+L'idée vient de la géométrie algébrique en caractéristique $p$, où elle avait
+déjà servi : les \emph{puissances divisées}. Plutôt que d'écrire $x^n$ et de
+diviser ensuite, on prend pour symbole de base $x^{(n)}$, « $x^n/n!$ » — comme
+on tient un registre des coefficients d'une série de Taylor plutôt que des
+dérivées. Les primitives redeviennent entières. Mais un nouvel obstacle
+surgit : le simplexe est défini par l'équation $x_0 + \cdots + x_n = 1$, et le
+nombre $1$ n'admet pas de puissances divisées entières. Sa solution est de
+remplacer $1$ par un paramètre $T$ qui, lui, en admet : on travaille avec des
+simplexes « de taille $T$ ». Le prix est qu'on ne récupère plus la cohomologie
+elle-même, mais ce qu'il appelle ses \emph{ombres} : des copies de la
+cohomologie multipliée par les puissances divisées de $T$, dont on ne voit que
+la partie située au-dessus d'une certaine hauteur. Tout un pan du dossier
+établit, à coups d'arithmétique des coefficients binomiaux, qu'une ombre suffit
+à reconstituer l'objet qui la projette : vue d'assez haut, la silhouette
+détermine la forme.
+
+Autour de ce noyau, le dossier construit les outils et pose les questions.
+L'intégration de Stokes compare ces formes aux cochaînes singulières, et
+l'intégrale d'un monôme en puissances divisées sur le simplexe de taille $t$
+se révèle être une puissance divisée de $t$. Il cherche si la structure est
+unique, et calcule pour cela le groupe des automorphismes de l'algèbre
+simpliciale universelle : un groupe multiplicatif prolongé par un groupe
+unipotent, qui ne produit aucune opération cohomologique nouvelle dès que $2$
+est inversible — d'où l'espoir, non réalisé, de voir apparaître en
+caractéristique $2$ les carrés de Steenrod. Il dualise tout en termes de
+coalgèbres, met en place les catégories de modules gradués où vivent les
+ombres, et termine sur une réflexion de méthode.
+
+Cette réflexion (pages 301 à 317) vaut d'être lue pour elle-même. Les invariants
+qu'on attache naïvement à un espace sont, dit-il, « trop gros et frustes » : ils
+dépendent de la façon dont l'espace est découpé, pas seulement de sa forme. Le
+travail consiste à les munir de structures supplémentaires raisonnables, puis à
+« inverser les flèches » qui viennent des équivalences d'homotopie — et
+l'invariant obtenu, plus grossier, est aussi plus subtil, et « moins
+redondant ». Il ajoute un aveu d'atelier : des deux langages possibles, objets
+simpliciaux et complexes de chaînes, le second est plus économique, mais seul le
+premier laisse voir les produits et les puissances extérieures, qui
+« s'introduisent de façon impérieuse ». Les vingt dernières pages, d'une autre
+facture, sont des notes sur les opérations de Steenrod, les espaces
+d'Eilenberg–MacLane et les extensions du groupe additif.
+
+Ce qu'on cherchera aujourd'hui sous d'autres noms : les formes polynomiales de
+Sullivan et l'homotopie rationnelle ; le complexe de De Rham à puissances
+divisées de la cohomologie cristalline ; la correspondance de Dold–Kan ; le
+théorème de Mandell, qui récupère le type d'homotopie à partir des cochaînes
+munies de leur structure $E_\infty$ — la réponse moderne, par un autre chemin,
+à la question que ce dossier pose.
+
+\keywords{divided power de Rham complex, polynomial de Rham forms, Sullivan model, rational homotopy theory, integral cochain models, Mandell theorem, divided powers, Lucas theorem, Kummer theorem, Legendre formula, graded modules, truncation functor, Serre quotient category, localization of abelian categories, simplicial sets, presheaf topos, Stokes integration map, normalized cochains, Dirichlet integral, Koszul complex, Poincare lemma, Cartier isomorphism, flasque resolution, simplicial commutative ring, automorphism group scheme, Hasse-Schmidt derivation, coalgebra, comodule, rational module, cotensor product, affine scheme of algebras, free divided power algebra, Dold-Kan correspondence, Dold-Puppe derived functors, decalage, Eilenberg-MacLane object, Kan extension, nerve and realization, free cocompletion, abelianization, Eilenberg-Zilber theorem, Alexander-Whitney map, shuffle map, Steenrod operations, Steenrod algebra, Adem relations, Milnor dual Steenrod algebra, cohomology of Eilenberg-MacLane spaces, Dold-Thom theorem, bar construction, Milnor K2, Steinberg group, Gersten resolution, Bloch formula, Ext of the additive group, perfect site, uniformization, projective structure, Euler class}
+\end{resume}
+
+\section*{Le fil du dossier, et l'ordre des feuillets}
+
+Le dossier n'est pas une rédaction suivie. C'est une liasse de notes — séries
+paginées par l'auteur (pages 2 à 17, 301 à 317, 361 à 365), feuilles isolées,
+chemises de sa main (« Gribouillis vrac », « Au fil des jours… », page 318 ;
+« Gribouillis », page 335) — dont une bonne part est écrite au verso de
+tapuscrits sans rapport (épreuves de SGA~7, textes sur les accouplements de
+monodromie et les modèles de Néron, listings), que les transcriptions laissent
+de côté. L'ordre archivistique n'est pas l'ordre de rédaction : la version
+correcte du théorème sur les homomorphismes de l'algèbre simpliciale (page 161)
+précède dans la liasse la version fausse qu'il corrige (page 193).
+
+\subsection*{Les stations}
+
+\begin{enumerate}
+\item \emph{Le plan de la conférence} (pages 2 à 17) : historique ; la
+construction $C^{\bullet\bullet}_{\mathrm{DRpd}}(X_*,k)$ ; le calcul de sa
+cohomologie ; les ombres ; la liste des problèmes ouverts.
+\item \emph{L'arithmétique des ombres} (pages 19 à 44) : critère de Lucas,
+pleine fidélité des foncteurs « ombres » $\omega_N$, le théorème sur
+$M \otimes_k S$, les homomorphismes homogènes entre tronqués.
+\item \emph{Cochaînes et intégration de Stokes} (pages 47 à 77) : cochaînes des
+ensembles simpliciaux, intégrales de Stokes, comparaison avec De Rham
+classique, le complexe vu comme noyau de la multiplication par $dT$.
+\item \emph{Sur un topos quelconque ; unicité} (pages 79 à 120) : faisceaux
+tests, « condition de De Rham », algèbres de De Rham spéciales, théories
+admissibles.
+\item \emph{La version duale} (pages 122 à 159) : coalgèbres, schémas affines
+en algèbres, chaînes de De Rham, dualisation de Stokes, le yoga coalgèbres
+$\mapsto$ algèbres, comodules.
+\item \emph{Homomorphismes et automorphismes} (pages 161 à 211) : le théorème
+des pages 161 à 171, le schéma en groupes $\Omega$, l'espoir de la
+caractéristique $2$, les endomorphismes de $\mathcal{A}_1$.
+\item \emph{Outils} (pages 214 à 240) : algèbre alternée libre à puissances
+divisées, les quatre complexes (De Rham, Koszul, et leurs versions à
+puissances divisées), calculs d'homotopie, version complétée et filtrée.
+\item \emph{Les ombres dans les catégories dérivées} (pages 243 à 298) :
+catégories $\mathcal{M}_N$ et leurs adjoints, modules négligeables,
+reconstruction d'un complexe à partir de son ombre, produit cotensoriel.
+\item \emph{Algèbre universelle des invariants} (pages 300 à 354) :
+conventions simpliciales, foncteurs universels, Dold–Puppe ; brouillons sur
+coalgèbres et puissances divisées ; un feuillet étranger sur les courbes
+(pages 325 à 327).
+\item \emph{Notes sur les opérations cohomologiques} (pages 356 à 375) :
+Eilenberg–Zilber, Steenrod, Eilenberg–MacLane, $K_2$ de Milnor,
+$\operatorname{Ext}(\mathbf{G}_a, \mathbf{G}_a)$.
+\end{enumerate}
+
+\subsection*{Conventions, valables pour tout le dossier}
+
+$k$ est un anneau commutatif, $S = S_k = k\{T\}$ l'algèbre des polynômes à
+puissances divisées en une variable, de base les $T^{(i)}$ avec
+$T^{(i)} T^{(j)} = c_{i,j}\, T^{(i+j)}$, où
+$c_{i,j} = \frac{(i+j)!}{i!\,j!}$. Les ensembles simpliciaux forment le topos
+$\mathrm{sSet} = \widehat{\Delta}$\footnote{Il écrit « ½simplicial » et
+« ½cosimplicial », au sens ancien où « semi-simplicial » désignait ce qu'on
+appelle aujourd'hui \emph{simplicial} (avec dégénérescences) ; c'est le sens
+qu'il précise lui-même pages 3, 6 et 301. Nous écrivons « simplicial ».} ; on
+note $X_*$ un objet et $X_{[n]}$ ses $n$-simplexes. On note
+$\Phi_* : [n] \mapsto k^{n+1}$ le $k$-module simplicial des fonctions sur les
+sommets, $k_* \subset \Phi_*$ le sous-module diagonal, $\Psi_* = \Phi_*/k_*$, et
+$T \in \Gamma(\Phi_*)$ la section « constante égale à $1$ »\footnote{Le même
+objet porte trois noms dans la liasse : $\Phi_*$ (pages 7, 73, 99, 336),
+$\mathfrak{G}_*$ (pages 101 à 107, lecture incertaine de la lettre gothique) et
+$\mathfrak{L}_*$ (pages 224 à 232). C'est l'image directe $i_{0*}(k)$ par le
+point $i_0$ du topos (page 99).}.
+
+Le complexe central est la $k\{T\}$-algèbre bigraduée simpliciale
+$C^{p,q}_* = \Gamma^p_k \Phi_* \otimes_k \Lambda^q_k \Psi_*$, où $p$ est le
+\emph{degré complémentaire} (le degré en puissances divisées), $q$ le
+\emph{degré extérieur}, $n = p + q$ le degré total\footnote{Les pages changent
+d'indexation : $(p,q)$ = (complémentaire, extérieur) pages 7 à 9, (total,
+extérieur) pages 80 et 230 à 232, et (total, extérieur) encore pour les
+structures de De Rham des pages 93 et suivantes. Tout est ramené ici à
+(complémentaire, extérieur), et dit en clair quand une page indexe autrement.}.
+Le complexe plus gros $\mathcal{D}^{p,q}_* = \Gamma^p \Phi_* \otimes \Lambda^q
+\Phi_*$ des pages 16 et 73 est une résolution de $k_*$ qui le contient. La
+translation des modules gradués est notée $M \mapsto M[i]$,
+$(M[i])_j = M_{i+j}$\footnote{Il la note $T$ page 243 et $t$ page 286 ; ces
+deux lettres désignent ailleurs la variable de $k\{T\}$ et l'élément marqué
+d'un anneau à puissances divisées.}.
+
+Trois homonymies à garder en tête. La lettre $K$ désigne le bicomplexe
+$K^{\bullet\bullet}_u$ d'une immersion (pages 79 à 86), un foncteur des pages
+341 à 344, et les objets d'Eilenberg–MacLane $K(G,n)$ ; ce sont trois objets
+sans rapport. $\Phi_*$ (le module) n'a rien à voir avec $\varphi_N$ (le
+foncteur adjoint de la troncature). Et l'« algèbre de De Rham standard »
+$\mathrm{DR}(\Phi, T)$ des pages 95 à 107 est le même objet que
+$C^{\bullet\bullet}_*$, vu sur un topos quelconque.
+
+\subsection*{Ce qui n'est pas établi}
+
+La question qui motive la conférence — le complexe de De Rham à puissances
+divisées, avec toutes ses structures, détermine-t-il le type d'homotopie d'un
+espace simplement connexe de type fini ? (pages 11 et 12) — reste posée ;
+des modèles minimaux sur $\mathbb{Z}$ qui permettraient de l'aborder, le
+dossier dit lui-même n'avoir « rien fait dans cette direction » (page 13).
+Sont également annoncés sans être établis : la connexité et la simple connexité
+du groupoïde des théories admissibles (page 120) ; le second des « deux
+groupes » de la page 105 ; le scindage canonique cherché page 77 ; la formule
+de Künneth (page 13). La reconstruction d'un complexe à partir de son ombre
+(pages 262 à 272) repose sur une annulation d'$\operatorname{Ext}$ dont la
+justification écrite ne suffit pas.
+
+\pagerange{2}{3}
+\section*{Le plan de la conférence : historique (pages 2 et 3)}
+
+La série paginée de 1 à 16 par l'auteur s'ouvre sur un plan, encadré au crayon
+« Plan conf.\ IHÉS en 1976 », avec en marge la liste des cadres où la question
+se pose : géométrie différentielle, analytique, algébrique, arithmétique,
+topologie algébrique (linéaire par morceaux, simpliciale).
+
+\begin{enumerate}
+\item[a)] Formes différentielles (Poincaré) et formule de Stokes
+$\int_C d\omega = \int_{\partial C} \omega$.
+\item[b)] Le théorème de De Rham\footnote{La page dit « conjecturé par
+E.~Cartan » ; c'est son attribution, que nous reproduisons sans la
+discuter.}, $H^*_{\mathrm{DR}}(X) \simeq H^*(X, \mathbb{C})$ ; on y perd la
+torsion. Il est « maintenant bien compris » par la théorie des faisceaux et le
+lemme de Poincaré.
+\item[c)] La théorie de Hodge : bigraduation de $H^*_{\mathrm{DR}}(X)$ pour $X$
+kählérienne compacte.
+\item[d)] Le théorème de H.~Cartan et Serre sur les variétés de Stein, où le
+lemme de Poincaré vaut dans le cadre analytique.
+\item[e)] Les schémas sur un corps de caractéristique $p$ : Dwork,
+Washnitzer–Monsky, puis le « yoga cristallin » de Berthelot, Illusie, Messing,
+Mazur\footnote{En marge, au crayon : Hartshorne, Herrera, Bloch (lecture
+incertaine), Ogus.}. On y trouve des cohomologies dont les coefficients ne
+contiennent plus $\mathbb{Q}$, et où la torsion n'est en principe pas perdue —
+« du point de vue de Weil », note la marge, la perte de la torsion « était un
+défaut impardonnable ».
+\item[f)] Son propre théorème de comparaison pour les variétés algébriques sur
+$\mathbb{C}$, généralisé à des coefficients par Deligne et Hartshorne, qui donne
+en caractéristique nulle la signification topologique de la cohomologie de De
+Rham algébrique.
+\item[g)] Le complexe de De Rham–Sullivan d'un espace topologique : formes
+différentielles polynomiales sur les simplexes singuliers, à coefficients dans
+$\mathbb{Q}$, $\mathbb{R}$ ou $\mathbb{C}$, qui calcule la cohomologie à ces
+coefficients. Sullivan montre davantage : le foncteur $C^\bullet_{\mathrm{DRS}}$
+induit une équivalence entre la catégorie homotopique rationnelle des espaces
+connexes et simplement connexes de type fini et une catégorie dérivée de
+$\mathbb{Q}$-algèbres différentielles graduées commutatives (au sens gradué) de
+degrés $\geq 0$, avec $H^0 \simeq \mathbb{Q}$ et $H^1 = 0$\footnote{L'hypothèse
+de type fini (sur les groupes d'homotopie rationnels, ou la cohomologie) est
+ajoutée par nous ; elle est nécessaire à l'énoncé de Sullivan, et la page dit
+« sauf erreur ». Un mot illisible suit « simplement connexes », qui la portait
+peut-être. Le nom moderne est la \emph{théorie de l'homotopie rationnelle} ; le
+foncteur est celui des \emph{formes polynomiales} $A_{\mathrm{PL}}$, et
+l'équivalence est due à Quillen et Sullivan.}. La théorie des modèles minimaux
+lit les $\pi_i \otimes \mathbb{Q}$ sur un tel modèle. Mais on perd à nouveau la
+torsion.
+\end{enumerate}
+
+\pagerange{3}{5}
+\section*{La démonstration de Sullivan, et l'obstacle sur $\mathbb{Z}$ (pages 3 à 5)}
+
+Soit $E^{[n]}$ l'espace affine $\sum_0^n x_i = 1$ de $\mathbb{R}^{n+1}$, avec sa
+$\mathbb{Q}$-structure, et
+$\mathrm{DRS}^\bullet_{[n]} = C^\bullet_{\mathbb{Q}\text{-DR}}(E^{[n]})$ son
+complexe de De Rham algébrique sur $\mathbb{Q}$ :
+\[
+\mathrm{DRS}^\bullet_{[n]} = \mathbb{Q}[X_i, dX_i]_{0 \leq i \leq n} \big/ \Bigl(\textstyle\sum X_i - 1,\ \sum dX_i\Bigr) \simeq \mathbb{Q}[X_0, \ldots, X_{n-1}][dX_0, \ldots, dX_{n-1}] .
+\]
+C'est contravariant en $[n]$ : on obtient une $\mathbb{Q}$-algèbre
+différentielle graduée commutative simpliciale $\mathrm{DRS}^\bullet_*$. Pour
+un ensemble simplicial $X_*$ (par exemple le complexe singulier $S_*(X)$ d'un
+espace),
+\[
+C^\bullet_{\mathrm{DRS}}(X_*, \mathbb{Q}) = \operatorname{Hom}_{\mathrm{sSet}}(X_*, \mathrm{DRS}^\bullet_*) ,
+\]
+et le foncteur ainsi défini sur $\mathrm{sSet}$ est représenté par
+$\mathrm{DRS}^\bullet_*$. Le théorème d'isomorphisme
+$H^q(C^\bullet_{\mathrm{DRS}}(X_*)) \simeq H^q(X_*, \mathbb{Q})$ résulte de deux
+faits : $\mathrm{DRS}^\bullet_*$ est une résolution de $\mathbb{Q}_*$ (lemme de
+Poincaré algébrique sur les espaces affines rationnels) ; et chaque composante
+$\mathrm{DRS}^i_*$ est un objet acyclique du topos $\mathrm{sSet}$, ce qui
+revient à dire que ses groupes d'homotopie sont nuls. Le même argument vaut
+pour des formes $C^\infty$, analytiques réelles ou complexes.
+
+Sur $\mathbb{Z}$, c'est le premier fait qui tombe : pour intégrer $x^n\,dx$ il
+faut le dénominateur de $x^{n+1}/(n+1)$\footnote{Un passage de deux lignes et
+demie, biffé et en grande partie illisible, disait qu'on « aimerait trouver une
+$\mathbb{Z}$-algèbre différentielle » analogue, « mais il paraît qu'il y a des
+[\ldots] contre ». Le fait aujourd'hui connu est qu'il n'existe pas de modèle
+fonctoriel strictement commutatif des cochaînes à coefficients entiers, ni même
+dans $\mathbb{F}_p$ : les opérations de Steenrod en sont l'obstruction. Nous ne
+savons pas ce que portait le mot illisible.}. La géométrie algébrique connaît
+le moyen de « sauter à pieds joints par-dessus le canular » : les puissances
+divisées. Si $E^{[n]}$ avait une origine sur $\mathbb{Z}$, on prendrait le
+complexe de De Rham à puissances divisées d'un $\mathbb{Z}$-module libre. Mais
+il n'en a pas : dans $\mathbb{Z}\{X_0, \ldots, X_n\}$, l'élément
+$\sum X_i - 1$ n'appartient pas à l'idéal à puissances divisées, et l'on ne peut
+« diviser par l'idéal à p.d.\ engendré » par lui.
+
+\pagerange{5}{8}
+\section*{La construction (pages 5 à 8)}
+
+\subsection*{Le simplexe de taille $t$}
+
+On remplace l'anneau de coefficients $\mathbb{Z}$ par un anneau $S$ muni d'un
+idéal à puissances divisées $J$ et d'un « paramètre » $t \in J$, et l'équation
+$\sum X_i = 1$ par $\sum X_i = t$. On pose
+\[
+C^\bullet_{\mathrm{DRpd}[n]}(S, J, t) = S\{X_0, \ldots, X_n\}[dX_0, \ldots, dX_n] \big/ \Bigl(\textstyle\sum X_i - t,\ \sum dX_i\Bigr)_{\mathrm{pd}} ,
+\]
+où l'on divise par l'idéal à puissances divisées engendré par
+$\sum X_i - t$ et $\sum dX_i$ ; cela a un sens, car l'idéal des formes
+d'augmentation dans $J$ est un idéal à puissances divisées. C'est une
+$S$-algèbre différentielle graduée alternée, de degrés $\geq 0$, augmentée vers
+$S/J$, à puissances divisées sur l'idéal d'augmentation et compatibles à la
+différentielle ($d(x^{(n)}) = x^{(n-1)}\,dx$), et elle est isomorphe à
+$S\{X_0, \ldots, X_{n-1}\}[dX_0, \ldots, dX_{n-1}]$ : c'est une
+\emph{résolution de $S$}. Pour $[n]$ variable on obtient une algèbre
+simpliciale $C^\bullet_{\mathrm{DRpd}*}(S,J,t)$, fonctorielle en $(S,J,t)$, et
+pour un ensemble simplicial $X_*$
+\[
+C^\bullet_{\mathrm{DRpd}}(X_*; S, J, t) = \operatorname{Hom}\bigl(X_*, C^\bullet_{\mathrm{DRpd}*}(S,J,t)\bigr) ,
+\]
+contravariant en $X_*$. On a seulement un homomorphisme
+$H^\bullet_{\mathrm{DRpd}}(X_*; S,J,t) \to H^\bullet(X_*, S)$, qui en général
+n'est pas un isomorphisme.
+
+\subsection*{Le cas universel $S = k\{T\}$}
+
+On prend $S = k\{T\}$, $J = k\{T\}^+$, $t = T$. Alors
+$k\{T, X_0, \ldots, X_n\}/(\sum X_i - T)_{\mathrm{pd}} \simeq k\{X_0, \ldots,
+X_n\}$, et
+\[
+C^{\bullet\bullet}_{\mathrm{DRpd}*}(k) \overset{\mathrm{def}}{=} C^\bullet_{\mathrm{DRpd}*}\bigl(k\{T\}, k\{T\}^+, T\bigr) \simeq \Gamma^\bullet_k \Phi_* \otimes_k \Lambda^\bullet \Psi_* .
+\]
+C'est une algèbre \emph{bigraduée} — degré complémentaire $p$, degré
+extérieur $q$ —, unitaire, associative, alternée pour le degré total
+(anticommutative, et de carré nul en degré impair), augmentée vers $k$, à
+puissances divisées sur l'idéal d'augmentation, avec une différentielle de
+bidegré $(-1, +1)$, donc de degré total nul, compatible aux puissances
+divisées. Ces structures passent aux
+\[
+C^{\bullet\bullet}_{\mathrm{DRpd}}(X_*, k) = \operatorname{Hom}\bigl(X_*, C^{\bullet\bullet}_{\mathrm{DRpd}*}(k)\bigr) ,
+\]
+contravariant en $X_*$, covariant en $k$.
+
+\subsection*{La cohomologie}
+
+$\Phi_*$ est homotope à $0$ (c'est la proposition 1 de la page 226) ; donc
+$C^{p,q}_* = \Gamma^p \Phi_* \otimes \Lambda^q \Psi_*$ est homotope à $0$, et
+acyclique, pour $p \neq 0$. En degré total $n$ fixé, la ligne
+\[
+0 \to k_* \xrightarrow{\ 1 \mapsto T^{(n)}\ } C^{n,0}_* \to C^{n-1,1}_* \to \cdots \to C^{1,n-1}_* \to C^{0,n}_* \to 0
+\]
+est exacte\footnote{La page parle de « résolution de longueur $n$ » sans
+justifier l'exactitude ; c'est l'exactitude du complexe de Koszul à puissances
+divisées associé à l'extension $0 \to k_* \to \Phi_* \to \Psi_* \to 0$, $\Psi_*$
+étant plat (cf.\ les pages 79 et 218). L'extrémité droite de la suite est
+d'une lecture incertaine sur la page.}, et tous ses termes sont acycliques sauf
+le dernier : c'est le tronqué en degré $n$ d'une résolution acyclique de $k_*$.
+D'où, pour tout ensemble simplicial $X_*$,
+\[
+H^{p,q}_{\mathrm{DRpd}}(X_*, k) \simeq H^q(X_*, k) \qquad \text{pour tout } p \geq 0 ,
+\]
+et $0$ pour $p < 0$\footnote{La page écrit la condition « $q \leq p+q$,
+i.e.\ $p \geq 0$ », lecture incertaine ; c'est bien ce que donne la troncature.
+La même conclusion est retrouvée page 232, en indexation (total, extérieur) :
+$H^{n,q} \simeq H^q$ pour $q \leq n$.}.
+
+\pagerange{9}{11}
+\section*{Les ombres (pages 9 à 11)}
+
+Pour $q$ fixé, la structure de $k\{T\}$-module de $H^{\bullet, q}$ est la
+suivante : la classe d'un $h \in H^q(X_*, k)$ dans la ligne de degré total $n$
+correspond à l'augmentation $1 \mapsto T^{(n)}$, et la multiplication par
+$T^{(j)}$ envoie la ligne $n$ sur la ligne $n+j$ par $c_{j,n}$. Indexé par le
+degré total, on trouve donc
+\[
+H^{\bullet, q}_{\mathrm{DRpd}}(X_*, k) \simeq \tau_{\geq q}\bigl(H^q(X_*, k) \otimes_k k\{T\}\bigr) ,
+\]
+le module gradué $H^q \otimes k\{T\}$ tronqué en degrés $\geq q$ : c'est ce
+qu'il appelle une \emph{$q$-ombre}. Les isomorphismes sont compatibles aux
+structures multiplicatives. A priori on ne récupère donc pas les $H^q$ et leurs
+cup-produits, mais seulement leurs ombres et les accouplements qu'elles
+héritent.
+
+Ce qui donne l'espoir que le complexe à puissances divisées porte une
+information homotopique précise, c'est l'observation suivante, démontrée aux
+pages 21 à 34 : un $k$-module $M$ se reconstitue, à isomorphisme canonique près,
+à partir de \emph{n'importe lequel} de ses tronqués $\tau_{\geq q}(M \otimes_k
+S)$, et un accouplement $M \otimes N \to P$ à partir de l'accouplement
+correspondant des tronqués, pour $q$ assez grand. Cette « théorie des ombres »
+acquise, la connaissance de $C^{\bullet\bullet}_{\mathrm{DRpd}}(X_*, k)$
+comme $S$-algèbre différentielle bigraduée implique celle de l'algèbre graduée
+$H^\bullet(X_*, k)$ — et, en raffinant un peu, celle de
+$\mathrm{R}\Gamma(X_*, k)$ dans $D(k)$ avec l'accouplement
+$\mathrm{R}\Gamma \otimes^{\mathrm{L}} \mathrm{R}\Gamma \to \mathrm{R}\Gamma$
+venant du cup-produit\footnote{Aucun nom moderne ne s'impose pour ces
+« ombres » ; ce sont des modules gradués sur l'algèbre des puissances divisées
+d'une variable, tronqués, et l'énoncé de reconstruction est celui des pages 21
+à 34. La page 10 est d'une écriture très chargée, et la phrase sur
+$\mathrm{R}\Gamma$ n'y est lue qu'en partie ; c'est l'objet des pages 262 à
+272.}.
+
+\pagerange{11}{17}
+\section*{Remarques et problèmes (pages 11 à 17)}
+
+\emph{a) Le lien avec Sullivan.} Si $k$ est une $\mathbb{Q}$-algèbre,
+$C^\bullet_{\mathrm{DRS}}(X_*, k) \simeq C^{\bullet\bullet}_{\mathrm{DRpd}}(X_*,
+k)/(T-1)$. Plus généralement, pour tout $k$, le quotient par $T - 1$ donne
+$C^\bullet_{\mathrm{DRS}}(X_*, k \otimes \mathbb{Q})$ — ce qui s'explique par
+$\mathbb{Z}\{T\}/(T-1) \simeq \mathbb{Q}$, $T^{(n)} \mapsto 1/n!$\footnote{Cette
+explication est la nôtre. Le passage au quotient ne commute pas aux produits
+infinis : l'énoncé est vrai tel quel pour $X_*$ n'ayant qu'un nombre fini de
+simplexes non dégénérés, et nous ne l'avons pas vérifié au-delà. Pour un triple
+$(S,J,t)$ général la page propose
+$C^\bullet_{\mathrm{DRpd}}(X_*; S,J,t)/(t-1) \simeq C^\bullet_{\mathrm{DRS}}(X_*,
+S_{\mathbb{Q}}/(t-1))$, avec un « ? » en marge et un membre de droite
+surchargé.}.
+
+\emph{b) La question principale.} Il a jusqu'ici négligé la structure à
+puissances divisées sur l'idéal d'augmentation de
+$C^{\bullet\bullet}_{\mathrm{DRpd}}(X_*, k) \to H^0(X_*, k)$, qui est
+importante. Appelons \emph{complexe de De Rham à puissances divisées virtuel}
+sur $k$ une $k$-algèbre bigraduée différentielle, augmentée, associative,
+unitaire, alternée, à différentielle de bidegré $(-1,+1)$ et bidegrés
+$\geq 0$, avec puissances divisées sur l'idéal d'augmentation compatibles à la
+différentielle, et telle que les $H^{\bullet q}$ soient des $q$-ombres ;
+inversons les quasi-isomorphismes. On obtient un foncteur de la catégorie
+homotopique $(\mathrm{Hot})$ vers cette catégorie dérivée $(\mathrm{DRpd})$, et
+l'on peut se demander si sa restriction aux espaces connexes et simplement
+connexes à $H^i(X, \mathbb{Z})$ de type fini induit une équivalence avec les
+complexes sur $\mathbb{Z}$ tels que $H^0 \simeq \mathbb{Z}$, $H^1 = 0$ et les
+$H^i$ de type fini\footnote{La marge ajoute « avec conditions de finitude sur
+$\mathcal{X}_*$ et sur les $\pi_i(\mathcal{X}_*)$ ». La question est restée
+ouverte dans le dossier. La réponse moderne passe par un autre chemin : Mandell
+(2006) a montré que les cochaînes singulières entières, munies de leur
+structure d'algèbre $E_\infty$, déterminent le type d'homotopie des espaces
+nilpotents de type fini. Rien n'indique que le manuscrit ait connu cette
+direction, et nous ne prétendons pas que la structure à puissances divisées en
+soit l'équivalent.}.
+
+\emph{c) Opérations cohomologiques.} Il a cherché à reconstruire les
+opérations de type Steenrod ou Whitney à partir de
+$C^{\bullet\bullet}_{\mathrm{DRpd}}(X_*, -)$, et n'a que des résultats partiels
+négatifs : avec les seules opérations multiplicatives de
+$C^{\bullet\bullet}_{\mathrm{DRpd}*}(k)$, on ne trouve rien d'intéressant. (Les
+pages 173 à 181 précisent ce résultat négatif.)
+
+\emph{d) Modèles minimaux.} Il faudrait étudier des modèles minimaux à la
+Sullivan sur $\mathbb{Z}$. Il n'a « rien fait dans cette direction », ni même
+développé une formule de Künneth pour un produit $X_* \times Y_*$ : la
+difficulté technique est qu'on ne peut sans doute pas supposer les complexes
+plats sur $k\{T\}$.
+
+\emph{e) La version homologique.} De même que le complexe de chaînes
+$C_\bullet(X_*, \mathbb{Z})$ est l'objet « le plus fin », dont on déduit toutes
+les cochaînes par $C^\bullet(X_*, k) \simeq \operatorname{Hom}^\bullet_{\mathbb{Z}}
+(C_\bullet(X_*, \mathbb{Z}), k)$, il existe une cogèbre différentielle
+bigraduée $C^{\mathrm{DRpd}}_{\bullet\bullet}(X_*, k)$, à comultiplication
+divisée et coaugmentée, telle que $C^{\bullet\bullet}_{\mathrm{DRpd}}(X_*, k')
+\simeq \operatorname{Hom}_k(C^{\mathrm{DRpd}}_{\bullet\bullet}(X_*, k), k')$
+pour toute $k$-algèbre $k'$, et
+$C^{\mathrm{DRpd}}_{\bullet\bullet}(X_*, k') \simeq
+C^{\mathrm{DRpd}}_{\bullet\bullet}(X_*, k) \otimes_k k'$. C'est
+$C^{\mathrm{DRpd}}_{\bullet\bullet}(X_*, \mathbb{Z})$ qu'il faudrait considérer
+pour aborder b), c), d) sans conditions de finitude ; il commute aux limites
+inductives quelconques en $X_*$. (Construction aux pages 122 à 134.)
+
+\emph{g) Faisceautisation.} La définition a un sens pour un Anneau
+commutatif $k$ d'un topos. On aimerait définir des $\mathrm{R}f_*$ dans des
+catégories dérivées convenables, pour $f$ un morphisme de topos, par exemple en
+remplaçant un complexe par un complexe quasi-isomorphe à composantes flasques —
+mais y en a-t-il toujours ? Le même problème se pose déjà, sur $\mathbb{Q}$,
+pour les complexes de De Rham–Sullivan : c'est un problème posé par Deligne
+pour $\widehat{\Delta} \to$ (point) ; « sauf erreur », il y a un topos qui
+marche pour les espaces topologiques\footnote{La lettre f) est biffée et
+remplacée par g), puis g) par h) au paragraphe suivant ; il n'y a pas de f)
+sur la page.}.
+
+\emph{h) Des invariants linéaires plus fins.} Le complexe
+$C^{\bullet\bullet}_{\mathrm{DRpd}*}(k)$ se déduit de
+$\mathcal{D}^{\bullet\bullet}_* = \Gamma^\bullet \Phi_* \otimes
+\Lambda^\bullet \Phi_*$ — une algèbre différentielle à puissances divisées qui
+est une résolution de $k$ — et de $dT$ : en chaque bidegré,
+\[
+C^{p,q}_* \simeq \operatorname{Ker}\bigl(\mathcal{D}^{p,q+1}_* \xrightarrow{\ dT \cdot\ } \mathcal{D}^{p,q+2}_*\bigr) ,
+\]
+d'où la même formule pour les sections sur $X_*$, et les structures de
+$C^{\bullet\bullet}_{\mathrm{DRpd}}$ peuvent se lire comme déduites de
+structures (compliquées) de $\mathcal{D}^{\bullet\bullet}(X_*, k)$. On peut
+aussi définir « \emph{la} structure multiplicative à puissances divisées
+cohomologique du type d'homotopie $X_*$ », qui permettrait de reconstituer
+aussi bien $C_{\mathrm{DRpd}}$ que $\mathcal{D}$ ou les complexes de
+Sullivan. Il ignore si le complexe à puissances divisées suffit à la récupérer ;
+sinon c'est cette dernière qui serait la candidate pour exprimer le type
+d'homotopie. (La construction est reprise page 73.)
+
+\pagerange{19}{22}
+\section*{Coefficients binomiaux modulo $p$ (pages 19 à 22)}
+
+\textbf{Lemme 1 (Lucas).} \emph{Soient $p$ premier, $i = \sum_\varepsilon
+u_\varepsilon p^\varepsilon$ et $j = \sum_\varepsilon v_\varepsilon
+p^\varepsilon$ les développements $p$-adiques, $0 \leq u_\varepsilon,
+v_\varepsilon \leq p-1$. Alors $c_{i,j} \not\equiv 0 \pmod p$ si et seulement si
+$u_\varepsilon + v_\varepsilon \leq p-1$ pour tout $\varepsilon$, et en tout
+cas $c_{i,j} \equiv \prod_\varepsilon c_{u_\varepsilon, v_\varepsilon} \pmod
+p$.}\footnote{Les bornes des sommes sont écrites $e$, celles du produit
+$\nu$ ; l'anneau du calcul est écrit $\mathbb{F}_p[V,Y]$ pour
+$\mathbb{F}_p[X,Y]$ ; et la conclusion de la première étape est écrite
+« $c_{v,s} \not\equiv 0$ » pour $c_{r,s}$. Ce sont les théorèmes de Lucas (1878)
+et, pour le critère, de Kummer (1852) ; la page ne les nomme pas.}
+
+On écrit $i = u + pr$, $j = v + ps$, on développe $(X+Y)^{i+j} =
+(X^p+Y^p)^{r+s}(X+Y)^{u+v}$ dans $\mathbb{F}_p[X,Y]$, et l'on obtient
+$c_{i,j} \equiv c_{u,v}\, c_{r,s}$, avec $c_{u,v} \equiv 0$ exactement quand
+$u + v \geq p$ ; le lemme suit par récurrence sur la longueur des
+développements.
+
+\textbf{Corollaire 2.} \emph{Si $N + 1 = (N'+1)p$ et $\varepsilon \geq 1$, alors
+$c_{N+1, p^\varepsilon - 1} \equiv c_{N'+1, p^{\varepsilon-1}-1}$, qui vaut $1$
+si $p^{\varepsilon-1} \mid N'+1$ et $0$ sinon ; et $c_{N, p^\varepsilon} \equiv
+c_{N', p^{\varepsilon-1}} \equiv v_{\varepsilon-1} + 1$, où $N' = \sum
+v_\alpha p^\alpha$.} C'est le décalage d'un chiffre entre les développements
+de $N$ et de $N'$.
+
+\textbf{Lemme 2.} \emph{Soient $E$ un $\mathbb{Z}_{(p)}$-module, $N \in
+\mathbb{N}$, $e$ tel que $p^e \geq N+1$, et des $x_i \in E$ pour $i \in \{N\}
+\cup \{N + p^\varepsilon\}_{0 \leq \varepsilon \leq e}$, tels que
+$\binom{j}{i}(x_j - x_i) = 0$ pour $i \in \{N, N+1\}$ et $i < j$. Alors $x_N =
+x_{N+1}$.} On pose $y_\varepsilon = x_{N+p^\varepsilon} - x_N$ ; on déduit la
+conclusion $y_0 = 0$ du système plus faible obtenu en ne gardant que les
+équations dont le coefficient est une unité, par récurrence sur $N$ : si $p
+\nmid N+1$ c'est immédiat, et sinon le corollaire 2 ramène le système pour $N$
+au même système pour $N' = \frac{N+1}{p} - 1 < N$ (« cqfd. Ouf ! »). La marge
+remarque que sur un $\mathbb{F}_p$-module on ne peut pas conclure que tous les
+$x_i$ sont égaux.
+
+\textbf{Théorème 1.} \emph{Soient $E$ un groupe abélien, $N \in \mathbb{N}$, et
+$(x_i)_{i \in \mathbb{N}}$ dans $E$ tels que $\binom{j}{i}(x_j - x_i) = 0$ pour
+$j > i \geq N$. Alors $x_i = x_N$ pour tout $i \geq N$.} On localise en chaque
+premier et l'on applique le lemme 2 de proche en proche.
+
+\pagerange{22}{25}
+\section*{Les foncteurs « ombres » $\omega_N$ (pages 22 à 25)}
+
+Soient $S^{+(N)} = \sum_{i \geq N} k\, T^{(i)}$ et, pour un $k$-module $M$,
+le $S$-module gradué $\omega_N(M) = M \otimes_k S^{+(N)}$\footnote{La page écrit
+$M \otimes_S S^{+(N)}$ ; le produit tensoriel est sur $k$.}.
+
+\textbf{Corollaire 1.} \emph{a) Le foncteur $\omega_N$, des $k$-modules vers les
+$S$-modules gradués, est pleinement fidèle. b) L'application $x \mapsto (x\,
+T^{(i)})_{i \geq N}$ identifie $M$ aux familles $(x_i)_{i \geq N}$, $x_i \in M\,
+T^{(i)}$, telles que $T^{(j)} x_i = c_{i,j}\, x_{i+j}$ pour $i \geq N$, $j \geq
+1$.} Écrivant $x_i = \xi_i T^{(i)}$, la condition devient $c_{i,j}(\xi_{i+j} -
+\xi_i) = 0$, et le théorème 1 conclut ; pour a), un morphisme
+$\omega_N(M) \to \omega_N(M')$ est une famille $u_i : M \to M'$ avec
+$c_{i,j}(u_{i+j} - u_i) = 0$, d'où $u_i$ constant.
+
+\emph{Remarque 1.} $\omega_N$ a un adjoint à droite $\pi_N$, avec
+$\pi_N(\mathcal{M}) = \{(x_i)_{i \geq N} \mid x_i T^{(j)} = c_{i,j} x_{i+j}\}
+\subset \prod_{i \geq N} \mathcal{M}_i$, et b) dit que l'unité $M \to
+\pi_N \omega_N(M)$ est un isomorphisme.
+
+\emph{Remarque 2.} $\omega_N(M) = S^{+(N)} \cdot \omega_0(M)$ est la troncature
+$\tau_{\geq N}$ de $\omega_{N'}(M)$ pour $N \geq N'$. Les ombres sont donc
+d'autant plus grossières que $N$ est grand, et toutes pleinement fidèles —
+alors que la troncature $\tau_N$ elle-même ne l'est pas.
+
+Soit $\mathrm{Omb}(k)$ la catégorie des « ombres virtuelles », les
+$S$-modules gradués. Les modules nuls en degrés $\geq N$ forment une
+sous-catégorie épaisse, et le quotient (les « $N$-ombres virtuelles ») est
+canoniquement équivalent aux modules nuls en degrés $< N$, le foncteur quotient
+s'identifiant à $\tau_N$\footnote{Le signe entre $i$ et $N$ dans la définition
+est surchargé ; la lecture $\mathcal{M}_i = 0$ pour $i \geq N$ est celle
+qu'impose la suite.}. Les modules \emph{négligeables} — ceux dont chaque élément
+est annulé par $S^{+(N)}$ pour $N$ assez grand — forment encore une
+sous-catégorie épaisse ; la phrase sur le localisé s'interrompt, et la notion
+est reprise pages 253 à 258.
+
+\pagerange{26}{34}
+\section*{Le théorème sur $M \otimes_k S$ (pages 26 à 34)}
+
+\textbf{Théorème.} \emph{Pour tout $k$-module $M$ et tout $N \geq 0$,
+l'homomorphisme canonique $M \otimes_k S \to \varphi_N \tau_N(M \otimes_k S)$
+est un isomorphisme en degrés $\geq 0$ ; de façon équivalente, pour $0 \leq i
+\leq N$,}
+\[
+(M \otimes_k S)_i = M\, T^{(i)} \xrightarrow{\ \sim\ } \operatorname{Hom}^i\bigl(\tau_{N-i}(S), M \otimes_k S\bigr) .
+\]
+Ici $\varphi_N$ est l'adjoint à droite de la troncature (pages 247 et 290) ; en
+degrés $\geq N$ c'est clair, et le cas $i = 0$ est le corollaire 1. Un
+homomorphisme de degré $i$ de $\tau_{N-i}(S)$ dans $M \otimes S$ s'écrit
+$T^{(k-i)} \mapsto \xi_k T^{(k)}$ pour $k \geq N$, et la linéarité s'écrit
+$c_{l,k}\,\xi_k = c_{l,k-i}\,\xi_{k+l}$. Le théorème équivaut donc à l'énoncé
+où $k$ ne figure plus :
+
+\textbf{Théorème.} \emph{Soient $0 \leq i \leq N$, $M$ un groupe abélien et
+$(\xi_k)_{k \geq N}$ dans $M$ tels que $c_{l,k}\,\xi_k = c_{l,k-i}\,\xi_{k+l}$
+pour $k \geq N$, $l \geq 0$. Il existe un unique $\xi \in M$ tel que $\xi_k =
+\binom{k}{i}\,\xi$ pour tout $k \geq N$.}\footnote{Il écrit tantôt
+$c_{k,k-i}$, tantôt $c_{i,k-i}$ ; ces deux coefficients sont égaux à
+$\binom{k}{i}$.}
+
+\emph{Démonstration.} On se ramène à un $\mathbb{Z}_{(p)}$-module : les
+$\binom{k}{i}$, $k \geq N$, sont premiers entre eux dans leur ensemble (pour
+chaque $p$, $k = i + p^\varepsilon$ avec $p^\varepsilon > i$ donne une unité),
+d'où une combinaison $\sum m_\alpha \binom{k_\alpha}{i} = 1$ qui fixe $\xi$ et
+son unicité, et l'égalité se vérifie dans chaque localisé. Sur
+$\mathbb{Z}_{(p)}$, on retranche la solution évidente et l'on est ramené au
+\textbf{Corollaire} : \emph{si $(\xi_k)$ satisfait la relation et s'annule en un
+$k_0$ avec $\binom{k_0}{i}$ inversible, elle est nulle.} Cela se fait en deux
+temps.
+
+\textbf{Lemme 1.1.} \emph{Si $k' \geq k \geq N$, $j = k - i$, $j' = k'-i$, et
+$c_{i,j}$, $c_{i,j'}$ sont des unités, alors $c_{j'-j, j}$ est une unité si et
+seulement si $c_{j'-j, j+i}$ l'est, et dans ce cas $\xi_k = 0 \iff \xi_{k'} =
+0$.} Les quotients $c_{j'-j,j+i}/c_{j'-j,j}$ et $c_{i,j'}/c_{i,j}$ sont égaux
+dans $\mathbb{Q}$, et la relation avec $l = j'-j$ conclut.
+
+\textbf{Lemme 1.} \emph{Les $\xi_k$ tels que $c_{i,k-i}$ soit une unité sont
+tous nuls ou tous non nuls.} On complète $i + j$ jusqu'à $p^{r+1} - 1$ en
+ajoutant chiffre à chiffre $\delta_\alpha = (p-1) - (i_\alpha + j_\alpha)$ ; la
+marge en donne une présentation plus simple : pour $p^r > i+j$ et $\delta =
+p^r - 1 - (i+j)$, on a $c_{i, j+\delta}$ et $c_{i+j, \delta}$ non nuls modulo
+$p$, d'où $\xi_k = 0 \iff \xi_{p^r - 1} = 0$.
+
+\textbf{Lemme 2.} \emph{Pour $i, j \geq 0$, il existe $l \geq 0$ tel que
+$c_{i+j,l}$ et $c_{i,j+l}$ soient non nuls modulo $p$} : on prend $l = p^r - 1 -
+(i+j)$ avec $p^r > i+j$\footnote{Une première démonstration par les retenues
+de l'addition $p$-adique (pages 32 et 33) est barrée de longs traits obliques ;
+la démonstration retenue est celle-ci.}. Le lemme commun, dit-il, est que
+$\mu + \nu = p^r - 1$ entraîne $c_{\mu,\nu} \not\equiv 0 \pmod p$ — aucune
+retenue n'est possible.
+
+Le théorème annonce encore un corollaire, $\operatorname{Ext}^n\bigl(
+\tau_{N-i}(S)[-i], M \otimes_k S\bigr) = 0$ pour $n > 0$, dont la lecture est
+incertaine et dont la démonstration ne vient qu'aux pages 262 à 264 (voir
+là-bas la réserve qu'elle appelle).
+
+Le feuillet isolé de la page 34 consigne la formule de Legendre
+$v_p(n!) = \frac{n - s_p(n)}{p-1}$, où $s_p(n)$ est la somme des chiffres de $n$
+en base $p$, d'où $v_p(p^n/n!) = \frac{s_p(n) + n(p-2)}{p-1}$, et le calcul
+$v_p\bigl(\frac{(p^{r+1})!}{(p^r!)^p\, p!}\bigr) = 0$, qui sert page 42.
+
+\pagerange{36}{44}
+\section*{Homomorphismes homogènes entre tronqués (pages 36 à 44)}
+
+Pour $N^*$ dans la catégorie $\mathcal{M}_N$ des modules gradués nuls en
+degrés $< N$, l'adjonction donne
+\[
+\operatorname{Hom}^d(M^*, \varphi_N N^*) \simeq \operatorname{Hom}^d(\tau_{N-d} M^*, N^*) ,
+\]
+et en particulier, pour des $k$-modules $M$, $N$ et $d \geq 0$,
+$\operatorname{Hom}^d(M \otimes_k S, N \otimes_k S) \simeq
+\operatorname{Hom}^d(\tau_{N-d} M_S, \tau_N N_S) \simeq \operatorname{Hom}_k(M,
+N)$\footnote{Il emploie la même lettre $N$ pour l'entier de troncature et pour
+le $k$-module. Le bas de la page 36, écrit tête-bêche et barré, porte un calcul
+sans rapport (« Diagramme de Cayley »).}. On étudie ensuite les homomorphismes
+de degré $d$ de $\tau_\alpha M_S$ dans $\tau_\beta N_S$, $\beta \geq \alpha$,
+où $M_S = M \otimes_k S$.
+
+a) Si $d \geq \beta - \alpha$, ils s'identifient à $\operatorname{Hom}_k(M, N)$,
+$u$ correspondant à $m\,T^{(j)} \mapsto c_{d,j}\, u(m)\, T^{(d+j)}$.
+
+b) Si $0 \leq d < \beta - \alpha$, ce sont les $u \in \operatorname{Hom}_k(M,
+N)$ tels que $c_{d,j}\, u = 0$ pour $\alpha \leq j \leq \beta - d - 1$ : il faut
+que les termes tombant en degré $d + j < \beta$ s'annulent\footnote{La page
+écrit le système jusqu'à $c_{d,\beta-d}\,u = 0$, puis la condition « $\alpha
+\leq j < \beta - d$ » ; la dernière équation doit être $c_{d, \beta-d-1}\,u =
+0$, ce que dit la condition.}.
+
+c) Si $d < 0$ — homomorphismes de degré négatif — on se place, au feuillet
+de la page 42, sur une $\mathbb{Z}_{(p)}$-algèbre $k$. Posant $T_r =
+T^{(p^r)}$, on a $T_r^{\,p} = p\,\nu'_r\, T_{r+1}$ avec $\nu'_r = (p-1)!\,
+\frac{(p^{r+1})!}{(p^r!)^p\, p!}$ inversible dans $\mathbb{Z}_{(p)}$ (page 34) ;
+$\tau_{p^r}S$ est engendré par les $T_s$, $s \geq r$, avec les relations
+$T_s^{p-1} T_s = p\nu'_s T_{s+1}$. Un homomorphisme de degré $-d$, $0 < d <
+p^r$, est donné par des $\eta_s = u(T_s) \in M \otimes S_{p^s - d}$, et en
+écrivant $\eta_s = \xi_s\, T_\nu^{\delta_\nu} \cdots
+T_{r-1}^{\delta_{r-1}}(T_r \cdots T_{s-1})^{p-1}$ ($\nu = v_p(d)$) la relation
+devient $\xi_s = p\,\nu'_s\,\xi_{s+1}$. Chaque $\xi_s$ est donc le premier terme
+d'une suite de divisions successives par $p$.
+
+\textbf{Proposition.} \emph{Soient $k$ une $\mathbb{Z}_{(p)}$-algèbre, $M$, $N$
+des $k$-modules, $d > 0$, $\alpha \geq d$, et $N_0$ le plus grand sous-module
+$p$-divisible de $N$. Tout $u \in \operatorname{Hom}^{-d}(\tau_\alpha M_S, N_S)$
+se factorise par $N_{0\,S}$ : $\operatorname{Hom}^{-d}(\tau_\alpha M_S,
+N_{0\,S}) \xrightarrow{\sim} \operatorname{Hom}^{-d}(\tau_\alpha M_S,
+N_S)$.}\footnote{Trois écarts. (i) La page définit $N_0 = \bigcap_{n} nN$ et
+l'appelle « le plus grand sous-module divisible » ; ces deux objets diffèrent
+en général ($\bigcap nN$ peut être strictement plus gros, ce qu'on appelle le
+premier sous-groupe d'Ulm). Ce que l'argument donne, puisque chaque $\xi_s$ se
+prolonge en une suite $\xi_s, \xi_{s+1}, \ldots$ de divisions successives, est
+l'appartenance au plus grand sous-module $p$-divisible, et c'est ce que nous
+énonçons. (ii) L'énoncé de la page vaut pour $k$ quelconque ; le calcul n'est
+fait que pour $k$ une $\mathbb{Z}_{(p)}$-algèbre, comme le dit la marge de la
+page 42. (iii) Les deux membres de l'isomorphisme sont écrits identiques sur la
+page.} \emph{Corollaire : si $N$ n'a pas de sous-module divisible non nul, par
+exemple si $k$ est de torsion, ces homomorphismes sont nuls.}
+
+\pagerange{47}{51}
+\section*{Cohomologie des ensembles simpliciaux (pages 47 à 51)}
+
+Ces trois pages sont au crayon très pâle, et la transcription n'en lit guère
+que les formules : la lecture est mince ici. On y voit le cadre suivant. Un
+foncteur $C^*$ des ensembles simpliciaux vers les complexes de $k$-modules,
+calculant fonctoriellement $H^*(X_\bullet, M)$ et dont chaque composante
+transforme limites inductives en limites projectives, est représentable :
+$C^n(X_\bullet) = \operatorname{Hom}(X_\bullet, C^n_\bullet)$, et les
+$C^*_\bullet$ forment une résolution de $M$, dont les cycles $Z^n$ sont liés aux
+objets d'Eilenberg–MacLane $K(M,n)$. Exemple 1 : les cochaînes ordinaires,
+représentées par $C^n_{\bullet M}$ avec $(C^n_{\bullet M})_m = M^{\operatorname{Hom}
+(\Delta_n, \Delta_m)}$. Exemple 2 : les cochaînes normalisées, représentées par
+\[
+(C^{n!}_{\bullet M})_m \simeq M^{\operatorname{Hom}_{\mathrm{mono}}(\Delta_n, \Delta_m)} \simeq \Lambda^{n+1}(k^{\Delta_m}) \otimes_k M ,
+\]
+les applications strictement croissantes $[n] \to [m]$ correspondant aux
+parties à $n+1$ éléments. Cette identification des cochaînes normalisées aux
+puissances extérieures de $\Phi_*$ revient pages 67 et 337.
+
+\pagerange{53}{55}
+\section*{Intégration des algèbres simpliciales (pages 53 à 55)}
+
+Soit $A_*$ un groupe différentiel gradué simplicial ($d$ de degré $+1$), avec
+$A^p_n = 0$ pour $p \notin [0,n]$, et tel que, muni de l'augmentation
+$\varepsilon_n : A_0 \to A^*_n$, chaque $A^*_n$ soit une résolution de $A_0$.
+Soit $\partial = \sum_i (-1)^i \partial^*_{n,i} : A^*_n \to A^*_{n-1}$
+l'opérateur de bord des faces.
+
+\textbf{Proposition 1.} \emph{Il existe un et un seul système d'homomorphismes
+$K_n : A^*_n \to A_0$ tel que a) $K_0 = \mathrm{id}$ ; b) $K_n(A^p_n) = 0$ pour
+$p \neq n$ ; c) (Stokes) $K_n(d\omega) = K_{n-1}(\partial\omega)$.}
+
+Par récurrence : tout $\varpi \in A^N_N$ est un cobord $d\omega$ puisque
+$H^N(A^*_N) = 0$, et l'on pose $K_N(d\omega) = K_{N-1}(\partial\omega)$ ; il
+faut que cela ne dépende pas de $\omega$, c'est-à-dire que $d\omega = 0$
+entraîne $K_{N-1}(\partial\omega) = 0$. Pour $N \geq 2$, $\omega = d\alpha$ et
+$K_{N-1}(\partial d\alpha) = K_{N-1}(d\partial\alpha) = K_{N-2}(\partial\partial
+\alpha) = 0$ ; pour $N = 1$, $\omega = \varepsilon_1(\alpha)$ et
+$\partial\varepsilon_1(\alpha) = 0$.
+
+\emph{Remarques.} 1) On n'a utilisé que $H^N(A^*_N) = 0$ pour $N \geq 1$,
+$H^{N-1}(A^*_N) = 0$ pour $N \geq 2$, et $H^0(A^*_1) = \varepsilon_1(A_0)$.
+2) Il y a une version abstraite, pour un bicomplexe augmenté satisfaisant ces
+conditions de degré dans une catégorie abélienne. 3) Par unicité, ces
+« intégrales » $A^n_n \to A_0$ commutent aux structures supplémentaires — la
+fin de la remarque est illisible.
+
+\pagerange{57}{59}
+\section*{Le topos induit par un ensemble simplicial (pages 57 et 59)}
+
+Pour $X \in \mathrm{sSet}$, le topos induit est $\mathrm{sSet}/X \simeq
+\widehat{\Delta/X}$ ; l'étude cohomologique de $X$ est celle de ce topos. Un
+faisceau abélien sur $X$ est un foncteur $(\Delta/X)^\circ \to \mathrm{Ab}$ ;
+un objet simplicial $A_\bullet$ définit le faisceau $A \times X \to X$, composé
+$(\Delta/X)^\circ \to \Delta^\circ \xrightarrow{A} \mathrm{Ens}$, et l'on peut
+parler de l'hypercohomologie $\mathrm{R}\Gamma(X, A^*_\bullet)$ d'un objet
+gradué. Le complexe des cochaînes d'un faisceau abélien $A$ est
+$C^n(X, A) = \prod_{\sigma \in X_{[n]}} A(\sigma)$.
+
+\pagerange{61}{68}
+\section*{Cochaînes et systèmes de Stokes (pages 61 à 68)}
+
+Un système de coefficients contravariant sur le simplexe variable
+$A_* : (\Delta/X)^\circ \to \mathcal{E}$ donne les chaînes
+$C_*(X, A_*) = i_!(A_*)$, où $i : \Delta/X \to \Delta$ ; un « cofaisceau »
+covariant donne les cochaînes ; on passe de l'un à l'autre en remplaçant
+$\mathcal{E}$ par $\mathcal{E}^\circ$\footnote{La moitié supérieure de la page
+61, biffée, esquisse les mêmes formules pour une fibration $C \to B$.}.
+
+Pour un $k$-Module $F$ sur $X_*$, on a $C^*(X_*, F) \simeq \Gamma(X_*,
+C^*_{X_*} \otimes_{k_*} F)$, et $C^*_{X_*} \otimes F$ est une résolution
+flasque de $F$ (« à vérifier en passant », dit la marge), que $F$ soit
+localement constant ou non. D'où $H^*(C^*(X_*, F)) \simeq H^*(X_*, F)$, et
+de même pour l'hypercohomologie d'un complexe, $\mathrm{R}\Gamma(X_*, F^*)
+\simeq C^*(X_*, F^*)$ (complexe simple associé).
+
+Soit maintenant $A^*_*$ un complexe de $k$-modules simpliciaux, et $M$ un
+$k$-module. Un morphisme de complexes $A^*_* \to C^*_{*M}$ (les cochaînes
+représentantes) est un système $k_n : A^n_n \to M$ satisfaisant la
+\emph{condition de Stokes} $k_n \circ \partial_{n+1} = k_{n+1} \circ d$ sur
+$A^n_{n+1}$. Il induit, pour tout $X_*$, un morphisme $\Gamma(X_*, A^*_{X_*})
+\to C^*(X_*, M)$, $f \mapsto k_n \circ f_n$, qui réalise le morphisme canonique
+$\Gamma \to \mathrm{R}\Gamma$ lorsque $A^*$ est une résolution de $M_*$ et que
+$k_0$ induit l'identité sur $M$.
+
+Si de plus a) $A^i_n = 0$ pour $i > n$, b) $H^n(A^*_n) = 0$ pour $n \geq 1$,
+c) $H^{n-1}(A^*_n) = 0$ pour $n \geq 2$, alors un système de Stokes est
+déterminé par $k_0$, et $k_0$ en provient si et seulement s'il annule
+$\partial_1(\operatorname{Ker}(A^0_1 \xrightarrow{d} A^1_1))$ — ce qui est
+automatique si c') $H^0(A^*_1) = \varepsilon^*(A^0_0)$. Il y a alors un
+\emph{unique} morphisme $A^*_* \to C^*_{*M}$ prolongeant $k_0$, et, grâce à a),
+il est à valeurs dans les cochaînes normalisées :
+\[
+A^*_* \longrightarrow C^{*!}_{*M} \simeq \Lambda^{*+1}\Phi_* \otimes_k M .
+\]
+
+\emph{Exemple.} Pour un anneau à puissances divisées $(S, J)$ et $t \in J$,
+l'algèbre $\bigl(\Gamma^*\Phi_{*S} \otimes_S \Lambda^*\Psi_{*S}\bigr)/(T -
+t)_{\mathrm{pd}}$ est une résolution de $S$ avec $A^i_j = 0$ pour $i > j$ : on a
+donc un système d'intégrales de Stokes à valeurs dans $S$, et un morphisme
+canonique vers $\Lambda^{*+1}\Phi_{*S}$, « dont il faudrait étudier les
+propriétés multiplicatives ». Le calcul explicite de ces intégrales est fait
+pages 136 à 140.
+
+\pagerange{69}{71}
+\section*{Comparaison avec le De Rham classique (pages 69 et 71)}
+
+Les données sont : (1) un complexe augmenté $k_X \to A^*_X$ avec intégrales de
+Stokes $K_n$ normalisées ; (2) un espace $X$ et une résolution différentielle
+$k_X \to \Omega^*$ (par exemple le De Rham d'une variété $C^\infty$, $k =
+\mathbb{R}$) ; (3) un sous-ensemble $S(X)'$ du complexe singulier qui donne la
+même homologie (les simplexes $C^\infty$) ; (4) pour chaque simplexe $\sigma$,
+un « tiré en arrière » des germes de formes au voisinage du support de $\sigma$
+vers $A^*_n$, compatible aux opérations simpliciales\footnote{« Supp » est une
+lecture conjecturale d'une abréviation qui revient sous toutes les limites
+inductives de la page 69.}. Les $K_*$ et (4) définissent un morphisme $\Omega^*
+\to S'^*_X$ compatible aux augmentations, d'où un cube commutatif dont la base
+est faite d'isomorphismes (image par $\mathrm{R}\Gamma$ d'un carré d'isomorphismes
+dans une catégorie dérivée), la flèche verticale de droite étant un
+isomorphisme par Cartan, $S^*_X$ étant « homotopiquement fin » ; la face du
+haut en hérite. La page 71 est en partie barrée, et le raisonnement n'est
+donné qu'à grands traits.
+
+\pagerange{73}{77}
+\section*{Le complexe comme noyau de la multiplication par $dT$ (pages 73 à 77)}
+
+Sur $\mathrm{sSet}$, $\Phi_* = i_{0*}(k)$ est un $k$-module muni de la section
+$T$, qui définit une injection $k_* \hookrightarrow \Phi_*$. L'algèbre bigraduée
+différentielle à puissances divisées
+$\mathcal{D}^{**}_* = \Gamma^*_k\Phi_* \otimes_k \Lambda^*\Phi_*$ (différentielle
+de bidegré $(-1,+1)$, alternée pour le degré total) est une résolution de $k$ :
+$\mathcal{D}^{00}_* = k_*$, et en degré total $n > 0$ la suite $0 \to
+\Gamma^n\Phi_* \to \Gamma^{n-1}\Phi_* \otimes \Lambda^1\Phi_* \to \cdots \to
+\Lambda^n\Phi_* \to 0$ est exacte, à termes flasques. Soit $\overline{T} = dT
+\in \Lambda^1\Phi_*$ ; la multiplication $\overline{T} \wedge$ est de carré nul,
+de bidegré $(0,1)$, anticommute à $d$, et a noyau égal à son image. On pose
+\[
+\mathrm{DR}^{p,q}_* = \operatorname{Ker}\bigl(\mathcal{D}^{p,q+1}_* \xrightarrow{\ \overline{T}\wedge\ } \mathcal{D}^{p,q+2}_*\bigr) \simeq \Gamma^p\Phi_* \otimes \Lambda^q \Psi_* = C^{p,q}_* ,
+\]
+car le noyau de $\overline{T} \wedge$ sur $\Lambda^{q+1}\Phi_*$ est
+$\overline{T} \wedge \Lambda^q\Phi_* \simeq \Lambda^q\Psi_*$. On a les suites
+exactes $0 \to \mathrm{DR}^{p,q}_* \xrightarrow{i} \mathcal{D}^{p,q+1}_*
+\xrightarrow{u} \mathrm{DR}^{p,q+1}_* \to 0$, où $u = \overline{T}\wedge$.
+
+Sur un $X_*$, avec $\Gamma = \operatorname{Hom}(X_*, -)$ :
+
+(A) $\mathcal{D}^{00}(X_*) \simeq k^{\pi_0(X_*)}$ et
+$H^{p,q}(\mathcal{D}(X_*)) = 0$ pour $(p,q) \neq (0,0)$\footnote{Écrit
+« si $pq \neq 0$ » ; c'est $(p,q) \neq (0,0)$ que donne la flasquitude des
+termes de degré total $> 0$.} ;
+
+(B) les lignes $0 \to \mathcal{D}^{p,0} \xrightarrow{\overline{T}\wedge}
+\mathcal{D}^{p,1} \to \cdots$ sont exactes pour $p > 0$, tandis que pour $p =
+0$, $\Lambda^\bullet\Phi_*$ muni de $\overline{T}\wedge$ étant une résolution
+flasque décalée de $k_*$, la cohomologie est nulle en degrés $\leq 1$ et vaut
+$H^{n-1}(X_*, k)$ en degré $n \geq 2$.
+
+La structure multiplicative à puissances divisées de $\mathrm{DR}^{**}$ est
+déterminée par la condition que $u : \mathcal{D}^{**} \to \mathrm{DR}^{**}$ soit
+compatible à toutes les structures, avec $i(x\,u(y)) = i(x)\,y$, $i(u(y)\,x) =
+y\,i(x)$ et $i(x)\,i(y) = 0$ — à la détermination près (E) des produits
+$\mathrm{DR}^{0,p} \times \mathrm{DR}^{0,q} \to \mathrm{DR}^{0,p+q}$ ($p,q \geq
+1$) et des puissances divisées sur $\mathrm{DR}^{0,p}$, qui sont les seules
+données supplémentaires. L'argument (D) : les puissances divisées de
+$\mathrm{DR}^{**+} = \operatorname{Ker}(\overline{T}\wedge)$ sont nulles en
+ordre $\geq 2$, car localement $y = \overline{T}z$ et $y^{(i)} =
+\overline{T}^i z^{(i)}$.
+
+\emph{Problème} (page 77). Trouver des scindages \emph{canoniques} des suites
+exactes $0 \to \Gamma^p\Phi_* \otimes \Lambda^{q-1}\Psi_* \to \Gamma^p\Phi_*
+\otimes \Lambda^q\Phi_* \to \Gamma^p\Phi_* \otimes \Lambda^q\Psi_* \to 0$,
+$p \geq 1$. Un scindage existe, $\Gamma^p\Phi_* \otimes \Lambda^q\Psi_*$ étant
+projectif pour $p \geq 1$, dit-il. Pour $p = q = 1$ il est \emph{unique}, car
+$\operatorname{Hom}(\Phi_* \otimes \Psi_*, \Phi_*) \simeq
+\operatorname{Hom}_k((\Phi_*\otimes\Psi_*)_0, k) = 0$, $\Psi$ étant nul en
+degré simplicial $0$ ($\Phi_* = i_{0*}k$ est adjoint à droite de l'évaluation
+en $[0]$). La page s'arrête sur « Soit $s : \Phi_* \otimes \Psi_* \to \Phi_*
+\otimes \overline{\Phi}_*$ », sans le définir.
+
+\pagerange{79}{90}
+\section*{Faisceaux tests sur un topos ; la condition de De Rham (pages 79 à 90)}
+
+\subsection*{Le bicomplexe d'une immersion}
+
+Soient $X$ un topos et $u : \mathbb{Z} \to \Phi$ une immersion telle que a)
+$\Psi = \operatorname{Coker} u$ soit plat, b) les $\Lambda^i\Phi$ et $\Gamma^i
+\Phi$, $i > 0$, soient flasques et le restent après tout produit tensoriel. On
+en déduit que les $\Gamma^i\Phi \otimes \Lambda^j\Phi$ ($i + j > 0$), puis les
+$\Gamma^i\Phi \otimes \Lambda^j\Psi$ ($i > 0$), sont flasques. Le bicomplexe
+$K^{\bullet\bullet}_u = \Gamma^*\Phi \otimes \Lambda^*\Psi$, avec la
+différentielle compatible aux puissances divisées qui est nulle sur
+$\Lambda\Psi$ et égale à $\Phi \to \Psi$ sur $\Phi$, est une résolution de
+$\mathbb{Z}\{T\}$, où $T \mapsto 1 \in \operatorname{Ker}(\Phi \to \Psi)$ ; et
+pour tout Anneau commutatif $k$ sur $X$, $K_{u,k} = \Gamma^*_k\Phi_k \otimes
+\Lambda^*_k\Psi_k$ est une résolution de $k\{T\}$, à composantes flasques pour
+$i > 0$.
+
+\textbf{Théorème.} \emph{Soit $K^{\bullet\bullet}(X, u, k) = \Gamma(X,
+K_{u,k})$. L'homomorphisme canonique $H^{**}(X, u, k) \to H^*(X, k) \otimes_k
+k\{T\}$ est un isomorphisme sur la partie de bidegré (complémentaire $p \geq
+0$, extérieur $q$), où il s'écrit $H^{p,q}(X,u,k) \simeq H^q(X,k)$, comme au
+cas simplicial.}\footnote{La page indexe par (total $i$, extérieur $j$) : isomorphisme
+pour $j \leq i$, et « $H^{i,j} = 0$ (et pas un iso) pour $j > i$ ». Comme le
+degré extérieur ne dépasse jamais le degré total, ce second membre de phrase
+reste obscur ; le dernier facteur est écrit $\mathbb{Z}\{T\}$, ce qui revient
+au même puisque $H^*(X,k) \otimes_{\mathbb{Z}} \mathbb{Z}\{T\} \simeq H^*(X,k)
+\otimes_k k\{T\}$.} \emph{Plus généralement, pour un morphisme de topos $f : X
+\to Y$, on a $f_* K_{u,k} \to \mathrm{R}f_*(k) \otimes_k k\{T\}$, isomorphisme
+en cohomologie dans le même domaine.}
+
+\subsection*{Fonctorialités}
+
+$K_u$ est fonctoriel en $k$ et en $u$ : un $\lambda : \Phi \to \Phi'$ tel que
+$\lambda u = u'$ induit un morphisme compatible aux structures, isomorphisme
+dans la catégorie dérivée, qui le reste après $\Gamma(X,-)$ ou $f_*$. Deux tels
+morphismes $\lambda$, $\mu = \lambda + \Theta$ ($\Theta u = 0$) : que peut-on en
+dire ? La question est posée page 86 et reste sans réponse.
+
+Les structures de $K$ (page 82) : anneau bigradué alterné pour le degré
+extérieur, à bidegrés $\geq 0$, puissances divisées sur l'idéal des bidegrés
+non nuls, différentielle compatible, $d : K^{1,0} = \Phi \to K^{1,1} = \Psi$
+épimorphique, $K \simeq \Gamma^*\Phi \otimes \Lambda^*\Psi$ libre,
+$\Phi$ et $\Psi$ plats ; si $L = \operatorname{Ker} d$, $K$ est une résolution
+de $\Gamma^*L$, et l'on suppose le plus souvent $L$ localement libre de rang
+$1$. La donnée de $K$ équivaut à celle de $(k, L, \Phi, u : L \hookrightarrow
+\Phi)$, et un morphisme à celle d'un morphisme d'anneaux $k \to k'$ et d'un
+$\lambda_\Phi$ semi-linéaire respectant les images de $L$.
+
+\subsection*{Indépendance du choix de $u$}
+
+\textbf{Lemme.} \emph{Pour tout $k$-module $N$, $u_N = u \otimes \mathrm{id}_N
+: N \to \Phi \otimes_k N$ est un monomorphisme « universel », satisfaisant les
+mêmes conditions.} Deux immersions $u$, $u'$ se plongent dans la somme
+amalgamée $\Phi \amalg_k \Phi'$, puis dans un $N$ du lemme ; d'où des
+isomorphismes $\mathrm{DR}(u) \simeq \mathrm{DR}(N) \simeq \mathrm{DR}(u')$ dans
+la catégorie $\mathbb{DR}^{**}$ des anneaux bigradués alternés différentiels à
+puissances divisées avec élément de bidegré $(1,0)$, indépendants des choix et
+transitifs (par le même argument appliqué à deux choix de $N$). L'argument
+vaut pour $f_*\mathcal{DR}^{**}_{\mathrm{pd}}(k,u)$.
+
+\subsection*{La condition de De Rham}
+
+Un Anneau $k$ d'un topos satisfait la \emph{condition de De Rham} s'il existe un
+$u : k \to \Phi$ comme ci-dessus ; elle passe à toute $k$-Algèbre, et « le plus
+beau » serait que $\mathbb{Z}_X$ y satisfasse. C'est vrai pour le topos
+$\widehat{\Delta}$ et pour le topos d'un espace paracompact\footnote{Le second
+cas porte « paracompact » souligné comme incertain.} ; pour le topos des
+ensembles cosimpliciaux, la réponse inscrite est « Non », soulignée trois fois.
+Si $A^{**}$ est une algèbre bigraduée de ce type avec $A^{00} = k$ satisfaisant
+la condition, l'augmentation $k\{T\} \to \mathcal{DR}(k,u)$ définit un morphisme
+$A^{**} \to \mathcal{DR}(k,u) \otimes_{k\{T\}} A^{**}$, qu'il affirme être un
+quasi-isomorphisme.
+
+\pagerange{93}{107}
+\section*{Les algèbres de De Rham spéciales (pages 93 à 107)}
+
+\subsection*{Définitions}
+
+Une \emph{structure de De Rham} (à puissances divisées, sous-entendu) est un
+anneau bigradué $A^{ij}$, $0 \leq j \leq i$ ($i$ total, $j$ extérieur,
+$i - j$ complémentaire), alterné pour le degré extérieur, avec une
+différentielle de bidegré $(0,1)$ — une dérivation graduée pour le degré
+extérieur —, des puissances divisées sur $A^+ = \sum_{i+j>0} A^{ij}$ compatibles
+aux deux graduations ($\gamma^d : A^{ij} \to A^{di,dj}$) et à la différentielle,
+et un élément marqué $T \in Z^{10}(A)$. Elle est \emph{spéciale} si $k\{T\}
+\xrightarrow{\sim} H^{*0}(A)$, $H^{*j}(A) = 0$ pour $j > 0$, et les $A^{ij}$ sont
+$k$-plats\footnote{La condition « $H^{*i} = 0$ » est écrite sans préciser $i$ ;
+« $i > 0$ » est la lecture du contexte. Une ligne en interligne, lecture
+incertaine, définit encore les structures \emph{flasques} : les $A^{ij}$ ($i
+\geq 1$) flasques.}. D'où les catégories $\mathbb{DR}\mathrm{sp}(\mathfrak{X},
+k)_0$ (morphismes respectant toutes les structures),
+$\mathbb{DR}\mathrm{spfl}$, $\mathbb{DR}\mathrm{spufl}$ (flasques,
+universellement flasques), et leurs catégories de fractions obtenues en
+inversant les quasi-isomorphismes.
+
+\subsection*{Réduction à l'algèbre standard}
+
+Pour $A$ spéciale, $T$ définit $k \to A^{10} = \Phi$, d'où une suite exacte $0
+\to k \to \Phi \to \Psi \to 0$ avec $\Psi$ plat, et un morphisme
+$\mathrm{DR}(\Phi, T) = \Gamma^*\Phi \otimes \Lambda^*\Psi \to A$. Tout
+morphisme $A \to A'$ s'inscrit dans un carré avec $\mathrm{DR}(\Phi,T) \to
+\mathrm{DR}(\Phi', T')$.
+
+\textbf{Proposition} (page 97). \emph{La catégorie localisée de
+$\mathbb{DR}\mathrm{sp}(\mathfrak{X}, k)_0$ est équivalente à la catégorie
+ponctuelle ; de même pour $\mathbb{DR}\mathrm{spufl}(\mathfrak{X},k)_0$, si les
+$\Gamma^i\Phi$ ($i > 0$) d'un $\Phi$ plat universellement flasque sont encore
+universellement flasques.} Elle se ramène à la même assertion pour la catégorie
+des extensions $0 \to k \to \Phi \to \Psi \to 0$ à $\Psi$ plat, que la page dit
+« on sait » équivalente à la catégorie ponctuelle\footnote{Ce dernier point
+n'est pas démontré dans le dossier ; c'est la même question que celle des deux
+morphismes $\lambda$, $\mu$ de la page 86 et de la simple connexité de la page
+120. Pour $\widehat{\Delta}$, la page 99 justifie l'hypothèse par
+« flasque $+$ plat $\Rightarrow$ homotope à $0$ $\Rightarrow$ universellement
+flasque et les $\Gamma^i$ universellement flasques », que la marge déclare
+elle-même « faux tel quel, à arranger ! ».}.
+
+\subsection*{Sur $\widehat{\Delta}$}
+
+Soit $i_n : P \to \widehat{\Delta}$ le point $K \mapsto K_{[n]}$.
+\textbf{Lemme.} \emph{$i_{0*}(M) \simeq \Phi_* \otimes_k M$, avec $\Phi_*(I) =
+k^I$.} Car $i_{0*}(M)(I) = M^I$. \textbf{Corollaire.}
+$\operatorname{Hom}(A_*, \Phi_* \otimes_k M) \simeq \operatorname{Hom}_k(A_0, M)$,
+d'où un morphisme canonique $A_* \to \Phi_* \otimes A_0 = i_{0*}i_0^*A_*$.
+Appliqué à $k_* \hookrightarrow A^{1,0}_*$, cela relie toute algèbre de De Rham
+spéciale, « en trois crans », à l'algèbre standard $\mathrm{DR}(\Phi_{*k}, T)$,
+« qui semble la plus économique de toutes » (page 101) :
+\[
+A^{**}_* \longleftarrow \mathrm{DR}(A^{10}_*, T) \longrightarrow \mathrm{DR}(A^{10}_0 \otimes \Phi_*, T) \longleftarrow \mathrm{DR}(\Phi_{*k}, T) ,
+\]
+diagramme qui reste dans les flasques si $A^{10}_*$ l'est.
+
+Il introduit ensuite des catégories $\mathbb{DR}\mathrm{sp}'$,
+$\mathbb{DR}\mathrm{spfl}'$ ayant plus de morphismes : les homomorphismes
+d'anneaux à puissances divisées entre complétés $\widehat{A} = \prod A^{ij}$
+respectant $T$. Les groupoïdes engendrés seraient « triviaux » (réunion
+d'objets reliés par des isomorphismes transitifs), et équivalents « au
+groupoïde connexe défini par deux groupes, que nous nous proposons de
+déterminer » dans le cas de $\widehat{\Delta}$ (page 105). Les pages 105 et 107
+commencent la détermination des morphismes de
+$\widehat{\mathrm{DR}}_{*k}$ dans une algèbre de De Rham : des composantes
+$v(p,q)$, avec $v(1,0)(T) = T$, et, page 107 — au crayon très pâle, lue par
+fragments seulement —, un élément $\xi_0$ en degré simplicial $1$ et des
+relations de commutation entre ses images par les deux dégénérescences
+$\Delta_2 \to \Delta_1$. Le premier groupe est déterminé aux pages 161 à
+179 ; le second n'apparaît pas dans le dossier\footnote{Le feuillet de la page
+104 ne porte qu'un dessin du diagramme ci-dessus au pied d'une page
+dactylographiée étrangère ; les pages 102, 106, 108 à 115 et 117 à 119 sont
+des versos dactylographiés, une feuille blanche, le début d'une lettre
+personnelle (page 117) et une lettre d'un tiers (page 119), qui ne sont pas
+reproduits.}.
+
+\pagerange{110}{120}
+\section*{Les théories de De Rham admissibles (pages 110 à 120)}
+
+On considère les foncteurs $C^{**} : \mathrm{sSet}^\circ \to \mathfrak{D}$, où
+$\mathfrak{D}$ est la catégorie des $S_k$-algèbres bigraduées alternées
+différentielles augmentées à puissances divisées, qui transforment limites
+inductives en limites projectives ; ils sont représentables, c'est-à-dire donnés
+par des objets simpliciaux $C^{**}_*$ de $\mathfrak{D}$. À un tel $C$ est
+associé le foncteur cohomologique $\mathcal{H}^{**}_C(X) = H^{**}(C^{**}(X))$.
+$C$ est \emph{admissible} si, pour tout $X$, l'image de $H^{**}$ modulo les
+modules négligeables (le foncteur $\tau_\omega$ des pages 253 à 258) est dans
+l'image essentielle des $k$-modules, $\mathcal{H}_C(X) \approx H^*_C(X)
+\otimes_k S_k$.
+
+Précisément : dans le diagramme $\mathrm{R}\Gamma(X, S_k) \to \mathrm{R}\Gamma(X,
+C^{**}) \leftarrow C^{**}(X)$, on veut que les deux flèches deviennent des
+isomorphismes après $\tau_\omega$, ce qui entraîne que les morphismes induits
+en cohomologie sont à noyau et conoyau négligeables. Pour $X = \Delta_n$ cela
+se réduit à :
+3a) $S^i_k \to H^{i,0}(C_n)$ est un isomorphisme pour $i \geq \lambda(n)$ ;
+3b) $H^{i,p}(C_n) = 0$ pour $i \geq \lambda(p)$, $p > 0$\footnote{Ici $i$ est le
+degré total et $p$ le degré extérieur.} — avec $\lambda$ strictement
+croissante, dont « on suspecte » qu'on peut la prendre indépendante de $n$.
+Dans ce cas la flèche horizontale devient un isomorphisme après $\tau_\omega$,
+chaque $C^{i*}_*$ étant une résolution de $(S^i_k)_*$ jusqu'en degré $p$ pour
+$i$ grand. Pour la flèche verticale suffit (4) : si $\pi(i)$ est le plus petit
+entier tel que $C^{ip}_*$ soit flasque pour $p \geq \pi(i)$, on veut $\pi(i) \to
++\infty$.
+
+Il aimerait un théorème d'unicité. Les morphismes entre théories admissibles
+sont déjà des quasi-isomorphismes modulo négligeables ; on passe au groupoïde
+engendré, et l'on « aimerait prouver que ce groupoïde est connexe et simplement
+connexe » : a) deux théories sont dominées par une troisième ; b) deux
+morphismes parallèles sont égalisés par un morphisme. Un grand « ? » en marge,
+et : « il y aurait plus de chances avec catégorie de fractions à droite ??? ».
+
+\pagerange{122}{134}
+\section*{La version duale : coalgèbres et chaînes de De Rham (pages 122 à 134)}
+
+\subsection*{Schémas affines en algèbres}
+
+Une nouvelle rédaction, intitulée « Complexes duaux de De Rham à
+p.d. »\footnote{Le mot « duaux » est une lecture incertaine.}, part d'une
+$k$-coalgèbre $s$ associative, unitaire, commutative, d'une sous-coalgèbre
+$\bar s$, du quotient $s^+ = s/\bar s$, d'un système de « copuissances
+divisées » $\gamma^*_i : s^+ \to \operatorname{Sym}^i_k(s^+)$, et d'une forme
+$t : s^+ \to k$. Le foncteur $V_k(s) : k' \mapsto s^{k'} =
+\operatorname{Hom}_k(s, k')$ est à valeurs dans les anneaux commutatifs ;
+$V_k(s^+)$ en est un Idéal, muni de puissances divisées par les
+$\gamma^*_i$, et $t$ en est une section. On obtient un objet simplicial dans les
+schémas affines en algèbres différentielles graduées alternées à idéal à
+puissances divisées :
+\[
+\mathcal{A}_n(s,s^+,\gamma,t)(k') = s^{k'}\{\{X_0,\ldots,X_n\}\}[dX_0,\ldots,dX_n] \big/ \Bigl(\textstyle\sum X_i - t,\ \sum dX_i\Bigr)_{\mathrm{pd}} ,
+\]
+où les doubles accolades désignent les séries formelles à puissances
+divisées. Comme foncteur en $k'$ c'est $\operatorname{Hom}_k(s,k')^{\mathbb{N}^n
+\times \mathfrak{P}([0,n-1])}$, donc
+\[
+\mathcal{A}_n = V\bigl(\mathcal{A}^n\bigr), \qquad \mathcal{A}^n = s \otimes_k k[Y_0,\ldots,Y_{n-1}] \otimes_k \Lambda^*(y_0,\ldots,y_{n-1}) .
+\]
+a) Chaque $\mathcal{A}^n$ est une $k$-coalgèbre graduée alternée
+codifférentielle (de degré $-1$), avec $\bar s \hookrightarrow \mathcal{A}^n$ et
+des copuissances divisées ; b) les $\mathcal{A}^n$ forment un objet
+cosimplicial ; c) $\mathcal{A}_* = V_k(\mathcal{A}^*)$.
+
+\subsection*{Chaînes de De Rham}
+
+d) Pour un ensemble simplicial $\mathcal{X}$,
+\[
+\operatorname{Hom}\bigl(\mathcal{X}, \mathcal{A}_*(k')\bigr) \simeq \varprojlim_{\sigma \in \Delta/\mathcal{X}} \mathcal{A}_{\dim\sigma}(k') \simeq \operatorname{Hom}_k\Bigl(\varinjlim_{\sigma \in \Delta/\mathcal{X}} \mathcal{A}^{\dim\sigma}, k'\Bigr) ,
+\]
+et l'on pose $C^{\mathrm{DR}}_*(\mathcal{X}; s, s^+, \gamma, t) =
+\varinjlim_{\sigma} \mathcal{A}^{\dim\sigma}$ : une $k$-coalgèbre graduée
+alternée codifférentielle avec un morphisme $\bar s \to C^{\mathrm{DR}}_*$ (non
+nécessairement injectif : il est nul si $\mathcal{X} = \varnothing$) et des
+copuissances divisées. Elle commute aux limites inductives quelconques en
+$\mathcal{X}$, et les cochaînes s'en déduisent par
+$C^*_{\mathrm{DR}}(\mathcal{X}; s^{k'},\ldots) = \operatorname{Hom}_k(C^{\mathrm{DR}}_*,
+k')$. e) Elle est covariante en $(s, s^+, \gamma, t)$ et commute aux limites
+inductives filtrantes et à l'extension de la base. f) Si $s$ est graduée et
+$t$ homogène de degré $\delta$, tout devient bigradué ($\deg X_r = \deg dX_r =
+\delta$).
+
+g) On prend $s = k[u]$, $\bar s = k$, d'où $s^{k'} = k'\{\{T\}\}$ ; les
+copuissances divisées sont celles qui correspondent aux puissances divisées de
+$k'\{\{T\}\}^+$, et $t = T$, c'est-à-dire $t(u^n) = 1$ si $n = 1$, $0$ sinon. On
+obtient $\mathcal{A}^*_{k*}$ avec $\operatorname{Hom}_k(\mathcal{A}^*_k, k') \simeq
+\mathcal{A}_*(k')^\wedge$ — le complété du complexe des pages 5 à 8 —, et la
+coalgèbre bigraduée $C^{\mathrm{DR,pd}}_*(\mathcal{X}, k)$ qui redonne par
+dualité toutes les structures de $C^*_{\mathrm{DR,pd}}(\mathcal{X}, k')$. Enfin
+tout se déduit du cas $\mathbb{Z}$ :
+\[
+C^{\mathrm{DR,pd}}_*(\mathcal{X}, k) \simeq C^{\mathrm{DR,pd}}_*(\mathcal{X}) \otimes_{\mathbb{Z}} k , \qquad C^*_{\mathrm{DR,pd}}(\mathcal{X}; M) = \operatorname{Hom}\bigl(C^{\mathrm{DR,pd}}_*(\mathcal{X}), M\bigr)
+\]
+pour tout groupe abélien $M$. C'est l'objet « le plus fin » annoncé page 14.
+
+\pagerange{136}{140}
+\section*{Dualisation des homomorphismes de Stokes (pages 136 à 140)}
+
+Les intégrales de Stokes $\pi_n : \mathcal{A}^n_n \to s^{k'}$ se dualisent en
+$\kappa_n : s \to (\mathcal{A}^*)_n$ en degré $n$, avec $\kappa_0 = \mathrm{id}$
+et la condition de Stokes $d_{\mathcal{A}^*}\kappa_n = \partial\,\kappa_{n-1}$,
+d'où des morphismes $C^{\mathrm{sing}}_*(\mathcal{X}, s) \to
+C^{\mathrm{DR}}_*(\mathcal{X}; s, s^+, \gamma, t)$\footnote{Le haut de la page
+136 est biffé et semble appartenir à un autre fil (faisceaux sur un ensemble
+simplicial). Dans le carré de Stokes la flèche de gauche est notée
+$\pi_{n-1}$, là où l'on attend $\kappa_{n-1}$.}.
+
+La dualité est explicite (page 138) : en degré cotangent $0$,
+$k\{\{T\}\}\{\{X_0,\ldots,X_n\}\}/(\sum X_i - T)_{\mathrm{pd}} \simeq
+k\{\{X_0,\ldots,X_n\}\}$ est dual de $k[Z_0,\ldots,Z_n] \hookrightarrow
+k[U, Y_0,\ldots,Y_n]$, $Z_i \mapsto U + Y_i$, par l'accouplement
+$\langle X^{(i)}, Z^j\rangle = \delta_{i,j}$ ; l'image est l'intersection des
+noyaux des opérateurs différentiels divisés $\bigl(\sum_i \partial/\partial Y_i
+- \partial/\partial U\bigr)^{(m)}$. En degré total égal au degré cotangent,
+$\Lambda^*[dX_0,\ldots,dX_n]/(\sum dX_i)$ est dual du sous-espace des vecteurs de
+somme nulle, noyau du produit intérieur par la forme « somme des
+coordonnées ».
+
+L'intégrale elle-même est calculée page 140 : sur $(\mathcal{A}^*_n)^n \simeq
+S\{X_0,\ldots,X_{n-1}\}\, dX_0\wedge\cdots\wedge dX_{n-1}$,
+\[
+\kappa^n\bigl(X_0^{(i_0)} \cdots X_{n-1}^{(i_{n-1})}\, dX_0 \wedge \cdots \wedge dX_{n-1}\bigr) = \gamma_{i_0 \ldots i_{n-1}}\; t^{(n + \sum i_\alpha)} ,
+\]
+avec $\gamma_{i} = \frac{(n+\sum i_\alpha)!}{\prod i_\alpha!} \int_{\sigma_n}
+X_0^{i_0}\cdots X_{n-1}^{i_{n-1}}\,dX_0\cdots dX_{n-1}$ sur le simplexe $\sigma_n
+= \{X_\alpha \geq 0,\ \sum X_\alpha \leq 1\}$. La page calcule ensuite $\gamma$
+par récurrence sur $n$ au moyen de Stokes, et la récurrence s'arrête au bas de
+la page. En fait $\gamma_i = 1$ pour tout $i$ : c'est l'intégrale de Dirichlet
+$\int_{\sigma_n} \prod X_\alpha^{i_\alpha} = \prod i_\alpha! / (n + \sum
+i_\alpha)!$\footnote{Cette évaluation est la nôtre ; elle suppose l'orientation
+standard du simplexe, à laquelle le signe est attaché. La page n'écrit, en
+accolade, que l'encadrement « $0 \leq \cdot \leq \frac{1}{n!}$,
+$\gamma_{0,\ldots,0} \overset{?}{=} \frac{1}{n!}$ », qui est le cas $i = 0$.
+Les coefficients $c_{i,l}$ de la récurrence sont ceux du produit des
+puissances divisées, ce que la page ne dit pas.}. L'intégrale, sur le simplexe
+de taille $t$, d'un monôme en puissances divisées est donc la puissance divisée
+de $t$ de l'ordre total :
+\[
+\int_{t\sigma_n} X_0^{(i_0)} \cdots X_{n-1}^{(i_{n-1})}\, dX_0\cdots dX_{n-1} = t^{(n + \sum i_\alpha)} ,
+\]
+ce qui explique pourquoi l'intégration de Stokes est définie sans dénominateur.
+
+\pagerange{143}{151}
+\section*{Le yoga coalgèbres $\mapsto$ Algèbres (pages 143 à 151)}
+
+On travaille dans le topos $\widehat{C}_k$ des préfaisceaux sur la catégorie
+opposée des $k$-algèbres, où le foncteur oubli est une $k$-Algèbre
+$\mathcal{O}_k$. Pour un $k$-module $M$, $V(M)(A) = \operatorname{Hom}_k(M, A)$
+est un $\mathcal{O}_k$-Module, représenté par $\operatorname{Sym}^*(M)$ ; d'où
+$\operatorname{Hom}_{\widehat{C}_k}(V(N), F) \simeq F(\operatorname{Sym}^* N)$ et
+\[
+\operatorname{Hom}_{\widehat{C}_k}(V(N), V(M)) \simeq \operatorname{Hom}_k(M, \operatorname{Sym}^* N) .
+\]
+Un morphisme $u^*$ est homogène de degré $n$ si et seulement si le $u$
+correspondant tombe dans $\operatorname{Sym}^n N$ (on teste sur $A = k[T]$,
+$\lambda = T$) ; les morphismes homogènes de degré $1$ sont donc exactement les
+$\operatorname{Hom}_k(M, N)$, nécessairement $\mathcal{O}_k$-linéaires, et $V$
+est pleinement fidèle (contravariant). De même, $V$ transforme sommes en
+produits, et les accouplements multilinéaires $\prod V(N_\alpha) \to V(M)$
+correspondent aux $M \to \bigotimes N_\alpha$ ; une loi bilinéaire sur $V(M)$
+est donc une comultiplication $\Delta : M \to M \otimes M$, associative,
+commutative, unitaire si la loi l'est ; une unité de $V(M)$ est une counité $M
+\to k$, une augmentation $V(M) \to \mathcal{O}_k$ un élément $e$ avec $\Delta e =
+e \otimes e$. Une limite inductive quelconque de coalgèbres est une coalgèbre.
+
+Une graduation de type $Z$ de $M$ revient à décomposer $V(M)$ en produit, et,
+si $Z$ est un groupe, à une action du groupe diagonalisable $D(Z) =
+\operatorname{Spec} k[Z]$. Une coalgèbre graduée correspond à une loi
+compatible aux graduations ; avec $Z \to \mathbb{Z}/2$ on définit les
+coalgèbres anticommutatives et \emph{alternées} ($x^2 = 0$ en degré impair),
+alterné entraînant anticommutatif ; ces conditions passent aux limites. Les
+codérivations et coantidérivations correspondent aux dérivations et
+antidérivations de $V(M)$ ; un endomorphisme de degré $\nu$ de $M$ donne un
+endomorphisme de degré $-\nu$ de $V(M)$, ce qui n'importe pas pour les
+dérivations, où seule la parité compte. Les « coproduits divisés » sont à
+traiter de même, après le cas ordinaire.
+
+\pagerange{152}{159}
+\section*{Coalgèbres et comodules (pages 152 à 159)}
+
+Si $C$ est un comodule sur la coalgèbre $s$, $V(C)$ est un Module sur $V(s)$,
+donc $C$ est un module ordinaire sur l'algèbre duale $s^k =
+\operatorname{Hom}_k(s, k)$, $u \in s^k$ opérant par $C \xrightarrow{\Delta_C}
+C \otimes s \xrightarrow{\mathrm{id} \otimes u} C$. On récupère la structure de
+comodule si $C \otimes s \to \prod_{u \in s^k} C$ est injectif, ce qui est le cas
+si $s$ est \emph{libre} sur $k$ (sans hypothèse de platitude sur $C$).
+Exemple : $s = k[U]$, $s^k = k\{\{T\}\}$ ; $C = k[U, Y_0,\ldots,Y_n]$ est un
+module sur $C^k = k\{\{T\}\}\{\{X_0,\ldots,X_n\}\}$, $T^{(i)}X^{(i_0)}_0\cdots$
+opérant par les opérateurs différentiels divisés $D_U^{(i)} D_{Y_0}^{(i_0)}
+\cdots$, localement nilpotents.
+
+Pour $s$ cocommutative, unitaire et libre de base $(e_\alpha)$, les modules qui
+proviennent d'un comodule sont ceux pour lesquels $u \mapsto u.x$ est continu
+pour la topologie de la convergence simple sur $s^k \simeq k^A$ et la topologie
+discrète sur $C$ ; la catégorie des $s$-comodules gradués équivaut à celle des
+$s^k$-modules gradués « localement nilpotents » en ce sens\footnote{Ce sont
+les modules qu'on appelle aujourd'hui \emph{rationnels} (ou discrets) sur
+l'algèbre duale d'une coalgèbre.}. Si $u \in (s^k)_n$, $u_C$ \emph{diminue} les
+degrés de $n$ ; pour qu'il les augmente il faut changer le signe des degrés,
+$V(C)^m = V(C_{-m})$ — ce que reprennent les notes de la page 159.
+
+\pagerange{161}{171}
+\section*{Les homomorphismes de l'algèbre simpliciale $\mathcal{A}_*$ (pages 161 à 171)}
+
+Notons $\mathcal{A}_S = \mathcal{A}(S, S^+, t)_*$ l'algèbre simpliciale des
+pages 5 à 8, pour un anneau $S$ à idéal à puissances divisées $S^+$ et $t \in
+S^+$ ; on a $(\mathcal{A}_S)_0 = S$ et $(\mathcal{A}_S)_1 \simeq
+S\{X_0\}[dX_0]$, avec les deux augmentations $\alpha(X_0) = 0$ et
+$\beta(X_0) = t$ (faces vers $(\mathcal{A}_S)_0$).
+
+\textbf{Théorème} (page 161). \emph{Les homomorphismes d'anneaux simpliciaux
+$\varphi_* : \mathcal{A}_S \to \mathcal{A}_{S'}$ — sans respecter a priori ni
+graduation, ni filtration, ni puissances divisées — correspondent
+biunivoquement aux systèmes $(\varphi_0, A'_1, (B'_i)_{i \geq 1})$ formés d'un
+homomorphisme d'anneaux $\varphi_0 : S \to S'$, de $A'_1 = \sum_{j \geq 1}
+a'_j X_0^{(j)} \in \operatorname{Ker}(\alpha)$ et de $B'_i = \sum_{j \geq 0}
+b'_{ij}X_0^{(j)} \in S'\{X_0\}$, soumis aux conditions :}
+\emph{1) $\varphi_0(t^{(i)}) = \varphi_0(t)^{(i)}$ — $\varphi_0$ commute
+nécessairement aux puissances divisées sur $(t)_{\mathrm{pd}}$ ;}
+\emph{2) $\beta(A'_1) = \varphi_0(t)$, i.e.\ $\sum_j a'_j\, t'^{(j)} =
+\varphi_0(t)$ ;}
+\emph{3) $(2B'_i)\,J' = 0$ pour tout $i$, où $J' \subset S'$ est l'idéal
+engendré par les coefficients $a'_j$ et $b'_{jk}$.}
+
+On reconstitue $\varphi_1$ par $\varphi_1|_S = \varphi_0$,
+$\varphi_1(X_0^{(i)}) = A_1'^{(i)} + B'_i\,dX_0$, $\varphi_1(dX_0) = dA'_1$, et
+$\varphi_n$ en écrivant $(\mathcal{A}_S)_n = S\{U_0,\ldots,U_{n-1}\}[dU_0,
+\ldots,dU_{n-1}]$, $U_r = X_0 + \cdots + X_r$, et en posant $\varphi_n(U_r^{(i)})
+= A_1'^{(i)}\{U_r\} + B'_i\{U_r\}\,dU_r$. La condition 3) ne sert qu'à partir
+de $n = 2$, pour que les images de variables différentes commutent\footnote{La
+page ne fait que l'affirmer ; voici la raison. Si $a + b$ et $a' + b'$ sont deux
+éléments dont les parties de degré $1$ sont $b = B_r\,dU_r$ et $b' = B'_s\,dU_s$
+($r \neq s$), leur commutateur est $bb' - b'b = 2\,bb' = 2B_rB'_s\,dU_r\,dU_s$ ;
+de même avec $\varphi_n(dU_s) = A_1'^{\mathrm{der}}\{U_s\}\,dU_s$. D'où
+l'annulation de $2B'_i$ contre les coefficients des $A'$ et des $B'$.}.
+Si $\varphi_0(t)$ est régulier, ou si le coefficient $a'_1$ est inversible, 3)
+signifie $2B'_i = 0$.
+
+\emph{Corollaire 1.} Si $2$ est inversible dans $S'$ (sous l'une de ces
+conditions), $\varphi_*$ respecte la graduation, et si $S^+ =
+(t)_{\mathrm{pd}}$, les puissances divisées.
+\emph{Corollaire 2.} $\varphi_*$ commute aux puissances divisées si et
+seulement si $B'_i = A_1'^{(i-1)}B'_1$ ; il respecte les graduations si et
+seulement si $B'_i = 0$ (et alors il commute aux puissances divisées).
+\emph{Corollaire 3.} Il respecte la filtration croissante grossière si et
+seulement si $A'_1 = a'_1X_0$ et $B'_i \in \mathrm{Fil}^{i-1}$ ; graduations et
+filtrations ensemble : $A'_1 = a'_1X_0$ et $B'_i = 0$, et ces $\varphi$ sont
+les prolongements canoniques des $(\varphi_0, \lambda)$ avec
+$\lambda t' = \varphi_0(t)$\footnote{La page écrit « $B'_i = 0$, $i \geq 0$ » ;
+les $B'_i$ ne sont définis que pour $i \geq 1$.}.
+\emph{Corollaire 4.} $\varphi_*$ respecte toujours la filtration décroissante
+associée au degré extérieur.
+
+\emph{Le cas $S = k\{T\}$, $S' = k'\{T\}$.} $\varphi_0$ est donné par
+$\varphi_{00} : k \to k'\{T\}$, $\lambda \mapsto \sum_i \delta_i(\lambda)
+T^{(i)}$, avec $\delta_0$ homomorphisme, $\delta_i(1) = 0$ pour $i \geq 1$ et
+$\delta_i(\lambda\lambda') = \sum_{j+l=i} \binom{i}{j} \delta_j(\lambda)
+\delta_l(\lambda')$\footnote{La page écrit la règle de Leibniz sans le
+coefficient binomial ; il est imposé par $T^{(j)}T^{(l)} = c_{j,l}T^{(j+l)}$.
+Les $\delta_i$ forment ce qu'on appelle aujourd'hui une \emph{dérivation de
+Hasse–Schmidt} (écrite ici dans la base des puissances divisées).}, et par
+$\varphi_0(T)$, fixé par 2). Identifiant $S'\{X_0\} = k'\{T\}\{X_0\} \simeq
+k'\{X_0, X_1\}$ ($T = X_0 + X_1$), on a $A'_1 = \sum_{i \geq 1, j \geq 0}
+\alpha_{ij}X_0^{(i)}X_1^{(j)}$ et $\varphi_0(T) = \sum_i \alpha_{i,0}T^{(i)}$.
+
+\textbf{Corollaire 5.} \emph{Les homomorphismes $\mathcal{A}(k\{T\}, k\{T\}^+, T)
+\to \mathcal{A}(k'\{T\}, k'\{T\}^+, T)$ sont donnés par $\varphi_{00} : k \to
+k'\{T\}$, $A'_1 \in k'\{X_0,X_1\}$ sans terme en $X_1^{(j)}$ seul, et des $B'_i
+\in k'\{X_0,X_1\}$, avec la seule condition $(2b'_{ij})J' = 0$.} Ils commutent
+aux puissances divisées si $B'_i = A_1'^{(i-1)}B'_1$, aux graduations
+extérieures si $B'_i = 0$, aux filtrations croissantes grossière ou fine sous
+des conditions explicites (pages 169 et 171), au degré total si $\varphi_0(k)
+\subset k'$, $A'_1 = \alpha'_0X_0$ et $B'_i$ homogène de degré $i-1$ en
+$(X_0,X_1)$. Ceux qui respectent les deux graduations sont exactement les
+prolongements des $u_{\varphi_{00}, \alpha'_0} : k\{T\} \to k'\{T\}$, $T \mapsto
+\alpha'_0 T$ — « vous voyez un minimum ! »\footnote{Sous e), page 171, la
+condition sur $\varphi_0$ et $A'_1$ qui devrait précéder celle des $B'_i$ ne se
+lit pas ; seule la ligne des $B'_i$ est écrite.}.
+
+\pagerange{173}{179}
+\section*{Le schéma en groupes des automorphismes (pages 173 à 179)}
+
+On complète : $\widehat{\mathcal{A}}_{k,n} \simeq k\{\{T\}\}\{\{X_0,\ldots,
+X_{n-1}\}\}[dX_0,\ldots,dX_{n-1}]$ ; les résultats sont les mêmes, $A$ et les
+$B_i$ devenant des séries à puissances divisées dans $k\{\{X_0,X_1\}\}$. Pour un
+endomorphisme $\varphi_*$ de la $k$-algèbre différentielle simpliciale
+$\widehat{\mathcal{A}}_{k*}$, écrivons $A = \sum_{i \geq 1, j \geq 0}
+\alpha_{ij}X_0^{(i)}X_1^{(j)}$ et $\varphi_0(T) = \sum_{j \geq 1} \lambda_j
+T^{(j)}$ ; on a $\alpha_{1,0} = \lambda_1$, l'\emph{indicateur}
+$\Delta(\varphi_*)$ de $\varphi_*$\footnote{Le mot est hésitant sur la page :
+« discriminant » biffé, « déterminant » ajouté, « indicateur » doublement
+souligné et peut-être lui aussi barré ; c'est celui de l'énoncé.}.
+
+\textbf{Théorème.} \emph{$\varphi_*$ est un automorphisme si et seulement si
+son indicateur est inversible. $\Delta$ est alors multiplicatif, $\Delta(1) =
+1$, d'où un homomorphisme $\Delta : \Omega(k) =
+\operatorname{Aut}(\widehat{\mathcal{A}}_{k*}) \to k^* = \mathbf{G}_m(k)$.}
+
+Les éléments de $\Omega(k)$ sont les systèmes $(a_{jk})_{j \geq 1, k \geq 0}$,
+$(b_{ijk})$ d'éléments de $k$ (coefficients de $A$ et des $B_i$ en puissances
+divisées de $T$), soumis aux seules conditions $a_{10} \in k^*$ et $2b_{ijk} =
+0$ (la condition 3 du théorème, $a_{10}$ étant inversible). Le foncteur
+$\Omega$ est donc représentable par le schéma affine
+\[
+\Omega \simeq \operatorname{Spec}\Bigl(\mathbb{Z}\bigl[(A_{jk}), (B_{ijk})\bigr] \big/ (2B_{ijk})\Bigr)\bigl[A_{10}^{-1}\bigr] ,
+\]
+c'est-à-dire $\mathbf{G}_m \times \mathbf{G}_a^{(\mathbb{N}^* \times
+\mathbb{N}) \smallsetminus \{(1,0)\}} \times {}_2\mathbf{G}_a^{\mathbb{N}^* \times
+\mathbb{N} \times \mathbb{N}}$ comme schéma, où ${}_2\mathbf{G}_a$ est le noyau de
+la multiplication par $2$\footnote{La page écrit l'indice ${}_2$ aussi devant le
+premier facteur $\mathbf{G}_a$, celui des $a_{jk}$, qui ne sont soumis à aucune
+condition hors $a_{10}$ ; la transcription signale que c'est peut-être un
+trait parasite. Nous suivons la description par les coefficients, qui est sans
+ambiguïté.}. C'est un schéma en groupes sur $\mathbb{Z}$ — « par abus de
+langage, le schéma en groupes d'automorphismes de l'anneau différentiel
+simplicial $\widehat{\mathcal{A}}_{\mathbb{Z}*}$ ». La section $\delta :
+\mathbf{G}_m \to \Omega$, $\lambda \mapsto (A = \lambda X_0, B_i = 0)$, soit
+$T \mapsto \lambda T$ et $X_i \mapsto \lambda X_i$, fait de $\Omega$ un produit
+semi-direct de $\mathbf{G}_m$ et d'un groupe unipotent fibre par fibre.
+
+Si $2$ est inversible dans $k$, les automorphismes respectent le degré
+extérieur ; leurs effets sur la cohomologie des $\operatorname{Hom}(X_*,
+\widehat{\mathcal{A}}_{k*})$ sont donc des opérations de degré $0$, qui se
+factorisent par $\Delta$ : des multiplications par des puissances de $\lambda
+\in k^*$ fixées par le bidegré\footnote{La page écrit « mult.\ par $\lambda^i$
+dans $H^i$ » au bout d'une phrase en grande partie illisible ; l'exposant exact
+dépend de l'indexation retenue, et nous ne le fixons pas.}. Aucune opération
+intéressante ne sort donc de là.
+
+\pagerange{181}{199}
+\section*{La caractéristique $2$, et les endomorphismes de $\mathcal{A}_1$ (pages 181 à 199)}
+
+« Si donc on veut trouver des opérations cohomologiques intéressantes », il
+faut se placer dans le cas où $2$ n'est pas inversible : « on peut espérer
+trouver alors une description des carrés de Steenrod mod $2$ ». On peut aussi
+appliquer le foncteur $\tau_\omega$, $M \mapsto M_\omega$, qui fait de
+$X_* \mapsto \operatorname{Hom}(X_*, \mathcal{A}_*)$ un foncteur à valeurs dans
+les algèbres différentielles de la catégorie abélienne $\mathcal{M}_\omega$
+(« de type Artin », avec un $\otimes$), et chercher les types d'anneaux et de
+foncteurs en oubliant la graduation. Le dossier ne revient pas sur ces
+espoirs.
+
+\textbf{Proposition} (page 185). \emph{Soient $S$ un anneau commutatif et $A =
+S\{X_0\}[dX_0]$, augmentée par $\alpha$. Les endomorphismes de $S$-algèbre
+différentielle augmentée de $A$ sont donnés par $\varphi(X_0^{(i)}) = A_1^{(i)} +
+B_i\,dX_0$, $\varphi(dX_0) = A_1'\,dX_0$, où $A_1 \in S\{X_0\}^+$ et les $B_i \in
+S\{X_0\}$ sont arbitraires ; $\varphi$ commute aux puissances divisées si et
+seulement si $B_i = A_1^{(i-1)}B_1$.} \emph{Corollaire : s'il respecte la
+graduation, il respecte les puissances divisées.} Pour $S = k\{T\}$, la
+compatibilité à la seconde augmentation $\beta$ ($\beta(X_0) = T$) s'écrit
+$\beta(A_1) = T$ ; posant $f = A_1 - X_0$ et identifiant $S\{X_0\} \simeq k\{X_0,
+X_1\}$, les deux conditions disent $f \in (X_0)_{\mathrm{pd}} \cap
+(X_1)_{\mathrm{pd}}$, soit $f = \sum_{i,j \geq 1} f_{ij}X_0^{(i)}X_1^{(j)}$.
+
+\textbf{Proposition} (pages 189 à 191). \emph{Les endomorphismes de la
+$S$-algèbre différentielle $\mathcal{A}_1$ compatibles aux deux augmentations
+sont donnés par $f = \sum_{i,j \geq 1} f_{ij}X_0^{(i)}X_1^{(j)}$ et des $B_i \in
+k\{X_0,X_1\}$, par $\varphi(X_0^{(i)}) = (X_0 + f)^{(i)} + B_i\,dX_0$ et
+$\varphi(dX_0) = dX_0 + df$.}\footnote{La page écrit $\varphi(dX_0) = 1 +
+df$ ; c'est $d(X_0 + f)$.} Échanger $X_0$ et $X_1$ change $f$ en $-f$ et les
+$B_i$ en $C_i = \sum_{j \leq i} (-1)^{j+1}T^{(i-j)}B_j$.
+
+\textbf{Proposition} (page 193). \emph{Un tel $\varphi$ se prolonge de façon
+unique en des $\varphi_n$ compatibles à toutes les $\sigma : \Delta_n \to
+\Delta_1$.} Le corollaire — les endomorphismes de l'algèbre simpliciale $A_*$
+correspondent aux $\varphi$ — est barré, avec en marge « faux tel quel ; vrai si
+$2B_i = 0$ ». C'est exactement la condition 3) du théorème de la page 161, qui
+en est la version corrigée. La démonstration (pages 195 à 199) utilise les
+surjections $\sigma_r : \Delta_n \to \Delta_1$, $A_*(\sigma_r)(X_0) = U_r = X_0 +
+\cdots + X_r$, le lemme $A_n^0 \simeq S\{U_0,\ldots,U_{n-1}\}$, et l'unique
+morphisme d'algèbres $U_r^{(i)} \mapsto \sigma_r^*(\xi_i)$ ; il reste à vérifier
+que les images des $dU_r$ sont de carré nul, anticommutent entre elles et
+commutent aux $\xi_{s,i}$ — c'est là que surgit, dans la note marginale,
+l'annulation de $2b_{ik}$. Le lemme final sur les morphismes d'algèbres
+différentielles $S\{U\}[dU] \to B$ s'interrompt avec le lot.
+
+\pagerange{201}{211}
+\section*{Endomorphismes de l'anneau différentiel simplicial (pages 201 à 211)}
+
+On ne demande plus que $\varphi$ induise l'identité sur $\mathcal{A}_0 = S$.
+$\mathcal{A}_*(S, S^+, t)$ est fonctoriel en $(S, S^+, t)$ pour les morphismes
+$(u, \lambda)$, $u$ homomorphisme à puissances divisées et $\lambda \in S'$ avec
+$u(t) = \lambda t'$, par $X_i \mapsto \lambda X_i$, $dX_i \mapsto \lambda dX_i$ ;
+la composition est $(u', \lambda')(u, \lambda) = (u'u, u'(\lambda)\lambda')$, et
+ces morphismes respectent la filtration naturelle $\mathrm{Fil}$\footnote{Dans
+l'énoncé de la page 203 il écrit « $\lambda' \in S'$ », puis $u(t) = \lambda
+t'$ et un but $\mathcal{A}_*(S, S'^+, t')$ ; nous lisons $\lambda \in S'$ et
+$\mathcal{A}_*(S', S'^+, t')$.}. Si $t'$ est régulier, $\lambda$ est déterminé
+par $u$ ; c'est le cas pour $S = k\{T\}$, $t = T$, lorsque $k$ est sans
+torsion.
+
+Soient $G_k$ le monoïde des $(u, \lambda)$ avec $u(T) = \lambda T$, $H_k$ celui
+des endomorphismes $S_k$-linéaires, $\Omega_k$ celui de tous les
+endomorphismes de $k$-algèbre différentielle simpliciale. On a
+\[
+G_k \cap H_k = \Bigl\{u_\lambda \Bigm| \lambda = 1 + \textstyle\sum_{i \geq 1}\lambda_iT^{(i)},\ (i+1)\lambda_i = 0\Bigr\} ,
+\]
+puisque $\lambda T = \sum_i (i+1)\lambda_iT^{(i+1)}$ ; c'est trivial si $k$ est
+sans torsion, et si $k$ est une $\mathbb{Q}$-algèbre $\Omega_k$ est produit
+semi-direct de $G_k \simeq G'_k = \operatorname{End}_{k\text{-alg.\ augm.}}(k\{T\})$ et du noyau.
+
+Premier invariant : $\varphi_0 \in \operatorname{End}(S_k)$, donné par les
+$\tau_i = \varphi_0(T^{(i)})$ avec $\tau_i\tau_j = c_{i,j}\tau_{i+j}$ ; chaque
+$\varphi_n$ est $\varphi_0$-semi-linéaire. Second invariant : $\varphi_1$.
+\textbf{Proposition} (page 209). \emph{Les homomorphismes d'anneaux
+différentiels $S\{X_0\}[dX_0] \to S'\{X_0\}[dX_0]$ au-dessus de $\varphi_0$,
+compatibles à l'augmentation $\alpha$, sont donnés par des $\xi_i = A_i +
+B_i\,dX_0$ avec $A_i = A_1^{(i)} \in S'\{X_0\}^+$, via $\varphi_1(X_0^{(i)}) =
+\xi_i$, $\varphi_1(dX_0) = d\xi_1$ ; graduations respectées si et seulement si
+$B_i = 0$, puissances divisées si et seulement si $B_i = A_1^{(i-1)}B_1$.}
+\emph{Remarque} : tout $\varphi_1$ s'écrit de façon unique $\psi_1 \circ
+\overline{\varphi}_0$, où $\overline{\varphi}_0$ prolonge $\varphi_0$
+canoniquement et $\psi_1$ est un $S'$-endomorphisme augmenté. La compatibilité
+à $\beta$ donne $\beta(A_1) = \varphi_0(T)$ et $\varphi_0(T^{(i)}) =
+\varphi_0(T)^{(i)}$ ; lorsque $\varphi_0(T) = T$, on retrouve $A_1 = X_0 + f$
+avec $f = \sum_{i,j \geq 1} f_{ij}X_0^{(i)}X_1^{(j)}$\footnote{La page 211 écrit
+$f = \sum X_0^{(i)}X_1^{(j)}$ sans coefficients, et sans rappeler la condition
+$\varphi_0(T) = T$ sous laquelle la forme de $f$ est celle des pages 189 et
+191.}. Le calcul de la page 201, qui développe $A_0$ en puissances de $X_0$,
+appartient à ce même fil.
+
+\pagerange{214}{216}
+\section*{L'algèbre alternée libre à puissances divisées (pages 214 à 216)}
+
+Sur une feuille marquée « Feuille à part ! » :
+
+\textbf{Théorème.} \emph{Soient $(S, I)$ un anneau à idéal à puissances
+divisées, $M^* = M^0 \oplus M^1$ un $S$-module gradué modulo $2$, $A(M^*) =
+\Gamma^*_S(M^0) \otimes_S \Lambda^* M^1$, augmentée vers $S$, et $J =
+\varepsilon^{-1}(I)$. a) Il existe une unique structure à puissances divisées,
+au sens gradué, sur $J$ — c'est-à-dire sur ses éléments de degré pair, les
+puissances divisées d'ordre $\geq 2$ d'un élément impair étant nulles —,
+compatible à celle de $I$ et fonctorielle en $(S, M^*)$. b) Pour toute
+$S$-algèbre alternée graduée modulo $2$, $B^*$, munie d'un idéal gradué à
+puissances divisées $K^*$ compatible à $I$, la restriction}
+\[
+\operatorname{Hom}_{S\text{-alg.\ à p.d.}}\bigl((A(M^*), J), (B^*, K^*)\bigr) \xrightarrow{\ \sim\ } \operatorname{Hom}_{S\text{-mod.\ gr.}}(M^*, K^*)
+\]
+\emph{est bijective : $A(M^*)$ est l'algèbre alternée à puissances divisées
+libre engendrée par $M^*$.}\footnote{Deux écarts. (i) La page formule a) pour
+une structure à puissances divisées sur tout $J = J^0 + J^1$, prolongée aux
+éléments impairs par $(x + u)^{(i)} = x^{(i)} + x^{(i-1)}u$. Elle découvre
+elle-même, page 216, que l'additivité $(x+y)^{(i)} = \sum x^{(j)}y^{(i-j)}$ et la
+règle $(\lambda x)^{(i)} = \lambda^i x^{(i)}$ ne valent alors que pour des
+éléments qui « commutent strictement » ($x^1y^1 = 0$) : pour $u, v$ impairs,
+$(u+v)^{(2)} = uv$ devrait être nul. La formulation correcte est celle de la
+théorie de Cartan (Séminaire H.~Cartan, 1954--1955), où les puissances divisées
+ne portent que sur les éléments de degré pair ; c'est celle que nous
+énonçons. (ii) La vérification des axiomes est laissée inachevée page 216, à
+l'axiome (4) $(x^{(i)})^{(j)} = \frac{(ij)!}{(i!)^j\,j!}x^{(ij)}$ ; elle est
+reprise et achevée sur une autre feuille, pages 246 et 248. Pour la partie
+paire $\Gamma_S(M^0)$ avec l'idéal $I$, c'est la théorie classique des
+puissances divisées (Roby), que le dossier ne redémontre pas.}
+
+\pagerange{218}{222}
+\section*{Les quatre complexes (pages 218 à 222)}
+
+Soient $A$ un anneau commutatif et $M$ un $A$-module ; on gradue par le degré
+de $\Lambda^*M$.
+
+(1) \emph{De Rham.} Sur $\operatorname{Sym}^*M \otimes \Lambda^*M$, l'unique
+antidérivation $d$ nulle sur $\Lambda^1M$ et égale à l'isomorphisme canonique
+sur $\operatorname{Sym}^1M$ ; $d^2 = 0$, $d : \operatorname{Sym}^p \otimes
+\Lambda^q \to \operatorname{Sym}^{p-1} \otimes \Lambda^{q+1}$. C'est le complexe
+de De Rham du fibré vectoriel $V(M)$. Si $M$ est plat et $A$ une
+$\mathbb{Q}$-algèbre, sa cohomologie est $A$ en degré $0$ (lemme de Poincaré) ;
+en caractéristique $p$, il y a « les opérations de Cartier »\footnote{Ce qu'on
+appelle aujourd'hui l'isomorphisme de Cartier.}.
+
+(2) \emph{Koszul.} L'unique antidérivation $\delta$ nulle sur
+$\operatorname{Sym}^1M$, égale à l'isomorphisme $\Lambda^1M \to
+\operatorname{Sym}^1M$ sur $\Lambda^1$ ; $\delta : \operatorname{Sym}^p \otimes
+\Lambda^q \to \operatorname{Sym}^{p+1} \otimes \Lambda^{q-1}$. Si $M$ est plat,
+sans condition de caractéristique, l'homologie est $A$ en degré $0$.
+
+(3) \emph{De Rham à puissances divisées.} Sur $\Gamma^*M \otimes \Lambda^*M$,
+l'unique antidérivation compatible aux puissances divisées, $d(x^{(i)}) =
+x^{(i-1)}dx$, nulle sur $\Lambda^1M$ et égale à l'isomorphisme sur $\Gamma^1M$ :
+c'est le complexe de De Rham à puissances divisées de $\Gamma^*M$. Si $M$ est
+plat, sa cohomologie est $A$ en degré $0$, sans condition de caractéristique.
+
+(4) \emph{Koszul à puissances divisées.} L'unique dérivation compatible aux
+puissances divisées, nulle sur $\Gamma^1M$, induisant $\Lambda^1M \to \Gamma^1M$ ;
+si $M$ est plat et $A$ de caractéristique $0$, l'homologie est $A$ en degré
+$0$ ; en caractéristique $p$ « on doit avoir une histoire d'opérations de
+Cartier ».
+
+\emph{Relations} (page 220). Les quatre algèbres différentielles sont
+fonctorielles en $(A, M)$, transforment sommes en produits tensoriels et
+commutent aux limites inductives filtrantes. Le morphisme canonique
+$\operatorname{Sym}^*M \otimes \Lambda^*M \to \Gamma^*M \otimes \Lambda^*M$ est
+compatible à $d$ et à $\delta$, et c'est un isomorphisme en caractéristique
+$0$. Le calcul de (3) se fait en se ramenant à $M$ libre de type fini (Lazard),
+puis par Künneth à $M$ libre de rang $1$ ; celui de (4) se ramène à (2), qui se
+traite comme (1). L'opérateur $\delta$ est un cas particulier du complexe de
+Koszul d'une forme linéaire $\varphi : \mathcal{M} \to S$ : $H_0 =
+S/\varphi(\mathcal{M})$, et pour $\mathcal{M}$ libre de type fini l'acyclicité en
+degrés $> 0$ a lieu si une base donne une suite $S$-régulière, condition
+nécessaire si $S$ est noethérien et $\varphi(\mathcal{M}) \subset
+\operatorname{rad}S$.
+
+\emph{L'opérateur d'Euler} (page 221). $\theta = d\delta + \delta d$, anticommutateur
+de deux antidérivations, est une dérivation (compatible aux puissances divisées
+dans le cas de $\Gamma$), égale à l'identité sur $\operatorname{Sym}^1$ (ou
+$\Gamma^1$) et sur $\Lambda^1$ ; c'est donc la multiplication par le degré total
+$n = p + q$ sur $\operatorname{Sym}^p \otimes \Lambda^q$ (ou $\Gamma^p \otimes
+\Lambda^q$). Comme $d$ et $\delta$ conservent le degré total, chaque complexe se
+scinde selon ce degré, et la composante de degré total $n$ est acyclique, pour
+$d$ comme pour $\delta$, dès que $n \cdot 1_A$ est inversible — sans hypothèse
+de platitude\footnote{La page dit « $H^n_{\mathrm{DR}}$ et $H^n_{\mathrm{Kosz}}$
+sont nuls pour tout $n > 0$ », en mélangeant le degré extérieur et le degré
+total ; c'est la composante de degré total $n$ que $\theta$ annule en
+cohomologie.}. En particulier $\operatorname{Sym}^kM \xrightarrow{d}
+\operatorname{Sym}^{k-1}M \otimes M$ est injectif si $k$ est inversible, car
+$\delta d = k$ sur $\operatorname{Sym}^kM$.
+
+\emph{Dualité.} Un accouplement $M \otimes M' \to A$ induit
+$\operatorname{Sym}^*M \times \Gamma^*M' \to A$ et $\Lambda^*M \times \Lambda^*M'
+\to A$, parfaits si $M$ est projectif de type fini et $M'$ son dual ; par ces
+accouplements $d_M$ et $\delta_{M'}$, $\delta_M$ et $d_{M'}$, multiplication et
+comultiplication sont transposés les uns des autres.
+
+\pagerange{224}{225}
+\section*{Deux feuilles volantes sur Dold--Puppe (pages 224 et 225)}
+
+Deux feuillets d'une encre plus pâle, « paumés » dit la marge, appartiennent à
+une rédaction numérotée qui n'est pas dans le dossier (ils renvoient à des
+propositions 3, 4 et 5 absentes). La « Proposition 6 » exprime le foncteur
+$\mathrm{ND}_\bullet$ des chaînes normalisées : $\mathrm{ND}_i(L_*) \simeq
+\operatorname{Hom}_{k,*}(\Lambda^i\Phi_*, L_*)$, la différentielle provenant de
+celle de $\Lambda^\bullet\Phi_*$, par la symétrie de Dold–Puppe et
+$\mathrm{ND}(\Lambda^i\Phi_*) \simeq C^{i-1}_\bullet$ ; le corollaire donne la
+version cosimpliciale $\mathrm{ND}^\bullet(L^*) \simeq \Lambda\Phi_* \otimes_{k,*}
+L^*$. La page 225 en contient une première ébauche, biffée.
+
+\pagerange{226}{232}
+\section*{Calculs d'homotopie (pages 226 à 232)}
+
+\textbf{Proposition 1.} \emph{$\Phi_*$ est homotope à $0$.} Par Dold–Puppe il
+suffit que le complexe normalisé le soit : il est réduit à $k$ en degrés $0$ et
+$1$, l'opérateur de bord étant l'identité.
+
+\emph{Corollaire 1.1.} Pour tout foncteur $F$, $F(\Phi_*)$ est homotope à
+$F(0)$ ; en particulier $\Lambda^i\Phi_*$, $\Gamma^i\Phi_*$,
+$\operatorname{Sym}^i\Phi_*$ sont homotopes à $0$ pour $i \neq 0$.
+
+\emph{Corollaire 1.2.} $\pi_i(\Psi_*) \simeq \pi_{i-1}(k_*)$ : $\Psi_*$ est un
+$K(k,1)$, de complexe normalisé $k[1]$.
+
+\emph{Corollaire 1.3.} $\Lambda^i\Psi_*$ est un $K(k, i)$. Dans le langage des
+foncteurs dérivés de Dold–Puppe, c'est $\mathrm{L}\Lambda^i(k[1]) \simeq k[i]$ ;
+on le voit aussi par la suite exacte $0 \to \Lambda^{i-1}\Psi_* \to
+\Lambda^i\Phi_* \to \Lambda^i\Psi_* \to 0$, à terme médian contractile.
+
+Les « mêmes arguments », ajoute la page, montreraient que $\Gamma^i\Psi_*$ et
+$\operatorname{Sym}^i\Psi_*$ sont des $K(k,i)$, « nettement moins
+économiques »\footnote{C'est faux en général. La formule de décalage de la page
+361 donne $\mathrm{L}\operatorname{Sym}^i(k[1]) \simeq
+\mathrm{L}\Lambda^i(k)[i]$, nul pour $i \geq 2$ puisque $\Lambda^i k = 0$ :
+$\operatorname{Sym}^i\Psi_*$ est contractile pour $i \geq 2$. Et si $k$ est une
+$\mathbb{Q}$-algèbre, $\Gamma^i \simeq \operatorname{Sym}^i$, donc
+$\Gamma^i\Psi_*$ l'est aussi. L'argument par la suite exacte ne s'étend pas :
+c'est pour $\Lambda$ que la suite $\Lambda^{i-1}\Psi \to \Lambda^i\Phi \to
+\Lambda^i\Psi$ existe.}.
+
+\emph{Corollaire 1.4.} Pour un $k$-module simplicial $A_*$, $\pi_\ell(A_*
+\otimes \Lambda^i\Psi_*) \simeq \pi_{\ell-i}(A_*)$ : par Eilenberg–Zilber, le
+complexe de $A_* \otimes B_*$ est équivalent à $A^!_* \otimes B^!_*$, et
+$(\Lambda^i\Psi_*)^!$, complexe de projectifs d'homologie $k$ en degré $i$, est
+homotopiquement équivalent à $k[i]$ ; c'est une « suspension additive ».
+
+\emph{Corollaire 1.5.} Pour $C^{p,q}_* = \Gamma^p\Phi_* \otimes \Lambda^q
+\Psi_*$, $\pi_\ell(C^{p,q}_*)$ vaut $k$ si $p = 0$ et $\ell = q$, et $0$ sinon.
+En degré total $n$, les composantes $C^{n,0}_*, \ldots, C^{1,n-1}_*$ sont donc
+flasques, et seule $C^{0,n}_*$ ne l'est pas : la ligne est le tronqué $\tau^{\leq
+n}$ d'une résolution flasque de $k_*$, et
+\[
+C^{\bullet,\, \text{total } n}_{\mathrm{DRpd}}(X_*, k) \simeq \tau^{\leq n}\,\mathrm{R}\Gamma(X_*, k) , \qquad H^{p,q}_{\mathrm{DRpd}}(X_*, k) \simeq H^q(X_*, k) \quad (p \geq 0) ,
+\]
+ce qui redémontre le calcul de la page 8\footnote{La page indexe par (total
+$p$, extérieur $i$) : $H^{p,i} \simeq H^i$ si $i \leq p$, $0$ si $i > p$.}.
+
+\pagerange{232}{240}
+\section*{La version complétée et filtrée (pages 232 à 240)}
+
+Soient $S$ un anneau à idéal à puissances divisées $S^+$, $t \in S^+$, et
+supposons $S$ séparé et complet pour la filtration par les $S^{[i]}$, adhérences
+des idéaux engendrés par les $t^{[j]}$, $j \geq i$. On considère l'anneau
+simplicial complété
+\[
+\widehat{A}^*_n = S\{\{X_0,\ldots,X_n\}\}/(\textstyle\sum X_i - t)_{\mathrm{pd}} \otimes_S \Lambda[dX_0,\ldots,dX_n]/(\textstyle\sum dX_i) ,
+\]
+de sorte que $\widehat{A}^*_* \simeq \widehat{A}^0_* \otimes_S \Lambda\Psi^S_*$
+et $\pi_\ell(\widehat{A}^i_*) \simeq \pi_{\ell-i}(\widehat{A}^0_*)$. On filtre
+$\widehat{A}^0_*$ par les idéaux fermés stables par puissances divisées
+engendrés par la condition que les $X_i$ et $t$ soient de filtration $\geq 1$ :
+$\mathrm{Fil}^p$ est formé des $\sum a_{i}X^{[i]}$ avec $a_i \in S^{[p - \sum
+i_\alpha]}$. Avec $k = S/S^{[1]}$, et \emph{si $k\{T\} \to \mathrm{Gr}^*(S)$ est
+un isomorphisme}, $\mathrm{Gr}^p(\widehat{A}^0_*) \simeq \Gamma^p_k(\Phi^k_*)$ est
+contractile pour $p > 0$. Filtrant $\widehat{A}^*_*$ par $\mathrm{Fil}^p =
+\sum_{i \leq p} \mathrm{Fil}^{p-i}(\widehat{A}^0_*) \otimes \Lambda^i\Psi_*$,
+stable par la différentielle, on voit $\mathrm{Fil}^p(\widehat{A}^*_*)$ comme une
+résolution de $\mathrm{Fil}^pS$ dont les termes de degré $< p$ sont flasques et
+dont le terme de degré $p$ a pour seul groupe d'homotopie $\pi_p = k$. D'où,
+pour $q \leq p$, un carré commutatif
+\[
+\begin{array}{ccc}
+H^i\bigl(\mathrm{Fil}^p C^*_{\mathrm{DR}}(\mathcal{X}; S, t, \gamma)\bigr) & \xrightarrow{\ \sim\ } & H^i(\mathcal{X}, \mathrm{Fil}^pS) \\
+\downarrow & & \downarrow \\
+H^i\bigl(\mathrm{Fil}^q C^*_{\mathrm{DR}}(\mathcal{X}; S, t, \gamma)\bigr) & \longrightarrow & H^i(\mathcal{X}, \mathrm{Fil}^qS)
+\end{array}
+\]
+dont la flèche du haut est un isomorphisme pour $i \leq p$, celle du bas pour
+$i \leq q$.
+
+Sans l'hypothèse sur $\mathrm{Gr}^*(S)$, « on ne peut rien dire ». Pour $t =
+0$, $S \simeq k$ et $\mathrm{Gr}^p \simeq \Gamma^p_k(\Psi_*)$, qui n'est flasque
+pour aucun $p$ si $k \neq 0$. Pour $(\mathbb{Z}_p, p)$, la filtration
+à puissances divisées définie par $p$ est cofinale à la filtration $p$-adique si
+$p \neq 2$ ; pour $p = 2$ elle est constante, $\mathrm{Fil}^i\mathbb{Z}_2 =
+2\mathbb{Z}_2$ pour $i \geq 1$, et $\mathrm{Gr}^*(S) \simeq \mathbb{F}_2$ : cas
+dégénéré. Le calcul de la page 240 le justifie : avec la formule de
+Legendre, $v_p(p^n/n!) = \frac{(p-2)n + s_p(n)}{p-1}$, et
+$\gamma_{p,i} = \inf_{n \geq i} v_p(p^n/n!)$ vaut $1$ si $p = 2$ (les puissances
+de $2$ ont un seul chiffre) et est $> \frac{p-2}{p-1}\,i \to +\infty$ si $p
+\neq 2$. Si $i$ se termine par $s$ chiffres $p - 1$, on a $v_p(p^{(i+1)}) -
+v_p(p^{(i)}) = 1 - s$, donc
+\[
+v_p\bigl(p^{(i)}\bigr) \leq v_p\bigl(p^{(i+1)}\bigr) \iff s \leq 1 \iff p^2 \nmid i+1 ,
+\]
+et $\gamma_{p,i} = \gamma_{p,i+1}$ dès que $p \mid i+1$\footnote{La page
+conclut « $\iff s = 0 \iff i+1 \not\equiv 0 \pmod p$ » : en comparant les sommes
+de chiffres de $i$ et de $i+1$, elle omet l'unité ajoutée au chiffre $i_s$. Pour
+$p = 3$, $i = 2$, on a $v_3(3^2/2!) = 2 = v_3(3^3/3!)$, avec $3 \mid i+1$. La
+seconde affirmation, « il suffit que $i + 1 \equiv 0 \pmod p$ » pour
+$\gamma_{p,i} = \gamma_{p,i+1}$, est exacte.}.
+
+\pagerange{243}{260}
+\section*{Les catégories $\mathcal{M}_N$ et les modules négligeables (pages 243 à 260)}
+
+\subsection*{Adjoints de l'inclusion}
+
+Soit $S$ un anneau commutatif $\mathbb{Z}$-gradué à degrés $\geq 0$, $S^0 = k$,
+$\mathcal{M}$ la catégorie des $S$-modules gradués, $\mathcal{M}_N$ celle des
+modules nuls en degrés $< N$ ($\mathcal{M}_N = \mathcal{M}_0[-N]$),
+$\mathcal{N}$ celle des $k$-modules, et $i : \mathcal{N} \to \mathcal{M}_0$, $M
+\mapsto M \otimes_k S$. L'inclusion $i_{N,N'} : \mathcal{M}_{N'} \hookrightarrow
+\mathcal{M}_N$ ($N' \geq N$) commute aux limites ; elle a un adjoint à droite,
+la troncature $\tau_{N'}$ (sous-module $\bigoplus_{i \geq N'} M_i$), et un
+adjoint à gauche $q_{N'}(M) = M/\langle M_i,\ i < N'\rangle$. Ce sont des
+« foncteurs de localisation » ; $q$ est exact à droite, $\tau$ exact et commute
+à toutes les limites, donc est le quotient par la sous-catégorie épaisse des
+modules nuls en degrés $\geq N'$, et a encore un adjoint à droite :
+\[
+\rho_{N'}(P)_i = \operatorname{Hom}^i_{\mathcal{M}}\bigl(\tau_{N'-i}S, P\bigr) , \qquad \rho_{N,N'} = \tau_N\,\rho_{N'} .
+\]
+On a donc la chaîne d'adjoints $q_{N'} \dashv i_{N'} \dashv \tau_{N'} \dashv
+\rho_{N'}$, $i$ et $\rho$ pleinement fidèles\footnote{Le foncteur $\rho$ de
+ces pages est le $\varphi$ des pages 26, 256 et 290 ; nous gardons $\varphi$
+ailleurs.}.
+
+Le foncteur $\tau_N \circ i : \mathcal{N} \to \mathcal{M}_N$ a pour adjoint à
+droite $k \circ \rho_N$ ($k$ = composante de degré $0$), et sont équivalents
+(page 251) : a) $\tau_N \circ i$ est pleinement fidèle ; b) $P
+\xrightarrow{\sim} (\rho_N\tau_N(P \otimes_k S))_0$ ; c) $k \circ \rho_N$ est
+une localisation ; et aussi c') pour $0 \leq \alpha \leq N-1$, $P \otimes
+S_\alpha \xrightarrow{\sim} \operatorname{Hom}^\alpha(\tau_{N-\alpha}S, P
+\otimes_k S)$, soit $\operatorname{Hom}^\alpha(S/\tau_{N-\alpha}S, P \otimes_k S)
+= 0$ — c'est le théorème des pages 26 à 31.
+
+\subsection*{Algèbres différentielles graduées à puissances divisées}
+
+Les feuilles 246 et 248, écrites tête-bêche, fixent les axiomes d'une algèbre
+$(A^*, \cdot, d, J, \gamma)$ : groupe gradué à degrés $\geq 0$, algèbre
+associative unitaire alternée ($xy = (-1)^{ij}yx$, $x^2 = 0$ en degré impair),
+différentielle de degré $+1$ dérivation graduée, idéal $J = J^0 + A^+$,
+puissances divisées sur $J$ avec $x^{(\alpha)} \in A^{\alpha i}$, $x^{(\alpha)} =
+0$ pour $x$ impair et $\alpha \geq 2$, et $d\,x^{(\alpha)} = x^{(\alpha-1)}dx$.
+Elles vérifient, pour $z = x + y$ ($x \in J^0$, $y$ impair), $z^{(\alpha)} =
+x^{(\alpha)} + x^{(\alpha-1)}y$ : l'additivité « OK si $yy' = 0$ », la règle
+$(\lambda z)^{(\alpha)} = \lambda^\alpha z^{(\alpha)}$ « OK si $\eta y = 0$ »,
+et, sans condition, $z^{(p)}z^{(q)} = c_{p,q}z^{(p+q)}$ et $(z^{(\alpha)})^{(\beta)}
+= \frac{(\alpha\beta)!}{\beta!(\alpha!)^\beta}z^{(\alpha\beta)}$. C'est
+l'achèvement de la vérification laissée en suspens page 216.
+
+La page 250 écrit le complexe $C^*(X, (A, \pi, \gamma))$ : pour un anneau $A$ à
+puissances divisées et $\pi$ dans l'idéal, $A\{(X_i, dX_i)\}/(\sum X_i - \pi,
+\sum dX_i)$, contravariant en $X$ et covariant en $(A,\pi,\gamma)$ pour les
+couples $(\varphi, \lambda)$ avec $\varphi(\pi) = \lambda\pi'$, $X_i \mapsto
+\lambda X_i$. La page 252, tête-bêche elle aussi, est une suite de formules
+sans texte autour des $\Gamma^*_{(A,\pi)}(J^I)$, de la flèche $H^{2i}(X, J) \to
+H^{2i\alpha}(X, \Gamma^\alpha J)$ et de $i!\,x^{(i)} = x^i$ ; elle ne se lit pas
+comme un argument.
+
+\subsection*{Modules négligeables}
+
+Un module est \emph{$N$-négligeable} si $M_i = 0$ pour $i \geq N$,
+\emph{$\infty$-négligeable} s'il l'est pour un $N$, \emph{négligeable} si
+chacun de ses éléments est annulé par un $\tau_NS$, c'est-à-dire s'il est
+limite inductive de modules $\infty$-négligeables ; pour un module de type
+fini, négligeable équivaut à $\infty$-négligeable. Ces classes forment des
+sous-catégories épaisses, avec $\mathcal{M}/\mathrm{Nég}_N \simeq
+\mathcal{M}_N$. Notons $\mathcal{M}_\omega = \mathcal{M}/\mathrm{Nég}$ et
+$\tau_\omega$, $\varphi_\omega$ le foncteur quotient et son adjoint ; la page
+253 note que $\varinjlim \mathcal{M}_N \simeq \mathcal{M}/\mathrm{Nég}_\infty$
+n'est pas une catégorie à limites inductives filtrantes exactes\footnote{C'est
+le cadre de ce qu'on appelle aujourd'hui une catégorie quotient de Serre, ou
+localisation au sens de Gabriel.}.
+
+\emph{Proposition} (page 256) : $\varinjlim_N \varphi_N\tau_N P
+\xrightarrow{\sim} \varphi_\omega\tau_\omega P$. On teste sur les modules de
+présentation finie $M$ : les deux membres sont $\varinjlim
+\operatorname{Hom}(\tau_NM, P)$ et $\varinjlim_{M' \subset M,\ M/M' \text{
+négl.}} \operatorname{Hom}(M', P)$, et pour $M$ de type fini les deux systèmes
+de sous-objets sont cofinaux. En particulier $(\varphi_\omega\tau_\omega P)_i
+\simeq \varinjlim_N \operatorname{Hom}^i(\tau_NS, P)$, et $P$ est dans l'image
+essentielle de $\varphi_\omega$ si et seulement si a) $P$ n'a pas d'élément
+négligeable non nul, et b) tout homomorphisme de degré $i$ d'un $\tau_NS$ dans
+$P$ se prolonge à $S$ — toute extension de $(S/\tau_NS)[-i]$ par $P$ est triviale.
+
+\emph{Foncteurs dérivés} (page 260). De $\operatorname{Hom}_{\mathcal{M}}(M,
+\varphi_N\tau_NP) = \operatorname{Hom}(i_N\tau_NM, P)$ et de l'exactitude de
+$\tau_N$ vient, pour $M$ projectif,
+\[
+\operatorname{Hom}\bigl(M, \mathrm{R}\varphi_N(\tau_NP)\bigr) \simeq \mathrm{R}\operatorname{Hom}(\tau_NM, P) , \qquad \operatorname{Hom}\bigl(M, \mathrm{R}^n\varphi_N(\tau_NP)\bigr) \simeq \operatorname{Ext}^n(\tau_NM, P) .
+\]
+
+\pagerange{262}{276}
+\section*{Reconstruire un complexe à partir de son ombre (pages 262 à 276)}
+
+Avec $M = S[-i]$ : $\bigl(\mathrm{R}^n\varphi_N(\tau_NP)\bigr)_i \simeq
+\operatorname{Ext}^n\bigl((\tau_{N-i}S)[-i], P\bigr)$, et de même pour
+$\varphi_\omega$ en passant à la limite sur $N$.
+
+Soient $C$ une catégorie abélienne et $i : C \to \mathcal{M}_{N_0}$ un foncteur
+exact tel que $i \simeq \varphi\tau\, i$. La page en conclut
+$(\mathrm{R}^n\varphi)(\tau\, i(M)) = 0$ pour $n > 0$, en écrivant $\mathrm{R}^*i
+\simeq \mathrm{R}^*(\varphi\tau i) \simeq (\mathrm{R}^*\varphi)(\tau i)$ « car
+$\tau i$ est exact ». Appliqué à $C = \mathrm{Mod}(k)$, $i(M) = M \otimes_k S$ —
+qui est bien dans l'image essentielle, par le théorème de la page 26 —, cela
+donnerait l'énoncé encadré
+\[
+\operatorname{Ext}^n_{\mathcal{M}}\bigl((\tau_{N-i}S)[-i], M \otimes_k S\bigr) = 0 \qquad (n > 0,\ i \geq 0) ,
+\]
+le corollaire annoncé page 26. La justification ne suffit pas telle
+quelle\footnote{Pour composer les foncteurs dérivés, $\mathrm{R}(\varphi \circ
+G) \simeq \mathrm{R}\varphi \circ G$, il faut que $G = \tau \circ i$ envoie les
+injectifs de $C$ sur des objets $\varphi$-acycliques, et l'exactitude de $G$ ne
+le donne pas : $\tau$ préserve les injectifs (son adjoint à gauche est exact),
+mais $i$, adjoint à \emph{gauche} du foncteur exact « composante de degré $0$ »,
+préserve les projectifs et non les injectifs. Nous n'avons pas établi
+l'annulation par un autre chemin, et la laissons comme un énoncé du dossier,
+non démontré. Ce qui suit en dépend.}.
+
+Sous cette annulation, la reconstruction suit (pages 266 à 272). Soient $K^\bullet$
+un complexe de $C$, $L^\bullet$ un complexe de $\mathcal{M}$ et $\alpha :
+i(K^\bullet) \to L^\bullet$ dans $D(\mathcal{M}_{N_0})$ tel que
+$\tau_\omega\alpha$ soit un isomorphisme dans $D(\mathcal{M}_\omega)$ — noyau et
+conoyau des $H^n(\alpha)$ négligeables. Alors $i(K) \simeq
+\mathrm{R}\varphi_\omega(\tau_\omega L^\bullet)$, et si $i$ est pleinement fidèle
+avec un adjoint à droite $k$ exact, $k \circ i \simeq \mathrm{id}$, on obtient
+dans $D(C)$
+\[
+K^\bullet \simeq \mathrm{R}(k \circ \varphi_\omega)\bigl(\tau_\omega L^\bullet\bigr) :
+\]
+\emph{$K^\bullet$ se reconstitue à partir de son ombre $\tau_\omega(i(K^\bullet))
+\simeq \tau_\omega(L^\bullet)$}. En termes de $\sigma = \tau_\omega \circ i : C \to
+\mathcal{M}_\omega$, pleinement fidèle et exact, d'adjoint à droite $\psi =
+k\varphi_\omega$ (« peut-être pas exact »), avec $\psi\sigma \simeq
+\mathrm{id}$, la page 272 énonce : $D^+(C) \to D^+(\mathcal{M}_\omega)$ est
+pleinement fidèle, compatible à la multiplication\footnote{Une tentative de
+simplification, $K \simeq k\,\varphi_\omega(\tau_\omega L)$ sans dériver, est
+encadrée et barrée page 268 ; un calcul par la suite spectrale $E_2^{pq} =
+\mathrm{R}^q\psi(H^p(L))$, page 270, est aussi traversé de traits.}. C'est le
+« en raffinant un peu » de la page 10 : la catégorie dérivée des $k$-modules se
+plonge dans celle des ombres.
+
+Les pages 274 et 276 cherchent à écrire explicitement $i \to
+\varphi_{0,N}\tau_{N,0}\,i$ comme un noyau, $M \hookrightarrow
+M^{[N,+\infty[} \rightrightarrows M^{[N,+\infty[ \times \mathbb{N}}$, avec les
+relations $c_{\ell,k}x_k - c_{\ell,k-i}x_{k+\ell}$, et définissent, dans une
+catégorie abélienne $k$-linéaire, les objets $\underline{\operatorname{Hom}}(M,
+X)$ et $M \otimes_k X$ par leurs propriétés universelles ; la page 276 est un
+brouillon sur l'exactitude d'un foncteur, sans conclusion.
+
+\pagerange{278}{284}
+\section*{Le produit cotensoriel (pages 278 à 284)}
+
+La page 278 reprend le point de vue des coalgèbres : $S = k[U]$ ($U^n$ de degré
+$-n$), d'algèbre duale $k\{\{T\}\}$, le foncteur $i_* : M \mapsto M \otimes_k S$,
+et la cotroncature $\sigma_N(P) = P/\tau_{N+1}(P)$ ; un théorème de pleine
+fidélité est énoncé et le calcul s'arrête sur
+« $\operatorname{Hom}_{\mathcal{M}}(S, \tau^NN \otimes_kS) \simeq N$ ?? ». Les pages
+280 à 284 posent, pour deux comodules $C$, $C'$ sur la coalgèbre $S$,
+\[
+P = C \,\square_S\, C' = \operatorname{Ker}\bigl(C \otimes C' \rightrightarrows C \otimes S \otimes C'\bigr) ,
+\]
+le produit tensoriel « au-dessus de $S$ » des comodules, dual de
+$V(C) \boxtimes_{V(S)} V(C')$\footnote{La page écrit le terme de droite $C
+\otimes C' \otimes S$, puis biffe le $\otimes S$ final ; c'est ce qu'on appelle
+aujourd'hui le \emph{produit cotensoriel}. Le passage aux intersections
+$P_\infty = \bigcap P_i$ d'une suite décroissante, et la question de savoir si
+$P \to P \otimes S$ est bien le coproduit, restent des calculs sans
+conclusion. La moitié inférieure de la page 280, tête-bêche et raturée, porte
+sur les coalgèbres à puissances divisées et se lit mal.} ; la question
+encadrée est $(M \otimes_k S) \boxtimes_S C \simeq M \otimes_k C$ ?, et la page 284
+écrit qu'un accouplement $V(C) \times V(C') \to V(C'')$ bilinéaire par rapport
+à $V(S)$ revient à un morphisme de coalgèbres $C'' \to C \,\square_S\, C'$.
+
+\pagerange{286}{298}
+\section*{Modules gradués : la mise au propre (pages 286 à 298)}
+
+$S$ commutatif $\mathbb{Z}$-gradué à degrés $\geq 0$, $k = S_0$,
+$\mathcal{M}$ les $S$-modules gradués, $M[i]$ la translation. Pour tout $N$, on
+pose $\mathcal{M}_N$ (modules nuls en degrés $< N$) et $\mathcal{M}^N$ (nuls en
+degrés $> N$) ; $\mathcal{M}_N = \mathcal{M}_0[-N]$, $\mathcal{M}^N =
+\mathcal{M}^0[-N]$, et toute la donnée équivaut au couple $(\mathcal{M}_0,
+\mathcal{M}^0)$.
+
+\textbf{Proposition 1.} \emph{L'inclusion $i_N : \mathcal{M}_N \hookrightarrow
+\mathcal{M}$ s'insère dans une suite de quatre foncteurs adjoints $q_N \dashv
+i_N \dashv \tau_N \dashv \varphi_N$, avec $\tau_N(P) = \bigoplus_{i \geq N}P_i
+\subset P$ et}
+\[
+(\varphi_N Q)_i = \operatorname{Hom}^i_{\mathcal{M}}\bigl(\tau_{N-i}(S), Q\bigr) = \operatorname{Hom}^*_{\mathcal{M}}\bigl(\tau_{N-i}(S)[-i], Q\bigr)_0 ,
+\]
+\emph{la structure de module venant de la multiplication $\tau_{N-i-k}S \to
+\tau_{N-i}S$ par $u \in S_k$, transposée.} La coünité $\tau_N\varphi_N Q
+\xrightarrow{\sim} Q$ est un isomorphisme ; l'unité $P \to \varphi_N\tau_NP$
+vient de $P_i \simeq \operatorname{Hom}^i(S, P) \to \operatorname{Hom}^i(\tau_{N-i}S,
+\tau_NP)$, tout homomorphisme de degré $i$ de $\tau_{N-i}S$ dans $P$ tombant dans
+$\tau_NP$. Enfin $q_N(P) = P/\langle P_i,\ i < N\rangle$, « qu'on n'utilisera
+pas ».
+
+\emph{Corollaire.} $i_N$ et $\tau_N$ commutent à toutes les limites, $q_N$ aux
+limites inductives, $\varphi_N$ aux limites projectives ; $i_N$ et $\varphi_N$
+sont pleinement fidèles, $q_N$ et $\tau_N$ des localisations ; $\tau_N$ est la
+localisation par la sous-catégorie épaisse $\mathcal{M}^{N-1}$.
+
+La page 294 généralise à $\mathcal{M}(C,S)$, les $S$-modules gradués dans une
+catégorie abélienne $C$ : l'adjoint $\varphi_N$ existe si $C$ ou $C^\circ$ est
+une catégorie de Grothendieck, le foncteur $P \mapsto
+\operatorname{Hom}(\tau_NP, Q)$ transformant limites inductives en limites
+projectives, et la même formule le décrit\footnote{L'étape intermédiaire porte
+« justifier » au-dessus du signe d'égalité.} ; par dualité, $\mathcal{M}^N(C,S)^\circ
+\simeq \mathcal{M}_{-N}(C^\circ, S)$, et $i^N$ s'insère dans la suite
+$\varphi^N \dashv \tau^N \dashv i^N \dashv q^N$. Le feuillet 298, sans prose,
+reprend les homomorphismes homogènes entre tronqués des pages 36 à 40 et la
+relation $c_{i,\ell}\,\xi_{i+\ell} = c_{i-d,\ell}\,\xi_i$ pour les homomorphismes
+de degré négatif.
+
+\pagerange{300}{309}
+\section*{Notations simpliciales. Constructions universelles (pages 300 à 309)}
+
+Une chemise de sa main (page 300) ouvre une série paginée de 1 à 17.
+$\Delta$ est la catégorie des ordinaux $\Delta^n = [0,n]$, $\widehat{\Delta} =
+\mathcal{S}s = \mathrm{Ens}_*$ ; pour une catégorie $\mathcal{A}$, $\mathcal{A}_*
+= \underline{\operatorname{Hom}}(\Delta^\circ, \mathcal{A})$ (objets simpliciaux),
+$\mathcal{A}^* = \underline{\operatorname{Hom}}(\Delta, \mathcal{A})$ (objets
+cosimpliciaux), et $(\mathcal{A}^\circ)^* = (\mathcal{A}_*)^\circ$\footnote{Il
+écrit $\underline{\operatorname{Hom}}(\Delta^\circ, \mathrm{Ens})$ et
+$\underline{\operatorname{Hom}}(\Delta, \mathrm{Ens})$ là où il faut
+$\mathcal{A}$. La marge précise : la notation $\widehat{\Delta}$ quand on veut
+garder à l'esprit la nature algébrique très particulière de ce topos,
+$\mathcal{S}s$ quand on veut l'oublier au profit de sa signification
+topologique.}. Le programme est énoncé d'emblée : étudier les objets
+simpliciaux — « l'équivalent combinatoire des espaces topologiques » — et leurs
+types d'homotopie via des invariants covariants ou contravariants, « dans
+l'esprit de l'algèbre universelle », avec leurs structures et les opérations
+qu'on peut définir sur eux.
+
+Les composantes s'écrivent $K_{[n]}$ et non $K_n$, réservé aux complexes de
+chaînes ; une dualité $v : \mathcal{A}^\circ \simeq \mathcal{B}$ (typiquement les
+modules projectifs de type fini sur $k$ commutatif) fait « monter et
+descendre les indices », $K^{[n]} = K_{[n]}^\vee$. Le foncteur pleinement fidèle
+$\Delta \hookrightarrow \widehat{\Delta}$, $n \mapsto \Delta^n_*$, est l'\emph{objet
+cosimplicial universel} $\Delta^*_*$, avec $\operatorname{Hom}(\Delta^n_*, X_*)
+\simeq X_{[n]}$. Les objets à plusieurs indices s'écrivent $K^*{}_*$, $K^{**}$,
+$K_{**}$, avec un symbole ${}^\sigma K$ pour le symétrisé, afin de ne pas
+brouiller la convention de montée des indices.
+
+\textbf{Proposition 1.} \emph{Si $\mathcal{A}$ a des limites inductives,
+$F \mapsto F(\Delta^*)$ est une équivalence de la catégorie des foncteurs
+$\mathcal{S}s \to \mathcal{A}$ commutant aux limites inductives sur
+$\mathcal{A}^*$ ; dualement pour $\mathcal{B}$ à limites projectives et les
+foncteurs $\mathcal{S}s^\circ \to \mathcal{B}$ transformant limites inductives
+en limites projectives, avec $\mathcal{B}_*$.} L'inverse est $X_* \mapsto
+\varinjlim_{\Delta^n \in \Delta/X_*} K^{[n]}$ ; c'est vrai pour toute petite
+catégorie, et « bien connu »\footnote{C'est l'extension de Kan à gauche le long
+du plongement de Yoneda, ou le couple nerf–réalisation. La page écrit $K_*$,
+$K_{[n]}$ pour l'objet cosimplicial, et $\varphi$ pour $\psi$ dans la version
+duale.}. Le yoga : les invariants covariants commutant aux limites inductives
+sont des objets cosimpliciaux de $\mathcal{A}$ ; les invariants contravariants
+correspondants sont des objets simpliciaux de $\mathcal{B}$, et pour
+$\mathcal{B} = \mathrm{Ens}$ des ensembles simpliciaux $K_*$, représentant $X_*
+\mapsto \operatorname{Hom}(X_*, K_*)$.
+
+Puis la réflexion de méthode qui oriente tout le dossier. Ces invariants obtenus
+« à coups de foncteurs représentables » sont de nature trop « grosse » et
+« fruste » pour être intéressants directement — ce ne sont pas des invariants du
+type d'homotopie. On devra en extraire d'autres, plus subtils, « qui ne seront
+pas de nature si simple ». « Notre propos sera de mettre sur les invariants gros
+[\ldots] une machinerie de structures supplémentaires raisonnables, et dans les
+catégories de structures de ce type (complexes de chaînes ou de cochaînes,
+algèbres cosimpliciales etc.) d'inverser les flèches qui sont obtenues à partir
+d'équivalences d'homotopie [\ldots] L'invariant ainsi obtenu, plus grossier bien
+sûr, mais plus subtil dans sa définition, et moins redondant, exprime donc de
+façon plus ou moins complète le type d'homotopie, ou en saisit de façon
+adéquate tel ou tel aspect. »
+
+Pour $\mathcal{A}$ additive karoubienne, la théorie de Dold–Puppe donne des
+équivalences $\mathrm{ND} : \mathcal{A}_* \rightleftarrows \mathcal{A}_\bullet
+: \mathrm{DP}$ avec les complexes de chaînes, et dualement avec les complexes de
+cochaînes ; la même lettre désigne alors quatre avatars $K^*$, $K_*$,
+$K^\bullet$, $K_\bullet$\footnote{C'est la correspondance de Dold–Kan ; $\mathrm{ND}$
+est le complexe normalisé (« non dégénéré »), $\mathrm{DP}$ son inverse.}, et les
+objets mixtes sont des bicomplexes. Remarque essentielle : les bicomplexes sont
+à différentielles qui \emph{commutent}, contrairement aux conventions de
+Cartan–Eilenberg, avec un signe dans la différentielle totale ; il « n'a pas eu
+encore besoin vraiment » d'une convention de degré pour les bicomplexes mixtes.
+
+\pagerange{310}{317}
+\section*{L'invariant additif universel (pages 310 à 317)}
+
+\textbf{Proposition 2.} \emph{Si $\mathcal{A}$ est additive à limites
+inductives, les foncteurs $\mathcal{S}s \to \mathcal{A}$ commutant aux limites
+inductives équivalent aux complexes de cochaînes $\mathcal{A}^\bullet$ ; si
+$\mathcal{B}$ est additive à limites projectives, les foncteurs $\mathcal{S}s^\circ
+\to \mathcal{B}$ qui transforment limites inductives en limites projectives
+équivalent aux complexes de chaînes $\mathcal{B}_\bullet$.}\footnote{L'indice
+de la seconde ligne se lit « comm.\ aux $\varinjlim$ », avec doute ; c'est la
+transformation des limites inductives en limites projectives qui convient.}
+
+Pour $\mathcal{B} = \mathrm{Ab}$ : si $K_\bullet$ correspond à $F$, et
+$\mathbb{C}_*(X_*) = \mathbb{Z}(X_*) = (n \mapsto \mathbb{Z}^{(X_{[n]})})$ est
+l'abélianisé de $X_*$, $\mathbb{C}_\bullet(X_*)$ son complexe normalisé,
+\[
+F(X_*) \simeq \operatorname{Hom}_{\mathrm{Ab}_*}\bigl(\mathbb{C}_*(X_*), K_*\bigr) \simeq \operatorname{Hom}_{\mathrm{Ab}_\bullet}\bigl(\mathbb{C}_\bullet(X_*), K_\bullet\bigr) .
+\]
+Deux conclusions. 1° Ces invariants ne dépendent que de $\mathbb{C}_\bullet(X_*)$,
+« l'invariant additif universel » ; vus comme foncteurs de $C_\bullet$, ce sont
+exactement les représentables. Une structure plus riche sur $F$ — une
+multiplication — n'est pas reconstruite par $C_\bullet$ seul : il faut tenir
+compte de structures supplémentaires de $C_\bullet$ « qui peuvent s'expliciter en
+se rappelant que $C_\bullet$ provient d'un $X_*$ », et « l'étude systématique de
+ces structures » est, dit-il, « le contenu essentiel de nos réflexions ». Une
+structure de $k$-module, en revanche, se lit sur $C_\bullet \otimes k$. 2° Il y a
+une solution universelle, $F_0(X_*) = \mathbb{C}_\bullet(X_*)$ à valeurs dans
+$\mathcal{B}_0 = (\mathrm{Ab}_\bullet)^\circ$.
+
+\textbf{Proposition 3} (« nouvelle forme de l'énoncé du théorème de
+Dold–Puppe »). \emph{Pour toute catégorie additive $\mathcal{B}$ à limites
+projectives, $\varphi \mapsto \varphi \circ F_0$ est une équivalence entre les
+foncteurs $\mathcal{B}_0 \to \mathcal{B}$ et les foncteurs $\mathcal{S}s^\circ
+\to \mathcal{B}$ qui commutent aux limites au sens ci-dessus.} Sous la forme
+équivalente avec $\widehat{\Delta}_{\mathrm{ab}}$ et l'abélianisation
+$G_0 : X \mapsto \mathbb{Z}(X)$, l'énoncé vaut pour toute petite catégorie à la
+place de $\Delta$ : un foncteur $\widehat{\Delta}_{\mathrm{ab}} \to \mathcal{A}$
+commutant aux limites inductives a un adjoint à droite, et se lit sur
+$\underline{\operatorname{Hom}}(\Delta, \mathcal{A})$\footnote{C'est dire que la
+catégorie des préfaisceaux abéliens sur $\Delta$ est la complétion libre de
+$\Delta$ par limites inductives dans le monde additif, et que l'abélianisation
+est l'objet universel. La démonstration de la page 313 est esquissée (« on a
+pratiquement terminé »).}. En variante : l'objet cosimplicial $n \mapsto
+\mathbb{Z}(\Delta^n_*)$ de $\mathrm{Ab}_*$ est universel pour les objets
+cosimpliciaux des catégories additives à limites inductives.
+
+Du point de vue de l'algèbre universelle : les invariants additifs s'expriment
+par des objets simpliciaux ou des complexes, et les « opérations sur les
+invariants » $\Omega$ par des objets $L_*$ ou $L_\bullet$ de $\mathrm{Ab}_*$ ou
+$\mathrm{Ab}_\bullet$, avec $\Omega(F) \simeq \operatorname{Hom}(L_*, K_*)$, et
+dualement $G(X_*) \simeq \mathbb{C}_*(X_*) \otimes K^*$ pour les covariants.
+Remarques. a) Les mêmes $L$ servent, contravariants dans un cas, covariants dans
+l'autre. b) La question des constructions possibles est ainsi résolue « de façon
+quasi-tautologique », parce qu'on a admis des catégories de valeurs très
+générales ; si l'on se restreint à un type $L$ de limites, on doit trouver la
+sous-catégorie pleine $U_L$ engendrée par les $\mathbb{C}_*(\Delta^n)$ par ces
+limites — « il doit résulter des principes généraux (que je n'ai pas
+détaillés) » ; on le vérifie pour $L = \varnothing$, sommes finies. c) Pour
+$\mathcal{B} = \mathrm{Ab}$, $F(X_*) \simeq \Omega_*(\mathbb{C}_*(X_*)^\circ)$.
+Tout cela vaut pour une petite catégorie quelconque, et dans le contexte non
+additif\footnote{La liste passe de c) à e) : il n'y a pas de d) sur ces pages.
+Les fins des pages 311 et 316 sont très surchargées, avec des insertions
+superposées dont l'ordre est incertain ; la lecture de b) et c) est mince.}.
+
+e) \emph{Le rôle de Dold–Puppe.} L'avantage des complexes sur les objets
+simpliciaux est que la description d'un objet y est « nettement plus simple — on
+se perd facilement dans la description des opérations simpliciales ! » ; $L_*$
+apparaît comme « une sorte de version pléthorique de $L_\bullet$ ». « Néanmoins,
+dès que $\mathrm{Ab}_{k*}$ et $\mathrm{Ab}_{k\bullet}$ ont chacun leur structure
+multiplicative — qui ne se correspondent \emph{pas} par DP et ND —, celle de
+$\mathrm{Ab}_{k*}$ est plus simple à beaucoup d'égards, et s'introduit d'ailleurs
+de bien des façons par la suite de façon absolument impérieuse », et les
+opérations $\Lambda^i$, $\otimes^i$, $\operatorname{Sym}^i$ « manquent purement et
+simplement » sur les complexes, sauf à les y transporter par DP\footnote{C'est
+le fait, aujourd'hui standard, que la correspondance de Dold–Kan n'est pas
+monoïdale : elle ne l'est qu'à homotopie près, par les applications
+d'Eilenberg–Zilber et d'Alexander–Whitney (pages 356 à 359).}.
+
+\pagerange{319}{324}
+\section*{Gribouillis : coalgèbres et puissances divisées (pages 319 à 324)}
+
+Une chemise bleue (page 318) porte « Gribouillis vrac » et « Au fil des
+jours… ». Pour une coalgèbre $A$ et $F_A(X) = \operatorname{Hom}(A, X)$, il
+cherche une transformation naturelle $\Gamma^*F_A(X) \to F_A(\Gamma^*X)$ et
+montre que les données suivantes se déterminent (pages 319 à 322, puis 328) :
+(1) une quasi-commutation de $F_A$ aux $\Gamma^p$, compatible à la structure
+multiplicative $\beta_{pq}$ de $\Gamma$ et à la composition $\gamma_{pq} :
+\Gamma^{pq} \to \Gamma^p\Gamma^q$ ; (2) des $u_p \in \operatorname{Hom}(A,
+\Gamma^pA)$ tels que
+\[
+u_0 = 1,\quad u_1 = \mathrm{id}, \qquad u_p\,u_q = c_{p,q}\,u_{p+q} , \qquad \Gamma^p(u_q) \circ u_p = \gamma^A_{pq} \circ u_{pq} ,
+\]
+c'est-à-dire un homomorphisme d'algèbres à puissances divisées $k\{T\} \to
+\operatorname{Hom}(A, \Gamma^*A)$ avec $\Gamma^p(u(T^{(q)}))\,u(T^{(p)}) =
+\gamma^A_{pq}\,u(T^{(pq)})$ ; (3) des applications non linéaires $f \mapsto
+f^{(p)}$ de $\operatorname{Hom}_k(A, M)$ dans $\operatorname{Hom}_k(A,
+\Gamma^pM)$, fonctorielles en $M$, avec $(f+g)^{(p)} = \sum f^{(i)}g^{(j)}$ ;
+(4)–(6) des puissances divisées fonctorielles sur $\operatorname{Hom}_k(A, J)$
+pour tout anneau à idéal à puissances divisées $(B, J)$. L'additivité se vérifie
+sur le cas universel $f = \mathrm{pr}_1$, $g = \mathrm{pr}_2$ : $\Gamma^p(\Delta)
+(u_p) = \sum_{i+j=p} u_i \otimes u_j$.
+
+Les « deux questions » de la page 323 : $\operatorname{Hom}_k(A, J)$ est-il un
+idéal à puissances divisées de l'anneau $\operatorname{Hom}_k(A, B)$ (c'est
+$\check{A} \otimes J$ si $A$ est libre de type fini) ? Les $u_n = u_1^{(n)}$
+pour $B = \Gamma^*A$ satisfont-ils la relation, et sont-ils les seuls ? Et
+dualement pour une algèbre augmentée et une cogèbre à coproduits divisés. Ces
+pages, et les suivantes de même sujet, sont des calculs sans conclusion
+énoncée.
+
+\pagerange{325}{327}
+\section*{Un feuillet étranger : la structure projective d'une courbe (pages 325 à 327)}
+
+Trois feuillets à l'encre bleue, écrits en travers, changent de sujet. Pour une
+courbe $X$ projective lisse connexe sur $\mathbb{C}$ de genre $g \geq 2$,
+l'uniformisation donne un torseur canonique sous $GP(1)_{\mathbb{C}}$ muni d'une
+connexion intégrable : en chaque $x$, les isomorphismes du revêtement universel
+pointé avec le demi-plan de Poincaré forment un torseur sous $\operatorname{Aut}
+(D_0) \simeq GP(1, \mathbb{R})$, d'où par extension un torseur sous
+$GP(1,\mathbb{C})$, plat, associé à $\pi_1 \to GP(1, \mathbb{R}) \subset
+GP(1,\mathbb{C})$\footnote{$GP(1)$ est sa notation pour le groupe projectif
+$PGL_2$, quotient de $SL_2$ par $\mu_2$, comme le dit la suite exacte de la page
+325. Un énoncé « une et une seule application analytique » de $\tilde{X}(x)$
+dans $T_x(X)$, d'image un disque et de dérivée l'identité, y est noté.}. La
+question encadrée : trouver une connexion intégrable algébrique canonique sur
+$\mathbb{P}(\Omega^{-1} \oplus \Omega) = \overline{V(\Omega^2)}$. La page 327
+calcule les classes d'Euler et l'obstruction à relever le torseur de
+$GP(1,\mathbb{R})$ à $SL(2,\mathbb{R})$ dans $H^2(X, \mathbb{Z}/2)$, avec $E' =
+\frac12 E$ et « $2g - 2 \sim g - 1$ »\footnote{Les diagrammes de la page 327
+relient $H^4(B_{SL_2}, \mathbb{Z})$, $H^2(B_{GP(1)}, \mathbb{Z})$ et leurs
+réductions modulo $2$ ; nous ne les restituons pas au-delà de ce qu'en dit ce
+résumé. Aujourd'hui on parle de \emph{structure projective} (ou d'oper) sur la
+courbe, et de l'inégalité de Milnor–Wood pour le nombre d'Euler.}. Ces calculs
+sont épars et la lecture en est mince.
+
+\pagerange{328}{334}
+\section*{Gribouillis, suite : la structure à puissances divisées induite (pages 328 à 334)}
+
+Retour au sujet des pages 319 à 324. Le foncteur $F_A$ commute au produit
+tensoriel ; on définit $u^X_* : \Gamma^*F(X) \to F(\Gamma^*X)$ par $x^{(p)} =
+u^X_p(\gamma^p(x))$, et l'on vérifie que c'est un homomorphisme d'algèbres et que
+$x \mapsto x^{(p)}$ satisfait l'additivité, $(\lambda x)^{(p)} =
+\lambda^px^{(p)}$, $x^{(p)}x^{(q)} = c_{p,q}x^{(p+q)}$, et — par le diagramme de
+la page 331 — $(x^{(p)})^{(q)} = \frac{(pq)!}{(p!)^q\,q!}\,x^{(pq)}$. La page 332
+réduit la compatibilité d'un morphisme aux puissances divisées à la vérification
+sur des générateurs ; la page 333 écrit la liste des axiomes d'une algèbre $A$
+opérant sur un idéal $J$ « sans $1$ » muni de $\gamma^p : J \to J$, et se demande
+si $F(J) \subset F(A)$ hérite des puissances divisées. La moitié inférieure de
+la page 329, qui définit $\operatorname{Sym}^*A \to A$ par $x_1\cdots x_n \mapsto
+\frac{1}{n!}x_1\cdots x_n$, est barrée ; la page 330 ne porte qu'une ligne
+biffée.
+
+\pagerange{336}{340}
+\section*{Gribouillis : rangs et cochaînes normalisées (pages 336 à 340)}
+
+La page 336 compte les rangs, sur $\Delta^N$ : $\Phi_{(N)}$ est de rang $N+1$,
+$\Psi_{(N)}$ de rang $N$, et
+\[
+\operatorname{rg}\bigl(\Gamma^p\Phi_{(N)} \otimes \Lambda^q\Psi_{(N)}\bigr) = \binom{N+p}{p}\binom{N}{q} = c_{p,q}\binom{N+p}{p+q} ,
+\]
+avec des relations de Pascal itérées $\tau^p\varphi_r = \sum_j \binom{p}{j}
+\varphi_{r-j}$ sur les polynômes de rang, pour comparer aux $\Lambda^{p+q}\Phi_*$
+— des cochaînes normalisées.
+
+Les pages 337 à 340 dressent le tableau des quatre avatars des cochaînes
+normalisées du simplexe : $\mathbb{C}^m_* = \Lambda^{m+1}\Phi_*$, avec
+$\mathbb{C}^m_{[n]} = \Lambda^{m+1}k^{n+1} = k^{\operatorname{Inj}_\Delta(\Delta^m,
+\Delta^n)}$, nul si $m > n$ et égal à $k$ si $m = n$ ; le complexe normalisé
+$\mathbb{C}^m_\bullet$ est $k$ en degrés $m$ et $m+1$ ; et les duaux. Pour
+$X_*$, $\operatorname{Hom}(X_*, \mathbb{C}^i_*) = \mathbb{C}^i(X_*)$ (cochaînes
+non dégénérées), $\mathbb{C}_*(X_*) = k^{(X_*)}$, $\mathbb{C}^*(X_*) \simeq
+\mathbb{C}_*(X_*)^\vee$. À $X_*$ il associe le foncteur $F_{X_*} : M_* \mapsto
+\operatorname{Hom}(X_*, M_*)$, et calcule $\operatorname{Hom}(F_{X_*},
+F_{\Delta^n_*}) \simeq k[X_{[n]}]^{\vee\vee}$, isomorphe à $k[X_{[n]}]$ si
+$X_{[n]}$ est fini. Il note que $k^{\operatorname{Hom}(\Delta_n, \Delta_m)} \to
+\operatorname{Hom}_k((k^{\Delta_m}, T_m), (k^{\Delta_n}, T_n))$ « n'est pas
+bijectif ! ». La page 340, numérisée à l'envers, construit l'objet cosimplicial
+$n \mapsto C^{[n]}_\bullet$ de $\mathrm{Ab}_{k\bullet}$ et son image par
+$\operatorname{Hom}_\bullet(-, \tilde{\lambda}_\bullet)$\footnote{Sur la page
+340 la seconde condition du dernier tableau répète « $j \neq i, i+1$ » pour
+« $j = i, i+1$ ». La phrase sur l'objet cosimplicial est en grande partie
+incertaine.}.
+
+\pagerange{341}{345}
+\section*{Retrouver $X$ à partir de ses cochaînes ; l'algèbre des opérateurs (pages 341 à 345)}
+
+Pour un ensemble simplicial $X_*$, les cochaînes normalisées $C^\bullet(X_*)$ ont
+une structure multiplicative ; il pose $F_*(X_*) = \bigl(n \mapsto
+\operatorname{Hom}(C^\bullet(X_*), C^\bullet(\Delta^n_*))\bigr)$ et se demande si
+$X_* \to F_*(X_*)$ est un isomorphisme, ou une équivalence d'homotopie (« est-ce
+une équiv.\ d'homotopie ? », page 344) : on a $\operatorname{Hom}(\Delta^m_*,
+\Delta^n_*) \xrightarrow{\sim} \operatorname{Hom}_{\mathrm{mult}}(F(\Delta^n_*),
+F(\Delta^m_*))$, mais $F_*(\Delta^m) = P^m_*$ est un torseur sous
+$\Psi_m^\vee \otimes \Phi_*$, et l'échange de $\varprojlim$ et
+$\operatorname{Hom}$ est en question. L'exemple du cercle $X_* =
+\operatorname{Coker}(\Delta^0_* \rightrightarrows \Delta^1_*)$ est commencé. La
+page 341 introduit un foncteur $K$, noyau de $M_{[1]} \rightrightarrows M_{[0]}$,
+et sa compatibilité au produit tensoriel. La page 342 contient un argument
+d'indépendance linéaire de caractères (homomorphismes $u_i$ distincts, idéaux
+premiers $\ker u_i$) dont la conclusion ne se lit pas.
+
+La page 345, feuillet couvert de calculs serrés, dresse l'algèbre des
+opérateurs agissant sur $\Gamma\Phi \otimes \Lambda\Psi$ : $d$, la multiplication
+$\lambda$ par $\overline{T} = dT$, l'opérateur de Koszul $\delta$, les
+multiplications $\mu_f$ par les $f \in k\{T\}$, et l'opérateur de degré
+$\Theta(x) = \deg(x)\,x$. Relations :
+\[
+d\delta + \delta d = \Theta, \quad \delta\lambda + \lambda\delta = \mu_T, \quad d\mu_f - \mu_fd = \mu_{f'}\lambda, \quad \Theta\lambda - \lambda\Theta = \lambda, \quad \Theta\mu_f - \mu_f\Theta = \mu_{\Theta f} ,
+\]
+et $d^2 = \delta^2 = \lambda^2 = 0$, $d\lambda + \lambda d = 0$, $\lambda\mu_f =
+\mu_f\lambda$, $\delta\mu_f = \mu_f\delta$, $\Theta$ commutant à $d$ et
+$\delta$ ; tout élément de l'algèbre engendrée s'écrit $\sum \mu_f
+\lambda^\alpha d^\beta \delta^\sigma \Theta^n$, $\alpha, \beta, \sigma \in
+\{0,1\}$\footnote{La relation $\delta\lambda + \lambda\delta = \mu_T$ suppose
+$\delta(\overline{T}) = T$ ; la page écrit « $\delta(\overline{T}) = 1$ », lecture
+incertaine. C'est une algèbre du type des relations de Cartan ($d\iota +
+\iota d = \mathcal{L}$) de la géométrie différentielle.}. Dans la colonne de
+droite, un début de construction du scindage de la page 77 pour $q = 1$ et $p$
+quelconque, par $(\varphi, \psi) \mapsto s(\varphi \otimes \psi)\,
+\varphi^{(p-1)}$.
+
+\pagerange{347}{351}
+\section*{Algèbres différentielles sur un topos (pages 347 à 351)}
+
+Trois pages au crayon très pâle, qui ne se lisent que par fragments : la lecture
+est mince ici. Pour un topos $\mathcal{X}$ et une résolution $k \to C^*$, il
+cherche à munir $C^*$ d'« accouplements » partiels $Z^i \times C^j \to C^{i+j}$
+et $C^i \times Z^j \to C^{i+j}$, coïncidant sur $Z^i \times Z^j$ à valeurs dans
+les cocycles, associatifs, unitaires, anticommutatifs, avec $x \circ x = 0$
+pour $x$ cocycle de degré impair, et compatibles à $d$ ; sous ces conditions,
+$C^*(U) = \Gamma(U, C^*_U)$ est une $k(U)$-algèbre et $H^*(C^*(U)) \to H^*(U,
+k_U)$ est un homomorphisme d'algèbres. L'exemple est $C^i = \Lambda^{i+1}\Phi$,
+de cocycles $Z^i \simeq \Lambda^i\Psi$, et la page 351 calcule
+$\operatorname{Hom}_k(C^i \otimes Z^j, C^{i+j}) \simeq \Lambda^i\Psi \otimes
+\Lambda^j\Psi \simeq \Lambda^{i+j}\Psi \oplus (\cdots)$. Les pages 348, 350 et
+352 sont un tapuscrit d'une autre main.
+
+\pagerange{354}{354}
+\section*{Le résumé des foncteurs universels (page 354)}
+
+Feuillet qui condense les pages 310 à 317 : pour un type $\mathcal{L}$ de
+limites, $\underline{\operatorname{Hom}}^!_{\mathcal{L}}(\mathcal{S}s^\circ,
+\mathcal{B}) \simeq \underline{\operatorname{Hom}}^!_{\mathcal{L}}(\mathcal{B}_0,
+\mathcal{B})$ avec $\mathcal{B}_0 \simeq (\mathrm{Ab}_*)^\circ$, et, encadré,
+$F(X_*) = \Omega_*(\mathbb{C}_*(X)) = \Omega_\bullet(\mathbb{C}_\bullet(X))$ ;
+la moitié tournée de la page refait l'argument de représentabilité des pages 312
+et 313.
+
+\pagerange{356}{360}
+\section*{Notes : Eilenberg--Zilber et les opérations de Steenrod (pages 356 à 360)}
+
+Les pages 356 à 375 sont d'une autre facture que le reste : des notes, avec
+références (Mac~Lane, \emph{Homology} ; Steenrod–Epstein, \emph{Cohomology
+operations} ; la thèse d'Illusie ; Dold ; Cartan ; Serre ; Lazard ; Milne,
+lecture incertaine), qui ressemblent à des notes d'exposés ou de lecture. Les
+pages ne disent pas de qui elles sont, et nous ne l'attribuons
+pas\footnote{Rien sur les feuillets ne permet de trancher entre des notes
+prises par Grothendieck à des exposés et des notes de sa propre lecture.}.
+
+\textbf{Théorème d'Eilenberg–Zilber–Cartier.} \emph{Pour un objet abélien
+bisimplicial $X_{**}$, il existe des morphismes naturels $\varphi : \int
+N X_{**} \to N\Delta X_{**}$ et $\psi$ en sens inverse, entre le complexe total
+du bicomplexe normalisé et le normalisé de la diagonale, qui coïncident avec
+les flèches évidentes en degré $0$ et sont inverses l'un de l'autre à homotopie
+naturelle près ; les homotopies sont elles-mêmes uniques à homotopie près.} Les
+choix traditionnels sont l'application d'Alexander–Whitney et celle des
+\emph{shuffles}, toutes deux associatives, la seconde (anti)commutative, la
+première commutative seulement à homotopie près ; on peut l'exprimer par des
+objets trisimpliciaux (thèse d'Illusie). E–Z–C entraîne E–Z, et le
+cup-produit $h = \sum \pm f(x_1,\ldots,x_i)g(x_{i+1},\ldots)$ est associatif et
+commutatif à homotopie près, d'où l'anticommutativité de $H^*(X, R)$. Les
+produits $K(\mathbb{Z},i) \wedge K(\mathbb{Z}, j) \to K(\mathbb{Z}, i+j)$ se
+construisent par $N(K \otimes K) \to NK \otimes NK = \mathbb{Z}[i] \otimes
+\mathbb{Z}[j]$.
+
+\emph{Corollaire.} Avec $W_n = \mathbb{Z}E\Sigma_n$, résolution libre de
+$\mathbb{Z}$ par des $\Sigma_n$-modules, on a des morphismes $\Sigma_n$-équivariants
+$W_n \otimes \mathbb{Z}(X^n) \to (\mathbb{Z}X)^{\otimes n}$ et inverses, qui
+expriment la commutativité à homotopie près, avec toutes ses cohérences — comme
+pour un H-espace $E\Sigma_n \times X^n \to X$ relevant la multiplication itérée,
+$E\Sigma_2 = \varinjlim S^n$. \textbf{Théorème} (Dold, « Über Steenrodsche
+Operationen ») : $\operatorname{Hom}^\bullet(\mathbb{Z}(X^n), (\mathbb{Z}X)^{\otimes
+n})$ est, pour $X$ variable, une résolution libre de $\mathbb{Z}$ dans les
+$\Sigma_n$-modules.
+
+\emph{Construction des opérations de Steenrod} (cf.\ Steenrod–Epstein, p.~99).
+Pour $A$ de caractéristique $p$ et $f \in H^n(X, A)$, le composé
+\[
+W_p \otimes \mathbb{Z}(X^p) \xrightarrow{\ \lambda\ } (\mathbb{Z}X)^{\otimes p} \xrightarrow{\ f^{\otimes p}\ } A[n]^{\otimes p} \xrightarrow{\ \mu\ } A[pn]
+\]
+donne $Pf \in H^{pn}_{\Sigma_p}(E\Sigma_p \times X^p, A)$, et par la diagonale
+$\Delta Pf \in H^{pn}(K(\Sigma_p,1) \times X, A) = H^*(K(\Sigma_p,1))
+\otimes_{\mathbb{F}_p} H^*(X, A)$ ; les composantes $D_ix \in H^{pn-i}(X,A)$
+selon une base $e_\alpha$ de $H_*(K(\Sigma_p, 1))$ donnent, réindexées, les
+$P^i$, et « ce réindexage est ce qui donne la formule de Cartan ». On travaille
+en fait avec $\mathbb{Z}/p \subset \Sigma_p$.
+
+\pagerange{361}{367}
+\section*{Notes : décalage, espaces d'Eilenberg--MacLane, algèbre de Steenrod (pages 361 à 367)}
+
+\emph{Formule de décalage (Quillen–Bousfield, cf.\ thèse d'Illusie).} Pour les
+foncteurs dérivés au sens de Dold–Puppe,
+\[
+\mathrm{L}\operatorname{Sym}^i(X[1]) \simeq \mathrm{L}\Lambda^i(X)[i] , \qquad \mathrm{L}\Lambda^i(X[1]) \simeq \mathrm{L}\Gamma^i(X)[i] , \qquad \mathrm{L}\operatorname{Sym}^i(X[2]) \simeq \mathrm{L}\Gamma^i(X)[2i] ,
+\]
+à partir des suites de Koszul $0 \to \operatorname{Sym}^iK(M,n) \to \cdots \to
+\Lambda^iE(M,n+1) \to \Lambda^iK(M,n+1) \to 0$ associées à $K(M,n) \to E(M,n+1)
+\to K(M,n+1)$ ; encadré : $\mathrm{L}_r\operatorname{Sym}^iK(M,n+1) \simeq
+\mathrm{L}_{r-i}\Lambda^iK(M,n)$\footnote{La page note les décalages $[-i]$ pour
+ce que nous écrivons $[i]$ (déplacement vers le haut en homologie). Les deux
+premières lignes de la page, en indices $L_i\operatorname{Sym}^i(M,n) \simeq
+L_{i+n}\Lambda^i(M,n+1)$, sont traversées de traits obliques et ne s'accordent
+pas avec l'énoncé encadré, que nous suivons.}.
+
+\emph{Dold–Thom et Dold–Puppe.} $\pi_i\operatorname{SP}^\infty X \simeq H_i(X)$ ;
+le théorème de Dold $\mathbb{Z}\operatorname{SP}^\infty X \simeq
+\operatorname{Sym}\mathbb{Z}X$ donne $H_*(K(G,n)) = \mathrm{L}_*\operatorname{Sym}(G,
+n)$, d'où une graduation « par le poids » sur l'homologie des espaces
+d'Eilenberg–MacLane, et la stabilité $H_{n+r}K(M,n) \simeq H_{n+r+1}K(M,n+1)$
+pour $r < n$.
+
+\emph{Opérations stables.} Pour $r < n$, $H^{n+r}(K(\mathbb{F}_p, n),
+\mathbb{F}_p)$ est stable ; les opérations stables forment l'algèbre de
+Steenrod, $\mathbb{F}_p[P^0, P^1, \ldots, \beta]/(\text{Adem}, P^0 = 1)$, $\deg P^i
+= 2i(p-1)$, $\deg\beta = 1$, pour $p \neq 2$, et $\mathbb{F}_2[\mathrm{Sq}^i]/
+(\text{Adem}, \mathrm{Sq}^0 = 1)$, $\deg\mathrm{Sq}^i = i$, avec $\mathrm{Sq}^1 =
+\beta$, pour $p = 2$ — par exemple $\mathrm{Sq}^1\mathrm{Sq}^2 =
+\mathrm{Sq}^3$\footnote{La page écrit « $\mathrm{Sq}^1\mathrm{Sq}^2 =
+\mathrm{Sq}^3 + \mathrm{Sq}^2\mathrm{Sq}^1$ (?) », avec le point d'interrogation ;
+la relation d'Adem donne $\mathrm{Sq}^1\mathrm{Sq}^2 = \mathrm{Sq}^3$ (et
+$\mathrm{Sq}^1\mathrm{Sq}^1 = 0$).}. Formule de Cartan $P^i(x \times y) = \sum_j
+P^j(x)P^{i-j}(y)$ ; monômes $P^I = \beta^{\varepsilon_0}P^{\eta_1}
+\beta^{\varepsilon_1}\cdots$, admissibles si $\eta_i \geq p\eta_{i+1} +
+\varepsilon_i$, qui forment une base ; excès $e(I)$\footnote{La page donne pour
+l'excès la forme « $\eta_1 - \sum_{i>1}\eta_i$ », qui est celle du cas $p = 2$ ;
+pour $p$ impair l'excès compte aussi les Bockstein.}. \emph{Théorème} (Serre
+pour $p = 2$, Cartan) : $H^*(K(\mathbb{F}_p, n), \mathbb{F}_p)$ est l'algèbre
+commutative graduée libre engendrée par les $P^I\iota_n$, $I$ admissible
+d'excès $< n$ (pour $p$ impair, s'y ajoutent ceux d'excès $n$ « qui se terminent
+par $\beta$ ») ; l'homologie est l'algèbre à puissances divisées sur les
+éléments duaux. Démonstrations : par la suite spectrale du classifiant
+(séminaire Cartan, bar construction, Eilenberg–Moore, Rothenberg–Steenrod), ou
+par la méthode de Serre (1954).
+
+\emph{L'algèbre duale de Milnor.} La formule de Cartan donne la comultiplication
+$\Delta P^i = \sum P^j \otimes P^k$ ; le dual est $A_* = \operatorname{Sym}(\xi_i)
+\otimes \Lambda(\tau_j)$, $\deg\xi_i = 2p^i - 2$, $\deg\tau_j = 2p^j - 1$, avec
+$\Delta\xi_k = \sum_i \xi_{k-i}^{p^i} \otimes \xi_i$ et $\Delta\tau_k = \tau_k
+\otimes 1 + \sum_i \xi_{k-i}^{p^i} \otimes \tau_i$. Le cup-produit $K(\mathbb{F}_p,
+n) \wedge K(\mathbb{F}_p, m) \to K(\mathbb{F}_p, m+n)$ induit la comultiplication
+de $A$. $\mathrm{L}\operatorname{Sym}^r = 0$ pour $r \neq p^s$, et
+$\mathrm{L}^{\mathrm{st}}_*\operatorname{Sym}\,\mathbb{F}_p = A_*$. La page 367
+rappelle la bar construction $\overline{B}(A)$ d'une algèbre différentielle
+graduée augmentée, $\overline{B}(\mathbb{Z}K(G,n)) \sim \mathbb{Z}BK(G,n)$, et sa
+structure d'algèbre via Eilenberg–Zilber quand $A$ est commutative.
+
+\pagerange{369}{372}
+\section*{Notes : $K_2$ de Milnor ; cohomologie des Eilenberg--MacLane (pages 369 à 372)}
+
+\emph{$K_2$ de Milnor.} $E(R) = [E(R), E(R)] \subset GL(R)$, $K_1(R) = GL(R)/E(R)$,
+et $E(R) = SL(R)$ si $R$ est local ; la suite $0 \to K_2(R) \to \mathrm{St}(R) \to
+E(R) \to 0$, et $K_2(R) = H_2(E(R), \mathbb{Z}) = \pi_2(BGL(R)^+)$\footnote{La page
+écrit « $\pi_1(E(R)) = K_2(R)$ », l'indice étant incertain ; $E(R)$ est un
+groupe discret, et c'est $H_2(E(R))$, ou $\pi_2$ de $BGL(R)^+$ qui figure à la
+ligne suivante, qui donne $K_2$.}. Pour un schéma $X$, la suite spectrale
+$H^i_{\mathrm{Zar}}(X, \underline{K}_j) \Rightarrow K_{j-i}(X)$, la résolution de
+Gersten $0 \to \underline{K}_i \to i_*\underline{K}_i \to \bigoplus_{\mathrm{codim}\,1}
+i_{x*}K_{i-1} \to \cdots \to \bigoplus_{\text{points fermés}} i_{x*}\mathbb{Z}
+\to 0$, et $H^i(X, \underline{K}_i) = $ cycles de codimension $i$ modulo
+l'équivalence rationnelle\footnote{La page écrit « $i$-cycles » ; c'est la formule
+de Bloch–Quillen, en codimension $i$, et la suite de Gersten s'écrit pour $X$
+régulier.}.
+
+\emph{Cohomologie des Eilenberg–MacLane.} Les quatre cas $H_*(K(\mathbb{F}_p, n),
+\mathbb{F}_p)$, $H_*(K(\mathbb{Z},n), \mathbb{F}_p)$, $H_*(K(\mathbb{F}_p,n),
+\mathbb{Z})$, $H_*(K(\mathbb{Z},n),\mathbb{Z})$ ; pour $G$ quelconque, la partie
+stable de l'homologie entière est de torsion première, par exemple
+$H_{n+2}(K(G,n)) = G/2G$, $H_{n+3} = {}_2G$. Les deux Bockstein $\beta_1$, $\beta_2$
+sont des dérivations de $A_* = \operatorname{Sym}(\xi_i) \otimes \Lambda(\tau_j)$,
+$\tau_0 \mapsto 1$ pour l'un, $\tau_j \mapsto \xi_j$ pour l'autre ; d'où
+$H_*(K(\mathbb{F}_p, n), \mathbb{Z})$ et $H_*(K(\mathbb{Z},n), \mathbb{Z})_{(p)}
+= \operatorname{Im}\beta_2 = \operatorname{Ker}\beta_2$ dans le domaine stable,
+et la conjugaison de Steenrod échange les deux Bockstein.
+
+\emph{Théorème (Cartan)} : sous des hypothèses sur les groupes $G$, $H$,
+l'homologie stable est symétrique : $H_{m+i}(K(H,m); G) \simeq H_{n+i}(K(G,n);
+H)$ dans le domaine stable\footnote{La page écrit « $H_*(K(G,n),H) \simeq
+H_*(K(H,n),G)$ additif », sans les décalages ; la seconde démonstration
+($\pi_{i+m}(K(H,m) \wedge K(G,n)) \simeq \pi_{i+n}(K(G,n) \wedge K(H,m))$ par
+permutation des facteurs) fixe les degrés que nous écrivons.}. Démonstration
+2 : $X \mapsto \pi_{n+r}(K(\mathbb{Z},n) \wedge X)$ est une théorie
+d'homologie partielle pour $r$ petit, égale à $\widetilde{H}_r(X)$, via
+$K(\mathbb{Z},n) \wedge X \to \mathbb{Z}^+(S^nX)$, quasi-isomorphisme jusqu'en
+degré $2n-1$, et Eilenberg–Zilber pointé. La page 372 en déduit des
+résolutions simpliciales canoniques de $K(G,n) = G \otimes \Lambda^n\Psi$ et la
+connectivité $r = \min(n + 2p - 1, 2n + p - 1)$ de $K(\mathbb{Z},n) \wedge K(G,p)
+\to \mathbb{Z}K(G,n+p)$.
+
+\pagerange{373}{375}
+\section*{Notes : les opérations sur $\mathbf{G}_a$ et $\operatorname{Ext}(\mathbf{G}_a, \mathbf{G}_a)$ (pages 373 à 375)}
+
+Pour un anneau $R$ de caractéristique $p$, $H^q(X, R) \simeq H^q(X, \mathbb{F}_p)
+\otimes R$, et l'algèbre de Steenrod agit avec $P^0_R = P^0 \otimes F$ ($F$, le
+Frobenius, lecture probable). Sur le site des schémas sur $\mathbb{F}_p$, avec le
+faisceau structural $\mathbf{G}_a$ et $K(\mathbf{G}_a, n) = \mathbf{G}_a \otimes
+\Lambda^n\Psi$, l'hypercohomologie $\mathbb{H}^*(K(F,p), G)$ classe les
+opérations de type $(F,p;G,q)$ (Illusie ; Epstein, « Operations in homological
+algebra », 1966). \emph{Théorème} : soit $\mathcal{A}$ l'algèbre engendrée par les
+$P^i$, $i \geq 0$, avec les relations d'Adem \emph{mais pas} $P^0 = 1$ ; alors
+$\mathbb{H}^*(K(\mathbf{G}_a, n), \mathbf{G}_a)$ est l'algèbre commutative graduée
+libre engendrée par les monômes admissibles de $\mathcal{A}$ d'excès $< n$\footnote{La
+page écrit $K(\mathcal{O}, m)$ et « excès $< n$ » ; nous uniformisons. Le calcul
+de $H^*(K(\mathbf{G}_a, 1), \mathbf{G}_a)$ est renvoyé à Lazard (« Lois de groupes
+et analyseurs ») ; on grimpe ensuite par le théorème de Borel et la suite de
+Leray de $K(\mathbf{G}_a, n-1) \to * \to K(\mathbf{G}_a, n)$. La classe $\beta \in
+H^2(K(\mathbf{G}_a,1), \mathbf{G}_a)$ est celle de l'extension de Witt $0 \to
+\mathbf{G}_a \to W_2 \to \mathbf{G}_a \to 0$.}.
+
+\emph{Proposition} : le $k[F]$-module $\operatorname{Ext}^i(\mathbf{G}_a,
+\mathbf{G}_a)$ est de $F$-torsion pour $i > 1$. \emph{Corollaire} (attribué,
+lecture incertaine, à Milne) : sur le site parfait, avec $\mathbf{G}_a^{\mathrm{parf}}
+= \varinjlim_F \mathbf{G}_a$, $\operatorname{Ext}^i(\mathbf{G}_a^{\mathrm{parf}},
+\mathbf{G}_a^{\mathrm{parf}}) = 0$ pour $i > 1$. La démonstration utilise la suite
+spectrale du coefficient universel $\operatorname{Ext}^i(\underline{H}_j(X), F)
+\Rightarrow \mathbb{H}^{i+j}(X, F)$ pour $X = K(\mathbf{G}_a, n)$, $n$ grand, dans
+les faisceaux de $\mathbb{F}_p$-modules et « modulo $F$ », avec $\operatorname{Hom}
+(\mathbf{G}_a, \mathbf{G}_a) = k[F]$ et $\operatorname{Ext}^1(\mathbf{G}_a, \mathbf{G}_a)
+= 0$\footnote{Cette dernière annulation est à lire dans la catégorie des faisceaux
+de $\mathbb{F}_p$-modules, où la page dit travailler : l'extension de Witt $W_2$,
+qui n'est pas tuée par $p$, n'y vit pas, et ne la contredit donc pas.}, deux
+lemmes (nullité d'un homomorphisme de bord ; générateurs $P^I\iota_n$), et la
+résolution par les $\mathbb{Z}^jK(\mathbf{G}_a, n)$. La page 375 inscrit le
+résultat : $\operatorname{Ext}^{2i+1}_{\mathbb{F}_p}(\mathbf{G}_a, \mathbf{G}_a) = 0$
+et $\operatorname{Ext}^{2i}(\mathbf{G}_a, \mathbf{G}_a) = k[F]/(F^d)$, $d =
+v_p(i)$, pour $i > 0$\footnote{Nous le restituons tel que la page l'écrit, sans
+l'avoir vérifié. Ces calculs sont aujourd'hui associés au nom de L.~Breen, qui
+publiait « Extensions du groupe additif » dans les \emph{Publications
+mathématiques de l'IHÉS} en 1978 ; les pages ne le nomment pas, et nous ne
+prétendons pas savoir de quel exposé elles procèdent. L'argument s'interrompt
+avec le dossier.}.
+
+\end{document}
