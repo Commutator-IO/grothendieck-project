@@ -1,0 +1,1930 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 80
+% (pages 1-72, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pp. 1-20), batch-02.fr.tex (pp. 21-40), batch-03.fr.tex (pp. 41-60) or
+% batch-04.fr.tex (pp. 61-72).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its four batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5). The literature named in
+% the footnotes is cited from memory and was not checked against the sources.
+% Folders 81, 88 and 89 of the same group, read in their modernised readings,
+% served as models; cross-references to them are ours and said so.
+%
+% Scope. Pages 1, 8, 15, 19, 30, 55, 59, 71 are blank sheets. Pages 21, 23,
+% 25, 29 are photocopies of a letter in German unrelated to the mathematics,
+% and page 27 a typed administrative notice dated 13 May 1981; the
+% transcription does not reproduce them, nor does this reading (RIGHTS.md).
+% Pages 9, 11-14, 56-58 are drawings, given only as the transcription
+% describes them.
+%
+% Spine. Arrangements of pseudo-lines in the real projective plane, seen as
+% maps (« cartes »), and the question how much of the map is determined by
+% its 1-skeleton with the decomposition of the edges into pseudo-lines.
+%   pp. 2-7     counting arrangements with a distinguished line: cut along it,
+%               a disc with a stable system of chords; orbit-stabiliser counts.
+%   pp. 9, 11-14 drawings (a nine-curve arrangement; polyhedra; a rectilinear
+%               construction with inequalities).
+%   p. 10       unrelated: Stein factorisation and base change.
+%   pp. 16-18   real hyperplane arrangements: sign vectors, closures of strata.
+%   pp. 20-28   the « crucial » arrangements: bigonal lines, the types I_N,
+%               I_{p,q}, II'_{p,q}, II_4, II_5, III_6, IV_7; a Théorème (p. 24),
+%               the lattice case and a Proposition (p. 26), a Lemme (p. 28).
+%   pp. 31-38   three pseudo-lines: cube, octahedron, their « gauche »
+%               (projective) quotients, orientations via contracted products,
+%               the equivalence (16) and the cube of functors (17).
+%   pp. 39-54   oriented 1-dimensional arrangements; the « Th. » (p. 39, the
+%               functor (18) is fully faithful), its proof by reconstruction
+%               (pp. 41-49, conditions (A1)-(A4)), the canonical orientation of
+%               triangles (pp. 49-54, (A5), (A6)), the « Théorème » of p. 54.
+%   pp. 56-58   drawings with region counts.
+%   pp. 60-66   second start, « Système de Pseudodroites »: definition,
+%               orientation cover, the bijections phi_{s;D,D'}, the local
+%               system Omega(s).
+%   pp. 67-70   third start with oriented pseudo-lines: rho_{D,s}, axioms
+%               a)-f), « Th » (p. 70).
+%   p. 72       table of small arrangements, projective vs combinatorial.
+% The three reconstructions (pp. 41-54, 60-66, 67-70) are kept distinct.
+%
+% Notation fixed for the document.
+%  - X the surface (a real projective plane), 𝒳 the map; (D_i)_{i in I} its
+%    pseudo-lines, I the set of ALL lines (as pp. 41-54); a triple of lines is
+%    J in 𝔓_3(I). Page 39 swaps the letters (J all lines, I a triple);
+%    footnoted. In pp. 31-38, which treat three lines only, I is the
+%    three-element index set, as on the page.
+%  - In pp. 2-7 the page's own (X, Σ, Δ): Σ = (Δ_i)_{i in I} the family of
+%    lines, Δ = Δ_{i_0} the distinguished one; card I = n+1, I_0 = I \ {i_0}.
+%  - « stable » (index st) = simple: every vertex on exactly two lines.
+%  - (K, (D_i)) a 1-dimensional arrangement (axioms of p. 40); K_J the
+%    sub-arrangement of the lines in J; nu_s the number of lines through s
+%    (the vertex has order 2 nu_s).
+%  - A two-element set is a {±1}-torsor; ∧ the contracted product, 1 the
+%    trivial torsor; or(I) the two orientations of a finite set I (for card
+%    I = 3, its two circular orders: folder 89's omega_I).
+%  - A polygonal structure on a finite set E (card >= 3): a pair {u, u^{-1}}
+%    of inverse circular permutations (folder 81's bi-circulation); 𝒞_E the
+%    set of circular permutations of E.
+%  - 𝔷_s (the page's 𝔷^1_s with a doubtful superscript, dropped) the
+%    polygonal structure on the lines through s; vec-𝔷_s the pair of inverse
+%    circular orders on the oriented lines through s.
+%  - The doubtful superscript on xi (pp. 5-7) is dropped.
+%  Collisions not corrected, the sections not mixing: S is the pinning polygon
+%  (pp. 3-7), the sphere (pp. 16-18, bold) and the vertex set of K (p. 41);
+%  Omega_i are orientations of a bigon (pp. 34-37), Omega(D), Omega(s)
+%  orientations of a pseudo-line and at a vertex (pp. 61-70).
+%
+% Substantive departures, each footnoted where it occurs:
+%  p. 2    the counts « n = 5: C(n) has one element, fibre of card 6 » hold
+%          for simple (stable) arrangements only; surjectivity of beta'
+%          (asked with « ? ») is Levi's enlargement lemma (ours).
+%  p. 5    the induction formula, « sans doute » on the page, is a general
+%          fact (an equivariant map to G/H is induced from its fibre).
+%  p. 6    Ex. 1: the orbit of order 2 is under D_S (order 4n), not D_{I_0}.
+%  p. 9    region counts: 3·7+4·24+5·6 = 147 is odd, so they cannot all be
+%          faces of a map counted with their sides; flagged, not resolved.
+%  p. 10   the Stein factorisation is the FINAL, not initial, object of the
+%          category of Stein arrows over Z -> X, with the arrows as drawn.
+%  p. 16   V^* is V \ {0}; D_H ≃ F_3 only after a choice of coorientation.
+%  p. 18   « Σ est une partie ouverte de E » is false in general (the page's
+%          own struck example, three planes through a line); true exactly
+%          when, at each x != 0, the forms vanishing at x are independent;
+%          the Inf statement follows only then.
+%  p. 22   I_N has N vertices, not the margin's N+1.
+%  p. 24   I'_{3,2} (II_{3,2} pp. 26-28), undefined, read as II'_{3,2};
+%          then IV_7 contains a II'_{3,2} (explicit), so the parenthesis
+%          « s'il ne contient ni I'_{3,2} ni II_5, c'est III_6 ou IV_7 » must
+%          read « II_4 ou III_6 »; the boxed statement is unaffected. Same for
+%          the NB of p. 20.
+%  p. 26   « pas de type II_4 » read as « K n'est pas de type II_4 » (II_5
+%          contains II_4 and is said to be lattice-like on p. 24).
+%  p. 33   C -> C~, O -> O~ are full (onto on automorphisms) and NOT faithful
+%          (kernel {1, a}); the page says the reverse, with an argument that
+%          proves non-faithfulness.
+%  p. 38   in the cube (17), if it commutes, gr.oct -> gr.oct.gauches cannot
+%          be an equivalence: it kills the antipody and its image has index 2.
+%  p. 40   « octogonal » read octaédral.
+%  p. 42   the margin's a priori c_2 <= c(K): true because X is connected and
+%          not a sphere (argument ours).
+%  p. 49   (A5) names two different conditions (pp. 49 and 51).
+%  p. 50   « concourantes » read « non concourantes ».
+%  p. 60   the definition needs each class of edges to pass at most once
+%          through each vertex (a simple closed curve); « n <= 6 »: all
+%          arrangements of at most 8 pseudo-lines are stretchable
+%          (Goodman-Pollack 1980), and nine is where non-stretchable ones
+%          start (Ringel 1956).
+%  p. 64   a) « simplement transitif » read « système transitif ».
+%  p. 72   4 lines in general position: the projective stabiliser of the SET
+%          of lines is 𝔖_4 too; « Id » holds for the transformations fixing
+%          each line. 5 lines in general position are NOT projectively
+%          standard (2 moduli); the « pas » the page strikes is needed.
+%
+% Links the pages do not write (ours, and said so in the body): the chord
+% systems of pp. 3-7 and the drawings of folder 81 (pp. 9-11); the labels of
+% p. 9 recur on p. 13; the octahedron of p. 11 (three great circles) is the
+% octahedron of p. 31 and 48 = 2·4! its symmetry group, which p. 38's margin
+% writes 𝔖_4 × {±1}; the six-line configurations of pp. 20, 24, 53, 63-64
+% are one and the same, the complete quadrangle III_6; u_{s,Δ} of p. 45 is
+% the rho_{D,s} of p. 67; the axioms of p. 67 restate (30), (A3), (A4), (22).
+%
+% Announced and never established: the « Théorème » of p. 24 and the
+% Proposition (lattice case) and Proposition of p. 26; the Lemme of p. 28
+% (an « Idée » only); the « Th. » of p. 39, whose proof he says he has not
+% checked in the case of n concurrent lines and one transversal (p. 49);
+% (A1)-(A6) in the 2-dimensional case (« bien entendu »); the reduction of
+% (A1)-(A6) and the automaticity of (23) (p. 54); the end of the condition on
+% r (p. 63); item c) of p. 64; the uniqueness asserted at the top of p. 65;
+% the « Th » of p. 70; the realisation for n <= 6 (p. 60, « on montre »);
+% the base-change question of p. 10.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{80}
+\pages{1}{72}
+\dating{[à partir de 1981]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Systèmes de pseudo-droites : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Tracez sur une feuille des courbes qui ne soient pas forcément droites, mais
+qui se comportent comme des droites : chacune coupe chacune des autres en un
+point et un seul, et aucune ne se ferme sur elle-même comme un cercle. Pour
+que la règle « un point et un seul » vaille sans exception, même pour deux
+courbes qui sembleraient parallèles, on travaille sur le plan projectif réel
+--- un disque dont on recolle chaque point du bord à son opposé ---, où deux
+droites ordinaires se coupent toujours. Ces courbes s'appellent des
+\emph{pseudo-droites}, et le dessin qu'elles forment, avec ses points de
+croisement, ses segments et ses régions, est une \emph{carte} au sens de
+Grothendieck : un réseau de sommets, d'arêtes et de faces tracé sur une
+surface.
+
+La question qui court à travers ces soixante-douze pages est celle-ci. Que
+faut-il savoir pour reconstituer un tel dessin ? Imaginez une ville dont on
+ne connaît que la liste des rues et, pour chaque rue, l'ordre des carrefours
+qu'on rencontre en la parcourant. Peut-on en redessiner le plan, avec ses
+pâtés de maisons ? Grothendieck appelle cette donnée un arrangement
+« de dimension $1$ » --- le squelette fait d'arêtes, découpé en
+pseudo-droites --- et le dessin complet un arrangement « de dimension $2$ ».
+Sa réponse, qu'il énonce sans l'avoir entièrement démontrée, est :
+presque toujours, oui. Il y a un obstacle, qu'il isole avec
+soin : une rue qui n'a que deux carrefours (un « bigone ») laisse une
+ambiguïté que rien ne lève, comme deux chemins parallèles entre les mêmes
+places. Hors de ce cas, le squelette suffit, et même les symétries du
+squelette sont toutes des symétries du dessin.
+
+Pour y parvenir, il passe par le cas de trois pseudo-droites --- qui découpent
+le plan projectif en quatre triangles, la moitié d'un octaèdre ---, et par une
+comptabilité minutieuse des \emph{orientations} : un objet à deux états,
+comme les deux sens de parcours d'une boucle, et la façon dont ces paires
+d'états se combinent. Il cherche ensuite à lire, en chaque carrefour, l'ordre
+circulaire dans lequel les rues en partent, à partir des seules rues qui n'y
+passent pas : une rue lointaine, coupée successivement par toutes celles du
+carrefour, en donne l'ordre, comme l'horizon donne l'ordre des chemins qui
+partent d'un col. Il réécrit cette reconstruction trois fois, de trois points
+de départ différents.
+
+Le dossier contient aussi un dénombrement des arrangements munis d'une droite
+distinguée, une étude des arrangements d'hyperplans de l'espace réel
+décrits par les signes que prend un point par rapport à chaque hyperplan, une
+liste des plus petites configurations qui ne sont pas « dégénérées », et
+un tableau qui compare, pour un, deux, \ldots, six droites, ce que voit la
+géométrie projective et ce que voit la combinatoire. Une page isolée, sans
+rapport avec le reste, porte sur la factorisation de Stein.
+
+On y voit une manière de travailler. Grothendieck signale lui-même ce qu'il
+n'a pas vérifié --- « Je n'ai donc pas vérifié que la proposition énoncée
+soit correcte » --- et ce qu'il ne fait que soupçonner --- « je soupçonne
+que cette dernière est automatique ». Il écrit aussi « j'ai maintenant envie
+de montrer », et la suite du texte suit cette envie plutôt qu'un plan. Et
+quand une approche s'embarrasse de cas particuliers, il ne la raccommode
+pas : il reprend tout, d'un autre point de départ.
+
+Les noms sous lesquels chercher la suite : arrangements de pseudo-droites,
+lemme d'extension de Levi, étirabilité ; matroïdes orientés, vecteurs de
+signes, théorème de représentation topologique de Folkman et Lawrence ;
+quadrangle et quadrilatère complets ; systèmes de rotation des plongements
+de graphes.
+
+\keywords{pseudoline arrangement, real projective plane, Levi enlargement lemma, orbit-stabilizer counting, stretchability, Stein factorization, monotone-light factorization, oriented matroid, covector, face poset, Folkman-Lawrence representation theorem, simple arrangement, complete quadrangle, complete quadrilateral, hemi-octahedron, contracted product of torsors, rotation system, orientation double cover, local system}
+\end{resume}
+
+\pagerange{1}{72}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+Le dossier n'est pas daté de sa main ; l'inventaire le date « à partir de
+1981 », ce qu'appuie la notice administrative dactylographiée de la page 27,
+datée du 13 mai 1981, et le range dans le groupe « Géométrie et topologie
+combinatoire ». Sa pagination propre court sur deux séries : $1$ à $6$ aux
+pages 2 à 7, et $1$ à $12$ sur les rectos des pages 31 à 53, les versos
+continuant le texte. Ses équations numérotées (1) à (34) et ses conditions
+(A1) à (A6) courent des pages 31 à 54.
+
+\begin{enumerate}
+  \item \emph{Pages 2 à 7}, « Classifications pseudo-droites » : les
+  arrangements munis d'une pseudo-droite distinguée, découpés le long de
+  celle-ci en un disque muni d'un système de cordes ; dénombrements par
+  orbites et stabilisateurs.
+  \item \emph{Pages 9 et 11 à 14}, des dessins : un arrangement de neuf
+  courbes, des polyèdres, une construction rectiligne avec inégalités. La
+  page 10, au milieu, est étrangère au sujet : la factorisation de Stein.
+  \item \emph{Pages 16 à 18}, « Système d'hyperplans (projectifs) réels » :
+  vecteurs de signes, adhérence des strates, ordre sur les signes.
+  \item \emph{Pages 20 à 28}, les arrangements « cruciaux » : pseudo-droites
+  bigonales, une liste de types, un théorème (page 24), le cas
+  « latticiel » (page 26), un lemme d'ordonnancement (page 28).
+  \item \emph{Pages 31 à 38}, « Arrangements de 3 pseudo-droites » : cube et
+  octaèdre combinatoires, leurs quotients « gauches », les orientations, le
+  cube de foncteurs (17).
+  \item \emph{Pages 39 à 54}, arrangements de dimension $1$ orientés, le
+  théorème de pleine fidélité de la page 39, sa démonstration par
+  reconstruction (pages 41 à 49), l'orientation canonique des triangles
+  (pages 49 à 54) et le théorème de la page 54.
+  \item \emph{Pages 56 à 58}, des dessins avec décompte des régions.
+  \item \emph{Pages 60 à 66}, « Système de Pseudodroites » : un second
+  départ, par les ensembles d'orientations $\Omega(D)$ et un système local.
+  \item \emph{Pages 67 à 70}, un troisième départ, par les pseudo-droites
+  orientées et les permutations circulaires $\rho_{\vec{D},s}$.
+  \item \emph{Page 72}, un tableau des arrangements de une à six droites.
+\end{enumerate}
+
+Les pages 1, 8, 15, 19, 30, 55, 59 et 71 sont blanches. Les pages 21, 23, 25
+et 29 sont des photocopies d'une lettre en allemand étrangère aux
+mathématiques, la page 27 la notice déjà dite ; ni la transcription ni cette
+lecture ne les reproduisent.
+
+\subsection*{Trois reconstructions, gardées distinctes}
+
+La même question --- retrouver la carte à partir de son squelette découpé en
+pseudo-droites --- est attaquée trois fois, et les trois rédactions ne se
+citent pas.
+\begin{itemize}
+  \item \emph{Pages 39 à 54} : on se donne en outre une \emph{orientation}
+  $\omega$ de chaque triple de pseudo-droites non concourantes ; on
+  reconstruit en chaque sommet la paire d'ordres circulaires
+  $\vec{\mathfrak{Z}}_s$ et, le long de chaque arête, un transport
+  $\psi_{\vec{a}}$ ; puis on montre que $\omega$ est elle-même déterminée par
+  le squelette.
+  \item \emph{Pages 60 à 66} : on part des ensembles $\Omega(D)$ des deux
+  orientations de chaque pseudo-droite et de bijections
+  $\varphi_{s;D,D'} : \Omega(D) \simeq \Omega(D')$ attachées aux sommets, et
+  on en tire un système local $\Omega(s)$ sur le squelette.
+  \item \emph{Pages 67 à 70} : on part des pseudo-droites orientées et d'une
+  permutation circulaire $\rho_{\vec{D},s}$ des pseudo-droites orientées
+  issues de $s$, pour chaque $\vec{D}$ ne passant pas par $s$, soumise à des
+  axiomes a) à f).
+\end{itemize}
+Ce sont trois habillages de la même construction --- la permutation
+$\vec{u}_{s,\vec{\Delta}}$ de la page 45 est exactement la
+$\rho_{\vec{\Delta},s}$ de la page 67 ---, mais chacun pose ses propres
+données et ses propres axiomes, et on les lit séparément.
+
+\subsection*{Conventions}
+
+\begin{itemize}
+  \item \emph{Arrangement.} Un arrangement de pseudo-droites, ou
+  \emph{système de pseudo-droites}, est une carte $\mathcal{X}$ sur une
+  surface $X$ homéomorphe au plan projectif réel, dont les arêtes se
+  répartissent en pseudo-droites (définition précise : page 60). Ses
+  pseudo-droites sont notées $(D_i)_{i \in I}$, et $I$ est toujours
+  l'ensemble de \emph{toutes} les pseudo-droites ; un triple est une partie
+  $J \in \mathfrak{P}_3(I)$\footnote{La page 39 fait l'inverse : $J$ y
+  indexe toutes les pseudo-droites et $I \in \mathfrak{P}_3(J)$ un triple.
+  Les pages 41 à 54 adoptent la convention suivie ici. Aux pages 31 à 38,
+  qui ne traitent que de trois pseudo-droites, $I$ est l'ensemble à trois
+  éléments qui les indexe, comme sur la page.}. Aux pages 2 à 7 on garde la
+  notation de la page, $(X, \Sigma, \Delta)$ : $\Sigma = (\Delta_i)_{i \in I}$
+  la famille des pseudo-droites, $\Delta = \Delta_{i_0}$ la pseudo-droite
+  distinguée.
+  \item \emph{Simple.} L'indice « $\mathrm{st}$ » (« stable ») des pages 2 à
+  7 désigne les arrangements \emph{simples} : par chaque sommet passent
+  exactement deux pseudo-droites. C'est le nom actuel, et c'est bien la
+  stabilité par petite déformation\footnote{La page ne définit pas
+  « stable » ; l'identification est nôtre, et c'est la seule qui rende
+  justes les nombres des pages 2 à 7.}.
+  \item \emph{Bigone, monogone.} Une pseudo-droite qui ne porte que deux
+  sommets est \emph{bigonale} : sur le squelette, c'est un polygone à deux
+  côtés. Une pseudo-droite qui n'en porte qu'un est un monogone, ce qui
+  n'arrive que si toutes les pseudo-droites sont concourantes.
+  \item \emph{Arrangement de dimension $1$.} C'est le squelette : un
+  $1$-complexe $K$ et une famille $(D_i)_{i \in I}$ de sous-complexes
+  polygonaux, avec les axiomes de la page 40. Pour $J \subset I$, $K_J$ est le
+  sous-arrangement formé des $D_i$, $i \in J$, où l'on oublie les sommets
+  qui ne sont pas des intersections de ces $D_i$. On note $\nu_s$ le nombre
+  de pseudo-droites passant par un sommet $s$ ; l'ordre du sommet est
+  $2\nu_s$.
+  \item \emph{Torseurs.} Un ensemble à deux éléments est un torseur sous
+  $\{\pm 1\}$ ; $\wedge$ est le produit contracté, $\underline{1}$ le
+  torseur trivial, et deux copies d'un même torseur ont un produit
+  canoniquement trivial. Pour un ensemble fini $I$, $\mathrm{or}(I)$ est
+  l'ensemble de ses deux orientations (ordres totaux à permutation paire
+  près) ; pour $\operatorname{card} I = 3$, ce sont ses deux ordres
+  circulaires --- l'ensemble que le dossier 89 note $\omega_I$. On garde le
+  signe $\wedge$ des pages, qui est celui du dossier 89.
+  \item \emph{Polygones.} Une \emph{structure polygonale} sur un ensemble
+  fini $E$ de cardinal $\geqslant 3$ est une paire $\{u, u^{-1}\}$ de
+  permutations circulaires inverses l'une de l'autre --- la
+  « bi-circulation » du dossier 81 (page 41), et la troisième description
+  d'un polygone combinatoire du dossier 89 (pages 19 et 20). $\mathcal{C}_E$
+  est l'ensemble des permutations circulaires de $E$. Les sommets portés par
+  une pseudo-droite forment un polygone, donc reçoivent une telle
+  structure.
+\end{itemize}
+
+Restent des collisions de lettres qu'on ne corrige pas, les sections ne se
+mêlant pas : $S$ est le polygone d'épinglage (pages 3 à 7), la sphère
+(pages 16 à 18, en gras) et l'ensemble des sommets de $K$ (page 41) ;
+$\Omega_i$ est l'ensemble des orientations d'un bigone (pages 34 à 37),
+$\Omega(D)$ et $\Omega(s)$ ceux d'une pseudo-droite et d'un sommet (pages 61
+à 70).
+
+\subsection*{Ce que seule une lecture d'ensemble peut dire}
+
+Des liens qu'aucun feuillet n'écrit, et qui sont de nous. La configuration
+de six pseudo-droites joignant deux à deux quatre points --- le
+\emph{quadrangle complet} --- revient quatre fois : dessinée page 20 (« $6$
+en position particulière »), nommée $\mathrm{III}_6$ page 24, rencontrée
+comme cas résiduel page 53, et pages 63 et 64 comme celui où l'on tombe
+« par malheur ». L'octaèdre tracé page 11 comme une sphère coupée de trois grands
+cercles est l'octaèdre combinatoire de la page 31, et le nombre
+$48 = 2 \cdot 4!$ qui l'accompagne est l'ordre de son groupe de symétries,
+$\mathfrak{S}_4 \times \{\pm 1\}$, que la marge de la page 38 écrit. Les
+étiquettes des points de la page 9 se retrouvent sur la construction de la
+page 13. Les axiomes de la page 67 réécrivent, pour les $\rho_{\vec{D},s}$,
+les relations (30), (A3), (A4) et (22) des pages 42 à 47. Enfin, les disques
+coupés de cordes des pages 3 à 7 sont de la même famille que ceux que
+dessine le dossier 81 (pages 9 à 11), mais ici les cordes se croisent toutes
+deux à deux : ce sont les pseudo-droites elles-mêmes, vues après découpage.
+
+\subsection*{Ce que le dossier annonce sans l'établir}
+
+Le théorème de la page 24, la proposition sur le cas latticiel et la
+proposition sur l'adjonction d'une pseudo-droite (page 26), le lemme de la
+page 28, dont seule une « Idée » est écrite. Le « Th. » de la page 39, dont
+Grothendieck dit lui-même (page 49) ne pas avoir vérifié la démonstration
+dans le cas de $n$ pseudo-droites concourantes coupées par une seule autre ;
+les conditions (A1) à (A6), affirmées vraies pour un arrangement de
+dimension $2$ (« bien entendu ») ; la simplification de ces conditions et le
+caractère automatique de la relation d'Euler-Poincaré (page 54). La fin de
+la condition sur le point $r$ (page 63), l'item c) de la page 64,
+l'unicité qu'affirme le haut de la page 65, le « Th » de la page 70. La
+réalisation par de vraies droites pour $n \leqslant 6$ (page 60, « on
+montre »). La question du changement de base de la page 10.
+
+\pagerange{2}{7}
+\section*{I. Arrangements à pseudo-droite distinguée (pages 2 à 7)}
+
+\pagerange{2}{2}
+\subsection*{Les ensembles de classes (page 2)}
+
+Soit $I$ un ensemble à $n+1$ éléments, $i_0 \in I$ et $I_0 = I \smallsetminus
+\{i_0\}$. On note $\mathrm{C}(I)$ l'ensemble des classes d'isomorphisme
+d'arrangements de pseudo-droites $(X, \Sigma = (\Delta_i)_{i \in I})$ indexés
+par $I$, et $\mathrm{C}_{\mathrm{aff}}(I_0)$ celui des arrangements
+\emph{affines} indexés par $I_0$, c'est-à-dire tracés dans le complémentaire
+d'une pseudo-droite $\Delta$ qu'on regarde comme la droite à
+l'infini\footnote{L'indice « $\mathrm{aff}$ » est une lecture incertaine :
+il l'écrit comme un petit a suivi de deux hampes doublées. La lecture
+« affine » est la seule qui convienne à l'énoncé
+$\mathrm{C}(I) \simeq \mathrm{C}_{\mathrm{aff}}(I_0)$.}. Choisir pour droite
+à l'infini la pseudo-droite d'indice $i_0$ donne une bijection
+\[
+\mathrm{C}(I) \simeq \mathrm{C}_{\mathrm{aff}}(I_0).
+\]
+Le groupe symétrique $\mathfrak{S}_I$ agit en changeant les indices, et l'on
+pose $\mathrm{C}(n+1) = \mathrm{C}(I)/\mathfrak{S}_I$ (arrangements de $n+1$
+pseudo-droites, sans indices) et $\mathrm{C}_{\mathrm{aff}}(n) =
+\mathrm{C}_{\mathrm{aff}}(I_0)/\mathfrak{S}_{I_0}$ ; ce dernier est
+l'ensemble des classes de triples $(X, \Sigma, \Delta)$ avec $\Delta \in
+\Sigma$, la pseudo-droite distinguée seule gardant son nom. On a deux
+applications :
+
+\begin{tikzcd}
+& \mathrm{C}_{\mathrm{aff}}(n) \arrow[dl, "\beta"'] \arrow[dr, "\beta'"] & \\
+\mathrm{C}(n+1) & & \mathrm{C}(n)
+\end{tikzcd}
+
+$\beta$ oublie quelle pseudo-droite est distinguée, $\beta'$ efface
+$\Delta$\footnote{Les étiquettes de la page sont « oubli du $\Delta$ » pour
+$\beta$, en partie illisible, et « gommage de $\Delta$ », écrit au-dessus de
+« oubli de $\Delta$ » biffé, pour $\beta'$. La page porte aussi une flèche
+$\alpha$ de $\mathrm{C}(I)$ vers $\mathrm{C}_{\mathrm{aff}}(n)$, « oubli du
+$I$-épinglage sauf $\Delta_{i_0} = \Delta$ », qui est le passage au quotient
+par $\mathfrak{S}_{I_0}$. Un premier état du diagramme est biffé.}.
+
+$\beta$ est surjective, et sa fibre en la classe de $(X, \Sigma)$ est
+l'ensemble des orbites de pseudo-droites sous le groupe d'automorphismes
+$G_{X,\Sigma}$ : $\Sigma / G_{X,\Sigma}$. $\beta'$ est surjective aussi ---
+la page le demande avec un point d'interrogation --- : tout arrangement se
+prolonge par une pseudo-droite supplémentaire, et même par une pseudo-droite
+en position générale ; c'est le \emph{lemme d'extension de Levi}
+(1926)\footnote{La réponse et le nom sont de nous ; la page n'en cite
+aucun.}. Sa fibre est l'ensemble des « types de positions relatives » d'une
+nouvelle pseudo-droite par rapport à l'arrangement donné.
+
+Tout cela vaut aussi pour les arrangements simples : la partie
+$\mathrm{C}_{\mathrm{aff,st}}(I_0) = \mathrm{C}_{\mathrm{st}}(I)$ de
+$\mathrm{C}_{\mathrm{aff}}(I_0) = \mathrm{C}(I)$ est stable par
+$\mathfrak{S}_I$, et en passant aux quotients on trouve
+$\mathrm{C}_{\mathrm{aff,st}}(n)$, $\mathrm{C}_{\mathrm{st}}(n)$,
+$\mathrm{C}_{\mathrm{st}}(n+1)$ et les mêmes diagrammes. Pour $n = 5$, la
+page donne : $\mathrm{C}_{\mathrm{st}}(5)$ n'a qu'un élément et la fibre de
+$\beta'$ en cet élément a $6$ éléments ; au-dessus de
+$\mathrm{C}_{\mathrm{st}}(6)$, les fibres de $\beta$ ont $1$, $1$, $2$ et $2$
+éléments\footnote{La page écrit ces nombres pour $\mathrm{C}(n)$ et
+$\mathrm{C}(n+1)$, sans l'indice ; ils ne sont justes que pour les
+arrangements simples --- il y a, par exemple, plusieurs arrangements non
+simples de cinq pseudo-droites. Les deux comptes donnent le même total,
+$6 = 1 + 1 + 2 + 2$, qui est le cardinal de
+$\mathrm{C}_{\mathrm{aff,st}}(5)$ écrit page 7 : c'est une vérification de
+cohérence que nous faisons, non une vérification des nombres eux-mêmes.}.
+
+\pagerange{3}{4}
+\subsection*{Couper le long de la droite distinguée (pages 3 et 4)}
+
+Soit $\xi = \mathrm{cl}(X, \Sigma) \in \mathrm{C}_{\mathrm{st}}(I) \simeq
+\mathrm{C}_{\mathrm{aff,st}}(I_0)$, avec $\operatorname{card} I_0 \geqslant 3$.
+Les pseudo-droites $\Delta_i$, $i \in I_0$, coupent $\Delta$ en des points
+distincts (l'arrangement est simple), rangés sur $\Delta$ dans un ordre
+circulaire : $I_0$ hérite d'une \emph{structure polygonale} $\pi(\xi)$, qui
+dépend de $\xi$.
+
+Découpons $X$ le long de $\Delta$. On obtient un disque fermé $\mathbf{D} =
+\mathrm{Déc}(X, \Delta)$, dont le bord $\partial \mathbf{D}$ est un revêtement
+à deux feuillets de $\Delta$ ; chaque $\Delta_i$, $i \in I_0$, devient une
+\emph{corde} de $\mathbf{D}$, dont les deux extrémités sont les deux points
+de $\partial\mathbf{D}$ au-dessus de $\Delta_i \cap \Delta$ --- donc deux
+points antipodaux du bord. On obtient un système de $n$ cordes deux à deux
+sécantes, simple, indexé par $I_0$, et l'ensemble
+\[
+\widetilde{I}_0(\xi) = \{\text{extrémités des cordes sur } \partial\mathbf{D}\}
+\]
+est un polygone à $2n$ sommets, revêtement à deux feuillets du polygone
+$I_0(\xi)$, l'antipodie échangeant les deux feuillets\footnote{La page
+appelle ce disque $\mathbf{D} = \widetilde{X}$ et l'abréviation
+« $\mathrm{Déc}$ » est la sienne. Elle note en marge « deux feuillets de
+$\Delta$ ». La description des cordes comme joignant des points antipodaux
+est explicitée par nous ; elle découle de ce que $\partial\mathbf{D} \to
+\Delta$ est le revêtement double.}.
+
+Fixons maintenant, une fois pour toutes, un polygone combinatoire $S$
+d'ordre $2n$, et notons $a_S$ son antipodie (la rotation d'un demi-tour) et
+$I_0 = S/\{1, a_S\}$, muni de la structure polygonale quotient $\pi_0$. Soit
+$\widetilde{\mathrm{C}}_{\mathrm{st}}(S)$ l'ensemble des classes de disques
+munis d'un système simple de cordes \emph{épinglé} par $S$, c'est-à-dire
+dont l'ensemble des extrémités est identifié à $S$ par un isomorphisme de
+polygones. L'application naturelle
+\[
+\widetilde{\mathrm{C}}_{\mathrm{st}}(S) \longrightarrow
+\mathrm{C}^{!}_{\mathrm{aff,st}}(I_0) := \{\xi \in
+\mathrm{C}_{\mathrm{aff,st}}(I_0) \mid \pi(\xi) = \pi_0\}
+\]
+a pour image la partie notée $\mathrm{C}^{!}$, formée des $\xi$ dont la
+structure polygonale induite sur $I_0$ est $\pi_0$. Sa fibre en $\xi$
+s'identifie à l'ensemble des isomorphismes de polygones $S \simeq
+\widetilde{I}_0(\xi)$ au-dessus de $I_0$ ; elle a \emph{deux} éléments, et
+on passe de l'un à l'autre par l'antipodie\footnote{Pour que la fibre ait
+exactement deux éléments, il faut qu'un automorphisme de $(X, \Sigma)$ qui
+fixe chaque pseudo-droite soit l'identité ; c'est le cas pour un arrangement
+simple d'au moins quatre pseudo-droites, puisqu'il fixe alors chaque sommet,
+intersection de deux pseudo-droites. Cette justification est de nous. La
+page commence par écrire « dont la fibre en $\xi$ est un \ldots », biffé, et
+le second argument de $\mathrm{C}_{\mathrm{aff,st}}(I_0, \ldots)$ est
+illisible ; on lit la notation $\mathrm{C}^{!}$ d'après la page 4, qui
+l'explique.}. Autrement dit,
+\[
+\widetilde{\mathrm{C}}_{\mathrm{st}}(S)/\{1, a_S\} \simeq
+\mathrm{C}^{!}_{\mathrm{aff,st}}(I_0).
+\]
+
+\pagerange{5}{7}
+\subsection*{Compter (pages 5 à 7)}
+
+Le groupe diédral $\mathbb{D}_{I_0} \subset \mathfrak{S}_{I_0}$, groupe
+d'automorphismes de la structure polygonale $\pi_0$, d'ordre $2n$, agit sur
+$\mathrm{C}^{!}_{\mathrm{aff,st}}(I_0)$, et l'on a deux applications
+\[
+\alpha : \mathrm{C}_{\mathrm{aff,st}}(I_0) \longrightarrow
+\mathrm{C}_{\mathrm{aff,st}}(n), \qquad
+\alpha^{!} : \mathrm{C}^{!}_{\mathrm{aff,st}}(I_0) \longrightarrow
+\mathrm{C}_{\mathrm{aff,st}}(n) \simeq
+\mathrm{C}^{!}_{\mathrm{aff,st}}(I_0)/\mathbb{D}_{I_0}.
+\]
+Soit $\xi \in \mathrm{C}_{\mathrm{aff,st}}(n)$\footnote{La page note cet
+élément $\xi$ surmonté d'un petit signe en exposant, lu « $q$ » ou « $4$ »
+sans certitude ; on l'omet. Elle écrit $\mathrm{C}_{\mathrm{aff}}(n)$ là où,
+les arrangements étant simples, il faut $\mathrm{C}_{\mathrm{aff,st}}(n)$.}.
+La fibre $\alpha^{-1}(\xi)$ est une orbite de $\mathfrak{S}_{I_0}$, la fibre
+$(\alpha^{!})^{-1}(\xi)$ une orbite de $\mathbb{D}_{I_0}$, et
+\[
+\alpha^{-1}(\xi) \simeq \mathfrak{S}_{I_0} \times^{\mathbb{D}_{I_0}}
+(\alpha^{!})^{-1}(\xi).
+\]
+Ce n'est pas une conjecture --- la page écrit « sans doute » --- mais un fait
+général : l'application $\xi' \mapsto \pi(\xi')$ de $\alpha^{-1}(\xi)$ vers
+l'ensemble des structures polygonales de $I_0$ est
+$\mathfrak{S}_{I_0}$-équivariante, cet ensemble est homogène de stabilisateur
+$\mathbb{D}_{I_0}$, et un ensemble équivariant au-dessus de $G/H$ est induit
+de sa fibre en $H$\footnote{La justification est de nous. La page note le
+produit contracté $\mathfrak{S}_{I_0} \wedge^{\mathbb{D}_{I_0}} (\cdot)$ ; on
+écrit $\times^{\mathbb{D}_{I_0}}$, la notation usuelle pour l'induction, et
+pour ne pas confondre avec le $\wedge$ des torseurs.}. D'où
+\[
+\operatorname{card} \alpha^{-1}(\xi) = \frac{n!}{2n} \cdot
+\operatorname{card} (\alpha^{!})^{-1}(\xi), \qquad \frac{n!}{2n} =
+\frac{(n-1)!}{2},
+\]
+le nombre de structures polygonales sur un ensemble à $n \geqslant 3$
+éléments.
+
+Le stabilisateur dans $\mathbb{D}_{I_0}$ d'un élément de
+$(\alpha^{!})^{-1}(\xi)$ s'identifie au groupe $G_\xi = \mathrm{Aut}(X,
+\Sigma, \Delta)$ des automorphismes de l'arrangement qui fixent $\Delta$ :
+ils agissent fidèlement sur les indices, comme on l'a dit, et respectent
+nécessairement l'ordre des points sur $\Delta$. Si $N(\xi) = \operatorname{card}
+\mathrm{Aut}(X, \Sigma, \Delta)$, on a donc
+\[
+\operatorname{card} (\alpha^{!})^{-1}(\xi) = \frac{2n}{N(\xi)}, \qquad
+\operatorname{card} \widetilde{\alpha}^{-1}(\xi) = \frac{4n}{N(\xi)},
+\]
+où $\widetilde{\alpha}$ est la composée $\widetilde{\mathrm{C}}_{\mathrm{st}}(S)
+\to \mathrm{C}^{!}_{\mathrm{aff,st}}(I_0) \to \mathrm{C}_{\mathrm{aff,st}}(n)$,
+de degré $2$ puis $\alpha^{!}$ ; c'est le quotient par le groupe diédral
+$\mathbb{D}_S$ d'ordre $4n$ de $S$, et la formule est celle des orbites et
+des stabilisateurs.
+
+\textbf{Exemples.} Pour $n = 3$, $\mathrm{C}_{\mathrm{aff,st}}(3)$ a un
+élément, $\mathrm{Aut}(X, \Sigma, \Delta) \simeq \mathfrak{S}_3$, et
+$\widetilde{\mathrm{C}}_{\mathrm{st}}(S)$ est une seule orbite de
+$\mathbb{D}_S$, à $12/6 = 2$ éléments\footnote{La page dit « une seule orbite
+sous $\mathbb{D}_{I_0}$, d'ordre $12/6 = 2$ ». Le nombre $12 = 4n$ est
+l'ordre de $\mathbb{D}_S$, et c'est sous $\mathbb{D}_S$ que
+$\widetilde{\mathrm{C}}_{\mathrm{st}}(S)$ est une orbite ; sous
+$\mathbb{D}_{I_0}$, d'ordre $6$, c'est $\mathrm{C}^{!}$ qui en est une, à un
+seul élément.}. Pour $n = 4$, $\mathrm{C}_{\mathrm{aff,st}}(4)$ a un
+élément, $\mathrm{Aut}(X, \Sigma, \Delta) \simeq \mathbf{Z}/2\mathbf{Z}$, et
+$\operatorname{card} \widetilde{\mathrm{C}}_{\mathrm{st}}(S) = 16/2 = 8$. Pour
+$n = 5$, $\operatorname{card} \mathrm{C}_{\mathrm{aff,st}}(5) = 6$, et la page
+s'arrête là. Ces groupes sont les stabilisateurs d'une droite dans les
+groupes d'automorphismes $\mathfrak{S}_4$ de quatre droites en position
+générale et diédral d'ordre $10$ de cinq droites, que donne le tableau de
+la page 72.
+
+\textbf{Résumé de la page 7.} Grothendieck récapitule.
+$\widetilde{\mathrm{C}}_{\mathrm{st}}(S)$ est l'ensemble des classes de
+disques munis d'un système simple de cordes épinglé par le polygone $S$
+d'ordre $2n$ ; il dépend fonctoriellement de $S$ pour les isomorphismes de
+polygones, donc $\mathbb{D}_S$ y agit. Pour $\widetilde{\xi} \in
+\widetilde{\mathrm{C}}_{\mathrm{st}}(S)$ correspondant à $(X, \Sigma,
+\Delta)$, il demande si
+\[
+(\mathbb{D}_S)_{\widetilde{\xi}} \simeq \mathrm{Aut}_{\mathrm{ist}}(\mathbf{D},
+\widetilde{\Sigma}) \simeq \mathrm{Aut}(X, \Sigma, \Delta),
+\]
+le premier terme étant le stabilisateur, le deuxième le groupe des
+automorphismes à isotopie près du disque à cordes --- ce qu'on vient
+d'utiliser\footnote{L'indice « $\mathrm{ist}$ » est lu ainsi, sans
+certitude, et glosé en marge « (\ldots{} des cat.\ isotopiques) ». La page
+fait précéder la formule d'un « alors ? ».}. Enfin
+$\widetilde{\mathrm{C}}_{\mathrm{st}}(S)/\mathbb{D}_S \simeq
+\mathrm{C}_{\mathrm{aff,st}}(n)$, l'ensemble des classes de systèmes simples
+$(X, \Sigma, \Delta)$, et $\widetilde{\mathrm{C}}_{\mathrm{st}}(S)/\{1, a_S\}
+\simeq \mathrm{C}^{!}_{\mathrm{aff,st}}(I_0)$.
+
+\pagerange{9}{14}
+\section*{Dessins, et une page étrangère (pages 9 à 14)}
+
+\pagerange{9}{9}
+\subsection*{Un arrangement de neuf courbes (page 9)}
+
+La page est occupée par un grand arrangement tracé dans un disque. Ses
+courbes portent, à leurs extrémités sur le bord, les étiquettes appariées
+$\Delta_A, \Delta_{A'}, \Delta_B, \Delta_{B'}, \Delta_C, \Delta_{C'}$, et trois
+autres, $D_A, D_B, D_C$, s'enroulent autour du centre ; les points
+d'intersection s'appellent $A, B, C, A', B', C'$ au centre, puis $L, M, N$,
+$L', M', N'$, $P, Q, R$, $P', Q', R'$. Chaque région porte son nombre de
+côtés, et la page les compte : $7$ triangles, $24$ quadrilatères, $6$
+pentagones, soit $37$ régions. Au-dessous, deux hexagones de sommets $A,
+B', C, A', B, C'$.
+
+Neuf pseudo-droites simples découpent le plan projectif en $1 + 9 \cdot 8 / 2
+= 37$ régions, ce qui s'accorde avec le total. Mais la somme des nombres de
+côtés, $3 \cdot 7 + 4 \cdot 24 + 5 \cdot 6 = 147$, est impaire, alors que pour
+les faces d'une carte elle vaut deux fois le nombre d'arêtes ; les régions
+« à l'infini », que la page ferme par un arc du bord, comptent sans doute ce
+côté-là, ou un décompte est faux. On ne tranche pas sur la
+transcription\footnote{La vérification de parité est de nous. Les mots
+« triangles », « carrés », « pentagones » sont du transcripteur : sur la
+page, chaque ligne du décompte est précédée d'un petit polygone dessiné.}.
+Les mêmes lettres $A, A', B, C', L, N, P, Q, R, \ldots$ marquent la
+construction de la page 13.
+
+\pagerange{10}{10}
+\subsection*{La factorisation de Stein (page 10)}
+
+Cette page, sur une autre feuille, n'a aucun lien avec les pseudo-droites.
+Pour une application $f : Z \to X$, notons $Z \to \widetilde{Z} \to X$ sa
+\emph{factorisation de Stein} : en topologie, pour $f$ propre,
+$\widetilde{Z}$ est l'espace des composantes connexes des fibres ; en
+géométrie algébrique, $\widetilde{Z} = \mathrm{Spec}_X f_* \mathcal{O}_Z$.
+Disons $f$ \emph{steinienne} si $\widetilde{Z} \simeq X$. La page énonce la
+propriété universelle : si $Z' \to X'$ est steinienne et s'insère dans un
+carré commutatif au-dessus de $Z \to X$, il existe une unique $X' \to
+\widetilde{Z}$ telle que le carré
+
+\begin{tikzcd}
+Z \arrow[d] & Z' \arrow[l] \arrow[d] \\
+\widetilde{Z} & X' \arrow[l]
+\end{tikzcd}
+
+commute. Autrement dit, dans la catégorie des flèches steiniennes $Z' \to X'$
+au-dessus de $Z \to X$, l'objet $(Z \to \widetilde{Z})$ est \emph{final} :
+de tout objet il part une unique flèche vers lui\footnote{La page dit « objet
+initial ». Avec les flèches telles qu'elle les dessine --- de l'objet
+$(Z' \to X')$ vers $(Z \to \widetilde{Z})$ ---, la propriété énoncée est
+celle d'un objet final ; elle serait initiale dans la catégorie opposée.
+Sous la flèche $X' \to \widetilde{Z}$, un mot souligné est illisible.}.
+
+Il demande ensuite quand la factorisation commute au changement de base :
+si le carré $Z' = Z \times_X X'$ est cartésien, les deux carrés de
+
+\begin{tikzcd}
+Z \arrow[d] & Z' \arrow[l] \arrow[d] \\
+\widetilde{Z} \arrow[d] & \widetilde{Z}' \arrow[l] \arrow[d] \\
+X & X' \arrow[l]
+\end{tikzcd}
+
+le sont-ils ? Il note deux conditions possibles, a) « $Z \to X$ compact ? »
+et b) « $X' \to X$ localement $\mathcal{O}$-acyclique »\footnote{« compact »
+et la lettre $\mathcal{O}$ sont des lectures incertaines.}, et s'arrête. Deux
+réponses connues, que la page ne donne pas : en topologie, pour $f$ propre
+entre espaces localement compacts, les fibres de $Z'$ étant celles de $Z$,
+les deux carrés sont cartésiens pour tout changement de base --- c'est la
+stabilité de la factorisation « monotone-légère » ; en géométrie algébrique,
+pour $f$ quasi-compact et quasi-séparé, il suffit que $X' \to X$ soit plat
+(changement de base plat pour $f_*\mathcal{O}_Z$)\footnote{Ces deux réponses
+sont de nous, citées de mémoire ; la condition b) de la page va dans le
+sens de la seconde.}.
+
+\pagerange{11}{14}
+\subsection*{Polyèdres et constructions (pages 11 à 14)}
+
+La page 11 est une page de dessins au crayon : une sphère parcourue de trois
+grands cercles, une pyramide et une bipyramide, un réseau de points, un
+octaèdre inscrit dans un cube, un polyèdre à faces carrées et hexagonales
+(un octaèdre tronqué ?) inscrit dans un cube, un arbre. Elle porte
+\[
+48 = 2 \cdot 4!, \qquad \frac{5!}{2 \cdot 4!} = \frac{5}{2}, \qquad
+12 = \frac{8 \times 3 \times 2}{4}.
+\]
+Une sphère coupée par trois grands cercles en position générale \emph{est}
+un octaèdre --- six sommets, douze arêtes, huit triangles --- et c'est le
+revêtement double de trois droites du plan projectif : c'est l'objet des
+pages 31 à 38, et $48 = 2 \cdot 4!$ est l'ordre de son groupe de symétries
+$\mathfrak{S}_4 \times \{\pm 1\}$\footnote{Ce rapprochement est de nous ; la
+page n'écrit rien autour de ces nombres.}.
+
+La page 12 dessine un arrangement de six pseudo-droites, un pentagone central
+entouré de cinq triangles, six régions marquées $4_1, \ldots, 4_6$. La page
+14, cinq droites $D_0, \ldots, D_4$ formant une étoile, des demi-plans
+hachurés, et une courbe --- une pseudo-droite --- qui coupe l'étoile.
+
+La page 13 construit un arrangement de droites rectilignes : deux
+horizontales, deux verticales et des obliques, portant les points $P, L, B,
+C', N$ et $N', C, B', L', P'$, et des longueurs $a, b, a', b'$ sur des
+segments. À droite :
+\[
+a + a' \leqslant 2, \qquad b + b' \geqslant 2, \qquad a' + b > 2,
+\]
+d'où $b > a$, puisque $a < 2 - a' < b$\footnote{Le signe des deux premières
+inégalités a été repassé, et on ne sait pas s'il est large ou strict ; la
+conclusion $b > a$ n'en dépend pas.}. Les lettres sont celles de la page 9,
+et la page 9 fait s'enrouler trois de ses courbes : il est naturel de lire
+la page 13 comme une tentative de réaliser l'arrangement de la page 9 par de
+vraies droites, en suivant les contraintes métriques que cela impose. C'est
+une conjecture de notre part ; elle rejoint la question de
+l'\emph{étirabilité} posée page 60, et neuf est justement le plus petit
+nombre de pseudo-droites d'un arrangement non étirable (Ringel, 1956, à
+partir de la configuration de Pappus)\footnote{Rien sur les pages ne dit que
+l'arrangement de la page 9 est celui-là, et on ne l'affirme pas.}.
+
+\pagerange{16}{18}
+\section*{II. Hyperplans réels et vecteurs de signes (pages 16 à 18)}
+
+Soit $V$ un espace vectoriel réel de dimension finie et $H$ un hyperplan de
+$V$. Les trois parties $H$, $V'_H$, $V''_H$ --- l'hyperplan et ses deux
+demi-espaces ouverts --- forment une partition $D_H$ de $V$ en parties
+convexes. C'est un ensemble à trois éléments dont un est distingué ; le
+choix de l'un des deux demi-espaces comme positif l'identifie à
+$\mathbf{F}_3 = \{-1, 0, 1\}$\footnote{La page dit « on peut regarder $D_H$
+comme isomorphe à $\mathbf{F}_3$ » ; l'isomorphisme dépend du choix d'une
+coorientation de $H$. Ce qui est canonique, c'est l'ordre défini plus bas,
+où $0$ est le plus petit élément. La note marginale qui ouvre la page,
+« Théorie analogue dans le cas affine, \ldots », est en majeure partie
+illisible.}. Soit $\mathbf{S} = (V \smallsetminus \{0\})/\mathbf{R}^{*}_{+}$ la
+sphère des directions\footnote{La page écrit $\mathbf{S} = V^{*}/\mathbf{R}^{*}_{+}$,
+où $V^{*}$ ne peut être ici que $V \smallsetminus \{0\}$, et non le dual.}, et
+$\varphi_H : \mathbf{S} \to D_H$ l'application qui envoie une direction sur la
+partie qui la contient.
+
+Pour une famille finie $(H_i)_{i \in I}$ d'hyperplans distincts, on obtient
+\[
+\varphi : \mathbf{S} \longrightarrow \mathbf{E} = \prod_{i \in I} D_{H_i},
+\]
+qui associe à chaque direction son \emph{vecteur de signes}. Les fibres non
+vides $Z^{*}_\alpha = \varphi^{-1}(\alpha)$ forment une partition de
+$\mathbf{S}$ en parties convexes --- leurs images inverses dans $V$ sont des
+cônes convexes --- et $\Sigma = \varphi(\mathbf{S}) \subset \mathbf{E}$ est leur
+ensemble d'indices. Il est stable par $-\mathrm{id}_{\mathbf{E}}$, et
+$Z^{*}_{-\alpha} = -Z^{*}_\alpha$\footnote{Le mot « alvéoles ouvertes » est
+celui de la page. Deux notes marginales, rattachées à « distincts » et à
+« convexes », sont en grande partie illisibles ; on y lit deux fois « si
+$\bigcap H_i = \{0\}$ ».}.
+
+\textbf{Les adhérences.} Ordonnons chaque $D_{H_i}$ par $0 < \alpha'_i$ et $0 <
+\alpha''_i$, les deux éléments non nuls étant incomparables : $\xi \leqslant
+\eta$ si et seulement si $\xi = 0$ ou $\xi = \eta$. On munit $\mathbf{E}$ de
+l'ordre produit et $\Sigma$ de l'ordre induit. Alors
+\[
+\overline{Z^{*}_\alpha} = \bigcup_{\beta \in \Sigma,\ \beta \leqslant \alpha}
+Z^{*}_\beta :
+\]
+l'adhérence d'une strate est l'intersection des demi-espaces \emph{fermés}
+et des hyperplans qui la définissent, et un point y est dans une strate
+$\beta$ dont chaque signe est soit celui de $\alpha$, soit $0$\footnote{La
+page écrit « On se propose de déterminer $\overline{Z}^{*}_\alpha$ pour
+$i \in I$ », où il faut $\alpha \in \Sigma$. L'argument --- l'adhérence d'un
+cône convexe ouvert dans son espace engendré, défini par des inégalités
+strictes, est défini par les inégalités larges --- est développé par nous ;
+la page l'énonce.}. Munissons $\Sigma$ de la topologie dont les fermés sont
+les parties stables par minoration (la « topologie inférieure » de la page,
+aujourd'hui topologie d'Alexandrov de l'ordre) ; alors $\beta \leqslant
+\alpha$ équivaut à $\beta \in \overline{\{\alpha\}}$, et pour toute partie $A
+\subset \Sigma$, en posant $Z^{*}_A = \bigcup_{\alpha \in A} Z^{*}_\alpha$,
+\[
+\overline{Z^{*}_A} = Z^{*}_{\overline{A}},
+\]
+puisque $\Sigma$ est fini et que l'adhérence d'une réunion finie est la
+réunion des adhérences. L'ensemble ordonné $\Sigma$ est donc l'ensemble
+d'indices d'une stratification de la sphère $\mathbf{S}$ en strates convexes,
+qui satisfait l'axiome de frontière : l'adhérence d'une strate est réunion de
+strates. Lorsque $\bigcap_i H_i = \{0\}$, les strates sont des cellules
+ouvertes et l'on obtient une décomposition cellulaire régulière de la
+sphère ; sinon, la strate de signe nul est la sphère de $\bigcap_i H_i$, et
+l'on se ramène à ce cas en passant au quotient par
+$\bigcap_i H_i$\footnote{Cette dernière remarque est de nous ; c'est sans
+doute ce que vise l'hypothèse « si $\bigcap H_i = \{0\}$ » des notes
+marginales.}.
+
+Dans le vocabulaire actuel, $\Sigma$ est l'ensemble des \emph{covecteurs}
+non nuls du \emph{matroïde orienté} réalisé par les $H_i$, et
+$(\Sigma, \leqslant)$ est le \emph{poset des faces} de l'arrangement. Le pont
+avec les pseudo-droites, que ce dossier cherche partout ailleurs, est le
+\emph{théorème de représentation topologique} de Folkman et Lawrence (1978) :
+les matroïdes orientés de rang $3$ sont exactement les arrangements de
+pseudo-droites (de pseudo-cercles sur la sphère)\footnote{Les noms sont de
+nous ; les pages n'en citent aucun.}.
+
+\textbf{Les bornes inférieures.} Un paragraphe barré dit que $\Sigma$ n'est
+pas en général un ensemble où deux éléments minorés ont une borne inférieure,
+avec l'exemple de trois plans de $\mathbf{R}^3$ passant par une même droite :
+deux fuseaux opposés de la sphère ont pour minorants communs les deux points
+$\pm p$ de cette droite, et aucune borne inférieure. Le paragraphe qui suit,
+non barré, affirme que $\Sigma$ est une partie ouverte de $\mathbf{E}$,
+c'est-à-dire stable par majoration, et en déduit que toute partie minorée de
+$\Sigma$ y a une borne inférieure.
+
+La première affirmation est fausse en général, et le contre-exemple est
+celui que la page vient de barrer. Ce qui est vrai : \emph{$\Sigma$ est
+stable par majoration dans $\mathbf{E}$ si et seulement si, pour tout $x
+\neq 0$, les formes linéaires des hyperplans qui contiennent $x$ sont
+linéairement indépendantes} --- par exemple si les $H_i$ sont en position
+générale. Si elles le sont, on peut donner aux $\ell_i(x + \varepsilon v)$
+les signes qu'on veut ; si une relation $\sum c_i \ell_i = 0$ les lie, le
+vecteur de signes $(\operatorname{sgn} c_i)$ est interdit. Sous cette
+hypothèse, la conclusion suit : dans $\mathbf{E}$, toute partie non vide a
+une borne inférieure (coordonnée par coordonnée), et si la partie est minorée
+dans $\Sigma$, cette borne majore un élément de $\Sigma$, donc est dans
+$\Sigma$\footnote{L'énoncé corrigé et son argument sont de nous. La fin de
+la page est d'une lecture très incertaine ; « Inf » y est écrit « I--f ».}.
+
+\pagerange{20}{28}
+\section*{III. Les arrangements cruciaux (pages 20 à 28)}
+
+\pagerange{20}{20}
+\subsection*{Une première liste (page 20)}
+
+La page 20 dessine quatre arrangements : (1) quatre droites en position
+générale, de groupe $\mathfrak{S}_4$ ; (2) cinq droites en position
+générale, de groupe diédral $D_5$ ; (3) cinq droites « en position
+particulière » ; (4) six droites, les côtés d'un triangle et ses trois
+médianes concourantes. Elle énonce : un arrangement de pseudo-droites sans
+pseudo-droite bigonale, s'il ne se réduit pas à quatre pseudo-droites (cas
+(1)), contient une configuration de l'un des types (2), (3), (4) ; et ces
+types sont « non spéciaux » : réalisés en arrangements de dimension $2$,
+l'intersection de deux faces fermées y est vide, un sommet ou une arête
+fermée\footnote{Le début de l'énoncé est d'une lecture difficile
+(« Tout arr.\ \ldots{} $1$-dim.\ de ps.\ droites \ldots{} pouvant être de
+ps.\ droites bigones ») ; on lui donne l'hypothèse « sans bigone » de la page
+24, qui reprend le même énoncé. La parenthèse ouverte avant « de
+ps.\ droites » n'est pas refermée.}. Un NB ajoute : s'il ne contient ni (2) ni
+(3), il est du type (4) ou d'un type (5), sept pseudo-droites formées d'un
+quadrilatère et de ses trois diagonales, « qui mérite d'être étudié ». La
+page s'arrête sur « Si elle ne contient », biffé. Les pages 22 et 24 donnent
+des noms à tous ces types ; on les retrouve ci-dessous, avec la correction
+que le NB demande.
+
+\pagerange{22}{22}
+\subsection*{La liste des types (page 22)}
+
+On cherche les « cas cruciaux » d'arrangements de $N \geqslant 4$
+pseudo-droites, le cas $N = 3$ étant connu. Le nombre de sommets de chacun,
+que la page note en marge, est rappelé entre parenthèses.
+
+\emph{1\textsuperscript{o}) Il existe une pseudo-droite bigonale.}
+\begin{itemize}
+  \item $\mathrm{I}_N$ : un faisceau de $N - 1 \geqslant 3$ pseudo-droites
+  concourantes et une sécante ($N$ sommets)\footnote{La marge porte
+  « $N+1$ sommets ». Le centre du faisceau et les $N-1$ points de la sécante
+  font $N$ sommets.}. Les pseudo-droites du faisceau sont bigonales.
+  \item $\mathrm{I}_{p,q}$ : deux faisceaux de $p$ et $q$ pseudo-droites,
+  $p \geqslant q \geqslant 2$, et la pseudo-droite qui joint leurs deux
+  centres, $p + q + 1 = N \geqslant 5$ ($pq + 2$ sommets). Celle-ci est
+  l'unique pseudo-droite bigonale.
+\end{itemize}
+Ces deux types épuisent le cas : si $D$ est bigonale, de sommets $x$ et $y$,
+toute autre pseudo-droite coupe $D$ en $x$ ou en $y$, et l'on a deux
+faisceaux de centres $x$ et $y$ ; s'il n'y a qu'une pseudo-droite par $y$
+hors de $D$, c'est le type $\mathrm{I}_N$\footnote{Cette vérification est de
+nous ; la page donne la liste sans dire qu'elle est complète.}.
+
+\emph{2\textsuperscript{o}) Il n'existe pas de pseudo-droite bigonale.}
+\begin{itemize}
+  \item $\mathrm{II}'_{p,q}$ : deux faisceaux de $p$ et $q$ pseudo-droites,
+  $p \geqslant q \geqslant 2$, $p + q = N$, sans la pseudo-droite qui joindrait
+  leurs centres ($pq + 2$ sommets).
+  \item $\mathrm{II}_4$ : quatre pseudo-droites en position générale ($6$
+  sommets).
+  \item $\mathrm{II}_5$ : cinq pseudo-droites en position générale ($10$
+  sommets).
+\end{itemize}
+Le cas « minimal » $p = q = 2$ de $\mathrm{II}'_{p,q}$ est justement
+$\mathrm{II}_4$ : deux paires de pseudo-droites se coupant en deux points
+distincts, sans troisième point de concours\footnote{L'identification
+$\mathrm{II}'_{2,2} = \mathrm{II}_4$ est de nous ; la page écrit que ce cas
+minimal est « justiciable \ldots », la fin étant illisible.}.
+
+\pagerange{24}{24}
+\subsection*{Le théorème (page 24)}
+
+Deux autres types entrent ici.
+\begin{itemize}
+  \item $\mathrm{III}_6$, l'arrangement « tétraédral » : les six
+  pseudo-droites qui joignent deux à deux quatre points, dont trois jamais
+  alignés --- le \emph{quadrangle complet} ($4 + 3 = 7$ sommets : quatre
+  points triples et trois points doubles, les points diagonaux). C'est la
+  configuration (4) de la page 20 : un triangle et ses trois médianes.
+  \item $\mathrm{IV}_7$ : un \emph{quadrilatère complet} --- quatre
+  pseudo-droites en position générale et leurs six sommets --- et ses trois
+  diagonales, qui joignent les sommets opposés ($6 + 3 = 9$ sommets : six
+  points triples et les trois points diagonaux). C'est la configuration (5)
+  de la page 20.
+\end{itemize}
+
+\emph{Théorème} (énoncé, non démontré). Soit $K$ un arrangement de
+pseudo-droites tel qu'il n'existe pas deux sommets par l'un desquels passe
+chaque pseudo-droite --- c'est-à-dire qui n'est d'aucun des types
+$\mathrm{I}_N$, $\mathrm{I}_{p,q}$, $\mathrm{II}'_{p,q}$ --- et qui ne contient
+pas de sous-arrangement de type $\mathrm{II}_5$. Alors $K$ est de type
+$\mathrm{III}_6$ ou $\mathrm{IV}_7$.
+
+La page en tire une forme encadrée : \emph{tout arrangement sans bigone est
+de type $\mathrm{II}_4$ ou contient un sous-arrangement de l'un des types}
+\[
+\mathrm{II}'_{3,2}, \qquad \mathrm{II}_5, \qquad \mathrm{III}_6,
+\]
+et ces trois types sont « latticiels » : les facettes fermées de
+l'arrangement de dimension $2$ correspondant forment un treillis,
+l'intersection de deux facettes fermées non vides étant une
+facette\footnote{Le premier type est écrit $\mathrm{I}'_{3,2}$ ici et
+$\mathrm{II}_{3,2}$ aux pages 26 et 28, et n'est défini nulle part. On le lit
+$\mathrm{II}'_{3,2}$ --- trois pseudo-droites par un point, deux par un
+autre, sans droite de jonction ---, ce qui est notre lecture : c'est le seul
+arrangement de cinq pseudo-droites sans bigone autre que $\mathrm{II}_5$, et
+c'est ce que demande la page 28, où un sous-arrangement de cinq
+pseudo-droites sans bigone est dit « du type $\mathrm{II}_5$ ou du type
+$\mathrm{II}_{3,2}$ ». C'est aussi la configuration (3) de la page 20.}. La
+forme encadrée découle du théorème : si $K$ est couvert par deux faisceaux
+sans bigone, c'est un $\mathrm{II}'_{p,q}$, qui contient
+$\mathrm{II}'_{3,2}$ dès que $p \geqslant 3$ et vaut $\mathrm{II}_4$ sinon ; et
+$\mathrm{IV}_7$ contient $\mathrm{III}_6$ (deux diagonales et les quatre côtés
+forment le quadrangle complet de quatre sommets du quadrilatère).
+
+La page ajoute entre parenthèses que s'il ne contient ni $\mathrm{II}'_{3,2}$
+ni $\mathrm{II}_5$, il est de type $\mathrm{III}_6$ ou $\mathrm{IV}_7$ ; le NB
+de la page 20 dit la même chose. Cela ne peut pas être juste tel quel :
+$\mathrm{IV}_7$ contient un $\mathrm{II}'_{3,2}$. Si $A, B, C, D$ sont les
+sommets d'un quadrangle, $E = AB \cap CD$, $F = AD \cap BC$, les sept
+pseudo-droites de $\mathrm{IV}_7$ sont $AB$, $BC$, $CD$, $DA$, $AC$, $BD$,
+$EF$, et les cinq pseudo-droites $AB$, $AD$, $AC$, $BD$, $EF$ n'ont qu'un
+point triple, $A$. Le théorème admis, la conclusion correcte est : \emph{s'il
+ne contient ni $\mathrm{II}'_{3,2}$ ni $\mathrm{II}_5$, $K$ est de type
+$\mathrm{II}_4$ ou $\mathrm{III}_6$}\footnote{La correction et le
+contre-exemple sont de nous. On vérifie aussi que $\mathrm{III}_6$ ne
+contient ni $\mathrm{II}_5$ ni $\mathrm{II}'_{3,2}$ : ôter une pseudo-droite
+du quadrangle complet laisse deux points triples. La forme encadrée n'est pas
+touchée.}.
+
+\pagerange{26}{26}
+\subsection*{Le cas latticiel (page 26)}
+
+On est dans le \emph{cas latticiel} si l'intersection de deux facettes
+fermées est vide ou une facette fermée. Grothendieck énonce : \emph{on est
+dans le cas latticiel si et seulement s'il n'y a pas de pseudo-droite
+bigonale et que l'arrangement n'est pas de type $\mathrm{II}_4$}\footnote{La
+page écrit « b) pas de type $\mathrm{II}_4$ ». On lit « $K$ n'est pas de type
+$\mathrm{II}_4$ » plutôt que « ne contient pas » : $\mathrm{II}_5$ contient
+$\mathrm{II}_4$ et la page 24 le dit latticiel. Dans $\mathrm{II}_4$, deux
+des trois quadrilatères ont en commun deux sommets opposés, qui ne forment
+pas une facette.}.
+
+\emph{Proposition} (énoncée). Soit $\mathcal{X}$ un arrangement de dimension
+$2$ de $N$ pseudo-droites $(D_i)_{i \in I}$, et $D$ une $(N+1)$-ième
+pseudo-droite, qui ne soit pas bigonale dans l'arrangement $\mathcal{X}'$
+obtenu en l'ajoutant. Soit $S$ l'ensemble des sommets de $\mathcal{X}'$ sur
+$D$, c'est-à-dire des points $D \cap D_i$. Deux points $s, s' \in S$ sont
+adjacents sur $D$ si et seulement s'il existe une facette fermée $f$ de
+$\mathcal{X}$ qui les contient tous deux ; elle est alors unique, et $D \cap
+f$ est l'arête de $\mathcal{X}'$ qui joint $s$ et $s'$\footnote{La fin de
+l'énoncé, autour de « $D \cap f$ » et d'une courbe notée $T$ sur le dessin,
+est d'une lecture incertaine ; on retient ce que dit la dernière ligne :
+« c'est aussi l'arête sur $D$ joignant $s$ et $s'$ ». Un premier énoncé du
+lemme de la page 28, barré, suit sur la page.}.
+
+C'est l'outil de la récurrence : si l'on ajoute les pseudo-droites une à une
+sans jamais créer de bigone, la position de chaque nouvelle pseudo-droite
+dans les faces de l'arrangement précédent se lit sur le squelette.
+
+\pagerange{28}{28}
+\subsection*{Le lemme d'ordonnancement (page 28)}
+
+\emph{Lemme} (énoncé ; seule une « Idée » de démonstration est écrite).
+Soit $K$ un arrangement de dimension $1$ de $N \geqslant 5$ pseudo-droites,
+sans pseudo-droite bigonale. On peut numéroter ses pseudo-droites $D_1,
+\ldots, D_N$ de sorte que, $K_i$ désignant l'arrangement formé de $D_1,
+\ldots, D_i$,
+\begin{enumerate}
+  \item[1\textsuperscript{o})] $D_1, \ldots, D_4$ forment un arrangement de type
+  $\mathrm{II}_4$ (ou bien $D_1, \ldots, D_6$ un arrangement de type
+  $\mathrm{III}_6$) ;
+  \item[2\textsuperscript{o})] pour $i \geqslant 5$ (respectivement $i
+  \geqslant 7$), $D_i$ n'est pas bigonale dans $K_i$.
+\end{enumerate}
+L'idée procède par cas, que la page dit mutuellement exclusifs : si l'on
+trouve un $K_5$ de type $\mathrm{II}_5$, on continue d'ajouter des
+pseudo-droites ; si l'on trouve un $K_5$ de type $\mathrm{II}'_{3,2}$, une
+pseudo-droite ajoutée n'est jamais bigonale ; si $K$ contient un
+$\mathrm{III}_6$, on part de lui. Le point de départ est donc toujours
+$\mathrm{II}_4$ ou $\mathrm{III}_6$\footnote{Ce passage est écrit très vite,
+et seules les formules s'en lisent sûrement ; un « $\mathrm{III}_7$ » y
+paraît deux fois sans être défini. On ne reconstitue pas l'argument.}.
+
+\pagerange{31}{38}
+\section*{IV. Trois pseudo-droites : cubes, octaèdres et leurs formes gauches (pages 31 à 38)}
+
+Ces pages, d'une écriture posée et numérotées, traitent à fond le cas $N = 3$
+que la page 22 disait « bien étudié ». Trois pseudo-droites en position
+générale découpent le plan projectif en $3$ sommets, $6$ arêtes et $4$
+triangles : c'est la moitié d'un octaèdre, l'\emph{hémi-octaèdre}, et son
+revêtement double sur la sphère est l'octaèdre lui-même.
+
+\pagerange{31}{32}
+\subsection*{Cube et octaèdre combinatoires (pages 31 et 32)}
+
+Soit $I$ un ensemble à trois éléments et $(\Phi_i)_{i \in I}$ une famille
+d'ensembles à deux éléments ; posons $\Phi = \coprod_i \Phi_i$, à six
+éléments, au-dessus de $I$. Le \emph{cube combinatoire} de dimension $3$
+associé a pour faces les éléments de $\Phi$, pour arêtes les sections
+partielles de $\Phi$ au-dessus d'une partie à deux éléments de $I$, pour
+sommets les sections totales :
+\[
+C_2 \simeq \Phi, \qquad C_1 \simeq \{A \in \mathfrak{P}_2(\Phi) \mid A \to I
+\text{ injectif}\}, \qquad C_0 \simeq \{A \in \mathfrak{P}_3(\Phi) \mid A \to I
+\text{ bijectif}\},
+\]
+l'incidence étant l'inclusion renversée. Les éléments de $I$ correspondent
+aux paires de faces opposées. L'\emph{octaèdre combinatoire}, dual du cube,
+a les mêmes ensembles en dimensions renversées, $O_0 = C_2$, $O_1 = C_1$,
+$O_2 = C_0$, l'incidence étant l'inclusion.
+
+L'automorphisme involutif $\underline{a}$ de $\Phi$, identique sur $I$ et
+échangeant les deux éléments de chaque $\Phi_i$, induit l'\emph{antipodie}
+du cube et de l'octaèdre ; il est central. Les quotients
+\[
+\widetilde{C}_k = C_k/\{1, \underline{a}\}, \qquad
+\widetilde{O}_k = O_k/\{1, \underline{a}\}
+\]
+sont le cube et l'octaèdre \emph{gauches}, ou projectifs --- aujourd'hui
+hémi-cube et hémi-octaèdre. L'octaèdre gauche a $3$ sommets, $6$ arêtes et
+$4$ faces : c'est la décomposition du plan projectif réel par trois droites
+indexées par $I$. À $i \in I$ correspond la « droite » $D_i$ formée des deux
+arêtes projectives images des quatre arêtes $A \in \mathfrak{P}_2(\Phi)$
+au-dessus de $I \smallsetminus \{i\}$\footnote{Sur la page, « gauche (ou
+projectif) » est ajouté en interligne, et plus bas « gauche » remplace
+« projectif » biffé ; le mot se lit sûrement page 37. La fin de la page 32 est
+d'une lecture incertaine.}.
+
+\pagerange{33}{35}
+\subsection*{Orientations (pages 33 à 35)}
+
+Les foncteurs $C \mapsto \widetilde{C}$ et $O \mapsto \widetilde{O}$ ne sont
+pas des équivalences : l'antipodie est un automorphisme non trivial de $C$
+et de $O$ qui induit l'identité de $\widetilde{C}$ et $\widetilde{O}$. Ils
+sont \emph{pleins} --- tout automorphisme du quotient se relève ---, mais
+\emph{pas fidèles} : sur les groupes d'automorphismes, c'est la surjection
+$\mathfrak{S}_4 \times \{\pm 1\} \to \mathfrak{S}_4$ de noyau $\{1,
+\underline{a}\}$\footnote{La page écrit qu'ils « ne sont pas pleinement
+fidèles mais \ldots{} fidèles, car l'antipodisme $\underline{a}$ est un
+automorphisme non trivial de $C$, $O$ et induit l'automorphisme trivial de
+$\widetilde{C}$, $\widetilde{O}$ » ; l'argument donné prouve le contraire de
+la fidélité, et la page 38 dit bien que $\mathrm{oct} \to
+\mathrm{oct.\ gauches}$ est « surjectif sur les isom. ». La lecture « sont » est
+incertaine.}. On obtient en revanche des équivalences de catégories en
+prenant des cubes et des octaèdres \emph{orientés} :
+
+(5)
+
+\begin{tikzcd}
+\text{cubes comb.\ orientés} \arrow[r, "\approx"] \arrow[d, "\approx"'] &
+\text{cubes comb.\ gauches} \arrow[d, "\approx"] \\
+\text{octaèdres comb.\ orientés} \arrow[r, "\approx"] &
+\text{octaèdres comb.\ gauches}
+\end{tikzcd}
+
+car le groupe des rotations du cube, $\mathfrak{S}_4$, ne contient pas
+l'antipodie (qui renverse l'orientation en dimension $3$) et s'envoie
+isomorphiquement sur le groupe de l'hémi-cube. Inversement, à partir de
+$\widetilde{C}$ ou $\widetilde{O}$, on retrouve $C$ ou $O$ orienté comme
+revêtement d'orientation.
+
+L'ensemble des orientations du cube, ou de l'octaèdre, défini par $(\Phi_i)$
+est
+\[
+(6) \qquad \mathrm{or}(C) \simeq \mathrm{or}(O) \simeq \Bigl(\bigwedge_{i \in I}
+\Phi_i\Bigr) \wedge \mathrm{or}(I) :
+\]
+une orientation du cube, réalisé comme le cube $[-1,1]^{I}$, est
+donnée par un choix d'un élément de chaque $\Phi_i$ (un sens sur chaque axe)
+et d'un ordre circulaire sur $I$ (l'ordre des axes), et changer l'un des
+choix renverse l'orientation. Une orientation est donc un isomorphisme
+\[
+(6\ \text{bis}) \qquad \Bigl(\bigwedge_{i \in I} \Phi_i\Bigr) \wedge \mathrm{or}(I)
+\simeq \underline{1}, \quad \text{ou encore} \quad \bigwedge_{i \in I} \Phi_i
+\simeq \mathrm{or}(I).
+\]
+
+Dans l'octaèdre gauche, la droite $D_i$ porte deux sommets et deux arêtes.
+Les sommets de $\widetilde{O}$ sont les paires $\Phi_j$, donc indexés par $I$,
+et $D_i$ passe par les deux sommets autres que $i$ :
+\[
+(8) \qquad S_i \simeq I \smallsetminus \{i\}.
+\]
+Ses deux arêtes sont les deux classes, modulo l'antipodie, d'arêtes $\{x_j,
+x_k\}$ du cube au-dessus de $\{j, k\} = I \smallsetminus \{i\}$ ; une telle
+classe est une bijection $\Phi_j \simeq \Phi_k$, d'où
+\[
+(7) \qquad A_i = \bigwedge_{\alpha \in I \smallsetminus \{i\}} \Phi_\alpha .
+\]
+Chaque $D_i$ est donc un \emph{bigone} du graphe de $\widetilde{O}$. Orienter
+un bigone, c'est dire de quel sommet part chacune de ses deux arêtes ;
+changer le sommet ou l'arête renverse l'orientation, si bien que
+l'ensemble des deux orientations de $D_i$ est
+\[
+(9) \qquad \Omega_i \simeq S_i \wedge A_i .
+\]
+Chaque $\Phi_\alpha$ figurant dans deux des $A_i$,
+\[
+(10) \qquad \bigwedge_{i \in I} A_i \simeq \bigwedge_{\alpha \in I}
+\Phi_\alpha^{\wedge 2} \simeq \underline{1},
+\]
+et donc
+\[
+(11) \qquad \bigwedge_{i \in I} \Omega_i \simeq \bigwedge_{i \in I} S_i \simeq
+\bigwedge_{i \in I} (I \smallsetminus \{i\}) \simeq \mathrm{or}(I),
+\]
+le dernier isomorphisme étant l'isomorphisme canonique évident pour un
+ensemble à trois éléments : à un ordre circulaire $\sigma$ on associe le
+choix, dans chaque $I \smallsetminus \{i\}$, de l'élément $\sigma(i)$ ; renverser
+$\sigma$ change les trois choix\footnote{L'explicitation de cet isomorphisme
+est de nous ; la page dit « isom.\ can.\ évident associé à l'ens.\ à $3$
+éléments $I$ ».}. Pour trois bigones quelconques $(S_i, A_i)$ avec $S_i = I
+\smallsetminus \{i\}$, se donner l'isomorphisme (10) revient donc à se donner
+\[
+(11\ \text{bis}) \qquad \bigwedge_{i \in I} \Omega_i \simeq \mathrm{or}(I), \qquad
+\text{soit} \qquad (12) \qquad \Bigl(\bigwedge_{i \in I} \Omega_i\Bigr) \wedge
+\mathrm{or}(I) \simeq \underline{1},
+\]
+c'est-à-dire une orientation du cube défini par la famille $(\Omega_i)$.
+
+Une fois le cube orienté par (6 bis), les $\Omega_i$ et les $\Phi_i$ se
+déterminent mutuellement :
+\[
+(13) \qquad \Omega_i \simeq \Phi_i \wedge \bigwedge_{\alpha \in I
+\smallsetminus \{i\}} (I \smallsetminus \{\alpha\}), \qquad \Phi_i \simeq \Omega_i
+\wedge \bigwedge_{\alpha \in I \smallsetminus \{i\}} (I \smallsetminus
+\{\alpha\}),
+\]
+d'où $\bigwedge \Omega_i \simeq \bigwedge \Phi_i$, et (14) : les orientations
+des octaèdres définis par $(\Omega_i)$ et par $(\Phi_i)$ se correspondent.
+
+\pagerange{35}{37}
+\subsection*{Le graphe octaédral gauche (pages 35 à 37)}
+
+\emph{Proposition} (« En résumé »). Considérons la carte de l'octaèdre gauche
+--- trois sommets, six arêtes, quatre faces triangulaires ---, c'est-à-dire
+un arrangement combinatoire de trois pseudo-droites $D_i$, $i \in I$, dans un
+plan projectif. Soit $K$ son squelette de dimension $1$, muni de ses trois
+sous-complexes $D_i$, qui sont des bigones, de sommets $S_i \simeq I
+\smallsetminus \{i\}$ et d'arêtes $A_i$ ; on l'appelle un \emph{graphe
+octaédral gauche}. (Les sommets de $K$ sont en bijection avec $I$, en
+associant à $i$ l'unique sommet qui n'est pas sur $D_i$.) Posons
+\[
+\Omega_i = S_i \wedge A_i, \qquad \Phi_i = \Omega_i \wedge \bigwedge_{\alpha
+\in I \smallsetminus \{i\}} (I \smallsetminus \{\alpha\}) \simeq A_i \wedge
+\bigwedge_{\alpha \in I} (I \smallsetminus \{\alpha\}).
+\]
+On a des isomorphismes canoniques, définis directement à partir de $K$ et
+des trois $D_i$,
+\[
+(15) \qquad \bigwedge_{i \in I} \Omega_i \simeq \bigwedge_{i \in I} \Phi_i
+\simeq \Bigl(\bigwedge_{i \in I} A_i\Bigr) \wedge \mathrm{or}(I),
+\]
+qu'on peut réécrire
+\[
+(15\ \text{bis}) \qquad \Bigl(\bigwedge_{i} \Omega_i\Bigr) \wedge \mathrm{or}(I)
+\simeq \Bigl(\bigwedge_{i} \Phi_i\Bigr) \wedge \mathrm{or}(I) \simeq
+\bigwedge_{i} A_i ,
+\]
+les deux premiers termes étant les orientations des octaèdres définis par
+$(\Omega_i)$ et par $(\Phi_i)$. Du fait que $K$ provient de la carte, le
+torseur (15 bis) reçoit une \emph{trivialisation canonique}, celle de (10).
+Appelons \emph{orientation} d'un graphe octaédral gauche une trivialisation
+$\bigwedge_{i} A_i \simeq \underline{1}$. Précisément, le foncteur
+\[
+(16) \qquad (\text{octaèdres gauches}) \longrightarrow (\text{graphes
+octaédraux gauches orientés})
+\]
+est une \emph{équivalence} de catégories. On le vérifie sur les groupes : le
+graphe octaédral gauche seul a pour groupe d'automorphismes
+$\mathfrak{S}_3 \ltimes (\mathbf{Z}/2\mathbf{Z})^3$, d'ordre $48$ (permuter les
+sommets, et échanger indépendamment les deux arêtes de chaque bigone) ; la
+trivialisation ne laisse que les échanges en nombre pair, $\mathfrak{S}_3
+\ltimes (\mathbf{Z}/2\mathbf{Z})^2 \simeq \mathfrak{S}_4$, le groupe de
+l'hémi-octaèdre\footnote{Cette vérification est de nous. La
+trivialisation a aussi une lecture directe : parmi les huit triples
+d'arêtes, une sur chaque $D_i$, elle distingue une classe de quatre, et ce
+sont les bords des quatre faces triangulaires. C'est en ce sens que les
+pages 46, 52 et 54 parlent de triples d'arêtes « compatibles avec
+l'orientation ». La note marginale de la page 37, qui glose l'équivalence
+comme l'ajout d'« une orientation des gr.\ octaédraux gauches », est d'une
+lecture incertaine.}. 
+
+\pagerange{37}{38}
+\subsection*{Le cube de foncteurs (pages 37 et 38)}
+
+Grothendieck résume les relations entre octaèdres et graphes octaédraux,
+gauches ou ordinaires, orientés ou non, par un diagramme commutatif en forme
+de cube :
+
+(17)
+
+\begin{tikzcd}[column sep=small, row sep=small]
+\text{oct}^{+} \arrow[rr, "\approx"] \arrow[dr, "\approx"] \arrow[dd] & &
+\text{oct.\ g.} \arrow[dr, "\approx"] \arrow[dd, no head, "=" description] & \\
+& \text{gr.\ oct}^{+} \arrow[rr, "\approx"] \arrow[dd] & &
+\text{gr.\ oct.\ g.}^{+} \arrow[dd] \\
+\text{oct} \arrow[rr] \arrow[dr, "\approx"] & & \text{oct.\ g.} \arrow[dr] & \\
+& \text{gr.\ oct} \arrow[rr] & & \text{gr.\ oct.\ g.}
+\end{tikzcd}
+
+où « g. » abrège « gauche » et l'exposant $+$ désigne les objets orientés.
+La face supérieure (objets orientés) est faite d'équivalences. Les quatre
+flèches verticales, qui oublient l'orientation, sont fidèles ; celle de
+droite à l'arrière est l'identité. La face arrière est formée des
+configurations de dimension $2$, la face avant des configurations de
+dimension $1$ associées ; les quatre flèches de l'arrière vers l'avant sont
+des équivalences, sauf $\text{oct.\ g.} \to \text{gr.\ oct.\ g.}$, qui est
+fidèle sans être plein, et dont l'énoncé (16) dit comment le rendre
+plein\footnote{La page marque certaines flèches d'un petit crochet, qu'on ne
+sait pas interpréter, et la flèche horizontale du milieu à l'arrière ne porte
+pas de $\approx$. On n'a pas reproduit les crochets.}.
+
+Sur la face inférieure, $\text{oct} \to \text{oct.\ g.}$ est pleine et non
+fidèle, comme on l'a vu. La page affirme que $\text{gr.\ oct} \to
+\text{gr.\ oct.\ g.}$ est une équivalence ; ce n'est pas possible si le cube commute.
+En effet la composée $\text{oct} \to \text{oct.\ g.} \to \text{gr.\ oct.\ g.}$
+induit sur les groupes $\mathfrak{S}_4 \times \{\pm 1\} \to \mathfrak{S}_4
+\hookrightarrow \mathfrak{S}_3 \ltimes (\mathbf{Z}/2\mathbf{Z})^3$, de noyau
+$\{1, \underline{a}\}$ et d'image d'indice $2$ ; puisque $\text{oct} \to
+\text{gr.\ oct}$ est une équivalence, la flèche $\text{gr.\ oct} \to
+\text{gr.\ oct.\ g.}$ n'est ni fidèle ni pleine. C'est d'ailleurs ce qu'on voit
+directement : le passage au quotient par l'antipodie la tue\footnote{La
+page dit : « les deux flèches $\text{oct} \to \text{gr.\ oct.} \to
+\text{gr.\ oct g.}$ sont des équivalences » et, plus bas, que les quatre
+flèches de passage du sphérique au gauche sont des équivalences « à
+l'exception de $\text{oct} \to \text{oct.\ gauches}$ ». La correction est de
+nous. Les groupes abstraits de $\text{gr.\ oct}$ et de $\text{gr.\ oct.\ g.}$
+sont isomorphes, d'ordre $48$ tous deux, ce qui explique peut-être
+l'affirmation ; mais le foncteur naturel n'induit pas cet isomorphisme.}. La
+marge de la page 38 relie les groupes $\mathfrak{S}_4 \times \{\pm 1\}$ et
+$\mathfrak{S}_4$ aux deux premières lignes de l'explication.
+
+\pagerange{39}{40}
+\section*{V. Arrangements de dimension 1 orientés (pages 39 et 40)}
+
+\pagerange{39}{39}
+\subsection*{Le théorème de pleine fidélité (page 39)}
+
+Un arrangement de dimension $1$ $(K, (D_i)_{i \in I})$ est défini à la page
+40 (ci-dessous). Une \emph{orientation} de cet arrangement est la donnée, pour tout $J
+\in \mathfrak{P}_3(I)$ dont les trois pseudo-droites ne sont pas concourantes,
+d'une orientation $\omega_J$ du graphe octaédral gauche $K_J$, au sens de
+(16).
+
+Soit $\mathcal{X}$ une carte qui est un arrangement de pseudo-droites. Son
+squelette $K$ est muni de la famille $(D_i)$ de ses pseudo-droites, qui en fait
+un arrangement de dimension $1$, et, par (16) appliqué à chaque triple, d'une
+orientation $\omega = (\omega_J)_J$. D'où un foncteur
+\[
+(18) \qquad \mathcal{X} \longmapsto (K, (D_i)_{i \in I}, \omega)
+\]
+de la catégorie des arrangements combinatoires de pseudo-droites vers celle
+des arrangements de dimension $1$ orientés.
+
+\emph{Théorème} (énoncé page 39). \emph{Le foncteur (18) est pleinement
+fidèle} : pour deux arrangements $\mathcal{X}$, $\mathcal{X}'$,
+\[
+\mathrm{Isom}(\mathcal{X}, \mathcal{X}') \xrightarrow{\ \sim\ }
+\mathrm{Isom}\bigl((K, (D_i), \omega), (K', (D'_{i'}), \omega')\bigr).
+\]
+La démonstration occupe les pages 41 à 49 ; Grothendieck dit à la fin ne pas
+l'avoir vérifiée dans un cas (voir plus bas)\footnote{Dans la marge de la
+page 39, trois lignes barrées, où l'on devine « bigone », sont trop
+incertaines pour être données.}.
+
+\pagerange{40}{40}
+\subsection*{Les axiomes (page 40)}
+
+La page 40 donne après coup la définition que la page 39 suppose. Un
+\emph{arrangement de dimension $1$ de pseudo-droites} est la donnée d'un
+$1$-complexe combinatoire fini $K$ et d'une famille finie $(D_i)_{i \in I}$ de
+sous-complexes polygonaux, tels que
+\begin{itemize}
+  \item toute arête de $K$ appartient à un $D_i$ et un seul ;
+  \item pour $i \neq j$, $D_i$ et $D_j$ se rencontrent en un sommet et un seul ;
+  \item tout sommet de $K$ appartient à au moins deux des $D_i$.
+\end{itemize}
+Supposons que l'intersection de tous les $D_i$ soit vide. Pour $J \subset I$,
+$K_J$ est la réunion des $D_i$, $i \in J$, où l'on ne garde comme sommets que
+les intersections de ces $D_i$. Si $J$ a trois éléments et $\bigcap_{i \in J}
+D_i = \emptyset$, $K_J$ est un graphe octaédral gauche --- trois bigones
+deux à deux sécants en un seul sommet ---, et l'on peut parler de ses
+orientations\footnote{La page écrit deux fois « graphe octogonal gauche » ;
+le contexte et la page 37 demandent « octaédral ». Elle est très reprise, et
+une phrase commencée, « Il existe alors une partie $I \subset J$ de cardinal
+\ldots », reste en suspens. La note marginale n'est lisible que par
+fragments.}.
+
+\pagerange{41}{49}
+\section*{VI. Reconstruire la carte (pages 41 à 49)}
+
+\pagerange{41}{42}
+\subsection*{Ce qu'il faut reconstruire (pages 41 et 42)}
+
+Pour démontrer le théorème, on montre comment reconstruire la carte
+$\mathcal{X}$ à partir de $(K, (D_i), \omega)$. Une carte sur une surface
+fermée, orientable ou non, dont les sommets sont d'ordre $\geqslant 3$, est
+déterminée par son graphe et par les données suivantes (le « théorème
+général des cartes » de la page) :
+\begin{enumerate}
+  \item[1\textsuperscript{o})] pour chaque sommet $s \in S$ (l'ensemble des sommets
+  de $K$), la paire
+  \[
+  (19) \qquad \vec{\mathfrak{Z}}_s \subset \mathcal{C}_{\vec{A}_s}
+  \]
+  des deux ordres circulaires, inverses l'un de l'autre, dans lesquels les
+  arêtes d'origine $s$ se succèdent autour de $s$ ; l'ensemble $\vec{A}_s$
+  de ces arêtes s'identifie à l'ensemble $\vec{I}_s$ des pseudo-droites
+  orientées $\vec{D}_i$ passant par $s$ ;
+  \item[2\textsuperscript{o})] pour chaque arête orientée $\vec{a}$, d'origine $s$ et
+  d'extrémité $s'$, une bijection
+  \[
+  (20) \qquad \psi_{\vec{a}} : \vec{\mathfrak{Z}}_s \xrightarrow{\ \sim\ }
+  \vec{\mathfrak{Z}}_{s'}, \qquad (21) \qquad \psi_{\overleftarrow{a}} =
+  (\psi_{\vec{a}})^{-1},
+  \]
+  qui dit comment l'orientation locale se transporte le long de l'arête.
+\end{enumerate}
+Ce sont les \emph{systèmes de rotation généralisés} (ou schémas de
+plongement) de la théorie des plongements de graphes, qui codent les
+plongements cellulaires dans les surfaces non nécessairement
+orientables\footnote{Le nom est de nous, cité de mémoire (Ringel ; Stahl,
+1978 ; Gross et Tucker, 1987). La page précise « quand les sommets de $K$
+sont d'ordre $\geqslant 4$ (a fortiori $\geqslant 3$) » : à partir de $3$, les
+deux ordres circulaires sont distincts. Le signe de (19) est lu $\subset$,
+peut-être $\in$.}. « Canonique » veut dire : provenant de la carte. À
+l'inverse, si l'on sait construire intrinsèquement, à partir de $(K, (D_i),
+\omega)$, des données (19) et (20) satisfaisant (21), on obtient un
+plongement cellulaire de $K$ dans une surface fermée $X$ --- « peut-être pas
+le plan projectif ! ». Deux conditions s'imposent alors.
+
+La première dit que les $D_i$ se déduisent de la carte de la façon
+habituelle, en « allant tout droit » à chaque sommet :
+\[
+(22) \qquad \rho^{\nu_s}(\vec{D}_i) = -\vec{D}_i \quad \text{pour } \rho \in
+\vec{\mathfrak{Z}}_s \text{ et } \vec{D}_i \text{ passant par } s :
+\]
+autour de $s$, l'arête opposée à une arête de $D_i$ est l'autre arête de
+$D_i$, à mi-tour\footnote{En marge : si $\nu_s = 2$, (22) détermine déjà
+$\vec{\mathfrak{Z}}_s$.}.
+
+La seconde dit que la surface obtenue est le plan projectif. C'est la
+relation d'Euler-Poincaré
+\[
+(23) \qquad c_0 - c_1 + c_2 = 1, \qquad \text{soit} \qquad c_2 = c(K),
+\]
+où $c_0$ et $c_1$, nombres de sommets et d'arêtes, ne dépendent que de $K$,
+$c_2$ (nombre de faces) dépend de la carte, et $c(K) = c_1 - c_0 + 1$ est
+le « degré de connexion » de $K$, son premier nombre de Betti. En marge :
+on a a priori $c_2 \leqslant c(K)$. C'est juste, pour la raison suivante :
+$K$ est connexe (deux pseudo-droites se rencontrent toujours), donc $X$
+aussi ; et $X$ n'est pas une sphère, car deux courbes fermées qui se
+coupent transversalement en un seul point ne peuvent pas être tracées sur une
+sphère. Donc $\chi(X) \leqslant 1$, avec égalité si et seulement si $X$ est
+un plan projectif\footnote{L'argument est de nous ; la note marginale ne se
+lit qu'en partie.}.
+
+\pagerange{42}{46}
+\subsection*{L'ordre circulaire en un sommet (pages 42 à 46)}
+
+Soit $s$ un sommet par lequel passent $\nu_s \geqslant 3$ pseudo-droites,
+$I_s$ leur ensemble, et $\Delta$ une pseudo-droite qui ne passe pas par $s$.
+L'application
+\[
+(25) \qquad \varphi_{s,\Delta} : I_s \longrightarrow S_\Delta, \qquad D_i \cap
+\Delta = \{\varphi_{s,\Delta}(D_i)\},
+\]
+vers l'ensemble $S_\Delta$ des sommets de $K$ sur $\Delta$, est
+\emph{injective} : deux pseudo-droites par $s$ ne peuvent se recouper sur
+$\Delta$. Comme $S_\Delta$ est un polygone, $I_s$ reçoit une structure
+polygonale induite $\mathfrak{Z}_{s,\Delta}$\footnote{La page note
+$\mathfrak{Z}^{1}_s$ et $\mathfrak{Z}^{1}_{s,\Delta}$, l'exposant étant un petit
+trait crochu lu « $1$ » sans certitude ; on l'omet, la flèche suffisant à
+distinguer $\mathfrak{Z}_s$ de $\vec{\mathfrak{Z}}_s$. La première marge de la
+page 42 l'écrit d'ailleurs sans exposant.}. On demande :
+\[
+(\mathrm{A}1) \qquad \mathfrak{Z}_{s,\Delta} \text{ ne dépend pas de } \Delta
+\in I \smallsetminus I_s ; \text{ on la note } \mathfrak{Z}_s .
+\]
+C'est une condition sur les sommets d'au moins trois pseudo-droites ;
+qu'elle soit satisfaite pour un $K$ provenant d'une carte, la marge le note
+« à prouver ». Dans le plan, c'est l'énoncé familier que les droites d'un
+faisceau coupent toute autre droite dans le même ordre.
+
+Soit $\vec{I}_s \to I_s$ l'application de degré $2$ qui oublie l'orientation
+(26). Si $\vec{u} \in \vec{\mathfrak{Z}}_s$, son image $u$ est une
+permutation circulaire de $I_s$, et l'on doit avoir
+\[
+(27) \qquad u \in \mathfrak{Z}_s .
+\]
+C'est une condition restrictive, qui ne laisse que $2^{\nu_s - 1}$ relèvements
+possibles d'un $u$ donné : relever $u$, c'est choisir pour chaque $i \in I_s$
+une bijection $\omega_i \simeq \omega_{u(i)}$ entre les ensembles des deux
+orientations de $D_i$ et de $D_{u(i)}$, soit $2^{\nu_s}$ choix, et l'on veut
+que la permutation $\vec{u}$ obtenue de $\vec{I}_s$ soit circulaire,
+c'est-à-dire que le composé des $\nu_s$ bijections autour du polygone soit
+l'échange des deux orientations et non l'identité : les $\nu_s - 1$ premiers
+choix fixent le dernier\footnote{Un premier essai de ce compte est encadré et
+barré. La page désigne aussi ces ensembles d'orientations par $\omega_i$.}.
+
+\textbf{La règle du triangle.} Soit maintenant $\vec{\Delta}$ une
+pseudo-droite \emph{orientée} ne passant pas par $s$. Son orientation
+oriente le polygone $S_\Delta$, donc $I_s$ : elle choisit un générateur
+$u_{s,\vec{\Delta}}$ de $\mathfrak{Z}_s$ --- pour $\nu_s = 2$, c'est la
+transposition de $I_s$, et $\mathfrak{Z}_s$ a alors un seul élément. Il
+s'agit de relever $u_{s,\vec{\Delta}}$ en $\vec{u}_{s,\vec{\Delta}}$ : pour
+$D_i$ passant par $s$ et $D_j$ son successeur, décider, une orientation
+$\vec{D}_i$ étant donnée, l'orientation correspondante de $D_j$. La figure
+(29) le dit : soient $t = D_i \cap \Delta$ et $u = D_j \cap \Delta$ ;
+l'orientation de $D_j$ est celle pour laquelle l'arête $a$ de $s$ à $t$ dans
+le sens de $\vec{D}_i$, l'arête $b$ de $s$ à $u$ dans le sens cherché de
+$D_j$, et l'arête $c$ de $t$ à $u$ dans le sens de $\vec{\Delta}$ forment un
+système d'orientations opposé à l'orientation $\omega$ du triple $\{D_i,
+D_j, \Delta\}$. La règle ne fait intervenir que ces trois pseudo-droites et
+$\omega$\footnote{La convention de signe, « opposé à l'orientation », est
+celle de la page et dépend de la figure (29), que la transcription décrit
+sans la reproduire ; on ne la recalcule pas. Le triangle est noté
+$W_{\{i, j, \Delta\}}$, indice lu sans certitude.}. On demande :
+\begin{itemize}
+  \item[(A2)] la permutation $\vec{u}_{s,\vec{\Delta}}$ ainsi définie est
+  circulaire, c'est-à-dire que $(\vec{u}_{s,\vec{\Delta}})^{\nu_s}$ est
+  l'échange sur chaque fibre de (26), et non l'identité ;
+  \item[(30)] on a alors $\vec{u}_{s,-\vec{\Delta}} =
+  \vec{u}_{s,\vec{\Delta}}^{\,-1}$, et l'on pose $\vec{\mathfrak{Z}}_{s,\Delta}
+  = \{\vec{u}_{s,\vec{\Delta}}, \vec{u}_{s,-\vec{\Delta}}\} \subset
+  \mathcal{C}_{\vec{I}_s}$ ;
+  \item[(A3)] pour toute autre pseudo-droite $\Delta'$ ne passant pas par
+  $s$, $\vec{\mathfrak{Z}}_{s,\Delta'} = \vec{\mathfrak{Z}}_{s,\Delta}$ ; on le
+  note $\vec{\mathfrak{Z}}_s$.
+\end{itemize}
+« Bien entendu », dit la page, (A1) à (A3) sont satisfaites quand
+l'arrangement orienté provient d'un arrangement de dimension $2$ ; on
+obtient alors les $\vec{\mathfrak{Z}}_s$, et une application surjective
+\[
+(31) \qquad \vec{I} \smallsetminus \vec{I}_s \longrightarrow
+\vec{\mathfrak{Z}}_s, \qquad \vec{\Delta} \longmapsto
+\vec{u}_{s,\vec{\Delta}},
+\]
+compatible à l'action de $\{\pm 1\}$.
+
+\pagerange{47}{49}
+\subsection*{Le transport le long d'une arête (pages 47 à 49)}
+
+Soit $\vec{a}$ une arête de $K$ de $s$ à $s'$, et supposons qu'il existe une
+pseudo-droite qui ne passe ni par $s$ ni par $s'$. Soit $\vec{J} = \vec{I}
+\smallsetminus (\vec{I}_s \cup \vec{I}_{s'})$ ; les applications (31) en $s$
+et en $s'$ font de $\vec{\mathfrak{Z}}_s$ et $\vec{\mathfrak{Z}}_{s'}$ deux
+quotients de $\vec{J}$,
+
+(32)
+
+\begin{tikzcd}[column sep=small]
+& \vec{J} \arrow[dl] \arrow[dr] & \\
+\vec{\mathfrak{Z}}_s \arrow[rr, dashed, "\psi_{\vec{a}}"] & &
+\vec{\mathfrak{Z}}_{s'}
+\end{tikzcd}
+
+et $\psi_{\vec{a}}$ existe si et seulement si ce sont les mêmes quotients :
+\begin{itemize}
+  \item[(A4)] si deux pseudo-droites orientées $\vec{\Delta}$, $\vec{\Delta}'$ ne
+  passant ni par $s$ ni par $s'$ induisent la même orientation en $s$, elles
+  induisent la même orientation en $s'$.
+\end{itemize}
+
+Reste le cas « très particulier » où toute pseudo-droite passe par $s$ ou par
+$s'$. Soit $\Theta$ la pseudo-droite qui porte $a$, $D \neq \Theta$ une
+pseudo-droite par $s$, $D' \neq \Theta$ une par $s'$, $t = D \cap D'$, et
+$K' = K_{\{\Theta, D, D'\}}$, graphe octaédral gauche. Soit $b$ l'une des deux
+arêtes de $K'$ joignant $s$ à $t$, et $b'$ l'unique arête de $K'$ joignant
+$t$ à $s'$ telle que $\{a, b, b'\}$ soit compatible avec l'orientation de
+$K'$, c'est-à-dire borde une face (figure (33)). Les arêtes $b$ et $b'$ de
+$K'$ sont des chemins d'arêtes de $K$, portés par $D$ et $D'$. Excluons le
+cas où $K$ est formé de $n \geqslant 3$ pseudo-droites concourantes et d'une
+seule sécante : alors $\Theta$ est l'unique pseudo-droite non bigonale, les
+transports le long des arêtes portées par $D$ et $D'$ sont déjà définis, et
+l'on pose
+\[
+(34) \qquad \psi_{\vec{a}} = \psi_{\vec{b}'} \, \psi_{\vec{b}},
+\]
+où $\psi_{\vec{b}}$ et $\psi_{\vec{b}'}$ sont les composés des transports le
+long des arêtes de $K$ qui composent les chemins de $s$ à $t$ et de $t$ à
+$s'$\footnote{Les deux dernières lignes de la page 48 sont d'une lecture très
+incertaine. Une note marginale ajoute que $K$ est alors réduit à un cas
+« déjà traité ».}.
+
+Il faudrait encore savoir que ce $\psi_{\vec{a}}$ ne dépend pas des choix
+faits ; la page appelle cette condition (A5), nom qu'elle redonne page 51 à
+une autre condition\footnote{On garde (A5) pour celle de la page 51, et on
+ne numérote pas celle-ci.}. Et Grothendieck conclut :
+
+\begin{quote}
+« Le cas où $K$ comporte une ps.\ droite qui est un bigône devrait plutôt
+être traité à part, avec des moyens plus directement adaptés à cette
+situation. Je n'ai donc pas vérifié que la proposition énoncée soit correcte,
+sans exclure le cas où $K$ est formé de $n$ pseudo-droites concourantes,
+coupées par une seule autre ps.\ droite. »
+\end{quote}
+
+Le théorème de la page 39 reste donc, de son propre aveu, non démontré dans
+ce cas. On ne sait pas s'il y est faux. On remarquera seulement que, dans ce
+cas, l'automorphisme du squelette qui échange simultanément les deux arêtes
+de chaque bigone respecte $\omega$ et provient bien de la carte : c'est
+l'homologie harmonique de centre le point de concours et d'axe la sécante\footnote{Remarque de nous, qui ne règle pas la question.}.
+
+\pagerange{49}{54}
+\section*{VII. L'orientation canonique d'un triangle (pages 49 à 54)}
+
+« J'ai maintenant envie de montrer que dans le cas d'un $K$ provenant d'une
+$\mathcal{X}$, son orientation peut se décrire canoniquement en termes de
+$(K, (D_i))$ seulement. » Si c'est le cas, la donnée $\omega$ du théorème de
+la page 39 est superflue.
+
+\pagerange{50}{51}
+\subsection*{Premier cas : une quatrième pseudo-droite évite le triangle (pages 50 et 51)}
+
+Soit $J \in \mathfrak{P}_3(I)$ un triple de pseudo-droites non
+concourantes\footnote{La page écrit « concourantes » ; un triangle demande
+« non concourantes », et l'on ne lit pas de « non » sur la page.}, et $K_J$
+le « triangle » qu'elles forment. Supposons qu'il existe une pseudo-droite
+$D_i$, $i \notin J$, qui ne passe par aucun des trois sommets de $K_J$ : les
+quatre pseudo-droites de $J \cup \{i\}$ sont trois à trois non concourantes.
+On utilise :
+
+\emph{Proposition.} Le foncteur évident
+\[
+\begin{pmatrix} \text{arrangements simples} \\ \text{de } 4
+\text{ pseudo-droites} \end{pmatrix} \longrightarrow
+\begin{pmatrix} \text{arrangements de dimension } 1 \\ \text{simples de } 4
+\text{ pseudo-droites} \end{pmatrix}
+\]
+est une équivalence de catégories --- on le voit en comparant les deux
+groupoïdes à celui des ensembles à quatre éléments : chacun n'a qu'une
+classe, de groupe $\mathfrak{S}_4$ agissant sur les pseudo-droites\footnote{La
+justification par les groupes est de la page ; le détail --- un
+automorphisme du squelette qui fixe les quatre pseudo-droites fixe les six
+sommets, intersections de deux d'entre elles, donc tout --- est de nous.}.
+
+Comme $K_{J \cup \{i\}}$ provient alors canoniquement d'un arrangement de
+dimension $2$, $K_J$ en hérite une orientation $\omega_{J,i}$, et l'on demande
+\begin{itemize}
+  \item[(A5)] l'orientation $\omega_{J,i}$ de $K_J$ ne dépend pas du choix de $i$.
+\end{itemize}
+
+\pagerange{51}{54}
+\subsection*{Second cas : toute pseudo-droite passe par un sommet du triangle (pages 51 à 54)}
+
+Supposons que toute pseudo-droite de $K$ passe par l'un des trois sommets
+$a_i$ ($i \in J$) de $K_J$, $a_i$ désignant le sommet opposé à $D_i$. Comme
+il n'y a pas de bigone, par chaque sommet passe au moins une $D_{a_i}$ avec
+$a_i \in D_{a_i}$, $D_{a_i} \notin J$.
+
+Supposons d'abord qu'on puisse choisir $D_{a_1}, D_{a_2}, D_{a_3}$ non
+concourantes. On obtient une configuration de six pseudo-droites, associée
+canoniquement à l'ensemble $J$, à neuf sommets : les $a_i$, les points
+$\alpha_i = D_{a_i} \cap D_i$, et les points $a'_i = D_{a_j} \cap D_{a_k}$ ($J
+= \{i, j, k\}$). Chaque $D_{a_i}$ porte quatre sommets, $a_i$, $\alpha_i$,
+$a'_j$, $a'_k$, et la configuration est entièrement décrite quand on sait
+lequel des trois autres est \emph{opposé} à $a_i$ sur le quadrilatère
+$D_{a_i}$. Deux cas sont possibles :
+\begin{itemize}
+  \item \emph{cas I} : il existe un ordre circulaire (unique) sur $J$ tel
+  que $a_i$ soit opposé à $a'_{i+1}$ ;
+  \item \emph{cas II} : $a_i$ est opposé à $\alpha_i$ pour tout $i$.
+\end{itemize}
+Soit $\lambda_i$ l'arête de $K_J$ portée par $D_i$ qui contient
+$\alpha_i$. Si la configuration provient d'un arrangement de dimension $2$,
+le triple $\{\lambda_i\}_{i \in J}$ est compatible avec l'orientation de
+$K_J$ dans le cas I, et ne l'est pas dans le cas II\footnote{La page dit
+d'abord que le cas d'une figure de dimension $2$ est le cas I, puis ajoute en
+marge le cas II comme « autre possibilité ». Plusieurs mots du passage sont
+illisibles ; la répartition des cas est celle que la transcription
+établit.}. D'où la condition :
+\begin{itemize}
+  \item[(A6)] pour un triple $J$ non concourant tel que toute autre pseudo-droite
+  passe par un sommet de $K_J$, et lorsqu'on peut choisir des $D_{a_i}$ non
+  concourantes, on exige 1\textsuperscript{o}) que la configuration de six
+  pseudo-droites obtenue soit du cas I ou du cas II, et 2\textsuperscript{o})
+  que l'orientation de $K_J$ qu'elle définit ne dépende pas du choix des
+  $D_{a_i}$.
+\end{itemize}
+
+Reste le cas où les $D_{a_i}$ sont concourantes quel que soit le choix.
+L'arrangement est alors l'arrangement standard de six pseudo-droites joignant
+deux à deux quatre points triples, avec $7 = 4 + 3$ sommets, les trois points
+supplémentaires étant les intersections des pseudo-droites « opposées » : le
+quadrangle complet $\mathrm{III}_6$ de la page 24\footnote{L'identification
+avec $\mathrm{III}_6$ est notée par le transcripteur ; le dessin de la page
+53 est un triangle et ses trois médianes, comme page 20.}. Sa forme de
+dimension $1$ est décrite par l'ensemble de ses quatre points triples, et sa
+forme de dimension $2$ aussi, de groupe d'automorphismes $\mathfrak{S}_4$. Si
+$a, b, c$ sont les sommets de $K_J$, $\alpha, \beta, \gamma$ les sommets
+« opposés » ($\alpha$ est l'intersection de $D_a$ avec la pseudo-droite qui
+joint $b$ et $c$), et $\lambda_a, \lambda_b, \lambda_c$ les arêtes de $K_J$ qui
+contiennent $\alpha, \beta, \gamma$, alors $\{\lambda_a, \lambda_b,
+\lambda_c\}$ est compatible avec l'orientation.
+
+\textbf{En résumé.} \emph{Théorème} (page 54). \emph{Le foncteur canonique du
+groupoïde des arrangements de pseudo-droites sans bigone vers celui des
+arrangements de dimension $1$ de pseudo-droites sans bigone est pleinement
+fidèle.}
+
+Il s'obtient en composant le théorème de la page 39 avec l'orientation
+canonique qu'on vient de décrire : tout isomorphisme de squelettes respecte
+les orientations canoniques, puisqu'elles sont définies à partir du seul
+squelette. Le cas litigieux de la page 49 a des bigones et n'intervient
+pas ; restent non vérifiés l'indépendance des choix dans (34), et les
+conditions (A1) à (A6) pour un arrangement de dimension $2$, affirmées sans
+démonstration. Grothendieck ajoute que (A1) à (A6) donnent en principe une
+voie pour déterminer l'image essentielle, mais qu'il faudrait d'abord les
+simplifier, et qu'il faudrait encore y joindre la relation d'Euler-Poincaré
+(23), « mais je soupçonne que cette dernière est automatique ».
+
+\pagerange{56}{58}
+\section*{Dessins (pages 56 à 58)}
+
+Trois petites cartes à l'italienne. La page 56 dessine un arrangement de
+droites à cinq sommets multiples, chaque région marquée de son nombre de
+côtés, les régions à l'infini marquées « id », et compte $25$ triangles, $5$
+carrés et $1$ pentagone, soit $31$ régions. La page 57, six droites qui
+forment au centre un petit triangle entouré de triangles. La page 58, un
+arrangement d'une dizaine de droites dont les extrémités portent des
+étiquettes de types, et le décompte
+\[
+5 + (5 + 10) + (5 + 5) + 1 = 31,
+\]
+avec la légende : $1_6$, « icosaèdre » ; $5_1$, « hexagone » ; $5_4$ et
+$5_2$, « triangle bordé » ; $5_5$ et $10_3$, « carré
+gammé »\footnote{« gammé » est une lecture incertaine. Aucun arrangement
+simple n'a $31$ régions ($1 + N(N-1)/2$ ne prend pas cette valeur) : les
+arrangements de ces pages ont des points multiples. Remarque de nous ; on ne
+tente pas d'identifier les figures.}.
+
+\pagerange{60}{66}
+\section*{VIII. « Système de Pseudodroites » : un second départ (pages 60 à 66)}
+
+\pagerange{60}{61}
+\subsection*{Définition et premières conséquences (pages 60 et 61)}
+
+\emph{Définition.} Un \emph{système de pseudo-droites} est une carte,
+topologique ou combinatoire, dont la surface sous-jacente $X$ est un plan
+projectif réel (une surface compacte non orientable de caractéristique
+d'Euler-Poincaré $1$), dont tous les sommets sont d'ordre pair $\geqslant 4$
+--- ce qui partage l'ensemble des arêtes en classes d'équivalence, en allant
+tout droit à chaque sommet : ce sont les \emph{pseudo-droites} de la carte
+---, et telle que deux pseudo-droites se rencontrent en un point et un
+seul\footnote{Il faut aussi demander que chaque pseudo-droite passe au plus
+une fois par chaque sommet, c'est-à-dire soit une courbe fermée simple ;
+« deux pseudo-droites se rencontrent en un point et un seul » ne l'entraîne
+pas. L'hypothèse est sous-entendue sur la page.}.
+
+\emph{Premières conséquences.} Le nombre $n$ des pseudo-droites est
+$\geqslant 2$. Chaque pseudo-droite est une courbe non homotope à $0$ : le
+long d'elle, $X$ est non orientable, et la situation est la même que pour
+une droite du plan projectif\footnote{Cela découle de ce que deux
+pseudo-droites se coupent transversalement en un seul point : leur nombre
+d'intersection modulo $2$ vaut $1$, ce qui interdit à l'une ou l'autre
+d'être homologue à zéro. L'argument est de nous.}. « On montre » que pour
+$n \leqslant 6$ pseudo-droites en position générale (tous les sommets d'ordre
+$4$), le système peut être réalisé par de vraies droites. C'est vrai, et
+même mieux : tout arrangement d'au plus huit pseudo-droites est
+\emph{étirable} (Goodman et Pollack, 1980), et il existe des arrangements
+simples non étirables de neuf pseudo-droites (Ringel, 1956)\footnote{Les
+références sont citées de mémoire ; la page n'en cite aucune et ne donne pas
+la démonstration.}.
+
+Soit $D$ une pseudo-droite, $\widetilde{X}$ le revêtement des orientations de
+$X$ --- une sphère, $\widetilde{X} \simeq \mathbf{S}^2 \simeq
+\mathbf{P}^1_{\mathbf{C}}$ --- et $\widetilde{D}$ l'image inverse de $D$ dans
+$\widetilde{X}$\footnote{La page écrit « l'image inverse de $D$ dans $X$ ».},
+un cercle. Alors $\widetilde{X} \smallsetminus \widetilde{D}$ a deux composantes
+connexes, deux « hémisphères », en bijection canonique avec les deux
+orientations de $D$ : un hémisphère est une orientation du disque $X
+\smallsetminus D$, qui oriente son bord, revêtement double de $D$, donc
+$D$\footnote{L'explication de la bijection est de nous ; la page l'affirme.}.
+
+Les sommets portés par $D$ forment un polygone combinatoire $S_D$ dès qu'ils
+sont au moins trois, et les orientations de $D$ --- c'est-à-dire
+$\pi_0(\widetilde{X} \smallsetminus \widetilde{D})$ --- correspondent à celles de
+ce polygone. La marge propose de dire plutôt que $D$ est le support d'un
+sous-complexe polygonal du squelette $K^1$, sans exclure les monogones et les
+bigones. Notons $\Omega(D)$ l'ensemble des deux orientations de $D$.
+
+\pagerange{61}{64}
+\subsection*{Comparer les orientations de deux pseudo-droites (pages 61 à 64)}
+
+Soit $s$ un sommet. Si toutes les pseudo-droites ne passent pas par $s$, il
+en existe une, $D$, qui n'y passe pas ; $s$ est alors dans le disque $X
+\smallsetminus D$, et l'ensemble $\Omega_s(X)$ des orientations locales de $X$
+en $s$ est en bijection canonique avec $\Omega(D)$. Si $D'$ est une autre
+pseudo-droite ne passant pas par $s$, on a donc une bijection composée
+\[
+\Omega(D) \simeq \Omega_s(X) \simeq \Omega(D'),
+\]
+et la question est de l'expliciter en termes du seul squelette $K^1$ et de
+ses pseudo-droites.
+
+Soit $t = D \cap D'$. Comme $s$ est d'ordre $\geqslant 4$, il passe par $s$
+au moins deux pseudo-droites $\Delta, \Delta'$ ; supposons-les distinctes de
+$D, D'$ et ne passant pas par $t$, et soient $u, u'$ (resp.\ $v, v'$) leurs
+intersections avec $D$ et $D'$. Les quatre pseudo-droites $D, D', \Delta,
+\Delta'$ sont en position générale, donc en position standard, et l'on
+constate que les orientations « de $t$ vers $u$ » de $D$ et « de $t$ vers
+$u'$ » de $D'$ se correspondent. Plus généralement, si $\Delta_1, \ldots,
+\Delta_k$ passent par $s$ et non par $t$, coupant $D$ en $u_i$ et $D'$ en
+$u'_i$, et si l'on munit $D \smallsetminus \{t\}$ et $D' \smallsetminus \{t\}$
+des ordres définis par deux orientations qui se correspondent, alors les
+$u'_i$ croissent quand les $u_i$ croissent : c'est la perspective de centre
+$s$. Cela définit la bijection $\Omega(D) \simeq \Omega(D')$
+combinatoirement.
+
+Reste le cas où une seule pseudo-droite $\Delta$ passe par $s$ et non par
+$t$ : alors $s$ est d'ordre $4$, et l'autre pseudo-droite $\Delta'$ par $s$
+passe par $t$. S'il existe une pseudo-droite $D''$ qui ne passe pas par $t$,
+distincte de $\Delta$, coupant $D$ et $D'$ en $x \neq u$ et $x' \neq u'$, on
+compare $\Omega(D)$ et $\Omega(D'')$, puis $\Omega(D'')$ et $\Omega(D')$,
+« et on gagne ». Si toutes les pseudo-droites qui ne passent pas par $t$
+passent par $u$, ou toutes par $u'$, on a deux faisceaux de centres $t$ et
+$u$ (resp.\ $u'$), cas qui demande un traitement à part. Sinon, il existe
+$\Gamma$ passant par $u$ et non par $u'$ et $\Gamma'$ passant par $u'$ et non
+par $u$ ; on a $\Omega(\Gamma) \simeq \Omega(D')$ et $\Omega(\Gamma') \simeq
+\Omega(D)$, et l'on peut déduire $\Omega(D) \simeq \Omega(D')$ de
+$\Omega(\Gamma) \simeq \Omega(\Gamma')$ pourvu que l'intersection $r$ de
+$\Gamma$ et $\Gamma'$ ne soit pas sur $\Delta'$\footnote{La fin de la
+condition n'est pas écrite : un blanc suit « l'intersection $r$ de $\Gamma$
+et $\Gamma'$ ». On la complète d'après la phrase suivante, « par malheur on
+se trouve encore justement sur $\Delta'$ ».}. Si « par malheur » $r$ est sur
+$\Delta'$, les six pseudo-droites $D, D', \Delta, \Delta', \Gamma, \Gamma'$
+sont celles qui joignent deux à deux les quatre points $u, u', r, t$ --- de
+nouveau le quadrangle complet --- et l'on constate que la bijection
+$\varphi_s : \Omega(D) \simeq \Omega(D')$ définie par $s$ est celle que
+définit $r$, qui est dans la même des deux régions de $X$ découpées par $D$
+et $D'$.
+
+\pagerange{64}{66}
+\subsection*{Axiomes et système local (pages 64 à 66)}
+
+Soit $K^1$ un $1$-complexe découpé en pseudo-droites --- tout sommet sur au
+moins deux d'entre elles, deux pseudo-droites se rencontrant en un point et
+un seul. Pour deux pseudo-droites distinctes $D, D'$ et un sommet $s$ qui
+n'est sur aucune des deux, on se donne une bijection
+\[
+\varphi_{s;D,D'} : \Omega(D) \simeq \Omega(D'),
+\]
+avec les propriétés suivantes.
+\begin{itemize}
+  \item[a)] Sur l'ensemble des pseudo-droites qui ne passent pas par $s$, les
+  $\varphi_{s;D,D'}$ forment un système transitif d'isomorphismes :
+  $\varphi_{s;D',D''} \circ \varphi_{s;D,D'} = \varphi_{s;D,D''}$\footnote{La
+  page écrit « est simplement transitif », où « simplement » est une lecture
+  incertaine ; ce qui est demandé, et ce que la suite utilise pour passer au
+  quotient, est la compatibilité à la composition.}.
+  \item[b)] Si $\Delta$ est une pseudo-droite distincte de $D$ et $D'$, les
+  coupant en $x$ et $x'$ (on n'exclut pas $x = x'$), et si $s, s'$ sont deux
+  sommets de $\Delta$ distincts de $x, x'$, alors $\varphi_{s;D,D'} =
+  \varphi_{s';D,D'}$ si et seulement si $s$ et $s'$ sont sur un même des deux
+  arcs que $x$ et $x'$ découpent sur $\Delta$. On peut donc définir
+  $\varphi_{a;D,D'}$ pour un tel arc $a$.
+  \item[c)] Soit $t = D \cap D'$, et $\Delta_1, \Delta_2$ deux pseudo-droites par $s$
+  et non par $t$, coupant $D$ en $u_1, u_2$ et $D'$ en $u'_1, u'_2$ \ldots{} ---
+  la page s'arrête là.
+\end{itemize}
+Dans un arrangement de dimension $2$, b) dit que $\varphi_{s;D,D'}$ ne dépend
+que de celle des deux régions de $X \smallsetminus (D \cup D')$ qui contient
+$s$ ; quand $x = x'$, l'arc unique $\Delta \smallsetminus \{t\}$ est tout
+entier dans une région\footnote{Cette lecture géométrique de b) est de
+nous.}.
+
+La page 65 commence sur une phrase dont le début manque : le système
+d'isomorphismes en question serait unique, à certaines conditions. Il ne
+peut pas l'être s'il existe une pseudo-droite bigonale --- c'est-à-dire un
+double faisceau avec la pseudo-droite qui joint ses deux centres --- ni
+s'il existe un monogone, c'est-à-dire un seul faisceau.
+
+Dans le cas où il n'y a ni monogone ni bigone, on définit pour tout sommet
+$s$ l'ensemble $\Omega(s)$ comme le quotient de la réunion des $\Omega(D)$,
+$D$ ne passant pas par $s$, par le système des $\varphi_{s;D,D'}$ : c'est la
+limite d'un système transitif d'isomorphismes, un ensemble à deux éléments.
+Pour en faire un \emph{système local} sur $K^1$, il faut pour toute arête de
+$K^1$, d'extrémités $s$ et $s'$, une bijection $\Omega(s) \simeq \Omega(s')$ ;
+on prend une pseudo-droite $D$ qui ne passe ni par $s$ ni par $s'$, et la
+composée
+
+\begin{tikzcd}[column sep=small]
+\Omega(s) \arrow[rr, "\sim"] \arrow[dr, "\sim"'] & & \Omega(s') \\
+& \Omega(D) \arrow[ur, "\sim"'] &
+\end{tikzcd}
+
+qui ne dépend pas du choix de $D$ par b) --- c'en est même une forme
+équivalente\footnote{La page dit qu'une telle $D$ existe « par hyp. » ; c'est
+une hypothèse supplémentaire : le cas où toute pseudo-droite passe par l'une
+des extrémités de l'arête est celui que la page 48 traitait à part.}.
+
+Pour reconstituer la carte à partir de $K^1$, il faudrait encore définir une
+structure polygonale sur l'ensemble des arcs issus de chaque sommet $s$, et
+une bijection canonique entre $\Omega(s)$ et les deux orientations de cette
+structure. La page 66 s'arrête là.
+
+\pagerange{67}{70}
+\section*{IX. Pseudo-droites orientées : un troisième départ (pages 67 à 70)}
+
+Sur de plus petites feuilles, la même construction est reprise avec les
+pseudo-droites orientées. Soit $\vec{\mathcal{D}}$ l'ensemble des
+pseudo-droites orientées, et $\vec{\mathcal{D}}(s)$ celui des pseudo-droites
+orientées passant par $s$ --- autant que d'arcs issus de $s$, soit $2\nu(s)$.
+Pour $\vec{D}$ ne passant pas par $s$, on se donne une permutation circulaire
+$\rho_{\vec{D},s}$ de $\vec{\mathcal{D}}(s)$\footnote{La lettre, un long trait
+bouclé en haut, est lue $\rho$ sans certitude ; de même le $\nu$ de
+« cardinal $2\nu(s)$ ».}, avec les axiomes :
+\begin{itemize}
+  \item[a)] $\rho_{-\vec{D},s} = \rho_{\vec{D},s}^{-1}$ ;
+  \item[b)] si $\vec{D}, \vec{D}' \notin \vec{\mathcal{D}}(s)$, $\rho_{\vec{D},s}$ et
+  $\rho_{\vec{D}',s}$ sont égales ou inverses l'une de l'autre\footnote{« ou
+  opposées », lu sans certitude.} ;
+  \item[c)] soient $\vec{D}, \vec{D}', \vec{\Delta}$ des pseudo-droites
+  distinctes, $x, x'$ les intersections de $\Delta$ avec $D$ et $D'$ (on ne
+  suppose pas $x \neq x'$), $s, s'$ des sommets de $\Delta$ distincts de $x,
+  x'$, et supposons $\rho_{\vec{D},s} = \rho_{\vec{D}',s}$ ; pour qu'on ait
+  $\rho_{\vec{D},s'} = \rho_{\vec{D}',s'}$, il faut et il suffit que $s$ et
+  $s'$ soient sur un même arc de $\Delta$ découpé par $x$ et
+  $x'$\footnote{Un premier état de c), page 67, est barré et repris page
+  68.} ;
+  \item[(d)] soient $\vec{\Delta}_1 \in \vec{\mathcal{D}}(s)$, $\vec{D} \notin
+  \vec{\mathcal{D}}(s)$, $\vec{\Delta}_2 = \rho_{\vec{D},s}(\vec{\Delta}_1)$,
+  et $u_1$, $u_2$ les points où $\Delta_1$, $\Delta_2$ coupent $D$ : alors
+  $u_2$ est le sommet de $\vec{D}$ qui suit $u_1$ \emph{parmi} les
+  intersections de $\vec{D}$ avec les pseudo-droites passant par $s$ ;
+  \item[(e)] soient $\vec{D}, \vec{D}' \notin \vec{\mathcal{D}}(s)$ distinctes,
+  $t = D \cap D'$, $\Delta_1, \Delta_2$ deux pseudo-droites par $s$ et non par
+  $t$, coupant $D$ en $u_1, u_2$ et $D'$ en $u'_1, u'_2$. Si $u_1$ et $u_2$ sont
+  adjacents sur $D$, $u'_1$ et $u'_2$ le sont sur $D'$. Si $\vec{D}$ est
+  orientée dans le sens $t u_1 u_2$, $\vec{D}'$ dans le sens $t u'_1 u'_2$, et
+  si $u_1, u_2$ sont adjacents parmi les intersections de $D$ avec les
+  pseudo-droites par $s$, alors $\rho_{\vec{D},s}$ envoie la pseudo-droite
+  orientée $s u_1 u'_1$ sur $s u_2 u'_2$\footnote{La page écrit « qui passent
+  par $\vec{D}$ » où il faut « par $s$ », comme en (d), et note l'indice de
+  $\rho$ sans le $s$.} ;
+  \item[(f)] si $s$ est d'ordre $2n$, $(\rho_{\vec{D},s})^n(\vec{\Delta}) =
+  -\vec{\Delta}$.
+\end{itemize}
+Ces axiomes sont ceux des pages 42 à 47 réécrits pour les
+$\rho_{\vec{D},s}$ : $\rho_{\vec{D},s}$ est la permutation
+$\vec{u}_{s,\vec{D}}$ de la page 45, (d) est la façon dont elle a été
+définie, a) est (30), b) est (A3), c) est la propriété b) de la page 64, et (f) est (22)\footnote{Ces correspondances sont
+de nous.}.
+
+\emph{Th} (page 70, énoncé). \emph{S'il existe un système de
+$\rho_{\vec{D},s}$ satisfaisant a) à f), et s'il n'y a pas de pseudo-droite
+qui soit un monogone ou un bigone, ce système est unique. De plus, les
+$\Omega(s) = \{\rho_s, \rho_s^{-1}\}$ forment de façon unique un système
+local} --- la fin de la phrase est illisible. En marge : il suffit de d), e)
+et f), et sans doute a) en est une conséquence ; pour donner un sens au
+système local, il faut des hypothèses plus fortes que b) et c). L'unicité
+est plausible sur l'axiome (d) seul pour ce qui est des pseudo-droites sous-jacentes :
+celles qui passent par $s$ coupent $D$ en des points distincts, et (d) dit
+dans quel ordre on les parcourt ; ce sont (e) et (f) qui fixent les
+orientations\footnote{Remarque de nous, qui ne démontre pas le « Th ».}.
+
+\pagerange{72}{72}
+\section*{X. Petits arrangements : la géométrie et la combinatoire (page 72)}
+
+La dernière page est un tableau. Pour chaque petit arrangement de droites du
+plan projectif réel, il note s'il est « standard » au sens projectif ---
+toutes ses réalisations sont projectivement équivalentes --- ou seulement au
+sens combinatoire --- il n'a qu'une classe combinatoire ---, et compare le
+groupe des transformations projectives qui le stabilisent, modulo sa
+composante neutre, au groupe de ses automorphismes combinatoires.
+
+\begin{itemize}
+  \item \emph{Une droite, deux droites} : standard projectif.
+  \item \emph{Trois droites en position générale} : standard projectif ; le groupe
+  projectif modulo sa composante neutre, le groupe combinatoire et le groupe
+  des permutations des quatre faces sont isomorphes --- c'est
+  $\mathfrak{S}_4$, le groupe de l'hémi-octaèdre des pages 31 à 38.
+  \item \emph{Trois droites concourantes} : standard projectif ; le groupe projectif
+  modulo sa composante neutre est une extension de $\mathfrak{S}_3$ par
+  $\mathbf{Z}/2$, isomorphe au groupe combinatoire, extension de $\mathbf{Z}/2$ par
+  $\mathbf{Z}/6$ --- le groupe de l'hexagone, celui des six demi-droites autour
+  du point de concours.
+  \item \emph{Quatre droites en position générale} : standard projectif ; groupe
+  combinatoire $\mathfrak{S}_4$\footnote{La page écrit « endom proj $\simeq$
+  Id mais endom comb.\ $\simeq \mathfrak{S}_4$ ». Le groupe des transformations
+  projectives qui stabilisent l'\emph{ensemble} des quatre droites est
+  $\mathfrak{S}_4$ lui aussi, toute permutation de quatre droites en position
+  générale étant réalisée par une unique transformation projective ; c'est
+  le groupe de celles qui fixent \emph{chaque} droite qui est trivial.}.
+  \item \emph{Quatre droites dont trois concourantes} : standard projectif ;
+  extension de $\mathfrak{S}_3$ par $\mathbf{Z}/2$, isomorphe au groupe
+  combinatoire, groupe de l'hexagone.
+  \item \emph{Quatre droites concourantes} : pas standard projectif (le birapport
+  des quatre droites est un module), mais standard combinatoire ; groupe
+  combinatoire, celui de l'octogone (?).
+  \item \emph{Cinq droites en position générale} : pas standard projectif, mais
+  standard combinatoire ; groupe combinatoire, celui du
+  pentagone\footnote{La page biffe le « pas » de « pas standard proj., mais
+  standard comb. ». Il est nécessaire : cinq droites en position générale
+  dépendent de $2 \cdot 5 - 8 = 2$ paramètres projectifs, et le « mais » qui
+  suit le demande. Le groupe du pentagone, diédral d'ordre $10$, est celui de
+  la page 20, « $(D_5)$ ».}.
+  \item \emph{Six droites ou plus en position générale} : \emph{pas} standard
+  combinatoire --- il y a plusieurs arrangements simples de six droites.
+\end{itemize}
+Le tableau mesure l'écart entre les deux points de vue du dossier : en
+position générale, la combinatoire détermine l'arrangement jusqu'à cinq
+droites et cesse de le faire à six ; la géométrie projective, elle, a des
+modules dès quatre droites concourantes et dès cinq droites en position
+générale.
+
+\end{document}
