@@ -1,0 +1,2271 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 78, pages 1-129
+% (the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into
+% a footnote. It is held to being mathematically correct as it stands; where
+% the manuscript is loose or mistaken, the true statement is what appears here
+% and the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck cites batch-01.fr.tex to
+% batch-07.fr.tex (pp. 1-20, 21-40, 41-60, 61-80, 81-100, 101-120, 121-129).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% The folder was read whole, all seven batches together; this is one document
+% for the shelfmark. It was made on Opus 5.5 and has not been measured against
+% the reference reading of folder 115 (made on Opus 5). The computations the
+% reading asserts beyond the page (the matrices of sigma_0, sigma_1 and the
+% condition sigma_0^2 = id, the centre, the invariant conic and its
+% discriminants, the vertices s_n = (F_n F_{n+1}, F_{n-1} F_n), the identity
+% X_n - U X_{n-1} + X_{n-2} = 1 and the Bezout pair it gives, the values
+% F_n(±2), the table of Psi_n, the strip and parabola cases, the affine
+% extension of i -> ri for alpha = ±2) were checked by hand while writing,
+% not by machine. The literature named in footnotes (Lehmer on the minimal
+% polynomial of 2cos(2pi/n), affinely regular polygons in finite planes,
+% Chebyshev and Dickson polynomials, Giraud's gerbes) is cited from memory
+% and was not checked against the sources.
+%
+% Scope. Pages not transcribed and not read here: 49 (a cover, « Cours /
+% Polygones réguliers / II », which heads a section), 53 (blank letterhead),
+% 93 (a typed letter to Grothendieck dated Paris, 10 November 1977; its date
+% only is used, as the transcription's note does), 108 (a pink cover,
+% « Polynômes cyclotomiques »). Page 110 is an unrelated typescript; only the
+% two lines of his calculation at its foot are used. Page 114's lower half
+% carries the start of an unrelated letter, not transcribed.
+%
+% Spine. One object, the regular polygon in an affine plane over an arbitrary
+% field (then ring), classified by one number alpha = zeta + zeta^{-1}:
+%   pp. 1-48    « Chap I », first draft: definitions (regular, unimodular,
+%               proper), the real examples, pinnings, dihedral
+%               representations (Props 1-3), dropping faithfulness (Prop 4),
+%               infinite polygons (Prop 5), « étoilage » (Prop 6),
+%               quasi-polygonal structures and regular systems of vertices
+%               (Prop 7), a programme of descent over Z[1/n];
+%   pp. 49-80   « Cours Polygones réguliers II », second draft: combinatorial
+%               polygons as D_infinity-sets, orientations, the case k
+%               algebraically closed with p not dividing n, invariant forms
+%               and the circumscribed conic, the programme in « universal
+%               affine coordinates », the Lemma and Proposition of p. 80;
+%   pp. 81-100  the universal coordinates: (alpha, beta), proper and improper
+%               realisations, fixed points and centre, eigenvalues, the three
+%               cases alpha != ±2, alpha = -2, alpha = 2, the invariant
+%               quadratic form f_alpha and its conic;
+%   pp. 101-107 faithfulness, in two versions (p. 104 marked « ancienne
+%               version »);
+%   pp. 108-120 « Polynômes cyclotomiques »: F_n, the theorem
+%               u_alpha^n = id <=> F_n(alpha) = 0, the semi-cyclotomic Psi_n,
+%               the « modular rings », Phi_n mod p and the order of a polygon
+%               in characteristic p, a table of alpha;
+%   pp. 121-129 loose sheets: a struck tensor computation, tables of Psi_n
+%               and Phi_n with their reductions mod p, the rings
+%               Z[zeta], Z[zeta + zeta^{-1}] and their ramification at p, the
+%               involution T -> T^{-1}, and a last page on ramified coverings
+%               that breaks off.
+%
+% Notation fixed for the whole document.
+%  - k a field (a ring where said), E an affine plane over k, V its direction,
+%    Aff(E) the affine group; Dr(E) the set of lines of E.
+%  - D_n the dihedral group of order 2n (2 <= n <= infinity), presented by two
+%    involutions sigma_0, sigma_1, with u = sigma_0 sigma_1 the rotation of
+%    one step. sigma_1 is the reflection that fixes the base vertex s_0,
+%    sigma_0 the one that fixes the base side a_0 = dr(s_0, s_1). This is
+%    the convention of pp. 77-120, where all the computations are. Chap I
+%    writes sigma for sigma_1 and sigma' for sigma_0 (p. 17: u = sigma'sigma);
+%    pp. 55-57 take u = sigma_1 sigma_0, the inverse rotation (footnoted);
+%    p. 29 calls the vertex-fixing involution sigma_0 (footnoted).
+%  - s_i = u^i s_0, a_i = dr(s_i, s_{i+1}); Pi_n the standard combinatorial
+%    n-gon (the page's Pi_0(n) in Chap I, Pi_n from p. 57).
+%  - alpha the « invariant numérique », zeta, zeta^{-1} the eigenvalues of
+%    the rotation, alpha = zeta + zeta^{-1}.
+%  - omega^{(r)} = {u^r, u^{-r}} the « étoilage » of a polygonal structure
+%    (p. 13's own notation); the pages 33-39 write Psi_r(omega). Q_n =
+%    (Z/nZ)^*/{±1} the group acting (the page's Psi_n, p. 33). Both renamed
+%    because Psi_n is, from p. 114, the semi-cyclotomic polynomial.
+%  - F_n in Z[U] the polynomials of p. 109 (product over the divisors d >= 3
+%    of n of the Psi_d); Psi_n the minimal polynomial of zeta + zeta^{-1},
+%    zeta a primitive n-th root of unity (p. 114). Pages 122-124 call the
+%    latter F_n; it is written Psi_n here throughout, with a footnote.
+%  - S_n in Z[U] with S_n(T + T^{-1}) = T^n + T^{-n} (n >= 1), S_0 = 1
+%    (p. 122).
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%  p. 3    unimodularity is « automatically satisfied » except, by pp. 84-85,
+%          for the improper 2p-gons in characteristic p, which are regular
+%          and not unimodular; the illegible word there is not restored.
+%  p. 7    the classes of real regular polygons are T/{±1} minus the classes
+%          of 1 AND -1, not of 1 alone.
+%  pp. 22-23 Prop 4: in (b) the divisor d must be proper; in (c) the kernel
+%          is generated by u^{n'}, n' = card S >= 3, n' | n (the page mixes
+%          d and n' = n/d).
+%  p. 27   the check « 3 <= d <= [n/3] » misses the doubled polygon: the
+%          first non-faithful case is n = 6 (a triangle traversed twice), not
+%          n = 9; the condition is vacuous exactly for n an odd prime or 4.
+%  p. 33   Prop 6 a): for n infinite, r = ±1 also works.
+%  p. 41   Aff±(S) has index phi(n)/2 in Aff(S), not 2.
+%  pp. 44-45 Prop 7's condition 2) must keep the struck clause (sigma inverts
+%          Z) and sigma != 1, or it is empty; unimodularity is not repeated.
+%  p. 57   S_n and A_n are interchanged with respect to p. 54's S = R/sigma_1.
+%  p. 63   the alternative zeta zeta' = -1 ({1, -1}) is excluded by n >= 3.
+%  p. 66   the basis of invariants needs (xy)^a alone (i = 0) as well.
+%  p. 97   « alpha != 0, 1 »: the triangle is alpha = -1; uniqueness of the
+%          circumscribed conic holds for n >= 5.
+%  p. 111  the third column of the matrix of u^n is (F_n F_{n+1},
+%          F_{n-1} F_n), as on the struck first version.
+%  p. 112  the conclusion is F_n(alpha) = 0 (page: = 1).
+%  p. 113  A_n = F_{n-2} - U F_n (the page's F_{n-1} is doubtful and wrong).
+%  p. 116  alpha = -2 is the invariant of the 2p-gon, not of a 2-gon.
+%  pp. 118-119 Corollary: for n' = 1 and p = 2 the order is 4, not p.
+%  p. 122  the recurrence for S_n is right as written, because S_0 = 1
+%          (the transcription's note asks for a 1/2 that S_0 = 1 absorbs).
+%  pp. 123-124 (p, n') = 1, not (n, n') = 1; F_p = Psi_p = (T - 2)^{p'}
+%          mod p (page: T - 1), Psi_{2p} = (T + 2)^{p'}; « n != 4 » should
+%          read « n != 2 ».
+%
+% Modern names given and footnoted as ours: affinely regular polygon, flag,
+% torsor, gerbe, group scheme mu_n semidirect Z/2, affine line over Z/nZ,
+% Chebyshev and Dickson polynomials, minimal polynomial of 2cos(2pi/n),
+% maximal real subfield, total ramification, casus irreducibilis, Minkowski's
+% theorem (p. 129). The pages name a person once (p. 70, read with doubt);
+% nothing on them cites the literature.
+%
+% Announced and never established: the « question longue » of p. 11 (taken
+% up and answered on pp. 81-111); proof of Prop 4 (b) (p. 23); the meaning of
+% the degenerate étoilé representations (p. 39); the case Aff(S) of p. 44;
+% condition 3) of Prop 7; the « Construction » of p. 48 (SRnS over Z or
+% Z[1/2]); the Exercise of p. 61; the theory of (étale) morphisms and
+% quotients Pi_(n) of combinatorial polygons (pp. 106-107); the question of
+% p. 127 (answered on p. 128); the connectedness question of p. 129.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{78}
+\pages{1}{129}
+\dating{[à partir de 1977]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Polygones réguliers et polynômes cyclotomiques] : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces feuillets se demandent ce qu'est un polygone régulier quand on retire au
+plan tout ce qui permet d'ordinaire de le reconnaître : les longueurs, les
+angles, et même les nombres réels. Il reste un plan « affine » --- des points,
+des droites, le parallélisme --- sur un corps de nombres quelconque, y compris
+un corps fini où $1 + 1 + 1 = 0$. Qu'est-ce qu'un pentagone régulier dans un
+tel plan, et combien y en a-t-il ?
+
+La réponse commence par un changement de définition. Au lieu de « côtés égaux
+et angles égaux », qui n'a plus de sens, Grothendieck demande que toute
+symétrie du dessin combinatoire --- tourner d'un cran, retourner --- soit
+réalisée par une transformation du plan. C'est la définition par les
+symétries, et elle est plus généreuse qu'on ne croit : dans le plan affine,
+tout triangle est régulier, tout parallélogramme aussi, puisqu'une
+transformation affine envoie n'importe quel triangle sur n'importe quel autre.
+Un polygone régulier devient ainsi la donnée d'une représentation du groupe
+diédral --- deux symétries $\sigma_0$, $\sigma_1$ dont le produit est la
+rotation d'un cran --- et d'un sommet de départ.
+
+L'idée qui arrive ensuite est qu'un seul nombre suffit à tout décrire. Dans le
+plan réel, un $n$-gone régulier (étoilé ou non) est déterminé, à transformation
+affine près, par $\alpha = 2\cos(2\pi k/n)$, et la règle qui fabrique les
+sommets de proche en proche est la même pour tous : quatre sommets consécutifs
+vérifient $s_{i+3} - s_i = (1 + \alpha)(s_{i+2} - s_{i+1})$. Grothendieck prend
+ce nombre comme seule donnée, sur un corps quelconque : chaque valeur de
+$\alpha$ définit un « polygone » infini, et la question devient de savoir
+quand il se referme après $n$ pas. La réponse est une équation polynomiale à
+coefficients entiers en $\alpha$ --- au fond, le polynôme minimal de
+$2\cos(2\pi/n)$, cousin des polynômes cyclotomiques. Les $n$-gones réguliers
+d'un corps correspondent ainsi aux racines de ce polynôme dans ce corps, et
+l'anneau qu'on obtient en adjoignant une racine aux entiers est l'anneau « sur
+lequel s'écrit » le $n$-gone régulier le plus général.
+
+Le plus beau est ce qui se passe en caractéristique $p$. Les deux valeurs
+$\alpha = 2$ et $\alpha = -2$, qu'on exclut d'habitude parce qu'elles
+correspondent à une « rotation d'angle nul », y donnent de vrais polygones
+réguliers : pour $\alpha = 2$, un polygone à $p$ sommets posés sur une
+parabole, où la rotation devient une translation le long de la parabole ; pour
+$\alpha = -2$, un polygone à $2p$ sommets qui zigzague entre deux droites
+parallèles. Le cercle circonscrit devient une parabole, ou une paire de
+droites ; la « métrique » invariante dégénère. Ces cas sont, dit-il, « les
+seuls cas vraiment nouveaux », et ceux qu'on perdrait si l'on exigeait dès le
+départ une métrique non dégénérée.
+
+Le dossier se lit aussi pour sa manière. Grothendieck refuse de « traîner tout
+au long » une condition (la fidélité) qu'on n'examine utilement qu'à certains
+moments ; il préfère étudier d'un coup tous les polygones, finis et infinis,
+puis demander lesquels se referment ; il garde les cas qui paraissent
+« exotiques » parce qu'ils « reviendraient indirectement » de toute façon, et
+qu'ils permettent de suivre la variation de l'objet avec son paramètre. Les
+deux rédactions successives --- un premier chapitre, puis des notes de cours
+--- montrent la même matière reprise depuis les définitions, plus simple la
+seconde fois.
+
+Les noms à chercher ensuite : polygones affinement réguliers (notamment dans
+les plans affines finis), représentations du groupe diédral, polynôme minimal
+de $2\cos(2\pi/n)$ et sous-corps réel maximal d'un corps cyclotomique,
+polynômes de Tchebychev et de Dickson, ramification de $p$ dans
+$\mathbf{Z}[\zeta_p]$, torseurs et gerbes, schéma en groupes $\mu_n \rtimes
+\mathbf{Z}/2$.
+
+\keywords{affinely regular polygon, dihedral group, representation of the infinite dihedral group, flag, torsor, regular polygon in positive characteristic, parabola, invariant quadratic form, circumscribed conic, cyclotomic polynomial, minimal polynomial of 2cos(2pi/n), maximal real subfield, Chebyshev polynomials, Dickson polynomials, ring of integers of a cyclotomic field, total ramification, affine line over Z/nZ, dihedral group scheme, gerbe, descent, casus irreducibilis}
+\end{resume}
+
+\pagerange{1}{129}
+\section*{Le fil du dossier, et les conventions}
+
+La chemise porte au crayon « Polygones réguliers / Chap I » ; l'inventaire
+titre « [Polygones réguliers et polynômes cyclotomiques] », d'après une
+seconde chemise, rose, insérée à la page 108. Une lettre dactylographiée
+reçue, datée de Paris le 10 novembre 1977 (page 93, non transcrite), donne un
+terme a quo compatible avec la datation de l'inventaire. Les pages 49 et 108
+sont des chemises, la page 53 une feuille blanche à en-tête, les pages 110
+et 114 portent au revers ou au pied des textes sans rapport.
+
+Le dossier se rattache au cours de DEA de 1977--1978, « géométrie arithmétique
+des polygones réguliers », dont l'annonce est au dossier 75 (page 32) : la
+notion de polygone régulier sur un corps, puis sur un anneau de base,
+« l'anneau sur lequel s'écrit le $n$-gone régulier le plus général », les formes
+imprévues que prennent en caractéristique positive la réflexion et le centre.
+C'est exactement la matière qu'on trouve ici. La page 49 est la chemise d'une
+deuxième leçon, « Cours / Polygones réguliers / II ».
+
+\subsection*{Les stations}
+
+\begin{itemize}
+  \item \emph{Pages 1 à 48 : « Chap. I », première rédaction.} Définitions
+    (polygone régulier, unimodulaire, propre ; pages 2 à 5) ; les exemples
+    réels $P_\zeta$ (pages 6 à 8, et une feuille de calculs, page 9) ;
+    repères et épinglages (pages 10 et 11) ; les représentations du groupe
+    diédral, propositions 1 à 3 (pages 12 à 21) ; abandon de la condition de
+    fidélité, proposition 4 (pages 22 à 26) ; les $\infty$-polygones,
+    proposition 5 (pages 26 à 33) ; l'étoilage, proposition 6 (pages 33 à
+    39) ; structures quasi-polygonales et systèmes réguliers de sommets,
+    proposition 7, et un programme de descente (pages 39 à 48).
+  \item \emph{Pages 49 à 80 : « Cours Polygones réguliers II », seconde
+    rédaction.} Plan et rappels (pages 50 à 52) ; polygones combinatoires,
+    contours et drapeaux, comme ensembles sous le groupe diédral infini
+    (pages 54 à 61) ; le cas d'un corps algébriquement clos de
+    caractéristique première à $n$, formes invariantes, conique circonscrite
+    (pages 62 à 73) ; reformulation du problème pour le polygone infini
+    $\Pi_\infty$, lemme et proposition (pages 74 à 80).
+  \item \emph{Pages 81 à 100 : les coordonnées universelles.} Les paramètres
+    $(\alpha, \beta)$ et la condition $\sigma_0^2 = 1$ ; cas propre et cas
+    impropre ; points fixes et centre ; valeurs propres ; les trois cas
+    $\alpha \neq \pm 2$, $\alpha = -2$, $\alpha = 2$ ; la forme quadratique
+    invariante $f_\alpha$ et sa conique ; la parabole.
+  \item \emph{Pages 101 à 107 : la fidélité}, en deux versions, la seconde
+    (page 104) marquée « ancienne version ».
+  \item \emph{Pages 108 à 120 : « Polynômes cyclotomiques ».} Les polynômes
+    $F_n$ ; le théorème $u_\alpha^n = 1 \iff F_n(\alpha) = 0$ ; le polynôme
+    semi-cyclotomique $\Psi_n$ et les « anneaux modulaires » ; réduction de
+    $\Phi_n$ modulo $p$ et ordre d'un polygone en caractéristique $p$ ; table
+    des $\alpha$.
+  \item \emph{Pages 121 à 129 : feuilles détachées.} Un calcul tensoriel barré
+    (page 121) ; tables de $\Psi_n$ et $\Phi_n$, réductions modulo $p$ (pages
+    122 à 124) ; les anneaux $\mathbf{Z}[\zeta]$ et $\mathbf{Z}[\zeta +
+    \zeta^{-1}]$, ramification en $p$ (pages 125 à 127) ; l'involution $T
+    \mapsto T^{-1}$ (page 128) ; revêtements ramifiés (page 129), où le
+    dossier s'arrête.
+\end{itemize}
+
+Les deux premières stations sont deux \emph{moutures} de la même théorie,
+non une suite : le cours reprend depuis les définitions ce que le chapitre
+avait construit, avec un autre langage (le polygone combinatoire y devient un
+ensemble de drapeaux sous le groupe diédral infini) et un programme plus net
+(tout déduire du polygone infini). On les garde distinctes ; on renvoie de
+l'une à l'autre là où elles se recouvrent. De même pour les deux versions de
+la fidélité (pages 101 à 103 et 104 à 107) et pour les deux présentations des
+polynômes (pages 109 à 120 et 122 à 124), qui n'appellent pas les mêmes
+objets du même nom.
+
+\subsection*{Conventions}
+
+$k$ est un corps (un anneau quand on le dit), $E$ un plan affine sur $k$, $V$
+son espace des translations, $\mathrm{Aff}(E)$ son groupe affine,
+$\mathrm{Dr}(E)$ l'ensemble de ses droites ; pour un automorphisme affine $g$,
+$g_V$ est sa partie linéaire. $\mathbf{D}_n$ ($2 \leq n \leq \infty$) est le
+groupe diédral d'ordre $2n$,
+\[
+  \mathbf{D}_n = \langle \sigma_0, \sigma_1 \mid \sigma_0^2 = \sigma_1^2 =
+  (\sigma_0\sigma_1)^n = 1 \rangle , \qquad
+  \mathbf{D}_\infty = \mathbf{Z}/2\mathbf{Z} * \mathbf{Z}/2\mathbf{Z} ,
+\]
+et $u = \sigma_0 \sigma_1$ est la rotation d'un cran ; $\mathbf{D}_n^{+} =
+\langle u \rangle$ le sous-groupe des rotations, d'indice $2$. Dans un
+polygone épinglé, $\sigma_1$ est la symétrie qui fixe le sommet de base
+$s_0$, $\sigma_0$ celle qui fixe le côté de base $a_0$ ; $s_i = u^i s_0$ et
+$a_i = \mathrm{dr}(s_i, s_{i+1})$\footnote{C'est la convention des pages 77
+à 120, où sont tous les calculs. Le chapitre I écrit $\sigma$ pour
+$\sigma_1$ et $\sigma'$ pour $\sigma_0$ (page 17 : « $\sigma' = u\sigma$ tel
+que $u = \sigma'\sigma$ »), les pages 55 à 57 prennent $u = \sigma_1\sigma_0$,
+la rotation inverse, et la page 29 appelle $\sigma_0$ l'involution qui fixe un
+sommet. Rien n'en dépend : on le signale là où cela se voit.}. $\Pi_n$ est le
+$n$-gone combinatoire type.
+
+L'\emph{invariant numérique} $\alpha$ est la trace de la rotation $u_V$ ; ses
+valeurs propres sont $\zeta$, $\zeta^{-1}$, $\alpha = \zeta + \zeta^{-1}$.
+L'\emph{étoilage} d'une structure polygonale $\omega = \{u, u^{-1}\}$ est
+$\omega^{(r)} = \{u^r, u^{-r}\}$, et $Q_n = (\mathbf{Z}/n\mathbf{Z})^{*}/\{\pm
+1\}$ le groupe qui agit par étoilage\footnote{La page 13 écrit elle-même
+$\omega^{(r)}$ ; les pages 33 à 39 écrivent $\Psi_r(\omega)$ et notent
+$\Psi_n$ le groupe $Q_n$. On renomme les deux, parce qu'à partir de la page 114
+$\Psi_n$ est le polynôme semi-cyclotomique.}.
+
+Deux familles de polynômes de $\mathbf{Z}[U]$, $U = T + T^{-1}$, se croisent
+dans le dossier, et il faut les distinguer d'emblée :
+\begin{itemize}
+  \item $F_n$ (page 109), dont les racines sont les $\zeta + \zeta^{-1}$ pour
+    \emph{toutes} les racines $\zeta \neq \pm 1$ de $\zeta^n = 1$ ; c'est le
+    polynôme qui dit quand le polygone d'invariant $\alpha$ se referme après
+    $n$ pas ;
+  \item $\Psi_n$ (page 114), le polynôme minimal de $\zeta + \zeta^{-1}$ pour
+    $\zeta$ racine \emph{primitive} $n$-ième ; il dit quand le polygone a
+    exactement $n$ côtés.
+\end{itemize}
+On a $F_n = \prod_{d \mid n,\ d \geq 3} \Psi_d$\footnote{Cette factorisation
+est de nous ; elle se lit sur les racines, et sur la table de la page 109
+($F_6 = U^2 - 1 = \Psi_3 \Psi_6$). Les pages 122 à 124 appellent $F_n$ ce
+qui est ici $\Psi_n$ ; on écrit $\Psi_n$ partout.}. Enfin $S_n \in
+\mathbf{Z}[U]$ est défini par $S_n(T + T^{-1}) = T^n + T^{-n}$ pour $n \geq 1$
+et $S_0 = 1$.
+
+Le mot « propre » a deux sens dans le dossier : pour un polygone (page 3),
+l'incidence géométrique reflète l'incidence combinatoire --- ce que le cours
+appelle « fidèle » (page 50) ; pour une réalisation de $\Pi_\infty$ (page 84),
+la réalisation n'est pas le cas « impropre » $\beta = -2$. On précise chaque
+fois.
+
+\subsection*{Ce que le dossier annonce sans l'établir}
+
+La démonstration de la partie (b) de la proposition 4 (page 23) ; le sens des
+représentations étoilées dégénérées (page 39) ; la détermination de la
+structure quasi-polygonale par $\mathrm{Aff}(S)$ (page 44, « faire dém. ») ;
+la condition 3) de la proposition 7 ; la « Construction » d'un système
+régulier de sommets sur $\mathbf{Z}$ ou $\mathbf{Z}[\frac12]$ (page 48) ;
+l'exercice de la page 61 ; la théorie des morphismes (étales) de polygones
+combinatoires et des quotients $\Pi_{(n)}$ dont la page 106 a besoin ; la
+question de connexité de la page 129. La « question longue » de la page 11 ---
+écrire explicitement le plan et les sommets en fonction de $n$ et d'un module
+$\alpha$ --- est, elle, menée à bien aux pages 81 à 111.
+
+\pagerange{1}{48}
+\section*{I. Le chapitre I : polygones réguliers affines (pages 1 à 48)}
+
+\pagerange{1}{5}
+\subsection*{Définitions (pages 1 à 5)}
+
+Soit $E$ un plan affine sur un corps $k$. Un \emph{polygone} (« déployé »)
+dans $E$ est une partie finie $S$ de $E$, l'ensemble des sommets, munie d'une
+\emph{structure polygonale combinatoire} : une partie $\omega = \{u,
+u^{-1}\}$ du groupe symétrique $\mathfrak{S}_S$ formée de deux permutations
+circulaires inverses l'une de l'autre, ce qui force $n = \operatorname{card} S
+\geq 3$. Les droites qui joignent deux sommets consécutifs sont les
+\emph{côtés} ; $n$ est aussi le nombre de côtés combinatoires, et l'on parle de
+$n$-gone\footnote{La paire $\{u, u^{-1}\}$ est la « bi-circulation » du
+dossier 81 (pages 41 et 42) et la troisième description d'un polygone du
+dossier 89 (pages 19 et 20). Ici le mot « orientation » désigne l'un des deux
+éléments de $\omega$.}.
+
+\textbf{Polygone régulier.} $P = (E, S, \omega)$ est \emph{régulier} si tout
+automorphisme combinatoire de $(S, \omega)$ --- tout élément du normalisateur
+$\Gamma$ de $\omega$ dans $\mathfrak{S}_S$, groupe diédral d'ordre $2n$ --- se
+prolonge \emph{de façon unique} en un automorphisme affine de $E$. Il suffit
+de l'exiger pour un système de générateurs : $u$ et la symétrie $\sigma_s$
+fixant un sommet $s$, ou $\sigma_s$ et la symétrie $\sigma_a$ fixant un côté
+$a$ ; si $s$ et $a$ sont incidents, deux quelconques des trois éléments
+$\sigma_s$, $\sigma_a$, $u = \sigma_a \sigma_s$ engendrent $\Gamma$.
+L'unicité du prolongement équivaut à ce que $S$ engendre affinement $E$, ou
+encore à ce que trois sommets consécutifs $s_0, s_1, s_2$ ne soient pas
+alignés : s'ils l'étaient, la régularité donnerait $u(d_0) = d_0$ pour la
+droite $d_0 = \mathrm{dr}(s_0, s_1)$, et $u$ étant transitif sur les côtés,
+tous les sommets seraient sur $d_0$.
+
+\textbf{Unimodularité.} « Pour des raisons techniques », on exige de plus que
+les rotations soient réalisées par des automorphismes \emph{unimodulaires}
+($\det u_V = 1$). Cela revient à demander que $\sigma_a$ (ou $\sigma_s$, qui
+lui est conjuguée) soit une \emph{réflexion}, c'est-à-dire fixe une droite
+point par point ; on comprendra la restriction en passant au plan projectif.
+Les pages 82 à 87 justifient cette annonce : la condition exclut exactement
+une famille, les réalisations « impropres », qui ne donnent de polygone fini
+qu'en caractéristique $p \neq 2$, et ce sont alors des $2p$-gones réguliers non
+unimodulaires\footnote{La page dit que la restriction « est automatiquement
+satisfaite dans le cas des polygones réguliers », puis un mot illisible, puis « $2p$ côtés
+en car.\ $p$ ($p$ nb premier impair) --- p.\ ex.\ l'hexagone en car.\ 3 ». Ce
+qui est vrai, par les pages 84 et 85, est l'inverse pour cette famille : le
+$2p$-gone impropre de caractéristique $p$ est régulier et \emph{n'est pas}
+unimodulaire ($\det u_V = -1$), et il est le seul polygone régulier fini qui
+ne le soit pas. Le mot illisible portait peut-être l'exception ; on ne le
+restitue pas.}.
+
+\textbf{Polygones propres, représentations géométriques.} Dans la définition
+générale d'un polygone, les côtés géométriques sont des droites, et
+l'application des côtés combinatoires vers les côtés géométriques n'est pas
+forcément injective. Le polygone est \emph{propre} si un sommet $s$ est sur la
+droite $\mathrm{dr}(s', s'')$ d'un côté combinatoire $\{s', s''\}$ seulement
+quand $s \in \{s', s''\}$ ; les côtés géométriques sont alors en bijection avec
+les côtés combinatoires. On verra que les polygones réguliers unimodulaires
+sont propres (pages 101 à 105). La bonne notion, conclut la page 5, est celle
+de \emph{représentation géométrique} d'un polygone combinatoire : deux
+applications, l'une sur les sommets, l'autre vers les droites, qui respectent
+l'incidence ; quand deux sommets adjacents ont des images distinctes, la
+première détermine la seconde, et elle peut être choisie arbitrairement. Une
+\emph{épinglage} d'un polygone géométrique par un polygone combinatoire $\Pi$
+est un couple $(\Pi, \varphi)$, $\varphi : S \to E$\footnote{La page 5 est en
+grande partie barrée et encadrée de renvois illisibles ; la phrase sur la
+représentation géométrique se poursuit au-delà de la page. C'est la notion que
+le cours reprend sous le nom de réalisation géométrique (page 50).}.
+
+\pagerange{6}{9}
+\subsection*{Les polygones réguliers réels (pages 6 à 9)}
+
+Soit $E = \mathbf{C}$, vu comme plan réel, $\zeta$ une racine primitive
+$n$-ième de l'unité ($n \geq 3$), $s_i = \zeta^i$ ($i \in
+\mathbf{Z}/n\mathbf{Z}$) avec la structure polygonale standard, et $\sigma z =
+\bar z$, $u z = \zeta z$ ; alors $\sigma s_i = s_{-i}$, $u s_i = s_{i+1}$, et
+l'on obtient un $n$-gone régulier $P_\zeta$ --- convexe pour $\zeta =
+e^{\pm 2i\pi/n}$, étoilé sinon. On vérifie, et la suite du dossier le
+démontrera dans un cadre plus général, que :
+\begin{enumerate}
+  \item[a)] $P_\zeta \simeq P_{\zeta'}$ si et seulement si $\zeta' =
+    \zeta^{\pm 1}$, ou encore si et seulement si $\alpha(\zeta) =
+    \alpha(\zeta')$, où $\alpha(\zeta) = \zeta + \zeta^{-1} = 2\cos\arg\zeta$ ;
+  \item[b)] tout polygone régulier d'un plan affine réel est isomorphe à un
+    $P_\zeta$.
+\end{enumerate}
+Les classes d'isomorphie de polygones réguliers réels sont donc en bijection
+avec l'ensemble des classes de racines de l'unité modulo l'inversion, privé
+des classes de $1$ et de $-1$\footnote{La page écrit
+$(\mathcal{T}/\{\pm 1\}) \smallsetminus \{\bar 1\}$, où $\mathcal{T} \simeq
+\mathbf{Q}/\mathbf{Z}$ est le groupe des racines de l'unité, $\{\pm 1\}$
+agissant par $\zeta \mapsto \zeta^{\pm 1}$. Il faut ôter aussi la classe de
+$-1$ : $\zeta = -1$ donnerait un « polygone » à deux sommets. Ici
+« isomorphisme » s'entend d'une bijection affine qui respecte la structure
+combinatoire.}.
+
+Pour quatre sommets consécutifs,
+\[
+  s_{i+3} - s_i = (1 + \alpha)\,(s_{i+2} - s_{i+1}), \qquad
+  \frac{\zeta^{i+3} - \zeta^i}{\zeta^{i+2} - \zeta^{i+1}}
+  = \frac{\zeta^2 + \zeta + 1}{\zeta} = 1 + \zeta + \zeta^{-1} ,
+\]
+et le facteur réel $1 + \alpha$ ne dépend que de $\zeta$. Cette relation, qui
+ne fait intervenir que des rapports de vecteurs parallèles, est affine ; elle
+reviendra comme définition (page 82).
+
+Si l'on étend les scalaires à $\mathbf{C}$, $E \otimes_{\mathbf{R}} \mathbf{C}
+\simeq \mathbf{C}^2$ par $z \mapsto (z, \bar z)$, la multiplication par
+$\zeta$ se diagonalise suivant les deux droites isotropes,
+$u = \mathrm{diag}(\zeta, \zeta^{-1})$, le sommet $s_i$ devient $(\zeta^i,
+\zeta^{-i})$ et la symétrie $z \mapsto \bar z$ l'échange des coordonnées.
+C'est, annonce la page 8, la structure typique des $n$-gones réguliers sur un
+corps algébriquement clos de caractéristique première à $n$ (elle est établie
+page 63), avec la même classification que sur $\mathbf{R}$ ; et il est
+« remarquable », note-t-il, que $\mathbf{R}$, qui n'est pas algébriquement
+clos, donne la même classification. L'explication viendra aux pages 81
+à 90 : un polygone régulier est déterminé par $\alpha$ seul, sans qu'il soit
+besoin que $\zeta$ soit dans le corps, et sur $\mathbf{R}$ toutes les valeurs
+$2\cos(2\pi k/n)$ sont réelles.
+
+La page 9 est une feuille de calculs isolée, barrée, sur les endomorphismes
+d'un plan : pour $u$, $v$ d'ordre $2$,
+\[
+  \det(u + v) = \det u + \det v + \operatorname{Tr} u \operatorname{Tr} v -
+  \operatorname{Tr}(uv), \qquad
+  \operatorname{Tr}(u \check v) = \operatorname{Tr} u \operatorname{Tr} v -
+  \operatorname{Tr}(uv),
+\]
+où $\check v = (\operatorname{Tr} v)\,\mathrm{id} - v$ est l'adjoint
+classique ; puis des essais sur les endomorphismes de trace nulle laissant
+stable une droite, nilpotents ou de carré nul\footnote{Les deux identités sont
+justes en dimension $2$. Le reste de la feuille (des fragments où paraissent
+$\mathcal{O}_\xi \subset \sqrt{\mathcal{J}} \subset \mathcal{L}$ et une
+flèche $X \to \mathbf{R}(\sqrt{\mathcal{J}}/\mathcal{O}_\xi)$) est trop
+lacunaire pour être lu ; rien ne le rattache aux pages voisines.}.
+
+\pagerange{10}{11}
+\subsection*{Repères et épinglages (pages 10 et 11)}
+
+Un \emph{repère} d'un polygone combinatoire $\Pi = (S, \omega)$ est un couple
+$(s_0, d_0)$ formé d'un sommet et d'un côté incidents --- un \emph{drapeau},
+dirait-on aujourd'hui --- ; il revient au même de se donner deux sommets
+adjacents $(s_0, s_1)$, ou un sommet $s_0$ et une orientation $u \in \omega$
+($s_1 = u s_0$).
+
+\textbf{Proposition 1.} Le groupe $\Gamma = \mathrm{Aut}(S, \omega)$ opère
+simplement transitivement sur l'ensemble $\mathrm{Rep}(\Pi)$ des repères :
+c'est un torseur sous $\Gamma$.
+
+\textbf{Corollaire 1.} Si $\Pi$ et $\Pi'$ sont isomorphes et $r_0$ est un
+repère de $\Pi$, l'application $\mathrm{Isom}(\Pi, \Pi') \to
+\mathrm{Rep}(\Pi')$, $\theta \mapsto \theta(r_0)$, est bijective.
+
+Un \emph{épinglage} d'un polygone combinatoire est le choix d'un repère ;
+c'est la même chose qu'un isomorphisme avec le $n$-gone combinatoire type
+$\Pi_n$ muni de son repère standard. Un épinglage d'un polygone géométrique
+est un épinglage du polygone combinatoire sous-jacent.
+
+\textbf{Corollaire 2.} Si $P$ et $P'$ sont deux polygones réguliers
+isomorphes et $r$ un repère de $P$, l'application $\mathrm{Isom}(P, P') \to
+\mathrm{Rep}(P')$, $\theta \mapsto \theta(r)$, est bijective.
+
+\textbf{Scholie.} Dans une classe d'isomorphie donnée, les $n$-gones réguliers
+épinglés sont déterminés à isomorphisme \emph{unique} près, et les classes
+d'isomorphie de $n$-gones épinglés et non épinglés se correspondent
+bijectivement. La page 11 pose alors la « question » qui organise la suite :
+écrire « le » plan $E$ où vit $P$, et les sommets $s_i$, en fonction du type
+d'isomorphie, c'est-à-dire de $n$ et d'un « module » $\alpha \in k$. La
+réponse sera la formule $s_n = (F_n F_{n+1}(\alpha), F_{n-1} F_n(\alpha))$
+des pages 111 et 112.
+
+\pagerange{12}{21}
+\subsection*{Polygones réguliers et représentations du groupe diédral (pages 12 à 21)}
+
+Un polygone régulier $P = (S, \omega)$ détermine un sous-groupe $\Gamma
+\subset \mathrm{Aff}(E)$, isomorphe à $\mathbf{D}_n$ (sans isomorphisme
+privilégié), dont $S$ est une orbite. Le groupe ne suffit pas à retrouver
+$\omega$ : $\omega$ et $\omega^{(r)} = \{u^r, u^{-r}\}$, $(r, n) = 1$, ont le
+même groupe d'automorphismes. Il faut donc se donner en plus la partie
+$\omega \subset \Gamma$, avec les conditions
+\begin{enumerate}
+  \item[(6)] le sous-groupe $\Gamma^{+}$ engendré par $\omega$ est d'indice
+    $2$, $\Gamma/\Gamma^{+}$ opère sur $\Gamma^{+}$ par $\lambda \mapsto
+    \lambda^{-1}$, et l'extension est scindée par une involution $\sigma \in
+    \Gamma \smallsetminus \Gamma^{+}$ ;
+  \item[(7)] $\Gamma^{+}$ est fini ;
+  \item[(8)] $S$ est un torseur sous $\Gamma^{+}$ ;
+  \item[(9)] $S$ n'est pas contenu dans une droite.
+\end{enumerate}
+Ces conditions suffisent : la structure de torseur sous le groupe cyclique
+$\Gamma^{+}$ fait de $S$ un polygone combinatoire, que $\sigma$ retourne, et
+$\Gamma$ s'injecte dans son groupe d'automorphismes avec $\Gamma^{+}
+\xrightarrow{\sim} \mathrm{Aut}^{+}$\footnote{Le texte qui justifie la
+suffisance (page 14) est en partie illisible ; on en donne l'argument. La page
+numérote les conditions dans l'ordre (9), (8), (7), et des flèches dans la
+marge rétablissent (7), (8), (9). En (7$'$), « $\operatorname{card}
+\Gamma^{+} \simeq \mathbf{Z}/n\mathbf{Z}$ » est à lire $\Gamma^{+} \simeq
+\mathbf{Z}/n\mathbf{Z}$.}. On peut remplacer la donnée de $S$ par celle d'une
+orbite sous $\Gamma^{+}$ et de la condition
+\[
+  (10) \qquad \exists\, \sigma_{s_0} \in \Gamma,\ \sigma_{s_0} \neq 1,\
+  \sigma_{s_0} s_0 = s_0 ,
+\]
+ce $\sigma_{s_0}$ étant a posteriori unique.
+
+Si l'on épingle entièrement (un sommet $s_0$ et une orientation $u$), les
+données deviennent, pour $n \geq 3$ fixé, un homomorphisme $\varphi :
+\mathbf{D}_n \to \mathrm{Aff}(E)$ et un point $s_0 \in E$, soumis à
+\[
+  (13) \qquad \sigma_1 s_0 = s_0, \qquad s_0,\ s_1 = u s_0,\ s_2 = u^2 s_0
+  \ \text{non alignés},
+\]
+\[
+  (12) \qquad \varphi \text{ fidèle}, \qquad u \text{ unimodulaire}.
+\]
+
+\textbf{Proposition 2.} Pour un plan $E$ et un entier $n \geq 3$ fixés, se
+donner dans $E$ un $n$-gone régulier (unimodulaire) épinglé revient à se donner
+un couple $(\varphi, s_0)$ comme ci-dessus.
+
+La donnée essentielle est $\varphi$. On verra que, pour les $\varphi$ qui
+proviennent de polygones réguliers, $\sigma_1$ est une réflexion : son lieu
+fixe $D_{\sigma_1}$ est une droite, et le choix de $s_0$ est celui d'un point
+de cette droite. Comme $u s_0 = \sigma_0 \sigma_1 s_0 = \sigma_0 s_0$, la
+condition $u s_0 \neq s_0$ demande $s_0 \notin D_{\sigma_0}$ ; on trouvera que
+$\sigma_0$ est aussi une réflexion et que $D_{\sigma_0} \neq D_{\sigma_1}$,
+ce qui exclut au plus un point, le \emph{centre} $c$, point fixe de tout
+$\varphi(\mathbf{D}_n)$. Soit $D_{\sigma_1}^{*} = D_{\sigma_1} \smallsetminus
+(D_{\sigma_0} \cap D_{\sigma_1})$, sur lequel opère le commutant $\mathfrak{G}$
+de $\varphi(\mathbf{D}_n)$ dans $\mathrm{Aff}(E)$.
+
+\textbf{Proposition 3.} Supposons que $\sigma_0$ et $\sigma_1$ soient des
+réflexions de droites fixes distinctes --- ce qui, note-t-il, n'est autre que
+la condition unimodulaire.
+\begin{enumerate}
+  \item[1°)] Si $D_{\sigma_0}$ et $D_{\sigma_1}$ se coupent en $c$, alors $c$
+    est l'unique point fixe de $\Gamma$ ; prenant $c$ pour origine, $\Gamma$
+    opère linéairement, et $\mathfrak{G}$ est le groupe des homothéties de
+    centre $c$, $\mathfrak{G} \simeq k^{*}$.
+  \item[2°)] Si $D_{\sigma_0} \parallel D_{\sigma_1}$, soit $T \simeq k$ le
+    groupe des translations de leur direction commune ; alors $\mathfrak{G} =
+    T$.
+\end{enumerate}
+Dans les deux cas, $D_{\sigma_1}^{*}$ est un torseur sous
+$\mathfrak{G}$\footnote{La démonstration de la page 19 : le groupe évident
+$\mathfrak{G}_0$ ($k^{*}$, resp.\ $T$) commute à $\sigma_0$ et $\sigma_1$,
+donc à $\Gamma$, et opère simplement transitivement sur $D_{\sigma_1}^{*}$ ;
+$\mathfrak{G}$ opère librement sur l'ensemble des $s_0$ admissibles (un
+élément du commutant qui fixe $s_0$ fixe tous les $s_i$, qui engendrent $E$) ;
+il en résulte « formellement » que $\mathfrak{G} = \mathfrak{G}_0$. Il faut
+que $\varphi$ soit admissible, c'est-à-dire qu'il existe un $s_0$ satisfaisant
+(13) ; alors, $\mathfrak{G}_0$ étant transitif et préservant (13), tous les
+points de $D_{\sigma_1}^{*}$ le sont. L'indice de « $\mathfrak{G}_0 =
+\mathfrak{G}$ » est lu avec doute. Par les pages 87 et 88, le cas 2° est
+celui de $\alpha = 2$, qui ne donne de polygone fini qu'en caractéristique
+$p$, avec $n = p$ ; la marge de la page 20, en partie illisible, semble le
+dire (« $n \neq \operatorname{car} k$ \ldots{} $n \neq 2$ si $p = 2$
+»).}.
+
+\textbf{Corollaire 1 (page 20).} Deux $n$-gones réguliers épinglés dont les
+représentations de $\mathbf{D}_n$ sont isomorphes sont isomorphes : classer
+les représentations affines admissibles de $\mathbf{D}_n$, c'est classer les
+$n$-gones réguliers.
+
+\textbf{Corollaire 2 (pages 20 et 21).} Si $\varphi$, $\varphi'$ sont deux
+représentations admissibles et $P$ un $n$-gone régulier épinglé subordonné à
+$\varphi$, l'application $\theta \mapsto \theta(P)$ est une bijection de
+$\mathrm{Isom}((E, \varphi), (E', \varphi'))$ sur l'ensemble des $n$-gones
+réguliers épinglés subordonnés à $\varphi'$\footnote{La page 21 ajoute
+« ((19) disait que c'était une surjection) », renvoi qu'on ne retrouve pas ;
+elle écrit $D_n^{*}$ pour $D_{\sigma_1}^{*}$, et $\square$ pour
+$\mathbf{D}_n$ au corollaire 1.}.
+
+En langage suggestif : choisir un sommet $s_0 \in D_{\sigma_1}^{*}$, c'est
+\emph{épingler} la représentation $\varphi$ --- on tue ses automorphismes
+($\mathfrak{G}$ opère librement) sans introduire de nouvelles classes
+d'isomorphie ($\mathfrak{G}$ opère transitivement).
+
+\pagerange{22}{26}
+\subsection*{Où l'on laisse tomber la fidélité (pages 22 à 26)}
+
+Considérons des données $(\varphi, s_0)$ qui satisfont (13), mais pas
+nécessairement (12) : ni la fidélité, ni l'unimodularité.
+
+\textbf{Proposition 4.}
+\begin{enumerate}
+  \item[(a)] Pour $v \in \mathbf{D}_n^{+}$, $\varphi(v) = \mathrm{id}_E$ si et
+    seulement si $v s_0 = s_0$.
+  \item[(b)] $\varphi$ est fidèle si et seulement si sa restriction à
+    $\mathbf{D}_n^{+}$ l'est, si et seulement si $u^d s_0 \neq s_0$ pour tout
+    diviseur \emph{strict} $d$ de $n$.
+  \item[(c)] Le noyau de $\varphi$ est le sous-groupe engendré par
+    $u^{n'}$, où $n' = \operatorname{card} S$ est un diviseur de $n$, et
+    $n' \geq 3$ ; $\varphi$ se factorise par une représentation fidèle
+    $\varphi'$ de $\mathbf{D}_{n'}$\footnote{Variances de la page. En (b) :
+    « $\forall d \mid n$, on ait $u^d(s_0) \neq s_0$ », où il faut exclure
+    $d = n$ ; un signe isolé sous $\mathbf{N}^{*}$, non lu, était peut-être
+    cette restriction. En (c) : « le noyau est engendré par un élément $u^d$,
+    où $d$ est un diviseur de $n$ tel que $n' = n/d \geq 3$ », puis, dans la
+    démonstration, $n = n'd$ et $\operatorname{card} S = n'$. Les deux ne
+    s'accordent pas : si le noyau est $\langle u^d \rangle$, l'image de
+    $\mathbf{D}_n^{+}$ est d'ordre $d$ et $\operatorname{card} S = d$. On
+    énonce ce qui est vrai, avec $n'$ le cardinal de $S$. La démonstration
+    de (b) n'est pas écrite ; elle résulte de (a) et du corollaire 1.}.
+\end{enumerate}
+\emph{Démonstration.} (a) Les $s_\nu = u^\nu s_0$ engendrent affinement $E$, et
+$v s_\nu = u^\nu v s_0$ puisque $\mathbf{D}_n^{+}$ est commutatif. (c) Le noyau
+de $\varphi|_{\mathbf{D}_n^{+}}$ est un sous-groupe de $\mathbf{Z}/n$, engendré
+par $u^{n'}$ avec $n' \mid n$ ; alors $\operatorname{card} S = n'$, et $n'
+\geq 3$ parce que $S$ engendre $E$. $\varphi$ se factorise par $\varphi' :
+\mathbf{D}_{n'} \to \mathrm{Aff}(E)$, fidèle sur les rotations, donc fidèle
+par (b), et le noyau de $\varphi$ est celui de sa restriction aux rotations.
+
+\textbf{Corollaire 1.} Si $v \in \mathbf{D}_n \smallsetminus
+\mathbf{D}_n^{+}$, $\varphi(v) \neq \mathrm{id}_E$ : $\varphi(v)$ échange les
+deux ordres circulaires de $S$ ($\operatorname{card} S \geq 3$), donc n'est
+pas l'identité sur $S$.
+
+\textbf{Corollaire 2.} Dans la situation de (c), $(\varphi', s_0)$ définit
+dans $E$ un $n'$-gone épinglé.
+
+\textbf{Scholie.} La donnée $(\varphi, s_0)$ est une réalisation géométrique
+du $n$-gone combinatoire $\Pi_n$ qui est un revêtement à $n/n'$ feuillets de
+la réalisation $(\varphi', s_0)$ de $\Pi_{n'}$.
+
+Quand on fixe $n$, on trouve d'abord des représentations $\varphi$ sans savoir
+lesquelles sont fidèles, et c'est une question d'un autre type ; surtout sur
+un anneau plus général qu'un corps --- $\mathbf{Z}[T]/(T^n - 1)$, les anneaux
+cyclotomiques ---, où certaines fibres donnent des représentations fidèles et
+d'autres non, sans que celles-ci cessent de définir des polygones réguliers,
+à moins de côtés. D'où la règle de conduite :
+\begin{quote}
+« Ce serait emprisonnant --- et finalement d'ailleurs artificiel --- de
+traîner tout au long dans les données la condition de fidélité, au lieu de se
+borner à l'examiner seulement aux moments où cette considération est
+utile\footnote{Citation de la page 26 ; « finalement d'ailleurs » est un
+ajout lu avec doute. La phrase sur les fibres (page 25) est lacunaire ; on en
+donne le sens que les pages 114 à 119 confirment.}. »
+\end{quote}
+
+\pagerange{26}{33}
+\subsection*{Les $\infty$-polygones (pages 26 à 33)}
+
+On peut aller plus loin. La représentation $\varphi$ revient à deux
+involutions $\sigma_0, \sigma_1 \in \mathrm{Aff}(E)$ avec $(\sigma_0
+\sigma_1)^n = \mathrm{id}$, et la fidélité s'écrit
+\[
+  (15) \qquad u^d s_0 \neq s_0 \quad \text{pour tout diviseur strict } d
+  \text{ de } n .
+\]
+Comme $s_0, s_1, s_2$ sont distincts, les diviseurs $d \leq 2$ sont sans
+objet : il suffit de tester les diviseurs stricts $d \geq 3$. La condition
+est vide exactement quand $n$ est un nombre premier impair ou $n = 4$ ; le
+premier cas où elle ne l'est pas est $n = 6$, où l'hexagone régulier peut
+dégénérer en un triangle parcouru deux fois\footnote{La page dit : « il
+suffit de l'exiger pour $3 \leq d \leq [\frac n3]$ (donc si $3 \leq n \leq 8$,
+cette condition est automatiquement satisfaite, le premier entier où elle ne
+l'est pas est $n = 9$ \ldots{} le $9$-gone régulier pouvant dégénérer en trois
+fois un $3$-gone régulier) ». Si $d$ y désigne le nombre de feuillets
+$n/n'$, la borne $d \leq n/3$ est juste ($n' \geq 3$), mais la borne
+inférieure doit être $d \geq 2$ : le triangle parcouru deux fois (sur un corps
+de caractéristique $\neq 3$, $\alpha = -1$, $u^3 = 1$, donc $u^6 = 1$) est
+une représentation non fidèle de $\mathbf{D}_6$ satisfaisant (13), de même
+que le carré parcouru deux fois pour $n = 8$. Avec la borne corrigée, la
+condition est vide pour $n$ premier impair et pour $n = 4$, et pour eux
+seulement ; c'est ce que dira, pour $n = p$, la page 115.}.
+
+Mais on peut aussi laisser tomber $(\sigma_0\sigma_1)^n = \mathrm{id}$
+lui-même, c'est-à-dire regarder une représentation
+\[
+  (16) \qquad \varphi : \mathbf{D}_\infty \longrightarrow \mathrm{Aff}(E)
+\]
+du groupe diédral infini, en s'intéressant surtout à celles qui se factorisent
+par un $\mathbf{D}_n$. De ce point de vue la fidélité ne se pose plus : les
+représentations les plus intéressantes de $\mathbf{D}_\infty$, celles qui
+donnent les polygones finis, sont précisément non fidèles.
+
+Il y a lieu alors de considérer des polygones combinatoires infinis, et leurs
+réalisations géométriques \emph{régulières} : une application $\varphi_S : S
+\to E$ telle que
+\[
+  (17) \qquad \forall v \in \mathrm{Aut}(\Pi),\ \exists!\, v_E \in
+  \mathrm{Aff}(E),\quad v_E \circ \varphi_S = \varphi_S \circ v .
+\]
+Cela revient à un homomorphisme $\varphi_\Gamma : \Gamma = \mathrm{Aut}(\Pi)
+\to \mathrm{Aff}(E)$ et une application $\Gamma$-équivariante $\varphi_S : S
+\to E$ dont l'image n'est pas contenue dans une droite (19). Si l'on fixe un
+sommet $i_0$ et l'unique élément $\neq 1$ de $\Gamma$ qui le fixe\footnote{La
+page l'appelle $\sigma_0$ ; c'est notre $\sigma_1$.}, la donnée de
+$\varphi_S$ équivaut à celle de $s_0 = \varphi_S(i_0)$ fixé par cet élément,
+et (19) à la non-colinéarité de $s_0, s_1, s_2$ (22). Se donner $(s_0, u)$,
+c'est épingler $\Pi$ par $\Pi_n$, $3 \leq n \leq \infty$.
+
+\textbf{Proposition 5.} Les réalisations géométriques régulières de
+$\Pi_\infty$ dans $E$ correspondent aux triples $(\sigma_0, \sigma_1, s_0)$ de
+deux automorphismes affines et d'un point tels que
+\begin{enumerate}
+  \item[1°)] $\sigma_0^2 = \sigma_1^2 = \mathrm{id}$ ;
+  \item[2°)] $\sigma_1 s_0 = s_0$ ;
+  \item[3°)] $s_0$, $s_1 = u s_0$, $s_2 = u^2 s_0$ ne sont pas alignés,
+    $u = \sigma_0 \sigma_1$.
+\end{enumerate}
+La réalisation est \emph{unimodulaire} si de plus 4°) $u$ est unimodulaire.
+
+\textbf{Scholie.} On étudie ainsi d'un coup tous les $n$-gones réguliers
+épinglés --- ceux où $u$ est d'ordre fini $n$ --- et un objet nouveau, les
+$\infty$-polygones réguliers épinglés.
+
+\textbf{Remarque.} Les résultats précédents (propositions 1 à 4 et leurs
+corollaires) s'étendent sans dommage aux $\infty$-polygones, la divisibilité
+de la proposition 4 perdant son sens pour $n = \infty$. La marge ajoute qu'il
+conviendrait de \emph{définir} d'emblée les polygones réguliers généraux,
+finis ou non --- ce que fera le cours.
+
+\textbf{NB (pages 32 et 33).} Le module $\alpha \in k$ n'est plus soumis à
+aucune condition, cyclotomique ou autre. Plus intrinsèquement, pour un polygone
+combinatoire $\Pi$ fini ou infini, la catégorie de ses réalisations
+géométriques régulières est \emph{rigide} : une réalisation n'a pas
+d'automorphisme autre que l'identité (un automorphisme compatible fixe $S$
+point par point, et $S$ engendre $E$). On peut donc parler de \emph{la}
+réalisation $E(\Pi)$ de module $\alpha$, sur laquelle l'action de
+$\mathrm{Aut}(\Pi)$ s'obtient automatiquement --- un des intérêts techniques
+d'éliminer l'épinglage dès le départ\footnote{Les deux pages sont rapides et
+lacunaires ; le mot « rigide » et la parenthèse « sans automorphismes autres
+que l'identité » sont sur la page, la justification est de nous.}.
+
+\pagerange{33}{39}
+\subsection*{L'étoilage (pages 33 à 39)}
+
+Soit $(S, \omega)$ un polygone combinatoire, $\omega = \{u, u^{-1}\}$, et $r
+\in \mathbf{Z}$ ; posons $\omega^{(r)} = \{u^r, u^{-r}\}$. Passer de $\omega$
+à $\omega^{(r)}$, c'est relier chaque sommet à son $r$-ième voisin : le
+pentagone devient le pentagramme pour $r = 2$.
+
+\textbf{Proposition 6.}
+\begin{enumerate}
+  \item[a)] $(S, \omega^{(r)})$ est un polygone combinatoire si et seulement si
+    $n = \operatorname{card} S$ est fini et $(r, n) = 1$, ou $r = \pm 1$.
+  \item[b)] Si $n$ est fini, $\omega^{(r)} = \omega^{(r')}$ si et seulement si
+    $r' \equiv \pm r \pmod n$.
+  \item[c)] $(\omega^{(r')})^{(r)} = \omega^{(rr')}$. Le groupe $Q_n =
+    (\mathbf{Z}/n\mathbf{Z})^{*}/\{\pm 1\}$ opère donc, et librement, sur
+    l'ensemble $\mathrm{Pol}(S)$ des structures polygonales sur $S$.
+\end{enumerate}
+\emph{Démonstration.} Une structure polygonale fait de $S$ un torseur sous
+$\mathbf{Z}_n$ ($\mathbf{Z}/n\mathbf{Z}$ si $n$ est fini, $\mathbf{Z}$ sinon) ;
+l'action déduite de $u^r$ se déduit de la précédente par la multiplication par
+$r$ de $\mathbf{Z}_n$, et fait de $S$ un torseur si et seulement si celle-ci
+est bijective. b) $\omega^{(r)} = \omega^{(r')}$ signifie $u^{r'} = u^{\pm
+r}$\footnote{La page conclut a) par « $n$ fini et $(r, n) = 1$ » : pour $n$
+infini, la multiplication par $r = \pm 1$ est bijective, et $\omega^{(\pm 1)}
+= \omega$. L'alinéa marqué (c) de la démonstration prouve b).}.
+
+\textbf{Remarque.} Une structure de polygone \emph{orienté} est la donnée d'une
+permutation circulaire $u$, c'est-à-dire d'une structure de
+$\mathbf{Z}_n$-torseur ; $(\mathbf{Z}/n\mathbf{Z})^{*}$ opère librement sur
+l'ensemble $\mathrm{Polor}(S)$ de ces structures, par $u \mapsto u^r$.
+
+Si $P = (E, S, \omega)$ est un $n$-gone régulier et $(r, n) = 1$,
+$P^{(r)} = (E, S, \omega^{(r)})$ est encore un $n$-gone régulier, de même
+ensemble de sommets : les normalisateurs de $\omega$ et de $\omega^{(r)}$ dans
+$\mathfrak{S}_S$ sont les mêmes,
+\[
+  (27) \qquad \mathrm{Aut}(\Pi) = \mathrm{Aut}(\Pi^{(r)}) \subset
+  \mathfrak{S}_S ,
+\]
+et l'unimodularité passe de $u$ à $u^r$. $Q_n$ opère donc librement sur
+l'ensemble des $n$-gones réguliers de $E$, et $(\mathbf{Z}/n)^{*}$ sur celui
+des $n$-gones réguliers orientés, ou orientés et munis d'un
+sommet\footnote{En (26), la page écrit $\Psi_r(E)$ pour ce qui est ici
+$P^{(r)}$.}.
+
+\textbf{Question} (pages 36 et 37). Un $n$-gone régulier $P$ peut-il être
+isomorphe à $P^{(r)}$ pour $r \not\equiv \pm 1$ ? En termes de l'invariant,
+$P^{(r)}$ a pour invariant $S_r(\alpha) = \zeta^r + \zeta^{-r}$, et
+l'isomorphie équivaut à $S_r(\alpha) = \alpha$. Si la caractéristique $p$ ne
+divise pas $n$, $\zeta$ est d'ordre exactement $n$ et $\zeta^r \neq
+\zeta^{\pm 1}$ : jamais. Si $p \mid n$, les seuls $n$-gones réguliers sont,
+par les pages 94, 95 et 118, les $p$-gones d'invariant $2$ et les
+$2p$-gones d'invariant $-2$ (dont le carré en caractéristique $2$) ; il n'y a
+alors qu'une classe, et $P^{(r)} \simeq P$ pour tout $r$\footnote{Le passage
+des pages 36 et 37 est très rapide, plusieurs fois récrit, et seules les
+affirmations mathématiques y sont sûres : « si $(n, p) = 1$ on aura
+$\Psi_r(\alpha) \neq \alpha$ si $r \neq 1$ dans $\Psi_n$, tandis que si $p
+\mid n$ \ldots{} (ou bien $n = p$, $p$ impair, ou bien $n = 2p$) alors
+\ldots{} les $n$-pol.\ réguliers sont non isom. », la lecture « non »
+étant douteuse. Ce qu'on énonce est ce que les pages 94 à 119 établissent. La
+suite, sur l'ordre de $r$ dans $(\mathbf{Z}/p)^{*}$ et « l'hexagone », n'a pas
+pu être suivie. $S_r$ est le polynôme de la page 122.}. On retiendra, dit-il,
+que l'étoilage « a une nette tendance à changer la classe d'isomorphie ».
+
+Pour les représentations de $\mathbf{D}_\infty$, l'étoilage se définit pour
+\emph{tout} $r \in \mathbf{Z}$ : on remplace $(\sigma_1, u)$ par $(\sigma_1,
+u^r)$, ce qui conserve les relations $\sigma_1^2 = 1$, $\sigma_1 u^r
+\sigma_1 = u^{-r}$. Mais la non-colinéarité de $s_0, u^r s_0, u^{2r} s_0$ peut
+tomber en défaut : si la représentation se factorise par $\mathbf{D}_n$ et $r
+= n$, tous les points sont confondus. La page pose alors la question de la
+signification géométrique de la représentation de $\mathbf{D}_\infty$
+attachée à l'invariant étoilé $S_r(\alpha)$ dans ces cas « exceptionnels » où
+les $s_i$ étoilés sont alignés\footnote{La question est sur la page ; elle
+reste sans réponse. On remarquera (c'est de nous) que dans le cas $\zeta^r =
+\pm 1$, l'invariant étoilé est $S_r(\alpha) = \pm 2$, celui du polygone
+parabolique ou de la bande des pages 94 à 100 : la représentation propre
+d'invariant $S_r(\alpha)$ n'est donc pas la représentation étoilée dégénérée,
+et c'est sans doute ce que la question vise.}.
+
+\pagerange{39}{48}
+\subsection*{Structures quasi-polygonales et systèmes réguliers de sommets (pages 39 à 48)}
+
+Une \emph{structure quasi-polygonale} sur un ensemble fini $S$ de cardinal $n$
+est une orbite $\pi$ de $Q_n$ dans $\mathrm{Pol}(S)$ --- une structure
+polygonale « modulo étoilage ». Le sous-groupe $Z \subset \mathfrak{S}_S$
+engendré par un $\omega \in \pi$ ne dépend que de $\pi$ ; il est cyclique
+d'ordre $n$ et $S$ est un $Z$-torseur. Se donner une structure
+quasi-polygonale, c'est donc se donner une structure de torseur sous un groupe
+cyclique d'ordre $n$ ; choisir $\omega \in \pi$, c'est choisir un générateur
+de $Z$ au signe près ; choisir une orientation, c'est choisir un générateur.
+
+En termes d'aujourd'hui, $Z$ est un $\mathbf{Z}/n\mathbf{Z}$-module libre de
+rang $1$ et $S$ un torseur sous lui : une \emph{droite affine sur
+$\mathbf{Z}/n\mathbf{Z}$}. La catégorie des quasi-polygones combinatoires
+d'ordre $n$ est équivalente à celle des fibrés affines de rang $1$ sur
+$\mathrm{Spec}(\mathbf{Z}/n\mathbf{Z})$\footnote{La page 40 écrit « fibrés
+» (un mot illisible) « affines sur $\mathrm{Spec}(\mathbf{Z}/n\mathbf{Z})$ », et la
+page 41 « l'ensemble de ses sections, qui est un torseur sous le groupe des
+sections du fibré vectoriel correspondant, lequel est un
+$\mathbf{Z}/n\mathbf{Z}$-module libre de rang $1$ ».}. Son groupe
+d'automorphismes $\mathrm{Aff}(S)$ est le groupe affine de cette droite :
+\[
+  0 \longrightarrow Z \longrightarrow \mathrm{Aff}(S) \longrightarrow
+  (\mathbf{Z}/n\mathbf{Z})^{*} \simeq \mathrm{Aut}(Z) \longrightarrow 0 ,
+\]
+extension scindée par le choix d'un point $s \in S$, qui identifie
+$\mathrm{Aff}(S)$ au produit semi-direct $(\mathbf{Z}/n)^{*} \ltimes
+\mathbf{Z}/n$. L'image inverse $\mathrm{Aff}^{\pm}(S)$ de $\{\pm 1\}$ est le
+groupe diédral $\mathrm{Aut}(S, \omega)$ de toute structure $\omega \in \pi$ ;
+il est d'indice $\varphi(n)/2$ dans $\mathrm{Aff}(S)$, et lui est égal
+exactement quand $\varphi(n) = 2$, c'est-à-dire $n = 3, 4, 6$\footnote{La page
+dit $\mathrm{Aff}^{\pm}(S)$ « d'indice deux » (lecture incertaine) ; l'indice
+est $[(\mathbf{Z}/n)^{*} : \{\pm 1\}] = \varphi(n)/2$, qui vaut $2$ pour
+$n = 5, 8, 10, 12$ seulement. Le crochet de la page 42 sur $n = 3, 4, 6$
+(« Vérifier ») est juste.}.
+
+\textbf{Systèmes réguliers de sommets.} Un \emph{système régulier de $n$
+sommets} dans $E$ (la page abrège SR$n$S) est un couple $(S, Z)$, $S \subset
+E$ finie de cardinal $n$, $Z$ une structure quasi-polygonale sur $S$, telle que
+pour une (donc toute) structure polygonale $\omega$ compatible, $(E, S,
+\omega)$ soit un polygone régulier --- « donc toute » par (27). C'est la même
+chose qu'une orbite de $Q_n$ opérant sur les $n$-gones réguliers de $E$.
+
+\textbf{Question} (pages 43 et 44) : $Z$ est-il déterminé par la seule partie
+$S \subset E$ ? Le stabilisateur de la partie $S$ dans $\mathrm{Aff}(E)$ est
+$\mathrm{Aut}(E, S, \omega) \simeq \mathbf{D}_n$, sauf pour $\alpha = \pm 2$,
+où c'est $\mathrm{Aff}(S, Z)$ tout entier\footnote{Énoncé de la page,
+marqué « vérifier ! ». On le vérifie (c'est de nous). Hors des cas $\alpha =
+\pm 2$, la caractéristique ne divise pas $n$, les sommets centrés vérifient
+$s_{i+1} + s_{i-1} = \alpha\, s_i$, et une application affine qui envoie
+$s_i$ sur $s_{ri}$ imposerait $S_r(\alpha) = \alpha$, donc $r \equiv \pm 1$.
+Pour $\alpha = 2$ (le $p$-gone de la page 100, sommets $(i, i^2)$ dans les
+coordonnées $(v, w)$), $i \mapsto ri$ est induit par l'application linéaire
+$(v, w) \mapsto (rv, r^2 w)$. Pour $\alpha = -2$ (le $2p$-gone de la
+page 95, sommets pairs $s_0 + m\,a$ et impairs $s'_0 - m\,a$ sur deux droites
+parallèles), $i \mapsto ri$ ($r$ impair) est induit par l'application affine
+qui multiplie par $r$ le long de la direction $a$ et envoie $s'_0$ sur $s'_0 -
+\frac{r-1}{2}\,a$.}. La question devient combinatoire : $Z$ est-il déterminé
+par $\mathrm{Aff}^{\pm}(S) \subset \mathfrak{S}_S$, ou par $\mathrm{Aff}(S)
+\subset \mathfrak{S}_S$ ? Dans le premier cas oui : $Z$ est le plus grand
+sous-groupe cyclique distingué de $G = \mathrm{Aff}^{\pm}(S) \simeq
+\mathbf{D}_n$ distinct de $G$, car le sous-groupe distingué engendré par une
+réflexion $\sigma \in G \smallsetminus Z$ n'est pas cyclique\footnote{La page
+dit qu'il est isomorphe à $\{\pm 1\} \cdot \mathbf{Z}/n'$ avec $n' = n/2$ ;
+c'est vrai pour $n$ pair (pour $n = 4$, c'est le groupe de Klein) ; pour $n$
+impair il est $G$ tout entier. Dans les deux cas il n'est pas cyclique.}. Le
+cas de $\mathrm{Aff}(S)$ est laissé (« faire dém. »)\footnote{Il se traite
+aussi (de nous) : ce cas n'arrive que pour $n = p$ ou $2p$ en caractéristique
+$p$, et dans $\mathrm{Aff}(\mathbf{Z}/p) = (\mathbf{Z}/p)^{*} \ltimes
+\mathbf{Z}/p$, comme dans $\mathrm{Aff}(\mathbf{Z}/2p) \simeq \mathbf{Z}/2
+\times \mathrm{Aff}(\mathbf{Z}/p)$, les sous-groupes distingués cycliques sont
+contenus dans les translations.}. « Donc sauf erreur », la structure
+quasi-polygonale d'un système régulier de sommets est unique.
+
+\textbf{Principe de classification géométrique.} Pour $n$ fixé, un système
+régulier de $n$ sommets détermine (a) un sous-groupe cyclique $Z \subset
+\mathrm{Aff}(E)$ d'ordre $n$, (b) une orbite $S$ de $Z$ dans $E$, soumis à
+\begin{enumerate}
+  \item[1)] $S$ n'est pas contenu dans une droite (donc $Z$ opère fidèlement
+    sur $S$, qui est un $Z$-torseur) ;
+  \item[2)] il existe $\sigma \neq 1$ dans le normalisateur de $Z$, qui opère
+    sur $Z$ par $\lambda \mapsto \lambda^{-1}$ et fixe un point de $S$.
+\end{enumerate}
+
+\textbf{Proposition 7.} Se donner un système régulier de $n$ sommets dans $E$
+équivaut à se donner $(Z, S)$ comme en (a), (b), satisfaisant 1) et 2)
+(et, si l'on tient à l'unimodularité du chapitre, $Z$ engendré par un élément
+de déterminant $1$)\footnote{La page a barré, dans 2), « opère sur $Z$ par
+$\lambda \mapsto \lambda^{-1}$ » et ne garde que « $\exists\, \sigma \in
+\mathrm{Norm}(Z)$ tel que $\sigma$ laisse invariant un pt de $S$ » ; sous
+cette forme la condition est remplie par $\sigma = 1$ et ne dit rien. On
+rétablit la clause barrée et $\sigma \neq 1$, qui sont ce qu'il faut pour que
+$\{1, \sigma\} \cdot Z$ (produit semi-direct, page 45) opère sur $S$ en
+groupe diédral. La proposition ajoute « éventuellement la condition de
+minimalité : 3) $Z$ formé d'ordre minimal », « formé » lu avec doute,, qu'on n'a pas su
+interpréter.}.
+
+\textbf{Remarque.} Selon $p = \operatorname{car} k$ et $n$, le groupe des
+automorphismes d'un système régulier de $n$ sommets est $\mathrm{Aff}^{\pm}(S)
+\simeq \mathbf{D}_n$ ou $\mathrm{Aff}(S)$.
+
+\textbf{Un programme de descente} (pages 46 à 48). On cherche une notion
+d'épinglage pour ces systèmes, qui ramène leur étude à un calcul ; la théorie
+de la descente devrait alors fournir un objet épinglé canonique sur le corps
+premier ($\mathbf{Q}$ ou $\mathbf{F}_p$), les autres s'en déduisant par
+\emph{torsion} par un torseur sous le groupe des automorphismes. La question
+est en somme celle-ci : les systèmes réguliers de $n$ sommets forment une
+\emph{gerbe} sur le corps premier --- sur un corps algébriquement clos ils sont
+tous isomorphes, puisque $Q_n$ permute transitivement les invariants ---, et
+cette gerbe a-t-elle une section ? En caractéristique $p \mid n$ (donc $n = p$
+ou $2p$), existe-t-il un tel système sur $\mathbf{F}_p$ ?\footnote{La page
+précise qu'elle considère les structures non nécessairement scindées, sur un
+anneau, où $S$ est un sous-schéma fini du fibré affine $E$ ; la parenthèse est
+en partie illisible. Le mot « gerbe » est sur la page (page 46), au sens de
+Giraud.} Le mieux qu'on puisse espérer :
+\begin{enumerate}
+  \item[a)] trouver un système régulier de $n$ sommets sur $A =
+    \mathbf{Z}[\frac1n]$ ;
+  \item[b)] si $n$ est premier impair ou $n = 4$, en trouver un sur $A =
+    \mathbf{Z}$ ;
+  \item[c)] si $n = 2p$, $p$ premier impair, en trouver un sur $A =
+    \mathbf{Z}[\frac12]$\footnote{La page restreint a) à « $n$ premier $\neq
+    2$ ou de la forme $2p$ » ; la solution qu'elle donne vaut pour tout $n
+    \geq 3$, ce qu'elle dit aussitôt.}.
+\end{enumerate}
+La solution de a) est « évidente » : dans le plan $\mathbf{E}^2_A$, on prend
+\[
+  Z_0 = \mu_{n,A} \subset \mathrm{SL}(2)_A, \quad t \mapsto
+  \begin{pmatrix} t & 0 \\ 0 & t^{-1} \end{pmatrix}, \qquad
+  \sigma_0 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \qquad
+  s_0 = (1, 1), \qquad S_0 = Z_0 \cdot s_0 ,
+\]
+qui n'est autre que le modèle $s_i = (\zeta^i, \zeta^{-i})$ de la page 8, écrit
+sans choisir $\zeta$. Son schéma en groupes d'automorphismes est $G =
+\mu_{n,A} \rtimes \{\pm 1\}_A$, une forme tordue du groupe diédral constant, et
+la catégorie fibrée des systèmes réguliers de $n$ sommets s'identifie à celle
+des $G$-torseurs\footnote{La page note ici $\sigma_0$ l'échange des
+coordonnées, qui est notre $\sigma_1$ ; on garde sa lettre dans la formule,
+ce morceau ne servant pas ailleurs. L'indice de $\sigma$ dans
+$\mathbf{E}^2(A)^{\sigma}$ manque sur la page.}. En caractéristique $p$, on
+perd ce modèle, où « les choses sont spéciales » : sur $\mathbf{F}_p$ il y a
+bien un système régulier scindé --- les $p$-gones paraboliques et les
+$2p$-gones en bande des pages 94 et 95 sont définis sur $\mathbf{F}_p$ --- mais
+la question sur $\mathbf{Z}$ (cas b)) ou $\mathbf{Z}[\frac12]$ (cas c)) reste
+ouverte. La « Construction » commencée au bas de la page 48 ($T =
+\mathrm{Spec}(A)$, $E = \mathbf{E}^2_T$, $s_0$) s'arrête après trois
+symboles\footnote{Au-dessus, quelques lignes encadrées et barrées
+envisageaient de regarder le cas a) au-dessus de $\mathrm{Spec}(A[\frac1p])$ et
+de prolonger. Les pages 114 à 116 reprendront la question sous la forme des
+« anneaux modulaires » $k'_n$, et trouveront $k'_4 = \mathbf{Z}$.}.
+
+\pagerange{49}{80}
+\section*{II. « Cours Polygones réguliers II » (pages 49 à 80)}
+
+\pagerange{50}{53}
+\subsection*{Plan, rappels, et le choix de ne pas se donner de métrique (pages 50 à 52)}
+
+Le plan de la leçon : 1. automorphismes et repères des polygones
+combinatoires, le polygone type et les groupes $\mathbf{D}_n$,
+$\mathbf{D}_\infty = \mathbf{Z}/2 * \mathbf{Z}/2$ ; 2. espaces affines et
+groupe affine $\mathrm{Aff}(E) \simeq \mathrm{GL}(n) \ltimes k^n$ ; 3. métrique
+et formes quadratiques, non dégénérées ou non.
+
+Rappel de la leçon précédente : un \emph{polygone géométrique} est un couple
+$(S, A)$, $S \subset E$, $A \subset \mathrm{Dr}(E)$, qui est un polygone
+combinatoire pour la relation d'incidence ; une \emph{réalisation
+géométrique} d'un polygone combinatoire $\Pi = (S, A, R)$ est un couple
+$\varphi_S : S \to E$, $\varphi_A : A \to \mathrm{Dr}(E)$ compatible avec
+l'incidence. Si deux sommets adjacents ont toujours des images distinctes,
+$\varphi_A$ est déterminée par $\varphi_S$, qui est arbitraire. La réalisation
+est \emph{fidèle} si $\varphi_S(s) \in \varphi_A(a)$ entraîne que $s$ est
+incident à $a$ ; alors $\varphi_S$ et $\varphi_A$ sont injectives et l'image
+est un vrai polygone de $E$, dit $\Pi$-épinglé\footnote{C'est le polygone
+« propre » de la page 3 ; la page 50 avait d'abord écrit « non dégénérée ».}.
+
+\textbf{Le choix de la définition.} Sur $\mathbf{R}$, avec une métrique, on
+avait proposé : le groupe des déplacements qui laissent le polygone invariant
+est transitif sur les sommets ; il y a alors un point fixe, le centre de
+gravité, les déplacements sont des rotations, et l'on retrouve les $\zeta^i
+s_0$ ; $S$ et $A$ sont des torseurs sous ce groupe. Le groupe de \emph{toutes}
+les isométries qui conservent $P$ a une transitivité plus forte : il est
+(simplement) transitif sur les \emph{repères}. Le cours fait le choix
+inverse :
+\begin{quote}
+Nous préférons ne pas nous donner de métrique d'avance, et prendre les
+automorphismes affines de $E$ qui conservent $P$, et \emph{exiger} qu'ils
+soient transitifs sur l'ensemble des repères. On récupère la métrique à peu
+près de façon unique modulo homothétie --- mais parfois elle sera
+dégénérée ! Si on exigeait dès le début une métrique non dégénérée, on
+perdrait des cas fort intéressants du point de vue arithmétique --- en fait,
+les seuls cas vraiment nouveaux ! Pratiquement, ce nouveau point de vue
+consiste à regarder \emph{tous} les triangles comme polygones réguliers, ainsi
+que \emph{tous} les parallélogrammes\footnote{Citation des pages 51 et 52,
+abréviations développées ; « fort intéressants » est lu avec doute. La
+métrique dégénérée est celle des pages 97 et 98 ($\alpha = \pm 2$).}.
+\end{quote}
+La « définition en forme » annoncée --- polygone régulier, puis réalisation
+géométrique régulière d'un polygone combinatoire --- s'arrête à ses deux
+titres ; elle est donnée au fil des pages 54 à 80.
+
+\pagerange{54}{61}
+\subsection*{Polygones combinatoires, contours et drapeaux (pages 54 à 61)}
+
+Un \emph{polygone combinatoire} est un triple $(S, A, R)$ : un ensemble de
+sommets, un ensemble d'arêtes, et une relation d'incidence $R \subset S
+\times A$ --- les \emph{repères}, ou drapeaux --- telle que 1) $R \to A$ soit
+de degré $2$ (deux sommets par arête), 2) $R \to S$ de degré $2$ (deux arêtes
+par sommet), 3) le tout soit connexe. Sans 3) on parle de \emph{contour} ;
+sans 2), de graphe ; et si l'on se donne $R \to S$, $R \to A$ sans supposer $R
+\hookrightarrow S \times A$, de complexe $1$-cellulaire\footnote{Même matière,
+et mêmes mots (« contour »), au dossier 75 (pages 4 à 7). Le langage des
+drapeaux est aussi celui du dossier 86.}.
+
+Sur l'ensemble $R$ des drapeaux d'un contour opèrent deux involutions sans
+point fixe : $\sigma_1$ échange les deux drapeaux de même sommet ($R/\sigma_1
+\simeq S$), $\sigma_0$ les deux drapeaux de même arête ($R/\sigma_0 \simeq
+A$). Elles engendrent une action du groupe
+\[
+  \mathfrak{G}_1 = \langle \sigma_0, \sigma_1 \mid \sigma_0^2 = \sigma_1^2 = 1
+  \rangle \simeq \mathbf{Z}/2 * \mathbf{Z}/2 = \mathbf{D}_\infty .
+\]
+
+\textbf{Proposition} (page 55). Le foncteur $(S, A, R) \mapsto R$ est une
+équivalence de la catégorie des contours sur celle des
+$\mathfrak{G}_1$-ensembles « admissibles », ceux où $\sigma_0$ et $\sigma_1$
+opèrent sans point fixe et où $\sigma_0 x \neq \sigma_1 x$ pour tout $x$ ---
+« c'est une tautologie »\footnote{La dernière condition exprime que $R \to S
+\times A$ est injectif ; elle exclut les orbites à deux éléments $\{x,
+\sigma_0 x = \sigma_1 x\}$, c'est-à-dire, dit la marge, les « monogones »,
+polygones à un côté. La page écrit « dans $E$ » pour « dans $R$ ».}.
+
+Avec $\sigma = \sigma_1$ et $u = \sigma_1 \sigma_0$, $\mathfrak{G}_1 =
+\langle \sigma, u \mid \sigma^2 = 1,\ \sigma u \sigma^{-1} = u^{-1} \rangle =
+\mathbf{Z} \rtimes \mathbf{Z}/2$, le groupe diédral infini, et les trois
+conditions d'admissibilité se résument en
+\[
+  \forall x \in R, \qquad \operatorname{card}\{x, \sigma x, u x\} = 3
+\]
+\footnote{Ici $u = \sigma_1\sigma_0$, l'inverse de notre rotation ; à cette
+page seulement, cela ne change rien. $\sigma_0 = u^{-1}\sigma = \sigma u$.}.
+
+\textbf{Corollaire} (page 56). Les polygones combinatoires sont les espaces
+homogènes de $\mathfrak{G}_1 = \mathbf{D}_\infty$ dont aucun stabilisateur ne
+contient $\sigma_0$, $\sigma_1$ ni $u$. Ces stabilisateurs sont exactement les
+sous-groupes $n\mathbf{Z} = \langle u^n \rangle$ des rotations, $2 \leq n \leq
+\infty$ ($\infty\mathbf{Z} = 0$) : ils sont distingués, de quotient le groupe
+diédral $\mathbf{D}_n$. \emph{Démonstration.} La condition est évidemment
+suffisante. Si un stabilisateur $H$ contenait un élément $u^m \sigma$ hors des
+rotations, comme $u^m \sigma u^{-m} = u^{2m}\sigma$, cet élément serait
+conjugué de $\sigma$ ($m$ pair) ou de $u\sigma$ ($m$ impair), donc un
+conjugué de $H$, stabilisateur d'un autre point, contiendrait $\sigma_1$ ou
+$\sigma_0$. Donc $H \subset \langle u \rangle$, et $u \notin H$.
+
+Soit $\Pi_n$ ($2 \leq n \leq \infty$) le polygone combinatoire défini par
+$\mathbf{D}_n$ comme espace homogène de $\mathfrak{G}_1$ : ses sommets sont
+$S_n = \langle \sigma_1 \rangle \backslash \mathbf{D}_n$, ses arêtes $A_n =
+\langle \sigma_0 \rangle \backslash \mathbf{D}_n$, chacun en bijection avec
+$\mathbf{Z}/n$, et $s_i$ est incident à $a_i$ et à $a_{i-1}$\footnote{La
+page 57 écrit $S_n = \langle u\sigma \rangle \backslash \mathbf{D}_n$, « $u\sigma
+= \sigma_0$ », et $A_n = \langle \sigma \rangle \backslash \mathbf{D}_n$,
+« $\sigma = \sigma_1$ » : c'est l'inverse de $S = R/\sigma_1$, $A =
+R/\sigma_0$ (page 54), et $u\sigma$ n'est pas $\sigma_0$ avec la convention
+$u = \sigma_1\sigma_0$ de la page 55 (il l'est avec celle des pages 77 et
+suivantes). Comme $\sigma_0$ et $\sigma_1$ jouent des rôles symétriques dans
+$\mathbf{D}_n$, le polygone obtenu est le même aux noms près ; on rétablit la
+convention de la page 54. Le croquis montre $a_0$ de $s_0$ à $s_1$.}.
+
+\textbf{Corollaire 2.} Si $\Pi$, $\Pi'$ sont isomorphes et $r \in
+\mathrm{Rep}(\Pi)$, $\mathrm{Isom}(\Pi, \Pi') \to \mathrm{Rep}(\Pi')$,
+$\varphi \mapsto \varphi(r)$, est bijective --- cas particulier d'un énoncé sur
+les espaces homogènes « distingués » (de stabilisateur distingué).
+
+\textbf{Corollaire 3.} Un $n$-gone combinatoire muni d'un repère est défini à
+isomorphisme unique près, et canoniquement isomorphe à $\Pi_n$.
+
+\textbf{Corollaire 4.} $\mathrm{Aut}(\Pi_n) \simeq \mathbf{D}_n$
+canoniquement (par multiplication à droite) ; $\mathrm{Aut}(\Pi) \simeq
+\mathbf{D}_n$, non canoniquement, pour tout $n$-gone $\Pi$.
+
+\textbf{NB.} La restriction $\sigma_0 x \neq \sigma_1 x$ exclut les orbites
+$\mathbf{D}_1$, les polygones à un côté ; on pourrait les inclure en
+n'exigeant pas $R \hookrightarrow S \times A$. La condition analogue à celle
+des polyèdres combinatoires reviendrait à exiger $n \geq 3$, et l'on ne
+regardera désormais que $n \geq 3$\footnote{Le bas de la page 58 et le haut de
+la page 59 sont en grande partie illisibles ; on n'en retient que la
+conclusion, sûre.}.
+
+\textbf{Orientations} (§ 6, pages 59 à 61). Une partie $R^{+} \subset R$ est
+une \emph{orientation} si $\sigma_0 R^{+} = \sigma_1 R^{+} = R \smallsetminus
+R^{+}$, ou, de façon équivalente, si $R^{+} \to S$ et $R^{+} \to A$ sont
+bijectives : $R^{+}$ est le graphe d'une bijection $S \xrightarrow{\sim} A$.
+Les orientations d'une somme de contours sont le produit des orientations des
+composantes ; un polygone combinatoire a exactement deux orientations,
+opposées, qui sont les deux orbites des rotations $\mathfrak{G}_1^{+} =
+\langle u \rangle$ dans $R$ (dans $R \simeq \mathbf{D}_n$, les deux classes
+$\mathbf{D}_n^{+}$ et $\mathbf{D}_n \smallsetminus \mathbf{D}_n^{+}$).
+
+\textbf{Proposition} (7., pages 60 et 61). Soit $\Pi = (S, A, R)$ un polygone
+combinatoire, $G = \mathrm{Aut}(\Pi)$. L'action de $G$ sur les deux
+orientations donne une suite exacte
+\[
+  1 \longrightarrow G^{+} \longrightarrow G \longrightarrow \{\pm 1\}
+  \longrightarrow 1 ,
+\]
+scindée par n'importe quel élément de $G^{-} = G \smallsetminus G^{+}$, qui
+sont tous d'ordre $2$, et
+\begin{enumerate}
+  \item[a)] $G^{+}$ est cyclique d'ordre $n$, et $G^{-}$ opère sur lui par
+    inversion ;
+  \item[b)] $R$ est un torseur sous $G$, $S$ et $A$ des torseurs sous $G^{+}$ ;
+  \item[c)] pour toute orientation $\omega$, il existe un unique $u_\omega \in
+    G^{+}$ qui coïncide avec $u$ sur $R^{+}_\omega$ ; $u_{-\omega} =
+    u_\omega^{-1}$, $u_\omega$ engendre $G^{+}$, et si $n \geq 3$,
+    $\omega \mapsto u_\omega$ est une injection de $\mathrm{Or}(\Pi)$ dans
+    l'ensemble des générateurs de $G^{+}$ ;
+  \item[d)] le foncteur $\Pi \mapsto (G^{+}, \{u_\omega, u_{-\omega}\}, S)$ est
+    une équivalence de la catégorie des $n$-gones ($3 \leq n \leq \infty$)
+    sur celle des triples formés d'un groupe cyclique d'ordre $n$ (monogène
+    infini si $n = \infty$), d'une paire de générateurs inverses l'un de
+    l'autre, et d'un torseur sous ce groupe\footnote{Le premier terme du
+    triple se lit « $\mathbf{Z}\,G^{+}$ », peut-être $\mathbf{Z} \simeq
+    G^{+}$ pour $n = \infty$ ; la note marginale ajoute « ou ce qui revient au
+    même $\mathbf{Z}$-torseur ». C'est la description par $(G^0, \{g,
+    g^{-1}\}, S)$ du dossier 75 (page 6).}.
+\end{enumerate}
+\emph{Exercice} : exprimer $A$, et $R$ comme partie de $S \times A$, en termes
+de ces données\footnote{La page écrit « partie de $S \times R$ », la lecture
+du dernier facteur étant sûre ; il faut $S \times A$. L'exercice n'est pas
+fait. La réponse attendue : $A$ est l'ensemble des paires $\{s, u_\omega s\}$,
+et $R$ celui des couples $(s, a)$ avec $s \in a$.}.
+
+\pagerange{62}{73}
+\subsection*{Le cas d'un corps algébriquement clos, $p \nmid n$ (pages 62 à 73)}
+
+Soit $k$ algébriquement clos de caractéristique $p$ ne divisant pas $n$, et
+$\Pi$ un $n$-gone régulier ($3 \leq n < \infty$) d'un plan $E$. Le barycentre
+$o$ de $S$ --- qui a un sens parce que $n$ est inversible dans $k$ --- est
+fixé par $G = \mathrm{Aut}(\Pi)$ ; prenant $o$ pour origine, $E$ devient un
+plan vectoriel où $G$ opère linéairement. Soit $u$ l'un des deux générateurs
+privilégiés de $G^{+}$, $s_0$ un sommet, $\sigma_1$ l'automorphisme $\neq 1$
+qui fixe $s_0$ : $\sigma_1^2 = 1$, $\sigma_1 u \sigma_1 = u^{-1}$, $u^n = 1$,
+$n$ minimal.
+
+Soient $\zeta$, $\zeta'$ les valeurs propres de $u$. Si $\zeta = \zeta'$, on
+écrit $u = \zeta(\mathrm{id} + v)$ avec $v$ nilpotent ; $u^n = \zeta^n
+(\mathrm{id} + n v) = \mathrm{id}$ donne $nv = 0$, donc $v = 0$ ($n$
+inversible), $u$ est une homothétie et les $s_i$ seraient alignés sur la
+droite $o s_0$ : absurde. Donc $\zeta \neq \zeta'$, d'où deux droites
+propres $D_\zeta$, $D_{\zeta'}$. Comme $u$ est conjugué de $u^{-1}$, l'ensemble
+$\{\zeta, \zeta'\}$ est stable par inversion, et $\zeta' =
+\zeta^{-1}$\footnote{La stabilité par inversion laisse une autre
+possibilité, $\{\zeta, \zeta'\} = \{1, -1\}$, que la page ne mentionne pas ;
+elle donnerait $u^2 = 1$, exclu puisque $u$ est d'ordre $n \geq 3$.}.
+$\sigma_1$ échange $D_\zeta$ et $D_{\zeta^{-1}}$ ; écrivant $s_0 = e_1 + e_2$
+($e_1 \in D_\zeta$, $e_2 \in D_{\zeta^{-1}}$), $\sigma_1 s_0 = s_0$ donne
+$\sigma_1 e_1 = e_2$, et $e_1, e_2 \neq 0$ (sinon $S$ serait sur une droite
+propre). Dans la base $(e_1, e_2)$, attachée à l'épinglage,
+\[
+  u = \begin{pmatrix} \zeta & 0 \\ 0 & \zeta^{-1} \end{pmatrix}, \qquad
+  \sigma_1 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \qquad
+  s_i = \begin{pmatrix} \zeta^i \\ \zeta^{-i} \end{pmatrix} .
+\]
+On retrouve le cas typique de la page 8, sans avoir supposé la caractéristique
+nulle ni $\zeta$ d'ordre fini. L'invariant $\alpha = \zeta + \zeta^{-1} =
+\operatorname{Tr} u = \operatorname{Tr} u^{-1}$, ou la paire non ordonnée
+$\{\zeta, \zeta^{-1}\}$, est défini intrinsèquement par $\Pi$.
+
+\textbf{Proposition} (pages 64 et 65). Soit $k$ algébriquement clos de
+caractéristique $p$ ne divisant pas $n$, $3 \leq n < \infty$.
+\begin{enumerate}
+  \item[a)] Tout $n$-gone régulier épinglé sur $k$ est isomorphe à l'un des
+    polygones épinglés $\Pi_{\zeta, k}$ de $k^2$ ci-dessus, $\zeta$ racine
+    primitive $n$-ième de $1$ définie au passage près à $\zeta^{-1}$.
+  \item[b)] D'où des bijections entre les classes d'isomorphie de $n$-gones
+    réguliers (épinglés ou non), les paires $\{\zeta, \zeta^{-1}\}$ de racines
+    primitives $n$-ièmes de $1$, et les $\alpha \in k$ tels que les deux
+    racines de $\zeta^2 - \alpha \zeta + 1 = 0$ soient des racines primitives
+    $n$-ièmes de $1$ --- les « invariants numériques » des polygones
+    réguliers.
+  \item[c)] Dans $\Pi_{\zeta, k}$, l'origine est le barycentre de $S$ et
+    l'unique point fixe de $G$, et de $G^{+}$ ; les axes de coordonnées sont
+    les droites propres des générateurs privilégiés de $G^{+}$, de valeurs
+    propres $\zeta$ et $\zeta^{-1}$\footnote{La fin de la page 64 est
+    surchargée d'ajouts ; on ne lit sûrement que « l'unique point fixe sous
+    $G$ », « $G^{+}$ » et « $\{\zeta, \zeta^{-1}\}$ » ; on complète c) par ce
+    que la page 63 établit.}.
+\end{enumerate}
+
+\textbf{Formes invariantes.} Les fonctions polynomiales invariantes par $G$
+sont sommes de leurs composantes homogènes. Comme $u^{*}(x^a y^b) =
+\zeta^{a-b} x^a y^b$, une forme $\sum c_{ab}\, x^a y^b$ est invariante par
+$u$ si et seulement si $c_{ab} = 0$ pour $a \not\equiv b \pmod n$ ;
+l'invariance par $\sigma_1$ est la symétrie en $x, y$. Les invariants ont donc
+pour base les $(xy)^a$ et les $(xy)^a (x^{in} + y^{in})$, $a \in \mathbf{N}$,
+$i \geq 1$\footnote{La page donne pour base $1$ et les $(xy)^a(x^{in} +
+y^{in})$, $a \in \mathbf{N}$, $i \in \mathbf{N}^{*}$, oubliant les $(xy)^a$,
+$a \geq 1$ (le cas $i = 0$, qui donnerait $2(xy)^a$).}. Comme $X^i + Y^i =
+S'_i(X + Y, XY)$ pour un polynôme universel $S'_i$ à coefficients entiers
+(fonctions symétriques), on obtient
+\[
+  k[x, y]^{G} = k[\,xy,\ x^n + y^n\,] .
+\]
+\emph{NB.} Le calcul marche pour tout $n \geq 1$ et sur tout anneau de base,
+« le meilleur étant $\mathbf{Z}$ » : sous la forme qu'on dirait aujourd'hui,
+l'anneau des invariants du schéma en groupes $\mu_n \rtimes \mathbf{Z}/2$
+opérant sur $\mathbf{A}^2_{\mathbf{Z}}$ (comme à la page 47) est
+$\mathbf{Z}[xy, x^n + y^n]$\footnote{La page dit simplement que les calculs
+« marchent pour tout $n \in \mathbf{N}^{*}$ \ldots{} et sur tout anneau de
+base ». Pour un $\zeta$ donné dans un anneau, il faut que les $\zeta^d - 1$
+($0 < d < n$) ne soient pas diviseurs de zéro ; la formulation par le schéma
+en groupes évite cette réserve. Pour $n$ infini, l'anneau des invariants est
+$k[xy]$ (page 67).}.
+
+\textbf{Corollaire} (page 67). Pour $n \geq 3$, les fonctions polynomiales de
+degré $\leq 2$ invariantes par $G$ sont les $a\,xy + b$. À un scalaire près,
+il y a donc une unique forme quadratique invariante, $q_0 = xy$, normalisée
+par $q_0(s) = 1$ pour $s \in S$, et une unique conique \emph{invariante}
+circonscrite, $xy - 1 = 0$. Pour $n \geq 5$, c'est même l'unique conique
+circonscrite, cinq points d'une conique non dégénérée la
+déterminant\footnote{C'est ce que dit la marge, en partie illisible : « Ne
+marche que si $n \geq 5$ \ldots{} Ici on a une conique circonscrite canonique
+--- d'équation invariante par $G$ ».}.
+
+Pour un $n$-gone régulier non épinglé, il y a donc une unique forme
+quadratique invariante $q_0$ normalisée par $q_0(s) = 1$, et une unique
+conique circonscrite invariante $C : q_0(x) = 1$. La forme $q_0$, vue sur
+l'espace des translations, est non dégénérée : elle fait de $E$ un « plan
+euclidien ». Le carré de la longueur d'un côté est
+\[
+  q_0(s_1 - s_0) = (\zeta - 1)(\zeta^{-1} - 1) = 2 - \alpha ,
+\]
+non nul puisque $\zeta \neq 1$. On pourrait normaliser plutôt par $q_0(a) =
+1$ ; « dans le cas général, c'est cette normalisation-là qui sera la
+meilleure » --- c'est celle de la forme $f_0$ de la page 97.
+
+\textbf{Remarque} (pages 69 et 70). Si l'on avait seulement exigé que le
+groupe des automorphismes affines soit transitif sur les sommets, on aurait
+trouvé beaucoup plus : un $u$ d'ordre $n$ sans $\sigma$, c'est-à-dire deux
+valeurs propres $\zeta$, $\zeta'$ racines de l'unité d'ordres $d$, $d'$ avec
+$n = \operatorname{ppcm}(d, d')$, et $S$ l'orbite d'un point hors des deux
+droites propres. Exiger de plus une métrique non dégénérée invariante dont
+les automorphismes soient des \emph{rotations} « sauve la mise » : une
+rotation est unimodulaire, ses valeurs propres sont $\{\zeta, \zeta^{-1}\}$,
+et l'on retombe sur les cas précédents\footnote{La page attribue la
+suggestion à un collègue dont le nom est lu avec doute ; on ne le restitue
+pas. Le paragraphe barré qui précède (« Commentaires philosophiques », pages
+68 et 69) décrivait la famille, paramétrée par $\alpha$, des représentations
+affines de dimension $2$ de $\mathbf{D}_n$ ; il est abandonné.}. Il ne sait pas
+si l'on simplifie encore en exigeant seulement que les éléments de $G^{+}$
+respectent la métrique.
+
+\textbf{Semi-invariants} (pages 71 à 73). Les monômes $x^i y^j$ sont vecteurs
+propres de $u$, de valeur propre $\zeta^{i-j}$. L'algèbre des invariants de
+$G^{+}$ est
+\[
+  k[x, y]^{G^{+}} = k[W, U, V], \qquad W = xy,\ U = x^n,\ V = y^n,\qquad UV =
+  W^n ,
+\]
+et, pour $0 < d < n$, la composante de valeur propre $\zeta^d$ est le module
+engendré par $X_d = x^d$ et $Y_d = y^{n-d}$, avec la relation $V X_d = W^d
+Y_d$. En degré $\leq 2$, les valeurs propres de $1, x, y, x^2, xy, y^2$ sont
+$1, \zeta, \zeta^{-1}, \zeta^2, 1, \zeta^{-2}$.
+\begin{itemize}
+  \item Si $n \geq 5$, ces valeurs $\zeta^{-2}, \ldots, \zeta^2$ sont
+    distinctes ; les semi-invariants de $G^{+}$ de degré $\leq 2$ sont $a +
+    bxy$, $ax$, $ay$, $ax^2$, $ay^2$, et comme $\sigma_1$ échange $x$ et $y$,
+    seuls les $a + bxy$ sont semi-invariants (et même invariants) sous $G$.
+  \item Si $n = 3$ ($\zeta^2 = \zeta^{-1}$), les semi-invariants de $G^{+}$
+    sont $a + bxy$, $ax + by^2$ (valeur propre $\zeta$), $ay + bx^2$
+    ($\zeta^{-1}$) ; sous $G$, encore les seuls $a + bxy$.
+  \item Si $n = 4$ ($\zeta^2 = \zeta^{-2} = -1$), il s'ajoute $ax^2 + by^2$
+    (valeur propre $-1$), et parmi eux $x^2 + y^2$ et $x^2 - y^2$ sont
+    semi-invariants sous $G$. Les coniques semi-invariantes circonscrites au
+    carré sont $xy - 1 = 0$ et $x^2 - y^2 = 0$, la paire de ses
+    diagonales\footnote{La page dit « dans chacune [des familles], il y a une
+    conique circonscrite à $S$, savoir l'habituelle $xy - 1 = 0$, et de plus
+    $x^2 - y^2 = 0$ » ; que celle-ci soit la paire des diagonales $y = \pm x$
+    du carré $(\pm 1, \pm 1)$, $(\pm i, \mp i)$ est de nous.}.
+\end{itemize}
+Les seules coniques invariantes par $G$ sont donc les $a + bxy = 0$, et la
+seule qui soit circonscrite est $xy - 1 = 0$ ; le choix des coordonnées
+épinglées universelles montre, ajoute-t-il, que c'est la seule conique
+circonscrite\footnote{Pour $n \geq 5$ ; pour $n = 3, 4$, il y a d'autres
+coniques circonscrites, non invariantes. La page 72 écrit la condition de
+passage par les sommets « $a + b = 0$ », avec la normalisation $xy = 1$ sur
+$S$.}.
+
+\pagerange{74}{80}
+\subsection*{Réaliser $\Pi_\infty$ : programme et reformulation (pages 74 à 80)}
+
+\textbf{Programme.} Soit $\Pi$ un polygone combinatoire ; on étudie ses
+réalisations géométriques régulières dans des plans affines variables. Deux
+réalisations $\Pi$-isomorphes le sont par un isomorphisme \emph{unique} ; dans
+chaque classe, la réalisation $(E_\alpha, \varphi_{\alpha,S},
+\varphi_{\alpha,A})$, et en particulier son plan, est donc définie à
+isomorphisme unique près. On indexera les classes par un invariant numérique
+$\alpha$, et il faudra écrire explicitement $E_\alpha$, $\varphi_{\alpha,S}$,
+$\varphi_{\alpha,A}$ en fonction de $\Pi$ et de $\alpha$. Épinglé par un
+repère, $\Pi$ devient canoniquement isomorphe à un $\Pi_n$, $3 \leq n \leq
+\infty$, et tous les $\Pi_n$ sont des quotients canoniques de $\Pi_\infty$ (et
+$\Pi_n$ de $\Pi_m$ si $n \mid m$), compatibles aux repères : la catégorie
+(discrète) des réalisations régulières de $\Pi_n$ est une sous-catégorie pleine
+de celle de $\Pi_\infty$. D'où trois étapes :
+\begin{enumerate}
+  \item[a)] étudier les réalisations régulières de $\Pi_\infty$ sur un corps,
+    plus généralement un anneau ; on verra qu'elles sont caractérisées par un
+    invariant $\alpha \in k$, arbitraire ;
+  \item[b)] expliciter les conditions sur $\alpha$ pour que la réalisation se
+    factorise par $\Pi_n$, et de façon fidèle --- d'où une classification des
+    $n$-gones réguliers sur $k$ par un invariant $\alpha$ soumis à des
+    conditions ;
+  \item[c)] en déduire les propriétés essentielles et la classification des
+    $n$-gones réguliers, sans épinglage ; « cette étape est essentiellement
+    triviale ».
+\end{enumerate}
+L'étape a) occupe les pages 76 à 100, l'étape b) les pages 101 à 120.
+
+\textbf{Reformulation.} Avec $G = \mathrm{Aut}(\Pi_\infty) \simeq
+\mathbf{D}_\infty$, une réalisation régulière de $\Pi_\infty$ dans $E$ est
+donnée par
+\[
+  (2) \quad \sigma_0, \sigma_1 \in \mathrm{Aff}(E), \ \sigma_0^2 = \sigma_1^2
+  = \mathrm{id}_E ; \qquad
+  (3) \quad r = (s_0, a_0) \in E \times \mathrm{Dr}(E),\ s_0 \in a_0 ,
+\]
+le drapeau image du repère standard $r_\infty$, d'où, avec $u = \sigma_0
+\sigma_1$, $\varphi_S(\underline{s}_n) = u^n s_0$ et
+$\varphi_A(\underline{a}_n) = u^n a_0$. L'application $\varphi_{\mathrm{rep}}
+: \mathrm{Rep}(\Pi_\infty) \to \mathrm{Drap}(E)$, $g\, r_\infty \mapsto
+\varphi_G(g)\, r$, vers l'ensemble des drapeaux affines (point, droite
+incidente) de $E$, doit passer au quotient en $\varphi_S$ et $\varphi_A$ :
+\begin{tikzcd}
+\mathrm{Rep}(\Pi_\infty) \arrow[r, "\varphi_{\mathrm{rep}}"] \arrow[d] & \mathrm{Drap}(E) \arrow[d] \\
+S(\Pi_\infty) \times A(\Pi_\infty) \arrow[r, "\varphi_S \times \varphi_A"'] & E \times \mathrm{Dr}(E)
+\end{tikzcd}
+ce qui équivaut à
+\[
+  (8) \qquad \sigma_1 s_0 = s_0, \qquad \sigma_0 a_0 = a_0
+\]
+\footnote{La page 78 dessine deux carrés superposés, $\mathrm{pr}_1$ vers
+$S(\Pi_\infty) \to E$ et $\mathrm{pr}_2$ vers $A(\Pi_\infty) \to
+\mathrm{Dr}(E)$ ; on les réunit en un seul, par le produit. « $\mathrm{Drap.aff}(E)$ »
+est une lecture probable. Les sommets et arêtes combinatoires sont soulignés
+sur la page ; on garde le soulignement ici seulement.}. Posons $s_1 = \sigma_0
+s_0 = u s_0$ et $s_{-1} = \sigma_1 s_1 = u^{-1} s_0$.
+
+\textbf{Lemme} (page 79). Étant donnés (2) et (3) satisfaisant (8), les
+conditions suivantes sont équivalentes :
+\begin{enumerate}
+  \item[(a)] les données définissent une réalisation de $\Pi_\infty$,
+    c'est-à-dire que les $s_n = u^n s_0$ engendrent affinement $E$ ;
+  \item[(b)] $s_0$, $s_1$, $s_{-1}$ sont affinement indépendants ;
+  \item[(c)] $\varphi_S$ et $\varphi_A$ ne sont pas constantes\footnote{La
+    page écrit en (a) que les $s_n$ sont « affinement indépendants », ce qui
+    pour une suite infinie de points d'un plan ne peut s'entendre que comme
+    « engendrent affinement $E$ ».}.
+\end{enumerate}
+\emph{Démonstration.} (b) $\Rightarrow$ (a) $\Rightarrow$ (c) sont
+immédiats. Supposons (c). 1°) $s_1 \neq s_0$, sinon $s_0$ serait fixé par
+$\sigma_0$ et $\sigma_1$, donc par $G$, et $\varphi_S$ serait constante.
+2°) Alors $a_0 = \mathrm{dr}(s_0, s_1)$, car $s_0 \in a_0$ et $\sigma_0 a_0 =
+a_0$ donne $s_1 = \sigma_0 s_0 \in a_0$ (9) ; et $\sigma_1 a_0 =
+\mathrm{dr}(s_0, s_{-1})$. Si $s_{-1}$ était sur $a_0$, on aurait $\sigma_1
+a_0 = a_0$, $a_0$ serait fixée par $G$ et $\varphi_A$ serait
+constante\footnote{La page écrit « $\sigma_0 a_0 = \mathrm{dr}(\sigma_0 s_0 =
+s_1, \sigma_1 s_1 = s_{-1})$ » et « si on avait $s_{-1} \in a_1$ » : il faut
+$\sigma_1 a_0$ et $a_0$, comme la suite l'exige.}.
+
+\textbf{Proposition} (page 80). Les réalisations géométriques régulières de
+$\Pi_\infty$ dans $E$ correspondent bijectivement aux triples $(\sigma_0,
+\sigma_1, s_0)$, $\sigma_i \in \mathrm{Aff}(E)$, $s_0 \in E$, tels que
+\begin{enumerate}
+  \item[a)] $\sigma_0^2 = \sigma_1^2 = \mathrm{id}$ ;
+  \item[b)] $\sigma_1 s_0 = s_0$ ;
+  \item[c)] $s_0$, $s_1 = \sigma_0 s_0$ et $s_{-1} = \sigma_1 s_1$ forment un
+    repère affine de $E$.
+\end{enumerate}
+La représentation associée envoie les générateurs $\underline{\sigma}_i$ de
+$\mathrm{Aut}(\Pi_\infty)$ sur $\sigma_i$, et $\varphi_S(\underline{s}_n) = u^n
+s_0$, $\varphi_A(\underline{a}_n) = \mathrm{dr}(s_n, s_{n+1}) = u^n
+\mathrm{dr}(s_0, s_1)$, $n \in \mathbf{Z}$. C'est la proposition 5 du
+chapitre I, à ceci près que la non-colinéarité porte sur $s_{-1}, s_0, s_1$, ce
+qui revient au même.
+
+\pagerange{81}{100}
+\section*{III. Les coordonnées universelles (pages 81 à 100)}
+
+\pagerange{81}{85}
+\subsection*{Les paramètres $\alpha$, $\beta$ ; cas propre et cas impropre (pages 81 à 85)}
+
+Le repère $(s_0, s_1, s_{-1})$ identifie $E$ à $k^2$ : origine $s_0$, base
+$e_1 = s_1 - s_0$, $e_2 = s_{-1} - s_0$, et $(x, y) = s_0 + x e_1 + y e_2$.
+Ainsi $s_0 = (0,0)$, $s_1 = (1, 0)$, $s_{-1} = (0, 1)$\footnote{La page 81
+écrit « $s_2 = (0,1)$ » ; par (15), c'est $s_{-1}$.}. L'automorphisme
+$\sigma_1$ fixe $s_0$ et échange $s_1$, $s_{-1}$ :
+\[
+  (21) \qquad \sigma_1(x, y) = (y, x) .
+\]
+L'automorphisme $\sigma_0$ échange $s_0$ et $s_1$ et envoie $s_{-1}$ sur $s_2 =
+u^2 s_0 = \sigma_0 s_{-1}$ ; on \emph{définit} $\alpha, \beta \in k$ par
+\[
+  s_2 = s_0 + (1 + \alpha)\, e_1 + (1 + \beta)\, e_2 ,
+\]
+d'où $\sigma_0 e_1 = -e_1$, $\sigma_0 e_2 = \alpha e_1 + (1 + \beta) e_2$, et
+\[
+  (17), (18) \qquad \sigma_0 = \begin{pmatrix} -1 & \alpha & 1 \\ 0 & 1 + \beta
+  & 0 \\ 0 & 0 & 1 \end{pmatrix}, \qquad \sigma_0(x, y) = (1 - x + \alpha y,\
+  (1 + \beta) y)
+\]
+(en coordonnées homogènes $(x, y, 1)$). Reste à écrire $\sigma_0^2 =
+\mathrm{id}$ : $\sigma_0^2(x, y) = (x + \alpha\beta\, y,\ (1 + \beta)^2 y)$,
+donc
+\[
+  (22) \qquad \alpha\beta = 0, \qquad \beta(\beta + 2) = 0 .
+\]
+
+\textbf{Proposition} (page 83). Les réalisations géométriques régulières de
+$\Pi_\infty$ sur $k$, épinglées, sont en bijection avec les couples $(\alpha,
+\beta) \in k^2$ satisfaisant (22).
+
+L'exemple $s_i = (\zeta^i, \zeta^{-i})$ (page 82) donne $s_2 - s_{-1} = (1 +
+\zeta + \zeta^{-1})(s_1 - s_0)$, la relation de la page 7 ; on a donc envie
+d'imposer $\beta = 0$.
+
+\textbf{Proposition} (pages 82 et 84). Pour une réalisation régulière de
+$\Pi_\infty$, les conditions suivantes sont équivalentes :
+\begin{enumerate}
+  \item[(i)] $\beta = 0$ ;
+  \item[(ii)] $s_2 - s_{-1} = (1 + \alpha)(s_1 - s_0)$ ; (ii$'$) $s_2 -
+    s_{-1} \parallel s_1 - s_0$ ;
+  \item[(iii)] pour tout $n \in \mathbf{Z}$, $s_{n+3} - s_n = (1 + \alpha)(s_{n+2}
+    - s_{n+1})$ ; (iii$'$) pour tout $n$, $s_{n+3} - s_n \parallel s_{n+2} -
+    s_{n+1}$\footnote{La page écrit (iii$'$) mot pour mot comme (iii) ; on
+    l'écrit comme l'appelle (ii$'$).} ;
+  \item[(iv)] $\det \sigma_{0V} = -1$ ; (iv$'$) $\det u_V = 1$ ; (iv$''$)
+    $\operatorname{Tr} \sigma_{0V} = 0$ ;
+  \item[(v)] on n'est pas dans le cas \emph{impropre} : $\operatorname{car} k
+    \neq 2$, $\alpha = 0$, $\beta = -2$, $\sigma_0(x, y) = (1 - x, -y)$,
+    symétrie par rapport au milieu de $[s_0, s_1]$.
+\end{enumerate}
+\emph{Démonstration.} $s_2 - s_{-1} = (1 + \alpha) e_1 + \beta e_2$, d'où (i)
+$\Leftrightarrow$ (ii) $\Leftrightarrow$ (ii$'$) ; (iii) donne (ii) pour $n =
+-1$ et s'en déduit en appliquant $u^{n+1}$. Comme
+\[
+  (24) \qquad \det u_V = -\det \sigma_{0V} = 1 + \beta, \qquad
+  \operatorname{Tr} \sigma_{0V} = \beta ,
+\]
+(iv), (iv$'$), (iv$''$) équivalent à (i) ; et (v) à (i) par (22).
+
+La condition « propre » est donc exactement l'\emph{unimodularité} du
+chapitre I.
+
+\textbf{Le cas impropre} (pages 84 et 85). À isomorphisme près il y en a un et
+un seul pour $k$ donné ($\operatorname{car} k \neq 2$) :
+\[
+  (25) \qquad u(x, y) = (1 - y, -x), \qquad u^2(x, y) = (x + 1, y - 1) ,
+\]
+$u^2$ est la translation de vecteur $(1, -1)$. En caractéristique $0$, $u$ est
+d'ordre infini, et l'on obtient un $\infty$-polygone régulier fidèle : les
+sommets $s_{2m} = (m, -m)$ et $s_{2m+1} = (m + 1, -m)$, en escalier. En
+caractéristique $p > 2$, $u^2$ est d'ordre $p$, $u$ d'ordre $2p$, et la
+réalisation impropre se factorise par $\Pi_{2p}$ en une réalisation fidèle :
+un $2p$-gone régulier, non unimodulaire\footnote{Les $2p$ points $(m, -m)$,
+$(m+1, -m)$, $m \in \mathbf{F}_p$, sont distincts ; c'est le calcul de la page
+85, « on vérifie aisément », fait ici.}. « Avec la théorie projective des
+polygones réguliers, l'anomalie des polygones réguliers impropres s'explique
+complètement », et l'on n'a rien perdu, du point de vue projectif, à
+l'exclure, ce qu'on fera désormais\footnote{La théorie projective n'est pas
+dans le dossier. Le mot qualifiant « anomalie » est illisible.}.
+
+\textbf{Scholie} (page 85). Une réalisation géométrique régulière propre de
+$\Pi_\infty$ est décrite par $\alpha \in k$, qui peut être choisi
+arbitrairement. La marge baptise $\alpha$ « invariant numérique ».
+
+\pagerange{86}{89}
+\subsection*{Points fixes, centre, valeurs propres (pages 86 à 89)}
+
+Dans le cas propre ($\beta = 0$) :
+\[
+  (26) \qquad \sigma_0(x, y) = (1 - x + \alpha y,\ y), \quad
+  \sigma_1(x, y) = (y, x), \quad u(x, y) = (1 - y + \alpha x,\ x) .
+\]
+Le lieu fixe de $\sigma_0$ est la droite
+\[
+  (27) \qquad H_0 : \ 2x - \alpha y - 1 = 0 ,
+\]
+sauf en caractéristique $2$ avec $\alpha = 0$ (le carré de caractéristique
+$2$), où $H_0 = \emptyset$ et $\sigma_0$ est la translation de vecteur $e_1$ ;
+en coordonnées homogènes on trouve encore une droite, la droite à l'infini.
+Celui de $\sigma_1$ est la droite $H_1 : x = y$. Appelant \emph{réflexion
+affine} un automorphisme d'un plan affine dont le lieu fixe est une droite, le
+cas propre est donc encore caractérisé par
+\begin{enumerate}
+  \item[(iv$'''$)] $\sigma_0$ est une réflexion affine, ou une translation
+    (dans le seul cas $p = 2$, $\alpha = 0$, où elle reste une réflexion
+    projective) ;
+  \item[(iv$^{\mathrm{iv}}$)] $\sigma_{0V}$ est une réflexion, $\neq
+    \mathrm{id}$\footnote{La page écrit « sauf pour $p = 2$, $\alpha = 2$ »,
+    puis, à la ligne (iv$'''$), « $p = 2$, $\alpha = 0$ » : en caractéristique
+    $2$ c'est la même valeur. Dans le cas impropre, $\sigma_0$ est la symétrie
+    par rapport à un point, et $\sigma_{0V} = -\mathrm{id}$.}.
+\end{enumerate}
+
+Les points fixes de $G$, de $G^{+}$ et de $u$ coïncident ; ce sont les
+solutions de $x = y$, $x(2 - \alpha) = 1$ :
+\[
+  (29) \qquad x_0 = y_0 = \frac{1}{2 - \alpha} ,
+\]
+qui existe, unique, si et seulement si $\alpha \neq 2$. C'est le \emph{centre}
+de la réalisation.
+
+La partie linéaire de la rotation est
+\[
+  (30) \qquad u_V = \begin{pmatrix} \alpha & -1 \\ 1 & 0 \end{pmatrix}, \qquad
+  \det u_V = 1, \quad \operatorname{Tr} u_V = \alpha ,
+\]
+d'équation aux valeurs propres $\zeta^2 - \alpha\zeta + 1 = 0$ ($\zeta \in
+\bar k$), de discriminant $\Delta(\alpha) = \alpha^2 - 4 = (\alpha -
+2)(\alpha + 2)$ ; ses racines vérifient $\zeta\zeta' = 1$ et $\alpha = \zeta +
+\zeta^{-1}$. L'invariant numérique est donc celui de la page 63, défini
+maintenant sans condition. Le cas d'une racine double, $\zeta = \zeta' = \pm
+1$, c'est-à-dire $\alpha = \pm 2$ ou $\Delta(\alpha) = 0$, n'est plus exclu
+($\alpha = 2$ pour $\zeta = 1$, $\alpha = -2$ pour $\zeta = -1$, confondus
+si et seulement si $p = 2$) : ce sont exactement les deux valeurs de $\zeta$
+qu'il avait fallu écarter pour définir la représentation $\varphi^\zeta$, et
+$\alpha = 2$ est le seul cas sans centre à distance finie.
+
+Pour $\alpha \neq \pm 2$, et $\zeta \in k$, on retrouve la représentation
+$\varphi^\zeta$ ; sur $k$ algébriquement clos, les seuls cas nouveaux sont donc
+$\alpha = \pm 2$. Et il y insiste :
+\begin{quote}
+même si on décidait (à tort !) d'exclure ces deux cas, les considérant comme
+trop « exotiques », ils y reviendraient indirectement, car a) ils sont
+valables pour tout corps, et même sur les anneaux de base, pas seulement pour
+$k$ algébriquement clos, et b) ils permettent de suivre la variation de
+$\varphi(\alpha)$ en termes des paramètres $\alpha$,
+intrinsèques\footnote{Page 89, abréviations développées ; trois mots
+illisibles après « décidait » sont rendus par « d'exclure », que le sens
+impose, et « même sur les » est lu avec doute.}.
+\end{quote}
+
+\pagerange{90}{95}
+\subsection*{Étude par cas (pages 90 à 95)}
+
+\textbf{I. $\alpha \neq \pm 2$, cas ordinaire.} Étendant au besoin $k$ en
+$k(\zeta)$ et rapportant $E$ au centre et aux droites propres $D_\zeta$,
+$D_{\zeta^{-1}}$ de $u$, avec $s_0 = (1,1)$, on retrouve le cas type
+$\Pi_\zeta$, où $\zeta$ n'est pas forcément racine de l'unité. Il y a une forme
+quadratique invariante non dégénérée, unique à un scalaire près. L'ordre de
+$u$ est celui de $u_V$, c'est-à-dire celui de $\zeta$ ; quand il est fini,
+c'est le nombre de côtés du polygone image, et il est premier à la
+caractéristique.
+
+\textbf{II. $\alpha = -2$, $p \neq 2$.} La partie linéaire s'écrit $u_V =
+-(\mathrm{id} + v_0)$, $v_0^2 = 0$, $v_0 \neq 0$ ; plus généralement, pour
+$\alpha = 2\varepsilon$, $\varepsilon = \pm 1$, $u_V = \varepsilon(\mathrm{id}
++ v_0)$ avec
+\[
+  v_0(x, y) = (x - \varepsilon y)\,(1, \varepsilon) = a'(x, y)\, a, \qquad
+  a' = x - \varepsilon y \in V^{*}, \quad a = (1, \varepsilon) \in V ,
+\]
+un endomorphisme de rang $1$ et de carré nul\footnote{Le cas II est d'abord
+écrit puis barré (page 90), repris page 91, essayé sur une page de brouillon
+(page 92) et récrit page 94 après quatre départs biffés ; on suit la version
+de la page 94.}. Il y a un centre, $(\frac14, \frac14)$, et dans les
+coordonnées centrées $X = x - \frac14$, $Y = y - \frac14$,
+\[
+  \sigma_0(X, Y) = (-X - 2Y,\ Y), \quad \sigma_1(X, Y) = (Y, X), \quad
+  u = -(\mathrm{id} + v_0), \quad v_0 = (X + Y)\,(1, -1) .
+\]
+Comme $u^{2m} = \mathrm{id} + 2m\, v_0$ et $u^{2m+1} = -(\mathrm{id} +
+(2m+1) v_0)$, les sommets sont
+\[
+  s_{2m} = s_0 + m\, b, \qquad s_{2m+1} = s_1 - m\, b, \qquad b = (-1, 1)
+\]
+dans les coordonnées de départ ($s_2 = (-1, 1)$, $s_3 = (2, -1)$, \ldots) :
+les sommets pairs sur la droite $x + y = 0$, les impairs sur la droite
+parallèle $x + y = 1$, parcourues en sens contraires --- un polygone qui
+zigzague dans une bande\footnote{La page 95 écrit, en coordonnées centrées,
+$s_0 = (\frac14, \frac14)$, $s_{2n} = s_0 + n a$, $s_{2n+1} = (-s_0 - \frac12
+a) - na$ avec $a = (1, -1)$ ; les signes sont des pâtés lus d'après le calcul.
+En coordonnées centrées $s_0 = (-\frac14, -\frac14)$ (le centre est en
+$(\frac14, \frac14)$ dans les coordonnées de départ, où $s_0$ est l'origine),
+et la description par deux droites parallèles parcourues en sens contraires
+ne dépend pas de ce signe. On la donne dans les coordonnées de départ, où elle
+se vérifie directement sur $u(x, y) = (1 - y - 2x, x)$.}. En
+caractéristique $0$ c'est un $\infty$-polygone ; en caractéristique $p > 2$,
+$u_V^2 = \mathrm{id} + 2v_0$ est une transvection d'ordre $p$, $u_V$ et $u$
+sont d'ordre $2p$ : un $2p$-gone régulier (unimodulaire), propre, distinct de
+l'impropre de la page 85.
+
+En caractéristique $2$, $\alpha = -2 = 0 = 2$ : c'est le \emph{carré},
+$u(x, y) = (1 - y, x)$, $u^2(x, y) = (1 - x, 1 - y)$, $u^4 = \mathrm{id}$,
+d'ordre $4 = 2p$ ; il n'a pas de centre.
+
+\textbf{III. $\alpha = 2$, pas de centre.} $u_V = \mathrm{id} + v_0$, $v_0 =
+a' \otimes a \neq 0$, $v_0^2 = 0$ : en caractéristique $p$, $u_V$ est d'ordre
+$p$. Dans l'enveloppe vectorielle $\hat E$ de $E$ (le plan affine plongé comme
+hyperplan $z = 1$ de $k^3$), $u_{\hat E} = \mathrm{id} + w$ avec $w^3 = 0$ et
+$w^2 \neq 0$, puisque $u$ n'a pas de point fixe ; donc $u^p = \mathrm{id} +
+w^p = \mathrm{id}$ si $p \geq 3$, et $u$ est d'ordre $p$ ; pour $p = 2$,
+$u^2 = \mathrm{id} + w^2 \neq \mathrm{id}$ et l'on retrouve le carré, d'ordre
+$4$. En caractéristique $0$, $u$ est d'ordre infini. La description
+géométrique est au § 9 (page 100) : un polygone inscrit dans une parabole.
+
+\pagerange{96}{100}
+\subsection*{La forme quadratique invariante et la conique circonscrite (pages 96 à 100)}
+
+\textbf{§ 6.} Cherchons les fonctions polynomiales de degré $\leq 2$ sur $E$ ---
+les formes quadratiques sur l'enveloppe vectorielle $\hat E$ --- invariantes
+par $G = \mathrm{Aut}(\Pi_\infty)$, c'est-à-dire par $\sigma_0$ et $\sigma_1$.
+À une constante près, l'invariance par $\sigma_1$ donne $f = a(x^2 + y^2) +
+bxy + c(x + y)$, et l'invariance par $\sigma_0$ force $b = -\alpha a$, $c =
+-a$ :
+\[
+  f = a\, f_\alpha, \qquad
+  \boxed{\ f_\alpha(x, y) = (x^2 - x) + (y^2 - y) - \alpha\, xy\ } .
+\]
+Les fonctions $1$, $f_\alpha$ forment une base des fonctions invariantes de
+degré $\leq 2$, et $f_\alpha$ est caractérisée par : a) $f_\alpha$ est nulle
+sur $S$ ; b) sa partie homogène
+\[
+  f_0(X, Y) = X^2 + Y^2 - \alpha XY
+\]
+vaut $1$ sur les côtés, $f_0(s_i - s_{i-1}) = 1$. C'est la normalisation
+« par les côtés » annoncée page 68. La \emph{conique circonscrite canonique}
+$C(f_\alpha) : f_\alpha = 0$ ne dépend pas de la normalisation ; si le
+polygone a au moins cinq sommets (en particulier pour les $n$-gones, $n \geq
+5$, et les $\infty$-polygones), c'est la seule conique
+circonscrite\footnote{La marge dit « si $\alpha \neq 0, 1$ (i.e.\ cas des
+polygones réguliers à $n \geq 5$ côtés) ». Or $\alpha = 0$ est le carré et
+$\alpha = -1$ le triangle (table de la page 120) ; $\alpha = 1$ est
+l'hexagone. Il faut lire $\alpha \neq 0, -1$, ou mieux : au moins cinq
+sommets distincts.}.
+
+\textbf{§ 7. Discriminant de $f_0$.} Le déterminant de la matrice de $f_0$
+(dans la convention $2 f_0$) est $\delta(f_0) = 4 - \alpha^2 = (2 - \alpha)(2
++ \alpha)$, nul si et seulement si $\alpha = \pm 2$ : $f_0$ est non dégénérée
+exactement dans le cas ordinaire. Sur une extension contenant $\zeta$,
+\[
+  f_0(X, Y) = (Y - \zeta X)(Y - \zeta^{-1} X) ,
+\]
+et les deux directions isotropes $Y = \zeta X$, $Y = \zeta^{-1} X$ sont les
+droites propres de $u_V$ --- ce qui traduit que $u_V$ est une
+\emph{rotation} pour $f_0$. Pour $\alpha = \pm 2$ les deux directions se
+confondent : $X + Y = 0$ pour $\alpha = -2$, la direction déjà privilégiée au
+cas II ; $X = Y$ pour $\alpha = 2$. C'est la « métrique dégénérée » de la
+page 52.
+
+\textbf{§ 8. Discriminant de $f$.} La matrice de $2 f_\alpha$ en coordonnées
+homogènes est
+\[
+  \begin{pmatrix} 2 & -\alpha & -1 \\ -\alpha & 2 & -1 \\ -1 & -1 & 0
+  \end{pmatrix}, \qquad \det = -2(\alpha + 2) ,
+\]
+de sorte que, en caractéristique $\neq 2$, $C(f_\alpha)$ est non singulière si
+et seulement si $\alpha \neq -2$\footnote{La page écrit $\delta = 2\delta'$,
+$\delta' = -(\alpha + 2)$. Le calcul par la matrice symétrique suppose $2$
+inversible ; la page ne traite pas à part la caractéristique $2$, où $-2 = 0$
+et le cas $\alpha = -2$ est le carré.}. En particulier pour $\alpha = 2$, où
+$f_0$ est dégénérée : $C$ est alors une \emph{parabole}. Pour $\alpha = -2$,
+\[
+  f_{-2}(x, y) = (x + y)^2 - (x + y) = (x + y)(x + y - 1) ,
+\]
+produit de deux formes affines de même partie homogène : $C$ est la réunion
+des deux droites parallèles distinctes $x + y = 0$ et $x + y = 1$ qui portent
+les sommets pairs et impairs (cas II) ; en coordonnées centrées, $X + Y = \mp
+\frac12$.
+
+\textbf{§ 9. Retour sur $\alpha = 2$} (caractéristique $\neq 2$). Avec $v = x
+- y$, $w = x + y$,
+\[
+  f_2(x, y) = (x - y)^2 - (x + y) = v^2 - w ,
+\]
+et la rotation $u(x, y) = (1 - y + 2x, x)$ devient
+\[
+  u(v, w) = (v + 1,\ 1 + 2v + w), \qquad u(v, v^2) = (v + 1, (v + 1)^2) .
+\]
+Si l'on paramètre la parabole $C : w = v^2$ par $v$, $u|_C$ est la
+\emph{translation} $v \mapsto v + 1$, et les sommets sont les points $(m,
+m^2)$, $m \in \mathbf{Z}$, ou $m \in \mathbf{F}_p$ en caractéristique $p$ :
+le $p$-gone régulier de caractéristique $p$ est formé des $p$ points
+$\mathbf{F}_p$-rationnels d'une parabole, et sa rotation est une translation
+le long de celle-ci\footnote{La page 100 s'arrête sur la formule et le point
+d'exclamation « $v \mapsto v + 1$ ! » ; les deux dernières phrases (les
+sommets $(m, m^2)$, le $p$-gone de $\mathbf{F}_p$) sont la conséquence immédiate,
+écrite par nous, et rejoignent le cas III de la page 95.}.
+
+\pagerange{101}{107}
+\section*{IV. La fidélité (pages 101 à 107)}
+
+Deux versions se suivent ; la seconde porte en marge « (ancienne version) »,
+et la première, de la page 101, paraît donc la plus récente. Dans les deux,
+$\Pi = (S, A, R)$ est un polygone combinatoire, $\rho = (\rho_S, \rho_A)$ une
+réalisation géométrique régulière \emph{propre} (non impropre) de $\Pi$ dans un
+plan $E$ sur $k$, et l'on note $S$, $A$ les images\footnote{Les pages
+soulignent les lettres des objets combinatoires ($\underline{S}$,
+$\underline{\Pi}$\ldots) et laissent nues leurs images, avec des
+irrégularités ; on dit ici « combinatoire » ou « image » en toutes lettres.}.
+
+\pagerange{101}{103}
+\subsection*{Première version (pages 101 à 103)}
+
+\textbf{Proposition.} L'image $\Pi_0 = (\rho_S(S), \rho_A(A))$ est un polygone
+géométrique régulier de $E$ ; son groupe d'automorphismes $G_0$ est l'image de
+$\mathrm{Aut}(\Pi)$ dans $\mathrm{Aff}(E)$, et $\Pi \to \Pi_0$ est un
+morphisme de polygones combinatoires. En détail :
+\begin{enumerate}
+  \item[a)] Toute arête image $a = \mathrm{dr}(s, s')$ contient exactement deux
+    sommets images. Les deux extrémités ont des images distinctes ; et un
+    troisième sommet sur $a$ mettrait trois points de la conique circonscrite
+    canonique $C$ sur une droite, ce qu'elle interdit, sauf si $C$ est
+    singulière, $\alpha = -2$, cas où $C$ est la réunion de deux droites
+    parallèles portant les sommets pairs et les impairs, et où
+    $\mathrm{dr}(s_i, s_{i+1}) \cap C = \{s_i, s_{i+1}\}$\footnote{La page 101
+    ne dit que « $a \cap C$ ne peut contenir que 2 points ($C$ conique
+    circonscrite canonique) » ; le cas singulier est traité à la page 105, et
+    on le rapatrie ici. Comme à la page 99, la caractéristique $2$ n'est pas
+    examinée à part ; le carré de caractéristique $2$, où $f_0 = (x + y)(x +
+    y + 1)$, relève du même argument que le cas $\alpha = -2$.}.
+  \item[b)] Tout sommet image est sur exactement deux arêtes images : si
+    $\mathrm{dr}(s_0, s_1)$, image d'une arête combinatoire, passe par $s$,
+    alors $s \in \{s_0, s_1\}$ par a) ; si $s = s_0$, l'arête est l'image de
+    l'une des deux arêtes combinatoires issues du sommet combinatoire au-dessus
+    de $s$, à une rotation $u^n$ près qui fixe $s_0$, donc est l'identité.
+  \item[c)] $S$ engendre $E$.
+  \item[d)] $G = \mathrm{Aut}(E, S, A)$ est transitif sur l'ensemble $R$ des
+    repères de $(S, A)$ : $R$ est l'image de l'ensemble des repères
+    combinatoires, sur lequel $\mathrm{Aut}(\Pi)$ est transitif ; et comme
+    $\mathrm{Aut}(E, S, A)$ y opère simplement transitivement, l'image de
+    $\mathrm{Aut}(\Pi)$ est $\mathrm{Aut}(E, S, A)$ tout entier.
+  \item[e)] $\Pi \to \Pi_0$ est un morphisme : l'application des repères est
+    compatible à $\sigma_0$, $\sigma_1$.
+\end{enumerate}
+
+\pagerange{104}{107}
+\subsection*{Seconde version, dite « ancienne » (pages 104 à 107)}
+
+\textbf{Proposition.} Pour une réalisation régulière propre $\varphi$ de $\Pi$
+sur $k$, les conditions suivantes sont équivalentes :
+\begin{enumerate}
+  \item[a)] $\varphi$ est fidèle (l'incidence des images entraîne
+    l'incidence) ;
+  \item[b)] $\varphi_S : S \to E$ est injective ; b$'$) $\varphi_A : A \to
+    \mathrm{Dr}(E)$ est injective ;
+  \item[c)] $\mathrm{Aut}(\Pi) \to \mathrm{Aff}(E)$ est injectif ;
+  \item[d)] $\mathrm{Aut}^{+}(\Pi) \to \mathrm{Aff}(E)$ est injectif.
+\end{enumerate}
+\emph{Démonstration.} a) $\Rightarrow$ b), b$'$) : deux sommets distincts sont
+séparés par une arête incidente à l'un et non à l'autre, puisque
+$\operatorname{card} S \geq 3$. b) $\Rightarrow$ c) et b$'$) $\Rightarrow$ c) :
+$\mathrm{Aut}(\Pi)$ s'injecte dans $\mathfrak{S}_S$ et dans $\mathfrak{S}_A$.
+c) $\Rightarrow$ d) est trivial. d) $\Rightarrow$ b) : si $s_i = s_{i+d}$ avec
+$0 < d < n$, alors $u^d s_0 = s_0$, donc $u^d$ fixe tous les $s_j$, qui
+engendrent $E$, et $u^d = \mathrm{id}_E$, alors que $u^d \neq 1$ dans
+$\mathrm{Aut}^{+}(\Pi)$. Enfin b), c), d) $\Rightarrow$ a) : si $s \in a =
+\mathrm{dr}(s_0, s_1)$ avec $s \neq s_0, s_1$, la droite $a$ couperait $C$ en
+trois points, donc $C$ serait singulière, $\alpha = -2$, et l'on a vu que
+$\mathrm{dr}(s_0, s_1) \cap C = \{s_0, s_1\}$ : absurde.
+
+\textbf{Corollaire} (page 105). Si $v \in \mathrm{Aut}^{+}(\Pi)$ et $s \in
+S$, alors $v s = s$ si et seulement si $\varphi(v) = \mathrm{id}_E$ --- la
+proposition 4 (a) de la page 22.
+
+\textbf{Corollaire} (page 106). Soit $\varphi$ une réalisation quelconque d'un
+polygone combinatoire $\Pi$ d'ordre $N$, $3 \leq N \leq \infty$, et $u$ l'image
+d'un générateur de $\mathrm{Aut}^{+}(\Pi)$. Les entiers suivants sont égaux :
+$\operatorname{card} \varphi(S)$, $\operatorname{card} \varphi(A)$,
+$\operatorname{card} \varphi(\mathrm{Aut}^{+}(\Pi))$, l'ordre de $u$. Cet entier
+$n$ est un diviseur de $N$ (condition vide si $N = \infty$), $n \geq 3$, et
+c'est le plus petit diviseur $n$ de $N$ tel que $\varphi$ se factorise par le
+quotient $\Pi_{(n)}$ de $\Pi$ d'ordre $n$, et l'unique tel que la réalisation
+obtenue de $\Pi_{(n)}$ soit fidèle\footnote{La page avait d'abord écrit « le
+plus grand », corrigé en « le plus petit ». C'est, sous forme intrinsèque, la
+proposition 4 (c) de la page 23.}.
+
+Mais il manque, dit la page, une théorie des morphismes (étales) de polygones
+combinatoires qui permette de parler des quotients $\Pi_{(n)}$ de $\Pi$ pour
+tout diviseur $n$ de l'ordre $N$. Elle n'est pas écrite\footnote{Un mot
+illisible précède « comb. » ; le reste de la page 107 est blanc.}.
+
+\pagerange{108}{120}
+\section*{V. « Polynômes cyclotomiques » (pages 108 à 120)}
+
+\pagerange{109}{113}
+\subsection*{Les polynômes $F_n$ et le critère $u_\alpha^n = 1$ (pages 109 à 113)}
+
+Soit $\mathbf{Z}[U] \subset \mathbf{Z}[T, T^{-1}]$, $U = T + T^{-1}$. On
+définit, pour $n \geq 1$,
+\[
+  F_{2m}(U) = (1 + T^2 + \cdots + T^{2(m-1)})\, T^{-(m-1)}, \qquad
+  F_{2m+1}(U) = (1 + T + \cdots + T^{2m})\, T^{-m} ,
+\]
+soit $F_{2m} = \dfrac{T^{2m} - 1}{T^2 - 1}\, T^{-(m-1)}$ et $F_{2m+1} =
+\dfrac{T^{2m+1} - 1}{T - 1}\, T^{-m}$, polynômes unitaires en $U$ de degré
+$[\frac{n-1}2]$ ; on pose $F_0 = 0$ et $F_{-n} = -F_n$. Les racines de $F_n$
+sont les $\zeta + \zeta^{-1}$, $\zeta^n = 1$, $\zeta \neq \pm 1$, chaque paire
+$\{\zeta, \zeta^{-1}\}$ une fois\footnote{Pour $n$ pair, $F_n(2\cos\theta) =
+\sin(n\theta/2)/\sin\theta$, polynôme de Tchebychev de deuxième espèce en
+$\cos\theta$ ; pour $n$ impair, $\sin(n\theta/2)/\sin(\theta/2)$, dit parfois
+de « quatrième espèce ». Ces noms sont de nous. Le signe de « $F_n = -F_{-n}$ »
+est peu net sur la page ; la formule
+$F_n = (T^{n/2} - T^{-n/2})/(T^{\epsilon/2} - T^{-\epsilon/2})$,
+$\epsilon \in \{1, 2\}$ selon la parité, le confirme.}. On a
+\[
+  F_{2m}(2) = m, \quad F_{2m}(-2) = (-1)^{m-1} m, \quad F_{2m+1}(2) = 2m + 1,
+  \quad F_{2m+1}(-2) = (-1)^m ,
+\]
+et les premiers sont $F_1 = F_2 = 1$, $F_3 = U + 1$, $F_4 = U$, $F_5 = U^2 + U
+- 1$, $F_6 = U^2 - 1$. Posons $X_n = F_n F_{n+1}$ (de degré $n - 1$).
+
+\textbf{Proposition} (page 109). Pour tout $n \in \mathbf{Z}$,
+\[
+  X_n - U X_{n-1} + X_{n-2} = 1 , \qquad \text{c'est-à-dire} \qquad F_n
+  F_{n+1} - U F_{n-1} F_n + F_{n-2} F_{n-1} = 1 .
+\]
+\emph{Démonstration.} Pour $n = 1, 2$ on vérifie directement ($1 - 0 + 0$,
+$(U + 1) - U + 0$). Pour $n \geq 3$, on multiplie par $(T - 1)(T^2 - 1)
+T^{n-1}$, en utilisant $F_n F_{n+1} (T - 1)(T^2 - 1) = (T^n - 1)(T^{n+1} - 1)
+T^{-(n-1)}$ ; les deux membres deviennent $T^{n+2} - T^{n+1} - T^n + T^{n-1} =
+(T - 1)(T^2 - 1) T^{n-1}$. Les $n$ négatifs s'en déduisent\footnote{La page
+introduit d'abord des $X'_n = F_n F_{n+1}$, $Y'_n = F_n F_{n-1}$, puis des
+$X_n$ définis par la récurrence $X_n = U X_{n-1} - X_{n-2} + 1$, et conclut
+par récurrence $X_n = X'_n$ ; les primes manquent par endroits. On a fusionné
+les deux notations. Une seconde démonstration (page 111) compare les racines :
+$T^{n-1} X_n(U)$ est unitaire de degré $2(n-1)$ en $T$, de racines les $\xi
+\neq 1$ avec $\xi^n = 1$ ou $\xi^{n+1} = 1$, au nombre de $2n - 2$ et
+distinctes. Les deux lignes de la page 110, au pied d'un tapuscrit étranger,
+sont $1 + T^2 + T^4 = T^2 (U^2 - 1)$ (le facteur $T^2$ manque sur la page) et
+la formule de $F_{2m+2}$.}.
+
+La proposition dit exactement que $F_{n-1}$ et $F_{n+1}$ engendrent l'idéal
+unité :
+\[
+  A_n F_{n-1} + B_n F_{n+1} = 1, \qquad B_n = F_n, \quad A_n = F_{n-2} - U F_n
+\]
+\footnote{La page 113 écrit $A_n = F_{n-2} - U F_{n-1}$, l'indice du second
+$F$ étant peu net ; le couple ne vérifie pas la relation ($n = 4$ : $(1 - U -
+U^2)(U + 1) + U(U^2 + U - 1) = 1 - U - U^2$). Celui qu'on donne se lit sur
+la proposition. La page 109 énonce $(F_n, F_{n+2}) = (1)$.}.
+
+\textbf{Les sommets.} Dans les coordonnées universelles $(s_0, s_1, s_{-1})$
+des pages 81 à 100, avec $u_\alpha(x, y) = (1 - y + \alpha x, x)$, la
+récurrence $x_{n+1} = \alpha x_n - x_{n-1} + 1$, $y_{n+1} = x_n$, et les
+valeurs initiales $s_0 = (0, 0)$, $s_1 = (1, 0)$, donnent
+\[
+  s_n = u_\alpha^n(s_0) = \bigl(F_n F_{n+1}(\alpha),\ F_{n-1} F_n(\alpha)\bigr)
+  = \bigl(X_n(\alpha), X_{n-1}(\alpha)\bigr), \qquad n \in \mathbf{Z} .
+\]
+C'est la réponse à la « question » de la page 11 : le plan et les sommets
+écrits en fonction de $\alpha$ seul, sur n'importe quel anneau. L'application
+$u^n$ envoie $(s_0, s_1, s_{-1})$ sur $(s_n, s_{n+1}, s_{n-1})$, d'où sa
+matrice
+\[
+  u_\alpha^n = \begin{pmatrix}
+    F_{n+1}(F_{n+2} - F_n) & F_n (F_{n-1} - F_{n+1}) & F_n F_{n+1} \\
+    F_n (F_{n+1} - F_{n-1}) & F_{n-1}(F_{n-2} - F_n) & F_{n-1} F_n \\
+    0 & 0 & 1
+  \end{pmatrix}(\alpha)
+\]
+\footnote{La page donne deux versions ; la première, barrée, a la troisième
+colonne $(F_n F_{n+1}, F_{n-1} F_n)$, la seconde $(F_{n+1} F_{n+1}, F_{n-1}
+F_{n+1})$, indices surchargés et douteux. La troisième colonne est $s_n$, et
+c'est la première version qui est juste.}.
+
+\textbf{Théorème} (page 112). Soit $k$ un anneau, $\alpha \in k$, $u_\alpha$
+l'automorphisme affine $(x, y) \mapsto (1 - y + \alpha x, x)$ de $k^2$, $s_n =
+u_\alpha^n(0, 0)$, et $n \in \mathbf{Z}$. Les conditions suivantes sont
+équivalentes :
+\begin{enumerate}
+  \item[a)] $u_\alpha^n = \mathrm{id}$ ;
+  \item[b)] $s_n = s_0$ ;
+  \item[c)] $u_\alpha^n s_i = s_i$, pour un $i \in \mathbf{Z}$ fixé ;
+  \item[d)] $F_n(\alpha) = 0$.
+\end{enumerate}
+\emph{Démonstration.} a) $\Rightarrow$ b) est trivial ; b) entraîne $u^n s_i =
+s_i$ pour tout $i$ (multiplier par $u^i$), en particulier pour $i = \pm 1$, et
+$s_0, s_1, s_{-1}$ forment un repère affine, d'où a) ; b) $\Leftrightarrow$ c)
+en multipliant par $u^{\pm i}$. d) $\Rightarrow$ b) par la formule des sommets.
+Réciproquement, si $F_n F_{n+1}(\alpha) = F_{n-1} F_n(\alpha) = 0$, la
+relation de Bézout donne $F_n(\alpha) = F_n(\alpha)(A_n F_{n-1} + B_n
+F_{n+1})(\alpha) = 0$\footnote{La page conclut « la relation $F_n(\alpha) =
+1$, cqfd » : lire $= 0$. Elle lettre les conditions a), b), b$_i$), d), et
+conclut « a $\iff$ b $\iff$ c », où c) est b$_i$).}.
+
+Pour $\alpha = 2$ en caractéristique $p$ impaire, $F_p(2) = p = 0$ et
+$u^p = 1$ ; pour $\alpha = -2$, $F_n(-2) = 0$ demande $n = 2m$ pair avec $p
+\mid m$, d'où l'ordre $2p$ : on retrouve les pages 94 et 95. Par la
+factorisation $F_n = \prod_{d \mid n,\ d \geq 3} \Psi_d$, le théorème dit, sur
+un corps de caractéristique $0$, que $u_\alpha^n = 1$ si et seulement si
+$\alpha$ est l'invariant d'un $d$-gone régulier pour un diviseur $d \geq 3$ de
+$n$.
+
+\pagerange{114}{116}
+\subsection*{Le polynôme semi-cyclotomique et les anneaux modulaires (pages 114 à 116)}
+
+Soit $\Phi_n(T) = \prod (T - \xi)$, $\xi$ parcourant les racines primitives
+$n$-ièmes de $1$ dans $\bar{\mathbf{Q}}$ : polynôme unitaire de
+$\mathbf{Z}[T]$, de degré $\varphi(n) = n \prod_{p \mid n}(1 - \frac1p)$, avec
+$T^n - 1 = \prod_{d \mid n} \Phi_d$. Sur un corps de caractéristique $p \nmid
+n$, les racines de $\Phi_n$ sont les racines primitives $n$-ièmes de $1$.
+
+Si une réalisation régulière de $\Pi_\infty$ sur $k$ ($p \nmid n$) est donnée
+par $\alpha = \xi + \xi^{-1}$, elle se factorise en une réalisation
+\emph{fidèle} de $\Pi_n$, $n \geq 3$, si et seulement si $\Phi_n(\xi) = 0$,
+c'est-à-dire $\Psi_n(\alpha) = 0$, où le \emph{polynôme semi-cyclotomique}
+$\Psi_n \in \mathbf{Z}[U]$ est défini par
+\[
+  \Psi_n(T + T^{-1}) = T^{-\varphi(n)/2}\, \Phi_n(T) \qquad (n \geq 3) :
+\]
+c'est le polynôme minimal de $2\cos(2\pi/n)$\footnote{Nom moderne de nous ;
+ce polynôme est étudié au moins depuis D. H. Lehmer (1933), sous le nom de
+polynôme minimal de $\cos(2\pi/n)$ ou de $2\cos(2\pi/n)$ (cité de mémoire).
+La page écrit $\mathbf{Z}(U)$ pour $\mathbf{Z}[U]$.}.
+
+\textbf{Les anneaux modulaires.} Si $n \geq 3$ n'est ni premier ni double d'un
+premier ($n = 8, 9, 12, 15, 16, \ldots$), l'anneau « modulaire » des
+réalisations fidèles de $\Pi_n$ est
+\[
+  k'_n = \mathbf{Z}[\tfrac1n][U]/\Psi_n(U) ,
+\]
+l'invariant universel $\alpha'_n$ étant l'image de $U$ ; il faut inverser $n$,
+parce qu'en caractéristique $p \mid n$ une racine de $\Psi_n$ définit un
+polygone d'un autre ordre (corollaire de la page 118). Pour les autres $n$, on
+peut faire mieux :
+\begin{itemize}
+  \item \emph{$n = p$ premier impair.} Toute réalisation régulière de $\Pi_p$
+    sur un corps est fidèle (page 27, corrigée) ; $\Phi_p = 1 + T + \cdots +
+    T^{p-1}$, $\Psi_p = F_p$, et $k'_p = \mathbf{Z}[U]/F_p(U)$, sans rien
+    inverser : en caractéristique $p$, la seule racine est $2$, le $p$-gone
+    parabolique.
+  \item \emph{$n = 2p$, $p$ premier impair.} $\Phi_{2p}(T) = \Phi_p(-T)$,
+    $\Psi_{2p}(U) = (-1)^{(p-1)/2}\,\Psi_p(-U)$. En caractéristique $p$, les
+    racines de $\Phi_{2p}$ sont toutes égales à $-1$, celles de $\Psi_{2p}$ à
+    $-2$, invariant du $2p$-gone en bande ; en caractéristique $2$, en
+    revanche, elles définissent des $p$-gones. Donc en toute caractéristique
+    $\neq 2$, $\Psi_{2p}(\alpha) = 0$ est la condition nécessaire et suffisante
+    pour que $\alpha$ définisse un $2p$-gone régulier, et $k'_{2p} =
+    \mathbf{Z}[\frac12][U]/\Psi_{2p}(U)$\footnote{La page 116 écrit que $-2$
+    « est bien l'invariant du pol.\ régulier à $2$ côtés » : il s'agit du
+    $2p$-gone. « Nécessaire et suffisante » est une lecture de l'abréviation
+    « n.\ et s. ». Le passage barré de la page 115 (racines de $\Phi_p$ en
+    caractéristique $p$) n'est pas repris.}.
+  \item \emph{$n = 4$.} $\Phi_4 = T^2 + 1$, $\Psi_4 = U = F_4$ ; en
+    caractéristique $2$, le seul zéro $0 = -2$ définit bien le carré. Donc
+    $k'_4 = \mathbf{Z}[U]/(U) \simeq \mathbf{Z}$ : sur un anneau donné il y a
+    une et une seule réalisation régulière de $\Pi_4$, à isomorphisme unique
+    près, fidèle quand l'anneau est un corps.
+\end{itemize}
+C'est la réponse partielle à la question b) de la page 47 : le carré est
+défini sur $\mathbf{Z}$ ; pour $n = p$, l'anneau $\mathbf{Z}[U]/F_p$ n'a pas à
+inverser $p$.
+
+\pagerange{117}{120}
+\subsection*{Réduction modulo $p$, ordre en caractéristique $p$, table (pages 117 à 120)}
+
+\textbf{Proposition} (page 117). Soient $p$ premier, $n = p^r n'$ avec $(p,
+n') = 1$. Alors
+\[
+  \Phi_n(T) \equiv \Phi_{n'}(T)^{\varphi(p^r)} \pmod p .
+\]
+\emph{Démonstration}, par récurrence sur $r + n'$. Pour tout diviseur strict
+$\delta = p^s d$ de $n$, l'hypothèse de récurrence donne $\Phi_\delta \equiv
+\Phi_d^{\varphi(p^s)}$. Multipliant ces relations entre elles et par
+$\Phi_n$,
+\[
+  \Phi_{n'}^{\varphi(p^r)} \prod_{\delta \mid n} \Phi_\delta \equiv
+  \prod_{s = 0}^{r} \Bigl(\prod_{d \mid n'} \Phi_d\Bigr)^{\varphi(p^s)}
+  \Phi_n , \quad\text{soit}\quad
+  \Phi_{n'}^{\varphi(p^r)} (T^n - 1) \equiv (T^{n'} - 1)^{p^r}\, \Phi_n ,
+\]
+puisque $\sum_{s=0}^{r} \varphi(p^s) = p^r$. Or $T^n - 1 = (T^{n'})^{p^r} -
+1 \equiv (T^{n'} - 1)^{p^r}$, et l'on simplifie dans l'anneau intègre
+$\mathbf{F}_p[T]$\footnote{La formule (2) de la page a été corrigée en place et
+se réduit à $\Phi_n \equiv \Phi_n$ ; on en donne le rôle. Les indices des deux
+$\Phi$ de la conclusion sont mal formés ; l'énoncé les fixe.}.
+
+\textbf{Corollaire} (pages 118 et 119). Soit $k$ un corps de caractéristique
+$p > 0$, $n \geq 1$, $\alpha \in k$ avec $\Psi_n(\alpha) = 0$, $n = p^r n'$,
+$(p, n') = 1$. Le polygone régulier d'invariant $\alpha$ est d'ordre
+\[
+  n' \text{ si } n' \geq 3 ; \qquad 2p \text{ si } n' = 2 ; \qquad p \text{ si
+  } n' = 1 \text{ et } p \neq 2 ; \qquad 4 \text{ si } n' = 1 \text{ et } p = 2 .
+\]
+\emph{Démonstration.} Écrivons $\alpha = \xi + \xi^{-1}$, $\xi$ dans une
+extension. $\Psi_n(\alpha) = 0$ équivaut à $\Phi_n(\xi) = 0$, donc, par la
+proposition, à $\Phi_{n'}(\xi) = 0$ : $\xi$ est racine primitive $n'$-ième de
+$1$. Si $n' \geq 3$, $\alpha \neq \pm 2$ et l'ordre est celui de $\xi$ ; si
+$n' = 2$, $\alpha = -2$ et l'ordre est $2p$ (cas II) ; si $n' = 1$, $\alpha =
+2$ et l'ordre est $p$, ou $4$ si $p = 2$ (cas III)\footnote{La page dit
+« d'ordre $p$ si $n' = 1$ », sans exception : pour $p = 2$, $\alpha = 2 = 0$
+est le carré, d'ordre $4$, comme la page 95 l'a établi. La page avait d'abord
+écrit $n \geq 3$, corrigé en $n \geq 1$.}.
+
+\textbf{La table de la page 120.} $\varphi(n)$ est pair pour $n \geq 3$, et
+$\varphi(p^r) < 6$ seulement pour $p^r = 2, 3, 4, 5, 8$. D'où les petits
+degrés :
+\begin{itemize}
+  \item $\varphi(n) \leq 2$, $\alpha$ \emph{entier} : $n = 1, 2, 4, 3, 6$,
+    $\alpha = 2, -2, 0, -1, 1$ ;
+  \item $\varphi(n) = 4$, $\alpha$ \emph{quadratique} : $n = 8$, $\alpha^2 = 2$ ;
+    $n = 12$, $\alpha^2 = 3$ ; $n = 5$, $\alpha^2 + \alpha - 1 = 0$ ; $n = 10$,
+    $\alpha^2 - \alpha - 1 = 0$ ;
+  \item $\varphi(n) = 6$, $\alpha$ \emph{cubique} : $n = 9$, $\alpha^3 - 3\alpha
+    + 1 = 0$ ; $n = 7$, $\alpha^3 + \alpha^2 - 2\alpha - 1 = 0$ ; $n = 18$,
+    $\alpha^3 - 3\alpha - 1 = 0$ ; $n = 14$, $\alpha^3 - \alpha^2 - 2\alpha + 1 =
+    0$.
+\end{itemize}
+Les seuls polygones réguliers définis sur $\mathbf{Q}$ sont donc le triangle,
+le carré et l'hexagone. Les cubiques sont, dit une note lue avec doute,
+des « exemples d'équations du 3e degré non résolubles » --- trois
+racines réelles, irréductibles sur $\mathbf{Q}$ : le \emph{casus
+irreducibilis}, où les radicaux réels ne suffisent pas\footnote{L'expression
+latine est de nous ; la note de la page est à demi illisible. La marge
+justifie la liste $\varphi(n) = 6$ : $p \neq 2$, et $r = 1$, $p = 7$ ou $r =
+2$, $p = 3$.}.
+
+\pagerange{121}{129}
+\section*{VI. Feuilles détachées (pages 121 à 129)}
+
+\pagerange{121}{121}
+\subsection*{Un calcul tensoriel barré (page 121)}
+
+La page, barrée de deux longs traits, commence au milieu d'un calcul : avec la
+transposée ${}^t u$ et l'identité $({}^t u\, x') \otimes x = x' \otimes u x$
+dans $V^{*} \otimes V$, il cherche la forme des matrices $u$ qui satisfont une
+relation sur l'élément $(-2e'_1 + e'_2) \otimes e_1$, et trouve une matrice
+triangulaire de diagonale $\lambda$ ; tête-bêche, un polynôme caractéristique
+$(\lambda - 1)^{\nu - 1}(\lambda + 1)$, celui d'une réflexion en dimension
+$\nu$. Le but du calcul ne se lit pas, et l'on n'en tire rien\footnote{Deux
+croquis de trapèze, et en marge des fragments ($x + \langle x, x' \rangle x$,
+$-x$), suggèrent des réflexions $x \mapsto x - \langle x, x' \rangle a$ ; c'est
+une conjecture qu'on n'appuie sur rien.}.
+
+\pagerange{122}{124}
+\subsection*{Tables et réductions modulo $p$ (pages 122 à 124)}
+
+La page 122 reprend la matière des pages 114 à 120 avec d'autres noms :
+$\Phi_n$ y est le polynôme minimal sur $\mathbf{Q}$ d'une racine primitive
+$n$-ième de $1$, et ce qui est ici $\Psi_n$ le polynôme minimal de $\zeta +
+\zeta^{-1}$, avec $\Phi_n(T) = T^{\varphi(n)/2}\, \Psi_n(T + T^{-1})$ pour $n
+\neq 1, 2$, $\Psi_1 = U - 2$, $\Psi_2 = U + 2$\footnote{La page appelle ce
+polynôme $F_n$, alors que le $F_n$ des pages 109 à 113 est autre ($F_6 = U^2 -
+1$ à la page 109, « $F_6 = U - 1$ » ici). On écrit $\Psi_n$ ; dans la table,
+la variable est une capitale barrée, lue $U$.}. La table :
+\[
+\begin{array}{lll}
+\Psi_1 = U - 2, & \Psi_2 = U + 2, & \Psi_3 = U + 1, \\
+\Psi_4 = U, & \Psi_5 = U^2 + U - 1, & \Psi_6 = U - 1, \\
+\Psi_7 = U^3 + U^2 - 2U - 1, & \Psi_8 = U^2 - 2, & \Psi_9 = U^3 - 3U + 1, \\
+\Psi_{10} = U^2 - U - 1, & &
+\end{array}
+\]
+en regard de $\Phi_1, \ldots, \Phi_{10}$ ; « donner aussi les cas $n = 12, 14,
+18$ » --- ceux de la page 120. Pour $p = 2p' + 1$ premier impair,
+\[
+  \Psi_p = S_0 + S_1 + \cdots + S_{p'}, \qquad
+  \Psi_{2p}(U) = (-1)^{p'}\, \Psi_p(-U) = (-1)^{p'} \sum_{j=0}^{p'} (-1)^j S_j(U),
+\]
+où $S_0 = 1$, $S_1 = U$, $S_2 = U^2 - 2$, $S_3 = U^3 - 3U$, \ldots, et
+\[
+  U^n = \sum_{0 \leq i \leq [n/2]} \binom{n}{i} S_{n-2i}(U), \qquad n \geq 1 ,
+\]
+d'où le calcul récurrent des $S_n$\footnote{Pour $n$ pair, le terme $i = n/2$
+vaut $\binom{n}{n/2} S_0 = \binom{n}{n/2}$, ce qui est juste puisque $S_0 =
+1$ et non $T^0 + T^0 = 2$ : la formule est correcte telle qu'elle est écrite.
+Les $S_n$ sont, à la normalisation près, les polynômes de Tchebychev de
+première espèce ($S_n(2\cos\theta) = 2\cos n\theta$), ou les polynômes de
+Dickson $D_n(U, 1)$ (noms de nous). À la page 123, la lettre devant $(-T)$ est
+lue $\Phi_p$ alors que la formule appelle $\Psi_p$.}.
+
+\textbf{Réduction modulo $p$} (pages 123 et 124). Sur un corps algébriquement
+clos de caractéristique $p$, avec $n = p^r n'$, $(p, n') = 1$, les racines de
+$\Phi_n$ sont les racines primitives $n'$-ièmes de $1$, chacune de
+multiplicité $\varphi(p^r)$ --- c'est la proposition de la page 117. Pour
+$\Psi_n$ ($n \geq 3$) :
+\begin{enumerate}
+  \item[1)] si $n' \neq 1, 2$, $\Psi_n \equiv \Psi_{n'}^{\varphi(p^r)} \pmod
+    p$ ;
+  \item[2)] si $n' = 1$ ou $2$, $\Psi_n \equiv \Psi_{n'}^{\varphi(p^r)/2}$,
+    c'est-à-dire $(U - 2)^{\varphi(p^r)/2}$ si $n = p^r$ et $(U +
+    2)^{\varphi(p^r)/2}$ si $n = 2p^r$.
+\end{enumerate}
+En particulier, pour $p$ premier impair et $p' = (p - 1)/2$,
+\[
+  \Psi_p \equiv (U - 2)^{p'}, \qquad \Psi_{2p} \equiv (U + 2)^{p'} \pmod p
+\]
+\footnote{Variances : la page écrit la condition « $(n, n') = 1$ » pour $(p,
+n') = 1$ ; en 2), « $p^r \neq 2$ i.e.\ $n \neq 4$ », alors que le cas exclu est
+$n = 2$ (pour $n = 4$, $p = 2$, $\Psi_4 = U \equiv U - 2$ et la formule vaut) ;
+elle écrit d'abord $F_{p^r} \equiv (T - 2)^{\varphi(p^r)}$, exposant que la
+page 124 corrige en $\varphi(p^r)/2$ ; et, à la fin de la page 124, $F_p
+\equiv (T - 1)^{p'}$, $F_{2p} \equiv (T + 1)^{p'}$, où la formule générale de
+la même page donne $T - 2$ et $T + 2$.}. C'est la forme polynomiale du
+corollaire de la page 118 : en caractéristique $p$, le $p$-gone et le
+$2p$-gone n'ont plus qu'un invariant, $2$ et $-2$.
+
+\pagerange{125}{127}
+\subsection*{Les anneaux $\mathbf{Z}[\zeta]$, $\mathbf{Z}[\alpha]$ et la ramification en $p$ (pages 125 à 127)}
+
+Pour $p$ premier impair, soient
+\[
+  A_p = \mathbf{Z}[T]/\Phi_p(T) \ni \zeta, \qquad B_p = \mathbf{Z}[U]/\Psi_p(U)
+  \ni \alpha = \zeta + \zeta^{-1} ,
+\]
+anneaux \emph{normaux} --- l'anneau des entiers du corps cyclotomique
+$\mathbf{Q}(\zeta_p)$ et celui de son sous-corps réel maximal, dirait-on
+aujourd'hui\footnote{La normalité est affirmée, non démontrée ; c'est un
+théorème classique. Les noms sont de nous. L'indice de $B$ est surchargé
+(« $n(p)$ » sous un $p$).}. Ils sont étales sur $\mathbf{Z}$ en dehors de $p$,
+les racines de $\Phi_p$, $\Psi_p$ étant distinctes en caractéristique $\ell
+\neq p$, et ramifiés en $p$, où il n'y a plus qu'une racine. Dans $A_p$,
+$(\zeta - 1)^{p-1} \equiv 0 \pmod p$ ; et la norme $N(\zeta - 1) =
+\prod_{i}(\zeta_i - 1) = \Phi_p(1) = p$ (au signe près) donne
+\[
+  \boxed{\ (\zeta - 1)^{p-1} = p\, \varepsilon\ }, \qquad \varepsilon \text{
+  unité} ,
+\]
+d'où $A/(\zeta - 1) = \mathbf{F}_p[T]/(T - 1)^{p-1}/(T - 1) = \mathbf{F}_p$ :
+$(\zeta - 1)$ est un idéal maximal, et $p$ est \emph{totalement ramifié} dans
+$A_p$\footnote{La page écrit $F_p(\zeta)$ et $F_p(1)$ là où le calcul porte sur
+$\Phi_p$. « Totalement ramifié » est de nous ; la page dit « ramifiés en
+$\ell = p$ (une seule racine en car.\ $p$) ».}. De même, pour $p^r \neq 2$ et
+$\varphi' = \varphi(p^r)/2$, dans $B_{p^r} = \mathbf{Z}[U]/\Psi_{p^r}$,
+\[
+  (\alpha - 2)^{\varphi'} = p\, \varepsilon', \qquad N(\alpha - 2) = \pm
+  \Psi_{p^r}(2) = \pm \Phi_{p^r}(1) = \pm p ,
+\]
+puisque $\prod_{1 \neq d \mid p^r} \Phi_d(1) = 1 + 1 + \cdots + 1 = p^r$
+donne $\Phi_{p^r}(1) = p$ (page 127). La page vérifie au passage
+$\Psi_7(2) = 8 + 4 - 4 - 1 = 7$, et s'interroge (« $F_p(2) = p$ ? ») --- ce
+qui est le cas, $F_p(2) = p$ par la page 109. Enfin
+\[
+  (\zeta - 1)(\zeta^{-1} - 1) = 2 - \alpha ,
+\]
+donc $\alpha - 2$ est, à une unité près, le carré de $\zeta - 1$ : la place
+au-dessus de $p$ dans $B$ se ramifie encore dans $A$, et la page demande si
+$B[T]/(T^2 - \alpha T + 1) \to A$ est un isomorphisme --- ce que la page 128
+établit\footnote{Les pages 126 et 127 sont des brouillons serrés ; la page 126
+esquisse le cas général $n = n' p^r$ ($\mathbf{F}_p[T]/\Phi_n =
+\mathbf{F}_p[T]/\Phi_{n'}^{\varphi(p^r)}$, la norme relative
+$N_{A_n/A_{n'}}(\zeta - 1)$, $\zeta' = \zeta^{p^r}$) sans conclure ; on n'en
+retient que ces formules.}.
+
+\pagerange{128}{128}
+\subsection*{Les anneaux $A_n$, $B_n$ et l'involution $T \mapsto T^{-1}$ (page 128)}
+
+Soient $A_n = \mathbf{Z}[T]/\Phi_n(T)$ et $B_n = \mathbf{Z}[U]/\Psi_n(U)$. Pour
+$n = n' n''$ avec $(n', n'') = 1$, $(\mathbf{Z}/n)^{*} \simeq
+(\mathbf{Z}/n')^{*} \times (\mathbf{Z}/n'')^{*}$ et $A_{n'} \otimes_{\mathbf{Z}}
+A_{n''} \xrightarrow{\sim} A_n$ ; en termes de schémas, le schéma des racines
+primitives $\mu_n^{*} = \mathrm{Spec}\, A_n \subset \mu_n$ vérifie
+$\mu^{*}_{n'n''} \simeq \mu^{*}_{n'} \times \mu^{*}_{n''}$, et $\mu_n^{*}/\{\pm
+1\} = \mathrm{Spec}\, B_n$. La page en tire la normalité de $A_n$ « par
+hypothèse de récurrence »\footnote{L'argument est esquissé. Un produit
+tensoriel d'anneaux normaux n'est pas normal en général ; il l'est ici parce
+que $A_{n'}$ est étale au-dessus des premiers où $A_{n''}$ se ramifie, et
+inversement --- ce que la page ne dit pas, et qui est peut-être l'objet de la
+page 129.}.
+
+L'involution $\sigma : T \mapsto T^{-1}$ de $A = \mathbf{Z}[T, T^{-1}]$ a pour
+invariants $B = \mathbf{Z}[U]$ ; géométriquement, le quotient de
+$\mathbf{G}_m$ par l'inversion est la droite affine $\mathbf{E}^1$, de
+coordonnée $U = T + T^{-1}$ :
+\begin{tikzcd}
+A = \mathbf{Z}[T, T^{-1}] \arrow[r] & A_n = \mathbf{Z}[T]/\Phi_n \\
+B = \mathbf{Z}[U] = A^{\sigma} \arrow[r] \arrow[u, hook] & B_n = \mathbf{Z}[U]/\Psi_n \arrow[u, hook]
+\end{tikzcd}
+Pour $n \neq 1, 2$, $A = B[S]/(S^2 - US + 1)$ est libre sur $B$ de base $1,
+T$ : si $F(U) + T\,G(U) = 0$, alors, appliquant $\sigma$, $F(U) + T^{-1} G(U)
+= 0$, d'où $(T - T^{-1}) G(U) = 0$ et $G = 0$. De même $A_n = B_n \oplus B_n
+T$, avec $\sigma(F + GT) = (F + GU) - GT$ (car $T^{-1} = U - T$), et
+$B_n = A_n^{\sigma}$ : $\sigma(F + GT) = F + GT$ force $2G = 0$, donc $G = 0$,
+$B_n$ étant sans torsion\footnote{La page écrit la condition « $GU = 0$, $G =
+-G$ $\iff G = 0$ ». L'application $B_n[T]/(T^2 - \alpha_n T + 1) \to A_n$,
+$T \mapsto \xi_n$, répond à la question de la page 127. L'exposant de $A_n$
+dans « $B_n = A_n^{\sigma}$ » est lu avec doute.}.
+
+\pagerange{129}{129}
+\subsection*{Revêtements ramifiés (page 129)}
+
+La dernière page change de langage. Sur une base $S$, soient $X$ et $X'$ deux
+revêtements normaux irréductibles, de groupes $G$ et $G'$, $X$ totalement
+ramifié en un point $s$ et étale ailleurs, $X'$ totalement ramifié en $s' \neq
+s$ et étale ailleurs. Le produit fibré $X \times_S X'$ est-il connexe ? Il
+dessine le carré des groupes fondamentaux
+\begin{tikzcd}[column sep=small, row sep=small]
+& \pi_1(S \smallsetminus \{s, s'\}) \arrow[dl] \arrow[dr] & \\
+\pi_1(S \smallsetminus s) \arrow[dr] & & \pi_1(S \smallsetminus s') \arrow[dl] \\
+& \pi_1(S) &
+\end{tikzcd}
+et un modèle où ôter un point ajoute un générateur libre ($G * \mathbf{Z} *
+\mathbf{Z} \to G * \mathbf{Z} \to G$), puis un sous-groupe d'inertie $I
+\subset H_s \subset G \times G'$ se surjectant sur $G$ et sur $G'$, et un
+revêtement $Z \subset X \times_S X'$ totalement ramifié au-dessus de $X_s$ et
+de $X'_{s'}$\footnote{Un sommet du diagramme se lit « $X * \mathbf{Z}$ », où
+l'on attend $G * \mathbf{Z}$ ; la dernière ligne écrit $X$ pour $X'$ ; le
+reste (« $(\mathbf{Z}/4)^{*}$ d'ordre $2$ ») ne se raccorde à rien.}. Le
+raisonnement reste en suspens, et le dossier s'arrête là.
+
+C'est, selon toute vraisemblance, la forme géométrique de la question des
+pages 127 et 128 : $\mathrm{Spec}\, A_{n'}$ et $\mathrm{Spec}\, A_{n''}$ sont
+des revêtements de $\mathrm{Spec}\, \mathbf{Z}$ ramifiés en des ensembles
+disjoints de premiers, et la connexité (avec la normalité) de leur produit
+fibré, $\mathrm{Spec}(A_{n'} \otimes A_{n''})$, est ce qu'il faut pour que
+$A_{n'} \otimes A_{n''} \simeq A_{n'n''}$ soit intègre et normal ; c'est le
+mécanisme où intervient, en arithmétique, le fait que $\mathrm{Spec}\,
+\mathbf{Z}$ n'a pas de revêtement étale non trivial (théorème de
+Minkowski)\footnote{Ce rapprochement est entièrement de nous ; rien sur la page
+ne nomme $\mathbf{Z}$ ni les anneaux $A_n$, et le lien n'est suggéré que par
+le voisinage de la page 128.}.
+
+\end{document}
