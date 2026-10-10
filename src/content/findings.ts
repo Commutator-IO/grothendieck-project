@@ -2785,4 +2785,375 @@ export const FINDINGS: Finding[] = [
     settle:
       'Look at the facsimile of pp. 56–57 for the struck or overwritten 1983 page numbers and any trace of a leaf 41. Then compare with Brown’s 1982 translation of the July letter (its pp. 2–11) or with the SMF vol. I edition’s note on this letter. If those pages hold mathematics answering Breen’s questions, the 1983 typescript omits them by design, and the transcription note and reading should say “omitted in 1983” rather than “missing from the folder”.',
   },
+  // Folder 6 — /find-novelty pass on Opus 5.5 (claude-opus-5-5), reading 6.modern.tex made on Opus 5.5 (same model). No literature was searched in this pass.
+  {
+    id: '6-ordinary-moduli-complete-intersection',
+    cote: '6',
+    pages: '52–56',
+    kind: 'mathematical',
+    claim:
+      'For a polarisation of any degree, including degree divisible by p, the local ring at a point of the moduli scheme of polarised ordinary abelian varieties in characteristic p (fixed polarisation degree, Jacobi level structure) is a complete intersection, locally irreducible, with smooth reduced scheme, because the formal moduli of compatible pairs of extensions is the kernel of a homomorphism α − β of formal tori, a formal group of multiplicative type.',
+    basis:
+      'Pages 52–53 identify the formal moduli of an extension of an étale Barsotti–Tate group by one of multiplicative type with a torsor under the formal torus T_p(M_0)^∨ ⊗ N_0; page 54 represents the compatible pairs (ξ, ξ′) as the kernel of α − β : G × G′ → H; pages 55–56 apply this to polarised ordinary abelian varieties and conclude « intersection complète », « loc. irréductible », « M_red lisse sur k », with smoothness when the degree is prime to p.',
+    ours:
+      'Much of pages 52–56 is illegible (fast, pale hand); the reading reconstructs the argument from its formulas and says so. « M_0 étale » is an hypothesis the reading supplies. Several words carrying the conclusion are \\uncertain on the page: « équivaut à » (p. 52), « lisse sur k » and « ordinaires » (p. 56), and the name of α − β and its two terms (p. 55). The page starts mid-sentence: its first premise is on a leaf not in the folder.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'The case of degree prime to p is matched (Katz, Serre–Tate local moduli, 1981; Deligne–Illusie 1981), and the reading says so. What is open is the case p | degree: check Norman and Oort, Moduli of abelian varieties (Ann. of Math. 1980), Oort’s 1971 Compositio paper on local moduli of abelian varieties, and de Jong, The moduli spaces of polarized abelian varieties (Math. Ann. 1993), for the local structure of the ordinary locus of A_{g,d} when p divides d. If it is stated there, mark matched.',
+  },
+  {
+    id: '6-formal-group-not-in-abelian-variety',
+    cote: '6',
+    pages: '49–50',
+    kind: 'mathematical',
+    claim:
+      'Over a finite field k, twisting the formal group of a supersingular elliptic curve E (all endomorphisms defined over k) by a unit θ of End(E) ⊗ Z_p whose reduced norm is transcendental gives a form of G_{1,1} that embeds in the formal group of no abelian variety over k, nor over any finite extension of k, because the Weil conjectures force det(θφ) to be algebraic.',
+    basis:
+      'Page 49 sets up E, the quaternion order 𝒜 = End(E) ⊗ Z_p, the twist φ′ = θφ, and the Weil obstruction on det φ′ = det φ · det θ; page 50 completes it in one line: « il est facile de trouver Θ unité de 𝒜 tel que det Θ ne soit pas algébrique ».',
+    ours:
+      'The reading supplies why such a θ exists (the reduced norm 𝒜* → Z_p* is surjective, and Z_p* contains transcendental elements) and why a finite extension of k changes nothing (φ′ is replaced by a power). On the page, « unité », « formelle » and « à multiplic. complexe définie dans k » are \\uncertain, and a four-line struck block on page 49, read only in fragments, sits in the middle of the Weil step.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for the statement that not every p-divisible (or formal) group over a finite field is a subgroup, up to isogeny, of that of an abelian variety, with the transcendental-norm twist or the integrality of the Frobenius characteristic polynomial as the obstruction: Tate, Endomorphisms of abelian varieties over finite fields (1966); Honda (1968); Manin, The theory of commutative formal groups over fields of finite characteristic (1963); and Oort’s surveys on p-divisible groups of abelian varieties. It is likely to be standard; if it is stated in any of them, mark matched.',
+  },
+  {
+    id: '6-same-formal-group-not-isogenous',
+    cote: '6',
+    pages: '47–48',
+    kind: 'mathematical',
+    claim:
+      'Over an algebraically closed field of characteristic p there are simple abelian surfaces with the same formal group Ĝ_m × G_{1,1} that are not isogenous, so Barsotti’s isogeny question has a negative answer once the supersingular hypothesis is dropped; the argument is that the simple ones form a non-empty open U of Manin’s two-dimensional family, the isogeny class of each is defined over finite extensions of its field of definition, and points of U of different transcendence degree over F_p therefore cannot be isogenous.',
+    basis:
+      'Pages 47–48: Manin’s family N of dimension 2, the non-simple members as images of the ordinary modular curve under E ↦ E × F, the open U of simple surfaces, the discreteness of an isogeny class, and the transcendence-degree comparison (0, 1 or 2).',
+    ours:
+      'The page reads « de dim 2 au plus » where the argument needs 1; the reading corrects it, and the digit is \\uncertain on the page. The reading supplies the justification of discreteness (finitely many finite subgroups of each order of Ĝ_m × G_{1,1} × Q_p/Z_p). The sentence asserting discreteness is partly \\ill, and « hypersingulière » throughout is \\uncertain.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Probably a match: isogeny classes are countable while the p-rank-one stratum of A_2 is positive-dimensional. Check Manin 1963 (Russian Math. Surveys 18), Oort, Subvarieties of moduli spaces (Invent. Math. 1974), and Oort, Foliations in moduli spaces of abelian varieties (JAMS 2004), on isogeny leaves; mark matched with the reference if the statement is there.',
+  },
+  {
+    id: '6-leaves-35-36-reversed',
+    cote: '6',
+    pages: '33–36',
+    kind: 'codicological',
+    claim:
+      'Pages 35 and 36 are in the wrong order: the notes on the reduction of elliptic curves read 33, 34, 36, 35.',
+    basis:
+      'Page 36 ends on « Je conjecture » after the case of non-integral j (multiplicative reduction); page 35 opens « que cet élément a une image non nulle dans Z_p, donc que l’extension ne provient pas d’une extension de groupes p-divisibles sur A », which can only continue that case, and then moves on to 2º (characteristic p).',
+    ours:
+      'The transcription keeps the facsimile order; the reordering is the reading’s, and it rests on the text, not on the paper.',
+    literature: ['Transcription 6, batch 2 (batch-02.fr.tex), pages 33–36', 'Reading 6.modern.tex, section on pages 32–36'],
+    status: 'candidate',
+    settle:
+      'A person checks against the facsimile whether 35 and 36 are the two sides of one leaf (then the order is a matter of which side was scanned first) or two leaves bound out of order.',
+  },
+  {
+    id: '6-eleven-leaves-not-in-sequence',
+    cote: '6',
+    pages: '38–39, 52, 61',
+    kind: 'codicological',
+    claim:
+      'From facsimile page 39 to the end, the archivists’ pencil numbers run eleven ahead (39 is pencilled 50, 66 is pencilled 77), so eleven leaves pencilled 39–49 are not in the folder at that place; the folder was reordered after pencilling, and page 52 (opening mid-sentence) and pages 61–62 (using a duality triangle defined nowhere in the folder) both continue text that is not here.',
+    basis:
+      'Pencil numbers agree with the facsimile from 21 to 38 (batch 2 header) and are offset by eleven from 39 through 66 (batch 2, 3 and 4 headers and the \\note under the Tate–Hodge cover); page 52 begins « S^(n) → G … » with no preceding sheet; pages 61–62 use ℓ_G → Δ(G) → ℓ̌_{G*}[1] without definition.',
+    ours:
+      'The transcriptions record the offset; linking it to the mid-sentence opening of page 52 and the undefined triangle of pages 61–62 is this pass’s inference, not a check that the missing leaves are the ones those pages continue.',
+    literature: ['Transcription 6, batches 2–4 (batch-02.fr.tex, batch-03.fr.tex, batch-04.fr.tex), headers and pages 39, 52, 61'],
+    status: 'candidate',
+    settle:
+      'A person checks the pencil numbers at the 38/39 junction on the facsimile, then looks for leaves pencilled 39–49 in the neighbouring folders of the « Cristaux » group (cotes 4–9) and checks whether one of them supplies the start of page 52 or the definition of the triangle of page 61.',
+  },
+  {
+    id: '34-wild-inertia-outer-pi1',
+    cote: '34',
+    pages: '163–167, 169–180',
+    kind: 'mathematical',
+    claim:
+      'For any X_K of finite type over the fraction field of a henselian trait, an open subgroup of the inertia acts tamely, by outer automorphisms, on the maximal prime-to-p quotient of π₁(X_K̄): the wild inertia has finite image in Out(π₁^(p′)(X_K̄)).',
+    basis:
+      'Exposé VI, Théorème 1.3 (p. 166), with Lemme 1.2.6 showing that tameness in Aut and in Out agree; the proof is a chain of reductions — to the geometrically normal case by van Kampen descent with P-invariant descent paths (2.1), to a smooth affine curve by generic hyperplane sections (2.2), to a regular model with normal-crossings special fibre (2.3), then to the versal deformation of a nodal curve (Lemme 3.1), where the tame π₁ of the base is abelian by Abhyankar (3.2).',
+    ours:
+      'The reading adds that the statement, for curves, follows from semistable reduction, and says it does not know whether the general form was published. Two steps are not carried out in the folder: the regular model with normal-crossings fibre is sent to « un exposé ultérieur » (p. 174), and Lemme 3.1 to an exposé VII « à l’aide de la théorie de Schlessinger » (p. 178); the transcription reads « locale » in the theorem’s title with doubt. This pass ran on Opus 5.5, the model that made the reading.',
+    literature: [
+      'M. Kisin, « Prime to p fundamental groups, and tame Galois actions », Ann. Inst. Fourier 50 (2000), no. 4, 1099–1126 — Introduction and Theorem 2.1: for any variety U over a complete discretely valued field of residue characteristic p, the image of the wild inertia in Out(π₁^(p′)_geom(U)) is finite; proved by de Jong’s alterations and a logarithmic purity theorem, not by reduction to curves',
+    ],
+    status: 'matched',
+    settle:
+      'Settled for the tameness clause: it is Kisin’s Theorem 2.1 (the passage from « finite image of P » to « an open I′ acts tamely » is immediate, the kernel being open in P). The finite-generation clause is the classical topological finite generation of π₁^(p′) in characteristic p and was not looked up separately. Kept as a killed candidate, since the reading left open whether the general statement had appeared. Kisin assumes the base field complete; the folder reduces to that case by I 3.13.',
+  },
+  {
+    id: '34-multiparameter-tame-monodromy',
+    cote: '34',
+    pages: '167, 175–180',
+    kind: 'mathematical',
+    claim:
+      'Over a strictly local base S of any dimension, for X̄ projective and flat with closed fibre having normal crossings outside codimension 2, smooth with relative normal-crossings boundary over an open U ⊂ S, the image of π₁(U) in Out(π₁^(p′)) of a geometric fibre is an abelian group of order prime to p — of rank at most ν, the number of double points, in relative dimension 1.',
+    basis:
+      'Exposé VI, Théorème 1.4 (p. 167), with the reduction of 2.4 (p. 176) from any relative dimension to relative dimension 1 by a generic hyperplane over the strict localisation of S[t₁,…,t_r], and the relative-dimension-1 case through the versal nodal curve (Lemme 3.1, unproved there) whose base has tame π₁ ≃ Ẑ′(1)^ν; on a trait the generator acts by h₁^{n₁}⋯h_ν^{n_ν}, n_i the thickness of the i-th node (p. 179).',
+    ours:
+      'The hypotheses rest on uncertain readings: the transcription has an \\ill{} and an uncertain « les composantes des » in (a), an uncertain « schéma » for X̄, and a long struck and overwritten passage between (b) and (d), so the reading « gives only what emerges ». Lemme 3.1 is not proved in the folder. That the h_i are Dehn twists and the local equation xy = t^{n_i} is the reading’s gloss.',
+    literature: [
+      'M. Kisin, Ann. Inst. Fourier 50 (2000), Corollary 1.16 and Theorem 2.1 — tameness over a discretely valued field (one-parameter base), not the multi-parameter abelian statement; only the introduction and §2 were read',
+      'T. Oda, « A note on ramification of the Galois representation on the fundamental group of an algebraic curve II », J. Number Theory 53 (1995), §2.7 — the outer inertia action recovered from edge twists of the reduction graph (cited via Betts–Dogra, not read directly)',
+      'M. Asada, M. Matsumoto, T. Oda, « Local monodromy on the fundamental groups of algebraic curves along a degenerate stable curve », J. Pure Appl. Algebra 103 (1995), Theorems 2.1–2.2 — multi-parameter degeneration of a stable curve (cited via Betts–Dogra, not read directly)',
+      'L. A. Betts, N. Dogra, « The local theory of unipotent Kummer maps and refined Selmer schemes », arXiv:1909.05734, §3.1 and Theorem 3.1.6 (non-abelian Picard–Lefschetz, edge twists raised to edge lengths)',
+    ],
+    status: 'unsearched',
+    settle:
+      'The relative-dimension-1 case, with h = ∏ h_i^{n_i}, appears to be the Oda / Asada–Matsumoto–Oda description; read AMO95 §2 to confirm, and if so the open part is only relative dimension ≥ 2 with fibres normal-crossings off codimension 2. For that part, look in the logarithmic literature (Fujiwara–Kato log purity; Illusie, « An overview of the work of K. Fujiwara, K. Kato and C. Nakayama on logarithmic étale cohomology », Astérisque 279, 2002) and in Kisin 2000 §1. Before any search counts, the hypotheses (a)–(d) must be re-read against the facsimile of p. 167: the status stays unsearched because the statement rests on unread words.',
+  },
+  {
+    id: '34-lci-local-1-asphericity',
+    cote: '34',
+    pages: '153–155',
+    kind: 'mathematical',
+    claim:
+      'If f : X → S over a strictly local trait is flat, its closed fibre X₀ is a local complete intersection, and the non-smooth locus Z of X₀ has codimension ≥ 2 in X₀, then f is locally 1-aspherical for primes ≠ p; in particular, for f proper, specialisation H¹(X₀, G) → H¹(X_η̄, G) is bijective for every finite group G of order prime to p.',
+    basis:
+      'Chapter « IV », 5.5–5.6 (pp. 153–154): local 1-acyclicity at the strict generisations reduces 1-asphericity at x to H^i(V(h), G) = 0 for i ≤ 1 on the punctured strict localisations of the finite base changes X(h), which holds when X(h) is a complete intersection of dimension ≥ 3 at x (Grothendieck’s purity, SGA 2 X), i.e. X₀ complete intersection of dimension ≥ 2 at x; the smooth points are handled by local 1-asphericity of smooth morphisms.',
+    ours:
+      'The page carries the statement; the transcription marks « pour » and « soit » in the hypothesis and « alors » in the conclusion as uncertain, readings of the syntax, not of the mathematics. The word « si » before « les intersections complètes » on p. 154 is struck and re-added in the transcription, so the condition is read rather than written. The induction over generisations is the one set up in 5.1–5.2, whose Lemme 5.3.3 is left unproved (« Donner démonstration ! »), but 5.6 goes through 5.5 and SGA 2 purity rather than through 5.3.3.',
+    literature: [
+      'L. Illusie, « Grothendieck and vanishing cycles », Ann. Fac. Sci. Toulouse Math. (6) 30 (2021), 83–115 — full text searched for complete intersection, depth and asphericity; not found',
+      'Web search (2026-10-10) on specialisation of the prime-to-p fundamental group for lci special fibres with singular locus of codimension ≥ 2; nothing relevant found',
+    ],
+    status: 'candidate',
+    settle:
+      'Read SGA 7 I, Exposé I (Deligne’s « Résumé des premiers exposés de A. Grothendieck »), the part on vanishing cycles and depth, and SGA 2 XIII–XIV: if the statement or its 1-asphericity form is there, mark matched. The cohomological shadow for d = 0 is the classical simple-connectedness of the Milnor fibre of an isolated complete-intersection singularity of dimension ≥ 2 (Hamm, over ℂ), which is a reason to expect it is known, not a search.',
+  },
+  {
+    id: '36-h1-invariant-cycle-defect',
+    cote: '36',
+    pages: '60–70',
+    kind: 'mathematical',
+    claim:
+      'For X projective and regular over a strictly henselian trait, with O_S ≅ f_*O_X, and n prime to p, there is an exact sequence 0 → ₙΓ → H¹(X, μₙ) → H¹(X_η̄, μₙ)^I → Ker(wₙ) → 0, where Γ is the group of divisors supported on the special fibre modulo X₀ and w : Γ → NS(X₀); in the limit, H¹(X, Z_ℓ(1)) → H¹(X_η̄, Z_ℓ(1))^I is injective with cokernel R ⊗ Z_ℓ, R = Ker w cyclic of order dividing gcd(dᵢ), and an isomorphism when X_η has a zero-cycle of degree 1.',
+    basis:
+      'The typescript of pages 60–63 states a)–d) and Corollaries 9, 10, 15 without proof; the manuscript of pages 64–68 proves the sequence for n prime to p when X_η has a zero-cycle of degree 1 (Kummer, the exact sequence 0 → Γ → Pic X → Pic X_η → 0, the snake lemma, and the injectivity of Pic(X)ₙ → Pic(X₀)ₙ for S complete), and page 70 drops the zero-cycle hypothesis. That Ker w is torsion (assertion b) is referred on page 68 to Raynaud, « Spécialisation du foncteur de Picard », th. 3. The transcription of pages 64–68 carries many \\uncertain{} and \\ill{} words in the linking sentences (batch 4), though none of the displayed sequences rests on one; page 70 says the torsion of R holds « au moins modulo résolution des singularités ».',
+    ours:
+      'The reading corrects two typed statements: d^t = p^h d with p^h only divisible by gcd(μᵢ), not equal to it, and Br(X_η) for the page’s Br(X_η̄) in Corollary 10; and it gives ₙδ/ₙδ′ as the term after uₙ on page 64, where the page’s run of the sequence is of doubtful reading. The case n divisible by p (flat cohomology), Corollary 15 and the Mittag-Leffler step for ℓ = p are unproved in the folder and are not part of the claim. The pass reads the page-70 boxed formula as assuming R equal to the whole torsion of Γ, as the reading does; the claim keeps the typescript’s cautious « order dividing d ».',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Read M. Raynaud, « Spécialisation du foncteur de Picard » (Publ. Math. IHÉS 38, 1970), §§ 6–8, and SGA 7 I, exposé IX, §§ 11–12 (component groups and the comparison of H¹ of a regular model with inertia invariants), then Bosch–Lütkebohmert–Raynaud, Néron Models, ch. 9. If the sequence with cokernel Ker wₙ, or the ℓ-adic form with defect R ⊗ Z_ℓ, is stated there, mark matched. Two web searches on 2026-10-10 returned no relevant result, and no source was read, so the status stays unsearched.',
+  },
+  {
+    id: '36-orthogonality-regular-adic-base',
+    cote: '36',
+    pages: '73–76',
+    kind: 'mathematical',
+    claim:
+      'The orthogonality of a toric part and a part of finite ℓ-power torsion under the Weil pairing holds over a complete regular noetherian J-adic base X = Spec A, not only over a discrete valuation ring: for flat commutative group schemes G, G′ over X restricting to abelian schemes on U = X − V(J), a divisorial correspondence ξ on A_U × A′_U, a flat subgroup H ⊂ G_Y with finite ℓ^ν-torsion and a torus T′ ⊂ G′_Y, φ_ξ(T_ℓ(H̃)|U, T_ℓ(T̃′)|U) = 0 at every point of U.',
+    basis:
+      'Page 73 states the theorem in this generality; pages 74–75 reduce, when A/J is of finite type over Z, to a complete discrete valuation ring with finite residue field and prove that case by Frobenius weights (q on the toric Tate modules and on T_ℓ(G_m), absolute value q^{1/2} on the abelian part); page 76 removes the finite-type hypothesis by writing V as a filtered union of subrings of finite type over Z. The statement on page 73 is legible except for three \\ill{} words before « en chaque pt »; the reduction steps on pages 73–74 and the linking words of pages 75–76 are read largely through \\uncertain{} and \\ill{}, and page 73’s last lines only « par bribes ».',
+    ours:
+      'The reading renames the page’s S as H, supplies the Galois-equivariance in the finite-field lemma, which the page states for « tout accouplement » and which is false without it, and reconstructs the reduction to a trait from page 74 where page 73 is illegible. The published orthogonality theorem (SGA 7 IX) gives the exact orthogonal; these pages give only the vanishing, and the claim is limited to it.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Read SGA 7 I, exposé IX (Grothendieck, « Modèles de Néron et monodromie »), §§ 2 and 4–5, to see whether the orthogonality theorem or its arithmetic proof is stated there over a regular complete adic base with arbitrary flat group schemes, rather than over a trait; then exposé VIII for the pairing. If the higher-dimensional form is there or in a later paper on degenerating abelian schemes (e.g. Faltings–Chai, Degeneration of Abelian Varieties, ch. III), mark matched. One web search on 2026-10-10 returned nothing relevant and no source was read.',
+  },
+  {
+    id: '36-griffiths-conditional-l-adic',
+    cote: '36',
+    pages: '9–16',
+    kind: 'mathematical',
+    claim:
+      'In any characteristic, for X smooth projective of dimension 2n and a Lefschetz pencil, if the inclusion of the generic hyperplane section Y satisfies a) a Lefschetz-type splitting by an algebraic correspondence and b) Coker(H^{2n−1}(X) → H^{2n−1}(Y)) contains no piece of coniveau n−1, then a cycle of X whose restriction to Y is algebraically trivial is homologically trivial up to torsion, so that Grif(Y) ⊗ Q has a subquotient mapping onto the primitive algebraic classes of X — an ℓ-adic Abel–Jacobi proof of Griffiths’s theorem conditional on a) and b).',
+    basis:
+      'The typescript « Le théorème de Griffiths par voie algébrique », nᵒˢ 1–5 (pages 9–15): the class u(x) ∈ H¹(S, R^{2n−1}f_*Z_ℓ(n)) of a primitive class, its functoriality under correspondences, the decomposition of an algebraically trivial cycle under a) and b) (nᵒ 2), its relative form (nᵒ 3), and the injectivity of the Griffiths homomorphism modulo the image of H¹(S, H^{2n−1}(X)) (nᵒ 4). Section 6 proves b) in characteristic 0 only; the author’s own margins say « pas prouvé » of 7.1 and 7.2, by which b) was to be reached in characteristic p.',
+    ours:
+      'Substantial. The page asserts that Grif(Y) ⊗ Q contains P^{2n}_alg(X) as a subspace; the reading shows the argument gives only a subquotient, and the claim takes the weaker form, which is the edition’s. The proof of nᵒ 4 is referred by the typescript to « calculs explicites essentiellement triviaux »; the argument through the vanishing part and H¹(P¹, j_*E) is the reading’s. The degree formula m = m′ + N − 2d′ (left blank on page 9) and Y_s̄ → X_s̄ (page 13) are the reading’s corrections. Hypothesis a) is a case of the standard conjectures and b) is unproved in characteristic p in the folder, so the claim is conditional twice over.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Read N. Katz, SGA 7 II, exposés XX and XXII, and S. Bloch, Lectures on Algebraic Cycles (1980), on Griffiths groups in positive characteristic; then C. Voisin, Hodge Theory and Complex Algebraic Geometry II, ch. 8, for the normal-function proof. If an ℓ-adic proof conditional on a Lefschetz-type correspondence and a coniveau hypothesis on the generic section is in print, mark matched. One web search on 2026-10-10 found only characteristic-0 work (Kahn, « Albanese kernels and Griffiths groups », Tunisian J. Math. 3, 2021, abstract only) and no source was read, so the status stays unsearched.',
+  },
+  // Folder 57 (Picard: annotated typescript, letters, 1962–[vers 1968]). Pass of 2026-10-10 on
+  // claude-opus-5-5, the model of the reading (Opus 5.5, 2026-10-04). Most of the reading's
+  // modern names are matches already footnoted there: Mumford's GIT for the theorem of p. 40,
+  // Mazur–Messing for pp. 90–93, Raynaud–Gruson for problem A, Ferrand for pinching, Boutot for
+  // the local Picard scheme. They are not repeated here. Below: one codicological entry, three
+  // killed candidates, and three left open.
+  {
+    id: '57-csg-letters-transcribed',
+    cote: '57',
+    pages: '19–22, 72–78, 226–230',
+    kind: 'codicological',
+    claim:
+      'Three letters of this folder are already transcribed and online, from scans of “Cote n° 57”. The Centre for Grothendieckian Studies (Grothendieck Institute, Mondovì) lists them on its transcriptions page: the undated letter to Murre (pp. 19–22, its L24d, dated there “1962 (?)”, draft October 2024), the letter to Murre of 18 July 1962 (pp. 72–78, its L25d), and the letter to Hironaka of 6 July 1962 (pp. 226–230, its L27d, draft April 2024).',
+    basis:
+      'The L27d and L24d PDFs open with “This transcription is derived from an unpublished scan provided by the Montpellier archive with the reference “Cote n◦ 57””. Their opening text is that of the transcription here: L27d starts “Neuilly July 6 1962 / Dear Hironaka, / I had a little thought over our conversation last tuesday”, and L24d starts “Dear Murre, / I am glad to hear that your are still willing to give the talk on unramified functors”, then states the quotient theorem of p. 19.',
+    ours:
+      'Neither the reading nor the transcriptions mention these editions. The pass read only the title pages and the opening paragraphs of L24d and L27d. It has not compared the texts line by line. L25d was listed but its URL returned an HTML page, not a PDF, on 2026-10-10, so that letter is identified from the listing alone. The listing labels L25d “French”, but pp. 72–78 here are in English. The pass has not settled whether the listing is wrong or L25d is another document.',
+    literature: [
+      'Centre for Grothendieckian Studies, Grothendieck Institute, transcriptions page (csg.igrothendieck.org/transcriptions/), entries for letters to J. Murre and H. Hironaka, read 2026-10-10',
+      'A. Grothendieck, Letter to H. Hironaka, 6.7.1962, transcription ed. M. Carmona et al., CSG, draft April 2024 (L27d.pdf), title page and pp. 1–2 read',
+      'A. Grothendieck, Letter to J. Murre, 1962 (?), transcription ed. M. Carmona et al., CSG, draft October 2024 (L24d.pdf), title page and opening read',
+    ],
+    status: 'matched',
+    settle:
+      'Collate L24d and L27d with batch-02 and batch-12, and record any reading where they differ. If L25d can be fetched, collate it with pp. 72–78 as well, and check whether it follows the fair copy (pp. 72–74) or the corrected earlier state (pp. 75–78). Then the reading’s header should name the CSG edition, which is /modernize-grothendieck’s work.',
+  },
+  {
+    id: '57-conic-nonseparated-pic',
+    cote: '57',
+    pages: '213–218',
+    kind: 'mathematical',
+    claim:
+      'For the family of conics xy = tz² over k[t], which degenerates into two lines at t = 0, the Picard functor is represented by a scheme locally of finite type but not separated. That scheme is ∐ₙ S_{I_n}, the line with its origin repeated once for each bidegree (p, q) with p + q = n.',
+    basis:
+      'Page 215 computes Pic(X) ≅ Pic(X₀) ≅ ℤ × ℤ through Lemma c) and the two sections (1, t) and (t, 1). Page 218 builds 𝔓 = ∐ S_{I_n} and says it represents the functor. The « Lemme f » of p. 216 claims non-representability, but its proof is struck through.',
+    ours:
+      'The reading corrects the degree of L_{D₁}|Y₁ to −1 (p. 214). It also keeps p. 218 over the unstruck statement of Lemme f, as the pages’ own later word.',
+    literature: [
+      'S. L. Kleiman, « The Picard scheme », in Fundamental Algebraic Geometry: Grothendieck’s FGA Explained (AMS, 2005), arXiv:math/0504020, Example 4.14 (Mumford’s example), read on ar5iv 2026-10-10',
+    ],
+    status: 'matched',
+    settle:
+      'Kleiman’s Example 4.14 uses x² + y² = t over ℝ[[t]], where the special fibre is a pair of conjugate lines and the Picard scheme does not exist. It notes that over ℂ[[t]] the functor is representable by a disjoint union of non-separated schemes. That is this folder’s split case, over a complete local base instead of k[t]. The match is to the phenomenon and its representing object, not to a word-for-word statement. A reader wanting the k[t] form should check Bosch–Lütkebohmert–Raynaud, Néron Models, ch. 8, before treating the global base as a difference.',
+  },
+  {
+    id: '57-cone-completion-class-group',
+    cote: '57',
+    pages: '188–192',
+    kind: 'mathematical',
+    claim:
+      'For the local ring S at the vertex of the affine cone over a regular X ⊂ ℙʳ, Pic(S − a) → Pic(Ŝ − â) is bijective if H¹(X, 𝒪_X(n)) = 0 for all n ≥ 1, and only if, when dim X = 1. For plane curves the condition fails exactly when the degree is at least 4.',
+    basis:
+      'Page 188 reduces the question to injectivity of Pic(Ê) → Pic(X), with Ê the formal completion of 𝕍(𝒪_X(1)) along its zero section. It identifies the successive kernels with H¹(X, 𝒪_X(n)). Page 191 states the criterion.',
+    ours:
+      'The exact threshold d ≥ 4 is the reading’s. The page gives the coarser sufficient condition deg 𝒪_X(1) < g − 1, which for plane curves means d ≥ 6.',
+    literature: [
+      'V. I. Danilov, « The group of ideal classes of a completed ring », Mat. Sb. 77(119) (1968), 533–541 (Math. USSR-Sb. 6 (1968)), not read; its theorem is known here only as restated below',
+      'J. Manning, « Patching and multiplicity 2^k for Shimura curves », arXiv:1902.06878, Theorem 3.17 (attributed to Danilov 1968): for smooth projective V with very ample L, Cl(S) → Cl(Ŝ) is an isomorphism iff H¹(V, L^{⊗i}) = 0 for all i ≥ 1; read 2026-10-10',
+    ],
+    status: 'matched',
+    settle:
+      'As restated by Manning, Danilov’s theorem is the equivalence in every dimension, with Cl(S) in place of Pic(S − a), which is the same group when S is normal. The folder states sufficiency in general and necessity only for dim X = 1. Read Danilov 1968 to confirm the hypotheses: smoothness, projective normality. The page’s further remark, that the henselisation S^h may already have the completion’s local Picard group, is not covered by this match.',
+  },
+  {
+    id: '57-ns-p-divisibility-generization',
+    cote: '57',
+    pages: '288–289',
+    kind: 'mathematical',
+    claim:
+      'Over a mixed-characteristic discrete valuation ring, there is a product of abelian schemes C = A × B^∨ with a section ū of NS_{C/Y} that is divisible by p on the special fibre but not globally. Divisibility in the Néron–Severi scheme does not pass to generizations.',
+    basis:
+      'Page 288 takes flat finite subgroups F, G of an abelian scheme X with F₁ ⊄ G₁ and F₀ ⊂ G₀. It sets A = X/F, B = X/G and factors pβ through u : A → B. Then u₀ ∈ p Hom(A₀, B₀) but u ∉ p Hom(A, B). Page 289 transports u into NS_{C/Y} through the correspondence summand Hom(A, B).',
+    ours:
+      'The reading replaces the page’s condition (iii), pF₁ = G₁, by pF₁ ⊂ G₁, because with (ii) the page’s equality is incompatible with flat subgroups of the same order. It also moves the choice of F, G into one supersingular elliptic factor, where the subgroup of order p of the special fibre is unique. The page claims uniqueness for the whole product, which is false for a product of two supersingular curves. The statement here is therefore the edition’s repair of the realisation. The argument of p. 288 is the page’s.',
+    literature: [
+      'D. Maulik and B. Poonen, « Néron–Severi groups under specialization », Duke Math. J. 161 (2012), Proposition 3.6 (a), (b) (cokernel of specialization torsion-free, after ⊗ ℤ[1/p] in characteristic p) and Example 3.12, read 2026-10-10 from the author’s PDF',
+    ],
+    status: 'matched',
+    settle:
+      'Maulik–Poonen’s Example 3.12 is the same phenomenon by the same mechanism. A p-isogeny of elliptic curves over a finite extension of ℤ_p gives End of conductor p generically and maximal order on the special fibre. This yields p-torsion in coker(NS((E′ × E′)_K) → NS((E′ × E′)_k)). The folder’s version uses a quotient by two subgroups and the summand Hom(A, B) of NS(A × B^∨), not endomorphism orders. That is a different construction of the same counterexample type, not a separate result.',
+  },
+  {
+    id: '57-generic-hyperplane-h1-injective',
+    cote: '57',
+    pages: '98–99',
+    kind: 'mathematical',
+    claim:
+      'For X ⊂ ℙʳ normal, integral, of dimension ≥ 2 over an algebraically closed field, and Y_K̄ the generic hyperplane section over the algebraic closure of k(t₁, …, t_r), H¹(X, G) → H¹(Y_K̄, G) is injective for G = 𝐆_a and for finite commutative G, μ_p and α_p included. As a corollary, the kernel of Pic^τ_{X_K̄} → Pic^τ_{Y_K̄} is a finite unipotent p-group.',
+    basis:
+      'Page 98 states the theorem and reduces it to Corollaries 1–4: H¹(𝒪), π₁ via Bertini and Lefschetz–Grauert, α_p, μ_p. Page 99 uses Cartier to embed H¹(X, α_p) and Pic(X)[p] into H⁰(X, Ω̃¹), and then the « presque triviale » injectivity of H⁰(Ω̃¹) under restriction. The description of G on p. 98 (« affine sans composantes conn. (gpe … ou gpe alg. fini) ») is read with \\uncertain{} and \\ill{}, and nearly every word of the p. 99 corollary is \\uncertain{}.',
+    ours:
+      'The pass notes a tension the reading does not mention. As stated, Corollaries 1 and 4 would give a kernel with no non-trivial points (injectivity on every Pic[n]) and zero Lie algebra (injectivity on H¹(𝒪)). Such a kernel is trivial, which is stronger than the page’s own corollary. Either the page’s corollary undersells the theorem, or Corollary 1 fails in characteristic p, where H¹(X, 𝒪_X(−1)) need not vanish. The reading reproduces both without remark. This is the pass’s own inference, not checked against any source.',
+    literature: [
+      'S. L. Kleiman, « The Picard scheme », arXiv:math/0504020, Remark 5.8, read on ar5iv 2026-10-10: for a general hyperplane section and r ≥ 2, ker(Pic⁰_X → Pic⁰_Y) is finite and unipotent by Kleiman, SGA 6 XIII, Lemma 3.11 and Remark 3.12 (not read), and trivial in characteristic 0 by Mumford',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read SGA 6 XIII, 3.11–3.12, for the Pic^τ and generic-section forms. Then test Corollary 1 (H¹(X, 𝒪_X) → H¹(Y_K̄, 𝒪) injective) against the known characteristic-p failures of Kodaira vanishing, Raynaud’s surfaces with H¹(L⁻¹) ≠ 0 for L ample. If Corollary 1 fails there, the theorem of p. 98 is refuted for 𝐆_a and α_p, and only the finite unipotent kernel of the corollary stands, which is then matched by Kleiman. The status stays unsearched because the statement’s scope rests on uncertain readings and SGA 6 XIII was not read.',
+  },
+  {
+    id: '57-rigid-subgroups-one-fibre',
+    cote: '57',
+    pages: '42–49',
+    kind: 'mathematical',
+    claim:
+      'Take S locally noetherian and connected, and G a group scheme of finite type over S. Two closed subgroup schemes of G that are “rigid” (commutative, flat, with geometric fibres the schematic closure of their prime-to-residue-characteristic torsion) and that agree on one fibre are equal. Hence two homomorphisms out of a rigid group that agree on one fibre are equal, and rigid subgroups descend uniquely along fppf covers with geometrically connected fibres.',
+    basis:
+      'Page 44 proves a lemma: finite étale subschemes of an unramified S-scheme that agree at one point agree everywhere. Page 45 states the Théorème de rigidité, and pp. 46–49 give the corollaries. The remark of pp. 50–51 notes that two étale subgroups of degree p of an abelian scheme over a DVR of residue characteristic p can have the same special fibre and still differ.',
+    ours:
+      'The definition on p. 42 is read with many \\ill{}: condition (ii) is fixed only by its boxed « ${}_{\\ell^k}(\\overline{G}_s)$ », and condition (iii), a finiteness clause, cannot be read. The theorem’s own statement on p. 45 is legible, apart from one \\uncertain{} « soit ». Its proof, which refers to « démonstration donnée plus haut » in the missing author pages 1–3, is not in the folder. The reading treats the notion as “torsion first to p dense”, and so does this entry.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Compare with SGA 3, Exp. IX–X (rigidity of groups of multiplicative type) and Exp. XV, and with Mumford, GIT 6.1 (rigidity for abelian schemes). Both theorems cover special cases of the notion: tori and abelian schemes are rigid in this sense. The question is whether the unified “prime-to-p torsion dense” hypothesis, covering for instance non-split extensions of an abelian scheme by 𝐆_a in characteristic 0, appears in print. A general web search on 2026-10-10 found nothing beyond the standard density of prime-to-ℓ torsion in tori and abelian varieties, and that is not a search of the named sources.',
+  },
+  {
+    id: '57-analytic-pic-completion-criterion',
+    cote: '57',
+    pages: '226–228, 247–271',
+    kind: 'mathematical',
+    claim:
+      'Let f : X → Y be a proper morphism of complex analytic spaces and y ∈ Y. The map from the germ Picard group (R¹f_*𝒪*_X)_y to lim Pic(X_n) is an isomorphism if and only if (R¹f_*𝒪_X)_y has finite length. The system (Pic(X_n)) is Mittag-Leffler. X is projective over a neighbourhood of y iff every X_n is projective. Via GAGA the same holds for X proper over Spec of an analytic algebra.',
+    basis:
+      'The typed letter to Hironaka (pp. 226–228) states (i)–(iii), (i bis) and Corollary 1, legibly. The draft of pp. 247–271 proves them from Grauert’s comparison theorem, the exponential sequence and the five lemma: w^i is injective, and bijective iff u^i is surjective (Prop. 1.5, Remark 1.7, Cor. 1.8, Th. 2.1, Cor. 2.2).',
+    ours: null,
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for the “iff finite length” criterion and the projectivity corollary in Bingener’s work on formal and analytic Picard groups, in Artin’s approximation papers (1968–1969), and in SGA 2 XII and EGA III 5.4. The algebraic projectivity statement for X proper over a complete local ring (X projective iff every X_n is) is classical, EGA III 5.4.5. The candidate is the analytic germ version and its necessary-and-sufficient condition (iii). The same letter is online as a CSG transcription (see 57-csg-letters-transcribed); that is the same text, not a literature match.',
+  },
+// 136: three candidates. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (% Pass header of 136.modern.tex, 2026-10-10). Dropped as matches the reading already footnotes: Lucas/Kummer (pp. 19–22), the Dirichlet evaluation of the Stokes integral (p. 140, the edition's own), Dold–Puppe/Dold–Kan, Eilenberg–Zilber, the décalage formulas, Serre–Cartan on K(F_p,n), Breen's Ext(G_a,G_a) (pp. 356–375, notes attributed to nobody), the divided-power filtration of Z_2 (p. 240). Dropped as repaired by the edition: the negative-degree proposition of p. 42 (p-divisible for « divisible »), Γ^iΨ and Sym^iΨ « are K(k,i) » (p. 226, false as written).
+  {
+    id: '136-pd-de-rham-shadows',
+    cote: '136',
+    pages: '5–10, 226–232',
+    kind: 'mathematical',
+    claim:
+      'For the simplicial k{T}-algebra C^{p,q} = Γ^p Φ ⊗ Λ^q Ψ (divided-power forms on the simplex Σ X_i = T), the cohomology of its sections over any simplicial set X is H^q(X, k) in every complementary degree p ≥ 0, so that, graded by total degree, H^{•,q} is the truncation τ_{≥q}(H^q(X, k) ⊗_k k{T}) — the integral cohomology is recovered only as these « shadows ».',
+    basis:
+      'Pages 5–7 build C_DRpd over (S, J, t) and specialise to (k{T}, k{T}⁺, T); page 8 argues that each row of fixed total degree is the truncation of an acyclic resolution of k_*, page 9 gives the k{T}-module structure, and pages 226–232 redo the computation through Φ_* ≃ 0 and Λ^iΨ_* = K(k, i). The right-hand end of the row on page 8 and the condition « q ≤ p+q » are \\uncertain{}.',
+    ours:
+      'The exactness of each row, which page 8 asserts without proof, is supplied by the reading from the divided-power Koszul complex of 0 → k_* → Φ_* → Ψ_* → 0. The comparison with Sullivan forms by T ↦ 1 (p. 11) is restricted by the reading to simplicial sets with finitely many non-degenerate simplices, a restriction the page does not make.',
+    literature: [
+      'R. Kageyama, « Higher holonomy via a simplicial viewpoint », arXiv:2211.03289 (2022), § 2.1 — builds the same simplicial divided-power de Rham algebra over ℤ⟨ϑ⟩, with ϑ playing the role of the unit (x_0 renamed ϑ), and divided-power integration; full text searched for a cohomology computation, none found',
+      'R. Kageyama, « On iterated integral on simplicial sets », arXiv:2405.11570 (2024), § 2.1 — same algebra; full text searched, no computation of its cohomology on a simplicial set found',
+    ],
+    status: 'candidate',
+    settle:
+      'The construction itself — the simplex of size ϑ with divided powers over ℤ — is in Kageyama 2022 § 2.1, so only the cohomology statement remains open. Read Cenkl–Porter, « De Rham theorem with cubical forms », Pacific J. Math. 112 (1984) (a web search summary says they work over ℤ[1/2, …, 1/q], not with divided powers; not read), Cenkl, Pacific J. Math. 140 (1989), and the literature on integral models of cochains (Mandell 2006; binomial-ring models, e.g. Horel) for a computation of H of divided-power forms as τ_{≥q}(H^q ⊗ Γ(T)). If found, mark matched; the reading’s Koszul exactness is the step a reader should check first.',
+  },
+  {
+    id: '136-shadow-full-faithfulness',
+    cote: '136',
+    pages: '19–31, 243–251',
+    kind: 'mathematical',
+    claim:
+      'Over S = k{T}, every truncation τ_{≥N}(M ⊗_k S) determines the k-module M functorially: M ↦ M ⊗_k S^{+(N)} is fully faithful for every N, and more precisely M ⊗_k S → φ_N τ_N(M ⊗_k S) is an isomorphism, φ_N the right adjoint of truncation; the arithmetic core is that a family with binom(j, i)(x_j − x_i) = 0 for all j > i ≥ N in any abelian group is constant from N on.',
+    basis:
+      'Pages 19–22 prove the binomial lemma by Lucas and a p-adic digit shift (Lemma 2, Theorem 1), page 22–23 derives full faithfulness of ω_N, pages 26–31 prove the general statement through the equivalent form « c_{l,k} ξ_k = c_{l,k−i} ξ_{k+l} ⇒ ξ_k = binom(k, i) ξ », and page 251 restates it as one of four equivalent conditions on τ_N ∘ i. In Theorem 1 (p. 22) the sentence checking that the hypotheses of Lemma 2 hold ends on an \\ill{}.',
+    ours:
+      'Small: the reading names Lucas and Kummer, which the page does not, and corrects the index slips footnoted in the reading (c_{v,s} for c_{r,s}, ⊗_S for ⊗_k). The derived-category sequel (pp. 262–272: D⁺(Mod k) fully faithful in the derived category of shadows) rests on an Ext-vanishing whose written justification the reading judges insufficient, and is not part of this claim.',
+    literature: [
+      'One web search (2026-10-10) for the binomial lemma and for full faithfulness of truncated Γ(T)-modules surfaced nothing stating either; it surfaced « The module theory of divided power algebras », arXiv:1606.03431, which was not read',
+    ],
+    status: 'unsearched',
+    settle:
+      'Look in Roby (1963) and Berthelot, Cohomologie cristalline (LNM 407), ch. I, on modules over divided-power algebras; in arXiv:1606.03431; and in the literature on graded modules over Γ(T) and on « binomial » sequences (Elliott, binomial rings) for either the lemma or the full-faithfulness statement. The statement is elementary, so a match in passing is likely; if found, mark matched. A separate question, not this entry: whether Ext^n((τ_{N−i}S)[−i], M ⊗ S) = 0 for n > 0 holds at all.',
+  },
+  {
+    id: '136-automorphism-group-scheme',
+    cote: '136',
+    pages: '161–179, 189–199',
+    kind: 'mathematical',
+    claim:
+      'The simplicial-ring homomorphisms between divided-power de Rham algebras 𝒜(S, S⁺, t)_* — with no grading, filtration or divided powers assumed — are classified by (φ_0, A′_1, (B′_i)) subject to three conditions, the third being (2B′_i)J′ = 0; hence the automorphism functor of the completed algebra over k{T} is an affine group scheme over ℤ, 𝐆_m ⋉ (unipotent) with factors killed by 2, and when 2 is invertible every automorphism preserves the exterior grading and acts on cohomology through 𝐆_m alone.',
+    basis:
+      'Page 161 states the theorem with conditions 1)–3) and corollaries 1–5 on pages 163–171; pages 173–179 define the « indicateur », prove that φ is an automorphism iff it is invertible, and write Ω as Spec ℤ[(A_jk), (B_ijk)]/(2B_ijk)[A_10⁻¹]. Page 193 carries the earlier, struck corollary with the margin « faux tel quel ; vrai si 2B_i = 0 ». On page 161 the list of structures set aside ends on an \\ill{} and « affinables » is \\uncertain{}; the remark continued on page 162 is largely \\ill{}.',
+    ours:
+      'The reason for condition 3) — the commutator 2bb′ of the degree-one parts — is the reading’s; the page only asserts it. The reading drops the index ₂ that page 177 writes before the first 𝐆_a factor, following the description by coefficients, and does not fix the exponent of λ by which automorphisms act on H^i (the page’s phrase is largely illegible).',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check whether the automorphisms (or simplicial-ring endomorphisms) of the simplicial algebra of polynomial forms — Sullivan’s ∇(•, •), A_PL — have been computed rationally (Bousfield–Gugenheim, Memoirs AMS 179, 1976; Félix–Halperin–Thomas, Rational Homotopy Theory, § 10) or for the divided-power version (Kageyama, arXiv:2211.03289). A rational computation would match only the case 2 invertible; the ₂𝐆_a factors are the part to look for. If found, mark matched.',
+  },
 ];
