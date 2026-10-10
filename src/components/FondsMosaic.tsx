@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { BY_ID, COTES, GROUPS } from '../content/catalogue.ts';
 import { FINDINGS } from '../content/findings.ts';
 import { THEOREM_LINKS } from '../content/theorem-links.ts';
+import { MAJOR_FINDINGS } from '../content/major-findings.ts';
 import { batchCount } from '../lib/batches.ts';
 import type { Cote } from '../lib/types.ts';
 
@@ -63,7 +64,7 @@ interface Cell {
  */
 const OPEN = new Map<string, number>();
 for (const f of FINDINGS)
-  if (f.kind === 'mathematical' && (f.status === 'candidate' || f.status === 'unsearched'))
+  if (MAJOR_FINDINGS.has(f.id) && (f.status === 'candidate' || f.status === 'unsearched'))
     OPEN.set(f.cote, (OPEN.get(f.cote) ?? 0) + 1);
 const CIRCLED = ['', '①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩', '⑪', '⑫'];
 const Lozenge = ({ color }: { color: string }) => (
@@ -312,11 +313,11 @@ export function FondsMosaic({
         </li>
         <li className="flex items-center gap-1.5">
           <Lozenge color="var(--color-alerte-500)" />
-          open candidates on{' '}
+          a major open finding on{' '}
           <a href="/findings/" className="underline decoration-ink-300 underline-offset-2 hover:text-ink-800">
             Findings
           </a>
-          , not established
+          , of the weight of his main theorems or a conjecture he did not prove; not established
         </li>
       </ul>
 
@@ -424,7 +425,7 @@ export function FondsMosaic({
               {THEOREM_LINKS[hover.cote.id] &&
                 ` · bears on theorem ${THEOREM_LINKS[hover.cote.id].map((n) => CIRCLED[n]).join(' ')} of the Timeline`}
               {OPEN.has(hover.cote.id) &&
-                ` · ${OPEN.get(hover.cote.id)} open candidate${OPEN.get(hover.cote.id) === 1 ? '' : 's'} on Findings`}
+                ` · ${OPEN.get(hover.cote.id)} major open finding${OPEN.get(hover.cote.id) === 1 ? '' : 's'} on Findings`}
             </span>
           </p>
         ) : (
