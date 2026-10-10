@@ -32,9 +32,9 @@ of every theorem and fails on any beyond Lean's three standard ones.
 | 41 | `Folder41.lean` | Proposition 1 | finiteness needed only for (iii bis) ⇒ (ii) |
 | 21 | `Folder21.lean` | 2.15, 2.16, partial | nothing false |
 | 39 | `Folder39.lean` | adic preparation, partial | nothing wrong |
-| 19 | `Folder19.lean` | Théorème 1.12, Gabriel–Popescu | **the « only if » of 1.12 b) is false on the page**; condition C is not Beck's |
+| 19 | `Folder19.lean` | Théorème 1.12, Gabriel–Popescu, comonad over a product base (matrix φ_ji, λ_kji, two-factor collapse) | **the « only if » of 1.12 b) is false on the page**; condition C is not Beck's; « ou I fini » on p. 7 is false: left adjoints need not preserve finite products (counterexample) |
 | 161-2 | `Folder161_2.lean` | monadicity, descent, Gabriel–Ulmer, Ind(Σ), partial | descent needs no topos |
-| 16 | `Folder16.lean` | sl₂ against (6.7), algebra only | confirms the reading's correction of p. 13 |
+| 16 | `Folder16.lean` | sl₂ against (6.7); πᵢ ∈ ℰ from one-sided inverses (no. 5, (6.3)); Cayley–Hamilton: any algebraic iso makes (L^{n−i})⁻¹ algebraic (pp. 47–48); ℤ-obstruction for the exterior model | confirms the reading's correction of p. 13; the reading's Φ₀ = ℤ[L₀, Λ₀] does not exist over ℤ for n ≥ 2 (ξ₀ⁿ divisible by n!), fine over ℚ |
 | 106 | `Folder106.lean` | cofibration categories, Brown, W₀⁻¹C ≅ W⁻¹C | several axioms and hypotheses unused |
 | 114 | `Folder114.lean` | Proposition 4, minimal localiser, partial | the reading dropped « satisfying Loc 4) »; without it W ⊆ W₀ fails |
 | 67 | `Folder67.lean` | Page 90: 2-regular modules with an involution ≌ triples (P, Q, m), for any ring k, no finiteness | holds as stated, for non-commutative k too; 2-regularity is the only hypothesis used; fullness needs no finiteness since a σ-map is determined on 2P × 2Q |

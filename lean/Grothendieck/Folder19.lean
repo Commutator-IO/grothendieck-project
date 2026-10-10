@@ -2,12 +2,17 @@ import Mathlib.CategoryTheory.Monad.Comonadicity
 import Mathlib.CategoryTheory.Limits.Pi
 import Mathlib.CategoryTheory.Limits.Types.Limits
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.GabrielPopescu
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+import Mathlib.SetTheory.Cardinal.Finite
 
 /-!
-# Folder 19: the comonadicity theorem (page 4) and Gabriel–Popescu (pages 14–15)
+# Folder 19: the comonadicity theorem (page 4), the comonad over a product base
+# (pages 7–11) and Gabriel–Popescu (pages 14–15)
 
-Issue #26 lists folder 19 in tier 2: « Comonadicity and Gabriel–Popescu ». Only
-those two statements of `transcripts/19/19.modern.tex` are formalised here.
+Issue #26 lists folder 19 in tier 2: « Comonadicity and Gabriel–Popescu ». Those
+two statements of `transcripts/19/19.modern.tex` are formalised here, and the
+finding `19-comonad-matrix-product-base` (pages 7–11).
 
 ## Théorème 1.12 (page 4)
 
@@ -53,6 +58,43 @@ condition C ↔ comonads): the comonads so obtained are only those whose forgetf
 functor satisfies condition C, and the counterexample above is one that does not;
 with Beck's condition in place of C the correspondence is right.
 
+## A product base: the matrix of the `φ_ji` (pages 7–11)
+
+> Le reste du texte examine ce que devient tout ceci quand `B = ∏_{i ∈ I} B_i`. […]
+> En posant `φ_ji = f_j g_i : B_i → B_j` et en supposant que les `f_j` commutent
+> aux produits indexés par `I` — ce qui est automatique si `I` est fini, ou si les
+> `f_j` sont exacts — on obtient `pr_j φ((X_i)) = ∏_i φ_ji(X_i)`. […] une famille
+> `λ_kji : φ_ki → φ_kj φ_ji`, obtenue en insérant l'unité `id → g_j f_j` au milieu.
+> […] pour `i = j = k` on retrouve la comultiplication de `φ_i`, et les cas où
+> deux des trois indices coïncident sont dégénérés. […] Deux facteurs, `g'`, `g''`
+> pleinement fidèles : deux foncteurs croisés `φ' : B'' → B'`, `φ'' : B' → B''`,
+> deux flèches `λ' : id → φ'φ''`, `λ'' : id → φ''φ'`, avec
+> `φ(X', X'') = (X' × φ'(X''), φ''(X') × X'')`.
+
+Setting: adjunctions `f_i ⊣ g_i`, `f_i : A → B_i`, and `A` with `I`-indexed products.
+* `adjPi` — (3.4): `f = (f_i) ⊣ g`, `g((X_i)) = ∏ g_i(X_i)`.
+* `matrice` — (3.6): if `f_j` commutes with `I`-indexed products, `pr_j φ((X_i))` is
+  the product of the `φ_ji(X_i)`, with projections `f_j(pr_i)`. True as stated.
+* `counit_matrice`, `comult_matrice` — (3.9): `ᾱ_k = α_k(X_k) ∘ pr_k` and
+  `λ̄_kji = λ_kji(X_i) ∘ pr_i`; no hypothesis needed. `comult_unique`: under the
+  hypothesis of `matrice`, these entries determine the comultiplication.
+* `lam_diag` — the margin of page 8: `λ_iii` is the comultiplication of `φ_i`.
+* `lam_isIso_left`, `lam_isIso_right` — the degenerate cases: if the `g` are fully
+  faithful, `λ_kki` and `λ_kjj` are isomorphisms.
+* `lamUnit`, `lam_eq_counit_comp_lamUnit` — (3.11 b), (3.14): `λ_iji` is the unit
+  `λ' : id → φ_ij φ_ji` after the isomorphism `φ_ii ≅ id`.
+* `deuxFacteurs_left`, `deuxFacteurs_right` — (3.12)–(3.14) for `I = WalkingPair`:
+  `pr' φ(X', X'') = X' × φ'(X'')` and `pr'' φ(X', X'') = φ''(X') × X''`.
+* `matrice_fini_fausse` — **« ou I fini » is false**: a left adjoint need not
+  commute with finite products. With `I = Bool`, `A = B_i = Type`,
+  `f_i = Bool × -` (left adjoint to `Bool → -`), `X_i = *`: `pr_j φ(X)` has two
+  elements and `∏_i φ_ji(X_i)` four. The phrase is on the page (« p. ex. `f_j`
+  exacts ; ou `I` fini », transcription page 7); the exactness alternative is right.
+
+The coassociativity relations between the `λ_kji`, which the page does not write,
+and the description of `A` by quadruples `(X', X'', u', u'')` (pages 9–10), are not
+formalised.
+
 ## Gabriel–Popescu (pages 14–15)
 
 > Le foncteur `Hom_C(U, -) : C → Mod_R` est pleinement fidèle, et son adjoint à
@@ -75,7 +117,7 @@ namespace Grothendieck.Folder19
 
 open CategoryTheory Limits
 
-universe v u₁ u₂
+universe w v u₁ u₂
 
 section Comonadicite
 
@@ -254,5 +296,309 @@ theorem gabriel_popescu {C : Type u₁} [Category.{v} C] [Abelian C]
     IsGrothendieckAbelian.GabrielPopescu.preservesFiniteLimits U hU, inferInstance⟩
 
 end GabrielPopescu
+
+section BaseProduit
+
+variable {I : Type w} {A : Type u₁} [Category.{v} A] {B : I → Type u₂} [∀ i, Category.{v} (B i)]
+variable (f : ∀ i, A ⥤ B i) (g : ∀ i, B i ⥤ A) (adj : ∀ i, f i ⊣ g i)
+
+/-- (3.4) The right adjoint over the product base, `g((Xᵢ)) = ∏ᵢ gᵢ(Xᵢ)`. -/
+noncomputable abbrev gPi [HasProductsOfShape I A] : (∀ i, B i) ⥤ A where
+  obj X := ∏ᶜ fun i => (g i).obj (X i)
+  map φ := Limits.Pi.map fun i => (g i).map (φ i)
+
+variable [HasProductsOfShape I A]
+
+/-- (3.4) `f = (fᵢ) : A → ∏ Bᵢ` is left adjoint to `g = ∏ gᵢ`. -/
+noncomputable def adjPi : Functor.pi' f ⊣ gPi g := Adjunction.mkOfHomEquiv
+  { homEquiv := fun Y X =>
+      { toFun := fun φ => Limits.Pi.lift fun i => (adj i).homEquiv _ _ (φ i)
+        invFun := fun ψ i => ((adj i).homEquiv _ _).symm (ψ ≫ Limits.Pi.π _ i)
+        left_inv := fun φ => by
+          funext i
+          simp only [Limits.Pi.lift_π]
+          exact Equiv.symm_apply_apply _ _
+        right_inv := fun ψ => by
+          refine Limits.Pi.hom_ext _ _ fun i => ?_
+          simp only [Limits.Pi.lift_π]
+          exact Equiv.apply_symm_apply _ _ }
+    homEquiv_naturality_left_symm := fun h ψ => by
+      funext i
+      change ((adj i).homEquiv _ _).symm ((h ≫ ψ) ≫ Limits.Pi.π _ i) =
+        (f i).map h ≫ ((adj i).homEquiv _ _).symm (ψ ≫ Limits.Pi.π _ i)
+      rw [Category.assoc]
+      exact (adj i).homEquiv_naturality_left_symm _ _
+    homEquiv_naturality_right := fun φ ψ => by
+      refine Limits.Pi.hom_ext _ _ fun i => ?_
+      change (Limits.Pi.lift fun i => (adj i).homEquiv _ _ ((φ ≫ ψ) i)) ≫ Limits.Pi.π _ i =
+        ((Limits.Pi.lift fun i => (adj i).homEquiv _ _ (φ i)) ≫
+          Limits.Pi.map (fun i => (g i).map (ψ i))) ≫ Limits.Pi.π _ i
+      rw [Category.assoc, Limits.Pi.map_π, Limits.Pi.lift_π, Limits.Pi.lift_π_assoc]
+      exact (adj i).homEquiv_naturality_right _ _ }
+
+@[reassoc (attr := simp)]
+theorem adjPi_unit_π (Y : A) (j : I) :
+    (adjPi f g adj).unit.app Y ≫ Limits.Pi.π _ j = (adj j).unit.app Y := by
+  change (Limits.Pi.lift fun i => (adj i).homEquiv _ _ (𝟙 ((f i).obj Y))) ≫ Limits.Pi.π _ j = _
+  rw [Limits.Pi.lift_π]
+  exact (adj j).homEquiv_id Y
+
+theorem adjPi_counit (X : ∀ i, B i) (j : I) :
+    (adjPi f g adj).counit.app X j =
+      (f j).map (Limits.Pi.π (fun i => (g i).obj (X i)) j) ≫ (adj j).counit.app (X j) := by
+  change ((adj j).homEquiv ((gPi g).obj X) (X j)).symm
+    (𝟙 ((gPi g).obj X) ≫ Limits.Pi.π (fun i => (g i).obj (X i)) j) = _
+  rw [Category.id_comp]
+  exact (adj j).homEquiv_counit _ _ _
+
+/-- (3.6) The entry `φ_ji = f_j g_i : B_i → B_j` of the matrix. -/
+abbrev phi (j i : I) : B i ⥤ B j := g i ⋙ f j
+
+/-- (3.10) `λ_kji : φ_ki → φ_kj φ_ji`, the unit `id → g_j f_j` inserted in the middle of
+`f_k g_i`. -/
+@[simps]
+def lam (k j i : I) : phi f g k i ⟶ phi f g j i ⋙ phi f g k j where
+  app X := (f k).map ((adj j).unit.app ((g i).obj X))
+  naturality X Y h := by
+    simp only [Functor.comp_obj, Functor.comp_map, ← Functor.map_comp]
+    congr 1
+    exact (adj j).unit.naturality ((g i).map h)
+
+/-- (3.5)–(3.6) **The matrix.** If `f_j` commutes with `I`-indexed products, the
+`j`-th component of `φ((Xᵢ))` is the product of the `φ_ji(Xᵢ)`, with projections
+`f_j(prᵢ)`. -/
+noncomputable def matrice (X : ∀ i, B i) (j : I) [PreservesLimitsOfShape (Discrete I) (f j)] :
+    IsLimit (Fan.mk ((adjPi f g adj).toComonad.obj X j)
+      fun i => (f j).map (Limits.Pi.π (fun i => (g i).obj (X i)) i)) :=
+  (isLimitMapConeFanMkEquiv (f j) _ _) (isLimitOfPreserves (f j) (productIsProduct _))
+
+/-- (3.9), first line: the counit of `φ` is diagonal, `ᾱ_k = α_k(X_k) ∘ pr_k`. -/
+theorem counit_matrice (X : ∀ i, B i) (k : I) :
+    (adjPi f g adj).toComonad.ε.app X k =
+      (f k).map (Limits.Pi.π (fun i => (g i).obj (X i)) k) ≫ (adj k).counit.app (X k) :=
+  adjPi_counit f g adj X k
+
+/-- (3.9), second line: the `(k, j, i)` entry of the comultiplication of `φ` is
+`λ̄_kji = λ_kji(Xᵢ) ∘ prᵢ`. -/
+theorem comult_matrice (X : ∀ i, B i) (k j i : I) :
+    (adjPi f g adj).toComonad.δ.app X k ≫
+        (f k).map (Limits.Pi.π _ j ≫ (g j).map ((f j).map (Limits.Pi.π (fun i => (g i).obj (X i)) i))) =
+      (f k).map (Limits.Pi.π (fun i => (g i).obj (X i)) i) ≫ (lam f g adj k j i).app (X i) := by
+  have h1 := adjPi_unit_π_assoc f g adj ((gPi g).obj X) j
+    ((g j).map ((f j).map (Limits.Pi.π (fun i => (g i).obj (X i)) i)))
+  have h2 := (adj j).unit.naturality (Limits.Pi.π (fun i => (g i).obj (X i)) i)
+  have h3 := congrArg (f k).map (h1.trans h2.symm)
+  exact (((f k).map_comp _ _).symm.trans h3).trans ((f k).map_comp _ _)
+
+/-- **The comultiplication is the family `λ_kji`.** If the `f_j` commute with
+`I`-indexed products, a morphism `(φX)_k → (φ²X)_k` with the entries `λ̄_kji` of
+`comult_matrice` is the `k`-th component of the comultiplication. -/
+theorem comult_unique [∀ j, PreservesLimitsOfShape (Discrete I) (f j)] (X : ∀ i, B i) (k : I)
+    (t : (adjPi f g adj).toComonad.obj X k ⟶
+      ((adjPi f g adj).toComonad.obj ((adjPi f g adj).toComonad.obj X)) k)
+    (ht : ∀ j i, t ≫
+        (f k).map (Limits.Pi.π _ j ≫ (g j).map ((f j).map (Limits.Pi.π (fun i => (g i).obj (X i)) i))) =
+      (f k).map (Limits.Pi.π (fun i => (g i).obj (X i)) i) ≫ (lam f g adj k j i).app (X i)) :
+    t = (adjPi f g adj).toComonad.δ.app X k := by
+  have hk := (isLimitMapConeFanMkEquiv (f k) _ _)
+    (isLimitOfPreserves (f k) (productIsProduct
+      (fun j => (g j).obj ((f j).obj ((gPi g).obj X)))))
+  refine Fan.IsLimit.hom_ext hk _ _ fun j => ?_
+  have : PreservesLimitsOfShape (Discrete I) (g j) := (adj j).rightAdjoint_preservesLimits.1
+  have hj := (isLimitMapConeFanMkEquiv (f j ⋙ g j ⋙ f k) _ _)
+    (isLimitOfPreserves (f j ⋙ g j ⋙ f k) (productIsProduct (fun i => (g i).obj (X i))))
+  refine Fan.IsLimit.hom_ext hj _ _ fun i => ?_
+  have e := (ht j i).trans (comult_matrice f g adj X k j i).symm
+  have e' : t ≫ ((f k).map (Limits.Pi.π
+        (fun j => (g j).obj ((f j).obj ((gPi g).obj X))) j) ≫
+        (f k).map ((g j).map ((f j).map (Limits.Pi.π (fun i => (g i).obj (X i)) i)))) =
+      (adjPi f g adj).toComonad.δ.app X k ≫ ((f k).map (Limits.Pi.π
+        (fun j => (g j).obj ((f j).obj ((gPi g).obj X))) j) ≫
+        (f k).map ((g j).map ((f j).map (Limits.Pi.π (fun i => (g i).obj (X i)) i)))) := by
+    exact (congrArg (t ≫ ·) ((f k).map_comp _ _).symm).trans
+      (e.trans (congrArg (_ ≫ ·) ((f k).map_comp _ _)))
+  exact (Category.assoc _ _ _).trans (e'.trans (Category.assoc _ _ _).symm)
+
+omit [HasProductsOfShape I A] in
+/-- Marginal note of page 8: for `i = j = k`, `λ_kji` is the comultiplication `λ_i`
+of the comonad `φ_i = f_i g_i`. -/
+theorem lam_diag (i : I) : lam f g adj i i i = (adj i).toComonad.δ := by
+  ext X
+  rfl
+
+section PleinementFideles
+
+omit [HasProductsOfShape I A] in
+/-- If `g_i` is fully faithful, the diagonal entry `φ_ii = f_i g_i` is the identity
+(through the counit). -/
+noncomputable def diagIso (i : I) [(g i).Full] [(g i).Faithful] : phi f g i i ≅ 𝟭 (B i) :=
+  asIso (adj i).counit
+
+omit [HasProductsOfShape I A] in
+/-- Pages 8–9, the degenerate cases `k = j`: if `g_k` is fully faithful,
+`λ_kki : φ_ki → φ_kk φ_ki` is an isomorphism. -/
+theorem lam_isIso_left (k i : I) [(g k).Full] [(g k).Faithful] :
+    IsIso (lam f g adj k k i) := by
+  have : ∀ X, IsIso ((lam f g adj k k i).app X) := fun X =>
+    NatIso.isIso_app_of_isIso (Functor.whiskerRight (adj k).unit (f k)) ((g i).obj X)
+  exact NatIso.isIso_of_isIso_app _
+
+omit [HasProductsOfShape I A] in
+/-- Pages 8–9, the degenerate cases `j = i`: if `g_j` is fully faithful,
+`λ_kjj : φ_kj → φ_kj φ_jj` is an isomorphism. -/
+theorem lam_isIso_right (k j : I) [(g j).Full] [(g j).Faithful] :
+    IsIso (lam f g adj k j j) := by
+  have : ∀ X, IsIso ((lam f g adj k j j).app X) := fun X => by
+    have := NatIso.isIso_app_of_isIso (Functor.whiskerLeft (g j) (adj j).unit) X
+    exact Functor.map_isIso (f k) ((adj j).unit.app ((g j).obj X))
+  exact NatIso.isIso_of_isIso_app _
+
+omit [HasProductsOfShape I A] in
+/-- (3.11 b), (3.14) The unit `λ' : id_{B_i} → φ_ij φ_ji` (`i ≠ j`) when `g_i` is
+fully faithful: `λ_iji` read through `φ_ii ≅ id`. -/
+noncomputable def lamUnit (i j : I) [(g i).Full] [(g i).Faithful] :
+    𝟭 (B i) ⟶ phi f g j i ⋙ phi f g i j :=
+  (diagIso f g adj i).inv ≫ lam f g adj i j i
+
+omit [HasProductsOfShape I A] in
+/-- `λ_iji = λ' ∘ α_i`: the entry `(i, j, i)` is the unit `λ'` after the counit
+`φ_ii → id`. -/
+theorem lam_eq_counit_comp_lamUnit (i j : I) [(g i).Full] [(g i).Faithful] :
+    lam f g adj i j i = (adj i).counit ≫ lamUnit f g adj i j := by
+  simp [lamUnit, diagIso]
+
+end PleinementFideles
+
+end BaseProduit
+
+section DeuxFacteurs
+
+variable {C : Type u₁} [Category.{v} C]
+
+/-- The family `(a, b)` on the two indices of `WalkingPair`. -/
+def famPair {F : WalkingPair → C} {T : C} (a : T ⟶ F .left) (b : T ⟶ F .right) :
+    ∀ j, T ⟶ F j
+  | .left => a
+  | .right => b
+
+/-- A fan over `WalkingPair` that is a limit, with its first leg corrected by an
+isomorphism, is a binary product. -/
+def binaryFanOfFanLeft {F : WalkingPair → C} {P : C} (p : ∀ j, P ⟶ F j)
+    (h : IsLimit (Fan.mk P p)) {Y : C} (e : F .left ≅ Y) :
+    IsLimit (BinaryFan.mk (p .left ≫ e.hom) (p .right)) :=
+  BinaryFan.IsLimit.mk _
+    (fun {T} a b => (Fan.IsLimit.lift h (famPair (a ≫ e.inv) b) : T ⟶ P))
+    (fun {T} a b => show Fan.IsLimit.lift h (famPair (a ≫ e.inv) b) ≫ p .left ≫ e.hom = a by
+      have h1 : Fan.IsLimit.lift h (famPair (a ≫ e.inv) b) ≫ p .left = a ≫ e.inv :=
+        Fan.IsLimit.fac h _ .left
+      rw [reassoc_of% h1]; simp)
+    (fun {T} a b => show Fan.IsLimit.lift h (famPair (a ≫ e.inv) b) ≫ p .right = b from
+      Fan.IsLimit.fac h _ .right)
+    (fun {T} a b (m : T ⟶ P) (ha : m ≫ p .left ≫ e.hom = a) (hb : m ≫ p .right = b) => by
+      refine Fan.IsLimit.hom_ext h _ _ fun j => ?_
+      show m ≫ p j = Fan.IsLimit.lift h (famPair (a ≫ e.inv) b) ≫ p j
+      have h1 : Fan.IsLimit.lift h (famPair (a ≫ e.inv) b) ≫ p j = famPair (a ≫ e.inv) b j :=
+        Fan.IsLimit.fac h _ j
+      rw [h1]
+      cases j
+      · simp [famPair, ← ha]
+      · simpa [famPair] using hb)
+
+/-- The same, with the second leg corrected. -/
+def binaryFanOfFanRight {F : WalkingPair → C} {P : C} (p : ∀ j, P ⟶ F j)
+    (h : IsLimit (Fan.mk P p)) {Y : C} (e : F .right ≅ Y) :
+    IsLimit (BinaryFan.mk (p .left) (p .right ≫ e.hom)) :=
+  BinaryFan.IsLimit.mk _
+    (fun {T} a b => (Fan.IsLimit.lift h (famPair a (b ≫ e.inv)) : T ⟶ P))
+    (fun {T} a b => show Fan.IsLimit.lift h (famPair a (b ≫ e.inv)) ≫ p .left = a from
+      Fan.IsLimit.fac h _ .left)
+    (fun {T} a b => show Fan.IsLimit.lift h (famPair a (b ≫ e.inv)) ≫ p .right ≫ e.hom = b by
+      have h1 : Fan.IsLimit.lift h (famPair a (b ≫ e.inv)) ≫ p .right = b ≫ e.inv :=
+        Fan.IsLimit.fac h _ .right
+      rw [reassoc_of% h1]; simp)
+    (fun {T} a b (m : T ⟶ P) (ha : m ≫ p .left = a) (hb : m ≫ p .right ≫ e.hom = b) => by
+      refine Fan.IsLimit.hom_ext h _ _ fun j => ?_
+      show m ≫ p j = Fan.IsLimit.lift h (famPair a (b ≫ e.inv)) ≫ p j
+      have h1 : Fan.IsLimit.lift h (famPair a (b ≫ e.inv)) ≫ p j = famPair a (b ≫ e.inv) j :=
+        Fan.IsLimit.fac h _ j
+      rw [h1]
+      cases j
+      · simpa [famPair] using ha
+      · simp [famPair, ← hb])
+
+variable {A : Type u₁} [Category.{v} A] {B : WalkingPair → Type u₂} [∀ i, Category.{v} (B i)]
+variable (f : ∀ i, A ⥤ B i) (g : ∀ i, B i ⥤ A) (adj : ∀ i, f i ⊣ g i)
+variable [HasProductsOfShape WalkingPair A]
+
+/-- (3.12)–(3.14), first factor. With `g'` fully faithful and `f'` commuting with
+binary products, `pr' φ(X', X'') = X' × φ'(X'')`, `φ' = f' g''`. -/
+noncomputable def deuxFacteurs_left (X : ∀ i, B i) [(g .left).Full] [(g .left).Faithful]
+    [PreservesLimitsOfShape (Discrete WalkingPair) (f .left)] :
+    IsLimit (BinaryFan.mk
+      ((f .left).map (Limits.Pi.π (fun i => (g i).obj (X i)) .left) ≫
+        (adj .left).counit.app (X .left))
+      ((f .left).map (Limits.Pi.π (fun i => (g i).obj (X i)) .right) :
+        (adjPi f g adj).toComonad.obj X .left ⟶ (phi f g .left .right).obj (X .right))) :=
+  binaryFanOfFanLeft _ (matrice f g adj X .left) (asIso ((adj .left).counit.app (X .left)))
+
+/-- (3.12)–(3.14), second factor: `pr'' φ(X', X'') = φ''(X') × X''`, `φ'' = f'' g'`. -/
+noncomputable def deuxFacteurs_right (X : ∀ i, B i) [(g .right).Full] [(g .right).Faithful]
+    [PreservesLimitsOfShape (Discrete WalkingPair) (f .right)] :
+    IsLimit (BinaryFan.mk
+      ((f .right).map (Limits.Pi.π (fun i => (g i).obj (X i)) .left) :
+        (adjPi f g adj).toComonad.obj X .right ⟶ (phi f g .right .left).obj (X .left))
+      ((f .right).map (Limits.Pi.π (fun i => (g i).obj (X i)) .right) ≫
+        (adj .right).counit.app (X .right))) :=
+  binaryFanOfFanRight _ (matrice f g adj X .right) (asIso ((adj .right).counit.app (X .right)))
+
+end DeuxFacteurs
+
+section ContreExempleFini
+
+/-- `Y ↦ Bool × Y`. -/
+def Fb : Type ⥤ Type where
+  obj Y := Bool × Y
+  map h := TypeCat.ofHom (Prod.map id h)
+
+/-- `X ↦ (Bool → X)`. -/
+def Gb : Type ⥤ Type where
+  obj X := Bool → X
+  map h := TypeCat.ofHom fun u b => h (u b)
+
+/-- `Bool × - ⊣ (Bool → -)`. -/
+def adjB : Fb ⊣ Gb := Adjunction.mkOfHomEquiv
+  { homEquiv := fun _ _ =>
+      { toFun := fun φ => TypeCat.ofHom fun y b => φ (b, y)
+        invFun := fun ψ => TypeCat.ofHom fun p => ψ p.2 p.1
+        left_inv := fun _ => rfl
+        right_inv := fun _ => rfl }
+    homEquiv_naturality_left_symm := fun _ _ => rfl
+    homEquiv_naturality_right := fun _ _ => rfl }
+
+/-- **Page 7, « ou I fini »: false.** With `I = Bool`, `A = B_i = Set` and
+`f_i = Bool × -` (left adjoint of `Bool → -`), `pr_j φ((Xᵢ))` is not a product of the
+`φ_ji(Xᵢ)`: for `Xᵢ = *` the first has two elements, the second four. The finite
+products of `I` are not automatically preserved by the left adjoints `f_j`. -/
+theorem matrice_fini_fausse :
+    ¬ Nonempty ((adjPi (B := fun _ : Bool => Type) (fun _ => Fb) (fun _ => Gb)
+        (fun _ => adjB)).toComonad.obj (fun _ => PUnit) true ≅
+      ∏ᶜ fun i : Bool => (phi (B := fun _ : Bool => Type) (fun _ => Fb) (fun _ => Gb)
+        true i).obj PUnit) := by
+  rintro ⟨e⟩
+  have h := Nat.card_congr e.toEquiv
+  have h1 : Nat.card ((adjPi (B := fun _ : Bool => Type) (fun _ => Fb) (fun _ => Gb)
+      (fun _ => adjB)).toComonad.obj (fun _ => PUnit) true) = 2 := by
+    change Nat.card (Bool × ∏ᶜ fun _ : Bool => (Bool → PUnit)) = 2
+    rw [Nat.card_prod, Nat.card_congr (Types.productIso _).toEquiv]
+    simp
+  have h2 : Nat.card (∏ᶜ fun i : Bool => (phi (B := fun _ : Bool => Type) (fun _ => Fb)
+      (fun _ => Gb) true i).obj PUnit) = 4 := by
+    change Nat.card (∏ᶜ fun _ : Bool => Bool × (Bool → PUnit)) = 4
+    rw [Nat.card_congr (Types.productIso _).toEquiv]
+    simp
+  omega
+
+end ContreExempleFini
+
 
 end Grothendieck.Folder19

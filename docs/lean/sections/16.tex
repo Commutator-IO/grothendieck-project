@@ -64,4 +64,98 @@ Le $\Lambda$ de $\mathfrak{sl}_2$ ne vérifie la relation $\Lambda L x = x$ de~(
 Le calcul confirme la correction que la lecture apporte à la page~13 : la contraction $\xi_0^* \lrcorner -$ n'est pas l'opérateur que caractérisent les relations~(6.15) dès que $n \geqslant 2$. L'erreur est sur la page ; elle est sans effet sur la Proposition qui suit, qui n'utilise que~(6.15).
 \end{remarque}
 
-\noindent Ne sont pas démontrés ici : que $(L_0, \Lambda_0)$ engendrent une représentation de $\mathfrak{sl}_2$ sur tout $\Lambda M_0$, dont seule la valeur en~$1$ est calculée ; la décomposition primitive et le théorème de Lefschetz difficile, que le dossier prend pour acquis ; le théorème du n\textsuperscript{o}~6 (pages~9 à~12)\piste{16-graded-ring-lefschetz-criterion}, l'anneau universel $\Phi_0$, sa proposition et son corollaire (pages~13 à~16)\piste{16-universal-lefschetz-ring} ; le contre-exemple de dimension~6 de la page~21 ; les algèbres de Hodge d'ordre~2 (pages~24 à~28)\piste{16-hodge-algebras-order-2} ; le formulaire le long d'une section hyperplane (pages~32 à~39), la réduction de la page~41, les lettres à Coates (pages~43 à~49), dont la suffisance d'un isomorphisme algébrique quelconque (pages~47 et~48)\piste{16-algebraic-iso-suffices} et les deux variantes en dimension critique (page~49)\piste{16-weak-variants-imply-strong} et le lemme des pages~50 à~54 --- toute la géométrie.
+Le n\textsuperscript{o}~4 remplace les conditions sur le module par la condition interne~$(4.4)_i$ (\lot{16}{1}{6}) ; le n\textsuperscript{o}~5, écrit sur un feuillet \q{5 bis}, en tire que les $\pi_i$ sont dans $\mathcal E$ (\lot{16}{1}{7}) ; la page~8 spécialise à $v_i = L^{n-i}$ sous le numéro~$(6.3)_i$ (\lot{16}{1}{8}).
+
+\noindent\emph{Conventions.} On se donne un anneau $E$ (le sur-anneau $\mathcal F$ de la lecture), une famille $(\pi_a)_{a \in \mathbb Z}$ d'idempotents orthogonaux de $E$, nuls hors de $[0, 2n]$, de somme~$1$, et un sous-anneau $\mathcal E \subset E$. Un élément $x$ est \emph{homogène de degré $d$} si $\pi_b\, x\, \pi_a = 0$ dès que $b \neq a + d$. Aucun module n'intervient, et $\mathcal E$ n'est qu'un anneau : tout se passe sur~$\mathbb Z$.
+
+\begin{enonce}[Pages 6 à 8, les projecteurs de la graduation\piste{16-graded-ring-lefschetz-criterion}]
+Supposons que, pour tout $i \leqslant n$, il existe $v_i \in \mathcal E$ homogène de degré $2n - 2i$ et $w_i \in \mathcal E$ homogène de degré $-(2n-2i)$ tels que $(w_i v_i - 1)\,\pi_i = 0$ et $(v_i w_i - 1)\,\pi_{2n-i} = 0$. Alors tous les $\pi_a$ sont dans $\mathcal E$. En particulier, si $L \in \mathcal E$ est homogène de degré~$2$ et si $L^{n-i}$ admet dans $\mathcal E$ des inverses $w_i$ au sens de~$(6.3)_i$, les $\pi_a$ sont dans $\mathcal E$.
+\end{enonce}
+
+\begin{lemme}\label{lem:16-homogene}
+Si $x$ est homogène de degré $d$, alors $x\,\pi_a = \pi_{a+d}\, x\, \pi_a$ pour tout $a$. Si $A$ et $B$ sont des parties finies de $\mathbb Z$, $a_0 \in A$, $a_0 + d \in B$, et si $a_0$ est le seul $a \in A$ tel que $a + d \in B$, alors
+\[
+\Bigl(\sum_{b \in B} \pi_b\Bigr)\, x \Bigl(\sum_{a \in A} \pi_a\Bigr) = \pi_{a_0 + d}\, x\, \pi_{a_0}.
+\]
+Un produit d'homogènes de degrés $d$ et $e$ est homogène de degré $d + e$, et $L^k$ est de degré $2k$ si $L$ est de degré~$2$.
+\end{lemme}
+
+\begin{proof}
+On écrit $x\,\pi_a = \bigl(\sum_b \pi_b\bigr) x\, \pi_a = \sum_b \pi_b\, x\, \pi_a$, où seul le terme $b = a + d$ subsiste (s'il sort de $[0, 2n]$, $\pi_{a+d} = 0$ et les deux membres sont nuls). Le second énoncé se développe en une double somme dont seul le terme $(a_0 + d, a_0)$ subsiste. Pour le produit, $\pi_b\, xy\, \pi_a = \pi_b\, x\, \pi_{a+e}\, y\, \pi_a$, nul si $b \neq a + e + d$ ; $1$ est de degré~$0$ par orthogonalité, d'où les puissances par récurrence.
+\end{proof}
+
+\begin{proof}[Démonstration]
+Montrons par récurrence sur $i \leqslant n + 1$ que $\pi_a \in \mathcal E$ dès que $a < i$ ou $a > 2n - i$. Pour $i = 0$, ces $\pi_a$ sont nuls. Supposons-le pour un $i \leqslant n$. Alors
+\[
+\varphi_i = \sum_{i \leqslant a \leqslant 2n} \pi_a = 1 - \sum_{0 \leqslant a < i} \pi_a,
+\qquad
+\psi_{2n-i} = \sum_{0 \leqslant a \leqslant 2n-i} \pi_a = 1 - \sum_{2n-i < a \leqslant 2n} \pi_a
+\]
+sont dans $\mathcal E$. Le lemme~\ref{lem:16-homogene}, appliqué à $v_i$ (le seul $a \geqslant i$ tel que $a + 2n - 2i \leqslant 2n - i$ est $a = i$) puis à $w_i$, donne
+\[
+v'_i = \psi_{2n-i}\, v_i\, \varphi_i = \pi_{2n-i}\, v_i\, \pi_i \in \mathcal E,
+\qquad
+w'_i = \varphi_i\, w_i\, \psi_{2n-i} = \pi_i\, w_i\, \pi_{2n-i} \in \mathcal E.
+\]
+Comme $\pi_{2n-i}\, v_i\, \pi_i = v_i\, \pi_i$ et $\pi_i\, w_i\, \pi_{2n-i} = w_i\, \pi_{2n-i}$ (même lemme),
+\[
+w'_i v'_i = \pi_i\, w_i\, \pi_{2n-i}^2\, v_i\, \pi_i = \pi_i\, (w_i v_i \pi_i) = \pi_i^2 = \pi_i,
+\qquad
+v'_i w'_i = \pi_{2n-i}\, (v_i w_i \pi_{2n-i}) = \pi_{2n-i},
+\]
+donc $\pi_i$ et $\pi_{2n-i}$ sont dans $\mathcal E$, ce qui est l'hypothèse au rang $i+1$. Au rang $n + 1$, tout $a$ vérifie $a < n + 1$ ou $a > n - 1$. Le cas $v_i = L^{n-i}$ suit, $L^{n-i}$ étant dans $\mathcal E$ et de degré $2n - 2i$.
+\end{proof}
+
+\begin{remarque}
+L'argument de la page~7 vaut tel qu'il est écrit, sans hypothèse de réalisation : $\mathcal E$ n'a besoin que d'être un sous-anneau, et l'existence des $\pi_i$ dans le sur-anneau suffit. Cela établit la première partie de la piste, l'appartenance des projecteurs de la graduation ; celle de $\Lambda$ et des projecteurs primitifs $\pi_{i,\alpha}$ n'est pas démontrée ici. Les formules des pages~10 à~12 les écrivent comme produits d'éléments de $\mathcal E$, si bien que leur appartenance est immédiate ; ce qui reste à vérifier est qu'elles satisfont~(6.7) et donnent bien les projecteurs de la décomposition primitive, ce qui demande la décomposition elle-même.
+\end{remarque}
+
+La lecture garde $\Phi_0 = \mathbb Z[L_0, \Lambda_0] \subset \operatorname{End}(\Lambda M_0)$, avec $M_0$ un $\mathbb Z$-module libre et $\Lambda_0$ \emph{au sens de~(6.15)}, pour réparer l'identification de la page~13. Sur $\mathbb Z$, ce $\Lambda_0$ n'existe pas.
+
+\begin{enonce}[Page 13, sur $\mathbb Z$\piste{16-universal-lefschetz-ring}]
+Soient $M_0 = \mathbb Z^{2n}$, $n \geqslant 2$, $\xi_0 = \sum_{k=1}^{n} e_{2k-1} \wedge e_{2k}$ et $\mathrm{vol} = e_1 \wedge \dots \wedge e_{2n}$. Il n'existe aucun $y \in \Lambda M_0$ tel que $\xi_0^n \wedge y = \mathrm{vol}$. En particulier, pour toute application $w$ de $\Lambda M_0$ dans lui-même, $L_0^n\bigl(w(\mathrm{vol})\bigr) \neq \mathrm{vol}$ : la condition~$(6.3)_0$ est fausse dans le modèle extérieur sur $\mathbb Z$.
+\end{enonce}
+
+\begin{proof}
+Posons $a_k = e_{2k-1} \wedge e_{2k}$. Deux produits de deux vecteurs commutent dans $\Lambda M_0$ (chaque vecteur traverse l'autre paire avec deux changements de signe), et $a_k \wedge a_k = 0$. Par récurrence sur le nombre de termes, $\xi_0 \wedge \xi_0 = c + c$ pour un $c \in \Lambda M_0$ : si $S$ est une somme partielle avec $S \wedge S = c + c$, alors $(a + S)^2 = a^2 + aS + Sa + S^2 = (aS + c) + (aS + c)$. Donc $\xi_0^n \wedge y = \xi_0^{n-2} \wedge (c + c) \wedge y = z + z$ avec $z = \xi_0^{n-2} c\, y$. Soit $\phi$ la forme linéaire sur $\Lambda M_0$ qui prend la composante de degré $2n$ et la lit sur la base $\mathrm{vol}$ de $\Lambda^{2n} M_0$ ; $\phi(\mathrm{vol}) = 1$. Si $\xi_0^n \wedge y = \mathrm{vol}$, alors $1 = \phi(z + z) = 2\,\phi(z)$ dans $\mathbb Z$, ce qui est impossible. Enfin $L_0^n(x) = \xi_0^n \wedge x$, et l'on prend $y = w(\mathrm{vol})$.
+\end{proof}
+
+\begin{remarque}
+En fait $\xi_0^n = n!\,\mathrm{vol}$, et $L_0^n \colon \Lambda^0 M_0 \to \Lambda^{2n} M_0$ est la multiplication par $n!$ ; seule la parité est démontrée ici, et elle suffit. Or, d'après la Remarque de la page~12, un $\Lambda_0$ vérifiant~(6.15) donne $(L_0^n \Lambda_0^n - 1)\,\pi_{2n} = 0$, c'est-à-dire $L_0^n(\Lambda_0^n\, \mathrm{vol}) = \mathrm{vol}$, ce que l'énoncé exclut. Pour $n \geqslant 2$, l'anneau $\Phi_0 = \mathbb Z[L_0, \Lambda_0]$ de la lecture ne peut donc pas être pris dans $\operatorname{End}_{\mathbb Z}(\Lambda M_0)$ : la décomposition primitive elle-même y fait défaut (pour $n = 2$, $e_1 \wedge e_2 \wedge \xi_0 = \mathrm{vol}$ et $\xi_0 \wedge \xi_0 = 2\,\mathrm{vol}$, si bien que la composante de $e_1 \wedge e_2$ sur $\mathbb Q\,\xi_0$ le long de $P^2$ vaut $\tfrac12\,\xi_0$, calcul fait à la main). L'obstacle disparaît sur~$\mathbb Q$. La correction de la page~13 par la lecture tient donc pour l'identification des deux $\Lambda_0$, mais non pour le choix de $\mathbb Z$ comme anneau de base du modèle.
+\end{remarque}
+
+\begin{lemme}[Pages 14 et 15, l'étape algébrique de l'unicité]\label{lem:16-pseudo}
+Dans un anneau, si $\Lambda L \Lambda = \Lambda$, $\Lambda' L \Lambda' = \Lambda'$, $\Lambda L = \Lambda' L$ et $L\Lambda = L \Lambda'$, alors $\Lambda = \Lambda'$.
+\end{lemme}
+
+\begin{proof}
+$\Lambda = (\Lambda L)\Lambda = \Lambda'(L\Lambda) = \Lambda'(L\Lambda') = \Lambda'$.
+\end{proof}
+
+\noindent Le lemme~\ref{lem:16-pseudo} dit qu'un pseudo-inverse est déterminé par les deux idempotents $\Lambda L$ et $L\Lambda$ ; ni l'existence de l'homomorphisme $\Phi_0 \to \mathcal E$ ni son unicité ne sont démontrées ici.
+
+La lettre du 6 janvier 1967 montre que $C(X)$ suit de $D(X)$ et de l'existence d'isomorphismes algébriques $H^{2n-i}(X) \to H^i(X)$ quelconques (\lot{16}{3}{47}).
+
+\noindent\emph{Conventions.} Soient $K$ un corps ($\mathbb Q_\ell$), $F \subset K$ un sous-corps ($\mathbb Q$), $V = H^i(X)$ et $W = H^{2n-i}(X)$ des $K$-espaces, $V$ de dimension finie. \q{Algébrique} est lu comme l'appartenance à des ensembles donnés d'applications : un sous-anneau $\mathcal A_V$ de $\operatorname{End}_K(V)$, stable par multiplication par les éléments de $F$, et des parties $\mathcal A_{WV}$ de $\operatorname{Hom}(W, V)$ et $\mathcal A_{VW}$ de $\operatorname{Hom}(V, W)$, telles que $g \circ h \in \mathcal A_{WV}$ pour $g \in \mathcal A_V$, $h \in \mathcal A_{WV}$, et $h \circ k \in \mathcal A_V$ pour $h \in \mathcal A_{WV}$, $k \in \mathcal A_{VW}$. L'hypothèse $D(X)$ est lue comme : les coefficients du polynôme caractéristique de tout $g \in \mathcal A_V$ sont dans $F$.
+
+\begin{enonce}[Pages 47 et 48, \emph{proposition}, b) $\Rightarrow$ $C$\piste{16-algebraic-iso-suffices}]
+Si $u \in \mathcal A_{WV}$ est un isomorphisme quelconque et si $v \in \mathcal A_{VW}$ (l'application induite par $L^{n-i}$) est un isomorphisme, alors il existe $v' \in \mathcal A_{WV}$ avec $v' \circ v = \mathrm{id}_V$ et $v \circ v' = \mathrm{id}_W$ : l'inverse de $L^{n-i}$ est algébrique.
+\end{enonce}
+
+\begin{lemme}[Cayley--Hamilton]\label{lem:16-ch}
+Si $w \in \mathcal A_V$ est inversible, son inverse est dans $\mathcal A_V$.
+\end{lemme}
+
+\begin{proof}
+Soit $p = \sum_j c_j X^j$ le polynôme caractéristique de $w$ ; ses coefficients sont dans $F$. Écrivons $p = q X + c_0$. Par Cayley--Hamilton, $q(w)\, w = -c_0$, et $c_0 = \pm \det w \neq 0$ puisque $w$ est inversible. Donc $g = -c_0^{-1} q(w)$ vérifie $g w = 1$, et $w g = 1$ puisque $q(w)$ commute à $w$. Enfin $q(w) = \sum_j c_{j+1}\, w^j$ est une somme de multiples par des éléments de $F$ de puissances de $w$, donc $g \in \mathcal A_V$.
+\end{proof}
+
+\begin{proof}[Démonstration]
+$w = u \circ v$ est dans $\mathcal A_V$, et inversible comme composé de deux bijections. Le lemme~\ref{lem:16-ch} donne $g \in \mathcal A_V$ avec $g \circ w = \mathrm{id}_V$ ; on pose $v' = g \circ u \in \mathcal A_{WV}$. Alors $v' \circ v = g \circ w = \mathrm{id}_V$, et pour $y = v(x)$, $v(v'(y)) = v\bigl((v' \circ v)(x)\bigr) = y$ : $v'$ est aussi inverse à droite, $v$ étant surjective.
+\end{proof}
+
+\begin{remarque}
+L'argument de la lettre vaut tel quel, avec la relation de Cayley--Hamilton écrite en $w = uv$ comme le rétablit la lecture : le tapuscrit l'écrit en $u$ avec les coefficients de $w$. L'hypothèse que $u$ soit un isomorphisme ne sert qu'à rendre $w$ inversible ; que $v$ en soit un aussi, comme induit par $L^{n-i}$, est l'axiome de Lefschetz de la cohomologie, que la lettre suppose.
+\end{remarque}
+
+\noindent Ne sont pas démontrés ici : que $(L_0, \Lambda_0)$ engendrent une représentation de $\mathfrak{sl}_2$ sur tout $\Lambda M_0$, dont seule la valeur en~$1$ est calculée ; la décomposition primitive et le théorème de Lefschetz difficile, que le dossier prend pour acquis ; dans le théorème du n\textsuperscript{o}~6 (pages~9 à~12), que $\Lambda$ et les projecteurs primitifs donnés par les formules des pages~10 à~12 vérifient~(6.7) et sont ceux de la décomposition primitive\piste{16-graded-ring-lefschetz-criterion} ; l'existence et l'unicité de l'homomorphisme $\Phi_0 \to \mathcal E$, et le corollaire de la page~16\piste{16-universal-lefschetz-ring} ; le contre-exemple de dimension~6 de la page~21 ; les algèbres de Hodge d'ordre~2 (pages~24 à~28)\piste{16-hodge-algebras-order-2} ; le formulaire le long d'une section hyperplane (pages~32 à~39), la réduction de la page~41, les lettres à Coates (pages~43 à~49), hors la proposition de la page~47, dont le corollaire de la page~48 et les deux variantes en dimension critique (page~49)\piste{16-weak-variants-imply-strong}, et le lemme des pages~50 à~54 --- toute la géométrie.

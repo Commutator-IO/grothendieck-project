@@ -196,14 +196,14 @@ export const PROOFS: Proof[] = [
     folder: '19',
     batch: 1,
     page: '4',
-    name: 'Théorème 1.12; Gabriel–Popescu',
+    name: 'Théorème 1.12; Gabriel–Popescu; comonad over a product base',
     statement:
-      'For an adjunction f ⊣ g with comparison functor h: a) if A has equalizers and f preserves them, h is essentially surjective; b) h is an equivalence if and only if f is conservative and, for every pair (u, v) whose image under f has an equalizer, the equalizer of (u, v) exists and f preserves it (condition C).',
+      'For an adjunction f ⊣ g with comparison functor h: a) if A has equalizers and f preserves them, h is essentially surjective; b) h is an equivalence if and only if f is conservative and, for every pair (u, v) whose image under f has an equalizer, the equalizer of (u, v) exists and f preserves it (condition C). Over a product base B = ∏ Bᵢ (pp. 7–9), the comonad fg is a matrix φ_ji = f_j g_i with comultiplication λ_kji, determined by its entries when the f_j preserve products; with fully faithful g′, g″ it collapses to two crossed functors and two units.',
     found:
-      'a) and the « if » of b) hold — Beck’s theorem. The « only if » of b) is false as the page states it: the inclusion of the pairs of sets (X, Y) with Y ≠ ∅ ⇒ X ≠ ∅ is coreflective, hence comonadic and conservative, yet the pair (∗, ∗) ⇉ ({0, 1}, ∗) has equalizer (∅, ∗) below and (∅, ∅) above. The reading had called condition C Beck’s f-split condition; it is not, and the reading is corrected. Gabriel–Popescu holds in the reading’s form and is classical.',
+      'a) and the « if » of b) hold — Beck’s theorem. The « only if » of b) is false as the page states it: the inclusion of the pairs of sets (X, Y) with Y ≠ ∅ ⇒ X ≠ ∅ is coreflective, hence comonadic and conservative, yet the pair (∗, ∗) ⇉ ({0, 1}, ∗) has equalizer (∅, ∗) below and (∅, ∅) above. The reading had called condition C Beck’s f-split condition; it is not, and the reading is corrected. Gabriel–Popescu holds in the reading’s form and is classical. On p. 7, the proviso « ou I fini » is false: a left adjoint need not preserve finite products (f = Bool × − on sets gives 2 elements against 4); exactness is the hypothesis that works.',
     verdict: 'false on the page',
     lean: 'lean/Grothendieck/Folder19.lean',
-    theorems: ['theoreme_a', 'theoreme_b_suffisance', 'theoreme_b_necessite_fausse', 'beck_iff', 'gabriel_popescu'],
+    theorems: ['theoreme_a', 'theoreme_b_suffisance', 'theoreme_b_necessite_fausse', 'beck_iff', 'gabriel_popescu', 'matrice', 'comult_matrice', 'lam_isIso_left', 'deuxFacteurs_left', 'matrice_fini_fausse'],
   },
   {
     folder: '161-2',
@@ -221,15 +221,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '16',
     batch: 1,
-    page: '9',
-    name: 'sl₂ against (6.7)',
+    page: '6–16, 47–48',
+    name: "sl₂ against (6.7); projectors; Cayley–Hamilton",
     statement:
-      'On a primitive vector of weight μ, ΛL^{k+1}x = (k+1)(μ−k)L^k x; the sl₂ Λ satisfies (6.7)’s ΛLx = x only when μ = 1; the commutator [L, Λ] follows from (6.7); in the exterior algebra, Λ₀L₀(1) = n.',
+      "On a primitive vector of weight μ, ΛL^{k+1}x = (k+1)(μ−k)L^k x, and the sl₂ Λ satisfies (6.7) only when μ = 1; in a graded ring, one-sided inverses of L^{n−i} put every grading projector in the ring, over ℤ, with no module (no. 5, (6.3)); any algebraic isomorphism H^{2n−i} → H^i makes the inverse of L^{n−i} algebraic, by Cayley–Hamilton (pp. 47–48).",
     found:
-      'Nothing false; the last identity confirms the reading’s correction of p. 13, where the page identifies the contraction Λ₀ with the Λ₀ of (6.15). Only the algebra is proved; Hard Lefschetz and the geometry are not.',
+      "Confirms the reading’s correction of p. 13. Finds the reading wrong on one point: its universal ring Φ₀ = ℤ[L₀, Λ₀], with Λ₀ in the sense of (6.15), does not exist over ℤ for n ≥ 2, since ξ₀ⁿ is divisible by n! and no y has ξ₀ⁿ ∧ y = vol; over ℚ the obstruction disappears. Not proved: Λ and the primitive projectors in the ring, the universal property of Φ₀, Hard Lefschetz.",
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder16.lean',
-    theorems: ['sl2_normalisation', 'identification_seulement_si', 'commutateur_pseudo_inverse', 'lambda0_L0_un_ne_un'],
+    theorems: ["sl2_normalisation", "identification_seulement_si", "lambda0_L0_un_ne_un", "projecteurs_mem_lefschetz", "inverse_Lefschetz_algebrique", "not_exists_xi₀_pow_mul_eq_vol"],
   },
   {
     folder: '106',

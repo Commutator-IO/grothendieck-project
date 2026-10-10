@@ -1,4 +1,4 @@
-\section[Cote 19 : le théorème de comonadicité 1.12 et le théorème de Gabriel--Popescu]{Cote 19 : le théorème de comonadicité 1.12 et le théorème de Gabriel--Popescu\protect\verifie{Folder19}}\label{sec:19}
+\section[Cote 19 : le théorème de comonadicité 1.12, la comonade sur une base produit et le théorème de Gabriel--Popescu]{Cote 19 : le théorème de comonadicité 1.12, la comonade sur une base produit et le théorème de Gabriel--Popescu\protect\verifie{Folder19}}\label{sec:19}
 
 La cote 19, \emph{Topos : notes manuscrites (s.d.)}, quatre-vingt-quinze pages que l'inventaire date \q{[à partir de 1958-1973]} et range dans le groupe Théorie des motifs, est un dossier de travail en neuf liasses. La première, « Tapis cartésiens » (pages~3 à~11), étudie la comonade d'une adjonction et ses coalgèbres ; la page~4 énonce le \q{Théorème 1.12}, suivi d'un nom propre que la transcription lit \q{Beck} avec doute, écrit \q{il faut et il suffit} pour~b), et porte en marge la restriction \q{il suffit de regarder les doubles flèches $u, v$ de $A$ telles que $\mathrm{Ker}(f(u), f(v))$ existe \quad (condition C)} (\lot{19}{1}{4}). La deuxième, « Cohomologie relative », s'ouvre pages~14 et~15 sur la représentabilité : pour une catégorie à générateur $U$, elle affirme une équivalence avec les modules sur $\mathrm{End}(U)$, \q{[détails laissés au lecteur]} (\lot{19}{1}{15}).
 
@@ -71,6 +71,64 @@ Le foncteur $h$ est une équivalence si et seulement si $f$ est conservatif et s
 La condition est suffisante par les lemmes~\ref{lem:19-paire} et~\ref{lem:19-comp}\,(3), qui n'utilisent que des doubles flèches $f$-scindées. Elle est nécessaire. Si $f(\psi)$ est inversible, $h(\psi)$ est un morphisme de coalgèbres dont la flèche sous-jacente est inversible, donc un isomorphisme de coalgèbres (le calcul de~(2) ci-dessus), et $\psi$ est inversible parce que $h$, pleinement fidèle, reflète les isomorphismes. Que le foncteur d'oubli des coalgèbres, donc $f$, crée les noyaux des doubles flèches $f$-scindées est la partie classique du théorème de Beck, que la preuve vérifiée invoque.
 \end{proof}
 
+\noindent\emph{Une base produit.} Les pages~7 à~11 reprennent la comonade d'une adjonction quand la base est un produit $B = \prod_{i \in I} B_i$ : $f$ est une famille $f_i : A \to B_i$, $g$ envoie $(X_i)$ sur $\prod_i g_i(X_i)$, et la page pose $\varphi_{ji} = f_j g_i$ en supposant \q{que les $f_{j}$ commutent aux produits de type $I$ (p. ex. $f_{j}$ exacts ; ou $I$ fini)} (\lot{19}{1}{7}). Les données de la comonade y deviennent (3.9) $\bar\alpha_k = \alpha_k(X_k) \circ \mathrm{pr}_k$ et $\bar\lambda_{kji} = \lambda_{kji}(X_i) \circ \mathrm{pr}_i$, avec $\lambda_{kji} : \varphi_{ki} \to \varphi_{kj}\varphi_{ji}$ venu de l'unité $\mathrm{id} \to g_j f_j$ ; la marge note que $\lambda_{iii}$ est $\lambda_i$, et le cas de deux facteurs, $g'$, $g''$ pleinement fidèles, ne laisse que $\varphi'$, $\varphi''$, $\lambda'$, $\lambda''$ (\lot{19}{1}{9}). On se donne ici des adjonctions $f_i \dashv g_i$, $f_i : A \to B_i$, et l'on suppose que $A$ a les produits indexés par $I$ ; on note $\eta_i$, $\varepsilon_i$ leurs unités et coünités, $\mathrm{pr}_i$ les projections de $\prod_i g_i(X_i)$, et $\lambda_{kji}(X) = f_k(\eta_{j, g_i X}) : f_k g_i X \to f_k g_j f_j g_i X$.
+
+\begin{enonce}[Pages 7 et 8, la matrice de la comonade\piste{19-comonad-matrix-product-base}]
+\begin{enumerate}
+\item Le foncteur $f = (f_i) : A \to \prod_i B_i$ est adjoint à gauche de $g$, $g((X_i)) = \prod_i g_i(X_i)$ ; l'unité a pour composantes les $\eta_i$, et la coünité en $(X_i)$ a pour composante $j$ la flèche $\varepsilon_{j, X_j} \circ f_j(\mathrm{pr}_j)$.
+\item Si $f_j$ commute aux produits indexés par $I$, la composante $j$ de $\varphi((X_i))$ est un produit des $\varphi_{ji}(X_i)$, de projections les $f_j(\mathrm{pr}_i)$.
+\item Sans autre hypothèse, la coünité de $\varphi$ a pour composante $k$ la flèche $\varepsilon_{k, X_k} \circ f_k(\mathrm{pr}_k)$, et la composante $k$ de la comultiplication $\delta$ vérifie, pour tous $j$ et $i$,
+\[
+f_k g_j f_j(\mathrm{pr}_i) \circ f_k(\mathrm{pr}_j) \circ \delta_k = \lambda_{kji}(X_i) \circ f_k(\mathrm{pr}_i) :
+\]
+c'est (3.9). Si tous les $f_j$ commutent aux produits indexés par $I$, ces égalités caractérisent $\delta_k$.
+\item Pour $i = j = k$, $\lambda_{iii}$ est la comultiplication de la comonade $\varphi_i = f_i g_i$.
+\end{enumerate}
+\end{enonce}
+
+\begin{proof}
+(1) La bijection $\operatorname{Hom}(fY, (X_i)) = \prod_i \operatorname{Hom}(f_i Y, X_i) \simeq \prod_i \operatorname{Hom}(Y, g_i X_i) \simeq \operatorname{Hom}(Y, \prod_i g_i X_i)$ est naturelle en $Y$ et en $(X_i)$, composante par composante ; l'unité est l'image de l'identité, c'est-à-dire la flèche de composantes $\eta_{i, Y}$, et la coünité l'image réciproque de l'identité, de composante $j$ la transposée de $\mathrm{pr}_j$, soit $\varepsilon_{j, X_j} \circ f_j(\mathrm{pr}_j)$.
+
+(2) Le cône $(\mathrm{pr}_i)$ est un produit dans $A$, et $f_j$ envoie un produit sur un produit : le cône $(f_j(\mathrm{pr}_i))$ de sommet $f_j(\prod_i g_i X_i)$ est un produit de la famille $f_j g_i(X_i)$.
+
+(3) La coünité de $\varphi$ est celle de l'adjonction, calculée en~(1). La composante $k$ de $\delta$ est $f_k(\eta_{gX})$, où $\eta$ est l'unité de~(1), dont la composante $j$ est $\eta_j$. Donc $\delta_k$ suivie de $f_k(\mathrm{pr}_j)$ puis de $f_k g_j f_j(\mathrm{pr}_i)$ vaut $f_k\bigl(g_j f_j(\mathrm{pr}_i) \circ \eta_{j, gX}\bigr) = f_k\bigl(\eta_{j, g_i X_i} \circ \mathrm{pr}_i\bigr)$, par naturalité de $\eta_j$, c'est-à-dire $\lambda_{kji}(X_i) \circ f_k(\mathrm{pr}_i)$. Si les $f_j$ commutent aux produits indexés par $I$, $f_k(\prod_j g_j f_j g X)$ est un produit de projections $f_k(\mathrm{pr}_j)$ ; $g_j$, adjoint à droite, commute aux produits, si bien que $f_k g_j f_j(\prod_i g_i X_i)$ est un produit de projections $f_k g_j f_j(\mathrm{pr}_i)$. Deux flèches qui ont les mêmes composées avec toutes ces projections sont égales.
+
+(4) $\lambda_{iii}(X) = f_i(\eta_{i, g_i X})$ est, par définition, la comultiplication de $f_i g_i$.
+\end{proof}
+
+\begin{enonce}[Pages 7 à 9, les cas dégénérés et les deux facteurs\piste{19-comonad-matrix-product-base}]
+Supposons les $g_i$ pleinement fidèles.
+\begin{enumerate}
+\item $\varepsilon_i : \varphi_{ii} \to \mathrm{id}_{B_i}$ est un isomorphisme ; $\lambda_{kki}$ et $\lambda_{kjj}$ sont des isomorphismes pour tous $i, j, k$.
+\item Pour $i \neq j$, $\lambda_{iji} = \lambda' \circ \varepsilon_i$, où $\lambda' = \lambda_{iji} \circ \varepsilon_i^{-1} : \mathrm{id}_{B_i} \to \varphi_{ij}\varphi_{ji}$.
+\item Pour deux facteurs, $B = B' \times B''$, $\varphi' = f' g''$, $\varphi'' = f'' g'$ : si $f'$ commute aux produits binaires, la composante $B'$ de $\varphi(X', X'')$ est un produit de $X'$ et de $\varphi'(X'')$, de projections $\varepsilon'_{X'} \circ f'(\mathrm{pr}')$ et $f'(\mathrm{pr}'')$ ; de même, si $f''$ y commute, la composante $B''$ est un produit de $\varphi''(X')$ et de $X''$.
+\end{enumerate}
+\end{enonce}
+
+\begin{proof}
+(1) Un adjoint à droite pleinement fidèle a une coünité inversible. L'identité triangulaire $\varepsilon_{k, f_k Y} \circ f_k(\eta_{k, Y}) = 1$ montre alors que $f_k(\eta_{k, Y})$ est l'inverse de $\varepsilon_{k, f_k Y}$ ; avec $Y = g_i X$, c'est $\lambda_{kki}(X)$. L'autre identité, $g_j(\varepsilon_{j, X}) \circ \eta_{j, g_j X} = 1$, montre que $\eta_{j, g_j X}$ est l'inverse de $g_j(\varepsilon_{j, X})$, et $\lambda_{kjj}(X) = f_k(\eta_{j, g_j X})$ est inversible.
+
+(2) C'est la définition de $\lambda'$.
+
+(3) Par~(2) de l'énoncé précédent, la composante $B'$ de $\varphi(X', X'')$ est un produit de $f'g'(X')$ et de $f'g''(X'')$ ; remplacer la première projection par sa composée avec l'isomorphisme $\varepsilon'_{X'}$ donne encore un produit, de facteurs $X'$ et $\varphi'(X'')$. De même pour $B''$.
+\end{proof}
+
+\begin{enonce}[Page 7, « ou $I$ fini »\piste{19-comonad-matrix-product-base}]
+Il existe des adjonctions $f_i \dashv g_i$, avec $I$ à deux éléments, pour lesquelles la composante $j$ de $\varphi((X_i))$ n'est isomorphe au produit des $\varphi_{ji}(X_i)$ pour aucun choix d'isomorphisme.
+\end{enonce}
+
+\begin{proof}
+Prenons $I = \{0, 1\}$, $A = B_0 = B_1$ la catégorie des ensembles, $f_i(Y) = \{0,1\} \times Y$ et $g_i(X) = X^{\{0,1\}}$, l'adjonction étant la curryfication, et $X_0 = X_1 = \ast$. Alors $g_i(\ast) = \ast$, $\prod_i g_i(X_i) = \ast$ et la composante $j$ de $\varphi(X)$ est $\{0,1\} \times \ast$, à deux éléments, tandis que $\prod_i \varphi_{ji}(X_i) = (\{0,1\} \times \ast)^2$ en a quatre.
+\end{proof}
+
+\begin{remarque}
+L'hypothèse de la page, que les $f_j$ commutent aux produits indexés par $I$, est celle qui sert, et elle est suffisante. Des deux exemples qu'elle en donne, le premier est juste --- un foncteur exact à gauche commute aux produits finis --- mais le second ne l'est pas : un adjoint à gauche ne commute pas en général aux produits finis, et l'exemple ci-dessus en est un pour lequel la formule $\mathrm{pr}_j\,\varphi((X_i)) = \prod_i \varphi_{ji}(X_i)$ est fausse avec $I$ fini. La lecture reprend la parenthèse de la page (« ce qui est automatique si $I$ est fini, ou si les $f_j$ sont exacts ») ; il faut l'exactitude, ou directement la commutation aux produits.
+\end{remarque}
+
+\begin{remarque}
+Les formules (3.9) ne demandent aucune hypothèse : elles décrivent les composées de la coünité et de la comultiplication avec les projections, et c'est seulement pour en déduire que ces données \emph{sont} une matrice, c'est-à-dire qu'elles déterminent $\varphi$ et $\delta$, qu'il faut la commutation des $f_j$ aux produits. Les cas \q{dégénérés} de la page 8, $i = j$ ou $j = k$, sont, pour des $g_i$ pleinement fidèles, ceux où $\lambda_{kji}$ est un isomorphisme ; c'est ce qui ne laisse, pour deux facteurs, que $\lambda'$ et $\lambda''$. Pour la formule $\varphi(X', X'') = (X' \times \varphi'(X''), \varphi''(X') \times X'')$, il faut encore que $f'$ et $f''$ commutent aux produits binaires, ce que la page tient de son hypothèse générale.
+\end{remarque}
+
 \begin{enonce}[Pages 14 et 15\lie{4}]
 Soient $C$ une catégorie de Grothendieck, $U$ un générateur de $C$ et $R = \mathrm{End}_C(U)$. Le foncteur $\operatorname{Hom}_C(U, -) : C \to \mathbf{Mod}_R$, à valeurs dans les $R$-modules à droite, est pleinement fidèle, et son adjoint à gauche $- \otimes_R U$ est exact.
 \end{enonce}
@@ -95,4 +153,4 @@ Toute double flèche $f$-scindée est une double flèche dont l'image a un noyau
 Pour un générateur seul, la page affirme une équivalence $C \simeq \mathbf{Mod}_R$ ; seul le plongement pleinement fidèle est acquis, et c'est la forme que la lecture retient.
 \end{remarque}
 
-\noindent Ne sont pas démontrés ici : la Conclusion des pages~4 à~6 (adjonctions vérifiant la condition~C et comonades), que la même réserve atteint ; la reconstruction de l'adjonction à partir d'une comonade ; l'énoncé de Morita (équivalence si et seulement si $U$ est petit et projectif) ; la décomposition en matrice de la comonade d'une adjonction sur une base produit (pages~7 à~11)\piste{19-comonad-matrix-product-base} ; les chaînes de $n$ adjoints successifs entre topos de préfaisceaux (pages~79 et~80)\piste{19-adjoint-chains-length-n}.
+\noindent Ne sont pas démontrés ici : la Conclusion des pages~4 à~6 (adjonctions vérifiant la condition~C et comonades), que la même réserve atteint ; la reconstruction de l'adjonction à partir d'une comonade ; l'énoncé de Morita (équivalence si et seulement si $U$ est petit et projectif) ; les relations de coünité et de coassociativité entre les $\lambda_{kji}$, que la page renonce à écrire, et la description de $A$ par les quadruplets $(X', X'', u', u'')$ et les triangles (3.16) (pages~9 et~10)\piste{19-comonad-matrix-product-base} ; les chaînes de $n$ adjoints successifs entre topos de préfaisceaux (pages~79 et~80)\piste{19-adjoint-chains-length-n}.
