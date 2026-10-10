@@ -1,0 +1,393 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+% Charter and Menlo (macOS); elsewhere, XCharter and DejaVu Sans Mono, from which they derive.
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{\setmainfont{XCharter}}
+\IfFontExistsTF{Menlo}{\setmonofont{Menlo}[Scale=0.82]}{\setmonofont{DejaVu Sans Mono}[Scale=0.82]}
+\usepackage{polyglossia}\setmainlanguage{english}\setotherlanguage{french}
+\usepackage{microtype}
+\usepackage[a4paper,margin=27mm]{geometry}
+\usepackage{booktabs,longtable,array}
+\usepackage{setspace}\setstretch{1.1}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newcommand{\q}[1]{“#1”}
+% Grothendieck's own French words, quoted from the page.
+\newcommand{\fr}[1]{\textfrench{#1}}
+% A folder, a batch, a page: the address of every claim.
+\newcommand{\cote}[1]{\mbox{no.\,#1}}
+\newcommand{\lot}[3]{\href{https://grothendieck.commutator.io/\##1/#2/p#3}{#1, batch #2, p.~#3}}
+% The file of the verified proof, once per section.
+\newcommand{\verifie}[1]{\footnote{Proof verified: \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/#1.lean}{\texttt{lean/Grothendieck/\detokenize{#1}.lean}}.}}
+\definecolor{frise}{HTML}{2F4DA8}
+% A lead: a statement of the folder that the Findings tab of the site holds to be
+% possibly absent from the literature, candidate or not yet searched --- not
+% proved here, and not established as new. The lozenge links to its entry.
+\definecolor{piste}{HTML}{B53D1D}
+\newcommand{\piste}[1]{\,\href{https://grothendieck.commutator.io/findings/\##1}{\textcolor{piste}{\ensuremath{\blacklozenge}}}}
+% Below the part title: the letters of the fonds that date and situate the part.
+\newcommand{\lettres}[1]{{\small #1\par}\medskip}
+% Below the letters, where relevant: formalisations outside the project that touch the theme of the part.
+\newcommand{\ailleurs}[1]{{\small\textit{Elsewhere:} #1\par}\medskip}
+\newcommand{\lie}[1]{\,\href{https://grothendieck.commutator.io/timeline/\#works}{\textcolor{frise}{\ensuremath{\blacklozenge}\,\textup{#1}}}}
+\theoremstyle{plain}
+\newtheorem*{enonce}{Statement}
+\newtheorem{lemme}{Lemma}[section]
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem*{remarque}{Remark}
+\raggedbottom\emergencystretch=1.5em
+
+\title{\Large Homotopy theory and test categories in Grothendieck's Montpellier manuscripts: statements proved in Lean~4\\[4pt]
+\normalsize An extract of the annex \q{Statements of the modernised readings proved}}
+\author{Michel Hua\\ \small Independent researcher, Paris\\ \small \texttt{michel@commutator.io}}
+\date{\small October 2026}
+
+\begin{document}
+\maketitle
+
+\noindent The modernised readings of the Grothendieck fonds at the University of Montpellier restate his working notes in present-day language and notation; derived from the transcriptions, they can be wrong. This document is the part of the annex \q{Statements of the modernised readings proved} devoted to homotopy theory and test categories (around 1976 on the map of the mathematics of the fonds), which covers folders 106, 114, 158 and 104. The statements are those of the modernised readings, not of the sheets. Each proof written here follows a proof checked mechanically in the Lean~4 proof assistant against the mathlib library, whose file is given in a footnote to the title of each section; it establishes that the statement holds under the hypotheses as written, not that the reading is faithful to the page. Each section gives the context on the sheet, the statement as the reading gives it, preceded by the definitions it leaves implicit, its proof, then remarks --- superfluous or necessary hypotheses, counterexamples, corrections to the reading or to the page --- and the list of the statements of the folder that are not proved here. References such as \lot{106}{1}{9} point to the page on the project's website. The red lozenge \textcolor{piste}{\ensuremath{\blacklozenge}} marks statements that the Findings tab of the site lists as leads: statements of the folder that may be absent from the published literature, neither established results nor claims of priority; the lozenge links to the entry, which says what was searched and what would settle it. None of the statements proved here is a conjecture of Grothendieck's.
+
+\bigskip
+
+\lettres{The letter to Daniel Quillen of 19 February 1983, continued until the 23rd, opens \emph{Pursuing Stacks} (\lot{134-2}{1}{14}); folder 114 is dated to that year. The last dated letter in the fonds on these questions is Ronald Brown's reply of 16 April 1991, on multiple groupoids and the Teichmüller groupoid (\lot{119}{15}{282}), contemporary with folder 158.}
+\ailleurs{OpenAI's repository \emph{math.\ Mathematical manuscripts and supporting proof artifacts produced by an internal OpenAI model} (\url{https://github.com/openai/math}, published on 6 October 2026, commit \texttt{adc7f12}; consulted on 10 October 2026, commit \texttt{fd4aeeb}, update of 7 October)\footnote{A repository of 719 manuscripts produced by an internal model, not peer-reviewed, partially formalised in Lean~4. The scope of the formalisations cited here is the one described by its pages \texttt{lean/docs/008.md} and \texttt{lean/docs/312.md}.} announces the homotopy hypothesis for the weak globular $\infty$-groupoids of every Grothendieck coherator, in the convention of Ara and Henry --- a hypothesis whose \q{yoga} is set out in the postscript of a 1975 letter, filed with those to Lawrence Breen (\lot{134-2}{3}{42}) ---, and Henry's conjecture on pushouts. Only the theorem on elementary expansions is formalised there: for every coherator in this convention and every model with cellular boundary, attaching an $(n+1)$-disc along its source $n$-face induces a weak equivalence. The semi-model structure and the comparison with the homotopy theory of spaces are not, and the project has not run this code. The statements of folders 106, 114, 158 and 104 proved below are of another scale: lemmas on cofibration categories, basic localizers, finite monoids and categories of \q{models}, which do not touch the hypothesis itself.}
+
+%======================================================================
+\section[Folder 106: cofibration categories, weak lifting and Brown's factorisation]{Folder 106: cofibration categories, weak lifting and Brown's factorisation\protect\verifie{Folder106}}\label{sec:106}
+
+Folder 106, \emph{\fr{[Champs (stacks) 3] : notes manuscrites (s.d.)}} (handwritten notes, undated), sixteen pages that the inventory dates \q{\fr{[à partir de 1982]}} (from 1982 onwards) and files in the group \q{Autour de Pursuing stacks}, consists of eight notepad sheets between which sheets of computer listing paper are interleaved, some of them bearing the printing dates 24 and 25~August 1982. It opens with \q{\fr{Soit $(\mathcal{C}, W, \mathrm{cof})$ une catégorie satisfaisant à C1 : C3 de Baues}} (let $(\mathcal{C}, W, \mathrm{cof})$ be a category satisfying Baues's C1--C3), constructs the cofibrant replacement and invokes the \q{weak lifting lemma} (\lot{106}{1}{1}); page~9 factorises a weak equivalence between cofibrant objects and notes in the margin \q{\fr{On utilise $y \in \mathcal{C}_{\mathrm{cof}}$ ici}} (we use $y \in \mathcal{C}_{\mathrm{cof}}$ here) (\lot{106}{1}{9}); page~11 writes: \q{\fr{Mais je doute qu'il ne suffise d'inverser les équiv.\ faibles \emph{cofibrantes}, pour que les équiv.\ faibles deviennent inversibles !}} (but I doubt that inverting the \emph{cofibrant} weak equivalences suffices to make the weak equivalences invertible!) (\lot{106}{1}{11}).
+
+\begin{definition}
+A \emph{cofibration category} (in Baues's sense; French \emph{catégorie à cofibrations}) is a category $\mathcal C$ with an initial object $\emptyset$, equipped with two classes of arrows, the weak equivalences $W$ and the cofibrations $\mathrm{cof}$, satisfying axioms C1 to C3 as the reading recalls them: C1, isomorphisms are in $W$ and in $\mathrm{cof}$, composites of cofibrations are cofibrations, and $W$ satisfies two-out-of-three; C2, for a cofibration $c : b \to a$ and an arrow $u : b \to y$, the pushout $a \vee_b y$ exists, the arrow $y \to a \vee_b y$ is a cofibration, and a weak equivalence if $c$ is one, and the arrow $a \to a \vee_b y$ is a weak equivalence if $u$ is one; C3, every arrow factorises as a cofibration followed by a weak equivalence. An object $x$ is \emph{cofibrant} if $\emptyset \to x$ is a cofibration. We write $W_0 = W \cap \mathrm{cof}$.
+\end{definition}
+
+\begin{enonce}[Cofibrant replacement and weak lifting, page 1]
+For every object $x$, there exists $\alpha_x : \widetilde x \to x$ in $W$ with $\widetilde x$ cofibrant. Let $f : x \to y$, and let $\alpha_x : \widetilde x \to x$, $\alpha_y : \widetilde y \to y$ be in $W$ with $\widetilde x$ and $\widetilde y$ cofibrant. There exist $i : \widetilde y \to \widetilde y'$ in $\mathrm{cof} \cap W$, $\alpha'_y : \widetilde y' \to y$ in $W$ with $\alpha_y = \alpha'_y\, i$, and $\widetilde f : \widetilde x \to \widetilde y'$ with $\alpha'_y \widetilde f = f \alpha_x$.
+\end{enonce}
+
+\begin{enonce}[Factorisation, page 9]
+Let $x, y$ be cofibrant and $f : x \to y$ in $W$. Factorising $(f, 1_y) : x \sqcup y \to y$ as a cofibration $x \sqcup y \to \bar x$ followed by a weak equivalence $\alpha : \bar x \to y$, and writing $i$ and $g$ for the composites of $x \to x \sqcup y$ and $y \to x \sqcup y$ with $x \sqcup y \to \bar x$, one has $\alpha i = f$, $\alpha g = 1_y$ and $i, g \in \mathrm{cof} \cap W$.
+\end{enonce}
+
+\begin{enonce}[The doubt dispelled, page 11]
+If all objects of $\mathcal C$ are cofibrant, the functor $W_0^{-1}\mathcal C \to W^{-1}\mathcal C$ is an isomorphism of categories.
+\end{enonce}
+
+\begin{lemme}\label{lem:106-cof}
+If $x$ is cofibrant and $i : x \to z$ is a cofibration, then $z$ is cofibrant.
+\end{lemme}
+
+\begin{proof}
+By initiality, $\emptyset \to z$ is the composite of $\emptyset \to x$ and $i$, which is a cofibration by C1.
+\end{proof}
+
+\begin{lemme}\label{lem:106-somme}
+Let $p : a \to y$ and $q : b \to y$, with $b$ cofibrant. The coproduct $a \sqcup b$ exists; factorise $(p, q) : a \sqcup b \to y$ by C3 as a cofibration $c : a \sqcup b \to z$ followed by $w : z \to y$ in $W$, and write $j_a$, $j_b$ for the composites of $c$ with the coprojections of $a$ and of $b$. Then $w j_a = p$, $w j_b = q$, $j_a$ is a cofibration, and $j_b$ is one if $a$ is cofibrant.
+\end{lemme}
+
+\begin{proof}
+The coproduct $a \sqcup b$ is the pushout of $\emptyset \to b$ and $\emptyset \to a$; since $\emptyset \to b$ is a cofibration, it exists by C2, and the coprojection $a \to a \sqcup b$ is a cofibration. Hence $j_a$ is one by C1. The equalities $w j_a = p$ and $w j_b = q$ follow from $wc = (p, q)$. If $a$ is cofibrant, the same square, read the other way round, makes $b \to a \sqcup b$ a cofibration, and $j_b$ is one.
+\end{proof}
+
+\begin{proof}[Proof of the cofibrant replacement and of the weak lifting]
+By C3, $\emptyset \to x$ factorises as a cofibration $\emptyset \to \widetilde x$ followed by $\alpha_x : \widetilde x \to x$ in $W$; by initiality, the cofibration is the arrow $\emptyset \to \widetilde x$, and $\widetilde x$ is cofibrant.
+
+For the lifting, apply Lemma~\ref{lem:106-somme} to $a = \widetilde y$, $b = \widetilde x$, $p = \alpha_y$ and $q = f \alpha_x$; this is the factorisation of $(\alpha_y, f\alpha_x) : \widetilde y \vee \widetilde x \to y$ that the reading proposes. Set $\widetilde y' = z$, $i = j_a$, $\alpha'_y = w$ and $\widetilde f = j_b$. Then $i$ is a cofibration, because $\widetilde x$ is cofibrant; $\alpha'_y \in W$; $\alpha'_y\, i = \alpha_y$ and $\alpha'_y \widetilde f = f\alpha_x$. Since $\alpha'_y$ and $\alpha'_y\, i = \alpha_y$ are in $W$, so is $i$, by two-out-of-three. Finally $\widetilde y'$ is cofibrant by Lemma~\ref{lem:106-cof}, since $\widetilde y$ is.
+\end{proof}
+
+\begin{proof}[Proof of the factorisation]
+Apply Lemma~\ref{lem:106-somme} to $a = x$, $b = y$, $p = f$ and $q = 1_y$, and set $\bar x = z$, $\alpha = w$, $i = j_a$, $g = j_b$. Then $\alpha i = f$ and $\alpha g = 1_y$; $i$ is a cofibration because $y$ is cofibrant, and $g$ is one because $x$ is. Since $\alpha$ and $\alpha g = 1_y$, an isomorphism, are in $W$, $g \in W$ by two-out-of-three; since $\alpha$ and $\alpha i = f$ are in $W$, $i \in W$.
+\end{proof}
+
+\begin{proof}[Proof of the statement of page 11]
+Let us first show that every functor $F : \mathcal C \to \mathcal D$ that inverts the arrows of $W_0$ inverts those of $W$. Let $f : x \to y$ be in $W$; $x$ and $y$ are cofibrant, and the factorisation of page~9 gives $f = \alpha i$ and $\alpha g = 1_y$ with $i, g \in W_0$. Then $F(g)$ is invertible and $F(\alpha) F(g) = 1$, so $F(\alpha) = F(g)^{-1}$ is invertible, and so is $F(f) = F(\alpha) F(i)$.
+
+Let $Q_0 : \mathcal C \to W_0^{-1}\mathcal C$ and $Q : \mathcal C \to W^{-1}\mathcal C$ be the localisation functors. Since $W_0 \subseteq W$, $Q$ inverts the arrows of $W_0$, and the universal property of $Q_0$ gives a unique $\bar F : W_0^{-1}\mathcal C \to W^{-1}\mathcal C$ such that $\bar F Q_0 = Q$. By what precedes, $Q_0$ inverts the arrows of $W$, whence a unique $\bar G : W^{-1}\mathcal C \to W_0^{-1}\mathcal C$ such that $\bar G Q = Q_0$. Then $\bar G \bar F Q_0 = Q_0$ and $\bar F \bar G Q = Q$, and uniqueness in the two universal properties gives $\bar G \bar F = \mathrm{id}$ and $\bar F \bar G = \mathrm{id}$.
+\end{proof}
+
+\begin{remarque}
+In the weak lifting, the hypothesis $\alpha_x \in W$ is not used, and $\widetilde y$ cofibrant serves only to make $\widetilde y'$ cofibrant, which the reading uses without saying so when it places $[i]^{-1}[\widetilde f]$ in $W_{\mathrm{cof}}^{-1}\mathcal C_{\mathrm{cof}}$.
+\end{remarque}
+
+\begin{remarque}
+In the factorisation, $f \in W$ serves only to put $i$ in $W$: for any $f$ between cofibrant objects, one still obtains $i \in \mathrm{cof}$, $g \in \mathrm{cof} \cap W$ and $\alpha \in W$. This is K.~S. Brown's factorisation lemma (1973), a classical result.
+\end{remarque}
+
+\begin{remarque}
+Of C2, only the existence of pushouts along a cofibration and the stability of cofibrations under cobase change are used; the two clauses of C2 on weak equivalences, and the clause of C1 that makes isomorphisms cofibrations, are used nowhere.
+\end{remarque}
+
+\begin{remarque}
+The doubt of page~11 is unfounded when all objects are cofibrant, which is the setting of the page since the reduction on page~5; the argument is the reading's, and all its ingredients are on page~9.
+\end{remarque}
+
+\noindent Not proved here: the equivalence $W_{\mathrm{cof}}^{-1}\mathcal C_{\mathrm{cof}} \simeq W^{-1}\mathcal C$ of page~1 and the proposition of page~5 ($\Psi$ is an equivalence if and only if condition~$(\star)$ holds); the reduction to $\mathcal C_{\mathrm{cof}}$; the categories $\mathrm{Ch}_0(x, y)$ and $\widetilde{\mathcal C}$, and the fullness of the functor $q$ (pages~5 to~9); the corrected definition $\mathrm{Ch}'_0(x, y)$, the comparison of factorisations and the criterion $(\star\star)$ of pages~11 to~15\piste{106-section-criterion-span-faithfulness}, whose sufficiency the folder does not establish.
+
+%======================================================================
+\section[Folder 114: basic localizers and Proposition 4]{Folder 114: basic localizers and Proposition 4\protect\verifie{Folder114}}\label{sec:114}
+
+Folder 114, \emph{\fr{Asphéricité : notes manuscrites (s.d.)}} (Asphericity: handwritten notes, undated), five pages that the inventory dates \q{[1983]} and files in the group \q{Autour de Pursuing stacks}, contains four handwritten sheets and one typed page, numbered~350, of \emph{Pursuing Stacks}. Page~2 asks the question \q{\fr{$0$-connexité totale $\Rightarrow$ asphéricité totale ?}} (total $0$-connectedness $\Rightarrow$ total asphericity?) (\lot{114}{1}{2}); page~350 answers it with Proposition~4, preceded by the admission \q{After a minute's thought, I feel very silly} and followed by a three-line proof, whose implication signs were left blank and which breaks off at \q{namely} (\lot{114}{1}{3}). The page states the proposition for \q{$W$ a basic localizer satisfying Loc 4)} and calls $W_0$ \q{the coarsest basic localizer satisfying Loc 4)}.
+
+\begin{definition}
+Fix a universe; a small category is a category whose objects and arrows form sets of this universe, and $e$ denotes the point category. For functors $v : A \to B$ and $w : B \to C$ and an object $c$ of $C$, write $A_{/c}$ for the category of pairs $(a, \gamma : wv(a) \to c)$, $B_{/c}$ for that of pairs $(b, \beta : w(b) \to c)$, and $v_{/c} : A_{/c} \to B_{/c}$ for the functor $(a, \gamma) \mapsto (v(a), \gamma)$. A \emph{basic localizer} (French \emph{localisateur fondamental}) is a class $W$ of functors between small categories that satisfies:
+\begin{enumerate}
+\item[LA] $W$ is weakly saturated: it contains the identities, satisfies two-out-of-three, and if $i : A \to B$ and $r : B \to A$ satisfy $ri = 1_A$ and $ir \in W$, then $r \in W$;
+\item[LB] if $A$ has a final object, $A \to e$ is in $W$;
+\item[LC] if, for $v : A \to B$ and $w : B \to C$, all the $v_{/c}$ are in $W$, then $v \in W$.
+\end{enumerate}
+These are the usual axioms; the reading gives only a description of them --- \q{weakly saturated}, \q{the functors $A \to e$ for every $A$ having a final object}, \q{a condition of the type of Quillen's Theorem~A} --- which they make precise. A small category $A$ is \emph{$W$-aspherical} if $A \to e$ is in $W$, and \emph{totally $W$-aspherical} if moreover, for all objects $a, b$ of $A$, the category $A_{/a \times b}$ of elements of the presheaf $a \times b$ --- the pairs $(c, (p, q))$ with $p : c \to a$, $q : c \to b$ --- is $W$-aspherical. A presheaf $X$ is \emph{$0$-connected} if $A_{/X}$ is non-empty and connected. We write $\pi_0(A)$ for the set of connected components of $A$, $W_0$ for the class of functors $u$ such that $\pi_0(u)$ is bijective, and $W_\infty$ for the class of functors that belong to every basic localizer.
+\end{definition}
+
+\begin{enonce}[Proposition 4, page 3]
+Let $A$ be a small category, $W$ a basic localizer, and $W_\infty$ the finest (smallest) basic localizer. The following conditions are equivalent:
+\begin{enumerate}
+\item[(i)] $A$ is totally $W_\infty$-aspherical;
+\item[(ii)] $A$ is totally $W$-aspherical;
+\item[(iii)] $A$ is non-empty and, for all objects $a, b$ of $A$, the product $a \times b$ is $0$-connected in $\hat A$.
+\end{enumerate}
+The proof rests on the bracketing $W_\infty \subseteq W \subseteq W_0$, where $W_0$ is the coarsest (largest) basic localizer, the one for which a functor is an equivalence as soon as it induces a bijection on connected components.
+\end{enonce}
+
+\begin{lemme}\label{lem:114-W0}
+The class $W_0$ is a basic localizer.
+\end{lemme}
+
+\begin{proof}
+Since $\pi_0$ is a functor, LA reduces to statements about bijections. Identities are bijective, and if two of the maps $\pi_0(u)$, $\pi_0(u')$, $\pi_0(u'u)$ are bijective, so is the third. If $ri = 1_A$ and $\pi_0(i)\pi_0(r)$ is bijective, $\pi_0(r)$ is injective by the second relation and surjective by the first. For LB, a category with a final object is non-empty and connected, and $\pi_0(A) \to \pi_0(e)$ is a bijection between two one-element sets.
+
+For LC, suppose all the $\pi_0(v_{/c})$ are bijective. For $b \in B$, choose, by surjectivity of $\pi_0(v_{/w(b)})$, an object $(a_b, \gamma_b)$ of $A_{/w(b)}$ whose image lies in the component of $(b, 1_{w(b)})$, and set $s(b) = [a_b] \in \pi_0(A)$. First, $s(v(a)) = [a]$ for every $a \in A$: in $A_{/wv(a)}$, the objects $(a_{v(a)}, \gamma_{v(a)})$ and $(a, 1)$ have their images in the component of $(v(a), 1)$; by injectivity, they lie in the same component, and the forgetful map $(a', \gamma) \mapsto a'$ sends a zigzag of $A_{/wv(a)}$ to a zigzag of $A$. Next, $s(b) = s(b')$ for every arrow $\beta : b \to b'$. Composition with $w(\beta)$ defines functors $A_{/w(b)} \to A_{/w(b')}$ and $B_{/w(b)} \to B_{/w(b')}$ compatible with $v_{/\cdot}$; the image of $(a_b, w(\beta)\gamma_b)$ under $v_{/w(b')}$ therefore lies in the component of $(b, w(\beta))$, which the arrow $\beta : (b, w(\beta)) \to (b', 1)$ connects to that of $(b', 1)$, where the image of $(a_{b'}, \gamma_{b'})$ also lies. By injectivity, $(a_b, w(\beta)\gamma_b)$ and $(a_{b'}, \gamma_{b'})$ lie in the same component of $A_{/w(b')}$, whence $[a_b] = [a_{b'}]$. Consequently $s$ is constant along the zigzags of $B$ and induces $\bar s : \pi_0(B) \to \pi_0(A)$ with $\bar s \circ \pi_0(v) = \mathrm{id}$: $\pi_0(v)$ is injective. It is surjective, since the forgetful functor sends the zigzag of $B_{/w(b)}$ joining $(v(a_b), \gamma_b)$ to $(b, 1)$ to a zigzag from $v(a_b)$ to $b$ in $B$.
+\end{proof}
+
+\begin{lemme}\label{lem:114-asph}
+A small category is $W_0$-aspherical if and only if it is non-empty and connected. It is totally $W_0$-aspherical if and only if it satisfies~(iii).
+\end{lemme}
+
+\begin{proof}
+The map $\pi_0(A) \to \pi_0(e)$ takes values in a one-element set; it is bijective if and only if $\pi_0(A)$ has exactly one element, that is, if $A$ is non-empty and connected. For the second assertion, being totally $W_0$-aspherical therefore means being non-empty and connected, with each $A_{/a \times b}$ non-empty and connected, which implies~(iii). Conversely, under~(iii), $A$ is non-empty, and for $a, b \in A$ an object $(c, (p, q))$ of $A_{/a \times b}$ provides the zigzag $a \xleftarrow{p} c \xrightarrow{q} b$; $A$ is therefore connected. This is the page's \q{(iii) implies that $A$ is $0$-connected}.
+\end{proof}
+
+\begin{lemme}\label{lem:114-min}
+The class $W_\infty$ is a basic localizer, contained in every basic localizer.
+\end{lemme}
+
+\begin{proof}
+The second assertion is the definition. Each of the axioms LA to LC says that certain functors are in $W$ as soon as certain others are; if the latter are in $W_\infty$, they are in every basic localizer $W$, hence so are the former, which are therefore in $W_\infty$.
+\end{proof}
+
+\begin{proof}[Proof of (i) $\Rightarrow$ (ii), and of (ii) $\Rightarrow$ (iii) if $W \subseteq W_0$]
+Total asphericity increases with the localizer: if $W \subseteq W'$, a totally $W$-aspherical category is totally $W'$-aspherical, the functors to $e$ involved being in $W$, hence in $W'$. Since $W_\infty$ is contained in $W$ (Lemma~\ref{lem:114-min}), (i) implies~(ii). If $W \subseteq W_0$, (ii) implies that $A$ is totally $W_0$-aspherical, that is,~(iii) by Lemma~\ref{lem:114-asph}.
+\end{proof}
+
+\begin{proof}[Two basic localizers not contained in $W_0$]
+The class of all functors trivially satisfies LA to LC. Let $W_{-1}$ be the class of functors $u : A \to B$ such that $A$ is empty if and only if $B$ is. It contains the identities, and two-out-of-three holds, the equivalence \q{$A$ empty $\iff$ $B$ empty} being transitive. If $ri = 1_A$, $A$ and $B$ are empty together, via $i$ and via $r$. A category with a final object is not empty. For LC, if $A$ is not empty, neither is $B$; if $b \in B$, $B_{/w(b)}$ contains $(b, 1)$, so $A_{/w(b)}$ is not empty, and neither is $A$. The functor from the discrete category with two objects to $e$ is in both classes and is not in $W_0$.
+
+For $W = W_{-1}$, let $A = B(\mathbb Z/2)$ be the category with one object $\ast$ whose endomorphism monoid is the group $G = \mathbb Z/2$. It is non-empty, and $A_{/\ast \times \ast}$ contains $(\ast, (1, 1))$: $A$ is totally $W_{-1}$-aspherical. But the objects of $A_{/\ast \times \ast}$ are the pairs $(p, q) \in G \times G$, and an arrow $g : (p', q') \to (p, q)$ satisfies $(p', q') = (pg, qg)$, so that $p^{-1}q$ is constant on each component; $(1, 1)$ and $(1, \sigma)$, where $\sigma$ is the non-identity element, lie in distinct components. Hence~(iii) fails, and so does~(i): by Lemmas~\ref{lem:114-W0} and~\ref{lem:114-min}, $W_\infty \subseteq W_0$, and (i) would imply~(iii) by what precedes. For the class of all functors, the empty category is totally aspherical and does not satisfy~(iii).
+\end{proof}
+
+\begin{remarque}
+The inclusion $W \subseteq W_0$ is false for basic localizers defined by LA to LC alone, and with it the implications (ii) $\Rightarrow$ (iii) and (ii) $\Rightarrow$ (i); the page imposes the condition \q{satisfying Loc 4)}, without which the statement does not hold. Condition Loc~4) is defined elsewhere in \emph{Pursuing Stacks}, outside this folder; whether it excludes the two counterexamples is not settled here.
+\end{remarque}
+
+\begin{remarque}
+The reading identifies $W_0$ with the class of functors that are bijective on $\pi_0$; this class is a basic localizer (Lemma~\ref{lem:114-W0}), but that it is the coarsest of those satisfying Loc~4) is not established here.
+\end{remarque}
+
+\begin{remarque}
+The implication (iii) $\Rightarrow$ (i), which the page asserts, is refuted in the literature by the category of cubes (Maltsiniotis 2005, Cisinski 2006).
+\end{remarque}
+
+\noindent Not proved here: that $W_\infty$ is the class of the usual weak homotopy equivalences, a theorem of Cisinski (2004) on which the page relies; the implication (iii) $\Rightarrow$ (i), not treated; the conditions and the complement on strict test categories that precede the proposition, page~3; the programme and the list of candidate test categories (pages~1 and~2); the NB on aspherical functors, dominance and the separation criterion (page~4); the two counterexamples on the aspherical part of a modelizer (pages~4 and~5) and the question of page~5.
+
+%======================================================================
+\section[Folder 158: Proposition 1 on finite monoids]{Folder 158: Proposition 1 on finite monoids\protect\verifie{Folder158}}\label{sec:158}
+
+Folder 158, \emph{\fr{[Autour des Dérivateurs] : notes manuscrites (s.d.)}} ([Around derivators]: handwritten notes, undated), eighty-five pages that the inventory dates \q{\fr{[vers 1990-1991]}} (around 1990--1991), is a working campaign around a single implication: if every $0$-connected object of the topos of presheaves on a small category $X$ is $1$-connected, is $X$ cofiltered? Pages~44 to~53, under their own numbering~1 to~8, treat the finite case, and open with the case of a monoid, that is, of a category with one object. Proposition~1 is stated on page~44 and proved up to the top of page~46, which concludes \q{\fr{cqfd}} (QED) (\lot{158}{3}{44}). Below the statement, a first paragraph, struck through with two long diagonals, begins with \q{\fr{L'unicité de $p$ est claire}} (the uniqueness of $p$ is clear); the proof then resumes through pseudo-cofilteredness, realises $M$ as a monoid of endomorphisms of a set $E$ --- the word \q{\fr{fini}} (finite) before $E$ is crossed out --- and writes: \q{\fr{comme $E_0$ est fini, on en conclut que $u(E_0) = E_0$}} (as $E_0$ is finite, we conclude that $u(E_0) = E_0$) (\lot{158}{3}{45}).
+
+\begin{definition}
+A monoid $M$ is \emph{pseudo-cofiltered} if, for all $u, v \in M$, there exist $u', v' \in M$ such that $uu' = vv'$; it is \emph{cofiltered} if it is pseudo-cofiltered and, for all $u, v \in M$, there exists $w \in M$ such that $uw = vw$. The \emph{enveloping group} of $M$ is \emph{trivial} if every monoid morphism from $M$ to a group is trivial. The first definition is the one the reading draws from page~55, where the manuscript gives its equivalent; the last is the universal property of the enveloping group.
+\end{definition}
+
+\begin{enonce}[Proposition 1, pages 44 to 46]
+Let $M$ be a finite monoid whose enveloping group is trivial and which is pseudo-cofiltered. Then there exists $p \in M$ such that $up = p$ for every $u \in M$ --- in particular $p^2 = p$ --- and $M$ is cofiltered.
+\end{enonce}
+
+\begin{lemme}\label{lem:158-etape1}
+In a finite pseudo-cofiltered monoid $M$, there exists $p$ such that, for every $u \in M$, $p = uv$ for some $v \in M$: $p$ belongs to all the principal right ideals $uM$.
+\end{lemme}
+
+\begin{proof}
+We show, by induction on the cardinality of a finite subset $F \subseteq M$, that there exists $p$ belonging to $uM$ for every $u \in F$; applied to $F = M$, this is the statement. For $F$ empty, $p = 1$ will do. Suppose the assertion holds for $F$, with an element $p$, and let $a \in M$. By pseudo-cofilteredness applied to $p$ and $a$, there exist $p', v'$ such that $pp' = av'$. The element $pp'$ lies in $aM$; and for $u \in F$, if $p = uv$, then $pp' = u(vp')$ lies in $uM$. The element $pp'$ therefore works for $F \cup \{a\}$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition 1]
+Let $p$ be given by Lemma~\ref{lem:158-etape1}, and let $E_0 = pM$ be the set of the $py$, $y \in M$. It is the image of $p$ in the left regular representation of $M$, where $u$ acts on $M$ by $x \mapsto ux$, and $E_0$ is finite since $M$ is.
+
+\emph{Each $u$ maps $E_0$ onto itself.} Let $u \in M$. First, $E_0 \subseteq uE_0$: the lemma applied to the element $up$ yields $v$ such that $p = upv$, and for $y \in M$, $py = upvy = u\bigl(p(vy)\bigr)$ lies in $uE_0$. Next, $uE_0$, the image of $E_0$ under a map, has at most as many elements as $E_0$; a subset of the finite set $uE_0$ that has at least as many elements as it is equal to it, and hence $uE_0 = E_0$. The map $x \mapsto ux$ is thus a surjection of the finite set $E_0$ onto itself, hence a bijection.
+
+\emph{The morphism to a group.} Write $\varphi(u)$ for the permutation $x \mapsto ux$ of $E_0$. We have $\varphi(1) = \mathrm{id}$ and, by associativity, $\varphi(uu') = \varphi(u) \circ \varphi(u')$: $\varphi$ is a monoid morphism from $M$ to the group of permutations of $E_0$. Since the enveloping group of $M$ is trivial, $\varphi(u) = \mathrm{id}$ for every $u$. Applying this to the element $p = p \cdot 1$ of $E_0$, we obtain $up = p$ for every $u \in M$.
+
+\emph{Conclusion.} For $u = p$, $p^2 = p$. Finally, $M$ is pseudo-cofiltered by hypothesis, and for $u, v \in M$, $w = p$ satisfies $uw = p = vw$: $M$ is cofiltered.
+\end{proof}
+
+\begin{remarque}
+Finiteness is used twice: in Lemma~\ref{lem:158-etape1}, to pass from two ideals $uM$ to all of them, and to turn the inclusion $E_0 \subseteq uE_0$ into an equality. The page's \q{\fr{comme $E_0$ est fini}} (as $E_0$ is finite) holds because $E_0 = pM$ is contained in $M$, and not for an arbitrary set $E$, before which the page crossed out \q{\fr{fini}}.
+\end{remarque}
+
+\begin{remarque}
+Without pseudo-cofilteredness, the statement is false: the monoid $\{1, a, b\}$ where $ax = a$ and $bx = b$ for every $x$ is finite, with trivial enveloping group, and has no element $p$ such that $ap = p = bp$. Without finiteness, it is false for the monoid $\mathrm{Ep}(E)$ of surjections of an infinite set $E$, which the reading studies in its section~6. (Not proved here.)
+\end{remarque}
+
+\begin{remarque}
+The element $p$ is not unique, and the Rees kernel $MpM = pM$ is not necessarily reduced to a point. Let $M = \{1, a, b\}$ with $x \cdot 1 = x$, $x \cdot a = a$, $x \cdot b = b$ for every $x$; this law is associative, with unit~$1$, pseudo-cofiltered ($ua = va$ for all $u, v$), with trivial enveloping group ($g(a) = g(ba) = g(b)g(a)$ forces $g(b) = 1$, and likewise $g(a) = 1$); we have $ua = a$ and $ub = b$ for every $u$, neither of the two is a two-sided zero ($ab = b$), and the intersection of the ideals $MxM$ is $\{a, b\}$.
+\end{remarque}
+
+\begin{remarque}
+The relation $up = p$ for every $u$ makes $p$ a right zero, and the left ideal $Mp = \{p\}$ is minimal; a gloss calling $p$ a \q{left zero} and the Rees kernel \q{a single point} would be false. The struck-through paragraph of page~44 asserted the uniqueness of $p$, identifying $pp'$ with $p'p$; the preceding example refutes it.
+\end{remarque}
+
+\noindent Not proved here, for lack of a theory of the fundamental group of a small category: Proposition~1 of pages~19 and~20 (a presentation of the fundamental group of a pseudo-cofiltered category with a smallest object); the construction of a $0$-connected category that is not $1$-connected (pages~21 to~41); Proposition~2, marked \q{(??)}, and the corollary marked \q{\fr{Faux !}} (False!) (pages~46 to~49); the second version via the local systems $H_x$ (pages~50 to~53); the properties of the monoids $\mathrm{Ep}(E)$ and $\mathrm{Mon}(E)$ (pages~55 to~58); the computations of asphericity and of suspensions on pages~60 to~83.
+
+%======================================================================
+\section[Folder 104: categories of models, three examples, a globular complex]{Folder 104: categories of models, three examples, a globular complex\protect\verifie{Folder104}}\label{sec:104}
+
+Folder 104, \emph{\fr{[Champs (stacks) 1] : copies de notes manuscrites (s.d.)}} (copies of handwritten notes, undated), sixteen undated pages, belongs to the group \q{Autour de \emph{Pursuing stacks}}, which the inventory dates \q{1968-1984}. Pages~6 to~16, under their own numbering~1 to~6, are a continuous write-up: a category $M$ of \q{\fr{modèles}} (models) is replaced by ordered sets --- the set $\mathbb N$ of its isomorphism classes, the sets $I_n$ of subobjects, the type maps $\tau_n$ --- from which it is reconstructed. Page~6 states the two hypotheses --- in the second, \q{\fr{automorphisme}} is crossed out and replaced by \q{\fr{end.}} --- and asserts that the map $(*)$ below \q{\fr{est injective par (i)(ii)}} (is injective by (i)(ii)) (\lot{104}{1}{6}); page~7 adds \q{\fr{On a donc (par (ii)) $\tau_n^{-1}(n) = \{d_n\}$}} (we therefore have (by (ii)) $\tau_n^{-1}(n) = \{d_n\}$) (\lot{104}{1}{7}); page~10 asserts the converse and gives three examples, with their counts in the margin (\lot{104}{1}{10}). Among the trial sheets that precede, the one on page~4 bears a sequence $\mathbb Z[F_{n+1}] \to \mathbb Z[F_n] \xrightarrow{t_n - s_n} \mathbb Z[F_{n-1}]$ and, under a brace, the computation $t_{n-1}(t_n y - s_n y) - s_{n-1}(t_n y - s_n y) = 0$ (\lot{104}{1}{4}).
+
+\begin{definition}
+Let $M$ be a category such that (i)~every arrow of $M$ is a monomorphism, and (ii)~every endomorphism of an object of $M$ is the identity. For an object $D$, a subobject of $D$ is a class of monomorphisms with target $D$, two monomorphisms $u, v$ being equivalent if each factors through the other; subobjects are ordered by factorisation, and $u(D')$ denotes the subobject defined by $u : D' \to D$. For a subobject $x$, we also write $x$ for an object representing it. The isomorphism classes of objects of $M$ are preordered by the existence of an arrow.
+\end{definition}
+
+\begin{enonce}[Pages 6 and 7]
+\begin{enumerate}
+\item The map $(*)$: $\operatorname{Hom}_M(D', D) \to \widetilde D$, $u \mapsto u(D')$, is injective.
+\item If $f : D' \to D$ and $g : D \to D'$, then $f$ is an isomorphism with inverse $g$; the preorder on classes is therefore an order.
+\item If $x \leq y$ are two subobjects of $D$ and there exists an arrow $y \to x$ --- in particular if $x$ and $y$ have the same type ---, then $x = y$. Consequently $\tau_n^{-1}(n) = \{d_n\}$, and $\tau_n$ is strictly increasing.
+\end{enumerate}
+\end{enonce}
+
+\begin{enonce}[Page 10, the converse: one step]
+Let $f$ be a bijective map from a set to itself such that $f \circ f = f$. Then $f = \mathrm{id}$. In particular, the composition law $u_{d_n} \circ u_{d_n} = u_{d_n}$ forces $u_{d_n} = \mathrm{id}$.
+\end{enonce}
+
+\begin{enonce}[Page 10, the three examples]
+\begin{enumerate}
+\item The category of the $\Delta_n = \{0, \dots, n\}$ and strictly increasing maps satisfies (i) and (ii), and the set $\mathfrak P^*(\Delta_n)$ of non-empty subsets of $\Delta_n$ has $2^{n+1} - 1$ elements.
+\item The faces of $[0,1]^n$, which fix some coordinates at $0$ or at $1$ and leave the others free, number $\sum_{k} \binom nk 2^k = 3^n$.
+\item On $I_n = (\Delta_{n-1} \times \{\pm 1\}) \sqcup \{d_n\}$, the relation \q{$(k, \varepsilon) \leq (k', \varepsilon')$ if and only if $(k, \varepsilon) = (k', \varepsilon')$ or $k < k'$, and $d_n$ the greatest element} is an order; $I_n$ has $2n + 1$ elements, exactly two of them of type $k$ for each $k < n$. With $\{\pm 1\}$ given the chaotic preorder, the product is only a preorder: $(k, +1)$ and $(k, -1)$, which are distinct, are each below the other.
+\end{enumerate}
+\end{enonce}
+
+\begin{enonce}[Page 4, the globular complex]
+Let $s_n, t_n : F_n \to F_{n-1}$ and $s_{n-1}, t_{n-1} : F_{n-1} \to F_{n-2}$ be maps such that $s_{n-1}s_n = s_{n-1}t_n$ and $t_{n-1}s_n = t_{n-1}t_n$. Then the morphisms $t_n - s_n : \mathbb Z[F_n] \to \mathbb Z[F_{n-1}]$ and $t_{n-1} - s_{n-1} : \mathbb Z[F_{n-1}] \to \mathbb Z[F_{n-2}]$ induced on the free abelian groups compose to zero.
+\end{enonce}
+
+\begin{proof}[Proof of the statement of pages 6 and 7]
+(1) Let $u, v : D' \to D$ be such that $u(D') = v(D')$. Since $u(D') \leq v(D')$, there exists $\theta : D' \to D'$ with $v\theta = u$. By (ii), $\theta = \mathrm{id}$, hence $u = v$. Hypothesis (i) serves only to make $u$ and $v$ monomorphisms, that is, to give a meaning to $u(D')$.
+
+(2) The composite $gf$ is an endomorphism of $D'$, and $fg$ an endomorphism of $D$; by (ii), they are identities.
+
+(3) Write $x \leq y$ in the form $a_x = a_y \circ j$, where $a_x, a_y$ are the monomorphisms with target $D$ that represent $x$ and $y$, and $j : x \to y$. Let $g : y \to x$. The composite $j \circ g$ is an endomorphism of $y$, hence the identity by (ii), and $a_y = a_y \circ j \circ g = a_x \circ g$: $a_y$ factors through $a_x$, that is, $y \leq x$, and $x = y$. If $\tau_n(x) = n$, $x$ is isomorphic to $D_n$, which represents the greatest subobject $d_n$; we have $x \leq d_n$ and an arrow $d_n \to x$, hence $x = d_n$. If $x < y$, there is an arrow $x \to y$, hence $\tau_n(x) \leq \tau_n(y)$; equality would give an arrow $y \to x$, hence $x = y$; thus $\tau_n(x) < \tau_n(y)$ in the ordered set of classes.
+\end{proof}
+
+\begin{proof}[Proof of the step of the converse]
+For every $x$, $f(f(x)) = f(x)$, and the injectivity of $f$ gives $f(x) = x$.
+\end{proof}
+
+\begin{proof}[Proof of the three examples]
+(1) A strictly increasing map is injective, hence left cancellable: if $fg = fh$, then $g = h$ pointwise. A strictly increasing map from $\Delta_n$ to itself is the identity: it is the unique strictly increasing map from $\{0, \dots, n\}$ onto a subset of $\Delta_n$ with $n + 1$ elements, namely $\Delta_n$ itself, and the identity is one. The subsets of $\Delta_n$ number $2^{n+1}$, one of which is empty.
+
+(2) A face is the datum, for each coordinate, of the value $0$, the value $1$, or nothing: it is a map from $\{1, \dots, n\}$ to a three-element set, and there are $3^n$ of them --- what the margin calls a partial section of $\Delta_{n-1} \times \{\pm 1\} \to \Delta_{n-1}$. Counting the faces according to the number $k$ of fixed coordinates, one obtains $\binom nk 2^k$ faces for each $k$, and $\sum_k \binom nk 2^k = (2 + 1)^n$ by the binomial formula; this is the formula of page~5.
+
+(3) The relation is reflexive. It is transitive: $d_n$ is above everything and below itself only, and on $\Delta_{n-1} \times \{\pm 1\}$ the composite of two relations \q{equal, or with strictly smaller first index} is again one. It is antisymmetric: if $(k, \varepsilon) \leq (k', \varepsilon')$ and $(k', \varepsilon') \leq (k, \varepsilon)$ with distinct elements, we would have $k < k'$ and $k' < k$. The cardinality is $2n + 1$, and the elements of type $k$ are $(k, +1)$ and $(k, -1)$. For the chaotic preorder, $(k, \varepsilon) \leq (k', \varepsilon')$ is equivalent to $k \leq k'$, and $(k, +1)$, $(k, -1)$ are each below the other.
+\end{proof}
+
+\begin{proof}[Proof of the statement of page 4]
+Passing from $F$ to $\mathbb Z[F]$ is functorial: the map induced by a composite is the composite of the induced maps. The composite $(t_{n-1} - s_{n-1})(t_n - s_n)$ therefore equals $\mathbb Z[t_{n-1}t_n] - \mathbb Z[t_{n-1}s_n] - \mathbb Z[s_{n-1}t_n] + \mathbb Z[s_{n-1}s_n]$, and the globular identities cancel the terms in pairs.
+\end{proof}
+
+\begin{remarque}
+Example~3 is proved in the form that the reading substitutes for the page: $\Delta_{n-1}$ instead of $\Delta_n$, which would give $2n + 3$ elements and not the $2n + 1$ of the margin; the order on the cells of the disc instead of the product with a chaotic preorder, which is not antisymmetric.
+\end{remarque}
+
+\begin{remarque}
+Hypothesis~(i) plays no part either in the order on classes or in $u_{d_n} = \mathrm{id}$, which (ii) alone gives; in $(*)$, which the page says is injective \q{\fr{par (i)(ii)}} (by (i)(ii)), it serves only to define $u(D')$.
+\end{remarque}
+
+\begin{remarque}
+Example~1 shows that the category of the $\Delta_n$ and increasing injections has no degeneracies. For the examples, only the computation on the sets $I_n$ is proved; the identification of the subobjects of the categories of cubes and of discs with these sets is the reading's (not proved here).
+\end{remarque}
+
+\begin{enonce}[Page 6, note of the reading: well-foundedness]
+Let $M$ be a category satisfying (ii). For two objects $X, Y$, write $X \prec Y$ if there exists an arrow $X \to Y$ and no arrow $Y \to X$.
+\begin{enumerate}
+\item Every arrow $X \to Y$ that is not an isomorphism gives $X \prec Y$; if $M$ is skeletal, every arrow that is not an identity gives it.
+\item If $M$ is skeletal and $\prec$ is well-founded, the ordinal rank $\deg$ for $\prec$ is a degree that every arrow other than an identity strictly increases, and $M$ is a direct category: a Reedy structure whose lowering class consists of the identities and whose raising class consists of all arrows.
+\item Conversely, if there exists a map $\deg$ from the objects to a well-founded ordered set that every arrow other than an identity strictly increases, then $\prec$ is well-founded.
+\item Hypotheses (i) and (ii) do not suffice: the category defined by the ordered set $\mathbb Z$ satisfies them, and $\prec$ is not well-founded on it.
+\end{enumerate}
+\end{enonce}
+
+\begin{proof}
+(1) If $g : Y \to X$, then $gf$ and $fg$ are endomorphisms, hence identities by (ii), and $f$ would be an isomorphism. If $M$ is skeletal and $f$ is an isomorphism, $X = Y$, and $f$, an endomorphism of $X$, is the identity by (ii); an arrow that is not an identity is therefore not an isomorphism.
+
+(2) The rank of an object $X$ is the smallest ordinal strictly greater than the ranks of the objects $Z \prec X$; it is defined by well-founded recursion, and $Z \prec X$ implies $\deg Z < \deg X$. By (1), every arrow $X \to Y$ other than an identity gives $\deg X < \deg Y$. The condition on the lowering class is vacuous, since it contains only identities. Finally, every arrow $f$ can be written in exactly one way as an identity followed by an arrow: if $f = p \circ i$ with $i$ an identity, the intermediate object is the source of $f$ and $p = f$.
+
+(3) If $X \prec Y$, an arrow $f : X \to Y$ is not an identity, since $X = Y$ would give the arrow $\mathrm{id}_X$ from $Y$ to $X$; hence $\deg X < \deg Y$, and $\prec$ is contained in the inverse image under $\deg$ of a well-founded order, which is well-founded.
+
+(4) Between two objects of $\mathbb Z$ there is at most one arrow: (i) and (ii) are immediate. For every $m$, $m - 1 \prec m$, and $\mathbb Z$ therefore has no minimal element for $\prec$.
+\end{proof}
+
+\begin{remarque}
+The reading states that a category satisfying (i) and (ii) is direct in Reedy's sense \q{as soon as} the order on $\mathbb N$ is well-founded: the example of $\mathbb Z$ shows that this condition is indeed an additional hypothesis, and not a consequence of (i) and (ii). The Reedy structure is the one defined by the mathlib library. Hypothesis~(i) is not used in it; it only says that the raising class consists of monomorphisms. The skeletal category is what page~9 calls \q{\fr{rigide}} (rigid); without it, an isomorphism between two distinct objects would increase no degree, and it is the order on classes, not on objects, that is well-founded.
+\end{remarque}
+
+\begin{enonce}[Page 10, example 1: the simplicial identities]
+For $0 \leq i \leq n + 1$, write $\delta_i : \Delta_n \to \Delta_{n+1}$ for the strictly increasing map that misses $i$.
+\begin{enumerate}
+\item For $i \leq j$, $\delta_{j+1} \circ \delta_i = \delta_i \circ \delta_j$.
+\item Every strictly increasing map $f : \Delta_m \to \Delta_{n+1}$ with $m \leq n$ can be written $\delta_i \circ g$, with $g : \Delta_m \to \Delta_n$ strictly increasing.
+\item The category of the $\Delta_n$ and strictly increasing maps is skeletal, every arrow other than an identity strictly increases $n$, and it is a direct category in the sense of the preceding statement.
+\end{enumerate}
+\end{enonce}
+
+\begin{proof}
+(1) Both sides send $k \in \Delta_n$ to $k$ if $k < i$, to $k + 1$ if $i \leq k < j$, and to $k + 2$ if $k \geq j$: this is a case-by-case check on the inequalities between $i$, $j$ and $k$. It is the first simplicial identity, which mathlib proves in the simplex category; it is redone here in the category without degeneracies.
+
+(2) Since $f$ is injective, and a surjection from $\Delta_m$, which has $m + 1 \leq n + 1$ elements, onto $\Delta_{n+1}$, which has $n + 2$, is impossible, $f$ misses some $i$. Each $f(k)$, being distinct from $i$, can be written $\delta_i(g(k))$ for a unique $g(k)$, and $g$ is strictly increasing because $\delta_i$ is, and therefore reflects the order.
+
+(3) An arrow $\Delta_m \to \Delta_n$ is injective, hence $m \leq n$. If $\Delta_m \simeq \Delta_n$, then $m \leq n$ and $n \leq m$. If $m = n$, the arrow is an endomorphism, hence the identity (example~1 above). The degree $n$, with values in the integers, therefore satisfies the hypothesis of part~(3) of the preceding statement, and part~(2) applies.
+\end{proof}
+
+\begin{remarque}
+Neither the simplicial identities nor the factorisation through faces are on the page; they justify the reading's identification of presheaves on this category with semi-simplicial sets: by (2) and an induction on $n - m$, every arrow is a composite of faces, and (1) gives, on passing to presheaves, the relations $d_i d_j = d_{j-1} d_i$ for $i < j$. The induction itself is not formalised here, only its step. In this example $\mathbb N = \mathbf N$, as page~10 says of the \q{\fr{cas que j'ai en tête}} (cases I have in mind), and the well-foundedness is that of the integers.
+\end{remarque}
+
+\noindent Not proved here: the decomposition of every arrow of example~1 as a composite of faces beyond the step above; the equivalence of $M$ with the category $M_0$ reconstructed from $(\mathbb N, I_n, \tau_n, \varphi_{n,n'})$ (page~9), and the converse of page~10 beyond the step above; the sphericity of the realisations $|I_n^*|$ and the regularity of the $I_n^*$ in the three examples; the question of regular sequences on page~11; the admissible presheaves and the $M$-pinned ordered sets of pages~12 to~16\piste{104-pinned-posets-nonsingular-presheaves}, with the equivalence of page~13; the conditions $(C_i)$ of page~4 on equivalences of globular systems.
+
+%======================================================================
+\section{What is not proved}\label{sec:reste}
+
+Table~\ref{tab:reste} gives, for each of the four folders, the statements not proved here: first those that the choice of the folder targeted, then the other statements of the reading. The red lozenge \textcolor{piste}{\ensuremath{\blacklozenge}} marks leads from the Findings tab: statements that may be absent from the literature and are not established.
+
+\begingroup\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{1.2cm}>{\raggedright\arraybackslash}p{6.4cm}>{\raggedright\arraybackslash}p{6.4cm}}
+\caption{Statements of the four folders not proved here.}\label{tab:reste}\\\toprule
+Folder & Targeted statements, not proved & Other statements of the reading\\\midrule\endfirsthead
+\toprule Folder & Targeted statements, not proved & Other statements of the reading\\\midrule\endhead
+106 & --- & $W_{\mathrm{cof}}^{-1}\mathcal C_{\mathrm{cof}} \simeq W^{-1}\mathcal C$ and the proposition of p.~5; $\mathrm{Ch}_0$, $\widetilde{\mathcal C}$, the fullness of $q$; $\mathrm{Ch}'_0$ and the criterion $(\star\star)$ (pp.~11--15)\piste{106-section-criterion-span-faithfulness}. \\
+114 & $W_\infty$ as the class of the usual weak equivalences (Cisinski); (iii)~$\Rightarrow$~(i), refuted in the literature. & $W_0$ as the coarsest under Loc~4); the beginning of p.~3; pp.~1--2; the NB and dominance (p.~4); the counterexamples and the question (pp.~4--5). \\
+158 & --- & The fundamental group (pp.~19--20); the $0$-connected, non-$1$-connected category (pp.~21--41); Proposition~2 \q{(??)} and the corollary \q{\fr{Faux !}}; pp.~50--53; $\mathrm{Ep}(E)$ and $\mathrm{Mon}(E)$; pp.~60--83. \\
+104 & The decomposition of every arrow of example~1 as a composite of faces (only the step is proved). & $M \simeq M_0$ and the converse (pp.~9--10); sphericity and regularity of $|I_n^*|$; p.~11; pp.~12--16 (pinned ordered sets)\piste{104-pinned-posets-nonsingular-presheaves}; the conditions $(C_i)$ of p.~4; the subobjects of the examples. \\\bottomrule
+\end{longtable}
+\endgroup
+
+Two of the errors found in the statements of the readings concerned modern glosses, in folders~158 and~114, the latter through the omission of a hypothesis stated on the page. In folder~104, well-foundedness is an additional hypothesis, which $\mathbb Z$ viewed as a category shows to be necessary. The remaining statements mostly await classical theories: the fundamental group of a category, the weak equivalences of small categories.
+
+%======================================================================
+\section*{Declaration on the use of artificial intelligence}\addcontentsline{toc}{section}{Declaration on the use of artificial intelligence}
+
+The statements proved here are taken from the modernised readings of the fonds, themselves derived from transcriptions produced by language models (Claude Opus~5, Opus~5.5, Fable~5 and Fable~5.1, from Anthropic) under editorial rules written by the author; these transcriptions have not been read in full by a person. The formal proofs were written in the Lean~4 proof assistant by Claude Opus~5.5, under the author's direction, and their correctness is checked mechanically by Lean against the mathlib library; the written proofs of this annex are derived from them by the same model. The choice of statements, the corrections made to the readings and the text have been reviewed by the author, who takes full responsibility for them. Lean guarantees that a statement holds under the hypotheses as written; it guarantees neither that the statement faithfully renders the sheet, nor that it is new. This English version was translated from the French annex by Claude Opus~5.5.
+
+\end{document}
