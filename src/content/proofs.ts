@@ -235,14 +235,14 @@ export const PROOFS: Proof[] = [
     folder: '106',
     batch: 1,
     page: '9',
-    name: 'Brown factorisation; W₀⁻¹C ≅ W⁻¹C',
+    name: 'Brown factorisation; W₀⁻¹C ≅ W⁻¹C; the criterion (⋆⋆)',
     statement:
       'In a cofibration category (Baues’s C1–C3): cofibrant replacement, weak lifting, and Brown’s factorisation of a weak equivalence between cofibrant objects; when every object is cofibrant, inverting W₀ = W ∩ cof inverts W, so W₀⁻¹C ≅ W⁻¹C.',
     found:
-      'Nothing false; the last statement answers the doubt the page raises on p. 11, as the reading says. Hypotheses unused: α_x ∈ W in the weak lifting, f ∈ W except for i ∈ W, the two weak-equivalence clauses of C2 and « isomorphisms are cofibrations ».',
+      'Nothing false; the last statement answers the doubt the page raises on p. 11, as the reading says. Hypotheses unused: α_x ∈ W in the weak lifting, f ∈ W except for i ∈ W, the two weak-equivalence clauses of C2 and « isomorphisms are cofibrations ». On pp. 11–15, with every object cofibrant, q′ from the spans x → ỹ ← y to W⁻¹C is faithful, full and an isomorphism with no further condition, so the criterion (⋆⋆) always holds and the finding’s « iff » holds with both sides true; the sufficiency is proved without comparing two sections.',
     verdict: 'holds, more generally',
     lean: 'lean/Grothendieck/Folder106.lean',
-    theorems: ['remplacementCofibrant', 'relevementFaible', 'factorisationDeBrown', 'localisation_W₀_iso_localisation_W'],
+    theorems: ['remplacementCofibrant', 'relevementFaible', 'factorisationDeBrown', 'localisation_W₀_iso_localisation_W', 'critere_of_fidele', 'fidele', 'fidele_iff_critere', 'plein', 'qFunctor_iso'],
   },
   {
     folder: '114',
