@@ -1,0 +1,1220 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 100
+% (pages 1-52, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% (pp. 1-20), batch-02.fr.tex (pp. 21-40) or batch-03.fr.tex (pp. 41-52).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% The folder was read whole, all three batches; every batch is transcribed.
+%
+% What the folder is. Notes in blue ink (pp. 2-44, 51-52) and a four-leaf
+% typescript (pp. 47-50) around one statement: over a locally noetherian S,
+% with U open and every residue characteristic on T = S - U equal to p, an
+% abelian scheme over U extends to S as soon as its p-divisible group does,
+% and the extension is unique — the functor A |-> (A_U, A[p^oo], id) is fully
+% faithful when U meets every connected component, an equivalence under
+% geometric unibranchness on T and finiteness of the normalisation (p. 2).
+% The other leaves of the folder — an English typescript on quotients by
+% group actions (pp. 5-15, 21-37), EGA IV errata (pp. 11, 17, 41-45), the
+% cover of Publ. Math. IHES 32 (p. 19), two letters (pp. 29, 39) — are the
+% paper he wrote on or kept with it; only his pencil on the first is noted.
+%
+% Notation fixed for the whole document. A[p^oo] for what he writes T_p(A)
+% (the p-divisible group, not the Tate module); triples (A_U, M, phi) with
+% phi : M|_U -> A_U[p^oo] an isomorphism; S_u for the "lieu d'algébricité"
+% of a homomorphism u of p-divisible groups (his T on pp. 3 and 20, renamed
+% because T is already the complement of U); \mathcal{M} for the formal
+% moduli of p. 28 (his M, renamed because M is the p-divisible group); in
+% the typescript, H = (H_n) a p-divisible group over the trait S, G_eta[p^oo]
+% for his wavy-underlined G_eta. S', S'' = S' x_S S' are reused by the pages
+% for different auxiliary bases in different sections; each section recalls
+% which.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+% — p. 2: « U rencontre toutes les composantes connexes (i.e. U dense, i.e.
+%   prof_T(S) >= 1) » joins three inequivalent conditions; the reading keeps
+%   the first, which is what pp. 3 and 20 actually use and suffices.
+% — p. 3: the Complément holds at points of residue characteristic l (= p),
+%   by Serre-Tate; the reading says so; the existence of the closed
+%   subscheme rests on « Invariants 1.2 », not identified.
+% — p. 4: « M gpe p-div. sur T » read « sur S »; X read S; the mark on T_p
+%   (\natural in the transcription) dropped.
+% — p. 8: « prouver que c'est un isom. » — for S geometrically unibranch and
+%   not normal the argument gives at most a finite, birational, radicial
+%   S' -> S; the reading says so.
+% — p. 22: « S'_1 -> S' fini radiciel » read S'_1 -> S.
+% — p. 28: W(k) is the right base only for k perfect (Cohen ring otherwise).
+% — p. 30: « quotient intègre B de A » read « de R ».
+% — p. 34: « S'_i -> S immersion fermée » needs S' -> S unramified, true for
+%   the S' built on p. 32 (finite unions of the net P^alpha), not for an
+%   arbitrary finite S'; the first Lemma's gluing is footnoted (pinching).
+% — p. 34/36: the S_red Lemma has « lisse » struck; the proof of p. 36 needs
+%   it; the reading states the Lemma for smooth X^ (enough for abelian ones).
+% — p. 36: the Proposition is false for a non-complete local ring
+%   (countably many height-one primes); « complet », struck on the page, is
+%   restored, as the proof needs it.
+% — p. 47: Lemma 1's v(m,g) = u(m) + g is a homomorphism only if G is
+%   commutative (his pencil « G commutatif ? »); supplied.
+% — p. 51: phi factors through the centre of Z, not through Centr(Z) as
+%   written; case 2 needs the boxed hypothesis and G_red.
+% — p. 52: « H -i-> K » read H -> G; « modèle de Néron » of H_K is of
+%   finite type because G_K has none of G_m either (footnoted).
+%
+% Modern names given and footnoted as ours: Barsotti-Tate group (his own
+% term from 1970, absent from the pages), Serre-Tate theorem, Tate's theorem
+% and de Jong's extension to characteristic p (1998), p-adic criterion of
+% good reduction, Grothendieck existence theorem, Néron mapping property,
+% smoothening, Weil restriction, semistable reduction theorem (SGA 7 IX),
+% Chevalley's structure theorem, Baire category, Cohen structure theorem,
+% Ferrand pinching, Anantharaman's quotients.
+%
+% What the folder announces and never establishes: the essential
+% surjectivity of p. 2 in general (b) closes on a struck sketch, e) rests on
+% a Lemma he marks « Douteux », p. 16 breaks off, p. 18 stops on « Alors »);
+% the proof of the Lemma of p. 3 (a reference); Corollary 3 of p. 24 (Hom of
+% p-divisible groups formally unramified); most of the proof of p. 36;
+% p. 40's equivalences (« procédant comme plus haut »); the descent remarks
+% of pp. 42-44 (fragments); Lemma 3 of p. 49 (cited from « le séminaire de
+% l'an dernier »); Tate's theorem when the generic point has characteristic
+% p (the typescript says so itself); the typescript's Corollary (no proof).
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{100}
+\pages{1}{52}
+\dating{[à partir de 1967-1968]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Bonne réduction des variétés abéliennes via bonne réduction de Barsotti-Tate Tp (A) (base quelconque) : notes manuscrites (s.d.), copies de tapuscrit annoté (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Une \emph{variété abélienne} est la généralisation en dimension quelconque
+d'une courbe elliptique : un objet géométrique qui est en même temps un
+groupe commutatif. Quand ses équations sont à coefficients entiers, on peut
+les réduire modulo un nombre premier ; si l'objet réduit est encore une
+variété abélienne, on dit qu'il y a \emph{bonne réduction}. Plus
+généralement, on se donne une famille de variétés abéliennes paramétrée par
+un ouvert $U$ d'un espace $S$, et l'on demande si elle se prolonge sans
+dégénérer au-dessus des points de $S$ qui manquent.
+
+Pour le savoir, on regarde un échantillon de la famille : ses points de
+torsion. Les points d'ordre une puissance de $p$ forment une suite de petits
+groupes finis emboîtés, qu'on appelle aujourd'hui un \emph{groupe
+$p$-divisible} ou \emph{groupe de Barsotti--Tate}. Lorsque $p$ est inversible,
+ces petits groupes sont de simples ensembles de points sur lesquels agit un
+groupe de Galois, et le critère classique de Néron, Ogg et Šafarevič dit que
+la bonne réduction se lit sur eux. Lorsque $p$ est justement la
+caractéristique des points qui manquent, ce sont des objets beaucoup plus
+fins, qui portent une partie infinitésimale ; et l'idée de ces feuillets est
+qu'ils en savent assez pour décider de tout : \emph{la famille se prolonge si
+et seulement si son groupe $p$-divisible se prolonge}, et le prolongement est
+unique. Un thermomètre placé à l'intérieur d'un objet ne donne d'habitude
+qu'une information partielle ; ici, à condition de regarder la torsion de la
+bonne caractéristique, il donne tout.
+
+Le titre du dossier dit l'ambition : une \emph{base quelconque}. Sur une base
+de dimension un --- un trait, l'analogue d'un disque autour d'un point ---,
+l'énoncé découle d'un théorème de Tate, et un tapuscrit annoté rangé dans le
+dossier en donne la démonstration. Grothendieck veut passer de là à une base
+localement noethérienne arbitraire. Les instruments sont ceux de sa géométrie
+algébrique : la \emph{descente}, qui recolle un objet construit sur un
+revêtement de la base ; la \emph{géométrie formelle}, qui construit d'abord
+l'objet sur des voisinages infinitésimaux de plus en plus gros, puis le rend
+algébrique ; les \emph{espaces de modules}, qui transforment une famille de
+variétés abéliennes en une application vers un espace qui les classe ; et,
+de façon inattendue, un argument de Baire : une réunion dénombrable de
+fermés rares ne remplit pas un anneau local complet.
+
+Le dossier n'arrive pas au bout. Le théorème de pleine fidélité (l'unicité du
+prolongement) est démontré ; l'existence est ramenée, par une suite de
+réductions dont certaines ne sont qu'esquissées, à des énoncés de descente et
+d'algébrisation qui occupent la seconde moitié des notes et qui sont souvent
+intéressants pour eux-mêmes. Le tapuscrit avoue la faiblesse de l'édifice :
+le théorème de Tate sur lequel tout repose n'était démontré qu'en
+caractéristique nulle. Les feuillets s'achèvent sur un lemme de sa main qui
+supprime une hypothèse du tapuscrit, et sur « On gagne ! ».
+
+\keywords{abelian scheme, Barsotti-Tate group, good reduction, Serre-Tate theorem, Tate's theorem on p-divisible groups, fpqc descent, effective epimorphism, formal moduli, algebraization of formal schemes, Grothendieck existence theorem, Néron model, semistable reduction, Weil restriction, smoothening, Baire category theorem}
+\end{resume}
+
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+L'inventaire date le dossier « à partir de 1967-1968 » et le range dans le
+groupe « Géométrie et topologie combinatoire » (dossiers 69 à 102, daté
+1976-[vers 1986]), dont le sujet n'est pas le sien.\footnote{Les lectures
+modernisées des dossiers 81, 88 et 89 du même groupe portent sur les cartes,
+les dessins d'enfants et des structures combinatoires finies ; aucune ne
+rencontre celui-ci, et on ne les cite plus. Le dossier contient aussi, au
+verso ou entre les feuillets de sa main, des pages qui ne sont pas de lui : un
+tapuscrit anglais sur les quotients d'un schéma par un groupe (pages 5 à 15,
+21 à 37), des listes d'errata d'EGA IV (pages 11, 17, 41 à 45), la couverture
+du numéro 32 des \emph{Publications mathématiques} (page 19), une lettre de
+L.~Illusie datée du 24 février 1968 (page 29) et une lettre à Dieudonné datée
+du 7 avril 1967 (page 39). On ne les résume pas ; on ne tire rien de leurs
+dates.}
+
+\begin{enumerate}
+  \item \emph{L'énoncé} (page 2, repris page 4) : le foncteur
+  $A \mapsto (A_U, A[p^\infty], \mathrm{id})$ est pleinement fidèle, et une
+  équivalence sous des hypothèses d'unibranchement.
+  \item \emph{La pleine fidélité} (pages 3 et 4, reprise page 20) : le lieu où
+  un homomorphisme de groupes $p$-divisibles est algébrique est un fermé qui
+  contient un voisinage de chacun de ses points de caractéristique $p$.
+  \item \emph{L'essentielle surjectivité}, par réductions successives (pages 6
+  à 18) : $S$ réduit, $S$ géométriquement unibranche, $S$ normal, $S$ réduit
+  par descente le long du normalisé, cas général par recollement.
+  \item \emph{La descente par un épimorphisme propre} (pages 21 à 24) : pleine
+  fidélité de la descente pour les schémas abéliens.
+  \item \emph{L'effectivité, et l'algébrisation des schémas abéliens formels}
+  (pages 26 à 38) : réduction à une base locale complète, construction formelle
+  par les modules formels, un théorème d'algébrisation à trois conditions
+  équivalentes, et l'argument de Baire qui le termine.
+  \item \emph{Le cas d'un schéma propre et plat quelconque} (pages 40 à 44) :
+  une remarque, et des remarques de descente en fragments.
+  \item \emph{Le cas d'un trait} (pages 47 à 52) : le tapuscrit « Modèles de
+  Néron et groupes $p$-divisibles », puis un lemme de sa main qui en supprime
+  une hypothèse.
+\end{enumerate}
+
+Les stations 4 à 6 sont les outils que réclame la station 3 : la réduction b)
+de la page 8 invoque le cas d'un trait, qui est la station 7 ; les réductions
+c) et d) des pages 10 à 14 demandent que les morphismes finis surjectifs
+soient de descente effective pour les schémas abéliens, ce que les pages 22 à
+38 entreprennent d'établir ; la réduction a) de la page 6 a besoin du lemme
+d'algébrisation « modulo le nilradical » des pages 34 à 36. Les feuillets ne
+font eux-mêmes aucun de ces renvois, sinon par les mots « Raynaud » et
+« Tate » qui reviennent d'un bout à l'autre ; ces liens sont notre lecture.
+
+\subsection*{Conventions, valables pour tout le dossier}
+
+$S$ est un schéma localement noethérien, $U \subset S$ un ouvert, $T = S - U$ le
+fermé complémentaire, et $p$ un nombre premier tel que tout point $t \in T$ ait
+un corps résiduel $k(t)$ de caractéristique $p$. Pour un schéma abélien $A$, on
+note $A[p^\infty] = (A[p^n])_n$ son groupe $p$-divisible.\footnote{Il écrit
+$T_p(A)$, la notation du module de Tate, pour le groupe $p$-divisible tout
+entier ; sur une base où $p$ n'est pas inversible, le module de Tate ne suffit
+pas, et c'est bien du groupe $p$-divisible qu'il s'agit (les « triples » de la
+page 2 contiennent un « groupe $p$-divisible $M$ »). Le titre de l'inventaire
+dit « Barsotti-Tate », nom que Grothendieck lui-même donnera à ces groupes
+(exposé au congrès de Nice, 1970) ; les feuillets disent « groupe
+$p$-divisible », le terme de Tate.} Un homomorphisme
+$v : A[p^\infty] \to B[p^\infty]$ est dit \emph{algébrique} s'il est induit par
+un homomorphisme de schémas abéliens $u : A \to B$ ; on note $S_v$ le lieu
+où il l'est (page 3).\footnote{Il appelle ce lieu $T$, comme le fermé
+complémentaire de $U$ ; on le renomme.} $\hat{\ }$ désigne une complétion
+formelle, $S_{\mathrm{red}}$ le sous-schéma réduit, $\mathcal{O}_{S,s}$ l'anneau
+local en $s$ et $S(s) = \mathrm{Spec}\,\mathcal{O}_{S,s}$. Les lettres $S'$,
+$S''= S' \times_S S'$, $S''' = S' \times_S S' \times_S S'$ désignent, d'une
+section à l'autre, des bases auxiliaires différentes, comme sur les pages ; on
+rappelle chaque fois laquelle.
+
+\pagerange{2}{2}
+\section*{L'énoncé (page 2)}
+
+\textbf{Théorème.} Soient $C$ la catégorie des schémas abéliens sur $S$, et
+$C'$ celle des triples $(A_U, M, \varphi)$, où $A_U$ est un schéma abélien sur
+$U$, $M$ un groupe $p$-divisible sur $S$ et
+$\varphi : M|_U \xrightarrow{\ \sim\ } A_U[p^\infty]$ un isomorphisme. Soit
+\[
+  F : C \longrightarrow C', \qquad
+  F(A) = \bigl(A \times_S U,\ A[p^\infty],\ \mathrm{id}\bigr).
+\]
+\begin{enumerate}
+  \item[1)] Si $U$ rencontre toutes les composantes connexes de $S$, $F$ est
+  pleinement fidèle.\footnote{La page ajoute en interligne « (i.e.\ $U$ dense
+  dans $S$, i.e.\ $\mathrm{prof}_T(S) \geq 1$) ». Les trois conditions ne sont
+  pas équivalentes : la troisième (aucun point associé de $\mathcal{O}_S$ dans
+  $T$, c'est-à-dire $U$ schématiquement dense) entraîne la deuxième, qui
+  entraîne la première, et aucune réciproque n'est vraie. C'est la
+  première --- la plus faible --- qu'utilise la démonstration de la page 3, et
+  elle suffit ; la page 4 dit d'ailleurs que le cas schématiquement dense est
+  le cas facile. Le dernier mot, « connexes », est mal formé.}
+  \item[2)] Si de plus $S$ est géométriquement unibranche en tout point de
+  $T$, et si le normalisé de $S_{\mathrm{red}}$ est fini sur $S$, $F$ est une
+  équivalence de catégories.\footnote{Le mot qui suit « Supposons » est
+  recouvert ; l'hypothèse est lue sur la ligne suivante (« $S'$ géom.\
+  unibranche ») et sur l'en-tête de la page 6, où elle est écrite en
+  entier : « Si $S$ géom.\ unibranche en les points de $S - U$ et si le
+  normalisé de $S_{\mathrm{red}}$ est fini sur $S$ ». Isolé sous le cadre,
+  « $\mathrm{prof}_T(S) \geq 2$ », sans attache.}
+\end{enumerate}
+
+Une condition de rechange, plus combinatoire, est essayée puis abandonnée.
+D'abord, biffée : pour tout $t \in T$, deux composantes irréductibles du
+localisé strict de $S$ en $t$ se rencontrent ailleurs qu'en son point fermé.
+Puis, non biffée mais inachevée : pour un morphisme fini surjectif
+$S' \to S$, on forme l'ensemble simplicial tronqué des composantes connexes
+\[
+  L_0 = \pi_0(S') \leftleftarrows L_1 = \pi_0(S'')
+  \;\substack{\leftarrow\\[-2pt]\leftarrow\\[-2pt]\leftarrow}\;
+  L_2 = \pi_0(S'''),
+\]
+et le sous-ensemble simplicial $K_\bullet$ des composantes dont l'image dans
+$S$ rencontre $U$ ; la condition b$'$) demande que la plus petite partie de
+$L_1$ contenant $K_1$ et stable par l'opération déduite des faces de $L_2$ soit
+$L_1$ tout entier.\footnote{« stable par “troisième face” », lecture
+incertaine. Le $S'$ renvoie aux « notations de a) », un alinéa a) qui est
+biffé ; on comprend un revêtement fini de $S$ par un schéma géométriquement
+unibranche, comme son normalisé. Le sens de la condition, qui est le nôtre :
+une donnée de descente le long de $S' \to S$ est une donnée sur $S''$ ; si
+elle n'est connue que sur l'image inverse de $U$, b$'$) dit que la
+compatibilité sur $S'''$ suffit à la propager à toutes les composantes de
+$S''$. La page s'arrête sur « Alors $F$ est une équivalence de
+catégories\ldots ».}
+C'est la forme que prendra la réduction d) des pages 12 et 14, où il faudra
+que $U''$ soit dense dans $S''$.
+
+\pagerange{3}{5}
+\section*{La pleine fidélité (pages 3 et 4)}
+
+La fidélité est connue : $u \mapsto u[p^\infty]$ est injectif, parce qu'un
+homomorphisme de schémas abéliens nul sur les fibres est nul (rigidité), et
+que sur un corps un homomorphisme qui tue tous les $A[p^n]$ se factorise par
+toutes les multiplications par $p^n$, donc est nul, $\mathrm{Hom}(A,B)$ étant
+un groupe abélien de type fini. Pour la plénitude, il faut montrer qu'un
+homomorphisme $v : A[p^\infty] \to B[p^\infty]$ défini sur $S$ et algébrique
+sur $U$ est algébrique sur $S$ ; l'unicité de l'homomorphisme $u$ qui
+l'induit, par la fidélité, fera le reste.
+
+\textbf{Lemme} (page 3). Soient $A$, $B$ deux schémas abéliens sur $S$ et
+$v : A[p^\infty] \to B[p^\infty]$. Il existe un sous-schéma fermé $S_v$ de $S$
+tel que, pour tout $S$-schéma $S'$, $v_{S'}$ soit induit par un homomorphisme
+$A_{S'} \to B_{S'}$ si et seulement si $S' \to S$ se factorise par
+$S_v$.\footnote{La page énonce le lemme pour un $u_\ell : T_\ell(A) \to
+T_\ell(B)$ et un nombre premier $\ell$ ; ici $\ell = p$, et la page 20 reprend
+l'énoncé avec $p$. Elle ne le démontre pas : « Cf Invariants 1.2
+(démonstration analogue) ». Nous n'identifions pas ce texte. La page 20
+ajoute que la formation de $S_v$ commute à tout changement de base
+(localement noethérien), et met « (cf.\ Serre) » au-dessus de « plus
+grand », lecture incertaine.}
+
+\textbf{Complément.} Si $t \in S_v$ et si $k(t)$ est de caractéristique $p$,
+alors $S_v$ contient un voisinage ouvert de $t$.
+
+C'est le théorème de Serre--Tate qui le donne, bien que la page 3 ne le dise
+pas.\footnote{La page 3 écrit « $T$ majore un voisinage ouvert de $t$ »,
+et la page 20 répète l'énoncé. La justification est la nôtre ; le théorème de
+Serre--Tate est nommé à la page 4, dans un argument biffé.} Sur
+$S_n = \mathrm{Spec}\,\mathcal{O}_{S,t}/\mathfrak{m}_t^{n+1}$, où $p$ est
+nilpotent, un homomorphisme de schémas abéliens est la même chose qu'un
+homomorphisme de leurs réductions au point fermé et de leurs groupes
+$p$-divisibles qui se correspondent ; comme $v_t$ est algébrique, $v_{S_n}$
+l'est pour tout $n$. L'idéal de $S_v$ est donc nul dans le complété de
+$\mathcal{O}_{S,t}$, donc dans $\mathcal{O}_{S,t}$, donc au voisinage de $t$.
+
+\textbf{Corollaire} (page 3). Si toute composante connexe de $S$ rencontre $U$
+et si $v|_U$ est algébrique, $v$ est algébrique.
+
+\emph{Démonstration.} Le sous-schéma fermé $S_v$ contient $U$ (hypothèse), et
+contient un voisinage de chacun de ses points situés dans $T$ (complément,
+puisque ces points sont de caractéristique $p$). Son idéal est donc nul au
+voisinage de chacun de ses points : $S_v$ est un sous-schéma à la fois ouvert
+et fermé, une réunion de composantes connexes de $S$. Toutes rencontrent
+$U \subset S_v$ ; donc $S_v = S$.\footnote{Avant cette conclusion, un essai
+par les composantes irréductibles, encadré et biffé de deux longs traits. La
+page souligne ou surligne tour à tour les $T$ de la conclusion, pour
+distinguer, semble-t-il, l'ensemble sous-jacent et le sous-schéma.}
+
+Cela démontre 1). La page 4 récrit l'énoncé --- triples, $T$ de
+caractéristiques résiduelles toutes égales à $p$, \emph{spécialisation}
+$U$ schématiquement dense ---,\footnote{Elle écrit « $M$ gpe $p$-div.\ sur
+$T$ », qu'on lit « sur $S$ » comme à la page 2, et
+$\varphi : T_p(A_U) \simeq M$, l'isomorphisme dans l'autre sens. Elle munit
+$T_p$ d'un petit signe en exposant, à chaque occurrence, peut-être une
+marque de complétion ; on ne le reprend pas. Elle note $X$ ce qui est
+clairement $S$.} puis la démonstration : si $U$ est schématiquement dense,
+cela résulte de la référence laissée en blanc « [\;] 1.2 » ; dans le cas
+général, on remplace $S$ par l'adhérence schématique $S_0$ de $U$, sur
+laquelle on dispose d'un homomorphisme $A_{S_0} \to B_{S_0}$ compatible avec
+$v$, et l'on remonte de $S_0$ à $S$ par Serre--Tate le long des voisinages
+infinitésimaux de $T$, puis par complétion et descente fidèlement
+plate.\footnote{Cette fin d'argument est encadrée et biffée de deux traits ;
+on n'en donne que le mouvement. Le corollaire de la page 3 la rend inutile.}
+
+\emph{La marge de la page 4.} Un bloc cerné, lourdement repris, dit que pour la
+pleine fidélité il suffit que $U$ soit dense, et évoque un contre-exemple
+obtenu en recollant les spectres de deux anneaux de valuation discrète
+complets, $U$ étant l'un des deux points maximaux ; il se termine sur « Y
+a-t-il des contre-exemples avec $S$ de dim.\ 2 ? ».\footnote{L'objet du
+contre-exemple ne se lit pas. Ce n'est pas la pleine fidélité : le corollaire
+de la page 3 s'applique à ce $S$, qui est connexe. Sur deux traits recollés en
+leurs points fermés, la base n'est pas géométriquement unibranche au point de
+recollement, et l'essentielle surjectivité y est en défaut --- deux schémas
+abéliens sur les deux traits dont les fibres spéciales ont des groupes
+$p$-divisibles isomorphes sans être isomorphes ne se recollent pas, alors que
+les triples se recollent. Cette lecture est la nôtre.}
+Au verso (page 5), un feuillet d'un tapuscrit anglais sur les quotients par
+un groupe porte quelques notes de lui au crayon.\footnote{Ce tapuscrit
+n'est pas de lui ; on ne le résume pas. Ses notes au crayon (pages 5, 7, 9,
+15 et 21) portent sur ce texte et non sur le dossier : une définition du
+quotient $X/R$ par le faisceau des invariants et les ouverts invariants,
+« I think sufficient if $\varphi$ is qu.\ cpct qu.\ sep. », une correction de
+lettre, « Dire : \emph{propre} et libre ».}
+
+\section*{L'essentielle surjectivité (pages 6 à 18)}
+
+On part d'un triple $(A_U, M, \varphi)$ et l'on cherche $A$. L'hypothèse
+est celle de 2) : $S$ géométriquement unibranche aux points de $T$, normalisé
+de $S_{\mathrm{red}}$ fini sur $S$. La page la dédouble aussitôt en une
+hypothèse de descente : pour $S' \to S$ convenable, l'image inverse $U'$
+(resp.\ $U''$) de $U$ rencontre toutes les composantes connexes de $S'$
+(resp.\ $S''$) --- de sorte que la pleine fidélité vaille sur $S'$ et $S''$.
+On peut supposer $S = \mathrm{Spec}\,\Lambda$ affine.
+
+\pagerange{6}{7}
+\subsection*{a) Réduction au cas $S$ réduit (page 6)}
+
+Soit $S_0 = S_{\mathrm{red}}$, et supposons trouvé sur $S_0$ un schéma abélien
+$A_0$ qui résout le problème pour le triple induit. Soit $T_n$ le $n$-ième
+voisinage infinitésimal de $T$ dans $S$ ; $p$ y est nilpotent, puisque tous
+les points de $T$ sont de caractéristique $p$. Par Serre--Tate, $A_0$ et $M$
+définissent un schéma abélien sur chaque $T_n$, donc un schéma abélien formel
+sur le complété $\mathrm{Spf}\,\hat\Lambda$ de $S$ le long de $T$. Sa
+restriction au-dessus de $S'_0 = (\mathrm{Spec}\,\hat\Lambda)_{\mathrm{red}}$
+est algébrique --- c'est l'image inverse de $A_0$ ---, donc il est algébrique
+sur $S' = \mathrm{Spec}\,\hat\Lambda$, puisque $S'_0 \to S'$ est une immersion
+nilpotente : on obtient un schéma abélien $A'$ sur $S'$.\footnote{La page
+écrit « Donc (réf.\ \ldots\ !!!) », une référence laissée à trouver. Le
+résultat qu'elle demande est le lemme des pages 34 à 36 (l'algébricité d'un
+schéma formel propre et lisse se vérifie sur la base réduite) ; ce
+rapprochement est le nôtre, et ce lemme est énoncé pour une base locale
+complète, non pour le complété le long d'un fermé quelconque.} Or
+\[
+  U \sqcup S' \longrightarrow S
+\]
+est fidèlement plat, et $A_U \sqcup A'$ est muni d'une donnée de descente
+relativement à ce morphisme. Elle est effective : la question ne dépend que
+de la réduction $S_0$ de $S$, où elle l'est, puisque $A_0$ existe --- c'est ce
+que la page attribue à « la réduction de Raynaud ».\footnote{« Elle est
+effective, puisqu'elle dépend de $S_0 \to S$, donc elle l'était déjà avant,
+d'après la réduction de Raynaud. Ce qu'on gagne ! », lecture en partie
+incertaine. La descente fidèlement plate des schémas abéliens n'est pas
+toujours effective ; les résultats de M.~Raynaud sur les faisceaux amples et
+la descente des schémas abéliens sont publiés en 1970 (\emph{Faisceaux amples
+sur les schémas en groupes}, Lecture Notes 119), et nous ne savons pas quel
+énoncé la page a en vue. Un carré $S_0 \leftarrow S'_0$ au-dessus de
+$S \leftarrow S'$ est dessiné en marge.}
+
+Un alinéa b), « réduction au cas $S$ local, $T$ réduit à un point fermé »,
+est commencé puis biffé ; il se poursuit, biffé, en tête de la page 8.
+
+\pagerange{8}{10}
+\subsection*{b) Cas $S$ géométriquement unibranche, par l'espace de modules (pages 8 et 10)}
+
+Après un revêtement convenable, $A_U$ admet une rigidification de Jacobi
+--- une structure de niveau --- et une polarisation ; il définit donc un
+morphisme $U \to R$ vers le schéma de modules $R$ des schémas abéliens
+polarisés munis de cette structure.\footnote{« $R$ schéma modulaire à
+décalage », lecture incertaine. L'existence d'un schéma de modules fin pour
+les schémas abéliens polarisés avec structure de niveau $\ell \geq 3$ est le
+théorème de Mumford (\emph{Geometric Invariant Theory}, 1965).} Soit $S'$
+l'adhérence du graphe de $U \to R$ dans $S \times R$. Par le critère valuatif,
+$S' \to S$ est propre : sur un trait $V$ qui envoie son point générique dans
+$U$, le groupe $p$-divisible de $A_U$ se prolonge (c'est $M$), donc $A_U$ a
+bonne réduction sur $V$ --- c'est le cas d'un trait, que la page attribue à
+Raynaud et que traitent les pages 47 à 52.\footnote{« Le critère valuatif et
+le résultat de Raynaud dans le cas d'un trait montrent que $S' \to S$ est
+propre », lecture en grande partie incertaine. Le rapprochement avec le
+tapuscrit est le nôtre ; la page 52 parle du « th.\ de Raynaud » pour un
+énoncé de cette forme.}
+
+Il veut ensuite montrer que $S' \to S$ est un isomorphisme ; par le
+théorème de Tate, cela revient à prouver que $A_U$ se prolonge, quand
+$A_U[p^\infty]$ se prolonge en $M$, de façon unique à isomorphisme unique
+près. Par le Main Theorem de Zariski, il suffit de voir que les fibres
+$S'_s$ sont finies. Soit $S''$ le normalisé de $S'$, supposé fini sur $S'$.
+Par le théorème de Tate, le groupe $p$-divisible de l'image inverse sur $S''$
+du schéma abélien universel est $M_{S''}$. Sur la fibre $S''_s$,
+géométriquement connexe, cette famille a donc un groupe $p$-divisible
+constant ; il en conclut qu'elle est elle-même constante à un morphisme
+radiciel près, que $(S''_s)_{\mathrm{red}} \to R$ se factorise par un point,
+et que $S''_s$ est radiciel sur $k(s)$.\footnote{Toute cette conclusion, en
+tête de la page 10, est barrée d'un trait oblique, et se lit mal. Le
+mécanisme est vraisemblable --- par Serre--Tate, une famille de schémas
+abéliens en caractéristique $p$ dont le groupe $p$-divisible est constant
+a une application de modules de différentielle nulle, ce qui n'en fait pas
+une constante mais un morphisme radiciel ---, mais la page ne le démontre
+pas.} Le cas où $S''$ n'est pas fini sur $S'$ se traiterait « par la méthode
+essentiellement de [\;] p.\ 75--76 ».
+
+Ce que ce raisonnement peut donner, si on le complète, est que $S' \to S$ est
+propre, quasi-fini, donc fini, birationnel et à fibres radicielles : un
+homéomorphisme universel. Ce n'est un isomorphisme que si $S$ est
+normal.\footnote{Sur une courbe à point de rebroussement, géométriquement
+unibranche, le normalisé est fini, birationnel et radiciel sans être un
+isomorphisme. La page écrit « Je veux : prouver que c'est un isom. ». C'est
+la raison d'être des alinéas c) et d) qui suivent : on traite d'abord le cas
+normal, puis on descend le long d'un morphisme fini.}
+
+\pagerange{10}{12}
+\subsection*{c) Cas $S$ normal (pages 10 et 12)}
+
+Soit $S$ normal et intègre. Choisissons un nombre premier $\ell \neq p$,
+$\ell \geq 3$,\footnote{La page écrit « $\ell \neq p, 3$ », qu'on lit comme
+la condition usuelle d'une structure de niveau rigidifiante ; la lecture est
+la nôtre.} et un revêtement fini étale surjectif $U' \to U$ sur lequel
+$A_{U'}$ est muni d'une rigidification de niveau $\ell$. Soit $S'$ le
+normalisé de $S$ dans le corps des fonctions de $U'$ ; c'est un schéma normal
+intègre fini sur $S$, qui prolonge $U' \to U$.\footnote{En marge, cerclé :
+« inutile au fond ! », relié à « Normalisons », lecture incertaine.} Par b),
+appliqué sur $S'$ qui est normal, on trouve sur $S'$ un schéma abélien $A'$
+prolongeant $A_U \times_U U'$, avec $A'[p^\infty] \simeq M_{S'}$.
+
+Soit $S'' = S' \times_S S'$. Le morphisme $S' \to S$, fini et dominant sur un
+schéma normal, est universellement ouvert ; donc $U''$ est dense dans $S''$,
+et la pleine fidélité (station 2), appliquée sur $S''$, munit $A'$ d'une donnée
+de descente relativement à $S' \to S$.\footnote{« $S'' \to S$ est ouvert car
+$S' \to S$ est universellement ouvert » ; c'est le théorème de Chevalley
+(EGA IV 14.4.4), que la page ne nomme pas.} Le morphisme fini surjectif
+$S' \to S$ est de descente effective pour les revêtements finis étales (SGA 1,
+exposé IX) ; la donnée de descente sur $A'[\ell]$ fournit donc un revêtement
+fini étale en groupes $N$ de $S$, avec $N|_U \simeq A_U[\ell]$. Un revêtement
+fini étale surjectif $S_1 \to S$ qui trivialise $N$ trivialise
+$A_U[\ell]$ ; on peut donc refaire la construction avec $S'$ \emph{étale}
+sur $S$, donc plat. Comme $A'$ est projectif sur $S'$, la donnée de descente
+est alors effective, et $A'$ descend en un schéma abélien $A$ sur $S$ qui
+répond à la question.\footnote{La page cite « SGA 1 VIII » ; la descente des
+revêtements étales le long d'un morphisme fini surjectif est, à notre
+connaissance, dans l'exposé IX.
+L'effectivité pour $A'$ projectif le long d'un morphisme fini étale demande
+une polarisation compatible à la donnée de descente, qu'on obtient par
+norme ; la page dit seulement « $A'$ étant projectif sur $S'$ ». Un ajout
+encadré propose de remplacer l'hypothèse par : « pourvu qu'il existe $S' \to
+S$ fini surjectif, avec $S'$ géom.\ unib. ».}
+
+\pagerange{12}{14}
+\subsection*{d) Cas $S$ réduit (pages 12 et 14)}
+
+Soit $S$ réduit, et $S' \to S$ son normalisé, fini par hypothèse. Comme $S$ est
+géométriquement unibranche aux points de $T$, $S' \to S$ y est radiciel, et
+l'image inverse $U''$ de $U$ est dense dans $S'' = S' \times_S S'$. Par c), on
+trouve sur $S'$ un schéma abélien $A'$, et la pleine fidélité pour $(S'',
+U'')$ le munit d'une donnée de descente relativement à $S' \to S$. Un
+morphisme fini et épimorphique --- ce qu'est $S' \to S$, $S$ étant réduit ---
+est un morphisme de descente pour les schémas abéliens et pour les groupes
+$p$-divisibles (ce sont les corollaires 2 et 3 de la page 24) ; il reste à
+montrer que la donnée de descente est effective.\footnote{Le début de la page
+14, sept lignes, est encadré et biffé de huit traits : une réduction au cas
+local, une factorisation, « l'effectivité des descentes sur les \ldots\ de
+FGA », un « cf plus bas ». C'est la question que reprennent les pages 26 à
+38, sans que la page 14 y renvoie.} La page s'interrompt ici sur ce point.
+
+\pagerange{14}{18}
+\subsection*{e) Cas général, par recollement (pages 14 à 18)}
+
+On peut supposer $S$ réduit (par a)). Pour tout $s \in S$, le cas local donne
+sur $S(s) = \mathrm{Spec}\,\mathcal{O}_{S,s}$ une solution $A(s)$ du problème
+induit, avec $U(s) = U \times_S S(s)$, $T(s) = T \cap S(s)$, $M(s)$. Par
+unicité, les $A(s)$ forment un système cohérent : pour $t$ générisation de
+$s$, $A(t) \simeq A(s) \times_{S(s)} S(t)$, avec la transitivité. Il faut un
+lemme qui fasse de ce « système local » un schéma abélien sur $S$.
+
+\textbf{Lemme} (page 16). Sur $S$ localement noethérien, un système local de
+schémas abéliens provient d'un schéma abélien.\footnote{En marge, cerclé :
+« Douteux » ; à la ligne suivante, « [\;] unicité ? ». La démonstration qui
+suit est un brouillon dont l'ordre de lecture est incertain et qui
+s'interrompt au bas du feuillet. On ne prétend pas que le lemme soit vrai
+sous cette forme : l'argument naturel --- étendre chaque $A(s)$ à un voisinage
+de $s$, puis recoller --- demande que les isomorphismes de recollement soient
+uniques, ce qui suppose que toute composante irréductible du voisinage passe
+par le point, comme le dit la page 18.} Une fois $A$ obtenu, on a
+$A \times_S U \simeq A_U$, et un isomorphisme $A[p^\infty] \simeq M$ qui
+induit les isomorphismes donnés sur les $S(s)$ ; il est donné sur $U$, et la
+pleine fidélité le prolonge.
+
+Le feuillet 18, qu'il numérote « 2 bis », donne l'outil du recollement :
+
+\textbf{Lemme} (page 18). Soient $S$ noethérien réduit, $t \in S$, et $B$ un
+schéma abélien sur $S$. Il existe un voisinage ouvert $V$ de $t$ tel que, pour
+tout voisinage ouvert $V' \subset V$ de $t$, tout schéma abélien $B'$ sur $V'$
+et tout isomorphisme $\varphi_t : B' \times_S S(t) \simeq B \times_S S(t)$, il
+existe un isomorphisme $\varphi : B' \simeq B|_{V'}$ qui prolonge
+$\varphi_t$, quitte à restreindre $V'$ ; il est unique dès que toute
+composante irréductible de $V'$ contient $t$.\footnote{La phrase de l'énoncé
+est en partie illisible (« il y a un isom.\ $\varphi(s)$ \ldots\ voisinage
+\ldots\ unique \ldots »), et l'existence n'a de sens qu'après restriction du
+voisinage ; c'est l'énoncé standard de prolongement d'un isomorphisme donné
+sur l'anneau local (EGA IV 8). La page commence la démonstration par un
+$S' \to S$ fini avec $S'$ réduit et géométriquement unibranche, et s'arrête sur
+« Alors ».}
+
+\pagerange{20}{20}
+\section*{La reprise de la page 20}
+
+La page 20 reprend le lemme de la page 3 pour $\ell = p$, avec une meilleure
+conclusion. Soient $A$, $B$ schémas abéliens sur $S$ et
+$v : A[p^\infty] \to B[p^\infty]$ ; \emph{quand $v$ provient-il d'un
+homomorphisme $A \to B$ ?}
+
+\begin{enumerate}
+  \item[a)] Il y a un plus grand sous-schéma $S_v$ de $S$ sur lequel $v$ est
+  algébrique ; il est fermé, et sa formation commute à tout changement de base
+  localement noethérien.
+  \item[b)] Si $t \in S_v$ et $k(t)$ est de caractéristique $p$, $S_v$
+  contient un voisinage ouvert de $t$.
+\end{enumerate}
+
+\textbf{Corollaire.} Soit $Z$ l'ensemble des points associés de
+$\mathcal{O}_S$. Supposons que pour tout $z \in Z$, l'adhérence
+$\overline{\{z\}}$ rencontre $S_v$ en un point de caractéristique $p$. Alors
+$v$ est algébrique.
+
+\emph{Démonstration.} Par b), $S_v$ contient un ouvert $W$ qui rencontre
+chaque $\overline{\{z\}}$ ; un ouvert étant stable par générisation, $W$
+contient tous les points associés, et l'idéal $I$ de $S_v$ est nul en
+chacun d'eux. Or les points associés de $I \subset \mathcal{O}_S$ sont des
+points associés de $\mathcal{O}_S$ ; donc $I = 0$ et $S_v = S$.\footnote{La
+démonstration est la nôtre ; la page n'en donne pas. Elle définit $Z$ comme
+l'ensemble des points associés « \emph{et} » des points maximaux, qui en
+font partie, et une incise biffée laisse un « $\neq p$ » isolé. Une première
+version, biffée, cherchait le lieu $T$ fibre à fibre. Le corollaire de la
+page 3 en est le cas où les points associés sont dans $U$.}
+
+\pagerange{21}{24}
+\section*{La descente par un épimorphisme propre (pages 21 à 24)}
+
+Au pied d'un feuillet du tapuscrit anglais (page 21), quelques lignes de sa
+main esquissent le schéma de toute la suite : $A$ sur $S$ et $A'$ sur $S'$,
+deux images inverses $A''_1$, $A''_2$ sur $S''$ dont les groupes
+$p$-divisibles sont isomorphes, $S \leftarrow S' \leftleftarrows S''$, et,
+pour un $S'$ fait de deux copies, $S'' = S' \sqcup S'$.\footnote{Ces lignes
+sont tête-bêche par rapport au texte dactylographié, et traversées de trois
+traits courbes ; on n'en reprend que la structure.} La question est : un
+schéma abélien sur $S'$ dont les deux images inverses sur $S''$ sont
+identifiées descend-il à $S$ ?
+
+Dans cette section, $f : S' \to S$ est un morphisme propre de schémas
+localement noethériens, $S'' = S' \times_S S'$, $p_1, p_2 : S'' \to S'$ les
+projections et $h = f p_1 = f p_2$. On dit que $f$ est un
+\emph{épimorphisme} si $\mathcal{O}_S \to f_*\mathcal{O}_{S'}$ est injectif ;
+propre et épimorphique, $f$ est surjectif.\footnote{C'est le N.B.\ de la page
+22 ; la surjectivité, que nous ajoutons, vient de ce que l'image fermée de $f$
+contient le support de $\mathcal{O}_S$.}
+
+\textbf{Lemme 1} (page 22). Soient $f : S' \to S$ un épimorphisme propre de
+schémas localement noethériens et $X$ un $S$-schéma formellement non ramifié.
+La suite
+\[
+  \mathrm{Hom}_S(S, X) \longrightarrow \mathrm{Hom}_S(S', X)
+  \rightrightarrows \mathrm{Hom}_S(S'', X)
+\]
+est exacte.\footnote{« propre » et « loc.\ » sont ajoutés en interligne ; en
+marge : « [\;] inutile si $X$ loc.\ de t.f.\ ? ».}
+
+\emph{Démonstration.} Soit $g' : S' \to X$ avec $g' p_1 = g' p_2$. Comme $f$
+est surjectif et fermé, c'est une application quotient, et $g'$, constante
+sur les fibres, se factorise en une application continue $g_0 : S \to X$. Le
+morphisme $g'^{-1}\mathcal{O}_X \to \mathcal{O}_{S'}$ définit
+$g_0^{-1}\mathcal{O}_X \to f_*\mathcal{O}_{S'}$, et l'égalité
+$g' p_1 = g' p_2$ dit qu'il prend ses valeurs dans
+\[
+  \mathcal{A} = \mathrm{Ker}\bigl(f_*\mathcal{O}_{S'} \rightrightarrows
+  h_*\mathcal{O}_{S''}\bigr).
+\]
+Donc $g'$ se factorise par $S' \to S'_1 = \mathrm{Spec}\,\mathcal{A} \to X$.
+L'algèbre $\mathcal{A}$ est cohérente (EGA III 3, $f$ étant propre), donc
+$S'_1 \to S$ est fini ; il est radiciel, parce que les deux morphismes
+$S'' \rightrightarrows S'_1$ coïncident par définition de $\mathcal{A}$ et que
+$S'' \to S'_1 \times_S S'_1$ est surjectif, si bien que $S'_1 \times_S S'_1$
+est ensemblistement réduit à sa diagonale ; et c'est un épimorphisme, puisque
+$\mathcal{O}_S \subset \mathcal{A} \subset f_*\mathcal{O}_{S'}$.\footnote{La
+page écrit « $S'_1 \to S'$ fini radiciel », où la transcription signale que
+le second $S'$ est peut-être un $S$ ; c'est $S'_1 \to S$ qui est fini et
+radiciel. L'argument de radicialité est le nôtre ; la page dit « EGA III 3
+indique aussitôt ».} On est donc ramené au cas d'un épimorphisme fini
+radiciel :
+
+\textbf{Corollaire 1} (page 22). Soient $f : S' \to S$ un épimorphisme entier
+et radiciel, $S$ localement noethérien, et $X$ un $S$-schéma non ramifié,
+localement de type fini. Alors $\mathrm{Hom}_S(S, X) \to \mathrm{Hom}_S(S',
+X)$ est bijectif.\footnote{La ligne est très reprise, et l'ordre exact des
+hypothèses incertain (« fini » biffé, « entier » en interligne, « ou $X \to
+S$ loc.\ de t.f. »). La démonstration de la page 24 est presque entièrement
+biffée ou illisible ; on en retient la réduction au cas local et un croquis
+$\mathcal{O}_{S,s} \to \mathcal{O}_{X,x} \dashrightarrow \mathcal{O}_{S',s'}$.
+Voici un argument : localement, $X$ est un sous-schéma fermé d'un $S$-schéma
+étale $E$ ; un morphisme radiciel entier surjectif est un homéomorphisme
+universel, donc $\mathrm{Hom}_S(S, E) = \mathrm{Hom}_S(S', E)$ (invariance
+topologique du site étale, EGA IV 18.1.2) ; et si $\sigma : S \to E$
+envoie $S'$ dans $X$, l'image réciproque $\sigma^{-1}(X)$ est un
+sous-schéma fermé de $S$ par lequel $S' \to S$ se factorise, donc égal à $S$,
+puisque $f$ est un épimorphisme.}
+
+\textbf{Corollaire 2} (page 24). Un épimorphisme propre $f$ de schémas
+localement noethériens est un morphisme de descente pour les schémas abéliens
+relatifs : le foncteur image inverse est pleinement fidèle.
+
+En effet, pour $A$, $B$ schémas abéliens sur $S$, le foncteur
+$\underline{\mathrm{Hom}}_{\mathrm{gr}}(A, B)$ est représentable et non
+ramifié sur $S$, et le lemme 1 s'applique à $X = \underline{\mathrm{Hom}}_
+{\mathrm{gr}}(A,B)$.\footnote{La page le tient pour connu ; la
+représentabilité est celle de FGA pour des schémas abéliens projectifs, la
+non-ramification est la rigidité des homomorphismes.}
+
+\textbf{Corollaire 3} (page 24). Le même $f$ est un morphisme de descente
+pour les groupes $p$-divisibles.
+
+L'argument du lemme 1 ramène à l'analogue du corollaire 1 pour
+$X = \underline{\mathrm{Hom}}_{\mathrm{gr}}(A, B)$, $A$, $B$ groupes
+$p$-divisibles, et il faut prouver que $X$ est formellement non ramifié. La
+page s'arrête sur cette exigence, sans la démontrer.\footnote{Ce qu'il faut
+est l'unicité du relèvement d'un homomorphisme de groupes $p$-divisibles le
+long d'une immersion nilpotente ; c'est vrai (rigidité des homomorphismes de
+groupes $p$-divisibles), mais n'est pas sur la page.}
+
+\pagerange{26}{30}
+\section*{L'effectivité : vers une base locale complète (pages 26 à 30)}
+
+On suppose maintenant que $f$ est un épimorphisme \emph{effectif}, et l'on
+veut montrer qu'il est de descente effective : un schéma abélien $A'$ sur
+$S'$ muni d'une donnée de descente relativement à $S' \to S$ provient d'un
+schéma abélien sur $S$.\footnote{« effectif » est d'une lecture incertaine.
+Épimorphisme effectif s'entend au sens où $\mathcal{O}_S$ est le noyau de
+$f_*\mathcal{O}_{S'} \rightrightarrows h_*\mathcal{O}_{S''}$, ce qu'utilise
+l'exactitude formelle de la page 28.}
+
+\emph{a) Réduction au cas $S$ local}, $S = \mathrm{Spec}\,R$ : par passage
+à la limite.
+
+\emph{b) Réduction au cas $S$ local complet} : on descend le long de
+$\mathrm{Spec}\,\hat R \to \mathrm{Spec}\,R$, fidèlement plat, par le critère
+de descente fpqc des schémas abéliens « de Raynaud ». Il faut alors savoir que
+les morphismes déduits par changement de base de $f$ au-dessus de
+$\mathrm{Spec}\,\hat R \times_S \mathrm{Spec}\,\hat R$, qui n'est plus
+localement noethérien, sont encore de descente, et le corollaire 2 ne
+s'applique plus. On s'en tire en remarquant que ce dont l'argument du lemme 1
+avait besoin, que l'algèbre noyau
+$\mathrm{Ker}\bigl(f_{2*}\mathcal{O}_{S'_2} \rightrightarrows
+h_{2*}\mathcal{O}_{S''_2}\bigr)$ soit radicielle sur $\mathcal{O}_{S_2}$,
+reste vrai au-dessus de $S_2$.\footnote{Le passage est en grande
+partie illisible ; on en donne la structure. En marge, un tableau à quatre
+lignes, $S \to S' \rightrightarrows S'' \equiv S'''$ et ses changements de
+base au-dessus des étages $S_1$, $S_2$, $S_3$ du complexe de Čech de
+$\mathrm{Spec}\,\hat R \to \mathrm{Spec}\,R$, chaque ligne étiquetée
+« 1-descente » ou, pour la dernière, « 0-descente ». Les étiquettes ne sont
+pas expliquées ; on les lit comme le degré de descente requis à chaque étage
+(pleine fidélité, puis fidélité), et cette lecture est la nôtre. Un alinéa
+c), « cas $\dim S = 0$ », est encadré et biffé.}
+
+\pagerange{28}{30}
+\subsection*{d) Construction d'un schéma abélien formel (pages 28 et 30)}
+
+Soient $R$ local complet, $s$ son point fermé, $k$ son corps résiduel,
+$S_0 = \mathrm{Spec}\,k$, et $S'_0$, $S''_0$ les fibres en $s$. D'abord,
+$A'_0$ descend en une variété abélienne $A_0$ sur $k$.\footnote{La page dit
+que $S'_0 \to S_0$ a une section, d'où un morphisme de descente effective
+universelle ; la lecture de « section » est incertaine, et une section
+demande un point rationnel. Sans point rationnel, on descend par un point
+fermé de $S'_0$, d'extension résiduelle finie, le long de laquelle la
+descente des variétés abéliennes (projectives) est effective.}
+
+On complète $S'$, $S''$, $S'''$, $A'$, $A''$, $A'''$ le long des fibres en $s$
+: on obtient un schéma abélien formel $\hat A'$ sur $\hat S'$ muni d'une
+donnée de descente relativement à $\hat S' \to \hat S$, et il s'agit de
+descendre dans la catégorie des schémas abéliens formels. Soient
+$\Lambda_0 = \mathrm{Spf}\,W(k)$ et $\mathcal{M}$ le schéma formel des
+modules de $A_0$.\footnote{Il note $T$ la base de Witt et $M$ l'espace des
+modules formels ; on les renomme, $T$ et $M$ étant pris. L'anneau $W(k)$ des
+vecteurs de Witt est la bonne base si $k$ est parfait ; sinon on prend un
+anneau de Cohen de $k$.} Un lemme facile --- pratiquement trivial si $S'$ est
+fini sur $S$ --- dit que se donner un prolongement formel $\hat A'$ de
+$A'_0 = A_0 \otimes_k S'_0$ sur $\hat S'$ équivaut à se donner un
+$\Lambda_0$-morphisme $\varphi' : \hat S' \to \mathcal{M}$, et de même sur
+$\hat S''$. La donnée de descente sur $\hat A'$ qui prolonge celle de
+$A'_0$ équivaut à $\varphi' \hat p_1 = \varphi' \hat p_2$. Or la suite
+\[
+  \hat S \longleftarrow \hat S' \leftleftarrows \hat S''
+\]
+est exacte dans les schémas formels --- trivial si $S'$ est fini sur $S$, et en
+général par le théorème de comparaison formel-algébrique appliqué à
+l'épimorphisme effectif $f$. Il existe donc $\varphi : \hat S \to \mathcal{M}$
+avec $\varphi \hat f = \varphi'$, c'est-à-dire un schéma abélien formel $\hat
+A$ sur $\hat S$ qui descend $\hat A'$.\footnote{Un croquis en marge empile
+$\mathcal{M} \leftarrow S_0 \leftarrow S'_0 \leftleftarrows S''_0$ au-dessus
+de $\Lambda_0 \leftarrow \hat S \leftarrow \hat S' \leftleftarrows \hat S''
+\Lleftarrow \hat S'''$, avec les $\hat A$ au-dessus des colonnes. La page 26
+avait annoncé cette construction comme « facile ».} Par le théorème de
+comparaison --- le théorème d'existence de Grothendieck, EGA III 5 ---, il
+reste à prouver que $\hat A$ est algébrique : si $\hat A$ est le complété d'un
+schéma abélien $A$, l'isomorphisme formel $\hat A_{\hat S'} \simeq \hat A'$
+s'algébrise et identifie $A_{S'}$ à $A'$ avec sa donnée de descente.
+
+\textbf{Théorème} (page 30). Soient $R$ un anneau local noethérien complet,
+$S = \mathrm{Spec}\,R$, et $\hat A$ un schéma abélien formel sur
+$\hat S = \mathrm{Spf}\,R$. Les conditions suivantes sont équivalentes :
+\begin{enumerate}
+  \item[(i)] $\hat A$ est algébrisable : il existe un schéma abélien $A$ sur
+  $S$ dont $\hat A$ est le complété formel ;
+  \item[(ii)] il existe un morphisme propre surjectif $S' \to S$ tel que
+  l'image inverse de $\hat A$ sur $\hat S'$ soit algébrisable ;
+  \item[(iii)] pour tout quotient intègre $B$ de $R$ de dimension $1$, de
+  normalisé $B'$, l'image inverse de $\hat A$ sur $\mathrm{Spf}\,B'$ est
+  algébrisable.\footnote{La page écrit « quotient intègre $B$ de $A$ » ;
+  c'est de $R$ qu'il s'agit. $B'$ est un anneau de valuation discrète
+  complet, fini sur $B$.}
+\end{enumerate}
+
+\emph{(i) $\Rightarrow$ (ii)} est trivial. \emph{(ii) $\Rightarrow$ (iii).}
+Soient $\Theta = \mathrm{Spec}\,B'$, un trait complet, et
+$\Theta' = S' \times_S \Theta$, propre et surjectif sur $\Theta$, qui rend
+$\hat A_{\hat\Theta}$ algébrique. Il existe un trait $\Theta_1$ fini sur
+$\Theta$ et un $\Theta$-morphisme $\Theta_1 \to \Theta'$ ; donc
+$\hat A_{\hat\Theta_1}$ est algébrique, et définit un schéma abélien
+$A_{\Theta_1}$ sur $\Theta_1$, muni --- par le théorème de comparaison --- d'une
+donnée de descente relativement à $\Theta_1 \to \Theta$. Elle est effective,
+parce que $\Theta_1 \to \Theta$ est fini et fidèlement plat et que
+$A_{\Theta_1}$, schéma abélien sur un trait, est
+projectif.\footnote{Il note $T$ ce que nous appelons $\Theta$, et $T'$ son
+changement de base ; la page ne redit pas que $T = \mathrm{Spec}\,B'$.}
+
+\pagerange{32}{34}
+\section*{Le théorème d'algébrisation : (iii) entraîne (i) (pages 32 et 34)}
+
+\emph{(iii) $\Rightarrow$ (ii$'$)}, où (ii$'$) est (ii) avec $S' \to S$
+\emph{fini} surjectif. Soient $S_n = \mathrm{Spec}\,R/\mathfrak{m}^{n+1}$,
+$A_n$ la réduction de $\hat A$ sur $S_n$, $N_n =
+\underline{\mathrm{NS}}_{A_n/S_n}$ et $P_n \subset N_n$ l'ouvert des
+polarisations. Les $P_n$ se recollent en un schéma formel $\hat P$ sur $\hat S$,
+réunion d'une famille dénombrable de schémas finis et non ramifiés sur $S$ :
+\[
+  \hat P = \coprod_\alpha \widehat{P^\alpha}, \qquad P^\alpha \text{ fini et
+  non ramifié sur } S, \qquad Z_\alpha = \mathrm{Im}(P^\alpha \to S).
+\]
+L'hypothèse (iii) donne, pour chaque $B$, une polarisation de
+$\hat A_{\mathrm{Spf}\,B'}$, donc un $S$-morphisme $\mathrm{Spec}\,B' \to
+P^\alpha$ pour un $\alpha$ convenable : le point générique $x$ de
+$\mathrm{Spec}\,B$ est dans $Z_\alpha$. La réunion $\bigcup_\alpha Z_\alpha$
+contient donc tous les $x \in S$ tels que $\dim \overline{\{x\}} = 1$ (et le
+point fermé). Par la proposition de la page 36, un nombre fini de
+$Z_\alpha$ recouvrent $S$ ; la somme $S'$ des $P^\alpha$ correspondants est
+finie et surjective sur $S$, et $\hat A_{\hat S'}$, muni de la polarisation
+tautologique, est algébrisable par le théorème d'existence.
+
+\emph{(ii$'$) $\Rightarrow$ (i)}, pour le $S'$ qu'on vient de construire. Par
+le lemme sur $S_{\mathrm{red}}$ ci-dessous, on peut supposer $S$ réduit.
+Quitte à faire une extension étale finie de $S$, et à redescendre --- ce qui
+est possible « par Raynaud » ---, on peut supposer triviales les extensions
+résiduelles de $S' \to S$. Alors chaque composante connexe $S'_i$ de $S'$ est
+locale, et $S'_i \to S$ est une immersion fermée.\footnote{Pour un morphisme
+fini quelconque, c'est faux (le normalisé d'une courbe à rebroussement, à
+extension résiduelle triviale, n'est pas une immersion fermée). C'est vrai
+ici parce que $S'$ est une somme de $P^\alpha$ non ramifiés sur $S$ : un
+morphisme fini non ramifié vers un schéma local, d'extension résiduelle
+triviale, est une immersion fermée (Nakayama). Les étiquettes de la page,
+« (ii$'$) $\Rightarrow$ (i$'$) (cas $R$ réduit) » biffé puis
+« (ii) $\Rightarrow$ (i) » plus bas, ne distinguent pas.} Si $S$ est
+irréductible, l'une de ces immersions fermées est un isomorphisme, puisque
+leur somme est surjective, et l'on conclut. Sinon, on passe aux composantes
+irréductibles :
+
+\textbf{Lemme} (page 34). Soient $R$ local noethérien complet, $S =
+\mathrm{Spec}\,R$ réduit, et $\hat X$ un schéma formel propre sur $\hat S$. Si
+pour toute composante irréductible $S_i$ de $S$, munie de sa structure
+réduite, $\hat X \times_{\hat S} \hat S_i$ est algébrique, alors $\hat X$
+l'est.
+
+Par récurrence sur le nombre de composantes : $S = S' \cup S''$ avec $S'$,
+$S''$ fermés, $\hat X_{\hat S'}$ et $\hat X_{\hat S''}$ proviennent de $X'$ et
+$X''$, qui sont isomorphes au-dessus de $S' \cap S''$ par le théorème de
+comparaison ; on recolle $X'$ et $X''$ par cet isomorphisme.\footnote{« On voit
+facilement que $X$ recollé marche. » Comme $S$ est réduit, il est la somme
+amalgamée de $S'$ et $S''$ le long de $S' \cap S''$ ; le recollement de $X'$
+et $X''$ le long de leur partie commune est un pincement au sens de Ferrand
+(2003), qui existe par exemple quand $X'$, $X''$ sont projectifs avec des
+fibrés amples compatibles. Pour l'application aux schémas abéliens polarisés
+de (ii$'$), c'est le cas ; la page ne pose pas la question.}
+
+\pagerange{34}{36}
+\section*{Algébricité modulo le nilradical (pages 34 et 36)}
+
+\textbf{Lemme} (page 34). Soient $R$ local noethérien complet,
+$S = \mathrm{Spec}\,R$, et $\hat X$ un schéma formel propre et lisse sur
+$\hat S$. Si $\hat X \times_{\hat S} \hat S_{\mathrm{red}}$ est algébrique,
+$\hat X$ l'est.\footnote{La page biffe « lisse » dans l'énoncé ; la
+démonstration de la page 36 s'en sert. On le rétablit : l'énoncé ainsi
+démontré suffit pour les schémas abéliens. Pour un $\hat X$ seulement propre
+et plat, l'argument demanderait la théorie des déformations par le complexe
+cotangent (Illusie, 1971), que les feuillets n'invoquent pas.}
+
+On se ramène à un idéal $J$ de carré nul, $S_0 = V(J)$, avec
+$\hat X_{\hat S_0}$ algébrique, de la forme $\hat X_0$ pour un $X_0$ propre et
+lisse sur $S_0$. On compare la théorie des prolongements infinitésimaux de
+$X_0$ en un $X$ lisse sur $S$ et celle de $\hat X_0$ en un $\hat X$ lisse sur
+$\hat S$ :
+\begin{enumerate}
+  \item[1°)] l'obstruction vit dans « le même » groupe,
+  \[
+    H^2(X_0, \mathcal{T}_{X_0/S_0} \otimes_{\mathcal{O}_{S_0}} J) \simeq
+    H^2(\hat X_0, \mathcal{T}_{\hat X_0/\hat S_0} \otimes \hat J),
+  \]
+  et c'est la même obstruction ;
+  \item[2°)] les prolongements forment, de part et d'autre, un torseur sous
+  « le même » groupe
+  \[
+    H^1(X_0, \mathcal{T} \otimes J) \simeq H^1(\hat X_0, \hat{\mathcal{T}}
+    \otimes \hat J).
+  \]
+\end{enumerate}
+Les isomorphismes sont ceux du théorème de comparaison, $R$ étant complet.
+Comme le prolongement formel $\hat X$ existe, l'obstruction est nulle, il
+existe un prolongement algébrique, et la complétion met en bijection les
+classes de prolongements algébriques et formels ; $\hat X$ est donc le complété
+d'un $X$.
+
+\pagerange{36}{38}
+\section*{Un argument de Baire (pages 36 et 38)}
+
+Il reste à prouver la proposition dont (iii) $\Rightarrow$ (ii$'$) avait
+besoin.
+
+\textbf{Proposition} (page 36). Soient $R$ un anneau local noethérien
+\emph{complet}, $S = \mathrm{Spec}\,R$, et $(Z_i)_{i \in I}$ une famille
+dénombrable de parties fermées de $S$ dont la réunion contient tout point $x$
+tel que $\dim \overline{\{x\}} \leq 1$. Alors une sous-famille finie recouvre
+$S$.\footnote{La page biffe « anneau local noeth.\ complet » et écrit au-dessus
+« schéma local (noethérien) ». Sans complétude, l'énoncé est faux : l'anneau
+local de $\mathbb{Q}[x,y]$ en l'origine n'a qu'un ensemble dénombrable
+d'idéaux premiers ; les adhérences de ses points de dimension $\leq 1$
+forment une famille dénombrable de fermés propres qui contient tous ces
+points, et aucune sous-famille finie ne recouvre le point générique. La
+démonstration de la page utilise la complétude (théorème de structure de
+Cohen) ; on la rétablit.}
+
+Si $\dim S \leq 1$, c'est trivial : la réunion contient les points génériques,
+qui sont en nombre fini. En général, il suffit, composante irréductible par
+composante, de trouver un $Z_i$ qui contienne le point générique ; c'est la
+contraposée du
+
+\textbf{Corollaire} (page 38). Si les $Z_i$ sont rares dans $S$ intègre, il
+existe $x \in S$, $\dim \overline{\{x\}} = 1$, avec
+$x \notin \bigcup Z_i$.
+
+\emph{Démonstration.} Par le théorème de structure de Cohen, $R$ est fini sur
+un anneau $V[[T_1, \ldots, T_n]]$, $V$ anneau de valuation discrète complet
+d'idéal maximal $\mathfrak{m}$.\footnote{La fin de la page 36, sous une grande
+accolade barrée, est illisible ; on lit seulement l'existence de $V$ et
+l'anneau $V[[T_1, \ldots, T_n]]$. Si $R$ contient un corps, on prend
+$V = k[[T_0]]$.} Les images des $Z_i$ dans $\Theta = \mathrm{Spec}\,V[[T_1,
+\ldots, T_n]]$ sont des fermés rares, et il suffit de trouver un point $x$ de
+$\Theta$ de dimension $1$ hors de leur réunion : un point de $S$ au-dessus de
+$x$ est alors de dimension $1$ et hors des $Z_i$. Les $V$-homomorphismes
+$\varphi : V[[T_1, \ldots, T_n]] \to V$ sont paramétrés par
+$(\varphi(T_1), \ldots, \varphi(T_n)) \in \mathfrak{m}^n$, espace métrique
+complet ; le noyau de chacun définit un point $x_\varphi$ de dimension $1$.
+Pour un fermé rare $Z \subset V(f)$, $f \neq 0$, la condition
+$x_\varphi \in V(f)$ s'écrit $f(\varphi(T_1), \ldots, \varphi(T_n)) = 0$, et
+définit une partie fermée rare de $\mathfrak{m}^n$. Par le théorème de Baire,
+une réunion dénombrable de fermés rares de $\mathfrak{m}^n$ n'est pas
+$\mathfrak{m}^n$ tout entier, et un $\varphi$ hors de cette réunion
+convient.\footnote{« Il est immédiat que c'est une partie fermée rare » :
+une série formelle non nulle ne s'annule identiquement sur aucun ouvert de
+$\mathfrak{m}^n$. Le nom de Baire n'est pas sur la page.}
+
+\pagerange{40}{44}
+\section*{Le cas d'un schéma propre et plat (pages 40 à 44)}
+
+\textbf{Remarque} (page 40). Soient $S = \mathrm{Spec}\,R$ local noethérien
+complet de corps résiduel $k$, et $\hat X$ un schéma formel propre et plat sur
+$\hat S$ tel que $H^0(X_0, \mathcal{O}_{X_0}) = k$. On suppose les
+$\underline{\mathrm{Pic}}^0_{X_n/S_n}$ plats (par exemple
+$\underline{\mathrm{Pic}}^0_{X_0/k}$ lisse), et l'on forme
+\[
+  \underline{\mathrm{NS}}_{X_n/S_n} = \underline{\mathrm{Pic}}_{X_n/S_n} /
+  \underline{\mathrm{Pic}}^0_{X_n/S_n}, \qquad
+  P_n = \underline{\mathrm{NS}}^+_{X_n/S_n} \ \text{(polarisations
+  relatives)}.
+\]
+Comme aux pages 32 et 34, les $P_n$ se recollent en
+$\hat P = \coprod_\alpha \hat P_\alpha$, les $P_\alpha$ finis sur $S$ et
+connexes, et en procédant comme plus haut on trouve équivalentes :
+\begin{enumerate}
+  \item[(i)] il existe $S' \to S$ propre surjectif avec $\hat X_{\hat S'}$
+  algébrisable et projectif ;
+  \item[(ii)] pour tout sous-schéma fermé $T \subset S$ de dimension $\leq 1$,
+  de normalisé $T'$, $\hat X_{\hat T'}$ est algébrisable et projectif ;
+  \item[(iii)] il existe $S' \to S$ fini surjectif avec $\hat X_{\hat S'}$
+  algébrisable et projectif ;
+  \item[(iv)] il existe $S' \to S$ fini surjectif tel que, pour toute
+  composante irréductible $S'_i$ de $S'$ munie de la structure réduite,
+  $\hat X_{\hat S'_i}$ soit algébrisable et projectif.
+\end{enumerate}
+De plus, sous (iv), $\hat X$ est algébrique.\footnote{La page n'en dit pas
+plus que « procédant comme plus haut ». La dernière phrase est lue « De plus,
+\ldots\ (iv), $\hat X_{\hat S}$ est algébrique », après une rature ; une
+dernière ligne, biffée, reprend (iv). Un N.B.\ en marge, relié à (iii) et
+(iv), parle de $\underline{\mathrm{Pic}}_{X_0/k}$ lisse et d'un $S' \to S$
+« fini et plat », et une note au bas de la marge d'« effectivité » ; ils se
+lisent trop mal pour être restitués. Ni les équivalences ni la dernière
+conclusion ne sont démontrées sur la page ; on les donne comme énoncés.}
+
+\emph{N.B.} (page 42). Si $X_0$ est un schéma abélien, ces conditions
+équivalent à ce que $\hat X$ soit algébrisable, et l'on peut supprimer la
+condition de projectivité dans (i) à (iv).\footnote{C'est le théorème de la
+page 30 ; pour (ii), un schéma abélien sur un trait est projectif. La page
+ajoute en marge un « ? », et propose « ou seulement pro-abélien ? »,
+lecture incertaine.}
+
+\emph{Remarques de descente} (pages 42 et 44). Soient $S' \to S$ un morphisme
+de descente effective, $S$ localement noethérien, et $X'$ propre et plat sur
+$S'$, muni d'une donnée de descente relativement à $S$ ; la donnée est-elle
+effective ? a) On se ramène aux anneaux locaux $\mathcal{O}_{S,s}$ ; b) par
+descente fidèlement plate, à leurs complétés ; c) si les fibres de $X'$ n'ont
+pas d'automorphismes infinitésimaux, on obtient un schéma formel $\hat X$ sur
+$\hat S$ qui descend $\hat X'$ ; d) si, de plus, $X'$ devient projectif après
+un $S'' \to S'$ surjectif et si les $\underline{\mathrm{Pic}}^0_{X'_n/S'_n}$
+sont plats, la donnée de descente devient effective après une extension finie
+étale $T$ de $\mathrm{Spec}\,\hat{\mathcal{O}}_{S,s}$, composante
+irréductible par composante irréductible de $T$. Une dernière remarque énonce
+: pour $S' \to S$ propre et effectif, $X'$ propre et plat sur $S'$ muni d'un
+faisceau inversible $L'$, et une donnée de descente sur $(X', L')$, si aucune
+fibre $(X'_{s'}, L'_{s'})$ n'a d'automorphisme infinitésimal, la donnée est
+effective --- « argument par modules formels\ldots ».\footnote{Ces deux pages
+sont un premier jet très rapide, surchargé ; une grande partie de la prose
+qui relie les énoncés est illisible, et la moitié inférieure de la page 42
+n'est donnée par la transcription qu'en fragments. On n'en restitue que les
+énoncés lisibles, sans les tenir pour démontrés. L'absence d'automorphismes
+infinitésimaux est ce qui rend les modules formels pro-représentables, et
+l'argument annoncé est celui de la page 28, où $\mathcal{M}$ est l'espace des
+modules formels.}
+
+\pagerange{47}{50}
+\section*{Le cas d'un trait : « Modèles de Néron et groupes $p$-divisibles » (pages 47 à 50)}
+
+Ces quatre feuillets sont un tapuscrit, non signé, non daté, qui parle à la
+première personne (« je sais maintenant prouver le théorème de Tate ») et cite
+« la note sur les modèles de Néron, prop.\ 2.5 » et « le séminaire de l'an
+dernier ». Ils sont annotés à l'encre bleue et au crayon.\footnote{Ni l'auteur
+du tapuscrit ni la main des annotations ne sont établis par la transcription,
+et on ne les établit pas ici. On donne les notes au crayon en note, comme
+remarques d'un lecteur.}
+
+Dans cette section, $S$ est un trait --- le spectre d'un anneau de valuation
+discrète ---, de point générique $\eta$ et de point fermé $s$. Un $S$-schéma
+en groupes $G$ est dit \emph{néronien} s'il est lisse, séparé, de type fini, et
+possède la propriété universelle de Néron : tout $\eta$-morphisme
+$Y_\eta \to G_\eta$ issu d'un $S$-schéma lisse $Y$ se prolonge en un
+$S$-morphisme $Y \to G$ ; c'est le modèle de Néron de $G_\eta$.\footnote{Le
+tapuscrit dit « $S$-néronien » sans définir le terme ; la définition est la
+nôtre.} $H = (H_n)_n$ est un $S$-groupe $p$-divisible, $H_n$ le noyau de
+$p^n$.
+
+\textbf{Théorème.} Soient $G$ un $S$-schéma en groupes néronien, dont la fibre
+générique est extension d'une variété abélienne par un tore, et $H$ un
+$S$-groupe $p$-divisible. Tout homomorphisme $u_\eta : H_\eta \to G_\eta$ se
+prolonge de manière unique en un $S$-homomorphisme $u : H \to
+G$.\footnote{L'hypothèse sur la fibre générique est entre crochets au crayon,
+et la marge dit « [\,] inutile », lecture incertaine. C'est ce que démontre
+le lemme manuscrit des pages 51 et 52 ci-dessous.}
+
+\textbf{Lemme 1.} Supposons $S$ hensélien. Soient $G$ néronien et commutatif,
+$M$ un $S$-schéma en groupes fini et plat, $M^0$ sa composante neutre, et
+$u_\eta : M_\eta \to G_\eta$ un homomorphisme. Pour que $u_\eta$ se prolonge,
+il faut et il suffit que $u_\eta|_{M^0_\eta}$ se prolonge en
+$u^0 : M^0 \to G$.\footnote{« commutatif » est ajouté, comme le demande au
+crayon la marge : « $G$ commutatif ? ». Sans lui, $v_\eta$ ci-dessous n'est pas
+un homomorphisme. Le tapuscrit note $\widetilde M$ la « partie connexe ».}
+
+La nécessité est claire. Pour la suffisance, considérons
+\[
+  v_\eta : M_\eta \times G_\eta \longrightarrow G_\eta, \qquad (m, g)
+  \longmapsto u_\eta(m) + g ;
+\]
+il suffit de prolonger $v_\eta$ en $v : M \times_S G \to G$, et $v|_M$
+prolongera $u_\eta$. Soient $P_\eta = \mathrm{Ker}\,v_\eta$ et $P$ son
+adhérence schématique dans $M \times_S G$. Comme $v_\eta$ identifie
+$(M_\eta \times G_\eta)/P_\eta$ à $G_\eta$, la propriété de Néron prolonge
+cette identification dès que le quotient $(M \times_S G)/P$ est lisse ; c'est
+le
+
+\textbf{Lemme 2.} Le $S$-schéma en groupes $(M \times_S G)/P$ existe et est
+lisse sur $S$.\footnote{« existe et » est ajouté au crayon. Sur un trait, le
+quotient d'un schéma en groupes de type fini par un sous-groupe fermé plat
+existe ; c'est un résultat d'Anantharaman (\emph{Mém.\ SMF} 33, 1973), que
+le tapuscrit ne pouvait citer sous cette forme.}
+
+Le morphisme $v^0 : M^0 \times_S G \to G$, $(m, g) \mapsto u^0(m) + g$,
+prolonge $v_\eta|_{M^0_\eta \times G_\eta}$, et il est scindé par
+$g \mapsto (0, g)$ ; d'où une suite exacte
+\[
+  0 \to \mathrm{Ker}\,v^0 \to M^0 \times_S G \to G \to 0,
+\]
+où $\mathrm{Ker}\,v^0 \simeq M^0$ est plat et
+$(M^0 \times_S G)/\mathrm{Ker}\,v^0 \simeq G$ lisse. Par ailleurs
+$(M \times_S G)/(M^0 \times_S G) = M/M^0$ est étale, de sorte que
+$(M \times_S G)/\mathrm{Ker}\,v^0$, extension d'un groupe étale par un groupe
+lisse, est lisse. Enfin $\mathrm{Ker}\,v^0$, plat, est l'adhérence de sa fibre
+générique, contenue dans $P_\eta$ ; donc $\mathrm{Ker}\,v^0 \subset P$, et
+$(M \times_S G)/P$ est lisse comme quotient d'un groupe
+lisse.\footnote{L'isomorphisme $\mathrm{Ker}\,v^0 \simeq M^0$, par
+$m \mapsto (m, -u^0(m))$, est notre justification de « il en résulte que
+$\mathrm{Ker}(\widetilde v)$ est plat ». En tête du feuillet 48, une note au
+crayon, « en fait il y a \ldots\ : $\widetilde M$ ! », lecture très
+incertaine.}
+
+\emph{Démonstration du théorème.} L'unicité est claire, $H$ étant plat et $G$
+séparé. La propriété de Néron se conserve par hensélisation : on peut supposer
+$S$ hensélien. Par le lemme 1 appliqué aux $H_n$, on peut remplacer $H$ par sa
+partie connexe, et supposer $H$ connexe.
+
+\emph{a) Cas où $G$ est semi-stable}, c'est-à-dire où les fibres de la
+composante neutre $G^0$ sont extensions de variétés abéliennes par des
+tores. Soient $G_\eta[p^\infty]$ le groupe $p$-divisible de $G_\eta$ et $G'$
+le $S$-groupe $p$-divisible défini par $G^0$, sa partie finie. On sait que
+$G''_\eta = G_\eta[p^\infty]/G'_\eta$ est non ramifié, et se prolonge donc en
+un $S$-groupe $p$-divisible étale $G''$.\footnote{« On sait » est entouré au
+crayon, avec en marge : « “donc” abusif ». La correction à l'encre remplace
+« non ramifié » par « étale ». C'est l'analogue $p$-adique de la filtration de
+SGA 7, exposé IX, pour la réduction semi-stable (la « partie fixe » et le
+quotient non ramifié) ; le tapuscrit ne cite rien.} Par le théorème de Tate,
+le composé $H_\eta \xrightarrow{u_\eta} G_\eta[p^\infty] \to G''_\eta$ se
+prolonge en $H \to G''$, qui est nul, $H$ étant connexe et $G''$ étale. Donc
+$u_\eta$ se factorise par $G'_\eta$ et, encore par Tate, se prolonge en
+$H \to G' \subset G$.
+
+\emph{b) Cas général.} Il existe une extension finie et plate de traits
+$S' \to S$, de point générique $\eta'$, telle que le modèle de Néron
+$\mathcal{G}'$ de $G_{\eta'}$ sur $S'$ soit semi-stable.\footnote{Au crayon :
+« ? Cas où $G_\eta$ est une V.A.\ seulement ! OK ». Le théorème de réduction
+semi-stable (SGA 7, exposé IX) est énoncé pour les variétés abéliennes ; pour
+une extension par un tore, il faut en outre déployer le tore, ce qui se fait
+par une extension finie.} Par a), $u_{\eta'}$ se prolonge en
+$u' : H_{S'} \to \mathcal{G}'$. Or $G$ se reconstruit à partir de
+$\mathcal{G}'$ : la restriction de Weil
+$\mathcal{G} = \prod_{S'/S} \mathcal{G}'$ est néronienne, $G_\eta$ s'identifie
+à un sous-groupe de $\mathcal{G}_\eta$, et si $G_1$ est l'adhérence
+schématique de $G_\eta$ dans $\mathcal{G}$, $G$ est le « lissifié » de
+$G_1$.\footnote{« cf.\ note sur les modèles de Néron prop.\ 2.5 », texte que
+nous n'identifions pas. Le lissifié est ce qu'on appelle aujourd'hui la
+lissification (\emph{smoothening}) de Néron ; voir Bosch, Lütkebohmert et
+Raynaud, \emph{Néron Models} (1990), § 3.1 et § 7.6.} Par la propriété
+universelle de $\prod_{S'/S}$, $u'$ fournit $H \to \mathcal{G}$, qui prolonge
+$u_\eta$ et se factorise par $G_1$, $H$ étant plat : soit
+$u_1 : H \to G_1$. Il reste à relever $u_1$ à $G$. Comme $H$ est connexe, on
+peut supposer $p$ égal à la caractéristique résiduelle de $S$.
+
+\textbf{Lemme 3.} Soit $f : G \to G_1$ le morphisme canonique, isomorphisme
+sur les fibres génériques. Il existe $n \geq 0$ et $g : G_1 \to G$ tels que
+$f g = p^n$ dans $G_1$.\footnote{« ceci a été démontré au cours du séminaire
+de l'an dernier ». La précision « qui induit isom.\ sur fibres gén.\ » est
+une note au crayon.}
+
+Alors $g u_1 : H \to G$ s'annule sur $H_n$, puisqu'il en est ainsi sur la fibre
+générique ($g_\eta u_{1,\eta} = f_\eta^{-1} p^n u_{1,\eta}$) et que $H_n$ est
+plat ; il se factorise donc par $p^n : H \to H$, de noyau $H_n$ : il existe
+$u : H \to G$ avec $u \circ p^n = g u_1$. Alors
+$f u \circ p^n = p^n u_1 = u_1 \circ p^n$, et comme $p^n$ est un épimorphisme,
+$f u = u_1$ : $u$ prolonge $u_\eta$.\footnote{Le tapuscrit dessine le
+diagramme à colonne exacte $0 \to H_n \to H \xrightarrow{p^n} H \to 0$, la
+flèche $u$ en pointillé, et un arc $p^n$ de $G_1$ à $G_1$ au crayon. La
+vérification $f u = u_1$ est la nôtre.}
+
+\emph{Remarques du tapuscrit.} La démonstration utilise deux fois le théorème
+de Tate, qui en toute rigueur n'est démontré que lorsque $\eta$ est de
+caractéristique $0$. La première fois, le groupe d'arrivée $G''$ est étale, et
+le théorème est alors facile. L'auteur sait maintenant le démontrer quand la
+partie connexe du groupe d'arrivée, sur la fibre générique, est de type
+multiplicatif.\footnote{Le théorème de Tate --- le foncteur « fibre
+générique » est pleinement fidèle sur les groupes $p$-divisibles d'un anneau
+de valuation discrète de caractéristique $0$ --- est de Tate (colloque de
+Driebergen, 1966). Son extension en caractéristique $p$, sur une base normale,
+est due à de Jong (\emph{Invent.\ Math.}\ 134, 1998). Tout le dossier, quand la
+fibre générique est de caractéristique $p$, en dépend.}
+
+\textbf{Corollaire.} Soit $G_\eta$ un groupe sur $\eta$, extension d'une
+variété abélienne par un tore, et $p$ la caractéristique résiduelle de $S$,
+supposée $> 0$. Pour que $G_\eta$ ait bonne réduction sur $S$, il faut et il
+suffit que son groupe $p$-divisible se prolonge en un $S$-groupe
+$p$-divisible.\footnote{« de car.\ rés.\ $p > 0$ » est une note au crayon ;
+une autre, reliée à « bonne réduction », demande : « explicitez ce que ça veut
+dire ». Le tapuscrit ne donne pas de démonstration et s'arrête là. Pour une
+variété abélienne, c'est le critère $p$-adique de bonne réduction, analogue du
+critère de Néron--Ogg--Šafarevič (Serre--Tate, \emph{Ann.\ of Math.}\ 1968,
+pour $\ell$ distinct de la caractéristique résiduelle) ; c'est le cas d'un
+trait du théorème de la page 2.}
+
+\pagerange{51}{52}
+\section*{Un lemme qui supprime l'hypothèse (pages 51 et 52)}
+
+\textbf{Lemme} (page 51). Soient $K$ un corps, $G$ un groupe algébrique sur
+$K$, $M = (M(n))_n$ un groupe $p$-divisible sur $K$ et $\varphi : M \to G$ un
+homomorphisme. On suppose que $K$ est de caractéristique $p$, ou bien que $K$
+est parfait et que $G$ ne contient pas de sous-groupe isomorphe à
+$\mathbf{G}_a$. Alors $\varphi$ se factorise par un sous-groupe $H$ de $G$,
+extension d'une variété abélienne par un tore.\footnote{L'hypothèse est un ajout
+encadré, à la place d'un « b) » biffé ; on la lit comme une alternative,
+« car $K = p$, ou [$K$ parfait et $G$ sans $\mathbf{G}_a$] », ce que
+confirment les deux cas de la démonstration. « $p \neq$ car $K$ » est biffé
+dans l'énoncé.}
+
+\emph{Démonstration.} Soit $Z_n$ le centralisateur de $\varphi(M(n))$. Les
+$Z_n$ forment une suite décroissante de sous-groupes fermés, donc
+stationnaire ; soit $Z$ sa valeur finale. Les $\varphi(M(n))$ sont
+commutatifs, contenus les uns dans les autres, et centralisent $Z$ : $\varphi$
+se factorise par le centre de $Z$, qui est commutatif.\footnote{La page écrit
+« par $Z$, et même par $\mathrm{Centr}(Z)$ » ; c'est par
+$Z \cap \mathrm{Centr}(Z)$, le centre de $Z$, qu'il faut entendre la
+factorisation, puisque c'est lui qui est commutatif.} On peut donc supposer
+$G$ commutatif. Le composé $M \to G \to G/G^0$ est nul, un groupe fini ne
+recevant pas d'image non nulle d'un groupe $p$-divisible ; on peut supposer
+$G$ connexe.
+
+\emph{1er cas : $K$ de caractéristique $p$.} Pour tout $\nu$, $\varphi$ se
+factorise par $p^\nu G$, car $M(n) = p^\nu M(n + \nu)$. Pour $\nu$ grand,
+$p^\nu G$ est extension d'une variété abélienne par un tore.\footnote{« à
+dégager en lemme, valable pour tout groupe algébrique commutatif sur un corps
+de car.\ $p > 0$ ». C'est vrai : sur une clôture parfaite, $G/G_{\mathrm{red}}$ est
+infinitésimal donc tué par une puissance de $p$, d'où
+$p^{2\nu} G \subset p^\nu G_{\mathrm{red}} \subset p^\nu G$, et ces groupes
+coïncident pour $\nu$ grand ; la décomposition de Chevalley de
+$G_{\mathrm{red}}$, extension d'une variété abélienne par $T \times U$,
+montre que $p^\nu$ tue $U$ ; être une extension d'une variété
+abélienne par un tore descend au corps de base. L'argument est le nôtre.}
+
+\emph{2e cas : $K$ parfait, sans $\mathbf{G}_a$ dans $G$.} Alors
+$G_{\mathrm{red}}$ est lisse, et sa partie unipotente, déployée sur un corps
+parfait, est nulle faute de $\mathbf{G}_a$ : $G_{\mathrm{red}}$ est extension
+d'une variété abélienne par un tore. Si $p$ est distinct de la
+caractéristique, les $M(n)$ sont étales, et $\varphi$ se factorise par
+$G_{\mathrm{red}}$ ; si $p$ est la caractéristique, on est dans le 1er
+cas.\footnote{La page dit seulement : « Alors on sait que $G$ est ext.\ d'une
+VA par un tore ! », ce qui n'est vrai que de $G_{\mathrm{red}}$ ; « $p \neq$ car
+$K$, les $M(n)$ sont alors étales » est biffé. Deux lignes encadrées et
+biffées ouvrent la page 52.}
+
+\textbf{Application} (page 52). Soient $S$ un trait de corps des fonctions $K$
+et de corps résiduel $k$, $G$ un $S$-schéma en groupes néronien, $M$ un
+$S$-groupe $p$-divisible et $\varphi_K : M_K \to G_K$. Alors $\varphi_K$ se
+prolonge, de façon évidemment unique, en $\varphi : M \to G$.
+
+Si $p$ est distinct de la caractéristique résiduelle, $M$ est étale, et la
+propriété de Néron suffit. Supposons $p = \mathrm{car}\,k$. Alors $K$ est de
+caractéristique $p$, ou de caractéristique $0$ et donc parfait ; et $G_K$ ne
+contient pas de $\mathbf{G}_a$, puisqu'il admet un modèle de Néron. Le lemme
+donne $H_K \subset G_K$, extension d'une variété abélienne par un tore, et
+$\psi_K : M_K \to H_K$ par lequel $\varphi_K$ se factorise. $H_K$ admet un
+modèle de Néron $H$, et l'inclusion $H_K \to G_K$ se prolonge en $i : H \to
+G$.\footnote{La page écrit le but de $i$ comme un $K$ ; on lit $G$. Le modèle
+de Néron de $H_K$ est de type fini parce que $G_K$, qui a un modèle de Néron de
+type fini, ne contient pas de $\mathbf{G}_m$, et $H_K$ non plus ; c'est le
+critère d'existence de Bosch, Lütkebohmert et Raynaud (\emph{Néron Models},
+§ 10.2), que la page ne pouvait citer.} Le théorème du tapuscrit, appliqué à
+$H$ --- la page dit « le th.\ de Raynaud pour $H$ » ---, prolonge $\psi_K$ en
+$\psi : M \to H$, et $\varphi = i \circ \psi$. « On gagne ! »
+
+L'hypothèse du tapuscrit sur la fibre générique est ainsi superflue, comme le
+disait la marge au crayon de la page 47 : il suffit que $G$ soit néronien. Et
+c'est sous cette forme que le cas d'un trait sert la page 8.
+
+\end{document}
