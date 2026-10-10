@@ -1,0 +1,1876 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 149, pages 1-135.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken the true statement appears and the footnote
+% says what the page has. In any dispute of substance the transcription
+% governs: whoever cites Grothendieck cites batch-01.fr.tex to batch-07.fr.tex.
+%
+% Scope: the folder is 135 archivists' pages in seven batches (1-20, ...,
+% 121-135), all transcribed, read whole before any of this was written, and
+% written as ONE file for the whole shelfmark. Page 1 is a pencilled label
+% (« Pages 1-67 ») with no mathematics. His own pagination 1-67 runs on the
+% even archivists' pages; the odd pages between continue the text.
+%
+% The spine. One continuous text in four numbered paragraphs:
+%   §1 « Résultats de fidélité » (pages 2-39, his 1-19): the étale topos /
+%      fundamental groupoid / Galois group of a field f.g. over Q; Thm 1
+%      (trivial centralisers), Scholie, Thm 2 (faithfulness), Cor. 1-3, Thm 3
+%      (points give distinct section classes), and a « Complément »;
+%   §2 « La question de pleine fidélité » (pages 40-51, his 20-26): the
+%      anabelian conjectures (Question-conjecture, Conjecture fondamentale);
+%   §3 « Étude des sections de E_U sur Γ » (pages 52-103, his 26-51): points
+%      and cusps, Conjectures A, B, B', relative curves, the local criterion,
+%      specialisation of sections, bad reduction;
+%   §4 « Sections d'extensions, et anneaux de valuation généraux » (pages
+%      104-135, his 52-67): notation, inertia, the Riemann-Zariski space, a
+%      birational conjecture, the boundary strata. The folder stops mid-§4.
+% Reading order: pages 82-83 (his 41) carry formulas (7), (8), which sit
+% between (6) of page 66 and (9) of page 72, and continue the argument of
+% pages 69-71; they are read there. Page 84 continues page 81.
+%
+% Notation fixed for the whole folder (his letters in brackets):
+%   G_K = Gal(Kbar/K) [E_{Kbar/K}, curly E_K, Gamma when K is algebraic];
+%   pi_1(X) the arithmetic fundamental group [E_X, curly E_X]; Delta_X =
+%   pi_1(X_Kbar) the geometric one [pi, pi_X, pi_{U/K}]; for a field,
+%   Delta_K = Gal(Kbar/K.Qbar) [pi_{Kbar/K}, pi_K]; k the algebraic closure of
+%   Q in K, G_k the « arithmetic part » [Gamma_{Kbar/K}, Gamma]; B_K, Pi_K kept;
+%   Out for Autext; Zhat(1) = lim mu_n [T, T_infty(Kbar*)]; chi the
+%   cyclotomic character and G_K^o = ker chi [Gamma^o, E^o]; L_i the cuspidal
+%   inertia (« lacet ») subgroups, as in folder 145; K^h, K^sh fraction fields
+%   of the henselisation and strict henselisation [both written K-tilde];
+%   « hyperbolic » for his « anabélienne » (2g-2+nu > 0); « polycourbe
+%   hyperbolique » for « variété élémentaire (d'Artin) anabélienne ».
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - pp. 12-14: Thm 1 and its corollary on « extensions successives de groupes
+%     libres » need the free factors non-abelian (rank >= 2); supplied.
+%   - p. 24: 3°) H_1(X) = H_1(J) holds modulo torsion; only surjectivity is
+%     used. X normal supplied for the generalised Albanese.
+%   - pp. 25, 31: a polycurve of dim >= 2 need NOT embed in a semi-abelian
+%     variety (universal elliptic curve minus zero section over Y(N)); the
+%     page's claim and its example in Thm 3 hold for curves only.
+%   - p. 33: G(K) is not finitely generated when G has a torus part (K* is
+%     not); what is true and needed is that G(K) has no non-zero infinitely
+%     divisible element.
+%   - pp. 36-39: the Lemma, stated without any pi_1 hypothesis, is FALSE for
+%     types (1,1) and (1,2) (U = E - {o,-u}; E - {o,t}, t of order 2); the
+%     page's argument works for g != 1 and for g = 1, nu >= 3; with the
+%     hypothesis of p. 26 all types go through. p. 38: J \ f^{-1}(I), not
+%     J \ f(I); the « shrink U » condition does not remove the case card I = 1.
+%   - p. 53: the extension (2) is by the NORMALISER of L_i, not its
+%     centraliser; the first assertion of the Proposition is false for type
+%     (0,2) (every section of G_m is cuspidal) and needs hyperbolicity.
+%   - pp. 100-102: c), d) => a) of the « Conjecture de bonne réduction » is
+%     false in general (genus 0 with colliding points; genus >= 2 of compact
+%     type); a) <=> b) is Oda's criterion.
+%   - p. 118: I = Norm_pi(I) can hold only in relative dimension 1.
+%   - p. 120: pi_1(U) is G_L modulo the inertia of the divisorial valuations
+%     WITHOUT centre on U (the page, partly uncertain, says « ayant un centre »).
+%   - p. 121: non-divisorial discrete valuations exist for n >= 2, so codim-0
+%     and divisorial points are not the only ones with noetherian local ring.
+%   - p. 123: the rank of the inertia is the rational rank of the value group,
+%     <= codim (Abhyankar), not = codim.
+%   - p. 126: (32)-(33) are read for the model U (section from x in U(K));
+%     for E_L as written they contradict pp. 44 and 125.
+%   - p. 129: 2°) is false in general (an arc valuation with v(t1) = v(t2)).
+%   - p. 133: the boundary map pi_2(D_J) -> T^J is given by Chern classes of
+%     normal bundles and can be non-zero ((-1)-curve), which is what the margin
+%     of p. 129 senses.
+%
+% Announced and never established in the folder: the injectivity of
+% G_k -> Out(Delta_K) (p. 20, « je sais prouver »); the centraliser fact of
+% p. 44 (« à vérifier »); every conjecture of §§2-4; the intersection-
+% multiplicity formula of p. 77 (« demander à Carlos » — true, cf. footnote);
+% the case nu = 1 of p. 77 (« je vais admettre »); the identification of the
+% class c_i with the conormal class (p. 80, sign undecided); the profinite
+% characterisation of the geometric splittings (p. 84); e) => a) of p. 102;
+% questions 1°), 2°) of p. 129; the struck continuation of p. 135.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{149}
+\pages{1}{135}
+\dating{s.d. — le groupe « Autour de La "Longue Marche" à travers la théorie de Galois » (141 à 149) est daté [à partir de 1978]-1983}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Autour de La "Longue Marche" à travers la théorie de Galois, pages 1 à 67] : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces soixante-sept pages, de la numérotation de Grothendieck, forment un texte
+suivi, découpé en quatre paragraphes, et posent une question qui paraît
+d'abord déraisonnable : peut-on reconstruire une courbe algébrique, ou un
+corps de fonctions, définis sur les nombres rationnels, à partir de leurs
+seules symétries ?
+
+Les symétries en question sont celles de Galois. À un corps $K$ on associe le
+groupe de toutes les permutations de ses extensions algébriques qui respectent
+les opérations : son \emph{groupe de Galois absolu}. Quand $K$ contient des
+transcendantes — c'est le corps des fonctions d'une courbe, d'une surface —,
+ce groupe se coupe en deux. Une partie \emph{géométrique} décrit comment l'on
+peut tourner autour des trous de la variété : c'est son groupe fondamental, le
+groupe des lacets que le dossier 145 étudie pour la sphère privée de trois
+points. Une partie \emph{arithmétique}, le groupe de Galois des nombres
+algébriques, agit sur la première. Toute la question du dossier est de savoir
+ce que cette action « sait ».
+
+Le premier paragraphe montre qu'elle sait beaucoup : le groupe n'a pas de
+centre, si bien que la connaissance de l'action, à automorphisme intérieur
+près, suffit ; deux plongements de corps qui induisent la même application
+entre groupes sont égaux ; deux points rationnels distincts d'une courbe se
+voient comme deux « sections » distinctes du groupe fondamental. La preuve de
+ce dernier fait passe par le théorème de Mordell–Weil : la géométrie seule ne
+suffit pas, et Grothendieck le dit (« je n'arrive pas à le prouver par voie
+géométrique — pour ceci je me rabats sur une méthode arithmétique »). Le
+deuxième paragraphe demande la réciproque, « avec un peu de culot » : tout
+homomorphisme entre ces groupes qui respecte l'action arithmétique et n'est
+pas dégénéré vient-il de la géométrie ? Ce sont les \emph{conjectures
+anabéliennes}.
+
+Le troisième paragraphe en isole le cœur, qui est aujourd'hui encore la
+pièce manquante : les \emph{sections}. Une image le guide, et c'est la
+sienne. Une courbe hyperbolique sur les complexes est le quotient d'un disque
+par un groupe de transformations ; son revêtement universel est ce disque,
+complété par un cercle de « points à l'infini ». Le groupe de Galois agit sur
+ce disque complété. Grothendieck conjecture qu'il y a toujours un point fixe,
+et un seul : soit à l'intérieur, et c'est un point rationnel de la courbe ;
+soit sur le bord, et c'est une « pointe », un trou rationnel. Un théorème de
+point fixe, comme celui de Brouwer pour un disque — mais pour un disque
+profini, et l'analogie s'arrête là. Le quatrième paragraphe étend ce
+programme aux variétés de dimension quelconque, par les anneaux de valuation
+et l'espace de Riemann–Zariski ; il s'interrompt au milieu d'une construction.
+
+Le texte dit aussi, en passant, comment il travaille. Il essaie, échoue, se
+rabat (« Ouf ! » à la fin d'une démonstration de quatre pages) ; il hasarde
+des conjectures qu'il qualifie lui-même d'« hérétiques », puis les retrouve
+dans la logique de ce qui suit ; et il s'impatiente du langage même dans
+lequel il écrit : il faudra, dit-il, « développer un langage géométrique qui
+colle mieux à l'intuition géométrique, que les sempiternelles extensions de
+groupes profinis ».
+
+Ces conjectures sont celles que Grothendieck énoncera dans sa lettre à
+Faltings de juin 1983. Une partie en a été démontrée dans les années 1990
+(Nakamura, Tamagawa, Pop, Mochizuki) : on reconstruit effectivement une
+courbe hyperbolique, ou un corps de fonctions, à partir de son groupe
+fondamental muni de l'action de Galois. La \emph{conjecture des sections},
+elle, reste ouverte à notre connaissance. Pour aller plus loin : géométrie
+anabélienne, conjecture des sections, sections cuspidales et points base
+tangentiels, polycourbes hyperboliques, critère de bonne réduction d'Oda,
+espace de Riemann–Zariski, complexe dual d'un diviseur à croisements normaux.
+
+\keywords{étale fundamental group, absolute Galois group, outer Galois representation, anabelian geometry, Grothendieck anabelian conjecture, Hom conjecture, faithfulness, centraliser, cohomological dimension, Artin neighbourhood, hyperbolic polycurve, generalised Jacobian, Kummer theory, Mordell–Weil theorem, Lefschetz fixed-point formula, section conjecture, cuspidal section, tangential base point, birational section conjecture, universal cover, specialisation of sections, purity, decomposition group, inertia group, henselisation, good reduction criterion, Zariski–Riemann space, valuation ring, Abhyankar inequality, normal crossings divisor, dual complex}
+\end{resume}
+
+\pagerange{2}{135}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+\begin{itemize}
+\item \textbf{§1, « Résultats de fidélité » (pages 2 à 39, ses pages 1 à 19).}
+Le topos étale, le groupoïde fondamental et le groupe de Galois d'un corps de
+type fini sur $\mathbb{Q}$ ; partie géométrique et partie arithmétique
+(pages 2 à 11) ; dimension cohomologique (11-12) ; théorème 1, centralisateurs
+triviaux (12-14) ; scholie et descriptions équivalentes (14-19) ; un
+renforcement (20) ; théorème 2, fidélité, avec les corollaires 1 à 3 et le
+théorème 3 (21-35) ; un « Complément » géométrique (36-39).
+\item \textbf{§2, « La question de pleine fidélité » (pages 40 à 51, ses pages
+20 à 26).} Les homomorphismes « admissibles » ; la question-conjecture sur les
+corps (40-44) ; les modèles et la « conjecture fondamentale » (45-49) ; un
+programme de reconstruction (49-51).
+\item \textbf{§3, « Étude des sections de $\pi_1(U)$ sur $G_K$ » (pages 52 à
+103, ses pages 26 à 51).} Points et pointes, conjecture A (52-57) ; la forme
+« point fixe », conjectures B et B$'$ (57-62) ; courbes relatives et
+reconstruction (63-68) ; sections rationnelles et sections partout définies
+(69-78, avec le feuillet 82-83) ; la classe de l'extension de seconde espèce
+(78-84) ; spécialisation des sections (84-98) ; mauvaise réduction (98-103).
+\item \textbf{§4, « Sections d'extensions, et anneaux de valuation généraux »
+(pages 104 à 135, ses pages 52 à 67).} Révision des notations (104-114) ;
+modèles et inertie (114-120) ; l'espace de Riemann–Zariski (120-123) ; germes
+de sections, une conjecture birationnelle (123-127) ; l'inertie le long du bord
+(127-131) ; strates du bord (131-135). Le dossier s'arrête là, sur un
+paragraphe barré.
+\end{itemize}
+
+\emph{L'ordre des feuillets.} Grothendieck numérote une page sur deux (ses
+pages 1 à 67 sont les pages paires 2 à 134 des archivistes) ; les pages
+impaires continuent le texte sans rupture. Une seule exception : les pages 82
+et 83 (sa page 41) ne prolongent pas la page 81 ; elles portent les formules
+numérotées (7) et (8), qui s'insèrent entre la formule (6) de la page 66 et la
+formule (9) de la page 72, et elles poursuivent l'argument des pages 69 à 71.
+On les lit là. La page 84 reprend exactement où s'arrête la page 81. Cette
+remise en ordre est la nôtre ; la numérotation des formules est ce qui la
+fonde.
+
+\emph{Ce qui n'est pas établi.} Le dossier démontre les énoncés du §1, à
+quelques points près que les notes signalent. Tout ce qui suit est
+conjectural, et Grothendieck le dit à chaque pas ; quelques présomptions des
+§§3 et 4 sont fausses telles qu'écrites, et les notes le montrent par un
+exemple.
+
+\subsection*{Les conventions}
+
+\emph{Corps et groupes de Galois.} $K$ est un corps de type fini sur
+$\mathbb{Q}$, de degré de transcendance $n$ ; $\overline{K}$ une clôture
+algébrique ; $G_K = \mathrm{Gal}(\overline{K}/K)$\footnote{Il écrit
+$E_{\overline{K}/K}$, puis $\mathcal{E}_K$ (une lettre ronde), et $\Gamma$
+quand le corps est algébrique sur $\mathbb{Q}$ ; au §4, $\mathcal{E}^{\overline
+K}_K$ et $\Gamma_K$. Nous écrivons $G_K$ partout.}. On note $k$ la fermeture
+algébrique de $\mathbb{Q}$ dans $K$, extension finie de $\mathbb{Q}$, et
+$\overline{\mathbb{Q}}$ celle de $\mathbb{Q}$ dans $\overline{K}$. Le
+caractère cyclotomique est $\chi : G_K \to \widehat{\mathbb{Z}}^{*}$, et
+$G_K^{\circ} = \ker \chi = G_{K(\mu_\infty)}$\footnote{Il écrit
+$\Gamma^{\circ}$, $E^{\circ}$, $\mathcal{E}_K^{\circ}$.}. On écrit
+$\widehat{\mathbb{Z}}(1) = \varprojlim_n \mu_n$, module de Tate du groupe
+multiplicatif\footnote{Il écrit $T$, ou $T_\infty(\overline{K}^{*})$, ou
+$\varprojlim \mu_n$.}.
+
+\emph{Groupes fondamentaux.} Pour un $K$-schéma $X$ géométriquement connexe,
+$\pi_1(X)$ est son groupe fondamental étale (arithmétique), et
+$\Delta_X = \pi_1(X_{\overline{K}})$ sa partie géométrique, d'où la suite
+exacte fondamentale
+\[
+1 \longrightarrow \Delta_X \longrightarrow \pi_1(X) \longrightarrow G_K
+\longrightarrow 1 .
+\]
+Pour $X = \operatorname{Spec} K$ on écrit $\Delta_K = \mathrm{Gal}(\overline{K}
+/ K\overline{\mathbb{Q}})$\footnote{Il écrit $\mathcal{E}_X$ ou $E_X$ pour
+$\pi_1(X)$, et $\pi$, $\pi_X$, $\pi_{U/K}$, $\pi_{\overline{K}/K}$, $\pi_K$
+pour la partie géométrique.}. Les groupes « extérieurs » sont les groupes
+définis à automorphisme intérieur près ; $\mathrm{Out}(\Delta) =
+\mathrm{Aut}(\Delta)/\mathrm{Int}(\Delta)$\footnote{Son $\mathrm{Autext}$. Le
+dossier 141 (pages 11 à 15) développe la même notion sous forme de
+bitorseurs, $\mathrm{Isomext}(\pi', \pi)$.}. $B_K$ est le topos étale de
+$\operatorname{Spec} K$, $\Pi_K$ son groupoïde fondamental : ses objets sont
+les clôtures séparables de $K$.
+
+\emph{Courbes.} Une courbe de type $(g, \nu)$ est une courbe lisse
+géométriquement connexe, complémentaire de $\nu$ points dans une courbe
+propre $X = \widehat{U}$ de genre $g$ ; elle est \emph{hyperbolique} si
+$2g - 2 + \nu > 0$\footnote{Son mot est « anabélienne » : $\Delta_U$ est
+alors non abélien, et de centre trivial. Il exclut ainsi les types $(0,0)$,
+$(0,1)$, $(0,2)$, $(1,0)$.}. Les points de $X \setminus U$ sont ses
+\emph{pointes} ; à chaque pointe $i$ et à chaque point de
+$\widetilde{U}$ au-dessus correspond un sous-groupe d'inertie $L_i \subset
+\Delta_U$, isomorphe à $\widehat{\mathbb{Z}}(1)$, bien défini à conjugaison
+près — le « sous-groupe de lacets » de Grothendieck, noté $L_i$ comme dans
+le dossier 145.
+
+\emph{Variétés élémentaires.} Une \emph{variété élémentaire} (d'Artin) est un
+schéma lisse qui se dévisse en fibrations successives de courbes lisses
+(fibrations élémentaires de SGA 4, exposé XI) ; elle est \emph{hyperbolique}
+si toutes les fibres le sont — on dit aujourd'hui \emph{polycourbe
+hyperbolique}\footnote{Son « variété élémentaire anabélienne », ou
+« admissible ». Le nom de polycourbe est postérieur (Hoshi, Schmidt–Stix).}.
+
+\emph{Sections.} Une section de $\pi_1(U) \to G_K$ est un homomorphisme
+continu $s : G_K \to \pi_1(U)$ relevant l'identité ; on la considère à
+conjugaison par $\Delta_U$ près. Un point $x \in U(K)$ en donne une classe :
+ce sont les sections \emph{de première espèce}. Une pointe rationnelle en
+donne d'autres, par le normalisateur de $L_i$ : ce sont les sections
+\emph{de seconde espèce}, aujourd'hui \emph{sections cuspidales}\footnote{Il
+emploie lui-même « de 2\textsuperscript{e} espèce » à la page 78.}.
+
+\emph{Hensélisés.} Pour un point $s$ d'un schéma normal, $K^{h}_s$ et
+$K^{sh}_s$ sont les corps des fractions de l'hensélisé et de l'hensélisé
+strict de l'anneau local\footnote{Il écrit $\tilde K$ pour les deux, à une
+ligne d'intervalle (page 92).}.
+
+\pagerange{2}{39}
+\section*{§1. Résultats de fidélité (pages 2 à 39)}
+
+\pagerange{2}{11}
+\subsection*{Le groupe de Galois d'un corps, partie géométrique et partie arithmétique (pages 2 à 11)}
+
+À tout corps $K$ on associe son topos étale $B_K$, topos galoisien
+profini, et le groupoïde $\Pi_K$ de ses points : ce groupoïde est
+canoniquement anti-équivalent à celui des clôtures séparables de $K$. Pour une
+telle clôture $\overline{K}$, le groupe d'automorphismes du point
+correspondant s'identifie à $G_K$, ou plutôt à son opposé\footnote{La
+parenthèse de la page (« il vaut peut-être mieux dire : à l'opposé de ce
+groupe ») tient à ce que les clôtures varient comme les foncteurs fibres, à
+l'inverse des points. Le choix n'a pas d'incidence sur ce qui suit, puisque
+$g \mapsto g^{-1}$ identifie un groupe à son opposé.}. On retrouve $B_K$
+soit comme le topos des systèmes locaux sur $\Pi_K$, soit comme celui des
+ensembles discrets munis d'une action continue de $G_K$.
+
+Un plongement $K \to K'$ définit un morphisme de topos $B_{K'} \to B_K$ et
+un morphisme de groupoïdes $\Pi_{K'} \to \Pi_K$ : une clôture $\overline{K'}$
+de $K'$ en définit une de $K$, la fermeture algébrique de $K$ dans
+$\overline{K'}$, et l'on obtient un homomorphisme
+\[
+G_{K'} \longrightarrow G_K
+\]
+dont l'image est le sous-groupe fermé qui fixe $K_1 = \overline{K} \cap K'$,
+fermeture algébrique de $K$ dans $K'$\footnote{La page écrit $K^{*}$ pour
+$K$ en trois endroits ; la petite marque ne paraît désigner que $K$
+lui-même.}. Si $K'$ est de type fini sur $K$, $K_1$ est fini sur $K$ :
+l'image est ouverte, et égale à $G_K$ si et seulement si $K$ est
+séparablement clos dans $K'$. L'homomorphisme est injectif si et seulement si
+$K'$ est algébrique sur $K$, donc bijectif si et seulement si $K'/K$ est
+radicielle — en caractéristique $0$, si et seulement si $K \to K'$ est un
+isomorphisme. Ainsi les foncteurs $K \mapsto B_K$, $K \mapsto \Pi_K$,
+$K \mapsto G_K$ sont \emph{conservatifs} sur la catégorie des corps de
+caractéristique $0$ et des extensions de type fini\footnote{Une note en
+diagonale, en partie illisible, propose pour la caractéristique $p$ de
+passer à la catégorie quotient où les extensions radicielles finies sont
+inversées ; c'est la forme juste de l'énoncé en caractéristique $p$.}.
+
+Pour des corps quelconques, ces foncteurs sont loin d'être fidèles : tous les
+corps séparablement clos ont le même topos, le topos ponctuel. On associe donc
+à $K$ un objet plus fin, le système projectif $\mathbb{B}_K = (B_{K_i})$, où
+$K_i$ parcourt les sous-corps de $K$ de type fini sur le corps premier, et de
+même $\boldsymbol{\Pi}_K$ et $\mathbb{G}_K$. On a $B_K \simeq \varprojlim
+B_{K_i}$, $\Pi_K \simeq \varprojlim \Pi_{K_i}$, $G_K \simeq \varprojlim
+G_{K_i}$ ; la réciproque ne vaut pas, mais comme le foncteur
+$\mathrm{Ind}(\text{corps de type fini}) \to \text{corps}$ est une
+équivalence, les foncteurs pro-objets $K \mapsto \mathbb{B}_K$, etc., ont
+exactement les propriétés de fidélité de leurs restrictions aux corps de type
+fini, auxquels on se borne désormais. Il faudra pourtant, en cours de route,
+une description algébrique des pro-groupes attachés par exemple à
+$\mathbb{C}$.
+
+Le rôle dominant est tenu par $\mathbb{Q}$, et par $G_{\mathbb{Q}} =
+\mathrm{Gal}(\overline{\mathbb{Q}}_0/\mathbb{Q})$, où
+$\overline{\mathbb{Q}}_0$ est la clôture algébrique de $\mathbb{Q}$ dans
+$\mathbb{C}$. Tout corps $K$ de caractéristique $0$ est muni de $B_K \to
+B_{\mathbb{Q}}$, $\Pi_K \to \Pi_{\mathbb{Q}}$, c'est-à-dire, une clôture
+$\overline{K}$ étant choisie, d'un homomorphisme $G_K \to
+G_{\mathbb{Q}}$, et l'on regarde désormais $B_K$, $\Pi_K$, $G_K$ comme munis
+de cette structure. Son noyau est la \emph{partie géométrique}
+$\Delta_K$ ; son image, la \emph{partie arithmétique}, est le sous-groupe
+ouvert $G_k \subset G_{\mathbb{Q}}$, où $k$ est la fermeture algébrique de
+$\mathbb{Q}$ dans $K$ :
+\[
+1 \longrightarrow \Delta_K \longrightarrow G_K \longrightarrow G_k
+\longrightarrow 1 .
+\]
+On a $\Delta_K = 1$ si et seulement si $K$ est fini sur $\mathbb{Q}$.
+
+Pour interpréter $\Delta_K$, on écrit $K = \varinjlim A_i$, où $A_i$
+parcourt les sous-$\mathbb{Q}$-algèbres de type fini de $K$ ; les $U_i =
+\operatorname{Spec} A_i$ sont les \emph{modèles affines} de $K$. On peut se
+borner à des $A_i$ réguliers, reliés par des localisations $A_j = (A_i)_{f}$,
+donc à des $U_i$ lisses sur $k$ et géométriquement intègres, reliés par des
+immersions ouvertes ; et même, d'après Artin, à des variétés élémentaires.
+Le choix de $\overline{K}$ définit un point géométrique $\bar\eta$ commun aux
+$U_i$, et l'on a
+\[
+G_K = \pi_1(\operatorname{Spec} K, \bar\eta) \xrightarrow{\ \sim\ }
+\varprojlim_i \pi_1(U_i, \bar\eta), \qquad
+\Delta_K \xrightarrow{\ \sim\ } \varprojlim_i \Delta_{U_i}, \qquad
+\Delta_{U_i} = \pi_1(U_i \otimes_k \overline{\mathbb{Q}}, \bar\eta),
+\]
+la seconde égalité parce que la suite exacte de $K$ est la limite projective
+des suites exactes d'homotopie
+\[
+1 \longrightarrow \Delta_{U_i} \longrightarrow \pi_1(U_i) \longrightarrow
+G_k \longrightarrow 1 .
+\]
+Par un plongement $\overline{K} \subset \mathbb{C}$, $\Delta_{U_i}$ est le
+complété profini du groupe fondamental de la variété complexe
+$U_i(\mathbb{C})$ (théorème d'existence de Riemann)\footnote{La page note
+$\Gamma_i$ dans une parenthèse ce qu'elle appelle $E_i$ dans le texte ; un
+membre de l'égalité placée sous $\pi_1(k, \bar\eta)$ est surchargé et
+illisible ; une note en diagonale, très pâle, renvoie aux formules (12) et (13)
+et à « $K/k_0$ » sans qu'on puisse en lire davantage.}.
+
+\pagerange{11}{12}
+\subsection*{Dimension cohomologique (pages 11 et 12)}
+
+Si $U_i$ est une variété élémentaire de dimension $n$, les fibrations
+successives font de $\Delta_{U_i}$ une extension successive de $n$ groupes
+profinis libres (ceux des fibres, courbes affines). D'où $\mathrm{cd}\,
+\Delta_{U_i} = n$, $\mathrm{cd}_\ell\, \pi_1(U_i) \le n+2$ pour $\ell$ impair,
+et à la limite
+\[
+\mathrm{cd}\, \Delta_K \le n, \qquad \mathrm{cd}_\ell\, G_K \le n + 2 \quad
+(\ell \ne 2),
+\]
+qui sont en fait des égalités\footnote{La page ajoute « s.f. erreur ». Les
+égalités sont exactes : $\Delta_K$ est le groupe de Galois absolu de
+$K\overline{\mathbb{Q}}$, de type fini et de degré de transcendance $n$ sur
+un corps algébriquement clos, de dimension cohomologique $n$ (Serre,
+\emph{Cohomologie galoisienne}, II.4.2) ; pour $\ell$ impair,
+$\mathrm{cd}_\ell\, G_k = 2$, et la formule d'additivité donne $n+2$. Le
+numéro de la formule, lu « (14) », ressemble sur la page à « (K) ».} : le
+degré de transcendance absolu de $K$ se lit sur la cohomologie de $G_K$.
+
+\pagerange{12}{14}
+\subsection*{Théorème 1 : centralisateurs triviaux (pages 12 à 14)}
+
+\textbf{Théorème 1.} \emph{Soit $K$ de type fini sur $\mathbb{Q}$. Le
+centralisateur dans $G_K$ de tout sous-groupe ouvert de $G_K$ est trivial ;
+de même dans $\Delta_K$.}
+
+La démonstration passe par deux corollaires, qui en sont les deux cas
+extrêmes.
+
+\textbf{Corollaire} (le cas arithmétique)\textbf{.} \emph{Dans
+$G_{\mathbb{Q}}$, le centralisateur de tout sous-groupe ouvert est
+trivial.} Soit $\Gamma'$ ouvert, qu'on peut supposer distingué, et $Z$ son
+centralisateur. Le centre de $\Gamma'$ est trivial\footnote{La page dit « il
+est bien connu (?) » et ajoute en marge « ? à vérifier ». C'est vrai : le
+groupe de Galois absolu d'un corps de nombres est de centre trivial.}, donc
+$Z \cap \Gamma' = 1$, $Z$ s'injecte dans $G_{\mathbb{Q}}/\Gamma'$ et est fini.
+Or les seuls éléments d'ordre fini non triviaux de $G_{\mathbb{Q}}$ sont les
+conjugués de la conjugaison complexe $\tau$ (Artin–Schreier), et le
+centralisateur de $\tau$ est $\{1, \tau\}$, qui ne contient pas $\Gamma'$. Donc
+$Z = 1$.
+
+\textbf{Corollaire} (le cas géométrique)\textbf{.} \emph{Soit $\Delta$ un
+groupe profini, extension successive de groupes profinis libres non
+abéliens. Le centralisateur dans $\Delta$ de tout sous-groupe ouvert est
+trivial.}\footnote{La page dit « libres », sans « non abéliens » ;
+l'hypothèse est indispensable, puisque $\widehat{\mathbb{Z}}$, libre de rang
+$1$, est abélien. Elle est satisfaite en choisissant des modèles dont les
+fibres sont hyperboliques, ce qu'on peut toujours faire en ôtant des points :
+c'est l'hypothèse « anabélienne » que la page ajoute plus loin (pages 23 et
+27).} Par récurrence : si $N \subset \Delta$ est le premier facteur libre et
+$Z$ centralise $\Delta'$ ouvert, l'image de $Z$ dans $\Delta/N$ centralise
+l'image, ouverte, de $\Delta'$, donc est triviale ; ainsi $Z \subset N$ et $Z$
+centralise $\Delta' \cap N$, ouvert dans $N$. On est ramené à un groupe libre
+$F$ de rang $\ge 2$ et à $\Delta'$ ouvert distingué : $\Delta'$ est libre de
+rang $\ge 2$, donc de centre trivial, $Z$ s'injecte dans $F/\Delta'$ et est
+fini, et un groupe profini libre est sans torsion\footnote{La page admet ces
+deux faits, en marge : « à vérifier ». Ils sont classiques ; le second tient à
+ce qu'un groupe profini libre est de dimension cohomologique $1$.}. Le cas
+d'une limite projective $\Delta_K = \varprojlim \Delta_{U_i}$, à applications
+de transition surjectives, s'en déduit aussitôt.
+
+\emph{Démonstration du théorème.} Si $Z$ centralise $E' \subset G_K$ ouvert,
+son image dans $G_k$ centralise l'image de $E'$, ouverte, donc est triviale
+par le premier corollaire : $Z \subset \Delta_K$, et $Z$ centralise $E' \cap
+\Delta_K$, ouvert dans $\Delta_K$, donc $Z = 1$ par le second\footnote{Le
+début de la démonstration, page 12, est enchevêtré de trois lignes biffées ;
+seul le sens général se lit, celui qu'on donne.}.
+
+\pagerange{14}{19}
+\subsection*{Scholie : ce que voit le groupe extérieur (pages 14 à 19)}
+
+Parce que $G_K$ est de centre trivial, le groupoïde $\Pi_K$ — et donc
+$B_K$ — est connu à isomorphisme unique près dès qu'on connaît le groupe
+extérieur sous-jacent à $G_K$. Les homomorphismes $G_{K'} \to G_K$ associés
+aux extensions de type fini ont une image ouverte, donc de centralisateur
+trivial ; par suite les morphismes $B_{K'} \to B_K$ et $\Pi_{K'} \to \Pi_K$
+sont déterminés, à isomorphisme unique près, par l'homomorphisme extérieur
+correspondant. Il en va ainsi des morphismes structuraux $B_K \to
+B_{\mathbb{Q}}$.
+
+Grothendieck préfère un point de vue voisin, qui exploite le fait que
+$\Delta_K$ est lui aussi de centre trivial : l'extension de $G_k$ par
+$\Delta_K$ est alors entièrement déterminée, à isomorphisme unique près, par
+l'action extérieure
+\[
+\varphi : G_k \longrightarrow \mathrm{Out}(\Delta_K),
+\]
+comme image inverse par $\varphi$ de l'extension universelle
+
+\begin{tikzcd}
+1 \arrow[r] & \Delta_K \arrow[r] & \mathrm{Aut}(\Delta_K) \arrow[r] & \mathrm{Out}(\Delta_K) \arrow[r] & 1 \\
+ & & & G_k \arrow[u, "\varphi"'] &
+\end{tikzcd}
+
+Un couple $(K, \overline{K})$ est donc décrit, avec une fidélité qui reste à
+examiner, par un triple $(\Delta, \Gamma, \varphi)$ — groupe profini $\Delta$,
+sous-groupe ouvert $\Gamma$ d'un $G_{\mathbb{Q}}$ bien déterminé, action
+extérieure $\varphi$ — d'où l'on reconstruit l'extension $G_K$ et
+l'homomorphisme $\Pi_K \to \Pi_{\mathbb{Q}}$ avec un objet de
+$\Pi_K$\footnote{« J'ai oublié de préciser », écrit-il, qu'il faut se donner
+$\Gamma$ comme sous-groupe d'un $G_{\mathbb{Q}}$ déterminé, c'est-à-dire un
+objet de $\Pi_{\mathbb{Q}}$ sur lequel $\Gamma$ opère fidèlement.}. On
+obtient ainsi plusieurs descriptions essentiellement équivalentes d'une
+extension $K$ de type fini de $\mathbb{Q}$ :
+\begin{enumerate}
+\item le topos $B_K$, comme topos pro-galoisien sur $B_{\mathbb{Q}}$ ;
+\item son groupoïde fondamental $\Pi_K$, au-dessus de $\Pi_{\mathbb{Q}}$ ;
+\item le groupe extérieur $G_K$, au-dessus du groupe extérieur
+$G_{\mathbb{Q}}$ ;
+\item pour un couple $(K, \overline{K})$ : un objet $\overline{\mathbb{Q}}$ de
+$\Pi_{\mathbb{Q}}$ et un homomorphisme $G_K \to
+\mathrm{Gal}(\overline{\mathbb{Q}}/\mathbb{Q})$ ;
+\item une clôture $\overline{\mathbb{Q}}$ étant fixée, pour un couple $(K,
+i)$ où $i : k \to \overline{\mathbb{Q}}$ : le groupe extérieur $\Delta_K$ sur
+lequel un sous-groupe ouvert de $G_{\mathbb{Q}}$ opère extérieurement ;
+\item (en marge) le groupoïde de $K \otimes_{\mathbb{Q}} \overline{\mathbb{Q}}$,
+ou son topos galoisien, sur lequel $G_{\mathbb{Q}}$ opère\footnote{Note
+verticale en marge, en partie illisible. La page 19 écrit aussi « $\pi_1(K) =
+\Gamma_K$ » là où l'on attend $\Delta_K$.}.
+\end{enumerate}
+Dans la description 5, un plongement $K \to K'$ donne un homomorphisme
+extérieur $\Delta_{K'} \to \Delta_K$ d'image ouverte, donc de centralisateur
+trivial, commutant aux actions extérieures de $G_{k'}$ ; ces données suffisent
+à reconstituer les extensions $G_K$, $G_{K'}$, les topos à équivalence près,
+et l'homomorphisme d'extensions.
+
+\pagerange{20}{20}
+\subsection*{Remarque : un renforcement (page 20)}
+
+Si $K$ n'est pas fini sur $\mathbb{Q}$, le théorème 1 se renforce : pour
+tout $\Delta' \subset \Delta_K$ ouvert \emph{dans $\Delta_K$}, on a
+$\mathrm{Centr}_{G_K}(\Delta') = 1$, pourvu que l'action extérieure $\varphi :
+G_k \to \mathrm{Out}(\Delta_K)$ soit injective. En effet, si $Z$ est ce
+centralisateur, $Z \cap \Delta_K = 1$ par le théorème 1 ; quitte à
+remplacer $K$ par une extension finie, on peut supposer $\Delta' = \Delta_K$,
+et alors l'image de $Z$ dans $G_k$ agit trivialement sur $\Delta_K$, à
+automorphisme intérieur près, donc est dans $\ker \varphi = 1$, et $Z = 1$.
+Grothendieck écrit : « sauf erreur je sais prouver que cet homomorphisme est
+injectif (on est ramené aussitôt au cas où $K$ est de degré de transcendance
+1, et au cas du $\pi_1$ d'une courbe algébrique…) », et la page s'arrête
+là\footnote{La page annonçait d'abord une conclusion plus faible : $Z$
+d'ordre $1$ ou $2$, engendré dans le second cas par une conjugaison
+complexe. L'injectivité de la représentation galoisienne extérieure d'une
+courbe hyperbolique sur un corps de nombres est aujourd'hui établie : pour
+$\mathbb{P}^1 \setminus \{0, 1, \infty\}$ c'est une conséquence du
+théorème de Belyi (1979) ; pour les courbes hyperboliques affines, puis
+propres, elle a été démontrée dans les années 1990 et 2000 (Matsumoto,
+Hoshi–Mochizuki). Rien ne dit quel argument il avait en vue.}.
+
+\pagerange{21}{39}
+\section*{Théorème 2 : fidélité (pages 21 à 39)}
+
+\pagerange{21}{23}
+\subsection*{L'énoncé, et sa réduction à la géométrie (pages 21 à 23)}
+
+\textbf{Théorème 2.} \emph{Le foncteur $K \mapsto (\Pi_K \to \Pi_{\mathbb{Q}})$,
+des extensions de type fini de $\mathbb{Q}$ vers les groupoïdes profinis
+au-dessus de $\Pi_{\mathbb{Q}}$, est fidèle.}
+
+Autrement dit, si deux plongements $f, g : K \rightrightarrows K'$ induisent
+des morphismes isomorphes au-dessus de $\Pi_{\mathbb{Q}}$, alors $f = g$. En
+termes de groupes : une clôture $\overline{K'}$ étant choisie, $f$ et $g$ en
+déduisent deux clôtures de $K$, et l'hypothèse dit qu'on peut les identifier
+de sorte que $f^{*} = g^{*} : G_{K'} \to G_K$ ; une clôture
+$\overline{\mathbb{Q}}$ étant fixée, que les deux homomorphismes extérieurs
+$\Delta_{K'} \rightrightarrows \Delta_K$, compatibles à l'action de
+$G_{\mathbb{Q}}$, sont égaux\footnote{Une note en marge observe que le
+théorème « n'est pas spécial à $\mathbb{Q}$ » et vaudrait sur un corps de
+base quelconque ; la suite de la note est illisible. Une autre, en bas de
+marge, ramène au cas $K = K'$.}.
+
+\emph{Réduction.} Écrivons $\operatorname{Spec} K = \varprojlim U_i$, d'où
+$\Delta_K = \varprojlim \Delta_{U_i}$. Il suffit de voir que $f_i = f|_{A_i}$
+et $g_i = g|_{A_i}$ coïncident pour tout $i$. Pour $i$ fixé, $K' =
+\varinjlim A'_j$ avec $A'_j \supset f(A_i) \cup g(A_i)$, et $\Delta_{K'} =
+\varprojlim \Delta_{V_j}$, $V_j = \operatorname{Spec} A'_j$. Les $V_j$ étant
+réguliers, les applications $\Delta_{K'} \to \Delta_{V_j}$ sont surjectives :
+l'égalité des homomorphismes extérieurs $\Delta_{K'} \to \Delta_{U_i}$
+entraîne donc celle de $\Delta_{V_j} \to \Delta_{U_i}$. Les morphismes $f_i,
+g_i : V_j \rightrightarrows U_i$ sont dominants, puisque $f$ et $g$ sont des
+plongements de corps ; et l'on est ramené à un énoncé « purement
+géométrique », sur un corps algébriquement clos.
+
+\textbf{Corollaire 1.} \emph{Soient $X$, $Y$ des schémas de type fini sur un
+corps algébriquement clos $k$, $X$ normal et connexe, et $f, g : X
+\rightrightarrows Y$ tels que $\pi_1(f) = \pi_1(g)$ comme homomorphismes
+extérieurs.}
+\begin{enumerate}
+\item[a)] \emph{Si $Y$ se plonge, par $i$, dans un groupe algébrique
+commutatif $G$, extension d'une variété abélienne par un tore, il existe un
+unique $a \in G(k)$ tel que $i \circ g = \tau_a \circ i \circ f$, où $\tau_a$
+est la translation par $a$.}
+\item[b)] \emph{Si $Y$ est une polycourbe hyperbolique et si $f$ ou $g$ est
+dominant, alors $f = g$.}
+\end{enumerate}
+\footnote{La page dit d'abord « $X$, $Y$ réduits », puis, pour b), « $X$
+réduit » sur un « normal » biffé. Nous supposons $X$ normal et connexe, ce
+qu'exige la jacobienne généralisée utilisée en a), et ce que le corollaire 2
+supposera. Une note marginale oblique, rattachée à b), est en grande partie
+illisible. Une autre observe que dans a) il suffit que $H_1(f, \mathbb{Z}_\ell)
+= H_1(g, \mathbb{Z}_\ell)$ pour un $\ell$ premier à la caractéristique.}
+
+\pagerange{23}{24}
+\subsection*{Le cas abélien (pages 23 et 24)}
+
+L'unicité de $a$ est claire : $a = g(x) - f(x)$ pour tout $x$. Pour
+l'existence, on remplace $Y$ par $G$, on choisit une origine $x_0 \in X(k)$ et
+l'on se ramène à $f(x_0) = g(x_0) = 0$ ; il s'agit alors de prouver $f = g$, et
+l'on peut affaiblir l'hypothèse en $H_1(f, \mathbb{Z}_\ell) = H_1(g,
+\mathbb{Z}_\ell)$ pour un $\ell$ premier à la caractéristique. Soit $J$ la
+jacobienne généralisée de $X$ (sa variété d'Albanese généralisée, extension
+d'une variété abélienne par un tore). On sait que
+\begin{enumerate}
+\item[1°)] tout morphisme $f : X \to G$ tel que $f(x_0) = 0$ se factorise de
+façon unique en $X \xrightarrow{\mathrm{can}} J \xrightarrow{\varphi} G$, avec
+$\varphi$ un homomorphisme de groupes algébriques ;
+\item[2°)] un tel $\varphi$ est déterminé par son action sur $H_1(-,
+\mathbb{Z}_\ell) = T_\ell$, c'est-à-dire sur les points de torsion
+$\ell$-primaire, qui sont denses ;
+\item[3°)] $H_1(X, \mathbb{Z}_\ell) \to H_1(J, \mathbb{Z}_\ell)$ est
+surjectif\footnote{La page écrit un isomorphisme. C'en est un modulo torsion
+(en caractéristique $0$) ; seule la surjectivité sert.}.
+\end{enumerate}
+Si $f = \varphi \circ \mathrm{can}$ et $g = \psi \circ \mathrm{can}$, l'égalité
+$H_1(f) = H_1(g)$ et 3°) donnent $H_1(\varphi) = H_1(\psi)$, donc $\varphi =
+\psi$ par 2°), et $f = g$.
+
+L'hypothèse de a) ne peut donner $f = g$ sans normalisation : pour $X = Y = G$,
+les translations induisent l'identité sur $\pi_1(G)$ sans être l'identité.
+
+\pagerange{24}{27}
+\subsection*{Le cas hyperbolique : réduction à un énoncé sur les translations (pages 24 à 27)}
+
+L'hypothèse de dominance n'est pas superflue : deux applications constantes
+distinctes induisent la même application (triviale) sur les $\pi_1$.
+
+Supposons d'abord $Y$ plongé par $i$ dans une extension $G$ d'une variété
+abélienne par un tore\footnote{La page affirme qu'une variété élémentaire
+« se plonge bien sûr » dans un tel groupe. C'est vrai pour une courbe
+hyperbolique (dans sa jacobienne généralisée), faux en général en dimension
+$\ge 2$ : la courbe elliptique universelle privée de sa section nulle,
+au-dessus d'une courbe modulaire $Y(N)$, $N \ge 3$, est une polycourbe
+hyperbolique de dimension $2$ dont la monodromie sur le $H_1$ de la fibre n'a
+que des coinvariants finis ; son application d'Albanese généralisée se
+factorise par la base et n'est pas un plongement. Les arguments des pages 25 à
+39 valent donc tels quels pour les courbes ; en dimension supérieure ils
+demandent un dévissage le long de la fibration, que la page invoque page 36
+(« par dévissage ») sans l'écrire.}. Par a), $i \circ g = \tau_u \circ i \circ
+f$ pour un $u \in G(k)$. Comme $f$ est dominant, il existe un ouvert non vide
+$V \subset Y$ contenu dans l'image de $f$ et tel que $V + u \subset Y$ ; quitte
+à remplacer $X$ par un ouvert dense, $f$ se factorise par $j : V \hookrightarrow
+Y$, et $g$ par $j' : V \to Y$, $y \mapsto y + u$. L'image de $\pi_1(X) \to
+\pi_1(V)$ est un sous-groupe \emph{ouvert} (c'est vrai pour un morphisme
+dominant entre variétés normales). L'hypothèse dit donc que $\pi_1(j)$ et
+$\pi_1(j')$ coïncident, à automorphisme intérieur de $\pi_1(Y)$ près, sur un
+sous-groupe ouvert de $\pi_1(V)$, et l'on est ramené à :
+
+\begin{quote}
+\emph{($\ast$) Soient $V \subset Y$ un ouvert non vide et $u \in G$ tels que
+$V + u \subset Y$, et que $\pi_1(j)$, $\pi_1(j')$ coïncident extérieurement sur
+un sous-groupe ouvert de $\pi_1(V)$. Alors $u = 0$.}
+\end{quote}
+
+\footnote{Dans ces lignes la page note $U$ l'ouvert de $Y$, d'abord noté $V$,
+comme l'ouvert de $X$ ; nous gardons $V$. Une note en marge observe que ($\ast$)
+n'est pas plus fort que le corollaire : on le retrouve en prenant pour $X$ le
+revêtement étale fini de $V$ attaché au sous-groupe ouvert.}« Finalement, je
+n'arrive pas à le prouver par voie \emph{géométrique} — pour ceci je me
+rabats sur une méthode \emph{arithmétique} » : ce sont les corollaires 2 et 3
+et le théorème 3. La démonstration géométrique viendra quand même, dans le
+« Complément » des pages 36 à 39.
+
+\pagerange{27}{33}
+\subsection*{Le détour arithmétique : corollaires 2 et 3, théorème 3 (pages 27 à 33)}
+
+\textbf{Corollaire 2.} \emph{La conclusion $f = g$ de 1 b) reste vraie si,
+au lieu de supposer $f$ ou $g$ dominant, on suppose $k$ de caractéristique
+$0$, $X$ normal, et l'une des hypothèses suivantes :}
+\begin{enumerate}
+\item[c)] \emph{l'image de $\pi_1(f)$ est ouverte dans $\pi_1(Y)$, et $Y$ est
+une polycourbe hyperbolique ;}
+\item[d)] \emph{l'image de $\pi_1(f)$ a un centralisateur trivial dans
+$\pi_1(Y)$, et $Y$ se plonge dans une extension d'une variété abélienne par
+un tore.}
+\end{enumerate}
+\footnote{Un alinéa e), sur le centre de $\pi_1(X)$, est annulé par une série
+de boucles.}Le cas c) est un cas particulier de d), puisque le centralisateur
+d'un sous-groupe ouvert du $\pi_1$ d'une polycourbe hyperbolique est trivial
+(corollaire géométrique de la page 14)\footnote{En marge : « il faut quand
+même traiter à part le cas des $\pi_1$ d'une courbe complète de genre
+$g \ge 2$, et vérifier que son $\pi_1$ est à centre trivial » — ce qui est
+vrai. Pour que c) relève de d), il faut aussi le plongement de $Y$ ; voir la
+note de la page 25.}. Dans le cas d), on peut remplacer $X$ par un ouvert,
+la normalité assurant que $\pi_1(X') \to \pi_1(X)$ reste surjectif.
+
+\emph{Démonstration.} La situation $(X, Y, f, g)$ provient, par extension des
+scalaires, d'une situation analogue sur un corps $K$ de type fini sur
+$\mathbb{Q}$, avec $k \supset \overline{K}$. Les groupes $\pi_1$ de $X_K$,
+$Y_K$ sont des extensions de $G_K$ par $\Delta_X$, $\Delta_Y$ ; et comme
+l'image de $\Delta_X$ a un centralisateur trivial, ces extensions et les
+homomorphismes $\pi_1(f_K)$, $\pi_1(g_K)$ sont reconstruits à partir de leurs
+parties géométriques et des actions extérieures de $G_K$ (c'est l'argument de
+la scholie). Ils sont donc égaux, et tout revient au
+
+\textbf{Corollaire 3.} \emph{Soient $X$, $Y$ de type fini sur un corps $K$
+de type fini sur $\mathbb{Q}$, géométriquement connexes, $X$ réduit, $Y$
+plongé dans une extension d'une variété abélienne par un tore ; soient $f,
+g : X \rightrightarrows Y$ tels que $\pi_1(f) = \pi_1(g)$ comme homomorphismes
+d'extensions de $G_K$, à conjugaison par $\Delta_Y$ près. Alors $f = g$.}
+
+Il suffit même que les homomorphismes induits sur les extensions
+« abélianisées » — de $G_K$ par $\Delta_X^{\mathrm{ab}}$, $\Delta_Y^{\mathrm{ab}}$
+— soient égaux. Une fois les hypothèses anabéliennes ramenées, dit-il, à des
+hypothèses « arithmético-géométriques », on peut laisser tomber l'anabélien et
+jouer sur l'abélien, mais dans un contexte arithmétique : au lieu de
+l'égalité des $H_1(\overline{f})$, $H_1(\overline{g})$ du corollaire 1 a), on a
+celle de deux homomorphismes d'\emph{extensions} de $G_K$ par les
+$H_1(\overline{X}, \mathbb{Z}_\ell)$, pour tout $\ell$.
+
+\emph{Démonstration.} Il suffit de voir que $f(x) = g(x)$ pour $x \in X(K)$,
+car on peut faire une extension finie de $K$ et les points fermés sont denses
+dans $X$ réduit. Un point $x$ définit une classe de conjugaison de sections de
+$\pi_1(X) \to G_K$, et a fortiori de l'extension abélianisée ; l'hypothèse
+dit que $f(x)$ et $g(x)$ définissent la même classe de sections de
+$\pi_1(Y)$. Tout revient donc au
+
+\textbf{Théorème 3.} \emph{Soit $X$ un schéma de type fini, géométriquement
+connexe, sur un corps $K$ de type fini sur $\mathbb{Q}$, qui se plonge dans
+une extension $G$ d'une variété abélienne par un tore. Alors les applications
+canoniques}
+\[
+(\ast)\qquad X(K) \longrightarrow \bigl\{\text{sections de } \pi_1(X) \to
+G_K\bigr\}/\Delta_X ,
+\]
+\[
+(\ast\ast)\qquad X(K) \longrightarrow \bigl\{\text{sections de }
+\pi_1(X)^{(\mathrm{ab})} \to G_K\bigr\}/\text{conj.}
+\]
+\emph{sont injectives}, où $\pi_1(X)^{(\mathrm{ab})}$ est l'extension de $G_K$
+par $\Delta_X^{\mathrm{ab}} = H_1(\overline{X}, \widehat{\mathbb{Z}})$
+déduite de $\pi_1(X)$\footnote{La page donne pour exemple « une variété
+élémentaire d'Artin à fibres génériques distinctes de la droite projective et
+de la droite affine » ; pour une courbe c'est juste, en dimension $\ge 2$ voir
+la note de la page 25. Une note en marge observe qu'il suffirait que $K$ soit
+de type fini sur son corps premier, la forme étant « pas très utilisable » en
+caractéristique $p$.}.
+
+\emph{Démonstration.} Il suffit de traiter $(\ast\ast)$, et l'on se ramène à
+$X = G$. L'application est alors un homomorphisme
+\[
+G(K) = H^0(K, G) \longrightarrow H^1\bigl(K, T(G)\bigr), \qquad T(G) =
+H_1(\overline{G}, \widehat{\mathbb{Z}}) = \varprojlim_n {}_nG .
+\]
+La suite de Kummer $0 \to {}_nG \to G \xrightarrow{n} G \to 0$ donne
+\[
+0 \longrightarrow G(K)/n \longrightarrow H^1(K, {}_nG) \longrightarrow
+{}_nH^1(K, G) \longrightarrow 0,
+\]
+et à la limite, l'application $G(K) \to \varprojlim_n H^1(K, {}_nG)$ —
+composée de la précédente avec $H^1(K, T(G)) \to \varprojlim H^1(K, {}_nG)$ —
+a pour noyau $\bigcap_n nG(K)$, les éléments infiniment divisibles de
+$G(K)$\footnote{C'est, sur un schéma en groupes quelconque, la suite de Kummer
+que le dossier 141 écrit pour $\mathbb{G}_m$ (pages 3 et 5).}. Or il n'y en a
+pas d'autre que $0$\footnote{La page invoque le théorème de Mordell–Weil :
+« $G(K)$ est un $\mathbb{Z}$-module de type fini ». C'est vrai pour une
+variété abélienne (Lang–Néron), faux dès qu'il y a un tore : $\mathbb{G}_m(K)
+= K^{*}$ n'est pas de type fini. Ce qui est vrai, et suffit, est que
+$\bigcap_n nG(K) = 0$ : pour la partie abélienne par Lang–Néron ; pour un
+tore déployé parce que $K^{*}$ est produit d'un groupe fini (les racines de
+l'unité de $K$) et d'un groupe abélien libre, $K$ étant de type fini ; et un
+élément de $G(K)$ infiniment divisible a une image infiniment divisible dans la
+partie abélienne, nulle, puis (quitte à multiplier par l'exposant de la
+torsion de celle-ci) appartient à $\bigcap_n nT(K) = 0$.}, d'où l'injectivité.
+
+\emph{Remarque} (page 33). Il ne suffisait pas de prendre l'extension par
+$H_1(\overline{X}, \mathbb{Z}_\ell)$ pour un seul $\ell$ : la translation par
+un point d'ordre $p \ne \ell$ donne un contre-exemple. L'énoncé dit ceci :
+pour $x \in G(K)$, le torseur sous $T(G)$ image inverse de $x$ dans le
+« revêtement universel abélien » $\widetilde{G} = \varprojlim (G
+\xrightarrow{n} G)$ est trivial — c'est-à-dire que $x$ est divisible par tout
+$n$ — seulement si $x = 0$.
+
+\pagerange{33}{35}
+\subsection*{En caractéristique $p$ (pages 33 à 35)}
+
+L'énoncé reste vrai en caractéristique $p > 0$ si l'on remplace les ${}_pG$,
+non étales, par des quotients convenables, dans une catégorie de
+« quasi-variétés » où les morphismes finis radiciels surjectifs sont inversés.
+Mais cette forme « me fait une belle jambe » : il faudrait la version
+première à $p$ ; or déjà pour une courbe elliptique, l'injectivité de
+$(\ast\ast)$ est fausse en version première à $p$ (translation par un point
+d'ordre $p$). Il est possible, ajoute-t-il, que $(\ast)$ reste injective sans
+hypothèse de caractéristique — « à examiner de plus près »\footnote{Ces deux
+pages sont, dans la transcription, les plus lacunaires du §1 : une dizaine de
+segments illisibles. On ne rend que ce qui se lit avec sûreté.}.
+
+Revenant au corollaire 1 b) en caractéristique $p$, avec les groupes
+fondamentaux premiers à $p$, la démonstration arithmétique montre que le $u$
+de la page 25 est un point de $p$-torsion de $G(K)$ ; si $G$ est un tore (fibres
+de genre $0$), $u = 0$. Dans le cas général elle donne seulement : si $P =
+f(x)$ et $Q = g(x)$, $Q - P$ est de $p$-torsion dans la jacobienne généralisée
+de $Y$, et de même au-dessus de tout revêtement étale galoisien fini ; « il se
+pourrait qu'on puisse en déduire $P = Q$ ». En marge : le théorème 2 reste
+certainement vrai en caractéristique $p$ pour les groupes premiers à $p$, la
+réduction géométrique ramenant au cas d'un produit de courbes de genre
+zéro.
+
+\pagerange{36}{39}
+\subsection*{Complément : une démonstration géométrique (pages 36 à 39)}
+
+Grothendieck revient au corollaire 1 b) par voie géométrique, en prenant pour
+$G$ la jacobienne généralisée de $Y$, et énonce :
+
+\textbf{Lemme.} \emph{Soient $Y$ une polycourbe hyperbolique sur $k$
+algébriquement clos, $Y \hookrightarrow J^1_Y$ son plongement dans sa
+jacobienne généralisée, $u \in J^0_Y(k)$, et $V \subset Y$ un ouvert non vide
+tel que $V + u \subset Y$. Alors $u = 0$.}
+
+Tel quel, sans hypothèse sur les $\pi_1$, le lemme est faux pour les courbes de
+types $(1,1)$ et $(1,2)$\footnote{Exemples, sur une courbe elliptique $E$
+d'origine $o$. Type $(1,1)$ : $Y = E \setminus \{o\}$, dont la jacobienne
+généralisée est $E$ ; pour $u \ne 0$, $V = E \setminus \{o, -u\}$ vérifie $V +
+u = E \setminus \{u, o\} \subset Y$. Type $(1,2)$ : $Y = E \setminus \{o,
+t\}$ avec $t$ d'ordre $2$ ; la translation par $t$ est un automorphisme de $Y$.
+Dans les deux cas l'hypothèse de ($\ast$), page 26, est violée : dans le
+premier, le lacet autour de $-u$ est tué par $j$ et envoyé par $j'$ sur un
+lacet autour de la pointe $o$, non trivial ; dans le second, $\tau_t$ échange
+les deux classes de lacets de pointes. Le corollaire 1 b) n'est donc pas mis en
+cause, seulement le lemme du Complément, qui oublie l'hypothèse.} ; il est
+vrai pour les autres types de courbes hyperboliques, et pour tous si l'on
+garde l'hypothèse de ($\ast$). C'est ce que l'argument de la page donne, une
+fois remis en ordre. Par dévissage on se ramène au cas d'une courbe, $Y = X
+\setminus I$, $X$ propre de genre $g$, $I$ fini, $V = X \setminus J$ avec $J
+\supset I$\footnote{Il note $\hat Y$ la complétion de $Y$ ; nous la notons
+$X$.}.
+
+\emph{Genre $g \ge 2$.} Si $Y$ est complète, $V + u \subset Y$ entraîne $Y + u
+= Y$, et $\tau_u$ induit un automorphisme de $Y$ qui agit trivialement sur la
+cohomologie (il est homotope à l'identité dans $J^1_Y$, dont la cohomologie
+s'envoie isomorphiquement sur celle de $Y$ en degré $1$). Par la formule des
+points fixes de Lefschetz il a $2 - 2g \ne 0$ points fixes comptés avec
+multiplicité, alors qu'une translation non nulle n'en a aucun : $u = 0$. En
+général on obtient ainsi que l'image $\bar u$ de $u$ dans $J^0_X$ est nulle ;
+et alors $x + u = y$ avec $x, y \in Y$ force $x$ et $y$ à avoir même image
+dans $J^1_X$, donc $x = y$ dès que $g \ge 1$, et $u = 0$\footnote{Un
+passage barré (pages 36-37) faisait le même calcul sur la courbe « pincée »
+$X/I$, en décrivant $J^0_Y$ comme extension de $J^0_X$ par
+$\mathbb{G}_m^I/\mathbb{G}_m$. Grothendieck note entre crochets que « ces
+arguments ne marchent que pour $g \ne 1$ » et passe à la forme
+cohomologique.}.
+
+\emph{Forme cohomologique.} Soient $i, j : V \rightrightarrows Y$ l'inclusion
+et $y \mapsto y + u$. On a $H_1(i) = H_1(j)$ : composées avec l'isomorphisme
+$H_1(Y) \simeq H_1(J^1_Y)$, elles diffèrent par $H_1(\tau_u) = \mathrm{id}$.
+Soit $f : X \xrightarrow{\sim} X$ le prolongement de $j$ aux complétées ; on a
+$f(V) \subset Y$, donc $J \supset f^{-1}(I)$. Dans $H_1(V) $ les sous-groupes de
+lacets $L_p$, $p \in J$, engendrent $\widehat{\mathbb{Z}}^J/\widehat{\mathbb{Z}}$
+(quotient par la diagonale) ; le noyau de $H_1(i)$ est engendré par les $L_p$,
+$p \in J \setminus I$, celui de $H_1(j)$ par les $L_p$, $p \in J \setminus
+f^{-1}(I)$\footnote{La page écrit $J \setminus f(I)$ ; c'est $f^{-1}(I)$,
+puisque $j$ tue le lacet autour de $p$ si et seulement si $f(p) \notin I$.}.
+Or dans $\widehat{\mathbb{Z}}^J/\widehat{\mathbb{Z}}$, deux parties propres de
+$J$ engendrent le même sous-module si et seulement si elles sont égales ou
+toutes deux de cardinal $\operatorname{card} J - 1$. Si $\operatorname{card} I
+\ge 2$, les parties $J \setminus I$ et $J \setminus f^{-1}(I)$ sont de cardinal
+$\le \operatorname{card} J - 2$, donc égales : $f^{-1}(I) = I$, et $\tau_u$
+induit un automorphisme de $Y$\footnote{La page veut écarter le cas
+exceptionnel en rapetissant $V$ de sorte que $\operatorname{card}(J \setminus
+I) > 1$. Cela ne suffit pas : le cas exceptionnel est $\operatorname{card} I
+= 1$, que rapetisser $V$ ne change pas. C'est là que tombent les exemples de
+la note précédente.}. Appliquant le même argument à $Y' = X \setminus (I
+\setminus \{i\})$ pour chaque $i \in I$ — possible si $\operatorname{card} I
+\ge 3$ —, $f$ fixe chaque point de $I$. En genre $0$ ($\operatorname{card} I
+\ge 3$ par hyperbolicité) $f$ fixe trois points, donc est l'identité. En genre
+$1$ avec $\operatorname{card} I \ge 3$, $f$ est une translation ayant un point
+fixe, donc $\bar u = 0$, et l'on conclut comme plus haut. « Ouf ! »
+
+Restent les types $(1,1)$ et $(1,2)$, où l'hypothèse de ($\ast$) est
+nécessaire. Elle suffit : si $\pi_1(i)$ et $\pi_1(j)$ coïncident
+extérieurement sur un sous-groupe ouvert, un lacet autour de $p \in J$ (ou
+l'une de ses puissances) est envoyé par $i$ et par $j$ sur des lacets
+conjugués ; comme les sous-groupes d'inertie de deux pointes distinctes de
+$Y$ n'ont pas de conjugués commensurables, et que $L_q$ est non trivial dans
+$\pi_1(Y)$, $f$ fixe chaque pointe ; en genre $1$ c'est une translation à
+point fixe, $\bar u = 0$, et $u = 0$\footnote{Ce paragraphe est de cette
+édition. Pour le cas $g = 1$, une note en marge renvoyait déjà à des
+« arguments cohomologiques plus bas ».}.
+
+\pagerange{40}{51}
+\section*{§2. La question de pleine fidélité (pages 40 à 51)}
+
+\pagerange{40}{44}
+\subsection*{Homomorphismes admissibles, et la question sur les corps (pages 40 à 44)}
+
+Soient $K$, $K'$ de type fini sur $\mathbb{Q}$. Tout homomorphisme
+$\Pi_{K'} \to \Pi_K$ au-dessus de $\Pi_{\mathbb{Q}}$ provient-il d'un
+plongement $K \to K'$ ? On se ramène au cas où $K$ et $K'$ ont la même
+fermeture algébrique $k$ de $\mathbb{Q}$, plongée dans
+$\overline{\mathbb{Q}}$ ; la question est alors de savoir si tout
+homomorphisme $\Delta_{K'} \to \Delta_K$ qui commute à l'action de $G_k$ est
+induit par un plongement. Il faudrait, pour en construire un, savoir
+reconstruire $K$ à partir de l'extension $G_K$, et l'on « pressent » que le
+théorème 3, appliqué à $\mathbb{P}^1_K$ convenablement troué, pourrait en
+donner la clé. L'idée : les opérations de $G_k$ sont « si draconiennes »
+qu'un homomorphisme qui les respecte ne peut être que géométrique — et cela
+exige que le corps de base soit $\mathbb{Q}$, ou de type fini sur
+$\mathbb{Q}$, et non quelconque.
+
+Il faut se borner aux homomorphismes d'image ouverte : sinon $K' = k$,
+$\Delta_{K'} = 1$, donnerait un plongement $K \to k$. Pour travailler avec les
+$\Delta$ plutôt qu'avec les $G$, il faut au moins que le centralisateur dans
+$\Delta_K$ de l'image de tout sous-groupe ouvert soit trivial ; un tel
+homomorphisme est dit \emph{admissible}. Pour $K' = k$, ce qui comptera n'est
+pas l'homomorphisme trivial $1 \to \Delta_K$, mais les \emph{sections} de $G_K
+\to G_k$.
+
+\textbf{Question-conjecture.} \emph{Pour un morphisme $B_{K'} \to B_K$ de
+topos au-dessus de $B_{\mathbb{Q}}$, les conditions suivantes sont-elles
+équivalentes : a) il provient d'un plongement $K \subset K'$ ; b)
+l'homomorphisme extérieur $G_{K'} \to G_K$ a une image ouverte ; [c) il est
+admissible] ?}
+
+On a a) $\Rightarrow$ b) $\Rightarrow$ c), et b) équivaut à ce que $\Delta_{K'}
+\to \Delta_K$ ait une image ouverte\footnote{La page écrit ici $\pi_K \to
+\pi_{K'}$, à l'inverse des autres flèches de la page ; nous suivons le sens
+$K' \to K$. La condition c) est mise entre crochets, avec en marge « c) n'est
+pas juste, cf. plus bas ».}. Une réponse affirmative avec c) impliquerait,
+pour $\operatorname{degtr} K' < \operatorname{degtr} K$, qu'aucun homomorphisme
+admissible $G_{K'} \to G_K$ n'existe ; en particulier qu'une section de $G_K$
+au-dessus d'un ouvert $\Gamma'$ de $G_k$ a toujours un centralisateur non
+trivial, donc (le centralisateur de $\Gamma'$ dans $G_k$ étant trivial)
+que $\Delta_K^{\Gamma'} \ne 1$. Or cela est « sans doute faux » (le §3 dira
+pourquoi : pour les sections venant de points, on attend des invariants
+triviaux). D'où la correction :
+
+\begin{enumerate}
+\item[c$'$)] \emph{l'homomorphisme $G_{K'}^{\circ} \to G_K$ induit est
+admissible.}
+\end{enumerate}
+
+Pour voir que c$'$) est nécessaire, il faudrait savoir que pour tout ouvert
+$E' \subset G_K$, le centralisateur de $E'^{\circ}$ est trivial ; cela
+résulterait de la démonstration du théorème 1 et du fait que, pour $\Gamma'$
+ouvert dans $G_{\mathbb{Q}}$, le centralisateur de $\Gamma'^{\circ}$ dans
+$G_{\mathbb{Q}}$ est trivial\footnote{En marge : « à vérifier ! ». Nous ne le
+vérifions pas ; c'est la seule chose dont dépend la nécessité de c$'$).}.
+
+\textbf{Conséquence (conjecturale).} \emph{Si $K$ n'est pas algébrique sur
+$\mathbb{Q}$, pour toute section de $G_K$ au-dessus d'un ouvert $\Gamma'$ de
+$G_{\mathbb{Q}}$, on a $\Delta_K^{\Gamma'^{\circ}} \ne 1$.}
+
+Ce n'est pas contradictoire avec ce qu'on attendra des modèles (page 48) :
+une section du groupe d'un \emph{corps} normalise, d'après les conjectures
+du §3, un sous-groupe d'inertie $\simeq \widehat{\mathbb{Z}}(1)$, sur lequel
+$G^{\circ}$ agit trivialement — c'est ce que les pages 55 et 60 rendront
+explicite\footnote{Ce rapprochement est le nôtre ; Grothendieck annonce
+seulement, page 48, qu'il étudiera « les relations entre cette conséquence
+conjecturale et la précédente (d'apparence opposée !) ».}.
+
+\pagerange{45}{49}
+\subsection*{Modèles, et la conjecture fondamentale (pages 45 à 49)}
+
+Les $G_K$ sont, à certains égards, trop gros ; il faut les regarder comme
+limites des $\pi_1(U)$ de leurs modèles affines, et particulièrement de
+modèles élémentaires — ou plus généralement de modèles qui sont des
+$K(\pi, 1)$ au sens profini. Peut-être faut-il exiger, dans la conjecture,
+qu'un homomorphisme $G_{K'} \to G_K$ respecte les « filtrations
+modéliques » de ces groupes. On étudie donc la situation analogue pour les
+modèles, sur $\mathbb{Q}$ (la situation « mixte », sur un corps de type fini,
+lui paraît « un peu bâtarde »). Un morphisme $V \to U$ donne un morphisme de
+topos galoisiens $B_V \to B_U$ ; si $U$ est élémentaire hyperbolique, il est
+connu dès qu'on connaît son effet sur les $H_1(\overline{V}, \mathbb{Z}_\ell)
+\to H_1(\overline{U}, \mathbb{Z}_\ell)$, ce qui est bien moins que la classe
+du morphisme de topos\footnote{Le sens des flèches de la page ($B_U \to B_V$,
+$E_U \to E_V$) est inverse de celui de $V \to U$ ; nous suivons $V \to U$.}.
+Mais quels homomorphismes viennent de morphismes ? « Avec un peu de culot, on
+dirait » :
+
+\textbf{Conjecture fondamentale.} \emph{Soient $U$, $V$ des schémas
+réguliers de type fini sur $\mathbb{Q}$, $U$ une polycourbe hyperbolique sur
+une extension finie de $\mathbb{Q}$, et $f : \pi_1(V) \to \pi_1(U)$ un
+homomorphisme extérieur compatible aux projections sur $G_{\mathbb{Q}}$.
+Équivalence de : a) $f$ provient (à isomorphisme près) d'un morphisme $V \to
+U$, alors unique ; b) $f|_{\pi_1(V)^{\circ}}$ est admissible.}
+
+La nécessité de b) se ramène au cas où $V$ est un point, et c'est la
+
+\textbf{Conséquence conjecturale.} \emph{Si $\Gamma' \subset G_{\mathbb{Q}}$
+est ouvert, de corps fixe $k'$, et $x$ un $k'$-point de $U$, d'où une
+section $\Gamma' \to \pi_1(U)$ et une action de $\Gamma'$ sur $\Delta_U$,
+alors $\Delta_U^{\Gamma'^{\circ}} = 1$.}
+
+La conjecture sur les modèles implique celle sur les corps, si l'on s'y borne
+aux homomorphismes compatibles aux filtrations modéliques\footnote{Une note
+en marge conseille de « se borner à l'équivalence de a) et b) » ; la condition
+c) qu'elle vise n'est pas écrite page 47, c'est vraisemblablement celle des
+pages 43-44.}. Plus généralement, pour des schémas $V$ qui sont limites projectives de
+schémas réguliers de type fini, à transitions affines (des immersions
+ouvertes), par exemple les spectres d'anneaux locaux réguliers
+$\mathcal{O}_{X,x}$, les morphismes \emph{dominants} $V \to U$ devraient
+correspondre exactement aux homomorphismes extérieurs compatibles à
+$G_{\mathbb{Q}}$ et d'image ouverte\footnote{Quand $U$ est une courbe, cette
+forme « dominante » est aujourd'hui un théorème : Mochizuki (1999) a démontré
+que, pour $X$ lisse et $Y$ courbe hyperbolique sur un corps sous-$p$-adique,
+les morphismes dominants $X \to Y$ correspondent aux homomorphismes ouverts
+$\pi_1(X) \to \pi_1(Y)$ au-dessus de $G_K$, à conjugaison près. La forme
+« isomorphismes » est due, pour les courbes, à Nakamura, Tamagawa et
+Mochizuki, et pour les corps de fonctions à Pop.
+La forme générale, avec b), contient la conjecture des sections (cas où $V$ est
+un point), qui reste ouverte.}.
+
+\pagerange{49}{51}
+\subsection*{Un programme de reconstruction (pages 49 à 51)}
+
+La conjecture admise, la question suivante est de déterminer quels topos
+galoisiens sur $B_{\mathbb{Q}}$ viennent de modèles élémentaires
+hyperboliques — c'est-à-dire, les groupes $\Delta_U$ étant connus, quelles
+actions extérieures d'ouverts de $G_{\mathbb{Q}}$ sur eux sont
+géométriques ; et la même question pour d'autres $K(\pi, 1)$ réalisés par des
+variétés qui ne sont pas élémentaires, au premier chef les variétés
+modulaires des courbes algébriques. À partir de là on reconstruirait, par
+recollement et en termes profinis, la catégorie des schémas lisses sur un corps
+de type fini, puis celle des schémas localement de type fini, au moins à
+homéomorphisme universel près.
+
+D'où un énoncé : pour $S$ localement noethérien, le foncteur $X \mapsto
+X_{\mathrm{ét}}$, des schémas réduits localement de présentation finie sur $S$
+vers les topos au-dessus de $S_{\mathrm{ét}}$, serait fidèle (deux morphismes
+$f, g$ tels que $f_{\mathrm{ét}}$ et $g_{\mathrm{ét}}$ soient isomorphes sont
+égaux), et peut-être pleinement fidèle après inversion des homéomorphismes
+universels\footnote{En marge : « $S$ de car. $0$ ? ». Sur un corps de type
+fini de caractéristique $0$, la forme « isomorphismes » pour les schémas normaux
+a été démontrée par Voevodsky (1990), et une forme pleinement fidèle, à
+homéomorphisme universel près, beaucoup plus récemment (Carlson, Haine et
+Wolf) — sauf erreur de notre part sur la portée exacte de ces énoncés.}. Pour
+une courbe propre sur un corps de nombres, on retrouverait que tout
+automorphisme extérieur de $G_K$ ($K$ son corps de fonctions) qui respecte la
+structure et commute à $G_k$ provient d'un automorphisme de la courbe.
+
+\pagerange{52}{103}
+\section*{§3. Étude des sections de $\pi_1(U)$ sur $G_K$ (pages 52 à 103)}
+
+\pagerange{52}{55}
+\subsection*{Points et pointes (pages 52 à 55)}
+
+Soit $U$ un schéma lisse de type fini géométriquement connexe sur $K$, et la
+suite exacte $1 \to \Delta_U \to \pi_1(U) \to G_K \to 1$, définie par le choix
+d'un revêtement universel $\widetilde{U}$. On étudie ses sections à
+$\Delta_U$-conjugaison près, et en même temps les sections au-dessus d'ouverts
+$G_{K'}$ de $G_K$ ($K'$ fini sur $K$). Si $U$ se plonge dans un schéma en
+groupes commutatif convenable, $U(K) \to \{\text{sections}\}/\Delta_U$ est
+injective (théorème 3). Il y a d'autres sections, « géométriques » elles
+aussi.
+
+Soit $U$ une courbe de type $(g, \nu) \ne (0,0), (0,1)$, et $i \in X
+\setminus U$ une pointe rationnelle sur $K$. Le sous-groupe de lacets $L_i
+\simeq \widehat{\mathbb{Z}}(1)$ a pour normalisateur dans $\pi_1(U)$ le
+\emph{groupe de décomposition} de la pointe, extension
+\[
+1 \longrightarrow L_i \longrightarrow N_{\pi_1(U)}(L_i) \longrightarrow G_K
+\longrightarrow 1 ,
+\]
+et ses scindages donnent des sections de $\pi_1(U)$\footnote{La page écrit
+« son centralisateur $Z(L_i)$ ». C'est le normalisateur : $G_K$ agit sur $L_i
+\simeq \widehat{\mathbb{Z}}(1)$ par le caractère cyclotomique, donc ne le
+centralise pas, et la page 79 dira d'ailleurs « le normalisateur de $L_i$ ». La
+suite est exacte à gauche parce que $N_{\Delta_U}(L_i) = L_i$, fait classique
+pour une courbe hyperbolique, que le dossier 145 utilise aussi (pages 6 à 11)
+pour $\mathbb{P}^1 \setminus \{0,1,\infty\}$.}. Il en existe : une
+uniformisante en $i$ en définit une — c'est aujourd'hui un \emph{point base
+tangentiel} (Deligne, 1989). Les classes de scindages forment un torseur sous
+\[
+H^1\bigl(G_K, \widehat{\mathbb{Z}}(1)\bigr) \simeq \varprojlim_n H^1(K, \mu_n)
+\simeq \varprojlim_n K^{*}/K^{*n} = \widehat{K^{*}},
+\]
+et s'envoient injectivement dans les classes de sections de
+$\pi_1(U)$\footnote{Affirmé sans démonstration. L'injectivité revient à ce que
+l'image d'un tel scindage ne normalise aucun autre conjugué de $L_i$, ce que
+la relation ($\dagger$) ci-dessous donnerait.}.
+
+\textbf{Proposition.} \emph{Soit $U$ hyperbolique. Les classes de sections
+issues des scindages des groupes de décomposition des pointes sont distinctes
+de celles des points de $U(K)$ ; et, sauf peut-être pour le type $(0,3)$,
+deux pointes distinctes donnent des classes distinctes.}\footnote{La page
+suppose seulement $(g, \nu) \ne (0,0), (0,1)$ pour la première assertion, et
+l'hyperbolicité pour la seconde. Pour le type $(0,2)$, $U = \mathbb{G}_m$, la
+première est fausse : $\Delta_U = L_0 = L_\infty$, le normalisateur de $L_0$
+est $\pi_1(U)$ tout entier, et toute section, celles des points comprises, est
+« cuspidale ». En marge : « C'est démontré sauf peut-être pour le type $(0,3)$,
+qui mérite un examen approfondi ».}
+
+Pour la première assertion on « bouche » le trou $i$ : la section devient,
+dans $U' = U \cup \{i\}$, celle du point $i$, distincte de celles des autres
+points de $U'$ par le théorème 3 (appliqué à $U'$, de type $(g, \nu - 1)$, qui
+se plonge dans sa jacobienne généralisée), a fortiori distincte de celles des
+points de $U$. On raisonne de même pour deux pointes en bouchant les deux
+trous, sauf pour le type $(0,3)$ qui tombe sur le type $(0,1)$, où l'on n'a pas
+l'injectivité. On s'en tirerait si l'on savait que, pour un scindage du groupe
+de décomposition de $i$, faisant agir $G_K$ sur $\Delta_U$,
+\[
+(\dagger)\qquad \Delta_U^{\,G_K^{\circ}} = L_i \qquad (\text{donc }
+\Delta_U^{\,G_K} = 1),
+\]
+« résultat qui me paraît hautement plausible » ; en marge : « à énoncer parmi
+les conjectures-clefs »\footnote{La page numérote cette relation (3), numéro
+déjà employé à la page 53 pour l'isomorphisme de Kummer.}. La classe de la
+section déterminerait alors celle de $L_i$, donc $i$.
+
+\pagerange{55}{57}
+\subsection*{La conjecture A, et le passage au corps de fonctions (pages 55 à 57)}
+
+\textbf{Conjecture A.} \emph{Soit $U$ une courbe hyperbolique géométriquement
+connexe sur un corps $K$ de type fini sur $\mathbb{Q}$. Toute section de
+$\pi_1(U) \to G_K$ est de l'un des deux types précédents : définie par un
+point de $U(K)$, ou par un scindage du groupe de décomposition d'une pointe
+$i \in X(K) \setminus U(K)$.}
+
+En marge, une précision : $\Delta_U^{G^{\circ}} = 1$ dans le premier cas,
+$= L_i$ dans le second. C'est la \emph{conjecture des sections} de
+Grothendieck, dans sa forme pour les courbes affines\footnote{Elle figure dans
+la lettre à Faltings de juin 1983. À notre connaissance elle reste ouverte
+sur les corps de nombres ; sa forme birationnelle, qui suit, a été démontrée
+sur les corps $p$-adiques (Koenigsmann, 2005 ; Pop).}.
+
+Passant à la limite sur les modèles — au corps de fonctions $L$ de $U$, et à
+$G_L \to G_K$, groupe « à lacets infini » où chaque point de $X$ est une
+pointe —, on obtiendrait que toute section de $G_L \to G_K$ provient d'un
+scindage du groupe de décomposition d'un point $x \in X(K)$ : c'est la
+\emph{conjecture des sections birationnelle}. Les sections se groupent en
+paquets, selon la classe de conjugaison du centralisateur de l'image de
+$G_K^{\circ}$, et l'on retrouve $X(K)$ — et les $X(K')$, $K'$ fini sur $K$ —
+à partir de l'extension $G_L$ de $G_K$, en même temps qu'une façon de
+reconstruire les ouverts $U = X \setminus I$. La structure $G_L \to G_K$ est
+donc la plus riche, et de loin la plus commode en genre $0$ et $1$, où se
+borner aux $U$ de type $(g, \nu)$ hyperboliques « casse le groupe continu
+d'automorphismes ». La forme « modélique » revient à la birationnelle si l'on
+précise que toute section de $\pi_1(U) \to G_K$ se relève en une section de
+$G_L \to G_K$.
+
+\pagerange{57}{62}
+\subsection*{Forme géométrique : un point fixe et un seul (pages 57 à 62)}
+
+Soit $\widetilde{U}$ un revêtement universel de $U$, et $X'$ la normalisée de
+$X$ dans $\widetilde{U}$ — que Grothendieck s'abstient de noter
+$\widetilde{X}$, « vu que justement il n'est pas étale sur $X$ ». Les fibres
+de $X'$ au-dessus d'une pointe $i$ sont en bijection avec les sous-groupes de
+lacets conjugués à $L_i$ ; $X'$ est donc la réunion de $\widetilde{U}$ et de
+l'ensemble des sous-groupes de lacets, qui jouent le rôle de « points à
+l'infini » du revêtement universel.
+
+\begin{tikzcd}
+U \arrow[r, hook] & X \\
+\widetilde{U} \arrow[r, hook] \arrow[u] & X' \arrow[u]
+\end{tikzcd}
+
+\footnote{Le diagramme de la page 57 met en regard les lignes $U \subset X$,
+$\overline{U} \subset \overline{X}$, $\widetilde{U} \subset X'$ au-dessus de $K
+\subset \overline{K}$, par des traits sans flèches. Nous n'en gardons que les
+deux lignes extrêmes, les flèches verticales montant de $\widetilde{U}$ et $X'$
+vers $U$ et $X$.}Le groupe $\pi_1(U)$ s'interprète comme groupe
+d'automorphismes du schéma $\widetilde{U}$ compatibles à son action sur
+$\overline{K}$ (la fermeture algébrique de $K$ dans $H^0(\widetilde{U},
+\mathcal{O})$). Une section de $\pi_1(U) \to G_K$ est donc une action de
+$G_K$ sur $\widetilde{U}$, compatible à son action sur $\overline{K}$ et
+continue en un sens convenable.
+
+\textbf{Conjecture B.} \emph{Toute telle action de $G_K$ sur
+$\widetilde{U}$ a, dans $X'$, un point fixe et un seul.}
+
+Cela signifie : s'il y a un point fixe $\tilde x$ « à distance finie », son
+image dans $U$ est déterminée (théorème 3), il n'y en a pas d'autre au-dessus
+($\Delta_U^{G_K} = 1$), et il n'y a pas en même temps de point fixe à l'infini
+(établi plus haut) ; s'il y a un point fixe à l'infini, une même action ne
+normalise pas deux $L_i$, $L_j$ distincts (établi sauf pour le type $(0,3)$), et
+le $L_i$ normalisé est unique — affaiblissement de ($\dagger$). Grothendieck
+conjecture davantage : \emph{$G_K^{\circ}$ a déjà, dans $X'$, un point fixe et
+un seul} (nécessairement fixe par $G_K$). À distance finie, cela donne
+$\Delta_U^{G^{\circ}} = 1$ ; à l'infini, $\Delta_U^{G^{\circ}} \subset
+N_{\Delta_U}(L_i) = L_i$, d'où la relation ($\dagger$).
+
+Il se demande alors si ces énoncés ne vaudraient pas en partant seulement
+d'un relèvement de $G_K^{\circ}$, ou d'un sous-groupe contenant un ouvert de
+$G_K^{\circ}$ ; et s'ils ne vaudraient pas dès que $K$ est de type fini sur un
+corps cyclotomique, fini ou non sur $\mathbb{Q}$.
+
+Il appelle \emph{courbe de Poincaré} sur $\overline{K}$ algébriquement clos de
+caractéristique $0$ un schéma isomorphe au revêtement universel d'une courbe
+hyperbolique sur $\overline{K}$ (deux courbes donnent des courbes de Poincaré
+isomorphes si et seulement si elles ont des revêtements finis étales
+isomorphes) ; une telle courbe a une complétion canonique, sur laquelle ses
+automorphismes agissent.
+
+\textbf{Conjecture B$'$.} \emph{Soient $K$ de type fini sur $\mathbb{Q}$ (ou
+sur un corps cyclotomique), $\mathcal{U}$ une courbe de Poincaré sur
+$\overline{K}$, de complétion $\mathcal{X}$, et une action de $G_K$ sur
+$\mathcal{U}$ compatible à son action sur $\overline{K}$. Alors $G_K^{\circ}$
+a dans $\mathcal{X}$ un point fixe et un seul.}
+
+La différence avec B : on ne suppose \emph{pas} que l'action normalise celle
+d'un groupe profini $\Delta$ agissant librement avec quotient une courbe
+algébrique.
+
+\pagerange{63}{68}
+\subsection*{Courbes relatives, et un programme de reconstruction (pages 63 à 68)}
+
+Les conjectures s'appliquent quand $K$ est le corps de fonctions d'un modèle
+$S$ (une polycourbe hyperbolique, disons) et que $U_K$ provient d'une courbe
+relative $U_S \to S$. On a alors $\pi_1(U_S) \to \pi_1(S)$ de noyau $\Delta$,
+et $\pi_1(U_K) \to G_K$ s'en déduit par produit fibré le long de la
+surjection $G_K \to \pi_1(S)$ :
+
+\begin{tikzcd}
+\pi_1(U_K) \arrow[r] \arrow[d] & \pi_1(U_S) \arrow[d] \\
+G_K \arrow[r] & \pi_1(S)
+\end{tikzcd}
+
+Les sections de $\pi_1(U_K)$ sur $G_K$ sont donc les relèvements continus $G_K
+\to \pi_1(U_S)$ de $G_K \to \pi_1(S)$, et ceux qui sont triviaux sur le noyau de
+$G_K \to \pi_1(S)$ sont exactement les sections de $\pi_1(U_S)$ sur $\pi_1(S)$.
+Les conjectures prédisent qu'elles sont de deux sortes : 1°) celles des
+sections rationnelles de $U_S$ sur $S$ — et l'on vérifiera (pages 69 à 78)
+qu'une telle section rationnelle ne donne une section de $\pi_1(U_S)$ que si
+elle est \emph{régulière} ; 2°) celles des sections sur $S$ du revêtement fini
+étale $S' = X_S \setminus U_S$ des pointes. Restent deux points « un peu
+techniques » : à quelle condition une telle section définit-elle des scindages,
+et lesquels.
+
+Avant, il veut voir dans quelle mesure la conjecture A permettrait de
+reconstruire la catégorie des modèles élémentaires hyperboliques sur
+$\mathbb{Q}$ et de leurs corps de fonctions, en termes de groupes extérieurs,
+à partir de la donnée fondamentale : \emph{$G_{\mathbb{Q}}$ opérant
+extérieurement sur $\widehat{\pi}_{0,3}$}, groupe fondamental de
+$\mathbb{P}^1_{\mathbb{Q}} \setminus \{0, 1, \infty\}$, d'où l'extension
+$\pi_1(\mathbb{P}^1 \setminus \{0,1,\infty\})$ de $G_{\mathbb{Q}}$\footnote{C'est
+l'action étudiée dans le dossier 145, dont les automorphismes « à lacets » de
+$\widehat{\pi}_{0,3}$ ont pour multiplicateur précisément le caractère
+cyclotomique ; le noyau $G^{\circ}$ de ce dossier-ci est le sous-groupe de
+multiplicateur $1$.}. Les classes de sections « admissibles » (centralisateur
+de l'image de $G^{\circ}$ trivial) de cette extension forment un ensemble sur
+lequel $G_{\mathbb{Q}}$ opère, qui devrait être $(\mathbb{P}^1 \setminus
+\{0,1,\infty\})(\overline{\mathbb{Q}})$ à un ensemble près. Pour tout ensemble
+fini $I$ de telles sections, stable par $G_{\mathbb{Q}}$, un foncteur de
+« forage des trous » doit fournir un groupe extérieur de type $(0, 3 +
+\operatorname{card} I)$ sur lequel $G_{\mathbb{Q}}$ opère. Il vaudrait mieux,
+dit-il, utiliser « le yoga introduit par Ihara des groupoïdes
+rigides »\footnote{La page ne dit pas de quel texte d'Ihara il s'agit, et
+nous ne l'identifions pas.}, et construire l'équivalent groupoïdal de
+$\mathbb{P}^1_{\mathbb{Q}}$, la « sphère arithmétique », qui correspond à un
+groupe à lacets infini — c'est $G_{K_1}$, $K_1 = \mathbb{Q}(T)$. De proche en
+proche, par des fibrations dont chaque cran est une courbe de genre $0$ ou un
+revêtement étale fini d'une telle, on construirait tous les $G_K$ au-dessus de
+$G_{\mathbb{Q}}$ (tout corps de type fini est fini sur une extension
+transcendante pure) et tous les modèles élémentaires, assez pour avoir un
+système fondamental de voisinages de tout point d'une variété lisse, et
+reconstituer celle-ci par recollement.
+
+« Mais je suis certain que pour faire une telle description, il me faudra
+développer un langage géométrique qui colle mieux à l'intuition géométrique,
+que les sempiternelles extensions de groupes profinis… ou actions
+extérieures, et où les points rigides (ou cuspidaux) dans des clôtures
+algébriques de corps jouent un rôle prépondérant. »
+
+\pagerange{69}{71}
+\subsection*{Sections rationnelles et sections partout définies (pages 69 à 71, et 82-83)}
+
+Soient $S$ lisse et irréductible sur $\mathbb{Q}$, de corps de fonctions $K$,
+$U_S \to S$ élémentaire à fibres de $\pi_1$ non nul, et $f$ une section
+rationnelle de $U_S$ sur $S$, d'où une section de $\pi_1(U_K)$ sur $G_K$,
+c'est-à-dire un relèvement $G_K \to \pi_1(U_S)$. Il veut montrer : \emph{$f$
+est partout définie si et seulement si ce relèvement s'annule sur le noyau de
+$G_K \to \pi_1(S)$.}
+
+La condition est « de codimension $1$ » : si $Z \subset S$ est fermé de
+codimension $\ge 2$ et $S' = S \setminus Z$, on a $\pi_1(S')
+\xrightarrow{\sim} \pi_1(S)$ (pureté de Zariski–Nagata), donc les noyaux de
+$G_K \to \pi_1(S)$ et $G_K \to \pi_1(S')$ coïncident. Il faut donc s'assurer
+qu'une section de $U_S$ définie sur $S'$ se prolonge à $S$. De proche en
+proche, on est ramené à une courbe relative $U_S = X_S \setminus T$, $X_S$
+lisse et propre de dimension relative $1$, $T$ fini étale sur $S$. Si le
+genre est $\ge 1$, la section se prolonge en une section de $X_S$ (théorème de
+Weil sur le prolongement des applications rationnelles vers les schémas
+abéliens), et l'image inverse de $T$ est un diviseur de $S$ dont la trace sur
+$S'$ est nulle, donc nul.
+
+\pagerange{82}{83}
+Le feuillet des pages 82 et 83\footnote{Sa page 41. Sur la place de ce
+feuillet, voir « L'ordre des feuillets » plus haut.} traite le genre $0$ :
+prenant une section de $T$ pour section à l'infini, on peut supposer (en
+localisant) $U_S = \mathbb{A}^1_S \setminus T'$, et $f$ est une fonction sur
+$S'$, qui se prolonge à $S$ normal. Puis il introduit les groupes de
+décomposition et d'inertie aux points de codimension $1$ : si $x$ est le
+point générique d'un diviseur irréductible $D$ de $S$\footnote{La page écrit
+« les points $x_i$ de $X$ » ; il s'agit de $S$.}, $\mathcal{O}_{S,x}$ est un
+anneau de valuation discrète ; on choisit un point $\tilde x$ au-dessus dans la
+normalisée de $S$ dans $\overline{K}$, et son stabilisateur $N_{\tilde x}
+\subset G_K$ s'envoie sur $\mathrm{Gal}(\overline{k(x)}/k(x))$, avec pour noyau
+le groupe d'inertie :
+\[
+1 \longrightarrow I_{\tilde x} \longrightarrow N_{\tilde x} \longrightarrow
+G_{k(x)} \longrightarrow 1, \qquad I_{\tilde x} \simeq
+\widehat{\mathbb{Z}}(1),
+\]
+la dernière identification par Kummer, « à cause de l'hypothèse de
+caractéristique $0$ » : l'inertie est alors modérée\footnote{C'est le calcul du
+dossier 141, page 1 : sur le corps des fractions d'un anneau de valuation
+discrète hensélien à corps résiduel de caractéristique $0$, toute extension
+finie est de Kummer.}. Ici $k(x)$, corps des fonctions de $D$, est de type fini
+sur $\mathbb{Q}$. Le noyau de $G_K \to \pi_1(S)$ est le sous-groupe distingué
+fermé engendré par les $I_{\tilde x}$ (pureté), et la condition envisagée
+revient à ce que le relèvement s'annule sur chacun d'eux\footnote{La fin de la
+page 83, deux lignes rapides, ne se lit pas avec assurance.}.
+
+\pagerange{72}{78}
+\subsection*{Le critère local (pages 72 à 78)}
+
+On passe à l'anneau local $\mathcal{O}_x$ en un tel $x$ : le relèvement $G_K
+\to \pi_1(U_S)$ se factorise par un relèvement $\varphi_x : G_K \to
+\pi_1(U_{\mathcal{O}_x})$ de $G_K \to \pi_1(\operatorname{Spec}
+\mathcal{O}_x)$, et il s'agit de prouver que $\varphi_x$ s'annule sur
+$I_{\tilde x}$ si et seulement si $f$ est définie en $x$\footnote{Une note
+marginale oblique, en grande partie douteuse, observe que le quotient de $G_K$
+par le sous-groupe distingué engendré par $I_x$ est
+$\pi_1(\operatorname{Spec} \mathcal{O}_x)$.}. C'est un énoncé purement
+géométrique, qu'il formule en général :
+
+\textbf{Théorème} (page 73)\textbf{.} \emph{Soient $S$ un trait (spectre
+d'un anneau de valuation discrète) de corps des fractions $K$ et de point
+fermé $s$, et $U \to S$ une courbe relative élémentaire (plus généralement un
+schéma élémentaire dont les fibrations n'ont pas de fibres de type $(0,0)$ ou
+$(0,1)$). Soit $f_K \in U(K)$, d'où une section $\psi$ de $\pi_1(U_K)$ sur $G_K$.
+Équivalence de : a) $f_K$ se prolonge en une section de $U$ sur $S$ ; b)
+$\psi$ provient d'une section de $\pi_1(U)$ sur $\pi_1(S)$ ; b$'$) le composé
+$G_K \to \pi_1(U_K) \to \pi_1(U)$ s'annule sur l'inertie $I_s$.}\footnote{La
+page numérote ce théorème « 1) », lecture incertaine, et écrit $T$ puis $S$
+pour le même trait.}
+
+b) $\Leftrightarrow$ b$'$) et a) $\Rightarrow$ b) sont clairs ; reste b)
+$\Rightarrow$ a). Par descente on suppose $S$ strictement local (alors $G_K =
+I_s$ et $\pi_1(S) = 1$) ; de proche en proche $U = X \setminus T$ est une
+courbe, $X$ lisse et propre, et $f$ se prolonge en une section de $X$. Il faut
+voir que $f(S) \subset U$. D'où le
+
+\textbf{Lemme.} \emph{Soient $S$ un trait strictement local, $X \to S$ propre et
+lisse de dimension relative $1$, à fibres connexes, $T = \bigsqcup_{i \in I}
+g_i(S)$ réunion de sections disjointes, $U = X \setminus T$, de type $(g,
+\nu) \ne (0,1)$. Soient $i_0 \in I$ et $f$ une section de $X$, distincte des
+$g_i$, avec $f(s) = g_{i_0}(s)$. Si $Y = S \setminus \{s\}$, l'homomorphisme
+$\pi_1(Y) \to \pi_1(U)$ induit par $f$ n'est pas trivial ; et même, pour $\nu
+\ge 2$ et $\ell$ premier à la caractéristique résiduelle,}
+\[
+\mathbb{Z}_\ell(1) \simeq H_1(Y, \mathbb{Z}_\ell) \longrightarrow H_1(U,
+\mathbb{Z}_\ell) \simeq H_1(U_s, \mathbb{Z}_\ell)
+\]
+\emph{n'est pas nul.}
+
+Comme $f$ définit une section régulière du torseur jacobien $J^1_{X/S}$,
+l'image tombe dans la partie torique de $H_1(U, \mathbb{Z}_\ell)$, isomorphe à
+$\mathbb{Z}_\ell(1)^I/\mathbb{Z}_\ell(1)$ (nulle si $\nu = 1$, auquel cas le
+critère homologique ne suffit pas). Il faut calculer
+\[
+\mathbb{Z}_\ell(1) \longrightarrow \mathbb{Z}_\ell(1)^I/\mathbb{Z}_\ell(1),
+\]
+et il « devine » le résultat\footnote{Un calcul intrinsèque, par les isogénies
+de $J^1_{U/S}$ et $\mathrm{Ker}(J^1_{U/S} \to J^1_{X/S}) \simeq
+\mathbb{G}_m^I/\mathbb{G}_m$, est commencé puis barré de trois grands
+traits.} : soient $A = \mathcal{O}_{X, g_{i_0}(s)}$, $V$ l'anneau de $S$,
+$J_{i_0}$ et $J_f$ les idéaux (inversibles) des sections $g_{i_0}$ et $f$, et
+\[
+n = \operatorname{long}\, V/g_{i_0}^{*}(J_f) = \operatorname{long}\,
+A/(J_{i_0} + J_f),
+\]
+la multiplicité d'intersection de $f(S)$ et $g_{i_0}(S)$, finie puisque $f \ne
+g_{i_0}$. L'homomorphisme serait $n$ fois l'injection canonique d'indice
+$i_0$. « Il faudrait que je demande à Carlos de me le confirmer. »\footnote{Le
+prénom est tel qu'écrit ; nous n'identifions pas la personne. La présomption
+est juste : si $t$ est une équation locale de $g_{i_0}(S)$ et $\varpi$ une
+uniformisante de $V$, $f^{*}t = (\text{unité}) \cdot \varpi^{n}$, et le lacet
+autour de $s$ s'envoie sur $n$ fois le lacet autour de la pointe $i_0$ dans
+le groupe fondamental modéré du voisinage épointé ; c'est vrai au niveau des
+$\pi_1$ (premiers à la caractéristique résiduelle), pas seulement des $H_1$.}
+
+Pour $\nu = 1$ il faut vérifier au niveau des $\pi_1$ (premiers à $p$) que
+$\pi_1(Y) \to \pi_1(U_s)$ est $k_{i_0} \circ (n \cdot \mathrm{id})$, où $k_{i_0}
+: \widehat{\mathbb{Z}}(1) \to \pi_1(U_s)$ est l'homomorphisme de lacets local
+de la pointe $i_0$ — « je vais admettre ce point, qui ne peut guère être
+difficile » ; c'est le même calcul local que pour $\nu \ge 2$, et l'énoncé, comme
+le dit une note en marge, est indépendant de $\nu$. Comme $L_{i_0}$ est non
+trivial et sans torsion dans $\Delta_U$, b) $\Rightarrow$ a) en
+résulte.
+
+\pagerange{78}{84}
+\subsection*{Sections de seconde espèce, et la classe conormale (pages 78 à 81, puis 84)}
+
+Soient toujours $U = X \setminus T$ sur $S$, $X$ propre et lisse, $T$ fini
+étale, et $g_i$ une section de $T$. On suppose la suite $1 \to \Delta \to
+\pi_1(U) \to \pi_1(S) \to 1$ exacte — ce qui demande que $\pi_2(S) \to
+\pi_1(\text{fibre})$ soit nul, vrai par exemple si $S$ est un modèle élémentaire
+en caractéristique $0$\footnote{Une longue note en marge, dont un premier bloc
+est barré, observe que l'action extérieure de $\pi_1(S)$ sur le $\pi_1$ de la
+fibre géométrique suffit à construire une extension, et conclut « Il faudrait
+regarder ceci de plus près ! ». La place de son astérisque dans le texte n'a
+pas été retrouvée.}. Le normalisateur de $L_i$ dans $\pi_1(U)$ s'envoie
+\emph{sur} $\pi_1(S)$ et donne une extension
+\[
+1 \longrightarrow \widehat{\mathbb{Z}}(1) \longrightarrow N(L_i)
+\longrightarrow \pi_1(S) \longrightarrow 1,
+\]
+dont la classe est un élément $c_i \in H^2(\pi_1(S), \widehat{\mathbb{Z}}(1))
+\simeq H^2(S, \widehat{\mathbb{Z}}(1))$ si $S$ est un $K(\pi, 1)$. La suite de
+Kummer
+\[
+0 \to \operatorname{Pic}(S)/n \to H^2(S, \mu_n) \to {}_nH^2(S, \mathbb{G}_m) \to 0
+\]
+donne à la limite $0 \to \widehat{\operatorname{Pic}(S)} \to H^2(S,
+\widehat{\mathbb{Z}}(1)) \to \varprojlim_n {}_n\mathrm{Br}(S)$. Si $S$ est
+élémentaire sur un corps de type fini sur $\mathbb{Q}$, $\operatorname{Pic}(S)$
+est de type fini (Mordell–Weil–Néron), et $\operatorname{Pic}(S) \to H^2(S,
+\widehat{\mathbb{Z}}(1))$ est injectif.
+
+Il affirme que $c_i$ est l'image de la classe $\xi_i \in \operatorname{Pic}(S)$
+du fibré conormal — « ou normal, le diable sait » — de $g_i(S)$ dans $X$, et
+esquisse la vérification : sur le complété formel de $X$ le long de $g_i(S)$ —
+un voisinage tubulaire —, l'extension est la suite d'homotopie de ce
+« fibré en disques épointés » au-dessus de $S$\footnote{Les deux signes
+diffèrent par $\xi_i \mapsto -\xi_i$, et le choix dépend des conventions de la
+suite de Kummer ; nous ne le tranchons pas, la page non plus. La vérification
+n'est pas faite dans le dossier.}. Dans le cas « arithmétique »,
+l'extension est donc scindée si et seulement si $\xi_i = 0$, c'est-à-dire s'il
+existe globalement sur $S$ une uniformisante de $X$ le long de $g_i(S)$ —
+condition toujours satisfaite localement, et suffisante en général.
+
+Quand $\xi_i = 0$, parmi les scindages il y a ceux qui proviennent d'une base
+de $J_i/J_i^2$ ; leur indétermination est dans $\mathbb{G}_m(S)$, celle de tous
+les scindages dans
+\[
+H^1(S, \widehat{\mathbb{Z}}(1)), \qquad 0 \to \widehat{\mathbb{G}_m(S)} \to H^1(S,
+\widehat{\mathbb{Z}}(1)) \to \varprojlim_n {}_n\operatorname{Pic}(S),
+\]
+et dans le cas arithmétique le dernier terme est nul (module de Tate d'un
+groupe de type fini), de sorte que $H^1(S, \widehat{\mathbb{Z}}(1)) \simeq
+\widehat{\mathbb{G}_m(S)}$\footnote{Le premier terme de la suite de Kummer de la
+page 81 est surchargé ; la lecture $\mathbb{G}_m(S)/\mathbb{G}_m(S)^n$ est celle
+qu'exige la limite qui suit.}. Comme $\mathbb{G}_m(S)$ n'a pas d'élément
+infiniment divisible autre que $1$ (page 84), $\mathbb{G}_m(S) \to
+\widehat{\mathbb{G}_m(S)}$ est injectif : les scindages « géométriques »
+forment un torseur sous $\mathbb{G}_m(S)$, sous-torseur du torseur sous
+$\widehat{\mathbb{G}_m(S)}$ de tous les scindages. « Pour que la description
+profinie de la géométrie algébrique absolue sur $\mathbb{Q}$ soit complète, il
+y faudrait également caractériser » ce sous-ensemble remarquable — ce qui
+n'est pas fait.
+
+\pagerange{84}{98}
+\subsection*{Spécialisation : d'une section de première espèce à une de seconde (pages 84 à 98)}
+
+Comment une section de première espèce peut-elle se « spécialiser » en une de
+seconde espèce ? Soit $f$ une section rationnelle de $U$ sur $S$, qui en un
+point $s$ de codimension $1$ coïncide, comme section de $X$, avec une $g_i$ :
+$f(s) = g_i(s)$. Alors $G_K \to \pi_1(U_K) \to \pi_1(U)$ est non trivial sur
+l'inertie $I_{s'}$, qu'il envoie dans $\Delta$, et même dans l'un des $L_i$. Le
+groupe de décomposition $N_{s'}$ s'identifie à $G_{K^h_s}$, groupe de Galois du
+corps des fractions de l'hensélisé (non strict) — le $\pi_1$ d'une « rondelle
+trouée », ou mieux d'un fibré en disques épointés autour du germe de diviseur
+$\overline{\{s\}}$ — et l'on a le diagramme de suites exactes, où $k = k(s)$ :
+
+\begin{tikzcd}
+ & & I \arrow[r, "\sim"] \arrow[d] & I_{s'} \arrow[d] & \\
+1 \arrow[r] & \Delta \arrow[r] \arrow[d, no head, "="'] & \pi_1(U_{K^h_s}) \arrow[r] \arrow[d] & G_{K^h_s} \arrow[r] \arrow[d] & 1 \\
+1 \arrow[r] & \Delta \arrow[r] & \pi_1(U_{\mathcal{O}^h_s}) \arrow[r] & G_{k} \arrow[r] & 1
+\end{tikzcd}
+
+\footnote{Le diagramme (26) de la page 87 a de plus des $1$ en haut et en bas
+des colonnes ; nous les omettons. À la page 86, il écrit $\mathcal{E}_U$ là où
+le diagramme écrit $\mathcal{E}_{U_{\tilde{\mathcal{O}}}}$.}La dernière ligne
+s'identifie à la suite $1 \to \Delta \to \pi_1(U_s) \to G_{k(s)} \to 1$ de la
+fibre $U_s$. Le noyau $I$ de la colonne médiane s'envoie isomorphiquement sur
+$I_{s'} \simeq \widehat{\mathbb{Z}}(1)$. La section définie par $f$ donne un
+relèvement
+\[
+\lambda : G_{K^h_s} \longrightarrow \pi_1(U_{\mathcal{O}^h_s}) \simeq
+\pi_1(U_s)
+\]
+de $G_{K^h_s} \to G_{k(s)}$ ; et il « résume » :
+
+\emph{Les conditions suivantes sont équivalentes : a) $\lambda$ est injectif ;
+b) $\lambda|_{I_{s'}} = k_i \circ (\mu \cdot \mathrm{id})$ pour un
+homomorphisme de lacets $k_i : \widehat{\mathbb{Z}}(1) \to \Delta$ et un
+$\mu \in \mathbb{N}^{*}$ ; c) $\lambda|_{I}$ n'est pas trivial ; d) la section
+de $\pi_1(U_{K^h_s})$ sur $G_{K^h_s}$ ne provient pas d'une section de
+$\pi_1(U_{\mathcal{O}^h_s})$ ; e) $f$ n'est pas définie en $s$ ; f) $f(s) \in
+X_s \setminus U_s$. Et alors l'indice $i$ de b) est $f(s)$.}
+
+Ces équivalences reposent sur le critère local des pages 72 à 78 ; l'entier
+$\mu$ est la multiplicité d'intersection $n$ de la page 77, c'est-à-dire la
+multiplicité en $s$ du diviseur $f^{*}T$ (page 93). Dans ce cas le groupe de
+décomposition $N_{s'} \simeq G_{K^h_s}$, extension de $G_{k(s)}$ par
+$\widehat{\mathbb{Z}}(1)$, s'identifie à un sous-groupe d'indice $\mu$ du
+normalisateur de $L_i$ dans $\pi_1(U_s)$\footnote{La page écrit
+« $\mathcal{E}_{X_s}$ » pour le groupe ambiant, et « ext. de $\mathcal{E}_{k(s)}$
+par $\pi$ » là où il faut « par $T$ », comme le dit la page 90.}. La section,
+qui ne provient d'aucune section de $\pi_1(U_{\mathcal{O}^h_s})$, définit donc
+« presque » un relèvement — seul le facteur $I_{s'}$ y fait obstacle — et toute
+section de cette extension de $G_{k(s)}$ par $\widehat{\mathbb{Z}}(1)$ donne une
+section de seconde espèce de $\pi_1(U_s)$ sur $G_{k(s)}$.
+
+Plus généralement (pages 90 à 92), la section $f_K$ donne une famille de
+sections des $\pi_1(U_s)$ sur les $G_{k(s)}$, pour $s$ dans le domaine de
+définition $S'$ de $f$, par le même mécanisme : pour tout $s \in S$ et $s'$
+au-dessus dans la normalisée de $S$ dans $\overline{K}$, on a $1 \to I_{s'} \to
+N_{s'} \to G_{k(s)} \to 1$, avec $N_{s'} \simeq G_{K^h_s}$ et $I_{s'} \simeq
+G_{K^{sh}_s}$\footnote{Il note $S'$ à la fois le domaine de définition de $f$
+(page 90) et la normalisée de $S$ dans $\overline{K}$ (page 91), et $\tilde K$
+les deux corps $K^h_s$ et $K^{sh}_s$.} ; si la composée s'annule sur
+$I_{s'}$ — c'est dire $s \in S'$ —, on obtient $G_{k(s)} \to \pi_1(U_s)$, une
+section. Pour $s \notin S'$, $D = S \setminus S'$ est purement de codimension
+$1$ (image inverse de $T$ par $f$) ; au point générique $s_\alpha$ d'une
+composante $D_\alpha$, $f$ donne un point rationnel $i_\alpha \in X_{s_\alpha}
+\setminus U_{s_\alpha}$, et les sections de seconde espèce relatives à
+$L_{i_\alpha}$, notamment celles que définit une équation locale de $D_\alpha$.
+On voit comment elles se spécialisent aux points de $D_\alpha$ où la section
+correspondante du fibré conormal reste régulière et inversible ; les autres
+points demanderaient une étude analogue, « d'un intérêt mineur ».
+
+Enfin (pages 95 à 98) : une section de première espèce $\varphi : G_K \to
+\pi_1(U_K)$ définit, pour toute section de $G_K$ au-dessus d'un ouvert de
+$G_{\mathbb{Q}}$ — ou de $G_{k'}$ pour un sous-corps $k' \subset K$ —, une
+section correspondante de $\pi_1(U_K)$, d'où des actions extérieures sur
+$\Delta$. Il veut les comparer à la famille des sections des $\pi_1(U_s)$ sur
+les $G_{k(s)}$, où les $k(s)$ sont des corps résiduels et non des sous-corps.
+Si $S$ est une courbe sur $k$, tout point fermé $s$ définit des groupes de
+décomposition $N_{s'} \subset G_K$ au-dessus d'ouverts $G_{k(s)} \subset G_k$,
+et l'on compare les sections de ces groupes à la section donnée : si $f$ est
+définie en $s$, la section restreinte est de première espèce, induite par le
+point $f(s) \in U_s(k(s))$ ; sinon elle est de seconde espèce et normalise un
+$L_i$\footnote{La page 97 est d'écriture rapide ; plusieurs liaisons entre les
+formules ne sont pas lues.}.
+
+\pagerange{98}{103}
+\subsection*{Mauvaise réduction (pages 98 à 103)}
+
+Tout cela supposait bonne réduction. Hors de cette hypothèse — exemple type :
+$K$ corps des fonctions d'une courbe modulaire pour les courbes elliptiques,
+$s$ une pointe, où la courbe elliptique dégénère —, on passe à un trait
+hensélien $S$ de corps résiduel $k$ (de type fini sur $\mathbb{Q}$), une courbe
+$U_\eta$ de type $(g, \nu)$ (ici $(1,1)$) sur le point générique, et
+\[
+1 \to \widehat{\mathbb{Z}}(1) \to G_\eta \to G_k \to 1, \qquad 1 \to \Delta \to
+\pi_1(U_\eta) \to G_\eta \to 1 .
+\]
+L'action extérieure de l'inertie sur $\Delta$ n'est pas triviale ; mais tout
+scindage de la première suite définit une action extérieure de $G_k$ sur
+$\Delta$. Est-elle « admissible », c'est-à-dire définie par une courbe
+algébrique ? Sans doute pas — quelle courbe serait-ce, « la courbe réduite de
+type $(g, \nu)$ (inexistante !) » ? En marge : « mais si !? ». Et il
+note : « à tâter pour la structure à l'infini des variétés modulaires de
+Teichmüller ! »\footnote{Lecture en partie lacunaire ; c'est le thème du
+dossier 147, « Structure à l'infini des $M_{g,\nu}$ ».}. S'il faut hasarder une
+conjecture dans « cette situation scabreuse » :
+
+\textbf{Conjecture de bonne réduction.} \emph{Équivalence de : a) $U_\eta$ a
+bonne réduction sur $S$ ; b) l'action extérieure de l'inertie sur $\Delta$ est
+triviale ; c) l'action de l'inertie sur $\Delta^{\mathrm{ab}} =
+H_1(U_{\bar\eta})$ est triviale ; d) de même sur $H_1(U_{\bar\eta},
+\mathbb{Z}_\ell)$, $\ell$ premier à la caractéristique résiduelle ; e) $k$ étant
+de type fini sur $\mathbb{Q}$, l'extension de $G_k$ par $\Delta$ définie par un
+scindage est admissible (quitte à passer à un ouvert).}\footnote{Un alinéa f),
+et une parenthèse en tête de la page 101, sont trop lacunaires pour être
+rendus.}
+
+On a a) $\Rightarrow$ b) $\Rightarrow$ c) $\Rightarrow$ d), et ces
+conditions impliquent e) ; d) $\Rightarrow$ a) « devrait être plus ou moins
+connu »\footnote{Ce ne l'est pas, et c'est faux en général : en genre $0$,
+l'inertie agit trivialement sur $H_1 = \widehat{\mathbb{Z}}(1)^I /
+\widehat{\mathbb{Z}}(1)$ même quand des pointes se rencontrent dans la fibre
+spéciale ; en genre $\ge 2$, une courbe à réduction stable de type compact a une
+jacobienne à bonne réduction. Pour une courbe elliptique, d) $\Rightarrow$ a)
+est le critère de Néron–Ogg–Šafarevič. Ce qui est vrai en général est a)
+$\Leftrightarrow$ b) : c'est le critère de bonne réduction d'Oda (1990, cas
+propre), étendu par Tamagawa (1997) au cas affine.} ; mais il n'a « pas d'idée
+pour le moment » pour voir que e) implique la bonne réduction.
+
+Il dispose donc d'un principe pour construire des actions extérieures de
+$G_k$ sur des groupes à lacets qui, sans doute, ne sont pas géométriques, par
+des courbes « se réduisant mal » ; mais il n'arrive pas par cette voie à
+construire des actions effectives, ou associées à des actions déjà
+géométriques, qui ne soient pas elles-mêmes de l'un des deux types de la page
+64. Le reste de la page 103 est blanc.
+
+\pagerange{104}{135}
+\section*{§4. Sections d'extensions, et anneaux de valuation généraux (pages 104 à 135)}
+
+\pagerange{104}{114}
+\subsection*{Révision des notations (pages 104 à 114)}
+
+Pour $X$ connexe, $\pi_1(X)$ est le groupe fondamental profini comme groupe
+extérieur ; un revêtement universel $\widetilde{X}$ le précise en un groupe
+profini, $\pi_1(X; \widetilde{X}) = \mathrm{Aut}_X(\widetilde{X})$ ; un point
+géométrique $\xi$ — un point $x$ et une extension séparablement close $\Omega$
+de $k(x)$ — en donne un autre, $\pi_1(X, \xi)$, qui ne dépend que de la clôture
+séparable de $k(x)$ dans $\Omega$\footnote{Il note ces groupes
+$\mathcal{E}_X$, $\mathcal{E}_X^{\tilde X}$, $\mathcal{E}_X^{\xi}$,
+$\mathcal{E}_X^{\Omega}$. Plusieurs mots de la page 105 ne se lisent pas ; le
+sens est celui de la formule (4).}. Plus généralement tout $Y$-schéma $Z$
+$1$-connexe au-dessus de $Y$ joue le rôle de foncteur fibre, et $(X,
+\widetilde{X}) \mapsto \pi_1(X; \widetilde{X})$ est un foncteur. Pour $X \to Y$
+et $T \to X$ avec $T$ $1$-connexe on pose
+\[
+\pi_1(X/Y; T) = \mathrm{Ker}\bigl(\pi_1(X; T) \to \pi_1(Y; T)\bigr) .
+\]
+S'il y a une « suite exacte d'homotopie universelle », par exemple si $Y =
+\operatorname{Spec} K$ et $X$ géométriquement connexe sur $K$, on a
+\[
+1 \longrightarrow \pi_1(X/Y; T) \longrightarrow \pi_1(X; T) \longrightarrow
+\pi_1(Y; T) \longrightarrow 1, \qquad \pi_1(X/Y; T) \simeq \pi_1(X \times_Y T;
+T),
+\]
+le groupe fondamental des fibres géométriques ; sinon $X \to Y$ se factorise en
+$X \to Y' \to Y$, $Y'$ pro-étale fini, avec $\pi_1(X) \to \pi_1(Y')$
+surjectif\footnote{La formule (16) porte $X/Y$ et non $X/Y'$, et la phrase qui
+suit écrit $X \times_Y T$ là où l'on attend $X \times_{Y'} T$.}. Les groupes
+fondamentaux des diverses fibres géométriques sont canoniquement isomorphes
+entre eux ; mais $\pi_1(X/Y)$ n'est qu'une classe d'isomorphie de groupes
+profinis, pas même un groupe extérieur, l'arbitraire venant de l'action de
+$\pi_1(X)$ par automorphismes intérieurs. Ce point de vue regarde $\pi_1(X)$
+comme une \emph{extension} de $\pi_1(Y)$, qui joue le rôle d'un groupe de
+Galois, par $\pi_1(X/Y)$, qui joue le rôle d'un groupe fondamental
+géométrique. Le cas principal est $Y = \operatorname{Spec} K$, où $\pi_1(Y) =
+G_K$.
+
+\pagerange{114}{120}
+\subsection*{Modèles, inertie, groupe générique (pages 114 à 120)}
+
+Soient $L$ de type fini sur un corps $K$ et $X$ un modèle propre et régulier de
+$L/K$. Alors $\pi_1(X)$ est un quotient de $G_L$ qui ne dépend pas du modèle
+choisi ; c'est la partie « universellement générique » de $G_L$, qui classe les
+extensions finies de $L$ non ramifiées sur tout modèle régulier, propre ou
+non\footnote{C'est-à-dire non ramifiées en toute valuation divisorielle. Pour
+la caractéristique $0$, invariance birationnelle de $\pi_1$ des modèles propres
+réguliers et pureté de Zariski–Nagata.}. Pour un modèle quelconque $U = X
+\setminus Z$, on a des surjections $G_L \to \pi_1(U) \to \pi_1(X)$, et
+$\pi_1(X)$ est le quotient de $\pi_1(U)$ par le sous-groupe distingué fermé
+engendré par les inerties $I_{x'_i}$ aux points génériques $x_i$ des
+composantes de codimension $1$ de $Z$. On a $G_L \simeq \varprojlim_U \pi_1(U)$
+et $\Delta_L \simeq \varprojlim_U \Delta_U$.
+
+Pour un anneau de valuation discrète $V$ de $L/K$ correspondant au point
+générique d'un diviseur d'un modèle — une \emph{valuation divisorielle} —, de
+point fermé $x$, on a le groupe de décomposition $N_{x'}$ et le groupe
+d'inertie $I_{x'}$, avec
+\[
+N_{x'}/I_{x'} \simeq G_{k(x)}, \qquad I_{x'} \simeq \widehat{\mathbb{Z}}(1)
+\subset \Delta_L ,
+\]
+$k(x)$ étant de degré de transcendance $n - 1$ sur $K$ ; et $N_{x'} \simeq
+\pi_1(\operatorname{Spec} L^h_x)$ (hensélisé non strict), $I_{x'}$ étant le
+noyau de $N_{x'} \to G_{k(x)}$. Un passage marqué d'un double trait et d'un
+point d'interrogation note $N_{x'} = \mathrm{Norm}_{G_L}(I_{x'})$, « lié à
+l'idée qu'on devrait avoir $I_{x'} = \mathrm{Norm}_{\Delta_L}(I_{x'})$ — à tirer
+au clair à l'occasion ! »\footnote{La seconde égalité ne peut valoir qu'en
+degré de transcendance $1$ : le normalisateur de $I_{x'}$ dans $\Delta_L$
+contient $N_{x'} \cap \Delta_L$, extension par $I_{x'}$ de la partie
+géométrique de $G_{k(x)}$, non triviale dès que $n \ge 2$. Pour $n = 1$, elle
+est vraie.}.
+
+Si l'homomorphisme $\pi_1(\operatorname{Spec} L^h_x) \to \pi_1(U)$ se
+factorise par $\operatorname{Spec} \mathcal{O}^h_x$ — si $V$ a un centre sur
+$U$ —, l'image de $I_{x'}$ dans $\pi_1(U)$ est nulle ; la réciproque est
+posée en question. Avec un modèle propre $X \supset U$, la condition est
+simplement que le centre de $V$ sur $X$ soit dans $U$. Ainsi $\pi_1(U)$ se
+reconstruit à partir de $G_L$, comme quotient par le sous-groupe distingué
+fermé engendré par les $I_{x'}$ des valuations divisorielles \emph{sans}
+centre sur $U$\footnote{La page 120 dit « en prenant tous les $V$ ayant un
+centre sur $U$ », c'est-à-dire les $V = \mathcal{O}_{U,x}$, et en divisant par
+leurs inerties ; c'est l'inverse de ce qu'exige ce qui précède, où les
+inerties tuées sont celles des points de $X \setminus U$. La phrase de la page
+est d'ailleurs en partie incertaine ; nous donnons la forme cohérente avec la
+page 119.}.
+
+\pagerange{120}{123}
+\subsection*{L'espace de Riemann–Zariski (pages 120 à 123)}
+
+Il introduit l'espace
+\[
+\mathfrak{X}_{L/K} = \varprojlim_{X \text{ modèle propre de } L/K} X ,
+\]
+aujourd'hui l'\emph{espace de Riemann–Zariski} de $L/K$. Pour $x \in
+\mathfrak{X}$, $k(x)$ est de degré de transcendance $d \le n$ sur $K$, sa
+\emph{dimension} ; $n - d$ est sa codimension. Il y a un seul point de
+codimension $0$, et les points de codimension $1$ correspondent exactement aux
+valuations divisorielles de $L/K$. Sauf pour $n \le 1$, $\mathfrak{X}$ n'est pas
+un schéma\footnote{La page ajoute, « sauf erreur », que ces deux types de points
+sont les seuls dont l'anneau local soit noethérien. C'est faux pour $n \ge 2$ :
+il existe des valuations discrètes de rang $1$ non divisorielles, par exemple
+celle d'un arc transcendant ($v(F) = \mathrm{ord}_t\, F(t, \varphi(t))$ sur
+$K(x, y)$, avec $\varphi$ série formelle transcendante), dont l'anneau est
+noethérien et dont le corps résiduel est algébrique sur $K$.}.
+
+\textbf{Proposition.} \emph{Pour tout $x \in \mathfrak{X}$, l'anneau local
+$\mathcal{O}_{\mathfrak{X},x}$ est un anneau de valuation de corps des
+fractions $L$ contenant $K$, et $x \mapsto \mathcal{O}_{\mathfrak{X},x}$ est une
+bijection de $\mathfrak{X}$ sur l'ensemble de ces anneaux de valuation.}
+
+C'est le théorème de Zariski. L'esquisse de la page : a) pour $f \notin
+\mathcal{O}_{\mathfrak{X},x}$, écrire $f = g/h$ sur un modèle, et, par
+éclatements, séparer les diviseurs de $g$ et $h$, pour obtenir $1/f \in
+\mathcal{O}_{\mathfrak{X},x}$\footnote{La page invoque la résolution des
+singularités ; elle n'est pas nécessaire, l'éclatement de l'idéal $(g, h)$
+suffit. L'esquisse est en partie illisible.} ; b) un anneau de valuation $V$
+domine un point bien déterminé de chaque modèle propre (critère valuatif), d'où
+un $x$ tel que $V$ domine $\mathcal{O}_{\mathfrak{X},x}$, donc lui est égal.
+Tout modèle $U$ définit un ouvert de $\mathfrak{X}$, mais les ouverts ainsi
+obtenus ne sont pas stables par réunion finie.
+
+\pagerange{123}{127}
+\subsection*{Germes de sections, et une conjecture birationnelle (pages 123 à 127)}
+
+Pour tout anneau local normal $\mathcal{O} \subset L$ de corps des fractions
+$L$ on a encore des groupes de décomposition et d'inertie. L'idée : pour un
+anneau de valuation contenant $K$, les groupes d'inertie ont une structure
+simple, « des $\widehat{\mathbb{Z}}(1)^{\alpha}$ essentiellement »\footnote{La
+page dit « où $\alpha$ est la codimension » du point. En caractéristique
+résiduelle $0$, l'inertie est $\mathrm{Hom}(\Gamma_v, \widehat{\mathbb{Z}}(1))$
+où $\Gamma_v$ est le groupe des valeurs : de rang $\alpha$ si $\Gamma_v \simeq
+\mathbb{Z}^\alpha$, et $\alpha$ est le rang rationnel, majoré par la
+codimension (inégalité d'Abhyankar), égal pour les valuations dites
+d'Abhyankar seulement.} ; et si $x$ est de dimension $0$ ($k(x)$ fini sur $K$),
+le groupe de décomposition est une extension de $G_{k(x)}$, ouvert dans $G_K$,
+par l'inertie, qu'un choix de paramètres scinde. D'où un principe général
+pour construire des \emph{germes de sections} de $G_L$ sur $G_K$ — sections
+au-dessus d'un sous-groupe ouvert — à partir des points de dimension $0$ de la
+« variété de Riemann » $\mathfrak{X}$.
+
+Pour une sous-extension $L_1$ de $L/K$ de degré de transcendance $1$, on en
+déduit des germes de sections de $G_{L_1}$ sur $G_K$\footnote{La page écrit
+« sous-extension $L_1$ de $K$ » ; il s'agit d'une sous-extension de $L/K$.} ; en
+trouve-t-on plus que celles des places de $L_1/K$ ? Non : $V_1 = V \cap L_1$
+est un anneau de valuation de $L_1$, de corps résiduel fini sur $K$ (et $V_1 \ne
+L_1$, puisque le corps résiduel de $V$ est algébrique sur $K$), donc une place ;
+$G_L \to G_{L_1}$ envoie $N_V$ dans $N_{V_1}$ et $I_V$ dans $I_{V_1}$ ; le germe
+obtenu normalise $I_{V_1}$, et sa restriction à $G_K^{\circ}$ le centralise,
+puisque $G_K$ agit sur $I_{V_1} \simeq \widehat{\mathbb{Z}}(1)$ par $\chi$.
+
+\textbf{Conjecture.} \emph{Soient $K \subset L$ de type fini sur $\mathbb{Q}$.
+a) Toute section (ou germe de section) de $G_L$ sur $G_K$ normalise un $I_V$
+associé à un anneau de valuation $V$ de $L/K$ à corps résiduel algébrique sur
+$K$, uniquement déterminé ; elle provient d'une section du groupe de
+décomposition $N_V$. b) Pour tout modèle élémentaire $U$ de $L/K$, toute
+section de $\pi_1(U)$ sur $G_K$ se relève en une section de $G_L$ sur $G_K$.}
+
+Une section de $\pi_1(U)$ se décrit donc par un anneau de valuation $V$ ; s'il
+a un centre $x \in U(K)$, la section est celle du point $x$, et l'on conjecture
+encore
+\[
+\Delta_U^{\,G_K^{\circ}} = 1,
+\]
+qui équivaut à la même relation pour $\pi_1(U)$ dès que le centralisateur de
+$G_K^{\circ}$ dans $G_K$ est trivial, et qui se déduirait par dévissage de la
+conjecture analogue en dimension relative $1$ (page 48)\footnote{La page écrit
+ces deux relations, (32) et (33), pour $G_L$ et $\Delta_{L/K}$. Lues ainsi, elles
+contredisent la page 125 et la conséquence conjecturale de la page 44 : la
+section normalise $I_V \ne 1$, que $G_K^{\circ}$ centralise. Le contexte — une
+section de $\pi_1(U)$ définie par un point $x \in U$, et le dévissage vers la
+dimension relative $1$ — impose de les lire pour le modèle $U$, comme à la page
+48. Une longue note en marge, en deux blocs, ne se lit que par fragments.}.
+
+\pagerange{127}{131}
+\subsection*{L'inertie le long du bord (pages 127 à 131)}
+
+Pour comprendre b), il faut voir ce que deviennent dans $\pi_1(U)$ les
+sections de $G_L$ associées à un $V$, et d'abord le sous-groupe $\Delta_V
+\subset \Delta_U$ image de $I_V$, dont il « devine » qu'il donne une réalisation
+algébrique d'un groupe de lacets. Des $V$ distincts donnent-ils des $\Delta_V$
+distincts ?
+
+Soit $X \supset U$ un modèle propre tel que $D = X \setminus U$ soit un
+diviseur à croisements normaux de composantes $D_i$ régulières, $i \in I$. Pour
+$x \in D$, soient $I(x) = \{i \mid x \in D_i\}$, $\mathcal{O}^h_x$ l'hensélisé
+de $\mathcal{O}_{X,x}$ et $U^h_x$ l'image inverse de $U$. En caractéristique
+$0$, par le lemme d'Abhyankar,
+\[
+1 \longrightarrow \widehat{\mathbb{Z}}(1)^{I(x)} \longrightarrow
+\pi_1(U^h_x) \longrightarrow G_{k(x)} \longrightarrow 1 .
+\]
+Si le centre de $V$ sur $X$ est $x \in D$, l'homomorphisme $N_V \to \pi_1(U)$ se
+factorise en $N_V \to \pi_1(U^h_x) \to \pi_1(U)$, l'image du second étant le
+groupe de décomposition de $x$. Sous réserve de vérifications, il présume :
+
+\begin{enumerate}
+\item[1°)] que $\pi_1(U^h_x) \to \pi_1(U)$ est injectif, c'est-à-dire que
+$\widehat{\mathbb{Z}}(1)^{I(x)} \to \Delta_U$ l'est ;
+\item[2°)] que si $V$ est de dimension $0$, $N_V \to \pi_1(U^h_x)$ a une image
+ouverte, c'est-à-dire que $I_V \to \widehat{\mathbb{Z}}(1)^{I(x)}$ est
+surjectif.
+\end{enumerate}
+
+Une note en marge, d'une encre plus foncée, ajoutée après coup, dit de 1°) :
+« C'est sûrement “en général” \emph{faux} pour $\operatorname{card} I(x) \ne
+1$, comme on voit en remplaçant $X$ par un $X'$ dominant $X$, en éclatant […]
+un point de $D$… \textbf{Mais} est-il vrai qu'on [peut trouver] $X \supset U$
+tel que [ce soit] localement injectif ? »\footnote{Mots entre crochets : lecture
+incertaine de la transcription, reconstruits par nous pour la phrase. La page
+133 en fournit la raison : voir la note sur $\pi_2(D_J)$.} De 2°), il dit qu'elle
+est purement locale et « doit être essentiellement triviale, que ma
+présomption s'avère vraie ou fausse » ; elle est fausse en
+général\footnote{Contre-exemple : en dimension $2$, avec $I(x) = \{1, 2\}$ et
+des équations locales $t_1$, $t_2$, la valuation d'arc $v(F) =
+\mathrm{ord}_t\, F(t, t\varphi(t))$, $\varphi$ transcendante avec $\varphi(0)
+\ne 0$, est de dimension $0$ et vérifie $v(t_1) = v(t_2) = 1$ ; $I_V \simeq
+\widehat{\mathbb{Z}}(1)$ s'envoie diagonalement dans
+$\widehat{\mathbb{Z}}(1)^2$, d'image non ouverte. La surjectivité vaut quand
+$v(t_i)_{i \in I(x)}$ engendrent un facteur direct du groupe des valeurs,
+par exemple pour la valuation monomiale de poids $1$ et $\sqrt{2}$.}. 1°) au contraire est « une question
+de nature globale sur $U$, et sans doute aucunement triviale ».
+
+Si ces énoncés valaient, les sections de $\pi_1(U)$ associées à une valuation
+de corps résiduel $K$ normaliseraient un sous-groupe $\Delta_x \simeq
+\widehat{\mathbb{Z}}(1)^{I(x)}$ de $\Delta_U$, non trivial si la valuation n'a
+pas de centre sur $U$ — « ce qui est justement dans le sens des conjectures
+(qui pouvaient d'abord sembler hérétiques !) du §2 ».
+
+\pagerange{131}{135}
+\subsection*{Les strates du bord (pages 131 à 135)}
+
+Avant d'aborder 1°) et 2°), il regarde les classes de conjugaison des
+sous-groupes $I_x$ pour $x \in X \setminus U$ variable. Pour $J \subset I$,
+soient
+\[
+D_J = \bigcap_{j \in J} D_j, \qquad D_J^{*} = \{x \in X \mid I(x) = J\} =
+D_J \setminus \bigcup_{i \notin J} D_i ;
+\]
+$D_J$ est régulier, de codimension $\operatorname{card} J$, peut-être vide.
+Les $J$ tels que $D_J \ne \emptyset$ forment un ensemble simplicial sur $I$ —
+c'est aujourd'hui le \emph{complexe dual} du diviseur $D$. « Quelle est sa
+signification topologique ? » Ses composantes connexes sont celles de $D$, et
+celles du « bout » $\widehat{X} \setminus D$ ($\widehat{X}$ le complété formel
+de $X$ le long de $D$), notion qui ne dépend pas de la compactification ; si les
+$D_J$ étaient « $\infty$-connexes », l'ensemble simplicial exprimerait le type
+d'homotopie de $U$ à l'infini\footnote{Le type d'homotopie du complexe dual
+ne dépend en effet que de $U$ (Danilov ; Thuillier, 2007, par l'espace de
+Berkovich ; Payne).}.
+
+Soit $X_J$ un « localisé » de $X$ le long de $D_J$ (en marge : un voisinage
+« tubulaire » ou « formel » vaudrait mieux), et $U_J = X_J \setminus D_J$. On
+trouve une suite
+\[
+\widehat{\mathbb{Z}}(1)^J \longrightarrow \pi_1(U_J) \longrightarrow
+\pi_1(D_J) \longrightarrow 1,
+\]
+début de la suite d'homotopie d'un fibré en produits de disques épointés
+au-dessus de $D_J$. Il a « eu un peu peur d'y mettre zéro à gauche, à cause du
+$\pi_2(\overline{D}_J) \to \pi_1(\text{fibre})$ (?) ! » En comparant avec la
+suite $1 \to \Delta_U \to \pi_1(U) \to G_K \to 1$, il voit que la composée
+$\pi_2(D_J) \to \widehat{\mathbb{Z}}(1)^J \to \Delta_U$ est nulle : si
+$\widehat{\mathbb{Z}}(1)^J \to \Delta_U$ est injectif (1°), $\pi_2(D_J) \to
+\widehat{\mathbb{Z}}(1)^J$ est nul\footnote{Sa peur est fondée. En topologie,
+ce bord est donné par les classes de Chern des fibrés normaux des $D_j$ le long
+de $D_J$, et il n'est pas nul en général : pour une courbe exceptionnelle
+$D \simeq \mathbb{P}^1$ d'auto-intersection $-1$ sur une surface, le voisinage
+épointé a le type d'homotopie de $S^3$, et le lacet autour de $D$ est trivial.
+C'est la même situation qui rend 1°) faux après éclatement, comme le dit la
+marge de la page 129.}. Il admet donc l'exactitude à gauche, et obtient un
+homomorphisme de suites exactes
+
+\begin{tikzcd}
+1 \arrow[r] & \widehat{\mathbb{Z}}(1)^J \arrow[r] \arrow[d] & \pi_1(U_{J,\alpha}) \arrow[r] \arrow[d] & \pi_1(D_{J,\alpha}) \arrow[r] \arrow[d] & 1 \\
+1 \arrow[r] & \Delta_U \arrow[r] & \pi_1(U) \arrow[r] & G_K \arrow[r] & 1
+\end{tikzcd}
+
+pour chaque composante connexe $D_{J,\alpha}$ de $D_J$\footnote{La page porte
+deux numéros devant ce diagramme, « (38') » surchargé et « (38) », et
+emploie (39) deux fois, aux pages 134 et 135.}. Les homomorphismes
+$\widehat{\mathbb{Z}}(1)^J \to \Delta_U$ induits par les divers $x \in
+D_{J,\alpha}$ sont tous conjugués entre eux, et l'on peut faire les choix de
+façon cohérente, de sorte que l'indétermination ne porte plus que sur l'image
+de $\pi_1(D_{J,\alpha}) \to G_K$. Pour $J = \{i\}$, $D_J = D_i$ est connexe, et
+l'on obtient
+\[
+\kappa_i : \widehat{\mathbb{Z}}(1) \longrightarrow \Delta_U ,
+\]
+homomorphisme extérieur bien déterminé, compatible aux actions extérieures de
+$G_K$ sur $\widehat{\mathbb{Z}}(1)$ et sur $\Delta_U$ — l'analogue, en dimension
+quelconque, des homomorphismes de lacets $k_i$ des courbes.
+
+Le dossier s'arrête sur un paragraphe barré de grandes croix, qui commençait
+à comparer les composantes de $D_{J'}$ et de $D_J$ pour $J' \supset J$\footnote{Une
+longue note en marge, sur toute la hauteur de la page 135, paraît préciser les
+choix de revêtements universels qui rendent les $\kappa_i$ bien définis ; seuls
+quelques mots se lisent.}.
+
+\end{document}

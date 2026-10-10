@@ -1,0 +1,1758 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 142, pages 1-121.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken the true statement appears and the footnote
+% says what the page has. In any dispute of substance the transcription
+% governs: whoever cites Grothendieck cites batch-01.fr.tex ... batch-07.fr.tex.
+%
+% Scope: the folder is 121 pages in seven batches (1-20, 21-40, 41-60, 61-80,
+% 81-100, 101-120, 121), all transcribed, read whole before any of this was
+% written, and written as ONE file for the whole shelfmark. Blank or
+% count-only sheets: 22, 42, 64; covers in his hand: 1, 21, 65, 104; pages 106
+% and 108 have no transcription (versos without text, by the page numbering).
+%
+% The spine. Five runs, each with its own title or start, kept distinct:
+%   I.   pp. 1-20  « Catégories de Galois-Teichmüller d'un corps alg. clos »
+%        (his pp. 1-10): isotopy category of surfaces with finite étale maps,
+%        its profinite completion, the Teichmüller-Galois category, the
+%        hole-filling problem.
+%   II.  pp. 21-41 « Opérations de Gamma_{Qbar/Q} sur pi_1 M_{0,3} » (his
+%        pp. 5-23; his pp. 1-4 are not in the folder): seven groupoids I-VII on
+%        the thrice-punctured sphere and the automorphisms commuting with the
+%        symmetries; the « relation des lacets ».
+%   III. pp. 43-63 « La sphère à trois points marqués » (his pp. 1-12): an
+%        invariant set-up of the same sphere, real blow-up, base points and
+%        base regions, « épinglages ».
+%   IV.  pp. 65-103 « Généralités sur les actions de groupes de Galois sur les
+%        compactifiés profinis de groupoïdes fondamentaux » (his pp. 1-18 and
+%        a tail): cocycles, base regions T, Mordell-Weil, reduction to U_{0,3}
+%        via Belyi, a lifting lemma for groupoid coverings, necessary
+%        conditions for an automorphism to come from Galois.
+%   V.   pp. 104-121 « Groupoïde fondamental d'une carte trouée (préliminaires
+%        à l'action de Galois) »: sketches (105-112), then a run (his pp. 1-7,
+%        113-121): presentations of the fundamental groupoid of a punctured
+%        map, and hole-filling made trivial.
+% II and III use the same letters (R, Q, P, a, b, c, d, phi, psi) for
+% different arcs; V reuses tau_i, rho_i for the cartographic group. Each is
+% read in its own notation and the spine section says so.
+%
+% Notation fixed for the whole folder. Paths compose as functions (right to
+% left); for a path c : x -> y, c(h) = c h c^-1 transports pi(x) to pi(y).
+% Pi_{0,3} = pi_1(P^1(C) - {0,1,inf}) = < l_0, l_1, l_inf | l_inf l_1 l_0 = 1 >,
+% the order of the relation being the one of II and III (and of 145's second
+% draft); Pi^_{0,3} its profinite completion. rho, sigma_inf, sigma~_inf,
+% tau_inf are the automorphisms of Pi_{0,3} of pages 23 and 53-54. T_X =
+% A_X / A°_X is « le groupe de Teichmüller » of the pages, today the extended
+% mapping class group; T_X^+ the oriented one. The Galois group of IV is
+% written Gamma_K where the page writes Gamma.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - p. 6: the proof of Prop. 2 is completed by a Lefschetz argument
+%     (ours); the page only sketches it and calls the end « bien connu ».
+%   - p. 7, Cor. 2: needs the contractibility of A°_X (Hamstrom), not stated.
+%   - p. 11: the identification (17) of the two contracted products is
+%     asserted, not proved; it needs a compatibility of profinite topologies
+%     that the page does not discuss.
+%   - pp. 11-14: reading order 11 -> 13 and 12 -> 14 (the text says so; the
+%     transcription records the leaves in scan order).
+%   - p. 14: « pas besoin qu'il soit de car. 0 » is restricted: in
+%     characteristic p the fundamental group of an affine curve is not
+%     invariant under extension of algebraically closed fields.
+%   - p. 46: the real blow-up of the sphere at three points has 3
+%     cross-caps; « genre 2 » is its first rational Betti number.
+%   - p. 51: the incisions of Sigma~_eps are the d^{eps'} (as drawn), and the
+%     arcs b_j are equatorial (the page writes supp c_j).
+%   - p. 54: tau_inf(l_inf) = l_0 l_1 (page 23), not l_0^-1 l_inf^-1 l_0;
+%     Pi~_{0,3} is PGL_2(Z) (as page 53 writes), not SL_2(Z).
+%   - p. 55: with Sigma oriented, 3 resp. 2 épinglages, not « trois resp. ».
+%   - pp. 35-36, (60)/(63): alpha' = zeta' rho(zeta')^-1, as the derivation of
+%     p. 35 and (78) of p. 40 give, not rho^-1.
+%   - p. 74, (26): the transition iso goes pi_alpha -> pi_beta.
+%   - pp. 75-76: the subdivision argument needs K-points everywhere; the
+%     correct statement is Brown's groupoid van Kampen theorem, which is the
+%     page's own « résultat un peu plus général » with I_alpha = I cap T_alpha.
+%   - p. 86: Belyi needs the curve defined over a number field.
+%   - p. 114, (9): a^i_r : R^{i+1,i+2}_r -> R^{i+2,i+1}_r (the arc along the
+%     side opposite i, as (10) requires); then (12) is the boundary of the
+%     truncated triangle, a loop at R^{01}_r.
+%   - p. 120, (21): A^{01}_r = (a^inf_{tau_0 r})^-1 Lambda'^1_r a^inf_r (the
+%     page's inverse on Lambda'^1_r does not compose).
+% The computations of II (pp. 23-41) depend on conventions fixed in his
+% missing pp. 1-4; they are reported as the pages give them. The implications
+% between equations that do not depend on those conventions — (23) => (12a),
+% (37) => (26), (30), (32), (61), (63) <=> (70'), the derivation of (60) —
+% were checked by hand.
+%
+% Announced and never established in the folder: the identification (17);
+% an algebraic determination of the Teichmüller-Galois category (« programme
+% à l'horizon », p. 16); a category containing both étale maps and
+% hole-filling (pp. 17-20); the « formules explicites » for f_l(u) (p. 81);
+% the conjecture that the conditions a), b) / 1)-4) are sufficient (p. 95);
+% a conjecture « en termes de M_{0,4}, M_{0,5} » (p. 99, mostly illegible);
+% the condition 5° (p. 101).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{142}
+\pages{1}{121}
+\dating{[à partir de 1978]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Action de Galois sur Teichmüller : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces cent vingt pages cherchent à voir le groupe de Galois des nombres
+algébriques agir sur des objets qu'on peut dessiner : des surfaces, des
+lacets tracés dessus, des cartes.
+
+Le point de départ est un fait que tout le dossier exploite. Une surface
+compacte dont on a percé quelques trous peut être regardée de deux façons :
+comme un objet de topologie, qu'on peut déformer à volonté, ou comme une
+courbe algébrique, définie par des équations. La première façon ne connaît que
+la forme ; la seconde connaît aussi les nombres qui entrent dans les
+équations. Or certains objets topologiques — les revêtements finis de la
+surface, les lacets « vus de loin », c'est-à-dire à travers tous les
+revêtements finis à la fois — se laissent décrire de la seconde façon. Dès
+lors, toute symétrie des nombres, tout élément du groupe de Galois, les
+transforme. On ne voit pas ces transformations : elles ne viennent d'aucune
+déformation de la surface. Mais on peut chercher à les attraper par les
+traces qu'elles laissent.
+
+Les pages 1 à 20 posent le décor le plus large. On assemble toutes les
+surfaces trouées, de tous les genres, en une seule catégorie, dont les flèches
+sont les revêtements finis pris « à déformation près » ; on la complète, en y
+ajoutant des limites, comme on passe des entiers aux entiers $p$-adiques ; et
+l'on obtient un objet sur lequel le groupe de Galois agit, la \emph{catégorie
+de Teichmüller–Galois}. Déterminer cet objet avec son action, par des moyens
+purement combinatoires, c'est le « programme à l'horizon ». Un obstacle reste
+en suspens : l'opération qui bouche un trou ne trouve pas sa place dans ce
+cadre.
+
+Le reste du dossier redescend au cas le plus petit : la sphère privée de trois
+points. Pour y décrire l'action de Galois sur les lacets, il faut des points
+de départ ; et c'est là que se joue une difficulté de méthode que Grothendieck
+affronte page après page. Un point de départ unique brise toutes les
+symétries de la situation : on fait les comptes depuis un carrefour choisi
+arbitrairement, et chaque formule porte la trace de ce choix. Il remplace
+donc le point par un \emph{système} de points de départ placés
+symétriquement — tout près de chaque trou, aux pôles, aux points opposés —,
+puis par des \emph{régions} de départ, des morceaux de sphère d'un seul
+tenant, qu'on peut utiliser comme un point puisqu'on peut s'y promener sans
+ambiguïté. Comme une ville où l'on se donne rendez-vous « sur la place » plutôt
+qu'à une adresse : la place est assez grande pour que tout le monde s'y
+retrouve, assez simple pour qu'il n'y ait qu'une façon d'aller d'un bout à
+l'autre. Les symétries de la sphère déplacent ces lieux de rendez-vous les uns
+sur les autres, et les calculs deviennent invariants. Il le dit lui-même :
+« un aspect essentiel du travail à faire est de garder cette opération
+constamment présente à l'esprit, et d'introduire des notations et des
+constructions qui soient invariantes ». Et plus loin, se reprenant : « suivant
+sans doute d'anciennes habitudes, j'ai privilégié » tels points de départ,
+alors que ce sont d'autres qui expriment directement les phénomènes en jeu.
+
+Ce que donnent ces calculs, ce sont des équations : une symétrie cachée des
+lacets est codée par quelques éléments du groupe des lacets complété et par un
+« multiplicateur », et ces éléments doivent satisfaire une « relation des
+lacets ». Dix ans plus tard, ces équations deviendront, sous la plume de
+Drinfeld et d'Ihara, les relations qui définissent le \emph{groupe de
+Grothendieck–Teichmüller}. Les pages 65 à 103 en donnent le cadre général :
+comment l'action d'un élément de Galois se lit par des « cocycles » attachés
+aux chemins ; pourquoi, sur les courbes d'un certain type, un point rationnel
+est entièrement déterminé par la façon dont Galois agit sur les chemins qui y
+mènent ; pourquoi, grâce au théorème de Belyi, tout se ramène à la sphère à
+trois trous ; et quelles conditions une symétrie des lacets doit remplir pour
+venir de Galois — la première, et « de très loin » la plus importante selon
+lui, étant précisément la relation des lacets. Il conjecture que ces
+conditions nécessaires sont aussi suffisantes ; la question est aujourd'hui
+encore ouverte.
+
+Les dernières pages reviennent au concret : une carte dessinée sur une
+surface, avec ses sommets, ses arêtes et ses faces percés, et les façons de
+présenter ses lacets par un nombre fini de chemins et de relations. Là, la
+difficulté laissée en suspens à la page 20 se dissout : boucher un trou, c'est
+seulement écrire que le petit lacet qui en fait le tour devient trivial.
+
+On lit dans ces notes une manière de travailler : une phrase qui s'arrête
+parce que la notation ne convient pas, une notation reprise jusqu'à ce que les
+symétries y soient visibles, un « travail fascinant en perspective, que je
+n'ai pratiquement pas encore commencé ! ». La mention du théorème de Belyi
+(1979) place au moins la quatrième suite après cette date ; le dossier est
+voisin, dans l'inventaire, de \emph{La Longue Marche à travers la théorie de
+Galois} (1981), dont il semble préparer plusieurs chapitres.
+
+\keywords{mapping class group, Teichmüller groupoid, profinite completion of a category, Galois–Teichmüller theory, Grothendieck–Teichmüller group, real oriented blow-up, tangential base point, étale fundamental groupoid, non-abelian Galois cohomology, Kummer map, anabelian geometry, Belyi's theorem, van Kampen theorem for groupoids, covering of groupoids, dessins d'enfants}
+\end{resume}
+
+\pagerange{1}{121}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+Le dossier réunit cinq suites, chacune avec son titre de couverture ou son
+départ propre ; on les garde distinctes.
+
+\begin{itemize}
+\item \textbf{I. Catégories de Galois–Teichmüller (pages 1 à 20, ses pages 1
+à 10).} La catégorie isotopique des surfaces trouées et des applications
+finies étales ; sa complétion profinie, d'abord pour les surfaces, puis pour
+une catégorie quelconque à groupes d'automorphismes profinis ; la catégorie de
+Teichmüller–Galois d'un corps algébriquement clos et le « programme » ; le
+problème du bouchage des trous, laissé ouvert. Les feuillets sont dans le
+désordre : le texte court de la page 3 à la page 5, puis à la page 4, puis à
+la page 6 ; et, plus loin, de la page 11 à la page 13, et de la page 12 à la
+page 14.
+\item \textbf{II. Opérations de $\Gamma_{\overline{\mathbb{Q}}/\mathbb{Q}}$
+sur $\pi_1 M_{0,3}$ (pages 21 à 41, ses pages 5 à 23).} Ses pages 1 à 4
+manquent au dossier, et avec elles les conventions de départ. Sept
+groupoïdes $\mathrm{I}$ à $\mathrm{VII}$, chacun le groupoïde fondamental de
+la sphère privée de trois points sur un système symétrique de points base ;
+pour chacun, la description des automorphismes (du complété profini) qui
+fixent les sommets et commutent aux symétries ; la « relation des lacets ».
+\item \textbf{III. La sphère à trois points marqués (pages 43 à 63, ses pages
+1 à 12).} La même sphère, reprise de façon invariante : géométrie euclidienne,
+éclatement réel, points base sur les bords, régions simplement connexes,
+isomorphismes d'« épinglage ».
+\item \textbf{IV. Généralités sur les actions de groupes de Galois (pages 65 à
+103, ses pages 1 à 18 et une suite).} Le formalisme des cocycles $f_l$,
+$g_l$ ; les régions de base $T$ ; Mordell–Weil ; la réduction à $U_{0,3}$
+par le théorème de Belyi ; un lemme de relèvement pour les revêtements de
+groupoïdes ; les conditions nécessaires pour qu'un automorphisme provienne de
+Galois.
+\item \textbf{V. Groupoïde fondamental d'une carte trouée (pages 104 à 121).}
+Des pages d'esquisses (105 à 112), puis une suite paginée de sa main de 1 à 7
+(pages 113 à 121) : présentations du groupoïde fondamental d'une carte dont
+sommets, milieux d'arêtes et centres de faces sont percés, et le bouchage des
+trous.
+\end{itemize}
+
+L'ordre de rédaction de II et III n'est pas sûr. III installe des notations
+qui semblent préparer II (« je vais réparer cette négligence » en privilégiant
+les points $R_i^{\omega}$ voisins des trous, que II utilise d'emblée), mais
+II a ses propres pages 1 à 4, perdues, et les lettres ne s'y accordent pas
+entièrement. \textbf{Même nom, objets différents} : en II, $c_i$ va d'un
+point $Q_i$ de l'équateur à un point voisin d'un trou et $d_i$ d'un pôle à
+$Q_i$ ; en III, $c_i$ va d'un pôle à $Q_i$ et $d_i$ d'un pôle à un point
+$S_i$ voisin du trou. Les $\varphi$, $\psi$ changent de rôle de même. En V,
+$\tau_0, \tau_1, \tau_\infty$ et $\rho_0, \rho_1, \rho_\infty$ sont les
+générateurs du groupe cartographique agissant sur les drapeaux d'une carte,
+sans rapport avec les automorphismes $\tau_\infty$, $\rho$ de
+$\Pi_{0,3}$ de II et III. Et $\varepsilon$ désigne en III à la fois un
+hémisphère ($\varepsilon \in \boldsymbol{\varepsilon}$) et, avec un indice,
+un élément de $\widetilde\Pi_{0,3}$ ($\varepsilon_0, \varepsilon_1,
+\varepsilon_\infty$), comme sur les pages.
+
+\subsection*{Les conventions}
+
+\emph{Chemins.} Les chemins se composent comme des fonctions, de droite à
+gauche : pour $l : x \to y$ et $l' : y \to z$, le composé est $l' l : x \to z$.
+Pour un chemin $c : x \to y$, on note $c(h) = c\,h\,c^{-1}$ le transport
+$\pi(x) \to \pi(y)$ qu'il induit sur les groupes fondamentaux. C'est la
+convention des pages ; elle impose l'ordre de la relation ci-dessous.
+
+\emph{Le groupe de la sphère à trois trous.} $U_{0,3} =
+\mathbb{P}^1(\mathbb{C}) \setminus \{0, 1, \infty\}$,
+\[
+\Pi_{0,3} = \pi_1(U_{0,3}) = \langle\, l_0, l_1, l_\infty \mid l_\infty l_1 l_0 = 1 \,\rangle ,
+\]
+libre sur $l_0, l_1$ ; $\widehat\Pi_{0,3}$ est son complété profini. C'est
+l'ordre de la seconde rédaction du dossier 145 (où ce groupe est noté $\pi$,
+$\widehat\pi$)\footnote{Le dossier 145 souligne : « et non
+$l_0 l_1 l_\infty = 1$ ! » ; sa première rédaction utilisait l'ordre
+opposé.}. Les pages 23 et 53–54 fixent un formulaire d'automorphismes de
+$\Pi_{0,3}$ :
+\[
+\rho : l_0 \mapsto l_1 \mapsto l_\infty \mapsto l_0, \qquad
+\sigma_\infty : l_0 \leftrightarrow l_1,\ l_\infty \mapsto l_1^{-1} l_0^{-1} = l_0\, l_\infty\, l_0^{-1},
+\]
+\[
+\tilde\sigma_\infty : l_0 \mapsto l_1^{-1},\ l_1 \mapsto l_0^{-1},\ l_\infty \mapsto l_\infty^{-1}, \qquad
+\tau_\infty = \sigma_\infty\tilde\sigma_\infty = \tilde\sigma_\infty\sigma_\infty : l_0 \mapsto l_0^{-1},\ l_1 \mapsto l_1^{-1},\ l_\infty \mapsto l_0\, l_1 .
+\]
+On a vérifié que chacune de ces règles définit bien un automorphisme (la
+relation $l_\infty l_1 l_0 = 1$ est respectée) et que $\sigma_\infty$ et
+$\tilde\sigma_\infty$ commutent. $\rho$ est d'ordre $3$, $\sigma_\infty$,
+$\tilde\sigma_\infty$, $\tau_\infty$ d'ordre $2$. Géométriquement, $\rho$
+est la rotation d'un tiers de tour qui permute $0 \to 1 \to \infty$,
+$\sigma_\infty$ le demi-tour qui échange $0$ et $1$, $\tau_\infty$ la
+conjugaison complexe et $\tilde\sigma_\infty$ la réflexion qui échange $0$ et
+$1$, chacune accompagnée d'un chemin qui ramène le point base à lui-même.
+
+\emph{Teichmüller.} Pour une surface $X$, $A_X$ est le groupe de ses
+homéomorphismes, $A^{\circ}_X$ le sous-groupe de ceux qui sont isotopes à
+l'identité, et $T_X = A_X/A^{\circ}_X$ ce que les pages appellent le
+« groupe de Teichmüller (non orienté) » — aujourd'hui le groupe modulaire
+étendu, ou \emph{mapping class group} étendu ; $T^{+}_X$ est le sous-groupe
+d'indice $2$ des classes qui respectent l'orientation\footnote{L'usage de
+« groupe de Teichmüller » pour le groupe des classes d'isotopie est celui de
+Grothendieck, ici comme dans l'\emph{Esquisse d'un programme} (1984) ;
+l'usage courant le réserve au groupe modulaire agissant sur l'espace de
+Teichmüller, ce qui revient au même pour les surfaces de type fini
+anabéliennes.}. Une surface est \emph{anabélienne} si chacune de ses
+composantes, de genre $g$ et à $\nu$ trous, vérifie $2g - 2 + \nu > 0$,
+c'est-à-dire $\chi < 0$ — aujourd'hui : \emph{hyperbolique}.
+
+\emph{Galois.} En IV, le groupe que la page note $\Gamma$ est noté
+$\Gamma_K = \mathrm{Aut}(\mathbb{C}/K)$, pour le distinguer du groupe des
+symétries de la sphère, noté $\Gamma_{\Sigma,J}$ en III.
+
+\pagerange{1}{20}
+\section*{I. Catégories de Galois–Teichmüller d'un corps algébriquement clos (pages 1 à 20)}
+
+La page 1 est une couverture de sa main, qui donne ce titre, avec au crayon
+« 19 pages ». La suite, paginée de 1 à 10, est un seul essai.
+
+\pagerange{2}{8}
+\subsection*{La catégorie isotopique (pages 2 à 8)}
+
+Soient $X$, $Y$ deux surfaces topologiques orientées de type fini — des
+surfaces compactes privées d'un nombre fini de points —, connexes pour
+simplifier. Une \emph{application finie étale} $X \to Y$ est un revêtement
+fini. On pose
+\[
+(1)\qquad \mathrm{Hom}_{\mathrm{isot}}(X, Y) = \pi_0\bigl(\text{espace des applications finies étales } X \to Y\bigr),
+\]
+l'ensemble des composantes connexes par arcs ; deux applications dans la même
+composante sont dites \emph{isotopes}. Une isotopie entre $f$ et $g$ est une
+application $F : X \times I \to Y \times I$ au-dessus de $I = [0,1]$, finie
+étale, valant $f$ en $0$ et $g$ en $1$. Comme $Y' \mapsto Y' \times I$ est
+une équivalence entre revêtements finis de $Y$ et de $Y \times I$, $F$ se
+factorise par un homéomorphisme $\alpha : X \times I \xrightarrow{\sim} Y'
+\times I$ suivi de $p \times \mathrm{id}_I$, pour un revêtement $p : Y' \to Y$
+unique à isomorphisme unique près\footnote{La page dit le foncteur
+« pleinement fidèle » ; il faut aussi qu'il soit essentiellement surjectif, ce
+qui vient de ce que $I$ est contractile. C'est ce qu'elle utilise.}. En
+d'autres termes, $f = p f_0$ et $g = p g_0$ avec $f_0, g_0 : X \to Y'$ deux
+homéomorphismes isotopes, donc $g_0 = f_0 u$ avec $u \in A^{\circ}_X$, et
+$g = f u$. Réciproquement $f u$ est isotope à $f$ si $u$ l'est à l'identité.
+
+\textbf{Proposition 1.} \emph{Deux applications finies étales $f, g : X \to Y$
+sont isotopes si et seulement si $g = f u$ avec $u \in A^{\circ}_X$.}
+
+La page pose alors la question de l'unicité : toute classe d'isotopie se
+factorise trivialement en un homéomorphisme suivi d'un revêtement,
+\[
+(10)\qquad X \xrightarrow[\ \sim\ ]{\ f_0\ } Y' \xrightarrow{\ p\ } Y ,
+\]
+mais cette factorisation est-elle canonique, $Y'$ étant défini à
+$Y$-isomorphisme unique près ? Il faut pour cela que, pour tout
+$Y$-automorphisme $\gamma$ de $Y'$,
+\[
+(11)\qquad \gamma f_0 \simeq f_0 \ (\text{isotopie}) \Longrightarrow \gamma = \mathrm{id}_{Y'} .
+\]
+Quitte à prendre $f_0 = \mathrm{id}$, la question est de savoir si un
+automorphisme $\gamma$ d'ordre fini, isotope à l'identité, est
+l'identité\footnote{La phrase qui pose la question (page 3) se poursuit à la
+page 5 ; la page 4 fait suite à la page 5, et la page 6 à la page 4. On lit
+dans cet ordre. Le début de la page 4, qui ramène le cas d'une action non libre
+au cas d'une action libre en ôtant les points de ramification, est en partie
+illisible.}. Ce n'est pas toujours vrai : sur $\mathbb{C}^{*}$, ou sur le tore
+$S^1 \times S^1$, les translations par des points d'ordre fini sont isotopes à
+l'identité sans être l'identité\footnote{La page écrit
+$\mathbb{U} \times \mathbb{U}$, lecture incertaine ; $\mathbb{U}$ est
+vraisemblablement le cercle unité, et l'exemple le tore. Les deux exemples sont
+de caractéristique d'Euler nulle, hors du cas anabélien.}. Mais :
+
+\textbf{Proposition 2.} \emph{Soit $Y'$ une surface orientée de type fini,
+anabélienne. Tout automorphisme d'ordre fini de $Y'$ isotope à l'identité est
+l'identité.}
+
+La page indique la voie : on peut supposer $Y'$ connexe ; il suffit que
+$\gamma$ agisse trivialement sur $H_1(Y', \mathbb{Z})$ ; on peut munir $Y'$
+d'une structure de courbe algébrique invariante par $\gamma$ ; alors $Y'$ se
+plonge dans sa jacobienne généralisée — extension d'une variété abélienne par
+un tore —, $\gamma$ y induit une translation, et une courbe anabélienne n'est
+stable par aucune translation non nulle, « fait bien connu ». Voici un
+argument complet. Un homéomorphisme d'ordre fini d'une surface préserve une
+structure conforme (Kerékjártó, Eilenberg) ; on peut donc supposer $\gamma$
+holomorphe sur $Y' = \overline{Y} \setminus D$, $\overline{Y}$ compacte de
+genre $g$, $D$ de cardinal $\nu$, et $\gamma$ s'étend à $\overline{Y}$.
+Isotope à l'identité, $\gamma$ agit trivialement sur $H_1(Y', \mathbb{Z})$.
+Si $\nu \geq 2$, les classes des petits lacets autour des points de $D$ sont
+non nulles et deux à deux distinctes (pour $\nu = 2$, elles sont opposées),
+et $\gamma$ les permute : il fixe donc chaque point de $D$. Si $\gamma \neq
+\mathrm{id}$, ses points fixes sur $\overline{Y}$ sont isolés et d'indice $+1$,
+et la formule de Lefschetz, $\gamma$ agissant trivialement sur
+$H_1(\overline{Y})$, donne $2 - 2g = \#\mathrm{Fix}(\gamma) \geq \nu$, soit
+$2g - 2 + \nu \leq 0$ ; pour $\nu \leq 1$ elle donne de même $g \leq 1$, avec
+$g = 0$ si $\nu = 1$. Dans tous les cas la surface n'est pas anabélienne :
+contradiction\footnote{Cet argument est de l'édition. La page dit qu'il suffit
+que $\gamma$ agisse trivialement sur $H_1$ à coefficients dans $\mathbb{Z}$,
+ou dans $\mathbb{Z}/n\mathbb{Z}$ avec $n \geq 3$ ; ce second énoncé est, pour
+les courbes projectives de genre $\geq 2$, le lemme de Serre (1960). La
+condition $2g + \nu \geq 2$ que la page écrit (lecture incertaine) est celle
+pour que l'application d'Abel–Jacobi généralisée soit injective. Elle ajoute :
+« Sûrement, il ne doit pas être difficile de trouver une démonstration directe
+purement topologique ».}.
+
+Un revêtement fini d'une surface anabélienne est anabélien. D'où :
+
+\textbf{Corollaire 1.} \emph{Si $Y$ est anabélienne, toute classe d'isotopie
+d'applications finies étales $X \to Y$ est un torseur à droite sous
+$A^{\circ}_X$.}
+
+En effet l'action $f \mapsto f u$ est transitive par la proposition 1, et
+libre : si $f u = f$, $u$ est un automorphisme du revêtement $X \to Y$, donc
+d'ordre fini, et isotope à l'identité, donc $u = \mathrm{id}$ par la
+proposition 2 appliquée à $X$.
+
+\textbf{Corollaire 2.} \emph{Les composantes connexes de l'espace des
+applications finies étales $X \to Y$ sont contractiles.}
+
+C'est le corollaire 1 joint à la contractilité de $A^{\circ}_X$ pour une
+surface anabélienne\footnote{La page ne dit pas d'où vient cette
+contractilité ; c'est le théorème de Hamstrom (1966) pour les groupes
+d'homéomorphismes, d'Earle et Eells (1969) pour les difféomorphismes. Il faut
+aussi que l'application orbite $A^{\circ}_X \to$ (composante), $u \mapsto f u$,
+soit un homéomorphisme, ce qu'on admet ici avec la page.}.
+
+\textbf{Corollaire 3.} \emph{Le groupe $T_X$ agit à droite sur
+$\mathrm{Hom}_{\mathrm{ét}}(X, Y) = \mathrm{Hom}_{\mathrm{isot}}(X, Y)$ avec des
+stabilisateurs finis : le stabilisateur de la classe de $f$ s'identifie au
+groupe des automorphismes du revêtement $X \to Y$ défini par $f$. Les orbites
+sont en bijection avec l'ensemble $R_X(Y)$ des classes d'isomorphisme de
+revêtements finis de $Y$ homéomorphes à $X$ ; les orbites de $T^{+}_X$, avec
+$R_X(Y) \times \{\pm 1\}$, le signe disant si l'application respecte ou
+renverse l'orientation.} L'ensemble des orbites est fini, $\pi_1(Y)$ étant de
+type fini et le degré étant fixé par $\chi(X) = d\,\chi(Y)$\footnote{Ces deux
+remarques sont dans les marges de la page 7. Une autre note marginale, en
+grande partie illisible, rapproche $T_X$ de $\mathrm{Out}$ de $\pi_X$ ; si
+c'est bien l'objet de la note, c'est le théorème de Dehn–Nielsen–Baer, mais
+la reconstruction est de l'édition.}.
+
+\textbf{Scholie.} Les surfaces orientées de type fini, avec pour flèches les
+classes d'isotopie d'applications finies étales qui respectent l'orientation,
+forment une catégorie. Une flèche équivaut à un triplet $(Y', p, f_0)$ : un
+revêtement fini $p : Y' \to Y$ et une classe d'isotopie d'homéomorphismes
+orientés $f_0 : X \to Y'$. À partir de là, tous les morphismes considérés
+respectent l'orientation, et l'on omet le signe $+$.
+
+\pagerange{8}{13}
+\subsection*{Complétion profinie, et sa version axiomatique (pages 8 à 13)}
+
+On pose
+\[
+(12)\qquad \widehat{\mathrm{Hom}}_{\mathrm{ét}}(X, Y) = \mathrm{Hom}_{\mathrm{ét}}(X, Y) \times^{T_X} \widehat{T}_X ,
+\]
+produit contracté par le complété profini $\widehat{T}_X$ de $T_X$. Comme
+$T_X$ a un nombre fini d'orbites, à stabilisateurs finis, c'est une réunion
+finie d'espaces $\widehat{T}_X/H$, $H$ fini : un espace compact totalement
+discontinu, métrisable, sans point isolé\footnote{La page 12 dit d'abord
+« compacts », puis « en fait, des espaces localement compacts dénombrables à
+l'infini » ; pour $X$, $Y$ fixés, le nombre d'orbites est fini (note de la
+page 7) et l'espace est compact. Le « sans point isolé » est son « et pas un
+point isolé ».}. La composition s'étend par continuité et reste associative.
+
+\textbf{Version axiomatique.} Une catégorie $C$ est \emph{à groupes
+d'automorphismes profinis} si chaque $\mathrm{Aut}(X)$ est muni d'une
+structure de groupe profini, de sorte que, pour l'action
+$(\psi, \varphi) \cdot u = \varphi u \psi^{-1}$ de $\mathrm{Aut}(X) \times
+\mathrm{Aut}(Y)$ sur $\mathrm{Hom}(X, Y)$, les stabilisateurs soient fermés.
+On munit alors chaque orbite de la topologie quotient et l'ensemble des
+orbites de la topologie discrète : $\mathrm{Hom}(X, Y)$ devient localement
+compact. On veut la composition
+\[
+(14)\qquad \mathrm{Hom}(X, Y) \times \mathrm{Hom}(Y, Z) \longrightarrow \mathrm{Hom}(X, Z)
+\]
+continue, ce qui revient à la continuité, pour $u$, $v$ fixés, de
+$\varphi \mapsto v \varphi u$ sur $\mathrm{Aut}(Y)$. Soit $G_u = \{(\psi,
+\varphi) \mid \varphi u = u \psi\}$ le stabilisateur de $u$, et $H_u$ son
+image dans $\mathrm{Aut}(Y)$. Sur $H_u$, $v \varphi u = (v u)\psi$ est
+continue, la topologie de $H_u$ étant quotient de celle de $G_u$ ; donc aussi
+sur chaque translaté $\alpha H_u$. D'où la condition :
+
+\[
+(16)\ (*)\qquad \text{pour toute flèche } u : X \to Y,\ H_u \text{ est d'indice fini dans } \mathrm{Aut}(Y).
+\]
+
+Fermé d'indice fini, $H_u$ est alors ouvert, ses translatés recouvrent
+$\mathrm{Aut}(Y)$, et (14) est continue. La condition dit aussi que, dans
+$\mathrm{Hom}(X, Y)$, chaque orbite sous $\mathrm{Aut}(X) \times
+\mathrm{Aut}(Y)$ est réunion finie d'orbites ouvertes sous
+$\mathrm{Aut}(X)$\footnote{C'est la note marginale de la page 10, en partie
+illisible ; l'équivalence est immédiate, l'orbite de $u$ sous
+$\mathrm{Aut}(X)$ correspondant à $\mathrm{Aut}(X) \times H_u$.}.
+
+Soit maintenant $C_0$ une catégorie sans topologie, satisfaisant $(*)$ pour
+ses groupes d'automorphismes. La page en construit une « complétion
+profinie » $\widehat{C}_0$, de mêmes objets, avec
+\[
+(17)\qquad \mathrm{Hom}_{\widehat{C}_0}(X, Y) = \mathrm{Hom}_{C_0}(X, Y) \times^{\mathrm{Aut}(X) \times \mathrm{Aut}(Y)} \bigl(\widehat{\mathrm{Aut}}(X) \times \widehat{\mathrm{Aut}}(Y)\bigr)
+\]
+et affirme que ce produit s'identifie à
+$\mathrm{Hom}_{C_0}(X, Y) \times^{\mathrm{Aut}(X)} \widehat{\mathrm{Aut}}(X)$,
+la composition étant l'unique loi continue qui prolonge celle de
+$C_0$\footnote{L'identification n'est pas démontrée par la page. Sur une orbite
+$O = (\mathrm{Aut} X \times \mathrm{Aut} Y)/G_u$, elle demande que l'adhérence
+de $G_u$ dans $\widehat{\mathrm{Aut}}(X) \times \widehat{\mathrm{Aut}}(Y)$
+rencontre $\widehat{\mathrm{Aut}}(X) \times \{1\}$ selon l'adhérence du
+stabilisateur de $u$ dans $\mathrm{Aut}(X)$ : une compatibilité des topologies
+profinies le long de $u$ que $(*)$ seule ne donne pas. Dans le cas des
+surfaces, le stabilisateur est fini, mais l'image de $G_u$ dans $T_X$ — les
+classes qui descendent le long du revêtement — est en général d'indice infini,
+et la question touche à la topologie que $\widehat{T}_X$ induit sur ce
+sous-groupe. On rapporte l'énoncé sans le reprendre à notre compte.}. Tout
+$\widehat{C}_0$-morphisme se factorise
+\[
+(19)\qquad \hat f : X \xrightarrow[\ \sim\ ]{\ \hat f_0\ } Y' \xrightarrow{\ u\ } Y ,
+\]
+$u$ morphisme de $C_0$, $\hat f_0$ isomorphisme de $\widehat{C}_0$ ; si
+$\mathrm{Aut}_Y(Y') \to \widehat{\mathrm{Aut}}(Y')$ est injectif pour toute
+$u : Y' \to Y$, $Y'$ est déterminé à $Y$-isomorphisme unique près. Pour
+composer $\hat f = u \hat f_0$ et $\hat g = v \hat g_0$, $\hat g_0 : Y
+\xrightarrow{\sim} Z'$, on écrit $\hat g_0 = w \hat\varphi$ avec $w$ un
+isomorphisme de $C_0$ et $\hat\varphi \in \widehat{H}_u$ — c'est possible
+parce que $\widehat{H}_u$ est ouvert —, on choisit $\hat\varphi'$ avec
+$\hat\varphi u = u \hat\varphi'$, et
+\[
+(22)\qquad \hat g \hat f = (v w \hat\varphi)(u \hat f_0) = \underbrace{(v w u)}_{\text{flèche de } C_0}\ \underbrace{(\hat\varphi' \hat f_0)}_{\text{isomorphisme de } \widehat{C}_0} .
+\]
+Dans le cas des surfaces anabéliennes, $C_0$ est la catégorie isotopique, la
+condition $(*)$ est satisfaite, et $\widehat{C}_0$ est la catégorie définie par
+(12)\footnote{La page 13 fait suite à la page 11 (« Par construction, tout
+$\widehat{C}_0$-morphisme » — « (18) $\hat f : X \to Y$ se factorise »), et la
+page 14 à la page 12. On lit dans cet ordre ; la transcription suit l'ordre des
+feuillets.}.
+
+\pagerange{12}{16}
+\subsection*{La catégorie de Teichmüller–Galois (pages 12, 14 à 16)}
+
+Limitons-nous aux surfaces qui sont des courbes algébriques complexes
+anabéliennes. Dans la factorisation (19), le revêtement $u : Y' \to Y$ provient
+d'un revêtement fini étale \emph{algébrique}, et l'isomorphisme $\hat f_0$
+s'interprète comme une flèche du groupoïde fondamental profini du champ des
+modules pertinent — la « multiplicité modulaire » $M_{g,\nu}$ — entre les
+points définis par $X$ et $Y'$ : une classe d'isotopie d'homéomorphismes
+$X \to Y'$ est exactement une classe de chemins de $[X]$ à $[Y']$ dans ce
+champ, dont l'espace de Teichmüller est le revêtement universel. La
+composition (22) s'explicite donc en compositions dans le groupoïde
+fondamental du champ des modules et dans la catégorie des courbes algébriques
+avec leurs revêtements. Tout devient algébrique, et la construction a un sens
+sur un corps algébriquement clos $k$ quelconque ; elle est fonctorielle en $k$,
+les foncteurs de changement de base $k \to k'$ étant des équivalences, parce
+que le groupoïde fondamental du champ des modules ou d'une courbe ne change pas
+par extension de corps algébriquement clos\footnote{La page ajoute « pas besoin
+qu'il soit de car.~0 ! ». En caractéristique $p > 0$, l'invariance par
+extension de corps algébriquement clos vaut pour les variétés propres et pour
+les quotients modérés, mais pas pour le groupe fondamental d'une courbe
+affine, que la ramification sauvage fait dépendre du corps ; et les
+revêtements étales d'une telle courbe ne relèvent plus de la topologie. On
+s'en tient ici à la caractéristique nulle. La note marginale de la page 15
+précise que l'équivalence ne signifie pas que toute courbe sur $k'$ provienne
+de $k$ : c'est que, dans cette catégorie, deux courbes de même type sont
+isomorphes.}.
+
+En particulier $\mathrm{Aut}(k)$ agit sur cette catégorie, qu'il nomme
+\emph{catégorie de Teichmüller–Galois} associée à $k$. Ses objets connexes à
+isomorphisme près correspondent aux types $(g, \nu)$ anabéliens ; le groupe
+des automorphismes d'un objet est le complété profini du groupe de
+Teichmüller, c'est-à-dire le groupe fondamental profini du champ
+$M_{g,[\nu]}$ des courbes de genre $g$ à $\nu$ points non ordonnés\footnote{La
+fin de la page 15 est peu lisible ; « des compactifiés profinis des groupes
+… de Teichmüller » est sûr, le reste non.}. Élargir le \emph{groupoïde} de
+Teichmüller en cette \emph{catégorie}, qui n'est plus un groupoïde, est une
+façon de relier entre eux les types $(g, \nu)$ différents.
+
+« Une part essentielle du vaste programme à l'horizon est la détermination
+complète de cette catégorie par voie “algébrique” (ni transcendante, ni de
+géométrie algébrique !), avec les opérations de Galois–Teichmüller dessus »,
+au moins pour $k = \overline{\mathbb{Q}}$, et dans une certaine mesure pour
+$k = \overline{K}$, $K$ de type fini sur $\mathbb{Q}$, en se limitant aux
+$K$-automorphismes. « Algébrique » veut dire ici, précise la marge, par des
+techniques combinatoires sur les surfaces et les groupes
+profinis\footnote{Note marginale très serrée, lecture en grande partie
+conjecturale. Ce programme est celui que l'\emph{Esquisse d'un programme}
+(1984) exposera sous le nom de « tour de Teichmüller ».}.
+
+\pagerange{17}{20}
+\subsection*{Le bouchage des trous (pages 17 à 20)}
+
+Un type de morphismes manque : les inclusions ouvertes
+\[
+(23)\qquad X = Y \setminus T \hookrightarrow Y ,
+\]
+qui \emph{bouchent des trous}. Pour les composer avec les morphismes finis
+étales, il faudrait admettre des morphismes $X \to Y$ qui s'insèrent dans un
+carré
+\[
+(24)\qquad
+\begin{array}{ccc}
+X & \hookrightarrow & \widehat{X}\\
+\downarrow & & \downarrow\\
+Y & \hookrightarrow & \widehat{Y}
+\end{array}
+\]
+avec $\widehat{X} \to \widehat{Y}$ fini ramifié et $X \to Y$ étale. Si $S =
+\widehat{X} \setminus X$ et $T = \widehat{Y} \setminus Y$, on a
+$S \supset \widehat{X}|_T$, l'image inverse de $T$\footnote{La page écrit
+$T = \widehat{Y} \setminus T$, pour $\widehat{Y} \setminus Y$.}, et la
+difficulté vient de ce que $\widehat{X} \to \widehat{Y}$ peut être ramifié non
+seulement en des points de $\widehat{X}|_T$, mais en des points de $S$ qui
+n'y sont pas — des trous de $X$ au-dessus de points de $Y$. La notion
+d'isotopie raisonnable existe (dans $\mathrm{Aut}(\widehat{X}, S) \times
+\mathrm{Aut}(\widehat{Y}, T)$), mais il n'y a plus de factorisation
+\emph{canonique} d'une classe en un bouchage de trous suivi d'un revêtement :
+les points de $S \setminus \widehat{X}|_T$ vont en des points de $Y$ que la
+classe seule ne détermine pas. « Pour cette raison, je ne vois plus comment
+interpréter une telle classe […] en termes de géométrie algébrique
+“abstraite” »\footnote{La page 18 est très corrigée ; l'ordre de lecture de
+sa phrase centrale est conjectural, et l'on n'en retient que la conclusion,
+qui est sûre.}.
+
+On peut pourtant définir, sur tout corps algébriquement clos, un foncteur du
+groupoïde de Teichmüller des courbes de type $(g, \nu)$ munies d'un ensemble
+$I$ de $\nu' \leq \nu$ trous marqués vers celui du type $(g, \nu - \nu')$, par
+« bouchage des trous en $I$ », transitif pour des bouchages
+successifs\footnote{Aujourd'hui : l'application d'oubli de points
+$M_{g,\nu} \to M_{g,\nu-\nu'}$ des champs de modules, sur les groupoïdes
+fondamentaux. Pour rester dans le monde anabélien, il faut $2g - 2 + \nu -
+\nu' > 0$, ce que la page ne précise pas.}. Ce qu'il ne voit pas, c'est
+comment loger ces inclusions dans une même catégorie que les morphismes
+étales — sinon en définissant par générateurs et relations une catégorie plus
+grosse, au prix de ne plus pouvoir l'interpréter, sur $\mathbb{C}$, comme
+complétée profinie de la catégorie isotopique. Le développement s'arrête là,
+au milieu de la page 20. La suite V du dossier (pages 120 et 121) traitera le
+bouchage des trous sur les présentations combinatoires, où il devient trivial.
+
+\pagerange{21}{41}
+\section*{II. Opérations de $\Gamma_{\overline{\mathbb{Q}}/\mathbb{Q}}$ sur $\pi_1 M_{0,3}$ (pages 21 à 41)}
+
+La page 21 est une couverture qui porte ce titre ; la page 22 n'a qu'un
+décompte au crayon. Le texte commence à sa page 5, les formules repartant de
+(1) : ses pages 1 à 4, qui fixaient les conventions, manquent. Les calculs de
+cette suite sont donc rapportés tels que les pages les donnent ; seules les
+implications entre équations qui ne dépendent pas de ces conventions ont été
+vérifiées, et on le signale\footnote{« $\pi_1 M_{0,3}$ » désigne ici le groupe
+fondamental d'une courbe de type $(0, 3)$, c'est-à-dire $\Pi_{0,3}$, et non
+celui du champ des modules $M_{0,3}$, qui est un point ; c'est l'usage de la
+\emph{Longue Marche}, qui écrit $\pi_{0,3}$.}.
+
+\emph{Le cadre.} Sur la sphère, les trois points marqués $R_0, R_1, R_\infty$
+sont sur l'équateur ; $\underline{\omega}$ est l'ensemble à deux éléments des
+ordres cycliques de $J = \{0, 1, \infty\}$ (les deux sens de parcours de
+l'équateur), et pour $\omega \in \underline{\omega}$ on note $\omega i$
+l'image de $i$ par la permutation circulaire correspondante, $\omega'$ l'autre
+élément. Le groupe $\mathfrak{S}_J$ agit sur la sphère par rotations — le
+tiers de tour autour de l'axe des pôles, les demi-tours autour des axes qui
+passent par un $R_i$ —, et $\tau$ est la réflexion par rapport au plan de
+l'équateur\footnote{La page note ce groupe $\widetilde{\mathfrak{S}}_J$ et dit
+qu'il permute « de façon simplement transitive » chacun des paquets de six
+flèches introduits ensuite, y compris les six méridiens $d_i^{\omega}$ issus
+des deux pôles. Cela impose l'action par rotations, les demi-tours échangeant
+les pôles ; un groupe fixant un pôle ne pourrait envoyer $d_i^{+}$ sur
+$d_i^{-}$. L'identification est de l'édition.}. On cherche les automorphismes
+$u$ du complété profini de divers groupoïdes fondamentaux de la sphère
+trouée, qui \emph{fixent les sommets} et \emph{commutent à $\mathfrak{S}_J$} :
+ce sont les candidats à l'action d'un élément de Galois, qui fixe les points
+réels et commute aux symétries définies sur $\mathbb{Q}$.
+
+\pagerange{23}{24}
+\subsection*{Le groupoïde $\mathrm{I}_J$ (pages 23 et 24)}
+
+Autour de chaque trou $R_i$, un petit cercle porte deux sommets
+$R_i^{\omega}$, $\omega \in \underline{\omega}$, reliés par deux arcs
+$a_i^{\omega} : R_i^{\omega} \to R_i^{\omega'}$ ; le long de l'équateur, des
+flèches $b_i^{\omega} : R^{\omega}_{\omega i} \to R^{\omega'}_{\omega' i}$
+relient les sommets voisins de deux trous différents. Le groupoïde
+$\mathrm{I}_J$ a ces six sommets, ces douze flèches, et les relations
+\[
+(2)\qquad \text{a)}\ b_i^{\omega} b_i^{\omega'} = 1, \qquad
+\text{b)}\ \text{une relation d'hexagone par hémisphère},
+\]
+soit trois relations effectives en a) et deux en b)\footnote{Les indices de
+(2\,b) sont lus avec doute ; on n'en retient que la forme. Le compte est
+cohérent : $12 - 3 = 9$ flèches indépendantes, $6$ sommets, $2$ relations, et
+$9 - 6 + 1 - 2 = 2$ est bien le rang du groupe libre $\Pi_{0,3}$
+(vérification de l'édition).}. Le lacet complet $\lambda_i^{\omega} =
+a_i^{\omega'} a_i^{\omega}$ autour de $R_i$ est l'image de $l_0$ par un
+isomorphisme $\varphi_i^{\omega} : \Pi_{0,3} \xrightarrow{\sim}
+\pi(R_i^{\omega})$, les six $\varphi_i^{\omega}$ étant permutés simplement
+transitivement par $\mathfrak{S}_J$ ; $\tau$ agit par $\tau_\infty$ (5). Les
+arcs transportent ces repères selon
+\[
+(6)\qquad a_i^{\omega}\bigl(\varphi_i^{\omega}(g)\bigr) = \varphi_i^{\omega'}\bigl(\varepsilon_0(g)\bigr), \qquad
+b_i^{\omega}\bigl(\varphi^{\omega}_{\omega i}(g)\bigr) = \varphi^{\omega'}_{\omega' i}\bigl(\sigma_\infty(g)\bigr), \qquad \varepsilon_0^2 = l_0 ,
+\]
+où $\varepsilon_0$ est la « racine carrée » de $l_0$ de la page 54 : faire le
+demi-tour d'un trou, c'est appliquer $\varepsilon_0$ ; le tour complet, deux
+demi-tours, c'est conjuguer par $l_0$\footnote{Avec $\varepsilon_0 =
+\sigma_\infty \rho$ (page 54), on vérifie $\varepsilon_0(l_0) = l_0$ et
+$\varepsilon_0^2 = \mathrm{int}(l_0)$ comme automorphismes de $\Pi_{0,3}$ ;
+c'est ce qu'utilise la formule (30) ci-dessous. Le dossier 145 écrit de même
+$\varepsilon_i^2 = l_i$, ses $\varepsilon_i$ relevant les transpositions.}.
+Avec $\tilde b_i^{\omega} = a^{\omega'}_{\omega' i} b_i^{\omega}$, la relation
+(2\,b) devient
+\[
+(8)\qquad \tilde b^{\omega}_{\omega^2 i}\, \tilde b^{\omega}_{\omega i}\, \tilde b_i^{\omega} = 1 ,
+\]
+et $\tilde b$ transporte par $\rho^{-1}$ (9).
+
+Un automorphisme $u$ du complété $\widehat{\mathrm{I}}_J$ commutant à
+$\mathfrak{S}_J$, fixant les sommets et respectant les sous-groupoïdes
+engendrés par chaque petit cercle, s'écrit
+\[
+u(a_i^{\omega}) = a_i^{\omega}\, \varphi_i^{\omega}(l_0^{\gamma}), \qquad
+u(b_i^{\omega}) = b_i^{\omega}\, \varphi^{\omega}_{\omega i}(\beta),
+\qquad \gamma = \frac{p - 1}{2} \in \widehat{\mathbb{Z}},\ p \in \widehat{\mathbb{Z}}^{*},\ \beta \in \widehat\Pi_{0,3} ;
+\]
+alors $u(\lambda_i^{\omega}) = (\lambda_i^{\omega})^{p}$ : $p$ est le
+\emph{multiplicateur}, l'exposant par lequel $u$ élève les lacets autour des
+trous. Les relations (2) donnent, sur $(p, \beta)$,
+\[
+(12)\qquad \beta\, \sigma_\infty(\beta) = 1, \qquad
+\alpha\, \rho^{-1}(\alpha)\, \rho^{-2}(\alpha) = 1 \quad \text{où } \alpha = l_1^{\gamma}\, \beta = \sigma_\infty(l_0^{\gamma})\,\beta .
+\]
+La marge remarque qu'en passant aux inverses on retrouve « les équations
+habituelles » $\alpha'\rho(\alpha')\rho^{2}(\alpha') = 1$, $\alpha' =
+\alpha^{-1}$ (c'est exact : on applique $\rho^{2}$ à l'inverse de la
+relation). Le passage de $u$ à $\tau u \tau^{-1}$ change $\beta$ en
+$\tau_\infty(\beta)$, et il faudrait, dit-il, vérifier directement que (12)
+est stable par ce changement.
+
+\emph{Le nom d'aujourd'hui.} Ces deux équations ont exactement la forme des
+deux premières relations par lesquelles Drinfeld (1990) définit le
+\emph{groupe de Grothendieck–Teichmüller} $\widehat{GT}$ : pour
+$(\lambda, f) \in \widehat{\mathbb{Z}}^{*} \times \widehat{F}_2$,
+$f(x, y) f(y, x) = 1$ et $f(z, x) z^{m} f(y, z) y^{m} f(x, y) x^{m} = 1$ avec
+$xyz = 1$ et $m = (\lambda - 1)/2$. Ici $\sigma_\infty$ échange $l_0$ et $l_1$,
+$\rho$ les permute circulairement, et le multiplicateur $p$ entre par
+$\gamma = (p - 1)/2$ comme $\lambda$ par $m$\footnote{Le rapprochement est de
+l'édition, à des conventions près (ordre de la relation entre les lacets,
+côté des conjugaisons) que nous n'avons pas confrontées terme à terme. Ni
+Drinfeld ni Ihara, qui nomma le groupe (1991), ne pouvaient être cités par ces
+pages. La troisième relation de Drinfeld, pentagonale, porte sur $M_{0,5}$ ;
+voir la page 99 ci-dessous. Le dossier 145 rencontre ces mêmes relations, dans
+une autre présentation, aux pages 6 à 11.}.
+
+\pagerange{25}{28}
+\subsection*{Les groupoïdes $\mathrm{II}_J$ et $\mathrm{III}_J$ (pages 25 à 28)}
+
+On ajoute sur l'équateur les trois sommets $Q_i$, opposés aux trous, et des
+arcs $c_i^{\omega} : Q_i \to R^{\omega'}_{\omega' i}$. Alors $b_i^{\omega} =
+c_i^{\omega}(c_i^{\omega'})^{-1}$ (13), les $b$ deviennent superflus, (2\,a)
+est automatique, et avec
+\[
+(14)\qquad \tilde a_i^{\omega} = (c^{\omega}_{\omega i})^{-1}\, a_i^{\omega}\, c^{\omega'}_{\omega' i} : Q_{\omega i} \to Q_{\omega' i}, \qquad \tau(\tilde a_i^{\omega}) = (\tilde a_i^{\omega'})^{-1},
+\]
+(2\,b) devient $\tilde a^{\omega}_{\omega^2 i}\, \tilde a^{\omega}_{\omega i}\,
+\tilde a_i^{\omega} = 1$ (16). On repère $\pi(Q_i)$ par $\psi_i^{\omega} :
+\Pi_{0,3} \xrightarrow{\sim} \pi(Q_i)$, déduit de
+$\varphi^{\omega'}_{\omega' i}$ par transport le long de $c_i^{\omega}$.
+
+Un automorphisme $u$ de $\widehat{\mathrm{II}}_J$ du type considéré est donné
+par $u(a_i^{\omega}) = a_i^{\omega}\varphi_i^{\omega}(\lambda)$ et
+$u(c_i^{\omega}) = c_i^{\omega}\psi_i^{\omega}(\eta)$, $\lambda, \eta \in
+\widehat\Pi_{0,3}$ — la marge observe qu'il est inutile d'exiger d'emblée
+$\lambda = l_0^{\gamma}$. Alors $u(b_i^{\omega}) =
+b_i^{\omega}\varphi^{\omega}_{\omega i}(\beta)$ avec
+\[
+(23)\qquad \beta = \sigma_\infty(\eta)\, \eta^{-1},
+\]
+qui entraîne la première relation (12), $\beta\sigma_\infty(\beta) = 1$
+($\sigma_\infty$ étant involutif) ; il reste la seconde, (24). Sur les
+$\tilde a$, $u$ agit par
+\[
+(27)\qquad \tilde\alpha = \eta^{-1}\, \varepsilon_0(\lambda\eta), \qquad \text{soit } \eta^{-1} l_0^{\gamma}\, \varepsilon_0(\eta) \text{ si } \lambda = l_0^{\gamma},
+\]
+et (24) équivaut à la même équation en $\tilde\alpha$ :
+\[
+(26)\qquad \tilde\alpha\, \rho^{-1}(\tilde\alpha)\, \rho^{-2}(\tilde\alpha) = 1 .
+\]
+Le groupoïde $\mathrm{III}_J$ induit sur les trois $Q_i$ (six arcs
+$\tilde a_i^{\omega}$, relations (16)) a donc pour automorphismes du type
+considéré les $\tilde\alpha \in \widehat\Pi_{0,3}$ solutions de (26). Sur le
+lacet $\tilde\lambda_i^{\omega} = \tilde a_i^{\omega'}\tilde a_i^{\omega}$,
+identifié à $l_0$,
+\[
+(30)\qquad u(l_0) = \tilde\alpha\, \varepsilon_0(\tilde\alpha)\, l_0 = \eta^{-1}\, l_0^{p}\, \eta \qquad (p = 2\gamma + 1) :
+\]
+$u$ envoie le lacet autour d'un trou sur un conjugué de sa puissance $p$-ième
+— c'est la propriété qui définit les automorphismes « à lacets » du dossier
+145, ceux qu'on dit aujourd'hui \emph{préserver l'inertie}\footnote{La
+seconde égalité de (30) a été vérifiée, à partir de $\varepsilon_0(l_0) = l_0$
+et $\varepsilon_0^2 = \mathrm{int}(l_0)$.}.
+
+Le passage de $u$ à $\tau u \tau^{-1}$ change $\tilde\alpha$ en
+$\varepsilon_0\tau_\infty(\tilde\alpha^{-1})$. La page en tire une remarque
+générale, juste : le groupe $\widetilde{\mathfrak{S}}_3$ engendré par $\rho$
+et les $\tilde\sigma_i$, qui contient $\{1, \rho, \rho^2\}$ avec indice $2$,
+agit sur l'ensemble des solutions $x$ de $x\,\rho^{-1}(x)\,\rho^{-2}(x) = 1$
+par
+\[
+(32)\qquad \Theta_g(x) = g\bigl(x^{\chi(g)}\bigr), \qquad \chi(g) = \pm 1 \text{ la signature},
+\]
+et $\tau$ agit par $\Theta_{\tilde\sigma_0}$ (33)\footnote{(32) est vérifié
+ici : pour $g = \rho$, on applique $\rho$ à la relation ; pour $g$ impair, qui
+vérifie $g\rho = \rho^{-1}g$, l'expression transformée est l'image par $g$ de
+l'inverse de $\rho^{-1}(x)\rho^{-2}(x)x$, conjugué cyclique de
+$x\rho^{-1}(x)\rho^{-2}(x)$, donc trivial. L'exposant $\chi(g)$ est surchargé
+sur la page.}.
+
+\pagerange{29}{31}
+\subsection*{Les groupoïdes $\mathrm{IV}_J$ et $\mathrm{V}_J$ : les pôles (pages 29 à 31)}
+
+On ajoute les deux pôles $P^{\omega}$ et les six méridiens $d_i^{\omega} :
+P^{\omega} \to Q_i$, avec $\tau(P^{\omega}) = P^{\omega'}$,
+$\tau(d_i^{\omega}) = d_i^{\omega'}$. Le groupoïde $\mathrm{IV}_J$ (sommets
+$Q_i$, $P^{\omega}$ ; arcs $\tilde a$, $d$ ; relations (35)) est équivalent à
+$\mathrm{III}_J$, et ses automorphismes du type considéré sont donnés par
+$\tilde\alpha$ et $\zeta \in \widehat\Pi_{0,3}$, liés par
+\[
+(37)\qquad \tilde\alpha = \zeta\, \rho^{-1}(\zeta^{-1}) .
+\]
+\emph{Il n'y a plus de condition sur $\zeta$} : toute $\zeta$ convient, et
+(37) entraîne (26) parce que $\rho$ est d'ordre trois\footnote{Vérifié : le produit
+$\tilde\alpha\rho^{-1}(\tilde\alpha)\rho^{-2}(\tilde\alpha)$ se télescope en
+$\zeta\rho^{-3}(\zeta)^{-1} = 1$.}. C'est le gain des pôles : ce sont les
+points fixes de la rotation $\rho$, et pris pour points base ils
+« résolvent » l'équation d'ordre trois. La marge note que les arcs $\tilde
+a_i^{\omega}$ deviennent superflus.
+
+Le groupoïde $\mathrm{V}_J$ induit sur les deux pôles est libre, engendré par
+trois arêtes $\tilde d_i^{\omega} = (d_i^{\omega'})^{-1} d_i^{\omega} :
+P^{\omega} \to P^{\omega'}$ ; ses automorphismes sont donnés par un
+$\tilde\beta \in \widehat\Pi_{0,3}$ soumis à la seule relation
+\[
+(47)\qquad \tilde\beta\, \sigma_\infty(\tilde\beta) = 1 ,
+\]
+et $\tilde\beta = \zeta\sigma_\infty(\zeta)^{-1}$ quand $u$ vient de
+$\mathrm{IV}_J$.
+
+\pagerange{31}{36}
+\subsection*{Le groupoïde $\mathrm{VI}$ et la relation des lacets (pages 31 à 36)}
+
+Le groupoïde induit sur les onze sommets $R_i^{\omega}$, $Q_i$, $P^{\omega}$
+est engendré par les arcs $a$, $c$, $d$ — trois paquets homogènes sous
+$\mathfrak{S}_J$ — avec six relations (48). Un automorphisme est donné par
+\[
+(54)\qquad u(a_i^{\omega}) = a_i^{\omega}\varphi_i^{\omega}(\lambda), \qquad
+u(c_i^{\omega}) = c_i^{\omega}\psi_i^{\omega}(\eta), \qquad
+u(d_i^{\omega}) = d_i^{\omega}\tilde\psi_i^{\omega}(\zeta),
+\]
+et, au lieu de refaire le calcul, il observe que $\mathrm{VI}$ est la réunion
+de $\mathrm{II}$ et de $\mathrm{IV}$, d'intersection $\mathrm{III}$ : un
+automorphisme de $\mathrm{VI}$ est un couple d'automorphismes de $\mathrm{II}$
+et de $\mathrm{IV}$ qui se recollent sur $\mathrm{III}$, c'est-à-dire tels que
+les deux expressions de $\tilde\alpha$ coïncident :
+\[
+(56)\qquad \eta^{-1}\varepsilon_0(\lambda\eta) = \zeta\, \rho^{-1}(\zeta)^{-1} .
+\]
+C'est la seule relation entre $\lambda, \eta, \zeta$ : celle de
+$\mathrm{II}$ est conséquence de celle de $\mathrm{IV}$. Pour la mettre
+« sous une forme plus familière pour moi », il passe aux inverses,
+$\beta' = \beta^{-1}$, $\alpha' = \alpha^{-1}$, $\tilde\alpha' =
+\tilde\alpha^{-1}$, et pose $\zeta' = \eta\zeta$. En résumé :
+
+\emph{Les automorphismes de $\widehat{\mathrm{VI}}_J$ qui fixent les sommets et
+commutent à $\mathfrak{S}_J$ correspondent aux triplets $(\lambda, \eta,
+\zeta') \in \widehat\Pi_{0,3}^{\,3}$ satisfaisant la \emph{relation des
+lacets}}
+\[
+(63)\qquad \boxed{\ \beta' = \alpha'\, \sigma_\infty(\lambda), \qquad \alpha' = \zeta'\, \rho(\zeta')^{-1}, \qquad \beta' = \eta\, \sigma_\infty(\eta)^{-1}\ }
+\]
+avec $\sigma_\infty(\lambda) = l_1^{\gamma}$ quand $\lambda =
+l_0^{\gamma}$, dans la forme qu'on retient ici\footnote{La page écrit, en (60) et (63),
+$\alpha' = \zeta'\rho^{-1}(\zeta')^{-1}$, l'exposant de $\rho$ étant surchargé
+et lu $-1$. Mais la dérivation qu'elle donne à la page 35 — (25\,bis) passé
+aux inverses, $\alpha' = \eta\,\rho(\tilde\alpha')\,\rho(\eta)^{-1}$, puis
+$\rho(\tilde\alpha') = \zeta\rho(\zeta)^{-1}$ — aboutit à
+$\alpha' = (\eta\zeta)\,\rho(\eta\zeta)^{-1}$, et c'est ce que réécrit (78) à
+la page 40. C'est aussi la forme qui donne la relation « habituelle »
+$\alpha'\rho(\alpha')\rho^2(\alpha') = 1$ par télescopage. On l'adopte. Les
+autres pas de (57) à (63) ont été vérifiés ; la formule (25\,bis), qui dépend
+des conventions perdues, est reprise de la page.}.
+
+Les quantités $\alpha', \beta', \zeta'$ ont été introduites « par le pur
+calcul », comme donnant les formules les plus sympathiques ; il leur donne
+ensuite un sens géométrique, en renversant les flèches $b$, $\tilde b$,
+$\tilde a$ (64)–(65) et en introduisant les chemins
+$\tilde d_i'^{\omega} = c^{\omega}_{\omega i}\, d^{\omega}_{\omega i} :
+P^{\omega} \to R_i^{\omega'}$, du pôle au voisinage du trou, sur lesquels
+\[
+(67)\qquad u(\tilde d_i'^{\omega}) = \varphi_i^{\omega'}(\zeta')\, \tilde d_i'^{\omega} :
+\]
+$\zeta'$ mesure ce que $u$ fait au chemin direct d'un pôle à un trou.
+
+\pagerange{37}{41}
+\subsection*{Le groupoïde $\mathrm{VII}$, et le diagramme des sept groupoïdes (pages 37 à 41)}
+
+Deux cas restent : le groupoïde $\mathrm{VII}$ induit sur les huit sommets
+$R_i^{\omega}$, $P^{\omega}$, et celui induit sur les $Q_i$, $P^{\omega}$, qui
+n'est autre que $\mathrm{IV}$ présenté par les seuls méridiens (les
+$\tilde a$ y sont inutiles par (35)). Les sept groupoïdes s'emboîtent selon le
+diagramme (68)\footnote{La page encadre ensemble $\mathrm{I}$, $\mathrm{II}$,
+$\mathrm{VII}$, $\mathrm{VI}$ ; une flèche partant de $\mathrm{II}$ vers la
+droite est rayée. Le diagramme a sept nœuds et huit inclusions, tous
+reproduits.} :
+
+\begin{tikzcd}[column sep=small, row sep=small]
+& & \mathrm{III} \arrow[dl, hook'] \arrow[dr, hook] & & \\
+\mathrm{I} \arrow[r, hook] \arrow[dr, hook] & \mathrm{II} \arrow[dr, hook] & & \mathrm{IV} \arrow[dl, hook'] & \mathrm{V} \arrow[l, hook'] \\
+& \mathrm{VII} \arrow[r, hook] & \mathrm{VI} & &
+\end{tikzcd}
+
+Pour $\mathrm{VII}$, le calcul prédit que ses automorphismes correspondent aux
+couples $(\lambda, \zeta')$ — $\beta'$ s'en déduit, d'où la marge « donc
+$\beta'$ inutile ! » — soumis à
+\[
+(70)\qquad \beta' = \alpha'\sigma_\infty(\lambda),\quad \alpha' = \zeta'\rho(\zeta')^{-1}, \qquad \beta'\sigma_\infty(\beta') = 1, \ \text{soit}\ \alpha'\,\sigma_\infty(\lambda)\,\sigma_\infty(\alpha')\,\lambda = 1 ,
+\]
+tandis que ceux de $\mathrm{II}$ correspondent aux $(\lambda, \eta)$ — « donc
+$\alpha'$ inutile ! » — avec $\beta' = \eta\sigma_\infty(\eta)^{-1} =
+\alpha'\sigma_\infty(\lambda)$ et $\alpha'\rho(\alpha')\rho^2(\alpha') = 1$
+(70$'$)\footnote{Les deux formes de la seconde ligne de (70) sont équivalentes
+($\sigma_\infty$ est involutif) ; vérifié. Même remarque qu'en (63) sur
+l'exposant de $\rho$.}. Les pages 39 à 41 explicitent le cas de
+$\mathrm{VII}$, présenté par les chemins $\tilde d_i^{\omega} : P^{\omega} \to
+R_i^{\omega}$, $\tilde d_i'^{\omega} : P^{\omega} \to R_i^{\omega'}$ et les
+$a_i^{\omega}$, avec deux familles de relations (72), dont trois seulement
+sont indépendantes. On y pose $u(\tilde d) = \varphi(\zeta_1)\tilde d$,
+$u(\tilde d') = \varphi(\zeta')\tilde d'$, $u(a) = a\varphi(\lambda)$ ; la
+première relation donne $\zeta' = \varepsilon_0(\lambda\zeta_1)$ (74), la
+seconde équivaut à $\beta'\sigma_\infty(\beta') = 1$ avec
+$\beta' = \alpha'\sigma_\infty(\lambda)$, $\alpha' = \zeta'\rho(\zeta')^{-1}$
+(78), et la page 41 conclut sur l'égalité des diverses expressions de
+$\beta'$, « ce qui donne la formulation la plus simple »\footnote{Les indices
+de (72) sont surchargés ; le numéro (75) sert deux fois, (78) trois fois ; les
+formules (76) et (79) auxquelles renvoie la page 41 ne figurent pas au
+dossier. On n'en retient que la conclusion, qui coïncide avec (70).}.
+
+\pagerange{43}{63}
+\section*{III. La sphère à trois points marqués (pages 43 à 63)}
+
+Une nouvelle suite, paginée de 1 à 12, reprend la même sphère, cette fois sans
+rien choisir : chaque objet est construit de façon que les symétries le
+transportent sur un objet du même type. Il l'annonce comme « exercice
+préliminaire de syntaxe galoisienne », avant des configurations plus riches en
+symétries sur la sphère ou sur d'autres surfaces, « en vue des applications au
+calcul des groupoïdes de Teichmüller ».
+
+\pagerange{43}{45}
+\subsection*{La géométrie (pages 43 à 45)}
+
+Soit $\Sigma$ une sphère conforme avec une partie $J = \{R_i\}$ à trois
+éléments. Son groupe d'automorphismes conformes ou anticonformes respectant $J$
+est
+\[
+\Gamma_{\Sigma, J} \simeq \mathfrak{S}_J \times \{1, \tau\},
+\]
+$\tau$ l'unique antiautomorphisme fixant les $R_i$ — la conjugaison complexe
+quand $J = \{0, 1, \infty\}$\footnote{La marge note que l'antipodie n'est pas
+dans $\Gamma_{\Sigma,J}$ : elle ne stabilise pas $J$.}. Une métrique
+riemannienne invariante, unique à scalaire près, identifie $\Sigma$ à la sphère
+unité d'un espace euclidien $E$ de dimension $3$. Le plan $V$ engendré par les
+$R_j$ coupe $\Sigma$ selon un grand cercle $\Sigma_{\mathbb{R}}$, sur lequel les
+$R_j$ forment un triangle équilatéral : $\sum R_j = 0$, et
+\[
+(5),(7)\qquad V \simeq V_J(\mathbb{R}) = \ker\bigl(\mathbb{R}^J \xrightarrow{\ \Sigma\ } \mathbb{R}\bigr), \qquad
+E \simeq V_J(\mathbb{R}) \oplus \Delta ,
+\]
+la forme quadratique sur $V_J(\mathbb{R})$ étant celle qui rend les $R_j$
+unitaires — $x^2 - xy + y^2$ dans la base $(R_i, R_j)$, où
+$R_k = (-1, -1)$ — et $\Delta = V^{\perp}$ l'axe polaire. Trois ensembles à
+deux éléments apparaissent :
+\[
+(3)\qquad \boldsymbol{\varpi} = \text{orientations de } \Sigma \text{ (ou de } E), \qquad
+\boldsymbol{\omega} = \text{orientations de } \Sigma_{\mathbb{R}} \text{ (ordres cycliques de } J),
+\]
+\[
+\boldsymbol{\varepsilon} = \pi_0(\Sigma \setminus \Sigma_{\mathbb{R}}) \text{ (hémisphères)},
+\]
+liés par $\boldsymbol{\varpi} \simeq \boldsymbol{\omega} \wedge
+\boldsymbol{\varepsilon}$ : une orientation de l'équateur et le choix d'un
+hémisphère orientent la sphère. $\Delta$ est la droite réelle tordue par
+$\boldsymbol{\varepsilon}$, ses deux demi-droites étant indexées par les
+hémisphères. $\mathfrak{S}_J$ agit sur $E$ par l'action tautologique sur
+$V_J(\mathbb{R})$ et par la signature sur $\Delta$ (8) — une transposition, qui
+renverse le plan, doit renverser l'axe pour rester une rotation —, et
+$\tau = \mathrm{id} \oplus (-\mathrm{id}_\Delta)$ (9)\footnote{Vérifications de
+l'édition : $q(R_k) = 1 - 1 + 1 = 1$, et le produit scalaire $-1/2$ entre deux
+$R_j$ est celui d'un triangle équilatéral inscrit.}.
+
+\pagerange{45}{48}
+\subsection*{L'éclatement réel, et la représentation fictive (pages 45 à 48)}
+
+On s'intéresse au groupoïde fondamental de $\Sigma^{*} = \Sigma \setminus J$.
+Pour disposer de points base « proches » de chaque $R_i$, on compactifie : soit
+$\Sigma'$ l'éclaté réel de $\Sigma$ en $J$, où chaque $R_i$ est remplacé par la
+droite projective réelle $P(T_{\Sigma, R_i})$ de ses directions tangentes. C'est
+la sphère où trois disques sont remplacés par des rubans de Möbius, une surface
+non orientable de caractéristique d'Euler $2 - 3 = -1$, à trois bonnets croisés\footnote{La page conclut
+« donc le genre est $2$ », par $\chi = 1 - g$. Le nombre de bonnets croisés de
+cette surface est $3$ ($\chi = 2 - 3$) ; $2$ est son premier nombre de Betti
+rationnel. La surface elle-même ne sert qu'à passer à $\widetilde\Sigma$.}. En
+la découpant le long des trois cercles, on obtient une surface compacte à bord
+$\widetilde\Sigma$ — une sphère à trois trous —, dont le bord
+\[
+(12)\qquad \partial\widetilde\Sigma \simeq \coprod_{i \in J} U_i , \qquad U_i = \text{cercle des directions tangentes unitaires en } R_i ,
+\]
+revêt doublement les droites projectives : c'est l'\emph{éclatement réel
+orienté}. L'intérieur de $\widetilde\Sigma$ est $\Sigma^{*}$, et l'inclusion
+donne une équivalence entre revêtements étales, d'où une équivalence de
+groupoïdes fondamentaux
+\[
+(14),(15)\qquad \Pi_1(\widetilde\Sigma) \xrightarrow{\ \approx\ } \Pi_1(\Sigma^{*}), \qquad
+\Pi_1\Bigl(\coprod U_i\Bigr) \longrightarrow \Pi_1(\Sigma^{*}) .
+\]
+Les points de $U_i$ sont ce qu'on appelle aujourd'hui des \emph{points base
+tangentiels}\footnote{La notion a été formalisée par Deligne (1989) pour la
+droite projective moins trois points, comme base de l'action de Galois sur le
+groupe fondamental ; ces pages n'en ont pas le nom.}. On dessine
+$\widetilde\Sigma$ dans $\Sigma^{*}$ comme si l'on avait ôté trois disques
+« infiniment petits » autour des trous, et l'on travaille avec des points de
+$\widetilde\Sigma$ ou avec des parties simplement connexes de
+$\widetilde\Sigma$. Le groupe $\Gamma_{\Sigma,J}$ agit sur toute la situation,
+et « un aspect essentiel du travail à faire est de garder cette opération
+constamment présente à l'esprit, et d'introduire des notations et des
+constructions qui soient invariantes ».
+
+\pagerange{49}{53}
+\subsection*{Points, chemins et régions de base (pages 49 à 53)}
+
+On introduit
+\[
+(16)\qquad Q_i = -R_i, \qquad R_i^{\omega} \in U_i\ (\omega \in \boldsymbol{\omega}), \qquad P_\varepsilon\ (\varepsilon \in \boldsymbol{\varepsilon}), \qquad S_i^{\varepsilon} \in U_i ,
+\]
+$Q_i$ le point opposé au trou, $P_\varepsilon$ le pôle de l'hémisphère
+$\varepsilon$, $R_i^{\omega}$ la direction de l'équateur orientée par $\omega$
+en $R_i$, $S_i^{\varepsilon}$ la direction du méridien de $R_i$ vers
+l'hémisphère $\varepsilon$. Puis des chemins simples, par paquets
+\[
+(20)\qquad a_i^{\omega,\varepsilon}\ (12), \qquad b_i^{\omega}\ (6), \qquad c_i^{\varepsilon}\ (6), \qquad d_i^{\varepsilon}\ (6) :
+\]
+$a_i^{\omega\varepsilon} : S_i^{\varepsilon} \to R_i^{\omega}$ le quart de tour
+sur $U_i$ ; $b_i^{\omega} : Q_i \to R^{\omega'}_{\omega' i}$ le long de
+l'équateur, dans la direction $\omega$ ; $c_i^{\varepsilon} : P_\varepsilon
+\to Q_i$ et $d_i^{\varepsilon} : P_\varepsilon \to S_i^{\varepsilon}$ le long
+de méridiens\footnote{En (25) et (26), l'indice supérieur est écrit $\omega$ là
+où (20) porte $\varepsilon$ ; on suit (20).}. Les paquets $b$, $c$, $d$ sont
+des torseurs sous $\mathfrak{S}_J$, le paquet $a$ sous $\Gamma_{\Sigma,J}$ ;
+$\tau$ échange les exposants $\varepsilon$ et fixe les $b$ (22).
+
+\emph{Régions de base.} On découpe ensuite $\widetilde\Sigma$ par des
+« incisions » qui relient les trois trous, de façon à obtenir des ouverts
+simplement connexes aussi grands que possible :
+\[
+(27)\qquad \widetilde\Sigma_\varepsilon = \widetilde\Sigma \setminus \bigcup_{i} \operatorname{supp} d_i^{\varepsilon'}, \qquad
+\widetilde\Sigma_i = \widetilde\Sigma \setminus \bigcup_{j \neq i} b_j ,
+\]
+$b_j$ étant l'arc d'équateur qui passe par $Q_j$ entre les deux trous
+voisins\footnote{La page écrit $\operatorname{supp} d_i^{\varepsilon}$, et
+$b_j = \operatorname{supp} c_j^{\omega} \cup \operatorname{supp} c_j^{\omega'}$.
+Le dessin en marge montre les incisions issues du pôle opposé, et c'est la
+seule lecture pour laquelle le « centre » $P_\varepsilon$ reste dans la région
+; de même les incisions de $\widetilde\Sigma_i$ sont dessinées « le long de
+l'équateur », donc faites des arcs $b$. Simple connexité : le complémentaire
+est réunion des trois disques fictifs et d'un arbre qui les joint, ensemble
+contractile.}. Ces régions, de « centres » $P_\varepsilon$ et $Q_i$, sont
+connexes et simplement connexes, et l'on pose
+\[
+(28)\qquad \Pi_\varepsilon = \pi_1(\widetilde\Sigma; \widetilde\Sigma_\varepsilon) \simeq \pi_1(\Sigma^{*}, P_\varepsilon), \qquad
+\Pi_i = \pi_1(\widetilde\Sigma; \widetilde\Sigma_i) \simeq \pi_1(\Sigma^{*}, Q_i) :
+\]
+le groupe fondamental basé en une région simplement connexe, canoniquement
+isomorphe au groupe basé en n'importe lequel de ses points par des
+« isomorphismes de transition » $\varphi$ (29). Les méridiens $c_i^{\varepsilon}$
+donnent des isomorphismes $\Pi_\varepsilon \rightleftarrows \Pi_i$ (30), qui
+relient ces cinq groupes de façon transitive, mais pas par un système
+transitif : le long des cycles du graphe de l'octaèdre (deux pôles, trois
+$Q_i$), on obtient des automorphismes intérieurs, et on les obtient
+tous\footnote{Les trois demi-méridiens qui portent les $c$ découpent la sphère
+en trois fuseaux contenant chacun un trou ; la sphère trouée se rétracte sur
+ce graphe, dont les cycles engendrent donc le groupe fondamental. Le centre de
+$\Pi_{0,3}$ étant trivial, on obtient bien tous les automorphismes intérieurs
+(justification de l'édition).}. On note $\varphi_i$, $\varphi_\varepsilon$ les
+repérages aux points $R_i^{\omega}$, $S_i^{\varepsilon}$ (31), le point base ne
+faisant pas de doute dans les calculs.
+
+\pagerange{53}{59}
+\subsection*{Le groupe standard, et les épinglages (pages 53 à 59)}
+
+On repère tout par le groupe standard
+\[
+(32)\qquad \Pi_{0,3} = \pi_1\bigl(U_{0,3}(\mathbb{C}), P^{+}\bigr) \subset
+\widetilde\Pi_{0,3} = \pi_1\bigl(U_{0,3}(\mathbb{C}), \mathfrak{S}_3 \times \{1, \tau\}; P^{+}\bigr)
+\]
+— le groupe fondamental équivariant, formé des couples d'une symétrie et d'un
+chemin de $P^{+}$ à son image, celui de la page 14 du dossier 141 —, avec
+\[
+\widetilde\Pi_{0,3} = \langle\, \rho, \sigma_\infty, \tilde\sigma_\infty \mid \rho^3 = \sigma_\infty^2 = \tilde\sigma_\infty^2 = 1,\ \sigma_\infty\rho\,\sigma_\infty^{-1} = \rho^{-1},\ (\sigma_\infty\tilde\sigma_\infty)^2 = 1 \,\rangle
+\]
+\[
+\simeq GL(2, \mathbb{Z})/\{\pm 1\} = PGL_2(\mathbb{Z}) .
+\]
+La présentation est bien celle de $PGL_2(\mathbb{Z})$, produit amalgamé d'un
+groupe diédral d'ordre $6$ et d'un groupe de Klein le long d'un
+$\mathbb{Z}/2$, et l'identification est écrite ici de sa main\footnote{La
+relation $\tilde\sigma_\infty(\sigma_\infty) = 1$ est lue avec doute ; on la
+comprend comme la commutation de $\sigma_\infty$ et $\tilde\sigma_\infty$, ce
+que confirme le crochet « i.e. $(\sigma_\infty\tilde\sigma_\infty)^2 = 1$ ».
+Une version biffée donnait pour la partie orientée
+$SL(2,\mathbb{Z})/\{\pm 1\}$. Le dossier 145 retrouve ce groupe comme groupe de
+Coxeter $(2, 3, \infty)$ et y donne l'identification comme de l'édition ; elle
+est en fait sur cette page-ci. La page suivante écrit
+« $\widetilde\Pi_{0,3} \simeq SL(2,\mathbb{Z})$ » : il faut lire
+$PGL_2(\mathbb{Z})$.}. Le « formulaire familier » (33) :
+\[
+\varepsilon_0 = \sigma_\infty\rho, \quad \varepsilon_1 = \rho(\varepsilon_0), \quad \varepsilon_\infty = \rho^2(\varepsilon_0), \qquad
+l_i = \varepsilon_i^2, \qquad l_\infty l_1 l_0 = 1, \qquad \rho(l_i) = l_{\rho(i)},
+\]
+avec les valeurs de $\sigma_\infty$, $\tilde\sigma_\infty$, $\tau_\infty$ sur les
+$l_i$ données dans les conventions\footnote{La page 54 donne
+$\tau_\infty(l_\infty) = l_0^{-1}l_\infty^{-1}l_0$ (lecture douteuse) ; les
+valeurs $\tau_\infty(l_0) = l_0^{-1}$, $\tau_\infty(l_1) = l_1^{-1}$, qui sont
+sûres, imposent $\tau_\infty(l_\infty) = l_0 l_1 = l_0\, l_\infty^{-1}\,
+l_0^{-1}$, comme l'écrit la page 23. Les $\varepsilon_i$ sont les éléments
+paraboliques de $\widetilde\Pi_{0,3}$ que le dossier 145 appelle racines
+quasi-carrées ; la lecture $\varepsilon_0 = \sigma_\infty\rho$ est douteuse,
+mais elle s'accorde avec celle de 145, $\varepsilon_1 = \sigma_0\rho$, par
+conjugaison par $\rho$.}.
+
+\emph{Épinglages.} Un \emph{repère} de la situation est un élément
+$r = (i, \omega, \varpi) \in J \times \boldsymbol{\omega} \times
+\boldsymbol{\varpi}$, qui définit $\varepsilon = \omega \wedge \varpi$. À
+chaque repère correspond l'unique isomorphisme (conforme ou anticonforme)
+$u_r : (U_{0,3}(\mathbb{C}), P^{+}) \to (\Sigma^{*}, P_\varepsilon)$ qui envoie
+le repère standard sur $r$, et l'\emph{isomorphisme d'épinglage}
+\[
+(34),(36)\qquad \psi_r = \psi_\varepsilon^{i,\omega} = \pi_1(u_r; P^{+}) : \Pi_{0,3} \xrightarrow{\ \sim\ } \Pi_\varepsilon ,
+\]
+et de même $\psi_i^{\omega,\varepsilon} : \Pi_{0,3} \xrightarrow{\sim} \Pi_i$,
+compatibles par les isomorphismes (30). Pour $P_\varepsilon$ fixé il y a six
+épinglages, pour $Q_i$ fixé quatre ; trois et deux si $\Sigma$ est
+orientée\footnote{La page écrit « trois resp. », le second nombre étant
+remplacé d'un premier « douze » biffé ; avec $\varpi$ fixé, $\varepsilon$ est
+déterminé par $\omega$, d'où $3$ choix en $P_\varepsilon$ et $2$ en $Q_i$.}.
+Le stabilisateur de $P_\varepsilon$ dans $\Gamma_{\Sigma,J}$,
+\[
+\Gamma_{P_\varepsilon} = \{(g, \tau^{\alpha}) \mid \alpha = 0 \text{ si } g \text{ est pair},\ \alpha = 1 \text{ sinon}\},
+\]
+le relèvement canonique de $\mathfrak{S}_3$ que le dossier 145 note
+$\Gamma_P$ (sa page 20), agit simplement transitivement sur les repères de
+même $\varepsilon$, et
+\[
+(39)\qquad \psi_{r g_0} = \psi_r \circ \pi_1(g_0; P^{+}), \qquad
+\psi_\varepsilon^{\omega i, \omega} = \psi_\varepsilon^{i,\omega} \circ \rho, \qquad
+\psi_\varepsilon^{\omega' i, \omega'} = \psi_\varepsilon^{i,\omega} \circ \tilde\sigma_\infty ,
+\]
+$\rho$ s'interprétant comme la rotation d'un tiers de tour autour de l'axe
+polaire, $\tilde\sigma_i$ comme la symétrie par rapport au méridien de $Q_i$.
+En $Q_i$, le stabilisateur de $Q_0$ dans le groupe standard est un groupe de
+Klein engendré par $\sigma_\infty$ et $\tau$, et (pages 58–59)
+\[
+\psi_i^{\omega,\varepsilon'} = \psi_i^{\omega,\varepsilon} \circ \tau_\infty, \qquad
+\psi_i^{\omega',\varepsilon'} = \psi_i^{\omega,\varepsilon} \circ \sigma_\infty, \qquad
+\psi_i^{\omega',\varepsilon} = \psi_i^{\omega,\varepsilon} \circ \tilde\sigma_\infty ,
+\]
+la troisième relation étant composée des deux premières
+($\tilde\sigma_\infty = \sigma_\infty\tau_\infty$)\footnote{Pour cette
+comparaison, $\pi_1(U_{0,3}; Q_\infty)$ est identifié à $\Pi_{0,3}$ par le
+chemin $d_\infty^{+}$ de $P^{+}$ à $Q_\infty$, alors qu'en (25)–(26) c'est $c$
+qui mène aux $Q_i$ ; les numéros (39), (40) sont repris deux fois.}.
+
+\pagerange{59}{63}
+\subsection*{Les régions-drapeaux, et les points proches des trous (pages 59 à 63)}
+
+« Dans tous ces calculs, suivant sans doute d'anciennes habitudes, j'ai
+privilégié les $P_\varepsilon$ et les $Q_i$ comme points base — alors que pour
+le travail que j'ai en vue, ce sont les points $R_i^{\omega}$ qui sont les plus
+cruciaux », parce que les calculs en ces points expriment directement la
+monodromie autour des trous. Il introduit donc, pour chaque repère $r$, une
+région associée au triangle-drapeau $D_r = P_\varepsilon Q_i R_{\omega i}$ de
+la subdivision barycentrique de la sphère par l'équateur et les trois
+trous — douze triangles —, tronqué sur $\widetilde\Sigma$ en un quadrilatère
+$\widetilde D_r$, et sa réunion avec trois de ses symétriques\footnote{La page écrit le dernier terme $\tilde\sigma_{\omega i}(\Sigma_r)$ ;
+son contour n'est lu qu'en partie, et l'on n'en donne pas la liste des
+sommets. Celui de la région standard, page 61, est
+$P_+ Q_1 R_0^- S_0^+ R_0^+ S_0^- P_- Q_\infty R_1^- S_1^+ P_+$.} :
+\[
+(41)\qquad \widetilde\Sigma_r = \widetilde D_r \cup \tau(\widetilde D_r) \cup \tilde\sigma_i(\widetilde D_r) \cup \tilde\sigma_{\omega i}(\widetilde D_r) .
+\]
+Ces douze
+régions sont simplement connexes et permutées simplement transitivement par
+$\Gamma_{\Sigma,J}$ ; d'où des groupes $\Pi_r = \pi_1(\widetilde\Sigma;
+\widetilde\Sigma_r)$ reliés par un système transitif d'isomorphismes, et des
+épinglages $\Psi_r : \Pi_{0,3} \to \Pi_r$ (42). Un point $R_i^{\omega}$ est
+intérieur à exactement deux régions $\widetilde\Sigma_r$ ; si $\Sigma$ est
+orientée par $\varpi_+$, l'une est privilégiée, et l'on obtient
+\[
+(43)\qquad \Psi_i^{\omega} : \Pi_{0,3} \xrightarrow{\ \sim\ } \pi_1(\widetilde\Sigma, R_i^{\omega}) ,
+\]
+compatible aux repérages en $Q_i$ et $P_\omega$ par les chemins $b$ et $c$
+(44). Le passage d'un côté à l'autre du trou, par le chemin $\tilde b_i^{\omega}$
+qui passe par $Q_i$, s'écrit
+\[
+(45)\qquad \tilde b_i^{\omega}\bigl(\Psi_i^{\omega}(x)\bigr) = \Psi_i^{\omega'}\bigl(\sigma_\infty(x)\bigr) ,
+\]
+la forme même des formules de transport de la suite II (comparer (6) et (42)
+de la page 30). La suite s'arrête là, au haut de la page 63.
+
+\pagerange{65}{103}
+\section*{IV. Généralités sur les actions de groupes de Galois sur les complétés profinis de groupoïdes fondamentaux (pages 65 à 103)}
+
+La page 65 est une couverture de sa main, avec au crayon « (38 pages) » ; la
+suite est paginée de 1 à 18, puis continue.
+
+\pagerange{66}{69}
+\subsection*{Le cadre (pages 66 à 69)}
+
+Soit $K$ un sous-corps de $\mathbb{C}$ — surtout de type fini sur
+$\mathbb{Q}$, la clôture algébrique $\overline{\mathbb{Q}}$ en étant un cas
+limite, « pour ne pas être gêné par les racines de 1 » —, et $X$ un schéma de
+type fini sur $K$, qu'on regarde comme l'espace $X(\mathbb{C})$ muni d'une
+structure supplémentaire ; on traite les homéomorphismes universels comme des
+isomorphismes. Le groupoïde fondamental topologique $\Pi_1(X)$ se plonge dans
+son complété profini $\widehat\Pi_1(X)$, bijectivement sur les objets, et
+\[
+(3)\qquad \pi_1(X_{\mathrm{sch}}, x) \simeq \widehat\pi_1(X, x)
+\]
+(théorème d'existence de Riemann, SGA~1, exposé XII) ; les ensembles de
+flèches $\mathrm{Hom}_{\widehat\Pi_1}(x, y)$ sont les bitorseurs déduits de
+ceux de $\Pi_1$ par extension des groupes. Comme $\widehat\Pi_1$ a une
+définition purement schématique, le groupe
+\[
+(5)\qquad \Gamma_K = \mathrm{Aut}(\mathbb{C}/K)
+\]
+agit sur lui, par ${}^{u}\lambda : {}^{u}x \to {}^{u}y$ pour $\lambda : x \to y$,
+de façon compatible à la composition (6) ; une flèche de $\Pi_1$ n'a en
+général qu'une image dans $\widehat\Pi_1$. Sur le sous-groupoïde induit sur
+les points algébriques $X(\overline{K})$, l'action se fait à travers
+$\mathrm{Gal}(\overline{K}/K)$ (7)\footnote{La page écrit ici $\Pi_1$ sans
+chapeau ; il s'agit de $\widehat\Pi_1(X_{\overline{K}})$, comme le dit la
+phrase précédente. Que l'action de $\mathrm{Aut}(\mathbb{C}/\overline{K})$
+soit triviale sur ce sous-groupoïde tient à l'invariance du groupoïde
+fondamental étale par extension de corps algébriquement clos en
+caractéristique nulle.}.
+
+Pour des points rationnels $x, y \in X(K)$, fixés par $\Gamma_K$, et un chemin
+$l : x \to y$ de $\Pi_1$, on écrit
+\[
+(8),(9)\qquad {}^{u}l = g_l(u)\, l = l\, f_l(u),
+\]
+\[
+f_l(u) = l^{-1}\,{}^{u}l \in \widehat\pi_1(X, x), \quad g_l(u) = {}^{u}l\, l^{-1} = l\bigl(f_l(u)\bigr) \in \widehat\pi_1(X, y),
+\]
+et l'on décrit l'action de $u$ par les $f_l(u)$, ou les $g_l(u)$, pour $l$
+parcourant des générateurs — en nombre fini sur une partie finie $I$ de
+$X(K)$ : un $x_0 \in I$, un chemin de $x_0$ à chaque autre point, des
+générateurs de $\pi_1(X, x_0)$. Il présume que pour une courbe anabélienne la
+connaissance de l'action de $u$ sur $\widehat\Pi_1(X, I)$ détermine $u$.
+
+\pagerange{70}{77}
+\subsection*{Multiplicativité, régions de base, cocycles (pages 70 à 77)}
+
+Pour $x \xrightarrow{l'} y \xrightarrow{l} z$,
+\[
+(10)\qquad g_{ll'}(u) = g_l(u)\, l\bigl(g_{l'}(u)\bigr), \qquad
+(11)\qquad f_{ll'}(u) = l'^{-1}\bigl(f_l(u)\bigr)\, f_{l'}(u) ,
+\]
+et (12) itère (10)\footnote{Vérifié : ${}^{u}(ll') = g_l\, l\, g_{l'}\, l' =
+g_l\,(l g_{l'} l^{-1})\,ll'$, et de même pour $f$. Un premier (12), qui
+parlait de 1-cocycles en $u$, est barré ; il reviendra en (29).}. Ces formules
+« d'allure peu sympathique » se simplifient si l'on remplace les chemins par
+des \emph{régions de base} : soit $p : T \to X$ continue, $T$ simplement
+connexe, et $\pi = \pi_1(X; T)$, qui s'identifie à chaque $\pi_1(X, p(x))$ par
+$\varphi_x$ (15) ; deux points $x, y \in T$ donnent une flèche canonique
+$l_{y,x} : p(x) \to p(y)$ (16). Pour $x, y \in T_K = p^{-1}(X(K))$, $f$ et $g$
+deviennent un même élément de $\widehat\pi$,
+\[
+(17)\qquad g^{T}_{y,x}(u) = \varphi_y^{-1}\bigl(g_{l_{y,x}}(u)\bigr) = \varphi_x^{-1}\bigl(f_{l_{y,x}}(u)\bigr),
+\]
+et (10), (11) se réduisent à la relation de Chasles
+\[
+(18)\qquad g^{T}_{z,y}(u)\, g^{T}_{y,x}(u) = g^{T}_{z,x}(u) \qquad (x, y, z \in T_K) ;
+\]
+« quant aux formules de passage (9), elles disparaissent ! »\footnote{Vérifié :
+$\varphi_y = l_{y,x} \circ \varphi_x$ comme transports, d'où l'égalité de
+(17) ; (18) découle de (10). La marge appelle $T$ « la conjugaison » dans le
+cas le plus intéressant : vraisemblablement $T$ un demi-plan, image d'un
+domaine fondamental de la conjugaison complexe ; c'est une lecture.}. Les
+invariants $f_l$, $g_l$ sont le cas $T = [0, 1]$ (20), et, pour $T \to T'$ au-dessus
+de $X$, $g^{T'} = \pi_1(f)(g^{T})$ (23).
+
+Soit alors $X = \bigcup_\alpha T_\alpha$, les $T_\alpha$ simplement connexes,
+d'intérieurs recouvrant $X$, ordonnés par inclusion de sorte que $T_\alpha \cap
+T_\beta = \bigcup_{\gamma \leq \alpha, \beta} T_\gamma$ (28), avec les groupes
+$\pi_\alpha = \pi_1(X, T_\alpha)$ et, pour $T_\alpha \subset T_\beta$,
+l'isomorphisme $\varphi_{\beta\alpha} : \pi_\alpha \to \pi_\beta$, de sorte que
+$g^{\beta}_{y,x} = \varphi_{\beta\alpha}(g^{\alpha}_{y,x})$ (27)\footnote{La page
+écrit $\varphi_{\beta\alpha} : \pi_\beta \to \pi_\alpha$ en (26), puis
+l'applique à $g^{\alpha}$ en (27) ; c'est un isomorphisme, on l'oriente dans
+le sens où il s'applique.}. La connaissance des $g^{\alpha}_{y,x}(u)$
+détermine-t-elle tous les $g_l(u)$ ? L'argument de la page subdivise un chemin
+en petits chemins entre points « voisins » ; il suppose des points
+$K$-rationnels partout, ce qui n'est pas le cas en général. L'énoncé juste est
+celui que la page donne ensuite, « un peu plus général, et peut-être plus
+intéressant » : soit $I \subset X(K)$ fini, $I_\alpha = I \cap T_\alpha$ ; si
+$I$ rencontre chaque composante connexe par arcs de chaque intersection finie
+des $T_\alpha$, le théorème de van Kampen pour les groupoïdes montre que
+$\Pi_1(X, I)$ est engendré par les flèches $l^{\alpha}_{y,x}$, $x, y \in
+I_\alpha$, avec pour relations les identifications le long des inclusions ;
+la connaissance des $g^{\alpha}_{y,x}(u)$ pour $x, y \in I_\alpha$ détermine
+alors \emph{tous} les $g_l(u)$, $l$ chemin de $\Pi_1(X, I)$\footnote{Le
+théorème de van Kampen pour les groupoïdes est de R. Brown (1967) ; la page ne
+le cite pas. Qu'il faille une hypothèse sur $I$ : pour une courbe de genre
+$\geq 2$ sur un corps de nombres, $X(K)$ est fini (Faltings, 1983), et
+l'argument de subdivision ne peut s'appliquer. La page parle aussi d'un
+« argument de descente » pour des $T_\alpha$ fermés, sans le donner.}.
+
+\emph{Variation de $u$.} De ${}^{uv}l = {}^{u}({}^{v}l)$ (28) on tire
+\[
+(29),(30)\qquad g_l(uv) = {}^{u}g_l(v)\, g_l(u), \qquad f_l(uv) = f_l(u)\, {}^{u}f_l(v) :
+\]
+pour $l$ fixé, $f_l$ et $g_l^{-1}$ sont des 1-cocycles (homomorphismes
+croisés) de $\Gamma_K$ à valeurs dans $\widehat\pi_1(X, x)$, resp.
+$\widehat\pi_1(X, y)$, déduits l'un de l'autre par le transport le long de $l$
+; ce sont les cocycles du torseur $\mathrm{Hom}_{\widehat\Pi_1}(x, y)$, dont $l$
+est un « élément origine »\footnote{Vérifié. La page dit $f$ cocycle « droit »
+et $g$ cocycle « à gauche » ; dans les conventions usuelles, $f_l$ est un
+1-cocycle ordinaire pour l'action de $\Gamma_K$ sur $\widehat\pi_1(X, x)$.}.
+
+\pagerange{78}{82}
+\subsection*{Classes de cohomologie, et Mordell–Weil (pages 78 à 82)}
+
+Si l'on remplace $l$ par $l' = la = bl$,
+\[
+(31)\qquad f_{l'}(u) = a^{-1}\, f_l(u)\, {}^{u}a, \qquad g_{l'}(u) = {}^{u}b\, g_l(u)\, b^{-1} :
+\]
+les cocycles changent en des cocycles cohomologues\footnote{Vérifié.}. Deux
+points rationnels $x, y$ définissent donc des classes
+\[
+(32)\qquad f_{y,x} \in H^1\bigl(\Gamma_K, \widehat\pi_1(X, x)\bigr), \qquad g_{y,x} \in H^1\bigl(\Gamma_K, \widehat\pi_1(X, y)\bigr)
+\]
+dans les ensembles de cohomologie non abélienne, qui se déterminent
+mutuellement, de même que $f_{x,y}$ et $f_{y,x}$ ($g_{l^{-1}} = f_l^{-1}$,
+(34))\footnote{La page écrit $\widehat\pi_1(Y, y)$ en deux endroits pour
+$\widehat\pi_1(X, y)$.}. Toute cette structure se décrit par le bitorseur
+$\mathrm{Hom}_{\widehat\Pi_1}(x, y)$ et l'action de Galois sur « tout ce
+fourbi ».
+
+Quand $X$ se plonge dans une extension d'une variété abélienne par un tore
+— par exemple une courbe anabélienne dans sa jacobienne généralisée — et que
+$K$ est de type fini sur $\mathbb{Q}$, le théorème de Mordell–Weil entraîne
+qu'\emph{un point $x \in X(K)$ est entièrement déterminé par la classe
+$f_{x_0,x}$}, $x_0$ fixé, et même par son image abélianisée
+\[
+(34)\qquad (f_{x_0, x})_{\mathrm{ab}} \in H^1\bigl(\Gamma_K, \widehat\pi_1(X, x_0)_{\mathrm{ab}}\bigr) .
+\]
+L'énoncé est juste\footnote{En
+effet, par l'application d'Albanese, la classe abélianisée est l'image du point
+par l'application de Kummer $A(K) \to H^1(\Gamma_K, \widehat{T}(A))$ de la
+variété semi-abélienne, injective parce que $A(K)$ est de type fini
+(Mordell–Weil ; Lang–Néron pour $K$ de type fini). C'est l'injectivité de ce
+qu'on appelle aujourd'hui l'application de Kummer, ou des sections, de la
+géométrie anabélienne ; la surjectivité est l'objet de la conjecture des
+sections, que Grothendieck formulera dans sa lettre à Faltings de 1983.}.
+
+Déterminer « explicitement » un tel cocycle, en termes des propriétés
+arithmétiques du point, « c'est là un travail fascinant en perspective, que je
+n'ai pratiquement pas encore commencé ! ». Mais que veut dire
+« explicitement », le groupe $\Gamma_K$ étant lui-même loin d'être connu ? Il
+faut repérer $u$ par des invariants $f_{l_j}(u)$ attachés à des générateurs
+d'un groupoïde $\Pi_1(X, I)$. Or pour une courbe elliptique, ou pour
+$\mathbb{G}_m$, l'action de $\Gamma_K$ sur $\widehat\Pi_1(X_{\overline{K}})$
+n'est pas fidèle : il faut des paramètres de repérage pris sur d'autres
+variétés, la plus naturelle étant
+\[
+(35)\qquad U_{0,3} = \mathbb{P}^1 \setminus \{0, 1, \infty\} .
+\]
+
+\pagerange{82}{89}
+\subsection*{Fonctorialité, symétries, réduction à $U_{0,3}$ (pages 82 à 89)}
+
+Un morphisme $f : X \to Y$ de $K$-schémas donne $\widehat f :
+\widehat\Pi_1(X) \to \widehat\Pi_1(Y)$, qui commute à l'action de Galois (39),
+d'où $\widehat f(f_l(u)) = f_{\widehat f(l)}(u)$ et de même pour $g$ (40). Le
+cas extrême est celui d'un groupe $\mathfrak{G}$ de $K$-automorphismes de $X$ :
+$\widehat\Pi_1(X)$ devient un groupoïde à opérateurs $\mathfrak{G} \times
+\Gamma_K$. Avec un point base $x_0$, l'action de $\Gamma_K$ sur
+$\widehat\Pi_1(X, I)$ est connue par son action sur $\widehat\pi_1(X, x_0)$ et
+sur les torseurs $\mathrm{Hom}(x_0, x_i)$, soit par les données (42), (43) ;
+mais le choix d'un point base introduit une dissymétrie « qui semble
+artificielle, et à la longue je crois impraticable », surtout en présence de
+$\mathfrak{G}$, « alors que pratiquement jamais on ne peut trouver un
+$x \in X(K)$ fixe sous $\mathfrak{G}$ ». C'est exactement la difficulté que
+les suites II et III contournaient par des systèmes symétriques de points et
+de régions de base.
+
+\emph{Réduction à $U_{0,3}$.} Soit $X$ quasi-projective lisse
+géométriquement connexe. Par un théorème de type Lefschetz, $X$ contient une
+courbe $C$ dont l'inclusion est surjective sur les groupes fondamentaux ; par
+le théorème de Belyi, un ouvert de $C$ est un revêtement fini étale de
+$U_{0,3}$ :
+\[
+(44)\qquad
+\begin{array}{ccc}
+C & \overset{i}{\hookrightarrow} & X\\
+{\scriptstyle f}\downarrow & & \\
+U_{0,3} & &
+\end{array}
+\qquad i \text{ surjectif sur les } \pi_1,\quad f \text{ fini étale},\quad I \subset C .
+\]
+Alors $\widehat\Pi_1(X, I)$ est un quotient de $\widehat\Pi_1(C, I)$, et
+$\widehat\Pi_1(C, I) \to \widehat\Pi_1(U_{0,3}, f(I))$ est fidèle,
+« injective » sur les ensembles de flèches. Les deux flèches commutant à
+Galois, \emph{l'action de $\Gamma_K$ sur $\widehat\Pi_1(U_{0,3}, I_0)$, $I_0 =
+f(I)$, détermine son action sur $\widehat\Pi_1(X, I)$}\footnote{La page passe
+par le saturé $I' = f^{-1}f(I)$, puis remarque (page 88) qu'il n'est pas
+rationnel en général et qu'on n'en a pas besoin ; c'est la version sans
+saturé qu'on donne ici. Belyi demande que $C$ soit définie sur un corps de
+nombres : la réduction vaut pour $K$ algébrique sur $\mathbb{Q}$, quitte à
+remplacer $\Gamma_K$ par un sous-groupe ouvert (pages 88–89) sur lequel $C$,
+$f$ et $i$ sont définis. Dans les deux formules de la page 87 où l'on attend
+$C$, la page écrit $U_{0,3}$. Le théorème de Belyi est de 1979 ; sa mention
+date au moins cette suite.}.
+
+Inversement, on cherchera des conditions nécessaires et suffisantes pour
+qu'un automorphisme $\Theta$ de $\widehat\Pi_1(U_{0,3}; I_0)$ fixant les
+sommets provienne d'un $u \in \Gamma_K$. Première condition : pour tout
+revêtement $f : C \to U_{0,3}$ défini sur $K$, avec $I = f^{-1}(I_0) \subset
+C(K)$, $\Theta$ doit se relever en une action sur $\widehat\Pi_1(C, I)$ qui
+soit l'identité sur les sommets ; quand $I \to I_0$ n'est pas surjectif, ou
+les points de $I$ pas rationnels, on demande la même chose pour une puissance
+$\Theta^n$ convenable.
+
+\pagerange{90}{97}
+\subsection*{Un lemme de relèvement (pages 90 à 97)}
+
+À ces conditions de « prolongeabilité » s'en ajoute une : pour un morphisme
+$C \to X$, que l'action passe au quotient, c'est-à-dire que l'action sur
+$\widehat\pi_1(C, x_0)$ stabilise le noyau de $\widehat\pi_1(C, x_0) \to
+\widehat\pi_1(X, x_0)$. Pour exprimer le relèvement, la page énonce :
+
+\textbf{Lemme.} \emph{Soit $\widetilde{\mathcal{C}} \to \mathcal{C}$ un
+revêtement de groupoïdes, $\mathcal{C}$ connexe, $x_0$ un sommet de
+$\mathcal{C}$, $x'_0$ un sommet au-dessus, $\Pi_0 = \pi_1(\mathcal{C}, x_0)$
+et $\Pi'_0 \subset \Pi_0$ l'image de $\pi_1(\widetilde{\mathcal{C}}, x'_0)$.
+Soit $\Theta$ un automorphisme de $\mathcal{C}$ fixant $x_0$. Alors $\Theta$ se
+relève en un automorphisme de $\widetilde{\mathcal{C}}$ fixant $x'_0$ si et
+seulement si $\Theta(\Pi'_0) = \Pi'_0$ ; le relèvement est alors unique, et
+sur les fibres il est donné par transport de structure à partir de}
+\[
+(45)\qquad \mathrm{Ob}\,\widetilde{\mathcal{C}}_{x_i} = H_{x_i, x_0} \times^{\Pi_0} \Pi_0/\Pi'_0, \qquad H_{x_i, x_0} = \mathrm{Hom}_{\mathcal{C}}(x_0, x_i) .
+\]
+\emph{Sans exiger que $x'_0$ soit fixe, $\Theta$ se relève si et seulement si
+$\Theta(\Pi'_0)$ est conjugué de $\Pi'_0$ dans $\Pi_0$, et les relèvements
+correspondent aux éléments de}
+\[
+(49)\qquad \mathrm{Transp}_{\Pi_0}\bigl(\Pi'_0, \Theta(\Pi'_0)\bigr)/\Pi'_0, \qquad \mathrm{Transp} = \{g \in \Pi_0 \mid g\,\Pi'_0\,g^{-1} = \Theta(\Pi'_0)\} .
+\]
+\emph{Pour un sous-groupoïde plein $\mathcal{C}' \subset
+\widetilde{\mathcal{C}}$, équivalent à un revêtement de $\mathcal{C}$, il faut
+de plus que $\mathrm{Ob}\,\mathcal{C}'$ soit stable par le relèvement.}
+
+En effet un relèvement sur la fibre $E_0 = \Pi_0/\Pi'_0$ est une bijection
+$\widetilde\Theta_0$ vérifiant $\widetilde\Theta_0(g x') =
+\Theta(g)\widetilde\Theta_0(x')$ (46) ; elle est déterminée par l'image $g\Pi'_0$
+du point base, et la compatibilité des stabilisateurs impose
+$\Theta(\Pi'_0) = g\Pi'_0 g^{-1}$ ; $g$ et $g\alpha$, $\alpha \in \Pi'_0$,
+donnent le même relèvement\footnote{Démonstration de l'édition, sur les
+indications des pages 91 à 93, qui sont très corrigées. L'ensemble (49), s'il
+est non vide, est en bijection avec $N_{\Pi_0}(\Pi'_0)/\Pi'_0$, le groupe des
+automorphismes du revêtement.}.
+
+Résumé (page 94) : pour qu'un automorphisme $\Theta$ de $\widehat\Pi_1(X, I)$,
+$I \subset X(K)$, provienne d'un $u \in \Gamma_K$, il faut que
+\begin{itemize}
+\item[a)] pour tout revêtement fini étale $X'$ de $X$ défini sur $K$, $\Theta$
+se relève en une action sur $\widehat\Pi_1(X', I')$, $I' = X'|_I$, qui soit
+l'identité sur $I' \cap X'(K)$ ;
+\item[b)] pour tout morphisme $f : X' \to Y$ défini sur $K$ et tout $x' \in
+I' \cap X'(K)$, le noyau de $\widehat\pi_1(X', x') \to \widehat\pi_1(Y, f(x'))$
+soit stable par le relèvement — et, sans supposer $x'$ rationnel, par
+$\Theta^{\nu}$ pour $\nu$ tel que $\Theta^{\nu}x' = x'$.
+\end{itemize}
+« Je ne pense pas trop exagérer en conjecturant » que ces conditions
+nécessaires sont aussi suffisantes, quand $X$ est une courbe anabélienne et
+$K$ de type fini sur $\mathbb{Q}$. Quant à l'unicité de $u$, il l'attend quand
+$K$ est algébrique sur $\mathbb{Q}$, et, en degré de transcendance positif,
+quand $K$ est fini sur le corps des modules de $X$\footnote{La page 95 est en
+partie illisible. L'unicité, c'est la fidélité de l'action extérieure de
+Galois ; elle est connue pour $U_{0,3}$ sur $\overline{\mathbb{Q}}$ (Belyi),
+et pour les courbes hyperboliques sur les corps de nombres (Matsumoto, 1996,
+pour les affines ; Hoshi et Mochizuki, 2011, pour les propres). La suffisance
+— une caractérisation de l'image de Galois par des conditions de cette sorte
+— est, à notre connaissance, ouverte.}.
+
+Pages 96–97 : le cas d'un revêtement $\widetilde{\mathcal{C}}$ non connexe,
+venant d'un $X' \to X$ seulement $K$-connexe : sur la fibre $E_0$, le groupe
+engendré par $\Gamma_K$ et $\Pi_0$ agit transitivement, sans que $\Pi_0$ le
+fasse. L'application qui à $x' \in E_0$ associe son stabilisateur induit
+\[
+(51)\qquad \pi_0(E_0) = E_0/\Pi_0 \longrightarrow \mathrm{Ssgr}(\Pi_0)/\Pi_0
+\]
+vers les classes de conjugaison de sous-groupes, et une condition nécessaire
+évidente est que l'image soit stable par $\Theta$ ; un relèvement est alors
+déterminé par une bijection de $\pi_0(E_0)$ compatible à (51) et par l'image
+d'un point dans chaque composante\footnote{Page très corrigée ; l'ordre de
+lecture des ajouts est incertain. La page 109 reprend ce diagramme, avec
+$\Sigma = \Gamma \cdot \pi$, $\Sigma/\pi = \Gamma$.}.
+
+\pagerange{98}{103}
+\subsection*{La condition des lacets, et les conditions de stabilité (pages 98 à 103)}
+
+Il reste une condition, « plus importante » : la compatibilité avec la
+« structure à l'infini » — pour une courbe, la donnée des classes de
+conjugaison des sous-groupes d'inertie aux trous — qui s'exprime
+« particulièrement élégamment » dans le langage des groupoïdes. Les conditions
+a), b), au contraire, ne s'expriment pas directement sur les paramètres
+($\alpha, \beta, \zeta, \eta, \ldots$) qui repèrent un $u \in
+\mathrm{Gal}(\overline{\mathbb{Q}}/\mathbb{Q})$ par son action sur
+$\Pi_{0,3}$. Il annonce, à propos des $M_{g,\nu}$ et des groupes de
+Teichmüller, une conjecture « intéressante et plausible » en termes de
+propriétés des groupes profinis tels que $\widehat\Pi_{0,3}$, liées à
+$M_{0,4}$, $M_{0,5}$\footnote{La page 99 est presque entièrement illisible ;
+on ne garde que ces mots. On pense à la relation pentagonale, sur $M_{0,5}$,
+que l'\emph{Esquisse d'un programme} placera au cœur du programme (« les deux
+premiers étages de la tour de Teichmüller ») et que Drinfeld prendra pour
+troisième relation de $\widehat{GT}$ ; le rapprochement est de l'édition.}.
+Puis il récapitule, pour un automorphisme $\Theta$ de $\widehat\Pi_1(X, I)$,
+$I \subset X(\overline{K})$, $I \cap X(K) \neq \emptyset$ — surtout pour
+$X = U_{0,3}$ :
+\begin{itemize}
+\item[1)] la \emph{condition des lacets}, « pour mémoire — c'est sûrement la
+plus importante de toutes, et de très loin ! » : $\Theta$ envoie chaque lacet
+autour d'un trou sur un conjugué de sa puissance $p$-ième, avec un même
+multiplicateur $p$ ;
+\item[2)] la stabilité pour les revêtements étales $X'$ de $X$ définis sur
+$K$ : $\Theta$ se relève à $\widehat\Pi_1(X', I')$, de façon unique si $X'$
+est $K$-connexe et $I' \cap X'(K) \neq \emptyset$ — ce qui s'explicite en une
+condition de stabilité de certains sous-groupes ouverts de $\pi_1(X, x)$ ;
+\item[3)] pour les morphismes $f : X' \to Y$ et $x' \in X'(K) \cap I'$, la
+stabilité du noyau de $\widehat\pi_1(X', x') \to \widehat\pi_1(Y, f(x'))$ ;
+\item[4)] pour deux revêtements $X'_1$, $X'_2$ de $X$ et un morphisme $f :
+X'_1 \to X'_2$, pas nécessairement au-dessus de $X$, la compatibilité de
+$\widehat\Pi_1(X'_1, J) \to \widehat\Pi_1(X'_2, I'_2)$, $J = I'_1 \cap
+f^{-1}(I'_2)$, aux relèvements de $\Theta$.
+\end{itemize}
+Une condition 5° réunissant 3° et 4° serait facile à écrire, dit la page 101,
+mais il ne sait pas s'il en aura besoin\footnote{Le haut de la page 101 est
+très incertain ; le petit diagramme $X'_1 \to X'_2$, $f_1, f_2 : X'_i \to Y$ y
+est trop raturé pour être rendu.}.
+
+\emph{Adjacence (pages 102–103).} Soit $T \subset X(\mathbb{C})$ localement
+fermée, simplement connexe, et $X' \to X$ fini étale au voisinage de $T$ ;
+$X'|_T$ est réunion de copies de $T$, et deux points au-dessus de $T$ sont
+\emph{$T$-adjacents} s'ils sont sur la même copie. Galois respecte
+l'adjacence, et l'on définit $g^T_{x',y'}(u)$ par
+${}^{u}l^T_{y',x'} = g^T(u)\, l^T_{u(y'),u(x')}$ (53), avec
+$\widehat f(g^T_{y',x'}(u)) = g^T_{y,x}(u)$ (54). D'où une condition nécessaire :
+\[
+g^{T}_{y,x}(u) \in \bigcap_{\alpha \in \pi_0(X'|_T)} \mathrm{Im}\,\widehat\varphi_\alpha \qquad \text{pour tout } u ,
+\]
+$\widehat\varphi_\alpha : \widehat\pi_1(X', T_\alpha) \hookrightarrow
+\widehat\pi_1(X, T)$ les inclusions des composantes $T_\alpha$, dont les images
+sont des conjugués d'un même sous-groupe, sous la seule hypothèse — plus faible
+que la rationalité — que $u(x'_\alpha)$ et $u(y'_\alpha)$ restent
+$T$-adjacents\footnote{Ces deux pages sont d'une lecture très partielle ;
+on ne retient que les formules et la conclusion. La marge identifie
+$\pi_0(X'|_T)$ à la fibre de $X'$ au-dessus de $T$, sur laquelle agit
+$\pi_1(X, T)$.}. La suite s'arrête là.
+
+\pagerange{104}{121}
+\section*{V. Groupoïde fondamental d'une carte trouée (pages 104 à 121)}
+
+La page 104 est une feuille de garde de sa main, avec ce titre — sous-titré
+« préliminaires à l'action de Galois » — et « (14 pages) ». Le titre reprend
+la « carte trouée » dont la page 10 du dossier 141 commençait la définition :
+une carte dont les sommets, les milieux d'arêtes et les centres des faces sont
+percés.
+
+\pagerange{105}{112}
+\subsection*{Esquisses (pages 105 à 112)}
+
+\emph{Présentations de $\Pi_1(U_{0,3})$ (page 105).} Quatre figures présentent
+le groupoïde fondamental de la sphère privée de $0, 1, \infty$ sur divers
+ensembles de points base, choisis sur de petits cercles autour des trous :
+« 6 sommets, 9 flèches, 2 relations » ; « 4 sommets, 6 flèches, 1 relation »
+(trois cas) ; « 2 sommets, trois flèches, 0 relation » (trois cas) ;
+« 1 sommet, 2 flèches, 0 relation » (trois cas). Dans chaque cas le nombre
+$\text{flèches} - \text{sommets} + 1 - \text{relations}$ vaut $2$, le rang du
+groupe libre $\Pi_{0,3}$\footnote{Vérification de l'édition. Une cinquième
+figure, « 1 cas », est biffée.}.
+
+\emph{La sphère à quatre trous (page 107).} Les points $0, \infty$ aux pôles,
+$1, -1$ (et $\pm i$) sur l'équateur ; les symétries $z \mapsto -z$,
+$z \mapsto 1/z$, qui engendrent un groupe de Klein $\mathbb{F}_2^{\,2}$ ; la
+suite exacte $1 \to \mathbb{F}_2^{\,2} \to \mathfrak{A}_4 \to \mathbb{Z}/3 \to 1$ ;
+la relation $l_\infty\, l_1\, l_0\, l_{-1} = 1$ entre les quatre lacets\footnote{La page ne dit pas ce
+que $\mathfrak{A}_4$ y fait ; la suite exacte est celle du groupe alterné,
+exacte, et les deux involutions engendrent bien un groupe de Klein. On ne
+reconstruit pas le reste.}.
+
+\emph{Le modèle algébrique (page 110).} La sphère de III se réalise comme
+$\Sigma_J = \mathbb{P}(V(J))$, $V(J) = \ker(\mathcal{O}^J \to \mathcal{O})$ ; le
+fibré tangent est $\mathcal{O}(2)$ tordu par le $\mathbb{Z}/2$-torseur
+$\boldsymbol{\omega}$ des orientations (« attention signe ! »), les trous
+$R_i$, les points $Q_i$, $Q_i^{\omega}$ et les pôles $P_\omega$ — ceux-ci
+définis à l'aide d'une racine cubique primitive de l'unité $\zeta$, comme
+droites propres de la permutation circulaire — étant donnés par des vecteurs
+explicites de $V(J)$\footnote{Formules en partie surchargées ; on n'en
+reproduit pas le détail. Que les pôles demandent $\zeta$ est le fait
+arithmétique notable : ils ne sont pas rationnels sur $\mathbb{Q}$, mais sur
+$\mathbb{Q}(\zeta)$, et la conjugaison complexe les échange.}.
+
+\emph{Cartes régulières et quotients diédraux (page 111).} Le polygone régulier
+à $n$ côtés, dessiné sur l'équateur de la sphère, troué en ses sommets, ses
+milieux d'arêtes et ses deux centres de faces, donne une surface
+$\Sigma_n^{**}$ et une tour
+\[
+\Sigma_n^{**} \xrightarrow{\ \deg n\ } \Sigma_1^{**} = \mathbb{P}^1 \setminus \{0, \infty, 1, -1\} \xrightarrow{\ \deg 2\ } U_{0,3},
+\]
+la première flèche étant $z \mapsto z^{n}$, la seconde le quotient par
+$z \mapsto 1/z$ ; le composé est un revêtement galoisien de $U_{0,3}$, de
+groupe le groupe diédral $D_n^{+}$ des rotations de la sphère qui préservent la
+carte\footnote{Les exposants de $\Sigma$, petites piles de $*$ et de points
+qui disent quels points sont ôtés, sont lus sans certitude sur leur
+disposition, et les diagrammes de quotients de la page ne sont pas
+reconstruits. On n'énonce que la tour, vérifiée : $z \mapsto z^n$ puis
+$z \mapsto z^{n} + z^{-n}$ à une homographie près, de groupe engendré par
+$z \mapsto e^{2i\pi/n} z$ et $z \mapsto 1/z$, d'ordre $2n$.}. La page 112
+dessine les douze points $\pm R_i^{\omega}$, $\pm R_i^{\omega'}$ et les
+douze valeurs de $P_i^{\omega,\zeta}$.
+
+\pagerange{113}{116}
+\subsection*{Le groupoïde fondamental d'une carte trouée (pages 113 à 116)}
+
+Soit $\mathcal{X}$ une carte finie, non nécessairement orientée, $\mathcal{R}$
+l'ensemble de ses \emph{repères} (drapeaux), $S = S_0 \sqcup S_1 \sqcup
+S_\infty$ l'ensemble de ses sommets, arêtes et faces, identifiés à leurs
+centres $R_\varphi$. Un repère $r = (s, a, f)$ s'identifie au triangle de la
+subdivision barycentrique de sommets $R_s, R_a, R_f$, d'indices $0, 1,
+\infty$, orienté dans le sens $0, 1, \infty$. Les repères adjacents
+$\tau_0(r)$, $\tau_1(r)$, $\tau_\infty(r)$ sont ceux qui partagent avec $r$ le
+côté opposé au sommet d'indice correspondant, et
+\[
+(1)\text{–}(5)\qquad \tau_0^2 = \tau_1^2 = \tau_\infty^2 = (\tau_0\tau_\infty)^2 = 1,
+\]
+\[
+\rho_\infty = \tau_1\tau_0,\ \rho_0 = \tau_\infty\tau_1,\ \rho_1 = \tau_0\tau_\infty, \qquad \rho_\infty\rho_1\rho_0 = 1 ,
+\]
+$\rho_\infty$ tournant d'un cran autour de la face, $\rho_0$ autour du sommet,
+$\rho_1$ autour du milieu de l'arête. C'est le groupe cartographique de la page
+9 du dossier 141, $\tau_0, \tau_1, \tau_\infty$ y étant notés $\sigma_0,
+\sigma_1, \sigma_2$\footnote{Vérifié : $\rho_\infty\rho_1\rho_0 =
+\tau_1\tau_0\,\tau_0\tau_\infty\,\tau_\infty\tau_1 = 1$.}.
+
+Sur chaque côté du triangle $r$, près de chacune de ses extrémités, on place un
+sommet : $R^{i,j}_r$ est voisin du sommet d'indice $i$, sur le côté qui le
+joint au sommet d'indice $j$ (6), avec les seules identifications
+$R^{i,j}_r = R^{i,j}_{\tau_k(r)}$, $k \notin \{i, j\}$ (7) — les deux
+triangles partagent ce côté. Les arcs sont
+\[
+(8)\qquad \lambda^i_r : R^{i,i+1}_r \longrightarrow R^{i,i+2}_r, \qquad
+(9)\qquad a^i_r : R^{i+1,i+2}_r \longrightarrow R^{i+2,i+1}_r ,
+\]
+où $i + 1$, $i + 2$ sont les successeurs de $i$ dans l'ordre circulaire $(0,
+1, \infty)$ : $\lambda^i_r$ est la portion, intérieure à $r$, du petit cercle
+autour du sommet d'indice $i$, et $a^i_r$ longe le côté opposé à ce sommet, de
+sorte que $a^i_r = a^i_{\tau_i(r)}$ (10)\footnote{La page écrit (9) $a^i_r :
+R^{i+1,i}_r \to R^{i+1,i+2}_r$ (lecture surchargée), qui serait un arc autour
+du sommet d'indice $i + 1$, comme $\lambda^{i+1}$, et rendrait (10) et (12)
+incohérentes. L'arc le long du côté opposé au sommet $i$ est ce qu'exige
+(10), et ce que dit le texte : les $a^i_r$ « entourent » le milieu du repère
+« en formant un contour fermé dans le sens défini par l'orientation de $r$ ».}.
+Le triangle tronqué est un hexagone, dont le bord donne la relation
+\[
+(12)\qquad \underbrace{(\lambda^0_r)^{-1} a^1_r}_{b^\infty_r}\ \underbrace{(\lambda^\infty_r)^{-1} a^0_r}_{b^1_r}\ \underbrace{(\lambda^1_r)^{-1} a^\infty_r}_{b^0_r} = 1 ,
+\]
+lacet basé en $R^{0,1}_r$\footnote{La page dit « lacet en $R^{1\infty}_r$ ».
+Avec les arcs (8) et (9) ci-dessus et la composition de droite à gauche, le
+produit part de $R^{0,1}_r$ et y revient après avoir fait le tour de
+l'hexagone dans le sens de $r$ ; vérifié pas à pas. Le point base d'une
+relation est sans effet sur le groupoïde présenté.}.
+
+\emph{Les sommets $R^{ij}_r$, les flèches $\lambda^i_r$ et $a^i_r$, avec les
+relations (7), (10), (12), présentent le groupoïde fondamental
+$\Pi_1(\widetilde{X}^{**}, \{R^{ij}_r\})$}, où $\widetilde{X}^{**}$ est la
+surface à bord obtenue en éclatant réellement la carte en tous les points de
+$S$, d'intérieur $X^{**} = X \setminus \{R_\varphi\}$\footnote{Les points et
+chemins sont « parfaitement canoniques, pas seulement des classes
+d'homotopie », dans la réalisation conforme canonique de la carte. Que ce soit
+une présentation est l'énoncé de van Kampen pour le complexe formé du graphe
+des $\lambda$ et des $a$ et des hexagones : son complémentaire est une réunion
+de disques épointés autour des $R_\varphi$.}. Les notations gardent un sens
+pour toute carte triangulaire « partielle » de type $\{0, 1, \infty\}$ ; la
+relation $(\tau_0\tau_\infty)^2 = 1$, qui dit que les sommets de type $1$ sont
+de valence $4$, est la seule qui la fasse venir de la subdivision barycentrique
+d'une carte. On introduit les « rotations d'un double cran »
+\[
+(13)\qquad \Lambda^i_r = (\lambda^i_{\tau_{i+1}(r)})^{-1}\lambda^i_r : R^{i,i+1}_r \to R^{i,i+1}_{\tau_{i+1}(r)}, \qquad
+\Lambda'^i_r = \lambda^i_{\tau_{i-1}(r)}(\lambda^i_r)^{-1} : R^{i,i-1}_r \to R^{i,i-1}_{\tau_{i-1}(r)},
+\]
+qui font le tour du sommet d'indice $i$ à travers deux triangles, et
+satisfont $\Lambda^i_r\Lambda^i_{\tau_{i+1}(r)} = 1$,
+$\Lambda'^i_r\Lambda'^i_{\tau_{i-1}(r)} = 1$ (14) — des relations de
+redondance\footnote{Vérifié sur (13) ; les indices $\tau_{i\pm 1}$ sont lus
+avec hésitation.}.
+
+\pagerange{117}{120}
+\subsection*{Présentations réduites (pages 117 à 120)}
+
+En éliminant les sommets sur les côtés de type $1$ (joignant un sommet et un
+centre de face) et les arcs $a^1_r$ qui les joignent, on garde les $R^{ij}_r$
+avec $1 \in \{i, j\}$, les arcs $\lambda^1_r$, $\Lambda^0_r$,
+$\Lambda^\infty_r$, $a^0_r$, $a^\infty_r$, les relations de redondance (14), et
+une relation par quadrilatère $r \cup \tau_1(r)$ :
+\[
+(16)\qquad \Lambda'^\infty_{\tau_1(r)}\,(\beta^1_{\tau_1(r)})^{-1}\,\Lambda^0_r\,(\beta^1_r)^{-1} = 1, \qquad \beta^1_r = a^0_r(\lambda^1_r)^{-1}a^\infty_r ,
+\]
+stable par $r \mapsto \tau_1(r)$, de sorte qu'on peut se borner, si $X$ est
+orientable, aux repères d'une orientation\footnote{Une première version de
+(16) est barrée. L'exposant de la première parenthèse est surchargé, lu $-1$
+avec hésitation ; on rapporte la relation sans l'avoir reconstruite pas à
+pas. La marge propose de voir le résultat comme une décomposition en
+« losanges », les sommets de type $1$ étant arrondis.}.
+
+En ne gardant que les arcs $a^\infty_r$ et les sommets $R^{0,1}_r$,
+$R^{1,0}_r$ qu'ils joignent, avec les doubles crans autour des sommets de type
+$0$ et $1$,
+\[
+(18)\qquad a^\infty_r : R^{0,1}_r \to R^{1,0}_r, \qquad \Lambda^0_r : R^{0,1}_r \to R^{0,1}_{\tau_1(r)}, \qquad \Lambda'^1_r : R^{1,0}_r \to R^{1,0}_{\tau_0(r)},
+\]
+les seules relations sont de redondance (19) : \emph{le groupoïde est libre}.
+En effet le graphe correspondant — de petits cercles autour des sommets de type
+$0$ et $1$, reliés le long des demi-arêtes — a pour complémentaire des disques
+épointés, et la surface se rétracte sur lui. Cela fait trois présentations, sur
+$S \setminus S_i$, $i = \infty, 0, 1$. Enfin, en ne gardant que les
+$R^{0,1}_r$, on obtient un groupoïde libre engendré par
+\[
+(21)\qquad A^{0,1}_r = (a^\infty_{\tau_0(r)})^{-1}\,\Lambda'^1_r\,a^\infty_r : R^{0,1}_r \to R^{0,1}_{\tau_0(r)}, \qquad \Lambda^0_r : R^{0,1}_r \to R^{0,1}_{\tau_1(r)},
+\]
+avec les seules relations de redondance $\Lambda^0_r\Lambda^0_{\tau_1(r)} = 1$,
+$A^{0,1}_r A^{0,1}_{\tau_0(r)} = 1$ (22)\footnote{La page écrit
+$(\Lambda'^1_r)^{-1}$ au milieu de $A^{0,1}_r$ (définition surchargée, lue
+avec hésitation). Pour que le chemin se compose, il faut aller de $R^{1,0}_r$
+à $R^{1,0}_{\tau_0(r)}$, ce que fait $\Lambda'^1_r$ ; son inverse va dans
+l'autre sens.}. Au total, $10 = 1 + 3 + 3 + 3$ présentations, selon les
+ensembles de sommets retenus.
+
+\pagerange{120}{121}
+\subsection*{Le bouchage des trous (pages 120 et 121)}
+
+« Dans chacun des cas envisagés, le “bouchage” d'un trou $R_\varphi$ se fait de
+façon essentiellement triviale » : il suffit d'exprimer, en termes des flèches
+génératrices choisies, le « lacet » autour de $R_\varphi$ — pour un sommet de
+type $0$, le produit des doubles crans $\Lambda^0$ qui en font le tour —,
+« puis d'exprimer que ce lacet est $\simeq 1$ »\footnote{La phrase s'arrête au
+bas de la page 120 et reprend en tête de la page 121, sa page 7, dont le reste
+est blanc ; l'exemple du produit des $\Lambda^0$ est de l'édition. Les
+« $R_s$ » de la page 121 sont les centres $R_\varphi$ de type sommet.}. Le
+groupoïde fondamental de la carte dont on a bouché ce trou est le quotient par
+cette relation, par le théorème de van Kampen.
+
+C'est la réponse, au niveau combinatoire et pour une carte donnée, à la
+difficulté laissée en suspens aux pages 17 à 20 : là, le bouchage des trous ne
+trouvait pas de place, à côté des revêtements, dans une catégorie dont on
+pût interpréter la complétion profinie ; ici, sur des présentations
+explicites, il n'est qu'une relation de plus. Le dossier s'arrête sur ce
+constat.
+
+\end{document}

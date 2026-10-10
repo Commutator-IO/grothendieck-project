@@ -1,0 +1,2126 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 144, pages 1-183.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken the true statement appears and the footnote
+% says what the page has. In any dispute of substance the transcription
+% governs: whoever cites Grothendieck cites batch-01.fr.tex ... batch-10.fr.tex.
+%
+% Scope: the folder is 183 pages in ten batches (1-20, ..., 161-180, 181-183),
+% all transcribed, read whole before any of this was written, and written as
+% ONE file for the whole shelfmark. About forty pages carry nothing in his hand or only a cover title
+% (blank sheets, typed university notices, a student's copy, an examination
+% paper); five letters or parts of letters are third-party correspondence
+% (B. Mazur, pp. 9-10; P. Deligne, pp. 117-123) and are reported only as far as
+% the transcription's notes report them (RIGHTS.md).
+%
+% The spine. The folder is not one argument but a dossier of working notes,
+% 1981-1983, around one object: the arithmetic fundamental groups of the moduli
+% multiplicities M_{g,nu} — « Teichmülleries ». Ten stations, kept distinct:
+%   A  pp. 2-10   notes of conversations with Deligne (30.5 and 5.6 [1981]);
+%   B  pp. 12-27  the groups T, S, N, M of the moduli multiplicities, the
+%                 Galois action, torsors P_{X,x}, Q_X, R_X, sections over a
+%                 field of finite type, « discrétifications » (1982);
+%   C  pp. 29-39  formularies for GL(2,Z) (1982 and 1981), its central
+%                 extension by Z, and the presentations of ST_{1,1} = B_3
+%                 (June 1983);
+%   D  pp. 41-46  the transcendental view of M_{1,1};
+%   E  pp. 49-100 « Rétrospection sur les cartes cellulaires », his §§1-8
+%                 (1982): maps, weighted triangular maps, pi_{0,3}, real
+%                 coverings, signatures, weightability, polygons, P Sigma;
+%   F  pp. 102-114 the double cover z -> (2z-1)^2 and the Z/4 cover (his
+%                 sheets 11-16), then the cover of the Deligne letters;
+%   G  pp. 125-139 index diagrams; S_{1,1} = T^!_{1,2} and its presentation;
+%                 relative positions in the (0,3) case;
+%   H  pp. 141-169 the cylinder and the torus: special extended Teichmüller
+%                 group of the cylinder, twist invariant, generators of GL(2,Z);
+%   I  pp. 172-176 « Construction »: G = GL(2,Z^).Z^ and the automorphisms u~;
+%   J  pp. 179-182 towers Gamma^{!+}_{g,nu}; stable curves and their skeleton.
+%
+% Notation fixed for the whole folder. Paths compose as functions; the mixed
+% fundamental groupoid Pi_1(X, G) has arrows (l, g): x -> y with l: gx -> y and
+% the law of page 49, (l', g')(l, g) = (l' o g'(l), g'g). int(g)(x) = g x g^-1,
+% often written g(x) as on the pages; [x, y] = x y x^-1 y^-1. Indices in
+% {0, 1, inf} run cyclically 0 -> 1 -> inf -> 0 (« i+1 »). tau is complex
+% conjugation throughout; the modulus of an elliptic curve is written z (the
+% pages also call it tau, p. 41). Superscript + = orientation-preserving
+% (holomorphic), ! = pure (marked points not permuted). For a type (g, nu):
+% T = pi_1 of the moduli multiplicity (Teichmüller modular group), S = pi_1 of
+% the universal curve, N = pi_1(M_{g,nu,Q}), M = pi_1(X_{g,nu,Q}) — the letters
+% of page 12; page 14 swaps M and N once, and is read in page 12's letters. The
+% curly capital that the transcription renders now S (gothic), now G (batch 2),
+% is written S. The inertia-preserving automorphisms are written Aut_lac, as in
+% folder 145 (the transcription reads « loc » on pp. 12-15, « lac » p. 24).
+%
+% Machine checks (scripts outside the repository): every matrix identity of
+% the two formularies (pp. 29-34); every braid identity of pp. 31, 35-39 and
+% 155-159 (Artin's faithful action of B_3 on F_3); the Aut(F_2) formulas of
+% pp. 32 and 130; formulas (59)-(86) of pp. 80-86 in a model of the polygon
+% groups (n = 5, 6); the presentations of pp. 36-39 by counting homomorphisms
+% to S_4 and S_5; g(z) and g_n(z) of pp. 64, 86.
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - p. 2: Smith theory is for p-groups; Bing's example is an involution of
+%     S^3 with a wild fixed 2-sphere;
+%   - p. 3: the simple connexity guess for (g, nu) = (1, 1) — the quotient of
+%     SL(2,Z) by the normal closure of the Dehn twist is trivial;
+%   - p. 5: a Riemannian metric existed (Weil-Petersson); Nielsen realisation
+%     is Kerckhoff's theorem;
+%   - p. 16, (18): Q_X / T^+, not R_X / T^+;
+%   - p. 27: phi and its complex conjugate give the same discretification if a
+%     discretification is only a subgroup (observation of this edition);
+%   - p. 29: eps_i = sigma_{i-1}^-1 rho, not sigma_i^-1 rho; Gamma_inf =
+%     sigma_inf^-1 Gamma_0 = Gamma_0 sigma_inf in the 1982 conventions;
+%   - p. 33: sigma_i sigma_{i+1} = -rho l_i; tau_0, tau_1 as read are not
+%     involutions (true values are those of p. 29); tau_{i+1} tau_i = -l_{i+2};
+%     tau'_inf = -sigma_inf tau_inf; tau_i = sigma_i tau'_i; tau_inf tau'_0 =
+%     -eps_0;
+%   - p. 33 and p. 114: S_{0,3} = GL(2,Z^)' and S^+_{0,3} = SL(2,Z^)' hold for the
+%     discrete groups with Z; for the profinite completions the map is onto,
+%     not injective (no congruence subgroup property for SL(2,Z));
+%   - p. 34: [sigma_inf, l_inf] = int(sigma_inf(rho^-1))([l_0, l_1]^-1);
+%   - p. 35, (a): sigma(rho'_1) = rho'_0;
+%   - p. 37: the « abracadabra » equation alone does not present B_3; the first
+%     relation of (i_0) alone does;
+%   - p. 38, 1°: the table is that of the AUTOMORPHISM eps_i -> eps_i^-1, not of
+%     an anti-automorphism;
+%   - p. 42: (a +- i)/c, not (a +- 2i)/(2c); Aut(D) = PSL(2,R); p. 44: the fixed
+%     point of rho is e^{i pi/3} = -j^2, not -j; p. 60: P_+ = -zeta^2;
+%   - p. 53, (7): the tau_i exchange R^+ and R^-;
+%   - p. 64: denominator psi^2 - 1;
+%   - p. 78: Sigma^{D^+} (two points), not Sigma^D (empty);
+%   - p. 80: second form of tau_{a_0}(rho_i) needs a leading rho_0; p. 84 the
+%     explicit sigma_{a_0}(rho_i) is (rho_0 rho_{n-1}...rho_{n+2-i})(rho_{n+1-i});
+%   - p. 84, (85): tau_{a_0}(rho) = sigma_{a_0} rho^-1 sigma_{a_0}, not rho^-1;
+%     (86), with sigma~_{a_0}, is right — the page's own correction;
+%   - p. 98: the ambient extension is SL^{+-}(V), not SL(V);
+%   - p. 130: rho~^6 = [u,v]^-1 (= l^!_0) and rho~^3 = sigma~^-2, as the first
+%     lines of the page have it; r~_inf(l^!_0) = l^!_0^-1;
+%   - p. 179: PMod_{0,4} is free of rank 2, of index 6 in PSL(2,Z); the rank of
+%     the canonical abelian subgroups is 3g - 3 + nu.
+%
+% Announced and never established in the folder: that M'/T' = Gamma_Q for all
+% (g, nu) (p. 13, « je pense »); that the P^phi_{X,x} for all X determine phi
+% (p. 17); that the sections (14), (14') determine (K, K-bar, (X, x)) (p. 24);
+% the Prop and Cor of p. 26; whether Hom(K-bar, C) -> Discspec is injective
+% (p. 27); T_{1,2} = GL(2,Z) *_{D_inf} GL(2,Z) (p. 153, « ? »); the
+% generalisation of §5 to n-gonal maps (p. 94); the « 2-groupoïde fondamental »
+% of item 8 of the table (p. 50), which breaks off at « Quand » (p. 100).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{144}
+\pages{1}{183}
+\dating{1981-1983}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{[Suite autour de Teichmüller dont] Teichmülleries, 1981-1982 : notes manuscrites (1981-1983, s.d.), lettres (1981, s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Une surface — une sphère, un tore, une surface à plusieurs anses — peut être
+munie de bien des formes : la même surface topologique porte une infinité de
+structures de « courbe algébrique », et ces structures forment à leur tour un
+espace, l'\emph{espace des modules} $M_{g,\nu}$ des courbes de genre $g$
+marquées de $\nu$ points. Ces pages, écrites entre 1981 et 1983 et rangées
+sous le titre de « Teichmülleries », tournent toutes autour d'une question :
+que voit-on de cet espace des modules quand on regarde ses lacets ?
+
+Les lacets d'un espace forment un groupe, son groupe fondamental. Pour
+$M_{g,\nu}$, c'est le groupe des façons de déformer la surface en elle-même —
+le \emph{groupe modulaire de Teichmüller}, qu'on décrit en tordant la surface
+le long de cylindres. Mais $M_{g,\nu}$ est défini par des équations à
+coefficients rationnels, et cela change tout : le groupe de Galois des
+nombres algébriques, qui permute les solutions des équations, agit aussi sur
+ses lacets, une fois ceux-ci « complétés » pour voir tous les revêtements
+finis. Les premières pages (12 à 27) écrivent cette situation avec soin : une
+courbe $X$ définie sur un corps porte, en plus de son groupe fondamental, une
+structure « arithmétique » qui retient le corps où elle vit. Grothendieck y
+avance une idée qu'on appelle aujourd'hui \emph{anabélienne} : ces données
+de groupes devraient suffire à reconstruire la courbe et son corps.
+
+L'objet le plus petit, le tore marqué d'un point, est traité à fond. Son
+groupe modulaire est $SL(2, \mathbb{Z})$, le groupe des matrices entières de
+déterminant $1$, qui agit sur le demi-plan des nombres complexes de partie
+imaginaire positive. Grothendieck en dresse deux « formulaires », en 1981 et
+1982 : des matrices nommées, et toutes leurs relations. Puis il passe à une
+extension de ce groupe par $\mathbb{Z}$, qu'il obtient en suivant aussi les
+tours que fait un vecteur autour de l'origine ; en juin 1983 il en écrit
+toutes les présentations à deux générateurs, et c'est le \emph{groupe des
+tresses à trois brins}, présenté par une seule relation,
+$\varepsilon_0\varepsilon_1\varepsilon_0 = \varepsilon_1\varepsilon_0\varepsilon_1$.
+
+Le plus long morceau, une « Rétrospection sur les cartes cellulaires » de
+1982 (pages 49 à 100), revient sur une idée centrale de ces années : un
+graphe dessiné sur une surface, une \emph{carte}, est la même chose qu'un
+revêtement de la sphère ramifié au-dessus de trois points seulement. Une
+carte se décrit par des drapeaux et trois façons de passer d'un drapeau à son
+voisin ; un revêtement, par une courbe algébrique. D'où ce fait étonnant :
+toute carte finie, dessin d'enfant sur une surface, est une courbe définie sur
+les nombres algébriques, et le groupe de Galois agit sur les dessins. Les
+pages déroulent la correspondance pour les cartes orientées ou non, à faces
+triangulaires, ou modelées sur un polygone régulier, et relient chaque fois le
+groupe qui classe les cartes à un groupe fondamental « à singularités »
+(orbifold).
+
+Le reste est plus fragmentaire : un cylindre et ses torsions, le tore coupé
+en deux cylindres, des diagrammes d'indices de sous-groupes, une construction
+qui fait agir des symétries « cachées » sur le groupe des tresses complété, et
+pour finir le décompte des courbes à points doubles qui bordent l'espace des
+modules. On y lit un mathématicien qui accumule les cas particuliers,
+recalcule ses formulaires d'une année sur l'autre (« attention aux
+signes ! »), et se fait des réflexions de méthode à la marge : qu'il vaut
+mieux, « au début, ne pas introduire » des éléments superflus, que telle
+figure « est plus jolie ou du moins plus symétrique ».
+
+Pour aller plus loin : groupe modulaire de Teichmüller, représentation
+galoisienne extérieure, géométrie anabélienne, groupe des tresses, dessins
+d'enfants, groupe cartographique, groupe fondamental orbifold, courbes
+stables.
+
+\keywords{Teichmüller modular group, moduli stack of curves, arithmetic fundamental group, outer Galois representation, homotopy exact sequence, anabelian geometry, section conjecture, profinite completion, congruence subgroup problem, Nielsen realization problem, Weil–Petersson metric, double suspension theorem, icosians, E8 lattice, Deligne–Mumford compactification, braid group B3, universal central extension, SL2(Z), GL2(Z), amalgamated free product, upper half-plane, dessins d'enfants, Belyi map, cartographic group, real Belyi theory, Klein surface, orbifold fundamental group, regular polygon, dihedral group, Birman exact sequence, Aut(F2), Dehn twist, mapping class group of the cylinder, stable curve, dual graph}
+\end{resume}
+
+\pagerange{2}{182}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+Le dossier n'a pas un argument unique : c'est une liasse de notes de travail,
+de plusieurs années et sur plusieurs papiers, réunies sous une chemise. Ses
+stations, dans l'ordre des feuillets :
+
+\begin{itemize}
+\item \textbf{Conversations avec Deligne (pages 2 à 10).} Onze points notés
+après deux entretiens (« 30.5 et 5.6 », vraisemblablement de 1981), puis une
+lettre de B. Mazur (pages 9 et 10), qu'on ne restitue pas.
+\item \textbf{Les groupes fondamentaux des multiplicités modulaires (pages 12
+à 27, 1982).} Définitions et suites exactes ; torseurs attachés à une courbe
+pointée ; courbes sur un corps de type fini et sections ; « discrétifications ».
+\item \textbf{Formulaires (pages 29 à 39).} $GL(2, \mathbb{Z})$ dans la
+version de 1982 (pages 29 et 30), son extension par $\mathbb{Z}$ (31 et 32),
+la version de 1981 (33 et 34), les présentations du groupe des tresses
+(35 à 39, juin 1983).
+\item \textbf{Point de vue transcendant pour $M_{1,1}$ (pages 41 à 46).}
+\item \textbf{Rétrospection sur les cartes cellulaires (pages 49 à 100).}
+Huit paragraphes numérotés de sa main, annoncés par une table (page 50).
+\item \textbf{Calculs sur un revêtement double (pages 102 à 114),} ses
+feuillets 11 à 16 ; puis la chemise « Calculs divers sur Teichmüller — Lettre
+Deligne sur groupes profinis » et deux lettres de Deligne (117 à 123), qu'on
+ne restitue pas.
+\item \textbf{Diagrammes d'indices et le groupe $\mathfrak{S}_{1,1}$ (pages 125
+à 139).}
+\item \textbf{Le cylindre et le tore (pages 141 à 169).}
+\item \textbf{« Construction » (pages 172 à 176).}
+\item \textbf{Tours de groupes modulaires et courbes stables (pages 179 à
+182).}
+\end{itemize}
+
+Ce qui tient ces morceaux ensemble est la question posée aux pages 12 et 13 :
+le groupe de Galois $\Gamma_{\mathbb{Q}} = \mathrm{Gal}(\overline{\mathbb{Q}}/\mathbb{Q})$
+agit sur les groupes fondamentaux profinis des multiplicités modulaires, et
+l'on veut décrire ces groupes assez explicitement pour voir l'action. Les
+formulaires sont la description explicite du cas $(1,1)$ ; les cartes, celle
+du cas $(0,3)$ et de ses revêtements ; le cylindre et le tore, les briques
+dont on recolle les cas supérieurs ; les dernières pages, la combinatoire du
+bord. Les dossiers voisins du même ensemble ont été lus de la même façon : le
+groupe cartographique est esquissé aux pages 9 et 10 du dossier 141, et le
+dossier 145 (« Printemps 81 ») construit l'extension discrète $\mathcal{E}$
+de $\mathfrak{S}_3 \times \mathbb{Z}/2$ par $\pi_{0,3}$ et ses éléments
+$\rho$, $\sigma_i$, $\varepsilon_i$, qui reviennent ici dans les
+formulaires.
+
+\textbf{Trois rédactions, trois conventions.} Les formulaires de 1981, de 1982
+et de juin 1983 ne nomment pas les mêmes matrices : $\sigma_\infty$ de 1982 est
+l'inverse de celui de 1981, et les $\tau_i$, les $\varepsilon_i$ changent en
+conséquence. Grothendieck le dit lui-même (page 30, « Relations avec le
+formulaire 1981 »). Chaque formulaire est lu ici dans ses propres conventions,
+et l'on ne les fusionne pas. De même, la lettre $\rho$ désigne à la fois la
+rotation d'ordre $3$ (ou $6$) des formulaires et, avec un indice, les lacets
+$\rho_0, \rho_1, \rho_\infty$ des cartes ; la distinction se lit à l'indice.
+La lettre bouclée $\varrho_i$ du formulaire de 1982 est un troisième objet,
+le carré $\varepsilon_i^2$.
+
+\subsection*{Les conventions}
+
+\emph{Groupoïdes mixtes.} Pour un groupe $G$ opérant sur un espace $X$, le
+groupoïde fondamental mixte $\Pi_1(X, G)$ a pour objets les points de $X$ ;
+une flèche $x \to y$ est un couple $(\ell, g)$ formé de $g \in G$ et d'une
+classe de chemins $\ell : gx \to y$, et
+\[
+(\ell', g')(\ell, g) = \bigl(\ell' \circ g'(\ell),\ g'g\bigr),
+\]
+les chemins se composant comme des fonctions (page 49). Le groupe
+$\pi_1(X, G; x)$ des automorphismes de $x$ est une extension de $G$ par
+$\pi_1(X, x)$ quand $G$ est discret et opère proprement : c'est le groupe
+fondamental orbifold (ou équivariant) que le dossier 145 appelle
+« à la Malgoire »\footnote{La page 49 écrit $(X, G) = \Pi_1(X, G)$ et la loi
+encadrée ci-dessus. Le dossier écrit ailleurs la même loi sous deux autres
+formes : $(u, l)(u', l') = (uu', u(l')\,l)$ (page 128) et, encadrée,
+$(l, \gamma)(l', \gamma') = (l \cdot \gamma(l'), \gamma\gamma')$ avec
+$l : \gamma a \to a$ (page 172) ; le dossier 145 emploie
+$(\gamma, l)(\gamma', l') = (\gamma\gamma', \gamma'^{-1}(l) \circ l')$ avec
+$l : P \to \gamma^{-1}(P)$. Ce sont des écritures équivalentes d'un même
+groupe, qui diffèrent par le sens donné à la flèche $\ell$.}. On écrit
+$\mathrm{int}(g)(x) = g x g^{-1}$, souvent abrégé $g(x)$ comme sur les pages,
+et $[x, y] = x y x^{-1} y^{-1}$.
+
+\emph{Indices.} Les indices $i \in \{0, 1, \infty\}$ tournent
+circulairement, $0 \mapsto 1 \mapsto \infty \mapsto 0$ ; $i + 1$, $i - 1$
+s'entendent ainsi. $\tau$ désigne la conjugaison complexe ; le module d'une
+courbe elliptique, que la page 41 note aussi $\tau$, est écrit $z$.
+
+\emph{Groupes modulaires.} Pour un type $(g, \nu)$, $M_{g,\nu}$ est la
+multiplicité (le champ) des courbes lisses de genre $g$ à $\nu$ points marqués
+\emph{non ordonnés}, $\mathcal{X}_{g,\nu} \to M_{g,\nu}$ la courbe universelle
+privée des points marqués, $X_{g,\nu}$ une fibre complexe. Avec les lettres de
+la page 12 :
+\[
+\begin{gathered}
+\mathcal{T}^{+}_{g,\nu} = \pi_1(M^{\mathrm{an}}_{g,\nu}), \quad
+\mathfrak{S}^{+}_{g,\nu} = \pi_1(\mathcal{X}^{\mathrm{an}}_{g,\nu}), \quad
+\pi_{g,\nu} = \pi_1(X_{g,\nu}), \\
+\mathcal{N}_{g,\nu} = \pi_1(M_{g,\nu\,\mathbb{Q}}), \quad
+\mathcal{M}_{g,\nu} = \pi_1(\mathcal{X}_{g,\nu\,\mathbb{Q}}) .
+\end{gathered}
+\]
+$\mathcal{T}^{+}_{g,\nu}$ est le groupe modulaire de Teichmüller (classes
+d'homéomorphismes directs permutant les $\nu$ points) ; sans l'exposant $+$,
+on admet les homéomorphismes qui renversent l'orientation. L'exposant $!$
+désigne la partie \emph{pure}, celle qui ne permute pas les points marqués,
+comme au dossier 145. Les chapeaux désignent les complétés profinis.
+$\mathrm{Aut}_{\mathrm{lac}}(\hat\pi)$ est le groupe des automorphismes
+qui préservent les classes de conjugaison des sous-groupes d'inertie (les
+lacets autour des points marqués), aujourd'hui « préservant
+l'inertie »\footnote{La transcription lit l'indice « loc » aux pages 12 à 15 et
+« lac » aux pages 24 et 25, dans les deux cas sans certitude ; c'est le même
+indice que le dossier 145 lit « lac ». Le sens ne fait pas de doute : ce sont
+les automorphismes qui respectent les lacets.}, et
+$\mathrm{Autext}_{\mathrm{lac}}$ son quotient par les automorphismes
+intérieurs.
+
+\pagerange{2}{10}
+\section*{Conversations avec Deligne (pages 2 à 10)}
+
+Sous une chemise de sa main, « Discussion avec Deligne + lettre Barry Mazur »,
+sept pages numérotent onze points notés après des « conversations avec
+Deligne du 30.5 et 5.6 ». Ce sont des notes d'écoute, souvent elliptiques ; on
+les restitue dans l'ordre.
+
+\emph{1) et 2) Points fixes.} Pour un groupe fini opérant sur une surface, la
+théorie de Smith (par les suites spectrales) montre que le lieu des points
+fixes est une variété homologique, donc localement connexe, donc connexe par
+arcs\footnote{La théorie de Smith porte sur les $p$-groupes ; pour un groupe
+fini quelconque, on l'applique à ses sous-groupes cycliques d'ordre premier.
+La page dit seulement « groupes finis ».}. En dimension $3$, ce n'est plus
+vrai sans précaution : un exemple de Bing donne une involution dont le lieu
+fixe est sauvagement plongé (la sphère cornue d'Alexander)\footnote{L'exemple
+de R. H. Bing (1952) est une involution de $S^3$ dont le lieu fixe est une
+$2$-sphère sauvage, la sphère cornue d'Alexander. La page parle de $B^3$ et
+d'un « cercle de points fixes sauvage », puis de $S^2 = \partial B^3$ et de la
+conjugaison complexe, dans une phrase en partie illisible ; on ne restitue pas
+davantage.}.
+
+\emph{3) Actions sur les boules.} Il doit exister des actions simpliciales de
+groupes finis sur $B^n$ (pour $n \geq 5$ ?) qui ne sont pas le cône d'une
+action sur la sphère bord ; cela tient à ce qu'une action d'un groupe fini sur
+une sphère, avec point fixe, n'est pas nécessairement conjuguée
+(topologiquement) à une action orthogonale. Il ajoute : « J'ai pas bien compris
+comment ».
+
+\emph{4) Le groupe fondamental arithmétique d'une courbe.} Pour décrire la
+structure « arithmétique » du groupe fondamental d'une courbe propre et lisse
+sur un corps algébriquement clos, il faudrait définir cohomologiquement les
+intersections de chemins ; la page dessine des chemins orientés entre points
+marqués qui se coupent.
+
+\emph{5) Compactification.} La compactification $\widehat{M}_{g,\nu}$ des
+multiplicités modulaires classe les courbes $X/S$ propres et plates, de
+présentation finie, à fibres géométriquement connexes et réduites n'ayant
+que des points doubles ordinaires, munies de $\nu$ sections lisses, avec un
+groupe d'automorphismes fini — ce qui revient à demander que toute composante
+de genre $0$ porte au moins trois points spéciaux (points marqués ou points
+d'intersection avec les autres composantes). C'est la compactification de
+Deligne et Mumford, qui reviendra aux pages 181 et 182. Il semble qu'on ait
+$\pi_1(\widehat{M}_{g,\nu}) = 1$ pour $g \geq 2$, et pour le genre $1$ un
+groupe cyclique fini d'ordre divisant $12$\footnote{Pour $g \geq 2$ c'est
+exact, et c'est un fait connu : le groupe modulaire est engendré par des
+torsions de Dehn, et chacune devient triviale au voisinage du bord. Pour le
+genre $1$, la page écrit « $g = 1$, $\nu = 0$ », vraisemblablement pour
+$M_{1,1}$. Le même argument donne alors le quotient de $SL(2, \mathbb{Z})$ par
+le sous-groupe distingué engendré par la torsion
+$T = \bigl(\begin{smallmatrix} 1 & 1 \\ 0 & 1 \end{smallmatrix}\bigr)$, et ce
+quotient est trivial : avec $S = \bigl(\begin{smallmatrix} 0 & -1 \\ 1 & 0 \end{smallmatrix}\bigr)$,
+la relation $(ST)^3 = S^2$ devient $S^3 = S^2$, donc $S = 1$ (calcul de cette
+édition). L'ordre $12$ de la page est celui de l'abélianisé de
+$SL(2, \mathbb{Z})$.}. Les générateurs « twist » du groupe de Teichmüller sont
+les lacets autour des composantes irréductibles du bord.
+
+\emph{6) Structure à l'infini.} Pour un schéma lisse connexe $X$ sur un corps
+algébriquement clos, plongé dans une compactification $\widehat{X}$ de bord
+$Y$, le noyau $\pi_1^{\infty}(X)$ de $\pi_1(X) \to \pi_1(\widehat{X})$ est le
+sous-groupe distingué fermé engendré par l'image du groupe fondamental du
+« voisinage épointé » de $Y$ (le complété formel de $\widehat{X}$ le long de
+$Y$, privé de $Y$). Il faudrait expliciter ce groupe local et l'action de
+Galois dessus en termes combinatoires — en supposant $Y$ à croisements
+normaux — et l'on doit pouvoir se ramener par récurrence à la dimension $2$.
+
+\emph{7) Points fixes dans l'espace de Teichmüller.} On espère une métrique
+riemannienne intrinsèque sur l'espace de Teichmüller, qui permettrait, par
+l'existence et l'unicité des géodésiques, de prouver que tout groupe fini
+d'automorphismes a un point fixe ; Deligne pense que c'est vrai. Le dessin
+montre des orbites $x_0, gx_0, \ldots, g^{N-1}x_0$ dont les polygones se
+resserrent vers un point fixe\footnote{C'est le problème de réalisation de
+Nielsen, résolu par S. Kerckhoff (annoncé en 1980, publié en 1983) ; la seconde
+lettre de Deligne y renvoie (page 117). La page dit qu'on n'a pas « défini
+jusqu'à présent de métrique riemannienne intrinsèque, mais bien des métriques
+finsleriennes » : la métrique de Weil–Petersson, kählérienne, existait
+pourtant (Weil, Ahlfors) ; elle n'est pas complète, mais l'argument géométrique
+espéré a été mené par elle (S. Wolpert, 1987).}.
+
+\emph{8) à 11).} Mumford connaîtrait une présentation des groupes de
+Teichmüller par les générateurs habituels ; Bers établit la compactification
+par « chirurgie » des surfaces de Riemann. Le cône sur une variété compacte
+peut être une variété sans que la base soit une sphère : le groupe binaire
+de l'icosaèdre $\Gamma \subset S^3$, d'ordre $120$, a pour image
+$\mathfrak{A}_5 \subset SO(3)$, et $S^3/\Gamma \simeq SO(3)/\mathfrak{A}_5$ —
+l'espace des icosaèdres réguliers inscrits dans une sphère donnée — est une
+sphère d'homologie qui n'est pas une sphère ; sa suspension n'est pas une
+variété (aux deux pôles le groupe fondamental local est $\Gamma$), mais sa
+double suspension est une variété, homéomorphe à $S^5$\footnote{C'est le
+théorème de la double suspension (R. D. Edwards pour cet exemple, J. Cannon
+en général, 1979) ; la marge renvoie à « Edwards, Exposé Bourbaki 1977--78
+(Cannon, 515) ». Le « $4$-groupe » de la page est d'une lecture douteuse ; le
+groupe d'ordre $120$ de $S^3$ est le groupe binaire de l'icosaèdre.}. Pour
+donner des conditions locales sur un espace stratifié conique, il faudrait se
+placer dans le cadre PL plutôt que topologique. Les groupes d'automorphismes
+des « cartes » régulières simplement connexes, en toute dimension, sont des
+groupes de Coxeter ; d'après Deligne, ils figurent tous dans Bourbaki, les
+finis comme décompositions de sphères, les infinis — dans le cas où la forme
+invariante est hyperbolique — sur une composante de la sphère unité de la
+forme\footnote{La page écrit d'abord « connexes », puis Deligne précise
+« simplement connexes ». Pour une carte régulière seulement connexe, le groupe
+d'automorphismes est un quotient d'un tel groupe de Coxeter, non un groupe de
+Coxeter en général.}. Enfin, le lien entre l'icosaèdre et $E_8$ : une forme
+quadratique de rang $4$ sur l'anneau des entiers
+$\mathbb{Z}[\alpha] = \mathbb{Z}[T]/(T^2 + T - 1)$ de $\mathbb{Q}(\sqrt{5})$,
+composée avec la trace, donne la forme de $E_8$, « mais attention : la
+ramification en $5$ »\footnote{C'est la construction de $E_8$ par les
+« icosiens » (J. Tits, 1980 ; J. H. Conway et N. Sloane) : il faut composer avec
+une trace tordue, précisément à cause de la ramification en $5$.}.
+
+Les pages 9 et 10 sont une lettre dactylographiée de Barry Mazur, avec un
+post-scriptum manuscrit ; la transcription la résume sans la transcrire. Selon
+cette notice, elle répond aux questions d'une lettre de Grothendieck — un
+contre-exemple de Deligne à une question sur les extensions de groupes finis,
+une involution de la boule à lieu fixe sauvage, les sous-groupes finis du
+groupe de Teichmüller — et fixe la date de sa visite ; le post-scriptum
+rapporte ce qu'en disent Siebenmann et Kravitz. On n'en dit pas davantage
+(RIGHTS.md).
+
+\pagerange{12}{27}
+\section*{Les groupes fondamentaux des multiplicités modulaires (pages 12 à 27)}
+
+\pagerange{12}{13}
+\subsection*{Définitions et suites exactes (pages 12 et 13)}
+
+La page porte en marge « 1982 ». Soit $\xi_0$ un point complexe de
+$M_{g,\nu}$, c'est-à-dire une courbe complexe $X_{g,\nu}$ de type $(g,\nu)$,
+et $x_0$ un point de $X_{g,\nu}$ ; ils définissent des points géométriques de
+$M_{g,\nu\,\mathbb{Q}}$ et de $\mathcal{X}_{g,\nu\,\mathbb{Q}}$, et des points
+des espaces analytiques correspondants. Le groupe $\mathfrak{S}^{+}_{g,\nu}$
+s'identifie au groupe modulaire $\mathcal{T}_{g,\nu+1,\nu}$ des surfaces à
+$\nu + 1$ points dont $\nu$ sont permutés et le dernier fixé — on a ajouté le
+point base de la fibre\footnote{La courbe universelle privée des $\nu$ points
+marqués est la multiplicité des courbes à $\nu + 1$ points dont un distingué ;
+c'est l'identification $\mathcal{X}_{g,\nu} \simeq M_{g,\nu+1,\nu}$ du
+diagramme (1). Le dossier la sous-entend.}. On a les suites exactes
+\[
+(2)\qquad 1 \to \pi_{g,\nu} \to \mathfrak{S}^{+}_{g,\nu} \to \mathcal{T}^{+}_{g,\nu} \to 1,
+\qquad
+(3)\qquad 1 \to \hat\pi_{g,\nu} \to \hat{\mathfrak{S}}^{+}_{g,\nu} \to \hat{\mathcal{T}}^{+}_{g,\nu} \to 1,
+\]
+la seconde complétée de la première, avec des flèches verticales vers
+$1 \to \pi \to \mathrm{Aut}_{\mathrm{lac}}(\pi) \to \mathrm{Autext}_{\mathrm{lac}}(\pi)$.
+Dans le cas discret, ces flèches sont injectives\footnote{C'est le théorème de
+Dehn–Nielsen–Baer, pour $2g - 2 + \nu > 0$. La page marque les flèches de (2)
+d'un petit signe lu « $i$ ». Pour (3), elle met un point d'interrogation : que
+$\hat{\mathcal{T}}^{+}_{g,\nu} \to \mathrm{Autext}(\hat\pi_{g,\nu})$ soit
+injectif est le problème des sous-groupes de congruence pour les groupes
+modulaires, résolu en genre $0$ et $1$ (M. Asada) et $2$ (M. Boggi), ouvert
+en général à notre connaissance.}. Par les théorèmes de comparaison,
+\[
+(4)\qquad \hat{\mathcal{T}}^{+}_{g,\nu} \simeq \pi_1(M_{g,\nu\,\mathbb{C}}) \simeq \pi_1(M_{g,\nu\,\overline{\mathbb{Q}}}),
+\]
+et de même pour $\hat{\mathfrak{S}}^{+}$ et $\hat\pi$. La suite exacte
+d'homotopie pour $M_{g,\nu\,\mathbb{Q}} \to \operatorname{Spec}\mathbb{Q}$,
+dont les fibres géométriques sont connexes, donne le diagramme
+\[
+(5)\qquad
+\begin{gathered}
+1 \to \hat{\mathcal{T}}^{+}_{g,\nu} \to \mathcal{N}_{g,\nu} \to \Gamma_{\mathbb{Q}} \to 1, \\
+1 \to \hat{\mathfrak{S}}^{+}_{g,\nu} \to \mathcal{M}_{g,\nu} \to \Gamma_{\mathbb{Q}} \to 1,
+\end{gathered}
+\]
+où $\mathcal{M}_{g,\nu} \to \mathcal{N}_{g,\nu}$ est surjectif de noyau
+$\hat\pi_{g,\nu}$. Les groupes non pointés $\hat{\mathcal{T}}_{g,\nu}$,
+$\hat{\mathfrak{S}}_{g,\nu}$ sont les images inverses de
+$\{1, \tau\} \subset \Gamma_{\mathbb{Q}}$ : ce sont les groupes fondamentaux
+des multiplicités sur $\mathbb{R}$, et ils contiennent les complétés des groupes
+modulaires étendus, qui admettent les renversements d'orientation. L'action
+sur les $\nu$ points donne des morphismes vers $\mathfrak{S}_\nu$, dont les
+noyaux sont les groupes purs $\mathcal{T}^{+!}$, $\mathcal{N}^{!}$, etc.
+
+Comme $\hat\pi_{g,\nu}$ est distingué dans $\mathcal{M}_{g,\nu}$, l'action par
+conjugaison donne
+\[
+(9)\qquad \mathcal{M}_{g,\nu} \to \mathrm{Aut}_{\mathrm{lac}}(\hat\pi_{g,\nu}), \qquad
+\mathcal{N}_{g,\nu} \to \mathrm{Autext}_{\mathrm{lac}}(\hat\pi_{g,\nu}),
+\]
+prolongeant (2) et (3). L'image $\mathcal{M}'_{g,\nu}$ de $\mathcal{M}_{g,\nu}$
+normalise celle, $\hat{\mathcal{T}}'_{g,\nu}$, du « Teichmüller profini », et
+le quotient $\mathcal{M}'_{g,\nu}/\hat{\mathcal{T}}'_{g,\nu}$ est un quotient de
+$\Gamma_{\mathbb{Q}}$. Grothendieck note qu'on peut prouver que c'est
+$\Gamma_{\mathbb{Q}}$ lui-même pour $g$ fixé et $\nu$ grand, et pense que c'est
+toujours le cas. Pour $g = 0$, le cas critique est $\nu = 3$, et c'est le
+théorème de Belyi : $\Gamma_{\mathbb{Q}} \hookrightarrow
+\mathrm{Autext}_{\mathrm{lac}}(\hat\pi_{0,3})$. On a alors
+\[
+\mathcal{N}_{0,3} \simeq \hat{\mathcal{T}}^{+}_{0,3} \times \mathcal{N}^{!}_{0,3},
+\qquad \hat{\mathcal{T}}^{+}_{0,3} = \mathcal{T}^{+}_{0,3} = \mathfrak{S}_3,
+\qquad \mathcal{N}^{!}_{0,3} \simeq \Gamma_{\mathbb{Q}},
+\]
+puisque $M_{0,3}$ est le classifiant de $\mathfrak{S}_3$ au-dessus de
+$\mathbb{Q}$\footnote{La fidélité de l'action extérieure de
+$\Gamma_{\mathbb{Q}}$ sur $\hat\pi_{g,\nu}$ a été établie depuis pour toutes
+les courbes hyperboliques (M. Matsumoto, 1996, pour les courbes affines ;
+Y. Hoshi et S. Mochizuki, 2011, pour les propres). L'énoncé de la page, sur le
+quotient par l'image du Teichmüller profini, est plus fort ; le dossier
+l'annonce pour $g = 1$ (« cas critique $\nu = 1$ ») et s'arrête en bas de
+page.}.
+
+\pagerange{14}{17}
+\subsection*{Une courbe pointée sur un corps algébriquement clos (pages 14 à 17)}
+
+Soit $k$ une extension algébriquement close de $\mathbb{Q}$, $X$ une courbe de
+type $(g, \nu)$ sur $k$, $x \in X$. Ils définissent des points géométriques
+$\xi$ de $M_{g,\nu}$ et $x$ de $\mathcal{X}_{g,\nu}$, d'où des groupes
+$\pi_{X,x}$, $\mathfrak{S}_{X,x}$, $\mathcal{T}_X$, $\mathcal{M}_{X,x}$,
+$\mathcal{N}_X$ (les mêmes que plus haut, avec ces points base) et un
+diagramme de suites exactes analogue à (5), où $\Gamma_{\mathbb{Q}}$ est
+remplacé par $\Gamma_{\widetilde{\mathbb{Q}}/\mathbb{Q}}$, $\widetilde{\mathbb{Q}}$
+désignant la clôture algébrique de $\mathbb{Q}$ dans $k$\footnote{La page 14
+écrit $\mathcal{M}_X = \pi_1(M_{g,\nu}, \xi)$ et
+$\mathcal{N}_{X,x} = \pi_1(\mathcal{X}_{g,\nu}, x)$, intervertissant les deux
+lettres par rapport à la page 12 ; son propre diagramme (12) revient à l'usage
+de la page 12, qu'on suit ici. La page 18 écrit $M$, $N$ en capitales
+droites.}.
+
+Un isomorphisme extérieur canonique $\mathcal{M}_{X,x} \simeq \mathcal{M}_{g,\nu}$
+(défini à automorphisme intérieur près) identifie les deux diagrammes ; il
+induit un isomorphisme $\pi_{X,x} \simeq \hat\pi_{g,\nu}$ défini seulement
+modulo l'action de $\mathcal{M}_{g,\nu}$. C'est une \emph{structure
+supplémentaire} sur le groupe profini $\pi_{X,x}$ : une « arithmétisation »,
+une réduction du groupe structural de $\mathrm{Autext}_{\mathrm{lac}}(\hat\pi)$
+à l'image $\mathcal{N}'_{g,\nu}$ de $\mathcal{N}_{g,\nu}$. Plus finement, sans
+supposer $\mathcal{N}_{g,\nu} \to \mathcal{N}'_{g,\nu}$ injectif, on a le
+torseur à droite sous $\mathcal{M}_{g,\nu}$
+\[
+(15)\qquad P_{X,x} = \mathrm{Isom}(x_0, x) \quad \text{dans le groupoïde fondamental de } \mathcal{X}_{g,\nu\,\mathbb{Q}},
+\]
+et un morphisme $P_{X,x} \to \mathrm{Isom}_{\mathrm{lac}}(\hat\pi_{g,\nu}, \pi_{X,x})$
+compatible à (9), d'où, en divisant par $\hat\pi$, le torseur
+$Q_X = P_{X,x}/\hat\pi \simeq \mathrm{Isom}(\xi_0, \xi)$ sous
+$\mathcal{N}_{g,\nu}$ et $Q_X \to \mathrm{Isomext}_{\mathrm{lac}}(\hat\pi, \pi_{X,x})$.
+Étendant le groupe structural de $Q_X$ à $\Gamma_{\mathbb{Q}}$, on obtient un
+$\Gamma_{\mathbb{Q}}$-torseur canonique\footnote{La page écrit
+$R_X = Q_X \wedge^{\mathcal{N}_{g,\nu}} \Gamma_{\mathbb{Q}} \simeq R_X/\hat{\mathcal{T}}^{+}_{g,\nu}$ ;
+le second membre doit se lire $Q_X/\hat{\mathcal{T}}^{+}_{g,\nu}$, puisque
+$\mathcal{N}/\hat{\mathcal{T}}^{+} = \Gamma_{\mathbb{Q}}$.}
+\[
+(18)\text{--}(19)\qquad R_X = Q_X \wedge^{\mathcal{N}_{g,\nu}} \Gamma_{\mathbb{Q}} \simeq Q_X/\hat{\mathcal{T}}^{+}_{g,\nu}
+\simeq \mathrm{Isom}(\overline{\mathbb{Q}}, \widetilde{\mathbb{Q}}) \simeq \{\text{plongements } \overline{\mathbb{Q}} \to k\}.
+\]
+Trivialiser $R_X$ — réduire le groupe structural de $Q_X$ à
+$\hat{\mathcal{T}}^{+}_{g,\nu}$, ou celui de $P_{X,x}$ à
+$\hat{\mathfrak{S}}^{+}_{g,\nu}$ — revient donc à choisir un plongement
+$\overline{\mathbb{Q}} \to k$.
+
+Un plongement $\varphi : k \hookrightarrow \mathbb{C}$ fait mieux : il réduit
+le groupe structural de $P_{X,x}$ au groupe \emph{discret}
+$\mathfrak{S}^{+}_{g,\nu}$, et celui de $Q_X$ à $\mathcal{T}^{+}_{g,\nu}$
+(on obtient des sous-torseurs $P^{\varphi}_{X,x} \subset P_{X,x}$,
+$Q^\varphi_X \subset Q_X$) : c'est une « structure de discrétification » du
+groupe profini $\pi_{X,x}$\footnote{Ces sous-groupes discrets sont plongés dans
+leurs complétés, les groupes modulaires étant résiduellement finis
+(E. Grossman). La page le sous-entend.}. Leurs adhérences ne retiennent
+plus que la réduction à $\hat{\mathfrak{S}}^{+}$, c'est-à-dire, par ce qui
+précède, le plongement $\varphi|_{\widetilde{\mathbb{Q}}}$. Grothendieck pense
+pourtant que la connaissance des $P^{\varphi}_{X,x}$ eux-mêmes, pour toutes
+les courbes $X$ et tous les types, détermine $\varphi$.
+
+\pagerange{18}{20}
+\subsection*{Récapitulation (pages 18 à 20)}
+
+Un feuillet « 4) Récapitulation (II) » reprend la même situation avec
+$k$ algébriquement clos de caractéristique $0$ : le diagramme de suites
+exactes
+\[
+1 \subset \pi_{X,x} \subset \mathfrak{S}_{X,x} \subset \mathcal{M}_{X,x},
+\qquad \mathfrak{S}_{X,x}/\pi_{X,x} = \mathcal{T}_X, \quad
+\mathcal{M}_{X,x}/\mathfrak{S}_{X,x} = \Gamma_{\widetilde{\mathbb{Q}}/\mathbb{Q}},
+\]
+s'obtient tout entier du diagramme de référence attaché à $(X_0, x_0)$ par
+produit contracté avec le torseur $P_{X,x}$, sur lequel $\mathcal{M}_{g,\nu}$
+opère par automorphismes intérieurs en respectant sa filtration :
+\[
+\pi_{X,x} \simeq P_{X,x} \wedge^{\mathcal{M}_{g,\nu}} \hat\pi_{g,\nu}, \quad
+\mathfrak{S}_{X,x} \simeq P_{X,x} \wedge^{\mathcal{M}_{g,\nu}} \hat{\mathfrak{S}}_{g,\nu}, \quad \ldots, \quad
+\widetilde{\mathbb{Q}} \simeq P_{X,x} \wedge^{\mathcal{M}_{g,\nu}} \overline{\mathbb{Q}} .
+\]
+Mais la donnée du torseur ne permet pas de retrouver $X$ : les
+automorphismes de $P_{X,x}$ forment le groupe $\mathcal{M}_{X,x}$, qui a la
+puissance du continu, alors que les automorphismes de $(X, x)$ induisant
+l'identité sur $k$ forment un groupe fini. D'où l'idée d'utiliser que $k$ est
+réunion filtrante de sous-corps $K_i$ de type fini sur $\mathbb{Q}$, et que
+$(X, x)$ est défini sur l'un d'eux.
+
+\pagerange{21}{25}
+\subsection*{Courbes définies sur un corps de type fini (pages 21 à 25)}
+
+Soit $K \subset k$ de type fini sur $\mathbb{Q}$ sur lequel $(X, x)$ est
+défini, et $\overline{K}$ sa clôture algébrique dans $k$. Posons
+$\mathcal{M}_{X,x,K} = \pi_1(\mathcal{X}_{g,\nu\,K}, x)$,
+$\mathcal{N}_{X,K} = \pi_1(M_{g,\nu\,K}, \xi)$ et
+$\Gamma_{K} = \mathrm{Gal}(\overline{K}/K)$. On a les mêmes suites exactes,
+$K$ remplaçant $\mathbb{Q}$, et elles se déduisent des précédentes par
+changement de base le long de $\Gamma_K \to \Gamma_{\widetilde{\mathbb{Q}}/\mathbb{Q}}$ :
+\[
+(12)\qquad \mathcal{M}_{X,x,K} \simeq \mathcal{M}_{X,x} \times_{\Gamma_{\widetilde{\mathbb{Q}}/\mathbb{Q}}} \Gamma_K,
+\qquad \mathcal{N}_{X,K} \simeq \mathcal{N}_{X} \times_{\Gamma_{\widetilde{\mathbb{Q}}/\mathbb{Q}}} \Gamma_K .
+\]
+Le point rationnel $x \in \mathcal{X}_{g,\nu}(K)$ définit alors une
+\emph{section} de $\mathcal{M}_{X,x,K} \to \Gamma_K$, c'est-à-dire un
+relèvement $\Gamma_K \to \mathcal{M}_{X,x}$ de $\Gamma_K \to \Gamma_{\widetilde{\mathbb{Q}}/\mathbb{Q}}$
+(14) ; de même $\xi \in M_{g,\nu}(K)$ définit un relèvement
+$\Gamma_K \to \mathcal{N}_X$ (14'). « Je pense que ces données permettent de
+reconstituer $(K, \overline{K}, (X, x))$, resp. $(K, \overline{K}, X)$. » Elles
+impliquent des morphismes
+\[
+(15)\qquad \Gamma_K \to \mathrm{Aut}_{\mathrm{lac}}(\pi_{X,x}), \qquad
+(15')\qquad \Gamma_K \to \mathrm{Autext}_{\mathrm{lac}}(\pi_{X,x}).
+\]\footnote{Ce
+sont les deux énoncés qui deviendront la conjecture anabélienne (la courbe est
+déterminée par l'action extérieure de son groupe de Galois) et la conjecture
+des sections (les points rationnels correspondent aux sections), formulées
+dans la lettre de Grothendieck à G. Faltings de juin 1983. Ces pages, de
+1982, en sont une forme antérieure ; la conjecture anabélienne a été démontrée
+pour les courbes hyperboliques (H. Nakamura, A. Tamagawa, S. Mochizuki), la
+conjecture des sections reste ouverte.}
+La page 25, rapide et à demi lisible, esquisse comment ces données, avec une
+discrétification stable par $\Gamma$, se traduisent en torseurs sous
+$\mathcal{M}'_{g,\nu} \subset \mathrm{Aut}_{\mathrm{lac}}(\hat\pi_{g,\nu})$ ou
+sous $\mathcal{N}'_{g,\nu}$\footnote{La transcription précise que seules les
+formules et les mots « torseur », « discrétisations », « stable par l'action de
+$\Gamma$ » de cette page sont sûrs ; on n'en restitue pas davantage.}.
+
+\pagerange{26}{27}
+\subsection*{Discrétifications (pages 26 et 27)}
+
+Soit $K$ de type fini sur $\mathbb{Q}$ et $\overline{K}$ une clôture
+algébrique. Une \emph{$D$-structure} (ou discrétification) sur $\overline{K}$
+est la donnée, pour toute courbe $X$ de type $(g, \nu)$ sur $\overline{K}$,
+d'une discrétification de $\pi_1(X)$ ; elle est \emph{spéciale} si elle
+provient d'un plongement $\varphi : \overline{K} \to \mathbb{C}$, par le
+groupe fondamental topologique de $X \otimes_\varphi \mathbb{C}$. Tout
+$K$-isomorphisme $\overline{K} \to \overline{K}'$ transporte les
+$D$-structures ; en particulier $\Gamma = \mathrm{Aut}_K(\overline{K})$ opère
+sur l'ensemble $\mathrm{Discspec}(\overline{K})$ des discrétifications
+spéciales, et l'application
+\[
+\mathrm{Hom}(\overline{K}, \mathbb{C}) \longrightarrow \mathrm{Discspec}(\overline{K})
+\]
+est surjective et compatible aux actions de $\Gamma$. La page énonce une
+proposition — deux clôtures munies de discrétifications spéciales sont
+$K$-isomorphes de façon compatible — et un corollaire — deux
+discrétifications spéciales sur $\overline{K}$ sont conjuguées par $\Gamma$, à
+un sous-groupe d'indice fini près —, sans preuve. La remarque qui suit en
+limite la portée : deux plongements $\varphi, \varphi'$ sont conjugués par
+$\Gamma$ si et seulement si $\varphi|_K = \varphi'|_K$ et
+$\varphi(\overline{K}) = \varphi'(\overline{K})$, « conditions des plus
+draconiennes » ; la marge restreint la transitivité au cas où $K$ est
+algébrique sur $\mathbb{Q}$\footnote{Le critère de conjugaison est exact (si
+les deux conditions valent, $\varphi^{-1}\varphi'$ est un $K$-automorphisme de
+$\overline{K}$). La proposition et le corollaire, eux, ne sont vrais que si la
+discrétification oublie assez de $\varphi$ ; c'est précisément la question
+posée ensuite, et on ne les affirme pas.}. D'où la question : l'application
+$\mathrm{Hom}(\overline{K}, \mathbb{C}) \to \mathrm{Discspec}(\overline{K})$
+peut-elle être injective\footnote{Si une discrétification n'est que la donnée
+des sous-groupes discrets, la réponse est négative : $\varphi$ et son
+conjugué $\bar\varphi = \tau \circ \varphi$ donnent le même sous-groupe, car
+la conjugaison complexe $X_\varphi(\mathbb{C}) \to X_{\bar\varphi}(\mathbb{C})$
+est un homéomorphisme compatible aux identifications avec le groupe
+fondamental étale de $X$ (observation de cette édition). Elle ne préserve pas
+l'orientation des lacets ; une discrétification qui retient cette orientation
+pourrait séparer $\varphi$ de $\bar\varphi$. La page ne précise pas.} ? Le
+feuillet s'achève sur deux mots-clés : la structure de Hodge mixte sur
+$\pi_1$ et sur son abélianisé, $\pi_{1,\mathrm{ab}} \otimes \mathbb{C}$, ou
+la structure complexe sur $\pi_{1,\mathrm{ab}} \otimes \mathbb{R}$.
+
+\pagerange{29}{39}
+\section*{Formulaires pour $GL(2, \mathbb{Z})$ et son extension (pages 29 à 39)}
+
+Une chemise de couleur, « Formulaire pour $\pi_{0,3}$ etc. Pt de vue
+transcendant pour $M_{1,1}$ », ouvre cette partie. Le groupe
+$GL(2, \mathbb{Z})/\{\pm 1\}$ est le groupe fondamental mixte de la sphère privée
+de $0, 1, \infty$ sous $\mathfrak{S}_3 \times \{1, \tau\}$ (pages 71 et 72
+ci-dessous, et le groupe $\mathcal{E}$ du dossier 145) ; c'est pourquoi un
+formulaire de matrices entières est un formulaire pour $\pi_{0,3}$.
+
+\pagerange{29}{30}
+\subsection*{Le formulaire de 1982 (pages 29 et 30)}
+
+On pose $\omega = -1$ et
+\[
+\rho = \begin{pmatrix} 0 & 1 \\ -1 & 1 \end{pmatrix}, \quad
+\sigma_\infty = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}, \quad
+\sigma_0 = \begin{pmatrix} -1 & 1 \\ -2 & 1 \end{pmatrix}, \quad
+\sigma_1 = \begin{pmatrix} -1 & 2 \\ -1 & 1 \end{pmatrix},
+\]
+de sorte que $\rho^3 = \omega$, $\rho^6 = 1$, $\sigma_i^2 = \omega$ et
+$\rho\sigma_i\rho^{-1} = \sigma_{i+1}$. Puis
+\[
+\varepsilon_0 = \sigma_\infty^{-1}\rho = \begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix}, \quad
+\varepsilon_1 = \rho\sigma_\infty^{-1} = \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix}, \quad
+\varepsilon_\infty = \rho^2\sigma_\infty^{-1}\rho^{-1} = \begin{pmatrix} 2 & -1 \\ 1 & 0 \end{pmatrix},
+\]
+unipotents, avec $\rho\varepsilon_i\rho^{-1} = \varepsilon_{i+1}$ et, en
+général, $\varepsilon_i = \sigma_{i-1}^{-1}\rho = \rho\,\sigma_{i+1}^{-1}$\footnote{La
+page écrit $\varepsilon_i = \sigma_i^{-1}\rho$, qui est faux pour chaque $i$
+avec ses propres matrices ; l'indice juste est $i - 1$, comme le montre le cas
+encadré $\varepsilon_0 = \sigma_\infty^{-1}\rho$.}. Les carrés
+$\varrho_i = \varepsilon_i^2$ sont
+$\bigl(\begin{smallmatrix} 1 & -2 \\ 0 & 1 \end{smallmatrix}\bigr)$,
+$\bigl(\begin{smallmatrix} 1 & 0 \\ 2 & 1 \end{smallmatrix}\bigr)$,
+$\bigl(\begin{smallmatrix} 3 & -2 \\ 2 & -1 \end{smallmatrix}\bigr)$, et
+\[
+\varrho_\infty\varrho_1\varrho_0 = \omega, \qquad
+\varrho'_\infty\varrho'_1\varrho'_0 = 1 \quad (\varrho'_i = \omega\varrho_i), \qquad
+\sigma_i\sigma_{i+1} = \omega\rho\varrho_i = \omega\varrho_{i+1}\rho, \qquad
+\sigma_i(\rho) = \rho^{-1}\varrho'_{i-1} .
+\]
+Les $\varrho'_i$ sont les images des trois lacets de $\pi_{0,3}$ ; la marge
+note $\varepsilon_i = 1 + N_i$, $N_i$ nilpotente.
+
+Les réflexions sont
+\[
+\tau_\infty = \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}, \quad
+\tau_0 = \begin{pmatrix} 1 & 0 \\ 2 & -1 \end{pmatrix}, \quad
+\tau_1 = \begin{pmatrix} 1 & -2 \\ 0 & -1 \end{pmatrix}, \qquad
+\tau_i^2 = 1, \quad \tau_i\tau_{i-1} = \varrho'_{i+1},
+\]
+et $\tau'_i = \sigma_i\tau_i = \omega\tau_i\sigma_i = \tau_i\sigma_i^{-1}$,
+d'ordre $2$, avec $\tau'_\infty = \bigl(\begin{smallmatrix} 0 & 1 \\ 1 & 0 \end{smallmatrix}\bigr)$,
+$\tau'_0\tau'_1 = \tau'_1\tau'_\infty = \tau'_\infty\tau'_0 = \omega\rho$ et
+$\sigma_i = \tau'_i\tau_i = \omega\tau_i\tau'_i$. Les actions par conjugaison :
+$\tau_i(\varepsilon_j) = \varepsilon_j^{-1}$ et
+$\tau_i(\varrho_j) = \varrho_j^{-1}$ pour $i \neq j$ ; $\tau_i(\sigma_i) = \sigma_i^{-1}$ ;
+$\tau'_i(\rho) = \rho^{-1}$ ; $\tau_i(\rho) = \varrho_{i-1}'^{-1}\rho = \sigma_i(\rho^{-1})$ ;
+$\sigma_i(\varepsilon_{i+1}) = \varepsilon_{i+2}$, $\sigma_i(\varrho_{i+1}) = \varrho_{i+2}$,
+$\sigma_i(\varrho_i) = \omega(\varrho_{i+1}\varrho_{i+2})^{-1} = \varrho_{i+1}(\varrho_i)$\footnote{Toutes
+ces relations ont été vérifiées sur les matrices. Une seule ligne de la page ne
+l'est pas : parmi les trois expressions de $\tau_\infty(\varrho_\infty)$, les
+deux premières, $\varrho_0\varrho_1\omega$ et $\varrho_1^{-1}(\varrho_\infty^{-1})$,
+sont justes, la troisième, lue $\varrho_0^{-1}(\varrho_\infty^{-1})$ avec doute,
+ne l'est pas.}.
+
+\emph{Présentations.} Posons $\lambda_0 = \varepsilon_0$, $\lambda_1 = \sigma_\infty$,
+$\lambda_\infty = \rho^{-1}$ (donc $\lambda_\infty\lambda_1\lambda_0 = 1$,
+$\lambda_1^4 = \lambda_\infty^6 = 1$) et
+\[
+\begin{gathered}
+\Gamma_0 = \tau'_\infty = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \quad
+\Gamma_1 = -\tau'_0 = \begin{pmatrix} -1 & 1 \\ 0 & 1 \end{pmatrix}, \quad
+\Gamma_\infty = \tau_\infty, \\
+\Gamma_\infty\Gamma_1 = \lambda_0, \quad \Gamma_0\Gamma_\infty = \lambda_1, \quad \Gamma_1\Gamma_0 = \lambda_\infty .
+\end{gathered}
+\]
+Le groupe $\pi^{\tau}_{0,3}$, produit libre de trois groupes d'ordre $2$
+engendrés par des $\tau_i$ (page 57 ci-dessous), s'envoie surjectivement sur
+$GL(2, \mathbb{Z})$ par $\tau_i \mapsto \Gamma_i$, et son sous-groupe
+d'indice $2$, $\pi_{0,3}$, sur $SL(2, \mathbb{Z})$, les lacets allant sur les
+$\lambda_i$. Et
+\[
+SL(2, \mathbb{Z}) = \langle \rho, \sigma \mid \rho^3 = \sigma^2,\ \sigma^4 = 1 \rangle \simeq \mathbb{Z}/6 *_{\mathbb{Z}/2} \mathbb{Z}/4,
+\]
+\[
+GL(2, \mathbb{Z}) = \langle \Gamma_0, \Gamma_1, \Gamma_\infty \mid
+\Gamma_i^2 = 1,\ (\Gamma_0\Gamma_\infty)^2 = (\Gamma_1\Gamma_0)^3 = (\Gamma_1\Gamma_0)^{-3} \rangle
+\simeq D_6 *_{D_2} D_4 ,
+\]
+où $D_m$ est le groupe diédral d'ordre $2m$ ; l'élément
+$(\Gamma_0\Gamma_\infty)^2 = (\Gamma_1\Gamma_0)^3 = \omega$ est central, et le
+quotient par lui est le groupe de Coxeter de type $(2, 3, \infty)$,
+$PGL(2, \mathbb{Z})$. Enfin $\Gamma_0$ inverse $\rho$ et $\sigma = \sigma_\infty$,
+$\Gamma_1 = \rho^{-1}\Gamma_0 = \Gamma_0\rho$ et
+$\Gamma_\infty = \sigma^{-1}\Gamma_0 = \Gamma_0\sigma$\footnote{La page écrit
+$\Gamma_\infty = \sigma\Gamma_0 = \Gamma_0\sigma^{-1}$, qui est la formule du
+formulaire de 1981 (page 33), où $\sigma_\infty$ est l'inverse de celui-ci ;
+avec les matrices de 1982, elle n'est vraie qu'au signe $\omega$ près.}.
+
+\emph{Relations avec le formulaire de 1981.} Les $\sigma_i$ sont devenus les
+$\sigma_i^{-1}$ ; les carrés $\varepsilon_i^2$, autrefois notés autrement, sont
+devenus les $\varrho_i$, et $\varrho'_i = \omega\varrho_i$ vérifie
+$\varrho'_\infty\varrho'_1\varrho'_0 = 1$.
+
+\pagerange{31}{32}
+\subsection*{L'extension centrale par $\mathbb{Z}$ et le groupe des tresses (pages 31 et 32)}
+
+La page 31, datée de 1982, introduit une extension
+$1 \to \mathbb{Z} \xrightarrow{k} GL(2, \mathbb{Z})^{\sim} \to GL(2, \mathbb{Z}) \to 1$,
+où $GL(2, \mathbb{Z})$ opère sur $\mathbb{Z}$ par le déterminant ; $k(\mathbb{Z})$
+est central dans $SL(2, \mathbb{Z})^{\sim}$, image inverse de $SL(2, \mathbb{Z})$,
+mais non dans $GL(2, \mathbb{Z})^{\sim}$. C'est l'image inverse de
+$SL(2, \mathbb{Z})$ dans le revêtement universel de $SL(2, \mathbb{R})$ — le
+groupe $ST_{1,1}$ des pages 41 à 46 —, prolongée par la conjugaison. On note
+$\ell'_0 = k(1)$, et $\tilde\rho$, $\tilde\sigma$, $\tilde\omega_0$ des
+relèvements de $\rho$, $\sigma$, $\omega$ avec
+\[
+\tilde\rho^{-3} = \tilde\sigma^2 = \tilde\omega_0, \qquad \tilde\omega_0^2 = \ell'_0 .
+\]
+Un relèvement $\tilde\tau'$ de $\tau'$ est « nécessairement » d'ordre $2$ :
+c'est exact, car tous les relèvements ont même carré, élément de $\mathbb{Z}$
+que $\tilde\tau'$ doit à la fois fixer et inverser\footnote{Justification de
+cette édition. Les autres relations de la ligne,
+$\tilde\tau'(\tilde\rho) = \tilde\rho^{-1}$ et
+$\tilde\tau'(\tilde\sigma) = \tilde\sigma^{-1}$, dépendent du choix des
+relèvements ; elles valent pour celui que donne la présentation ci-dessous.}.
+Posant $\tilde\varepsilon_0 = \tilde\sigma\tilde\rho$,
+$\tilde\varepsilon_1 = \tilde\rho\tilde\sigma = \tilde\rho(\tilde\varepsilon_0)$,
+on trouve $\tilde\varepsilon_1\tilde\varepsilon_0 = \tilde\rho^{-1}$ et
+$\tilde\sigma = \tilde\varepsilon_0\tilde\varepsilon_1\tilde\varepsilon_0 = \tilde\varepsilon_1\tilde\varepsilon_0\tilde\varepsilon_1$, d'où
+\[
+SL(2, \mathbb{Z})^{\sim} = \langle \tilde\rho, \tilde\sigma \mid \tilde\rho^3\tilde\sigma^2 = 1 \rangle
+= \langle \tilde\varepsilon_0, \tilde\varepsilon_1 \mid
+\tilde\varepsilon_0\tilde\varepsilon_1\tilde\varepsilon_0 = \tilde\varepsilon_1\tilde\varepsilon_0\tilde\varepsilon_1 \rangle .
+\]
+C'est le groupe des tresses à trois brins $B_3$ ; $\tilde\omega_0 = (\tilde\varepsilon_1\tilde\varepsilon_0)^3$
+engendre son centre et $\ell'_0 = \tilde\omega_0^2$ le noyau de
+$B_3 \to SL(2, \mathbb{Z})$\footnote{L'identification à $B_3$ est de cette
+édition ; la page n'emploie pas le mot de tresse, mais la relation encadrée est
+celle d'Artin.}. Pour l'extension à $GL$ :
+\[
+\begin{gathered}
+GL(2, \mathbb{Z})^{\sim} = \langle \tilde\rho, \tilde\sigma, \tilde\Gamma_0 \mid
+\tilde\Gamma_0^2 = \tilde\rho^3\tilde\sigma^2 = 1,\ \tilde\Gamma_0(\tilde\rho) = \tilde\rho^{-1},\ \tilde\Gamma_0(\tilde\sigma) = \tilde\sigma^{-1} \rangle \\
+= \langle \tilde\Gamma_0, \tilde\Gamma_1, \tilde\Gamma_\infty \mid
+\tilde\Gamma_i^2 = (\tilde\Gamma_1\tilde\Gamma_0)^3(\tilde\Gamma_0\tilde\Gamma_\infty)^2 = 1 \rangle,
+\end{gathered}
+\]
+la seconde forme avec $\tilde\Gamma_1 = \tilde\Gamma_0\tilde\rho$,
+$\tilde\Gamma_\infty = \tilde\sigma\tilde\Gamma_0$ ; en termes des
+$\tilde\varepsilon_i$, $\tilde\Gamma_0$ échange $\tilde\varepsilon_0$ et
+$\tilde\varepsilon_1^{-1}$, ce qui est bien un automorphisme de $B_3$. Avec
+$\tilde\ell_i = \tilde\varepsilon_i^2$ et les relèvements $\tilde\sigma_i$
+conjugués de $\tilde\sigma$ par les puissances de $\tilde\rho$, on retrouve le
+formulaire relevé :
+$\tilde\varepsilon_i = \tilde\sigma_{i-1}\tilde\rho = \tilde\rho\tilde\sigma_{i+1}$,
+$\tilde\sigma_i\tilde\sigma_{i+1} = \tilde\omega_0\tilde\rho\tilde\ell_i = \tilde\omega_0\tilde\ell_{i+1}\tilde\rho$,
+$\tilde\sigma_i(\tilde\rho) = \tilde\omega_0^{-1}\tilde\rho^{-1}\tilde\ell_{i-1}$,
+$\tilde\ell_\infty\tilde\ell_1\tilde\ell_0 = \tilde\omega_0$.
+
+La page 32 note que la suite des $\tilde\rho^{\,n}(\tilde\tau'_\infty)$,
+$n \in \mathbb{Z}$, parcourt une fois chacun les relèvements de
+$\tau'_\infty, \tau'_0, \tau'_1$ (car $\tilde\rho^3(\tilde\tau'_\infty) = \ell_0'^{-1}\tilde\tau'_\infty$),
+et donne l'action des générateurs sur deux éléments $\tilde u$, $\tilde v$ :
+\[
+\begin{gathered}
+\tilde\rho : \tilde u \mapsto \tilde v^{-1},\ \tilde v \mapsto \tilde v\tilde u ; \quad
+\tilde\sigma : \tilde u \mapsto \tilde u\tilde v\tilde u^{-1},\ \tilde v \mapsto \tilde u^{-1} ; \\
+\tilde\varepsilon_0 : \tilde u \mapsto \tilde u,\ \tilde v \mapsto \tilde v\tilde u^{-1} ; \quad
+\tilde\varepsilon_1 : \tilde u \mapsto \tilde u\tilde v,\ \tilde v \mapsto \tilde v,
+\end{gathered}
+\]
+et $\tilde\Gamma_0 : \tilde u \leftrightarrow \tilde v$,
+$\tilde\Gamma_\infty : \tilde u \mapsto \tilde u^{-1},\ \tilde v \mapsto \tilde u\tilde v\tilde u^{-1}$,
+$\tilde\Gamma_1 : \tilde u \mapsto \tilde u^{-1},\ \tilde v \mapsto \tilde u\tilde v$.
+Ce sont des automorphismes du groupe libre $\langle \tilde u, \tilde v \rangle$,
+groupe fondamental du tore privé d'un point, et ces formules anticipent les
+pages 128 à 130\footnote{La page note $\tilde u(\tilde v)$ sans dire s'il s'agit
+d'une action ou d'un produit ; on lit
+$\mathrm{int}(\tilde u)(\tilde v) = \tilde u\tilde v\tilde u^{-1}$, comme la
+page 130 l'écrit en toutes lettres. Ainsi lues, toutes ces formules ont été
+vérifiées dans $\mathrm{Aut}(F_2)$, y compris
+$\tilde\varepsilon_0 = \tilde\sigma\tilde\rho$, $\tilde\varepsilon_1 = \tilde\rho\tilde\sigma$
+et la relation de tresse.}.
+
+\pagerange{33}{34}
+\subsection*{Le formulaire de 1981 (pages 33 et 34)}
+
+Le formulaire de 1981 est encadré par deux identifications,
+$\mathfrak{S}_{0,3} \simeq GL(2, \mathbb{Z})'$ et
+$\mathfrak{S}^{+}_{0,3} \simeq SL(2, \mathbb{Z})'$, où l'accent n'est pas défini\footnote{La page 114 écrit
+$SL(2, \mathbb{Z}/12)' \simeq (SL(2, \mathbb{Z}/4) \times SL(2, \mathbb{Z}/3))/\pm 1$,
+ce qui suggère le quotient par $\{\pm 1\}$ ; mais la page 133 présente
+$\mathfrak{S}_{0,3}$ comme $GL(2, \mathbb{Z})$ lui-même. Pour les groupes
+discrets, les groupes fondamentaux mixtes correspondants sont
+$GL(2, \mathbb{Z})/\pm 1$ et $SL(2, \mathbb{Z})/\pm 1$ ((43) et (44) de la
+page 72), ou ces groupes eux-mêmes si l'on garde le facteur $\{\pm 1\}$ de la
+page 133. La page 33 semble écrire $\widehat{\mathbb{Z}}$ (« le chapeau est clair dans le premier
+encadré »), et la page 114 identifie de même $\hat{\mathfrak{S}}^{+}_{0,3}$ à
+$SL(2, \widehat{\mathbb{Z}})'$ : dans l'une ou l'autre lecture, pour les complétés, l'application
+$\widehat{SL(2, \mathbb{Z})} \to SL(2, \widehat{\mathbb{Z}})$ (et de même modulo
+$\pm 1$, ou pour $GL$) est surjective mais non injective, $SL(2, \mathbb{Z})$ n'ayant pas la propriété des
+sous-groupes de congruence — son sous-groupe libre $\Gamma(2)$ a des quotients
+finis qui ne sont pas de congruence.}. Avec le même $\rho$ et
+$\sigma_\infty = \bigl(\begin{smallmatrix} 0 & -1 \\ 1 & 0 \end{smallmatrix}\bigr)$,
+$\sigma_0 = \bigl(\begin{smallmatrix} 1 & -1 \\ 2 & -1 \end{smallmatrix}\bigr)$,
+$\sigma_1 = \bigl(\begin{smallmatrix} 1 & -2 \\ 1 & -1 \end{smallmatrix}\bigr)$,
+on a $\varepsilon_0 = \sigma_\infty\rho$, $\varepsilon_1 = \rho\sigma_\infty$,
+$\varepsilon_\infty = \rho^2\sigma_\infty\rho^{-1}$ (les mêmes matrices
+unipotentes qu'en 1982), $\varepsilon_i = \sigma_{i-1}\rho = \rho\sigma_{i+1}$,
+$\ell_i = \varepsilon_i^2$, $\ell_\infty\ell_1\ell_0 = -1$, $\lambda_i = -\ell_i$
+de produit $1$, $\rho(\sigma_i) = \sigma_{i+1} = \ell_{i-1}\varepsilon_{i+1}$,
+$\sigma_i(\rho) = \rho^{-1}\lambda_{i-1}$, et
+$\sigma_i\sigma_{i+1} = -\rho\ell_i = -\ell_{i+1}\rho$\footnote{La page écrit
+$\sigma_i\sigma_{i+1} = \rho\ell_i = -\ell_{i+1}\rho$ ; le premier membre
+demande un signe $-$.}.
+
+Pour les réflexions, $\tau_\infty = \bigl(\begin{smallmatrix} -1 & 0 \\ 0 & 1 \end{smallmatrix}\bigr)$
+et ses conjugués $\tau_{i+1} = \rho\tau_i\rho^{-1}$, qui sont les matrices
+$\tau_0, \tau_1$ de 1982\footnote{La page porte
+$\tau_0 = \bigl(\begin{smallmatrix} -1 & 0 \\ -2 & -1 \end{smallmatrix}\bigr)$ et
+$\tau_1 = \bigl(\begin{smallmatrix} -1 & -2 \\ 0 & -1 \end{smallmatrix}\bigr)$,
+qui ne sont pas d'ordre $2$ ; la transcription le signale. Les conjugués de
+$\tau_\infty$ par $\rho$ et $\rho^2$ sont ceux de la page 29.}. On a alors
+$\tau_1\tau_0 = -\ell_\infty$, $\tau_\infty\tau_1 = -\ell_0$, $\tau_0\tau_\infty = -\ell_1$,
+soit $\tau_{i+1}\tau_i = -\ell_{i+2}$\footnote{La page écrit la règle générale
+$\tau_i\tau_{i+1} = -\ell_{i+2}$ ; ce sont ses trois relations explicites, justes,
+qui fixent l'ordre.} ;
+$\tau'_i = -\sigma_i\tau_i = \tau_i\sigma_i$, d'ordre $2$, avec
+$\tau'_0\tau'_1 = \tau'_1\tau'_\infty = \tau'_\infty\tau'_0 = -\rho$ et
+$\tau'_i(\rho) = \rho^{-1}$ ; $\tau_i = \sigma_i\tau'_i$ ;
+$\sigma_i = -\tau'_i\tau_i = \tau_i\tau'_i$\footnote{La page écrit
+$\tau'_\infty = \sigma_\infty\tau_\infty$ (un signe biffé précède) et
+$\tau_i = \tau'_i\sigma_i = \sigma_i\tau'_i$, signes surchargés : la règle
+uniforme est $\tau'_i = -\sigma_i\tau_i$, et $\tau'_i\sigma_i = -\tau_i$.}.
+La page vérifie aussi les actions $\tau_i(\varepsilon_j) = \varepsilon_j^{-1}$
+($i \neq j$), $\tau'_i(\varepsilon_{i+1}) = \varepsilon_{i-1}^{-1}$,
+$\sigma_i(\varepsilon_{i+1}) = \varepsilon_{i-1}$,
+$\sigma_i(\ell_i) = -(\ell_{i+1}\ell_{i-1})^{-1}$,
+$\tau_i(\ell_i) = -\ell_{i+1}\ell_{i-1}$, toutes exactes. Elle reprend les deux
+présentations de $SL$ et de $GL$, et note, « attention aux signes ! », que
+$\Gamma_\infty\Gamma_1 = \varepsilon_0$, $\Gamma_0\Gamma_\infty = -\sigma_\infty$,
+$\Gamma_1\Gamma_0 = \rho^{-1}$\footnote{La page écrit d'abord
+$\tau_\infty\tau'_0 = \varepsilon_0$ ; comme $\Gamma_1 = -\tau'_0$, c'est
+$\tau_\infty\tau'_0 = -\varepsilon_0$, et la forme en $\Gamma$, qu'elle écrit
+ensuite, est juste.}.
+
+La page 34 calcule, dans le même groupe,
+\[
+[\ell_0, \ell_1] = [\lambda_0, \lambda_1] = \bigl(\sigma_\infty(\rho)\rho^{-1}\bigr)^3, \qquad
+\sigma_\infty(\rho)\rho^{-1} = \ell_0\rho = \rho\ell_\infty,
+\]
+\[
+[\sigma_\infty, \ell_\infty] = \bigl(\sigma_\infty(\rho^{-1})\rho\bigr)^3
+= \mathrm{int}\bigl(\sigma_\infty(\rho^{-1})\bigr)\bigl([\ell_0, \ell_1]^{-1}\bigr),
+\]
+de sorte que $[\lambda_0, \lambda_1] = 1$, $[\sigma_\infty, \ell_\infty] = 1$ et
+$(\ell_0\rho)^3 = 1$ sont équivalents\footnote{Le dernier membre de la seconde
+ligne est lu sur la page « $\mathrm{int}(\sigma)(\rho^{-1}) \cdot [\ell_0, \ell_1]$ » ;
+la forme exacte, vérifiée dans $SL(2, \mathbb{Z})$ et dans le groupe des
+tresses, est un conjugué de l'inverse. L'équivalence n'en dépend pas. Dans
+$SL(2, \mathbb{Z})$ ces commutateurs ne sont pas triviaux ($\ell_0$ et $\ell_1$
+engendrent un groupe libre) : l'équivalence porte sur un quotient où l'on
+voudrait les faire commuter, que la page ne nomme pas.}.
+
+\pagerange{35}{39}
+\subsection*{Les présentations de $ST_{1,1}$ (pages 35 à 39, juin 1983)}
+
+Daté de juin 1983, un nouveau cahier de cinq feuillets part de la seule
+relation : soit $H$ engendré par $\varepsilon_0, \varepsilon_1$ avec
+\[
+(*)\qquad \varepsilon_0\varepsilon_1\varepsilon_0 = \varepsilon_1\varepsilon_0\varepsilon_1,
+\]
+c'est-à-dire le groupe des tresses $B_3 = ST_{1,1} = SL(2, \mathbb{Z})^{\sim}$\footnote{La
+page 38 nomme le groupe $ST_{11}$ sans le définir ; la page 41 pose
+$ST_{11} \simeq \widetilde{SL}(2, \mathbb{Z})$, et la page 31 a montré que c'est
+le groupe présenté par $(*)$.}. On pose
+\[
+\sigma = \varepsilon_0\varepsilon_1\varepsilon_0, \quad
+\rho_0 = (\varepsilon_1\varepsilon_0)^{-1}, \quad \rho_1 = (\varepsilon_0\varepsilon_1)^{-1}, \quad
+\rho'_0 = (\varepsilon_1\varepsilon_0)^2, \quad \rho'_1 = (\varepsilon_0\varepsilon_1)^2, \quad
+\omega = \sigma^2 .
+\]
+Alors (a) la conjugaison par $\sigma$ échange $\varepsilon_0$ et
+$\varepsilon_1$, $\rho_0$ et $\rho_1$, $\rho'_0$ et $\rho'_1$\footnote{La page
+écrit $\sigma(\rho'_1) = \rho'_1$ ; la transcription le signale. C'est
+$\rho'_0$.} ; $\sigma^2$ est central et $\mathrm{int}(\sigma) = \mathrm{int}(\sigma^{-1})$ ;
+(a') $\rho_0(\varepsilon_0) = \rho'_0(\varepsilon_0) = \varepsilon_1$,
+$\rho_1(\varepsilon_1) = \rho'_1(\varepsilon_1) = \varepsilon_0$,
+$\varepsilon_0(\rho_0) = \rho_1$, $\varepsilon_0(\rho'_0) = \rho'_1$,
+$\varepsilon_1(\rho_1) = \rho_0$, $\varepsilon_1(\rho'_1) = \rho'_0$ ;
+(b) $\rho_0 = \sigma^{-1}\varepsilon_0 = \varepsilon_1\sigma^{-1}$,
+$\rho'_0 = \sigma\varepsilon_0 = \varepsilon_1\sigma$, et symétriquement ;
+(c) $\rho_0^{-3} = \rho_1^{-3} = \sigma^2 = \omega$ ;
+(d) $\rho'_i = \rho_i^{-2} = \omega\rho_i$. Il note qu'il vaut mieux « au
+début ne pas introduire $\rho'_0, \rho'_1$ », qui encombrent le formulaire.
+
+Il écrit ensuite $B_3$ en chacune des paires de générateurs, avec les autres
+éléments exprimés en fonction de la paire et la relation qui reste :
+\begin{itemize}
+\item (e) $[\varepsilon_0, \varepsilon_1]$ : la relation $(*)$ ;
+\item (f$_0$) $[\sigma, \varepsilon_0]$ : $(\sigma^{-1}\varepsilon_0)^3 = \sigma^{-2}$,
+dont $[\sigma^2, \varepsilon_0] = 1$, encadré avec elle, est conséquence ;
+\item (g$_0$) $[\sigma, \rho_0]$ : $\rho_0^{-3} = \sigma^2$ ;
+\item (g$'_0$) $[\sigma, \rho'_0]$ : $[\sigma^2, \rho'_0] = 1$ et $\rho_0'^{\,3} = \sigma^4$ ;
+\item (h$_0$) $[\varepsilon_0, \rho_0]$ : $\rho_0\varepsilon_0\rho_0^{-1}\varepsilon_0\rho_0 = 1$ ;
+\item (i$_0$) $[\varepsilon_0, \rho'_0]$ : $\rho'_0 = \bigl(\rho'_0(\varepsilon_0)\varepsilon_0\bigr)^2$ et $[\rho_0'^{\,3}, \varepsilon_0] = 1$ ;
+\item (h$'_0$) $[\varepsilon_0, \rho_1]$ : $\rho_1\varepsilon_0\rho_1^{-1}\varepsilon_0\rho_1 = 1$, conjugué de (h$_0$) par $\varepsilon_0$ ;
+\item (j$'_0$) $[\varepsilon_0, \rho'_1]$ : $\rho'_1 = \bigl(\rho'_1(\varepsilon_0)\varepsilon_0\bigr)^2$ et $[\rho_1'^{\,3}, \varepsilon_0] = 1$,
+\end{itemize}
+chaque cas ayant son symétrique par échange des indices $0$ et $1$. Toutes les
+expressions de la page sont exactes dans $B_3$, et toutes ces paires
+présentent bien $B_3$ avec les relations indiquées\footnote{Vérification par
+machine des identités. Pour les présentations, preuves de cette édition dans
+les cas (f$_0$), (g$_0$), (g$'_0$), (i$_0$) — on se ramène à
+$\rho^{-3} = \sigma^2$ ou à la relation de tresse —, les cas (h$'_0$),
+(j$'_0$) et symétriques s'en déduisant par conjugaison ; pour (h$_0$) et en
+contrôle de tous, le nombre de morphismes vers $\mathfrak{S}_4$ et
+$\mathfrak{S}_5$ coïncide avec celui de $B_3$.}. Dans le cas
+(i$_0$), la première relation suffit : si $c = \rho'_0\varepsilon_0\rho_0'^{-1}$,
+elle s'écrit $\rho'_0 = (c\varepsilon_0)^2$, et en reportant dans
+$c\rho'_0 = \rho'_0\varepsilon_0$ on trouve
+$c\varepsilon_0 c = \varepsilon_0 c\varepsilon_0$. En revanche, l'« équation
+abracadabrante » par laquelle la page propose de tout remplacer,
+\[
+[\rho'_0\varepsilon_0\rho_0'^{-1}\varepsilon_0\rho'_0,\ \varepsilon_0] = 1,
+\]
+est vraie dans $B_3$ mais ne la présente pas : étant un commutateur, elle laisse
+l'abélianisé égal à $\mathbb{Z}^2$, alors que celui de $B_3$ est
+$\mathbb{Z}$\footnote{La page écrit que cette équation « implique »
+$\rho'_0 = (\rho'_0(\varepsilon_0)\varepsilon_0)^2$ ; c'est l'inverse qui est
+vrai.}.
+
+\emph{Symétries.} La présentation $(*)$ a deux symétries involutives
+évidentes : l'automorphisme $\varepsilon_i \mapsto \varepsilon_i^{-1}$, qui
+envoie $\sigma \mapsto \sigma^{-1}$, $\rho_0 \mapsto \rho_1^{-1}$,
+$\rho'_0 \mapsto \rho_1'^{-1}$\footnote{La page l'appelle « antiaut. », souligné
+deux fois. Mais l'antiautomorphisme $\varepsilon_i \mapsto \varepsilon_i^{-1}$
+n'est autre que $g \mapsto g^{-1}$, qui envoie $\rho_0$ sur $\rho_0^{-1}$ ; le
+tableau de la page, vérifié, est celui de l'automorphisme.} ; et
+$\mathrm{int}(\sigma)$, qui échange les indices $0$ et $1$. La symétrie est
+« binaire », centrée sur $\sigma$ ($\sigma^2$ central) ; centrée sur
+$\rho = \rho_0$, elle devient « ternaire » ($\rho^3$ central) : les éléments
+$\varepsilon_0$, $\varepsilon_1 = \rho(\varepsilon_0)$,
+$\varepsilon_\infty = \rho^2(\varepsilon_0)$ sont permutés circulairement par
+$\mathrm{int}(\rho)$, vérifient deux à deux la relation de tresse, et
+\[
+\sigma_\infty = \varepsilon_0\varepsilon_1\varepsilon_0, \quad
+\sigma_0 = \varepsilon_1\varepsilon_\infty\varepsilon_1, \quad
+\sigma_1 = \varepsilon_\infty\varepsilon_0\varepsilon_\infty, \quad
+\rho = (\varepsilon_1\varepsilon_0)^{-1} = (\varepsilon_\infty\varepsilon_1)^{-1} = (\varepsilon_0\varepsilon_\infty)^{-1},
+\]
+tandis que les trois éléments $(\varepsilon_0\varepsilon_1)^{-1} = \sigma_\infty(\rho)$,
+$(\varepsilon_1\varepsilon_\infty)^{-1} = \sigma_0(\rho)$,
+$(\varepsilon_\infty\varepsilon_0)^{-1} = \sigma_1(\rho)$ sont distincts. Le
+dernier feuillet résume : les éléments essentiels sont
+$\varepsilon_0, \varepsilon_1, \sigma, \rho$, et les « quatre systèmes de
+générateurs principaux » de $ST_{1,1}$ sont
+\[
+\begin{gathered}
+(\varepsilon_0, \varepsilon_1) \mid (*) ; \quad
+(\varepsilon_0, \sigma) \mid [\sigma^2, \varepsilon_0] = 1,\ (\sigma^{-1}\varepsilon_0)^3 = \sigma^{-2} ; \\
+(\varepsilon_0, \rho) \mid \rho\varepsilon_0\rho^{-1}\varepsilon_0\rho = 1 ; \quad
+(\sigma, \rho) \mid \rho^{-3} = \sigma^2 .
+\end{gathered}
+\]
+Pour un formulaire plus complet, il faudrait introduire
+$\varepsilon_\infty$ et les $\ell_i = \varepsilon_i^2$, les réflexions $\tau_i$
+pour $ST_{1,1}^{\pm}$, et la représentation dans $GL(2, \mathbb{Z})$ (qui
+impose $\omega^2 = 1$).
+
+\pagerange{41}{46}
+\section*{Le point de vue transcendant pour $M_{1,1}$ (pages 41 à 46)}
+
+Soit $\mathcal{D} = \{z \in \mathbb{C} \mid \mathrm{Im}\, z > 0\}$ et
+$P\mathcal{D} \simeq \mathrm{Hom}^{+}(\mathbb{Z}^2, \mathbb{C})$ l'espace des
+couples $(z_1, z_2)$ de nombres complexes formant une base directe d'un réseau,
+avec $z_1/z_2 \in \mathcal{D}$\footnote{La page 41 écrit
+$z_2/z_1 \in \mathcal{D}$, mais la page 42 prend la section $z \mapsto (z, 1)$
+et la page 46 écrit $z_1/z_2 \in \mathcal{D}$ ; c'est la convention
+compatible avec l'action homographique ci-dessous, et on la suit.}. Le groupe
+$\mathbb{C}^* \times SL(2, \mathbb{Z})$ opère sur $P\mathcal{D}$ par
+$(z_1, z_2) \mapsto \lambda(az_1 + bz_2, cz_1 + dz_2)$, d'où, sur
+$P\mathcal{D}/\mathbb{C}^* \simeq \mathcal{D}$, l'action homographique
+$z \mapsto (az+b)/(cz+d)$, induite par celle de $SL(2, \mathbb{R})$, qui
+préserve $\mathcal{D}$\footnote{La page ajoute
+« $SL(2, \mathbb{R}) \simeq \mathrm{Aut}_{\mathbb{C}}(\mathcal{D})$ » ; c'est
+$PSL(2, \mathbb{R}) = SL(2, \mathbb{R})/\{\pm 1\}$, puisque $-1$ opère
+trivialement.}. Ainsi
+\[
+M_{1,1}^{\mathrm{an}} \simeq (\mathcal{D}, SL(2, \mathbb{Z})), \qquad
+PM_{1,1}^{\mathrm{an}} \simeq (P\mathcal{D}, SL(2, \mathbb{Z})), \qquad
+\mathcal{T}_{1,1} \simeq SL(2, \mathbb{Z}), \qquad ST_{1,1} \simeq \widetilde{SL}(2, \mathbb{Z}),
+\]
+les multiplicités étant décrites par un espace et un groupe qui y opère ;
+$PM_{1,1}$, quotient des réseaux munis d'une base, est le
+$\mathbb{C}^*$-fibré des courbes elliptiques munies d'une différentielle non
+nulle. Le groupe $GL(2, \mathbb{Z})$ opère aussi, les
+éléments de déterminant $-1$ agissant composés avec la conjugaison complexe,
+$g \mapsto \tau^{\alpha(g)} g$ ; le couple $(\mathcal{D}, GL(2, \mathbb{Z}))$
+décrit $M_{1,1}$ avec sa structure réelle\footnote{La page écrit aussi
+$M_{11}^{\mathrm{an}} \simeq (\mathcal{D}, GL(2, \mathbb{Z}))$ sous le même
+nom ; c'est la multiplicité « mixte » munie de l'action de $\{1, \tau\}$,
+comme aux pages 64 à 67.}.
+
+La section $z \mapsto (z, 1)$ trivialise $P\mathcal{D} \simeq \mathcal{D} \times \mathbb{C}^*$,
+$[z, \lambda] = (\lambda z, \lambda)$, et dans ces coordonnées
+\[
+\begin{pmatrix} a & b \\ c & d \end{pmatrix} [z, \lambda] = \Bigl[\frac{az+b}{cz+d},\ \lambda(cz+d)\Bigr] ;
+\]
+le revêtement universel de $P\mathcal{D}$ est $\mathcal{D} \times \mathbb{C}$,
+$(z, w) \mapsto [z, e^{2i\pi w}]$, et le groupe $ST_{1,1}$ des relèvements y
+contient $\mathbb{Z}$, engendré par $\omega^2$ opérant par $(z, w) \mapsto (z, w+1)$.
+
+\emph{Points fixes.} Les points fixes de $z \mapsto (az+b)/(cz+d)$ sont racines
+de $cz^2 + (d-a)z - b = 0$, de discriminant $(a+d)^2 - 4$ ; il y en a un dans
+$\mathcal{D}$ si et seulement si $|a + d| \leq 1$. Si $a + d = 0$, ce sont
+$z = (a \pm i)/c$ — pour $\bigl(\begin{smallmatrix} 0 & -1 \\ 1 & 0 \end{smallmatrix}\bigr)$,
+le point $i$\footnote{La page écrit $z = (a \pm 2i)/(2c)$ ; la transcription
+le signale.}. Si $a + d = 1$, par exemple pour
+$\rho = \bigl(\begin{smallmatrix} 0 & 1 \\ -1 & 1 \end{smallmatrix}\bigr)$, c'est
+$z = \tfrac12 + i\tfrac{\sqrt3}{2} = e^{i\pi/3} = -j^2$\footnote{La page écrit
+$-j$, lu avec doute ; $-j = e^{-i\pi/3}$ est dans le demi-plan inférieur. Le
+dossier 145 relève la même confusion (sa page 5), et la page 104 écrit
+correctement $-\bar\jmath$ pour ce point.}.
+
+\emph{Conventions de signe (page 46).} Avec
+$\sigma = \bigl(\begin{smallmatrix} 0 & 1 \\ -1 & 0 \end{smallmatrix}\bigr)$,
+$\sigma^2 = \omega = -1$, $\rho^3 = \omega$, les signes sont choisis pour que
+$\rho$ engendre le groupe d'isotropie (d'ordre $6$) du point $e^{i\pi/3}$, que
+$\sigma$ soit la rotation d'angle $-\pi/2$ de $\mathbb{R}^2$ et $\rho$ une
+rotation d'angle $-2\pi/6$ pour une métrique invariante convenable : « la
+chose importante dans cette convention, c'est que pour $\rho$ et $\sigma$ le
+sens de rotation soit le même ». Le groupe des relèvements de l'action de
+$SL(2, \mathbb{Z})$ au revêtement universel de $P\mathcal{D}$ est l'extension
+centrale $ST_{1,1}$ de $\mathcal{T}_{1,1}$ par $\mathbb{Z}$ ; la phrase qui
+introduit son générateur central reste en suspens au bas de la page.
+
+\pagerange{49}{100}
+\section*{Rétrospection sur les cartes cellulaires (pages 49 à 100)}
+
+Sous une chemise marquée « 2-cartes cellulaires », un texte suivi de 1982,
+paginé de sa main et divisé en paragraphes numérotés, reprend la théorie des
+cartes. La page 49 fixe la loi du groupoïde mixte (ci-dessus), la page 50
+donne la table :
+\begin{enumerate}
+\item description combinatoire des cartes, via $\mathfrak{G}_2$ et $\mathfrak{G}_2^0$ ;
+\item cartes triangulaires pondérées, et groupes $\pi_{0,3}$, $\tilde\pi_{0,3}$ ;
+\item relation avec les revêtements de $U_{0,3}$ et les courbes algébriques ;
+\item conditions $\rho_i^{\nu_i} = 1$ et groupes fondamentaux à signature ;
+\item existence d'une pondération d'une carte triangulaire ;
+\item carte associée à un polygone convexe, et groupes fondamentaux associés ;
+\item relation aux cartes $n$-polygonales pondérées ;
+\item introduction de $P\Sigma^{\times}_{P_n}$ et du $2$-groupoïde
+fondamental\footnote{La table renvoie pour le §8 à sa page 29 ; le
+paragraphe commence à sa page 24 (page 95), et s'interrompt à la page 100
+avant d'avoir introduit le $2$-groupoïde.}.
+\end{enumerate}
+
+\pagerange{51}{57}
+\subsection*{§1. Description combinatoire des cartes (pages 51 à 57)}
+
+Une \emph{carte} (topologique, cellulaire) est une surface compacte $X$, pas
+nécessairement orientable, munie d'un fermé $K$ localement homéomorphe à une
+étoile (un $1$-complexe), sans composante homéomorphe à un cercle ni point
+isolé, dont le complémentaire est réunion de disques ouverts. On en fait une
+catégorie « isotopique », et l'on établit une équivalence
+\[
+\begin{gathered}
+(1)\qquad \{\text{cartes finies, à isotopie près}\} \xrightarrow{\ \approx\ } \{\mathfrak{G}_2\text{-ensembles finis spéciaux}\}, \\
+(2)\qquad \mathfrak{G}_2 = \langle \tau_0, \tau_1, \tau_2 \mid \tau_0^2 = \tau_1^2 = \tau_2^2 = (\tau_0\tau_2)^2 = 1 \rangle,
+\end{gathered}
+\]
+le groupe cartographique\footnote{C'est le groupe $\Gamma$ du dossier 141
+(pages 9 et 10), et le $C_2$ de l'\emph{Esquisse d'un programme} (1984). La
+page renvoie à la notion de « biarc » pour la preuve.}, opérant sur
+l'ensemble $\mathcal{R}(X)$ des \emph{repères} (ou drapeaux) — les triangles
+de la subdivision barycentrique —, $\tau_i$ changeant le sommet de type $i$ du
+repère : type $0$ pour les sommets, $1$ pour les milieux d'arêtes, $2$ (noté
+ensuite $\infty$) pour les centres de faces. « Spéciaux » signifie que les
+$\tau_i$ et $\tau_0\tau_2$ opèrent sans point fixe. Le noyau
+$\mathfrak{G}^0_2$ de $\mathfrak{G}_2 \to \mathbb{Z}/2$ ($\tau_i \mapsto 1$) est
+\[
+(4)\text{--}(5)\qquad \mathfrak{G}^0_2 = \langle \rho_0, \rho_1, \rho_\infty \mid \rho_\infty\rho_1\rho_0 = \rho_1^2 = 1 \rangle,
+\qquad \rho_\infty = \tau_1\tau_0,\ \rho_1 = \tau_0\tau_\infty,\ \rho_0 = \tau_\infty\tau_1 .
+\]
+La carte duale a les mêmes repères, les types $0$ et $\infty$ échangés, et
+chaque repère y reçoit les orientations opposées. Une carte est orientée si
+l'on se donne une partition $\mathcal{R} = \mathcal{R}^+ \sqcup \mathcal{R}^-$
+que chaque $\tau_i$ échange ; les $\rho_i$ préservent alors chaque
+partie\footnote{La ligne (7) de la page 53 écrit
+$\sigma_i(\mathcal{R}^+) = \mathcal{R}^+$, contredisant (6), dont elle devrait
+être la forme forte ; la transcription le signale. On écrit la forme juste.
+Sur ces pages les involutions sont notées tantôt $\tau_i$, tantôt
+$\sigma_i$.}, et
+\[
+(8)\qquad \{\text{cartes orientées finies}\} \xrightarrow{\ \approx\ } \{\mathfrak{G}^0_2\text{-ensembles finis spéciaux}\}, \qquad X \mapsto \mathcal{R}^+(X) ;
+\]
+la carte duale orientée a $\mathcal{R}^+(\check C) = \mathcal{R}^-(C)$. Une
+figure de dix repères autour d'un repère $r$ montre les $\tau_i r$ et les
+$\tau_i\tau_j r$ ; il n'y en a que neuf, car $\tau_0\tau_\infty = \tau_\infty\tau_0$.
+
+En admettant des \emph{arêtes pliées} — des arêtes dont une extrémité est un
+point-bord de $K$, sur le modèle d'un Y épaissi dont une branche est repliée —,
+on supprime l'hypothèse que $\rho_1$ opère sans point fixe : les points fixes
+de $\rho_1$ correspondent exactement aux arêtes pliées, et ceux de $\rho_0$ aux
+sommets marqués au bord. La condition que les $\tau_i$ opèrent sans point fixe
+demeure « provisoirement ».
+
+\pagerange{57}{60}
+\subsection*{§2. Cartes triangulaires pondérées (pages 57 à 60)}
+
+Le rôle particulier de l'indice $1$, dû à $\rho_1^2 = 1$, disparaît si l'on
+pose
+\[
+(12)\qquad \tilde\pi_{0,3} = \langle \tau_0, \tau_1, \tau_\infty \mid \tau_0^2 = \tau_1^2 = \tau_\infty^2 = 1 \rangle,
+\qquad
+(13)\qquad \pi_{0,3} = \langle \rho_0, \rho_1, \rho_\infty \mid \rho_\infty\rho_1\rho_0 = 1 \rangle,
+\]
+le second d'indice $2$ dans le premier (libre de rang $2$), avec les mêmes
+formules (14) ; alors $\mathfrak{G}_2 \simeq \tilde\pi_{0,3}/\langle\langle\rho_1^2\rangle\rangle$
+et $\mathfrak{G}^0_2 \simeq \pi_{0,3}/\langle\langle\rho_1^2\rangle\rangle$.
+Le groupe $\tilde\pi_{0,3}$ classe les \emph{cartes triangulaires pondérées} :
+une carte dont l'ensemble $S$ des sommets est muni d'une application
+$S \to \{0, 1, \infty\}$ qui, pour chaque face, est une bijection de ses trois
+sommets sur $\{0, 1, \infty\}$. Les repères sont alors les faces elles-mêmes,
+$\tau_i$ envoyant une face sur sa voisine par le côté opposé au sommet de type
+$i$ ; les ordres des sommets sont pairs, et l'\emph{ordre réduit} d'un sommet
+est la moitié de son ordre. On obtient
+\[
+\begin{gathered}
+(17)\qquad \{\text{cartes triangulaires pondérées}\} \simeq \\
+\{\tilde\pi_{0,3}\text{-ensembles finis où les } \tau_i \text{ opèrent sans point fixe}\},
+\end{gathered}
+\]
+\[
+(18)\qquad \{\text{cartes triangulaires pondérées orientées}\} \simeq \{\pi_{0,3}\text{-ensembles finis}\}, \qquad X \mapsto \mathcal{R}^+(X),
+\]
+et la dualité est remplacée par l'action de $\mathfrak{S}_3$ réindexant les
+poids, $\mathcal{R}^+(X^g) = \mathcal{R}^{\mathrm{sg}(g)}(X)$. Par les
+isomorphismes ci-dessus, la catégorie des cartes (avec arêtes pliées) devient
+une sous-catégorie pleine de celle des cartes triangulaires pondérées, par la
+subdivision barycentrique. Enfin
+\[
+(19)\text{--}(20)\qquad \pi_{0,3} \simeq \pi_1(U_{0,3}, P_+), \qquad U_{0,3} = \mathbb{P}^1(\mathbb{C}) \setminus \{0, 1, \infty\},
+\]
+$P_+$ étant un point de l'hémisphère supérieur, commodément
+$P_+ = e^{i\pi/3} = -\zeta^2$, $\zeta = e^{2i\pi/3}$\footnote{La page écrit
+$P_+ = -\zeta$, qui est $e^{-i\pi/3}$, dans l'hémisphère inférieur ; la page 87
+écrit $P_+ = \exp 2i\pi/6$, qu'on suit.}.
+
+\pagerange{61}{67}
+\subsection*{§3. Revêtements de $U_{0,3}$ et courbes algébriques (pages 61 à 67)}
+
+Les cartes triangulaires pondérées orientées sont ainsi équivalentes aux
+revêtements finis de $\mathbb{P}^1(\mathbb{C})$ ramifiés au plus au-dessus de
+$0, 1, \infty$ — qui sont des courbes algébriques propres et lisses —, la
+carte étant l'image inverse de l'équateur $\mathbb{P}^1(\mathbb{R})$ : les
+sommets de type $i$ sont les points au-dessus de $i$, leurs ordres réduits les
+indices de ramification, et les arêtes les composantes des images inverses de
+$]1, \infty[$, $]\infty, 0[$, $]0, 1[$. Les cartes ordinaires (celles où
+$\rho_1^2 = 1$) s'obtiennent en prenant l'image inverse du segment $[0, 1]$ :
+sommets au-dessus de $0$, milieux d'arêtes au-dessus de $1$, centres de faces
+au-dessus de $\infty$\footnote{C'est la correspondance des « dessins d'enfants »
+de l'\emph{Esquisse d'un programme} ; le théorème de Belyi (1979) en fait une
+correspondance avec les courbes définies sur $\overline{\mathbb{Q}}$.}. La
+carte universelle est $\{0\} \subset [0, 1]$ : une seule face, la sphère
+fendue le long de $[0, 1]$, dont le bord est une boucle à un seul sommet $0'$
+et de milieu $1'$ ; l'arête $[0, 1]$ est pliée.
+
+\emph{La représentation conforme (pages 63 et 64).} La face unique est
+conformément isomorphe au disque unité $\mathbb{D}$, par l'unique
+isomorphisme $g$ envoyant $0$ sur le centre $\infty$, $1$ sur le sommet $0'$,
+$-1$ sur $1'$, $\pm i$ sur les deux bords du point $\tfrac12$. On le trouve en
+voyant $\mathbb{D}$ comme un hémisphère de la carte $X_1$ à un sommet $1$, une
+arête (l'équateur) et deux faces de centres $0$ et $\infty$, revêtement double
+de la carte universelle : $g = \varphi \circ g' \circ \psi$ avec
+$\psi(z) = (z-1)/(z+1)$, $g'(z) = z^2$, $\varphi(z) = z/(z-1)$, d'où
+\[
+(23)\qquad g(z) = \frac{\psi(z)^2}{\psi(z)^2 - 1} = -\frac{(z-1)^2}{4z},
+\]
+de degré $2$\footnote{Le
+dénominateur se lit $\psi^2 + 1$ sur la page ; la valeur de $\varphi$ et le
+membre suivant demandent $\psi^2 - 1$, comme le note la transcription.}, ramifié au-dessus de $0$ (en $1$) et de $1$ (en $-1$), non
+ramifié au-dessus de $\infty$ ; il envoie le cercle unité sur $[0, 1]$
+($g(e^{i\theta}) = (1 - \cos\theta)/2$) et $\mathbb{D}$ sur le complémentaire.
+
+\emph{Le groupe à conjugaison (pages 64 à 67).} Le groupe $\tilde\pi_{0,3}$ —
+que la page note $\Pi^{\tau}_{0,3}$ — est un groupe fondamental mixte :
+\[
+(24)\qquad \Pi^{\tau}_{0,3} \simeq \pi_1(U_{0,3}, \{1, \tau\}; P_+), \qquad \tau_i = (\lambda_i, \tau),
+\]
+où $\lambda_i$ est le demi-grand cercle de $P_- = \tau(P_+)$ à $P_+$ passant
+par le milieu $Q_i$ de l'arc de l'équateur opposé à $i$ ($Q_0 = 2$,
+$Q_1 = -1$, $Q_\infty = \tfrac12$)\footnote{Avec la loi de la page 49,
+$\tau_a\tau_b = (\lambda_a\lambda_b^{-1}, 1)$, d'où
+$\rho_\infty = \tau_1\tau_0 = \lambda_1\lambda_0^{-1}$ ; la note marginale
+« $\rho_i = \lambda_{i+1}\lambda_{i-1}^{-1}$ » donne l'inverse, l'écart tenant
+au sens de lecture des chemins.}. Les cartes triangulaires pondérées non
+orientées sont donc équivalentes aux $\{1, \tau\}$-revêtements finis étales de
+$U_{0,3}$ sur lesquels les $\tau_i$ opèrent sans point fixe ; or les points
+fixes de $\tau_i$ correspondent aux composantes de $U'^{\tau}$ au-dessus de
+l'arc réel de centre $Q_i$, et la condition s'écrit $X'^{\tau} = \emptyset$,
+$X'$ étant le revêtement ramifié complété. Un $\{1, \tau\}$-revêtement est une
+donnée de descente de $\mathbb{C}$ à $\mathbb{R}$ : on obtient un foncteur
+pleinement fidèle
+\[
+\begin{gathered}
+(26)\qquad \{\text{cartes triangulaires pondérées finies}\} \hookrightarrow \\
+\{\text{revêtements étales finis du schéma } \mathbb{P}^1_{\mathbb{R}} \setminus \{0, 1, \infty\}\},
+\end{gathered}
+\]
+d'image essentielle les revêtements sans point réel, $X'(\mathbb{R}) = \emptyset$
+(27). Le foncteur inverse prend l'image inverse de $\mathbb{P}^1(\mathbb{R})$ dans
+$X'(\mathbb{C})$ et passe au quotient par la conjugaison ; sans la condition
+(27), le quotient $X'(\mathbb{C})/\tau$ est une surface compacte à bord, et l'on
+pourrait étendre la notion de carte aux surfaces à bord pour faire de (26) une
+équivalence\footnote{C'est ce qu'on appelle aujourd'hui la théorie de Belyi
+réelle, ou les dessins sur les surfaces de Klein (B. Köck et D. Singerman).}.
+Dans ce dictionnaire, $X'$ est le revêtement des orientations locales de la
+carte, et $\tau$ l'automorphisme qui change l'orientation.
+
+\pagerange{67}{73}
+\subsection*{§4. Conditions $\rho_i^{\nu_i} = 1$ et signatures (pages 67 à 73)}
+
+Pour $\nu_i \in \overline{\mathbb{N}^*} = \mathbb{N}^* \cup \{\infty\}$, la
+condition $\rho_i^{\nu_i} = 1$ dit que les sommets de type $i$ ont un ordre
+réduit divisant $\nu_i$ ($\rho_i^{\infty} = 1$ par convention). Pour une carte
+ordinaire, $\rho_0^{\nu_0} = 1$ borne l'ordre des sommets et
+$\rho_\infty^{\nu_\infty} = 1$ celui des faces ; comme $\rho_1^2 = 1$, une
+condition $\rho_1^{\nu_1} = 1$ est automatique si $\nu_1$ est pair, et force
+$\rho_1 = 1$ si $\nu_1$ est impair — ce qui ne laisse que les revêtements
+ramifiés en $0$ et $\infty$, $z \mapsto z^n$, la carte « cyclotomique » à un
+sommet, une face et $n$ arêtes, cas trivial. Les cartes vérifiant ces
+conditions sont classées par
+\[
+(32)\text{--}(33)\qquad \pi_{0,3}/\langle\langle \rho_i^{\nu_i} \rangle\rangle \simeq \pi_1(\mathbb{P}^1(\mathbb{C}), \nu_*; P_+)
+\qquad \text{(cas orienté)},
+\]
+et par $\Pi^{\tau}_{0,3}/\langle\langle \rho_i^{\nu_i} \rangle\rangle$, extension
+de $\{1, \tau\}$ par le précédent, dans le cas non orienté. Le second membre
+est le groupe fondamental « à singularités » de la sphère, de signature
+$\nu_* = \nu_0 R_0 + \nu_1 R_1 + \nu_\infty R_\infty$ : celui du topos
+$\mathcal{X}(\mathbb{P}^1_{\mathbb{C}}, \nu_*)$ des surfaces ramifiées sur la
+sphère avec indices divisant $\nu_i$ en $R_i$ — une multiplicité topologique,
+localement une surface, canoniquement orientée ; avec $\{1, \tau\}$, une
+multiplicité non orientable. C'est le groupe fondamental orbifold. En passant
+aux complétés,
+\[
+(38)\qquad \widehat{\pi}_{0,3}/\langle\langle \rho_i^{\nu_i} \rangle\rangle \simeq \pi_1(\mathbb{P}^1_{\overline{\mathbb{Q}}}, \nu_*; P_+),
+\qquad
+(39)\qquad \widehat{\Pi}^{\tau}_{0,3}/\langle\langle \rho_i^{\nu_i} \rangle\rangle \simeq \pi_1(\mathbb{P}^1_{\overline{\mathbb{Q}} \cap \mathbb{R}}, \nu_*; P_+),
+\]
+et (38) montre que $\mathrm{Gal}(\overline{\mathbb{Q}}/\mathbb{Q})$ opère
+extérieurement sur ces groupes, et sur $\widehat{\pi}_{0,3}$ lui-même.
+
+Trois cas sont distingués : (I) tous les $\nu_i$ infinis, les cartes
+triangulaires pondérées ; (II) $\nu_1 = 2$, les cartes ordinaires ; (III)
+$\nu_0 = \infty$, $\nu_1 = 2$, $\nu_\infty = 3$, les cartes ordinaires
+\emph{triangulaires} (non pondérées). Pour ces dernières on a
+\[
+\begin{gathered}
+\Pi^{\tau}_{0,3}/\langle\langle \rho_1^2, \rho_\infty^3 \rangle\rangle \simeq \pi_1(U_{0,3}, \mathfrak{S}_3 \times \{1, \tau\}; P_+) = \Pi^{\mathbb{D}_3,\tau}_{0,3}, \\
+\pi_{0,3}/\langle\langle \rho_1^2, \rho_\infty^3 \rangle\rangle \simeq \pi_1(U_{0,3}, \mathfrak{S}_3; P_+) = \Pi^{\mathbb{D}_3}_{0,3},
+\end{gathered}
+\]
+le second donné par $\rho \mapsto \rho_\infty^{-1}$, $\sigma_\infty \mapsto \rho_1$,
+$\varepsilon_0 = \sigma_\infty\rho \mapsto \rho_0$ (41), le premier par
+$\tau_\infty \mapsto \tau_\infty$, $\tau_0 = \rho(\tau_\infty) \mapsto \rho_\infty^{-1}\tau_\infty\rho_\infty$,
+$\tau_1 \mapsto \rho_\infty\tau_\infty\rho_\infty^{-1}$ (42)\footnote{Ces
+formules sont cohérentes : $\rho_1\rho_\infty^{-1} = \rho_0$ découle de
+$\rho_\infty\rho_1\rho_0 = 1$ et $\rho_1^2 = 1$, et
+$\rho_\infty^{-1}\tau_\infty\rho_\infty = \tau_0\tau_1\tau_\infty\tau_1\tau_0 = (\rho_\infty^{-1}\rho_1\rho_\infty^{-1}\rho_1)\tau_\infty$,
+comme l'écrit la page, par la remarque marginale
+$\tau_\infty(\rho_\infty) = \rho_0\rho_1$.}. En remplaçant $U_{0,3}$ par le
+demi-plan de Poincaré, on trouve les isomorphismes remarquables
+\[
+\begin{gathered}
+(43)\qquad GL(2, \mathbb{Z})/\pm 1 \simeq \Pi^{\mathbb{D}_3,\tau}_{0,3} \simeq \Pi^{\tau}_{0,3}/\langle\langle \rho_1^2, \rho_\infty^3 \rangle\rangle, \\
+(44)\qquad SL(2, \mathbb{Z})/\pm 1 \simeq \Pi^{\mathbb{D}_3}_{0,3} \simeq \pi_{0,3}/\langle\langle \rho_1^2, \rho_\infty^3 \rangle\rangle,
+\end{gathered}
+\]
+qui permettent de lire les éléments remarquables $\rho, \sigma_i, \tau_i, \varepsilon_i, \ldots$
+comme des matrices, et de les relever canoniquement dans $GL(2, \mathbb{Z})$ :
+d'où « un formulaire des plus sympathiques, que j'ai développé et utilisé
+intensivement dans mes notes de l'an dernier (1981) »\footnote{C'est le
+formulaire des pages 33 et 34 ; les éléments $\rho$, $\sigma_i$, $\varepsilon_i$
+du dossier 145, écrit au printemps 1981, en relèvent. La lecture du dossier
+145 avait identifié son groupe $\mathcal{E}^+$ à $PSL(2, \mathbb{Z})$ et
+$\mathcal{E}$ à $PGL(2, \mathbb{Z})$ ; ce sont exactement (44) et (43), que
+Grothendieck écrit ici.}. Pour généraliser aux groupes $\Pi_{0,n}$ des polygones
+réguliers, il faudrait interpréter les analogues de $SL(2, \mathbb{Z})/\pm 1$
+comme sous-groupes discrets remarquables de $GL(2, \mathbb{R})$.
+
+\pagerange{73}{76}
+\subsection*{§5. Pondérabilité d'une carte triangulaire (pages 73 à 76)}
+
+Les isomorphismes de (III) se lisent comme une équivalence entre les cartes
+triangulaires $X$ (toutes les faces sont des triangles) et les cartes
+triangulaires pondérées $X'$ munies d'une action de $\mathfrak{S}_3$ qui
+permute les poids : à $X'$ on associe $X = X'/\mathfrak{S}_3$, et
+réciproquement $X'$ est le revêtement principal ramifié de groupe
+$\mathfrak{S}_3$ de $X$ défini par les « couleurs » des drapeaux. Selon la
+page, dans le cas orienté, le revêtement $X'$ de $X$ n'est ramifié qu'aux
+sommets d'ordre impair ; une condition nécessaire de pondérabilité est donc
+que tous les sommets soient d'ordre pair, et l'existence d'un
+\emph{coloriage} des faces en $+$ et $-$, deux faces adjacentes ayant des
+couleurs différentes. Un tel coloriage donné, on obtient un revêtement
+principal $X'^{+} \to X$ de groupe $\mathfrak{S}_3^{+} \simeq \mathbb{Z}/3$, dont
+la classe
+\[
+(43)\qquad \mathrm{cl}(X) \in H^1(X, \mathbb{Z}/3)
+\]
+est l'obstruction à l'existence d'une pondération : elle s'annule si et
+seulement si $X$ est pondérable, et les pondérations dont les faces $+$ sont
+les faces directes correspondent aux sections du torseur\footnote{La page
+numérote cette formule (43) une seconde fois. On restitue l'énoncé tel que la
+page le donne, sans la preuve, que la page ne donne pas ; une partie de la
+page 74 est illisible.}.
+
+\pagerange{77}{91}
+\subsection*{§6. Le polygone régulier et ses groupes (pages 77 à 91)}
+
+Soit $P = (S, A, R \subset S \times A)$ un polygone combinatoire à $n \geq 3$
+sommets, $\mathbb{D} = \mathbb{D}_P$ son groupe d'automorphismes (diédral
+d'ordre $2n$), $\mathbb{D}^+$ le sous-groupe des rotations. L'ensemble
+$\underline{\omega}$ des orientations de $P$ s'identifie aux deux générateurs
+privilégiés $\omega, \omega' = \omega^{-1}$ de $\mathbb{D}^+$. Il existe un
+plongement de $S$ dans une sphère de Riemann $\Sigma_P$, unique à isomorphisme
+unique près, tel que $\mathbb{D}$ opère par automorphismes holomorphes ; les
+sommets et les arcs sont alors sur un grand cercle $\Sigma_{\mathbb{R}}$, qui
+définit une structure réelle, et il y a une unique métrique homogène
+invariante par $\mathbb{D}$. Les deux hémisphères correspondent aux deux
+orientations, et
+\[
+(50)\qquad \Sigma^{\mathbb{D}^+} = \{P_\omega, P_{\omega'}\} \simeq \underline{\omega},
+\]
+$P_\omega$ étant le pôle où $\omega$ opère sur l'espace tangent par la rotation
+d'angle $+2\pi/n$\footnote{La page écrit
+$\Sigma^{\mathbb{D}} = \Sigma^{\mathbb{D}^+} = \Sigma^{\underline\omega}$. Les
+éléments de $\mathbb{D} \setminus \mathbb{D}^+$, opérant holomorphiquement,
+sont les demi-tours autour d'axes équatoriaux et échangent les deux pôles :
+$\Sigma^{\mathbb{D}}$ est vide, et c'est $\Sigma^{\mathbb{D}^+}$ qui a deux
+points. La suite de la page (le stabilisateur (66) de $P_\omega$ dans
+$\mathbb{D} \times \{1, \tau\}$) le confirme.}. On note $R_s$ ($s \in S$) les
+sommets sur l'équateur, $Q_a$ les milieux des arêtes, $\tau$ la conjugaison
+complexe qui fixe l'équateur et échange les pôles, et
+$\Sigma^* = \Sigma \setminus S$. Le groupe $\mathbb{D}_P \times \{1, \tau\}$,
+d'ordre $4n$, opère sur $\Sigma$ en respectant la carte cyclotomique, et l'on
+pose
+\[
+\begin{gathered}
+\Pi = \Pi_{P,\omega} = \pi_1(\Sigma^*, P_\omega), \quad
+\Pi^{\tau} = \pi_1(\Sigma^*, \{1, \tau\}; P_\omega), \\
+\Pi^{\mathbb{D}} = \pi_1(\Sigma^*, \mathbb{D}; P_\omega), \quad
+\Pi^{\mathbb{D},\tau} = \pi_1(\Sigma^*, \mathbb{D} \times \{1, \tau\}; P_\omega),
+\end{gathered}
+\]
+contenus les uns dans les autres en losange.
+
+\emph{Générateurs.} Soit $\lambda_a$ le demi-grand cercle de $P_{\omega'}$ à
+$P_\omega$ par $Q_a$, et, pour $s \in S$, $a = a(s)$ l'arête telle que
+$(s, a)$ soit un repère d'orientation $\omega$. Les lacets
+$\rho_s = \lambda_a\lambda_{\omega' a}^{-1}$ tournent autour de $R_s$, et, avec
+un sommet origine $s_0$ et $\rho_i = \rho_{\omega^i s_0}$,
+\[
+(59)\text{--}(60)\qquad \rho_{n-1}\cdots\rho_1\rho_0 = 1, \qquad
+\Pi \simeq \langle \rho_0, \ldots, \rho_{n-1} \mid \rho_{n-1}\cdots\rho_0 = 1 \rangle ;
+\]
+puis $\tau_a = (\lambda_a, \tau)$ et, avec $a_0 = a(s_0)$ et
+$\tau_i = \tau_{\omega^i a_0}$,
+\[
+(62)\text{--}(65)\qquad \Pi^{\tau} \simeq \langle \tau_0, \ldots, \tau_{n-1} \mid \tau_i^2 = 1 \rangle, \qquad \rho_i = \tau_i\tau_{i-1},
+\]
+de sorte que (59) découle des $\tau_i^2 = 1$\footnote{La marge prévient que
+$\tau_{a_0}$, noté ici $\tau_0$, est noté $\tau_\infty$ dans le cas $n = 3$ des
+paragraphes précédents.}. Le stabilisateur de $P_\omega$ dans
+$\mathbb{D} \times \{1, \tau\}$ est formé des $(g, \tau^{\alpha(g)})$,
+$\alpha(g) = 0$ ou $1$ selon que $g$ est une rotation ou non ; il donne un
+homomorphisme $g \mapsto \tilde g$ de $\mathbb{D}$ dans $\Pi^{\mathbb{D},\tau}$.
+On pose $\rho = \tilde\omega$ ($\rho^n = 1$), $\tilde\sigma_a$ l'image de la
+symétrie $\sigma^0_a$ qui fixe l'arête $a$ ($\tilde\sigma_a^2 = 1$), puis
+\[
+(72)\qquad \sigma_a = \tilde\sigma_a\tau_a = \tau_a\tilde\sigma_a = (\lambda_a, \sigma^0_a) \in \Pi^{\mathbb{D}},
+\qquad (74)\text{--}(76)\qquad \varepsilon_s = \sigma_a\rho, \quad \rho_s = \varepsilon_s^2 = \sigma_a\rho\sigma_a\rho,
+\]
+$\sigma_a$ étant d'ordre $2$. On en déduit
+\[
+(77)\qquad \Pi^{\mathbb{D}}_P = \langle \rho, \sigma_{a_0} \mid \rho^n = \sigma_{a_0}^2 = 1 \rangle \simeq \mathbb{Z}/n * \mathbb{Z}/2,
+\]
+la relation (59) étant conséquence de $\rho^n = \sigma_{a_0}^2 = 1$, et
+$\rho(\varepsilon_s) = \varepsilon_{\rho(s)}$, $\rho(\rho_s) = \rho_{\rho(s)}$.
+
+\emph{Actions.} Dans $\Pi^{\tau}$ on calcule
+\[
+\begin{gathered}
+(80)\qquad \tau_{a_0}(\rho_0) = \rho_0^{-1}, \quad \tau_{a_0}(\rho_1) = \rho_1^{-1}, \\
+\tau_{a_0}(\rho_i) = \mathrm{int}\bigl((\rho_{i-1}\cdots\rho_1)^{-1}\bigr)(\rho_i^{-1}) \\
+= \mathrm{int}(\rho_0\rho_{n-1}\cdots\rho_{i+1})(\rho_i^{-1}),
+\end{gathered}
+\]\footnote{La
+seconde forme de la page omet le facteur $\rho_0$ ; une remarque à peine
+lisible sous le produit dit « avec $\rho_0$, pas $\rho_{n-1}$ ! ». Les formules
+(80) à (86) ont été vérifiées dans un modèle du groupe
+$\Pi^{\mathbb{D},\tau}$, pour $n = 5$ et $6$.}
+et, plus généralement, $\tilde g(\varepsilon_s) = \varepsilon_{g(s)}^{\mathrm{sg}(g)}$,
+$\tilde g(\rho_s) = \rho_{g(s)}^{\mathrm{sg}(g)}$ — en particulier
+$\tilde\sigma_{a_0}(\rho_i) = \rho_{1-i}^{-1}$ —, d'où
+$\sigma_{a_0}(\rho_0) = \rho_1$, $\sigma_{a_0}(\rho_1) = \rho_0$ et
+$\sigma_{a_0}(\rho_i) = \tau_{a_0}(\rho_{n+1-i}^{-1}) = \mathrm{int}(\rho_0\rho_{n-1}\cdots\rho_{n+2-i})(\rho_{n+1-i})$
+pour $2 \leq i \leq n-1$\footnote{Les indices de la dernière forme sont lus
+avec doute sur la page ; on donne ceux que le calcul impose.}. Le groupe
+total est
+\[
+\begin{gathered}
+(86)\text{--}(87)\qquad \Pi^{\mathbb{D},\tau}_P = \Pi^{\mathbb{D}}_P \rtimes \{1, \tilde\sigma_{a_0}\},
+\quad \tilde\sigma_{a_0}(\rho) = \rho^{-1},\ \tilde\sigma_{a_0}(\sigma_{a_0}) = \sigma_{a_0}, \\
+\Pi^{\mathbb{D},\tau}_P \simeq D(\rho) *_{D_1} D(\sigma_{a_0}),
+\end{gathered}
+\]
+somme amalgamée du groupe diédral d'ordre $2n$ engendré par $\rho$ et
+$\tilde\sigma_{a_0}$ et du groupe de Klein $\{1, \sigma_{a_0}\} \times \{1, \tilde\sigma_{a_0}\}$
+au-dessus de $D_1 = \{1, \tilde\sigma_{a_0}\}$. La page écrit d'abord le
+produit semi-direct avec $\tau_{a_0}$, en affirmant
+$\tau_{a_0}(\rho) = \rho^{-1}$ ; son propre calcul donne
+$\tau_{a_0}(\rho) = \sigma_{a_0}\rho^{-1}\sigma_{a_0}$, et elle se reprend
+aussitôt : « plus simplement », c'est $\tilde\sigma_{a_0}$ qui inverse $\rho$,
+ce qui est trivial puisque $g \mapsto \tilde g$ est un homomorphisme\footnote{La
+décomposition $\Pi^{\mathbb{D},\tau} = \Pi^{\mathbb{D}} \cdot \{1, \tau_{a_0}\}$ de
+(84) reste vraie comme produit semi-direct ; seule la formule (85) pour
+$\tau_{a_0}(\rho)$ est fausse. La page conclut « Je [crains] peut-être
+d'erreur », mots en partie illisibles.}. Pour $n = 3$, c'est
+$\mathbb{D}_3 *_{\mathbb{Z}/2} (\mathbb{Z}/2)^2 \simeq PGL(2, \mathbb{Z})$, en
+accord avec (43).
+
+\emph{La signature $(\infty, 2, n)$ (pages 85 à 91).} Le quotient de
+$\Sigma_P$ par $\mathbb{D}_P$ est une droite projective, ramifiée d'ordre $2$
+en les images des $R_s$ et des $Q_a$, d'ordre $n$ en celle des pôles ; en
+normalisant $R_s \mapsto 0$, $Q_a \mapsto 1$, $P_\omega \mapsto \infty$, on
+obtient
+\[
+(89)\qquad \Pi^{\mathbb{D}}_P \xrightarrow{\ \sim\ } \pi_{0,3}/\langle\langle \rho_1^2, \rho_\infty^n \rangle\rangle
+= \pi_1\bigl(\mathbb{P}^1(\mathbb{C}),\ \infty(0) + 2(1) + n(\infty);\ P_+\bigr).
+\]
+Pour le polygone épinglé $S_0 = \mu_n(\mathbb{C})$ sur le cercle unité,
+$\Sigma = \widehat{\mathbb{C}}$, $\mathbb{D}^+ = \mu_n$ opérant par homothéties,
+$\tau(z) = 1/\bar z$, l'application est explicite :
+\[
+(92)\qquad g_n(z) = -\frac{(z^n - 1)^2}{4z^n} = g(z^n),
+\]
+composée de $z \mapsto z^n$ et de l'application (23) : la carte cyclotomique
+$X_n$ devient un revêtement galoisien de la carte universelle, de groupe
+$\mathbb{D}_n$, ramifié d'ordres $2, 2, n$ au-dessus de $0, 1, \infty$.
+Pour en tirer un isomorphisme précis et non seulement extérieur, on prend le
+point base $P$ dans le repère origine $r_0 = (R_0, Q_{a_0}, P_\omega)$, envoyé
+sur $P_+$, et l'on compte les traversées de la subdivision barycentrique : le
+chemin qui représente $\rho$ franchit $(\infty, 0)$ puis $(\infty, 1)$, celui de
+$\sigma_{a_0}$ franchit $(\infty, 1)$ puis $(0, 1)$. D'où
+\[
+(98)\qquad g_n : \varepsilon_0 \mapsto \rho_0, \quad \sigma_{a_0} \mapsto \rho_1 = \rho_1^{-1}, \quad \rho \mapsto \rho_\infty^{-1},
+\]
+en accord avec (41) pour $n = 3$, et, pour la version à conjugaison,
+\[
+(100)\qquad g_n(\tilde\sigma_{a_0}) = \tau_0, \qquad g_n(\tau_{a_0}) = \tau_0\rho_1 = \tau_\infty .
+\]
+« Pour se rassurer », la page vérifie que $\tau_0$ inverse $\rho_\infty$ et
+$\rho_1$, comme $\tilde\sigma_{a_0}$ inverse $\rho$ et fixe $\sigma_{a_0}$
+(modulo $\rho_1^2 = 1$) ; c'est exact.
+
+\pagerange{91}{94}
+\subsection*{§7. Cartes $P$-pondérées (pages 91 à 94)}
+
+« Dans toutes ces considérations, on a un peu perdu de vue les cartes. » Le
+groupe $\Pi^{\tau}_P$ est un groupe cartographique « pondéré polygonal » : ses
+ensembles finis où les involutions $\tau_a$, indexées par les arêtes de $P$,
+opèrent sans point fixe sont les ensembles de faces des cartes
+\emph{$P$-pondérées}, cartes dont chaque face est un $n$-gone aux côtés
+numérotés circulairement, $\tau_a$ envoyant une face sur sa voisine par le
+côté de type $a$ :
+\[
+\begin{gathered}
+(101)\qquad \{\text{cartes } P\text{-pondérées finies}\} \simeq \{\Pi^{\tau}_P\text{-ensembles finis spéciaux}\}, \\
+(102)\qquad \{\text{cartes } P\text{-pondérées orientées}\} \simeq \{\Pi_P\text{-ensembles finis}\}.
+\end{gathered}
+\]
+Pour décrire $\Pi^{\tau}_P$ et (101), on n'a besoin que de $P$ ; pour $\Pi_P$ et
+(102), il faut une orientation $\omega$, bien qu'on puisse définir $\Pi_P$
+sans elle comme noyau de $\Pi^{\tau}_P \to \{\pm 1\}$, $\tau_a \mapsto -1$.
+Un quasi-inverse de (102) vient de la théorie de Galois des revêtements de
+$\Sigma^*_P$ : l'image inverse de la carte canonique de $\Sigma_P$, « carte
+$P$-pondérée orientée universelle », par un revêtement ramifié fini étale
+au-dessus de $\Sigma^*_P$. Pour (101), on « tord » $\mathbb{C}$ par l'orientation
+et l'on procède comme au §3. La généralisation du §5 aux cartes $n$-gonales est
+annoncée, « je ne vais pas détailler ce point ici ».
+
+\pagerange{95}{100}
+\subsection*{§8. Le fibré $P\Sigma$ (pages 95 à 100)}
+
+Un nouveau paragraphe, à numérotation de formules propre, construit $\Sigma$
+autrement : on part d'un polygone régulier $\tilde P_{2n}$ à $2n$ côtés dans un
+plan vectoriel réel $V$, revêtement double de $P_n = \tilde P_{2n}/\pm 1$
+($-1$ opérant par antipodie), et l'on pose $\Sigma = \mathbb{P}(V)(\mathbb{C})$,
+les sommets de $P_n$ allant sur les droites qu'engendrent ceux de
+$\tilde P_{2n}$ ; tout se factorise par la droite projective réelle. L'action
+de $D_{\tilde P_{2n}} \simeq \mathbb{D}_{2n}$ sur $V$ passe à $\Sigma$ en une
+action de $D_{P_n} = D_{\tilde P_{2n}}/\pm 1$, qui est l'action naturelle.
+
+Si $n$ est impair, la suite $1 \to \{\pm 1\} \to D_{\tilde P_{2n}} \to D_{P_n} \to 1$
+est scindée — un scindage revient à choisir l'un des deux $n$-gones inscrits
+dans le $2n$-gone, comme les deux triangles d'un hexagone —, de sorte que
+l'action de $D_{P_n}$ se relève linéairement, et
+$\Sigma_{P_n} = \mathbb{P}(V_{P_n})$, l'application $s \mapsto \mathbb{R}s$ étant
+injective sur les sommets. Si $n$ est pair, la suite n'est pas scindée : déjà
+$\mathbb{Z}/2n \to \mathbb{Z}/n$ ne l'est pas\footnote{La page écrit
+« $\mathbb{Z}/2m \to \mathbb{Z}/m$ … où $n = 2m$ » ; il s'agit de
+$\mathbb{Z}/2n \to \mathbb{Z}/n$, qui se ramène, en divisant par $m$, à
+$\mathbb{Z}/4 \to \mathbb{Z}/2$, non scindée. Plus directement : les relèvements
+dans $D_{\tilde P_{2n}}$ d'une rotation d'ordre $n$ sont deux rotations d'ordre
+$2n$.}. Comme l'extension est l'image réciproque de
+$1 \to \{\pm 1\} \to SL^{\pm}(V) \to \mathrm{Aut}(\Sigma)$\footnote{La page écrit
+$SL(V)$ ; les symétries du polygone sont de déterminant $-1$, et c'est le
+groupe des éléments de déterminant $\pm 1$ qu'il faut prendre.}, l'action de
+$D_{P_n}$ sur $\Sigma_{P_n}$ ne se relève pas en une action linéaire, ni sur
+$(\Sigma_{P_n}, \mathcal{O}(1))$. Le $\mathbb{C}^*$-fibré principal
+\[
+(12)\qquad P\Sigma_{P_n} = \check{\mathbb{V}}(\mathcal{O}_{\Sigma_{P_n}}(1))^*
+\]
+n'a donc pas d'action naturelle de $D_{P_n}$, mais, le revêtement double
+$\tilde P_{2n}$ choisi, il en a une de $D_{\tilde P_{2n}}$. Grothendieck
+s'intéresse, $n$ pair ou impair, au groupoïde fondamental de la restriction
+$P\Sigma^*_{P_n}$ de ce fibré à $\Sigma^*_{P_n}$, à l'action de
+$D_{\tilde P_{2n}}$ et de $D_{\tilde P_{2n}} \times \{1, \tau\}$ dessus, et
+aux groupes fondamentaux mixtes correspondants. Le texte s'interrompt sur le
+mot « Quand ».
+
+\pagerange{102}{123}
+\section*{Calculs sur un revêtement double (pages 102 à 123)}
+
+Ces feuillets, numérotés 11 à 16 de sa main (les feuillets 1 à 10 manquent au
+dossier), sont des calculs sans phrases ; on en restitue l'intention et ce qui
+se vérifie\footnote{La transcription marque de nombreuses lectures douteuses
+sur ces pages : indices surchargés, facteurs barrés un à un dans les
+produits. On ne reprend pas les calculs dont la lecture ne permet pas de
+décider ce qu'ils affirment.}.
+
+\pagerange{102}{108}
+\subsection*{Le revêtement $z \mapsto (2z-1)^2$ (pages 102 à 108)}
+
+L'involution $\sigma_\infty : z \mapsto 1 - z$ de la sphère fixe $\tfrac12$ et
+$\infty$ et échange $0$ et $1$ ; le quotient est donné par
+\[
+g(z) = (2z - 1)^2, \qquad \infty \mapsto \infty, \quad \tfrac12 \mapsto 0, \quad 0, 1 \mapsto 1,
+\]
+revêtement double ramifié au-dessus de $0$ et $\infty$. Soit $l_0, l_1, l_\infty$
+les lacets de la sphère privée de trois points (dans la variable $w = g(z)$),
+avec $l_\infty l_1 l_0 = 1$, et $\pi' \subset \Pi_{0,3}$ le sous-groupe d'indice
+$2$, noyau du caractère $l_0, l_\infty \mapsto -1$, $l_1 \mapsto +1$ : c'est le
+groupe fondamental de la sphère privée de $0, \tfrac12, 1, \infty$ (dans la
+variable $z$), engendré par
+\[
+\lambda_0 = l_0^{-1} l_1 l_0, \quad \lambda_{1/2} = l_0^2, \quad \lambda_1 = l_1, \quad \lambda_\infty = l_\infty^2,
+\qquad \lambda_\infty\lambda_1\lambda_{1/2}\lambda_0 = 1,
+\]
+la relation se vérifiant à partir de $l_\infty l_1 l_0 = 1$ ; la page 104
+établit $\lambda_0 = l_0^{-1}l_\infty^{-1} = (l_\infty l_0)^{-1} = \mathrm{int}(l_0^{-1})(l_1)$.
+En bouchant le point $\tfrac12$, on obtient une surjection
+$\pi' \to \Pi_{0,3}$ ($\lambda_0 \mapsto l_0$, $\lambda_{1/2} \mapsto 1$,
+$\lambda_1 \mapsto l_1$, $\lambda_\infty \mapsto l_\infty$), qui se prolonge en
+\[
+\hat\varphi_{1/2} : \widehat{\Pi}_{0,3} \longrightarrow \widehat{\Pi}_{0,3} \cdot \{1, \sigma_\infty\},
+\qquad l_0 \mapsto \sigma_\infty, \quad l_1 \mapsto l_1, \quad l_\infty \mapsto \varepsilon_\infty,
+\]
+le second membre étant le groupe fondamental mixte de la sphère sous
+$\sigma_\infty$, où $\sigma_\infty$ et $\varepsilon_\infty$ relèvent
+l'involution\footnote{Ce sont les éléments du dossier 145 ; la page marque
+d'un point d'interrogation les images $\sigma_\infty$ et $\varepsilon_\infty$, et
+la vérification de la relation entre les images, faite aux pages 106 et 112
+avec $\varepsilon_\infty = \rho^{-1}\sigma_\infty\rho^{-1}$, n'est pas lisible
+jusqu'au bout.}. La page 108 cherche ensuite comment un automorphisme à lacets
+$u$ de $\widehat{\Pi}_{0,3}$, $u(l_i) = \mathrm{int}(g_i)(l_i^p)$, se transporte
+par $\hat\varphi$ : la condition $\hat\varphi(u(x)) = u(\hat\varphi(x))$ pour
+$x = l_0$ force $\hat\varphi(g_0)$ à commuter à $\sigma_\infty$, d'où
+$\hat\varphi_{1/2}(g_0) = \sigma_\infty^{\alpha}$ ; pour $x = l_1$, on obtient
+$\hat\varphi_{1/2}(\sigma_\infty(g_0)) = \sigma_\infty(g_0)\, l_1^{\beta}$, $\beta$
+ne dépendant que du choix de $g_0$ ; le cas $x = l_\infty$ reste inachevé.
+
+\pagerange{110}{114}
+\subsection*{Le revêtement d'ordre $4$ (pages 110 à 114)}
+
+Le caractère $\Pi_{0,3} \to \mathbb{Z}/4$ qui prolonge le précédent, avec
+$\lambda_0, \lambda_{1/2}, \lambda_1, \lambda_\infty \mapsto 2$, est
+\[
+l_0, l_\infty \mapsto 1, \qquad l_1 \mapsto 2 \pmod 4
+\]
+(à l'automorphisme $-1$ près) : de $\alpha_1 = 2$ et $2\alpha_0 \equiv 2$ on tire
+$\alpha_0 \equiv \pm 1$, et $\alpha_0 + \alpha_1 + \alpha_\infty \equiv 0$ fixe
+$\alpha_\infty$. Son noyau $\pi''$ est le groupe d'un revêtement cyclique de
+degré $4$, totalement ramifié au-dessus de $0$ et $\infty$, d'indice $2$
+au-dessus de $1$ ; par Riemann–Hurwitz, c'est une courbe de genre $1$ (privée
+de quatre points)\footnote{Ce calcul est de cette édition ; la page écrit le
+quotient $\pi''/\langle\langle\lambda_0^2, \lambda_1^2, \lambda_\infty^2\rangle\rangle$
+et un diagramme où figurent $\hat{\mathfrak{S}}^{+}_{0,3}$, $M_{0,3}$ et
+$N'_{1,1}$ : c'est le passage du type $(0,3)$ au type $(1,1)$, la courbe de
+genre $1$ à automorphisme d'ordre $4$.}. La page 112 essaie un second
+prolongement ($l_0 \mapsto \varepsilon_0$, $l_1 \mapsto l_1$,
+$l_\infty \mapsto \varepsilon_\infty$), la page 114 un troisième
+$\hat\varphi_\infty$ ($l_0 \mapsto \varepsilon_\infty$, $l_1 \mapsto l_0$,
+$l_\infty \mapsto \sigma_\infty$), puis note
+$SL(2, \mathbb{Z}/12)' \simeq (SL(2, \mathbb{Z}/4) \times SL(2, \mathbb{Z}/3))/\pm 1$
+et la surjection de $SL(2, \widehat{\mathbb{Z}})'$ sur
+$SL(2, \mathbb{Z}/2) \simeq \mathfrak{S}_3$, dont le noyau correspond aux
+revêtements « pairs »\footnote{Sur l'identification de
+$\hat{\mathfrak{S}}^{+}_{0,3}$ à $SL(2, \widehat{\mathbb{Z}})'$ que porte la même
+page, voir la note de la page 33 : elle vaut pour les groupes discrets, non
+pour les complétés.}.
+
+\pagerange{116}{123}
+\subsection*{Les lettres de Deligne (pages 116 à 123)}
+
+Une chemise porte, au crayon, « Calculs divers sur Teichmüller » et « Lettre
+Deligne sur groupes profinis ». Suivent deux lettres de P. Deligne à
+Grothendieck, que la transcription ne restitue pas ; selon ses notices, la
+première, datée du 27 mars 1981, porte sur les pro-groupes libres, les éléments
+d'ordre fini et centraux d'un complété profini de groupe libre, le centre des
+sous-groupes d'indice fini de $\mathrm{Gal}(\overline{\mathbb{Q}}/\mathbb{Q})$ et
+les sous-groupes finis du groupe de Teichmüller (avec un renvoi à Kerckhoff) ;
+la seconde, sans date, résume la théorie du corps de classes et le théorème de
+Shimura–Taniyama sur la multiplication complexe. On n'en dit pas davantage
+(RIGHTS.md).
+
+\pagerange{125}{139}
+\section*{Diagrammes d'indices et le groupe $\mathfrak{S}_{1,1}$ (pages 125 à 139)}
+
+\pagerange{125}{125}
+\subsection*{Diagrammes d'indices (page 125)}
+
+Sur une feuille de papier kraft, sans phrases, des diagrammes d'inclusions
+entre sous-groupes de $\mathcal{M}$ — un groupe de type $\pi_1$ de multiplicité
+modulaire —, chaque arête portant son indice ($2$, $4$, $6$, $12$), dessinés en
+cubes et en doubles pyramides, avec des quotients du type
+$\mathcal{M} \to \mathfrak{S}_3 \times \mu \times \mu$, $\mu = \{\pm 1\}$. On y lit
+l'ordre $48$ de $SL(2, \mathbb{Z}/4)$, son noyau d'ordre $8$ vers
+$SL(2, \mathbb{Z}/2)$, d'ordre $6$, et la suite
+$1 \to SL(2, \mathbb{Z}/4) \to GL(2, \mathbb{Z}/4) \to (\mathbb{Z}/4)^* \to 1$,
+toutes exactes. Ce sont des repères pour les pages 133 à 139.
+
+\pagerange{128}{130}
+\subsection*{Le groupe $\mathfrak{S}_{1,1}$ (pages 128 à 130)}
+
+Le groupe $\mathfrak{S}_{1,1}$ du tore marqué d'un point, groupe fondamental de
+la courbe universelle (avec la conjugaison), est identifié à
+$\mathcal{T}^{!}_{1,2}$, le groupe modulaire étendu du tore à deux points
+fixés ; il contient
+\[
+S\mathcal{T}_{1,1} \simeq GL(2, \mathbb{Z})^{\sim} = \mathrm{Norm}_{\mathfrak{S}_{1,1}}(L^!_0),
+\]
+$L^!_0$ étant engendré par le lacet $l^!_0$ autour du point base. Avec
+$[\tilde u, \tilde v] = l_0^{!\,-1}$, $\tilde\rho^3 = \tilde\omega_0$,
+$\tilde\sigma^2 = \tilde\omega_0^{-1}$, $\tilde\omega_0^2 = l^!_0$, et des
+involutions $\tilde r_0, \tilde r_1, \tilde r_\infty$ avec
+$\tilde\rho = \tilde r_0\tilde r_1$, $\tilde\sigma = \tilde r_\infty\tilde r_0$,
+$\tilde r_1\tilde r_\infty = (\tilde\sigma\tilde\rho)^{-1} = \tilde\varepsilon_0^{-1}$,
+il obtient la présentation
+\[
+\mathfrak{S}_{1,1} = \Bigl\langle \tilde r_0, \tilde r_1, \tilde r_\infty, \tilde u, \tilde v \Bigm|
+\begin{array}{l}
+\tilde r_i^2 = 1, \quad (\tilde r_0\tilde r_1)^3(\tilde r_\infty\tilde r_0)^2 = 1, \quad (\tilde r_0\tilde r_1)^6 = [\tilde u, \tilde v]^{-1}, \\
+\tilde r_0 : \tilde u \leftrightarrow \tilde v, \quad
+\tilde r_\infty : \tilde u \mapsto \tilde u^{-1},\ \tilde v \mapsto \tilde u\tilde v\tilde u^{-1}, \quad
+\tilde r_1 : \tilde u \mapsto \tilde u^{-1},\ \tilde v \mapsto \tilde u\tilde v
+\end{array}
+\Bigr\rangle,
+\]
+les relations de la seconde ligne étant des relations de conjugaison
+$\tilde r\tilde u\tilde r^{-1} = \ldots$\footnote{La page écrit
+$(\tilde r_0\tilde r_1)^6 = [\tilde u, \tilde v]$ dans la présentation, et
+$(\tilde r_0\tilde r_1)^3 = (\tilde r_\infty\tilde r_0)^2 = \tilde\omega_0$,
+$\tilde\omega_0^2 = [\tilde u, \tilde v]$ dans sa seconde forme : c'est l'inverse
+de ses propres premières lignes ($[\tilde u, \tilde v] = l_0^{!\,-1}$,
+$\tilde\sigma^2 = \tilde\omega_0^{-1}$, relation encadrée
+$(\tilde r_0\tilde r_1)^3(\tilde r_\infty\tilde r_0)^2 = 1$). Le calcul dans
+$\mathrm{Aut}(F_2)$ tranche pour les premières lignes :
+$\tilde\rho^3\tilde\sigma^2 = 1$ et $\tilde\rho^6 = \mathrm{int}([\tilde u, \tilde v]^{-1})$.}.
+Les trois réflexions inversent le commutateur :
+$\tilde r_i([\tilde u, \tilde v]) = [\tilde u, \tilde v]^{-1}$ pour
+$i = 0, 1, \infty$, et $\tilde\rho$, $\tilde\sigma$ le fixent\footnote{La page
+conclut $\tilde r_\infty(l^!_0) = l^!_0$, ajouté au bord, d'un indice lu
+plutôt « $1$ » ; pour $\tilde r_\infty$ comme pour $\tilde r_0$ et $\tilde r_1$,
+c'est $l_0^{!\,-1}$.}. Ce groupe est, à isomorphisme près, $\mathrm{Aut}(F_2)$ :
+le sous-groupe $\langle \tilde u, \tilde v \rangle$ s'y plonge par les
+automorphismes intérieurs, et le quotient
+$\mathrm{Out}(F_2) = GL(2, \mathbb{Z})$ est le groupe modulaire étendu du tore
+marqué\footnote{Identification de cette édition (Nielsen ; Dehn–Nielsen–Baer
+pour le tore privé d'un point) ; toutes les relations ci-dessus ont été
+vérifiées dans $\mathrm{Aut}(F_2)$ avec $\mathrm{int}(g)(x) = gxg^{-1}$.}. La
+page 129, en marge d'une affiche du séminaire de géométrie algébrique de
+Montpellier (octobre 1980), écrit la loi d'associativité des couples
+$(\gamma, l)$ sur un diagramme de chemins.
+
+\pagerange{133}{139}
+\subsection*{Le cas $(0,3)$ : positions relatives (pages 133 à 139)}
+
+Pour le type $(0,3)$, le groupe $\mathfrak{S} = \mathfrak{S}_{0,3}$ est présenté
+par
+\[
+\mathfrak{S} = \langle \rho, \sigma, \tau' \mid \rho^6 = \sigma^4 = \tau'^2 = 1,\ \rho^3 = \sigma^2,\ \tau'(\rho) = \rho^{-1},\ \tau'(\sigma) = \sigma^{-1} \rangle
+\]
+— c'est $GL(2, \mathbb{Z})$ (page 30) —, avec $\tau = \sigma\tau' = \tau'\sigma^{-1}$ et
+$\mathfrak{S}_{0,3}/\mathfrak{S}^{+!}_{0,3} \simeq \mathfrak{S}_3 \times \mu_\tau$.
+Le sous-groupe $\Pi_0 = \langle \lambda_0, \lambda_1, \lambda_\infty \mid \lambda_\infty\lambda_1\lambda_0 = 1 \rangle$,
+$\lambda_i = -l_i$, s'y plonge, et les quotients
+\[
+\mathfrak{S}/\Pi_0 = \langle \rho, \sigma, \tau \mid \rho^6 = \sigma^4 = \tau^2 = 1,\ \rho^3 = \sigma^2,\ \tau(\sigma) = \sigma^{-1},\ \tau(\rho) = \rho,\ \sigma(\rho) = \rho^{-1} \rangle,
+\]
+d'ordre $24$, et $\mathfrak{S}^+/\Pi_0$, d'ordre $12$, s'obtiennent en ajoutant
+$\tau(\rho) = \rho$\footnote{Avec $\lambda_i = -\ell_i$ dans les matrices de la page 33, $\Pi_0$ est un
+sous-groupe libre d'indice $2$ du sous-groupe de congruence
+$\Gamma(2) = \{\pm 1\} \times \Pi_0$, distingué dans $GL(2, \mathbb{Z})$, d'indice
+$12$ dans $SL(2, \mathbb{Z})$ et $24$ dans $GL(2, \mathbb{Z})$ ; $\mathfrak{S}/\Pi_0$
+est une extension de $GL(2, \mathbb{F}_2) \simeq \mathfrak{S}_3$ par
+$(\mathbb{Z}/2)^2$, ce qui redonne les ordres $24$ et $12$ de la page.
+Vérification de cette édition.}. Les grands diagrammes
+des pages 133 à 139 — (I) position relative des sous-groupes $L_\rho$, $L_\sigma$
+engendrés par $\rho$ et $\sigma$ et de leurs normalisateurs diédraux $D_\rho$,
+$D_\sigma$ ; (II) le cube des groupes $\Pi_0$, $\Pi = \Pi_0 \times \mu$,
+$\Pi' = \{1, \tau\} \cdot \Pi$, tous d'indice $2$ les uns dans les autres ;
+(III) la place de $\mathcal{M}(0)$ ; (IV) les centralisateurs $Z_\rho$ et
+normalisateurs $N_\rho$ — sont des treillis d'inclusions marqués de leurs
+indices ($2$, $3$, $6$), avec des arêtes $\widehat{\mathbb{Z}}^*$ vers les
+groupes arithmétiques $\mathcal{M}$, $\mathcal{M}^!$ ; on n'en restitue pas
+le détail, que la transcription décrit, et qui ne comporte pas d'énoncé.
+Une chemise annonce ensuite « $S\mathcal{T}_{0,2}$, $S\mathcal{T}_{1,1}$,
+$S\mathcal{T}_{1,2}$ … ».
+
+\pagerange{141}{169}
+\section*{Le cylindre et le tore (pages 141 à 169)}
+
+\pagerange{141}{148}
+\subsection*{Le groupe de Teichmüller spécial étendu du cylindre (pages 141 à 148)}
+
+Soit $X = \mathbb{U} \times \mathbb{I}$, $\mathbb{U} = \{|z| = 1\}$,
+$\mathbb{I} = [-1, 1]$, de bord $\mathbb{U}_{-1} \sqcup \mathbb{U}_1$. Le groupe
+diédral « torique » $D_{\mathbb{U}} = \{1, \sigma\} \ltimes \mathbb{U} \simeq O(2, \mathbb{R})$,
+$\sigma$ étant la conjugaison, a pour revêtement universel
+$D_{\mathbb{R}} = \{1, \sigma\} \ltimes \mathbb{R}$, avec
+$1 \to \mathbb{Z} \to D_{\mathbb{R}} \to D_{\mathbb{U}} \to 1$, opérant sur les
+revêtements $\mathbb{R}_\varepsilon$ des composantes du bord par
+$(\sigma^\nu u)\cdot t = (-1)^\nu(t + u)$. Le sous-groupe
+$D_{\mathbb{R}\times\mathbb{R}} = \{1, \sigma\} \ltimes (\mathbb{R} \times \mathbb{R})$
+opère sur $\widetilde{X} = \mathbb{R} \times \mathbb{I}$ par interpolation
+affine : pour $(u_{-1}, u_1)$, soit $u_s = as + b$ l'application affine
+($a = (u_1 - u_{-1})/2$, $b = (u_1 + u_{-1})/2$) et
+\[
+(15)\qquad f_{a,b}(t, s) = (t + as + b, s), \qquad \sigma(t, s) = (-t, s).
+\]
+Cette action est fidèle sur $\widetilde{X}$ et même sur son bord ; deux
+éléments ont même effet sur $X$ si et seulement si ils ont même composante
+$\sigma^\nu$, même $a$, et des $b$ congrus modulo $\mathbb{Z}$\footnote{La
+seconde ligne de (18) porte $u_{+1}$ au numérateur de gauche ; on attend
+$u_{-1}$, comme le note la transcription. L'argument : $(a - a')s + (b - b')$
+entier pour tout $s \in \mathbb{I}$ force $a = a'$ et $b - b' \in \mathbb{Z}$.}.
+Le groupe qui opère fidèlement sur $X$ est donc
+\[
+(21)\text{--}(22)\qquad D_{\mathbb{R}\times\mathbb{U}} = \{1, \sigma\} \ltimes (\mathbb{R} \times \mathbb{U}),
+\qquad g_{a,\theta}(z, s) = \bigl(z\, e^{2i\pi as}\,\theta,\ s\bigr), \quad \sigma(z, s) = (z^{-1}, s),
+\]
+$\sigma$ opérant par $(u, \theta) \mapsto (-u, \theta^{-1})$. On y ajoute le
+retournement $s \mapsto \varepsilon s$, $\varepsilon = \pm 1$, qui change le
+signe de $a$. Les éléments qui opèrent sur chaque composante du bord par des
+rotations d'ordre fini — $\theta e^{\mp 2i\pi a} \in \mu_\infty(\mathbb{C})$ —
+sont ceux où $\theta \in \mu_\infty$ et $a \in \mathbb{Q}$ ; ils forment
+\[
+(29)\text{--}(31)\qquad G = (\mu \times \mu) \ltimes (\mathbb{Q} \times \mu_\infty),
+\qquad \widetilde{G} = (\mu \times \mu) \ltimes (\mathbb{Q} \times \mathbb{Q}),
+\qquad 1 \to \mathbb{Z} \to \widetilde{G} \to G \to 1,
+\]
+avec $\mu = \{\pm 1\}$, $\mu_\infty \simeq \mathbb{Q}/\mathbb{Z}$, $\sigma = (-1, -1)$,
+et l'action
+\[
+(32)\text{--}(33)\qquad \bigl((\varepsilon, \varepsilon') f_{a,b}\bigr)(t, s) = \bigl(\varepsilon'(t + as + b),\ \varepsilon\varepsilon' s\bigr),
+\qquad \bigl((\varepsilon, \varepsilon') g_{a,\theta}\bigr)(z, s) = \bigl((z\theta e^{2i\pi as})^{\varepsilon'},\ \varepsilon\varepsilon' s\bigr).
+\]
+$\varepsilon$ est le caractère d'orientation, $\varepsilon\varepsilon'$ dit si les
+deux composantes du bord sont échangées. Le sous-groupe $G_0$ des
+$g_a(z, s) = (z e^{2i\pi as}, s)$ ($\theta = 1$) induit l'identité sur le bord
+si et seulement si $a \in \mathbb{Z}$ : ce sont les puissances de la torsion de
+Dehn. La phrase suivante s'arrête.
+
+\pagerange{149}{149}
+\subsection*{L'invariant de torsion (page 149)}
+
+Un cylindre $X$ porte trois ensembles à deux éléments : $\varepsilon_0(X) = \pi_0(\partial X)$,
+l'ensemble $\varepsilon_1(X)$ des deux générateurs de $\pi_1(X) \simeq H_1(X)$,
+et l'ensemble $\omega(X)$ de ses orientations, avec
+$\omega(X) \simeq \varepsilon_0(X) \wedge \varepsilon_1(X)$ (une composante du bord
+et une orientation de celle-ci orientent $X$). Un automorphisme $u$ de $X$
+induisant l'identité sur $\partial X$ se relève de façon unique en $\tilde u^{(S)}$
+induisant l'identité au-dessus d'une composante $S$ du bord ; au-dessus de
+l'autre, il opère par une translation $n \in H_1(X)$, et échanger les rôles
+change $n$ en $-n$. L'invariant vit donc dans
+\[
+H_1(X) \wedge_{\{\pm 1\}} \varepsilon_0(X) \simeq \mathbb{Z} \wedge_{\{\pm 1\}} \omega(X) :
+\]
+le nombre de torsions de Dehn est un entier dès que $X$ est orienté, et son
+signe change avec l'orientation.
+
+\pagerange{153}{159}
+\subsection*{Le tore et ses générateurs (pages 153 à 159)}
+
+La page 153 se demande si
+$\mathcal{T}^{!}_{1,2} \simeq GL(2, \mathbb{Z}) *_{D_\infty} GL(2, \mathbb{Z})$ :
+les éléments $\tau'', \xi_0, \xi_1$ engendrent une copie de $GL(2, \mathbb{Z})$,
+$\tau'', \xi_2, \xi_1^{-1}$ une autre, $\tau'', \xi_1$ un groupe diédral infini,
+et $\tau$ échange les deux copies. La question reste ouverte dans le
+dossier\footnote{La page met un point d'interrogation sur l'isomorphisme ; on
+ne la tranche pas ici.}. Elle note aussi, pour le genre $g$, un système de
+$3g$ cylindres deux à deux en position standard ou disjoints, avec
+$2g + g(g-1) = g(g+1)$ paires en position standard.
+
+La page 155 dessine un tore traversé par deux cylindres ; $\xi_0, \xi_1, \xi_2$
+sont des torsions de Dehn, $\tau, \tau', \tau''$ des involutions commutant deux
+à deux, et
+\[
+\begin{gathered}
+\tau(\xi_0) = \xi_2, \quad \tau(\xi_1) = \xi_1^{-1}, \quad \tau'(\xi_i) = \tau''(\xi_i) = \xi_i^{-1}, \\
+[\xi_0, \xi_2] = 1, \quad \xi_0\xi_1\xi_0 = \xi_1\xi_0\xi_1, \quad \xi_2\xi_1^{-1}\xi_2 = \xi_1^{-1}\xi_2\xi_1^{-1},
+\end{gathered}
+\]
+d'où $(\xi_1\xi_0)^3 = (\xi_0\xi_1\xi_0)^2$\footnote{La page lit
+$\tau(\xi_2) = \tau(\xi_1)$ ; on attend $\tau(\xi_2) = \xi_0$, $\tau$ étant une
+involution. La dernière relation de tresse porte sur $\xi_1^{-1}$ parce que
+$\xi_2 = \tau\xi_0\tau$ est une torsion de sens opposé, $\tau$ renversant
+l'orientation ; elle équivaut à la relation de tresse entre $\xi_2^{-1}$ et
+$\xi_1$.}. La page 157 en tire les présentations
+\[
+\begin{gathered}
+SL(2, \mathbb{Z}) = \langle \xi_0, \xi_1 \mid \xi_0\xi_1\xi_0 = \xi_1\xi_0\xi_1,\ (\xi_1\xi_0)^6 = 1 \rangle, \\
+GL(2, \mathbb{Z}) = \langle r_0, \xi_0, \xi_1 \mid r_0^2 = 1,\ r_0(\xi_0) = \xi_1^{-1},\ r_0(\xi_1) = \xi_0^{-1}, \\
+\ \xi_0\xi_1\xi_0 = \xi_1\xi_0\xi_1,\ (\xi_1\xi_0)^6 = 1 \rangle,
+\end{gathered}
+\]
+et, avec $r_0, r_1, r_\infty$, celle des pages 30 et 33\footnote{Dans la
+dernière ligne, la page lit le second membre de la relation de tresse
+$\xi_1\xi_2\xi_1$ ; c'est $\xi_1\xi_0\xi_1$. L'exposant de $(r_0r_\infty)$ est
+surchargé ; les relations justes sont $(r_0r_\infty)^2 = (r_1r_0)^3$ et
+$(r_0r_\infty)^4 = 1$.}. Les relèvements $\tilde\xi_0, \tilde\xi_1, \tilde r_0$
+existent parce que les torsions fixent le point base au bord ; avec
+$\tilde\rho = (\tilde\xi_1\tilde\xi_0)^{-1}$ et
+$\tilde\sigma = \tilde\xi_0\tilde\rho^{-1} = \tilde\xi_0\tilde\xi_1\tilde\xi_0$, on a
+$\tilde\sigma(\tilde\xi_0) = \tilde\rho(\tilde\xi_0) = \tilde\xi_1$ et
+$\tilde\rho^{-3} = \tilde\sigma^2$ — « oui », écrit la marge ; c'est le groupe
+des tresses de la page 31, et l'on voudrait que $\tilde\rho^{-6} = \tilde\sigma^4$
+soit le générateur canonique du noyau vers $\mathcal{T}_{1,1}$.
+
+La page 159 réalise tout cela par des matrices dans une base $(e', e'')$ : les
+réflexions $\tau' = \mathrm{diag}(1, -1)$, $\tau'' = \mathrm{diag}(-1, 1)$, la
+rotation $\sigma : e' \mapsto e'', e'' \mapsto -e'$, avec
+$\tau'\tau'' = \sigma^2 = \omega_0 = -1$ ; la torsion
+$\xi' : e' \mapsto e', e'' \mapsto e'' - e'$ et $\xi'' = \sigma(\xi')$. Le
+dictionnaire $\tau'' \mapsto \tau_\infty = r_\infty$, $\sigma \mapsto \sigma_\infty$,
+$\xi' \mapsto \xi_0$, $\xi'' \mapsto \xi_1$, $\sigma\tau' \mapsto r_0$ donne
+$\xi_0 = \sigma\rho$, $\xi_1 = \rho\sigma$, $\xi_1\xi_0 = \rho\sigma^2\rho = -\rho^2 = \rho^{-1}$,
+avec le $\rho$ des formulaires, et
+$r_0(\rho) = \rho^{-1}$, $r_0(\sigma) = \sigma^{-1}$, conformément à la
+relation de tresse.
+
+\pagerange{161}{169}
+\subsection*{Le groupe $\Gamma_{1,1}$ et le cylindre (pages 161 à 169)}
+
+Un tore muni de deux cylindres $X'$, $X''$ se coupant en un carré : les
+ensembles $\varepsilon_0, \varepsilon_1$ des deux cylindres s'échangent,
+$\varepsilon_0(X') \simeq \varepsilon_1(X'')$, $\varepsilon_1(X') \simeq \varepsilon_0(X'')$,
+et leurs orientations se correspondent, de façon « anticommutative ».
+$\tau', \tau'', \sigma$ ne dépendent pas des orientations ; $e', e''$ les fixent
+et définissent les torsions $\rho', \rho''$ ($\rho'(e'') = e' + e''$). On a
+\[
+\begin{gathered}
+\tau'^2 = \tau''^2 = \sigma^4 = 1, \quad \sigma^2 = \tau'\tau'', \\
+\tau'(\rho') = \tau''(\rho') = \rho'^{-1}, \quad \tau'(\rho'') = \tau''(\rho'') = \rho''^{-1}, \quad \sigma(\rho') = \rho'',
+\end{gathered}
+\]
+et le dictionnaire $\rho' \mapsto \varepsilon_0$, $\rho'' \mapsto \varepsilon_1$,
+$\tau'' \mapsto r_\infty$, $\tau' \mapsto -r_\infty$, $\sigma \mapsto \sigma_\infty$,
+d'où $\sigma^{-1}\rho' \mapsto \rho$, $\tau''\sigma \mapsto r_0$,
+$\tau''\rho' \mapsto r_1$. La relation $(\sigma\rho')^3 = 1$ n'a pas lieu dans
+$\Gamma^{+}_{1,1}$, mais dans un groupe « spécial »\footnote{Dans
+$SL(2, \mathbb{Z})$, $\sigma\rho'$ est d'ordre $6$ et $(\sigma\rho')^3 = -1$ ;
+c'est dans $PSL(2, \mathbb{Z})$ qu'il vaut $1$. Les conventions de signe des
+torsions varient d'une page à l'autre : $\rho'(e'') = e' + e''$ ici,
+$\xi'(e'') = e'' - e'$ à la page 159, $\rho_1(e_2) = e_2 - e_1$ à la page
+167.}. Les pages 163 et 165 décrivent l'ensemble des sommets du carré
+comme produit des ensembles $\varepsilon$.
+
+Les pages 165 à 167 réalisent le groupe diédral $D_\sigma \simeq D_4$ sur un
+cylindre : $\sigma(z, t) = (iz, -t)$, $\sigma_1(z, t) = (\bar z, t)$,
+$\sigma_2(z, t) = (-\bar z, t)$, avec $\sigma^2 = \sigma_1\sigma_2$ et
+$\sigma_1(\sigma) = \sigma_2(\sigma) = \sigma^{-1}$ (le point d'interrogation de
+la page peut être levé). Puis, avec une torsion $\rho_1$ inversée par
+$\sigma_1$ et commutant à $\sigma^2$, le groupe
+$\langle \sigma, \sigma_1, \rho_1 \mid \sigma^4 = \sigma_1^2 = 1,\ \sigma_1(\sigma) = \sigma^{-1},\ \sigma_1(\rho_1) = \rho_1^{-1},\ \sigma^2(\rho_1) = \rho_1 \rangle$,
+amalgame de $D_\sigma$ et de $D_{\rho_1} = \langle \rho_1, \sigma_1 \rangle$\footnote{La
+page n'en dit pas davantage. Dans $GL(2, \mathbb{Z})$, avec les matrices de la
+page 167, ces relations sont satisfaites, mais aussi $(\sigma\rho_1)^3 = 1$, qui
+n'en découle pas ; la page ne dit pas que ce groupe soit $GL(2, \mathbb{Z})$.}.
+
+La page 169 fait opérer $D_\infty \times \mu$ sur le cylindre
+$(z, s) \mapsto (\varepsilon z e^{2i\pi as}, \varepsilon' s)$ : avec
+$\sigma_1(z, s) = (z^{-1}, s)$, $\sigma_2(z, s) = (z, -s)$, la torsion
+$\theta(z, s) = (z e^{2i\pi s}, s)$ et $\mathbf{a}(z, s) = (-z, -s)$, on a
+$\mathbf{a}^2 = \sigma_1^2 = \sigma_2^2 = 1$, $\sigma_1\sigma_2 = \sigma_2\sigma_1$,
+$\mathbf{a}\sigma_1 = \sigma_1\mathbf{a}$, et $\sigma_1, \sigma_2, \mathbf{a}$
+inversent tous trois $\theta$ ; toutes ces relations se vérifient sur les
+formules.
+
+\pagerange{172}{176}
+\section*{« Construction » (pages 172 à 176)}
+
+La page 172 rappelle la loi de composition dans une extension
+$1 \to \pi \to E \to G \to 1$ décrite par des couples (voir les conventions),
+puis calcule, dans le complété du groupe des tresses, l'effet d'un
+automorphisme $\tilde u$ sur les générateurs. La page 174 en donne le cadre :
+\[
+(1)\text{--}(2)\qquad G = GL(2, \widehat{\mathbb{Z}}) \ltimes \widehat{\mathbb{Z}}, \qquad u \cdot \lambda = \det(u)\lambda,
+\]
+$\mathfrak{z}(\lambda)$ désignant l'image de $\lambda \in \widehat{\mathbb{Z}}$, et
+l'homomorphisme
+\[
+\begin{gathered}
+(3)\qquad SL(2, \mathbb{Z})^{\sim} \to G, \\
+\tilde\rho \mapsto \rho_0\,\mathfrak{z}(-2), \quad \tilde\sigma \mapsto \sigma_0\,\mathfrak{z}(3), \quad
+\tilde\omega_0 \mapsto \omega_0\,\mathfrak{z}(6), \quad \ell'_0 \mapsto \mathfrak{z}(12), \quad \tilde r_0 \mapsto r_0 .
+\end{gathered}
+\]
+Il est bien défini ($\tilde\rho^{-3}$ et $\tilde\sigma^2$ vont tous deux sur
+$\omega_0\mathfrak{z}(6)$, puisque $\rho_0^{-3} = \sigma_0^2 = -1$) ; c'est le
+couple formé de la réduction $B_3 \to SL(2, \mathbb{Z})$ et de l'abélianisation
+$B_3 \to \mathbb{Z}$ (chaque $\tilde\varepsilon_i$ va sur $\mathfrak{z}(1)$), qui
+est injectif sur $B_3$, puisque le noyau $\langle \ell'_0 \rangle$ de la première
+s'envoie isomorphiquement par la seconde\footnote{Cette interprétation est de
+cette édition ; la page donne les images sans les commenter.}. Le sous-groupe
+$SG = SL(2, \widehat{\mathbb{Z}}) \times \widehat{\mathbb{Z}}$ a pour centre
+$\mu \times \widehat{\mathbb{Z}}$, de sorte que $G$ opère sur $SG$ par
+conjugaison à travers $G/\widehat{\mathbb{Z}} \simeq GL(2, \widehat{\mathbb{Z}})$.
+Pour $\beta = \mathbf{u}\, b^{-1} \in SL(2, \widehat{\mathbb{Z}})$, avec
+$\mathbf{u} = \bigl(\begin{smallmatrix} \mu & \lambda \\ 0 & 1 \end{smallmatrix}\bigr)$
+et $b = t\sigma + u$ dans le centralisateur de $\sigma$, de déterminant
+$t^2 + u^2 = \mu \in \widehat{\mathbb{Z}}^*$, on pose
+$\tilde\eta = [\tilde\beta, \tilde\sigma] = \beta(\tilde\sigma)\tilde\sigma^{-1}$,
+inversé par $\sigma$.
+
+Les pages 173 et 176 cherchent alors un automorphisme $\tilde u$ de multiplicateur
+$\mu$ de la forme
+\[
+\tilde u(\tilde\rho) = \lambda'\tilde\xi\tilde\rho, \qquad \tilde u(\tilde\sigma) = \lambda''\tilde\eta\tilde\sigma,
+\qquad \tilde u(\tilde\omega_0) = \tilde\omega_0^{\mu}, \qquad \tilde u(\tilde\varepsilon_0) \overset{?}{=} \tilde\varepsilon_0^{\mu},
+\]
+avec des facteurs centraux $\lambda', \lambda''$. Les conditions sur
+$\tilde\rho^3$ et $\tilde\sigma^2$ donnent
+$\lambda' = \tilde\omega_0^{-(\mu - \varepsilon_3)/3}$ et
+$\lambda'' = \tilde\omega_0^{(\mu - \varepsilon_2)/2}$, où
+$\varepsilon_3, \varepsilon_2 \in \{\pm 1\}$ sont des signes de réduction
+de $\mu$, d'où $\lambda'\lambda'' = \tilde\omega_0^{(\mu - 3\varepsilon_2 + 2\varepsilon_3)/6}$.
+La dernière condition, $\tilde u(\tilde\varepsilon_0) = \tilde\varepsilon_0^{\mu}$,
+se ramène à une équation entre exposants, $\nu' - \nu'' = 2\nu$, qui entraîne
+$\nu_0 = 0$ quand $\nu_2 = \nu_3 = 0$\footnote{La page 173 écrit
+$-\nu_2\nu_3 + \nu_0 = 2(2\nu_3 - 3\nu_2 - 6\nu_2\nu_3 + 6\nu_0)$ puis
+« $11\nu_0 = 0$, $\nu_0 = 0$ » ; la transcription note que cela ne se déduit pas
+tel quel. C'est le cas $\nu_2 = \nu_3 = 0$, que précise la page 176 : il reste
+$\nu_0 = 12\nu_0$, donc $11\nu_0 = 0$, et $\nu_0 = 0$ puisque
+$\widehat{\mathbb{Z}}$ est sans torsion. Les exposants $\nu, \nu', \nu'', \nu_i$
+ne sont pas définis sur ces pages ; on ne restitue que cette conséquence.}.
+Le calcul s'achève sur une égalité encadrée et interrogative,
+$\lambda'\lambda'' \overset{?}{=} \tilde\xi^{-1}\tilde\eta\,\tilde l_1^{\nu}$. C'est,
+pour le type $(1,1)$, la recherche d'automorphismes « à lacets » du complété de
+$B_3$ analogue à celle que le dossier 145 mène pour $\widehat{\pi}_{0,3}$, et qui
+deviendra la théorie du groupe de Grothendieck–Teichmüller\footnote{Le
+rapprochement est de cette édition. Le titre « Ext des gr. de
+$\mathcal{M}_{0,3}[0]$ dans $SL(2, \mathbb{Z})^{\wedge}$ » de la page 176
+indique ce qui est cherché.}.
+
+\pagerange{179}{182}
+\section*{Tours de groupes modulaires et courbes stables (pages 179 à 182)}
+
+\pagerange{179}{179}
+\subsection*{Les tours $\Gamma^{!+}_{g,\nu}$ (page 179)}
+
+Oublier un point donne des suites
+$\Gamma^{!+}_{g,\nu} \to \Gamma^{!+}_{g,\nu-1}$, de noyau le groupe fondamental
+$\Pi_{g,\nu-1}$ de la surface correspondante (suite exacte de Birman), et la
+page dessine les tours pour $g = 0$, $g = 1$, $g \geq 2$, jusqu'à
+$\Gamma^{!+}_{0,3} = 1$, $\Gamma^{!+}_{1,1} \simeq SL(2, \mathbb{Z})$ et
+$\Gamma^{!+}_{g,0}$\footnote{La page écrit
+$\Gamma^{!+}_{0,4} \simeq SL(2, \mathbb{Z})/\pm 1$. Avec l'exposant $!$ pour
+« pur », comme partout dans le dossier, $\Gamma^{!+}_{0,4}$ est le noyau de
+$\Gamma^{!+}_{0,4} \to \Gamma^{!+}_{0,3} = 1$, c'est-à-dire $\Pi_{0,3}$, libre de
+rang $2$ : l'image de $\Gamma(2)$ dans $PSL(2, \mathbb{Z})$, d'indice $6$. C'est
+le groupe modulaire des sphères à quatre points dont un seul est fixé (les
+trois autres pouvant être permutés) qui est $PSL(2, \mathbb{Z})$.}. Dans chaque groupe, des
+sous-groupes canoniques commutatifs libres — engendrés par les torsions le long
+des cylindres d'une décomposition en pantalons — de rang $\nu - 3$ pour $g = 0$,
+$\nu$ pour $g = 1$, et $3g - 3 + \nu$ en général\footnote{La page lit ce dernier
+rang « $3g + \nu$ », chiffre surchargé et lecture douteuse ; le rang maximal
+d'un sous-groupe abélien libre du groupe modulaire pur est $3g - 3 + \nu$, qui
+redonne $\nu - 3$ et $\nu$ pour $g = 0$ et $1$.}. Une ligne note le
+plongement $k[x_1, \ldots, x_\nu] \subset k\{x_1\}\cdots\{x_\nu\}$ des séries
+itérées, qui servira à décrire les voisinages du bord.
+
+\pagerange{181}{182}
+\subsection*{Courbes stables et leur squelette (pages 181 et 182)}
+
+Les conditions qui définissent une courbe stable de type $(g, \nu)$ : $X$
+propre, connexe, de dimension $1$, lisse sauf en des points doubles
+ordinaires (ensemble $D$, de cardinal $\mu$) ; $\chi(\mathcal{O}_X) = 1 - g$ ;
+$S \subset X$ fini étale de rang $\nu$ dans le lieu lisse ; toute composante
+dont la normalisée est de genre $1$ rencontre $D \cup S$ (sauf si $X$ est
+lisse de genre $1$ et $S = \emptyset$) ; toute composante de normalisée de
+genre $0$ a au moins trois points au-dessus de $D \cup S$. Si
+$\widetilde{X}$ est la normalisée, de composantes de genres $g_i$, $s$ leur
+nombre, on a
+\[
+g - 1 = \sum_i (g_i - 1) + \mu, \qquad g = \sum_i g_i + \mu + 1 - s, \qquad \mu + 1 - s \geq 0,
+\]
+la dernière inégalité par connexité\footnote{La page 181 écrit sous $\mu$
+« $\mathrm{card}\,\widetilde{D}$ » ; c'est $\mathrm{card}\,D$, l'image inverse
+$\widetilde{D}$ ayant $2\mu$ points, comme la page 182 le rectifie.}.
+
+Le \emph{squelette} $\Sigma$ de $X$ — aujourd'hui le graphe dual — est la donnée
+de l'ensemble $\Delta = \pi_0(\widetilde{X})$ des composantes, de leurs genres
+$g : \Delta \to \mathbb{N}$, et des applications
+$\widetilde{D} \hookrightarrow \widetilde{D} \sqcup \widetilde{S} \xrightarrow{p} \Delta$,
+$q : \widetilde{D} \to D$ de degré $2$, avec : (a) $D \sqcup_{\widetilde{D}} \Delta$
+réduit à un point (connexité) ; (c) $\sum_\delta (g(\delta) - 1) + \mathrm{card}\,D = g - 1$ ;
+(d) $\mathrm{card}\,\widetilde{S} = \nu$ ; (e) et (f) les conditions de stabilité
+sur les composantes de genre $1$ et $0$. Avec
+$\mu(\delta, \Sigma) = 3(g_\delta - 1) + \nu_\delta$, où
+$\nu_\delta = \mathrm{card}\,p^{-1}(\delta)$, il calcule
+\[
+\mu(\Sigma) = \sum_\delta \mu(\delta, \Sigma) = 3\sum_\delta (g_\delta - 1) + 2\mu + \nu
+= \bigl(3(g - 1) + \nu\bigr) - \mu = \mu(g, \nu) - \mu .
+\]
+C'est la dimension de la strate du bord de $\widehat{M}_{g,\nu}$ formée des
+courbes de squelette $\Sigma$ : la dimension $3g - 3 + \nu$ de l'espace des
+modules, diminuée du nombre de points doubles, chacun imposant une
+condition\footnote{Le calcul de la page est exact ; l'interprétation en
+codimension est de cette édition, la page s'arrêtant sur la formule.}. Le
+dossier s'arrête là.
+
+\end{document}

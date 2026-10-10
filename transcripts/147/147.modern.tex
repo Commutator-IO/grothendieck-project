@@ -1,0 +1,1986 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 147, pages 1-189.
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken the true statement appears and the footnote
+% says what the page has. In any dispute of substance the transcription
+% governs: whoever cites Grothendieck cites batch-01.fr.tex ... batch-10.fr.tex.
+%
+% Scope: the folder is 189 pages in ten batches (1-20, ..., 181-189), all
+% transcribed, read whole before any of this was written, and written as ONE
+% file for the whole shelfmark. Page 1 is a cover sheet not in his hand; page 2
+% is his table of contents; pages 3-189 are his pp. 1-90, numbered on every
+% other sheet (two sheets both numbered 81, and 75/76 written twice).
+%
+% The spine. One text, « Structure à l'infini des M_{g,nu} », in two halves:
+%   - pp. 3-104 (his §§1-10): the boundary of the Deligne-Mumford-Knudsen
+%     compactification described by stable graphs (his « maquettes » and
+%     « MD-graphes »): strata, codimension, the poset of contractions (his
+%     « morphismes de généralisation »), the census of modular dimension <= 2,
+%     Euler characteristics and classes of the small moduli stacks, then the
+%     fundamental groupoids of strata and their « generalisation »
+%     homomorphisms, and the « normalisation » morphisms; ends on a Programme;
+%   - pp. 105-189 (his §§11-13): a general digression on normal-crossings
+%     divisors — the unfolding (« déploiement ») into normalised strata D_d,
+%     multinormal torus bundles P_d, specialisation homomorphisms through
+%     tubular neighbourhoods, a gluing (van Kampen) theorem for the deleted
+%     neighbourhood of the divisor, the elementary building blocks, and a
+%     sketch of general (local/global) stratifications. Breaks off on p. 189.
+%
+% Notation fixed for the whole folder. Graph data as his: S vertices, A~ arcs
+% (= oriented edges = half-edges) with fixed-point-free involution, A = A~/sigma
+% edges, I marked points (legs), g: S -> N genus, nu^_alpha = nu_alpha +
+% omega_alpha total weight. Moduli: M_{g,I} (points labelled by I) is today's
+% \mathcal{M}_{g,I}; his M^!_{g,nu} is \mathcal{M}_{g,nu} (ordered); his
+% M_{g,nu} (unordered) is written \mathcal{M}_{g,[nu]} = [\mathcal{M}_{g,nu}/S_nu];
+% his hats are bars (\overline{\mathcal{M}}). Strata: \mathcal{M}_G = prod_alpha
+% \mathcal{M}_{g_alpha, I^_alpha}, \mathcal{M}_{[G]} = [\mathcal{M}_G/Gamma_G],
+% Gamma_G = Aut G, Gamma^!_G its subgroup fixing I. « Multiplicité » =
+% champ (Deligne-Mumford stack), kept as his word. Pi_1 = fundamental
+% groupoid. L = [A^1] for his T(1). Equation numbers are his; the transcription
+% reads (2.35)-(2.61) for what follows (234): cited here as (235)-(261).
+%
+% Substantive departures from the pages, each footnoted where it occurs:
+%   - pp. 6-7, 16-17: over a non-reduced base, « all geometric fibres of type
+%     G » does not make a family standard (xy = eps over k[eps]); standard
+%     curves over S are taken constructively, as the page's (5) defines them;
+%   - p. 21: « G semi-stable » read as stable;
+%   - p. 23: the theorem is Deligne-Mumford (1969) for nu = 0; with marked
+%     points it is Knudsen's (published 1983); the page names neither paper;
+%   - p. 30 (37), pp. 49-50: Mbar_[G] -> Mbar_{g,nu} is NOT a closed immersion
+%     and the closures of strata are NOT smooth in general: the map is finite,
+%     unramified, an isomorphism over M_[G]; example on the page's own p. 69
+%     (Delta_irr of Mbar_{1,2} crosses itself at P_0). The 2^mu generalisations
+%     correspond to local branches, not to closed substacks;
+%   - p. 33, 5°: the stability condition must count the edges of G(alpha);
+%   - p. 58: genus-1 alpha_0 may also be isolated (order 0);
+%   - p. 59 (74): Gamma does not act trivially on Mbar_{1,1} x Mbar_{1,1} when
+%     it exchanges the two genus-1 vertices;
+%   - p. 61: the terms -1, 1/3, 1/2 are S_3-orbifold contributions; dividing by
+%     |V_4| = 4 gives -1/24;
+%   - p. 62: [M_{1,1}] = 2[M_{0,4}] (over Z[1/6]), not 1/2 [M_{0,4}]; the map
+%     to (Mbar^!_{0,4}, S_3) is a mu_2-gerbe over the open part only; the
+%     page's « groupe de Grothendieck » is the coarse-stratified one, not the
+%     point count ([M_{1,1}] = L by point count);
+%   - pp. 65-67: « icosaèdre/dodécaèdre grand » are the hemi-icosahedron and
+%     hemi-dodecahedron (quotients by the antipody); the boundary graph of
+%     Mbar_{0,5} is the Petersen graph (names ours);
+%   - p. 69: P_0 lies on D_circ only, P_1 on both D_circ and D_-;
+%   - p. 70 (86)-(87): orbifold points of D_circ at u = 2 AND u = -2;
+%   - p. 72: g' + g'' = g, not 0;
+%   - p. 76 (95)-(96): I^_alpha, nu^_alpha; the kernel is pi_1(M_G);
+%   - p. 77 (98): finite unramified only; (99) is an immersion;
+%   - p. 90: it is X' that does not map to X; Xbar' -> Xbar always exists;
+%   - p. 103: kernel Z^{A(G)} (edges), not Z^{A~(G)};
+%   - p. 124 (198): the two « déf » are interchanged on the page;
+%   - p. 137 (230): codimension labels reversed (D'' is the deeper stratum);
+%     p. 138: the evident map is P_{D''} -> P_{D'}, and (233) starts at D''*;
+%   - p. 151, Cor. 3: Pi_1 X^*, not Pi_1 X;
+%   - p. 172 (282): the filtration is increasing, N_{d*,d_i} of rank d_0 - d_i;
+%   - p. 174: torsor under N_{d*,d'_0};
+%   - p. 149: the gluing theorem is read as a homotopy equivalence, as the
+%     page itself says; it is announced, not proved;
+%   - pp. 178-179: the homotopy colimit of the pieces does recover S^2; what
+%     loses it is the colimit of groupoids / locally constant sheaves.
+%
+% Announced and never established in the folder: that every subgroup of S_4
+% is an image Gamma_G -> S_4 (p. 57, « sauf erreur »); the structure of
+% Mbar_{1,2} at infinity (p. 71, « J'y renonce »); the construction of the
+% specialisation homomorphism (231) (« On donnera la construction ... dans la
+% suite »); the gluing theorems (pp. 149, 154); the canonical equivalence (295);
+% the Programme of p. 103.
+%
+% Cross-references: folder 145 (the anharmonic action of S_3 on P^1 - {0,1,inf}
+% and its fixed points -j, -jbar) at pp. 61-62; folder 141, page 9 (PSL_2(Z) as
+% orbifold pi_1 of the modular line, and Gamma(2)) at pp. 62-64.
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{147}
+\pages{1}{189}
+\dating{s.d. — le groupe « Autour de La "Longue Marche" à travers la théorie de Galois » (141 à 149) est daté [à partir de 1978]-1983}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Structure à l'infini des Mg,ν [pages 1 à 90, dont table des matières] : notes manuscrites (s.d.) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces feuillets étudient des cartes géographiques d'un genre particulier : des
+espaces dont chaque point est une \emph{forme} de surface. Prenons une surface
+fermée à $g$ trous — une bouée si $g = 1$, un bretzel si $g = 2$ — sur laquelle
+on a planté $\nu$ épingles. Il y en a une infinité de formes, au sens de la
+géométrie complexe, et toutes ces formes, mises ensemble, constituent un espace,
+noté $M_{g,\nu}$ : l'\emph{espace des modules}. Le titre du dossier, « Structure
+à l'infini des $M_{g,\nu}$ », dit son sujet : ce qui se passe au bord de cette
+carte, là où la forme dégénère.
+
+Car la carte n'est pas fermée : on peut s'en échapper. Il suffit de serrer un
+lacet tracé sur la surface jusqu'à le réduire à un point ; la surface se
+pince, et à la limite on obtient une surface « nouée », faite de morceaux plus
+simples recollés en des points doubles. Deligne et Mumford (puis Knudsen, pour les
+épingles) ont montré que si l'on ajoute toutes ces surfaces nouées — pourvu qu'elles restent \emph{stables},
+c'est-à-dire qu'aucun morceau n'ait de symétries continues —, la carte devient
+compacte, et parfaitement lisse ; Grothendieck l'appelle « le vraiment
+magnifique théorème ». Le bord ajouté se décrit par un dessin : un sommet par
+morceau, une arête par point double. Ce dessin est un graphe, que le dossier
+nomme \emph{maquette} ou \emph{MD-graphe} et qu'on appelle aujourd'hui
+\emph{graphe stable}. Le bord se découpe alors en régions, une par graphe, et
+chaque région est elle-même un produit de cartes plus petites, une par
+morceau. Le bord d'un polyèdre est fait de faces qui sont des polygones plus
+petits ; le bord de l'espace des modules est fait d'espaces des modules plus
+petits.
+
+La première moitié du dossier (pages 3 à 104) met cette image en ordre :
+comment un graphe en « spécialise » un autre (on écrase des arêtes), quelle est
+la codimension d'une région (le nombre d'arêtes), et la liste exhaustive des
+graphes quand la dimension est au plus $2$. Il y trouve quatre cas
+« élémentaires » — la sphère à quatre épingles, la bouée à une épingle, la
+sphère à cinq, la bouée à deux — et calcule pour chacun la forme exacte du bord,
+avec de jolies surprises : le bord de l'espace des sphères à cinq épingles est
+un graphe à dix sommets et quinze arêtes qu'il relie à l'icosaèdre, et qu'on
+appelle aujourd'hui le graphe de Petersen. Puis il passe aux lacets sur la
+carte elle-même. Le groupe fondamental de $M_{g,\nu}$ est le groupe des
+« classes d'applications » de la surface — il l'appelle groupe de Teichmüller —
+et près du bord, faire le tour d'un mur revient à tordre la surface le long du
+lacet pincé. Il formule un \emph{Programme} : décrire tous ces groupes, et leurs
+liens, par générateurs et relations lus sur la géométrie du bord.
+
+La seconde moitié (pages 105 à 189) prend du recul et traite le problème en
+général : un espace lisse et une hypersurface qui se recoupe elle-même
+transversalement (« à croisements normaux »), comme le bord de l'espace des
+modules. Comment reconstituer les lacets de l'espace à partir de ce qui se
+passe le long des murs, de leurs intersections deux à deux, trois à trois ? Il
+« déploie » l'hypersurface en ses morceaux lisses, entoure chacun d'un tube,
+et énonce un théorème de recollement : le voisinage épointé des murs se
+reconstruit à partir de pièces élémentaires — un cercle, un disque, un disque
+épointé, un point —, comme $\mathbb{C}$ se recolle à partir du plan épointé et
+d'un petit disque. Le dossier s'achève sur une ébauche de théorie générale des
+espaces stratifiés, au milieu d'une phrase.
+
+Une phrase de la page 59 éclaire tout le dossier : « J'ai l'impression qu'une
+compréhension plus ou moins complète de la structure des $\Pi_1$ discrets […]
+impliqués dans ces cas [de dimension au plus deux] donnera la clef pour une
+compréhension complète dans le cas général. » C'est la conviction qui deviendra,
+dans l'\emph{Esquisse d'un programme} (1984), le principe des deux étages de la
+« tour de Teichmüller » : tout se joue en dimension un et deux, le reste
+s'assemble comme un jeu de construction. On voit ici comment elle naît : non
+d'un calcul, mais d'un inventaire patient du bord, et du sentiment qu'un objet
+compliqué est fait de pièces simples qu'il faut apprendre à recoller. On le
+voit aussi renoncer (« J'y renonce », page 71) quand une pièce lui échappe, et
+préférer, chaque fois qu'il le peut, une construction \emph{canonique} à une
+construction commode : pour lui, une identification qui dépend d'un choix n'est
+pas encore comprise.
+
+Le groupe de dossiers 141 à 149 tourne autour de la \emph{Longue Marche à travers
+la théorie de Galois} : le groupe de Galois des nombres algébriques agit sur
+les lacets de ces espaces des modules, et comprendre leur structure à l'infini,
+c'est préparer le terrain où cette action se lit. Pour aller plus loin :
+compactification de Deligne--Mumford--Knudsen, graphes stables, groupe des
+classes d'applications, torsions de Dehn, tour de Teichmüller, principe des deux
+étages, diviseurs à croisements normaux, théorème de van Kampen, espaces
+stratifiés.
+
+\keywords{Deligne–Mumford compactification, Knudsen compactification, stable curve, nodal curve, stable graph, dual graph, boundary stratification, graph contraction, moduli of pointed curves, orbifold Euler characteristic, Grothendieck ring of stacks, Legendre family, Petersen graph, mapping class group, Teichmüller groupoid, Teichmüller tower, two-level principle, Dehn twist, normal crossings divisor, deleted tubular neighbourhood, specialisation homomorphism, van Kampen theorem, homotopy colimit, stratified space, Segal condition}
+\end{resume}
+
+\pagerange{2}{189}
+\section*{Le fil du dossier, et les conventions}
+
+\subsection*{Les stations}
+
+Le dossier est un seul texte, paginé de sa main de 1 à 90 sur un feuillet sur
+deux, précédé d'une table des matières (page 2) ; la page 1 est une chemise au
+crayon qui n'est pas de lui. Il s'interrompt au milieu d'une phrase. Ses
+paragraphes, numérotés de 1 à 13, se groupent en deux moitiés.
+
+\begin{itemize}
+\item \textbf{Courbes standard et maquettes (pages 3 à 13, §§ 1--2)} : courbes
+nodales pointées, leur graphe dual, le genre d'une maquette.
+\item \textbf{Courbes stables et MD-graphes (pages 13 à 21, § 3)} : la condition
+de stabilité, le type anabélien, le champ $\mathcal{M}_G$ des courbes de type
+$G$ épinglées.
+\item \textbf{La théorie de Mumford--Deligne (pages 21 à 30, § 4)} : la
+compactification $\overline{\mathcal{M}}_{g,[\nu]}$, sa partition en strates
+$\mathcal{M}_{[G]}$, la codimension d'une strate, l'adhérence.
+\item \textbf{Spécialisation et contraction (pages 31 à 50, §§ 5--6)} : la recette
+qui remplace un sommet par un graphe, les « morphismes généralisés » de graphes,
+les contractions d'arêtes, l'ensemble ordonné des généralisations.
+\item \textbf{Le recensement en dimension au plus $2$ (pages 51 à 60, § 7)} :
+graphes de dimension modulaire $0$, $1$, $2$ et leurs groupes d'automorphismes ;
+les quatre cas élémentaires.
+\item \textbf{La structure de spécialisation en petite dimension (pages 60 à 74,
+§ 8)} : $\overline{\mathcal{M}}_{0,4}$, $\overline{\mathcal{M}}_{1,1}$,
+$\overline{\mathcal{M}}_{0,5}$, $\overline{\mathcal{M}}_{1,2}$ ;
+caractéristiques d'Euler et classes ; connexité du bord.
+\item \textbf{Les groupoïdes de Teichmüller (pages 75 à 88, § 9)} : groupoïdes
+fondamentaux des strates, homomorphismes de généralisation, l'extension
+$S_A\Pi\mathcal{M}_G$, une axiomatique.
+\item \textbf{Morphismes de normalisation et Programme (pages 89 à 104,
+§ 10)} : couper des arêtes, oublier des points ; le Programme.
+\item \textbf{Déploiement d'un diviseur à croisements normaux (pages 105 à 120,
+§ 11)} : les strates normalisées $D_d$, leurs drapeaux, une axiomatique en
+« catégorie analytique ».
+\item \textbf{Fibrés multinormaux et spécialisation (pages 120 à 147)} : les
+tores $G_d$, les torseurs $P_d$, les groupoïdes $\widetilde{\Pi}$, l'homomorphisme
+de spécialisation, les voisinages tubulaires.
+\item \textbf{Le recollement (pages 148 à 160)} : la filtration par les
+$\Theta^{(d)}$, les parties admissibles, deux « théorèmes de recollement »
+énoncés.
+\item \textbf{Les pièces élémentaires (pages 161 à 179, § 12)} : le cas de
+$\mathbb{C}^I$, les seize pièces de $\mathbb{C}^2$, la filtration du fibré
+normal, le « Scholie important », et la limite de l'approche.
+\item \textbf{Stratifications locales et globales (pages 180 à 189, § 13)} :
+définitions, l'espace des drapeaux, une catégorie topologique.
+\end{itemize}
+
+La première moitié est de géométrie algébrique ; la seconde, à partir de la page
+105, est une digression qui ne nomme plus les courbes, mais qui est faite pour
+elles : le diviseur à croisements normaux qu'elle a en vue est le bord de
+$\overline{\mathcal{M}}_{g,\nu}$, et la page 178 le rappelle (« ce qui est le
+cas dans la situation de Teichmüller ! »).
+
+\textbf{La table des matières (page 2)} annonce treize paragraphes avec leurs
+pages. Elle s'écarte des titres du texte en trois endroits\footnote{Le § 8 est
+annoncé « en dim.\ modulaire ambiante $\leq 4$ » ; le titre de la page 60 dit
+« $\leq 2$ », et c'est ce que le texte traite. Le § 10 est annoncé « Structure
+MDT analytique : calcul des morphismes de généralisation » à sa page 45 ; le
+titre de la page 89 (sa page 44) est « Structure MDT discrète : étude des
+morphismes de normalisation ». Le § 12 est annoncé à sa page 74 ; le titre est
+aux pages 154--155 (ses pages 76--77), mais le contenu annoncé — « types
+canoniques associés à une stratification par croisements normaux, et leurs
+dévissages en types élémentaires » — commence bien à la page 149.} ; on suit le
+texte.
+
+\subsection*{Les conventions}
+
+\emph{Graphes.} Un graphe est un quadruplet $G = (S, \widetilde{A},
+\sigma_{\widetilde{A}}, o)$ : un ensemble fini $S$ de \emph{sommets}, un ensemble
+fini $\widetilde{A}$ d'\emph{arcs}, une involution sans point fixe
+$\sigma_{\widetilde{A}}$ de $\widetilde{A}$ (l'arc opposé) et l'application
+\emph{origine} $o : \widetilde{A} \to S$. Les \emph{arêtes} sont les éléments de
+$A = \widetilde{A}/\sigma_{\widetilde{A}}$. Les arcs du dossier sont les
+\emph{demi-arêtes} d'aujourd'hui (un arc est déterminé par son origine et
+l'arête qui le porte) ; les boucles sont permises. On garde ses mots. L'ordre
+d'un sommet $\alpha$ est $\omega_\alpha = \operatorname{card}
+\widetilde{A}_\alpha$, où $\widetilde{A}_\alpha = o^{-1}(\alpha)$ ; une boucle
+compte pour $2$. On note $s_0 = \operatorname{card} S$, $s_1 =
+\operatorname{card} A$, et $h_1 = \operatorname{rg} H_1(G, \mathbb{Z})$.
+
+\emph{Maquettes.} Une \emph{maquette} est un graphe muni d'un ensemble fini $I$ de
+\emph{points marqués} (les « jambes » d'aujourd'hui), d'une application $I \to S$
+et d'une application \emph{genre} $g : S \to \mathbb{N}$. On note $I_\alpha$ la
+fibre de $I$ en $\alpha$, $\nu_\alpha = \operatorname{card} I_\alpha$ (le
+\emph{poids marqué}), $\widehat{I}_\alpha = I_\alpha \amalg
+\widetilde{A}_\alpha$ et $\widehat{\nu}_\alpha = \nu_\alpha + \omega_\alpha$ (le
+\emph{poids total}). Le \emph{genre} de la maquette est $g = \sum_\alpha g_\alpha
++ h_1$, son \emph{type} est $(g, \nu)$ avec $\nu = \operatorname{card} I$. Un
+\emph{MD-graphe} est une maquette connexe et stable : $2g_\alpha +
+\widehat{\nu}_\alpha \geq 3$ en tout sommet. C'est un \emph{graphe stable} au
+sens d'aujourd'hui\footnote{Le nom « graphe stable » (« stable graph ») est
+postérieur ; l'objet est le graphe dual d'une courbe stable, en usage dès
+Deligne--Mumford (1969). « MD » est pour lui « Mumford--Deligne, ou
+modulaire » (page 14).}. On note $\Gamma_G = \operatorname{Aut} G$ et
+$\Gamma^{!}_G = \operatorname{Ker}(\Gamma_G \to \mathfrak{S}_I)$.
+
+\emph{Champs de modules.} Le dossier dit « multiplicité » (modulaire,
+schématique, analytique) pour ce qu'on appelle un champ de Deligne--Mumford ; on
+garde son mot, qui a le mérite de dire qu'un point peut avoir des automorphismes.
+On note $\mathcal{M}_{g,I}$ le champ des courbes propres, lisses, connexes de
+genre $g$ munies de points distincts indexés par $I$, et
+$\overline{\mathcal{M}}_{g,I}$ son compactifié par les courbes stables ; pour $I
+= \{1, \dots, \nu\}$ on écrit $\mathcal{M}_{g,\nu}$. Le dossier note ce champ
+$\overset{!}{M}_{g,\nu}$ et réserve $M_{g,\nu}$ au champ des courbes munies d'un
+\emph{ensemble} de $\nu$ points non ordonnés, quotient par $\mathfrak{S}_\nu$, que
+nous notons $\mathcal{M}_{g,[\nu]} = [\mathcal{M}_{g,\nu}/\mathfrak{S}_\nu]$ ; ses
+chapeaux $\widehat{M}$ sont nos barres $\overline{\mathcal{M}}$\footnote{La
+convention de la page 21 : « $M_{g,J}$ est isomorphe au schéma modulaire
+$\overset{!}{M}_{g,\nu}$ (via un iso.\ $[1, \nu] \cap \mathbb{Z} \simeq J$) ». Le
+point d'exclamation, chez lui, marque toujours la version « pure » où les
+points sont numérotés, ou le sous-groupe qui les fixe. Tous ces champs sont pris
+sur $\operatorname{Spec} \mathbb{Z}$ dans la première moitié, et analytiques
+(sur $\mathbb{C}$) à partir de la page 75.}. Pour un MD-graphe $G$ :
+\[
+\mathcal{M}_G = \prod_{\alpha \in S} \mathcal{M}_{g_\alpha, \widehat{I}_\alpha},
+\qquad \overline{\mathcal{M}}_G = \prod_{\alpha \in S}
+\overline{\mathcal{M}}_{g_\alpha, \widehat{I}_\alpha}, \qquad
+\mathcal{M}_{[G]} = [\mathcal{M}_G/\Gamma_G],
+\]
+et de même $\overline{\mathcal{M}}_{[G]} = [\overline{\mathcal{M}}_G/\Gamma_G]$.
+
+\emph{Groupoïdes.} $\Pi_1 Y$ (ou $\Pi Y$, comme il l'écrit souvent) est le
+groupoïde fondamental de $Y$ ; pour un champ $[Y/\Gamma]$ on écrit $\Pi_1(Y,
+\Gamma)$, ce qu'il note $(\Pi Y, \Gamma)$. Le groupe fondamental (orbifold) de
+$\mathcal{M}_{g,\nu}^{\mathrm{an}}$ est le groupe des classes d'applications pur
+$\mathrm{Mod}_{g,\nu}$ (« mapping class group ») ; le dossier l'appelle groupe
+de Teichmüller\footnote{Comme au dossier 145, où « groupe de Teichmüller »
+désigne $\Gamma_{0,3}$, le groupe modulaire étendu de la sphère à trois trous.
+Ici l'exposant $+$ ($\Gamma^{+}_{g,I}$, $\mathcal{T}^{!+}_{g,\nu}$, page 76)
+marque les classes qui préservent l'orientation.}.
+
+\emph{Classes.} $\mathbb{L} = [\mathbb{A}^1]$ est sa $T(1)$, « Tate » (page 62).
+
+\emph{Deux homonymies.} Le mot « généralisation » désigne dans la première
+moitié une \emph{contraction} d'arêtes de graphes (§§ 5--6) ; dans la seconde,
+« spécialisation » désigne un homomorphisme de groupoïdes qui ne provient
+d'aucune application d'espaces (§ 11). Et la lettre $S$ y sert à trois usages :
+l'ensemble des sommets, la base $\mathcal{S}$ d'une famille, le préfixe de
+$S_A\Pi\mathcal{M}_G$ ; on écrit la base en caligraphie, comme le fait la
+transcription.
+
+\emph{Numérotation.} Les numéros de formules sont les siens. Ils se répètent par
+endroits (deux (24), deux (30), deux (65), deux (72), deux (78), deux (96)), et
+la transcription lit (2.35) à (2.61) ce qui suit (234) ; on cite (235) à
+(261)\footnote{Lecture de l'édition : la suite immédiate de (234), page 139, et
+le renvoi « (260) » de la marge de la page 162 la rendent probable.}.
+
+\pagerange{3}{13}
+\section*{Courbes standard et maquettes (pages 3 à 13)}
+
+\pagerange{3}{7}
+\subsection*{Courbes standard (pages 3 à 7)}
+
+Soit $k$ un corps algébriquement clos. Une \emph{courbe standard} sur $k$ est un
+$k$-schéma quasi-projectif $X$ dont toutes les composantes irréductibles sont de
+dimension $1$ et dont chaque point est lisse ou \emph{quadratique ordinaire}
+(un nœud : étale-localement isomorphe à $\operatorname{Spec} k[x,y]/(xy)$ en
+l'origine). C'est une courbe nodale, non nécessairement propre ni connexe.
+
+Elle admet une complétée $\widehat{X}$, propre, contenant $X$ comme ouvert dense,
+et lisse aux points de $I = \widehat{X} \setminus X$ ; elle est unique à
+isomorphisme unique près\footnote{La page dit « il est connu » ; c'est la
+complétion lisse d'une courbe le long de ses bouts, faite composante par
+composante sur la normalisée.}. On a donc deux ensembles finis de points
+\[
+I = \widehat{X} \setminus X \subset \widehat{X}^{\mathrm{lisse}}(k)
+\quad \text{(les points à l'infini)}, \qquad
+A = \widehat{X} \setminus \widehat{X}^{\mathrm{lisse}} \subset X(k)
+\quad \text{(les nœuds)},
+\]
+et $X$ équivaut à la paire $(\widehat{X}, I)$. Soit $Y$ la normalisée de
+$\widehat{X}$ ; c'est une courbe propre et lisse, $I$ s'y relève bijectivement,
+et l'image inverse $\widetilde{A}$ de $A$ est un revêtement de degré $2$ de $A$,
+d'où une involution sans point fixe $\sigma_{\widetilde{A}}$. Ainsi $X$ définit
+le système
+\[
+(4) \qquad \bigl(Y,\ \widetilde{A},\ I,\ \sigma_{\widetilde{A}}\bigr) :
+\ Y \text{ propre et lisse},\ \widetilde{A}, I \subset Y(k) \text{ finis
+disjoints},\ \sigma_{\widetilde{A}} \text{ involution libre de } \widetilde{A},
+\]
+et inversement $X$ s'obtient de ce système en identifiant dans $Y \setminus I$
+les points de $\widetilde{A}$ deux à deux selon $\sigma_{\widetilde{A}}$ (un
+quotient qui existe dans les schémas, et qui est universel pour les morphismes
+constants sur les paires) ; $\widehat{X}$ est le même quotient de $Y$. Les
+courbes standard sur $k$, avec leurs isomorphismes, forment un groupoïde
+équivalent à celui des systèmes (4).
+
+Sur une base quelconque $\mathcal{S}$, il prend ce système pour
+\emph{définition} : une courbe standard sur $\mathcal{S}$ est ce qu'on obtient
+d'un système (5) — $Y$ propre et lisse sur $\mathcal{S}$ de dimension relative
+$1$, $\widetilde{A}$ et $I$ deux sous-schémas fermés disjoints finis étales sur
+$\mathcal{S}$, $\sigma_{\widetilde{A}}$ une involution libre de $\widetilde{A}$ —
+en formant $\widehat{X} = Y/\sigma_{\widetilde{A}}$ puis $X = \widehat{X}
+\setminus I$. Le système s'appelle le \emph{compactifié normalisé} de $X$. Que le
+foncteur (6), système $\mapsto X$, soit pleinement fidèle, il l'affirme puis le
+corrige en marge : c'est « faux tel quel », vrai au mieux sur une base réduite,
+et en défaut sur les nombres duaux dès que $I \neq \emptyset$ ; il faut
+travailler avec la paire propre $(\widehat{X}, I)$ plutôt qu'avec
+$X$\footnote{La note marginale des pages 6--7 est en partie illisible ; elle dit
+lisiblement que le foncteur est pleinement fidèle « au mieux sur une base $S$
+réduite », qu'il est « faux p.\ ex.\ sur les nbs duaux (si $I \neq \emptyset$) »,
+et qu'il faut se placer « dans le contexte propre, i.e.\ $(\widehat{X}, I)$ ».
+La raison est simple : un automorphisme infinitésimal de $\widehat{X}$ qui
+déplace un point de $I$ induit un automorphisme de $X = \widehat{X} \setminus
+I$ qui ne respecte pas le système.}. On suit cette correction : dans tout le
+dossier, une courbe standard sur $\mathcal{S}$ est la donnée de $(\widehat{X},
+I)$ \emph{provenant d'un système} (5).
+
+\pagerange{7}{13}
+\subsection*{Le graphe d'une courbe standard ; maquettes et genre (pages 7 à 13)}
+
+Revenons à $k$ algébriquement clos. Posons $S = \pi_0(Y)$, l'ensemble des
+composantes irréductibles de $X$. Les inclusions $\widetilde{A} \subset Y$ et $I
+\subset Y$ donnent, après passage aux $\pi_0$, une application origine
+$\widetilde{A} \to S$ et une application $I \to S$\footnote{La page note
+$\sigma$ l'application $\widetilde{A} \to S$, comme l'involution ; on l'écrit
+$o$.}. Le quadruplet $(S, \widetilde{A}, \sigma_{\widetilde{A}}, o)$ est un graphe
+$G_X$, le \emph{graphe dual} : un sommet par composante, une arête par nœud,
+joignant les deux composantes qui s'y croisent. Les boucles en $\alpha$
+correspondent aux points doubles de la composante $X_\alpha$ elle-même ; dire que
+les composantes sont lisses, c'est dire que $G_X$ est sans boucle. Le graphe ne
+dépend que de $\widehat{X}$ ; c'est pour tenir compte de $X$ qu'on ajoute $I \to
+S$.
+
+La \emph{maquette} de $X$ est le graphe $G_X$ muni de $I \to S$ et du genre
+$\alpha \mapsto g_\alpha = $ genre de $Y_\alpha$. Toute maquette provient d'une
+courbe standard. Deux énoncés relient la courbe à sa maquette (page 11) :
+
+\begin{enumerate}
+\item $\pi_0(G_X) \simeq \pi_0(X)$ ; en particulier $X$ est connexe si et
+seulement si $G_X$ l'est.
+\item Si $X$ est connexe, le genre arithmétique $g(\widehat{X}) = \dim
+H^1(\widehat{X}, \mathcal{O}_{\widehat{X}})$ vaut
+\[
+(14) \qquad g(\widehat{X}) = \sum_{\alpha \in S} g_\alpha + h_1(G_X),
+\qquad h_1(G_X) = 1 - s_0 + s_1 .
+\]
+\end{enumerate}
+La démonstration est celle de la page 12 : la suite exacte $0 \to
+\mathcal{O}_{\widehat{X}} \to \nu_* \mathcal{O}_Y \to \bigoplus_{a \in A} k_a \to
+0$, où $\nu : Y \to \widehat{X}$ est la normalisation, donne $\chi(\widehat{X},
+\mathcal{O}) = \sum_\alpha (1 - g_\alpha) - s_1$, et la formule d'Euler--Poincaré
+du graphe connexe, $1 - h_1 = s_0 - s_1$, donne (14)\footnote{La page écrit
+$\chi_{\mathrm{coh}}(\widehat{X}) = \chi(X, \mathcal{O}_X)$ avec $X$ au lieu de
+$\widehat{X}$ dans le second membre de (12) ; c'est $\widehat{X}$ qu'il faut lire,
+$X$ n'étant pas propre.}. Le genre de $\widehat{X}$ ne dépend donc que de la
+maquette, et on l'appelle le genre de la maquette ; le type $(g, \nu)$ et les
+poids $\nu_\alpha$, $\widehat{\nu}_\alpha$ sont ceux des conventions. Le poids
+total $\widehat{\nu}_\alpha$ est le nombre de points spéciaux — nœuds et points
+à l'infini — portés par la composante $Y_\alpha$.
+
+\pagerange{13}{21}
+\section*{Courbes stables et MD-graphes (pages 13 à 21)}
+
+\pagerange{13}{16}
+\subsection*{Stabilité, et le type anabélien (pages 13 à 16)}
+
+Une courbe standard sur $k$ est \emph{stable} si elle satisfait l'une des
+conditions équivalentes : son groupe d'automorphismes est fini ; pour tout
+$\alpha$, la courbe pointée $(Y_\alpha, I_\alpha \cup \widetilde{A}_\alpha)$ est
+anabélienne, c'est-à-dire $2g_\alpha - 2 + \widehat{\nu}_\alpha > 0$ (si
+$g_\alpha = 1$, $\widehat{\nu}_\alpha \geq 1$ ; si $g_\alpha = 0$,
+$\widehat{\nu}_\alpha \geq 3$) ; tout champ de vecteurs sur $Y$ nul sur $I \cup
+\widetilde{A}$ est nul ; le schéma en groupes des automorphismes de $(Y,
+\widetilde{A}, I)$ est fini étale. La seconde forme ne dépend que de la
+maquette. Une \emph{MD-courbe} est une courbe standard stable et connexe ; les
+maquettes des MD-courbes sont les MD-graphes. Une maquette est un MD-graphe si et
+seulement si elle est connexe et non vide, n'est pas réduite à un sommet de genre
+$1$ sans arête ni point marqué, et ses sommets de genre $0$ sont de poids total
+au moins $3$.
+
+\textbf{Proposition (page 15).} \emph{Le type $(g, \nu)$ d'un MD-graphe est
+anabélien : $2g - 2 + \nu > 0$.}
+
+Il faut exclure $(1, 0)$, $(0, 0)$, $(0, 1)$, $(0, 2)$. Si $g = 1$ et $\nu = 0$,
+la formule $1 = \sum g_\alpha + h_1$ laisse deux possibilités. Ou bien un sommet
+est de genre $1$ et $G$ est un arbre : il n'est pas réduit à ce sommet (qui serait
+instable), il a donc au moins deux feuilles, dont une de genre $0$, d'ordre $1$
+et sans point marqué — instable. Ou bien tous les sommets sont de genre $0$ et
+$h_1 = 1$ : sans points marqués, chaque sommet doit être d'ordre au moins $3$,
+alors que $s_0 = s_1$ force l'ordre moyen à valoir $2$ — contradiction\footnote{La
+page conclut par la topologie : un graphe connexe avec $h_1 = 1$ et sans bout
+est homéomorphe à un cercle, donc tous ses sommets sont d'ordre $2$. L'argument
+de l'ordre moyen est le même dit autrement. La page est très corrigée et l'ordre
+de ses ajouts reste conjectural ; l'argument, lui, est complet.}. Si $g = 0$ et
+$\nu \leq 2$, le graphe est un arbre de sommets de genre $0$ ; il n'est pas
+réduit à un sommet, a donc au moins deux feuilles, chacune de poids marqué au
+moins $2$, d'où $\nu \geq 4$ — absurde.
+
+\pagerange{16}{21}
+\subsection*{Courbes épinglées et le champ $\mathcal{M}_G$ (pages 16 à 21)}
+
+Soit $G$ une maquette. Une courbe standard sur $k$ est \emph{de type $G$} si sa
+maquette est isomorphe à $G$, et \emph{$G$-épinglée} si l'on s'est donné un tel
+isomorphisme. Sur une base $\mathcal{S}$, les maquettes des fibres géométriques
+d'une courbe standard de type $G$ forment un « schéma en maquettes » localement
+isomorphe à $G_{\mathcal{S}}$, et les épinglages sont les sections d'un torseur
+sous le groupe fini $\Gamma = \operatorname{Aut} G$\footnote{Que les fibres
+géométriques soient toutes de type $G$ ne suffit pas, sur une base non réduite, à
+faire d'une famille de courbes nodales une courbe standard au sens du système
+(5) : sur $k[\varepsilon]$, la famille $xy = \varepsilon$ a pour seule fibre une
+courbe nodale, mais lisse son nœud au premier ordre. C'est pourquoi on garde la
+définition constructive des pages 6--7 ; avec elle, l'énoncé est juste.}.
+
+Une courbe standard $G$-épinglée sur $\mathcal{S}$ équivaut à la donnée, pour
+chaque sommet $\alpha$, d'une courbe propre, lisse, à fibres connexes $Y_\alpha$
+de genre $g_\alpha$ sur $\mathcal{S}$, munie de sections disjointes indexées par
+$\widehat{I}_\alpha = I_\alpha \amalg \widetilde{A}_\alpha$. D'où, en notant
+$\mathcal{M}_{g,I}(\mathcal{S})$ le groupoïde des courbes $I$-pointées et
+$\mathcal{M}_G(\mathcal{S})$ celui des courbes standard $G$-épinglées, une
+équivalence compatible aux changements de base et au transport de structure :
+\[
+(21) \qquad \mathcal{M}_G(\mathcal{S}) \simeq \prod_{\alpha \in S}
+\mathcal{M}_{g_\alpha, \widehat{I}_\alpha}(\mathcal{S}) .
+\]
+Le champ $\mathcal{S} \mapsto \mathcal{M}_G(\mathcal{S})$ est donc représentable
+par une multiplicité schématique si et seulement si chaque facteur l'est,
+c'est-à-dire si chaque $(g_\alpha, \widehat{\nu}_\alpha)$ est anabélien : si $G$
+est stable. Pour $G$ un MD-graphe, $\mathcal{M}_G \simeq \prod_\alpha
+\mathcal{M}_{g_\alpha, \widehat{I}_\alpha}$ ; le groupe $\Gamma$ y opère, et la
+multiplicité quotient $\mathcal{M}_{[G]} = [\mathcal{M}_G/\Gamma]$ ne dépend que
+de la classe d'isomorphie $[G]$ : c'est le champ des courbes standard de type
+$[G]$, sans épinglage. Comme $\mathcal{M}_{g,J} \simeq \mathcal{M}_{g,\nu}$
+(choisir une numérotation de $J$) est lisse de type fini sur $\mathbb{Z}$, il en
+est de même de $\mathcal{M}_G$ et de $\mathcal{M}_{[G]}$, pour tout MD-graphe
+$G$\footnote{La page 21 écrit « pour $G$ semi-stable » ; c'est « stable » qu'il
+faut, puisque c'est la condition qui rend chaque facteur représentable.}.
+
+\pagerange{21}{30}
+\section*{La théorie de Mumford--Deligne (pages 21 à 30)}
+
+\pagerange{21}{25}
+\subsection*{Le théorème, et la partition en strates (pages 21 à 25)}
+
+Une \emph{MD-courbe relative} sur une multiplicité $\mathcal{S}$ est un couple
+$(\mathfrak{X}, \underline{I})$, avec $\mathfrak{X}$ propre, plat et de
+présentation finie sur $\mathcal{S}$, $\underline{I}$ un sous-schéma fermé fini
+étale, et dont chaque fibre géométrique est une MD-courbe : connexe, de dimension
+$1$, à singularités des nœuds hors de $\underline{I}$, et stable. À la
+différence des courbes standard, le type de la fibre peut varier d'un point à
+l'autre ; mais le type numérique $(g, \nu)$ est localement constant, par
+invariance de $\chi(\mathcal{O})$ et du degré de $\underline{I}$. Pour $(g, \nu)$
+anabélien, soit $\overline{\mathcal{M}}_{g,[\nu]}$ le champ des MD-courbes
+relatives de type $(g, \nu)$.
+
+\textbf{Théorème de Mumford--Deligne (page 23).} \emph{Le champ
+$\overline{\mathcal{M}}_{g,[\nu]}$ est représentable par une multiplicité
+schématique propre et lisse sur $\operatorname{Spec} \mathbb{Z}$ ; le champ
+$\mathcal{M}_{g,[\nu]}$ des courbes lisses en est un ouvert de Zariski,
+schématiquement dense fibre par fibre.}
+
+« Le vraiment magnifique théorème », écrit-il\footnote{Pour $\nu = 0$, c'est le
+théorème de Deligne et Mumford (« The irreducibility of the space of curves of
+given genus », 1969). Pour les courbes pointées, la compactification par les
+courbes stables pointées et sa lissité sont dues à Knudsen (« The projectivity of
+the moduli space of stable curves II », \emph{Math.\ Scand.} 52, 1983) ; le
+dossier ne cite ni l'un ni l'autre, et le nom qu'il donne au théorème ne dit rien
+de ce qu'il en avait lu.}. Il en tire la connexité des fibres géométriques de
+$\mathcal{M}_{g,[\nu]}$ en toute caractéristique à partir de la caractéristique
+nulle — c'est l'argument de Deligne et Mumford : un champ propre et lisse sur
+$\mathbb{Z}$ à fibre générique géométriquement connexe a toutes ses fibres
+géométriques connexes, et l'ouvert dense hérite de la connexité.
+
+Pour chaque classe $[G]$ de MD-graphes de type $(g, \nu)$, les courbes standard
+de type $[G]$ sont des MD-courbes de type $(g, \nu)$, d'où un morphisme
+\[
+(25) \qquad \mathcal{M}_{[G]} \hookrightarrow \overline{\mathcal{M}}_{g,[\nu]}
+\]
+qui est une immersion (localement fermée) ; pour le graphe trivial — un sommet
+de genre $g$, $\nu$ points marqués, pas d'arête — c'est l'immersion ouverte
+$\mathcal{M}_{g,[\nu]} \hookrightarrow \overline{\mathcal{M}}_{g,[\nu]}$. Les
+$\mathcal{M}_{[G]}$ forment une \emph{partition} de $\overline{\mathcal{M}}_{g,[\nu]}$
+en un nombre fini de sous-multiplicités : c'est la stratification du bord par
+les graphes stables. L'adhérence d'une strate est réunion de strates ; on dit
+que $[G']$ est \emph{spécialisation} de $[G]$ si $\mathcal{M}_{[G']} \subset
+\overline{\mathcal{M}_{[G]}}$. C'est une relation d'ordre, dont le graphe
+trivial est le plus grand élément (sa strate est dense).
+
+\pagerange{26}{28}
+\subsection*{Dimension et codimension d'une strate (pages 26 à 28)}
+
+Comme $\dim \mathcal{M}_{g,n}/\mathbb{Z} = 3g - 3 + n$,
+\[
+(27) \qquad \dim \mathcal{M}_G = \sum_{\alpha \in S} \bigl(3(g_\alpha - 1) +
+\widehat{\nu}_\alpha\bigr) = 3 \sum_\alpha g_\alpha - 3 s_0 + \nu + 2 s_1 ,
+\]
+puisque $\sum_\alpha \widehat{\nu}_\alpha = \nu + 2 s_1$. Avec $s_0 - s_1 = 1 -
+h_1$ on obtient $-3s_0 + 2s_1 = 3(h_1 - 1) - s_1$, d'où
+\[
+(28) \qquad \dim \mathcal{M}_G = \bigl[3(g - 1) + \nu\bigr] - s_1, \qquad
+(29) \qquad \operatorname{codim}_{\overline{\mathcal{M}}_{g,[\nu]}}
+\mathcal{M}_{[G]} = s_1 .
+\]
+La codimension d'une strate est le nombre d'arêtes du graphe, c'est-à-dire de
+nœuds de la courbe. Il appelle $\mu(G) = \dim \mathcal{M}_G$ la \emph{dimension
+modulaire} et $s_1$ la \emph{codimension modulaire} de $G$ ; la seconde est nulle
+pour le seul graphe trivial, et maximale, égale à $3(g-1) + \nu$, quand la
+dimension modulaire est nulle — les graphes « les plus complexes », dont le
+recensement viendra au § 7.
+
+\pagerange{28}{30}
+\subsection*{L'adhérence d'une strate (pages 28 à 30)}
+
+Posons $\overline{\mathcal{M}}_G = \prod_\alpha
+\overline{\mathcal{M}}_{g_\alpha, \widehat{I}_\alpha}$. Un point de
+$\overline{\mathcal{M}}_G$ est une famille $(Y_\alpha)$ de courbes stables munies
+de sections lisses indexées par les $\widehat{I}_\alpha$ ; en réunissant les
+$Y_\alpha$ en $Y$ et en recollant les sections indexées par $\widetilde{A}$
+selon $\sigma_{\widetilde{A}}$, on obtient une MD-courbe $\mathfrak{X} =
+Y/\sigma_{\widetilde{A}}$ munie de $I$ : c'est le \emph{morphisme de recollement}
+\[
+(36) \qquad \xi_G : \overline{\mathcal{M}}_G \longrightarrow
+\overline{\mathcal{M}}_{g,I},
+\]
+compatible à l'action de $\Gamma$ sur la source et à son action sur le but à
+travers $\Gamma \to \mathfrak{S}_I$. Il en note la nature en marge : ce
+morphisme est une immersion locale, pas une immersion. Passant au quotient par
+$\Gamma$, il obtient
+\[
+(37) \qquad \overline{\mathcal{M}}_{[G]} = [\overline{\mathcal{M}}_G/\Gamma]
+\longrightarrow \overline{\mathcal{M}}_{g,[\nu]},
+\]
+dont l'image est l'adhérence de $\mathcal{M}_{[G]}$, et les types qui
+spécialisent $[G]$ sont exactement ceux des strates de $\overline{\mathcal{M}}_G$
+— ce qu'il va exploiter. Ce morphisme est fini et non ramifié, et c'est un
+isomorphisme au-dessus de la strate ouverte $\mathcal{M}_{[G]}$ ; il fait de
+$\overline{\mathcal{M}}_{[G]}$ la normalisée de l'adhérence de la
+strate\footnote{La page affirme davantage : que (37) est « encore une
+\emph{immersion}, fermée cette fois-ci », de sorte que l'adhérence de
+$\mathcal{M}_{[G]}$ serait propre et lisse sur $\mathbb{Z}$ (« qui pourrait
+espérer mieux ! »). C'est faux en général : le quotient par $\Gamma$ ne recolle
+pas les branches d'une adhérence qui se recoupe elle-même. L'exemple est dans le
+dossier : pour $G$ la boucle sur un sommet de genre $0$ portant deux points
+marqués, l'adhérence de la strate est le diviseur $D_\circ$ de
+$\overline{\mathcal{M}}_{1,2}$ des pages 69--70. Au point $P_0$ — deux droites
+se coupant en deux points, chacune portant un point marqué — les deux nœuds
+peuvent se lisser séparément : dans une carte étale, le bord y est $\{t_1 t_2 =
+0\}$, et $D_\circ$ y a deux branches, une par nœud ; la page 69 marque d'ailleurs
+d'un « 2 » la flèche de $G_0$ vers $P_0$. Une adhérence qui a deux branches en un
+point n'y est pas lisse. C'est le fait connu que le bord de $\overline{\mathcal{M}}_{g,n}$ est
+un diviseur à croisements normaux, mais non à croisements normaux
+\emph{simples}.}.
+
+\pagerange{31}{50}
+\section*{Spécialisation et contraction de graphes (pages 31 à 50)}
+
+\pagerange{31}{33}
+\subsection*{La recette de spécialisation (pages 31 à 33)}
+
+Les strates de $\overline{\mathcal{M}}_G = \prod_\alpha
+\overline{\mathcal{M}}_{g_\alpha, \widehat{I}_\alpha}$ s'obtiennent en choisissant,
+pour chaque sommet $\alpha$, une strate du facteur, c'est-à-dire un MD-graphe
+$G(\alpha)$ de type $(g_\alpha, \widehat{I}_\alpha)$ — à isomorphisme près
+induisant l'identité sur ses points marqués $\widehat{I}_\alpha$ ; le graphe
+trivial est permis. Le graphe spécialisé $G'$ se lit sur (40) :
+\[
+S' = \coprod_\alpha S(\alpha), \qquad \widetilde{A}' = \widetilde{A} \amalg
+\coprod_\alpha \widetilde{A}(\alpha), \qquad I' = I,
+\]
+l'involution étant celle de $\widetilde{A}$ et des $\widetilde{A}(\alpha)$, et
+les arcs de $\widetilde{A}$ issus de $\alpha$ recevant leur nouvelle origine par
+$\widehat{I}_\alpha \to S(\alpha)$. La « recette pratique » : on remplace chaque
+sommet $\alpha$ de $G$ par un graphe connexe $G(\alpha)$, on lui donne un genre
+$g_\alpha : S(\alpha) \to \mathbb{N}$, on répartit les points marqués de $\alpha$
+entre ses sommets, on choisit pour chaque arc de $G$ issu de $\alpha$ une
+nouvelle origine dans $G(\alpha)$ ; on veille à ce que $G(\alpha)$ soit un
+MD-graphe de genre $g_\alpha$ — en chaque sommet $\beta$ de $G(\alpha)$, $2g(\beta)
++ \operatorname{card} I_{\alpha,\beta} + \operatorname{card}
+\widetilde{A}_{\alpha,\beta} + \omega_{G(\alpha)}(\beta) \geq 3$, où
+$\widetilde{A}_{\alpha,\beta}$ est l'ensemble des arcs de $G$ réattribués à
+$\beta$\footnote{La page n'écrit la condition que pour les sommets de genre $0$,
+sous la forme $\operatorname{card} I_{\alpha,\beta} + \operatorname{card}
+\widetilde{A}_{\alpha,\beta} \geq 3$, sans compter les arêtes de $G(\alpha)$
+lui-même ni les sommets de genre $1$. La condition juste est que $G(\alpha)$,
+avec $\widehat{I}_\alpha$ pour points marqués, soit un MD-graphe ; c'est elle
+qu'on écrit.}. On trouve un MD-graphe $G'$, spécialisation de $G$.
+
+\pagerange{34}{40}
+\subsection*{Morphismes généralisés de graphes (pages 34 à 40)}
+
+Pour dire mieux la relation entre $G$ et $G'$, il introduit une
+« catégorisation » des morphismes de graphes. À un graphe $G$ est associé son
+groupoïde fondamental $\Pi_1(G)$ : objets les sommets, flèches les chemins
+réduits, c'est-à-dire les classes d'homotopie de chemins dans la réalisation
+topologique. C'est le groupoïde libre sur les arcs, l'arc opposé donnant
+l'inverse. Un morphisme de graphes $f : G' \to G''$ est déterminé par $\Pi_1(f)$,
+et les morphismes de graphes s'identifient aux morphismes de groupoïdes qui
+envoient arcs sur arcs.
+
+Un \emph{morphisme généralisé} (ou « de générisation ») $G' \to G''$ est un
+morphisme de groupoïdes $\Pi_1(G') \to \Pi_1(G'')$ qui envoie tout arc sur un arc
+ou sur une identité ; la composition est évidente sous cette forme. Concrètement,
+c'est la donnée (45) d'une application $f_S : S' \to S''$, d'une partie
+$\widetilde{B}' \subset \widetilde{A}'$ stable par l'involution, et d'une
+application $\widetilde{B}' \to \widetilde{A}''$ compatible aux involutions et aux
+origines, avec la condition, ajoutée en marge, que les deux extrémités de chaque
+arc de $\widetilde{C}' = \widetilde{A}' \setminus \widetilde{B}'$ aient même image
+par $f_S$. Autrement dit : un sous-graphe de $G'$ ayant tous ses sommets, et un
+morphisme ordinaire de ce sous-graphe vers $G''$. Les isomorphismes de cette
+catégorie sont les isomorphismes ordinaires.
+
+Pour des MD-graphes, un \emph{morphisme de générisation} $G' \to G$ est un
+morphisme généralisé muni d'une bijection $I' \simeq I$ compatible aux applications
+vers les sommets, tel que $S' \to S$ soit surjectif, $\widetilde{B}' \to
+\widetilde{A}$ bijectif, et que pour chaque $\alpha \in S$ le \emph{graphe fibre}
+$G'(\alpha)$ — les sommets au-dessus de $\alpha$ et les arcs de $\widetilde{C}'$
+entre eux, avec pour points marqués $I'_\alpha \amalg \widetilde{B}'_\alpha$ et le
+genre induit — soit un MD-graphe de genre $g_\alpha$. Il dégage (48) les
+conditions nécessaires et suffisantes pour qu'un morphisme généralisé de graphes
+soit sous-jacent à un tel morphisme : surjectivité sur les sommets, bijectivité
+de $\widetilde{B}' \to \widetilde{A}$, fibres connexes ; conservation des poids
+marqués, $\nu_\alpha = \sum_{\beta \in S'_\alpha} \nu'_\beta$ ; et
+\[
+(48.3^\circ) \qquad g_\alpha = \sum_{\beta \in S'_\alpha} g'_\beta +
+h_1\bigl(G'(\alpha)\bigr) .
+\]
+Une quatrième condition de stabilité, d'abord écrite, est barrée : on va voir
+qu'elle est automatique\footnote{La condition d) de la page 39 écrit
+$h_1(G(\alpha))$ ; c'est $h_1(G'(\alpha))$, comme le porte 3°) de la page 40.}.
+
+\pagerange{41}{50}
+\subsection*{Contractions d'arêtes ; l'ensemble ordonné des généralisations (pages 41 à 50)}
+
+Un morphisme généralisé $f : G' \to G$ satisfaisant 1°) de (48) est un
+\emph{morphisme de généralisation}. Le but et $f$ sont alors déterminés à
+isomorphisme près par $G'$ et l'ensemble $C' \subset A'$ des arêtes contractées :
+si $G'_!$ est le sous-graphe de $G'$ formé de tous les sommets et des arêtes de
+$C'$, on a $S \simeq \pi_0(G'_!)$ et $\widetilde{A} \simeq \widetilde{B}'$, les
+origines passant au quotient. Mieux, $G$ est la somme amalgamée, dans la catégorie
+des graphes et morphismes généralisés, de $G' \hookleftarrow G'_! \to
+\pi_0(G'_!)$ (52) ; on écrit $G = G'/C'$, le graphe obtenu en \emph{contractant}
+les arêtes de $C'$ en des points — ce que fait, sur les réalisations
+topologiques, une application continue qui écrase ces arêtes. Tout morphisme
+généralisé se factorise de manière unique en une contraction suivie d'un
+morphisme ordinaire (55).
+
+Si $G'$ est un MD-graphe, $G'/C'$ en devient un, avec $I = I'$ et le genre (56)
+$g_\alpha = \sum_{\alpha' \in S'_\alpha} g'_{\alpha'} + h_1(G'(\alpha))$. La
+stabilité se vérifie par un calcul de la page 46 : en un sommet $\beta$ de
+$G'(\alpha)$, la condition de stabilité dans $G'(\alpha)$ s'écrit $2g'_\beta +
+(\operatorname{card} I'_\beta + \operatorname{card} \widetilde{B}'_\beta) +
+\operatorname{card} \widetilde{C}'_\beta \geq 3$, et comme $\widetilde{A}'_\beta
+= \widetilde{B}'_\beta \amalg \widetilde{C}'_\beta$, c'est exactement la
+stabilité de $\beta$ dans $G'$. Les $G'(\alpha)$ sont donc des MD-graphes, de type
+$(g_\alpha, \widehat{\nu}_\alpha)$ ; par la proposition de la page 15 ce type est
+anabélien, ce qui est la stabilité de $\alpha$ dans $G$.
+
+\textbf{Proposition (pages 46--47).} \emph{Soient $G'$ un MD-graphe et $C'$ un
+ensemble d'arêtes de $G'$. Il existe, à isomorphisme unique près, un unique
+morphisme de généralisation de MD-graphes $G' \to G$ qui contracte exactement les
+arêtes de $C'$\footnote{La page écrit « tel que $B$ soit l'ens.\ des arêtes qui
+se contractent en un point » ; ce sont celles de $C'$, comme le dit la
+définition (53).}. On a $\pi_0(G') \simeq \pi_0(G)$ ; $G'$ est stable si et
+seulement si les $G'(\alpha)$ le sont, et alors $G$ l'est aussi.}
+
+Il généralise au passage ces définitions aux « m-graphes » quelconques, ni
+connexes ni stables. Les quotients d'un $G'$ forment un ensemble ordonné
+isomorphe à l'ensemble des parties $B' = A' \setminus C'$ des arêtes : il y en a
+$2^{\mu'}$, $\mu' = \operatorname{card} A'$. L'\emph{écart} d'un morphisme de
+généralisation est le nombre $\delta = \operatorname{card} C'$ d'arêtes
+contractées ; il prend toutes les valeurs de $0$ à la codimension modulaire de
+$G'$, et s'annule pour les isomorphismes. Tout morphisme de généralisation
+d'écart $\delta$ se factorise en $\delta$ morphismes d'écart $1$, de $\delta!$
+façons (l'ordre où l'on contracte les arêtes).
+
+Il rattache enfin ces quotients aux strates : pour un MD-graphe $G$, les
+généralisations de $G$ correspondent aux strates de
+$\overline{\mathcal{M}}_{g,I}$ (au sens des pages 28--30, avec le groupe
+$\Gamma^{!}_G$ qui fixe les points marqués) dont l'adhérence contient celle de
+$G$. « C'est la situation typique d'une stratification à l'infini à croisements
+normaux », et l'analyse locale par les schémas modulaires formels montre qu'on y
+est. L'énoncé exact est local : au voisinage d'un point de $\mathcal{M}_G$, le
+champ $\overline{\mathcal{M}}_{g,I}$ est le quotient d'un polydisque par un groupe
+fini, le bord y est réunion des $\mu$ hyperplans de coordonnées — un par nœud,
+c'est-à-dire par arête — et les $2^\mu$ généralisations de $G$ sont les $2^\mu$
+strates locales qu'ils découpent ; globalement, deux généralisations qu'échange
+un automorphisme de $G$ donnent la même strate, et une même strate peut
+contenir $\mathcal{M}_G$ dans son adhérence selon plusieurs
+branches\footnote{La page 49 parle d'une « correspondance biunivoque » entre
+les $2^\mu$ généralisations et les sous-multiplicités « fermées, donc propres sur
+$\mathbb{Z}$, et lisses » de la forme $\overline{\mathcal{M}}_{[G']}$ qui
+contiennent $\overline{\mathcal{M}}_{[G]}$. Les adhérences ne sont pas lisses en
+général (note de la page 30), et le nombre de strates globales est celui des
+orbites ; la correspondance est vraie localement, branche par branche, comme on
+l'a dit.}.
+
+\pagerange{51}{60}
+\section*{Le recensement en dimension modulaire au plus $2$ (pages 51 à 60)}
+
+\pagerange{51}{54}
+\subsection*{Dimension modulaire nulle (pages 51 à 54)}
+
+Pour un MD-graphe $G$, les conditions suivantes sont équivalentes : $\dim
+\mathcal{M}_G = 0$ ; la codimension modulaire $s_1$ atteint son maximum $3(g - 1)
++ \nu$ ; $G$ est maximal pour la relation de généralisation (tout morphisme de
+généralisation $G' \to G$ est un isomorphisme) ; tout sommet est de genre $0$ et de
+poids total $3$, soit $\nu_\alpha = 3 - \omega_\alpha$. En effet chaque terme
+$3(g_\alpha - 1) + \widehat{\nu}_\alpha$ de (27) est positif ou nul pour un type
+anabélien, et ne s'annule que pour $(0, 3)$. Une courbe de ce type est faite de
+droites projectives portant chacune trois points spéciaux ; elle est rigide : il y en a une seule, à isomorphisme unique près, sur toute base, et
+\[
+(60)\text{--}(62) \qquad \mathcal{M}_G \simeq \operatorname{Spec} \mathbb{Z},
+\qquad \mathcal{M}_{[G]} \simeq B\Gamma, \qquad [\mathcal{M}_G/\Gamma^{!}] \simeq
+B\Gamma^{!},
+\]
+où $B\Gamma$ est la multiplicité classifiante du groupe constant $\Gamma$ sur
+$\operatorname{Spec} \mathbb{Z}$\footnote{La page écrit (62) « $(M_{[G]},
+\Gamma^{!}) \simeq B(\Gamma^{!}_{S_0})$ » ; c'est le quotient de $\mathcal{M}_G$,
+non de $\mathcal{M}_{[G]}$, par $\Gamma^{!}$ qu'il faut lire.}. Le groupe des
+automorphismes d'une telle courbe (qui ne respectent pas forcément l'épinglage)
+est $\Gamma$, et celui qui fixe les points marqués est $\Gamma^{!}$.
+
+Comme $g = h_1$ ici, la dimension modulaire ambiante est $3(h_1 - 1) + \nu$ (63) ;
+il énumère les cas où elle vaut au plus $2$, ce qui force $h_1 \leq 1$.
+
+\emph{Arbres} ($h_1 = 0$, dimension ambiante $\nu - 3$, donc $3 \leq \nu \leq 5$).
+Une feuille d'un arbre de MD-graphe porte deux points marqués ; un arbre à au
+moins trois feuilles a donc $\nu \geq 6$, et l'arbre est un sommet ou une chaîne.
+Une chaîne de $k \geq 2$ sommets porte $2 + 2 + (k - 2) = k + 2$ points. D'où trois
+cas : un sommet portant $3$ points ($\nu = 3$, la droite à trois points) ; deux
+sommets portant chacun $2$ points ($\nu = 4$, deux droites sécantes) ; une chaîne
+$2 - 1 - 2$ ($\nu = 5$, trois droites en chaîne).
+
+\emph{Graphes à un cycle} ($h_1 = 1$, dimension ambiante $\nu \leq 2$). Il y a au
+plus une feuille. Sans feuille, le graphe est un cycle dont tous les sommets sont
+d'ordre $2$, donc de poids $1$ : un ou deux sommets. Avec une feuille, de poids
+$2$, le graphe est un cycle muni d'une queue, et $\nu \leq 2$ ne laisse que la
+boucle sur un sommet relié à la feuille. D'où trois cas : la boucle sur un sommet
+de poids $1$ ($\nu = 1$, la cubique nodale) ; deux sommets de poids $1$ reliés par
+deux arêtes ($\nu = 2$) ; la boucle munie d'une queue dont le bout porte deux
+points ($\nu = 2$).
+
+Leurs groupes, que la page 54 calcule, sont
+\[
+\begin{array}{lll}
+\text{un sommet, } 3 \text{ points} & \Gamma \simeq \mathfrak{S}_3, &
+\Gamma^{!} = 1 \\
+\text{deux sommets, } 2 + 2 & \Gamma \simeq D_4, & \Gamma^{!} = 1 \\
+\text{chaîne } 2 - 1 - 2 & \Gamma \simeq D_4, & \Gamma^{!} = 1 \\
+\text{boucle, poids } 1 & \Gamma = \Gamma^{!} \simeq \mathbb{Z}/2 & \\
+\text{deux sommets, deux arêtes} & \Gamma \simeq \mathbb{Z}/2 \times \mathbb{Z}/2, &
+\Gamma^{!} \simeq \mathbb{Z}/2 \\
+\text{boucle et queue} & \Gamma \simeq \mathbb{Z}/2 \times \mathbb{Z}/2, &
+\Gamma^{!} \simeq \mathbb{Z}/2
+\end{array}
+\]
+où $D_4$ est le groupe diédral d'ordre $8$ (on échange les deux points de chaque
+bout, et les deux bouts), le $\mathbb{Z}/2$ de la boucle la retourne, et dans le
+cinquième cas on échange les deux arêtes et les deux sommets\footnote{La page
+écrit $D_2$ pour ce groupe, le groupe de Klein. Elle numérote (65) le tableau des
+arbres, déjà numéroté (64), et (66) celui des graphes à un cycle, déjà numéroté
+(65).}.
+
+\pagerange{55}{58}
+\subsection*{Dimension modulaire $1$ (pages 55 à 58)}
+
+La dimension modulaire $\delta(G) = \sum_\alpha \delta_\alpha$, $\delta_\alpha =
+3(g_\alpha - 1) + \widehat{\nu}_\alpha \geq 0$, vaut $1$ exactement quand un seul
+sommet $\alpha_0$ a $\delta_{\alpha_0} = 1$ — type $(0, 4)$ ou $(1, 1)$ — et que
+tous les autres sont de type $(0, 3)$. Les cas élémentaires (graphes ponctuels)
+sont
+\[
+(70) \qquad
+\begin{array}{ll}
+\text{un sommet de genre } 0 \text{ portant } 4 \text{ points} : &
+\Gamma = \mathfrak{S}_4,\ \Gamma^{!} = 1 ; \\
+\text{un sommet de genre } 1 \text{ portant } 1 \text{ point} : &
+\Gamma = \Gamma^{!} = 1 .
+\end{array}
+\]
+Les autres sont les graphes dont tous les sommets sont de genre $0$ et de poids
+total $3$ sauf un, de poids total $4$ ; ou dont tous sont de genre $0$ et de poids
+total $3$ sauf une feuille de genre $1$ sans point marqué. Dans les deux cas
+\[
+(71) \qquad \overline{\mathcal{M}}_G \simeq \overline{\mathcal{M}}_{g_{\alpha_0},
+\widehat{I}_{\alpha_0}},
+\]
+car les autres facteurs sont des points. $\Gamma$ y opère trivialement si
+$g_{\alpha_0} = 1$, et à travers $\Gamma \to \mathfrak{S}_{\widehat{I}_{\alpha_0}}
+\simeq \mathfrak{S}_4$ si $g_{\alpha_0} = 0$. Il pense que l'image peut être
+n'importe quel sous-groupe de $\mathfrak{S}_4$, « sauf erreur » ; le dossier ne
+le vérifie pas, et nous non plus.
+
+En dimension ambiante $2$ (une seule arête) il y a trois cas : un sommet
+$\alpha_0$ de genre $0$ portant trois points relié à un sommet portant deux points
+(deux droites, type $(0, 5)$) ; une boucle sur un sommet de genre $0$ portant deux
+points (courbe nodale, type $(1, 2)$) ; un sommet de genre $1$ relié à un sommet de
+genre $0$ portant deux points (type $(1, 2)$). Leurs groupes (73) sont
+respectivement $\mathfrak{S}_3 \times \mathfrak{S}_2$ (avec $\Gamma^{!} = 1$ et
+image $\mathfrak{S}_3$ dans $\mathfrak{S}_4$), $\mathfrak{S}_2 \times
+\mathfrak{S}_2$ (avec $\Gamma^{!} = \mathfrak{S}_2$, le retournement de la boucle,
+et image $\mathfrak{S}_2 \times \mathfrak{S}_2$), et $\mathfrak{S}_2$ (avec
+$\Gamma^{!} = 1$).
+
+\pagerange{58}{60}
+\subsection*{Dimension modulaire $2$, et les quatre cas élémentaires (pages 58 à 60)}
+
+La dimension modulaire vaut $2$ si un seul sommet $\alpha_0$ a $\delta_{\alpha_0} =
+2$ — type $(0, 5)$ ou $(1, 2)$ — ou si deux sommets ont $\delta = 1$ — types
+$(0,4)$ ou $(1,1)$ chacun, trois combinaisons —, tous les autres étant de type
+$(0, 3)$\footnote{Pour $\alpha_0$ de genre $1$, la page donne l'ordre
+$\omega_{\alpha_0} \in \{1, 2\}$ ; l'ordre $0$ (sommet isolé, graphe trivial de
+type $(1, 2)$) est aussi possible, et c'est le cas élémentaire
+$\overline{\mathcal{M}}_{1,2}$ lui-même.}. Le champ $\overline{\mathcal{M}}_G$ est
+alors l'un des
+\[
+(74) \qquad \overline{\mathcal{M}}_{0,5}, \quad \overline{\mathcal{M}}_{1,2}, \quad
+\overline{\mathcal{M}}_{0,4} \times \overline{\mathcal{M}}_{0,4}, \quad
+\overline{\mathcal{M}}_{0,4} \times \overline{\mathcal{M}}_{1,1}, \quad
+\overline{\mathcal{M}}_{1,1} \times \overline{\mathcal{M}}_{1,1},
+\]
+avec $\Gamma$ opérant à travers les permutations des points spéciaux des sommets
+non triviaux : $\mathfrak{S}_5$, $\mathfrak{S}_2$, le produit en couronne
+$(\mathfrak{S}_4 \times \mathfrak{S}_4) \rtimes \mathbb{Z}/2$ (qu'il appelle
+« produit semi-direct » dans $\mathfrak{S}_8$), $\mathfrak{S}_4$, et, dans le
+dernier cas, à travers l'échange des deux facteurs quand $\Gamma$ échange les
+deux sommets de genre $1$\footnote{La page dit « $\Gamma$ opère trivialement » sur
+$\overline{\mathcal{M}}_{1,1} \times \overline{\mathcal{M}}_{1,1}$. Chaque facteur
+est en effet fixé, mais un automorphisme du graphe qui échange les deux sommets de
+genre $1$ échange les facteurs : pour deux sommets de genre $1$ reliés par une
+arête (genre $2$, $\nu = 0$), $\Gamma = \mathbb{Z}/2$ agit sur
+$\overline{\mathcal{M}}_{1,1} \times \overline{\mathcal{M}}_{1,1}$ par la symétrie,
+et la strate est le diviseur $\Delta_1$ de $\overline{\mathcal{M}}_2$. Il traite
+correctement le même phénomène pour $\overline{\mathcal{M}}_{0,4} \times
+\overline{\mathcal{M}}_{0,4}$.}.
+
+Il conclut : en dimension $1$, les seules multiplicités nouvelles sont
+$\overline{\mathcal{M}}_{0,4}$ et $\overline{\mathcal{M}}_{1,1}$ ; en dimension
+$2$, ce sont $\overline{\mathcal{M}}_{0,5}$ et $\overline{\mathcal{M}}_{1,2}$ ;
+les produits n'apportent rien. « Cela fait en tout essentiellement quatre cas
+“élémentaires” à étudier à fond, pour le cas de dim.\ modulaires $\leq 2$. J'ai
+l'impression qu'une compréhension plus ou moins complète de la structure des
+$\Pi_1$ discrets (i.e.\ dans le contexte analytique) impliqués dans ces cas,
+donnera la clef pour une compréhension complète dans le cas général. » C'est,
+mot pour mot presque, ce que l'\emph{Esquisse d'un programme} (1984) appellera le
+principe des deux premiers étages de la tour de Teichmüller : le groupoïde de
+toute la tour est engendré par les deux premiers étages, avec des relations
+venues du second\footnote{Le rapprochement est de l'édition. La forme discrète de
+ce principe a été démontrée par Hatcher, Lochak et Schneps (« On the Teichmüller
+tower of mapping class groups », \emph{J.\ reine angew.\ Math.} 521, 2000). Le
+dossier, lui, n'énonce qu'une impression.}.
+
+\pagerange{60}{74}
+\section*{La structure de spécialisation en petite dimension (pages 60 à 74)}
+
+Il reprend les quatre cas élémentaires, et décrit pour chacun la stratification
+de $\overline{\mathcal{M}}$ et de sa version numérotée.
+
+\pagerange{60}{62}
+\subsection*{La sphère à quatre points (pages 60 à 62)}
+
+Dans $\overline{\mathcal{M}}_{0,4}$ (points numérotés par $I$, $\operatorname{card}
+I = 4$), la strate ouverte a pour bord trois points, un par partition de $I$ en
+deux paires : la courbe s'y casse en deux droites portant chacune deux des
+points. On a
+\[
+(77) \qquad \overline{\mathcal{M}}_{0,4} \simeq \mathbb{P}^1_{\mathbb{Z}}, \qquad
+\mathcal{M}_{0,4} \simeq \mathbb{P}^1_{\mathbb{Z}} \setminus \{0, 1, \infty\}
+= U_{0,3},
+\]
+par le birapport, et les trois points à l'infini sont $0$, $1$, $\infty$.
+L'objet est celui du dossier 145 : la sphère privée de trois points, avec ses
+symétries. Le groupe $\mathfrak{S}_4$ opère sur $\overline{\mathcal{M}}_{0,4}$ à
+travers $\mathfrak{S}_4 \to \mathfrak{S}_3$, de noyau le groupe de Klein $V_4$,
+c'est-à-dire par l'action anharmonique $z \mapsto 1 - z, 1/z, \dots$ ; dans
+$\overline{\mathcal{M}}_{0,[4]} = [\overline{\mathcal{M}}_{0,4}/\mathfrak{S}_4]$
+il ne reste qu'un point à l'infini, les trois étant permutés
+transitivement\footnote{La page dit « correspondant aux \uncertain{deux} pts à
+l'infini » ; il y en a trois, comme elle l'a dit à la page 60. Il voulait
+d'abord décrire la courbe universelle $\overline{\mathfrak{X}}_{0,4}$, avec ses
+quatre sections et l'action de $\mathfrak{S}_4$ qui les échange, et y renonce
+(« Je vais pas le faire ici »).}.
+
+\emph{Caractéristiques d'Euler.} Pour une multiplicité, la caractéristique d'Euler
+qui compte un point d'automorphismes $H$ pour $1/\operatorname{card} H$ (la
+caractéristique orbifold) donne
+\[
+\chi(\mathcal{M}_{0,4}) = \chi(U_{0,3}) = -1, \qquad
+\chi(\overline{\mathcal{M}}_{0,4}) = 2, \qquad
+\chi(\mathcal{M}_{0,[4]}) = -\tfrac{1}{24}, \qquad
+\chi(\overline{\mathcal{M}}_{0,[4]}) = \tfrac{1}{12} .
+\]
+Le calcul de la page 61 découpe $U_{0,3}$ en trois parties stables : l'orbite
+$\{-j, -\bar\jmath\}$ des points fixes de la rotation $\rho(z) = 1/(1 - z)$, de
+stabilisateur $\mathbb{Z}/3$ dans $\mathfrak{S}_3$ — ce sont les points que la
+page 5 du dossier 145 identifie, et que le dossier 145 corrige de « $\pm j$ » en
+$-j$, $-\bar\jmath$ ; ici la page les écrit juste —, l'orbite $\{1/2, 2, -1\}$ des
+points fixes des transpositions, de stabilisateur $\mathbb{Z}/2$, et le reste, où
+$\mathfrak{S}_3$ agit librement. Comptées pour $\mathfrak{S}_3$, ces parties
+contribuent $-6/6 = -1$, $1/3$ et $1/2$, d'où $\chi([U_{0,3}/\mathfrak{S}_3]) =
+-1/6$ ; comme $V_4$ agit trivialement, il faut encore diviser par $4$ :
+$\chi(\mathcal{M}_{0,[4]}) = -1/24$\footnote{La page écrit « $= -1 + \frac13 +
+\frac12 = -\frac{1}{24}$ », ce qui ne fait pas le compte : la somme vaut
+$-1/6$, qui est la caractéristique pour $\mathfrak{S}_3$, et le facteur $1/4$ du
+noyau $V_4$ est omis. La marge donne directement « $\chi(U_{0,3}) :
+[\mathfrak{S}_4] = -\frac{1}{24}$ », qui est juste.}. Les trois points à
+l'infini, permutés par $\mathfrak{S}_4$ avec des stabilisateurs d'ordre $8$,
+ajoutent $3/24 = 1/8$, d'où $1/12$.
+
+\emph{Classes.} « De façon plus fine, dans un groupe de Grothendieck convenable »,
+il écrit $[\mathcal{M}_{0,4}] = \mathbb{L} - 2$ et
+\[
+[\mathcal{M}_{0,[4]}] = \tfrac14(\mathbb{L} - 2) + \tfrac{1}{12} + \tfrac18 =
+\tfrac14(\mathbb{L} - 1) - \tfrac{1}{24}, \qquad
+[\overline{\mathcal{M}}_{0,[4]}] = \tfrac14(\mathbb{L} - 1) + \tfrac{1}{12} .
+\]
+La règle qu'il applique est celle-ci : on découpe la multiplicité en parties où le
+groupe d'automorphismes $H$ d'un point est constant, et l'on compte chacune pour la
+classe de son espace grossier divisée par $\operatorname{card} H$ ; ici l'espace
+grossier de $\mathcal{M}_{0,[4]}$ est la droite affine, privée des deux points
+spéciaux, de stabilisateurs d'ordre $12$ et $8$, le stabilisateur générique étant
+$V_4$. Cette classe se spécialise en la caractéristique orbifold ($\mathbb{L}
+\mapsto 1$ donne bien $-1/24$). Elle n'est \emph{pas} le nombre de points sur un
+corps fini, qui pour $[U/G]$ vaut $\operatorname{card} U(\mathbb{F}_q) /
+\operatorname{card} G$\footnote{Précision de l'édition. Pour $\mathcal{M}_{1,1}$,
+le nombre de points (pondéré par les automorphismes) vaut $q$ ; la classe de la
+page 63 vaut $\frac12(q - 1) - \frac{1}{12}$. Les deux invariants sont additifs,
+mais ne coïncident pas. Le « groupe de Grothendieck convenable » n'est pas
+précisé par le dossier ; la règle ci-dessus est celle qui rend tous ses calculs
+justes. La marge de la page 62 limite ces formules à $\mathbb{Z}[\frac16]$, et
+envisage de refaire le calcul sur $\mathbb{Z}$, ce que les pages 63--64 font pour
+$\mathcal{M}_{1,1}$.}.
+
+\pagerange{62}{64}
+\subsection*{Les courbes elliptiques (pages 62 à 64)}
+
+Le bord de $\overline{\mathcal{M}}_{1,1}$ est un point, la cubique nodale (une
+boucle sur un sommet de genre $0$ portant un point). Au-dessus de
+$\mathbb{Z}[\frac12]$, associer à une courbe elliptique ses quatre points de
+$2$-torsion, l'origine étant marquée, donne un morphisme
+\[
+(78) \qquad \mathcal{M}_{1,1} \longrightarrow [\mathcal{M}_{0,4}/\mathfrak{S}_3]
+= [U_{0,3}/\mathfrak{S}_3]
+\]
+qui fait de $\mathcal{M}_{1,1}$ une gerbe de groupe $\{\pm 1\}$ : c'est la forme
+de Legendre, $y^2 = x(x-1)(x-\lambda)$, et l'action anharmonique de
+$\mathfrak{S}_3 = SL_2(\mathbb{F}_2)$ sur $\lambda$\footnote{La page écrit (78)
+pour les compactifiés, $\widehat{M}_{1,1} \to \widehat{M}'_{1,4} = (\widehat{M}^{!}_{1,4},
+\mathfrak{S}_3)$ ; les indices « $1,4$ » sont à lire $0,4$, comme la ligne
+suivante l'écrit. La structure de gerbe ne vaut qu'au-dessus de la partie
+ouverte : la cubique nodale n'a que deux points de $2$-torsion lisses, et
+son groupe d'automorphismes est $\mathbb{Z}/2$, non une extension de
+$\mathbb{Z}/2$ par $\mathbb{Z}/2$. C'est la structure que le dossier 141, page 9,
+décrit du côté des groupes : $1 \to \Gamma(2)/\{\pm 1\} \to PSL_2(\mathbb{Z}) \to
+\mathfrak{S}_3 \to 1$.}. D'où, au-dessus de $\mathbb{Z}[\frac16]$,
+\[
+[\mathcal{M}_{1,1}] = \tfrac12\,[U_{0,3}, \mathfrak{S}_3] = 2\,[\mathcal{M}_{0,[4]}],
+\qquad
+(79) \qquad [\mathcal{M}_{1,1}] = \tfrac12(\mathbb{L} - 1) - \tfrac{1}{12}, \qquad
+[\overline{\mathcal{M}}_{1,1}] = \tfrac12(\mathbb{L} - 1) + \tfrac{5}{12},
+\]
+la pointe ajoutant $\frac12$\footnote{La page écrit « $= \frac12 [M_{0,4}]$ ».
+Comme $[\mathcal{M}_{0,[4]}] = \frac14 [U_{0,3}, \mathfrak{S}_3]$ (le facteur $V_4$),
+c'est $2[\mathcal{M}_{0,[4]}]$ ; la formule (79) qu'il en tire est juste. Elle
+vaut au-dessus de $\mathbb{Z}[\frac16]$, non de $\mathbb{Z}[\frac12]$ comme le dit
+la page 63 : en caractéristique $3$, les points $-j$ et $-1$ se confondent, et la
+formule (80) qui suit porte en effet un terme en $\zeta_3$.}.
+
+Le second calcul, sur $\mathbb{Z}$ tout entier, découpe la droite des modules
+$\mathbb{A}^1_{\mathbb{Z}}$ (l'invariant $j$) par les deux sections $S_0$ (la
+courbe harmonique, $j = 1728$, d'automorphismes $\mathbb{Z}/4$) et $S_1$ (la
+courbe équianharmonique, $j = 0$, d'automorphismes $\mathbb{Z}/6$), qui ne se
+rencontrent qu'en caractéristiques $2$ et $3$, aux points $a_2$ et $a_3$ où le
+groupe d'automorphismes est d'ordre $24$ et $12$. Avec $\zeta_p = [\operatorname{Spec}
+\mathbb{F}_p]$ et le stabilisateur générique $\{\pm 1\}$,
+\[
+[\mathcal{M}_{1,1}] = \tfrac12 [U] + \tfrac14 [S'_0] + \tfrac16 [S'_1] +
+\tfrac{1}{24} \zeta_2 + \tfrac{1}{12} \zeta_3, \qquad [U] = \mathbb{L} - 2 +
+\zeta_2 + \zeta_3, \quad [S'_i] = 1 - \zeta_2 - \zeta_3,
+\]
+d'où
+\[
+(80) \qquad [\mathcal{M}_{1,1}] = \tfrac12(\mathbb{L} - 1) - \tfrac{1}{12} +
+\tfrac18 \zeta_2 + \tfrac16 \zeta_3, \qquad [\overline{\mathcal{M}}_{1,1}] =
+\tfrac12 \mathbb{L} - \tfrac{1}{12} + \tfrac18 \zeta_2 + \tfrac16 \zeta_3 .
+\]
+Nous avons refait le calcul : il est juste. Les termes correctifs disparaissent
+au-dessus de $\mathbb{Z}[\frac16]$, où l'on retrouve (79).
+
+\pagerange{65}{68}
+\subsection*{La sphère à cinq points (pages 65 à 68)}
+
+Pour $\operatorname{card} I = 5$, la stratification de $\overline{\mathcal{M}}_{0,I}$
+est
+\[
+(81) \qquad \text{un sommet portant } I \ \xrightarrow{\ 10\ } \ I' - I''
+\ (2 + 3) \ \xrightarrow{\ 3\ } \ 2 - 1 - 2
+\qquad (\text{codim. } 0,\ 1,\ 2) .
+\]
+Il y a dix diviseurs à l'infini, un par partie $I' \subset I$ à deux éléments ;
+chacun est isomorphe à $\overline{\mathcal{M}}_{0,3} \times
+\overline{\mathcal{M}}_{0,4} \simeq \mathbb{P}^1_{\mathbb{Z}}$ et porte trois
+points à l'infini. Les points de codimension $2$ sont au nombre de $30/2 = 15$, un
+par partition de $I$ de type $(2, 2, 1)$. Deux diviseurs $D_{I'}$, $D_{I''}$ se
+rencontrent si et seulement si $I' \cap I'' = \emptyset$.
+
+Le graphe d'incidence — dix sommets, les paires de $I$, reliés quand elles sont
+disjointes — est le \emph{graphe de Petersen}. Il le reconnaît, par la combinatoire
+de l'icosaèdre : un choix d'orientation de $I$ détermine un icosaèdre « grand »,
+dont les dix faces correspondent aux paires de faces opposées de l'icosaèdre
+ordinaire et aux dix diviseurs, et les quinze arêtes aux quinze points ; par
+dualité, les diviseurs sont les sommets et les points les arêtes d'un dodécaèdre
+« grand »\footnote{Ses « icosaèdre grand » et « dodécaèdre grand » sont, d'après
+les nombres qu'il donne (dix faces, quinze arêtes ; dix sommets, quinze arêtes),
+l'\emph{hémi-icosaèdre} et l'\emph{hémi-dodécaèdre}, quotients des solides
+réguliers par l'antipodie, et non le grand dodécaèdre de Kepler--Poinsot, qui a
+douze sommets. Le $1$-squelette de l'hémi-dodécaèdre est le graphe de Petersen.
+Les noms sont de l'édition. La page 66 est très raturée ; seuls les énoncés se
+lisent sûrement.}.
+
+\textbf{Proposition (page 67).} \emph{Le diviseur à l'infini de
+$\overline{\mathcal{M}}_{0,I}$ est une courbe stable déployée sur
+$\operatorname{Spec} \mathbb{Z}$, dont le graphe dual est le $1$-squelette de
+l'hémi-dodécaèdre défini par $I$, c'est-à-dire le graphe de Petersen.}
+
+C'est juste : dix droites projectives, chacune portant trois nœuds, se coupant
+en quinze points ; une courbe stable de genre $15 - 10 + 1 = 6$. L'isomorphisme
+de la proposition n'est compatible qu'au groupe alterné $\mathfrak{S}_I^{+} =
+\mathfrak{A}_I$, le groupe de l'hémi-dodécaèdre orienté, alors que
+$\mathfrak{S}_I$ tout entier opère sur le diviseur ; il faudrait, écrit-il, le
+comprendre par la géométrie de l'icosaèdre, « lié bien sûr au \emph{bi-icosaèdre}
+grand »\footnote{C'est cohérent : le groupe d'automorphismes du graphe de
+Petersen est $\mathfrak{S}_5$, celui de l'hémi-dodécaèdre comme polyèdre abstrait
+est $\mathfrak{A}_5$, d'indice $2$. La marge de la page 67 note que
+$\overline{\mathcal{M}}_{0,I}$ est un vrai schéma, projectif et lisse sur
+$\mathbb{Z}$ ; c'est aujourd'hui la surface de del Pezzo de degré $5$
+(identification de l'édition).}. Dans $\overline{\mathcal{M}}_{0,[5]} =
+[\overline{\mathcal{M}}_{0,5}/\mathfrak{S}_5]$, il ne reste qu'un diviseur à
+l'infini et un point critique, $\mathfrak{S}_5$ permutant transitivement les dix
+diviseurs et les quinze points.
+
+\pagerange{69}{71}
+\subsection*{La bouée à deux points (pages 69 à 71)}
+
+Pour $I = \{a, b\}$, la stratification de $\overline{\mathcal{M}}_{1,I}$ est
+\[
+(83) \qquad
+\begin{array}{ll}
+\text{codim. } 0 : & \text{un sommet de genre } 1 \text{ portant } I ; \\
+\text{codim. } 1 : & G_0 : \text{boucle sur un sommet de genre } 0
+\text{ portant } I ; \\
+& G_1 : \text{sommet de genre } 1 - \text{sommet de genre } 0 \text{ portant } I ; \\
+\text{codim. } 2 : & P_0 : \text{deux sommets portant } a \text{ et } b,
+\text{ reliés par deux arêtes} ; \\
+& P_1 : \text{boucle sur un sommet} - \text{sommet portant } I .
+\end{array}
+\]
+Il y a deux diviseurs à l'infini, $D_\circ$ (la boucle, $G_0$) et $D_-$ (le segment,
+$G_1$), et deux points critiques. $P_1$ est sur les deux diviseurs ; $P_0$ n'est
+que sur $D_\circ$, qui y passe par deux branches\footnote{La page, surchargée,
+place l'un des points sur les deux diviseurs et l'autre sur un seul, et semble
+dire que c'est $P_0$ qui est sur les deux. Les flèches de son tableau disent
+l'inverse : $G_0 \to P_0$ (marquée $2$), $G_0 \to P_1$ et $G_1 \to P_1$ (marquées
+$1$). La courbe $P_0$ a deux nœuds non séparants et aucun nœud séparant : elle
+n'est pas sur $D_-$, dont les courbes ont un nœud séparant.}.
+
+$D_\circ$ se normalise en $[\overline{\mathcal{M}}_{G_0}/\Gamma^{!}_0]$, où
+$\overline{\mathcal{M}}_{G_0} = \overline{\mathcal{M}}_{0, \{a, b, h, h'\}}
+\simeq \mathbb{P}^1$ et $\Gamma^{!}_0 = \mathbb{Z}/2$ échange les deux arcs $h,
+h'$ de la boucle. Envoyons $h, h', a, b$ sur $0, \infty, 1, T$ ; l'échange de $h$
+et $h'$ est $T \mapsto T^{-1}$. Il fixe le point à l'infini $T = 1$ (où $a$ et
+$b$ se rencontrent : c'est $P_1$) et échange les deux autres, $T = 0$ et $T =
+\infty$ (c'est $P_0$) ; l'échange de $a$ et $b$ agit de la même façon, de sorte
+que $\mathfrak{S}_I$ opère trivialement sur le quotient. Avec la coordonnée $u =
+T + T^{-1}$,
+\[
+(86) \qquad \text{espace grossier de } [\mathcal{M}_{G_0}/\Gamma^{!}_0] \simeq
+\operatorname{Spec} \mathbb{Z}[u, (u - 2)^{-1}], \qquad (87) \qquad
+[\overline{\mathcal{M}}_{G_0}/\Gamma^{!}_0] \to \mathbb{P}^1_{\mathbb{Z}},
+\]
+$P_0$ étant en $u = \infty$ et $P_1$ en $u = 2$. Le quotient a des points
+d'automorphisme $\mathbb{Z}/2$ là où $T = T^{-1}$, soit $u = 2$ et $u =
+-2$\footnote{La page note $\mathbb{Z}[T]_{(T-2)}$ pour l'anneau où $T - 2$ est
+inversé, et ne signale (87) qu'une « singularité $2$ le long de la section $T =
+2$ ». Le point $u = -2$ ($T = -1$ : la courbe nodale où $a$ et $b$ sont en
+position harmonique par rapport aux deux branches) a lui aussi le stabilisateur
+$\mathbb{Z}/2$, et (86) ne décrit que l'espace grossier. En caractéristique $2$,
+les deux points se confondent.}.
+
+Quant à $D_-$, il est $\overline{\mathcal{M}}_{G_1} \simeq
+\overline{\mathcal{M}}_{1,1}$. Pour la suite, il s'arrête : « J'y renonce, compte
+tenu qu'il me faudrait d'abord comprendre la structure de $M_{1,1}$ […] dans la
+catégorie transcendante (analytique complexe, avec éventuellement la structure
+réelle explicitée — i.e.\ considération de la conjugaison complexe…). J'y
+reviendrai plus loin. » Il n'y revient pas dans ce dossier.
+
+\pagerange{71}{74}
+\subsection*{La connexité du bord (pages 71 à 74)}
+
+\textbf{Proposition (page 71).} \emph{Si $\dim \mathcal{M}_G \geq 2$, le bord
+$\overline{\mathcal{M}}_G \setminus \mathcal{M}_G$ est connexe, fibre par fibre
+géométrique.}
+
+Si deux facteurs de $\overline{\mathcal{M}}_G = \prod_\alpha
+\overline{\mathcal{M}}_{g_\alpha, \widehat{I}_\alpha}$ sont de dimension au moins
+$1$, le bord d'un produit d'espaces connexes à bords non vides est connexe. Sinon
+on est ramené à $\overline{\mathcal{M}}_{g,I}$ avec $N = 3g - 3 + \nu \geq 2$ ; le
+cas $N = 2$ vient d'être vu ($\overline{\mathcal{M}}_{0,5}$ et
+$\overline{\mathcal{M}}_{1,2}$). Pour $N \geq 3$, il suffit, chaque diviseur à
+l'infini étant connexe, de relier deux diviseurs quelconques par une chaîne de
+diviseurs dont deux consécutifs se rencontrent. Les diviseurs sont
+\[
+(90) \qquad
+\begin{array}{ll}
+\text{a)} & \text{une boucle sur un sommet } (g - 1, I) \quad (g \geq 1) ; \\
+\text{b)} & (g', I') - (g'', I''), \quad g' + g'' = g, \quad I = I' \amalg I'',
+\end{array}
+\]
+avec $\operatorname{card} I' \geq 2$ si $g' = 0$, et de même pour
+$g''$\footnote{La page écrit « $g' + g'' = 0$ » ; c'est $g' + g'' = g$.}. Si $g
+\geq 1$, chaque diviseur b) a un sommet de genre au moins $1$, disons $g'$ ; la
+strate « boucle sur $(g' - 1, I')$ reliée à $(g'', I'')$ » est à la fois une
+spécialisation de b) (contracter la boucle) et de a) (contracter l'arête
+séparante), donc tout diviseur b) rencontre l'unique diviseur a). Si $g = 0$
+(et donc $\nu \geq 6$), chaque diviseur $I' - I''$ contient une strate maximale en
+chaîne
+\[
+(93) \qquad (2) - (1) - (1) - \cdots - (1) - (2),
+\]
+c'est-à-dire un ordre total sur $I$, défini à l'échange près des deux premiers et
+des deux derniers ; et deux ordres qui diffèrent par la transposition de deux
+éléments consécutifs $c_i, c_{i+1}$ donnent deux points du bord reliés par la
+courbe de bord où $c_i$ et $c_{i+1}$ sont sur un même sommet, dont ces deux
+chaînes sont des spécialisations (on contracte l'arête qui les sépare). Les ordres
+totaux étant reliés par des transpositions consécutives, tous les points en chaîne
+sont dans une même composante, et tout diviseur en contient un\footnote{Toutes les
+strates maximales de genre $0$ ne sont pas des chaînes (pour $\nu = 6$, l'étoile à
+trois branches de deux points chacune n'en est pas une) ; l'argument n'en a pas
+besoin, puisqu'il suffit que chaque diviseur contienne une chaîne. La page 74 est
+lue avec beaucoup d'incertitude ; la reconstruction de l'argument est fidèle à
+ses formules.}.
+
+\pagerange{75}{88}
+\section*{Les groupoïdes de Teichmüller et leurs homomorphismes de généralisation (pages 75 à 88)}
+
+\pagerange{75}{76}
+\subsection*{Le groupoïde fondamental d'une strate (pages 75 et 76)}
+
+Le § 9 passe au cadre transcendant : toutes les multiplicités sont désormais
+analytiques complexes, et l'on omet l'exposant « an ». Pour un MD-graphe $G$,
+soit $\Pi_1\mathcal{M}_G$ le groupoïde fondamental de $\mathcal{M}_G$. Il
+précise qu'on peut le remplacer par tout groupoïde équivalent, par exemple à
+ensemble d'objets fini, pourvu que l'équivalence commute à l'action de
+$\Gamma_G$. C'est un groupoïde connexe, et
+\[
+(95) \qquad \pi_1(\mathcal{M}_G) \simeq \prod_{\alpha \in S}
+\pi_1(\mathcal{M}_{g_\alpha, \widehat{I}_\alpha}) \simeq \prod_{\alpha \in S}
+\mathrm{Mod}_{g_\alpha, \widehat{\nu}_\alpha},
+\]
+produit de groupes de classes d'applications purs — ses « groupes de
+Teichmüller » $\Gamma^{+}_{g, I}$, $\mathcal{T}^{!+}_{g,\nu}$\footnote{La page
+écrit les indices $I_\alpha$ et $\nu_\alpha$ dans les deux derniers termes ; ce
+sont $\widehat{I}_\alpha$ et $\widehat{\nu}_\alpha$, comme dans le premier.}.
+L'action de $\Gamma_G$ donne le groupoïde $\Pi_1(\mathcal{M}_G, \Gamma_G)$ du
+champ quotient $\mathcal{M}_{[G]}$, et une extension
+\[
+(96) \qquad 1 \to \pi_1(\mathcal{M}_G) \to \pi_1(\mathcal{M}_G, \Gamma_G) \to
+\Gamma_G \to 1 .
+\]
+La page écrit le même terme aux deux premières places de (96)\footnote{Le noyau
+est $\pi_1(\mathcal{M}_G)$ ; c'est la suite exacte d'un champ quotient par un
+groupe fini.}.
+
+\pagerange{77}{80}
+\subsection*{L'homomorphisme de généralisation (pages 77 à 80)}
+
+Soit $G' = G/C$ un quotient de $G$ par un ensemble $C$ d'arêtes. La strate de
+$G$ est au bord de celle de $G'$ : on a $\mathcal{M}_G \subset
+\overline{\mathcal{M}}_G \to \overline{\mathcal{M}}_{G'}$. Soit
+$\Gamma^{!}_{G,G'}$ le sous-groupe de $\Gamma_G$ des automorphismes qui
+induisent l'identité sur $G'$ ; il préserve $C$, et c'est le produit, sur les
+sommets $\beta$ de $G'$, des groupes $\Gamma^{!}$ des graphes fibres $G(\beta)$.
+Le morphisme horizontal se factorise par
+\[
+(98) \qquad [\overline{\mathcal{M}}_G/\Gamma^{!}_{G,G'}] \longrightarrow
+\overline{\mathcal{M}}_{G'}, \qquad (99) \qquad [\mathcal{M}_G/\Gamma^{!}_{G,G'}]
+\hookrightarrow \overline{\mathcal{M}}_{G'} .
+\]
+Le second est une immersion localement fermée — un isomorphisme sur la strate de
+type $G$ de $\overline{\mathcal{M}}_{G'}$ — ; le premier n'est en général que fini
+et non ramifié, ce que sa marge soupçonne (« que ce ne sont peut-être que des
+immersions locales »)\footnote{La page appelle (98) une immersion, puis doute en
+marge. Le doute est fondé, pour la raison donnée à propos de la page 30 ; et
+(99) est bien une immersion, parce qu'au-dessus de la strate ouverte les
+automorphismes de la courbe qui fixent ses points marqués et respectent les
+nœuds contractés sont exactement $\Gamma^{!}_{G,G'}$.}. Il désigne par
+$\mathcal{M}_{G,G'}$ le germe de $\overline{\mathcal{M}}_{G'}$ le long de (99) —
+un voisinage tubulaire de la strate —, et par $\mathcal{M}^{*}_{G,G'}$ ce germe
+privé des diviseurs à l'infini de $\overline{\mathcal{M}}_{G'}$ : le voisinage
+tubulaire \emph{épointé}, contenu dans $\mathcal{M}_{G'}$. Ses groupoïdes
+fondamentaux se définissent par la limite inductive des catégories de revêtements
+de ces germes\footnote{Il renvoie ici, et à la page 144, à ses notes sur la
+monodromie (« notes Monodromie », § 53, n° 5, p.~768' et suivantes), qui ne sont
+pas dans ce dossier.}. On a
+\[
+(101)\text{--}(103) \qquad \Pi_1 \mathcal{M}_{G'} \xleftarrow{\ \gamma_{G,G'}\ }
+\Pi_1 \mathcal{M}^{*}_{G,G'} \xrightarrow{\ \varphi_{G,G'}\ } \Pi_1
+\mathcal{M}_{G,G'} \simeq \Pi_1\bigl(\mathcal{M}_G, \Gamma^{!}_{G,G'}\bigr),
+\]
+la flèche de gauche induite par l'inclusion, celle de droite par la rétraction
+du germe sur la strate, qui est une équivalence d'homotopie. Le voisinage épointé
+est fibré sur la strate en produits de disques épointés, un par arête de $C$ : la
+flèche $\varphi_{G,G'}$ fait de $\Pi_1 \mathcal{M}^{*}_{G,G'}$ une extension de
+$\Pi_1(\mathcal{M}_G, \Gamma^{!}_{G,G'})$ par $\mathbb{Z}^C$, tordu par l'action
+de $\Gamma^{!}_{G,G'}$ sur $C$. La flèche $\gamma_{G,G'}$ s'appelle
+l'\emph{homomorphisme de généralisation}.
+
+En termes de surfaces : le générateur de $\mathbb{Z}$ attaché à une arête est le
+lacet qui fait le tour du mur où le nœud se forme, et dans $\pi_1(\mathcal{M}_{G'})$
+il devient la \emph{torsion de Dehn} le long de la courbe simple qu'on pince ; les
+torsions le long des $\operatorname{card} C$ courbes disjointes commutent et
+engendrent un $\mathbb{Z}^C$\footnote{L'interprétation par les torsions de Dehn
+est de l'édition ; le dossier n'en parle pas. Le noyau est exactement
+$\mathbb{Z}^C$, et non un quotient comme dans le cas général que la marge de la
+page 87 envisage, parce que les strates $\mathcal{M}_G$ sont des $K(\pi, 1)$ (leur
+revêtement universel, un produit d'espaces de Teichmüller, est contractile), de
+sorte que $\pi_2$ ne tue rien.}.
+
+\pagerange{81}{86}
+\subsection*{Transitivité, et l'extension $S_A\Pi_1\mathcal{M}_G$ (pages 81 à 86)}
+
+Pour un composé $G \to G' \to G''$ de contractions, le diagramme (105) met bout à
+bout les deux homomorphismes de généralisation ; le groupoïde $\Pi_1
+\mathcal{M}^{*}_{G,G',G''}$ qu'il définit par un produit $2$-cartésien est à la
+fois une extension de $\Pi_1 \mathcal{M}^{*}_{G,G'}$ par un $\mathbb{Z}^{C'}$
+tordu et une extension de $\Pi_1 \mathcal{M}_G$ par un $\mathbb{Z}^{C \amalg C'}$
+tordu\footnote{La page 82 et la moitié supérieure de la page 83, qui comparaient
+ce diagramme à celui de $G \to G''$ directement, sont barrées.}.
+
+Il simplifie alors en prenant d'un coup la généralisation la plus grossière, celle
+qui contracte toutes les arêtes (le graphe à un seul sommet, de genre $g$,
+portant $I$) :
+\[
+(113) \qquad S_A\Pi_1\mathcal{M}_G := \Pi_1 \mathcal{M}^{*}_{G, G/A},
+\]
+extension de $\Pi_1(\mathcal{M}_G, \Gamma^{!}_{G, G/A})$ par $\mathbb{Z}^{A(G)}$,
+$A(G)$ étant l'ensemble de toutes les arêtes\footnote{La page dit « le graphe de
+MD \emph{discret} défini par $G$ — c'est donc la généralisation “la plus
+grossière” de toutes ». Le quotient de $G$ par toutes ses arêtes est le graphe à
+un sommet ; c'est celui-là qui est « le plus grossier ».}. C'est le groupoïde
+fondamental du voisinage tubulaire épointé de la strate dans
+$\mathcal{M}_{g,I}$ lui-même : le groupe d'un « bout » de l'espace des modules.
+$\Gamma_G$ tout entier y opère, compatiblement à la projection, d'où pour tout
+sous-groupe $\Gamma' \subset \Gamma_G$ une extension $(S_A\Pi_1\mathcal{M}_G,
+\Gamma') \to \Pi_1(\mathcal{M}_G, \Gamma')$ de noyau le système local
+$\mathbb{Z}^{A(G)}$ tordu par $\Gamma'$. Pour $C \subset A(G)$ stable par $\Gamma'$,
+la projection $\mathbb{Z}^{A(G)} \to \mathbb{Z}^C$ donne une extension quotient
+$S_C\Pi_1\mathcal{M}_G$ par $\mathbb{Z}^C$, et pour $G' = G/C$ on a le carré (120)
+\[
+S_A\Pi_1\mathcal{M}_G \xrightarrow{\ \tau_{G,G'}\ } S_{A'}\Pi_1\mathcal{M}_{G'},
+\qquad S_C\Pi_1\mathcal{M}_G \longrightarrow \Pi_1\mathcal{M}_{G'},
+\]
+d'où, pour $\Gamma^{!}_{G,G'} \subset \Gamma' \subset \Gamma_{G,G'}$ (le stabilisateur
+de $C$),
+\[
+(122) \qquad \bigl(S_C\Pi_1\mathcal{M}_G, \Gamma'\bigr) \longrightarrow
+\bigl(\Pi_1\mathcal{M}_{G'}, \Gamma'/\Gamma^{!}_{G,G'}\bigr) .
+\]
+La transitivité s'exprime alors simplement : $G \mapsto S_A\Pi_1\mathcal{M}_G$
+est un foncteur pour les morphismes de généralisation.
+
+\pagerange{86}{88}
+\subsection*{Une axiomatique (pages 86 à 88)}
+
+Les MD-graphes et les morphismes de généralisation forment une catégorie
+$\mathcal{G}$ dont tous les morphismes sont des épimorphismes et qui vérifie
+
+\begin{quote}
+(123) (Simpl) Pour tout $G$, l'ensemble ordonné des quotients de $G$ est un
+« simplexe » : il est isomorphe à l'ensemble des parties d'un ensemble fini $A_G$
+(celui des quotients minimaux non triviaux, c'est-à-dire des arêtes).
+\end{quote}
+
+Il se donne alors abstraitement, pour tout $G$, deux groupoïdes $S\Pi_G$ et
+$\Pi_G$ et une extension $\varphi_G : S\Pi_G \to \Pi_G$ par $\mathbb{Z}^{A(G)}$ ;
+$G \mapsto \Pi_G$ est fonctoriel pour les isomorphismes, $G \mapsto S\Pi_G$ pour
+tous les morphismes, et pour une contraction $f : G \to G/C$ le composé $S\Pi_G \to
+S\Pi_{G/C} \to \Pi_{G/C}$ se factorise par l'extension quotient $S_C\Pi_G$ (125).
+La transitivité pour un composé est alors automatique. Deux réserves en marge : il
+faudrait montrer comment cette axiomatique s'applique aux espaces munis d'un
+diviseur à croisements normaux — ce sera l'objet de la seconde moitié du
+dossier — ; et en général le noyau n'est pas $\mathbb{Z}^C$ tordu, mais un quotient
+d'un tel.
+
+\pagerange{89}{104}
+\section*{Morphismes de normalisation, et le Programme (pages 89 à 104)}
+
+\pagerange{89}{100}
+\subsection*{Couper des arêtes, oublier des points (pages 89 à 100)}
+
+Le § 10 veut rendre compte d'autres morphismes entre champs de modules, comme
+$\mathcal{M}_G \to \mathcal{M}_{g_\alpha, \widehat{I}_\alpha}$ ou l'oubli de points
+$\mathcal{M}_{g,I} \to \mathcal{M}_{g,I'}$ pour $I' \subset I$. Géométriquement :
+partant d'une courbe stable $X = \widehat{X} \setminus I$, on choisit $I' \subset
+I$ et une partie $A'$ des nœuds ; on normalise $\widehat{X}$ aux nœuds de $A
+\setminus A'$ et l'on « bouche les trous » de $I \setminus I'$. On obtient
+$\widehat{X}'$, avec un morphisme $\widehat{X}' \to \widehat{X}$, et $X' =
+\widehat{X}' \setminus I'$, qui ne s'envoie pas dans $X$ en général\footnote{La
+page écrit que « $\widehat{X}'$ ne \emph{s'envoie pas} dans $\widehat{X}$ (sauf si
+$I' = I$), mais seulement dans $\widehat{X}$ » ; les chapeaux sont retouchés sur
+la page. Le sens est : la normalisation $\widehat{X}' \to \widehat{X}$ existe
+toujours, mais $X'$ ne s'envoie dans $X$ que si $I' \supset I$, puisque les points
+de $I \setminus I'$, rebouchés dans $X'$, vont à l'infini de $X$.}. Plus
+généralement, on garde comme points marqués une partie $I'$ de $I \amalg
+\widetilde{J}$, où $\widetilde{J}$ est l'ensemble des $2\operatorname{card}(A
+\setminus A')$ points de $\widehat{X}'$ au-dessus des nœuds défaits, et l'on peut
+ne retenir qu'une réunion de composantes connexes.
+
+\textbf{Définition (page 94).} Un \emph{morphisme de normalisation} $G' \to G$ de
+MD-graphes est un couple $(f_G, f_I)$ : $f_G : G' \to G$ un morphisme de graphes
+injectif sur les sommets et sur les arêtes (qui identifie $G'$ à un sous-graphe de
+$G$), et $f_I : I' \hookrightarrow I \amalg \widetilde{J}$ une injection compatible
+aux applications vers les sommets, où $\widetilde{J}$ est l'ensemble des arcs de
+$G$ qui ne sont pas dans $f_G(\widetilde{A}')$ ; on demande en marge que $f_G$
+respecte les genres. Le morphisme est \emph{strict} si $S' \simeq S$ et $I' \simeq
+I \amalg \widetilde{J}$ : on coupe des arêtes, chaque arête coupée donnant deux
+points marqués.
+
+Il le relie à une notion orthodoxe en mettant arcs et points marqués « dans un
+même sac » : un \emph{graphe à boucles aplaties} est un système $(S,
+\widehat{\widetilde{A}}, \sigma, o)$ où l'involution peut avoir des points fixes ;
+les points fixes sont les « boucles aplaties », c'est-à-dire les points marqués
+(des demi-arêtes libres), et les autres forment un graphe ordinaire.
+Topologiquement, ce sont les couples $(X, S)$ d'un $1$-complexe compact et d'une
+partie finie contenant les sommets d'ordre au moins $3$ et rencontrant chaque
+composante connexe. Un morphisme de normalisation strict revient à choisir un
+ensemble $C$ d'arêtes et à les couper d'un coup de ciseaux en leur milieu ; un
+morphisme quelconque s'en déduit en ôtant des boucles aplaties et en ne gardant
+que certaines composantes. Les sous-MD-graphes stricts d'un $G$ correspondent aux
+parties de $A(G)$.
+
+Pour un morphisme de normalisation strict, $G'$ est stable si et seulement si $G$
+l'est (les poids totaux sont inchangés) ; en général, si $S' \to S$ est surjectif
+et $G'$ stable, $G$ est stable. À une courbe standard épinglée par $G$, la
+construction associe une courbe épinglée par $G'$, d'où un morphisme $\mathcal{M}_G
+\to \mathcal{M}_{G'}$ (132) : $\mathcal{M}_G$ est contravariant en $G$.
+
+\textbf{Proposition (page 100).} \emph{a) Si $G' \to G$ est un morphisme de
+normalisation strict, $\mathcal{M}_G \to \mathcal{M}_{G'}$ est un isomorphisme.
+b) Si $G$ est la somme de MD-graphes stables $G_\alpha$, $\mathcal{M}_G \to
+\prod_\alpha \mathcal{M}_{G_\alpha}$ est un isomorphisme.}
+
+Les deux sont immédiates sur la description (21), qui ne voit que les sommets et
+leurs points spéciaux $\widehat{I}_\alpha$, inchangés par une coupure.
+
+\pagerange{101}{104}
+\subsection*{Le Programme (pages 101 à 104)}
+
+Le foncteur $G \mapsto \Pi_1\mathcal{M}_G$ transforme normalisations strictes en
+équivalences et sommes en produits ; en coupant toutes les arêtes,
+\[
+(144) \qquad \Pi_1\mathcal{M}_G \simeq \prod_{\alpha \in S}
+\Pi_1\mathcal{M}_{g_\alpha, \widehat{I}_\alpha} .
+\]
+Un morphisme de normalisation quelconque se ramène, par le diagramme (146), aux
+morphismes d'oubli de points
+\[
+(148) \qquad \Pi_1\mathcal{M}_{g,I} \longrightarrow \Pi_1\mathcal{M}_{g,I'},
+\qquad I' \subset I,
+\]
+compatibles à l'action de $\mathfrak{S}_{I'} \times \mathfrak{S}_{I \setminus I'}$.
+D'où le
+
+\begin{quote}
+\textbf{Programme (page 103).} Déterminer, à équivalence canonique près, tous les
+groupoïdes $\Pi_1\mathcal{M}_{g,I}$, avec leur dépendance fonctorielle pour $g$
+fixé et $I$ variable par les morphismes (148) — « par “générateurs et relations”
+en termes purement géométriques ». Pour un MD-graphe $G$, déterminer l'extension
+$S\Pi_1\mathcal{M}_G$ de $\Pi_1\mathcal{M}_G \simeq \prod_\alpha
+\Pi_1\mathcal{M}_{g_\alpha, \widehat{I}_\alpha}$ par $\mathbb{Z}^{A(G)}$, et, pour
+un morphisme de généralisation $G \to G'$ (par exemple un isomorphisme), les
+morphismes $S\Pi_1\mathcal{M}_G \to S\Pi_1\mathcal{M}_{G'}$
+correspondants\footnote{La page écrit ici $\mathbb{Z}^{\widetilde{A}(G)}$ (les arcs)
+et $\Pi_1 M_{\alpha, \widehat{I}_\alpha}$ sans $g$. Le noyau a un facteur par
+\emph{arête}, comme à la page 84 ; un arc et son opposé donnent la même torsion.}.
+\end{quote}
+
+C'est le programme qu'exposera l'\emph{Esquisse} sous le nom de « jeu de
+Lego--Teichmüller ». Le paragraphe 12 qui devait suivre, « Relation entre les
+morphismes de généralisation et morphismes de normalisation », est commencé à la
+page 104 puis barré : il voulait examiner « l'effet à l'infini » des oublis de
+points (148). La page suivante ouvre à sa place, sous le numéro 11, la
+digression qui occupe tout le reste du dossier.
+
+\pagerange{105}{120}
+\section*{Déploiement d'un diviseur à croisements normaux (pages 105 à 120)}
+
+\pagerange{105}{113}
+\subsection*{Les strates normalisées $D_d$ et leurs drapeaux (pages 105 à 113)}
+
+On se place dans les multiplicités analytiques lisses (on pourrait le faire en
+relatif, en topologique, ou en schématique). Soit $X$ une telle multiplicité et
+$D$ un diviseur à croisements normaux. En un point $x$ de $D$, les branches de
+$D$ forment un ensemble fini $I(x)$, et les germes de sous-variétés « attachés à
+$D$ » en $x$ sont les intersections $D_{x,J} = \bigcap_{i \in J} D_{x,i}$ ; ils
+forment un ensemble ordonné $\Delta_x$ anti-isomorphe à $\mathfrak{P}(I(x))$, avec
+$\operatorname{codim} D_{x,J} = \operatorname{card} J$ (149).
+
+Le \emph{déploiement} remplace chaque strate par sa normalisée. Pour $d \geq 1$,
+soit $D_d$ la multiplicité des couples $(x, V)$, $x \in D$ et $V$ un germe attaché
+de codimension $d$ ; c'est une variété lisse, et $D_d \to X$ est une immersion
+locale de codimension $d$, se factorisant par $D$ ; on pose $D_0 = X$. Les
+triplets $(x, V, W)$ avec $V \subset W$ de codimensions $d$ et $1$ forment un
+revêtement étale $\widetilde{D}_d \to D_d$ de degré $d$ (les branches qui
+contiennent $V$), et l'on note $D^{!}_d$ le revêtement principal de groupe
+$\mathfrak{S}_d$ qui lui est associé : une numérotation des $d$ branches. Plus
+généralement, pour un ensemble ordonné fini $J$ muni d'une fonction codimension
+strictement croissante, $D_J$ est la multiplicité des couples $(x, \varphi)$, où
+$\varphi : J \hookrightarrow \Delta_x$ est un plongement compatible aux
+codimensions ; si $d$ est la codimension maximale, et $H(J)$ l'ensemble fini des
+plongements de $J$ dans $\mathfrak{P}(\{1, \dots, d\})^{\circ}$,
+\[
+(155) \qquad D_J \simeq D^{!}_d \wedge^{\mathfrak{S}_d} H(J) .
+\]
+En particulier, pour le drapeau $\{d > d'\}$, $D_{d,d'} \simeq D^{!}_d
+\wedge^{\mathfrak{S}_d} \mathfrak{P}_{d'}(\{1, \dots, d\})$ : un point de $D_d$ et
+une strate de codimension $d'$ qui le contient. On a $D_{d,d'} \times_{D_{d'}}
+D_{d',d''} \simeq D_{d,d',d''}$ pour $d > d' > d''$, deux projections $D_{d,d'}
+\to D_d$ (étale finie, la « source ») et $D_{d,d'} \to D_{d'}$ (immersion locale,
+le « but »), et $D_{d,d''} \to D_d \times D_{d''}$ est un monomorphisme : une
+flèche est déterminée par sa source et son but.
+
+\pagerange{113}{120}
+\subsection*{L'axiomatique d'une « structure de déploiement » (pages 113 à 120)}
+
+Il axiomatise : une \emph{structure de déploiement} est une catégorie interne
+$\mathcal{D}$ aux espaces analytiques — un espace d'objets $D_*$, un espace de
+flèches $D_{**}$, source, but, identités et composition —, avec une fonction
+codimension $D_* = \coprod_d D_d$, d'où $D_{**} = \coprod D_{d,d'}$, telle que : a)
+$D_{d,d'} = \emptyset$ si $d' > d$ ; b) les flèches de source et but de même
+codimension sont les identités ; c) pour $d$ fixé, l'espace $D_{d,*} \to D_d$ des
+flèches de source dans $D_d$, avec son ordre de factorisation et sa codimension,
+est localement isomorphe au faisceau constant $\mathfrak{P}(\{1, \dots,
+d\})^{\circ}$. La condition c) implique a) et b), et même que $D_{d,d''} \to D_d
+\times D_{d''}$ est un monomorphisme ; elle donne le revêtement $D^{!}_d$. La
+structure se décrit donc par les $D_d$, les revêtements principaux $D^{!}_d$, les
+« buts » $D_{d,d'} \to D_{d'}$, des carrés cartésiens (175)--(176) qui identifient
+le revêtement induit sur $D_{d,d'}$ par $D^{!}_{d'}$, et la commutativité (177).
+L'axiomatique a un sens dans tout site.
+
+Pour retrouver l'intuition des croisements normaux, il faut des hypothèses
+supplémentaires : que $D_d \to D_0 = X$ soit une immersion locale de codimension
+$d$ (180) — d'où la même propriété pour $D_{d,d'} \to D_{d'}$, de codimension $d -
+d'$ — et qu'en un point $x$ de $D_d$, le germe de $D_d$ soit l'intersection
+\emph{transversale} des $d$ germes de branches qui le contiennent. Dans le cas
+lisse, « immersion locale » équivaut à « monomorphisme local », notion qui garde
+un sens dans un site.
+
+Cette axiomatique est plus large que celle des diviseurs : elle admet une courbe
+plane lisse immergée qui se recoupe elle-même, avec $D_1$ sa normalisée et $D_2 =
+\emptyset$, c'est-à-dire en ne retenant pas le point double comme strate — ce
+qu'aucun diviseur de $X$ ne décrit.
+
+Enfin, l'action de $\mathfrak{S}_d$ sur $\mathbb{Z}^d$ donne sur $D_d$ un système
+local $T_d = D^{!}_d \wedge^{\mathfrak{S}_d} \mathbb{Z}^d$ (183) et un tore relatif
+$G_d = T_d \otimes \mathbb{G}_m$ (184), dont $T_d$ est le système local des
+$\pi_1$.
+
+\pagerange{121}{147}
+\section*{Fibrés multinormaux, et l'homomorphisme de spécialisation (pages 121 à 147)}
+
+\pagerange{121}{126}
+\subsection*{Le torseur multinormal $P_d$ (pages 121 à 126)}
+
+Sur $D^{!}_d$ on a $d$ morphismes $s_i : D^{!}_d \to D_1$, permutés par
+$\mathfrak{S}_d$. Si $D_1 \to D_0$ est une immersion régulière de codimension $1$,
+son fibré normal est un faisceau inversible $L_1$ sur $D_1$ ; les $s_i^* L_1$
+définissent $d$ torseurs sous $\mathbb{G}_m$, leur produit est un torseur sous
+$\mathbb{G}_m^d$, et par descente on obtient sur $D_d$ un torseur $P_d$ sous le
+tore $G_d$ (191). C'est le \emph{fibré normal privé des hyperplans de
+coordonnées} : le produit, branche par branche, des fibrés normaux épointés. On
+a $T_d \simeq$ système local des $\pi_1$ (ou des $H_1$) des fibres de $P_d$ (192).
+On note $D^{*}_d$ l'ouvert de $D_d$ hors des strates plus profondes, $P^{*}_d$ la
+restriction de $P_d$, et $\Pi_1 P^{*}_d$ son groupoïde fondamental.
+
+Pour $d \geq d'$, la projection tautologique $T_d \to T_{d'}$ sur $D_{d,d'}$ (on
+oublie les branches qui ne contiennent pas la strate de codimension $d'$) donne
+$G_d \to G_{d'}$, et $P_{d'}$ restreint à $D_{d,d'}$ est l'image de $P_d$ par ce
+morphisme (198)\footnote{Les deux « déf » de (198) sont intervertis sur la page :
+c'est $P(d,d')_d = P_d \times_{D_d} D_{d,d'}$ et $P(d,d')_{d'} = P_{d'}
+\times_{D_{d'}} D_{d,d'}$, et l'isomorphisme est $P(d,d')_{d'} \simeq P(d,d')_d
+\wedge^{G(d,d')_d} G(d,d')_{d'}$.} ; pour $d \geq d' \geq d''$, ces morphismes sont
+transitifs. « Toutes ces relations sont essentiellement tautologiques. » La
+suivante ne l'est pas, et sert l'hypothèse des croisements normaux « dans toute
+sa force » : quand la structure provient d'un diviseur, chaque $D_d$ hérite d'un
+diviseur à croisements normaux $\Theta_d$ (les traces des strates plus profondes),
+dont $D^{*}_d$ est le complémentaire.
+
+\pagerange{127}{136}
+\subsection*{Le système des drapeaux, et ce qui n'est pas formel (pages 127 à 136)}
+
+Pour un drapeau $d_0 \geq d_1 \geq \dots \geq d_r \geq 0$, $D_{d_0, \dots, d_r}$
+est un revêtement étale fini de $D_{d_0}$ (205), et leur réunion $\mathcal{D}_r =
+D_{\Delta_r}$ forme un espace simplicial, le nerf de la catégorie
+$\mathcal{D}$\footnote{La page dit « ½-simplicial », écrit (204) avec des
+inégalités strictes et $\mathbb{N}^r$, puis (206), (211) avec des inégalités larges
+et $\mathbb{N}^{r+1}$ ; les opérations de dégénérescence sont considérées page 133,
+et la page 161 dira qu'elles sont des isomorphismes. On lit le nerf, avec ses
+dégénérescences.}. On restreint tout aux parties ouvertes : $D^{*}_{d_0, \dots,
+d_r}$ (l'image inverse de $D^{*}_{d_0}$), les torseurs $P^{*}_{d_0, \dots, d_r}$
+sous $G_{d_0}$ restreint, les systèmes locaux $T^{*}_{d_0, \dots, d_r}$, et les
+groupoïdes
+\[
+(212) \qquad \Pi_{\Delta_r} = \Pi_1 D^{*}_{\Delta_r}, \qquad
+\widetilde{\Pi}_{\Delta_r} = \Pi_1 P^{*}_{\Delta_r},
+\]
+$\widetilde{\Pi}_{\Delta_r}$ étant une extension de $\Pi_{\Delta_r}$ par
+$T^{*}_{\Delta_r}$ dès que $\pi_2(D^{*}_{d_0, \dots, d_r}) = 0$ (suite exacte
+d'homotopie de la fibration en tores ; sinon le noyau est un quotient).
+
+Les $\Pi_{\Delta_r}$ n'ont pas de dépendance simpliciale : il n'y a pas de
+morphisme naturel de $\Pi_1 D^{*}_{d,d'}$ vers $\Pi_1 D^{*}_{d'}$, la strate
+ouverte de codimension $d$ n'étant pas dans la strate ouverte de codimension
+$d'$. Pour les opérations qui préservent le premier sommet ($\alpha(0) = 0$),
+les morphismes $D^{*}_{\Delta_{r'}} \to D^{*}_{\Delta_r}$ sont étales finis et
+tout est formel ; les dégénérescences donnent des isomorphismes. La structure
+\emph{non formelle} est que les $\widetilde{\Pi}_{\Delta_r}$ — non les
+$\Pi_{\Delta_r}$ — forment un groupoïde simplicial : pour une face $\alpha$ qui ne
+préserve pas le premier sommet, il faut un homomorphisme
+\[
+(219) \qquad \widetilde{\alpha}^* : \widetilde{\Pi}_{\Delta_{r'}} \longrightarrow
+\widetilde{\Pi}_{\Delta_r},
+\]
+l'\emph{homomorphisme de spécialisation}. Le cas typique est $\Pi_1 P^{*}_{d_0,
+d_1, \dots, d_r} \to \Pi_1 P^{*}_{d_1, \dots, d_r}$ : du torseur multinormal d'une
+strate profonde vers celui d'une strate moins profonde qui la contient dans son
+adhérence. L'application sous-jacente $D^{*}_{d_*} \to D_{d'_*}$ (223) existe,
+mais aboutit dans le bord $\Theta_{d'_*}$ de $D_{d'_*}$, pas dans $D^{*}_{d'_*}$ ;
+plus précisément elle est étale finie sur la partie ouverte $\Theta^{(d)*}_{d'_*}$
+du squelette de codimension $d = d_0 - d'_0$ de $\Theta_{d'_*}$ (227)--(229).
+
+\pagerange{137}{147}
+\subsection*{La construction par le voisinage tubulaire (pages 137 à 147)}
+
+Il se ramène à la situation suivante : $Y$ lisse muni d'un diviseur à croisements
+normaux $\Theta$, et deux immersions locales $D'' \to D' \to Y$, $D''$ plus
+profonde que $D'$, de codimension $d$ dans $D'$, $D'$ se factorisant par le
+squelette $\Theta^{(d_1)}$ et $D''^{*}$ par la partie ouverte $\Theta^{(d_0)*}$,
+avec $d_0 = d_1 + d$\footnote{La page écrit « $D''$ de codim.\ $d_0$, $D'$ de codim.\
+$d_1$ dans $Y$, donc $D''$ de codim.\ $d = d_1 - d_0$ dans $D'$ », avec $d_1 >
+d_0$. Pour que $D''$, contenue dans $D'$, y soit de codimension $d \geq 0$, il
+faut $d_0 = d_1 + d \geq d_1$ ; c'est aussi ce que porte sa marge
+($D''^{*} \to D_{d_0, d_1} \to D_{d_1}$, et l'on écrit toujours $D_{d,d'}$ avec $d
+\geq d'$) et ce que demande (223). On lit donc $D''$ comme la strate la plus
+profonde.}. Soient $P_{D''}$ et $P_{D'}$ les « fibrés principaux multinormaux » et
+leurs restrictions aux parties ouvertes. L'homomorphisme de spécialisation
+\[
+(231) \qquad r_{D'',D'} : \Pi_1 P_{D''^{*}} \longrightarrow \Pi_1 P_{D'^{*}}
+\]
+ne correspond à aucune application $P_{D''^{*}} \to P_{D'^{*}}$, puisque l'image
+de $D''$ dans $D'$ est justement dans le complémentaire de $D'^{*}$ ; mais son
+composé avec $\Pi_1 P_{D'^{*}} \to \Pi_1 P_{D'}$ est l'homomorphisme trivial
+induit par $P_{D''} \to P_{D'}$, qui oublie les directions normales de $D''$ dans
+$D'$ (234)\footnote{La page écrit le morphisme évident « $P_{D'} \to P_{D''}$ » et
+le composé (233) avec $\Pi_1 P_{D'^{*}}$ pour source. Le carré (234) de la page
+suivante, $\Pi_1 P_{D''^{*}} \to \Pi_1 P_{D''} \to \Pi_1 P_{D'}$, fixe le sens :
+c'est $P_{D''} \to P_{D'}$, la projection du torseur sous $G_{d_0}$ sur le
+torseur sous $G_{d_1}$, et (233) part de $\Pi_1 P_{D''^{*}}$.}. Il annonce : « On
+donnera la construction de ce morphisme, et ses principales propriétés formelles,
+dans la suite. »
+
+Le principe est le \emph{voisinage tubulaire}. Une immersion locale $D' \to Y$ a un
+voisinage tubulaire $V_{D',Y}$, germe d'espace autour de $D'$ — non dans $Y$ : si
+$D'$ est une courbe immergée qui se recoupe, le tube ne se recoupe pas, comme le
+montrent les dessins de la page 140. C'est fonctoriel : $D'' \to D' \to Y$ donne
+$V_{D'',Y} \to V_{D',Y} \to Y$, immersions locales. Avec $Y^* = Y \setminus \Theta$
+et ses traces $V^{*}_{D',Y}$, $V^{*}_{D'',Y}$, on a un vrai morphisme
+\[
+(237) \qquad \Pi_1 V^{*}_{D'',Y} \longrightarrow \Pi_1 V^{*}_{D',Y},
+\]
+à condition de définir les groupoïdes fondamentaux par les revêtements et non par
+les chemins ; cela vaut pour des immersions locales de topos.
+
+\textbf{Théorème (pages 143--144).} \emph{Soient $Y$ un espace analytique lisse,
+$\Theta$ un diviseur à croisements normaux, $D' \to Y$ une immersion locale de
+codimension $d$ se factorisant par la partie ouverte $\Theta^{(d)*}$ du squelette
+de codimension $d$. Il y a une équivalence de groupoïdes, définie à isomorphisme
+unique près,}
+\[
+(239) \qquad \Pi_1 P_{D'^{*}} \xrightarrow{\ \approx\ } \Pi_1 V^{*}_{D',Y} .
+\]
+C'est le fait que le voisinage tubulaire épointé d'une strate ouverte a le type
+d'homotopie du produit de ses fibrés normaux épointés. Composée avec (237), elle
+définit (231). Le cas le plus simple — $Y$ de dimension $1$, $D'$ un point — est
+déjà, quant à la canonicité, l'objet d'une longue digression de ses notes sur la
+monodromie. En général, on aurait un plongement $C^\infty$ du tube dans le fibré
+normal $\check{N}_{D',Y}$, induisant l'identité sur les fibrés normaux le long de
+la section nulle ; il existe pour les vrais espaces analytiques paracompacts, mais
+pas pour les multiplicités. L'exemple de la page 145 : $\mathbb{Z}$ agissant sur
+$\mathbb{C}^2$ par $\begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$, $D' = (\mathbb{C}
+\times \{0\}, \mathbb{Z})$, $Y = (\mathbb{C}^2, \mathbb{Z})$ ; le groupe agit
+trivialement sur $D'$ et sur son fibré normal, mais l'extension $0 \to T_{D'} \to
+T_Y|_{D'} \to N \to 0$ n'est pas scindée équivariamment, alors qu'elle le serait
+pour la section nulle d'un fibré. Nous l'avons vérifié : l'exemple est juste.
+
+Même quand le plongement existe, il n'est pas canonique, et « le bât blesse ». Il
+préfère donc — comme dans ses notes sur la monodromie — définir une flèche en sens
+inverse, $\Pi_1^{\text{arcs}} P_{D'^{*}} \to \Pi_1^{\text{rev}} V^{*}_{D',Y}$,
+la source définie par points et chemins, le but (« on n'a pas le choix ! ») par
+revêtements ; et il remet les détails, se demandant s'il ne serait pas aussi
+commode de travailler directement avec les $\Pi_1 V^{*}$ au lieu des $\Pi_1 P^{*}$.
+
+\pagerange{148}{160}
+\section*{Le recollement (pages 148 à 160)}
+
+\pagerange{148}{151}
+\subsection*{Le théorème de recollement (pages 148 à 151)}
+
+Reprenons d'un point de vue topologique. Le diviseur $\Theta$ définit une
+filtration $X = \Theta^{(0)} \supset \Theta^{(1)} = \Theta \supset \Theta^{(2)}
+\supset \cdots$ (244), dont $D_d$ est le « normalisé topologique » de
+$\Theta^{(d)}$. Notons $V_{d_0 \dots d_r} = V_{D_{d_0 \dots d_r}, X}$ les voisinages
+tubulaires des strates déployées et $V^{*}_{d_0 \dots d_r}$ leurs traces sur $X^* =
+X \setminus \Theta$, pour $d_0 > \dots > d_r > 0$ ; ils s'envoient tous dans le
+voisinage tubulaire épointé $V^{*}_{\Theta,X}$ du diviseur lui-même, la
+« structure à l'infini » $X^{*\infty}$.
+
+\textbf{Théorème de recollement (page 149).} \emph{Le système semi-simplicial des
+$V^{*}_{d_0, \dots, d_r}$ a pour limite inductive $X^{*\infty} =
+V^{*}_{\Theta,X}$ : plus précisément, le morphisme de sa limite inductive homotopique
+vers $V^{*}_{\Theta,X}$ est une équivalence d'homotopie ; en particulier il induit
+des bijections sur les $\pi_0$ et des isomorphismes sur les $\pi_1$.}
+
+La page l'énonce comme une équivalence de topos, et se reprend aussitôt : « en
+fait, c'est une équivalence d'homotopie » ; c'est sous cette forme qu'on
+l'entend. Elle n'en donne pas de démonstration\footnote{Le corollaire 1 l'étend à
+la structure à l'infini $D^{*\infty}_\delta$ d'une strate $D_\delta$ munie de son
+diviseur $\Theta_\delta$. Un « Cor.\ Main 2 », sur la limite inductive des
+$\widetilde{\Pi}_{d_0}$ ($1 \leq d_0 \leq 3$), est barré.}.
+
+\textbf{Corollaire 2 (page 151).} \emph{On a}
+\[
+(246) \qquad \Pi_1 X^{*\infty} \simeq \varinjlim\bigl(\widetilde{\Pi}_1
+\longleftarrow \widetilde{\Pi}_{2,1} \longrightarrow \widetilde{\Pi}_2\bigr) .
+\]
+La flèche $\widetilde{\Pi}_{2,1} \to \widetilde{\Pi}_2$ préserve le premier sommet
+et est formelle ; la flèche $\widetilde{\Pi}_{2,1} \to \widetilde{\Pi}_1$ est une
+spécialisation au sens de (219). La strate $\Theta^{(3)}$ est négligeable par un
+argument de pureté : elle est de codimension réelle $6$, et ôter de la
+codimension réelle au moins $3$ ne change pas le $\pi_1$.
+
+\textbf{Corollaire 3.} \emph{Si $X^{*\infty} \to X^*$ induit une équivalence des
+groupoïdes fondamentaux, alors $\Pi_1 X^* \simeq \varinjlim(\widetilde{\Pi}_1
+\leftarrow \widetilde{\Pi}_{2,1} \rightarrow \widetilde{\Pi}_2)$\footnote{La page
+écrit $\Pi_1 X$ ; c'est $\Pi_1 X^*$ que donne l'hypothèse. Pour les espaces de
+modules, $X^* = \mathcal{M}_{g,\nu}$ et $X = \overline{\mathcal{M}}_{g,\nu}$ : c'est
+le groupe des classes d'applications qui s'exprimerait ainsi par les données des
+strates de codimension $1$ et $2$.}.}
+
+Un corollaire 4, sur les strates d'une partie ouverte et fermée d'un $D_i$,
+est commencé puis barré. Le corollaire 3 donne une forme du principe des deux
+étages (le rapprochement est le nôtre) : si le bout de l'espace a
+déjà tout le $\pi_1$, celui-ci se lit sur les strates de codimension $1$ et $2$ et
+leurs incidences.
+
+\pagerange{152}{154}
+\subsection*{Parties admissibles (pages 152 à 154)}
+
+Une partie fermée $\Sigma$ de $\Theta$, localement réunion de composantes
+irréductibles des $\Theta^{(p)}$, est dite \emph{$\Theta$-admissible}. Elle
+équivaut à la donnée des réunions de composantes $D^{\Sigma}_d \subset D_d$ qui
+s'envoient dans $\Sigma$, ou des parties $\pi_0(D_d)^\Sigma \subset \pi_0(D_d)$,
+soumises à une condition de compatibilité : on pose $D^{\Sigma}_{d,d'}$ l'image
+inverse de $D^{\Sigma}_{d'}$ par le but $D_{d,d'} \to D_{d'}$ — et non celle de
+$D^{\Sigma}_d$ par la source, qui est plus grande —, et il faut qu'elle s'envoie
+dans $D^{\Sigma}_d$ (si une branche de codimension $d'$ est dans $\Sigma$, les
+strates plus profondes qu'elle contient y sont aussi). Les $D^{\Sigma}_{d_0 \dots
+d_r}$ forment une sous-catégorie pleine de $\mathcal{D}$ qui est un \emph{crible} :
+avec un objet, elle contient tous ceux qui s'envoient dans lui. Le théorème de
+recollement se généralise : les $V^{\Sigma *}_{d_0 \dots d_r}$ ont pour limite
+inductive $V^{*}_{\Sigma,X}$ (2\textsuperscript{e} version, page 154).
+
+\pagerange{154}{160}
+\subsection*{Les topos associés à la filtration (pages 154 à 160)}
+
+Pour une courbe $X$ et un diviseur lisse $\Theta$ (des points), le théorème est
+tautologique : le voisinage tubulaire épointé de $\Theta$ est la somme de disques
+épointés. Il donne pourtant une chose intéressante, le théorème de van Kampen pour
+reboucher les trous : $\Pi_1 X$ est la somme amalgamée de $\Pi_1 X^*
+\leftarrow \Pi_1 V^{*}_{\Theta,X} \rightarrow \Pi_1 V_{\Theta,X}$, le dernier étant
+le groupoïde discret d'ensemble d'objets $\Theta$.
+
+En général, pour des parties admissibles $\Sigma \subset \Sigma'$, il voudrait
+exprimer $\Pi_1 \Sigma$, $\Pi_1(\Sigma' \setminus \Sigma)$, $\Pi_1 V^{*}_{\Sigma,X}$
+et plus généralement les topos $V^{\Sigma_1}_{\Sigma', \Sigma''} = V_{\Sigma',
+\Sigma''} \setminus (V_{\Sigma',\Sigma''} \cap \Sigma_1)$ (257) au moyen des
+$\widetilde{\Pi}_{\Delta_r}$ et $\Pi_{\Delta_r}$, en se gardant de confondre, par
+exemple, $V^{\Sigma'}_{\Sigma',X}$ (pour $\Sigma' = \Theta$ lisse, un fibré en
+disques épointés sur $\Theta$) et $V_{\Sigma' \setminus \Sigma', X \setminus
+\Sigma'}$, qui est vide. Tout se ramène aux topos $V_{\Sigma', \Sigma''}$ et à leurs
+morphismes de transition, quitte à remplacer $X$ par le complémentaire d'une
+partie admissible — « l'hypothèse lisse des croisements normaux […] ne joue plus
+de rôle depuis belle lurette » —, mais « cette “évidence” ne s'explicite pas
+aisément, au niveau des groupoïdes fondamentaux ». Le fil directeur : exprimer tous
+ces topos et leurs $\Pi_1$ par les voisinages tubulaires des strates
+\emph{ouvertes} $D^{*}_{d_0 \dots d_r}$, et ceux qu'on obtient en remplaçant $(X,
+\Theta)$ par une strate $(D_{d_*}, \Theta_{d_*})$ (260).
+
+\pagerange{161}{179}
+\section*{Les pièces élémentaires (pages 161 à 179)}
+
+\pagerange{161}{163}
+\subsection*{Le cas de la droite (pages 161 à 163)}
+
+Il élimine d'abord les redondances de notation : les dégénérescences sont des
+isomorphismes ($D_{d_0, d_0} \simeq D_{d_0}$), et $D_{d_0, \dots, d_r, 0} \simeq
+D_{d_0, \dots, d_r}$ ; on n'écrit donc que des drapeaux stricts, d'indices non nuls
+sauf $D_0 = X$, en regardant tous les $D_{d_*}$ au-dessus de $X$.
+
+Pour $X = \mathbb{C}$ et $\Theta = \{0\}$, les pièces sont au nombre de quatre :
+\[
+(264) \qquad
+\begin{array}{ll}
+\mathbb{C}^* & \text{(global, de dimension 1)}, \\
+\mathbb{P} & \text{(le point, global)}, \\
+\mathbb{D} & \text{(germe de disque)}, \\
+\mathbb{D}^* & \text{(germe de disque épointé)},
+\end{array}
+\]
+avec les inclusions $\mathbb{P} \hookrightarrow \mathbb{D} \hookleftarrow
+\mathbb{D}^* \hookrightarrow \mathbb{C}^*$, et $\mathbb{C}$ se recolle :
+\[
+(266) \qquad \mathbb{C} \simeq \mathbb{C}^* \amalg_{\mathbb{D}^*} \mathbb{D} .
+\]
+
+\pagerange{164}{171}
+\subsection*{Le cas de $\mathbb{C}^I$, et les seize pièces de $\mathbb{C}^2$ (pages 164 à 171)}
+
+Pour $X = \mathbb{C}^I$ et $\Theta = \operatorname{div}(\prod_{i \in I} z_i)$ (267),
+les pièces élémentaires attendues sont les produits, indexés par $I$, de pièces
+des quatre types, d'où une partition $I = I'_0 \amalg I'_1 \amalg I''_0 \amalg
+I''^{*}$ (facteurs $\mathbb{P}$, $\mathbb{C}^*$, $\mathbb{D}$, $\mathbb{D}^*$). Avec
+$D_J = \{z_j = 0,\ j \in J\}$ et $D^{*}_J = \mathbb{P}^J \times \mathbb{C}^{*(I
+\setminus J)}$, une telle pièce est le voisinage tubulaire de l'\emph{âme} $A =
+D^{*}_{I'_0 \amalg I''}$ dans le \emph{réceptacle} $R = D^{*}_{I'_0}$, épointé le
+long de la strate intermédiaire $B = D^{*}_{I'_0 \amalg I''^{*}}$ :
+\[
+(273) \qquad V^{B(*)}_{A,R} = V_{A,R} \times_{V_{B,R}} V^{*}_{B,R},
+\]
+qu'il note en général $V^{d'_0}_{d_*, d''_0}$, pour un drapeau $d_*$ et $d_0 \geq
+d'_0 \geq d''_0$. Pour $\mathbb{C}^2$, il en dresse la liste des $4 \times 4 = 16$
+(277) : les strates ouvertes $\mathbb{C}^* \times \mathbb{C}^*$, $\mathbb{C}^*
+\times \mathbb{P}$, $\mathbb{P} \times \mathbb{C}^*$, $\mathbb{P} \times
+\mathbb{P}$ ; les voisinages des deux axes épointés, pleins ou épointés
+($\mathbb{C}^* \times \mathbb{D}$, $\mathbb{C}^* \times \mathbb{D}^*$, etc.) ; les
+voisinages de l'origine dans chaque axe ($\mathbb{D} \times \mathbb{P}$,
+$\mathbb{D}^* \times \mathbb{P}$, etc.) ; et les quatre voisinages de l'origine
+dans le plan, $\mathbb{D} \times \mathbb{D}$, $\mathbb{D} \times \mathbb{D}^*$,
+$\mathbb{D}^* \times \mathbb{D}$, $\mathbb{D}^* \times \mathbb{D}^*$. Les ouverts
+globaux se recollent : $U_1 = \mathbb{C} \times \mathbb{C}^*$ et $U_2 =
+\mathbb{C}^* \times \mathbb{C}$ par (279), $U = \mathbb{C}^2 \setminus \{0\} =
+U_1 \amalg_{\mathbb{C}^* \times \mathbb{C}^*} U_2$ par (280), et $\mathbb{C}^2$
+comme limite inductive du carré produit de $\mathbb{C}^* \leftarrow \mathbb{D}^*
+\rightarrow \mathbb{D}$ par lui-même (281). C'est là qu'interviennent les pièces
+« mixtes » $\mathbb{D} \times \mathbb{D}^*$ et $\mathbb{D}^* \times \mathbb{D}$.
+Il juge plausible que ces pièces, avec leurs morphismes canoniques, expriment
+tous les topos canoniques de la stratification.
+
+\pagerange{171}{177}
+\subsection*{Le fibré normal filtré, et le Scholie (pages 171 à 177)}
+
+Pour un drapeau strict $d_* = \{d_0 > d_1 > \dots > d_r > 0\}$, le fibré normal
+$\check{N}_{d_*}$ de l'immersion locale $D_{d_*} \to D_0$, de rang $d_0$, porte
+une filtration canonique croissante
+\[
+(282) \qquad 0 = \check{N}_{d_*, d_0} \subset \check{N}_{d_*, d_1} \subset \cdots
+\subset \check{N}_{d_*, d_r} \subset \check{N}_{d_*, 0} = \check{N}_{d_*},
+\]
+avec
+\[
+\check{N}_{d_*, d_i} = \check{N}_{D_{d_*}, D_{d_i}}, \qquad
+\operatorname{rg} \check{N}_{d_*, d_i} = d_0 - d_i,
+\]
+issue des suites exactes (284) $0 \to \check{N}_{D_{d_*}, D_{d_i}} \to
+\check{N}_{d_*} \to \check{N}_{d_i}|_{D_{d_*}} \to 0$\footnote{La page écrit la
+filtration décroissante, de $\check{N}_{d_*, d_0} = \check{N}_{d_*}$ de rang $d_0$
+à $\check{N}_{d_*, 0} = 0$, avec des rangs $d_i$. C'est incompatible avec sa
+propre définition (283), $\check{N}_{d_*, d_i} = \check{N}_{D_{d_*}, D_{d_i}}$,
+qui est de rang $d_0 - d_i$ et nulle pour $i = 0$, ainsi qu'avec (287) et (288),
+qui demandent $\check{N}_{d_*, d'_0} \subset \check{N}_{d_*, d''_0}$ pour $d'_0
+\geq d''_0$ ; une fois la filtration lue croissante, tout s'accorde.}. Ses
+sous-quotients
+\[
+(286) \qquad \check{N}_{d_*; (d'_0, d''_0)} = \check{N}_{d_*, d''_0} /
+\check{N}_{d_*, d'_0} \simeq \check{N}_{D_{d'_*}, D_{d''_*}}|_{D_{d_*}},
+\qquad d_0 \geq d'_0 \geq d''_0,
+\]
+de rang $d'_0 - d''_0$, se décomposent localement en fibrés en droites, d'où
+l'ouvert $\check{N}^{*}$ où aucune coordonnée ne s'annule, un torseur sous un tore.
+L'image inverse $\check{N}^{d'_0}_{d_*, d''_0}$ de $\check{N}^{*}_{d_*; (d'_0,
+d''_0)}$ dans $\check{N}_{d_*, d''_0}$ est un torseur sur lui sous le fibré
+vectoriel $\check{N}_{d_*, d'_0}$\footnote{La page porte $\check{N}_{d_*, d_0}$,
+peut-être $d'_0$ ; c'est le noyau $\check{N}_{d_*, d'_0}$ de (287).}, et il pose,
+« heuristiquement », que $\check{N}^{d'_0}_{d_*, d''_0}|_{D^{*}_{d_*}}$ est la
+pièce $V^{d'_0}_{d_*, d''_0}$, d'où une équivalence d'homotopie
+\[
+(294) \qquad V^{d'_0}_{d_*, d''_0} \simeq \check{N}^{*}_{d_*; (d'_0,
+d''_0)}\big|_{D^{*}_{d_*}} .
+\]
+
+\begin{quote}
+\textbf{Scholie important (page 176).} Les « pièces de construction » dans la
+dissection d'un espace analytique lisse muni d'un diviseur à croisements normaux
+sont, à homotopie près, les fibrés localement triviaux sur les strates ouvertes
+$D^{*}_{d_*}$, de fibre $\mathbb{C}^{*(d'_0 - d''_0)}$, obtenus en prenant un
+sous-quotient de la filtration du fibré normal et l'ouvert où aucune coordonnée
+ne s'annule.
+\end{quote}
+
+Il faudrait encore une équivalence \emph{canonique} (295) entre $\Pi_1$ de ces
+fibrés et $\Pi_1 V^{d'_0}_{d_*, d''_0}$ ; la suite exacte d'homotopie en fait des
+extensions des $\Pi_1$ des composantes de $D^{*}_{d_*}$ par des quotients de
+$\mathbb{Z}^{d'_0 - d''_0}$ (par l'image de leur $\pi_2$).
+
+\pagerange{178}{179}
+\subsection*{Ce que les groupoïdes reconstituent, et ce qu'ils ne reconstituent pas (pages 178 et 179)}
+
+« Lorsque les $D^{*}_{d_*}$ sont tous des $K(\pi, 1)$ (ce qui est le cas dans la
+situation de Teichmüller !) », la connaissance des $\Pi_1 V^{d'_0}_{d_*, d''_0}$ et
+de leurs morphismes doit permettre de reconstituer le groupoïde de $X$, les
+topos canoniques associés, et, croit-il d'abord, le type d'homotopie de $X$. La
+remarque suivante le tempère : pour $X = \mathbb{P}^1_{\mathbb{C}} \approx S^2$ et
+$\Theta$ un point, $X^* = \mathbb{C}$ est un $K(\pi, 1)$ de groupe trivial, le
+diagramme $\mathbb{D}_\infty \leftarrow \mathbb{D}^{*}_\infty \rightarrow
+\mathbb{C}$ donne le diagramme de groupes $\{1\} \leftarrow \mathbb{Z} \rightarrow
+\{1\}$, et le topos des faisceaux localement constants qu'il définit a une
+cohomologie nulle en degrés positifs, alors que $H^2(S^2) \neq 0$. « Ceci souligne
+la question générale de comprendre le type d'homotopie d'un topos obtenu par
+“recollement” d'un ouvert à son fermé complémentaire »\footnote{Précision de
+l'édition : le type d'homotopie est bien reconstitué par la limite inductive
+\emph{homotopique} des espaces classifiants des groupoïdes — ici
+$\operatorname{hocolim}(\mathrm{pt} \leftarrow S^1 \rightarrow \mathrm{pt}) = S^2$.
+Ce qui le perd est le passage à la limite inductive des groupoïdes, ou des
+faisceaux localement constants, qui ne retient que le $1$-type. La remarque de la
+page 178 vaut donc pour le groupoïde de $X$, non pour son type d'homotopie.}.
+
+\pagerange{180}{189}
+\section*{Stratifications locales et globales (pages 180 à 189)}
+
+Le § 13 cherche le cadre général. Une \emph{stratification globale} d'un espace
+topologique $X$ est une partition localement finie en strates localement fermées
+$X_i$, connexes et localement connexes, telle que l'adhérence d'une composante
+d'une strate rencontre chaque autre strate selon une réunion de composantes, que
+le germe en $x$ d'une strate dont l'adhérence contient $x$ soit connexe — ce qui
+exclut la courbe nodale stratifiée par son nœud, dont le complémentaire a deux
+branches au nœud —, et enfin (e) que la structure autour d'une strate $X_i$ soit
+localement un produit $X_i \times Z$, la strate correspondant à un point $z_0$ de
+$Z$ et les autres strates à des parties $Z_j$ localement connexes en
+$z_0$\footnote{La condition e) s'interrompt au bas de la page 180 et reprend en
+tête de la page 181 ; la lecture des conditions a) à d) est par endroits
+incertaine.}.
+
+Les stratifications globales d'un ouvert $U$ forment un préfaisceau qui n'est pas
+un faisceau (les exemples de d) le montrent, et plus simplement encore les
+feuilletages) ; les sections du faisceau associé sont les \emph{stratifications
+locales}, cas très particulier des relations d'équivalence locales d'un exercice
+de SGA 4. Une stratification locale définit un « espace des strates » $D^{*}_{\Delta_0}
+\to X$, bijectif et immersion locale (297) ; sa formation commute à la
+restriction aux ouverts, il n'a qu'un nombre fini de composantes si $X$ est
+compact (propriété qui ne passe pas aux ouverts), et pour un diviseur à
+croisements normaux il redonne $\coprod_d D^{*}_d$ (298). Un \emph{drapeau local strict} est un
+couple $(x, \Sigma_*)$, $\Sigma_* = \{\overline{X_{i_0}} \subset \dots \subset
+\overline{X_{i_r}}\}$, $x \in X_{i_0}$ ; avec la topologie évidente on obtient des
+espaces $D^{*}_{\Delta_r} \to X$, immersions locales, qui redonnent les
+$\coprod D^{*}_{d_*}$ des sections précédentes. En n'exigeant que $x \in
+\overline{X_{i_0}}$, on obtient les $D_{\Delta_r}$, qui forment cette fois un
+espace simplicial, et même une catégorie topologique :
+\[
+(303) \qquad D_{\Delta_2} \xrightarrow{\ \sim\ } D_{\Delta_1} \times_{D_{\Delta_0}}
+D_{\Delta_1},
+\]
+dont l'espace des objets est celui des strates locales, l'espace des flèches celui
+des drapeaux $x \in \overline{X_{i_0}} \subset \overline{X_{i_1}}$, la composition
+étant évidente — la condition (303) est la condition de Segal qui dit que le
+système simplicial est le nerf d'une catégorie\footnote{Le nom est de l'édition.
+On peut rapprocher cette catégorie des catégories de chemins de sortie
+(« exit paths ») qui servent aujourd'hui à décrire les faisceaux constructibles
+sur un espace stratifié ; le rapprochement est le nôtre et n'est qu'un
+rapprochement.}. La projection « premier sommet » $D_{\Delta_r} \to D_{\Delta_0}$
+est finie étale au-dessus de $D^{*}_{\Delta_0}$.
+
+Deux traits sont propres aux croisements normaux : que cette projection soit finie
+étale partout, et que les strates locales contenant une strate donnée forment le
+simplexe des parties d'un ensemble fini. Le tripode du plan — trois arcs issus d'un
+point — en donne le contre-exemple : sept strates contiennent le point dans leur
+adhérence (le point, trois arcs, trois secteurs), et $7$ n'est pas une puissance
+de $2$. La dernière phrase annonce que l'hypothèse de trivialité locale (e)
+servira « plus loin » à expliciter les voisinages tubulaires en termes de
+fibrations localement triviales. Le dossier s'arrête là.
+
+\end{document}
