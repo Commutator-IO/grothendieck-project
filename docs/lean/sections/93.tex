@@ -1,0 +1,91 @@
+\section[Cote 93 : la différence schwarzienne en dérivées divisées]{Cote 93 : la différence schwarzienne en dérivées divisées\protect\verifie{Folder93}}\label{sec:93}
+
+La cote 93, du groupe \q{Géométrie et topologie combinatoire}, étudie la dérivée schwarzienne et les connexions projectives sur une courbe lisse $X$ au-dessus d'une base $S$. Pour deux uniformisantes $t$, $s$, la lecture note $G(t,s) = \bigl(-2\,s'''/s' + 3\,(s''/s')^2\bigr)\,dt^2$. Page~72, la page remplace les dérivées par les opérateurs $D^{(i)}_t = \frac{1}{i!}\frac{d^i}{dt^i}$ sur une base variable, observe que les coefficients $2$ et $3$ de $G$ l'interdisent, et prend $G_0 = \frac{1}{12}G$ ; elle fixe le signe par la valeur test $G_0(t, t^3) = \frac{2}{3t^2}\,dt^2$, après un premier essai sur $G_0(t, t^2)$ (\lot{93}{4}{72}). Pages~115 à~117, la mise au net énonce l'invariance par les homographies~(1) et la relation de cocycle~(2) (\lot{93}{6}{115}). Page~120, elle écrit $G(t,s) = 12\,G_0(t,s)$ avec $G_0(t,s) = -D^{(3)}_t s/D^{(1)}_t s + (D^{(2)}_t s/D^{(1)}_t s)^2$ (\lot{93}{6}{120}). Une marge de la page~121, marquée \q{OK}, dit que les fonctions annulées par $D^{(1)}$, $D^{(2)}$, $D^{(3)}$ forment $\mathcal O^{(p)}$ si $p \neq 2, 3$ et $\mathcal O^{(p^2)}$ sinon ; la Proposition des pages~121 à~123 en tire la rigidité locale (\lot{93}{7}{121}, \lot{93}{7}{123}). On démontre ici le noyau algébrique de ces pages dans le modèle local $R[X]$, sur un anneau commutatif quelconque : la formule $G = 12\,G_0$, la relation de cocycle, l'invariance par les homographies, les deux valeurs tests, la description de la marge de la page~121, et le fait qu'en caractéristique $2$ et $3$ une translation par une puissance $p$-ième change $G_0$.
+
+\noindent\emph{Conventions.} $R$ est un anneau commutatif et $X$ joue le rôle de l'uniformisante $t$. Pour $f \in R[X]$, $D^{(k)} f$ est la dérivée de Hasse, définie sans division par $k!$ par $D^{(k)} X^n = \binom nk X^{n-k}$ ; on a $k!\,D^{(k)} f = f^{(k)}$. On pose
+\[
+N(f) = (D^{(2)} f)^2 - D^{(3)} f \cdot D^{(1)} f, \qquad G_0(f) = N(f)\,(D^{(1)} f)^{-2},
+\]
+où l'inverse est pris quand $D^{(1)} f$ est inversible (Lean utilise \texttt{Ring.inverse}, qui vaut $0$ sinon). Ainsi $G_0(f)$ est le coefficient de $dt^2$ dans $G_0(t, f)$, et $N(f)$ est ce coefficient débarrassé de son dénominateur. On note de même $N_{\mathrm{cl}}(f) = 3\,(f'')^2 - 2\,f''' f'$ et $G(f) = N_{\mathrm{cl}}(f)\,(f')^{-2}$. Pour $s, u \in R[X]$, $s \circ u$ est le polynôme composé. On dit que $f$ est \emph{tué} si $D^{(1)} f = D^{(2)} f = D^{(3)} f = 0$.
+
+\begin{enonce}[Page 120, le facteur $12$\piste{93-integral-schwarzian-level-p2}]
+Pour tout $f \in R[X]$, $N_{\mathrm{cl}}(f) = 12\,N(f)$ et $G(f) = 12\,G_0(f)$.
+\end{enonce}
+
+\begin{proof}
+On a $f' = D^{(1)} f$, $f'' = 2\,D^{(2)} f$ et $f''' = 6\,D^{(3)} f$ (par un lemme de mathlib sur les dérivées de Hasse). Donc $3\,(f'')^2 - 2\,f''' f' = 12\,(D^{(2)} f)^2 - 12\,D^{(3)} f\,D^{(1)} f$. La seconde égalité s'en déduit en multipliant par $(f')^{-2}$.
+\end{proof}
+
+\begin{lemme}\label{lem:93-chaine}
+Pour $s, u \in R[X]$, en notant $s_i = (D^{(i)} s) \circ u$ et $u_i = D^{(i)} u$ :
+\[
+D^{(1)}(s \circ u) = s_1 u_1, \quad
+D^{(2)}(s \circ u) = s_1 u_2 + s_2 u_1^2, \quad
+D^{(3)}(s \circ u) = s_1 u_3 + 2\,s_2 u_1 u_2 + s_3 u_1^3 .
+\]
+\end{lemme}
+
+\begin{proof}
+Les trois identités sont additives en $s$ et valent pour $s$ constant. On les démontre ensemble par récurrence sur les monômes, en passant de $s$ à $Xs$. On a $(Xs) \circ u = u \cdot (s \circ u)$, et la formule de Leibniz $D^{(k)}(fg) = \sum_{i+j=k} D^{(i)} f\, D^{(j)} g$ donne, avec $D^{(1)}X = 1$ et $D^{(2)}X = D^{(3)}X = 0$, $D^{(1)}(Xs) = s + X D^{(1)}s$, $D^{(2)}(Xs) = D^{(1)}s + X D^{(2)}s$, $D^{(3)}(Xs) = D^{(2)}s + X D^{(3)}s$. On développe les deux membres par Leibniz et l'hypothèse de récurrence ; ils coïncident comme polynômes en $u$, les $u_i$, $s \circ u$ et les $s_i$.
+\end{proof}
+
+\begin{enonce}[Pages 115 à 117, la relation de cocycle\piste{93-integral-schwarzian-level-p2}]
+Pour $s, u \in R[X]$ :
+\begin{enumerate}
+\item $N(s \circ u) = N(s) \circ u \cdot (D^{(1)} u)^4 + \bigl((D^{(1)} s) \circ u\bigr)^2 N(u)$, sans hypothèse ;
+\item si $D^{(1)} s$ et $D^{(1)} u$ sont inversibles, $G_0(s \circ u) = G_0(s) \circ u \cdot (D^{(1)} u)^2 + G_0(u)$.
+\end{enumerate}
+De plus $N(X) = 0$, donc $G_0(X) = 0$.
+\end{enonce}
+
+\begin{proof}
+(1) On reporte les formules du lemme~\ref{lem:93-chaine} dans $N(s \circ u)$. Avec les notations du lemme,
+\[
+(s_1 u_2 + s_2 u_1^2)^2 - (s_1 u_3 + 2 s_2 u_1 u_2 + s_3 u_1^3)\, s_1 u_1 = u_1^4 (s_2^2 - s_3 s_1) + s_1^2 (u_2^2 - u_3 u_1),
+\]
+les termes croisés $\pm 2 s_1 s_2 u_1^2 u_2$ se compensant. (2) On a $D^{(1)}(s \circ u) = s_1 u_1$ ; $s_1$ est inversible comme image de l'inversible $D^{(1)} s$ par l'homomorphisme $f \mapsto f \circ u$, qui envoie l'inverse de $(D^{(1)} s)^2$ sur l'inverse de $s_1^2$. On divise~(1) par $(s_1 u_1)^2$.
+\end{proof}
+
+\begin{remarque}
+Dans~(2), $G_0(s) \circ u \cdot (D^{(1)} u)^2$ est le coefficient de $dt^2$ dans $G_0(u, s \circ u)$, puisque $du = D^{(1)}u\,dt$ ; l'énoncé est donc la relation $G_0(t, r) = G_0(t, u) + G_0(u, r)$ pour $r = s \circ u$. La forme~(1) n'utilise aucune hypothèse d'inversibilité : la relation de cocycle est une identité entre polynômes des coefficients, valable sur $\mathbf Z$ et donc sur toute base, en caractéristique~$2$ et~$3$ comprises. L'inversibilité ne sert qu'à diviser.
+\end{remarque}
+
+\begin{enonce}[Page 115, invariance par les homographies\piste{93-integral-schwarzian-level-p2}]
+Soient $s, p, q \in R[X]$ avec $s\,q = p$ et $D^{(2)} p = D^{(3)} p = D^{(2)} q = D^{(3)} q = 0$. Alors $q^2 N(s) = 0$. En particulier, si $a, b, c, d \in R[X]$ sont tués, si $cX + d$ est inversible et si $s\,(cX + d) = aX + b$, alors $G_0(s) = 0$ ; c'est le cas pour $a, b, c, d \in R$.
+\end{enonce}
+
+\begin{proof}
+On applique $D^{(2)}$ et $D^{(3)}$ à $s\,q = p$ par Leibniz : $D^{(2)}s\,q + D^{(1)}s\,D^{(1)}q = 0$ et $D^{(3)}s\,q + D^{(2)}s\,D^{(1)}q = 0$. Alors
+\[
+q^2 N(s) = D^{(2)}s\,q\,\bigl(D^{(2)}s\,q + D^{(1)}s\,D^{(1)}q\bigr) - D^{(1)}s\,q\,\bigl(D^{(3)}s\,q + D^{(2)}s\,D^{(1)}q\bigr) = 0 .
+\]
+Si $a$ est tué, Leibniz donne $D^{(2)}(aX) = D^{(1)}a = 0$ et $D^{(3)}(aX) = D^{(2)}a = 0$ ; les hypothèses valent donc pour $p = aX + b$ et $q = cX + d$. Si $q$ est inversible, $N(s) = 0$, d'où $G_0(s) = 0$. Les constantes sont tuées.
+\end{proof}
+
+\begin{enonce}[Page 72, les valeurs tests]
+Dans $R[X]$, $N(X^2) = 1$ et $D^{(1)}(X^2) = 2X$ ; $N(X^3) = 6X^2$ et $D^{(1)}(X^3) = 3X^2$. Donc $G_0(t, t^2) = \frac{1}{4t^2}\,dt^2$ là où $2$ est inversible, et $G_0(t, t^3) = \frac{2}{3t^2}\,dt^2$ là où $3$ est inversible.
+\end{enonce}
+
+\begin{proof}
+$D^{(k)} X^n = \binom nk X^{n-k}$. Pour $X^2$ : $D^{(2)} = 1$, $D^{(3)} = 0$. Pour $X^3$ : $D^{(1)} = 3X^2$, $D^{(2)} = 3X$, $D^{(3)} = 1$, et $9X^2 - 3X^2 = 6X^2$.
+\end{proof}
+
+\begin{enonce}[Marge de la page 121, les fonctions tuées\piste{93-integral-schwarzian-level-p2}]
+Soit $R$ de caractéristique $p$ première.
+\begin{enumerate}
+\item $f \in R[X]$ est tué si et seulement si, pour tout $n$ tel que le coefficient de $X^n$ dans $f$ soit non nul, $p$ divise $n$ si $p > 3$, $4$ divise $n$ si $p = 2$, $9$ divise $n$ si $p = 3$.
+\item Si $u$ est tué, tout polynôme $f \circ u$ est tué ; c'est le cas des polynômes en $X^p$ ($p > 3$), en $X^4$ ($p = 2$), en $X^9$ ($p = 3$).
+\item Si $p = 2$, $D^{(1)}(X^2) = 0$, $D^{(1)}(X + X^2) = 1$ et $G_0(X + X^2) = 1$.
+\item Si $p = 3$, $D^{(1)}(X^3) = D^{(2)}(X^3) = 0$, $D^{(3)}(X^3) = 1$, $D^{(1)}(X + X^3) = 1$ et $G_0(X + X^3) = -1$.
+\end{enumerate}
+\end{enonce}
+
+\begin{proof}
+(1) Le coefficient de $X^n$ dans $D^{(k)} f$ est $\binom{n+k}{k}$ fois celui de $X^{n+k}$ dans $f$ ; donc $D^{(k)} f = 0$ si et seulement si $\binom nk a_n = 0$ pour tout $n$, où $a_n$ est le coefficient de $X^n$. Dans un anneau de caractéristique $p$, un entier $c$ non divisible par $p$ est inversible, car il l'est dans $\mathbf F_p$ ; donc $\binom nk a_n = 0$ équivaut à $p \mid \binom nk$ ou $a_n = 0$. Ainsi $f$ est tué si et seulement si $p$ divise $n$, $\binom n2$ et $\binom n3$ pour tout $n$ tel que $a_n \neq 0$. Le théorème de Lucas (\texttt{Choose.choose\_modEq\_choose\_mod\_mul\_choose\_div\_nat} de Mathlib) donne $\binom nk \equiv \binom{n \bmod p}{k \bmod p}\binom{\lfloor n/p\rfloor}{\lfloor k/p\rfloor} \pmod p$. Si $p > 3$ et $p \mid n$, cela vaut $\binom 0k = 0$ pour $k = 2, 3$ : la condition se réduit à $p \mid n$. Si $p = 2$ : $\binom n2 \equiv \lfloor n/2\rfloor$ quand $n$ est pair, donc $2 \mid n$ et $2 \mid \binom n2$ équivalent à $4 \mid n$, et alors $\binom n3 \equiv \binom 01 \lfloor n/2 \rfloor = 0$. Si $p = 3$ : $\binom n3 \equiv \lfloor n/3\rfloor$ quand $3 \mid n$, donc $3 \mid n$ et $3 \mid \binom n3$ équivalent à $9 \mid n$, et alors $\binom n2 \equiv \binom 02 = 0$. (2) Par le lemme~\ref{lem:93-chaine}, les trois dérivées de $f \circ u$ sont des combinaisons de $u_1$, $u_2$, $u_3$, nuls ; et $X^m$ est tué par~(1). (3) et (4) sont des calculs de coefficients binomiaux : $N(X + X^2) = 1$ sur tout anneau et $D^{(1)}(X + X^2) = 1 + 2X$ ; $N(X + X^3) = 6X^2 - 1$ et $D^{(1)}(X + X^3) = 1 + 3X^2$.
+\end{proof}
+
+\begin{remarque}
+La vérification confirme la page~120 sans hypothèse sur la base : $G = 12\,G_0$ est une identité sur $\mathbf Z$, et $G_0$ est défini partout, en caractéristique~$2$ et~$3$ comprises. La relation de cocycle vaut sous la forme~(1), sans dénominateur ; l'invariance par les homographies ne demande que $D^{(2)}$ et $D^{(3)}$ nuls sur le numérateur et le dénominateur, ce qui couvre les homographies à coefficients dans $\mathcal O'$, les fonctions tuées, en toute caractéristique. La valeur test de la page~72 est confirmée, $G_0(t, t^3) = \frac{2}{3t^2}\,dt^2$, ainsi que la correction de la lecture pour le premier essai : $G_0(t, t^2) = \frac{1}{4t^2}\,dt^2$, là où la page écrit $\frac{1}{2t}\,dt^2$. Dans le modèle local, la marge de la page~121 est exacte : les fonctions tuées sont les polynômes en $X^p$ si $p > 3$, en $X^4$ si $p = 2$, en $X^9$ si $p = 3$. Les points~(3) et~(4) montrent que ce niveau $p^2$ est nécessaire pour l'invariance : en caractéristique~$2$, $t^2$ a une différentielle nulle mais la translation $t \mapsto t + t^2$ donne $G_0 = dt^2$ ; en caractéristique~$3$, $t \mapsto t + t^3$ donne $G_0 = -dt^2$. Le groupe qui laisse $G_0$ invariant n'est donc pas celui des homographies à coefficients dans $\mathcal O^{(p)}$ pour $p = 2, 3$. Ces énoncés portent sur l'invariance ; la rigidité réciproque, qui est l'énoncé de niveau $p^2$ de la piste, n'est pas démontrée. Le cadre est $R[X]$ : les unités de $R[X]$ sont rares, et l'hypothèse \q{$D^{(1)}$ inversible} n'y est satisfaite que pour des $f$ particuliers ; les formes sans dénominateur, (1) du cocycle et $q^2 N(s) = 0$, n'ont pas cette limite. Le passage aux séries formelles, à $A[T]/(T^{p^N} - \alpha)$ ou à une courbe lisse n'est pas formalisé.
+\end{remarque}
+
+Ne sont pas démontrés ici : la Proposition des pages~121 à~123 (si $G_0(t,s) = 0$ dans $A[T]/(T^{p^N} - \alpha)$, avec $\mathrm{Pic}(A) = 0$ et $D^{(1)} s$ inversible, alors $s$ est une homographie à coefficients dans $A$, pour $N = 1$ si $p > 3$ et $N = 2$ si $p = 2, 3$) ; l'injectivité espérée page~121 du quotient de $\mathcal P_{X/S}$ par les homographies à coefficients dans $\mathcal O'_X$ dans $\mathrm{Conn}^0_{X/S}$ ; la construction des torseurs $\mathrm{Conn}_{X/S}$ et $\mathrm{Conn}_{0,X/S}$ ; l'unicité de $G_0$ au signe près sur $\mathbf Z$ (page~72) et l'unicité en caractéristique $p$ de la remarque~3 (page~73) ; la piste \texttt{93-derived-morphism-homotopy-torsor}.

@@ -8152,6 +8152,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'The decisive sources are unread: Y. Ihara, « Schwarzian equations », J. Fac. Sci. Univ. Tokyo IA 21 (1974), 97–118 (Hoshi’s reference for the Schwarzian in characteristic p, his [4]); Y. Hoshi, « Frobenius-projective structures on curves in positive characteristic », Publ. RIMS 56 (2020), 401–430, §2 (pseudo-coordinates, Proposition 2.8); Y. Sugiyama and S. Yasuda, « Belyi’s theorem in characteristic two », Compos. Math. 156 (2020), 325–339, §2. If any of them writes G/12 with Hasse derivatives, or proves rigidity at level p² for p = 2 or 3, mark matched. A finer question that would also settle what is the page’s: whether, for (p, N) = (2, 2), G₀ and the Sugiyama–Yasuda invariant determine each other — an orienting web search turned up no source treating this.',
+    lean: { file: 'lean/Grothendieck/Folder93.lean', found: "Partly: G₀ = G/12 is defined over any ring and satisfies the cocycle and homography invariance (with no unit hypothesis once denominators are cleared); the functions killed by D¹, D², D³ are the p-th powers for p > 3 and the p²-th powers for p = 2, 3, where translating by t² or t³ changes G₀. The rigidity at level p or p² is not proved." },
   },
   {
     id: '93-p100-author-page-one',
@@ -8205,6 +8206,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'For Λ = Z/n this is matched by Singerman–Strudwick, Theorem 11. What remains open is the extension to every semi-local ring. Look for Farey graphs or unimodular-row graphs over finite and semi-local rings: Farey graphs over Z[i] and Z[ω], and the « unimodular graph » or « unitary graph » of a ring in algebraic graph theory. Mark matched if the semi-local bound is stated there. The argument is two lines, so a match is likely.',
+    lean: { file: 'lean/Grothendieck/Folder79.lean', found: "Holds for every ring with finitely many maximal ideals, so for local rings, fields and Z/n; the fact the page cites is stable range one, proved by the Chinese remainder theorem. Optimality of the bound is not proved." },
   },
   {
     id: '79-homothety-distance-three',
@@ -8241,6 +8243,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read the normaliser computations for the unipotent radical of SL₂ over rings: Menal & Vaserstein on SL₂ of local rings without 1/2, and Bass, « K-theory and stable algebra », for E₂-normal subgroups. Check whether the quotient by ±1 and the ring condition 2Λ = {0, 2} ≠ {0} appear. Check the direct-product claim independently for Λ = Z/4[ε] or F₂[t]/(t²)-extensions before treating it as established.',
+    lean: { file: 'lean/Grothendieck/Folder79.lean', found: "Holds over every commutative ring, without assuming 2 ≠ 0 or bijectivity: maps of M*/±1 commuting with SL(M) are scalars, or scalars times σ(ẋ) = (x + 2y)˙ when 2Λ ⊂ {0, 2}; the product is direct; over Z/n the exception is exactly n = 4, where σ is the octahedral antipody." },
   },
   {
     id: '79-vertex-determined-by-star',
@@ -8260,6 +8263,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'For Λ = Z/n the statement reduces to « twins only for n = 4 » in the Farey map mod n, which is likely to be known or easy from Singerman–Strudwick Theorem 12. Search first for that. The semi-local statement, and its exact exceptional class of Z/4-algebras, should then be looked for in work on unimodular graphs or projective lines over rings (Veldkamp, « Geometry over rings », and the literature on the projective line over a ring and its distant graph). That literature is the most likely place for a match, and it was not read.',
+    lean: { file: 'lean/Grothendieck/Folder79.lean', found: "Holds over every commutative ring, without the semi-local hypothesis: u′ has the neighbours of u type by type iff u′ = ±u, or 2Λ ⊂ {0, 2} and u′ = ±(u + 2y); then σ is induced by a matrix of determinant −1 and square 1." },
   },
   {
     id: '79-star-polygon-twist',
@@ -8276,6 +8280,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Wilson, « Operators over regular maps », Pacific J. Math. 81 (1979), and Nedela & Škoviera, « Exponents of orientable maps », Proc. LMS 75 (1997). Decide whether the folder’s twist (each link polygon replaced by its ν-th power, the centre moved by a commutant element) is H_ν, its dual, or a composite with a duality or hole operator. If it is one of these, mark matched and record which. If not, check Jones & Thornton, « Operations on maps, and outer automorphisms » (JCT B 35, 1983), before leaving it as a candidate. Page 141’s question for arbitrary triangulations with vertices of order 7 is a separate open item.',
+    lean: { file: 'lean/Grothendieck/Folder79.lean', found: "Partly: the model computation holds over any commutative ring — twisting one end by μ turns type-i edges into type-μi edges, and the index map is k ↦ μk; the abstract To 6 statement is not proved." },
   },
   {
     id: '79-homothety-groups-as-subgroups',
@@ -8292,6 +8297,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'First check that the converse really holds: given T_H with these properties, verify the homothety condition λ Et(t) = Et(λ^{-1}t) and the faithfulness (72). Then search the literature on arc-regular graphs and regular maps for « graph automorphisms commuting with an arc-regular group » or the « centraliser of the automorphism group in Sym(V) » acting by twisting one end of each edge. Candidates are Sabidussi-type coset-graph descriptions, Conder and Nedela on regular maps with a given automorphism group, and Lorimer on symmetric graphs. A match is possible under another name.',
+    lean: { file: 'lean/Grothendieck/Folder79.lean', found: "Holds as stated, in both directions, for any group H, subgroup U₀ and σ with σ² ∈ U₀ and U₀ ∩ σU₀σ⁻¹ = 1; commutativity of Z follows from the homothety and faithfulness conditions, even without simple transitivity." },
   },
   {
     id: '79-pages-33-35-dated-1982',

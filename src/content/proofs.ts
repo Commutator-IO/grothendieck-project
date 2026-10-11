@@ -109,7 +109,7 @@ export const PROOFS: Proof[] = [
     statement:
       "In a category of models, (*) is injective, the classes form an order, u_d = id, and the three examples have 2ⁿ⁺¹ − 1, 3ⁿ and 2n + 1 cells; a skeletal category of models whose strict relation is well-founded is a direct (Reedy) category, and conversely; in Example 1, the simplicial identities hold, every arrow factors through a face, and the category is direct.",
     found:
-      "Nothing wrong. Well-foundedness is a real extra hypothesis, as the reading’s « dès que » says: ℤ as a category satisfies (i) and (ii) and is not direct. The Reedy statement needs the category skeletal (« rigide », p. 9); (i) is not used. Not proved: the full decomposition of an arrow into faces, M ≃ M₀.",
+      "Nothing wrong. Well-foundedness is a real extra hypothesis, as the reading’s « dès que » says: ℤ as a category satisfies (i) and (ii) and is not direct. The Reedy statement needs the category skeletal (« rigide », p. 9); (i) is not used. Not proved: the full decomposition of an arrow into faces, M ≃ M₀. The characterisation of direct categories by well-foundedness is proposed to mathlib (leanprover-community/mathlib4#44731), and with it the direct Reedy structure of the semi-simplex category (#44732).",
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder104.lean',
     theorems: ["etoile_injective", "isIso_of_aller_retour", "id_of_idempotent_bijective", "reedyDirecte", "wf_of_degre", "entiers_relatifs_non_directe", "deltaInjReedy"],
@@ -373,5 +373,31 @@ export const PROOFS: Proof[] = [
     verdict: 'the reading dropped a hypothesis',
     lean: 'lean/Grothendieck/Folder74.lean',
     theorems: ['Config.latin', 'Config.pullback', 'Config.scholieIso', 'Scholie.scholie_converse', 'Scholie.axiom1_iff_ka', 'ka_needed', 'p116'],
+  },
+  {
+    folder: '79',
+    batch: 5,
+    page: '19–20, 92–95, 242–247, 275–279',
+    name: 'Homotheties of regular maps; the commutant of SL₂; stars and distances',
+    statement:
+      'For a coset graph H/U₀ with σ² ∈ U₀ and U₀ ∩ σU₀σ⁻¹ = 1, groups of homotheties correspond to subgroups T normalised and inverted by σ. Over a commutative ring, the maps of M*/±1 commuting with SL(M) are the scalars, and also the scalars times σ(ẋ) = (x + 2y)˙ when 2Λ ⊂ {0, 2}; a vertex is determined by its star up to sign and σ; over a semi-local ring any two vertices are at distance at most 3.',
+    found:
+      'The statements hold more generally than the page writes them: the commutant needs neither 2 ≠ 0 nor bijectivity, the star statement needs no semi-local hypothesis, and the commutativity of the homothety group follows from the other conditions. Over Z/n the exception is exactly n = 4, the octahedral antipody. The distance bound rests on stable range one. The star-polygon twist is proved only in the model.',
+    verdict: 'holds, more generally',
+    lean: 'lean/Grothendieck/Folder79.lean',
+    theorems: ['homothetyEquiv', 'commutant', 'exceptional_zmod_iff', 'same_star_iff', 'exists_isUnit_mul_add', 'semilocal_dist_three', 'twist_edge'],
+  },
+  {
+    folder: '93',
+    batch: 6,
+    page: '72, 115–123',
+    name: 'The Schwarzian with divided derivatives',
+    statement:
+      'With Hasse derivatives D⁽ᵏ⁾ on R[X], over any commutative ring, G₀ = −D⁽³⁾s/D⁽¹⁾s + (D⁽²⁾s/D⁽¹⁾s)² satisfies G = 12 G₀, the cocycle relation for composition and invariance under homographies; in characteristic p the functions killed by D⁽¹⁾, D⁽²⁾, D⁽³⁾ are the polynomials in X^p for p > 3, in X⁴ for p = 2 and in X⁹ for p = 3.',
+    found:
+      'G₀ is defined in characteristics 2 and 3, and the cocycle needs no unit hypothesis once denominators are cleared. In characteristic 2, translating by t² changes G₀, and by t³ in characteristic 3, so level p² is needed there. The test value of p. 72 is 1/(4t²), as the reading corrects, not 1/(2t). The rigidity proposition of pp. 121–123 is not proved.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder93.lean',
+    theorems: ['G_eq', 'chain', 'N_comp', 'G0_comp', 'G0_homography', 'killed_iff_two', 'killed_iff_three', 'char_two', 'char_three'],
   },
 ];
