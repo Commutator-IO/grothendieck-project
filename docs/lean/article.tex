@@ -5,6 +5,14 @@
 \IfFontExistsTF{Menlo}{\setmonofont{Menlo}[Scale=0.82]}{\setmonofont{DejaVu Sans Mono}[Scale=0.82]}
 \usepackage{polyglossia}\setmainlanguage{french}\setotherlanguage{english}
 \usepackage{microtype}
+% L’ : la paire de crénage de Charter colle l’apostrophe au L ; on rajoute une fine espace.
+\XeTeXinterchartokenstate=1
+\newXeTeXintercharclass\LetterL
+\newXeTeXintercharclass\Apostrophe
+\XeTeXcharclass`L=\LetterL
+\XeTeXcharclass`'=\Apostrophe
+\XeTeXcharclass"2019=\Apostrophe
+\XeTeXinterchartoks\LetterL\Apostrophe={\kern0.07em}
 \usepackage[a4paper,margin=27mm]{geometry}
 \usepackage{booktabs,longtable,array}
 \usepackage{setspace}\setstretch{1.1}
