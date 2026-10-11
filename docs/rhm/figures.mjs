@@ -63,9 +63,19 @@ const BINS = [
 ];
 const bin = (y) => BINS.findIndex((b) => y <= b.max);
 
-const W = 13.6; // cm
-const s = W / map.width;
-const X = (x) => (x * s).toFixed(2);
+// La colonne de la revue mesure 11,2 cm : les disques sont ramenés dans
+// [M, W - M] horizontalement, la marge M laissant place aux étiquettes des
+// bords ; les étiquettes gardent leur corps, seules les positions changent.
+const W = 11.2; // cm
+const M = 1.5; // cm
+const xs = map.nodes.map((n) => n.x);
+const xmin = Math.min(...xs);
+const xmax = Math.max(...xs);
+const sx = (W - 2 * M) / (xmax - xmin);
+const s = 0.017; // cm par unité, verticalement
+const ybot = Math.min(...map.nodes.map((n) => (map.height - n.y) * s)) - 0.75;
+const px = (x) => M + (x - xmin) * sx;
+const X = (x) => px(x).toFixed(2);
 const Y = (y) => ((map.height - y) * s).toFixed(2);
 const maxW = Math.max(...map.links.map((l) => l.w));
 
@@ -87,24 +97,27 @@ const nodes = map.nodes
 // autres placements défont les chevauchements que la disposition laisse.
 const PLACE = {
   'Commutative algebra': 'above',
-  'Functional analysis': 'below',
+  'Functional analysis': 'left',
   'Topoi and sites': 'left',
   'Group schemes and algebraic groups': 'right',
-  'Weil conjectures and zeta functions': 'below',
+  'Weil conjectures and zeta functions': 'right',
   'Abelian varieties and Picard schemes': 'below',
   'Homotopy theory and test categories': 'left',
   'Categories and functors': 'below',
   'Number theory and arithmetic': 'below',
   'Fundamental groups and Galois theory': 'below',
   'Games and combinatorics': 'left',
-  'Formal geometry, moduli and representability': 'below',
+  'Formal geometry, moduli and representability': 'right',
   'Duality theory': 'left',
+  'Polyhedra and convex geometry': 'below',
+  'Tensor categories and Tannakian duality': 'left',
+  'Crystalline and de Rham cohomology': 'left',
 };
 const labels = map.nodes
   .map((n) => {
     const r = 0.07 + 0.028 * Math.sqrt(n.folders.length);
-    const where = PLACE[n.term] ?? (n.x > 860 ? 'left' : 'above');
-    const x = n.x * s;
+    const where = PLACE[n.term] ?? (px(n.x) > W - 2 * M ? 'left' : 'above');
+    const x = px(n.x);
     const y = (map.height - n.y) * s;
     const [anchor, lx, ly] = {
       above: ['south', x, y + r + 0.02],
@@ -116,7 +129,7 @@ const labels = map.nodes
   })
   .join('\n');
 const legend = BINS.map(
-  (b, i) => `\\fill[dat${i}] (${(i * 2.5).toFixed(2)},-0.55) circle (0.09); \\node[font=\\scriptsize,anchor=west] at (${(i * 2.5 + 0.15).toFixed(2)},-0.55) {${b.label}};`,
+  (b, i) => `\\fill[dat${i}] (${(0.6 + i * 2.1).toFixed(2)},${ybot.toFixed(2)}) circle (0.09); \\node[font=\\scriptsize,anchor=west] at (${(0.6 + i * 2.1 + 0.15).toFixed(2)},${ybot.toFixed(2)}) {${b.label}};`,
 ).join('\n');
 
 writeFileSync(
