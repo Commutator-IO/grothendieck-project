@@ -20,6 +20,8 @@ import Grothendieck.Folder39
 import Grothendieck.Folder41
 import Grothendieck.Folder42
 import Grothendieck.Folder67
+import Grothendieck.Folder68
+import Grothendieck.Folder70
 import Grothendieck.Folder74
 import Grothendieck.Folder77
 import Grothendieck.Folder79

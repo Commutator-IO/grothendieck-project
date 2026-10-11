@@ -356,10 +356,10 @@ export const PROOFS: Proof[] = [
     statement:
       'For linear maps u, v between finite-dimensional inner product spaces, σ_n^m(u + v) ≤ Σ_{p ≤ m} σ_n^p(u) σ_n^{m−p}(v), σ_n^m the elementary symmetric functions of the first n singular values; the system implies ∏(1 + r s_i(u + v)) ≤ ∏(1 + r s_i(u)) ∏(1 + r s_i(v)).',
     found:
-      'Proved for m ≤ 1 and every n, which is Ky Fan’s inequality, absent from mathlib; the maximum principle needs only orthogonal families of norm ≤ 1. The implication from the system to the product form holds. The cases 2 ≤ m ≤ n go through Hilbert exterior powers, which mathlib lacks, and compact operators are not attempted. Ky Fan’s inequality, absent from mathlib, is proposed there (#44728).',
+      'Proved for m ≤ 2 and every n. The case m = 1 is Ky Fan’s inequality, absent from mathlib; the case m = 2 follows the page’s Λ² route, written with 2×2 minors (Cauchy–Binet, Lagrange) instead of Hilbert exterior powers, with the mixed-term constant 1/2 of the page; Ky Fan applied to Λ²T alone would be too weak, and a row bound from decomposable vectors closes the gap. The implication from the system to the product form holds, hence (15) for n ≤ 2. The cases 3 ≤ m ≤ n and compact operators are not proved. Ky Fan’s inequality is proposed to mathlib (leanprover-community/mathlib4#44728).',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder1.lean',
-    theorems: ['sum_singularValues_add_le', 'sigma_system_of_le_one', 'prod_le_of_sigma_system', 'one_add_singularValues_zero_le'],
+    theorems: ['sum_singularValues_add_le', 'sigma_system_of_le_one', 'prod_le_of_sigma_system', 'one_add_singularValues_zero_le', 'sigma_two_add_le', 'sigma_system_of_le_two', 'prod_le_of_le_two'],
   },
   {
     folder: '74',
@@ -399,5 +399,31 @@ export const PROOFS: Proof[] = [
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder93.lean',
     theorems: ['G_eq', 'chain', 'N_comp', 'G0_comp', 'G0_homography', 'killed_iff_two', 'killed_iff_three', 'char_two', 'char_three', 'rigidity_of_gt', 'rigidity_iff_of_gt', 'rigidity_four', 'rigidity_nine', 'rigidity_char_zero', 'det_one_counterexample'],
+  },
+  {
+    folder: '68',
+    batch: 3,
+    page: '49, 51',
+    name: 'Theories of orientation',
+    statement:
+      'A theory of orientation assigns to each finite-dimensional real space a two-element set Ω(V), functorially in linear isomorphisms, with Ω(0) ≃ {±1} and bijective Stokes maps for half-spaces that change sign for the opposite half-space. Every morphism of theories is an isomorphism, there is exactly one morphism between two theories, and GL(n, ℝ) acts on Ω(ℝⁿ) by the sign of the determinant.',
+    found:
+      'The whole claim holds. The bijectivity of the Stokes maps must be an axiom, as the reading says; the page’s cardinality argument does not give it. The opposite-half-space axiom is used only for existence. The « de proche en proche » of p. 51 is filled in by transvections and diagonal matrices.',
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder68.lean',
+    theorems: ['Hom.bijective', 'Hom.ext_app', 'exists_unique_hom', 'Theory.fixes_iff_det_pos', 'Theory.not_fixes_reflect'],
+  },
+  {
+    folder: '70',
+    batch: 4,
+    page: '74–102',
+    name: 'The icosahedron over ℤ[α] and modulo 5',
+    statement:
+      'Over any nonzero ring with α² + α = 1, the twelve vertices of the icosahedron are distinct, no three are collinear and none lies in a face plane not containing it. Over 𝔽₅, the conic q₀ = 0 consists of the six vertex directions, and the 6 + 15 + 10 directions of vertices, edges and faces are the 31 points of ℙ²(𝔽₅).',
+    found:
+      'The incidences hold in characteristics 2 and 5 as well, by the page’s homogeneity argument with kernel-checked word tables and 30 unit minors; the margin « faux en car. 2 » does not concern them. In characteristic 2 the translation of p. 91 is (α′, α, α), not (α′, 1, 1). The 24 isotropic vectors mod 5 are the icosahedron and its double, and edge and face points are exterior and interior to the conic. The order of the group and the quadric statements are not proved.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder70.lean',
+    theorems: ['vert_injective_any', 'not_collinear_any', 'not_in_face_plane_any', 'iota_char_two', 'conic_iff', 'point_bijective', 'isotropic_card', 'edge_tangents'],
   },
 ];
