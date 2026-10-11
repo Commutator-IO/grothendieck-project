@@ -18,9 +18,10 @@ traduction en théorie des groupes », pages 238 to 269; « Le commutant de
 `SL(M)` et de `SL(M)'` », pages 92 to 95; « Un sommet est-il déterminé par son
 étoile ? », pages 275 to 280; « Orientation et connexité », pages 17 to 20;
 « Lire `Z'_Λ` sur les étoiles » and « Le fait mirifique », pages 96 to 101 and
-136 to 140) is the source of the findings `79-homothety-groups-as-subgroups`,
+136 to 140; « Points antipodiques et homothéties », pages 178 to 189) is the source of the findings `79-homothety-groups-as-subgroups`,
 `79-commutant-octahedral-exception`, `79-vertex-determined-by-star`,
-`79-semilocal-diameter-three` and `79-star-polygon-twist` of
+`79-semilocal-diameter-three`, `79-star-polygon-twist` and
+`79-homothety-distance-three` of
 `src/content/findings.ts`. Proving them says only that the claims hold as
 stated (or as corrected below); whether they stand in the literature is a
 separate question.
@@ -64,6 +65,20 @@ What is formalised:
   star of `μẋ` after the twist), `star_line`, `triangle_face` (formula (178), page 67),
   `link_polygon` (the star `k ↦ y + kx` carries the polygon `k ~ k ± μ` in
   `P_{M, μi}`), `twist_index` (`λ_{Γ, s} = ± μ`, no exponent).
+* **Page 188, (32) a″).** In the coset graph (`σ² ∈ U₀`), for an
+  `H`-equivariant permutation `λ ≠ 1`: `homothety_fixed` (no fixed point),
+  `homothety_adj` (if `λx` is a neighbour of `x`, it is the only one),
+  `homothety_common_nbr` (a common neighbour of `x` and `λx` forces equal
+  stars), hence `homothety_dist_ge_three`: if `x` has two neighbours and no
+  other vertex has its star, `λx` is at distance at least `3` from `x`. The
+  double-cone lemma of page 275 (equal stars only for the octahedron) is not
+  formalised; in the model it is replaced by `same_star_iff`. In the model
+  (`Adj`, edges of type `± e` on `M*/±1`), over any commutative ring:
+  `commutant_dist` (a map `λ ≠ 1` commuting with `SL(2, R)` fixes no vertex,
+  moves none to a neighbour, and moves one, equivalently all, to distance `2`
+  iff `R` is exceptional and `λ = σ`), `sigma_common_nbr`; over a semi-local
+  ring `commutant_dist_three` (distance exactly `3` for `λ ≠ 1, σ`), and over
+  `Z/n`, `n ≥ 2`, `zmod_scal_dist_three` (units `μ ≠ ± 1`).
 -/
 
 namespace Grothendieck.Folder79
@@ -424,6 +439,89 @@ def homothetyEquiv (hσ : σ * σ ∈ U₀) :
   right_inv T := Subtype.ext (torusOf_homothetiesOf hz hσ T.2)
 
 end Homothety
+
+/-! ## The distance from a vertex to its image under a homothety (pages 187 and 188) -/
+
+section HomothetyDistance
+
+variable {H : Type*} [Group H] {U₀ : Subgroup H} {σ : H}
+
+/-- Arcs are carried to arcs by `H`. -/
+theorem IsArc.smul {s t : H ⧸ U₀} (h : IsArc (σ := σ) s t) (g : H) :
+    IsArc (σ := σ) (g • s) (g • t) := by
+  obtain ⟨k, rfl, rfl⟩ := h
+  exact ⟨g * k, mul_smul _ _ _, mul_smul _ _ _⟩
+
+/-- With `σ² ∈ U₀`, the graph is undirected: `σ` exchanges `s₀` and `t₀`. -/
+theorem IsArc.symm (hσ : σ * σ ∈ U₀) {s t : H ⧸ U₀} (h : IsArc (σ := σ) s t) :
+    IsArc (σ := σ) t s := by
+  obtain ⟨k, rfl, rfl⟩ := h
+  refine ⟨k * σ, by rw [mul_smul, sigma_smul_s₀], ?_⟩
+  rw [← sigma_smul_s₀, ← mul_smul, mul_assoc, mul_smul, (smul_s₀_eq_iff _).2 hσ]
+
+/-- The stabiliser of `s` is transitive on the neighbours of `s`: this is
+regularity, `H` being transitive on arcs. -/
+theorem IsArc.stab_trans {s t t' : H ⧸ U₀} (h : IsArc (σ := σ) s t)
+    (h' : IsArc (σ := σ) s t') : ∃ g : H, g • s = s ∧ g • t = t' := by
+  obtain ⟨k, rfl, rfl⟩ := h
+  obtain ⟨k', hk, rfl⟩ := h'
+  refine ⟨k' * k⁻¹, ?_, ?_⟩
+  · rw [mul_smul, inv_smul_smul, hk]
+  · rw [mul_smul, inv_smul_smul]
+
+variable {l : Equiv.Perm (H ⧸ U₀)}
+
+/-- Distance `0`: an `H`-equivariant permutation with a fixed point is the
+identity. -/
+theorem homothety_fixed (hl : ∀ (h : H) x, l (h • x) = h • l x) {x : H ⧸ U₀}
+    (hx : l x = x) : l = 1 := by
+  apply equivariant_ext hl (fun _ _ => rfl)
+  induction x using QuotientGroup.induction_on with
+  | H g =>
+    rw [← smul_s₀, hl] at hx
+    simpa using congrArg (g⁻¹ • ·) hx
+
+/-- Distance `1` (page 188, « puisque stabilisateurs »): if `λ x` is a
+neighbour of `x`, the stabiliser of `x` fixes `λ x` and is transitive on the
+neighbours of `x`, so `λ x` is the only neighbour of `x`. -/
+theorem homothety_adj (hl : ∀ (h : H) x, l (h • x) = h • l x) {x t : H ⧸ U₀}
+    (h : IsArc (σ := σ) x (l x)) (ht : IsArc (σ := σ) x t) : t = l x := by
+  obtain ⟨g, hg, rfl⟩ := h.stab_trans ht
+  rw [← hl, hg]
+
+/-- Distance `2` (page 188): if `x` and `λ x` have a common neighbour, they
+have the same neighbours. -/
+theorem homothety_common_nbr (hσ : σ * σ ∈ U₀) (hl : ∀ (h : H) x, l (h • x) = h • l x)
+    {x t : H ⧸ U₀} (h1 : IsArc (σ := σ) x t) (h2 : IsArc (σ := σ) t (l x)) (t' : H ⧸ U₀) :
+    IsArc (σ := σ) x t' ↔ IsArc (σ := σ) (l x) t' := by
+  constructor
+  · intro h'
+    obtain ⟨g, hg, rfl⟩ := h1.stab_trans h'
+    have := h2.smul g
+    rw [← hl, hg] at this
+    exact this.symm hσ
+  · intro h'
+    obtain ⟨g, hg, rfl⟩ := (h2.symm hσ).stab_trans h'
+    have hgx : g • x = x := l.injective (by rw [hl, hg])
+    have := h1.smul g
+    rwa [hgx] at this
+
+/-- **Page 188, (32) a″).** Let `λ ≠ 1` be an `H`-equivariant permutation of
+the vertices of the coset graph (`σ² ∈ U₀`), and `x` a vertex with at least two
+neighbours that no other vertex has as its neighbours. Then `λ x` is neither `x`,
+nor a neighbour of `x`, nor at distance `2` from `x`. If `λ x` is at distance at
+most `3` from `x`, the distance is therefore `3`. The same holds for `λ⁻¹`. -/
+theorem homothety_dist_ge_three (hσ : σ * σ ∈ U₀) (hl : ∀ (h : H) x, l (h • x) = h • l x)
+    (hl1 : l ≠ 1) {x : H ⧸ U₀}
+    (hstar : ∃ t t', IsArc (σ := σ) x t ∧ IsArc (σ := σ) x t' ∧ t ≠ t')
+    (hsep : ∀ y, (∀ t, IsArc (σ := σ) x t ↔ IsArc (σ := σ) y t) → y = x) :
+    l x ≠ x ∧ ¬ IsArc (σ := σ) x (l x) ∧ ¬ ∃ t, IsArc (σ := σ) x t ∧ IsArc (σ := σ) t (l x) := by
+  have hne : l x ≠ x := fun e => hl1 (homothety_fixed hl e)
+  refine ⟨hne, fun h => ?_, fun ⟨t, h1, h2⟩ => hne (hsep _ (homothety_common_nbr hσ hl h1 h2))⟩
+  obtain ⟨t, t', ht, ht', hne'⟩ := hstar
+  exact hne' ((homothety_adj hl h ht).trans (homothety_adj hl h ht').symm)
+
+end HomothetyDistance
 
 /-! ## Rank two: unimodular vectors modulo sign -/
 
@@ -1126,6 +1224,200 @@ theorem twist_index (μ : R) (x y : Fin 2 → R) (k : R) :
     μ • (y + k • x) = μ • y + (μ * k) • x ∧ det2 x (μ • y) = μ * det2 x y := by
   refine ⟨?_, det2_smul_right μ x y⟩
   rw [smul_add, smul_smul]
+
+/-! ### The distance from a vertex to its image, in the model (pages 187 and 188) -/
+
+variable (R) in
+/-- `ẋ` and `ż` are joined by an edge of type `± e` (of `P_{M, ±e}`) when
+`x ∧ z = ± e`; for `e = 1` and `R = Z/n` this is the Farey map mod `n`. -/
+def Adj (e : R) : Vtx R → Vtx R → Prop :=
+  Quotient.lift₂ (fun a b => det2 a.1 b.1 = e ∨ det2 a.1 b.1 = -e) (by
+    intro a₁ b₁ a₂ b₂ h₁ h₂
+    apply propext
+    rcases h₁ with h | h <;> rcases h₂ with h' | h' <;>
+      simp only [h, h', det2_neg_left, det2_neg_right, neg_neg, neg_eq_iff_eq_neg] <;>
+        tauto)
+
+theorem adj_vtx (e : R) {x y z w : Fin 2 → R} (h : det2 x y = 1) (h' : det2 z w = 1) :
+    Adj R e (vtx h) (vtx h') ↔ (det2 x z = e ∨ det2 x z = -e) := Iff.rfl
+
+theorem units_pm_of_mul {c e : Rˣ} (h : (c : R) * e = e ∨ (c : R) * e = -e) :
+    c = 1 ∨ c = -1 := by
+  rcases h with h | h
+  · left; ext; simpa using congrArg (· * (↑e⁻¹ : R)) h
+  · right; ext; simpa using congrArg (· * (↑e⁻¹ : R)) h
+
+/-- A scalar `μ ≠ ± 1` moves every vertex: `μ ẋ ≠ ẋ`. -/
+theorem scal_ne_self {c : Rˣ} (hc : c ≠ 1 ∧ c ≠ -1) (v : Vtx R) : scal c v ≠ v := by
+  induction v using Vtx.ind with
+  | H x y h =>
+    rw [scal_vtx, Ne, vtx_eq_iff]
+    rintro (e | e) <;> have := congrArg (det2 · y) e <;>
+      simp only [det2_smul_left, det2_neg_left, h, mul_one] at this
+    · exact hc.1 (Units.ext this)
+    · exact hc.2 (Units.ext this)
+
+/-- Distance `1` in the model: `μ ẋ` is never adjacent to `ẋ`, since
+`x ∧ μ x = 0`. -/
+theorem not_adj_scal [Nontrivial R] (e c : Rˣ) (v : Vtx R) : ¬ Adj R e v (scal c v) := by
+  induction v using Vtx.ind with
+  | H x y h =>
+    rw [scal_vtx, adj_vtx, det2_smul_right, det2_self, mul_zero]
+    rintro (h0 | h0)
+    · exact e.ne_zero h0.symm
+    · exact e.ne_zero (neg_eq_zero.mp h0.symm)
+
+/-- Distance `2` in the model: if `ż` is adjacent to `ẋ` and to `μ ẋ`, then
+`μ e = ± e`, so `μ = ± 1`. -/
+theorem no_common_nbr_scal (e : Rˣ) {c : Rˣ} (hc : c ≠ 1 ∧ c ≠ -1) (v : Vtx R) :
+    ¬ ∃ w, Adj R e v w ∧ Adj R e w (scal c v) := by
+  rintro ⟨w, hw1, hw2⟩
+  induction v using Vtx.ind with
+  | H x y h =>
+  induction w using Vtx.ind with
+  | H z z' hz =>
+    rw [adj_vtx] at hw1
+    rw [scal_vtx, adj_vtx, det2_smul_right, det2_swap] at hw2
+    have : (c : R) * e = e ∨ (c : R) * e = -e := by
+      rcases hw1 with h1 | h1 <;> rw [h1] at hw2 <;> rcases hw2 with h2 | h2
+      · right; linear_combination -h2
+      · left; linear_combination -h2
+      · left; linear_combination h2
+      · right; linear_combination h2
+    rcases units_pm_of_mul this with h | h
+    · exact hc.1 h
+    · exact hc.2 h
+
+/-- The three exclusions for a scalar `μ ≠ ± 1`. -/
+theorem scal_dist [Nontrivial R] (e : Rˣ) {c : Rˣ} (hc : c ≠ 1 ∧ c ≠ -1) (v : Vtx R) :
+    scal c v ≠ v ∧ ¬ Adj R e v (scal c v) ∧ ¬ ∃ w, Adj R e v w ∧ Adj R e w (scal c v) :=
+  ⟨scal_ne_self hc v, not_adj_scal e c v, no_common_nbr_scal e hc v⟩
+
+/-- `σ(ẋ)` and `ẋ` have a common neighbour of each type: `(e y)˙`. -/
+theorem sigma_common_nbr (hR : Exceptional R) (e : Rˣ) (v : Vtx R) :
+    ∃ w, Adj R e v w ∧ Adj R e w (sigma hR v) := by
+  induction v using Vtx.ind with
+  | H x y h =>
+    have hw : det2 ((e : R) • y) ((↑e⁻¹ : R) • -x) = 1 := by
+      rw [det2_smul_left, det2_smul_right, det2_neg_right, det2_swap, h]; simp
+    refine ⟨vtx hw, ?_, ?_⟩
+    · rw [adj_vtx, det2_smul_right, h, mul_one]; left; rfl
+    · rw [sigma_vtx, adj_vtx, det2_smul_left, det2_add_right, det2_smul_right, det2_self,
+        det2_swap, h]
+      right; ring
+
+theorem scal_eq_id_iff (c : Rˣ) : scal (R := R) c = id ↔ c = 1 ∨ c = -1 := by
+  have h1 : scal (R := R) 1 = id := funext scal_one
+  rw [← h1, scal_eq_scal_iff]
+
+/-- **Page 188, (32) a″), in the model, over any commutative ring.** Let `λ ≠ 1`
+be a map of `M*/±1` commuting with `SL(2, R)` and `e ∈ R*`. For every vertex
+`v`: `λ v ≠ v`; `λ v` is not adjacent to `v` in `P_{M, ±e}`; and `v`, `λ v`
+have a common neighbour iff `R` is exceptional (`2R ⊂ {0, 2}`) and `λ = σ`, the
+octahedral antipody for `Z/4`. -/
+theorem commutant_dist [Nontrivial R] (e : Rˣ) (f : Vtx R → Vtx R)
+    (hf : ∀ g v, f (act g v) = act g (f v)) (hf1 : f ≠ id) (v : Vtx R) :
+    f v ≠ v ∧ ¬ Adj R e v (f v) ∧
+      ((∃ w, Adj R e v w ∧ Adj R e w (f v)) ↔ ∃ hR : Exceptional R, f = sigma hR) := by
+  have key : f v ≠ v ∧ ¬ Adj R e v (f v) ∧
+      ((∃ w, Adj R e v w ∧ Adj R e w (f v)) → ∃ hR : Exceptional R, f = sigma hR) := by
+    have hscal : ∀ c : Rˣ, f = scal c → f v ≠ v ∧ ¬ Adj R e v (f v) ∧
+        ((∃ w, Adj R e v w ∧ Adj R e w (f v)) → ∃ hR : Exceptional R, f = sigma hR) := by
+      rintro c rfl
+      have hc : c ≠ 1 ∧ c ≠ -1 := by
+        have := mt (scal_eq_id_iff c).2 hf1; tauto
+      obtain ⟨a, b, d⟩ := scal_dist e hc v
+      exact ⟨a, b, fun h => absurd h d⟩
+    rcases commutant f hf with ⟨c, hc⟩ | ⟨hR, c, hc⟩
+    · exact hscal c hc
+    by_cases h2 : (2 : R) = 0
+    · exact hscal c (by rw [hc, sigma_eq_id_of_two hR h2]; rfl)
+    subst hc
+    induction v using Vtx.ind with
+    | H x y h =>
+    have hfv : (scal c ∘ sigma hR) (vtx h) = vtx (det2_scal c (det2_sigma h)) := by
+      rw [Function.comp_apply, sigma_vtx, scal_vtx]
+    have h2c := hR.two_mul_unit c.isUnit
+    rw [hfv]
+    refine ⟨?_, ?_, ?_⟩
+    · rw [Ne, vtx_eq_iff]
+      rintro (e' | e') <;> apply h2 <;> have := congrArg (det2 x) e' <;>
+        simp only [det2_smul_right, det2_add_right, det2_self, det2_neg_right, h] at this
+      · linear_combination this - h2c
+      · linear_combination this - h2c
+    · rw [adj_vtx, det2_smul_right, det2_add_right, det2_smul_right, det2_self, h]
+      intro he
+      have hu : IsUnit (2 : R) := by
+        rcases he with he | he
+        · rw [show (c : R) * (0 + 2 * 1) = 2 by linear_combination h2c] at he
+          rw [he]; exact e.isUnit
+        · rw [show (c : R) * (0 + 2 * 1) = 2 by linear_combination h2c] at he
+          rw [he]; exact e.isUnit.neg
+      obtain ⟨u, hu⟩ := hu
+      rcases hR (↑u⁻¹ : R) with h3 | h3
+      · rw [← hu, Units.mul_inv] at h3; exact one_ne_zero h3
+      · rw [← hu, Units.mul_inv, hu] at h3
+        exact one_ne_zero (by linear_combination -h3)
+    · rintro ⟨w, hw1, hw2⟩
+      induction w using Vtx.ind with
+      | H z z' hz =>
+      rw [adj_vtx] at hw1
+      rw [adj_vtx, det2_smul_right, det2_add_right, det2_smul_right, det2_swap x z] at hw2
+      have h2e := hR.two_mul_unit e.isUnit
+      have hcpm : (c : R) * e = e ∨ (c : R) * e = -e := by
+        rcases hR (det2 z y) with hb | hb <;> rw [hb] at hw2 <;>
+          rcases hw1 with h1 | h1 <;> rw [h1] at hw2 <;> rcases hw2 with h3 | h3
+        · right; linear_combination -h3
+        · left; linear_combination -h3
+        · left; linear_combination h3
+        · right; linear_combination h3
+        · left; linear_combination h3 + c * h2e
+        · right; linear_combination h3 + c * h2e
+        · right; linear_combination -h3 + c * h2e + c * hR.four
+        · left; linear_combination -h3 + c * h2e + c * hR.four
+      refine ⟨hR, ?_⟩
+      have hid : scal c = id := (scal_eq_id_iff c).2 (units_pm_of_mul hcpm)
+      rw [hid]; rfl
+  exact ⟨key.1, key.2.1, key.2.2, fun ⟨hR, hfs⟩ => hfs ▸ sigma_common_nbr hR e v⟩
+
+/-- Over a semi-local ring, any two vertices are joined in `P_{M, ±e}` by a
+path of length `3` (from `semilocal_dist_three`). -/
+theorem adj_path_three [Finite (MaximalSpectrum R)] (e : Rˣ) (v v' : Vtx R) :
+    ∃ w₁ w₂, Adj R e v w₁ ∧ Adj R e w₁ w₂ ∧ Adj R e w₂ v' := by
+  induction v using Vtx.ind with
+  | H x y h =>
+  induction v' using Vtx.ind with
+  | H x' y' h' =>
+    obtain ⟨z₁, z₂, hz₁, hz₂, h1, h2, h3⟩ := semilocal_dist_three e ⟨y, h⟩ ⟨y', h'⟩
+    obtain ⟨a₁, ha₁⟩ := hz₁
+    obtain ⟨a₂, ha₂⟩ := hz₂
+    exact ⟨vtx ha₁, vtx ha₂, Or.inl h1, Or.inl h2, Or.inl h3⟩
+
+/-- **The finding in the model, over a semi-local ring.** If `λ ≠ 1` commutes
+with `SL(2, R)` and is not `σ`, every vertex `v` is at distance exactly `3`
+from `λ v` in `P_{M, ±e}`: `λ v ≠ v`, not adjacent, no common neighbour, and a
+path of length `3`. -/
+theorem commutant_dist_three [Nontrivial R] [Finite (MaximalSpectrum R)] (e : Rˣ)
+    (f : Vtx R → Vtx R) (hf : ∀ g v, f (act g v) = act g (f v)) (hf1 : f ≠ id)
+    (hσ : ¬ ∃ hR : Exceptional R, f = sigma hR) (v : Vtx R) :
+    f v ≠ v ∧ ¬ Adj R e v (f v) ∧ (¬ ∃ w, Adj R e v w ∧ Adj R e w (f v)) ∧
+      ∃ w₁ w₂, Adj R e v w₁ ∧ Adj R e w₁ w₂ ∧ Adj R e w₂ (f v) := by
+  obtain ⟨a, b, c⟩ := commutant_dist e f hf hf1 v
+  exact ⟨a, b, fun h => hσ (c.1 h), adj_path_three e v (f v)⟩
+
+/-- **The model case of the finding: the Farey map mod `n`.** For `n ≥ 2`, a unit
+`μ ≠ ± 1` of `Z/n` and any type `± e`, every vertex is at distance exactly `3`
+from its image under `μ` (for `e = 1`: Singerman and Strudwick, Theorem 9). -/
+theorem zmod_scal_dist_three {n : ℕ} (hn : 1 < n) (e : (ZMod n)ˣ) {μ : (ZMod n)ˣ}
+    (hμ : μ ≠ 1 ∧ μ ≠ -1) (v : Vtx (ZMod n)) :
+    scal μ v ≠ v ∧ ¬ Adj (ZMod n) e v (scal μ v) ∧
+      (¬ ∃ w, Adj (ZMod n) e v w ∧ Adj (ZMod n) e w (scal μ v)) ∧
+      ∃ w₁ w₂, Adj (ZMod n) e v w₁ ∧ Adj (ZMod n) e w₁ w₂ ∧ Adj (ZMod n) e w₂ (scal μ v) := by
+  have : NeZero n := ⟨by omega⟩
+  have : Fact (1 < n) := ⟨hn⟩
+  have := finite_maximalSpectrum_of_finite (R := ZMod n)
+  obtain ⟨a, b, c⟩ := scal_dist e hμ v
+  exact ⟨a, b, c, adj_path_three e v _⟩
 
 end RankTwo
 

@@ -8225,6 +8225,7 @@ export const FINDINGS: Finding[] = [
     status: 'matched',
     settle:
       'The model case is matched by Singerman–Strudwick Theorem 9. The abstract form, for any regular triangulation and any element of the commutant, is a short argument that is likely to be folklore, and the page carries part of it on illegible words. Nothing further is worth searching unless someone wants the abstract statement in print.',
+    lean: { file: 'lean/Grothendieck/Folder79.lean', found: "Holds in the model over any nonzero commutative ring and any edge type: a map ≠ id commuting with SL₂ moves no vertex to distance 0 or 1, and to distance 2 exactly when it is σ (for Z/n only n = 4); over semi-local rings, so for units μ ≠ ±1 of Z/n, every vertex is at distance exactly 3 from its image. In the abstract coset graph the same holds when no other vertex shares a star; the double-cone step to the octahedron is not proved." },
   },
   {
     id: '79-commutant-octahedral-exception',

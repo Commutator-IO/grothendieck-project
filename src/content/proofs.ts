@@ -377,15 +377,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '79',
     batch: 5,
-    page: '19–20, 92–95, 242–247, 275–279',
+    page: '19–20, 92–95, 188, 242–247, 275–279',
     name: 'Homotheties of regular maps; the commutant of SL₂; stars and distances',
     statement:
       'For a coset graph H/U₀ with σ² ∈ U₀ and U₀ ∩ σU₀σ⁻¹ = 1, groups of homotheties correspond to subgroups T normalised and inverted by σ. Over a commutative ring, the maps of M*/±1 commuting with SL(M) are the scalars, and also the scalars times σ(ẋ) = (x + 2y)˙ when 2Λ ⊂ {0, 2}; a vertex is determined by its star up to sign and σ; over a semi-local ring any two vertices are at distance at most 3.',
     found:
-      'The statements hold more generally than the page writes them: the commutant needs neither 2 ≠ 0 nor bijectivity, the star statement needs no semi-local hypothesis, and the commutativity of the homothety group follows from the other conditions. Over Z/n the exception is exactly n = 4, the octahedral antipody. The distance bound rests on stable range one. The star-polygon twist is proved only in the model.',
+      'The statements hold more generally than the page writes them: the commutant needs neither 2 ≠ 0 nor bijectivity, the star statement needs no semi-local hypothesis, and the commutativity of the homothety group follows from the other conditions. Over Z/n the exception is exactly n = 4, the octahedral antipody. The distance bound rests on stable range one. The star-polygon twist is proved only in the model. A homothety ≠ 1 moves a vertex to distance exactly 3 in the model over semi-local rings (σ alone reaches distance 2), so the bound 3 is attained for Z/n with n ∉ {1, 2, 3, 4, 6}. Stable range one is proposed to mathlib (leanprover-community/mathlib4#44734).',
     verdict: 'holds, more generally',
     lean: 'lean/Grothendieck/Folder79.lean',
-    theorems: ['homothetyEquiv', 'commutant', 'exceptional_zmod_iff', 'same_star_iff', 'exists_isUnit_mul_add', 'semilocal_dist_three', 'twist_edge'],
+    theorems: ['homothetyEquiv', 'commutant', 'exceptional_zmod_iff', 'same_star_iff', 'exists_isUnit_mul_add', 'semilocal_dist_three', 'twist_edge', 'homothety_dist_ge_three', 'commutant_dist', 'zmod_scal_dist_three'],
   },
   {
     folder: '93',
@@ -395,7 +395,7 @@ export const PROOFS: Proof[] = [
     statement:
       'With Hasse derivatives D⁽ᵏ⁾ on R[X], over any commutative ring, G₀ = −D⁽³⁾s/D⁽¹⁾s + (D⁽²⁾s/D⁽¹⁾s)² satisfies G = 12 G₀, the cocycle relation for composition and invariance under homographies; in characteristic p the functions killed by D⁽¹⁾, D⁽²⁾, D⁽³⁾ are the polynomials in X^p for p > 3, in X⁴ for p = 2 and in X⁹ for p = 3.',
     found:
-      'G₀ is defined in characteristics 2 and 3, and the cocycle needs no unit hypothesis once denominators are cleared. In characteristic 2, translating by t² changes G₀, and by t³ in characteristic 3, so level p² is needed there. The test value of p. 72 is 1/(4t²), as the reading corrects, not 1/(2t). The rigidity proposition of pp. 121–123 is not proved.',
+      'G₀ is defined in characteristics 2 and 3, and the cocycle needs no unit hypothesis once denominators are cleared. In characteristic 2, translating by t² changes G₀, and by t³ in characteristic 3, so level p² is needed there. The test value of p. 72 is 1/(4t²), as the reading corrects, not 1/(2t). The rigidity proposition of pp. 121–123 is not proved. The general characteristic-p criterion for vanishing Hasse derivatives is proposed to mathlib (leanprover-community/mathlib4#44736), with the Lucas divisibility lemma it uses (#44735).',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder93.lean',
     theorems: ['G_eq', 'chain', 'N_comp', 'G0_comp', 'G0_homography', 'killed_iff_two', 'killed_iff_three', 'char_two', 'char_three'],
