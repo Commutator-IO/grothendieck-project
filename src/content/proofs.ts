@@ -426,4 +426,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder70.lean',
     theorems: ['vert_injective_any', 'not_collinear_any', 'not_in_face_plane_any', 'iota_char_two', 'conic_iff', 'point_bijective', 'isotropic_card', 'edge_tangents'],
   },
+  {
+    folder: '86',
+    batch: 1,
+    page: '18–32',
+    name: 'The five trièdres and the hemi-icosahedron',
+    statement:
+      'On the icosahedron, the map ρ on the 15 directions has order 3 and its five orbits, the trièdres, are perfect matchings; the automorphism group (of order 120) acts on them through the alternating group with kernel {1, ι}. The hemi-icosahedron is the set of the 60 even numberings of the five trièdres, its vertices, edges and faces being the pentagons, (2,2,1) partitions and 3-subsets.',
+    found:
+      'Both claims hold as stated, with ρ well defined independently of the choice of face. Page 23 writes {u, v} where the trièdre needs {u, v₁}; the page’s σ₁ is the dictionary’s σ₁ conjugated by σ₂, and the label « σ₀σ₁ » of p. 32 carries the value of σ₀σ₂.',
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder86.lean',
+    theorems: ['card_aut', 'rho_cube', 'orthogonal_disjoint', 'permT_surjective', 'permT_eq_one_iff', 'numb_even', 'numb_eq_iff', 'incidence_dictionary', 'counts'],
+  },
 ];

@@ -7311,6 +7311,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Look for a purely incidence-theoretic definition of the five orthogonal edge triples (opposite side in the vertex link) and for the canonical orientation of the five-set in Coxeter, Regular Polytopes §3.6–3.8 and §14; Conway–Burgiel–Goodman-Strauss, The Symmetries of Things; McMullen–Schulte, Abstract Regular Polytopes, on the hemi-icosahedron {3,5}_5; and Klein 1884, Part I ch. 1. If the definition is there, mark matched; the A₅ isomorphism itself is already a match.',
+    lean: { file: 'lean/Grothendieck/Folder86.lean', found: "Holds as stated on the icosahedron modelled on Fin 12, everything computed from adjacency: ρ is well defined on the 15 directions with ρ³ = id; its five orbits are perfect matchings meeting each vertex’s five edges once; |Aut| = 120, and Aut → Perm(T) has image Alt_T and kernel {1, ι}. Page 23’s first triple needs {u, v₁}: the page’s {u, v} is never in one trièdre with {v, w₁}." },
   },
   {
     id: '86-hemi-icosahedron-five-set-model',
@@ -7330,6 +7331,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Check McMullen–Schulte, Abstract Regular Polytopes (2002), on {3,5}_5 and its presentation by A₅; Coxeter, « The abstract groups Gᵐ’ⁿ’ᵖ » and Coxeter–Moser, Generators and Relations, on A₅ as a {3,5} map group with generators as permutations of five letters; and the literature on the exceptional S₅ → S₆ (synthemes and totals) for the six pentagons-on-five-points ↔ six vertices dictionary. A permutation representation of the {3,5}_5 flag generators on five letters is very likely in Coxeter–Moser; if so, the remaining question is only whether the full incidence dictionary (edges as (2,2,1) partitions, faces as 3-subsets, flags as ω-compatible orders) is written anywhere.',
+    lean: { file: 'lean/Grothendieck/Folder86.lean', found: "Holds as stated: the numbering of T read around a flag’s vertex is always even, and gives a bijection from the 60 flags of Π/ι onto the 60 even numberings; the flag involutions act by (2 4)(3 5), (1 5)(2 4), (2 5)(3 4); same vertex, edge, face corresponds to same pentagon, (2,2,1) partition, 3-subset, giving 6, 15 and 10. The page’s σ₁ = (1 2)(3 5) is the conjugate by σ₂, and p. 32’s « σ₀σ₁ » carries the value of σ₀σ₂." },
   },
   {
     id: '73-ear-area-multiplier-classification',
