@@ -1,17 +1,42 @@
 \domainevide{Mathlib contient le formalisme des catégories galoisiennes, mais pas le groupe fondamental étale des schémas auquel ces cotes l'appliquent.}{29, 34, 142, 143, 145, 149, 156-9}
 \noindent Pistes de l'onglet Findings pour ces cotes, non démontrées ici :
 \begin{itemize}\small\setlength{\itemsep}{0pt}
-\item Cote~29 : un \q{domaine de ramification} est axiomatisé comme champ de catégories multigaloisiennes sur le site étale de $S$ muni d'une réalisation géométrique ; sous R1, R3 et R4, l'axiome R2 équivaut à la fidélité de la réalisation. Mathlib n'a pas les champs sur le site étale.\piste{29-ramification-domain-axioms}
-\item Cote~29 : dans la 2-catégorie des domaines de ramification sur $S$, tout homomorphisme est pleinement fidèle. Mathlib n'a pas les objets galoisiens sur le site étale.\piste{29-domram-morphisms-fully-faithful}
-\item Cote~29 : le \q{degré $n$} d'un morphisme peut être pris comme donnée primitive : six conditions le déterminent, et il coïncide alors avec \q{trivialisé par un morphisme de descente effective universelle}. Mathlib n'a pas la descente effective dans une catégorie.\piste{29-degree-n-as-primitive}
-\item Cote~29 : pour un schéma formel régulier dont la fibre spéciale est une composante d'un diviseur à croisements normaux, le groupe fondamental modéré est une extension centrale dont la classe est la classe de Chern de l'auto-intersection de cette fibre. Mathlib n'a pas le groupe fondamental modéré des schémas formels.\piste{29-formal-tame-pi1-self-intersection}
 \item Cote~29 : pour un groupe discret $G$, la classification des $G$-torseurs comparée pour cinq classes de familles couvrantes. Mathlib n'a pas les torseurs fppf ni le $H^1$ pour ces topologies.\piste{29-h1-five-classes-infinite-group}
 \item Cote~29 : pour un morphisme entre schémas strictement locaux réguliers munis de diviseurs à croisements normaux, l'application sur l'inertie modérée est donnée par la matrice $N$ des multiplicités ; c'est un isomorphisme si et seulement si $N$ est carrée et $\det N$ est $\pm$ une puissance de la caractéristique résiduelle. Mathlib n'a pas l'inertie modérée des schémas réguliers.\piste{29-inertia-matrix-determinant}
 \item Cote~34 : sur une base strictement locale de dimension quelconque, l'image de $\pi_1(U)$ dans $\mathrm{Out}(\pi_1^{(p')})$ d'une fibre géométrique est un groupe abélien d'ordre premier à $p$. Mathlib n'a pas la monodromie modérée.\piste{34-multiparameter-tame-monodromy}
-\item Cote~34 : si $f : X \to S$ est plat sur un trait strictement local, de fibre fermée localement d'intersection complète et lisse hors d'un fermé de codimension $\geq 2$, $f$ est localement 1-asphérique pour les premiers $\neq p$. Mathlib n'a pas la 1-asphéricité locale ni la spécialisation du $H^1$ étale.\piste{34-lci-local-1-asphericity}
 \item Cote~142 : conditions nécessaires pour qu'un automorphisme du groupoïde fondamental profini d'une courbe vienne de $\mathrm{Gal}(\bar K/K)$, conjecturées suffisantes pour une courbe anabélienne sur un corps de type fini sur $\mathbf Q$. Mathlib n'a pas les groupoïdes fondamentaux profinis des courbes.\piste{142-galois-image-conditions-single-curve}
 \item Cote~142 : une catégorie des courbes anabéliennes de tous types, dont les flèches sont les complétés profinis des classes d'isotopie d'applications étales finies, et où chaque groupe d'automorphismes est le groupe de Teichmüller profini. Mathlib n'a pas la complétion profinie des catégories ni les groupes de Teichmüller.\piste{142-teichmuller-galois-category-etale}
 \item Cote~145 : dans le groupe profini libre sur $l_0$, $l_1$, avec $l_\infty l_1 l_0 = 1$, une unité $p \in \hat{\mathbf Z}^*$ vérifie $l_\infty^p l_1^p l_0^p = 1$ seulement pour $p = 1$. Accessible en partie par des témoins finis ; mathlib n'a pas le groupe profini libre.\piste{145-unit-exponent-exercise}
 \item Cote~149 : en caractéristique $0$, sur un corps algébriquement clos, deux morphismes $f, g : X \to Y$ vers une courbe hyperbolique, $f$ dominant, qui induisent le même homomorphisme extérieur des groupes fondamentaux étales profinis, sont égaux. Mathlib n'a pas le groupe fondamental étale des courbes hyperboliques.\piste{149-dominant-faithfulness-curves}
 \item Cote~149 : pour une courbe hyperbolique relative sur un trait et une section rationnelle qui rencontre une section de pointe avec multiplicité $n$ dans la fibre spéciale, l'inertie s'envoie sur $n$ fois le sous-groupe de lacet de cette pointe. Mathlib n'a pas la spécialisation des sections des courbes hyperboliques relatives.\piste{149-cusp-specialisation-index}
 \end{itemize}
+
+\begin{encadre}
+\begin{theoreme}[Grothendieck, pages 190 à 193, axiome R2 des domaines de ramification\piste{29-ramification-domain-axioms}]\nonverifie
+Soit $(R, r)$ un domaine de ramification sur $S$ : un champ de catégories multigaloisiennes sur le site étale de $S$ muni d'une réalisation géométrique continue $r$ vers les schémas relatifs. Sous les axiomes R1, R3 et R4, l'axiome R2 (les sous-objets directs de $X$ correspondent bijectivement aux parties ouvertes et fermées de $r(X)$) équivaut à la fidélité de~$r$.
+\end{theoreme}
+\end{encadre}
+
+\begin{encadre}
+\begin{theoreme}[Grothendieck, page 197, homomorphismes de domaines de ramification\piste{29-domram-morphisms-fully-faithful}]\nonverifie
+Pour $(R, r)$ défini par un schéma $Z$ muni d'un groupe fini d'opérateurs $G$, $\mathrm{Hom}((R,r),(R',r'))$ est équivalente à la catégorie des couples $(P', \alpha)$, $P'$ objet galoisien de $R'_S$ de groupe $G$ et $\alpha$ un $G$-isomorphisme $r'(P') \simeq Z$. En particulier, dans tout homomorphisme $(\varphi, \lambda)$ de domaines de ramification, $\varphi$ est pleinement fidèle.
+\end{theoreme}
+\end{encadre}
+
+\begin{encadre}
+\begin{theoreme}[Grothendieck, pages 212 et 214, le degré comme donnée primitive\piste{29-degree-n-as-primitive}]\nonverifie
+Sur une catégorie, six conditions sur une classe de morphismes de degré~$n$ (changement de base, additivité finie, isomorphismes de degré~$1$, décomposition $Y = \coprod_n Y_n$ avec $X \times_Y Y_n \to Y_n$ de degré~$n$, descente effective en degré $\geq 1$, vide en degré~$0$) déterminent la notion de façon unique ; elle coïncide alors avec \q{trivialisé par un morphisme de descente effective universelle}.
+\end{theoreme}
+\end{encadre}
+
+\begin{encadre}
+\begin{theoreme}[Grothendieck, pages 87 à 97, $\pi_1$ modéré et auto-intersection\piste{29-formal-tame-pi1-self-intersection}]\nonverifie
+Soit $\mathfrak X$ un schéma formel régulier dont la fibre spéciale $X_o$ est une composante d'un diviseur à croisements normaux~$D$. Le groupe fondamental modéré $\pi_1^t(\mathfrak X/D)$ est une extension centrale de $\pi_1^t(X_o/D'_o)$ par un quotient de $\mu^\infty$, dont la classe est la classe de Chern de l'auto-intersection de $X_o$ dans $\mathfrak X$ ; pour $X_o = \mathbf P^1_k$ et $D'_o$ vide, l'extension est $\mu_n(k)$, où $n$ est la partie première à $p$ du degré de $X_o \cdot X_o$.
+\end{theoreme}
+\end{encadre}
+
+\begin{encadre}
+\begin{theoreme}[Grothendieck, pages 153 à 155, 1-asphéricité locale\piste{34-lci-local-1-asphericity}]\nonverifie
+Soit $f : X \to S$ plat sur un trait strictement local, de fibre fermée $X_0$ localement d'intersection complète, dont le lieu non lisse est de codimension $\geq 2$ dans $X_0$. Alors $f$ est localement 1-asphérique pour les premiers $\neq p$ ; si $f$ est propre, la spécialisation $H^1(X_0, G) \to H^1(X_{\bar\eta}, G)$ est bijective pour tout groupe fini $G$ d'ordre premier à~$p$.
+\end{theoreme}
+\end{encadre}

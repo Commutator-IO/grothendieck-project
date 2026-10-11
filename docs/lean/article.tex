@@ -6,6 +6,7 @@
 \usepackage{polyglossia}\setmainlanguage{french}\setotherlanguage{english}
 \usepackage{microtype}
 \usepackage[most]{tcolorbox}
+\usepackage{marginnote}% \nonverifie, dans les encadrés
 % Chaque partie commence sur une nouvelle page.
 \usepackage{etoolbox}
 % Numéros de partie en chiffres : les ordinaux en toutes lettres de polyglossia s'arrêtent avant la vingtième.
@@ -48,6 +49,8 @@
 \definecolor{mathlib}{HTML}{1F5FA8}
 \newcommand{\mathlibpr}[1]{\,\href{https://github.com/leanprover-community/mathlib4/pull/#1}{\textcolor{mathlib}{\ensuremath{\blacksquare}}}}
 % La démonstration de la page, résumée, pour un énoncé non démontré en Lean : marquée dans la marge.
+% Un théorème de Grothendieck que Lean ne vérifie pas : marque dans la marge.
+\newcommand{\nonverifie}{\marginnote{\raggedright\footnotesize\textcolor{piste}{\ensuremath{\lozenge}}~non vérifié en Lean}}
 \newenvironment{demopage}[1][]{\par\smallskip\noindent\marginpar{\raggedright\footnotesize\textcolor{piste}{\ensuremath{\lozenge}}~non vérifiée en Lean}\textit{Démonstration de la page}\if\relax\detokenize{#1}\relax\else{} (#1)\fi.~}{\par\smallskip}
 % Sous le titre de chaque partie : les lettres du fonds qui datent et situent la partie.
 \newcommand{\lettres}[1]{{\small #1\par}\medskip}
@@ -102,7 +105,7 @@ Le losange rouge \textcolor{piste}{\ensuremath{\blacklozenge}} marque les énonc
 
 Les résultats principaux sont encadrés. Un énoncé démontré par piste de l'onglet Findings entièrement démontrée y est appelé théorème, et porte le nom de Grothendieck, dont il vient des feuillets ; quand la démonstration établit davantage que la page, la remarque qui suit le dit ; un énoncé qui établit qu'une affirmation de la page ou de la lecture est fausse y est appelé contre-exemple. Les autres énoncés de la lecture gardent le nom d'énoncé.
 
-Pour un énoncé que Lean ne vérifie pas, notamment une piste restante, l'annexe donne, quand la transcription en contient une, la démonstration des feuillets. L'énoncé est alors encadré comme un théorème de Grothendieck, et sa démonstration, résumée, porte en marge la mention \textcolor{piste}{\ensuremath{\lozenge}}~\emph{non vérifiée en Lean} : elle est rapportée, non vérifiée.
+Une piste restante que les feuillets démontrent est encadrée aussi, comme un théorème de Grothendieck, avec en marge la mention \textcolor{piste}{\ensuremath{\lozenge}}~\emph{non vérifié en Lean} : l'énoncé est rapporté, sa démonstration n'est pas vérifiée.
 
 Le carré bleu \textcolor{mathlib}{\ensuremath{\blacksquare}} marque les énoncés dont un lemme général est proposé à la bibliothèque mathlib ; il renvoie à la demande d'intégration (\emph{pull request}) correspondante. Seul le lemme général y est proposé, sans référence aux feuillets, sauf pour la proposition~1 de la cote~158, qui y est citée comme énoncé d'un manuscrit inédit. Une remarque à la fin de chaque section concernée donne le numéro de la demande, et dit ce que mathlib contenait déjà.
 
