@@ -48,7 +48,7 @@ pentagon, same `(2, 2, 1)` partition, same three-element set. `vertex_pentagons`
 traces a vertex pentagon iff it is even (the dihedral group of the pentagon is even,
 `dihedral_even`); `counts`: 6 pentagons, 15 partitions, all 10 three-element subsets.
 
-All finite checks use `decide +kernel`; no `native_decide`.
+All finite checks use `decide +kernel`, which the kernel checks.
 -/
 
 namespace Grothendieck.Folder86
