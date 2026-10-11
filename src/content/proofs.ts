@@ -395,9 +395,9 @@ export const PROOFS: Proof[] = [
     statement:
       'With Hasse derivatives D⁽ᵏ⁾ on R[X], over any commutative ring, G₀ = −D⁽³⁾s/D⁽¹⁾s + (D⁽²⁾s/D⁽¹⁾s)² satisfies G = 12 G₀, the cocycle relation for composition and invariance under homographies; in characteristic p the functions killed by D⁽¹⁾, D⁽²⁾, D⁽³⁾ are the polynomials in X^p for p > 3, in X⁴ for p = 2 and in X⁹ for p = 3.',
     found:
-      'G₀ is defined in characteristics 2 and 3, and the cocycle needs no unit hypothesis once denominators are cleared. In characteristic 2, translating by t² changes G₀, and by t³ in characteristic 3, so level p² is needed there. The test value of p. 72 is 1/(4t²), as the reading corrects, not 1/(2t). The rigidity proposition of pp. 121–123 is not proved. The general characteristic-p criterion for vanishing Hasse derivatives is proposed to mathlib (leanprover-community/mathlib4#44736), with the Lucas divisibility lemma it uses (#44735).',
+      'G₀ is defined in characteristics 2 and 3, and the cocycle needs no unit hypothesis once denominators are cleared. In characteristic 2, translating by t² changes G₀, and by t³ in characteristic 3, so level p² is needed there. The test value of p. 72 is 1/(4t²), as the reading corrects, not 1/(2t). The rigidity of pp. 121–123 holds in A[T]/(T^n) for α = 0 over any ring of characteristic p, with no Pic(A) hypothesis; the homography has a unit determinant, and the page’s added normalisation ad − bc = 1 is false (s = 2t over 𝔽₅). The reduction from α ≠ 0 is not proved. The general characteristic-p criterion for vanishing Hasse derivatives is proposed to mathlib (leanprover-community/mathlib4#44736), with the Lucas divisibility lemma it uses (#44735).',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder93.lean',
-    theorems: ['G_eq', 'chain', 'N_comp', 'G0_comp', 'G0_homography', 'killed_iff_two', 'killed_iff_three', 'char_two', 'char_three'],
+    theorems: ['G_eq', 'chain', 'N_comp', 'G0_comp', 'G0_homography', 'killed_iff_two', 'killed_iff_three', 'char_two', 'char_three', 'rigidity_of_gt', 'rigidity_iff_of_gt', 'rigidity_four', 'rigidity_nine', 'rigidity_char_zero', 'det_one_counterexample'],
   },
 ];

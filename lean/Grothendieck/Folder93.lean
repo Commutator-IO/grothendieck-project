@@ -3,6 +3,8 @@ import Mathlib.Tactic.LinearCombination
 import Mathlib.Data.Nat.Choose.Lucas
 import Mathlib.Algebra.CharP.Basic
 import Mathlib.Algebra.Field.ZMod
+import Mathlib.Algebra.Polynomial.Div
+import Mathlib.Data.Nat.Prime.Factorial
 
 /-!
 # Folder 93, pages 72, 115–123: the Schwarzian difference with divided derivatives
@@ -42,9 +44,27 @@ the divided derivative `D⁽ᵏ⁾ = (1/k!) dᵏ/dtᵏ`, defined without dividin
   for `p = 2, 3`, which is why the coefficients of the homographies must be taken in
   `O^{p²}` there.
 
-Not proved: the rigidity (the Proposition of pages 121–123: `G₀(t,s) = 0` in
-`A[T]/(T^{p^N} − α)` forces a homography), the torsor `Conn₀`, uniqueness of `G₀` up to
-sign over `ℤ` (page 72), and the passage from the local model `R[X]` to a smooth curve.
+* Rigidity (the Proposition of pages 121–123), in the truncated model
+  `B = A[T]/(T^n)` with `α = 0`, written in `A[X]`: `G₀(t, s) = 0` in `B` is `X^n ∣ N s`
+  (well defined by `hasseDeriv_X_pow_mul`, `N_add_X_pow_mul` when `n = p^N > 3` in
+  characteristic `p`), and `D⁽¹⁾s ∈ B*` is `s₁ ∈ A*`.
+  `step` (page 122): if `s · (cX + d)` is affine modulo `X^(j+3)`, the coefficient of `X^j`
+  in `(cX + d) · N(s)` is `−C(j+3,3) · s₁ · [X^(j+3)](s · (cX + d))`.
+  `rigidity_core`, `rigidity_explicit`, `rigidity`: over any commutative ring `A` in which
+  `C(k,3)` is a unit for `3 ≤ k < n`, `X^n ∣ N s` and `s₁ ∈ A*` give `a, b, c ∈ A` with
+  `a − bc = s₁` and `s · (cX + 1) ≡ aX + b` modulo `X^n` (`c = −s₂/s₁`).
+  `rigidity_of_gt` (`n = p`, any ring of characteristic `p`, no hypothesis on `Pic(A)`),
+  `rigidity_iff_of_gt` (with the converse `N_of_homography_trunc`, `p > 3`),
+  `rigidity_four` (`n = 4`, level `p²` for `p = 2`: over any ring), `rigidity_nine`
+  (`n = 9`, level `p²` for `p = 3`: `C(k,3) ≢ 0 mod 3` for `3 ≤ k ≤ 8`),
+  `rigidity_char_zero` (`A` a `ℚ`-algebra, in `A[X]` itself: `s · (cX + 1) = aX + b`).
+* `det_one_square`, `det_one_counterexample`: the normalisation « `ad − bc = 1` » added on
+  page 121 fails: in `𝔽₅[T]/(T^5)`, `s = 2t` has `G₀ = 0` but is no homography of
+  determinant `1`. The determinant `s₁` is a unit, not a square in general.
+
+Not proved: the reduction from `T^(p^N) − α` to `T^(p^N)` for `α ≠ 0` (it is where
+`Pic(A) = 0` would enter), the torsor `Conn₀`, uniqueness of `G₀` up to sign over `ℤ`
+(page 72), and the passage from the local model to a smooth curve.
 Proving these statements says only that they hold as stated; the literature question
 of the finding stays open.
 -/
@@ -366,5 +386,279 @@ theorem killed_iff_three [CharP R 3] (f : R[X]) :
     rw [this] at l2
     simp at l2
     omega
+
+/-! ### Rigidity (the Proposition of pages 121–123) -/
+
+lemma killed_C (r : R) : Killed (C r) :=
+  ⟨hasseDeriv_C 1 r (by norm_num), hasseDeriv_C 2 r (by norm_num), hasseDeriv_C 3 r (by norm_num)⟩
+
+lemma D_lin (c d : R) :
+    D 1 (C c * X + C d) = C c ∧ D 2 (C c * X + C d) = 0 ∧ D 3 (C c * X + C d) = 0 := by
+  obtain ⟨h1, h2, h3⟩ := D_mul_X_of_const (killed_C c).1 (killed_C c).2.1 (killed_C c).2.2
+  obtain ⟨k1, k2, k3⟩ := killed_C d
+  simp [h2, h3, k2, k3]
+
+/-- The invariance computation with `q = cX + d`, kept with its right-hand side:
+`q · N(s) = D⁽²⁾s · D⁽²⁾(sq) − D⁽¹⁾s · D⁽³⁾(sq)`. -/
+theorem N_mul_lin (s : R[X]) (c d : R) :
+    (C c * X + C d) * N s =
+      D 2 s * D 2 (s * (C c * X + C d)) - D 1 s * D 3 (s * (C c * X + C d)) := by
+  obtain ⟨q1, q2, q3⟩ := D_lin c d
+  rw [D_mul_two, D_mul_three, q1, q2, q3, N]
+  ring
+
+lemma coeff_lin_of_two_le (a b : R) {i : ℕ} (hi : 2 ≤ i) : (C a * X + C b).coeff i = 0 := by
+  obtain ⟨j, rfl⟩ := Nat.exists_eq_add_of_le hi
+  rw [coeff_add, coeff_C_mul_X, coeff_C]
+  simp; omega
+
+/-- The step of page 122: if `s · (cX + d) ≡ aX + b` modulo `X^(j+3)`, the coefficient of
+`X^j` in `(cX + d) · N(s)` is `−C(j+3,3) · s₁ · (coefficient of X^(j+3) in s·(cX+d))`. -/
+theorem step (s : R[X]) (a b c d : R) (j : ℕ)
+    (h : X ^ (j + 3) ∣ s * (C c * X + C d) - (C a * X + C b)) :
+    ((C c * X + C d) * N s).coeff j =
+      -(((j + 3).choose 3 : ℕ) : R) * s.coeff 1 * (s * (C c * X + C d)).coeff (j + 3) := by
+  set r := s * (C c * X + C d) - (C a * X + C b) with hr
+  have e : s * (C c * X + C d) = r + (C a * X + C b) := by rw [hr]; ring
+  obtain ⟨-, l2, l3⟩ := D_lin a b
+  have hD2 : X ^ (j + 1) ∣ D 2 r := X_pow_dvd_iff.2 fun i hi => by
+    rw [hasseDeriv_coeff, (X_pow_dvd_iff.1 h) (i + 2) (by omega), mul_zero]
+  have hD3 : X ^ j ∣ D 3 r := X_pow_dvd_iff.2 fun i hi => by
+    rw [hasseDeriv_coeff, (X_pow_dvd_iff.1 h) (i + 3) (by omega), mul_zero]
+  obtain ⟨w2, hw2⟩ := hD2
+  obtain ⟨w3, hw3⟩ := hD3
+  have c3 : (D 3 r).coeff j = w3.coeff 0 := by
+    rw [hw3, coeff_X_pow_mul', if_pos le_rfl, Nat.sub_self]
+  have rj : r.coeff (j + 3) = (s * (C c * X + C d)).coeff (j + 3) := by
+    rw [hr, coeff_sub, coeff_lin_of_two_le a b (by omega), sub_zero]
+  have e2 : D 2 (s * (C c * X + C d)) = D 2 r := by rw [e, map_add, l2, add_zero]
+  have e3 : D 3 (s * (C c * X + C d)) = D 3 r := by rw [e, map_add, l3, add_zero]
+  rw [N_mul_lin, e2, e3, hw2, hw3, coeff_sub,
+    show D 2 s * (X ^ (j + 1) * w2) = X ^ (j + 1) * (D 2 s * w2) by ring,
+    show D 1 s * (X ^ j * w3) = X ^ j * (D 1 s * w3) by ring,
+    coeff_X_pow_mul', coeff_X_pow_mul', if_neg (by omega), if_pos le_rfl, Nat.sub_self,
+    mul_coeff_zero, ← c3, hasseDeriv_coeff, hasseDeriv_coeff, ← rj]
+  simp
+  ring
+
+/-- The induction of pages 121–123, over any commutative ring: if `C(k,3)` is a unit for
+`3 ≤ k < n`, `s₁` is a unit, `s · (cX + d)` has no `X²` term and the coefficients of `N(s)`
+vanish below `X^(n−3)`, then `s · (cX + d)` is affine modulo `X^n`. -/
+theorem rigidity_core (n : ℕ) (hC : ∀ k, 3 ≤ k → k < n → IsUnit ((k.choose 3 : ℕ) : R))
+    (s : R[X]) (hs : IsUnit (s.coeff 1)) (c d : R) (h2 : (s * (C c * X + C d)).coeff 2 = 0)
+    (hN : ∀ m, m + 3 < n → (N s).coeff m = 0) :
+    X ^ n ∣ s * (C c * X + C d) -
+      (C ((s * (C c * X + C d)).coeff 1) * X + C ((s * (C c * X + C d)).coeff 0)) := by
+  set q := C c * X + C d
+  set a := (s * q).coeff 1
+  set b := (s * q).coeff 0
+  have key : ∀ i, i < n → (s * q - (C a * X + C b)).coeff i = 0 := by
+    intro i
+    induction i using Nat.strong_induction_on with
+    | _ i ih =>
+      intro hi
+      rcases lt_or_ge i 3 with h3 | h3
+      · interval_cases i <;> simp [a, b, coeff_C, h2]
+      · obtain ⟨j, rfl⟩ := Nat.exists_eq_add_of_le' h3
+        have hdiv : X ^ (j + 3) ∣ s * q - (C a * X + C b) :=
+          X_pow_dvd_iff.2 fun m hm => ih m hm (by omega)
+        have hst := step s a b c d j hdiv
+        have hz : (q * N s).coeff j = 0 := by
+          have : X ^ (j + 1) ∣ N s := X_pow_dvd_iff.2 fun m hm => hN m (by omega)
+          exact X_pow_dvd_iff.1 (this.mul_left q) j (by omega)
+        rw [hz, neg_mul, neg_mul, zero_eq_neg] at hst
+        have u := (hC (j + 3) (by omega) hi).mul hs
+        rw [coeff_sub, coeff_lin_of_two_le a b (by omega), sub_zero]
+        exact u.mul_right_eq_zero.1 hst
+  exact X_pow_dvd_iff.2 key
+
+lemma coeff_mul_lin_zero (s : R[X]) (c d : R) : (s * (C c * X + C d)).coeff 0 = d * s.coeff 0 := by
+  rw [mul_add, coeff_add, ← mul_assoc, mul_coeff_zero, coeff_mul_C]
+  simp [mul_comm]
+
+lemma coeff_mul_lin_succ (s : R[X]) (c d : R) (i : ℕ) :
+    (s * (C c * X + C d)).coeff (i + 1) = c * s.coeff i + d * s.coeff (i + 1) := by
+  rw [mul_add, coeff_add, ← mul_assoc, coeff_mul_X, coeff_mul_C, coeff_mul_C]
+  ring
+
+/-- The Proposition of pages 121–123 with an explicit homography: for
+`c = −s₂/s₁`, `s · (cX + 1) ≡ (s₁ + c s₀) X + s₀` modulo `X^n`. -/
+theorem rigidity_explicit (n : ℕ) (hC : ∀ k, 3 ≤ k → k < n → IsUnit ((k.choose 3 : ℕ) : R))
+    (s : R[X]) (hs : IsUnit (s.coeff 1)) (hN : ∀ m, m + 3 < n → (N s).coeff m = 0) :
+    X ^ n ∣ s * (C (-(s.coeff 2 * (s.coeff 1)⁻¹ʳ)) * X + 1) -
+      (C (s.coeff 1 + -(s.coeff 2 * (s.coeff 1)⁻¹ʳ) * s.coeff 0) * X + C (s.coeff 0)) := by
+  set c := -(s.coeff 2 * (s.coeff 1)⁻¹ʳ)
+  have h2 : (s * (C c * X + C 1)).coeff 2 = 0 := by
+    rw [coeff_mul_lin_succ, one_mul]
+    have := Ring.inverse_mul_cancel _ hs
+    linear_combination (-(s.coeff 2)) * this
+  have := rigidity_core n hC s hs c 1 h2 hN
+  rw [coeff_mul_lin_succ, coeff_mul_lin_zero, map_one, zero_add, one_mul, one_mul,
+    add_comm (c * _)] at this
+  exact this
+
+/-- The Proposition of pages 121–123 in `B = A[T]/(T^n)` (`G₀(t, s) = 0` in `B` reads
+`X^n ∣ N(s)`, and `D⁽¹⁾s` is a unit of `B` iff `s₁` is a unit of `A`), over any commutative
+ring `A` in which `C(k,3)` is a unit for `3 ≤ k < n`: `s = (at + b)/(ct + 1)` in `B`, with
+`a, b, c ∈ A` and determinant `a − bc = s₁`. -/
+theorem rigidity (n : ℕ) (hC : ∀ k, 3 ≤ k → k < n → IsUnit ((k.choose 3 : ℕ) : R))
+    (s : R[X]) (hs : IsUnit (s.coeff 1)) (hN : X ^ n ∣ N s) :
+    ∃ a b c : R, a - b * c = s.coeff 1 ∧ X ^ n ∣ s * (C c * X + 1) - (C a * X + C b) :=
+  ⟨s.coeff 1 + -(s.coeff 2 * (s.coeff 1)⁻¹ʳ) * s.coeff 0, s.coeff 0,
+    -(s.coeff 2 * (s.coeff 1)⁻¹ʳ), by ring,
+    rigidity_explicit n hC s hs fun m hm => X_pow_dvd_iff.1 hN m (by omega)⟩
+
+lemma natCast_isUnit (p : ℕ) [Fact p.Prime] [CharP R p] {m : ℕ} (h : ¬ p ∣ m) :
+    IsUnit (m : R) := by
+  have hz : (m : ZMod p) ≠ 0 := by rwa [Ne, ZMod.natCast_eq_zero_iff]
+  simpa using (IsUnit.mk0 _ hz).map (ZMod.castHom (dvd_refl p) R)
+
+/-- Characteristic `p > 3`, `B = A[T]/(T^p)`: the Proposition of pages 121–122, over any
+ring of characteristic `p` (no hypothesis on `Pic(A)`). -/
+theorem rigidity_of_gt (p : ℕ) [hp : Fact p.Prime] [CharP R p] (s : R[X])
+    (hs : IsUnit (s.coeff 1)) (hN : X ^ p ∣ N s) :
+    ∃ a b c : R, a - b * c = s.coeff 1 ∧ X ^ p ∣ s * (C c * X + 1) - (C a * X + C b) := by
+  refine rigidity p (fun k hk3 hkp => natCast_isUnit p fun hdvd => ?_) s hs hN
+  have hf : p ∣ k.factorial := by
+    rw [← Nat.choose_mul_factorial_mul_factorial (show 3 ≤ k from hk3), mul_assoc]
+    exact hdvd.mul_right _
+  exact absurd ((Nat.Prime.dvd_factorial hp.out).1 hf) (by omega)
+
+/-- `B = A[T]/(T^4)`, the level `p²` for `p = 2` (page 123): only `C(3,3) = 1` occurs, and
+the statement holds over any commutative ring. -/
+theorem rigidity_four (s : R[X]) (hs : IsUnit (s.coeff 1)) (hN : X ^ 4 ∣ N s) :
+    ∃ a b c : R, a - b * c = s.coeff 1 ∧ X ^ 4 ∣ s * (C c * X + 1) - (C a * X + C b) :=
+  rigidity 4 (fun k hk3 hk4 => by
+    obtain rfl : k = 3 := by omega
+    simp) s hs hN
+
+/-- `B = A[T]/(T^9)`, the level `p²` for `p = 3` (page 123, right-hand column):
+`C(k,3) ≢ 0 mod 3` for `3 ≤ k ≤ 8`. -/
+theorem rigidity_nine [CharP R 3] (s : R[X]) (hs : IsUnit (s.coeff 1)) (hN : X ^ 9 ∣ N s) :
+    ∃ a b c : R, a - b * c = s.coeff 1 ∧ X ^ 9 ∣ s * (C c * X + 1) - (C a * X + C b) := by
+  have : Fact (Nat.Prime 3) := ⟨Nat.prime_three⟩
+  refine rigidity 9 (fun k hk3 hk9 => natCast_isUnit 3 ?_) s hs hN
+  interval_cases k <;> decide
+
+/-- Characteristic `0` (`A` a `ℚ`-algebra), in `A[X]` itself: `N(s) = 0` with `s₁` a unit
+forces `s · (cX + 1) = aX + b`. -/
+theorem rigidity_char_zero [Algebra ℚ R] (s : R[X]) (hs : IsUnit (s.coeff 1)) (hN : N s = 0) :
+    ∃ a b c : R, a - b * c = s.coeff 1 ∧ s * (C c * X + 1) = C a * X + C b := by
+  have hC : ∀ k, 3 ≤ k → IsUnit ((k.choose 3 : ℕ) : R) := fun k hk => by
+    have h0 : ((k.choose 3 : ℕ) : ℚ) ≠ 0 := by exact_mod_cast (Nat.choose_pos hk).ne'
+    simpa using (IsUnit.mk0 _ h0).map (algebraMap ℚ R)
+  refine ⟨s.coeff 1 + -(s.coeff 2 * (s.coeff 1)⁻¹ʳ) * s.coeff 0, s.coeff 0,
+    -(s.coeff 2 * (s.coeff 1)⁻¹ʳ), by ring, ?_⟩
+  set f := s * (C (-(s.coeff 2 * (s.coeff 1)⁻¹ʳ)) * X + 1) -
+      (C (s.coeff 1 + -(s.coeff 2 * (s.coeff 1)⁻¹ʳ) * s.coeff 0) * X + C (s.coeff 0))
+  have hd := rigidity_explicit (f.natDegree + 1) (fun k hk _ => hC k hk) s hs
+    (fun m _ => by rw [hN, coeff_zero])
+  have hf : f = 0 := by
+    ext i
+    rw [coeff_zero]
+    rcases lt_or_ge i (f.natDegree + 1) with hi | hi
+    · exact X_pow_dvd_iff.1 hd i hi
+    · exact coeff_eq_zero_of_natDegree_lt (by omega)
+  exact sub_eq_zero.1 hf
+
+/-! ### The truncated ring `A[T]/(T^(p^N))` -/
+
+/-- In characteristic `p`, `D⁽ᵏ⁾` for `k < p^N` is `A[X^(p^N)]`-linear on multiples of
+`X^(p^N)`; hence it passes to `A[T]/(T^(p^N))`. -/
+theorem hasseDeriv_X_pow_mul (p M : ℕ) [hp : Fact p.Prime] [CharP R p] {k : ℕ}
+    (hk : k < p ^ M) (g : R[X]) : D k (X ^ (p ^ M) * g) = X ^ (p ^ M) * D k g := by
+  rw [hasseDeriv_mul, Finset.sum_eq_single (0, k)]
+  · simp
+  · rintro ⟨i, j⟩ hij hne
+    rw [Finset.mem_antidiagonal] at hij
+    have hi : i ≠ 0 := by rintro rfl; simp_all
+    rw [D_X_pow, (CharP.cast_eq_zero_iff R[X] p _).2
+      (Nat.Prime.dvd_choose_pow hp.out hi (by omega)), zero_mul, zero_mul]
+  · simp
+
+/-- `N(s)` modulo `X^(p^N)` depends only on `s` modulo `X^(p^N)` (`3 < p^N`), so
+`G₀(t, s) = 0` in `A[T]/(T^(p^N))` reads `X^(p^N) ∣ N(s)`. -/
+theorem N_add_X_pow_mul (p M : ℕ) [Fact p.Prime] [CharP R p] (hM : 3 < p ^ M) (s g : R[X]) :
+    X ^ (p ^ M) ∣ N (s + X ^ (p ^ M) * g) - N s := by
+  rw [N, N, map_add, map_add, map_add, hasseDeriv_X_pow_mul p M (by omega),
+    hasseDeriv_X_pow_mul p M (by omega), hasseDeriv_X_pow_mul p M (by omega)]
+  exact ⟨2 * D 2 s * D 2 g + X ^ (p ^ M) * D 2 g ^ 2 - D 3 s * D 1 g - D 3 g * D 1 s
+    - X ^ (p ^ M) * D 3 g * D 1 g, by ring⟩
+
+lemma X_pow_dvd_of_mul_lin {n : ℕ} {c d : R} (hd : IsUnit d) {F : R[X]}
+    (h : X ^ n ∣ F * (C c * X + C d)) : X ^ n ∣ F := by
+  rw [X_pow_dvd_iff] at h ⊢
+  intro i
+  induction i with
+  | zero =>
+    intro hi
+    have := h 0 hi
+    rw [coeff_mul_lin_zero] at this
+    exact hd.mul_right_eq_zero.1 this
+  | succ i ih =>
+    intro hi
+    have := h (i + 1) hi
+    rw [coeff_mul_lin_succ, ih (by omega), mul_zero, zero_add] at this
+    exact hd.mul_right_eq_zero.1 this
+
+/-- The converse in `A[T]/(T^(p^N))`, `3 < p^N`: a homography `(at + b)/(ct + d)` with
+`a, b, c, d ∈ A` and `d` a unit has `G₀ = 0`. -/
+theorem N_of_homography_trunc (p M : ℕ) [Fact p.Prime] [CharP R p] (hM : 3 < p ^ M)
+    (s : R[X]) {a b c d : R} (hd : IsUnit d)
+    (h : X ^ (p ^ M) ∣ s * (C c * X + C d) - (C a * X + C b)) : X ^ (p ^ M) ∣ N s := by
+  obtain ⟨g, hg⟩ := h
+  have e : s * (C c * X + C d) = (C a * X + C b) + X ^ (p ^ M) * g := by
+    rw [← hg]; ring
+  obtain ⟨-, l2, l3⟩ := D_lin a b
+  have key := N_mul_lin s c d
+  rw [e, map_add (D 2) (C a * X + C b), map_add (D 3) (C a * X + C b), l2, l3,
+    hasseDeriv_X_pow_mul p M (by omega),
+    hasseDeriv_X_pow_mul p M (by omega), zero_add, zero_add] at key
+  refine X_pow_dvd_of_mul_lin (c := c) hd ⟨D 2 s * D 2 g - D 1 s * D 3 g, ?_⟩
+  rw [mul_comm, key]
+  ring
+
+/-- The Proposition of pages 121–123 as an equivalence in `A[T]/(T^p)`, `p > 3`. -/
+theorem rigidity_iff_of_gt (p : ℕ) [hp : Fact p.Prime] [CharP R p] (hp3 : 3 < p) (s : R[X])
+    (hs : IsUnit (s.coeff 1)) :
+    X ^ p ∣ N s ↔
+      ∃ a b c : R, a - b * c = s.coeff 1 ∧ X ^ p ∣ s * (C c * X + 1) - (C a * X + C b) := by
+  refine ⟨rigidity_of_gt p s hs, ?_⟩
+  rintro ⟨a, b, c, -, h⟩
+  have := N_of_homography_trunc p 1 (by simpa using hp3) s (d := 1) isUnit_one
+    (by simpa using h)
+  simpa using this
+
+/-! ### The determinant cannot be normalised to `1` -/
+
+/-- If `uX` is a homography of determinant `1` modulo `X³`, then `u` is a square. -/
+theorem det_one_square (u : R) {a b c d : R} (hdet : a * d - b * c = 1)
+    (h : X ^ 3 ∣ C u * X * (C c * X + C d) - (C a * X + C b)) : ∃ v, u = v ^ 2 := by
+  have h0 := X_pow_dvd_iff.1 h 0 (by norm_num)
+  have h1 := X_pow_dvd_iff.1 h 1 (by norm_num)
+  rw [coeff_sub, coeff_mul_lin_zero] at h0
+  rw [coeff_sub, coeff_mul_lin_succ] at h1
+  simp [coeff_C, coeff_X] at h0 h1
+  refine ⟨u * d, ?_⟩
+  linear_combination (-u) * hdet - u * d * h1 - u * c * h0
+
+/-- Page 121 adds « avec `ad − bc = 1` »: in `𝔽₅[T]/(T^5)`, `s = 2t` has `G₀ = 0` and
+`D⁽¹⁾s = 2` a unit, and is `(2t + 0)/(0·t + 1)`, but no homography of determinant `1` gives
+it, `2` not being a square mod `5`. -/
+theorem det_one_counterexample :
+    N (C 2 * X : (ZMod 5)[X]) = 0 ∧ IsUnit ((C 2 * X : (ZMod 5)[X]).coeff 1) ∧
+      X ^ 5 ∣ (C 2 * X : (ZMod 5)[X]) * (C 0 * X + C 1) - (C 2 * X + C 0) ∧
+      ¬ ∃ a b c d : ZMod 5, a * d - b * c = 1 ∧
+        X ^ 5 ∣ (C 2 * X : (ZMod 5)[X]) * (C c * X + C d) - (C a * X + C b) := by
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · obtain ⟨-, l2, l3⟩ := D_lin (2 : ZMod 5) 0
+    rw [map_zero, add_zero] at l2 l3
+    simp [N, l2, l3]
+  · rw [coeff_C_mul_X]; exact IsUnit.of_mul_eq_one (3 : ZMod 5) (by decide)
+  · simp
+  · rintro ⟨a, b, c, d, hdet, h⟩
+    obtain ⟨v, hv⟩ := det_one_square 2 hdet
+      (dvd_trans (pow_dvd_pow X (by norm_num)) h)
+    revert v; decide
 
 end Grothendieck.Folder93
