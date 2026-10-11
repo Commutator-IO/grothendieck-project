@@ -47,6 +47,8 @@
 % Un énoncé dont un lemme général est proposé à mathlib : un carré bleu, lien vers la PR.
 \definecolor{mathlib}{HTML}{1F5FA8}
 \newcommand{\mathlibpr}[1]{\,\href{https://github.com/leanprover-community/mathlib4/pull/#1}{\textcolor{mathlib}{\ensuremath{\blacksquare}}}}
+% La démonstration de la page, résumée, pour un énoncé non démontré en Lean : marquée dans la marge.
+\newenvironment{demopage}[1][]{\par\smallskip\noindent\marginpar{\raggedright\footnotesize\textcolor{piste}{\ensuremath{\lozenge}}~non vérifiée en Lean}\textit{Démonstration de la page}\if\relax\detokenize{#1}\relax\else{} (#1)\fi.~}{\par\smallskip}
 % Sous le titre de chaque partie : les lettres du fonds qui datent et situent la partie.
 \newcommand{\lettres}[1]{{\small #1\par}\medskip}
 % Sous les lettres, quand il y a lieu : des formalisations extérieures au projet qui touchent le thème de la partie.
@@ -100,6 +102,8 @@ Le losange rouge \textcolor{piste}{\ensuremath{\blacklozenge}} marque les énonc
 
 Les résultats principaux sont encadrés. Un énoncé démontré par piste de l'onglet Findings entièrement démontrée y est appelé théorème, et porte le nom de Grothendieck, dont il vient des feuillets ; quand la démonstration établit davantage que la page, la remarque qui suit le dit ; un énoncé qui établit qu'une affirmation de la page ou de la lecture est fausse y est appelé contre-exemple. Les autres énoncés de la lecture gardent le nom d'énoncé.
 
+Pour un énoncé que Lean ne vérifie pas, notamment une piste restante, l'annexe résume la démonstration que donnent les feuillets quand la transcription en contient une. Ces démonstrations portent en marge la mention \textcolor{piste}{\ensuremath{\lozenge}}~\emph{non vérifiée en Lean} : elles sont rapportées, non vérifiées.
+
 Le carré bleu \textcolor{mathlib}{\ensuremath{\blacksquare}} marque les énoncés dont un lemme général est proposé à la bibliothèque mathlib ; il renvoie à la demande d'intégration (\emph{pull request}) correspondante. Seul le lemme général y est proposé, sans référence aux feuillets, sauf pour la proposition~1 de la cote~158, qui y est citée comme énoncé d'un manuscrit inédit. Une remarque à la fin de chaque section concernée donne le numéro de la demande, et dit ce que mathlib contenait déjà.
 
 Sous le titre de chaque partie, quand le fonds en conserve, un paragraphe donne les lettres datées qui situent la partie dans le temps, chacune avec sa cote, son lot et sa page, d'après les registres du site. Dans deux parties, une ligne \textit{Ailleurs} signale des formalisations extérieures au projet qui touchent leur thème. L'annexe laisse au lecteur trois questions. La première est de savoir si l'énoncé démontré est juste tel qu'il est écrit, puisque Lean n'établit que sa validité sous les hypothèses écrites. La deuxième est de savoir s'il lui manque une hypothèse ou s'il en porte une de trop. La troisième est de savoir s'il figure déjà dans la littérature, et où. Pour les pistes, seule la troisième se pose. La fidélité de la lecture au feuillet demande le fac-similé et relève d'un autre travail.
@@ -110,36 +114,16 @@ Sous le titre de chaque partie, quand le fonds en conserve, un paragraphe donne 
 \input{sections/16}
 
 \part{Motifs}
-\domainevide{Les cotes de ce thème supposent les correspondances algébriques et une catégorie de motifs, que mathlib ne définit pas.}{12, 162-6}
-\noindent Pistes de l'onglet Findings pour ces cotes, hors de portée de Lean pour l'instant :
-\begin{itemize}\small\setlength{\itemsep}{0pt}
-\item Cote~12 : pour une immersion $f : X \to Y$ de source régulière, les constituants de $R^i f_*\mathbb Q_\ell$ sont de poids $\leq 2\inf(i, n)$ et de niveau $\leq \inf(i, n-1)$, où $n$ est la dimension de l'adhérence de $f(X)$. Mathlib n'a pas les poids des faisceaux $\ell$-adiques.\piste{12-immersion-level-bound}
-\end{itemize}
+\input{sections/vide/motifs}
 
 \part{Théorie de Hodge}
-\domainevide{Les cotes de ce thème supposent la cohomologie des variétés kählériennes et les structures de Hodge, absentes de mathlib.}{13, 18}
-\noindent Pistes de l'onglet Findings pour ces cotes, hors de portée de Lean pour l'instant :
-\begin{itemize}\small\setlength{\itemsep}{0pt}
-\item Cote~13 : pour une catégorie tensorielle munie d'un foncteur fibre sur $k$ et d'un autre sur une extension $K$, les éléments de $V$ qui sont dans la $K$-structure sont les invariants d'un sous-groupe algébrique $H$ de $\mathrm{Aut}^\otimes(T)$, sans point base sur le torseur. Mathlib n'a pas les catégories tannakiennes ni les torseurs de foncteurs fibres.\piste{13-double-lattice-invariants}
-\item Cote~18 : pour un motif sur $k \simeq \mathbb C$ défini sur un corps de type fini $k_0$, la comparaison des réseaux de Betti entiers en différentes places archimédiennes donne un 1-cocycle de $\mathrm{Gal}(k/k_0)$ dans $G(k)$, dont la classe ne dépend pas de la place. Mathlib n'a pas les motifs, les réseaux de Betti ni la cohomologie galoisienne non abélienne.\piste{18-archimedean-lattice-cocycle}
-\end{itemize}
+\input{sections/vide/theorie-de-hodge}
 
 \part{Cohomologie étale et $\ell$-adique}
-\domainevide{Les cotes de ce thème supposent le site étale d'un schéma et sa cohomologie, que mathlib ne contient pas.}{31, 33, 60}
-\noindent Pistes de l'onglet Findings pour ces cotes, hors de portée de Lean pour l'instant :
-\begin{itemize}\small\setlength{\itemsep}{0pt}
-\item Cote~31 : une fonction $\varphi$ sur les points d'un schéma noethérien qui vérifie deux conditions locales majore la dimension cohomologique étale $\ell$-primaire. Mathlib n'a pas la cohomologie étale.\piste{31-phi-specialisation-criterion}
-\item Cote~31 : conjecture : en la caractéristique résiduelle $\ell$, la borne de la dimension cohomologique d'un schéma affine est gouvernée par le degré d'imperfection $\nu(k)$, défini par $\ell^{\nu(k)} = [k : k^\ell]$. Mathlib n'a pas la dimension cohomologique étale.\piste{31-imperfection-bound-conjectures}
-\item Cote~31 : pour un anneau local noethérien intègre $A$ de corps des fractions $K$ et de corps résiduel $k$, $\mathrm{cd}_r(K) \geq \mathrm{cd}_r(k) + \dim A$ pour tout premier $r$, à deux exceptions près. Mathlib n'a pas la dimension cohomologique galoisienne.\piste{31-local-ring-cd-lower-bound}
-\item Cote~60 : pour un faisceau $\ell$-adique au point générique d'une courbe sur $\mathbf F_p$, la moyenne sur l'inertie donne un faisceau virtuel $E_\eta^\natural$ dont la fonction $L$ est additive et locale ; le dossier calcule son dual de Verdier. Mathlib n'a pas les faisceaux $\ell$-adiques, leurs fonctions $L$ ni la dualité de Verdier.\piste{60-inertia-average-duality}
-\end{itemize}
+\input{sections/vide/cohomologie-etale-et-l-adique}
 
 \part{Groupes $p$-divisibles et groupes formels}
-\domainevide{Les cotes de ce thème supposent les groupes de Barsotti--Tate et la théorie de Dieudonné, absents de mathlib.}{129}
-\noindent Pistes de l'onglet Findings pour ces cotes, hors de portée de Lean pour l'instant :
-\begin{itemize}\small\setlength{\itemsep}{0pt}
-\item Cote~129 : le faisceau $\mathrm{Ext}^2_{\mathbf Z}(G, M)$ est nul pour tout schéma en groupes commutatif fini localement libre $G$ et tout module quasi-cohérent $M$ dès que $2$ est inversible. Mathlib n'a pas les Ext de schémas en groupes finis localement libres.\piste{129-ext2-vanishing-p-odd}
-\end{itemize}
+\input{sections/vide/groupes-p-divisibles-et-groupes-formels}
 
 \part{Algèbre universelle et théories}
 \input{sections/161-2}
@@ -153,67 +137,16 @@ Sous le titre de chaque partie, quand le fonds en conserve, un paragraphe donne 
 \input{sections/125}
 
 \part{Descente}
-\domainevide{Les cotes de ce thème supposent la descente fidèlement plate pour les schémas, que mathlib ne développe pas.}{126, 128}
-\noindent Pistes de l'onglet Findings pour ces cotes, non démontrées ici :
-\begin{itemize}\small\setlength{\itemsep}{0pt}
-\item Cote~126 : un morphisme fini universellement ouvert $X \to Y$, $Y$ localement noethérien, dont toutes les fibres ont le même nombre de points géométriques, se factorise en un morphisme radiciel fini surjectif suivi d'un revêtement étale fini, universel parmi les morphismes vers les $Y$-schémas étales. Mathlib n'a pas les morphismes universellement ouverts ni cette factorisation étale.\piste{126-radicial-etale-factorisation}
-\item Cote~126 : une relation d'équivalence plate $R \rightrightarrows X$ effective modulo un idéal nilpotent, de quotient fpqc quasi-séparé, est effective, et son quotient est un épaississement nilpotent du premier. Mathlib n'a pas les relations d'équivalence plates ni les quotients fpqc.\piste{126-nilpotent-deformation-quotient}
-\item Cote~126 : pour $T \to S$ plat de type fini et une catégorie fibrée où les morphismes plats surjectifs sont de descente, une donnée de descente définie sur des ouverts denses devient, après restriction de $T$ à un ouvert dense, une donnée de descente. Mathlib n'a pas la descente dans les catégories fibrées sur les schémas.\piste{126-generic-descent}
-\item Cote~128 : dans un carré de Milnor à idéal nilpotent, si $\operatorname{Spec} A'/IA' \to \operatorname{Spec} A/I$ est un morphisme de descente effective pour les modules plats, $\operatorname{Spec} A' \to \operatorname{Spec} A$ l'est aussi, et le reste après changement de base plat. Mathlib n'a pas la descente effective des modules plats.\piste{128-nilpotent-conductor-flat-descent}
-\item Cote~128 : pour $A$ local artinien et $A'$ une $A$-algèbre finie à extensions résiduelles triviales, les hypothèses sur l'idéal d'équivalence forcent $\mathrm{long}(A'/A) \leq 1$ ; si $A'/A \simeq A/\mathfrak m$, $\operatorname{Spec} A'$ porte exactement deux relations d'équivalence sur $\operatorname{Spec} A$. Accessible : mathlib a la longueur des modules ; la preuve reste à écrire.\piste{128-colength-one-equivalence-criterion}
-\item Cote~128 : le dossier énonce sans démonstration l'équivalence de trois conditions sur les $A'_n/A_n$ (nullité de $H^1$, trivialité de $H^1(-, \mathrm{GL}_r)$, descente effective des modules plats), et qu'elles entraînent la descente effective des modules plats de type fini le long de $\operatorname{Spec} A' \to \operatorname{Spec} H^0(A'/A)$. Mathlib n'a pas la descente ni $H^1(A'/A, \mathrm{GL}_r)$.\piste{128-infinitesimal-descent-theorem}
-\end{itemize}
+\input{sections/vide/descente}
 
 \part{Topos et sites}
-\domainevide{Mathlib contient les sites et les faisceaux, mais pas les morphismes de topos, leurs points ni les topos classifiants, que ces cotes emploient.}{23, 37, 90, 112, 116, 156-6, 161-3, 161-4}
-\noindent Pistes de l'onglet Findings pour ces cotes, non démontrées ici :
-\begin{itemize}\small\setlength{\itemsep}{0pt}
-\item Cote~23 : pour un anneau noethérien intègre $A$ quotient d'un anneau régulier, la clôture intégrale est finie sur $A$ si et seulement si les premiers de hauteur un où $A$ n'est pas régulier sont en nombre fini et que la normalisée de chaque $A_{\mathfrak p}$ correspondant est finie. Mathlib n'a pas les anneaux excellents ni les anneaux de Nagata.\piste{23-finite-normalisation-quotient-of-regular}
-\item Cote~37 : pour une petite catégorie $C$ d'enveloppe de Karoubi $C'$, $\mathrm{Ind}(C)$ est un topos si et seulement si $C'$ a les limites inductives finies et que son foncteur vers les faisceaux pour la topologie finitaire les respecte. Mathlib n'a pas les conditions de SGA~4 pour que $\mathrm{Ind}(C)$ soit un topos.\piste{37-ind-topos-exercise}
-\item Cote~37 : pour $B = k[X_0, X_1, \ldots]$ et $A = B[[T]]$, les modules $A_n/J_n$, $J_n = (X_0, X_1T, \ldots, X_nT^n)$, forment un système compatible de modules de présentation finie qui ne vient d'aucun $A$-module de présentation finie : la condition b) d'EGA~I 10.10.5 n'entraîne pas a) et c) sans hypothèse noethérienne. Accessible avec les polynômes et les séries formelles de mathlib ; l'anneau $B$ à une infinité de variables demande du soin.\piste{37-ega-i-10-10-5-counterexample}
-\item Cote~90 : pour $G$ plat affine sur un schéma $S$ quelconque, d'algèbre réunion filtrante de sous-cogèbres localement libres, opérant sur $X$ avec un fibré ample $G$-linéarisé, tout sous-module quasi-cohérent d'un $G$-module quasi-cohérent est contenu dans un plus petit sous-module $G$-stable. Mathlib n'a pas les modules quasi-cohérents équivariants.\piste{90-equivariant-resolution-general-base}
-\item Cote~112 : question : jusqu'où la correspondance de Dold--Kan subsiste hors de $\Delta$, restreinte aux préfaisceaux abéliens \q{lisses}. Mathlib n'a pas les catégories dérivées de complexes localement constants.\piste{112-linearization-beyond-the-simplex}
-\item Cote~116 : énoncé sans démonstration : un topos recollé d'un sous-topos ouvert et de son fermé complémentaire est un topos de préfaisceaux exactement quand les deux le sont et que le foncteur de recollement commute aux limites projectives. Mathlib n'a pas le recollement des topos.\piste{116-presheaf-gluing-continuous-gluing-functor}
-\item Cote~161-3 : $\mathrm{Top}(X \times Y) \to \mathrm{Top}(X) \times \mathrm{Top}(Y)$ est une équivalence sous une hypothèse plus faible que la compacité locale : toute partie localement fermée non vide de $X$ a un point qui y possède un voisinage relativement quasi-compact. Mathlib n'a pas les topos de faisceaux sur un produit.\piste{161-3-product-converse}
-\item Cote~161-3 : pour une famille quelconque, $\mathrm{Top}(\prod X_i) \to \prod \mathrm{Top}(X_i)$ est une équivalence quand tous les facteurs sauf un au plus ont des systèmes fondamentaux de voisinages quasi-compacts, et tous sauf un au plus sont quasi-compacts. Mathlib n'a pas les produits infinis de topos de faisceaux.\piste{161-3-infinite-product-criterion}
-\item Cote~161-3 : la spatialité du locale produit, démontrée par trois passages à la borne supérieure dans le treillis des sous-objets. Mathlib n'a pas les produits de locales.\piste{161-3-locale-spatiality-suprema-proof}
-\item Cote~161-3 : le 2-produit de deux topos est l'intersection, dans le topos des préfaisceaux sur $C \times D$, des images réciproques des sous-topos $\tilde C \subset \hat C$ et $\tilde D \subset \hat D$. Mathlib n'a pas les sous-topos ni les 2-produits de topos.\piste{161-3-two-product-by-intersection}
-\end{itemize}
+\input{sections/vide/topos-et-sites}
 
 \part{Variétés abéliennes et schémas de Picard}
-\domainevide{Les cotes de ce thème supposent les schémas abéliens et le foncteur de Picard, absents de mathlib.}{9, 14, 44, 47, 49, 50, 51, 52, 57, 59, 100, 130, 139}
-\noindent Pistes de l'onglet Findings pour ces cotes, non démontrées ici :
-\begin{itemize}\small\setlength{\itemsep}{0pt}
-\item Cote~9 : pour un schéma abélien ordinaire localement polarisable sur une base connexe de caractéristique $p$, $\det T_p(\tilde\varphi)_{\text{ét}}/\sqrt{\deg\tilde\varphi}$ ne dépend pas de la polarisation et donne un isomorphisme $\det T_p(A)_{\text{ét}} \simeq \det T_p(A^*)_{\text{ét}}$. Mathlib n'a pas les schémas abéliens ni les modules de Tate $p$-adiques.\piste{9-det-etale-tate-iso}
-\item Cote~9 : pour une variété abélienne ordinaire polarisée et $u \in \mathrm{End}(A) \otimes \mathbf Q$ symétrique et positif pour l'involution de Rosati, le déterminant de $u$ sur la partie étale du module de Tate $p$-adique vaut $+\sqrt{\deg u}$. Mathlib n'a pas les variétés abéliennes ni l'involution de Rosati.\piste{9-symmetric-positive-det-sqrt-degree}
-\item Cote~14 : une équivalence d'Albanese sur les cycles de toute codimension, comprise entre les équivalences rationnelle et algébrique ; dans l'anneau quotient, le produit de deux classes algébriquement triviales est nul. Mathlib n'a pas les cycles algébriques des variétés projectives lisses.\piste{14-albanese-equivalence-ring}
-\item Cote~14 : un faisceau inversible $L$ sur un schéma projectif est ample dès que $\chi(\mathcal O_Z \otimes L^{\otimes n}) \to +\infty$ pour tout sous-schéma fermé intègre $Z$ de dimension $\geq 1$ (énoncé attribué à Mumford et Nakai). Mathlib n'a pas la caractéristique d'Euler des faisceaux cohérents ni l'amplitude.\piste{14-nakai-euler-characteristic-criterion}
-\item Cote~44 : une page biffée sur les systèmes de racines semble déduire l'intégralité des nombres de Cartan de trois axiomes (finitude, réduction, symétries) ; ces trois axiomes seuls ne l'entraînent pas. Accessible : un contre-exemple d'algèbre linéaire sur $\mathbf Q$, $\Delta = \{\pm 3e_1, \pm 3e_2, \pm(e_1 \pm e_2)\}$, reste à écrire.\piste{44-cartan-integrality-from-axioms}
-\item Cote~47 : sur une base $S$, Grothendieck--Riemann--Roch donne $\mathrm{ch}(x * y) = (\mathrm{ch}\,x * \mathrm{ch}\,y)\cdot\mathrm{Todd}(t_A)$ sur un schéma abélien $A$, et la transformation $\Psi_D$ est multiplicative sans correction. Mathlib n'a pas Grothendieck--Riemann--Roch ni les schémas abéliens.\piste{47-chow-fourier-todd-over-base}
-\item Cote~47 : le dossier propose l'intégralité des classes $\binom{\chi}{k}\delta'^k/\chi^m$ sur une variété abélienne, comme conséquence de $c(\Phi_L(\mathrm{cl}\,L)) = (1 - D'/\chi)^\chi$. Mathlib n'a pas les classes de Chern sur les variétés abéliennes.\piste{47-dual-polarisation-divisibility}
-\item Cote~49 : pour $\varphi : X \to Y$ de type fini sur $S$ localement noethérien, $F$ quasi-cohérent sur $X$ plat sur $S$ et $G$ cohérent sur $Y$, si $G \to \varphi_*F$ est injectif sur la fibre en $s$ aux points au-dessus de $y$, $G$ est plat sur $S$ en $y$. Mathlib n'a pas la platitude des faisceaux cohérents sur les schémas.\piste{49-flatness-lemma-pushforward}
-\item Cote~50 : un cadre axiomatique pour les endomorphismes des variétés abéliennes (dualité, cônes, forme d'intersection), dont le degré $\nu(\alpha)$, les coefficients $\sigma_i(\alpha)$ et la formule des traces sont des conséquences, sans points ni diviseurs. Accessible une fois les axiomes posés ; les arguments de positivité allongent la preuve.\piste{50-axiomatic-trace-formula}
-\item Cote~51 : si $X$ est projectif et plat sur un anneau de valuation discrète, à fibres lisses hors d'un fermé de codimension $\geq 2$, $\mathrm{Alb}(X_K)$ et $(\mathrm{Pic}^0_{X_K})_{\mathrm{red}}$ ont bonne réduction. Mathlib n'a pas les schémas d'Albanese et de Picard.\piste{51-albanese-good-reduction-codim-two}
-\item Cote~57 : pour $X \subset \mathbf P^r$ normal intègre de dimension $\geq 2$ et sa section hyperplane générique $Y_{\bar K}$, $H^1(X, G) \to H^1(Y_{\bar K}, G)$ est injectif pour $G = \mathbf G_a$ et pour $G$ fini commutatif. Mathlib n'a pas la cohomologie plate des schémas.\piste{57-generic-hyperplane-h1-injective}
-\item Cote~57 : deux sous-schémas en groupes fermés \q{rigides} d'un schéma en groupes de type fini sur une base connexe localement noethérienne, qui coïncident sur une fibre, sont égaux. Mathlib n'a pas les schémas en groupes sur une base noethérienne.\piste{57-rigid-subgroups-one-fibre}
-\item Cote~57 : pour $f : X \to Y$ propre entre espaces analytiques complexes, $(R^1f_*\mathcal O^*_X)_y \to \varprojlim \mathrm{Pic}(X_n)$ est un isomorphisme si et seulement si $(R^1f_*\mathcal O_X)_y$ est de longueur finie. Mathlib n'a pas les espaces analytiques complexes ni GAGA.\piste{57-analytic-pic-completion-criterion}
-\item Cote~59 : pour un schéma abélien $A/S$ de dimension relative $2$ et une section $\delta$ de $\mathrm{NS}_{A/S}$ avec $\chi(\delta)$ pair, le torseur $\mathrm{Pic}^\delta_{A/S}$ est trivial. Mathlib n'a pas les torseurs de Picard des schémas abéliens.\piste{59-surface-even-chi-torsor}
-\item Cote~59 : le déterminant de la cohomologie du faisceau de Poincaré donne une trivialisation canonique d'un torseur formé d'$\mathrm{Alb}^{\chi(\delta)}_{X/S}$ et de deux torseurs de Picard. Mathlib n'a pas le déterminant de la cohomologie ni le faisceau de Poincaré.\piste{59-determinant-canonical-section}
-\item Cote~100 : sur $S$ localement noethérien, $A \mapsto (A_U, A[p^\infty], \mathrm{id})$ est pleinement fidèle dès que l'ouvert $U$ rencontre chaque composante connexe de $S$, sans hypothèse de normalité ni de réduction. Mathlib n'a pas les schémas abéliens ni les groupes $p$-divisibles.\piste{100-full-faithfulness-connected-components}
-\item Cote~100 : si $f : S' \to S$ est propre et $\mathcal O_S \to f_*\mathcal O_{S'}$ injectif, sans platitude, le changement de base le long de $f$ est pleinement fidèle sur les schémas abéliens. Mathlib n'a pas la descente des morphismes le long d'un morphisme propre.\piste{100-proper-epimorphism-hom-descent}
-\item Cote~100 : un schéma abélien formel sur $\operatorname{Spf} R$ est algébrisable si et seulement si ses changements de base aux normalisés des quotients intègres de dimension un de $R$ le sont. Mathlib n'a pas l'algébrisation des schémas formels.\piste{100-formal-abelian-curve-criterion}
-\item Cote~100 : dans le spectre d'un anneau local noethérien complet, une famille dénombrable de fermés dont la réunion contient tous les points de dimension $\leq 1$ a une sous-famille finie qui recouvre le spectre. Mathlib n'a pas l'indénombrabilité des idéaux premiers d'un anneau local complet.\piste{100-baire-dimension-one-points}
-\item Cote~100 : sur un trait, tout homomorphisme de la fibre générique d'un groupe $p$-divisible vers celle d'un modèle de Néron se prolonge de façon unique, le théorème de Tate étant admis. Mathlib n'a pas les modèles de Néron ni les groupes $p$-divisibles.\piste{100-neron-extension-p-divisible}
-\item Cote~130 : le symbole local de Néron se décompose en un nombre d'intersection sur le modèle de Néron et une correction caractérisée par quatre axiomes, d'où un accouplement à valeurs dans $\mathbf Z/m\mathbf Z$. Mathlib n'a pas les modèles de Néron ni les symboles locaux.\piste{130-neron-symbol-component-correction}
-\item Cote~130 : les fonctions de Weil forment un faisceau de Zariski $QF_X$, extension de $\mathrm{Div}_X$ par $\Phi_X$ ; sur $X$ quasi-projectif, tout diviseur de Cartier est le diviseur d'une quasi-fonction globale. Mathlib n'a pas les fonctions de Weil ni les diviseurs de Cartier.\piste{130-quasi-function-sheaf}
-\end{itemize}
+\input{sections/vide/varietes-abeliennes-et-schemas-de-picard}
 
 \part{Catégories tensorielles et dualité tannakienne}
-\domainevide{Mathlib contient les catégories monoïdales et rigides, mais pas la reconstruction tannakienne que ces cotes emploient.}{155, 161-5}
-\noindent Pistes de l'onglet Findings pour ces cotes, non démontrées ici :
-\begin{itemize}\small\setlength{\itemsep}{0pt}
-\item Cote~155 : l'anneau où la comultiplication d'un algébroïde de Hopf sur une base non centrale prend ses valeurs est le quotient idéalisateur $\tilde{\mathcal J}/\mathcal J$ de l'idéal à droite $\mathcal J = J\cdot(A \mathbin{\hat\otimes_k} A)$. Accessible sans complétion ; mathlib n'a pas les produits tensoriels complétés.\piste{155-takeuchi-idealiser}
-\end{itemize}
+\input{sections/vide/categories-tensorielles-et-dualite-tanna}
 
 \part{Algèbre commutative}
 \lettres{Ces cotes sont contemporaines de la rédaction d'EGA avec Dieudonné. Le 29 septembre 1965, il lui envoie le plan des paragraphes 20 à 27 du chapitre IV (\lot{25}{7}{134}). Le 27 août 1967, il lui envoie un contre-exemple à EGA I 10.10.5 sans hypothèse noethérienne ; Dieudonné répond le 11 septembre qu'il n'est pas convaincu pour les modules de présentation finie (\lot{37}{5}{92}, \lot{37}{5}{95}). La cote 22 est elle-même un tapuscrit de travail pour EGA IV.}
@@ -238,21 +171,7 @@ Sous le titre de chaque partie, quand le fonds en conserve, un paragraphe donne 
 \input{sections/153}
 
 \part{Cohomologie cristalline et de de Rham}
-\domainevide{Mathlib contient les puissances divisées sur un anneau, mais pas le site cristallin ni la cohomologie de de Rham des schémas.}{4, 5, 6, 7, 8, 54, 137, 156-4}
-\noindent Pistes de l'onglet Findings pour ces cotes, non démontrées ici :
-\begin{itemize}\small\setlength{\itemsep}{0pt}
-\item Cote~4 : si l'on admet le théorème de Lefschetz faible cristallin avec torsion, le nombre de valeurs propres unités du Frobenius sur la cohomologie cristalline évanescente d'une section hyperplane lisse est au moins le rang $F$-semi-simple de la cohomologie cohérente évanescente. Mathlib n'a pas la cohomologie cristalline.\piste{4-vanishing-unit-root-bound}
-\item Cote~5 : la $W(k)$-algèbre locale artinienne universelle dont l'idéal maximal porte des puissances divisées nulles en degrés $\geq p^{\nu+1}$ est $W[\Lambda_0, \ldots, \Lambda_\nu]/(\Lambda_i^p - q_i\Lambda_{i+1}, \Lambda_\nu^p, \Lambda_0 - p)$, avec une forme normale explicite. Accessible en partie : l'intégralité des $q_i$ et leur valuation $p$-adique ; la forme normale demande des calculs dans les vecteurs de Witt.\piste{5-universal-artinian-pd-normal-form}
-\item Cote~5 : la lettre du 10~décembre~1965 énonce la dualité étale pour un morphisme lisse compactifiable de sites annelés, pour des faisceaux d'anneaux quelconques tués par un entier premier aux caractéristiques résiduelles. Mathlib n'a pas la dualité étale.\piste{5-deligne-letter-ringed-duality}
-\item Cote~6 : pour une polarisation de degré quelconque, divisible par $p$ compris, l'anneau local d'un point du schéma de modules des variétés abéliennes ordinaires polarisées est d'intersection complète. Mathlib n'a pas les schémas de modules de variétés abéliennes.\piste{6-ordinary-moduli-complete-intersection}
-\item Cote~6 : sur un corps fini, la torsion du groupe formel d'une courbe elliptique supersingulière par une unité de norme réduite transcendante donne une forme de $G_{1,1}$ qui ne se plonge dans le groupe formel d'aucune variété abélienne. Mathlib n'a pas les groupes formels des variétés abéliennes ni les conjectures de Weil.\piste{6-formal-group-not-in-abelian-variety}
-\item Cote~6 : sur un corps algébriquement clos de caractéristique $p$, il existe des surfaces abéliennes simples de même groupe formel $\hat{\mathbf G}_m \times G_{1,1}$ qui ne sont pas isogènes. Mathlib n'a pas les surfaces abéliennes ni la famille de Manin.\piste{6-same-formal-group-not-isogenous}
-\item Cote~7 : le dossier propose comme cohomologie $p$-adique celle d'un site de schémas formels affines $p$-adiques, sans puissances divisées ni surconvergence, soumise à deux tests (Washnitzer--Monsky, de Rham d'un relèvement). Mathlib n'a pas de cohomologie $p$-adique des schémas.\piste{7-noninfinitesimal-site}
-\item Cote~8 : quand $\pi A$ a des puissances divisées, le relèvement de Lubin--Tate existe et est unique par la seule théorie des déformations cristallines ; sans puissances divisées, l'argument donne l'unicité à isogénie près. Mathlib n'a pas la théorie des déformations cristallines.\piste{8-lubin-tate-via-hodge-filtration}
-\item Cote~8 : deux groupes de Barsotti--Tate de dimension un et de hauteur $[K : \mathbf Q_p]$ sur $\mathbf F_q$, munis d'une action de $A$, sont isogènes si et seulement si $\varpi = \varpi'$, et $\mathrm{Hom}_A(G_0, G'_0)$ est alors explicite. Mathlib n'a pas les groupes de Barsotti--Tate.\piste{8-dim-one-A-module-homs}
-\item Cote~137 : pour la catégorie $\mathcal P$ des complexes bornés de modules libres de type fini, l'évaluation sur le complexe des disques est une équivalence entre les foncteurs $\mathcal P \to \mathcal B$ exacts à gauche sur $\Sigma$ et les complexes de cochaînes de $\mathcal B$. Accessible avec les complexes homologiques de mathlib ; la preuve est longue.\piste{137-perfect-complexes-universal-sigma-exact}
-\item Cote~137 : énoncé sans démonstration : les catégories polynomiales strictes sont équivalentes aux $\otimes$-pd-catégories. Mathlib n'a aucune des deux notions.\piste{137-polynomial-categories-pd-tensor-categories}
-\end{itemize}
+\input{sections/vide/cohomologie-cristalline-et-de-de-rham}
 
 \part{Schémas en groupes et groupes algébriques}
 \input{sections/84}
@@ -261,14 +180,7 @@ Sous le titre de chaque partie, quand le fonds en conserve, un paragraphe donne 
 \input{sections/93}
 
 \part{Champs, gerbes et catégories fibrées}
-\domainevide{Les cotes de ce thème supposent les champs et les gerbes sur un site, que mathlib ne définit pas.}{62, 63, 103, 134-1, 134-2, 134-8}
-\noindent Pistes de l'onglet Findings pour ces cotes, hors de portée de Lean pour l'instant :
-\begin{itemize}\small\setlength{\itemsep}{0pt}
-\item Cote~62 : sur une base où $6$ est inversible, les triplets $(X, X', s)$ formés d'une courbe de genre $0$, d'une trisection étale et d'une section disjointe ont trois descriptions équivalentes, dont un invariant $j$ qui détermine le triplet là où $j(j-1)$ est inversible. Mathlib n'a pas les courbes de genre $0$ sur une base ni leurs trisections étales.\piste{62-triples-rigidified-moduli}
-\item Cote~103 : énoncé sans démonstration : pour un Groupe $G$ sur un topos et un $G$-Module $N$, les Gr-champs épinglés par $(G, N)$ correspondent au complexe tronqué $\tau_{\leq 2}(R\Gamma(B_G \bmod X, N)[1])$. Mathlib n'a pas les Gr-champs ni les topos classifiants.\piste{103-gr-stacks-relative-cohomology-BG}
-\item Cote~134-1 : heuristique : pour des faisceaux abéliens $M$, $N$ sur un topos, une suite exacte $0 \to \mathrm{Ext}^2(M, N) \to P(M, N) \to \mathrm{Hom}(M, {}_2N) \to 0$, où $P(M, N)$ est le faisceau des champs de Picard épinglés. Mathlib n'a pas les champs de Picard sur un topos.\piste{134-1-picard-sign-sequence}
-\item Cote~134-1 : \q{sauf erreur} et sans argument : sur tout topos, tout homomorphisme $M \to {}_2N$ est l'invariant de symétrie d'un champ de Picard épinglé par $M$, $N$. Mathlib n'a pas les champs de Picard ni leurs obstructions dans $\mathrm{Ext}^3$.\piste{134-1-sign-realisation-universal-argument}
-\end{itemize}
+\input{sections/vide/champs-gerbes-et-categories-fibrees}
 
 \part{Topologie combinatoire, surfaces et cartes}
 \lettres{Le 15 avril 1984, l'année de l'\emph{Esquisse d'un programme}, il écrit à Lipman Bers sur l'espace de Teichmüller et l'espace de Thurston des surfaces à bord, avec des modèles en disques et en tranches d'orange (\lot{67}{1}{15}). C'est la seule lettre datée du fonds sur les surfaces et leurs découpages.}
@@ -283,23 +195,7 @@ Sous le titre de chaque partie, quand le fonds en conserve, un paragraphe donne 
 \input{sections/68}
 
 \part{Groupes fondamentaux et théorie de Galois}
-\domainevide{Mathlib contient le formalisme des catégories galoisiennes, mais pas le groupe fondamental étale des schémas auquel ces cotes l'appliquent.}{29, 34, 142, 143, 145, 149, 156-9}
-\noindent Pistes de l'onglet Findings pour ces cotes, non démontrées ici :
-\begin{itemize}\small\setlength{\itemsep}{0pt}
-\item Cote~29 : un \q{domaine de ramification} est axiomatisé comme champ de catégories multigaloisiennes sur le site étale de $S$ muni d'une réalisation géométrique ; sous R1, R3 et R4, l'axiome R2 équivaut à la fidélité de la réalisation. Mathlib n'a pas les champs sur le site étale.\piste{29-ramification-domain-axioms}
-\item Cote~29 : dans la 2-catégorie des domaines de ramification sur $S$, tout homomorphisme est pleinement fidèle. Mathlib n'a pas les objets galoisiens sur le site étale.\piste{29-domram-morphisms-fully-faithful}
-\item Cote~29 : le \q{degré $n$} d'un morphisme peut être pris comme donnée primitive : six conditions le déterminent, et il coïncide alors avec \q{trivialisé par un morphisme de descente effective universelle}. Mathlib n'a pas la descente effective dans une catégorie.\piste{29-degree-n-as-primitive}
-\item Cote~29 : pour un schéma formel régulier dont la fibre spéciale est une composante d'un diviseur à croisements normaux, le groupe fondamental modéré est une extension centrale dont la classe est la classe de Chern de l'auto-intersection de cette fibre. Mathlib n'a pas le groupe fondamental modéré des schémas formels.\piste{29-formal-tame-pi1-self-intersection}
-\item Cote~29 : pour un groupe discret $G$, la classification des $G$-torseurs comparée pour cinq classes de familles couvrantes. Mathlib n'a pas les torseurs fppf ni le $H^1$ pour ces topologies.\piste{29-h1-five-classes-infinite-group}
-\item Cote~29 : pour un morphisme entre schémas strictement locaux réguliers munis de diviseurs à croisements normaux, l'application sur l'inertie modérée est donnée par la matrice $N$ des multiplicités ; c'est un isomorphisme si et seulement si $N$ est carrée et $\det N$ est $\pm$ une puissance de la caractéristique résiduelle. Mathlib n'a pas l'inertie modérée des schémas réguliers.\piste{29-inertia-matrix-determinant}
-\item Cote~34 : sur une base strictement locale de dimension quelconque, l'image de $\pi_1(U)$ dans $\mathrm{Out}(\pi_1^{(p')})$ d'une fibre géométrique est un groupe abélien d'ordre premier à $p$. Mathlib n'a pas la monodromie modérée.\piste{34-multiparameter-tame-monodromy}
-\item Cote~34 : si $f : X \to S$ est plat sur un trait strictement local, de fibre fermée localement d'intersection complète et lisse hors d'un fermé de codimension $\geq 2$, $f$ est localement 1-asphérique pour les premiers $\neq p$. Mathlib n'a pas la 1-asphéricité locale ni la spécialisation du $H^1$ étale.\piste{34-lci-local-1-asphericity}
-\item Cote~142 : conditions nécessaires pour qu'un automorphisme du groupoïde fondamental profini d'une courbe vienne de $\mathrm{Gal}(\bar K/K)$, conjecturées suffisantes pour une courbe anabélienne sur un corps de type fini sur $\mathbf Q$. Mathlib n'a pas les groupoïdes fondamentaux profinis des courbes.\piste{142-galois-image-conditions-single-curve}
-\item Cote~142 : une catégorie des courbes anabéliennes de tous types, dont les flèches sont les complétés profinis des classes d'isotopie d'applications étales finies, et où chaque groupe d'automorphismes est le groupe de Teichmüller profini. Mathlib n'a pas la complétion profinie des catégories ni les groupes de Teichmüller.\piste{142-teichmuller-galois-category-etale}
-\item Cote~145 : dans le groupe profini libre sur $l_0$, $l_1$, avec $l_\infty l_1 l_0 = 1$, une unité $p \in \hat{\mathbf Z}^*$ vérifie $l_\infty^p l_1^p l_0^p = 1$ seulement pour $p = 1$. Accessible en partie par des témoins finis ; mathlib n'a pas le groupe profini libre.\piste{145-unit-exponent-exercise}
-\item Cote~149 : en caractéristique $0$, sur un corps algébriquement clos, deux morphismes $f, g : X \to Y$ vers une courbe hyperbolique, $f$ dominant, qui induisent le même homomorphisme extérieur des groupes fondamentaux étales profinis, sont égaux. Mathlib n'a pas le groupe fondamental étale des courbes hyperboliques.\piste{149-dominant-faithfulness-curves}
-\item Cote~149 : pour une courbe hyperbolique relative sur un trait et une section rationnelle qui rencontre une section de pointe avec multiplicité $n$ dans la fibre spéciale, l'inertie s'envoie sur $n$ fois le sous-groupe de lacet de cette pointe. Mathlib n'a pas la spécialisation des sections des courbes hyperboliques relatives.\piste{149-cusp-specialisation-index}
-\end{itemize}
+\input{sections/vide/groupes-fondamentaux-et-theorie-de-galoi}
 
 \part{Polyèdres et géométrie convexe}
 \input{sections/70}
@@ -314,22 +210,10 @@ Sous le titre de chaque partie, quand le fonds en conserve, un paragraphe donne 
 \input{sections/104}
 
 \part{Topologie modérée et espaces stratifiés}
-\domainevide{Les cotes de ce thème supposent une théorie des espaces stratifiés et de la topologie modérée, absente de mathlib.}{119, 121, 156-5}
-\noindent Pistes de l'onglet Findings pour ces cotes, non démontrées ici :
-\begin{itemize}\small\setlength{\itemsep}{0pt}
-\item Cote~119 : énoncé sans démonstration : une équivalence entre les couples $(X, R)$, où $R$ est une relation d'équivalence locale sur un espace $X$, et des triplets $(X, \mathcal Y, f)$ où $\mathcal Y$ est une \q{multiplicité topologique}. Mathlib n'a pas les relations d'équivalence locales ni les multiplicités topologiques.\piste{119-foliation-quotient-topos-equivalence}
-\item Cote~121 : pour une algèbre de Boole de parties d'un espace, stable par adhérence et soumise à une condition de chaîne descendante, toute sous-famille finie admet une partition finie qui vérifie la condition de frontière, et parmi elles une plus grossière que toutes les autres. Accessible avec la topologie générale et les algèbres de Boole de mathlib ; la preuve est longue.\piste{121-coarsest-cell-decomposition}
-\end{itemize}
+\input{sections/vide/topologie-moderee-et-espaces-stratifies}
 
 \part{Géométrie anabélienne et dessins}
-\domainevide{Les cotes de ce thème supposent le groupe fondamental profini des courbes et l'action de Galois sur les dessins d'enfants, absents de mathlib.}{81, 138, 140-1, 144, 146}
-\noindent Pistes de l'onglet Findings pour ces cotes, hors de portée de Lean pour l'instant :
-\begin{itemize}\small\setlength{\itemsep}{0pt}
-\item Cote~138 : une \q{opération} sur les cartes orientées donnée par une partie $A$ de la sphère de référence est, sauf un cas exceptionnel, la composition avec un revêtement $\varphi$ ramifié au-dessus de $0$, $1$, $\infty$, de ramification $2$ au-dessus de $1$. Mathlib n'a pas les revêtements de Belyi de la sphère.\piste{138-operations-belyi-extending}
-\item Cote~138 : critère pour qu'une partie $A$ de la sphère définisse par image réciproque une nouvelle structure de carte : $A$ connexe, et $A$ contient au plus un des points $0$, $1$, $\infty$ ; telle qu'elle est lue, la seconde condition est contredite par l'exemple $A = [0, 1]$. Mathlib n'a pas les cartes sur les surfaces ; la question relève d'abord de la lecture.\piste{138-operations-subset-criterion}
-\item Cote~140-1 : pour $S$ régulier intègre avec $\mathrm{Pic}(S) = 0$, le groupe de Picard du champ quotient $[(\mathbf P^1 - \{0, 1, \infty\})_S/\mathfrak S_3]$ est $\mathbf Z/6$ en caractéristique générique $\neq 2$, et $\mathbf Z/3$ en caractéristique générique $2$. Mathlib n'a pas les groupes de Picard des champs quotients.\piste{140-1-equivariant-pic-u03}
-\item Cote~146 : table des plus petits exposants qui rendent triviaux, de façon compatible au groupe symétrique, les fibrés $L_i$ et $L = \bigotimes L_i$ sur $M_{0,I}$ : $3$ pour $L$ et $6$ pour $L_i$ quand $n = 4$ ; pour $n = 5$ et~$6$, les valeurs sont seulement posées en question. Mathlib n'a pas les espaces de modules $M_{0,n}$.\piste{146-equivariant-trivialising-exponents}
-\end{itemize}
+\input{sections/vide/geometrie-anabelienne-et-dessins}
 
 \part{Ordres et géométrie des formes}
 \input{sections/156-1}
