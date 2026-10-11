@@ -57,7 +57,7 @@ export const PROOFS: Proof[] = [
     statement:
       "The lemma on integer-valued polynomials and free modules; the co-addition and co-multiplication of Int(k₀) exist, are unique and obey the composition rules (K₀ a localisation of k₀, Ω free); the Pólya basis and Vandermonde for Int(ℤ); the decomposition Ω = Ω₀ ⊕ Ω⁰; the examples and counterexamples of p. 7 (Appl, k[T], 𝔽_q, k[[T]]⁺).",
     found:
-      "Holds. The inclusion k₀ ⊂ K₀ is never used; what is used is that K₀ is a localisation, not K₀ ⊗ K₀ = K₀, and whether the latter alone suffices is left open. The decomposition needs neither axiom 3) nor the unit T. Appl(A, A) fails 3a) for every infinite non-zero unital A. The reading’s footnote on k[[T]]⁺: the matrix is Pascal’s without its (0, 0) entry; the counterexample holds in every characteristic.",
+      "Holds. The inclusion k₀ ⊂ K₀ is never used; what is used is that K₀ is a localisation, not K₀ ⊗ K₀ = K₀, and whether the latter alone suffices is left open. The decomposition needs neither axiom 3) nor the unit T. Appl(A, A) fails 3a) for every infinite non-zero unital A. The reading’s footnote on k[[T]]⁺: the matrix is Pascal’s without its (0, 0) entry; the counterexample holds in every characteristic. Pólya’s basis is proposed to mathlib (leanprover-community/mathlib4#44722), as is the coordinate criterion for the range of N ⊗ M (#44717); the coordinate expansion itself was already there.",
     verdict: 'holds, more generally',
     lean: 'lean/Grothendieck/Folder153.lean',
     theorems: ["lemme_injective", "lemme_range", "Phi_injective", "coaddition_existsUnique", "polya", "vandermonde", "isCompl_constants_zeroPart", "appl_not_coaddition", "geom_not_finite_coaddition"],
@@ -96,7 +96,7 @@ export const PROOFS: Proof[] = [
     statement:
       'The Karoubi envelope is the free completion under retracts, and (Kar P)^k ≃ P^k: restriction along P → Kar P is an equivalence on additive functors to any idempotent-complete additive category.',
     found:
-      'The first is classical (and in mathlib); the second holds in additive form, without the smallness or abelianness the reading assumes. Not proved: the k-linear form, Kar P ≃ Proj_tf(P^k), Freyd–Mitchell.',
+      'The first is classical (and in mathlib); the second holds in additive form, without the smallness or abelianness the reading assumes. Not proved: the k-linear form, Kar P ≃ Proj_tf(P^k), Freyd–Mitchell. The equivalence of additive functors on P and on its Karoubi envelope is proposed to mathlib (#44726).',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder113.lean',
     theorems: ['enveloppe_libre', 'morita', 'morita_module'],
@@ -122,7 +122,7 @@ export const PROOFS: Proof[] = [
     statement:
       'In a long exact sequence, the vanishing of C_p for p ≥ m is equivalent to L_p → G_p bijective for p > m and surjective for p = m; and under Serre duality to the dual statement for q ⩽ r − m. Lemme III-18: a map of finite modules bijective at 𝔭 is so near 𝔭.',
     found:
-      'The statements hold; the reading’s prose has a slip — « q < r − m » should be « q ⩽ r − m » under p + q = r. III-18 is a classical fact about finitely presented modules; the margin’s hypotheses only make B finitely presented. Serre duality is taken as given.',
+      'The statements hold; the reading’s prose has a slip — « q < r − m » should be « q ⩽ r − m » under p + q = r. III-18 is a classical fact about finitely presented modules; the margin’s hypotheses only make B finitely presented. Serre duality is taken as given. The pointwise equivalences between bijectivity and vanishing in an exact sequence are already in mathlib.',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder125.lean',
     theorems: ['etage1_iff_etage2', 'etage2_iff_etage3', 'lemme_III18'],
@@ -135,7 +135,7 @@ export const PROOFS: Proof[] = [
     statement:
       "Conditions (1) and (2), the five conditions of p. 3, the fixed parts E₀ ≃ F₀, the conditions 1), 3), 4) of p. 5; under idempotency E₀ is reflective with a colimit-preserving reflector and F₀ coreflective; the descent of p. 6.",
     found:
-      "Nothing wrong. The fifth condition of p. 3 repeats the second word for word. The descent of p. 6 holds without β fully faithful, which the page assumes. Not proved: the reconstruction of an idempotent adjunction from (E₀, F₀, E₀ ≃ F₀), pp. 9–19.",
+      "Nothing wrong. The fifth condition of p. 3 repeats the second word for word. The descent of p. 6 holds without β fully faithful, which the page assumes. Not proved: the reconstruction of an idempotent adjunction from (E₀, F₀, E₀ ≃ F₀), pp. 9–19. The idempotent-adjunction statements are proposed to mathlib (#44723); the reflector’s preservation of colimits was already there, as for any left adjoint.",
     verdict: 'holds, more generally',
     lean: 'lean/Grothendieck/Folder161_1.lean',
     theorems: ["condition1", "condition2", "five_conditions_tfae", "fixedEquiv", "reflectorAdj", "reflector0_preservesColimits", "condition4", "descent"],
@@ -148,7 +148,7 @@ export const PROOFS: Proof[] = [
     statement:
       'For M finitely presented, M ⊗ ∏ Pᵢ ≅ ∏ (M ⊗ Pᵢ); if every finitely generated module is finitely presented (« par exemple A noethérien »), a product of flat modules is flat; a countable strict limit of projectives is flat.',
     found:
-      '« Par exemple A noethérien » is misleading: the hypothesis of 3.4 is equivalent to Noetherian, and the proof needs only a coherent ring. 3.5 is proved for ℕ-indexed systems with surjective maps. Not proved: formal smoothness and Cohen algebras.',
+      '« Par exemple A noethérien » is misleading: the hypothesis of 3.4 is equivalent to Noetherian, and the proof needs only a coherent ring. 3.5 is proved for ℕ-indexed systems with surjective maps. Not proved: formal smoothness and Cohen algebras. Three general lemmas are proposed to mathlib: products of flat modules (#44714), ⊗ with a finitely presented module commutes with products (#44715), and Noetherian iff every finitely generated module is finitely presented (#44716).',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder22.lean',
     theorems: ['lemme3_3', 'corollaire3_4', 'corollaire3_5', 'hypothese_iff_noetherien'],
@@ -174,7 +174,7 @@ export const PROOFS: Proof[] = [
     statement:
       'Over a Noetherian ring, an I-torsion module H is injective iff Hom(−, H) is right exact on finitely generated modules killed by a power of I; Γ_I preserves injectives.',
     found:
-      'Nothing false. Artin–Rees must be used with the ambient module in the intersection — the reading’s correction to the page’s N ∩ IᵐN. Not proved: 2.1–2.14, the sheaf and Hartogs half.',
+      'Nothing false. Artin–Rees must be used with the ambient module in the intersection — the reading’s correction to the page’s N ∩ IᵐN. Not proved: 2.1–2.14, the sheaf and Hartogs half. Injectivity of the I-primary component of an injective module over a Noetherian ring is proposed to mathlib (#44724).',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder21.lean',
     theorems: ['proposition2_15', 'corollaire2_16'],
@@ -187,7 +187,7 @@ export const PROOFS: Proof[] = [
     statement:
       'If A is I-adically complete, a₀, …, a_{N−1} ∈ I and a_N a unit, F is regular and every G is QF + r uniquely with deg r < N; the same when a₀, …, a_{N−1} are nilpotent.',
     found:
-      'Nothing wrong; it follows from classical Weierstrass division. Not proved: the general linearly topologised case, and the exact hypothesis aᵢ ∈ √I.',
+      'Nothing wrong; it follows from classical Weierstrass division. Not proved: the general linearly topologised case, and the exact hypothesis aᵢ ∈ √I. Weierstrass division over an I-adically complete ring is already in mathlib; the missing completeness for a nilpotent ideal is proposed (#44725).',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder39.lean',
     theorems: ['preparation_adique', 'preparation_discrete'],
@@ -200,7 +200,7 @@ export const PROOFS: Proof[] = [
     statement:
       'For an adjunction f ⊣ g with comparison functor h: a) if A has equalizers and f preserves them, h is essentially surjective; b) h is an equivalence if and only if f is conservative and, for every pair (u, v) whose image under f has an equalizer, the equalizer of (u, v) exists and f preserves it (condition C). Over a product base B = ∏ Bᵢ (pp. 7–9), the comonad fg is a matrix φ_ji = f_j g_i with comultiplication λ_kji, determined by its entries when the f_j preserve products; with fully faithful g′, g″ it collapses to two crossed functors and two units.',
     found:
-      'a) and the « if » of b) hold — Beck’s theorem. The « only if » of b) is false as the page states it: the inclusion of the pairs of sets (X, Y) with Y ≠ ∅ ⇒ X ≠ ∅ is coreflective, hence comonadic and conservative, yet the pair (∗, ∗) ⇉ ({0, 1}, ∗) has equalizer (∅, ∗) below and (∅, ∅) above. The reading had called condition C Beck’s f-split condition; it is not, and the reading is corrected. Gabriel–Popescu holds in the reading’s form and is classical. On p. 7, the proviso « ou I fini » is false: a left adjoint need not preserve finite products (f = Bool × − on sets gives 2 elements against 4); exactness is the hypothesis that works.',
+      'a) and the « if » of b) hold — Beck’s theorem. The « only if » of b) is false as the page states it: the inclusion of the pairs of sets (X, Y) with Y ≠ ∅ ⇒ X ≠ ∅ is coreflective, hence comonadic and conservative, yet the pair (∗, ∗) ⇉ ({0, 1}, ∗) has equalizer (∅, ∗) below and (∅, ∅) above. The reading had called condition C Beck’s f-split condition; it is not, and the reading is corrected. Gabriel–Popescu holds in the reading’s form and is classical. On p. 7, the proviso « ou I fini » is false: a left adjoint need not preserve finite products (f = Bool × − on sets gives 2 elements against 4); exactness is the hypothesis that works. Beck’s comonadicity theorem as an iff is proposed to mathlib (#44727); both directions were already there separately.',
     verdict: 'false on the page',
     lean: 'lean/Grothendieck/Folder19.lean',
     theorems: ['theoreme_a', 'theoreme_b_suffisance', 'theoreme_b_necessite_fausse', 'beck_iff', 'gabriel_popescu', 'matrice', 'comult_matrice', 'lam_isIso_left', 'deuxFacteurs_left', 'matrice_fini_fausse'],
@@ -213,7 +213,7 @@ export const PROOFS: Proof[] = [
     statement:
       'The crude monadicity theorem (p. 33); the descent criterion (p. 34); a cocomplete category is locally presentable iff it has a small dense subcategory of presentable objects (p. 61); for Σ with finite colimits, Ind(Σ) is the category of left-exact presheaves on Σ (p. 77).',
     found:
-      'Nothing false. The descent criterion needs no topos: it holds for any left-exact conservative left adjoint out of a category with finite limits. Not proved: the p. 54 theorem on π-accessible categories and the non-accessibility of (Ens)° and (Ab)°.',
+      'Nothing false. The descent criterion needs no topos: it holds for any left-exact conservative left adjoint out of a category with finite limits. Not proved: the p. 54 theorem on π-accessible categories and the non-accessibility of (Ens)° and (Ab)°. The descent theorem is already in mathlib, as a case of the comonadicity criterion.',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder161_2.lean',
     theorems: ['monadicite', 'descente', 'caracterisation_gabriel_ulmer', 'lemme_ind'],
@@ -356,7 +356,7 @@ export const PROOFS: Proof[] = [
     statement:
       'For linear maps u, v between finite-dimensional inner product spaces, σ_n^m(u + v) ≤ Σ_{p ≤ m} σ_n^p(u) σ_n^{m−p}(v), σ_n^m the elementary symmetric functions of the first n singular values; the system implies ∏(1 + r s_i(u + v)) ≤ ∏(1 + r s_i(u)) ∏(1 + r s_i(v)).',
     found:
-      'Proved for m ≤ 1 and every n, which is Ky Fan’s inequality, absent from mathlib; the maximum principle needs only orthogonal families of norm ≤ 1. The implication from the system to the product form holds. The cases 2 ≤ m ≤ n go through Hilbert exterior powers, which mathlib lacks, and compact operators are not attempted.',
+      'Proved for m ≤ 1 and every n, which is Ky Fan’s inequality, absent from mathlib; the maximum principle needs only orthogonal families of norm ≤ 1. The implication from the system to the product form holds. The cases 2 ≤ m ≤ n go through Hilbert exterior powers, which mathlib lacks, and compact operators are not attempted. Ky Fan’s inequality, absent from mathlib, is proposed there (#44728).',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder1.lean',
     theorems: ['sum_singularValues_add_le', 'sigma_system_of_le_one', 'prod_le_of_sigma_system', 'one_add_singularValues_zero_le'],
