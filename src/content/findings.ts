@@ -8185,4 +8185,128 @@ export const FINDINGS: Finding[] = [
     settle:
       'The statement (the canonical isomorphism, the crystal property of de Rham cohomology) is matched — Grothendieck, « Crystals and the de Rham cohomology of schemes » (Dix exposés, 1968) and Berthelot, Cohomologie cristalline (LNM 407, 1974), as the reading notes. What is open is only the route: look in those two, in Berthelot–Ogus, Notes on crystalline cohomology (1978), §§ on independence of the lifting, and in Illusie, Complexe cotangent et déformations I (LNM 239), for the device of the extension of ℤ by 𝒢 attached to a torsor used to produce a choice-free derived morphism. If it is there, mark matched; if those sources use Čech data instead, mark candidate, as a route only.',
   },
+  // Folder 79 — /find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-11, over transcripts/79/79.modern.tex (% Pass: Opus 5.5, 2026-10-11) and batch-01..15.fr.tex; same model as the reading. Literature consulted: D. Singerman and J. Strudwick, « The Farey maps modulo N », arXiv:1803.08851v1 (2018), read in §§ 3–10 (Theorems 4, 9, 11, 12); two general web searches (2026-10-11), one on Farey graphs mod N and twin vertices, one on the centraliser of SL(2, R)/±1 on unimodular vectors and the 2R = {0, 2} case, which turned up nothing on point.
+  // Dropped as matches (footnoted in the reading): SP_M as the Farey tessellation and its quotient by Γ(n) on X(n), the genus formula and the n ≤ 5 / n = 6 trichotomy (pp. 21–26); the cartographic groups as PSL(2, Z), PGL(2, Z) and the amalgam presentation of SL(2, Z) (pp. 26–37); the normaliser of the unipotent group being the Borel (p. 93); commutant ≅ N_G(U)/U (pp. 92, 179); the hemi-icosahedron (p. 115); arc-transitive graphs as coset graphs (pp. 242–244); the B, N, T, U notation of Tits systems (pp. 266–269); a vertex torsor over a graph as a voltage graph (pp. 233–234); the polarity reading of pp. 198–201; the action of (Z/n)*/±1 on polygon structures by star polygons (p. 138), which is classical as stated.
+  // Dropped as the edition's or the page's errors, not novelties: connectedness of SP_M over Z (p. 21, supplied by the reading); exactness of 0 → R_M → Z^(M*) → M → 0 for Λ = Λ_0 (p. 82, supplied); the proof of Aut(P_M) = GL(M)' (p. 89 c), supplied, and a short corollary of b)); every footnoted repair listed in the reading's header.
+  {
+    id: '79-semilocal-diameter-three',
+    cote: '79',
+    pages: '19–20',
+    kind: 'mathematical',
+    claim:
+      'For M free of rank 2 over any semi-local ring Λ and any gauge e, any two vertices of the triangulation SP_M (vertices M*/±1, edges the pairs with x ∧ y = ±e) are at combinatorial distance at most 3.',
+    basis:
+      'Page 19 joins x to y through z = λx + λy whenever (x, y) is a basis with e = λ x ∧ y; page 20 uses that over a semi-local ring any two unimodular vectors have a common basis partner z, rescales z so that x ∧ z = e, and inserts z′ by the same trick, giving (47) x ∧ z = z ∧ z′ = z′ ∧ y = e. The page adds that the bound is attained for the icosahedron (Λ = Z/5). The sign in z = λx + λy is overwritten in the transcription, but the choice of sign does not affect the argument.',
+    ours:
+      'The page cites the common basis partner over a semi-local ring as known (« on sait que »), and the reading does not prove it either: it follows from the fact that the plane minus two lines over any field is non-empty, together with the Chinese remainder theorem.',
+    literature: [
+      'Singerman & Strudwick, « The Farey maps modulo N », arXiv:1803.08851, § 10.1, Theorem 11: the diameter of M₃(n), the Farey map modulo n (= SP_M for Λ = Z/n), is 3 for every n ≥ 5, by Lemma 10 and a congruence computation. That is the case Λ = Z/n, with equality, and it says nothing about other rings.',
+    ],
+    status: 'candidate',
+    settle:
+      'For Λ = Z/n this is matched by Singerman–Strudwick, Theorem 11. What remains open is the extension to every semi-local ring. Look for Farey graphs or unimodular-row graphs over finite and semi-local rings: Farey graphs over Z[i] and Z[ω], and the « unimodular graph » or « unitary graph » of a ring in algebraic graph theory. Mark matched if the semi-local bound is stated there. The argument is two lines, so a match is likely.',
+  },
+  {
+    id: '79-homothety-distance-three',
+    cote: '79',
+    pages: '187–188',
+    kind: 'mathematical',
+    claim:
+      'A non-trivial homothety λ of a regular triangulated 2-polyhedron (an element of the commutant of its automorphism group) moves no vertex to an adjacent one or to one at distance 2, octahedral antipody excepted; when λ^{-1}s lies within distance 3 of s, the distance is therefore exactly 3. In the model, the units μ ≠ ±1 acting on the Farey map mod n, each vertex is at distance exactly 3 from its images.',
+    basis:
+      'Page 188, (32) a″): the distance from λ^{-1}s to s is ≤ 3 « et en fait, égale à 3 … sauf si λ = identité, ou dans le cas de l’octaèdre et λ = l’antipodisme (où elle est 2) ». Distance 1 is excluded by the stabilisers (p. 110, (31)), and distance 2 forces equal stars, hence the octahedron. The qualifying clause after « égale à 3 » carries an \\ill{} and an \\uncertain{si}, as does « stabilisateurs ».',
+    ours:
+      'The reading supplies the passage from « one common neighbour » to « same star », using that G_{0s} fixes λ^{-1}s and is transitive on the star of s, and it cites the lemma of p. 275 (two vertices with the same star force a double pyramid) for the octahedral case. The application to the units of Z/n is this pass’s own.',
+    literature: [
+      'Singerman & Strudwick, « The Farey maps modulo N », arXiv:1803.08851, § 10, Theorem 9: the distance between two distinct poles a/0 of M₃(n) is 3. The poles are the φ(n)/2 images of 1/0 under the scalars, that is the orbit of the folder’s Z′_n = (Z/n)*/±1, so this is the model case of the folder’s statement.',
+    ],
+    status: 'matched',
+    settle:
+      'The model case is matched by Singerman–Strudwick Theorem 9. The abstract form, for any regular triangulation and any element of the commutant, is a short argument that is likely to be folklore, and the page carries part of it on illegible words. Nothing further is worth searching unless someone wants the abstract statement in print.',
+  },
+  {
+    id: '79-commutant-octahedral-exception',
+    cote: '79',
+    pages: '92–95',
+    kind: 'mathematical',
+    claim:
+      'For any commutative ring Λ with 2 ≠ 0 and M free of rank 2, the permutations of M*/±1 that commute with SL(M)/±1 are exactly the scalars Λ*/±1, except when the ideal 2Λ is {0, 2}. In that case the commutant is Λ*/±1 × {1, σ}, with σ induced by the matrix with rows (1, 0) and (2, 1); for Λ = Z/4 this extra element is the antipody of the octahedron.',
+    basis:
+      'Page 93 computes the conjugate of the matrix with rows (1, t) and (0, 1) under g and finds the normaliser in SL(2, Λ): the upper triangular matrices. Pages 94–95 redo it modulo ±1: either ac = 0, which gives c = 0, or ac = 2, which forces 4 = 0 and 2t ∈ {0, 2} for all t. Page 95 concludes on the two cases. The page carries the direct product (« pas seulement ½direct ! ») and Z/4 as the typical case. The diagonal marginal note naming σ is fragmentary (several \\ill{} and \\uncertain{}).',
+    ours:
+      'The reading restates the result in modern terms and cross-refers it to the lemma of pp. 276–279. It does not re-derive the direct-product claim; this pass has not checked it either, beyond the case Λ = Z/4.',
+    literature: [
+      'Web search, 2026-10-11: « centralizer of SL(2,R)/{±1} acting on unimodular vectors modulo sign, commutative ring, normalizer unipotent subgroup, exception 2R = {0,2} ». No source on point. The hits were on normalisers of congruence subgroups in SL₂(ℝ), centralisers in SL₂(Z[1/p]), and E(2, A)-normal subgroups when 2 is not a unit (Menal–Vaserstein, as reported); none was read.',
+    ],
+    status: 'unsearched',
+    settle:
+      'Read the normaliser computations for the unipotent radical of SL₂ over rings: Menal & Vaserstein on SL₂ of local rings without 1/2, and Bass, « K-theory and stable algebra », for E₂-normal subgroups. Check whether the quotient by ±1 and the ring condition 2Λ = {0, 2} ≠ {0} appear. Check the direct-product claim independently for Λ = Z/4[ε] or F₂[t]/(t²)-extensions before treating it as established.',
+  },
+  {
+    id: '79-vertex-determined-by-star',
+    cote: '79',
+    pages: '275–279',
+    kind: 'mathematical',
+    claim:
+      'Over a semi-local ring Λ, two unimodular vectors u, u′ of a free rank-2 module with the same neighbours, type by type (u ∧ x a unit ⇒ u′ ∧ x = ±u ∧ x), satisfy u′ = ±u, unless 2Λ = {0, 2} ≠ {0}; in that case there is a fixed-point-free involution a of M*/±1 with the same stars in every type, induced by an element of GL(M) of determinant −1 (the octahedral antipody for Z/4).',
+    basis:
+      'Page 275 proves the combinatorial half: two distinct vertices with one star make a double cone. Pages 276–277 prove the algebraic statement. Equal neighbourhoods give colinearity in every residue field, hence a basis with u = e + f and u′ = e ± f, and u′ = e − f forces 2α or 2(1 − α) to vanish for every α. Pages 277–279 build the involution a from 2M ≃ M ⊗ k_{i₀} and show det a = −1. The transcription notes that a conclusion on p. 277 is written α − β ∈ ±(α − β) where α + β is meant. On p. 278 the letter N and the exponent of F₂ are readings. The last line of p. 279 breaks off.',
+    ours:
+      'The reading checks for Z/4 that a is the class of the matrix with rows (1, 2) and (2, −1). It also notes that the page leaves open whether, in the exceptional case, further vertices share a star. The page itself says so (« il n’est pas vrai nécessairement … »).',
+    literature: [
+      'Singerman & Strudwick, « The Farey maps modulo N », arXiv:1803.08851, § 8 (Theorem 4, the star of a/c as {(ak + b)/(ck + d)}) and § 10.1 (Theorem 12, a criterion for distance 2 from 1/0). Neither states when two vertices share a star, and both are confined to Λ = Z/n and a single type.',
+      'Web search, 2026-10-11, on Farey graphs modulo N and vertices with the same neighbourhood: nothing on twin vertices.',
+    ],
+    status: 'unsearched',
+    settle:
+      'For Λ = Z/n the statement reduces to « twins only for n = 4 » in the Farey map mod n, which is likely to be known or easy from Singerman–Strudwick Theorem 12. Search first for that. The semi-local statement, and its exact exceptional class of Z/4-algebras, should then be looked for in work on unimodular graphs or projective lines over rings (Veldkamp, « Geometry over rings », and the literature on the projective line over a ring and its distant graph). That literature is the most likely place for a match, and it was not read.',
+  },
+  {
+    id: '79-star-polygon-twist',
+    cote: '79',
+    pages: '136–140, 184–187',
+    kind: 'mathematical',
+    claim:
+      'The triangulations P_{M,i} (i a type) on the common vertex set M*/±1 over Z/n are carried into one another by an operation intrinsic to the triangulation: keep each vertex star as a set, redraw its induced n-gon as the ν-th star polygon (ν ∈ (Z/n)*/±1), and recentre it at the image vertex. The folder isolates the condition, To 6, under which homotheties act this way and inject into (Z/n)*/±1.',
+    basis:
+      'Page 138 states the « fait mirifique » (32): (Z/n)*/±1 acts on polygon structures of an n-element set. Page 139 states To 6 and A_λ = A^{(ν)}, and the following pages derive Z ↪ Z′_n except for the octahedron. Pages 184–187 recover it from the commutant: the two polygon structures on a star share their rotation group, whence ν, independent of the vertex, (29). Page 141 asks whether, for every triangulation with vertices of order 7, the twist by ν = 2 is again a triangulation, and leaves it open. Several connecting words on pp. 138–139 are \\uncertain{}.',
+    ours:
+      'That in the model the twist by ν = μ is exactly the passage from P_{M,i} to P_{M,μi} (T_μ ↦ μ, no exponent) is the reading’s computation, not the page’s. The page’s own formulas (65)–(66) carry an illegible exponent. This pass disagrees with one footnote of the reading. The reading identifies the operation with Wilson’s operator H_j and with map exponents. As this pass reads them, H_j keeps the graph and changes the rotation at each vertex, so it generally destroys triangular faces. The folder’s twist instead changes the edge set and keeps triangles, the new star of λs being the old star of s as a set. The two are related but are not obviously the same operation. This pass has not settled that question, and the reading’s footnote should not be taken as a match.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Read Wilson, « Operators over regular maps », Pacific J. Math. 81 (1979), and Nedela & Škoviera, « Exponents of orientable maps », Proc. LMS 75 (1997). Decide whether the folder’s twist (each link polygon replaced by its ν-th power, the centre moved by a commutant element) is H_ν, its dual, or a composite with a duality or hole operator. If it is one of these, mark matched and record which. If not, check Jones & Thornton, « Operations on maps, and outer automorphisms » (JCT B 35, 1983), before leaving it as a candidate. Page 141’s question for arbitrary triangulations with vertices of order 7 is a separate open item.',
+  },
+  {
+    id: '79-homothety-groups-as-subgroups',
+    cote: '79',
+    pages: '242–247',
+    kind: 'mathematical',
+    claim:
+      'For a graph whose automorphism group H is simply transitive on arcs, given as the coset graph of (H, U₀, σ), a faithful commutative group Z of « homotheties » (permutations commuting with H with λ Et(t) = Et(λ^{-1}t)) is equivalent to a subgroup T_H ⊂ H such that σ normalises T_H and inverts it, T_H normalises U₀, and U₀ × T_H × U₁ → H is injective (U₁ = σU₀σ^{-1}).',
+    basis:
+      'Page 245 defines T_H = {u : us₀ = λs₀, ut₀ = λ^{-1}t₀} and proves (81)–(82). Pages 246–247 prove (84)–(87) and state the equivalence (88), with the margin « [ ] résulte des autres ». The reading takes the form (89) of the « particulièrement jolie » case 𝔷_H = 1. The converse direction on p. 247, that such a T_H gives homotheties, is partly illegible: several \\ill{} and an \\uncertain{} sit in the very lines that check commutativity and the homothety condition.',
+    ours:
+      'The reading corrects (70 b) on p. 242 to u(s₀, t₀) = (λs₀, λ^{-1}t₀), without which the condition contradicts (72). It also writes the condition as injectivity of U₀ × T_H × U₁ → H, where the page has [T U₀] ∩ U₁ = 𝔷_H; the two are equivalent when 𝔷_H = 1. The identification with the torus and the big Bruhat cell of SL(2, Z/n)/±1 is the reading’s.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'First check that the converse really holds: given T_H with these properties, verify the homothety condition λ Et(t) = Et(λ^{-1}t) and the faithfulness (72). Then search the literature on arc-regular graphs and regular maps for « graph automorphisms commuting with an arc-regular group » or the « centraliser of the automorphism group in Sym(V) » acting by twisting one end of each edge. Candidates are Sabidussi-type coset-graph descriptions, Conder and Nedela on regular maps with a given automorphism group, and Lorimer on symmetric graphs. A match is possible under another name.',
+  },
+  {
+    id: '79-pages-33-35-dated-1982',
+    cote: '79',
+    pages: '33, 35',
+    kind: 'codicological',
+    claim:
+      'Pages 33–35 refer to a « formulaire 1981 » and to a convention chosen « l’an dernier » in it, so these leaves were written in 1982 or later, a narrower bound than the inventory’s « à partir de 1980 ».',
+    basis:
+      'Page 33 (author’s p. 16): « on tombe pile sur les formules du formulaire 1981, qui avaient été obtenues par voie topologico-transcendante ». Page 35 (author’s p. 17): « l’an dernier j’ai choisi délibérément l’image de ρ_∞ comme λ_∞ = ρ^{-1} … pour avoir un élément d’ordre 6 », the choice of that formulaire (87). Both are legible in batch-02.fr.tex.',
+    ours:
+      'The inference is the reading’s, and it is an inference: it assumes that « l’an dernier » refers to the year of the « formulaire 1981 », and that the formulaire’s date is the year it was made. Neither the formulaire nor a date is in this folder.',
+    literature: ['Transcription 79, batch 2 (batch-02.fr.tex), pages 33 and 35'],
+    status: 'candidate',
+    settle:
+      'A person checks the two passages against the facsimile and looks for the « formulaire 1981 » elsewhere in the fonds; the dessins d’enfants folders (81, 88), which the reading cross-refers, are one place to look. Note that this dates the leaves that make the reference, not the folder.',
+  },
 ];
