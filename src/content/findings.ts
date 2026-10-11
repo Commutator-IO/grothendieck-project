@@ -1665,6 +1665,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'That Hom(GL(n, ℝ), {±1}) = {1, sg ∘ det} is classical, and so is the orientation torsor; the question is only whether orientation has been characterised, up to unique isomorphism, by axioms on its boundary (Stokes) maps for half-spaces. Look in Bourbaki’s treatment of the orientation of vector spaces over an ordered field (Algèbre), in P. Deligne and D. Freed, « Sign manifesto » (Quantum Fields and Strings: A Course for Mathematicians, vol. 1, AMS, 1999), in the discussions of boundary-orientation conventions in Bott–Tu, Differential Forms in Algebraic Topology, and in Greub, Linear Algebra, and, for the determinant analogue that page 55 prepares, in Knudsen–Mumford (Math. Scand. 39, 1976). All are cited from memory. If the characterisation is stated in any of them, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+    lean: { file: 'lean/Grothendieck/Folder68.lean', found: "Holds as stated: every morphism of theories is an isomorphism, any two theories are related by exactly one, and GL(n, ℝ) acts on Ω(ℝⁿ) by sg∘det; a) and uniqueness need only the bijectivity of the Stokes maps (an axiom, as the reading says), the opposite-half-space axiom being used only for existence." },
   },
   {
     id: '68-games-redactions-order',
@@ -7450,6 +7451,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read Monson–Schulte I–III and their « Modular reduction in abstract polytopes » for any treatment of H3 over Z[τ] including p = 2 and 5 and of the geometric incidences of the reduced orbit, and search the literature on finite (Galois) geometries for an icosahedron in AG(3, 4) or AG(3, 5) with the incidence check; independently, have a person re-run the minors over Z[α].',
+    lean: { file: 'lean/Grothendieck/Folder70.lean', found: "Partly: the incidence part holds over every nonzero ring with α² + α = 1, hence at every prime including 2 and 5 (distinct vertices, no three collinear, no vertex in a foreign face plane), by the page’s homogeneity argument with kernel-checked word tables and 30 unit minors; the quadric statements (unique quadric, discriminant −α − 3, smooth away from 5) are not proved." },
   },
   {
     id: '70-icosahedron-char5-conic',
@@ -7470,6 +7472,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Find whether any account (Klein, Coxeter, Conway–Sloane, finite-geometry literature, or work following the Esquisse §4) obtains the identification as the mod-5 reduction of a realisation of the icosahedron with the circumscribed sphere degenerating to the isotropic cone; the abstract fact A5 ≅ PSL(2,5) on six points is certainly classical, so the entry stands or falls on the geometric route alone.',
+    lean: { file: 'lean/Grothendieck/Folder70.lean', found: "Holds as stated over 𝔽₅: the vertices are isotropic about the centre, the conic q₀ = 0 is exactly the six vertex directions, the 6 + 15 + 10 directions are the 31 points of ℙ²(𝔽₅), and the 24 nonzero isotropic vectors are the icosahedron and its double; the edition’s exterior/interior reading of edge and face directions is also proved (two tangents, none)." },
   },
   {
     id: '70-universal-formulae-double-cosines',
@@ -7639,7 +7642,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Decide whether the coefficientwise system, and not just its consequences for concave f, is in Rotfel\'d (1967, 1969), Thompson ("Convex and concave functions of singular values of matrix sums", 1976), Marshall–Olkin–Arnold ch. 9–10 (elementary symmetric functions and weak majorisation), Bhatia, Matrix Analysis, ch. IV, or Simon, Trace Ideals, ch. 3. Two web searches made in this pass (2026-10-10) turned up Seiler–Simon and the Thompson–Freede and Bourin–Uchiyama line, and no statement of this system. Those results were not read, so they are not a search of the sources.',
-    lean: { file: 'lean/Grothendieck/Folder1.lean', found: "Partly, in finite dimension: the case m = 1 (Ky Fan’s inequality, for every n) and the implication from the system to the product form are proved; the cases 2 ≤ m ≤ n, which go through exterior powers, and compact operators are not." },
+    lean: { file: 'lean/Grothendieck/Folder1.lean', found: "Partly, in finite dimension: the cases m ≤ 2 for every n (m = 1 is Ky Fan’s inequality; m = 2 follows the page’s Λ² route written with 2×2 minors, and holds as stated) and the implication from the system to the product form, hence (15) for n ≤ 2, are proved; the cases 3 ≤ m ≤ n and compact operators are not." },
   },
   {
     id: '1-mixed-schwarz-fredholm-coefficients',
