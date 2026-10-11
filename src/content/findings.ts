@@ -8132,4 +8132,57 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person checks on the facsimile whether pages 55 and 56 are recto and verso of one sheet (written verso first, or the sheet turned) or separate leaves misfiled, and whether page 46 is on a different paper or in a different ink from pages 45 and 47.',
   },
+// Folder 93 — /find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-11, over the Opus 5.5 reading of 2026-10-11 (same model; no disagreement with the reading to record).
+// Dropped as matches already footnoted in the reading: station IV (Grothendieck–Messing, Mazur–Messing, Tate, Fontaine), the oper / projective-connection dictionary (VII–X), Cartier isomorphism, Tate residues, Hasse–Witt/Cartier–Manin duality, Cartier descent, Katz–Oda, the p-curvature question (Grothendieck–Katz), χ − χ_! for locally conic spaces. Dropped as repaired by the reading: p. 203 (dimension of logarithmic forms), p. 184 (sign of the determinant). The Q × Q → Ω¹ Cartier pairing (pp. 181–185) is left out as most likely in Raynaud 1982; not checked.
+  {
+    id: '93-integral-schwarzian-level-p2',
+    cote: '93',
+    pages: '71–73, 120–123',
+    kind: 'mathematical',
+    claim:
+      'The Schwarzian difference written with divided derivatives, G₀(t,s) = −D⁽³⁾s/D⁽¹⁾s + (D⁽²⁾s/D⁽¹⁾s)² = G/12, is an ω^{⊗2}-valued cocycle defined over any base, characteristics 2 and 3 included, and its vanishing forces a homography at Frobenius level p for p > 3 but only at level p² for p = 2, 3: over A with Pic(A) = 0, an s ∈ A[T]/(T^{p^N} − α) with D⁽¹⁾s a unit and G₀(t,s) = 0 is (at + b)/(ct + d) with a, b, c, d ∈ A, for N = 1 when p > 3 and N = 2 when p = 2, 3.',
+    basis:
+      'Page 72 replaces derivatives by D⁽ⁱ⁾ = (1/i!)dⁱ/dtⁱ over a variable base, says the coefficients 2 and 3 forbid G and that G₀ = G/12 must be taken, and asserts uniqueness up to sign over ℤ; page 120 proves G = 12 G₀ and builds the finer torsor Conn₀ under ω^{⊗2}; a margin of page 121, marked « OK », says the functions killed by D⁽¹⁾, D⁽²⁾, D⁽³⁾ are O^{(p)} for p ≠ 2, 3 and O^{(p²)} otherwise; the Proposition of pages 121–122 proves the case p > 3 by normalising s ≡ t mod t³ and showing a·C(d,3) = 0 for the first term a·t^d, 3 ≤ d ≤ p − 1; page 123 does p = 2 (only d = 3) and p = 3 (the struck first attempt replaced by a right-hand column, added afterwards, using Lucas: no carry in 3 + (d − 3) for d ≤ 8).',
+    ours:
+      'The reading restates pages 120–123 without change. This pass checked the arithmetic on its own: C(d,3) mod 3 for d = 3, …, 8 is 1, 1, 1, 2, 2, 2, and C(9,3) ≡ 0 mod 3, C(4,3) ≡ 0 mod 2, consistent with the level p² of the margin (a cube f³ is not a constant for D⁽³⁾, since D⁽³⁾(f³) = (D⁽¹⁾f)³, which is why p = 3 needs p²). What the pages do NOT establish: the Proposition is local, on one p-basis neighbourhood with t fixed; the global injectivity of the quotient of 𝒫_{X/S} by homographies over O′ into Conn₀ is only hoped for (« On peut espérer », page 121, with « injectifs » \\uncertain{}); uniqueness of G₀ up to sign over ℤ (page 72) is asserted, not proved; the characteristic-p uniqueness of Remark 3 (page 73) has a margin reading « \\uncertain{faux} … d’ordre p ? ». Transcription: on page 121 the exponents (2) and (3) are hard to tell apart and are read from page 122; « uniques … scalaire » is \\uncertain{}; on page 123 « unicité » and « modulo vérification » are \\uncertain{}; on page 72 « schéma » and « lisse » are \\uncertain{}. The test value G₀(t,t²) on page 72 is miscomputed on the page (the reading footnotes it); it does not bear on the claim.',
+    literature: [
+      'Y. Hoshi, « A note on Schwarzian derivatives and Sugiyama–Yasuda locally exact differentials », Osaka J. Math. 61 (2024), 313–333 — introduction, §3 (Definitions 3.2–3.4, Theorem 3.5, Corollary 3.6), §6 (Definition 6.2, Lemma 6.3, Remark 6.4.2) and bibliography read. The level-1 projective invariant there is the classical Schwarzian with coefficients 2 and 3, set to 0 for p = 2 and noted to vanish identically for p ≤ 3 (Remark 6.4.2); the level-2 invariant in characteristic 2 is Sugiyama–Yasuda’s, valued in the locally exact differentials B_X, not in ω^{⊗2}. No divided-derivative Schwarzian, nothing on p = 3 at level 2. Not found there.',
+      'Y. Wakabayashi, « Frobenius-Ehresmann structures and Cartan geometries in positive characteristic », arXiv:2109.02826v1 (2021) — introduction and §1.7 read, full text searched for « Schwarz » and « Hasse »: p is an odd prime throughout and no Schwarzian is written. Not found there.',
+    ],
+    status: 'candidate',
+    settle:
+      'The decisive sources are unread: Y. Ihara, « Schwarzian equations », J. Fac. Sci. Univ. Tokyo IA 21 (1974), 97–118 (Hoshi’s reference for the Schwarzian in characteristic p, his [4]); Y. Hoshi, « Frobenius-projective structures on curves in positive characteristic », Publ. RIMS 56 (2020), 401–430, §2 (pseudo-coordinates, Proposition 2.8); Y. Sugiyama and S. Yasuda, « Belyi’s theorem in characteristic two », Compos. Math. 156 (2020), 325–339, §2. If any of them writes G/12 with Hasse derivatives, or proves rigidity at level p² for p = 2 or 3, mark matched. A finer question that would also settle what is the page’s: whether, for (p, N) = (2, 2), G₀ and the Sugiyama–Yasuda invariant determine each other — an orienting web search turned up no source treating this.',
+  },
+  {
+    id: '93-p100-author-page-one',
+    cote: '93',
+    pages: '100–105',
+    kind: 'codicological',
+    claim:
+      'Page 100, a draft the author numbered « 1 », is most likely the first page of the run he numbered 2, 2 bis, 3, 4, 5 (pages 102, 103, 104, 105, 101), so that his order of these leaves is 100, 102, 103, 104, 105, 101.',
+    basis:
+      'Page 100 carries a circled « 1 »; pages 101–105 carry circled 5, 2, 2 bis, 3, 4 (transcription notes), and the note to page 101 says his page 1 « n’est pas dans ce lot » (batch 06 starts at page 101). Page 100 ends on the decomposition v_s ∈ Γ(𝔤 ⊗ ω) = ω² ⊕ ω ⊕ ω⁰ of 𝔤 ⊗ ω, and page 102 (his 2) opens on « ω + O_X ξ₀ + ω⁻¹ v_{s₀} »; page 100 identifies sections of P disjoint from σ with connections on ω, which is where page 104 (his 3) resumes.',
+    ours:
+      'The link is this pass’s: neither the transcription nor the reading makes it. The reading calls page 100 « un brouillon numéroté 1 » and places it in station VII, and says that in his order the calculation « commence page 102 ». Page 100 is draft-like, its first line struck and much of it \\uncertain{}, so the continuity rests on the mathematics of two lines, not on a sentence carried across.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Compare on the facsimile the paper, ink and circled numerals of page 100 with those of pages 101–105, and check whether the last line of page 100 runs on into the first line of page 102. If it does, the reading’s stations VII and VIII should be cut at page 99 rather than at page 100.',
+  },
+  {
+    id: '93-derived-morphism-homotopy-torsor',
+    cote: '93',
+    pages: '233–235',
+    kind: 'mathematical',
+    claim:
+      'A torsor 𝒫 under an abelian sheaf 𝒢 with maps u : 𝒫 → Hom⁰(K′, K″) and k : 𝒢 → Hom⁻¹(K′, K″) satisfying u(p + g) − u(p) = dk(g) + k(g)d defines, without any choice of section or covering, a morphism K′ → K″ in the derived category, by mapping the complex [𝒢 → 𝒢̄] (𝒢̄ the extension of ℤ by 𝒢 with j⁻¹(1) = 𝒫, quasi-isomorphic to ℤ) into Hom•(K′, K″) — a covering-free route to the canonical isomorphism between the de Rham complexes of two liftings over a square-zero thickening.',
+    basis:
+      'Page 233 sets up the torsor of local isomorphisms between two liftings X′, X″ of X₀, under T_{X₀/T₀} ⊗ f₀*I, and the interior-product homotopy; pages 234–235 give the general construction, 𝒢̄, 𝓛 = [𝒢 → 𝒢̄] ≃ ℤ and φ : 𝓛 → ℋ with φ⁻¹ = k and φ⁰|𝒫 = u, and stop on « un homom. de la cat. dérivée ». The pages carry three \\ill{} or \\uncertain{} between them.',
+    ours:
+      'The reading writes the torsor additively and combines two relations the pages write differently (page 233: u(pg) = u(p)v(g) and v(g) − id = dk(g) + k(g)d; page 234: v(g) = dk(g) + k(g)d, which as written omits the identity). The application to the Gauss–Manin connection is the reading’s inference from the title; it is not on the pages. The pass checked that φ is a map of complexes: φ⁰ on 𝒢 is u(p + g) − u(p) = dk(g) + k(g)d, independent of p, which is what makes φ⁰ well defined on 𝒢̄.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'The statement (the canonical isomorphism, the crystal property of de Rham cohomology) is matched — Grothendieck, « Crystals and the de Rham cohomology of schemes » (Dix exposés, 1968) and Berthelot, Cohomologie cristalline (LNM 407, 1974), as the reading notes. What is open is only the route: look in those two, in Berthelot–Ogus, Notes on crystalline cohomology (1978), §§ on independence of the lifting, and in Illusie, Complexe cotangent et déformations I (LNM 239), for the device of the extension of ℤ by 𝒢 attached to a torsor used to produce a choice-free derived morphism. If it is there, mark matched; if those sources use Čech data instead, mark candidate, as a route only.',
+  },
 ];
