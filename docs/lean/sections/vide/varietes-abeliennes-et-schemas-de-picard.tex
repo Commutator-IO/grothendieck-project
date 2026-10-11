@@ -1,14 +1,53 @@
 \domainevide{Les cotes de ce thème supposent les schémas abéliens et le foncteur de Picard, absents de mathlib.}{9, 14, 44, 47, 49, 50, 51, 52, 57, 59, 100, 130, 139}
-\noindent Pistes de l'onglet Findings pour ces cotes, non démontrées ici :
-\begin{itemize}\small\setlength{\itemsep}{0pt}
-\item Cote~14 : un faisceau inversible $L$ sur un schéma projectif est ample dès que $\chi(\mathcal O_Z \otimes L^{\otimes n}) \to +\infty$ pour tout sous-schéma fermé intègre $Z$ de dimension $\geq 1$ (énoncé attribué à Mumford et Nakai). Mathlib n'a pas la caractéristique d'Euler des faisceaux cohérents ni l'amplitude.\piste{14-nakai-euler-characteristic-criterion}
-\item Cote~44 : une page biffée sur les systèmes de racines semble déduire l'intégralité des nombres de Cartan de trois axiomes (finitude, réduction, symétries) ; ces trois axiomes seuls ne l'entraînent pas. Accessible : un contre-exemple d'algèbre linéaire sur $\mathbf Q$, $\Delta = \{\pm 3e_1, \pm 3e_2, \pm(e_1 \pm e_2)\}$, reste à écrire.\piste{44-cartan-integrality-from-axioms}
-\item Cote~59 : le déterminant de la cohomologie du faisceau de Poincaré donne une trivialisation canonique d'un torseur formé d'$\mathrm{Alb}^{\chi(\delta)}_{X/S}$ et de deux torseurs de Picard. Mathlib n'a pas le déterminant de la cohomologie ni le faisceau de Poincaré.\piste{59-determinant-canonical-section}
-\item Cote~100 : sur $S$ localement noethérien, $A \mapsto (A_U, A[p^\infty], \mathrm{id})$ est pleinement fidèle dès que l'ouvert $U$ rencontre chaque composante connexe de $S$, sans hypothèse de normalité ni de réduction. Mathlib n'a pas les schémas abéliens ni les groupes $p$-divisibles.\piste{100-full-faithfulness-connected-components}
-\item Cote~100 : si $f : S' \to S$ est propre et $\mathcal O_S \to f_*\mathcal O_{S'}$ injectif, sans platitude, le changement de base le long de $f$ est pleinement fidèle sur les schémas abéliens. Mathlib n'a pas la descente des morphismes le long d'un morphisme propre.\piste{100-proper-epimorphism-hom-descent}
-\item Cote~100 : un schéma abélien formel sur $\operatorname{Spf} R$ est algébrisable si et seulement si ses changements de base aux normalisés des quotients intègres de dimension un de $R$ le sont. Mathlib n'a pas l'algébrisation des schémas formels.\piste{100-formal-abelian-curve-criterion}
-\item Cote~130 : les fonctions de Weil forment un faisceau de Zariski $QF_X$, extension de $\mathrm{Div}_X$ par $\Phi_X$ ; sur $X$ quasi-projectif, tout diviseur de Cartier est le diviseur d'une quasi-fonction globale. Mathlib n'a pas les fonctions de Weil ni les diviseurs de Cartier.\piste{130-quasi-function-sheaf}
-\end{itemize}
+
+\begin{encadre}
+\begin{conjecture*}[Grothendieck, pages 93 et 94, amplitude par la caractéristique d'Euler\piste{14-nakai-euler-characteristic-criterion}]
+Un faisceau inversible $L$ sur un schéma projectif est ample dès que $\chi(\mathcal O_Z \otimes L^{\otimes n}) \to +\infty$ pour tout sous-schéma fermé intègre $Z$ de dimension $\geq 1$, et de même avec $\dim H^0$ à la place de $\chi$. La page attribue l'énoncé à Mumford et Nakai.
+\end{conjecture*}
+\end{encadre}
+{\small Les feuillets en esquissent une démonstration incomplète (page 94). Ses deux lemmes y sont renvoyés à une \q{lettre de Mumford}. Mathlib n'a pas la caractéristique d'Euler des faisceaux cohérents ni l'amplitude.\par}
+
+\begin{encadre}
+\begin{contrexemple*}[page 4, intégralité des nombres de Cartan\piste{44-cartan-integrality-from-axioms}]\nonverifie
+Dans $\mathbf Q^2$, l'ensemble $\Delta = \{\pm 3e_1, \pm 3e_2, \pm(e_1 \pm e_2)\}$ est fini, engendre un réseau, est réduit et stable par une symétrie pour chaque racine : les axiomes a) à c) de la page biffée sont satisfaits, et les symétries engendrent le groupe de Weyl de type $B_2$. Pourtant le nombre de Cartan $\langle \gamma_{3e_1}, e_1 + e_2 \rangle$ vaut $2/3$ : ces trois axiomes n'entraînent pas l'intégralité.
+\end{contrexemple*}
+\end{encadre}
+{\small Le mot qui gouverne l'assertion de la page est illisible ; on ne sait pas si elle affirme l'intégralité, se propose de la démontrer ou la demande. Le contre-exemple, de l'algèbre linéaire sur $\mathbf Q$, reste à écrire en Lean.\par}
+
+\begin{encadre}
+\begin{conjecture*}[Grothendieck, pages 1 à 22, section canonique par le déterminant\piste{59-determinant-canonical-section}]
+Soient $X/S$ propre et plat, avec $\mathrm{Pic}^0_{X/S} = B$ schéma abélien de dual $A$, et $\delta$ une section de $\mathrm{NS}_{X/S}$. Le déterminant de la cohomologie du faisceau de Poincaré donne une trivialisation canonique du $A$-torseur $\mathrm{Alb}^{\chi(\delta)}_{X/S} \times^A \mathrm{Pic}^{\varphi(\delta)}_{B/S} \times^A (\widetilde{\varphi(\delta)}_*\mathrm{Pic}^\delta_{X/S})^{(-1)}$, où $\varphi : \mathrm{NS}_{X/S} \to \mathrm{NS}_{B/S}$ est une application polynomiale de degré $n - 1$, non additive.
+\end{conjecture*}
+\end{encadre}
+{\small Les feuillets en esquissent une démonstration incomplète (pages 1 à 4 et 16 à 19). La descente y est marquée \q{détailler}, la propriété universelle de $\mathrm{Alb}^1$ annoncée page~22 sans preuve, et l'inverse sur le torseur poussé est de l'édition. Mathlib n'a pas le déterminant de la cohomologie ni le faisceau de Poincaré.\par}
+
+\begin{encadre}
+\begin{conjecture*}[Grothendieck, pages 2, 3 et 20, pleine fidélité et composantes connexes\piste{100-full-faithfulness-connected-components}]
+Soient $S$ un schéma localement noethérien et $U \subset S$ un ouvert tel que toutes les caractéristiques résiduelles de $S - U$ soient égales à $p$. Le foncteur $A \mapsto (A_U, A[p^\infty], \mathrm{id})$ des schémas abéliens sur $S$ vers les triplets est pleinement fidèle dès que $U$ rencontre chaque composante connexe de $S$, sans hypothèse de normalité, de réduction ni de densité schématique.
+\end{conjecture*}
+\end{encadre}
+{\small Les feuillets en esquissent une démonstration incomplète (page 3). Le lemme d'existence de $S_v$ y renvoie à \q{Invariants 1.2}. Mathlib n'a pas les schémas abéliens ni les groupes $p$-divisibles.\par}
+
+\begin{encadre}
+\begin{conjecture*}[Grothendieck, pages 22 à 24, descente des morphismes le long d'un épimorphisme propre\piste{100-proper-epimorphism-hom-descent}]
+Soit $f : S' \to S$ un morphisme propre de schémas localement noethériens tel que $\mathcal O_S \to f_*\mathcal O_{S'}$ soit injectif, sans hypothèse de platitude, et soit $S'' = S' \times_S S'$. Pour tout $S$-schéma $X$ non ramifié et localement de type fini, la suite $\mathrm{Hom}_S(S, X) \to \mathrm{Hom}_S(S', X) \rightrightarrows \mathrm{Hom}_S(S'', X)$ est exacte ; le changement de base le long de $f$ est donc pleinement fidèle sur les schémas abéliens.
+\end{conjecture*}
+\end{encadre}
+{\small Démonstration donnée par l'édition, non vérifiée en Lean. Mathlib n'a pas la descente des morphismes le long d'un morphisme propre.\par}
+
+\begin{encadre}
+\begin{conjecture*}[Grothendieck, pages 30 à 38, algébrisation par les courbes\piste{100-formal-abelian-curve-criterion}]
+Soit $R$ un anneau local noethérien complet. Un schéma abélien formel sur $\operatorname{Spf} R$ est algébrisable si et seulement si son changement de base à $\operatorname{Spf} B'$ l'est pour tout quotient intègre $B$ de dimension un de $R$, de normalisé $B'$, ou encore s'il le devient après un morphisme propre surjectif $S' \to \operatorname{Spec} R$.
+\end{conjecture*}
+\end{encadre}
+{\small Les feuillets en esquissent une démonstration incomplète (pages 32 à 38). Mathlib n'a pas l'algébrisation des schémas formels.\par}
+
+\begin{encadre}
+\begin{conjecture*}[Grothendieck, pages 39 à 48, faisceau des quasi-fonctions\piste{130-quasi-function-sheaf}]
+Les fonctions de Weil forment un faisceau de Zariski $QF_X$, somme amalgamée du faisceau $\Phi_X$ des fonctions admissibles et de $\mathcal R^*_X$ au-dessus de $\mathcal O^*_X$, dans une suite exacte $0 \to \Phi_X \to QF_X \to \mathrm{Div}_X \to 0$. Pour $X$ quasi-projectif, tout diviseur de Cartier est le diviseur d'une quasi-fonction globale.
+\end{conjecture*}
+\end{encadre}
+{\small Les feuillets en esquissent une démonstration incomplète (pages 41 à 48). La page s'arrête avant le cas de $\mathbf P^r$. Mathlib n'a pas les fonctions de Weil ni les diviseurs de Cartier.\par}
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 22 à 28, déterminants des parties étales\piste{9-det-etale-tate-iso}]\nonverifie
