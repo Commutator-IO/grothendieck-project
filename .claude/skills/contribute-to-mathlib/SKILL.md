@@ -115,31 +115,27 @@ Check there is no cycle: the imported module must not already import the edited 
 
 ## 3. Compile against the latest master
 
-The machine has 8 GB of RAM and little disk: **one Lean process at a time** (also with the
-repository's own Lean jobs), and no full build of Mathlib from source.
+The machine has 8 GB of RAM and little disk: **one Lean process at a time**, no second copy of
+Mathlib's build (8 GB), no full build from source.
 
-- **The build to use is the clone's own**: `~/Commutator/mathlib4` is a Mathlib checkout at
-  upstream master with a complete build in `.lake/build` (about 8 GB). Compile a test file or a
-  PR's file there:
+- **The one build** is the project's: `lean/.lake/packages/mathlib`, a Lake package pinned to a
+  recent upstream master revision in `lean/lakefile.toml` (`rev = "<sha>"`; same revision in
+  `lean/lake-manifest.json` and `lean/lean-toolchain`). Compile a test file, or a PR's changed
+  file copied from its worktree, from `lean/`:
 
-      cd ~/Commutator/mathlib4 && lake env lean <scratchpad>/Test.lean
+      cd lean && lake env lean <scratchpad>/Test.lean
 
-  Before relying on it, bring it to the latest master and fetch the matching cache:
-
-      git fetch upstream master && git merge --ff-only upstream/master
-      lake exe cache get && lake build Mathlib --no-build   # expect "All targets up-to-date"
-
-  (`cache get` downloads thousands of files when master moved; it needs a few GB of disk.) The
-  clone's `master` must stay a fast-forward of `upstream/master`: never commit on it, put work
-  in worktrees (§4).
-- **Never point another Lake project at this clone with a symlink** (`.lake/packages/mathlib`
-  → `~/Commutator/mathlib4`). Lake compares the package's URL and revision with the manifest,
-  and when they differ it *deletes the directory and clones again*, through the symlink: tested
-  on a toy project, the target was emptied. The Lean project of this repository
-  (`lean/`, Mathlib pinned at `v4.33.0`, toolchain v4.33.0) keeps its own copy under
-  `lean/.lake/packages/mathlib`; it cannot share the build with the clone as long as the two
-  revisions differ. To share one copy, bump the pin of `lean/` to a master revision (lakefile,
-  manifest, toolchain) and rebuild the 32 folders, as a separate change.
+  Mathlib files with `module` / `public import` compile this way too.
+- **Refreshing it to a newer master**: set `rev` in `lean/lakefile.toml` to the new SHA, then
+  `cd lean && lake update mathlib` (its post-update hook runs `cache get`), then
+  `lake build Mathlib --no-build` must answer "All targets up-to-date". Then rebuild the
+  Grothendieck folders (they use `warningAsError`, so a deprecation in Mathlib fails them).
+- **`~/Commutator/mathlib4` is a git clone only** (remotes `origin` = the fork `mycaule/mathlib4`,
+  `upstream` = leanprover-community), without a build: it holds the PR worktrees (§4). Keep its
+  `master` a fast-forward of `upstream/master`.
+- **Never point a Lake package at that clone with a symlink.** Lake compares the package's URL
+  and revision with the manifest, and when they differ it *deletes the directory and clones
+  again*, through the symlink: tested on a toy project, the target was emptied.
 - The local check misses what only CI sees (linters on the whole library, other files that
   changed after the cache): **the PR's CI is the final judge**. After pushing, wait for it with
   a background loop on `gh pr checks N --json bucket`, and read failures with
@@ -149,8 +145,8 @@ repository's own Lean jobs), and no full build of Mathlib from source.
 ## 4. Branches and PRs
 
 - **Clone**: `~/Commutator/mathlib4`, remotes `origin` = the fork `mycaule/mathlib4`,
-  `upstream` = leanprover-community. Never switch branches or commit in that clone (it is the
-  build of §3 and agents may be using it): work in **worktrees** in the session scratchpad,
+  `upstream` = leanprover-community. Never switch branches or commit in that clone (agents may be
+  using it): work in **worktrees** in the session scratchpad,
   one per PR,
 
       git -C ~/Commutator/mathlib4 fetch origin <branch>
