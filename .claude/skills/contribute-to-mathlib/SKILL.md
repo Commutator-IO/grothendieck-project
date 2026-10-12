@@ -80,15 +80,19 @@ Checked on every added line before pushing:
   continuation of a multi-line statement;
 - one blank line between declarations, **no blank line inside a declaration**, no double
   blank lines;
-- **comments: as few as possible.** Mathlib's linter (`docBlame`) requires a docstring on
-  definitions, structures and their fields, not on theorems. Give a docstring to a definition,
-  an instance carrying content, and the headline theorems (the ones the module docstring
-  lists); give none to a routine lemma whose statement says it all. A docstring that restates
-  the name or the statement (`/-- X is coprime to p iff … -/` over `isCoprime_X_iff`) is noise:
-  vihdzp, on #44756, called such docstrings on trivial theorems "visual noise" and said AI
-  has a tendency to comment all of its code. Likewise no `--` comment narrating a proof step
-  that the next line shows; keep one only where a step is surprising (a workaround, a
-  non-obvious choice). When a docstring is warranted it comes **before** the attributes:
+- **comments: as few as possible.** Definitions (and structures, classes, their fields)
+  need a docstring: the `docBlame` linter and the style guide's section on comments are about
+  them. **Theorems largely do not.** The convention reviewers apply, stated by vihdzp on
+  #44756 (there is no official guideline), is to comment a theorem only if it is
+  1. a major theorem, so that its name in the wider literature can be mentioned, or
+  2. otherwise convoluted or hard to make sense of from the type signature alone.
+  A docstring that restates the name or the statement (`/-- X is coprime to p iff … -/` over
+  `isCoprime_X_iff`) is visual noise, and he added that AI tends to comment all of its code.
+  Do not cite the style guide as asking for docstrings on every theorem: Michel did, and was
+  told he had misread it. Likewise no `--` comment narrating a proof step that the next line
+  shows; keep one only where a step is surprising (a workaround, a non-obvious choice).
+  Instances: a docstring if the instance carries content. Module docstrings stay.
+  When a docstring is warranted it comes **before** the attributes:
   `/-- … -/` then `@[simp]` then `theorem` — a docstring after `@[simp]` is a parse error
   (it broke #44722's CI);
 - no conjunction in hypotheses or conclusions (two lemmas instead);
@@ -188,10 +192,10 @@ Mathlib's build (8 GB), no full build from source.
   different route (exterior powers for Cauchy–Binet, `Reedy/SimplexCategory.lean` for #44732)
   means rewriting the PR, then rewriting its title and description, saying in one line what
   an earlier version did.
-- Do not answer a review about comments by adding more: when a reviewer finds docstrings
-  superfluous, remove them (all of the trivial ones, not only the quoted line), and draft for
-  Michel a reply only if he wants to point to the style guide's section on comments, which
-  asks for docstrings on declarations worth documenting, not on every lemma.
+- A review about comments is answered by removing: delete all the docstrings of trivial
+  theorems, not only the quoted one, and keep the definitions' docstrings. Do not draft a reply
+  that argues from the style guide that theorems need docstrings; the maintainers' practice
+  (above) is the opposite.
 - Improving several open PRs at once: spread the read-only review over a few agents, then
   apply and compile yourself, one PR at a time.
 
