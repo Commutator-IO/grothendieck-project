@@ -479,7 +479,7 @@ theorem permT_surjective (σ : Equiv.Perm (Fin 5)) (hσ : σ ∈ alternatingGrou
     intro τ hτ
     obtain ⟨p, hp, rfl⟩ := List.mem_map.1 (List.mem_toFinset.1 hτ)
     simp only [A, Finset.mem_filter, Finset.mem_univ, true_and, permF,
-      dif_pos (mem_triList p hp)]
+      dite_eq_left (mem_triList p hp)]
     exact permT_mem_alternating _
   have hA : A.card = 60 := by
     have h1 := card_alternatingGroup (α := Fin 5)
@@ -489,7 +489,7 @@ theorem permT_surjective (σ : Equiv.Perm (Fin 5)) (hσ : σ ∈ alternatingGrou
   have : σ ∈ S := by rw [hS]; simpa [A] using hσ
   obtain ⟨p, hp, e⟩ := List.mem_map.1 (List.mem_toFinset.1 this)
   refine ⟨mkAut _ _ _ (mem_triList p hp), ?_⟩
-  rw [← e, permF, dif_pos (mem_triList p hp)]
+  rw [← e, permF, dite_eq_left (mem_triList p hp)]
 
 /-- The automorphisms correspond to the `120` flags (`card_flags`). -/
 def autEquivFlag : Aut ≃ {p : Fin 12 × Fin 12 × Fin 12 // Tri p.1 p.2.1 p.2.2} where

@@ -316,11 +316,11 @@ noncomputable def adjPi : Functor.pi' f ⊣ gPi g := Adjunction.mkOfHomEquiv
         invFun := fun ψ i => ((adj i).homEquiv _ _).symm (ψ ≫ Limits.Pi.π _ i)
         left_inv := fun φ => by
           funext i
-          simp only [Limits.Pi.lift_π]
+          simp only [Limits.Pi.lift_comp_π]
           exact Equiv.symm_apply_apply _ _
         right_inv := fun ψ => by
           refine Limits.Pi.hom_ext _ _ fun i => ?_
-          simp only [Limits.Pi.lift_π]
+          simp only [Limits.Pi.lift_comp_π]
           exact Equiv.apply_symm_apply _ _ }
     homEquiv_naturality_left_symm := fun h ψ => by
       funext i
@@ -333,14 +333,14 @@ noncomputable def adjPi : Functor.pi' f ⊣ gPi g := Adjunction.mkOfHomEquiv
       change (Limits.Pi.lift fun i => (adj i).homEquiv _ _ ((φ ≫ ψ) i)) ≫ Limits.Pi.π _ i =
         ((Limits.Pi.lift fun i => (adj i).homEquiv _ _ (φ i)) ≫
           Limits.Pi.map (fun i => (g i).map (ψ i))) ≫ Limits.Pi.π _ i
-      rw [Category.assoc, Limits.Pi.map_π, Limits.Pi.lift_π, Limits.Pi.lift_π_assoc]
+      rw [Category.assoc, Limits.Pi.map_π, Limits.Pi.lift_comp_π, Limits.Pi.lift_comp_π_assoc]
       exact (adj i).homEquiv_naturality_right _ _ }
 
 @[reassoc (attr := simp)]
 theorem adjPi_unit_π (Y : A) (j : I) :
     (adjPi f g adj).unit.app Y ≫ Limits.Pi.π _ j = (adj j).unit.app Y := by
   change (Limits.Pi.lift fun i => (adj i).homEquiv _ _ (𝟙 ((f i).obj Y))) ≫ Limits.Pi.π _ j = _
-  rw [Limits.Pi.lift_π]
+  rw [Limits.Pi.lift_comp_π]
   exact (adj j).homEquiv_id Y
 
 theorem adjPi_counit (X : ∀ i, B i) (j : I) :

@@ -75,7 +75,7 @@ noncomputable def other (x : P) : P := if h : ∃ y, y ≠ x then h.choose else 
 
 theorem other_ne (hP : Nat.card P = 2) (x : P) : other x ≠ x := by
   have h : ∃ y, y ≠ x := ((Nat.card_eq_two_iff' x).1 hP).exists
-  rw [other, dif_pos h]
+  rw [other, dite_eq_left h]
   exact h.choose_spec
 
 theorem eq_other (hP : Nat.card P = 2) {x y : P} (h : y ≠ x) : y = other x :=
@@ -676,10 +676,10 @@ theorem psi_injective (n : ℕ) : Function.Injective (psi T T' n) := by
   by_contra hab
   by_cases ha : a = T.ref n
   · have hb : b ≠ T.ref n := fun hb => hab (ha.trans hb.symm)
-    simp only [psi, ha, hb, if_true, if_false] at h
+    simp only [psi, ha, hb, ite_true, ite_false] at h
     exact other_ne (T'.card _) _ h.symm
   · by_cases hb : b = T.ref n
-    · simp only [psi, ha, hb, if_true, if_false] at h
+    · simp only [psi, ha, hb, ite_true, ite_false] at h
       exact other_ne (T'.card _) _ h
     · exact hab (two_elem (T.card _) ha hb)
 

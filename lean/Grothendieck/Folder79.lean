@@ -1065,7 +1065,7 @@ theorem exists_isUnit_mul_add [Finite (MaximalSpectrum R)] {d d' a₀ b₀ : R}
   apply hI.ne_top
   rw [Ideal.eq_top_iff_one]
   by_cases hd : d ∈ I
-  · have hx : x ⟨I, hI⟩ = 0 := dif_pos hd
+  · have hx : x ⟨I, hI⟩ = 0 := dite_eq_left hd
     rw [hx, sub_zero] at hai
     have hd' : d' ∈ I := by
       have := I.sub_mem hmem (I.mul_mem_left a hd)
@@ -1073,7 +1073,7 @@ theorem exists_isUnit_mul_add [Finite (MaximalSpectrum R)] {d d' a₀ b₀ : R}
     rw [← h]
     exact I.add_mem (I.mul_mem_left _ hd) (I.mul_mem_left _ hd')
   · obtain ⟨k, hk, hy⟩ := (hI.exists_inv hd).choose_spec
-    have hx : x ⟨I, hI⟩ = (hI.exists_inv hd).choose * (1 - d') := dif_neg hd
+    have hx : x ⟨I, hI⟩ = (hI.exists_inv hd).choose * (1 - d') := dite_eq_right hd
     rw [hx] at hai
     have e : (1 : R) = (a * d + d') - (a - (hI.exists_inv hd).choose * (1 - d')) * d
         + (1 - d') * k := by

@@ -475,14 +475,14 @@ theorem powCoeff_eq_chebP (t d a : R) (h : t ^ 2 = (a + 2) * d) (k : ℕ) :
     have c3 : chebP a (2 * (k + 1) + 1) = (a + 2) * chebP a (2 * k + 2) - chebP a (2 * k + 1) := by
       rw [show 2 * (k + 1) + 1 = (2 * k + 1) + 2 by ring]
       simp only [chebP]
-      rw [if_neg (by omega)]
+      rw [ite_eq_right (by omega)]
     have e4 : powCoeff t d (2 * (k + 1) + 2)
         = t * powCoeff t d (2 * (k + 1) + 1) - d * powCoeff t d (2 * k + 2) := by
       rw [show 2 * (k + 1) + 2 = (2 * k + 2) + 2 by ring]; rfl
     have c4 : chebP a (2 * (k + 1) + 2) = chebP a (2 * (k + 1) + 1) - chebP a (2 * k + 2) := by
       rw [show 2 * (k + 1) + 2 = (2 * k + 2) + 2 by ring]
       simp only [chebP]
-      rw [if_pos (by omega), one_mul]
+      rw [ite_eq_left (by omega), one_mul]
       rfl
     have hx3 : powCoeff t d (2 * (k + 1) + 1) = d ^ (k + 1) * chebP a (2 * (k + 1) + 1) := by
       rw [e3, h1, h2, c3]; linear_combination d ^ k * chebP a (2 * k + 2) * h

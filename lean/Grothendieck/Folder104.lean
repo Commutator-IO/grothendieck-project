@@ -165,10 +165,10 @@ objects is well founded is a direct category: the rank of an object for that
 order is a degree that every non-identity arrow strictly raises. -/
 noncomputable def reedyDirecte (hsk : Skeletal M) (hwf : WellFounded (Strict (M := M))) :
     HomotopicalAlgebra.ReedyStructure (MorphismProperty.identities M) ⊤ Ordinal.{u} :=
-  haveI : IsWellFounded M Strict := ⟨hwf⟩
-  { deg := IsWellFounded.rank Strict
+  haveI : WellFounded (Strict (M := M)) := hwf
+  { deg := WellFounded.rank Strict
     lt₁ := fun _ hf hf' => absurd hf hf'
-    lt₂ := fun f _ hf' => IsWellFounded.rank_lt_of_rel (strict_of_not_identities hend hsk f hf')
+    lt₂ := fun f _ hf' => WellFounded.rank_lt_of_rel (strict_of_not_identities hend hsk f hf')
     nonempty_unique := factorisation_unique }
 
 /-- Conversely, a degree into a well-founded order that every non-identity arrow

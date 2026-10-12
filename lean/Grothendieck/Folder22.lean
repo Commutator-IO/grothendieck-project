@@ -122,8 +122,7 @@ theorem psi_tmul (n : ℕ) {N : Type*} [AddCommGroup N] [Module A N] (f : Fin n 
 theorem can_bijective_fin (n : ℕ) : Function.Bijective (can (A := A) P (Fin n → A)) := by
   have key : ∀ x i, psi n (P i) (can P (Fin n → A) x i) = fun j => psi n (∀ i, P i) x j i := by
     intro x
-    induction x using TensorProduct.induction_on with
-    | zero => intro i; funext j; simp
+    induction x using TensorProduct.inductionOn with
     | tmul f q => intro i; funext j; simp [psi_tmul]
     | add x y hx hy =>
       intro i; funext j

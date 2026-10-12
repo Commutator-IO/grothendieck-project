@@ -10,6 +10,16 @@ formalised misreading.
 cd lean && lake exe cache get && lake build   # fails on any warning, so on any sorry
 ```
 
+Mathlib is pinned to a revision of its `master` (`rev` in `lakefile.toml`, with
+the toolchain in `lean-toolchain`), not to a release tag, so that the proofs
+are checked against the library the pull requests of issue
+[#52](https://github.com/Commutator-IO/grothendieck-project/issues/52) target.
+To move the pin: set `rev` to the new SHA, copy `lean-toolchain` from that
+Mathlib revision, run `lake update mathlib` (it fetches the cache), then build
+the folders one at a time, since a process that imports Mathlib takes about
+2 GB and Lake has no option to limit parallelism. A deprecation in Mathlib
+fails the build; the compiler names the replacement.
+
 Thirty-two folders: the eighteen of issue #26 (tier 1, and the five rows of tier 2), and fourteen findings of the Findings tab (1, 67, 68, 70, 74, 77, 79, 84, 85, 86, 93, 133, 156-1, 156-3), proved as stated — which says nothing about whether they are in the literature. Each statement, its written-out proof and
 what the verification found are in the appendix
 [`docs/lean/article.pdf`](../docs/lean/article.pdf), served at

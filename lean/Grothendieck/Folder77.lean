@@ -83,9 +83,9 @@ theorem skew_transpose (n : ℕ) : (skew n)ᵀ = -skew n := by
   simp only [skew]
   rw [Sym2.eq_swap (a := j) (b := i)]
   rcases lt_trichotomy i j with h | rfl | h
-  · simp only [if_pos h, if_neg (not_lt_of_gt h)]
+  · simp only [ite_eq_left h, ite_eq_right (not_lt_of_gt h)]
   · simp
-  · simp only [if_pos h, if_neg (not_lt_of_gt h), neg_neg]
+  · simp only [ite_eq_left h, ite_eq_right (not_lt_of_gt h), neg_neg]
 
 theorem det_skew_of_odd {n : ℕ} (hn : Odd n) : (skew n).det = 0 := by
   have h := det_transpose (skew n)
@@ -102,11 +102,11 @@ theorem polar_map_red (n : ℕ) : (polar n).map (red n) = (skew n).map (red n) :
   refine Matrix.ext fun i j => ?_
   simp only [map_apply, polar, skew]
   rcases lt_trichotomy i j with h | rfl | h
-  · simp only [if_neg h.ne, if_pos h]
-  · rw [if_pos rfl, if_neg (lt_irrefl i), if_neg (lt_irrefl i)]
+  · simp only [ite_eq_right h.ne, ite_eq_left h]
+  · rw [ite_eq_left rfl, ite_eq_right (lt_irrefl i), ite_eq_right (lt_irrefl i)]
     simp only [map_mul, map_zero, map_ofNat,
       CharTwo.two_eq_zero (R := MvPolynomial (Sym2 (Fin n)) (ZMod 2)), zero_mul]
-  · simp only [if_neg h.ne', if_neg (not_lt_of_gt h), if_pos h, map_neg]
+  · simp only [ite_eq_right h.ne', ite_eq_right (not_lt_of_gt h), ite_eq_left h, map_neg]
     exact (CharTwo.neg_eq (R := MvPolynomial (Sym2 (Fin n)) (ZMod 2)) _).symm
 
 /-- An integer polynomial whose reduction modulo `2` vanishes is divisible by `2`. -/

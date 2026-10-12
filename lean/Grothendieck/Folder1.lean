@@ -559,7 +559,7 @@ theorem sum_sum_mul_le_of_weights {κ : Type*} [Fintype κ] [DecidableEq κ] (G 
           · have := mul_nonneg (hd0 k) (hd0 l)
             nlinarith [hα1 k l]
       _ = _ := by
-          simp only [sum_sub_distrib, sum_ite_eq, mem_univ, if_true]
+          simp only [sum_sub_distrib, sum_ite_eq, mem_univ, ite_true]
           rw [← sum_mul_sum, hDu, ← hd2u]
           simp only [sq]
   have hsG : ∑ k ∈ G, s k = g * θ + D := by
@@ -680,7 +680,7 @@ theorem sum_lam_le {κ : Type*} [Fintype κ] (g : κ → H)
     _ = ∑ i ∈ S, ((#S : ℝ) * ‖c i‖ ^ 2 + ∑ j ∈ S, ‖c j‖ ^ 2 - 2 * ‖c i‖ ^ 2) := by
         refine sum_congr rfl fun i hi => ?_
         rw [sum_sub_distrib, sum_add_distrib, sum_const, nsmul_eq_mul]
-        simp only [sum_ite_eq, if_pos hi]
+        simp only [sum_ite_eq, ite_eq_left hi]
     _ = _ := by
         rw [sum_sub_distrib, sum_add_distrib, ← mul_sum, sum_const, nsmul_eq_mul, ← mul_sum]
         simp only [wt, hc]
@@ -979,7 +979,7 @@ theorem bform_ebasis_fvec (w : E →ₗ[𝕜] F) (n : ℕ) :
       ((w.singularValues i * w.singularValues j -
         if i = j then w.singularValues i ^ 2 else 0 : ℝ) : 𝕜) := by
     intro i j
-    simp only [hij, if_true]
+    simp only [hij, ite_true]
     by_cases h : i = j
     · subst h; simp; ring
     · simp [h, Ne.symm h]
@@ -990,7 +990,7 @@ theorem bform_ebasis_fvec (w : E →ₗ[𝕜] F) (n : ℕ) :
     rw [sq, sum_mul_sum]
     congr 1
     refine sum_congr rfl fun i hi => ?_
-    simp only [sum_ite_eq, if_pos hi]
+    simp only [sum_ite_eq, ite_eq_left hi]
   simp only [e]
   rw [← hr]
   simp only [RCLike.ofReal_sum]

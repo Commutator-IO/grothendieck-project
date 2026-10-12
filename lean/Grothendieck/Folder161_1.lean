@@ -215,7 +215,7 @@ its first half alone: the pair is redundant. -/
 theorem condition2_iff :
     ((∀ P, IsIso (adj.unit.app (v.obj P))) ∧ ∀ X, IsIso (adj.counit.app (u.obj X))) ↔
       ∀ P, IsIso (adj.unit.app (v.obj P)) :=
-  ⟨And.left, fun h => ⟨h, ((idempotent_tfae adj).out 0 2).1 h⟩⟩
+  ⟨And.left, fun h => ⟨h, ((idempotent_tfae adj).out 1 3).1 h⟩⟩
 
 end Idempotent
 
@@ -523,7 +523,7 @@ noncomputable def reflectorAdj (hu : ∀ X, F0 adj (u.obj X)) :
         rw [Iso.comp_inv_eq, Category.assoc, Iso.eq_inv_comp]
         simp }
   left_triangle_components X := by
-    have h := ((idempotent_tfae adj).out 2 0).1 hu
+    have h := ((idempotent_tfae adj).out 3 1).1 hu
     apply ObjectProperty.hom_ext
     dsimp [reflector0]
     rw [Iso.comp_inv_eq, vu_unit_eq adj h]
@@ -583,7 +583,7 @@ noncomputable def coreflectorAdj (hv : ∀ P, E0 adj (v.obj P)) :
   counit := { app := adj.counit.app, naturality := fun _ _ f => adj.counit.naturality f }
   left_triangle_components P := (counitIso0 adj P).inv_hom_id
   right_triangle_components P := by
-    have h := ((idempotent_tfae adj).out 0 2).1 hv
+    have h := ((idempotent_tfae adj).out 1 3).1 hv
     apply ObjectProperty.hom_ext
     dsimp [coreflector0]
     rw [Iso.inv_comp_eq, uv_counit_eq adj h]
@@ -610,7 +610,7 @@ noncomputable def condition4' (hv : ∀ P, E0 adj (v.obj P)) :
 inclusion `E₀ ⊂ E` has a left adjoint and `F₀ ⊂ F` a right adjoint. -/
 theorem condition3_p5 (hv : ∀ P, E0 adj (v.obj P)) :
     (E0 adj).ι.IsRightAdjoint ∧ (F0 adj).ι.IsLeftAdjoint :=
-  ⟨⟨_, ⟨reflectorAdj adj ((idempotent_tfae adj).out 0 2 |>.1 hv)⟩⟩, ⟨_, ⟨coreflectorAdj adj hv⟩⟩⟩
+  ⟨⟨_, ⟨reflectorAdj adj ((idempotent_tfae adj).out 1 3 |>.1 hv)⟩⟩, ⟨_, ⟨coreflectorAdj adj hv⟩⟩⟩
 
 /-- The coreflector `F ⥤ F₀` preserves all limits. -/
 theorem coreflector0_preservesLimits (hv : ∀ P, E0 adj (v.obj P)) :

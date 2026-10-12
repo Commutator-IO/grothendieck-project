@@ -88,8 +88,7 @@ theorem coords_tmul (n : N) (m : M) (i : ι) :
 /-- The coordinates are natural in `N`. -/
 theorem coords_rTensor (f : N →ₗ[R] P) (t : N ⊗[R] M) :
     coords b P (f.rTensor M t) = Finsupp.mapRange f f.map_zero (coords b N t) := by
-  induction t using TensorProduct.induction_on with
-  | zero => simp
+  induction t using TensorProduct.inductionOn with
   | tmul n m => ext i; simp [coords_tmul]
   | add s t hs ht => rw [map_add, map_add, hs, ht, map_add, Finsupp.mapRange_add f.map_add]
 
@@ -300,8 +299,7 @@ theorem values_of_mem_range_Phi {P : K₀[X][X]} (hP : P ∈ LinearMap.range (Ph
     (x y : k₀) :
     (P.eval (C (algebraMap k₀ K₀ x))).eval (algebraMap k₀ K₀ y) ∈ (algebraMap k₀ K₀).range := by
   obtain ⟨t, rfl⟩ := hP
-  induction t using TensorProduct.induction_on with
-  | zero => rw [map_zero, eval_zero, eval_zero]; exact zero_mem _
+  induction t using TensorProduct.inductionOn with
   | tmul G H =>
     rw [Phi_tmul, eval_eval_Phi_tmul]
     exact mul_mem (mem_Omega.mp G.2 x) (mem_Omega.mp H.2 y)
@@ -503,7 +501,7 @@ theorem binom_linearIndependent : LinearIndependent ℤ binom := by
   rw [hf, fwdDiff_iter_finsetSum, Finset.sum_apply] at h0
   simp only [fwdDiff_iter_const_smul, Pi.smul_apply, fwdDiff_iter_choose_zero, smul_eq_mul,
     mul_ite, mul_one, mul_zero] at h0
-  rwa [Finset.sum_ite_eq, if_pos hi] at h0
+  rwa [Finset.sum_ite_eq, ite_eq_left hi] at h0
 
 /-- **Pólya (1919).** A polynomial of `ℚ[T]` taking integer values on `ℤ` is an
 integer combination of the `binom(T, k)`, `k ≤ deg P`. -/

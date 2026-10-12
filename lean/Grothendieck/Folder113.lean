@@ -73,7 +73,7 @@ categories): faithful, full, and every object is hit on the nose. -/
 instance : (opKaroubi P).IsEquivalence where
   faithful := ⟨fun {Q₁ Q₂} f g h => by
     ext
-    exact Quiver.Hom.unop_inj (congrArg (fun k => k.unop.f) h)⟩
+    exact congrArg (fun k => k.unop.f) h⟩
   full := ⟨fun {Q₁ Q₂} g => by
     refine ⟨⟨(g.unop.f : Q₂.X.unop ⟶ Q₁.X.unop).op, ?_⟩, rfl⟩
     apply Quiver.Hom.unop_inj

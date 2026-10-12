@@ -177,7 +177,7 @@ theorem lambda0_L0_un : Λ₀ R n (L₀ R n 1) = (n : ExteriorAlgebra R (M₀ R 
     rw [contractLeft_ι_mul, contractLeft_ι]
     simp only [base, LinearMap.proj_apply, Pi.single_apply, Prod.mk.injEq]
     have h01 : ((0 : Fin 2) = 1) = False := by decide
-    simp only [h01, and_false, if_false, map_zero, mul_zero, sub_zero, and_true, map_smul]
+    simp only [h01, and_false, ite_false, map_zero, mul_zero, sub_zero, and_true, map_smul]
     rw [ExteriorAlgebra.ι, contractLeft_ι]
     simp only [LinearMap.proj_apply, Pi.single_apply, Prod.mk.injEq, and_true]
     split_ifs <;> simp

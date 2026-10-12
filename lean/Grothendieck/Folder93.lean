@@ -428,7 +428,7 @@ theorem step (s : R[X]) (a b c d : R) (j : ℕ)
   obtain ⟨w2, hw2⟩ := hD2
   obtain ⟨w3, hw3⟩ := hD3
   have c3 : (D 3 r).coeff j = w3.coeff 0 := by
-    rw [hw3, coeff_X_pow_mul', if_pos le_rfl, Nat.sub_self]
+    rw [hw3, coeff_X_pow_mul', ite_eq_left le_rfl, Nat.sub_self]
   have rj : r.coeff (j + 3) = (s * (C c * X + C d)).coeff (j + 3) := by
     rw [hr, coeff_sub, coeff_lin_of_two_le a b (by omega), sub_zero]
   have e2 : D 2 (s * (C c * X + C d)) = D 2 r := by rw [e, map_add, l2, add_zero]
@@ -436,7 +436,7 @@ theorem step (s : R[X]) (a b c d : R) (j : ℕ)
   rw [N_mul_lin, e2, e3, hw2, hw3, coeff_sub,
     show D 2 s * (X ^ (j + 1) * w2) = X ^ (j + 1) * (D 2 s * w2) by ring,
     show D 1 s * (X ^ j * w3) = X ^ j * (D 1 s * w3) by ring,
-    coeff_X_pow_mul', coeff_X_pow_mul', if_neg (by omega), if_pos le_rfl, Nat.sub_self,
+    coeff_X_pow_mul', coeff_X_pow_mul', ite_eq_right (by omega), ite_eq_left le_rfl, Nat.sub_self,
     mul_coeff_zero, ← c3, hasseDeriv_coeff, hasseDeriv_coeff, ← rj]
   simp
   ring
