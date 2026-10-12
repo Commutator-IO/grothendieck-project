@@ -105,31 +105,45 @@ Check there is no cycle: the imported module must not already import the edited 
 (`Determinant/Basic.lean` cannot import `ExteriorPower/Basis.lean`; hence
 `Matrix/CauchyBinet.lean`).
 
-## 3. Compile without `lake build`
+## 3. Compile against the latest master
 
-The machine has 8 GB of RAM: **never** `lake build` on Mathlib, never `lake exe cache get`,
-**one Lean process at a time** (also with the repository's own Lean jobs).
+The machine has 8 GB of RAM and little disk: **one Lean process at a time** (also with the
+repository's own Lean jobs), and no full build of Mathlib from source.
 
-- The project's pinned Mathlib is built in `lean/.lake/packages/mathlib`. Compile a test file
-  there:
+- **The build to use is the clone's own**: `~/Commutator/mathlib4` is a Mathlib checkout at
+  upstream master with a complete build in `.lake/build` (about 8 GB). Compile a test file or a
+  PR's file there:
 
-      cd lean && lake env lean <scratchpad>/Test.lean
+      cd ~/Commutator/mathlib4 && lake env lean <scratchpad>/Test.lean
 
-  Mathlib files with `module` / `public import` compile this way too. The pinned Mathlib
-  lags master: when a proof uses a lemma that appeared since, stub it in the test file with
-  its exact master signature and say so. Some new files (e.g. the singular-value files of
-  #44728) cannot be compiled locally at all; then CI is the only check.
-- This local check misses master's renames and deprecations and the environment linters:
-  **the PR's CI is the final judge**. After pushing, wait for it (a background loop on
-  `gh pr checks N --json bucket`, not a short polling of the chat) and read failures with
+  Before relying on it, bring it to the latest master and fetch the matching cache:
+
+      git fetch upstream master && git merge --ff-only upstream/master
+      lake exe cache get && lake build Mathlib --no-build   # expect "All targets up-to-date"
+
+  (`cache get` downloads thousands of files when master moved; it needs a few GB of disk.) The
+  clone's `master` must stay a fast-forward of `upstream/master`: never commit on it, put work
+  in worktrees (§4).
+- **Never point another Lake project at this clone with a symlink** (`.lake/packages/mathlib`
+  → `~/Commutator/mathlib4`). Lake compares the package's URL and revision with the manifest,
+  and when they differ it *deletes the directory and clones again*, through the symlink: tested
+  on a toy project, the target was emptied. The Lean project of this repository
+  (`lean/`, Mathlib pinned at `v4.33.0`, toolchain v4.33.0) keeps its own copy under
+  `lean/.lake/packages/mathlib`; it cannot share the build with the clone as long as the two
+  revisions differ. To share one copy, bump the pin of `lean/` to a master revision (lakefile,
+  manifest, toolchain) and rebuild the 32 folders, as a separate change.
+- The local check misses what only CI sees (linters on the whole library, other files that
+  changed after the cache): **the PR's CI is the final judge**. After pushing, wait for it with
+  a background loop on `gh pr checks N --json bucket`, and read failures with
   `gh api repos/leanprover-community/mathlib4/actions/jobs/<id>/logs --allow-escape-sequences`
   piped through `sed 's/\x1b\[[0-9;]*m//g' | grep -n 'error'`.
 
 ## 4. Branches and PRs
 
 - **Clone**: `~/Commutator/mathlib4`, remotes `origin` = the fork `mycaule/mathlib4`,
-  `upstream` = leanprover-community. Never switch branches in that clone (agents may be
-  using it): work in **worktrees** in the session scratchpad, one per PR,
+  `upstream` = leanprover-community. Never switch branches or commit in that clone (it is the
+  build of §3 and agents may be using it): work in **worktrees** in the session scratchpad,
+  one per PR,
 
       git -C ~/Commutator/mathlib4 fetch origin <branch>
       git -C ~/Commutator/mathlib4 worktree add -f <scratch>/wt-<N> -B fix/<N> origin/<branch>
