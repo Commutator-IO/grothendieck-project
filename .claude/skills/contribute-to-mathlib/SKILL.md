@@ -80,7 +80,15 @@ Checked on every added line before pushing:
   continuation of a multi-line statement;
 - one blank line between declarations, **no blank line inside a declaration**, no double
   blank lines;
-- a docstring on every public declaration, **before** its attributes:
+- **comments: as few as possible.** Mathlib's linter (`docBlame`) requires a docstring on
+  definitions, structures and their fields, not on theorems. Give a docstring to a definition,
+  an instance carrying content, and the headline theorems (the ones the module docstring
+  lists); give none to a routine lemma whose statement says it all. A docstring that restates
+  the name or the statement (`/-- X is coprime to p iff … -/` over `isCoprime_X_iff`) is noise:
+  vihdzp, on #44756, called such docstrings on trivial theorems "visual noise" and said AI
+  has a tendency to comment all of its code. Likewise no `--` comment narrating a proof step
+  that the next line shows; keep one only where a step is surprising (a workaround, a
+  non-obvious choice). When a docstring is warranted it comes **before** the attributes:
   `/-- … -/` then `@[simp]` then `theorem` — a docstring after `@[simp]` is a parse error
   (it broke #44722's CI);
 - no conjunction in hypotheses or conclusions (two lemmas instead);
@@ -184,6 +192,10 @@ repository's own Lean jobs), and no full build of Mathlib from source.
   different route (exterior powers for Cauchy–Binet, `Reedy/SimplexCategory.lean` for #44732)
   means rewriting the PR, then rewriting its title and description, saying in one line what
   an earlier version did.
+- Do not answer a review about comments by adding more: when a reviewer finds docstrings
+  superfluous, remove them (all of the trivial ones, not only the quoted line), and draft for
+  Michel a reply only if he wants to point to the style guide's section on comments, which
+  asks for docstrings on declarations worth documenting, not on every lemma.
 - Improving several open PRs at once: spread the read-only review over a few agents, then
   apply and compile yourself, one PR at a time.
 
