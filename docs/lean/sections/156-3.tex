@@ -8,6 +8,22 @@ La cote 156-3, chapitre~III de \emph{Vers une géométrie des formes}, quarante 
 Soient $a < b < c$ dans un ensemble ordonné. Alors $X_{\{a,b\}}(c) = \mathcal L_{>b}$, $X_{\{b,c\}}(a) = \mathcal L_{<b}$ et $X_{\{c,a\}}(b) = \,]a,c[$. Si l'ordre est dense et si $p, q, r$ sont deux à deux distincts et comparables, $\mathcal R(p,q,r)$ a lieu si et seulement si $X_{\{p,q\}}(r) \cap X_{\{q,r\}}(p) = \emptyset$.
 \end{enonce}
 
+Sur une chaîne $a < b < c$, chaque paire découpe le reste de la chaîne en trois morceaux : au-dessous, entre, au-dessus. Le trait épais est le morceau qui contient le troisième point.
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=0.75cm]
+\foreach \row/\p/\q/\lo/\hi/\lab in {0/1.5/3/3/6.3/{$X_{\{a,b\}}(c) = \mathcal L_{>b}$}, -1/3/4.5/-0.3/3/{$X_{\{b,c\}}(a) = \mathcal L_{<b}$}, -2/1.5/4.5/1.5/4.5/{$X_{\{c,a\}}(b) = \,]a,c[$}} {
+  \draw[gray!60] (-0.3,\row) -- (6.3,\row);
+  \draw[line width=2.2pt, blue!55] (\lo,\row) -- (\hi,\row);
+  \foreach \x in {1.5,3,4.5} \fill (\x,\row) circle (1.6pt);
+  \draw[fill=white] (\p,\row) circle (2.6pt);
+  \draw[fill=white] (\q,\row) circle (2.6pt);
+  \node[anchor=west] at (6.6,\row) {\lab};
+}
+\foreach \x/\n in {1.5/a,3/b,4.5/c} \node[below] at (\x,-2.15) {$\n$};
+\end{tikzpicture}
+\end{center}
+{\small Les cercles blancs sont les deux points de la paire, exclus de $C(\varepsilon)$.\par}
+
 \begin{proof}
 Si $b < t$ et $a < b$, un élément $s$ est dans le même morceau que $t$ exactement quand il est au-dessus de $a$ et de $b$ : $t$ n'est ni sous $a$ ni strictement entre $a$ et $b$. Un tel $s$ est dans $C(\{a,b\})$, d'où $X_{\{a,b\}}(c) = \mathcal L_{>b}$ ; de même $X_{\{b,c\}}(a) = \mathcal L_{<b}$, et, la relation étant symétrique en la paire, $X_{\{c,a\}}(b) = \,]a,c[$. Trois éléments deux à deux distincts et comparables forment une chaîne, et l'un des six ordres possibles a lieu. Si $q$ est au milieu, les deux morceaux sont $\mathcal L_{>q}$ et $\mathcal L_{<q}$, disjoints. Si le milieu est $p$, disons $q < p < r$, les morceaux sont $\mathcal L_{>p}$ et $]q,r[$, qui contiennent tous deux un point de $]p,r[$, non vide par densité ; les quatre autres cas sont semblables.
 \end{proof}
