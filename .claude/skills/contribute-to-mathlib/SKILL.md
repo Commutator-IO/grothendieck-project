@@ -163,6 +163,15 @@ Mathlib's build (8 GB), no full build from source.
       cd lean && lake env lean <scratchpad>/Test.lean
 
   Mathlib files with `module` / `public import` compile this way too.
+- **Run Mathlib's linters locally**, as CI will. The syntax linters (long lines, `fun =>`, `$`,
+  `·`, empty lines, header, unused tactics and simp arguments, flexible tactics…) are the set
+  `linter.mathlibStandardSet`:
+
+      cd lean && lake env lean -Dlinter.mathlibStandardSet=true <file>.lean
+
+  The environment linters (`docBlame` on definitions, `unusedArguments`, `simpNF`, …) run by
+  appending `#lint` to a test file that imports the PR's module. Neither formats code: there is
+  no `ruff format` for Lean, and the golfs reviewers ask for (§2) are not linted.
 - **Refreshing it to a newer master**: set `rev` in `lean/lakefile.toml` to the new SHA, then
   `cd lean && lake update mathlib` (its post-update hook runs `cache get`), then
   `lake build Mathlib --no-build` must answer "All targets up-to-date". Then rebuild the
