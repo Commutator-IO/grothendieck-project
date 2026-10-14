@@ -36,6 +36,12 @@ A PR that duplicates a lemma or an open PR gets closed.
 
   Search by name, by constants (`q=IsIso, "comp_eq_id"`), by substring. An empty answer
   proves nothing until a positive control on a neighbouring name that exists has returned it.
+- **Not a one-liner of existing lemmas.** A lemma that is two existing lemmas composed gets
+  dropped: `isCoprime_X_pow_of_isUnit_coeff_zero` was `(isCoprime_X_iff.2 hp).pow_left`, and
+  themathqueen asked to drop it from #44756; avoiding an import (`IsCoprime.pow_left` lives in
+  `RingTheory/Coprime/Lemmas.lean`) was not accepted as a reason. Likewise vihdzp dropped two
+  divisibility lemmas that were `IsCoprime.dvd_mul_left_iff` applied. Keep only what a user
+  could not write in one line.
 - **Open and closed PRs**: `gh search prs --repo leanprover-community/mathlib4 "<words>"`.
   Closed without merge often means "redone elsewhere" or "wrong approach": read the review.
   Cauchy–Binet is the example: #40473 and #44209 were closed because the reviewer
@@ -109,13 +115,32 @@ Checked on every added line before pushing:
 `gh pr diff N` outputs; its "check" items (terminal `simp only`, operators in `calc`) need a
 look, not a blind fix.
 
-### Imports
+### Imports and files
 
-Each import costs. The bot adds `large-import` beyond a few percent; the answer is a new file
-rather than a heavy import in a basic one. What only proofs need is imported without `public`.
-Check there is no cycle: the imported module must not already import the edited file
-(`Determinant/Basic.lean` cannot import `ExteriorPower/Basis.lean`; hence
-`Matrix/CauchyBinet.lean`).
+Each import costs. The bot adds `large-import` beyond a few percent. What only proofs need is
+imported without `public`. Check there is no cycle: the imported module must not already import
+the edited file (`Determinant/Basic.lean` cannot import `ExteriorPower/Basis.lean`).
+
+**A new file only for a theory, not for a few lemmas.** A short result goes at the end of the
+existing file whose API it uses: Cauchy–Binet (#44757) first had its own
+`Matrix/CauchyBinet.lean`; once the proof was four lines, themathqueen asked for it to join a
+file, and it now ends `ExteriorPower/Basis.lean`, the file of `pairingDual` and
+`Module.Basis.exteriorPower`. Reuse that file's ambient `variable`s (`R`, `n`) instead of
+redeclaring them.
+
+### Proofs, as reviewers golf them
+
+- **Lean on the API of the file.** The first Cauchy–Binet proof built an alternating map and
+  went through a `calc`; the reviewer's golf applies `exteriorPower.pairingDual` to
+  `Basis.sum_repr` with `congr(...)`, then one `simpa`. Look for the pairing, the `repr`
+  lemma or the universal property the file already proves before computing by hand.
+- **Prove the simplest case, derive the general one.** The minors version of Cauchy–Binet
+  follows from the square case by `Matrix.submatrix_mul` in two lines; the first version did
+  the opposite with a longer proof.
+- **`rfl` when it is definitional**: `have hG : … := rfl` rather than `change …; congr 1`.
+- **Two `rw` rather than `abel`** when the rewriting is short (vihdzp's golf on #44756).
+- **Generalize into an iff** and deprecate the old one-way lemma (`@[deprecated +typeChanged
+  (since := "…")] alias ⟨_, old_name⟩ := new_iff`), updating its uses in Mathlib.
 
 ## 3. Compile against the latest master
 
