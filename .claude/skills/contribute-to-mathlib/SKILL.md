@@ -138,6 +138,14 @@ redeclaring them.
   follows from the square case by `Matrix.submatrix_mul` in two lines; the first version did
   the opposite with a longer proof.
 - **`rfl` when it is definitional**: `have hG : … := rfl` rather than `change …; congr 1`.
+- **`congr(...)` with `$h`** to apply a function to both sides of an equation in one term:
+  `congr(pairingDual R (ι → R) n w $(b.sum_repr x))` is `congrArg (pairingDual …) (b.sum_repr x)`
+  without naming the function; follow it with `eta_expand at h` when `simp` must see through the
+  lambdas, and close with `simpa [lemmas] using! h` (the `!` variant, which the reviewer used for
+  the Cauchy–Binet golf).
+- **Feed the rewrite to `simp`** instead of `rw [lemma …]` then `simpa using other …`:
+  `simp [submatrix_mul A B I id K Function.bijective_id, det_mul_eq_sum_powersetCard]` closes the
+  minors version of Cauchy–Binet in one line (themathqueen, #44757).
 - **Two `rw` rather than `abel`** when the rewriting is short (vihdzp's golf on #44756).
 - **Generalize into an iff** and deprecate the old one-way lemma (`@[deprecated +typeChanged
   (since := "…")] alias ⟨_, old_name⟩ := new_iff`), updating its uses in Mathlib.
