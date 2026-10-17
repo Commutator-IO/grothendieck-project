@@ -65,19 +65,17 @@ theorem derivative_pow_units (u : A⟦X⟧ˣ) (n : ℕ) :
   | zero => simp
   | succ n ih =>
     rw [pow_succ, Units.val_mul, Derivation.leibniz, ih]
-    have : (↑u : A⟦X⟧) * ↑u⁻¹ = 1 := Units.mul_inv u
     simp only [smul_eq_mul, Nat.cast_succ]
-    linear_combination (-(↑(u ^ n) * d⁄dX (↑u : A⟦X⟧))) * this
+    linear_combination (-(↑(u ^ n) * d⁄dX (↑u : A⟦X⟧))) * Units.mul_inv u
 
 theorem derivative_zpow_units (u : A⟦X⟧ˣ) (n : ℤ) :
     d⁄dX (↑(u ^ n) : A⟦X⟧) = n * (↑(u ^ n) * ↑u⁻¹ * d⁄dX (↑u : A⟦X⟧)) := by
   rcases n with n | n
   · simpa using derivative_pow_units u n
   · rw [zpow_negSucc, derivative_inv, derivative_pow_units]
-    have h1 : (↑(u ^ (n + 1)) : A⟦X⟧) * ↑(u ^ (n + 1))⁻¹ = 1 := Units.mul_inv _
     simp only [Int.cast_negSucc, Nat.cast_add, Nat.cast_one]
-    linear_combination
-      (-(↑(u ^ (n + 1))⁻¹ : A⟦X⟧) * ↑u⁻¹ * d⁄dX (↑u : A⟦X⟧) * ((n : A⟦X⟧) + 1)) * h1
+    linear_combination (-(↑(u ^ (n + 1))⁻¹ : A⟦X⟧) * ↑u⁻¹ * d⁄dX (↑u : A⟦X⟧) *
+      ((n : A⟦X⟧) + 1)) * Units.mul_inv (u ^ (n + 1))
 
 theorem derivative_prod_units {ι : Type*} (s : Finset ι) (w : ι → A⟦X⟧ˣ) :
     d⁄dX (↑(∏ i ∈ s, w i) : A⟦X⟧) =
@@ -87,9 +85,8 @@ theorem derivative_prod_units {ι : Type*} (s : Finset ι) (w : ι → A⟦X⟧�
   | empty => simp
   | insert a s ha ih =>
     rw [prod_insert ha, sum_insert ha, Units.val_mul, Derivation.leibniz, ih]
-    have : (↑(w a) : A⟦X⟧) * ↑(w a)⁻¹ = 1 := Units.mul_inv _
     simp only [smul_eq_mul]
-    linear_combination (-(↑(∏ i ∈ s, w i) * d⁄dX (↑(w a) : A⟦X⟧))) * this
+    linear_combination (-(↑(∏ i ∈ s, w i) * d⁄dX (↑(w a) : A⟦X⟧))) * Units.mul_inv (w a)
 
 theorem coe_lin_one_inv (a : A) : (↑(lin 1 a)⁻¹ : A⟦X⟧) = mk fun m => a ^ m := by
   rw [Units.inv_eq_of_mul_eq_one_left]
@@ -122,8 +119,7 @@ theorem sum_eps_pow_self (r : ℕ) :
 theorem logDeriv_zpow (u : A⟦X⟧ˣ) (n : ℤ) :
     ↑(u ^ n)⁻¹ * d⁄dX (↑(u ^ n) : A⟦X⟧) = n * (↑u⁻¹ * d⁄dX (↑u : A⟦X⟧)) := by
   rw [derivative_zpow_units]
-  have : (↑(u ^ n)⁻¹ : A⟦X⟧) * ↑(u ^ n) = 1 := Units.inv_mul _
-  linear_combination ((n : A⟦X⟧) * ↑u⁻¹ * d⁄dX (↑u : A⟦X⟧)) * this
+  linear_combination ((n : A⟦X⟧) * ↑u⁻¹ * d⁄dX (↑u : A⟦X⟧)) * Units.inv_mul (u ^ n)
 
 /-! ### Page 9 -/
 
