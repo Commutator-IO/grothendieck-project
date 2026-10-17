@@ -10,6 +10,18 @@
 % batch-10.fr.tex.
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — footnotes added from the
+% Lean checks of lean/Grothendieck/Folder84.lean: p. 48 in the free case, with
+% « 2 regular » shown necessary (F_2 x F_2 and F_4); the identity of p. 64, the
+% reading 4c_1c_2 and delta = delta_1 delta_2 confirmed; p. 79's invertibility
+% criterion for L = O; p. 85 proved in coordinates over any ring; p. 86's
+% « après tout changement de base » shown necessary (Z[X], b_1 = X, b_2 = 0);
+% the cocycle of p. 131; gamma chi = 2 shown necessary already for the unit
+% objects (pp. 125-169). Mathlib named for the naturality of the tensor
+% constraints. Literature of the findings cited: Voight 2016 (Construction
+% 3.12, Theorems 3.24, 4.3, Prop. 3.11), Small 1972, Hahn 1994, Loos 1996,
+% Biesel-Gioia. Two « Ce que » headings renamed. No facsimile revision since
+% the first pass.
 %
 % Source: the ten batches as revised on the 700 dpi tiles on 2026-10-10 (each
 % batch header carries its « % Revised: » line). Read whole, twice, before any
@@ -262,7 +274,7 @@ L'algèbre d'Azumaya de la section 4 est notée $\mathcal{M}$ (son $M$), comme a
 dossier 82, et l'ensemble des $\theta$ tels que $\theta u = \bar{u}\theta$ est noté
 $\mathcal{J}$ (son $M$ de la page 39).
 
-\subsection*{Ce que seule une lecture d'ensemble peut dire}
+\subsection*{Une lecture d'ensemble}
 
 \emph{Les premiers feuillets viennent après.} Les pages 1 et 2 manipulent deux
 applications $\alpha : (L, \delta, T_0) \mapsto (L, \delta)$ et
@@ -298,7 +310,7 @@ rédaction : la page 38 achève la démonstration de la page 34, la page 37 ouvr
 le paragraphe 4.2, que continuent les pages 36 puis 35, et la page 39 suit. On
 lit dans cet ordre.
 
-\subsection*{Ce que le dossier annonce sans l'établir}
+\subsection*{Annoncé, non établi}
 
 L'explicitation des isomorphismes de transition de $A_Q$ (page 23, « Je ne vais
 pas faire l'explicitation ici ») ; un invariant d'Arf pour les formes de rang
@@ -959,7 +971,25 @@ inversible, sous $\mu'_2 = \{\lambda : \lambda^{2} = 1,\ \lambda_0 = 1\}$, et $f
 $f(\bar{x}) = -f(x)$\footnote{La marge précise : non représentables s'il existe un
 point où $2 \in \mathfrak{m}_x$ sans être nul dans $\mathcal{O}_{X,x}$.}.
 
-\textbf{Théorème.} Supposons $2$ non diviseur de zéro dans $\mathcal{O}_X$. La donnée
+\textbf{Théorème.} Supposons $2$ non diviseur de zéro dans $\mathcal{O}_X$\footnote{Vérifié
+en Lean dans le cas libre, $L$ trivial et l'algèbre donnée par une base $(1, U)$,
+sur les classes d'isomorphisme (lean/Grothendieck/Folder84.lean). Sur tout anneau,
+$\mathcal{O}[U]/(U^{2} + bU + c)$ et $\mathcal{O}[V]/(V^{2} + b'V + c')$ sont
+isomorphes si et seulement si $V = \varepsilon U + t$ avec $\varepsilon$ inversible
+(\texttt{qalg\_iso\_iff\_moves}) ; si $2$ est régulier, si et seulement si
+$\delta' = \varepsilon^{2}\delta$ et $b' \equiv \varepsilon b$ modulo $2$
+(\texttt{qalg\_iso\_iff\_disc}), et $T_0$ est la réduction de $b$ ; tout $\delta$
+congru modulo $4$ au carré d'un relèvement de $T_0$ provient d'une algèbre, sur
+tout anneau (\texttt{exists\_of\_congr}). L'hypothèse est nécessaire : sur
+$\mathbf{F}_2$, $\mathbf{F}_2 \times \mathbf{F}_2$ et $\mathbf{F}_4$ ont les mêmes
+$\delta = 1$ et $T_0 = 1$ (\texttt{two\_regular\_needed}). L'équivalence de catégories
+fibrées et le cas où $L$ n'est pas trivial ne sont pas vérifiés. Dans le cas libre
+sur une base affine, l'énoncé sur les classes est chez J.~Voight,
+« Discriminants and the monoid of quadratic rings », \emph{Pacific J. Math.}
+283 (2016), proposition 3.11 et théorème 4.3 : la fibre du discriminant au-dessus
+de $d$ y est indexée par les $t$ tels que $t^{2} \equiv d$ modulo $4$ et par
+$R[4]/dR[4]$, qui est nul quand $2$ est régulier ; il le formule par une action
+d'Artin--Schreier, non par une équivalence de catégories fibrées sur un schéma.}. La donnée
 d'un revêtement quadratique de $X$ équivaut à celle d'un triplet
 \[
   (L, \delta, T_0), \qquad L \text{ inversible}, \quad \delta \in \Gamma L^{\otimes 2}, \quad
@@ -1001,7 +1031,10 @@ $T_0 \in \mathbf{F}_2$, la condition $T_0^{2} \equiv \delta$ modulo $4$ dit exac
 que $\delta \equiv 0$ ou $1$ modulo $4$, et que $T_0$ est déterminé par $\delta$ : le
 théorème généralise la classification classique des anneaux quadratiques par leur
 discriminant, avec la congruence de Stickelberger\footnote{Rapprochement de
-l'édition.}.
+l'édition. Vérifié en Lean : sur $\mathbf{Z}$, les discriminants sont les entiers
+congrus à $0$ ou $1$ modulo $4$ (\texttt{int\_disc\_iff}), et deux anneaux
+quadratiques sont isomorphes si et seulement s'ils ont le même discriminant
+(\texttt{int\_qalg\_iso\_iff}).}.
 
 \pagerange{53}{55}
 \subsection*{Torseurs sous $\mu_2$ et sous $\mathbf{Z}/2$ (pages 53 à 55)}
@@ -1130,7 +1163,10 @@ $Q_i(u_i) = u_i^{2} + b_iu_i + c_i$ et $u = u_1b_2 + u_2b_1 + 2u_1u_2$ :
   u^{2} + bu + c = b_2^{2}Q_1(u_1) + b_1^{2}Q_2(u_2) + 4\bigl[Q_1(u_1)Q_2(u_2) - c_1Q_2(u_2) - c_2Q_1(u_1)\bigr],
 \]
 qui s'annule quand $Q_1(u_1) = Q_2(u_2) = 0$\footnote{On a refait le développement :
-il est exact. La page porte des essais biffés ; l'accolade « $-4c_1c_2$ » sous
+il est exact. Vérifié en Lean (lean/Grothendieck/Folder84.lean,
+\texttt{identity\_page64}) : l'identité vaut dans tout anneau commutatif, sans
+hypothèse sur les $u_i$ et sans diviser par $2$ ; avec $4c_1c_2$, les deux formes de
+l'encadré sont égales (\texttt{c\_two\_forms}), ce qui confirme la lecture. La page porte des essais biffés ; l'accolade « $-4c_1c_2$ » sous
 $4(c_1c_2 - c_1c_2 - c_1c_2)$ est la sienne.}. Il en retient, sous forme
 intrinsèque,
 \[
@@ -1227,7 +1263,13 @@ $T = (-b, \chi)$ et $\pi(u, \lambda) = \lambda b + \chi u$ dans $E \simeq L \opl
 \]
 --- « Il n'y a pas plus simple ! ». Les contraintes de commutativité et
 d'associativité sont caractérisées par $x_1 * x_2 \mapsto x_2 * x_1$, $(x_1 * x_2) * x_3
-\mapsto x_1 * (x_2 * x_3)$ et les isomorphismes correspondants des $L_i$. L'unité est
+\mapsto x_1 * (x_2 * x_3)$ et les isomorphismes correspondants des $L_i$\footnote{Vérifié
+en Lean pour des extensions scindées de modules quelconques
+(\texttt{prod\_comm}, \texttt{prod\_assoc}, \texttt{prod\_unit}) : c'est la
+naturalité des isomorphismes de commutativité et d'associativité du produit
+tensoriel, \texttt{TensorProduct.map\_comp\_comm\_eq} et
+\texttt{TensorProduct.map\_map\_comp\_assoc\_eq} dans mathlib. Les morphismes
+sont les transvections, $b = b' + \chi w$ (\texttt{iso\_iff}).}. L'unité est
 $E_0 = \mathcal{O} \times \mathcal{O}$, $x_0 = (0, 1)$, $\pi(u, \lambda) = \lambda + \chi u$,
 $T = (-1, \chi)$ : un scindage est \emph{unitaire} si $b$ est une base de $L$, et
 $P_0 * P_1 \simeq P_1$ par $x_1 \mapsto x_0 * x_1$, $u_1 \mapsto b_0 \otimes u_1$. Un objet
@@ -1237,7 +1279,12 @@ caractérisation est dans une longue note marginale, oblique, en partie illisibl
 on donne ce qui s'en lit, qui est juste : si $b_0$ engendre $L_0$, $b$ engendre $L$
 près de $X_0$, et hors de $X_0$, où $\chi$ est inversible, on rend $b$ unitaire par
 $b \mapsto b + \chi u$. La nécessité : $b \otimes b'$ unitaire force $b_0$ à être une
-base sur $X_0$, où $b'$ ne change pas.}. Pour $\chi = 2$ : l'extension
+base sur $X_0$, où $b'$ ne change pas. Vérifié en Lean pour $L = \mathcal{O}$
+(\texttt{invertible\_iff}, \texttt{span\_eq\_top\_iff\_isUnit}) : la classe de $b$
+est inversible si et seulement si $b\mathcal{O} + \chi\mathcal{O} = \mathcal{O}$,
+c'est-à-dire si $b$ est inversible modulo $\chi$ ; l'inverse est la classe de
+tout $g$ avec $bg \equiv 1$ modulo $\chi$. Le cas où $L$ n'est pas trivial n'est
+pas vérifié.}. Pour $\chi = 2$ : l'extension
 $2$-trivialisée d'un revêtement quadratique est inversible si et seulement si le
 revêtement est étale en tout point de caractéristique $2$.
 
@@ -1284,7 +1331,14 @@ $2 = 0$ sur $X$, que la page annonce sans la justifier et qui demanderait un
 argument sur une base non réduite. Les générateurs sont ceux de la page 84. La
 page 85 appelle $n$ le rang de $L_1 \otimes L_2$, qui vaut $1$. Sans la condition,
 par exemple si $T_1 = T_2 = 0$, $\sigma_i = \mathrm{id}$ et l'image est nulle alors que
-le noyau est de rang $3$ (le crochet de la page 84).}.
+le noyau est de rang $3$ (le crochet de la page 84). Vérifié en Lean
+(lean/Grothendieck/Folder84.lean, \texttt{coinvariants\_bijective\_iff}), avec
+des bases et des scindages : sur tout anneau commutatif, l'application induite est
+bijective si et seulement si $2\mathcal{O} + b_1\mathcal{O} + b_2\mathcal{O} =
+\mathcal{O}$, dans les deux sens, sans changement de base, sans décompte de rangs
+et globalement, le noyau étant engendré par les relations de Koszul de la suite
+unimodulaire $(2, b_2, b_1)$ (\texttt{ker\_le\_range}). La forme ponctuelle, en
+tout point de $X_0$, n'est pas vérifiée.}.
 
 \textbf{Corollaire} (page 86). Sous la même condition, et pour tout Module $M$,
 $\underline{\mathrm{Hom}}(E_1 * E_2, M) \simeq \underline{\mathrm{Hom}}(E_1 \otimes
@@ -1293,7 +1347,14 @@ $A = (E_1 * E_2)^{\vee}$,
 \[
   A_1 * A_2 \xrightarrow{\ \sim\ } (A_1 \otimes A_2)^{\sigma_1 \otimes \sigma_2},
 \]
-et réciproquement si cela reste vrai après tout changement de base. C'est la
+et réciproquement si cela reste vrai après tout changement de base\footnote{Vérifié
+en Lean en coordonnées : la condition suffit sur la base elle-même
+(\texttt{invariants\_of\_span\_eq\_top}), et la réciproque vaut « après tout
+changement de base », le passage à $\mathcal{O}/(2, b_1, b_2)$ suffisant
+(\texttt{invariants\_universally\_iff}). La précision de la page est nécessaire :
+sur $\mathbf{Z}[X]$, avec $b_1 = X$ et $b_2 = 0$, l'application est un isomorphisme
+sur l'anneau lui-même, alors que $2$, $X$ et $0$ engendrent un idéal propre
+(\texttt{invariants\_not\_iff}).}. C'est la
 définition classique du produit des algèbres quadratiques étales ; elle reste
 valable dès qu'en chaque point de caractéristique $2$ l'un des facteurs est
 étale\footnote{Pour le produit des algèbres quadratiques étales, voir M.-A. Knus,
@@ -1301,7 +1362,16 @@ valable dès qu'en chaque point de caractéristique $2$ l'un des facteurs est
 quadratiques quelconques, la question a été reprise par d'autres moyens dans les
 travaux sur l'« algèbre discriminante » (Deligne, Rost, Loos, Biesel--Gioia) ;
 on ne prétend pas qu'ils retrouvent exactement cette construction. Références de
-l'édition.}.
+l'édition. J.~Voight, « Discriminants and the monoid of quadratic rings »,
+\emph{Pacific J. Math.} 283 (2016), théorèmes A(iii) et 3.24(iii), énonce
+$S * T = (S \otimes T)^{\sigma \otimes \tau}$ lorsque les deux facteurs sont
+séparables, d'après C.~Small (\emph{J. Pure Appl. Algebra} 2, 1972,
+proposition 1), et remarque après sa construction 3.12 qu'en caractéristique $2$,
+pour $\sigma = \tau = \mathrm{id}$, l'élément $w$ n'engendre pas toujours une
+algèbre de rang $2$ ; O.~Biesel et A.~Gioia (arXiv:1503.05318, § 8) reprennent la
+caractérisation pour des facteurs étales. Ni l'énoncé avec un seul facteur
+étale en chaque point de caractéristique $2$, ni la réciproque n'ont été trouvés
+dans ces deux sources ; d'autres (Loos, Hahn, Small) restent à lire.}.
 
 \emph{Au-dessus de $V(\chi)$} (pages 86 à 88). Si $\chi = 0$ sur $X$, une
 $\chi$-trivialisation n'est plus qu'une section $T$ de $L$, et $\pi(x) = -T$ est
@@ -1334,7 +1404,21 @@ $x_1 * x_2$ :
   \boxed{\ b = b_1b_2, \qquad c = c_1b_2^{2} + c_2b_1^{2} - 4c_1c_2\ } .
 \]
 \textbf{Corollaire.} $\delta = \delta_1\delta_2$ : $b_1^{2}b_2^{2} - 4(c_1b_2^{2} + c_2b_1^{2} -
-4c_1c_2) = (b_1^{2} - 4c_1)(b_2^{2} - 4c_2)$.
+4c_1c_2) = (b_1^{2} - 4c_1)(b_2^{2} - 4c_2)$\footnote{Vérifié en Lean
+(\texttt{disc\_mul}), comme identité sur tout anneau commutatif ; l'unicité de $Q$ et
+la construction intrinsèque de $X_1 * X_2$ ne le sont pas. La formule du produit
+est publiée : J.~Voight, « Discriminants and the monoid of quadratic rings »,
+\emph{Pacific J. Math.} 283 (2016), construction 3.12 et théorème 3.24, donne pour
+$x^{2} = tx - n$, $y^{2} = sy - m$ le produit $R \oplus Rw$ avec $w^{2} = (st)w -
+(mt^{2} + ns^{2} - 4nm)$, qui est celle-ci pour $b = -t$, $c = n$ et $w \mapsto -w$ ;
+son générateur $w = x \otimes y + \sigma(x) \otimes \tau(y)$ est celui de la page 102.
+Voight attribue la formule à A.~Hahn, \emph{Quadratic algebras, Clifford algebras,
+and arithmetic Witt groups} (1994), exercices 14 à 20, le monoïde général à
+O.~Loos (\emph{Monatsh. Math.} 122, 1996), et son existence à une lettre de
+P.~Deligne à M.~Rost et M.~Bhargava (2005) ; O.~Biesel et A.~Gioia
+(arXiv:1503.05318, § 8) retrouvent le même monoïde par les algèbres
+discriminantes. La route du dossier, par les extensions $\chi$-trivialisées, ne
+s'y lit pas, à notre lecture de ces deux sources.}.
 
 Les deux formules simples sont $b = b_1b_2$ et $\delta = \delta_1\delta_2$ ; celle de $c$
 s'en déduit « heuristiquement » en divisant $4c = b^{2} - \delta$ par $4$, et se
@@ -1412,7 +1496,11 @@ extension de $L_1^{\vee} \otimes L_2^{\vee}$ par $\mathcal{O}$ ($\mathrm{Tr}_1(1
   i(\mathcal{U}) = 2U_1U_2 + b_1U_2 + b_2U_1,
 \]
 avec $b, c$ comme au théorème de la page 89 ; que $i(\mathcal{U})$ vérifie l'équation
-est l'identité de la page 64, dans l'anneau $A_1 \otimes A_2$.
+est l'identité de la page 64, dans l'anneau $A_1 \otimes A_2$\footnote{Vérifié en
+Lean (\texttt{tensor\_root}) dans $A_1 \otimes A_2$ pour deux algèbres quelconques
+munies de racines $u_1$, $u_2$, sur tout anneau de base ; d'où le morphisme
+d'algèbres $\mathcal{O}[\mathcal{U}]/(\mathcal{U}^{2} + b\,\mathcal{U} + c) \to A_1
+\otimes A_2$ (\texttt{productToTensor}).}.
 
 \textbf{Proposition} (pages 104 et 105). 1) L'homomorphisme canonique
 $\mathrm{Tr}_{A_1 \otimes A_2/A} : A_1 \otimes A_2 \to A$ (le transposé de $i$), qu'il note
@@ -1592,7 +1680,9 @@ s'arrête ; elle est vraie :
   vérification est de l'édition. Les signes de $b'_i = b_i \pm \chi u_i$ varient d'une
   ligne à l'autre des pages 129 à 133, et la page 131 écrit $b''_2 = b_2 + \chi u'_2$ ;
   on fixe $b'_i = b_i + \chi u_i$, $b''_i = b'_i + \chi u'_i$, avec lesquels la relation
-  est exacte.}
+  est exacte. Vérifié en Lean pour des modules quelconques
+  (lean/Grothendieck/Folder84.lean, \texttt{prod\_change} pour la formule de $u$,
+  \texttt{uProd\_cocycle} pour $u'' = u + u'$), avec ces signes.}
 Le produit $E_1 * E_2$ existe donc par recollement.
 
 \emph{Le produit tiré} (pages 125 et 127). Une seconde construction, duale, donne
@@ -1600,7 +1690,14 @@ en coordonnées la même extension, mais avec le $\chi$-scindage défini par $-b
 lieu de $b$ ; un isomorphisme de l'une sur l'autre est une transvection $T_v$ avec
 $b + \chi v = -b$, c'est-à-dire $v = -\tfrac{2}{\chi}b$. Il existe donc, canonique,
 dès qu'il y a $\gamma \in k$ avec $\gamma\chi = 2$ : $v = -\gamma b$, et le carré de la page
-125 commute (« commute ! »). Pour $\chi = 2$, $\gamma = 1$\footnote{La page 125 note
+125 commute (« commute ! »). Pour $\chi = 2$, $\gamma = 1$\footnote{Vérifié en Lean
+(\texttt{push\_pull}, \texttt{push\_pull\_square}) : si $\gamma\chi = 2$, $T_{\gamma b}$
+envoie le $\chi$-scindage de $b$ sur celui de $-b$, compatiblement aux changements
+de scindage. La condition est nécessaire dès les objets unités : un isomorphisme
+du produit poussé sur le produit tiré qui induit l'identité sur $L$ et sur $M$
+existe si et seulement s'il y a $\gamma$ avec $\gamma\chi = 2$
+(\texttt{push\_pull\_unit\_iff}) ; sur $\mathbf{Z}$ avec $\chi = 4$, il n'y en a
+pas. La page 125 note
 $\vee$ et $\wedge$ les deux produits ; on les note $E_1 * E_2$ et $E_1 *^{\varpi} E_2$. La
 page 127 note $\sigma$ l'élément qu'on appelle $\gamma$, comme le font les pages 141 et
 suivantes.}.
@@ -1696,7 +1793,8 @@ La composée verticale du milieu est l'opérateur $F_{11}$\footnote{Le diagramme
 page 167 porte « ? » sur la flèche du milieu, et un trait barre la page entre ses
 deux premières lignes. On le lit avec la flèche que les pages 141 à 157
 construisent. La page 169 dit l'isomorphisme « de façon évidente » ; l'hypothèse
-$\gamma\chi = 2$ est de l'édition, d'après la page 127.}. Les deux constructions se
+$\gamma\chi = 2$ est de l'édition, d'après la page 127, et la vérification en
+Lean rapportée à propos des pages 125 et 127 montre qu'on ne peut s'en passer.}. Les deux constructions se
 correspondent par transposition (page 159) : le dual d'une extension
 $0 \to L \to E \to M \to 0$ est $0 \to M^{\vee} \to E^{\vee} \to L^{\vee} \to 0$, la
 transposée d'une $\chi$-rétraction est une $\chi$-section, et, pour $M_i$ localement
