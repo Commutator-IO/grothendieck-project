@@ -78,6 +78,12 @@
 % reviendrai"); the equianharmonic case (p. 124 stops on "On").
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — with the Lean check
+% (Folder146.lean): the table's 6 for L_4, n = 4 (p. 70), checked — the class
+% has order exactly 6; the 3 for L and n = 5, 6 stay unverified. Literature
+% of the findings cited: Bakalov-Kirillov (2000) for G(I) of pp. 8-10 as the
+% mapping class group of the three-holed sphere. No mathlib result, no
+% facsimile correction since the pass.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -419,7 +425,23 @@ action — sur $\mathfrak{S}_I^{+}$ elle est celle du scindage canonique. C'est,
 pour la partie $\mathfrak{S}_3$ du groupe $\Gamma_{0,3}$, l'extension
 $S\Gamma$ de $\Gamma_{0,3}$ par $\mathbb{Z}^{\{0,1,\infty\}}$ que le dossier
 145 (page 31) laisse à expliciter\footnote{Rapprochement de cette édition ;
-le dossier 145 adjoint en outre la conjugaison complexe, absente ici.}.
+le dossier 145 adjoint en outre la conjugaison complexe, absente ici.}. Le
+groupe $G(I)$ se retrouve, par ses relations, dans le groupe des classes
+d'applications de la sphère à trois trous, composantes du bord permutables :
+B.~Bakalov et A.~Kirillov Jr., « On the Lego--Teichmüller game »,
+\emph{Transform. Groups} 5 (2000), proposition 6.6 (présentation de
+$\Gamma_{0,n}$ par les tressages $b_i$, les twists $t_i$ et la rotation $z$,
+$z^n = 1$), exemple 4.18 et relation (4.11). Pour $n = 3$, $\Gamma_{0,3}$ est
+une extension de $\mathfrak{S}_3$ par les twists de bord $\mathbb{Z}^3$, la
+rotation, d'ordre $3$, la scinde sur les $3$-cycles, et le carré d'un tressage
+est un produit de twists où celui du trou fixe figure à la puissance $\pm 1$,
+de sorte qu'aucun relèvement d'une transposition n'est d'ordre $2$\footnote{La
+comparaison est de l'édition et ne porte que sur les relations : la rotation
+d'ordre $3$ en regard du scindage canonique sur $\mathfrak{S}_I^{+}$, le carré
+d'un tressage en regard de $(\sigma, n)^2 = (1, n + \sigma n)$. L'isomorphisme
+$G(I) \simeq \Gamma_{0,3}$, signe du tressage fixé, reste à écrire. La voie de
+la page, la parité des demi-tours entre les deux points base réels
+$\omega(I)$, n'est pas dans cet article.}.
 
 \pagerange{10}{14}
 \subsection*{Un graphe de dimension modulaire nulle ; l'exemple du carré
@@ -1038,7 +1060,23 @@ $\mathfrak{A}_5$ et l'icosaèdre.}. La page 72 en donne la source : des
 sections $\xi_A$ indexées par les parties $A$ à trois éléments, et leur
 produit, section de $L^{\otimes\nu}$, $\nu = (n-1)(n-2)/2$, d'où « $L^{\otimes
 6} \simeq 1$ » pour $n = 4$ et $n = 5$. Ces affirmations ne sont pas
-démontrées sur les pages et ne sont pas vérifiées ici.
+démontrées sur les pages. La valeur $6$ pour $L_i$, $n = 4$, est juste : la
+classe de $L_4$ est d'ordre exactement $6$\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder146.lean, \texttt{der\_pow\_six} et
+\texttt{six\_dvd}), sur un corps où $2$ et $3$ sont inversibles et qui contient
+une racine $\zeta$ de $\zeta^2 - \zeta + 1$ ; l'argument est de l'édition. Sur
+$U = M_{0,4} = \mathbb{P}^1 \smallsetminus \{0, 1, \infty\}$, les six
+substitutions anharmoniques $g$ réalisent $\mathfrak{S}_3$, et $g \mapsto
+g'(\lambda)$, l'action sur la droite tangente au point mobile, est un
+$1$-cocycle ; sa puissance sixième est le cobord de $h = \lambda^4(1 -
+\lambda)^4$, et aucune puissance plus petite n'est un cobord, même parmi les
+fonctions sans zéro quelconques sur $U(K)$ : en $\lambda = -1$, fixe sous
+$1/\lambda$, la dérivée vaut $-1$, et en $\zeta$, fixe sous $1/(1 - \lambda)$,
+elle vaut $\zeta^2$, racine primitive cubique de l'unité. Ne sont pas
+formalisés l'identification du groupe de Picard équivariant à
+$H^1(\mathfrak{S}_3, \mathcal{O}(U)^{*})$, la valeur $3$ pour $L$ sous
+$\mathfrak{S}_4$, ni les valeurs proposées pour $n = 5, 6$.} ; la valeur $3$
+pour $L$ et les colonnes $n = 5, 6$ ne sont pas vérifiées ici.
 
 Le cadre est la cohomologie équivariante. Comme $M_{0,K}$ est le complémentaire
 d'un arrangement d'hyperplans dans un espace affine, $\mathrm{Pic}(M_{0,K}) = 0$
