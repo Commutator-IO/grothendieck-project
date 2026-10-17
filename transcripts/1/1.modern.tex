@@ -42,7 +42,8 @@
 % Announced and never established: the plan's « N° 7, autres inégalités »
 % (page 2); the marginal « ② Dual de 𝓛^p ; réflexivité » of page 126 (done for
 % general Schatten norms at pages 98-104, not in that theorem); the
-% inventory's « lettre (1953) », which no transcribed page identifies.
+% inventory's « lettre (1953) », which is not among the scanned pages (the
+% untranscribed pages were checked blank on the facsimile, 2026-09-27).
 %
 % Chronology, argued in the spine section from the pages themselves: pages
 % 123-149 predate pages 37-104 (page 129 knows only an analytic proof of
@@ -51,6 +52,14 @@
 %
 % Pass: Fable 5.1 (claude-fable-5-1), 2026-09-10 — first pass, unchecked
 % against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — Théorème 2 of pages
+% 71-73 footnoted with the Lean check (system (16) for m ≤ 2 in finite
+% dimension, and (16) ⟹ (15), proved; m ≥ 3 and the compact case not), with
+% the open mathlib PRs for Cauchy–Binet and Lagrange; the page-73 footnote
+% corrected: Rotfel'd/Thompson cover the product form (15), not the
+% coefficientwise system, whose literature search is not done; the
+% « lettre (1953) » recorded as absent from the scan, the untranscribed
+% pages (1, 36, 42, 46, 105, 122, 140) being blank on the facsimile.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -287,8 +296,10 @@ promet un « N° 7, autres inégalités » qui n'existe nulle part. Et la page
 126 annonce en marge « ② Dual de $\mathcal{L}^p$ ; réflexivité » sans que ce
 point soit traité dans ce théorème-là ; il l'est, pour les normes de
 Schatten générales, aux pages 98 à 104. L'inventaire mentionne enfin une
-« lettre (1953) » : aucune page transcrite ne porte d'adresse ni de signature,
-et cette lecture ne désigne pas laquelle serait la lettre.
+« lettre (1953) » : elle n'est pas dans la numérisation. Aucune page
+transcrite ne porte d'adresse ni de signature, et les seules pages non
+transcrites (1, 36, 42, 46, 105, 122 et 140) ont été vérifiées sur le
+fac-similé le 27 septembre 2026 : elles sont blanches.
 
 \pagerange{3}{5}
 \section*{Les multiplicateurs d'une $C^{*}$-algèbre (pages 3 à 5)}
@@ -1315,6 +1326,31 @@ et plus précisément, avec $\sigma_n^m(w) = \sum_{1 \leq i_1 < \cdots < i_m
 \[
   \sigma_n^m(u+v) \leq \sum_{p=0}^{m} \sigma_n^p(u)\,\sigma_n^{m-p}(v) .
 \]
+Le second membre est la fonction symétrique élémentaire de degré $m$ des
+$2n$ nombres $s_1(u), \ldots, s_n(u), s_1(v), \ldots, s_n(v)$ ; le système
+majore donc, coefficient par coefficient, les fonctions symétriques des $n$
+premières valeurs singulières de $u+v$ par celles de la réunion des deux
+listes (remarque de l'édition, que la page ne fait pas).\footnote{Vérifié en Lean, en dimension finie seulement
+(lean/Grothendieck/Folder1.lean). Pour $m = 1$, le système est l'inégalité de
+Ky Fan $\sum_{i \leq n} s_i(u+v) \leq \sum_{i \leq n} s_i(u) + \sum_{i \leq n}
+s_i(v)$ (\texttt{sum\_singularValues\_add\_le}, \texttt{sigma\_system\_of\_le\_one}),
+démontrée par le principe du maximum ; mathlib définit les valeurs
+singulières d'une application linéaire en dimension finie
+(\texttt{LinearMap.singularValues}) mais ne contient pas cette inégalité.
+Pour $m = 2$, l'inégalité vaut telle que la page l'écrit, pour tout $n$
+(\texttt{sigma\_two\_add\_le}, \texttt{sigma\_system\_of\_le\_two}) ; la
+démonstration suit la voie de la page par $\Lambda^2$, écrite avec des
+mineurs d'ordre $2$, la formule de Cauchy--Binet et l'inégalité de Lagrange,
+avec la constante $p!\,q!/(p+q)! = 1/2$ de la proposition 2. L'inégalité de
+Ky Fan appliquée à $\Lambda^2 u$ seule n'y suffirait pas : pour $n = 3$ et des
+valeurs singulières $(2, 1, 1, 1)$, la somme des trois plus grands produits
+$s_is_j$ vaut $6$ et $\sigma_3^2 = 5$. L'implication du système vers la forme
+produit, coefficient par coefficient, est vérifiée pour tout $n$
+(\texttt{prod\_le\_of\_sigma\_system}), d'où la forme produit pour $n \leq 2$
+(\texttt{prod\_le\_of\_le\_two}). Ne sont pas vérifiés : le système pour
+$3 \leq m \leq n$, la proposition 3 en général, et le passage aux opérateurs
+compacts. La formule de Cauchy--Binet et l'inégalité de Lagrange dont la
+preuve se sert sont proposées à mathlib (demandes d'intégration mathlib4 n° 44757 et 44759, ouvertes).}
 
 \emph{Proposition 3.} Pour $u$ compact et $m \leq n$,
 \[
@@ -1333,11 +1369,16 @@ rang $\leq n$, le corollaire 2 donne $|\alpha_m(w(u+v))| \leq
 \sum_p \alpha_p(|wu|)\,\alpha_{m-p}(|wv|) \leq \sum_p \sigma_n^p(u)\,
 \sigma_n^{m-p}(v)$, et l'on prend le sup en $w$ par la proposition 3. La page
 73 juge ce système d'inégalités « les plus fortes possibles » majorant les
-$s_i(u+v)$ en fonction des $s_i(u)$ et $s_i(v)$.\footnote{Elles sont, pour
-$f(s) = \log(1 + rs)$, l'inégalité $\sum_{i \leq n} f(s_i(u+v)) \leq
+$s_i(u+v)$ en fonction des $s_i(u)$ et $s_i(v)$.\footnote{La forme produit
+est, pour $f(s) = \log(1 + rs)$, l'inégalité $\sum_{i \leq n} f(s_i(u+v)) \leq
 \sum_{i \leq n} f(s_i(u)) + f(s_i(v))$ que Rotfel'd (1967) et Thompson (1976)
 établissent pour toute $f$ concave croissante nulle en $0$ ; les pages 74
-et 75 vont exactement dans cette direction.}
+et 75 vont exactement dans cette direction. Cet énoncé ne couvre pas le
+système coefficient par coefficient, dont seul le cas $m = 1$ (Ky Fan, 1951)
+est un résultat publié connu de l'édition ; la recherche des cas $m \geq 2$
+dans la littérature n'est pas faite. Le jugement « les plus fortes
+possibles » repose sur des mots lus avec doute, et l'édition ne l'a pas
+vérifié.}
 
 \pagerange{74}{75}
 \section*{Sous-additivité des fonctions des valeurs singulières (pages 74 et 75)}
