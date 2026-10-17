@@ -7,6 +7,14 @@
 % Pass: Opus 5 (claude-opus-5), 2026-09-13 — first pass, unchecked against the
 % pages by a human. The folder was read whole; it holds one batch, pages 1-13,
 % of which page 2 (the blank back of the title leaf) carries nothing.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — page 11, Prop. 1: footnote
+%   on the Lean check (Folder41.lean: holds, (i) <=> (ii) and (i) => (iii) <=>
+%   (iii bis) for any map of spaces with a generic-point section, and a
+%   counterexample showing only (iii bis) => (ii) needs finiteness), and the
+%   mathlib declaration for that step (Stacks 01U1). Page 8: the « quasi- » of
+%   « quasi-fini » is now the transcription's supply, not his insertion
+%   (transcription revised 2026-09-26); footnoted, kept. Literature of the
+%   folder's findings is unsearched: nothing cited.
 %
 % What the folder is. A draft section, under a title of his, on the étale
 % Y-scheme M whose geometric points over y are the irreducible components of
@@ -39,7 +47,7 @@
 %   half of the valuative criterion, hence M proper, hence finite étale; the
 %   word on the leaf does not carry that sense and is footnoted.
 % — page 11, Prop. 1: (i) <=> (ii) holds with no hypothesis (phi^{-1}(U) =
-%   f(U), his own formula); (ii) <=> (iii) needs f locally of finite
+%   f(U), his own formula); only (iii bis) => (ii) needs f locally of finite
 %   presentation. The reading says which implication uses what.
 % — page 13, the struck Lemme: as legible, it fails for a flat f without a
 %   further hypothesis; a counterexample is given in a footnote.
@@ -359,7 +367,10 @@ $Y[t_1, \ldots, t_{n-1}]$ --- condition vérifiée, dit-il, si $X$ est plat sur
 $Y$ au voisinage de $x$.\footnote{« Principal » est son mot pour ces points
 génériques. L'indice $n - 1$ est sur le feuillet sans que $n$ soit défini ; on
 comprend la dimension de la fibre en $x$ augmentée de un, mais c'est une
-lecture. L'assertion sur le cas plat n'est pas démontrée ici et cette lecture ne
+lecture. Le préfixe « quasi- » n'est pas de sa main : le feuillet écrit
+« fini », et la transcription supplée « quasi- » ; nous le gardons, car un
+voisinage ouvert de $x$ n'a pas de raison d'être fini sur un espace affine, et
+c'est la quasi-finitude que l'énoncé, local en $x$, peut demander. L'assertion sur le cas plat n'est pas démontrée ici et cette lecture ne
 la vérifie pas : ce qu'on sait sans peine est qu'un morphisme plat de
 présentation finie est universellement ouvert, et c'est cette propriété que
 la construction des pages 5 et 6 utilise.} Pour qu'il existe un $M$
@@ -496,7 +507,26 @@ presque entièrement illisible, et on la rédige. La page énonce (ii) sous la
 forme « $f$ soit ouvert, […] si $Y$ est loc.\ noeth., $f$ de type fini », ce qui
 place l'hypothèse de finitude au bon endroit : elle ne sert qu'au retour de
 (iii bis) vers (ii), qui est le relèvement des générisations
-(EGA~IV, 1.10.4). La condition (iii bis) est encadrée sur le feuillet.}
+(EGA~IV, 1.10.4). La condition (iii bis) est encadrée sur le feuillet.
+Vérifié en Lean (lean/Grothendieck/Folder41.lean, \texttt{i\_iff\_ii},
+\texttt{i\_imp\_iii}, \texttt{iii\_iff\_iiibis}, \texttt{proposition1}) :
+l'énoncé tient tel qu'il est écrit ici, et plus généralement. Les
+équivalences (i) $\Leftrightarrow$ (ii) et (i) $\Rightarrow$ (iii)
+$\Leftrightarrow$ (iii bis) valent pour toute application $f$ entre espaces
+topologiques munie d'une section $\varphi$ dont chaque $\varphi(y)$ se
+spécialise en tous les points de la fibre, sans que $f$ soit de type fini, ni
+même continue ; c'est en ce sens fort que « sans autre hypothèse » est vrai. Le
+contrôle donne aussi (\texttt{iiibis\_not\_imp\_ii}) un exemple, de
+l'édition, où l'hypothèse de finitude manque et le retour échoue : l'identité
+de $\mathbb{N}$ discret vers $\mathbb{N}$ muni de la topologie cofinie a pour
+fibres des points, relève trivialement les générisations (les deux espaces
+sont T$_1$) et n'est pas ouverte, puisque $\{0\}$ n'est pas ouvert à
+l'arrivée. Ce n'est pas un morphisme de schémas ; il montre seulement que le
+retour de (iii bis) vers (ii) demande une hypothèse, et qu'il est le seul à en
+demander une. Ce retour est un résultat classique déjà dans mathlib : un
+morphisme localement de présentation finie qui relève les générisations est
+ouvert, \texttt{AlgebraicGeometry.isOpenMap\_of\_generalizingMap},
+dont la source renvoie au Stacks Project, Tag 01U1.}
 
 \textbf{Définition 2.} $f$ est \emph{universellement monogène} s'il est
 universellement ouvert et à fibres géométriquement irréductibles --- de sorte
