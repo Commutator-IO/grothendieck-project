@@ -119,25 +119,20 @@ theorem six_dvd (h2 : (2 : K) ≠ 0) (h3 : (3 : K) ≠ 0) {ζ : K} (hζ : ζ ^ 2
     (m : ℤ) (h : K → K) (hh : ∀ x, U x → h x ≠ 0)
     (hc : ∀ a x, U x → der a x ^ m = h (anh a x) / h x) : 6 ∣ m := by
   have hU1 : U (-1 : K) := ⟨by simp, fun e => h2 (by linear_combination -e)⟩
-  have e1 := hc 1 (-1) hU1
-  have hm1 : (1 / (-1 : K)) = -1 := by simp
-  simp only [der, anh, hm1, div_self (hh _ hU1)] at e1
-  have e1' : (-1 : K) ^ m = 1 := by simpa using e1
+  have e1' : (-1 : K) ^ m = 1 := by simpa [der, anh, hh _ hU1] using hc 1 (-1) hU1
   have h2m : 2 ∣ m := by
     rcases Int.even_or_odd m with he | ho
     · exact even_iff_two_dvd.1 he
     · rw [ho.neg_one_zpow] at e1'
       exact absurd (by linear_combination -e1') h2
-  have hζ0 : ζ ≠ 0 := by rintro rfl; norm_num at hζ
-  have hζ1 : ζ ≠ 1 := by rintro rfl; norm_num at hζ
-  have hUζ : U ζ := ⟨hζ0, hζ1⟩
+  have hUζ : U ζ := ⟨fun e => by simp [e] at hζ, fun e => by simp [e] at hζ⟩
   have hfix : 1 / (1 - ζ) = ζ := by
-    have : 1 - ζ ≠ 0 := sub_ne_zero.2 (Ne.symm hζ1)
+    have : 1 - ζ ≠ 0 := sub_ne_zero.2 (Ne.symm hUζ.2)
     field_simp; linear_combination hζ
   have hder : 1 / (1 - ζ) ^ 2 = ζ ^ 2 := by rw [one_div, ← inv_pow, ← one_div, hfix]
   have w1 : ζ ^ 2 ≠ 1 := fun e => h3 (by linear_combination (-1 - ζ) * e + (ζ + 2) * hζ)
   have w3 : (ζ ^ 2) ^ 3 = 1 := by linear_combination (ζ ^ 4 + ζ ^ 3 - ζ - 1) * hζ
-  have hw0 : ζ ^ 2 ≠ 0 := pow_ne_zero _ hζ0
+  have hw0 : ζ ^ 2 ≠ 0 := pow_ne_zero _ hUζ.1
   have e2 := hc 4 ζ hUζ
   simp only [der, anh, hfix, hder, div_self (hh _ hUζ)] at e2
   generalize ζ ^ 2 = w at e2 w1 w3 hw0
