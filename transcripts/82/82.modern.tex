@@ -115,6 +115,16 @@
 % smooth one-dimensional subgroup is commutative over a base, and the
 % normaliser (pp. 43-44, breaks off); the question in the margin of p. 77.
 % The folder ends at p. 78 in the middle of section VI.
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder82.lean): the split case of pp. 77-78
+% holds as the footnote gave it, over any commutative ring with 2 = 0
+% (ker_phi, orth_iff, orth_smul), with no unimodularity needed for the
+% orthogonal, and over F_2[eps]/(eps^2) the points (1 : eps) and (1 : 0)
+% have the same orthogonal (not_mono), a direct witness that (60) is not a
+% monomorphism. (61) for twisted conics stays unchecked. No mathlib
+% theorem carries the statement; the finding records no literature read.
+% No facsimile check since the first pass.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -1698,6 +1708,16 @@ cas standard : la conique $xy = z^2$ (caractéristique $2$) est paramétrée par
 $(s : t) \mapsto (s^2, t^2, st)$ ; l'orthogonal de la droite isotrope
 $\mathcal{O}(s^2\widetilde{X} + t^2\widetilde{Y} + st\,\widetilde{H})$ est l'hyperplan
 $t^2 x + s^2 y = 0$, qui contient $\widetilde{H} = 1$ et ne dépend que de
-$(s^2 : t^2)$.}. La page, et le dossier, s'arrêtent là.
+$(s^2 : t^2)$. Vérifié en Lean (lean/Grothendieck/Folder82.lean,
+\texttt{ker\_phi}, \texttt{orth\_iff}, \texttt{one\_mem\_orth} et
+\texttt{orth\_smul}) sur tout anneau commutatif où $2 = 0$, pour tous $s$,
+$t$, sans hypothèse d'unimodularité : $\widetilde{H} = 1$, le noyau de
+$\varphi$ est engendré par $1$, et (60) est $(s : t) \mapsto (s^2 : t^2)$. La
+vérification donne aussi un témoin direct de ce que (60) n'est pas un
+monomorphisme, sans passer par l'existence de fibrés non banals : sur
+$\mathbb{F}_2[\varepsilon]/(\varepsilon^2)$, les points distincts
+$(1 : \varepsilon)$ et $(1 : 0)$ ont le même orthogonal
+(\texttt{not\_mono}). L'isomorphisme canonique (61) pour une conique tordue
+sur une base quelconque n'est pas vérifié.}. La page, et le dossier, s'arrêtent là.
 
 \end{document}
