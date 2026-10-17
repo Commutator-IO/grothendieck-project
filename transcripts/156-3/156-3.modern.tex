@@ -40,7 +40,8 @@
 % — page 10: the inner components are the open ]s_i, s_{i+1}[ (the page has
 %   brackets that read closed).
 % — page 11: the margin's « or {a,b,c} of cardinal ≤ 2 » is replaced by the
-%   exact relation 𝓡̄(a,b,c) ⇔ 𝓡(a,b,c) or b ∈ {a,c}.
+%   exact relation 𝓡̄(a,b,c) ⇔ 𝓡(a,b,c) or (b ∈ {a,c} and a, c comparable)
+%   (the comparability clause added 2026-10-18, see below).
 % — page 13: « trois » éléments is four.
 % — page 16: the claim that the largest class 𝒯 is the class of tronçons is
 %   verified (footnote).
@@ -82,6 +83,19 @@
 % 𝓡(a,b,c), and on (𝔖_0, R_ε), characterising a tronçon (page 16 (2), page
 % 40); the end of the locally closed theorem of page 20 (overwritten);
 % properties 1)-8) of pages 32-33, stated without proof; soberness (page 22).
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder156_3.lean) and the literature of the
+% findings 156-3-order-from-betweenness and 156-3-betweenness-from-cuts:
+% — page 11: the reading's « R-bar(a,b,c) iff R(a,b,c) or b in {a,c} » was
+%   false for a, c incomparable (product order on N^2); corrected to require
+%   a, c comparable; the lemma of page 13 never meets the case.
+% — pages 11-13: order from betweenness and comparability checked; it is a
+%   case of Courcelle 2020, Theorem 7, now cited.
+% — pages 14-15: betweenness from the cuts, hence the order up to reversal,
+%   checked; only density and directedness used; comparability alone does
+%   not suffice (Q). Courcelle 2020, §§ 1-2, cited as not treating cut data.
+% No facsimile check since 2026-10-10.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -418,10 +432,17 @@ l'orientation. Pour $a, b, c$ on note
 dans la paire et qui est symétrique en $a$ et $c$. Sa version large,
 $\overline{\mathcal{R}}(a,b,c) \iff a \leq b \leq c$ ou $a \geq b \geq c$,
 s'en déduit : $\overline{\mathcal{R}}(a,b,c)$ équivaut à $\mathcal{R}(a,b,c)$
-ou $b \in \{a,c\}$\footnote{La marge de la page 11 donne « ou $\{a,b,c\}$ est
-de cardinal $\leq 2$ », précédé d'un mot illisible. Pris tel quel, c'est faux
-pour $a = c \neq b$, où $\overline{\mathcal{R}}(a,b,a)$ est faux ; on écrit la
-condition exacte.}. Dans la suite, « entre » sans adverbe est la relation
+ou à $b \in \{a,c\}$ avec $a$ et $c$ comparables\footnote{La marge de la page
+11 donne « ou $\{a,b,c\}$ est de cardinal $\leq 2$ », précédé d'un mot
+illisible. Pris tel quel, c'est faux pour $a = c \neq b$, où
+$\overline{\mathcal{R}}(a,b,a)$ est faux ; on écrit la condition exacte.
+Correction du 18 octobre 2026 : une version antérieure de cette lecture
+écrivait « $\mathcal{R}(a,b,c)$ ou $b \in \{a,c\}$ », ce qui est faux quand $a$
+et $c$ sont incomparables --- pour $b = a$, $\overline{\mathcal{R}}(a,a,c)$
+demande $a \leq c$ ou $c \leq a$ ; contre-exemple avec l'ordre produit sur
+$\mathbf{N}^{2}$. Vérifié en Lean (lean/Grothendieck/Folder156\_3.lean,
+\texttt{btwLe\_iff} et \texttt{btwLe\_reading\_fails}). Le lemme de la page 13,
+où l'on a toujours $x < y$, ne rencontre pas ce cas.}. Dans la suite, « entre » sans adverbe est la relation
 large.
 
 \begin{quote}
@@ -448,7 +469,10 @@ sont connus. Enfin $u \leq v$ si et seulement s'il existe $x \in
 l'intermédiarité, ce que fait le lemme suivant\footnote{La page 12 énumère les
 conditions « $u$, $v$ sont entre $x$ et $y$ ; $u$ est entre $x$ et $v$ ; $v$
 est entre $u$ et $y$ », réunies par un crochet. La page 13 les reprend en
-lemme.}. \hfill$\square$
+lemme. Vérifié en Lean (lean/Grothendieck/Folder156\_3.lean,
+\texttt{le\_iff\_readLe} et \texttt{order\_eq\_or\_dual}) : sur un ensemble
+ordonné filtrant dans les deux sens, l'intermédiarité stricte et la
+comparabilité déterminent l'ordre à l'opposé près, par cette formule même.}. \hfill$\square$
 
 \begin{quote}
 \textbf{Lemme} (page 13). \emph{Soient $x, y, u, v$ quatre éléments d'un ensemble
@@ -504,7 +528,21 @@ les deux dernières par divisibilité. L'élément du milieu est donc le seul
 composantes disjointes : $\mathcal{R}(a,b,c)$ se lit sur les découpages. « On
 gagne ! » Et le programme de la page 3 est rempli pour le tronçon : la relation
 de position modérée et les découpages des seules 0-sphères déterminent
-l'ordre à l'opposé près, donc tout le reste.
+l'ordre à l'opposé près, donc tout le reste.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder156\_3.lean, \texttt{piece\_above},
+\texttt{piece\_below}, \texttt{piece\_between}, \texttt{middle\_iff} et
+\texttt{order\_of\_cuts}) : une bijection entre tronçons qui respecte la
+comparabilité et les partitions, non étiquetées, des $C(\varepsilon)$ est un
+isomorphisme ou un anti-isomorphisme d'ordres. Seules servent la divisibilité
+c), deux fois, pour les deux intersections non vides, et la filtration b), dans
+le lemme des pages 11 à 13 ; les conditions locales a), a$'$) et d) ne servent
+pas. La comparabilité seule ne suffit pas, déjà sur le tronçon $\mathbf{Q}$
+(\texttt{cmp\_alone\_insufficient}). L'édition n'a pas trouvé l'énoncé sous
+cette forme : B.~Courcelle, « Betweenness of partial orders »
+(arXiv:2004.09777, 2020), §§ 1--2, traite de la reconstruction à partir de
+l'intermédiarité et, par la décomposition modulaire, à partir du graphe de
+comparabilité, non à partir des découpages ; c'est la seule source lue sur ce
+point.}
 
 Le nom actuel de $\mathcal{R}$ est celui de \emph{relation d'intermédiarité}
 (\emph{betweenness})\footnote{Pour un ordre total, c'est la relation primitive
@@ -515,7 +553,14 @@ ordonnés ont été caractérisées par M.~Altwegg (1950). Les feuillets ne cite
 personne ; la page 40 avance le nom de Hilbert, avec un point d'interrogation.
 Que l'ordre soit déterminé à l'opposé près par l'intermédiarité est faux pour un
 ensemble ordonné quelconque (deux composantes incomparables peuvent être
-renversées indépendamment) ; c'est la filtration b) qui l'assure ici.}.
+renversées indépendamment) ; c'est la filtration b) qui l'assure ici. C'est un
+cas particulier d'un théorème de B.~Courcelle, « Betweenness of partial
+orders » (arXiv:2004.09777, 2020), théorème 7 : un ensemble ordonné se
+reconstruit à l'opposé près à partir de son intermédiarité si et seulement s'il
+est connexe (à une exception infinie près) et que toute paire comparable est
+dans une chaîne à trois éléments ; la divisibilité donne la seconde condition,
+la filtration dans les deux sens la première. La formule explicite de la page,
+par une paire d'ancrage $(a, b)$, est une voie directe vers ce cas.}.
 
 \subsection*{Remarques (page 16)}
 
