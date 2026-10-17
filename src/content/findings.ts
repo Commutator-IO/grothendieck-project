@@ -6628,6 +6628,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'A person checks the computation for A = BG (𝒲_A = isomorphisms; A/(e × e) → A/e × A/e not a weak equivalence) and whether the published Astérisque 308 or a later erratum restricts condition (g) of Proposition 4.3.2; the published Astérisque 301, Proposition 1.6.1, should also be read. If (g) is stated differently there, mark matched or drop.',
+    lean: { file: 'lean/Grothendieck/Folder118.lean', found: 'Holds, in a 1-truncated model (isWeq_iff_bijective, answer_page_35). Presheaves on BG are G-sets and A/X is the action groupoid X//G; a weak equivalence of groupoids is read as bijective on components and an isomorphism on automorphism groups, and asphericity as connected with trivial automorphism groups — classical characterisations taken as definitions, not proved. Then a map of G-sets is in 𝒲_A iff it is bijective (the reading’s reason, and its converse), so 𝒲_A is stable under binary products and under products of any family, finite or not (isWeq_prod, isWeq_pi); for G ≠ 1, A = A/e is not aspherical (its automorphism group is G) and neither is a × a for the regular G-set a, since (1, 1) and (1, g) lie in different orbits (not_aspherical_point, not_aspherical_regular_prod). For BG, Cisinski’s condition (g) of Proposition 4.3.2 therefore holds while (a) fails; whether the published statement restricts (g) is still to be checked.' },
   },
   {
     id: '118-pushout-along-cofibrations-in-cat',
