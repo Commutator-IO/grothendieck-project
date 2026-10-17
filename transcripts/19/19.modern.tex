@@ -39,6 +39,7 @@
 %
 % Pass: Opus 5 (claude-opus-5), 2026-08-22 — first pass, unchecked against the
 % pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — p. 81: the footnote no longer says an infinite chain of adjoints is impossible; the Lean check (Folder19, chain_adj) gives one for presheaf topoi.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — refined with the Lean checks
 % of lean/Grothendieck/Folder19.lean, mathlib and the literature of the
 % folder's findings: the page-7 proviso « ou I fini » is false and is replaced
@@ -2110,10 +2111,17 @@ alors, à un ensemble $E$, le triple $(E, \mathrm{id}_{E}, E, \mathrm{id}_{E})$.
 C'est tout ce que la page soutient. Ni la construction ni la conclusion ne sont
 lisibles, et on ne les a pas reconstituées.\footnote{Trois mots de ces six
 lignes sont illisibles, dont le nom même de l'objet que $f$ produit. La
-question elle-même reste donc ouverte sur la page. Une chaîne d'adjoints
-infinie dans les deux sens est en fait impossible dans des situations très
-générales — mais le dire ici serait prêter à l'auteur une réponse que sa page
-n'a pas.}
+question reste donc ouverte sur la page. Elle a une réponse positive pour les
+topos de préfaisceaux, et la réponse est de nous : sur $\mathbb{Z}$, les
+applications croissantes $e_{m}(x) = 2x + m$ et $r_{m}(x) = \lfloor (x - m)/2
+\rfloor$ vérifient $e_{m} \dashv r_{m} \dashv e_{m+1}$ ; sur $\mathbb{Z}
+\sqcup \mathbb{Z}$, les sommes $e_{m} \sqcup r_{m}$ et $r_{m} \sqcup e_{m+1}$
+forment une chaîne $B_{k} \dashv B_{k+1}$ pour tout $k \in \mathbb{Z}$, et la
+restriction des préfaisceaux donne une chaîne d'adjoints $F_{k} \dashv
+F_{k+1}$, infinie dans les deux sens, dont aucun n'est fidèle (vérifié en Lean,
+lean/Grothendieck/Folder19.lean, \texttt{chain\_adj} et
+\texttt{chain\_not\_faithful}). Rien ne dit que c'est la construction que la
+page esquisse avec ses ensembles à involution.}
 
 \pagerange{82}{95}
 \section*{Catégories fibrées (pages 82 à 95)}
