@@ -85,6 +85,12 @@
 % commutation modulo inner automorphisms announced on the last line of page 37.
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-09-24 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — with the Lean check
+% (Folder145.lean): the exercise (14) of p. 35 holds more generally, for every
+% odd p in Z^ (unit or not); oddness cannot be dropped (p = 0 satisfies (14)).
+% Footnoted as checked, read in the finite quotients. No mathlib result; the
+% finding's literature is unread search summaries (status unsearched), so
+% nothing cited; no facsimile correction since the pass.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -1215,7 +1221,19 @@ paire, ce qui change $p$ en $-p$ — à l'énoncé : pour $p \in
 \[
 (14)\qquad l_\infty^{p}\, l_1^{p}\, l_0^{p} = 1 \quad\Longrightarrow\quad p = 1,
 \]
-et le laisse en « Exercice ! ». C'est vrai, et voici une solution\footnote{La
+et le laisse en « Exercice ! ». C'est vrai, et plus généralement pour tout
+$p \in \widehat{\mathbb{Z}}$ impair, inversible ou non\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder145.lean, \texttt{rel14\_iff},
+\texttt{rel14\_unit\_iff}, \texttt{dihedral\_witness}, \texttt{rel14\_zero}).
+Mathlib n'ayant pas le groupe profini libre, $p$ y est une famille compatible
+de résidus $p_n \in \mathbb{Z}/n$ et (14) est lue dans tous les quotients
+finis : pour tout groupe fini $G$ et tous $x, y, z \in G$ avec $zyx = 1$,
+$z^{p} y^{p} x^{p} = 1$. Alors (14) a lieu si et seulement si $p_n = 1$ pour
+tout $n$, par le témoin diédral ci-dessous. Seule sert l'imparité de $p$
+($p_2 = 1$), non son inversibilité aux nombres premiers impairs, et elle ne
+peut être omise : $p = 0$ vérifie (14). La conséquence pour les systèmes à
+rectificateurs triviaux de $S\hat{\hat{\mathcal{E}}}$ n'est pas formalisée.} ;
+voici une solution\footnote{La
 solution est de cette édition. La phrase de la page qui opère la réduction
 (« Je pense qu'on peut [quitte : corriger par un $\tilde\sigma_i$, ou $\sigma \in
 \Gamma_P$)] revient au $\equiv$ de dire\ldots ») est lue avec peine ; la réduction
