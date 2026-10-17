@@ -36,6 +36,23 @@
 % never written; Σ ≃ R° (pp. 68, 106) is asserted; X_car ≃ R̂_car (p. 49) is
 % asserted; § 9 « Relation avec analyseurs de Lazard » (p. 89) has no text;
 % the fair copy ①-⑩ stops mid-sentence on p. 106.
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder161_2.lean), mathlib and the literature of
+% the findings 161-2-vn-regular-cartesian-presheaf-classifier (matched),
+% 161-2-field-classifier-absolutely-flat-site and
+% 161-2-definite-characteristic-join-of-subtopoi (candidates):
+% — page 33: the monadicity theorem is mathlib's; page 34: the descent
+%   criterion holds without topoi (left exact conservative left adjoint out
+%   of a category with finite limits), a case of mathlib's comonadicity;
+% — page 61: the Gabriel-Ulmer characterisation checked through
+%   Adámek-Rosický 1.20 (in mathlib); page 77: the lemma Ind(Σ) = Lex is
+%   mathlib's isIndObject_iff_preservesFiniteLimits (Kashiwara-Schapira 6);
+% — page 41: pseudo-corps, Berni-Mariano and Elephant D1.3, D3.1 cited;
+%   pages 47-48: Elephant A4.5 and Hutzler cited, the criterion's relation
+%   to them left open; page 94: Johnstone 1977 and Caramello cited for the
+%   field classifier, the site they use not checked.
+% No facsimile check since 2026-09-26.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -975,7 +992,10 @@ les trois noms sont peu nets. Le critère de Beck date de 1967 ; Linton,
 and free triples} (1970). Le second point du critère, laissé illisible,
 est nécessairement celui-là. C'est le seul endroit du dossier où le nom de
 Lawvere est écrit, et il désigne la notion que les pages 18--22 et 84--87
-construisent sous le nom d'analyseur.}
+construisent sous le nom d'analyseur. Le théorème est dans mathlib
+(\texttt{CategoryTheory.Monad.monadicOfHasPreservesReflexiveCoequalizersOfReflectsIsomorphisms}) ;
+la vérification en Lean (lean/Grothendieck/Folder161\_2.lean,
+\texttt{monadicite}) ne fait que l'invoquer.}
 
 Le second feuillet est le \emph{critère de descente} pour un morphisme de
 topos $f : B \to B'$, d'image inverse $f^{*} : B' \to B$. On forme la
@@ -1003,7 +1023,13 @@ $\underline{\mathrm{Hom}}_{\mathrm{Ens}}(f^{*}X, Y) \simeq
 du point canonique $(\mathrm{Ens}) \to BG$ du topos des $G$-ensembles,
 dont l'image inverse est le foncteur d'oubli : les coalgèbres de la
 comonade $Y \mapsto \underline{\mathrm{Hom}}(G, Y)$ sur les ensembles sont
-les $G$-ensembles, et c'est le cas le plus simple du théorème.} Le dernier alinéa dit l'usage prévu :
+les $G$-ensembles, et c'est le cas le plus simple du théorème. Vérifié en
+Lean (lean/Grothendieck/Folder161\_2.lean, \texttt{descente}), plus
+généralement : la structure de topos ne sert pas ; il suffit d'une adjonction
+$f^{*} \dashv f_{*}$ dont l'adjoint à gauche $f^{*}$ est exact à gauche et
+conservatif, au départ d'une catégorie à limites finies. C'est un cas du
+critère de comonadicité pour les couples coréflexifs, qui est dans mathlib
+(\texttt{CategoryTheory.Monad.Comonadicity}).} Le dernier alinéa dit l'usage prévu :
 un topos $B$ étant donné, on cherche un topos $B'$ ayant assez de points
 et un morphisme $B \to B'$ auquel appliquer le critère, avec le croquis
 $C \subset \widehat{C}$. C'est l'amorce d'une question constante dans le
@@ -1254,7 +1280,14 @@ présentation finie ; l'« anneau absolument plat universel » $T(A)$
 associé à un anneau $A$, dont le spectre est $\mathrm{Spec}\,A$ muni de la
 topologie constructible, est l'objet de la thèse de J.-P. Olivier
 (Montpellier, 1970--71), et le nom « cons » y renvoie. Le cahier ne cite
-pas Olivier.}
+pas Olivier. Que les pseudo-corps forment une théorie cartésienne, à
+classifiant en préfaisceaux sur l'opposée des modèles de présentation finie,
+est établi par la même voie, pour les $C^{\infty}$-anneaux réguliers au sens
+de von Neumann, par J.~C.~Berni et H.~L.~Mariano, « Classifying toposes for
+some theories of $C^{\infty}$-rings » (arXiv:1811.08838) ; l'argument se
+transporte mot pour mot aux anneaux ordinaires, et le fait général, qu'une
+théorie cartésienne est de type préfaisceaux, est dans P.~T.~Johnstone,
+\emph{Sketches of an Elephant}, D1.3 et D3.1.}
 
 \item[14)] \emph{Corps séparablement clos} $=$ corps strictement hensélien :
 $X \simeq \widetilde{R}_{\mathrm{top\,corps\,sépclos}} \simeq
@@ -1371,7 +1404,14 @@ branches ; les pages 47--48 sont de brouillon et l'énoncé ci-dessus est
 notre mise en forme de ce que la page 48 conclut. Le point délicat, que
 le cahier voit, est que $W = X_{\mathbb{Q}}$ n'est pas ouvert dans $B$ mais
 que $V \wedge W$ (le lieu où $p = 0$ et $p$ inversible, i.e. l'anneau nul)
-l'est.} La page 49 conclut par une description en préfaisceaux :
+l'est. Le cadre général des bornes supérieures de sous-topos est celui de
+P.~T.~Johnstone, \emph{Sketches of an Elephant}, A4.5 ; M.~Hutzler,
+« Syntactic presentations for glued toposes and for crystalline toposes »
+(arXiv:2206.11244), présente un topos à partir d'un recouvrement par des
+sous-topos ouverts. Que le critère de la page 48 se déduise de cette théorie
+générale, et que les anneaux « à caractéristique » y figurent comme exemple
+de quotient non cohérent de la théorie des anneaux, n'a pas été établi pour
+l'édition.} La page 49 conclut par une description en préfaisceaux :
 \[
 X_{\mathrm{car}} \simeq \widehat{R_{\mathrm{car}}},
 \]
@@ -1705,7 +1745,17 @@ celle qui deviendra standard. La dernière phrase, sur le nom, dit que
 l'exposé I de SGA 4 avait pris « accessible » pour une notion plus faible ;
 la terminologie moderne a suivi le manuscrit sans le savoir, en réservant
 « accessible » au cas non cocomplet (Makkai--Paré) et « localement
-présentable » à celui-ci.}
+présentable » à celui-ci. Vérifié en Lean (lean/Grothendieck/Folder161\_2.lean,
+\texttt{caracterisation\_gabriel\_ulmer}), « strictement génératrice » étant
+pris au sens de la page 56, c'est-à-dire dense, et « accessible » au sens de
+présentable : la vérification s'appuie sur le théorème 1.20 de J.~Adámek et
+J.~Rosický, \emph{Locally presentable and accessible categories} (1994), qui
+est dans mathlib
+(\texttt{CategoryTheory.IsCardinalLocallyPresentable.iff\_exists\_isStrongGenerator}),
+et ajoute un court passage des générateurs forts aux sous-catégories
+denses. Le théorème de la page 54 et la non-accessibilité de
+$(\mathrm{Ens})^{\circ}$ et $(\mathrm{Ab})^{\circ}$ ne sont pas vérifiés ;
+mathlib n'a pas les $\mathrm{Ind}_{\pi}$.}
 
 \pagerange{62}{68}
 \section*{Compléments : théories sur $\Delta$, et le passage aux préfaisceaux (pages 62 à 68)}
@@ -2221,7 +2271,13 @@ $\Sigma \to D$ vers une $D$ à limites inductives filtrantes ; or $\mathrm{Ind}
 exacts $\Sigma \to D$ correspondent aux foncteurs $\mathrm{Ind}(\Sigma) \to
 D$ commutant aux limites filtrantes et aux limites finies — la nécessité
 est triviale, et pour la suffisance $\mathrm{Ind}(\Sigma) \to \mathrm{Ind}(D)
-\to D$ est exact (SGA 4 I 8.9.8).
+\to D$ est exact (SGA 4 I 8.9.8).\footnote{Le lemme est dans mathlib, sous la
+forme : un préfaisceau sur une petite catégorie à limites inductives finies
+est un ind-objet si et seulement s'il est exact à gauche
+(\texttt{CategoryTheory.isIndObject\_iff\_preservesFiniteLimits}, d'après
+M.~Kashiwara et P.~Schapira, \emph{Categories and Sheaves}, chapitre 6) ; la
+vérification en Lean (lean/Grothendieck/Folder161\_2.lean, \texttt{lemme\_ind})
+ne fait que l'invoquer. Le corollaire qui suit n'est pas vérifié.}
 
 \textbf{Corollaire.} \emph{Pour $X \in S$, on a $X \in \Sigma$ si et seulement
 si $\mathrm{Hom}_{S}(X, -)$ commute aux limites inductives filtrantes.}
@@ -2689,7 +2745,13 @@ la catégorie $R'$ des schémas absolument plats les recouvrements de
 Zariski sont les recouvrements $\{V(f), D(f)\}$, et c'est bien ce qu'il
 faut. « Le corps universel est le faisceau structural » : l'anneau
 générique du topos classifiant est un corps au sens interne, énoncé qui
-est aujourd'hui le premier exemple de la théorie (Johnstone, Wraith).}
+est aujourd'hui le premier exemple de la théorie (Johnstone, Wraith).
+P.~T.~Johnstone, « Rings, fields and spectra », \emph{J.\ Algebra} 49
+(1977), et O.~Caramello, « De Morgan classifying toposes »
+(arXiv:0808.1519), traitent du topos classifiant des corps ; le site qu'ils
+emploient n'a pas été vérifié pour l'édition, et l'édition n'a pas trouvé de
+source qui le présente sur les anneaux absolument plats de présentation
+finie, comme la page le fait.}
 
 La page 95 pose ensuite, pour les anneaux intègres, la question du
 sous-type $O' \subset O$ des éléments « qui opèrent régulièrement sur $O$ »
