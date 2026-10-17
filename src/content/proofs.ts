@@ -634,4 +634,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder140_1.lean',
     theorems: ['exact_mapQ', 'card_H1_VJ', 'card_H1_triv', 'card_mu2_dvd', 'card_mu2_char_two', 'card_H1_dvd'],
   },
+  {
+    folder: '146',
+    batch: 4,
+    page: '70',
+    name: 'The trivialising exponent of L₄ on M₀,₄',
+    statement:
+      'The table of page 70 gives, for n = card I = 4, the smallest exponent making the tangent line bundles L_i trivial compatibly with the symmetric group on M₀,ᵢ: 6.',
+    found:
+      'Holds for L₄: on U = ℙ¹ ∖ {0, 1, ∞}, g ↦ g′(λ) under the six anharmonic substitutions is a cocycle whose sixth power is the coboundary of λ⁴(1 − λ)⁴, and no smaller power is a coboundary — at the fixed points −1 of 1/λ and ζ of 1/(1 − λ) the derivative is −1 and a primitive cube root of unity. So the order is exactly 6. Not formalised: the entry 3 for L, and n = 5, 6.',
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder146.lean',
+    theorems: ['mul_group', 'anh_mul', 'der_mul', 'der_pow_six', 'six_dvd'],
+  },
 ];
