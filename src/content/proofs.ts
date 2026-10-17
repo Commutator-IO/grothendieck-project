@@ -55,12 +55,12 @@ export const PROOFS: Proof[] = [
     page: '2–7',
     name: "Lemme; co-operations; Pólya, Vandermonde; Ω = Ω₀ ⊕ Ω⁰",
     statement:
-      "The lemma on integer-valued polynomials and free modules; the co-addition and co-multiplication of Int(k₀) exist, are unique and obey the composition rules (K₀ a localisation of k₀, Ω free); the Pólya basis and Vandermonde for Int(ℤ); the decomposition Ω = Ω₀ ⊕ Ω⁰; the examples and counterexamples of p. 7 (Appl, k[T], 𝔽_q, k[[T]]⁺).",
+      "The lemma on integer-valued polynomials and free modules; the co-addition and co-multiplication of Int(k₀) exist, are unique and obey the composition rules (Ω free and K₀ ⊗ Ω → K₀[T] injective: K₀ a localisation of k₀, or K₀ flat over k₀ with K₀ ⊗ K₀ = K₀); the Pólya basis and Vandermonde for Int(ℤ); the decomposition Ω = Ω₀ ⊕ Ω⁰; the examples and counterexamples of p. 7 (Appl, k[T], 𝔽_q, k[[T]]⁺).",
     found:
-      "Holds. The inclusion k₀ ⊂ K₀ is never used; what is used is that K₀ is a localisation, not K₀ ⊗ K₀ = K₀, and whether the latter alone suffices is left open. The decomposition needs neither axiom 3) nor the unit T. Appl(A, A) fails 3a) for every infinite non-zero unital A. The reading’s footnote on k[[T]]⁺: the matrix is Pascal’s without its (0, 0) entry; the counterexample holds in every characteristic. Pólya’s basis is proposed to mathlib (leanprover-community/mathlib4#44722), as is the coordinate criterion for the range of N ⊗ M (#44717); the coordinate expansion itself was already there.",
+      "Holds. The inclusion k₀ ⊂ K₀ is never used. The co-operations need only that K₀ ⊗_{k₀} Ω → K₀[T] be injective (it is always surjective, k₀[T] ⊂ Ω); this holds for K₀ a localisation and for K₀ flat over k₀ with K₀ ⊗ K₀ = K₀, the relative-Int finding’s hypothesis plus flatness; whether K₀ ⊗ K₀ = K₀ alone suffices is left open. The decomposition needs neither axiom 3) nor the unit T. Appl(A, A) fails 3a) for every infinite non-zero unital A. The reading’s footnote on k[[T]]⁺: the matrix is Pascal’s without its (0, 0) entry; the counterexample holds in every characteristic. Pólya’s basis is proposed to mathlib (leanprover-community/mathlib4#44722), as is the coordinate criterion for the range of N ⊗ M (#44717); the coordinate expansion itself was already there.",
     verdict: 'holds, more generally',
     lean: 'lean/Grothendieck/Folder153.lean',
-    theorems: ["lemme_injective", "lemme_range", "Phi_injective", "coaddition_existsUnique", "polya", "vandermonde", "isCompl_constants_zeroPart", "appl_not_coaddition", "geom_not_finite_coaddition"],
+    theorems: ["lemme_injective", "lemme_range", "Phi_injective", "coaddition_existsUnique", "coaddition_existsUnique_of_injective", "omegaBaseChange_surjective", "omegaBaseChange_injective_of_flat", "polya", "vandermonde", "isCompl_constants_zeroPart", "appl_not_coaddition", "geom_not_finite_coaddition"],
   },
   {
     folder: '152',

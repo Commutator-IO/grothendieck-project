@@ -108,6 +108,29 @@ Soit $p \in K_0[T]$. On chasse les dénominateurs des coefficients : il existe $
 L'hypothèse employée est que $K_0$ soit un localisé de $k_0$, ce que la lecture donne comme exemple de son hypothèse $K_0 \otimes_{k_0} K_0 = K_0$. La démonstration ne passe pas par l'identification $K_0[X] \otimes_{k_0} K_0[Y] = K_0[X, Y]$, l'application $\Phi$ arrivant directement dans $K_0[X, Y]$. La liberté de $\Omega$, que demande la marge de la page, sert aux deux lemmes et à l'écriture $t = \sum_j G_j \otimes e_j$. L'inclusion $k_0 \subset K_0$ n'est pas supposée. Elle découle de la liberté de $\Omega$ dès que $K_0 \neq 0$, un $c \in k_0$ tel que $\iota(c) = 0$ annulant tous les $e_j$. Les règles de~(4) valent pour n'importe quel représentant et ne demandent pas l'unicité ; l'unicité fait des co-opérations des éléments \q{bien déterminés} de $\Omega \otimes_{k_0} \Omega$. La formule $F \circ \lambda T = \sum_\alpha J_\alpha(\lambda) K_\alpha$ de la page en est le cas $P = \lambda$, $Q = T$.
 \end{remarque}
 
+L'hypothèse de localisation ne sert qu'aux deux lemmes, et le second n'en a pas besoin. On le voit sur l'application $K_0$-linéaire $\beta : K_0 \otimes_{k_0} \Omega \to K_0[T]$, $a \otimes F \mapsto aF$.
+
+\begin{enonce}[Page 3, les co-opérations sans localisation\piste{153-relative-int-coproducts}]
+Soit $K_0$ une $k_0$-algèbre commutative quelconque.
+\begin{enumerate}
+\item L'application $\beta$ est surjective.
+\item Si $\beta$ est injective et que $\Omega$ est un $k_0$-module libre, les conclusions (1) à (3) de l'énoncé précédent valent : $\Phi$ est injective, son image est l'ensemble des $P$ à valeurs dans $\iota(k_0)$ sur $k_0 \times k_0$, et $F(X + Y)$, $F(XY)$ sont, pour $F \in \Omega$, les images d'éléments uniques de $\Omega \otimes_{k_0} \Omega$.
+\item L'application $\beta$ est injective lorsque $K_0$ est un localisé de $k_0$ et que $\Omega$ est libre, et lorsque $K_0$ est plat sur $k_0$ et que la multiplication $K_0 \otimes_{k_0} K_0 \to K_0$ est injective, c'est-à-dire $K_0 \otimes_{k_0} K_0 = K_0$.
+\end{enumerate}
+\end{enonce}
+
+\begin{proof}
+(1) Les monômes $T^n$ sont dans $\Omega$, puisqu'ils envoient $\iota(x)$ sur $\iota(x^n)$, et $\beta(a \otimes T^n) = a T^n$ ; ces polynômes engendrent $K_0[T]$.
+
+(2) Soit $(e_j)$ une base de $\Omega$. Les $1 \otimes e_j$ forment une base du $K_0$-module $K_0 \otimes_{k_0} \Omega$, et $\beta\bigl(\sum_j a_j \otimes e_j\bigr) = \sum_j a_j e_j$. La surjectivité de $\beta$ donne donc la conclusion du lemme~\ref{lem:153-engendre}, son injectivité celle du lemme~\ref{lem:153-indep}, et la démonstration des co-opérations n'utilise rien d'autre de l'hypothèse sur $K_0$.
+
+(3) Pour un localisé, l'injectivité est le lemme~\ref{lem:153-indep}, lu dans la base $(1 \otimes e_j)$. Dans le cas plat, $\beta$ est la composée de $\mathrm{id}_{K_0} \otimes (\Omega \hookrightarrow K_0[T])$, injective par platitude, et de $\mu : K_0 \otimes_{k_0} K_0[T] \to K_0[T]$, $a \otimes p \mapsto ap$. Comme $k_0$-module, $K_0[T]$ est isomorphe à $K_0^{(\mathbf N)}$ par les coefficients, donc $K_0 \otimes_{k_0} K_0[T]$ à $(K_0 \otimes_{k_0} K_0)^{(\mathbf N)}$, et $\mu$ devient la multiplication $K_0 \otimes_{k_0} K_0 \to K_0$ coefficient par coefficient, injective par hypothèse.
+\end{proof}
+
+\begin{remarque}
+L'hypothèse de la lecture, $K_0[X] \otimes_{k_0} K_0[Y] = K_0[X, Y]$, revient à $K_0 \otimes_{k_0} K_0 = K_0$, le premier membre étant $(K_0 \otimes_{k_0} K_0)[X, Y]$. Elle suffit ici avec la platitude de $K_0$, qui couvre les localisés. Sans platitude, la démonstration demande l'injectivité de $\beta$, et l'on ne sait pas ici si $K_0 \otimes_{k_0} K_0 = K_0$ et la liberté de $\Omega$ la donnent. Ni l'inclusion $k_0 \subset K_0$ ni le passage par $K_0[X] \otimes_{k_0} K_0[Y]$ ne servent.
+\end{remarque}
+
 \medskip
 \noindent\textit{Pólya et Vandermonde (page~2).} Pour $k_0 = \mathbf Z \subset K_0 = \mathbf Q$, $\Omega = \mathrm{Int}(\mathbf Z)$ ; on pose $F_n = \binom{T}{n} = T(T-1)\cdots(T-n+1)/n!$, et l'on note $\Delta f(x) = f(x+1) - f(x)$ la différence finie.
 
@@ -181,7 +204,7 @@ Le contre-exemple de~3a) pour $\mathrm{Appl}(A, A)$ est établi pour $A$ unitair
 Le théorème de Pólya (la base des polynômes binomiaux de l'anneau des polynômes à valeurs entières) est proposé à mathlib (PR mathlib4~\#44722 ; voir \cite[chap.~I]{cahen1997}), ainsi que le critère d'appartenance à l'image de $N \otimes M$ par les coordonnées dans une base de $M$ (\#44717). L'écriture d'un élément de $P \otimes M$ par ses coordonnées y figurait déjà.
 \end{remarque}
 
-Ne sont pas démontrés ici : l'isomorphisme $(\Omega_A)_0 \simeq \Gamma A$ pour un anneau d'un topos et l'exemple $\mathrm{End}(W_k(A))$ ; les constantes de $k[[T]]^+$ et les séries à terme constant nilpotent ; les co-opérations sous la seule hypothèse $K_0 \otimes_{k_0} K_0 = K_0$ ; le contre-exemple de 3a) pour $\mathrm{Appl}(A,A)$, $A$ pseudo-anneau infini quelconque ; les analyseurs des puissances divisées et des $\lambda$-anneaux.
+Ne sont pas démontrés ici : l'isomorphisme $(\Omega_A)_0 \simeq \Gamma A$ pour un anneau d'un topos et l'exemple $\mathrm{End}(W_k(A))$ ; les constantes de $k[[T]]^+$ et les séries à terme constant nilpotent ; les co-opérations sous la seule hypothèse $K_0 \otimes_{k_0} K_0 = K_0$, sans platitude ; le contre-exemple de 3a) pour $\mathrm{Appl}(A,A)$, $A$ pseudo-anneau infini quelconque ; les analyseurs des puissances divisées et des $\lambda$-anneaux.
 
 \begin{encadre}
 \begin{theoreme}[Grothendieck, pages 3 et 9, co-opérations de $\mathrm{Int}$ relatif\piste{153-relative-int-coproducts}]\nonverifie

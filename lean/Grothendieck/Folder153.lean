@@ -12,6 +12,7 @@ import Mathlib.LinearAlgebra.Matrix.Block
 import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
 import Mathlib.FieldTheory.Finite.Basic
 import Mathlib.Data.Nat.Choose.Vandermonde
+import Mathlib.Algebra.Polynomial.Basis
 
 /-!
 # Folder 153: integer-valued polynomials, co-operations, analyseurs
@@ -48,8 +49,12 @@ paragraph; the co-operations are formalised below without it.)
   (`mem_range_Phi_iff`), so `F(X + Y)` and `F(XY)` have unique preimages
   (`coaddition_existsUnique`, `comultiplication_existsUnique`), and the rules
   `F ∘ (P + Q) = ∑ (Gᵢ ∘ P)(Hᵢ ∘ Q)`, `F ∘ (PQ) = ∑ (Jₐ ∘ P)(Kₐ ∘ Q)` hold for any
-  representative (`comp_add_eq`, `comp_mul_eq`). The hypothesis used is that `K₀`
-  is a localisation of `k₀`, the reading's example of `K₀ ⊗ K₀ = K₀`.
+  representative (`comp_add_eq`, `comp_mul_eq`). What the proof uses of `K₀` is
+  that `K₀ ⊗_{k₀} Ω → K₀[T]` be injective (`..._of_injective`); it is always
+  surjective (`omegaBaseChange_surjective`), and injective for `K₀` a localisation
+  (`omegaBaseChange_injective`) and for `K₀` flat over `k₀` with `K₀ ⊗ K₀ = K₀`
+  (`omegaBaseChange_injective_of_flat`). Whether `K₀ ⊗ K₀ = K₀` alone suffices is
+  left open.
 * Page 2: Pólya's basis of `Int(ℤ)` by forward differences (`polya`, `polyaBasis`),
   Vandermonde in `ℚ[X, Y]` from mathlib's `Ring.add_choose_eq` (`vandermonde`), and
   the co-operations of `Int(ℤ)` (`coaddition_binom`, `comultiplication_binom`).
@@ -307,6 +312,207 @@ theorem values_of_mem_range_Phi {P : K₀[X][X]} (hP : P ∈ LinearMap.range (Ph
     rw [map_add, eval_add, eval_add]
     exact add_mem ht ht'
 
+/-! ### The co-operations for any `k₀ → K₀` with `K₀ ⊗_{k₀} Ω ↪ K₀[T]`
+
+The proof of page 3 uses one property of the pair: a `k₀`-basis of `Ω` stays a
+basis of `K₀[T]` over `K₀`, i.e. `K₀ ⊗_{k₀} Ω → K₀[T]` is bijective. It is always
+surjective, since `k₀[T] ⊂ Ω` (`omegaBaseChange_surjective`); injectivity is the
+hypothesis. It holds for `K₀` a localisation of `k₀` (`omegaBaseChange_injective`)
+and, more generally, for `K₀` flat over `k₀` with `K₀ ⊗_{k₀} K₀ = K₀`
+(`omegaBaseChange_injective_of_flat`). -/
+
+variable (k₀ K₀) in
+/-- `K₀ ⊗_{k₀} Ω → K₀[T]`, `a ⊗ F ↦ a F`. -/
+noncomputable def omegaBaseChange : K₀ ⊗[k₀] Omega k₀ K₀ →ₗ[K₀] K₀[X] :=
+  LinearMap.liftBaseChange K₀ (Omega k₀ K₀).val.toLinearMap
+
+theorem omegaBaseChange_tmul (a : K₀) (F : Omega k₀ K₀) :
+    omegaBaseChange k₀ K₀ (a ⊗ₜ F) = a • (F : K₀[X]) := by
+  simp [omegaBaseChange]
+
+/-- In a basis `e` of `Ω`, `K₀ ⊗ Ω → K₀[T]` sends `∑ aⱼ ⊗ eⱼ` to `∑ aⱼ eⱼ`. -/
+theorem omegaBaseChange_eq_sum {I : Type*} (e : Module.Basis I k₀ (Omega k₀ K₀))
+    (t : K₀ ⊗[k₀] Omega k₀ K₀) :
+    omegaBaseChange k₀ K₀ t = ((e.baseChange K₀).repr t).sum fun j c => c • (e j : K₀[X]) := by
+  conv_lhs => rw [← (e.baseChange K₀).linearCombination_repr t]
+  rw [Finsupp.linearCombination_apply, map_finsuppSum]
+  refine Finsupp.sum_congr fun j _ => ?_
+  rw [map_smul, Module.Basis.baseChange_apply, omegaBaseChange_tmul, one_smul]
+
+theorem X_pow_mem_Omega (n : ℕ) : (X ^ n : K₀[X]) ∈ Omega k₀ K₀ :=
+  mem_Omega.mpr fun x => ⟨x ^ n, by simp⟩
+
+/-- `K₀ ⊗_{k₀} Ω → K₀[T]` is always surjective: `k₀[T] ⊂ Ω`. -/
+theorem omegaBaseChange_surjective : Function.Surjective (omegaBaseChange k₀ K₀) := by
+  intro p
+  change p ∈ LinearMap.range (omegaBaseChange k₀ K₀)
+  induction p using Polynomial.induction_on' with
+  | add p q hp hq => exact add_mem hp hq
+  | monomial n a =>
+    exact ⟨a ⊗ₜ ⟨X ^ n, X_pow_mem_Omega n⟩, by
+      rw [omegaBaseChange_tmul, ← C_mul_X_pow_eq_monomial, smul_eq_C_mul]⟩
+
+/-- A `k₀`-basis of `Ω` spans `K₀[T]` over `K₀`, for any `k₀`-algebra `K₀`. -/
+theorem exists_sum_smul_basis {I : Type*} (e : Module.Basis I k₀ (Omega k₀ K₀)) (p : K₀[X]) :
+    ∃ a : I →₀ K₀, (a.sum fun j c => c • (e j : K₀[X])) = p := by
+  obtain ⟨t, rfl⟩ := omegaBaseChange_surjective (k₀ := k₀) p
+  exact ⟨(e.baseChange K₀).repr t, (omegaBaseChange_eq_sum e t).symm⟩
+
+/-- When `K₀ ⊗_{k₀} Ω → K₀[T]` is injective, a `k₀`-basis of `Ω` stays linearly
+independent over `K₀`. -/
+theorem sum_smul_basis_eq_zero_of_injective (hK : Function.Injective (omegaBaseChange k₀ K₀))
+    {I : Type*} (e : Module.Basis I k₀ (Omega k₀ K₀)) (a : I →₀ K₀)
+    (h : (a.sum fun j c => c • (e j : K₀[X])) = 0) : a = 0 := by
+  have ht : omegaBaseChange k₀ K₀ ((e.baseChange K₀).repr.symm a) = 0 := by
+    rw [omegaBaseChange_eq_sum e, LinearEquiv.apply_symm_apply, h]
+  exact (e.baseChange K₀).repr.symm.map_eq_zero_iff.mp
+    ((injective_iff_map_eq_zero _).mp hK _ ht)
+
+/-- **`K₀` flat over `k₀` with `K₀ ⊗_{k₀} K₀ = K₀`** (multiplication injective, i.e.
+`K₀[X] ⊗_{k₀} K₀[Y] = K₀[X, Y]`): then `K₀ ⊗_{k₀} Ω → K₀[T]` is injective. -/
+theorem omegaBaseChange_injective_of_flat [Module.Flat k₀ K₀]
+    (hmul : Function.Injective (LinearMap.mul' k₀ K₀)) :
+    Function.Injective (omegaBaseChange k₀ K₀) := by
+  set g : K₀ ⊗[k₀] K₀[X] →ₗ[k₀] K₀[X] :=
+    (LinearMap.liftBaseChange K₀ ((LinearMap.id : K₀[X] →ₗ[K₀] K₀[X]).restrictScalars k₀)).restrictScalars k₀
+  have hfac : ∀ t, omegaBaseChange k₀ K₀ t =
+      g (LinearMap.lTensor K₀ (Omega k₀ K₀).val.toLinearMap t) := by
+    intro t
+    induction t using TensorProduct.inductionOn with
+    | tmul a F => simp [g, omegaBaseChange_tmul]
+    | add t t' ht ht' => rw [map_add, map_add, map_add, ht, ht']
+  set E : K₀[X] ≃ₗ[k₀] ℕ →₀ K₀ := (Polynomial.basisMonomials K₀).repr.restrictScalars k₀
+  have hE : ∀ p n, E p n = p.coeff n := fun p n => rfl
+  have hc : ∀ (t : K₀ ⊗[k₀] K₀[X]) n,
+      LinearMap.mul' k₀ K₀ (finsuppRight k₀ k₀ K₀ K₀ ℕ (LinearMap.lTensor K₀ E.toLinearMap t) n) =
+        (g t).coeff n := by
+    intro t n
+    induction t using TensorProduct.inductionOn with
+    | tmul a p => simp [g, hE, finsuppRight_apply_tmul_apply]
+    | add t t' ht ht' => simp only [map_add, Finsupp.add_apply, coeff_add, ht, ht']
+  have hg : Function.Injective g := by
+    refine (injective_iff_map_eq_zero _).mpr fun t ht => ?_
+    have h0 : finsuppRight k₀ k₀ K₀ K₀ ℕ (LinearMap.lTensor K₀ E.toLinearMap t) = 0 := by
+      ext n
+      apply hmul
+      rw [hc, ht, Finsupp.coe_zero, Pi.zero_apply, map_zero, coeff_zero]
+    rw [LinearEquiv.map_eq_zero_iff] at h0
+    exact (LinearEquiv.lTensor K₀ E).map_eq_zero_iff.mp h0
+  intro t t' h
+  rw [hfac, hfac] at h
+  exact Module.Flat.lTensor_preserves_injective_linearMap _ Subtype.val_injective (hg h)
+
+theorem exists_decomp {I : Type*} (e : Module.Basis I k₀ (Omega k₀ K₀)) (P : K₀[X][X]) :
+    ∃ g : I →₀ K₀[X], P = g.sum fun j G => G.map C * C (e j : K₀[X]) := by
+  classical
+  induction P using Polynomial.induction_on' with
+  | add P Q hP hQ =>
+    obtain ⟨g, rfl⟩ := hP
+    obtain ⟨g', rfl⟩ := hQ
+    exact ⟨g + g', (Finsupp.sum_add_index' (fun j => by simp)
+      (fun j G G' => by simp [Polynomial.map_add, add_mul])).symm⟩
+  | monomial n p =>
+    obtain ⟨a, ha⟩ := exists_sum_smul_basis e p
+    refine ⟨a.mapRange (fun c => C c * X ^ n) (by simp), ?_⟩
+    rw [Finsupp.sum_mapRange_index (fun j => by simp), ← ha, ← C_mul_X_pow_eq_monomial]
+    simp only [Finsupp.sum, map_sum, Finset.sum_mul]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    simp only [smul_eq_C_mul, map_mul, Polynomial.map_mul, Polynomial.map_pow, map_C, map_X]
+    ring
+
+/-- **Two-variable form of the Lemme.** When `K₀ ⊗_{k₀} Ω → K₀[T]` is injective
+and `Ω` is free, a
+polynomial of `K₀[X, Y]` lies in the image of `Ω ⊗ Ω` iff it takes values in `k₀`
+on `k₀ × k₀`. -/
+theorem mem_range_Phi_iff_of_injective [Module.Free k₀ (Omega k₀ K₀)]
+    (hK : Function.Injective (omegaBaseChange k₀ K₀)) (P : K₀[X][X]) :
+    P ∈ LinearMap.range (Phi k₀ K₀) ↔ ∀ x y : k₀,
+      (P.eval (C (algebraMap k₀ K₀ x))).eval (algebraMap k₀ K₀ y) ∈ (algebraMap k₀ K₀).range := by
+  classical
+  refine ⟨values_of_mem_range_Phi, fun hP => ?_⟩
+  set e := Module.Free.chooseBasis k₀ (Omega k₀ K₀)
+  obtain ⟨g, rfl⟩ := exists_decomp e P
+  have hg : ∀ j, g j ∈ Omega k₀ K₀ := by
+    intro j
+    rw [mem_Omega]
+    intro x
+    set a := algebraMap k₀ K₀ x
+    have hQ : (g.sum fun j G => G.map C * C (e j : K₀[X])).eval (C a) =
+        g.sum fun j G => G.eval a • (e j : K₀[X]) := by
+      simp [Finsupp.sum, eval_finsetSum, eval_map, eval₂_at_apply, smul_eq_C_mul]
+    have hQΩ : (g.sum fun j G => G.eval a • (e j : K₀[X])) ∈ Omega k₀ K₀ :=
+      mem_Omega.mpr fun y => by rw [← hQ]; exact hP x y
+    obtain ⟨β, hβ⟩ : ∃ β : _ →₀ k₀,
+        (β.sum fun j c => c • (e j : K₀[X])) = g.sum fun j G => G.eval a • (e j : K₀[X]) := by
+      refine ⟨e.repr ⟨_, hQΩ⟩, ?_⟩
+      have := congrArg Subtype.val (e.linearCombination_repr ⟨_, hQΩ⟩)
+      rw [Finsupp.linearCombination_apply] at this
+      simpa [Finsupp.sum] using this
+    have h0 := sum_smul_basis_eq_zero_of_injective hK e
+      (g.mapRange (fun G => G.eval a) (eval_zero) - β.mapRange (algebraMap k₀ K₀) (map_zero _)) (by
+        rw [Finsupp.sum_sub_index (fun j c c' => sub_smul c c' _),
+          Finsupp.sum_mapRange_index (h := fun j c => c • (e j : K₀[X])) (fun j => zero_smul _ _),
+          Finsupp.sum_mapRange_index (h := fun j c => c • (e j : K₀[X])) (fun j => zero_smul _ _),
+          sub_eq_zero]
+        simp only [algebraMap_smul]
+        exact hβ.symm)
+    have := DFunLike.congr_fun h0 j
+    simp only [Finsupp.coe_sub, Pi.sub_apply, Finsupp.mapRange_apply, Finsupp.coe_zero,
+      Pi.zero_apply, sub_eq_zero] at this
+    exact ⟨β j, this.symm⟩
+  refine ⟨∑ j ∈ g.support, (⟨g j, hg j⟩ : Omega k₀ K₀) ⊗ₜ e j, ?_⟩
+  simp [map_sum, Phi_tmul, Finsupp.sum]
+
+/-- **Uniqueness.** When `K₀ ⊗_{k₀} Ω → K₀[T]` is injective and `Ω` is free, `Φ : Ω ⊗ Ω → K₀[X, Y]` is injective. -/
+theorem Phi_injective_of_injective [Module.Free k₀ (Omega k₀ K₀)]
+    (hK : Function.Injective (omegaBaseChange k₀ K₀)) : Function.Injective (Phi k₀ K₀) := by
+  classical
+  set e := Module.Free.chooseBasis k₀ (Omega k₀ K₀)
+  have hz : ∀ m, ((0 : Omega k₀ K₀) : K₀[X]).coeff m = 0 := fun m => by
+    rw [ZeroMemClass.coe_zero, coeff_zero]
+  have hΦ : ∀ t, Phi k₀ K₀ t =
+      (coords e (Omega k₀ K₀) t).sum fun j H => (H : K₀[X]).map C * C (e j : K₀[X]) := by
+    intro t
+    conv_lhs => rw [eq_sum_coords e t]
+    rw [map_finsuppSum]
+    simp only [Phi_tmul]
+  have hcoeff : ∀ t m, (Phi k₀ K₀ t).coeff m =
+      ((coords e (Omega k₀ K₀) t).mapRange (fun H : Omega k₀ K₀ => (H : K₀[X]).coeff m)
+        (hz m)).sum fun j c => c • (e j : K₀[X]) := by
+    intro t m
+    rw [hΦ, Finsupp.sum_mapRange_index (h := fun j c => c • (e j : K₀[X]))
+      (fun j => zero_smul _ _)]
+    simp [Finsupp.sum, finsetSum_coeff, coeff_mul_C, coeff_map, smul_eq_C_mul]
+  intro t t' h
+  apply (coords e (Omega k₀ K₀)).injective
+  ext j : 1
+  apply Subtype.ext
+  ext m
+  have h0 := sum_smul_basis_eq_zero_of_injective hK e
+    (((coords e _ t).mapRange (fun H : Omega k₀ K₀ => (H : K₀[X]).coeff m) (hz m)) -
+      ((coords e _ t').mapRange (fun H : Omega k₀ K₀ => (H : K₀[X]).coeff m) (hz m))) (by
+    rw [Finsupp.sum_sub_index (fun j c c' => sub_smul c c' _), ← hcoeff, ← hcoeff, h, sub_self])
+  have := DFunLike.congr_fun h0 j
+  simpa [sub_eq_zero, Finsupp.mapRange_apply] using this
+
+/-- **The co-addition is well defined (page 3), for any `k₀ → K₀` with
+`K₀ ⊗_{k₀} Ω ↪ K₀[T]`.** For `F ∈ Ω`, `F(X + Y)` is the image of exactly one
+element of `Ω ⊗ Ω`. -/
+theorem coaddition_existsUnique_of_injective [Module.Free k₀ (Omega k₀ K₀)]
+    (hK : Function.Injective (omegaBaseChange k₀ K₀)) {F : K₀[X]}
+    (hF : F ∈ Omega k₀ K₀) : ∃! t, Phi k₀ K₀ t = coadd F := by
+  obtain ⟨t, ht⟩ := (mem_range_Phi_iff_of_injective hK (coadd F)).mpr fun x y => by
+    rw [eval_eval_coadd, ← map_add]; exact mem_Omega.mp hF (x + y)
+  exact ⟨t, ht, fun t' ht' => Phi_injective_of_injective hK (ht'.trans ht.symm)⟩
+
+/-- **The co-multiplication is well defined (page 3), same hypothesis.** -/
+theorem comultiplication_existsUnique_of_injective [Module.Free k₀ (Omega k₀ K₀)]
+    (hK : Function.Injective (omegaBaseChange k₀ K₀)) {F : K₀[X]}
+    (hF : F ∈ Omega k₀ K₀) : ∃! t, Phi k₀ K₀ t = comul F := by
+  obtain ⟨t, ht⟩ := (mem_range_Phi_iff_of_injective hK (comul F)).mpr fun x y => by
+    rw [eval_eval_comul, ← map_mul]; exact mem_Omega.mp hF (x * y)
+  exact ⟨t, ht, fun t' ht' => Phi_injective_of_injective hK (ht'.trans ht.symm)⟩
+
 section Localisation
 
 variable (S : Submonoid k₀) [IsLocalization S K₀]
@@ -343,127 +549,37 @@ theorem sum_smul_basis_eq_zero {I : Type*} (e : Module.Basis I k₀ (Omega k₀ 
     exact hu.mul_right_eq_zero.mp h2.symm
   · exact Finsupp.notMem_support_iff.mp hj
 
-/-- When `K₀ = S⁻¹k₀`, a `k₀`-basis of `Ω` spans `K₀[T]` over `K₀`. -/
-theorem exists_sum_smul_basis {I : Type*} (e : Module.Basis I k₀ (Omega k₀ K₀)) (p : K₀[X]) :
-    ∃ a : I →₀ K₀, (a.sum fun j c => c • (e j : K₀[X])) = p := by
-  rw [← Finsupp.mem_span_range_iff_exists_finsupp]
-  obtain ⟨b, hb, hbp⟩ := IsLocalization.integerNormalization_spec S p
-  have hu : IsUnit (algebraMap k₀ K₀ b) := IsLocalization.map_units K₀ (⟨b, hb⟩ : S)
-  refine (Submodule.smul_mem_iff_of_isUnit _ hu).mp ?_
-  rw [algebraMap_smul, ← hbp]
-  have hq : (IsLocalization.integerNormalization S p).map (algebraMap k₀ K₀) ∈ Omega k₀ K₀ :=
-    mem_Omega.mpr fun x => ⟨(IsLocalization.integerNormalization S p).eval x, by
-      rw [eval_map, eval₂_at_apply]⟩
-  have h1 : (⟨_, hq⟩ : Omega k₀ K₀) ∈ Submodule.span k₀ (Set.range e) := by
-    rw [e.span_eq]; trivial
-  have h2 := Submodule.apply_mem_span_image_of_mem_span (Omega k₀ K₀).val.toLinearMap h1
-  rw [← Set.range_comp] at h2
-  exact Submodule.span_le_restrictScalars k₀ K₀ _ h2
-
-theorem exists_decomp {I : Type*} (e : Module.Basis I k₀ (Omega k₀ K₀)) (P : K₀[X][X]) :
-    ∃ g : I →₀ K₀[X], P = g.sum fun j G => G.map C * C (e j : K₀[X]) := by
-  classical
-  induction P using Polynomial.induction_on' with
-  | add P Q hP hQ =>
-    obtain ⟨g, rfl⟩ := hP
-    obtain ⟨g', rfl⟩ := hQ
-    exact ⟨g + g', (Finsupp.sum_add_index' (fun j => by simp)
-      (fun j G G' => by simp [Polynomial.map_add, add_mul])).symm⟩
-  | monomial n p =>
-    obtain ⟨a, ha⟩ := exists_sum_smul_basis S e p
-    refine ⟨a.mapRange (fun c => C c * X ^ n) (by simp), ?_⟩
-    rw [Finsupp.sum_mapRange_index (fun j => by simp), ← ha, ← C_mul_X_pow_eq_monomial]
-    simp only [Finsupp.sum, map_sum, Finset.sum_mul]
-    refine Finset.sum_congr rfl fun j _ => ?_
-    simp only [smul_eq_C_mul, map_mul, Polynomial.map_mul, Polynomial.map_pow, map_C, map_X]
-    ring
+/-- When `K₀ = S⁻¹k₀` and `Ω` is free, `K₀ ⊗_{k₀} Ω → K₀[T]` is injective. -/
+theorem omegaBaseChange_injective [Module.Free k₀ (Omega k₀ K₀)] :
+    Function.Injective (omegaBaseChange k₀ K₀) := by
+  set e := Module.Free.chooseBasis k₀ (Omega k₀ K₀)
+  refine (injective_iff_map_eq_zero _).mpr fun t ht => ?_
+  have h0 := sum_smul_basis_eq_zero S e ((e.baseChange K₀).repr t) (by
+    rw [← omegaBaseChange_eq_sum e, ht])
+  exact (e.baseChange K₀).repr.map_eq_zero_iff.mp h0
 
 /-- **Two-variable form of the Lemme.** For `K₀ = S⁻¹k₀` and `Ω` free, a
 polynomial of `K₀[X, Y]` lies in the image of `Ω ⊗ Ω` iff it takes values in `k₀`
 on `k₀ × k₀`. -/
 theorem mem_range_Phi_iff [Module.Free k₀ (Omega k₀ K₀)] (P : K₀[X][X]) :
     P ∈ LinearMap.range (Phi k₀ K₀) ↔ ∀ x y : k₀,
-      (P.eval (C (algebraMap k₀ K₀ x))).eval (algebraMap k₀ K₀ y) ∈ (algebraMap k₀ K₀).range := by
-  classical
-  refine ⟨values_of_mem_range_Phi, fun hP => ?_⟩
-  set e := Module.Free.chooseBasis k₀ (Omega k₀ K₀)
-  obtain ⟨g, rfl⟩ := exists_decomp S e P
-  have hg : ∀ j, g j ∈ Omega k₀ K₀ := by
-    intro j
-    rw [mem_Omega]
-    intro x
-    set a := algebraMap k₀ K₀ x
-    have hQ : (g.sum fun j G => G.map C * C (e j : K₀[X])).eval (C a) =
-        g.sum fun j G => G.eval a • (e j : K₀[X]) := by
-      simp [Finsupp.sum, eval_finsetSum, eval_map, eval₂_at_apply, smul_eq_C_mul]
-    have hQΩ : (g.sum fun j G => G.eval a • (e j : K₀[X])) ∈ Omega k₀ K₀ :=
-      mem_Omega.mpr fun y => by rw [← hQ]; exact hP x y
-    obtain ⟨β, hβ⟩ : ∃ β : _ →₀ k₀,
-        (β.sum fun j c => c • (e j : K₀[X])) = g.sum fun j G => G.eval a • (e j : K₀[X]) := by
-      refine ⟨e.repr ⟨_, hQΩ⟩, ?_⟩
-      have := congrArg Subtype.val (e.linearCombination_repr ⟨_, hQΩ⟩)
-      rw [Finsupp.linearCombination_apply] at this
-      simpa [Finsupp.sum] using this
-    have h0 := sum_smul_basis_eq_zero S e
-      (g.mapRange (fun G => G.eval a) (eval_zero) - β.mapRange (algebraMap k₀ K₀) (map_zero _)) (by
-        rw [Finsupp.sum_sub_index (fun j c c' => sub_smul c c' _),
-          Finsupp.sum_mapRange_index (h := fun j c => c • (e j : K₀[X])) (fun j => zero_smul _ _),
-          Finsupp.sum_mapRange_index (h := fun j c => c • (e j : K₀[X])) (fun j => zero_smul _ _),
-          sub_eq_zero]
-        simp only [algebraMap_smul]
-        exact hβ.symm)
-    have := DFunLike.congr_fun h0 j
-    simp only [Finsupp.coe_sub, Pi.sub_apply, Finsupp.mapRange_apply, Finsupp.coe_zero,
-      Pi.zero_apply, sub_eq_zero] at this
-    exact ⟨β j, this.symm⟩
-  refine ⟨∑ j ∈ g.support, (⟨g j, hg j⟩ : Omega k₀ K₀) ⊗ₜ e j, ?_⟩
-  simp [map_sum, Phi_tmul, Finsupp.sum]
+      (P.eval (C (algebraMap k₀ K₀ x))).eval (algebraMap k₀ K₀ y) ∈ (algebraMap k₀ K₀).range :=
+  mem_range_Phi_iff_of_injective (omegaBaseChange_injective S) P
 
 /-- **Uniqueness.** For `K₀ = S⁻¹k₀` and `Ω` free, `Φ : Ω ⊗ Ω → K₀[X, Y]` is injective. -/
-theorem Phi_injective [Module.Free k₀ (Omega k₀ K₀)] : Function.Injective (Phi k₀ K₀) := by
-  classical
-  set e := Module.Free.chooseBasis k₀ (Omega k₀ K₀)
-  have hz : ∀ m, ((0 : Omega k₀ K₀) : K₀[X]).coeff m = 0 := fun m => by
-    rw [ZeroMemClass.coe_zero, coeff_zero]
-  have hΦ : ∀ t, Phi k₀ K₀ t =
-      (coords e (Omega k₀ K₀) t).sum fun j H => (H : K₀[X]).map C * C (e j : K₀[X]) := by
-    intro t
-    conv_lhs => rw [eq_sum_coords e t]
-    rw [map_finsuppSum]
-    simp only [Phi_tmul]
-  have hcoeff : ∀ t m, (Phi k₀ K₀ t).coeff m =
-      ((coords e (Omega k₀ K₀) t).mapRange (fun H : Omega k₀ K₀ => (H : K₀[X]).coeff m)
-        (hz m)).sum fun j c => c • (e j : K₀[X]) := by
-    intro t m
-    rw [hΦ, Finsupp.sum_mapRange_index (h := fun j c => c • (e j : K₀[X]))
-      (fun j => zero_smul _ _)]
-    simp [Finsupp.sum, finsetSum_coeff, coeff_mul_C, coeff_map, smul_eq_C_mul]
-  intro t t' h
-  apply (coords e (Omega k₀ K₀)).injective
-  ext j : 1
-  apply Subtype.ext
-  ext m
-  have h0 := sum_smul_basis_eq_zero S e
-    (((coords e _ t).mapRange (fun H : Omega k₀ K₀ => (H : K₀[X]).coeff m) (hz m)) -
-      ((coords e _ t').mapRange (fun H : Omega k₀ K₀ => (H : K₀[X]).coeff m) (hz m))) (by
-    rw [Finsupp.sum_sub_index (fun j c c' => sub_smul c c' _), ← hcoeff, ← hcoeff, h, sub_self])
-  have := DFunLike.congr_fun h0 j
-  simpa [sub_eq_zero, Finsupp.mapRange_apply] using this
+theorem Phi_injective [Module.Free k₀ (Omega k₀ K₀)] : Function.Injective (Phi k₀ K₀) :=
+  Phi_injective_of_injective (omegaBaseChange_injective S)
 
-/-- **The co-addition is well defined (page 3).** For `F ∈ Ω`, `F(X + Y)` is the
-image of exactly one element of `Ω ⊗ Ω`. -/
+/-- **The co-addition is well defined (page 3).** For `K₀ = S⁻¹k₀`, `Ω` free and
+`F ∈ Ω`, `F(X + Y)` is the image of exactly one element of `Ω ⊗ Ω`. -/
 theorem coaddition_existsUnique [Module.Free k₀ (Omega k₀ K₀)] {F : K₀[X]}
-    (hF : F ∈ Omega k₀ K₀) : ∃! t, Phi k₀ K₀ t = coadd F := by
-  obtain ⟨t, ht⟩ := (mem_range_Phi_iff S (coadd F)).mpr fun x y => by
-    rw [eval_eval_coadd, ← map_add]; exact mem_Omega.mp hF (x + y)
-  exact ⟨t, ht, fun t' ht' => Phi_injective S (ht'.trans ht.symm)⟩
+    (hF : F ∈ Omega k₀ K₀) : ∃! t, Phi k₀ K₀ t = coadd F :=
+  coaddition_existsUnique_of_injective (omegaBaseChange_injective S) hF
 
 /-- **The co-multiplication is well defined (page 3).** -/
 theorem comultiplication_existsUnique [Module.Free k₀ (Omega k₀ K₀)] {F : K₀[X]}
-    (hF : F ∈ Omega k₀ K₀) : ∃! t, Phi k₀ K₀ t = comul F := by
-  obtain ⟨t, ht⟩ := (mem_range_Phi_iff S (comul F)).mpr fun x y => by
-    rw [eval_eval_comul, ← map_mul]; exact mem_Omega.mp hF (x * y)
-  exact ⟨t, ht, fun t' ht' => Phi_injective S (ht'.trans ht.symm)⟩
+    (hF : F ∈ Omega k₀ K₀) : ∃! t, Phi k₀ K₀ t = comul F :=
+  comultiplication_existsUnique_of_injective (omegaBaseChange_injective S) hF
 
 end Localisation
 
