@@ -666,14 +666,13 @@ const FIRST_BATCH = '2026-08-08';
 
 const PILOT = {
   /** Transcribed, counted off transcripts/ and excluding the specimen:
-      164 folders, 632 batches, 9,422 pages (10 October 2026). */
-  batchesTranscribed: 632,
+      164 folders, 638 batches, 9,414 pages (17 October 2026). */
+  batchesTranscribed: 638,
   /** Batches belonging to a folder that has a modernised reading. The reading
       is written per folder, taken whole, and covers every batch of it, so a
-      folder is either wholly in this count or wholly out. 152 folders are
-      read; twelve transcribed folders are not — 69, 70, 72, 74, 77, 78, 79,
-      83, 84, 85, 91 and 93 (10 October 2026). */
-  batchesModernised: 529,
+      folder is either wholly in this count or wholly out. All 164
+      transcribed folders are read (17 October 2026). */
+  batchesModernised: 638,
   /** Per batch. `contextM` is every token the pass sent or received, cache
       reads included; `writtenK` is output alone. Transcription is the mean of
       twelve passes (25 September 2026): hours are model-active time, gaps
@@ -775,7 +774,7 @@ function CostAndHorizon({ manifest }: { manifest: ReturnType<typeof useManifest>
       <P id="cost-plan" className="prose-fonds mt-3">
         In subscription terms, which is how the work is actually paid for: one twenty-page
         transcription uses about <strong>1 % of a week</strong> of a Claude Max 20× plan. The
-        632 batches transcribed have therefore cost on the order of six such weeks; the
+        638 batches transcribed have therefore cost on the order of six such weeks; the
         modernised readings much less, since they read text rather than page images.
       </P>
       <P id="cost-pace" className="prose-fonds mt-3">

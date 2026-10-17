@@ -129,7 +129,7 @@ const labels = map.nodes
   })
   .join('\n');
 const legend = BINS.map(
-  (b, i) => `\\fill[dat${i}] (${(0.6 + i * 2.1).toFixed(2)},${ybot.toFixed(2)}) circle (0.09); \\node[font=\\scriptsize,anchor=west] at (${(0.6 + i * 2.1 + 0.15).toFixed(2)},${ybot.toFixed(2)}) {${b.label}};`,
+  (b, i) => `\\fill[dat${i}] (${(0.45 + i * 2.05).toFixed(2)},${ybot.toFixed(2)}) circle (0.09); \\node[font=\\scriptsize,anchor=west] at (${(0.45 + i * 2.05 + 0.15).toFixed(2)},${ybot.toFixed(2)}) {${b.label}};`,
 ).join('\n');
 
 writeFileSync(
