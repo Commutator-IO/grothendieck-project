@@ -79,6 +79,14 @@
 %   - the Theoreme of page 39, which breaks off inside its case a);
 %   - the folder's closing question (pages 81-83), which is left open in his
 %     own words.
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder158.lean): the footnote to Proposition 1
+% (§5.1) names the theorems, says that finiteness is used exactly where the
+% page says « comme E_0 est fini » and that no hypothesis is superfluous
+% (without pseudo-cofilteringness, {1, a, b} with left zeros). The 2026-09-26
+% correction of the gloss was already in. The folder's findings are
+% unsearched (no literature cited). No facsimile check since 2026-09-26.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -821,7 +829,14 @@ $\{a, b\}$.\footnote{Correction du 26 septembre 2026. Une première version de
 cette lecture disait $p$ « zéro à gauche » et le noyau de Rees « ponctuel » ;
 la formalisation en Lean (\texttt{lean/Grothendieck/Folder158.lean},
 \texttt{contre\_noyau\_non\_ponctuel}) a donné le contre-exemple. La
-Proposition elle-même, telle que le feuillet l'énonce, est démontrée.}\footnote{La
+Proposition elle-même, telle que le feuillet l'énonce, est démontrée
+(\texttt{etape1} et \texttt{proposition1}), sans hypothèse ajoutée. La finitude
+y sert exactement là où la page dit « comme $E_{0}$ est fini », et à l'étape
+qui fait se rencontrer tous les $uM$ ; aucune hypothèse n'est superflue : sans
+la pseudo-cofiltrance, le monoïde $\{1, a, b\}$ où $a$ et $b$ sont des zéros à
+gauche ($xy = x$ pour $x \neq 1$) est fini, de groupe enveloppant trivial, et
+n'a pas de tel $p$. Mathlib n'a pas de théorie de structure des semi-groupes
+finis ; la vérification ne s'appuie sur aucun théorème de ce genre.}\footnote{La
 théorie de structure des semi-groupes finis — noyau, semi-groupe complètement
 simple — était disponible ; rien sur ces feuillets n'indique qu'il l'ait eue
 en vue, et la démonstration est menée de bout en bout par ses propres moyens.}
