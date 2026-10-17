@@ -1,0 +1,71 @@
+\section[Cote 73 : les aires des oreilles d'un polygone plan]{Cote 73 : les aires des oreilles d'un polygone plan\protect\verifie{Folder73}}\label{sec:73}
+
+La cote 73, \emph{Polygones : notes manuscrites (s.d.), lettre (s.d.)}, vingt-huit pages que l'inventaire date \q{[à partir de 1976]}, étudie l'application qui envoie un polygone plan, donné par ses côtés $u_i = s_{i+1} - s_i$, sur les aires algébriques doublées de ses \q{oreilles}, les triangles $s_{i-1}s_is_{i+1}$ : $\mu_i = u_{i-1} \wedge u_i$. La page~5 traite le quadrilatère fermé. Elle établit $\mu_0 + \mu_2 = \mu_1 + \mu_3$, écrit \q{$\mathbf{M}_4 \to \mathbf{P}^2_{\mathbf{Z}}$ mono}, puis \q{épi ?}, donne les formules inverses et conclut \q{$\mathbf{M}_4 \simeq \mathbf{P}^2_{\mathbf{Z}}$} ; elle encadre $u_2 = 0 \Leftrightarrow \mu_2 = \mu_3 = 0$ (\lot{73}{1}{5}). La page~6 parle de \q{l'enveloppe projective de $A$}, l'ensemble des arêtes (\lot{73}{1}{6}). Les pages~14 et~15 écrivent la relation des multiplicateurs de Lagrange et encadrent la formule close $\lambda_i u_{i-1}u_i = -\lambda_0 u_{-1}u_{1i} + \lambda_1 u_1 u_{0i}$ (\lot{73}{1}{15}). La page~18 pose $\lambda_0 = 0$ et dessine un ennéagone étoilé (\lot{73}{1}{18}). Le bas de la page~28 énonce, pour le \q{cas spécial II}, un critère : \q{a) $\sum u_i = 0$ ; b) $u_{i-1}, u_i \parallel u_1, u_{0i}$}, précédé d'un \q{il faut et il suffit} lu avec doute, et ajoute que les $i$ tels que $\lambda_i = 0$ sont ceux pour lesquels $s_i = s_0$ (\lot{73}{2}{28}).
+
+\noindent\emph{Conventions.} $k$ est un corps et $V = k^2$, muni de la forme volume $a \wedge b = a_0b_1 - a_1b_0$. Une application affine agit sur les côtés par sa partie linéaire, une matrice $M$ d'ordre~$2$. Pour un quadrilatère, les indices sont pris modulo~$4$ ; il est fermé quand $u_0 + u_1 + u_2 + u_3 = 0$, et aligné quand tous les $u_i \wedge u_j$ sont nuls. Pour un $n$-gone, $n \geq 3$, les côtés sont indexés par $\mathbf{Z}/n\mathbf{Z}$ et $u_{0i} = u_0 + \cdots + u_{i-1} = s_i - s_0$. Comme la lecture, on lit la juxtaposition $u\,v$ de la page comme le produit $u \cdot v$ dans le carré symétrique $\operatorname{Sym}^2 V$, identifié à $k^3$ par $a \cdot b = (a_0b_0,\ a_0b_1 + a_1b_0,\ a_1b_1)$ : ce sont les coefficients de la forme quadratique $(a_0X + a_1Y)(b_0X + b_1Y)$. L'espace $N(u_*)$ des multiplicateurs est celui des $(\lambda_i) \in k^{\mathbf{Z}/n\mathbf{Z}}$ tels que
+\[ (\ast) \qquad \lambda_i u_{i-1} - \lambda_{i+1}(u_i + u_{i+1}) + \lambda_{i+2} u_{i+2} = 0 \qquad \text{pour tout } i. \]
+
+\begin{theoreme}[Grothendieck, pages 5 et 6, les quadrilatères forment un plan projectif\piste{73-quadrilateral-projective-frame}]\label{thm:73-quadrilatere}
+Soient $u = (u_0, u_1, u_2, u_3)$ et $u'$ deux quadrilatères fermés de $V$.
+\begin{enumerate}
+\item On a $u_0 \wedge u_2 = \mu_0 - \mu_1 = \mu_3 - \mu_2$ et $u_1 \wedge u_3 = \mu_1 - \mu_2 = \mu_0 - \mu_3$ ; donc $\mu_0 + \mu_2 = \mu_1 + \mu_3$, et $u$ est aligné si et seulement si tous les $\mu_i$ sont nuls. Ces identités valent sur tout anneau commutatif.
+\item Une matrice $M$ multiplie tous les $\mu_i$ par $\det M$. Si $u$ n'est pas aligné, les $\mu_i(u')$ sont proportionnels aux $\mu_i(u)$, de rapport non nul, si et seulement s'il existe $M$ inversible avec $u'_i = Mu_i$ pour tout $i$ ; on peut prendre $\det M$ égal au rapport.
+\item Tout $(m_0, m_1, m_2, m_3) \neq 0$ tel que $m_0 + m_2 = m_1 + m_3$ est le vecteur $(\mu_i)$ d'un quadrilatère fermé.
+\item Si $u$ n'est pas aligné, $u_i = 0$ équivaut à $\mu_i = \mu_{i+1} = 0$, et alors $(\mu_j) = \mu_{i+2}\, p_i$ avec $\mu_{i+2} \neq 0$, où $p_0 = (0,0,1,1)$, $p_1 = (1,0,0,1)$, $p_2 = (1,1,0,0)$, $p_3 = (0,1,1,0)$.
+\item La seule relation linéaire entre les $p_i$ est $p_0 - p_1 + p_2 - p_3 = 0$ : trois quelconques d'entre eux sont indépendants, et les quatre forment un repère projectif du plan $\Pi = \{m_0 + m_2 = m_1 + m_3\}$. L'application linéaire $e_i \mapsto (-1)^i p_i$ induit un isomorphisme $k^4 / k\cdot(1,1,1,1) \simeq \Pi$.
+\end{enumerate}
+Ainsi les quadrilatères fermés non alignés, à transformation affine près, sont en bijection avec les points du plan projectif $\mathbf{P}(\Pi) \simeq \mathbf{P}\bigl(k^A / k\cdot(1,1,1,1)\bigr)$, et la droite de l'arête $i$ y est le quadrilatère où cette arête est réduite à un point.
+\end{theoreme}
+
+\begin{proof}
+1. On remplace $u_3$ par $-(u_0 + u_1 + u_2)$ et l'on développe : les quatre identités sont polynomiales en les coordonnées. Elles expriment les six produits $u_i \wedge u_j$ par les $\mu_i$, qui sont les produits de côtés consécutifs ; si les $\mu_i$ sont nuls, tous les $u_i \wedge u_j$ le sont.
+
+2. $Ma \wedge Mb = \det M\,(a \wedge b)$. Pour la réciproque, supposons d'abord $\mu_1(u) \neq 0$ : $u_0, u_1$ est une base de $V$. La formule de Cramer $(a \wedge b)\,x = (x \wedge b)\,a + (a \wedge x)\,b$, appliquée à $u_0, u_1, u_2$, donne avec la première identité la carte de la page~5 :
+\[ \mu_1 u_2 = -\mu_2 u_0 + (\mu_3 - \mu_2) u_1 . \]
+Soit $M$ l'endomorphisme qui envoie $u_0, u_1$ sur $u'_0, u'_1$. Si $\mu(u') = c\,\mu(u)$ avec $c \neq 0$, la carte de $u'$, divisée par $c$, s'écrit $\mu_1 u'_2 = -\mu_2 Mu_0 + (\mu_3 - \mu_2)Mu_1 = \mu_1 Mu_2$, d'où $u'_2 = Mu_2$, puis $u'_3 = Mu_3$ par fermeture. Enfin $\det M \cdot \mu_1 = \mu_1(u') = c\,\mu_1$ donne $\det M = c$. Si c'est un autre $\mu_i$ qui est non nul, on se ramène à ce cas par permutation circulaire des indices, qui préserve la fermeture et décale les $\mu_i$.
+
+3. Si $m_1 \neq 0$, le quadrilatère $u_0 = (m_1, 0)$, $u_1 = (0, 1)$, $u_2 = (-m_2, (m_3 - m_2)/m_1)$, $u_3 = -(u_0 + u_1 + u_2)$ a $\mu_1 = m_1$, $\mu_2 = m_2$, $\mu_3 = m_3$, et $\mu_0 = m_1 + m_3 - m_2 = m_0$ par la relation. Sinon on décale les indices.
+
+4. Si $u_i = 0$, les deux oreilles qui contiennent $u_i$ sont plates, et la relation du point~1 donne $\mu_{i+2} = \mu_{i+3}$ ou son analogue, d'où $(\mu_j) = \mu_{i+2}\,p_i$ ; si $\mu_{i+2}$ était nul, tous les $\mu_j$ le seraient. Réciproquement, ramenons-nous par décalage à $i = 1$, et supposons $\mu_1 = \mu_2 = 0$ et $u_1 \neq 0$. La formule de Cramer pour $u_0, u_1, u_2$ se réduit à $(u_0 \wedge u_2)\,u_1 = 0$, donc $u_0 \wedge u_2 = 0$, et le point~1 donne $\mu_0 = \mu_1 = 0$ et $\mu_3 = \mu_2 = 0$ : le quadrilatère est aligné.
+
+5. $\sum c_ip_i = (c_1 + c_2,\ c_2 + c_3,\ c_0 + c_3,\ c_0 + c_1)$, qui est nul si et seulement si $c$ est multiple de $(1, -1, 1, -1)$ ; un tel $c$ avec une composante nulle est nul. L'application $c \mapsto \sum (-1)^ic_ip_i = (c_2 - c_1,\ c_2 - c_3,\ c_0 - c_3,\ c_0 - c_1)$ a pour noyau les vecteurs constants, et pour image $\Pi$ : un point $m$ de $\Pi$ est l'image de $(m_2,\ m_2 - m_3,\ m_2 - m_3 + m_0,\ m_2 - m_3 + m_0 - m_1)$.
+\end{proof}
+
+\begin{remarque}
+La deuxième ligne du tableau de la page~5, $u_1 \wedge u_3 = \mu_0 - \mu_2$, que la lecture reprend, est fausse : le quadrilatère $u = (e_1, e_2, e_2, -e_1 - 2e_2)$ a $u_1 \wedge u_3 = 1$ et $\mu_0 - \mu_2 = 2$. La valeur juste, $\mu_1 - \mu_2 = \mu_0 - \mu_3$, est celle que la quatrième ligne de la même page donne pour $u_3 \wedge u_1$ ; à la troisième ligne, la première valeur donnée pour $u_2 \wedge u_0$, $\mu_1 - \mu_3$, est fausse aussi (il faut $\mu_2 - \mu_3$), la seconde, $\mu_1 - \mu_0$, est juste. Le reste de la lecture n'en dépend pas : la relation $\mu_0 + \mu_2 = \mu_1 + \mu_3$ ne vient que de $u_0 \wedge u_2$. L'identification canonique du point~5 demande un signe : l'application $e_i \mapsto p_i$ a pour noyau $k\cdot(1,-1,1,-1)$, et c'est $e_i \mapsto (-1)^ip_i$ qui a pour noyau $k\cdot(1,1,1,1)$ ; les droites, donc les points du plan projectif, sont les mêmes. Le fichier démontre l'énoncé sur un corps, les identités sur tout anneau commutatif ; l'isomorphisme de schémas sur $\operatorname{Spec}\mathbf{Z}$ que suggère l'indice de $\mathbf{P}^2_{\mathbf{Z}}$ n'est pas formalisé.
+\end{remarque}
+
+\begin{lemme}[paire de directions]\label{lem:73-paire}
+Soient $a, b, c, d$ des vecteurs non nuls de $V$. Le produit $c \cdot d$ est multiple de $a \cdot b$ dans $\operatorname{Sym}^2 V$ si et seulement si $\{[a], [b]\} = \{[c], [d]\}$ comme paires de droites, c'est-à-dire si $a \wedge c = b \wedge d = 0$ ou $a \wedge d = b \wedge c = 0$.
+\end{lemme}
+
+\begin{proof}
+Si $c \cdot d = t\,a \cdot b$, alors $t \neq 0$, car un produit de vecteurs non nuls n'est pas nul. Évaluons les formes quadratiques en $x = (y_1, -y_0)$, orthogonal à $y$ : $a \cdot b$ y vaut $(a \wedge y)(b \wedge y)$. Pour $y = a, b, c, d$ on obtient
+\[ (a \wedge c)(a \wedge d) = 0, \quad (b \wedge c)(b \wedge d) = 0, \quad (a \wedge c)(b \wedge c) = 0, \quad (a \wedge d)(b \wedge d) = 0 . \]
+Si $a \wedge c \neq 0$, la première et la troisième donnent $a \wedge d = b \wedge c = 0$. Si $a \wedge c = 0$ et $b \wedge d \neq 0$, la deuxième et la quatrième donnent encore $b \wedge c = a \wedge d = 0$. Réciproquement, $a \wedge c = 0$ avec $a \neq 0$ donne $c = \alpha a$, et de même pour les autres paires ; alors $c \cdot d = \alpha\beta\, a \cdot b$.
+\end{proof}
+
+\begin{theoreme}[Grothendieck, pages 15, 18 et 28, critère du cas spécial II\piste{73-zero-multiplier-criterion}]\label{thm:73-critere}
+Soient $n \geq 3$ et $u_* = (u_i)_{i \in \mathbf{Z}/n\mathbf{Z}}$ une suite de vecteurs non nuls de $V$. Il existe $\lambda \in N(u_*)$ avec $\lambda_0 = 0$ et $\lambda_1 = 1$ si et seulement si
+\begin{enumerate}
+\item[a)] $\sum u_i = 0$, et
+\item[b)] pour $2 \leq i \leq n - 1$, ou bien $s_i = s_0$, c'est-à-dire $u_{0i} = 0$, ou bien la paire de directions de $\{u_{i-1}, u_i\}$ est celle de $\{u_1, u_{0i}\}$.
+\end{enumerate}
+Un tel $\lambda$ est alors unique, il vérifie $\lambda_i\, u_{i-1} \cdot u_i = u_1 \cdot u_{0i}$ pour tout $i \geq 1$, et $\lambda_i = 0$ si et seulement si $s_i = s_0$. Enfin un multiplicateur qui a deux composantes consécutives nulles est nul ; c'est ce qui permet de normaliser $\lambda_1 = 1$ dès que $\lambda_0 = 0$.
+\end{theoreme}
+
+\begin{proof}
+Posons $L_i = \lambda_i u_{i-1} - \lambda_{i+1} u_{i+1}$. La relation $(\ast)$ en $i$ est $L_i - L_{i+1} = 0$ : $(\ast)$ pour tout $i$ dit que $L_i$ ne dépend pas de $i$, et, avec $\lambda_0 = 0$, $\lambda_1 = 1$, que $L_i = L_0 = -u_1$ pour tout $i$. Notons $(S_i)$ l'identité $\lambda_i\, u_{i-1} \cdot u_i = u_1 \cdot u_{0i}$, pour $i \geq 1$ entier, les indices de $u$ et $\lambda$ étant lus modulo~$n$. $(S_1)$ est $u_0 \cdot u_1 = u_1 \cdot u_0$. Si $(S_i)$ a lieu et que $L_i = -u_1$, c'est-à-dire $\lambda_{i+1} u_{i+1} = \lambda_i u_{i-1} + u_1$, on multiplie par $u_i$ :
+\[ \lambda_{i+1}\, u_i \cdot u_{i+1} = \lambda_i\, u_{i-1} \cdot u_i + u_1 \cdot u_i = u_1 \cdot (u_{0i} + u_i) = u_1 \cdot u_{0,i+1}, \]
+qui est $(S_{i+1})$. Réciproquement, $(S_i)$ et $(S_{i+1})$ donnent $u_i \cdot (\lambda_i u_{i-1} - \lambda_{i+1} u_{i+1} + u_1) = 0$, d'où $L_i = -u_1$ puisque $u_i \neq 0$ et qu'un produit de deux vecteurs n'est nul que si l'un l'est. Ainsi $(\ast)$ équivaut à $(S_i)$ pour tout $i \geq 1$.
+
+Si $\lambda$ existe, $(S_n)$ s'écrit $0 = \lambda_0\, u_{n-1} \cdot u_0 = u_1 \cdot \sum_j u_j$, d'où a) ; et pour $2 \leq i \leq n - 1$ avec $u_{0i} \neq 0$, $(S_i)$ dit que $u_1 \cdot u_{0i}$ est multiple de $u_{i-1} \cdot u_i$, d'où b) par le lemme~\ref{lem:73-paire}. Réciproquement, sous a) et b), le lemme donne pour chaque $2 \leq i \leq n - 1$ un scalaire $\lambda_i$ avec $\lambda_i\, u_{i-1} \cdot u_i = u_1 \cdot u_{0i}$ ($\lambda_i = 0$ si $u_{0i} = 0$) ; avec $\lambda_0 = 0$ et $\lambda_1 = 1$, les identités $(S_1), \ldots, (S_n)$ ont lieu, $(S_n)$ par a). Comme $u_{0,i+n} = \sum_j u_j + u_{0i} = u_{0i}$, $(S_{i+n})$ équivaut à $(S_i)$, et toutes ont lieu : $\lambda \in N(u_*)$.
+
+Pour $i \geq 1$, $(S_i)$ donne $\lambda_i = 0$ si et seulement si $u_1 \cdot u_{0i} = 0$, si et seulement si $u_{0i} = 0$, et détermine $\lambda_i$ puisque $u_{i-1} \cdot u_i \neq 0$ ; tout indice modulo~$n$ est de la forme $i \geq 1$, d'où l'unicité. Enfin, si $\lambda_i = \lambda_{i+1} = 0$, $(\ast)$ en $i$ se réduit à $\lambda_{i+2} u_{i+2} = 0$, donc $\lambda_{i+2} = 0$, et de proche en proche $\lambda = 0$.
+\end{proof}
+
+\begin{remarque}
+Le critère tient tel que la lecture l'énonce : le \q{il faut et il suffit} lu avec doute à la page~28 est juste. La démonstration est celle de la lecture, qui est de l'édition. Elle n'utilise aucune hypothèse sur le corps : l'hypothèse \q{$k$ infini} du théorème de la page~28 ne sert qu'à l'exhaustivité des quatre cas, qui n'est pas en jeu ici. La formule $\lambda_i\, u_{i-1} \cdot u_i = u_1 \cdot u_{0i}$ vaut pour tout $i \geq 1$ et pas seulement pour $2 \leq i \leq n - 1$ ; c'est le cas $\lambda_0 = 0$, $\lambda_1 = 1$ de la formule close encadrée de la page~15. La paire de directions est la reformulation, par la lecture, du \q{$u_{i-1}, u_i \parallel u_1, u_{0i}$} de la page ; le lemme~\ref{lem:73-paire} montre que c'est bien ce que dit la proportionnalité dans $\operatorname{Sym}^2 V$.
+\end{remarque}
+
+Ne sont pas démontrés ici : le théorème de la page~28 lui-même, avec $\dim N(u_*) \leq 2$, le cas hyperspécial ($n \equiv 0 \pmod 3$, triangle parcouru $n/3$ fois) et la dichotomie selon les hyperplans de coordonnées, qui est une autre piste de l'onglet Findings ; l'interprétation de $N(u_*)$ comme espace conormal de l'application \q{aires des oreilles} sur les polygones fermés ; l'équation du second degré du pentagone (page~19) et la formule de Gauss ; l'ennéagone de la page~18, dont la lecture vérifie numériquement que $N(u_*)$ est une droite ; le foncteur $\mathrm{Polg}_n$ de la page~1 ; l'énoncé du plan projectif sur $\operatorname{Spec}\mathbf{Z}$.

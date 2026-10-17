@@ -517,4 +517,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder37.lean',
     theorems: ['le_of_lifts', 'Jn_not_generated', 'Jn_spanRank', 'Mn_finitePresentation', 'Jn_map_succ', 'ideal_spanRank_le_of_presentation', 'no_finitePresentation_inducing'],
   },
+  {
+    folder: '73',
+    batch: 1,
+    page: '5–6, 15, 18, 28',
+    name: 'Ear areas: the quadrilateral plane and the zero-multiplier criterion',
+    statement:
+      'For closed quadrilaterals of a plane, the ear areas μ_i = u_{i−1} ∧ u_i satisfy μ₀ + μ₂ = μ₁ + μ₃, and the non-collinear ones, up to affine maps, are in bijection with the points of that plane in P³, in which the four quadrilaterals with one side reduced to a point form a projective frame, canonically P(k^A / k·(1,1,1,1)). For an n-gon with nonzero sides, a multiplier (λ_i u_{i−1} − λ_{i+1}(u_i + u_{i+1}) + λ_{i+2} u_{i+2} = 0) with λ₀ = 0, λ₁ = 1 exists if and only if Σu_i = 0 and, for 2 ≤ i ≤ n − 1, s_i = s_0 or the directions of {u_{i−1}, u_i} are those of {u₁, u_{0i}}; it is given by λ_i u_{i−1}·u_i = u₁·u_{0i} in Sym²V and vanishes exactly where s_i = s_0.',
+    found:
+      'Both hold. The quadrilateral statement over a field (its identities over any commutative ring): injectivity on affine classes with det M equal to the ratio, surjectivity onto the nonzero points of the plane (the page’s « épi ? »), u_i = 0 ⇔ μ_i = μ_{i+1} = 0, and the frame. The canonical identification needs a sign, e_i ↦ (−1)ⁱp_i; with e_i ↦ p_i the kernel is k·(1,−1,1,−1). The second line of the page’s table, u₁ ∧ u₃ = μ₀ − μ₂, copied by the reading, is false (it is μ₁ − μ₂, as the page’s fourth line has); nothing rests on it. The criterion holds over any field, as the reading proves it, with the « il faut et il suffit » of p. 28 confirmed; the formula holds for every i ≥ 1, the multiplier is unique, and two consecutive zero components force it to vanish. The « pair of directions » rests on a lemma proved here: for nonzero plane vectors, c·d ∈ k·(a·b) in Sym²V exactly when {[a], [b]} = {[c], [d]}. Not formalised: P²_ℤ over Spec ℤ, the four-case theorem of p. 28 and the nine-gon of p. 18.',
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder73.lean',
+    theorems: ['mu_relation', 'not_wedge13_eq', 'quad_moduli', 'exists_quad_of_mu', 'side_eq_zero_iff', 'mu_eq_smul_framePt', 'framePt_three_indep', 'frame_canonical', 'symProd_proportional_iff', 'zero_multiplier_criterion', 'symProd_formula', 'mult_eq_zero_iff', 'mult_unique', 'eq_zero_of_consecutive'],
+  },
 ];
