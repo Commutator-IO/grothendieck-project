@@ -13,6 +13,12 @@
 % the pages by a human. The folder was read whole: five batches, pages 1-99,
 % all transcribed. This reading was made on Opus 5.5 and is not measured
 % against the Opus 5 reference reading of folder 115.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — pp. 92-97 completed with the
+% Lean check (Folder37.lean: minimality of J_n, the counterexample in a more
+% general form, the Schanuel bound p + 1 instead of p + q) and mathlib's
+% lTensor_exact; pp. 29-30 cite Giraud ch. VII 2.1.2 through Haine, as the
+% findings record it; p. 38's footnote names the texts compared. No facsimile
+% correction since the pass.
 %
 % WHAT THE FOLDER IS. A dossier of editorial work, not a mathematical text:
 % the Springer re-editions of SGA 1, 4, 5, 6, 7 and of EGA I and II, ordered
@@ -613,7 +619,15 @@ la fois les sections ($H^0$) et les torseurs ($H^1$ non abélien au sens de
 Giraud).\footnote{« Ind-$L$-champ » est le terme de la page ; nous l'entendons
 comme un champ dont les faisceaux d'automorphismes sont des
 ind-$L$-faisceaux, ce que la ligne tapée biffée après « champ » disait
-explicitement.}
+explicitement.} Un théorème de changement de base lisse pour les faisceaux
+en groupoïdes figure sous le numéro 2.1.2 du chapitre VII de J. Giraud,
+\emph{Cohomologie non abélienne} (Grundlehren 179, 1971).\footnote{D'après la
+citation qu'en fait P. Haine, « Nonabelian basechange theorems \& étale
+homotopy theory » (arXiv 2304.00938, introduction et corollaire 2.30) ; nous
+n'avons pas lu le chapitre de Giraud lui-même, et n'avons donc pas vérifié que
+son énoncé est celui de la page 30. La concordance avec le « Chap. VII » et
+les numéros 2.1.x de la lettre est notée ; elle n'identifie pas le
+destinataire, que les feuillets ne nomment pas.}
 
 \pagerange{32}{35}
 \section*{Les réponses d'Artin, et d'autres notes (pages 32 à 35)}
@@ -671,8 +685,10 @@ c'est le théorème de Verdier (SGA 4 V 7). La page ne dit pas que ça marche.}
 
 Un tapuscrit coté « SGA 4 VIII » porte un § 10 qui n'est ni dans l'exposé
 publié ni dans le tirage original de l'IHÉS.\footnote{Vérification faite par
-la transcription : l'exposé VIII publié et le tapuscrit IHÉS s'arrêtent au
-§ 9. Les deux entrées manuscrites de la liste de terminologie (page 44) citent
+la transcription : l'exposé VIII de la réédition d'Orgogozo (SGA 4, t. 2)
+n'a que les §§ 1 à 9, sans « étendue algébrique », et le tapuscrit original
+de l'IHÉS s'arrête à 9.4 ; l'impression Springer (LNM 270) elle-même n'a pas
+été consultée. Les deux entrées manuscrites de la liste de terminologie (page 44) citent
 pourtant « étendue algébrique VIII 10.2 » et « espace algébrique VIII 10.4 ».}
 Il est annoncé comme une suite d'exercices « qui ne seront pas utilisés dans
 la suite du Séminaire ». Les renvois à IV y sont pour la plupart laissés en
@@ -1015,9 +1031,23 @@ J_n = (X_0,\ X_1 T,\ \ldots,\ X_n T^n) \subset A_n , \qquad M_n = A_n/J_n .
 Les $M_n$ se recollent ($X_{n+1}T^{n+1}$ est nul dans $A_n$) et sont de
 présentation finie ; mais \emph{l'idéal $J_n$ ne peut pas être engendré par
 moins de $n+1$ éléments}. Si les $M_n$ provenaient d'un $A$-module de
-présentation finie $M$, on aurait des présentations
+présentation finie $M$, présenté par $A^p \to A^q \to M \to 0$, le produit
+tensoriel par $A_n$, exact à droite, donnerait des présentations
 $A_n^p \to A_n^q \to M_n \to 0$ avec $p$, $q$ indépendants de $n$, et
-(lemme de Schanuel) $J_n$ serait engendré par au plus $p + q$ éléments.
+(lemme de Schanuel) $J_n$ serait engendré par au plus $p + 1$ éléments, ce
+qui est absurde pour $n > p$.\footnote{La lettre laisse implicite l'étape de
+Schanuel ; nous l'ajoutons. Vérifié en Lean (lean/Grothendieck/Folder37.lean,
+\texttt{ideal\_spanRank\_le\_of\_presentation} et
+\texttt{no\_finitePresentation\_inducing}) : de $A_n^q \to A_n/J_n$, de noyau
+engendré par $p$ éléments, on tire que $J_n$ est engendré par $p + 1$
+éléments, borne plus fine que $p + q$. Le contre-exemple tient de plus sous une forme plus
+générale : pour un anneau commutatif $A$ quelconque et des homomorphismes
+$A \to A_n$ quelconques, aucun $A$-module de présentation finie $M$ ne vérifie
+$A_n \otimes_A M \simeq M_n$ pour tout $n$ ; ni la complétude de $A$, ni la
+surjectivité des $A \to A_n$, ni la compatibilité des isomorphismes ne
+servent. L'exactitude à droite du produit tensoriel est, dans mathlib,
+\texttt{lTensor\_exact} ; la vérification ne formalise ni les schémas formels
+ni les conditions a), b), c) de 10.10.5.}
 
 Preuve de la minimalité. Soit $\mathfrak{m} = (X_i)_{i \ge 0} \subset B$. Si
 $a_0, \ldots, a_n \in B$ vérifient
@@ -1030,7 +1060,16 @@ $n+1$ générateurs écrits ont des images linéairement indépendantes sur $k$
 dans $J_n / (TJ_n + \mathfrak{m}J_n)$, qui est donc de dimension $n+1$ ; par
 Nakayama gradué, ou simplement parce que tout système générateur de $J_n$ en
 donne un de cet espace, $J_n$ demande au moins $n+1$
-générateurs.\footnote{La lettre affirme plus : que les images sont
+générateurs.\footnote{Vérifié en Lean (lean/Grothendieck/Folder37.lean,
+\texttt{Jn\_spanRank}, \texttt{le\_of\_lifts}), sous forme numérique : la forme
+$\lambda_i$, coefficient du monôme $X_iT^i$, annule $T^{n+1}$ et vérifie
+$\lambda_i(a \cdot X_lT^l) = \delta_{il}\,\varepsilon(a)$, $\varepsilon$ le
+terme constant ; une famille génératrice de $m$ éléments donne deux matrices
+$E$, $(n+1) \times m$, et $L$, $m \times (n+1)$, sur $k$ avec $EL = 1$, d'où
+$n+1 \leqslant m$ par le rang. La vérification établit aussi que $M_n$ est de
+présentation finie et que $J_{n+1}$ s'envoie sur $J_n$
+(\texttt{Mn\_finitePresentation}, \texttt{Jn\_map\_succ}). L'indépendance sur
+$B$ que la lettre affirme ne sert pas.}\footnote{La lettre affirme plus : que les images sont
 linéairement indépendantes sur $B$ dans $J_n/TJ_n$, et conclut « d'où
 évidemment $a_i = 0$ ». C'est faux : $X_0 \cdot (X_1 T) = T \cdot X_1 \cdot
 X_0 \in TJ_n$, relation non triviale à coefficient $a_1 = X_0$. Son argument
