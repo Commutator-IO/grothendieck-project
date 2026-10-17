@@ -115,8 +115,7 @@ theorem mem_range_rTensor (f : N →ₗ[R] P) (t : P ⊗[R] M) :
     rw [Finset.sum_ite_eq']
     split_ifs with hj
     · exact hg j
-    · rw [map_zero, eq_comm, ← Finsupp.notMem_support_iff]
-      exact hj
+    · exact (map_zero f).trans (Finsupp.notMem_support_iff.mp hj).symm
 
 theorem coords_tmul_basis (n : N) (j : ι) : coords b N (n ⊗ₜ b j) = Finsupp.single j n := by
   ext i
@@ -188,10 +187,7 @@ theorem lemme_range [Module.Free k₀ M] :
   let b := Module.Free.chooseBasis k₀ M
   ext F
   rw [SetLike.mem_coe, mem_range_rTensor b, lemme_coordonnees b]
-  refine forall_congr' fun i => ⟨?_, fun h => ⟨⟨_, h⟩, rfl⟩⟩
-  rintro ⟨G, hG⟩
-  rw [← hG]
-  exact G.2
+  exact forall_congr' fun i => ⟨fun ⟨G, hG⟩ => hG ▸ G.2, fun h => ⟨⟨_, h⟩, rfl⟩⟩
 
 /-! ### `Ω = Int(k₀)` is stable under composition (pages 3 and 9) -/
 
@@ -200,9 +196,7 @@ theorem mem_Omega {F : K₀[X]} :
   Iff.rfl
 
 theorem comp_mem_Omega {F G : K₀[X]} (hF : F ∈ Omega k₀ K₀) (hG : G ∈ Omega k₀ K₀) :
-    F.comp G ∈ Omega k₀ K₀ := by
-  rw [mem_Omega] at *
-  intro x
+    F.comp G ∈ Omega k₀ K₀ := fun x => by
   obtain ⟨y, hy⟩ := hG x
   rw [eval_comp, ← hy]
   exact hF y
@@ -432,10 +426,7 @@ theorem mem_range_Phi_iff_of_injective [Module.Free k₀ (Omega k₀ K₀)]
   refine ⟨values_of_mem_range_Phi, fun hP => ?_⟩
   set e := Module.Free.chooseBasis k₀ (Omega k₀ K₀)
   obtain ⟨g, rfl⟩ := exists_decomp e P
-  have hg : ∀ j, g j ∈ Omega k₀ K₀ := by
-    intro j
-    rw [mem_Omega]
-    intro x
+  have hg : ∀ j, g j ∈ Omega k₀ K₀ := fun j x => by
     set a := algebraMap k₀ K₀ x
     have hQ : (g.sum fun j G => G.map C * C (e j : K₀[X])).eval (C a) =
         g.sum fun j G => G.eval a • (e j : K₀[X]) := by
@@ -468,8 +459,7 @@ theorem Phi_injective_of_injective [Module.Free k₀ (Omega k₀ K₀)]
     (hK : Function.Injective (omegaBaseChange k₀ K₀)) : Function.Injective (Phi k₀ K₀) := by
   classical
   set e := Module.Free.chooseBasis k₀ (Omega k₀ K₀)
-  have hz : ∀ m, ((0 : Omega k₀ K₀) : K₀[X]).coeff m = 0 := fun m => by
-    rw [ZeroMemClass.coe_zero, coeff_zero]
+  have hz : ∀ m, ((0 : Omega k₀ K₀) : K₀[X]).coeff m = 0 := coeff_zero
   have hΦ : ∀ t, Phi k₀ K₀ t =
       (coords e (Omega k₀ K₀) t).sum fun j H => (H : K₀[X]).map C * C (e j : K₀[X]) := by
     intro t
@@ -492,8 +482,7 @@ theorem Phi_injective_of_injective [Module.Free k₀ (Omega k₀ K₀)]
     (((coords e _ t).mapRange (fun H : Omega k₀ K₀ => (H : K₀[X]).coeff m) (hz m)) -
       ((coords e _ t').mapRange (fun H : Omega k₀ K₀ => (H : K₀[X]).coeff m) (hz m))) (by
     rw [Finsupp.sum_sub_index (fun j c c' => sub_smul c c' _), ← hcoeff, ← hcoeff, h, sub_self])
-  have := DFunLike.congr_fun h0 j
-  simpa [sub_eq_zero, Finsupp.mapRange_apply] using this
+  simpa [sub_eq_zero, Finsupp.mapRange_apply] using DFunLike.congr_fun h0 j
 
 /-- **The co-addition is well defined (page 3), for any `k₀ → K₀` with
 `K₀ ⊗_{k₀} Ω ↪ K₀[T]`.** For `F ∈ Ω`, `F(X + Y)` is the image of exactly one
@@ -633,14 +622,10 @@ theorem polya {P : ℚ[X]} (hP : P ∈ Omega ℤ ℚ) :
     rw [fwdDiff_iter_eq_sum_shift, fwdDiff_iter_eq_sum_shift]
     push_cast
     simp [hf, zsmul_eq_mul]
-  have hzero : ∀ k, P.natDegree < k → (fwdDiff 1)^[k] f 0 = 0 := by
-    intro k hk
-    have := hcast k
-    rw [Polynomial.fwdDiff_iter_eq_zero_of_degree_lt hk] at this
-    simpa using this
-  have hN : ∀ m : ℕ, f m = ∑ k ∈ Finset.range (m + 1), m.choose k • (fwdDiff 1)^[k] f 0 := by
-    intro m
-    simpa using shift_eq_sum_fwdDiff_iter 1 f m 0
+  have hzero : ∀ k, P.natDegree < k → (fwdDiff 1)^[k] f 0 = 0 := fun k hk => by
+    simpa [Polynomial.fwdDiff_iter_eq_zero_of_degree_lt hk] using hcast k
+  have hN : ∀ m : ℕ, f m = ∑ k ∈ Finset.range (m + 1), m.choose k • (fwdDiff 1)^[k] f 0 :=
+    fun m => by simpa using shift_eq_sum_fwdDiff_iter 1 f m 0
   apply eq_of_infinite_eval_eq
   apply Set.Infinite.mono _ (Set.infinite_range_of_injective
     (Nat.cast_injective : Function.Injective (Nat.cast : ℕ → ℚ)))
@@ -760,13 +745,10 @@ theorem mem_constants {l : Ω} : l ∈ c.constants ↔ ∀ F, c.comp l F = l := 
 /-- `Ω⁰ = {F | F ∘ 0 = 0}`. -/
 def zeroPart : AddSubgroup Ω where
   carrier := {F | c.comp F 0 = 0}
-  add_mem' {a b} ha hb := by
-    show c.comp (a + b) 0 = 0
-    rw [c.add_comp, show c.comp a 0 = 0 from ha, show c.comp b 0 = 0 from hb, add_zero]
+  add_mem' {a b} (ha : c.comp a 0 = 0) (hb : c.comp b 0 = 0) :=
+    show c.comp (a + b) 0 = 0 by rw [c.add_comp, ha, hb, add_zero]
   zero_mem' := c.zero_comp 0
-  neg_mem' {a} ha := by
-    show c.comp (-a) 0 = 0
-    rw [c.neg_comp, show c.comp a 0 = 0 from ha, neg_zero]
+  neg_mem' {a} (ha : c.comp a 0 = 0) := show c.comp (-a) 0 = 0 by rw [c.neg_comp, ha, neg_zero]
 
 theorem mem_zeroPart {F : Ω} : F ∈ c.zeroPart ↔ c.comp F 0 = 0 := Iff.rfl
 
@@ -790,16 +772,10 @@ theorem sub_comp_zero_mem_zeroPart (F : Ω) : F - c.comp F 0 ∈ c.zeroPart := b
   rw [mem_zeroPart, c.sub_comp, c.mem_constants.mp (c.comp_zero_mem_constants F) 0, sub_self]
 
 /-- **`Ω = Ω₀ ⊕ Ω⁰` (page 5)**, as abelian groups, through `F = F(0) + (F - F(0))`. -/
-theorem isCompl_constants_zeroPart : IsCompl c.constants.toAddSubgroup c.zeroPart := by
-  constructor
-  · rw [AddSubgroup.disjoint_def]
-    intro l hl h0
-    exact c.eq_zero_of_mem_constants_of_mem_zeroPart hl h0
-  · rw [codisjoint_iff, eq_top_iff]
-    intro F _
-    rw [AddSubgroup.mem_sup]
-    exact ⟨c.comp F 0, c.comp_zero_mem_constants F, F - c.comp F 0,
-      c.sub_comp_zero_mem_zeroPart F, add_sub_cancel _ _⟩
+theorem isCompl_constants_zeroPart : IsCompl c.constants.toAddSubgroup c.zeroPart :=
+  ⟨AddSubgroup.disjoint_def.mpr fun hl h0 => c.eq_zero_of_mem_constants_of_mem_zeroPart hl h0,
+    codisjoint_iff_le_sup.mpr fun F _ => AddSubgroup.mem_sup.mpr ⟨c.comp F 0,
+      c.comp_zero_mem_constants F, F - c.comp F 0, c.sub_comp_zero_mem_zeroPart F, add_sub_cancel _ _⟩⟩
 
 /-- `Ω → Appl(Ω₀, Ω₀)`, `F ↦ (λ ↦ F ∘ λ)` (page 7). -/
 def toAppl (F : Ω) : c.constants → c.constants := fun l => ⟨c.comp F l, c.comp_mem_constants F l.2⟩
@@ -835,24 +811,16 @@ def appl (A : Type*) [NonUnitalCommRing A] : Composition (A → A) where
   mul_comp _ _ _ := rfl
 
 theorem mem_constants_appl {A : Type*} [NonUnitalCommRing A] (l : A → A) :
-    l ∈ (appl A).constants ↔ ∃ a, l = fun _ => a := by
-  rw [Composition.mem_constants]
-  constructor
-  · intro hl
-    exact ⟨l 0, funext fun x => (congr_fun (hl fun _ => 0) x).symm⟩
-  · rintro ⟨a, rfl⟩ F
-    rfl
+    l ∈ (appl A).constants ↔ ∃ a, l = fun _ => a :=
+  ⟨fun hl => ⟨l 0, funext fun x => (congr_fun (hl fun _ => 0) x).symm⟩, by
+    rintro ⟨a, rfl⟩ F
+    rfl⟩
 
 /-- `(Ω_A)₀ ≃ A`. -/
 def applConstantsEquiv (A : Type*) [NonUnitalCommRing A] : (appl A).constants ≃+* A where
   toFun l := l.1 0
   invFun a := ⟨fun _ => a, (mem_constants_appl _).mpr ⟨a, rfl⟩⟩
-  left_inv l := by
-    obtain ⟨a, ha⟩ := (mem_constants_appl l.1).mp l.2
-    apply Subtype.ext
-    funext x
-    show l.1 0 = l.1 x
-    rw [ha]
+  left_inv l := Subtype.ext <| funext fun x => (congr_fun (l.2 fun _ => x) 0).symm
   right_inv _ := rfl
   map_mul' _ _ := rfl
   map_add' _ _ := rfl
@@ -896,13 +864,10 @@ noncomputable def poly (k : Type*) [CommRing k] : Composition k[X] where
 
 /-- The constants of `k[T]` are `k`. -/
 theorem mem_constants_poly {k : Type*} [CommRing k] (l : k[X]) :
-    l ∈ (poly k).constants ↔ ∃ a, l = C a := by
-  rw [Composition.mem_constants]
-  constructor
-  · intro hl
-    exact ⟨l.eval 0, by rw [← comp_C]; exact (hl (C 0)).symm⟩
-  · rintro ⟨a, rfl⟩ F
-    exact C_comp
+    l ∈ (poly k).constants ↔ ∃ a, l = C a :=
+  ⟨fun hl => ⟨l.eval 0, (hl (C 0)).symm.trans comp_C⟩, by
+    rintro ⟨a, rfl⟩ F
+    exact C_comp⟩
 
 /-- **`Ω → Ω_{Ω₀}` is not injective (page 7)**: for `k` a finite field with `q`
 elements, `T^q - T ≠ 0` acts as zero on every constant of `k[T]`. -/
@@ -911,9 +876,7 @@ theorem poly_toAppl_not_injective (k : Type*) [Field k] [Fintype k] :
       ∀ l ∈ (poly k).constants, (poly k).comp (X ^ Fintype.card k - X) l = 0 := by
   refine ⟨FiniteField.X_pow_card_sub_X_ne_zero k Fintype.one_lt_card, fun l hl => ?_⟩
   obtain ⟨a, rfl⟩ := (mem_constants_poly l).mp hl
-  show (X ^ Fintype.card k - X : k[X]).comp (C a) = 0
-  rw [comp_C]
-  simp [FiniteField.pow_card]
+  simp [poly, comp_C, FiniteField.pow_card]
 
 /-- For `k` an infinite domain, `k[T] → Ω_{Ω₀}` is injective. -/
 theorem poly_toAppl_injective (k : Type*) [CommRing k] [IsDomain k] [Infinite k] (F G : k[X])
@@ -943,10 +906,7 @@ theorem pascal_det (k : Type*) [CommRing k] (N : ℕ) :
     rw [choose_add_eq_sum, Nat.cast_sum,
       Fin.sum_univ_eq_sum_range (fun j => ((p : ℕ).choose j : k) * ((q : ℕ).choose j : k)) N]
     push_cast
-    apply Finset.sum_subset
-    · intro j hj
-      simp only [Finset.mem_range] at hj ⊢
-      omega
+    refine Finset.sum_subset (Finset.range_mono p.isLt) ?_
     · intro j _ hj
       simp only [Finset.mem_range, not_lt] at hj
       rw [Nat.choose_eq_zero_of_lt (by omega)]
