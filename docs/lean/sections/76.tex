@@ -1,0 +1,37 @@
+\section[Cote 76 : drapeaux de type H d'un ensemble à opérateurs, le lemme de surjectivité]{Cote 76 : drapeaux de type $H$ d'un ensemble à opérateurs, le lemme de surjectivité\protect\verifie{Folder76}}\label{sec:76}
+
+La cote 76, \emph{n-cartes cellulaires : notes manuscrites (s.d.)}, soixante-deux pages que l'inventaire date \q{[vers 1977]}, cherche une description combinatoire des complexes cellulaires et des cartes de dimension~$n$. Les pages~20 à~24 relient les ensembles semi-simpliciaux aux ensembles ordonnés munis d'un ordre sur les sommets ; la relation lue sur les arêtes, $x \prec y$, doit être transitive. La page~26 donne un second exemple (\q{Ex 2}) : un groupe $G$, des éléments $\sigma_0, \ldots, \sigma_n$ tels que $\sigma_i$ et $\sigma_j$ commutent pour $j \geq i + 2$, le sous-groupe $N_H$ engendré par les $\sigma_i$, $i \notin H$, un $G$-ensemble $X$ et ses \q{drapeaux de type $H$}, $D(H) = X/N_H$ (\lot{76}{2}{26}). La page~27 pose $x_i \prec y_j$ si $i < j$ et si $x_i$, $y_j$ ont un majorant commun, ramène la transitivité à la surjectivité de $D(\{i, j, k\}) \to D(\{i, j\}) \times_{D(\{j\})} D(\{j, k\})$ et énonce un lemme plus général, sous l'hypothèse \q{$H \cap H'$ \ldots{} segment final de l'ens tot.\ ordonné $H$, un segment initial de l'ens tot ordonné $H'$} (\lot{76}{2}{27}). La page~28 le démontre par la décomposition $G_{K \cup K'} \subset G_{K_0} \cdot G_{K'_0}$, et une note oblique dans la marge gauche dit n'avoir utilisé que \q{a) le dernier él.\ de $H$ est dans $H'$ ; b) $H \cap H'$ est un segment initial de $H'$} (\lot{76}{2}{28}). La lecture énonce le lemme sous ces deux hypothèses.
+
+\noindent\emph{Conventions.} On note $\Delta_n = \{0, \ldots, n\}$, $G_K$ le sous-groupe de $G$ engendré par les $\sigma_i$, $i \in K$, pour $K \subset \Delta_n$, et $N_H = G_{\Delta_n \smallsetminus H}$. Pour $H \subset H'$, on a $N_{H'} \subset N_H$, d'où la restriction $D(H') \to D(H)$, $N_{H'}x \mapsto N_Hx$ ; elle est transitive. Aucune autre hypothèse n'est faite sur les $\sigma_i$ : ce ne sont pas nécessairement des involutions.
+
+\begin{lemme}\label{lem:76-produit}
+Soient $K, K' \subset \Delta_n$ et $i \in \Delta_n \smallsetminus (K \cup K')$ tels que tout $j \in K \cup K'$ avec $j < i$ soit dans $K'$ et tout $j \in K \cup K'$ avec $j > i$ soit dans $K$. Alors tout élément de $G_{K \cup K'}$ s'écrit $k'k$ avec $k' \in G_{K'}$ et $k \in G_K$.
+\end{lemme}
+
+\begin{proof}
+Soient $A = G_{K'_0}$ et $B = G_{K_0}$, où $K'_0 = \{j \in K \cup K' : j < i\}$ et $K_0 = \{j \in K \cup K' : j > i\}$. Par hypothèse $A \subset G_{K'}$ et $B \subset G_K$. Un indice de $K'_0$ et un indice de $K_0$ diffèrent d'au moins~$2$, donc leurs générateurs commutent ; tout générateur de $B$ est alors dans le centralisateur de $A$, puis $B$ tout entier, et tout élément de $A$ commute à tout élément de $B$. L'ensemble $AB$ contient donc $1$, les générateurs $\sigma_j$, $j \in K \cup K'$ (qui sont dans $K'_0$ ou $K_0$ puisque $i \notin K \cup K'$), et il est stable par produit, $(ab)(a'b') = (aa')(bb')$, et par inverse, $(ab)^{-1} = a^{-1}b^{-1}$. Il contient le sous-groupe $G_{K \cup K'}$ qu'ils engendrent.
+\end{proof}
+
+\begin{theoreme}[Grothendieck, pages 27 et 28, lemme\piste{76-flag-presheaf-gset-lemma}]\label{thm:76-lemme}
+Soient $G$ un groupe, $\sigma_0, \ldots, \sigma_n \in G$ tels que $\sigma_i$ et $\sigma_j$ commutent pour $j \geq i + 2$, et $X$ un $G$-ensemble. Soient $H, H' \subset \Delta_n$ tels que le plus grand élément de $H$ soit dans $H'$ et que $H \cap H'$ soit un segment initial de $H'$. Alors l'application
+\[ D(H \cup H') \longrightarrow D(H) \times_{D(H \cap H')} D(H') \]
+est surjective : deux drapeaux de types $H$ et $H'$ de même restriction à $H \cap H'$ sont les restrictions d'un même drapeau de type $H \cup H'$.
+\end{theoreme}
+
+\begin{proof}
+Soient $a = N_Hx$ et $b = N_{H'}y$ de même image dans $D(H \cap H')$ : il existe $g \in N_{H \cap H'}$ avec $gy = x$. Posons $K = \Delta_n \smallsetminus H$ et $K' = \Delta_n \smallsetminus H'$, de sorte que $N_{H \cap H'} = G_{K \cup K'}$, et soit $i$ le plus grand élément de $H$. Il est dans $H \cap H'$, donc hors de $K \cup K'$. Un $j > i$ n'est pas dans $H$, donc est dans $K$. Un $j < i$ de $K \cup K'$ n'est pas dans $H'$ : sinon, $j \leq i$ avec $i \in H \cap H'$ et le segment initial le mettraient dans $H$, donc dans $H \cap H'$, ce qui contredit $j \in K \cup K'$. Le lemme~\ref{lem:76-produit} écrit $g^{-1} = k'k$ avec $k' \in N_{H'}$ et $k \in N_H$. Le drapeau $c$, classe de $kx$ dans $D(H \cup H')$, a pour image $N_Hkx = N_Hx = a$ dans $D(H)$, et, puisque $y = g^{-1}x = k'(kx)$, pour image $N_{H'}kx = N_{H'}y = b$ dans $D(H')$.
+\end{proof}
+
+\begin{corollaire}[page 27]\label{cor:76-transitif}
+Pour $x \in D(\{i\})$ et $y \in D(\{j\})$, posons $x \prec y$ si $i < j$ et si $x$ et $y$ sont les restrictions d'un même drapeau d'un type $H \supset \{i, j\}$. Cette relation est transitive, pour tout $G$-ensemble $X$. Un majorant commun peut toujours être pris dans $D(\{i, j\})$, les sommets $i < j$ d'un même drapeau vérifient $\prec$, et $x \prec y$ n'a jamais lieu pour $x$ et $y$ de même type.
+\end{corollaire}
+
+\begin{proof}
+La restriction d'un majorant de type $H$ à $\{i, j\}$ est un majorant de type $\{i, j\}$. Soient $i < j < k$, $x \prec y$ par $u \in D(\{i, j\})$ et $y \prec w$ par $v \in D(\{j, k\})$. On a $\{i, j\} \cap \{j, k\} = \{j\}$, qui est le plus grand élément de $\{i, j\}$ et un segment initial de $\{j, k\}$. Les restrictions de $u$ et $v$ à $\{j\}$ valent $y$, et le théorème~\ref{thm:76-lemme} donne $c \in D(\{i, j, k\})$ qui restreint à $u$ et à $v$, donc à $x$ et à $w$ : sa restriction à $\{i, k\}$ est un majorant commun de $x$ et $w$, et $i < k$.
+\end{proof}
+
+\begin{remarque}
+Le lemme tient tel que la lecture l'énonce, sous les deux hypothèses de la note marginale, plus faibles que celles de l'énoncé de la page~27 : la non-vacuité de $H \cap H'$ découle de a), et le segment final de $H$ ne sert pas. La démonstration est celle de la page~28 ; la page écrit $G_{K \cup K'} = G_K \cdot G_{K'}$, le fichier en démontre l'inclusion sous la forme $G_{K'} \cdot G_K$, la seule dont la démonstration se sert. Les $\sigma_i$ ne sont pas supposés d'ordre~$2$, et le groupe, l'ensemble $X$ et l'action sont quelconques : la lecture le dit, et la page n'utilise en effet que la commutation des $\sigma_i$ éloignés. Le fichier formalise l'ordre des sommets sur $D_0 = \coprod_i D(\{i\})$ et sa transitivité, mais pas l'ensemble semi-simplicial qui en résulte. La piste demande si cette surjectivité, pour des $G$-ensembles quelconques, figure dans la théorie des géométries de classes de Tits ou des systèmes de chambres.
+\end{remarque}
+
+Ne sont pas démontrés ici : la condition (a) pour $D_* = \coprod_H D(H)$ et l'ensemble semi-simplicial qu'elle définit, avec $D_m = \coprod_{\operatorname{card} H = m+1} X/N_H$ ; la correspondance des pages~23 et~24 entre ensembles semi-simpliciaux à relation transitive sur les sommets et ensembles ordonnés munis d'un ordre sur les sommets, qui est une autre piste de l'onglet Findings ; le programme de la page~29.
