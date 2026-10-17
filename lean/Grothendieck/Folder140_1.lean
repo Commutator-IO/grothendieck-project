@@ -65,20 +65,15 @@ variable (G M) in
 /-- The 1-coboundaries `g ↦ g m - m`, inside the cocycles. -/
 def B1 : AddSubgroup (Z1 G M) where
   carrier := {f | IsCoboundary₁ (f : G → M)}
-  add_mem' {f f'} hf hf' := by
-    obtain ⟨x, hx⟩ := hf
-    obtain ⟨x', hx'⟩ := hf'
-    refine ⟨x + x', fun g => ?_⟩
+  add_mem' {f f'} := fun ⟨x, hx⟩ ⟨x', hx'⟩ => ⟨x + x', fun g => by
     change g • (x + x') - (x + x') = (f : G → M) g + (f' : G → M) g
     rw [smul_add, ← hx, ← hx']
-    abel
+    abel⟩
   zero_mem' := ⟨0, fun g => by simp⟩
-  neg_mem' {f} hf := by
-    obtain ⟨x, hx⟩ := hf
-    refine ⟨-x, fun g => ?_⟩
+  neg_mem' {f} := fun ⟨x, hx⟩ => ⟨-x, fun g => by
     change g • (-x) - (-x) = -(f : G → M) g
     rw [smul_neg, ← hx]
-    abel
+    abel⟩
 
 variable (G M) in
 /-- `Z¹ / B¹`. -/
@@ -144,9 +139,7 @@ theorem exact_mapQ (i : A →+ M) (p : M →+ N) (hi : ∀ (g : G) a, i (g • a
   · rintro ⟨v, hv⟩
     obtain ⟨m, rfl⟩ := hsurj v
     have h0 : ∀ g, p ((f : G → M) g - (g • m - m)) = 0 := fun g => by
-      have := hv g
-      simp only [mapZ_apply] at this
-      rw [map_sub, map_sub, hp, this, sub_self]
+      rw [map_sub, map_sub, hp, hv g, mapZ_apply, sub_self]
     choose a ha using fun g => (hex _).1 (h0 g)
     have hac : IsCocycle₁ a := fun g h => hinj (by
       rw [map_add, hi, ha, ha, ha, Z1_apply_mul, mul_smul]; simp only [smul_sub]; abel)
@@ -194,8 +187,7 @@ lemma sum_perm (σ : G3) (x : Fin 3 → ℤ) : ∑ j, x (σ⁻¹ j) = ∑ j, x j
 
 /-- `𝔖₃` permutes the coordinates: `(σ x)_j = x_{σ⁻¹ j}`. -/
 instance : DistribMulAction G3 VJ where
-  smul σ x := ⟨fun j => (x : Fin 3 → ℤ) (σ⁻¹ j), by
-    change ∑ j, _ = 0; rw [sum_perm]; exact x.2⟩
+  smul σ x := ⟨fun j => (x : Fin 3 → ℤ) (σ⁻¹ j), (sum_perm σ x).trans x.2⟩
   one_smul x := rfl
   mul_smul σ τ x := by ext j; rfl
   smul_zero σ := rfl
@@ -213,9 +205,7 @@ def pot (f : G3 → VJ) (j : Fin 3) : ℤ := -(f (Equiv.swap 0 j) : Fin 3 → �
 potential in `ℤ^J`. -/
 lemma cocycle_eq_pot {f : G3 → VJ} (hf : IsCocycle₁ f) (g : G3) (j : Fin 3) :
     (f g : Fin 3 → ℤ) j = pot f (g⁻¹ j) - pot f j := by
-  have h1 : f 1 = 0 := by
-    have := hf 1 1; simp only [one_mul, one_smul] at this
-    simpa using this
+  have h1 : f 1 = 0 := by simpa using hf 1 1
   have hs : ∀ s : G3, s 0 = 0 → (f s : Fin 3 → ℤ) 0 = 0 := fun s hs0 => by
     have := congrArg (fun x : VJ => (x : Fin 3 → ℤ) 0) (hf s s)
     have hinv : s⁻¹ 0 = 0 := by rw [Equiv.Perm.inv_eq_iff_eq, hs0]
@@ -224,10 +214,8 @@ lemma cocycle_eq_pot {f : G3 → VJ} (hf : IsCocycle₁ f) (g : G3) (j : Fin 3) 
     omega
   set k := g⁻¹ j
   set s : G3 := (Equiv.swap 0 j)⁻¹ * g * Equiv.swap 0 k with hsdef
-  have hs0 : s 0 = 0 := by
-    simp [hsdef, k, Equiv.swap_inv]
-  have hgs : g * Equiv.swap 0 k = Equiv.swap 0 j * s := by
-    simp [hsdef, ← mul_assoc]
+  have hs0 : s 0 = 0 := by simp [hsdef, k, Equiv.swap_inv]
+  have hgs : g * Equiv.swap 0 k = Equiv.swap 0 j * s := by simp [hsdef, ← mul_assoc]
   have hf' : ∀ g h, f (g * h) = g • f h + f g := hf
   have e := congrArg (fun x : VJ => (x : Fin 3 → ℤ) j) (congrArg f hgs)
   simp only [hf', AddSubgroup.coe_add, Pi.add_apply, smul_VJ, Equiv.swap_inv,
@@ -259,8 +247,7 @@ lemma psi_eq_zero_iff (f : Z1 G3 VJ) : psi f = 0 ↔ IsCoboundary₁ (f : G3 →
     have hp : ∀ j, pot f j = (v : Fin 3 → ℤ) j - (v : Fin 3 → ℤ) 0 := fun j => by
       simp [pot, ← hv, Equiv.swap_inv]
     have hv0 : ∑ j, (v : Fin 3 → ℤ) j = 0 := v.2
-    simp only [hp, Finset.sum_sub_distrib, hv0]
-    simp
+    simp [hp, Finset.sum_sub_distrib, hv0]
 
 /-- The first basis vector of `ℤ^J`. -/
 def e0 : Fin 3 → ℤ := fun j => if j = 0 then 1 else 0
@@ -332,9 +319,7 @@ variable (f : Z1 G3 (Triv k))
 
 lemma cocycle_triv_mul (g h : G3) : (f : G3 → Triv k) (g * h) = f.1 h + f.1 g := f.2 g h
 
-lemma cocycle_triv_one : (f : G3 → Triv k) 1 = 0 := by
-  have := cocycle_triv_mul f 1 1
-  simpa using this
+lemma cocycle_triv_one : (f : G3 → Triv k) 1 = 0 := by simpa using cocycle_triv_mul f 1 1
 
 lemma cocycle_triv_two : (f : G3 → Triv k) (Equiv.swap 0 1) + f.1 (Equiv.swap 0 1) = 0 := by
   rw [← cocycle_triv_mul, show Equiv.swap (0 : Fin 3) 1 * Equiv.swap 0 1 = 1 by decide]
@@ -344,19 +329,11 @@ lemma cocycle_triv_two : (f : G3 → Triv k) (Equiv.swap 0 1) + f.1 (Equiv.swap 
 lemma cocycle_triv_eq : f = signCocycle ⟨_, cocycle_triv_two f⟩ := by
   have h1 := cocycle_triv_one f
   have haa : f.1 (Equiv.swap 0 1) + f.1 (Equiv.swap 0 1) = 0 := cocycle_triv_two f
-  have hbb : f.1 (Equiv.swap 1 2) + f.1 (Equiv.swap 1 2) = 0 := by
-    rw [← cocycle_triv_mul, show Equiv.swap (1 : Fin 3) 2 * Equiv.swap 1 2 = 1 by decide, h1]
   have e := congrArg f.1 (show Equiv.swap (0 : Fin 3) 1 * Equiv.swap 1 2 * Equiv.swap 0 1 =
     Equiv.swap 1 2 * Equiv.swap 0 1 * Equiv.swap 1 2 by decide)
   simp only [cocycle_triv_mul] at e
-  have key : f.1 (Equiv.swap 1 2) = f.1 (Equiv.swap 0 1) :=
-    calc f.1 (Equiv.swap 1 2)
-        = f.1 (Equiv.swap 1 2) + (f.1 (Equiv.swap 0 1) + f.1 (Equiv.swap 0 1)) := by
-          rw [haa, add_zero]
-      _ = f.1 (Equiv.swap 0 1) + (f.1 (Equiv.swap 1 2) + f.1 (Equiv.swap 0 1)) := by abel
-      _ = f.1 (Equiv.swap 1 2) + (f.1 (Equiv.swap 0 1) + f.1 (Equiv.swap 1 2)) := e
-      _ = f.1 (Equiv.swap 0 1) + (f.1 (Equiv.swap 1 2) + f.1 (Equiv.swap 1 2)) := by abel
-      _ = f.1 (Equiv.swap 0 1) := by rw [hbb, add_zero]
+  have key : f.1 (Equiv.swap 1 2) = f.1 (Equiv.swap 0 1) := by
+    linear_combination (norm := module) -e
   have sa : Equiv.Perm.sign (Equiv.swap (0 : Fin 3) 1) = -1 := by decide
   have sb : Equiv.Perm.sign (Equiv.swap (1 : Fin 3) 2) = -1 := by decide
   apply Subtype.ext
@@ -374,13 +351,9 @@ def cocyclesTrivEquiv : Z1 G3 (Triv k) ≃ mu2 k where
   left_inv f := (cocycle_triv_eq f).symm
   right_inv x := Subtype.ext (by simp [signCocycle])
 
-lemma B1_triv : B1 G3 (Triv k) = ⊥ := by
-  rw [eq_bot_iff]
-  rintro f ⟨x, hx⟩
-  rw [AddSubgroup.mem_bot]
-  apply Subtype.ext
-  funext g
-  simp [← hx g]
+lemma B1_triv : B1 G3 (Triv k) = ⊥ :=
+  eq_bot_iff.2 fun _ ⟨x, hx⟩ =>
+    AddSubgroup.mem_bot.2 (Subtype.ext (funext fun g => by simp [← hx g]))
 
 /-- `H¹(𝔖₃, k^*) = Hom(𝔖₃, k^*) = μ₂(k)` for the trivial action. -/
 theorem card_H1_triv : Nat.card (H1 (R G3 (Triv k))) = Nat.card (mu2 k) := by
@@ -391,20 +364,12 @@ theorem card_H1_triv : Nat.card (H1 (R G3 (Triv k))) = Nat.card (mu2 k) := by
 def val (x : mu2 k) : k := ((Additive.toMul (show Additive kˣ from x.1) : kˣ) : k)
 
 /-- An element of `μ₂(k)` is `1` or `-1` when `k` is a domain. -/
-lemma mu2_eq [IsDomain k] (x : mu2 k) : val x = 1 ∨ val x = -1 := by
-  have h : (Additive.toMul (show Additive kˣ from x.1) : kˣ) *
-      Additive.toMul (show Additive kˣ from x.1) = 1 := congrArg Additive.toMul x.2
-  have h' := congrArg (fun u : kˣ => (u : k)) h
-  simp only [Units.val_mul, Units.val_one] at h'
-  have : val x - 1 = 0 ∨ val x + 1 = 0 := mul_eq_zero.1 (by unfold val; linear_combination h')
-  rcases this with h1 | h1
-  · left; linear_combination h1
-  · right; linear_combination h1
+lemma mu2_eq [IsDomain k] (x : mu2 k) : val x = 1 ∨ val x = -1 :=
+  mul_self_eq_one_iff.1
+    (show val x * val x = 1 from congrArg Units.val (congrArg Additive.toMul x.2))
 
 lemma mu2_ext {x y : mu2 k} (h : val x = val y) : x = y :=
   Subtype.ext (Additive.toMul.injective (Units.ext h))
-
-lemma val_zero : val (⟨0, add_zero 0⟩ : mu2 k) = 1 := rfl
 
 /-- `μ₂(k)` has one or two elements: its order divides `2`. -/
 theorem card_mu2_dvd [IsDomain k] : Nat.card (mu2 k) ∣ 2 := by
@@ -422,12 +387,7 @@ theorem card_mu2_dvd [IsDomain k] : Nat.card (mu2 k) ∣ 2 := by
 /-- In characteristic `2`, `μ₂(k)` is trivial. -/
 theorem card_mu2_char_two [IsDomain k] (h2 : (2 : k) = 0) : Nat.card (mu2 k) = 1 := by
   have hm : (-1 : k) = 1 := by linear_combination -h2
-  have h : ∀ x : mu2 k, x = ⟨0, add_zero 0⟩ := fun x => mu2_ext (by
-    rw [val_zero]
-    rcases mu2_eq x with hx | hx
-    · exact hx
-    · rw [hx, hm])
-  have : Unique (mu2 k) := ⟨⟨⟨0, add_zero 0⟩⟩, h⟩
+  have : Unique (mu2 k) := ⟨⟨⟨0, add_zero 0⟩⟩, fun x => mu2_ext ((mu2_eq x).elim id (·.trans hm))⟩
   exact Nat.card_unique
 
 /-! ## The bound of the marginal note of page 22 -/
@@ -441,18 +401,10 @@ theorem card_H1_dvd [IsDomain k] (M : Type) [AddCommGroup M] [DistribMulAction G
     (hp : ∀ (g : G3) m, p (g • m) = g • p m) (hinj : Function.Injective i)
     (hsurj : Function.Surjective p) (hex : ∀ m, p m = 0 ↔ ∃ a, i a = m) :
     Nat.card (H1 (R G3 M)) ∣ 6 ∧ ((2 : k) = 0 → Nat.card (H1 (R G3 M)) ∣ 3) := by
-  have hi' : ∀ (g : G3) a, i (g • a) = g • i a := fun g a => hi g a
-  have hex' := exact_mapQ (G := G3) i p hi' hp hinj hsurj hex
-  have key : Nat.card (Q G3 M) ∣ Nat.card (Q G3 (Triv k)) * Nat.card (Q G3 VJ) :=
-    card_dvd_of_exact (mapQ i hi') (mapQ p hp) hex'
-  have hA : Nat.card (Q G3 (Triv k)) = Nat.card (mu2 k) :=
-    (card_H1 (G := G3) (M := Triv k)).symm.trans card_H1_triv
-  have hV : Nat.card (Q G3 VJ) = 3 := (card_H1 (G := G3) (M := VJ)).symm.trans card_H1_VJ
-  have hM : Nat.card (H1 (R G3 M)) = Nat.card (Q G3 M) := card_H1
-  rw [hA, hV] at key
-  rw [hM]
-  refine ⟨key.trans ?_, fun h2 => ?_⟩
-  · exact mul_dvd_mul_right card_mu2_dvd 3
-  · rwa [card_mu2_char_two h2, one_mul] at key
+  have key := card_dvd_of_exact _ _ (exact_mapQ (G := G3) i p hi hp hinj hsurj hex)
+  rw [← card_H1 (M := Triv k), card_H1_triv, ← card_H1 (M := VJ), card_H1_VJ] at key
+  rw [card_H1]
+  exact ⟨key.trans (mul_dvd_mul_right card_mu2_dvd 3),
+    fun h2 => by rwa [card_mu2_char_two h2, one_mul] at key⟩
 
 end Grothendieck.Folder140_1
