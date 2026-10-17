@@ -15,6 +15,10 @@ ours to give**:
 - `scripts/` — the mirroring, tiling, rendering, TEI, PDF and manifest tooling
 - `src/`, `relay/`, `public/vendor/`, the build configuration — the site and
   the facsimile relay
+- `lean/` — the Lean proofs and their build files (since 17 October 2026). The
+  statements they check are mathematics, which nobody owns; the code is ours.
+  The few words of the manuscripts quoted in their comments, in « », stay
+  under the rights described below for `transcripts/`
 - `src/content/catalogue.ts` and `src/content/books.json` as *arrangements* —
   the data is read from Montpellier's inventory and the facts in it are theirs
 
