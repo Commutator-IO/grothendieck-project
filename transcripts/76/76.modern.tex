@@ -13,6 +13,10 @@
 % batch-04.fr.tex (pp. 61-62).
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — the Lemme of pp. 27-28 and the
+% transitivity of p. 27 footnoted with the Lean check (Folder76.lean, flag_lemma,
+% prec_trans), which confirms them as read; no mathlib result, no literature
+% recorded by the findings, no facsimile correction since the pass.
 % The folder was read whole, its four batches together; this is one document
 % for the shelfmark. It was made on Opus 5.5 and has not been measured against
 % the reference reading of folder 115 (made on Opus 5). The four
@@ -994,12 +998,27 @@ On a $K_0 \subset K$, car $[i+1, n]$ ne rencontre pas $H$ ; et $K'_0 \subset
 K'$, car un $j < i$ qui serait dans $H'$ serait dans le segment initial $H
 \cap H'$. Les indices de $K'_0$ et de $K_0$ diffèrent d'au moins deux, donc
 $G_{K'_0}$ et $G_{K_0}$ commutent, et $G_{K \cup K'} = G_{K'_0} G_{K_0}
-\subset G_{K'} G_K$.
+\subset G_{K'} G_K$.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder76.lean, \texttt{flag\_lemma}, et
+\texttt{mem\_mul\_of\_split} pour la factorisation) : le lemme tient tel qu'on
+l'énonce, sous les deux hypothèses de la note marginale, pour un groupe, un
+$G$-ensemble et une action quelconques, sans $\sigma_i^2 = 1$. Le segment final
+de $H$ demandé par l'énoncé de la page 27 ne sert pas, et la non-vacuité de $H
+\cap H'$ découle de ce que le plus grand élément de $H$ est dans $H'$. La
+vérification démontre l'inclusion $G_{K \cup K'} \subset G_{K'} \cdot G_K$,
+la seule dont la démonstration se sert ; l'inclusion inverse est évidente.}
 
 Ainsi, pour \emph{tout} $G$-ensemble $X$, $(D_*, \prec)$ satisfait (a), (b),
 (c) et la transitivité, et définit un ensemble semi-simplicial satisfaisant
 (1), avec $D_m = \coprod_{\mathrm{card}\, H = m+1} X/N_H$. La page n'exige pas
-des $\sigma_i$ qu'ils soient des involutions.
+des $\sigma_i$ qu'ils soient des involutions.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder76.lean, \texttt{prec\_trans}, \texttt{prec\_iff\_pair},
+\texttt{not\_prec\_self}) : la relation $\prec$ sur $D_0$ est transitive pour
+tout $G$-ensemble, par le lemme appliqué à $H = \{i, j\}$, $H' = \{j, k\}$ ; un
+majorant commun peut toujours être pris dans $D(\{i, j\})$, deux sommets $i <
+j$ d'un même drapeau vérifient $x \prec y$, et $x \prec y$ n'a jamais lieu
+entre sommets de même type. La condition (a) pour $D_*$ et l'ensemble
+semi-simplicial qui en résulte n'ont pas été formalisés.}
 
 \emph{Programme} (page 29). La page s'arrête sur deux tâches : a) trouver,
 en termes de l'ensemble ordonné $(D_*, \prec)$, des conditions pour que (2
