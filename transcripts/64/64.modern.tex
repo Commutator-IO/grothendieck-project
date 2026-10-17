@@ -83,6 +83,15 @@
 % sufficiency claimed on p. 155 and the example after it.
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — with the Lean check
+% (Folder64.lean): the fixer computation of pp. 48-49 holds with only 2 and 5
+% invertible (char 3 needs no exclusion), and the char-5 counterexample (120
+% bijections, a fixer of 4) confirms the hypothesis « 5 inversible »; both
+% footnoted as checked. Literature of the findings cited: Beauville
+% (arXiv 0909.3942) for the field case of p. 51, Antieau-Meier
+% (arXiv 1608.00851, §4) beside the Legendre moduli of p. 85, GroupNames
+% (SmallGroup(96,195)) for GL_2(Z/4Z) at p. 28. No mathlib result, no
+% facsimile correction since the pass.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -678,7 +687,15 @@ $I$ ensemble à quatre éléments, $Q$ carré combinatoire.
 
 est cartésien, $\chi_C$ étant l'action sur les codiagonales :
 $\operatorname{GL}_\Lambda(M) \simeq \mathfrak{S}_I \times_{\{\pm 1\}}
-\mathfrak{D}_Q$, et $24 \cdot 8 / 2 = 96$. Le noyau de
+\mathfrak{D}_Q$, et $24 \cdot 8 / 2 = 96$.\footnote{Le groupe abstrait est
+répertorié : T.~Dokchitser, \emph{GroupNames}, page « A4$\rtimes$D4 »
+(SmallGroup(96,195)), donne $\operatorname{GL}_2(\mathbb{Z}/4\mathbb{Z})$
+comme alias et le décrit comme $A_4 \rtimes D_4$, $D_4$ opérant par $D_4 /
+C_2^2 \simeq C_2$. Que ce produit semi-direct soit le produit fibré du
+corollaire est une déduction de l'édition : le noyau de $\chi_C$ est un
+sous-groupe de Klein de $\mathfrak{D}_Q$, et $\mathfrak{D}_Q$ opère sur
+$\mathfrak{S}_I^{+} \simeq A_4$ par $\mathfrak{D}_Q / V_S \simeq C_2$. La forme
+canonique, comme équivalence de groupoïdes, n'y figure pas.} Le noyau de
 $\operatorname{GL}_\Lambda(M) \to \mathfrak{D}_Q$ est $\mathfrak{S}_I^{+}$, celui
 de $\operatorname{GL}_\Lambda(M) \to \mathfrak{S}_I$ est
 $\operatorname{Ker} \chi_C = V_S \simeq \mathbb{F}_2^{\underline{\omega}}$, et
@@ -972,7 +989,20 @@ $\mathbb{P}^1(\mathbb{F}_5)$ tout entier, les quatre ensembles ont en commun
 $\{2, 3, 4\}$, et $\underline{\operatorname{Aut}}(X, \Delta) =
 \operatorname{PGL}_2(\mathbb{F}_5) \simeq \mathfrak{S}_5$, d'ordre $120$. La
 page ne revient pas sur ce cas ; l'hypothèse « caractéristiques $\neq 5$ » est
-ajoutée par nous partout où elle est nécessaire.}
+ajoutée par nous partout où elle est nécessaire. Vérifié en Lean
+(lean/Grothendieck/Folder64.lean, \texttt{fixer\_five},
+\texttt{fixer\_trivial}, \texttt{fixer\_nontrivial\_char5},
+\texttt{card\_pgl}, \texttt{card\_fixer}) : sur tout corps où $2 \neq 0$ et
+$i^2 = -1$, si $z \mapsto az + (a - 1)$ envoie $\{0, 1, i, -i\}$ dans
+lui-même, alors $5(a - 1) = 0$, car les quatre points ont pour somme $1$ et
+l'application change cette somme en $5a - 4$ (l'argument est de l'édition, non
+de la page) ; seuls $2$ et $5$ inversibles servent, et la caractéristique $3$
+n'a pas à être exclue. Sur $\mathbb{F}_5$, avec $i = 2$, $z \mapsto 2z + 1$
+permute les quatre points, les bijections de $\mathbb{P}^1(\mathbb{F}_5)$
+induites par les matrices inversibles, qui préservent toutes $\Delta$, sont au
+nombre de $120$ et non de $24$, et le fixateur de $\infty$ et $-1$ a quatre
+éléments : sans « $5$ inversible », l'identification au groupe octaédral est
+fausse.}
 
 Une structure octaédrale sur un diviseur étale $\Delta$ de degré $6$ est la
 donnée d'une antipodie $\underline{a}_\Delta$, involution sans point fixe sur
@@ -1009,7 +1039,15 @@ de corriger « icosaédrale » en « octaédrale » en tête de page ; de même 
 corollaire 1 et page 59. On lit octaédrale partout. Elle écrit aussi c)~$\to$~b)
 comme $\Gamma = \underline{\operatorname{Aut}}_S(X, \Delta) \leftarrow
 \underline{\operatorname{Aut}}^{+}_{S\text{-oct}}(\Delta)$, isomorphisme qui
-n'a lieu que hors de la caractéristique $5$.}
+n'a lieu que hors de la caractéristique $5$. Sur un corps $K$, sans base,
+A.~Beauville, « Finite subgroups of $\mathrm{PGL}_2(K)$ » (arXiv 0909.3942),
+proposition 1.1 et théorème 4.2, établit que, pour un ordre premier à la
+caractéristique, $\mathfrak{S}_4 \subset \operatorname{PGL}_2(K)$ si et
+seulement si $-1$ est somme de deux carrés, avec une seule classe de
+conjugaison, et que le normalisateur d'un sous-groupe de Klein sur $K_s$ est
+$\mathfrak{S}_4$ : c'est le cas d'un corps de a)~$\to$~b). Ni les formes de
+$\mathbb{P}^1$ sur une base, ni le diviseur octaédral, ni l'équivalence du
+corollaire 2 n'y figurent.}
 \end{quote}
 
 En marge :
@@ -1425,7 +1463,16 @@ et la courbe universelle y a un fibré tangent à l'origine isomorphe à
 $\mathcal{O}(1)^{\natural}$, qui devient $\mathcal{O}_{U_{0,3}}(1)$ puisque
 $Q_{0}$ est trivial au-dessus de $\mu_4^{*}$.\footnote{La page note
 $\Delta_{E/S}$, aux pages 81 à 86, le fibré tangent $T_{E/S,0}$ ; on écrit
-$T$. Le second nom propre de la parenthèse de la page 85 n'est pas lu.}
+$T$. Le second nom propre de la parenthèse de la page 85 n'est pas lu. La
+représentabilité est affirmée sans démonstration. Dans la littérature,
+B.~Antieau et L.~Meier, « The Brauer group of the moduli stack of elliptic
+curves » (arXiv 1608.00851), §4, définition 4.4, proposition 4.5 et lemme
+4.7, décrivent sur $\mathbb{Z}[1/2]$ l'espace de Legendre $X = \mathbb{A}^1
+\setminus \{0, 1\}$ : $\mathcal{M}(2) \simeq B C_{2,X}$, et $X \to
+\mathcal{M}(2)$ est le $C_2$-torseur des racines carrées de $p\,\omega^{\otimes
+2}$, $p = e_2 - e_1$ ; l'action de $\mathfrak{S}_3$ ne s'y relève pas
+strictement à $X$. Ni l'épinglage tordu par $\mu_4^{*}$, ni un schéma muni
+d'une action stricte de $\mu_4 \times \mathfrak{S}_3$ n'y figurent.}
 
 \emph{Le groupe modulaire.} Les épinglages de Legendre forment un torseur sous
 $\mu_4$, ceux de Jacobi d'échelon $2$ un torseur sous $\mathfrak{S}_3$ ; les
