@@ -183,8 +183,7 @@ theorem beck_iff : (Comonad.comparison adj).IsEquivalence ↔
     have : HasLimit (parallelPair u v ⋙ f) := by
       rw [hasLimit_iff_of_iso (diagramIsoParallelPair _)]
       exact inferInstanceAs <| HasEqualizer (f.map u) (f.map v)
-    have : HasEqualizer u v := hasLimit_of_created (parallelPair u v) f
-    exact ⟨this, inferInstance⟩
+    exact ⟨hasLimit_of_created (parallelPair u v) f, inferInstance⟩
   · rintro ⟨_, hC⟩
     have : Comonad.HasEqualizerOfIsCosplitPair f := ⟨fun u v _ => (hC u v inferInstance).1⟩
     have : Comonad.PreservesLimitOfIsCosplitPair f := ⟨fun u v _ => (hC u v inferInstance).2⟩
@@ -266,8 +265,7 @@ theorem non_conditionC : ¬ ConditionC P.ι := by
   let l := (isLimitOfHasEqualizerOfPreservesLimit P.ι u0 v0).lift K
   obtain ⟨x⟩ := (equalizer u0 v0).property (l false PUnit.unit)
   have h := congrArg (fun φ : equalizer u0 v0 ⟶ T0 => (φ.hom true) x) (equalizer.condition u0 v0)
-  have h' : true = false := h
-  exact Bool.noConfusion h'
+  exact Bool.noConfusion (h : true = false)
 
 /-- **Théorème 1.12 b), necessity: false as stated.** Here is an adjunction
 `f ⊣ g` whose comparison functor is an equivalence, and yet `f` does not satisfy
@@ -361,8 +359,7 @@ def lam (k j i : I) : phi f g k i ⟶ phi f g j i ⋙ phi f g k j where
   app X := (f k).map ((adj j).unit.app ((g i).obj X))
   naturality X Y h := by
     simp only [Functor.comp_obj, Functor.comp_map, ← Functor.map_comp]
-    congr 1
-    exact (adj j).unit.naturality ((g i).map h)
+    exact congrArg (f k).map ((adj j).unit.naturality ((g i).map h))
 
 /-- (3.5)–(3.6) **The matrix.** If `f_j` commutes with `I`-indexed products, the
 `j`-th component of `φ((Xᵢ))` is the product of the `φ_ji(Xᵢ)`, with projections
@@ -414,8 +411,8 @@ theorem comult_unique [∀ j, PreservesLimitsOfShape (Discrete I) (f j)] (X : �
         (f k).map ((g j).map ((f j).map (Limits.Pi.π (fun i => (g i).obj (X i)) i)))) =
       (adjPi f g adj).toComonad.δ.app X k ≫ ((f k).map (Limits.Pi.π
         (fun j => (g j).obj ((f j).obj ((gPi g).obj X))) j) ≫
-        (f k).map ((g j).map ((f j).map (Limits.Pi.π (fun i => (g i).obj (X i)) i)))) := by
-    exact (congrArg (t ≫ ·) ((f k).map_comp _ _).symm).trans
+        (f k).map ((g j).map ((f j).map (Limits.Pi.π (fun i => (g i).obj (X i)) i)))) :=
+    (congrArg (t ≫ ·) ((f k).map_comp _ _).symm).trans
       (e.trans (congrArg (_ ≫ ·) ((f k).map_comp _ _)))
   exact (Category.assoc _ _ _).trans (e'.trans (Category.assoc _ _ _).symm)
 
@@ -599,6 +596,5 @@ theorem matrice_fini_fausse :
   omega
 
 end ContreExempleFini
-
 
 end Grothendieck.Folder19
