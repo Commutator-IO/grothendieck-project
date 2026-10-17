@@ -35,7 +35,8 @@
 %    the step that fails without it. The affine line with a doubled origin is a
 %    counterexample to Lemme 3 as stated; it is given below. Whether the
 %    theorem itself survives without separatedness is not settled by these
-%    pages, and this reading does not claim it either way.
+%    pages, and this reading does not claim it either way. (2026-10-18: the
+%    edition has since found that it does not; see the revised footnote.)
 %
 % 3. The page glosses ker(A -> A_p) as "l'annulateur de A - p". That is not
 %    what the kernel is; the correct description is given, with the page's own
@@ -43,6 +44,14 @@
 %
 % Pass: Opus 5 (claude-opus-5), 2026-08-23 — first pass, unchecked against the
 % transcription by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean checks
+% (lean/Grothendieck/Folder42.lean), mathlib and the literature of the folder's
+% findings: the openness step of Lemme 1 needs no constructibility (footnote,
+% open mathlib PR 44707); Lemme 2 (2) holds over any commutative ring;
+% Corollaire 1 checked in the affine case, which is Ferrand's Prop. 3 (2004);
+% the theorem of page 2 without separatedness now has the edition's
+% counterexample (Y neither separated nor quasi-compact), so item 2 above is
+% settled in the negative; résumé adjusted accordingly.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -67,7 +76,8 @@ point d'aussi près qu'on veut. Ces six pages demandent si cette seconde
 description, qui a jeté la topologie, suffit encore. Grothendieck appelle
 \emph{réseau d'anneaux locaux} la donnée appauvrie, et démontre que oui : une
 application entre deux schémas est exactement une application entre leurs
-réseaux.
+réseaux --- à condition, ce que la page ne dit pas, que le schéma d'arrivée
+soit séparé ; sans cette condition, l'énoncé tombe.
 
 Le problème qui se pose est le suivant, et il est plus subtil qu'il n'en a
 l'air. Qu'une application soit \emph{déterminée} par ce qu'elle fait au
@@ -206,13 +216,24 @@ générique. Soit $F$ un faisceau sur $X$ vérifiant :
 
 $(\mathrm{H})$ : pour tout $x \in X$, il existe un ouvert non vide $U$ de
 $\overline{\{x\}}$ tel que $\rho_{yx} : F_y \to F_x$ soit \emph{injective}
-pour tout $y \in U$.
+pour tout $y \in U$.\footnote{La page écrit « un voisinage $U$ de
+$\bar x$ tel que pour tt $y \in \bar x \cap U$ », deux mots biffés autour de
+« voisinage ». Un ouvert contenant tout $\overline{\{x\}}$ donnerait une
+condition plus forte ; la démonstration de la page, au lemme 1, n'emploie que
+la forme retenue ici, « un ouvert non vide de $\bar x$ ». Vérifié en Lean
+(lean/Grothendieck/Folder42.lean, \texttt{ConditionH},
+\texttt{lemme1\_faisceau}, \texttt{proposition}) : la proposition et le
+lemme 1 tiennent sous cette forme faible, pour un espace noethérien et sobre,
+auquel la page se ramène (« la question est locale »).}
 
 Alors $\Gamma(X, F) \to \varprojlim_x F_x$ est bijective.
 \end{quote}
 
 L'injectivité ne demande rien : une section dont tous les germes sont égaux à
-ceux d'une autre leur est égale, par l'axiome de séparation des faisceaux.
+ceux d'une autre leur est égale, par l'axiome de séparation des
+faisceaux.\footnote{La vérification en Lean (\texttt{proposition}) le
+confirme : l'injectivité n'utilise ni $(\mathrm{H})$ ni l'hypothèse
+noethérienne.}
 Tout le contenu est dans la surjectivité, et il tient dans le lemme
 suivant.\footnote{Sur le mot « injective », qui gouverne $(\mathrm{H})$ :
 il est écrit d'un seul trait sur la page, la première syllabe réduite à un
@@ -256,8 +277,25 @@ Une partie constructible et stable par générisation d'un espace noethérien es
 ouverte.\footnote{Résultat standard, contemporain de ces notes ; il figure
 dans EGA IV, au chapitre des parties constructibles. Le manuscrit l'emploie
 sans le nommer --- « il suffit de montrer qu'il est constructible » --- ce qui
-est le signe qu'il l'avait sous la main.} Donc $E$ est ouvert, et le lemme 1
-est acquis.
+est le signe qu'il l'avait sous la main. Pour les spectres d'anneaux, c'est
+\texttt{PrimeSpectrum.isOpen\_of\_stableUnderGeneralization\_of\_isConstructible}
+dans mathlib, qui renvoie au Stacks Project, étiquette 00I0.} Donc $E$ est
+ouvert, et le lemme 1 est acquis.
+
+Le détour par la constructibilité peut d'ailleurs être évité, et c'est une
+remarque de l'édition, non de la page. L'argument ci-dessus a établi, pour
+tout $x \in E$, un ouvert $W \ni x$ tel que $W \cap \overline{\{x\}}
+\subseteq E$ ; jointe à la stabilité par générisation, cette propriété suffit
+à elle seule à rendre $E$ ouvert dans un espace noethérien et sobre, par une
+récurrence noethérienne sur les fermés.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder42.lean,
+\texttt{isOpen\_of\_stableUnderGeneralization}) : la constructibilité
+n'intervient nulle part. Le « donc » de la page, qui passe de
+« constructible » à « s'il contient $x$, il contient les points d'un ouvert
+non vide de $\bar x$ », est exactement l'hypothèse qui sert. Mathlib ne
+contient l'énoncé que pour les spectres et sous l'hypothèse de
+constructibilité ; la forme sans constructibilité, pour un espace
+noethérien et sobre, lui est proposée (PR ouverte n° 44707).}
 
 La proposition suit. Soit $(\xi_x)$ une famille cohérente et $x_0 \in X$. Le
 germe $\xi_{x_0}$ provient d'une section $s$ sur un ouvert $U \ni x_0$ ; par
@@ -275,7 +313,11 @@ fait d'algèbre commutative que le dossier isole proprement.
 
 \begin{quote}
 \textbf{Lemme 2.} Soient $A$ un anneau noethérien et $\mathfrak p$ un idéal
-premier de $A$. Alors :
+premier de $A$. Alors\footnote{Vérifié en Lean (\texttt{lemme2\_1},
+\texttt{lemme2\_2}, et la forme de la page, \texttt{lemme2\_page}).
+L'hypothèse noethérienne ne sert qu'à l'assertion (1), et seulement pour
+rendre de type fini le noyau de $A \to A_{\mathfrak p}$ ; l'assertion (2)
+vaut pour tout anneau commutatif.} :
 \end{quote}
 
 \begin{enumerate}
@@ -299,14 +341,24 @@ noethérien, $J = (x_1, \dots, x_n)$, et chaque $x_i$ est annulé par un
 $s_i \in A - \mathfrak p$. Posons $f = s_1 \cdots s_n$ : il est hors de
 $\mathfrak p$, qui est premier, et $fJ = 0$. Soit alors $x/f^n$ dans le noyau
 de $A_f \to A_{\mathfrak p}$ : il existe $s \in A - \mathfrak p$ avec
-$sx = 0$, donc $x \in J$, donc $fx = 0$, donc $x/f^n = 0$ dans $A_f$.
+$sx = 0$, donc $x \in J$, donc $fx = 0$, donc $x/f^n = 0$ dans
+$A_f$.\footnote{L'existence d'un $f \notin \mathfrak p$ tel que
+$fJ = 0$ est un fait standard sur le support d'un module de type fini :
+$J_{\mathfrak p} = 0$, donc $\mathfrak p$ n'est pas dans le support de $J$,
+donc l'annulateur de $J$ n'est pas contenu dans $\mathfrak p$ ; dans mathlib,
+\texttt{Module.mem\_support\_iff\_of\_finite} et
+\texttt{Module.notMem\_support\_iff'}.}
 
 \emph{Démonstration de (2).} Comme $\mathfrak p \subseteq \mathfrak q$, tout
 élément de $A - \mathfrak q$ est hors de $\mathfrak p$, et
 $A_{\mathfrak q} \to A_{\mathfrak p}$ a un sens. Soit $x/s$ ($x \in A$,
 $s \in A - \mathfrak q$) dans son noyau : l'image de $x$ dans $A_{\mathfrak p}$
 est nulle, donc $x = 0$ par l'injectivité supposée de $A \to A_{\mathfrak p}$,
-donc $x/s = 0$.\footnote{La page traite ce point sous la forme : « on peut
+donc $x/s = 0$ ; aucune hypothèse noethérienne n'a servi.\footnote{Le
+critère employé --- un morphisme issu d'un localisé est injectif dès que
+l'image de $a/1$ nulle entraîne $a/1 = 0$ --- est
+\texttt{IsLocalization.injective\_of\_map\_algebraMap\_zero} dans
+mathlib. La page traite ce point sous la forme : « on peut
 supposer $f = 1$, i.e.\ $A_f = A$, car $A_{\mathfrak p} =
 (A_f)_{\mathfrak p A_f}$ ». C'est le même argument, la réduction étant
 légitime parce que l'injectivité de $A \to A_{\mathfrak p}$ entraîne celle de
@@ -330,7 +382,30 @@ $A_f \to A_{\mathfrak p}$ soit injectif ; le lemme 2 (2), appliqué à $A_f$,
 donne l'injectivité de $A_{\mathfrak q} \to A_{\mathfrak p}$ pour tout
 $\mathfrak q \in D(f) \cap V(\mathfrak p)$. Or $D(f) \cap V(\mathfrak p)$ est
 un ouvert non vide de $\overline{\{x\}}$ --- il contient $\mathfrak p$
-lui-même. C'est $(\mathrm{H})$.
+lui-même. C'est $(\mathrm{H})$.\footnote{Vérifié en Lean dans le cas
+affine, $X = \operatorname{Spec} A$ avec $A$ noethérien
+(\texttt{lemme1}, \texttt{corollaire1}) ; le cas d'un préschéma non affine,
+qui s'en déduit par recollement, n'y est pas formalisé. La démonstration
+n'utilise du lemme 2 qu'un seul fait : un même $f \notin \mathfrak p$ annule
+le noyau de $A \to A_{\mathfrak p}$, et rend alors injectives toutes les
+flèches $A_{\mathfrak q} \to A_{\mathfrak p}$ pour
+$\mathfrak q \in D(f) \cap V(\mathfrak p)$.}
+
+Dans le cas affine, le corollaire 1 est un cas d'un énoncé de D.~Ferrand sur
+les modules qui sont limite projective de leurs localisés : si
+$M \to M_{\mathfrak p_1} \times \cdots \times M_{\mathfrak p_n}$ est
+injectif pour un nombre fini d'idéaux premiers, $M \to
+\varprojlim_{\mathfrak p} M_{\mathfrak p}$ est bijectif, et pour $A$
+noethérien et $M$ de type fini les idéaux premiers associés conviennent
+(D.~Ferrand, « On the inverse limit of localizations », note de février
+2004, proposition 3).\footnote{La note de 2004 cite une annonce sans
+démonstration, D.~Ferrand, « Sur les modules qui sont limite projective de
+leurs localisés », C. R. Acad. Sci. Paris 262 (1966), 609--611, que nous
+n'avons pas lue ; selon la note, la démonstration de 1966 prolonge chaque
+$x(\mathfrak p)$ en une section sur un ouvert et recolle, la route des pages 3
+à 5. L'inventaire date la cote « [années 1960-1970] ». Le critère faisceautique
+de la page 3, pour un faisceau quelconque vérifiant $(\mathrm{H})$, n'a pas
+été retrouvé dans la littérature consultée.}
 
 \pagerange{5}{6}
 \section*{Des morphismes, et non plus des fonctions (pages 5 et 6)}
@@ -426,8 +501,21 @@ soulève pas la question. Il montre que le lemme 3 tel qu'il est énoncé est
 faux, non que le théorème le soit : la surjectivité du corollaire 2 peut
 survivre à la perte du lemme 1, et l'exemple ci-dessus n'en fournit pas de
 contre-exemple. Ce que ces six pages établissent, on l'a donc énoncé avec
-l'hypothèse de séparation ; ce qu'il en resterait sans elle, elles ne le
-disent pas, et cette lecture ne le tranche pas.}
+l'hypothèse de séparation. Le théorème de la page 2 lui-même est faux sans
+elle, et le contre-exemple suivant est de l'édition, non de la page ; il n'a
+pas été vérifié en Lean. Soient $k$ un corps infini, $S = \operatorname{Spec}
+k$, $X = \mathbb{A}^1_k$, des points fermés distincts $a_0, a_1, \ldots$ de
+$\mathbb{A}^1_k$, et $Y$ le recollement de copies $V_0, V_1, \ldots$ de
+$\mathbb{A}^1_k$, $V_n$ et $V_m$ étant recollés par l'identité le long de
+$\mathbb{A}^1_k$ privé de $a_n$ et $a_m$ : chaque $a_n$ y est dédoublé, et
+$Y$ est localement de type fini, ni séparé ni quasi-compact. Envoyons $a_n$
+sur sa copie dans $V_n$ et tout autre point sur $V_0$, avec les identités
+entre anneaux locaux : c'est un homomorphisme de réseaux. Un morphisme
+$\mathbb{A}^1_k \to Y$ qui le réaliserait aurait une image quasi-compacte,
+donc contenue dans un nombre fini des $V_n$, alors que la copie de $a_n$ dans
+$V_n$ n'appartient à aucun autre $V_m$. Si une cible quasi-compacte non
+séparée, la droite à origine dédoublée, fournit aussi un contre-exemple, nous
+ne l'avons pas vérifié.}
 
 \pagerange{6}{6}
 \section*{La condition ne peut pas être supprimée (page 6)}
