@@ -90,14 +90,11 @@ theorem etape1 [Finite M] (h : PseudoCofiltrant M) :
     | insert a s _ ih =>
       obtain ⟨p, hp⟩ := ih
       obtain ⟨p', v', e⟩ := h p a
-      refine ⟨p * p', fun u hu => ?_⟩
-      rcases Finset.mem_insert.1 hu with rfl | hu
-      · exact ⟨v', e⟩
-      · obtain ⟨v, hv⟩ := hp u hu
-        exact ⟨v * p', by rw [hv, mul_assoc]⟩
+      refine ⟨p * p', (Finset.forall_mem_insert _ _ _).2 ⟨⟨v', e⟩, fun u hu => ?_⟩⟩
+      obtain ⟨v, hv⟩ := hp u hu
+      exact ⟨v * p', by rw [hv, mul_assoc]⟩
   have := Fintype.ofFinite M
-  obtain ⟨p, hp⟩ := key Finset.univ
-  exact ⟨p, fun u => hp u (Finset.mem_univ u)⟩
+  exact (key Finset.univ).imp fun p hp u => hp u (Finset.mem_univ u)
 
 /-- **Proposition 1.** Let `M` be a finite pseudo-cofiltering monoid with
 trivial group completion. Then there is `p ∈ M` with `u p = p` for every
@@ -114,8 +111,7 @@ theorem proposition1 [Finite M] (hpc : PseudoCofiltrant M)
     obtain ⟨v, hv⟩ := hp (u * p)
     refine ⟨p * (v * y), ⟨v * y, rfl⟩, ?_⟩
     change u * (p * (v * y)) = p * y
-    conv_rhs => rw [hv]
-    simp only [mul_assoc]
+    rw [← mul_assoc, ← mul_assoc, ← hv]
   -- Finiteness of `E₀` turns the inclusion into an equality.
   have heq : ∀ u : M, (u * ·) '' E₀ = E₀ := fun u =>
     (Set.eq_of_subset_of_ncard_le (hsub u) (Set.ncard_image_le (Set.toFinite _))
@@ -125,8 +121,7 @@ theorem proposition1 [Finite M] (hpc : PseudoCofiltrant M)
     ⟨u * x, (heq u).subset ⟨x, x.2, rfl⟩⟩
   have hbij : ∀ u : M, Function.Bijective (f u) := fun u =>
     Finite.surjective_iff_bijective.1 fun y => by
-      have hy : (y : M) ∈ (u * ·) '' E₀ := (heq u).symm.subset y.2
-      obtain ⟨x, hx, e⟩ := hy
+      obtain ⟨x, hx, e⟩ : (y : M) ∈ (u * ·) '' E₀ := (heq u).symm.subset y.2
       exact ⟨⟨x, hx⟩, Subtype.ext e⟩
   -- The restriction `u ↦ u|E₀` is a morphism into the group `Perm E₀` …
   let φ : M →* Equiv.Perm E₀ :=
@@ -135,9 +130,8 @@ theorem proposition1 [Finite M] (hpc : PseudoCofiltrant M)
       map_mul' := fun a b => by ext x; simp [f, mul_assoc] }
   -- … hence trivial, which gives `u p = p`.
   have hup : ∀ u : M, u * p = p := fun u => by
-    have h1 : φ u = 1 := by rw [hG _ φ]; rfl
-    have h2 := congrArg (fun σ : Equiv.Perm E₀ => (σ ⟨p, 1, mul_one p⟩ : M)) h1
-    simpa [φ, f] using h2
+    simpa [φ, f] using congrArg (fun σ : Equiv.Perm E₀ => (σ ⟨p, 1, mul_one p⟩ : M))
+      (DFunLike.congr_fun (hG _ φ) u)
   exact ⟨p, hup, hup p, hpc, fun u v => ⟨p, by rw [hup u, hup v]⟩⟩
 
 /-! ### The modern gloss: the kernel need not be a point
@@ -182,17 +176,11 @@ theorem contre_pseudoCofiltrant : PseudoCofiltrant Contre := fun u v =>
 `b = a b` forces `a ↦ 1`. -/
 theorem contre_groupeEnveloppantTrivial : GroupeEnveloppantTrivial Contre := by
   intro G _ f
-  have hb : f .b = 1 := by
-    have h := f.map_mul .b .a
-    exact mul_right_cancel (h.symm.trans (one_mul (f .a)).symm)
-  have ha : f .a = 1 := by
-    have h := f.map_mul .a .b
-    exact mul_right_cancel (h.symm.trans (one_mul (f .b)).symm)
+  have hb : f .b = 1 := mul_right_cancel ((f.map_mul .b .a).symm.trans (one_mul (f .a)).symm)
+  have ha : f .a = 1 := mul_right_cancel ((f.map_mul .a .b).symm.trans (one_mul (f .b)).symm)
   ext x
   cases x
-  · exact f.map_one
-  · exact ha
-  · exact hb
+  exacts [f.map_one, ha, hb]
 
 /-- The kernel of a monoid: the intersection of its principal two-sided ideals
 `MxM` (equivalently of all its non-empty two-sided ideals; for a finite monoid
