@@ -1,0 +1,1588 @@
+% Modernised reading — fonds Alexandre Grothendieck, shelfmark 91
+% (pages 1-142, the whole folder).
+%
+% This is an INTERPRETATION, not a transcription. It re-reads the pages in
+% today's notation and vocabulary, states the hypotheses the manuscript leaves
+% implicit, and drops the critical apparatus so that the mathematics reads
+% straight through. Everything the brackets and underlines carried moves into a
+% footnote. It is held to being mathematically correct as it stands; where the
+% manuscript is loose or mistaken, the true statement is what appears here and
+% the footnote says what the page has. In any dispute of substance the
+% transcription governs: whoever cites Grothendieck must cite batch-01.fr.tex
+% to batch-08.fr.tex (pp. 1-20, 21-40, ..., 121-140, 141-142).
+%
+% Pass: Opus 5.5 (claude-opus-5-5), 2026-10-17 — first pass, unchecked against the pages by a human.
+% The folder was read whole, its eight batches together, from the second-pass
+% transcriptions (700 dpi tiles, commit cc339bf); this is one document for the
+% shelfmark. It was made on Opus 5.5 and has not been measured against the
+% reference reading of folder 115 (made on Opus 5). The literature named in the
+% footnotes is cited from memory and was not checked against the sources.
+% The transcription still carries many \ill and \uncertain marks, most of them
+% in pp. 21-58 and 81-100, where the hand is a fast draft: statements and
+% formulas carry, connective prose often does not. Where a section rests on a
+% thin reading it says so in the body, not only in a note.
+%
+% Not transcribed, hence not read: p. 1 and p. 80 are covers (their words are
+% used as titles); blanks or unrelated versos 3, 14, 29, 32, 59, 82, 84, 85,
+% 87, 89, 91, 93, 95, 97, 99, 101, 102, 111, 116, 118, 120, 122, 124, 126,
+% 128, 129, 132, 136, 138, 140, 142 (typed pages of other texts, or nothing).
+%
+% Spine. One problem, the existence of « spaces of maps », taken three ways:
+%   pp. 1-13    subfunctors of the base (monomorphisms): the locus where
+%               Y = X, where E is flat, where X -> S is faithfully flat;
+%               centralisers, normalisers, transporters; G/N.
+%   pp. 15-28   the non-projective method for Hom: the open subfunctor
+%               Hom_S(X,Y;phi) where restriction to Z is unramified, its
+%               obstruction theory, and the corollaries (Isom, Aut).
+%   pp. 30-31   the typed letter of 11.9.1967 to Anantharaman that states it.
+%   pp. 33-58   two plans, the formalism of Res, and Weil restriction along a
+%               finite locally free T -> S: existence, permanence, ampleness,
+%               smoothness, dimension, the relative pi_0.
+%   pp. 60-79   « Set up »: a functor W of local nature and its right adjoint
+%               W^a; base change (Weil restriction) and Greenberg as cases.
+%   pp. 80-121  « Schémas localement compacts »: constructible maps,
+%               « ensembles schématiques », the constructible topology.
+%   pp. 123-141 « Greenberg-Néron »: thick points, rational maps on Greenberg
+%               schemes, the ind-scheme A((t))^*, pro-schemes, jet groups.
+%
+% Notation fixed for the whole folder. Schemes for « préschémas » (all
+% schemes, not separated ones). Res_{T/S}(X) for the Weil restriction of a
+% T-scheme X along T -> S, which the pages write prod_{T/S} X/T (pp. 1-28,
+% 33), f_*(X/T) (pp. 34-58), phi_{S'/S}(X) (pp. 74-76) and W^a(X) in the case
+% of base change (pp. 60-79); Res_{T/S}(g) for the morphism he writes f_*(g).
+% Hom_S(X,Y), Isom, Aut underlined: the functors (internal Hom). Hom_S(X,Y;
+% phi) as on the page. M_u, M_v the coherent modules of EGA III 7.7.6 attached
+% to u, v (pp. 15-20). W for a functor of local nature, W^a its right adjoint;
+% Lambda for the ring scheme generating W (the page calls it W too, p. 64).
+% « Lisse » for his « simple ». « Pro-constructible » for his « analytique »
+% (pp. 103-110), footnoted once. V-check(F) = V(F^vee), the vector bundle
+% whose sections are F (p. 37), so that its formula holds.
+%
+% Substantive departures from the pages, with page numbers:
+%  - p. 4: the representing object is a monomorphism of finite type S' -> S;
+%    the page's « sous-préschéma (fermé) » for Y closed holds, by EGA IV
+%    18.12.6 (proper monomorphism), and is justified here, not on the page.
+%  - pp. 11-13: in Cor. 3 (i), f' is a monomorphism of finite presentation,
+%    not an immersion as the page has: X = (A^1 - 0) ⊔ {0} -> A^1 satisfies
+%    (ii) and is not an immersion. Same correction for the two corollaries of
+%    p. 13 (« sous-préschéma » -> monomorphism).
+%  - p. 10: he writes F for the coherent sheaf E (and X_. plat for E_. plat).
+%  - p. 15, p. 24, letter p. 31: « séparé » for Y (resp. P/X) is supplied, as
+%    the letter's inked addition and the « [et séparé ?] » of p. 15 ask.
+%  - p. 25: the theorem with Z_1..Z_n is reported as announced; its proof is
+%    not on the pages and its sufficiency is not checked here.
+%  - p. 48: « f_*(X/T) = Spec(f_*(F)) » read as Res(V-check(F)) =
+%    V-check(f_* F), the formula of p. 37.
+%  - pp. 50-51: « rang des anneaux locaux artiniens » read as [T_s : k(s)];
+%    Cor. 2 reads D(s) = n D'(s), corrected to D'(s) = n D(s) and stated for
+%    T_s local (in general D'(s) is a set of sums).
+%  - pp. 55-58: f^et_*(T) (relative pi_0) needs nu(s) locally constant (Cor. 3
+%    p. 53) to be a finite étale cover; supplied. It is a left adjoint; the
+%    name f_* is his and its variance is explained.
+%  - p. 69: the page writes « est un W(U') », read W^a(U).
+%  - p. 72: the factorisation ends in X_i, read 𝔛_i.
+%  - p. 92, Cor. 0: holds for the underlying space, not for the scheme.
+%  - p. 109, Cor. 3 (iii): f^{-1}(Y) read f^{-1}(E).
+%  - p. 135: Y_j quasi-separated supplied (EGA IV 8.13.1).
+%
+% Announced and never established in the folder: the two « nous admettrons »
+% of pp. 19-20 (compatibility of the obstructions); the question of p. 38
+% (does f^* commute with filtered intersections?); the « ??? » of p. 96
+% (Cons(lim X_i) = lim Cons(X_i)); the « catégorie géométrique (?) » of p. 98;
+% condition (ii) of p. 83 (the sheet is torn); the meaning of « d'indice
+% fini » (pp. 130-131); the « Espaces de Néron » of the plan of p. 117; the
+% calculation of p. 139, which breaks off; the « ??? » implication of p. 127.
+\documentclass[11pt,a4paper]{article}
+\input{../preamble/grothendieck}
+
+\folder{91}
+\pages{1}{142}
+\dating{[à partir de 1964-vers 1970]}
+\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
+\foldertitle{Autour de Néron / Greenberg-Néron. Foncteurs Hom (méthodes non-projectives) : notes manuscrites (s.d.), lettre (1967) — lecture modernisée du dossier entier}
+
+\begin{document}
+
+\section*{Résumé}
+
+\begin{resume}
+Ces feuillets cherchent à construire des \emph{espaces d'applications}.
+Étant données deux variétés $X$ et $Y$, on voudrait que l'ensemble de toutes
+les applications algébriques de $X$ dans $Y$ soit lui-même une variété, dont
+chaque point est une application, et dont les courbes sont des familles
+d'applications qui se déforment continûment. Le cas le plus célèbre est celui
+des symétries d'une variété : son « groupe d'automorphismes », dont on veut
+qu'il soit un groupe algébrique.
+
+Le problème vient de ce que la méthode connue ne marche que pour les variétés
+« projectives », celles que l'on peut plonger dans un espace projectif. On y
+identifie une application à son graphe, une sous-variété de $X \times Y$, et
+l'on dispose d'un espace de toutes les sous-variétés (le schéma de Hilbert).
+Sans plongement, il n'y a plus de schéma de Hilbert. Le titre de
+l'inventaire le dit : « méthodes non projectives ».
+
+L'idée qui arrive est celle d'une \emph{rigidification}. Un polynôme de degré
+$d$ est connu dès qu'on connaît ses valeurs en $d+1$ points ; une fonction
+holomorphe est connue dès qu'on connaît son développement de Taylor en un
+point. De même, une application de $X$ dans $Y$ est, au voisinage d'une
+application donnée, déterminée par sa restriction à un petit morceau $Z$ de
+$X$ — quelques points épaissis — pourvu que la restriction ne perde aucune
+information infinitésimale, ce qu'on dit en demandant qu'elle soit « non
+ramifiée ». L'espace des applications de $Z$ dans $Y$ est facile à construire
+quand $Z$ est fini ; on en déduit, morceau par morceau, celui des applications
+de $X$. C'est ce qu'une lettre de septembre 1967, conservée ici, expose à
+un collègue : il y systématise l'étape clé d'une démonstration de Matsumura
+sur le groupe d'automorphismes d'une variété propre.
+
+Pour cela il faut savoir construire l'espace des applications d'un objet
+\emph{fini} dans $Y$. C'est la « restriction de Weil », dont l'image familière
+est celle-ci : une variété définie par des équations à coefficients complexes
+devient, en écrivant chaque variable complexe $z = x + iy$, une variété réelle
+de dimension double. La moitié du dossier étudie cette opération — quand elle
+existe, ce qu'elle préserve — et la généralise : le même mécanisme, appliqué
+aux entiers $p$-adiques au lieu des nombres complexes, donne le foncteur de
+Greenberg, qui transforme les solutions d'équations modulo $p^n$ en points
+d'une variété sur le corps à $p$ éléments. C'est le lien avec le titre,
+« Autour de Néron » : la construction des modèles de Néron des variétés
+abéliennes passe par là.
+
+Le dernier tiers change d'outil. Pour comparer des points de ces espaces de
+Greenberg on veut des applications qui ne sont des morphismes que « par
+morceaux » ; il les appelle applications constructibles, et l'espace muni de
+la seule topologie qu'elles respectent est un espace compact totalement
+discontinu, comme l'ensemble de Cantor. Les feuillets s'arrêtent sur des
+calculs de changements de coordonnées, sans avoir rejoint Néron.
+
+Une remarque de la page 135 dit quelque chose de sa manière : là où Serre et
+Néron manipulent des systèmes de variétés de plus en plus fines, « il y a
+avantage à les interpréter comme étant de véritables schémas » — remplacer
+l'échafaudage par l'objet qu'il approche, et travailler sur l'objet.
+
+Les noms à chercher ensuite : schéma $\mathrm{Hom}$ et théorème de
+Matsumura--Oort, critère de représentabilité de Murre, restriction de Weil,
+foncteur de Greenberg, modèle de Néron, topologie constructible et parties
+pro-constructibles, groupe des lacets de $\mathbf{G}_m$.
+
+\keywords{Hom scheme, Isom scheme, automorphism group scheme, Matsumura-Oort theorem, Murre representability criterion, unramified functor, universal flattening, centralizer and transporter, quotient by a flat normal subgroup, Weil restriction, effective descent, relative connected components, Greenberg functor, Witt vectors, constructible set, constructible topology, pro-constructible set, spectral space, Néron model, ind-scheme, loop group of Gm, pro-scheme, jet group}
+\end{resume}
+
+\pagerange{1}{141}
+\section*{Le fil du dossier, et les conventions}
+
+Le dossier n'est pas paginé de sa main. Il est fait de suites séparées par
+deux feuilles de couverture — « Représentabilité des foncteurs
+$\underline{\mathrm{Hom}}$, $\prod_{T/S} X/T$, de Greenberg etc. » (page 1) et
+« Schémas localement compacts » (page 80) — et d'un titre isolé,
+« Greenberg -- Néron » (page 123). Beaucoup de versos portent des
+dactylographies sans rapport (dont des pages Bourbaki) et ne sont pas
+transcrits. L'inventaire date l'ensemble « à partir de 1964 -- vers 1970 » ;
+la seule date écrite est celle de la lettre, 11 septembre 1967.
+
+Les stations, dans l'ordre des pages :
+
+\begin{enumerate}
+  \item \emph{Pages 1 à 13.} Sous-foncteurs de la base : le lieu où un
+  sous-schéma $Y$ de $X$ remplit $X$, le lieu où un faisceau est plat, le lieu
+  où $X \to S$ est fidèlement plat. Applications aux centralisateurs,
+  normalisateurs, transporteurs, et aux quotients $G/N$.
+  \item \emph{Pages 15 à 28.} La méthode non projective pour
+  $\underline{\mathrm{Hom}}_S(X,Y)$ : le sous-foncteur ouvert
+  $\underline{\mathrm{Hom}}_S(X,Y;\varphi)$, sa théorie d'obstruction, et une
+  série de corollaires ($\underline{\mathrm{Isom}}$, $\underline{\mathrm{Aut}}$).
+  \item \emph{Pages 30 et 31.} La lettre dactylographiée à Anantharaman qui
+  expose cette méthode.
+  \item \emph{Pages 33 à 58.} Deux plans d'exposé, le formalisme de la
+  restriction de Weil, puis son étude le long d'un morphisme fini localement
+  libre.
+  \item \emph{Pages 60 à 79.} Un cadre commun : un foncteur $\mathbb{W}$ « de
+  nature locale » et son adjoint à droite $\mathbb{W}^{a}$, dont la
+  restriction de Weil et le foncteur de Greenberg sont deux cas.
+  \item \emph{Pages 80 à 121.} « Schémas localement compacts » : applications
+  constructibles, « ensembles schématiques », topologie constructible.
+  \item \emph{Pages 123 à 141.} « Greenberg -- Néron » : points épais,
+  applications rationnelles entre schémas de Greenberg, l'ind-schéma
+  $A \mapsto A((t))^{*}$, pro-schémas, groupes de jets.
+\end{enumerate}
+
+Les trois premières stations forment un tout, la quatrième et la cinquième en
+forment un autre, et les deux dernières un troisième. Le lien entre eux est
+celui que le résumé décrit : la méthode de la deuxième station demande la
+restriction de Weil des stations quatre et cinq ; celles-ci, prises dans le
+cas des vecteurs de Witt, donnent les schémas de Greenberg des deux
+dernières. Le dossier ne referme pas cette boucle : il n'y a ni construction
+d'un modèle de Néron, ni retour aux schémas $\underline{\mathrm{Hom}}$ après la
+page 58.
+
+\emph{Notations, valables pour tout le dossier.} On écrit « schéma » pour son
+« préschéma »\footnote{Le mot « préschéma » est celui d'EGA I (1960) ;
+« schéma » y désignait un préschéma séparé. Aucun énoncé ci-dessous ne
+suppose la séparation sans le dire.} et « lisse » pour son « simple ». La
+\emph{restriction de Weil} d'un $T$-schéma $X$ le long de $f : T \to S$ est le
+foncteur sur les $S$-schémas
+\[
+  \mathrm{Res}_{T/S}(X) : S' \longmapsto \mathrm{Hom}_{T}(T \times_S S', X)
+  = \Gamma\bigl(X \times_S S' / T \times_S S'\bigr),
+\]
+l'ensemble des sections de $X' \to T'$ ; on le note ainsi partout, alors que
+les pages l'écrivent successivement $\prod_{T/S} X/T$ (pages 1 à 33),
+$f_{*}(X/T)$ (pages 34 à 58), $\varphi_{S'/S}(\mathfrak{X})$ (pages 74 à 76) et
+$\mathbb{W}^{a}(\mathfrak{X})$ (pages 60 à 79)\footnote{Les trois premières
+écritures sont les siennes ; la quatrième désigne un foncteur plus général,
+dont la restriction de Weil est un cas (pages 60 à 79). Le dossier EGA VI
+(cote 26) l'écrit, comme ici, $\mathrm{Res}$.}. Pour $g : X \to Y$ un
+$T$-morphisme, $\mathrm{Res}_{T/S}(g)$ est le morphisme qu'il note $f_{*}(g)$.
+Le symbole souligné $\underline{\mathrm{Hom}}_S(X,Y)$ est le foncteur
+$S' \mapsto \mathrm{Hom}_{S'}(X', Y')$, et de même
+$\underline{\mathrm{Isom}}$, $\underline{\mathrm{Aut}}$ ; on garde le trait,
+qui note aujourd'hui encore le Hom interne. Les formules de la page 34
+relient les deux : $\underline{\mathrm{Hom}}_S(X,Y) = \mathrm{Res}_{X/S}(X
+\times_S Y)$, et $\mathrm{Res}_{T/S}(X)$ est la fibre de
+$\underline{\mathrm{Hom}}_S(T,X) \to \underline{\mathrm{Hom}}_S(T,T)$ au-dessus
+de l'identité.
+
+Deux choses portent le même nom dans le dossier et sont tenues distinctes
+ici. Le « $f_{*}$ » des pages 34 à 55 est la restriction de Weil, un
+adjoint \emph{à droite} ; le « $f_{*}^{\mathrm{\acute{e}t}}$ » des pages 56 à 58
+est un adjoint \emph{à gauche}, le schéma des composantes connexes relatives.
+Et la lettre $\mathbb{W}$ désigne, page 64, à la fois le foncteur et le schéma en
+anneaux qui l'engendre ; on écrit $\Lambda$ pour le second, lettre que les
+pages 61 et 65 emploient aussi.
+
+\pagerange{1}{13}
+\section*{I. Sous-foncteurs de la base (pages 1 à 13)}
+
+La couverture annonce le programme : « Représentabilité des foncteurs
+$\underline{\mathrm{Hom}}$, $\prod_{T/S} X/T$, de Greenberg etc. ». La page 2
+n'est qu'une liste de sujets : représentabilité relative de
+$\mathrm{Res}_{X/S}(P)$ sans hypothèse projective, « flattening functor »,
+passage au quotient, $\underline{\mathrm{Hom}}_S(X,Y)$,
+$\underline{\mathrm{Aut}}_S(X)$. Les pages 4 à 13 en traitent la partie la plus
+simple : des foncteurs qui sont des \emph{sous-foncteurs} de la base $S$,
+c'est-à-dire qui prennent sur chaque $S'$ au plus une valeur.
+
+\subsection*{L'outil : un critère de représentabilité}
+
+Toutes les démonstrations de ces pages et des suivantes vérifient une même
+liste de huit conditions, numérotées de 1° à 8°, d'un « théorème de
+représentabilité par morphismes non nécessairement séparés » qui n'est pas
+énoncé dans le dossier. On reconnaît, par les conditions elles-mêmes et par
+la lettre de la page 30 qui l'attribue à « Murre's talk », le critère de
+représentabilité des foncteurs non ramifiés exposé par Murre au Séminaire
+Bourbaki\footnote{J.~P.~Murre, « Representation of unramified functors.
+Applications (according to unpublished results of A.~Grothendieck) »,
+Séminaire Bourbaki, exposé 294 (1965). La référence est citée de mémoire. Le
+dossier n'en reproduit pas l'énoncé : il en vérifie les conditions une à une
+(faisceau pour fpqc ; commutation aux limites inductives d'anneaux ;
+commutation aux limites projectives adiques d'anneaux artiniens ; trois
+conditions de nature infinitésimale ; deux conditions de « modularité » sur
+un schéma local de dimension $1$ muni d'un idéal de carré nul).}. Les conditions
+sont, en substance : (1°) $F$ est un faisceau pour la topologie fidèlement
+plate quasi-compacte ; (2°) $F$ commute aux limites inductives filtrantes
+d'anneaux ; (3°) $F$ commute aux limites projectives adiques d'anneaux locaux
+artiniens ; (4° à 6°) des conditions infinitésimales ; (7°) une condition de
+recollement : si $T$ est local noethérien, muni d'un idéal $J$ de carré nul,
+$T_0 = V(J)$, et $U$ un ouvert schématiquement dense de $T$, le carré
+\[
+\begin{array}{ccc}
+F(T) & \longrightarrow & F(T_0)\\
+\downarrow & & \downarrow\\
+F(U) & \longrightarrow & F(U_0)
+\end{array}
+\]
+est cartésien ; (8°) si $T$ est intègre et $F(T_0) \neq \emptyset$, $F$ est
+représentable au-dessus d'un ouvert dense.
+
+\subsection*{Le lieu où un sous-schéma remplit $X$ (pages 4 à 7)}
+
+\textbf{Théorème.} \emph{Soient $S$ localement noethérien, $f : X \to S$ plat
+de type fini, et $Y \to X$ un morphisme de type fini qui est un monomorphisme.
+Le sous-foncteur $F$ de $S$, défini par $F(S') \neq \emptyset$ si et seulement
+si $Y \times_S S' \to X \times_S S'$ est un isomorphisme, est représentable
+(par un monomorphisme de type fini $S_Y \to S$) si et seulement s'il commute
+aux limites projectives adiques d'anneaux artiniens. Si $Y \to X$ est une
+immersion fermée, $S_Y$ est alors un sous-schéma fermé de
+$S$.}\footnote{L'énoncé de la page 4 porte deux additions : « plat », et « de
+type fini » pour $Y \to X$ ; une première version, où $Y$ était « un
+sous-préschéma \ldots{} de $X$ », est biffée, et une marge ajoute « il suffit
+que $Y \to X$ soit un monomorphisme ». La page 5 est une première rédaction
+du même énoncé, biffée entière et écrite tête-bêche. Le foncteur est un
+sous-foncteur de $S$ ; ce qui le représente est donc un monomorphisme vers
+$S$, et c'est ce qu'on écrit. La dernière phrase est sur la page (« alors il
+est représentable par un sous-préschéma (fermé) de $S$ ») ; la démonstration
+ne la justifie pas. Elle est vraie : quand $Y$ est fermé, la condition 7°
+donne, par le raisonnement de la page 6, la partie « existence » du critère
+valuatif, et un monomorphisme de type fini propre est une immersion fermée
+(EGA IV 18.12.6). Enfin la page énonce le théorème pour un $Y \to X$ de type
+fini quelconque, mais sa démonstration ne traite que le cas où le foncteur
+est un sous-foncteur de $S$ (« dans le cas d'un monomorphisme $F \to S$ ») ;
+on énonce ce qui est démontré.}
+
+Le foncteur est $\mathrm{Res}_{X/S}(Y)$ : une section de $Y' \to X'$, quand
+$Y \to X$ est un monomorphisme, existe si et seulement si $Y' = X'$, et elle
+est alors unique. Les conditions se vérifient ainsi. La platitude de $X$
+donne 4° à 6° : si $A \to A'$ est un homomorphisme injectif d'anneaux
+artiniens, $\mathcal{O}_{X_A} \to \mathcal{O}_{X_A} \otimes_A A'$ est injectif,
+de sorte que $Y_{A'} = X_{A'}$ entraîne $Y_A = X_A$. Elle donne aussi 7° : si $T$
+est l'adhérence schématique de $U$, $X_T$ est l'adhérence schématique de $X_U$
+(par platitude), donc un sous-schéma fermé de $X_T$ qui contient $X_U$ est
+$X_T$ entier\footnote{La page 6 ajoute deux variantes en interligne : « en
+fait, il suffit ici $F(U) \neq \emptyset$ pour $F(T) \neq \emptyset$ », puis
+« (6 lorsque $Y$ est supposé fermé dans $X$) ». Le début de la ligne est
+illisible.}. La condition 8° vient de la platitude générique (EGA IV 11 : $X_U$
+« ensemblistement libre » sur un ouvert dense $U$).
+
+La commutation aux limites adiques s'énonce aussi :
+
+\begin{quote}
+(L) pour tout $S$-schéma $T$ spectre d'un anneau local noethérien (qu'on peut
+supposer complet, à corps résiduel algébriquement clos), si $Y_T$ contient
+un voisinage de la fibre spéciale de $X_T$, alors $Y_T = X_T$.
+\end{quote}
+
+\emph{Corollaires.} Si $X$ est propre sur $S$, (L) est automatique. Si $X$ est
+un groupe et $Y$ un sous-groupe, $Y_T$ contient un voisinage de la section
+unité, donc $Y_T \to X_T$ est un monomorphisme étale, c'est-à-dire une
+immersion ouverte ; la vérification de $Y_T = X_T$ se ramène, par
+connexité, au cas où $T$ est le spectre d'un anneau de valuation discrète.
+D'où la condition, isolée page 8 :
+
+\begin{quote}
+(R) pour tout schéma local $T$ sur $S$ et tout sous-groupe ouvert $U$ de
+$G_T$ qui contient la fibre spéciale, on a $U = G_T$.
+\end{quote}
+
+Pour $G$ de type fini sur $S$ localement noethérien, il suffit de tester (R)
+sur les spectres d'anneaux de valuation discrète complets à corps résiduel
+algébriquement clos. (R) est vraie quand $G$ est à fibres connexes, ou
+quand il existe des sous-schémas $G_i$ finis sur $S$ tels que, pour chaque
+$s$, les $G_{i,\bar s} \cdot G^{0}_{\bar s}$ recouvrent $G_{\bar s}$.
+
+\subsection*{Centralisateurs, normalisateurs, transporteurs (pages 8 et 9)}
+
+\textbf{Corollaire.} \emph{Soit $X$ un schéma en groupes plat de type fini sur
+$S$ localement noethérien, satisfaisant à (R), et $Y$ un sous-groupe fermé.
+Alors $\mathrm{Res}_{X/S}(Y)$ est représentable par un sous-schéma fermé de
+$S$.}\footnote{« Plat » manque à l'énoncé de la page 8 ; il est l'hypothèse
+du théorème qu'on applique, et la page 9 l'ajoute en interligne pour le
+groupe $H$ du corollaire suivant.}
+
+\textbf{Corollaire.} \emph{Soit $u : H \to G$ un homomorphisme de schémas en
+groupes sur $S$, avec $G$ localement noethérien, $H$ plat de type fini sur $S$
+et satisfaisant à (R) (par exemple à fibres connexes). Alors
+$\mathrm{Cent}_G(u)$ est représentable par un sous-schéma de $G$, fermé si $G$
+est séparé sur $S$. Si $K$ est un sous-groupe de $G$, le transporteur
+$\mathrm{Transp}_G(u, K)$ est représentable, et c'est un sous-schéma (resp.
+un sous-schéma fermé) de $G$ si $K$ en est un. Si $K$ est en outre plat et
+satisfait à (R), et si $u$ est un monomorphisme, $\mathrm{Transp}_G(H,K)$
+est représentable par un schéma de type fini sur $G$ ; en particulier
+$\mathrm{Norm}_G(H)$ est représentable, et c'est un sous-schéma (fermé) de $G$
+si $H$ l'est.}
+
+On l'obtient en appliquant le théorème au-dessus de $G$ : le centralisateur
+est le lieu des $g$ où les deux morphismes $H_G \to G_G$, $u$ et $g u
+g^{-1}$, coïncident, c'est-à-dire où le sous-schéma « égaliseur » remplit
+$H_G$. Ce sont les énoncés que SGA 3 établit dans les exposés VIII et XI
+sous d'autres hypothèses\footnote{Une première version de ce corollaire,
+page 8, barrée de deux diagonales, supposait $G$ séparé ; la condition
+« ($G$ séparé sur $S$) » migre page 9 dans la conclusion. Le rapprochement
+avec SGA 3 est le nôtre ; les pages n'y renvoient pas ici.}.
+
+\subsection*{Le lieu de platitude (pages 10 et 11)}
+
+\textbf{Théorème.} \emph{Soient $f : X \to S$ de type fini, $S$ localement
+noethérien, $E$ un $\mathcal{O}_X$-module cohérent. Le sous-foncteur de $S$
+\[
+  F(S') = \begin{cases} \{\ast\} & \text{si } E_{S'} \text{ est plat sur } S',\\
+  \emptyset & \text{sinon,}\end{cases}
+\]
+est représentable si et seulement s'il commute aux limites projectives
+adiques d'anneaux artiniens}\footnote{La page écrit $F_{S'}$ pour le faisceau,
+de la même lettre que le foncteur, et, en 4°--7°, « $X_{A'}$ plat » là où il
+s'agit de la platitude de $E_{A'}$ ; elle le dit elle-même en 4° (« je veux
+dire $E$ plat »). La page 10 s'ouvre sur « Variantes débarrassées
+d'hypothèses noethériennes\ldots » et « Variante. Pour un morphisme $Y \to X$
+non ramifié », deux titres sans suite.}. \emph{La condition s'écrit : pour tout
+$T$ spectre d'un anneau local noethérien, si $E_T$ est plat sur $T$ au
+voisinage de la fibre générique, il est plat. Elle est satisfaite si $f$ est
+propre, et si $E = \mathcal{O}_X$ avec $X$ un schéma en groupes satisfaisant à
+(R).}
+
+C'est ce que la page 2 appelait « flattening functor ». Le cas propre est
+aujourd'hui le théorème de l'aplatissement universel, dû à Mumford dans le
+cas projectif et à Raynaud et Gruson en général\footnote{Le rapprochement est
+le nôtre et la référence citée de mémoire : M.~Raynaud, L.~Gruson, « Critères
+de platitude et de projectivité », \emph{Invent. Math.} 13 (1971). Une marge
+de la page 11 ajoute qu'on peut supposer $\dim T = 1$, $T$ intègre, donc le
+spectre d'un anneau de valuation discrète ; deux mots y sont illisibles.}.
+
+\subsection*{Le lieu où un morphisme est fidèlement plat, et les quotients (pages 11 à 13)}
+
+\textbf{Corollaire 3.} \emph{Soit $f : X \to S$ de présentation finie.
+Conditions équivalentes :}
+\begin{enumerate}
+  \item[(i)] \emph{$f$ se factorise en $X \xrightarrow{f''} S' \xrightarrow{f'} S$,
+  avec $f''$ fidèlement plat et $f'$ un monomorphisme ;}
+  \item[(i bis)] \emph{de même avec $f''$ seulement plat ;}
+  \item[(ii)] \emph{la projection $\mathrm{pr}_1 : X \times_S X \to X$ est plate.}
+\end{enumerate}
+\emph{Sous ces conditions la factorisation (i) est unique à isomorphisme unique
+près, $S' = X/R$ avec $R = X \times_S X$, et $S'$ est de présentation finie sur
+$S$.}\footnote{La page demande que $f'$ soit une \emph{immersion} (« $f'$
+\emph{imm.} », souligné). C'est trop : le morphisme $X = (\mathbf{A}^1 - \{0\})
+\sqcup \{0\} \to \mathbf{A}^1$ satisfait à (ii) — au-dessus de chaque morceau,
+$X \times_S X \to X$ est un isomorphisme — et c'est un monomorphisme
+bijectif qui n'est pas une immersion ; ici $S' = X$. La démonstration de la
+page 12 fournit exactement un monomorphisme : le foncteur qu'elle
+représente est le sous-foncteur de $S$ des $T$ tels que $X_T \to T$ soit
+couvrant pour fpqc, et son représentant est donc un monomorphisme vers $S$.}
+
+La démonstration est celle de la page 12 : (i) $\Rightarrow$ (i bis)
+$\Rightarrow$ (ii) est immédiat, puisque $X \times_S X = X \times_{S'} X$ quand
+$S' \to S$ est un monomorphisme ; l'unicité vient de ce que $X \to S'$ est un
+épimorphisme effectif pour fpqc. Pour (ii) $\Rightarrow$ (i), on se ramène à
+$S$ affine noethérien et l'on applique le théorème au foncteur « $X_T \to T$
+fidèlement plat » ; sous (ii), la condition (L) est satisfaite, car un point
+$x$ de la fibre spéciale donne un anneau local $\mathcal{O}_{X,x}$ fidèlement
+plat sur celui de $T$.
+
+\textbf{Corollaires} (page 13). \emph{(a) Soient $G$ un schéma en groupes de
+présentation finie sur $S$ et $P$ un $S$-schéma de présentation finie sur
+lequel $G$ opère de façon que $P$ soit formellement principal homogène. Il
+existe un monomorphisme $S' \to S$ par lequel $P \to S$ se factorise et au-dessus
+duquel $P$ est un torseur (fidèlement plat) sous $G$ ; $S'$ est unique à
+isomorphisme unique près. (b) Soit $u : G \to H$ un homomorphisme de schémas
+en groupes de présentation finie, dont le noyau $N$ est plat (et de présentation
+finie) sur $S$. Alors le quotient $G/N$ existe, comme schéma, et $G \to G/N
+\to H$ factorise $u$ en un épimorphisme fidèlement plat suivi d'un
+monomorphisme.}
+
+Pour (b) : $G \times_H G \simeq G \times_S N$ est plat sur $G$, et le corollaire 3
+s'applique à $G \to H$\footnote{La page dit seulement « $G/N$ existe ». La
+factorisation par un monomorphisme est ce que le corollaire 3, corrigé,
+fournit ; avec l'énoncé de la page on aurait conclu à tort que $G/N \to H$
+est une immersion. Le (a) dit sur la page « il existe un sous-préschéma
+$S' \hookrightarrow S$ » : même correction.}.
+
+\pagerange{15}{24}
+\section*{II. Le foncteur $\underline{\mathrm{Hom}}_S(X, Y; \varphi)$ (pages 15 à 24)}
+
+\subsection*{La donnée, et le sous-foncteur ouvert (pages 15 et 16)}
+
+On se donne sur $S$ un morphisme $\varphi : Z \to X$ entre deux $S$-schémas
+$X$ et $Z$ plats et propres, et un $S$-schéma $Y$ de type fini et
+séparé\footnote{Page 15 : « $f$, $h$ plat et propre sur $S$ loc.\ noeth. »,
+« $g$ de type fini [et séparé ?] » ; la séparation est restée une question.
+La lettre des pages 30 et 31 l'ajoute à l'encre (« and separated ») à
+l'énoncé correspondant, et on la suppose ici. Une marge ajoute « suffit si
+$Z \to X$ est surjectif », sans dire à quoi ; un N.B. dit que l'hypothèse
+« $S$ localement noethérien » peut être remplacée par des hypothèses de
+présentation finie sur $X$, $Y$, $Z$.}. La composition avec $\varphi$ définit
+\[
+  \varphi^{\sharp} : \underline{\mathrm{Hom}}_S(X,Y) \longrightarrow
+  \underline{\mathrm{Hom}}_S(Z,Y), \qquad u \longmapsto u\varphi .
+\]
+Pour $u : X' \to Y'$ au-dessus de $S'$, posons $v = u\varphi'$. Comme $X'$ et
+$Z'$ sont propres et plats, il existe des $\mathcal{O}_{S'}$-modules cohérents
+$M_u$, $M_v$, dont la formation commute au changement de base, tels que pour
+tout $\mathcal{O}_{S'}$-module quasi-cohérent $J$
+\[
+  \mathrm{Hom}_{\mathcal{O}_{X'}}\bigl(u^{*}\Omega^1_{Y'/S'},\, \mathcal{O}_{X'}
+  \otimes J\bigr) \simeq \mathrm{Hom}_{\mathcal{O}_{S'}}(M_u, J),
+\]
+et de même pour $v$ et $Z'$ (EGA III 7.7.6). L'application naturelle entre les
+deux groupes de gauche provient d'un homomorphisme $M_v \to M_u$. Le
+morphisme $\varphi^{\sharp}$ est « non ramifié en $u$ » au-dessus d'un point
+$s$ si l'application tangente
+$\mathrm{Hom}(u_s^{*}\Omega^1, k(s)) \to \mathrm{Hom}(v_s^{*}\Omega^1, k(s))$
+est injective, c'est-à-dire si $M_v \otimes k(s) \to M_u \otimes k(s)$ est
+surjectif ; par Nakayama, la condition est ouverte. On note
+$\underline{\mathrm{Hom}}_S(X,Y;\varphi)$ le sous-foncteur ouvert des $u$ pour
+lesquels $M_v \to M_u$ est surjectif.
+
+\textbf{Théorème} (page 16). \emph{Le morphisme
+$\underline{\mathrm{Hom}}_S(X,Y;\varphi) \to \underline{\mathrm{Hom}}_S(Z,Y)$ est
+représentable par des morphismes non ramifiés. En particulier, si
+$\underline{\mathrm{Hom}}_S(Z,Y)$ est représentable, $\underline{\mathrm{Hom}}_S(X,Y;
+\varphi)$ l'est aussi.}
+
+\subsection*{La démonstration : l'obstruction (pages 16 à 20)}
+
+On fixe $v : Z \to Y$ et l'on représente le foncteur des $u$ tels que
+$u\varphi = v$ et que $M_v \to M_u$ soit surjectif, par le critère des
+pages 4 à 7 (version non ramifiée et séparée). Toutes les conditions sont
+« habituelles » sauf les deux de modularité, et la seule qui demande un
+calcul est 7° : $S = \mathrm{Spec}\,A$ local noethérien de dimension $1$
+— dans le calcul, l'anneau d'une uniformisante $\pi$ —, $J$ un idéal de carré
+nul, $S_0 = V(J)$, $\eta$ le point générique ; on a $u_0 : X_0 \to Y_0$ avec
+$u_0\varphi_0 = v_0$, et un prolongement $u_\eta$ avec $u_\eta \varphi_\eta = v_\eta$.
+Il s'agit de prolonger $u_0$ en $u$ avec $u\varphi = v$.
+
+Les prolongements de $u_0$ (resp. $v_0$) sur $S$ et sur le localisé en $\eta$
+forment un carré d'ensembles principaux homogènes sous le carré de groupes
+\[
+\begin{array}{ccc}
+\mathrm{Hom}(M_{u_0}, J) & \longrightarrow & \mathrm{Hom}(M_{u_0}, J_\eta)\\
+\downarrow & & \downarrow\\
+\mathrm{Hom}(M_{v_0}, J) & \longrightarrow & \mathrm{Hom}(M_{v_0}, J_\eta)
+\end{array}
+\]
+et l'on cherche un élément du coin supérieur gauche relevant les deux
+éléments donnés aux coins voisins\footnote{L'astérisque de « $M_{u_0}^{*}$ »
+au coin supérieur gauche est sur la page ; il ne correspond à rien et on
+l'omet. L'indice que la main forme comme un $y$ est lu $\eta$, le point
+générique nommé plus haut ; dans les pages 19 et 20, $J_n$ et $J_\eta$ se
+ressemblent et sont départagés par le sens.}. Il suffit que l'ensemble des
+prolongements de $u_0$ sur $S$ soit non vide : le carré d'ensembles est alors
+isomorphe au carré de groupes, et celui-ci est cartésien parce que
+$M_{v_0} \to M_{u_0}$ est surjectif et que $J$ est sans torsion sur $A$, ce qui
+rend $\mathrm{Hom}(N, J) \to \mathrm{Hom}(N, J_\eta)$ injectif\footnote{La page dit
+« (2) est cartésien, grâce au fait que $M_{v_0} \to M_{u_0}$ est surjectif » ;
+l'injectivité de la localisation, qu'on ajoute, est ce qui fait marcher
+l'argument, et elle tient dans le cas où $A$ est intègre, celui du calcul.}.
+
+L'obstruction à l'existence de $u$ est une classe
+$\xi \in \mathrm{Ext}^1_{\mathcal{O}_{P_0}}(I_{\Gamma_0}, \mathcal{O}_{\Gamma_0}
+\otimes J)$, où $P_0 = X_0 \times_{S_0} Y_0$, $\Gamma_0$ est le graphe de $u_0$ et
+$I_{\Gamma_0}$ son idéal. Elle s'annule en $\eta$, donc $\pi^{n+1}\xi = 0$ pour un
+$n$. La suite exacte $0 \to J \xrightarrow{\pi^{n+1}} J \to J_n \to 0$, avec
+$J_n = J/\pi^{n+1}J$, permet de la relever en une classe de
+$\mathrm{Hom}(I_{\Gamma_0}/I_{\Gamma_0}^2, \mathcal{O}_{\Gamma_0} \otimes J_n) =
+\mathrm{Hom}(M_{u_0}, J_n)$ modulo l'image de $\mathrm{Hom}(M_{u_0}, J)$, d'où une
+classe $\xi'' \in \mathrm{Ext}^1_{A_0}(M_{u_0}, J)$, tuée par une puissance de
+$\pi$, dont l'annulation équivaut au prolongement de $u_0$. De même pour $v_0$
+une classe $\eta''$, qui est nulle puisque $v$ existe. Avec la suite exacte
+$0 \to N \to M_{v_0} \to M_{u_0} \to 0$, $\xi''$ provient d'une classe
+$\xi''' \in \mathrm{Hom}(N, J)/\mathrm{Im}\,\mathrm{Hom}(M_{v_0}, J)$ ; la compatibilité
+des prolongements génériques donne une classe $\eta'$ dans
+$\mathrm{Hom}(N, J_\eta)/\mathrm{Im}\,\mathrm{Hom}(M_{v_0}, J)$, nulle par hypothèse, et
+si $\eta' = \xi'''$ on conclut.
+
+Deux pas sont admis, et la page le dit : que $\eta''$ soit l'image de
+$\xi''$ par $M_{v_0} \to M_{u_0}$, et que $\eta' = \xi'''$. La démonstration
+n'est donc pas achevée sur ces feuillets\footnote{« Nous admettrons » deux
+fois, pages 19 et 20. « $\eta''$ est nul » est souligné.}.
+
+\subsection*{Une variante sous hypothèse de rigidité (pages 21 à 24)}
+
+La page 21 se propose de « simplifier les raisonnements, en éliminant les
+hypothèses de propreté sur $X$, $Z$ et le résultat délicat de l'existence de
+$M_u$, $M_v$ », en imposant une hypothèse de rigidité : l'application
+\[
+  \mathrm{Hom}\bigl(u_0^{*}\Omega^1_{Y_0/S_0}, \mathcal{O}_{X_0} \otimes G\bigr)
+  \longrightarrow
+  \mathrm{Hom}\bigl(v_0^{*}\Omega^1_{Y_0/S_0}, \mathcal{O}_{Z_0} \otimes G\bigr)
+\]
+injective pour tout $G$ quasi-cohérent sur $S_0$\footnote{La page écrit
+$\omega^{\circ}$ pour les deux images inverses et $\Omega^1_{X_0/S_0}$ au second
+membre ; on lit $v_0^{*}\Omega^1_{Y_0/S_0}$, seul sens que la flèche puisse
+avoir. Une marge porte, au crayon et entourée, « SGA 3 III 4.2 », le
+paragraphe sur les relèvements infinitésimaux de morphismes. Le reste de la
+page est biffé.}. Les pages 22 à 24 refont alors le calcul : les relèvements
+de $u_0$ correspondent aux scindages d'une extension
+$0 \to \mathcal{O}_{\Gamma_0} \otimes J \to E \to I_{\Gamma_0} \to 0$ sur $P_0$,
+ceux de $v_0$ à ceux de l'extension qui s'en déduit sur $Z_0 \times_{S_0} Y_0$,
+laquelle est déjà scindée. Les foncteurs $\mathrm{Ext}^1$ en $G$ sont
+représentés, d'où un diagramme de modules $L \to M \to N \to 0$ au-dessus de
+$0 \to L' \to M' \to N' \to 0$, et la condition d'existence d'un relèvement
+compatible, pour un $\lambda : J \to G$ donné, est l'annulation de $\lambda$ sur
+un sous-module $R = R_1 + R_2$ de $J$ ; autrement dit, le foncteur en $G$ est
+représenté par $J/R$, le conoyau d'une flèche
+$\rho : L \oplus M' \to J$, et sa formation commute aux extensions plates de
+la base. C'est ce qui donne les conditions 7° et 8°. La surjectivité de
+$(i,\beta) : L \oplus M' \to M$, notée en marge, est la condition de non
+ramification\footnote{La lecture de ces trois pages est mince : la prose qui
+relie les formules est en grande partie illisible ou incertaine, et l'on
+ne reconstruit que la structure du calcul — deux extensions, leurs
+$\mathrm{Ext}^1$ représentés, un quotient $J/R$. Les flèches $\alpha$, $\beta$ du
+diagramme (D) portent une pointe à chaque bout sur la page.}.
+
+\pagerange{24}{28}
+\section*{III. Les théorèmes de représentabilité (pages 24 à 28)}
+
+\textbf{Corollaire} (page 24). \emph{Soit $k$ un corps algébriquement clos,
+$X$ propre sur $k$ et $P \to X$ localement de type fini et séparé. Alors
+$\mathrm{Res}_{X/k}(P)$ est représentable par un schéma localement de type fini.
+Si $P$ est quasi-projectif sur $X$, ou seulement à fibres quasi-projectives,
+toute partie ouverte quasi-compacte en est quasi-projective sur $k$ ; il suffit
+que pour tout $x \in \mathrm{Ass}\,\mathcal{O}_X$ il existe $y \in \overline{\{x\}}$
+tel que la fibre $P_y$ soit quasi-projective.}\footnote{En marge :
+« (déjà difficile !) ». « Séparé » est supposé ici, comme pour $Y$ à la page 15
+et dans la lettre ; voir la note correspondante.}
+
+\textbf{Théorème} (page 25)\textbf{,} \emph{tel qu'il est annoncé.} Soient $X$
+propre, plat et de présentation finie sur $S$, $P \to X$ localement de
+présentation finie, et $Z_1, \ldots, Z_n$ des sous-schémas fermés de $X$, plats
+et de présentation finie sur $S$. On suppose :
+\begin{enumerate}
+  \item[(a)] chaque $\mathrm{Res}_{Z_i/S}(P_{Z_i})$ est représentable (par
+  exemple $Z_i$ radiciel sur $S$, ou $Z_i/S$ et $P_{Z_i}/Z_i$ projectifs) ;
+  \item[(b)] $X$ est normalement plat le long de chaque $Z_i$ (par exemple
+  $Z_i$ lisse sur $S$ et $X$ lisse sur $S$ aux points de $Z_i$) ;
+  \item[(c)] pour tout $s \in S$ et tout point associé $x$ de $X_{\bar s}$,
+  $\bigcup_i Z_{i,\bar s}$ rencontre l'adhérence de $x$.
+\end{enumerate}
+Alors (i) $\mathrm{Res}_{X/S}(P)$ est représentable par un schéma localement de
+présentation finie sur $S$ ; (ii) pour toute partie ouverte quasi-compacte $U$
+de celui-ci, $U \to \prod_i \mathrm{Res}_{Z_i/S}(P_{Z_i})$ est quasi-affine ;
+(iii) si les $\mathrm{Res}_{Z_i/S}(P_{Z_i})$ sont quasi-projectifs sur $S$ (par
+exemple $Z_i$ fini et $P_{Z_i}$ projectif), toute partie quasi-compacte de
+$\mathrm{Res}_{X/S}(P)$ est quasi-projective sur $S$, et il existe un fibré en
+droites sur $\mathrm{Res}_{X/S}(P)$ ample relativement à $S$ sur toute partie
+quasi-compacte.
+
+La démonstration n'est pas dans le dossier, et nous ne vérifions pas que
+les hypothèses (a) à (c) suffisent\footnote{Le mécanisme est celui de la
+page 15 et de la lettre : recouvrer $\underline{\mathrm{Hom}}$ par les ouverts
+$\underline{\mathrm{Hom}}(X,Y;\varphi)$. Avec une famille \emph{fixe} de $Z_i$, la
+restriction des sections de $u^{*}T_Y$ à $\bigcup Z_i$ n'a pas de raison
+d'être injective ; il faut vraisemblablement faire jouer aussi les voisinages
+infinitésimaux des $Z_i$, et c'est le rôle probable de (b) — la normale
+platitude rend ces voisinages plats sur $S$. C'est une conjecture de lecture.
+Au (i), « séparé » est biffé dans la conclusion ; au (ii), le mot « ouverte »
+et la parenthèse « (qui est quasi-séparé) » sont des lectures incertaines.}. Il
+est suivi, pages 26 à 28, d'une liste de corollaires :
+
+\begin{itemize}
+  \item \emph{Cor. 1} est contenu dans le théorème.
+  \item \emph{Cor. 2.} $k$ un corps quelconque, $X$ propre sur $k$, $P/X$
+  localement de type fini : si tout point associé $x_i$ de $X$ a dans son
+  adhérence un point $x'_i$ à corps résiduel radiciel sur $k$ (plus
+  généralement, tel que $\mathrm{Res}_{k(x'_i)/k}(P_{x'_i})$ soit représentable),
+  $\mathrm{Res}_{X/k}(P)$ est représentable ; c'est le cas si $X$ est irréductible
+  et a un point rationnel.
+  \item \emph{Cor. 3.} Sans hypothèse sur les points, la représentabilité a
+  lieu après une extension finie séparable $k'/k$.
+  \item \emph{Cor. 4.} $P/X$ à fibres quasi-projectives, $X/k$ propre :
+  $\mathrm{Res}_{X/k}(P)$ existe et toute partie ouverte quasi-compacte est
+  quasi-projective.
+  \item \emph{Cor. 5.} $X$ propre et plat sur $S$ noethérien intègre : il
+  existe un ouvert $U \neq \emptyset$ et un revêtement fini étale surjectif $U'
+  \to U$ au-dessus duquel $\mathrm{Res}$ est représentable.
+  \item \emph{Cor. 6.} $X \to S$ propre et plat à fibres géométriques
+  intègres, muni d'une section le long de laquelle il est lisse :
+  $\mathrm{Res}_{X/S}(P)$ est représentable.
+  \item \emph{Cor. 7.} $X \to S$ lisse et propre : représentable localement
+  pour la topologie étale ; pour $X$ seulement propre, plat, à fibres sans
+  cycles associés immergés, localement pour la topologie fidèlement plate
+  quasi-finie.
+  \item \emph{Cor. 8.} $X$ et $Y$ propres sur un corps $k$ :
+  $\underline{\mathrm{Isom}}_k(X,Y)$ est représentable ; en particulier
+  $\underline{\mathrm{Aut}}_k(X)$.
+  \item \emph{Cor. 9.} $X$ propre et plat sur $S$ noethérien intègre : il
+  existe $U \neq \emptyset$ et $U' \to U$ fini étale surjectif tels que
+  $\underline{\mathrm{Aut}}_S(X) \times_S U'$ soit représentable. « Il est
+  plausible qu'on puisse même prendre $U' = U$, c'est lié à une question
+  d'effectivité de données de descente » ; en marge, « cf.\ Raynaud ».
+\end{itemize}
+
+Le corollaire 8 est le théorème de Matsumura et Oort : pour $X$ propre sur un
+corps, $\underline{\mathrm{Aut}}_k(X)$ est un schéma en groupes localement de type
+fini\footnote{H.~Matsumura, F.~Oort, « Representability of group functors, and
+automorphisms of algebraic schemes », \emph{Invent. Math.} 4 (1967), cité de
+mémoire. La lettre de la page 30 attribue le théorème à Matsumura seul.
+Aujourd'hui, pour $X$ propre et plat de présentation finie sur $S$ et $Y$
+séparé, $\underline{\mathrm{Hom}}_S(X,Y)$ est en général un espace algébrique
+(Artin) ; ce que ces feuillets cherchent, c'est un \emph{schéma}, et c'est
+ce qui oblige aux hypothèses sur les points et aux extensions de la base.}.
+Le dossier EGA VI (cote 26) annonce au § 22 des « théorèmes du type
+Matsumura » pour $\mathrm{Res}_{Y/S}(X)$ et les foncteurs voisins ; ces pages
+sont, en partie, ce que ce paragraphe aurait contenu, par une autre méthode
+que le schéma de Hilbert que la lecture du dossier 26 lui prête.
+
+\pagerange{30}{31}
+\section*{IV. La lettre à Anantharaman (pages 30 et 31)}
+
+Deux feuillets dactylographiés en anglais, sans signature, datés à la main
+« 11.9.1967 », adressés « Dear Anantharaman ». Ils sont de Grothendieck : le
+« je » y expose la méthode des pages 15 à 28 et propose d'envoyer « a
+photocopy of the statement of the general theorem », c'est-à-dire du
+théorème de la page 25\footnote{L'attribution se tire du contenu, la lettre
+n'étant pas signée ; c'est vraisemblablement un double conservé par
+l'expéditeur. La transcription la reproduit telle qu'elle est tapée, fautes
+de frappe comprises (« standart », « descebt », « resultst »), avec deux
+insertions dactylographiées en interligne et une à l'encre.}.
+
+Le contenu, en substance. Matsumura a prouvé que, pour $X$ propre sur un corps
+$k$, $\underline{\mathrm{Aut}}_{X/k}$ est représentable par un schéma en groupes
+localement de type fini ; la lettre propose d'en systématiser l'étape clé.
+Pour $\varphi : Z \to X$ entre $S$-schémas propres, plats et de présentation
+finie, et $Y$ localement de présentation finie et séparé, on a le
+sous-foncteur ouvert $\underline{\mathrm{Hom}}_S(X,Y;\varphi)$ où $\varphi^{\sharp}$
+est non ramifié, et le résultat de l'exposé de Murre montre que
+$\underline{\mathrm{Hom}}_S(X,Y;\varphi) \to \underline{\mathrm{Hom}}_S(Z,Y)$ est
+représentable par des morphismes non ramifiés, séparés, localement de
+présentation finie. Pour représenter $\underline{\mathrm{Hom}}_S(X,Y)$, on cherche
+des $\varphi_i : Z_i \to X$ dont les ouverts $\underline{\mathrm{Hom}}_S(X,Y;\varphi_i)$
+recouvrent $\underline{\mathrm{Hom}}_S(X,Y)$ comme faisceau fpqc et dont les
+$\underline{\mathrm{Hom}}_S(Z_i, Y)$ sont représentables. Sur un corps
+algébriquement clos on prend pour $Z_i$ tous les sous-schémas finis de $X$ à
+points radiciels ; sur un corps quelconque, cela marche après extension finie,
+d'où le théorème de Matsumura par descente.
+
+Elle ajoute trois remarques. $\underline{\mathrm{Hom}}_S(X,Y)$ n'est pas toujours
+représentable, même quand $X$ est le spectre d'une extension quadratique de
+$k$ et $Y$ propre non projectif — c'est la non-existence de certaines
+restrictions de Weil, dont les pages 34 et 35 donnent un exemple. Sur une base
+quelconque, les points radiciels sont remplacés par des sous-schémas plats :
+$\underline{\mathrm{Hom}}_S(X,Y)$ est représentable si $X$ a des fibres
+géométriques intègres et une section le long de laquelle il est lisse, et
+localement pour la topologie étale si $X$ a des fibres géométriques
+réduites\footnote{C'est le corollaire 7 de la page 27, qui demande « $X \to S$
+simple propre » ; la lettre dit « reduced geometric fibers ». Les deux ne
+coïncident pas, et le dossier ne contient pas l'énoncé intermédiaire.} ; et il
+est représentable si $Y$ est quasi-projectif sur un corps.
+
+\pagerange{33}{36}
+\section*{V. Deux plans, le formalisme, et le contre-exemple de Nagata (pages 33 à 36)}
+
+La page 33 est le plan d'un exposé « Schémas Hom etc. » : (1) formalisme des
+$\underline{\mathrm{Hom}}$ et des restrictions de Weil ; (2) foncteurs de
+Serre--Lang et de Greenberg ; (3)--(4) existence ; (5) application aux
+immersions et morphismes de type fini ; (6) morphismes quasi-projectifs ;
+(7) morphismes lisses et étales ; [8] morphismes quasi-étales ; (9) cas d'un
+$S' \to S$ étale, « à reporter à la fin » ; [10] compléments dans le cas de
+Greenberg\footnote{Plusieurs mots du plan sont illisibles (rubriques 3 et 5). Le
+$\underline{W}^{\circ}(X)$ des rubriques 2 et 3 est lisible, son sens non.}. C'est,
+à peu près, l'ordre des pages 37 à 79.
+
+La page 34 pose le formalisme. Pour $T \to S$, $X$ sur $T$, $Y$ sur $S$ :
+\begin{align*}
+  \mathrm{Res}_{T/S}(X) &= \underline{\mathrm{Hom}}_S(T, X) \times_{\underline{\mathrm{Hom}}_S(T,T)} S,\\
+  \underline{\mathrm{Hom}}_{T/S}(X, Y_T) &= \mathrm{Res}_{T/S}\bigl(\underline{\mathrm{Hom}}_T(X, Y_T)\bigr),\\
+  \underline{\mathrm{Hom}}_S(X,Y) &= \mathrm{Res}_{X/S}(X \times_S Y).
+\end{align*}
+Et une formule de descente : si $X$ sur $T$ est muni d'une donnée de descente
+relativement à $T \to S$ et si les restrictions de Weil existent, l'objet
+descendu existe et
+\[
+  X_0 = \mathrm{Res}_{T/S}(X) \times_{\mathrm{Res}_{T \times_S T/S}(X \times_S T)} \mathrm{Res}_{T/S}(X),
+\]
+les deux flèches étant l'image inverse par $\mathrm{pr}_1$ et l'image inverse
+par $\mathrm{pr}_2$ suivie de la donnée de descente\footnote{À première vue
+on attendrait un égalisateur et non un produit fibré. Les deux coïncident
+ici : un couple $(s, t)$ de sections avec $\mathrm{pr}_1^{*}s =
+\theta(\mathrm{pr}_2^{*}t)$ donne, en restreignant à la diagonale, $s = t$, la
+donnée de descente $\theta$ étant l'identité sur la diagonale.}.
+
+\emph{Le contre-exemple} (pages 34 et 35). Soit $X$ un schéma lisse sur un corps
+algébriquement clos $k$, muni d'une action libre de $G = \mathbf{Z}/2$ sans
+quotient schématique, parce qu'une orbite n'est contenue dans aucun ouvert
+affine\footnote{La page dit « contre-exemple de Nagata ». L'exemple d'une
+involution libre sur une variété lisse propre sans quotient schématique est
+souvent attribué à Hironaka ; nous gardons le nom de la page. Le raisonnement
+de la page 35 est presque entièrement illisible entre les formules ; on n'en
+garde que ce qu'il affirme : une orbite fermée contenue dans aucun ouvert
+affine.}. Soient $L$ une extension de $k$ sur laquelle $G$ opère fidèlement et
+$K = L^{G}$. L'action diagonale sur $X \otimes_k L$ est une donnée de descente
+galoisienne relativement à $L/K$, non effective. Par la formule précédente :
+
+\textbf{Corollaire.} \emph{$\mathrm{Res}_{L/K}(X_L)$ n'est pas représentable ; a
+fortiori $\underline{\mathrm{Hom}}_K(\mathrm{Spec}\,L, X_L)$ ne l'est pas.}
+
+C'est l'exemple qu'annonçait la lettre\footnote{Cf. S.~Bosch, W.~Lütkebohmert,
+M.~Raynaud, \emph{Néron Models} (1990), § 7.6, pour la condition d'existence
+des restrictions de Weil et ce type de contre-exemple ; cité de mémoire.}.
+
+La page 36 est un second plan, en paragraphes : § 1 descente d'objets plats
+par morphismes quelconques ; § 2 descente d'objets quelconques par morphismes
+plats ; § 3 application aux morphismes non ramifiés ; § 4 cas élémentaires
+— quotients $X/G$, descente galoisienne, le contre-exemple de Nagata,
+descente plate finie par opérateurs différentiels, cas de Cartier ; § 5
+$\underline{\mathrm{Hom}}_S(X,Y)$ et restriction de Weil, existence pour $X$ fini et
+plat, les $\check{\mathbf{V}}(\mathcal{F})$ ; § 6 applications (géométrie
+différentielle, Picard, Greenberg) ; § 7 hypothèses sur $S$, critère de
+représentabilité ; § 8 théorème fondamental d'existence : théorie formelle des
+modules, restriction de Weil pour $X$ projectif sur un $Y$ plat et propre,
+Picard. C'est le plan d'EGA VI dans une de ses versions, et il recoupe le plan
+du dossier 26 (descente, puis représentabilités)\footnote{Les §§ 9 et 10 sont
+sans intitulé lisible ; une accolade réunit les §§ 8 à 10 avec en marge
+« ensemble ? ».}.
+
+\pagerange{37}{58}
+\section*{VI. La restriction de Weil le long d'un morphisme fini (pages 37 à 58)}
+
+Dans toute cette partie $f : T \to S$ est fini et localement libre, de rang $n$
+quand il est constant.
+
+\subsection*{Fibrés vectoriels, et une question (pages 37 et 38)}
+
+\textbf{Proposition.} \emph{Pour $\mathcal{F}$ localement libre de type fini sur
+$T$, on a un isomorphisme fonctoriel, compatible au changement de base,
+\[
+  \mathrm{Res}_{T/S}\bigl(\check{\mathbf{V}}(\mathcal{F})\bigr) =
+  \check{\mathbf{V}}\bigl(f_{*}\mathcal{F}\bigr),
+\]
+où $\check{\mathbf{V}}(\mathcal{F}) = \mathbf{V}(\mathcal{F}^{\vee})$ est le fibré
+vectoriel dont le faisceau des sections est $\mathcal{F}$.}\footnote{La notation
+$\check{\mathbf{V}}$ est la sienne, sans définition dans le dossier. Avec le
+$\mathbf{V}(\mathcal{F}) = \mathrm{Spec}\,\mathrm{Sym}\,\mathcal{F}$ d'EGA II, dont les
+sections sont les formes linéaires sur $\mathcal{F}$, la formule serait fausse
+($\mathrm{Hom}_T(\mathcal{F}, \mathcal{O}_T)$ n'est pas
+$\mathrm{Hom}_S(f_{*}\mathcal{F}, \mathcal{O}_S)$) ; elle est vraie, et immédiate,
+pour le fibré des sections, et c'est le sens qu'on donne ici au signe.}
+
+La page 38 pose une question qui reste ouverte sur la feuille. Soient $f : X
+\to Y$ plat et propre, $Y$ local noethérien, $F$ cohérent sur $Y$ et $F'_1$ un
+sous-faisceau cohérent de $f^{*}F$ : y a-t-il un plus petit sous-faisceau
+cohérent $F_1$ de $F$ avec $f^{*}F_1 \supset F'_1$ ? Par platitude, la famille
+des $F_i$ convenables est stable par intersection finie ; tout revient à
+savoir si $f^{*}$ commute aux intersections filtrantes décroissantes, et la
+page écrit : « est-il vrai que $\bigcap f^{*}(F_i) = 0$ ? »\footnote{La
+démonstration esquissée en bas de page est presque illisible. La propriété
+demandée est ce qu'on appelle aujourd'hui une platitude « par intersections »
+(Raynaud--Gruson) ; nous ne savons pas si elle tient sous ces seules
+hypothèses et ne tranchons pas.}
+
+\subsection*{Existence (pages 39 à 42)}
+
+\textbf{Proposition 2 bis.} \emph{Soit $X = \bigcup_i U_i$ un recouvrement
+ouvert tel que, pour tout $s \in S$, toute section de $X_s \to T_s$ définie
+sur une extension finie de $k(s)$ ait son image dans un des $U_i$. Si les
+$\mathrm{Res}_{T/S}(U_i)$ existent, $\mathrm{Res}_{T/S}(X)$ existe et en est la
+réunion, les $\mathrm{Res}_{T/S}(U_i)$ y étant ouverts.}
+
+La démonstration (pages 40 et 41) recolle les $\mathrm{Res}_{T/S}(U_i)$ le long de
+leurs intersections en un schéma $H$, puis montre que $H \times_S T \to X$ est
+universel : une section $\sigma$ de $X_{S'} \to T_{S'}$ envoie, au voisinage de
+chaque point $s'$, $T_{s'}$ dans un $U_i$, donc tout un voisinage, parce que
+$T$ est fini, donc fermé\footnote{La page 39 donne d'abord une
+« Proposition 2 », remplacée en marge par la 2 bis ; la démonstration des
+pages 40 et 41 est très surchargée et sa prose en grande partie incertaine.
+On n'en garde que l'argument que les formules portent.}.
+
+\textbf{Théorème} (page 41). \emph{Si, pour tout $s \in S$, toute multisection
+de $X_s$ sur $T_s$ définie sur une extension finie de $k(s)$ est contenue dans
+un ouvert affine de $X$, alors $\mathrm{Res}_{T/S}(X)$ existe et est la réunion
+des $\mathrm{Res}_{T/S}(U)$, $U$ parcourant les ouverts affines de $X$.}
+
+Le cas affine est immédiat : la restriction de Weil d'un $T$-schéma affine est
+un $S$-schéma affine. L'hypothèse est satisfaite si $S$ est recouvert par
+des ouverts au-dessus desquels toute partie finie de $X$ est contenue dans un
+ouvert affine, en particulier si $X$ est quasi-projectif sur $S$
+(corollaire 1). Le corollaire 2 ajoute que, sous ces conditions, la restriction
+de Weil d'un sous-schéma fermé est un sous-schéma fermé. C'est la condition
+d'existence qu'on trouve aujourd'hui dans le livre de Bosch, Lütkebohmert et
+Raynaud (§ 7.6)\footnote{La page 42 appelle ces conditions « hypothèses
+abracadabrantes », lecture incertaine. L'alternative (i) de la page 41 (« $T
+\to S$ est \ldots{} injectif ») est barrée, et l'ordre (i)--(ii) suit les
+traits de renvoi.}.
+
+\subsection*{Ce que la restriction de Weil préserve (pages 43 à 48)}
+
+Le foncteur $\mathrm{Res}_{T/S}$ est exact à gauche :
+$\mathrm{Res}_{T/S}(T) = S$ et $\mathrm{Res}_{T/S}(X \times_Z Y) =
+\mathrm{Res}_{T/S}(X) \times_{\mathrm{Res}_{T/S}(Z)} \mathrm{Res}_{T/S}(Y)$. Il
+transforme immersions ouvertes en immersions ouvertes, recouvrements ouverts
+en recouvrements ouverts (sous la condition du théorème), immersions fermées
+en immersions fermées, morphismes affines en morphismes affines,
+morphismes quasi-projectifs en morphismes quasi-projectifs, et morphismes
+projectifs, ou propres, en morphismes projectifs, ou propres, \emph{pourvu que
+$T \to S$ soit étale}\footnote{La page dit « pourvu que $f$ séparable », et
+une marge (*) commente : il faut pouvoir descendre la propreté le long de $f$.
+La restriction est nécessaire : le long d'une extension purement inséparable
+non triviale, la restriction de Weil d'une variété propre de dimension $> 0$
+n'est pas propre (Conrad--Gabber--Prasad, \emph{Pseudo-reductive groups},
+appendice A.5, cité de mémoire). Une autre marge pose la question : si $T/S$
+est fini et fidèlement plat et $Y \times_S T$ propre sur $T$, $Y$ est-il propre
+sur $S$ ? « Oui dans le cas $S$ loc.\ noeth., car on utilise encore le critère
+de Chow. »}.
+
+\textbf{Proposition} (page 44). \emph{Soit $g : X \to Y$ un morphisme de
+$T$-schémas et $\mathcal{L}$ un fibré en droites sur $X$ ample relativement à
+$g$. Soit $\mathrm{ev} : \mathrm{Res}_{T/S}(X) \times_S T \to X$ le morphisme
+universel et $p : \mathrm{Res}_{T/S}(X) \times_S T \to \mathrm{Res}_{T/S}(X)$ la
+projection, finie localement libre. Alors $\det p_{*}\mathrm{ev}^{*}\mathcal{L}$
+— la norme de $\mathcal{L}$ — est ample relativement à $\mathrm{Res}_{T/S}(g)$.}
+
+Il le note $\det f_{*}(\mathcal{L})$ et ajoute « (resp. très ample) »\footnote{La
+version « très ample » est celle de la page, et nous ne la vérifions pas ;
+la version « ample » est celle qu'on sait établir par la norme (EGA II 6.6).}.
+La démonstration se ramène, la question étant locale et compatible aux
+produits, au cas $X = \mathbf{P}^m_T$, $Y = T$, $S = \mathrm{Spec}\,A$, $T =
+\mathrm{Spec}\,B$ avec $B$ libre de rang $\nu$ sur $A$. Il faut alors (A)
+déterminer une grassmannienne et un fibré ample dessus, et (B) représenter,
+sur un schéma $G$ portant une $\mathcal{O}_G$-algèbre $\mathcal{A}$ localement
+libre de rang $\nu$, un $\mathcal{A}$-module libre $\mathcal{F}$ et un
+sous-$\mathcal{O}_G$-module $\mathcal{F}_1$ à quotient localement libre de rang
+$k\nu$, le lieu où $\mathcal{F}_1$ est un sous-$\mathcal{A}$-module et
+$\mathcal{F}/\mathcal{F}_1$ un $\mathcal{A}$-module localement libre de rang $k$.
+En coordonnées (pages 45 à 47) : la stabilité de $\mathcal{F}_1$ par
+$\mathcal{A}$ est l'annulation de coefficients $\varphi_{i\lambda\mu}$, d'où un
+sous-schéma fermé $G_1$ ; sur $G_1$, la liberté locale de $M =
+\mathcal{F}/\mathcal{F}_1$ est l'inversibilité d'un des déterminants
+$\det(u_\xi)$ pour $\xi \in M^k$, d'où un ouvert. Le lieu cherché est donc
+localement fermé, et la condition est ponctuelle, compatible aux extensions du
+corps résiduel.
+
+\emph{Finitude} (pages 47 et 48). Si $g : X \to Y$ est de type fini et $S$
+localement noethérien, $\mathrm{Res}_{T/S}(g)$ est de type fini (sous la
+condition d'existence). On se ramène à $Y = T$ et l'on recouvre $X$ par un
+nombre fini d'ouverts affines $U_i$ tels que les $U_i^{\nu} = U_i \times_S \cdots
+\times_S U_i$ recouvrent ceux des $U^{\nu}$ — c'est possible parce que $X^{\nu}$
+est un espace noethérien —, puis au cas affine, et enfin, par la proposition de
+la page 37, au cas d'un fibré vectoriel\footnote{La page écrit, pour ce
+dernier cas, « $X = \mathrm{Spec}(\underline{F})$ \ldots{} $f_{*}(X/T) =
+\mathrm{Spec}(f_{*}(\underline{F}))$ » ; on lit la formule de la page 37, seule
+correcte à cette place.}.
+
+\textbf{Remarque} (page 48). \emph{La dimension des fibres de
+$\mathrm{Res}_{T/S}(X)$ n'est pas bornée par $n$ fois celle des fibres de $X/T$.}
+Exemple : $S = \mathrm{Spec}\,k$, $T$ radiciel sur $S$, $X = T \times_S T$ (de
+dimension relative nulle) ; alors $\mathrm{Res}_{T/S}(X) = \underline{\mathrm{Hom}}_k(T,
+T)$, qui peut être de dimension $> 0$. Ainsi pour $T = \mathrm{Spec}\,k[x]/(x^2)$
+en caractéristique $\neq 2$, les endomorphismes $x \mapsto a + bx$ avec $a^2 =
+0$ forment, sur les points, une droite.
+
+\subsection*{Lissité, étalitude, dimension (pages 49 à 53)}
+
+\textbf{Proposition} (page 49). \emph{Soit $g : X \to Y$ un morphisme de type
+fini de $T$-schémas dont les restrictions de Weil existent, $S$ et $T$
+localement noethériens. (i) Si $g$ est lisse, $\mathrm{Res}_{T/S}(g)$ l'est.
+(ii) Si $g$ est étale, $\mathrm{Res}_{T/S}(g)$ l'est.}
+
+(i) est le critère infinitésimal : un problème de relèvement le long d'une
+immersion fermée nilpotente $S'_1 \to S'$ devient, après $\times_S T$, un
+problème de relèvement le long de $T'_1 \to T'$, que la lissité de $g$ résout
+localement, $T'$ étant affine sur $S'$ affine. Pour (ii), le même raisonnement
+donne la non-ramification ; reste la platitude, qu'on obtient en remarquant
+qu'un relèvement existe point par point, $T'$ étant, au-dessus d'un corps
+algébriquement clos, un nombre fini de schémas nilpotents
+connexes\footnote{Lecture mince : la démonstration de (ii), page 50, est
+incertaine mot à mot, et on n'en retient que l'argument d'ensemble.}.
+
+\textbf{Dimension.} Si $g$ est lisse de dimension relative $d$ et $T/S$ de
+degré $n$ constant, $\mathrm{Res}_{T/S}(g)$ est lisse de dimension relative $nd$.
+Plus finement (corollaire 2, page 51), pour $s \in S$ notons $D(s)$
+l'ensemble des dimensions des composantes des fibres de $X_s \to Y_s$, et
+$D'(s)$ l'analogue pour $\mathrm{Res}_{T/S}(g)_s$ ; si $T_s$ est local, $D'(s) =
+n D(s)$\footnote{La page écrit $D(s) = n\,D'(s)$, puis conclut « dimension $d$
+pour $g$, dimension $nd$ pour $f_{*}(g)$ », ce qui demande $D'(s) = n\,D(s)$.
+La démonstration (page 52) se ramène justement au cas où $T_s$ est local :
+$\mathrm{Res}$ d'une somme est le produit des $\mathrm{Res}$. Dans le cas général
+l'égalité d'ensembles est fausse : si $T_s$ a deux points rationnels et que
+les fibres de $g$ ont des composantes de dimension $1$ et $2$, celles de
+$\mathrm{Res}(g)_s$, produits de fibres, ont aussi la dimension $3$.}. Une
+première version, encadrée puis barrée (page 51), bornait la dimension par le
+produit de $n$ et d'un « maximum des rangs des anneaux locaux artiniens des
+$T_s$ » ; c'est le degré $[T_s : k(s)]$ qui convient\footnote{Corollaire 1 de
+la page 50, lecture incertaine (« rgs », « anneaux locaux artiniens »).}.
+
+\textbf{Corollaire 1 bis} (page 53). \emph{Si $g : X \to Y$ est fini étale de
+degré $\lambda$, $\mathrm{Res}_{T/S}(g)_s$ est fini étale de degré
+$\lambda^{\nu_s}$, où $\nu_s$ est le nombre de points géométriques de $T_s$ (son
+degré séparable).} Une section au-dessus de $T_{\bar s}$ se choisit en effet
+indépendamment en chacun des $\nu_s$ points, et se prolonge de façon unique aux
+épaississements nilpotents.
+
+\textbf{Corollaire 3} (page 53). \emph{Conditions équivalentes : (i) $\nu(s)$ est
+localement constant ; (ii) $\mathrm{Res}_{T/S}$ transforme revêtements finis
+étales en revêtements finis étales ; (iii) $\mathrm{Res}_{T/S}(T')$ est fini étale
+pour tout $T'$ fini étale sur $T$ ; (iv) $\mathrm{Res}_{T/S}(T \sqcup T)$ est fini
+étale sur $S$.} Une marge relie (i) $\Rightarrow$ (ii) $\Rightarrow$ (iii)
+$\Rightarrow$ (iv) $\Rightarrow$ (i).
+
+\textbf{Corollaire 4} (page 54). \emph{Si $g$ est lisse et surjectif,
+$\mathrm{Res}_{T/S}(g)$ est surjectif.}
+
+\subsection*{Torseurs, et les composantes connexes relatives (pages 54 à 58)}
+
+La restriction de Weil transforme torseurs en torseurs : un revêtement
+principal de groupe fini $G$ de $Y$ devient un torseur sur
+$\mathrm{Res}_{T/S}(Y)$ sous le groupe $\mathrm{Res}_{T/S}(G_T)$\footnote{Pages 54 et
+55, lecture mince : la proposition générale est en grande partie incertaine,
+et une marge conseille de prendre « plutôt la notion de fibré principal
+homogène ».}. D'où la question de déterminer, pour un ensemble fini $I$, le
+schéma étale $\mathrm{Res}_{T/S}(T \times I)$.
+
+La réponse occupe les pages 55 à 58. Supposons $\nu(s)$ localement constant,
+comme au corollaire 3\footnote{La page ne le suppose pas à cet endroit ; sans
+cette condition $\mathrm{Res}_{T/S}(T \times I)$ est étale mais pas fini, et le
+revêtement $A(T)$ ci-dessous n'existe pas. La page dit aussi supposer $S$
+connexe, « ce qu'on devrait pas être nécessaire ».}. Le foncteur $I \mapsto
+\mathrm{Res}_{T/S}(T \times I)$, des revêtements finis étales de $S$ dans
+eux-mêmes, est exact à gauche ; au-dessus d'un point géométrique $a$ de $S$
+connexe, c'est un foncteur exact à gauche sur les $\pi_1(S,a)$-ensembles finis,
+donc de la forme $E \mapsto \mathrm{Hom}_{\pi_1}(A, E)$ pour un $\pi_1$-ensemble
+fini $A = A(T)$. Le revêtement étale correspondant, qu'il note
+$f^{\mathrm{\acute{e}t}}_{*}(T)$, est caractérisé par
+\[
+  \mathrm{Hom}_S\bigl(f^{\mathrm{\acute{e}t}}_{*}(T), S'\bigr) \simeq \mathrm{Hom}_S(T, S')
+\]
+pour tout revêtement fini étale $S'$ de $S$ ; d'où, pour $S' =
+f^{\mathrm{\acute{e}t}}_{*}(T)$, un morphisme canonique $T \to
+f^{\mathrm{\acute{e}t}}_{*}(T)$, surjectif et à fibres géométriques connexes. Une
+réciproque : un morphisme surjectif à fibres géométriques connexes de $T$ sur
+un revêtement fini étale $\overline{T}$ identifie $\overline{T}$ à
+$f^{\mathrm{\acute{e}t}}_{*}(T)$\footnote{La page 58 énonce la réciproque pour un
+morphisme « surjectif et fini injectif », lecture incertaine, et sa dernière
+ligne n'est pas déchiffrée. On donne la réciproque juste.}.
+
+C'est le schéma des composantes connexes relatives $\pi_0(T/S)$, et la
+variance demande un mot. Le nom est celui d'une image directe, mais
+$f^{\mathrm{\acute{e}t}}_{*}$ est un adjoint \emph{à gauche} — de l'inclusion des
+revêtements finis étales dans les $S$-schémas —, alors que la restriction de
+Weil est un adjoint à droite. Les deux se rejoignent par la formule même qui
+le définit : $\mathrm{Res}_{T/S}(T \times I)$ est le schéma des applications de
+$\pi_0(T/S)$ dans $I$\footnote{Le nom $\pi_0(T/S)$ et la référence (EGA IV 6.8
+pour les cas finis ; D.~Romagny, « Composantes connexes et irréductibles en
+familles », 2011, cité de mémoire) sont les nôtres.}.
+
+\pagerange{60}{79}
+\section*{VII. Un foncteur de nature locale et son adjoint : Weil et Greenberg (pages 60 à 79)}
+
+\subsection*{Le cadre, et les exemples (pages 60 à 66)}
+
+La page 60 ouvre une nouvelle rédaction, « (1) Set up optimal »\footnote{Le
+titre est souligné et sa lecture très incertaine.}. Soit $\mathbb{W}$ un
+foncteur covariant des $S$-schémas dans des schémas, \emph{de nature locale} :
+il transforme immersions ouvertes en immersions ouvertes, et commute aux
+réunions et aux intersections d'ouverts. Exemples :
+
+\begin{itemize}
+  \item[I.] Le changement de base $\mathbb{W}_{S'}(T) = T \times_S S'$, pour un
+  $S$-schéma $S'$ ; I$'$ : $S'$ fini localement libre sur $S$.
+  \item[II.] Un schéma en anneaux commutatifs $\Lambda$ sur $S$ tel que, pour
+  tout $T$, le faisceau d'anneaux $\Gamma(\Lambda_T/T)$ sur l'espace $|T|$ fasse de
+  $|T|$ un schéma $\mathbb{W}(T)$ : $|\mathbb{W}(T)| = |T|$, et les anneaux
+  locaux sont « tordus » par $\Lambda$. C'est le cas des vecteurs de Witt
+  tronqués, et ce sont les foncteurs de Greenberg ; II$'$ : $\mathbb{W}(T) \to
+  T$ surjectif à noyau nilpotent sur les faisceaux d'anneaux.
+  \item[III.] $S' = \mathrm{Spec}\,\mathcal{A}$, $\mathcal{A}$ localement libre,
+  $S' \to S$ homéomorphisme universel, et $\Lambda = \mathbf{V}(\check{\mathcal{A}})$
+  — à la fois I et II.
+\end{itemize}
+
+Pour $\mathfrak{X}$ un schéma sur $\mathbb{W}(S)$, on considère le foncteur sur
+les $S$-schémas $T \mapsto \mathrm{Hom}_{\mathbb{W}(S)}(\mathbb{W}(T),
+\mathfrak{X})$, et l'on note $\mathbb{W}^{a}(\mathfrak{X})$ le schéma qui le
+représente quand il existe :
+\[
+  \mathrm{Hom}_S\bigl(T, \mathbb{W}^{a}(\mathfrak{X})\bigr) \simeq
+  \mathrm{Hom}_{\mathbb{W}(S)}\bigl(\mathbb{W}(T), \mathfrak{X}\bigr).
+\]
+$\mathbb{W}^{a}$ est donc un adjoint \emph{à droite} de $\mathbb{W}$, défini sur
+la sous-catégorie des $\mathfrak{X}$ pour lesquels il existe\footnote{La page
+dit « foncteur adjoint (au sens de Kan) » sans préciser le côté ; la formule
+le fixe. Celle qui clôt la page 62, $\mathrm{Hom}_{S^{a}}(T^{a}, \mathfrak{X})
+\simeq \mathrm{Hom}_S(T, \mathfrak{X})$, est coupée au bord et ses exposants
+sont incertains ; on ne la retient pas.}. Dans l'exemple I c'est la
+restriction de Weil $\mathrm{Res}_{S'/S}$, dans l'exemple II le foncteur de
+Greenberg\footnote{M.~J.~Greenberg, « Schemata over local rings », \emph{Ann.
+of Math.} 73 (1961), cité de mémoire. Le dossier 23 (pages 19 à 22) rencontre
+la même construction, le long d'un épaississement infinitésimal, sous la
+notation $X^{\{\Lambda\}}$ ; le dossier 43 (pages 111 à 113) l'emploie pour
+présenter les schémas en groupes finis comme noyaux d'isogénies.}.
+
+Propriétés (pages 63 à 66) : $\mathbb{W}^{a}$ commute aux limites projectives
+finies, donc transforme schémas en groupes, en anneaux, en schémas du même
+type ; il commute au changement de base, $\mathbb{W}^{a}(\mathfrak{X}) \times_S T
+= \mathbb{W}^{a}_T(\mathfrak{X} \times_{\mathbb{W}(S)} \mathbb{W}(T))$. Si
+$\mathbb{W}^{a}(\mathbf{A}^1_{\mathbb{W}(S)})$ existe, c'est un schéma en anneaux
+sur $S$ qui \emph{engendre} $\mathbb{W}$ : c'est $\Lambda$ dans l'exemple II, et
+$\mathbf{V}(\check{\mathcal{A}})$ dans l'exemple I$'$. Alors, pour $\mathfrak{X}$
+fermé dans $\mathbf{A}^r_{\mathbb{W}(S)}$ défini par $F_1, \ldots, F_s$, les $F_j$
+ont des coefficients dans $\Gamma(\Lambda/S)$, définissent $\Lambda^r \to
+\Lambda^s$, et $\mathbb{W}^{a}(\mathfrak{X})$ est l'image inverse de la section
+nulle. Exemples donnés (page 65) : $\mathbb{W}^{a}$ de $\mathbf{G}_a^n$, de
+$\mathrm{GL}_n$ sur $\mathbb{W}(S)$. Enfin un morphisme $\mathbb{W}' \to \mathbb{W}$ de tels foncteurs induit
+$\mathbb{W}^{a}(\mathfrak{X}) \to \mathbb{W}'^{a}(\mathfrak{X} \times_{\mathbb{W}(S)}
+\mathbb{W}'(S))$, et l'expression de droite est un bifoncteur covariant en
+$\mathfrak{X}$, contravariant en $\mathbb{W}'$ — la variance est bien celle de
+la page.
+
+\subsection*{Le cas affine (pages 66 à 68)}
+
+Supposons que $\mathbb{W}$ transforme schémas affines en schémas affines ; sur
+un ouvert affine $\mathrm{Spec}\,A$ de $S$, il est alors donné par $\mathbb{W}(B)
+= \mathrm{Hom}_{A\text{-alg}}(\Lambda, B)$, $\Lambda$ l'anneau d'un schéma en
+anneaux affine sur $S$ (cas I$'$, et cas II quand $\Lambda$ est affine).
+
+\textbf{Proposition.} \emph{Si $\mathfrak{X}$ est affine sur $\mathbb{W}(S)$,
+$\mathbb{W}^{a}(\mathfrak{X})$ existe et est affine sur $S$. Si l'anneau de
+$\mathfrak{X}$ est engendré par $r$ éléments et celui de $\Lambda$ par $s$
+éléments, celui de $\mathbb{W}^{a}(\mathfrak{X})$ l'est par $rs$
+éléments.}\footnote{L'énoncé du corollaire (pages 67 et 68) est en partie
+illisible ; on reconstruit la seule lecture compatible avec la démonstration,
+qui plonge $\mathbb{W}^{a}(\mathfrak{X})$ dans $\Lambda^r$.}
+
+Pour $\mathfrak{X} = \mathrm{Spec}\,\mathcal{C}$ quelconque, on écrit $\mathcal{C} =
+\varinjlim \mathcal{C}_i$ (sous-algèbres de type fini) et l'on trouve
+$\mathbb{W}^{a}(\mathfrak{X}) = \mathrm{Spec}\,\mathcal{D}$, avec $\mathcal{D} =
+\varinjlim \mathcal{D}_i$, $\mathcal{D}_i$ l'anneau de
+$\mathbb{W}^{a}(\mathrm{Spec}\,\mathcal{C}_i)$.
+
+\subsection*{Recollement (pages 69 à 76)}
+
+Sans hypothèse sur $\mathbb{W}$, deux conditions sur un recouvrement ouvert
+$\mathfrak{X} = \bigcup \mathfrak{X}_i$ :
+\begin{itemize}
+  \item[($\alpha$)] (lemme 1) si $\mathbb{W}^{a}(\mathfrak{X}) = X$ existe et
+  $\mathfrak{U} \subset \mathfrak{X}$ est ouvert, d'image inverse $\mathfrak{U}'$
+  dans $\mathbb{W}(X)$, il existe un ouvert $U$ de $X$ tel qu'un morphisme
+  $\mathbb{W}(T) \to \mathbb{W}(X)$ se factorise par $\mathfrak{U}'$ si et
+  seulement s'il se factorise par $\mathbb{W}(U)$ ; alors $U =
+  \mathbb{W}^{a}(\mathfrak{U})$\footnote{La page écrit « est un
+  $\mathbb{W}(\mathfrak{U}')$ » ; on attend $\mathbb{W}^{a}(\mathfrak{U})$, et c'est
+  ce que la suite emploie.} ;
+  \item[($\beta$)] (lemme 2) pour tout $\mathbb{W}(T) \to \mathfrak{X}$, il existe
+  un recouvrement ouvert $T = \bigcup T_i$ avec $\mathbb{W}(T_i)$ envoyé dans
+  $\mathfrak{X}_i$.
+\end{itemize}
+Sous ($\beta$), et si les $\mathbb{W}^{a}(\mathfrak{X}_i)$ existent avec leurs
+intersections ouvertes, $\mathbb{W}^{a}(\mathfrak{X})$ existe et est leur
+recollement ; la démonstration (pages 70 à 73) vérifie la condition de cocycle
+et l'universalité, par raffinement de deux recouvrements\footnote{Page 72, la
+factorisation finit sur la page en « $X_i$ » ; on lit $\mathfrak{X}_i$.}. La
+condition ($\beta$) est automatique si $|\mathbb{W}(T)| \simeq |T|$ (cas II$'$
+et III, lemme 3) ; ($\alpha$) l'est dans les cas I$'$ et « Greenberg
+spécial » (lemme 4 ; pour I$'$, parce qu'un morphisme fini est fermé). Un corollaire
+(page 74) note que les conditions sont encore satisfaites dans le cas I quand
+$S'$ est propre sur $S$ et $\mathbb{W}^{a}(\mathfrak{X})$ localement noethérien ;
+une ligne suivante, « Mauvaises \ldots{} I$'$ », est presque illisible.
+
+\textbf{Théorème 1} (page 74). \emph{Pour un foncteur de Greenberg spécial, ou
+pour le changement de base le long de $S' \to S$ fini, localement libre et
+radiciel, $\mathbb{W}^{a}(\mathfrak{X})$ existe pour tout $\mathfrak{X}$ sur
+$\mathbb{W}(S)$, et $\mathbb{W}^{a}$ est de nature locale.}
+
+C'est exact : dans ces deux cas $|\mathbb{W}(T)| = |T|$, et une section au-dessus
+d'un point a son image en un seul point, donc dans un ouvert
+affine\footnote{« Greenberg spécial » n'est pas défini sur les pages ; c'est
+vraisemblablement le cas II avec $\Lambda$ affine, celui du lemme 4.}.
+
+\textbf{Théorème 1 bis} (pages 74 et 75). \emph{Dans le cas I$'$ : (i) si
+$\mathrm{Res}_{S'/S}(\mathfrak{X})$ existe, $\mathrm{Res}_{S'/S}(\mathfrak{U})$ existe
+pour tout ouvert $\mathfrak{U}$ et en est un ouvert ; (ii) si $\mathfrak{X} =
+\bigcup \mathfrak{X}_i$ et que, pour tout $s$, toute section de $\mathfrak{X}_s$
+sur $S'_s$ définie sur une extension de $k(s)$ tombe dans un $\mathfrak{X}_i$,
+l'existence des $\mathrm{Res}_{S'/S}(\mathfrak{X}_i)$ entraîne celle de
+$\mathrm{Res}_{S'/S}(\mathfrak{X})$, réunion des
+précédents.}\footnote{L'énoncé (ii) porte deux mots illisibles à la place de
+« section » ; on reprend la formulation de la proposition 2 bis de la page
+39, que la démonstration de la page 75 suit.} Ce sont, dans le nouveau
+cadre, la proposition 2 bis et le théorème des pages 39 à 41 ; les
+corollaires (pages 75 et 76) redonnent l'existence quand toute partie finie
+des fibres est dans un ouvert affine, et la finitude par le même argument
+noethérien sur $\mathfrak{X} \times_S \cdots \times_S \mathfrak{X}$.
+
+\subsection*{Immersions, morphismes de type fini, affines (pages 77 à 79)}
+
+Pour $\mathbb{W}$ de type I$'$ ou Greenberg spécial : $\mathbb{W}^{a}$ transforme
+immersions fermées en immersions fermées (dans le cas I$'$, sous la condition
+d'existence pour le but), immersions en immersions si le but est
+quasi-projectif, morphismes séparés en morphismes séparés (appliquer ce qui
+précède à la diagonale), morphismes de type fini en morphismes de type fini,
+et morphismes affines en morphismes affines\footnote{La dernière proposition,
+page 79, n'a que son énoncé : « Comme dessus, pour un morphisme
+\emph{affine} ». Page 77, le « $S^{*}$ » de « quasi-projectif sur $S^{*}$ » est
+sur la page, sans explication.}.
+
+\pagerange{80}{121}
+\section*{VIII. « Schémas localement compacts » (pages 80 à 121)}
+
+La couverture de la page 80 porte ce titre, sous un premier titre biffé
+(« Notions d'espaces \ldots{} »). Le mot « compact » y a le sens de Bourbaki,
+séparé compris, et l'objet est le suivant : regarder un schéma à travers ses
+parties constructibles seulement, c'est-à-dire en oubliant tout ce que les
+morphismes ont de « continu » pour ne garder que ce qu'ils ont de « par
+morceaux ».
+
+\subsection*{Applications constructibles et ensembles schématiques (pages 81 à 100)}
+
+Les pages paires portent les notes, les impaires sont des versos sans
+rapport, et la main est rapide : on en donne les définitions et les énoncés,
+la prose qui les relie étant souvent incertaine.
+
+\emph{Constructibilité locale} (pages 81 et 83). Une partie $Z$ est constructible
+si et seulement si elle est quasi-compacte et localement constructible ; une
+partie localement fermée $Z$ d'un schéma quasi-compact et quasi-séparé est
+constructible si et seulement si elle est quasi-compacte et localement définie,
+dans un ouvert affine, par un nombre fini d'équations\footnote{Page 83 commence
+une liste d'équivalences, pour $T$ fermé irréductible, entre l'existence d'une
+partie constructible dense dans $T$ et une condition (ii) que le bas de la
+feuille, déchiré, interrompt.}.
+
+\emph{Schémas atomiques} (page 86). Un schéma \emph{atomique} est une somme de
+spectres de corps ; ils forment une sous-catégorie pleine, qui se plonge
+pleinement fidèlement dans les foncteurs covariants des corps vers les
+ensembles (par $\coprod_x \mathrm{Spec}\,k(x) \mapsto \coprod_x \mathrm{Hom}(k(x),
+-)$, et le lemme de Yoneda). Tout schéma $X$ définit le schéma atomique $|X| =
+\coprod_{x \in X} \mathrm{Spec}\,k(x)$, et $X \mapsto |X|$ est fidèle sur les
+schémas réduits.
+
+\textbf{Définition.} \emph{Une application constructible $f : X \to Y$ est un
+morphisme $|X| \to |Y|$ tel que tout ouvert affine $U$ de $X$ admette une
+partition finie en parties localement fermées constructibles $U_i$, sur
+chacune desquelles $f$ provient d'un morphisme $(U_i)_{\mathrm{r\acute ed}} \to Y$.
+Un ensemble schématique est un schéma quasi-compact et quasi-séparé, vu comme
+objet de la catégorie dont les morphismes sont les applications
+constructibles.}\footnote{Le mot est lu « schématique » sur les tuiles à
+700 dpi ; le premier passage lisait « élémentaire ». Il revient jusqu'à la
+page 100. Le nom n'a pas d'équivalent courant : ces objets sont ce que la
+théorie des modèles appelle des ensembles définissables, et c'est aussi le
+cadre de l'anneau de Grothendieck des variétés, où deux variétés découpables
+en morceaux isomorphes sont identifiées. Le rapprochement est le nôtre.}
+
+Il les étudie (pages 88 à 94). Un lemme, cerné en marge : sur un schéma
+quasi-compact quasi-séparé, tout recouvrement fini par des parties
+constructibles est raffiné par une partition finie en parties localement
+fermées constructibles affines. Puis : pour $X$ quasi-compact quasi-séparé, $f$ est
+constructible si et seulement s'il existe une partition finie de $X$ en
+parties localement fermées constructibles affines sur lesquelles $f$ est
+morphique ; l'image inverse d'une partie constructible par une application
+constructible est constructible, de sorte que la notion de partie
+constructible est invariante par isomorphisme d'ensembles schématiques ; $f$ est un isomorphisme d'ensembles
+schématiques si et seulement s'il existe des partitions finies $(X_i)$,
+$(Y_i)$ en parties localement fermées constructibles avec $f$ induisant des
+isomorphismes $X_{i,\mathrm{r\acute ed}} \simeq Y_{i,\mathrm{r\acute ed}}$. D'où :
+\begin{itemize}
+  \item tout ensemble schématique est isomorphe à un $|X|$ avec $X$ affine
+  (somme finie des morceaux) ;
+  \item si $X$ est noethérien, l'espace sous-jacent de $Y$ l'est\footnote{La
+  page dit « Cor.~0. Si $X$ noethérien, $Y$ l'est ». C'est vrai de l'espace
+  sous-jacent, réunion finie de morceaux noethériens, non du schéma $Y$, qui
+  peut porter des nilpotents non noethériens que les applications
+  constructibles ne voient pas.} ;
+  \item tout morphisme d'ensembles schématiques est isomorphe à un morphisme de
+  schémas, vu comme application constructible\footnote{Corollaire 2 de la
+  page 92. Un corollaire 3, en marge, est perdu dans des trous du papier ;
+  la même marge parle d'« ens.\ schématique noethérien ».} ;
+  \item les morphismes de type fini, les produits fibrés et les limites
+  projectives finies existent dans la catégorie, et le foncteur des schémas
+  quasi-compacts quasi-séparés vers elle commute aux produits fibrés.
+\end{itemize}
+
+Les pages 96 et 98 posent une question : pour un système projectif à
+transitions affines, a-t-on $\mathrm{Cons}(\varprojlim X_i) \simeq \varprojlim
+\mathrm{Cons}(X_i)$ ? Les formules écrites interchangent une limite inductive
+sur les partitions finies et une limite projective sur $i$, et la page ne
+conclut pas (« ??? »). Elle avance ensuite que les ensembles
+« quasi-schématiques » de type fini sur un noethérien forment une « catégorie
+géométrique (?) », et la page 100 en dresse la liste d'axiomes : limites
+projectives finies, quotients par les groupoïdes d'équivalence, épimorphismes
+effectifs et universels, et leurs duaux ; puis l'« axiome géométrique » $X
+\times \coprod_i Y_i \simeq \coprod_i X \times Y_i$. La liste rappelle les axiomes
+de Giraud des topos (SGA 4, 1963--1964), transposés à une catégorie
+d'espaces ; la page s'arrête sur « $R \to S$ »\footnote{Le rapprochement avec
+les axiomes de Giraud est le nôtre. En tête de la liste : « Tout épimorphisme
+est un morphisme de descente », avec « application surjective » biffé et
+remplacé par « morphisme fid.\ plat ».}.
+
+\subsection*{La topologie constructible (pages 103 à 110)}
+
+\textbf{Définition 1.} \emph{La topologie constructible d'un espace $X$ est celle
+dont les ouverts sont les réunions de parties localement constructibles ; on
+note $X^{\mathrm{cons}}$ l'espace ainsi topologisé. Une partie pro-constructible
+est un fermé de $X^{\mathrm{cons}}$, c'est-à-dire une intersection de parties
+localement constructibles.}\footnote{La page dit « partie analytique ». Le
+nom d'aujourd'hui, « pro-constructible », est celui d'EGA IV 1.9 (1964), où
+la topologie constructible est aussi introduite (1.9.13). On ne sait pas
+d'après le dossier lequel précède l'autre.}
+
+\textbf{Proposition 1.} \emph{Si $X$ a une base d'ouverts rétrocompacts :
+(0) les parties constructibles forment une base de $X^{\mathrm{cons}}$ ; (i)
+$X^{\mathrm{cons}} \to X$ est continue ; (ii) $X^{\mathrm{cons}}$ est séparé (et
+totalement discontinu) si et seulement si $X$ est $T_0$ ; (iii) sur une
+partie constructible $E$, la topologie constructible de $E$ est induite par
+celle de $X$.}
+
+Un lemme (pages 104 et 105) établit la transitivité : pour $E$ localement
+constructible, une partie de $E$ est (localement) constructible dans $E$ si et
+seulement si elle l'est dans $X$ (EGA $0_{\mathrm{III}}$ 9.1.8 et 9.1.13,
+auxquels la page renvoie).
+
+\textbf{Corollaires} (pages 105 à 107). \emph{Si de plus les ouverts de base
+sont quasi-compacts pour la topologie constructible et $X$ est $T_0$ :
+$X^{\mathrm{cons}}$ est localement compact, et compact si $X$ est quasi-compact ;
+une partie est fermée dans $X^{\mathrm{cons}}$ si et seulement si elle y est
+compacte ; $E$ est constructible si et seulement si $E$ et $X - E$ sont
+pro-constructibles, si et seulement si $E$ est ouvert et fermé dans
+$X^{\mathrm{cons}}$.}
+
+Une parenthèse de la page 108 rappelle le critère topologique dont tout
+cela dépend : si $X$ a une base d'ouverts quasi-compacts $U_i$, une application
+continue $f : X' \to X$ est quasi-compacte si et seulement si les
+$f^{-1}(U_i)$ le sont ; et les $U_i$ sont rétrocompacts si et seulement si tout
+ouvert quasi-compact l'est.
+
+\textbf{Proposition 2 et corollaires} (pages 107 à 109). \emph{Si $f : X \to Y$
+est continue et que l'image inverse d'un ouvert rétrocompact soit
+rétrocompacte, $f$ ramène les parties (localement) constructibles en parties
+(localement) constructibles, et $f^{\mathrm{cons}}$ est continue. Pour $X$, $Y$ de
+la classe précédente : $f$ est quasi-compacte si et seulement si
+$f^{\mathrm{cons}}$ est propre ; si $X$ et $Y$ sont quasi-compacts, $f$ envoie
+constructibles sur constructibles si et seulement si $f^{\mathrm{cons}}$ est
+ouverte, ce qui a lieu si $f$ est bijective ; $f(X)$ est pro-constructible ;
+une partie $E$ de $f(X)$ est pro-constructible si et seulement si $f^{-1}(E)$
+l'est, et si $f$ est surjective, $E$ est constructible si et seulement si
+$f^{-1}(E)$ l'est.}\footnote{Page 109, (iii) écrit « $f^{-1}(Y)$ » ; on lit
+$f^{-1}(E)$. Une marge renvoie à Bourbaki, \emph{Topologie générale}, I, § 10,
+pour les applications propres. Une note marginale page 107 juge l'hypothèse de
+la proposition 2 « trop restrictive pour un morphisme de préschémas ».}
+
+\textbf{Théorème} (page 110). \emph{Si $X$ est affine, $X^{\mathrm{cons}}$ est
+compact. Si $X$ est quasi-séparé, $X$ est $T_0$ et a une base d'ouverts
+rétrocompacts et compacts pour la topologie constructible, de sorte que
+$X^{\mathrm{cons}}$ est localement compact. Si $X$ est quasi-compact et
+quasi-séparé : $X^{\mathrm{cons}}$ est compact ; les parties constructibles sont
+les ouverts fermés de $X^{\mathrm{cons}}$ ; les parties pro-constructibles sont
+les images des morphismes quasi-compacts $X' \to X$, et l'on peut prendre
+$X' \to X$ un monomorphisme.}\footnote{La page écrit « [quasi-compact et
+quasi-séparé] quasi-noethérien » : un mot de plus que la parenthèse, sans
+définition ; nous gardons la parenthèse. Le point (iv) de la page, qui reprend
+le corollaire 3, est en partie illisible. Ces énoncés sont ceux d'EGA IV 1.9 ;
+la topologie constructible fait de $X$ ce qu'on appelle aujourd'hui un espace
+spectral muni de sa topologie « patch ».}
+
+Le dossier 23 (page 72) rencontre la même topologie par l'autre bout : il
+caractérise les schémas pour lesquels $X^{\mathrm{cons}} \to X$ est un
+homéomorphisme — les schémas de dimension zéro — et, parmi eux, ceux dont tout
+module est plat.
+
+\subsection*{Le foncteur $\mathrm{Cons}$ et l'anneau $A^{\mathrm{cons}}$ (pages 112 à 115)}
+
+La page 112 étend la notion d'application constructible aux couples $(X, E)$,
+$E$ partie localement constructible d'un schéma $X$, et introduit la catégorie
+$(\mathrm{Cons\,Aff})$ : objets les schémas affines (ou quasi-compacts
+quasi-séparés), morphismes les applications constructibles. À $(X,E)$ elle
+associe le préfaisceau $\mathrm{Cons}(X,E) : Y \mapsto \mathrm{App\,cons}(Y, (X,E))$
+sur $(\mathrm{Cons\,Aff})$, et la page 113 affirme que $(X,E) \mapsto
+\mathrm{Cons}(X,E)$ est pleinement fidèle, de même que les foncteurs
+$(\mathrm{Cons\,Aff}) \to (\text{couples}) \to \mathrm{Ind}(\mathrm{Cons\,Aff})' \to
+\underline{\mathrm{Hom}}((\mathrm{Cons\,Aff})^{\circ}, \mathrm{Ens})$\footnote{Le
+$\mathrm{Ind}(\ldots)'$ est glosé « systèmes inductifs injectifs\ldots ». La
+pleine fidélité du dernier est le lemme de Yoneda ; celle des autres est
+affirmée sans démonstration.}.
+
+\textbf{La construction de la page 114.} Soit $A$ un anneau, $X =
+\mathrm{Spec}\,A$. Pour une partition finie $\mathfrak{P} = (X_i)$ de $X$ en parties
+localement fermées constructibles affines, posons $A_{\mathfrak{P}} = \prod_i
+\Gamma(X_{i,\mathrm{r\acute ed}}, \mathcal{O})$, et
+\[
+  A^{\mathrm{cons}} = \varinjlim_{\mathfrak{P}} A_{\mathfrak{P}} .
+\]
+Les transitions sont injectives. $\mathrm{Spec}\,A_{\mathfrak{P}} = \coprod_i
+X_{i,\mathrm{r\acute ed}}$ est en bijection avec $X$, les transitions sont des
+bijections, et $\mathrm{Spec}\,A^{\mathrm{cons}} = \varprojlim
+\mathrm{Spec}\,A_{\mathfrak{P}}$ est donc en bijection avec $X$ ; la topologie
+limite est engendrée par les ouverts des morceaux, qui sont constructibles, et
+c'est la topologie constructible : $\mathrm{Spec}\,A^{\mathrm{cons}} \simeq
+X^{\mathrm{cons}}$\footnote{La page dit seulement que la bijection « est
+compatible avec les topologies \ldots{} comme on voit aisément sur la
+description d'une base d'ouverts » ; l'argument qu'on donne est celui-là. Si
+$A$ est noethérien, les anneaux locaux de $A^{\mathrm{cons}}$ sont les corps
+résiduels de $A$ — on peut prendre pour morceau contenant $x$ un ouvert de
+$\overline{\{x\}}$ —, donc $A^{\mathrm{cons}}$ est absolument plat : à
+rapprocher de l'anneau absolument plat universel d'Olivier (1968) et de la
+page 72 du dossier 23. Ce rapprochement est le nôtre.}. C'est la même limite
+sur les partitions constructibles finies que le dossier 43 (pages 91 à 97)
+emploie pour définir le foncteur qu'il appelle « de Néron ».
+
+La page 115, barrée entière, est un premier essai de la définition 1.
+
+\subsection*{Le plan de la suite, et les schémas compacts (pages 117 à 121)}
+
+La page 117 est un plan : N° 1 schémas compacts et localement compacts,
+anneaux flasques ; N° 2 proschémas flasques, espaces schématiques compacts ;
+N° 3 espaces schématiques ; N° 4 opérations, et limites projectives ; N° 5
+espaces quasi-schématiques ; N° 6 « Pb d'espaces. Espaces de Néron ». Il est
+suivi de deux diagrammes de catégories (pages 117 et 119) : schémas
+quasi-compacts quasi-séparés, pro-schémas « flasques », schémas compacts
+réduits, et leurs versions $\mathrm{Ind}$, avec des foncteurs $\gamma$, $\beta$ et
+des adjoints $\gamma'$, $\beta'$ pleinement fidèles, $\mathrm{Hom}(K, \gamma X)
+\simeq \mathrm{Hom}(\gamma' K, X)$, où $\gamma'$ est donc adjoint \emph{à gauche}
+de $\gamma$\footnote{Plusieurs étiquettes de ces diagrammes sont incertaines
+(« surjectif », « subjectif », « immersion ») et le départ de l'arc
+$\overline{\gamma}$ de la page 119 n'est pas sûr. On ne rapporte que les
+formules d'adjonction, qui sont lisibles.}. Ce que sont les « espaces de
+Néron » n'est dit nulle part.
+
+\textbf{Schémas compacts} (page 121). \emph{Soit $X$ un schéma compact, c'est-à-dire
+quasi-compact et séparé comme espace topologique. Alors (i) $X$ est totalement
+discontinu, tout point ayant un système fondamental de voisinages ouverts et
+fermés ; (ii) $X$ est affine ; (iii) ses parties constructibles sont ses parties
+ouvertes et fermées.} Pour (ii) : on recouvre $X$ par des ouverts affines
+$X_1, \ldots, X_n$, qui sont ouverts et fermés ; les $X'_i = X_i - \bigcup_{j<i}
+X_j$ sont ouverts et fermés dans des affines, donc affines, et $X$ est leur
+somme. Ces schémas sont ceux de dimension zéro à espace quasi-compact, dont le
+dossier 23 (page 72) donne d'autres caractérisations.
+
+\pagerange{123}{141}
+\section*{IX. « Greenberg -- Néron » (pages 123 à 141)}
+
+La page 123 ne porte que ce titre. Ce qui suit est la partie la plus
+fragmentaire du dossier : des définitions et des énoncés sans démonstration,
+puis des calculs.
+
+\subsection*{Points épais d'une limite projective (pages 125 et 127)}
+
+Soit $(X_i)$ un système projectif de schémas essentiellement affine (les
+transitions sont affines à partir d'un rang), de sorte que $X = \varprojlim X_i$
+existe et que son espace est la limite des espaces. Un point $x = (x_i)$ est
+\emph{épais} si
+\begin{quote}
+(Ep) il existe $i$ tel que pour tout $j \geq i$, $x_j$ soit un point maximal de
+la fibre $\varphi_{ij}^{-1}(x_i)$.
+\end{quote}
+Variantes : (Ep)$'$ il existe une partie ouverte non vide $U_i$ de
+$\overline{\{x_i\}}$ avec $\varphi_{ij}^{-1}(U_i) \subset \overline{\{x_j\}}$ pour
+$j \geq i$ ; (Ep)$''$ $\overline{\{x\}}$ est une partie constructible de $X$,
+c'est-à-dire l'image inverse de $\overline{\{x_i\}}$ pour $i$ grand ; (Ep)$'''$
+$\overline{\{x\}}$ contient une partie constructible ouverte non vide.
+L'encadré de la page 127 donne (Ep)$'$ $\Rightarrow$ (Ep), (Ep)$''$
+$\Rightarrow$ (Ep)$'$ sous une condition de Mittag-Leffler et un ensemble
+d'indices dénombrable, (Ep)$''$ $\Rightarrow$ (Ep)$'''$, et une réciproque
+(Ep)$'''$ $\Rightarrow$ (Ep)$'$ marquée « ??? »\footnote{La première
+implication est démontrée page 125 : $\varphi_{ij}^{-1}(U_i)$ est irréductible
+de point générique $x_j$. Les autres ne le sont pas ; la flèche de la
+deuxième porte « M.L.\ et $\Sigma = \mathbf{N}$ », celle de la troisième « 4 ». Le
+reste de la page 127 est fait de calculs épars sur des idéaux premiers, sans
+énoncé.}. L'idée est qu'un point épais est un point générique d'une partie
+« de dimension finie » d'un objet de dimension infinie, comme le sont les
+schémas de Greenberg d'un schéma sur un anneau de valuation discrète.
+
+\subsection*{Applications rationnelles entre schémas de Greenberg (pages 130 et 131)}
+
+Soit $V$ un anneau de valuation discrète de corps résiduel parfait $k$ et de
+corps des fractions $K$. Pour $X$ sur $V$, $\overline{X}$ est le schéma de
+Greenberg, avec $\overline{X}(k') = X(V_{k'})$ pour $k'$ algébrique sur $k$,
+$V_{k'}$ l'extension correspondante de $V$, de valuation discrète si $k'$ est
+parfait. Soit $\varphi : X_K \to Y_K$ un $K$-morphisme, $Y$ propre sur $V$. Il
+définit une \emph{application d'ensembles} $\bar\varphi : \overline{X} \to
+\overline{Y}$ : un point $\bar x$ donne, avec $k'$ la clôture parfaite de
+$k(\bar x)$, un point de $X(V_{k'}) \subset X(K_{k'})$ ; son image par $\varphi$
+est dans $Y(K_{k'}) = Y(V_{k'})$ (critère valuatif de propreté), c'est-à-dire
+dans $\overline{Y}(k')$, et l'on prend le point sous-jacent. On a $k(\bar\varphi(\bar
+x)) \to k(\bar x)^{\mathrm{parf}}$.
+
+\textbf{Proposition 1}, \emph{telle qu'elle est énoncée.} Pour $X$, $Y$ intègres
+de type fini, $\bar x$ épais et $\varphi$ dominante et génériquement séparable,
+$\bar y = \bar\varphi(\bar x)$ est épais, $k(\bar y) \subset k(\bar x)$, et
+$\bar\varphi$ provient, sur un voisinage constructible de $\bar x$, d'un morphisme
+« d'indice fini ». \emph{Corollaire} : l'ensemble des points épais de
+$\overline{X}$ est fonctoriel en $X_K$ pour les applications rationnelles
+dominantes génériquement séparables entre $K$-schémas propres.
+\textbf{Proposition 2} : si $X_K$ est lisse et $S$ une partie constructible de
+$\overline{X}$, $\bar\varphi(S)$ est constructible, et $S$ admet une partition
+finie sur les morceaux de laquelle $\bar\varphi$ est morphique d'indice fini ;
+d'où la fonctorialité de l'ensemble $\mathrm{Cons}(\overline{X})$ des parties
+constructibles.
+
+Les démonstrations ne sont pas sur les pages, et « d'indice fini » n'est pas
+défini — sans doute : défini à un niveau fini de troncation de
+Greenberg\footnote{Lecture mince : dans la proposition 1, « dominant
+génér.t » et ses corrections interlinéaires (lues « excité », « en
+$\bar x$ ») sont incertaines. Une marge propose, quand $Y$ n'est pas propre,
+une « application non partout définie ».}. C'est ici que les applications
+constructibles des pages 81 à 115 trouvent leur emploi : $\bar\varphi$ n'est
+pas un morphisme, mais il l'est par morceaux. Le dossier 43 (pages 91 à 97)
+construit de même, sur un trait, un foncteur « dit de Néron » par limite sur
+les partitions constructibles\footnote{Le mémoire de Néron, « Modèles minimaux
+des variétés abéliennes sur les corps locaux et globaux », \emph{Publ. Math.
+IHÉS} 21 (1964), construit les modèles en travaillant sur les points à valeurs
+dans les extensions non ramifiées par le foncteur de Greenberg ; nous ne
+savons pas si le mot « épais » y figure, et ne l'affirmons pas.}.
+
+\subsection*{L'ind-schéma $A \mapsto A((t))^{*}$ (pages 133 et 134)}
+
+Le foncteur $\Gamma : A \mapsto A((t))^{*}$ des unités des séries de Laurent est
+ind-représentable par $\mathcal{G} = \varinjlim_n \mathcal{G}_n$, où
+$\mathcal{G}_n$ représente les couples de séries $\sum a_i t^i$, $\sum b_j t^j$
+inverses l'une de l'autre avec $a_i = b_i = 0$ pour $i < -n$ : un sous-schéma
+fermé de $\mathrm{Spec}\,\mathbf{Z}[(a_i, b_i)_{i \geq -n}]$. Pour $n = 0$,
+$\mathcal{G}_0 = \mathbf{G}_m \times \mathrm{Spec}\,\mathbf{Z}[(a_i)_{i \geq 1}]$
+représente $A[[t]]^{*}$. On a $\varphi_n : [-n, n] \times \mathcal{G}_0 \to
+\mathcal{G}_n$, $(\nu, u) \mapsto t^{\nu}u$.
+
+\textbf{Théorème} (page 134). \emph{(i) $\varphi_n$ est une immersion fermée
+surjective. (ii) Sa restriction à $\{\nu\} \times \mathcal{G}_0$ est une
+immersion ouverte pour $\nu = \pm n$, et ne l'est pas pour $|\nu| < n$, après
+aucun changement de base non vide. (iii) $\mathcal{G}_n$ est la somme disjointe
+d'ouverts fermés $\mathcal{G}_n^{\nu}$ de même espace que les images, et
+$\mathcal{G}_n^{\nu} \to \mathcal{G}_{n'}^{\nu}$ n'est jamais un isomorphisme.}
+
+(i) se vérifie : l'image de la composante $\nu$ est le fermé $a_i = 0$ ($i <
+\nu$), $b_i = 0$ ($i < -\nu$), sur lequel $a_\nu b_{-\nu} = 1$, et ces fermés sont
+disjoints ; elle est surjective parce qu'une unité de $k((t))$, $k$ un corps,
+est un $t^{\nu}$ fois une unité de $k[[t]]$. Pour $\nu = n$, l'image est l'ouvert
+où $b_{-n}$ est inversible (les coefficients de $t^{-2n}, t^{-2n+1}, \ldots$
+dans le produit tuent alors les $a_i$, $i < n$) ; de même pour $\nu = -n$. Pour
+$|\nu| < n$, les éléments $1 + \varepsilon t^{-1}$, $\varepsilon^2 = 0$, montrent
+que l'image n'est pas ouverte. Le théorème dit, en termes d'aujourd'hui, que le
+groupe des lacets de $\mathbf{G}_m$ a pour réduit $\mathbf{Z} \times
+L^{+}\mathbf{G}_m$, et que la structure non réduite est portée par les
+« queues » nilpotentes\footnote{C'est la description du groupe des lacets de
+$\mathbf{G}_m$ qu'on trouve chez Contou-Carrère (\emph{C. R. Acad. Sci.} 1994) et
+chez Beilinson--Drinfeld ; références citées de mémoire, rapprochement nôtre.
+Une marge dit « $\varinjlim$ par abus de langage » : $\mathcal{G}$ n'est pas un
+schéma.}.
+
+\subsection*{Pro-schémas (page 135)}
+
+Soit $\mathrm{Pro}''(\mathrm{Sch}/S)$ la catégorie des pro-schémas $(X_i)$ à
+transitions affines à partir d'un rang, avec $X_i$ quasi-compact et de
+présentation finie sur $S$ pour $i$ grand. Pour $\mathfrak{X}$ dans
+$\mathrm{Pro}''$ et $\mathcal{Y} = (Y_j)$ à transitions affines, $Y_j$
+quasi-compacts et quasi-séparés,
+\[
+  \mathrm{Hom}_{\mathrm{Pro}(\mathrm{Sch}/S)}(\mathcal{Y}, \mathfrak{X})
+  \xrightarrow{\ \sim\ } \mathrm{Hom}_S\bigl(\varprojlim \mathcal{Y}, \varprojlim
+  \mathfrak{X}\bigr) :
+\]
+le passage à la limite est pleinement fidèle sur $\mathrm{Pro}''$ (EGA IV
+8.13.1)\footnote{La page ne demande aux $Y_j$ que d'être quasi-compacts ;
+« quasi-séparés » est nécessaire à EGA IV 8.13.1 et on l'ajoute.}.
+
+\emph{Remarque} : « Dans Serre et Néron, on utilise des systèmes projectifs de
+schémas (de Greenberg) qui sont dans $\mathrm{Pro}''$. Il y a avantage à les
+interpréter comme étant de véritables schémas sur $k$, au lieu de
+pro-objets. » C'est la remarque que cite le résumé\footnote{Serre :
+\emph{Groupes proalgébriques} (Publ. Math. IHÉS 7, 1960), cité de mémoire.}.
+
+\subsection*{Groupes de changements de coordonnées (pages 137 à 141)}
+
+Les dernières pages sont des calculs. Soit $A$ local d'idéal maximal
+$\mathfrak{m}$, d'« échelon infinitésimal » $N$ ($\mathfrak{m}^{N+1} = 0$). Un
+système $f = (f_1, \ldots, f_n)$ de séries
+\[
+  f_i = a_i + \sum_j b_{ij} t_j + \sum_{|p| \geq 2} c_{ip} t^{p}, \qquad a_i \in
+  \mathfrak{m},\ \det(b_{ij}) \notin \mathfrak{m},
+\]
+définit une bijection $\lambda_f$ de $\mathfrak{m}^{n}$ sur lui-même, qui ne
+dépend que des termes de degré $\leq N$. Les changements de coordonnées sans
+terme constant forment le schéma en groupes
+$G_{n,N} = \underline{\mathrm{Aut}}_{\text{alg.\ aug.}}\,\mathbf{Z}[t_1, \ldots,
+t_n]/(t_1, \ldots, t_n)^{N+1}$, dont le transformé de Greenberg $\Gamma_n$ opère
+sur $\mathfrak{m}^n$ regardé comme schéma sur $k$ ; avec les translations
+$a \in \mathfrak{m}^n$ on obtient le groupe $\mathbb{G}_{A,n}$ des changements de
+coordonnées affines-polynomiaux de la page 141. L'échelle $\mathfrak{m}^k /
+\mathfrak{m}^{k+1}$ découpée en tranches $V_1, \ldots, V_N$ (page 137) et les
+termes $\mathcal{T}^{0}_{B_0/A_0} \otimes V_i$ de la page 141 suggèrent un
+dévissage de ce groupe par des groupes vectoriels, faisceau tangent tensorisé
+par les gradués\footnote{Conjecture de lecture, sur une base très mince : la
+lettre lue $\mathcal{T}$ est une conjecture du transcripteur, et le calcul de la
+page 139 s'interrompt sans conclusion.}. La page 141 calcule enfin, modulo
+$t^{3}$, la composition de deux polynômes $a'_0 + a'_1 u + a'_2 u^2$ et $u = a_0
++ a_1 t + a_2 t^2$ : les coefficients sont $a'_0 + a'_1 a_0 + a'_2 a_0^2$, $a'_1
+a_1 + 2a'_2 a_0 a_1$ et $a'_1 a_2 + a'_2(a_1^2 + 2 a_0 a_2)$, ce qui est exact. Le
+dossier s'arrête là.
+
+\section*{Ce que le dossier annonce et ne fait pas}
+
+\begin{itemize}
+  \item Les deux « nous admettrons » des pages 19 et 20, qui laissent
+  ouverte la démonstration du théorème de la page 16 sous sa forme générale.
+  \item La démonstration du théorème de la page 25, que la lettre propose
+  d'envoyer et que le dossier ne contient pas.
+  \item La question de la page 38 (commutation de $f^{*}$ aux intersections
+  filtrantes) et celle de la page 96 ($\mathrm{Cons}$ et limites projectives).
+  \item La « catégorie géométrique » de la page 98, dont la page 100 ne donne
+  que les axiomes.
+  \item Les « espaces de Néron » du plan de la page 117, et la notion
+  d'« indice fini » des pages 130 et 131.
+  \item La rubrique 9 du plan de la page 33 (cas d'un $S' \to S$ étale) et les
+  compléments de Greenberg de la rubrique 10.
+  \item Le calcul de la page 139, interrompu.
+\end{itemize}
+
+\end{document}
