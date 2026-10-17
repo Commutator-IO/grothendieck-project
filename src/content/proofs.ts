@@ -219,6 +219,19 @@ export const PROOFS: Proof[] = [
     theorems: ['monadicite', 'descente', 'caracterisation_gabriel_ulmer', 'lemme_ind'],
   },
   {
+    folder: '11',
+    batch: 3,
+    page: '50–56',
+    name: 'The tautological subalgebra of H*(Xᵏ)',
+    statement:
+      'For a diagonal class Δ with (a ⊗ 1)Δ = (1 ⊗ a)Δ, Δ symmetric, m(Δ) = χy, (y ⊗ 1)Δ = y ⊗ y and y² = 0: δ² = χ y₁y₂ on X²; δ² = 0 and δ₁₂δ = χ y₁y₂y₃ for the small diagonal of X³; for two partitions with s and s′ blocks and coarse join, s + s′ ≤ k + 1, and δ_R δ_{R′} is the small diagonal, χ y₁⋯y_k or 0 as s + s′ = k + 1, k or less. A local commutative Frobenius algebra gives such a Δ with χ = dim A.',
+    found:
+      'All hold in the algebraic model, more generally: a connected multigraph of diagonals multiplies to δ_V for a tree, χ ∏ y_v with one cycle, 0 otherwise, by contracting edges. The χ the page strikes in the case k = s + s′ is confirmed. The push-forward kills classes not involving the forgotten factor only because ∫ 1 = 0. Not formalised: the geometry and excess intersection, general joins, generation under ⊠.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder11.lean',
+    theorems: ['model', 'table_two', 'table_three', 'graph_rule', 'product_rule', 'product_rule_pointed', 'push_old', 'push_point', 'push_diag', 'pull_d'],
+  },
+  {
     folder: '16',
     batch: 1,
     page: '6–16, 24–28, 47–48',

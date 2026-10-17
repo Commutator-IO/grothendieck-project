@@ -1,0 +1,52 @@
+\section[Cote 11 : la sous-algèbre tautologique des puissances de X, un modèle algébrique]{Cote 11 : la sous-algèbre tautologique de $H^*(X^k)$, un modèle algébrique\protect\verifie{Folder11}}\label{sec:11}
+
+La cote 11, \emph{Formalisme des correspondances}, cinquante-sept pages que l'inventaire date \q{à partir de 1961}, se clôt sur la sous-algèbre de $H^*(X^k)$ engendrée par les images inverses $y_i$ de la classe d'un point et par les classes des diagonales partielles (pages~50 à~56). La page~50 en donne les relations pour $k = 2$ et $k = 3$ (\lot{11}{3}{50}) ; la page~56 encadre la borne $s + s' \leqslant k + 1$ pour deux polydiagonales à $s$ et $s'$ blocs qui se coupent suivant la petite diagonale, trouve la petite diagonale dans le cas d'égalité, la nullité \q{pour raison de degrés} si $k > s + s'$, et laisse le cas $k = s + s'$ sur un $\chi$ biffé suivi d'un point d'interrogation (\lot{11}{3}{56}). La lecture rétablit $\chi$ par la formule d'intersection en excès et énonce la table de multiplication complète ; cette table est de l'édition. Aucune géométrie n'est formalisée ici : tout se déduit de quelques identités que vérifie la classe de la diagonale.
+
+\noindent\emph{Conventions.} On se donne un anneau commutatif $k$, une $k$-algèbre commutative $A$, un élément $\Delta \in A \otimes A$, une classe $y \in A$, un scalaire $\chi$ et une forme linéaire $\int$ sur $A$, avec
+\[
+(a \otimes 1)\Delta = (1 \otimes a)\Delta, \quad \Delta \text{ symétrique}, \quad m(\Delta) = \chi\, y, \quad (y \otimes 1)\Delta = y \otimes y, \quad y^2 = 0,
+\]
+et, pour les images directes, $\int y = 1$, $\int 1 = 0$, $(\mathrm{id} \otimes \textstyle\int)\Delta = 1$. Dans une $k$-algèbre commutative $B$ munie de morphismes $\iota_1, \dots, \iota_k : A \to B$ (par exemple $A^{\otimes k}$), on pose $y_i = \iota_i(y)$ et $\delta_{ij} = (\iota_i, \iota_j)(\Delta)$ ; ainsi $\delta_{ii} = \chi\, y_i$. Pour une partie $V$ et une racine $r \in V$, la petite diagonale est $\delta_V = \prod_{v \in V \smallsetminus \{r\}} \delta_{rv}$ ; elle ne dépend pas de $r$.
+
+\begin{enonce}[Le modèle]
+Soient $k$ un corps, $A$ une $k$-algèbre commutative de dimension finie, $(b_i)$ et $(b'_i)$ deux bases duales pour $(a, b) \mapsto \int ab$, $\varepsilon : A \to k$ une augmentation de noyau nilpotent, et $y$ tel que $ay = \varepsilon(a)\,y$, $\int y = 1$, $\int 1 = 0$, $\varepsilon(y) = 0$. Alors $\Delta = \sum_i b_i \otimes b'_i$ vérifie les identités ci-dessus, avec $\chi = \dim A$.
+\end{enonce}
+
+C'est le cas pair d'une algèbre à dualité de Poincaré, où $\chi = \dim H^*(X)$ ; le cas des classes de degré impair, avec signes, n'est pas formalisé (Lean : \texttt{model}).
+
+\begin{enonce}[Grothendieck, page 50]
+Pour $k = 2$ : $y_1\delta = y_2\delta = y_1y_2$ et $\delta^2 = \chi\, y_1y_2$. Pour $k = 3$, avec $\delta = \delta_{\{1,2,3\}}$ : $\delta_{12}\delta_{23} = \delta_{12}\delta_{13} = \delta_{23}\delta_{13} = \delta$, $\delta_{ij}^2 = \chi\, y_iy_j$, $\delta_{ij}\,y_i = y_iy_j$, $\delta\, y_i = y_1y_2y_3$, $\delta^2 = 0$ et $\delta_{ij}\,\delta = \chi\, y_1y_2y_3$.
+\end{enonce}
+
+Lean : \texttt{table\_two}, \texttt{table\_three}.
+
+\begin{theoreme}[D'après les pages 54 et 56, règle des multigraphes, énoncé de l'édition\piste{11-tautological-diagonal-product-rule}]\label{thm:11-graphes}
+Soit $E$ une famille finie d'arêtes, boucles et arêtes multiples permises, sur un ensemble fini $V$ qu'elle rend connexe, et $\delta_E = \prod_{(i,j) \in E} \delta_{ij}$. Alors $|V| \leqslant |E| + 1$, et $\delta_E$ vaut $\delta_V$ si $|E| = |V| - 1$, $\chi \prod_{v \in V} y_v$ si $|E| = |V|$, et $0$ si $|E| > |V|$.
+\end{theoreme}
+
+\begin{proof}
+Par récurrence sur $|E|$. Sans arête, $V$ est un point et $\delta_E = 1 = \delta_V$. Une boucle en $i$ vaut $\chi\, y_i$ ; on la retire sans rompre la connexité, et l'on conclut par $y_i\,\delta_V = \prod_{v \in V} y_v$ et $y_i^2 = 0$. Une arête $(i, j)$ avec $i \neq j$ permet le transfert : la première identité donne $\delta_{ij}\,\iota_j(a) = \delta_{ij}\,\iota_i(a)$, donc, multiplié par $\delta_{ij}$, tout produit de classes reste le même quand on y remplace l'indice $j$ par $i$. On contracte ainsi l'arête : le reste devient un multigraphe connexe sur $V \smallsetminus \{j\}$, avec une arête et un sommet de moins, des arêtes parallèles à $(i,j)$ devenant des boucles. Il reste à voir que $\delta_{ij}$ fait repasser de $V \smallsetminus \{j\}$ à $V$ dans chacun des trois cas, ce que donnent le transfert, la symétrie de $\Delta$ et $y_i\,\delta_{ij} = y_iy_j$.
+\end{proof}
+
+\begin{corollaire*}[Grothendieck, page 56, et la table de l'édition]
+Soient $R$ et $R'$ deux partitions des $k$ indices, à $s$ et $s'$ blocs, dont la borne supérieure est la partition grossière, et $\delta_R = \prod_{P \in R} \delta_P$. Alors $s + s' \leqslant k + 1$, et $\delta_R\,\delta_{R'}$ vaut la petite diagonale si $s + s' = k + 1$, $\chi\, y_1 \cdots y_k$ si $s + s' = k$, et $0$ si $s + s' < k$. Avec un bloc marqué d'un point, $y_j\,\delta_R\,\delta_{R'}$ vaut $y_1 \cdots y_k$ si $s + s' = k + 1$ et $0$ sinon ; avec deux, le produit est nul.
+\end{corollaire*}
+
+Les arêtes de $R$ et $R'$ joignant chaque bloc à son plus petit élément sont au nombre de $2k - s - s'$, et forment un multigraphe connexe : le théorème~\ref{thm:11-graphes} donne tout (Lean : \texttt{graph\_rule}, \texttt{product\_rule}, \texttt{product\_rule\_pointed}).
+
+\begin{enonce}[Page 56, stabilités, en un facteur]
+Dans $B \otimes A$, l'image directe $\mathrm{id} \otimes \int$ par la projection qui oublie le dernier facteur $\ast$ annule les classes qui ne le font pas intervenir, et envoie $x\,y_\ast$ et $x\,\delta_{i\ast}$ sur $x$ ; l'image inverse envoie $\delta_{ij}$ sur $\delta_{ij}$ et $y_i$ sur $y_i$.
+\end{enonce}
+
+Lean : \texttt{push\_old}, \texttt{push\_point}, \texttt{push\_diag}, \texttt{pull\_d}.
+
+\paragraph{Remarques.} La règle tient plus généralement que la table de la lecture : pour tout multigraphe connexe, dans toute algèbre où vivent une classe de la diagonale et une classe de point, et le coefficient $\chi$ du cas $s + s' = k$, biffé sur la page, est bien celui qu'elle rétablit. La nullité de l'image directe d'une classe qui n'implique pas le facteur oublié demande $\int 1 = 0$, ce que donne en géométrie la raison de degré.
+
+Ne sont pas démontrés ici : le cadre géométrique et la formule d'intersection en excès ; la réduction d'une jointure quelconque aux blocs de $R''$ et l'engendrement par $\boxtimes$ de la conclusion encadrée ; la catégorie des correspondances d'une théorie bivariante (pages~2 à~18), les sous-foncteurs stables (pages~20 à~24), les algèbres de Poincaré et bivariantes (pages~26 à~39), la seconde mouture (pages~41 à~47).
+
+\begin{encadre}
+\begin{conjecture*}[Grothendieck, pages 37 et 41, algèbres bivariantes simpliciales et algèbres de Poincaré\piste{11-simplicial-bivariant-poincare-equivalence}]
+L'évaluation en un ensemble à un élément est une équivalence entre les algèbres bivariantes simpliciales, foncteurs contravariants des ensembles finis non vides vers les algèbres graduées bivariantes de la page~33, dont la valeur en un point est une algèbre de Poincaré, et les algèbres de Poincaré. Le foncteur $A(\cdot) \mapsto (A(\mathrm{pt}), \Delta)$, avec $\Delta = \delta_*(1)$ de degré $d(A)$, est pleinement fidèle vers les algèbres jaugées munies d'un tel~$\Delta$.
+\end{conjecture*}
+\end{encadre}
+{\small La page laisse \q{à préciser} les axiomes sur $\Delta$. L'édition restreint l'équivalence aux objets \q{spéciaux}, sans quoi rien ne lie $A(I)$ à $A(\mathrm{pt})$ pour $\mathrm{card}\,I \geq 2$. Mathlib n'a pas ces théories bivariantes. On se reportera aux notes de Grothendieck (\lot{11}{2}{37}).\par}
