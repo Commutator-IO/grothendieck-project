@@ -145,9 +145,7 @@ theorem identification_seulement_si [IsDomain R] [Module.IsTorsionFree R M] {x :
   have h1 := (sl2_normalisation t P 0).1
   rw [h] at h1
   have : (μ - 1) • x = 0 := by rw [sub_smul, one_smul, ← h1, sub_self]
-  rcases smul_eq_zero.1 this with h2 | h2
-  · exact sub_eq_zero.1 h2
-  · exact absurd h2 P.ne_zero
+  exact sub_eq_zero.1 ((smul_eq_zero.1 this).resolve_right P.ne_zero)
 
 end Sl2
 
@@ -246,20 +244,14 @@ theorem inverse_mem_of_charpoly (F : Subfield K) (𝒜 : Subring (Module.End K V
     ∃ g ∈ 𝒜, g * w = 1 ∧ w * g = 1 := by
   set p := w.charpoly with hp
   have hCH : aeval w p = 0 := LinearMap.aeval_self_charpoly w
-  have hc0 : p.coeff 0 ≠ 0 := by
-    have hdet := LinearMap.det_eq_sign_charpoly_coeff w
-    have hu : IsUnit (LinearMap.det w) := (LinearMap.isUnit_iff_isUnit_det w).1 hunit
-    intro h
-    rw [← hp, h, mul_zero] at hdet
-    exact hu.ne_zero hdet
+  have hc0 : p.coeff 0 ≠ 0 := fun h => ((LinearMap.isUnit_iff_isUnit_det w).1 hunit).ne_zero (by
+    rw [LinearMap.det_eq_sign_charpoly_coeff w, ← hp, h, mul_zero])
   set q := aeval w p.divX with hq
   have hqw : q * w = -algebraMap K _ (p.coeff 0) := by
     have := congrArg (aeval w) (divX_mul_X_add p)
     rw [map_add, map_mul, aeval_X, aeval_C, hCH] at this
     exact eq_neg_of_add_eq_zero_left this
-  have hwq : w * q = q * w := by
-    have := ((commute_X p.divX).map (aeval w)).eq
-    rwa [aeval_X] at this
+  have hwq : w * q = q * w := by simpa only [aeval_X] using ((commute_X p.divX).map (aeval w)).eq
   have hqmem : q ∈ 𝒜 := by
     rw [hq, aeval_eq_sum_range]
     refine Subring.sum_mem _ fun j _ => ?_
@@ -291,14 +283,11 @@ theorem inverse_Lefschetz_algebrique (F : Subfield K) (𝒜V : Subring (Module.E
   have hunit : IsUnit (u ∘ₗ v : Module.End K V) :=
     (Module.End.isUnit_iff _).2 (hub.comp hvb)
   obtain ⟨g, hg, hgw, -⟩ := inverse_mem_of_charpoly F 𝒜V hsmul hD hw hunit
-  have hleft : (g ∘ₗ u) ∘ₗ v = LinearMap.id := by
-    rw [LinearMap.comp_assoc]; exact hgw
+  have hleft : (g ∘ₗ u) ∘ₗ v = LinearMap.id := (LinearMap.comp_assoc _ _ _).trans hgw
   refine ⟨g ∘ₗ u, hcomp₁ _ hg _ hu, hleft, ?_⟩
   ext y
   obtain ⟨x, rfl⟩ := hvb.2 y
-  have := congrArg (fun f => f x) hleft
-  simp only [LinearMap.comp_apply, LinearMap.id_apply] at this ⊢
-  rw [this]
+  exact congrArg v (LinearMap.congr_fun hleft x)
 
 end CayleyHamilton
 
@@ -329,9 +318,8 @@ theorem Graduation.mul_proj (G : Graduation π n) {d : ℤ} {x : E} (hx : Homoge
       refine Finset.sum_eq_single (a + d) (fun b _ hb => hx a b hb) (fun h => ?_)
       rw [G.supp _ h, zero_mul, zero_mul]
 
-theorem Graduation.homogene_one (G : Graduation π n) : Homogene π 0 (1 : E) := by
-  intro a b hab
-  rw [mul_one]; exact G.orth b a (by omega)
+theorem Graduation.homogene_one (G : Graduation π n) : Homogene π 0 (1 : E) :=
+  fun a b hab => by rw [mul_one, G.orth b a (by omega)]
 
 theorem Graduation.homogene_mul (G : Graduation π n) {d e : ℤ} {x y : E}
     (hx : Homogene π d x) (hy : Homogene π e y) : Homogene π (d + e) (x * y) := by
@@ -344,9 +332,8 @@ theorem Graduation.homogene_pow (G : Graduation π n) {L : E} (hL : Homogene π 
   induction k with
   | zero => simpa using G.homogene_one
   | succ k ih =>
-    rw [pow_succ]
-    have := G.homogene_mul ih hL
-    rwa [show 2 * (k : ℤ) + 2 = 2 * ((k + 1 : ℕ) : ℤ) by push_cast; ring] at this
+    rw [pow_succ, show 2 * ((k + 1 : ℕ) : ℤ) = 2 * k + 2 by push_cast; ring]
+    exact G.homogene_mul ih hL
 
 /-- The computation of no. 5: `ψ v φ = π_{2n-i} v π_i` when only one pair of degrees survives. -/
 theorem sandwich {d : ℤ} {x : E} (hx : Homogene π d x) (A B : Finset ℤ) {a₀ : ℤ}
@@ -355,20 +342,19 @@ theorem sandwich {d : ℤ} {x : E} (hx : Homogene π d x) (A B : Finset ℤ) {a�
   rw [Finset.sum_mul, Finset.sum_mul]
   simp_rw [Finset.mul_sum]
   rw [Finset.sum_eq_single (a₀ + d)]
-  · refine Finset.sum_eq_single a₀ (fun a _ ha => hx a _ (fun h => ha (by omega))) ?_
-    intro h; exact absurd ha₀ h
+  · exact Finset.sum_eq_single a₀ (fun a _ ha => hx a _ (fun h => ha (by omega)))
+      fun h => absurd ha₀ h
   · intro b hb hne
     refine Finset.sum_eq_zero fun a ha => hx a b fun h => hne ?_
-    have := huniq a ha (h ▸ hb); subst this; exact h
-  · intro h; exact absurd hb₀ h
+    rw [h, huniq a ha (h ▸ hb)]
+  · exact fun h => absurd hb₀ h
 
 /-- The complement of a sum of known projectors. -/
 theorem Graduation.sum_filter_not (G : Graduation π n) (P : ℤ → Prop) [DecidablePred P] :
     ∑ a ∈ (Finset.Icc (0 : ℤ) (2 * n)).filter (fun a => ¬ P a), π a =
       1 - ∑ a ∈ (Finset.Icc (0 : ℤ) (2 * n)).filter P, π a := by
-  have := Finset.sum_filter_add_sum_filter_not (Finset.Icc (0 : ℤ) (2 * n)) P π
-  rw [G.sum] at this
-  rw [← this]; abel
+  rw [← G.sum, ← Finset.sum_filter_add_sum_filter_not (Finset.Icc (0 : ℤ) (2 * n)) P π]
+  abel
 
 /-- **Pages 6–7 (`(4.4)ᵢ` and no. 5, on the leaf « 5 bis »), over `ℤ`.** Let `ℰ` be a
 subring of a ring `E` in which orthogonal idempotents `π_a` of sum `1`, zero outside
@@ -440,8 +426,7 @@ theorem projecteurs_mem (ℰ : Subring E) (G : Graduation π n) (v w : ℕ → E
         · omega
         · exact h' ▸ hπi'
         · exact ih a (Or.inr h')
-  intro a
-  exact step (n + 1) le_rfl a (by push_cast; omega)
+  exact fun a => step (n + 1) le_rfl a (by push_cast; omega)
 
 /-- **Page 8 (no. 6, `(6.3)ᵢ`).** The case `vᵢ = L^{n-i}`, `L ∈ ℰ` of degree `2`: one-sided
 inverses `wᵢ ∈ ℰ` of `L^{n-i}` (on `πᵢ` and on `π_{2n-i}`) put all the grading projectors
@@ -452,10 +437,8 @@ theorem projecteurs_mem_lefschetz (ℰ : Subring E) (G : Graduation π n) {L : E
     (h₁ : ∀ i ≤ n, w i * L ^ (n - i) * π i = π i)
     (h₂ : ∀ i ≤ n, L ^ (n - i) * w i * π (2 * n - i) = π (2 * n - i)) :
     ∀ a, π a ∈ ℰ :=
-  projecteurs_mem ℰ G (fun i => L ^ (n - i)) w (fun i _ => ℰ.pow_mem hLE _) hwE
-    (fun i hi => by
-      have := G.homogene_pow hL (n - i)
-      rwa [Nat.cast_sub hi] at this) hw h₁ h₂
+  projecteurs_mem ℰ G (fun i => L ^ (n - i)) w (fun _ _ => ℰ.pow_mem hLE _) hwE
+    (fun i hi => Nat.cast_sub (R := ℤ) hi ▸ G.homogene_pow hL (n - i)) hw h₁ h₂
 
 end Projecteurs
 
@@ -528,8 +511,7 @@ theorem not_exists_xi₀_pow_mul_eq_vol (hn : 2 ≤ n) :
   let φ : ExteriorAlgebra ℤ (M₀ ℤ (2 + m)) → ℤ := fun x =>
     exteriorPower.ιMultiDual ℤ ((2 + m) * 2) (baseFin (R := ℤ) (n := 2 + m)) ⟨Finset.univ, by simp⟩
       (DirectSum.decompose (fun i : ℕ => ⋀[ℤ]^i (M₀ ℤ (2 + m))) x ((2 + m) * 2))
-  have hφadd : ∀ x x', φ (x + x') = φ x + φ x' := by
-    intro x x'
+  have hφadd : ∀ x x', φ (x + x') = φ x + φ x' := fun x x' => by
     simp only [φ, DirectSum.decompose_add, DirectSum.add_apply, map_add]
   have hφvol : φ (vol (R := ℤ) (n := 2 + m)) = 1 := by
     simp only [φ]
@@ -549,12 +531,7 @@ over `ℤ`, because `ξ₀ⁿ = n! · vol`. -/
 theorem L₀_pow_ne_vol (hn : 2 ≤ n)
     (w : ExteriorAlgebra ℤ (M₀ ℤ n) → ExteriorAlgebra ℤ (M₀ ℤ n)) :
     (L₀ ℤ n)^[n] (w (vol (R := ℤ) (n := n))) ≠ (vol (R := ℤ) (n := n)) := by
-  have hit : ∀ (k : ℕ) (x : ExteriorAlgebra ℤ (M₀ ℤ n)), (L₀ ℤ n)^[k] x = xi₀ ℤ n ^ k * x := by
-    intro k
-    induction k with
-    | zero => intro x; simp
-    | succ k ih => intro x; rw [Function.iterate_succ_apply', ih, L₀, pow_succ', mul_assoc]
-  rw [hit]
+  rw [show L₀ ℤ n = (xi₀ ℤ n * ·) from rfl, mul_left_iterate]
   exact fun h => not_exists_xi₀_pow_mul_eq_vol hn ⟨_, h⟩
 
 end Entiers
@@ -733,9 +710,7 @@ theorem mul_comm_of_pair {a : AlgHodge k V W} (ha : Pair a) (b : AlgHodge k V W)
     D.mul a b = D.mul b a := by
   obtain ⟨a0, a1, ⟨ac, aw⟩, a3, a4⟩ := a
   obtain ⟨b0, b1, ⟨bc, bw⟩, b3, b4⟩ := b
-  obtain ⟨h1, h3⟩ := ha
-  simp only at h1 h3
-  subst h1 h3
+  obtain ⟨(rfl : a1 = 0), (rfl : a3 = 0)⟩ := ha
   simp only [mul, Prod.mk.injEq]
   refine ⟨by ring, by abel, ⟨by simp; ring, by simp; abel⟩, ?_, ?_⟩
   · ext t; simp
@@ -746,12 +721,10 @@ theorem mul_anticomm_of_impair {a b : AlgHodge k V W} (ha : Impair a) (hb : Impa
     D.mul a b = -D.mul b a := by
   obtain ⟨a0, a1, ⟨ac, aw⟩, a3, a4⟩ := a
   obtain ⟨b0, b1, ⟨bc, bw⟩, b3, b4⟩ := b
-  obtain ⟨h0, h2, h4⟩ := ha
-  obtain ⟨h0', h2', h4'⟩ := hb
-  simp only at h0 h2 h4 h0' h2' h4'
+  obtain ⟨(rfl : a0 = 0), (h2 : (ac, aw) = 0), (rfl : a4 = 0)⟩ := ha
+  obtain ⟨(rfl : b0 = 0), (h2' : (bc, bw) = 0), (rfl : b4 = 0)⟩ := hb
   obtain ⟨rfl, rfl⟩ := h2
   obtain ⟨rfl, rfl⟩ := h2'
-  subst h0 h4 h0' h4'
   simp only [mul, Prod.neg_mk, Prod.mk.injEq]
   refine ⟨by ring, by simp, ⟨by simp [D.φ_anti a1 b1], by simp [D.ψ_anti a1 b1]⟩, ?_, ?_⟩
   · ext t; simp
@@ -760,10 +733,8 @@ theorem mul_anticomm_of_impair {a b : AlgHodge k V W} (ha : Impair a) (hb : Impa
 /-- **Page 24, anticommutativity (3): odd elements square to zero.** -/
 theorem mul_self_of_impair {a : AlgHodge k V W} (ha : Impair a) : D.mul a a = 0 := by
   obtain ⟨a0, a1, ⟨ac, aw⟩, a3, a4⟩ := a
-  obtain ⟨h0, h2, h4⟩ := ha
-  simp only at h0 h2 h4
+  obtain ⟨(rfl : a0 = 0), (h2 : (ac, aw) = 0), (rfl : a4 = 0)⟩ := ha
   obtain ⟨rfl, rfl⟩ := h2
-  subst h0 h4
   simp [mul, D.φ_alt, D.ψ_alt, act]
 
 /-- The quadrilinear identity of page 24, `(xy)(tz) = (tx)(yz)`. -/
@@ -898,18 +869,17 @@ theorem lefschetz_iff [FiniteDimensional k V] : D.Lefschetz ↔ D.φ.Nondegenera
 non-degenerate iff `Q` is. No finiteness is needed. -/
 theorem poincare_iff : D.Poincare ↔ D.Q.Nondegenerate := by
   rw [nondegenerate_iff_of_symm _ D.Q_symm]
-  have p0 : ∀ c d : k, (D.mul (deg0 c) (deg4 d)).2.2.2.2 = c * d := by
-    intro c d; simp [mul, deg0, deg4]
-  have p1 : ∀ (x : V) (u : Module.Dual k V), (D.mul (deg1 x) (deg3 u)).2.2.2.2 = u x := by
-    intro x u; simp [mul, deg1, deg3]
+  have p0 : ∀ c d : k, (D.mul (deg0 c) (deg4 d)).2.2.2.2 = c * d := fun c d => by
+    simp [mul, deg0, deg4]
+  have p1 : ∀ (x : V) (u : Module.Dual k V), (D.mul (deg1 x) (deg3 u)).2.2.2.2 = u x :=
+    fun x u => by simp [mul, deg1, deg3]
   have p2 : ∀ (c c' : k) (w w' : W), (D.mul (deg2 c w) (deg2 c' w')).2.2.2.2 =
-      c * c' + D.Q w w' := by
-    intro c c' w w'; simp [mul, deg2]
+      c * c' + D.Q w w' := fun c c' w w' => by simp [mul, deg2]
   simp only [Poincare, p0, p1, p2]
   have a0 : ∀ c : k, (∀ d : k, c * d = 0) → c = 0 := fun c h => by simpa using h 1
   have a0' : ∀ d : k, (∀ c : k, c * d = 0) → d = 0 := fun d h => by simpa using h 1
   have a1 : ∀ x : V, (∀ u : Module.Dual k V, u x = 0) → x = 0 :=
-    fun x h => (Module.forall_dual_apply_eq_zero_iff k x).1 h
+    fun x => (Module.forall_dual_apply_eq_zero_iff k x).1
   have a1' : ∀ u : Module.Dual k V, (∀ x : V, u x = 0) → u = 0 := fun u h => LinearMap.ext h
   refine ⟨fun h w hw => ?_, fun h => ⟨a0, a0', a1, a1', fun c w hcw => ?_⟩⟩
   · exact (h.2.2.2.2 0 w fun c' w' => by simp [hw w']).2
@@ -961,12 +931,11 @@ theorem reformulation_spec [FiniteDimensional k V] :
     simp [D, reformulation, hQ' ξ']
   have hdec : ∀ x y, α x y = D.φ x y • ξ' + (D.ψ x y : W') := fun x y => by
     simp [D, reformulation]
-  have hchi : ∀ x y z t, Q' (α x y) (α z t) = D.chi x y z t := by
-    intro x y z t
+  have hchi : ∀ x y z t, Q' (α x y) (α z t) = D.chi x y z t := fun x y z t => by
     simp only [DonneesHodge.chi]
     conv_lhs => rw [hdec x y, hdec z t]
     have h1 : Q' ξ' (D.ψ z t : W') = 0 := (D.ψ z t).2
-    have h2 : Q' (D.ψ x y : W') ξ' = 0 := by rw [hQ']; exact (D.ψ x y).2
+    have h2 : Q' (D.ψ x y : W') ξ' = 0 := (hQ' _ _).trans (D.ψ x y).2
     simp only [map_add, map_smul, LinearMap.add_apply, LinearMap.smul_apply, smul_eq_mul, hξ, h1,
       h2]
     simp [D, reformulation]
@@ -977,8 +946,7 @@ theorem reformulation_spec [FiniteDimensional k V] :
   · rw [D.poincare_iff, nondegenerate_iff_of_symm _ D.Q_symm, nondegenerate_iff_of_symm _ hQ']
     constructor
     · intro h v hv
-      have hvk : v ∈ LinearMap.ker (Q' ξ') := by
-        rw [LinearMap.mem_ker, hQ']; exact hv ξ'
+      have hvk : v ∈ LinearMap.ker (Q' ξ') := (hQ' ξ' v).trans (hv ξ')
       have := h ⟨v, hvk⟩ fun w => by simp [D, reformulation, hv]
       simpa using congrArg Subtype.val this
     · intro h w hw
