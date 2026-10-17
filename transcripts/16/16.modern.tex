@@ -26,7 +26,8 @@
 % of projectors pi_i — already determined by (E, L), and when do L's inverse
 % Lambda and the projectors of the primitive decomposition lie in E? The
 % theorem of his no. 6 answers it; his no. 7 builds the universal ring
-% Phi_0 = Z[L_0, Lambda_0] on an exterior algebra and makes the conditions a
+% Phi_0 = Z[L_0, Lambda_0] on an exterior algebra (to be taken over Q when
+% n >= 2, see below) and makes the conditions a
 % graded ring homomorphism Phi_0 -> E; a Question answered « Non » shows L
 % alone never suffices. (2) pp. 19-28: EXAMPLES AND COUNTEREXAMPLES. The
 % attempt to write Lambda as a polynomial in L (p. 19); a six-dimensional
@@ -36,7 +37,7 @@
 % Lefschetz element. (3) pp. 32-54: THE STANDARD CONJECTURES. The formulary of
 % L and Lambda along a smooth hyperplane section (pp. 32-39), the equivalence
 % C(X) <=> [C(Y) and A^0(X x Y)] (p. 41), two letters to Coates of January 1967
-% and January 1966 (pp. 43-49), and the Lemma (pp. 50-54) that carries the
+% and (dated, by a slip, 1966) January 1967 (pp. 43-49), and the Lemma (pp. 50-54) that carries the
 % theorem of no. 6 into the ring of algebraic correspondences.
 %
 % What only a folder-wide reading can say: run (3)'s p^X_i IS run (1)'s
@@ -57,7 +58,7 @@
 %            says at each use which of the three is meant.
 % L is the Lefschetz operator (degree 2), Lambda its PSEUDO-INVERSE of degree
 % -2 — not the Kähler adjoint; see the footnote at no. 6. E for his script E,
-% Phi_0 = Z[L_0, Lambda_0], M for the graded module, P^i for primitive parts.
+% Phi_0 = Z[L_0, Lambda_0] (the page's name; over Q for n >= 2), M for the graded module, P^i for primitive parts.
 % phi : Y -> X is the inclusion of the hyperplane section (the typescript draws
 % a slashed O), with phi^* and phi_*; xi_X, xi_Y the polarisation classes;
 % chi the index of the cohomology theory. The phi, psi, Q, chi of the Hodge
@@ -80,7 +81,12 @@
 %     cycles modulo numerical equivalence, not for the conjecture C(X) two
 %     lines above; and « C^{n-1}_chi » should read C^{n-i}.
 %   - pp. 43 and 47: the two letters are dated 4.1.67 and 6.1.1966 in his hand.
-%     Both dates are transcribed; nothing on the leaves reconciles them.
+%     The second opens « a few more comments to my talk »: it follows the
+%     first, and « 1966 » is by deduction a slip for 1967 (transcription note
+%     of 2026-09-27).
+%   - p. 13 / no. 7: over Z, for n >= 2, the exterior model carries no Lambda_0
+%     in the sense of (6.15) — L_0^n sends 1 to n! vol — so the model has to be
+%     taken over Q (checked in Lean, 2026-10-17).
 %   - p. 47: the Cayley-Hamilton relation is written in u with the coefficients
 %     of w; restated in w here.
 %   - p. 50: the leaf reads « Alors A contient L », with L drawn as the
@@ -108,6 +114,15 @@
 %
 % Modern names are footnoted with whether the pages could have known them. The
 % dating 1966-1967 is the archivists'.
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — refined with the Lean checks
+% of lean/Grothendieck/Folder16.lean, mathlib and the literature of the
+% folder's findings: the universal ring of no. 7 cannot be built over Z on the
+% exterior algebra for n >= 2 (model taken over Q); Lean and mathlib footnotes
+% on the sl2 normalisation, no. 5, the commutator, the Hodge algebras of order
+% 2 and Cayley-Hamilton; the Artinian Gorenstein literature recorded by the
+% page-21 finding cited; the date « 6.1.1966 » read as a slip for 1967 after
+% the transcription; the readings of p. 47-49 checked on the facsimile agree.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -394,7 +409,12 @@ utilisant $w_{i}v_{i}\pi_{i} = \pi_{i}$ :
 w'_{i}v'_{i} = \pi_{i}\,w_{i}\,\pi_{2n-i}\,v_{i}\,\pi_{i} = \pi_{i}^{3} = \pi_{i},
 \qquad v'_{i}w'_{i} = \pi_{2n-i} .
 \]
-Les deux projecteurs sont donc des produits d'éléments de $\mathcal{E}$.
+Les deux projecteurs sont donc des produits d'éléments de $\mathcal{E}$.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder16.lean, \texttt{projecteurs\_mem},
+\texttt{projecteurs\_mem\_lefschetz}) : dans un anneau muni d'idempotents de
+graduation, des inverses unilatères $w_{i} \in \mathcal{E}$ de $L^{n-i}$
+mettent chaque $\pi_{i}$ dans $\mathcal{E}$, sur $\mathbb{Z}$ et sans module.
+Ni $\Lambda$ ni les projecteurs $\pi_{i,\alpha}$ du n° 6 ne sont vérifiés.}
 
 \pagerange{8}{13}
 \section*{La condition de Lefschetz, la décomposition primitive, et $\Lambda$ (pages 8 à 13)}
@@ -465,7 +485,14 @@ chaînes, et $L\Lambda$ vaut l'identité partout sauf sur les sommets. Ce n'est
 pas l'opérateur $\Lambda$ de la théorie de Hodge, l'adjoint de $L$ pour la
 métrique, lequel satisfait $[L,\Lambda] = H$ et agit sur $L^{k}P^{i}$ par des
 scalaires entiers non triviaux --- sur une classe primitive de degré $i$ on a
-$\Lambda L x = (n-i)\,x$ et non $x$.\footnote{Le choix n'est pas anodin et les
+$\Lambda L x = (n-i)\,x$ et non $x$.\footnote{Ces formules de la
+représentation de $\mathfrak{sl}_{2}$ --- sur un vecteur primitif de poids
+$\mu$, $\Lambda L^{k+1}x = (k+1)(\mu-k)\,L^{k}x$ --- sont dans mathlib
+(\texttt{IsSl2Triple.HasPrimitiveVectorWith}) ; la vérification en Lean
+(lean/Grothendieck/Folder16.lean, \texttt{sl2\_normalisation},
+\texttt{identification\_seulement\_si}) établit en outre que ce $\Lambda$ ne
+satisfait $\Lambda L x = x$ sur une classe primitive, comme le demande
+$(6.7)$, que si $\mu = 1$.}\footnote{Le choix n'est pas anodin et les
 feuillets ne le commentent pas : c'est précisément la normalisation en
 pseudo-inverse qui permet à tout le n° 6 de rester sur $\mathbb{Z}$, sans
 introduire les dénominateurs qu'une représentation de $\mathfrak{sl}_{2}$
@@ -542,10 +569,12 @@ L_{0}\,x = \xi_{0} \wedge x,
 \qquad
 \Lambda_{0}\,x = \xi_{0}^{*} \lrcorner\, x .
 \]
-On pose enfin
+La page pose enfin
 \[
-\Phi_{0} = \mathbb{Z}[L_{0}, \Lambda_{0}] \subset \operatorname{End}(\Lambda M_{0}) .
+\Phi_{0} = \mathbb{Z}[L_{0}, \Lambda_{0}] \subset \operatorname{End}(\Lambda M_{0}) ,
 \]
+définition qu'il faudra, pour $n \geqslant 2$, transporter sur $\mathbb{Q}$ (voir
+plus bas).
 Cet anneau gradué est engendré par les éléments
 \[
 \varphi^{\beta,\alpha}_{i} =
@@ -583,11 +612,32 @@ apparie les $n$ termes un à un. Ce que le feuillet affirme est bien
 l'identification, et la transcription révisée la porte ; l'erreur est sur la
 page et n'est pas réparée ici. Elle est d'ailleurs sans conséquence pour la
 Proposition qui suit, dont la démonstration n'utilise que les relations
-$(6.15)$ et jamais la contraction.}
+$(6.15)$ et jamais la contraction. Vérifié en Lean
+(lean/Grothendieck/Folder16.lean, \texttt{lambda0\_L0\_un},
+\texttt{lambda0\_L0\_un\_ne\_un}) : $\Lambda_{0}L_{0}(1) = n$, donc
+$\neq 1$ pour $n \neq 1$ en caractéristique nulle.}
 
-C'est donc $\Lambda_{0}$ \emph{au sens de $(6.15)$} que $\Phi_{0}$ contient dans
-tout ce qui suit --- c'est ce dont la Proposition a besoin --- et l'algèbre
-extérieure ne sert qu'à fournir un modèle où les $\pi_{i,\alpha}$ existent. L'élément
+C'est donc $\Lambda_{0}$ \emph{au sens de $(6.15)$} que $\Phi_{0}$ doit
+contenir dans tout ce qui suit --- c'est ce dont la Proposition a besoin --- et
+l'algèbre extérieure ne sert qu'à fournir un modèle où les $\pi_{i,\alpha}$
+existent. Mais ce modèle doit être pris sur $\mathbb{Q}$, et non sur
+$\mathbb{Z}$ comme le dit la page : pour $n \geqslant 2$, $L_{0}^{n}$ envoie
+$1$ sur $\xi_{0}^{n} = n!\, e_{1} \wedge \cdots \wedge e_{2n}$, si bien que
+$L_{0}^{n} \colon \Lambda^{0}M_{0} \to \Lambda^{2n}M_{0}$ n'est pas surjectif,
+que la condition $(6.3)_{0}$ échoue, et qu'aucun $\Lambda_{0}$ au sens de
+$(6.15)$ n'existe dans $\operatorname{End}_{\mathbb{Z}}(\Lambda M_{0})$. Sur
+$\mathbb{Q}$, l'obstruction disparaît ; on lit donc $\Phi_{0}$ comme le
+sous-anneau de $\operatorname{End}_{\mathbb{Q}}(\Lambda M_{0} \otimes
+\mathbb{Q})$ engendré par $L_{0}$, ce $\Lambda_{0}$ et les
+$\pi_{i}$.\footnote{Correction de l'édition, du 17 octobre 2026 ; la première
+version de cette lecture gardait $\Phi_{0} = \mathbb{Z}[L_{0}, \Lambda_{0}]
+\subset \operatorname{End}(\Lambda M_{0})$ sur $\mathbb{Z}$. Vérifié en Lean
+(lean/Grothendieck/Folder16.lean, \texttt{not\_exists\_xi}$_{0}$\texttt{\_pow\_mul\_eq\_vol},
+\texttt{L}$_{0}$\texttt{\_pow\_ne\_vol}) : pour $n \geqslant 2$, $\xi_{0}^{n} \wedge y$
+n'est jamais la classe de volume de $\Lambda\,\mathbb{Z}^{2n}$, $\xi_{0}^{2}$
+étant pair. La propriété universelle de la Proposition qui suit, et
+l'indépendance de la table de multiplication à l'égard du modèle, ne sont pas
+vérifiées.} L'élément
 $\varphi^{\beta,\alpha}_{i}$ envoie le facteur $L^{\alpha}P^{i-2\alpha}$ sur le
 facteur $L^{\beta}P^{i-2\alpha}$ et tue les autres : $\Phi_{0}$ est donc
 l'anneau de toutes les façons de circuler dans les chaînes de la décomposition
@@ -634,7 +684,8 @@ $\sum_{i \geqslant n}\pi_{i,0} - \sum_{i \leqslant n}\pi_{i,0}$ et ne retient
 que les extrémités des chaînes. La graduation doit donc être fournie
 séparément.\footnote{Ce calcul est une conséquence immédiate des deux
 relations $(6.7)$ ; le dossier ne l'écrit pas et ne mentionne jamais
-$\mathfrak{sl}_{2}$.}
+$\mathfrak{sl}_{2}$. Vérifié en Lean (lean/Grothendieck/Folder16.lean,
+\texttt{commutateur\_pseudo\_inverse}).}
 
 \subsection*{Le n° 8, resté ouvert}
 
@@ -724,7 +775,10 @@ $L \cdot L^{2}$, $L \cdot LL'$, $L' \cdot L^{2}$, $L' \cdot LL'$ sur le même
 élément $L^{3}$, et sa matrice $\left(\begin{smallmatrix} 1 & 1 \\ 1 & 1
 \end{smallmatrix}\right)$ est de rang $1$. L'exemple ne relève donc pas des
 algèbres artiniennes de Gorenstein, où la distinction entre $L^{n} \neq 0$ et
-la propriété de Lefschetz forte est aujourd'hui classique ; ce qu'il sépare est
+la propriété de Lefschetz forte est aujourd'hui classique --- voir par exemple
+le critère hessien des éléments de Lefschetz (arXiv:0903.3581), ou le
+théorème de Stanley sur les intersections complètes monomiales et ses
+prolongements (arXiv:math/0506537) ; ce qu'il sépare est
 la condition de Lefschetz de la condition de Poincaré --- précisément les deux
 que les pages 24 à 28 imposent séparément. Le calcul de l'accouplement est de
 l'éditeur : la page n'écrit que les relations et la conclusion sur $L$ et $L'$,
@@ -784,12 +838,28 @@ ces pages qu'elles se lisent chacune sur une seule des trois données :
   dégénérée.
 \end{itemize}
 
+Ces énoncés sont justes tels quels.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder16.lean, \texttt{DonneesHodge.produit\_force},
+\texttt{DonneesHodge.mul\_anticomm\_of\_impair}, \texttt{DonneesHodge.assoc\_iff},
+\texttt{DonneesHodge.lefschetz\_iff}, \texttt{DonneesHodge.poincare\_iff}). Le
+produit $H^{1} \times H^{2} \to H^{3}$ ci-dessus est le seul compatible avec
+l'associativité et l'accouplement $H^{1} \times H^{3}$ ; la construction et le
+critère d'associativité valent sur tout anneau commutatif, et des conditions
+d'associativité seule celle du triplet $H^{1} \times H^{1} \times H^{1}$ n'est
+pas automatique. La finitude de $V$ sert une seule fois, pour Lefschetz ($\xi
+\colon V \to \check V$ injective entraîne surjective) ; Poincaré n'en demande
+aucune.}
+
 \subsection*{Le cas dégénéré, et la reformulation}
 
 Le feuillet 26 examine le cas où $(xy)(zt) = 0$, c'est-à-dire où l'image de
 $\alpha$ est isotrope. Plus généralement, il introduit la forme
-quadrilinéaire alternée $\chi$ définie par
-$x\,y\,z\,t = \chi(x,y,z,t)\,\xi^{2}$, et observe que la forme $Q \oplus 1$
+quadrilinéaire $\chi$ définie par
+$x\,y\,z\,t = \chi(x,y,z,t)\,\xi^{2}$, qui est alternée exactement quand la loi
+est associative,\footnote{L'identité quadrilinéaire d'associativité équivaut à
+$\chi(x,y,y,t) = 0$, c'est-à-dire à l'alternance de $\chi$ ; vérifié en Lean
+(lean/Grothendieck/Folder16.lean, \texttt{DonneesHodge.identite\_iff\_chi}). La
+page dit $\chi$ alternée sans le relier à l'associativité.} et observe que la forme $Q \oplus 1$
 induite sur $\Lambda^{2}V$ par $\alpha$ se factorise à travers $\chi$. Toute
 l'algèbre se ramène alors à la donnée de
 
@@ -804,7 +874,13 @@ l'algèbre se ramène alors à la donnée de
 \end{itemize}
 
 les conditions de non-dégénérescence devenant : $Q$ non dégénérée, et
-$\varphi(x,y) = Q(\alpha(x \wedge y), \xi)$ non dégénérée. Le gain est que la
+$\varphi(x,y) = Q(\alpha(x \wedge y), \xi)$ non dégénérée.\footnote{Avec
+$W = \xi^{\perp}$, $\varphi = \tilde Q(\alpha(\cdot), \xi)$ et $\psi = \alpha -
+\varphi\,\xi$, $\tilde Q$ est non dégénérée si et seulement si sa restriction à
+$W$ l'est, parce que $\tilde Q(\xi,\xi) = 1$ : les deux formulations ont donc
+les mêmes conditions. Vérifié en Lean (lean/Grothendieck/Folder16.lean,
+\texttt{reformulation\_spec}) ; la question de finitude du feuillet 28 ne
+l'est pas.} Le gain est que la
 polarisation $\xi$ devient un \emph{paramètre} de la structure, et non plus une
 partie de sa définition --- ce qui est exactement la question que les lettres
 de janvier poseront pour les conjectures.
@@ -1009,8 +1085,9 @@ C(X) \implies A^{0}(X \times Y) \ \text{et}\ A^{0}(Y \times Z)
 Le premier des deux carbones est une lettre de travail adressée à celui qui
 rédigeait les notes d'un exposé sur les cycles algébriques.\footnote{L'en-tête
 porte « Dear Coates » et la date « 4.1.67 » de sa main. Le second carbone porte
-« 6.1.1966 » ; les deux dates sont transcrites telles quelles et rien sur les
-feuillets ne les concilie. Les lettres grecques manquaient à la frappe et ont
+« 6.1.1966 » ; mais il s'ouvre sur « a few more comments to my talk » et suit
+donc le premier, si bien que « 1966 » est, par déduction, un lapsus pour 1967,
+au début d'une année nouvelle --- c'est la note de la transcription. Les lettres grecques manquaient à la frappe et ont
 été encrées à la main ; là où il ne les a pas encrées, l'indice reste absent.}
 
 \subsection*{Ce qu'il demande qu'on écrive}
@@ -1138,7 +1215,7 @@ hypersurfaces singulières, « et voir comment reformuler les conjectures
 standard pour les variétés singulières » --- ce que le dossier ne fait pas.
 
 \pagerange{47}{49}
-\section*{La lettre du 6 janvier : Cayley--Hamilton, et les variantes « faibles » (pages 47 à 49)}
+\section*{La lettre du 6 janvier 1967 : Cayley--Hamilton, et les variantes « faibles » (pages 47 à 49)}
 
 Le second carbone fait deux choses : il rend $C_{\chi}(X)$ indépendante de la
 polarisation par un argument purement linéaire, et il montre que des variantes
@@ -1176,7 +1253,12 @@ $\pm\,\sigma_{i}(w)/\sigma_{b}(w)$. L'hypothèse rend ces coefficients
 rationnels, donc $w^{-1}$ est algébrique, donc $w^{-1}u = v^{-1}$ aussi ---
 c'est-à-dire l'inverse de $L_{X}^{n-i}$.\footnote{Le tapuscrit écrit la
 relation de Cayley--Hamilton en $u$ alors que ses coefficients sont ceux de
-$w$ ; elle est rétablie en $w$ ici. En caractéristique nulle, note-t-il,
+$w$ ; elle est rétablie en $w$ ici. L'argument est juste tel quel : vérifié
+en Lean (lean/Grothendieck/Folder16.lean, \texttt{inverse\_mem\_of\_charpoly},
+\texttt{inverse\_Lefschetz\_algebrique}), où « algébrique » est
+l'appartenance à des ensembles d'applications stables par composition et par
+les scalaires de $F$ ; le théorème de Cayley--Hamilton y est celui de mathlib,
+\texttt{LinearMap.aeval\_self\_charpoly}. En caractéristique nulle, note-t-il,
 l'énoncé se simplifie : $C(X)$ équivaut à la seule existence d'isomorphismes
 algébriques $H^{2n-i}(X) \to H^{i}(X)$, la condition préliminaire de b) étant
 alors automatique.}
