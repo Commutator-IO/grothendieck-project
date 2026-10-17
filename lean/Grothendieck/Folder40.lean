@@ -63,7 +63,6 @@ theorem irreducible_radical {n : ℕ} (hn : n ≠ 0) {ϖ u : A} (hϖ : Irreducib
   · rw [hm.leadingCoeff]; exact fun h => (maximalIdeal.isMaximal A).ne_top
       ((Ideal.eq_top_iff_one _).mpr h)
   · intro m hmn
-    rw [hdeg] at hmn
     have hne : m ≠ n := by omega
     simp only [coeff_sub, coeff_X_pow, coeff_C, hne, ↓reduceIte, zero_sub]
     split_ifs with h0
@@ -74,8 +73,7 @@ theorem irreducible_radical {n : ℕ} (hn : n ≠ 0) {ϖ u : A} (hϖ : Irreducib
     rw [neg_mem_iff, hϖ.maximalIdeal_eq, Ideal.span_singleton_pow,
       Ideal.mem_span_singleton]
     rintro ⟨c, hc⟩
-    have h0 : ϖ ≠ 0 := hϖ.ne_zero
-    have : u = ϖ * c := mul_left_cancel₀ h0 (by rw [hc]; ring)
+    have : u = ϖ * c := mul_left_cancel₀ hϖ.ne_zero (by rw [hc]; ring)
     exact hϖ.not_isUnit (isUnit_of_mul_isUnit_left (this ▸ hu))
 
 theorem isDomain_radical {n : ℕ} (hn : n ≠ 0) {ϖ u : A} (hϖ : Irreducible ϖ)
@@ -113,23 +111,19 @@ theorem isDVR_adjoinRoot {n : ℕ} (hn : n ≠ 0) {ϖ u : A} (hϖ : Irreducible 
     have hϖM : AdjoinRoot.of g ϖ ∈ M := by
       rw [← AdjoinRoot.algebraMap_eq, ← Ideal.mem_comap, hc', hϖ.maximalIdeal_eq]
       exact Ideal.mem_span_singleton_self ϖ
-    have hyM : y ∈ M := by
-      apply hM.isPrime.mem_of_pow_mem n
-      rw [hy, map_mul]; exact M.mul_mem_right _ hϖM
+    have hyM : y ∈ M :=
+      hM.isPrime.mem_of_pow_mem n (by rw [hy, map_mul]; exact M.mul_mem_right _ hϖM)
     refine hM.eq_of_le ?_ ?_
-    · intro h
-      exact hM.ne_top (Ideal.eq_top_of_isUnit_mem _ hyM (Ideal.span_singleton_eq_top.mp h))
+    · exact fun h => hM.ne_top (Ideal.eq_top_of_isUnit_mem _ hyM (Ideal.span_singleton_eq_top.mp h))
     · intro r hr
       obtain ⟨q, rfl⟩ := AdjoinRoot.mk_surjective r
       have e : AdjoinRoot.root g = y := rfl
       rw [← X_mul_divX_add q, map_add, map_mul, AdjoinRoot.mk_X, AdjoinRoot.mk_C, e] at hr ⊢
       have ha : AdjoinRoot.of g (q.coeff 0) ∈ M := by
-        have := M.sub_mem hr (M.mul_mem_right (AdjoinRoot.mk g q.divX) hyM)
-        simpa using this
-      have ha' : q.coeff 0 ∈ maximalIdeal A := by
-        rw [← hc', Ideal.mem_comap, AdjoinRoot.algebraMap_eq]; exact ha
-      rw [hϖ.maximalIdeal_eq, Ideal.mem_span_singleton'] at ha'
-      obtain ⟨b, hb⟩ := ha'
+        simpa using M.sub_mem hr (M.mul_mem_right (AdjoinRoot.mk g q.divX) hyM)
+      obtain ⟨b, hb⟩ : ∃ b, b * ϖ = q.coeff 0 := by
+        rwa [← Ideal.mem_span_singleton', ← hϖ.maximalIdeal_eq, ← hc', Ideal.mem_comap,
+          AdjoinRoot.algebraMap_eq]
       refine Ideal.add_mem _ (Ideal.mul_mem_right _ _ (Ideal.mem_span_singleton_self y)) ?_
       rw [← hb, map_mul]
       exact Ideal.mul_mem_left _ _ hϖy
@@ -143,14 +137,10 @@ theorem isDVR_adjoinRoot {n : ℕ} (hn : n ≠ 0) {ϖ u : A} (hϖ : Irreducible 
   have hpid : IsPrincipalIdealRing (AdjoinRoot g) :=
     ((tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain (R := AdjoinRoot g)).out 5 1).mp
       (by rw [hmax]; exact ⟨⟨y, rfl⟩⟩)
-  have hy0 : y ≠ 0 := by
-    intro h
-    have h1 := hy
-    rw [h, zero_pow hn] at h1
-    have hinj := AdjoinRoot.of.injective_of_degree_ne_zero (f := g)
+  have hy0 : y ≠ 0 := fun h => mul_ne_zero hϖ.ne_zero v.ne_zero <|
+    AdjoinRoot.of.injective_of_degree_ne_zero (f := g)
       (by rw [hg_def, degree_X_pow_sub_C (Nat.pos_of_ne_zero hn)]; exact_mod_cast hn)
-    have : ϖ * ↑v = 0 := hinj (by rw [← h1, map_zero])
-    exact (mul_ne_zero hϖ.ne_zero v.ne_zero) this
+      (by rw [← hy, h, zero_pow hn, map_zero])
   exact { hpid, ‹IsLocalRing (AdjoinRoot g)› with
     not_a_field' := by rw [hmax]; simpa [Ideal.span_singleton_eq_bot] using hy0 }
 
@@ -190,10 +180,8 @@ def noOddBelow (n : ℕ) : Subring (PowerSeries k) where
     refine Finset.sum_eq_zero fun x hx => ?_
     rw [Finset.HasAntidiagonal.mem_antidiagonal] at hx
     rcases Nat.even_or_odd x.1 with h | h
-    · have h2 : Odd x.2 := by
-        rcases Nat.even_or_odd x.2 with h2 | h2
-        · exfalso; rw [← hx] at hm; exact Nat.not_odd_iff_even.mpr (h.add h2) hm
-        · exact h2
+    · have h2 : Odd x.2 :=
+        Nat.not_even_iff_odd.mp fun h2 => Nat.not_odd_iff_even.mpr (h.add h2) (hx ▸ hm)
       rw [hb _ h2 (by omega), mul_zero]
     · rw [ha _ h (by omega), zero_mul]
   one_mem' m hm _ := by
@@ -232,8 +220,7 @@ theorem cuspMap_mem (n : ℕ) (hn : n ≠ 0) (r : Cusp k n) : cuspMap n hn r ∈
   | add p q hp hq => rw [eval₂_add]; exact Subring.add_mem _ hp hq
   | monomial j a =>
     rw [eval₂_monomial]
-    refine Subring.mul_mem _ (substPow_mem n hn a) ?_
-    intro m hm hmn
+    refine Subring.mul_mem _ (substPow_mem n hn a) fun m hm hmn => ?_
     rw [← pow_mul, PowerSeries.coeff_X_pow, ite_eq_right_iff]
     rintro rfl; exact absurd hm (Nat.not_odd_iff_even.mpr (even_two_mul j))
 
@@ -272,10 +259,9 @@ theorem cusp_not_valuation {n : ℕ} (hn : 3 ≤ n) (hodd : Odd n) (c : Cusp k n
 theorem not_isDVR_cusp_odd {n : ℕ} (hn : 3 ≤ n) (hodd : Odd n) :
     ¬ ∃ _ : IsDomain (Cusp k n), IsDiscreteValuationRing (Cusp k n) := by
   rintro ⟨_, _⟩
-  obtain ⟨c, hc | hc⟩ := ValuationRing.cond (AdjoinRoot.of _ PowerSeries.X : Cusp k n)
+  obtain ⟨c, hc⟩ := ValuationRing.cond (AdjoinRoot.of _ PowerSeries.X : Cusp k n)
     (AdjoinRoot.root _)
-  · exact (cusp_not_valuation hn hodd c).1 hc
-  · exact (cusp_not_valuation hn hodd c).2 hc
+  exact hc.elim (cusp_not_valuation hn hodd c).1 (cusp_not_valuation hn hodd c).2
 
 theorem cusp_factor_ne_zero {m : ℕ} (hm : m ≠ 0) (ε : (PowerSeries k)) :
     AdjoinRoot.mk (X ^ (2 * m) - C (PowerSeries.X ^ 2 : (PowerSeries k))) (X ^ m + C ε) ≠ 0 := by
@@ -287,13 +273,11 @@ theorem cusp_factor_ne_zero {m : ℕ} (hm : m ≠ 0) (ε : (PowerSeries k)) :
 /-- For `n = 2m` even, `k[[X]][T]/(T^n - X²)` is not a domain. -/
 theorem not_isDomain_cusp_even {m : ℕ} (hm : m ≠ 0) : ¬ IsDomain (Cusp k (2 * m)) := by
   intro hd
-  have h1 := cusp_factor_ne_zero (k := k) hm (-PowerSeries.X)
-  have h2 := cusp_factor_ne_zero (k := k) hm PowerSeries.X
   have h0 : AdjoinRoot.mk (X ^ (2 * m) - C (PowerSeries.X ^ 2 : (PowerSeries k))) (X ^ m + C (-PowerSeries.X)) *
       AdjoinRoot.mk _ (X ^ m + C PowerSeries.X) = 0 := by
     rw [← map_mul, AdjoinRoot.mk_eq_zero]
     exact ⟨1, by rw [mul_one, map_neg, C_pow]; ring⟩
-  exact mul_ne_zero h1 h2 h0
+  exact mul_ne_zero (cusp_factor_ne_zero hm _) (cusp_factor_ne_zero hm _) h0
 
 /-- For `n = 2` in characteristic `2`: `(T - X)² = 0` and `T - X ≠ 0`. -/
 theorem cusp_two_nilpotent [CharP k 2] :
@@ -405,12 +389,9 @@ theorem toD_z : toD p (z (k := k) p) =
 
 omit [CharP k p] in
 /-- **The fibre product is not reduced.** `z ≠ 0`. -/
-theorem fibre_ne_zero : z (k := k) p ≠ 0 := by
-  intro h
-  have h1 := congrArg (toD p) h
-  rw [toD_z, map_zero] at h1
+theorem fibre_ne_zero : z (k := k) p ≠ 0 := fun h => by
   refine AdjoinRoot.mk_ne_zero_of_natDegree_lt (monic_X_pow_sub_C _ hp.out.ne_zero)
-    (X_sub_C_ne_zero _) ?_ h1
+    (X_sub_C_ne_zero _) ?_ ((toD_z (k := k) p).symm.trans (by rw [h, map_zero]))
   rw [natDegree_X_pow_sub_C, natDegree_X_sub_C]; exact hp.out.one_lt
 
 /-- **The fibre product is not reduced.** `z^p = 0`. -/
