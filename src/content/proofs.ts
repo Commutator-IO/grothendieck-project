@@ -504,4 +504,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder76.lean',
     theorems: ['commute_of_closure', 'mem_mul_of_split', 'res_res', 'flag_lemma', 'prec_iff_pair', 'prec_of_mem', 'not_prec_self', 'prec_trans'],
   },
+  {
+    folder: '37',
+    batch: 5,
+    page: '92',
+    name: 'Letter to Dieudonné: the counterexample to EGA I 10.10.5',
+    statement:
+      'With B = k[X₀, X₁, …], A_n = B[T]/(T^{n+1}) and J_n = (X₀, X₁T, …, X_nTⁿ), the ideal J_n needs exactly n + 1 generators, M_n = A_n/J_n is finitely presented and J_{n+1} maps onto J_n. Hence, for any commutative ring A (the page’s B[[T]]) and any ring maps A → A_n, no finitely presented A-module M has A_n ⊗_A M ≅ M_n for every n: condition b) of EGA I 10.10.5 does not imply a) and c) without noetherian hypotheses.',
+    found:
+      'Holds, more generally: neither the completeness of A, nor the surjectivity of A → A_n, nor the compatibility of the isomorphisms is used. Minimality is proved as the reading writes it, made numerical: the coefficient λᵢ of XᵢTⁱ satisfies λᵢ(a·XₗTˡ) = δᵢₗ·ε(a) and kills T^{n+1}, so m generators give E·L = 1 for (n+1) × m and m × (n+1) matrices over k, and n + 1 ≤ m by rank. The letter’s claim that the generators are independent over B in J_n/TJ_n is false (X₀·X₁T ∈ TJ_n) and is not used. Right exactness of A_n ⊗_A − carries a presentation A^p → A^q → M → 0 to A_n, and a Schanuel step (N ≅ S/J the quotient of a projective module by the image of p generators ⇒ J has p + 1 generators) bounds every J_n by p + 1, instead of the reading’s p + q. Not formalised: formal schemes and the conditions a), b), c) of 10.10.5.',
+    verdict: 'holds, more generally',
+    lean: 'lean/Grothendieck/Folder37.lean',
+    theorems: ['le_of_lifts', 'Jn_not_generated', 'Jn_spanRank', 'Mn_finitePresentation', 'Jn_map_succ', 'ideal_spanRank_le_of_presentation', 'no_finitePresentation_inducing'],
+  },
 ];

@@ -1,0 +1,51 @@
+\section[Cote 37 : le contre-exemple à EGA I 10.10.5]{Cote 37 : le contre-exemple à EGA~I 10.10.5\protect\verifie{Folder37}}\label{sec:37}
+
+La cote 37, \emph{Rééditions SGA, EGA [SGA 4 à SGA 7, EGA I et EGA II]}, quatre-vingt-dix-neuf pages de tapuscrits, de lettres et de notes, dont l'inventaire date les lettres \q{(1967-1971, s.d.)}, est un dossier de travail éditorial : les rééditions de SGA~1, 4, 5, 6 et~7 et d'EGA~I et~II, avec les lettres échangées et quelques morceaux de mathématiques inédits. La page~92 est une lettre dactylographiée à Dieudonné, datée à la main du 27.8.1967. Dieudonné avait tiqué sur la généralisation proposée d'EGA~I 10.10.5 hors du cas noethérien ; la lettre admet que les conditions a) et c) \q{ne son[t] pas impliquées par b)} et le montre sur $A = B[[T]]$, $A_n = B[T]/(T^{n+1})$, $M_n = A_n/J_n$ avec $J_n = (X_0, X_1T, \ldots, X_nT^n)$ et $B = k[(X_i)_{i \geq 0}]$, pour lequel les générateurs écrits de $J_n$ sont \q{en nombre minimal} (\lot{37}{5}{92}). La lettre affirme pour cela que ces générateurs sont linéairement indépendants sur $B$ dans $J_n/TJ_n$, ce qui est faux : $X_0 \cdot X_1T = T \cdot X_1X_0 \in TJ_n$. Sa réduction modulo les $X_j$, $j \neq i$, montre seulement que chaque coefficient est dans l'idéal $(X_j)_{j \geq 0}$, et c'est ce qui suffit. La lecture rédige ainsi la minimalité et ajoute l'étape de Schanuel, que la lettre laisse implicite.
+
+\noindent\emph{Conventions.} $k$ est un corps, $B = k[X_0, X_1, \ldots]$, $P = B[T]$, $A_n = P/(T^{n+1})$ et $J_n \subset A_n$ l'idéal engendré par les classes de $X_lT^l$, $0 \leq l \leq n$. Pour $f \in P$, on note $\lambda_i(f) \in k$ le coefficient du monôme $X_iT^i$ et $\varepsilon(f) \in k$ le terme constant ; $\varepsilon$ est un homomorphisme d'anneaux, $\lambda_i$ est $k$-linéaire.
+
+\begin{lemme}\label{lem:37-lambda}
+Pour $a \in P$ et $i, l \geq 0$, $\lambda_i(a \cdot X_lT^l)$ vaut $\varepsilon(a)$ si $l = i$ et $0$ sinon. Pour $i \leq n$, $\lambda_i(a\,T^{n+1}) = 0$.
+\end{lemme}
+
+\begin{proof}
+Tout monôme de $a\,X_lT^l$ est divisible par $X_lT^l$. Le monôme $X_iT^i$ ne l'est que si $l = i$, et le coefficient de $X_iT^i$ dans $a\,X_iT^i$ est alors celui du monôme $1$ dans $a$. Tout monôme de $a\,T^{n+1}$ a un degré en $T$ au moins $n + 1 > i$.
+\end{proof}
+
+\begin{theoreme}[Grothendieck, page 92, minimalité des générateurs\piste{37-ega-i-10-10-5-counterexample}]\label{thm:37-minimal}
+L'idéal $J_n$ de $A_n$ est engendré par $n + 1$ éléments et ne l'est par aucune famille de moins de $n + 1$ éléments.
+\end{theoreme}
+
+\begin{proof}
+Soient $g_1, \ldots, g_m$ des générateurs de $J_n$. On écrit chaque $X_jT^j$, $0 \leq j \leq n$, comme combinaison $\sum_r a_{jr}g_r$, et chaque $g_r$ comme combinaison $\sum_l b_{rl}X_lT^l$, puis on relève tout dans $P$ : les égalités y valent à un multiple de $T^{n+1}$ près. Appliquons $\lambda_i$, $i \leq n$, à la première. Par le lemme~\ref{lem:37-lambda}, le membre de gauche donne $\delta_{ij}$, le multiple de $T^{n+1}$ ne contribue pas, et chaque $a_{jr}g_r$ donne $\sum_l \lambda_i(a_{jr}b_{rl}X_lT^l) = \varepsilon(a_{jr})\,\varepsilon(b_{ri})$. Les matrices $E = (\varepsilon(a_{jr}))$, de taille $(n+1) \times m$, et $L = (\varepsilon(b_{ri}))$, de taille $m \times (n+1)$, à coefficients dans $k$, vérifient donc $EL = 1$. Le rang de l'identité, $n + 1$, est au plus celui de $E$, lui-même au plus $m$.
+\end{proof}
+
+\begin{enonce}[Page 92, compatibilité]\label{prop:37-compat}
+Le $A_n$-module $M_n = A_n/J_n$ est de présentation finie, et la réduction $A_{n+1} \to A_n$ envoie $J_{n+1}$ sur $J_n$ : les $M_n$ forment un système compatible.
+\end{enonce}
+
+\begin{proof}
+$M_n$ est le quotient de $A_n$ par un idéal de type fini. L'image de $J_{n+1}$ est engendrée par les classes de $X_lT^l$, $l \leq n + 1$, et $X_{n+1}T^{n+1}$ est nul dans $A_n$.
+\end{proof}
+
+\begin{lemme}[l'étape de Schanuel]\label{lem:37-schanuel}
+Soient $S$ un anneau commutatif, $J$ un idéal de $S$, $F$ un $S$-module projectif, $\varphi : F \to N$ surjective et $\gamma : K \to F$ d'image le noyau de $\varphi$, où $K$ est engendré par $p$ éléments. Si $N \simeq S/J$, alors $J$ est engendré par $p + 1$ éléments.
+\end{lemme}
+
+\begin{proof}
+Soit $\varphi' : F \to S/J$ le composé de $\varphi$ et de l'isomorphisme. Comme $F$ est projectif, $\varphi'$ se relève en $\psi : F \to S$ ; comme $\varphi'$ est surjective, il existe $x_0 \in F$ d'image la classe de $1$, et l'on pose $\chi(s) = s x_0$. Alors $c = 1 - \psi(x_0)$ est dans $J$, et les $\psi(\gamma(v_r))$, pour des générateurs $v_1, \ldots, v_p$ de $K$, aussi, puisque $\varphi \circ \gamma = 0$. Réciproquement, pour $x \in J$, $\varphi'(\chi(x))$ est la classe de $x$, nulle, donc $\chi(x) = \gamma(y)$ pour un $y \in K$, et $x = xc + x\,\psi(x_0) = xc + \psi(\gamma(y))$ est dans l'idéal engendré par $c$ et les $\psi(\gamma(v_r))$.
+\end{proof}
+
+\begin{theoreme}[Grothendieck, page 92, contre-exemple à EGA~I 10.10.5\piste{37-ega-i-10-10-5-counterexample}]\label{thm:37-contre}
+Soient $A$ un anneau commutatif quelconque et, pour tout $n$, un homomorphisme d'anneaux quelconque $A \to A_n$. Il n'existe pas de $A$-module de présentation finie $M$ tel que $A_n \otimes_A M \simeq M_n$ comme $A_n$-modules pour tout $n$. En particulier, pour $A = B[[T]]$ et ses réductions, le système compatible $(M_n)$ de modules de présentation finie ne vient d'aucun $A$-module de présentation finie : la condition b) d'EGA~I 10.10.5 n'entraîne pas a) et c) sans hypothèse noethérienne.
+\end{theoreme}
+
+\begin{proof}
+Soit $A^p \xrightarrow{\gamma_0} A^q \xrightarrow{\varphi_0} M \to 0$ une présentation. Le produit tensoriel par $A_n$ est exact à droite : $A_n \otimes_A A^p \to A_n \otimes_A A^q \to A_n \otimes_A M \to 0$ est exact, le module du milieu est libre, et celui de gauche est engendré par $p$ éléments. Si $A_n \otimes_A M \simeq A_n/J_n$, le lemme~\ref{lem:37-schanuel} engendre $J_n$ par $p + 1$ éléments, et le théorème~\ref{thm:37-minimal} donne $n + 1 \leq p + 1$ pour tout $n$, ce qui est absurde pour $n = p + 1$.
+\end{proof}
+
+\begin{remarque}
+Le contre-exemple tient tel que la lettre l'énonce, et plus généralement. Ni la complétude de $A$, ni la surjectivité des $A \to A_n$, ni la compatibilité des isomorphismes ne servent : une présentation de $M$ par $q$ générateurs et $p$ relations borne uniformément, par $p + 1$, le nombre de générateurs de chaque $J_n$. La borne de la lecture, $p + q$, est remplacée par $p + 1$. La minimalité est démontrée comme la lecture la rédige, par l'indépendance des $n+1$ générateurs dans $J_n/(TJ_n + \mathfrak m J_n)$, $\mathfrak m = (X_j)_{j \geq 0}$, mise en équations : les formes $\lambda_i$ sont nulles sur $TJ_n + \mathfrak m J_n$ et valent $\delta_{il}$ sur $X_lT^l$. L'indépendance sur $B$ dans $J_n/TJ_n$ qu'affirme la lettre est fausse et ne sert pas.
+\end{remarque}
+
+Ne sont pas démontrés ici : les schémas formels et les conditions a), b), c) d'EGA~I 10.10.5 elles-mêmes, que la page ne rappelle pas ; l'implication a) $\Rightarrow$ c) sans hypothèse noethérienne, que les deux correspondants laissent ouverte ; le \q{canular} d'EGA~IV 17.1.6 (i) que signale la page~93.
