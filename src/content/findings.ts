@@ -3003,26 +3003,6 @@ export const FINDINGS: Finding[] = [
   // the local Picard scheme. They are not repeated here. Below: one codicological entry, three
   // killed candidates, and three left open.
   {
-    id: '57-csg-letters-transcribed',
-    cote: '57',
-    pages: '19–22, 72–78, 226–230',
-    kind: 'codicological',
-    claim:
-      'Three letters of this folder are already transcribed and online, from scans of “Cote n° 57”. The Centre for Grothendieckian Studies (Grothendieck Institute, Mondovì) lists them on its transcriptions page: the undated letter to Murre (pp. 19–22, its L24d, dated there “1962 (?)”, draft October 2024), the letter to Murre of 18 July 1962 (pp. 72–78, its L25d), and the letter to Hironaka of 6 July 1962 (pp. 226–230, its L27d, draft April 2024).',
-    basis:
-      'The L27d and L24d PDFs open with “This transcription is derived from an unpublished scan provided by the Montpellier archive with the reference “Cote n◦ 57””. Their opening text is that of the transcription here: L27d starts “Neuilly July 6 1962 / Dear Hironaka, / I had a little thought over our conversation last tuesday”, and L24d starts “Dear Murre, / I am glad to hear that your are still willing to give the talk on unramified functors”, then states the quotient theorem of p. 19.',
-    ours:
-      'Neither the reading nor the transcriptions mention these editions. The pass read only the title pages and the opening paragraphs of L24d and L27d. It has not compared the texts line by line. L25d was listed but its URL returned an HTML page, not a PDF, on 2026-10-10, so that letter is identified from the listing alone. The listing labels L25d “French”, but pp. 72–78 here are in English. The pass has not settled whether the listing is wrong or L25d is another document.',
-    literature: [
-      'Centre for Grothendieckian Studies, Grothendieck Institute, transcriptions page (csg.igrothendieck.org/transcriptions/), entries for letters to J. Murre and H. Hironaka, read 2026-10-10',
-      'A. Grothendieck, Letter to H. Hironaka, 6.7.1962, transcription ed. M. Carmona et al., CSG, draft April 2024 (L27d.pdf), title page and pp. 1–2 read',
-      'A. Grothendieck, Letter to J. Murre, 1962 (?), transcription ed. M. Carmona et al., CSG, draft October 2024 (L24d.pdf), title page and opening read',
-    ],
-    status: 'matched',
-    settle:
-      'Collate L24d and L27d with batch-02 and batch-12, and record any reading where they differ. If L25d can be fetched, collate it with pp. 72–78 as well, and check whether it follows the fair copy (pp. 72–74) or the corrected earlier state (pp. 75–78). Then the reading’s header should name the CSG edition, which is /modernize-grothendieck’s work.',
-  },
-  {
     id: '57-conic-nonseparated-pic',
     cote: '57',
     pages: '213–218',
@@ -3309,25 +3289,6 @@ export const FINDINGS: Finding[] = [
     status: 'matched',
     settle:
       'Matched on a secondary citation only: read Giraud, Cohomologie non abélienne, VII § 2.1, check that Théorème 2.1.2 there is this statement (hypotheses on L, ind-L-stacks, the strictly local case a)), and whether the chapter layout fits the letter’s « 2.1.1, 2.1.5, 2.1.7 » and « Chap. VII ». If the statements differ, reopen as unsearched.',
-  },
-  {
-    id: '37-dieudonne-letter-sent-copy',
-    cote: '37',
-    pages: '96–97',
-    kind: 'codicological',
-    claim:
-      'Pages 96–97, the letter to Dieudonné of 15.9.1967, are an uncompleted copy: a typed top copy of the same letter, with the machine’s blanks filled by hand and signed « Bien cordialement A. Grothendieck », survives elsewhere, and its hand-inked « m = Σ m_i » in the Lemma confirms the reading’s restitution of the blank the folder copy leaves.',
-    basis:
-      'The transcription records that on pages 96–97 the arrows, ∈, ≤ and the tilde were left blank and never completed, that a blank stands between « m » and « m_i » in the Lemma, and that the second leaf has no signature. The Grothendieck Circle hosts a two-page scan (csg.igrothendieck.org, L88u.pdf) of the same typed text, dated « 15.9.67 », marked « 3H/DIEU I/241 » at the top right, with the blanks inked, « engendré par m = Σ m_i générateurs » and a signature.',
-    ours:
-      'The comparison is this pass’s own, made on the scan at screen resolution on 2026-10-10; that the scan is the dispatched copy and the folder’s a retained copy is inferred, not established, and the reading of the mark « 3H/DIEU I/241 » (and of « I 10.11.3 » where the folder copy reads « I 10.11 ») is uncertain.',
-    literature: [
-      'Grothendieck Circle scan csg.igrothendieck.org/wp-content/uploads/2025/01/L88u.pdf, pages 1–2, read directly',
-      'Transcription 37, batch 5 (batch-05.fr.tex), pages 96–97',
-    ],
-    status: 'candidate',
-    settle:
-      'A person compares the two documents line by line, checks whether the folder’s leaves are a carbon of the scanned sheets, identifies the holding behind « 3H/DIEU I/241 », and records the scan’s Σ and its « 10.11.3 » (if that is what it reads) in the transcription’s apparatus.',
   },
 // Folder 58 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over 58.modern.tex (Opus 5.5 reading, 2026-10-04) and batch-01..04.fr.tex.
 // SGA 2 was read in the retyped edition (arXiv math/0511279, text extracted from the PDF); nothing else was read in full.
