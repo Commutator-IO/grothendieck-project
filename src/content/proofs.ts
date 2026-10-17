@@ -608,4 +608,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder118.lean',
     theorems: ['isWeq_iff_bijective', 'isWeq_prod', 'isWeq_pi', 'not_aspherical_point', 'not_aspherical_regular_prod', 'answer_page_35'],
   },
+  {
+    folder: '64',
+    batch: 3,
+    page: '48',
+    name: 'The octahedral configuration in characteristic 5',
+    statement:
+      'An automorphism of ℙ¹ fixing ∞ and −1 and preserving Δ = {0, ∞, ±1, ±i} is z ↦ az + (a − 1), and a = 1 unless the characteristic is 2 or 5; the reading adds « 5 invertible » wherever Aut(X, Δ) is identified with the octahedral group 𝔖₄.',
+    found:
+      'Holds, more generally: if z ↦ az + (a − 1) maps {0, 1, i, −i} into itself then 5(a − 1) = 0, since the four points sum to 1 and the map sends that sum to 5a − 4; only 2 and 5 invertible are used, and the margin’s exclusion of characteristic 3 is not needed. In characteristic 5, z ↦ 2z + 1 permutes the four points; over 𝔽₅ (i = 2) the configuration is all of ℙ¹(𝔽₅) and the bijections induced by invertible matrices, which all preserve it, are 120, not 24 — the reading’s hypothesis is necessary. Not formalised: the statements over a base.',
+    verdict: 'holds, more generally',
+    lean: 'lean/Grothendieck/Folder64.lean',
+    theorems: ['fixer_five', 'fixer_trivial', 'fixer_nontrivial_char5', 'two_sq', 'octahedral_eq_univ', 'perm_octa', 'card_pgl', 'card_fixer'],
+  },
 ];
