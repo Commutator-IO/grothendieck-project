@@ -95,6 +95,17 @@
 % off); the description of S~, A~, F~ in terms of (T, varpi) and of Pi-bar as
 % a quotient polyhedron (p. 30, « Il reste »), of which the table of p. 31
 % gives the sets but no incidences and no proof.
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder86.lean), which re-does on the
+% combinatorial icosahedron, from adjacency alone, what the machine checks on
+% the regular one did: rho well defined and rho^3 = id; orthogonal edges
+% disjoint; the page-23 correction {u, v_1}; |G| = 120, image Alt_T, kernel
+% {1, iota}; the 60 even numberings and the incidence dictionary of pp.
+% 26-32. New: the page's sigma_1 on p. 31 is the dictionary's sigma_1
+% conjugated by sigma_2 (the reading said only « another dictionary »).
+% The findings record no literature actually read. No facsimile check since
+% 2026-10-10.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -655,7 +666,10 @@ en
 On calcule $\rho^2(\bar a) = \overline{\{u, \iota v\}} = \overline{\{v, \iota
 u\}}$, puis $\rho^3(\bar a) = \bar a$\footnote{Le calcul de $\rho^2$ et de
 $\rho^3$ n'est pas détaillé sur la page ; on l'a vérifié sur l'icosaèdre
-régulier. La page écrit $\{u, v'\}$ pour $\{u, \iota v\}$. Les indices des
+régulier, et en Lean sur l'icosaèdre combinatoire, tout étant calculé à partir
+de l'adjacence (lean/Grothendieck/Folder86.lean, \texttt{rho\_sq} et
+\texttt{rho\_cube}) : $\rho$ est bien défini sur les directions, quelle que
+soit la face choisie, et $\rho^3 = \mathrm{id}$ sans point fixe. La page écrit $\{u, v'\}$ pour $\{u, \iota v\}$. Les indices des
 $\Pi$ de la figure marginale sont serrés et parfois surchargés.}. Donc
 $\rho^3 = \mathrm{id}$, $\rho$ est une permutation sans point fixe, toutes ses
 orbites ont trois éléments, et il y en a cinq. Une orbite s'appelle un
@@ -694,7 +708,9 @@ coloration propre des arêtes en cinq couleurs, chaque sommet voyant les cinq
 couleurs\footnote{La page 19 s'arrête sur « Interprétation concrète en termes
 de coloriage, » au bas de la feuille ; la page 20 commence par la Proposition.
 L'interprétation donnée ici --- aujourd'hui, une $1$-factorisation du graphe
-de l'icosaèdre --- est de l'édition.}.
+de l'icosaèdre --- est de l'édition. Vérifié en Lean
+(lean/Grothendieck/Folder86.lean, \texttt{orthogonal\_disjoint},
+\texttt{col\_inj\_at} et \texttt{col\_surj\_at}).}.
 
 \textbf{Corollaire.} \emph{Pour tout $s \in S$, si $P(s)$ est l'ensemble des
 cinq arêtes issues de $s$, $a \mapsto \operatorname{tr}(\bar a)$ est une
@@ -751,7 +767,10 @@ obtient une \emph{orientation canonique} $\varpi$ de $T$, conservée par $G$.
 « $\overline{\{u, v\}}$ », avec doute sur les lettres et les indices : c'est
 $\overline{\{u, v_1\}}$, car $\{u, v\}$ est un côté de $f$, dont le trièdre
 $t_w$ est distinct de $t_\omega$ par b). Le second triple est lu comme on
-l'écrit. Les deux triples ont été vérifiés sur l'icosaèdre régulier.}. \emph{Soit $f = \{u, v, w\}$ une face, et
+l'écrit. Les deux triples ont été vérifiés sur l'icosaèdre régulier, et en
+Lean (lean/Grothendieck/Folder86.lean, \texttt{face\_triedres} et
+\texttt{face\_triedre\_page\_reading}), qui confirme que la lecture
+$\overline{\{u, v\}}$ ne donne pas un trièdre.}. \emph{Soit $f = \{u, v, w\}$ une face, et
 $u_1$, $v_1$, $w_1$ les troisièmes sommets des faces qui bordent
 respectivement les côtés $\{v, w\}$, $\{w, u\}$, $\{u, v\}$.}
 \begin{enumerate}
@@ -809,7 +828,12 @@ l'image de $G$ est aussi multiple de $4$, donc de $60 =
 \operatorname{Aut}(\Pi) \to \mathfrak{S}_T$, de l'ensemble des trièdres
 distingués de l'icosaèdre, a pour image $\operatorname{Alt}_T$ et pour noyau
 le sous-groupe $\mathfrak{z}$ d'ordre $2$ engendré par l'antipodisme.} Le
-noyau a $120/60 = 2$ éléments et contient $\iota$, qui fixe chaque direction.
+noyau a $120/60 = 2$ éléments et contient $\iota$, qui fixe chaque
+direction.\footnote{Vérifié en Lean (lean/Grothendieck/Folder86.lean,
+\texttt{card\_aut}, \texttt{permT\_mem\_alternating},
+\texttt{permT\_surjective} et \texttt{permT\_eq\_one\_iff}) : le groupe des
+automorphismes de l'icosaèdre combinatoire a $120$ éléments, son image dans
+$\mathfrak{S}_T$ est $\operatorname{Alt}_T$ et son noyau $\{1, \iota\}$.}
 
 Soit $G^{+}$ le sous-groupe d'indice $2$ des automorphismes qui conservent
 l'orientation de l'icosaèdre, c'est-à-dire chacune des deux classes $R^{+}$,
@@ -1057,7 +1081,17 @@ $\pi = (a_1 \ldots a_5)$), $\sigma_0$ et $\sigma_2$ sont bien ceux de la page,
 mais $\sigma_1$ est $(a_1, \ldots, a_5) \mapsto (a_5, a_4, a_3, a_2, a_1)$ ;
 celui de la page change aussi la face. Les deux triples satisfont les mêmes
 relations et définissent des $\widehat{\Gamma}$-ensembles isomorphes, ce qu'on
-a vérifié par machine : celui de la page correspond à un autre dictionnaire.}.
+a vérifié par machine : celui de la page correspond à un autre dictionnaire.
+Vérifié en Lean (lean/Grothendieck/Folder86.lean, \texttt{numb\_even},
+\texttt{numb\_eq\_iff}, \texttt{numb\_sigma}, \texttt{numb\_sigma\_page},
+\texttt{page32}, \texttt{incidence\_dictionary} et \texttt{counts}) : les
+drapeaux de l'icosaèdre gauche donnent exactement les $60$ numérotations
+paires, deux drapeaux ayant la même si et seulement s'ils sont égaux ou
+antipodaux ; sommets, arêtes et faces correspondent aux pentagones, aux
+partitions de type $(2,2,1)$ et aux parties à trois éléments ; et le
+$\sigma_1$ de la page est le conjugué par $\sigma_2$ de celui du dictionnaire
+de la page 30, c'est-à-dire celui du dictionnaire obtenu en appliquant
+d'abord $\sigma_2$ au drapeau.}.
 Le dossier s'arrête là ; le reste de la page 32 est blanc.
 
 \end{document}
