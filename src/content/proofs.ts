@@ -686,4 +686,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder2.lean',
     theorems: ['derivative_pow_units', 'derivative_zpow_units', 'derivative_prod_units', 'coe_lin_one_inv', 'eps_mul_pow', 'sum_eps_pow_of_lt', 'sum_eps_pow_self', 'logDeriv_zpow', 'chernPoint_int', 'chernPoint', 'rescale_C', 'prod_zpow_eq_zpow_sum', 'chernImmersion', 'chernImmersion_of_isNilpotent'],
   },
+  {
+    folder: '82',
+    batch: 4,
+    page: '77–78',
+    name: 'The conic in characteristic 2 and Frobenius, split case',
+    statement:
+      'Over a base with 2 = 0, O_S·1 ⊂ g̃ is the kernel of φ(u, v) = Tr(uv) (58); sending an isotropic line to its φ-orthogonal factors through P(g̃/O_S) (60), which the page identifies with X^(2), (60) being the relative Frobenius, not a monomorphism. Split case (footnote of the reading): the orthogonal of O(s²X̃ + t²Ỹ + stH̃) is t²x + s²y = 0, containing H̃ = 1 and depending only on (s² : t²).',
+    found:
+      'The split case holds as the edition’s footnote gives it, over any commutative ring with 2 = 0: H̃ = 1 spans the kernel of φ on g̃, the point (s : t) has orthogonal t²x + s²y = 0, which contains 1 and depends only on (s² : t²), so (60) is (s : t) ↦ (s² : t²); over 𝔽₂[ε]/(ε²) the distinct points (1 : ε) and (1 : 0) have the same image, so (60) is not a monomorphism. No unimodularity is needed for the orthogonal. Not formalised: the canonical isomorphism (61) with X^(2) for a twisted conic over a base, which needs conics over a base and the relative Frobenius, absent from mathlib.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder82.lean',
+    theorems: ['coord_eq', 'coord_mul_self', 'traceless_iff', 'tH_eq_one', 'one_mem_traceless', 'ker_phi', 'vst_mul_self', 'trace_mul_vst', 'orth_iff', 'one_mem_orth', 'orth_smul', 'not_mono'],
+  },
 ];

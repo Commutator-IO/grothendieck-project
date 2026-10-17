@@ -1,0 +1,16 @@
+\section[Cote 82 : la conique de caractéristique 2 et le Frobenius, cas déployé]{Cote 82 : la conique de caractéristique 2 et le Frobenius, cas déployé\protect\verifie{Folder82}}\label{sec:82}
+
+La cote 82, \emph{SO(3) $\simeq$ GP(1)}, notes que l'inventaire date \q{[vers 1982]}, compare les formes de $\mathrm{SO}(3)$ et de $\mathrm{PGL}(2)$ sur une base quelconque. Aux pages~77 et~78, sur une base où $2 = 0$, elle prend le module $\tilde{\mathfrak g}$ des matrices $2 \times 2$ de trace nulle avec $\varphi(u, v) = \mathrm{Tr}(uv)$ : comme $\mathrm{Tr}\,1 = 2 = 0$, $\mathcal O_S \cdot 1 \subset \tilde{\mathfrak g}$ est le noyau de $\varphi$ (58). Le morphisme (59), qui envoie un sous-groupe de Borel, c'est-à-dire une droite isotrope $L \subset \tilde{\mathfrak g}$, sur son orthogonal, se factorise par $\mathbf P(\tilde{\mathfrak g}/\mathcal O_S)$ (60), et la page affirme que (60) est le Frobenius relatif, non un monomorphisme (\lot{82}{4}{77}). L'édition le vérifie dans le cas déployé ; c'est cette vérification qui est démontrée ici, sur tout anneau commutatif $R$ où $2 = 0$, dans les coordonnées $u = x\tilde X + y\tilde Y + z\tilde H$, $\tilde X = E_{12}$, $\tilde Y = E_{21}$, $\tilde H = \mathrm{diag}(1, -1)$, pour lesquelles $u^2 = (xy + z^2) \cdot 1$.
+
+\begin{theoreme}[D'après les pages 77 et 78, cas déployé\piste{82-char2-conic-frobenius}]\label{thm:82-frobenius}
+Soit $R$ un anneau commutatif où $2 = 0$. Alors $\tilde H = 1$ et le noyau de $\varphi$ sur $\tilde{\mathfrak g}$ est $R \cdot 1$. Pour $s, t \in R$, l'élément $s^2\tilde X + t^2\tilde Y + st\tilde H$ est de carré nul, et son orthogonal pour $\varphi$ est l'hyperplan $t^2 x + s^2 y = 0$, qui contient $1$ et ne dépend que de $(s^2 : t^2)$ : (60) est $(s : t) \mapsto (s^2 : t^2)$. Sur $R = \mathbf F_2[\varepsilon]/(\varepsilon^2)$, les points distincts $(1 : \varepsilon)$ et $(1 : 0)$ de $\mathbf P^1(R)$ ont le même orthogonal : (60) n'est pas un monomorphisme.
+\end{theoreme}
+
+\noindent L'énoncé tient tel que la note de la lecture le donne (\texttt{ker\_phi}, \texttt{orth\_iff}, \texttt{orth\_smul}, \texttt{not\_mono}, dans \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/Folder82.lean}{\texttt{Folder82.lean}}). Le calcul de l'orthogonal vaut pour tous $s$, $t$, sans hypothèse d'unimodularité.
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, page 78, (61)]\nonverifie
+Pour une algèbre de quaternions sur une base de caractéristique~$2$, il existe un isomorphisme canonique $\mathbf P(\tilde{\mathfrak g}/\mathcal O_S) \simeq X^{(2)}$, et (60) est le Frobenius relatif $X \to X^{(2)}$ : il est fini, plat de rang~$2$ et radiciel.
+\end{theoreme*}
+\end{encadre}
+{\small La page~78 l'affirme sans démonstration. Sur un corps, la projection depuis le noyau de la conique est classique ; la forme relative et canonique ne l'est pas. Mathlib n'a pas les coniques sur une base ni le Frobenius relatif des schémas. On se reportera aux notes de Grothendieck (\lot{82}{4}{77}).\par}

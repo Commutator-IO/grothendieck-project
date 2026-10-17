@@ -6768,6 +6768,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Havlicek’s survey on the nucleus, and the treatment of Severi–Brauer conics and quadratic forms in characteristic 2 over a base in Knus, Quadratic and Hermitian Forms over Rings (1991), ch. IV–V; check whether the projection from the nucleus is identified there with the relative Frobenius X → X^(2) for twisted conics. If so, mark matched; over a field alone, it is matched already and the entry should say so.',
+    lean: { file: 'lean/Grothendieck/Folder82.lean', found: 'Partly proved: the split case holds as the edition’s footnote gives it, over any commutative ring R with 2 = 0, in the coordinates u = xX̃ + yỸ + zH̃ (X̃ = E₁₂, Ỹ = E₂₁, H̃ = diag(1, −1)), where u² = (xy + z²)·1. H̃ = 1 and the kernel of φ(u, v) = Tr(uv) on g̃ is R·1 (58, ker_phi); s²X̃ + t²Ỹ + stH̃ has square zero, and its φ-orthogonal is the hyperplane t²x + s²y = 0 (orth_iff), which contains 1 (one_mem_orth) and depends only on (s² : t²) (orth_smul), so (60) is (s : t) ↦ (s² : t²); over 𝔽₂[ε]/(ε²) the distinct points (1 : ε) and (1 : 0) have the same orthogonal, so (60) is not a monomorphism (not_mono). No unimodularity is needed for the orthogonal. Not formalised: the canonical isomorphism (61) P(g̃/O_S) ≃ X^(2) for a twisted conic over an arbitrary base, and (60) as the relative Frobenius (mathlib has neither conics over a base nor the relative Frobenius).' },
   },
   {
     id: '82-leaves-out-of-order',
