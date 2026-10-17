@@ -89,11 +89,8 @@ lemma TwoRegular.submodule (h : TwoRegular M) (N : Submodule k M) : TwoRegular N
 noncomputable def half (h : TwoRegular M) : two k M ≃ₗ[k] M :=
   (LinearEquiv.ofInjective (twice k M) h.injective).symm
 
-lemma two_smul_half (h : TwoRegular M) (x : two k M) : 2 • half h x = (x : M) := by
-  have e1 := LinearEquiv.ofInjective_apply (twice k M) (h := h.injective) (half h x)
-  have e2 : (LinearEquiv.ofInjective (twice k M) h.injective) (half h x) = x :=
-    LinearEquiv.apply_symm_apply _ x
-  exact e1.symm.trans (congrArg Subtype.val e2)
+lemma two_smul_half (h : TwoRegular M) (x : two k M) : 2 • half h x = (x : M) :=
+  congrArg Subtype.val ((LinearEquiv.ofInjective (twice k M) h.injective).apply_symm_apply x)
 
 /-- In `M/2M`, `-x` and `x` have the same class. -/
 lemma mk_neg (x : M) :
@@ -193,9 +190,7 @@ theorem inf_eigen_eq_bot : X.plus ⊓ X.minus = ⊥ := by
   rw [mem_plus] at h1
   rw [mem_minus, h1] at h2
   refine (Submodule.mem_bot k).2 (X.reg x ?_)
-  rw [two_nsmul]
-  nth_rewrite 1 [h2]
-  exact neg_add_cancel x
+  rw [two_nsmul, ← neg_add_cancel x, ← h2]
 
 /-- Page 90: `2x = (x + σx) + (x - σx)`, with `x + σx ∈ M₊` and `x - σx ∈ M₋`. -/
 lemma add_σ_mem_plus (x : X.carrier) : x + X.σ x ∈ X.plus := by
@@ -302,14 +297,9 @@ def buildObj (X : Triple.{v} k) : InvMod.{v} k where
   carrier := X.N
   σ := X.σN
   σ_σ z := Subtype.ext (by simp)
-  reg := by
-    intro z hz
+  reg z hz := by
     have h := congrArg Subtype.val hz
-    simp only [Submodule.coe_zero] at h
-    apply Subtype.ext
-    apply Prod.ext
-    · exact X.regP _ (congrArg Prod.fst h)
-    · exact X.regQ _ (congrArg Prod.snd h)
+    exact Subtype.ext (Prod.ext (X.regP _ (congrArg Prod.fst h)) (X.regQ _ (congrArg Prod.snd h)))
 
 /-- The linear map `N → N'` induced by a morphism of triples. -/
 def bmap {X Y : Triple.{v} k} (φ : X ⟶ Y) : X.N →ₗ[k] Y.N :=
@@ -343,10 +333,7 @@ variable {k}
 instance : (build k).Faithful where
   map_injective {X Y} φ ψ h := by
     have key : ∀ z : X.N, ((bmap φ z : Y.N) : Y.P × Y.Q) = ((bmap ψ z : Y.N) : Y.P × Y.Q) :=
-      fun z => by
-        change Subtype.val (InvMod.Hom.f ((build k).map φ) z) =
-          Subtype.val (InvMod.Hom.f ((build k).map ψ) z)
-        rw [h]
+      fun z => congr(Subtype.val (InvMod.Hom.f $h z))
     ext p
     · have h1 := congrArg Prod.fst (key ⟨_, X.two_smul_inl_mem p⟩)
       simp only [bmap_apply, map_nsmul] at h1
@@ -399,14 +386,8 @@ lemma image_ιP (p : X.P) :
   rw [aP_apply]
   generalize hh h (ιP X p) = w at hc ⊢
   obtain ⟨⟨a, b⟩, hw⟩ := w
-  have hb : b = -b := by
-    have := congrArg (fun w : Y.N => (w : Y.P × Y.Q).2) hc
-    simp only [σN_apply] at this
-    exact this
-  have h2 : b = 0 := Y.regQ _ (by
-    rw [two_nsmul]
-    calc b + b = b + -b := by rw [← hb]
-      _ = 0 := add_neg_cancel b)
+  have hb : b = -b := congrArg (fun w : Y.N => (w : Y.P × Y.Q).2) hc
+  have h2 : b = 0 := Y.regQ _ (by rw [two_nsmul, ← add_neg_cancel b, ← hb])
   refine ⟨h2, ?_⟩
   have hmem : (Submodule.Quotient.mk a, Submodule.Quotient.mk b) ∈ Y.m := hw
   rw [h2, Submodule.Quotient.mk_zero] at hmem
@@ -421,14 +402,8 @@ lemma image_ιQ (q : X.Q) :
   rw [aQ_apply]
   generalize hh h (ιQ X q) = w at hc ⊢
   obtain ⟨⟨a, b⟩, hw⟩ := w
-  have ha : -a = a := by
-    have := congrArg (fun w : Y.N => (w : Y.P × Y.Q).1) hc
-    simp only [σN_apply, Submodule.coe_neg, Prod.fst_neg] at this
-    exact this
-  have h1 : a = 0 := Y.regP _ (by
-    rw [two_nsmul]
-    calc a + a = -a + a := by rw [ha]
-      _ = 0 := neg_add_cancel a)
+  have ha : -a = a := congrArg (fun w : Y.N => (w : Y.P × Y.Q).1) hc
+  have h1 : a = 0 := Y.regP _ (by rw [two_nsmul, ← neg_add_cancel a, ha])
   refine ⟨h1, ?_⟩
   have hmem : (Submodule.Quotient.mk a, Submodule.Quotient.mk b) ∈ Y.m := hw
   rw [h1, Submodule.Quotient.mk_zero] at hmem
@@ -479,8 +454,7 @@ noncomputable def preimage : X ⟶ Y where
   g := fQ h
   hm p q hpq := by
     have h1 := (hh h ⟨(p, q), hpq⟩).2
-    rw [apply_eq] at h1
-    exact h1
+    rwa [apply_eq] at h1
 
 end Full
 
@@ -509,25 +483,22 @@ def m : Submodule k ((X.plus ⧸ two k X.plus) × (X.minus ⧸ two k X.minus)) :
 theorem mk_mem_m_iff (p : X.plus) (q : X.minus) :
     (Submodule.Quotient.mk p, Submodule.Quotient.mk q) ∈ X.m ↔
       (p : X.carrier) + q ∈ two k X.carrier := by
-  constructor
-  · rintro ⟨⟨p', q'⟩, hS, he⟩
-    simp only [LinearMap.prodMap_apply, Submodule.mkQ_apply, Prod.mk.injEq,
-      Submodule.Quotient.eq] at he
-    obtain ⟨hp, hq⟩ := he
-    have hS' : (p' : X.carrier) + q' ∈ two k X.carrier := hS
-    have lift : ∀ (N : Submodule k X.carrier) (x : N), x ∈ two k N →
-        (x : X.carrier) ∈ two k X.carrier := by
-      intro N x hx
-      obtain ⟨y, hy⟩ := mem_two.1 hx
-      exact mem_two.2 ⟨y, by rw [← hy]; rfl⟩
-    have h1 := lift _ _ hp
-    have h2 := lift _ _ hq
-    simp only [Submodule.coe_sub] at h1 h2
-    have : (p : X.carrier) + q = ((p' : X.carrier) + q') - (p' - p) - (q' - q) := by abel
-    rw [this]
-    exact Submodule.sub_mem _ (Submodule.sub_mem _ hS' h1) h2
-  · intro h
-    exact ⟨(p, q), h, rfl⟩
+  refine ⟨?_, fun h => ⟨(p, q), h, rfl⟩⟩
+  rintro ⟨⟨p', q'⟩, hS, he⟩
+  simp only [LinearMap.prodMap_apply, Submodule.mkQ_apply, Prod.mk.injEq,
+    Submodule.Quotient.eq] at he
+  obtain ⟨hp, hq⟩ := he
+  have hS' : (p' : X.carrier) + q' ∈ two k X.carrier := hS
+  have lift : ∀ (N : Submodule k X.carrier) (x : N), x ∈ two k N →
+      (x : X.carrier) ∈ two k X.carrier := by
+    intro N x hx
+    obtain ⟨y, hy⟩ := mem_two.1 hx
+    exact mem_two.2 ⟨y, by rw [← hy]; rfl⟩
+  have h1 := lift _ _ hp
+  have h2 := lift _ _ hq
+  simp only [Submodule.coe_sub] at h1 h2
+  rw [show (p : X.carrier) + q = ((p' : X.carrier) + q') - (p' - p) - (q' - q) by abel]
+  exact Submodule.sub_mem _ (Submodule.sub_mem _ hS' h1) h2
 
 /-- The triple `(M₊, M₋, m)` of page 90. -/
 def triple : Triple.{v} k where
@@ -561,9 +532,8 @@ def toBuild : X.carrier →ₗ[k] X.Nx :=
       change (Submodule.Quotient.mk (⟨x + X.σ x, X.add_σ_mem_plus x⟩ : X.plus),
         Submodule.Quotient.mk (⟨x - X.σ x, X.sub_σ_mem_minus x⟩ : X.minus)) ∈ X.m
       rw [mk_mem_m_iff]
-      have : (x + X.σ x) + (x - X.σ x) = 2 • x := by rw [two_nsmul]; abel
       change (x + X.σ x) + (x - X.σ x) ∈ two k X.carrier
-      rw [this]
+      rw [show (x + X.σ x) + (x - X.σ x) = 2 • x by rw [two_nsmul]; abel]
       exact two_smul_mem_two x)
 
 /-- `toBuild` as a morphism `(M, σ) → build (M₊, M₋, m)`. -/
