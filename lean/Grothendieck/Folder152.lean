@@ -63,8 +63,8 @@ structure InvolutionSansPointFixe (D : Type*) where
   sansPointFixe : ∀ a, σ a ≠ a
 
 theorem InvolutionSansPointFixe.mul_self (s : InvolutionSansPointFixe D) :
-    s.σ * s.σ = 1 := by
-  ext a; exact s.invol a
+    s.σ * s.σ = 1 :=
+  Equiv.ext s.invol
 
 /-- A combinatorial circularised graph without isolated vertex, on the set of
 arcs `D = Ā`: the reversal `σ_Γ` and the rotation `ρ_Γ` (next arc around the
@@ -123,9 +123,7 @@ theorem sommets (Γ : GrapheCircularise D) (a b : D) :
 theorem tete_page9_incompatible (Γ : GrapheCircularise D) (a : D) :
     Γ.ρ ≠ Γ.ρ * Γ.σ.σ := by
   intro h
-  have : Γ.σ.σ = 1 := by
-    have := congrArg (Γ.ρ⁻¹ * ·) h
-    simpa using this.symm
+  have : Γ.σ.σ = 1 := by simpa using (congrArg (Γ.ρ⁻¹ * ·) h).symm
   exact Γ.σ.sansPointFixe a (by rw [this]; rfl)
 
 /-- Connectedness of the graph: any two arcs are joined by a chain of moves
@@ -143,11 +141,7 @@ theorem connexe_of_une_face [Finite D] (Γ : GrapheCircularise D)
   induction k with
   | zero => exact Relation.EqvGen.refl _
   | succ k ih =>
-    refine ih.trans _ _ _ ?_
-    have h1 : Relation.EqvGen (fun x y => y = Γ.ρ x ∨ y = Γ.σ.σ x)
-        ((((dictionnaire Γ).ρC) ^ k) a) (Γ.σ.σ ((((dictionnaire Γ).ρC) ^ k) a)) :=
-      Relation.EqvGen.rel _ _ (Or.inr rfl)
-    refine h1.trans _ _ _ (Relation.EqvGen.rel _ _ (Or.inl ?_))
+    refine (ih.trans _ _ _ (.rel _ _ (Or.inr rfl))).trans _ _ _ (.rel _ _ (Or.inl ?_))
     rw [pow_succ']
     rfl
 
