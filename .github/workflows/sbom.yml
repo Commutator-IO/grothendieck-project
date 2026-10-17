@@ -43,8 +43,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Syft leaves devDependencies out by default. Here nearly everything is
+      # one, KaTeX included, which postinstall copies into the served site, so
+      # they are kept in the inventory.
       - name: Inventory the dependencies (SBOM)
         uses: anchore/sbom-action@v0
+        env:
+          SYFT_JAVASCRIPT_INCLUDE_DEV_DEPENDENCIES: 'true'
         with:
           file: package-lock.json
           format: cyclonedx-json
