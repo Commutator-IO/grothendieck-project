@@ -941,13 +941,11 @@ theorem collinear_of_finrank_two (h2 : Module.finrank k (multSpace u) = 2) (i : 
   have a1 : l.1 (i + 1 + 1) = 0 := by rw [← evPair_one u (i + 1) l, hl]; rfl
   have b0 : l'.1 (i + 1) = 0 := by rw [← evPair_zero u (i + 1) l', hl']; rfl
   have b1 : l'.1 (i + 1 + 1) = 1 := by rw [← evPair_one u (i + 1) l', hl']; rfl
-  have e : IsMult u l.1 := l.2
-  have e' : IsMult u l'.1 := l'.2
   have r1 : i + 1 - 1 = i := by ring
   have r2 : i + 1 + 1 = i + 2 := by ring
   have r3 : i + 1 + 2 = i + 3 := by ring
-  have f := e (i + 1)
-  have f' := e' (i + 1)
+  have f := (l.2 : IsMult u l.1) (i + 1)
+  have f' := (l'.2 : IsMult u l'.1) (i + 1)
   rw [a0, a1, r1, r2, r3] at f
   rw [b0, b1, r1, r2, r3] at f'
   have f0 := congrFun f 0
@@ -974,13 +972,13 @@ theorem indep {a b : Fin 2 → k} (hw : wedge a b ≠ 0) {p q : k} (h0 : p * a 0
     exact (mul_eq_zero.1 this).resolve_right hw
 
 omit hu in
-theorem smul_coords {a c : Fin 2 → k} {α : k} (h : c = α • a) (j : Fin 2) : c j = α * a j := by
-  rw [h]; rfl
+theorem smul_coords {a c : Fin 2 → k} {α : k} (h : c = α • a) (j : Fin 2) : c j = α * a j :=
+  congrFun h j
 
 omit hu in
 theorem add_coords {a b c : Fin 2 → k} {α : k} (h : a + b = α • c) (j : Fin 2) :
-    a j + b j = α * c j := by
-  rw [← Pi.add_apply, h]; rfl
+    a j + b j = α * c j :=
+  congrFun h j
 
 omit [NeZero n] in
 /-- One step of page 24: from an independent pair `u_i, u_{i+1}`. -/
@@ -1013,8 +1011,7 @@ theorem step (hb : ∀ i, wedge (u i) (u (i + 3)) = 0 ∧ wedge (u i) (u (i + 1)
     exact hu (i + 3) (by rw [hβ, zero_smul])
   have eα'' : α'' = -1 := by
     have : β * (1 + α'') = 0 := by linear_combination p2 + α'' * p1
-    have := (mul_eq_zero.1 this).resolve_left hβ0
-    linear_combination this
+    linear_combination (mul_eq_zero.1 this).resolve_left hβ0
   have eβ' : β' = 1 := by linear_combination q2 - eα''
   have eα' : α' = -1 := by linear_combination -q1
   refine ⟨?_, by rw [hβ'v, eβ', one_smul], by rw [hα'v, eα', neg_one_smul]⟩
@@ -1022,8 +1019,7 @@ theorem step (hb : ∀ i, wedge (u i) (u (i + 3)) = 0 ∧ wedge (u i) (u (i + 1)
     unfold wedge
     linear_combination u (i + 1) 0 * B 1 - u (i + 1) 1 * B 0 +
       (u i 1 * u (i + 1) 0 - u i 0 * u (i + 1) 1) * p1
-  rw [this]
-  exact mul_ne_zero hβ0 hw
+  exact this ▸ mul_ne_zero hβ0 hw
 
 omit hu in
 theorem wedge_eq_zero_of_common {a b c : Fin 2 → k} (ha : a ≠ 0) (hb : wedge a b = 0)
@@ -1044,10 +1040,8 @@ theorem exists_consecutive (hl : ∃ i j, wedge (u i) (u j) ≠ 0) :
     induction m with
     | zero => simpa using wedge_self (u 0)
     | succ m ih =>
-      have := h m
       push_cast
-      rw [wedge_eq_zero_comm] at ih
-      exact wedge_eq_zero_of_common (hu _) ih this
+      exact wedge_eq_zero_of_common (hu _) ((wedge_eq_zero_comm _ _).1 ih) (h m)
   have hall : ∀ j, wedge (u 0) (u j) = 0 := fun j => by
     simpa [ZMod.natCast_zmod_val] using hm j.val
   obtain ⟨i, j, hij⟩ := hl
@@ -1131,8 +1125,7 @@ theorem isMult_periodic (h3 : 3 ∣ n) (hper : ∀ i, u (i + 3) = u i) (hs : u 0
   intro i
   have h1 := hS (i - 1).val
   rw [ZMod.natCast_zmod_val, sub_add_cancel, show i - 1 + 2 = i + 1 by ring] at h1
-  have h2 : u (i + 2) = u (i - 1) := by
-    rw [show i + 2 = i - 1 + 3 by ring, hper]
+  have h2 : u (i + 2) = u (i - 1) := by rw [show i + 2 = i - 1 + 3 by ring, hper]
   have hpair : u i + u (i + 1) = -u (i - 1) := by
     rw [eq_neg_iff_add_eq_zero, ← h1]; abel
   have hsum := sum_three f hf (ZMod.castHom h3 (ZMod 3) i)
@@ -1178,8 +1171,7 @@ theorem exists_mult_ne_zero (h3 : 3 ∣ n) (hper : ∀ i, u (i + 3) = u i)
     · simp
     · simpa using hω0
     · simp only [Matrix.cons_val]
-      intro h
-      exact hω1 (by linear_combination -h)
+      exact fun h => hω1 (by linear_combination -h)
   exact this _
 
 /-- A plane `N(u_*)` lies in no coordinate hyperplane. -/
@@ -1212,8 +1204,7 @@ theorem dichotomy (hk : (n : ℕ∞) < ENat.card k) :
     LinearMap.ker ((LinearMap.proj i).comp (multSpace u).subtype)
   have hp : ∀ i, p i ≠ ⊤ := fun i htop => by
     obtain ⟨l, hl, hli⟩ := h2 i
-    have : (⟨l, hl⟩ : multSpace u) ∈ p i := htop ▸ Submodule.mem_top
-    exact hli this
+    exact hli (htop ▸ Submodule.mem_top : (⟨l, hl⟩ : multSpace u) ∈ p i)
   have hss := Submodule.iUnion_ssubset_of_forall_ne_top_of_card_lt Finset.univ p hp
     (by rw [Finset.card_univ, ZMod.card]; exact hk)
   obtain ⟨x, -, hx⟩ := Set.exists_of_ssubset hss
