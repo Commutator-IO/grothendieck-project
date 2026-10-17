@@ -621,4 +621,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder64.lean',
     theorems: ['fixer_five', 'fixer_trivial', 'fixer_nontrivial_char5', 'two_sq', 'octahedral_eq_univ', 'perm_octa', 'card_pgl', 'card_fixer'],
   },
+  {
+    folder: '140-1',
+    batch: 2,
+    page: '22',
+    name: 'The bound on the equivariant Picard group of U₀,₃',
+    statement:
+      'The marginal note of page 22 bounds H¹(U₀,₃, 𝔖₃; 𝔾_m) through H¹(𝔖₃, O(S)^*) and H¹(𝔖₃, V(J)), V(J) the divisors of the units; the reading computes them as μ₂(S) and ℤ/3, so the group has order dividing 6, and 3 in generic characteristic 2.',
+    found:
+      'Holds as the reading computes it, in mathlib’s group cohomology: H¹(𝔖₃, V(J)) ≅ ℤ/3, a cocycle being the coboundary in ℤ^J of an explicit potential; H¹(𝔖₃, k^*) = μ₂(k) for a domain k; so H¹(𝔖₃, M) has order dividing 6 (3 if 2 = 0) for every extension 0 → k^* → M → V(J) → 0. Not formalised: the units of U₀,₃, Hochschild–Serre, and the lower bound — O(1) of order exactly 6.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder140_1.lean',
+    theorems: ['exact_mapQ', 'card_H1_VJ', 'card_H1_triv', 'card_mu2_dvd', 'card_mu2_char_two', 'card_H1_dvd'],
+  },
 ];

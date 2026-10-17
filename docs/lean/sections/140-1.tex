@@ -1,0 +1,20 @@
+\section[Cote 140-1 : la majoration de $H^1(U_{0,3}, \mathfrak S_3; \mathbf G_m)$]{Cote 140-1 : la majoration de $H^1(U_{0,3}, \mathfrak S_3; \mathbf G_m)$\protect\verifie{Folder140_1}}\label{sec:140-1}
+
+La cote 140-1, brouillon de la \emph{Longue Marche}, trente-six pages que l'inventaire date \q{[à partir de 1978-à partir de 1982]}, encadre page~22 un lemme : pour $S$ régulier intègre, $\mathrm{Pic}(S) = 0$, de caractéristique générique $\neq 2$, le groupe $H^1(U_{0,3}, \mathfrak S_3; \mathbf G_m)$ des $\mathbf G_m$-torseurs $\mathfrak S_3$-équivariants sur $U_{0,3} = \mathbf P^1 - \{0, 1, \infty\}$ est $\mathbf Z/6$, engendré par $\mathcal O(1)$, et $\mathbf Z/3$ en caractéristique générique~$2$ (\lot{140-1}{2}{22}). Une note marginale le majore par deux suites exactes : $H^1$ équivariant $= H^1(\mathfrak S_3, \mathcal O(U_{0,3})^*)$, et $0 \to \mathcal O(S)^* \to \mathcal O(U_{0,3})^* \to V(J) \to 0$, où $V(J) = \mathrm{Ker}(\mathbf Z^J \to \mathbf Z)$ est le groupe des diviseurs des unités, $J$ l'ensemble des trois points retirés. Les calculs de $H^1(\mathfrak S_3, \cdot)$ qui concluent ne sont pas sur la page ; la lecture les ajoute.
+
+\noindent\emph{Conventions.} $H^1$ est la cohomologie des groupes de mathlib, $H^1(G, M)$ pour la représentation de $G$ sur un groupe abélien $M$ ; Lean l'identifie aux cocycles modulo les cobords. Le groupe $\mathcal O(S)^*$ est remplacé par les unités $k^*$ d'un anneau intègre, avec l'action triviale.
+
+\begin{theoreme}[énoncé de l'édition, d'après la note marginale de la page 22]\label{thm:140-1-majoration}
+On a $H^1(\mathfrak S_3, V(J)) \simeq \mathbf Z/3$ et $H^1(\mathfrak S_3, k^*) \simeq \mu_2(k)$. Pour toute extension de $\mathfrak S_3$-modules $0 \to k^* \to M \to V(J) \to 0$, l'ordre de $H^1(\mathfrak S_3, M)$ divise~$6$, et divise~$3$ si $2 = 0$ dans~$k$.
+\end{theoreme}
+
+\noindent Vérifié tel quel (\texttt{H1\_VJ}, \texttt{card\_H1\_VJ}, \texttt{card\_H1\_triv}, \texttt{card\_mu2\_dvd}, \texttt{card\_H1\_dvd}). La classe d'un cocycle $f$ à valeurs dans $V(J)$ est $\sum_j m_j \bmod 3$, où $m_j = -f(\tau_j)_j$, $\tau_j$ la transposition de $0$ et~$j$ : c'est la forme explicite de $H^1(\mathfrak S_3, \mathbf Z^J) = 0$ et du bord $\mathbf Z \to H^1(\mathfrak S_3, V(J))$.
+
+Ne sont pas démontrés ici : le calcul des unités de $U_{0,3}$ qui place $\mathcal O(U_{0,3})^*$ dans une telle extension, $\mathrm{Pic}(U_{0,3}) = 0$ et la suite de Hochschild--Serre, et l'ordre exact de la classe de $\mathcal O(1)$ (page~24), qui restent ouverts :
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 22, 24 et 29, Picard du champ {$[U_{0,3}/\mathfrak S_3]$}\piste{140-1-equivariant-pic-u03}]\nonverifie
+Soit $S$ régulier intègre avec $\mathrm{Pic}(S) = 0$. Le groupe de Picard du champ quotient $[(\mathbf P^1 - \{0, 1, \infty\})_S/\mathfrak S_3]$, $\mathfrak S_3$ agissant par les substitutions anharmoniques, est $\mathbf Z/6$, engendré par $\mathcal O(1)$ sur $\mathbf P(V_J)$, en caractéristique générique $\neq 2$, et $\mathbf Z/3$ en caractéristique générique~$2$.
+\end{theoreme*}
+\end{encadre}
+{\small La majoration est le théorème~\ref{thm:140-1-majoration}, une fois connues les unités de $U_{0,3}$ ; reste à montrer que $\mathcal O(1)$ est d'ordre exactement $6$ (resp.~$3$). Mathlib n'a pas les champs quotients ni leur groupe de Picard.\par}
