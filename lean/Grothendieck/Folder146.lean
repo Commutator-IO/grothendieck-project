@@ -69,24 +69,6 @@ def der : Fin 6 → K → K
 /-- `U = ℙ¹ ∖ {0, 1, ∞}`. -/
 def U (x : K) : Prop := x ≠ 0 ∧ x ≠ 1
 
-lemma anh_U (a : Fin 6) {x : K} (hx : U x) : U (anh a x) := by
-  obtain ⟨h0, h1⟩ := hx
-  have h1' : x - 1 ≠ 0 := sub_ne_zero.2 h1
-  have h1'' : 1 - x ≠ 0 := sub_ne_zero.2 (Ne.symm h1)
-  fin_cases a <;> simp only [anh, U] <;> refine ⟨?_, ?_⟩ <;>
-    first
-    | (simp_all; done)
-    | (intro h; field_simp at h; apply h1'; linear_combination h)
-    | (intro h; field_simp at h; apply h1''; linear_combination h)
-    | (intro h; field_simp at h; apply h0; linear_combination h)
-    | (intro h; field_simp at h; apply h1'; linear_combination -h)
-    | (intro h; field_simp at h; apply h1''; linear_combination -h)
-    | (intro h; field_simp at h; apply h0; linear_combination -h)
-    | (intro h; rw [div_eq_one_iff_eq h1'] at h
-       exact one_ne_zero (α := K) (by linear_combination h))
-    | (intro h; rw [div_eq_one_iff_eq h0] at h
-       exact one_ne_zero (α := K) (by linear_combination -h))
-
 /-- The substitutions compose by the table: an action of `𝔖₃` on `U`. -/
 theorem anh_mul (a b : Fin 6) {x : K} (hx : U x) : anh (mul a b) x = anh a (anh b x) := by
   obtain ⟨h0, h1⟩ := hx
@@ -136,8 +118,7 @@ a primitive cube root of unity. -/
 theorem six_dvd (h2 : (2 : K) ≠ 0) (h3 : (3 : K) ≠ 0) {ζ : K} (hζ : ζ ^ 2 - ζ + 1 = 0)
     (m : ℤ) (h : K → K) (hh : ∀ x, U x → h x ≠ 0)
     (hc : ∀ a x, U x → der a x ^ m = h (anh a x) / h x) : 6 ∣ m := by
-  have hU1 : U (-1 : K) := ⟨by simp,
-    fun e => h2 (by linear_combination -e)⟩
+  have hU1 : U (-1 : K) := ⟨by simp, fun e => h2 (by linear_combination -e)⟩
   have e1 := hc 1 (-1) hU1
   have hm1 : (1 / (-1 : K)) = -1 := by simp
   simp only [der, anh, hm1, div_self (hh _ hU1)] at e1
@@ -168,10 +149,8 @@ theorem six_dvd (h2 : (2 : K) ≠ 0) (h3 : (3 : K) ≠ 0) {ζ : K} (hζ : ζ ^ 2
     rcases hr with rfl | rfl | rfl
     · simp
     · exact absurd (by simpa using e2) w1
-    · exfalso; apply w1
-      have : w ^ 2 = 1 := by simpa using e2
-      calc w = w ^ 3 / w ^ 2 := by field_simp
-        _ = 1 := by rw [w3, this, div_one]
+    · rw [pow_succ, show w ^ 2 = 1 by simpa using e2, one_mul] at w3
+      exact absurd w3 w1
   omega
 
 end Grothendieck.Folder146
