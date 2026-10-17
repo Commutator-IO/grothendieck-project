@@ -115,6 +115,15 @@ theorem nullePartScalaire_of_isUnit (g : Matrix (Fin 2) (Fin 2) R) (hu : IsUnit 
     NullePartScalaire g :=
   Ideal.eq_top_of_isUnit_mem _ (Ideal.subset_span (by simp)) hu
 
+/-- The unit-ideal argument: if `x` kills `b`, `c`, `a − d` of a nowhere-scalar `g`,
+then `x = 0`. -/
+theorem eq_zero_of_nps {g : Matrix (Fin 2) (Fin 2) R} (hg : NullePartScalaire g) {x : R}
+    (h1 : x * g 0 1 = 0) (h2 : x * g 1 0 = 0) (h3 : x * (g 0 0 - g 1 1) = 0) : x = 0 := by
+  have h : (1 : R) ∈ Ideal.span {g 0 1, g 1 0, g 0 0 - g 1 1} := by rw [hg]; trivial
+  obtain ⟨a, b, c, e⟩ := Submodule.mem_span_triple.1 h
+  simp only [smul_eq_mul] at e
+  linear_combination (-x) * e + a * h1 + b * h2 + c * h3
+
 /-- `A` depends only on the image in `PGL₂`: `A(μ g) = A(g)` for a unit `μ`. -/
 theorem invA_smul (g : Matrix (Fin 2) (Fin 2) R) (hg : IsUnit g.det) {μ : R} (hμ : IsUnit μ) :
     invA (μ • g) = invA g := by
@@ -160,19 +169,9 @@ theorem sq_add_sub_of_pow_five (g : Matrix (Fin 2) (Fin 2) R) (hg : IsUnit g.det
   have e00 := congrFun (congrFun e 0) 0
   have e11 := congrFun (congrFun e 1) 1
   simp at e01 e10 e00 e11
-  have hle : Ideal.span {g 0 1, g 1 0, g 0 0 - g 1 1} ≤
-      LinearMap.ker (LinearMap.mul R R x) := by
-    rw [Ideal.span_le]
-    intro r hr
-    simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hr
-    simp only [SetLike.mem_coe, LinearMap.mem_ker, LinearMap.mul_apply']
-    rcases hr with rfl | rfl | rfl
-    · linear_combination -e01
-    · linear_combination -e10
-    · linear_combination e11 - e00
-  rw [hns] at hle
-  have h1 : x * 1 = 0 := hle Submodule.mem_top
-  rw [mul_one, hx, coeff_eq g hg] at h1
+  have h1 : x = 0 := eq_zero_of_nps hns (by linear_combination -e01) (by linear_combination -e10)
+    (by linear_combination e11 - e00)
+  rw [hx, coeff_eq g hg] at h1
   exact ((hg.pow 2).mul_right_eq_zero).1 h1
 
 /-- The converse: if `A(g)² + A(g) − 1 = 0`, then `g⁵` is scalar. No
@@ -280,9 +279,7 @@ theorem exists_model_adjoinRoot :
       NullePartScalaire (pModel ζ) ∧ NullePartScalaire (sModel * pModel ζ) ∧
       invA (pModel ζ) ^ 2 + invA (pModel ζ) - 1 = 0 := by
   intro f ζ
-  have h : ζ ^ 4 + ζ ^ 3 + ζ ^ 2 + ζ + 1 = 0 := by
-    have := AdjoinRoot.eval₂_root f
-    simpa [f] using this
+  have h : ζ ^ 4 + ζ ^ 3 + ζ ^ 2 + ζ + 1 = 0 := by simpa [f] using AdjoinRoot.eval₂_root f
   exact ⟨sModel_sq, sp_cube h, pModel_pow_five h, sModel_nullePartScalaire,
     pModel_nullePartScalaire ζ, sp_nullePartScalaire h, invA_pModel_root h⟩
 
@@ -328,12 +325,9 @@ theorem nps_iff_maximal (g : Matrix (Fin 2) (Fin 2) R) :
       ¬ (g 0 1 ∈ m ∧ g 1 0 ∈ m ∧ g 0 0 - g 1 1 ∈ m) := by
   constructor
   · rintro h m hm ⟨h1, h2, h3⟩
-    have : Ideal.span {g 0 1, g 1 0, g 0 0 - g 1 1} ≤ m := by
-      rw [Ideal.span_le]; intro x hx
-      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx
-      rcases hx with rfl | rfl | rfl <;> assumption
-    rw [h, top_le_iff] at this
-    exact hm.ne_top this
+    refine hm.ne_top (top_le_iff.1 ?_)
+    rw [← h, Ideal.span_le]
+    simp [Set.insert_subset_iff, h1, h2, h3]
   · intro h
     by_contra hne
     obtain ⟨m, hm, hle⟩ := Ideal.exists_le_maximal _ hne
@@ -363,22 +357,12 @@ theorem nps_iff_not_isScalar {K : Type*} [Field K] (g : Matrix (Fin 2) (Fin 2) K
       exact absurd ⟨hb _ (by simp), hb _ (by simp), sub_eq_zero.1 (hb _ (by simp))⟩ h
     · exact ht
 
-/-- The unit-ideal argument: if `x` kills `b`, `c`, `a − d` of a nowhere-scalar `g`,
-then `x = 0`. -/
-theorem eq_zero_of_nps {g : Matrix (Fin 2) (Fin 2) R} (hg : NullePartScalaire g) {x : R}
-    (h1 : x * g 0 1 = 0) (h2 : x * g 1 0 = 0) (h3 : x * (g 0 0 - g 1 1) = 0) : x = 0 := by
-  have h : (1 : R) ∈ Ideal.span {g 0 1, g 1 0, g 0 0 - g 1 1} := by rw [hg]; trivial
-  obtain ⟨a, b, c, e⟩ := Submodule.mem_span_triple.1 h
-  simp only [smul_eq_mul] at e
-  linear_combination (-x) * e + a * h1 + b * h2 + c * h3
-
 /-- For `g` nowhere scalar, `x g + y` is scalar if and only if `x = 0`. -/
 theorem isScalar_smul_add_iff {g : Matrix (Fin 2) (Fin 2) R} (hg : NullePartScalaire g)
     (x y : R) : IsScalar (x • g + y • (1 : Matrix (Fin 2) (Fin 2) R)) ↔ x = 0 := by
   constructor
   · intro h
-    rw [isScalar_iff] at h
-    obtain ⟨h1, h2, h3⟩ := h
+    obtain ⟨h1, h2, h3⟩ := (isScalar_iff _).1 h
     simp at h1 h2 h3
     exact eq_zero_of_nps hg h1 h2 (by linear_combination h3)
   · rintro rfl; exact ⟨y, by simp⟩
@@ -563,22 +547,16 @@ theorem order_six_iff {g : Matrix (Fin 2) (Fin 2) R} (hg : NullePartScalaire g)
   · rintro ⟨h6, ht, ha1⟩
     rw [show 6 = 2 * 2 + 2 from rfl, isScalar_pow_even_iff hg hd ht, chebP_six] at h6
     have ha : invA g = 1 := by
-      have : (invA g - 1) * (invA g + 1) = 0 := by linear_combination h6
-      have := ha1.mul_left_eq_zero.1 this
-      linear_combination this
+      linear_combination ha1.mul_left_eq_zero.1
+        (by linear_combination h6 : (invA g - 1) * (invA g + 1) = 0)
     refine ⟨ha, ?_⟩
     rw [ha] at hts ha1
     have h3u : IsUnit (3 * g.det) := by
-      have : (1 + 2 : R) = 3 := by norm_num
-      rw [this] at hts; exact hts ▸ ht.pow 2
-    have h2u : IsUnit (2 : R) := by
-      have : (1 + 1 : R) = 2 := by norm_num
-      rwa [this] at ha1
-    have : (6 : R) = 2 * 3 := by norm_num
-    rw [this]; exact h2u.mul (isUnit_of_mul_isUnit_left h3u)
+      rw [show (1 + 2 : R) = 3 by norm_num] at hts; exact hts ▸ ht.pow 2
+    have h2u : IsUnit (2 : R) := by rwa [show (1 + 1 : R) = 2 by norm_num] at ha1
+    rw [show (6 : R) = 2 * 3 by norm_num]; exact h2u.mul (isUnit_of_mul_isUnit_left h3u)
   · rintro ⟨ha, h6u⟩
-    have h6' : (6 : R) = 2 * 3 := by norm_num
-    rw [h6'] at h6u
+    rw [show (6 : R) = 2 * 3 by norm_num] at h6u
     have h2u : IsUnit (2 : R) := isUnit_of_mul_isUnit_left h6u
     have h3u : IsUnit (3 : R) := isUnit_of_mul_isUnit_right h6u
     have ht : IsUnit g.trace := by
@@ -732,9 +710,7 @@ theorem not_isScalar_of_star {K : Type*} [Field K] {τ₀ τ₁ τ₂ : Matrix (
   · rintro ⟨c, hc⟩
     have hc0 : c ≠ 0 := by
       rintro rfl
-      have := congrArg Matrix.det hc
-      rw [det_mul, zero_smul, det_zero] at this
-      exact mul_ne_zero hd0 hd2 this
+      simpa [hd0, hd2] using congrArg Matrix.det hc
     have h20 : τ₂ * τ₀ = c • (1 : Matrix (Fin 2) (Fin 2) K) := by
       have h1 : τ₀ * (c⁻¹ • τ₂) = 1 := by
         rw [Matrix.mul_smul, hc, smul_smul, inv_mul_cancel₀ hc0, one_smul]
@@ -793,11 +769,9 @@ theorem discr_isUnit_of_star (u0 : IsUnit τ₀.det) (u1 : IsUnit τ₁.det) (u2
       rw [← RingHom.mapMatrix_apply, ← RingHom.map_det]; exact (u0.map _).ne_zero
     have d2 : (τ₂.map (Ideal.Quotient.mk m)).det ≠ 0 := by
       rw [← RingHom.mapMatrix_apply, ← RingHom.map_det]; exact (u2.map _).ne_zero
-    have := not_isScalar_of_star d0 d2
-      (by rw [← Matrix.map_mul]; exact isScalar_map _ s0)
-      (by rw [← Matrix.map_mul]; exact isScalar_map _ s1) (hS m hm)
     rw [Matrix.map_mul]
-    exact this
+    exact not_isScalar_of_star d0 d2 (by rw [← Matrix.map_mul]; exact isScalar_map _ s0)
+      (by rw [← Matrix.map_mul]; exact isScalar_map _ s1) (hS m hm)
   have n0 := nps_of_forall_map fun m hm => (fib m hm).1
   have n1 := nps_of_forall_map fun m hm => (fib m hm).2.1
   have n2 := nps_of_forall_map fun m hm => (fib m hm).2.2.1
@@ -815,8 +789,7 @@ theorem discr_isUnit_of_star (u0 : IsUnit τ₀.det) (u1 : IsUnit τ₁.det) (u2
         (A.map (Ideal.Quotient.mk m)).trace = 0 := fun A hA => by
       rw [← AddMonoidHom.map_trace, hA, map_zero]
     have := traces_ne_zero_of_star (z _ h0) (z _ h1) (z _ h2) (hS m hm)
-    rw [trace_map_mul, trace_map_mul, ← Matrix.map_mul, trace_map_mul] at this
-    exact this
+    rwa [trace_map_mul, trace_map_mul, ← Matrix.map_mul, trace_map_mul] at this
   refine ⟨?_, ?_, ?_⟩ <;> rw [isUnit_iff_maximal] <;> intro m hm hx <;>
     [exact (fib2 m hm).1 (Ideal.Quotient.eq_zero_iff_mem.2 hx);
      exact (fib2 m hm).2.1 (Ideal.Quotient.eq_zero_iff_mem.2 hx);
@@ -885,8 +858,7 @@ theorem rigid (u0 : IsUnit τ₀.det) (u1 : IsUnit τ₁.det) (u2 : IsUnit τ₂
     rw [Matrix.nonsing_inv_mul_cancel_left g _ hg, Matrix.mul_smul, Matrix.trace_smul,
       smul_eq_mul, ← Matrix.mul_assoc, trace_conj hg] at e
     have e' : (1 - μ * ν) * (A * B).trace = 0 := by linear_combination e
-    have hμν : μ * ν = 1 := by
-      have := hu.mul_left_eq_zero.1 e'; linear_combination -this
+    have hμν : μ * ν = 1 := by linear_combination -hu.mul_left_eq_zero.1 e'
     rw [r, hμν, one_smul]
   have c0 := conj τ₀ τ₁ μ₀ μ₁ k0 k1 t1
   have c1 := conj τ₁ τ₂ μ₁ μ₂ k1 k2 t2
@@ -895,10 +867,9 @@ theorem rigid (u0 : IsUnit τ₀.det) (u1 : IsUnit τ₁.det) (u2 : IsUnit τ₂
   rw [hpq] at c1
   have e : q • (τ₀ * τ₁ * (τ₁ * τ₂) - τ₁ * τ₂ * (τ₀ * τ₁)) = 0 := by
     rw [smul_sub, sub_eq_zero]
-    have := c1
     simp only [add_mul, mul_add, Matrix.smul_mul, Matrix.mul_smul, Matrix.one_mul,
-      Matrix.mul_one] at this
-    exact (add_left_cancel this)
+      Matrix.mul_one] at c1
+    exact add_left_cancel c1
   rw [commutator_eq h0 h1 h2, smul_smul] at e
   have e2 := congrArg (· * τ₁) e
   simp only [Matrix.smul_mul, Matrix.zero_mul, mul_self_of_trace_zero h1, smul_smul] at e2
@@ -1004,13 +975,10 @@ theorem exists_normalForm_adjoinRoot {a₀ a₁ : R} (hU : IsUnit (discr a₀ a�
     ∀ m : Ideal (AdjoinRoot f), m.IsMaximal → Star ((tau0N ℓ b).map (Ideal.Quotient.mk m))
       ((tau1N ℓ b).map (Ideal.Quotient.mk m)) ((tau2N ℓ b).map (Ideal.Quotient.mk m)) := by
   intro f ℓ b
-  have hℓ : ℓ ^ 2 - AdjoinRoot.of f a₀ * ℓ + 1 = 0 := by
-    have := AdjoinRoot.eval₂_root f
-    simpa [f] using this
+  have hℓ : ℓ ^ 2 - AdjoinRoot.of f a₀ * ℓ + 1 = 0 := by simpa [f] using AdjoinRoot.eval₂_root f
   have hU' : IsUnit (discr (AdjoinRoot.of f a₀) (AdjoinRoot.of f a₁)) := by
-    have := hU.map (AdjoinRoot.of f)
     have h2 : AdjoinRoot.of f (2 : R) = 2 := map_ofNat _ 2
-    simpa [discr, h2] using this
+    simpa [discr, h2] using hU.map (AdjoinRoot.of f)
   exact normalForm hℓ rfl hU'
 
 end NormalForm
@@ -1155,19 +1123,12 @@ theorem conj_normalForm {τ₀ τ₁ τ₂ : Matrix (Fin 2) (Fin 2) K}
   generalize invA (τ₀ * τ₁) = a₀ at ha0 hℓ
   generalize invA (τ₁ * τ₂) + 2 = b at hb0 ⊢
   have hsq : (ℓ + 1) ^ 2 = (a₀ + 2) * ℓ := by linear_combination hℓ
-  have hb : b ≠ 0 := by
-    rintro rfl
-    exact pow_ne_zero 2 t2 (by rw [← hb0, zero_mul])
-  have ha2 : a₀ + 2 ≠ 0 := by
-    intro h
-    exact pow_ne_zero 2 t1 (by rw [← ha0, h, zero_mul])
+  have hb : b ≠ 0 := fun h => pow_ne_zero 2 t2 (by rw [← hb0, h, zero_mul])
+  have ha2 : a₀ + 2 ≠ 0 := fun h => pow_ne_zero 2 t1 (by rw [← ha0, h, zero_mul])
   have hℓ0 : ℓ ≠ 0 := by
     rintro rfl
     simp at hℓ
-  have hℓ1 : ℓ + 1 ≠ 0 := by
-    intro h
-    have : (a₀ + 2) * ℓ = 0 := by rw [← hsq, h]; ring
-    exact mul_ne_zero ha2 hℓ0 this
+  have hℓ1 : ℓ + 1 ≠ 0 := fun h => mul_ne_zero ha2 hℓ0 (by rw [← hsq, h]; ring)
   have hti := mul_inv_cancel₀ t1
   have hsi := mul_inv_cancel₀ t2
   obtain ⟨c, hcdef⟩ : ∃ c : K, c = (ℓ + 1) * (τ₀ * τ₁).trace⁻¹ := ⟨_, rfl⟩
@@ -1252,10 +1213,7 @@ theorem conj_trans {A A' N g g' : Matrix (Fin 2) (Fin 2) K} {c c' : K} (hg' : g'
   have hgu' := isUnit_iff_ne_zero.2 hg'
   have hc' : c' ≠ 0 := by
     rintro rfl
-    rw [zero_smul] at H'
-    have := congrArg Matrix.det H'
-    rw [det_mul, det_zero] at this
-    exact mul_ne_zero hA' hg' this
+    simpa [hA', hg'] using congrArg Matrix.det H'
   have H1 : g'⁻¹ * A' = c' • (N * g'⁻¹) := by
     calc g'⁻¹ * A' = g'⁻¹ * (A' * g') * g'⁻¹ := by
           rw [Matrix.mul_assoc, Matrix.mul_nonsing_inv_cancel_right g' A' hgu']
