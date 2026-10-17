@@ -12,6 +12,14 @@
 % refutes it (Cisinski, Astérisque 308, Remarque 8.4.33; Maltsiniotis,
 % Astérisque 301, introduction). Only (i) => (ii) => (iii) stands.
 %
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder114.lean): the footnotes on W_0, on the
+% sandwich and on the minimal localiser now name the theorems that verify
+% them (W_0 a fundamental localiser, W_0-aspheric = 0-connected, totally
+% W_0-aspheric = (iii), the minimal localiser exists, (ii) => (iii) under
+% W ⊆ W_0, the two counterexamples). The finding's literature (Cisinski 2004,
+% 2006; Maltsiniotis 2005) was already cited; no facsimile check since.
+%
 % Two places where this reading departs from the page, both flagged in
 % footnotes at the point of departure:
 %
@@ -234,8 +242,13 @@ fondamental » : elle dit « a basic localizer satisfying Loc 4) », et appelle
 $W_{0}$ le plus grossier de ceux qui satisfont Loc~4) ; cette lecture avait omis
 la condition. Loc~4) est définie ailleurs dans \emph{À la poursuite des
 champs}, hors de cette chemise ; savoir si elle exclut les deux localisateurs
-ci-dessus demande le texte. Contre-exemples vérifiés en Lean,
-\texttt{lean/Grothendieck/Folder114.lean}.} L'asphéricité
+ci-dessus demande le texte. Contre-exemples vérifiés en Lean
+(lean/Grothendieck/Folder114.lean, \texttt{Wtrivial\_not\_inclus\_W}$_{0}$,
+\texttt{Wmoins1\_not\_inclus\_W}$_{0}$ et \texttt{contreExemple\_proposition4}) ;
+la même vérification établit (i) $\Rightarrow$ (ii) pour tout localisateur
+fondamental et (ii) $\Rightarrow$ (iii) sous la seule hypothèse
+$W \subseteq W_{0}$ (\texttt{proposition4\_i\_ii},
+\texttt{proposition4\_ii\_iii}).} L'asphéricité
 totale étant d'autant plus facile à obtenir que la classe des équivalences est
 large, l'encadrement donne aussitôt
 \[
@@ -255,7 +268,13 @@ $W_{0}$-asphérique et $0$-connexe sont le même mot\footnote{La page s'arrête 
 pas dans la chemise. L'identification de $W_{0}$ à la classe des foncteurs
 induisant une bijection sur $\pi_{0}$ est donc celle de cette édition, non celle
 de la page ; ce n'est pas le plus grossier de tous les localisateurs fondamentaux (voir plus haut), mais c'est le seul candidat
-compatible avec l'usage qui en est fait deux lignes plus haut.}.
+compatible avec l'usage qui en est fait deux lignes plus haut. Vérifié en
+Lean (lean/Grothendieck/Folder114.lean, \texttt{W}$_{0}$\texttt{\_localisateurFondamental},
+\texttt{aspherique\_W}$_{0}$\texttt{\_iff} et \texttt{totalementAspherique\_W}$_{0}$\texttt{\_iff}) :
+cette classe est bien un localisateur fondamental, pour les axiomes usuels
+LA--LC, être $W_{0}$-asphérique y équivaut à être $0$-connexe, et être
+totalement $W_{0}$-asphérique équivaut exactement à (iii), y compris
+l'assertion que (iii) rend $A$ lui-même $0$-connexe.}.
 
 Cela établit la chaîne (i) $\Rightarrow$ (ii) $\Rightarrow$ (iii). La seconde
 moitié du programme, que (iii) entraîne (i), n'est ni démontrée sur la page, qui
@@ -289,7 +308,12 @@ modèles des types d'homotopie}, Astérisque 308 (2006). La page de 1983 écrit
 « $W_{\infty}$ the finest basic localizer (i.e.\ usual weak equivalence) » sans
 plus de commentaire : le résultat y est en usage, non en démonstration. Rien
 n'autorise à lire cette parenthèse comme autre chose que la conjecture prise
-pour acquise dans un brouillon.}. La proposition 4, telle qu'elle est écrite,
+pour acquise dans un brouillon. Que l'intersection de tous les localisateurs
+fondamentaux en soit un, contenu dans tous les autres, est vérifié en Lean
+(lean/Grothendieck/Folder114.lean, \texttt{Wmin\_localisateurFondamental} et
+\texttt{Wmin\_inclus}) : le plus fin existe. Qu'il soit la classe des
+équivalences faibles usuelles, le théorème de Cisinski, ne l'est pas ; mathlib
+n'a pas ces équivalences pour les petites catégories.}. La proposition 4, telle qu'elle est écrite,
 en dépend.
 
 \subsection*{Une remarque sur la pratique}
