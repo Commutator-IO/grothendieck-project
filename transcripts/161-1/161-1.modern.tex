@@ -21,6 +21,20 @@
 % established. The shelfmark holds one batch, so pages 1-19 are the folder
 % entire and no part of it is read in another file. Stated here rather than
 % left to be inferred from a batch count.
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder161_1.lean), mathlib and the literature of
+% the matched findings:
+% — pages 3-6: (1), (2), the margin's example (ours), the five conditions of
+%   page 3 (the fifth repeats the second), E_0 ≃ F_0, the redundancy of the
+%   idempotence conditions and the direct half of the decomposition footnoted
+%   as checked; Borceux, Handbook I, §§ 3.4, 4.2 cited.
+% — pages 6-7: the descent holds without beta fully faithful; the
+%   characterisation of Sigma is mathlib's isLocal_iff_isIso_map.
+% — page 12: the sign as the commutativity constraint of a Picard category,
+%   Deligne SGA 4 XVIII, and folder 135; page 15: Giraud 1963 / SGA 4 IV and
+%   Diaconescu 1975 cited, with no order between the undated pages and them.
+% No facsimile check since the pass.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -133,13 +147,25 @@ Le manuscrit se demande en marge si la seconde condition de (1) est
 vraiment nécessaire — « donner un exemple montrant que cette condition
 n'est pas surabondante, avec $E'$ réduit à un élément ». Elle l'est : la
 pleine fidélité de $u|E'$ ne force pas $vu$ à ramener $E'$ dans
-$\overline{E}'$.
+$\overline{E}'$.\footnote{Vérifié en Lean (lean/Grothendieck/Folder161\_1.lean,
+\texttt{condition1}, \texttt{condition2} et
+\texttt{condition1\_non\_surabondante}) : (1) et (2) tiennent pour toute
+sous-catégorie pleine, sans autre hypothèse que l'adjonction. L'exemple que
+demande la marge est de l'édition : $E$ la catégorie des ensembles, $F$ la
+catégorie ponctuelle, $v$ pointant l'ensemble à un élément et $E' = \{\emptyset\}$ ;
+$u|E'$ est pleinement fidèle, mais $vu(\emptyset)$, ponctuel, n'est pas
+isomorphe à $\emptyset$.}
 
 Les sous-catégories strictement pleines $E'$ vérifiant (1) et $F'$
 vérifiant (2) se correspondent bijectivement par image essentielle,
 $\alpha(E') = \overline{u(E')}$ et $\beta(F') = \overline{v(F')}$, et pour
 un couple $(E', F')$ se correspondant, les foncteurs induits
-$u' : E' \to F'$ et $v' : F' \to E'$ sont des équivalences quasi-inverses.
+$u' : E' \to F'$ et $v' : F' \to E'$ sont des équivalences quasi-inverses.\footnote{La
+page énonce cette correspondance sous la forme de cinq conditions
+équivalentes ; la cinquième répète mot pour mot la deuxième. Vérifié en Lean
+(lean/Grothendieck/Folder161\_1.lean, \texttt{five\_conditions\_tfae},
+\texttt{beta\_alpha} et \texttt{alpha\_beta}) pour $E'$, $F'$ strictement
+pleines.}
 
 \pagerange{4}{4}
 \subsection*{Les points fixes}
@@ -157,7 +183,10 @@ F_0 = \overline{u(E_0)}, \qquad E_0 = \overline{v(F_0)},
 et $u$, $v$ induisent des équivalences quasi-inverses
 $E_0 \simeq F_0$.\footnote{C'est l'énoncé aujourd'hui standard sur la
 \emph{partie fixe d'une adjonction} : toute adjonction se restreint en une
-équivalence entre les objets où l'unité, resp. la coünité, est inversible.}
+équivalence entre les objets où l'unité, resp. la coünité, est inversible ;
+voir F.~Borceux, \emph{Handbook of Categorical Algebra}~1, §§ 3.4 et 4.2.
+Vérifié en Lean (lean/Grothendieck/Folder161\_1.lean, \texttt{E0\_iff},
+\texttt{F0\_iff} et \texttt{fixedEquiv}).}
 
 \pagerange{5}{6}
 \subsection*{Adjonctions idempotentes}
@@ -173,7 +202,9 @@ $\varepsilon u : uvu \xrightarrow{\ \sim\ } u$ ;\footnote{Fait aujourd'hui
 classique : chacune des quatre conditions ($\eta v$, $v\varepsilon$,
 $\varepsilon u$, $u\eta$ inversible) implique les trois autres, de sorte
 que les paires du manuscrit sont redondantes — mais l'énoncer par paires
-symétriques est plus parlant.}
+symétriques est plus parlant. Vérifié en Lean
+(lean/Grothendieck/Folder161\_1.lean, \texttt{idempotent\_tfae} et
+\texttt{condition2\_iff}).}
 \item $\mathrm{Im}\, v \subset E_0$ et l'inclusion $E_0 \subset E$ admet un
 adjoint à gauche ; de même $\mathrm{Im}\, u \subset F_0$ et l'inclusion
 $F_0 \subset F$ admet un adjoint à droite ;
@@ -200,7 +231,18 @@ idempotente $(u, v)$ entre $E$ et $F$ équivaut à la donnée
 (adjoint à droite $\beta'$ de l'inclusion $\beta$),
 \item d'une équivalence $E_0 \underset{v_0}{\overset{u_0}{\rightleftarrows}} F_0$,
 \end{itemize}
-en posant $u = \beta u_0 \alpha'$ et $v = \alpha v_0 \beta'$.
+en posant $u = \beta u_0 \alpha'$ et $v = \alpha v_0 \beta'$.\footnote{C'est
+la décomposition standard d'une adjonction idempotente (F.~Borceux,
+\emph{Handbook of Categorical Algebra}~1, §§ 3.4 et 4.2). Vérifié en Lean
+(lean/Grothendieck/Folder161\_1.lean, \texttt{condition1\_p5\_iff},
+\texttt{reflectorAdj}, \texttt{coreflectorAdj}, \texttt{condition4},
+\texttt{condition4'} et \texttt{reflector0\_isLocalization}) dans le sens
+direct : sous les conditions 1), 3), 4), $E_0$ est réflexive de réflecteur
+$v_0 u'$, $F_0$ coréflexive, $u \simeq \beta u_0 \alpha'$ et
+$v \simeq \alpha v_0 \beta'$, $\alpha'$ étant une localisation ; de plus le
+réflecteur commute aux colimites, comme tout adjoint à gauche (c'est dans
+mathlib), et $E_0$ est stable par limites. La reconstruction d'une adjonction
+idempotente à partir de $(E_0, F_0, E_0 \simeq F_0)$ n'a pas été vérifiée.}
 
 Deux exemples dégénérés ouvrent la page 6 : si $E$ est ponctuelle, $v$
 est l'unique foncteur $F \to E$, son adjoint à gauche existe si et
@@ -243,7 +285,15 @@ aujourd'hui un lemme fondamental de la théorie des localisations
 réflexives : l'image essentielle d'une sous-catégorie réflexive est
 exactement la sous-catégorie des objets locaux pour les flèches inversées
 par le réflecteur.\footnote{La réponse à la question de départ est alors
-positive elle aussi. Le manuscrit note ce lieu des objets locaux
+positive elle aussi, et sans que $\beta$ soit pleinement fidèle : vérifié en
+Lean (lean/Grothendieck/Folder161\_1.lean, \texttt{descent} et
+\texttt{descent\_isLeftAdjoint}), un préfaisceau $\psi$ sur $E_1$ tel que
+$\psi \circ \alpha'$ soit représentable est représentable, donc si
+$\beta\alpha'$ a un adjoint à droite, $\beta$ en a un, pour tout $\beta$.
+La caractérisation de $\Sigma$ est dans mathlib
+(\texttt{CategoryTheory.ObjectProperty.isLocal\_iff\_isIso\_map}), et
+l'égalité des objets $\Sigma$-locaux et de l'image essentielle de $\alpha$ est
+vérifiée (\texttt{local\_iff\_mem\_essImage}). Le manuscrit note ce lieu des objets locaux
 $\Phi(\Sigma)$ — notation sans rapport avec le $\Phi(A)$ des pages
 suivants. Au passage, la page 7 écrit deux fois
 $\mathrm{Hom}_{E_1}(Y, \alpha Z_1)$ là où seul $\mathrm{Hom}_E$ a un sens ;
@@ -374,7 +424,12 @@ Picard} du manuscrit — tout objet inversible, tous les signes
 triviaux.\footnote{Ce signe est devenu un invariant central : c'est lui qui
 distingue les catégories de Picard \emph{strictes} et qui gouverne, par
 exemple, la règle de Koszul des complexes gradués, où
-$\varepsilon(L) = -1$ pour un inversible en degré impair.}
+$\varepsilon(L) = -1$ pour un inversible en degré impair. C'est la contrainte
+de commutativité d'une catégorie de Picard, au sens de P.~Deligne, « La
+formule de dualité globale », SGA~4, exposé XVIII ; le dossier 135 calcule
+précisément l'exemple des droites graduées avec la règle de Koszul, le plus
+petit cas d'une catégorie de Picard non stricte. Les noms ne sont pas sur la
+page.}
 
 Enfin, l'\emph{inverse} d'un objet inversible $L$ : un $L'$ muni d'un
 isomorphisme $L \otimes L' \simeq \mathbf{1}$ — d'où, par la symétrie, un
@@ -461,7 +516,7 @@ petites colimites — l'extension de Kan à gauche de $\varphi$ le long du
 plongement de Yoneda. Sous quelles conditions sur $E$ le prolongement
 $\overline{\varphi}$ est-il encore exact à gauche ? « On sait que c'est OK
 si $E$ est un topos.\footnote{C'est le théorème aujourd'hui attaché au nom
-de Diaconescu : sur un topos, l'extension de Kan d'un foncteur plat — en
+de Diaconescu (1975) : sur un topos, l'extension de Kan d'un foncteur plat — en
 particulier exact à gauche sur un $C$ à limites finies — est exacte à
 gauche. La phrase de la page (« on sait que ») indique un fait déjà acquis
 dans son entourage ; les pages ne sont pas datés.} Réciproque ? »
@@ -474,7 +529,10 @@ $E$ est une localisation réflexive de $\widehat{C}$. Donc si
 $\overline{\varphi}$ est exact à gauche, $E$ est une localisation exacte à
 gauche d'une catégorie de préfaisceaux — « $E$ est un topos ». C'est,
 énoncé sur une demi-page, le théorème de reconnaissance de
-Giraud.\footnote{Aux hypothèses de taille près, que la page ne discute
+Giraud.\footnote{J.~Giraud, « Analysis situs », Séminaire Bourbaki 256
+(1963), et SGA~4, exposé IV ; la page en donne la forme « localisation exacte
+à gauche ». Les pages n'étant pas datées, rien ne les place avant ou après
+l'énoncé publié. Aux hypothèses de taille près, que la page ne discute
 pas : il faut $C$ petite et $E$ à colimites petites, ce qui est supposé
 ici. Une ligne intermédiaire, « il suffit que $E$ soit un topos », est
 barrée sur la page — c'est bien la réciproque qu'il visait.}
