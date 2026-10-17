@@ -115,9 +115,7 @@ theorem proposition2_15 [IsNoetherianRing A] (H : Type u) [AddCommGroup H] [Modu
     (hH : TorsionI I H) : Module.Injective A H ↔ ExactSurC I H := by
   constructor
   · -- La nécessité est triviale.
-    intro hinj M _ _ _ _ N f
-    obtain ⟨w, hw⟩ := hinj.out N.subtype N.injective_subtype f
-    exact ⟨w, hw⟩
+    exact fun hinj M _ _ _ _ N f => hinj.out N.subtype N.injective_subtype f
   · intro hC
     refine Module.Baer.injective fun J g => ?_
     -- The image of `g` is killed by one power `Iⁿ` …
@@ -139,10 +137,7 @@ theorem proposition2_15 [IsNoetherianRing A] (H : Type u) [AddCommGroup H] [Modu
     set m := n + k
     have hAR : ∀ x ∈ J, x ∈ I ^ m → x ∈ I ^ n • J := by
       intro x hxJ hxm
-      have h1 : x ∈ I ^ m • (⊤ : Ideal A) ⊓ J := by
-        refine ⟨?_, hxJ⟩
-        rw [Ideal.smul_eq_mul, Ideal.mul_top]
-        exact hxm
+      have h1 : x ∈ I ^ m • (⊤ : Ideal A) ⊓ J := ⟨by rwa [Ideal.smul_eq_mul, Ideal.mul_top], hxJ⟩
       rw [hk m (by omega), show m - k = n by omega] at h1
       exact Submodule.smul_mono le_rfl inf_le_right h1
     -- `J → A/Iᵐ`, whose kernel is `J ∩ Iᵐ`, on which `g` vanishes.
@@ -150,9 +145,7 @@ theorem proposition2_15 [IsNoetherianRing A] (H : Type u) [AddCommGroup H] [Modu
     have hker : LinearMap.ker φ ≤ LinearMap.ker g := by
       intro x hx
       have h0 : Ideal.Quotient.mk (I ^ m) (x : A) = 0 := by simpa [φ] using hx
-      have hxm : (x : A) ∈ I ^ m := Ideal.Quotient.eq_zero_iff_mem.1 h0
-      have := hgIJ x (hAR x x.2 hxm)
-      simpa using this
+      simpa using hgIJ x (hAR x x.2 (Ideal.Quotient.eq_zero_iff_mem.1 h0))
     let u' : LinearMap.range φ →ₗ[A] H :=
       (LinearMap.ker φ).liftQ g hker ∘ₗ φ.quotKerEquivRange.symm.toLinearMap
     -- `A/Iᵐ` is in `𝒞`, so `u'` extends to it.
