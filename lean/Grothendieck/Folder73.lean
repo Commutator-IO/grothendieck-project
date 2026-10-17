@@ -5,10 +5,11 @@ import Mathlib
 
 The modernised reading `transcripts/73/73.modern.tex` studies the map sending a plane
 `n`-gon, given by its sides `u_i = s_{i+1} - s_i`, to the doubled signed areas of its
-« ears », `μ_i = u_{i-1} ∧ u_i`. Two of its statements are proved here; they are findings
+« ears », `μ_i = u_{i-1} ∧ u_i`. Three of its statements are proved here; they are findings
 `73-quadrilateral-projective-frame` and `73-zero-multiplier-criterion` of
-`src/content/findings.ts`. Proving them says only that the claims hold as stated; whether
-they stand in the literature is a separate question.
+`src/content/findings.ts`, and the reachable part of `73-ear-area-multiplier-classification`
+(pages 23–28, at the end of the file). Proving them says only that the claims hold as
+stated; whether they stand in the literature is a separate question.
 
 The plane is `k²` (`Fin 2 → k`) with the volume form `a ∧ b = a₀b₁ - a₁b₀`; an affine map
 acts on sides through its linear part, a `2 × 2` matrix.
@@ -857,5 +858,374 @@ theorem eq_zero_of_consecutive (u : ZMod n → Fin 2 → k) (hu : ∀ i, u i ≠
   rwa [ZMod.natCast_zmod_val, add_sub_cancel] at this
 
 end Polygon
+
+/-! ## Pages 23–28: the multiplier space, its dimension, and the four cases
+
+`multSpace u` is the space `N(u_*)` of the multipliers `λ` of page 25 (`IsMult`).
+
+* `evPair_injective`, `finrank_multSpace_le_two`: for nonzero sides, `λ ↦ (λ_i, λ_{i+1})` is
+  injective on `N(u_*)`, so `dim N(u_*) ≤ 2` (page 23).
+* `collinear_of_finrank_two`: if `dim N(u_*) = 2`, then `u_i`, `u_{i+1} + u_{i+2}`, `u_{i+3}`
+  are collinear for every `i` (pages 23, 26, (a) ⇒ (b)).
+* `triangle_of_collinear`: if moreover the `u_i` are not all on one line, `u_{i+3} = u_i` and
+  `u_{i+1} + u_{i+2} = -u_i` for every `i`, and `3 ∣ n` (pages 24, 26–27, (b) ⇒ (c) ⇒ (d)).
+* `finrank_multSpace_eq_two_iff`: for nonzero sides not all on one line, `dim N(u_*) = 2` iff
+  `3 ∣ n`, `u_{i+3} = u_i` and `u₀ + u₁ + u₂ = 0` — a triangle traversed `n/3` times; then
+  `N(u_*)` is the plane of the `3`-periodic `λ` with `λ₀ + λ₁ + λ₂ = 0`
+  (`isMult_periodic`), and it has an element with no zero component as soon as some
+  `ω ≠ 0, -1` exists in `k`, i.e. `|k| ≥ 3` (`exists_mult_ne_zero`).
+* `dichotomy`, `finrank_le_one_of_le_hyperplane`, `not_le_hyperplane_of_finrank_two`
+  (page 28): if `|k| > n`, either some multiplier has no zero component, or `N(u_*)` lies in
+  a coordinate hyperplane `H_i`, and then `dim N(u_*) ≤ 1`; a plane `N(u_*)` lies in no `H_i`.
+  The page assumes `k` infinite (`dichotomy_of_infinite`).
+-/
+
+section EarArea
+
+variable [Field k] {n : ℕ} [NeZero n]
+
+/-- The space `N(u_*)` of multipliers. -/
+def multSpace (u : ZMod n → Fin 2 → k) : Submodule k (ZMod n → k) where
+  carrier := {l | IsMult u l}
+  add_mem' {a b} ha hb i := by
+    have h := congrArg₂ (· + ·) (ha i) (hb i)
+    simp only [add_zero] at h
+    rw [← h]
+    simp only [Pi.add_apply, add_smul]
+    abel
+  zero_mem' i := by simp
+  smul_mem' c a ha i := by
+    simp only [Pi.smul_apply, smul_eq_mul, mul_smul, ← smul_sub, ← smul_add, ha i, smul_zero]
+
+omit [NeZero n] in
+theorem mem_multSpace (u : ZMod n → Fin 2 → k) (l : ZMod n → k) :
+    l ∈ multSpace u ↔ IsMult u l := Iff.rfl
+
+/-- `λ ↦ (λ_i, λ_{i+1})` on `N(u_*)`. -/
+def evPair (u : ZMod n → Fin 2 → k) (i : ZMod n) : multSpace u →ₗ[k] (Fin 2 → k) :=
+  (LinearMap.pi ![LinearMap.proj i, LinearMap.proj (i + 1)]).comp (multSpace u).subtype
+
+omit [NeZero n] in
+theorem evPair_zero (u : ZMod n → Fin 2 → k) (i : ZMod n) (l : multSpace u) :
+    evPair u i l 0 = l.1 i := rfl
+
+omit [NeZero n] in
+theorem evPair_one (u : ZMod n → Fin 2 → k) (i : ZMod n) (l : multSpace u) :
+    evPair u i l 1 = l.1 (i + 1) := rfl
+
+variable (u : ZMod n → Fin 2 → k) (hu : ∀ i, u i ≠ 0)
+include hu
+
+theorem evPair_injective (i : ZMod n) : Function.Injective (evPair u i) := by
+  rw [← LinearMap.ker_eq_bot, LinearMap.ker_eq_bot']
+  intro l hl
+  have h0 : l.1 i = 0 := by rw [← evPair_zero, hl]; rfl
+  have h1 : l.1 (i + 1) = 0 := by rw [← evPair_one, hl]; rfl
+  exact Subtype.ext (eq_zero_of_consecutive u hu l.1 l.2 i h0 h1)
+
+/-- **Page 23.** `dim N(u_*) ≤ 2`. -/
+theorem finrank_multSpace_le_two : Module.finrank k (multSpace u) ≤ 2 := by
+  simpa using LinearMap.finrank_le_finrank_of_injective (evPair_injective u hu 0)
+
+theorem evPair_surjective (h2 : Module.finrank k (multSpace u) = 2) (i : ZMod n) :
+    Function.Surjective (evPair u i) :=
+  (LinearMap.injective_iff_surjective_of_finrank_eq_finrank (by simp [h2])).1
+    (evPair_injective u hu i)
+
+/-- **Pages 23 and 26, (a) ⇒ (b).** -/
+theorem collinear_of_finrank_two (h2 : Module.finrank k (multSpace u) = 2) (i : ZMod n) :
+    wedge (u i) (u (i + 3)) = 0 ∧ wedge (u i) (u (i + 1) + u (i + 2)) = 0 := by
+  obtain ⟨l, hl⟩ := evPair_surjective u hu h2 (i + 1) ![1, 0]
+  obtain ⟨l', hl'⟩ := evPair_surjective u hu h2 (i + 1) ![0, 1]
+  have a0 : l.1 (i + 1) = 1 := by rw [← evPair_zero u (i + 1) l, hl]; rfl
+  have a1 : l.1 (i + 1 + 1) = 0 := by rw [← evPair_one u (i + 1) l, hl]; rfl
+  have b0 : l'.1 (i + 1) = 0 := by rw [← evPair_zero u (i + 1) l', hl']; rfl
+  have b1 : l'.1 (i + 1 + 1) = 1 := by rw [← evPair_one u (i + 1) l', hl']; rfl
+  have e : IsMult u l.1 := l.2
+  have e' : IsMult u l'.1 := l'.2
+  have r1 : i + 1 - 1 = i := by ring
+  have r2 : i + 1 + 1 = i + 2 := by ring
+  have r3 : i + 1 + 2 = i + 3 := by ring
+  have f := e (i + 1)
+  have f' := e' (i + 1)
+  rw [a0, a1, r1, r2, r3] at f
+  rw [b0, b1, r1, r2, r3] at f'
+  have f0 := congrFun f 0
+  have f1 := congrFun f 1
+  have g0 := congrFun f' 0
+  have g1 := congrFun f' 1
+  simp only [Pi.add_apply, Pi.sub_apply, Pi.smul_apply, smul_eq_mul, Pi.zero_apply] at f0 f1 g0 g1
+  have w1 : wedge (u i) (u (i + 3)) = 0 := by
+    unfold wedge; linear_combination u (i + 3) 1 * f0 - u (i + 3) 0 * f1
+  refine ⟨w1, ?_⟩
+  unfold wedge at w1 ⊢
+  simp only [Pi.add_apply]
+  linear_combination (-u i 0) * g1 + u i 1 * g0 + l'.1 (i + 3) * w1
+
+omit hu in
+/-- Two vectors with nonzero wedge are linearly independent, in coordinates. -/
+theorem indep {a b : Fin 2 → k} (hw : wedge a b ≠ 0) {p q : k} (h0 : p * a 0 + q * b 0 = 0)
+    (h1 : p * a 1 + q * b 1 = 0) : p = 0 ∧ q = 0 := by
+  unfold wedge at hw
+  constructor
+  · have : p * (a 0 * b 1 - a 1 * b 0) = 0 := by linear_combination b 1 * h0 - b 0 * h1
+    exact (mul_eq_zero.1 this).resolve_right hw
+  · have : q * (a 0 * b 1 - a 1 * b 0) = 0 := by linear_combination a 0 * h1 - a 1 * h0
+    exact (mul_eq_zero.1 this).resolve_right hw
+
+omit hu in
+theorem smul_coords {a c : Fin 2 → k} {α : k} (h : c = α • a) (j : Fin 2) : c j = α * a j := by
+  rw [h]; rfl
+
+omit hu in
+theorem add_coords {a b c : Fin 2 → k} {α : k} (h : a + b = α • c) (j : Fin 2) :
+    a j + b j = α * c j := by
+  rw [← Pi.add_apply, h]; rfl
+
+omit [NeZero n] in
+/-- One step of page 24: from an independent pair `u_i, u_{i+1}`. -/
+theorem step (hb : ∀ i, wedge (u i) (u (i + 3)) = 0 ∧ wedge (u i) (u (i + 1) + u (i + 2)) = 0)
+    (i : ZMod n) (hw : wedge (u i) (u (i + 1)) ≠ 0) :
+    wedge (u (i + 1)) (u (i + 2)) ≠ 0 ∧ u (i + 4) = u (i + 1) ∧
+      u (i + 2) + u (i + 3) = -u (i + 1) := by
+  obtain ⟨β, hβ⟩ := exists_smul_of_wedge (hu i) (hb i).1
+  obtain ⟨α, hα⟩ := exists_smul_of_wedge (hu i) (hb i).2
+  have h1 := hb (i + 1)
+  rw [show i + 1 + 3 = i + 4 by ring, show i + 1 + 1 = i + 2 by ring,
+    show i + 1 + 2 = i + 3 by ring] at h1
+  obtain ⟨β', hβ'v⟩ := exists_smul_of_wedge (hu (i + 1)) h1.1
+  obtain ⟨α', hα'v⟩ := exists_smul_of_wedge (hu (i + 1)) h1.2
+  have h2 := (hb (i + 2)).2
+  rw [show i + 2 + 1 = i + 3 by ring, show i + 2 + 2 = i + 4 by ring] at h2
+  obtain ⟨α'', hα''v⟩ := exists_smul_of_wedge (hu (i + 2)) h2
+  have A := smul_coords hβ
+  have B := add_coords hα
+  have C := smul_coords hβ'v
+  have D := add_coords hα'v
+  have G := add_coords hα''v
+  obtain ⟨p1, q1⟩ := indep hw (p := α + β) (q := -1 - α')
+    (by linear_combination D 0 - B 0 - A 0) (by linear_combination D 1 - B 1 - A 1)
+  obtain ⟨p2, q2⟩ := indep hw (p := β - α'' * α) (q := β' + α'')
+    (by linear_combination G 0 - A 0 - C 0 + α'' * B 0)
+    (by linear_combination G 1 - A 1 - C 1 + α'' * B 1)
+  have hβ0 : β ≠ 0 := by
+    rintro rfl
+    exact hu (i + 3) (by rw [hβ, zero_smul])
+  have eα'' : α'' = -1 := by
+    have : β * (1 + α'') = 0 := by linear_combination p2 + α'' * p1
+    have := (mul_eq_zero.1 this).resolve_left hβ0
+    linear_combination this
+  have eβ' : β' = 1 := by linear_combination q2 - eα''
+  have eα' : α' = -1 := by linear_combination -q1
+  refine ⟨?_, by rw [hβ'v, eβ', one_smul], by rw [hα'v, eα', neg_one_smul]⟩
+  have : wedge (u (i + 1)) (u (i + 2)) = β * wedge (u i) (u (i + 1)) := by
+    unfold wedge
+    linear_combination u (i + 1) 0 * B 1 - u (i + 1) 1 * B 0 +
+      (u i 1 * u (i + 1) 0 - u i 0 * u (i + 1) 1) * p1
+  rw [this]
+  exact mul_ne_zero hβ0 hw
+
+omit hu in
+theorem wedge_eq_zero_of_common {a b c : Fin 2 → k} (ha : a ≠ 0) (hb : wedge a b = 0)
+    (hc : wedge a c = 0) : wedge b c = 0 := by
+  obtain ⟨s, rfl⟩ := exists_smul_of_wedge ha hb
+  obtain ⟨t, rfl⟩ := exists_smul_of_wedge ha hc
+  unfold wedge
+  simp only [Pi.smul_apply, smul_eq_mul]
+  ring
+
+/-- Not all on one line: some consecutive pair is independent. -/
+theorem exists_consecutive (hl : ∃ i j, wedge (u i) (u j) ≠ 0) :
+    ∃ i, wedge (u i) (u (i + 1)) ≠ 0 := by
+  by_contra h
+  push Not at h
+  have hm : ∀ m : ℕ, wedge (u 0) (u m) = 0 := by
+    intro m
+    induction m with
+    | zero => simpa using wedge_self (u 0)
+    | succ m ih =>
+      have := h m
+      push_cast
+      rw [wedge_eq_zero_comm] at ih
+      exact wedge_eq_zero_of_common (hu _) ih this
+  have hall : ∀ j, wedge (u 0) (u j) = 0 := fun j => by
+    simpa [ZMod.natCast_zmod_val] using hm j.val
+  obtain ⟨i, j, hij⟩ := hl
+  exact hij (wedge_eq_zero_of_common (hu 0) (hall i) (hall j))
+
+/-- **Pages 24, 26 and 27, (b) ⇒ (c) ⇒ (d).** -/
+theorem triangle_of_collinear (hl : ∃ i j, wedge (u i) (u j) ≠ 0)
+    (hb : ∀ i, wedge (u i) (u (i + 3)) = 0 ∧ wedge (u i) (u (i + 1) + u (i + 2)) = 0) :
+    (∀ i, u (i + 3) = u i ∧ u (i + 1) + u (i + 2) = -u i) ∧ 3 ∣ n := by
+  obtain ⟨i₀, h₀⟩ := exists_consecutive u hu hl
+  have hind : ∀ m : ℕ, wedge (u (i₀ + m)) (u (i₀ + m + 1)) ≠ 0 := by
+    intro m
+    induction m with
+    | zero => simpa using h₀
+    | succ m ih =>
+      have := (step u hu hb _ ih).1
+      push_cast
+      convert this using 3 <;> ring
+  have hc : ∀ j, u (j + 3) = u j ∧ u (j + 1) + u (j + 2) = -u j := by
+    intro j
+    have hw := hind (j - 1 - i₀).val
+    rw [ZMod.natCast_zmod_val, add_sub_cancel] at hw
+    obtain ⟨-, h4, h23⟩ := step u hu hb (j - 1) hw
+    rw [show j - 1 + 4 = j + 3 by ring, sub_add_cancel] at h4
+    rw [show j - 1 + 2 = j + 1 by ring, show j - 1 + 3 = j + 2 by ring, sub_add_cancel] at h23
+    exact ⟨h4, h23⟩
+  refine ⟨hc, ?_⟩
+  by_contra h3
+  have hcop : Nat.Coprime 3 n := (Nat.Prime.coprime_iff_not_dvd Nat.prime_three).2 h3
+  set v := (ZMod.unitOfCoprime 3 hcop)⁻¹
+  have hv : (3 : ZMod n) * ((v : ZMod n).val : ZMod n) = 1 := by
+    rw [ZMod.natCast_zmod_val]
+    have := Units.mul_inv (ZMod.unitOfCoprime 3 hcop)
+    rwa [ZMod.coe_unitOfCoprime, Nat.cast_ofNat] at this
+  have hper : ∀ (m : ℕ) j, u (j + 3 * m) = u j := by
+    intro m
+    induction m with
+    | zero => simp
+    | succ m ih =>
+      intro j
+      rw [show j + 3 * ((m + 1 : ℕ) : ZMod n) = (j + 3 * m) + 3 by push_cast; ring, (hc _).1, ih]
+  have h1 : ∀ j, u (j + 1) = u j := fun j => by rw [← hv, hper]
+  have hall : ∀ m : ℕ, u m = u 0 := by
+    intro m
+    induction m with
+    | zero => simp
+    | succ m ih => push_cast; rw [h1, ih]
+  obtain ⟨i, j, hij⟩ := hl
+  apply hij
+  rw [← ZMod.natCast_zmod_val i, ← ZMod.natCast_zmod_val j, hall, hall, wedge_self]
+
+omit hu in
+/-- `3`-periodic sequences, as functions of `ZMod 3`. -/
+def per (h3 : 3 ∣ n) (f : ZMod 3 → k) : ZMod n → k := fun i => f (ZMod.castHom h3 (ZMod 3) i)
+
+omit hu in
+theorem sum_three (f : ZMod 3 → k) (hf : f 0 + f 1 + f 2 = 0) (t : ZMod 3) :
+    f t + f (t + 1) + f (t + 2) = 0 := by
+  have : t = 0 ∨ t = 1 ∨ t = 2 := by revert t; decide
+  rcases this with rfl | rfl | rfl
+  · simpa using hf
+  · rw [show (1 : ZMod 3) + 1 = 2 by decide, show (1 : ZMod 3) + 2 = 0 by decide]
+    linear_combination hf
+  · rw [show (2 : ZMod 3) + 1 = 0 by decide, show (2 : ZMod 3) + 2 = 1 by decide]
+    linear_combination hf
+
+omit hu in
+/-- **Page 27, (d) ⇒ (a).** For a triangle traversed `n/3` times, every `3`-periodic `λ` with
+`λ₀ + λ₁ + λ₂ = 0` is a multiplier. -/
+theorem isMult_periodic (h3 : 3 ∣ n) (hper : ∀ i, u (i + 3) = u i) (hs : u 0 + u 1 + u 2 = 0)
+    (f : ZMod 3 → k) (hf : f 0 + f 1 + f 2 = 0) : IsMult u (per h3 f) := by
+  have hS : ∀ m : ℕ, u m + u (m + 1) + u (m + 2) = 0 := by
+    intro m
+    induction m with
+    | zero => simpa [add_assoc] using hs
+    | succ m ih =>
+      push_cast
+      rw [show (m : ZMod n) + 1 + 2 = m + 3 by ring, hper,
+        show (m : ZMod n) + 1 + 1 = m + 2 by ring]
+      rw [← ih]; abel
+  intro i
+  have h1 := hS (i - 1).val
+  rw [ZMod.natCast_zmod_val, sub_add_cancel, show i - 1 + 2 = i + 1 by ring] at h1
+  have h2 : u (i + 2) = u (i - 1) := by
+    rw [show i + 2 = i - 1 + 3 by ring, hper]
+  have hpair : u i + u (i + 1) = -u (i - 1) := by
+    rw [eq_neg_iff_add_eq_zero, ← h1]; abel
+  have hsum := sum_three f hf (ZMod.castHom h3 (ZMod 3) i)
+  simp only [per, map_add, map_one, map_ofNat]
+  rw [h2, hpair, smul_neg, sub_neg_eq_add, ← add_smul, ← add_smul, hsum, zero_smul]
+
+/-- **Page 25, the Proposition, (a) ⇔ (d).** For nonzero sides not all on one line,
+`dim N(u_*) = 2` if and only if the polygon is a triangle traversed `n/3` times. -/
+theorem finrank_multSpace_eq_two_iff (hl : ∃ i j, wedge (u i) (u j) ≠ 0) :
+    Module.finrank k (multSpace u) = 2 ↔
+      3 ∣ n ∧ (∀ i, u (i + 3) = u i) ∧ u 0 + u 1 + u 2 = 0 := by
+  constructor
+  · intro h2
+    obtain ⟨hc, h3⟩ := triangle_of_collinear u hu hl (collinear_of_finrank_two u hu h2)
+    refine ⟨h3, fun i => (hc i).1, ?_⟩
+    have := (hc 0).2
+    rw [zero_add, zero_add] at this
+    rw [add_assoc, this, add_neg_cancel]
+  · rintro ⟨h3, hper, hs⟩
+    have hsurj : Function.Surjective (evPair u 0) := by
+      intro v
+      refine ⟨⟨per h3 ![v 0, v 1, -v 0 - v 1], isMult_periodic u h3 hper hs _ (by simp)⟩, ?_⟩
+      funext j
+      fin_cases j
+      · change (![v 0, v 1, -v 0 - v 1] : ZMod 3 → k) (ZMod.castHom h3 (ZMod 3) 0) = v 0
+        rw [map_zero]; rfl
+      · change (![v 0, v 1, -v 0 - v 1] : ZMod 3 → k) (ZMod.castHom h3 (ZMod 3) (0 + 1)) = v 1
+        rw [zero_add, map_one]; rfl
+    rw [(LinearEquiv.ofBijective (evPair u 0) ⟨evPair_injective u hu 0, hsurj⟩).finrank_eq]
+    simp
+
+omit hu in
+/-- **Page 27, (d) ⇒ (a)**: a multiplier with no zero component, if some `ω ≠ 0, -1` is in `k`
+(that is, `|k| ≥ 3`). -/
+theorem exists_mult_ne_zero (h3 : 3 ∣ n) (hper : ∀ i, u (i + 3) = u i)
+    (hs : u 0 + u 1 + u 2 = 0) {ω : k} (hω0 : ω ≠ 0) (hω1 : ω ≠ -1) :
+    ∃ l, IsMult u l ∧ ∀ i, l i ≠ 0 := by
+  refine ⟨per h3 ![1, ω, -1 - ω], isMult_periodic u h3 hper hs _ (by simp), fun i => ?_⟩
+  have : ∀ t : ZMod 3, (![1, ω, -1 - ω] : ZMod 3 → k) t ≠ 0 := by
+    intro t
+    have : t = 0 ∨ t = 1 ∨ t = 2 := by revert t; decide
+    rcases this with rfl | rfl | rfl
+    · simp
+    · simpa using hω0
+    · simp only [Matrix.cons_val]
+      intro h
+      exact hω1 (by linear_combination -h)
+  exact this _
+
+/-- A plane `N(u_*)` lies in no coordinate hyperplane. -/
+theorem not_le_hyperplane_of_finrank_two (h2 : Module.finrank k (multSpace u) = 2)
+    (i : ZMod n) : ∃ l ∈ multSpace u, l i ≠ 0 := by
+  obtain ⟨l, hl⟩ := evPair_surjective u hu h2 i ![1, 0]
+  refine ⟨l.1, l.2, ?_⟩
+  rw [← evPair_zero, hl]
+  simp
+
+/-- **Page 28, case II.** If `N(u_*)` lies in a coordinate hyperplane, `dim N(u_*) ≤ 1`. -/
+theorem finrank_le_one_of_le_hyperplane (i : ZMod n) (h : ∀ l ∈ multSpace u, l i = 0) :
+    Module.finrank k (multSpace u) ≤ 1 := by
+  let e : multSpace u →ₗ[k] k := (LinearMap.proj (i + 1)).comp (multSpace u).subtype
+  have he : Function.Injective e := by
+    rw [← LinearMap.ker_eq_bot, LinearMap.ker_eq_bot']
+    intro l hl
+    exact Subtype.ext (eq_zero_of_consecutive u hu l.1 l.2 i (h l.1 l.2) hl)
+  simpa using LinearMap.finrank_le_finrank_of_injective he
+
+omit hu in
+/-- **Page 28, the dichotomy**, for `|k| > n`: either some multiplier has no zero
+component, or `N(u_*)` lies in a coordinate hyperplane. -/
+theorem dichotomy (hk : (n : ℕ∞) < ENat.card k) :
+    (∃ l ∈ multSpace u, ∀ i, l i ≠ 0) ∨ ∃ i, ∀ l ∈ multSpace u, l i = 0 := by
+  by_contra hcon
+  push Not at hcon
+  obtain ⟨h1, h2⟩ := hcon
+  let p : ZMod n → Submodule k (multSpace u) := fun i =>
+    LinearMap.ker ((LinearMap.proj i).comp (multSpace u).subtype)
+  have hp : ∀ i, p i ≠ ⊤ := fun i htop => by
+    obtain ⟨l, hl, hli⟩ := h2 i
+    have : (⟨l, hl⟩ : multSpace u) ∈ p i := htop ▸ Submodule.mem_top
+    exact hli this
+  have hss := Submodule.iUnion_ssubset_of_forall_ne_top_of_card_lt Finset.univ p hp
+    (by rw [Finset.card_univ, ZMod.card]; exact hk)
+  obtain ⟨x, -, hx⟩ := Set.exists_of_ssubset hss
+  obtain ⟨i, hi⟩ := h1 x.1 x.2
+  exact hx (Set.mem_iUnion₂.2 ⟨i, Finset.mem_univ _, hi⟩)
+
+omit hu in
+/-- The page's form: over an infinite field. -/
+theorem dichotomy_of_infinite [Infinite k] :
+    (∃ l ∈ multSpace u, ∀ i, l i ≠ 0) ∨ ∃ i, ∀ l ∈ multSpace u, l i = 0 :=
+  dichotomy u (by rw [ENat.card_eq_top_of_infinite]; exact ENat.natCast_lt_top n)
+
+end EarArea
 
 end Folder73
