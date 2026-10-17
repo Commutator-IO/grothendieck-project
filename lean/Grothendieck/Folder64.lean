@@ -50,21 +50,17 @@ variable {i : K}
 
 omit [DecidableEq K] in
 lemma quad_facts (hi : i ^ 2 = -1) (h2 : (2 : K) ≠ 0) :
-    i ≠ 0 ∧ i ≠ 1 ∧ i ≠ -1 ∧ (1 : K) ≠ -1 := by
-  refine ⟨?_, ?_, ?_, ?_⟩
-  · rintro rfl; apply h2; linear_combination 2 * hi
-  · rintro rfl; apply h2; linear_combination hi
-  · rintro rfl; apply h2; linear_combination hi
-  · intro h; apply h2; linear_combination h
+    i ≠ 0 ∧ i ≠ 1 ∧ i ≠ -1 ∧ (1 : K) ≠ -1 :=
+  ⟨fun h => h2 (by linear_combination 2 * hi - 2 * i * h),
+    fun h => h2 (by linear_combination hi - (1 + i) * h),
+    fun h => h2 (by linear_combination hi + (1 - i) * h), fun h => h2 (by linear_combination h)⟩
 
 lemma quad_distinct (hi : i ^ 2 = -1) (h2 : (2 : K) ≠ 0) :
     (0 : K) ∉ ({1, i, -i} : Finset K) ∧ (1 : K) ∉ ({i, -i} : Finset K) ∧ i ≠ -i := by
   obtain ⟨h0, h1, hm, -⟩ := quad_facts hi h2
   have f1 : (1 : K) ≠ -i := fun h => hm (by linear_combination h)
   have f2 : (0 : K) ≠ -i := fun h => h0 (by linear_combination h)
-  have hii : i ≠ -i := fun h => h0 (by
-    have : (2 : K) * i = 0 := by linear_combination h
-    simpa [h2] using this)
+  have hii : i ≠ -i := fun h => h2 (by linear_combination 2 * hi - i * h)
   simp [f1, f2, h0.symm, h1.symm, hii]
 
 lemma card_quad (hi : i ^ 2 = -1) (h2 : (2 : K) ≠ 0) : (quad i).card = 4 := by
@@ -82,25 +78,16 @@ theorem fixer_five (hi : i ^ 2 = -1) (h2 : (2 : K) ≠ 0) (a : K)
     (h : ∀ z ∈ quad i, a * z + (a - 1) ∈ quad i) : (5 : K) * (a - 1) = 0 := by
   obtain ⟨h0, h1, hm, h11⟩ := quad_facts hi h2
   rcases eq_or_ne a 0 with rfl | ha
-  · have := h 0 (by simp [quad])
-    simp only [quad, mem_insert, mem_singleton] at this
-    rcases this with h' | h' | h' | h'
-    · norm_num at h'
-    · exact (h11 (by linear_combination -h')).elim
-    · exact (hm (by linear_combination -h')).elim
-    · exact (h1 (by linear_combination h')).elim
+  · exact absurd (h 0 (by simp [quad])) (by simp [quad, h11.symm, hm.symm, h1.symm])
   set f : K → K := fun z => a * z + (a - 1)
   have hinj : Set.InjOn f (quad i) := fun x _ y _ hxy => by
     simpa [f, ha] using hxy
   have himg : (quad i).image f = quad i :=
-    eq_of_subset_of_card_le (fun y hy => by
-      obtain ⟨z, hz, rfl⟩ := mem_image.1 hy; exact h z hz)
-      (card_image_of_injOn hinj).ge
-  have hsum := congrArg (fun s => ∑ z ∈ s, z) himg
-  simp only [sum_image hinj, f, sum_add_distrib, sum_const, card_quad hi h2,
-    quad_sum hi h2] at hsum
-  rw [← mul_sum, quad_sum hi h2, nsmul_eq_mul] at hsum
-  push_cast at hsum
+    eq_of_subset_of_card_le (image_subset_iff.2 h) (card_image_of_injOn hinj).ge
+  have hsum := congr(∑ z ∈ $himg, z)
+  simp only [sum_image hinj, f, sum_add_distrib, sum_const, card_quad hi h2, nsmul_eq_mul,
+    Nat.cast_ofNat] at hsum
+  rw [← mul_sum, quad_sum hi h2] at hsum
   linear_combination hsum
 
 /-- With `5` invertible as well, the fixer of `∞` and `−1` in `Aut(ℙ¹, Δ)` is trivial. -/
@@ -114,18 +101,12 @@ theorem fixer_nontrivial_char5 (hi : i ^ 2 = -1) (h5 : (5 : K) = 0) :
   have hi2 : (i - 2) * (i + 2) = 0 := by linear_combination hi - h5
   simp only [quad, mem_insert, mem_singleton, forall_eq_or_imp, forall_eq]
   rcases mul_eq_zero.1 hi2 with h | h
-  · have : i = 2 := by linear_combination h
-    subst this
-    refine ⟨Or.inr (Or.inl (by norm_num)), Or.inr (Or.inr (Or.inr ?_)), Or.inl ?_, ?_⟩
-    · linear_combination h5
-    · linear_combination h5
-    · right; right; left; linear_combination -h5
-  · have : i = -2 := by linear_combination h
-    subst this
-    refine ⟨Or.inr (Or.inl (by norm_num)), Or.inr (Or.inr (Or.inl ?_)), ?_, Or.inl ?_⟩
-    · linear_combination h5
-    · right; right; right; linear_combination -h5
-    · linear_combination h5
+  · obtain rfl : i = 2 := by linear_combination h
+    exact ⟨Or.inr (Or.inl (by norm_num)), Or.inr (Or.inr (Or.inr (by linear_combination h5))),
+      Or.inl (by linear_combination h5), Or.inr (Or.inr (Or.inl (by linear_combination -h5)))⟩
+  · obtain rfl : i = -2 := by linear_combination h
+    exact ⟨Or.inr (Or.inl (by norm_num)), Or.inr (Or.inr (Or.inl (by linear_combination h5))),
+      Or.inr (Or.inr (Or.inr (by linear_combination -h5))), Or.inl (by linear_combination h5)⟩
 
 end Field
 
