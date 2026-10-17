@@ -73,26 +73,13 @@ theorem sum_norm_inner_sq_le {ι : Type*} (s : Finset ι) (y : ι → E)
         inner_self_eq_norm_sq_to_K]
       norm_cast
     rw [h1, hS]
-    refine sum_le_sum fun i hi => ?_
-    have := hle i hi
-    have h0 : 0 ≤ ‖y i‖ := norm_nonneg _
-    have : ‖y i‖ ^ 2 ≤ 1 := by nlinarith
-    nlinarith [sq_nonneg ‖c i‖]
+    exact sum_le_sum fun i hi =>
+      mul_le_of_le_one_right (by positivity) (pow_le_one₀ (norm_nonneg _) (hle i hi))
   have hSle : S ≤ ‖p‖ * ‖z‖ := by
     have := norm_inner_le_norm (𝕜 := 𝕜) p z
-    rw [hpz, RCLike.norm_ofReal, abs_of_nonneg hS0] at this
-    exact this
-  have hp0 : 0 ≤ ‖p‖ := norm_nonneg _
-  have hz0 : 0 ≤ ‖z‖ := norm_nonneg _
-  rcases hS0.eq_or_lt with h | h
-  · rw [← h]; positivity
-  · by_contra hcon
-    rw [not_le] at hcon
-    have : S ^ 2 ≤ S * ‖z‖ ^ 2 := by
-      calc S ^ 2 ≤ (‖p‖ * ‖z‖) ^ 2 := by gcongr
-        _ = ‖p‖ ^ 2 * ‖z‖ ^ 2 := by ring
-        _ ≤ S * ‖z‖ ^ 2 := by gcongr
-    nlinarith
+    rwa [hpz, RCLike.norm_ofReal, abs_of_nonneg hS0] at this
+  have hpz' : ‖p‖ ≤ ‖z‖ := by nlinarith [norm_nonneg p, norm_nonneg z]
+  nlinarith [norm_nonneg z]
 
 
 /-- The key counting step: for `s` antitone and nonnegative, and weights `0 ≤ c j ≤ 1` of total
@@ -121,11 +108,8 @@ theorem sum_mul_le_sum_range {d : ℕ} (s : ℕ → ℝ) (hs : Antitone s) (hs0 
         ∑ k ∈ range d, (if k < n then s k else 0) :=
       Fin.sum_univ_eq_sum_range (fun k => if k < n then s k else 0) d
     rw [h1, ← sum_filter]
-    apply sum_le_sum_of_subset_of_nonneg
-    · intro k hk
-      simp only [mem_filter, mem_range] at hk ⊢
-      exact hk.2
-    · intro k _ _; exact hs0 k
+    exact sum_le_sum_of_subset_of_nonneg (fun k hk => mem_range.2 (mem_filter.1 hk).2)
+      fun k _ _ => hs0 k
   calc ∑ j : Fin d, s j * c j ≤ ∑ j : Fin d, ((if (j : ℕ) < n then s j else 0)
         + s n * (c j - if (j : ℕ) < n then 1 else 0)) := sum_le_sum fun j _ => key j
     _ = ∑ j : Fin d, (if (j : ℕ) < n then s j else 0)
@@ -134,6 +118,22 @@ theorem sum_mul_le_sum_range {d : ℕ} (s : ℕ → ℝ) (hs : Antitone s) (hs0 
     _ ≤ ∑ j ∈ range n, s j + s n * 0 :=
           add_le_add hfin (mul_le_mul_of_nonneg_left (by linarith) (hs0 n))
     _ = _ := by ring
+
+/-- A sum over `range n` of a function vanishing from `d` on is a sum over `{j : Fin d | j < n}`. -/
+theorem sum_range_eq_sum_filter (d : ℕ) (f : ℕ → ℝ) (hf : ∀ k, d ≤ k → f k = 0) (n : ℕ) :
+    ∑ j ∈ range n, f j = ∑ j ∈ univ.filter (fun j : Fin d => (j : ℕ) < n), f j := by
+  have h1 : ∑ j : Fin d, (if (j : ℕ) < n then f j else 0) =
+      ∑ k ∈ range d, (if k < n then f k else 0) :=
+    Fin.sum_univ_eq_sum_range (fun k => if k < n then f k else 0) _
+  rw [sum_filter, h1, ← sum_filter]
+  symm
+  apply sum_subset
+  · intro k hk
+    simp only [mem_filter, mem_range] at hk ⊢
+    exact hk.2
+  · intro k hk hk'
+    simp only [mem_filter, mem_range, not_and, not_lt] at hk hk'
+    exact hf k (not_lt.mp fun h => (not_lt.mpr (hk' h)) hk)
 
 section SVD
 
@@ -265,19 +265,8 @@ theorem norm_sum_inner_le {ι : Type*} (s : Finset ι) (x : ι → E) (y : ι �
 /-- The sum of the first `n` singular values, as a sum over the indices `j < dim E`. -/
 theorem sum_range_singularValues_eq (T : E →ₗ[𝕜] F) (n : ℕ) :
     ∑ j ∈ range n, T.singularValues j =
-      ∑ j ∈ univ.filter (fun j : Fin (finrank 𝕜 E) => (j : ℕ) < n), T.singularValues j := by
-  have h1 : ∑ j : Fin (finrank 𝕜 E), (if (j : ℕ) < n then T.singularValues j else 0) =
-      ∑ k ∈ range (finrank 𝕜 E), (if k < n then T.singularValues k else 0) :=
-    Fin.sum_univ_eq_sum_range (fun k => if k < n then T.singularValues k else 0) _
-  rw [sum_filter, h1, ← sum_filter]
-  symm
-  apply sum_subset
-  · intro k hk
-    simp only [mem_filter, mem_range] at hk ⊢
-    exact hk.2
-  · intro k hk hk'
-    simp only [mem_filter, mem_range, not_and, not_lt] at hk hk'
-    exact T.singularValues_of_finrank_le (not_lt.mp fun h => (not_lt.mpr (hk' h)) hk)
+      ∑ j ∈ univ.filter (fun j : Fin (finrank 𝕜 E) => (j : ℕ) < n), T.singularValues j :=
+  sum_range_eq_sum_filter _ _ (fun _ hk => T.singularValues_of_finrank_le hk) n
 
 /-- **Ky Fan's inequality** (the case `m = 1` of the system of page 71):
 `s_0(u+v) + ⋯ + s_{n-1}(u+v) ≤ (s_0(u) + ⋯ + s_{n-1}(u)) + (s_0(v) + ⋯ + s_{n-1}(v))`. -/
@@ -405,9 +394,7 @@ theorem prod_le_of_sigma_system (u v : E →ₗ[𝕜] F) (n : ℕ)
 theorem one_add_singularValues_zero_le (u v : E →ₗ[𝕜] F) {r : ℝ} (hr : 0 ≤ r) :
     1 + r * (u + v).singularValues 0 ≤
       (1 + r * u.singularValues 0) * (1 + r * v.singularValues 0) := by
-  have := prod_le_of_sigma_system u v 1
-    (fun m hm => sigma_system_of_le_one u v 1 m hm) hr
-  simpa using this
+  simpa using prod_le_of_sigma_system u v 1 (fun m hm => sigma_system_of_le_one u v 1 m hm) hr
 
 end Product
 
@@ -930,22 +917,6 @@ theorem norm_bform_self_le (T : E →ₗ[𝕜] F) (G : Finset (Fin (finrank 𝕜
   linarith
 
 end SigmaTwoOp
-
-/-- A sum over `range n` of a function vanishing from `d` on is a sum over `{j : Fin d | j < n}`. -/
-theorem sum_range_eq_sum_filter (d : ℕ) (f : ℕ → ℝ) (hf : ∀ k, d ≤ k → f k = 0) (n : ℕ) :
-    ∑ j ∈ range n, f j = ∑ j ∈ univ.filter (fun j : Fin d => (j : ℕ) < n), f j := by
-  have h1 : ∑ j : Fin d, (if (j : ℕ) < n then f j else 0) =
-      ∑ k ∈ range d, (if k < n then f k else 0) :=
-    Fin.sum_univ_eq_sum_range (fun k => if k < n then f k else 0) _
-  rw [sum_filter, h1, ← sum_filter]
-  symm
-  apply sum_subset
-  · intro k hk
-    simp only [mem_filter, mem_range] at hk ⊢
-    exact hk.2
-  · intro k hk hk'
-    simp only [mem_filter, mem_range, not_and, not_lt] at hk hk'
-    exact hf k (not_lt.mp fun h => (not_lt.mpr (hk' h)) hk)
 
 section SigmaTwo
 
