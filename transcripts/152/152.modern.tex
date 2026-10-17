@@ -47,6 +47,14 @@
 % matching, dual tree of a dissection, Catalan numbers for rooted plane trees,
 % free reduction.
 %
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder152.lean): the dictionary of page 9 (three
+% formulas, vertices as orbits of rho_C sigma_C, the equivalence on objects)
+% and the connectivity step of the Critère footnoted as checked; the check
+% confirms that page 9's head line rho_Gamma = rho_C would force sigma = 1.
+% Page 4's Proposition and the Euler-formula half of the Critère are not
+% checked. The folder has no findings; no facsimile check since 2026-09-13.
+%
 % What the folder announces and never establishes: the equivalence of page 2
 % (stated); the two last words of the boxed criterion of page 9 (illegible);
 % the functoriality of the equivalences, asserted as « équivalences de
@@ -283,7 +291,14 @@ correspondances sont celles qu'on écrit ; la première égalité de la tête au
 La page 7 construit encore des involutions $\sigma^{C}_{0}$, $\sigma^{C}_{1}$ sur
 les arêtes orientées du contour, $A(C) \times \{\pm 1\} \simeq \bar{A} \times
 \{\pm 1\}$, qui sont les opérations « changer de sommet » et « changer d'arête »
-d'une carte de dimension 1 ; on ne les reprend pas.}
+d'une carte de dimension 1 ; on ne les reprend pas. Vérifié en Lean
+(lean/Grothendieck/Folder152.lean, \texttt{formules}, \texttt{sommets} et
+\texttt{tete\_page9\_incompatible}) : les trois formules retenues tiennent
+ensemble parce que $\sigma_{\Gamma}^{2} = 1$, sans rien d'autre, les sommets
+sont bien les orbites de $\rho_{C}\sigma_{C}$, et la tête de la page 9,
+$\rho_{\Gamma} = \rho_{C}$, jointe à $\rho_{C} = \rho_{\Gamma}\sigma_{\Gamma}$,
+forcerait $\sigma_{\Gamma} = 1$, impossible pour une involution sans point fixe
+sur un ensemble d'arcs non vide.}
 
 \textbf{Équivalence.} La catégorie des graphes combinatoires circularisés sans
 sommet isolé est équivalente à celle des contours orientés $(A(C), \rho_{C})$
@@ -293,7 +308,10 @@ l'autre par les formules ci-dessus.\footnote{C'est la description moderne d'une
 \emph{carte combinatoire} par un ensemble de demi-arêtes muni d'une involution
 et d'une rotation, les faces étant les cycles de leur produit. Le passage d'une
 présentation à l'autre n'est qu'un changement de générateurs ; les noms ne sont
-pas sur la page. Deux notes en biais dans la marge de la page 7 ne se lisent
+pas sur la page. Vérifié en Lean sur les objets
+(lean/Grothendieck/Folder152.lean, \texttt{dictionnaire}) : les deux
+passages sont inverses l'un de l'autre ; les morphismes ne sont pas
+examinés, ni ici ni sur la page. Deux notes en biais dans la marge de la page 7 ne se lisent
 pas.}
 
 \textbf{Critère} (encadré, page 9). $\Gamma$ est un arbre, non ponctuel, si et
@@ -302,7 +320,13 @@ croise pas : pour deux orbites disjointes $\{a, \sigma_{C} a\}$ et
 $\{b, \sigma_{C} b\}$, les points $b$ et $\sigma_{C}b$ sont du même côté de la
 corde qui joint $a$ à $\sigma_{C}a$ dans l'ordre circulaire du polygone.
 
-En effet, $\Gamma$ est connexe puisque $\rho_{C}$ n'a qu'un cycle, et la formule
+En effet, $\Gamma$ est connexe puisque $\rho_{C}$ n'a qu'un cycle\footnote{Vérifié
+en Lean (lean/Grothendieck/Folder152.lean, \texttt{connexe\_of\_une\_face}),
+pour un ensemble d'arcs fini. La suite, par la formule d'Euler et le genre de
+la surface recollée, ne l'est pas : mathlib n'a ni surfaces ni genre des
+cartes combinatoires. La proposition de la page 4, qui identifie les
+plongements dans une surface orientée aux systèmes de rotation, ne l'est pas
+non plus.}, et la formule
 d'Euler $|S| - |A| + 1 = 2 - 2g$ montre que $\Gamma$ est un arbre si et seulement
 si la surface obtenue en recollant le polygone est une sphère, $g = 0$. Or le
 recollement d'un polygone par un appariement de ses côtés, en renversant les
