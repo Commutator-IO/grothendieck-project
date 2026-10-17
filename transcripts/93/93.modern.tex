@@ -18,6 +18,16 @@
 % footnotes is cited from memory and was not checked against the sources.
 % Models followed: the readings of folders 75, 82, 85 and 100 of the same
 % group, cross-referenced where they meet this one.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% checks of lean/Grothendieck/Folder93.lean (stations VI and IX): the
+% Proposition of pp. 121-123 no longer normalises ad - bc = 1 (false, s = 2t
+% over F_5; the determinant is a unit), and a footnote says Pic(A) = 0 is not
+% used once alpha = 0 and that p = 2 needs no hypothesis on A; footnotes record
+% the checks of G = 12 G_0, the cocycle without denominators, the p. 72 test
+% values and the margin of p. 121 (level p^2 needed for p = 2, 3), the mathlib
+% declarations and open PRs involved, and the two sources read by the finding
+% 93-integral-schwarzian-level-p2 (Hoshi 2024, Wakabayashi 2021). No facsimile
+% revision of the transcription postdates the reading.
 %
 % Reading is thin. The transcription carries about 12.6 \ill/\uncertain per
 % page; on pp. 97-99, 109-112, 127-139, 188-197, 202-203, 205-217 whole
@@ -931,7 +941,12 @@ coïncident.\footnote{Il essaie d'abord $G_0(t,t^2)$ et écrit
 « $\frac{1}{2t}\,dt^2$ (au lieu de $-\frac{1}{2t}\,dt^2$) » ; le calcul direct
 donne $\frac{1}{4t^2}\,dt^2$, comme le note la transcription. Il écarte ce test
 lui-même : si $2$ n'est pas inversible, $t^2$ n'est jamais une
-uniformisante.}
+uniformisante. Les deux valeurs sont vérifiées en Lean
+(lean/Grothendieck/Folder93.lean, \texttt{N\_X\_sq} et \texttt{N\_X\_cube}),
+sous forme débarrassée des dénominateurs : le numérateur
+$(D^{(2)}s)^2 - D^{(3)}s\,D^{(1)}s$ vaut $1$ pour $s = t^2$ et $6t^2$ pour
+$s = t^3$, d'où $G_0(t,t^2) = \frac{1}{4t^2}\,dt^2$ là où $2$ est inversible
+et $G_0(t,t^3) = \frac{2}{3t^2}\,dt^2$ là où $3$ l'est.}
 
 \emph{Remarques} (pages 72 et 73). 1) Le rôle de $\omega^2$ est universel : un
 morphisme $G' : \mathcal{E}_X \times \mathcal{E}_X \to \mathcal{F}$ vers un faisceau
@@ -1431,12 +1446,36 @@ $F_X^{-1}(H_{X'})\backslash\mathcal{P}_X \hookrightarrow \mathrm{Conn}_{X/S}$.
   G_0(t,s) = -\frac{D^{(3)}_t s}{D^{(1)}_t s} + \Bigl(\frac{D^{(2)}_t
   s}{D^{(1)}_t s}\Bigr)^2 .
 \]
-Donc, si $12$ est nul sur $S$, toutes les $c_t$ sont égales et il y a une
+La page affirme la formule sans écrire le calcul.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder93.lean, \texttt{G\_eq}) : $G = 12\,G_0$ est une
+identité sur $\mathbf{Z}$, valable sur tout anneau commutatif, sans division
+par $2$ ni par $3$ ; elle découle de $k!\,D^{(k)} = d^k/dt^k$, qui est
+\texttt{Polynomial.factorial\_smul\_hasseDeriv} dans mathlib (les $D^{(k)}$
+sont les dérivées de Hasse, \texttt{Polynomial.hasseDeriv}). La même
+vérification, dans le modèle local d'un anneau de polynômes, établit la
+relation de cocycle (II) pour $G_0$ (\texttt{N\_comp}, \texttt{G0\_comp}) :
+écrite sans dénominateur, c'est une identité entre polynômes des
+coefficients, sans hypothèse d'inversibilité, donc valable sur toute base, en
+caractéristique $2$ et $3$ comprises ; et l'invariance (1) par les
+homographies dont les coefficients sont annulés par $D^{(1)}$, $D^{(2)}$,
+$D^{(3)}$ (\texttt{G0\_homography}).} Donc, si $12$ est nul sur $S$, toutes les $c_t$ sont égales et il y a une
 connexion projective canonique ; et en toute caractéristique,
 $\mathrm{Conn}_{X/S}$ se déduit, par le changement de groupe $12\,\mathrm{id} :
 \omega^2 \to \omega^2$, d'un torseur plus fin $\mathrm{Conn}_{0,X/S}$ muni de
 $c_0^X$ avec $c_0^X(s) - c_0^X(t) = G_0(t,s)$, et l'on écrira $c_0 =
-\frac{1}{12}c$ (page 121).
+\frac{1}{12}c$ (page 121).\footnote{De l'édition : dans les deux travaux récents
+lus pour situer ce $G_0$, il ne se trouve pas. Chez Y.~Hoshi (« A note on
+Schwarzian derivatives and Sugiyama--Yasuda locally exact differentials »,
+Osaka J. Math. 61, 2024, § 3 et § 6), l'invariant projectif de niveau $1$ est
+la dérivée schwarzienne classique, à coefficients $2$ et $3$, qui s'annule
+identiquement pour $p \leq 3$ (remarque 6.4.2) ; l'invariant de niveau $2$ en
+caractéristique $2$ y est celui de Sugiyama et Yasuda, à valeurs dans les
+différentielles localement exactes et non dans $\omega^{\otimes 2}$ ; rien n'y
+porte sur $p = 3$ au niveau $2$. Chez Y.~Wakabayashi (« Frobenius-Ehresmann
+structures and Cartan geometries in positive characteristic »,
+arXiv:2109.02826, 2021), $p$ est impair et aucune schwarzienne n'est écrite.
+Les sources qui trancheraient (Ihara 1974, Hoshi 2020, Sugiyama--Yasuda 2020)
+n'ont pas été lues ; on n'affirme donc rien sur la priorité.}
 
 \pagerange{121}{123}
 \subsection*{L'injectivité en caractéristique $p$ (pages 121 à 123)}
@@ -1445,13 +1484,35 @@ On peut espérer que, $\mathcal{O}'_X$ désignant le sous-faisceau des fonctions
 annulées par $D^{(1)}, D^{(2)}, D^{(3)}$ — c'est $\mathcal{O}_X^{p}$ si $p \neq
 2,3$, et $\mathcal{O}_X^{p^2}$ si $p = 2$ ou $3$ —, le quotient de $\mathcal{P}_{X/S}$
 par les homographies à coefficients dans $\mathcal{O}'_X$ s'injecte dans
-$\mathrm{Conn}^0_{X/S}$. Un cas local le confirme :
+$\mathrm{Conn}^0_{X/S}$.\footnote{La description de $\mathcal{O}'_X$, en
+marge de la page 121 et marquée « OK », est vérifiée en Lean dans le modèle
+local d'un anneau de polynômes en caractéristique $p$
+(lean/Grothendieck/Folder93.lean, \texttt{killed\_iff\_of\_gt},
+\texttt{killed\_iff\_two}, \texttt{killed\_iff\_three}) : les polynômes
+annulés par $D^{(1)}$, $D^{(2)}$, $D^{(3)}$ sont ceux en $t^p$ si $p > 3$, en
+$t^4$ si $p = 2$, en $t^9$ si $p = 3$ ; l'argument est le théorème de Lucas,
+\texttt{Choose.choose\_modEq\_choose\_mod\_mul\_choose\_div\_nat} dans mathlib.
+Le niveau $p^2$ est nécessaire (\texttt{char\_two}, \texttt{char\_three}) : en
+caractéristique $2$, $D^{(1)}(t^2) = 0$ mais $G_0(t, t + t^2) = dt^2$ ; en
+caractéristique $3$, $D^{(1)}(t^3) = D^{(2)}(t^3) = 0$ mais
+$G_0(t, t + t^3) = -dt^2$. La forme générale de ce critère (polynômes annulés
+par les $D^{(k)}$, $0 < k < p^e$) est proposée à mathlib, PR ouverte
+n° 44736, avec le lemme de divisibilité tiré de Lucas qu'elle emploie, PR
+ouverte n° 44735.} Un cas local le confirme :
 
 \textbf{Proposition.} Soient $A$ un anneau de caractéristique $p > 3$ avec
 $\mathrm{Pic}(A) = 0$, $B = A[T]/(T^p - \alpha)$, $t$ la classe de $T$, et
 $s \in B$ avec $D^{(1)}_t s \in B^*$. Si $c_0(s) = 0$, c'est-à-dire
-$(D^{(2)} s)^2 = D^{(1)}s \cdot D^{(3)}s$, il existe $a, b, c, d \in A$, $ad - bc
-= 1$, avec $s = (at + b)/(ct + d)$.
+$(D^{(2)} s)^2 = D^{(1)}s \cdot D^{(3)}s$, il existe $a, b, c, d \in A$, avec
+$ad - bc \in A^*$, tels que $s = (at + b)/(ct + d)$.\footnote{La page ajoute
+« avec $ad - bc = 1$ » ; c'est faux en général, et nous l'avons retiré. Si
+une homographie de déterminant $1$ vaut $ut$ modulo $t^3$, alors $u$ est un
+carré ; or dans $\mathbf{F}_5[T]/(T^5)$, $s = 2t$ vérifie $c_0(s) = 0$ et
+$D^{(1)}s = 2 \in \mathbf{F}_5^*$, et $2$ n'est pas un carré modulo $5$ :
+vérifié en Lean (lean/Grothendieck/Folder93.lean,
+\texttt{det\_one\_counterexample}). Le déterminant est une unité, carré
+seulement si le coefficient de $t$ dans $s$ l'est ; l'énoncé juste porte sur
+$\mathrm{PGL}_2(A)$.}
 
 \emph{Démonstration.} On se ramène à $\alpha = 0$ ; $D^{(1)}s \in B^*$ veut dire
 $a_1 \in A^*$ ($s = \sum a_i t^i$), et, quitte à composer par des
@@ -1468,7 +1529,21 @@ $3 = (0,1)$ en base $3$ et $d - 3 \leq 5$ a un chiffre des « $3$ » au plus ég
 pour $p = 3$, faux, est barré de trois diagonales ; la colonne de droite,
 ajoutée après coup, donne l'argument retenu. La page dit « $A$ local, plus
 généralement $\mathrm{Pic}(A) = 0$ », hypothèse qui sert à normaliser les
-coefficients de l'homographie.}
+coefficients de l'homographie. La vérification en Lean
+(lean/Grothendieck/Folder93.lean, \texttt{rigidity\_of\_gt},
+\texttt{rigidity\_four}, \texttt{rigidity\_nine}) établit la Proposition
+pour $\alpha = 0$, dans $A[T]/(T^p)$ pour $p > 3$ et dans $A[T]/(T^{p^2})$
+pour $p = 2, 3$, sur tout anneau de caractéristique $p$ et sans hypothèse sur
+$\mathrm{Pic}(A)$ : on peut prendre $d = 1$, et le déterminant est alors le
+coefficient de $t$ dans $s$ ; pour $T^4$ ($p = 2$) l'énoncé vaut même sur
+tout anneau, seul $\binom33 = 1$ intervenant. L'hypothèse sur
+$\mathrm{Pic}(A)$ ne peut donc servir qu'à la réduction de $\alpha$ à $0$,
+que la page fait sans argument et qui n'est pas vérifiée. Pour $p > 3$,
+\texttt{rigidity\_iff\_of\_gt} donne aussi la réciproque : une homographie à
+coefficients dans $A$, de dénominateur $ct + d$ avec $d \in A^*$, vérifie
+$c_0 = 0$. La démonstration vérifiée suit les coefficients de
+$s\,(ct + 1)$ au lieu de composer $s$ par des homographies, et le
+coefficient $a\binom d3$ de la page y reparaît tel quel.}
 
 \pagerange{125}{129}
 \section*{X. Uniformisation et connexion projective canonique (pages 125 à 139)}
