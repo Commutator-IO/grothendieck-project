@@ -106,8 +106,7 @@ theorem fixer_five (hi : i ^ 2 = -1) (h2 : (2 : K) ≠ 0) (a : K)
 /-- With `5` invertible as well, the fixer of `∞` and `−1` in `Aut(ℙ¹, Δ)` is trivial. -/
 theorem fixer_trivial (hi : i ^ 2 = -1) (h2 : (2 : K) ≠ 0) (h5 : (5 : K) ≠ 0) (a : K)
     (h : ∀ z ∈ quad i, a * z + (a - 1) ∈ quad i) : a = 1 := by
-  have := fixer_five hi h2 a h
-  simpa [h5, sub_eq_zero] using this
+  simpa [h5, sub_eq_zero] using fixer_five hi h2 a h
 
 /-- In characteristic `5`, `z ↦ 2z + 1` (`a = 2`) maps `{0, 1, i, −i}` into itself. -/
 theorem fixer_nontrivial_char5 (hi : i ^ 2 = -1) (h5 : (5 : K) = 0) :
