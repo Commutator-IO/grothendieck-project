@@ -131,9 +131,8 @@ theorem tensor_root {b₁ c₁ b₂ c₂ : R} {u₁ : A₁} {u₂ : A₂}
   have e₂ := congrArg (Algebra.TensorProduct.includeRight (R := R) (A := A₁)) h₂
   simp only [map_add, map_mul, map_pow, AlgHom.commutes, map_zero,
     Algebra.TensorProduct.includeLeft_apply, Algebra.TensorProduct.includeRight_apply] at e₁ e₂
-  have := root_of_roots e₁ e₂
   simp only [iU, map_mul, map_sub, map_add, map_pow, map_ofNat]
-  linear_combination this
+  linear_combination root_of_roots e₁ e₂
 
 /-- The quadratic polynomial `𝒰² + b𝒰 + c` of the product. -/
 noncomputable def prodPoly (b₁ c₁ b₂ c₂ : R) : R[X] :=
@@ -146,9 +145,8 @@ noncomputable def productToTensor {b₁ c₁ b₂ c₂ : R} {u₁ : A₁} {u₂ 
     (h₂ : u₂ ^ 2 + algebraMap R A₂ b₂ * u₂ + algebraMap R A₂ c₂ = 0) :
     AdjoinRoot (prodPoly b₁ c₁ b₂ c₂) →ₐ[R] A₁ ⊗[R] A₂ :=
   AdjoinRoot.liftAlgHom _ (Algebra.ofId R _) (iU b₁ b₂ u₁ u₂) (by
-    have := tensor_root h₁ h₂
     simp only [prodPoly, eval₂_add, eval₂_mul, eval₂_pow, eval₂_C, eval₂_X]
-    simpa using this)
+    simpa using tensor_root h₁ h₂)
 
 theorem productToTensor_root {b₁ c₁ b₂ c₂ : R} {u₁ : A₁} {u₂ : A₂}
     (h₁ : u₁ ^ 2 + algebraMap R A₁ b₁ * u₁ + algebraMap R A₁ c₁ = 0)
@@ -271,8 +269,8 @@ theorem coinvariants_bijective_iff (b₁ b₂ : R) :
     obtain ⟨q, hq⟩ := hs ![1, 0]
     obtain ⟨v, rfl⟩ := Submodule.Quotient.mk_surjective _ q
     have e := congrFun hq 0
-    simp only [coinvMap, Submodule.liftQ_apply, starMap, LinearMap.coe_mk, AddHom.coe_mk] at e
-    simp only [Fin.isValue, Matrix.cons_val_zero] at e
+    simp only [coinvMap, Submodule.liftQ_apply, starMap, LinearMap.coe_mk, AddHom.coe_mk,
+      Fin.isValue, Matrix.cons_val_zero] at e
     exact (span_eq_top_iff b₁ b₂).2 ⟨v (0, 0), v (1, 0), v (0, 1), by rw [← e]; ring⟩
   · intro h
     obtain ⟨g₀, g₁, g₂, hg⟩ := (span_eq_top_iff b₁ b₂).1 h
@@ -399,12 +397,11 @@ theorem invariants_universally_iff {R : Type u} [CommRing R] (b₁ b₂ : R) :
     by_contra hI
     set I := Ideal.span ({2, b₁, b₂} : Set R)
     have hS : Nontrivial (R ⧸ I) := Ideal.Quotient.nontrivial_iff.2 hI
-    have h2 : (Ideal.Quotient.mk I) 2 = 0 :=
-      Ideal.Quotient.eq_zero_iff_mem.2 (Ideal.subset_span (by simp))
-    have hb₁ : (Ideal.Quotient.mk I) b₁ = 0 :=
-      Ideal.Quotient.eq_zero_iff_mem.2 (Ideal.subset_span (by simp))
-    have hb₂ : (Ideal.Quotient.mk I) b₂ = 0 :=
-      Ideal.Quotient.eq_zero_iff_mem.2 (Ideal.subset_span (by simp))
+    have hz : ∀ x ∈ ({2, b₁, b₂} : Set R), Ideal.Quotient.mk I x = 0 :=
+      fun x hx => Ideal.Quotient.eq_zero_iff_mem.2 (Ideal.subset_span hx)
+    have h2 := hz 2 (by simp)
+    have hb₁ := hz b₁ (by simp)
+    have hb₂ := hz b₂ (by simp)
     obtain ⟨-, hr⟩ := H (R ⧸ I) (Ideal.Quotient.mk I)
     rw [hb₁, hb₂] at hr
     -- the invariant `U₂` is not in the image
@@ -520,12 +517,8 @@ lemma coords_zero {b c a e : R}
   rcases subsingleton_or_nontrivial R with hR | hR
   · exact ⟨Subsingleton.elim _ _, Subsingleton.elim _ _⟩
   by_cases hp : C e * X + C a = 0
-  · have h0 := congrArg (coeff · 0) hp
-    have h1 := congrArg (coeff · 1) hp
-    simp at h0 h1
-    exact ⟨h0, h1⟩
-  · exfalso
-    refine (qpoly_monic b c).not_dvd_of_natDegree_lt hp ?_ hm
+  · exact ⟨by simpa using congrArg (coeff · 0) hp, by simpa using congrArg (coeff · 1) hp⟩
+  · refine absurd hm ((qpoly_monic b c).not_dvd_of_natDegree_lt hp ?_)
     rw [qpoly_natDegree]
     exact lt_of_le_of_lt natDegree_linear_le (by norm_num)
 
@@ -539,16 +532,14 @@ lemma coords_exist {b c : R} (y : QAlg b c) :
     rw [← mul_one y, this]; simp
   obtain ⟨p, rfl⟩ := AdjoinRoot.mk_surjective y
   have hm := qpoly_monic b c
-  have h1 : qpoly b c ≠ 1 := by
-    intro h; have := congrArg natDegree h; rw [qpoly_natDegree] at this; simp at this
+  have h1 : qpoly b c ≠ 1 := fun h => by simpa [qpoly_natDegree] using congrArg natDegree h
   have hq : (p %ₘ qpoly b c).natDegree ≤ 1 := by
     have := natDegree_modByMonic_lt p hm h1
     rw [qpoly_natDegree] at this; omega
   refine ⟨(p %ₘ qpoly b c).coeff 0, (p %ₘ qpoly b c).coeff 1, ?_⟩
   have e : AdjoinRoot.mk (qpoly b c) p = AdjoinRoot.mk (qpoly b c) (p %ₘ qpoly b c) := by
     rw [AdjoinRoot.mk_eq_mk]
-    exact ⟨p /ₘ qpoly b c, by
-      have := modByMonic_add_div p (qpoly b c); linear_combination -this⟩
+    exact ⟨p /ₘ qpoly b c, by linear_combination -modByMonic_add_div p (qpoly b c)⟩
   rw [e, eq_X_add_C_of_natDegree_le_one hq]
   simp [add_comm]
 
@@ -596,8 +587,7 @@ theorem qalg_iso_iff_moves (b c b' c' : R) :
       have : algebraMap R (QAlg b c) (s + η * t) + algebraMap R (QAlg b c) (η * ε - 1)
           * AdjoinRoot.root _ = 0 := by
         simp only [map_add, map_mul, map_sub, map_one]; linear_combination e
-      have := (coords_zero this).2
-      linear_combination this
+      linear_combination (coords_zero this).2
     have key := congrArg φ.symm (root_sq b' c')
     simp only [map_add, map_mul, map_pow, AlgEquiv.commutes, map_zero, hV] at key
     have r := root_sq b c
@@ -733,10 +723,8 @@ theorem int_qalg_iso_iff (b c b' c' : ℤ) :
     refine ⟨1, by rw [hd]; simp, ?_⟩
     have hev : Even ((b' - b) * (b' + b)) := ⟨2 * (c' - c), by
       unfold disc at hd; linear_combination -hd⟩
-    have hsub : Even (b' - b) := by
-      rcases Int.even_mul.1 hev with h | h
-      · exact h
-      · rwa [Int.even_sub, ← Int.even_add]
+    have hsub : Even (b' - b) :=
+      (Int.even_mul.1 hev).elim id fun h => by rwa [Int.even_sub, ← Int.even_add]
     obtain ⟨s, hs⟩ := hsub
     exact ⟨s, by simp; linear_combination hs⟩
 
@@ -803,8 +791,7 @@ theorem chiSplitting_eq {π : M × L →ₗ[R] L} {ϖ : M →ₗ[R] M × L}
       simp [piOf]
       rw [show ((0 : M), (0 : L)) = 0 from rfl, map_zero, zero_add, this]
   · ext η
-    · have := LinearMap.congr_fun h.sect η
-      simpa [varpiOf] using this
+    · simpa [varpiOf] using LinearMap.congr_fun h.sect η
     · have := congrArg Prod.snd (LinearMap.congr_fun h.sum (η, 0))
       simp only [LinearMap.add_apply, LinearMap.coe_comp, Function.comp_apply,
         LinearMap.inr_apply, LinearMap.fst_apply, Prod.snd_add, LinearMap.smul_apply,
@@ -857,8 +844,7 @@ theorem iso_iff (b b' : M →ₗ[R] L) :
     refine ⟨w, ?_⟩
     have e := h3.symm.trans (by rw [hf, piOf_comp_transv])
     ext η
-    have := LinearMap.congr_fun e (η, 0)
-    simpa [piOf] using this
+    simpa [piOf] using LinearMap.congr_fun e (η, 0)
   · rintro ⟨w, rfl⟩
     refine ⟨transv w, ?_, ?_, piOf_comp_transv χ b' w⟩
     · ext <;> simp [transv]
