@@ -221,15 +221,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '16',
     batch: 1,
-    page: '6–16, 47–48',
-    name: "sl₂ against (6.7); projectors; Cayley–Hamilton",
+    page: '6–16, 24–28, 47–48',
+    name: "sl₂ against (6.7); projectors; Hodge algebras of order 2; Cayley–Hamilton",
     statement:
-      "On a primitive vector of weight μ, ΛL^{k+1}x = (k+1)(μ−k)L^k x, and the sl₂ Λ satisfies (6.7) only when μ = 1; in a graded ring, one-sided inverses of L^{n−i} put every grading projector in the ring, over ℤ, with no module (no. 5, (6.3)); any algebraic isomorphism H^{2n−i} → H^i makes the inverse of L^{n−i} algebraic, by Cayley–Hamilton (pp. 47–48).",
+      "On a primitive vector of weight μ, ΛL^{k+1}x = (k+1)(μ−k)L^k x, and the sl₂ Λ satisfies (6.7) only when μ = 1; in a graded ring, one-sided inverses of L^{n−i} put every grading projector in the ring, over ℤ, with no module (no. 5, (6.3)); any algebraic isomorphism H^{2n−i} → H^i makes the inverse of L^{n−i} algebraic, by Cayley–Hamilton (pp. 47–48). Hodge algebras of order 2 (pp. 24–28): from an alternating φ on V, ψ : Λ²V → W and a symmetric Q on W, the product on k ⊕ V ⊕ (kξ ⊕ W) ⊕ V̌ ⊕ kξ² is a unital graded-anticommutative bilinear law; it is associative iff φ(x,y)φ(t,z) + Q(ψ(x,y), ψ(t,z)) = φ(t,x)φ(y,z) + Q(ψ(t,x), ψ(y,z)); Lefschetz iff φ is non-degenerate, Poincaré iff Q is; xyzt = χ(x,y,z,t)ξ², and the reformulation by (W̃, Q̃, α, ξ) with Q̃(ξ,ξ) = 1.",
     found:
-      "Confirms the reading’s correction of p. 13. Finds the reading wrong on one point: its universal ring Φ₀ = ℤ[L₀, Λ₀], with Λ₀ in the sense of (6.15), does not exist over ℤ for n ≥ 2, since ξ₀ⁿ is divisible by n! and no y has ξ₀ⁿ ∧ y = vol; over ℚ the obstruction disappears. Not proved: Λ and the primitive projectors in the ring, the universal property of Φ₀, Hard Lefschetz. The Cayley–Hamilton lemma is proposed to mathlib in a more general form, for integral units of a subalgebra over an Artinian ring (leanprover-community/mathlib4#44708).",
+      "Confirms the reading’s correction of p. 13. Finds the reading wrong on one point: its universal ring Φ₀ = ℤ[L₀, Λ₀], with Λ₀ in the sense of (6.15), does not exist over ℤ for n ≥ 2, since ξ₀ⁿ is divisible by n! and no y has ξ₀ⁿ ∧ y = vol; over ℚ the obstruction disappears. The Hodge algebras of pp. 24–28 hold as stated: of the associativity conditions only the triple H¹ × H¹ × H¹ is not automatic, and it is the quadrilinear identity, which is also exactly « χ is alternating »; each of the two conditions reads on one datum, Lefschetz using that V is finite-dimensional (ξ : V → V̌ injective ⇒ onto) and Poincaré needing no finiteness; construction and associativity hold over any commutative ring. In the reformulation, Q̃ is non-degenerate iff its restriction to ξ^⊥ is, because Q̃(ξ,ξ) = 1. Not proved: the finiteness question of p. 28; Λ and the primitive projectors in the ring, the universal property of Φ₀, Hard Lefschetz. The Cayley–Hamilton lemma is proposed to mathlib in a more general form, for integral units of a subalgebra over an Artinian ring (leanprover-community/mathlib4#44708).",
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder16.lean',
-    theorems: ["sl2_normalisation", "identification_seulement_si", "lambda0_L0_un_ne_un", "projecteurs_mem_lefschetz", "inverse_Lefschetz_algebrique", "not_exists_xi₀_pow_mul_eq_vol"],
+    theorems: ["sl2_normalisation", "identification_seulement_si", "lambda0_L0_un_ne_un", "projecteurs_mem_lefschetz", "inverse_Lefschetz_algebrique", "not_exists_xi₀_pow_mul_eq_vol", "DonneesHodge.produit_force", "DonneesHodge.mul_anticomm_of_impair", "DonneesHodge.assoc_iff", "DonneesHodge.lefschetz_iff", "DonneesHodge.poincare_iff", "DonneesHodge.identite_iff_chi", "reformulation_spec"],
   },
   {
     folder: '106',

@@ -1,4 +1,4 @@
-\section[Cote 16 : le pseudo-inverse de l'opérateur de Lefschetz et la normalisation de sl(2)]{Cote 16 : le pseudo-inverse de l'opérateur de Lefschetz et la normalisation de $\mathfrak{sl}_2$\protect\verifie{Folder16}}\label{sec:16}
+\section[Cote 16 : le pseudo-inverse de l'opérateur de Lefschetz, la normalisation de sl(2) et les algèbres de Hodge]{Cote 16 : le pseudo-inverse de l'opérateur de Lefschetz, la normalisation de $\mathfrak{sl}_2$ et les algèbres de Hodge\protect\verifie{Folder16}}\label{sec:16}
 
 La cote 16, \emph{Formalisme algébrique des correspondances et algèbres de Poincaré-Hodge (cf conjectures standard) : notes manuscrites (s.d.), tapuscrit annoté (s.d.), lettres (1966-1967)}, compte cinquante-cinq pages datées \q{1966-1967}. Elle s'ouvre sur un cahier, « Sur certains anneaux gradués » (pages~2 à~17), qui cherche à quelles conditions l'opérateur $\Lambda$ et les projecteurs de la décomposition primitive appartiennent à un anneau gradué $\mathcal E$ muni d'un $L$ de degré~$2$. La page~9 fixe $\Lambda$ par les relations~(6.7) (\lot{16}{1}{9}), que la page~13 reprend sous le numéro~(6.15). La même page pose sur une algèbre extérieure le modèle $L_0 x = \xi_0 x$, $\Lambda_0 x = \xi_0^* \lrcorner\, x$, et écrit que \q{$\Lambda_{0}$ est l'opérateur associé défini par (6.15)} (\lot{16}{1}{13}). Le dossier ne mentionne jamais $\mathfrak{sl}_2$. La lecture compare les deux normalisations de $\Lambda$ ; cette comparaison, purement algébrique, est démontrée ici.
 
@@ -136,6 +136,65 @@ $\Lambda = (\Lambda L)\Lambda = \Lambda'(L\Lambda) = \Lambda'(L\Lambda') = \Lamb
 
 \noindent Le lemme~\ref{lem:16-pseudo} dit qu'un pseudo-inverse est déterminé par les deux idempotents $\Lambda L$ et $L\Lambda$ ; ni l'existence de l'homomorphisme $\Phi_0 \to \mathcal E$ ni son unicité ne sont démontrées ici.
 
+Les pages~24 à~28, sous le titre \q{Algèbres de Hodge d'ordre 2} (\lot{16}{2}{24}), dégagent l'ossature d'un anneau de cohomologie de surface à partir de trois données ; la page~26 la reformule en faisant de la polarisation un paramètre (\lot{16}{2}{26}).
+
+\noindent\emph{Conventions.} Soient $k$ un anneau commutatif, $V$ et $W$ des $k$-modules, $\check V = \operatorname{Hom}_k(V, k)$, $\varphi$ une forme bilinéaire alternée sur $V$, $\psi \colon V \times V \to W$ bilinéaire alternée (c'est-à-dire $\psi \colon \Lambda^2 V \to W$) et $Q$ une forme bilinéaire symétrique sur $W$. Soit $A = k \oplus V \oplus (k\xi \oplus W) \oplus \check V \oplus k\xi^2$, de composantes $H^0, \dots, H^4$, muni du produit de la page~24 : $1$ est unité ; $xy = \varphi(x,y)\,\xi + \psi(x,y)$ pour $x, y \in V$ ; $x(c\xi + w) = (c\xi + w)x$ est la forme $t \mapsto c\,\varphi(t,x) + Q(\psi(t,x), w)$, soit $x\xi = \tilde\varphi(x)$ et $xw = \rho(w,x)$ dans les notations de la page ; $xy' = -y'x = y'(x)\,\xi^2$ pour $y' \in \check V$ ; $\xi\cdot\xi = \xi^2$, $\xi w = w\xi = 0$ et $ww' = Q(w,w')\,\xi^2$ ; les produits de degré total supérieur à~$4$ sont nuls, et l'on étend par bilinéarité. Un élément est \emph{pair} s'il est dans $H^0 \oplus H^2 \oplus H^4$, \emph{impair} s'il est dans $H^1 \oplus H^3$. On pose
+\[
+\chi(x,y,z,t) = \varphi(x,y)\,\varphi(z,t) + Q\bigl(\psi(x,y), \psi(z,t)\bigr),
+\]
+de sorte que $(xy)(zt) = \chi(x,y,z,t)\,\xi^2$ ; $\chi(x,y,z,t) = \chi(z,t,x,y)$ par symétrie de $Q$, et $\chi$ change de signe quand on échange $x$ et $y$, ou $z$ et $t$.
+
+\begin{encadre}
+\begin{theoreme}[Grothendieck, pages 24 à 28, algèbres de Hodge d'ordre~2\piste{16-hodge-algebras-order-2}]\label{thm:16-hodge}
+\begin{enumerate}
+\item Quels que soient $\varphi$, $\psi$, $Q$, le produit est bilinéaire, admet $1$ pour unité et est anticommutatif au sens gradué : les éléments pairs sont centraux, deux éléments impairs anticommutent, et le carré d'un élément impair est nul. Le produit $H^1 \times H^2 \to H^3$ est le seul pour lequel $t(xh) = (tx)h$ quels que soient $t, x \in V$ et $h \in H^2$.
+\item Le produit est associatif si et seulement si, pour tous $x, y, z, t \in V$,
+\[
+\varphi(x,y)\varphi(t,z) + Q\bigl(\psi(x,y), \psi(t,z)\bigr) = \varphi(t,x)\varphi(y,z) + Q\bigl(\psi(t,x), \psi(y,z)\bigr).
+\]
+\item Si $k$ est un corps et $V$ de dimension finie, $\xi^2 \colon H^0 \to H^4$ est toujours un isomorphisme, et $\xi \colon H^1 \to H^3$ en est un si et seulement si $\varphi$ est non dégénérée : la condition de Lefschetz équivaut à la non-dégénérescence de~$\varphi$.
+\item Si $k$ est un corps, les accouplements $H^0 \times H^4 \to H^4$ et $H^1 \times H^3 \to H^4$ sont toujours non dégénérés, et $H^2 \times H^2 \to H^4$ l'est si et seulement si $Q$ l'est : la condition de Poincaré équivaut à la non-dégénérescence de~$Q$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) Chaque composante du produit est bilinéaire, et l'unité se lit sur la définition. Si $a$ est pair, les seuls termes de $ab$ où l'ordre compte sont $Q(w, w')$, symétrique, et les produits $xh$ et $hx$, égaux par définition. Si $a = x + y'$ et $b = z + u'$ sont impairs, $ab = \varphi(x,z)\,\xi + \psi(x,z) + \bigl(u'(x) - y'(z)\bigr)\xi^2$, qui change de signe quand on échange $a$ et $b$, $\varphi$ et $\psi$ étant alternées, et qui s'annule pour $a = b$. Enfin $t(xh) = (xh)(t)\,\xi^2$, et pour $h = c\xi + w$,
+\[
+(tx)h = \bigl(\varphi(t,x)\,\xi + \psi(t,x)\bigr)(c\xi + w) = \bigl(c\,\varphi(t,x) + Q(\psi(t,x), w)\bigr)\xi^2 ;
+\]
+l'égalité pour tout $t$ détermine la forme $xh$, qui est celle de la définition.
+
+(2) Par bilinéarité, il suffit de vérifier l'associativité sur des éléments homogènes. Les triples où figure un élément de $H^0$ sont associatifs par l'unité, et ceux de degré total supérieur à~$4$ donnent~$0$ des deux côtés. Restent le triple $H^1 \times H^1 \times H^1$, à valeurs dans $H^3$, et les trois triples formés de deux éléments de $V$ et d'un de $H^2$, à valeurs dans $H^4$. Ces derniers sont associatifs quelles que soient les données : pour $t, x \in V$ et $h \in H^2$, $t(xh) = (tx)h$ par~(1) ; $(xh)t = -t(xh) = -(tx)h = (xt)h$, puisque $tx = -xt$ ; $x(ht) = x(th) = (xt)h$ ; et $(hx)t = (xh)t$, $h(xt) = (xt)h$ par symétrie de $Q$. Pour $x, y, z \in V$, $(xy)z$ et $x(yz)$ sont des formes sur $V$, que l'on évalue en $t$ par~(1) : $\langle t, (xy)z \rangle = \langle t, z(xy) \rangle = \chi(t,z,x,y)$ et $\langle t, x(yz) \rangle = \chi(t,x,y,z)$. L'associativité équivaut donc à $\chi(t,z,x,y) = \chi(t,x,y,z)$ pour tous $x, y, z, t$ ; comme $\chi(t,z,x,y) = \chi(x,y,t,z)$, c'est l'identité de l'énoncé.
+
+(3) On a $\xi^2 \cdot c = c\,\xi^2$, et $\xi x = x\xi = \tilde\varphi(x)$ est la forme $t \mapsto \varphi(t,x)$. L'application linéaire $\tilde\varphi \colon V \to \check V$ est injective si et seulement si $\varphi$ sépare à droite, ce qui, $\varphi$ étant antisymétrique, revient à la non-dégénérescence. Comme $\dim \check V = \dim V$, injective équivaut à bijective.
+
+(4) On a $c \cdot d\xi^2 = cd\,\xi^2$ et $x \cdot y' = y'(x)\,\xi^2$ ; sur un corps, un vecteur annulé par toutes les formes linéaires est nul, sans hypothèse de dimension, et une forme nulle sur tout $V$ est nulle. Enfin $(c\xi + w)(c'\xi + w') = \bigl(cc' + Q(w,w')\bigr)\xi^2$. Si $Q$ est non dégénérée et si $cc' + Q(w,w') = 0$ pour tous $c'$ et $w'$, le choix $c' = 1$, $w' = 0$ donne $c = 0$, puis $Q(w, w') = 0$ pour tout $w'$ donne $w = 0$. Inversement, si l'accouplement est non dégénéré, un $w$ tel que $Q(w, \cdot) = 0$ est orthogonal à tout $H^2$, donc nul. Les deux formes étant symétriques, séparer d'un côté suffit.
+\end{proof}
+
+\begin{enonce}[Page 26, la forme $\chi$ et la reformulation]
+\begin{enumerate}
+\item Pour tous $x, y, z, t \in V$, $((xy)z)t = \chi(x,y,z,t)\,\xi^2$, que le produit soit associatif ou non.
+\item L'identité d'associativité équivaut à $\chi(x,y,y,t) = 0$ pour tous $x, y, t$, et entraîne que $\chi$ s'annule dès que deux de ses arguments sont égaux : la forme $\chi$ est alternée.
+\item Soient $k$ un corps, $V$ de dimension finie, $\tilde W$ un $k$-espace muni d'une forme bilinéaire symétrique $\tilde Q$, $\alpha \colon \Lambda^2 V \to \tilde W$ linéaire et $\xi \in \tilde W$ tel que $\tilde Q(\xi,\xi) = 1$. Posons $W = \xi^{\perp}$, $\varphi(x,y) = \tilde Q(\alpha(x \wedge y), \xi)$, $\psi = \alpha - \varphi\,\xi$ et $Q = \tilde Q|_W$. Alors $\psi$ est à valeurs dans $W$, $\alpha = \varphi\,\xi + \psi$ et $\tilde Q(\alpha(x \wedge y), \alpha(z \wedge t)) = \chi(x,y,z,t)$. L'algèbre de Hodge de $(\varphi, \psi, Q)$ est associative si et seulement si $\tilde Q(\alpha(x \wedge y), \alpha(y \wedge t)) = 0$ pour tous $x, y, t$ ; elle vérifie la condition de Lefschetz si et seulement si $\varphi$ est non dégénérée, et la condition de Poincaré si et seulement si $\tilde Q$ est non dégénérée.
+\end{enumerate}
+\end{enonce}
+
+\begin{proof}
+(1) Par~(1) du théorème~\ref{thm:16-hodge}, $(xy)z = z(xy)$ est la forme $s \mapsto \chi(s,z,x,y)$, donc $((xy)z)t = -t((xy)z) = -\chi(t,z,x,y)\,\xi^2 = \chi(z,t,x,y)\,\xi^2 = \chi(x,y,z,t)\,\xi^2$.
+
+(2) Écrivons l'identité $\chi(x,y,t,z) = \chi(t,x,y,z)$. Pour $z = y$, elle donne $\chi(x,y,t,y) = \chi(t,x,y,y) = 0$, d'où $\chi(x,y,y,t) = -\chi(x,y,t,y) = 0$. Pour $t = x$, elle donne $\chi(x,y,x,z) = \chi(x,x,y,z) = 0$, d'où aussi $\chi(x,y,z,x) = 0$ ; avec $(t,z)$ remplacé par $(z,y)$, elle donne $\chi(x,y,z,y) = \chi(z,x,y,y) = 0$. Les cas $\chi(x,x,z,t)$ et $\chi(x,y,z,z)$ sont nuls par alternance de $\varphi$ et $\psi$. Réciproquement, si $\chi(x,y,y,t) = 0$ pour tous $x, y, t$, le développement de $\chi(x, y+z, y+z, t) = 0$ donne $\chi(x,y,z,t) = -\chi(x,z,y,t)$, et alors
+\[
+\chi(x,y,t,z) = -\chi(x,t,y,z) = \chi(t,x,y,z).
+\]
+
+(3) $\tilde Q\bigl(\xi, \alpha - \tilde Q(\xi,\alpha)\,\xi\bigr) = \tilde Q(\xi,\alpha)\bigl(1 - \tilde Q(\xi,\xi)\bigr) = 0$, donc $\psi$ est à valeurs dans $W$, et $\alpha = \varphi\,\xi + \psi$ par définition. Comme $\psi(x,y)$ et $\psi(z,t)$ sont orthogonaux à $\xi$ et $\tilde Q(\xi,\xi) = 1$, le développement de $\tilde Q(\varphi(x,y)\,\xi + \psi(x,y), \varphi(z,t)\,\xi + \psi(z,t))$ donne $\chi(x,y,z,t)$. L'associativité suit alors de~(2) du théorème et de~(2) ci-dessus, la condition de Lefschetz de~(3). Pour la condition de Poincaré, il reste par~(4) à voir que $\tilde Q$ est non dégénérée si et seulement si $Q$ l'est. Tout $v \in \tilde W$ s'écrit $v = \tilde Q(\xi,v)\,\xi + v'$ avec $v' = v - \tilde Q(\xi,v)\,\xi \in W$. Si $w \in W$ est orthogonal à $W$, alors $\tilde Q(w, v) = \tilde Q(\xi,v)\,\tilde Q(w,\xi) + \tilde Q(w, v') = 0$ pour tout $v$, et $w = 0$ si $\tilde Q$ est non dégénérée. Si $v \in \tilde W$ est orthogonal à $\tilde W$, alors $\tilde Q(\xi, v) = 0$, donc $v \in W$ est orthogonal à $W$, et $v = 0$ si $Q$ est non dégénérée.
+\end{proof}
+
+\begin{remarque}
+Les énoncés tiennent tels que la page les écrit, et la formalisation dit d'où vient chacun. L'associativité ne contraint que le triple $H^1 \times H^1 \times H^1$ : les autres sont associatifs parce que le produit $H^1 \times H^2 \to H^3$ est imposé par la dualité, ce qui donne un sens précis à la phrase de la page selon laquelle $V$, $W$, $\varphi$, $\psi$, $Q$ permettent de \q{reconstituer $H^*$ à isom.\ canonique près}. La construction et l'associativité valent sur tout anneau commutatif. Seule la condition de Lefschetz demande que $V$ soit de dimension finie, pour passer de l'injectivité de $\tilde\varphi$ à sa bijectivité ; la condition de Poincaré n'en demande aucune. L'identité d'associativité est exactement l'alternance de la forme $\chi$ que la page~26 dit alternée ; la note marginale de la page~24, en partie illisible, rattache déjà l'identité à la forme $xyzt$. Dans la reformulation, c'est $\tilde Q(\xi,\xi) = 1$ qui scinde $\tilde W$ en somme orthogonale $k\xi \oplus \xi^{\perp}$ et rend équivalentes les non-dégénérescences de $\tilde Q$ et de~$Q$.
+\end{remarque}
+
 La lettre du 6 janvier 1967 montre que $C(X)$ suit de $D(X)$ et de l'existence d'isomorphismes algébriques $H^{2n-i}(X) \to H^i(X)$ quelconques (\lot{16}{3}{47}).
 
 \noindent\emph{Conventions.} Soient $K$ un corps ($\mathbb Q_\ell$), $F \subset K$ un sous-corps ($\mathbb Q$), $V = H^i(X)$ et $W = H^{2n-i}(X)$ des $K$-espaces, $V$ de dimension finie. \q{Algébrique} est lu comme l'appartenance à des ensembles donnés d'applications : un sous-anneau $\mathcal A_V$ de $\operatorname{End}_K(V)$, stable par multiplication par les éléments de $F$, et des parties $\mathcal A_{WV}$ de $\operatorname{Hom}(W, V)$ et $\mathcal A_{VW}$ de $\operatorname{Hom}(V, W)$, telles que $g \circ h \in \mathcal A_{WV}$ pour $g \in \mathcal A_V$, $h \in \mathcal A_{WV}$, et $h \circ k \in \mathcal A_V$ pour $h \in \mathcal A_{WV}$, $k \in \mathcal A_{VW}$. L'hypothèse $D(X)$ est lue comme : les coefficients du polynôme caractéristique de tout $g \in \mathcal A_V$ sont dans $F$.
@@ -166,13 +225,7 @@ L'argument de la lettre vaut tel quel, avec la relation de Cayley--Hamilton écr
 Le lemme~\ref{lem:16-ch} est proposé à mathlib sous une forme plus générale : sur un anneau artinien $R$, un élément d'une sous-$R$-algèbre $B \subseteq A$, entier sur $R$ et inversible dans $A$, est inversible dans $B$ (PR mathlib4~\#44708). Le lemme s'en déduit par Cayley--Hamilton.
 \end{remarque}
 
-Ne sont pas démontrés ici : le théorème de Lefschetz difficile par $\mathfrak{sl}_2$ et la représentation de $\mathfrak{sl}_2$ engendrée par $(L_0, \Lambda_0)$ ; dans le théorème du n\textsuperscript{o}~6, $\Lambda$ et les projecteurs primitifs (pages~9 à~12) ; l'existence et l'unicité de l'homomorphisme $\Phi_0 \to \mathcal E$ et le corollaire de la page~16\piste{16-universal-lefschetz-ring} ; le contre-exemple de la page~21 ; les pages~2 à~5, 24 à~46 et~48 à~54, dont les algèbres de Hodge, les sections hyperplanes, le corollaire de la page~48, les variantes de la page~49 et le lemme.
-
-\begin{encadre}
-\begin{definition}[Grothendieck, pages 24 à 28, algèbres de Hodge\piste{16-hodge-algebras-order-2}]
-Une algèbre de Hodge est une algèbre graduée anticommutative de composantes $k$, $V$, $k\xi \oplus W$, $\check V$, $k\xi^2$, donnée par une forme alternée $\varphi$ sur $V$, une application $\psi : \Lambda^2 V \to W$ et une forme symétrique $Q$ sur $W$. La page ramène l'associativité à une identité quadrilinéaire et montre que la condition de Lefschetz et la condition de Poincaré équivalent chacune à la non-dégénérescence de l'une exactement des formes $\varphi$ et $Q$ ; une seconde formulation fait de la polarisation $\xi$ un paramètre de la structure.
-\end{definition}
-\end{encadre}
+Ne sont pas démontrés ici : le théorème de Lefschetz difficile par $\mathfrak{sl}_2$ et la représentation de $\mathfrak{sl}_2$ engendrée par $(L_0, \Lambda_0)$ ; dans le théorème du n\textsuperscript{o}~6, $\Lambda$ et les projecteurs primitifs (pages~9 à~12) ; l'existence et l'unicité de l'homomorphisme $\Phi_0 \to \mathcal E$ et le corollaire de la page~16\piste{16-universal-lefschetz-ring} ; le contre-exemple de la page~21 ; dans les algèbres de Hodge, l'exemple $\chi = \varphi^2$ de la page~28 et la question, restée sans réponse, de la finitude d'une orbite sous $u$ ; les pages~2 à~5, 29 à~46 et~48 à~54, dont les sections hyperplanes, le corollaire de la page~48, les variantes de la page~49 et le lemme.
 
 \begin{encadre}
 \begin{theoreme}[Grothendieck, pages 4 à 17, critère de Lefschetz dans un anneau gradué\piste{16-graded-ring-lefschetz-criterion}]\nonverifie

@@ -1303,6 +1303,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Compare with the literature on graded Poincaré duality algebras of formal dimension 4 and on the classification of cohomology rings of algebraic surfaces, and check in both directions that his « algèbre de Hodge d’ordre 2 » and the standard notion define the same objects. The point to test is the claimed separation — one condition per datum — rather than the axiomatisation itself.',
+    lean: { file: 'lean/Grothendieck/Folder16.lean', found: "Holds as stated. With x·(cξ + w) = (t ↦ cφ(t,x) + Q(ψ(t,x), w)) — the only product H¹ × H² → H³ compatible with associativity and the pairing H¹ × H³ — the law is unital, bilinear and graded-anticommutative for any φ, ψ, Q, over any commutative ring; of the associativity conditions only H¹ × H¹ × H¹ is not automatic, and it is the quadrilinear identity, equivalently « χ(x,y,y,t) = 0 », i.e. χ alternating. Over a field, ξ² : H⁰ → H⁴ and the pairings H⁰ × H⁴, H¹ × H³ are always perfect; ξ : H¹ → H³ is bijective iff φ is non-degenerate (V finite-dimensional: injective ⇒ onto), and H² × H² iff Q is (no finiteness). In the second formulation, with W = ξ^⊥, φ = Q̃(α(·), ξ) and ψ = α − φξ, Q̃ is non-degenerate iff Q̃|_W is, because Q̃(ξ,ξ) = 1. The orbit question at the end of p. 28 is not formalised." },
   },
   {
     id: '16-page-21-not-gorenstein',

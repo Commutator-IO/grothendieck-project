@@ -4,6 +4,11 @@ import Mathlib.LinearAlgebra.Charpoly.BaseChange
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.ExteriorAlgebra.Grading
 import Mathlib.Data.Int.Interval
+import Mathlib.LinearAlgebra.BilinearForm.Properties
+import Mathlib.LinearAlgebra.Dual.Lemmas
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+import Mathlib.Tactic.Module
+import Mathlib.Tactic.LinearCombination
 
 /-!
 # Folder 16: the `𝔰𝔩₂` side of hard Lefschetz, against the folder's pseudo-inverse `Λ`
@@ -58,6 +63,22 @@ from the `𝔰𝔩₂` (Hodge) normalisation, and a fourth about the manuscript'
   in the sense of `(6.15)` exists in `End_ℤ(Λ M₀)`.
 * `pseudo_inverse_unique` — a pseudo-inverse with `ΛLΛ = Λ` is determined by `ΛL` and `LΛ`.
 
+* Pages 24–28, the « algèbres de Hodge d'ordre 2 » (finding `16-hodge-algebras-order-2`).
+  `DonneesHodge` holds `(φ, ψ, Q)`: `φ` alternating on `V`, `ψ : Λ²V → W`, `Q` symmetric on `W`;
+  `AlgHodge` is `k ⊕ V ⊕ (kξ ⊕ W) ⊕ V̌ ⊕ kξ²` and `DonneesHodge.mul` the product of page 24.
+  `produits`, `produit_force` — the products of the reading, and the `H¹ × H²` one is the only
+  one compatible with associativity and the pairing `H¹ × H³`; `one_mul`, `mul_one`, `mulₗ`,
+  `mul_comm_of_pair`, `mul_anticomm_of_impair`, `mul_self_of_impair` — whatever `φ, ψ, Q`, a
+  bilinear unital graded-anticommutative law; `assoc_iff` — associative iff
+  `φ(x,y)φ(t,z) + Q(ψ(x,y), ψ(t,z)) = φ(t,x)φ(y,z) + Q(ψ(t,x), ψ(y,z))`; `lefschetz_iff` —
+  `ξ² : H⁰ → H⁴` is always bijective and `ξ : H¹ → H³` is iff `φ` is non-degenerate
+  (`V` finite-dimensional); `poincare_iff` — `H⁰ × H⁴`, `H¹ × H³` always perfect, `H² × H²`
+  non-degenerate iff `Q` is (no finiteness). Page 26: `chi_eq` (`xyzt = χ(x,y,z,t)ξ²`),
+  `chi_alt`, `identite_iff_chi` (associativity ⇔ `χ` alternating ⇔ `χ(x,y,y,t) = 0`), and
+  `reformulation`, `reformulation_spec`: from `(W̃, Q̃, α, ξ)` with `Q̃(ξ,ξ) = 1`, `W = ξ^⊥`,
+  `φ = Q̃(α(·), ξ)`, `ψ = α - φξ`, `Q = Q̃|_W`, associativity is `Q̃(α(x∧y), α(y∧t)) = 0`,
+  Lefschetz is « `φ` non dégénérée » and Poincaré is « `Q̃` non dégénérée ».
+
 **What the formalisation finds.** The reading's comparison of the two normalisations holds
 as stated, and its correction of the manuscript (the two `Λ₀` differ as soon as `n ≥ 2`) is
 confirmed by `Λ₀ L₀ (1) = n`; the `𝔰𝔩₂` facts themselves are already in mathlib. The
@@ -67,13 +88,22 @@ sense of `(6.15)` — fails over `ℤ` for `n ≥ 2`: `L₀ⁿ : Λ⁰ → Λ^{2
 `n!` (here: by an even number), so the exterior model over `ℤ` does not satisfy the
 Lefschetz conditions. Over `ℚ` the obstruction disappears.
 
+The Hodge algebras of order 2 hold as the reading states them, over any commutative ring for the
+construction and associativity, over a field for the two conditions: associativity reduces to
+the single triple `H¹ × H¹ × H¹` (the triples with one factor in `H²` hold by the definition of
+`x · h`, using only that `φ`, `ψ` are alternating and `Q` symmetric), and each condition reads
+on one datum. Finite dimension is used once, for Lefschetz (`ξ : V → V̌` injective ⇒ onto);
+Poincaré needs none. The quadrilinear identity is exactly the alternance of `χ`, and in the
+reformulation `Q̃` is non-degenerate iff its restriction to `ξ^⊥` is, because `Q̃(ξ,ξ) = 1`.
+
 **Not formalised.** That `(L₀, Λ₀)` generate an `𝔰𝔩₂`-representation on all of
 `Λ M₀` (only its value on `1` is computed); the derivation of hard Lefschetz from
 `𝔰𝔩₂` (the folder takes the primitive decomposition as known); in the theorem of no. 6,
 that `Λ` and the projectors `π_{i,α}` given by the formulas of pages 10–12 satisfy `(6.7)`
 and are the projectors of the primitive decomposition; the existence and uniqueness of the
 homomorphism `Φ₀ → ℰ`; the Corollary of page 48; the dimension-6 counterexample of page
-21; everything geometric.
+21; the finiteness question of page 28 on the orbit under `u` (an unreconstructible sketch);
+everything geometric.
 
 What this certifies is that the reading holds together, not that it is what the
 pages say (issue #26).
@@ -543,5 +573,426 @@ theorem pseudo_inverse_unique {L Λ Λ' : E} (h : Λ * L * Λ = Λ) (h' : Λ' * 
     _ = Λ' := h'
 
 end Unicite
+
+section AlgebresHodge
+
+/-- **Page 24, the three data.** An alternating form `φ` on `V`, an alternating bilinear map
+`ψ : V × V → W` (i.e. `Λ²V → W`), a symmetric bilinear form `Q` on `W`. -/
+structure DonneesHodge (k V W : Type*) [CommRing k] [AddCommGroup V] [Module k V]
+    [AddCommGroup W] [Module k W] where
+  /-- the alternating form `φ` on `V` -/
+  φ : LinearMap.BilinForm k V
+  /-- `ψ : Λ²V → W` -/
+  ψ : V →ₗ[k] V →ₗ[k] W
+  /-- the symmetric form `Q` on `W` -/
+  Q : LinearMap.BilinForm k W
+  φ_alt : ∀ x, φ x x = 0
+  ψ_alt : ∀ x, ψ x x = 0
+  Q_symm : ∀ w w', Q w w' = Q w' w
+
+/-- The graded space `H⁰ ⊕ H¹ ⊕ H² ⊕ H³ ⊕ H⁴ = k ⊕ V ⊕ (kξ ⊕ W) ⊕ V̌ ⊕ kξ²`; an element is
+`(a₀, a₁, (c, w), a₃, a₄)`, with `c` the coefficient of `ξ` and `a₄` that of `ξ²`. -/
+abbrev AlgHodge (k V W : Type*) [CommRing k] [AddCommGroup V] [Module k V]
+    [AddCommGroup W] [Module k W] :=
+  k × V × (k × W) × Module.Dual k V × k
+
+variable {k V W : Type*}
+
+section Anneau
+
+variable [CommRing k] [AddCommGroup V] [Module k V] [AddCommGroup W] [Module k W]
+
+/-- `H⁰ → A`. -/
+def deg0 (c : k) : AlgHodge k V W := (c, 0, (0, 0), 0, 0)
+/-- `H¹ = V → A`. -/
+def deg1 (x : V) : AlgHodge k V W := (0, x, (0, 0), 0, 0)
+/-- `H² = kξ ⊕ W → A`. -/
+def deg2 (c : k) (w : W) : AlgHodge k V W := (0, 0, (c, w), 0, 0)
+/-- `H³ = V̌ → A`. -/
+def deg3 (u : Module.Dual k V) : AlgHodge k V W := (0, 0, (0, 0), u, 0)
+/-- `H⁴ = kξ² → A`. -/
+def deg4 (c : k) : AlgHodge k V W := (0, 0, (0, 0), 0, c)
+/-- The polarisation `ξ ∈ H²`. -/
+def xi : AlgHodge k V W := deg2 1 0
+
+namespace DonneesHodge
+
+variable (D : DonneesHodge k V W)
+
+theorem φ_anti (x y : V) : D.φ y x = -D.φ x y := by
+  have := D.φ_alt (x + y)
+  simp only [map_add, LinearMap.add_apply, D.φ_alt, zero_add, add_zero] at this
+  exact eq_neg_of_add_eq_zero_left this
+
+theorem ψ_anti (x y : V) : D.ψ y x = -D.ψ x y := by
+  have := D.ψ_alt (x + y)
+  simp only [map_add, LinearMap.add_apply, D.ψ_alt, zero_add, add_zero] at this
+  exact eq_neg_of_add_eq_zero_left this
+
+theorem Qψ_anti (x y : V) (w : W) : D.Q (D.ψ y x) w = -D.Q (D.ψ x y) w := by
+  rw [D.ψ_anti, map_neg, LinearMap.neg_apply]
+
+/-- The product `H¹ × H² → H³`, forced by `⟨t, x h⟩ ξ² = (t x) h`:
+`x · (cξ + w) = (t ↦ c φ(t,x) + Q(ψ(t,x), w))`, i.e. `x ξ = φ̃(x)` and `x w = ρ(w,x)`. -/
+def act (x : V) (c : k) (w : W) : Module.Dual k V :=
+  c • D.φ.flip x + (D.Q.flip w).comp (D.ψ.flip x)
+
+@[simp]
+theorem act_apply (x : V) (c : k) (w : W) (t : V) :
+    D.act x c w t = c * D.φ t x + D.Q (D.ψ t x) w := by
+  simp [act]
+
+/-- **Page 24, the multiplication.** `x y = φ(x,y) ξ + ψ(x,y)` on `H¹ × H¹`, `x h` as in `act`,
+`x y' = ⟨x, y'⟩ ξ²` on `H¹ × H³`, `ξ² = ξ²`, `ξ w = 0`, `w w' = Q(w,w') ξ²`, extended by
+graded anticommutativity and `H⁰ = k`. -/
+def mul (a b : AlgHodge k V W) : AlgHodge k V W :=
+  (a.1 * b.1,
+   a.1 • b.2.1 + b.1 • a.2.1,
+   (a.1 * b.2.2.1.1 + b.1 * a.2.2.1.1 + D.φ a.2.1 b.2.1,
+    a.1 • b.2.2.1.2 + b.1 • a.2.2.1.2 + D.ψ a.2.1 b.2.1),
+   a.1 • b.2.2.2.1 + b.1 • a.2.2.2.1 + D.act a.2.1 b.2.2.1.1 b.2.2.1.2 +
+     D.act b.2.1 a.2.2.1.1 a.2.2.1.2,
+   a.1 * b.2.2.2.2 + b.1 * a.2.2.2.2 + a.2.2.1.1 * b.2.2.1.1 + D.Q a.2.2.1.2 b.2.2.1.2 +
+     b.2.2.2.1 a.2.1 - a.2.2.2.1 b.2.1)
+
+/-- **Page 24, the products of the reading.** -/
+theorem produits (x y : V) (w w' : W) (u : Module.Dual k V) :
+    D.mul (deg1 x) (deg1 y) = deg2 (D.φ x y) (D.ψ x y) ∧
+      D.mul (deg1 x) xi = deg3 (D.φ.flip x) ∧
+      D.mul (deg1 x) (deg2 0 w) = deg3 ((D.Q.flip w).comp (D.ψ.flip x)) ∧
+      D.mul (deg1 x) (deg3 u) = deg4 (u x) ∧
+      D.mul xi xi = (deg4 1 : AlgHodge k V W) ∧
+      D.mul xi (deg2 0 w) = 0 ∧
+      D.mul (deg2 0 w) (deg2 0 w') = deg4 (D.Q w w') := by
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_⟩ <;>
+    simp [mul, deg1, deg2, deg3, deg4, xi, act]
+
+/-- **Page 24, « les produits restants sont alors forcés ».** The product `H¹ × H² → H³` is
+the only one compatible with associativity and the pairing `H¹ × H³ → H⁴`: a `u ∈ V̌` satisfies
+`t u = (t x) h` for every `t ∈ V` if and only if `u = x h`. -/
+theorem produit_force (x : V) (c : k) (w : W) (u : Module.Dual k V) :
+    (∀ t, D.mul (deg1 t) (deg3 u) = D.mul (D.mul (deg1 t) (deg1 x)) (deg2 c w)) ↔
+      u = (D.mul (deg1 x) (deg2 c w)).2.2.2.1 := by
+  constructor
+  · intro h
+    ext t
+    have := congrArg (fun p => p.2.2.2.2) (h t)
+    simp [mul, deg1, deg2, deg3] at this
+    simp [mul, deg1, deg2, this]
+    ring
+  · rintro rfl t
+    simp [mul, deg1, deg2, deg3, act, mul_comm]
+
+/-- **Page 24, « on obtient ainsi une loi … unifère ».** -/
+theorem one_mul (a : AlgHodge k V W) : D.mul (deg0 1) a = a := by
+  obtain ⟨a0, a1, ⟨ac, aw⟩, a3, a4⟩ := a
+  simp [mul, deg0, act]
+
+theorem mul_one (a : AlgHodge k V W) : D.mul a (deg0 1) = a := by
+  obtain ⟨a0, a1, ⟨ac, aw⟩, a3, a4⟩ := a
+  simp [mul, deg0, act]
+
+/-- The multiplication is `k`-bilinear. -/
+def mulₗ : AlgHodge k V W →ₗ[k] AlgHodge k V W →ₗ[k] AlgHodge k V W :=
+  LinearMap.mk₂ k D.mul
+    (fun a a' b => by
+      obtain ⟨a0, a1, ⟨ac, aw⟩, a3, a4⟩ := a
+      obtain ⟨a0', a1', ⟨ac', aw'⟩, a3', a4'⟩ := a'
+      obtain ⟨b0, b1, ⟨bc, bw⟩, b3, b4⟩ := b
+      simp only [mul, Prod.mk_add_mk, Prod.mk.injEq]
+      refine ⟨by ring, by module, ⟨by simp; ring, by simp; module⟩, ?_, by simp; ring⟩
+      ext t; simp; ring)
+    (fun r a b => by
+      obtain ⟨a0, a1, ⟨ac, aw⟩, a3, a4⟩ := a
+      obtain ⟨b0, b1, ⟨bc, bw⟩, b3, b4⟩ := b
+      simp only [mul, Prod.smul_mk, Prod.mk.injEq, smul_eq_mul]
+      refine ⟨by ring, by module, ⟨by simp; ring, by simp; module⟩, ?_, by simp; ring⟩
+      ext t; simp; ring)
+    (fun a b b' => by
+      obtain ⟨a0, a1, ⟨ac, aw⟩, a3, a4⟩ := a
+      obtain ⟨b0, b1, ⟨bc, bw⟩, b3, b4⟩ := b
+      obtain ⟨b0', b1', ⟨bc', bw'⟩, b3', b4'⟩ := b'
+      simp only [mul, Prod.mk_add_mk, Prod.mk.injEq]
+      refine ⟨by ring, by module, ⟨by simp; ring, by simp; module⟩, ?_, by simp; ring⟩
+      ext t; simp; ring)
+    (fun r a b => by
+      obtain ⟨a0, a1, ⟨ac, aw⟩, a3, a4⟩ := a
+      obtain ⟨b0, b1, ⟨bc, bw⟩, b3, b4⟩ := b
+      simp only [mul, Prod.smul_mk, Prod.mk.injEq, smul_eq_mul]
+      refine ⟨by ring, by module, ⟨by simp; ring, by simp; module⟩, ?_, by simp; ring⟩
+      ext t; simp; ring)
+
+/-- An element is even if it lies in `H⁰ ⊕ H² ⊕ H⁴`, odd if it lies in `H¹ ⊕ H³`. -/
+def Pair (a : AlgHodge k V W) : Prop := a.2.1 = 0 ∧ a.2.2.2.1 = 0
+
+/-- Odd elements. -/
+def Impair (a : AlgHodge k V W) : Prop := a.1 = 0 ∧ a.2.2.1 = 0 ∧ a.2.2.2.2 = 0
+
+/-- **Page 24, anticommutativity (1): even elements are central.** -/
+theorem mul_comm_of_pair {a : AlgHodge k V W} (ha : Pair a) (b : AlgHodge k V W) :
+    D.mul a b = D.mul b a := by
+  obtain ⟨a0, a1, ⟨ac, aw⟩, a3, a4⟩ := a
+  obtain ⟨b0, b1, ⟨bc, bw⟩, b3, b4⟩ := b
+  obtain ⟨h1, h3⟩ := ha
+  simp only at h1 h3
+  subst h1 h3
+  simp only [mul, Prod.mk.injEq]
+  refine ⟨by ring, by abel, ⟨by simp; ring, by simp; abel⟩, ?_, ?_⟩
+  · ext t; simp
+  · simp [D.Q_symm aw bw]; ring
+
+/-- **Page 24, anticommutativity (2): odd elements anticommute.** -/
+theorem mul_anticomm_of_impair {a b : AlgHodge k V W} (ha : Impair a) (hb : Impair b) :
+    D.mul a b = -D.mul b a := by
+  obtain ⟨a0, a1, ⟨ac, aw⟩, a3, a4⟩ := a
+  obtain ⟨b0, b1, ⟨bc, bw⟩, b3, b4⟩ := b
+  obtain ⟨h0, h2, h4⟩ := ha
+  obtain ⟨h0', h2', h4'⟩ := hb
+  simp only at h0 h2 h4 h0' h2' h4'
+  obtain ⟨rfl, rfl⟩ := h2
+  obtain ⟨rfl, rfl⟩ := h2'
+  subst h0 h4 h0' h4'
+  simp only [mul, Prod.neg_mk, Prod.mk.injEq]
+  refine ⟨by ring, by simp, ⟨by simp [D.φ_anti a1 b1], by simp [D.ψ_anti a1 b1]⟩, ?_, ?_⟩
+  · ext t; simp
+  · simp
+
+/-- **Page 24, anticommutativity (3): odd elements square to zero.** -/
+theorem mul_self_of_impair {a : AlgHodge k V W} (ha : Impair a) : D.mul a a = 0 := by
+  obtain ⟨a0, a1, ⟨ac, aw⟩, a3, a4⟩ := a
+  obtain ⟨h0, h2, h4⟩ := ha
+  simp only at h0 h2 h4
+  obtain ⟨rfl, rfl⟩ := h2
+  subst h0 h4
+  simp [mul, D.φ_alt, D.ψ_alt, act]
+
+/-- The quadrilinear identity of page 24, `(xy)(tz) = (tx)(yz)`. -/
+def IdentiteQuadrilineaire : Prop :=
+  ∀ x y z t : V, D.φ x y * D.φ t z + D.Q (D.ψ x y) (D.ψ t z) =
+    D.φ t x * D.φ y z + D.Q (D.ψ t x) (D.ψ y z)
+
+/-- **Page 24, associativity ⇔ the quadrilinear identity.** Whatever `φ`, `ψ`, `Q`, the
+multiplication is associative if and only if
+`φ(x,y)φ(t,z) + Q(ψ(x,y), ψ(t,z)) = φ(t,x)φ(y,z) + Q(ψ(t,x), ψ(y,z))`. Only the triple
+`H¹ × H¹ × H¹` is not automatic; the others hold by the definition of `act`. -/
+theorem assoc_iff :
+    (∀ a b c : AlgHodge k V W, D.mul (D.mul a b) c = D.mul a (D.mul b c)) ↔
+      D.IdentiteQuadrilineaire := by
+  constructor
+  · intro H x y z t
+    have := congrArg (fun p => p.2.2.2.1 t) (H (deg1 x) (deg1 y) (deg1 z))
+    simp [mul, deg1] at this
+    linear_combination this + D.Q_symm (D.ψ x y) (D.ψ t z)
+  · intro h a b c
+    obtain ⟨a0, a1, ⟨ac, aw⟩, a3, a4⟩ := a
+    obtain ⟨b0, b1, ⟨bc, bw⟩, b3, b4⟩ := b
+    obtain ⟨c0, c1, ⟨cc, cw⟩, c3, c4⟩ := c
+    simp only [mul, Prod.mk.injEq]
+    refine ⟨by ring, by module, ⟨by simp; ring, by simp; module⟩, ?_, ?_⟩
+    · ext t
+      simp
+      linear_combination h a1 b1 c1 t + D.Q_symm (D.ψ t c1) (D.ψ a1 b1)
+    · simp
+      linear_combination (-bc) * D.φ_anti c1 a1 - D.Qψ_anti c1 a1 bw -
+        ac * D.φ_anti c1 b1 - D.Qψ_anti c1 b1 aw + D.Q_symm (D.ψ b1 c1) aw
+
+/-- `χ(x,y,z,t)`, page 26: `x y z t = χ(x,y,z,t) ξ²` (see `chi_eq`). -/
+def chi (x y z t : V) : k := D.φ x y * D.φ z t + D.Q (D.ψ x y) (D.ψ z t)
+
+/-- **Page 26, `x y z t = χ(x,y,z,t) ξ²`**, with the product taken from the left; this holds
+whether or not the multiplication is associative. -/
+theorem chi_eq (x y z t : V) :
+    D.mul (D.mul (D.mul (deg1 x) (deg1 y)) (deg1 z)) (deg1 t) = deg4 (D.chi x y z t) := by
+  simp [mul, deg1, deg4, act, chi]
+  rw [D.φ_anti t z, D.ψ_anti t z, D.Q_symm]
+  simp only [map_neg]
+  ring
+
+/-- **Page 26, the quadrilinear form `χ` is alternating** as soon as the multiplication is
+associative: it vanishes whenever two of its arguments coincide. -/
+theorem chi_alt (h : D.IdentiteQuadrilineaire) (x y z t : V) :
+    D.chi x x z t = 0 ∧ D.chi x y y t = 0 ∧ D.chi x y z z = 0 ∧ D.chi x y x t = 0 ∧
+      D.chi x y z x = 0 ∧ D.chi x y z y = 0 := by
+  have h1 := h x y y t
+  have h2 := h x y t x
+  have h3 := h x y z x
+  have h4 := h x y y z
+  simp only [D.φ_alt, D.ψ_alt, map_zero, LinearMap.zero_apply, zero_mul, mul_zero, add_zero] at h1 h2 h3 h4
+  refine ⟨by simp [chi, D.φ_alt, D.ψ_alt], ?_, by simp [chi, D.φ_alt, D.ψ_alt], ?_, ?_, ?_⟩
+  · simp only [chi]; rw [D.φ_anti t y, D.ψ_anti t y]; simp only [map_neg]; linear_combination -h1
+  · simpa only [chi] using h2
+  · simp only [chi]; rw [D.φ_anti x z, D.ψ_anti x z]; simp only [map_neg]; linear_combination -h3
+  · simpa only [chi] using h4
+
+/-- **Pages 24–26, associativity ⇔ `χ` alternating.** The quadrilinear identity is equivalent
+to `χ(x,y,y,t) = 0`: the vanishing in the two other adjacent positions is automatic. -/
+theorem identite_iff_chi : D.IdentiteQuadrilineaire ↔ ∀ x y t : V, D.chi x y y t = 0 := by
+  refine ⟨fun h x y t => (D.chi_alt h x y y t).2.1, fun g x y z t => ?_⟩
+  have pol : ∀ x y z t : V, D.chi x y z t = -D.chi x z y t := by
+    intro x y z t
+    have := g x (y + z) t
+    have g1 := g x y t
+    have g2 := g x z t
+    simp only [chi, map_add, LinearMap.add_apply] at this g1 g2 ⊢
+    linear_combination this - g1 - g2
+  have := pol x y t z
+  simp only [chi] at this
+  linear_combination this - D.φ y z * D.φ_anti x t - D.Qψ_anti x t (D.ψ y z)
+
+end DonneesHodge
+
+end Anneau
+
+section Corps
+
+variable [Field k] [AddCommGroup V] [Module k V] [AddCommGroup W] [Module k W]
+
+/-- For a symmetric form, non-degenerate means left-separating. -/
+theorem nondegenerate_iff_of_symm {M : Type*} [AddCommGroup M] [Module k M]
+    (B : LinearMap.BilinForm k M) (hB : ∀ u v, B u v = B v u) :
+    B.Nondegenerate ↔ B.SeparatingLeft :=
+  ⟨fun h => h.1, fun h => ⟨h, fun y hy => h y fun x => by rw [hB]; exact hy x⟩⟩
+
+namespace DonneesHodge
+
+variable (D : DonneesHodge k V W)
+
+/-- **Page 24, the Lefschetz condition** for `L = ξ ·`: `L² : H⁰ → H⁴` and `L : H¹ → H³` are
+isomorphisms (`L⁰ : H² → H²` is the identity). -/
+def Lefschetz : Prop :=
+  Function.Bijective (fun c : k => (D.mul (D.mul xi xi) (deg0 c)).2.2.2.2) ∧
+    Function.Bijective (fun x : V => (D.mul xi (deg1 x)).2.2.2.1)
+
+/-- **Page 24, the Poincaré condition**: the pairings `H⁰ × H⁴`, `H¹ × H³`, `H² × H² → H⁴` are
+non-degenerate (on both sides). -/
+def Poincare : Prop :=
+  (∀ c : k, (∀ d : k, (D.mul (deg0 c) (deg4 d)).2.2.2.2 = 0) → c = 0) ∧
+    (∀ d : k, (∀ c : k, (D.mul (deg0 c) (deg4 d)).2.2.2.2 = 0) → d = 0) ∧
+    (∀ x : V, (∀ u : Module.Dual k V, (D.mul (deg1 x) (deg3 u)).2.2.2.2 = 0) → x = 0) ∧
+    (∀ u : Module.Dual k V, (∀ x : V, (D.mul (deg1 x) (deg3 u)).2.2.2.2 = 0) → u = 0) ∧
+    (∀ (c : k) (w : W), (∀ (c' : k) (w' : W), (D.mul (deg2 c w) (deg2 c' w')).2.2.2.2 = 0) →
+      c = 0 ∧ w = 0)
+
+/-- **Page 24, « condition de Lefschetz ⇔ `φ` non dégénérée ».** `ξ² : H⁰ → H⁴` is always an
+isomorphism, and `ξ : H¹ → H³`, `x ↦ φ(·, x)`, is one iff `φ` is non-degenerate (`V` of finite
+dimension). -/
+theorem lefschetz_iff [FiniteDimensional k V] : D.Lefschetz ↔ D.φ.Nondegenerate := by
+  have e1 : (fun c : k => (D.mul (D.mul xi xi) (deg0 c)).2.2.2.2) = id := by
+    funext c; simp [mul, xi, deg2, deg0]
+  have e2 : (fun x : V => (D.mul xi (deg1 x)).2.2.2.1) = ⇑(LinearMap.flip D.φ) := by
+    funext x; ext t; simp [mul, xi, deg2, deg1]
+  rw [Lefschetz, e1, e2]
+  have hinj : Function.Injective (LinearMap.flip D.φ) ↔ D.φ.SeparatingRight := by
+    rw [← LinearMap.flip_separatingLeft, LinearMap.separatingLeft_iff_ker_eq_bot,
+      LinearMap.ker_eq_bot]
+  have hbij : Function.Bijective (LinearMap.flip D.φ) ↔ Function.Injective (LinearMap.flip D.φ) :=
+    ⟨fun h => h.1, fun h => ⟨h, (LinearMap.injective_iff_surjective_of_finrank_eq_finrank
+      (Subspace.dual_finrank_eq).symm).1 h⟩⟩
+  have hLR : D.φ.SeparatingRight → D.φ.SeparatingLeft :=
+    fun h x hx => h x fun y => by rw [D.φ_anti, hx, neg_zero]
+  rw [hbij, hinj]
+  exact ⟨fun h => ⟨hLR h.2, h.2⟩, fun h => ⟨Function.bijective_id, h.2⟩⟩
+
+/-- **Page 24, « condition de Poincaré ⇔ `Q` non dégénérée ».** The pairings `H⁰ × H⁴` and
+`H¹ × H³` are always perfect, and `H² × H² → H⁴`, `(cξ + w, c'ξ + w') ↦ cc' + Q(w,w')`, is
+non-degenerate iff `Q` is. No finiteness is needed. -/
+theorem poincare_iff : D.Poincare ↔ D.Q.Nondegenerate := by
+  rw [nondegenerate_iff_of_symm _ D.Q_symm]
+  have p0 : ∀ c d : k, (D.mul (deg0 c) (deg4 d)).2.2.2.2 = c * d := by
+    intro c d; simp [mul, deg0, deg4]
+  have p1 : ∀ (x : V) (u : Module.Dual k V), (D.mul (deg1 x) (deg3 u)).2.2.2.2 = u x := by
+    intro x u; simp [mul, deg1, deg3]
+  have p2 : ∀ (c c' : k) (w w' : W), (D.mul (deg2 c w) (deg2 c' w')).2.2.2.2 =
+      c * c' + D.Q w w' := by
+    intro c c' w w'; simp [mul, deg2]
+  simp only [Poincare, p0, p1, p2]
+  have a0 : ∀ c : k, (∀ d : k, c * d = 0) → c = 0 := fun c h => by simpa using h 1
+  have a0' : ∀ d : k, (∀ c : k, c * d = 0) → d = 0 := fun d h => by simpa using h 1
+  have a1 : ∀ x : V, (∀ u : Module.Dual k V, u x = 0) → x = 0 :=
+    fun x h => (Module.forall_dual_apply_eq_zero_iff k x).1 h
+  have a1' : ∀ u : Module.Dual k V, (∀ x : V, u x = 0) → u = 0 := fun u h => LinearMap.ext h
+  refine ⟨fun h w hw => ?_, fun h => ⟨a0, a0', a1, a1', fun c w hcw => ?_⟩⟩
+  · exact (h.2.2.2.2 0 w fun c' w' => by simp [hw w']).2
+  · have hc : c = 0 := by simpa using hcw 1 0
+    subst hc
+    exact ⟨rfl, h w fun w' => by simpa using hcw 0 w'⟩
+
+end DonneesHodge
+
+/-- **Page 26, the reformulation `(V, χ, (W̃, Q̃, α), ξ)`.** From a symmetric form `Q̃` on
+`W̃`, an alternating `α : Λ²V → W̃` and `ξ ∈ W̃` with `Q̃(ξ,ξ) = 1`, the data of page 24 are
+recovered with `W = ξ^⊥`, `φ(x,y) = Q̃(α(x∧y), ξ)`, `ψ = α - φ ξ` and `Q = Q̃|_W`. -/
+def reformulation {W' : Type*} [AddCommGroup W'] [Module k W']
+    (Q' : LinearMap.BilinForm k W') (hQ' : ∀ u v, Q' u v = Q' v u)
+    (α : V →ₗ[k] V →ₗ[k] W') (hα : ∀ x, α x x = 0) (ξ' : W') (hξ : Q' ξ' ξ' = 1) :
+    DonneesHodge k V (LinearMap.ker (Q' ξ')) where
+  φ := α.compr₂ (Q' ξ')
+  ψ := LinearMap.mk₂ k (fun x y => ⟨α x y - Q' ξ' (α x y) • ξ', by simp [hξ]⟩)
+    (fun x x' y => Subtype.ext (by simp; module))
+    (fun r x y => Subtype.ext (by simp [smul_sub, smul_smul]))
+    (fun x y y' => Subtype.ext (by simp; module))
+    (fun r x y => Subtype.ext (by simp [smul_sub, smul_smul]))
+  Q := Q'.restrict _
+  φ_alt x := by simp [hα]
+  ψ_alt x := Subtype.ext (by simp [hα])
+  Q_symm w w' := hQ' _ _
+
+section Reformulation
+
+variable {W' : Type*} [AddCommGroup W'] [Module k W']
+    (Q' : LinearMap.BilinForm k W') (hQ' : ∀ u v, Q' u v = Q' v u)
+    (α : V →ₗ[k] V →ₗ[k] W') (hα : ∀ x, α x x = 0) (ξ' : W') (hξ : Q' ξ' ξ' = 1)
+
+/-- **Page 26.** In the reformulation: `φ(x,y) = Q̃(α(x∧y), ξ)`, `α = φ ξ + ψ`, `χ` is
+`Q̃(α(x∧y), α(z∧t))` — so associativity reads `Q̃(α(x∧y), α(y∧t)) = 0`, the compatibility of
+`α` with `χ'` — and the two non-degeneracy conditions become « `Q̃` non dégénérée » and
+« `φ` non dégénérée ». -/
+theorem reformulation_spec [FiniteDimensional k V] :
+    let D := reformulation Q' hQ' α hα ξ' hξ
+    (∀ x y, D.φ x y = Q' (α x y) ξ') ∧
+      (∀ x y, α x y = D.φ x y • ξ' + (D.ψ x y : W')) ∧
+      (∀ x y z t, Q' (α x y) (α z t) = D.chi x y z t) ∧
+      ((∀ a b c : AlgHodge k V _, D.mul (D.mul a b) c = D.mul a (D.mul b c)) ↔
+        ∀ x y t, Q' (α x y) (α y t) = 0) ∧
+      (D.Lefschetz ↔ D.φ.Nondegenerate) ∧
+      (D.Poincare ↔ Q'.Nondegenerate) := by
+  intro D
+  have hφ : ∀ x y, D.φ x y = Q' (α x y) ξ' := fun x y => by
+    simp [D, reformulation, hQ' ξ']
+  have hdec : ∀ x y, α x y = D.φ x y • ξ' + (D.ψ x y : W') := fun x y => by
+    simp [D, reformulation]
+  have hchi : ∀ x y z t, Q' (α x y) (α z t) = D.chi x y z t := by
+    intro x y z t
+    simp only [DonneesHodge.chi]
+    conv_lhs => rw [hdec x y, hdec z t]
+    have h1 : Q' ξ' (D.ψ z t : W') = 0 := (D.ψ z t).2
+    have h2 : Q' (D.ψ x y : W') ξ' = 0 := by rw [hQ']; exact (D.ψ x y).2
+    simp only [map_add, map_smul, LinearMap.add_apply, LinearMap.smul_apply, smul_eq_mul, hξ, h1,
+      h2]
+    simp [D, reformulation]
+    ring
+  refine ⟨hφ, hdec, hchi, ?_, D.lefschetz_iff, ?_⟩
+  · rw [D.assoc_iff, D.identite_iff_chi]
+    simp only [hchi]
+  · rw [D.poincare_iff, nondegenerate_iff_of_symm _ D.Q_symm, nondegenerate_iff_of_symm _ hQ']
+    constructor
+    · intro h v hv
+      have hvk : v ∈ LinearMap.ker (Q' ξ') := by
+        rw [LinearMap.mem_ker, hQ']; exact hv ξ'
+      have := h ⟨v, hvk⟩ fun w => by simp [D, reformulation, hv]
+      simpa using congrArg Subtype.val this
+    · intro h w hw
+      have hw' : Q' ξ' (w : W') = 0 := w.2
+      refine Subtype.ext (h w fun v => ?_)
+      have hv : v - Q' ξ' v • ξ' ∈ LinearMap.ker (Q' ξ') := by simp [hξ]
+      have := hw ⟨_, hv⟩
+      simp [D, reformulation] at this
+      rwa [hQ' (w : W') ξ', hw', mul_zero, sub_zero] at this
+
+end Reformulation
+
+end Corps
+
+end AlgebresHodge
 
 end Grothendieck.Folder16
