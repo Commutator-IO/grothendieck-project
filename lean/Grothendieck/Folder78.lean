@@ -67,8 +67,7 @@ noncomputable def F (n : ℤ) : R[X] :=
   if Even n then S R (n / 2 - 1) else S R (n / 2) + S R (n / 2 - 1)
 
 theorem F_even (n m : ℤ) (h : n = 2 * m) : F R n = S R (m - 1) := by
-  subst h
-  simp [F]
+  simp [F, h]
 
 theorem F_odd (n m : ℤ) (h : n = 2 * m + 1) : F R n = S R m + S R (m - 1) := by
   subst h
@@ -100,25 +99,20 @@ theorem F_six : F R 6 = X ^ 2 - 1 := by
 /-- `F_{−n} = −F_n`. -/
 theorem F_neg (n : ℤ) : F R (-n) = -F R n := by
   obtain ⟨m, rfl | rfl⟩ := Int.even_or_odd' n
-  · rw [F_even R (-(2 * m)) (-m) (by ring), F_even R (2 * m) m rfl]
-    have := S_neg_sub_two R (m - 1)
-    rw [show -(m - 1) - 2 = -m - 1 by ring] at this
-    rw [this]
-  · rw [F_odd R (-(2 * m + 1)) (-m - 1) (by ring), F_odd R (2 * m + 1) m rfl]
-    have h1 := S_neg_sub_two R (m - 1)
-    have h2 := S_neg_sub_two R m
-    rw [show -(m - 1) - 2 = -m - 1 by ring] at h1
-    rw [show -m - 1 - 1 = -m - 2 by ring, h1, h2]
+  · rw [F_even R (-(2 * m)) (-m) (by ring), F_even R (2 * m) m rfl,
+      ← show -(m - 1) - 2 = -m - 1 by ring, S_neg_sub_two]
+  · rw [F_odd R (-(2 * m + 1)) (-m - 1) (by ring), F_odd R (2 * m + 1) m rfl,
+      show -m - 1 - 1 = -m - 2 by ring, ← show -(m - 1) - 2 = -m - 1 by ring, S_neg_sub_two,
+      S_neg_sub_two]
     ring
 
 /-- `F_{n+4} = U F_{n+2} − F_n`: the recursion within each parity class. -/
 theorem F_add_four (n : ℤ) : F R (n + 4) = X * F R (n + 2) - F R n := by
   obtain ⟨m, rfl | rfl⟩ := Int.even_or_odd' n
   · rw [F_even R (2 * m + 4) (m + 2) (by ring), F_even R (2 * m + 2) (m + 1) (by ring),
-      F_even R (2 * m) m rfl]
-    have := S_add_two R (m - 1)
-    rw [show m - 1 + 2 = m + 2 - 1 by ring, show m - 1 + 1 = m + 1 - 1 by ring] at this
-    exact this
+      F_even R (2 * m) m rfl, show m + 2 - 1 = m - 1 + 2 by ring,
+      show m + 1 - 1 = m - 1 + 1 by ring]
+    exact S_add_two R (m - 1)
   · rw [F_odd R (2 * m + 1 + 4) (m + 2) (by ring), F_odd R (2 * m + 1 + 2) (m + 1) (by ring),
       F_odd R (2 * m + 1) m rfl]
     have h1 := S_add_two R m
@@ -159,11 +153,9 @@ end Poly
 /-- The page's coefficient `A_n = F_{n−2} − U F_{n−1}` does not give a Bézout relation at
 `n = 4`. -/
 theorem page_A_four_fails :
-    (F ℤ 2 - X * F ℤ 3) * F ℤ 3 + F ℤ 4 * F ℤ 5 ≠ 1 := by
-  intro h
+    (F ℤ 2 - X * F ℤ 3) * F ℤ 3 + F ℤ 4 * F ℤ 5 ≠ 1 := fun h => by
   have := congrArg (eval 1) h
-  rw [F_two, F_three, F_four, F_five] at this
-  norm_num at this
+  norm_num [F_two, F_three, F_four, F_five] at this
 
 /-- The defining formula for `n = 2m + 2` even, cleared of denominators:
 `F_n(t + t⁻¹) (t² − 1) t^{m} = t^{2m+2} − 1`, for `t t' = 1` in any commutative ring. -/
@@ -233,8 +225,7 @@ noncomputable def xs (α : k) (n : ℤ) : k := (F k n).eval α * (F k (n + 1)).e
 theorem F_identity_eval (α : k) (n : ℤ) :
     (F k n).eval α * (F k (n + 1)).eval α - α * (F k (n - 1)).eval α * (F k n).eval α
       + (F k (n - 2)).eval α * (F k (n - 1)).eval α = 1 := by
-  have := congrArg (eval α) (F_identity k n)
-  simpa using this
+  simpa using congrArg (eval α) (F_identity k n)
 
 /-- `X_{n+1} = α X_n − X_{n−1} + 1`. -/
 theorem xs_rec (α : k) (n : ℤ) : xs α (n + 1) = α * xs α n - xs α (n - 1) + 1 := by
@@ -300,31 +291,23 @@ theorem s_neg_one (α : k) : s α (-1) = (0, 1) := by simp [s, u_inv_apply]
 /-- d) ⇒ a) and b) ⇒ d): **Théorème (p. 112)**, `s_n = s_0 ⇔ F_n(α) = 0`. -/
 theorem vertex_eq_iff (α : k) (n : ℤ) : s α n = (0, 0) ↔ (F k n).eval α = 0 := by
   rw [vertex, Prod.mk.injEq]
-  constructor
-  · rintro ⟨h1, h2⟩
-    have hid := F_identity_eval α n
-    linear_combination -((F k n).eval α) * hid + (F k n).eval α * h1
-      + ((F k (n - 2)).eval α - α * (F k n).eval α) * h2
-  · intro h
-    simp [h]
+  refine ⟨fun ⟨h1, h2⟩ => ?_, fun h => by simp [h]⟩
+  linear_combination -((F k n).eval α) * F_identity_eval α n + (F k n).eval α * h1
+    + ((F k (n - 2)).eval α - α * (F k n).eval α) * h2
 
 /-- a) ⇔ d): **Théorème (p. 112)**, `u_α^n = id ⇔ F_n(α) = 0`, over any commutative ring. -/
 theorem zpow_eq_one_iff (α : k) (n : ℤ) : u α ^ n = 1 ↔ (F k n).eval α = 0 := by
-  constructor
-  · intro h
-    rw [← vertex_eq_iff, s, h]
-    rfl
-  · intro h
-    have hx0 : xs α n = 0 := by simp [xs, h]
-    have hxm : xs α (n - 1) = 0 := by simp [xs, h, show n - 1 + 1 = n by ring]
-    have hx1 : xs α (n + 1) = 1 := by rw [xs_rec, hx0, hxm]; ring
-    have hxm2 : xs α (n - 2) = 1 := by
-      have := xs_rec α (n - 1)
-      rw [show n - 1 + 1 = n by ring, show n - 1 - 1 = n - 2 by ring, hx0, hxm] at this
-      linear_combination this
-    ext p
-    · rw [u_zpow_apply]; simp [V, hx0, hx1, hxm]
-    · rw [u_zpow_apply]; simp [V, hx0, hxm, hxm2]
+  refine ⟨fun h => by rw [← vertex_eq_iff, s, h]; rfl, fun h => ?_⟩
+  have hx0 : xs α n = 0 := by simp [xs, h]
+  have hxm : xs α (n - 1) = 0 := by simp [xs, h, show n - 1 + 1 = n by ring]
+  have hx1 : xs α (n + 1) = 1 := by rw [xs_rec, hx0, hxm]; ring
+  have hxm2 : xs α (n - 2) = 1 := by
+    have := xs_rec α (n - 1)
+    rw [show n - 1 + 1 = n by ring, show n - 1 - 1 = n - 2 by ring, hx0, hxm] at this
+    linear_combination this
+  ext p
+  · rw [u_zpow_apply]; simp [V, hx0, hx1, hxm]
+  · rw [u_zpow_apply]; simp [V, hx0, hxm, hxm2]
 
 /-- c) ⇔ d): `u_α^n s_i = s_i` for one `i` iff `F_n(α) = 0`. -/
 theorem zpow_fix_iff (α : k) (n i : ℤ) :
@@ -344,8 +327,7 @@ theorem swap_vertex (α : k) (n : ℤ) : σ₁ (s α n) = s α (-n) := by
   have h : σ₁ * u α ^ n * σ₁ = (u α)⁻¹ ^ n := by
     rw [← inv_eq_conj]
     have hσ : (σ₁ : Equiv.Perm (k × k)) * σ₁ = 1 := by ext p <;> simp [σ₁]
-    have : ∀ g : Equiv.Perm (k × k), σ₁ * g * σ₁ = MulAut.conj σ₁ g := by
-      intro g
+    have : ∀ g : Equiv.Perm (k × k), σ₁ * g * σ₁ = MulAut.conj σ₁ g := fun g => by
       simp [MulAut.conj_apply, show (σ₁ : Equiv.Perm (k × k))⁻¹ = σ₁ from
         inv_eq_of_mul_eq_one_right hσ]
     rw [this, this, map_zpow]
@@ -360,8 +342,7 @@ def fα (α : k) (p : k × k) : k := p.1 ^ 2 - p.1 + p.2 ^ 2 - p.2 - α * p.1 * 
 /-- `f_α ∘ u_α = f_α`, and `f_α` vanishes on every vertex. -/
 theorem conic_invariant (α : k) :
     (∀ p, fα α (u α p) = fα α p) ∧ ∀ n, fα α (s α n) = 0 := by
-  have hinv : ∀ p, fα α (u α p) = fα α p := by
-    intro p; simp only [fα, u_apply]; ring
+  have hinv : ∀ p, fα α (u α p) = fα α p := fun p => by simp only [fα, u_apply]; ring
   refine ⟨hinv, fun n => ?_⟩
   induction n using Int.induction_on with
   | zero => simp [s, fα]
@@ -391,23 +372,7 @@ theorem affine_eq_of_frame (f g : (k × k) →ᵃ[k] (k × k)) (h0 : f (0, 0) = 
     apply LinearMap.prod_ext
     · apply LinearMap.ext_ring; simpa using e1
     · apply LinearMap.ext_ring; simpa using e2
-  ext p
-  · have a := f.linear_apply_vsub p (0, 0)
-    have b := g.linear_apply_vsub p (0, 0)
-    simp only [vsub_eq_sub, Prod.mk_zero_zero, sub_zero] at a b
-    simp only [Prod.mk_zero_zero] at h0
-    have : f p = g p := by
-      rw [← sub_add_cancel (f p) (f 0), ← sub_add_cancel (g p) (g 0), ← a, ← b, hl,
-        h0]
-    rw [this]
-  · have a := f.linear_apply_vsub p (0, 0)
-    have b := g.linear_apply_vsub p (0, 0)
-    simp only [vsub_eq_sub, Prod.mk_zero_zero, sub_zero] at a b
-    simp only [Prod.mk_zero_zero] at h0
-    have : f p = g p := by
-      rw [← sub_add_cancel (f p) (f 0), ← sub_add_cancel (g p) (g 0), ← a, ← b, hl,
-        h0]
-    rw [this]
+  exact AffineMap.ext_linear hl h0
 
 end Map
 
@@ -437,7 +402,7 @@ theorem strip_vertex (m : ℤ) :
       ext <;> push_cast <;> ring
     refine ⟨?_, e2⟩
     apply (u (-2 : k)).injective
-    rw [← step, show 2 * (-(m : ℤ) - 1) + 1 = 2 * (-(m : ℤ) - 1) + 1 by ring, e2, u_apply]
+    rw [← step, e2, u_apply]
     ext <;> push_cast <;> ring
 
 /-- The even vertices lie on `x + y = 0`, the odd ones on the parallel line `x + y = 1`. -/
@@ -461,8 +426,7 @@ theorem strip_vertex_eq_zero_iff (n : ℤ) : s (-2 : k) n = (0, 0) ↔ (2 * p : 
   · rw [(strip_vertex m).2, Prod.mk.injEq]
     constructor
     · rintro ⟨h1, h2⟩
-      rw [neg_eq_zero] at h2
-      rw [h2, add_zero] at h1
+      rw [neg_eq_zero.1 h2, add_zero] at h1
       exact absurd h1 one_ne_zero
     · rintro ⟨c, hc⟩
       exact absurd ⟨p * c, by rw [hc]; ring⟩ (Int.not_even_iff_odd.mpr (odd_two_mul_add_one m))
@@ -590,8 +554,7 @@ theorem imp_vertex_eq_zero_iff (n : ℤ) :
   · rw [(imp_vertex m).2, Prod.mk.injEq]
     constructor
     · rintro ⟨h1, h2⟩
-      rw [neg_eq_zero] at h2
-      rw [h2, zero_add] at h1
+      rw [neg_eq_zero.1 h2, zero_add] at h1
       exact absurd h1 one_ne_zero
     · rintro ⟨c, hc⟩
       exact absurd ⟨p * c, by rw [hc]; ring⟩ (Int.not_even_iff_odd.mpr (odd_two_mul_add_one m))
@@ -603,8 +566,7 @@ theorem imp_zpow_eq_one_iff (n : ℤ) :
   refine ⟨fun h => ?_, fun h => ?_⟩
   · rw [← imp_vertex_eq_zero_iff (k := k) p, h]; rfl
   obtain ⟨c, rfl⟩ := h
-  have hc : ((p * c : ℤ) : k) = 0 := by
-    rw [CharP.intCast_eq_zero_iff k p]; exact dvd_mul_right _ _
+  have hc : ((p * c : ℤ) : k) = 0 := (CharP.intCast_eq_zero_iff k p _).2 (dvd_mul_right _ _)
   ext q <;> simp [show (2 * (p : ℤ) * c) = 2 * (p * c) by ring, (imp_zpow_apply _ q).1, hc]
 
 include p in
