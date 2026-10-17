@@ -8403,4 +8403,117 @@ export const FINDINGS: Finding[] = [
     settle:
       'A person checks the sentence joins on the facsimile and whether the reversals belong to the stack, the binding or the scan. The pages carry no author\'s numbering of their own to confirm the order.',
   },
+  // Folder 91 — find-novelty pass, Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading, 2026-10-17. Nothing was searched: every entry is unsearched.
+  {
+    id: '91-hom-unramified-rigidification',
+    cote: '91',
+    pages: '15–20, 30–31',
+    kind: 'mathematical',
+    claim:
+      'For φ : Z → X between proper flat S-schemes and Y separated of finite type, the open subfunctor Hom_S(X,Y;φ) of maps u for which composition with φ is unramified at u (M_v → M_u surjective) maps to Hom_S(Z,Y) by a morphism representable by unramified morphisms.',
+    basis:
+      'Page 15 defines the open subfunctor through the modules M_u, M_v of EGA III 7.7.6; page 16 states the theorem; pages 16–20 check the conditions of the representability criterion, the only computed one being the gluing condition 7°, by an obstruction class in Ext¹. The typed letter of 11.9.1967 (pages 30–31) states the same result, adding « separated, locally of finite presentation », and credits « Murre’s talk ».',
+    ours:
+      'The proof on the pages is not complete: two steps are « admis » (pages 19 and 20). « Séparé » for Y is a question on page 15 (« [et séparé ?] ») and is supplied from the letter’s inked addition. The injectivity of Hom(N,J) → Hom(N,J_η), which makes the cartesian square work, is the reading’s, and holds when A is a domain. The attribution of the unsigned letter to Grothendieck is the reading’s.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look for this relative statement in Murre, Séminaire Bourbaki exp. 294 (1965), and in Matsumura–Oort, Invent. Math. 4 (1967), whose proof uses restriction to finite subschemes. If either states the morphism Hom(X,Y;φ) → Hom(Z,Y) as unramified over an arbitrary base, mark matched; if it appears only over a field and for Aut, the relative form is the point to check.',
+  },
+  {
+    id: '91-res-representable-by-scheme',
+    cote: '91',
+    pages: '24–28, 31',
+    kind: 'mathematical',
+    claim:
+      'For X proper, flat and of finite presentation over S and P → X locally of finite presentation, the Weil restriction Res_{X/S}(P) (and so Hom_S(X,Y)) is representable by a scheme — not only an algebraic space — under three conditions on finitely many closed subschemes Z_i (representable Res_{Z_i/S}, normal flatness of X along Z_i, every associated point of a geometric fibre meeting ⋃Z_i), with quasi-projectivity on quasi-compact parts when the Res_{Z_i/S} are quasi-projective; corollaries give representability when X → S has geometrically integral fibres and a section along which it is smooth.',
+    basis:
+      'Page 25 states the theorem with (a)–(c) and conclusions (i)–(iii); pages 26–28 list Corollaries 2–9 (radicial points over an arbitrary field, étale-local representability, Isom and Aut over a field); the letter (page 31) repeats the integral-fibres-with-a-section case.',
+    ours:
+      'The theorem is announced, not proved: no proof is in the folder and the reading does not check that (a)–(c) suffice; its note says a fixed family Z_i probably needs the infinitesimal neighbourhoods, a conjecture of reading. In Corollary 6 the word « lisse » is an \\uncertain{} interlinear addition, and in (ii) « ouverte » and « (qui est quasi-séparé) » are uncertain readings. « Séparé » for P is supplied (page 24). The letter says « reduced geometric fibers » where Corollary 7 has « simple propre »; the two do not coincide.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Compare with the published representability results for Hom and Res: Grothendieck, FGA (TDTE IV, projective case), Matsumura–Oort (1967), Artin’s algebraic-space theorem (Invent. Math. 1969 / Ann. of Math. 1970) and later work on when Hom-spaces are schemes (e.g. Olsson’s Hom-stacks, and BLR Néron Models §7.6 for Weil restriction). If a scheme-valued statement under hypotheses like (a)–(c) or « section along which X is smooth » is there, mark matched. A refutation would be a proper flat X with such a section and P for which Res is not a scheme.',
+  },
+  {
+    id: '91-centraliser-condition-R',
+    cote: '91',
+    pages: '4–9',
+    kind: 'mathematical',
+    claim:
+      'For H flat of finite type over a locally noetherian S satisfying condition (R) — every open subgroup of H_T containing the special fibre, T local, is all of H_T (true for connected fibres, or when finitely many finite subschemes meet every geometric component) — and u : H → G any homomorphism, Cent_G(u) is representable by a subscheme of G, closed if G is separated, and Transp_G(H,K) and Norm_G(H) are representable under the same hypotheses on K.',
+    basis:
+      'Page 4 proves that the locus where a monomorphism Y → X of finite type with X flat becomes an isomorphism is representable iff it commutes with adic limits; page 8 isolates (R), which makes that condition hold for subgroups; page 9 states the corollary on centralisers, transporters and normalisers.',
+    ours:
+      'The reading restricts the theorem of page 4 to the monomorphism case, which is all its proof treats, and justifies the closedness of the representing subscheme by EGA IV 18.12.6 (proper monomorphism), which the page asserts without proof. « Plat » for H is added in the page’s own interline on page 9 and is supplied in the corollary of page 8. On page 9 « de t.f. sur S » for K is \\uncertain{}.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Look in SGA 3 (exposés VI_B §6, VIII §6 and XI §6) and in Conrad–Gabber–Prasad, Pseudo-reductive Groups, Appendix A.8 (representability of centralisers and fixed-point schemes). If centralisers of flat finite-type H with connected fibres, or under a condition equivalent to (R), are shown there to be closed subschemes of separated G, mark matched; the finite-subschemes variant of (R) is the part to look for separately.',
+  },
+  {
+    id: '91-weil-restriction-finite-etale-criterion',
+    cote: '91',
+    pages: '53, 55–58',
+    kind: 'mathematical',
+    claim:
+      'For T → S finite locally free, the following are equivalent: the number ν(s) of geometric points of T_s is locally constant; Res_{T/S} sends finite étale covers to finite étale covers; Res_{T/S}(T′) is finite étale for every finite étale T′ over T; Res_{T/S}(T ⊔ T) is finite étale over S — and under these conditions I ↦ Res_{T/S}(T × I) is represented by a finite étale S-scheme through which T maps with geometrically connected fibres.',
+    basis:
+      'Page 53 states Corollary 3 with the chain (i) ⇒ (ii) ⇒ (iii) ⇒ (iv) ⇒ (i) drawn in the margin and Corollary 1 bis (degree λ^{ν_s}); pages 55–58 build the finite étale cover A(T) from the left exact functor I ↦ Res_{T/S}(T × I) on π₁-sets.',
+    ours:
+      'The pages do not suppose ν locally constant at pages 55–58; the reading supplies it, without which A(T) does not exist. The converse of page 58 is stated by the page for a morphism « surjectif et fini injectif » (\\uncertain{}, last line undeciphered) and the reading gives a corrected converse. The identification with the relative π₀ and its left-adjoint variance are the reading’s. The proof of Corollary 1 bis on page 53 is mostly \\uncertain{} and \\ill{}.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Check Conrad–Gabber–Prasad, Pseudo-reductive Groups, A.5 (Weil restriction and étaleness), BLR Néron Models §7.6, EGA IV 6.8 and Romagny, « Composantes connexes et irréductibles en familles » (2011), for the equivalence (i)–(iv). If it is stated there, mark matched; the relative π₀ part is very likely matched by Romagny or EGA IV and can be split off as such.',
+  },
+  {
+    id: '91-local-functor-right-adjoint',
+    cote: '91',
+    pages: '60–79',
+    kind: 'mathematical',
+    claim:
+      'Weil restriction along a finite locally free S′ → S and the Greenberg functor are two cases of one construction — the right adjoint W^a of a functor W « of local nature » from S-schemes to W(S)-schemes — for which existence, gluing, base change and preservation of closed immersions, separated, finite-type and affine morphisms are proved once, with W^a existing for every 𝔛 when W is « Greenberg spécial » or base change along a finite locally free radicial S′ → S.',
+    basis:
+      'Page 60 defines W and W^a by Hom_S(T, W^a(𝔛)) ≃ Hom_{W(S)}(W(T), 𝔛) with examples I (base change), II (ring schemes Λ, truncated Witt vectors), III; pages 63–68 give limits, base change and the affine case; pages 69–76 the gluing lemmas (α), (β) and Theorems 1 and 1 bis; pages 77–79 the permanence properties.',
+    ours:
+      '« Greenberg spécial » is not defined on the pages; the reading takes it to be case II with Λ affine. The side of the adjunction is fixed by the reading from the formula (the page says « adjoint au sens de Kan »). Page 69 is read W^a(U) where the page writes « est un W(U′) », and page 72’s X_i is read 𝔛_i. The affine corollary of pages 67–68 is partly \\ill{} and reconstructed. The statement of page 79 for affine morphisms has no proof.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Compare with Bertapelle–González-Avilés, « The Greenberg functor revisited » (Eur. J. Math., 2018), which presents the Greenberg functor as a Weil restriction from a ringed space, and with Lipman’s « The Picard group of a scheme over an Artin ring » (Publ. IHÉS 46, 1976, appendix on the Greenberg functor). If a common right-adjoint framework covering both cases is there, mark matched.',
+  },
+  {
+    id: '91-constructible-ring-Acons',
+    cote: '91',
+    pages: '114',
+    kind: 'mathematical',
+    claim:
+      'For a ring A, the colimit A^cons = colim_𝔓 ∏_i Γ(X_{i,red}, 𝒪), over finite partitions 𝔓 of Spec A into affine locally closed constructible pieces, has spectrum homeomorphic to Spec A with its constructible topology.',
+    basis:
+      'Page 114 defines A^cons, notes that the transitions are injective and the transition maps of spectra bijections, deduces a bijection Spec A^cons ≃ Spec A, and says it is compatible with the constructible topology « comme on voit aisément sur la description d’une base d’ouverts ».',
+    ours:
+      'The topological identification is asserted, not proved, on the page; the argument given is the reading’s. That for noetherian A the local rings of A^cons are the residue fields, so that A^cons is absolutely flat, is entirely the reading’s, as is the comparison with Olivier’s universal absolutely flat ring. The adjective of « partitions ordinaires » is \\uncertain{}.',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Compare with J.-P. Olivier’s universal absolutely flat algebra (Sém. Samuel 1967–68 / C. R. Acad. Sci. 1968), whose spectrum is the constructible (patch) topology, and with the treatment of the constructible topology in EGA IV 1.9 and in Dickmann–Schwartz–Tressl, Spectral Spaces (2019). If A^cons is shown there, or is isomorphic to Olivier’s ring by a known argument, mark matched.',
+  },
+  {
+    id: '91-greenberg-rational-maps-constructible',
+    cote: '91',
+    pages: '125–131',
+    kind: 'mathematical',
+    claim:
+      'Over a complete discrete valuation ring V with perfect residue field, a dominant generically separable rational map φ : X_K ⇢ Y_K with Y proper induces a map of sets on Greenberg schemes that sends « thick » points to thick points, and, when X_K and Y_K are smooth, sends constructible sets to constructible sets and is piecewise a morphism « of finite index » on a finite constructible partition — so that thick points and constructible sets of the Greenberg scheme are functorial in X_K.',
+    basis:
+      'Pages 125 and 127 define thick points (Ep) and variants on a projective limit; page 130 constructs φ̄ by the valuative criterion; page 130 states Proposition 1 and page 131 its corollary, Proposition 2 and its corollary.',
+    ours:
+      'No proof is on the pages and « d’indice fini » is never defined; the reading guesses « defined at a finite level of Greenberg truncation ». The hypothesis of Proposition 1 rests on \\uncertain{} interlinear corrections (« dominant génér.t », read « excité », « en x̄ ») and an \\ill{} word; of the implications between (Ep)–(Ep)‴ only the first is proved, and one is marked « ??? ». « Thick » is a translation of « épais ».',
+    literature: [],
+    status: 'unsearched',
+    settle:
+      'Compare with the cylinder and change-of-variables lemmas of motivic integration — Denef–Loeser, « Germs of arcs on singular algebraic varieties and motivic integration » (Invent. Math. 135, 1999), Sebag, « Intégration motivique sur les schémas formels » (Bull. SMF 132, 2004), Loeser–Sebag (Duke 2003) — and with Néron’s construction via Greenberg schemes (Publ. IHÉS 21, 1964; BLR ch. 3). If constructibility of images of cylinders under maps induced by generically étale rational maps is there in this form, mark matched.',
+  },
 ];
