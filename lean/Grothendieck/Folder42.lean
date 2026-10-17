@@ -135,10 +135,10 @@ theorem isOpen_of_stableUnderGeneralization [NoetherianSpace X] [QuasiSober X] {
     induction Z using WellFoundedLT.induction with
     | _ Z IH =>
     intro hd
+    rw [Set.eq_empty_iff_forall_notMem]
+    rintro y ⟨hyZ, hyE⟩
     by_cases h₁ : IsPreirreducible (Z : Set X)
-    · rw [Set.eq_empty_iff_forall_notMem]
-      rintro y ⟨hyZ, hyE⟩
-      have hirr : IsIrreducible (Z : Set X) := ⟨⟨y, hyZ⟩, h₁⟩
+    · have hirr : IsIrreducible (Z : Set X) := ⟨⟨y, hyZ⟩, h₁⟩
       have hg := hirr.isGenericPoint_genericPoint Z.isClosed
       have hzE : hirr.genericPoint ∈ E := hgen (hg.specializes hyZ) hyE
       obtain ⟨W, hW, hzW, hWE⟩ := hloc _ hzE
@@ -153,31 +153,19 @@ theorem isOpen_of_stableUnderGeneralization [NoetherianSpace X] [QuasiSober X] {
         let Z' : Closeds X := ⟨closure ((Z : Set X) ∩ z ∩ Eᶜ), isClosed_closure⟩
         have sub : (Z' : Set X) ⊆ (Z : Set X) ∩ z :=
           closure_minimal (fun x hx => hx.1) (Z.isClosed.inter hz)
-        have lt : Z' < Z := by
-          refine lt_of_le_of_ne (fun x hx => (sub hx).1) fun e => hz' fun x hx => ?_
-          have : x ∈ (Z' : Set X) := by rw [e]; exact hx
-          exact (sub this).2
-        refine ⟨Z', lt, IH Z' lt ?_, subset_rfl⟩
-        exact closure_mono fun x hx => ⟨subset_closure hx, hx.2⟩
+        have lt : Z' < Z := lt_of_le_of_ne (fun x hx => (sub hx).1) fun e =>
+          hz' fun x hx => (sub (e.symm ▸ hx : x ∈ (Z' : Set X))).2
+        exact ⟨Z', lt, IH Z' lt (closure_mono fun x hx => ⟨subset_closure hx, hx.2⟩), subset_rfl⟩
       obtain ⟨Z₁, -, e₁, s₁⟩ := piece z₁ hz₁ hz₁'
       obtain ⟨Z₂, -, e₂, s₂⟩ := piece z₂ hz₂ hz₂'
-      rw [Set.eq_empty_iff_forall_notMem]
-      rintro y ⟨hyZ, hyE⟩
-      have hy := hd hyZ
-      have hsplit : (Z : Set X) ∩ Eᶜ ⊆ ((Z : Set X) ∩ z₁ ∩ Eᶜ) ∪ ((Z : Set X) ∩ z₂ ∩ Eᶜ) := by
-        rintro x ⟨hxZ, hxE⟩
-        rcases h hxZ with h' | h'
-        · exact Or.inl ⟨⟨hxZ, h'⟩, hxE⟩
-        · exact Or.inr ⟨⟨hxZ, h'⟩, hxE⟩
-      have hy' := closure_mono hsplit hy
-      rw [closure_union] at hy'
-      rcases hy' with h' | h'
+      have hsplit : (Z : Set X) ∩ Eᶜ ⊆ ((Z : Set X) ∩ z₁ ∩ Eᶜ) ∪ ((Z : Set X) ∩ z₂ ∩ Eᶜ) :=
+        fun x ⟨hxZ, hxE⟩ => (h hxZ).imp (fun h' => ⟨⟨hxZ, h'⟩, hxE⟩) fun h' => ⟨⟨hxZ, h'⟩, hxE⟩
+      rcases closure_union.subset (closure_mono hsplit (hd hyZ)) with h' | h'
       · exact (Set.eq_empty_iff_forall_notMem.1 e₁) y ⟨s₁ h', hyE⟩
       · exact (Set.eq_empty_iff_forall_notMem.1 e₂) y ⟨s₂ h', hyE⟩
   let T : Closeds X := ⟨closure Eᶜ, isClosed_closure⟩
   have hT := key T (closure_mono fun x hx => ⟨subset_closure hx, hx⟩)
-  refine isClosed_compl_iff.1 (closure_subset_iff_isClosed.1 fun x hx hxE => ?_)
-  exact (Set.eq_empty_iff_forall_notMem.1 hT) x ⟨hx, hxE⟩
+  exact isClosed_compl_iff.1 (closure_subset_iff_isClosed.1 fun x hx hxE => hT.subset ⟨hx, hxE⟩)
 
 end Topology
 
@@ -289,11 +277,8 @@ theorem corollaire1 [IsNoetherianRing A] :
         isCoherent_algebraMap a⟩ : {ξ // IsCoherent ξ})) := by
   constructor
   · intro a b hab
-    have hab' := congrArg Subtype.val hab
-    apply (toOpenₗ_top_bijective (R := A) (M := A)).1
-    apply Subtype.ext
-    funext x
-    have h := congrFun hab' x.1
+    refine (toOpenₗ_top_bijective (R := A) (M := A)).1 (Subtype.ext (funext fun x => ?_))
+    have h := congrFun (congrArg Subtype.val hab) x.1
     simp only [← Localization.mk_one_eq_algebraMap] at h
     exact h
   · rintro ⟨ξ, hξ⟩
@@ -362,10 +347,8 @@ theorem proposition [NoetherianSpace X] [QuasiSober X] (hH : ConditionH F) :
         F.presheaf.germ_stalkSpecializes_apply (U := ⊤) (hy := trivial) h s⟩ :
         {ξ // IsCoherentGerms F ξ})) := by
   constructor
-  · intro s t hst
-    apply TopCat.Presheaf.section_ext F ⊤ s t
-    intro x _
-    exact congrFun (congrArg Subtype.val hst) x
+  · exact fun s t hst => TopCat.Presheaf.section_ext F ⊤ s t fun x _ =>
+      congrFun (congrArg Subtype.val hst) x
   · rintro ⟨ξ, hξ⟩
     choose U hxU s hs using fun x => F.presheaf.exists_germ_eq (ξ x)
     let V : X → Opens X := fun x =>
@@ -374,10 +357,7 @@ theorem proposition [NoetherianSpace X] [QuasiSober X] (hH : ConditionH F) :
     have hVU : ∀ x, V x ≤ U x := fun x y hy => hy.1
     let sf : ∀ x, ToType (F.1.obj (op (V x))) := fun x => F.1.map (homOfLE (hVU x)).op (s x)
     have hgerm : ∀ x y (hy : y ∈ V x), F.presheaf.germ (V x) y hy (sf x) = ξ y :=
-      fun x y hy => by
-        simp only [sf]
-        rw [TopCat.Presheaf.germ_res_apply]
-        exact hy.2
+      fun x y hy => (F.presheaf.germ_res_apply _ y hy _).trans hy.2
     have hcompat : TopCat.Presheaf.IsCompatible F.1 V sf := by
       intro x y
       apply TopCat.Presheaf.section_ext F
