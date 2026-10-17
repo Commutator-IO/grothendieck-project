@@ -58,14 +58,11 @@ theorem choose_pow_sub_one_zmod {p : ℕ} (hp : p.Prime) (r : ℕ) :
   | zero => simp
   | succ b ih =>
     intro hb
-    have hdvd : p ∣ (p ^ r).choose (b + 1) :=
-      hp.dvd_choose_pow (by omega) (by omega)
     have hpascal : (p ^ r).choose (b + 1) =
         (p ^ r - 1).choose b + (p ^ r - 1).choose (b + 1) := by
-      conv_lhs => rw [show p ^ r = (p ^ r - 1) + 1 by omega]
-      exact Nat.choose_succ_succ _ _
+      rw [← Nat.choose_succ_succ', Nat.sub_add_cancel (by omega : 1 ≤ p ^ r)]
     have h0 : ((p ^ r).choose (b + 1) : ZMod p) = 0 :=
-      (ZMod.natCast_eq_zero_iff _ _).2 hdvd
+      (ZMod.natCast_eq_zero_iff _ _).2 (hp.dvd_choose_pow (by omega) (by omega))
     rw [hpascal, Nat.cast_add, ih (by omega)] at h0
     rw [pow_succ]
     linear_combination h0
@@ -83,9 +80,8 @@ theorem choose_add_mul_choose (k l i : ℕ) :
     (k + l).choose l * k.choose i = (k + l).choose i * (k + l - i).choose l := by
   rcases le_or_gt i k with hik | hik
   · have h := Nat.choose_mul (n := k + l) hik
-    rw [Nat.choose_symm_add, Nat.choose_symm_of_eq_add (show k + l - i = (k - i) + l by omega)]
+    rwa [Nat.choose_symm_add, Nat.choose_symm_of_eq_add (show k + l - i = (k - i) + l by omega)]
       at h
-    exact h
   · rw [Nat.choose_eq_zero_of_lt hik, mul_zero]
     rcases Nat.eq_zero_or_pos l with rfl | hl
     · simp [Nat.choose_eq_zero_of_lt hik]
@@ -101,10 +97,8 @@ theorem eq_zero_of_forall_prime_smul {A : Type*} [AddCommGroup A] (z : A)
 
 /-- For every prime `p` some `K = p^r − 1 ≥ m` exists. -/
 theorem exists_pow_sub_one_ge {p : ℕ} (hp : p.Prime) (m : ℕ) :
-    ∃ r, m ≤ p ^ r - 1 := by
-  refine ⟨m + 1, ?_⟩
-  have := Nat.lt_pow_self (n := m + 1) hp.one_lt
-  omega
+    ∃ r, m ≤ p ^ r - 1 :=
+  ⟨m, Nat.le_sub_one_of_lt (Nat.lt_pow_self hp.one_lt)⟩
 
 /-- The cross relation `binom(k, i) ξ_{k'} = binom(k', i) ξ_k` for `k, k' ≥ N`. -/
 theorem cross_relation {A : Type*} [AddCommGroup A] (ξ : ℕ → A) (N i : ℕ)
@@ -112,33 +106,29 @@ theorem cross_relation {A : Type*} [AddCommGroup A] (ξ : ℕ → A) (N i : ℕ)
     {k k' : ℕ} (hk : N ≤ k) (hk' : N ≤ k') :
     k.choose i • ξ k' = k'.choose i • ξ k := by
   rw [← sub_eq_zero]
-  apply eq_zero_of_forall_prime_smul
-  intro p hp
+  refine eq_zero_of_forall_prime_smul _ fun p hp => ?_
   obtain ⟨r, hr⟩ := exists_pow_sub_one_ge hp (k + k')
   set K := p ^ r - 1 with hK
   have e : k + (K - k) = K := by omega
   have e' : k' + (K - k') = K := by omega
   have h1 := h k (K - k) hk
   have h2 := h k' (K - k') hk'
-  rw [e] at h1
-  rw [e'] at h2
   have i1 := choose_add_mul_choose k (K - k) i
   have i2 := choose_add_mul_choose k' (K - k') i
-  rw [e] at i1
-  rw [e'] at i2
+  rw [e] at h1 i1
+  rw [e'] at h2 i2
   set u := K.choose (K - k)
   set u' := K.choose (K - k')
   set a := (K - i).choose (K - k)
   set a' := (K - i).choose (K - k')
   refine ⟨u * u', fun hd => ?_, ?_⟩
-  · rcases (Nat.Prime.dvd_mul hp).1 hd with hd | hd
-    · exact not_dvd_choose_pow_sub_one hp r _ (by omega) hd
-    · exact not_dvd_choose_pow_sub_one hp r _ (by omega) hd
+  · exact ((Nat.Prime.dvd_mul hp).1 hd).elim (not_dvd_choose_pow_sub_one hp r _ (by omega))
+      (not_dvd_choose_pow_sub_one hp r _ (by omega))
   · rw [smul_sub, smul_smul, smul_smul,
       show u * u' * k.choose i = (u * k.choose i) * u' by ring,
       show u * u' * k'.choose i = (u' * k'.choose i) * u by ring,
-      mul_smul, mul_smul (u' * _), h1, h2, i1, i2, smul_smul, smul_smul]
-    rw [show K.choose i * a * a' = K.choose i * a' * a by ring, sub_self]
+      mul_smul, mul_smul (u' * _), h1, h2, i1, i2, smul_smul, smul_smul,
+      show K.choose i * a * a' = K.choose i * a' * a by ring, sub_self]
 
 /-- The binomial coefficients `binom(N + n, i)`, `n ∈ ℕ`, generate the unit ideal
 of `ℤ`: for each `p`, `binom(p^r − 1, i)` with `p^r − 1 ≥ N + i` is prime to `p`. -/
@@ -153,12 +143,9 @@ theorem span_choose_eq_top (N i : ℕ) :
     set p := Nat.minFac g.natAbs with hpdef
     have hp : p.Prime := Nat.minFac_prime h1
     obtain ⟨r, hr⟩ := exists_pow_sub_one_ge hp (N + i)
-    have hmem : ((N + (p ^ r - 1 - N)).choose i : ℤ) ∈ I :=
-      Ideal.subset_span ⟨_, rfl⟩
+    have hmem : ((N + (p ^ r - 1 - N)).choose i : ℤ) ∈ I := Ideal.subset_span ⟨_, rfl⟩
     rw [hg, Ideal.submodule_span_eq, Ideal.mem_span_singleton] at hmem
-    have hdvd : (p : ℤ) ∣ g :=
-      Int.natCast_dvd.2 (Nat.minFac_dvd _)
-    have := Int.natCast_dvd_natCast.1 (hdvd.trans hmem)
+    have := Int.natCast_dvd_natCast.1 ((Int.natCast_dvd.2 (Nat.minFac_dvd _)).trans hmem)
     rw [show N + (p ^ r - 1 - N) = p ^ r - 1 by omega] at this
     exact not_dvd_choose_pow_sub_one hp r i (by omega) this
 
@@ -168,19 +155,14 @@ there is a unique `ξ` with `ξ_k = binom(k, i) ξ` for every `k ≥ N`. -/
 theorem binomial_shadow_existsUnique {A : Type*} [AddCommGroup A] (ξ : ℕ → A) (N i : ℕ)
     (h : ∀ k l, N ≤ k → (k + l).choose l • ξ k = (k + l - i).choose l • ξ (k + l)) :
     ∃! x : A, ∀ k, N ≤ k → ξ k = k.choose i • x := by
-  have h1 : (1 : ℤ) ∈ Submodule.span ℤ (Set.range fun n : ℕ => ((N + n).choose i : ℤ)) := by
-    have := span_choose_eq_top N i
-    rw [Ideal.span, Submodule.eq_top_iff'] at this
-    exact this 1
+  have h1 : (1 : ℤ) ∈ Submodule.span ℤ (Set.range fun n : ℕ => ((N + n).choose i : ℤ)) :=
+    Submodule.eq_top_iff'.1 (span_choose_eq_top N i) 1
   obtain ⟨c, hc⟩ := Finsupp.mem_span_range_iff_exists_finsupp.1 h1
   simp only [smul_eq_mul] at hc
   -- `ξ = ∑ mₐ ξ_{N+a}` and, for any `y`, `y = ∑ mₐ binom(N+a, i) y`
-  have hone : ∀ y : A, (c.sum fun n m => (m * ((N + n).choose i : ℤ)) • y) = y := by
-    intro y
-    unfold Finsupp.sum
-    rw [← Finset.sum_smul]
-    unfold Finsupp.sum at hc
-    rw [hc, one_smul]
+  have hone : ∀ y : A, (c.sum fun n m => (m * ((N + n).choose i : ℤ)) • y) = y := fun y => by
+    unfold Finsupp.sum at hc ⊢
+    rw [← Finset.sum_smul, hc, one_smul]
   refine ⟨c.sum fun n m => m • ξ (N + n), ?_, ?_⟩
   · intro k hk
     rw [← natCast_zsmul, Finsupp.smul_sum]
