@@ -64,22 +64,10 @@ lemma N_anti (σ : Fin (n + 1) → G) {H H' : Set (Fin (n + 1))} (h : H ⊆ H') 
 elements. -/
 lemma commute_of_closure {A B : Set G} (h : ∀ a ∈ A, ∀ b ∈ B, Commute a b) {a b : G}
     (ha : a ∈ Subgroup.closure A) (hb : b ∈ Subgroup.closure B) : Commute a b := by
-  have hB : Subgroup.closure B ≤ Subgroup.centralizer (Subgroup.closure A : Set G) := by
-    rw [Subgroup.closure_le]
-    intro b' hb'
-    have hA : Subgroup.closure A ≤ Subgroup.centralizer {b'} := by
-      rw [Subgroup.closure_le]
-      intro a' ha'
-      rw [SetLike.mem_coe, Subgroup.mem_centralizer_iff]
-      intro c hc
-      rw [Set.mem_singleton_iff] at hc
-      rw [hc]
-      exact (h a' ha' b' hb').eq.symm
-    rw [SetLike.mem_coe, Subgroup.mem_centralizer_iff]
-    intro a'' ha''
-    have := Subgroup.mem_centralizer_iff.mp (hA ha'') b' rfl
-    exact this.symm
-  exact Subgroup.mem_centralizer_iff.mp (hB hb) a ha
+  have hA : Subgroup.closure A ≤ Subgroup.centralizer (Subgroup.closure B : Set G) := by
+    rw [Subgroup.centralizer_closure, Subgroup.closure_le]
+    exact fun a ha => Subgroup.mem_centralizer_iff.2 fun b hb => (h a ha b hb).eq.symm
+  exact (Subgroup.mem_centralizer_iff.1 (hA ha) b hb).symm
 
 /-- The product decomposition of page 28: if `K ∪ K'` splits at `i ∉ K ∪ K'`,
 the part below `i` lying in `K'` and the part above `i` in `K`, then
@@ -94,8 +82,7 @@ theorem mem_mul_of_split (σ : Fin (n + 1) → G)
   set SB : Set (Fin (n + 1)) := {j | j ∈ K ∪ K' ∧ i < j}
   have hAK : gen σ SA ≤ gen σ K' := gen_mono σ fun j hj => hlow j hj.1 hj.2
   have hBK : gen σ SB ≤ gen σ K := gen_mono σ fun j hj => hhigh j hj.1 hj.2
-  have hcomm : ∀ {a b : G}, a ∈ gen σ SA → b ∈ gen σ SB → Commute a b := by
-    intro a b ha hb
+  have hcomm : ∀ {a b : G}, a ∈ gen σ SA → b ∈ gen σ SB → Commute a b := fun ha hb => by
     refine commute_of_closure ?_ ha hb
     rintro _ ⟨j, hj, rfl⟩ _ ⟨k, hk, rfl⟩
     apply hσ
@@ -117,13 +104,11 @@ theorem mem_mul_of_split (σ : Fin (n + 1) → G)
     obtain ⟨a, ha, b, hb, rfl⟩ := hx
     obtain ⟨a', ha', b', hb', rfl⟩ := hy
     refine ⟨a * a', mul_mem ha ha', b * b', mul_mem hb hb', ?_⟩
-    have := (hcomm ha' hb).eq
-    rw [mul_assoc, ← mul_assoc b, ← this, mul_assoc, mul_assoc]
+    rw [mul_assoc, ← mul_assoc b, ← (hcomm ha' hb).eq, mul_assoc, mul_assoc]
   | inv x _ hx =>
     obtain ⟨a, ha, b, hb, rfl⟩ := hx
-    refine ⟨a⁻¹, inv_mem ha, b⁻¹, inv_mem hb, ?_⟩
-    rw [mul_inv_rev]
-    exact ((hcomm (inv_mem ha) (inv_mem hb)).eq).symm
+    exact ⟨a⁻¹, inv_mem ha, b⁻¹, inv_mem hb,
+      (mul_inv_rev a b).trans (hcomm (inv_mem ha) (inv_mem hb)).eq.symm⟩
 
 variable (σ : Fin (n + 1) → G) (X : Type*) [MulAction G X]
 
@@ -181,27 +166,20 @@ theorem flag_lemma (hσ : ∀ i j : Fin (n + 1), (i : ℕ) + 2 ≤ j → Commute
   obtain ⟨g, hg, hgy⟩ := mk_eq_mk.mp hab
   -- `g⁻¹ ∈ N_{H ∩ H'} = G_{Hᶜ ∪ H'ᶜ}` splits as `k' k`.
   have hg' : g⁻¹ ∈ gen σ (Hᶜ ∪ H'ᶜ) := by
-    have : N σ (H ∩ H') = gen σ (Hᶜ ∪ H'ᶜ) := by
-      unfold N; rw [Set.compl_inter]
-    exact this ▸ inv_mem hg
+    rw [← Set.compl_inter]; exact inv_mem hg
   have hi : i ∉ Hᶜ ∪ H'ᶜ := by
     simp [hiH, hiH']
   have hlow : ∀ j ∈ Hᶜ ∪ H'ᶜ, j < i → j ∈ H'ᶜ := by
     intro j hj hji hjH'
-    have hjH : j ∈ H := hinit j hjH' i ⟨hiH, hiH'⟩ hji.le
-    rcases hj with hj | hj
-    · exact hj hjH
-    · exact hj hjH'
+    exact hj.elim (· (hinit j hjH' i ⟨hiH, hiH'⟩ hji.le)) (· hjH')
   have hhigh : ∀ j ∈ Hᶜ ∪ H'ᶜ, i < j → j ∈ Hᶜ := fun j _ hij hjH =>
     absurd (hmax j hjH) (not_le.mpr hij)
   obtain ⟨k', hk', k, hk, hkk⟩ := mem_mul_of_split σ hσ i hi hlow hhigh hg'
   refine ⟨mk _ (k • x), ?_, ?_⟩
-  · rw [res_mk, mk_eq_mk]
-    exact ⟨k, hk, rfl⟩
+  · exact mk_eq_mk.2 ⟨k, hk, rfl⟩
   · rw [res_mk, mk_eq_mk]
     refine ⟨k'⁻¹, inv_mem hk', ?_⟩
-    have hy : y = g⁻¹ • x := by rw [← hgy, inv_smul_smul]
-    rw [hy, hkk, mul_smul, inv_smul_smul]
+    rw [← inv_smul_smul g y, hgy, hkk, mul_smul, inv_smul_smul]
 
 /-- The relation `≺` on vertices (page 27): for `x ∈ D({i})` and `y ∈ D({j})`,
 `x ≺ y` if `i < j` and `x`, `y` have a common majorant in `D_* = ∐_H D(H)`. -/
@@ -214,15 +192,11 @@ def Prec {i j : Fin (n + 1)} (x : D σ X {i}) (y : D σ X {j}) : Prop :=
 lemma prec_iff_pair {i j : Fin (n + 1)} (x : D σ X {i}) (y : D σ X {j}) :
     Prec x y ↔ i < j ∧ ∃ d : D σ X {i, j},
       res (by simp) d = x ∧ res (by simp) d = y := by
-  constructor
-  · rintro ⟨hij, H, hi, hj, d, rfl, rfl⟩
-    have hsub : ({i, j} : Set (Fin (n + 1))) ⊆ H := by
-      rintro k (rfl | rfl)
-      · exact hi rfl
-      · exact hj rfl
-    exact ⟨hij, res hsub d, by rw [res_res], by rw [res_res]⟩
-  · rintro ⟨hij, d, hx, hy⟩
-    exact ⟨hij, _, _, _, d, hx, hy⟩
+  refine ⟨?_, fun ⟨hij, d, hx, hy⟩ => ⟨hij, _, _, _, d, hx, hy⟩⟩
+  rintro ⟨hij, H, hi, hj, d, rfl, rfl⟩
+  have hsub : ({i, j} : Set (Fin (n + 1))) ⊆ H :=
+    Set.insert_subset_iff.2 ⟨hi rfl, Set.singleton_subset_iff.2 (hj rfl)⟩
+  exact ⟨hij, res hsub d, by rw [res_res], by rw [res_res]⟩
 
 /-- (c): for `d ∈ D(H)` and `i < j` in `H`, the vertices of `d` of types `i`
 and `j` satisfy `≺`. -/
@@ -257,10 +231,7 @@ theorem prec_trans (hσ : ∀ i j : Fin (n + 1), (i : ℕ) + 2 ≤ j → Commute
         res hjm (res (by simp) d₂) := by rw [res_res]
     rw [e₁, e₂, hy₁, hy₂]
   obtain ⟨c, hc₁, hc₂⟩ := flag_lemma hσ (H := {i, j}) (H' := {j, k}) j (by simp)
-    (by
-      rintro m (rfl | rfl)
-      · exact hij.le
-      · exact le_rfl)
+    (by simp [hij.le])
     (by simp)
     (by
       rintro m hm l ⟨hl₁, hl₂⟩ hml
