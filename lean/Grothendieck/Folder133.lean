@@ -83,16 +83,12 @@ theorem mem_zbar {z : G} :
     z ∈ zbar N N' ↔ (∀ g : G, ⁅g, z⁆ ∈ N ⊓ N') ∧ ∀ n ∈ N, n * z = z * n := by
   rw [zbar, mem_inf, mem_comap, mem_centralizer_iff]
   refine and_congr ⟨fun h g => ?_, fun h => mem_center_iff.mpr fun x => ?_⟩ Iff.rfl
-  · rw [← QuotientGroup.eq_one_iff]
-    show QuotientGroup.mk' (N ⊓ N') ⁅g, z⁆ = 1
-    rw [map_commutatorElement]
-    exact commutatorElement_eq_one_iff_mul_comm.mpr (mem_center_iff.mp h _)
+  · exact (QuotientGroup.eq_one_iff _).mp <| (map_commutatorElement (QuotientGroup.mk' _) g z).trans
+      (commutatorElement_eq_one_iff_mul_comm.mpr (mem_center_iff.mp h _))
   · obtain ⟨g, rfl⟩ := QuotientGroup.mk_surjective x
-    have := h g
-    rw [← QuotientGroup.eq_one_iff] at this
-    change QuotientGroup.mk' (N ⊓ N') ⁅g, z⁆ = 1 at this
-    rw [map_commutatorElement] at this
-    exact commutatorElement_eq_one_iff_mul_comm.mp this
+    exact commutatorElement_eq_one_iff_mul_comm.mp <|
+      (map_commutatorElement (QuotientGroup.mk' _) g z).symm.trans
+        ((QuotientGroup.eq_one_iff _).mpr (h g))
 
 /-- A central element commutes with everything, written in the order used below. -/
 private theorem central_comm {H : Type*} [Group H] {c : H} (hc : c ∈ center H) (x : H) :
@@ -151,14 +147,10 @@ theorem phi_mk (z : zbar N N') (g : G) :
 
 theorem phi_eq_of_rel {z w : zbar N N'} (h : z⁻¹ * w ∈ N'.subgroupOf (zbar N N')) :
     phi hN' z = phi hN' w := by
-  apply QuotientGroup.monoidHom_ext
-  apply MonoidHom.ext
-  intro g
-  apply Subtype.ext
+  refine QuotientGroup.monoidHom_ext _ (MonoidHom.ext fun g => Subtype.ext ?_)
   show ⁅g, (z : G)⁆ = ⁅g, (w : G)⁆
   have hc : (z : G)⁻¹ * w ∈ center G := hN' (by simpa [mem_subgroupOf] using h)
-  have : (w : G) = z * ((z : G)⁻¹ * w) := by group
-  rw [this, comm_mul_central hc]
+  rw [show (w : G) = z * ((z : G)⁻¹ * w) by group, comm_mul_central hc]
 
 /-- `Ψ_G : ℨ → Hom(π₀, π₁)` (page 46). -/
 def Psi : Zfrak N N' → (G ⧸ (N ⊔ N') →* ↥(N ⊓ N')) :=
@@ -193,16 +185,11 @@ theorem injective_Psi_iff : Function.Injective (Psi (N := N) hN') ↔ N' = cente
       exact one_mem _, fun n _ => mem_center_iff.mp hc n⟩
     have : Psi hN' ((⟨c, hcz⟩ : zbar N N') : Zfrak N N') =
         Psi hN' ((1 : zbar N N') : Zfrak N N') := by
-      apply QuotientGroup.monoidHom_ext
-      apply MonoidHom.ext
-      intro g
-      apply Subtype.ext
+      refine QuotientGroup.monoidHom_ext _ (MonoidHom.ext fun g => Subtype.ext ?_)
       show ⁅g, c⁆ = ⁅g, ((1 : zbar N N') : G)⁆
       rw [commutatorElement_eq_one_iff_mul_comm.mpr (mem_center_iff.mp hc g)]
       simp
-    have h1 := hinj this
-    rw [QuotientGroup.eq] at h1
-    simpa [mem_subgroupOf] using h1
+    simpa [mem_subgroupOf] using QuotientGroup.eq.mp (hinj this)
   · intro hc a b hab
     induction a using QuotientGroup.induction_on with | H z => ?_
     induction b using QuotientGroup.induction_on with | H w => ?_
@@ -256,15 +243,13 @@ theorem dmk_one : dmk (1 : G) (one_mem N) = 1 := rfl
 theorem dmk_conj {c : G} (hc : c ∈ N) (x : G) :
     dmk (x * c * x⁻¹) (‹N.Normal›.conj_mem c hc x) = dmk c hc := by
   rw [dmk_eq_iff]
-  have : (x * c * x⁻¹)⁻¹ * c = ⁅x, c⁻¹⁆ := by simp only [commutatorElement_def]; group
-  rw [this]
+  rw [show (x * c * x⁻¹)⁻¹ * c = ⁅x, c⁻¹⁆ by simp only [commutatorElement_def]; group]
   exact commutator_mem_commutator (mem_top x) (inv_mem hc)
 
 /-- `𝒟` is commutative. -/
 theorem dmk_comm {a b : G} (ha : a ∈ N) (hb : b ∈ N) : dmk a ha * dmk b hb = dmk b hb * dmk a ha := by
   rw [← dmk_mul, ← dmk_mul, dmk_eq_iff]
-  have : (a * b)⁻¹ * (b * a) = ⁅b⁻¹, a⁻¹⁆ := by simp only [commutatorElement_def]; group
-  rw [this]
+  rw [show (a * b)⁻¹ * (b * a) = ⁅b⁻¹, a⁻¹⁆ by simp only [commutatorElement_def]; group]
   exact commutator_mem_commutator (mem_top _) (inv_mem ha)
 
 theorem Dcal_comm (u v : Dcal N) : u * v = v * u := by
@@ -281,8 +266,7 @@ theorem pi0_comm (hD : _root_.commutator G ≤ N) (a b : G ⧸ (N ⊔ N')) : a *
   induction a using QuotientGroup.induction_on with | H x => ?_
   induction b using QuotientGroup.induction_on with | H y => ?_
   rw [← QuotientGroup.mk_mul, ← QuotientGroup.mk_mul, QuotientGroup.eq]
-  have : (x * y)⁻¹ * (y * x) = ⁅y⁻¹, x⁻¹⁆ := by simp only [commutatorElement_def]; group
-  rw [this]
+  rw [show (x * y)⁻¹ * (y * x) = ⁅y⁻¹, x⁻¹⁆ by simp only [commutatorElement_def]; group]
   exact mem_sup_left (comm_mem hD _ _)
 
 /-- For fixed `y`, `x ↦ [⁅x, y⁆] ∈ 𝒟` is a homomorphism. -/
@@ -314,8 +298,7 @@ theorem le_ker_lamG (hN' : N' ≤ center G) (y : G) : N ⊔ N' ≤ (lamG hD y).k
 omit [N'.Normal] in
 theorem lamG_eq_of_rel (hN' : N' ≤ center G) (y : G) {x x' : G} (h : x⁻¹ * x' ∈ N ⊔ N') :
     lamG hD y x = lamG hD y x' := by
-  have : x' = x * (x⁻¹ * x') := by group
-  rw [this, map_mul, le_ker_lamG hD hN' y h, mul_one]
+  rw [show x' = x * (x⁻¹ * x') by group, map_mul, le_ker_lamG hD hN' y h, mul_one]
 
 theorem lamG_swap (x y : G) : lamG hD y x = (lamG hD x y)⁻¹ := by
   rw [lamG_apply, lamG_apply, ← dmk_inv]
@@ -367,8 +350,7 @@ theorem eq_commutator_iff_lam_surjective :
   have hcl : closure (commutatorSet G) ≤ N := by rw [← commutator_eq_closure]; exact hD
   constructor
   · intro h
-    rw [eq_top_iff]
-    intro u _
+    refine eq_top_iff.2 fun u _ => ?_
     induction u using QuotientGroup.induction_on with | H a => ?_
     obtain ⟨n, hn⟩ := a
     have hn' : n ∈ closure (commutatorSet G) := by rw [← commutator_eq_closure, ← h]; exact hn
@@ -404,9 +386,7 @@ theorem eq_commutator_iff_lam_surjective :
     rw [mem_subgroupOf] at hm h1
     have h2 : (m : G)⁻¹ * n ∈ _root_.commutator G :=
       commutator_mono le_top le_top (by simpa using h1)
-    have : n = (m : G) * ((m : G)⁻¹ * n) := by group
-    rw [this]
-    exact mul_mem hm h2
+    simpa using mul_mem hm h2
 
 end Derived
 
@@ -497,9 +477,8 @@ theorem commutator_G1 (hex : q.ker = ι.range) (p r : fibre q) :
   have hc := cE_spec hD ι q hex (p : G × E).2 (r : G × E).2
   apply Subtype.ext
   rw [coe_mul, coe_inv, hpr, incN_coe, antidiag_coe]
-  refine Prod.ext ?_ ?_
-  · simp only [Prod.fst_mul, Prod.fst_inv, inv_mul_cancel_left]
-  · simp only [Prod.snd_mul, Prod.snd_inv, mul_one, hc]
+  exact Prod.ext (by simp only [Prod.fst_mul, Prod.fst_inv, inv_mul_cancel_left])
+    (by simp only [Prod.snd_mul, Prod.snd_inv, mul_one, hc])
 
 /-- **Page 48.** `Ψ_{G₁} = Ψ_G · c̃_E α`: for `z ∈ zbar`, the commutator in `G₁` of
 the classes of `(g, e)` and `(z, f)` is the image of `Ψ_G(z)(ḡ) · c_E(e, f) ∈ π₁`. -/
