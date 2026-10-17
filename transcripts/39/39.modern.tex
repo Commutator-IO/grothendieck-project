@@ -64,6 +64,14 @@
 % résumé and the spine is this reading's.
 %
 % Pass: Opus 5 (claude-opus-5), 2026-09-13 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — pages 18-19: footnotes on the
+%   Lean check (lean/Grothendieck/Folder39.lean: adic and discrete cases proved,
+%   the passage to an arbitrary linear topology and the hypothesis a_i in sqrt(I)
+%   not formalised; finite generation of m not needed in the adic form), on the
+%   mathlib declarations used (Weierstrass division, Washington; nilpotency of a
+%   finitely generated nil ideal) and the open mathlib PR n° 44725; the literature
+%   recorded by finding 39-inverse-function-axioms-henselian cited at the
+%   Weierstrass-system comparison; two « Ce que » headings renamed.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -203,7 +211,7 @@ sur la page. Les structures définies par un pseudogroupe de transformations
 (Lie, Cartan, Ehresmann dans les années 1950) lui étaient connues ;
 l'analogie est de cette lecture.}.
 
-\textbf{Ce que le dossier annonce sans l'établir.} Que la condition
+\textbf{Annoncé sans être établi.} Que la condition
 d'hensélianité entraîne celle d'inversion (page 3) ; que $S_n$ soit fidèlement
 plat sur $A_n$ (page 12) ; que la loi de Hausdorff soit une $A$-loi (page 5) ;
 la correspondance entre quotients formels et relations d'équivalence
@@ -771,7 +779,23 @@ désigne ici un anneau quelconque et non plus une classe de séries ; nous
 gardons la notation de la page, qui ne rattache pas ce théorème aux pages
 précédentes. Sous cette forme, sur un anneau linéairement topologisé, il
 figure chez Bourbaki (\emph{Algèbre commutative}, chap.~VII, § 3), sauf erreur
-de notre part sur le lieu exact.}.
+de notre part sur le lieu exact.}. Deux cas en sont vérifiés en Lean : celui
+d'un anneau séparé et complet pour une topologie $I$-adique, avec $a_i \in I$
+pour $i < N$, et le cas discret auquel la démonstration ci-dessous se
+ramène\footnote{Vérifié en Lean (lean/Grothendieck/Folder39.lean,
+\texttt{preparation\_adique} et \texttt{preparation\_discrete}) : régularité de
+$F$ et écriture unique $G = QF + r$, $r$ polynôme de degré $< N$. La vérification
+ne trouve rien de faux et confirme que les hypothèses servent telles
+qu'énoncées : (ii) est la condition d'unité de la division de Weierstrass, et
+(i) fait que l'ordre de $F$ modulo l'idéal est exactement $N$. Elle ne couvre ni
+le recollement des quotients discrets pour une topologie linéaire quelconque, ni
+l'hypothèse exacte de (i) dans le cas adique, où « topologiquement nilpotent »
+signifie $a_i \in \sqrt{I}$, plus faible que $a_i \in I$. Le cas adique n'est
+qu'une application de la division de Weierstrass sur un anneau complet,
+présente dans mathlib (\texttt{PowerSeries.IsWeierstrassDivisorAt}, avec
+référence à L.~C. Washington, \emph{Introduction to cyclotomic fields}, seconde éd.,
+Springer, 1997, prop.~7.2) ; la complétude pour un idéal nilpotent, dont le cas
+discret a besoin, fait l'objet de la PR ouverte n° 44725 de mathlib.}.
 
 \textbf{Démonstration.} $A$ est limite projective de ses quotients discrets
 $A/I$, $I$ parcourant les idéaux ouverts, et $A[[Z]] = \varprojlim (A/I)[[Z]]$.
@@ -780,7 +804,12 @@ $FH = 0$ est nul modulo chaque $I$ : on peut supposer $A$ discret. Alors (i)
 signifie que $a_0, \ldots, a_{N-1}$ sont nilpotents.
 
 Soit $\mathfrak{m}$ l'idéal qu'ils engendrent : il est de type fini et engendré
-par des nilpotents, donc nilpotent. Posons $A_0 = A/\mathfrak{m}$ et notons
+par des nilpotents, donc nilpotent\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder39.lean, \texttt{ideal\_nilpotent}, puis
+\texttt{isAdicComplete\_of\_nilpotent} : un anneau est séparé et complet pour un
+idéal nilpotent). Le premier fait est classique : un idéal de type fini contenu
+dans le nilradical est nilpotent, \texttt{Ideal.FG.isNilpotent\_iff\_le\_nilradical}
+dans mathlib.}. Posons $A_0 = A/\mathfrak{m}$ et notons
 $\dot{a}_i$, $\dot{F}$ les réductions modulo $\mathfrak{m}$. On a $\dot{a}_i = 0$
 pour $i < N$, donc
 \[
@@ -797,7 +826,10 @@ surchargée à cet endroit.}. Considérons l'application $A$-linéaire
   \sum_{0 \leq i \leq N-1} b_i Z^i + QF.
 \]
 Elle respecte les filtrations $\mathfrak{m}$-adiques, qui sont finies, et
-$\mathfrak{m}^j A[[Z]] = \mathfrak{m}^j[[Z]]$ puisque $\mathfrak{m}$ est de type fini.
+$\mathfrak{m}^j A[[Z]] = \mathfrak{m}^j[[Z]]$ puisque $\mathfrak{m}$ est de type
+fini\footnote{L'hypothèse de type fini ne sert qu'ici, à cette égalité. Par la
+division de Weierstrass, le cas adique vaut pour un idéal quelconque, non
+nécessairement de type fini (vérifié en Lean, \texttt{preparation\_adique}).}.
 En degré $j$, l'application graduée associée est, pour le $A_0$-module
 $M = \mathfrak{m}^j/\mathfrak{m}^{j+1}$,
 \[
@@ -819,7 +851,7 @@ $A[Z]/F A[Z] \to A[[Z]]/F A[[Z]]$ est surjective, et bijective si et seulement
 si $F A[[Z]] \cap A[Z] = F A[Z]$. L'argument par l'application $\varphi$ remplace
 les trois à la fois.
 
-\textbf{Ce que les feuillets ne disent pas.} Les pages 18 et 19 ne mentionnent
+\textbf{Un lien que les feuillets ne font pas.} Les pages 18 et 19 ne mentionnent
 ni les classes $A$ ni les $A$-schémas formels. Le lien est pourtant direct :
 demander qu'une classe de séries soit stable par la division de Weierstrass —
 le quotient et le reste d'une série de la classe par une série de la classe
@@ -830,6 +862,17 @@ coefficients) en découlent ou l'accompagnent\footnote{Ces travaux sont
 postérieurs de plus de dix ans à la datation de l'inventaire ; les feuillets
 ne pouvaient pas les connaître, et nous ne suggérons pas qu'ils les
 annoncent. Le rapprochement, et l'hypothèse qu'il explique la présence du
-théorème dans le dossier, sont de cette lecture.}.
+théorème dans le dossier, sont de cette lecture.}. Les axiomes de Denef et
+Lipshitz, tels que les reformule un travail récent (arXiv:2207.03979), sont
+posés sur un corps et prennent la division de Weierstrass comme axiome
+premier : ce n'est pas la liste des pages 9 à 14, qui part de l'inversion des
+automorphismes formels sur un anneau quelconque et ne pose jamais la division
+en axiome\footnote{La recherche bibliographique de l'édition est mince sur ce
+point : l'article de Denef et Lipshitz (\emph{Math. Ann.}, 1984) n'a été
+consulté qu'à travers cette reformulation, et pour Rolin, Speissegger et Wilkie
+(\emph{J. AMS} 16, 2003), sur les classes quasi-analytiques de Denjoy--Carleman,
+seul le résumé a été lu. Nous ne savons donc pas si une liste d'axiomes de ce
+type, sur un anneau quelconque et sans axiome de division, est déjà
+publiée.}.
 
 \end{document}
