@@ -1,0 +1,25 @@
+\section[Cote 10 : les indécomposables de $\mathbb G_a \rtimes \mathbb G_m$]{Cote 10 : les indécomposables de $\mathbb G_a \rtimes \mathbb G_m$\protect\verifie{Folder10}}\label{sec:10}
+
+La cote 10, \emph{Catégories tensorielles}, que l'inventaire date \q{[à partir de 1958]}, finit sur sept feuillets consacrés au groupe $G = k \rtimes k^*$, $k^*$ opérant sur $k$ par $\lambda \mapsto \lambda^p$, en caractéristique nulle (\lot{10}{10}{191}). La page~191 passe à l'algèbre de Lie, engendrée par $X$ (de $\mathbb G_a$) et $Y$ (de $\mathbb G_m$) avec $[Y, X] = pX$ ; les pages~192 à~194 classent les représentations indécomposables ; les pages~195 à~197 calculent l'anneau des classes. L'hypothèse $p \geq 1$ est de l'édition.
+
+\noindent\emph{Conventions.} Une représentation est un espace vectoriel muni de deux endomorphismes $X$ et $Y$, et un morphisme une application linéaire qui commute aux deux. La chaîne $e_{n,k}$ est $k^k$, de base $z_0, \ldots, z_{k-1}$, avec $X z_j = z_{j+1}$ ($z_k = 0$) et $Y z_j = (n + pj)\, z_j$ ; c'est le $k[Z]/(Z^k)$ de la page, de poids $n, n + p, \ldots, n + p(k-1)$. Le produit tensoriel est muni de $X \otimes 1 + 1 \otimes X$ et de $Y \otimes 1 + 1 \otimes Y$, le dual de $-{}^tX$ et $-{}^tY$, et l'on pose $\xi = e_{0,2}$.
+
+\begin{enonce}[Grothendieck, page 194, les chaînes\piste{10-split-ring-ga-rtimes-gm}]
+En caractéristique nulle et pour $p \geq 1$, tout endomorphisme de $e_{n,k}$ est scalaire, de sorte que $e_{n,k}$ est indécomposable ; $e_{n,k} \simeq e_{n',k'}$ avec $k \geq 1$ entraîne $n = n'$ et $k = k'$ ; et le dual de $e_{n,k}$ est $e_{-n-p(k-1),k}$.
+\end{enonce}
+
+L'énoncé tient tel que la lecture le donne (\texttt{string\_end\_scalar}, \texttt{string\_indecomposable}, \texttt{string\_iso\_imp}, \texttt{string\_dual}). La formule du dual vaut sur tout corps et pour tout $p$.
+
+\begin{enonce}[Énoncé de l'édition, d'après les pages 196 et 197, le terme dominant de $\xi^n$]
+Sur un corps $K$ quelconque et pour tout $p$, si $k \geq 2$ est inversible dans $K$, on a $\xi \otimes e_{n,k} \simeq e_{n,k+1} \oplus e_{n+p,k-1}$.
+\end{enonce}
+
+\begin{proof}
+Soient $a$, $b$ la base de $\xi$, de poids $0$ et $p$, avec $Xa = b$ et $Xb = 0$. Comme $X^2 = 0$ sur $\xi$, on a $X^c(a \otimes y) = a \otimes X^c y + c\, b \otimes X^{c-1} y$. Posons $v_j = X^j(a \otimes z_0)$, $0 \leq j \leq k$, et $w_i = X^i w_0$, $0 \leq i \leq k - 2$, avec $w_0 = a \otimes z_1 - (k-1)\, b \otimes z_0$. Alors $v_j = a \otimes z_j + j\, b \otimes z_{j-1}$ et $w_i = a \otimes z_{i+1} + (i - k + 1)\, b \otimes z_i$, d'où $X v_k = 0$ et $X w_{k-2} = 0$. La relation $[Y, X] = pX$ passe au produit tensoriel, et $a \otimes z_0$, $w_0$ sont propres pour $Y$, de valeurs $n$ et $n + p$ : les $v_j$ et les $w_i$ forment deux chaînes, de types $e_{n,k+1}$ et $e_{n+p,k-1}$. Enfin $v_{i+1} - w_i = k\, b \otimes z_i$ et $v_k = k\, b \otimes z_{k-1}$ ; comme $k$ est inversible, les $b \otimes z_i$, puis les $a \otimes z_j = v_j - j\, b \otimes z_{j-1}$, sont dans l'espace engendré. Les $2k$ vecteurs $v_j$, $w_i$ engendrent un espace de dimension $2k$ : ils en forment une base, et l'application qui envoie les bases des deux chaînes sur eux est un isomorphisme de représentations.
+\end{proof}
+
+\begin{remarque}
+C'est ce qui rend triangulaire, à coefficient dominant $1$, l'écriture de $\xi^n$ sur les $e_{0,i}$ : $\xi \cdot e_{0,k} = e_{0,k+1} + \sigma_p\, e_{0,k-1}$ donne par récurrence $\xi^n = e_{0,n+1} + \sum_{i \leq n} c_{ni}\, e_{0,i}$, soit le $\alpha = 0$ que la page~197 obtient par les poids. L'énoncé vaut plus généralement que la page ne le demande : seule sert l'inversibilité de $k$, non la caractéristique nulle ni $p \geq 1$ (\texttt{xi\_tensor\_string}).
+\end{remarque}
+
+Ne sont pas démontrés ici : que toute représentation indécomposable soit une chaîne (lemmes~1 et~2 des pages~192 à~194), et l'anneau $R(G) = \mathbf Z[\mathbf Z][\xi]$ lui-même, qui demande cette classification et le théorème de Krull--Schmidt, absents de mathlib ; le passage du groupe algébrique à son algèbre de Lie.

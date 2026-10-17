@@ -582,4 +582,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder115.lean',
     theorems: ['kernelEquiv', 'kernelAdj', 'isbell', 'isbellO_obj_obj', 'isbellSpec_obj_obj', 'isbellO_yoneda', 'isbellSpec_coyoneda', 'isbellO_preservesColimits', 'isbellSpec_preservesLimits'],
   },
+  {
+    folder: '10',
+    batch: 10,
+    page: '191–197',
+    name: 'The indecomposables of 𝔾_a ⋊ 𝔾_m',
+    statement:
+      'For G = 𝔾_a ⋊ 𝔾_m, 𝔾_m acting by λ ↦ λ^p, in characteristic 0, read through its Lie algebra [Y, X] = pX: the strings e_{n,k} (k[Z]/Z^k, X = multiplication by Z, weights n, n + p, …, n + p(k − 1)) are indecomposable and pairwise inequivalent, ě_{n,k} = e_{−n−p(k−1),k}, and ξ = e_{0,2} generates the ring of classes over ℤ[ℤ], ξⁿ having leading term e_{0,n+1}.',
+    found:
+      'Partly proved. Every endomorphism of a string is a scalar (char 0, p ≥ 1), so strings are indecomposable; strings are pairwise non-isomorphic; the dual formula holds over any field. The leading term of ξⁿ comes from ξ ⊗ e_{n,k} ≅ e_{n,k+1} ⊕ e_{n+p,k−1} (k ≥ 2), which needs only k invertible — no hypothesis on p or the characteristic. Not formalised: that every indecomposable is a string, and the ring R(G) = ℤ[ℤ][ξ], which needs that classification and Krull–Schmidt, absent from mathlib.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder10.lean',
+    theorems: ['sY_sX', 'string_end_scalar', 'string_indecomposable', 'string_iso_imp', 'string_dual', 'xi_tensor_string'],
+  },
 ];
