@@ -54,27 +54,20 @@ theorem int_of_smul_mem {V : Type*} [AddCommGroup V] [Module ℚ V]
     have h1 : ((q.den : ℤ) : ℚ) * q = (q.num : ℚ) := by
       push_cast; exact Rat.den_mul_eq_num q
     rw [smul_add, smul_comm ((q.den : ℤ)) u, ← Int.cast_smul_eq_zsmul ℚ ((q.den : ℤ)) (q • α),
-      smul_smul, h1, Int.cast_smul_eq_zsmul, smul_smul, smul_smul, ← add_smul]
-    rw [show u * q.num + (q.den : ℤ) * v = 1 by linarith, one_smul]
+      smul_smul, h1, Int.cast_smul_eq_zsmul, smul_smul, smul_smul, ← add_smul,
+      show u * q.num + (q.den : ℤ) * v = 1 by linarith, one_smul]
   have hu := hind _ hy _ key
-  have hden : (q.den : ℤ) = 1 := by
-    rcases Int.isUnit_iff.mp hu with h | h
-    · exact h
-    · have := q.den_pos; omega
-  refine ⟨q.num, ?_⟩
-  have := Rat.den_mul_eq_num q
-  rw [show (q.den : ℚ) = 1 by exact_mod_cast hden, one_mul] at this
-  exact this
+  have hden : (q.den : ℤ) = 1 :=
+    (Int.isUnit_iff.mp hu).resolve_right (by have := q.den_pos; omega)
+  exact ⟨q.num, (Rat.coe_int_num_of_den_eq_one (by exact_mod_cast hden)).symm⟩
 
 /-- **The step the leaf takes.** If `α ∈ P` is indivisible in `P` and the symmetry
 `x ↦ x - f x • α` maps `P` into `P`, then every Cartan number `f x`, `x ∈ P`, is an
 integer. -/
 theorem cartan_int_of_indivisible {V : Type*} [AddCommGroup V] [Module ℚ V]
     {P : AddSubgroup V} {α : V} (hα : α ∈ P) (hind : Indivisible P α) (f : V → ℚ)
-    (hS : ∀ x ∈ P, x - f x • α ∈ P) {x : V} (hx : x ∈ P) : ∃ n : ℤ, f x = n := by
-  refine int_of_smul_mem hα hind ?_
-  have := P.sub_mem hx (hS x hx)
-  simpa using this
+    (hS : ∀ x ∈ P, x - f x • α ∈ P) {x : V} (hx : x ∈ P) : ∃ n : ℤ, f x = n :=
+  int_of_smul_mem hα hind (by simpa using P.sub_mem hx (hS x hx))
 
 /-! ## The axioms a)–c) alone: a counterexample in `ℤ²` -/
 
@@ -87,16 +80,10 @@ theorem generates : AddSubgroup.closure (roots : Set (ℤ × ℤ)) = ⊤ := by
   set H := AddSubgroup.closure (roots : Set (ℤ × ℤ))
   have mem : ∀ p ∈ roots, p ∈ H := fun p hp => AddSubgroup.subset_closure hp
   have e1 : ((1 : ℤ), (0 : ℤ)) ∈ H := by
-    have := H.sub_mem (H.sub_mem (mem (3, 0) (by decide)) (mem (1, 1) (by decide)))
+    simpa using H.sub_mem (H.sub_mem (mem (3, 0) (by decide)) (mem (1, 1) (by decide)))
       (mem (1, -1) (by decide))
-    simpa using this
-  have e2 : ((0 : ℤ), (1 : ℤ)) ∈ H := by
-    have := H.sub_mem (mem (1, 1) (by decide)) e1
-    simpa using this
-  rw [eq_top_iff]
-  rintro ⟨a, b⟩ -
-  have := H.add_mem (H.zsmul_mem e1 a) (H.zsmul_mem e2 b)
-  simpa using this
+  have e2 : ((0 : ℤ), (1 : ℤ)) ∈ H := by simpa using H.sub_mem (mem (1, 1) (by decide)) e1
+  exact eq_top_iff.2 fun ⟨a, b⟩ _ => by simpa using H.add_mem (H.zsmul_mem e1 a) (H.zsmul_mem e2 b)
 
 /-- Axiom b), first half: `Δ = -Δ`. -/
 theorem neg_mem : ∀ a ∈ roots, -a ∈ roots := by decide
@@ -200,8 +187,7 @@ where
 /-- The Cartan number `⟨(3e₁)^∨, e₁ + e₂⟩ = 2/3` is not an integer. -/
 theorem cartan_not_int : ¬ ∃ n : ℤ, (2 / 3 : ℚ) = n := by
   rintro ⟨n, hn⟩
-  have h : (2 : ℚ) = 3 * n := by linarith
-  have : (2 : ℤ) = 3 * n := by exact_mod_cast h
+  have : (2 : ℤ) = 3 * n := by exact_mod_cast (by linarith : (2 : ℚ) = 3 * n)
   omega
 
 /-- The root `3e₁` is divisible in `P = ℤ²`. -/
@@ -230,9 +216,8 @@ theorem axioms_not_integral :
     (∀ a ∈ roots, ∃ S : (ℤ × ℤ) ≃+ (ℤ × ℤ), S a = -a ∧ ∀ x ∈ roots, S x ∈ roots) ∧
     ∀ f : ℤ × ℤ →+ ℚ, f (3, 0) = 2 →
       (∀ x ∈ roots, ∃ y ∈ roots, (x.1 : ℚ) - f x * 3 = y.1 ∧ (x.2 : ℚ) = y.2) →
-      ¬ ∃ n : ℤ, f (1, 1) = n := by
-  refine ⟨generates, neg_mem, reduced_rat, symmetries, fun f ha hS => ?_⟩
-  rw [cartan_eq_two_thirds f hS ha]
-  exact cartan_not_int
+      ¬ ∃ n : ℤ, f (1, 1) = n :=
+  ⟨generates, neg_mem, reduced_rat, symmetries, fun f ha hS =>
+    cartan_eq_two_thirds f hS ha ▸ cartan_not_int⟩
 
 end Grothendieck.Folder44
