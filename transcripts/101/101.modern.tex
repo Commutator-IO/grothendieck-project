@@ -12,6 +12,13 @@
 % (pp. 1-20), batch-02.fr.tex (pp. 21-40) or batch-03.fr.tex (pp. 41-42).
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — with the Lean check
+% (Folder101.lean): the duality maps of p. 11 renamed after p. 10's phi^i
+% (phi^1 : Ext^0 -> Hom(Coker u, K/A), phi^0 : Ext^1 -> Hom(Ker u, K/A));
+% the first pass followed p. 11, whose labels are swapped relative to p. 10;
+% duality in dimension one footnoted as checked in the page's model of
+% triples, fact c) being Baer's criterion (Module.Baer in mathlib). The
+% findings record no literature; no facsimile correction since the pass.
 % The folder was read whole, its three batches together; this is one document
 % for the shelfmark. It was made on Opus 5.5 and has not been measured against
 % the reference reading of folder 115 (made on Opus 5). The literature named
@@ -492,29 +499,51 @@ La résolution injective $\mathcal{O}_X \to \underline{K}_X \to
 le complexe étant placé en degrés $0$ et $1$, la flèche étant $g \mapsto g
 \circ u \bmod A$. Les homomorphismes de dualité deviennent
 \[
-  \varphi^0 : \operatorname{Ext}^0 \to \operatorname{Hom}(\operatorname{Coker} u,
+  \varphi^1 : \operatorname{Ext}^0 \to \operatorname{Hom}(\operatorname{Coker} u,
   K/A), \qquad
-  \varphi^1 : \operatorname{Ext}^1 \to \operatorname{Hom}(\operatorname{Ker} u,
+  \varphi^0 : \operatorname{Ext}^1 \to \operatorname{Hom}(\operatorname{Ker} u,
   K/A),
 \]
+indexés, comme à la page 10, par le degré de cohomologie locale ($\operatorname{Coker} u
+= H^1_x(F)$, $\operatorname{Ker} u = H^0_x(F)$)\footnote{La page 11 écrit
+$E^0 \xrightarrow{\varphi^0} \operatorname{Hom}(\operatorname{Coker} u, K/A)$
+et $E^1 \xrightarrow{\varphi^1} \operatorname{Hom}(\operatorname{Ker} u, K/A)$,
+indexant par le degré de l'$\operatorname{Ext}$ ; la définition de la page 10,
+$\varphi^i_F : \operatorname{Ext}^{n-i} \to \operatorname{Hom}(H^i_x(F), I)$,
+donne pour $n = 1$ l'indexation contraire. La première version de cette
+lecture suivait la page 11 et contredisait ainsi la page 10 ; on suit ici la
+page 10, et les deux applications échangent leurs noms dans a), b) et c).},
 et ce sont des isomorphismes par les trois faits suivants :
 \begin{enumerate}
 \item[a)] tout homomorphisme d'un $K$-espace vectoriel dans $A$ est nul, son
-image étant un sous-module divisible de $A$ ; donc $\varphi^0$ est injectif ;
+image étant un sous-module divisible de $A$ ; donc $\varphi^1$ est injectif ;
 \item[b)] $\operatorname{Ext}^1_A(K, A) = 0$, parce que $A$ est complet : dans
 la suite exacte $\operatorname{Hom}(K, K) \to \operatorname{Hom}(K, K/A) \to
 \operatorname{Ext}^1(K, A) \to 0$, la première flèche est surjective, car
 $\operatorname{Hom}(K, K/A) \simeq \widehat{K} = K$. Tout homomorphisme
 $M_1 \to K/A$ se relève donc en $M_1 \to K$ (automatiquement $K$-linéaire),
-et $\varphi^0$ est surjectif ;
+et $\varphi^1$ est surjectif ;
 \item[c)] $K/A$ est injectif : tout homomorphisme $\operatorname{Ker} u \to K/A$
-s'étend à $M_0$, et $\varphi^1$ est surjectif ; un homomorphisme $M_0 \to K/A$
+s'étend à $M_0$, et $\varphi^0$ est surjectif ; un homomorphisme $M_0 \to K/A$
 nul sur $\operatorname{Ker} u$ se factorise par $u(M_0) \subset M_1$, s'étend
 à $M_1$, se relève à $K$ par b), et vient donc de $\operatorname{Hom}(M_1, K)$
-: $\varphi^1$ est injectif\footnote{La fin de c) ne se lit qu'en partie ; nous
+: $\varphi^0$ est injectif\footnote{La fin de c) ne se lit qu'en partie ; nous
 avons rétabli l'argument dans l'ordre logique. L'insertion
 « $\widehat{K} = K$ » et la remarque « $A$ complet » sont sur la page, au-dessus
-de b).}.
+de b). Vérifié en Lean (lean/Grothendieck/Folder101.lean,
+\texttt{duality\_dim\_one}, avec \texttt{eq\_zero\_of\_mem}, \texttt{lift\_K},
+\texttt{lift\_vs} et \texttt{baer\_KA}), dans le modèle des triplets de la
+page : pour $A$ de valuation discrète complet et tout triplet $(M_0, M_1, u)$,
+les deux applications sont bijectives. Les trois faits sont démontrés : a) tel
+quel ; b) en écrivant tout $f : K \to K/A$ comme $x \mapsto cx \bmod A$, la
+série de la page convergeant par complétude, ce qui relève tout
+homomorphisme d'un $K$-espace vectoriel dans $K/A$ ; c) par le critère de
+Baer, $A$ étant principal et $K/A$ divisible --- c'est
+\texttt{Module.Baer.extension\_property} (et \texttt{Module.Baer.injective})
+dans mathlib. La fin de l'argument d'injectivité, telle que nous l'avons
+rétablie, est juste, et la complétude ne sert qu'en b). Ne sont pas
+formalisés l'équivalence entre $\mathcal{O}_X$-Modules et triplets, ni le
+calcul des $\operatorname{Ext}$ et des $H^i_x$ dans ce modèle.}.
 \end{enumerate}
 
 La dualité locale vaut donc, en dimension $1$, pour \emph{tous} les
