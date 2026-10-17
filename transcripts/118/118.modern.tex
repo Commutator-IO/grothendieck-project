@@ -12,6 +12,15 @@
 % batch-01.fr.tex and batch-02.fr.tex.
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — with the Lean check
+% (Folder118.lean): the « Non » of p. 35 checked in a 1-truncated model, W_A
+% for BG stable under products of any family (infinite products included,
+% for this example). Literature of the findings cited: Cisinski, Astérisque
+% 308, 4.3.2 (condition (g) against the example), 4.3.1-4.3.2 and
+% Maltsiniotis 2001, Prop. 7.1, for (iv) <=> a x b aspherical (pp. 33-34),
+% Cisinski 4.2.4 for strong saturation (pp. 39-40), Cisinski §5.1 beside the
+% pushout theorem of p. 20. No mathlib result; no facsimile correction since
+% the pass.
 %
 % Scope: the folder was read whole — two batches, pages 1-40 — before any of
 % this was written, and it is ONE file for the shelfmark. Pages 3, 5, 6, 9,
@@ -734,7 +743,13 @@ de diagrammes de $(Y = Y \xrightarrow{g} Y')$ vers $(Y \xrightarrow{i} X,\ Y \xr
  induit une flèche de $\mathcal{W}$ entre leurs $\int$,
 et $Y' \to \int(\mathrm{id}_{Y}, g)$ est un homotopisme ; la composée
 $Y' \to \int(i, g) \to X'$ est $i'$, et les deux facteurs sont dans
-$\mathcal{W}$. De même pour $f$\footnote{La déduction est la nôtre.}.
+$\mathcal{W}$. De même pour $f$\footnote{La déduction est la nôtre. Les
+résultats publiés voisins, D.-C. Cisinski, Astérisque 308 (2006), §5.1
+(carrés $\mathcal{W}$-homotopiquement cocartésiens 5.1.2, lemmes 5.1.10 à
+5.1.12, propositions 5.1.13 et 5.1.16), portent sur des sommes amalgamées le
+long d'immersions fermées ou de cofibrations formelles, non sur des
+hypothèses de cofibration sur $f$ et $i'$ ; nous n'avons pas vérifié si le
+carré du théorème s'y ramène.}.
 
 \pagerange{21}{22}
 \section*{Dans les préfaisceaux, et une mise en garde (pages 21 et 22)}
@@ -1064,7 +1079,14 @@ des doubles flèches. Sa propre démonstration n'obtient que les énoncés
 ci-dessous, et la page 35 montre que (iv) n'implique pas (i). La page 32 écrit
 (iv) avec $\mathrm{Hot}_{A}(\mathcal{W})$, la page 34 avec
 $\mathrm{Hot}(\mathcal{W})$ ; la démonstration porte sur
-$\mathrm{Hot}$.} :
+$\mathrm{Hot}$. L'équivalence entre (iv) et l'asphéricité des $a \times b$, et
+celle de (i) avec sa conjonction avec l'asphéricité de $A$, sont dans
+G.~Maltsiniotis, \emph{La théorie de l'homotopie de Grothendieck} (version
+provisoire, 2001), proposition 7.1, (a) $\Leftrightarrow$ (b)
+$\Leftrightarrow$ (b$'$), avec le même isomorphisme de tranches, et
+définition 7.2, exposé qui se présente comme celui de \emph{Pursuing
+Stacks} ; et dans D.-C. Cisinski, Astérisque 308 (2006), 4.3.1 et proposition
+4.3.2, (a) $\Leftrightarrow$ (c) $\Leftrightarrow$ (d).} :
 \begin{itemize}
 \item (ii) $\Leftrightarrow$ (ii bis), et il suffit de prendre pour $Z$ les
 représentables $a$ : la condition se teste localement sur $Z$ ;
@@ -1098,9 +1120,33 @@ de $G$-ensembles qui induit une bijection sur les orbites et des isomorphismes
 sur les stabilisateurs est un isomorphisme --- et elle est stable par produits
 finis, alors que $A$, de nerf $BG$, n'est pas asphérique\footnote{La raison
 donnée pour « $\mathcal{W}_{A}$ formé des seuls iso » est la nôtre ; la page
-renvoie à l'équivalence faible « habituelle ».}.
+renvoie à l'équivalence faible « habituelle ». Vérifié en Lean
+(lean/Grothendieck/Folder118.lean, \texttt{isWeq\_iff\_bijective},
+\texttt{isWeq\_prod}, \texttt{isWeq\_pi}, \texttt{not\_aspherical\_point},
+\texttt{not\_aspherical\_regular\_prod}, \texttt{answer\_page\_35}), dans un
+modèle tronqué en degré $1$ où une équivalence faible de groupoïdes est une
+bijection sur les composantes et un isomorphisme sur les groupes
+d'automorphismes, et un groupoïde asphérique un groupoïde connexe à
+automorphismes triviaux --- caractérisations classiques prises pour
+définitions. Une flèche de $G$-ensembles est dans $\mathcal{W}_{A}$ si et
+seulement si elle est bijective (notre raison, et sa réciproque), de sorte que
+$\mathcal{W}_{A}$ est stable par produits de toute famille, finie ou non ; pour
+$G \neq 1$, ni $A = A_{/e}$, ni $a \times a$ pour le $G$-ensemble régulier $a$
+ne sont asphériques, $(1, 1)$ et $(1, g)$ étant dans deux orbites distinctes.
+L'exemple bute sur une proposition publiée : D.-C. Cisinski, \emph{Les
+préfaisceaux comme modèles des types d'homotopie}, Astérisque 308 (2006),
+proposition 4.3.2, range parmi les conditions équivalentes à (a), asphéricité
+des $a \times b$, une condition (g), stabilité des $\mathcal{W}$-équivalences
+de préfaisceaux par produits finis ; pour $A = BG$, $G \neq 1$, (g) est
+satisfaite et (a) ne l'est pas, de sorte que (g) paraît seulement
+impliquée par les autres conditions, non équivalente à elles. G.~Maltsiniotis, \emph{La théorie de l'homotopie de
+Grothendieck} (version provisoire, 2001), proposition 7.1, ne range pas cette
+condition parmi les siennes. Cette comparaison est de l'édition ; reste à voir
+si le texte publié ou un erratum restreint (g).}.
 
-Les produits infinis restent en suspens. Il faudrait savoir qu'un produit de
+Les produits infinis restent en suspens --- sauf dans l'exemple qu'on vient
+de donner, où $\mathcal{W}_{A}$, formé des bijections, est stable par tous
+produits. Dans le cas général, il faudrait savoir qu'un produit de
 flèches de $\mathcal{W}$ est dans $\mathcal{W}$, ou le même énoncé dans un
 $\widehat{A}$, le second impliquant le premier ; « déjà pour l'équiv. faible
 habituelle $\mathcal{W}_{0}$, ce n'est pas évident ». Il suggère de passer
@@ -1179,7 +1225,10 @@ sens est celui de la seconde. Le corollaire est énoncé sans démonstration ; i
 découle du théorème en une ligne : si $\gamma_{A}(f)$ est inversible dans
 $\mathrm{Hot}_{A}$, son image par le foncteur $\mathrm{Hot}_{A} \to
 \mathrm{Hot}$ induit par $i_{A}$ l'est, donc $i_{A}(f) \in \mathcal{W}$,
-c'est-à-dire $f \in \mathcal{W}_{A}$. La démonstration est la nôtre.}. Une
+c'est-à-dire $f \in \mathcal{W}_{A}$. La démonstration est la nôtre.
+L'énoncé est connu : « Tout localisateur fondamental est fortement saturé »,
+D.-C. Cisinski, Astérisque 308 (2006), proposition 4.2.4, démontré par une
+$\mathcal{W}$-catégorie test, non par le télescope de la page 40.}. Une
 première démonstration, sur la page 39, est barrée de deux longs traits : elle
 partait de $f : X \to Y$ et de $g : Y \to X'$, $f' : X' \to Y'$, avec
 $\gamma(gf) = \gamma(\alpha)$ et $\gamma(f'g) = \gamma(\beta)$ pour
