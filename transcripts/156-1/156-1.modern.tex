@@ -67,6 +67,19 @@
 % segments with the same extremities (pages 25-26), which stops mid-sentence;
 % the equivalence relation on singular lieux announced on page 9 (and posited
 % as E1 on page 2); the recursion on dimension n announced on page 1.
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder156_1.lean) and the literature of the
+% finding 156-1-branching-without-branch-point:
+% — pages 12-13: the biorder proposition and its converse footnoted as
+%   checked in both directions; the forward direction uses only F1, F2, F'3,
+%   F4; F'3 is exactly the two directedness conditions; F4 holds in the
+%   converse without its regularity hypothesis; a non-total example in Q^2.
+% — page 21: the bifurcation without a branch point compared with the
+%   branching line of non-Hausdorff one-manifolds (Baillif-Gabard;
+%   Haefliger-Reeb 1957, known only through secondary sources).
+% The biorder finding is unsearched; its abstracts-only literature is not
+% cited. No facsimile check since 2026-10-10.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -581,9 +594,21 @@ ne se rencontrent qu'en $z$, régulier, et leur recollé est le segment
 d'extrémités $x$, $y$) ; a) est F2 ; b) est F$'$3 appliqué au segment
 $[x,x_{1}]$ en son extrémité $x$, et b$'$) de même avec $[x_{0},x]$. Pour la réciproque, F1 à
 F5 se vérifient directement sur les intervalles, F3 et F$'$3 grâce à b) et
-b$'$).}. Ce qu'elle n'énonce pas, et qu'il faut souligner, c'est que l'ordre
+b$'$). Vérifié en Lean (lean/Grothendieck/Folder156\_1.lean,
+\texttt{SegModel.biorder}, \texttt{SegModel.le\_swap},
+\texttt{intervals\_axioms}, \texttt{intervals\_segModel} et
+\texttt{intervals\_le\_iff}) : les deux sens tiennent. Le sens direct
+n'utilise que F1, F2, F$'$3 et F4, ni F3 ni F5 ; F$'$3 donne exactement les
+deux filtrations b) et b$'$), et c'est F4, en un lieu régulier, qui fait de
+chaque intervalle un segment. Dans la réciproque, F4 vaut même sans son
+hypothèse de régularité, et des bornes on n'utilise que $x_{0} \neq x_{1}$ et
+que l'ensemble entier soit l'intervalle $[x_{0}, x_{1}]$.}. Ce qu'elle n'énonce pas, et qu'il faut souligner, c'est que l'ordre
 soit total : il ne l'est pas en général, et c'est le point c) de la page 5 vu
-autrement. Le cardinal de $\mathcal{L}$ est infini, par la densité.
+autrement\footnote{Exemple de l'édition, vérifié en Lean
+(lean/Grothendieck/Folder156\_1.lean, \texttt{Diamond.example\_segModel}) :
+dans $\mathbb{Q}^{2}$, ordonné par $p < q$ si $|q_{2} - p_{2}| < q_{1} - p_{1}$,
+l'ensemble des points compris entre $(0,0)$ et $(2,0)$ vérifie a), b) et b$'$),
+et contient deux points non comparables.}. Le cardinal de $\mathcal{L}$ est infini, par la densité.
 
 Échanger $x_{0}$ et $x_{1}$ remplace l'ordre par l'ordre opposé, et les
 conditions a), b), b$'$) sont autoduales. D'où la conclusion de la page 13 :
@@ -747,7 +772,17 @@ cardinal $\geq 2$, est barré de quatre traits et s'interrompt.}. Dans le
 modèle correspondant, le tronc se dédouble sans qu'aucun lieu marque la
 bifurcation : chaque lieu est régulier, d'ordre $2$, et pourtant la forme
 bifurque. F1 à F5 ne voient pas cette bifurcation, parce qu'elle a lieu
-« entre » des lieux, en un endroit où il n'y a pas de lieu.
+« entre » des lieux, en un endroit où il n'y a pas de lieu.\footnote{Le
+phénomène est connu en topologie, comme variété non séparée de dimension 1 :
+c'est la « droite branchée », deux copies de $\mathbb{R}$ identifiées le long
+des réels négatifs, exemple standard chez M.~Baillif et A.~Gabard,
+« Manifolds: Hausdorffness versus homogeneity » (arXiv:math/0609098) ; les
+variétés non séparées de dimension 1 sont étudiées par A.~Haefliger et
+G.~Reeb, « Variétés (non séparées) à une dimension et structures feuilletées
+du plan », \emph{Enseign.\ Math.}\ 3 (1957), que l'édition ne connaît que par
+des sources secondaires. Le rapprochement est le nôtre ; la page ne cite
+personne. Qu'une condition combinatoire comme F6 figure dans une axiomatique
+publiée des espaces de dimension 1 n'a pas été cherché.}
 
 \pagerange{22}{22}
 \section*{L'axiome F6 (page 22)}
