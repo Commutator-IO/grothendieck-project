@@ -11,6 +11,13 @@
 %
 % Pass: Opus 5 (claude-opus-5), 2026-09-19 — first pass, unchecked against the
 % pages by a human. The model was chosen explicitly for this pass.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% checks of 2.15/2.16 (lean/Grothendieck/Folder21.lean: Artin-Rees containment
+% with the ambient module confirmed, finiteness used only through the A/I^m,
+% 2.16's extension argument needs no finiteness; mathlib declarations for Baer
+% and Artin-Rees; the open mathlib PR n° 44724), and with the literature of the
+% matched finding on pp. 15-20 and 27-28 (SGA 2 XIV §1, Raynaud), which
+% confirms the lowered ranges of Cor. 10. Body unchanged otherwise.
 %
 % Scope: one document for the shelfmark, its two batches read as one argument.
 % Twenty-four of the twenty-eight leaves carry mathematics; pages 1 and 14 are
@@ -792,7 +799,12 @@ puissance de $I$.
 La nécessité est triviale. Pour la suffisance, il suffit — c'est le critère de
 Baer, qu'il cite sous le nom de \emph{Tohoku} — de vérifier que pour tout
 sous-module $N$ de $A$, l'application $\mathrm{Hom}(A,H) \to \mathrm{Hom}(N,H)$
-est surjective, ce qui ramène au cas où $M$ et $N$ sont de type fini. Soit donc
+est surjective, ce qui ramène au cas où $M$ et $N$ sont de type fini.\footnote{Le
+critère de Baer est \texttt{Module.Baer.injective} dans mathlib ; c'est par lui
+que passe la vérification en Lean (lean/Grothendieck/Folder21.lean,
+\texttt{proposition2\_15}), qui confirme l'énoncé tel qu'il est lu ici, $H$ étant,
+comme le veulent « les notations précédentes », un module dont tout élément est
+annulé par une puissance de $I$.} Soit donc
 $u : N \to H$. Son image est un sous-module de type fini de $H$, donc annulé par
 une puissance de $I$ : $u$ est nul sur $I^{n}N$. Par le lemme d'Artin--Rees, il
 existe $m$ tel que $N \cap I^{m}M \subset I^{n}N$.\footnote{Le feuillet écrit
@@ -800,19 +812,42 @@ existe $m$ tel que $N \cap I^{m}M \subset I^{n}N$.\footnote{Le feuillet écrit
 — avec $N$ au second membre, là où le déploiement qui suit immédiatement écrit
 $N \cap I^{m}M$, qui est le seul terme dont l'énoncé ait besoin. C'est le lemme
 d'Artin--Rees ; le théorème d'intersection de Krull en est le corollaire usuel,
-et c'est lui qu'il nomme.} On a alors une injection
+et c'est lui qu'il nomme. Il ne donne pas à lui seul l'inclusion utile, et
+celle du feuillet, $N \cap I^{m}N \subset I^{n}N$, est triviale pour
+$m \geqslant n$ et ne sert à rien. La vérification en Lean
+(lean/Grothendieck/Folder21.lean, \texttt{proposition2\_15}) emploie exactement
+l'inclusion $N \cap I^{m}M \subset I^{n}N$ pour $M = A$, tirée de la forme
+$I^{p}M \cap N = I^{p-k}(I^{k}M \cap N)$ ($p \geqslant k$) du lemme
+d'Artin--Rees, qui est \texttt{Ideal.exists\_pow\_inf\_eq\_pow\_smul} dans
+mathlib ; elle confirme ainsi la correction.} On a alors une injection
 $0 \to N/(N \cap I^{m}M) \to M/I^{m}M$ dans $\mathcal{C}$, et $u$ se factorise
 par un homomorphisme $u' : N/(N \cap I^{m}M) \to H$, lequel par hypothèse se
-prolonge à $M/I^{m}M$ ; d'où $v : M \to H$ prolongeant $u$.
+prolonge à $M/I^{m}M$ ; d'où $v : M \to H$ prolongeant $u$.\footnote{La
+vérification en Lean fait une observation de plus, qui est de l'édition : les
+objets de $\mathcal{C}$ n'interviennent dans la suffisance qu'à travers les
+modules monogènes $A/I^{m}$. Il suffit donc, pour que $H$ soit injectif, que les
+homomorphismes vers $H$ se prolongent le long des inclusions
+$N/(N \cap I^{m}) \hookrightarrow A/I^{m}$, $N$ idéal de $A$.}
 
 \emph{Corollaire 2.16.} Soit $K$ un $A$-module et soit $H^{0}_{I}(K)$ le
 sous-module des éléments annulés par une puissance de $I$. Si $K$ est injectif,
 $H^{0}_{I}(K)$ l'est aussi.
 
-En effet, lorsque $M$ parcourt $\mathcal{C}$, l'inclusion induit un isomorphisme
-fonctoriel $\mathrm{Hom}(M, H^{0}_{I}(K)) \xrightarrow{\ \sim\ }
-\mathrm{Hom}(M,K)$ — un homomorphisme d'un module de $I$-torsion de type fini
-atterrit dans la partie de $I$-torsion — et il suffit d'appliquer 2.15.
+En effet, lorsque $M$ parcourt $\mathcal{C}$, l'inclusion induit un
+isomorphisme fonctoriel
+\[
+  \mathrm{Hom}(M, H^{0}_{I}(K)) \xrightarrow{\ \sim\ } \mathrm{Hom}(M,K)
+\]
+— un homomorphisme d'un module de $I$-torsion de type fini
+atterrit dans la partie de $I$-torsion — et il suffit d'appliquer 2.15.\footnote{Vérifié
+en Lean (lean/Grothendieck/Folder21.lean, \texttt{corollaire2\_16}), sous la
+forme : tout homomorphisme vers $H^{0}_{I}(K)$ défini sur un sous-module d'un
+$M \in \mathcal{C}$ se prolonge à $M$, en le prolongeant dans $K$. La
+vérification observe, et c'est de l'édition, que cet argument n'use d'aucune
+finitude de $M$, seulement de ce qu'il est annulé par une puissance de $I$ ; la
+noethérianité de $A$ n'y sert qu'à invoquer 2.15. L'énoncé selon lequel la
+composante $I$-primaire d'un module injectif sur un anneau noethérien est
+injective est proposé à mathlib (PR ouverte n° 44724).}
 C'est l'énoncé que le foncteur de $I$-torsion préserve les
 injectifs.\footnote{La notation $H^{0}_{I}$ est la sienne, et c'est la seule
 occurrence, dans tout le tapuscrit, d'un symbole de cohomologie locale. Le
@@ -921,7 +956,19 @@ $F$ un faisceau d'ensembles sur $X$. Sont équivalentes :
 \emph{Corollaire 4.} Si $F$ satisfait $(P_{1})$, resp. $(P_{2})$, relativement à
 $Y$, alors pour tout ouvert $X' \subset X$ et toute partie fermée $Y'$ de $X'$
 avec $Y' \subset X' \cap Y$, le faisceau $F|X'$ satisfait $(P_{1})$, resp.
-$(P_{2})$, relativement à $Y'$.
+$(P_{2})$, relativement à $Y'$.\footnote{La même suite d'énoncés figure,
+pour la topologie étale, dans SGA~2, exposé XIV (M.~Raynaud, « Profondeur et
+théorèmes de Lefschetz en cohomologie étale »), §~1 : la Proposition 1.1
+définit la profondeur $\geqslant 2$ d'un faisceau d'ensembles par
+l'injectivité, resp. la bijectivité, de $F \to i_{*}i^{*}F$, et $\geqslant 3$
+pour un faisceau de groupes ; le Corollaire 1.3 est le passage à un fermé plus
+petit, notre Corollaire 4 ; le Théorème 1.8 donne la caractérisation ponctuelle
+$\mathrm{prof}_{Y}(F) = \inf_{y \in Y} \mathrm{prof}_{y}(F)$, démontrée en
+prenant un point maximal du complémentaire du plus grand ouvert où la propriété
+vaut, comme aux pages 19 et 20. Raynaud y emploie les localisés stricts là où
+le dossier prend le localisé de Zariski $X_{(x)}$. L'exposé est donné
+« d'après des notes inédites de A. Grothendieck » ; nous ne prétendons pas que
+ces feuillets en fassent partie.}
 
 La démonstration du corollaire est celle qui passe le mieux sur le feuillet 18,
 et elle est purement formelle. Avec $U' = X' - Y'$, on a le triangle commutatif
@@ -1207,7 +1254,11 @@ satisfait à $P_{1}$ ($P_{2}$, $P_{3}$) », avec $F$ là où toute la page préc
 porte sur $\mathcal{F}$. Les trois conditions n'ont de sens à trois niveaux que
 pour une catégorie fibrée ; c'est ainsi que l'énoncé est lu ici, $F$ étant le
 faisceau abélien dont $\mathcal{F}$ est, comme au feuillet suivant, la catégorie
-des torseurs.}
+des torseurs. Les plages corrigées sont aussi celles de SGA~2, exposé XIV,
+Proposition 1.1, 3° (la profondeur le long de $Y$ est $\geqslant n$ si et
+seulement si $\underline{H}^{p}_{Y} = 0$ pour $p < n$) et Corollaire 1.4
+(restriction des torseurs fidèle, pleinement fidèle, équivalence), où la
+profondeur $\geqslant 3$ correspond au prolongement des torseurs.}
 
 Le feuillet donne, pour le cas $(P_{3})$, l'identification qui fait tout :
 \[
