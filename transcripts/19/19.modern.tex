@@ -39,6 +39,14 @@
 %
 % Pass: Opus 5 (claude-opus-5), 2026-08-22 — first pass, unchecked against the
 % pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — refined with the Lean checks
+% of lean/Grothendieck/Folder19.lean, mathlib and the literature of the
+% folder's findings: the page-7 proviso « ou I fini » is false and is replaced
+% by « I fini et f_j exacts à gauche »; the degenerate cases of page 8 are put
+% under the page's own hypothesis that the g_i are fully faithful; Lean and
+% mathlib declarations named for Théorème 1.12, (3.9), the two-factor formula
+% and Gabriel-Popescu (Mitchell 1981); Adámek-Herrlich-Strecker ch. 5 and SGA 1
+% VI cited for pages 71-75.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -275,7 +283,7 @@ comonadique, et conservative. Les deux flèches $(\ast, \ast) \rightrightarrows
 $(\varnothing, \ast)$ dans $B$, et $(\varnothing, \varnothing)$ dans $A$ : $f$ ne
 commute pas à ce noyau. La condition nécessaire et suffisante est celle de Beck,
 qui ne porte que sur les doubles flèches dont l'image a un noyau \emph{scindé}.
-Vérifié en Lean, \texttt{lean/Grothendieck/Folder19.lean}.} C'est le
+Vérifié en Lean (lean/Grothendieck/Folder19.lean, \texttt{theoreme\_b\_necessite\_fausse}) : le contre-exemple y est formalisé, l'inclusion y est comonadique et ne vérifie pas la condition C. Le même fichier vérifie a), sous la forme de la marge (\texttt{theoreme\_a}) et sous celle du texte, et la suffisance de b) (\texttt{theoreme\_b\_suffisance}) ; celle-ci n'est qu'une application du théorème de comonadicité de Beck tel qu'il est dans mathlib, \texttt{Comonad.comonadicOfHasPreservesFSplitEqualizersOfReflectsIsomorphisms}. La forme exacte, nécessaire et suffisante, avec les doubles flèches $f$-scindées (\texttt{beck\_iff}), s'obtient en joignant à ce théorème sa réciproque, \texttt{Comonad.createsFSplitEqualizersOfComonadic}, elle aussi dans mathlib.} C'est le
 théorème de comonadicité de Beck, à la condition près.\footnote{La page porte
 un nom propre entre parenthèses après « Théorème 1.12 », que la transcription
 lit « Beck » sans certitude. La forme monadique du théorème est celle de la
@@ -382,7 +390,18 @@ décompose. En posant
   \varphi_{ji} \;=\; f_{j} g_{i} \;:\; B_{i} \longrightarrow B_{j}
 \]
 et en supposant que les $f_{j}$ commutent aux produits indexés par $I$ — ce qui
-est automatique si $I$ est fini, ou si les $f_{j}$ sont exacts — on obtient
+a lieu par exemple si $I$ est fini et les $f_{j}$ exacts à gauche — on
+obtient\footnote{La page donne deux exemples de cette hypothèse : « p.~ex.\
+$f_{j}$ exacts ; ou $I$ fini ». Le second est faux : un adjoint à gauche ne
+commute pas en général aux produits finis. Avec $I$ à deux éléments,
+$A = B_{0} = B_{1}$ la catégorie des ensembles, $f_{i} = \{0,1\} \times -$,
+adjoint à gauche de $X \mapsto X^{\{0,1\}}$, et $X_{0} = X_{1}$ un point, la
+composante $j$ de $\varphi((X_{i}))$ a deux éléments, et
+$\prod_{i} \varphi_{ji}(X_{i})$ en a quatre. Vérifié en Lean
+(lean/Grothendieck/Folder19.lean, \texttt{matrice\_fini\_fausse}) ; la formule
+elle-même, sous l'hypothèse de commutation aux produits, y est vérifiée
+(\texttt{matrice}). L'erreur est sur la page, et la première version de cette
+lecture l'avait reprise.}
 \[
   \mathrm{pr}_{j}\, \varphi\bigl( (X_{i}) \bigr)
   \;=\; \prod_{i \in I} \varphi_{ji}(X_{i}) .
@@ -393,15 +412,34 @@ structure se réécrit en une famille de flèches
   \lambda_{kji} \;:\; \varphi_{ki} \longrightarrow \varphi_{kj}\varphi_{ji} ,
 \]
 qui n'est autre que $f_{k} g_{i} \to f_{k}\, g_{j} f_{j}\, g_{i}$, obtenue en
-insérant l'unité $\mathrm{id} \to g_{j} f_{j}$ au milieu. Les axiomes de
+insérant l'unité $\mathrm{id} \to g_{j} f_{j}$ au milieu.\footnote{Les
+formules (3.9) de la page, qui expriment la coünité et la comultiplication de
+$\varphi$ par $\alpha_{k}(X_{k}) \circ \mathrm{pr}_{k}$ et
+$\lambda_{kji}(X_{i}) \circ \mathrm{pr}_{i}$, valent sans aucune hypothèse ; la
+commutation des $f_{j}$ aux produits sert seulement à ce qu'elles déterminent
+$\delta$. Vérifié en Lean (lean/Grothendieck/Folder19.lean,
+\texttt{counit\_matrice}, \texttt{comult\_matrice}, \texttt{comult\_unique}),
+ainsi que la note marginale de la page 8, $\lambda_{iii} = \lambda_{i}$
+(\texttt{lam\_diag}).} Les axiomes de
 coünité et de coassociativité se traduisent en relations entre les
 $\lambda_{kji}$, que le manuscrit renonce à écrire. Il observe seulement que
-pour $i = j = k$ on retrouve la comultiplication de $\varphi_{i}$, et que les
-cas où deux indices consécutifs coïncident ($i = j$ ou $j = k$) sont
-dégénérés : l'un des deux facteurs de $\varphi_{kj}\, \varphi_{ji}$ est alors
+pour $i = j = k$ on retrouve la comultiplication de $\varphi_{i}$. Puis il se
+place dans « le cas le plus intéressant », celui où les $g_{i}$ sont pleinement
+fidèles, de sorte que les coünités $\varphi_{ii} \to \mathrm{id}_{B_{i}}$ sont
+des isomorphismes et qu'on peut prendre $\varphi_{ii} = \mathrm{id}_{B_{i}}$ ;
+les cas où deux indices consécutifs coïncident ($i = j$ ou $j = k$) sont alors
+dégénérés : l'un des deux facteurs de $\varphi_{kj}\, \varphi_{ji}$ est
 l'identité, et $\lambda_{kji}$ l'est aussi.\footnote{Lecture de la page 8
 revue sur le fac-similé le 15 octobre 2026 ; la première passe y lisait « deux
-des $i, j, k$ ».} Ne restent que le cas
+des $i, j, k$ ». Le mot qui précède « $\lambda_{kji}$ l'identité » reste
+illisible. L'hypothèse de pleine fidélité est nécessaire : sans elle,
+$\lambda_{kki}$ et $\lambda_{kjj}$ ne sont pas inversibles en général. Avec
+elle, ce sont des isomorphismes, et des identités une fois $\varphi_{ii}$
+identifié à $\mathrm{id}_{B_{i}}$ ; vérifié en Lean
+(lean/Grothendieck/Folder19.lean, \texttt{lam\_isIso\_left},
+\texttt{lam\_isIso\_right}), de même que l'identification de $\lambda_{iji}$ à
+l'unité $\mathrm{id}_{B_{i}} \to \varphi_{ij}\varphi_{ji}$ composée avec la
+coünité (\texttt{lam\_eq\_counit\_comp\_lamUnit}).} Ne restent que le cas
 des trois indices distincts et le cas $i = k \neq j$, qui donne
 \[
   \mathrm{id}_{B_{i}} \longrightarrow \varphi_{ij}\, \varphi_{ji}
@@ -423,7 +461,12 @@ et deux flèches
   \lambda'' : \mathrm{id}_{B''} \longrightarrow \varphi'' \varphi' ,
 \]
 avec $\varphi(X', X'') = \bigl( X' \times \varphi'(X''),\ \varphi''(X') \times
-X'' \bigr)$.
+X'' \bigr)$.\footnote{Cette formule demande que $f'$ et $f''$ commutent aux
+produits binaires, ce que la page tient de son hypothèse générale sur les
+$f_{j}$ ; sous cette hypothèse elle est vérifiée en Lean
+(lean/Grothendieck/Folder19.lean, \texttt{deuxFacteurs\_left},
+\texttt{deuxFacteurs\_right}). La description de $A$ par les quadruplets qui
+suit ne l'est pas.}
 
 La catégorie $A$ s'explicite alors complètement : ses objets sont les
 quadruplets $(X', X'', u', u'')$ où
@@ -558,7 +601,14 @@ L'énoncé vrai est le suivant. Le foncteur $\mathrm{Hom}_{C}(U, -) : C \to
 \mathbf{Mod}_{R}$ est pleinement fidèle, et son adjoint à gauche $- \otimes_{R}
 U$ est exact : c'est le théorème de Gabriel--Popescu, et il présente $C$ comme
 une \emph{localisation} de $\mathbf{Mod}_{R}$, non comme
-$\mathbf{Mod}_{R}$.\footnote{Gabriel--Popescu, 1964. Le manuscrit invoque
+$\mathbf{Mod}_{R}$.\footnote{Gabriel--Popescu, 1964. Sous cette forme, c'est
+un théorème de mathlib, dans l'espace de noms
+\texttt{IsGrothendieckAbelian} : \texttt{GabrielPopescu.full} et
+\texttt{GabrielPopescu.preservesFiniteLimits} ; le
+fichier source renvoie à B.~Mitchell, « A quick proof of the Gabriel--Popesco
+theorem », \emph{J. Pure Appl. Algebra} 20 (1981) ; la preuve en Lean
+(lean/Grothendieck/Folder19.lean, \texttt{gabriel\_popescu}) ne fait que
+l'invoquer. L'énoncé de Morita qui suit n'y est pas vérifié. Le manuscrit invoque
 $\mathrm{Hom}_{C}(U, M \otimes_{R} U) \simeq M$ comme « bien connu » ; cette
 formule vaut pour tout $M$ exactement quand $U$ est petit et projectif. La
 page, qui ne suppose que « générateur », affirme donc une équivalence là où
@@ -1865,7 +1915,11 @@ des groupoïdes.
 demande de pouvoir factoriser une flèche quelconque par une flèche cartésienne,
 donc que $p$ soit une fibration ; c'est l'hypothèse qu'on a explicitée. Quant à
 l'antisymétrie, l'auteur y revient lui-même au bas de la page 74 : les fibres
-sont en général préordonnées et non ordonnées, et il faut les réduire.}
+sont en général préordonnées et non ordonnées, et il faut les réduire. Ces
+énoncés sont aujourd'hui classiques : catégories concrètes et transport de
+structure chez Adámek, Herrlich et Strecker, \emph{Abstract and Concrete
+Categories}, ch.~5 ; catégories fibrées, et catégorie des éléments d'un
+préfaisceau comme cas discret, dans SGA~1, exposé~VI.}
 
 
 \textbf{Le théorème.} Pour un foncteur $p : E \to B$, les conditions suivantes
