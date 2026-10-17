@@ -6,6 +6,13 @@
 % batch-01.fr.tex and batch-02.fr.tex.
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — pp. 20-23 footnoted with the
+% Lean check (Folder120.lean): the ring of tame functions from (M'1), (M'2),
+% (M'4) and (M11) b) only; the collapse of p. 23 holds over any domain, with
+% the Z/4 counter-example and both corrections of the edition confirmed. No
+% mathlib result, no literature beyond « unsearched » in the findings, no
+% facsimile correction since the pass; the pencil on the cover is left as the
+% transcription has it.
 % The folder was read whole: two batches, pages 1-24, both transcribed. Page 1
 % is the cover; it carries no \page in the transcription.
 %
@@ -932,7 +939,15 @@ particulier $R_0$ est un sous-anneau de $R$.
 
 En effet, pour $f, g$ modérées, $(f, g) : X \to R^2$ est modérée, d'image $A
 \in \mathcal{M}_2$, et $f - g$, $fg$ sont les composés de $(f,g)$ avec les
-fonctions modérées de b) ; les constantes $0$ et $1$ sont modérées par a). Une
+fonctions modérées de b) ; les constantes $0$ et $1$ sont modérées par a).\footnote{Vérifié en
+Lean (lean/Grothendieck/Folder120.lean, \texttt{isTameFun\_sub},
+\texttt{isTameFun\_mul}, \texttt{isTameFun\_const}, \texttt{isTameFun\_coord},
+\texttt{isTameFun\_comp}), les axiomes étant pris sous la forme (M$'$1) à
+(M$'$4) de la page 4 : les fonctions modérées sur une partie modérée sont
+stables par différence et par produit et contiennent les constantes de $R_0$ et
+les coordonnées. Seuls servent (M$'$1), (M$'$2), (M$'$4) et la partie b) de
+(M11), par le graphe joint de deux fonctions et un lemme de composition ; la
+vérification se fait sur un anneau commutatif.} Une
 fonction constante de valeur $c$ est modérée si et seulement si $c \in R_0$ —
 son graphe est $X \times \{c\}$ —, et $R_0$ est le sous-anneau des
 constantes.\footnote{La page s'arrête au bas du feuillet sur « En particulier
@@ -998,7 +1013,13 @@ f_\alpha(x) \neq 0$, et il existe $\beta$ avec $g_\beta(x) \neq g_\beta(y)$ ;
 alors
 \[ f_\alpha g_\beta(x) = \lambda\, g_\beta(x) \neq \lambda\, g_\beta(y) =
 f_\alpha g_\beta(y) , \]
-puisque $\lambda \neq 0$ dans le corps $R$.
+puisque $\lambda \neq 0$ dans le corps $R$.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder120.lean, \texttt{separates\_off\_zeroSet}) : le pas
+est $\lambda\,(g_\beta(x) - g_\beta(y)) \neq 0$, qui ne demande à $R$ que de
+n'avoir pas de diviseur de zéro. On ne peut s'en passer : sur
+$\mathbf{Z}/4\mathbf{Z}$, avec $f = 2$ et $g = \mathrm{id}$, la famille $2,\
+2x$ ne sépare pas $0$ et $2$ (\texttt{not\_separates\_zmod4}), bien que
+$f(0) \neq 0$ et $g(0) \neq g(2)$.}
 
 \textbf{Proposition (page 23).} Sous (M1) à (M7) et (M11), toute partie modérée
 $Y$ d'un espace modéré $X$ qui est le lieu des zéros communs d'une famille
@@ -1012,10 +1033,20 @@ Y$ qui est entendu, comme dans l'argument qui précède. Les mots entre
 lecture « $X/Y$ est un espace modéré » est sûre. Le « Dém : » qui précède
 l'énoncé est resté vide : la démonstration est l'argument écrit juste
 au-dessus, aux pages 22 et 23. « M1 : M7 » est peut-être « M1 à M7 ». Un mot
-barré devant « modérée », lu « fermée », est douteux.}
+barré devant « modérée », lu « fermée », est douteux.}\footnote{Vérifié en
+Lean (lean/Grothendieck/Folder120.lean, \texttt{collapse\_separation} et
+\texttt{exists\_separating\_family\_of\_field}) : l'énoncé tient, et plus
+généralement. Ni (M3), ni (M5) à (M7), ni les parties a) et c) de (M11), ni la
+finitude des familles ne servent, et « corps » peut être affaibli en « anneau
+commutatif sans diviseur de zéro » ; les coordonnées tiennent lieu des
+$g_\beta$. Les deux corrections de l'édition sont nécessaires : $e_\alpha \in
+R_0$ pour la translation, et $X \smallsetminus Y$ parce qu'une famille nulle
+sur $Y$ ne sépare aucun couple de points de $Y$
+(\texttt{not\_separates\_on\_zeroSet}). Les sommes amalgamées des pages 12 et
+13 et la catégorie $\Sigma$ ne sont pas formalisées.}
 
-Ainsi, dès que $R$ est un corps, la seconde moitié de (M6) est conséquence de
-la première : c'est le seul endroit où le dossier allège ses propres axiomes.
+Ainsi, dès que $R$ est un corps --- un anneau intègre suffirait ---, la
+seconde moitié de (M6) est conséquence de la première : c'est le seul endroit où le dossier allège ses propres axiomes.
 
 \pagerange{24}{24}
 \section*{À prouver (page 24)}
