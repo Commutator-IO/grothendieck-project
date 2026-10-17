@@ -116,8 +116,7 @@ theorem chain (s u : R[X]) :
     refine ⟨by ring, by ring, by ring⟩
   | monomial n a ih =>
     obtain ⟨h1, h2, h3⟩ := ih
-    have e : C a * X ^ (n + 1) = X * (C a * X ^ n) := by ring
-    rw [e]
+    rw [show C a * X ^ (n + 1) = X * (C a * X ^ n) by ring]
     set w := C a * X ^ n
     simp only [mul_comp, X_comp, D_mul_one, D_mul_two, D_mul_three, D1_X, D2_X, D3_X,
       h1, h2, h3, add_comp, zero_mul, one_mul, add_zero, zero_add]
@@ -290,32 +289,23 @@ theorem Killed.comp {u : R[X]} (hu : Killed u) (f : R[X]) : Killed (f.comp u) :=
 
 lemma hasseDeriv_eq_zero_iff (k : ℕ) (f : R[X]) :
     D k f = 0 ↔ ∀ n, (n.choose k : R) * f.coeff n = 0 := by
-  constructor
-  · intro h n
-    rcases lt_or_ge n k with hn | hn
-    · simp [Nat.choose_eq_zero_of_lt hn]
-    · have := congrArg (fun g => g.coeff (n - k)) h
-      simpa [hasseDeriv_coeff, Nat.sub_add_cancel hn] using this
-  · intro h
-    ext n
-    rw [hasseDeriv_coeff, coeff_zero]
-    exact h (n + k)
+  refine ⟨fun h n => ?_, fun h => ext fun n => by
+    rw [hasseDeriv_coeff, coeff_zero]; exact h (n + k)⟩
+  rcases lt_or_ge n k with hn | hn
+  · simp [Nat.choose_eq_zero_of_lt hn]
+  · simpa [hasseDeriv_coeff, Nat.sub_add_cancel hn] using congrArg (coeff · (n - k)) h
+
+lemma natCast_isUnit (p : ℕ) [Fact p.Prime] [CharP R p] {m : ℕ} (h : ¬ p ∣ m) :
+    IsUnit (m : R) := by
+  have hz : (m : ZMod p) ≠ 0 := by rwa [Ne, ZMod.natCast_eq_zero_iff]
+  simpa using (IsUnit.mk0 _ hz).map (ZMod.castHom (dvd_refl p) R)
 
 lemma natCast_mul_eq_zero (p : ℕ) [Fact p.Prime] [CharP R p] (c : ℕ) (a : R) :
     (c : R) * a = 0 ↔ p ∣ c ∨ a = 0 := by
-  constructor
-  · intro h
-    by_cases hc : p ∣ c
-    · exact Or.inl hc
-    · right
-      have hz : (c : ZMod p) ≠ 0 := by rwa [Ne, ZMod.natCast_eq_zero_iff]
-      have hu : IsUnit (c : R) := by
-        have := (IsUnit.mk0 _ hz).map (ZMod.castHom (dvd_refl p) R)
-        simpa using this
-      exact (hu.mul_right_eq_zero).1 h
-  · rintro (h | h)
-    · rw [(CharP.cast_eq_zero_iff R p c).2 h, zero_mul]
-    · rw [h, mul_zero]
+  refine ⟨fun h => or_iff_not_imp_left.2 fun hc => (natCast_isUnit p hc).mul_right_eq_zero.1 h, ?_⟩
+  rintro (h | h)
+  · rw [(CharP.cast_eq_zero_iff R p c).2 h, zero_mul]
+  · rw [h, mul_zero]
 
 /-- In characteristic `p`, `f` is killed if and only if, for every exponent `n` that occurs
 in `f`, `p` divides `C(n,1)`, `C(n,2)` and `C(n,3)`. -/
@@ -363,9 +353,7 @@ theorem killed_iff_two [CharP R 2] (f : R[X]) :
     omega
   · intro h
     refine ⟨by omega, by omega, ?_⟩
-    have : n % 2 = 0 := by omega
-    rw [this] at l3
-    simp at l3
+    simp [show n % 2 = 0 by omega] at l3
     omega
 
 /-- Margin of page 121, `p = 3`: the killed polynomials are those in `X^9`. -/
@@ -382,9 +370,7 @@ theorem killed_iff_three [CharP R 3] (f : R[X]) :
     omega
   · intro h
     refine ⟨by omega, ?_, by omega⟩
-    have : n % 3 = 0 := by omega
-    rw [this] at l2
-    simp at l2
+    simp [show n % 3 = 0 by omega] at l2
     omega
 
 /-! ### Rigidity (the Proposition of pages 121–123) -/
@@ -493,9 +479,8 @@ theorem rigidity_explicit (n : ℕ) (hC : ∀ k, 3 ≤ k → k < n → IsUnit ((
     have := Ring.inverse_mul_cancel _ hs
     linear_combination (-(s.coeff 2)) * this
   have := rigidity_core n hC s hs c 1 h2 hN
-  rw [coeff_mul_lin_succ, coeff_mul_lin_zero, map_one, zero_add, one_mul, one_mul,
+  rwa [coeff_mul_lin_succ, coeff_mul_lin_zero, map_one, zero_add, one_mul, one_mul,
     add_comm (c * _)] at this
-  exact this
 
 /-- The Proposition of pages 121–123 in `B = A[T]/(T^n)` (`G₀(t, s) = 0` in `B` reads
 `X^n ∣ N(s)`, and `D⁽¹⁾s` is a unit of `B` iff `s₁` is a unit of `A`), over any commutative
@@ -507,11 +492,6 @@ theorem rigidity (n : ℕ) (hC : ∀ k, 3 ≤ k → k < n → IsUnit ((k.choose 
   ⟨s.coeff 1 + -(s.coeff 2 * (s.coeff 1)⁻¹ʳ) * s.coeff 0, s.coeff 0,
     -(s.coeff 2 * (s.coeff 1)⁻¹ʳ), by ring,
     rigidity_explicit n hC s hs fun m hm => X_pow_dvd_iff.1 hN m (by omega)⟩
-
-lemma natCast_isUnit (p : ℕ) [Fact p.Prime] [CharP R p] {m : ℕ} (h : ¬ p ∣ m) :
-    IsUnit (m : R) := by
-  have hz : (m : ZMod p) ≠ 0 := by rwa [Ne, ZMod.natCast_eq_zero_iff]
-  simpa using (IsUnit.mk0 _ hz).map (ZMod.castHom (dvd_refl p) R)
 
 /-- Characteristic `p > 3`, `B = A[T]/(T^p)`: the Proposition of pages 121–122, over any
 ring of characteristic `p` (no hypothesis on `Pic(A)`). -/
@@ -588,17 +568,12 @@ theorem N_add_X_pow_mul (p M : ℕ) [Fact p.Prime] [CharP R p] (hM : 3 < p ^ M) 
 lemma X_pow_dvd_of_mul_lin {n : ℕ} {c d : R} (hd : IsUnit d) {F : R[X]}
     (h : X ^ n ∣ F * (C c * X + C d)) : X ^ n ∣ F := by
   rw [X_pow_dvd_iff] at h ⊢
-  intro i
+  intro i hi
   induction i with
-  | zero =>
-    intro hi
-    have := h 0 hi
-    rw [coeff_mul_lin_zero] at this
-    exact hd.mul_right_eq_zero.1 this
+  | zero => exact hd.mul_right_eq_zero.1 ((coeff_mul_lin_zero F c d).symm.trans (h 0 hi))
   | succ i ih =>
-    intro hi
-    have := h (i + 1) hi
-    rw [coeff_mul_lin_succ, ih (by omega), mul_zero, zero_add] at this
+    have := (coeff_mul_lin_succ F c d i).symm.trans (h _ hi)
+    rw [ih (by omega), mul_zero, zero_add] at this
     exact hd.mul_right_eq_zero.1 this
 
 /-- The converse in `A[T]/(T^(p^N))`, `3 < p^N`: a homography `(at + b)/(ct + d)` with
@@ -625,9 +600,8 @@ theorem rigidity_iff_of_gt (p : ℕ) [hp : Fact p.Prime] [CharP R p] (hp3 : 3 < 
       ∃ a b c : R, a - b * c = s.coeff 1 ∧ X ^ p ∣ s * (C c * X + 1) - (C a * X + C b) := by
   refine ⟨rigidity_of_gt p s hs, ?_⟩
   rintro ⟨a, b, c, -, h⟩
-  have := N_of_homography_trunc p 1 (by simpa using hp3) s (d := 1) isUnit_one
+  simpa using N_of_homography_trunc p 1 (by simpa using hp3) s (d := 1) isUnit_one
     (by simpa using h)
-  simpa using this
 
 /-! ### The determinant cannot be normalised to `1` -/
 
