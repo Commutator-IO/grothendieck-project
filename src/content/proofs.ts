@@ -673,4 +673,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder101.lean',
     theorems: ['eq_zero_of_mem', 'lift_K', 'lift_vs', 'baer_KA', 'duality_dim_one'],
   },
+  {
+    folder: '2',
+    batch: 1,
+    page: '9, 13',
+    name: 'The Chern class of a point, and a nonzero class with trivial Chern class',
+    statement:
+      'In Ã(P^r) = ℤ[η]/(η^{r+1}), c(ξ^r) = ∏_{i=0}^{r} (1 − iη)^{(−1)^i binom(r,i)} = 1 + (−1)^{r−1}(r−1)! η^r (page 9); for a divisor Y of class x′ with (r−1)! x′ = 0, c(i_!(O_Y)) = ∏ ((1 − iη)/(1 − x′ − iη))^{(−1)^i binom(r,i)} = 1 (page 13).',
+    found:
+      'Both computations hold as the reading gives them, over any commutative ring, in the splitting-principle model the reading uses. Page 9 is proved over ℤ by the logarithmic derivative instead of the reading’s logarithm, with mathlib’s forward differences for Σ (−1)^i binom(r,i) i^k, then mapped to any ring; page 13 needs only 1 − x′ invertible and (r−1)!·x′ = 0, the denominator product being the numerator one rescaled by (1 − x′)^{−1}. Not formalised: that i_!(O_Y) is nonzero in K(X × P^r) and the restriction r ≥ 3, which need K-theory of coherent sheaves and Chern classes, absent from mathlib.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder2.lean',
+    theorems: ['derivative_pow_units', 'derivative_zpow_units', 'derivative_prod_units', 'coe_lin_one_inv', 'eps_mul_pow', 'sum_eps_pow_of_lt', 'sum_eps_pow_self', 'logDeriv_zpow', 'chernPoint_int', 'chernPoint', 'rescale_C', 'prod_zpow_eq_zpow_sum', 'chernImmersion', 'chernImmersion_of_isNilpotent'],
+  },
 ];

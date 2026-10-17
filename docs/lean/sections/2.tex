@@ -1,0 +1,27 @@
+\section[Cote 2 : une classe non nulle de classe de Chern totale triviale]{Cote 2 : une classe non nulle de classe de Chern totale triviale\protect\verifie{Folder2}}\label{sec:2}
+
+La cote 2, \emph{Théorème de Riemann-Roch}, notes que l'inventaire dit antérieures à 1958, calcule aux pages~9 à~13 la classe de Chern de l'image directe par l'immersion $i : X \to X \times \mathbf P^r$ d'une section constante (\lot{2}{1}{9}). Dans $K(\mathbf P^r) = \mathbf Z[\xi]/(\xi^{r+1})$, $\xi = 1 - L^{-1}$, la classe d'un point est $\xi^r = \sum_i (-1)^i \binom ri L^{-i}$, et $c(L^{-i}) = 1 - i\eta$, où $\eta$ est la classe d'un hyperplan. Mathlib n'a ni le groupe $K$ des faisceaux cohérents ni les classes de Chern ; ce qui est démontré est l'algèbre des deux pages, dans le modèle du principe de scindage que suit la lecture : $i_!(\mathcal O_Y) = \sum_i (-1)^i\binom ri\bigl([L^{-i}] - [L^{-i} \otimes \mathcal O(-Y)]\bigr)$ et $c(L^{-i} \otimes \mathcal O(-Y)) = 1 - y - i\eta$, avec $y = x'$. Une congruence modulo $\eta^{r+1}$ dans $A[[\eta]]$ est une égalité dans $A[\eta]/(\eta^{r+1})$.
+
+\begin{theoreme}[Grothendieck, page 9, la classe de Chern d'un point\piste{2-trivial-total-chern-class}]\label{thm:2-point}
+Soient $r \geq 1$ et $A$ un anneau commutatif. Dans $A[\eta]/(\eta^{r+1})$,
+\[
+  \prod_{i=0}^{r} (1 - i\eta)^{(-1)^i\binom ri} \;=\; 1 + (-1)^{r-1}(r-1)!\,\eta^r .
+\]
+\end{theoreme}
+
+\begin{theoreme}[D'après la page 13, la classe de Chern de $i_!(\mathcal O_Y)$]\label{thm:2-immersion}
+Soient $r \geq 1$, $A$ un anneau commutatif et $y \in A$ tel que $1 - y$ soit inversible (par exemple $y$ nilpotent) et $(r-1)!\,y = 0$. Dans $A[\eta]/(\eta^{r+1})$,
+\[
+  \prod_{i=0}^{r} \Bigl(\frac{1 - i\eta}{1 - y - i\eta}\Bigr)^{(-1)^i\binom ri} \;=\; 1 ,
+\]
+c'est-à-dire $c(i_!(\mathcal O_Y)) = 1$ dans ce modèle.
+\end{theoreme}
+
+\noindent Les deux énoncés tiennent tels que la lecture les donne (\texttt{chernPoint}, \texttt{chernImmersion}, dans \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/Folder2.lean}{\texttt{Folder2.lean}}). Le premier est démontré sur $\mathbf Z$ par la dérivée logarithmique, au lieu du logarithme de la lecture, puis transporté à tout anneau ; le second en découle, le produit des dénominateurs étant celui des numérateurs où $\eta$ est remplacé par $\eta/(1 - y)$. La page~13 suppose $y$ dans $A^1(X)$ ; seules servent l'inversibilité de $1 - y$ et l'hypothèse $(r-1)!\,y = 0$.
+
+\begin{encadre}
+\begin{theoreme*}[Énoncé de l'édition, d'après les pages 9 à 13, une classe non nulle de classe de Chern totale~$1$]\nonverifie
+Si $Y \subset X$ est un diviseur dont la classe $x' \in A^1(X)$ est non nulle mais tuée par $(r-1)!$, la classe $i_!(\mathcal O_Y)$ est non nulle dans $K(X \times \mathbf P^r)$ et sa classe de Chern totale vaut~$1$, ce qui n'est possible que pour $r \geq 3$.
+\end{theoreme*}
+\end{encadre}
+{\small La non-nullité de la classe et la restriction $r \geq 3$ relèvent de la géométrie. Le \q{0} final de la page~13 est incertain, et la page nomme la classe $[\mathcal O_{Y \times \mathbf P^r}]$ là où le calcul porte sur $Y \times \{\text{point}\}$. Mathlib n'a pas le groupe $K$ des faisceaux cohérents ni les classes de Chern. On se reportera aux notes de Grothendieck (\lot{2}{1}{9}).\par}
