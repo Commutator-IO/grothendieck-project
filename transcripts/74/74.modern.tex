@@ -148,6 +148,20 @@
 % « ? »); the Résolution of p. 100 (stops); the classification I), II) of
 % pp. 102-103; the « corollaire plus fort » of p. 114 (struck); p. 129 b)
 % (stops); the bracket of p. 135 (not closed).
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder74.lean) of sections 19-21 and the isotopy
+% lemma:
+% — page 97: its claim that data satisfying (*) give a graph satisfying axiom 1
+%   is false without the margin's condition (order-2 Latin square, trivial
+%   covers); the reading now states the converse with (Ka) and beta, says
+%   that (Ka)'s form is the edition's reconstruction, and that axiom 1 is
+%   equivalent to (Ka) under (*) and beta.
+% — pages 101-102: the Latin-square reduction checked both ways; axiom 3 not
+%   needed for it. Page 116: checked, and restricted to the group-table case
+%   the page treats. Pages 5-6: autotopisms of an abelian table, 96 for Klein.
+% The folder's findings are unsearched (no literature cited). No facsimile
+% check since 2026-10-10.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -453,7 +467,11 @@ C'est le théorème classique selon lequel les isotopies entre tables de groupes
 normalisées en l'unité sont des isomorphismes ; le dossier 69 (page 116) en
 fait le même calcul pour décrire les autotopies de la table d'un
 groupe\footnote{Rattaché en général à Albert (1943) ; cité de mémoire, nom
-d'« isotopie » de nous.}. La page 5 pose alors la question qui restera ouverte :
+d'« isotopie » de nous. Vérifié en Lean (lean/Grothendieck/Folder74.lean,
+\texttt{autotopism\_iff} et \texttt{card\_klein\_autotopisms}) sous la forme
+dont le dossier 69 se sert : pour un groupe commutatif, les autotopies de la
+table sont un automorphisme commun suivi de translations par $c_f$, $c_g$,
+$c_f + c_g$, et la table du groupe de Klein en a $96$.}. La page 5 pose alors la question qui restera ouverte :
 \emph{le foncteur $\varphi$ est-il une équivalence ?} --- c'est-à-dire : tout
 carré latin vérifiant l'axiome I vient-il d'un système de bitorseurs ? La
 réponse est non en général (il y a des quasigroupes qui ne sont isotopes à
@@ -1525,6 +1543,21 @@ T \simeq \lbrace t_0\rbrace \amalg \coprod_{\alpha \in t_0} E_\alpha \amalg
 (le triangle de base, les triangles verticaux $\lbrace \alpha\rbrace \cup u$,
 $u$ une orbite de $\sigma_\alpha$, et les triangles supérieurs). « Rien
 n'empêche pour l'instant qu'on ait $\widetilde T = \emptyset$ ! »
+Réciproquement, des données a)--c) donnent un graphe qui vérifie l'axiome 1 et
+l'axiome 2 pour $t_0$, pourvu qu'elles satisfassent, outre (*) et la
+condition $\beta_{\widetilde\Gamma}$ de la page 101, la condition de la
+marge.\footnote{La page 97 affirme la réciproque pour des données vérifiant
+(*) seulement ; c'est faux sans la condition de la marge. Vérifié en Lean
+(lean/Grothendieck/Folder74.lean, \texttt{ka\_needed}) : un carré latin
+d'ordre $2$ muni de revêtements doubles triviaux satisfait (*) et
+$\beta_{\widetilde\Gamma}$, et son graphe viole l'axiome 1 ; sous (*) et
+$\beta_{\widetilde\Gamma}$, l'axiome 1 équivaut à (Ka)
+(\texttt{Scholie.axiom1\_iff\_ka}). La forme de (Ka) employée, « si
+$(s_\alpha)$ et un triangle supérieur $(t_\alpha)$ vérifient les relations de
+la marge, alors $(s_\alpha)$ est un triangle supérieur », est une
+reconstruction de l'édition, la fin de la condition étant illisible ; c'est la
+forme sous laquelle la Scholie devient une équivalence
+(\texttt{Config.scholieIso}, \texttt{Scholie.scholie\_converse}).}
 
 \textbf{L'axiome 2 pour les autres triangles} (pages 98 à 100). Pour un
 triangle vertical $\lbrace \alpha, s, s'\rbrace$ il donne la \textbf{Prop.~5} :
@@ -1567,7 +1600,9 @@ $\widetilde\Gamma \to \widetilde E_\alpha$ compatibles aux involutions, avec
   $s \in u$ a $(s, t)$ dans l'image ;
 \item[$\gamma$)] l'axiome (Ka), énoncé plus haut sur des familles $(s_\alpha)$,
   $(t_\alpha)$ et qu'on ne peut restituer\footnote{L'axiome (Ka) est la condition
-  (***) de la marge de la page 96, lue en partie seulement.}.
+  (***) de la marge de la page 96, lue en partie seulement ; voir la note sur
+  la page 97 pour la forme que l'édition en reconstruit, et pour la raison qui
+  le rend nécessaire.}.
 \end{enumerate}
 
 Passons aux quotients : $\Gamma = \widetilde\Gamma/\sigma$, $E_\alpha =
@@ -1585,7 +1620,13 @@ $\Gamma \to E_\alpha \times E_\beta$ est \emph{bijective}.
 C'est mot pour mot l'axiome I de la page 1 : $\Gamma \subset \prod_\alpha
 E_\alpha$ est un carré latin d'ordre $c$, et $\operatorname{card}\Gamma = c^2$,
 $\operatorname{card}\widetilde\Gamma = 2c^2$\footnote{Le rapprochement avec la
-page 1 est de nous ; les pages 101 à 103 ne renvoient pas en arrière.}. La page
+page 1 est de nous ; les pages 101 à 103 ne renvoient pas en arrière. Vérifié
+en Lean (lean/Grothendieck/Folder74.lean, \texttt{Config.latin},
+\texttt{Config.pullback}, \texttt{Config.latinCover} et
+\texttt{LatinCover.converse}) : un graphe donne un carré latin muni de trois
+revêtements doubles et d'un système transitif, et réciproquement sous (Ka). Le
+sens direct n'utilise l'axiome 2 que pour $t_0$ et pour les triangles
+verticaux, et pas l'axiome 3, qui ne sert qu'aux dénombrements.}. La page
 102 l'écrit : « la classification des cas "complexes cubiques généralisés" se
 décompose en deux questions exactement » :
 
@@ -1738,7 +1779,13 @@ produits pairs en $a$ opère trivialement sur $\widetilde E_a$, transitivement s
 $\widetilde E_b$ et $\widetilde E_c$, et il est isomorphe au groupe des parties
 paires de $E_a$ ; $\mathcal{G}$ opère transitivement sur $\widetilde\Gamma \simeq
 \mathcal{G}/\mathfrak{g}$. Voilà pourquoi le carré latin du problème I) doit être la
-table d'un $\mathbb{F}_2$-espace vectoriel, et $c$ une puissance de 2.
+table d'un $\mathbb{F}_2$-espace vectoriel, et $c$ une puissance de 2 --- du
+moins lorsque ce carré latin est la table d'un groupe, seul cas que la page
+traite.\footnote{Vérifié en Lean (lean/Grothendieck/Folder74.lean,
+\texttt{p116} et \texttt{p116\_comm}) : pour un groupe $G$, les $\varphi_a$
+préservent $xyz = 1$ pour tout $a$ si et seulement si tout élément est d'ordre
+divisant $2$, et $G$ est alors commutatif. Que le carré latin soit
+nécessairement la table d'un groupe n'est pas démontré par la page.}
 
 \pagerange{117}{123}
 \section*{22. La tour et ses tableaux (pages 117 à 123)}
