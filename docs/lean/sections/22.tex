@@ -1,6 +1,6 @@
-\section[Cote 22 : produits de modules plats (lemme 3.3, corollaires 3.4 et 3.5)]{Cote 22 : produits de modules plats (lemme 3.3, corollaires 3.4 et 3.5)\protect\verifie{Folder22}}\label{sec:22}
+\section[Cote 22 : produits de modules plats (lemme 3.3, corollaires 3.4 et 3.5), et l'obstruction sur k[[t]]]{Cote 22 : produits de modules plats (lemme 3.3, corollaires 3.4 et 3.5), et l'obstruction sur $k[[t]]$\protect\verifie{Folder22}}\label{sec:22}
 
-La cote 22, \emph{[EGA IV]. [Chapitre] 0 IV. Cohen, différentielles, algèbres formellement simples (Compléments)}, datée par l'inventaire \q{1963-[vers 1967]}, réunit des tirés à part, un tapuscrit annoté et des notes manuscrites. Les pages~9 à~17 sont un tapuscrit paginé de sa main 24 à 32 et corrigé à l'encre : le numéro~3 d'un chapitre adressé à un correspondant qu'il tutoie. Avant le théorème central du numéro, la page~10 (sa page~25) place trois énoncés et en donne la fonction : \q{il nous sera commode d'avoir un critère permettant de déduire de la propriété P une propriété de platitude} (\lot{22}{1}{10}). Dans la démonstration du lemme~3.3, les mots \q{de type fini}, qui qualifient les modules libres de la présentation, sont une addition manuscrite. Dans l'énoncé du corollaire~3.5, un passage biffé portait \q{de $A$-modules projectifs de type fini}.
+La cote 22, \emph{[EGA IV]. [Chapitre] 0 IV. Cohen, différentielles, algèbres formellement simples (Compléments)}, datée par l'inventaire \q{1963-[vers 1967]}, réunit des tirés à part, un tapuscrit annoté et des notes manuscrites. Les pages~9 à~17 sont un tapuscrit paginé de sa main 24 à 32 et corrigé à l'encre : le numéro~3 d'un chapitre adressé à un correspondant qu'il tutoie. Avant le théorème central du numéro, la page~10 (sa page~25) place trois énoncés et en donne la fonction : \q{il nous sera commode d'avoir un critère permettant de déduire de la propriété P une propriété de platitude} (\lot{22}{1}{10}). Dans la démonstration du lemme~3.3, les mots \q{de type fini}, qui qualifient les modules libres de la présentation, sont une addition manuscrite. Dans l'énoncé du corollaire~3.5, un passage biffé portait \q{de $A$-modules projectifs de type fini}. Les pages manuscrites~22 et~24 prennent $k = \mathbf Q((x_i))$ et $A = k[[t]]$, écrivent $\Omega_k \otimes_k A \simeq A^{(I)} \subsetneq \prod_i A\,dx_i$ et cherchent une dérivation $D : A \to \Omega_k \otimes_k A$ qui prolonge $d_k$ ; la page~22 présume que $A$ \q{n'est jamais formellement lisse sur $k$ pour la topologie discrète} (\lot{22}{2}{22}). La page~24 choisit des indices $i_0, i_1, \ldots$, commence la série $\sum_n a_n t^n$ et s'arrête.
 
 \begin{enonce}[Lemme 3.3\mathlibpr{44715}]
 Soient $A$ un anneau, $(P_i)_{i \in I}$ une famille de $A$-modules, $P = \prod_i P_i$ leur produit, et $M$ un $A$-module de présentation finie. Alors l'homomorphisme canonique $M \otimes_A P \to \prod_i (M \otimes_A P_i)$ est un isomorphisme.
@@ -85,17 +85,46 @@ Le corollaire~3.4 est un cas du théorème de Chase, publié en 1960 \cite{chase
 Trois lemmes généraux de cette section sont proposés à mathlib : un produit de modules plats est plat (PR mathlib4~\#44714), le produit tensoriel par un module de présentation finie commute aux produits (\#44715), et un anneau est noethérien si et seulement si tout module de type fini y est de présentation finie (\#44716).
 \end{remarque}
 
-Ne sont pas démontrés ici : la lissité, la non-ramification et l'étalitude formelles et leurs critères de relèvement ; dans le corollaire~3.5, la réduction à un système indexé par $\mathbb N$ ; les numéros~3.2 et~3.6 à~3.13 (algèbres de Cohen, homomorphismes réguliers) ; l'obstruction différentielle sur {$k[[t]]$} (pages~22 et~24) ; le contre-exemple sur les différentielles (pages~26 et~28) ; les pages~1 à~8 et~18 à~28.
+\noindent\emph{L'obstruction des pages~22 et~24.} On note $A = k[[t]]$ et, pour un $k$-module $M$, $A \otimes_k M$ le $A$-module obtenu par extension des scalaires. Une dérivation est prise sur une base quelconque $R$ (pour la page, $R = \mathbf Q$) ; seules servent l'additivité et la règle de Leibniz. \q{Formellement lisse pour la topologie discrète} est la lissité formelle de mathlib, $\mathtt{Algebra.FormallySmooth}$ : $\Omega_{A/k}$ projectif et $H_1(L_{A/k}) = 0$, ce qui équivaut au relèvement des morphismes à travers les idéaux de carré nul.
+
+\begin{lemme}\label{lem:22-obstruction}
+Soient $k$ un anneau commutatif non nul, $M$ un $k$-module libre de base $(b_i)_{i \in I}$, $(i_n)_{n \in \mathbb N}$ une suite injective d'indices et $(a_n)$ une suite d'éléments de $k$. Il n'existe pas de dérivation $D : A \to A \otimes_k M$ telle que $D(a_n) = 1 \otimes b_{i_n}$ pour tout $n$.
+\end{lemme}
+
+\begin{proof}
+Pour $j \in I$, soit $p_j : A \otimes_k M \to A$ l'application $A$-linéaire $f \otimes m \mapsto b_j^*(m)\, f$, où $b_j^*$ est la coordonnée d'indice $j$. Un élément de $A \otimes_k M$ est une somme finie de tenseurs purs, donc n'a qu'un nombre fini de coordonnées $p_j$ non nulles. Soit $f = \sum_n a_n t^n$. Il existe donc $n$ tel que $p_{i_n}(D(f)) = 0$ et $p_{i_n}(D(t)) = 0$. L'application $E = p_{i_n} \circ D : A \to A$ est une dérivation, puisque $p_{i_n}$ est $A$-linéaire ; elle vérifie $E(t) = 0$, donc $E(t^m) = 0$ et $E(t^m g) = t^m E(g)$ pour tout $m$ et tout $g \in A$, et $E(a_m) = b_{i_n}^*(b_{i_m}) = \delta_{mn}$, l'application $m \mapsto i_m$ étant injective. Écrivons $f = \sum_{m \leq n} a_m t^m + t^{n+1} g$. Alors
+\[ E(f) = \sum_{m \leq n} \delta_{mn}\, t^m + t^{n+1} E(g), \]
+dont le coefficient de $t^n$ est $1$. Or $E(f) = 0$, et $1 \neq 0$ dans $k$.
+\end{proof}
+
+\begin{theoreme}[Grothendieck, pages 22 et 24, obstruction différentielle sur {$k[[t]]$}, topologie discrète\piste{22-power-series-discrete-obstruction}]
+Soient $k = \mathbf Q(x_i : i \in I)$, avec $I$ infini, et $A = k[[t]]$. Les $dx_i$ forment une base de $\Omega_{k/\mathbf Q}$, si bien que $A \otimes_k \Omega_{k/\mathbf Q} \simeq A^{(I)}$ ; aucune dérivation $D : A \to A \otimes_k \Omega_{k/\mathbf Q}$ ne vérifie $D(c) = 1 \otimes dc$ pour tout $c \in k$, et $A$ n'est pas formellement lisse sur $k$ pour la topologie discrète.
+\end{theoreme}
+
+\begin{proof}
+Les $dx_i$ forment une base de $\Omega_{P/\mathbf Q}$, pour $P = \mathbf Q[x_i : i \in I]$. Le corps $k$ est un localisé de $P$, donc formellement étale sur $P$, et $k \otimes_P \Omega_{P/\mathbf Q} \to \Omega_{k/\mathbf Q}$ est un isomorphisme ; les $dx_i$ forment donc une base de $\Omega_{k/\mathbf Q}$. Si $D$ existait, on choisirait une suite injective $(i_n)$ dans $I$ et $a_n = x_{i_n}$ : le lemme~\ref{lem:22-obstruction} interdit $D(x_{i_n}) = 1 \otimes dx_{i_n}$.
+
+Supposons $A$ formellement lisse sur $k$. La suite de Jacobi--Zariski
+\[ H_1(L_{A/k}) \xrightarrow{\ \delta\ } A \otimes_k \Omega_{k/\mathbf Q} \xrightarrow{\ \iota\ } \Omega_{A/\mathbf Q} \longrightarrow \Omega_{A/k} \longrightarrow 0 \]
+est exacte. Comme $H_1(L_{A/k}) = 0$, $\iota$ est injective, et comme $\Omega_{A/k}$ est projectif, la surjection $\Omega_{A/\mathbf Q} \to \Omega_{A/k}$ a une section ; la suite est donc scindée et $\iota$ a une rétraction $A$-linéaire $r$. Alors $D = r \circ d_A$ est une dérivation de $A$ dans $A \otimes_k \Omega_{k/\mathbf Q}$, et $D(c) = r(\iota(1 \otimes dc)) = 1 \otimes dc$ pour $c \in k$, ce qui vient d'être exclu.
+\end{proof}
+
+\begin{corollaire}\label{prop:22-corps}
+Soient $R$ un anneau commutatif et $K$ un corps qui est une $R$-algèbre, avec $\Omega_{K/R}$ de dimension infinie sur $K$. Alors $K[[t]]$ n'est pas formellement lisse sur $K$ pour la topologie discrète.
+\end{corollaire}
+
+\begin{proof}
+Les $da$, $a \in K$, engendrent $\Omega_{K/R}$ ; on en extrait une base, infinie par hypothèse, et une suite injective $da_0, da_1, \ldots$ de vecteurs de cette base. La seconde moitié de la démonstration précédente, avec le lemme~\ref{lem:22-obstruction}, s'applique telle quelle.
+\end{proof}
+
+\begin{remarque}
+La moitié discrète de l'énoncé tient telle que la lecture la donne. La réduction à $D(t) = 0$, que les pages~22 et~23 font dans une prose en grande partie illisible en passant par un sous-corps de type fini $k_0$, n'est pas nécessaire : il suffit de prendre $n$ assez grand pour que la coordonnée d'indice $i_n$ de $D(t)$ soit déjà nulle. La caractéristique~$0$ ne sert pas non plus : le corollaire~\ref{prop:22-corps} vaut pour tout corps dont le module des différentielles absolues est de dimension infinie, en particulier en caractéristique $p$ pour $\mathbb F_p(x_i : i \in I)$, $I$ infini. La piste demande si l'exemple figure dans EGA~$0_{\mathrm{IV}}$ ou chez Matsumura ; le projet Stacks n'énonce la lissité formelle de $K[[x]]$ que pour la topologie $(x)$-adique \cite[tags 07EL et 07EM]{stacks}.
+\end{remarque}
+
+Ne sont pas démontrés ici : la lissité, la non-ramification et l'étalitude formelles pour des topologies préadiques, et leurs critères de relèvement ; en particulier la moitié $t$-adique de l'obstruction ; dans le corollaire~3.5, la réduction à un système indexé par $\mathbb N$ ; les numéros~3.2 et~3.6 à~3.13 (algèbres de Cohen, homomorphismes réguliers) ; la proposition de la page~23 ; le contre-exemple sur les différentielles (pages~26 et~28) ; les pages~1 à~8, 18 à~21, 23 et~25 à~28.
 
 \begin{encadre}
 \begin{theoreme}[Grothendieck, pages 26 et 28, noyau des différentielles\piste{22-differentials-kernel-counterexample}]\nonverifie
 Pour une extension de corps $K/k$ de caractéristique $p > 0$, l'application $\Omega^1_{k/(k \cap K^p)} \otimes_k K \to \Omega^1_K$ n'est pas toujours injective : le noyau de $\Omega^1_k \otimes_k K \to \Omega^1_K$ n'est pas toujours engendré par les différentielles des éléments de $k \cap K^p$. Contre-exemple : $\mathbb F$ un corps de caractéristique~$p$, $k = \mathbb F(x, y) \subset K = \mathbb F(x, a_0^{1/p}, \ldots, a_{p-1}^{1/p})$, où $y = \sum_i a_i x^i$ et $x, y, a_1, \ldots, a_{p-1}$ sont algébriquement indépendants.
 \end{theoreme}
 \end{encadre}
-
-\begin{encadre}
-\begin{conjecture}[Grothendieck, pages 22 et 24, obstruction différentielle sur {$k[[t]]$}\piste{22-power-series-discrete-obstruction}]
-Soient $k = \mathbf Q(x_i : i \in I)$, avec $I$ infini, et $A = k[[t]]$. L'anneau $A$ est formellement lisse sur $k$ pour la topologie $t$-adique, mais pas pour la topologie discrète : aucune dérivation $D : A \to \Omega^1_k \otimes_k A \simeq A^{(I)}$ n'induit $d_k$, car $D(\sum_n x_{i_n} t^n)$ aurait une infinité de composantes non nulles.
-\end{conjecture}
-\end{encadre}
-{\small Les feuillets en esquissent une démonstration incomplète (pages 22 et 24). La page~24 s'arrête sur la construction de la série\par}

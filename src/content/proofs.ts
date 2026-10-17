@@ -143,15 +143,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '22',
     batch: 1,
-    page: '10',
-    name: '3.3–3.5',
+    page: '10, 22, 24',
+    name: '3.3–3.5, and the obstruction on k[[t]] for the discrete topology',
     statement:
-      'For M finitely presented, M ⊗ ∏ Pᵢ ≅ ∏ (M ⊗ Pᵢ); if every finitely generated module is finitely presented (« par exemple A noethérien »), a product of flat modules is flat; a countable strict limit of projectives is flat.',
+      'For M finitely presented, M ⊗ ∏ Pᵢ ≅ ∏ (M ⊗ Pᵢ); if every finitely generated module is finitely presented (« par exemple A noethérien »), a product of flat modules is flat; a countable strict limit of projectives is flat. For k = ℚ(x_i : i ∈ I), I infinite, no derivation D : k[[t]] → Ω_k ⊗_k k[[t]] ≅ k[[t]]^{(I)} induces d_k, so k[[t]] is not formally smooth over k for the discrete topology (pp. 22, 24).',
     found:
-      '« Par exemple A noethérien » is misleading: the hypothesis of 3.4 is equivalent to Noetherian, and the proof needs only a coherent ring. 3.5 is proved for ℕ-indexed systems with surjective maps. Not proved: formal smoothness and Cohen algebras. Three general lemmas are proposed to mathlib: products of flat modules (#44714), ⊗ with a finitely presented module commutes with products (#44715), and Noetherian iff every finitely generated module is finitely presented (#44716).',
+      '« Par exemple A noethérien » is misleading: the hypothesis of 3.4 is equivalent to Noetherian, and the proof needs only a coherent ring. 3.5 is proved for ℕ-indexed systems with surjective maps. Not proved: formal smoothness and Cohen algebras. Three general lemmas are proposed to mathlib: products of flat modules (#44714), ⊗ with a finitely presented module commutes with products (#44715), and Noetherian iff every finitely generated module is finitely presented (#44716). The obstruction of pp. 22, 24 holds as the reading gives it, without the reduction to D(t) = 0 that pp. 22–23 carry in illegible prose: for n large the dx_{i_n}-coordinate of D(t) already vanishes. It holds for every field K with Ω_{K/R} infinite-dimensional, over any base R and in every characteristic, not only for ℚ(x_i). The t-adic half is not proved.',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder22.lean',
-    theorems: ['lemme3_3', 'corollaire3_4', 'corollaire3_5', 'hypothese_iff_noetherien'],
+    theorems: ['lemme3_3', 'corollaire3_4', 'corollaire3_5', 'hypothese_iff_noetherien', 'no_derivation', 'basisDx_apply', 'no_derivation_extending_d', 'not_formallySmooth_discrete', 'not_formallySmooth_of_field'],
   },
   {
     folder: '41',

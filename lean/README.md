@@ -20,7 +20,7 @@ the folders one at a time, since a process that imports Mathlib takes about
 2 GB and Lake has no option to limit parallelism. A deprecation in Mathlib
 fails the build; the compiler names the replacement.
 
-Thirty-four folders: the eighteen of issue #26 (tier 1, and the five rows of tier 2), and sixteen findings of the Findings tab (1, 44, 67, 68, 70, 74, 77, 78, 79, 84, 85, 86, 93, 133, 156-1, 156-3), proved as stated — which says nothing about whether they are in the literature. Each statement, its written-out proof and
+Thirty-four folders: the eighteen of issue #26 (tier 1, and the five rows of tier 2), and sixteen findings of the Findings tab (1, 44, 67, 68, 70, 74, 77, 78, 79, 84, 85, 86, 93, 133, 156-1, 156-3); folder 22 also proves part of one finding, proved as stated — which says nothing about whether they are in the literature. Each statement, its written-out proof and
 what the verification found are in the appendix
 [`docs/lean/article.pdf`](../docs/lean/article.pdf), served at
 <https://grothendieck.commutator.io/article/grothendieck-lean.pdf>, and on the
@@ -38,7 +38,7 @@ of every theorem and fails on any beyond Lean's three standard ones.
 | 104 | `Folder104.lean` | categories of models (i)(ii), (*), order on classes, τ_n, u_{d_n}=id; well-foundedness ⇒ Reedy direct (mathlib ReedyStructure) and converse; Δ: simplicial identities, factorisation through a face, Δ direct; three examples' counts; globular complex (p. 4) | nothing wrong; well-foundedness is a real extra hypothesis (ℤ satisfies (i)(ii), is not direct); the Reedy statement needs M skeletal ("rigide" p. 9); (i) not used |
 | 125 | `Folder125.lean` | étages, III-18, partial | prose slip `q < r − m` → `q ⩽ r − m` |
 | 161-1 | `Folder161_1.lean` | conditions (1), (2), the five conditions of p. 3, E₀ ≃ F₀, idempotency, p. 5 conditions 1), 3), 4), reflector preserves colimits, local objects, p. 6 descent | nothing wrong; p. 3's fifth condition repeats the second; p. 6 descent needs no full faithfulness of β |
-| 22 | `Folder22.lean` | 3.3–3.5, partial | « par exemple noethérien » is equivalent, not an example |
+| 22 | `Folder22.lean` | 3.3–3.5; obstruction on k[[t]] for the discrete topology (pp. 22, 24): no derivation k[[t]] → Ω_k ⊗ k[[t]] induces d_k for k = ℚ(x_i), I infinite, so k[[t]] is not formally smooth over k; partial | « par exemple noethérien » is equivalent, not an example; the obstruction needs no reduction to D(t) = 0 and holds for every field with infinite-dimensional Ω, in every characteristic; t-adic half not proved |
 | 41 | `Folder41.lean` | Proposition 1 | finiteness needed only for (iii bis) ⇒ (ii) |
 | 21 | `Folder21.lean` | 2.15, 2.16, partial | nothing false |
 | 39 | `Folder39.lean` | adic preparation, partial | nothing wrong |

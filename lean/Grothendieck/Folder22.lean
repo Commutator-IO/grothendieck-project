@@ -1,9 +1,15 @@
 import Mathlib.Algebra.Module.FinitePresentation
 import Mathlib.RingTheory.Flat.Tensor
 import Mathlib.LinearAlgebra.TensorProduct.Prod
+import Mathlib.RingTheory.PowerSeries.Trunc
+import Mathlib.RingTheory.Kaehler.Polynomial
+import Mathlib.RingTheory.Kaehler.JacobiZariski
+import Mathlib.RingTheory.Etale.Kaehler
+import Mathlib.RingTheory.Smooth.Basic
+import Mathlib.LinearAlgebra.TensorProduct.Basis
 
 /-!
-# Folder 22, Lemme 3.3 and Corollaires 3.4, 3.5
+# Folder 22, Lemme 3.3, Corollaires 3.4, 3.5, and the obstruction of pp. 22, 24
 
 The modernised reading `transcripts/22/22.modern.tex` (typescript page 10, his
 page 25) states:
@@ -23,9 +29,15 @@ page 25) states:
 > Alors `P` est un `A`-module plat.
 
 The rest of the folder — formal smoothness of topological algebras (3.2, 3.6),
-Cohen algebras (3.7–3.12), the regular-homomorphism criterion 3.13, the
-differential obstruction over `ℚ((x_i))` — needs preadic topologies and
-geometric regularity, which mathlib does not have; it is not formalised here.
+Cohen algebras (3.7–3.12), the regular-homomorphism criterion 3.13 — needs preadic
+topologies and geometric regularity, which mathlib does not have; it is not
+formalised here. The discrete-topology half of the obstruction of pages 22 and 24
+is (finding `22-power-series-discrete-obstruction`, issue #54): for
+`k = ℚ(x_i : i ∈ I)`, `I` infinite, and `A = k[[t]]`, no derivation
+`D : A → Ω_k ⊗_k A ≅ A^{(I)}` induces `d_k`, because the `dx_{i_n}`-component of
+`D(Σ x_{i_n} tⁿ)` has `tⁿ`-coefficient `1` for every `n`; hence `A` is not formally
+smooth over `k` for the discrete topology. The `t`-adic half (formal smoothness
+for the `t`-adic topology) is not formalised.
 
 What is proved:
 
@@ -42,6 +54,26 @@ What is proved:
   strict »). The reduction from a general countable cofinal system to `ℕ` is not
   formalised. The proof follows the reading's argument: the sequences split,
   `lim P_n ≅ P_0 × ∏ K_n` with `K_n = ker(P_{n+1} → P_n)` projective, then 3.4.
+* `no_derivation` — the obstruction, abstractly: if `M` is a free `k`-module with
+  basis `b`, no derivation `k⟦t⟧ → k⟦t⟧ ⊗_k M` over any base sends `aₙ` to
+  `1 ⊗ b(iₙ)` for infinitely many distinct `iₙ`. The proof is the reading's, with one
+  simplification: the reading first reduces to `D(t) = 0`; here `n` is chosen large
+  enough that the `b(iₙ)`-coordinate of `D(t)` already vanishes, so the coordinate
+  derivation `E` kills `t`, hence `E(t^{n+1}g) = t^{n+1}E(g)`, and the `tⁿ`-coefficient
+  of `E(Σ a_m t^m)` is `1`, while `E(Σ a_m t^m)` is itself `0` for `n` large.
+* `basisDx`, `no_derivation_extending_d` — page 22's case: `(dx_i)` is a basis of
+  `Ω_{k/ℚ}` (polynomial basis, then localisation, which is formally étale), and no
+  derivation `D : A → A ⊗_k Ω_{k/ℚ}` satisfies `D(c) = 1 ⊗ dc` on `k`.
+* `retraction_of_formallySmooth`, `not_formallySmooth_discrete` — the conclusion the
+  reading draws: if `A` were formally smooth over `k` (discrete topology, mathlib's
+  `Algebra.FormallySmooth`), Jacobi–Zariski and projectivity of `Ω_{A/k}` would split
+  `A ⊗_k Ω_{k/ℚ} → Ω_{A/ℚ}`, and the retraction composed with `d_A` would be such a
+  `D`. So `ℚ(x_i)[[t]]` is not formally smooth over `ℚ(x_i)`.
+* `not_formallySmooth_of_field` — the same in every characteristic: for a field `K`
+  and any base `R` with `Ω_{K/R}` infinite-dimensional, `K[[t]]` is not formally
+  smooth over `K` for the discrete topology. Neither characteristic 0 nor the choice
+  of `ℚ(x_i)` is used: only a basis of `Ω` containing infinitely many `d aₙ`, which
+  over a field can always be extracted from the spanning family `(da)`.
 
 **What the formalisation finds.**
 
@@ -57,6 +89,10 @@ What is proved:
   hypothesis is strictly stronger.
 * Lemme 3.3 holds over any commutative ring with no further hypothesis, as
   stated.
+* The obstruction holds as the reading states it, and the step pages 22–23 carry
+  in illegible prose (the reduction to `D(t) = 0` through a finitely generated
+  subfield `k_0`) is not needed. The conclusion holds for every field with
+  infinite-dimensional `Ω`, in every characteristic, over any base ring.
 
 What this certifies is that the reading holds together at these points, not
 that it is what the page says (issue #26).
@@ -283,5 +319,180 @@ theorem corollaire3_5 (hA : Hypothese A) [∀ n, Module.Projective A (P n)]
   exact Module.Flat.of_linearEquiv (LinearEquiv.ofBijective Φ hΦ)
 
 end Corollaire35
+
+section PowerSeriesObstruction
+
+open PowerSeries
+
+section Obstruction
+
+variable {k : Type*} [CommRing k] {M : Type*} [AddCommGroup M] [Module k M]
+
+/-- The `k⟦t⟧`-linear map `k⟦t⟧ ⊗_k M → k⟦t⟧`, `f ⊗ m ↦ φ(m) f`. -/
+noncomputable def coordProj (φ : M →ₗ[k] k) : k⟦X⟧ ⊗[k] M →ₗ[k⟦X⟧] k⟦X⟧ :=
+  (TensorProduct.AlgebraTensorModule.rid k k⟦X⟧ k⟦X⟧).toLinearMap ∘ₗ φ.baseChange k⟦X⟧
+
+theorem coordProj_tmul (φ : M →ₗ[k] k) (f : k⟦X⟧) (m : M) : coordProj φ (f ⊗ₜ m) = φ m • f := by
+  simp [coordProj]
+
+/-- An element of `k⟦t⟧ ⊗_k M` has only finitely many non-zero coordinates. -/
+theorem coordProj_eventually_zero {ι : Type*} (b : Module.Basis ι k M) (z : k⟦X⟧ ⊗[k] M) :
+    ∃ s : Finset ι, ∀ i ∉ s, coordProj (b.coord i) z = 0 := by
+  classical
+  induction z using TensorProduct.inductionOn with
+  | tmul f m =>
+    refine ⟨(b.repr m).support, fun i hi => ?_⟩
+    rw [coordProj_tmul, Module.Basis.coord_apply, Finsupp.notMem_support_iff.1 hi, zero_smul]
+  | add x y hx hy =>
+    obtain ⟨s, hs⟩ := hx
+    obtain ⟨t, ht⟩ := hy
+    refine ⟨s ∪ t, fun i hi => ?_⟩
+    rw [Finset.mem_union, not_or] at hi
+    rw [map_add, hs i hi.1, ht i hi.2, add_zero]
+
+variable {R : Type*} [CommRing R] [Algebra R k]
+
+theorem der_X_pow_mul (E : Derivation R k⟦X⟧ k⟦X⟧) (hX : E X = 0) (m : ℕ) (g : k⟦X⟧) :
+    E (X ^ m * g) = X ^ m * E g := by
+  rw [Derivation.leibniz, Derivation.leibniz_pow, hX]
+  simp
+
+theorem der_C_mul_X_pow (E : Derivation R k⟦X⟧ k⟦X⟧) (hX : E X = 0) (m : ℕ) (c : k) :
+    E (C c * X ^ m) = E (C c) * X ^ m := by
+  rw [mul_comm, der_X_pow_mul E hX, mul_comm]
+
+/-- `Σ aₙ tⁿ = Σ_{m ≤ n} a_m t^m + t^{n+1} g`. -/
+theorem mk_eq_sum_add (a : ℕ → k) (n : ℕ) :
+    PowerSeries.mk a = ∑ m ∈ Finset.range (n + 1), C (a m) * X ^ m +
+      X ^ (n + 1) * PowerSeries.mk fun j => a (j + (n + 1)) := by
+  ext j
+  rw [map_add, map_sum, coeff_X_pow_mul']
+  simp only [coeff_C_mul_X_pow, coeff_mk, Finset.sum_ite_eq, Finset.mem_range]
+  by_cases hj : j < n + 1
+  · simp [hj, show ¬ n + 1 ≤ j by omega]
+  · simp [hj, show n + 1 ≤ j by omega, Nat.sub_add_cancel (show n + 1 ≤ j by omega)]
+
+/-- **The obstruction (pp. 22, 24).** Let `M` be a free `k`-module with basis `b`, and
+`a₀, a₁, …` elements of `k`. There is no derivation `D : k⟦t⟧ → k⟦t⟧ ⊗_k M` (over any base
+`R`) with `D(aₙ) = 1 ⊗ b(iₙ)` for infinitely many distinct indices `iₙ`: the coordinate
+of `D(Σ aₙ tⁿ)` along `b(iₙ)` has `tⁿ`-coefficient `1` for every `n`. -/
+theorem no_derivation [Nontrivial k] {ι : Type*} (b : Module.Basis ι k M) (e : ℕ → ι)
+    (he : Function.Injective e) (a : ℕ → k) (D : Derivation R k⟦X⟧ (k⟦X⟧ ⊗[k] M))
+    (hD : ∀ n, D (C (a n)) = 1 ⊗ₜ b (e n)) : False := by
+  classical
+  obtain ⟨s, hs⟩ := coordProj_eventually_zero b (D (PowerSeries.mk a))
+  obtain ⟨t, ht⟩ := coordProj_eventually_zero b (D X)
+  obtain ⟨n, hn⟩ := Infinite.exists_notMem_finset ((s ∪ t).preimage e he.injOn)
+  rw [Finset.mem_preimage, Finset.mem_union, not_or] at hn
+  let E : Derivation R k⟦X⟧ k⟦X⟧ := (coordProj (b.coord (e n))).compDer D
+  have hE : ∀ z, E z = coordProj (b.coord (e n)) (D z) := fun _ => rfl
+  have hX : E X = 0 := by rw [hE, ht _ hn.2]
+  have hC : ∀ m, E (C (a m)) = C (if m = n then 1 else 0) := by
+    intro m
+    rw [hE, hD, coordProj_tmul, Module.Basis.coord_apply, Module.Basis.repr_self,
+      Finsupp.single_apply, he.eq_iff]
+    split_ifs <;> simp
+  have h0 : E (PowerSeries.mk a) = 0 := by rw [hE, hs _ hn.1]
+  have h1 := congrArg (coeff n) h0
+  rw [mk_eq_sum_add a n, map_add, map_sum, der_X_pow_mul E hX, map_add, map_sum,
+    coeff_X_pow_mul', ite_eq_right (by omega)] at h1
+  simp only [der_C_mul_X_pow E hX, hC, coeff_C_mul_X_pow] at h1
+  simp at h1
+
+end Obstruction
+
+section Discrete
+
+/-- `k = ℚ(x_i : i ∈ I)`. -/
+abbrev K (I : Type*) := FractionRing (MvPolynomial I ℚ)
+
+instance (I : Type*) : Algebra.FormallyEtale (MvPolynomial I ℚ) (K I) :=
+  Algebra.FormallyEtale.of_isLocalization (nonZeroDivisors (MvPolynomial I ℚ))
+
+/-- The generator `x_i` of `k`. -/
+noncomputable abbrev x {I : Type*} (i : I) : K I := algebraMap (MvPolynomial I ℚ) (K I) (.X i)
+
+/-- The basis `(dx_i)` of `Ω_{k/ℚ}`: `Ω_k ⊗_k A ≅ A^{(I)}`, as page 22 writes. -/
+noncomputable def basisDx (I : Type*) : Module.Basis I (K I) Ω[K I⁄ℚ] :=
+  ((KaehlerDifferential.mvPolynomialBasis ℚ I).baseChange (K I)).map
+    (KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale ℚ (MvPolynomial I ℚ) (K I))
+
+theorem basisDx_apply (I : Type*) (i : I) :
+    basisDx I i = KaehlerDifferential.D ℚ (K I) (x i) := by
+  simp only [basisDx, Module.Basis.map_apply, Module.Basis.baseChange_apply,
+    KaehlerDifferential.mvPolynomialBasis_apply,
+    KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply]
+  exact (KaehlerDifferential.mapBaseChange_tmul ..).trans
+    (by rw [one_smul, KaehlerDifferential.map_D])
+
+/-- **No derivation `D : A → Ω_k ⊗_k A` induces `d_k`** (pp. 22, 24), for `k = ℚ(x_i : i ∈ I)`,
+`I` infinite, `A = k[[t]]`. -/
+theorem no_derivation_extending_d (I : Type*) [Infinite I] :
+    ¬ ∃ D : Derivation ℚ (K I)⟦X⟧ ((K I)⟦X⟧ ⊗[K I] Ω[K I⁄ℚ]),
+      ∀ c, D (C c) = 1 ⊗ₜ KaehlerDifferential.D ℚ (K I) c := by
+  rintro ⟨D, hD⟩
+  let e := Infinite.natEmbedding I
+  exact no_derivation (basisDx I) e e.injective
+    (fun n => x (e n)) D fun n => by rw [hD, basisDx_apply]
+
+/-- If `S` is formally smooth over `k` (discrete topology), `S ⊗_k Ω_{k/R} → Ω_{S/R}` has a
+`S`-linear retraction. -/
+theorem retraction_of_formallySmooth (R k S : Type*) [CommRing R] [CommRing k] [CommRing S]
+    [Algebra R k] [Algebra R S] [Algebra k S] [IsScalarTower R k S]
+    [Algebra.FormallySmooth k S] :
+    ∃ r : Ω[S⁄R] →ₗ[S] S ⊗[k] Ω[k⁄R], r ∘ₗ KaehlerDifferential.mapBaseChange R k S =
+      LinearMap.id := by
+  have hinj : Function.Injective (KaehlerDifferential.mapBaseChange R k S) := by
+    rw [injective_iff_map_eq_zero]
+    intro x hx
+    obtain ⟨y, rfl⟩ := (Algebra.H1Cotangent.exact_δ_mapBaseChange R k S x).mp hx
+    rw [Subsingleton.elim y 0, map_zero]
+  have h := ((KaehlerDifferential.exact_mapBaseChange_map R k S).split_tfae').out 1 2
+  exact (h.mp ⟨hinj,
+    Module.projective_lifting_property _ _ (KaehlerDifferential.map_surjective R k S)⟩).2
+
+/-- **`k⟦t⟧` is not formally smooth over `k` for the discrete topology** as soon as `Ω_{k/R}`
+has a basis containing infinitely many differentials `d aₙ`. -/
+theorem not_formallySmooth_of_basis (R k : Type*) [CommRing R] [CommRing k] [Nontrivial k]
+    [Algebra R k] {ι : Type*} (b : Module.Basis ι k Ω[k⁄R]) (e : ℕ → ι)
+    (he : Function.Injective e) (a : ℕ → k) (ha : ∀ n, KaehlerDifferential.D R k (a n) = b (e n)) :
+    ¬ Algebra.FormallySmooth k k⟦X⟧ := by
+  intro _
+  obtain ⟨r, hr⟩ := retraction_of_formallySmooth R k k⟦X⟧
+  refine no_derivation b e he a (r.compDer (KaehlerDifferential.D R k⟦X⟧)) fun n => ?_
+  have h := LinearMap.congr_fun hr (1 ⊗ₜ KaehlerDifferential.D R k (a n))
+  rw [LinearMap.comp_apply, KaehlerDifferential.mapBaseChange_tmul, one_smul,
+    KaehlerDifferential.map_D, LinearMap.id_apply, ha] at h
+  simpa using h
+
+/-- **The page's example**: for `k = ℚ(x_i : i ∈ I)`, `I` infinite, `k[[t]]` is not formally
+smooth over `k` for the discrete topology. -/
+theorem not_formallySmooth_discrete (I : Type*) [Infinite I] :
+    ¬ Algebra.FormallySmooth (K I) (K I)⟦X⟧ := by
+  let e := Infinite.natEmbedding I
+  exact not_formallySmooth_of_basis ℚ (K I) (basisDx I) e e.injective
+    (fun n => x (e n)) fun n => (basisDx_apply I _).symm
+
+/-- **The general form, in every characteristic**: for a field `K` and any base ring `R` with
+`Ω_{K/R}` infinite-dimensional, `K[[t]]` is not formally smooth over `K` for the discrete
+topology. -/
+theorem not_formallySmooth_of_field (R K : Type*) [CommRing R] [Field K] [Algebra R K]
+    (h : ¬ Module.Finite K Ω[K⁄R]) : ¬ Algebra.FormallySmooth K K⟦X⟧ := by
+  obtain ⟨s, hs, hspan, hli⟩ := exists_linearIndependent K (Set.range (KaehlerDifferential.D R K))
+  let b : Module.Basis s K Ω[K⁄R] := Module.Basis.mk hli (by
+    rw [Subtype.range_coe, hspan, KaehlerDifferential.span_range_derivation])
+  have : Infinite s := by
+    by_contra hfin
+    rw [not_infinite_iff_finite] at hfin
+    exact h (Module.Finite.of_basis b)
+  let e := Infinite.natEmbedding s
+  have ha : ∀ n, ∃ c, KaehlerDifferential.D R K c = (e n : Ω[K⁄R]) := fun n => hs (e n).2
+  choose a ha using ha
+  exact not_formallySmooth_of_basis R K b e e.injective a fun n => by
+    rw [ha, Module.Basis.mk_apply]
+
+end Discrete
+
+end PowerSeriesObstruction
 
 end Grothendieck.Folder22

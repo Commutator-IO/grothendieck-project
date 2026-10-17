@@ -5709,6 +5709,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read EGA 0_IV §§19–22 (formal smoothness for the discrete versus adic topologies, and the remarks on power series over a field) and Matsumura, Commutative Ring Theory §§25–28, for an example of k[[t]] not formally smooth over k for the discrete topology when Ω_k is infinite-dimensional. This is a short argument and is likely to be stated or set as an exercise somewhere; the search so far is too thin to rule that out, and if it is found the status becomes matched.',
+    lean: { file: 'lean/Grothendieck/Folder22.lean', found: 'The discrete-topology half holds as stated: no derivation k[[t]] → Ω_k ⊗_k k[[t]] induces d_k, and k[[t]] is not formally smooth over k (mathlib’s Algebra.FormallySmooth, via Jacobi–Zariski). The reduction to D(t) = 0 is not needed: for n large the dx_{i_n}-coordinate of D(t) already vanishes. Characteristic 0 is not used either: the same holds for every field K with Ω_{K/R} infinite-dimensional, over any base R. The t-adic half is not proved.' },
   },
   {
     id: '22-p23-proposition-reconstruction',
