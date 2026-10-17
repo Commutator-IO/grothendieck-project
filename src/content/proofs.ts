@@ -609,6 +609,19 @@ export const PROOFS: Proof[] = [
     theorems: ['isWeq_iff_bijective', 'isWeq_prod', 'isWeq_pi', 'not_aspherical_point', 'not_aspherical_regular_prod', 'answer_page_35'],
   },
   {
+    folder: '29',
+    batch: 6,
+    page: '120',
+    name: 'The determinant criterion on tame inertia',
+    statement:
+      'For a morphism of strictly local regular schemes with normal crossings divisors, branches indexed by C and C′, the map on tame inertia is the map N : ∏_{ℓ≠p} ℤ_ℓ(1)^C → ∏_{ℓ≠p} ℤ_ℓ(1)^{C′} of the matrix of multiplicities, and N is an isomorphism iff card C = card C′ and the integer det N is ± p^r, p the characteristic exponent.',
+    found:
+      'Holds as stated, for the criterion: an integer matrix N is bijective over ℤ_ℓ for every prime ℓ ≠ p (p prime, or 1 in characteristic zero) iff card C = card C′ and det N = ± p^k, by the reading’s one-line argument (bijective over ℤ_ℓ iff ℓ ∤ det N, and an integer prime to every ℓ ≠ p is ± p^k). One prime ℓ forces card C = card C′; the matching of columns with rows changes det N only by a sign. Not formalised: that the map on tame inertia is N, and the conjugacy of inertia subgroups, which need tame inertia of regular schemes, absent from mathlib.',
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder29.lean',
+    theorems: ['card_eq_of_bijective', 'bijective_iff_not_dvd_det', 'forall_not_dvd_iff', 'bijective_submatrix_iff', 'criterion_of_equiv', 'criterion'],
+  },
+  {
     folder: '64',
     batch: 3,
     page: '48',

@@ -1,0 +1,54 @@
+\section[Cote 29 : le critère du déterminant sur l'inertie modérée]{Cote 29 : le critère du déterminant sur l'inertie modérée\protect\verifie{Folder29}}\label{sec:29}
+
+La cote 29 réunit, entre 1959 et 1969, les notes de Grothendieck sur le groupe fondamental modéré, dont l'échange de 1967 avec Murre. Le tapuscrit \q{Comportement fonctoriel des groupes d'inertie} (pages~116 à 122) calcule, pour un morphisme $f$ de schémas strictement locaux réguliers munis de diviseurs à croisements normaux de branches indexées par $C$ et $C'$, l'application induite sur l'inertie modérée : c'est l'application $N : \prod_{\ell \neq p} \mathbf Z_\ell(1)^C \to \prod_{\ell \neq p} \mathbf Z_\ell(1)^{C'}$ de la matrice $(n_{c,c'})$ des multiplicités, $f^*(\bar E_{c'}) = \sum_c n_{c,c'} \bar D_c$ (\lot{29}{6}{120}). Que cette application soit $N$ demande l'inertie modérée des schémas réguliers, que mathlib n'a pas, et n'est pas démontré ici. Le critère que la page en tire porte sur la seule matrice, $\mathbf Z_\ell(1)$ étant libre de rang~$1$ sur $\mathbf Z_\ell$.
+
+\begin{theoreme}[Grothendieck, page 120, le critère\piste{29-inertia-matrix-determinant}]\label{thm:29-critere}
+Soient $C$, $C'$ des ensembles finis, $N$ une matrice entière de lignes indexées par $C'$ et de colonnes par $C$, et $p$ un nombre premier ou $p = 1$ (l'exposant caractéristique). L'application $\mathbf Z_\ell^C \to \mathbf Z_\ell^{C'}$ de matrice $N$ est bijective pour tout nombre premier $\ell \neq p$ si et seulement si $\operatorname{card} C = \operatorname{card} C'$ et, les colonnes étant mises en bijection avec les lignes, l'entier $\det N$ vaut $\pm p^k$ pour un $k \geq 0$.
+\end{theoreme}
+
+\noindent L'énoncé tient tel que la page le donne, par l'argument d'une ligne de la lecture (\texttt{criterion}, dans \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/Folder29.lean}{\texttt{Folder29.lean}}). L'égalité des cardinaux vient d'une seule valeur de $\ell$ ; le choix de la bijection entre colonnes et lignes ne change le déterminant que d'un signe.
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, page 120, inertie modérée et matrice des multiplicités]\nonverifie
+Dans la situation ci-dessus, l'application induite sur l'inertie modérée est l'application $N$ de matrice $(n_{c,c'})$ ; lorsque $N$ est un isomorphisme, les sous-groupes d'inertie de $H$ en $y$ sont exactement les conjugués des images de ceux de $G$ en $x$.
+\end{theoreme*}
+\end{encadre}
+{\small Mathlib n'a pas l'inertie modérée des schémas réguliers. On se reportera aux notes de Grothendieck (\lot{29}{6}{120}).\par}
+
+Les autres pistes de la cote, hors de portée de Lean pour l'instant :
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 190 à 193, axiome R2 des domaines de ramification\piste{29-ramification-domain-axioms}]\nonverifie
+Soit $(R, r)$ un domaine de ramification sur $S$ : un champ de catégories multigaloisiennes sur le site étale de $S$ muni d'une réalisation géométrique continue $r$ vers les schémas relatifs. Sous les axiomes R1, R3 et R4, l'axiome R2 (les sous-objets directs de $X$ correspondent bijectivement aux parties ouvertes et fermées de $r(X)$) équivaut à la fidélité de~$r$.
+\end{theoreme*}
+\end{encadre}
+{\small La proposition est énoncée page~193, une page rayée. La page n'en argumente que le sens \q{$r$ fidèle $\Rightarrow$ R2}, en se ramenant à $X'' = X' \sqcup X_1$ et jusqu'à $r(X_1) = \emptyset$ ; la réciproque n'est démontrée ni sur la page ni ici.\par}
+
+\begin{encadre}
+\begin{enonce}[Grothendieck, page 197, proposition~6, homomorphismes de domaines de ramification, énoncée sans démonstration\piste{29-domram-morphisms-fully-faithful}]\nonverifie
+Pour $(R, r)$ défini par un schéma $Z$ muni d'un groupe fini d'opérateurs $G$, $\mathrm{Hom}((R,r),(R',r'))$ est équivalente à la catégorie des couples $(P', \alpha)$, $P'$ objet galoisien de $R'_S$ de groupe $G$ et $\alpha$ un $G$-isomorphisme $r'(P') \simeq Z$. En particulier, dans tout homomorphisme $(\varphi, \lambda)$ de domaines de ramification, $\varphi$ est pleinement fidèle.
+\end{enonce}
+\end{encadre}
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 212 et 214, le degré comme donnée primitive\piste{29-degree-n-as-primitive}]\nonverifie
+Sur une catégorie, six conditions sur une classe de morphismes de degré~$n$ (changement de base, additivité finie, isomorphismes de degré~$1$, décomposition $Y = \coprod_n Y_n$ avec $X \times_Y Y_n \to Y_n$ de degré~$n$, descente effective en degré $\geq 1$, vide en degré~$0$) déterminent la notion de façon unique ; elle coïncide alors avec \q{trivialisé par un morphisme de descente effective universelle}.
+\end{theoreme*}
+\end{encadre}
+\begin{demopage}[pages 212 et 214]
+La page suppose aussi les conditions (0) à (2) de la page~212, que l'encadré omet. Elle montre par récurrence sur $n$ qu'un morphisme $X \to Y$ de degré~$n$ devient $[1, n]$ après un morphisme de descente effective universelle ; pour $n = 0$, $X$ est vide. Pour $n > 0$, la diagonale fait de $X$ un sommande direct universel de $X \times_Y X \simeq X \sqcup X'_1$, où $X'_1 \to X$ est de degré $n - 1$ ; la récurrence le trivialise par un $Y'' \to X$, d'où $X \times_Y Y'' \simeq Y'' \times [1, n]$, et $Y'' \to Y$ est de descente effective universelle comme composé (p.~214). La \q{Conclusion} en tire l'unicité, sans écrire qu'un morphisme ainsi trivialisé est de degré~$n$.
+\end{demopage}
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 87 à 97, $\pi_1$ modéré et auto-intersection\piste{29-formal-tame-pi1-self-intersection}]\nonverifie
+Soit $\mathfrak X$ un schéma formel régulier dont la fibre spéciale $X_o$ est une composante d'un diviseur à croisements normaux~$D$. Le groupe fondamental modéré $\pi_1^t(\mathfrak X/D)$ est une extension centrale de $\pi_1^t(X_o/D'_o)$ par un quotient de $\mu^\infty$, dont la classe est la classe de Chern de l'auto-intersection de $X_o$ dans $\mathfrak X$ ; pour $X_o = \mathbf P^1_k$ et $D'_o$ vide, l'extension est $\mu_n(k)$, où $n$ est la partie première à $p$ du degré de $X_o \cdot X_o$.
+\end{theoreme*}
+\end{encadre}
+{\small Les feuillets en esquissent une démonstration incomplète : les lemmes~1 et~2 et l'argument de Kummer de la page~95 sont donnés, mais la page~91 porte \q{il faut prouver} et \q{à vérifier}, et la raison de la divisibilité, page~93, est omise.\par}
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 170 et 171, torseurs sous un groupe discret infini\piste{29-h1-five-classes-infinite-group}]\nonverifie
+Soit $G$ un groupe discret, éventuellement infini, et soient $C_1$ à $C_5$ les classes de familles couvrantes fppf quasi-compactes, de type fini, quasi-finies, principales finies et principales finies étales. On a $H^1_{C_3} \simeq H^1_{C_2}$ en général ; $H^1_{C_2} \simeq H^1_{C_1}$ sur un anneau de Dedekind ; $H^1_{C_i} \simeq H^1(\hat V/V, -)$ pour $i = 1, 2, 3$ sur un anneau de valuation discrète complet $V$ à corps résiduel algébriquement clos ; $H^1_{C_5} \simeq H^1_{C_4} \simeq H^1_{C_3}$ et $H^1_{C_i}(V, -) \simeq H^1_{C_i}(k, -)$ sur un anneau local complet $V$ de corps résiduel $k$.
+\end{theoreme*}
+\end{encadre}
+{\small Mathlib n'a pas les torseurs fppf ni le $H^1$ pour ces topologies. On se reportera aux notes de Grothendieck (\lot{29}{9}{170}).\par}
