@@ -1,0 +1,274 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[english]{babel}
+\usepackage{microtype}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\setlist{itemsep=2pt}
+\newcommand{\lot}[3]{\href{https://grothendieck.commutator.io/\##1/#2}{shelfmark~#1, p.~#3}}
+\newcommand{\q}[1]{“#1”}
+\title{Conjectures in Grothendieck's working notes\\[4pt]
+\large Dated first appearances, open questions, and what can be formalised}
+\author{Michel Hua\\\small\texttt{michel@commutator.io} --- \url{https://grothendieck.commutator.io}}
+\date{October 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent The University of Montpellier holds Alexander Grothendieck's
+mathematical working notes, about 16\,000 digitised pages. A transcription
+project begun in August 2026 has read more than 11\,000 of them and restated
+160 folders in current notation. This note reports what that reading shows
+about conjectures. Five well-known conjectures appear in the notes, some
+earlier than the texts usually cited for them: the standard conjectures
+(1965), the de Rham--Betti form of the period conjecture (1965), the homotopy
+hypothesis (1975), the section conjecture, and the programme behind the
+Grothendieck--Teichmüller group. The notes also pose questions that have no
+printed source. For each item we give the place and date in the fonds, the
+published source to cite, its status, whether it is already in the
+\emph{Formal Conjectures} repository, and whether current Mathlib can state
+it. Everything rests on transcriptions that no person has yet read in full
+against the manuscripts; Section~\ref{sec:caveats} says what follows from that.
+\end{abstract}
+
+\section{The corpus and how it was read}
+
+The fonds is the deposit of Grothendieck's mathematical notes at Montpellier,
+catalogued by folder (« cote ») and published as facsimiles at
+\url{https://grothendieck.umontpellier.fr}. The project at
+\url{https://grothendieck.commutator.io} works on it in four layers.
+
+\begin{itemize}
+\item \textbf{Transcription.} Each batch of twenty pages is transcribed into
+  LaTeX with a critical apparatus (illegible, doubtful, struck, added), by
+  Anthropic's Claude models (Opus~5 and Opus~5.5) under written editorial
+  rules. More than 11\,000 pages are done.
+\item \textbf{Modernised readings.} 160 folders are restated whole, in French,
+  in current notation, with footnotes marking every departure from the page.
+  A reading is an interpretation; where it disagrees with the transcription,
+  the transcription is the record.
+\item \textbf{Findings.} A register of 458 entries lists statements of the
+  folders that may not be in the literature, each written as a claim about the
+  literature, with what was searched and what would settle it. Its status
+  vocabulary is used below: \emph{matched} (found in print), \emph{candidate}
+  (searched, not found), \emph{unsearched}, \emph{refuted}.
+\item \textbf{Lean.} An appendix proves in Lean~4, on Mathlib, 1\,018
+  theorems drawn from the readings, using only Lean's standard axioms
+  (\url{https://grothendieck.commutator.io/article/grothendieck-lean.pdf}).
+  Lean checks the proofs, not that a statement is faithful to the page.
+\end{itemize}
+
+References of the form \q{shelfmark~$N$, p.~$k$} below point to the reading
+view of the folder, which shows the transcription beside Montpellier's
+facsimile.
+
+\section{Five conjectures and where they first appear}
+
+Table~\ref{tab:five} sums up this section. The dates are those of the leaves or
+of Montpellier's inventory, whose brackets mark a date the archivists
+inferred.
+
+\begin{table}[h]
+\small
+\begin{tabularx}{\textwidth}{>{\raggedright}p{2.7cm} >{\raggedright}p{3.2cm} >{\raggedright}X >{\raggedright\arraybackslash}p{2.6cm}}
+\toprule
+Conjecture & In the fonds & Published source to cite & Mathlib today \\
+\midrule
+Standard conjectures & 14, p.~44: letter to Serre, 27 Aug.\ 1965; 16 (1966--67) & Grothendieck, Bombay 1968 (1969); Kleiman 1968, 1994 & no Weil cohomology \\
+Period conjecture (de Rham--Betti) & 13, pp.~47--48 (1965) & Grothendieck 1966; André 2004; Bost--Charles 2016 & elliptic case statable \\
+Homotopy hypothesis & 134-2, p.~42: letter to Breen, 5 Feb.\ 1975 & \emph{Pursuing Stacks} (1983); Maltsiniotis 2010 & partly \\
+Section conjecture & 149, p.~65 (undated) & letter to Faltings, 27 June 1983 (1997) & no étale $\pi_1$ \\
+Galois action and $\widehat{GT}$ & 119 (\emph{Esquisse}, 1984); 142 ([from 1978]); 147 & \emph{Esquisse} (1997); Drinfeld 1990; Ihara 1990 & partly \\
+\bottomrule
+\end{tabularx}
+\caption{The five conjectures. None of them is in \emph{Formal Conjectures} as of 17 October 2026 (code search on the repository).}
+\label{tab:five}
+\end{table}
+
+\subsection{The standard conjectures (1965)}
+On 27 August 1965 a letter to Serre states the standard conjectures, among
+them the positivity conjecture of Hodge type (\lot{14}{3}{44}); the letter is
+printed in the \emph{Correspondance Grothendieck--Serre}. Folder~16
+(1966--67) works out their algebraic side: Lefschetz operators, the
+pseudo-inverse $\Lambda$, Poincaré--Hodge algebras. Part of that algebra is
+proved in the Lean appendix (the normalisation of $\mathfrak{sl}_2$ and the
+pseudo-inverse, folder~16), and the register records one statement of the
+folder as possibly unpublished: the Lefschetz-type conjecture follows from
+$D(X)$ and the existence of \emph{some} algebraic isomorphism
+$H^{2n-i} \to H^i$, not necessarily inverse to $L^{n-i}$ (unsearched).
+
+\emph{Status.} Open in general: the Hodge-type conjecture holds in
+characteristic~0 by the Hodge--Riemann relations; the Lefschetz-type
+conjecture is known in dimension at most~2 and for abelian varieties.
+
+\subsection{The period conjecture (1965)}
+Folder~13, \q{Groupe de Galois motivique} (1965), asks on pp.~47--48 whether,
+over an algebraic extension $k$ of $\mathbb{Q}$, the functor sending a motive
+to its de Rham realisation, its Betti realisation and the comparison
+isomorphism between them is fully faithful. It reduces the question to
+$k = \overline{\mathbb Q}$ and recasts it as $V^G = V \cap g(\overline V)$ for
+the motivic Galois group, noting that the rank-one (Tate) case works. This is
+the de Rham--Betti form of what is now called Grothendieck's period conjecture
+(register: \emph{matched}, Bost--Charles 2016, Conj.~2.12).
+
+\emph{Status.} Open. The elliptic case can be stated with Mathlib's
+\texttt{PeriodPair} and \texttt{weierstrassP}: for a lattice with algebraic
+invariants and no complex multiplication, the periods and quasi-periods
+$\omega_1, \omega_2, \eta_1, \eta_2$ should have transcendence degree~4; with
+complex multiplication the degree is~2 (Chudnovsky, 1976).
+
+\subsection{The homotopy hypothesis (1975)}
+On 5 February 1975, the postscript of a letter to Lawrence Breen sets out the
+\q{yoga} by which an $n$-category in groupoids, up to $n$-equivalence,
+\q{est essentiellement la même chose} as a semi-simplicial set up to homotopy
+whose $\pi_i$ are neglected for $i \geq n+1$ (\lot{134-2}{3}{42}). It is the
+homotopy hypothesis in its first form; \emph{Pursuing Stacks} takes it up in
+1983 for non-strict $\infty$-groupoids. The fonds also holds the handwritten
+French original of the third letter to Breen (17--19 July 1975,
+shelfmark~134-2, pp.~145--184), of which the folder otherwise holds only English versions, one of them
+R.~Brown's translation.
+
+\emph{Status.} Depends on the model: false for strict $n$-groupoids from
+$n = 3$ (Simpson), regarded as open for Grothendieck's own globular
+$\infty$-groupoids in Maltsiniotis's formulation.
+
+\subsection{The section conjecture}
+An undated page of folder~149 concludes \q{Nos conjectures impliquent donc
+qu'il y a exactement deux sortes de telles sections}, those of rational points
+and those of points at infinity (\lot{149}{4}{65}). This is the section
+conjecture in its affine form, usually cited from the letter to Faltings of
+27 June 1983.
+
+\emph{Status.} Open; injectivity is known, and so are a birational $p$-adic
+variant (Koenigsmann) and the real analogue.
+
+\subsection{The Galois action on Teichmüller towers}
+The \emph{Esquisse d'un programme} (1984; folder~119) is at the origin of the
+group Drinfeld named after Grothendieck and Teichmüller. Folders~142,
+\q{Action de Galois sur Teichmüller} ([from 1978]), and 147, \q{Structure à
+l'infini des $M_{g,\nu}$}, work on the same subject. Folder~142 lists
+necessary conditions for an automorphism of the profinite fundamental groupoid
+of a curve to come from $\mathrm{Gal}(\overline K/K)$ (pp.~94--101; register:
+\emph{candidate}).
+
+\emph{Status.} Ihara's question --- is $\mathrm{Gal}(\overline{\mathbb Q}/\mathbb Q)
+\to \widehat{GT}$ an isomorphism? --- is open; the map is injective by Belyi's
+theorem.
+
+\section{Questions posed in the notes, with no printed source}
+
+The register also holds questions that the notes raise and that the project
+has not found in print. They cannot go into \emph{Formal Conjectures} as they
+stand, since that repository asks for a published source; they are listed so
+that a reader who knows the literature can say whether they are known.
+
+\begin{itemize}
+\item \textbf{The 27 lines around a triangle} (folder~69, \q{Graphes
+  cubiques}, [from 1976], pp.~7--8, 14--15, 25--26, 113; unsearched). The
+  intersection graph of the 27 lines with a marked triangle $t$ is described as
+  the data of a 3-element set, an $\mathbb F_2$-plane $V$, and a torsor under
+  the Baer product of three pull-backs of the extension of $V$ by
+  $\mathbb F_2$ that splits over no subgroup of order~2 --- the quaternion
+  group $Q_8$; $\operatorname{Aut}(C, t)$ has order $1152 = |W(F_4)|$. The
+  group is classical; the torsor reconstruction may not be. A general version
+  for graphs whose edges lie in unique triangles (folder~74) is proved in Lean.
+\item \textbf{Cohomological dimension and imperfection} (folder~31, SGA~4
+  residues, [1963--1973], p.~84; unsearched). The bound on the
+  $\ell$-cohomological dimension of affine schemes in characteristic $\ell$
+  would be governed by the degree of imperfection $\nu(k)$,
+  $\ell^{\nu(k)} = [k : k^\ell]$, rather than by the dimension.
+\end{itemize}
+
+Some questions of the notes are now settled, and serve as a check on the
+method: whether the monodromy of projective structures on a fixed Riemann
+surface is injective (folder~159; yes, Poincaré); whether sequential colimits
+of presheaves on a test category are homotopy colimits (folder~107; not in
+general, Milnor's $\lim^1$); whether stratifying cohomology is invariant under
+nilpotent immersions (folder~7; no, as the printed exposé says); and in
+folder~68, \q{Jeux de position} ([from 1978]), a statement left under a
+question mark --- that winning positions are reached by finitely many
+backward steps --- which needs transfinite iteration, $\omega + 1$ already
+for a position with infinitely many successors.
+
+\section{Relation to recent machine-written proofs}
+On 6 October 2026 OpenAI made public a repository of 719 manuscripts
+produced by an internal model. Four families announce proofs of statements
+from Grothendieck's programme or bearing his name: the homotopy hypothesis
+for weak globular $\infty$-groupoids; the section conjecture, local
+$p$-adic and over $\mathbb Q$ for the modular curves $X_0(N)$ and $X_1(N)$ of
+genus at least two; the Deligne--Drinfeld conjecture on the
+Grothendieck--Teichmüller Lie algebra; and the rational Hodge conjecture for
+abelian varieties with complex multiplication, hence the Hodge-type standard
+conjecture for them. None has been peer-reviewed, and only two are partly
+formalised in Lean. This note does not assess them. The fonds supplies dated
+points to which a confirmed proof can be related, and it does not attribute
+those conjectures: Deligne--Drinfeld is Deligne's and Drinfeld's, the Hodge
+conjecture is not Grothendieck's, and the proved forms of the homotopy
+hypothesis come from later work.
+
+\section{Formalisation}
+
+\paragraph{What exists.} The Lean appendix proves 1\,018 theorems from the
+readings, on a Mathlib master of October 2026; general lemmas from it are
+proposed to Mathlib as pull requests. One overlap with \emph{Formal
+Conjectures} was found: a proof in folder~36 (SGA~7, [about 1967--1973], on invariant cycles in
+$H^1$ over a henselian trait) holds \q{at least modulo resolution of
+singularities}, whose solved and open cases are stated in
+\texttt{Wikipedia/ResolutionOfSingularities.lean}; the appendix now cites it.
+
+\paragraph{What we propose.} In order of feasibility:
+\begin{enumerate}
+\item the period conjecture, elliptic case, as \texttt{research open}, with
+  the CM case as \texttt{research solved}; it needs only the Weierstrass zeta
+  function and the quasi-periods on top of Mathlib's \texttt{PeriodPair};
+\item a weak form of Ihara's question for the group $\widehat{GT}_0$ defined
+  by Drinfeld's relations (I) and (II) on the profinite free group $\widehat F_2$;
+\item the section conjecture and the standard conjectures as issues only,
+  with precise informal statements, until étale fundamental groups and Weil
+  cohomology exist in Mathlib.
+\end{enumerate}
+Each would cite the published source of Table~\ref{tab:five}, with the fonds
+as context.
+
+\section{Caveats and how to cite}\label{sec:caveats}
+\begin{itemize}
+\item \textbf{Unchecked readings.} The transcriptions are first passes by a
+  language model. A few pages have been read against the facsimile by a
+  person; none of the folders above has been checked whole. Quotations are
+  given as transcribed; the facsimile is the authority.
+\item \textbf{No priority claims.} A conjecture appearing in a folder says
+  where Grothendieck wrote it, not that he was first; dates in brackets are
+  the archivists' inferences.
+\item \textbf{Rights.} The fonds is under copyright; publishing transcriptions
+  requires the heirs' authorisation, which is being sought. Statements of
+  mathematics are cited here; the manuscripts are not reproduced.
+\item \textbf{AI use.} The transcriptions, readings, register, Lean proofs and
+  this note were produced with Anthropic's Claude models under the author's
+  direction; the author checked and takes responsibility for the content.
+\end{itemize}
+
+\section*{References}
+\small\raggedright
+\begin{itemize}[leftmargin=*]
+\item Y. André, \emph{Une introduction aux motifs}, Panoramas et Synthèses 17, SMF, 2004.
+\item J.-B. Bost and F. Charles, \q{Some remarks concerning the Grothendieck period conjecture}, \emph{J. reine angew. Math.} 714 (2016).
+\item P. Colmez and J.-P. Serre (eds.), \emph{Correspondance Grothendieck--Serre}, SMF, 2001.
+\item V. G. Drinfeld, \q{On quasitriangular quasi-Hopf algebras and on a group that is closely connected with $\mathrm{Gal}(\overline{\mathbb Q}/\mathbb Q)$}, \emph{Leningrad Math. J.} 2 (1991).
+\item Google DeepMind, \emph{Formal Conjectures}, \url{https://github.com/google-deepmind/formal-conjectures}.
+\item A. Grothendieck, \q{On the de Rham cohomology of algebraic varieties}, \emph{Publ. Math. IHÉS} 29 (1966).
+\item A. Grothendieck, \q{Standard conjectures on algebraic cycles}, in \emph{Algebraic Geometry (Bombay Colloquium, 1968)}, OUP, 1969.
+\item A. Grothendieck, \q{Esquisse d'un programme} and letter to G. Faltings (27 June 1983), in L. Schneps and P. Lochak (eds.), \emph{Geometric Galois Actions} 1, LMS Lecture Notes 242, CUP, 1997.
+\item A. Grothendieck, \emph{À la poursuite des champs}, vol.~I, ed. G. Maltsiniotis, Documents mathématiques 20, SMF, 2022.
+\item Y. Ihara, \q{Braids, Galois groups, and some arithmetic functions}, \emph{Proc. ICM Kyoto} (1990).
+\item S. Kleiman, \q{Algebraic cycles and the Weil conjectures}, in \emph{Dix exposés sur la cohomologie des schémas}, 1968; \q{The standard conjectures}, \emph{Proc. Symp. Pure Math.} 55 (1994).
+\item G. Maltsiniotis, \q{Grothendieck $\infty$-groupoids, and still another definition of $\infty$-categories}, arXiv:1009.2331 (2010).
+\item OpenAI, \emph{math}: mathematical manuscripts and supporting proof artifacts produced by an internal OpenAI model, \url{https://github.com/openai/math}, 6 October 2026.
+\item J. Stix, \emph{Rational Points and Arithmetic of Fundamental Groups}, LNM 2054, Springer, 2013.
+\item Université de Montpellier, fonds Alexandre Grothendieck, \url{https://grothendieck.umontpellier.fr}.
+\end{itemize}
+
+\end{document}
