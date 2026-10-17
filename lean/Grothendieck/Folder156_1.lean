@@ -135,11 +135,7 @@ include hM
 theorem ne_of_bd {J : S} {a b : L} (h : M.bd J = {a, b}) : a ≠ b := by
   rintro rfl
   obtain ⟨x, y, hxy, hJ⟩ := hM.bd_pair J
-  have hx : x ∈ M.bd J := by rw [hJ]; simp
-  have hy : y ∈ M.bd J := by rw [hJ]; simp
-  rw [h] at hx hy
-  simp only [mem_insert_iff, mem_singleton_iff, or_self] at hx hy
-  exact hxy (hx.trans hy.symm)
+  rcases pair_eq_pair_iff.1 (hJ.symm.trans h) with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩ <;> exact hxy rfl
 
 theorem left_mem {J : S} {a b : L} (h : M.bd J = {a, b}) : a ∈ M.car J :=
   hM.bd_sub J (by rw [h]; simp)
@@ -163,10 +159,10 @@ theorem x0_bd : x0 ∈ M.bd I := by rw [h.bd_eq]; simp
 
 theorem x1_bd : x1 ∈ M.bd I := by rw [h.bd_eq]; simp
 
-theorem mem_car (a : L) : a ∈ M.car I := by rw [h.car_eq]; trivial
+theorem mem_car (a : L) : a ∈ M.car I := h.car_eq ▸ mem_univ a
 
 theorem isSub {J : S} {e w : L} (hJ : M.bd J = {e, w}) : M.IsSub I e w J :=
-  ⟨by rw [h.car_eq]; exact subset_univ _, hJ⟩
+  ⟨h.car_eq ▸ subset_univ _, hJ⟩
 
 theorem mem_intr {a : L} (h0 : a ≠ x0) (h1 : a ≠ x1) : a ∈ M.intr I :=
   ⟨h.mem_car a, by rw [h.bd_eq]; simp [h0, h1]⟩
@@ -179,19 +175,12 @@ theorem uniq0 {J J' : S} {b : L} (hJ : M.bd J = {x0, b}) (hJ' : M.bd J' = {x0, b
     J = J' :=
   h.ax.sub_unique h.x0_bd (h.mem_car b) (h.ax.ne_of_bd hJ).symm (h.isSub hJ) (h.isSub hJ')
 
-theorem le_iff {J : S} {a b : L} (hJ : M.bd J = {x0, b}) : M.le x0 a b ↔ a ∈ M.car J := by
-  constructor
-  · rintro (rfl | ⟨J', hJ', ha⟩)
-    · exact h.ax.right_mem hJ
-    · rwa [h.uniq0 hJ hJ']
-  · exact fun ha => Or.inr ⟨J, hJ, ha⟩
+theorem le_iff {J : S} {a b : L} (hJ : M.bd J = {x0, b}) : M.le x0 a b ↔ a ∈ M.car J :=
+  ⟨fun hab => hab.elim (· ▸ h.ax.right_mem hJ) fun ⟨_, hJ', ha⟩ => h.uniq0 hJ hJ' ▸ ha,
+    fun ha => Or.inr ⟨J, hJ, ha⟩⟩
 
-theorem le_x0 {a : L} : M.le x0 a x0 ↔ a = x0 := by
-  constructor
-  · rintro (rfl | ⟨J, hJ, -⟩)
-    · rfl
-    · exact absurd rfl (h.ax.ne_of_bd hJ)
-  · rintro rfl; exact Or.inl rfl
+theorem le_x0 {a : L} : M.le x0 a x0 ↔ a = x0 :=
+  ⟨fun ha => ha.elim id fun ⟨_, hJ, _⟩ => absurd rfl (h.ax.ne_of_bd hJ), Or.inl⟩
 
 theorem bot_le (a : L) : M.le x0 x0 a := by
   by_cases ha : a = x0
@@ -226,9 +215,7 @@ theorem le_antisymm' {a b : L} (hab : M.le x0 a b) (hba : M.le x0 b a) : a = b :
   obtain ⟨K, hK, -⟩ := h.ax.F1 Jb b (by rw [hb]; simp) a ha hne
   have haint : a ∈ M.intr Jb := ⟨ha, by rw [hb]; simp [ha0, hne]⟩
   have h2 := (h.ax.F2 Jb x0 b a hb haint Ja K ⟨hJab, hJa⟩ hK).1
-  have hmem : b ∈ M.car Ja ∩ M.car K := ⟨hJba (h.ax.right_mem hb), h.ax.left_mem hK.2⟩
-  rw [h2] at hmem
-  exact hne hmem.symm
+  exact hne (h2.subset ⟨hJba (h.ax.right_mem hb), h.ax.left_mem hK.2⟩).symm
 
 /-- Two segments of the segment model with the same extremities are equal
 (corollary 3 a of page 5, in the segment model). -/
@@ -249,14 +236,11 @@ theorem bd_inj {J K : S} (hJK : M.bd J = M.bd K) : J = K := by
   have hvK : v ∈ M.car K := h.ax.right_mem hK
   have key : ∀ Q, u ∈ M.bd Q → M.car J ⊆ M.car Q → M.car K ⊆ M.car Q → J = K :=
     fun Q hQ hJQ hKQ => h.ax.sub_unique hQ (hJQ hvJ) huv.symm ⟨hJQ, hJ⟩ ⟨hKQ, hK⟩
-  have hsub : ∀ T, M.car T ⊆ M.car I := fun T => by rw [h.car_eq]; exact subset_univ _
-  rcases hF2.2 J (hsub J) (by rw [hJ]; simp) with hJ1 | hJ1 <;>
-    rcases hF2.2 K (hsub K) (by rw [hK]; simp) with hK1 | hK1
+  rcases hF2.2 J (h.isSub hJ).1 (by rw [hJ]; simp) with hJ1 | hJ1 <;>
+    rcases hF2.2 K (h.isSub hK).1 (by rw [hK]; simp) with hK1 | hK1
   · exact key Ju (by rw [hJu.2]; simp) hJ1 hK1
-  · have hm : v ∈ M.car Ju ∩ M.car Pu := ⟨hJ1 hvJ, hK1 hvK⟩
-    rw [hF2.1] at hm; exact absurd hm huv.symm
-  · have hm : v ∈ M.car Ju ∩ M.car Pu := ⟨hK1 hvK, hJ1 hvJ⟩
-    rw [hF2.1] at hm; exact absurd hm huv.symm
+  · exact absurd (hF2.1.subset ⟨hJ1 hvJ, hK1 hvK⟩) huv.symm
+  · exact absurd (hF2.1.subset ⟨hK1 hvK, hJ1 hvJ⟩) huv.symm
   · exact key Pu (by rw [hPu.2]; simp) hJ1 hK1
 
 /-- Gluing (F4) at a regular lieu `a`: if `[x₀, a]` meets a segment `Q` with
@@ -277,20 +261,20 @@ theorem inter_eq {a z : L} {Ja K Q : S} (hJa : M.bd Ja = {x0, a}) (hQ : M.bd Q =
 theorem lt_or_lt_of_bd {J : S} {u v : L} (hJ : M.bd J = {u, v}) :
     M.lt x0 u v ∨ M.lt x0 v u := by
   have huv := h.ax.ne_of_bd hJ
-  by_cases hu0 : u = x0
-  · rw [hu0] at huv ⊢; exact Or.inl ⟨h.bot_le v, huv⟩
-  by_cases hv0 : v = x0
-  · rw [hv0] at huv ⊢; exact Or.inr ⟨h.bot_le u, huv.symm⟩
-  by_cases hu1 : u = x1
-  · rw [hu1] at huv ⊢; exact Or.inr ⟨h.le_top v, huv.symm⟩
-  by_cases hv1 : v = x1
-  · rw [hv1] at huv ⊢; exact Or.inl ⟨h.le_top u, huv⟩
+  obtain rfl | hu0 := eq_or_ne u x0
+  · exact Or.inl ⟨h.bot_le v, huv⟩
+  obtain rfl | hv0 := eq_or_ne v x0
+  · exact Or.inr ⟨h.bot_le u, huv.symm⟩
+  obtain rfl | hu1 := eq_or_ne u x1
+  · exact Or.inr ⟨h.le_top v, huv.symm⟩
+  obtain rfl | hv1 := eq_or_ne v x1
+  · exact Or.inl ⟨h.le_top u, huv⟩
   have hu := h.mem_intr hu0 hu1
   obtain ⟨Ju, hJu, -⟩ := h.ax.F1 I x0 h.x0_bd u (h.mem_car u) hu0
   obtain ⟨Pu, hPu, -⟩ := h.ax.F1 I x1 h.x1_bd u (h.mem_car u) hu1
   have hF2 := h.ax.F2 I x0 x1 u h.bd_eq hu Ju Pu hJu hPu
   have hvJ : v ∈ M.car J := h.ax.right_mem hJ
-  rcases hF2.2 J (by rw [h.car_eq]; exact subset_univ _) (by rw [hJ]; simp) with h1 | h1
+  rcases hF2.2 J (h.isSub hJ).1 (by rw [hJ]; simp) with h1 | h1
   · exact Or.inr ⟨(h.le_iff hJu.2).2 (h1 hvJ), huv.symm⟩
   · obtain ⟨Q, hQ, -⟩ := h.ax.F1 Pu u (by rw [hPu.2]; simp) v (h1 hvJ) huv.symm
     exact Or.inl ⟨h.glue ⟨I, hu⟩ hJu.2 hQ.2 (h.inter_eq hJu.2 hQ.2 hQ.1 hF2.1), huv⟩
@@ -357,9 +341,9 @@ extremity `a` of `[a, x₁]`. -/
 theorem dir_down {a y₁ y₂ : L} (h₁ : M.lt x0 a y₁) (h₂ : M.lt x0 a y₂) :
     ∃ y, M.lt x0 a y ∧ M.le x0 y y₁ ∧ M.le x0 y y₂ := by
   by_cases e₁ : y₁ = x1
-  · exact ⟨y₂, h₂, by rw [e₁]; exact h.le_top y₂, le_refl' x0 y₂⟩
+  · exact ⟨y₂, h₂, e₁ ▸ h.le_top y₂, le_refl' x0 y₂⟩
   by_cases e₂ : y₂ = x1
-  · exact ⟨y₁, h₁, le_refl' x0 y₁, by rw [e₂]; exact h.le_top y₁⟩
+  · exact ⟨y₁, h₁, le_refl' x0 y₁, e₂ ▸ h.le_top y₁⟩
   have ha1 : M.lt x0 a x1 := ⟨h.le_top a, h.ne_x1_of_lt h₁⟩
   obtain ⟨T, hT⟩ := h.exists_seg ha1
   have hTc := h.car_eq_Icc ha1 hT
@@ -381,9 +365,9 @@ extremity `a` of `[x₀, a]`. -/
 theorem dir_up {a y₁ y₂ : L} (h₁ : M.lt x0 y₁ a) (h₂ : M.lt x0 y₂ a) :
     ∃ y, M.le x0 y₁ y ∧ M.le x0 y₂ y ∧ M.lt x0 y a := by
   by_cases e₁ : y₁ = x0
-  · exact ⟨y₂, by rw [e₁]; exact h.bot_le y₂, le_refl' x0 y₂, h₂⟩
+  · exact ⟨y₂, e₁ ▸ h.bot_le y₂, le_refl' x0 y₂, h₂⟩
   by_cases e₂ : y₂ = x0
-  · exact ⟨y₁, le_refl' x0 y₁, by rw [e₂]; exact h.bot_le y₁, h₁⟩
+  · exact ⟨y₁, le_refl' x0 y₁, e₂ ▸ h.bot_le y₁, h₁⟩
   have ha0 := h.ne_x0_of_lt h₁
   have h0a : M.lt x0 x0 a := ⟨h.bot_le a, Ne.symm ha0⟩
   obtain ⟨T, hT⟩ := h.exists_x0 ha0
@@ -699,15 +683,11 @@ theorem cone_asymm {p q : ℚ × ℚ} (h : cone p q) : ¬ cone q p := fun h' => 
 /-- `p ≤ q` iff `p = q` or `p ≺ q`. -/
 def cle (p q : ℚ × ℚ) : Prop := p = q ∨ cone p q
 
-theorem cle_cone {p q r : ℚ × ℚ} (h1 : cle p q) (h2 : cone q r) : cone p r := by
-  rcases h1 with rfl | h1
-  · exact h2
-  · exact cone_trans h1 h2
+theorem cle_cone {p q r : ℚ × ℚ} (h1 : cle p q) (h2 : cone q r) : cone p r :=
+  h1.elim (· ▸ h2) (cone_trans · h2)
 
-theorem cone_cle {p q r : ℚ × ℚ} (h1 : cone p q) (h2 : cle q r) : cone p r := by
-  rcases h2 with rfl | h2
-  · exact h1
-  · exact cone_trans h1 h2
+theorem cone_cle {p q r : ℚ × ℚ} (h1 : cone p q) (h2 : cle q r) : cone p r :=
+  h2.elim (· ▸ h1) (cone_trans h1 ·)
 
 /-- The lower end `(0, 0)`. -/
 def lo : ℚ × ℚ := (0, 0)
@@ -743,15 +723,9 @@ instance : BoundedOrder T where
   bot_le a := a.2.1
   le_top a := a.2.2
 
-theorem lt_iff {a b : T} : a < b ↔ cone a.1 b.1 := by
-  rw [lt_iff_le_and_ne]
-  constructor
-  · rintro ⟨h | h, hne⟩
-    · exact absurd (Subtype.ext h) hne
-    · exact h
-  · intro h
-    refine ⟨Or.inr h, fun e => ?_⟩
-    subst e; exact cone_irrefl _ h
+theorem lt_iff {a b : T} : a < b ↔ cone a.1 b.1 :=
+  lt_iff_le_and_ne.trans ⟨fun ⟨h, hne⟩ => h.resolve_left fun e => hne (Subtype.ext e),
+    fun h => ⟨Or.inr h, by rintro rfl; exact cone_irrefl _ h⟩⟩
 
 /-- A point of `ℚ²` strictly between two points of `T` is in `T`. -/
 def mk (m : ℚ × ℚ) (a b : T) (h1 : cone a.1 m) (h2 : cone m b.1) : T :=
