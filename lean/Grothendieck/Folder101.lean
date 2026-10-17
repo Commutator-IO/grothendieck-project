@@ -44,10 +44,6 @@ variable {A K}
 omit [IsDomain A] [IsDiscreteValuationRing A] [IsFractionRing A K] in
 lemma mem_Aₖ {x : K} : x ∈ Aₖ A K ↔ ∃ a : A, algebraMap A K a = x := Iff.rfl
 
-omit [IsDomain A] [IsDiscreteValuationRing A] [IsFractionRing A K] in
-lemma mk_eq_zero {x : K} : (Submodule.Quotient.mk x : KA A K) = 0 ↔ ∃ a : A, algebraMap A K a = x :=
-  Submodule.Quotient.mk_eq_zero _
-
 /-- Fact a) of page 11: a `K`-linear map with values in `A` is zero. -/
 theorem eq_zero_of_mem {M : Type*} [AddCommGroup M] [Module K M] (g : M →ₗ[K] K)
     (hg : ∀ m, g m ∈ Aₖ A K) : g = 0 := by
@@ -74,7 +70,6 @@ lemma exists_eq_div_pow {ϖ : A} (hϖ : Irreducible ϖ) (x : K) :
     eq_inv_of_mul_eq_one_left (by rw [← map_mul, Units.inv_mul, map_one])
   rw [hv, map_mul, map_mul, map_pow, hv', div_eq_mul_inv, mul_inv]
   ring
-
 
 section Complete
 
