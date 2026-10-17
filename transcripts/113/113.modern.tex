@@ -60,6 +60,15 @@
 %   transcription was a misreading of « résolutions projectives », so the
 %   reading's « par résolutions projectives de F ou de L' » stands.
 %
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder113.lean) and mathlib:
+% — page 3: the footnote on Morita invariance says that (Kar P)^k ≃ P^k is
+%   checked in Lean in additive form, for any preadditive idempotent-complete
+%   target, without the smallness of P or an abelian target; the free
+%   completion under retracts it rests on is mathlib's karoubiUniversal.
+%   The findings of the folder are codicological and record no literature
+%   beyond the files themselves; no facsimile check since 2026-09-23.
+%
 % Modern names given and footnoted as ours: Karoubi envelope and Morita
 % invariance; Freyd-Mitchell recognition of functor categories; free
 % cocompletion; tensor product of k-linear categories; tensor product of
@@ -216,7 +225,18 @@ C'est l'invariance de Morita.\footnote{La page écrit « $\mathrm{Kar}\, P
 pas tous dans l'image de $\mathrm{Kar}\, P$ --- une somme infinie de
 représentables ne l'est pas --- et c'est la sous-catégorie des projectifs de
 type fini que l'énoncé demande ; on lit ainsi. La seconde équivalence est en
-marge.}
+marge. Vérifié en Lean (lean/Grothendieck/Folder113.lean, \texttt{morita} et
+\texttt{morita\_module}) sous sa forme additive : la restriction le long de
+$P^{\circ} \to (\mathrm{Kar}\, P)^{\circ}$ est une équivalence des foncteurs
+additifs $(\mathrm{Kar}\, P)^{\circ} \to \mathcal{D}$ sur les foncteurs
+additifs $P^{\circ} \to \mathcal{D}$ pour toute $\mathcal{D}$ préadditive
+karoubienne, les $k$-modules par exemple ; ni la petitesse de $P$ ni
+l'abélianité du but ne servent. La vérification repose sur la propriété
+universelle de l'enveloppe de Karoubi, complétion libre par les rétractes,
+qui est dans mathlib (\texttt{CategoryTheory.Idempotents.karoubiUniversal}) ;
+le passage aux catégories opposées et à l'additivité est de l'édition. La
+forme $k$-linéaire, la première équivalence et l'indépendance de la
+structure $k$-linéaire n'ont pas été vérifiées.}
 
 \textbf{Reconnaissance.} Pour qu'une catégorie $k$-additive $\mathcal{P}$ soit
 équivalente à $P^{k}$ pour une petite catégorie $k$-additive $P$, il faut et il
