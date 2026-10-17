@@ -34,6 +34,17 @@
 % notices date nothing he wrote unless it does. The offprint title
 % « Skolem-Nother » checked on the facsimile: printed so, kept.
 %
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder133.lean) of section VII, pages 45-53:
+% page 46's equivalence N' = Cent(G) <=> Psi_G injective holds with N'
+% central only (the commuting of N and N' follows; N ⊃ D(G) unused); page
+% 48's sign, left open by the page, is fixed (correction c_E(g-bar, alpha z));
+% pi_0 commutative from N ⊃ D(G); pages 51-52, N = D(G) <=> lambda_G
+% surjective, holds; the changes of Psi and lambda under E are checked as
+% identities of commutators in G_1, not as equalities of maps. The folder's
+% mathematical findings are unsearched (no literature to cite); the others
+% are codicological. No facsimile check since 2026-09-23.
+%
 % Scope. Pages 1, 34 and 44 are covers whose words head sections here. Pages
 % 4, 9 and 40 are blank. Pages 10-16 are two printed offprints of O. Laborde
 % (C. R. Acad. Sc. Paris 1974), with nothing in his hand; they are identified,
@@ -1614,8 +1625,10 @@ entre eux, on obtient deux modules croisés,
 les actions étant induites par la conjugaison ; ils ont les mêmes
 invariants, $\pi_1 = N \cap N'$ et $\pi_0 = G/NN'$, avec la même action de
 $\pi_0$ sur $\pi_1$\footnote{L'hypothèse que $N$ et $N'$ commutent est
-ajoutée ici : sans elle, $G/N'$ n'agit pas sur $N$. Elle est remplie dans le
-cas qui intéresse la suite, où $N' = \mathrm{Cent}(G)$.}. Le problème de la
+ajoutée ici : sans elle, $G/N'$ n'agit pas sur $N$. Elle est remplie dès que
+$N'$ est central, en particulier dans le cas qui intéresse la suite, où
+$N' = \mathrm{Cent}(G)$ ; la vérification en Lean de la page 46 n'utilise que
+$N' \subset \mathrm{Cent}(G)$ et en déduit que $N$ et $N'$ commutent.}. Le problème de la
 page est l'inverse : étant donnés deux modules croisés $\mathcal{C}$,
 $\mathcal{C}'$ (données I et II) et des isomorphismes
 $\pi_i(\mathcal{C}) \simeq \pi_i(\mathcal{C}')$ compatibles aux actions
@@ -1689,7 +1702,12 @@ N' = \mathrm{Cent}(G) \iff \Psi_G \text{ est injectif.}
 La page passe par $\varphi_G \colon \pi_0 \to \mathrm{Hom}(\mathfrak{Z},
 \pi_1)$, le même accouplement curryfié de l'autre côté\footnote{Les
 vérifications d'additivité et de nullité sont de nous ; la page les
-résume par « est triviale sur $N'$ et sur $\mathfrak{Z}$ ». En marge, une
+résume par « est triviale sur $N'$ et sur $\mathfrak{Z}$ ». Vérifié en Lean
+(lean/Grothendieck/Folder133.lean, \texttt{Psi\_mul} et
+\texttt{injective\_Psi\_iff}) pour des groupes abstraits : l'équivalence
+encadrée tient telle quelle, sous la seule hypothèse
+$N' \subset \mathrm{Cent}(G)$ ; la condition $N \supset D(G)$ n'y joue aucun
+rôle. En marge, une
 définition antérieure, $\mathfrak{Z} = \operatorname{Ker}\Theta \cap
 \mathrm{Cent}\,M$, est biffée.}.
 
@@ -1707,7 +1725,8 @@ bilinéaire parce que $\pi_0$ est commutatif, et nulle si et seulement si
 $E$ est commutative\footnote{En marge : « on suppose $\pi_0$ commutatif ici.
 Que dire sinon ? ». Dans le problème qui intéresse la « Solution », la
 condition $N \supset D(G)$ le rend commutatif : la question ne s'y pose
-pas.}. La page annonce, « au signe près »,
+pas (vérifié en Lean, lean/Grothendieck/Folder133.lean,
+\texttt{pi0\_comm}).}. La page annonce, « au signe près »,
 \[
 \Psi_{G_1} = \Psi_G + \tilde{c}_E \circ \alpha,
 \]
@@ -1716,7 +1735,14 @@ $\tilde{c}_E \colon \pi_0 \to \mathrm{Hom}(\pi_0, \pi_1)$ la curryfication
 de $c_E$. C'est juste : dans $G_1$, un commutateur est le produit des
 commutateurs dans $G$ et dans $E$\footnote{Le « on doit trouver » de la
 page est vérifié par nous. Le signe dépend du côté où l'on curryfie, ce que
-la page note (« d'un signe ! »). Un $\beta$ biffé, qui envoyait
+la page note (« d'un signe ! »). Il se fixe ainsi : avec
+$\Psi_G(z)(g) = [g, z]$ et $c_E(x, y)$ le commutateur de relèvements de $x$ et
+$y$ dans $E$, on a $\Psi_{G_1}(z)(g) = \Psi_G(z)(g) + c_E(\bar{g}, \alpha(z))$.
+Vérifié en Lean (lean/Grothendieck/Folder133.lean, \texttt{commutator\_G1},
+\texttt{cE\_well\_defined} et \texttt{Psi\_G1}) comme identité des commutateurs
+dans $G_1$ ; l'identification des deux modules croisés de $G_1$ à ceux de $G$,
+qui en ferait une égalité d'applications sur un même $\mathfrak{Z}$, ne l'est
+pas. La surjectivité de $E \to \pi_0$ ne sert pas. Un $\beta$ biffé, qui envoyait
 $\mathrm{Hom}(\pi_0, \pi_1)$ dans $\mathrm{Hom}(\pi_0, N')$, est abandonné
 par la page elle-même.}. Il faut donc choisir $E$ de sorte que
 $\Psi_G + \tilde{c}_E \alpha$ soit injectif.
@@ -1774,11 +1800,20 @@ surjectif\footnote{La page écrit « si $\bar{x}$ ou $\bar{y} \in d'(N')$ » ;
 ce sont $x$ et $y$, non leurs relèvements, qui doivent être dans $d'(N')$.
 L'isomorphisme $N/D(G) \simeq \mathcal{D}/\lambda_G(\pi_0 \otimes \pi_0)$
 vient de ce que $D(G)/N_0$ est le groupe dérivé de $G/N_0$, engendré par ces
-commutateurs.}. Quand on change $G$ en $G_1$ par l'extension $E$,
+commutateurs. Vérifié en Lean (lean/Grothendieck/Folder133.lean,
+\texttt{lam\_self}, \texttt{lam\_swap} et
+\texttt{eq\_commutator\_iff\_lam\_surjective}) pour des groupes abstraits :
+$\lambda_G$ est bien définie sur $\pi_0$, multiplicative en chaque variable et
+alternée, et $N = D(G)$ si et seulement si ses valeurs engendrent
+$\mathcal{D}$ ; la centralité de $N'$ sert à la définir sur $\pi_0$, et
+$\mathcal{D}$ s'y identifie à $N/[G, N]$.}. Quand on change $G$ en $G_1$ par l'extension $E$,
 \[
 \lambda_{G_1} = \lambda_G + \beta \circ c_E,
 \]
-où $\beta \colon \pi_1 \to \mathcal{D}$ est le passage au quotient.
+où $\beta \colon \pi_1 \to \mathcal{D}$ est le passage au quotient, avec
+la même réserve qu'à la page 48 : la vérification en Lean
+(\texttt{lam\_G1}) porte sur la classe dans $\mathcal{D}$ du commutateur
+calculé dans $G_1$.
 
 La page divise encore. Soit $\mathcal{D}_0 = \operatorname{Coker}(\pi_1 \to
 \mathcal{D})$ et $\lambda_0 \colon \pi_0 \otimes \pi_0 \to \mathcal{D}_0$
