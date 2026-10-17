@@ -1,0 +1,28 @@
+\section[Cote 101 : la dualité locale en dimension un pour tous les modules]{Cote 101 : la dualité locale en dimension un pour tous les modules\protect\verifie{Folder101}}\label{sec:101}
+
+La cote 101, \emph{Cohomologie locale : notes manuscrites (s.d.)}, quarante-deux pages que l'inventaire date \q{[à partir de 1967-1968]}, énonce page~10, pour $A$ local régulier complet de dimension $n$, $X = \operatorname{Spec} A$ et $I = H^n_x(\mathcal O_X)$, que les applications de dualité $\varphi^i_F : \mathrm{Ext}^{n-i}(X; F, \mathcal O_X) \to \mathrm{Hom}(H^i_x(F), I)$ sont des isomorphismes pour tout $\mathcal O_X$-module $F$, \q{pas nécessairement quasi-cohérent} (\lot{101}{1}{10}). Pour $n = 1$, les pages~10 et~11 le démontrent. Un $\mathcal O_X$-module est un triplet $(M_0, M_1, u)$ : un $A$-module $M_0$, un $K$-espace vectoriel $M_1$ et une application $A$-linéaire $u : M_0 \to M_1$, avec $H^0_x(F) = \mathrm{Ker}\, u$ et $H^1_x(F) = \mathrm{Coker}\, u$. La résolution injective $\mathcal O_X \to \underline K_X \to \underline K_X/\mathcal O_X$ donne $\mathrm{Ext}^\bullet(X; F, \mathcal O_X)$ comme cohomologie du complexe $\mathrm{Hom}_K(M_1, K) \to \mathrm{Hom}_A(M_0, K/A)$, $g \mapsto g \circ u \bmod A$. La page conclut par trois faits : a) un homomorphisme d'un $K$-espace vectoriel dans $A$ est nul ; b) $\mathrm{Ext}^1_A(K, A) = 0$, parce que $A$ est complet ; c) $K/A$ est injectif.
+
+\noindent\emph{Conventions.} On travaille dans le modèle de la page : l'équivalence entre $\mathcal O_X$-modules et triplets et le calcul des $\mathrm{Ext}$ par la résolution sont la réduction de la page, et ne sont pas démontrés ici. $\mathrm{Ext}^0$ est le noyau et $\mathrm{Ext}^1$ le conoyau de $g \mapsto g \circ u \bmod A$.
+
+\begin{theoreme}[Grothendieck, pages 10 et 11, dimension un\piste{101-sheaf-duality-dim-one}]\label{thm:101-dualite}
+Soit $A$ un anneau de valuation discrète complet, de corps des fractions $K$. Pour tout triplet $(M_0, M_1, u)$, les applications $\mathrm{Ext}^0 \to \mathrm{Hom}_A(\mathrm{Coker}\, u, K/A)$, $g \mapsto (g \bmod A)$, et $\mathrm{Ext}^1 \to \mathrm{Hom}_A(\mathrm{Ker}\, u, K/A)$, restriction, sont bijectives.
+\end{theoreme}
+
+\begin{proof}
+Soit $\varpi$ une uniformisante. Fait a) : si $g(m) = y \neq 0$, alors $g((\varpi y)^{-1} m) = \varpi^{-1} \in A$, absurde. Fait b) : soit $f : K \to K/A$ linéaire et $c_n \in K$ avec $f(\varpi^{-n}) = c_n \bmod A$. Comme $\varpi f(\varpi^{-n-1}) = f(\varpi^{-n})$, les $d_n = \varpi^n c_n$ vérifient $d_{n+1} - d_n \in \varpi^n A$ ; par complétude, $d_n - d_0$ converge vers $e \in A$, avec $d_0 + e - d_n \in \varpi^n A$. Pour $c = d_0 + e$, on a $c\,\varpi^{-n} - c_n \in A$ pour tout $n$, donc $f(x) = cx \bmod A$ pour tout $x = a \varpi^{-n}$. Sur une base de $M_1$, tout $h : M_1 \to K/A$ se relève ainsi en une application $K$-linéaire $M_1 \to K$. Fait c) : $A$ est principal et $K/A$ divisible, d'où le critère de Baer.
+
+L'injectivité sur $\mathrm{Ext}^0$ est a) appliqué à une différence. Pour la surjectivité, un $\psi : \mathrm{Coker}\, u \to K/A$ donne $h : M_1 \to K/A$ nul sur $u(M_0)$, qui se relève par b) en $g$, et $g \circ u$ est à valeurs dans~$A$. La surjectivité sur $\mathrm{Ext}^1$ est c). Pour l'injectivité, un $h : M_0 \to K/A$ nul sur $\mathrm{Ker}\, u$ se factorise par $u(M_0) \subset M_1$, s'étend à $M_1$ par c), se relève par b) en $g : M_1 \to K$, et $h = g \circ u \bmod A$.
+\end{proof}
+
+\begin{remarque}
+L'énoncé tient tel que la page le démontre ; la complétude ne sert qu'en b). La fin de l'argument d'injectivité, en partie illisible sur la page, est rétablie par la lecture dans cet ordre, et Lean la confirme. La page désigne les deux applications par $\varphi^0$ et $\varphi^1$ selon les degrés de cohomologie locale : $\varphi^1$ part de $\mathrm{Ext}^0$ et $\varphi^0$ de $\mathrm{Ext}^1$.
+\end{remarque}
+
+Ne sont pas démontrés ici : l'équivalence entre $\mathcal O_X$-modules et triplets, le calcul des $\mathrm{Ext}$ et des $H^i_x$ dans ce modèle, et l'équivalence entre $\mathrm{Ext}^1_A(K, A) = 0$ et la complétude, que la lecture cite de mémoire. En dimension~$2$ la dualité échoue, ce que la page~14 découvre (piste \texttt{101-sheaf-duality-dim-two-fails}, ci-dessous) :
+
+\begin{encadre}
+\begin{contrexemple*}[pages 10, 14 et 15, dualité locale en dimension deux\piste{101-sheaf-duality-dim-two-fails}]\nonverifie
+La première phrase de la page~10 affirme les isomorphismes de dualité locale en toute dimension ; ils tombent en défaut en dimension~$2$. Soient $A$ un anneau local régulier complet de dimension~$2$, $f \in \mathfrak m$ non nul, $U = X_f$ et $F = j_!\mathcal O_U$ sur $X = \operatorname{Spec} A$. L'application $A_f = \mathrm{Ext}^0(X; F, \mathcal O_X) \to \mathrm{Hom}_A(H^2_x(F), E(k))$ est injective et non surjective : la dualité locale à duaux de Matlis algébriques ne vaut pas pour les $\mathcal O_X$-modules non quasi-cohérents.
+\end{contrexemple*}
+\end{encadre}
+{\small La page~14 conclut \q{$\varphi$ n'est pas surjective}, souligné deux fois, sans démonstration, et la page~15 dit qu'il faut des duaux topologiques. Mathlib n'a pas la cohomologie locale ni la dualité de Matlis.\par}

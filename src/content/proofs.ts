@@ -647,4 +647,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder146.lean',
     theorems: ['mul_group', 'anh_mul', 'der_mul', 'der_pow_six', 'six_dvd'],
   },
+  {
+    folder: '101',
+    batch: 1,
+    page: '10–11',
+    name: 'Local duality in dimension one for every module',
+    statement:
+      'On X = Spec A, A a complete discrete valuation ring, the local duality maps Ext^{1−i}(X; F, O_X) → Hom_A(H^i_x(F), K/A) are bijective for every O_X-module F, quasi-coherent or not; with F a triple (M₀, M₁, u), they are Ext⁰ → Hom_A(Coker u, K/A) and Ext¹ → Hom_A(Ker u, K/A).',
+    found:
+      'Holds in the page’s model of triples: both maps are bijective for every triple, by the page’s three facts — a K-linear map into A is zero; every A-linear K → K/A is x ↦ cx mod A, by completeness; K/A is injective. The end of the injectivity argument, restored by the reading, checks; completeness is used only in the lifting step. Not formalised: the equivalence between O_X-modules and triples, and the computation of Ext and local cohomology in that model.',
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder101.lean',
+    theorems: ['eq_zero_of_mem', 'lift_K', 'lift_vs', 'baer_KA', 'duality_dim_one'],
+  },
 ];
