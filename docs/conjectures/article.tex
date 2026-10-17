@@ -56,7 +56,7 @@ catalogued by folder (« cote ») and published as facsimiles at
   literature, with what was searched and what would settle it. Its status
   vocabulary is used below: \emph{matched} (found in print), \emph{candidate}
   (searched, not found), \emph{unsearched}, \emph{refuted}.
-\item \textbf{Lean.} An appendix proves in Lean~4, on Mathlib, 1\,018
+\item \textbf{Lean.} An appendix proves in Lean~4, on Mathlib, 1\,032
   theorems drawn from the readings, using only Lean's standard axioms
   (\url{https://grothendieck.commutator.io/article/grothendieck-lean.pdf}).
   Lean checks the proofs, not that a statement is faithful to the page.
@@ -203,16 +203,37 @@ $p$-adic and over $\mathbb Q$ for the modular curves $X_0(N)$ and $X_1(N)$ of
 genus at least two; the Deligne--Drinfeld conjecture on the
 Grothendieck--Teichmüller Lie algebra; and the rational Hodge conjecture for
 abelian varieties with complex multiplication, hence the Hodge-type standard
-conjecture for them. None has been peer-reviewed, and only two are partly
+conjecture for abelian varieties in any characteristic. None has been peer-reviewed, and only two are partly
 formalised in Lean. This note does not assess them. The fonds supplies dated
 points to which a confirmed proof can be related, and it does not attribute
 those conjectures: Deligne--Drinfeld is Deligne's and Drinfeld's, the Hodge
 conjecture is not Grothendieck's, and the proved forms of the homotopy
 hypothesis come from later work.
 
+Table~\ref{tab:openai} sets out, for the five conjectures of
+Table~\ref{tab:five}, what the preprints of \texttt{openai/math} claim and
+what they leave aside, as read in their abstracts on 17 October 2026.
+
+\begin{table}[h]
+\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{>{\raggedright}p{2cm} >{\raggedright}p{2.5cm} >{\raggedright}X >{\raggedright}p{2.6cm} >{\raggedright\arraybackslash}p{2.4cm}}
+\toprule
+Conjecture & OpenAI preprint & Claimed & Not claimed & Lean in the repository \\
+\midrule
+Standard conjectures & \emph{The rational Hodge conjecture for CM abelian varieties} (30 Sept.; 6 Oct., 53~pp.) & the Hodge conjecture for complex CM abelian varieties; as consequences, the Tate conjecture for abelian varieties over finite fields and the Hodge-type standard conjecture for abelian varieties in any characteristic & the standard conjectures beyond abelian varieties; $B$ and $D$ in general & none found \\
+Period conjecture & none & --- & the whole conjecture & --- \\
+Homotopy hypothesis & \emph{The Grothendieck homotopy hypothesis via elementary expansions} (24 Sept., 26~pp.) & the hypothesis for every Grothendieck coherator in the Ara--Henry convention; Henry's pushout conjecture & other models of weak $\infty$-groupoids & 58 files, about 12\,750 lines: the elementary-expansion theorem; the comparison with spaces is not stated \\
+Section conjecture & \emph{The $p$-adic section conjecture} (24 Sept.; 6 Oct., 24~pp.) & the local $p$-adic conjecture for curves of genus $\geq 2$ over every finite extension of $\mathbb Q_p$; the global conjecture over number fields when the finite-cover descent locus equals the rational points, including $X_0(N)$ and $X_1(N)$ of genus $\geq 2$ over $\mathbb Q$ & the global conjecture in general; the affine (cuspidal) form of the fonds & none found \\
+Galois action and $\widehat{GT}$ & \emph{The Deligne--Drinfeld conjecture} (23 Sept., 41~pp.) & the rational Grothendieck--Teichmüller Lie algebra is free on one generator in each odd weight $\geq 3$ & Ihara's question, $\mathrm{Gal}(\overline{\mathbb Q}/\mathbb Q) \to \widehat{GT}$ an isomorphism & 21 files under \texttt{Algebra/\allowbreak Drinfeld}, not inspected \\
+\bottomrule
+\end{tabularx}
+\caption{Coverage of the five conjectures by the \texttt{openai/math} preprints (\url{https://github.com/openai/math}, folder \texttt{preprints}), from their abstracts and repository listings, 17 October 2026. None is peer-reviewed. ``None found'' means no Lean directory matching the subject in the repository's tree.}
+\label{tab:openai}
+\end{table}
+
 \section{Formalisation}
 
-\paragraph{What exists.} The Lean appendix proves 1\,018 theorems from the
+\paragraph{What exists.} The Lean appendix proves 1\,032 theorems from the
 readings, on a Mathlib master of October 2026; general lemmas from it are
 proposed to Mathlib as pull requests. One overlap with \emph{Formal
 Conjectures} was found: a proof in folder~36 (SGA~7, [about 1967--1973], on invariant cycles in
