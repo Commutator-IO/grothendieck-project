@@ -14,6 +14,18 @@
 % all transcribed. This reading was made on Opus 5.5 and is not measured
 % against the Opus 5 reference reading of folder 115.
 %
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — refined with the Lean checks
+% of lean/Grothendieck/Folder40.lean, mathlib and the literature of the
+% folder's findings. Now checked by machine, pp. 26-27: the two regular
+% torsors (over any discrete valuation ring, any n, no characteristic; the
+% Eisenstein criterion is mathlib's), the non-regularity of the sum T^p = X^2
+% for every p over any field, and the non-reducedness of C_1 (x)_A C_2. Not
+% checked: C_1 (x)_A C_2 = C_1[T]/(T^p), the other n, the group law of H^1.
+% Cited from the findings: the Hopf-Galois characterisation (Chase-Sweedler
+% 1969, Kreimer-Takeuchi 1981, Montgomery 1993 § 8.3) for the criteria of
+% pp. 9-15, not read directly; arXiv:1911.02267 for the single-torsor
+% criterion, through a search summary only.
+%
 % WHAT THE FOLDER IS. Twenty-seven pages of fast working notes, all in his
 % hand, undated, no third-party material. The spine: affine group schemes as
 % commutative Hopf algebras (pp. 1-2), their actions (pp. 2-4), principal
@@ -489,6 +501,22 @@ $P \otimes \operatorname{Hom}(Q, R) \to
 \operatorname{Hom}(\operatorname{Hom}(P, Q), R)$. L'argument par
 transposition donné ci-dessus est le nôtre ; il établit la réciproque sans
 passer par $\rho$, et ne dit pas si le $g_C$ de la page est le bon.}
+L'équivalence des deux critères est aujourd'hui la caractérisation des
+extensions galoisiennes au sens de Hopf, et elle est dans la
+littérature.\footnote{Dans le langage d'aujourd'hui, $C$ est une extension
+$\mathcal{U}$-galoisienne de $A$ (ou $B$-galoisienne pour la coaction), et la
+bijectivité de $\psi$ est l'isomorphisme $C \# \mathcal{U} \simeq
+\operatorname{End}_A(C)$ du produit smash sur les endomorphismes. La notion
+remonte à Chase et Sweedler (\emph{Hopf Algebras and Galois Theory}, LNM 97,
+1969) ; Kreimer et Takeuchi (\emph{Indiana Univ. Math. J.} 30, 1981) l'ont
+étendue et ont établi la projectivité finie de ces extensions ; Montgomery
+(\emph{Hopf Algebras and Their Actions on Rings}, CBMS 82, 1993, § 8.3) donne
+la caractérisation par $C \# \mathcal{U} \simeq \operatorname{End}$ jointe à
+la projectivité finie, qui est notre réciproque sous l'hypothèse que $C$ est
+projectif de type fini et non nul. Ces références ont été repérées par des
+sources secondaires (dont arXiv:0912.0291 et arXiv:math/0207187) et n'ont pas
+été lues directement ; les numéros exacts des énoncés restent à relever. Le
+dossier ne cite personne et sa date n'est pas établie.}
 
 \pagerange{16}{18}
 \section*{L'exemple de $\alpha_p$ (pages 16 à 18)}
@@ -842,7 +870,18 @@ $k[[Z^p, Z^n]]$, dont le semi-groupe des valuations, engendré par $p$ et $n$,
 est un invariant ; pour $n = p+1$ il ne contient aucun entier de $1$ à
 $p - 1$, et ne provient d'aucun $n \le p-1$. Il s'agit ici de l'anneau, non
 de la structure de torseur, que l'unité $\epsilon$ modifie.} Si $n = 1$ c'est
-un anneau local régulier ; sinon il ne l'est pas. Pour $p = 3$ et $n = 2$, on
+un anneau local régulier ; sinon il ne l'est pas.\footnote{Le cas $n = 1$ est
+vérifié en Lean (lean/Grothendieck/Folder40.lean, \texttt{isDVR\_adjoinRoot},
+\texttt{isDVR\_root\_X}) sous une forme plus générale : sur tout anneau de
+valuation discrète $A$ d'uniformisante $\varpi$, pour toute unité $u$ et tout
+$n \geq 1$, $A[T]/(T^n - \varpi u)$ est de valuation discrète, sans
+complétude, sans hypothèse sur la caractéristique ni sur $k$. Le polynôme est
+d'Eisenstein, et le critère d'Eisenstein est dans mathlib
+(\texttt{Polynomial.IsEisensteinAt.irreducible}). Pour « sinon », seul le cas
+$n = 2$ est vérifié (voir la note sur la somme) ; les autres $n$ ne le sont
+pas. Le critère pour un seul torseur, régulier exactement pour un exposant
+$1$, figure dans arXiv:1911.02267 (modèles maximaux de torseurs sur un corps
+local), d'après un résumé de recherche seulement.} Pour $p = 3$ et $n = 2$, on
 obtient $A[X^{2/3}]$, le sous-anneau de $k[[Y]] = k[[X^{1/3}]]$ formé des
 séries sans terme en $Y$ --- le cusp.
 
@@ -851,14 +890,30 @@ régulier est la \emph{somme} de deux torseurs réguliers : ceux des racines
 $p$-ièmes de $X$ et de $-X + X^2$, puisque
 $X + (-X + X^2) = X^2$.\footnote{La page dit cela pour $p$ quelconque, après
 l'exemple $p = 3$ ; l'addition est celle de $A/A^p$, dont la page 22 disait
-n'avoir pas prouvé qu'elle est celle de $H^1$.} La régularité ne passe donc
+n'avoir pas prouvé qu'elle est celle de $H^1$. Vérifié en Lean
+(lean/Grothendieck/Folder40.lean), sur un corps $k$ quelconque, non
+nécessairement algébriquement clos : les deux torseurs sont réguliers
+(\texttt{isDVR\_root\_X}, \texttt{isDVR\_root\_neg\_X\_add\_X\_sq}, puisque
+$-X + X^2 = X(X - 1)$ avec $X - 1$ inversible), et la somme
+$A[T]/(T^p - X^2)$ ne l'est pas, pour tout $p$ : pour $p$ impair ni $X$ ni la
+racine ne divise l'autre (\texttt{not\_isDVR\_cusp\_odd}, par $X \mapsto
+Z^p$, $T \mapsto Z^2$ dans $k[[Z]]$), et pour $p = 2$, $(T - X)^2 = 0$ avec
+$T - X \neq 0$ (\texttt{cusp\_two\_nilpotent}). L'identification de la loi
+de $H^1$ avec l'addition de $A/A^p$ n'est pas vérifiée par la machine.
+Aucune source consignant cet échec de la régularité sous la loi de groupe
+n'a été trouvée.} La régularité ne passe donc
 pas à la somme. Elle ne passe même pas au produit fibré : si $C_1$ et $C_2$
 sont ces deux anneaux, $C_1 \otimes_A C_2 \simeq C_1[T]/(T^p)$ a des
 nilpotents. En effet, dans $C_1$, on a $X = s^p$ et
 $-X + X^2 = (-s + s^2)^p$, de sorte que l'équation de $C_2$ devient une
 puissance $p$-ième parfaite.\footnote{Ce calcul est le nôtre ; la page
 affirme l'isomorphisme $C_1 \otimes_A C_2 \simeq C_1[T]/(T^p)$ sans le
-justifier. La somme des deux torseurs est le quotient de ce produit fibré par
+justifier. La non-réduction du produit fibré est vérifiée en Lean
+(lean/Grothendieck/Folder40.lean, \texttt{neg\_X\_add\_X\_sq\_eq\_pow},
+\texttt{fibre\_nilpotent}, \texttt{fibre\_ne\_zero}) : $z = 1 \otimes t + (s -
+s^2) \otimes 1$ vérifie $z^p = 0$ et $z \neq 0$, ce qu'on voit par l'image de
+$z$ dans $C_1[T]/(T^p + X - X^2)$, classe d'un polynôme unitaire de degré
+$1 < p$ ; l'isomorphisme lui-même ne l'est pas. La somme des deux torseurs est le quotient de ce produit fibré par
 l'antidiagonale de $\alpha_p \times \alpha_p$.}
 
 \end{document}
