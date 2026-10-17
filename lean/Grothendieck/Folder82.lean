@@ -135,9 +135,7 @@ theorem not_mono :
     ext <;> simp <;> rfl
   refine ⟨?_, fun x y z => ?_⟩
   · rintro ⟨c, -, h⟩
-    rw [mul_zero] at h
-    have := congrArg TrivSqZeroExt.snd h
-    simp at this
+    simpa using congrArg TrivSqZeroExt.snd h
   · rw [trace_mul_vst h2, trace_mul_vst h2, sq, DualNumber.eps_mul_eps]
     ring
 
