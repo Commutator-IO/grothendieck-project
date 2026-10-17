@@ -149,19 +149,16 @@ include W in
 /-- Composing a cofibration `∅ → x` with a cofibration `x → z` shows `z`
 cofibrant. -/
 lemma cofibrant_of_cof {x z : C} (hx : Cofibrant cof x) (i : x ⟶ z) (hi : cof i) :
-    Cofibrant cof z := by
-  have := cof_comp (W := W) _ _ hx hi
-  unfold Cofibrant
-  rwa [Subsingleton.elim (initial.to z) (initial.to x ≫ i)]
+    Cofibrant cof z :=
+  (Subsingleton.elim (initial.to x ≫ i) (initial.to z) ▸ cof_comp (W := W) _ _ hx hi :
+    cof (initial.to z))
 
 /-- Cofibrant replacement (page 1): C3 applied to `∅ → x` gives `α_x : x̃ → x`
 in `W` with `x̃` cofibrant. -/
 theorem remplacementCofibrant (x : C) :
     ∃ (x' : C) (α : x' ⟶ x), Cofibrant cof x' ∧ W α := by
   obtain ⟨z, i, p, hi, hp, -⟩ := factorisation (W := W) (cof := cof) (initial.to x)
-  refine ⟨z, p, ?_, hp⟩
-  unfold Cofibrant
-  rwa [Subsingleton.elim (initial.to z) i]
+  exact ⟨z, p, (Subsingleton.elim i (initial.to z) ▸ hi : cof (initial.to z)), hp⟩
 
 /-- The common core of pages 1 and 9. Given `p : a → y` and `q : b → y` with
 `b` cofibrant, the sum `a ⊔ b` (the pushout of `∅ → b` along `∅ → a`) exists,
@@ -180,8 +177,7 @@ theorem factorisation_somme {a b y : C} (hb : Cofibrant cof b) (p : a ⟶ y) (q 
     cof_comp (W := W) _ _ (pushout_cof (W := W) hP hb) hc, hw, ?_, ?_, ?_⟩
   · rw [Category.assoc, hcw, hP.inr_desc]
   · rw [Category.assoc, hcw, hP.inl_desc]
-  · intro ha
-    exact cof_comp (W := W) _ _ (pushout_cof (W := W) hP.flip ha) hc
+  · exact fun ha => cof_comp (W := W) _ _ (pushout_cof (W := W) hP.flip ha) hc
 
 /-- **Page 1, the weak lifting lemma, general form.** Given `f : x → y`,
 `α_x : x̃ → x`, `α_y : ỹ → y ∈ W` with `x̃` cofibrant, there are
@@ -666,8 +662,7 @@ noncomputable def qFunctor : Rect W cof ⥤ W.Localization where
     have := hasPushout (W := W) (cof := cof) t.f s.i t.hf
     unfold frac
     have := W.Q_inverts _ (s.comp t).hi
-    rw [← cancel_mono (W.Q.map (s.comp t).i)]
-    rw [Category.assoc, wInv_hom, Category.comp_id]
+    rw [← cancel_mono (W.Q.map (s.comp t).i), Category.assoc, wInv_hom, Category.comp_id]
     show W.Q.map (s.f ≫ pushout.inr t.f s.i) = _ ≫ W.Q.map (t.i ≫ pushout.inl t.f s.i)
     simp only [Category.assoc, Functor.map_comp, wInv_hom_assoc]
     rw [← W.Q.map_comp t.f, pushout.condition (f := t.f) (g := s.i), W.Q.map_comp,
@@ -680,9 +675,8 @@ noncomputable def phiBar (hcof : ∀ x : C, Cofibrant cof x) : W.Localization �
 
 lemma phiBar_map_Q (hcof : ∀ x : C, Cofibrant cof x) {x y : C} (f : x ⟶ y) :
     (phiBar W cof hcof).map (W.Q.map f) = (phi W cof hcof).map f := by
-  have := Functor.congr_hom (Localization.Construction.fac (phi W cof hcof)
-    (phi_inverts hcof)) f
-  refine this.trans ?_
+  refine (Functor.congr_hom (Localization.Construction.fac (phi W cof hcof)
+    (phi_inverts hcof)) f).trans ?_
   erw [eqToHom_refl, eqToHom_refl, Category.id_comp, Category.comp_id]
 
 /-- `φ̄(q'(f, i)) = (f, i)`: every arrow of `𝒞̃'` is `(1, i) ∘ (f, 1)`, with
