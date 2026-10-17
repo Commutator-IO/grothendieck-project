@@ -21,6 +21,20 @@
 % 38 classes under A5), of subgroups of S5 (156 in 19 classes) and of the
 % subgroup classes of D4, S3 x S2, S4, A4, A5, and the roots of the equation
 % (E) of pp. 61-73 for each type, were recomputed by machine for this reading.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — with the Lean check of
+% lean/Grothendieck/Folder85.lean. Footnotes added at p. 4 (part 1 over any
+% ring, each factor of the discriminant matching one condition of (*);
+% rigidity over any ring; conjugacy over a field containing a root of
+% T^2 - alpha_0 T + 1; the normal form needs that root, hence forms of
+% PGL_2), p. 6 (the page-4 product confirmed), pp. 6-7 (condition c) checked
+% for nu = 3, 4, 5, 6), pp. 8-10 (discriminants -2, -2, -1), p. 27 (A
+% independent of the lift), p. 40 (the order-5 computation over any base and
+% the model over Z[zeta_5]). p. 30: the corollaries are completed — for
+% PGL_2 the restrictions to residue characteristics != 3 and != 5 are
+% superfluous, while 2 (order 4) and 6 (order 6) invertible are necessary.
+% Rigidity and representability (pp. 4, 40) remain unverified. No mathlib
+% result is invoked; no finding records a literature reference read; no
+% facsimile check postdates the first pass.
 %
 % The transcription is thin. About eighteen \ill/\uncertain per page on
 % average; the prose is largely lost on pp. 2, 12-21 (the run on G_1), 44,
@@ -76,7 +90,7 @@
 %
 % Substantive departures from the pages, with page numbers:
 %  - p. 6: the product « (alpha_0+2)(alpha_0-2)(alpha_0+alpha_1) » is the
-%    (alpha_0+2)(alpha_1+2)(alpha_0+alpha_1) of pp. 4 and 7.
+%    (alpha_0+2)(alpha_1+2)(alpha_0+alpha_1) of pp. 4 and 7 (checked in Lean).
 %  - p. 12, D): « two of the three pairs commute » is « one of them » (his
 %    i.e.); the equivalences are restated, the proof sketch is mostly lost.
 %  - p. 19, Cor. 2 c) (char. 2) describes an empty case: in C, alpha + 2 =
@@ -89,7 +103,8 @@
 %  - p. 28: the converse (A(u) = -2 => u^2 = 1) holds for forms of PGL_2
 %    over reduced S, not for SL_2 (-u unipotent).
 %  - p. 29, 2°) and the margin: n invertible on S is needed (Psi_15(-1) = 0
-%    mod 5). p. 30, Cor. 1: « resp. 6 » needs residue characteristics != 2.
+%    mod 5). p. 30, Cor. 1: « resp. 6 » needs residue characteristics != 2;
+%    for PGL_2, orders 3 and 5 need no restriction at all (Lean).
 %  - p. 31, Theorem: A) is « n neither p nor 2p »; B), C) need u nowhere
 %    central (supplied, from the margin). With it, the implications <= of
 %    A), B), C) hold over any base (Chebyshev argument, given); => holds on
@@ -357,7 +372,26 @@ Alors :
     mêmes invariants ;
   \item si $\Gamma = G_2$, c'est une équivalence : tout couple $(\alpha_0,
     \alpha_1)$ de $C'$ provient d'un $(G, \varphi)$, défini à isomorphisme
-    unique près.
+    unique près\footnote{Vérifié en partie en Lean
+    (lean/Grothendieck/Folder85.lean), pour $\mathrm{PGL}_2$ déployé, les
+    $\tau_i$ relevés en matrices de $\mathrm{GL}_2(R)$ sur un anneau
+    commutatif $R$ quelconque, sans hypothèse sur $2$. Pour 1) :
+    $(*)$ en tout point force les $\tau_i$ et $\tau_0\tau_2$ à être de
+    trace nulle et le produit $(\alpha_0 + 2)(\alpha_1 + 2)(\alpha_0 +
+    \alpha_1)$ à être inversible (\texttt{discr\_isUnit\_of\_star}), et
+    réciproquement (\texttt{star\_of\_discr\_isUnit}). Chaque facteur
+    répond à une condition de $(*)$ : $\alpha_0 + 2$ à $\rho_0^2 \neq 1$,
+    $\alpha_1 + 2$ à $\rho_1^2 \neq 1$, $\alpha_0 + \alpha_1$ à la
+    non-commutation, car $\rho_0\rho_1 - \rho_1\rho_0 = -\mathrm{Tr}(\tau_0
+    \tau_1\tau_2)\,\tau_1$. Pour 2) : la rigidité vaut sur tout anneau
+    (\texttt{rigid}) ; deux triplets de mêmes invariants sont conjugués
+    sur un corps qui contient une racine de $T^2 - \alpha_0 T + 1$
+    (\texttt{conj\_of\_same\_invariants}). Pour 3) : une forme normale
+    explicite existe après adjonction d'une telle racine, sur $R[T]/(T^2 -
+    \alpha_0 T + 1)$ (\texttt{exists\_normalForm\_adjoinRoot}), et pas sur
+    $R$ en général ; c'est pourquoi l'énoncé porte sur les formes de
+    $\mathrm{PGL}_2$. La descente à une forme sur $R$, la conjugaison sur
+    une base quelconque et la représentabilité ne sont pas vérifiées.}.
 \end{enumerate}
 En d'autres termes, le champ des représentations non dégénérées de $G_2$ dans
 les formes de $\mathrm{PGL}_2$ est représentable par l'ouvert de
@@ -432,8 +466,10 @@ inversement un couple qui satisfait cette condition définit un polyèdre
 régulier, donc une conique lisse et une représentation de
 $G_2$\footnote{La page 6 écrit le produit « $(\alpha_0 + 2)(\alpha_0 -
 2)(\alpha_0 + \alpha_1)$ », lecture nette ; c'est un lapsus pour celui des
-pages 4 et 7. Le premier paragraphe de la page est en grande partie illisible,
-et le principe de prolongement est rapporté tel qu'on le devine.}.
+pages 4 et 7, et le calcul vérifié en Lean (\texttt{discr\_isUnit\_of\_star})
+donne bien ce dernier. Le premier paragraphe de la page est en grande partie
+illisible, et le principe de prolongement est rapporté tel qu'on le
+devine.}.
 
 \pagerange{6}{8}
 \subsection*{Ordres prescrits : le groupe $\Gamma_{\nu_0,\nu_1}$ (pages 6 à 8)}
@@ -464,7 +500,14 @@ $\nu_i$ inv. », en face d'une rédaction biffée ; on le lit comme renvoyant
 aux cas A), C), B) du théorème de la page 31, ce qui donne c). Une
 condition c) sur les $\nu_i$ de la forme $2p$, réécrite plusieurs fois, est
 barrée. Sur une base non réduite, l'équivalence dépend de cette traduction,
-que Grothendieck marque « à vérifier » ; voir la section IV.}. Une remarque
+que Grothendieck marque « à vérifier » ; voir la section IV. Pour
+$\nu_i \in \{3, 4, 5, 6\}$, la traduction est vérifiée en Lean sur toute base,
+réduite ou non : ordre $3$ si et seulement si $\alpha_i = -1$, ordre $5$ si et
+seulement si $\alpha_i^2 + \alpha_i - 1 = 0$, sans condition ; ordre $4$ si et
+seulement si $\alpha_i = 0$ et $2$ inversible ; ordre $6$ si et seulement si
+$\alpha_i = 1$ et $6$ inversible (\texttt{isScalar\_pow\_three\_iff},
+\texttt{sq\_add\_sub\_of\_pow\_five}, \texttt{order\_four\_iff},
+\texttt{order\_six\_iff}). C'est la condition c) dans ces quatre cas.}. Une remarque
 de la page 8, barrée de deux longs traits, observait que pour $\nu_i = 2p$ les
 deux catégories sont vides dès que $S$ a un point de caractéristique $p$ :
 $\Psi_{2p} \equiv (U + 2)^{(p-1)/2}$ modulo $p$, ce qui force $\alpha_i =
@@ -507,7 +550,9 @@ subsiste que par sa note marginale.}.
 avec $\alpha^2 + \alpha - 1 = 0$. Tout est inversible sans condition :
 $\alpha_0 + 2 = 1$, $\alpha + 2$ est de norme $1$ et d'inverse $1 - \alpha$,
 $\alpha_0 + \alpha_1 = \alpha - 1$ est de norme $1$ et d'inverse $-\alpha -
-2$.
+2$\footnote{Les trois produits, $-2$ en A) et B) et $-1$ en C), sont
+vérifiés en Lean (\texttt{discr\_tetra}, \texttt{discr\_octa},
+\texttt{discr\_icosa}).}.
 
 \textbf{Théorème} (page 10). La catégorie des couples $(G, \varphi)$, $G$ forme
 de $\mathrm{PGL}_2$ sur $S$ et $\varphi : \mathbf{Z}/2 \times \mathfrak{A}_5
@@ -526,7 +571,10 @@ particulier l'icosaèdre existe en caractéristique $2$ ($\mathfrak{A}_5 \simeq
 \mathrm{PSL}_2(\mathbf{F}_4)$), $3$ ($\mathfrak{A}_5 \subset
 \mathrm{PGL}_2(\mathbf{F}_9)$) et $5$ ($\mathfrak{A}_5 \simeq
 \mathrm{PSL}_2(\mathbf{F}_5)$, où $T^2 + T - 1 = (T - 2)^2$ et la rotation
-d'ordre $5$ est unipotente)\footnote{Ces trois exemples sont de l'édition.}.
+d'ordre $5$ est unipotente)\footnote{Ces trois exemples sont de l'édition.
+Celui de la caractéristique $5$ se lit sur le modèle vérifié en Lean
+(section V, page 40) : $\zeta = 1$, la rotation est unipotente et
+d'invariant $2$.}.
 
 \pagerange{12}{21}
 \section*{III. Représentations projectives de $G_1$, et représentations dégénérées de $G_2$ (pages 12 à 21)}
@@ -885,7 +933,9 @@ suit le dossier 78. Le nom de Tchebychev est de l'édition.}. Exemples :
       A(u_C) = \frac{(\mathrm{Tr}\, u)^2}{\det u} - 2 ,
     \]
     ce qui se ramène au cas précédent en écrivant localement $u = tv$, $t$ une
-    unité, $v \in \mathrm{SL}(V)$. Si les valeurs propres de $u$ sont
+    unité, $v \in \mathrm{SL}(V)$\footnote{Que cette expression ne dépende
+    pas du relèvement, $A(\mu u) = A(u)$ pour $\mu$ inversible, est vérifié
+    en Lean (lean/Grothendieck/Folder85.lean, \texttt{invA\_smul}).}. Si les valeurs propres de $u$ sont
     $\lambda_1, \lambda_2$, $A(u_C) = \lambda_1/\lambda_2 +
     \lambda_2/\lambda_1$ ; pour une \emph{pseudo-réflexion} de déterminant
     $\lambda$ (valeurs propres $\lambda$ et $1$), $A = \lambda +
@@ -957,6 +1007,30 @@ $5$ si et seulement si $\alpha^2 + \alpha - 1 = 0$\footnote{La page ne suppose,
 pour l'ordre $6$, que les caractéristiques $\neq 3$ ; il faut aussi $\neq 2$ :
 en caractéristique $2$, $\alpha = 1 = -1$ donne un élément d'ordre $3$. Pour
 l'ordre $5$, la page écrit « $u^5 = 0$ », lapsus pour $u^5 = 1$.}.
+
+Pour une forme de $\mathrm{PGL}_2$, ces énoncés se précisent. Les
+restrictions de caractéristique des ordres $3$ et $5$ sont superflues : une
+section $u$ avec $u_s \neq 1$ en tout point est d'ordre exactement $3$
+(resp. $5$) en tout point si et seulement si $\alpha = -1$ (resp. $\alpha^2 +
+\alpha - 1 = 0$), sur toute base, réduite ou non, les caractéristiques $3$
+(resp. $5$) comprises, où $u_s$ est unipotent et $\alpha_s = 2$. Pour l'ordre
+$4$ et l'ordre $6$ au contraire, les conditions « $2$ inversible » et
+« $6$ inversible » sont nécessaires : $u$ est d'ordre exactement $4$ en tout
+point si et seulement si $\alpha = 0$ et $2$ est inversible, d'ordre exactement
+$6$ si et seulement si $\alpha = 1$ et $6$ est inversible\footnote{Vérifié en
+Lean (lean/Grothendieck/Folder85.lean) pour $\mathrm{PGL}_2$ déployé,
+localement donc pour toute forme, $u$ relevé en une matrice $g$ de
+$\mathrm{GL}_2(R)$ dont l'image n'est scalaire en aucun point. Les théorèmes
+sont \texttt{isScalar\_pow\_three\_iff}, \texttt{sq\_add\_sub\_of\_pow\_five}
+avec sa réciproque \texttt{pow\_five\_of\_sq\_add\_sub},
+\texttt{order\_four\_iff} et \texttt{order\_six\_iff} ; comme $3$ et $5$ sont
+premiers, « $g^3$ (resp. $g^5$) scalaire » suffit à l'ordre exact. Plus
+généralement, $g^{2k+1}$ est scalaire si et seulement si $P_{2k+1}(\alpha) =
+0$, sans hypothèse sur $(\alpha + 2)(\alpha - 2)$
+(\texttt{isScalar\_pow\_odd\_iff}), où les $P_n$ sont donnés par $P_0 = 0$,
+$P_1 = 1$ et une récurrence de Tchebychev ; ils valent $F_n$ pour $n \leq 7$,
+l'identification $P_n = F_n$ pour tout $n$ n'étant pas vérifiée. Ces
+précisions sont de l'édition.}.
 
 \textbf{Les ordres dans $\mathrm{SL}_2(k)$} (pages 30 et 31). L'ordre d'un
 élément de $\mathrm{SL}_2(k)$, $k$ un corps de caractéristique $p$, est infini,
@@ -1232,7 +1306,18 @@ $G$ de $\mathrm{PGL}_{2,S}$ et tout monomorphisme $\varphi :
 A(\varphi(\pi))$, $\pi$ le $5$-cycle standard. Alors le foncteur $(G, \varphi)
 \mapsto \alpha(\varphi)$, du groupoïde des $(G, \varphi)$ vers la catégorie
 discrète des $\alpha \in \Gamma(S, \mathcal{O}_S)$ tels que $\alpha^2 + \alpha
-- 1 = 0$, est une équivalence. Autrement dit le groupoïde est \emph{rigide},
+- 1 = 0$, est une équivalence\footnote{Le calcul sous l'énoncé est vérifié
+en Lean (lean/Grothendieck/Folder85.lean), sur tout anneau commutatif, sans
+hypothèse sur $2$, $3$ ou $5$ : pour $g \in \mathrm{GL}_2(R)$ dont l'image
+n'est scalaire en aucun point, $g^5$ est scalaire si et seulement si $A(g)^2
++ A(g) - 1 = 0$ (\texttt{sq\_add\_sub\_of\_pow\_five} et
+\texttt{pow\_five\_of\_sq\_add\_sub}). Un modèle explicite des relations de
+l'icosaèdre, $s^2$, $(sp)^3$ et $p^5$ scalaires, avec $A(p) = \zeta^2 +
+\zeta^3$, existe dans le $\mathrm{PGL}_2$ déployé sur $\mathbf{Z}[\zeta_5]$
+(\texttt{exists\_model\_adjoinRoot}), et non sur $\mathbf{Z}[T]/(T^2 + T -
+1)$ ; en caractéristique $5$, $\zeta = 1$ et $p$ est unipotent. La rigidité,
+la représentabilité par $M$ et le plongement de $\mathfrak{A}_5$ lui-même ne
+sont pas vérifiés.}. Autrement dit le groupoïde est \emph{rigide},
 et le foncteur des classes d'isomorphisme est représentable par
 \[
   M = \mathrm{Spec}\, \mathbf{Z}[T]/(T^2 + T - 1) .
@@ -1243,7 +1328,8 @@ intérieur sur aucune fibre, $\alpha(\varphi \circ u) = \alpha'(\varphi) = -1 -
 \alpha(\varphi) = -1/\alpha(\varphi)$.
 
 En effet un automorphisme extérieur envoie $\pi$ sur un conjugué de $\pi^2$, et
-$A(\pi^2) = S_2(\alpha) = \alpha^2 - 2 = -1 - \alpha$. C'est le théorème de la
+$A(\pi^2) = S_2(\alpha) = \alpha^2 - 2 = -1 - \alpha$\footnote{Vérifié en Lean
+(\texttt{invA\_sq} et \texttt{invA\_sq\_of\_root}).}. C'est le théorème de la
 page 10 débarrassé du facteur $\mathbf{Z}/2$\footnote{Un premier énoncé, en
 termes de bijection sur les classes d'isomorphisme, est encadré et barré. La
 note marginale « il suffit que \ldots{} soit trivial sur les fibres » vise sans
