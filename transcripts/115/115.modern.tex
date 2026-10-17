@@ -21,6 +21,16 @@
 % predates the modernisation skill and its model pin. The transcription this
 % reading works from, batch-01.fr.tex, is Fable 5's and unaffected.
 %
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — with the Lean check
+% (Folder115.lean): the dual adjunction of every kernel (pp. 3-5) and Isbell
+% duality as its specialisation at the hom kernel (p. 7) footnoted as
+% checked; nothing false. Literature of the matched findings cited: Isbell
+% (1960, 1966) for the duality, its fixed objects and the envelope, Bénabou
+% (1973) and Kelly (ch. 4) beside the wheel of p. 5, Borceux (I, §6.5) for
+% Kar as Cauchy completion. No mathlib result (mathlib has no Isbell
+% duality); no facsimile correction since the pass. Two overfull lines of the
+% PDF fixed (the pairing display of p. 3 split, the wheel set in \tiny).
+%
 % Scope: a SINGLE document for the whole folder, the convention 161-3's reading
 % established. The shelfmark holds one batch, so pages 1-14 are the folder
 % entire and no part of it is read in another file. Stated here rather than
@@ -121,8 +131,8 @@ et un unique accouplement les relie :
 X(L,M) = \mathrm{Hom}(L \boxtimes M,\ X)
 \;\cong\; \mathrm{Hom}_{\widehat{A}}\bigl(L,\ {}^{d}X(M)\bigr)
 \;\cong\; \mathrm{Hom}_{\widehat{B}}\bigl(M,\ {}^{s}X(L)\bigr),
-\qquad L \boxtimes M = p_{B}^{*}L \times p_{A}^{*}M .
 \]
+où $L \boxtimes M = p_{B}^{*}L \times p_{A}^{*}M$.
 Le produit externe $\boxtimes : \widehat{A} \times \widehat{B} \to (A \times
 B)^{\wedge}$ est pleinement fidèle.
 
@@ -141,7 +151,12 @@ $\widehat{B}$, autrement dit une adjonction \emph{duale} et non une adjonction
 ordinaire.\footnote{$X$ n'est donc pas un profoncteur $A \nrightarrow B$ : un
 profoncteur est covariant en une variable. C'est un préfaisceau à deux
 variables, et ce qu'il engendre est une correspondance de Galois du type
-$V \mapsto V^{*}$ — ce qui explique précisément où le dossier aboutit.}
+$V \mapsto V^{*}$ — ce qui explique précisément où le dossier aboutit.
+Vérifié en Lean (lean/Grothendieck/Folder115.lean, \texttt{kernelEquiv},
+\texttt{kernelAdj}) : pour tout noyau, les deux transformées sont
+mutuellement adjointes à droite, les deux membres de la bijection étant les
+familles $L(a) \times M(b) \to X(a, b)$, et toutes les naturalités valent par
+définition.}
 
 La page 5 dispose onze catégories de foncteurs en roue, dont toutes les
 flèches sont des équivalences. Le centre est le noyau lui-même ; la couronne
@@ -154,9 +169,15 @@ $\bigl|\widehat{A}^{\,\mathrm{op}} \text{ ou } A^{\vee}\bigr| \times
 \bigl|\widehat{B}^{\,\mathrm{op}} \text{ ou } B^{\vee}\bigr| \to
 \mathbf{Ens}$. Avec le centre : onze. La roue en dessine treize, les deux
 formes intérieures étant chacune écrites deux fois, aux deux bouts d'un
-diamètre — chacune curryfie vers deux bords différents.}
+diamètre — chacune curryfie vers deux bords différents. Chaque nœud est une
+curryfication classique d'un préfaisceau à deux variables, au sens de
+J.~Bénabou, \emph{Les distributeurs} (1973), et les équivalences du bord sont
+la propriété universelle de la (co)complétion libre, l'extension le long de
+Yoneda (G.~M.~Kelly, \emph{Basic Concepts of Enriched Category Theory},
+chap.~4). Ce qui n'est pas classique, c'est la disposition : onze
+présentations d'un même noyau rangées par variance.}
 
-\begin{tikzcd}[column sep=tiny, row sep=small, nodes={font=\scriptsize}]
+\begin{tikzcd}[column sep=tiny, row sep=small, nodes={font=\tiny}]
 (\widehat{B}_{\to}) & & & & & & (\widehat{A}_{\to}) \\
 & \underline{\mathrm{Hom}}^{!}(\widehat{B}^{\,\mathrm{op}},\widehat{A}) \arrow[rr, bend left=22] \arrow[dd, bend right=22] & & \underline{\mathrm{Hom}}^{!!}(\widehat{A}^{\,\mathrm{op}},\widehat{B}^{\,\mathrm{op}};\,\mathbf{Ens}) & & \underline{\mathrm{Hom}}^{!}(\widehat{A}^{\,\mathrm{op}},\widehat{B}) \arrow[ll, bend right=22] \arrow[dd, bend left=22] & \\
 & & \underline{\mathrm{Hom}}(B^{\mathrm{op}},\widehat{A}) \arrow[ul] & & \underline{\mathrm{Hom}}(A^{\mathrm{op}},\widehat{B}) \arrow[ur] & & \\
@@ -214,8 +235,19 @@ c'est-à-dire $\mathcal{O} \dashv \mathrm{Spec}$ comme foncteurs $\widehat{A}
 $\varphi_{A}$ pour $\mathcal{O}$ et $\Psi_{A}$ pour $\mathrm{Spec}$ ; les noms
 $\mathcal{O}$ et $\mathrm{Spec}$ sont postérieurs et portent la lecture
 géométrique de l'adjonction, fonctions contre points. Rien dans le dossier ne
-cite les travaux d'Isbell du milieu des années soixante : la construction naît
-ici du calcul de noyaux ci-dessus.}
+cite les travaux d'Isbell --- l'adjonction et ses objets fixes sont dans
+J.~R.~Isbell, « Structure of categories », \emph{Bull. AMS} 72 (1966) : la
+construction naît ici du calcul de noyaux ci-dessus. Vérifié en Lean
+(lean/Grothendieck/Folder115.lean, \texttt{isbell},
+\texttt{isbellO\_obj\_obj}, \texttt{isbellSpec\_obj\_obj},
+\texttt{isbellO\_yoneda}, \texttt{isbellSpec\_coyoneda},
+\texttt{isbellO\_preservesColimits}) : en prenant pour noyau le hom de $A$,
+les deux transformées sont exactement $\mathcal{O}$ et $\mathrm{Spec}$ (les
+formules ci-dessus valent par définition), $\mathcal{O} \dashv \mathrm{Spec}$,
+$\mathcal{O}(y a) \simeq \mathrm{Hom}_{A}(a, -)$, $\mathrm{Spec}(\mathrm{Hom}_{A}(a,
+-)) \simeq y a$, et $\mathcal{O}$ transforme les colimites en limites. La
+dualité d'Isbell est donc bien un cas particulier de la transformée par un
+noyau. Mathlib n'a pas la dualité d'Isbell.}
 
 Chaque foncteur est déterminé à isomorphisme unique près par deux propriétés,
 que le manuscrit énonce toutes deux : il se restreint le long de $y$ au hom
@@ -248,7 +280,11 @@ exactement sur les espaces de dimension finie ; ici, les objets où $\eta$ est
 inversible sont dits \emph{réflexifs}, ou auto-duaux au sens d'Isbell, et ce
 sont eux que construit la section suivante.\footnote{Sa parenthèse « sans
 doute pas » est conservée ci-dessus ; la transcription signale les mots qui la
-précèdent comme une lecture incertaine.}
+précèdent comme une lecture incertaine. La réponse est connue et va dans le
+sens de la page : les objets réflexifs excèdent en général strictement les
+représentables (J.~R.~Isbell, « Adequate subcategories » (1960), pour les
+représentables comme premiers objets réflexifs, et « Structure of
+categories » (1966), pour l'adjonction et ses objets fixes).}
 
 Dualement, il existe une contraction, cocontinue en chaque variable,
 \[
@@ -275,7 +311,8 @@ symétrie.}
 \subsection*{L'enveloppe}
 
 Les pages 10 et 11 construisent ce qu'on appelle aujourd'hui l'enveloppe
-d'Isbell. Soit $A \hookrightarrow B$ pleinement fidèle et $x$ un objet de $B$.
+d'Isbell\footnote{La construction est dans J.~R.~Isbell, « Structure of
+categories » (1966) ; le dossier ne la cite pas.}. Soit $A \hookrightarrow B$ pleinement fidèle et $x$ un objet de $B$.
 Les deux homs $H_{x} = \mathrm{Hom}_{B}(-, x) \in \widehat{A}$ et $H^{x} =
 \mathrm{Hom}_{B}(x, -) \in A^{\vee}$ se composent, par la composition de $B$ :
 \[
@@ -313,7 +350,8 @@ La page 13 place la complétion de Cauchy au centre. L'identité
 \]
 tient parce que le scindage des idempotents commute au passage à l'opposée, et
 que pour des catégories enrichies sur $\mathbf{Ens}$ l'enveloppe de Karoubi
-$\mathrm{Kar}$ \emph{est} la complétion de Cauchy. Les rétractes de
+$\mathrm{Kar}$ \emph{est} la complétion de Cauchy\footnote{F.~Borceux,
+\emph{Handbook of Categorical Algebra} I, §6.5.}. Les rétractes de
 représentables sont réflexifs, donc $\mathrm{Kar}(A)$ se place dans la part
 auto-duale de $\widetilde{A}$.\footnote{Le manuscrit écrit $A = \widehat{A}
 \cap A^{\vee\circ}$, intersection de sous-catégories de catégories
