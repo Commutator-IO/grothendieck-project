@@ -127,10 +127,8 @@ theorem le_of_lifts (n m : ℕ) (g : Fin m → P k) (a : Fin (n + 1) → Fin m �
   have hEL : E * L = 1 := by
     ext j i
     have key := congrArg (lam k i) (ha j)
-    rw [lam_gen] at key
-    simp only [map_add, map_sum, lam_mul_Xpow k _ (Fin.is_le i)] at key
-    have hr : ∀ r, lam k i (a j r * g r) = eps k (a j r) * eps k (b r i) := by
-      intro r
+    simp only [lam_gen, map_add, map_sum, lam_mul_Xpow k _ (Fin.is_le i)] at key
+    have hr : ∀ r, lam k i (a j r * g r) = eps k (a j r) * eps k (b r i) := fun r => by
       rw [hb r, mul_add, Finset.mul_sum, map_add, map_sum, ← mul_assoc,
         lam_mul_Xpow k _ (Fin.is_le i)]
       simp_rw [← mul_assoc, lam_mul_gen]
@@ -149,8 +147,8 @@ theorem le_of_lifts (n m : ℕ) (g : Fin m → P k) (a : Fin (n + 1) → Fin m �
 theorem Jn_not_generated (n m : ℕ) (g : Fin m → An k n)
     (hg : Ideal.span (Set.range g) = Jn k n) : n + 1 ≤ m := by
   classical
-  have hmem : ∀ j : Fin (n + 1), mkA k n (gen k j) ∈ Ideal.span (Set.range g) := by
-    intro j; rw [hg]; exact Ideal.subset_span ⟨j, rfl⟩
+  have hmem : ∀ j : Fin (n + 1), mkA k n (gen k j) ∈ Ideal.span (Set.range g) :=
+    fun j => hg ▸ Ideal.subset_span ⟨j, rfl⟩
   have hmem' : ∀ r, g r ∈ Jn k n := fun r => hg ▸ Ideal.subset_span ⟨r, rfl⟩
   choose c hc using fun j => (Submodule.mem_span_range_iff_exists_fun _).1 (hmem j)
   choose d hd using fun r => (Submodule.mem_span_range_iff_exists_fun _).1 (hmem' r)
@@ -158,16 +156,14 @@ theorem Jn_not_generated (n m : ℕ) (g : Fin m → An k n)
   let gt : Fin m → P k := fun r => lift (g r)
   let a : Fin (n + 1) → Fin m → P k := fun j r => lift (c j r)
   let b : Fin m → Fin (n + 1) → P k := fun r l => lift (d r l)
-  have ha : ∀ j : Fin (n + 1), ∃ h, gen k j = ∑ r, a j r * gt r + h * X ^ (n + 1) := by
-    intro j
+  have ha : ∀ j : Fin (n + 1), ∃ h, gen k j = ∑ r, a j r * gt r + h * X ^ (n + 1) := fun j => by
     have : gen k j - ∑ r, a j r * gt r ∈ Ideal.span {(X : P k) ^ (n + 1)} := by
       rw [← mkA_eq_zero_iff, map_sub, map_sum]
       simp only [map_mul, a, gt, hlift]
       rw [← hc j]; simp [smul_eq_mul]
     obtain ⟨h, hh⟩ := Ideal.mem_span_singleton'.1 this
     exact ⟨h, by rw [hh]; ring⟩
-  have hb : ∀ r, ∃ h, gt r = ∑ l : Fin (n + 1), b r l * gen k l + h * X ^ (n + 1) := by
-    intro r
+  have hb : ∀ r, ∃ h, gt r = ∑ l : Fin (n + 1), b r l * gen k l + h * X ^ (n + 1) := fun r => by
     have : gt r - ∑ l : Fin (n + 1), b r l * gen k l ∈ Ideal.span {(X : P k) ^ (n + 1)} := by
       rw [← mkA_eq_zero_iff, map_sub, map_sum]
       simp only [map_mul, b, gt, hlift]
@@ -211,11 +207,10 @@ theorem Jn_map_succ (n : ℕ) : Ideal.map (red k n) (Jn k (n + 1)) = Jn k n := b
     rw [red_mkA]
     by_cases hl : (l : ℕ) ≤ n
     · exact Ideal.subset_span ⟨⟨l, by omega⟩, rfl⟩
-    · have : (l : ℕ) = n + 1 := by omega
-      have h0 : mkA k n (gen k l) = 0 := by
-        rw [mkA_eq_zero_iff, gen, this]
+    · have h0 : mkA k n (gen k l) = 0 := by
+        rw [mkA_eq_zero_iff, gen, show (l : ℕ) = n + 1 by omega]
         exact Ideal.mul_mem_left _ _ (Ideal.subset_span rfl)
-      rw [SetLike.mem_coe, h0]; exact zero_mem _
+      exact h0 ▸ zero_mem _
   · rw [Ideal.span_le]
     rintro _ ⟨l, rfl⟩
     exact Ideal.subset_span ⟨mkA k (n + 1) (gen k l), ⟨⟨l, by omega⟩, rfl⟩, by rw [red_mkA]⟩
@@ -234,8 +229,7 @@ theorem ideal_spanRank_le_of_presentation {S : Type*} [CommRing S] {F K N : Type
   obtain ⟨ψ, hψ⟩ := Module.projective_lifting_property J.mkQ φ' J.mkQ_surjective
   obtain ⟨x0, hx0⟩ := (e.surjective.comp hφ) (J.mkQ 1)
   let χ : S →ₗ[S] F := LinearMap.toSpanSingleton S F x0
-  have hφ'χ : ∀ s, φ' (χ s) = J.mkQ s := by
-    intro s
+  have hφ'χ : ∀ s, φ' (χ s) = J.mkQ s := fun s => by
     simp only [χ, LinearMap.toSpanSingleton_apply, map_smul, φ']
     change s • e (φ x0) = _
     rw [show e (φ x0) = J.mkQ 1 from hx0, ← map_smul, smul_eq_mul, mul_one]
@@ -253,11 +247,8 @@ theorem ideal_spanRank_le_of_presentation {S : Type*} [CommRing S] {F K N : Type
       rw [← Submodule.Quotient.mk_eq_zero, ← Submodule.mkQ_apply, hψ']
       simp [φ', hex.apply_apply_eq_zero]
   · intro x hx
-    have hχx : φ (χ x) = 0 := by
-      apply e.injective
-      rw [map_zero]
-      change φ' (χ x) = 0
-      rw [hφ'χ]; exact (Submodule.Quotient.mk_eq_zero _).2 hx
+    have hχx : φ (χ x) = 0 := e.injective <| show e (φ (χ x)) = e 0 by
+      rw [map_zero]; exact (hφ'χ x).trans ((Submodule.Quotient.mk_eq_zero _).2 hx)
     obtain ⟨y, hy⟩ := (hex (χ x)).1 hχx
     have hy' : ψ (γ y) ∈ Ideal.span (Set.range w) := by
       have hyv : y ∈ Submodule.span S (Set.range v) := hv ▸ Submodule.mem_top
@@ -269,8 +260,7 @@ theorem ideal_spanRank_le_of_presentation {S : Type*} [CommRing S] {F K N : Type
     have hdec : x = x * c + ψ (γ y) := by
       rw [hy]
       simp only [χ, LinearMap.toSpanSingleton_apply, map_smul, smul_eq_mul, c]
-      have : ψ (χ 1) = ψ x0 := by simp [χ]
-      rw [mul_sub, mul_one]; ring
+      ring
     rw [hdec]
     refine add_mem (Ideal.mul_mem_left _ _ (Ideal.subset_span ⟨0, by simp [w]⟩)) hy'
 
