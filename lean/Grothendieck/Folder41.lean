@@ -83,12 +83,9 @@ include hφ
 omit [TopologicalSpace Y] in
 /-- **The page's formula** `φ⁻¹(U) = f(U)`, for `U` open. -/
 theorem preimage_eq_image {U : Set X} (hU : IsOpen U) : φ ⁻¹' U = f '' U := by
-  ext y
-  constructor
-  · intro hy
-    exact ⟨φ y, hy, (hφ y).1⟩
-  · rintro ⟨x, hx, rfl⟩
-    exact ((hφ (f x)).2 x rfl).mem_open hU hx
+  refine Set.ext fun y => ⟨fun hy => ⟨φ y, hy, (hφ y).1⟩, ?_⟩
+  rintro ⟨x, hx, rfl⟩
+  exact ((hφ (f x)).2 x rfl).mem_open hU hx
 
 /-- **(i) ⟺ (ii).** `φ` is continuous if and only if `f` is open. -/
 theorem i_iff_ii : Continuous φ ↔ IsOpenMap f := by
@@ -104,12 +101,10 @@ theorem i_imp_iii (h : Continuous φ) : ∀ y y', y' ⤳ y → φ y' ⤳ φ y :=
 /-- **(iii) ⟺ (iii bis).** `φ` preserves specialisation if and only if `f`
 lifts generizations. -/
 theorem iii_iff_iiibis : (∀ y y', y' ⤳ y → φ y' ⤳ φ y) ↔ GeneralizingMap f := by
-  constructor
-  · intro h x y' hy'
-    exact ⟨φ y', (h _ _ hy').trans ((hφ (f x)).2 x rfl), (hφ y').1⟩
-  · intro h y y' hy'
-    obtain ⟨x', hx', hfx'⟩ := h (show y' ⤳ f (φ y) by rw [(hφ y).1]; exact hy')
-    exact ((hφ y').2 x' hfx').trans hx'
+  refine ⟨fun h x y' hy' => ⟨φ y', (h _ _ hy').trans ((hφ (f x)).2 x rfl), (hφ y').1⟩,
+    fun h y y' hy' => ?_⟩
+  obtain ⟨x', hx', hfx'⟩ := h (show y' ⤳ f (φ y) by rw [(hφ y).1]; exact hy')
+  exact ((hφ y').2 x' hfx').trans hx'
 
 end Topologie
 
@@ -141,9 +136,7 @@ theorem iiibis_not_imp_ii :
       GeneralizingMap (CofiniteTopology.of : ℕ → CofiniteTopology ℕ) ∧
       ¬ IsOpenMap (CofiniteTopology.of : ℕ → CofiniteTopology ℕ) := by
   refine ⟨fun y => ⟨by simp, fun x hx => by rw [← hx]; simp⟩, fun x y' hy' => ?_, fun h => ?_⟩
-  · have hy'' : y' ⤳ CofiniteTopology.of x := hy'
-    rw [specializes_iff_eq] at hy''
-    exact ⟨x, specializes_rfl, hy''.symm⟩
+  · exact ⟨x, specializes_rfl, (specializes_iff_eq.1 (hy' : y' ⤳ CofiniteTopology.of x)).symm⟩
   · have hopen := h {0} (isOpen_discrete _)
     rw [Set.image_singleton, CofiniteTopology.isOpen_iff'] at hopen
     have : Infinite (CofiniteTopology ℕ) :=
