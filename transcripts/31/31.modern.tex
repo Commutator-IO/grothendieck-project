@@ -52,6 +52,18 @@
 %
 % Pass: Opus 5 (claude-opus-5), 2026-09-11 — first pass, unchecked against the
 % pages by a human.
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the page
+% proofs of #55 (commit 76fb96e): the Proposition of p. 66 (the phi bound)
+% is published by M. Artin, SGA 4 X, th. 4.1 (1973), now said where it is
+% stated, with the inventory's dating [1963-1973], no priority asserted.
+% Correction (pp. 66-67): the reduction is to F = g_*(G) with g : Spec k(x)
+% -> X, not the closure of x (a closed immersion has no higher direct
+% images); the spectral sequence abuts to H^*(k(x), G); the boxed bound is
+% strict at y != x, which kills E_2^{pq} for q > 0 and p + q >= phi(x), as
+% the page's sketch of the (p, q) plane shows; the last step is the
+% edition's. No Lean file, no mathlib. No facsimile check since the first
+% pass.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -854,21 +866,44 @@ cohomologie de l'anneau local strict relatif $K_{\bar{y}} =
 spécialisations, $\varphi$ doit perdre au moins ce que la fibre peut faire
 remonter.
 
-La démonstration est une récurrence noethérienne. On se ramène à
-$F = g_{*}(G)$ avec $g : \overline{\{x\}} \to X$, on écrit la suite spectrale
+Cette proposition est publiée : c'est le théorème~4.1 de l'exposé~X de
+SGA~4, dû à M.~Artin (1973).\footnote{L'inventaire date la cote
+« [1963-1973] » ; on n'en tire rien sur l'ordre de la page et de l'exposé.}
+
+La démonstration est une récurrence noethérienne. Le dévissage ramène au cas
+$F = g_{*}(G)$, avec $g : \operatorname{Spec} k(x) \to X$ et $G$ fini de
+$\ell$-torsion sur $\operatorname{Spec} k(x)$, où $\varphi(F) = \varphi(x)$ ;
+on écrit la suite spectrale de Leray
 \[
 E_2^{pq} = H^p\bigl(X, R^q g_{*}(G)\bigr) \Longrightarrow
-H^{p+q}\bigl(\overline{\{x\}}, G\bigr),
+H^{p+q}\bigl(k(x), G\bigr),
 \]
-et tout tient dans une majoration, encadrée sur la page :
+dont l'aboutissement est nul en degré $> \operatorname{cd}_{\ell} k(x)$, donc
+en degré $> \varphi(x)$ par a).\footnote{La page écrit $g : \bar{x} \to X$,
+« Spec » étant biffé, et $H^{*}(\overline{\{x\}}, G)$ pour l'aboutissement ;
+la première version de cette lecture avait écrit $g : \overline{\{x\}} \to X$.
+Ce ne peut être l'immersion fermée de l'adhérence, qui n'a pas d'images
+directes supérieures : c'est le morphisme du point $x$, dont les fibres sont
+celles que la page calcule ensuite. La prose de ce dévissage, page 66, est en
+grande partie illisible.} Tout tient alors dans une majoration, encadrée sur
+la page :
 \[
 \varphi\bigl(R^q g_{*}(G)\bigr) \leqslant \varphi(x) - q.
 \]
 Elle s'obtient en calculant la fibre $R^q g_{*}(G)_{\bar{y}} =
 H^q(K_{\bar{y}}, G)$, qui est nulle dès que $q > \operatorname{cd}_{\ell}
-(K_{\bar{y}})$, et en reportant dans la condition b). L'hypothèse de récurrence
-donne alors $E_2^{pq} = 0$ pour $p + q > \varphi(x)$, et il ne reste rien
-au-dessus.
+(K_{\bar{y}})$, et en reportant dans la condition b). Pour $q > 0$, le support
+de $R^q g_{*}(G)$ ne contient pas $x$, et l'inégalité b) est stricte en
+$y \neq x$ : $\varphi(R^q g_{*}(G)) \leqslant \varphi(x) - q - 1$. L'hypothèse
+de récurrence donne donc $E_2^{pq} = 0$ pour $q > 0$ et $p + q \geqslant
+\varphi(x)$. Pour $p > \varphi(x)$, les différentielles qui arrivent sur
+$E_r^{p,0}$ partent de termes $E_r^{p-r,\,r-1}$, de degré total $p - 1
+\geqslant \varphi(x)$ et avec $r - 1 \geqslant 1$, donc nuls ; ainsi $E_2^{p,0} =
+H^p(X, g_{*}G)$ s'injecte dans l'aboutissement, nul en ce degré.\footnote{La
+page s'arrête sur un croquis du plan $(p, q)$, où la région $p + q \geqslant
+\varphi(x)$ ne rencontre aucune croix, sans écrire ce dernier pas ; il est de
+l'édition. C'est l'inégalité stricte de b) qui fait que $p + q = \varphi(x)$
+est déjà vide pour $q > 0$, ce qu'il faut pour $p = \varphi(x) + 1$.}
 
 La page 68 note au passage la façon dont $\varphi$ se comporte le long d'un
 morphisme de type fini $f : X \to Y$ : pour $x \in X$ et $y = f(x)$,
