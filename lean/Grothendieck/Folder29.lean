@@ -48,25 +48,16 @@ noncomputable def inertiaMap (N : Matrix C' C ℤ) (ℓ : ℕ) [Fact ℓ.Prime] 
 /-- A matrix bijective over `ℤ_ℓ` for one `ℓ` is square. -/
 theorem card_eq_of_bijective (N : Matrix C' C ℤ) (ℓ : ℕ) [Fact ℓ.Prime]
     (h : Function.Bijective (inertiaMap N ℓ)) : Fintype.card C = Fintype.card C' := by
-  let f := LinearEquiv.ofBijective (N.map (Int.cast : ℤ → ℤ_[ℓ])).mulVecLin h
-  simpa using f.finrank_eq
+  simpa using (LinearEquiv.ofBijective (N.map (Int.cast : ℤ → ℤ_[ℓ])).mulVecLin h).finrank_eq
 
 /-- A square integer matrix is bijective over `ℤ_ℓ` iff `ℓ` does not divide its
 determinant. -/
 theorem bijective_iff_not_dvd_det [DecidableEq C'] (M : Matrix C' C' ℤ) (ℓ : ℕ) [Fact ℓ.Prime] :
     Function.Bijective (inertiaMap M ℓ) ↔ ¬ (ℓ : ℤ) ∣ M.det := by
-  have hdet : (M.map (Int.cast : ℤ → ℤ_[ℓ])).det = (M.det : ℤ_[ℓ]) :=
-    ((Int.castRingHom ℤ_[ℓ]).map_det M).symm
-  have key : IsUnit (M.map (Int.cast : ℤ → ℤ_[ℓ])) ↔ ¬ (ℓ : ℤ) ∣ M.det := by
-    rw [isUnit_iff_isUnit_det, hdet, PadicInt.isUnit_iff, ← PadicInt.norm_intCast_lt_one_iff]
-    exact ⟨fun h => h.symm ▸ lt_irrefl 1, fun h => le_antisymm (PadicInt.norm_le_one _)
-      (not_lt.1 h)⟩
-  refine ⟨fun h => key.1 (mulVec_surjective_iff_isUnit.1 h.2), fun h => ?_⟩
-  have hu := key.2 h
-  refine ⟨fun v w hvw => ?_, mulVec_surjective_iff_isUnit.2 hu⟩
-  have := congrArg ((M.map (Int.cast : ℤ → ℤ_[ℓ]))⁻¹).mulVec hvw
-  simpa [inertiaMap, mulVec_mulVec, nonsing_inv_mul _ ((isUnit_iff_isUnit_det _).1 hu)]
-    using this
+  rw [not_iff_comm.1 ((PadicInt.not_isUnit_iff (p := ℓ)).trans
+    PadicInt.norm_intCast_lt_one_iff), Int.cast_det, ← isUnit_iff_isUnit_det]
+  exact ⟨fun h => mulVec_surjective_iff_isUnit.1 h.2,
+    fun h => ⟨mulVec_injective_of_isUnit h, mulVec_surjective_iff_isUnit.2 h⟩⟩
 
 /-- An integer is prime to every prime `ℓ ≠ p` iff it is `± p^k`, for `p` prime or
 `p = 1`. -/
@@ -83,9 +74,7 @@ theorem forall_not_dvd_iff {p : ℕ} (hp : p = 1 ∨ p.Prime) (d : ℤ) :
       · exact Nat.eq_prime_pow_of_unique_prime_dvd (Int.natAbs_ne_zero.2 hd) fun hq hqd =>
           by_contra fun hqp => h _ hq hqp (Int.natCast_dvd.2 hqd)
     generalize d.natAbs.primeFactorsList.length = k at hn
-    have hn' : (d.natAbs : ℤ) = (p : ℤ) ^ k := by exact_mod_cast hn
-    refine ⟨k, ?_⟩
-    rcases Int.natAbs_eq d with h' | h' <;> rw [h', hn'] <;> simp
+    exact ⟨k, (by exact_mod_cast hn : (d.natAbs : ℤ) = p ^ k) ▸ Int.natAbs_eq d⟩
   · rintro ⟨k, hk⟩ ℓ hℓ hℓp hdvd
     have : ℓ ∣ p ^ k := by
       rcases hk with rfl | rfl <;> simpa [← Int.natCast_dvd_natCast] using hdvd
@@ -123,13 +112,10 @@ theorem criterion [DecidableEq C'] {p : ℕ} (hp : p = 1 ∨ p.Prime) (N : Matri
     (∀ (ℓ : ℕ) [Fact ℓ.Prime], ℓ ≠ p → Function.Bijective (inertiaMap N ℓ)) ↔
       Fintype.card C = Fintype.card C' ∧ ∃ e : C' ≃ C, ∃ k : ℕ,
         (N.submatrix id e).det = p ^ k ∨ (N.submatrix id e).det = -(p ^ k : ℤ) := by
-  constructor
-  · intro h
-    obtain ⟨ℓ, hℓp, hℓ⟩ := Nat.exists_infinite_primes (p + 1)
-    have := Fact.mk hℓ
-    have hc := card_eq_of_bijective N ℓ (h ℓ (by omega))
-    exact ⟨hc, Fintype.equivOfCardEq hc.symm, (criterion_of_equiv hp N _).1 h⟩
-  · rintro ⟨-, e, he⟩
-    exact (criterion_of_equiv hp N e).2 he
+  refine ⟨fun h => ?_, fun ⟨_, e, he⟩ => (criterion_of_equiv hp N e).2 he⟩
+  obtain ⟨ℓ, hℓp, hℓ⟩ := Nat.exists_infinite_primes (p + 1)
+  have := Fact.mk hℓ
+  have hc := card_eq_of_bijective N ℓ (h ℓ (by omega))
+  exact ⟨hc, Fintype.equivOfCardEq hc.symm, (criterion_of_equiv hp N _).1 h⟩
 
 end Folder29
