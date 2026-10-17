@@ -478,4 +478,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder40.lean',
     theorems: ['irreducible_radical', 'isDomain_radical', 'isDVR_adjoinRoot', 'isDVR_root_X', 'isDVR_root_neg_X_add_X_sq', 'cusp_not_valuation', 'not_isDVR_cusp_odd', 'not_isDomain_cusp_even', 'cusp_two_nilpotent', 'neg_X_add_X_sq_eq_pow', 'fibre_ne_zero', 'fibre_nilpotent'],
   },
+  {
+    folder: '136',
+    batch: 2,
+    page: '22, 26–31',
+    name: 'Théorème 1 and the degree-i form: the binomial lemma behind the shadows',
+    statement:
+      'If binom(j, i)(x_j − x_i) = 0 for all j > i ≥ N in an abelian group, then x_i = x_N for every i ≥ N (Théorème 1, p. 22); and if c_{l,k} ξ_k = c_{l,k−i} ξ_{k+l} for k ≥ N, l ≥ 0, with c_{a,b} = binom(a + b, a), there is a unique ξ with ξ_k = binom(k, i) ξ for every k ≥ N (pp. 26–31). In the group of additive maps M → M′, the first is Corollary 1: ω_N is fully faithful.',
+    found:
+      'Holds, more generally: the degree-i form needs no i ≤ N, and Théorème 1 is its case i = 0. The proof is not the page’s: no localisation at p and no p-adic digit shift. One index K = p^r − 1 above k and k′, where every binom(K, ·) is prime to p (the « no carry » lemma of p. 31, proved as binom(p^r − 1, b) ≡ (−1)^b mod p), ties ξ_k to ξ_{k′} through binom(k+l, l) binom(k, i) = binom(k+l, i) binom(k+l−i, l); an element killed, for every p, by an integer prime to p is zero. The binom(k, i), k ≥ N, generate ℤ, and the Bézout combination of p. 27 gives ξ and its uniqueness. Full faithfulness of ω_N and the isomorphism with φ_N τ_N are formalised only on coefficients, not as statements about graded k{T}-modules.',
+    verdict: 'holds, more generally',
+    lean: 'lean/Grothendieck/Folder136.lean',
+    theorems: ['choose_pow_sub_one_zmod', 'not_dvd_choose_pow_sub_one', 'choose_add_mul_choose', 'eq_zero_of_forall_prime_smul', 'cross_relation', 'span_choose_eq_top', 'binomial_shadow_existsUnique', 'binomial_constant', 'hom_family_constant'],
+  },
 ];

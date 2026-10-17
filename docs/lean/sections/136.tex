@@ -1,0 +1,61 @@
+\section[Cote 136 : le lemme binomial des ombres]{Cote 136 : le lemme binomial des ombres\protect\verifie{Folder136}}\label{sec:136}
+
+La cote 136, \emph{Complexe de De Rham à puissance divisée [conférence de 1976 à l'IHÉS] : notes manuscrites (s.d.)}, que l'inventaire date \q{[à partir de 1975-1976]}, est une liasse de notes autour d'une conférence : le complexe de De Rham à puissances divisées d'un ensemble simplicial, sa cohomologie, ses \q{ombres}, la version duale et les automorphismes. L'algèbre des ombres est $S = k\{T\}$, l'algèbre des polynômes à puissances divisées sur un anneau commutatif $k$, de base les $T^{(i)}$, avec $T^{(i)} T^{(j)} = c_{i,j}\, T^{(i+j)}$, où $c_{i,j} = \binom{i+j}{i}$. Pour un $k$-module $M$ et $N \geq 0$, l'ombre $\omega_N(M) = M \otimes_k S^{+(N)}$, où $S^{+(N)} = \sum_{i \geq N} k\, T^{(i)}$, est un $S$-module gradué. Les pages~19 à~22 démontrent par le critère de Lucas un lemme sur les coefficients binomiaux, le théorème~1 (\lot{136}{2}{22}). La page~22 en tire que $\omega_N$ est pleinement fidèle : un morphisme $\omega_N(M) \to \omega_N(M')$ est une famille $u_i : M \to M'$, $i \geq N$, telle que $c_{i,j}(u_{i+j} - u_i) = 0$, et le théorème~1 dans le groupe $\mathrm{Hom}(M, M')$ la rend constante. Les pages~26 à~31 étendent le théorème au degré $i$, sous la forme qu'en donne la lecture : l'homomorphisme $M \otimes_k S \to \varphi_N \tau_N(M \otimes_k S)$ est un isomorphisme, $\varphi_N$ adjoint à droite de la troncature, et cela revient à un énoncé sur des familles d'éléments d'un groupe abélien (\lot{136}{2}{26}). Dans la démonstration du théorème~1, la phrase qui vérifie les hypothèses du lemme~2 finit sur un mot illisible. Les noms de Lucas et de Kummer sont de la lecture.
+
+\begin{theoreme}[Grothendieck, page 22, théorème~1\piste{136-shadow-full-faithfulness}]\label{thm:136-1}
+Soient $E$ un groupe abélien, $N \in \mathbf N$ et $(x_i)_{i \in \mathbf N}$ une famille d'éléments de $E$ telle que $\binom{j}{i}(x_j - x_i) = 0$ pour $j > i \geq N$. Alors $x_i = x_N$ pour tout $i \geq N$.
+\end{theoreme}
+
+\begin{theoreme}[Grothendieck, pages 26 à 31, la forme en degré $i$\piste{136-shadow-full-faithfulness}]\label{thm:136-i}
+Soient $i, N \in \mathbf N$, $M$ un groupe abélien et $(\xi_k)_{k \geq N}$ une famille d'éléments de $M$ telle que $c_{l,k}\, \xi_k = c_{l,k-i}\, \xi_{k+l}$ pour tous $k \geq N$ et $l \geq 0$. Il existe un unique $\xi \in M$ tel que $\xi_k = \binom{k}{i} \xi$ pour tout $k \geq N$.
+\end{theoreme}
+
+La lecture suppose $i \leq N$, ce qui donne un sens à $c_{l,k-i}$ ; on lit ici $k - i$ comme une soustraction tronquée à~$0$, et l'énoncé vaut pour tout~$i$. Pour $i = 0$, la relation s'écrit $c_{l,k}(\xi_{k+l} - \xi_k) = 0$, et le théorème~\ref{thm:136-i} donne le théorème~\ref{thm:136-1}, puisque $\binom{k}{0} = 1$. On démontre donc le second. La démonstration n'est pas celle de la page : elle ne localise pas et ne passe pas par le décalage des chiffres $p$-adiques du lemme~2.
+
+\begin{lemme}\label{lem:136-retenue}
+Soient $p$ premier, $r \geq 0$ et $0 \leq b \leq p^r - 1$. Alors $\binom{p^r - 1}{b} \equiv (-1)^b \pmod p$ ; en particulier $p$ ne divise pas $\binom{p^r - 1}{b}$.
+\end{lemme}
+
+\begin{proof}
+Par récurrence sur $b$, le cas $b = 0$ étant clair. Pour $0 < b + 1 \leq p^r - 1$, $p$ divise $\binom{p^r}{b+1}$, et la relation de Pascal $\binom{p^r}{b+1} = \binom{p^r - 1}{b} + \binom{p^r - 1}{b+1}$ donne $\binom{p^r - 1}{b+1} \equiv -\binom{p^r-1}{b} \equiv (-1)^{b+1}$.
+\end{proof}
+
+C'est le \q{lemme commun} de la page~31 : quand $\mu + \nu = p^r - 1$, aucune retenue n'est possible et $c_{\mu,\nu} \not\equiv 0 \pmod p$.
+
+\begin{lemme}\label{lem:136-identite}
+Pour tous $k, l, i \in \mathbf N$, $\binom{k+l}{l} \binom{k}{i} = \binom{k+l}{i} \binom{k+l-i}{l}$, la soustraction étant tronquée.
+\end{lemme}
+
+\begin{proof}
+Si $i \leq k$, les deux membres valent $(k+l)!/(l!\, i!\, (k-i)!)$. Si $i > k$, le premier membre est nul, et le second aussi : pour $l = 0$, $\binom{k}{i} = 0$ ; pour $l > 0$, $k + l - i < l$.
+\end{proof}
+
+\begin{lemme}\label{lem:136-ordre}
+Soit $z$ un élément d'un groupe abélien tel que, pour tout nombre premier $p$, un entier $c$ non divisible par $p$ vérifie $cz = 0$. Alors $z = 0$.
+\end{lemme}
+
+\begin{proof}
+Soit $d$ l'ordre de $z$, éventuellement nul. Si $d \neq 1$, soit $p$ le plus petit facteur premier de $d$ ($p = 2$ si $d = 0$). L'entier $c$ associé à $p$ vérifie $cz = 0$, donc $d \mid c$, et $p \mid c$, contradiction. Donc $d = 1$ et $z = 0$.
+\end{proof}
+
+\begin{lemme}\label{lem:136-croise}
+Sous les hypothèses du théorème~\ref{thm:136-i}, $\binom{k}{i} \xi_{k'} = \binom{k'}{i} \xi_k$ pour tous $k, k' \geq N$.
+\end{lemme}
+
+\begin{proof}
+Soit $z = \binom{k}{i} \xi_{k'} - \binom{k'}{i} \xi_k$, et soit $p$ premier. Choisissons $r$ tel que $K = p^r - 1 \geq k + k'$. La relation pour $(k, K - k)$ et pour $(k', K - k')$ s'écrit $u\, \xi_k = a\, \xi_K$ et $u'\, \xi_{k'} = a'\, \xi_K$, avec $u = \binom{K}{K-k}$, $a = \binom{K - i}{K - k}$, $u' = \binom{K}{K-k'}$, $a' = \binom{K-i}{K-k'}$. Le lemme~\ref{lem:136-identite} donne $u \binom{k}{i} = \binom{K}{i}\, a$ et $u' \binom{k'}{i} = \binom{K}{i}\, a'$. Alors
+\[ u u' z = \tbinom{k}{i} u \cdot u' \xi_{k'} - \tbinom{k'}{i} u' \cdot u \xi_k = \tbinom{K}{i}\, a a'\, \xi_K - \tbinom{K}{i}\, a' a\, \xi_K = 0, \]
+et $p$ ne divise pas $u u'$ par le lemme~\ref{lem:136-retenue}. Le lemme~\ref{lem:136-ordre} conclut.
+\end{proof}
+
+\begin{proof}[Démonstration du théorème~\ref{thm:136-i}]
+Les $\binom{k}{i}$, $k \geq N$, engendrent l'idéal unité de $\mathbf Z$. En effet, cet idéal est principal, de générateur $g \geq 0$ ; si $g \neq 1$, soit $p$ un facteur premier de $g$ ($p = 2$ si $g = 0$) et $r$ tel que $p^r - 1 \geq N + i$. Alors $g$ divise $\binom{p^r - 1}{i}$, que $p$ ne divise pas par le lemme~\ref{lem:136-retenue}, contradiction. Il existe donc des $k_1, \ldots, k_n \geq N$ et des entiers $m_1, \ldots, m_n$ tels que $\sum_\alpha m_\alpha \binom{k_\alpha}{i} = 1$. Posons $\xi = \sum_\alpha m_\alpha\, \xi_{k_\alpha}$. Pour $k \geq N$, le lemme~\ref{lem:136-croise} donne
+\[ \tbinom{k}{i} \xi = \sum_\alpha m_\alpha \tbinom{k}{i} \xi_{k_\alpha} = \sum_\alpha m_\alpha \tbinom{k_\alpha}{i} \xi_k = \xi_k . \]
+Si $\eta$ vérifie aussi $\xi_k = \binom{k}{i} \eta$ pour tout $k \geq N$, alors $\eta = \sum_\alpha m_\alpha \binom{k_\alpha}{i} \eta = \sum_\alpha m_\alpha \xi_{k_\alpha} = \xi$.
+\end{proof}
+
+\begin{remarque}
+Les deux énoncés tiennent tels que la lecture les donne, et le second sans l'hypothèse $i \leq N$. La combinaison de Bézout qui définit $\xi$ et en donne l'unicité est celle de la page~27. Le reste diffère. La page se ramène à un $\mathbf Z_{(p)}$-module, retranche la solution évidente et procède en deux lemmes sur les unités parmi les $c_{i,j}$. Ici, un seul indice $K = p^r - 1$ au-dessus de $k$ et $k'$ relie directement $\xi_k$ et $\xi_{k'}$, et le lemme~\ref{lem:136-ordre} remplace la localisation. Le théorème~1 de la page~22 se ramène lui aussi au lemme~2, $\mathbf Z_{(p)}$-local et pour un ensemble fini d'indices ; il est obtenu ici comme le cas $i = 0$. La pleine fidélité de $\omega_N$ en est l'instance dans le groupe des homomorphismes $M \to M'$, que le fichier énonce sur les familles d'homomorphismes, sans les modules gradués. La piste demande si le lemme ou la pleine fidélité figurent dans la littérature sur les modules sur les algèbres à puissances divisées ; sa partie modulaire n'est démontrée ici que sur les coefficients.
+\end{remarque}
+
+Ne sont pas démontrés ici : le critère de Lucas et le lemme~2 sous leur forme $p$-adique (pages~19 à~22) ; la pleine fidélité de $\omega_N$ et l'isomorphisme $M \otimes_k S \to \varphi_N \tau_N(M \otimes_k S)$ comme énoncés sur les $S$-modules gradués ; le corollaire $\operatorname{Ext}^n(\tau_{N-i}(S)[-i], M \otimes_k S) = 0$ et la pleine fidélité dans la catégorie dérivée (pages~262 à~272) ; la cohomologie des formes à puissances divisées et le schéma en groupes des automorphismes, dont les pistes figurent à la fin de la partie.
