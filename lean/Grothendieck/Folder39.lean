@@ -67,8 +67,7 @@ theorem isAdicComplete_of_nilpotent {I : Ideal A} (hI : IsNilpotent I) : IsAdicC
     exact Ideal.pow_le_pow_right hn
   refine { haus' := fun x hx => ?_, prec' := fun f hf => ⟨f k, fun n => ?_⟩ }
   · have := hx k
-    rw [hk' k le_rfl, SModEq.zero, Submodule.mem_bot] at this
-    exact this
+    rwa [hk' k le_rfl, SModEq.zero, Submodule.mem_bot] at this
   · rcases le_total n k with h | h
     · exact hf h
     · have := hf h
@@ -90,21 +89,15 @@ theorem preparation_adique (I : Ideal A) [IsAdicComplete I A] (F : A⟦X⟧) (N 
   have := Ideal.Quotient.nontrivial_iff.2 hI
   -- The order of `F` modulo `I` is `N`.
   have hord : (F.map (Ideal.Quotient.mk I)).order.toNat = N := by
-    have : (F.map (Ideal.Quotient.mk I)).order = N := by
-      rw [PowerSeries.order_eq_nat]
-      refine ⟨?_, fun i hi => ?_⟩
-      · rw [PowerSeries.coeff_map]
-        exact (h2.map _).ne_zero
-      · rw [PowerSeries.coeff_map, Ideal.Quotient.eq_zero_iff_mem]
-        exact h1 i hi
+    have : (F.map (Ideal.Quotient.mk I)).order = N := PowerSeries.order_eq_nat.2
+      ⟨(h2.map (Ideal.Quotient.mk I)).ne_zero, fun i hi =>
+        Ideal.Quotient.eq_zero_iff_mem.2 (h1 i hi)⟩
     rw [this, ENat.toNat_natCast]
   have H : F.IsWeierstrassDivisorAt I := by
-    rw [IsWeierstrassDivisorAt, hord]
-    exact h2
+    rwa [IsWeierstrassDivisorAt, hord]
   refine ⟨fun Q hQ => ?_, fun G => ?_⟩
-  · have hdeg : (0 : A[X]).degree < ((F.map (Ideal.Quotient.mk I)).order.toNat : WithBot ℕ) := by
-      rw [Polynomial.degree_zero]
-      exact WithBot.bot_lt_coe _
+  · have hdeg : (0 : A[X]).degree < ((F.map (Ideal.Quotient.mk I)).order.toNat : WithBot ℕ) :=
+      Polynomial.degree_zero.trans_lt (WithBot.bot_lt_coe _)
     exact (H.eq_zero_of_mul_eq hdeg (by rw [hQ, Polynomial.coe_zero])).1
   · have hdiv := H.isWeierstrassDivisionAt_div_mod G
     have hdeg := hdiv.degree_lt
@@ -116,15 +109,11 @@ theorem preparation_adique (I : Ideal A) [IsAdicComplete I A] (F : A⟦X⟧) (N 
     rintro ⟨q, r⟩ ⟨hr, hG⟩
     simp only at hr hG
     have hr' : r.degree < ((F.map (Ideal.Quotient.mk I)).order.toNat : WithBot ℕ) := by
-      rw [hord]; exact hr
-    have hmod : (H.mod G).degree <
-        ((F.map (Ideal.Quotient.mk I)).order.toNat : WithBot ℕ) := by
-      rw [hord]; exact hdeg
+      rwa [hord]
     have heq : F * q + ↑r = F * H.div G + ↑(H.mod G) := by
       rw [mul_comm F q, ← hG]
       exact hdiv.eq_mul_add
-    have := H.eq_of_mul_add_eq_mul_add hr' hmod heq
-    exact Prod.ext this.1 this.2
+    exact Prod.ext_iff.2 (H.eq_of_mul_add_eq_mul_add hr' hdiv.degree_lt heq)
 
 /-- « il est de type fini et engendré par des nilpotents, donc nilpotent ». -/
 theorem ideal_nilpotent (F : A⟦X⟧) (N : ℕ) (h1 : ∀ i < N, IsNilpotent (coeff i F)) :
@@ -132,8 +121,7 @@ theorem ideal_nilpotent (F : A⟦X⟧) (N : ℕ) (h1 : ∀ i < N, IsNilpotent (c
   classical
   rw [(Ideal.FG.isNilpotent_iff_le_nilradical
     ⟨Finset.univ.image fun i : Fin N => coeff (i : ℕ) F, by simp⟩), Ideal.span_le]
-  rintro _ ⟨i, rfl⟩
-  exact h1 i i.2
+  exact Set.range_subset_iff.2 fun i => h1 i i.2
 
 /-- **Formal preparation, discrete case.** Over any commutative ring, if
 `a₀, …, a_{N-1}` are nilpotent and `a_N` is a unit, `F` is regular and every `G`
