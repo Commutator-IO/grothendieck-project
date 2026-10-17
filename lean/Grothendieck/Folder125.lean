@@ -101,20 +101,15 @@ theorem etage1_iff_etage2
   · intro h
     refine ⟨fun p hp => ⟨?_, surj h p hp.le⟩, surj h m le_rfl⟩
     obtain ⟨q, rfl⟩ : ∃ q, p = q + 1 := ⟨p - 1, by omega⟩
-    rw [injective_iff_map_eq_zero]
-    intro x hx
+    refine (injective_iff_map_eq_zero _).2 fun x hx => ?_
     obtain ⟨c, rfl⟩ := (exL q x).1 hx
     rw [h q (by omega) c, map_zero]
   · rintro ⟨hbij, hsurj⟩ p hp c
-    have hsurj' : Function.Surjective (a p) := by
-      rcases hp.lt_or_eq with hp | rfl
-      · exact (hbij p hp).2
-      · exact hsurj
+    have hsurj' : Function.Surjective (a p) :=
+      hp.lt_or_eq.elim (fun hp => (hbij p hp).2) fun e => e ▸ hsurj
     -- `δ p c` is killed by the injective map `a (p+1)`, so `c` comes from `G p` …
-    have hδ : δ p c = 0 := by
-      apply (hbij (p + 1) (by omega)).1
-      rw [map_zero]
-      exact (exL p _).2 ⟨c, rfl⟩
+    have hδ : δ p c = 0 :=
+      (hbij (p + 1) (by omega)).1 (((exL p _).2 ⟨c, rfl⟩).trans (map_zero _).symm)
     obtain ⟨y, rfl⟩ := (exC p c).1 hδ
     -- … and `G p` is the image of `L p`, which `b p` kills.
     obtain ⟨x, rfl⟩ := hsurj' y
@@ -144,8 +139,7 @@ theorem etage2_iff_etage3 {m r : ℕ} (hmr : m ≤ r) :
   have hm : r - (r - m) = m := by omega
   rw [hm, LinearMap.dualMap_injective_iff]
   refine and_congr_left fun _ => ⟨fun h q hq => ?_, fun h p hp hpr => ?_⟩
-  · rw [LinearMap.dualMap_bijective_iff]
-    exact h _ (by omega) (by omega)
+  · exact LinearMap.dualMap_bijective_iff.2 (h _ (by omega) (by omega))
   · have := h (r - p) (by omega)
     rwa [LinearMap.dualMap_bijective_iff, show r - (r - p) = p by omega] at this
 
