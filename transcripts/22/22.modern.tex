@@ -12,6 +12,21 @@
 % Pass: Opus 5 (claude-opus-5), 2026-09-19 — first pass, unchecked against the
 % pages by a human. The model was chosen explicitly for this pass.
 %
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — refined with the Lean checks
+% of lean/Grothendieck/Folder22.lean, mathlib and the literature of the
+% folder's findings. Now checked by machine: Lemme 3.3, Cor. 3.4 (whose
+% hypothesis is equivalent to Noetherian; the proof needs only finitely
+% presented finitely generated ideals), Cor. 3.5 for N-indexed systems with
+% surjective transitions, and the obstruction of pp. 22 and 24, which needs
+% neither the reduction to D(t) = 0 nor characteristic 0. CORRECTION: the
+% first pass completed the illegible conclusion of p. 23's Proposition as
+% « A formally smooth over k for the discrete topology »; that completion is
+% false (K = k = Q(x_i), Ω_{K/k} = 0, against the verified obstruction) and is
+% withdrawn, and with it the claim that Ω_{K/k} is the dividing invariant: the
+% invariant the check bears out is the ABSOLUTE module Ω_K. Cited from the
+% findings: the Stacks Project, tags 07EL and 07EM (formal smoothness of
+% K[[x]] for the adic topology only).
+%
 % Scope: one document for the shelfmark, its two batches read as one argument.
 % Twenty-two of the twenty-nine leaves carry something; pages 4, 6, 7, 8 are
 % blank versos of the offprints, 18 and 25 are covers carrying one word each,
@@ -65,7 +80,11 @@
 %     characteristic zero as soon as dim A > 0, yes in characteristic p when
 %     K has a finite p-basis. This is the single strongest piece of evidence
 %     that the folder is one dossier and not four.
-%   - THE DIVIDING LINE IS THE DIMENSION OF Ω_{K/k}. Page 23's proposition
+%   - [Revised 2026-10-17: the relative Ω_{K/k} below is NOT the dividing
+%     invariant; Ω_{K/k} = 0 for K = k, where pp. 22-24 show failure. The
+%     invariant is the absolute Ω_K, infinite-dimensional on p. 22 and finite
+%     under p. 21's p-basis hypothesis. The first-pass bullet follows.]
+%     THE DIVIDING LINE IS THE DIMENSION OF Ω_{K/k}. Page 23's proposition
 %     assumes it finite; page 21's marginal notes Ω_{K/k} free; page 22's
 %     counterexample makes it infinite. The three campaigns agree on one
 %     invariant without ever saying so.
@@ -111,11 +130,13 @@
 %   - p. 22: « de dim A ≥ 0 » is read as dim A > 0. Dimension zero must be
 %     excluded: in characteristic zero every field extension is formally
 %     smooth.
-%   - p. 23: the right half of the Proposition is illegible. The conclusion
-%     given here is the one its hypothesis and the surrounding argument force,
-%     and it is OURS.
+%   - p. 23: the right half of the Proposition is illegible. The first pass
+%     supplied a conclusion (formal smoothness over k for the discrete
+%     topology); it is refuted by pp. 22 and 24 and withdrawn (2026-10-17).
+%     No conclusion is restored.
 %   - p. 24: the reduction to D(t_i) = 0 is carried out on pp. 22 and 23 in
-%     prose that is largely illegible. Only its shape is given.
+%     prose that is largely illegible. Only its shape is given, and it is not
+%     needed: the argument given here does without it.
 %
 % NUMBERING. The digit opening each statement is typed then gone over in ink
 % and reads as 3 or 4. The transcription retained 3.N. That reading is taken
@@ -215,7 +236,8 @@ pour une raison également simple : le corps de base y possède, quand il n'est
 pas trop gros, un système fini de directions indépendantes — une
 \emph{p-base} — et une infinité de directions ne peut pas se produire. C'est
 la même mesure qui décide dans les deux cas : la dimension de l'espace des
-différentielles du corps. Finie, tout va bien ; infinie, rien ne va.
+différentielles du corps. Infinie, rien ne va ; finie, en caractéristique
+positive, tout va bien.
 
 Reste à dire ce que ces feuillets sont, car cela fait partie de ce qu'on y lit.
 Le dossier est un dossier de travail, et il montre quatre régimes d'écriture
@@ -559,7 +581,12 @@ présentation finie. Alors l'homomorphisme canonique
 \[
   M \otimes_A P \longrightarrow \prod_i (M \otimes_A P_i)
 \]
-est un isomorphisme.
+est un isomorphisme.\footnote{Vérifié en Lean (lean/Grothendieck/Folder22.lean,
+\texttt{lemme3\_3}), sur un anneau commutatif quelconque, par la démonstration
+du feuillet : exactitude à droite du produit tensoriel, exactitude des
+produits, lemme des cinq. La réciproque --- un module pour lequel ces
+flèches sont bijectives pour toute famille est de présentation finie --- est
+due à Lenzing (1969).}
 
 La démonstration est celle du feuillet : on écrit $M$ comme conoyau d'un
 homomorphisme $L' \to L$ de modules libres \emph{de type fini}, on note que le
@@ -575,7 +602,17 @@ la version dactylographiée.}
 
 \emph{Corollaire 3.4.} Supposons que tout $A$-module de type fini soit de
 présentation finie — par exemple $A$ noethérien. Alors tout produit de
-$A$-modules plats est plat.
+$A$-modules plats est plat.\footnote{C'est le cas noethérien du théorème de
+Chase (1960) : sur un anneau cohérent, tout produit de modules plats est plat.
+Vérifié en Lean (lean/Grothendieck/Folder22.lean, \texttt{corollaire3\_4},
+\texttt{hypothese\_iff\_noetherien}), avec deux précisions de l'édition.
+L'hypothèse « tout module de type fini est de présentation finie » équivaut à
+la noethérianité : le « par exemple $A$ noethérien » de la page ne désigne pas
+une classe plus large, c'est la même. Et la démonstration n'emploie que la
+présentation finie des idéaux de type fini (\texttt{corollaire3\_4\_coherent}),
+ce qui est exactement l'hypothèse de Chase. Le critère de platitude par les
+idéaux de type fini qu'elle invoque est dans mathlib
+(\texttt{Module.Flat.iff\_rTensor\_injective}).}
 
 Il suffit en effet de voir que $P \otimes_A -$ transforme en monomorphisme tout
 monomorphisme $M \to N$ de modules \emph{de type fini}, la platitude se testant
@@ -601,7 +638,14 @@ chaque $n$, la suite exacte
 est scindée, puisque $P_n$ est projectif ; donc $P_{n+1} \simeq P_n \oplus K_n$,
 et $K_n$, facteur direct d'un projectif, est projectif. En itérant,
 $\varprojlim_n P_n \simeq P_0 \times \prod_{n \geqslant 0} K_n$, produit de
-modules projectifs. Le corollaire 3.4 conclut.
+modules projectifs. Le corollaire 3.4 conclut.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder22.lean, \texttt{corollaire3\_5}) pour un système
+indexé par $\mathbf{N}$ à transitions surjectives : l'isomorphisme
+$\varprojlim_n P_n \simeq P_0 \times \prod_n K_n$, $(x_n) \mapsto (x_0,
+(x_{n+1} - s_n(x_n))_n)$, puis 3.4 et la platitude d'un produit de deux
+modules plats. La réduction d'un système strict à système cofinal dénombrable
+à un tel système, que la page laisse au « on voit facilement », n'est pas
+vérifiée par la machine.}
 
 \pagerange{11}{12}
 \subsection*{Le théorème central (3.6, pages 11 et 12)}
@@ -1067,7 +1111,7 @@ que $K$ et $A^p$ sont linéairement disjoints sur $K^p$ — c'est-à-dire
 exactement que les $t_i$ restent p-indépendants au-dessus de $K$. Le terme
 après le signe $\simeq$ est repassé et n'a pas été lu avec certitude. La marge
 porte, isolément : « $\Omega_{K/k}$ est libre sur $K$ », qui est la traduction
-de l'hypothèse de p-base et qui annonce l'invariant dont tout dépendra.} Il
+de l'hypothèse de p-base.} Il
 ajoute le renvoi « [cf. “Diff”] », qui vise la chemise « Différentielles »
 quatre feuillets plus loin : c'est le dossier qui se cite lui-même.
 
@@ -1096,7 +1140,15 @@ différentielle de $A$ on obtient une dérivation
 \[
   D : A \longrightarrow \Omega^1_{k} \otimes_{k} A
 \]
-qui induit $d_{k}$ sur $k$. C'est cette dérivation que les pages 22 à 24
+qui induit $d_{k}$ sur $k$.\footnote{« Formellement lisse pour la topologie
+discrète » est ici la lissité formelle de mathlib,
+\texttt{Algebra.FormallySmooth} : $\Omega_{A/k}$ projectif et
+$H_1(L_{A/k}) = 0$. Le complément à gauche est la suite de Jacobi--Zariski
+$H_1(L_{A/k}) \to \Omega^1_k \otimes_k A \to \Omega^1_A$, exacte, qui est dans
+mathlib (\texttt{Algebra.H1Cotangent.exact\_}$\delta$\texttt{\_mapBaseChange}, avec le renvoi
+au projet Stacks, tag 00S2). La rétraction est construite en Lean
+(lean/Grothendieck/Folder22.lean, \texttt{retraction\_of\_formallySmooth}).}
+C'est cette dérivation que les pages 22 à 24
 cherchent, et c'est son inexistence qui est l'obstruction.
 
 \emph{L'exemple.} Prenons $k = \mathbf{Q}(x_i : i \in I)$ avec $I$ infini, et
@@ -1108,65 +1160,92 @@ $(dx_i)_{i \in I}$, de sorte que
 la somme directe étant \emph{strictement} contenue dans le produit dès que $I$
 est infini. Toute la démonstration est là.
 
-\emph{L'argument.} Supposons donnée une telle $D$, et supposons d'abord
-$D(t) = 0$. Alors pour tout $n$, $D(\mathfrak{m}^n) \subset \mathfrak{m}^n
-\cdot (\Omega^1_k \otimes_k A)$, puisque $\mathfrak{m}^n = t^n A$ et que
-$D(a t^n) = D(a)\,t^n$. La dérivation $D$ est donc automatiquement continue
-pour les topologies $\mathfrak{m}$-adiques ; le but étant
-$\mathfrak{m}$-adiquement séparé, $D$ est entièrement déterminée par ses
-valeurs sur les polynômes, et l'on a nécessairement
+\emph{L'argument.} Supposons donnée une telle $D$. Choisissons une suite
+d'indices distincts $i_0, i_1, i_2, \ldots$ et posons
 \[
-  D\Big(\sum_{\lambda} a_{\lambda} t^{\lambda}\Big)
-  \;=\; \sum_{\lambda} d_{k}(a_{\lambda})\, t^{\lambda} .
+  f = \sum_{n \geqslant 0} x_{i_n} t^{n} .
 \]
-Or le membre de droite n'a aucune raison d'appartenir à $A^{(I)}$. Il suffit,
-pour le prendre en défaut, de choisir une suite d'indices distincts $i_0, i_1,
-i_2, \ldots$ et des coefficients $a_n \in k$ tels que $d_k(a_n)$ ait une
-composante non nulle sur $dx_{i_n}$ — par exemple $a_n = x_{i_n}$ — et de poser
-\[
-  f = \sum_{n \geqslant 0} a_n t^{n} .
-\]
-La suite des sommes partielles de $D(f)$ est de Cauchy pour la topologie
-$\mathfrak{m}$-adique et converge donc dans le complété de $A^{(I)}$, qui
-contient $A^{(I)}$ strictement ; mais sa limite a une infinité de composantes
-non nulles et n'appartient pas à $A^{(I)}$. La dérivation $D$ ne peut donc pas
+Un élément de $\Omega^1_k \otimes_k A \simeq A^{(I)}$ n'a qu'un nombre fini de
+coordonnées non nulles ; il existe donc un $n$ tel que la coordonnée d'indice
+$i_n$ soit nulle à la fois dans $D(f)$ et dans $D(t)$. Notons $E : A \to A$ la
+dérivation obtenue en composant $D$ avec cette coordonnée, qui est
+$A$-linéaire. Comme $E(t) = 0$, on a $E(t^m g) = t^m E(g)$ pour tout $m$ et
+tout $g \in A$, et $E(x_{i_m}) = \delta_{mn}$. En écrivant $f = \sum_{m
+\leqslant n} x_{i_m} t^m + t^{n+1} g$, on trouve que $E(f)$ a pour coefficient
+de $t^n$ le nombre $1$ ; or $E(f) = 0$. La dérivation $D$ ne peut donc pas
 exister, et $A$ n'est pas formellement lisse sur $k$ pour la topologie
 discrète.\footnote{Le feuillet 24 s'arrête sur la construction de $f = \sum a_n
-t^n$ ; la conclusion n'est pas écrite. Elle est fournie ici, et la rédaction
-de l'argument de continuité l'est aussi : les pages 22 et 23 disent seulement
-que $D(a)$ est « une combinaison linéaire finie de certains $\ldots x_i$,
-$i \in J$ », ce qui est la même observation prise par l'autre bout. — La
-réduction au cas $D(t) = 0$ est ce que les bas de pages 22 et 23 mènent, en
-passant à un sous-corps $k_0 = \mathbf{Q}(x_i : i \in J)$ engendré par les
-indices $J$, en nombre fini, qui apparaissent dans $D(t)$ ; mais la prose qui
-l'exécute est un palimpseste et n'est pas lisible. Seule sa forme est donnée
-ici. Le feuillet 22 porte en outre une prescription « $D(x_i) = 1/\alpha\,x_i$ »
-dont la lettre au dénominateur est une seule lettre, lue $\alpha$ sans
-certitude ; elle n'est pas utilisée ici.}
+t^n$ ; la conclusion n'est pas écrite. Elle est fournie ici, ainsi que le
+choix $a_n = x_{i_n}$ ; les pages 22 et 23 disent seulement que $D(a)$ est
+« une combinaison linéaire finie de certains $\ldots x_i$, $i \in J$ », ce qui
+est la même observation de finitude. — Les bas de pages 22 et 23 mènent une
+réduction au cas $D(t) = 0$, en passant à un sous-corps $k_0 = \mathbf{Q}(x_i :
+i \in J)$ engendré par les indices $J$, en nombre fini, qui apparaissent dans
+$D(t)$ ; la prose qui l'exécute est un palimpseste et n'est pas lisible. La
+première lecture la supposait faite et concluait par la continuité
+$\mathfrak{m}$-adique de $D$ et la formule $D(\sum a_\lambda t^\lambda) =
+\sum d_k(a_\lambda) t^\lambda$. Cette réduction n'est pas nécessaire : il
+suffit de prendre $n$ assez grand pour que la coordonnée d'indice $i_n$ de
+$D(t)$ soit déjà nulle, et c'est l'argument donné ci-dessus, qui est de
+l'édition. Vérifié en Lean (lean/Grothendieck/Folder22.lean,
+\texttt{no\_derivation}, \texttt{no\_derivation\_extending\_d},
+\texttt{not\_formallySmooth\_discrete}) : aucune dérivation $A \to \Omega^1_k
+\otimes_k A$ n'induit $d_k$, et $A$ n'est pas formellement lisse sur $k$. La
+caractéristique nulle ne sert pas : la vérification
+(\texttt{not\_formallySmooth\_of\_field}) établit que $K[[t]]$ n'est pas
+formellement lisse sur $K$ pour la topologie discrète dès que le module des
+différentielles $\Omega_{K/R}$ de $K$ sur un anneau de base $R$ quelconque est
+de dimension infinie, en particulier pour $\mathbf{F}_p(x_i : i \in I)$, $I$
+infini. La lissité formelle de $K[[t]]$ pour la topologie $t$-adique, l'autre
+moitié de l'énoncé, n'est pas vérifiée par la machine ; c'est celle que le
+projet Stacks énonce (théorème 15.41.1 et exemple 15.41.2, tags 07EL et 07EM),
+qui ne traite pas la topologie discrète. Aucune source énonçant la moitié
+discrète n'a été trouvée. — Le feuillet 22 porte en outre une prescription
+« $D(x_i) = 1/\alpha\,x_i$ » dont la lettre au dénominateur est une seule
+lettre, lue $\alpha$ sans certitude ; elle n'est pas utilisée ici.}
 
 \emph{Ce que la page 23 énonce.} Entre la conjecture et le contre-exemple, il
 pose une proposition dont l'hypothèse est nette et dont la conclusion ne l'est
 pas : $k$ un corps, $K$ une extension telle que $\Omega_{K/k}$ soit \emph{de
-dimension finie} sur $K$, et $A = K[[t_1, \ldots, t_n]]$. La conclusion est
-que $A$ est alors formellement lisse sur $k$ pour la topologie
-discrète.\footnote{La moitié droite de l'énoncé est illisible, et la conclusion
-donnée ici est nôtre. Elle est celle que l'hypothèse force : si $\Omega_{K/k}$
-est de dimension finie sur $K$, alors $\Omega_{K/k} \otimes_K A$ est un
-$A$-module libre de \emph{rang fini}, somme directe et produit coïncident, et
-l'obstruction exhibée trois lignes plus bas s'évanouit. Elle est aussi celle
-que la suite du feuillet suppose, puisqu'il y cherche une $D$ à valeurs dans
-$\Omega_{K/k} \otimes_K A$ induisant $d_{K/k}$ et qu'il conclut sur un
-« l'hypothèse ! ». Aucune autre conclusion ne rendrait compte de ces deux
-choses.}
+dimension finie} sur $K$, et $A = K[[t_1, \ldots, t_n]]$. De la conclusion, on
+ne lit qu'un mot douteux, « discret », et « sur $K$ rel. ; $k$ » ; la suite du
+feuillet cherche une dérivation $D : A \to \Omega_{K/k} \otimes_K A$ induisant
+$d_{K/k}$ et s'achève sur « l'hypothèse ! ». La conclusion n'est pas
+restituée ici.\footnote{La première lecture la complétait en « $A$ est
+formellement lisse sur $k$ pour la topologie discrète », au motif que, si
+$\Omega_{K/k}$ est de dimension finie, somme directe et produit coïncident
+dans $\Omega_{K/k} \otimes_K A$ et la dérivation cherchée existe. Ainsi
+complétée, la proposition est fausse, par l'exemple même des pages 22 et 24 :
+pour $K = k = \mathbf{Q}(x_i : i \in I)$ et $n = 1$, $\Omega_{K/k} = 0$
+satisfait l'hypothèse, et $k[[t]]$ n'est pas formellement lisse sur $k$ pour
+la topologie discrète (vérifié en Lean, lean/Grothendieck/Folder22.lean,
+\texttt{not\_formallySmooth\_discrete}). La complétion confondait le module
+relatif $\Omega_{K/k}$, que vise la dérivation de la page 23, et le module
+absolu $\Omega_k$, où vit l'obstruction de la page 22 : une dérivation $A \to
+\Omega_{K/k} \otimes_K A$ prolongeant $d_{K/k}$ ne donne pas, à elle seule, la
+lissité formelle sur $k$. La conclusion de la page était plausiblement
+relative --- à $K$, ou à un sous-corps de type fini comme le $k_0$ de la page
+22 et le $K'$ du bas de la page 23 ---, mais elle est illisible, et l'on ne
+la devine pas. La correction est de l'édition (2026-10-17).}
 
-C'est ce qui unifie les deux cas, et c'est le vrai contenu de ces quatre
-feuillets : l'invariant qui décide n'est ni la caractéristique ni la dimension,
-c'est \emph{la dimension de $\Omega_{K/k}$ sur $K$}. En caractéristique $p$,
-l'existence d'une p-base finie la rend finie, et tout va bien. En
-caractéristique nulle sur un corps engendré par une infinité de variables, elle
-est infinie, et rien ne va. Les trois campagnes du dossier — la marginale de la
-page 21, la proposition de la page 23, le contre-exemple des pages 22 et 24 —
-disent la même chose de trois manières, sans que le dossier le dise jamais.
+Ce qui unifie les deux cas, et qui est le vrai contenu de ces quatre feuillets,
+c'est la taille du module des différentielles \emph{absolu} du corps,
+$\Omega_K$ (sur le corps premier, ou sur n'importe quel anneau de base). En
+caractéristique $p$, l'hypothèse de la page 21, $K$ fini sur $K^p$, le rend
+de dimension finie, et la réponse est positive. En caractéristique nulle sur
+un corps engendré par une infinité de variables, il est de dimension infinie,
+et la réponse est négative --- et cela en toute caractéristique : dès que
+$\Omega_K$ est de dimension infinie, $K[[t]]$ n'est pas formellement lisse sur
+$K$ pour la topologie discrète.\footnote{C'est la forme générale vérifiée en
+Lean (lean/Grothendieck/Folder22.lean,
+\texttt{not\_formallySmooth\_of\_field}) ; elle est de l'édition, la page ne
+traitant que $\mathbf{Q}(x_i : i \in I)$. La première lecture désignait comme
+invariant la dimension du module \emph{relatif} $\Omega_{K/k}$, et voyait
+dans la marginale de la page 21, la proposition de la page 23 et le
+contre-exemple des pages 22 et 24 trois manières de dire la même chose ; ce
+n'est pas le cas, l'exemple des pages 22 et 24 ayant $\Omega_{K/k} = 0$. Le
+cas positif de la caractéristique nulle --- $\Omega_K$ de dimension finie ---
+n'est pas tranché par le dossier.}
 
 \pagerange{25}{28}
 \section*{V. Différentielles : le carré $k \to K$ et son contre-exemple (pages 25 à 28)}
