@@ -7436,7 +7436,7 @@ export const FINDINGS: Finding[] = [
     status: 'matched',
     settle:
       'Matched in substance: rebuilding the configuration around a triangle t from a group of order 32 acting simply transitively on the 32 triangles disjoint from t, with one subgroup of order 4 per line of t, is Kantor’s coset construction of H(3, 4) = GQ(4, 2) (Payne–Thas § 10.4–10.6.1, with anisotropic forms in the role of the page’s conditions (i)–(iv)); and this pass’s check identifies Ψ̃ with the extraspecial group 2^{1+4}_+, the normal 2-subgroup of W(F₄). What was not found in the sources read is the page’s presentation of that group as the Baer product of the three pull-backs of Q₈, its characterisation by the anisotropy conditions for dim V ≤ 2 with uniqueness up to unique isomorphism, and the statement as an equivalence of categories. Kantor 1980 and Freudenthal 1975, not opened here, are where that residue would be found if it is anywhere.',
-
+    lean: { file: 'lean/Grothendieck/Folder74.lean', found: 'Only the count: the Klein table has 96 autotopisms, each a common automorphism of (ℤ/2)² followed by translations by c_f, c_g, c_f + c_g; with 2 lifts and the 6 permutations of t this gives folder 69’s 1152 = |W(F₄)|, the lift and the 27-line graph not being formalised.' },
   },
   {
     id: '69-pencil-numbers-94-95-absent',

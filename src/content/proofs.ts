@@ -369,10 +369,10 @@ export const PROOFS: Proof[] = [
     statement:
       'A graph in which every edge lies in one triangle and every vertex off a triangle is adjacent to one of its vertices, with no empty fibre over a triangle t₀, gives a Latin square Γ on the quotients E_α with three double covers whose pull-backs to Γ are identified by a transitive system; conversely such data, with axiom (Ka), give such a graph.',
     found:
-      'Holds under a reconstructed form of the marginal axiom (Ka), whose end is illegible. Under (*), axiom 1 holds iff (Ka) does, and page 97’s claim fails without it: an order-2 Latin square with trivial covers satisfies the other conditions and breaks axiom 1. Axiom 3 is not needed for the reduction. Page 116 proves only the case of a group table.',
+      'Holds under a reconstructed form of the marginal axiom (Ka), whose end is illegible. Under (*), axiom 1 holds iff (Ka) does, and page 97’s claim fails without it: an order-2 Latin square with trivial covers satisfies the other conditions and breaks axiom 1. Axiom 3 is not needed for the reduction. Page 116 proves only the case of a group table. The Klein table has 96 autotopisms, a common automorphism followed by translations (the count folder 69 uses for 1152).',
     verdict: 'the reading dropped a hypothesis',
     lean: 'lean/Grothendieck/Folder74.lean',
-    theorems: ['Config.latin', 'Config.pullback', 'Config.scholieIso', 'Scholie.scholie_converse', 'Scholie.axiom1_iff_ka', 'ka_needed', 'p116'],
+    theorems: ['Config.latin', 'Config.pullback', 'Config.scholieIso', 'Scholie.scholie_converse', 'Scholie.axiom1_iff_ka', 'ka_needed', 'p116', 'autotopism_iff', 'card_klein_autotopisms'],
   },
   {
     folder: '79',

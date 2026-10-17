@@ -6,6 +6,9 @@ import Mathlib.Data.Fintype.Prod
 import Mathlib.Data.Fintype.Pi
 import Mathlib.Tactic.Group
 import Mathlib.Tactic.FinCases
+import Mathlib.Data.ZMod.Basic
+import Mathlib.Data.Fintype.Perm
+import Mathlib.Tactic.Abel
 
 /-!
 # Folder 74: generalised cubic complexes around a triangle (pages 92–103, 116)
@@ -50,6 +53,13 @@ vertices off `t₀` adjacent to `t α`. The file proves:
 * (p. 116) for a group `G`, the maps `(x, y, z) ↦ (x, a⁻¹z⁻¹, a⁻¹y⁻¹)` preserve
   `xyz = 1` for every `a` if and only if every element has order dividing 2
   (`p116`), and then `G` is commutative (`p116_comm`).
+* (the count used by folder 69) for permutations `f, g, h` of a commutative group,
+  `f x + g y = h (x + y)` for all `x, y` if and only if they are a common additive
+  automorphism followed by translations by `c_f`, `c_g`, `c_f + c_g`
+  (`autotopism_iff`); the Klein group has 6 automorphisms (`card_klein_addAut`) and
+  its table 96 autotopisms (`card_klein_autotopisms`, cross-checked by enumeration in
+  `card_klein_autotopisms_decide`). With two lifts and the 6 permutations of a
+  triangle this gives the 1152 of folder 69; the lift is not formalised.
 
 The forward direction uses axiom 2 only for `t₀` and for the vertical
 triangles, and does not use axiom 3 (the `Ẽ_α` nonempty), which serves only for
@@ -1172,6 +1182,131 @@ theorem p116_comm {G : Type*} [Group G] (h : ∀ g : G, g * g = 1) (g k : G) :
   calc g * k = (g * k)⁻¹ := (hinv _).symm
     _ = k⁻¹ * g⁻¹ := mul_inv_rev g k
     _ = k * g := by rw [hinv, hinv]
+
+
+/-! ## The autotopisms of the Klein table
+
+An autotopism of the Cayley table of an additive group `A` is a triple `(f, g, h)`
+of permutations with `f x + g y = h (x + y)`. For the Klein group they number
+`96 = 6 · 4 · 4`; this is the count behind the stabiliser of a triangle in the
+graph of the 27 lines (folder 69: `96 · 2 · 6 = 1152`), whose lift is not
+formalised here. -/
+
+section Klein
+
+variable {A : Type*} [AddCommGroup A]
+
+/-- For an autotopism `(f, g, h)`, the normalised `x ↦ f x - f 0` is additive. -/
+def normAdd (f g h : A ≃ A) (H : ∀ x y, f x + g y = h (x + y)) : A ≃+ A :=
+  { f.trans (Equiv.subRight (f 0)) with
+    map_add' := fun x y => by
+      simp only [Equiv.toFun_as_coe, Equiv.trans_apply, Equiv.subRight_apply]
+      have a : f (x + y) = h (x + y) - g 0 := eq_sub_of_add_eq (by simpa using H (x + y) 0)
+      have b : g y = h y - f 0 := eq_sub_of_add_eq' (by simpa using H 0 y)
+      have c : f y = h y - g 0 := eq_sub_of_add_eq (by simpa using H y 0)
+      rw [a, ← H x y, b, c]
+      abel }
+
+/-- Autotopisms of the table of a commutative group: `(f, g, h)` is one if and only if
+`f`, `g`, `h` are a common additive automorphism `φ` followed by translations by
+`c_f`, `c_g` and `c_f + c_g`. Setting `y = 0` and `x = 0` shows that the normalised
+`f - f 0`, `g - g 0`, `h - f 0 - g 0` coincide; additivity follows. -/
+theorem autotopism_iff (f g h : A ≃ A) :
+    (∀ x y, f x + g y = h (x + y)) ↔ ∃ φ : A ≃+ A, ∃ cf cg : A,
+      (∀ x, f x = φ x + cf) ∧ (∀ y, g y = φ y + cg) ∧ (∀ z, h z = φ z + cf + cg) := by
+  constructor
+  · intro H
+    refine ⟨normAdd f g h H, f 0, g 0, fun x => ?_, fun y => ?_, fun z => ?_⟩
+    · show f x = f x - f 0 + f 0
+      abel
+    · show g y = f y - f 0 + g 0
+      have h1 : f 0 + g y = h y := by simpa using H 0 y
+      have h2 : f y + g 0 = h y := by simpa using H y 0
+      rw [eq_sub_of_add_eq' h1, ← h2]
+      abel
+    · show h z = f z - f 0 + f 0 + g 0
+      rw [← show f z + g 0 = h z by simpa using H z 0]
+      abel
+  · rintro ⟨φ, cf, cg, hf, hg, hh⟩ x y
+    rw [hf, hg, hh, map_add]
+    abel
+
+/-- The autotopisms of the table of `A`. -/
+abbrev Autotopisms (A : Type*) [AddCommGroup A] : Type _ :=
+  {t : Equiv.Perm A × Equiv.Perm A × Equiv.Perm A // ∀ x y, t.1 x + t.2.1 y = t.2.2 (x + y)}
+
+/-- The autotopisms of `A` are parametrised by `(φ, c_f, c_g)`. -/
+def autotopismEquiv (A : Type*) [AddCommGroup A] : (A ≃+ A) × A × A ≃ Autotopisms A where
+  toFun p := ⟨(p.1.toEquiv.trans (Equiv.addRight p.2.1),
+      p.1.toEquiv.trans (Equiv.addRight p.2.2),
+      p.1.toEquiv.trans (Equiv.addRight (p.2.1 + p.2.2))), fun x y => by
+    simp only [Equiv.trans_apply, AddEquiv.toEquiv_eq_coe, EquivLike.coe_coe,
+      Equiv.coe_addRight, map_add]
+    abel⟩
+  invFun t := (normAdd t.1.1 t.1.2.1 t.1.2.2 t.2, t.1.1 0, t.1.2.1 0)
+  left_inv p := by
+    obtain ⟨φ, a, b⟩ := p
+    refine Prod.ext (AddEquiv.ext fun x => ?_) (Prod.ext ?_ ?_)
+    · show φ x + a - (φ 0 + a) = φ x
+      simp
+    · show φ 0 + a = a
+      simp
+    · show φ 0 + b = b
+      simp
+  right_inv t := by
+    obtain ⟨⟨f, g, h⟩, H⟩ := t
+    have hg : ∀ y, f y - f 0 + g 0 = g y := fun y => by
+      have h1 : f 0 + g y = h y := by simpa using H 0 y
+      have h2 : f y + g 0 = h y := by simpa using H y 0
+      rw [eq_sub_of_add_eq' h1, ← h2]
+      abel
+    have hh : ∀ z, f z - f 0 + (f 0 + g 0) = h z := fun z => by
+      rw [← show f z + g 0 = h z by simpa using H z 0]
+      abel
+    refine Subtype.ext (Prod.ext (Equiv.ext fun x => ?_) (Prod.ext (Equiv.ext fun y => ?_)
+      (Equiv.ext fun z => ?_)))
+    · show f x - f 0 + f 0 = f x
+      abel
+    · exact hg y
+    · exact hh z
+
+/-- The Klein group. -/
+abbrev Klein : Type := ZMod 2 × ZMod 2
+
+/-- The characterisation for the Klein group. -/
+theorem klein_autotopism_iff (f g h : Klein ≃ Klein) :
+    (∀ x y, f x + g y = h (x + y)) ↔ ∃ φ : Klein ≃+ Klein, ∃ cf cg : Klein,
+      (∀ x, f x = φ x + cf) ∧ (∀ y, g y = φ y + cg) ∧ (∀ z, h z = φ z + cf + cg) :=
+  autotopism_iff f g h
+
+/-- Additive automorphisms as additive permutations. -/
+def kleinAddEquiv :
+    (Klein ≃+ Klein) ≃ {e : Equiv.Perm Klein // ∀ x y, e (x + y) = e x + e y} where
+  toFun φ := ⟨φ.toEquiv, φ.map_add⟩
+  invFun e := { e.1 with map_add' := e.2 }
+  left_inv _ := rfl
+  right_inv _ := rfl
+
+instance : Fintype (Klein ≃+ Klein) := Fintype.ofEquiv _ kleinAddEquiv.symm
+
+/-- The Klein group has six additive automorphisms (`GL₂(𝔽₂) ≅ S₃`). -/
+theorem card_klein_addAut : Fintype.card (Klein ≃+ Klein) = 6 := by
+  rw [Fintype.card_congr kleinAddEquiv]
+  decide +kernel
+
+/-- The Cayley table of the Klein group has `96 = 6 · 4 · 4` autotopisms. -/
+theorem card_klein_autotopisms : Fintype.card (Autotopisms Klein) = 96 := by
+  rw [← Fintype.card_congr (autotopismEquiv Klein), Fintype.card_prod, Fintype.card_prod,
+    card_klein_addAut]
+  rfl
+
+/-- The same count by enumeration of the `24³` triples of permutations. -/
+theorem card_klein_autotopisms_decide :
+    (Finset.univ.filter fun t : Equiv.Perm Klein × Equiv.Perm Klein × Equiv.Perm Klein =>
+      ∀ x y, t.1 x + t.2.1 y = t.2.2 (x + y)).card = 96 := by
+  decide +kernel
+
+end Klein
 
 end
 
