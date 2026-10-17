@@ -676,18 +676,14 @@ theorem not_faithful (u : C ⥤ D) (q p : D) (hqp : ¬ q ≤ p)
     (h : ∀ c, u.obj c ≤ q → u.obj c ≤ p) : ¬ (pre u).Faithful := by
   intro hf
   have heq : (pre u).map (arrow q p true) = (pre u).map (arrow q p false) := by
-    apply NatTrans.ext
-    funext c
-    refine ConcreteCategory.hom_ext _ _ fun x => Subtype.ext ?_
+    refine NatTrans.ext (funext fun c => ConcreteCategory.hom_ext _ _ fun x => Subtype.ext ?_)
     change (if u.obj c.unop ≤ p then false else true) =
       (if u.obj c.unop ≤ p then false else false)
     simp only [h c.unop x.down, ↓reduceIte]
-  have h1 := (pre u).map_injective heq
-  have h2 := congrArg
-    (fun α : rep q ⟶ sep p => (α.app (Opposite.op q) (PLift.up (le_refl q) : PLift (q ≤ q))).1) h1
+  have h2 := congrArg (fun α : rep q ⟶ sep p =>
+    (α.app (Opposite.op q) (PLift.up (le_refl q) : PLift (q ≤ q))).1) ((pre u).map_injective heq)
   change (if q ≤ p then false else true) = (if q ≤ p then false else false) at h2
-  simp only [hqp, ↓reduceIte] at h2
-  exact Bool.noConfusion h2
+  simp only [hqp, ↓reduceIte, Bool.true_eq_false] at h2
 
 /-- The maps of the chain on `ℤ ⊕ ℤ`. -/
 def Bmap (k : ℤ) : ℤ ⊕ ℤ → ℤ ⊕ ℤ :=
@@ -699,13 +695,10 @@ theorem gc (k : ℤ) : GaloisConnection (Bmap k) (Bmap (k + 1)) := by
   intro x y
   unfold Bmap
   by_cases hk : k % 2 = 0
-  · have hk' : ¬ (k + 1) % 2 = 0 := by omega
-    have h2 : (k + 1) / 2 = k / 2 := by omega
-    simp only [hk, hk', h2, ↓reduceIte]
+  · simp only [hk, show ¬ (k + 1) % 2 = 0 by omega, show (k + 1) / 2 = k / 2 by omega, ↓reduceIte]
     rcases x with x | x <;> rcases y with y | y <;> simp <;> omega
-  · have hk' : (k + 1) % 2 = 0 := by omega
-    have h2 : (k + 1) / 2 = k / 2 + 1 := by omega
-    simp only [hk, hk', h2, ↓reduceIte]
+  · simp only [hk, show (k + 1) % 2 = 0 by omega, show (k + 1) / 2 = k / 2 + 1 by omega,
+      ↓reduceIte]
     rcases x with x | x <;> rcases y with y | y <;> simp <;> omega
 
 /-- The functor of `Bmap k` on the poset `ℤ ⊕ ℤ`. -/
@@ -727,8 +720,7 @@ theorem chain_not_faithful (k : ℤ) : ¬ (chain k).Faithful := by
     intro c hc
     change Bmap k c ≤ _ at hc
     change Bmap k c ≤ _
-    unfold Bmap at hc ⊢
-    simp only [hk, ↓reduceIte] at hc ⊢
+    simp only [Bmap, hk, ↓reduceIte] at hc ⊢
     rcases c with x | x
     · simp only [Sum.map_inl, Sum.inl_le_inl_iff] at hc ⊢; omega
     · simp at hc
@@ -737,8 +729,7 @@ theorem chain_not_faithful (k : ℤ) : ¬ (chain k).Faithful := by
     intro c hc
     change Bmap k c ≤ _ at hc
     change Bmap k c ≤ _
-    unfold Bmap at hc ⊢
-    simp only [hk, ↓reduceIte] at hc ⊢
+    simp only [Bmap, hk, ↓reduceIte] at hc ⊢
     rcases c with x | x
     · simp at hc
     · simp only [Sum.map_inr, Sum.inr_le_inr_iff] at hc ⊢; omega
