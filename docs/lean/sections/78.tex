@@ -1,0 +1,79 @@
+\section[Cote 78 : le critère de fermeture des polygones réguliers sur un anneau, et les 2p-gones en bande]{Cote 78 : le critère de fermeture $u_\alpha^n = 1$ sur un anneau, et les $2p$-gones en bande\protect\verifie{Folder78}}\label{sec:78}
+
+La cote 78, \emph{[Polygones réguliers et polynômes cyclotomiques] : notes manuscrites (s.d.)}, que l'inventaire date \q{[à partir de 1977]}, compte cent vingt-neuf pages. Elle cherche ce qu'est un polygone régulier dans un plan affine sur un corps, ou un anneau, quelconque, sans longueurs ni angles : un $n$-gone dont chaque automorphisme combinatoire se prolonge d'une seule façon en une affinité. Dans le repère $(s_0, s_1, s_{-1})$ de trois sommets consécutifs, les pages~81 à~85 ramènent un tel polygone, quand il est \q{propre}, à un seul paramètre $\alpha$, l'invariant numérique, et la rotation s'écrit $u_\alpha(x, y) = (1 - y + \alpha x, x)$ (\lot{78}{5}{81}). Les pages~109 à~113, sous le titre \q{Polynômes cyclotomiques}, définissent des polynômes $F_n \in \mathbb Z[U]$, prouvent une identité entre trois produits consécutifs, écrivent les sommets et la matrice de $u^n$ en fonction de $\alpha$ seul et énoncent, \q{soient $k$ un anneau}, que $u_\alpha^n = 1$ si et seulement si $F_n(\alpha) = 0$ (\lot{78}{6}{109}, \lot{78}{6}{111}, \lot{78}{6}{112}). La page~112 conclut \q{la relation $F_n(\alpha) = 1$} et le premier coefficient de Bézout de la page~113 a un indice douteux ; la lecture modernisée lit $F_n(\alpha) = 0$ et corrige le coefficient. Les pages~84 et~85, puis~94 à~99, décrivent deux polygones de caractéristique $p$ dont les sommets sont alternativement sur deux droites parallèles : l'\q{impropre}, et celui d'invariant $\alpha = -2$ (\lot{78}{5}{85}, \lot{78}{5}{95}, \lot{78}{5}{99}).
+
+\noindent\emph{Conventions.} $k$ est un anneau commutatif, $\alpha \in k$, et $S_m \in \mathbb Z[U]$, $m \in \mathbb Z$, les polynômes de Tchebychev de seconde espèce renormalisés : $S_0 = 1$, $S_1 = U$, $S_{m+1} = U S_m - S_{m-1}$, de sorte que $S_{-1} = 0$. On pose
+\[ F_{2m} = S_{m-1}, \qquad F_{2m+1} = S_m + S_{m-1} \qquad (m \in \mathbb Z), \]
+d'où $F_0 = 0$, $F_1 = F_2 = 1$, $F_3 = U + 1$, $F_4 = U$, $F_5 = U^2 + U - 1$, $F_6 = U^2 - 1$. On note $u_\alpha$ la bijection $(x, y) \mapsto (1 - y + \alpha x, x)$ de $k^2$, d'inverse $(x, y) \mapsto (y, 1 - x + \alpha y)$, $s_n = u_\alpha^n(0, 0)$ pour $n \in \mathbb Z$, et $\sigma_1(x, y) = (y, x)$.
+
+\begin{enonce}[Page 109, les polynômes $F_n$]
+Les $F_n$ sont ceux de la page : $F_{-n} = -F_n$ et, pour tout $t \in k$ inversible d'inverse $t'$ et tout entier $m \geq 0$,
+\[ F_{2m+2}(t + t')\,(t^2 - 1)\,t^m = t^{2m+2} - 1, \qquad F_{2m+1}(t + t')\,(t - 1)\,t^m = t^{2m+1} - 1. \]
+\end{enonce}
+
+\begin{proof}
+L'égalité $F_{-n} = -F_n$ se lit sur $S_{-m-2} = -S_m$. Dans chaque classe de parité, la récurrence de $S$ donne $F_{n+4} = U F_{n+2} - F_n$. Les deux formules se vérifient pour $m = 0$ et $m = 1$ ; si $A_m$ désigne le membre de gauche de l'une d'elles, la récurrence donne $A_{m+2} = (t + t')\,t\,A_{m+1} - t^2 A_m$, et $(t^2 + tt')(t^{j+2} - 1) - t^2(t^j - 1) = t^{j+4} - 1 + (tt' - 1)(t^{j+2} - 1)$.
+\end{proof}
+
+\begin{theoreme}[Grothendieck, pages 109 à 113, le critère de fermeture sur un anneau\piste{78-closure-criterion-over-rings}]
+\leavevmode
+\begin{enumerate}
+\item Pour tout $n \in \mathbb Z$, on a dans $\mathbb Z[U]$
+\[ F_n F_{n+1} - U F_{n-1} F_n + F_{n-2} F_{n-1} = 1, \]
+c'est-à-dire $A_n F_{n-1} + F_n F_{n+1} = 1$ avec $A_n = F_{n-2} - U F_n$ ; en particulier $F_{n-1}$ et $F_{n+1}$ sont étrangers.
+\item Pour tout $n \in \mathbb Z$ et tout $(x, y) \in k^2$, avec $X_n = F_n F_{n+1}(\alpha)$,
+\[ u_\alpha^n(x, y) = (1 - x - y)\, s_n + x\, s_{n+1} + y\, s_{n-1}, \]
+où $s_n = (X_n, X_{n-1}) = \bigl(F_n F_{n+1}(\alpha), F_{n-1} F_n(\alpha)\bigr)$.
+\item Pour $n \in \mathbb Z$, les conditions suivantes sont équivalentes : a) $u_\alpha^n = \mathrm{id}$ ; b) $s_n = s_0$ ; c) $u_\alpha^n(s_i) = s_i$, pour un $i \in \mathbb Z$ donné ; d) $F_n(\alpha) = 0$.
+\end{enumerate}
+\end{theoreme}
+
+\begin{proof}
+1) Si $n = 2m$, les quatre polynômes sont $S_{m-1}$, $S_m + S_{m-1}$, $S_{m-1} + S_{m-2}$ et $S_{m-2}$ ; en remplaçant $S_m$ par $U S_{m-1} - S_{m-2}$, le membre de gauche devient $S_{m-1}^2 - U S_{m-1} S_{m-2} + S_{m-2}^2$. Si $n = 2m + 1$, il devient de même $S_m^2 - U S_m S_{m-1} + S_{m-1}^2$. Or $Q_m = S_m^2 - U S_m S_{m-1} + S_{m-1}^2$ ne dépend pas de $m$ : $Q_{m+1} = S_{m+1}(S_{m+1} - U S_m) + S_m^2 = -S_{m+1} S_{m-1} + S_m^2 = Q_m$, et $Q_0 = 1$. C'est l'identité de Cassini des $S_m$. La relation de Bézout n'en est qu'une réécriture.
+
+2) L'identité au rang $n + 1$, évaluée en $\alpha$, donne $X_{n+1} = \alpha X_n - X_{n-1} + 1$ pour tout $n$. Notons $V_n(x, y)$ le membre de droite. On a $V_0(x, y) = (x, y)$, puisque $X_0 = X_{-1} = 0$ et $X_1 = X_{-2} = 1$. La récurrence donne $u_\alpha \circ V_n = V_{n+1}$ : la seconde coordonnée de $u_\alpha(V_n(x, y))$ est la première de $V_n(x, y)$, et la première est $1 - (\text{seconde}) + \alpha\,(\text{première})$, où l'on remplace chacun des trois termes $1 - X_{j-1} + \alpha X_j$ par $X_{j+1}$, pour $j = n$, $n + 1$, $n - 1$, les poids $1 - x - y$, $x$, $y$ ayant pour somme $1$. On conclut par récurrence vers le haut et, comme $u_\alpha$ est bijective, vers le bas.
+
+3) a) $\Rightarrow$ b) est clair. d) $\Rightarrow$ a) : si $F_n(\alpha) = 0$, alors $X_n = X_{n-1} = 0$, puis $X_{n+1} = 1$ et $X_{n-2} = 1$ par la récurrence, et la formule de 2) se réduit à $u_\alpha^n(x, y) = (x, y)$. b) $\Rightarrow$ d) : si $F_n F_{n+1}(\alpha) = F_{n-1} F_n(\alpha) = 0$, on multiplie l'identité évaluée en $\alpha$ par $F_n(\alpha)$ :
+\[ F_n(\alpha) = F_n(\alpha)\cdot F_nF_{n+1}(\alpha) + \bigl(F_{n-2}(\alpha) - \alpha F_n(\alpha)\bigr)\cdot F_{n-1}F_n(\alpha) = 0. \]
+c) $\Leftrightarrow$ b) : $u_\alpha^n$ et $u_\alpha^i$ commutent, donc $u_\alpha^n(s_i) = u_\alpha^i(s_n)$, et $u_\alpha^i$ est injective.
+\end{proof}
+
+\begin{remarque}
+Le théorème tient tel que la lecture l'énonce, sur tout anneau commutatif et pour tout $n \in \mathbb Z$, diviseurs de zéro compris : la réciproque passe par la relation de Bézout et non par une factorisation. Les colonnes de la formule 2) sont $s_{n+1} - s_n$, $s_{n-1} - s_n$ et $s_n$, soit $\bigl(F_{n+1}(F_{n+2} - F_n), F_n(F_{n+1} - F_{n-1})\bigr)$, $\bigl(F_n(F_{n-1} - F_{n+1}), F_{n-1}(F_{n-2} - F_n)\bigr)$ et $(F_n F_{n+1}, F_{n-1} F_n)$ : c'est la première version de la matrice de la page~111, celle qui est barrée, que la lecture retient. La suite $X_n$ vérifie une récurrence linéaire d'ordre deux avec second membre, et, avec la suite de Lucas $U_m = U_m(\alpha, 1)$ ($U_0 = 0$, $U_1 = 1$, $U_{m+1} = \alpha U_m - U_{m-1}$) \cite{lucas1878}, on a $F_{2m}(\alpha) = U_m$ et $F_{2m+1}(\alpha) = U_{m+1} + U_m$ ; la piste demande si l'équivalence sur un anneau quelconque y figure déjà, sous un autre nom. Le fichier vérifie aussi que $\sigma_1 u_\alpha \sigma_1 = u_\alpha^{-1}$ et $\sigma_1(s_n) = s_{-n}$, de sorte que $u_\alpha$ et $\sigma_1$ font opérer le groupe diédral sur les sommets, et que la forme $f_\alpha(x, y) = x^2 - x + y^2 - y - \alpha xy$ de la page~96 est invariante par $u_\alpha$ et nulle en tous les sommets. Enfin une affinité de $k^2$ est déterminée par ses valeurs en $s_0 = (0, 0)$, $s_1 = (1, 0)$ et $s_{-1} = (0, 1)$ : un automorphisme du polygone combinatoire se prolonge au plus d'une façon.
+\end{remarque}
+
+\begin{contrexemple}[Page 113, le coefficient de la page]
+Le couple $A_n = F_{n-2} - U F_{n-1}$, $B_n = F_n$ ne vérifie pas $A_n F_{n-1} + B_n F_{n+1} = 1$ pour $n = 4$.
+\end{contrexemple}
+
+\begin{proof}
+Pour $n = 4$, $(1 - U(U + 1))(U + 1) + U(U^2 + U - 1) = 1 - U - U^2$, qui vaut $-1$ en $U = 1$.
+\end{proof}
+
+\noindent\emph{Les deux polygones en bande.} Pour $\alpha = -2$, $u_{-2}(x, y) = (1 - y - 2x, x)$ ; le polygone impropre de la page~85 a pour rotation $v(x, y) = (1 - y, -x)$, et l'on pose $t_n = v^n(0, 0)$. Une \emph{caractéristique} $p$ est un entier $p \geq 0$ tel que, pour $m \in \mathbb Z$, l'image de $m$ dans $k$ soit nulle si et seulement si $p$ divise $m$ ; on suppose $k$ non nul.
+
+\begin{enonce}[Pages 84, 85 et 94 à 99, existence des $2p$-gones en bande\piste{78-strip-2p-gon}]
+Soit $k$ un anneau non nul de caractéristique $p$.
+\begin{enumerate}
+\item Pour $m \in \mathbb Z$, $s_{2m} = (-m, m)$ et $s_{2m+1} = (1 + m, -m)$ : les sommets pairs sont sur la droite $x + y = 0$, les impairs sur la droite parallèle $x + y = 1$, et $f_{-2}(x, y) = (x + y)(x + y - 1)$.
+\item $u_{-2}^n = \mathrm{id}$ si et seulement si $2p$ divise $n$, ce qui équivaut à $F_n(-2) = 0$ ; $u_{-2}$ est d'ordre $2p$, et $s_n = s_m$ si et seulement si $2p$ divise $n - m$.
+\item Trois sommets consécutifs ne sont jamais alignés : le déterminant de $(s_{n+1} - s_n, s_{n-1} - s_n)$ vaut $1$. La partie linéaire $(x, y) \mapsto (-2x - y, x)$ est de déterminant~$1$.
+\item Pour le polygone impropre, $v^{2m}$ est la translation de vecteur $m\,(1, -1)$, $t_{2m} = (m, -m)$ et $t_{2m+1} = (m + 1, -m)$, sur les deux mêmes droites ; $v^n = \mathrm{id}$ si et seulement si $2p$ divise $n$, $v$ est d'ordre $2p$, $t_n = t_m$ si et seulement si $2p$ divise $n - m$, trois sommets consécutifs ne sont pas alignés (déterminant $\pm 1$), $\sigma_1 v \sigma_1 = v^{-1}$, et la partie linéaire $(x, y) \mapsto (-y, -x)$ est de déterminant $-1$.
+\end{enumerate}
+\end{enonce}
+
+\begin{proof}
+1) Par récurrence sur $m$ dans les deux sens : $u_{-2}(-m, m) = (1 + m, -m)$ et $u_{-2}(1 + m, -m) = (-(m + 1), m + 1)$. La factorisation de $f_{-2}$ est immédiate.
+
+2) Par 1), $s_{2m} = (0, 0)$ équivaut à $m = 0$ dans $k$, c'est-à-dire à $p \mid m$, ou encore à $2p \mid 2m$ ; et $s_{2m+1} = (0, 0)$ imposerait $m = 0$ et $1 + m = 0$, donc $1 = 0$. Le théorème ci-dessus (b $\Leftrightarrow$ a $\Leftrightarrow$ d) donne $u_{-2}^n = \mathrm{id} \iff 2p \mid n \iff F_n(-2) = 0$, d'où l'ordre. Enfin $s_n = s_m$ équivaut à $u_{-2}^{n-m}(s_m) = s_m$, donc à $2p \mid n - m$ par la condition c).
+
+3) Pour $n = 2m$, les deux vecteurs sont $(1 + 2m, -2m)$ et $(2m, 1 - 2m)$, de déterminant $1 - 4m^2 + 4m^2 = 1$ ; le cas impair est analogue.
+
+4) $v(1 - y + m, -x - m) = (x + m + 1, y - m - 1)$ et $v(x + m, y - m) = (1 - y + m, -x - m)$ donnent par récurrence $v^{2m}(x, y) = (x + m, y - m)$ et $v^{2m+1}(x, y) = (1 - y + m, -x - m)$. Les sommets s'en déduisent, et l'on raisonne comme en 2) : $t_{2m} = (0, 0)$ si et seulement si $p \mid m$, $t_{2m+1} \neq (0, 0)$, et $v^{2m}$ est l'identité dès que $m = 0$ dans $k$. Les déterminants se calculent sur les sommets : les vecteurs sont $(1, 0)$ et $(0, 1)$ en un sommet pair, $(0, -1)$ et $(-1, 0)$ en un sommet impair.
+\end{proof}
+
+\begin{remarque}
+L'existence tient en toute caractéristique, sans supposer $p$ premier ni impair. Pour $p = 2$, $\alpha = -2 = 0$ et l'on retrouve le carré, d'ordre $4 = 2p$, comme le note la lecture ; pour $p = 0$, les deux rotations sont d'ordre infini et les sommets forment les deux $\infty$-polygones en escalier de la page~85. Le déterminant $-1$ ne sépare le polygone impropre des polygones unimodulaires que si $2 \neq 0$, c'est-à-dire pour $p$ impair. Les formules 1) et 4) montrent que les deux polygones ont le même ensemble de sommets : $s_{2m+1} = t_{2m+1}$ et $s_{2m} = t_{-2m}$. Le premier zigzague en parcourant les deux droites en sens contraires, $(0, 0)$, $(1, 0)$, $(-1, 1)$, $(2, -1)$, et ainsi de suite ; le second monte en escalier en les parcourant dans le même sens, $(0, 0)$, $(1, 0)$, $(1, -1)$, $(2, -1)$, et ainsi de suite. C'est l'ordre des sommets qui les distingue, et le déterminant de la rotation.
+\end{remarque}
+
+Ne sont pas démontrés ici : l'énoncé de la piste selon lequel le $2p$-gone impropre est le seul polygone régulier fini non unimodulaire, que la lecture ajoute et qui demande la classification des réalisations régulières ; la proposition de la page~83, qui met les réalisations épinglées en bijection avec les couples $(\alpha, \beta)$ vérifiant $\alpha\beta = 0$ et $\beta(\beta + 2) = 0$ ; la factorisation $F_n = \prod_{d \mid n,\, d \geq 3} \Psi_d$ et le polynôme semi-cyclotomique $\Psi_n$ des pages~114 à~120, avec la réduction $\Psi_p \equiv (U - 2)^{(p-1)/2}$ modulo $p$ ; le $p$-gone de la parabole (pages~95 et~100), dont la piste est retrouvée dans la littérature ; les gerbes et la descente des pages~39 à~48.

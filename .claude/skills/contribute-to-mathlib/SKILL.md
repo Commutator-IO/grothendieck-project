@@ -5,7 +5,7 @@ description: Proposes to Mathlib (leanprover-community/mathlib4) a general lemma
 
 # Contributing to Mathlib from this repository
 
-The Lean proofs in `lean/Grothendieck/` (33 folders, about a thousand theorems) sometimes
+The Lean proofs in `lean/Grothendieck/` (34 folders, about a thousand theorems) sometimes
 need a general lemma Mathlib lacks. These make good PRs if they are presented the way Mathlib
 expects. Tracking: issue #52 (one checkbox per candidate, with the PR number and its state).
 PRs, titles, descriptions and commit messages are **in English**.

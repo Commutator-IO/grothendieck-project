@@ -452,4 +452,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder44.lean',
     theorems: ['cartan_int_of_indivisible', 'generates', 'reduced_rat', 'symmetries', 'cartan_eq_two_thirds', 'cartan_exists', 'axioms_not_integral', 'not_integral_base'],
   },
+  {
+    folder: '78',
+    batch: 6,
+    page: '109–113',
+    name: 'The closure criterion u_α^n = id ⇔ F_n(α) = 0, and the strip 2p-gons',
+    statement:
+      'Over any commutative ring k, for u_α(x, y) = (1 − y + αx, x): F_nF_{n+1} − U F_{n−1}F_n + F_{n−2}F_{n−1} = 1, the vertices are s_n = (F_nF_{n+1}(α), F_{n−1}F_n(α)), and u_α^n = id ⇔ s_n = s_0 ⇔ F_n(α) = 0. In characteristic p, α = −2 gives a regular 2p-gon on two parallel lines, and the improper u(x, y) = (1 − y, −x) a non-unimodular one (pp. 84–85, 94–99).',
+    found:
+      'The criterion holds as stated for every n ∈ ℤ; the identity is the Cassini identity of the Chebyshev polynomials S_m and is itself the Bézout relation with the reading’s A_n = F_{n−2} − U F_n, while the page’s A_n = F_{n−2} − U F_{n−1} fails at n = 4. The matrix of u^n is the first, struck version of page 111. Both strip polygons exist in every characteristic p (the square for p = 2): order 2p, 2p distinct vertices alternating on x + y = 0 and x + y = 1, three consecutive ones never collinear, determinant 1 and −1. That the improper one is the only non-unimodular finite regular polygon is not proved.',
+    verdict: 'holds, more generally',
+    lean: 'lean/Grothendieck/Folder78.lean',
+    theorems: ['F_identity', 'F_bezout', 'page_A_four_fails', 'u_zpow_apply', 'vertex', 'zpow_eq_one_iff', 'vertex_eq_iff', 'zpow_fix_iff', 'strip_vertex', 'strip_orderOf', 'strip_vertex_eq_iff', 'imp_orderOf', 'imp_vertex_eq_iff'],
+  },
 ];
