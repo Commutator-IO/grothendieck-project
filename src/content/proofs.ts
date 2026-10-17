@@ -569,4 +569,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder145.lean',
     theorems: ['dihedral_witness', 'rel14_iff', 'rel14_unit_iff', 'rel14_zero', 'compatible_zero'],
   },
+  {
+    folder: '115',
+    batch: 1,
+    page: '3–7',
+    name: 'Isbell duality from the kernel transform',
+    statement:
+      'For a kernel X ∈ (A × B)^, contravariant in both variables, the transforms ˢX(L) = Hom_B(p_B^*L, X) and ᵈX(M) = Hom_A(p_A^*M, X) satisfy Hom(L, ᵈX(M)) ≅ X(L, M) ≅ Hom(M, ˢX(L)), a dual adjunction between Â and B̂^op; for B = A^op and X = Hom_A it is Isbell duality 𝒪 ⊣ Spec, 𝒪(Φ)(a) = Hom(Φ, y a), Spec(Ψ)(a) = Hom(Ψ, Hom_A(a, −)).',
+    found:
+      'Holds as stated. The dual adjunction holds for every kernel, with every naturality true by definition, and at the hom kernel the two transforms are the reading’s 𝒪 and Spec on the nose; 𝒪(y a) ≅ Hom_A(a, −), Spec(Hom_A(a, −)) ≅ y a, and 𝒪 turns colimits into limits. Not formalised: the eleven-node wheel of page 5, the families (Aᵢ), and the characterisation of 𝒪 and Spec by their restriction along y.',
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder115.lean',
+    theorems: ['kernelEquiv', 'kernelAdj', 'isbell', 'isbellO_obj_obj', 'isbellSpec_obj_obj', 'isbellO_yoneda', 'isbellSpec_coyoneda', 'isbellO_preservesColimits', 'isbellSpec_preservesLimits'],
+  },
 ];

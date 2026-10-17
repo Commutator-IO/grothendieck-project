@@ -600,6 +600,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Establish whether any published account derives the duality this way — as one instance of a two-variable kernel calculus — rather than directly. The duality itself is Isbell’s and is not in question; what is in question is whether this derivation exists in print.',
+    lean: { file: 'lean/Grothendieck/Folder115.lean', found: 'Holds as stated (kernelAdj, isbell). mathlib has no Isbell duality. The kernel is written K : Aᵒᵖ ⥤ C ⥤ Type, the page’s kernel on A × B being the case C = Bᵒᵖ; the two transforms ˢK(L)(c) = Hom(L, K(−, c)) and ᵈK(M)(a) = Hom(M, K(a, −)) are mutually right adjoint for every kernel, both sides of the bijection being the families L(a) × M(c) → K(a, c), and every naturality holds by definition. Taking K = Hom_A (C = A) gives 𝒪(Φ)(a) = Hom(Φ, y a) and Spec(Ψ)(a) = Hom(Ψ, Hom_A(a, −)) on the nose (isbellO_obj_obj, isbellSpec_obj_obj) and 𝒪 ⊣ Spec; on representables 𝒪(y a) ≅ Hom_A(a, −) and Spec(Hom_A(a, −)) ≅ y a, and 𝒪 sends colimits to limits. The derivation is thus exactly a specialisation; whether it is in print is the finding’s open question. Not formalised: the eleven-node wheel of page 5, the families (Aᵢ), the characterisation of 𝒪 and Spec by restriction along y.' },
   },
   {
     id: '161-1-contractions-string-calculus',
