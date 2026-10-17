@@ -235,10 +235,6 @@ lemma cocycle_eq_pot {f : G3 → VJ} (hf : IsCocycle₁ f) (g : G3) (j : Fin 3) 
   simp only [pot, k] at e ⊢
   omega
 
-lemma Z1_map_one (f : Z1 G3 VJ) : (f : G3 → VJ) 1 = 0 := by
-  have := f.2 1 1
-  simpa using this
-
 /-- The class of a cocycle: the sum of its potential, modulo `3`. -/
 def psi : Z1 G3 VJ →+ ZMod 3 where
   toFun f := ((∑ j, pot f j : ℤ) : ZMod 3)
