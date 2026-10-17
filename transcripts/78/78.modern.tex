@@ -26,6 +26,19 @@
 % Chebyshev and Dickson polynomials, Giraud's gerbes) is cited from memory
 % and was not checked against the sources.
 %
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — refined with the Lean checks
+% of lean/Grothendieck/Folder78.lean, mathlib and the literature of the
+% folder's findings. Now checked by machine: the identity of p. 109 (the
+% Cassini identity of the Chebyshev polynomials, in mathlib), the Bezout pair,
+% the vertices and the matrix of u^n, the theorem of p. 112 over any
+% commutative ring, the invariance of f_alpha, and both strip 2p-gons (alpha =
+% -2 and the improper one) in every characteristic p. The claim that the
+% improper 2p-gon is the only non-unimodular finite regular polygon rests on
+% the classification of pp. 82-85 and is not checked by machine. Cited from
+% the findings: Korchmaros-Szonyi, Contrib. Discrete Math. 3 (2008), for the
+% parabola p-gon (Korchmaros 1974), for Bachmann-Schmidt's criterion over a
+% field, and as a survey in which no two-line 2p-gon appears.
+%
 % Scope. Pages not transcribed and not read here: 49 (a cover, « Cours /
 % Polygones réguliers / II », which heads a section), 53 (blank letterhead),
 % 93 (a typed letter to Grothendieck dated Paris, 10 November 1977; its date
@@ -397,7 +410,10 @@ en car.\ $p$ ($p$ nb premier impair) --- p.\ ex.\ l'hexagone en car.\ 3 ». Ce
 qui est vrai, par les pages 84 et 85, est l'inverse pour cette famille : le
 $2p$-gone impropre de caractéristique $p$ est régulier et \emph{n'est pas}
 unimodulaire ($\det u_V = -1$), et il est le seul polygone régulier fini qui
-ne le soit pas. Le mot illisible portait peut-être l'exception ; on ne le
+ne le soit pas --- ce dernier point se tire de la classification des pages 82
+à 85 et n'est pas vérifié par la machine, alors que l'existence de ce
+$2p$-gone, son ordre et le déterminant $-1$ le sont (voir la note du cas
+impropre). Le mot illisible portait peut-être l'exception ; on ne le
 restitue pas.}.
 
 \textbf{Polygones propres, représentations géométriques.} Dans la définition
@@ -1520,7 +1536,15 @@ caractéristique $p > 2$, $u^2$ est d'ordre $p$, $u$ d'ordre $2p$, et la
 réalisation impropre se factorise par $\Pi_{2p}$ en une réalisation fidèle :
 un $2p$-gone régulier, non unimodulaire\footnote{Les $2p$ points $(m, -m)$,
 $(m+1, -m)$, $m \in \mathbf{F}_p$, sont distincts ; c'est le calcul de la page
-85, « on vérifie aisément », fait ici.}. « Avec la théorie projective des
+85, « on vérifie aisément », fait ici. Ils sont sur les deux droites
+parallèles $x + y = 0$ et $x + y = 1$, celles-là mêmes qui portent le
+$2p$-gone propre d'invariant $\alpha = -2$ (pages 94 et 95). Vérifié en Lean
+(lean/Grothendieck/Folder78.lean, \texttt{imp\_orderOf},
+\texttt{imp\_vertex\_eq\_iff}, \texttt{imp\_noncollinear},
+\texttt{imp\_linPart\_det}) : $u$ est d'ordre $2p$, les $2p$ sommets sont
+distincts, trois sommets consécutifs ne sont jamais alignés,
+$\sigma_1 u \sigma_1 = u^{-1}$, et la partie linéaire est de déterminant
+$-1$.}. « Avec la théorie projective des
 polygones réguliers, l'anomalie des polygones réguliers impropres s'explique
 complètement », et l'on n'a rien perdu, du point de vue projectif, à
 l'exclure, ce qu'on fera désormais\footnote{La théorie projective n'est pas
@@ -1645,7 +1669,21 @@ se vérifie directement sur $u(x, y) = (1 - y - 2x, x)$.}. En
 caractéristique $0$ c'est un $\infty$-polygone ; en caractéristique $p > 2$,
 $u_V^2 = \mathrm{id} + 2v_0$ est une transvection d'ordre $p$, $u_V$ et $u$
 sont d'ordre $2p$ : un $2p$-gone régulier (unimodulaire), propre, distinct de
-l'impropre de la page 85.
+l'impropre de la page 85.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder78.lean, \texttt{strip\_vertex}, \texttt{strip\_orderOf},
+\texttt{strip\_vertex\_eq\_iff}, \texttt{strip\_noncollinear},
+\texttt{linPart\_det}), en toute caractéristique $p$, y compris $p = 2$ où
+c'est le carré : $s_{2m} = (-m, m)$, $s_{2m+1} = (1 + m, -m)$, $u$ d'ordre
+$2p$, $2p$ sommets distincts, trois sommets consécutifs jamais alignés,
+partie linéaire de déterminant $1$. Le survol de Korchmáros et Szőnyi
+(\emph{Contrib. Discrete Math.} 3, 2008) inscrit les polygones affinement
+réguliers sur un corps quelconque dans une conique irréductible (§~2,
+théorème~2.1, lemme~2.2, théorème~2.3) et ne traite le cas $c = -2$ de
+Bachmann et Schmidt que pour $n$ premier à la caractéristique (§~3) : aucun
+$2p$-gone porté par deux droites n'y figure. Les définitions qu'il recense
+exigent qu'il n'y ait pas trois sommets alignés, ou excluent $p \mid n$, et
+écartent ces polygones par définition ; la définition par les symétries des
+pages 1 à 5 les admet.}
 
 En caractéristique $2$, $\alpha = -2 = 0 = 2$ : c'est le \emph{carré},
 $u(x, y) = (1 - y, x)$, $u^2(x, y) = (1 - x, 1 - y)$, $u^4 = \mathrm{id}$,
@@ -1675,7 +1713,11 @@ bxy + c(x + y)$, et l'invariance par $\sigma_0$ force $b = -\alpha a$, $c =
   \boxed{\ f_\alpha(x, y) = (x^2 - x) + (y^2 - y) - \alpha\, xy\ } .
 \]
 Les fonctions $1$, $f_\alpha$ forment une base des fonctions invariantes de
-degré $\leq 2$, et $f_\alpha$ est caractérisée par : a) $f_\alpha$ est nulle
+degré $\leq 2$\footnote{L'invariance de $f_\alpha$ par $u_\alpha$ et son
+annulation en tous les sommets, sur un anneau commutatif quelconque, sont
+vérifiées en Lean (lean/Grothendieck/Folder78.lean,
+\texttt{conic\_invariant}) ; pour $\alpha = -2$, la factorisation
+$f_{-2} = (x+y)(x+y-1)$ du § 8 aussi (\texttt{strip\_conic}).}, et $f_\alpha$ est caractérisée par : a) $f_\alpha$ est nulle
 sur $S$ ; b) sa partie homogène
 \[
   f_0(X, Y) = X^2 + Y^2 - \alpha XY
@@ -1742,7 +1784,17 @@ $\mathbf{F}_p$-rationnels d'une parabole, et sa rotation est une translation
 le long de celle-ci\footnote{La page 100 s'arrête sur la formule et le point
 d'exclamation « $v \mapsto v + 1$ ! » ; les deux dernières phrases (les
 sommets $(m, m^2)$, le $p$-gone de $\mathbf{F}_p$) sont la conséquence immédiate,
-écrite par nous, et rejoignent le cas III de la page 95.}.
+écrite par nous, et rejoignent le cas III de la page 95. Le résultat est
+connu : le survol de Korchmáros et Szőnyi (\emph{Contrib. Discrete Math.} 3,
+2008, § 2) donne l'exemple des points $(a + i, (a + i)^{2})$,
+$i = 1, \ldots, p$, et rapporte le théorème de Korchmáros (\emph{Atti Accad.
+Naz. Lincei Rend.} (8) 56, 1974) selon lequel, dans $AG(2, q)$, un $p$-gone
+affinement régulier existe et est inscrit dans une parabole ; le même survol
+note (§ 3) que deux tels $p$-gones non dégénérés, $p \geq 5$, sont
+affinement équivalents, et que ce sont eux qui séparent, en caractéristique
+$p \geq 5$, la définition algébrique de Bachmann et Schmidt de la définition
+synthétique. Les originaux n'ont pas été lus ; ce qui reste propre au dossier
+est le chemin, par le quotient de l'$\infty$-polygone universel.}.
 
 \pagerange{101}{107}
 \section*{IV. La fidélité (pages 101 à 107)}
@@ -1856,7 +1908,13 @@ sont les $\zeta + \zeta^{-1}$, $\zeta^n = 1$, $\zeta \neq \pm 1$, chaque paire
 $\{\zeta, \zeta^{-1}\}$ une fois\footnote{Pour $n$ pair, $F_n(2\cos\theta) =
 \sin(n\theta/2)/\sin\theta$, polynôme de Tchebychev de deuxième espèce en
 $\cos\theta$ ; pour $n$ impair, $\sin(n\theta/2)/\sin(\theta/2)$, dit parfois
-de « quatrième espèce ». Ces noms sont de nous. Le signe de « $F_n = -F_{-n}$ »
+de « quatrième espèce ». Ces noms sont de nous. En termes des polynômes de
+Tchebychev de deuxième espèce renormalisés $S_m$ de mathlib
+(\texttt{Polynomial.Chebyshev.S}), $F_{2m} = S_{m-1}$ et
+$F_{2m+1} = S_m + S_{m-1}$ ; la vérification en Lean
+(lean/Grothendieck/Folder78.lean, \texttt{F\_even\_closed},
+\texttt{F\_odd\_closed}, \texttt{F\_zero}, \texttt{F\_neg}) établit que ce
+sont bien les $F_n$ définis ici, pour tout $n \in \mathbf{Z}$. Le signe de « $F_n = -F_{-n}$ »
 est peu net sur la page ; la formule
 $F_n = (T^{n/2} - T^{-n/2})/(T^{\epsilon/2} - T^{-\epsilon/2})$,
 $\epsilon \in \{1, 2\}$ selon la parité, le confirme.}. On a
@@ -1876,7 +1934,12 @@ et les premiers sont $F_1 = F_2 = 1$, $F_3 = U + 1$, $F_4 = U$, $F_5 = U^2 + U
 $(U + 1) - U + 0$). Pour $n \geq 3$, on multiplie par $(T - 1)(T^2 - 1)
 T^{n-1}$, en utilisant $F_n F_{n+1} (T - 1)(T^2 - 1) = (T^n - 1)(T^{n+1} - 1)
 T^{-(n-1)}$ ; les deux membres deviennent $T^{n+2} - T^{n+1} - T^n + T^{n-1} =
-(T - 1)(T^2 - 1) T^{n-1}$. Les $n$ négatifs s'en déduisent\footnote{La page
+(T - 1)(T^2 - 1) T^{n-1}$. Les $n$ négatifs s'en déduisent\footnote{C'est,
+en termes des $S_m$, l'identité de Cassini
+$S_m^{2} - U S_m S_{m-1} + S_{m-1}^{2} = 1$ des polynômes de Tchebychev, qui
+est dans mathlib (\texttt{Polynomial.Chebyshev.S\_sq\_add\_S\_sq}) ; la
+proposition en découle pour tout $n \in \mathbf{Z}$, vérifié en Lean
+(lean/Grothendieck/Folder78.lean, \texttt{F\_identity}).}\footnote{La page
 introduit d'abord des $X'_n = F_n F_{n+1}$, $Y'_n = F_n F_{n-1}$, puis des
 $X_n$ définis par la récurrence $X_n = U X_{n-1} - X_{n-2} + 1$, et conclut
 par récurrence $X_n = X'_n$ ; les primes manquent par endroits. On a fusionné
@@ -1895,7 +1958,9 @@ unité :
 \footnote{La page 113 écrit $A_n = F_{n-2} - U F_{n-1}$, l'indice du second
 $F$ étant peu net ; le couple ne vérifie pas la relation ($n = 4$ : $(1 - U -
 U^2)(U + 1) + U(U^2 + U - 1) = 1 - U - U^2$). Celui qu'on donne se lit sur
-la proposition. La page 109 énonce $(F_n, F_{n+2}) = (1)$.}.
+la proposition. La page 109 énonce $(F_n, F_{n+2}) = (1)$. Vérifié en Lean
+(lean/Grothendieck/Folder78.lean, \texttt{F\_bezout}, \texttt{isCoprime\_F} ;
+\texttt{page\_A\_four\_fails} pour l'échec du couple de la page en $n = 4$).}.
 
 \textbf{Les sommets.} Dans les coordonnées universelles $(s_0, s_1, s_{-1})$
 des pages 81 à 100, avec $u_\alpha(x, y) = (1 - y + \alpha x, x)$, la
@@ -1919,7 +1984,9 @@ matrice
 \footnote{La page donne deux versions ; la première, barrée, a la troisième
 colonne $(F_n F_{n+1}, F_{n-1} F_n)$, la seconde $(F_{n+1} F_{n+1}, F_{n-1}
 F_{n+1})$, indices surchargés et douteux. La troisième colonne est $s_n$, et
-c'est la première version qui est juste.}.
+c'est la première version qui est juste. Vérifié en Lean
+(lean/Grothendieck/Folder78.lean, \texttt{u\_zpow\_apply}, \texttt{vertex}) :
+$u_\alpha^n(x, y) = (1 - x - y)\,s_n + x\,s_{n+1} + y\,s_{n-1}$.}.
 
 \textbf{Théorème} (page 112). Soit $k$ un anneau, $\alpha \in k$, $u_\alpha$
 l'automorphisme affine $(x, y) \mapsto (1 - y + \alpha x, x)$ de $k^2$, $s_n =
@@ -1939,7 +2006,18 @@ Réciproquement, si $F_n F_{n+1}(\alpha) = F_{n-1} F_n(\alpha) = 0$, la
 relation de Bézout donne $F_n(\alpha) = F_n(\alpha)(A_n F_{n-1} + B_n
 F_{n+1})(\alpha) = 0$\footnote{La page conclut « la relation $F_n(\alpha) =
 1$, cqfd » : lire $= 0$. Elle lettre les conditions a), b), b$_i$), d), et
-conclut « a $\iff$ b $\iff$ c », où c) est b$_i$).}.
+conclut « a $\iff$ b $\iff$ c », où c) est b$_i$).}. Le théorème est juste
+tel quel, sur tout anneau commutatif et pour tout
+$n \in \mathbf{Z}$.\footnote{Vérifié en Lean (lean/Grothendieck/Folder78.lean,
+\texttt{zpow\_eq\_one\_iff}, \texttt{vertex\_eq\_iff}, \texttt{zpow\_fix\_iff}),
+c) pour un seul $i$ quelconque ; et aussi $\sigma_1 u_\alpha \sigma_1 =
+u_\alpha^{-1}$, $\sigma_1 s_n = s_{-n}$ (\texttt{inv\_eq\_conj},
+\texttt{swap\_vertex}). Sur un corps, le critère de Bachmann et Schmidt, tel
+que le rapporte le survol de Korchmáros et Szőnyi (\emph{Contrib. Discrete
+Math.} 3, 2008, § 3, (3.4)), dit que le système circulaire $v_i + c\,v_{i+1}
++ v_{i+2} = 0$ a une solution non triviale si et seulement si $c = \pm 2$ ou
+$x^{2} - cx + 1$ divise $x^{n} - 1$ ; il ne porte ni sur un anneau ni sur
+l'application affine, qui contient une translation.}
 
 Pour $\alpha = 2$ en caractéristique $p$ impaire, $F_p(2) = p = 0$ et
 $u^p = 1$ ; pour $\alpha = -2$, $F_n(-2) = 0$ demande $n = 2m$ pair avec $p
