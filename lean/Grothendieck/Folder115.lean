@@ -61,22 +61,18 @@ def kernelEquiv (K : Aᵒᵖ ⥤ C ⥤ Type u) (L : Aᵒᵖ ⥤ Type u) (M : C �
     { app := fun a => TypeCat.ofHom fun l =>
         { app := fun c => TypeCat.ofHom fun m => (β.app c m).app a l
           naturality := fun c c' f => ConcreteCategory.hom_ext _ _ fun m => by
-            have h := congr_arg (fun φ => φ.app a l) (types_congr_hom (β.naturality f) m)
-            exact h }
+            exact (congr_arg (fun φ => φ.app a l) (types_congr_hom (β.naturality f) m) :) }
       naturality := fun a a' g => ConcreteCategory.hom_ext _ _ fun l =>
         NatTrans.ext (funext fun c => ConcreteCategory.hom_ext _ _ fun m => by
-          have h := types_congr_hom ((β.app c m).naturality g) l
-          exact h) }
+          exact (types_congr_hom ((β.app c m).naturality g) l :)) }
   invFun α :=
     { app := fun c => TypeCat.ofHom fun m =>
         { app := fun a => TypeCat.ofHom fun l => (α.app a l).app c m
           naturality := fun a a' g => ConcreteCategory.hom_ext _ _ fun l => by
-            have h := congr_arg (fun φ => φ.app c m) (types_congr_hom (α.naturality g) l)
-            exact h }
+            exact (congr_arg (fun φ => φ.app c m) (types_congr_hom (α.naturality g) l) :) }
       naturality := fun c c' f => ConcreteCategory.hom_ext _ _ fun m =>
         NatTrans.ext (funext fun a => ConcreteCategory.hom_ext _ _ fun l => by
-          have h := types_congr_hom ((α.app a l).naturality f) m
-          exact h) }
+          exact (types_congr_hom ((α.app a l).naturality f) m :)) }
   left_inv _ := rfl
   right_inv _ := rfl
 
