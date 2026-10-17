@@ -140,8 +140,8 @@ a closed quadrilateral not contained in a line has a nonzero ear area. -/
 theorem wedge_eq_zero_of_mu (u : Fin 4 → Fin 2 → k) (h : Closed u)
     (hμ : ∀ i, mu u i = 0) (i j : Fin 4) : wedge (u i) (u j) = 0 := by
   obtain ⟨h02, -, h13, -⟩ := wedge_diag u h
-  have e0 := hμ 0; have e1 := hμ 1; have e2 := hμ 2; have e3 := hμ 3
-  rw [mu_zero] at e0; rw [mu_one] at e1; rw [mu_two] at e2; rw [mu_three] at e3
+  obtain ⟨e0, e1, e2, e3⟩ : wedge (u 3) (u 0) = 0 ∧ wedge (u 0) (u 1) = 0 ∧
+      wedge (u 1) (u 2) = 0 ∧ wedge (u 2) (u 3) = 0 := ⟨hμ 0, hμ 1, hμ 2, hμ 3⟩
   rw [hμ 0, hμ 1, sub_zero] at h02
   rw [hμ 1, hμ 2, sub_zero] at h13
   have s := fun a b : Fin 4 => wedge_swap (u a) (u b)
@@ -168,14 +168,11 @@ def rot (r : Fin 4) (u : Fin 4 → Fin 2 → k) : Fin 4 → Fin 2 → k := fun j
 
 theorem mu_rot (r : Fin 4) (u : Fin 4 → Fin 2 → k) (j : Fin 4) :
     mu (rot r u) j = mu u (j + r) := by
-  simp only [mu, rot]
-  rw [sub_add_eq_add_sub]
+  simp only [mu, rot, sub_add_eq_add_sub]
 
 theorem closed_rot (r : Fin 4) (u : Fin 4 → Fin 2 → k) (h : Closed u) :
-    Closed (rot r u) := by
-  unfold Closed rot at *
-  rw [← h]
-  exact Equiv.sum_comp (Equiv.addRight r) u
+    Closed (rot r u) :=
+  (Equiv.sum_comp (Equiv.addRight r) u).trans h
 
 end Quadrilateral
 
@@ -192,13 +189,8 @@ theorem exists_matrix_of_mu_one (u u' : Fin 4 → Fin 2 → k) (hu : Closed u) (
     !![u' 0 0 * u 1 1 - u' 1 0 * u 0 1, -(u' 0 0 * u 1 0) + u' 1 0 * u 0 0;
        u' 0 1 * u 1 1 - u' 1 1 * u 0 1, -(u' 0 1 * u 1 0) + u' 1 1 * u 0 0]
   have hm' : m = u 0 0 * u 1 1 - u 0 1 * u 1 0 := by rw [hm, mu_one]; rfl
-  have e0 : M *ᵥ u 0 = u' 0 := by
-    funext r; fin_cases r <;>
-      · simp [M, Matrix.mulVec, dotProduct, Fin.sum_univ_two]
-        field_simp
-        rw [hm']; ring
-  have e1 : M *ᵥ u 1 = u' 1 := by
-    funext r; fin_cases r <;>
+  obtain ⟨e0, e1⟩ : M *ᵥ u 0 = u' 0 ∧ M *ᵥ u 1 = u' 1 := by
+    constructor <;> funext r <;> fin_cases r <;>
       · simp [M, Matrix.mulVec, dotProduct, Fin.sum_univ_two]
         field_simp
         rw [hm']; ring
@@ -217,21 +209,12 @@ theorem exists_matrix_of_mu_one (u u' : Fin 4 → Fin 2 → k) (hu : Closed u) (
   have e3 : M *ᵥ u 3 = u' 3 := by
     rw [(closed_iff u).1 hu, (closed_iff u').1 hu', Matrix.mulVec_neg, Matrix.mulVec_add,
       Matrix.mulVec_add, e0, e1, e2]
-  refine ⟨M, ?_, fun i => ?_⟩
-  · have := mu_mulVec M u 1
-    have hfun : (fun j => M *ᵥ u j) = u' := by
-      funext j; fin_cases j
-      · exact e0
-      · exact e1
-      · exact e2
-      · exact e3
-    rw [hfun, hμ 1, ← hm] at this
-    exact (mul_right_cancel₀ h1 this).symm
-  · fin_cases i
-    · exact e0.symm
-    · exact e1.symm
-    · exact e2.symm
-    · exact e3.symm
+  have hfun : (fun j => M *ᵥ u j) = u' := by
+    funext j; fin_cases j <;> assumption
+  refine ⟨M, ?_, fun i => (congrFun hfun i).symm⟩
+  have := mu_mulVec M u 1
+  rw [hfun, hμ 1, ← hm] at this
+  exact (mul_right_cancel₀ h1 this).symm
 
 /-- Injectivity on affine classes (page 5, « mono »): closed quadrilaterals with
 proportional ear areas, the first not contained in a line, differ by a linear map of
@@ -245,9 +228,7 @@ theorem exists_matrix_of_mu (u u' : Fin 4 → Fin 2 → k) (hu : Closed u) (hu' 
     rw [mu_rot]; convert hi using 2; simp [r]
   obtain ⟨M, hM, hM'⟩ := exists_matrix_of_mu_one (rot r u) (rot r u') (closed_rot r u hu)
     (closed_rot r u' hu') c hc (fun j => by rw [mu_rot, mu_rot, hμ]) h1
-  refine ⟨M, hM, fun j => ?_⟩
-  have := hM' (j - r)
-  simpa [rot] using this
+  exact ⟨M, hM, fun j => by simpa [rot] using hM' (j - r)⟩
 
 /-- Pages 5–6, the bijection on affine classes: two closed quadrilaterals not contained in
 a line have proportional ear areas exactly when one is the image of the other by an
@@ -259,8 +240,7 @@ theorem quad_moduli (u u' : Fin 4 → Fin 2 → k) (hu : Closed u) (hu' : Closed
   constructor
   · rintro ⟨M, hM, hM'⟩
     refine ⟨M.det, hM, fun i => ?_⟩
-    have : u' = fun j => M *ᵥ u j := funext hM'
-    rw [this, mu_mulVec]
+    rw [show u' = fun j => M *ᵥ u j from funext hM', mu_mulVec]
   · rintro ⟨c, hc, hμ⟩
     obtain ⟨M, hM, hM'⟩ := exists_matrix_of_mu u u' hu hu' c hc hμ hne
     exact ⟨M, hM ▸ hc, hM'⟩
@@ -292,16 +272,13 @@ theorem exists_quad_of_mu_one (m : Fin 4 → k) (hrel : m 0 + m 2 = m 1 + m 3) (
 ear-area vector of a closed quadrilateral. -/
 theorem exists_quad_of_mu (m : Fin 4 → k) (hrel : m 0 + m 2 = m 1 + m 3) (hm : m ≠ 0) :
     ∃ u : Fin 4 → Fin 2 → k, Closed u ∧ mu u = m := by
-  obtain ⟨i, hi⟩ : ∃ i, m i ≠ 0 := by
-    by_contra h; push Not at h; exact hm (funext h)
+  obtain ⟨i, hi⟩ : ∃ i, m i ≠ 0 := Function.ne_iff.mp hm
   have hA : ∀ i : Fin 4, 1 + (i - 1) = i := by decide
-  have hrot : ∀ r : Fin 4, m (0 + r) + m (2 + r) = m (1 + r) + m (3 + r) := by
-    intro r
+  have hrot : ∀ r : Fin 4, m (0 + r) + m (2 + r) = m (1 + r) + m (3 + r) := fun r => by
     fin_cases r <;> simp <;> first | linear_combination hrel | linear_combination -hrel
   set r : Fin 4 := i - 1
   have h1 : m (1 + r) ≠ 0 := by rw [show (1 : Fin 4) + r = i by simp only [r]; exact hA i]; exact hi
-  have hrel' := hrot r
-  obtain ⟨u, hu, hmu⟩ := exists_quad_of_mu_one (fun j => m (j + r)) hrel' h1
+  obtain ⟨u, hu, hmu⟩ := exists_quad_of_mu_one (fun j => m (j + r)) (hrot r) h1
   refine ⟨rot (-r) u, closed_rot _ u hu, funext fun j => ?_⟩
   rw [mu_rot, hmu]
   simp
@@ -334,20 +311,14 @@ theorem side_eq_zero_iff (u : Fin 4 → Fin 2 → k) (hu : Closed u) (hne : ∃ 
       have hc := cramer (v 0) (v 1) (v 2)
       rw [e1, wedge_swap (v 1) (v 2), e2, neg_zero, zero_smul, zero_smul, zero_add, eq_comm,
         smul_eq_zero] at hc
-      rcases hc with hc | hc
-      · exact hc
-      · exact absurd hc hv1
+      exact hc.resolve_right hv1
     obtain ⟨d1, d2, -, -⟩ := wedge_diag v hv
     have hall : ∀ l, mu v l = 0 := by
       have m1 : mu v 1 = 0 := e1
       have m2 : mu v 2 = 0 := e2
       have m0 : mu v 0 = 0 := by linear_combination -d1 + e02 + m1
       have m3 : mu v 3 = 0 := by linear_combination -d2 + e02 + m2
-      intro l; fin_cases l
-      · exact m0
-      · exact m1
-      · exact m2
-      · exact m3
+      intro l; fin_cases l <;> assumption
     apply hj
     have := hall (j - r)
     rw [mu_rot] at this
@@ -376,11 +347,9 @@ theorem mu_eq_smul_framePt (u : Fin 4 → Fin 2 → k) (hu : Closed u) (i : Fin 
     first | linear_combination hrel | linear_combination -hrel
 
 theorem mu_degenerate_ne_zero (u : Fin 4 → Fin 2 → k) (hu : Closed u) (i : Fin 4)
-    (h : u i = 0) (hne : ∃ j, mu u j ≠ 0) : mu u (i + 2) ≠ 0 := by
-  intro h0
+    (h : u i = 0) (hne : ∃ j, mu u j ≠ 0) : mu u (i + 2) ≠ 0 := fun h0 => by
   obtain ⟨j, hj⟩ := hne
-  apply hj
-  rw [mu_eq_smul_framePt u hu i h, h0, zero_smul, Pi.zero_apply]
+  exact hj (by rw [mu_eq_smul_framePt u hu i h, h0, zero_smul, Pi.zero_apply])
 
 /-- The only linear relation among the four degenerate points is the alternating one. -/
 theorem sum_smul_framePt_eq_zero_iff (c : Fin 4 → k) :
@@ -470,11 +439,8 @@ theorem frame_canonical :
   have hmem : ∀ c, frameMap (k := k) c ∈ plane := fun c => by
     rw [← frameMap_range]; exact LinearMap.mem_range_self _ c
   let f : (Fin 4 → k) →ₗ[k] plane := LinearMap.codRestrict plane frameMap hmem
-  have hf : Function.Surjective f := by
-    rintro ⟨m, hm⟩
-    rw [← frameMap_range] at hm
-    obtain ⟨c, hc⟩ := hm
-    exact ⟨c, Subtype.ext hc⟩
+  have hf : Function.Surjective f := fun ⟨m, hm⟩ =>
+    ((frameMap_range (k := k)).ge hm).imp fun c hc => Subtype.ext hc
   have hker : LinearMap.ker f = k ∙ (fun _ => (1 : k)) := by
     rw [LinearMap.ker_codRestrict, frameMap_ker]
   refine ⟨(Submodule.quotEquivOfEq _ _ hker.symm).trans (f.quotKerEquivOfSurjective hf),
@@ -525,18 +491,13 @@ theorem symProd_zero_right (a : Fin 2 → k) : symProd a 0 = 0 := by
 theorem symProd_eq_zero_iff (a b : Fin 2 → k) : symProd a b = 0 ↔ a = 0 ∨ b = 0 := by
   constructor
   · intro h
-    have h0 := congrFun h 0
-    have h1 := congrFun h 1
-    have h2 := congrFun h 2
-    rw [symProd_apply0, Pi.zero_apply] at h0
-    rw [symProd_apply1, Pi.zero_apply] at h1
-    rw [symProd_apply2, Pi.zero_apply] at h2
+    have h0 : a 0 * b 0 = 0 := congrFun h 0
+    have h1 : a 0 * b 1 + a 1 * b 0 = 0 := congrFun h 1
+    have h2 : a 1 * b 1 = 0 := congrFun h 2
     by_cases ha0 : a 0 = 0
     · rw [ha0, zero_mul, zero_add] at h1
       by_cases ha1 : a 1 = 0
-      · left; funext j; fin_cases j
-        · exact ha0
-        · exact ha1
+      · exact Or.inl (funext fun j => by fin_cases j <;> assumption)
       · right; funext j; fin_cases j
         · exact (mul_eq_zero.1 h1).resolve_left ha1
         · exact (mul_eq_zero.1 h2).resolve_left ha1
@@ -568,10 +529,7 @@ theorem exists_smul_of_wedge {a c : Fin 2 → k} (ha : a ≠ 0) (h : wedge a c =
     ∃ α : k, c = α • a := by
   unfold wedge at h
   by_cases h0 : a 0 = 0
-  · have h1 : a 1 ≠ 0 := by
-      intro h1; apply ha; funext j; fin_cases j
-      · exact h0
-      · exact h1
+  · have h1 : a 1 ≠ 0 := fun h1 => ha (funext fun j => by fin_cases j <;> assumption)
     rw [h0, zero_mul, zero_sub, neg_eq_zero] at h
     refine ⟨c 1 / a 1, funext fun j => ?_⟩
     fin_cases j
@@ -655,20 +613,17 @@ omit [NeZero n] in
 theorem isMult_iff_lagr (u : ZMod n → Fin 2 → k) (l : ZMod n → k) :
     IsMult u l ↔ ∀ i, lagr u l i = lagr u l (i + 1) := by
   have key : ∀ i, lagr u l i - lagr u l (i + 1) =
-      l i • u (i - 1) - l (i + 1) • (u i + u (i + 1)) + l (i + 2) • u (i + 2) := by
-    intro i
+      l i • u (i - 1) - l (i + 1) • (u i + u (i + 1)) + l (i + 2) • u (i + 2) := fun i => by
     simp only [lagr, add_sub_cancel_right, add_assoc, one_add_one_eq_two, smul_add]
     abel
   simp only [IsMult, ← key, sub_eq_zero]
 
 theorem sum_range_eq_sum (f : ZMod n → Fin 2 → k) :
-    ∑ j ∈ Finset.range n, f j = ∑ i, f i := by
-  refine Finset.sum_nbij' (fun j => (j : ZMod n)) (fun i => i.val) ?_ ?_ ?_ ?_ ?_
-  · intro j _; exact Finset.mem_univ _
-  · intro i _; exact Finset.mem_range.2 (ZMod.val_lt i)
-  · intro j hj; exact ZMod.val_cast_of_lt (Finset.mem_range.1 hj)
-  · intro i _; exact ZMod.natCast_zmod_val i
-  · intro j _; rfl
+    ∑ j ∈ Finset.range n, f j = ∑ i, f i :=
+  Finset.sum_nbij' (fun j => (j : ZMod n)) (fun i => i.val) (fun _ _ => Finset.mem_univ _)
+    (fun i _ => Finset.mem_range.2 (ZMod.val_lt i))
+    (fun _ hj => ZMod.val_cast_of_lt (Finset.mem_range.1 hj)) (fun i _ => ZMod.natCast_zmod_val i)
+    fun _ _ => rfl
 
 /-- With `λ₀ = 0` and `λ₁ = 1`, `(∗)` says `L_i = -u₁` for every `i`. -/
 theorem isMult_iff_lagr_eq (u : ZMod n → Fin 2 → k) (l : ZMod n → k) (h0 : l 0 = 0)
@@ -706,8 +661,7 @@ private theorem alg_bwd (A B : k) (x y z u1 P : Fin 2 → k) (hy : y ≠ 0)
     rw [symProd_add_right, symProd_sub_right, symProd_smul_right, symProd_smul_right,
       symProd_comm y x, hS, hS', symProd_comm y u1, symProd_add_right]
     abel
-  rw [symProd_eq_zero_iff] at this
-  exact eq_neg_of_add_eq_zero_left (this.resolve_left hy)
+  exact eq_neg_of_add_eq_zero_left (((symProd_eq_zero_iff _ _).1 this).resolve_left hy)
 
 omit [NeZero n] in
 private theorem lagr_succ (u : ZMod n → Fin 2 → k) (l : ZMod n → k) (m : ℕ) :
@@ -746,8 +700,7 @@ theorem symId_of_isMult (u : ZMod n → Fin 2 → k) (l : ZMod n → k) (h0 : l 
 /-- Conversely, `(S_i)` for every `i ≥ 1` gives `(∗)`, the sides being nonzero. -/
 theorem isMult_of_symId (u : ZMod n → Fin 2 → k) (hu : ∀ i, u i ≠ 0) (l : ZMod n → k)
     (h0 : l 0 = 0) (h1 : l 1 = 1) (hS : ∀ m, SymId u l m) : IsMult u l := by
-  rw [isMult_iff_lagr_eq u l h0 h1]
-  intro i
+  refine (isMult_iff_lagr_eq u l h0 h1).2 fun i => ?_
   have hn : 1 ≤ n := NeZero.one_le
   set m := i.val + (n - 1)
   have hi : ((m + 1 : ℕ) : ZMod n) = i := by
@@ -756,8 +709,7 @@ theorem isMult_of_symId (u : ZMod n → Fin 2 → k) (hu : ∀ i, u i ≠ 0) (l 
     rw [ZMod.natCast_self, add_zero, ZMod.natCast_zmod_val]
   rw [← hi, lagr_succ]
   have h2 := hS (m + 1)
-  unfold SymId at h2
-  rw [partialSum_succ u (m + 1)] at h2
+  rw [SymId, partialSum_succ u (m + 1)] at h2
   exact alg_bwd _ _ _ _ _ _ _ (hu _) (hS m) h2
 
 omit [NeZero n] in
@@ -767,11 +719,7 @@ private theorem cast_n_add (j : ℕ) : ((n + j : ℕ) : ZMod n) = j := by
 omit [NeZero n] in
 private theorem partialSum_n_add (u : ZMod n → Fin 2 → k) (j : ℕ) :
     partialSum u (n + j) = partialSum u n + partialSum u j := by
-  unfold partialSum
-  rw [Finset.sum_range_add]
-  congr 1
-  refine Finset.sum_congr rfl fun x _ => ?_
-  rw [cast_n_add]
+  simp only [partialSum, Finset.sum_range_add, cast_n_add]
 
 omit [NeZero n] in
 /-- For a closed polygon, `(S_i)` is periodic in `i`. -/
@@ -798,16 +746,14 @@ theorem zero_multiplier_criterion (hn : 3 ≤ n) (u : ZMod n → Fin 2 → k)
     have hS := symId_of_isMult u l h0 h1 h
     refine ⟨?_, fun i hi2 hin => ?_⟩
     · have := hS (n - 1)
-      unfold SymId at this
-      rw [show n - 1 + 1 = n by omega, ZMod.natCast_self, h0, zero_smul, eq_comm,
+      rw [SymId, show n - 1 + 1 = n by omega, ZMod.natCast_self, h0, zero_smul, eq_comm,
         symProd_eq_zero_iff] at this
       exact this.resolve_left (hu 1)
     · by_cases hP : partialSum u i = 0
       · exact Or.inl hP
       · right
         have := hS (i - 1)
-        unfold SymId at this
-        rw [show i - 1 + 1 = i by omega] at this
+        rw [SymId, show i - 1 + 1 = i by omega] at this
         exact (symProd_proportional_iff (hu _) (hu _) (hu 1) hP).1 ⟨_, this.symm⟩
   · rintro ⟨hcl, hcond⟩
     have hex : ∀ i : ℕ, ∃ t : k, 2 ≤ i → i ≤ n - 1 →
@@ -859,8 +805,7 @@ theorem symProd_formula (u : ZMod n → Fin 2 → k) (l : ZMod n → k) (h0 : l 
     (h1 : l 1 = 1) (h : IsMult u l) (i : ℕ) (hi : 1 ≤ i) :
     l i • symProd (u (i - 1 : ℕ)) (u i) = symProd (u 1) (partialSum u i) := by
   have := symId_of_isMult u l h0 h1 h (i - 1)
-  unfold SymId at this
-  rwa [show i - 1 + 1 = i by omega] at this
+  rwa [SymId, show i - 1 + 1 = i by omega] at this
 
 /-- Page 28: `λ_i = 0` exactly at the vertices `s_i = s_0` (`u_{0i} = 0`). -/
 theorem mult_eq_zero_iff (u : ZMod n → Fin 2 → k) (hu : ∀ i, u i ≠ 0) (l : ZMod n → k)
@@ -873,10 +818,7 @@ theorem mult_eq_zero_iff (u : ZMod n → Fin 2 → k) (hu : ∀ i, u i ≠ 0) (l
     exact hf.resolve_left (hu 1)
   · intro hP
     rw [hP, symProd_zero_right, smul_eq_zero, symProd_eq_zero_iff] at hf
-    rcases hf with hf | hf | hf
-    · exact hf
-    · exact absurd hf (hu _)
-    · exact absurd hf (hu _)
+    exact hf.resolve_right (not_or.2 ⟨hu _, hu _⟩)
 
 /-- The multiplier with `λ₀ = 0`, `λ₁ = 1` is unique. -/
 theorem mult_unique (u : ZMod n → Fin 2 → k) (hu : ∀ i, u i ≠ 0) (l l' : ZMod n → k)
@@ -889,8 +831,8 @@ theorem mult_unique (u : ZMod n → Fin 2 → k) (hu : ∀ i, u i ≠ 0) (l l' :
   have e := symProd_formula u l h0 h1 h (j.val + n) (by omega)
   have e' := symProd_formula u l' h0' h1' h' (j.val + n) (by omega)
   rw [← e'] at e
-  have hne : symProd (u ((j.val + n - 1 : ℕ) : ZMod n)) (u ((j.val + n : ℕ) : ZMod n)) ≠ 0 := by
-    rw [Ne, symProd_eq_zero_iff, not_or]; exact ⟨hu _, hu _⟩
+  have hne : symProd (u ((j.val + n - 1 : ℕ) : ZMod n)) (u ((j.val + n : ℕ) : ZMod n)) ≠ 0 :=
+    fun h0 => ((symProd_eq_zero_iff _ _).1 h0).elim (hu _) (hu _)
   have := smul_left_injective k hne e
   rwa [hj] at this
 
