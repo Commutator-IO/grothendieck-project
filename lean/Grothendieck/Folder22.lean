@@ -123,10 +123,8 @@ noncomputable abbrev piRTensor {M N : Type*} [AddCommGroup M] [Module A M] [AddC
 /-- The canonical map is natural in `M`. -/
 theorem can_naturality {M N : Type*} [AddCommGroup M] [Module A M] [AddCommGroup N]
     [Module A N] (g : M →ₗ[A] N) :
-    piRTensor P g ∘ₗ can P M = can P N ∘ₗ g.rTensor (∀ i, P i) := by
-  refine TensorProduct.ext' fun m q => ?_
-  funext i
-  simp
+    piRTensor P g ∘ₗ can P M = can P N ∘ₗ g.rTensor (∀ i, P i) :=
+  TensorProduct.ext' fun m q => funext fun i => by simp
 
 /-- A product of exact sequences is exact. -/
 theorem exact_pi {M N Q : ι → Type*} [∀ i, AddCommGroup (M i)] [∀ i, Module A (M i)]
@@ -134,16 +132,10 @@ theorem exact_pi {M N Q : ι → Type*} [∀ i, AddCommGroup (M i)] [∀ i, Modu
     [∀ i, Module A (Q i)] {f : ∀ i, M i →ₗ[A] N i} {g : ∀ i, N i →ₗ[A] Q i}
     (h : ∀ i, Function.Exact (f i) (g i)) :
     Function.Exact (LinearMap.pi fun i => f i ∘ₗ LinearMap.proj i)
-      (LinearMap.pi fun i => g i ∘ₗ LinearMap.proj i) := by
-  intro y
-  constructor
-  · intro hy
-    have : ∀ i, ∃ x, f i x = y i := fun i => (h i (y i)).1 (congrFun hy i)
-    choose x hx using this
-    exact ⟨x, funext hx⟩
-  · rintro ⟨x, rfl⟩
-    funext i
-    exact (h i _).2 ⟨x i, rfl⟩
+      (LinearMap.pi fun i => g i ∘ₗ LinearMap.proj i) := fun y => by
+  refine ⟨fun hy => ?_, fun ⟨x, hx⟩ => hx ▸ funext fun i => (h i _).2 ⟨x i, rfl⟩⟩
+  choose x hx using fun i => (h i (y i)).1 (congrFun hy i)
+  exact ⟨x, funext hx⟩
 
 /-- `(Aⁿ) ⊗ N ≃ Nⁿ`. -/
 noncomputable def psi (n : ℕ) (N : Type*) [AddCommGroup N] [Module A N] :
@@ -162,15 +154,12 @@ theorem can_bijective_fin (n : ℕ) : Function.Bijective (can (A := A) P (Fin n 
     | tmul f q => intro i; funext j; simp [psi_tmul]
     | add x y hx hy =>
       intro i; funext j
-      simp only [map_add, Pi.add_apply]
-      rw [congrFun (hx i) j, congrFun (hy i) j]
+      simp only [map_add, Pi.add_apply, congrFun (hx i) j, congrFun (hy i) j]
   constructor
   · intro x y hxy
     apply (psi n (∀ i, P i)).injective
     funext j i
-    have := congrFun (key x i) j
-    rw [hxy, key y i] at this
-    exact this.symm
+    rw [← congrFun (key x i) j, hxy, key y i]
   · intro z
     refine ⟨(psi n (∀ i, P i)).symm fun j i => psi n (P i) (z i) j, funext fun i => ?_⟩
     apply (psi n (P i)).injective
@@ -216,13 +205,10 @@ theorem corollaire3_4_coherent
   rw [Module.Flat.iff_rTensor_injective]
   intro I hI
   have := hA I hI
-  have hsq := can_naturality P I.subtype
   have h1 : Function.Injective (piRTensor P I.subtype) := fun x y hxy => funext fun i =>
     Module.Flat.rTensor_preserves_injective_linearMap _ I.injective_subtype (congrFun hxy i)
-  have hinj : Function.Injective (piRTensor P I.subtype ∘ₗ can P I) := by
-    rw [LinearMap.coe_comp]
-    exact h1.comp (lemme3_3 P I).1
-  rw [hsq, LinearMap.coe_comp] at hinj
+  have hinj : Function.Injective (piRTensor P I.subtype ∘ₗ can P I) := h1.comp (lemme3_3 P I).1
+  rw [can_naturality P I.subtype, LinearMap.coe_comp] at hinj
   exact hinj.of_comp
 
 /-- **Corollaire 3.4.** If every finitely generated `A`-module is finitely
@@ -243,9 +229,8 @@ theorem flat_prod (M N : Type*) [AddCommGroup M] [Module A M] [AddCommGroup N] [
   intro I
   have hsq : (TensorProduct.prodRight A A A M N).toLinearMap ∘ₗ I.subtype.rTensor (M × N) =
       (I.subtype.rTensor M).prodMap (I.subtype.rTensor N) ∘ₗ
-        (TensorProduct.prodRight A A I M N).toLinearMap := by
-    refine TensorProduct.ext' fun x m => ?_
-    simp
+        (TensorProduct.prodRight A A I M N).toLinearMap :=
+    TensorProduct.ext' fun x m => by simp
   have h1 : Function.Injective ((I.subtype.rTensor M).prodMap (I.subtype.rTensor N)) :=
     fun x y hxy => Prod.ext
       (Module.Flat.rTensor_preserves_injective_linearMap _ I.injective_subtype
@@ -253,9 +238,8 @@ theorem flat_prod (M N : Type*) [AddCommGroup M] [Module A M] [AddCommGroup N] [
       (Module.Flat.rTensor_preserves_injective_linearMap _ I.injective_subtype
         (congrArg Prod.snd hxy))
   have hinj : Function.Injective ((I.subtype.rTensor M).prodMap (I.subtype.rTensor N) ∘ₗ
-      (TensorProduct.prodRight A A I M N).toLinearMap) := by
-    rw [LinearMap.coe_comp]
-    exact h1.comp (TensorProduct.prodRight A A I M N).injective
+      (TensorProduct.prodRight A A I M N).toLinearMap) :=
+    h1.comp (TensorProduct.prodRight A A I M N).injective
   rw [← hsq, LinearMap.coe_comp] at hinj
   exact hinj.of_comp
 
@@ -304,7 +288,7 @@ theorem corollaire3_5 (hA : Hypothese A) [∀ n, Module.Projective A (P n)]
       funext n
       induction n with
       | zero => exact h0
-      | succ n ih => have := hk n; rw [ih] at this; exact sub_left_inj.1 this
+      | succ n ih => exact sub_left_inj.1 ((hk n).trans (by rw [ih]))
     · rintro ⟨y, k⟩
       let seq : ∀ n, P n := fun n => Nat.rec (motive := fun n => P n) y
         (fun n xn => s n xn + (k n : P (n + 1))) n
@@ -344,11 +328,9 @@ theorem coordProj_eventually_zero {ι : Type*} (b : Module.Basis ι k M) (z : k�
     refine ⟨(b.repr m).support, fun i hi => ?_⟩
     rw [coordProj_tmul, Module.Basis.coord_apply, Finsupp.notMem_support_iff.1 hi, zero_smul]
   | add x y hx hy =>
-    obtain ⟨s, hs⟩ := hx
-    obtain ⟨t, ht⟩ := hy
+    obtain ⟨⟨s, hs⟩, t, ht⟩ := And.intro hx hy
     refine ⟨s ∪ t, fun i hi => ?_⟩
-    rw [Finset.mem_union, not_or] at hi
-    rw [map_add, hs i hi.1, ht i hi.2, add_zero]
+    rw [map_add, hs i (Finset.notMem_union.1 hi).1, ht i (Finset.notMem_union.1 hi).2, add_zero]
 
 variable {R : Type*} [CommRing R] [Algebra R k]
 
@@ -442,9 +424,8 @@ theorem retraction_of_formallySmooth (R k S : Type*) [CommRing R] [CommRing k] [
     [Algebra.FormallySmooth k S] :
     ∃ r : Ω[S⁄R] →ₗ[S] S ⊗[k] Ω[k⁄R], r ∘ₗ KaehlerDifferential.mapBaseChange R k S =
       LinearMap.id := by
-  have hinj : Function.Injective (KaehlerDifferential.mapBaseChange R k S) := by
-    rw [injective_iff_map_eq_zero]
-    intro x hx
+  have hinj : Function.Injective (KaehlerDifferential.mapBaseChange R k S) :=
+      (injective_iff_map_eq_zero _).mpr fun x hx => by
     obtain ⟨y, rfl⟩ := (Algebra.H1Cotangent.exact_δ_mapBaseChange R k S x).mp hx
     rw [Subsingleton.elim y 0, map_zero]
   have h := ((KaehlerDifferential.exact_mapBaseChange_map R k S).split_tfae').out 1 2
@@ -481,13 +462,9 @@ theorem not_formallySmooth_of_field (R K : Type*) [CommRing R] [Field K] [Algebr
   obtain ⟨s, hs, hspan, hli⟩ := exists_linearIndependent K (Set.range (KaehlerDifferential.D R K))
   let b : Module.Basis s K Ω[K⁄R] := Module.Basis.mk hli (by
     rw [Subtype.range_coe, hspan, KaehlerDifferential.span_range_derivation])
-  have : Infinite s := by
-    by_contra hfin
-    rw [not_infinite_iff_finite] at hfin
-    exact h (Module.Finite.of_basis b)
+  have : Infinite s := not_finite_iff_infinite.mp fun _ => h (.of_basis b)
   let e := Infinite.natEmbedding s
-  have ha : ∀ n, ∃ c, KaehlerDifferential.D R K c = (e n : Ω[K⁄R]) := fun n => hs (e n).2
-  choose a ha using ha
+  choose a ha using fun n => hs (e n).2
   exact not_formallySmooth_of_basis R K b e e.injective a fun n => by
     rw [ha, Module.Basis.mk_apply]
 
