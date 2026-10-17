@@ -88,21 +88,13 @@ theorem rel14_iff (p : ∀ n : ℕ, ZMod n) (hp : Compatible p) (h2 : p 2 = 1) :
     have hodd := val_odd_of_two p hp h2 h2n (dvd_mul_right 2 n)
     have : NeZero n := ⟨hn⟩
     have key := h (DihedralGroup n) (sr 1) (sr 0) (sr 0 * sr 1)⁻¹ (by group)
-    simp only [hatPow] at key
-    rw [DihedralGroup.card] at key
-    have hm := (dihedral_witness n hodd).1 key
-    rw [← hp n (2 * n) h2n (dvd_mul_left n 2), ZMod.castHom_apply]
+    rw [hatPow, hatPow, hatPow, DihedralGroup.card] at key
     have : NeZero (2 * n) := ⟨h2n⟩
-    rw [ZMod.cast_eq_val, hm]
+    rw [← hp n (2 * n) h2n (dvd_mul_left n 2), ZMod.castHom_apply, ZMod.cast_eq_val,
+      (dihedral_witness n hodd).1 key]
   · intro h G _ _ x y z hxyz
-    have hc : Fintype.card G ≠ 0 := Fintype.card_ne_zero
-    have hv : (p (Fintype.card G)).val = 1 % Fintype.card G := by
-      rw [h _ hc, ZMod.val_one_eq_one_mod]
-    simp only [hatPow, hv]
-    rcases Nat.lt_or_ge 1 (Fintype.card G) with hlt | hle
-    · rw [Nat.mod_eq_of_lt hlt]; simpa using hxyz
-    · have : Subsingleton G := Fintype.card_le_one_iff_subsingleton.mp hle
-      exact Subsingleton.elim _ _
+    simpa only [hatPow, h _ Fintype.card_ne_zero, ZMod.val_one_eq_one_mod, pow_mod_card,
+      pow_one] using hxyz
 
 /-- The page's form: `p` a unit of `ℤ̂` (each residue a unit). -/
 theorem rel14_unit_iff (p : ∀ n : ℕ, ZMod n) (hp : Compatible p)
