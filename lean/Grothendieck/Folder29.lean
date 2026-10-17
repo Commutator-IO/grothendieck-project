@@ -80,9 +80,8 @@ theorem forall_not_dvd_iff {p : ℕ} (hp : p = 1 ∨ p.Prime) (d : ℤ) :
       rcases hp with rfl | hp
       · rw [one_pow, Nat.eq_one_iff_not_exists_prime_dvd]
         exact fun q hq hqd => h q hq hq.one_lt.ne' (Int.natCast_dvd.2 hqd)
-      · refine Nat.eq_prime_pow_of_unique_prime_dvd (Int.natAbs_ne_zero.2 hd) fun {q} hq hqd => ?_
-        by_contra hqp
-        exact h q hq hqp (Int.natCast_dvd.2 hqd)
+      · exact Nat.eq_prime_pow_of_unique_prime_dvd (Int.natAbs_ne_zero.2 hd) fun hq hqd =>
+          by_contra fun hqp => h _ hq hqp (Int.natCast_dvd.2 hqd)
     generalize d.natAbs.primeFactorsList.length = k at hn
     have hn' : (d.natAbs : ℤ) = (p : ℤ) ^ k := by exact_mod_cast hn
     refine ⟨k, ?_⟩
@@ -129,8 +128,7 @@ theorem criterion [DecidableEq C'] {p : ℕ} (hp : p = 1 ∨ p.Prime) (N : Matri
     obtain ⟨ℓ, hℓp, hℓ⟩ := Nat.exists_infinite_primes (p + 1)
     have := Fact.mk hℓ
     have hc := card_eq_of_bijective N ℓ (h ℓ (by omega))
-    let e : C' ≃ C := Fintype.equivOfCardEq hc.symm
-    exact ⟨hc, e, (criterion_of_equiv hp N e).1 h⟩
+    exact ⟨hc, Fintype.equivOfCardEq hc.symm, (criterion_of_equiv hp N _).1 h⟩
   · rintro ⟨-, e, he⟩
     exact (criterion_of_equiv hp N e).2 he
 
