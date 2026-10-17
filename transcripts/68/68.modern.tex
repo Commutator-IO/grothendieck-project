@@ -28,6 +28,15 @@
 % the p. 52 footnote says the « 82 » is on that copy alone, is not
 % transcribed, and is in a hand the facsimile does not attribute.
 %
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — section VI gets the Lean
+% check of lean/Grothendieck/Folder68.lean (Hom.bijective, Hom.ext_app,
+% exists_unique_hom, Theory.fixes_iff_det_pos, Theory.not_fixes_reflect):
+% footnotes say that a) and b) hold, that bijectivity of St must be an axiom,
+% that a) and uniqueness in b) use neither the opposite-half-space axiom nor
+% the naturality of St (the former serves only existence), and that the « de
+% proche en proche » of p. 51 is mathlib's transvection/diagonal induction.
+% No literature (the finding is unsearched); no facsimile change since.
+%
 % Spine. Five subjects on loose leaves; no link between them is written.
 %  (1) Positional games, in three moutures kept distinct:
 %      A  pp. 1-13, pencil, numbered 1-5 (6 is a title only): data
@@ -1654,7 +1663,12 @@ involution $a_P$, soulignée.}
 
 \textbf{Lemme 1.} Pour $\varphi : P \to Q$ entre ensembles à deux éléments,
 sont équivalents : $\varphi$ bijective, injective, surjective, non constante,
-$\mathbb{Z}/2$-équivariante ($\varphi \circ \tau_P = \tau_Q \circ \varphi$).
+$\mathbb{Z}/2$-équivariante ($\varphi \circ \tau_P = \tau_Q \circ \varphi$).\footnote{Les
+faits de ce genre dont la vérification a besoin (deux injections qui
+coïncident en un point sont égales ; une bijection fixe tous les points ou
+aucun) sont vérifiés en Lean (lean/Grothendieck/Folder68.lean,
+\texttt{eq\_of\_inj\_of\_eq}, \texttt{fix\_all\_or\_none}) ; le lemme 2
+n'y est pas formalisé.}
 
 \textbf{Lemme 2.} Pour $\varphi : P \times Q \to R$ entre ensembles à deux
 éléments, $\varphi$ se factorise par un isomorphisme
@@ -1682,8 +1696,10 @@ soumise à deux axiomes : $\mathrm{St}_{V'}$ est bijective, et si $V''$ est le
 demi-espace opposé, $\mathrm{St}_{V''} = \tau \circ \mathrm{St}_{V'}$.\footnote{La page écrit $\mathrm{St}_{V''} = a \circ \mathrm{St}_V$ ; on lit
 $\mathrm{St}_{V'}$. Le premier axiome est d'abord justifié par le seul
 cardinal, ce qui ne suffit pas : une application entre deux ensembles à deux
-éléments peut être constante. Le mot « vectoriels » est d'une lecture
-incertaine.} Par le lemme 2, il revient au même de demander que, en notant
+éléments peut être constante. La vérification en Lean
+(lean/Grothendieck/Folder68.lean) prend donc la bijectivité pour axiome,
+comme ici ; elle sert à chaque pas de la récurrence ci-dessous. Le mot
+« vectoriels » est d'une lecture incertaine.} Par le lemme 2, il revient au même de demander que, en notant
 $D(W, V)$ l'ensemble à deux éléments des demi-espaces bordés par $W$, les
 applications de Stokes se factorisent en un isomorphisme
 naturel\footnote{La page note cet ensemble $\mathrm{Dem}_{W,V}$, lecture
@@ -1704,7 +1720,17 @@ seul isomorphisme. c) Il existe une théorie de l'orientation.
 Pour a) et l'unicité dans b), on raisonne par récurrence sur la dimension :
 $\varphi_V$ est déterminé, et bijectif, par
 $\varphi_W \circ \mathrm{St}_{V'} = \mathrm{St}'_{V'} \circ \varphi_V$,
-puisque les applications de Stokes sont bijectives. L'existence dans b) et c)
+puisque les applications de Stokes sont bijectives.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder68.lean, \texttt{Hom.bijective} pour a),
+\texttt{Hom.ext\_app} pour l'unicité dans b)). La vérification montre que
+cet argument n'utilise que la bijectivité des applications de Stokes, la
+compatibilité du morphisme à b) et à c) et l'identification de
+$\Omega(0)$ : ni l'axiome du demi-espace opposé ni la naturalité de
+$\mathrm{St}$ n'y servent. L'axiome de l'opposé ne sert qu'à l'existence
+dans b). Sans lui, remarque de l'édition non formalisée, la théorie où
+$\Omega(V) = \{\pm 1\}$, avec action triviale et applications de Stokes
+identiques, vérifierait les autres axiomes sans être isomorphe aux
+orientations usuelles.} L'existence dans b) et c)
 passe par une description des théories en termes de groupes.
 
 \pagerange{49}{51}
@@ -1734,7 +1760,16 @@ entier, que la page fait « de proche en proche », utilise que tout
 homomorphisme $\mathrm{GL}(n, \mathbb{R}) \to \{\pm 1\}$ se factorise par le
 déterminant, le groupe dérivé étant $\mathrm{SL}(n, \mathbb{R})$ ; il est
 donc déterminé par ses valeurs sur les matrices diagonales
-$\operatorname{diag}(1, \ldots, 1, \lambda)$. La note marginale, lue
+$\operatorname{diag}(1, \ldots, 1, \lambda)$. La conclusion
+$\varepsilon_n = \operatorname{sg} \circ \det$ est vérifiée en Lean
+(lean/Grothendieck/Folder68.lean, \texttt{Theory.fixes\_iff\_det\_pos}),
+par une autre voie que le groupe dérivé : toute matrice inversible est
+produit de transvections et de matrices diagonales, principe de récurrence
+que mathlib tire d'une variante du pivot de Gauss
+(\texttt{Matrix.diagonal\_transvection\_induction\_of\_det\_ne\_zero}) ;
+transvections et matrices diagonales positives sont des carrés, donc agissent
+trivialement, et $\operatorname{diag}(1, \ldots, 1, -1)$ échange les deux
+éléments par l'axiome de l'opposé (\texttt{Theory.not\_fixes\_reflect}). La note marginale, lue
 « choisi $\mathbb{R}^{n-1} \times \mathbb{R}^+$ comme demi-espace de
 $\mathbb{R}^n$ », a son premier mot incertain. La page 49 écrit la donnée de
 Stokes $\Omega(V, W) \wedge \Omega(W) \to \Omega(W)$ ; le second facteur est
@@ -1746,7 +1781,11 @@ $\Omega(V)$.}
 Les caractères sont donc imposés, et une théorie se réduit aux bijections
 $s_n : \omega_n \to \omega_{n-1}$ et à $\omega_0 \simeq \{\pm 1\}$, qui
 identifient tous les $\omega_n$ à $\{\pm 1\}$ : d'où l'unicité à isomorphisme
-unique près, et l'existence en prenant pour $\Omega(V)$ l'ensemble des deux
+unique près,\footnote{L'existence d'un morphisme entre deux théories, par
+cette réduction (éléments de référence $r_n$ avec $s_n(r_n) = r_{n-1}$,
+transportés à tout $V$ par une carte), est vérifiée en Lean
+(lean/Grothendieck/Folder68.lean, \texttt{exists\_unique\_hom}) ;
+l'existence c) d'une théorie ne l'est pas.} et l'existence en prenant pour $\Omega(V)$ l'ensemble des deux
 orientations usuelles de $V$. C'est ce que disait un passage encadré et
 biffé d'une grande croix, dont la conclusion est « donc
 $\omega_n \simeq \{\pm 1\}$ ».
