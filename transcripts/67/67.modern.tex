@@ -24,6 +24,15 @@
 % longer says Roquette published Tate's manuscript (Roquette 1970 expounds
 % the theory, Tate's text appeared in 1995; cited from memory); the p. 100
 % footnote no longer says the page writes « à » above the struck « sans ».
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — the cover date of p. 1
+% corrected after the facsimile checks of 2026-09-27 and 2026-10-17: it reads
+% « (1976 ou 77 ?) », in the archivist's hand, not « (1978 ou 77 ?) » in his;
+% pp. 1-13 now dated « vers 1977 » (résumé, « Les pièces et leur date »,
+% section I). Section XII: k need not be commutative (« par exemple » on the
+% page), and the Proposition's footnote records the Lean check
+% (Folder67.lean): an equivalence for any ring, no finiteness, 2-regularity
+% the only hypothesis. No mathlib result invoked; the finding's literature
+% is unsearched, so none is cited.
 %
 % Page numbers. Every page reference is the transcription's \page{}: the
 % leaf's rank in the folder, confirmed by the Montpellier footer. From p. 22
@@ -53,7 +62,7 @@
 % states: how the Teichmüller space of curves with nu marked points sits in
 % the Teichmüller space of bordered surfaces (Thurston's, with boundary
 % lengths), through the surgery that caps each hole with a canonical disc.
-% Stations: the 1977-78 programme of surgeries (pp. 1-6); the Nagoya
+% Stations: the c. 1977 programme of surgeries (pp. 1-6); the Nagoya
 % envelopes, an elliptic curve with a closed geodesic (pp. 8-13, 1977); the
 % letter (pp. 15-21, 15.4.1984); canonical metrics, which make the capping
 % canonical (pp. 23-45, read in the order above); Teichmüller isomorphisms
@@ -159,7 +168,8 @@ découper, recoudre, rapiécer. L'étoffe est ici une surface de Riemann ---
 une surface sur laquelle on sait mesurer les angles, mais pas encore les
 longueurs --- et la question est de savoir ce que ces gestes font à sa forme.
 Grothendieck appelle cela la \emph{chirurgie des surfaces conformes}. Le mot
-est sur une chemise de 1977 ou 1978, et l'essentiel des feuillets date de
+est de sa main sur une chemise que l'archiviste date, avec un point
+d'interrogation, de 1976 ou 1977 ; l'essentiel des feuillets date de
 décembre 1983 à avril 1984.
 
 Le problème vient de ce qu'il existe, au début des années 1980, deux façons
@@ -242,8 +252,13 @@ raturé. On les cite comme « son feuillet $n$ ».
 époques.
 
 \begin{enumerate}
-  \item \emph{Pages 1 à 13}, fin 1977 ou 1978. La chemise (page 1) porte le
-  titre et « (1978 ou 77 ?) » de sa main. Un programme de chirurgie occupe les
+  \item \emph{Pages 1 à 13}, vers 1977. La chemise (page 1) porte le
+  titre de sa main, et « (1976 ou 77 ?) » d'une autre main, celle de
+  l'archiviste.\footnote{Vérifié sur le fac-similé par Michel Hua : le
+  27 septembre 2026, la date se lit « 1976 ou 77 », non « 1978 ou 77 » ; le
+  17 octobre 2026, elle est de la main de l'archiviste, non de celle de
+  Grothendieck. Elle n'est donc pas un témoignage de l'auteur ; la seule date
+  observée de ces pages reste le cachet de Nagoya.} Un programme de chirurgie occupe les
   pages 2 à 6 (section I). Suivent trois brouillons d'une même liste, écrits
   sur des enveloppes (pages 8 à 13, section II) ; l'une d'elles porte le
   cachet de l'université de Nagoya du 20 décembre 1977, date observée sur le
@@ -368,7 +383,8 @@ la page 86, illisible.
 \subsection*{Les opérations (pages 2 et 3)}
 
 La chemise porte le titre du dossier, « Chirurgie des surfaces conformes »,
-suivi d'un mot illisible et de « (1978 ou 77 ?) ». La page 2 reprend le titre
+suivi d'un mot illisible ; « (1976 ou 77 ?) » y est ajouté par
+l'archiviste. La page 2 reprend le titre
 et énumère des opérations sur une surface conforme $X$, éventuellement à
 bord.
 
@@ -1911,7 +1927,11 @@ La page 90 est datée « Déc 83 ».
 \pagerange{90}{91}
 \subsection*{Modules munis d'une involution (pages 90, 91 et 99)}
 
-Soit $k$ un anneau commutatif, et $M$ un $k$-module muni d'un automorphisme
+Soit $k$ un anneau, commutatif ou non,\footnote{La page écrit « Soit $k$
+un anneau (par exemple commut.) », « par exemple » lu avec doute. La
+commutativité ne sert nulle part : $2$ est central dans tout anneau, de sorte
+que $2M$ est un sous-module. La vérification en Lean est faite
+sans elle (voir la note de la proposition ci-dessous).} et $M$ un $k$-module muni d'un automorphisme
 $\sigma$ tel que $\sigma^{2} = \mathrm{id}$, avec $M$ \emph{$2$-régulier} :
 la multiplication par $2$ y est injective. On pose
 \[
@@ -1936,7 +1956,18 @@ $2$ est un isomorphisme de $(M,\sigma)$ sur $(M', \sigma)$.
 équivalence entre la catégorie des modules $2$-réguliers à involution et celle
 des triples formés de deux modules $2$-réguliers et d'un sous-module $m$ de
 $P/2P \oplus Q/2Q$ qui rencontre trivialement chacun des deux
-facteurs.\footnote{La page 91 est le brouillon de ce calcul, sur un listing
+facteurs.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder67.lean, \texttt{equivalence},
+\texttt{inverse\_obj\_iso}, \texttt{essSurj\_witness}). L'énoncé tient pour
+tout anneau $k$, même non commutatif, sans hypothèse de finitude ni de
+projectivité sur $M$, $P$ ou $Q$ : la $2$-régularité est la seule hypothèse
+utilisée. Elle sert pour $P \cap Q = 0$, pour $M' \cap P = 2P$ et
+$M' \cap Q = 2Q$, et pour la plénitude, un morphisme étant déterminé par sa
+restriction à $2P \oplus 2Q$ puisque le but est $2$-régulier. La page ne
+définit pas les morphismes de triples ; la vérification prend, de nous, les
+couples $(f, g)$ tels que $(\bar f \oplus \bar g)(m) \subset m'$, et la
+description de $m$ comme graphe n'y est pas formalisée, non plus que les deux
+corollaires (pages 90 et 99).}\footnote{La page 91 est le brouillon de ce calcul, sur un listing
 daté du 19 août 1982. Elle écrit $\sigma(x,y) = x - y$ pour
 $\sigma(x,y) = (x, -y)$, et une partie en est barrée.}
 
