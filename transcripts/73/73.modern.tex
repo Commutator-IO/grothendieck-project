@@ -12,6 +12,13 @@
 % (pp. 1-20) or batch-02.fr.tex (pp. 21-28).
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — with the Lean check
+% (Folder73.lean): p. 5's u_1 ^ u_3 corrected to mu_1 - mu_2 = mu_0 - mu_3 (the
+% page's table, copied by the first pass, is false there); the sign of the
+% canonical identification e_i -> (-1)^i p_i; « épi ? » and the criterion of
+% p. 28 footnoted as checked. No mathlib result, no literature recorded by the
+% findings, no facsimile correction since the pass. Two « Ce que » headings
+% renamed.
 % The folder was read whole, both batches together; this is one document for
 % the shelfmark. It was made on Opus 5.5 and has not been measured against the
 % reference reading of folder 115 (made on Opus 5). The literature named in the
@@ -73,6 +80,8 @@
 %    shown false (p. 15, i = 2: the sign of the lambda_0 term) in a footnote.
 %
 % Substantive departures from the pages, each footnoted where it occurs:
+%  - p. 5: the table's u_1 ^ u_3 = mu_0 - mu_2 and first value of u_2 ^ u_0
+%    are false; u_1 ^ u_3 = mu_1 - mu_2 = mu_0 - mu_3 is written (Lean).
 %  - p. 16: the first displayed result for the vertex s_2 has the wrong sign;
 %    the vertex is s_2, not the page's s_1. The boxed lambda_0 + lambda_1 = 0
 %    stands.
@@ -261,9 +270,9 @@ on suit l'indexation des pages 25 à 28. Le vecteur constant $w$ s'appelle $u$
 aux pages 3, 4 et 12 et a pour coordonnées $(\nu, -\mu)$ à la page 14 ; on le
 renomme pour garder $u$ libre.}.
 
-\subsection*{Ce que seule une lecture d'ensemble peut dire}
+\subsection*{Trois raccords d'ensemble}
 
-Trois raccords, qu'aucune page ne fait.
+Aucune page ne fait ces trois raccords.
 
 Le $N(u_*)$ du théorème final est l'espace des multiplicateurs de Lagrange de
 la page 14 : la relation à quatre termes des pages 20 à 28 est la différence
@@ -281,7 +290,7 @@ pages 15 et 18 avec $\lambda_0 = 0$, et l'ennéagone étoilé de la page 18 en
 est un exemple : son espace de multiplicateurs est une droite, engendrée par
 un vecteur nul en $0$ et en $0$ seulement.
 
-\subsection*{Ce que le dossier annonce sans l'établir}
+\subsection*{Annoncé, non établi}
 
 La condition qui définit l'ouvert $\mathcal{U}$ de la page 1 est biffée ; les
 comptes de dimensions de la page 4 ne se lisent plus ; le système des équations
@@ -376,7 +385,7 @@ trouve
 \[
   u_0 \wedge u_2 = \mu_0 - \mu_1 = \mu_3 - \mu_2 ,
   \qquad
-  u_1 \wedge u_3 = \mu_0 - \mu_2 ,
+  u_1 \wedge u_3 = \mu_1 - \mu_2 = \mu_0 - \mu_3 ,
 \]
 d'où la relation
 \[
@@ -388,7 +397,17 @@ $(u_0 + u_1) \wedge (u_1 + u_2)$, le produit extérieur des deux
 diagonales\footnote{Page 5, la deuxième ligne du calcul de $u_0 \wedge u_2$
 doit se lire $-u_0 \wedge (u_1 + u_3)$ ; le signe est surchargé. Page 17, le
 point d'interrogation de « $\overset{?}{=}$ » est levé par le calcul qui
-suit, que la page conclut d'un « ok ».}.
+suit, que la page conclut d'un « ok ». Le tableau de la page 5 donne
+$u_1 \wedge u_3 = \mu_0 - \mu_2$, ce qui est faux : le quadrilatère
+$(e_1, e_2, e_2, -e_1 - 2e_2)$ a $u_1 \wedge u_3 = 1$ et $\mu_0 - \mu_2 = 2$ ;
+la valeur juste, qu'on écrit, est celle que la quatrième ligne du même tableau
+donne pour $u_3 \wedge u_1 = \mu_2 - \mu_1$. À la troisième ligne, la première
+valeur donnée pour $u_2 \wedge u_0$, $\mu_1 - \mu_3$, est fausse de même (il
+faut $\mu_2 - \mu_3$), la seconde, $\mu_1 - \mu_0$, est juste. La relation
+$\mu_0 + \mu_2 = \mu_1 + \mu_3$ ne dépend que de $u_0 \wedge u_2$. Vérifié en
+Lean (lean/Grothendieck/Folder73.lean, \texttt{mu\_relation} et
+\texttt{not\_wedge13\_eq}) : la relation et les valeurs justes valent sur tout
+anneau commutatif, et la ligne du tableau est réfutée par cet exemple.}.
 
 Soit $\mathbf{M}_4$ l'ensemble des quadrilatères fermés non contenus dans une
 droite, à transformation affine près. L'application
@@ -416,7 +435,14 @@ après les formules ci-dessus : la question est réglée par ces formules
 elles-mêmes, ce qu'on dit ici. L'indice $\mathbf{Z}$ indique qu'il pense
 l'énoncé sur $\mathrm{Spec}\,\mathbf{Z}$ ; on ne l'a vérifié que sur un corps.
 Il ne précise pas ce qu'il exclut ; les quadrilatères alignés ont tous leurs
-$\mu_i$ nuls et n'ont pas d'image.}.
+$\mu_i$ nuls et n'ont pas d'image. Vérifié en Lean
+(lean/Grothendieck/Folder73.lean, \texttt{quad\_moduli} et
+\texttt{exists\_quad\_of\_mu}), sur un corps : deux quadrilatères fermés, le
+premier non aligné, ont des $\mu_i$ proportionnels de rapport non nul si et
+seulement si l'un est l'image de l'autre par une application linéaire
+inversible, de déterminant égal au rapport, et tout point non nul du plan
+$\mu_0 + \mu_2 = \mu_1 + \mu_3$ est atteint : la réponse à « épi ? » est oui.
+L'énoncé sur $\mathrm{Spec}\,\mathbf{Z}$ n'est pas formalisé.}.
 
 \emph{Les quadrilatères dégénérés.} Un côté est nul si et seulement si les deux
 aires qui le contiennent le sont : $u_i = 0$ équivaut à
@@ -435,7 +461,17 @@ $\mathbf{M}(\Pi)$ des quadrilatères de type $\Pi$ s'identifie canoniquement au
 plan projectif engendré par $A$, c'est-à-dire au plan
 $\mathbf{P}\bigl(k^{A} / k\cdot(1,1,1,1)\bigr)$ dont les quatre points de
 repère sont les arêtes, chaque arête correspondant au quadrilatère où elle est
-réduite à un point\footnote{La page dit « l'enveloppe projective de $A$ »,
+réduite à un point\footnote{L'identification demande un signe :
+l'application $e_i \mapsto (-1)^i p_i$, où $p_i$ est le quadrilatère dégénéré
+de côté $u_i$ nul, a pour noyau $k\cdot(1,1,1,1)$ et pour image le plan,
+tandis que $e_i \mapsto p_i$ a pour noyau $k\cdot(1,-1,1,-1)$ ; les droites,
+donc les points de repère, sont les mêmes. Vérifié en Lean
+(lean/Grothendieck/Folder73.lean, \texttt{frame\_canonical},
+\texttt{framePt\_three\_indep}, \texttt{side\_eq\_zero\_iff},
+\texttt{mu\_eq\_smul\_framePt}) : $u_i = 0$ équivaut à
+$\mu_i = \mu_{i+1} = 0$, le vecteur des aires est alors $\mu_{i+2}\, p_i$ avec
+$\mu_{i+2} \neq 0$, et la seule relation entre les $p_i$ est
+$p_0 - p_1 + p_2 - p_3 = 0$.}\footnote{La page dit « l'enveloppe projective de $A$ »,
 « enveloppe » étant lu avec doute ; la formule
 $\mathbf{P}(k^{A}/k\cdot(1,1,1,1))$ est la nôtre. La page 6 ne nomme que trois
 des quatre points ; leur « rang 3 » et le mot « coplanaires » sont des lectures
@@ -640,8 +676,8 @@ forme vectorielle, encadrée, avec une simple juxtaposition
 L'en-tête de la transcription rapproche cette juxtaposition du déterminant ;
 elle ne peut pas l'être : avec $u_{i-1} \wedge u_i$, la relation $(L)$ en
 $i = 1$ donne pour $i = 2$ le terme $+\lambda_0\, u_{-1} \wedge u_1$, de signe
-opposé à celui de la formule. Ce que la page établit, coordonnée par
-coordonnée, est l'identité dans $\operatorname{Sym}^2 V$ qu'on écrit ici ; le
+opposé à celui de la formule. La page établit, coordonnée par
+coordonnée, l'identité dans $\operatorname{Sym}^2 V$ qu'on écrit ici ; le
 nom est le nôtre.}. Éliminant $\lambda_i$ entre la formule en $x$ et la formule
 en $y$, la page en tire, pour $2 \leqslant i \leqslant n-1$, une relation
 linéaire entre $\lambda_0$ et $\lambda_1$ seuls :
@@ -1146,7 +1182,20 @@ $(S_i)$, pour $2 \leqslant i \leqslant n-1$, a une solution $\lambda_i$ si et
 seulement si b) a lieu, puisque dans un plan deux produits de vecteurs non nuls
 sont proportionnels exactement quand ils portent la même paire de droites.
 Enfin $\lambda_i = 0$ si et seulement si $u_1 \cdot u_{0i} = 0$, si et
-seulement si $u_{0i} = 0$\footnote{La page écrit le critère sous la forme
+seulement si $u_{0i} = 0$\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder73.lean, \texttt{zero\_multiplier\_criterion}) : le
+critère tient tel qu'on l'énonce, sur un corps quelconque, et le « il faut et
+il suffit » de la page est juste. Le pas « deux produits de vecteurs non nuls
+sont proportionnels exactement quand ils portent la même paire de droites »
+y est démontré (\texttt{symProd\_proportional\_iff}), en évaluant les formes
+quadratiques aux vecteurs orthogonaux aux quatre vecteurs. La formule
+$\lambda_i\, u_{i-1} \cdot u_i = u_1 \cdot u_{0i}$ vaut pour tout $i \geqslant 1$
+(\texttt{symProd\_formula}), le multiplicateur est unique
+(\texttt{mult\_unique}), $\lambda_i = 0$ exactement quand $s_i = s_0$
+(\texttt{mult\_eq\_zero\_iff}), et deux composantes consécutives nulles
+annulent $\lambda$ (\texttt{eq\_zero\_of\_consecutive}), ce qui justifie la
+normalisation $\lambda_1 = 1$. Le théorème des quatre cas de la page 28 et
+l'ennéagone de la page 18 ne sont pas formalisés.}\footnote{La page écrit le critère sous la forme
 « a) $\sum u_i = 0$ ; b) $\forall\, 1 \leqslant i \leqslant n-1$, on ait
 $u_{i-1}, u_i \parallel u_1, u_{0i}$ », et « si on normalise ($\lambda_1 = 1$),
 on aura $\lambda_i$ défini par $u_1 u_{0i} = \lambda_i u_i u_{i-1}$ » ; le
