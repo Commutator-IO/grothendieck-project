@@ -6,6 +6,12 @@
 %
 % Pass: Opus 5 (claude-opus-5), 2026-08-30 — first pass, unchecked against the
 % pages by a human. The folder was read whole; it holds one batch, pages 1-8.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — refined with the Lean check
+% of lean/Grothendieck/Folder44.lean: on page 4 the governing word before « en
+% fait gamma_alpha in P' » is illegible, so the reading no longer says the
+% leaf asserts integrality; indivisibility gives it, axioms a)-c) alone do not
+% (counterexample in Z^2, type B_2). The readings of page 7 checked on the
+% facsimile (« des VA », « des conjectures ») already agree.
 %
 % Notation fixed for the whole document. The folder writes the intermediate
 % Jacobian two ways: P^i(X) on the three sheets of the programme (pages 1, 3,
@@ -546,21 +552,46 @@ fois au moyen d'une seule forme quadratique invariante, écrite explicitement :
 
 De là, $S_{\alpha}x = x - \langle\gamma_{\alpha}, x\rangle\,\alpha$ pour un
 $\gamma_{\alpha}\in (P')^{\mathbb{Q}}$ bien déterminé — c'est la coracine
-$\alpha^{\vee}$ — et le feuillet affirme qu'en fait $\gamma_{\alpha}$ est
-entier, c'est-à-dire que les nombres
+$\alpha^{\vee}$ — et le feuillet en vient à « en fait $\gamma_{\alpha} \in
+P'$ », c'est-à-dire à l'intégralité des nombres
 
 \[
   c_{\alpha\beta} \;=\; \langle\gamma_{\alpha},\beta\rangle
 \]
 
-sont dans $\mathbb{Z}$ : ce sont les entiers de Cartan. La raison qu'il en donne
-tient à ce que $\alpha$ soit indivisible dans $P$, du fait de pouvoir faire
-partie d'un « système fondamental de racines ».\footnote{Ce dernier crochet est
-en partie illisible et la lecture ne le reconstitue pas au-delà de sa forme
-générale. L'ordre choisi est remarquable en lui-même : dans la présentation
-usuelle l'intégralité des $\langle\alpha^{\vee},\beta\rangle$ est un
-\emph{axiome} ; ici elle est une \emph{conséquence}, tirée de la forme
-quadratique canonique et de l'indivisibilité des racines.}
+--- les entiers de Cartan. Le mot qui gouverne la phrase est illisible, si
+bien qu'on ne sait pas si le feuillet l'affirme, se propose de le montrer ou le
+demande. La raison donnée entre crochets tient à ce que $\alpha$ soit
+indivisible dans $P$, du fait de pouvoir faire partie d'un « système
+fondamental de racines ».\footnote{Ce dernier crochet est en partie illisible
+et la lecture ne le reconstitue pas au-delà de sa forme générale. La première
+version de cette lecture prenait la phrase pour une affirmation et disait
+l'ordre « remarquable » : l'intégralité, axiome dans la présentation usuelle,
+y serait une conséquence. Elle l'est de l'indivisibilité, non des trois
+conditions ; voir la note suivante.}
+
+L'indivisibilité suffit bien : si $\alpha$ est indivisible dans un sous-groupe
+$P$ d'un $\mathbb{Q}$-espace vectoriel et si $x - f(x)\,\alpha \in P$ pour
+$x \in P$, alors $f(x) \in \mathbb{Z}$, sans hypothèse de rang ni de
+finitude. Mais les trois conditions seules ne donnent ni l'indivisibilité ni
+l'intégralité.\footnote{Contre-exemple de l'édition. Dans $P = \mathbb{Z}^{2}$,
+$\Delta = \{\pm 3e_{1}, \pm 3e_{2}, \pm(e_{1}+e_{2}), \pm(e_{1}-e_{2})\}$
+engendre $P$, est réduit (même avec $n \in \mathbb{Q}$, comme l'écrit la page)
+et stable par les quatre réflexions du groupe de Weyl de type $B_{2}$. La
+symétrie de $3e_{1}$ de la forme $x \mapsto x - f(x)\cdot 3e_{1}$ est unique,
+et $f(e_{1}+e_{2}) = 2/3$, tandis que $3e_{1}$ est divisible dans $P$. Le
+système simple $\{3e_{1}, e_{2}-e_{1}\}$ du groupe de réflexions n'en est un
+qu'à coefficients rationnels, puisque $e_{1}+e_{2} = \tfrac{2}{3}\cdot 3e_{1} +
+(e_{2}-e_{1})$ : l'appel du crochet à un système fondamental n'est donc pas
+réfuté --- un élément d'un système fondamental entier fait partie d'une base
+de $P$, donc est indivisible ---, et c'est un tel système que les trois
+conditions ne fournissent pas. Vérifié en Lean
+(lean/Grothendieck/Folder44.lean, \texttt{cartan\_int\_of\_indivisible} pour le
+pas de l'indivisibilité à l'intégralité, \texttt{axioms\_not\_integral},
+\texttt{cartan\_eq\_two\_thirds} et \texttt{not\_integral\_base} pour le
+contre-exemple).} L'intégralité est donc ici une conséquence de
+l'indivisibilité des racines, et l'existence d'un système fondamental entier
+est l'hypothèse qui la porte.
 
 \subsection*{La donnée radicielle}
 
