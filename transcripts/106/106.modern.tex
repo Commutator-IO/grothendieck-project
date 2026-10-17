@@ -71,6 +71,22 @@
 %   replaced by what pages 9 and 11 contain.
 % — pages 14-15 footnote: « la préparation de ce diagramme » replaced by a
 %   description of the page-14 block; no order between the two is asserted.
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% checks (lean/Grothendieck/Folder106.lean), mathlib and the literature of
+% finding 106-section-criterion-span-faithfulness:
+% — pages 1, 9, 11: weak lifting, Brown's factorisation and W_0^{-1}C = W^{-1}C
+%   footnoted as checked in Lean, with the hypotheses the proofs do not use
+%   (alpha_x in W; f in W except for i in W); y~' cofibrant made explicit.
+%   Mathlib's model-category form of Brown's lemma named, with its reference.
+% — pages 11-15: the composition of page 11's diagrams written out (the C2
+%   clause it needs); (**) and the faithfulness of q' are no longer « open »:
+%   the edition proves, in Lean, that q' is an isomorphism with no further
+%   condition, so (**) always holds. The page's statement stays the page's;
+%   the proof, which never compares two sections, is the edition's. The
+%   « Ce que le dossier annonce » heading renamed; résumé and last footnote
+%   brought into line; Cisinski 2010 and Rădulescu-Banu §6.4, read for the
+%   finding on 2026-09-26, cited with what they give.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -114,8 +130,11 @@ précise sur les sections d'une équivalence faible, qui n'est pas démontrée.
 
 C'est une page de travail au sens propre : on y voit l'endroit exact où une
 construction résiste, et la manière dont on déplace la définition plutôt que
-de forcer la preuve. L'un des deux doutes peut d'ailleurs être levé avec ce
-que contient la page 9, que la page 11 n'invoque pas.
+de forcer la preuve. Les deux doutes se lèvent d'ailleurs. Le premier avec ce
+que contient la page 9, que la page 11 n'invoque pas. Le second par une
+démonstration de l'édition, vérifiée sur machine : la définition rectifiée
+donne bien la catégorie homotopique, sans condition supplémentaire, de sorte
+que la condition finale est toujours remplie.
 
 \keywords{cofibration category, localization, homotopy category, cofibrant replacement, Brown factorization lemma, calculus of fractions}
 \end{resume}
@@ -166,10 +185,12 @@ $f \in \mathrm{cof}$ et $i \in W$. On écrit ici $\mathrm{Ch}_{0}$ pour la
 première, $\mathrm{Ch}'_{0}$ pour la seconde, et $\widetilde{\mathcal{C}}$,
 $\widetilde{\mathcal{C}}'$ pour les catégories qu'on en tire.
 
-\emph{Ce que le dossier annonce et n'établit pas} : que le choix des
+\emph{Annoncé, non établi sur les feuillets} : que le choix des
 factorisations dans la construction rectifiée n'importe pas, ramené à
 $(\star\star)$ ; que $(\star\star)$ suffise à la fidélité ; et donc que
-$\widetilde{\mathcal{C}}' \to W^{-1}\mathcal{C}$ soit un isomorphisme.
+$\widetilde{\mathcal{C}}' \to W^{-1}\mathcal{C}$ soit un isomorphisme. Ces
+trois points sont vrais, et l'édition les démontre à la fin de la dernière
+section, par un autre chemin que celui des pages 13 à 15.
 
 \pagerange{1}{3}
 \section*{Les objets cofibrants suffisent (pages 1 à 3)}
@@ -206,9 +227,16 @@ On l'obtient en factorisant $(\alpha_{y}, f\alpha_{x}) : \widetilde{y} \vee
 \widetilde{x} \to y$ en une cofibration suivie d'une équivalence faible ;
 $\widetilde{y} \to \widetilde{y} \vee \widetilde{x}$ est une cofibration parce
 que $\widetilde{x}$ est cofibrant, et $i$ est dans $W$ par
-deux-sur-trois.\footnote{La page invoque le « weak lifting lemma » de Baues
-sans l'énoncer ; on donne la forme sous laquelle elle l'utilise et la manière
-de l'obtenir sous C1--C3.}
+deux-sur-trois. Enfin $\widetilde{y}'$ est cofibrant, puisque $\widetilde{y}$
+l'est et que $i$ est une cofibration.\footnote{La page invoque le « weak
+lifting lemma » de Baues sans l'énoncer ; on donne la forme sous laquelle
+elle l'utilise et la manière de l'obtenir sous C1--C3. Que $\widetilde{y}'$
+soit cofibrant est de nous : la page s'en sert sans le dire, en plaçant
+$[i]^{-1}[\widetilde{f}]$ dans $W_{\mathrm{cof}}^{-1}\mathcal{C}_{\mathrm{cof}}$.
+Vérifié en Lean (lean/Grothendieck/Folder106.lean, \texttt{remplacementCofibrant}
+et \texttt{relevementFaible}) : l'énoncé tient tel quel ; l'hypothèse
+$\alpha_{x} \in W$ ne sert pas, et $\widetilde{y}$ cofibrant ne sert qu'à
+rendre $\widetilde{y}'$ cofibrant (\texttt{relevementFaible\_general}).}
 
 On pose $\Phi(f) = [i]^{-1}[\widetilde{f}] : \widetilde{x} \to \widetilde{y}$
 dans $W_{\mathrm{cof}}^{-1}\mathcal{C}_{\mathrm{cof}}$.
@@ -342,7 +370,16 @@ note en marge « on utilise $y \in \mathcal{C}_{\mathrm{cof}}$ ici ». Elle dit
 $i \in W \cap \mathrm{cof}$ et « $\alpha$ admet une section $g$ », sans
 relever que $g$ est aussi dans $\mathrm{cof} \cap W$ --- ce qui servira plus
 bas. C'est le lemme de factorisation de K.~S.~Brown ; le nom n'est pas sur la
-page.}
+page. Vérifié en Lean (lean/Grothendieck/Folder106.lean,
+\texttt{factorisationDeBrown}) : l'hypothèse $f \in W$ ne sert qu'à mettre $i$
+dans $W$ ; pour toute $f$ entre objets cofibrants, on a encore
+$i \in \mathrm{cof}$, $g \in \mathrm{cof} \cap W$ et $\alpha \in W$
+(\texttt{factorisationDeBrown\_general}). Mathlib a ce lemme pour les
+catégories de modèles (\texttt{HomotopicalAlgebra.CofibrantBrownFactorization},
+dont le fichier renvoie à K.~S.~Brown, « Abstract homotopy theory and
+generalized sheaf cohomology », Trans.\ AMS 186, 1973, § I.1) ; la
+vérification ne s'en sert pas, les axiomes de Baues n'étant pas ceux d'une
+catégorie de modèles.}
 
 \emph{L'inverse proposé.} « Je dis que $(g, i)$ est l'inverse cherché. » Pour
 voir que $(gf, i)$ est dans la composante de $\underline{1}_{x}$, on voudrait
@@ -393,7 +430,12 @@ page : que $W_{0}^{-1}\mathcal{C} = W^{-1}\mathcal{C}$ ne dit pas que les
 fractions $[i]^{-1}[f]$ à un seul dénominateur, prises à composante connexe
 près, suffisent à décrire les flèches, ni que deux fractions égales dans la
 localisation soient dans la même composante. C'est la fidélité de $q$ qui
-reste ouverte.}
+reste ouverte sur la page. Vérifié en Lean (lean/Grothendieck/Folder106.lean,
+\texttt{inverse\_W\_of\_inverse\_W}$_{0}$ et
+\texttt{localisation\_W}$_{0}$\texttt{\_iso\_localisation\_W}) : tous les objets
+étant cofibrants, les deux foncteurs entre $W_{0}^{-1}\mathcal{C}$ et
+$W^{-1}\mathcal{C}$ que donnent les propriétés universelles sont inverses
+l'un de l'autre, sans autre hypothèse.}
 
 \emph{La rectification.} Il change donc de définition : $\mathrm{Ch}'_{0}(x,y)$
 est la catégorie des diagrammes
@@ -407,6 +449,18 @@ la page 11 déplace la condition de cofibration du dénominateur au
 numérateur.\footnote{Il écrit $\underline{Ch}_{0}$ et $\widetilde{\mathcal{C}}$
 pour les deux constructions. C'est le point de bascule du dossier ; on les
 distingue par un prime.}
+
+La composition se définit comme à la page 5, par la somme amalgamée de
+$\widetilde{y} \xleftarrow{i} y \xrightarrow{g} \widetilde{z}$, qui existe
+cette fois parce que $g$ est une cofibration : $(g, j) \circ (f, i) = (g'f, kj)$, où $g'f$ est une cofibration par C2 et C1, et $k \in W$ par la clause de
+C2 qui fait d'une somme amalgamée de l'équivalence faible $i$ le long de la
+cofibration $g$ une équivalence faible. La flèche $q' :
+\widetilde{\mathcal{C}}' \to W^{-1}\mathcal{C}$, $(f, i) \mapsto
+[i]^{-1}[f]$, est alors un foncteur bien défini sur les
+composantes.\footnote{La page n'écrit pas cette composition ; elle est de
+nous. Vérifié en Lean (lean/Grothendieck/Folder106.lean, la catégorie
+\texttt{Rect} et le foncteur \texttt{qFunctor}) : la composition passe aux
+composantes, elle est associative et unitaire, et $q'$ est un foncteur.}
 
 \pagerange{13}{15}
 \section*{Comparer deux factorisations, et le critère $(\star\star)$ (pages 13 à 15)}
@@ -473,21 +527,58 @@ fidèle, les deux diagrammes définissent la même flèche de
 $\widetilde{\mathcal{C}}'$, c'est-à-dire sont dans la même composante. La suffisance est affirmée, et le dossier s'arrête
 là.\footnote{La page écrit « (nec.\ et) suffis. », la nécessité entre
 parenthèses. La construction est voisine de ce qu'on appelle aujourd'hui un
-\emph{calcul de fractions à homotopie près}. Les références qui suivent sont
-citées de mémoire, sans recherche : P.~Gabriel et M.~Zisman (1967) pour le
-calcul de fractions exact ; K.~S.~Brown (1973), pour les catégories d'objets
-fibrants, et D.-C.~Cisinski, pour les catégories dérivables, pour des
-descriptions des flèches de la catégorie homotopique par des fractions à un
-seul dénominateur ; W.~G.~Dwyer et D.~M.~Kan (vers 1980), et M.~Weiss pour
-les catégories de Waldhausen, pour des catégories de zigzags
+\emph{calcul de fractions à homotopie près}. Deux textes ont été lus pour
+l'édition le 26 septembre 2026 : A.~Rădulescu-Banu, \emph{Cofibrations in
+Homotopy Theory} (arXiv math/0610009), § 6.4, théorèmes 6.4.1, 6.4.4 et
+6.4.5, décrit les flèches de la catégorie homotopique d'une catégorie à
+cofibrations par des fractions à gauche identifiées à homotopie près, non
+par les composantes connexes d'une catégorie de diagrammes ; D.-C.~Cisinski,
+« Catégories dérivables » (Bull.\ SMF 138, 2010), §§ 1 et 3, traite le
+cadre dual des objets fibrants et y montre, d'après Brown, que le foncteur
+de la catégorie des objets fibrants, prise à homotopie près, vers la
+catégorie homotopique est fidèle. Ni l'un ni l'autre ne donne la forme des pages 11 à 15. Restent
+non lus, et cités de mémoire : P.~Gabriel et M.~Zisman (1967) pour le calcul
+de fractions exact ; K.~S.~Brown (1973) ; W.~G.~Dwyer et D.~M.~Kan (« Calculating
+simplicial localizations », 1980) et M.~Weiss (« Hammock localization in
+Waldhausen categories », 1999), pour des catégories de zigzags
 $x \to \cdot \leftarrow y$ dont les composantes connexes, sous des
-hypothèses convenables, donnent les flèches de la catégorie homotopique, forme
-proche de celle des pages 5 et 11. Cette
-lecture ne dit pas si $(\star\star)$, sous cette forme, figure dans la
-littérature, ni si elle est vraie sous C1--C3. Sa première rédaction
+hypothèses convenables, donneraient les flèches de la catégorie homotopique,
+forme proche de celle des pages 5 et 11 ; H.-J.~Baues, \emph{Algebraic
+Homotopy}, chapitre II. Cette lecture ne dit pas si $(\star\star)$, ou la
+description qui suit, figure dans la littérature. Sa première rédaction
 affirmait que la littérature n'utilise pas cette forme « à notre
-connaissance », et opposait les fractions de Brown et de Cisinski, prises à
-homotopie près, aux composantes connexes d'une catégorie de diagrammes ; ni
-l'un ni l'autre n'avait été vérifié.}
+connaissance » ; ce n'avait pas été vérifié.}
+
+\emph{La suffisance, et davantage, de l'édition.} Sous C1--C3, tous les
+objets étant cofibrants, $q'$ est un isomorphisme de catégories sans aucune
+condition, et $(\star\star)$ est donc toujours vérifiée : l'énoncé final est
+vrai, avec ses deux membres vrais. La démonstration est la nôtre et ne suit
+pas les pages 13 à 15, qui factorisent $f$ seule puis lui choisissent une
+section, ce qui oblige à comparer deux sections. Elle factorise plutôt
+$(F, 1_{z}) : x \sqcup z \to z$, comme à la page 9, en une cofibration
+$c : x \sqcup z \to \bar{z}$ suivie de $\alpha : \bar{z} \to z$ dans $W$ ; la
+section fait alors partie de la cofibration. Le point clé : tout diagramme
+$(f, i)$ de $\mathrm{Ch}'_{0}(x,z)$ muni d'une $\psi$ telle que $\psi i = 1_{z}$
+et $\psi f = F$ est dans la composante du diagramme de cette factorisation ;
+on le voit en prenant la somme amalgamée de $c$ et de $(f, i) : x \sqcup z \to
+\widetilde{z}$, puis en factorisant par C3 la flèche qu'induisent $\alpha$ et
+$\psi$ de cette somme vers $z$. On en tire un foncteur $\varphi : \mathcal{C}
+\to \widetilde{\mathcal{C}}'$, qui rend inversibles les flèches de $W_{0}$, donc
+celles de $W$ par l'argument de la page 11, et la composante de $(f, i)$ est
+$\varphi(i)^{-1}\varphi(f)$ ; le foncteur que $\varphi$ induit sur
+$W^{-1}\mathcal{C}$ est l'inverse de $q'$.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder106.lean) : la nécessité de $(\star\star)$ par
+l'argument de la page (\texttt{critere\_of\_fidele}) ; la fidélité de $q'$
+sans condition (\texttt{fidele}), d'où $(\star\star)$ toujours
+(\texttt{critere}) et l'équivalence des deux énoncés
+(\texttt{fidele\_iff\_critere}) ; la plénitude (\texttt{plein}) ; et
+l'isomorphisme de catégories, avec des égalités de foncteurs
+(\texttt{qFunctor\_iso}), le lemme clé étant \texttt{arrow\_brown}. Des deux
+clauses de C2 sur les équivalences faibles, seule sert celle qu'utilise la
+composition ; la clause de C1 qui met les isomorphismes dans
+$\mathrm{cof}$ sert pour l'unité $(1_{x}, 1_{x})$ et les diagrammes
+$(1_{x}, i)$. La construction des pages 5 à 9 (diagrammes dont la flèche
+de retour est dans $\mathrm{cof} \cap W$), la proposition de la page 5 et la
+comparaison de la page 13 n'ont pas été vérifiées.}
 
 \end{document}
