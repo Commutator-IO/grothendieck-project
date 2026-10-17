@@ -101,11 +101,7 @@ theorem btw_comm : Btw a s b ↔ Btw b s a := by
 theorem samePiece_comm : SamePiece a b s t ↔ SamePiece b a s t := by
   unfold SamePiece
   rw [btw_comm (a := a) (s := s) (b := b), btw_comm (a := a) (s := t) (b := b)]
-  constructor <;> rintro (⟨h1, h2, h3, h4⟩ | h | ⟨h1, h2, h3, h4⟩)
-  all_goals first
-    | exact Or.inl ⟨h2, h1, h4, h3⟩
-    | exact Or.inr (Or.inl h)
-    | exact Or.inr (Or.inr ⟨h2, h1, h4, h3⟩)
+  tauto
 
 theorem piece_comm (a b t : α) : piece a b t = piece b a t := by
   ext s
@@ -236,19 +232,13 @@ theorem preimage_piece {e : α ≃ β} (he : PreservesCuts e) {a b t : α} (hab 
     (cab : Cmp a b) (ht : InC a b t) : e ⁻¹' piece (e a) (e b) (e t) = piece a b t := by
   ext s
   simp only [mem_preimage, piece, mem_ofPred_eq, inC_transport he.cmp]
-  constructor
-  · rintro ⟨hs, h⟩; exact ⟨hs, (he.piece a b hab cab s t hs ht).1 h⟩
-  · rintro ⟨hs, h⟩; exact ⟨hs, (he.piece a b hab cab s t hs ht).2 h⟩
+  exact and_congr_right fun hs => he.piece a b hab cab s t hs ht
 
 omit [PartialOrder α] [PartialOrder β] in
 theorem disjoint_preimage_equiv (e : α ≃ β) (X Y : Set β) :
     Disjoint (e ⁻¹' X) (e ⁻¹' Y) ↔ Disjoint X Y := by
-  simp only [Set.disjoint_left, mem_preimage]
-  constructor
-  · intro h y hy hy'
-    exact h (a := e.symm y) (by simpa using hy) (by simpa using hy')
-  · intro h x hx hx'
-    exact h hx hx'
+  refine ⟨fun h => ?_, fun h => h.preimage e⟩
+  simpa using h.preimage e.symm
 
 /-- **Pages 14–15.** A bijection between dense posets that preserves
 comparability and the partitions of the `C(ε)` preserves strict betweenness. -/
@@ -263,12 +253,10 @@ theorem btw_transport (hdα : ∀ x y : α, x < y → ∃ z, x < z ∧ z < y)
       ← disjoint_preimage_equiv e,
       preimage_piece he hpq cpq ⟨hpr.symm, hqr.symm, Or.symm cpr, Or.symm cqr⟩,
       preimage_piece he hqr cqr ⟨hpq, hpr, cpq, cpr⟩]
-  · constructor
-    · intro h
-      obtain ⟨h1, h2, h3, h4, h5, h6⟩ := chain_of_btw h
-      exact absurd ⟨e.injective.ne_iff.1 h1, e.injective.ne_iff.1 h2, e.injective.ne_iff.1 h3,
-        (he.cmp _ _).1 h4, (he.cmp _ _).1 h5, (he.cmp _ _).1 h6⟩ hc
-    · intro h; exact absurd (chain_of_btw h) hc
+  · refine iff_of_false (fun h => hc ?_) fun h => hc (chain_of_btw h)
+    obtain ⟨h1, h2, h3, h4, h5, h6⟩ := chain_of_btw h
+    exact ⟨e.injective.ne_iff.1 h1, e.injective.ne_iff.1 h2, e.injective.ne_iff.1 h3,
+      (he.cmp _ _).1 h4, (he.cmp _ _).1 h5, (he.cmp _ _).1 h6⟩
 
 end Transport
 
@@ -291,14 +279,13 @@ theorem btwLe_iff (a b c : α) : BtwLe a b c ↔ Btw a b c ∨ ((b = a ∨ b = c
       by_cases e2 : b = c
       · exact Or.inr ⟨Or.inr e2, Or.inr (h1.trans h2)⟩
       exact Or.inl (Or.inr ⟨lt_of_le_of_ne h1 (Ne.symm e2), lt_of_le_of_ne h2 e1⟩)
-  · rintro (hb | ⟨e | e, h | h⟩)
-    · rcases hb with ⟨h1, h2⟩ | ⟨h1, h2⟩
-      · exact Or.inl ⟨h1.le, h2.le⟩
-      · exact Or.inr ⟨h1.le, h2.le⟩
-    · exact Or.inl ⟨e.symm.le, e.le.trans h⟩
-    · exact Or.inr ⟨h.trans e.symm.le, e.le⟩
-    · exact Or.inl ⟨h.trans e.symm.le, e.le⟩
-    · exact Or.inr ⟨e.symm.le, e.le.trans h⟩
+  · rintro ((⟨h1, h2⟩ | ⟨h1, h2⟩) | ⟨rfl | rfl, h | h⟩)
+    · exact Or.inl ⟨h1.le, h2.le⟩
+    · exact Or.inr ⟨h1.le, h2.le⟩
+    · exact Or.inl ⟨le_rfl, h⟩
+    · exact Or.inr ⟨h, le_rfl⟩
+    · exact Or.inl ⟨h, le_rfl⟩
+    · exact Or.inr ⟨le_rfl, h⟩
 
 /-- The reading's form « `𝓡̄(a, b, c)` iff `𝓡(a, b, c)` or `b ∈ {a, c}` » fails
 for incomparable `a, c`: here `b = a` and `𝓡̄(a, a, c)` is false. -/
@@ -320,14 +307,9 @@ theorem le_iff_readLe (low : ∀ x y : α, ∃ z, z ≤ x ∧ z ≤ y)
   · intro huv
     obtain ⟨x, hxu, hxa⟩ := low u a
     obtain ⟨y, hvy, hby⟩ := high v b
-    refine ⟨x, y, ?_, ?_, Or.inl ⟨hxu, huv.trans hvy⟩, Or.inl ⟨hxu.trans huv, hvy⟩,
-      Or.inl ⟨hxu, huv⟩⟩
-    · rcases eq_or_lt_of_le hxa with e | e
-      · exact Or.inl e
-      · exact Or.inr (Or.inr ⟨e, hab⟩)
-    · rcases eq_or_lt_of_le hby with e | e
-      · exact Or.inl e.symm
-      · exact Or.inr (Or.inl ⟨hab, e⟩)
+    exact ⟨x, y, hxa.eq_or_lt.imp id fun e => Or.inr ⟨e, hab⟩,
+      hby.eq_or_lt.imp Eq.symm fun e => Or.inl ⟨hab, e⟩, Or.inl ⟨hxu, huv.trans hvy⟩,
+      Or.inl ⟨hxu.trans huv, hvy⟩, Or.inl ⟨hxu, huv⟩⟩
   · rintro ⟨x, y, hx, hy, h1, h2, h3⟩
     have hxa : x ≤ a := by
       rcases hx with rfl | ⟨h, -⟩ | ⟨h, -⟩
@@ -344,11 +326,9 @@ theorem le_iff_readLe (low : ∀ x y : α, ∃ z, z ≤ x ∧ z ≤ y)
       rcases hw with ⟨h, -⟩ | ⟨h, h'⟩
       · exact h
       · exact absurd (h.trans h') (not_le_of_gt hxy)
-    rcases h3 with ⟨-, h⟩ | ⟨hvu, hux⟩
+    rcases h3 with ⟨-, h⟩ | ⟨-, hux⟩
     · exact h
-    · have hu : u = x := le_antisymm hux (mid u h1)
-      have hv : v = x := le_antisymm (hvu.trans hux) (mid v h2)
-      rw [hu, hv]
+    · exact (le_antisymm hux (mid u h1)).trans_le (mid v h2)
 
 theorem btwLe_transport {e : α ≃ β} (hcmp : ∀ x y, Cmp (e x) (e y) ↔ Cmp x y)
     (hbtw : ∀ x y z, Btw (e x) (e y) (e z) ↔ Btw x y z) (a b c : α) :
@@ -358,15 +338,7 @@ theorem btwLe_transport {e : α ≃ β} (hcmp : ∀ x y, Cmp (e x) (e y) ↔ Cmp
 theorem readLe_transport {e : α ≃ β} (hcmp : ∀ x y, Cmp (e x) (e y) ↔ Cmp x y)
     (hbtw : ∀ x y z, Btw (e x) (e y) (e z) ↔ Btw x y z) (a b u v : α) :
     ReadLe (e a) (e b) (e u) (e v) ↔ ReadLe a b u v := by
-  constructor
-  · rintro ⟨x', y', hx, hy, h1, h2, h3⟩
-    obtain ⟨x, rfl⟩ := e.surjective x'
-    obtain ⟨y, rfl⟩ := e.surjective y'
-    simp only [btwLe_transport hcmp hbtw, hbtw, e.injective.eq_iff] at hx hy h1 h2 h3
-    exact ⟨x, y, hx, hy, h1, h2, h3⟩
-  · rintro ⟨x, y, hx, hy, h1, h2, h3⟩
-    refine ⟨e x, e y, ?_, ?_, ?_, ?_, ?_⟩ <;>
-      simpa only [btwLe_transport hcmp hbtw, hbtw, e.injective.eq_iff]
+  simp only [ReadLe, e.surjective.exists, btwLe_transport hcmp hbtw, hbtw, e.injective.eq_iff]
 
 /-- The case of `order_eq_or_dual` where `e` keeps the orientation of one
 strict pair. -/
@@ -405,12 +377,9 @@ theorem order_eq_or_dual (lowα : ∀ x y : α, ∃ z, z ≤ x ∧ z ≤ y)
         (show e' a < e' b from (lt_of_le_of_ne h (e.injective.ne hab.ne') : e b < e a))
       exact Or.inr fun x y => by simpa [e'] using this x y
   · simp only [not_exists] at hex
-    have eq_of_le : ∀ {x y : α}, x ≤ y → x = y := fun {x y} h => by
-      by_contra hne; exact hex x y (lt_of_le_of_ne h hne)
-    refine Or.inl fun x y => ⟨fun h => ?_, fun h => (eq_of_le h) ▸ le_rfl⟩
-    rcases (hcmp x y).1 (Or.inl h) with h' | h'
-    · exact h'
-    · exact (eq_of_le h') ▸ le_rfl
+    have eq_of_le : ∀ {x y : α}, x ≤ y → x = y := fun h => h.eq_of_not_lt (hex _ _)
+    exact Or.inl fun x y => ⟨fun h => ((hcmp x y).1 (Or.inl h)).elim id fun h' => (eq_of_le h').ge,
+      fun h => eq_of_le h ▸ le_rfl⟩
 
 /-- **The finding, pages 11–15.** A bijection between tronçons ordonnés that
 preserves comparability and, for every comparable pair `ε`, the partition of
