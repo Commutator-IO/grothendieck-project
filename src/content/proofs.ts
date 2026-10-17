@@ -465,4 +465,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder78.lean',
     theorems: ['F_identity', 'F_bezout', 'page_A_four_fails', 'u_zpow_apply', 'vertex', 'zpow_eq_one_iff', 'vertex_eq_iff', 'zpow_fix_iff', 'strip_vertex', 'strip_orderOf', 'strip_vertex_eq_iff', 'imp_orderOf', 'imp_vertex_eq_iff'],
   },
+  {
+    folder: '40',
+    batch: 2,
+    page: '26–27',
+    name: 'Regularity of α_p-torsors over k[[X]] is not stable under the group law',
+    statement:
+      'Over A = k[[X]] in characteristic p, the torsors A[T]/(T^p − X) and A[T]/(T^p + X − X²) are regular local rings, their sum in H¹(A, α_p) = A/A^p, A[T]/(T^p − X²), is not, and already their fibre product C₁ ⊗_A C₂ has nilpotents: in C₁, −X + X² = (−s + s²)^p.',
+    found:
+      'Holds, more generally. A[T]/(T^n − ϖu) is a discrete valuation ring over any discrete valuation ring A, for every n ≥ 1 and every unit u: no completeness, no characteristic (Eisenstein makes it a domain; integrality makes it local with maximal ideal (T)). A[T]/(T^n − X²) is not a discrete valuation ring for any n ≥ 2 over any field k: for n odd neither of X, T divides the other (map to k[[Z]], X ↦ Zⁿ, T ↦ Z², whose image has no odd exponent below n), for n even it is not a domain, and for n = 2 in characteristic 2, (T − X)² = 0. In C₁ ⊗_A C₂, z = 1 ⊗ t − (−s + s²) ⊗ 1 has z^p = 0 and z ≠ 0, seen through C₁ ⊗_A C₂ → C₁[T]/(T^p + X − X²). The isomorphism with C₁[T]/(T^p), the non-regularity of T^p − X^n for other n, and the identification of the group law of H¹ with addition in A/A^p are not formalised.',
+    verdict: 'holds, more generally',
+    lean: 'lean/Grothendieck/Folder40.lean',
+    theorems: ['irreducible_radical', 'isDomain_radical', 'isDVR_adjoinRoot', 'isDVR_root_X', 'isDVR_root_neg_X_add_X_sq', 'cusp_not_valuation', 'not_isDVR_cusp_odd', 'not_isDomain_cusp_even', 'cusp_two_nilpotent', 'neg_X_add_X_sq_eq_pow', 'fibre_ne_zero', 'fibre_nilpotent'],
+  },
 ];

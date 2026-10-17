@@ -3649,6 +3649,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'The single-torsor criterion is in the literature; the question is only whether the failure of regularity under the group law is recorded — look in work on models of α_p-torsors over DVRs (arXiv:1911.02267 §7, and the literature on inseparable covers of surfaces) and in Milne, Étale Cohomology III.4. Given how elementary it is, expect a match or an exercise; if found, mark matched.',
+    lean: { file: 'lean/Grothendieck/Folder40.lean', found: 'Holds as stated, and more generally. The regular torsors: A[T]/(T^n − ϖu) is a discrete valuation ring over any discrete valuation ring A, any n ≥ 1, any unit u, with no completeness or characteristic used, so both T^p = X and T^p = −X + X² = X(X − 1) qualify. The sum: A[T]/(T^n − X²) is not a discrete valuation ring for any n ≥ 2 over any field, since for n odd neither of X, T divides the other and for n even it is not a domain. The fibre product: z = t + s − s² is nonzero with z^p = 0 in C₁ ⊗_A C₂. The isomorphism C₁ ⊗_A C₂ ≅ C₁[T]/(T^p) and the identification of the group law of H¹(A, α_p) with addition in A/A^p are not formalised.' },
   },
   {
     id: '64-legendre-pinning-moduli',

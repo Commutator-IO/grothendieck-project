@@ -1,0 +1,55 @@
+\section[Cote 40 : la régularité des torseurs sous α\_p ne passe pas à la somme]{Cote 40 : la régularité des torseurs sous $\alpha_p$ ne passe pas à la somme\protect\verifie{Folder40}}\label{sec:40}
+
+La cote 40, \emph{Calculs [affines sur des] fibrés principaux affines : notes manuscrites (s.d.)}, que l'inventaire date \q{[années 1960-1970]}, compte vingt-sept pages de notes rapides, toutes de sa main. Elle traite des schémas en groupes affines comme algèbres de Hopf commutatives, de leurs actions et des espaces principaux homogènes (pages~1 à~15), puis du noyau $\alpha_p$ du Frobenius en caractéristique~$p$ (pages~16 à~18), de la classification $H^1(A, \alpha_p) = A/A^p$ (pages~18 à~23) et d'une version globale par la suite de Frobenius (pages~24 à~27). La remarque des pages~26 et~27 prend $A = k[[X]]$, $k$ algébriquement clos, et les revêtements obtenus en extrayant une racine $p$-ième : au changement d'uniformisante près, ce sont les $A[T]/(T^p - X^n)$, et \q{si $n = 1$, c'est un anneau local régulier. Sinon, il ne l'est pas, comme on voit facilement} (\lot{40}{2}{26}). Pour $p = 3$ et $n = 2$, la page décrit le cusp. La page~27 ajoute que, pour la structure de revêtement sous $\alpha_p$, ce revêtement est la somme de deux revêtements réguliers, ceux des racines $p$-ièmes de $X$ et de $-X + X^2$, et que le produit fibré de ces deux anneaux $C_1$, $C_2$ sur $A$ est \q{déjà un anneau non régulier [car isomorphe à $C_1[T]/(T^p)$, qui a des éléments nilpotents]} (\lot{40}{2}{27}). La phrase de la page~26 qui introduit la somme comporte des mots illisibles ou incertains ; l'énoncé de la page~27 est lu.
+
+\noindent\emph{Conventions.} Un anneau local noethérien de dimension un est régulier si et seulement s'il est de valuation discrète ; c'est ce dernier énoncé qui est démontré. Un anneau local régulier est intègre, donc un anneau non intègre n'est pas régulier. Pour un polynôme unitaire $g$ sur un anneau $R$, $R[T]/(g)$ est libre de base $1, T, \ldots, T^{\deg g - 1}$ ; en particulier la classe d'un polynôme non nul de degré $< \deg g$ n'y est pas nulle.
+
+\begin{lemme}\label{lem:40-dvr}
+Soient $A$ un anneau de valuation discrète, $\varpi$ une uniformisante, $u \in A^\times$ et $n \geq 1$. L'anneau $C = A[T]/(T^n - \varpi u)$ est de valuation discrète, d'idéal maximal $(t)$, où $t$ est la classe de $T$.
+\end{lemme}
+
+\begin{proof}
+Le polynôme $T^n - \varpi u$ est unitaire et d'Eisenstein pour l'idéal $(\varpi)$ : ses coefficients non dominants sont dans $(\varpi)$, et son terme constant $-\varpi u$ n'est pas dans $(\varpi^2)$. Il est donc irréductible dans $A[T]$, qui est factoriel, donc premier, et $C$ est intègre. L'anneau $C$ est fini sur $A$, donc entier, et tout idéal maximal $M$ de $C$ se contracte en un idéal maximal de $A$, c'est-à-dire en $(\varpi)$. Alors $\varpi \in M$, puis $t^n = \varpi u \in M$ et $t \in M$, puisque $M$ est premier. Inversement, tout $x \in M$ s'écrit $x = a + t y$ avec $a \in A$ et $y \in C$ ; comme $a = x - ty \in M \cap A = (\varpi)$ et $\varpi = t^n u^{-1}$, on a $x \in (t)$. Ainsi $M = (t)$ pour tout idéal maximal $M$ : $C$ est local d'idéal maximal $(t)$. Il est noethérien comme quotient de $A[T]$, et $t \neq 0$, puisque $t^n = \varpi u \neq 0$ et que $A \to C$ est injective. Un anneau local noethérien intègre dont l'idéal maximal est principal et non nul est de valuation discrète.
+\end{proof}
+
+\begin{enonce}[Page 26, le cusp $T^n = X^2$]\label{prop:40-cusp}
+Soient $k$ un corps quelconque, $n \geq 2$, $S = k[[X]][T]/(T^n - X^2)$ et $y$ la classe de $T$.
+\begin{enumerate}
+\item Si $n$ est impair, ni $X$ ne divise $y$, ni $y$ ne divise $X$ dans $S$ ; $S$ n'est donc pas un anneau de valuation, ni a fortiori de valuation discrète.
+\item Si $n = 2m$ est pair, $(y^m - X)(y^m + X) = 0$ et les deux facteurs sont non nuls ; $S$ n'est pas intègre.
+\item Si $n = 2$ et si $k$ est de caractéristique~$2$, $(y - X)^2 = 0$ et $y - X \neq 0$.
+\end{enumerate}
+\end{enonce}
+
+\begin{proof}
+1) L'homomorphisme $A = k[[X]] \to k[[Z]]$, $f(X) \mapsto f(Z^n)$, se prolonge en $\varphi : S \to k[[Z]]$ par $y \mapsto Z^2$, puisque $(Z^2)^n = (Z^n)^2$. Soit $B \subset k[[Z]]$ l'ensemble des séries dont les coefficients d'exposant impair $< n$ sont nuls. C'est un sous-anneau : dans le coefficient d'exposant $m$ impair $< n$ d'un produit, chaque terme $a_i b_{m-i}$ a un indice impair $< n$. Il contient $f(Z^n)$, qui n'a que des exposants multiples de $n$, et $Z^2$ ; il contient donc $\varphi(S)$. Si $Xc = y$, alors $Z^n \varphi(c) = Z^2$, donc $Z^{n-2}\varphi(c) = 1$, ce que le terme constant interdit, puisque $n \geq 3$. Si $yc = X$, alors $Z^2 \varphi(c) = Z^n$ et $\varphi(c) = Z^{n-2}$, qui n'est pas dans $B$ puisque $n - 2$ est impair et $< n$. Or, dans un anneau de valuation, de deux éléments l'un divise l'autre.
+
+2) Le produit des polynômes unitaires $T^m - X$ et $T^m + X$ est $T^{2m} - X^2$, et leurs classes sont non nulles, étant de degré $m < 2m$.
+
+3) $(T - X)^2 - (T^2 - X^2) = 2X(X - T)$ est nul en caractéristique~$2$, et $T - X$ est de degré $1 < 2$.
+\end{proof}
+
+\begin{theoreme}[Grothendieck, pages 26 et 27, la régularité ne passe pas à la somme des torseurs sous $\alpha_p$\piste{40-alpha-p-regular-sum}]
+Soient $k$ un corps de caractéristique $p > 0$, $A = k[[X]]$, $C_1 = A[T]/(T^p - X)$ et $C_2 = A[T]/(T^p + X - X^2)$, de racines $s$ et $t$.
+\begin{enumerate}
+\item $C_1$ et $C_2$ sont des anneaux locaux réguliers.
+\item Leur somme dans $H^1(A, \alpha_p) = A/A^p$, l'anneau $A[T]/(T^p - X^2)$ de la classe de $X + (-X + X^2) = X^2$, n'est pas régulière.
+\item Le produit fibré $C_1 \otimes_A C_2$ n'est pas réduit : $z = 1 \otimes t + (s - s^2) \otimes 1$ est non nul et $z^p = 0$. Dans $C_1$, on a $-X + X^2 = (-s + s^2)^p$.
+\end{enumerate}
+\end{theoreme}
+
+\begin{proof}
+1) C'est le lemme~\ref{lem:40-dvr} pour $\varpi = X$, avec $u = 1$, puis avec $u = X - 1$, qui est inversible de terme constant $-1$ et vérifie $-X + X^2 = X(X - 1)$.
+
+2) Si $p$ est impair, c'est l'énoncé~\ref{prop:40-cusp}, 1). Si $p = 2$, l'anneau a un nilpotent non nul par l'énoncé~\ref{prop:40-cusp}, 3) ; il n'est donc pas intègre.
+
+3) L'anneau $C_1$ est non nul et $p = 0$ dedans, donc de caractéristique~$p$, et le Frobenius y est additif : $(-s + s^2)^p = (s^2 - s)^p = s^{2p} - s^p = X^2 - X$, puisque $s^p = X$. Le produit fibré est non nul (voir plus bas) et de caractéristique~$p$ pour la même raison, et $z = 1 \otimes t - (-s + s^2) \otimes 1$. Donc
+\[ z^p = 1 \otimes t^p - (-s + s^2)^p \otimes 1 = 1 \otimes a - a \otimes 1 = 0, \qquad a = -X + X^2 \in A, \]
+car $a \otimes 1 = 1 \otimes a$ pour $a \in A$. Pour voir que $z \neq 0$, soit $D = C_1[T]/(T^p + X - X^2)$, l'extension des scalaires de $C_2$ à $C_1$. L'homomorphisme de $A$-algèbres $C_2 \to D$, $t \mapsto T$, et l'inclusion $C_1 \to D$ définissent $\psi : C_1 \otimes_A C_2 \to D$, $x \otimes y \mapsto x\,\psi_2(y)$. Alors $\psi(z) = T - (-s + s^2)$ est la classe d'un polynôme unitaire de degré $1 < p$, donc non nulle.
+\end{proof}
+
+\begin{remarque}
+Le théorème tient tel que la lecture l'énonce, et plus généralement. Le lemme~\ref{lem:40-dvr} n'utilise ni la complétude de $A$, ni la caractéristique, ni $k$ algébriquement clos, et vaut pour tout $n \geq 1$. L'énoncé~\ref{prop:40-cusp} vaut sur tout corps et pour tout $n \geq 2$. Le calcul de $\psi(z)$ est celui de la lecture : dans $D$, $T^p = -X + X^2 = (-s + s^2)^p$, donc $(T - (-s + s^2))^p = 0$, et le changement de variable $T \mapsto T - (-s + s^2)$ donne $D \simeq C_1[T]/(T^p)$, l'anneau de la page. La lecture en déduit $C_1 \otimes_A C_2 \simeq C_1[T]/(T^p)$, que le fichier ne démontre pas ; il ne démontre que la non-réduction du produit fibré lui-même. La piste demande si cet échec de la régularité sous la loi de groupe de $H^1(A, \alpha_p)$ est consigné dans la littérature sur les modèles de torseurs sous $\alpha_p$.
+\end{remarque}
+
+Ne sont pas démontrés ici : les algèbres de Hopf, les actions et les deux critères des pages~1 à~15 ; la classification $H^1(A, \alpha_p) = A/A^p$ (pages~18 à~23), et donc l'identification de la loi de groupe de $H^1$ avec l'addition de $A/A^p$, que la page~22 dit ne pas avoir prouvée ; la suite de Frobenius (pages~24 à~26) ; la réduction de tout torseur de $k[[X]]$ à $A[T]/(T^p - X^n)$ par changement d'uniformisante ; la non-régularité de $A[T]/(T^p - X^n)$ pour $n \geq 2$ autre que $n = 2$ ; l'isomorphisme $C_1 \otimes_A C_2 \simeq C_1[T]/(T^p)$.
