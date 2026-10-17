@@ -142,52 +142,38 @@ lemma zigzag_of_injective {F : J ⥤ K} (h : Injective F.mapConnectedComponents)
 
 end
 
+lemma bijective_star (A : Type u) [Category.{u} A] [IsConnected A] :
+    Bijective (Functor.star.{u} A).mapConnectedComponents :=
+  ⟨fun x y _ => Quotient.inductionOn₂ x y fun a b => Quotient.sound (isPreconnected_zigzag a b),
+    fun y => Quotient.inductionOn y fun _ =>
+      ⟨Quotient.mk _ (Classical.arbitrary A), Quotient.sound (Zigzag.of_hom (eqToHom (by ext)))⟩⟩
+
 theorem W₀_localisateurFondamental : LocalisateurFondamental W₀.{u} where
-  id_mem A _ := by
-    show Bijective (𝟭 A).mapConnectedComponents
-    rw [mapCC_id]; exact bijective_id
-  comp_mem F G hF hG := by
-    show Bijective (F ⋙ G).mapConnectedComponents
-    rw [mapCC_comp]; exact hG.comp hF
-  of_comp_left F G hF hFG := by
-    have : Bijective (F ⋙ G).mapConnectedComponents := hFG
-    rw [mapCC_comp] at this
-    exact (Bijective.of_comp_iff _ hF).1 this
-  of_comp_right F G hG hFG := by
-    have : Bijective (F ⋙ G).mapConnectedComponents := hFG
-    rw [mapCC_comp] at this
-    exact (Bijective.of_comp_iff' hG _).1 this
+  id_mem A _ := (mapCC_id (J := A) ▸ bijective_id :)
+  comp_mem F G hF hG := (mapCC_comp F G ▸ hG.comp hF :)
+  of_comp_left F G hF hFG := (Bijective.of_comp_iff _ hF).1 (mapCC_comp F G ▸ hFG)
+  of_comp_right F G hG hFG := (Bijective.of_comp_iff' hG _).1 (mapCC_comp F G ▸ hFG)
   retract i r hir hri := by
     have h1 : r.mapConnectedComponents ∘ i.mapConnectedComponents = id := by
       rw [← mapCC_comp, hir, mapCC_id]
-    have h2 : Bijective (i.mapConnectedComponents ∘ r.mapConnectedComponents) := by
-      rw [← mapCC_comp]; exact hri
-    refine ⟨fun x y hxy => h2.1 (by simp only [comp_apply, hxy]), fun x => ⟨_, congrFun h1 x⟩⟩
-  final A _ _ := by
-    have := isConnected_of_hasTerminal A
-    refine ⟨fun x y _ => ?_, fun y => ?_⟩
-    · induction x using Quotient.inductionOn
-      induction y using Quotient.inductionOn
-      exact Quotient.sound (isPreconnected_zigzag _ _)
-    · induction y using Quotient.inductionOn
-      exact ⟨Quotient.mk _ (⊤_ A), Quotient.sound (Zigzag.of_hom (eqToHom (by ext)))⟩
+    have h2 : Bijective (i.mapConnectedComponents ∘ r.mapConnectedComponents) :=
+      mapCC_comp r i ▸ hri
+    exact ⟨fun x y hxy => h2.1 (by simp only [comp_apply, hxy]), fun x => ⟨_, congrFun h1 x⟩⟩
+  final A _ _ := @bijective_star A _ (isConnected_of_hasTerminal A)
   theoremeA := by
     intro A B C _ _ _ v w h
-    have hinj := fun c => (h c).1
-    have hsurj := fun c => (h c).2
     -- for each `b`, a chosen object of `A/w(b)` over the component of `(b, 1)`
     have hs : ∀ b : B, ∃ α : CostructuredArrow (v ⋙ w) (w.obj b),
         Zigzag ((CostructuredArrow.pre v w _).obj α) (CostructuredArrow.mk (𝟙 (w.obj b))) := by
       intro b
-      obtain ⟨α, hα⟩ := hsurj (w.obj b) (Quotient.mk _ (CostructuredArrow.mk (𝟙 (w.obj b))))
-      induction α using Quotient.inductionOn with | h α => ?_
-      exact ⟨α, Quotient.exact hα⟩
+      obtain ⟨α, hα⟩ := (h (w.obj b)).2 (Quotient.mk _ (CostructuredArrow.mk (𝟙 (w.obj b))))
+      induction α using Quotient.inductionOn with | h α => exact ⟨α, Quotient.exact hα⟩
     choose α hα using hs
     let s : B → ConnectedComponents A := fun b => Quotient.mk _ (α b).left
     have hs1 : ∀ a : A, s (v.obj a) = Quotient.mk _ a := by
       intro a
       have : Zigzag (α (v.obj a)) (CostructuredArrow.mk (Y := a) (𝟙 ((v ⋙ w).obj a))) :=
-        zigzag_of_injective (hinj _) (hα (v.obj a))
+        zigzag_of_injective (h _).1 (hα (v.obj a))
       exact Quotient.sound (zigzag_obj_of_zigzag (CostructuredArrow.proj _ _) this)
     have hs2 : ∀ {b b' : B} (g : b ⟶ b'), s b = s b' := by
       intro b b' g
@@ -198,7 +184,7 @@ theorem W₀_localisateurFondamental : LocalisateurFondamental W₀.{u} where
         Zigzag.of_hom (CostructuredArrow.homMk g (by simp))
       have z3 : Zigzag ((CostructuredArrow.pre v w _).obj (T.obj (α b)))
           ((CostructuredArrow.pre v w _).obj (α b')) := (z1.trans z2).trans (hα b').symm
-      have z4 := zigzag_of_injective (hinj _) z3
+      have z4 := zigzag_of_injective (h _).1 z3
       exact Quotient.sound (zigzag_obj_of_zigzag (CostructuredArrow.proj _ _) z4)
     have hs3 : ∀ {b b' : B}, Zigzag b b' → s b = s b' := by
       intro b b' hz
@@ -209,13 +195,11 @@ theorem W₀_localisateurFondamental : LocalisateurFondamental W₀.{u} where
         · exact ih.trans (hs2 g)
         · exact ih.trans (hs2 g).symm
     refine ⟨fun x y hxy => ?_, fun y => ?_⟩
-    · induction x using Quotient.inductionOn with | h a => ?_
-      induction y using Quotient.inductionOn with | h a' => ?_
+    · induction x, y using Quotient.inductionOn₂ with | h a a' => ?_
       rw [← hs1, ← hs1]
       exact hs3 (Quotient.exact hxy)
-    · induction y using Quotient.inductionOn with | h b => ?_
-      refine ⟨Quotient.mk _ (α b).left, Quotient.sound ?_⟩
-      exact zigzag_obj_of_zigzag (CostructuredArrow.proj _ _) (hα b)
+    · induction y using Quotient.inductionOn with | h b =>
+      exact ⟨s b, Quotient.sound (zigzag_obj_of_zigzag (CostructuredArrow.proj _ _) (hα b))⟩
 
 /-! ### Asphericity, and `W₀` -/
 
@@ -233,13 +217,7 @@ theorem aspherique_W₀_iff (A : Type u) [Category.{u} A] :
     have : Nonempty A := ⟨a⟩
     exact zigzag_isConnected fun a a' => Quotient.exact (hinj (a₁ := Quotient.mk _ a)
       (a₂ := Quotient.mk _ a') rfl)
-  · intro hA
-    refine ⟨fun x y _ => ?_, fun y => ?_⟩
-    · induction x using Quotient.inductionOn
-      induction y using Quotient.inductionOn
-      exact Quotient.sound (isPreconnected_zigzag _ _)
-    · induction y using Quotient.inductionOn
-      exact ⟨Quotient.mk _ (Classical.arbitrary A), Quotient.sound (Zigzag.of_hom (eqToHom (by ext)))⟩
+  · exact fun _ => bijective_star A
 
 /-- The product `a × b` of two representables in `Â`, computed objectwise:
 `(a × b)(c) = Hom(c, a) × Hom(c, b)`. -/
@@ -289,8 +267,7 @@ theorem totalementAspherique_W₀_iff (A : Type u) [Category.{u} A] :
     TotalementAspherique W₀ A ↔ ConditionIII A := by
   simp only [TotalementAspherique, ConditionIII, aspherique_W₀_iff]
   constructor
-  · rintro ⟨hA, h⟩
-    exact ⟨inferInstance, h⟩
+  · exact fun ⟨_, h⟩ => ⟨inferInstance, h⟩
   · rintro ⟨hA, h⟩
     refine ⟨zigzag_isConnected fun a b => ?_, h⟩
     obtain ⟨Y⟩ := (h a b).is_nonempty
@@ -376,8 +353,7 @@ not in `W₀`. -/
 theorem star_deuxPoints_not_W₀ : ¬ W₀ (Functor.star.{u} (Discrete (ULift.{u} Bool))) := by
   rintro ⟨hinj, -⟩
   have := Quotient.exact (hinj (a₁ := Quotient.mk _ ⟨⟨true⟩⟩) (a₂ := Quotient.mk _ ⟨⟨false⟩⟩) rfl)
-  have := eq_of_zigzag _ this
-  simp at this
+  simpa using eq_of_zigzag _ this
 
 /-- **Finding: `W₀` is not the coarsest fundamental localiser.** `W₋₁` is a
 fundamental localiser that is not contained in `W₀`. -/
@@ -406,19 +382,14 @@ abbrev fl (m : G2) : SingleObj.star G2 ⟶ SingleObj.star G2 := m
 lemma elt_left_eq {Y Y' : Tranche (produitRep (SingleObj.star G2) (SingleObj.star G2))}
     (g : Y ⟶ Y') :
     elt Y = (g.left ≫ (elt Y').1, g.left ≫ (elt Y').2) := by
-  have hw := CostructuredArrow.w g
-  have e1 := ConcreteCategory.congr_hom (NatTrans.congr_app hw (Opposite.op Y.left)) (𝟙 Y.left)
+  have e1 := ConcreteCategory.congr_hom
+    (NatTrans.congr_app (CostructuredArrow.w g) (Opposite.op Y.left)) (𝟙 Y.left)
   have nat := NatTrans.naturality_apply Y'.hom g.left.op (𝟙 Y'.left)
   unfold elt
-  rw [← e1]
-  simp only [NatTrans.comp_app_apply] at nat ⊢
-  have h1 : (ConcreteCategory.hom ((yoneda.map g.left).app (Opposite.op Y.left))) (𝟙 Y.left) =
-      g.left := by simp
-  have h2 : (ConcreteCategory.hom ((yoneda.obj Y'.left).map g.left.op)) (𝟙 Y'.left) =
-      g.left := by simp
-  rw [h1]
-  rw [h2] at nat
-  exact nat.trans rfl
+  rw [← e1, NatTrans.comp_app_apply]
+  simp only [yoneda_map_app, yoneda_obj_map, Quiver.Hom.unop_op, TypeCat.hom_ofHom,
+    TypeCat.Fun.coe_mk, Category.id_comp, Category.comp_id] at nat ⊢
+  exact nat
 
 /-- The invariant `x₁⁻¹ x₂` of an element `(x₁, x₂)` of `(∗ × ∗)(∗) = G × G`. -/
 def invariant (Y : Tranche (produitRep (SingleObj.star G2) (SingleObj.star G2))) : G2 :=
