@@ -439,4 +439,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder86.lean',
     theorems: ['card_aut', 'rho_cube', 'orthogonal_disjoint', 'permT_surjective', 'permT_eq_one_iff', 'numb_even', 'numb_eq_iff', 'incidence_dictionary', 'counts'],
   },
+  {
+    folder: '44',
+    batch: 1,
+    page: '4',
+    name: 'Integrality of the Cartan numbers from the axioms of a root system',
+    statement:
+      'For (P, Δ) with Δ finite generating P, reduced (na ∉ Δ for n ∈ ℚ, n ≠ ±1) and stable under a symmetry S_a for each root, write S_α x = x − ⟨γ_α, x⟩α with γ_α ∈ (P′)^ℚ; the leaf says that in fact γ_α ∈ P′, the Cartan numbers ⟨γ_α, β⟩ being integers because α is indivisible in P.',
+    found:
+      'Indivisibility does give integrality, in any subgroup of a ℚ-vector space. The three axioms alone do not: Δ = {±3e₁, ±3e₂, ±(e₁ ± e₂)} ⊂ ℤ² satisfies them, its symmetry of 3e₁ is unique and ⟨γ_{3e₁}, e₁ + e₂⟩ = 2/3, with 3e₁ divisible. The simple system {3e₁, e₂ − e₁} of its reflection group is one only with rational coefficients, so the bracket’s appeal to a fundamental system is not refuted; whether the page asserts, proposes or asks is still unread.',
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder44.lean',
+    theorems: ['cartan_int_of_indivisible', 'generates', 'reduced_rat', 'symmetries', 'cartan_eq_two_thirds', 'cartan_exists', 'axioms_not_integral', 'not_integral_base'],
+  },
 ];

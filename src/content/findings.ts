@@ -6387,6 +6387,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'First read the illegible word before « que l’on a en fait » and the bracket on the facsimile (transcription work, /transcribe-grothendieck): if the page only asks or proposes, the entry reduces to the reading’s footnote being too strong and should be withdrawn; if it asserts, mark refuted on the counterexample above. Independently, check whether the derivation of integrality from indivisibility of roots in the lattice they generate is stated in Bourbaki, Lie VI §1, or in SGA 3 Exp. XXI §1, and mark matched if so.',
+    lean: { file: 'lean/Grothendieck/Folder44.lean', found: "The step from indivisibility holds in general: in any subgroup P of a ℚ-vector space, α indivisible and x − f(x)α ∈ P for x ∈ P give f(x) ∈ ℤ. Axioms a)–c) alone do not give it, as the entry says: Δ = {±3e₁, ±3e₂, ±(e₁ ± e₂)} ⊂ ℤ² satisfies a), b) — with n ∈ ℚ, as the page writes it — and c), its symmetry of 3e₁ of the form x − f(x)·3e₁ is unique, and f(e₁ + e₂) = 2/3 while 3e₁ = 3·e₁ is divisible. One correction to the entry: {3e₁, e₂ − e₁} (the entry’s {e₁, (e₂ − e₁)/3}) is a simple system only with rational coefficients, since e₁ + e₂ = (2/3)·3e₁ + (e₂ − e₁); a member of an integral fundamental system is indivisible, so the bracket’s « part of a fundamental system » is not refuted — what a)–c) fail to provide is such a system." },
   },
   {
     id: '46-semilocal-hilbert90-inertia',
