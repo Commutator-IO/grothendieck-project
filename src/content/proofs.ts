@@ -699,4 +699,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder82.lean',
     theorems: ['coord_eq', 'coord_mul_self', 'traceless_iff', 'tH_eq_one', 'one_mem_traceless', 'ker_phi', 'vst_mul_self', 'trace_mul_vst', 'orth_iff', 'one_mem_orth', 'orth_smul', 'not_mono'],
   },
+  {
+    folder: '62',
+    batch: 2,
+    page: '39–47',
+    name: 'The invariant j of a conic with an étale trisection',
+    statement:
+      'With the trisection at {0, 1, ∞}, the quotient by the six anharmonic substitutions is j(t) = −(1/27)((t + 1)(2t − 1)(t − 2)/(t(t − 1)))² (11), a Galois covering of group 𝔖₃ unramified over P¹ ∖ {0, 1, ∞}; j = 0 on {−1, 2, 1/2}, j = 1 at the roots of t² − t + 1; j(κt) = 1/j(t) for κ(t) = (t − 2)/(2t − 1) (12); the invariant determines the triple where j(j − 1) is invertible.',
+    found:
+      'Holds fibre by fibre, over a field with 6 invertible: j(s) − j(t) is a constant times the product of the six factors s − g(t), denominators cleared, so the fibres of j off {0, 1, ∞} are exactly the 𝔖₃-orbits; j = 0 and j = 1 exactly where the reading says, and the orbit is free iff j(j − 1) ≠ 0; j = 1 − j_cl/1728; κ is an involution and j(κt)·j(t) = 1. Not formalised: the torsor, barycentre and invariant descriptions of the triples over a base (pages 49–53), which need genus-0 curves over a base and their trisections, absent from mathlib.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder62.lean',
+    theorems: ['sub_one_ne', 'one_sub_ne', 'den_ne', 'three_pow_ne', 'j_sub_j', 'j_eq_iff', 'j_inv', 'j_one_sub', 'j_div_sub_one', 'j_one_div_one_sub', 'j_sub_one_div', 'j_eq_zero_iff', 'one_sub_j', 'j_eq_one_iff', 'stabilizer_trivial_iff', 'j_eq_one_sub_jcl', 'kappa_kappa', 'j_kappa_mul'],
+  },
 ];
