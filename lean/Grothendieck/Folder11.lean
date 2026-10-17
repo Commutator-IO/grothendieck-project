@@ -95,8 +95,7 @@ theorem model_comm (a : A) :
     simp [TensorProduct.tmul_sum, TensorProduct.tmul_smul]
   simp_rw [h1, h2]
   rw [Finset.sum_comm]
-  refine Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun i _ => ?_
-  rw [mul_right_comm]
+  exact Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun i _ => by rw [mul_right_comm]
 
 theorem model_symm : TensorProduct.comm k A A (diag b b') = diag b b' := by
   simp only [diag, map_sum, TensorProduct.comm_tmul]
@@ -130,16 +129,13 @@ theorem trace_eq (c : A) (hd : ∀ i j, tr (b i * b' j) = if i = j then 1 else 0
 include hy hnil in
 theorem model_euler (htr : tr y = 1) :
     lmul' k (diag b b') = (Fintype.card ι : k) • y := by
-  have hlm : lmul' k (diag b b') = ∑ i, b i * b' i := by simp [diag]
-  rw [hlm]
+  rw [show lmul' k (diag b b') = ∑ i, b i * b' i by simp [diag]]
   set e := ∑ i, b i * b' i
   -- `∫ (e c) = Tr(c) = (dim A) ε(c)`
   have hc : ∀ c, tr (e * c) = (Fintype.card ι : k) * ε c := by
     intro c
-    have hn : Algebra.trace k A (c - algebraMap k A (ε c)) = 0 := by
-      have := Algebra.isNilpotent_trace_of_isNilpotent (R := k) (hnil (c - algebraMap k A (ε c))
-        (by simp))
-      exact this.eq_zero
+    have hn : Algebra.trace k A (c - algebraMap k A (ε c)) = 0 :=
+      (Algebra.isNilpotent_trace_of_isNilpotent (R := k) (hnil _ (by simp))).eq_zero
     rw [← trace_eq tr b b' c hd]
     rw [map_sub, Algebra.trace_algebraMap_of_basis b, sub_eq_zero] at hn
     rw [hn, nsmul_eq_mul]
@@ -155,10 +151,9 @@ theorem model_point (htr : tr y = 1) :
     (y ⊗ₜ[k] (1 : A)) * diag b b' = y ⊗ₜ[k] y := by
   rw [model_comm tr b b' hd]
   have h : ∀ i, ((1 : A) ⊗ₜ[k] y) * (b i ⊗ₜ[k] b' i) = (ε (b' i) • b i) ⊗ₜ[k] y := by
-    intro i; rw [tmul_mul_tmul, one_mul, mul_comm y, hy, ← TensorProduct.smul_tmul]
-  rw [diag, Finset.mul_sum]
-  simp_rw [h]
-  rw [← TensorProduct.sum_tmul]
+    intro i
+    rw [tmul_mul_tmul, one_mul, mul_comm y, hy, ← TensorProduct.smul_tmul]
+  simp_rw [diag, Finset.mul_sum, h, ← TensorProduct.sum_tmul]
   congr 1
   conv_rhs => rw [expand tr b b' hd y]
   refine Finset.sum_congr rfl fun i _ => ?_
@@ -231,8 +226,7 @@ theorem d_self (i : I) : d D ι i i = D.χ • yy D ι i := by
   rw [d, productMap_self, D.euler, map_smul, yy]
 
 theorem y_d (i j : I) : yy D ι i * d D ι i j = yy D ι i * yy D ι j := by
-  have := congrArg (productMap (ι i) (ι j)) D.point
-  simpa [map_mul, yy, d] using this
+  simpa [map_mul, yy, d] using congrArg (productMap (ι i) (ι j)) D.point
 
 theorem yy_sq (i : I) : yy D ι i * yy D ι i = 0 := by
   rw [yy, ← map_mul, D.y_sq, map_zero]
@@ -255,11 +249,8 @@ theorem transfer_d (i j a b : I) :
     induction z using TensorProduct.inductionOn with
     | tmul u v =>
       simp only [productMap_apply_tmul]
-      have h1 := transfer_ren D ι i j a u
-      have h2 := transfer_ren D ι i j b v
-      calc d D ι i j * (ι a u * ι b v) = (d D ι i j * ι a u) * ι b v := by ring
-        _ = ι (ren j i a) u * (d D ι i j * ι b v) := by rw [h1]; ring
-        _ = _ := by rw [h2]; ring
+      rw [← mul_assoc, transfer_ren D ι i j a u, mul_right_comm, transfer_ren D ι i j b v]
+      ring
     | add x y hx hy => simp only [map_add, mul_add, hx, hy]
   exact key D.Δ
 
@@ -310,11 +301,8 @@ theorem transfer_P (i j : I) (E : Multiset (I × I)) :
   | empty => simp [P]
   | cons e E ih =>
     simp only [Multiset.map_cons, P_cons, Prod.map_fst, Prod.map_snd]
-    calc d D ι i j * (d D ι e.1 e.2 * P D ι E)
-        = (d D ι i j * d D ι e.1 e.2) * P D ι E := by ring
-      _ = d D ι (ren j i e.1) (ren j i e.2) * (d D ι i j * P D ι E) := by
-          rw [transfer_d]; ring
-      _ = _ := by rw [ih]; ring
+    rw [← mul_assoc, transfer_d, mul_right_comm, ih]
+    ring
 
 omit [DecidableEq I] in
 theorem prod_transfer (x : B) (s : Finset I) (f g : I → B) (h : ∀ v ∈ s, x * f v = x * g v) :
@@ -323,12 +311,9 @@ theorem prod_transfer (x : B) (s : Finset I) (f g : I → B) (h : ∀ v ∈ s, x
   induction s using Finset.induction_on with
   | empty => simp
   | insert a s ha ih =>
-    rw [Finset.prod_insert ha, Finset.prod_insert ha]
-    have h1 := h a (Finset.mem_insert_self _ _)
-    have h2 := ih fun v hv => h v (Finset.mem_insert_of_mem hv)
-    calc x * (f a * ∏ v ∈ s, f v) = (x * f a) * ∏ v ∈ s, f v := by ring
-      _ = g a * (x * ∏ v ∈ s, f v) := by rw [h1]; ring
-      _ = _ := by rw [h2]; ring
+    rw [Finset.prod_insert ha, Finset.prod_insert ha, ← mul_assoc, h a (Finset.mem_insert_self _ _),
+      mul_right_comm, ih fun v hv => h v (Finset.mem_insert_of_mem hv)]
+    ring
 
 omit [DecidableEq I] in
 /-- `y_r δ_S = y_r ∏_{v ∈ S} y_v`. -/
@@ -338,11 +323,8 @@ theorem y_prod_d (r : I) (S : Finset I) :
   induction S using Finset.induction_on with
   | empty => simp
   | insert a S ha ih =>
-    rw [Finset.prod_insert ha, Finset.prod_insert ha]
-    calc yy D ι r * (d D ι r a * ∏ v ∈ S, d D ι r v)
-        = (yy D ι r * d D ι r a) * ∏ v ∈ S, d D ι r v := by ring
-      _ = yy D ι a * (yy D ι r * ∏ v ∈ S, d D ι r v) := by rw [y_d]; ring
-      _ = _ := by rw [ih]; ring
+    rw [Finset.prod_insert ha, Finset.prod_insert ha, ← mul_assoc, y_d, mul_right_comm, ih]
+    ring
 
 /-- `yᵢ δ_V = ∏_{v ∈ V} y_v` for `i, r ∈ V`. -/
 theorem y_δ {V : Finset I} {i r : I} (hi : i ∈ V) (hr : r ∈ V) :
@@ -385,11 +367,8 @@ theorem d_δ {V : Finset I} {i j r : I} (hi : i ∈ V) (hj : j ∈ V) (hij : i �
       rw [← Finset.mul_prod_erase _ _ hiV]
       have := transfer_d D ι r i i j
       rw [show ren i r i = r by simp [ren], show ren i r j = j by simp [ren, hij.symm]] at this
-      calc d D ι i j * (d D ι r i * ∏ x ∈ ((V.erase r).erase j).erase i, d D ι r x)
-          = (d D ι r i * d D ι i j) * ∏ x ∈ ((V.erase r).erase j).erase i, d D ι r x := by ring
-        _ = (d D ι r i * d D ι r j) * ∏ x ∈ ((V.erase r).erase j).erase i, d D ι r x := by
-            rw [this]
-        _ = _ := by ring
+      rw [← mul_assoc, mul_comm (d D ι i j), this]
+      ring
 
 omit [DecidableEq I] in
 theorem eqvGen_zero {v w : I}
@@ -496,8 +475,7 @@ theorem graph_rule (n : ℕ) : ∀ (E : Multiset (I × I)) (V : Finset I), Multi
       have hc'' : Conn (E'.map (Prod.map σ σ)) (V.erase j) := by
         intro v hv w hw
         have := eqvGen_contract (hc v (Finset.mem_of_mem_erase hv) w (Finset.mem_of_mem_erase hw))
-        rw [show ren j i v = v from hσ' v hv, show ren j i w = w from hσ' w hw] at this
-        exact this
+        rwa [show ren j i v = v from hσ' v hv, show ren j i w = w from hσ' w hw] at this
       have hr' : (if r = j then i else r) ∈ V.erase j := by
         split_ifs with h
         · exact Finset.mem_erase.2 ⟨hij, hiV⟩
@@ -653,9 +631,8 @@ theorem table_three (ι : Fin 3 → A →ₐ[k] B) :
     · subst hij
       rw [show ren i i i = i by simp [ren], d_self, smul_mul_smul_comm, yy_sq]
       simp only [smul_zero]
-    · have e1 : ren j i i = i := by simp [ren]
-      have e2 : ren j i j = i := by simp [ren]
-      rw [e1, e2, d_self, mul_comm, smul_mul_assoc, y_d]
+    · rw [show ren j i i = i by simp [ren], show ren j i j = i by simp [ren], d_self, mul_comm,
+        smul_mul_assoc, y_d]
   have h1 : d D ι 0 1 * d D ι 1 2 = δ := by
     rw [transfer_d D ι 0 1 1 2]; simp [ren, δ]
   have h2 : d D ι 1 2 * d D ι 0 2 = δ := by
@@ -669,11 +646,8 @@ theorem table_three (ι : Fin 3 → A →ₐ[k] B) :
     rw [hδ, y_δ D ι (Finset.mem_univ i) (Finset.mem_univ 0), Fin.prod_univ_three]
   refine ⟨h1, h2, hy, ?_, ?_, sq, fun i j => y_d D ι i j⟩
   · change d D ι 0 1 * d D ι 0 2 * (d D ι 0 1 * d D ι 0 2) = 0
-    calc d D ι 0 1 * d D ι 0 2 * (d D ι 0 1 * d D ι 0 2)
-        = (d D ι 0 1 * d D ι 0 1) * (d D ι 0 2 * d D ι 0 2) := by ring
-      _ = D.χ • D.χ • (yy D ι 0 * yy D ι 0 * (yy D ι 1 * yy D ι 2)) := by
-          rw [sq, sq, smul_mul_smul_comm]; simp only [smul_smul]; congr 1; ring
-      _ = 0 := by rw [yy_sq]; simp
+    rw [mul_mul_mul_comm, sq, sq, smul_mul_smul_comm, mul_mul_mul_comm, yy_sq]
+    simp
   · have h01 : d D ι 0 1 * δ = D.χ • (yy D ι 0 * yy D ι 1 * yy D ι 2) := by
       calc d D ι 0 1 * δ = (d D ι 0 1 * d D ι 0 1) * d D ι 0 2 := by simp only [δ]; ring
         _ = D.χ • (yy D ι 1 * (yy D ι 0 * d D ι 0 2)) := by
