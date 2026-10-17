@@ -90,14 +90,14 @@ theorem derivative_prod_units {ι : Type*} (s : Finset ι) (w : ι → A⟦X⟧�
 
 theorem coe_lin_one_inv (a : A) : (↑(lin 1 a)⁻¹ : A⟦X⟧) = mk fun m => a ^ m := by
   rw [Units.inv_eq_of_mul_eq_one_left]
-  have := congrArg (rescale a) (mk_one_mul_one_sub_eq_one (S := A))
-  simpa [rescale_mk, rescale_X, map_sub] using this
+  simpa [rescale_mk, rescale_X, map_sub] using
+    congr(rescale a $(mk_one_mul_one_sub_eq_one (S := A)))
 
 theorem eps_mul_pow {r i : ℕ} (k : ℕ) (hi : i ∈ range (r + 1)) :
     ε r i * (i : ℤ) ^ k = (-1) ^ r * ((-1) ^ (r - i) * r.choose i * (i : ℤ) ^ k) := by
   obtain ⟨j, rfl⟩ := Nat.exists_eq_add_of_le (Nat.lt_succ_iff.1 (mem_range.1 hi))
   rw [ε, Nat.add_sub_cancel_left, pow_add]
-  have hsq : ((-1 : ℤ) ^ j) ^ 2 = 1 := by rw [← pow_mul, mul_comm, pow_mul]; simp
+  have hsq : ((-1 : ℤ) ^ j) ^ 2 = 1 := by rw [← pow_mul, pow_mul', neg_one_sq, one_pow]
   linear_combination (-((-1 : ℤ) ^ i * ((i + j).choose i : ℤ) * (i : ℤ) ^ k)) * hsq
 
 /-- The sums `S(k) = Σ_i (−1)^i binom(r,i) i^k` vanish for `k < r` (forward differences). -/
@@ -135,9 +135,8 @@ theorem chernPoint_int {r : ℕ} (hr : 1 ≤ r) :
     congr 1
     simp only [logDeriv_zpow, coe_lin_one_inv]
     ext m
-    have hd : ∀ i : ℕ, derivative (R := ℤ) (↑(lin 1 (i : ℤ)) : ℤ⟦X⟧) = C (-(i : ℤ)) := by
-      intro i; ext n
-      rcases n with _ | n <;> simp
+    have hd (i : ℕ) : derivative (R := ℤ) (↑(lin 1 (i : ℤ)) : ℤ⟦X⟧) = C (-(i : ℤ)) := by
+      ext (_ | n) <;> simp
     simp only [hd, L, coeff_mk, map_sum, ← sum_neg_distrib]
     refine sum_congr rfl fun i _ => ?_
     rw [← map_intCast (C (R := ℤ)), coeff_C_mul, coeff_mul_C, coeff_mk]
@@ -147,7 +146,7 @@ theorem chernPoint_int {r : ℕ} (hr : 1 ≤ r) :
     simp [L, sum_eps_pow_of_lt hm]
   have hLr : coeff (r - 1) L = -((-1) ^ r * r.factorial) := by
     simp [L, Nat.sub_add_cancel hr, sum_eps_pow_self]
-  have hP0 : coeff 0 P = 1 := by
+  have hP0 : constantCoeff P = 1 := by
     have := congrArg Units.val (show Units.map (constantCoeff (R := ℤ)).toMonoidHom
         (altProd r fun i => lin 1 (i : ℤ)) = 1 by
       rw [altProd, map_prod]
@@ -167,24 +166,19 @@ theorem chernPoint_int {r : ℕ} (hr : 1 ≤ r) :
     have hs : ∑ p ∈ antidiagonal (r - 1), coeff p.1 P * coeff p.2 L =
         coeff 0 P * coeff (r - 1) L := by
       refine sum_eq_single_of_mem (0, r - 1) (by simp) fun p hp hne => ?_
-      have h1 := Finset.HasAntidiagonal.mem_antidiagonal.1 hp
-      rcases p with ⟨a, b⟩
-      simp only at h1 ⊢
-      rcases a with _ | a
-      · exact (hne (by simp only [zero_add] at h1; rw [h1])).elim
-      · rw [hL b (by omega), mul_zero]
+      rcases p with ⟨_ | a, b⟩
+      · simp_all
+      · simp [hL b (by simp at hp; omega)]
     have h := hcoef (r - 1)
-    rw [hs, hP0, hLr] at h
+    rw [hs, coeff_zero_eq_constantCoeff_apply, hP0, hLr] at h
     obtain ⟨s, rfl⟩ := Nat.exists_eq_add_of_le' hr
     simp only [Nat.add_sub_cancel, Nat.factorial_succ] at h ⊢
     have h' : (coeff (s + 1) P - (-1) ^ s * (s.factorial : ℤ)) * ((s : ℤ) + 1) = 0 := by
       push_cast at h; linear_combination h
     linear_combination (mul_eq_zero.1 h').resolve_right (by positivity)
-  rw [X_pow_dvd_iff]
-  intro m hm
+  refine X_pow_dvd_iff.2 fun m hm => ?_
   rcases m with _ | n
-  · have : constantCoeff P = 1 := by rwa [← coeff_zero_eq_constantCoeff_apply]
-    simp [this, show r ≠ 0 by omega]
+  · simp [hP0, show r ≠ 0 by omega]
   · rw [map_sub, map_add, coeff_C_mul_X_pow, coeff_one]
     rcases (Nat.lt_succ_iff.1 hm).lt_or_eq with h | h
     · simp [hlow n h, h.ne]
@@ -196,18 +190,17 @@ theorem chernPoint {r : ℕ} (hr : 1 ≤ r) :
     X ^ (r + 1) ∣ (↑(altProd r fun i => lin 1 (i : A)) : A⟦X⟧) -
       (1 + C ((-1) ^ (r - 1) * ((r - 1).factorial : A)) * X ^ r) := by
   have h := map_dvd (PowerSeries.map (Int.castRingHom A)) (chernPoint_int hr)
-  have hP := congrArg Units.val (show Units.map (PowerSeries.map (Int.castRingHom A)).toMonoidHom
-      (altProd r fun i => lin 1 (i : ℤ)) = altProd r fun i => lin 1 (i : A) by
-    simp only [altProd, map_prod, map_zpow]
-    exact prod_congr rfl fun i _ => by
-      congr 1; exact Units.ext (by simp))
-  have hP' : PowerSeries.map (Int.castRingHom A) ↑(altProd r fun i => lin 1 (i : ℤ)) =
-      ↑(altProd r fun i => lin 1 (i : A)) := hP
-  rw [map_sub, hP'] at h
+  have hP : PowerSeries.map (Int.castRingHom A) ↑(altProd r fun i => lin 1 (i : ℤ)) =
+      ↑(altProd r fun i => lin 1 (i : A)) :=
+    congrArg Units.val (show Units.map (PowerSeries.map (Int.castRingHom A)).toMonoidHom
+        (altProd r fun i => lin 1 (i : ℤ)) = altProd r fun i => lin 1 (i : A) by
+      simp only [altProd, map_prod, map_zpow]
+      exact prod_congr rfl fun i _ => congrArg (· ^ ε r i) (Units.ext (by simp)))
+  rw [map_sub, hP] at h
   simpa [map_add, map_mul, map_pow, map_C, map_X] using h
 
 theorem rescale_C (a c : A) : rescale a (C c) = C c := by
-  ext n; rcases n with _ | n <;> simp [coeff_rescale, coeff_C]
+  ext (_ | n) <;> simp [coeff_rescale, coeff_C]
 
 theorem prod_zpow_eq_zpow_sum {G : Type*} [CommGroup G] {ι : Type*} (c : G) (s : Finset ι)
     (f : ι → ℤ) : ∏ i ∈ s, c ^ f i = c ^ ∑ i ∈ s, f i := by
@@ -229,9 +222,8 @@ theorem chernImmersion {r : ℕ} (hr : 1 ≤ r) {y : A} (hy : IsUnit (1 - y))
   set a : A := ↑w⁻¹
   have haw : a * (1 - y) = 1 := by simp [a, w]
   -- the denominators are the numerators rescaled by `a = (1 − y)⁻¹`
-  have hlin : ∀ i : ℕ, lin w (i : A) =
+  have hlin (i : ℕ) : lin w (i : A) =
       Units.map (C (R := A)).toMonoidHom w * Units.map (rescale a).toMonoidHom (lin 1 (i : A)) := by
-    intro i
     refine Units.ext ?_
     change C (w : A) - C (i : A) * X = C (w : A) * rescale a (C 1 - C (i : A) * X)
     have hwa : C (w : A) * C a = 1 := by rw [← map_mul, Units.mul_inv, map_one]
@@ -255,28 +247,20 @@ theorem chernImmersion {r : ℕ} (hr : 1 ≤ r) {y : A} (hy : IsUnit (1 - y))
   have hPQ : X ^ (r + 1) ∣ P - (↑(altProd r fun i => lin w (i : A)) : A⟦X⟧) := by
     rw [hQ, Units.coe_map]
     change X ^ (r + 1) ∣ P - rescale a P
-    rw [X_pow_dvd_iff]
-    intro n hn
+    refine X_pow_dvd_iff.2 fun n hn => ?_
     rw [map_sub, coeff_rescale, hPc n hn, map_add, coeff_C_mul_X_pow, coeff_one]
     rcases n with _ | n
     · simp
-    · by_cases hnr : n + 1 = r
-      · subst hnr
-        simp only [↓reduceIte, Nat.succ_ne_zero]
+    · obtain rfl | hnr := eq_or_ne (n + 1) r
+      · simp only [↓reduceIte, Nat.succ_ne_zero]
         linear_combination -hca
       · simp [hnr]
   have hprod : ∏ i ∈ range (r + 1), (lin 1 (i : A) * (lin w (i : A))⁻¹) ^ ε r i =
       altProd r (fun i => lin 1 (i : A)) * (altProd r fun i => lin w (i : A))⁻¹ := by
     simp only [altProd, mul_zpow, prod_mul_distrib, inv_zpow, prod_inv_distrib]
-  rw [hprod]
-  have hinv : (↑(altProd r fun i => lin w (i : A)) : A⟦X⟧) *
-      ↑(altProd r fun i => lin w (i : A))⁻¹ = 1 := Units.mul_inv _
-  have : (↑(altProd r (fun i => lin 1 (i : A)) * (altProd r fun i => lin w (i : A))⁻¹) :
-      A⟦X⟧) - 1 = (P - (↑(altProd r fun i => lin w (i : A)) : A⟦X⟧)) *
-        (↑(altProd r fun i => lin w (i : A))⁻¹ : A⟦X⟧) := by
-    rw [Units.val_mul]; linear_combination hinv
-  rw [this]
-  exact hPQ.mul_right _
+  rw [hprod, Units.val_mul]
+  convert hPQ.mul_right (↑(altProd r fun i => lin w (i : A))⁻¹ : A⟦X⟧) using 1
+  linear_combination Units.mul_inv (altProd r fun i => lin w (i : A))
 
 /-- Page 13 with `y` nilpotent, as `x' ∈ Ã(X)` is. -/
 theorem chernImmersion_of_isNilpotent {r : ℕ} (hr : 1 ≤ r) {y : A} (hy : IsNilpotent y)
