@@ -179,11 +179,8 @@ theorem map_injective (e : V ≃ₗ[ℝ] V₂) : Function.Injective (T.map e) :=
   rw [← T.map_symm_map e a, h, T.map_symm_map]
 
 theorem nonempty (V : Type) [AddCommGroup V] [Module ℝ V] [FiniteDimensional ℝ V] :
-    Nonempty (T.Ω V) := by
-  have := T.card V
-  by_contra hne
-  rw [not_nonempty_iff] at hne
-  simp at this
+    Nonempty (T.Ω V) :=
+  (Nat.card_pos_iff.1 (by simp [T.card V])).1
 
 /-- `e` acts trivially on `Ω(V)`. -/
 def Fixes (e : V ≃ₗ[ℝ] V) : Prop := ∀ ω : T.Ω V, T.map e ω = ω
@@ -491,16 +488,13 @@ theorem fixes_iff_det_pos (g : E n ≃ₗ[ℝ] E n) :
 theorem map_eq_iff_det_pos (g : E n ≃ₗ[ℝ] E n) (ω : T.Ω (E n)) :
     T.map g ω = ω ↔ 0 < LinearMap.det (g : E n →ₗ[ℝ] E n) := by
   rw [← T.fixes_iff_det_pos]
-  refine ⟨fun h => ?_, fun h => h ω⟩
-  rcases T.fixes_or g with hf | hf
-  · exact hf
-  · exact absurd h (hf ω)
+  exact ⟨fun h => (T.fixes_or g).resolve_right fun hf => hf ω h, fun h => h ω⟩
 
 theorem map_ne_iff_det_neg (g : E n ≃ₗ[ℝ] E n) (ω : T.Ω (E n)) :
     T.map g ω ≠ ω ↔ LinearMap.det (g : E n →ₗ[ℝ] E n) < 0 := by
   have h0 : LinearMap.det (g : E n →ₗ[ℝ] E n) ≠ 0 := g.isUnit_det'.ne_zero
   rw [Ne, T.map_eq_iff_det_pos, not_lt]
-  exact ⟨fun h => lt_of_le_of_ne h h0, fun h => h.le⟩
+  exact h0.le_iff_lt
 
 /-- The same on any finite-dimensional `V`: an automorphism acts trivially on `Ω(V)` iff its
 determinant is positive. -/
@@ -544,9 +538,7 @@ theorem exists_adapted {V : Type} [AddCommGroup V] [Module ℝ V] [FiniteDimensi
   obtain ⟨f, rfl, hf, rfl⟩ := hH
   have hdim := Module.Dual.finrank_ker_add_one_of_ne_zero hf
   set m := finrank ℝ (LinearMap.ker f)
-  obtain ⟨v, hv⟩ : ∃ v, f v ≠ 0 := by
-    by_contra! h
-    exact hf (LinearMap.ext h)
+  obtain ⟨v, hv⟩ : ∃ v, f v ≠ 0 := DFunLike.ne_iff.1 hf
   set v₀ := (f v)⁻¹ • v
   have hv₀ : f v₀ = 1 := by simp [v₀, hv]
   let jW : LinearMap.ker f ≃ₗ[ℝ] E m := LinearEquiv.ofFinrankEq _ _ (by simp [m])
@@ -565,9 +557,7 @@ theorem exists_adapted {V : Type} [AddCommGroup V] [Module ℝ V] [FiniteDimensi
         simpa [d, lastForm, hl] using hu
       have : jW.symm (init u) = 0 := Subtype.ext this
       simpa using congrArg jW this
-    funext j
-    refine Fin.lastCases hl (fun i => ?_) j
-    exact congrFun h2 i
+    exact funext fun j => Fin.lastCases hl (fun i => congrFun h2 i) j
   have hbij : Function.Bijective d :=
     ⟨hinj, (LinearMap.injective_iff_surjective_of_finrank_eq_finrank (by simp [← hdim])).1 hinj⟩
   let c : V ≃ₗ[ℝ] E (m + 1) := (LinearEquiv.ofBijective d hbij).symm
@@ -787,9 +777,9 @@ theorem Hom.isIso {T T' : Theory} (φ : Hom T T') :
     ∃ ψ : Hom T' T, (∀ (V : Type) [AddCommGroup V] [Module ℝ V] [FiniteDimensional ℝ V]
       (ω : T.Ω V), ψ.app V (φ.app V ω) = ω) ∧
       ∀ (V : Type) [AddCommGroup V] [Module ℝ V] [FiniteDimensional ℝ V] (ω : T'.Ω V),
-        φ.app V (ψ.app V ω) = ω := by
-  refine ⟨canonical T' T, fun V _ _ _ ω => ?_, fun V _ _ _ ω => ?_⟩
-  · exact congrFun (((canonical T' T).comp φ).ext_app (Hom.id T) _ V rfl) ω
-  · exact congrFun ((φ.comp (canonical T' T)).ext_app (Hom.id T') _ V rfl) ω
+        φ.app V (ψ.app V ω) = ω :=
+  ⟨canonical T' T,
+    fun V _ _ _ ω => congrFun (((canonical T' T).comp φ).ext_app (Hom.id T) _ V rfl) ω,
+    fun V _ _ _ ω => congrFun ((φ.comp (canonical T' T)).ext_app (Hom.id T') _ V rfl) ω⟩
 
 end Grothendieck.Folder68
