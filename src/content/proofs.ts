@@ -543,4 +543,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder120.lean',
     theorems: ['isTameFun_mul', 'isTameFun_sub', 'isTameFun_const', 'isTameFun_coord', 'isTameFun_comp', 'separates_off_zeroSet', 'not_separates_zmod4', 'not_separates_on_zeroSet', 'collapse_separation', 'exists_separating_family', 'exists_separating_family_of_field'],
   },
+  {
+    folder: '145',
+    batch: 2,
+    page: '34–35',
+    name: 'The unit-exponent exercise',
+    statement:
+      'In the free profinite group on l₀, l₁ with l_∞ l₁ l₀ = 1, a unit p ∈ ℤ̂* satisfies l_∞^p l₁^p l₀^p = 1 only for p = 1 (relation (14), left by the page as « Exercice ! »). Read in every finite quotient, with p a compatible family of residues p_n ∈ ℤ/n.',
+    found:
+      'Holds, more generally, by the edition’s dihedral argument: in D_N, two reflections x, y and z = (yx)⁻¹ give z^m y^m x^m = 1 iff m ≡ 1 mod N when m is odd. Only the oddness of p is used, not that p is a unit at the odd primes; oddness cannot be dropped, since p = 0 satisfies (14). mathlib has no free profinite group, so the statement is read in its finite quotients. Not formalised: the consequence for the trivial-rectifier systems of SÊ^ (the six (sg σ, σ) of Γ_P).',
+    verdict: 'holds, more generally',
+    lean: 'lean/Grothendieck/Folder145.lean',
+    theorems: ['dihedral_witness', 'rel14_iff', 'rel14_unit_iff', 'rel14_zero', 'compatible_zero'],
+  },
 ];
