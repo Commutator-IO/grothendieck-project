@@ -118,10 +118,9 @@ theorem condition1 (P : ObjectProperty E) :
     · rw [Category.assoc, hg', e.hom_inv_id]
       rfl
   · intro h
-    refine ⟨fun X Y _ hY => ?_, fun Y hY => ⟨Y, hY, ⟨(have := h Y hY; asIso (adj.unit.app Y)).symm⟩⟩⟩
-    rw [map_bijective_iff adj]
-    have := h Y hY
-    exact (asIso (adj.unit.app Y)).homToEquiv.bijective
+    exact ⟨fun X Y _ hY => (map_bijective_iff adj X Y).2
+      (have := h Y hY; (asIso (adj.unit.app Y)).homToEquiv.bijective),
+      fun Y hY => ⟨Y, hY, ⟨(have := h Y hY; asIso (adj.unit.app Y)).symm⟩⟩⟩
 
 section Example
 
@@ -143,12 +142,9 @@ theorem condition1_non_surabondante :
     Function.Bijective (toPoint.map : (Empty ⟶ Empty) → (toPoint.obj Empty ⟶ toPoint.obj Empty)) ∧
       ¬ (ObjectProperty.isoClosure (· = Empty)) (fromPoint.obj (toPoint.obj Empty)) ∧
       ¬ IsIso (adjPoint.unit.app Empty) := by
-  refine ⟨⟨fun f g _ => by ext (x : Empty); exact x.elim, fun _ => ⟨𝟙 _, Subsingleton.elim _ _⟩⟩,
-    ?_, ?_⟩
-  · rintro ⟨Y, rfl, ⟨e⟩⟩
-    exact (e.hom PUnit.unit).elim
-  · intro h
-    exact ((inv (adjPoint.unit.app Empty)) PUnit.unit).elim
+  exact ⟨⟨fun f g _ => by ext (x : Empty); exact x.elim, fun _ => ⟨𝟙 _, Subsingleton.elim _ _⟩⟩,
+    fun ⟨_, rfl, ⟨e⟩⟩ => (e.hom PUnit.unit).elim,
+    fun _ => (inv (adjPoint.unit.app Empty) PUnit.unit).elim⟩
 
 end Example
 
@@ -158,6 +154,24 @@ section Idempotent
 theorem isIso_of_eq_id {C : Type*} [Category C] {X : C} {f : X ⟶ X} (h : f = 𝟙 X) :
     IsIso f :=
   h ▸ inferInstance
+
+/-- Under idempotency, `vu(η_X) = η_{vuX}`. -/
+theorem vu_unit_eq (h : ∀ P, IsIso (adj.unit.app (v.obj P))) (X : E) :
+    v.map (u.map (adj.unit.app X)) = adj.unit.app (v.obj (u.obj X)) := by
+  have := isIso_of_eq_id (adj.right_triangle_components (u.obj X))
+  have := h (u.obj X)
+  have : IsIso (v.map (adj.counit.app (u.obj X))) := IsIso.of_isIso_comp_left (adj.unit.app _) _
+  rw [← cancel_mono (v.map (adj.counit.app (u.obj X))), ← Functor.map_comp]
+  simp
+
+/-- Under idempotency, `uv(ε_P) = ε_{uvP}`. -/
+theorem uv_counit_eq (h : ∀ X, IsIso (adj.counit.app (u.obj X))) (P : F) :
+    u.map (v.map (adj.counit.app P)) = adj.counit.app (u.obj (v.obj P)) := by
+  have := isIso_of_eq_id (adj.left_triangle_components (v.obj P))
+  have := h (v.obj P)
+  have : IsIso (u.map (adj.unit.app (v.obj P))) := IsIso.of_isIso_comp_right _ (adj.counit.app _)
+  rw [← cancel_epi (u.map (adj.unit.app (v.obj P))), ← Functor.map_comp]
+  simp
 
 /-- **Idempotent adjunctions.** The four conditions `ηv`, `vε`, `εu`, `uη`
 invertible are equivalent. -/
@@ -180,33 +194,17 @@ theorem idempotent_tfae :
         | exact IsIso.of_isIso_comp_left (u.map (adj.unit.app X)) (adj.counit.app (u.obj X))
   tfae_have 1 → 3 := by
     intro h X
-    -- `vuη_X = η_{vuX}`: both are sections of the isomorphism `vε_{uX}`.
-    have hvε : IsIso (v.map (adj.counit.app (u.obj X))) := by
-      have := isIso_of_eq_id (adj.right_triangle_components (u.obj X))
-      have := h (u.obj X)
-      exact IsIso.of_isIso_comp_left (adj.unit.app _) _
-    have key : v.map (u.map (adj.unit.app X)) = adj.unit.app (v.obj (u.obj X)) := by
-      rw [← cancel_mono (v.map (adj.counit.app (u.obj X))), ← Functor.map_comp]
-      simp
     refine ⟨u.map (adj.unit.app X), ?_, adj.left_triangle_components X⟩
     have nat := adj.counit.naturality (u.map (adj.unit.app X))
     dsimp at nat
-    rw [← nat, key]
+    rw [← nat, vu_unit_eq adj h]
     simp
   tfae_have 3 → 1 := by
     intro h P
-    -- `uvε_P = ε_{uvP}`: both are retractions of the isomorphism `uη_{vP}`.
-    have huη : IsIso (u.map (adj.unit.app (v.obj P))) := by
-      have := isIso_of_eq_id (adj.left_triangle_components (v.obj P))
-      have := h (v.obj P)
-      exact IsIso.of_isIso_comp_right _ (adj.counit.app _)
-    have key : u.map (v.map (adj.counit.app P)) = adj.counit.app (u.obj (v.obj P)) := by
-      rw [← cancel_epi (u.map (adj.unit.app (v.obj P))), ← Functor.map_comp]
-      simp
     refine ⟨v.map (adj.counit.app P), adj.right_triangle_components P, ?_⟩
     have nat := adj.unit.naturality (v.map (adj.counit.app P))
     dsimp at nat
-    rw [nat, key]
+    rw [nat, uv_counit_eq adj h]
     simp
   tfae_finish
 
@@ -487,24 +485,6 @@ equivalent to either half alone (`idempotent_tfae`). -/
 theorem condition1_p5_iff :
     ((∀ P, E0 adj (v.obj P)) ∧ ∀ X, F0 adj (u.obj X)) ↔ ∀ P, IsIso (adj.unit.app (v.obj P)) :=
   condition2_iff adj
-
-/-- Under idempotency, `vu(η_X) = η_{vuX}`. -/
-theorem vu_unit_eq (h : ∀ P, IsIso (adj.unit.app (v.obj P))) (X : E) :
-    v.map (u.map (adj.unit.app X)) = adj.unit.app (v.obj (u.obj X)) := by
-  have := isIso_of_eq_id (adj.right_triangle_components (u.obj X))
-  have := h (u.obj X)
-  have : IsIso (v.map (adj.counit.app (u.obj X))) := IsIso.of_isIso_comp_left (adj.unit.app _) _
-  rw [← cancel_mono (v.map (adj.counit.app (u.obj X))), ← Functor.map_comp]
-  simp
-
-/-- Under idempotency, `uv(ε_P) = ε_{uvP}`. -/
-theorem uv_counit_eq (h : ∀ X, IsIso (adj.counit.app (u.obj X))) (P : F) :
-    u.map (v.map (adj.counit.app P)) = adj.counit.app (u.obj (v.obj P)) := by
-  have := isIso_of_eq_id (adj.left_triangle_components (v.obj P))
-  have := h (v.obj P)
-  have : IsIso (u.map (adj.unit.app (v.obj P))) := IsIso.of_isIso_comp_right _ (adj.counit.app _)
-  rw [← cancel_epi (u.map (adj.unit.app (v.obj P))), ← Functor.map_comp]
-  simp
 
 /-- The page's `v₀ ∘ u'`: `X ↦ vu(X)`, landing in `E₀` once `Im u ⊂ F₀`. -/
 def reflector0 (hu : ∀ X, F0 adj (u.obj X)) : E ⥤ (E0 adj).FullSubcategory :=
