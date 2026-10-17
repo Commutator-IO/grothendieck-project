@@ -83,6 +83,16 @@
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against
 % the pages by a human.
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — refined with the Lean checks
+% of lean/Grothendieck/Folder136.lean and the literature of the folder's
+% findings. Now checked by machine, on coefficients: Théorème 1 of p. 22,
+% Corollaire 1 in its coefficient form, and the degree-i theorem of pp. 26-31,
+% which holds for every i (the i <= N of the coefficient form is not needed)
+% and is proved without localisation or digit shift. Not checked: Lucas,
+% Lemme 2, full faithfulness as a statement about graded k{T}-modules. Cited
+% from the findings: Kageyama (arXiv:2211.03289, arXiv:2405.11570) for the
+% divided-power simplicial de Rham algebra of pp. 5-8, without its cohomology.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -383,7 +393,16 @@ pour un ensemble simplicial $X_*$
 \[
 C^\bullet_{\mathrm{DRpd}}(X_*; S, J, t) = \operatorname{Hom}\bigl(X_*, C^\bullet_{\mathrm{DRpd}*}(S,J,t)\bigr) ,
 \]
-contravariant en $X_*$. On a seulement un homomorphisme
+contravariant en $X_*$.\footnote{La même algèbre simpliciale de formes à
+puissances divisées sur le simplexe de « taille » $\vartheta$, au-dessus de
+$\mathbb{Z}\langle\vartheta\rangle$, avec une intégration à puissances
+divisées, est construite par R.~Kageyama, « Higher holonomy via a simplicial
+viewpoint », arXiv:2211.03289 (2022), § 2.1, et reprise dans « On iterated
+integral on simplicial sets », arXiv:2405.11570 (2024), § 2.1 ; son paramètre
+$\vartheta$ joue le rôle du $T$ du cas universel ci-dessous. Aucun calcul de
+sa cohomologie sur un ensemble simplicial, analogue à celui des pages 8 et
+232, n'y a été trouvé. Le dossier ne cite personne ; l'inventaire le date à
+partir de 1975--1976.} On a seulement un homomorphisme
 $H^\bullet_{\mathrm{DRpd}}(X_*; S,J,t) \to H^\bullet(X_*, S)$, qui en général
 n'est pas un isomorphisme.
 
@@ -601,7 +620,12 @@ $x_i$ sont égaux.
 \textbf{Théorème 1.} \emph{Soient $E$ un groupe abélien, $N \in \mathbb{N}$, et
 $(x_i)_{i \in \mathbb{N}}$ dans $E$ tels que $\binom{j}{i}(x_j - x_i) = 0$ pour
 $j > i \geq N$. Alors $x_i = x_N$ pour tout $i \geq N$.} On localise en chaque
-premier et l'on applique le lemme 2 de proche en proche.
+premier et l'on applique le lemme 2 de proche en proche.\footnote{Vérifié en
+Lean (lean/Grothendieck/Folder136.lean, \texttt{binomial\_constant}), comme
+cas $i = 0$ du théorème des pages 26 à 31 (voir là), par une autre
+démonstration que celle de la page : sans localisation et sans le décalage
+des chiffres du corollaire 2. Le lemme de Lucas, le corollaire 2 et le
+lemme 2 ne sont pas vérifiés par la machine.}
 
 \pagerange{22}{25}
 \section*{Les foncteurs « ombres » $\omega_N$ (pages 22 à 25)}
@@ -617,7 +641,12 @@ T^{(i)}$, telles que $T^{(j)} x_i = c_{i,j}\, x_{i+j}$ pour $i \geq N$, $j \geq
 1$.} Écrivant $x_i = \xi_i T^{(i)}$, la condition devient $c_{i,j}(\xi_{i+j} -
 \xi_i) = 0$, et le théorème 1 conclut ; pour a), un morphisme
 $\omega_N(M) \to \omega_N(M')$ est une famille $u_i : M \to M'$ avec
-$c_{i,j}(u_{i+j} - u_i) = 0$, d'où $u_i$ constant.
+$c_{i,j}(u_{i+j} - u_i) = 0$, d'où $u_i$ constant.\footnote{Ce dernier pas,
+le théorème 1 dans le groupe des applications additives $M \to M'$, est
+vérifié en Lean (lean/Grothendieck/Folder136.lean,
+\texttt{hom\_family\_constant}) ; la pleine fidélité de $\omega_N$ comme
+énoncé sur les $S$-modules gradués ne l'est pas, seule sa forme sur les
+coefficients l'est.}
 
 \emph{Remarque 1.} $\omega_N$ a un adjoint à droite $\pi_N$, avec
 $\pi_N(\mathcal{M}) = \{(x_i)_{i \geq N} \mid x_i T^{(j)} = c_{i,j} x_{i+j}\}
@@ -662,7 +691,22 @@ $(\xi_k)_{k \geq N}$ dans $M$ tels que $c_{l,k}\,\xi_k = c_{l,k-i}\,\xi_{k+l}$
 pour $k \geq N$, $l \geq 0$. Il existe un unique $\xi \in M$ tel que $\xi_k =
 \binom{k}{i}\,\xi$ pour tout $k \geq N$.}\footnote{Il écrit tantôt
 $c_{k,k-i}$, tantôt $c_{i,k-i}$ ; ces deux coefficients sont égaux à
-$\binom{k}{i}$.}
+$\binom{k}{i}$. Vérifié en Lean (lean/Grothendieck/Folder136.lean,
+\texttt{binomial\_shadow\_existsUnique}), et pour tout $i$ : sous cette forme,
+où $k$ ne figure plus, l'hypothèse $i \leq N$ ne sert pas ; elle ne sert qu'à
+donner un sens à $\tau_{N-i}(S)$ dans la première forme. La démonstration
+vérifiée n'est pas celle de la page et n'utilise ni localisation ni décalage
+de chiffres : pour $k, k' \geq N$ et $p$ premier, on prend $K = p^r - 1$
+au-dessus de $k$ et de $k'$ ; tous les $\binom{K}{b}$ sont premiers à $p$
+(\texttt{not\_dvd\_choose\_pow\_sub\_one}, par $\binom{p^r - 1}{b} \equiv
+(-1)^b \bmod p$, le « aucune retenue » de la page 31), et l'identité
+$\binom{k+l}{l}\binom{k}{i} = \binom{k+l}{i}\binom{k+l-i}{l}$
+(\texttt{choose\_add\_mul\_choose}) relie $\xi_k$ et $\xi_{k'}$ à $\xi_K$ ;
+ainsi $\binom{k}{i}\xi_{k'} - \binom{k'}{i}\xi_k$ est tué par un entier
+premier à $p$, pour tout $p$, donc nul (\texttt{eq\_zero\_of\_forall\_prime\_smul}).
+Les $\binom{k}{i}$, $k \geq N$, engendrent $\mathbb{Z}$
+(\texttt{span\_choose\_eq\_top}), et la combinaison de Bézout de la page 27
+donne $\xi$ et son unicité. Cet argument est de l'édition.}
 
 \emph{Démonstration.} On se ramène à un $\mathbb{Z}_{(p)}$-module : les
 $\binom{k}{i}$, $k \geq N$, sont premiers entre eux dans leur ensemble (pour
