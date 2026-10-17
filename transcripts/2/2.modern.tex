@@ -12,6 +12,16 @@
 % Pass: Opus 5 (claude-opus-5), 2026-09-19 — first pass, unchecked against the
 % pages by a human.
 %
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder2.lean): the computations of pp. 9 and 13
+% hold as read, over any commutative ring (chernPoint, chernImmersion);
+% p. 13 uses only 1 - x' invertible and (r-1)! x' = 0. Mathlib: the sums
+% sum (-1)^i binom(r,i) i^m are r-th forward differences
+% (fwdDiff_iter_pow_eq_zero_of_lt, fwdDiff_iter_eq_factorial). Correction:
+% p. 13 names the class Y x P^r where i_!(O_Y) is the class of Y x {point};
+% the reading had kept the page's name. The finding records no literature
+% read. No facsimile check since the first pass.
+%
 % Scope: one document for the shelfmark, its three batches read as one folder.
 % Twenty-eight of the forty-four leaves carry mathematics; five are covers in
 % his hand, whose words become section headings here; the rest are blank or are
@@ -749,7 +759,16 @@ qu'un terme et l'exponentielle se réduit à sa partie linéaire :
 C'est le premier visage du nombre du dossier : la classe de Chern de dimension
 maximale du faisceau structural d'un point de $\mathbb{P}^{r}$ n'est pas la
 classe de ce point, mais son multiple par
-$(-1)^{r-1}(r-1)!$.\footnote{L'exposant de $(-1)$ est écrit $r+1$ à la page 9 et
+$(-1)^{r-1}(r-1)!$.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder2.lean, \texttt{chernPoint}) pour tout $r \geqslant 1$
+et dans $A[\eta]/(\eta^{r+1})$ pour tout anneau commutatif $A$ : la formule
+n'a pas besoin des dénominateurs du logarithme. La vérification passe par la
+dérivée logarithmique sur $\mathbb{Z}$, puis transporte l'identité à $A$. Les
+deux valeurs de $\sum_{i}(-1)^{i}\binom{r}{i} i^{m}$ sont celles de la
+$r$-ième différence finie de $i \mapsto i^{m}$ en $0$ (au signe $(-1)^{r}$
+près), nulle pour $m < r$ et égale à $r!$ pour $m = r$ :
+\texttt{fwdDiff\_iter\_pow\_eq\_zero\_of\_lt} et
+\texttt{fwdDiff\_iter\_eq\_factorial} dans mathlib.}\footnote{L'exposant de $(-1)$ est écrit $r+1$ à la page 9 et
 $r-1$ à la page 11, et la transcription signale que la page ne tranche pas
 entre les deux. Elle n'a pas à trancher : $(-1)^{r+1} = (-1)^{r-1}$. Les deux
 leçons sont la même, et la variance relevée n'en est pas une.}
@@ -815,14 +834,28 @@ sont des entiers multipliés par $(r-1)!$ une fois le facteur global rétabli.}
 Par conséquent :
 
 \textbf{Si $(r-1)!\,x' = 0$ dans $A^{1}(X)$, alors
-$c\bigl(i_{!}(\mathcal{O}_{Y})\bigr) = 1$.}\footnote{Le dernier membre de la
+$c\bigl(i_{!}(\mathcal{O}_{Y})\bigr) = 1$.}\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder2.lean, \texttt{chernImmersion}) dans le modèle du
+principe de scindage, avec $c(L^{-i} \otimes \mathcal{O}(-Y)) = 1 - x' -
+i\eta$ : le calcul tient tel quel, et n'utilise que l'inversibilité de
+$1 - x'$ (automatique, $x'$ étant nilpotent dans $\widetilde{A}(X)$) et
+l'hypothèse $(r-1)!\,x' = 0$. La non-nullité de la classe et la restriction
+$r \geqslant 3$ ci-dessous relèvent de la géométrie et ne sont pas
+formalisées.}\footnote{Le dernier membre de la
 page 13 est lu $0$ ; la classe de Chern \emph{totale} vaut $1$, et c'est sa
 partie de degré $\geqslant 1$ qui vaut $0$. Les deux énoncés disent la même
 chose et ne diffèrent que par ce que $\widetilde{C}$ désigne ; le feuillet ne
 tranche pas, et il n'y a rien à trancher.}
 
-Autrement dit, la classe non nulle $[\mathcal{O}_{Y \times \mathbb{P}^{r}}]$ a
-une classe de Chern totale triviale : les classes de Chern ne séparent pas.
+Autrement dit, la classe non nulle $i_{!}[\mathcal{O}_{Y}] =
+[\mathcal{O}_{Y \times \{\mathrm{pt}\}}]$ a une classe de Chern totale
+triviale : les classes de Chern ne séparent pas.\footnote{La page nomme cette
+classe $Y \times \mathbb{P}^{r}$, et la première version de cette lecture
+l'avait suivie ; mais $i_{!}(\mathcal{O}_{Y}) = [\mathcal{O}_{Y}] \otimes
+\xi^{r}$ est la classe de $Y \times \{\mathrm{pt}\}$, $\xi^{r}$ étant celle
+d'un point, et c'est sur elle que porte tout le calcul.} Comme
+$(r-1)! = 1$ pour $r \leqslant 2$, l'hypothèse force alors $x' = 0$ : le
+phénomène demande $r \geqslant 3$.
 Reste à produire un $x' \neq 0$ tué par $(r-1)!$, ce qu'une classe de torsion
 de $\operatorname{Pic}^{0}$ fournit --- par exemple un point de torsion d'ordre
 divisant $(r-1)!$ sur une courbe elliptique.\footnote{Le feuillet demande
