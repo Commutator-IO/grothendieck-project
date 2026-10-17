@@ -57,15 +57,13 @@ theorem isWeq_iff_bijective {X Y : Type*} [MulAction G X] [MulAction G Y] (f : X
   · rintro ⟨hs, hi, hst⟩
     refine ⟨fun x x' hxx => ?_, fun y => ?_⟩
     · obtain ⟨h, rfl⟩ := hi x x' 1 (by rw [one_smul, hxx])
-      have : h • f x = f x := by rw [← map_smul, hxx]
-      rw [hst x h this]
+      rw [hst x h (by rw [← map_smul, hxx])]
     · obtain ⟨x, g, rfl⟩ := hs y
       exact ⟨g • x, map_smul f g x⟩
   · rintro ⟨hinj, hsurj⟩
-    refine ⟨fun y => ?_, fun x x' g hg => ⟨g, hinj (by rw [map_smul, hg])⟩,
+    exact ⟨fun y => (hsurj y).imp fun x hx => ⟨1, by rw [one_smul, hx]⟩,
+      fun x x' g hg => ⟨g, hinj (by rw [map_smul, hg])⟩,
       fun x g hg => hinj (by rw [map_smul, hg])⟩
-    obtain ⟨x, rfl⟩ := hsurj y
-    exact ⟨x, 1, one_smul _ _⟩
 
 /-- The product of two maps of `G`-sets. -/
 def prodHom {X Y X' Y' : Type*} [MulAction G X] [MulAction G Y] [MulAction G X']
@@ -89,10 +87,8 @@ def piHom {ι : Type*} {X Y : ι → Type*} [∀ i, MulAction G (X i)] [∀ i, M
 /-- `𝒲_A` is stable under products of any family, finite or not. -/
 theorem isWeq_pi {ι : Type*} {X Y : ι → Type*} [∀ i, MulAction G (X i)]
     [∀ i, MulAction G (Y i)] {f : ∀ i, X i →[G] Y i} (hf : ∀ i, IsWeq G (f i)) :
-    IsWeq G (piHom f) := by
-  rw [isWeq_iff_bijective]
-  simp only [isWeq_iff_bijective] at hf
-  exact Function.Bijective.piMap hf
+    IsWeq G (piHom f) :=
+  (isWeq_iff_bijective _).2 (.piMap fun i => (isWeq_iff_bijective _).1 (hf i))
 
 /-- `A = A/e` is not aspherical when `G ≠ 1`. -/
 theorem not_aspherical_point [Nontrivial G] : ¬ Aspherical G PUnit := by
