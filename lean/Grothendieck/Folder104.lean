@@ -117,9 +117,8 @@ theorem sousObjet_eq_of_meme_type {D : M} {x y : Subobject D} (hxy : x ≤ y)
 /-- In the converse construction: the composition law gives `u_d ∘ u_d = u_d`,
 and `u_d` being bijective it is the identity. -/
 theorem id_of_idempotent_bijective {α : Type*} (f : α → α) (hf : Function.Bijective f)
-    (h : f ∘ f = f) : f = id := by
-  funext x
-  exact hf.1 (congrFun h x)
+    (h : f ∘ f = f) : f = id :=
+  funext fun x => hf.1 (congrFun h x)
 
 end Modeles
 
@@ -178,9 +177,7 @@ theorem wf_of_degre {α : Type*} [Preorder α] [WellFoundedLT α] (deg : M → �
     WellFounded (Strict (M := M)) := by
   refine Subrelation.wf (r := InvImage (· < ·) deg) ?_ (InvImage.wf deg wellFounded_lt)
   rintro X Y ⟨⟨f⟩, ⟨e⟩⟩
-  refine hdeg f fun hi => ?_
-  cases hi
-  exact e (𝟙 X)
+  exact hdeg f fun ⟨_⟩ => e (𝟙 X)
 
 /-- (i) and (ii) do not make a direct category: the ordered set `ℤ`, as a
 category, satisfies both, and its strict order is not well founded. -/
@@ -230,8 +227,7 @@ written `δ_i ≫ δ_{j+1} = δ_j ≫ δ_i` for `i ≤ j`, as in mathlib's
 `SimplexCategory.δ_comp_δ`. -/
 theorem DeltaInj.δ_comp_δ {n : ℕ} {i j : Fin (n + 2)} (H : i ≤ j) :
     DeltaInj.δ i ≫ DeltaInj.δ j.succ = DeltaInj.δ j ≫ DeltaInj.δ i.castSucc := by
-  apply Subtype.ext
-  funext k
+  refine Subtype.ext (funext fun k => ?_)
   change j.succ.succAbove (i.succAbove k) = i.castSucc.succAbove (j.succAbove k)
   rcases i with ⟨i, hi⟩
   rcases j with ⟨j, hj⟩
@@ -304,11 +300,8 @@ theorem card_I_cube (n : ℕ) : Fintype.card (Fin n → Option Bool) = 3 ^ n := 
 /-- Page 5: `1 + n·2 + C(n,2)·2² + ⋯ + 2ⁿ = (1 + 2)ⁿ`. -/
 theorem somme_faces_cube (n : ℕ) :
     ∑ k ∈ Finset.range (n + 1), n.choose k * 2 ^ k = 3 ^ n := by
-  have := (add_pow (2 : ℕ) 1 n).symm
-  simp only [one_pow, mul_one] at this
-  rw [show (2 : ℕ) + 1 = 3 from rfl] at this
-  rw [← this]
-  exact Finset.sum_congr rfl fun k _ => mul_comm _ _
+  rw [show (3 : ℕ) = 2 + 1 from rfl, add_pow]
+  exact Finset.sum_congr rfl fun k _ => by rw [one_pow, mul_one, mul_comm, Nat.cast_id]
 
 /-- **Example 3**, the hemispherical disc `D_n`: `I_n = (Δ_{n-1} × {±1}) ⊔ {d_n}`
 (`none` is `d_n`). -/
@@ -359,10 +352,9 @@ theorem card_type_hemi (n : ℕ) (k : Fin n) :
       (fun x => ∃ e : Bool, x = some (k, e))).card = 2 := by
   have : (Finset.univ : Finset (Option (Fin n × Bool))).filter (fun x => ∃ e : Bool, x = some (k, e)) =
       Finset.univ.image (fun e : Bool => (some (k, e) : Option (Fin n × Bool))) := by
-    refine Finset.ext fun x => ?_
-    rw [Finset.mem_filter, Finset.mem_image]
-    simp only [Finset.mem_univ, true_and]
-    exact ⟨fun ⟨e, h⟩ => ⟨e, h.symm⟩, fun ⟨e, h⟩ => ⟨e, h.symm⟩⟩
+    ext x
+    simp only [Finset.mem_filter, Finset.mem_image, Finset.mem_univ, true_and]
+    exact exists_congr fun _ => eq_comm
   rw [this, Finset.card_image_of_injective _ (fun e e' h => by
     simpa using (Option.some.inj h : ((k, e) : Fin n × Bool) = (k, e')))]
   rfl
@@ -383,7 +375,6 @@ theorem globulaire_complexe {F₂ F₁ F₀ : Type*} (s₂ t₂ : F₂ → F₁)
     (hs : s₁ ∘ s₂ = s₁ ∘ t₂) (ht : t₁ ∘ s₂ = t₁ ∘ t₂) :
     (Finsupp.lmapDomain ℤ ℤ t₁ - Finsupp.lmapDomain ℤ ℤ s₁) ∘ₗ
       (Finsupp.lmapDomain ℤ ℤ t₂ - Finsupp.lmapDomain ℤ ℤ s₂) = 0 := by
-  simp only [LinearMap.sub_comp, LinearMap.comp_sub, ← Finsupp.lmapDomain_comp, hs, ht]
-  exact sub_self _
+  simp only [LinearMap.sub_comp, LinearMap.comp_sub, ← Finsupp.lmapDomain_comp, hs, ht, sub_self]
 
 end Grothendieck.Folder104
