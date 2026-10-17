@@ -51,6 +51,19 @@
 %
 % Pass: Opus 5 (claude-opus-5), 2026-08-29 — first pass, unchecked against the
 % pages by a human.
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder29.lean): the determinant criterion of
+% p. 120 holds as stated, for any integer matrix (criterion); one prime l
+% already forces card C = card C'; the matching of columns with rows
+% changes det N only by a sign. Mathlib: a square matrix is invertible iff
+% its determinant is a unit (isUnit_iff_isUnit_det). Literature of the
+% finding cited at p. 120 (SGA 1 XIII App. I 5.3, Illusie 2002, Abbes-Saito
+% 2011): the criterion not found written there. From the page-proof pass
+% (#55): the struck proposition of p. 193 is argued only in the direction
+% « r faithful => R2 »; the Conclusion of p. 214 does not write that a
+% morphism so trivialised is of degree n. No facsimile check since
+% 2026-10-10.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -3046,7 +3059,33 @@ Le critère est joli et il est exact : $N$ doit être inversible sur
 $\prod_{\ell \neq p}\mathbb{Z}_{\ell}$, ce qui revient à demander que $\det N$
 soit inversible dans cet anneau, c'est-à-dire premier à tout $\ell \neq p$,
 c'est-à-dire une puissance de $p$ au signe près. La caractéristique n'entre
-donc qu'à un seul endroit, et sous cette forme.
+donc qu'à un seul endroit, et sous cette forme.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder29.lean, \texttt{criterion}) pour toute matrice
+entière $N$, $\underline{Z}_{\ell}(1)$ étant libre de rang~$1$ sur
+$\mathbb{Z}_{\ell}$ : $N$ est bijective sur $\mathbb{Z}_{\ell}$ pour tout
+premier $\ell \neq p$ (avec $p$ premier, ou $p = 1$ en caractéristique nulle,
+comme l'exposant caractéristique de la page) si et seulement si
+$\operatorname{card} C = \operatorname{card} C'$ et $\det N = \pm p^{r}$. Le
+critère tient tel que la page le donne ; un seul $\ell$ suffit déjà à forcer
+l'égalité des cardinaux (\texttt{card\_eq\_of\_bijective}), et $\det N$ n'a
+de sens qu'une fois les colonnes mises en bijection avec les lignes, le choix
+de la bijection ne changeant le déterminant que d'un signe
+(\texttt{criterion\_of\_equiv}). Le pas « bijective si et seulement si le
+déterminant est inversible » est l'énoncé classique qu'une matrice carrée sur
+un anneau commutatif est inversible si et seulement si son déterminant l'est,
+\texttt{Matrix.isUnit\_iff\_isUnit\_det} dans mathlib. Que l'application
+induite sur l'inertie modérée soit $N$, et l'énoncé de conjugaison, ne sont pas
+formalisés. Côté littérature, l'inertie modérée en un point à $r$ branches est
+canoniquement $\prod_{\ell \neq p} \mathbb{Z}_{\ell}(1)^{r}$, un facteur par
+branche (SGA~1, exposé XIII de Mme M.~Raynaud, appendice~I, corollaire~5.3), et
+L.~Illusie (\emph{Astérisque} 279, 2002, 4.6 et exemples~4.7) décrit
+l'inertie logarithmique comme $\mathrm{Hom}(\bar{M}^{\mathrm{gp}},
+\mathbb{Z}'(1))$, en la comparant à Grothendieck--Murre ; A.~Abbes et
+T.~Saito (\emph{Tohoku Math.~J.} 63, 2011, lemme~2.15) ne donnent que
+l'inclusion des groupes d'inertie par image inverse d'un torseur galoisien.
+Le critère sous forme de déterminant et l'énoncé de conjugaison n'ont été
+trouvés écrits dans aucune de ces sources ; ils en sont à un pas, et doivent
+être tenus pour probablement connus.}
 
 \subsection*{5. Le cas d'un diviseur image inverse}
 
@@ -4841,7 +4880,11 @@ $X' \cap X'' \subset X'$ et $X' \cap X'' \subset X''$ deviennent des
 isomorphismes par $r$, ce qui ramène au cas d'une inclusion
 $X' \subset X''$, soit $X'' = X' \sqcup X_{1}$. Alors
 $r(X'') = r(X') \sqcup r(X_{1})$, et $r(X') = r(X'')$ équivaut à
-$r(X_{1}) = \varnothing$, donc à $X_{1} = \varnothing$.
+$r(X_{1}) = \varnothing$, donc à $X_{1} = \varnothing$.\footnote{La page
+n'argumente que ce sens, « $r$ fidèle $\Rightarrow$ R2 », et la proposition
+est rayée avec le reste du feuillet. La réciproque, que R2 entraîne la
+fidélité de $r$, n'est démontrée ni sur la page ni ici : l'équivalence est
+énoncée par Grothendieck, non établie.}
 
 Cette proposition mérite d'être mise en regard des pages 12 à 20. En 1967, la
 \emph{non-}pleine-fidélité de la réalisation géométrique était le fait
@@ -5645,6 +5688,12 @@ $Y' \to Y$ épimorphisme effectif universel, et de descente effective, avec
 \[
   X \times_{Y} Y' \;\simeq\; [1, n]_{Y'} .
 \]
+La récurrence ci-dessus donne le sens direct : un morphisme de degré $n$
+devient $[1, n]$ après un tel changement de base, et la page en tire
+l'unicité.\footnote{La page ne démontre que ce sens, et ne dit pas qu'un
+morphisme ainsi trivialisé est de degré $n$, ce que l'équivalence affirme
+aussi. La récurrence s'appuie en outre sur les conditions (0) à (2), et non
+sur les seules propriétés a) à e) de (3).}
 
 C'est-à-dire : \emph{un morphisme est de degré $n$ s'il devient l'ensemble
 constant à $n$ éléments après un changement de base convenable}, et cette
