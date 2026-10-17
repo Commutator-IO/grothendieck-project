@@ -87,6 +87,15 @@
 %   - page 197's « p alpha <= pn, d'où alpha <= 0 » needs alpha + pn <= pn, and
 %     page 196 writes p for n in c_{n,n+1} and e_{0,n+1}.
 %
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — with the Lean check
+% (Folder10.lean): the strings e_{n,k} of p. 194 (indecomposable, pairwise
+% inequivalent, dual) footnoted as checked; the edition's decomposition
+% xi (x) e_{n,k} = e_{n,k+1} + e_{n+p,k-1} (k >= 2 invertible, any p, any
+% characteristic) added beside p. 197 as a second route to alpha = 0. No
+% mathlib result; the findings record no literature read (the codicological
+% ones cite only the transcriptions); the facsimile check of 2026-09-27
+% (« couvrants », p. 41, retyped) touches nothing the reading says.
+%
 % Revised 2026-09-23 (Opus 5.5, claude-opus-5-5), after the find-novelty pass.
 % Each point checked against the transcriptions (and page 188 against the
 % facsimile) before changing:
@@ -3712,7 +3721,17 @@ $e_{0,k}$ est de dimension $k$, les poids de $e_{n,k}$ sont $n$, $n+p$,
 \end{quote}
 La formule du dual se lit sur les poids : le dual de $e_{n,k}$ a pour poids les
 opposés, donc pour poids minimal $-n-p(k-1)$, et il est encore indécomposable
-de dimension $k$.
+de dimension $k$.\footnote{Vérifié en Lean (lean/Grothendieck/Folder10.lean,
+\texttt{string\_end\_scalar}, \texttt{string\_indecomposable},
+\texttt{string\_iso\_imp}, \texttt{string\_dual}), les représentations étant
+lues, comme page 191, par l'algèbre de Lie : un espace vectoriel muni de $X$,
+$Y$ avec $[Y, X] = pX$, et $e_{n,k}$ la chaîne $X z_j = z_{j+1}$, $Y z_j = (n
++ pj)\, z_j$. En caractéristique nulle et pour $p \geqslant 1$, tout
+endomorphisme de $e_{n,k}$ est scalaire, donc $e_{n,k}$ est indécomposable ;
+$e_{n,k} \simeq e_{n',k'}$ force $n = n'$ et $k = k'$ (dimension et trace de
+$Y$) ; et la formule du dual vaut sur tout corps et pour tout $p$. Que toute
+représentation indécomposable soit une chaîne (lemmes 1 et 2) n'est pas
+formalisé, ni le passage du groupe à son algèbre de Lie.}
 
 \subsection*{Le calcul de l'anneau}
 
@@ -3783,7 +3802,20 @@ regard de $e_{\alpha,p+1}$, s'accorde avec ce plus haut poids. La page 196 note 
 terme $c_{p,p+1} = \sigma_{\alpha}$ et $\sigma_{\alpha}e_{0,p+1} =
 e_{\alpha,p+1}$, avec $p$ là où l'exposant est $n$. La transcription donne ces
 leçons telles quelles ; une version antérieure de cette lecture les
-reproduisait.}
+reproduisait.} Le même $\alpha = 0$ s'obtient sans les poids, par une
+décomposition que la page n'écrit pas : pour $k \geqslant 2$,
+\[
+\xi \otimes e_{n,k} \simeq e_{n,k+1} \oplus e_{n+p,k-1} ,
+\]
+les deux chaînes étant engendrées par $a \otimes z_{0}$ et par $a \otimes
+z_{1} - (k-1)\, b \otimes z_{0}$ ($a$, $b$ la base de $\xi$, de poids $0$ et
+$p$, $Xa = b$) ; donc $\xi \cdot e_{0,k} = e_{0,k+1} + \sigma_{p}\, e_{0,k-1}$,
+et par récurrence $c_{n,n+1} = 1$.\footnote{Cette décomposition est de
+l'édition. Vérifié en Lean (lean/Grothendieck/Folder10.lean,
+\texttt{xi\_tensor\_string}) : elle vaut sur tout corps où l'entier $k$ est inversible,
+sans hypothèse sur $p$ ni sur la caractéristique. L'anneau $R(G) =
+\mathbf{Z}[\mathbf{Z}][\xi]$ lui-même n'est pas formalisé : il demande la
+classification et le théorème de Krull--Schmidt, absents de mathlib.}
 
 \begin{quote}
 \textbf{Proposition (page 197).} $R(G)$ est l'algèbre de polynômes sur
