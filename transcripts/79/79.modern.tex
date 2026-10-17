@@ -12,6 +12,15 @@
 % batch-15.fr.tex (pp. 1-20, 21-40, ..., 261-280, 281-296).
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-11 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — footnotes added from the Lean checks
+% (lean/Grothendieck/Folder79.lean): distance <= 3 over semi-local rings and stable range
+% one (pp. 19-20, Bass 1964, mathlib CRT, open PR 44734, Singerman-Strudwick Thm 11); the
+% commutant over any ring, without 2 != 0 or bijectivity (pp. 92-95); the twist in the
+% model (pp. 96-101, 136-140); the distance-3 argument of p. 188 (abstract part, model,
+% Singerman-Strudwick Thm 9); (89) in both directions, commutativity of Z derived (p. 247);
+% a vertex determined by its star over any ring (pp. 275-279), which settles in the
+% algebraic setting the question the page leaves open (no other vertex shares the star).
+% The Wilson-operator footnote (p. 138) no longer suggests the twist is Wilson's operator.
 % The folder was read whole, all fifteen batches, batch by batch with notes;
 % this is one document for the shelfmark. It was made on Opus 5.5 and has not
 % been measured against the reference reading of folder 115 (made on Opus 5).
@@ -478,7 +487,27 @@ avec $e = \lambda\, x \wedge y$, $\lambda \in \Lambda^{*}$, l'élément $z =
 relier par des chaînes de bases, ce qui est toujours possible sur un anneau
 semi-local. On trouve même que deux sommets de $SP_M$ sont à distance au plus
 $3$ quand $\Lambda$ est semi-local, la borne étant atteinte pour l'icosaèdre
-($\Lambda = \mathbf{Z}/5\mathbf{Z}$). Pour $\Lambda = \mathbf{Z}$, la page 21
+($\Lambda = \mathbf{Z}/5\mathbf{Z}$)\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder79.lean, \texttt{semilocal\_dist\_three}) pour tout
+anneau commutatif n'ayant qu'un nombre fini d'idéaux maximaux, donc pour les
+anneaux locaux, les corps et les $\mathbf{Z}/n\mathbf{Z}$, et pour toute jauge
+$e$ : il existe $z_1, z_2 \in M^{*}$ avec $x \wedge z_1 = z_1 \wedge z_2 = z_2
+\wedge y = e$. Le fait que la page cite comme connu (« on sait que »), un
+partenaire de base commun, est le rang stable $1$ des anneaux semi-locaux :
+si $a_0d + b_0d' = 1$, il existe $a \in \Lambda$ tel que $ad + d'$ soit
+inversible. Il est dû à Bass
+(« K-theory and stable algebra », Publ. Math. IHÉS 22, 1964, § 4 et lemme
+6.4) ; la vérification (\texttt{exists\_isUnit\_mul\_add}) le démontre par le
+théorème chinois, \texttt{Ideal.exists\_forall\_sub\_mem\_ideal} dans mathlib,
+et l'énoncé est proposé à mathlib (PR ouverte n° 44734). La borne est
+atteinte, de nous, pour $\mathbf{Z}/n\mathbf{Z}$ dès que $n \notin \{1, 2, 3,
+4, 6\}$, icosaèdre compris : un sommet y est à distance exactement $3$ de son
+image par un $\mu \in (\mathbf{Z}/n)^{*}$, $\mu \neq \pm 1$
+(\texttt{zmod\_scal\_dist\_three} ; voir le § X, pages 187 et 188). Pour
+$\Lambda = \mathbf{Z}/n\mathbf{Z}$, $n \geq 5$, le diamètre $3$ est le théorème
+11 de Singerman et Strudwick, « The Farey maps modulo $N$ » (arXiv:1803.08851,
+§ 10.1) ; la borne sur un anneau semi-local quelconque n'a pas été trouvée
+imprimée.}. Pour $\Lambda = \mathbf{Z}$, la page 21
 juge « sûrement vrai » que $SP_M$ est connexe, sans s'y attarder\footnote{C'est
 vrai, et c'est l'algorithme d'Euclide : un vecteur primitif $(a, b)$ de
 $\mathbf{Z}^2$ distinct de $\pm(1, 0), \pm(0, 1)$ est la somme de deux vecteurs
@@ -1121,7 +1150,21 @@ D'où deux cas :
 Le cas typique de 1) est $\Lambda = \mathbf{Z}/4\mathbf{Z}$ : $Z'_\Lambda$ est
 trivial, mais les permutations des six sommets de l'octaèdre qui commutent aux
 rotations ne se réduisent pas à l'identité --- il y a l'antipodie de
-l'octaèdre.
+l'octaèdre\footnote{Vérifié en Lean (lean/Grothendieck/Folder79.lean,
+\texttt{commutant}, \texttt{commutant\_converse},
+\texttt{exceptional\_zmod\_iff}), sous une forme plus générale que la page :
+sur tout anneau commutatif, sans supposer $2 \neq 0$ ni la bijectivité, une
+application de $S_M$ dans lui-même qui commute à $\mathrm{SL}(M)$ est un
+scalaire, ou bien $2\Lambda \subset \{0, 2\}$ et c'est un scalaire composé avec
+$\sigma(\dot x) = (x + 2y)^{\cdot}$, où $x \wedge y = 1$ ; quand $2 = 0$,
+$\sigma$ est l'identité. L'application $\sigma$ est bien définie, commute aux
+scalaires, vérifie $\sigma^2 = 1$ et n'est un scalaire que si $2 = 0$ : le
+produit est bien direct, comme la page le dit. Elle envoie $\dot e_1$ sur la
+classe de $(1, 2)$, image de $e_1$ par la matrice de la page ; la formule
+biffée de la page 95 est celle que l'on démontre. Sur $\mathbf{Z}/n\mathbf{Z}$,
+$2\Lambda = \{0, 2\} \neq \{0\}$ si et seulement si $n = 4$. La vérification
+fixe l'image de $\dot e_1$ au lieu de passer par le normalisateur, ce qui
+revient au même calcul.}.
 
 \pagerange{96}{101}
 \subsection*{Lire $Z'_\Lambda$ sur les étoiles (pages 96 à 101)}
@@ -1157,7 +1200,10 @@ de $s$ dans $P_{\mu i_0}$, où les voisins sont $y' \sim y' \pm x$. La
 translation de $k$ crans devient donc une translation de $\mu k$ crans :
 $\lambda_{\Gamma, s} = \pm\mu$, et l'application est $T_\mu \mapsto \mu$ modulo
 $\pm 1$, sans exposant. Les formules (65) et (66) portent un exposant illisible
-(« un $4$ ? ») qu'on ne restitue pas.}.
+(« un $4$ ? ») qu'on ne restitue pas. Ces identités sont vérifiées en Lean
+(lean/Grothendieck/Folder79.lean, \texttt{twist\_edge}), sur tout anneau
+commutatif : tordre une extrémité par $\mu$ change les arêtes de type $\pm e$ en
+arêtes de type $\pm\mu e$, et l'indice $k$ de l'étoile devient $\mu k$.}.
 
 Enfin, l'ensemble $\overrightarrow{\Pi} = \coprod_{i \in \Pi} \mu(i)$ des
 couples (structure, orientation) reçoit une action de $\Lambda^{*}$ au-dessus
@@ -1425,7 +1471,13 @@ l'opération qui remplace en chaque sommet la rotation $\rho_0$ par
 $\rho_0^\nu$ est connue aujourd'hui comme opérateur de Wilson, et les $\nu$ qui
 donnent une carte isomorphe sont les \emph{exposants} de la carte (Wilson,
 1979 ; Nedela et Škoviera, 1997). Cités de mémoire ; la page ne connaît pas
-ces noms.}.
+ces noms. L'opération du dossier ne s'identifie pas pour autant à celle de
+Wilson : l'opérateur de Wilson garde le graphe et change la rotation en chaque
+sommet, ce qui détruit en général les faces triangulaires, tandis que la
+torsion $A_0^{(\nu)}$ ci-dessous change l'ensemble des arêtes, garde les
+étoiles comme parties de $S$ (en déplaçant leur centre) et garde des
+triangles. Le rapport entre les deux opérations (la même, sa duale, ou une
+composée) n'est pas établi.}.
 
 On pose alors (To 6) : pour tout $\lambda \in Z$ il existe $\nu \in Z'_n$ tel
 que, pour tout sommet $s$, la structure de polygone induite par $A_\lambda$ sur
@@ -1442,7 +1494,11 @@ remarquable, et qui pourrait être très forte, qui mérite d'être examinée po
 son propre mérite »\footnote{Dans le modèle (de nous) : pour $\lambda =
 T_\mu$, l'étoile de $\dot x$ est $\{y + kx\}$ ; pour $A_0$, $y + kx$ est voisin
 de $y + (k \pm 1)x$, pour $A_{T_\mu}$ de $y + (k \pm \mu)x$. Donc $\nu = \mu$,
-et l'injection $Z \to Z'_n$ est l'isomorphisme $T_\mu \mapsto \mu$.}.
+et l'injection $Z \to Z'_n$ est l'isomorphisme $T_\mu \mapsto \mu$. Ce
+calcul dans le modèle est vérifié en Lean (lean/Grothendieck/Folder79.lean,
+\texttt{twist\_edge}), sur tout anneau commutatif ; l'action de $Z'_n$ sur les
+structures de polygone d'un ensemble quelconque, l'axiome To 6 dans le cadre
+abstrait et l'injection qui en découle ne le sont pas.}.
 
 \pagerange{141}{145}
 \subsection*{Les premiers cas, et le torseur des orientations (pages 141 à 145)}
@@ -1773,7 +1829,27 @@ la même étoile, ce qui n'arrive que pour l'octaèdre\footnote{C'est le lemme d
 la page 275, énoncé plus tard : deux sommets distincts de même étoile forment
 une double pyramide, qui n'est régulière que pour l'octaèdre. Le passage de
 « un voisin commun » à « même étoile » utilise que $G_{0s}$ fixe aussi
-$\lambda^{-1}s$ et est transitif sur l'étoile de $s$.}. L'examen de b) est
+$\lambda^{-1}s$ et est transitif sur l'étoile de $s$. Vérifié en Lean
+(lean/Grothendieck/Folder79.lean, \texttt{homothety\_dist\_ge\_three}) dans
+le cadre abstrait du graphe de classes $H/U_0$, avec $\sigma^2 \in U_0$ : une
+permutation $\lambda \neq 1$ qui commute à $H$ n'a pas de point fixe, n'envoie
+$s$ sur un voisin que si $s$ n'a qu'un voisin, et si $s$ et $\lambda s$ ont un
+voisin commun ils ont les mêmes voisins. Seule la transitivité sur les arêtes
+orientées sert ; l'exclusion de la distance $1$ demande que $s$ ait au moins
+deux voisins, et le passage de « même étoile » à « octaèdre », le lemme du
+double cône, n'est pas vérifié : l'énoncé vérifié suppose à sa place qu'aucun
+autre sommet n'a l'étoile de $s$. Dans le modèle, sur tout anneau commutatif
+non nul et pour tout type $\pm e$, une application $f \neq \mathrm{id}$ qui
+commute à $\mathrm{SL}(2, \Lambda)$ n'envoie aucun sommet à distance $0$ ou
+$1$, et à distance $2$ si et seulement si $f$ est l'application $\sigma$ des
+pages 92 à 95, ce qui sur $\mathbf{Z}/n\mathbf{Z}$ n'arrive que pour $n = 4$
+(\texttt{commutant\_dist}) ; sur un anneau semi-local, la distance vaut alors
+exactement $3$ dès que $f \neq \sigma$ (\texttt{commutant\_dist\_three},
+\texttt{zmod\_scal\_dist\_three}). L'application au modèle est de l'édition.
+Pour $\Lambda = \mathbf{Z}/n\mathbf{Z}$, c'est le théorème 9 de Singerman et
+Strudwick, « The Farey maps modulo $N$ » (arXiv:1803.08851, § 10) : deux
+pôles distincts $a/0$ de la carte de Farey modulo $n$, qui forment l'orbite de
+$1/0$ sous $Z'_n$, sont à distance $3$.}. L'examen de b) est
 commencé (page 189) et laissé là.
 
 \pagerange{190}{197}
@@ -2083,7 +2159,17 @@ u_1$, est injective\footnote{Dans le modèle (de nous), $H = \mathrm{SL}(2,
 groupe unipotent supérieur, $U_1$ l'inférieur, $T_H$ le tore diagonal $\simeq
 (\mathbf{Z}/n)^{*}/\{\pm 1\}$, $\sigma = \bigl(\begin{smallmatrix} 0 & -1 \\ 1 &
 0 \end{smallmatrix}\bigr)$ ; c) est l'unicité de la décomposition de Gauss (ici
-sous la forme $UDL$) sur la grosse cellule de Bruhat.}.
+sous la forme $UDL$) sur la grosse cellule de Bruhat. L'équivalence (89)
+elle-même est vérifiée en Lean (lean/Grothendieck/Folder79.lean,
+\texttt{homothetyEquiv}), dans les deux sens, pour tout groupe $H$, tout
+sous-groupe $U_0$ et tout $\sigma$ avec $\sigma^2 \in U_0$ et $U_0 \cap U_1 =
+1$, y compris la réciproque que la page 247 vérifie sur des lignes en partie
+illisibles. La commutativité de $Z$, supposée plus haut, découle de la
+condition d'homothétie et de la fidélité (72), comme le dit la marge
+« [ ] résulte des autres » (\texttt{IsHomothetyGroup.comm}), et cela sans la
+simple transitivité ; la condition $\bigcap_u uU_0u^{-1} = 1$ ne sert pas.
+Seule la bijection entre groupes d'homothéties et sous-groupes $T_H$ est
+vérifiée, non l'isomorphisme de groupes $T_H \simeq Z$ de (81').}.
 
 \pagerange{248}{260}
 \subsection*{Le groupe $G$ reconstruit (pages 248 à 260)}
@@ -2228,7 +2314,16 @@ tout $x \in M^{*}$, $u \wedge x$ inversible entraîne $u' \wedge x \in \{\pm u
 \[
   2\Lambda = \{0, 2\} \neq \{0\} ,
 \]
-c'est-à-dire si $\Lambda$ est une $\mathbf{Z}/4$-algèbre, extension de
+c'est-à-dire\footnote{Vérifié en Lean (lean/Grothendieck/Folder79.lean,
+\texttt{same\_star\_iff}) sur tout anneau commutatif : l'hypothèse
+« semi-local » n'est pas nécessaire, et il suffit des voisins d'un seul type,
+les $z$ tels que $u \wedge z = 1$. Si $u \wedge y = 1$, $u'$ a les voisins de
+$u$ type par type si et seulement si $u' = \pm u$, ou bien $2\Lambda \subset
+\{0, 2\}$ et $u' = \pm(u + 2y)$, c'est-à-dire $\dot u' = \sigma(\dot u)$
+pour l'application $\sigma$ des pages 92 à 95. La démonstration vérifiée ne
+passe ni par les corps résiduels ni par la colinéarité ; la conclusion de la
+page 277 écrite $\alpha - \beta \in \pm(\alpha - \beta)$, qui doit se lire
+$\alpha + \beta \in \pm(\alpha - \beta)$, n'y intervient pas.} si $\Lambda$ est une $\mathbf{Z}/4$-algèbre, extension de
 l'$\mathbf{F}_2$-algèbre $\Lambda/2\Lambda$ par l'idéal $2\Lambda$, de carré
 nul, de dimension $1$ sur $\mathbf{F}_2$\footnote{La page parle d'une
 « connexion » $\chi : \Lambda/2\Lambda \to \mathbf{F}_2$ : c'est le caractère par
@@ -2245,11 +2340,19 @@ sans point fixe, avec $\mathrm{Et}_i(a(u)) = \mathrm{Et}_i(u)$ pour tout type
 $i$, et $a \in \mathrm{GL}'(M)^{\pm}$, de déterminant $-1$\footnote{Pour
 $\Lambda = \mathbf{Z}/4$, on vérifie (de nous) que $a$ est la classe de la
 matrice $\bigl(\begin{smallmatrix} 1 & 2 \\ 2 & -1 \end{smallmatrix}\bigr)$, de
-déterminant $-5 = -1$.}. Pour $\Lambda = \mathbf{Z}/4$ c'est l'antipodie de
+déterminant $-5 = -1$. Vérifié en Lean (lean/Grothendieck/Folder79.lean,
+\texttt{same\_star\_iff}) sur tout anneau tel que $2\Lambda \subset \{0,
+2\}$ : cette matrice envoie $x$ sur $\pm(x + 2y)$, a pour déterminant $-1$ et
+pour carré $1$.}. Pour $\Lambda = \mathbf{Z}/4$ c'est l'antipodie de
 l'octaèdre, « retrouvée par voie d'algèbre linéaire » : c'est l'exception du §
 VI, et celle que les §§ VII et VIII rencontraient sous le nom d'octaèdre. La
-construction marche dès que $2\Lambda = \{0, 2\} \neq \{0\}$, mais rien ne dit
-alors qu'il n'y a pas d'autres sommets de même étoile.
+construction marche dès que $2\Lambda = \{0, 2\} \neq \{0\}$ ; la page
+ajoute, sur une lecture en partie incertaine, qu'il n'est pas nécessairement
+vrai qu'aucun autre sommet n'ait alors l'étoile de $u$. Il n'y en a pas dans
+ce cadre algébrique, où l'étoile est prise type par type : par l'équivalence
+vérifiée en Lean (\texttt{same\_star\_iff}), le seul sommet autre que $\dot
+u$ qui ait les voisins de $\dot u$ est $a(\dot u) = \sigma(\dot u)$ (de
+nous).
 
 La page 280, au crayon, essaie des conditions de connexité (deux sommets reliés
 par une chaîne de longueur $4$) et note : « Sommet déterminé par son étoile ?
