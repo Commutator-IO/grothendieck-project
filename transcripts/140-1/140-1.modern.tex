@@ -76,6 +76,13 @@
 % definition of PM_{11}.
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-09-24 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — with the Lean check
+% (Folder140_1.lean): the bound of the marginal note of p. 22, as the reading
+% computes it (H^1(S_3, V(J)) = Z/3, H^1(S_3, k^*) = mu_2(k), order dividing
+% 6, resp. 3), footnoted as checked; the lower bound stays unchecked. No
+% mathlib theorem beyond the frame of group cohomology; the finding's
+% literature is unread search results (status unsearched), so nothing cited;
+% no facsimile correction since the pass.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -1118,7 +1125,21 @@ cherché est donc d'ordre divisant $6$ (resp. $3$), et il suffit de montrer que 
 classe de $\mathcal{O}(1)$ est d'ordre exactement $6$ (resp. $3$).\footnote{La
 note marginale écrit les deux suites exactes, et les calculs de
 $H^1(\mathfrak{S}_3, \cdot)$ ne sont pas sur la page ; ils sont ajoutés. Le
-terme médian de la première suite est coupé par le bord de la feuille.}
+terme médian de la première suite est coupé par le bord de la feuille.
+Vérifié en Lean (lean/Grothendieck/Folder140\_1.lean, \texttt{card\_H1\_VJ},
+\texttt{card\_H1\_triv}, \texttt{card\_mu2\_dvd},
+\texttt{card\_mu2\_char\_two}, \texttt{card\_H1\_dvd}), dans la cohomologie
+des groupes de mathlib : $H^1(\mathfrak{S}_3, V(J)) \simeq \mathbb{Z}/3$, un
+cocycle à valeurs dans $V(J)$ étant le cobord, dans $\mathbb{Z}^J$, du
+potentiel $m_j = -f(\tau_j)_j$ ($\tau_j$ la transposition de $0$ et $j$), de
+classe $\sum_j m_j \bmod 3$ ; $H^1(\mathfrak{S}_3, k^{*}) = \mu_2(k)$ pour un
+anneau intègre $k$ à action triviale, d'ordre divisant $2$ et égal à $1$ si
+$2 = 0$ ; et, pour toute extension $0 \to k^{*} \to M \to V(J) \to 0$ de
+$\mathfrak{S}_3$-modules, l'ordre de $H^1(\mathfrak{S}_3, M)$ divise $6$
+(resp.\ $3$). La majoration tient donc telle que nous la calculons. Ne sont pas
+formalisés le calcul des unités de $U_{0,3}$, $\mathrm{Pic}(U_{0,3}) = 0$ et la
+suite de Hochschild--Serre, ni la minoration : les valeurs $\mathbb{Z}/6$ et
+$\mathbb{Z}/3$ du lemme ne sont pas vérifiées en Lean.}
 
 \emph{L'ordre divise $6$.} La section
 \[
