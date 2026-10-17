@@ -160,8 +160,7 @@ theorem pi_sq (g : W) (r : R) (u : Rep' n I) :
   have h2 : (τ n).trans ((τ n).trans u) = u := by
     ext k; simp [τ, swap_apply_self]
   rw [h1, h2, E.equivariant, ab]
-  congr 1
-  congr 1
+  congr 2
   group
 
 /-- `π^{2m}(r, u) = ((ab)^m r, u)`. -/
@@ -186,24 +185,16 @@ theorem pi_pow_fixe (r : R) (u : Rep' n I) (k : ℕ) :
     (pi E n ^ k) (r, u) = (r, u) ↔ 2 * orderOf (ab E n r u) ∣ k := by
   obtain ⟨m, rfl | rfl⟩ := Nat.even_or_odd' k
   · rw [pi_pow_pair, Nat.mul_dvd_mul_iff_left two_pos, orderOf_dvd_iff_pow_eq_one]
-    constructor
-    · intro h; exact E.libre _ _ (congrArg Prod.fst h)
-    · intro h; rw [h, one_smul]
-  · constructor
-    · intro h; exact absurd (congrArg Prod.snd h) (pi_pow_impair E n r u m)
-    · intro h
-      have : 2 ∣ 2 * m + 1 := (dvd_mul_right 2 _).trans h
-      omega
+    exact ⟨fun h => E.libre _ _ (congrArg Prod.fst h), fun h => by rw [h, one_smul]⟩
+  · exact iff_of_false (fun h => pi_pow_impair E n r u m (congrArg Prod.snd h)) fun h =>
+      absurd ((dvd_mul_right 2 _).trans h) (by omega)
 
 /-- `n_{ij}` does not depend on the base: `φ(w r, i) φ(w r, j)` is conjugate to
 `φ(r, i) φ(r, j)`. -/
 theorem orderOf_indep (r r' : R) (i j : I) :
     orderOf (E.φ r' i * E.φ r' j) = orderOf (E.φ r i * E.φ r j) := by
   obtain ⟨w, rfl⟩ := E.transitif r r'
-  rw [E.equivariant, E.equivariant]
-  have : w * E.φ r i * w⁻¹ * (w * E.φ r j * w⁻¹) = MulAut.conj w (E.φ r i * E.φ r j) := by
-    rw [MulAut.conj_apply]; group
-  rw [this, MulEquiv.orderOf_eq]
+  rw [E.equivariant, E.equivariant, conj_mul, ← MulAut.conj_apply, MulEquiv.orderOf_eq]
 
 /-- Every ordered pair `i ≠ j` is `(u(ℓ-1), u(ℓ))` for some `u ∈ Rep'(I)`. -/
 theorem existe_rep [DecidableEq I] (e : Rep' n I) (i j : I) (hij : i ≠ j) :
@@ -230,36 +221,27 @@ theorem proposition_ordre (r₀ : R) (e : Rep' n I) :
   rw [sigmaAvant_mul_sigmaDernier, orderOf_inv]
   set S := (Finset.univ : Finset (I × I)).filter (fun p => p.1 ≠ p.2)
   set f : I × I → ℕ := fun p => orderOf (E.φ r₀ p.1 * E.φ r₀ p.2)
-  have hS : (e (avantDernier n), e (dernier n)) ∈ S := by
-    simp only [S, Finset.mem_filter, Finset.mem_univ, true_and]
-    exact fun h => avantDernier_ne_dernier n (e.injective h)
+  have hS (u : Rep' n I) : (u (avantDernier n), u (dernier n)) ∈ S :=
+    Finset.mem_filter.2 ⟨Finset.mem_univ _, fun h => avantDernier_ne_dernier n (u.injective h)⟩
   -- `π^k = 1` iff `2 n_{ij} ∣ k` for all `i ≠ j`, iff `2ν ∣ k`.
   have key : ∀ k, pi E n ^ k = 1 ↔ 2 * S.lcm f ∣ k := by
     intro k
     have step1 : pi E n ^ k = 1 ↔ ∀ p ∈ S, 2 * f p ∣ k := by
       constructor
       · intro h p hp
-        simp only [S, Finset.mem_filter, Finset.mem_univ, true_and] at hp
-        obtain ⟨u, hu1, hu2⟩ := existe_rep n e p.1 p.2 hp
-        have := (pi_pow_fixe E n r₀ u k).1 (by rw [h]; rfl)
-        simpa [ab, hu1, hu2, f] using this
+        obtain ⟨u, hu1, hu2⟩ := existe_rep n e p.1 p.2 (Finset.mem_filter.1 hp).2
+        simpa [ab, hu1, hu2, f] using (pi_pow_fixe E n r₀ u k).1 (by rw [h]; rfl)
       · intro h
         ext1 ⟨r, u⟩
         rw [Perm.one_apply, pi_pow_fixe, ab, orderOf_indep E r₀ r]
-        refine h (u (avantDernier n), u (dernier n)) ?_
-        simp only [S, Finset.mem_filter, Finset.mem_univ, true_and]
-        exact fun h => avantDernier_ne_dernier n (u.injective h)
-    rw [step1]
-    constructor
-    · intro h
-      obtain ⟨m, rfl⟩ : 2 ∣ k := (dvd_mul_right 2 _).trans (h _ hS)
-      rw [Nat.mul_dvd_mul_iff_left two_pos]
-      exact Finset.lcm_dvd fun p hp => (Nat.mul_dvd_mul_iff_left two_pos).1 (h p hp)
-    · intro h p hp
-      exact (Nat.mul_dvd_mul_left 2 (Finset.dvd_lcm hp)).trans h
-  apply Nat.dvd_antisymm
-  · exact orderOf_dvd_of_pow_eq_one ((key _).2 dvd_rfl)
-  · exact (key _).1 (pow_orderOf_eq_one _)
+        exact h _ (hS u)
+    refine step1.trans ⟨fun h => ?_, fun h p hp =>
+      (Nat.mul_dvd_mul_left 2 (Finset.dvd_lcm hp)).trans h⟩
+    obtain ⟨m, rfl⟩ : 2 ∣ k := (dvd_mul_right 2 _).trans (h _ (hS e))
+    rw [Nat.mul_dvd_mul_iff_left two_pos]
+    exact Finset.lcm_dvd fun p hp => (Nat.mul_dvd_mul_iff_left two_pos).1 (h p hp)
+  exact Nat.dvd_antisymm (orderOf_dvd_of_pow_eq_one ((key _).2 dvd_rfl))
+    ((key _).1 (pow_orderOf_eq_one _))
 
 end Ordre
 
