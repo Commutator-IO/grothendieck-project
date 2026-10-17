@@ -168,6 +168,25 @@
 % structure G ≃ G^0 x Z/2 of p. 125 (« on va montrer »); the char. 2 attempt
 % of p. 99 and the rescaled formula (26) of p. 100; the transitivity
 % statement in the margin of p. 155 (no proof).
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder77.lean) and the literature of the findings
+% 77-odd-rank-half-discriminant, 77-so-even-rank-smooth-connected-matched,
+% 77-two-regular-classification-matched (matched),
+% 77-universal-even-rank-discriminant-mod-4 and 77-arf-cover-stein-
+% factorisation (candidates):
+% — page 68: delta' in every odd rank and (-1)^n Delta = B^2 - 4C in every even
+%   rank checked (no Pfaffian; the opposite sign refuted in ranks 2 and 4);
+%   Conrad, Appendix C, C.1.4 cited for the half-discriminant, and as not
+%   containing the mod-4 identity.
+% — page 123: the uniqueness of the canonical symmetry needs a connected base
+%   (in general id - e pi ⊗ a, e idempotent); corrected and footnoted;
+%   sigma^2 = id checked with pi(a) = 2.
+% — pages 155-157: Conrad C.2.2, C.2.11, C.2.12, C.3.1 cited for the Dickson
+%   invariant and SO(q); the Stein-factorisation route not found there.
+% — spine: Voight 2016, Thm C / 4.3, cited for the classification of quadratic
+%   covers (affine, free), as the folder-84 pass read it.
+% No facsimile check since 2026-10-10.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -359,7 +378,13 @@ $\det V \simeq L$ que la page 35 appelle aussi $\alpha$ est écrit $\kappa$ ici.
     revêtement est le spectre du centre de l'algèbre de Clifford paire, et la
     congruence est une forme de celle de Stickelberger ; le dossier 84 (pages
     48 à 53) énonce le même théorème de classification avec les triplets
-    $(L, \delta, T_0)$, et le rapproche lui aussi de Stickelberger.}.
+    $(L, \delta, T_0)$, et le rapproche lui aussi de Stickelberger. Sur les
+classes d'isomorphisme, dans le cas affine et libre, la classification est
+celle de J.~Voight, « Discriminants and the monoid of quadratic rings »,
+\emph{Pacific J.\ Math.} 283 (2016), théorème C et théorème 4.3, telle que la
+lecture du dossier 84 l'a lue : la fibre du discriminant au-dessus de $d$ est
+indexée par les $t$ tels que $t^2 \equiv d \pmod 4$ quand $2$ est
+régulier. Les feuillets travaillent sur un schéma.}.
   \item \emph{La quadrique affine de la partie V est le schéma des
     involutions $\sigma$ de la page 5.} Les éléments $\sigma$ d'une algèbre de
     quaternions, de trace nulle et de déterminant $-1$ (donc $\sigma^2 = 1$),
@@ -1310,7 +1335,18 @@ polygone, c'est-à-dire les involutions sans point fixe de $I$, et
   \pmod 2 .
 \]
 En particulier $\Delta \equiv 0 \pmod 2$ si $\mathrm{card}\, I$ est impair : c'est ce qui
-rend le discriminant divisé $\delta' = \delta/2$ défini sur toute base en rang impair.
+rend le discriminant divisé $\delta' = \delta/2$ défini sur toute base en rang
+impair.\footnote{Vérifié en Lean (lean/Grothendieck/Folder77.lean,
+\texttt{two\_dvd\_det\_polar} et \texttt{det\_polar\_eq}) pour tout rang impair,
+par une autre voie que les graphes : modulo $2$, la matrice polaire est celle
+d'une matrice alternée à coefficients dans $\mathbf{Z}[Y]$, de déterminant nul.
+C'est le demi-discriminant de B.~Conrad, \emph{Reductive group schemes}
+(Luminy, 2014), appendice C, proposition C.1.4, avec $\delta'(q)$ inversible si
+et seulement si $q$ est non dégénérée ; Conrad le présente comme une
+modification du discriminant découverte indépendamment par Grothendieck et
+par M.~Kneser, et l'établit par le défaut d'une forme sur un corps de
+caractéristique $2$. Cette attribution porte sur la notion, non sur ces
+feuillets ni sur une date.}
 
 \textbf{Modulo $4$, en rang pair} $m = 2n$. Posons
 \[
@@ -1345,7 +1381,17 @@ La page passe par une fausse alarme — une ligne à l'encre brune, « $\equiv 2
 M_\gamma \not\equiv 0$ (4) ! », corrigée par les deux lignes suivantes : chaque terme
 vaut $2(1 \pm 1)M_\gamma \equiv 0$\footnote{Vérifié par machine pour $m = 2, 4,
 6$ ; le choix $\varepsilon = -(-1)^n$ échoue dans chaque cas. Pour $m = 2$, c'est la
-formule classique $b^2 - 4ac$.}. Le signe $(-1)^n$ est celui du discriminant
+formule classique $b^2 - 4ac$. Vérifié en Lean (lean/Grothendieck/Folder77.lean,
+\texttt{four\_dvd\_disc\_sub\_hafnian\_sq} et \texttt{disc\_even\_rank}) pour
+tout rang pair, sans pfaffien et par une autre voie que la page : $\det K
+\equiv (1 - 2n)\det P \pmod 4$, $\det K$ est un carré dans $\mathbf{Z}[Y]$ par
+clôture intégrale, et sa racine est l'hafnien modulo $2$ ; le signe opposé est
+réfuté en rangs $2$ et $4$ (\texttt{not\_dvd\_rank\_two},
+\texttt{not\_dvd\_rank\_four}). Conrad (\emph{Reductive group schemes},
+appendice C, C.2.2 et la remarque qui suit C.3.3) rattache au rang pair
+l'algèbre discriminante, centre de l'algèbre de Clifford paire, et renvoie à
+Knus pour des formules explicites ; l'édition n'y a trouvé ni cette
+congruence polynomiale universelle ni l'hafnien.}. Le signe $(-1)^n$ est celui du discriminant
 « changé de signe » ; c'est la forme universelle de la congruence de
 Stickelberger\footnote{Le nom n'est pas sur la page.}.
 
@@ -1788,7 +1834,16 @@ puisque $\pi(a) = 2$\footnote{La page justifie (21) par « $\pi(a) = 1$ » ; ave
 s'intéresser surtout au cas « $E$ de rg impair » : il s'agit de $T$ de rang pair, $E$
 de rang impair.}. \textbf{Proposition} (en marge) : il existe une unique réflexion de
 $P$ d'hyperplan fixe $H$ laissant $Q$ invariante, $\sigma = \mathrm{id} - \pi \otimes a$ :
-\emph{la symétrie canonique} de la quadrique affine. En caractéristique $\neq 2$ elle
+\emph{la symétrie canonique} de la quadrique affine. L'unicité demande une base
+connexe : sur une base quelconque, les isométries qui fixent $\ker \pi$ sont les
+$\mathrm{id} - e\,\pi \otimes a$, $e$ idempotent.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder77.lean, \texttt{canSym\_isometry},
+\texttt{canSym\_canSym}, \texttt{isometry\_of\_idem}, \texttt{eq\_of\_isometry\_fix}
+et \texttt{eq\_id\_or\_canSym}), sur tout anneau : $\sigma$ est une isométrie
+involutive, l'involutivité tenant à $\pi(a) = 2$ ; une isométrie de la forme
+$\mathrm{id} - c\,\pi \otimes a$ est $\mathrm{id} - e\,\pi \otimes a$ avec $e$
+idempotent, donc l'identité ou $\sigma$ sur une base connexe. La page ne dit
+pas « connexe ».} En caractéristique $\neq 2$ elle
 induit sur $E$ la symétrie de centre $a/2$ ; en caractéristique $2$, $a \in V$ et c'est
 une transvection.
 
@@ -2122,7 +2177,15 @@ $O(q)$ sur $\underline{\mathrm{Arf}}(q)$, d'où un homomorphisme
 \]
 si $\eta : \mathbf{Z}/2 \to \mu_2$ est le morphisme canonique, $\eta \circ \varepsilon_q =
 \det$, de sorte que $\mathrm{SO}(q) = O(q) \cap \mathrm{SL}(E)$ si $2$ est inversible
-(marge). C'est l'invariant de Dickson\footnote{Le nom n'est pas sur la page.}.
+(marge). C'est l'invariant de Dickson\footnote{Le nom n'est pas sur la page.
+B.~Conrad, \emph{Reductive group schemes} (Luminy, 2014), appendice C, le définit
+(C.2.2) par l'action sur le centre de l'algèbre de Clifford paire, et démontre
+que $\mathrm{SO}(q)$ est lisse à fibres connexes (théorème C.2.11, et
+proposition C.3.1 en rang pair), avec $O(q) = \mu_2 \times \mathrm{SO}(q)$ en
+rang impair (remarque C.2.12) ; il renvoie à Knus pour l'invariant de Dickson.
+La voie de ces feuillets, par la factorisation de Stein de la grassmannienne
+isotrope maximale et sans algèbre de Clifford, n'a pas été trouvée chez
+Conrad.}
 \textbf{Proposition} : $\varepsilon_q|O_D(q)$ est le composé $O_D(q) \to O(q_Q)
 \xrightarrow{\varepsilon_{q_Q}} \mathbf{Z}/2$, donc $\mathrm{SO}_D(q)$ est l'image
 réciproque de $\mathrm{SO}(q_Q)$, extension de $\prod \mathrm{GL}(R_i) \times
