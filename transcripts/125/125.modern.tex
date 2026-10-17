@@ -33,6 +33,19 @@
 % programme of pages 7 and 8 — it is a list of places where formal schemes are
 % needed, not a proof of anything, and the folder stops two-thirds down page 8.
 % Item 6, on the Greenberg-Néron types, is one sentence and has no sequel here.
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder125.lean) and mathlib:
+% — page 2: the reading's sentence on the bounds paired p >= m with q < r - m;
+%   under p + q = r it is q <= r - m (p > m bijective <-> q < r - m bijective,
+%   p = m surjective <-> q = r - m injective). Corrected, footnoted; the
+%   boxes themselves were consistent. Étages 1 <=> 2 (any long exact
+%   sequence) and 2 <=> 3 (Serre duality granted) footnoted as checked.
+% — page 3: the typescript's lemma checked in affine form; it is mathlib's
+%   Module.FinitePresentation.exists_notMem_bijective, more generally, and
+%   the margin's hypotheses serve only to make B finitely presented.
+% The folder's mathematical finding is still unsearched (its literature is not
+% cited); the others are codicological. No facsimile check since 2026-08-30.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -190,7 +203,12 @@ Le complémentaire n'a pas de cohomologie au-delà du degré $m$.
 \]
 C'est le premier étage lu à travers la suite exacte : tuer la cohomologie du
 complémentaire, c'est identifier la cohomologie locale à la cohomologie
-totale.\footnote{Sous l'encadré de droite correspondant, il note :
+totale.\footnote{Vérifié en Lean (lean/Grothendieck/Folder125.lean,
+\texttt{etage1\_iff\_etage2}) : l'équivalence des deux premiers étages vaut,
+avec exactement ces bornes, pour toute suite exacte longue indexée par les
+entiers naturels ; rien de $X$, $Y$ ni $F$ ne sert. Les équivalences terme à
+terme entre bijectivité et annulation dans une suite exacte sont déjà dans
+mathlib. Sous l'encadré de droite correspondant, il note :
 « Le cas $p = m$ peut être omis, car $H^{m}(X, \mathcal{O}(-n)) = 0$ pour $n$
 grand ». C'est l'annulation de Serre en degré $< \dim X$ pour un fibré très
 négatif, et elle dispense de traiter séparément le cas limite.}
@@ -209,8 +227,18 @@ C'est le pivot. Les deux énoncés — l'annulation de la cohomologie de $X - Y$
 au-delà du degré $m$, et la bijectivité de la comparaison des $\mathrm{Ext}$ à
 valeurs dans $\Omega^{r}$ en dessous du degré $r - m$ — sont le \emph{même}
 énoncé, lu des deux côtés de la dualité de Serre. Les bornes se répondent
-comme il faut : $p \geqslant m$ d'un côté, $q < r - m$ de l'autre, et
-$p + q = r$.\footnote{Le dossier écrit la dualité comme une identification de
+comme il faut, avec $p + q = r$ : la bijectivité pour $p > m$ répond à la
+bijectivité pour $q < r - m$, la surjectivité pour $p = m$ à l'injectivité
+pour $q = r - m$ ; en tout, $p \geqslant m$ d'un côté et $q \leqslant r - m$
+de l'autre.\footnote{Correction du 18 octobre 2026 : une version antérieure de
+cette lecture appariait $p \geqslant m$ et $q < r - m$, ce qui, sous
+$p + q = r$, oublie le cas limite ; les encadrés du feuillet sont cohérents
+entre eux, seule la phrase de l'édition était fausse. Vérifié en Lean
+(lean/Grothendieck/Folder125.lean, \texttt{etage2\_iff\_etage3} et
+\texttt{bornes}) : sur un corps, la dualité de Serre étant admise sous la forme
+où la flèche des $\mathrm{Ext}$ en degré $q = r - p$ est la transposée de
+$H^{p}_{Y} \to H^{p}$, le deuxième étage équivaut au troisième, avec les
+bornes ci-dessus. Le dossier écrit la dualité comme une identification de
 groupes d'$\mathrm{Ext}$. Ce qu'elle est, et ce que les croix du feuillet 5
 disent explicitement, est un \emph{accouplement parfait} : $H^{p}$ et
 $\mathrm{Ext}^{r-p}(-, \Omega^{r})$ sont en dualité. On l'énonce ici sous
@@ -268,6 +296,16 @@ correction :
 \begin{quote}
 puisque $Y$ est noethérien et $B$ de type fini par hypothèse
 \end{quote}
+Elle ne sert qu'à cela : noethérien et de type fini rendent $B$ de
+présentation finie, et c'est tout ce que le lemme demande.\footnote{Vérifié en
+Lean (lean/Grothendieck/Folder125.lean, \texttt{lemme\_III18} et
+\texttt{lemme\_III18\_general}) sous sa forme affine : pour $R$ noethérien,
+$B$ de type fini et $u : R^{n} \to B$ bijectif en $\mathfrak{p}$, $u$ est
+bijectif sur un ouvert $D(f) \ni \mathfrak{p}$. C'est un résultat classique,
+dans mathlib sous une forme plus générale,
+\texttt{Module.FinitePresentation.exists\_notMem\_bijective} : sur un anneau
+commutatif quelconque, de la source finie vers un but de présentation finie.
+Le passage aux faisceaux sur un schéma noethérien n'a pas été vérifié.}
 
 \pagerange{4}{5}
 \section*{Le dictionnaire, et les suites appariées (feuillets 4 et 5)}
