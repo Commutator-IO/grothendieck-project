@@ -8,6 +8,20 @@
 % pages by a human. The folder was read whole; it holds one batch, pages 1-10.
 % Pages 4, 6, 8, 10 are listings with nothing of his.
 %
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-17 — refined with the Lean checks
+% of lean/Grothendieck/Folder153.lean, mathlib and the literature of the
+% folder's findings. Now checked by machine: the lemma of p. 3 (the inclusion
+% k_0 ⊂ K_0 is not used), the co-operations of p. 3, Pólya's basis and
+% Vandermonde (mathlib's Ring.add_choose_eq), Omega = Omega_0 + Omega^0
+% (needs neither 3) nor the unit), and the examples of p. 7. CORRECTIONS: the
+% co-operations of p. 3 are established for K_0 a localisation of k_0, or K_0
+% flat over k_0 with K_0 (x) K_0 = K_0; the first pass's « K_0 (x) K_0 = K_0 »
+% alone is not shown to suffice, and the reading now says so. The k[[T]]^+
+% footnote: the coefficient matrix is Pascal's without its (0,0) entry, and
+% the counterexample holds in every characteristic. Cited from the findings:
+% Elliott (arXiv:1109.3848) for the plethory structure of Int(D) over a
+% domain, Cahen-Chabert (1997) through its zbMATH review.
+%
 % What the folder is. The definition of an « analyseur » — a commutative
 % pseudo-ring with a second, associative and unital, composition law, right
 % composition being a ring homomorphism, and left composition with a sum or a
@@ -28,9 +42,11 @@
 %
 % Substantive departures from the pages, each footnoted where it occurs:
 % — page 3: K_0[X,Y] = K_0[X] (x)_{k_0} K_0[Y] holds when K_0 (x)_{k_0} K_0
-%   = K_0 (e.g. K_0 a localisation of k_0); the uniqueness of the elements of
-%   Omega (x) Omega representing F(x+y), F(xy) needs that and Omega free, the
-%   latter being his own margin. The reading states both hypotheses.
+%   = K_0 (e.g. K_0 a localisation of k_0); the existence and uniqueness of
+%   the elements of Omega (x) Omega representing F(x+y), F(xy) need Omega
+%   free (his own margin) and K_0 (x) Omega -> K_0[T] injective, which holds
+%   for K_0 a localisation, or flat over k_0 with K_0 (x) K_0 = K_0 (revised
+%   2026-10-17: the first pass assumed K_0 (x) K_0 = K_0 alone).
 % — page 5, 3) b): the sum is indexed by i where the family is indexed by
 %   alpha.
 % — page 7: Appl(A,A) satisfies 1) and 2) and not 3) in general (the leaf
@@ -183,7 +199,19 @@ $\mathrm{Int}(\mathbf{Z})$ des polynômes à valeurs entières. La page écrit l
 co-addition sous la forme générale $\sum \gamma^{m}_{ij} F_{i}(P)F_{j}(Q)$ et
 laisse inachevée la formule de la co-multiplication ; que $\gamma^{m}_{ij}$ vaille
 1 si $i + j = m$ et 0 sinon est la formule de Vandermonde, qui n'est pas sur la
-page. Elle écrit $\delta : \Omega \to \Omega \otimes_{\mathbf{Z}} \Omega$.}
+page. Elle écrit $\delta : \Omega \to \Omega \otimes_{\mathbf{Z}} \Omega$.
+Vérifié en Lean (lean/Grothendieck/Folder153.lean, \texttt{polya},
+\texttt{vandermonde}, \texttt{coaddition\_binom},
+\texttt{comultiplication\_binom}) : les $F_n$ forment une base de
+$\mathrm{Int}(\mathbf{Z})$, par les différences finies, et la co-addition
+est celle qu'on écrit. L'identité est la formule de Chu--Vandermonde dans un
+anneau binomial, $\binom{r+s}{m} = \sum_{i+j=m} \binom{r}{i}\binom{s}{j}$, qui
+est dans mathlib (\texttt{Ring.add\_choose\_eq}) ; mathlib la tient de
+J.~Elliott, « Binomial rings, integer-valued polynomials, and
+$\lambda$-rings » (\emph{J. Pure Appl. Algebra} 207, 2006), sa référence
+principale sur les anneaux binomiaux. La base de Pólya figure chez Cahen et
+Chabert (\emph{Integer-Valued Polynomials}, AMS, 1997, ch. I), consulté par
+son compte rendu au zbMATH seulement.}
 \[
 F_{m}(P + Q) = \sum_{i+j=m} F_{i}(P)\, F_{j}(Q),
 \qquad
@@ -207,16 +235,39 @@ opère sur $k_{0}$ de sorte que $(F + G)(x) = F(x) + G(x)$, $(\lambda F)(x) =
 $F \in K_{0}[T] \otimes_{k_{0}} M$ tels que $F(x) \in M$ pour tout $x \in k_{0}$
 s'identifie à $\Omega \otimes_{k_{0}} M$ --- coordonnée par coordonnée dans une
 base de $M$.\footnote{Le mot souligné qui ouvre l'énoncé est lu « Lemme »
-sans certitude.}
+sans certitude. Vérifié en Lean (lean/Grothendieck/Folder153.lean,
+\texttt{lemme\_coordonnees}, \texttt{lemme\_injective},
+\texttt{lemme\_range}) : $F$ a ses valeurs dans $M$ si et seulement si ses
+coordonnées sont dans $\Omega$, $\Omega \otimes M \to K_0[T] \otimes M$ est
+injective et d'image cet ensemble. L'inclusion $k_0 \subset K_0$ ne sert
+pas : le lemme vaut pour toute $k_0$-algèbre commutative $K_0$.}
 
-\textbf{Les co-opérations.} Supposons $K_{0} \otimes_{k_{0}} K_{0} = K_{0}$ --- par
-exemple $K_{0}$ localisé de $k_{0}$, comme $\mathbf{Q}$ de $\mathbf{Z}$ --- et
-$\Omega$ libre comme $k_{0}$-module. Alors
+\textbf{Les co-opérations.} Supposons $K_{0}$ localisé de $k_{0}$, comme
+$\mathbf{Q}$ de $\mathbf{Z}$ --- ou, plus généralement, plat sur $k_0$ avec
+$K_{0} \otimes_{k_{0}} K_{0} = K_{0}$ --- et $\Omega$ libre comme
+$k_{0}$-module. Alors
 $K_{0}[X, Y] = K_{0}[X] \otimes_{k_{0}} K_{0}[Y]$\footnote{La page écrit ces deux égalités avec un « ? » au-dessus du signe égal
 et l'identité $K_{0}[X,Y] = K_{0}[X] \otimes_{k_{0}} K_{0}[Y]$ sans hypothèse ;
 sa marge ajoute « OK si $\Omega$ est un $k_{0}$-module \emph{libre} ». La
-seconde hypothèse est la sienne, la première la nôtre : sans elle, le produit
-tensoriel sur $k_{0}$ est plus gros que $K_{0}[X,Y]$. Pour $\mathbf{Z} \subset
+seconde hypothèse est la sienne, la première la nôtre : sans
+$K_0 \otimes_{k_0} K_0 = K_0$, le produit tensoriel sur $k_{0}$ est plus gros
+que $K_{0}[X,Y]$. La première lecture supposait cette seule égalité ; la
+vérification en Lean (lean/Grothendieck/Folder153.lean,
+\texttt{coaddition\_existsUnique\_of\_injective},
+\texttt{comultiplication\_existsUnique\_of\_injective},
+\texttt{omegaBaseChange\_injective\_of\_flat}, \texttt{coaddition\_existsUnique})
+montre que les co-opérations existent et sont uniques dans $\Omega \otimes
+\Omega$ dès que $\Omega$ est libre et que $K_0 \otimes_{k_0} \Omega \to
+K_0[T]$, $a \otimes F \mapsto aF$, est injective --- elle est toujours
+surjective, $k_0[T]$ étant contenu dans $\Omega$ ---, ce qui a lieu pour
+$K_0$ localisé de $k_0$ et pour $K_0$ plat sur $k_0$ avec $K_0 \otimes K_0 =
+K_0$ ; si l'égalité $K_0 \otimes K_0 = K_0$ suffit sans platitude reste
+ouvert, et l'énoncé a été restreint en conséquence. L'inclusion $k_0 \subset
+K_0$ ne sert pas. Pour un anneau intègre $D$ et son corps des fractions, la
+structure de biring et de pléthorie de $\mathrm{Int}(D)$ est étudiée par
+J.~Elliott (arXiv:1109.3848, § 1), sous une hypothèse de platitude de
+$\mathrm{Int}(D)$ ; le couple $k_0 \subset K_0$ non intègre de la page n'y
+est pas traité, et aucune source le traitant n'a été trouvée. Pour $\mathbf{Z} \subset
 \mathbf{Q}$ les deux sont vraies, $\mathrm{Int}(\mathbf{Z})$ ayant pour base les
 $F_{n}$. Le signe en exposant du second opérateur, lu $\times$ ou $+$, est rendu
 ici par l'indice $m$.}, et, pour $F \in \Omega$, les
@@ -301,7 +352,9 @@ F(0) \circ 0 = 0$, $F(0)$ étant une constante, et une constante $\lambda$ telle
 que $\lambda \circ 0 = 0$ est nulle ; $\Omega^{0}$ est un idéal parce que
 $(FG) \circ 0 = (F \circ 0)(G \circ 0)$. Ces vérifications sont les nôtres. Le
 premier adjectif de la proposition est illisible ; « sous-pseudo-anneau » est
-ce que l'argument donne.}
+ce que l'argument donne. Vérifié en Lean (lean/Grothendieck/Folder153.lean,
+\texttt{isCompl\_constants\_zeroPart}, \texttt{comp\_mem\_constants}) : la
+décomposition n'utilise ni les conditions 3) ni l'unité $T$.}
 
 \textbf{Définition.} L'analyseur est \emph{unitaire} si la multiplication a une
 unité $1$ et que celle-ci est une constante : $1 \circ F = 1$ pour tout $F$.
@@ -316,7 +369,11 @@ sont les applications constantes, et $(\Omega_{A})_{0} \simeq A$. Il ne satisfai
 pas 3) en général : pour $A$ infini, une application $(x, y) \mapsto F(x + y)$
 n'est pas une somme finie de produits $F'(x)F''(y)$.\footnote{La page dit
 « Les conditions 1°) et 2°) … vérifiées », sans parler de 3), et la
-remarque sur 3) est la nôtre.}
+remarque sur 3) est la nôtre. Vérifiée en Lean
+(lean/Grothendieck/Folder153.lean, \texttt{appl\_not\_coaddition}) pour $A$
+anneau commutatif unitaire, non nul et infini : l'indicatrice de $0$ ne
+vérifie pas 3a). Le cas d'un pseudo-anneau infini sans unité n'est pas
+vérifié par la machine.}
 
 \emph{Variante.} Si $A$ est une $k$-algèbre, on peut prendre
 $\Omega_{A/k} = \mathrm{End}(W_{k}(A))$, avec $\Omega_{0} \simeq A$ ; et plus
@@ -342,10 +399,18 @@ terme constant, avec le produit et la composition ; les constantes s'y réduisen
 à zéro. On peut encore admettre les séries $a_{0} + a_{1}T + \cdots$ dont le terme
 constant est nilpotent, pour lesquelles la composition converge. Ce ne sont pas
 des analyseurs au sens de 3).\footnote{La page ne dit pas si 3) est vérifiée. Elle
-ne l'est pas : pour $F = \sum_{n} T^{n}$, si $F(X + Y)$ était une somme finie
-$\sum_{i \leq N} a_{i}(X) b_{i}(Y)$, la matrice des coefficients de
-$X^{p}Y^{q}$, qui est la matrice de Pascal $\binom{p+q}{p}$, serait de rang au
-plus $N$ ; or ses mineurs principaux valent tous 1.}
+ne l'est pas : pour $F = \sum_{n \geq 1} T^{n}$, si $F(X + Y)$ était une somme
+finie $\sum_{i < N} a_{i}(X) b_{i}(Y)$, la matrice des coefficients de
+$X^{p}Y^{q}$, qui est la matrice de Pascal $\binom{p+q}{p}$ privée de son
+coefficient $(0, 0)$, nul puisque $F$ est sans terme constant, serait de rang
+au plus $N$ ; en lui rajoutant ce coefficient, on obtiendrait une matrice de
+rang au plus $N + 1$, alors que le mineur principal d'ordre $N + 2$ de la
+matrice de Pascal vaut $1$. Il vaut $1$ sur $\mathbf{Z}$, et le contre-exemple
+vaut en toute caractéristique. Vérifié en Lean
+(lean/Grothendieck/Folder153.lean, \texttt{pascal\_det},
+\texttt{geom\_not\_finite\_coaddition}), sur les coefficients. La première
+lecture écrivait $F = \sum_n T^n$ et la matrice de Pascal elle-même, ce qui
+oubliait le coefficient $(0, 0)$.}
 
 \textbf{L'analyseur des constantes.} Pour un analyseur quelconque $\Omega$,
 \[
@@ -356,7 +421,10 @@ est un homomorphisme d'analyseurs, qui induit l'identité sur les constantes. «
 est content » quand il est injectif.\footnote{Il ne l'est pas toujours : pour
 $k$ un corps fini à $q$ éléments et $\Omega = k[T]$, $T^{q} - T$ est envoyé sur
 l'application nulle. Pour $\mathrm{Int}(\mathbf{Z})$ il l'est, un polynôme étant
-déterminé par ses valeurs sur une partie infinie. L'exemple est le nôtre ; la
+déterminé par ses valeurs sur une partie infinie. Ces deux faits, et
+l'injectivité pour $k[T]$, $k$ intègre infini, sont vérifiés en Lean
+(lean/Grothendieck/Folder153.lean, \texttt{poly\_toAppl\_not\_injective},
+\texttt{poly\_toAppl\_injective}, \texttt{eq\_of\_comp\_intCast}). L'exemple est le nôtre ; la
 phrase de la page est à demi illisible.}
 
 \pagerange{9}{9}
