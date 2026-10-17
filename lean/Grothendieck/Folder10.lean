@@ -109,9 +109,8 @@ theorem string_end_scalar [CharZero K] {p : ℕ} (hp : p ≠ 0) (n : ℤ) {k : �
       simp only [wt, add_right_inj, mul_eq_mul_left_iff, Nat.cast_inj,
         Nat.cast_eq_zero, hp, or_false] at hw
       exact Fin.ext hw.symm
-    have := sub_ne_zero.mpr hw
     have h' : (wt p n j - wt p n i) * f (Pi.single j 1) i = 0 := by rw [sub_mul, h, sub_self]
-    exact (mul_eq_zero.mp h').resolve_left this
+    exact (mul_eq_zero.mp h').resolve_left (sub_ne_zero.mpr hw)
   have hsingle : ∀ j : Fin k, f (Pi.single j 1) = f (Pi.single j 1) j • Pi.single j 1 := by
     intro j; ext i
     by_cases h : i = j
@@ -145,12 +144,11 @@ theorem string_indecomposable [CharZero K] {p : ℕ} (hp : p ≠ 0) (n : ℤ) {k
   obtain ⟨c, rfl⟩ := string_end_scalar hp n f hX hY
   rcases Nat.eq_zero_or_pos k with hk | hk
   · subst hk
-    left; exact LinearMap.ext fun u => funext fun i => i.elim0
+    exact .inl <| LinearMap.ext fun u => funext fun i => i.elim0
   have h := congrArg (fun g : Module.End K (Fin k → K) => g (Pi.single ⟨0, hk⟩ 1) ⟨0, hk⟩) hf
   simp only [Module.End.mul_apply, LinearMap.smul_apply, LinearMap.id_apply, map_smul,
     Pi.smul_apply, Pi.single_eq_same, smul_eq_mul, mul_one] at h
-  have h2 : c * (c - 1) = 0 := by linear_combination h
-  rcases mul_eq_zero.mp h2 with hc | hc
+  rcases mul_eq_zero.mp (show c * (c - 1) = 0 by linear_combination h) with hc | hc
   · left; rw [hc, zero_smul]
   · right; rw [sub_eq_zero.mp hc, one_smul]; rfl
 
@@ -167,10 +165,7 @@ lemma trace_sY (p : ℕ) (n : ℤ) (k : ℕ) :
 theorem string_iso_imp [CharZero K] (p : ℕ) {n n' : ℤ} {k k' : ℕ} (hk : 0 < k)
     (h : IsoRep (sX k) (sY p n k) (sX (K := K) k') (sY p n' k')) : k = k' ∧ n = n' := by
   obtain ⟨e, -, hY⟩ := h
-  have hkk : k = k' := by
-    have := e.finrank_eq
-    simpa only [Module.finrank_fin_fun] using this
-  subst hkk
+  obtain rfl : k = k' := by simpa only [Module.finrank_fin_fun] using e.finrank_eq
   refine ⟨rfl, ?_⟩
   have hconj : e.conj (sY p n k) = sY p n' k := by
     refine LinearMap.ext fun w => ?_
@@ -182,9 +177,7 @@ theorem string_iso_imp [CharZero K] (p : ℕ) {n n' : ℤ} {k k' : ℕ} (hk : 0 
   rw [hconj, trace_sY, trace_sY] at ht
   simp only [wt, Finset.sum_add_distrib, Finset.sum_const, Finset.card_univ, Fintype.card_fin,
     nsmul_eq_mul, add_left_inj] at ht
-  have hk' : (k : K) ≠ 0 := by exact_mod_cast hk.ne'
-  have := mul_left_cancel₀ hk' ht
-  exact_mod_cast this.symm
+  exact_mod_cast (mul_left_cancel₀ (by exact_mod_cast hk.ne' : (k : K) ≠ 0) ht).symm
 
 /-! ## The dual of a string -/
 
@@ -315,8 +308,7 @@ lemma Z_eq_zero {c : ℕ} (h : m + 2 ≤ c) : Z (K := K) (m := m) c = 0 := by
   induction d with
   | zero =>
     change Z (K := K) (m := m) (m + 2) = 0
-    rw [Z, pow_succ', Module.End.mul_apply, ← Z, Z_eq_single (by omega),
-      sX_single]
+    rw [Z, pow_succ', Module.End.mul_apply, ← Z, Z_eq_single (by omega), sX_single]
     simp
   | succ d ih =>
     rw [Z, ← Nat.add_assoc, pow_succ', Module.End.mul_apply, ← Z, ih (by omega), map_zero]
@@ -368,11 +360,11 @@ lemma top_le_span (hk : ((m : K) + 2) ≠ 0) :
     · have e : vb ⊗ₜ Z (K := K) (m := m) c =
           ((m : K) + 2)⁻¹ • ((tX (K := K) m ^ (c + 1)) (va ⊗ₜ Z 0) -
             (tX (K := K) m ^ c) (va ⊗ₜ Z 1 - ((m : K) + 1) • (vb ⊗ₜ Z 0))) := by
-        rw [strings_inl, strings_inr, Nat.add_sub_cancel]
-        rw [show (va ⊗ₜ Z (c + 1) + ((c + 1 : ℕ) : K) • (vb ⊗ₜ Z c) -
+        rw [strings_inl, strings_inr, Nat.add_sub_cancel,
+          show (va ⊗ₜ Z (c + 1) + ((c + 1 : ℕ) : K) • (vb ⊗ₜ Z c) -
             (va ⊗ₜ Z (c + 1) + ((c : K) - (m + 1)) • (vb ⊗ₜ Z c)) : _) =
-            ((m : K) + 2) • (vb ⊗ₜ Z (K := K) (m := m) c) by push_cast; module]
-        rw [smul_smul, inv_mul_cancel₀ hk, one_smul]
+            ((m : K) + 2) • (vb ⊗ₜ Z (K := K) (m := m) c) by push_cast; module,
+          smul_smul, inv_mul_cancel₀ hk, one_smul]
       rw [e]
       exact S.smul_mem _ (S.sub_mem (hl _ (by omega)) (hr _ hc))
     · have e : vb ⊗ₜ Z (K := K) (m := m) (m + 1) =
@@ -401,8 +393,7 @@ lemma top_le_span (hk : ((m : K) + 2) ≠ 0) :
   rw [Module.Basis.tensorProduct_apply, Pi.basisFun_apply, Pi.basisFun_apply,
     ← Z_eq_single c.2]
   fin_cases i
-  · exact ha c
-  · exact hb c
+  exacts [ha c, hb c]
 
 variable (n p) in
 /-- **Page 197, the leading term**: `ξ ⊗ e_{n,k} ≅ e_{n,k+1} ⊕ e_{n+p,k-1}` for `k = m + 2`,
@@ -421,10 +412,8 @@ theorem xi_tensor_string (hk : ((m : K) + 2) ≠ 0) :
   let e := src.equiv B (Equiv.refl _)
   have he : ∀ i, e (src i) = strings i := fun i => by
     rw [Module.Basis.equiv_apply]; exact Module.Basis.mk_apply _ _ _
-  have hsrc_l : ∀ j, src (Sum.inl j) = (Pi.single j 1, 0) := fun j => by
-    simp [src, Pi.basisFun_apply]
-  have hsrc_r : ∀ i, src (Sum.inr i) = (0, Pi.single i 1) := fun i => by
-    simp [src, Pi.basisFun_apply]
+  have hsrc_l : ∀ j, src (Sum.inl j) = (Pi.single j 1, 0) := fun j => by simp [src]
+  have hsrc_r : ∀ i, src (Sum.inr i) = (0, Pi.single i 1) := fun i => by simp [src]
   have ea : sY p 0 2 (va (K := K)) = (0 : K) • va := by rw [sY_single]; simp [wt]
   have eb : sY p 0 2 (vb (K := K)) = (p : K) • vb := by rw [sY_single]; simp [wt]
   have e0 : sY p n (m + 2) (Z (K := K) (m := m) 0) = (n : K) • Z 0 := by
