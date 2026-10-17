@@ -488,6 +488,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check the length-n construction against the literature on adjoint strings — where chains of length four and beyond on presheaf categories are classical — and establish whether the « none fully faithful » clause is what makes the statement non-trivial. The two-sided impossibility should be given its actual source rather than left as the reading’s aside.',
+    lean: { file: 'lean/Grothendieck/Folder19.lean', found: "Holds, more generally: for every n, n successive adjoints between presheaf topoi on a small category, none fully faithful — and the chain goes on forever in both directions. On ℤ, e_m(x) = 2x + m and r_m(x) = ⌊(x − m)/2⌋ give e_m ⊣ r_m ⊣ e_{m+1}; on ℤ ⊔ ℤ the maps e_m ⊔ r_m and r_m ⊔ e_{m+1} alternate into a two-sided chain B_k ⊣ B_{k+1}, and restriction of presheaves along them gives F_k ⊣ F_{k+1} for every k ∈ ℤ, none faithful (each B_k misses a parity class on one copy). So the page's Question has a positive answer for presheaf topoi, contrary to the reading's note that a two-sided infinite chain is impossible in very general situations; on one copy of ℤ every other restriction would be fully faithful. Whether the construction is in print is the open part." },
   },
   {
     id: '19-faithful-transportable-is-forgetful',

@@ -1,4 +1,4 @@
-\section[Cote 19 : le théorème de comonadicité 1.12, la comonade sur une base produit et le théorème de Gabriel--Popescu]{Cote 19 : le théorème de comonadicité 1.12, la comonade sur une base produit et le théorème de Gabriel--Popescu\protect\verifie{Folder19}}\label{sec:19}
+\section[Cote 19 : le théorème de comonadicité 1.12, la comonade sur une base produit le théorème de Gabriel--Popescu et les chaînes d'adjoints]{Cote 19 : le théorème de comonadicité 1.12, la comonade sur une base produit, le théorème de Gabriel--Popescu et les chaînes d'adjoints\protect\verifie{Folder19}}\label{sec:19}
 
 La cote 19, \emph{Topos : notes manuscrites (s.d.)}, quatre-vingt-quinze pages que l'inventaire date \q{[à partir de 1958-1973]}, est un dossier de travail en neuf liasses. La première, « Tapis cartésiens » (pages~3 à~11), étudie la comonade d'une adjonction et ses coalgèbres. La page~4 énonce le \q{Théorème 1.12}, suivi d'un nom propre que la transcription lit \q{Beck} avec doute. Elle écrit \q{il faut et il suffit} pour~b), et porte en marge la restriction \q{il suffit de regarder les doubles flèches $u, v$ de $A$ telles que $\mathrm{Ker}(f(u), f(v))$ existe \quad (condition C)} (\lot{19}{1}{4}). La deuxième liasse, « Cohomologie relative », s'ouvre pages~14 et~15 sur la représentabilité. Pour une catégorie à générateur $U$, elle affirme une équivalence avec les modules sur $\mathrm{End}(U)$, \q{[détails laissés au lecteur]} (\lot{19}{1}{15}).
 
@@ -168,7 +168,27 @@ Pour un générateur seul, la page affirme une équivalence $C \simeq \mathbf{Mo
 Le théorème de comonadicité de Beck, sous forme d'équivalence, est proposé à mathlib (PR mathlib4~\#44727).
 \end{remarque}
 
-Ne sont pas démontrés ici : l'énoncé de Morita (équivalence si et seulement si $U$ est petit et projectif) ; la Conclusion des pages~4 à~6 (adjonctions et comonades) ; la reconstruction de l'adjonction ; les topos de coalgèbres (page~6) ; les relations de coünité et de coassociativité entre les $\lambda_{kji}$ et la description de la catégorie par les quadruplets $(X', X'', u', u'')$ (pages~9 et~10) ; les chaînes de $n$ adjoints (pages~79 et~80) ; les pages~7 à~95 (résolutions standard, cohomologie relative, SGA~4, localisation, recollement, catégories fibrées).
+\paragraph{Chaînes d'adjoints (pages 79 et 80).} La page~80 prolonge une chaîne d'adjoints vers le bas par les foncteurs $f_!, f^*, f_*, f^!, \ldots$, énonce une Proposition, puis pose une Question : \q{Peut-on trouver une suite infinie dans les deux directions ?} La phrase s'achève page~81 sur une ébauche illisible (\lot{19}{4}{80}). La clause \q{dont aucun n'est pl.\ fid.} est une insertion interlinéaire. Pour un foncteur $u$ entre petites catégories, $u^*$ désigne la restriction des préfaisceaux d'ensembles le long de $u$.
+
+\begin{theoreme}[Grothendieck, page 80, Proposition\piste{19-adjoint-chains-length-n}]\label{thm:19-chaine}
+Pour tout $n$, il existe une petite catégorie $C$ et $n$ foncteurs $\widehat C \to \widehat C$, chacun adjoint à droite du précédent, dont aucun n'est pleinement fidèle.
+\end{theoreme}
+
+\begin{theoreme}[Page 80, la Question, énoncé de l'édition\piste{19-adjoint-chains-length-n}]\label{thm:19-infinie}
+Soit $C = \mathbb Z \sqcup \mathbb Z$, réunion disjointe de deux copies de l'ensemble ordonné $\mathbb Z$. Il existe des foncteurs $F_k : \widehat C \to \widehat C$, $k \in \mathbb Z$, avec $F_k \dashv F_{k+1}$ pour tout $k$, dont aucun n'est fidèle, donc aucun pleinement fidèle. La Question de la page a donc une réponse positive, pour des topos de préfaisceaux sur une petite catégorie.
+\end{theoreme}
+
+\begin{proof}
+Sur $\mathbb Z$, posons $e_m(x) = 2x + m$ et $r_m(x) = \lfloor (x - m)/2 \rfloor$. On a $2x + m \leqslant y \iff x \leqslant \lfloor (y-m)/2 \rfloor$ et $\lfloor (x-m)/2 \rfloor \leqslant y \iff x \leqslant 2y + m + 1$, d'où la chaîne de correspondances de Galois $e_m \dashv r_m \dashv e_{m+1}$, infinie dans les deux sens. Sur $C$, soient $B_{2m} = e_m \sqcup r_m$ et $B_{2m+1} = r_m \sqcup e_{m+1}$ ; alors $B_k \dashv B_{k+1}$ pour tout $k$. Une adjonction $u \dashv v$ entre petites catégories donne $u^* \dashv v^*$ sur les préfaisceaux, et l'on pose $F_k = B_k^*$.
+
+Chaque $B_k$ agit sur l'une des deux copies par un $e_m$, dont l'image évite une classe de parité. Soit $q$ un point de cette copie hors de l'image, et $p = q - 1$ : tout $B_k(c) \leqslant q$ vérifie $B_k(c) \leqslant p$, et $q \not\leqslant p$. Soient $h_q$ le préfaisceau représenté par $q$ et $G$ le préfaisceau $x \mapsto \{b \in \{0, 1\} : x \leqslant p \Rightarrow b = 0\}$, dont les restrictions remplacent $b$ par $0$ au-dessous de $p$. Les deux morphismes $h_q \to G$ de valeurs $0$ et $1$ en $q$ sont distincts, et leurs restrictions par $B_k$ coïncident, puisque ces restrictions ne voient que des points au-dessous de $p$. Donc $F_k$ n'est pas fidèle. La Proposition s'obtient en prenant $F_0, \ldots, F_{n-1}$ (Lean : \texttt{proposition\_page80}, \texttt{chain\_adj}, \texttt{chain\_not\_fullyFaithful}).
+\end{proof}
+
+\begin{remarque}
+La réunion disjointe est essentielle : sur une seule copie de $\mathbb Z$, un $e_m^*$ sur deux est pleinement fidèle, puisque $r_m e_m = \mathrm{id}$. Les deux copies décalées d'un cran font qu'aucun $F_k$ ne l'est. Une note de la lecture, à la page~81, tient une chaîne infinie dans les deux sens pour impossible \q{dans des situations très générales} ; l'exemple montre qu'elle existe entre topos de préfaisceaux. La suggestion de la page, un $g$ à la fois adjoint à gauche et à droite de $f$, n'est pas celle suivie ici.
+\end{remarque}
+
+Ne sont pas démontrés ici : l'énoncé de Morita (équivalence si et seulement si $U$ est petit et projectif) ; la Conclusion des pages~4 à~6 (adjonctions et comonades) ; la reconstruction de l'adjonction ; les topos de coalgèbres (page~6) ; les relations de coünité et de coassociativité entre les $\lambda_{kji}$ et la description de la catégorie par les quadruplets $(X', X'', u', u'')$ (pages~9 et~10) ; les pages~7 à~95 (résolutions standard, cohomologie relative, SGA~4, localisation, recollement, catégories fibrées).
 
 \begin{encadre}
 \begin{theoreme}[Grothendieck, pages 7 à 11, comonade sur une base produit\piste{19-comonad-matrix-product-base}]\nonverifie
@@ -176,8 +196,3 @@ Pour une adjonction sur une base produit $B = \prod_i B_i$, les transformations 
 \end{theoreme}
 \end{encadre}
 
-\begin{encadre}
-\begin{theoreme*}[Grothendieck, pages 79 et 80, chaînes d'adjoints\piste{19-adjoint-chains-length-n}]\nonverifie
-Pour tout $n$, il existe des topos de préfaisceaux portant une chaîne de $n$ foncteurs adjoints successifs dont aucun n'est pleinement fidèle. La page laisse ouverte la question d'une chaîne prolongeable indéfiniment dans les deux sens.
-\end{theoreme*}
-\end{encadre}

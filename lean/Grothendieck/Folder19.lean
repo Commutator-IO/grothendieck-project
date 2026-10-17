@@ -5,10 +5,14 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.Gabri
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Mathlib.SetTheory.Cardinal.Finite
+import Mathlib.CategoryTheory.Category.GaloisConnection
+import Mathlib.CategoryTheory.Adjunction.Whiskering
+import Mathlib.CategoryTheory.Adjunction.Opposites
+import Mathlib.Order.Sum.Order
 
 /-!
 # Folder 19: the comonadicity theorem (page 4), the comonad over a product base
-# (pages 7–11) and Gabriel–Popescu (pages 14–15)
+# (pages 7–11), Gabriel–Popescu (pages 14–15) and chains of adjoints (pages 79–80)
 
 Issue #26 lists folder 19 in tier 2: « Comonadicity and Gabriel–Popescu ». Those
 two statements of `transcripts/19/19.modern.tex` are formalised here, and the
@@ -596,5 +600,162 @@ theorem matrice_fini_fausse :
   omega
 
 end ContreExempleFini
+
+section ChainesAdjoints
+
+/-!
+## Pages 79–80: chains of adjoints between presheaf topoi
+
+The Proposition of page 80: for every `n`, `n` successive adjoint functors between presheaf
+topoi on small categories, none fully faithful. The construction gives more: a chain infinite
+in both directions on the presheaves on `ℤ ⊕ ℤ`, which answers the page's Question.
+
+* `preAdj`: an adjunction `u ⊣ v` between small categories gives `u^* ⊣ v^*` on presheaves.
+* `not_faithful`: for preorders and `u : C ⥤ D`, if some `q ≰ p` has
+  `u c ≤ q → u c ≤ p` for every `c`, the restriction `u^*` is not faithful.
+* `Bmap k`: on `ℤ`, `e m x = 2x + m` and `r m x = ⌊(x - m)/2⌋` satisfy `e m ⊣ r m ⊣ e (m+1)`;
+  on `ℤ ⊕ ℤ` the maps `Bmap (2m) = e m ⊕ r m`, `Bmap (2m+1) = r m ⊕ e (m+1)` satisfy
+  `Bmap k ⊣ Bmap (k+1)` for every `k ∈ ℤ` (`gc`).
+* `chain_adj`, `chain_not_faithful`: the restrictions `F k = (Bmap k)^*` satisfy
+  `F k ⊣ F (k+1)` for all `k ∈ ℤ`, and none is faithful, hence none fully faithful.
+* `proposition_page80`: the Proposition, for every `n`.
+-/
+
+open CategoryTheory
+
+/-- Restriction along `u`, on presheaves of sets. -/
+abbrev pre {C D : Type} [Category C] [Category D] (u : C ⥤ D) :
+    (Dᵒᵖ ⥤ Type) ⥤ (Cᵒᵖ ⥤ Type) :=
+  (Functor.whiskeringLeft Cᵒᵖ Dᵒᵖ Type).obj u.op
+
+/-- An adjunction `u ⊣ v` gives `u^* ⊣ v^*` on presheaves. -/
+def preAdj {C D : Type} [Category C] [Category D] {u : C ⥤ D} {v : D ⥤ C} (adj : u ⊣ v) :
+    pre u ⊣ pre v :=
+  (Adjunction.op adj).whiskerLeft _
+
+variable {C D : Type} [Preorder C] [Preorder D]
+
+open Classical in
+/-- The presheaf `x ↦ {b : Bool // x ≤ p → b = false}`. -/
+noncomputable def sep (p : D) : Dᵒᵖ ⥤ Type where
+  obj x := {b : Bool // x.unop ≤ p → b = false}
+  map {_ y} _ := TypeCat.ofHom fun b =>
+    ⟨if y.unop ≤ p then false else b.1, fun h => by simp [h]⟩
+  map_id x := ConcreteCategory.hom_ext _ _ fun b => Subtype.ext (by
+    by_cases h : x.unop ≤ p
+    · simp [h, b.2 h]
+    · simp [h])
+  map_comp {x y z} f g := ConcreteCategory.hom_ext _ _ fun b => Subtype.ext (by
+    have hzy := leOfHom g.unop
+    by_cases hz : z.unop ≤ p
+    · simp [hz]
+    · have : ¬ y.unop ≤ p := fun h => hz (hzy.trans h)
+      simp [hz, this])
+
+/-- The presheaf represented by `q`. -/
+def rep (q : D) : Dᵒᵖ ⥤ Type where
+  obj x := PLift (x.unop ≤ q)
+  map f := TypeCat.ofHom fun h => ⟨(leOfHom f.unop).trans h.down⟩
+
+open Classical in
+/-- The two maps `rep q ⟶ sep p`, by the value `b` at `q`. -/
+noncomputable def arrow (q p : D) (b : Bool) : rep q ⟶ sep p where
+  app x := TypeCat.ofHom fun _ =>
+    ⟨if x.unop ≤ p then false else b, fun h' => by simp [h']⟩
+  naturality x y f := ConcreteCategory.hom_ext _ _ fun h => Subtype.ext (by
+    have hyx := leOfHom f.unop
+    by_cases hy : y.unop ≤ p
+    · simp [rep, sep, hy]; rfl
+    · have : ¬ x.unop ≤ p := fun h => hy (hyx.trans h)
+      simp [rep, sep, hy, this]; rfl)
+
+open Classical in
+/-- If every `u c` below `q` is below `p` and `q ≰ p`, restriction along `u` is not
+faithful. -/
+theorem not_faithful (u : C ⥤ D) (q p : D) (hqp : ¬ q ≤ p)
+    (h : ∀ c, u.obj c ≤ q → u.obj c ≤ p) : ¬ (pre u).Faithful := by
+  intro hf
+  have heq : (pre u).map (arrow q p true) = (pre u).map (arrow q p false) := by
+    apply NatTrans.ext
+    funext c
+    refine ConcreteCategory.hom_ext _ _ fun x => Subtype.ext ?_
+    change (if u.obj c.unop ≤ p then false else true) =
+      (if u.obj c.unop ≤ p then false else false)
+    simp only [h c.unop x.down, ↓reduceIte]
+  have h1 := (pre u).map_injective heq
+  have h2 := congrArg
+    (fun α : rep q ⟶ sep p => (α.app (Opposite.op q) (PLift.up (le_refl q) : PLift (q ≤ q))).1) h1
+  change (if q ≤ p then false else true) = (if q ≤ p then false else false) at h2
+  simp only [hqp, ↓reduceIte] at h2
+  exact Bool.noConfusion h2
+
+/-- The maps of the chain on `ℤ ⊕ ℤ`. -/
+def Bmap (k : ℤ) : ℤ ⊕ ℤ → ℤ ⊕ ℤ :=
+  if k % 2 = 0 then Sum.map (fun x => 2 * x + k / 2) (fun x => (x - k / 2) / 2)
+  else Sum.map (fun x => (x - k / 2) / 2) (fun x => 2 * x + (k / 2 + 1))
+
+/-- `Bmap k ⊣ Bmap (k + 1)` for every `k ∈ ℤ`. -/
+theorem gc (k : ℤ) : GaloisConnection (Bmap k) (Bmap (k + 1)) := by
+  intro x y
+  unfold Bmap
+  by_cases hk : k % 2 = 0
+  · have hk' : ¬ (k + 1) % 2 = 0 := by omega
+    have h2 : (k + 1) / 2 = k / 2 := by omega
+    simp only [hk, hk', h2, ↓reduceIte]
+    rcases x with x | x <;> rcases y with y | y <;> simp <;> omega
+  · have hk' : (k + 1) % 2 = 0 := by omega
+    have h2 : (k + 1) / 2 = k / 2 + 1 := by omega
+    simp only [hk, hk', h2, ↓reduceIte]
+    rcases x with x | x <;> rcases y with y | y <;> simp <;> omega
+
+/-- The functor of `Bmap k` on the poset `ℤ ⊕ ℤ`. -/
+def chainFun (k : ℤ) : (ℤ ⊕ ℤ) ⥤ (ℤ ⊕ ℤ) := (gc k).monotone_l.functor
+
+/-- The `k`-th functor of the chain, restriction along `Bmap k`. -/
+abbrev chain (k : ℤ) : ((ℤ ⊕ ℤ)ᵒᵖ ⥤ Type) ⥤ ((ℤ ⊕ ℤ)ᵒᵖ ⥤ Type) := pre (chainFun k)
+
+/-- **Infinite in both directions**: `chain k ⊣ chain (k + 1)` for every `k ∈ ℤ`. -/
+def chainAdj (k : ℤ) : chain k ⊣ chain (k + 1) := preAdj (gc k).adjunction
+
+theorem chain_adj (k : ℤ) : Nonempty (chain k ⊣ chain (k + 1)) := ⟨chainAdj k⟩
+
+/-- No functor of the chain is faithful. -/
+theorem chain_not_faithful (k : ℤ) : ¬ (chain k).Faithful := by
+  by_cases hk : k % 2 = 0
+  · refine not_faithful (chainFun k) (Sum.inl (k / 2 + 1)) (Sum.inl (k / 2))
+      (by simp only [Sum.inl_le_inl_iff]; omega) ?_
+    intro c hc
+    change Bmap k c ≤ _ at hc
+    change Bmap k c ≤ _
+    unfold Bmap at hc ⊢
+    simp only [hk, ↓reduceIte] at hc ⊢
+    rcases c with x | x
+    · simp only [Sum.map_inl, Sum.inl_le_inl_iff] at hc ⊢; omega
+    · simp at hc
+  · refine not_faithful (chainFun k) (Sum.inr (k / 2 + 2)) (Sum.inr (k / 2 + 1))
+      (by simp only [Sum.inr_le_inr_iff]; omega) ?_
+    intro c hc
+    change Bmap k c ≤ _ at hc
+    change Bmap k c ≤ _
+    unfold Bmap at hc ⊢
+    simp only [hk, ↓reduceIte] at hc ⊢
+    rcases c with x | x
+    · simp at hc
+    · simp only [Sum.map_inr, Sum.inr_le_inr_iff] at hc ⊢; omega
+
+theorem chain_not_fullyFaithful (k : ℤ) : ¬ ((chain k).Full ∧ (chain k).Faithful) :=
+  fun h => chain_not_faithful k h.2
+
+/-- **Page 80, Proposition.** For every `n`, `n` functors between presheaf topoi on a small
+category, each right adjoint to the previous, none fully faithful. -/
+theorem proposition_page80 (n : ℕ) :
+    ∃ G : Fin n → (((ℤ ⊕ ℤ)ᵒᵖ ⥤ Type) ⥤ ((ℤ ⊕ ℤ)ᵒᵖ ⥤ Type)),
+      (∀ (i : Fin n) (h : i.1 + 1 < n), Nonempty (G i ⊣ G ⟨i.1 + 1, h⟩)) ∧
+      ∀ i, ¬ ((G i).Full ∧ (G i).Faithful) := by
+  refine ⟨fun i => chain i.1, fun i _ => ?_, fun i => chain_not_fullyFaithful _⟩
+  have := chain_adj (i.1 : ℤ)
+  rwa [show ((i.1 : ℤ) + 1) = ((i.1 + 1 : ℕ) : ℤ) by push_cast; rfl] at this
+
+end ChainesAdjoints
 
 end Grothendieck.Folder19
