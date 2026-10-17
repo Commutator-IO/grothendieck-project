@@ -57,6 +57,14 @@
 % d'enfants. « Groupe cartographique » is his own term (Esquisse d'un
 % programme, 1984).
 %
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — footnotes added from the
+% Lean checks (lean/Grothendieck/Folder88.lean): the Proposition of page 8
+% holds for any group acting freely and transitively with a) and phi^2 = 1,
+% without the Weyl-group hypothesis, b), the rest of c), d) or finiteness;
+% the arithmetic of (6), with the corrected (c_2), is confirmed. The
+% published theory of maps recorded by the folder's finding (Coxeter-Moser
+% ch. 8, Jones-Singerman 1978, Bryant-Singerman 1985) cited at (6) and (7).
+%
 % What the folder announces and never establishes: the whole of run 2, which
 % he heads « à prouver »; the proof that the flag complex of page 5 is a
 % sphere (« manifestement »); b) and the NB of page 13, largely illegible;
@@ -348,7 +356,17 @@ $R \times \mathrm{Rep}'(I)$ est $2\nu$, où $\nu$ est le plus petit commun
 multiple des $n_{ij}$, $i \neq j$.\footnote{La page 8 écrit « ordre de
 $\pi = \sigma_{\ell-2}\sigma_{\ell-1} = 2\nu$ », égalant l'ordre à $\pi$ ; et
 $\sigma_{\ell-2}\sigma_{\ell-1}$ est l'inverse du $\pi$ de la page 6, ce qui
-ne change pas l'ordre. Les $n_{ij} = 2$ comptent dans le ppcm.}
+ne change pas l'ordre. Les $n_{ij} = 2$ comptent dans le ppcm. Vérifié en
+Lean (lean/Grothendieck/Folder88.lean, \texttt{proposition\_ordre}, et
+\texttt{sigmaAvant\_mul\_sigmaDernier} pour l'inverse) : la proposition vaut
+pour tout groupe $W$ opérant librement et transitivement sur un ensemble non
+vide $R$ et toute application $\varphi$ vérifiant a) et
+$\varphi(r,i)^{2} = 1$ ; que $W$ soit un groupe de Weyl, la condition b), le
+reste de la présentation c) et le graphe d) n'interviennent pas, ni la
+finitude de $W$ : en convenant qu'un élément d'ordre infini est d'ordre $0$,
+et qu'un ppcm dont un terme est nul est nul, la formule $2\nu$ vaut encore
+quand un $n_{ij}$ est infini. Cette généralité est de l'édition, non de la
+page.}
 
 Pour $\ell = 3$ c'est une carte de dimension 2 sur la sphère : les faces sont
 des triangles ($\sigma_{0}\sigma_{1}$ d'ordre 3), et un sommet de type $k$ est
@@ -507,7 +525,16 @@ par « ou », engloberait les cas sphériques ; on la remplace par la forme
 lesquels $\frac{1}{p} + \frac{1}{q} = \frac{1}{2}$, sont écrits puis biffés dans
 la liste euclidienne ; le premier est la carte $(\mathbb{R}^{2} \supset
 \mathbb{R})$ de l'exception de (1), et la page ne dit pas où elle les range.
-Le nom du pavage hexagonal est illisible. Que $\Gamma_{p,q}$ contienne un groupe
+Le nom du pavage hexagonal est illisible. L'arithmétique de ce tri est
+vérifiée en Lean (lean/Grothendieck/Folder88.lean, \texttt{spherique\_iff},
+\texttt{euclidien\_iff}, \texttt{hyperbolique\_iff}) pour les types finis
+$p, q \geq 1$ atteints au sens de (2) : les trois listes sont exactement les
+cas où $\frac{1}{p} + \frac{1}{q}$ est supérieur, égal ou inférieur à
+$\frac{1}{2}$, et la forme corrigée de $(c_{2})$ est la bonne ; le contenu
+géométrique de (6) n'est pas vérifié. La répartition des types en sphériques,
+euclidiens et hyperboliques selon ce signe, avec les groupes $[q,p]$, est au
+chapitre 8 de Coxeter et Moser, \emph{Generators and Relations for Discrete
+Groups} (1957). Que $\Gamma_{p,q}$ contienne un groupe
 libre non abélien dans le cas hyperbolique tient à ce qu'il y est un groupe
 fuchsien non élémentaire.}
 
@@ -524,7 +551,19 @@ géodésique, et la carte est régulière exactement quand $\pi$ est distingué
 dans $\Gamma_{p,q}$.\footnote{La page écrit « les cartes régulières », puis
 « $\Gamma_{p,q}$ est invariant » ; on lit la seconde expression comme la
 condition de régularité, ce qui oblige à lire la première comme
-« quasi-régulières ». Une partie de l'énoncé est illisible.}
+« quasi-régulières ». Une partie de l'énoncé est illisible. La théorie
+publiée contient cet énoncé : G. A. Jones et D. Singerman, « Theory of maps
+on orientable surfaces », \emph{Proc. London Math. Soc.} (3) 37 (1978),
+273--307, réalisent toute carte orientée de type $(p,q)$ comme quotient de la
+carte universelle, sur la sphère, le plan ou le plan hyperbolique, par un
+sous-groupe du groupe triangulaire, régulière si et seulement si ce
+sous-groupe est distingué ; R. P. Bryant et D. Singerman, « Foundations of the
+theory of maps on surfaces with boundary », \emph{Quart. J. Math.} 36 (1985),
+17--41, font de même pour les cartes non orientées et les groupes
+triangulaires étendus. Ces références sont relevées par l'édition, non
+relues ici en entier ; il reste à vérifier qu'elles couvrent les types
+dégénérés $(2,q)$, $(p,2)$ et l'exception $(\mathbb{R}^{2} \supset
+\mathbb{R})$ de (1).}
 \end{enumerate}
 
 \textbf{NB.} Pour $(p,q)$ donné, déterminer les $\pi$ possibles revient à
