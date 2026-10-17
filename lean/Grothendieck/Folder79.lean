@@ -160,9 +160,7 @@ theorem eq_of_agree {u v : H} (hs : u • s₀ U₀ = v • s₀ U₀)
   have h2 : (v⁻¹ * u) • t₀ U₀ σ = t₀ U₀ σ := by rw [mul_smul, ht, inv_smul_smul]
   rw [smul_s₀_eq_iff] at h1
   rw [smul_t₀_eq_iff] at h2
-  have := hz _ h1 h2
-  rw [inv_mul_eq_one] at this
-  exact this.symm
+  exact (inv_mul_eq_one.mp (hz _ h1 h2)).symm
 
 theorem sigma_sq (hσ : σ * σ ∈ U₀) : σ * σ = 1 :=
   hz _ hσ (by simpa [mul_assoc] using hσ)
@@ -195,17 +193,12 @@ theorem IsHomothetyGroup.comm (hZ : IsHomothetyGroup U₀ σ Z) {a b} (ha : a �
   have cba := hZ.commute _ (Z.mul_mem hb ha)
   have hw1' := eq_inv_of_smul cba hw1
   have hw2' : w⁻¹ • t₀ U₀ σ = (b * a) (t₀ U₀ σ) := by
-    have := eq_inv_of_smul (inv_commute cba) hw2
-    simpa using this
+    simpa using eq_inv_of_smul (inv_commute cba) hw2
   set c := b⁻¹ * a⁻¹ * b * a with hc
   have hcZ : c ∈ Z := Z.mul_mem (Z.mul_mem (Z.mul_mem (Z.inv_mem hb) (Z.inv_mem ha)) hb) ha
   have key := hZ.faithful c hcZ (w⁻¹ * (u * v)) ?_ ?_
-  · have : b⁻¹ * a⁻¹ * b * a = 1 := key
-    have h2 : a⁻¹ * (b * a) = b := by
-      have := congrArg (b * ·) this
-      simpa [mul_assoc] using this
-    have := congrArg (a * ·) h2
-    simpa [mul_assoc] using this.symm
+  · calc a * b = a * b * c := by rw [key, mul_one]
+      _ = b * a := by rw [hc]; group
   · rw [mul_smul, mul_smul, hv1, ← cb, hu1]
     have : b (a (s₀ U₀)) = (b * a) (s₀ U₀) := rfl
     rw [this, ← hw1, inv_smul_smul]
@@ -267,10 +260,7 @@ theorem inv_t₀ {l : Equiv.Perm (H ⧸ U₀)} (c : ∀ (h : H) x, l (h • x) =
 omit hz in
 theorem sigma_inv_comm {T : Subgroup H} (hT : IsTorus U₀ σ T) {t : H} (ht : t ∈ T) :
     σ * t⁻¹ = t * σ := by
-  have := hT.inverts _ (T.inv_mem ht)
-  rw [inv_inv] at this
-  calc σ * t⁻¹ = σ * t⁻¹ * σ⁻¹ * σ := by group
-    _ = t * σ := by rw [this]
+  simpa using mul_inv_eq_iff_eq_mul.mp (hT.inverts _ (T.inv_mem ht))
 
 /-- The conditions of (89) hold for `T_H`. -/
 theorem isTorus_torusOf (hσ : σ * σ ∈ U₀) (hZ : IsHomothetyGroup U₀ σ Z) :
@@ -284,8 +274,7 @@ theorem isTorus_torusOf (hσ : σ * σ ∈ U₀) (hZ : IsHomothetyGroup U₀ σ 
     · rw [hσi, mul_smul, mul_smul, sigma_smul_s₀, h2, ← inv_commute c, sigma_smul_t₀ hσ1,
         eq_inv_of_smul c h1]
     · rw [hσi, mul_smul, mul_smul, sigma_smul_t₀ hσ1, h1, ← c, sigma_smul_s₀]
-      have := eq_inv_of_smul (inv_commute c) h2
-      simpa using this.symm
+      simpa using (eq_inv_of_smul (inv_commute c) h2).symm
   · rintro t ⟨l, hl, h1, h2⟩ u hu
     have c := hZ.commute l hl
     rw [← smul_s₀_eq_iff, mul_smul, mul_smul, eq_inv_of_smul c h1, ← inv_commute c,
@@ -295,17 +284,14 @@ theorem isTorus_torusOf (hσ : σ * σ ∈ U₀) (hZ : IsHomothetyGroup U₀ σ 
     set c' := t'⁻¹ * (a'⁻¹ * a) * t'⁻¹⁻¹ with hc'
     have hc'U : c' ∈ U₀ := by
       obtain ⟨l, hl, h1, h2⟩ := (torusOf hZ).inv_mem ht'
-      exact (show t'⁻¹ * (a'⁻¹ * a) * t'⁻¹⁻¹ ∈ U₀ by
-        rw [← smul_s₀_eq_iff, mul_smul, mul_smul, eq_inv_of_smul (hZ.commute l hl) h1,
-          ← inv_commute (hZ.commute l hl), (smul_s₀_eq_iff _).2 (U₀.mul_mem (U₀.inv_mem ha') ha),
-          ← inv_commute (hZ.commute l hl), h1]
-        simp)
+      rw [hc', ← smul_s₀_eq_iff, mul_smul, mul_smul, eq_inv_of_smul (hZ.commute l hl) h1,
+        ← inv_commute (hZ.commute l hl), (smul_s₀_eq_iff _).2 (U₀.mul_mem (U₀.inv_mem ha') ha),
+        ← inv_commute (hZ.commute l hl), h1]
+      simp
     set r := t'⁻¹ * t with hr
     have hrT : r ∈ torusOf hZ := (torusOf hZ).mul_mem ((torusOf hZ).inv_mem ht') ht
     set d := b * b'⁻¹ with hd
-    have hdU : σ⁻¹ * d * σ ∈ U₀ := by
-      have := U₀.mul_mem hb (U₀.inv_mem hb')
-      simpa [hd, mul_assoc] using this
+    have hdU : σ⁻¹ * d * σ ∈ U₀ := by simpa [hd, mul_assoc] using U₀.mul_mem hb (U₀.inv_mem hb')
     have hcrd : c' * r * d = 1 := by
       have e : c' * r * d = t'⁻¹ * a'⁻¹ * (a * t * b) * b'⁻¹ := by
         simp only [hc', hr, hd]; group
@@ -324,20 +310,14 @@ theorem isTorus_torusOf (hσ : σ * σ ∈ U₀) (hZ : IsHomothetyGroup U₀ σ 
       ((smul_s₀_eq_iff _).2 (U₀.inv_mem hc'U)) (by simpa using hc0)
     have hl1' : l = 1 := inv_eq_one.mp hl1
     have hr1 : r = 1 := eq_of_agree hz (by rw [r1, hl1']; simp) (by rw [r2, hl1']; simp)
-    have htt : t = t' := by
-      have := hr1; simp only [hr] at this
-      exact (inv_mul_eq_one.mp this).symm
+    have htt : t = t' := (inv_mul_eq_one.mp hr1).symm
     have hcd : c' * d = 1 := by simpa [hr1] using hcrd
-    have hd1 : d = 1 := by
-      have hdc : d = c'⁻¹ := eq_inv_of_mul_eq_one_right hcd
-      exact hz d (by rw [hdc]; exact U₀.inv_mem hc'U) hdU
+    have hd1 : d = 1 :=
+      hz d (by rw [eq_inv_of_mul_eq_one_right hcd]; exact U₀.inv_mem hc'U) hdU
     have hc1 : c' = 1 := by simpa [hd1] using hcd
     refine ⟨?_, htt, ?_⟩
-    · have : a'⁻¹ * a = 1 := by
-        have := hc1; simp only [hc'] at this
-        have h2 := congrArg (fun x => t' * x * t'⁻¹) this
-        simpa [mul_assoc] using h2
-      exact (inv_mul_eq_one.mp this).symm
+    · calc a = a' * (t' * c' * t'⁻¹) := by rw [hc']; group
+        _ = a' := by rw [hc1]; group
     · exact mul_inv_eq_one.mp hd1
 
 /-- The permutation `h U₀ ↦ h t U₀`, for `t` normalising `U₀`. -/
@@ -378,20 +358,13 @@ theorem isHomothetyGroup_homothetiesOf (hσ : σ * σ ∈ U₀) {T : Subgroup H}
     rw [← sigma_smul_s₀, c, hlt, ← mul_smul, ← mul_smul, smul_s₀, smul_s₀, QuotientGroup.eq] at hut
     -- `hut : (u * σ)⁻¹ * (σ * t) ∈ U₀`
     set a := t⁻¹ * (σ⁻¹ * u * σ) with ha
-    have haU : a ∈ U₀ := by
-      have := U₀.inv_mem hut
-      simpa [ha, mul_assoc] using this
+    have haU : a ∈ U₀ := by simpa [ha, mul_assoc] using U₀.inv_mem hut
     have hb : σ⁻¹ * (σ⁻¹ * u * σ) * σ ∈ U₀ := by
-      have e : σ⁻¹ * (σ⁻¹ * u * σ) * σ = u := by
-        rw [hσi]
-        calc σ * (σ * u * σ) * σ = (σ * σ) * u * (σ * σ) := by group
-          _ = u := by rw [hσ1]; group
-      rw [e]; exact hu
+      rw [hσi, show σ * (σ * u * σ) * σ = (σ * σ) * u * (σ * σ) by group, hσ1]; simpa using hu
     have key := hT.injective (t * a * t⁻¹) (hT.normalises t ht a haU) 1 U₀.one_mem t ht 1
       T.one_mem 1 (σ⁻¹ * u * σ) (by simp) hb (by simp [ha, mul_assoc])
-    have ht1 : t = 1 := key.2.1
     apply equivariant_ext c (fun _ _ => rfl)
-    rw [hlt, ht1]; simp
+    rw [hlt, key.2.1]; simp
 
 omit hz in
 /-- `Z ↦ T_H ↦ Z` is the identity. -/
@@ -400,8 +373,7 @@ theorem homothetiesOf_torusOf (hZ : IsHomothetyGroup U₀ σ Z) :
   ext l
   constructor
   · rintro ⟨c, t, ⟨m, hm, h1, _⟩, hlt⟩
-    have : l = m := equivariant_ext c (hZ.commute m hm) (by rw [hlt, h1])
-    exact this ▸ hm
+    exact equivariant_ext c (hZ.commute m hm) (by rw [hlt, h1]) ▸ hm
   · intro hl
     obtain ⟨u, h1, h2⟩ := hZ.base hl
     exact ⟨hZ.commute l hl, u, ⟨l, hl, h1, h2⟩, h1.symm⟩
@@ -677,9 +649,7 @@ theorem Exceptional.four (hR : Exceptional R) : (4 : R) = 0 := by
 theorem Exceptional.two_mul_unit (hR : Exceptional R) {c : R} (hc : IsUnit c) : 2 * c = 2 := by
   obtain ⟨u, rfl⟩ := hc
   rcases hR u with h | h
-  · have : (2 : R) = 0 := by
-      calc (2 : R) = 2 * ↑u * ↑u⁻¹ := by simp [mul_assoc]
-        _ = 0 := by rw [h, zero_mul]
+  · have : (2 : R) = 0 := by simpa [mul_assoc] using congrArg (· * (↑u⁻¹ : R)) h
     rw [h, this]
   · exact h
 
@@ -733,16 +703,11 @@ theorem det2_sigma {x y : Fin 2 → R} (h : det2 x y = 1) : det2 (x + (2 : R) �
 `(1, 0)` and `(2, 1)`. -/
 noncomputable def sigma (hR : Exceptional R) : Vtx R → Vtx R :=
   Quotient.lift (fun x => vtx (det2_sigma x.2.choose_spec))
-    (fun x x' hx => by
-      rw [vtx_eq_iff]
-      rcases hR.sigma_rel x'.2.choose_spec x.2.choose_spec
-        (hx.elim (fun h => Or.inl h) (fun h => Or.inr h)) with e | e
-      · exact Or.inl e
-      · exact Or.inr e)
+    (fun x x' hx => (vtx_eq_iff _ _).2 (hR.sigma_rel x'.2.choose_spec x.2.choose_spec hx))
 
 theorem sigma_vtx (hR : Exceptional R) {x y : Fin 2 → R} (h : det2 x y = 1) :
-    sigma hR (vtx h) = vtx (det2_sigma h) := by
-  exact Quotient.sound (hR.sigma_rel h (⟨x, y, h⟩ : {x : Fin 2 → R // Unimod x}).2.choose_spec
+    sigma hR (vtx h) = vtx (det2_sigma h) :=
+  Quotient.sound (hR.sigma_rel h (⟨x, y, h⟩ : {x : Fin 2 → R // Unimod x}).2.choose_spec
     (Or.inl rfl))
 
 theorem sigma_act (hR : Exceptional R) (g : Matrix.SpecialLinearGroup (Fin 2) R) (v : Vtx R) :
@@ -783,13 +748,8 @@ theorem sigma_ne_scal (hR : Exceptional R) (h2 : (2 : R) ≠ 0) (c : Rˣ) (v : V
   induction v using Vtx.ind with
   | H x y h =>
     rw [sigma_vtx, scal_vtx, Ne, vtx_eq_iff]
-    rintro (e | e) <;> apply h2
-    · have := congrArg (det2 x) e
-      simp only [det2_add_right, det2_smul_right, det2_self, h] at this
-      simpa using this
-    · have := congrArg (det2 x) e
-      simp only [det2_add_right, det2_smul_right, det2_neg_right, det2_self, h] at this
-      simpa using this
+    rintro (e | e) <;> apply h2 <;>
+      simpa [det2_add_right, det2_smul_right, det2_neg_right, det2_self, h] using congrArg (det2 x) e
 
 /-- The ring computation of pages 93 to 95: a unimodular `(p, q)` whose class
 is fixed by every `(1, t; 0, 1)` modulo `± 1`. -/
@@ -852,14 +812,12 @@ theorem commutant (f : Vtx R → Vtx R) (hf : ∀ g v, f (act g v) = act g (f v)
     have := hf N (vtx det2_e)
     rw [hN, hfw, act_vtx, vtx_eq_iff] at this
     rcases this with e | e
-    · left; have := congrFun e 0
-      simp only [N, mulVec_apply2] at this
-      simpa using this
+    · left; simpa [N, mulVec_apply2] using congrFun e 0
     · right
       have e0 := congrFun e 0
       have e1 := congrFun e 1
       simp only [N, mulVec_apply2, Pi.neg_apply] at e0 e1
-      refine ⟨by simpa using e0, by simpa using e1⟩
+      exact ⟨by simpa using e0, by simpa using e1⟩
   have hdet : w 0 * w' 1 - w 1 * w' 0 = 1 := hw
   have hval : ∀ (x y : Fin 2 → R) (h : det2 x y = 1),
       f (vtx h) = vtx (show det2 (w 0 • x + w 1 • y) ((cols h).1 *ᵥ w') = 1 by
@@ -1052,9 +1010,8 @@ page 20 cites as known (« on sait que »). -/
 theorem exists_isUnit_mul_add [Finite (MaximalSpectrum R)] {d d' a₀ b₀ : R}
     (h : a₀ * d + b₀ * d' = 1) : ∃ a : R, IsUnit (a * d + d') := by
   classical
-  have hcop : Pairwise (Function.onFun IsCoprime fun i : MaximalSpectrum R => i.asIdeal) := by
-    intro i j hij
-    exact Ideal.isCoprime_of_isMaximal (fun e => hij (MaximalSpectrum.ext e))
+  have hcop : Pairwise (Function.onFun IsCoprime fun i : MaximalSpectrum R => i.asIdeal) :=
+    fun i j hij => Ideal.isCoprime_of_isMaximal (fun e => hij (MaximalSpectrum.ext e))
   let x : MaximalSpectrum R → R := fun i =>
     if hd : d ∈ i.asIdeal then 0 else (i.isMaximal.exists_inv hd).choose * (1 - d')
   obtain ⟨a, ha⟩ := Ideal.exists_forall_sub_mem_ideal hcop x
@@ -1067,9 +1024,7 @@ theorem exists_isUnit_mul_add [Finite (MaximalSpectrum R)] {d d' a₀ b₀ : R}
   by_cases hd : d ∈ I
   · have hx : x ⟨I, hI⟩ = 0 := dite_eq_left hd
     rw [hx, sub_zero] at hai
-    have hd' : d' ∈ I := by
-      have := I.sub_mem hmem (I.mul_mem_left a hd)
-      simpa using this
+    have hd' : d' ∈ I := by simpa using I.sub_mem hmem (I.mul_mem_left a hd)
     rw [← h]
     exact I.add_mem (I.mul_mem_left _ hd) (I.mul_mem_left _ hd')
   · obtain ⟨k, hk, hy⟩ := (hI.exists_inv hd).choose_spec
@@ -1105,13 +1060,11 @@ theorem semilocal_dist_three [Finite (MaximalSpectrum R)] (e : Rˣ) {x y : Fin 2
   have h1y : det2 z₁ y = e * u := by rw [det2_smul_left, hzy]
   set z₂ := (↑u⁻¹ : R) • (z₁ + y)
   have h12 : det2 z₁ z₂ = e := by
-    rw [det2_smul_right, det2_add_right, det2_self, zero_add, h1y]
-    calc (↑u⁻¹ : R) * (↑e * ↑u) = ↑e * (↑u⁻¹ * ↑u) := by ring
-      _ = e := by simp
+    rw [det2_smul_right, det2_add_right, det2_self, zero_add, h1y, mul_left_comm, Units.inv_mul,
+      mul_one]
   have h2y : det2 z₂ y = e := by
-    rw [det2_smul_left, det2_add_left, det2_self, add_zero, h1y]
-    calc (↑u⁻¹ : R) * (↑e * ↑u) = ↑e * (↑u⁻¹ * ↑u) := by ring
-      _ = e := by simp
+    rw [det2_smul_left, det2_add_left, det2_self, add_zero, h1y, mul_left_comm, Units.inv_mul,
+      mul_one]
   refine ⟨z₁, z₂, unimod_of_isUnit (z := y) ?_, unimod_of_isUnit (z := y) ?_, h1, h12, h2y⟩
   · rw [h1y]; exact (e * u).isUnit
   · rw [h2y]; exact e.isUnit
@@ -1151,9 +1104,7 @@ theorem pm_mul_cancel {a b : R} (μ : Rˣ) :
   constructor
   · rintro (h | h)
     · left; simpa using congrArg ((↑μ⁻¹ : R) * ·) h
-    · right
-      have := congrArg ((↑μ⁻¹ : R) * ·) h
-      simpa [mul_neg] using this
+    · right; simpa [mul_neg] using congrArg ((↑μ⁻¹ : R) * ·) h
   · rintro (rfl | rfl)
     · left; rfl
     · right; ring
@@ -1177,8 +1128,7 @@ theorem star_line (e : Rˣ) {x y z : Fin 2 → R} (hy : det2 x y = e) (hz : det2
     z = y + det2 z ((↑e⁻¹ : R) • y) • x := by
   have h1 : det2 x ((↑e⁻¹ : R) • y) = 1 := by rw [det2_smul_right, hy]; simp
   have := decomp h1 z
-  rw [hz, smul_smul, Units.mul_inv, one_smul, add_comm] at this
-  exact this
+  rwa [hz, smul_smul, Units.mul_inv, one_smul, add_comm] at this
 
 /-- **Page 67, formula (178): the faces of a type are the triangles of its
 edges.** If `x ∧ y = e` is a unit, `x ∧ z = ± e` and `z ∧ y = ± e`, then
@@ -1209,9 +1159,7 @@ theorem link_polygon (e μ : Rˣ) {x y : Fin 2 → R} (hy : det2 x y = e) (k k' 
   constructor
   · rintro (h | h)
     · left; simpa using congrArg (· * (↑e⁻¹ : R)) h
-    · right
-      have := congrArg (· * (↑e⁻¹ : R)) h
-      simpa [neg_mul] using this
+    · right; simpa [neg_mul] using congrArg (· * (↑e⁻¹ : R)) h
   · rintro (h | h) <;> rw [h]
     · left; ring
     · right; ring
@@ -1263,9 +1211,7 @@ theorem not_adj_scal [Nontrivial R] (e c : Rˣ) (v : Vtx R) : ¬ Adj R e v (scal
   induction v using Vtx.ind with
   | H x y h =>
     rw [scal_vtx, adj_vtx, det2_smul_right, det2_self, mul_zero]
-    rintro (h0 | h0)
-    · exact e.ne_zero h0.symm
-    · exact e.ne_zero (neg_eq_zero.mp h0.symm)
+    simp [e.ne_zero.symm]
 
 /-- Distance `2` in the model: if `ż` is adjacent to `ẋ` and to `μ ẋ`, then
 `μ e = ± e`, so `μ = ± 1`. -/
@@ -1284,9 +1230,7 @@ theorem no_common_nbr_scal (e : Rˣ) {c : Rˣ} (hc : c ≠ 1 ∧ c ≠ -1) (v : 
       · left; linear_combination -h2
       · left; linear_combination h2
       · right; linear_combination h2
-    rcases units_pm_of_mul this with h | h
-    · exact hc.1 h
-    · exact hc.2 h
+    exact (units_pm_of_mul this).elim hc.1 hc.2
 
 /-- The three exclusions for a scalar `μ ≠ ± 1`. -/
 theorem scal_dist [Nontrivial R] (e : Rˣ) {c : Rˣ} (hc : c ≠ 1 ∧ c ≠ -1) (v : Vtx R) :
@@ -1324,8 +1268,7 @@ theorem commutant_dist [Nontrivial R] (e : Rˣ) (f : Vtx R → Vtx R)
     have hscal : ∀ c : Rˣ, f = scal c → f v ≠ v ∧ ¬ Adj R e v (f v) ∧
         ((∃ w, Adj R e v w ∧ Adj R e w (f v)) → ∃ hR : Exceptional R, f = sigma hR) := by
       rintro c rfl
-      have hc : c ≠ 1 ∧ c ≠ -1 := by
-        have := mt (scal_eq_id_iff c).2 hf1; tauto
+      have hc : c ≠ 1 ∧ c ≠ -1 := not_or.mp (mt (scal_eq_id_iff c).2 hf1)
       obtain ⟨a, b, d⟩ := scal_dist e hc v
       exact ⟨a, b, fun h => absurd h d⟩
     rcases commutant f hf with ⟨c, hc⟩ | ⟨hR, c, hc⟩
@@ -1348,16 +1291,9 @@ theorem commutant_dist [Nontrivial R] (e : Rˣ) (f : Vtx R → Vtx R)
     · rw [adj_vtx, det2_smul_right, det2_add_right, det2_smul_right, det2_self, h]
       intro he
       have hu : IsUnit (2 : R) := by
-        rcases he with he | he
-        · rw [show (c : R) * (0 + 2 * 1) = 2 by linear_combination h2c] at he
-          rw [he]; exact e.isUnit
-        · rw [show (c : R) * (0 + 2 * 1) = 2 by linear_combination h2c] at he
-          rw [he]; exact e.isUnit.neg
-      obtain ⟨u, hu⟩ := hu
-      rcases hR (↑u⁻¹ : R) with h3 | h3
-      · rw [← hu, Units.mul_inv] at h3; exact one_ne_zero h3
-      · rw [← hu, Units.mul_inv, hu] at h3
-        exact one_ne_zero (by linear_combination -h3)
+        rw [show (c : R) * (0 + 2 * 1) = 2 by linear_combination h2c] at he
+        exact he.elim (fun he => he ▸ e.isUnit) fun he => he ▸ e.isUnit.neg
+      exact h2 (hu.mul_left_cancel (by linear_combination hR.four))
     · rintro ⟨w, hw1, hw2⟩
       induction w using Vtx.ind with
       | H z z' hz =>
@@ -1375,9 +1311,7 @@ theorem commutant_dist [Nontrivial R] (e : Rˣ) (f : Vtx R → Vtx R)
         · right; linear_combination h3 + c * h2e
         · right; linear_combination -h3 + c * h2e + c * hR.four
         · left; linear_combination -h3 + c * h2e + c * hR.four
-      refine ⟨hR, ?_⟩
-      have hid : scal c = id := (scal_eq_id_iff c).2 (units_pm_of_mul hcpm)
-      rw [hid]; rfl
+      exact ⟨hR, by rw [(scal_eq_id_iff c).2 (units_pm_of_mul hcpm)]; rfl⟩
   exact ⟨key.1, key.2.1, key.2.2, fun ⟨hR, hfs⟩ => hfs ▸ sigma_common_nbr hR e v⟩
 
 /-- Over a semi-local ring, any two vertices are joined in `P_{M, ±e}` by a
@@ -1388,9 +1322,7 @@ theorem adj_path_three [Finite (MaximalSpectrum R)] (e : Rˣ) (v v' : Vtx R) :
   | H x y h =>
   induction v' using Vtx.ind with
   | H x' y' h' =>
-    obtain ⟨z₁, z₂, hz₁, hz₂, h1, h2, h3⟩ := semilocal_dist_three e ⟨y, h⟩ ⟨y', h'⟩
-    obtain ⟨a₁, ha₁⟩ := hz₁
-    obtain ⟨a₂, ha₂⟩ := hz₂
+    obtain ⟨z₁, z₂, ⟨a₁, ha₁⟩, ⟨a₂, ha₂⟩, h1, h2, h3⟩ := semilocal_dist_three e ⟨y, h⟩ ⟨y', h'⟩
     exact ⟨vtx ha₁, vtx ha₂, Or.inl h1, Or.inl h2, Or.inl h3⟩
 
 /-- **The finding in the model, over a semi-local ring.** If `λ ≠ 1` commutes
