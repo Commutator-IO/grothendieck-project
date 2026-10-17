@@ -113,10 +113,8 @@ theorem graphOn_pair_mem {I : Type} [Finite I] {X : Set (I → R)} {f g : (I →
     rintro (i | k)
     · exact ⟨.inl (.inl i), rfl⟩
     · fin_cases k
-      · exact ⟨.inl (.inr ()), rfl⟩
-      · exact ⟨.inr (.inr ()), rfl⟩
-  have := T.m2 w hw (T.m4 hf hg)
-  convert this using 1
+      exacts [⟨.inl (.inr ()), rfl⟩, ⟨.inr (.inr ()), rfl⟩]
+  convert T.m2 w hw (T.m4 hf hg) using 1
   ext y
   constructor
   · rintro ⟨hX, hk⟩
@@ -124,8 +122,7 @@ theorem graphOn_pair_mem {I : Type} [Finite I] {X : Set (I → R)} {f g : (I →
   · rintro ⟨⟨hX, h0⟩, -, h1⟩
     refine ⟨hX, fun k => ?_⟩
     fin_cases k
-    · exact h0 ()
-    · exact h1 ()
+    exacts [h0 (), h1 ()]
 
 /-- The image `F(X)` of `X` by a family with tame graph is tame ((M′1)). -/
 theorem image_mem {I K : Type} [Finite I] [Finite K] {X : Set (I → R)}
@@ -154,9 +151,8 @@ theorem isTameFun_comp {I K : Type} [Finite I] [Finite K] {X : Set (I → R)}
   let v : I ⊕ Unit → (I ⊕ K) ⊕ Unit := fun
     | .inl i => .inl (.inl i)
     | .inr _ => .inr ()
-  have := T.m1 v (T.m2 w hw (T.m4 hF hh))
   unfold IsTameFun
-  convert this using 1
+  convert T.m1 v (T.m2 w hw (T.m4 hF hh)) using 1
   ext z
   simp only [graphOn, Set.mem_ofPred_eq, Set.mem_image, Set.mem_preimage]
   constructor
@@ -166,13 +162,7 @@ theorem isTameFun_comp {I K : Type} [Finite I] [Finite K] {X : Set (I → R)}
     funext i
     rcases i with i | _ <;> rfl
   · rintro ⟨y, ⟨⟨hy, hyk⟩, -, hyh⟩, rfl⟩
-    refine ⟨hy, fun _ => ?_⟩
-    have hF' : (fun k => y (.inl (.inr k))) = F (fun i => y (.inl (.inl i))) :=
-      funext hyk
-    have := hyh ()
-    simp only [comp_apply] at this ⊢
-    rw [this]
-    exact congrArg h hF'
+    exact ⟨hy, fun _ => (hyh ()).trans (congrArg h (funext hyk))⟩
 
 /-- The tame functions are stable by product (page 20). -/
 theorem isTameFun_mul [CommRing R] (h11 : T.RingOps) {I : Type} [Finite I]
@@ -201,8 +191,7 @@ theorem isTameFun_const {I : Type} [Finite I] {X : Set (I → R)} (hX : X ∈ T.
 theorem isTameFun_coord {I : Type} [Finite I] {X : Set (I → R)} (hX : X ∈ T.M I) (i : I) :
     T.IsTameFun X (fun x => x i) := by
   unfold IsTameFun
-  have := T.m1 (Sum.elim id fun _ => i : I ⊕ Unit → I) hX
-  convert this using 1
+  convert T.m1 (Sum.elim id fun _ => i : I ⊕ Unit → I) hX using 1
   ext y
   simp only [graphOn, Set.mem_ofPred_eq, Set.mem_image]
   constructor
@@ -235,8 +224,7 @@ divisors, any set. -/
 theorem separates_off_zeroSet {R X A B : Type*} [Ring R] [NoZeroDivisors R] (f : A → X → R)
     (g : B → X → R) {x y : X} (hx : ∃ a, f a x ≠ 0) (hg : ∃ b, g b x ≠ g b y) :
     ∃ c, collapseFamily f g c x ≠ collapseFamily f g c y := by
-  by_contra h
-  push Not at h
+  by_contra! h
   obtain ⟨a, ha⟩ := hx
   obtain ⟨b, hb⟩ := hg
   have h1 : f a x = f a y := h (.inl a)
@@ -276,14 +264,9 @@ theorem collapse_separation [CommRing R] [NoZeroDivisors R] (h11 : T.RingOps) {I
   · rintro (a | ⟨a, b⟩)
     · exact hf' a
     · exact T.isTameFun_mul h11 (hf' a) (hg b)
-  · rw [collapseFamily_eq_zero_iff]
-    exact forall_congr' fun a => sub_eq_zero
-  · refine separates_off_zeroSet _ g ?_ ?_
-    · obtain ⟨a, ha⟩ := hxy
-      exact ⟨a, sub_ne_zero.mpr ha⟩
-    · by_contra h
-      push Not at h
-      exact hne (hinj hx hy (funext h))
+  · exact (collapseFamily_eq_zero_iff _ _ x).trans (forall_congr' fun a => sub_eq_zero)
+  · exact separates_off_zeroSet _ g (hxy.imp fun a => sub_ne_zero.mpr)
+      (not_forall.mp fun h => hne (hinj hx hy (funext h)))
 
 /-- **Proposition (page 23)** as an existence: a tame `Y = ⋂ f_α⁻¹(e_α)` of a tame `X` is the
 common zero set of a finite family of tame functions separating the points of `X ∖ Y`
