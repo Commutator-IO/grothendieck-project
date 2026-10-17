@@ -55,6 +55,22 @@
 % regular polytopes; weak equivalence of higher groupoids for the conditions
 % of page 4.
 %
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+%   checks of lean/Grothendieck/Folder104.lean and mathlib. Page 6 footnote:
+%   « direct dès que bien fondé » now needs M skeletal, does not use (i), and
+%   the well-foundedness is shown a genuine extra hypothesis (Z satisfies (i)
+%   and (ii)); mathlib's ReedyStructure and Riehl-Verity C.4 cited. The proof
+%   of (*) says theta is an endomorphism (not an automorphism) and that (ii)
+%   alone carries it; the argument for tau_n^{-1}(n) = {d_n} rewritten (an
+%   arrow y -> x exists because x and y have the same type). Footnotes
+%   recording the Lean checks of the order on classes, u_{d_n} = id, the three
+%   counts (binomial formula, add_pow), Ex. 3's two corrections, the
+%   simplicial identities (SimplexCategory.delta_comp_delta) and face
+%   factorisation behind « semi-simpliciaux », and the page 4 complex. Two
+%   « Ce que » run-in headings renamed. No literature added (the findings are
+%   unsearched or candidate on dating only); no facsimile change since
+%   2026-09-23 beyond a macro rename. mathlib PRs 44731/44732 closed, not cited.
+%
 % Revised 2026-09-23 (Opus 5.5), after the find-novelty pass:
 % — page 11, question b): (P_n)_{<=xi} = P_{n'} replaced by
 %   (P_n)_{<xi} = P_{n'-1}, with a footnote on why the page's form fails.
@@ -166,7 +182,7 @@ $I_{n,n'} = \tau_{n}^{-1}(n')$, et $u^{n}_{\xi} : I_{n'} \to I_{n}$
 l'application admissible attachée à $\xi \in I_{n,n'}$. Pour un ensemble ordonné
 $K$ et $\xi \in K$, $K_{\leq \xi} = \{x \in K \mid x \leq \xi\}$.
 
-\emph{Ce que le dossier annonce et n'établit pas} : les démonstrations des deux
+\emph{Annoncé par le dossier et non établi} : les démonstrations des deux
 équivalences de catégories (pages 9 et 13), toutes deux affirmées ; la
 sphéricité de $|I_{n}^{*}|$ dans les trois exemples ; la réponse à la question
 de la page 11 et le caractère canonique demandé dans sa marge.
@@ -232,7 +248,8 @@ quatrième terme, $\mathbb{Z}[F_{n-1}] \longleftarrow
 suite serait $\mathbb{Z}[F_{n-2}]$. On ne garde que les trois termes que
 l'identité ci-dessous concerne.}, parce que
 $t_{n-1}(t_{n}y - s_{n}y) - s_{n-1}(t_{n}y - s_{n}y) = 0$ par les identités
-globulaires $s_{n-1}s_{n} = s_{n-1}t_{n}$ et $t_{n-1}s_{n} = t_{n-1}t_{n}$.
+globulaires $s_{n-1}s_{n} = s_{n-1}t_{n}$ et $t_{n-1}s_{n} = t_{n-1}t_{n}$.\footnote{Vérifié
+en Lean (lean/Grothendieck/Folder104.lean, \texttt{globulaire\_complexe}).}
 Puis, pour $f : F \to F'$, des conditions échelonnées : a) tout objet de
 $F'$ est relié par une flèche à l'image d'un objet de $F$ ; b) deux objets
 dont les images sont reliées le sont --- « $\pi_{0}(f)$ inj. » ; b') et on peut
@@ -281,10 +298,20 @@ Soit $M$ une catégorie telle que
 Exemple : la catégorie définie par un ensemble ordonné.\footnote{« Tout
 endomorphisme » remplace « tout automorphisme », biffé. La correction
 importe : avec (i) seulement et des automorphismes triviaux, un endomorphisme
-non trivial resterait possible dans une catégorie infinie. Une catégorie qui
-satisfait (i) et (ii) est une \emph{catégorie directe} au sens de Reedy, dont
-toutes les flèches sont monomorphes, dès que l'ordre de $\mathbb{N}$ défini
-plus bas est bien fondé ; le nom n'est pas sur la page.}
+non trivial resterait possible dans une catégorie infinie. Une catégorie
+squelettique qui satisfait (ii) est une \emph{catégorie directe} au sens de
+Reedy --- une structure de Reedy dont la classe descendante est formée des
+identités --- si et seulement si l'ordre de $\mathbb{N}$ défini plus bas est
+bien fondé, le degré étant le rang pour cet ordre ; (i) dit seulement que ses
+flèches sont monomorphes. La bonne fondation est une hypothèse de plus, qui ne
+découle pas de (i) et (ii) : l'ensemble ordonné $\mathbf{Z}$, vu comme
+catégorie, vérifie (i) et (ii) et n'est pas direct. Le nom n'est pas sur la
+page. Vérifié en Lean (lean/Grothendieck/Folder104.lean,
+\texttt{reedyDirecte}, \texttt{wf\_of\_degre},
+\texttt{entiers\_relatifs\_non\_directe}), avec la notion de structure de
+Reedy de mathlib, \texttt{HomotopicalAlgebra.ReedyStructure}, dont la source
+renvoie à E.~Riehl et D.~Verity, \emph{Elements of $\infty$-Category Theory},
+annexe C.4.}
 
 \emph{Sous-objets.} Pour $D \in \mathrm{Ob}\, M$, soit $\widetilde{D}$
 l'ensemble des sous-objets de $D$, ordonné par inclusion, et identifions $D$ au
@@ -293,14 +320,20 @@ plus grand élément. Pour $D', D$ objets de $M$, l'application
 (*) \qquad \mathrm{Hom}_{M}(D', D) \longrightarrow \widetilde{D},
 \qquad u \longmapsto u(D')
 \]
-est injective : si $u$ et $v$ définissent le même sous-objet, $v = u\theta$
-avec $\theta$ automorphisme de $D'$, et $\theta = \mathrm{id}$ par (ii). Son
-image est l'ensemble des sous-objets de $D$ isomorphes à $D'$.
+est injective : si $u$ et $v$ définissent le même sous-objet, $u = v\theta$
+avec $\theta$ endomorphisme de $D'$, et $\theta = \mathrm{id}$ par (ii). Son
+image est l'ensemble des sous-objets de $D$ isomorphes à $D'$.\footnote{La page
+dit $(*)$ injective « par (i)(ii) ». Vérifié en Lean
+(lean/Grothendieck/Folder104.lean, \texttt{etoile\_injective}) : (ii) seule
+porte l'argument, et (i) ne sert qu'à faire de $u$ et $v$ des monomorphismes,
+c'est-à-dire à donner un sens à $u(D')$.}
 
 \emph{Les classes.} L'ensemble $\mathbb{N}$ des classes d'isomorphisme
 d'objets de $M$, préordonné par l'existence d'une flèche, est ordonné : deux
 flèches $D' \to D \to D'$ composent en un endomorphisme, donc en
-l'identité, et $D \simeq D'$. Pour $n \in \mathbb{N}$, un objet $D_{n}$ de
+l'identité, et $D \simeq D'$.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder104.lean, \texttt{isIso\_of\_aller\_retour}), sous
+(ii) seule.} Pour $n \in \mathbb{N}$, un objet $D_{n}$ de
 classe $n$ est déterminé à isomorphisme unique près, et $I_{n} =
 \widetilde{D}_{n}$ est donc défini à isomorphisme unique près.
 
@@ -310,11 +343,14 @@ $\mathbb{N}_{\leq n}$, et
 \[
 \tau_{n}^{-1}(n) = \{d_{n}\}.
 \]
-En effet, si $x \subset y$ sont deux sous-objets de même type, la flèche
-$x \to y$ admet une rétraction et le composé dans l'autre sens est un
-endomorphisme de $y$, donc l'identité : $x = y$.\footnote{La page énonce la
-stricte croissance et $\tau_{n}^{-1}(n) = \{d_{n}\}$ « par (ii) » ; l'argument
-est le nôtre. « Rappelle » et « déjà » sont lus sur le sens.}
+En effet, si $x \subset y$ sont deux sous-objets de même type, notons
+$j : x \to y$ l'inclusion ; étant de même type, ils sont isomorphes, et il y a
+une flèche $g : y \to x$. Le composé $j g$ est un endomorphisme de $y$, donc
+l'identité par (ii) : $y$ se factorise par $x$, et $x = y$.\footnote{La page
+énonce la stricte croissance et $\tau_{n}^{-1}(n) = \{d_{n}\}$ « par (ii) » ;
+l'argument est le nôtre. Vérifié en Lean (lean/Grothendieck/Folder104.lean,
+\texttt{sousObjet\_eq\_of\_meme\_type}) : il suffit d'une flèche $y \to x$, et
+(ii) seule sert. « Rappelle » et « déjà » sont lus sur le sens.}
 
 \emph{Les applications admissibles.} Pour $n' \leq n$, $(*)$ donne une bijection
 $\mathrm{Hom}(D_{n'}, D_{n}) \simeq I_{n,n'} = \tau_{n}^{-1}(n')$, et un
@@ -378,7 +414,11 @@ injectives, d'où (i), et $\mathrm{End}(n)$ s'identifie à
 $\tau_{n}^{-1}(n) = \{d_{n}\}$, d'où (ii). Enfin $\xi \leq \eta$ dans $I_{n}$
 si et seulement si $u_{\xi}$ se factorise par $u_{\eta}$, parce que
 $(I_{n})_{\leq \eta}$ est l'image de $u_{\eta}$ : les sous-objets de $n$ dans
-$M_{0}$ forment bien $I_{n}$. Ces vérifications sont les nôtres.} « Dans les cas
+$M_{0}$ forment bien $I_{n}$. Ces vérifications sont les nôtres ; le pas
+$u_{d_{n}} = \mathrm{id}$ est vérifié en Lean
+(lean/Grothendieck/Folder104.lean, \texttt{id\_of\_idempotent\_bijective}). La
+réciproque elle-même, comme l'équivalence $M \to M_{0}$, n'est pas
+formalisée.} « Dans les cas
 que j'ai en tête, $\mathbb{N} = \mathbf{N}$. »
 
 \textbf{Exemple 1.} La catégorie des ensembles finis totalement ordonnés
@@ -388,6 +428,9 @@ Les sous-objets sont les parties non vides :
 I_{n} = \mathfrak{P}^{*}(\Delta_{n}), \qquad
 \mathrm{Card}\, I_{n} = 2^{n+1} - 1 .
 \]
+Cette catégorie vérifie (i) et (ii), et le dénombrement est
+exact.\footnote{Vérifié en Lean (lean/Grothendieck/Folder104.lean,
+\texttt{deltaInj\_mono}, \texttt{deltaInj\_end}, \texttt{card\_I\_simplexe}).}
 
 \textbf{Exemple 2.} La catégorie des cubes combinatoires épinglés --- par un
 ordre total sur l'ensemble des paires d'hyperfaces opposées et le choix d'une
@@ -405,7 +448,10 @@ marginale de l'Ex. 2 commence par « $I_{n}$ = ens.\ des sections », le mot
 « sections » lu avec doute, et porte $\Delta_{n-1} \times \{\pm 1\} \to
 \Delta_{n-1}$ ; le reste n'est lu que par fragments. Le mot « partielles » et
 l'ordre (une face est inférieure à une autre si sa section prolonge
-l'autre) sont les nôtres.}
+l'autre) sont les nôtres. Les deux dénombrements, $3^{n}$ et la somme de la
+page 5, sont vérifiés en Lean (lean/Grothendieck/Folder104.lean,
+\texttt{card\_I\_cube}, \texttt{somme\_faces\_cube}) ; le second est la formule
+du binôme, \texttt{add\_pow} dans mathlib.}
 
 \textbf{Exemple 3.} La catégorie des disques hémisphériques $D_{n}$, dont les
 cellules sont deux hémisphères en chaque dimension $k < n$ et la cellule
@@ -423,16 +469,30 @@ chacune des dimensions $0, \ldots, n-1$. On retient $\Delta_{n-1}$. La page
 munit $\{\pm 1\}$ de « l'ordre chaotique » ; le produit par un préordre
 chaotique serait un préordre et non un ordre, deux hémisphères de même
 dimension y étant chacun inférieur à l'autre. L'ordre voulu, celui des cellules
-du disque, est celui qu'on écrit.}
+du disque, est celui qu'on écrit. Vérifié en Lean
+(lean/Grothendieck/Folder104.lean) : la relation écrite est un ordre
+(\texttt{Hemi}), de cardinal $2n + 1$ (\texttt{card\_I\_hemi}), avec deux
+éléments de chaque type $k < n$ (\texttt{card\_type\_hemi}) ; avec le
+préordre chaotique, le produit n'est pas antisymétrique
+(\texttt{chaotique\_non\_antisymetrique}). Les deux corrections sont donc
+nécessaires.}
 
-\emph{Ce que sont ces trois catégories.} Les préfaisceaux sur la première sont
+\emph{Les trois catégories.} Les préfaisceaux sur la première sont
 les ensembles semi-simpliciaux au sens actuel du mot, c'est-à-dire sans
 dégénérescences, puisque toutes les flèches sont monomorphes ; sur la deuxième, des ensembles semi-cubiques ; sur
 la troisième, les ensembles globulaires. En effet $\mathrm{Hom}(D_{n'}, D_{n})
 = \tau_{n}^{-1}(n')$ a deux éléments pour $n' < n$, les deux hémisphères de
 dimension $n'$, et c'est la catégorie des globes, avec sa source et son
 but.\footnote{L'identification est la nôtre ; la page ne nomme aucune des
-trois. Le troisième exemple est la forme des cellules de \emph{Pursuing
+trois. Pour la première, elle repose sur deux faits, vérifiés en Lean
+(lean/Grothendieck/Folder104.lean) et absents de la page : les faces
+$\delta_{i}$ y satisfont la première identité simpliciale
+(\texttt{DeltaInj.}$\delta$\texttt{\_comp\_}$\delta$, la même que \texttt{SimplexCategory.}$\delta$\texttt{\_comp\_}$\delta$
+de mathlib), et toute flèche $\Delta_{m} \to \Delta_{n+1}$, $m \leq n$, se
+factorise par une face (\texttt{DeltaInj.factorise\_face}) ; seul ce pas est
+formalisé, non la décomposition complète en composé de faces. La même source
+vérifie que cette catégorie est squelettique et directe
+(\texttt{deltaInjReedy}). Le troisième exemple est la forme des cellules de \emph{Pursuing
 Stacks}. Le mot « hémisphères » est lu avec doute.}
 
 \emph{Sphéricité.} Dans les trois exemples, posant $I_{n}^{*} = I_{n} -
