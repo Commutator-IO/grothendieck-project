@@ -16,11 +16,9 @@
 % of this was written, and it is written as ONE file for the shelfmark.
 %
 % Coverage. Every page that carries his mathematics in the transcriptions is
-% read here, with one exception: page 72. Batch 4's header announces « p. 72 a
-% third recapitulation of sn, formulas (1)-(6) » and says no page was skipped,
-% but its body has no \page{72} (it goes from 71 to 73). The reading cannot
-% cover what the transcription does not give; this is flagged in the spine
-% section and at its place. Pages 1, 2, 17, 19, 25, 26, 28, 30, 32, 34, 36,
+% read here. (The first pass had to leave out page 72, absent from batch 4's
+% body at the time; it was transcribed on 2026-10-10 and is read since the
+% revision below.) Pages 1, 2, 17, 19, 25, 26, 28, 30, 32, 34, 36,
 % 38, 40, 44, 48, 50, 52, 54, 55, 58 are covers, blanks or unrelated typed
 % versos, as the transcriptions record.
 %
@@ -110,7 +108,23 @@
 % of p. 16; « Prouver : le normalisateur ... » (p. 29); the supplementary data
 % needed when j is not invertible (p. 45); the elimination « on peut aussi
 % éliminer ... » (p. 53); the quotients by κ « il serait facile de ... »
-% (p. 39); the value of sn ω_2 on p. 67 (denominator illegible); page 72.
+% (p. 39); the value of sn ω_2 on p. 67 (denominator illegible).
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder62.lean): fibre by fibre, over a field with
+% 6 invertible and for t off {0, 1, oo}, j(s) - j(t) is 4/27 times the
+% product of the six s - g(t) over (s(s-1)t(t-1))^2, so the fibres of (11)
+% are the S_3-orbits; j = 0 on {-1, 2, 1/2}, j = 1 at t^2 - t + 1 = 0; the
+% orbit is free iff j(j - 1) != 0; j = 1 - j_cl/1728; j(kappa t) j(t) = 1
+% (j_sub_j, j_eq_iff, stabilizer_trivial_iff, j_eq_one_sub_jcl,
+% j_kappa_mul). The descriptions over a base stay unchecked. No mathlib
+% theorem carries the statement. Literature of the finding: Phillips,
+% arXiv:2201.10624, Prop. 5.1.7 (mu_2-rigidification), read, without the
+% triple description. Transcription: pp. 71 (end) and 72, transcribed on
+% 2026-10-10, now read (pp. 70-73); the residues of cn_1, dn_1 on p. 71 are
+% written sqrt(e_3 - e_1), sqrt(e_2 - e_1) where 1/sqrt is right. Facsimile
+% (2026-10-17): the two margin notes of p. 49 confirmed, as the reading had
+% them.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -287,10 +301,9 @@ Proposition 3 (pages 6--7, bloc annulé) ; la forme explicite du discriminant
 calcul du normalisateur de $\mathfrak{S}_3$ (page 29, « Prouver ») ; les données
 supplémentaires qu'il faut quand $j$ n'est pas inversible (page 45) ; la fin de
 la page 53 ; les quotients par $\kappa$ (page 39). On les retrouve à leur place.
-\emph{Ce que la transcription ne donne pas} : la page 72, qu'annonce l'en-tête
-de sa transcription (une troisième récapitulation de $\mathrm{sn}$, formules (1)
-à (6)) mais que son texte ne contient pas ; la présente lecture ne la couvre
-donc pas.
+La page 72, troisième récapitulation de $\mathrm{sn}$, manquait à la
+transcription quand cette lecture a été écrite ; elle a été transcrite depuis,
+et elle est lue à sa place, avec la fin de la page 71 (pages 70 à 73).
 
 \pagerange{1}{16}
 \section*{I. Modules des courbes elliptiques (pages 1 à 16)}
@@ -961,13 +974,26 @@ $a$ est peu net. Le passage qui suit (11), « il doit définir \ldots\ sur $J$ !
 l'invariant usuel, $j_{\mathrm{cl}}(t) = 256\,(t^2 - t + 1)^3/t^2(t-1)^2$, et (11) dit
 exactement $j = 1 - j_{\mathrm{cl}}/1728$ : c'est l'identité classique
 $j_{\mathrm{cl}} - 1728 = 64\,(t+1)^2(2t-1)^2(t-2)^2/t^2(t-1)^2$.\footnote{Rapprochement
-et vérification sont les nôtres.}
+et vérification sont les nôtres. Vérifié en Lean
+(lean/Grothendieck/Folder62.lean, \texttt{j\_eq\_one\_sub\_jcl}), ainsi
+que le reste de ce qui précède, fibre à fibre sur un corps où $6$ est
+inversible et pour $s$, $t$ hors de $\{0, 1, \infty\}$ : $j(s) - j(t)$ vaut
+$\frac{4}{27}$ fois le produit des six facteurs $s - g(t)$, $g$ parcourant
+les substitutions anharmoniques, dénominateurs chassés, divisé par
+$(s(s-1)\,t(t-1))^2$ (\texttt{j\_sub\_j}) ; les fibres de (11) sont donc
+exactement les orbites de $\mathfrak{S}_3$ (\texttt{j\_eq\_iff}), $j$ ne
+s'annule que sur $\{-1, 2, \frac12\}$ et ne vaut $1$ qu'aux racines de
+$t^2 - t + 1$ (\texttt{j\_eq\_zero\_iff}, \texttt{j\_eq\_one\_iff}).}
 
 \emph{Les quotients de $\kappa$.} Comme $\kappa$ commute à $\mathfrak{S}_3$,
 elle passe aux quotients ; elle échange les orbites au-dessus de $\infty$ et
 de $0$, et fixe $x'$, d'où\footnote{La page écrit « $\sigma'(t) = \sigma''(t) = 1/t$ » ; l'identité
 $j(\kappa t)\, j(t) = 1$ est vérifiée. Elle conclut qu'« il serait facile de
-\ldots\ quotients \ldots », sans le faire.}
+\ldots\ quotients \ldots », sans le faire. Vérifié en Lean
+(lean/Grothendieck/Folder62.lean, \texttt{kappa\_kappa} et
+\texttt{j\_kappa\_mul}) pour $t \notin \{0, 1, -1, 2, \frac12\}$, là où
+les deux membres sont définis : $\kappa$ est une involution et
+$j(\kappa t)\,j(t) = 1$.}
 \[
 \kappa'(w) = \frac1w, \qquad \kappa''(r) = \frac1r, \qquad\text{c'est-à-dire}\qquad
 j(\kappa t) = 1/j(t). \tag{12}
@@ -1023,7 +1049,12 @@ et $j - 1$ sont inversibles, l'image réciproque par $q$ de la section $j\colon
 S \to \mathbf{P}^1_S$ est un revêtement étale galoisien de $S$ de groupe
 $\mathfrak{S}_3$ --- $q$ est étale galoisien au-dessus de $\mathbf{P}^1
 \smallsetminus \{0, 1, \infty\}$ --- et \emph{c'est celui qui définit $X$}.
-Dans ce cas l'invariant suffit à reconstituer $(X, X', s)$.
+Dans ce cas l'invariant suffit à reconstituer $(X, X', s)$.\footnote{Fibre à
+fibre, c'est exactement là que l'orbite de $t$ sous $\mathfrak{S}_3$ est
+libre : aucune substitution non triviale ne fixe $t$ si et seulement si
+$j(t)(j(t) - 1) \neq 0$, vérifié en Lean (lean/Grothendieck/Folder62.lean,
+\texttt{stabilizer\_trivial\_iff}) sur un corps où $6$ est inversible. La
+description sur une base quelconque n'est pas formalisée.}
 
 Le lien avec les courbes elliptiques est celui de la page 15 : pour $C$ sur $S$
 avec $6$ inversible, $X = C/\{\pm 1\}$, $X'$ l'image des points d'ordre $2$
@@ -1033,7 +1064,12 @@ Legendre (page 24). L'invariant $j$ du triple est alors $j(t)$, formule (11).
 Le triple ne détermine la courbe qu'à torsion quadratique près : le revêtement
 double ramifié le long de $s + X'$ demande le choix d'une racine carrée d'un
 faisceau inversible.\footnote{Ce paragraphe est le nôtre ; le dossier ne
-revient pas des triples aux courbes.}
+revient pas des triples aux courbes. On sait aujourd'hui que le champ
+$\mathcal{M}_{1,1}$ est une gerbe en $\mu_2$ au-dessus de sa rigidification ;
+T.~Phillips (arXiv:2201.10624, § 5.1, proposition~5.1.7) traite cette
+rigidification pour les courbes modulaires, mais n'y donne pas la description
+par triplets, torseurs ou barycentres de ce dossier, qui n'a pas été trouvée
+écrite dans ce qui a été lu.}
 
 \pagerange{45}{47}
 \subsection*{Quand $j$ vaut $0$ ou $1$ (pages 45 à 47)}
@@ -1512,13 +1548,66 @@ e_1)\,\mathrm{sn}_1\mathrm{cn}_1,
 e_1)\mathrm{sn}_1^2\bigr).
 \]
 Pour les racines $e_i$ de la page 66 on a $e_2 - e_1 = 1$ et $e_3 - e_1 = k^2$, et
-l'on retrouve $\mathrm{sn}$, $\mathrm{cn}$, $\mathrm{dn}$.\footnote{La page 71
-rappelle sous un trait les valeurs « $\mathrm{sn}\,\omega_2 = 1$,
-$\mathrm{sn}\,\omega_3 = -1/k$ », qui sont celles de la fonction normalisée.
-Les formules de la page 73 sont numérotées (8) et (9), sans (7) ; la page 72,
-qui portait selon l'en-tête de la transcription une récapitulation de
-$\mathrm{sn}$ numérotée (1) à (6), n'est pas transcrite, et n'est donc pas lue
-ici.}
+l'on retrouve $\mathrm{sn}$, $\mathrm{cn}$, $\mathrm{dn}$.
+
+La page 71 donne aussi les expressions par $\sigma$, numérotées (6) :
+\[
+\mathrm{cn}_1 z = \frac{\sigma\omega_1}{\sigma\omega_2}\,e^{(\eta_2-\eta_1)z}\,
+\frac{\sigma(z-\omega_2)}{\sigma(z-\omega_1)},
+\qquad
+\mathrm{dn}_1 z = \frac{\sigma\omega_1}{\sigma\omega_3}\,e^{(\eta_3-\eta_1)z}\,
+\frac{\sigma(z-\omega_3)}{\sigma(z-\omega_1)},
+\]
+puis, en (7), la table des périodes : $\mathrm{cn}_1$ et $\mathrm{dn}_1$ sont
+paires ; $\mathrm{cn}_1$ change de signe par $z \mapsto z + 2\omega_1$ et
+$z \mapsto z + 2\omega_2$ et a les périodes $2\omega_3$, $4\omega_1$,
+$4\omega_2$ ; $\mathrm{dn}_1$ change de signe par $z \mapsto z + 2\omega_1$ et
+$z \mapsto z + 2\omega_3$ et a les périodes $2\omega_2$, $4\omega_3$,
+$4\omega_1$ ; toutes deux sont d'ordre $2$.\footnote{Dans la phrase qui suit
+le tableau, la troisième période de $\mathrm{cn}_1$ est lue $4\omega_3$
+(douteux) et celle de $\mathrm{dn}_1$ a un indice taché ; on suit le tableau
+(7). La table est celle des fonctions de Jacobi, $\omega_1$, $\omega_2$,
+$\omega_3$ jouant les rôles de $iK'$, $K$ et $-(K + iK')$.} Les pôles de
+$\mathrm{cn}_1$ et de $\mathrm{dn}_1$ sont les homologues de $\omega_1$ et de
+$-\omega_1$ ; les zéros de $\mathrm{cn}_1$ ceux de $\pm\omega_2$, ceux de
+$\mathrm{dn}_1$ ceux de $\pm\omega_3$. Si $(\omega_1, \omega_2)$ est
+directe, les résidus en $\omega_1$ sont\footnote{La page écrit $\pm i\sqrt{e_3 - e_1}$ et $\pm i\sqrt{e_2 - e_1}$
+pour les derniers membres. Avec $\mathrm{sn}_1\omega_2 = \pm 1/\sqrt{e_2 -
+e_1}$ et $k_1^2 = (e_2 - e_1)(e_3 - e_1)$, le premier membre vaut $\pm
+i/\sqrt{e_3 - e_1}$, ce que confirme le développement $\wp - e_1 \sim
+k_1^2 (z - \omega_1)^2$ ; de même pour $\mathrm{dn}_1$. Pour les racines
+normalisées, $e_2 - e_1 = 1$ et la seconde leçon est juste ; la première
+donne $\pm ik$ au lieu de $\pm i/k$. La transcription de la fin de la page 71
+et de la page 72 date du 10 octobre 2026, après la première version de cette
+lecture.}
+\[
+\frac{i}{k_1\,\mathrm{sn}_1\omega_2} = \pm\frac{i}{\sqrt{e_3 - e_1}}
+\quad (\mathrm{cn}_1),
+\qquad
+\frac{-i}{k_1\,\mathrm{sn}_1\omega_3} = \pm\frac{i}{\sqrt{e_2 - e_1}}
+\quad (\mathrm{dn}_1).
+\]
+
+La page 72 récapitule une troisième fois la fonction normalisée, en six
+formules encadrées ou numérotées : (1) $\mathrm{sn}'^2 = (1 -
+\mathrm{sn}^2)(1 - k^2\mathrm{sn}^2)$, $\mathrm{sn}\,0 = 0$,
+$\mathrm{sn}'0 = 1$ ;\footnote{La page écrit $(1 - z^2)(1 - k^2z^2)$ au second
+membre.} (2) $\mathrm{sn}^2 z = 1/(\wp z - e_1) = k^{-2}\bigl(\wp(z - \omega_1)
+- e_1\bigr)$, avec $e_1 = -(1 + k^2)/3$, $e_2 = (2 - k^2)/3$, $e_3 = (2k^2 -
+1)/3$, donc $e_2 - e_1 = 1$ et $e_3 - e_1 = k^2$ ; (3) la formule par $\sigma$,
+$\mathrm{sn}\,z = \sigma\omega_1\,e^{\eta_1 z}\,\sigma z/\sigma(z + \omega_1)$ ;
+(4) $\mathrm{sn}\,z\;\mathrm{sn}(z + \omega_1) = 1/k$ pour la normalisation
+de $k$ déjà vue ; (5) $\mathrm{sn}$ est impaire, de périodes $2\omega_1$,
+$4\omega_2$, $4\omega_3$, et change de signe par $z \mapsto z + 2\omega_2$ ou
+$z + 2\omega_3$ ;\footnote{Le tableau (5) écrit
+$\mathrm{sn}(z + 2\omega_2) = \mathrm{sn}\,z$, sans le signe moins que la phrase
+qui le suit annonce et que la page 70 donne ; c'est la phrase qui est juste.}
+(6) les pôles sont les homologues de $\omega_1$ (résidu $1/k$) et de $\omega_1
++ 2\omega_2$ (résidu $-1/k$), les zéros ceux de $0$ (dérivée $1$) et de
+$2\omega_2$ (dérivée $-1$). Pour $\omega_2$ convenable, $\mathrm{sn}\,\omega_2
+= 1$, $\mathrm{sn}\,\omega_3 = -1/k$, et $\mathrm{sn}'$ s'annule en ces deux
+points. Les formules de la page 73, (8) et (9), sont celles qu'on a écrites
+plus haut pour $\mathrm{sn}_1$, $\mathrm{cn}_1$, $\mathrm{dn}_1$.
 
 \pagerange{74}{96}
 \section*{VIII. Seconde rédaction : « Fonctions elliptiques » (pages 74 à 96)}
