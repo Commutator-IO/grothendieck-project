@@ -93,9 +93,7 @@ theorem ker_phi (h2 : (2 : R) = 0) (x y z : R) :
 
 /-- The point `(s : t)`: `s²X̃ + t²Ỹ + stH̃` has square zero in characteristic 2. -/
 theorem vst_mul_self (h2 : (2 : R) = 0) (s t : R) : vst s t * vst s t = 0 := by
-  rw [vst, coord_mul_self]
-  have : s ^ 2 * t ^ 2 + (s * t) ^ 2 = 2 * (s * t) ^ 2 := by ring
-  rw [this, h2, zero_mul, zero_smul]
+  rw [vst, coord_mul_self, ← mul_pow, ← two_mul, h2, zero_mul, zero_smul]
 
 /-- `φ(u, s²X̃ + t²Ỹ + stH̃) = t²x + s²y` in characteristic 2. -/
 theorem trace_mul_vst (h2 : (2 : R) = 0) (x y z s t : R) :
@@ -112,9 +110,8 @@ theorem orth_iff (h2 : (2 : R) = 0) (x y z s t : R) :
 /-- It contains `1 = H̃`, so (59) factors through `P(g̃/𝒪_S)`. -/
 theorem one_mem_orth (h2 : (2 : R) = 0) (s t : R) : ((1 : Matrix (Fin 2) (Fin 2) R) *
     vst s t).trace = 0 := by
-  rw [← tH_eq_one h2, show (tH : Matrix (Fin 2) (Fin 2) R) = coord 0 0 1 by
-    simp [tH, coord], orth_iff h2]
-  ring
+  rw [← tH_eq_one h2]
+  exact (trace_mul_vst h2 0 0 1 s t).trans (by ring)
 
 /-- It depends only on `(s² : t²)`: (60) is `(s : t) ↦ (s² : t²)`. -/
 theorem orth_smul (h2 : (2 : R) = 0) {s t s' t' c : R} (hs : s' ^ 2 = c * s ^ 2)
@@ -131,8 +128,7 @@ theorem not_mono :
         (1 : DualNumber (ZMod 2)) = c * 1 ∧ DualNumber.eps = (c : DualNumber (ZMod 2)) * 0) ∧
       ∀ x y z : DualNumber (ZMod 2),
         (coord x y z * vst 1 DualNumber.eps).trace = (coord x y z * vst 1 0).trace := by
-  have h2 : (2 : DualNumber (ZMod 2)) = 0 := by
-    ext <;> simp <;> rfl
+  have h2 : (2 : DualNumber (ZMod 2)) = 0 := by ext <;> simp <;> rfl
   refine ⟨?_, fun x y z => ?_⟩
   · rintro ⟨c, -, h⟩
     simpa using congrArg TrivSqZeroExt.snd h
