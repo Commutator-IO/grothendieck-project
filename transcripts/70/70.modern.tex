@@ -204,6 +204,19 @@
 % Proposition « régulière => fidèle » (p. 109, proof breaks off); the
 % classification programme in the margin of p. 111; questions (25)-(29)
 % (pp. 117-118); conditions 1)-4) of p. 122 are a definition with no result.
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — refined with the Lean
+% check (lean/Grothendieck/Folder70.lean) and the literature of the findings
+% 70-icosahedron-integral-faithful and 70-icosahedron-char5-conic:
+% — page 91: the translation (alpha', alpha, alpha) in characteristic 2
+%   checked; pages 93-94: twelve distinct vertices, no three collinear, no
+%   vertex in a foreign face plane, checked over any nonzero ring with
+%   alpha^2 + alpha = 1 (so the margin « faux en car. 2 » does not bear on
+%   them); page 78: the mod-5 conic, the 31 points, the 24 isotropic vectors
+%   and the exterior/interior points checked.
+% — Ji 2023 (arXiv:2304.03345), read in full for the findings, cited with what
+%   it establishes, and the Esquisse § 4 as Ji quotes it. Monson-Schulte
+%   (abstracts only) not cited. No facsimile check since 2026-10-10.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -1506,7 +1519,19 @@ d'une conique sur $\mathbf{F}_q$, $q$ impair, qui a $q + 1$ points,
 $q(q+1)/2$ points extérieurs et $q(q-1)/2$ points intérieurs. La page écrit
 d'abord $1 + 12 + 60 + 40 = 113$, total surchargé. C'est l'isomorphisme
 exceptionnel $\mathfrak{A}_5 \simeq \mathrm{PSL}(2, \mathbf{F}_5)$, que les
-annonces de cours du dossier 75 mettent en tête du programme.}.
+annonces de cours du dossier 75 mettent en tête du programme. Vérifié en Lean
+(lean/Grothendieck/Folder70.lean, \texttt{vert\_isotropic},
+\texttt{isotropic\_card}, \texttt{conic\_iff}, \texttt{point\_bijective},
+\texttt{edge\_tangents}, \texttt{face\_tangents}, \texttt{card\_square} et
+\texttt{card\_nonsquare}) : sur $\mathbf{F}_5$, les vingt-quatre vecteurs
+isotropes non nuls sont les douze sommets centrés et leurs doubles, la conique
+$q_0 = 0$ est formée des six directions de sommets, les $6 + 15 + 10$
+directions sont les $31$ points de $\mathbf{P}^2(\mathbf{F}_5)$, un point
+d'arête est sur exactement deux tangentes et un point de face sur aucune. Ji
+(arXiv:2304.03345, § 3.3) cite le « paradigme combinatoire » que
+l'\emph{Esquisse} lit sur l'icosaèdre en caractéristiques $2$ et $5$ et dit
+que son interprétation n'en rend pas compte ; il ne donne pas cette géométrie
+de caractéristique $5$, et l'édition n'en a pas trouvé de source explicite.}.
 
 \pagerange{80}{80}
 \subsection*{Un départ par les cocycles (page 80)}
@@ -1610,7 +1635,9 @@ page n'identifie pas $\iota$ à un mot en les générateurs ; on a vérifié sur
 machine que $(\sigma_0\sigma_1\sigma_2)^5$ est $x \mapsto 2o - x$. Elle lit le
 vecteur de translation « $(\alpha', 1, 1)$ », les deux dernières composantes
 surchargées ; c'est $(\alpha', 1 - \alpha', 1 - \alpha') = (\alpha', \alpha,
-\alpha)$ en caractéristique $2$.} En caractéristique $2$, l'équation $\alpha^2 +
+\alpha)$ en caractéristique $2$. Vérifié en Lean
+(lean/Grothendieck/Folder70.lean, \texttt{iota\_char\_two}), sur tout anneau
+de caractéristique $2$ où $\alpha^2 + \alpha = 1$.} En caractéristique $2$, l'équation $\alpha^2 +
 \alpha - 1 = 0$ n'a de solutions que dans $\mathbf{F}_4 \smallsetminus
 \mathbf{F}_2$ : se donner $\alpha$ sur une base $Y$ au-dessus de $\mathbf{F}_2$,
 c'est se donner une structure de $\mathbf{F}_4$-schéma, $Y \to \operatorname{Spec}
@@ -1657,9 +1684,29 @@ $\mathbf{F}_{31}$ : $12$ points distincts, aucun triplet aligné, $75$
 quadruplets coplanaires, aucun contenant une face. Ce que vise la marge
 « faux en car.\ $2$ » n'est pas clair ; en caractéristique $2$, $\iota$ étant
 une translation, $s_0, s_1, \iota s_0, \iota s_1$ forment un parallélogramme,
-mais ces quatre points sont déjà coplanaires en caractéristique $0$.}. La
+mais ces quatre points sont déjà coplanaires en caractéristique $0$.
+Vérifié en Lean (lean/Grothendieck/Folder70.lean,
+\texttt{vert\_injective\_any}, \texttt{not\_collinear\_any} et
+\texttt{not\_in\_face\_plane\_any}), sur tout anneau commutatif non nul où
+$\alpha^2 + \alpha = 1$ : l'argument est celui de la page, « par
+homogénéité », rendu explicite par des tables de mots vérifiées par le noyau,
+qui ramènent chaque cas aux droites $s_0 s_1$, $s_0 s''_3$, $s_0\,\iota s_0$ et
+au plan $z = 0$, où un mineur d'ordre $2$ ou une coordonnée est une unité de
+$\mathbf{Z}[\alpha]$. La marge « faux en car.\ $2$ » ne porte donc pas sur ces
+incidences.}. La
 réalisation est donc \emph{fidèle} au sens de la page 110 en toute
-caractéristique : l'icosaèdre reste un icosaèdre.
+caractéristique : l'icosaèdre reste un icosaèdre.\footnote{L'\emph{Esquisse
+d'un Programme} (1984), § 4, affirme que l'icosaèdre spécialisé sur un corps
+fini reste un icosaèdre et désigne $\mathbf{F}_4$ et $\mathbf{F}_5$ comme les
+caractéristiques « les plus singulières » ; l'édition ne connaît ce passage
+que par la citation qu'en donne C.~Ji, « A note on regular polyhedra over
+finite fields » (arXiv:2304.03345, 2023), §§ 2--3. Avec des formules sur
+$\mathbf{Z}[\cos\theta, \cos\gamma]$, la réduction de Ji n'est pas définie en
+$p = 2$ et $p = 5$ ; sa proposition 3.1 montre seulement que le groupe
+d'automorphismes reste $\mathfrak{A}_5$ aux autres premiers, sans examiner
+d'incidence ni de quadrique, et sa remarque finale note que Grothendieck
+« semble l'affirmer dans tous les cas ». La réalisation de ces feuillets, sur
+$\mathbf{Z}[\alpha]$, comble cet écart ; le rapprochement est de l'édition.}
 
 \pagerange{95}{99}
 \subsection*{La quadrique circonscrite (pages 95 à 99)}
