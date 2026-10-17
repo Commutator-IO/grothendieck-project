@@ -19,6 +19,14 @@
 % p. 28 footnoted as checked. No mathlib result, no literature recorded by the
 % findings, no facsimile correction since the pass. Two « Ce que » headings
 % renamed.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — with the Lean check of
+% the ear-area multiplier space (Folder73.lean, commit c974233): the
+% Proposition of pp. 25-27 footnoted as checked (dim N <= 2, dim N = 2 iff
+% (d), non-collinearity needed, n = 0 mod 3 a consequence of the rest); the
+% Theorem of p. 28 now assumes card k > n instead of k infinite, the
+% dichotomy being mathlib's Submodule.iUnion_ssubset_of_forall_ne_top_of_
+% card_lt. The finding's literature is unread (status unsearched); no
+% facsimile correction since the pass.
 % The folder was read whole, both batches together; this is one document for
 % the shelfmark. It was made on Opus 5.5 and has not been measured against the
 % reference reading of folder 115 (made on Opus 5). The literature named in the
@@ -103,8 +111,8 @@
 %    The proof of d) => a), announced and not written, is supplied, and needs
 %    card k >= 3.
 %  - p. 28 (Theorem): the equivalence (b_2) <=> (d) needs the same
-%    non-collinearity; the exhaustiveness of the cases needs k infinite (the
-%    « Lemme » of the margin of p. 26). The half-illegible gloss of (a) is
+%    non-collinearity; the exhaustiveness of the cases needs card k > n, not
+%    k infinite as the page has (the « Lemme » of the margin of p. 26). The half-illegible gloss of (a) is
 %    reconstructed as « phi is a submersion at u_* »; the criterion for (c)
 %    (« il faut et il suffit », read with doubt) is proved here and holds.
 %
@@ -1033,7 +1041,20 @@ satisfait (a) et (b), mais ni (c) ni (d). (2) La condition $n \equiv 0$ (3) est
 mise dans (d) : la page l'y écrivait et l'a biffée, et sans elle la période 3 des
 $\lambda_i$ n'a pas de sens sur $\mathbf{Z}/n\mathbf{Z}$. (3) La page suppose
 $k$ infini pour la démonstration ; on dit ce qui sert, et où. Les lettres (a)
-à (d) sont cerclées.}.
+à (d) sont cerclées. Vérifié en Lean (lean/Grothendieck/Folder73.lean,
+\texttt{finrank\_multSpace\_le\_two}, \texttt{finrank\_multSpace\_eq\_two\_iff},
+\texttt{isMult\_periodic}, \texttt{exists\_mult\_ne\_zero},
+\texttt{triangle\_of\_collinear}), sur un corps quelconque : pour des $u_i$ non
+nuls, $\lambda \mapsto (\lambda_i, \lambda_{i+1})$ est injective sur $N(u_*)$,
+d'où $\dim N(u_*) \leqslant 2$ ; les $u_i$ non tous alignés, $\dim N(u_*) = 2$
+si et seulement si (d), et $N(u_*)$ est alors le plan des $(\lambda_i)$ de
+période 3 tels que $\lambda_0 + \lambda_1 + \lambda_2 = 0$, qui contient un
+élément sans composante nulle dès que $k$ a au moins trois éléments. L'énoncé
+tient tel que nous le donnons. L'hypothèse de non-alignement est nécessaire,
+et la condition $n \equiv 0$ (3) que la page biffe est conséquence des autres :
+si $3 \nmid n$, $u_{i+3} = u_i$ sur $\mathbf{Z}/n\mathbf{Z}$ rend la suite
+constante, donc alignée. On la garde dans (d) pour que la période 3 se lise
+d'emblée.}.
 
 \pagerange{26}{27}
 \section*{La démonstration (pages 26 et 27)}
@@ -1094,7 +1115,11 @@ page est blanc ; la démonstration est de l'édition.}.
 \pagerange{28}{28}
 \section*{Le Théorème (page 28)}
 
-\textbf{Théorème.} Soit $V$ un plan vectoriel sur un corps infini $k$,
+\textbf{Théorème.} Soit $V$ un plan vectoriel sur un corps $k$ ayant plus de
+$n$ éléments\footnote{La page suppose $k$ infini. Il suffit que $k$ ait plus de
+$n$ éléments, et l'hypothèse ne sert qu'à séparer (b) de (c) ; vérifié en Lean
+(lean/Grothendieck/Folder73.lean, \texttt{dichotomy},
+\texttt{finrank\_le\_one\_of\_le\_hyperplane}).},
 $n \geqslant 3$, et $u_* = (u_i) \in V^{\mathbf{Z}/n\mathbf{Z}}$ une suite de
 vecteurs non nuls. Soit
 \[
@@ -1125,10 +1150,15 @@ surchargée, et ses indices sont lus d'après la page 25.}.
 
 \emph{Démonstration.} Si $N(u_*) \neq 0$, ou bien $N(u_*)$ n'est pas contenu
 dans la réunion des $H_i$, ou bien il l'est, et alors il est contenu dans l'un
-d'eux : un espace vectoriel sur un corps infini n'est pas réunion finie de
-sous-espaces stricts. C'est le « Lemme ($N(u_*) \not\subset \bigcup H_i$) » de
-la marge de la page 26, et c'est là, et là seulement, que sert l'hypothèse
-$k$ infini. On a toujours $\dim N(u_*) \leqslant 2$ (page 23). Si
+d'eux : un espace vectoriel sur un corps de plus de $n$ éléments n'est pas
+réunion de $n$ sous-espaces stricts\footnote{C'est
+\texttt{Submodule.iUnion\_ssubset\_of\_forall\_ne\_top\_of\_card\_lt} dans
+mathlib, dont la source renvoie à une réponse de MathOverflow (n° 14241) ; la
+page l'invoque pour $k$ infini, cas de
+\texttt{Submodule.exists\_forall\_notMem\_of\_forall\_ne\_top}.}. C'est le
+« Lemme ($N(u_*) \not\subset \bigcup H_i$) » de la marge de la page 26, et
+c'est là, et là seulement, que sert l'hypothèse sur $k$ --- infini sur la
+page, plus de $n$ éléments ici. On a toujours $\dim N(u_*) \leqslant 2$ (page 23). Si
 $\dim N(u_*) = 2$, l'injection $N(u_*) \to k^2$,
 $\lambda \mapsto (\lambda_i, \lambda_{i+1})$, est bijective pour tout $i$, et
 $N(u_*)$ n'est contenu dans aucun $H_i$ : en (c), la dimension est 1. Enfin
