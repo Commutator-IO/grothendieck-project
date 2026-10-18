@@ -6,6 +6,12 @@
 % batch-01.fr.tex ... batch-04.fr.tex.
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — p. 14: footnote on the Lean
+%   check (lean/Grothendieck/Folder121.lean): existence and the coarsest
+%   decomposition hold as stated. pp. 10-13: the literature of the matched
+%   finding 121-cell-decomposition-open-quotient (Waas-Woolf-Yokura 2024,
+%   Prop. 4.1, Lemma 2.7, Cor. 4.3; Tamaki 2017 at second hand; Waas 2019).
+%   No mathlib result, no facsimile correction.
 % The folder was read whole: four batches, pages 1-72, all transcribed.
 % Pages with no \page in the transcription: 2, 24, 28, 37, 39, 52, 63, 68
 % (blank separators) and 47 (the pink cover « Équisingularité / Cellules »).
@@ -497,7 +503,15 @@ $I$, et l'ouverture de l'application est précisément la condition de
 frontière.\footnote{Ce langage est celui de Lurie (\emph{Higher Algebra},
 appendice A) et de la littérature récente sur les espaces stratifiés ; il est
 de trente ans postérieur et la page n'en a évidemment rien. Le dictionnaire
-entre espaces finis et ensembles préordonnés est d'Alexandrov (1937).}
+entre espaces finis et ensembles préordonnés est d'Alexandrov (1937).
+L'équivalence entre condition de frontière et ouverture de l'application vers
+l'espace d'Alexandrov des strates est la proposition 4.1 de Waas, Woolf et
+Yokura, « On stratifications and poset-stratified spaces » (arXiv:2407.17690,
+2024), qui la fait remonter à un lemme de Tamaki (2017), que l'édition n'a
+pas lu ; que les strates soient localement fermées exactement quand le
+préordre est un ordre est leur lemme 2.7 et leur corollaire 4.3, et se trouve
+aussi chez Waas, « Decomposition spaces and poset-stratified spaces »
+(arXiv:1912.00339).}
 
 \pagerange{13}{16}
 \section*{§ 3. Décompositions $\mathcal{F}$-admissibles : existence (pages 13 à 16)}
@@ -531,7 +545,16 @@ rencontre $\partial Y$ y est contenue : si elle est dans $Y$, elle est dans
 l'adhérence d'une cellule de $\complement Y$ par (1), donc disjointe de
 $\mathring{Y}$, et symétriquement. Donc $\mathcal{Q}$ se restreint à $U$, où
 elle raffine les atomes $U_i$, et à $X'$, où elle rend les $\overline{U_i} \cap
-X'$ réunions de cellules ; la récurrence conclut.
+X'$ réunions de cellules ; la récurrence conclut.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder121.lean, \texttt{page14},
+\texttt{exists\_coarsest}, \texttt{subset\_bd}, avec le lemme de la page 8,
+\texttt{Tame.rare\_bd}), d) étant lu, comme ici, avec l'intérieur relatif à
+l'adhérence. L'existence et la décomposition la plus grossière tiennent telles
+que la page les énonce. La récurrence porte sur un fermé $Z \in \mathcal{F}$
+quelconque à la place de $X$, la frontière étant prise relativement à $Z$, et
+s'arrête par e) ; « la plus grossière » suit de la remarque ci-dessus. La
+version à cellules connexes de la page 16, les corollaires de la page 15 et les
+décompositions régulières de la page 17 ne sont pas vérifiés.}
 
 \emph{Corollaire 1.} Sous a) à e), $\mathcal{F}$ est réunion filtrante des
 $\mathcal{F}_{\mathcal{P}}$, $\mathcal{P}$ parcourant les décompositions
