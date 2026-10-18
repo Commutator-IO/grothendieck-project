@@ -561,13 +561,10 @@ theorem triple_injective (hp : 0 < p) : Function.Injective (aeval (R := ZMod p) 
     ext i; fin_cases i <;> simp [θ, ε]
   have h3 : aeval (R := ZMod p) (triple p) = ε.comp ψ := by
     ext i; fin_cases i <;> simp [ψ, ε, triple]
-  have hψ : Function.Injective ψ := fun a b h => by
-    have := congrArg ψ' h
-    rwa [← AlgHom.comp_apply, ← AlgHom.comp_apply, h1, AlgHom.id_apply, AlgHom.id_apply] at this
-  have hε : Function.Injective ε := fun a b h => expand_injective hp (by
-    rw [← h2, AlgHom.comp_apply, AlgHom.comp_apply, h])
+  have hε : Function.Injective ε :=
+    Function.Injective.of_comp (f := θ) (by rw [← AlgHom.coe_comp, h2]; exact expand_injective hp)
   rw [h3, AlgHom.coe_comp]
-  exact hε.comp hψ
+  exact hε.comp (Function.LeftInverse.injective (g := ψ') (DFunLike.congr_fun h1))
 
 /-! #### The fields `k = 𝔽_p(x, y) ⊂ K = 𝔽_p(x, b₀, b₁)` and `k' = k ∩ Kᵖ` -/
 
