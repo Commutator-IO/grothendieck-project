@@ -28,6 +28,12 @@
 % declarations and open PRs involved, and the two sources read by the finding
 % 93-integral-schwarzian-level-p2 (Hoshi 2024, Wakabayashi 2021). No facsimile
 % revision of the transcription postdates the reading.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — pp. 234-235: footnote on the
+%   tier-2 Lean check of the derived morphism (Folder93.lean), for a torsor
+%   under an abelian group: G-bar built without a point, [G -> G-bar] ~ Z,
+%   (k, phi^0) a morphism of complexes, the class of u(p) independent of p;
+%   the sheaf case and de Rham not checked. No literature (the finding is
+%   unsearched). One « Ce que » turn removed.
 %
 % Reading is thin. The transcription carries about 12.6 \ill/\uncertain per
 % page; on pp. 97-99, 109-112, 127-139, 188-197, 202-203, 205-217 whole
@@ -425,8 +431,8 @@ Les conditions se poursuivent :
 Il ajoute, d'une autre encre, qu'il suffirait d'exiger 6°) pour les
 $\mathbb{R}^n$, et qu'« il sera vrai a posteriori » qu'une orientation de
 $\mathbb{R}^n$, ou de toute $X$ connexe, est connue quand on la connaît en un
-seul point. La page s'arrête là ; aucun théorème n'est énoncé. Ce que les
-axiomes visent est visible : 1°), 5°) et 6°) font de $\Omega_X$ un revêtement
+seul point. La page s'arrête là ; aucun théorème n'est énoncé. Le but des
+axiomes est visible : 1°), 5°) et 6°) font de $\Omega_X$ un revêtement
 de $X$, 2°) à 4°) forcent par récurrence sur la dimension ses fibres à avoir
 deux éléments, et l'on retrouve le revêtement d'orientation, torseur sous
 $\{\pm 1\}$.\footnote{Cette conclusion est la nôtre ; les feuillets ne la
@@ -2466,7 +2472,21 @@ sur $\mathcal{P}$ compatibles. D'où, dans la catégorie dérivée,
 \]
 puis $\mathbf{R}\Gamma_X(\mathcal{O}_X) \to \mathbf{R}\underline{\mathrm{Hom}}(K',K'')$, et
 en degré $0$ un élément de $\mathrm{Hom}_{D}(K', K'')$ : un morphisme canonique
-$K' \to K''$ dans la catégorie dérivée, sans choix de $p$.
+$K' \to K''$ dans la catégorie dérivée, sans choix de $p$.\footnote{Vérifié
+en Lean (lean/Grothendieck/Folder93.lean, \texttt{j\_eq\_zero\_iff},
+\texttt{j\_eq\_one\_iff}, \texttt{$\delta$\_$\varphi$0},
+\texttt{quotient\_map\_eq}, \texttt{derived\_map\_eq}) dans le cas d'un
+torseur sous un groupe abélien $G$, $K'$ et $K''$ étant des complexes d'une
+catégorie préadditive quelconque. L'extension $\overline{G}$ se construit sans
+choisir de point, comme quotient de $G \times \mathbb{Z}^{(\mathcal{P})}$ par les
+relations $[p + g] - [p] = g$ ; $[G \to \overline{G}]$ est quasi-isomorphe à
+$\mathbb{Z}$ ; $\varphi^0$, égal à $u$ sur $\mathcal{P}$ et à $dk + kd$ sur $G$,
+fait de $(k, \varphi^0)$ un morphisme de complexes ; et la classe de $u(p)$ dans
+la catégorie d'homotopie, et dans la catégorie dérivée, ne dépend pas de $p$,
+l'homotopie entre $u(p')$ et $u(p)$ étant $k(p' - p)$. Pour un groupe, le
+torseur a toujours un point et l'énoncé se réduit à cette indépendance ; le cas
+visé par la page, un torseur sous un faisceau sans section globale, n'est pas
+vérifié, ni l'application aux complexes de De~Rham.}
 
 Appliqué à $K' = \Omega^\bullet_{X'/T}$, $K'' = \Omega^\bullet_{X''/T}$, c'est
 l'isomorphisme canonique entre les cohomologies de De~Rham de deux
