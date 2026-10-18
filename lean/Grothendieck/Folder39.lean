@@ -458,11 +458,9 @@ theorem implicit_mem (hA : IsFormalClass A) {n : ℕ} {P : MvPowerSeries (Fin (n
   -- (H): `v = u⁻¹` is an `A`-morphism, so `φ ∈ A_{n+1}`
   have hφA : φ ∈ A (n + 1) := by
     have := hA.inv_mem (f := u) (g := v)
-      (fun i => by refine Fin.cases ?_ (fun i => ?_) i
-                   · exact hP
-                   · exact hA.X_mem _ _)
-      (fun i => by rw [hu0]; exact IsNilpotent.zero)
-      (fun i => by rw [hv0]; exact IsNilpotent.zero)
+      (Fin.cases hP fun _ => hA.X_mem _ _)
+      (fun i => (hu0 i).symm ▸ IsNilpotent.zero)
+      (fun i => (hv0 i).symm ▸ IsNilpotent.zero)
       (fun i => by refine Fin.cases ?_ (fun i => ?_) i
                    · exact hvP
                    · simp [u, subst_X hv, v])
@@ -475,11 +473,8 @@ theorem implicit_mem (hA : IsFormalClass A) {n : ℕ} {P : MvPowerSeries (Fin (n
   have hw0 : ∀ i, constantCoeff (w i) = 0 := fun i => by
     refine Fin.cases ?_ (fun i => ?_) i <;> simp [w]
   have hw := hasSubst_of_zero hw0
-  have hF'A : subst w φ ∈ A n := hA.subst_mem hφA
-    (fun i => by refine Fin.cases ?_ (fun i => ?_) i
-                 · exact zero_mem _
-                 · exact hA.X_mem _ _)
-    (fun i => by rw [hw0]; exact IsNilpotent.zero)
+  have hF'A : subst w φ ∈ A n := hA.subst_mem hφA (Fin.cases (zero_mem _) fun _ => hA.X_mem _ _)
+    (fun i => (hw0 i).symm ▸ IsNilpotent.zero)
   have hF'0 : constantCoeff (subst w φ) = 0 := constantCoeff_subst_eq_zero hw hw0 hφ0
   have hF'root : subst (Fin.cons (subst w φ) X : Fin (n + 1) → MvPowerSeries (Fin n) k) P = 0 := by
     have : (Fin.cons (subst w φ) X : Fin (n + 1) → MvPowerSeries (Fin n) k) =
