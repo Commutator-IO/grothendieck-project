@@ -815,12 +815,10 @@ theorem common_ancestor (H : HypH X) (F : Psh X) (hF : F.Connected) {a b : X}
         refine ⟨fun h => hT'.resolve_right fun h₂ => disj _ _ h ?_, fun h => ?_⟩
         · rw [F.map_comp]; exact T₂map k' _ h₂
         · rw [F.map_comp]; exact T₁map k' _ h
-      simp only [ind, e]
-      simp
+      simp [ind, e]
     · rw [Dneg k t bb hv hT']
       have h₁ : ¬ T₁ z' (F.map k t) := fun h => hT' (Or.inl h)
-      simp only [ind, F.map_comp, h₁]
-      simp
+      simp [ind, F.map_comp, h₁]
   let c : ∀ {z z' : X}, (z' ⟶ z) → D.obj z → Multiplicative (ULift.{v} ℤ) :=
     fun k q => Multiplicative.ofAdd (ULift.up (ind k q))
   obtain ⟨g, hg⟩ := H D hD _ c (fun z q => by simp only [c, ind_id]; rfl)
@@ -1032,13 +1030,12 @@ theorem isCofiltered_of_H (H : HypH X) (hX : (Psh.terminal X).Connected) : IsCof
     have h : (ψE z hz).symm s = Lmap k ((ψE z' hz').symm s) := by
       rw [Equiv.symm_apply_eq, ψinv k hz hz', Equiv.apply_symm_apply]
     rw [h, ← Category.assoc]
-  have hpL : p.asHom ≫ p.asHom = p.asHom := hpp
   have equal : ∀ {x y : X} (f g : x ⟶ y), ∃ (w : X) (h : w ⟶ x), h ≫ f = h ≫ g := by
     intro x y f g
     obtain ⟨c₀⟩ := he x
     obtain ⟨w, a, b, hab⟩ := square_of_H H (c₀ ≫ f) (c₀ ≫ g)
     obtain ⟨j⟩ := he w
-    let s := ψE e he₀ ⟨p.asHom, hpL⟩
+    let s := ψE e he₀ ⟨p.asHom, hpp⟩
     have key : ((ψE e he₀).symm s).1 ≫ c₀ ≫ f = ((ψE e he₀).symm s).1 ≫ c₀ ≫ g := by
       rw [← Φinv (j ≫ a) he₀ he₀ (c₀ ≫ f) s, ← Φinv (j ≫ b) he₀ he₀ (c₀ ≫ g) s]
       simp only [Category.assoc, hab]
