@@ -240,8 +240,7 @@ theorem toComp_carrier (ρ : Riv A) : (toComp ρ : Set (Spec A)) = toSpecSet ρ 
 closedness of `A` is used. -/
 theorem toComp_injective : Function.Injective (toComp (A := A)) := by
   intro ρ ρ' h
-  have hset : toSpecSet ρ = toSpecSet ρ' := by
-    rw [← toComp_carrier, ← toComp_carrier, h]
+  have hset : toSpecSet ρ = toSpecSet ρ' := congrArg SetLike.coe h
   obtain ⟨g, hg⟩ := ρ
   obtain ⟨V, hV, f, hf, rfl⟩ := (mem_locSec A).1 hg
   obtain ⟨g', hg'⟩ := ρ'
@@ -309,9 +308,7 @@ theorem riv_one_eq_zero_iff : (1 : Riv A) = 0 ↔ IsOpen A := by
     ext; simp only [Pi.one_apply, Pi.zero_apply, Set.mem_ofPred_eq, Set.mem_empty_iff_false,
       iff_false]; decide
   rw [h10, empty_mem_iff_bot, inf_principal_eq_bot, compl_compl]
-  constructor
-  · intro h
-    exact isOpen_iff_mem_nhds.2 fun x hx => mem_nhdsSet_iff_forall.1 h x hx
-  · exact IsOpen.mem_nhdsSet_self
+  exact ⟨fun h => isOpen_iff_mem_nhds.2 fun x hx => mem_nhdsSet_iff_forall.1 h x hx,
+    IsOpen.mem_nhdsSet_self⟩
 
 end Grothendieck.Folder156_2
