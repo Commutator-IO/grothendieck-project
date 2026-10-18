@@ -87,6 +87,14 @@
 % (without pseudo-cofilteringness, {1, a, b} with left zeros). The 2026-09-26
 % correction of the gloss was already in. The folder's findings are
 % unsearched (no literature cited). No facsimile check since 2026-09-26.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — after the Lean checks of
+%   §4.6 and §5.3 (lean/Grothendieck/Folder158.lean): the monoid corollary of
+%   p. 39 holds in the simply connected form, its converse for any monoid,
+%   with the two witnesses of pp. 39-41 and the stability of eM (p. 41's
+%   illegible step); p. 52's Corollaire is false for disconnected X (discrete
+%   category on two objects) and is now stated for X non-empty and connected;
+%   the unargued step to pseudo-cofilteringness on p. 53 holds for every small
+%   category (doubling lemma, ours). « Ce que » turns removed.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -314,7 +322,7 @@ les produits étant pris dans $\widehat{Z}$, ce qui exhibe le produit de
 $(b,E)$ et $(b',E')$ dans $\widetilde{\pi}\backslash B$ sous la forme
 $\bigl(b \times b',\, p_{1}^{*}(E) \cap p_{2}^{*}(E')\bigr)$.
 
-Ce que le feuillet 3 observe, et qui servira plus tard, est que
+Le feuillet 3 observe, et cela servira plus tard, que
 $\widetilde{\pi}\backslash B$ est \emph{cofibrée} sur $B$, de fibre en $b$
 l'ensemble ordonné $\mathfrak{P}^{*}(\pi(b))$.
 
@@ -723,7 +731,7 @@ $\varphi^{r}\psi = \varphi^{s}\psi$, l'énoncé s'interrompt ici.
 \end{quote}
 
 L'énoncé s'arrête là ; le bas du feuillet porte une grande boucle et la
-conclusion manque. Ce que le feuillet 37 en tire, en revanche, est complet :
+conclusion manque. La conséquence qu'en tire le feuillet 37, en revanche, est complète :
 dans le cas où $\overline{M}$ est un groupe, si $Y = B_{M}$ est $1$-connexe ce
 groupe est trivial, donc $u\lambda = \lambda$ pour tout $u$ et tout $\lambda$
 minimal, et $M$ est cofiltrant. Dans le cas contraire, $Y_{/F}$ est
@@ -741,6 +749,21 @@ tel $f$ vérifie $\delta(f) = 1$.}
 objets $0$-connexes de $\widehat{B_{M}}$ sont $1$-connexes — ou même seulement
 si leur $H^{1}(-,\mathbf{Q})$ est nul — alors $M$ est cofiltrant.
 \end{quote}
+
+Sous la forme $1$-connexe, l'énoncé est juste, et sa réciproque vaut pour tout
+monoïde\footnote{Vérifié en Lean (lean/Grothendieck/Folder158.lean), en lisant
+« $1$-connexe » comme « tout foncteur de la catégorie des éléments vers un
+groupe est trivial », c'est-à-dire en termes de cocycles : un monoïde ayant un
+élément minimal $\psi$ ($\psi \in uM$ pour tout $u$) est cofiltrant si et
+seulement si tout $M$-ensemble à droite connexe a une catégorie des éléments
+$1$-connexe. Les deux témoins sont ceux des feuillets 39 et 41 : si les
+puissances de $\psi$ sont distinctes, le quotient $M/R_{\psi}$ porte le degré
+relatif à valeurs dans $\mathbf{Z}$, égal à $1$ sur l'endomorphisme $\psi$ de
+la classe de $1$ — c'est la Proposition 2 avec $\varphi = \psi$, où les
+conditions (B) à (D) se réduisent à cela, sans présentation de $\pi_1$ ;
+sinon une puissance $e$ de $\psi$ est un idempotent minimal, et
+$M \to \mathrm{Perm}(eM)$ est trivial si et seulement si $M$ est cofiltrant.
+La variante par $H^{1}(-, \mathbf{Q})$ n'est pas formalisée.}.
 
 C'est enfin la thèse du dossier, obtenue cette fois sans lemme conjectural,
 mais seulement pour les monoïdes. Le feuillet 39 entreprend de la transporter
@@ -764,7 +787,12 @@ $\varphi^{p} = \varphi^{q}$ entraîne $p = q$, et l'objet quotient
 $F = e/\mathbf{N}$ est $0$-connexe de $\pi_{1}$ se surjectant sur $\mathbf{Z}$,
 donc non $1$-connexe. Dans le second, il existe $p \neq q$ avec
 $\varphi^{p} = \varphi^{q}$ ; l'image de $M$ dans $\mathrm{Ep}(E_{0})$, où
-$E_{0}$ est l'ensemble des éléments minimaux, est alors un groupe $\Gamma$, et
+$E_{0}$ est l'ensemble des éléments minimaux, est alors un groupe $\Gamma$\footnote{Cela
+demande que $E_0$ soit stable par la multiplication à gauche, ce qui est le
+pas caché sous les mots illisibles du feuillet 41 ; il est juste : si $e$ est
+un idempotent minimal, puissance de $\varphi$, les éléments minimaux forment
+$eM$, et $u\,eM \subset eM$ (vérifié en Lean,
+lean/Grothendieck/Folder158.lean).}, et
 \[
   \pi_{1}(X_{0}, e) \simeq \pi_{1}(M) \twoheadrightarrow \Gamma .
 \]
@@ -916,12 +944,32 @@ convenable.
 \end{quote}
 
 \begin{quote}
-\textbf{Corollaire.} Soit $X$ une catégorie finie telle que tout objet
+\textbf{Corollaire.} Soit $X$ une catégorie finie, non vide et connexe, telle que tout objet
 $0$-connexe de $\widehat{X}$ soit $1$-connexe — par exemple telle que $X_{0}$
 soit totalement $W$-asphérique pour un localisateur fondamental
 $W \subset W_{1}$. Alors $X$ est cofiltrante, $X^{\circ}$ est filtrante, et
 tout objet de $\widehat{X}$ est $\infty$-connexe.
 \end{quote}
+
+La connexité de $X$ manque sur le feuillet 52, et l'énoncé est faux sans
+elle : la catégorie discrète à deux objets satisfait l'hypothèse (tout cocycle
+y est trivial) et n'est pas cofiltrante\footnote{Contre-exemple de l'édition,
+vérifié en Lean (lean/Grothendieck/Folder158.lean). Le préfaisceau final de
+$\widehat{X}$ doit être $0$-connexe, ce qui est la connexité de $X$. Pour $X$
+finie, non vide et connexe, la conclusion « $X$ cofiltrante » est vérifiée, au
+sens de \texttt{IsCofiltered} dans mathlib, en lisant « $1$-connexe » comme
+« tout foncteur vers un groupe est trivial ».}. Le feuillet 53 passe sans
+argument de l'hypothèse à la pseudo-cofiltrance ; ce pas vaut pour toute
+petite catégorie, par un lemme de doublement que nous ajoutons : sous
+l'hypothèse, deux éléments d'un préfaisceau connexe ont un ancêtre commun,
+sinon le préfaisceau recollé à lui-même le long des deux sous-préfaisceaux
+disjoints qu'ils engendrent porterait un cocycle non trivial à valeurs dans
+$\mathbf{Z}$. L'égalisation suit ensuite les feuillets 50 à 52 : un objet $e$
+qui s'envoie partout, un idempotent minimal $p$ de $\mathrm{End}(e)$, le
+système local $\mathrm{Hom}(e, z)p$ sur les plus petits objets, bijectif par
+dénombrement et constant par l'hypothèse, d'où $fcp = gcp$\footnote{Vérifié en
+Lean (lean/Grothendieck/Folder158.lean). Le système local $\mathrm{Hom}(e,z)p$
+est la forme que prend $H_x$ quand on le décrit par un idempotent minimal.}.
 
 C'est le premier endroit du dossier où le vocabulaire des \emph{localisateurs
 fondamentaux} apparaît en toutes lettres, et il y arrive comme conséquence, non
@@ -1201,7 +1249,7 @@ dossier, s'arrête sur cette phrase ; les feuillets 84 et 85 sont les deux
 faces d'une enveloppe.}
 
 \pagerange{1}{85}
-\section*{Ce que le dossier établit, et ce qu'il laisse}
+\section*{Établi et laissé}
 
 Il vaut la peine de séparer les deux, parce qu'un dossier de travail ne
 distingue pas et qu'une lecture doit le faire.
@@ -1213,7 +1261,7 @@ Proposition 2 du feuillet 31 et son corollaire, qui fournissent le
 contre-exemple ; les six propriétés de $\mathrm{Ep}(E)$ du feuillet 55 ; le
 lemme de recouvrement du feuillet 76, démontré au feuillet 78 ; la proposition
 d'asphéricité totale du feuillet 70 ; la seconde mouture des feuillets 50
-à 53.
+à 53, avec la connexité de $X$ que le corollaire du feuillet 52 omet.
 
 \textbf{Conjectural ou interrompu :} le Lemme (?) du feuillet 10, dont
 dépendent ses deux corollaires ; la Proposition 2 (??) du feuillet 46,
@@ -1222,7 +1270,7 @@ conclusion ; le Théorème du feuillet 39, interrompu dans son premier cas ; le
 corollaire du feuillet 49, répudié par lui en marge ; et la question finale
 des feuillets 81 et 83, laissée ouverte.
 
-\textbf{Ce que le dossier ne fait pas :} il n'énonce nulle part les axiomes
+\textbf{Absent du dossier :} il n'énonce nulle part les axiomes
 $\mathrm{Loc}(6)$, $\mathrm{Loc}(6a)$, $\mathrm{Loc}(8)$ qu'il invoque, ni ne
 définit $W_{2}$ et $W_{\infty}$. Un lecteur qui voudrait vérifier les
 raisonnements de la section 7 devra les prendre ailleurs.
