@@ -245,19 +245,9 @@ theorem Tame.cell_mem (hF : Tame F) {Z X' : Set X} {L : Finset (Set X)} (S : Fin
   classical
   have : cell Z X' L S = (Z \ X') ∩ ⋂ Y ∈ L, (if Y ∈ S then Y else Yᶜ) := by
     ext y
-    simp only [cell, mem_ofPred_eq, mem_inter_iff, mem_sdiff, mem_iInter]
-    constructor
-    · rintro ⟨h1, h2, h3⟩
-      refine ⟨⟨h1, h2⟩, fun Y hY => ?_⟩
-      split_ifs with h
-      · exact (h3 Y hY).2 h
-      · exact fun hy => h ((h3 Y hY).1 hy)
-    · rintro ⟨⟨h1, h2⟩, h3⟩
-      refine ⟨h1, h2, fun Y hY => ?_⟩
-      have := h3 Y hY
-      split_ifs at this with h
-      · exact ⟨fun _ => h, fun _ => this⟩
-      · exact ⟨fun hy => absurd hy this, fun h' => absurd h' h⟩
+    simp only [cell, mem_ofPred_eq, mem_inter_iff, mem_sdiff, mem_iInter, and_assoc]
+    refine and_congr_right fun _ => and_congr_right fun _ => forall₂_congr fun Y _ => ?_
+    split_ifs with h <;> simp [h]
   rw [this]
   refine hF.inter_mem (hF.diff_mem hZ hX') (hF.biInter_mem L _ fun Y hY => ?_)
   split_ifs
