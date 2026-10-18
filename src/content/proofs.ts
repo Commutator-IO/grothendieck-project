@@ -169,15 +169,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '21',
     batch: 1,
-    page: '13',
-    name: 'Proposition 2.15; Corollaire 2.16',
+    page: '13, 21–26',
+    name: 'Proposition 2.15; Corollaire 2.16; the pointwise criterion (Proposition 7)',
     statement:
-      'Over a Noetherian ring, an I-torsion module H is injective iff Hom(−, H) is right exact on finitely generated modules killed by a power of I; Γ_I preserves injectives.',
+      'Over a Noetherian ring, an I-torsion module H is injective iff Hom(−, H) is right exact on finitely generated modules killed by a power of I; Γ_I preserves injectives. Pages 21–26: for a stack over the opens of a noetherian spectral space and Y closed, restriction to V − Y is faithful, fully faithful, an equivalence for every open V iff the functor on germs at each x ∈ Y, Pseudolim_W 𝓕(W) ⥤ Pseudolim_W 𝓕(W − cl{x}), is so.',
     found:
-      'Nothing false. Artin–Rees must be used with the ambient module in the intersection — the reading’s correction to the page’s N ∩ IᵐN. Not proved: 2.1–2.14, the sheaf and Hartogs half. Injectivity of the I-primary component of an injective module over a Noetherian ring is proposed to mathlib (#44724).',
+      'Nothing false. Artin–Rees must be used with the ambient module in the intersection — the reading’s correction to the page’s N ∩ IᵐN. Proposition 7 holds for split fibered categories that are stacks for covers by two opens (prestacks for (P₁), (P₂)), over any noetherian quasi-sober space, with the 2-colimits of Définition 6 unfolded as germs; (i) ⟹ (ii) is formal (Corollaire 8), and in (ii) ⟹ (i) pointwise essential surjectivity alone gives essential surjectivity, without the (P₁), (P₂) page 25 assumes. Not proved: 2.1–2.14, the sheaf and Hartogs half, the identification with 𝓕_(x) on X_(x) (p. 23), Corollaire 10. Injectivity of the I-primary component of an injective module over a Noetherian ring is proposed to mathlib (#44724).',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder21.lean',
-    theorems: ['proposition2_15', 'corollaire2_16'],
+    theorems: ['proposition2_15', 'corollaire2_16', 'proposition7_P1', 'proposition7_P2', 'proposition7_P3', 'corollaire8_P1', 'corollaire8_P2', 'corollaire8_P3', 'essSurj_of_essSurjAt', 'exists_maximal_point'],
   },
   {
     folder: '39',
