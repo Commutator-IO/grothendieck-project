@@ -8134,6 +8134,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Prove the page-17 equivalence (centraliser of φ(𝔻_∞) and transitivity on the data (a₀, a₁)), then search the literature on dihedral subgroups of PGL₂ over rings and on degenerations of a torus normaliser to a Borel for a classification of 𝔻_∞-representations by an invariant and a 𝒰_ρ-torsor; if found, mark matched. Settle it together with 72-automorphisms-deform-gm-to-ga.',
+    lean: { file: 'lean/Grothendieck/Folder85.lean', found: "False as read, in the split group over a field: two representations with u² ≠ 1 are conjugate in PGL₂(K) iff they have the same α and det t₀ in the same square class (Hilbert 90 for K[u], characteristic 2 included); (α, δ) occurs iff δ ≠ 0 is a value of p² + (α+2)pr + (α+2)r². Over ℚ, α = −6 (ρ = 8, 𝒰_ρ ≅ 𝔾_m, no non-trivial torsor) carries two non-conjugate representations, det t₀ = −1 and 1, so the classification by 𝒰_{2−α}-torsors fails; the centraliser is {1, [t₀, t₁]} (2 ≠ 0), det [t₀, t₁] = det u · (2 − α), i.e. ₂𝒰_ρ as page 19 says, and the classes match torsors under ₂𝒰_ρ. « u² ≠ 1, that is α + 2 invertible » fails for u = 1 (α = 2). Forms of PGL₂, local rings and torsors over S are not formalised." },
   },
   {
     id: '85-leaves-out-of-order',

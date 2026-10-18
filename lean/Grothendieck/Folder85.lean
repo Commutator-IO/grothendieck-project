@@ -7,6 +7,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Basic
 import Mathlib.RingTheory.AdjoinRoot
 import Mathlib.Tactic.LinearCombination
 import Mathlib.Tactic.FinCases
+import Mathlib.Tactic.Module
+import Mathlib.Tactic.Linarith
 
 /-!
 # Folder 85: the invariant of a rotation of order 5 (pages 10, 27, 30, 40)
@@ -93,6 +95,34 @@ Not formalised: forms of `PGL₂` and descent from `R[ℓ]` to `R` (the realisat
 over `R` itself lives in a form, not in the split group in general); conjugacy
 over a general base or over a field without `ℓ`; the identification of `Pₙ` with
 `Fₙ = ∏_{d ∣ n, d ≥ 3} Ψ_d` for general `n`.
+
+## Representations of `𝔻_∞` (pages 16 to 20), finding `85-dinfty-torsor-classification`
+
+**Partial: the split group over a field.** A homomorphism `𝔻_∞ → PGL₂(K)` with `u² ≠ 1`,
+`u = φ(τ₀τ₁)`, is given by `t₀, t₁ ∈ GL₂(K)` with `t₀²`, `t₁²` scalar and `(t₀t₁)²` not
+scalar (`DRep`); conjugacy in `PGL₂(K)` is `PConj`.
+
+* `exists_normal`: in a basis `(v, uv)`, `u` is the companion matrix of `T² − τT + d` and
+  `t₀ = invD τ d p r`, `−det t₀ = p² + τpr + dr²` (the norm form of `K[u]`).
+* `dinfty_conj_iff` (the classification): two representations are conjugate iff they have
+  the same `α = A(u)` and `det t₀` in the same class of `K^×/K^×²`. The step is Hilbert 90
+  for `K[u]`, split, non-split or non-reduced (`hilbert90`), with a case for characteristic 2.
+* `exists_dinfty_iff`: the pair `(α, δ)` occurs iff `α + 2 ≠ 0` and `δ ≠ 0` is a value of
+  `p² + (α+2)pr + (α+2)r²`.
+* `centralizer_iff`, `det_commD`, `commD_not_isScalar` (page 19, `2 ≠ 0`): the centraliser in
+  `PGL₂(K)` is `{1, [t₀, t₁]}`, `det [t₀, t₁] = det u · (2 − α)`: two elements if `ρ = 2 − α ≠ 0`,
+  one if `α = 2` — `₂𝒰_ρ(K)`, Corollaries 1 and 2.
+* `dinfty_not_conj_rat`: over `ℚ`, `α = −6` (`ρ = 8`, `𝒰_ρ ≅ 𝔾_m`) is carried by two
+  representations that are not conjugate, `det t₀ = −1` and `det s₀ = 1`.
+
+What the formalisation found: the equivalence of page 17 as read, with `R` a torsor under
+`𝒰_{2−α}`, is false. Over `ℚ`, `H¹(ℚ, 𝔾_m) = 0` would leave one class for `α = −6`, and
+automorphisms of `PGL₂` over a field are inner, so `dinfty_not_conj_rat` gives two; and the
+automorphism group of an object of `C′` is `𝒰_ρ(S)`, against `₂𝒰_ρ` of page 19, which
+`centralizer_iff` confirms. The classes match torsors under `₂𝒰_ρ` (`μ₂` for `ρ`
+invertible). Also, « `u_s² ≠ 1`, that is `α + 2` invertible » is not an equivalence:
+`t₁ = t₀` gives `u = 1`, `α = 2` (`dinfty_add_two_not_iff`). Forms of `PGL₂`, local rings
+and torsors over `S` are not formalised.
 -/
 
 namespace Grothendieck.Folder85
@@ -1255,5 +1285,523 @@ theorem discr_icosa {a : R} (h : a ^ 2 + a - 1 = 0) : discr (-1 : R) a = -1 := b
   unfold discr; linear_combination h
 
 end Conjugacy
+
+/-! ## Representations of `𝔻_∞` (pages 16 to 20), finding `85-dinfty-torsor-classification` -/
+
+section Dinfty
+
+variable {K : Type*} [Field K]
+
+/-- A homomorphism `𝔻_∞ = ⟨τ₀, τ₁ | τ₀², τ₁²⟩ → PGL₂(K)` with `u² ≠ 1`, `u = φ(τ₀τ₁)`,
+given by lifts `t₀, t₁ ∈ GL₂(K)`. -/
+def DRep (t₀ t₁ : Matrix (Fin 2) (Fin 2) K) : Prop :=
+  t₀.det ≠ 0 ∧ t₁.det ≠ 0 ∧ IsScalar (t₀ * t₀) ∧ IsScalar (t₁ * t₁) ∧
+    ¬ IsScalar (t₀ * t₁ * (t₀ * t₁))
+
+/-- Conjugacy in `PGL₂(K)` of two pairs. -/
+def PConj (t₀ t₁ s₀ s₁ : Matrix (Fin 2) (Fin 2) K) : Prop :=
+  ∃ g : Matrix (Fin 2) (Fin 2) K, g.det ≠ 0 ∧ ∃ c₀ c₁ : K,
+    t₀ * g = c₀ • (g * s₀) ∧ t₁ * g = c₁ • (g * s₁)
+
+/-- The companion matrix of `T² − τT + d`. -/
+def compD (τ d : K) : Matrix (Fin 2) (Fin 2) K := !![0, -d; 1, τ]
+
+/-- The normal form of `t₀` in the basis `(v, uv)`. -/
+def invD (τ d p r : K) : Matrix (Fin 2) (Fin 2) K := !![p, τ * p + d * r; r, -p]
+
+/-- The binary form `p² + τpr + dr²`, the norm of `ℤ[u]`. -/
+def normD (τ d p r : K) : K := p ^ 2 + τ * p * r + d * r ^ 2
+
+theorem det_invD (τ d p r : K) : (invD τ d p r).det = -normD τ d p r := by
+  simp [invD, normD, det_fin_two]; ring
+
+theorem isScalar_smul_mul {c : K} {M : Matrix (Fin 2) (Fin 2) K} (h : IsScalar M) :
+    IsScalar (c • M) := by
+  obtain ⟨a, rfl⟩ := h; exact ⟨c * a, by rw [smul_smul]⟩
+
+theorem DRep.facts {t₀ t₁ : Matrix (Fin 2) (Fin 2) K} (h : DRep t₀ t₁) :
+    t₀.trace = 0 ∧ t₁.trace = 0 ∧ (t₀ * t₁).trace ≠ 0 ∧ ¬ IsScalar (t₀ * t₁) := by
+  obtain ⟨-, -, s0, s1, hu⟩ := h
+  have n0 : ¬ IsScalar t₀ := by
+    rintro ⟨c, rfl⟩
+    apply hu
+    obtain ⟨a, ha⟩ := s1
+    refine ⟨c ^ 2 * a, ?_⟩
+    simp only [Matrix.mul_smul, Matrix.smul_mul, Matrix.one_mul, ha, smul_smul]
+    ring_nf
+  have n1 : ¬ IsScalar t₁ := by
+    rintro ⟨c, rfl⟩
+    apply hu
+    obtain ⟨a, ha⟩ := s0
+    refine ⟨c ^ 2 * a, ?_⟩
+    simp only [Matrix.mul_smul, Matrix.mul_one, Matrix.smul_mul, ha, smul_smul]
+    ring_nf
+  have h0 := trace_eq_zero_of_isScalar_mul ((nps_iff_not_isScalar _).2 n0) s0
+  have h1 := trace_eq_zero_of_isScalar_mul ((nps_iff_not_isScalar _).2 n1) s1
+  refine ⟨h0, h1, ?_, ?_⟩
+  · intro ht
+    apply hu
+    rw [sq_eq_trace, ht, zero_smul, zero_sub]
+    exact ⟨-(t₀ * t₁).det, by rw [neg_smul]⟩
+  · rintro ⟨c, hc⟩
+    exact hu ⟨c ^ 2, by
+      rw [hc, Matrix.smul_mul, Matrix.mul_smul, Matrix.one_mul, smul_smul]; ring_nf⟩
+
+
+/-- `t₀ u t₀⁻¹ = Tr u − u`: `t₀` inverts `u` in `PGL₂`. -/
+theorem t0_mul_u {t₀ t₁ : Matrix (Fin 2) (Fin 2) K} (h0 : t₀.trace = 0) (h1 : t₁.trace = 0) :
+    t₀ * (t₀ * t₁) = ((t₀ * t₁).trace • (1 : Matrix (Fin 2) (Fin 2) K) - t₀ * t₁) * t₀ := by
+  have e := mul_add_mul t₀ t₁
+  rw [h0, h1, zero_smul, zero_smul, add_zero, mul_zero, sub_zero, zero_add] at e
+  rw [← e, add_sub_cancel_left, ← Matrix.mul_assoc, Matrix.mul_assoc t₁,
+    mul_self_of_trace_zero h0, Matrix.mul_smul, Matrix.smul_mul, Matrix.mul_one, Matrix.one_mul]
+
+/-- A cyclic vector: a non-scalar `u` has `v` with `(v, uv)` a basis. -/
+theorem exists_cyclic {u : Matrix (Fin 2) (Fin 2) K} (hu : ¬ IsScalar u) :
+    ∃ v₀ v₁ : K, v₀ * (u 1 0 * v₀ + u 1 1 * v₁) - v₁ * (u 0 0 * v₀ + u 0 1 * v₁) ≠ 0 := by
+  rw [isScalar_iff] at hu
+  by_cases h10 : u 1 0 = 0
+  · by_cases h01 : u 0 1 = 0
+    · refine ⟨1, 1, ?_⟩
+      have : u 0 0 ≠ u 1 1 := fun h => hu ⟨h01, h10, h⟩
+      rw [h10, h01]
+      intro h; exact this (by linear_combination -h)
+    · exact ⟨0, 1, by simpa using h01⟩
+  · exact ⟨1, 0, by simpa using h10⟩
+
+/-- **Normal form of a representation of `𝔻_∞`.** In the basis `(v, uv)`, `u = t₀t₁` is the
+companion matrix of `T² − τT + d` and `t₀` is `invD τ d p r`. -/
+theorem exists_normal {t₀ t₁ : Matrix (Fin 2) (Fin 2) K} (h : DRep t₀ t₁) :
+    ∃ g : Matrix (Fin 2) (Fin 2) K, g.det ≠ 0 ∧ ∃ p r : K,
+      t₀ * g = g * invD (t₀ * t₁).trace (t₀ * t₁).det p r ∧
+      t₀ * t₁ * g = g * compD (t₀ * t₁).trace (t₀ * t₁).det := by
+  obtain ⟨h0, h1, -, hu⟩ := h.facts
+  obtain ⟨v₀, v₁, hv⟩ := exists_cyclic hu
+  set u := t₀ * t₁ with hudef
+  set g : Matrix (Fin 2) (Fin 2) K :=
+    !![v₀, u 0 0 * v₀ + u 0 1 * v₁; v₁, u 1 0 * v₀ + u 1 1 * v₁] with hgdef
+  have hg : g.det ≠ 0 := by rw [hgdef, det_fin_two_of]; convert hv using 1; ring
+  have hgu : IsUnit g.det := isUnit_iff_ne_zero.2 hg
+  have hC : u * g = g * compD u.trace u.det := by
+    ext i j
+    fin_cases i <;> fin_cases j <;>
+      simp [hgdef, compD, Matrix.mul_apply, Fin.sum_univ_two, trace_fin_two, det_fin_two] <;> ring
+  set X := g⁻¹ * t₀ * g with hXdef
+  have hX : t₀ * g = g * X := by
+    rw [hXdef, ← Matrix.mul_assoc, ← Matrix.mul_assoc, Matrix.mul_nonsing_inv g hgu,
+      Matrix.one_mul]
+  have hXt : X.trace = 0 := by rw [hXdef, trace_conj hgu, h0]
+  have hXC : X * compD u.trace u.det = (u.trace • 1 - compD u.trace u.det) * X := by
+    have k : g * (compD u.trace u.det * X) = u * (t₀ * g) := by
+      rw [← Matrix.mul_assoc, ← hC, Matrix.mul_assoc, ← hX]
+    have e : g * (X * compD u.trace u.det) = g * ((u.trace • 1 - compD u.trace u.det) * X) := by
+      calc g * (X * compD u.trace u.det) = t₀ * (t₀ * t₁) * g := by
+            rw [← Matrix.mul_assoc, ← hX, Matrix.mul_assoc, ← hC]
+            simp only [hudef, Matrix.mul_assoc]
+        _ = (u.trace • 1 - u) * (t₀ * g) := by rw [t0_mul_u h0 h1, Matrix.mul_assoc]
+        _ = _ := by
+            rw [Matrix.sub_mul, Matrix.sub_mul, Matrix.mul_sub, k, Matrix.smul_mul, Matrix.smul_mul,
+              Matrix.one_mul, Matrix.one_mul, Matrix.mul_smul, hX]
+    have := congrArg (g⁻¹ * ·) e
+    simpa only [Matrix.nonsing_inv_mul_cancel_left g _ hgu] using this
+  refine ⟨g, hg, X 0 0, X 1 0, ?_, hC⟩
+  rw [hX]
+  congr 1
+  have e00 := congrFun (congrFun hXC 0) 0
+  simp [compD, Matrix.mul_apply, Fin.sum_univ_two] at e00
+  rw [trace_fin_two] at hXt
+  ext i j
+  fin_cases i <;> fin_cases j <;> simp [invD]
+  · linear_combination e00
+  · linear_combination hXt
+
+/-- Scaling: `(τ, d)` and `(cτ, c²d)` give conjugate normal forms. -/
+theorem scale_normal {τ d p r c : K} (hc : c ≠ 0) :
+    invD (c * τ) (c ^ 2 * d) p r * !![1, 0; 0, c⁻¹] = !![1, 0; 0, c⁻¹] * invD τ d p (c * r) ∧
+    compD (c * τ) (c ^ 2 * d) * !![1, 0; 0, c⁻¹] = c • (!![1, 0; 0, c⁻¹] * compD τ d) := by
+  constructor <;> ext i j <;> fin_cases i <;> fin_cases j <;>
+    simp [invD, compD, Matrix.mul_apply, Fin.sum_univ_two] <;> field_simp
+
+/-- An element `a + bC` of `K[C]`, `C = compD τ d`. -/
+def zD (τ d a b : K) : Matrix (Fin 2) (Fin 2) K := !![a, -d * b; b, a + τ * b]
+
+theorem comm_zD (τ d a b : K) : compD τ d * zD τ d a b = zD τ d a b * compD τ d := by
+  ext i j; fin_cases i <;> fin_cases j <;> simp [zD, compD, Matrix.mul_apply, Fin.sum_univ_two]
+    <;> ring
+
+/-- **Hilbert 90 for `K[C]`.** If `N(p, r) = e² N(p', r')`, the two normal forms of `t₀` are
+conjugate by an element of `K[C]^×`, the torus of `u`. -/
+theorem hilbert90 {τ d p r p' r' e : K} (hτ : τ ≠ 0) (hB : normD τ d p' r' ≠ 0)
+    (hrel : normD τ d p r = e ^ 2 * normD τ d p' r') (he : e ≠ 0) :
+    ∃ z : Matrix (Fin 2) (Fin 2) K, z.det ≠ 0 ∧ ∃ c : K,
+      invD τ d p r * z = c • (z * invD τ d p' r') ∧ compD τ d * z = z * compD τ d := by
+  -- the candidates `f + ȳ` (for `±e`) and `f C + ȳ C̄`, `y = w w̄'`, `f = e N(w')`
+  set N := normD τ d p' r' with hN
+  set Q := p * p' + τ * p * r' + d * r * r' with hQd
+  set a₃ := -d * p * r' + d * p' * r + d * r * r' * τ + p * p' * τ + p * r' * τ ^ 2 with ha₃
+  have z1 : ∀ e' : K, normD τ d p r = e' ^ 2 * N →
+      invD τ d p r * zD τ d (Q + e' * N) (p' * r - p * r') =
+        e' • (zD τ d (Q + e' * N) (p' * r - p * r') * invD τ d p' r') := by
+    intro e' h
+    unfold normD at h hN
+    rw [hN] at h
+    ext i j
+    fin_cases i <;> fin_cases j <;> simp [invD, zD, Matrix.mul_apply, Fin.sum_univ_two, hN, hQd]
+    · linear_combination p' * h
+    · linear_combination (d * r' + p' * τ) * h
+    · linear_combination r' * h
+    · linear_combination (-p') * h
+  have z3 : invD τ d p r * zD τ d a₃ (e * N - Q) =
+      e • (zD τ d a₃ (e * N - Q) * invD τ d p' r') := by
+    unfold normD at hrel hN
+    rw [hN] at hrel
+    ext i j
+    fin_cases i <;> fin_cases j <;>
+      simp [invD, zD, Matrix.mul_apply, Fin.sum_univ_two, hN, hQd, ha₃]
+    · linear_combination (-d * r') * hrel
+    · linear_combination (d * p') * hrel
+    · linear_combination (p' + r' * τ) * hrel
+    · linear_combination (d * r') * hrel
+  have hrel' : normD τ d p r = (-e) ^ 2 * N := by rw [hrel]; ring
+  have d1 : ∀ e' : K, (zD τ d (Q + e' * N) (p' * r - p * r')).det
+      = N * normD τ d (p + e' * p') (r + e' * r') := by
+    intro e'; simp [zD, normD, det_fin_two, hN, hQd]; ring
+  have d3 : (zD τ d a₃ (e * N - Q)).det = N * (e * τ ^ 2 * Q + d * (normD τ d p r + e ^ 2 * N)
+      + e * τ * d * (p * r' + p' * r) - 2 * d * e * (d * r * r' + p * p' + 2 * p * r' * τ)) := by
+    simp [zD, normD, det_fin_two, hN, hQd, ha₃]; ring
+  by_cases k1 : normD τ d (p + e * p') (r + e * r') ≠ 0
+  · exact ⟨_, by rw [d1]; exact mul_ne_zero hB k1, e, z1 e hrel, comm_zD _ _ _ _⟩
+  by_cases k2 : normD τ d (p + -e * p') (r + -e * r') ≠ 0
+  · exact ⟨_, by rw [d1]; exact mul_ne_zero hB k2, -e, z1 (-e) hrel', comm_zD _ _ _ _⟩
+  push Not at k1 k2
+  refine ⟨_, ?_, e, z3, comm_zD _ _ _ _⟩
+  rw [d3]
+  refine mul_ne_zero hB fun k3 => ?_
+  unfold normD at k1 k2 k3 hrel hN
+  have hBe : e ^ 2 * N ≠ 0 := mul_ne_zero (pow_ne_zero 2 he) hB
+  have h4 : 4 * (e ^ 2 * N) = 0 := by linear_combination k1 + k2 - 2 * hrel + 2 * e ^ 2 * hN
+  have h2 : (2 : K) = 0 := by
+    have : (2 : K) * 2 = 0 := by
+      linear_combination (mul_eq_zero.1 h4).resolve_right hBe
+    exact mul_self_eq_zero.1 this
+  have hpr : e * τ * (p * r' + p' * r) = 0 := by
+    linear_combination k1 - hrel - (e * (p * p' + d * r * r') + e ^ 2 * N) * h2 + e ^ 2 * hN
+  have hpr' : p * r' + p' * r = 0 :=
+    (mul_eq_zero.1 hpr).resolve_left (mul_ne_zero he hτ)
+  have hQ : e * τ ^ 2 * Q = 0 := by
+    linear_combination k3 - d * hrel - (d * e ^ 2 * N
+      - d * e * (d * r * r' + p * p' + 2 * p * r' * τ)) * h2 - e * τ * d * hpr'
+  have hQ' : Q = 0 := (mul_eq_zero.1 hQ).resolve_left (mul_ne_zero he (pow_ne_zero 2 hτ))
+  have hsq : e ^ 2 * N * N = 0 := by
+    linear_combination -hrel * N + Q * hQ' - a₃ * hpr' + (p' * r) * a₃ * h2
+      + (p ^ 2 + τ * p * r + d * r ^ 2) * hN
+  exact mul_ne_zero hBe hB hsq
+
+theorem ne_zero_of_conj {A B g : Matrix (Fin 2) (Fin 2) K} (hA : A.det ≠ 0) (hg : g.det ≠ 0)
+    {c : K} (h : A * g = c • (g * B)) : c ≠ 0 := by
+  rintro rfl
+  simpa [hA, hg] using congrArg Matrix.det h
+
+/-- `A` is invariant under conjugacy in `PGL₂(K)`. -/
+theorem invA_conj {A B g : Matrix (Fin 2) (Fin 2) K} (hA : A.det ≠ 0) (hg : g.det ≠ 0) {c : K}
+    (h : A * g = c • (g * B)) : invA A = invA B := by
+  have hc := ne_zero_of_conj hA hg h
+  have hgu := isUnit_iff_ne_zero.2 hg
+  have e : A = c • (g * B * g⁻¹) := by
+    rw [← Matrix.smul_mul, ← h, Matrix.mul_nonsing_inv_cancel_right _ _ hgu]
+  have ht : A.trace = c * B.trace := by
+    rw [e, Matrix.trace_smul, smul_eq_mul, Matrix.trace_mul_comm,
+      Matrix.nonsing_inv_mul_cancel_left _ _ hgu]
+  have hd : A.det = c ^ 2 * B.det := by
+    rw [e, det_smul, Fintype.card_fin, Matrix.det_conj ((Matrix.isUnit_iff_isUnit_det g).2 hgu)]
+  have hB : B.det ≠ 0 := by
+    rintro hB; rw [hd, hB, mul_zero] at hA; exact hA rfl
+  unfold invA
+  simp only [ht, hd, Ring.inverse_eq_inv']
+  field_simp
+
+/-- From the conjugacy of `t₀` and of `u = t₀t₁`, that of `t₁`. -/
+theorem conj_t1 {t₀ t₁ s₀ s₁ Γ : Matrix (Fin 2) (Fin 2) K} (h0 : t₀.det ≠ 0) {a b : K}
+    (ha : a ≠ 0) (H0 : t₀ * Γ = a • (Γ * s₀)) (Hu : t₀ * t₁ * Γ = b • (Γ * (s₀ * s₁))) :
+    t₁ * Γ = (b * a⁻¹) • (Γ * s₁) := by
+  have hu := isUnit_iff_ne_zero.2 h0
+  have e : Γ * s₀ = a⁻¹ • (t₀ * Γ) := by rw [H0, smul_smul, inv_mul_cancel₀ ha, one_smul]
+  have k : t₀ * (t₁ * Γ) = t₀ * ((b * a⁻¹) • (Γ * s₁)) := by
+    rw [← Matrix.mul_assoc, Hu, ← Matrix.mul_assoc, e, Matrix.smul_mul, smul_smul,
+      Matrix.mul_smul, Matrix.mul_assoc, mul_comm]
+  have := congrArg (t₀⁻¹ * ·) k
+  simpa only [Matrix.nonsing_inv_mul_cancel_left _ _ hu] using this
+
+/-- **Classification of the representations of `𝔻_∞` in `PGL₂(K)` with `u² ≠ 1`, over a
+field.** Two of them are conjugate if and only if they have the same invariant `α = A(u)` and
+`det t₀` in the same square class. -/
+theorem dinfty_conj_iff {t₀ t₁ s₀ s₁ : Matrix (Fin 2) (Fin 2) K} (ht : DRep t₀ t₁)
+    (hs : DRep s₀ s₁) :
+    PConj t₀ t₁ s₀ s₁ ↔ invA (t₀ * t₁) = invA (s₀ * s₁) ∧ ∃ e : K, t₀.det = e ^ 2 * s₀.det := by
+  have dt0 := ht.1
+  have dt1 := ht.2.1
+  have ds0 := hs.1
+  have ds1 := hs.2.1
+  constructor
+  · rintro ⟨g, hg, c₀, c₁, H0, H1⟩
+    have hc₀ := ne_zero_of_conj dt0 hg H0
+    have Hu : t₀ * t₁ * g = (c₀ * c₁) • (g * (s₀ * s₁)) := by
+      rw [Matrix.mul_assoc, H1, Matrix.mul_smul, ← Matrix.mul_assoc, H0, Matrix.smul_mul,
+        smul_smul, Matrix.mul_assoc, mul_comm]
+    refine ⟨invA_conj (by rw [det_mul]; exact mul_ne_zero dt0 dt1) hg Hu, c₀, ?_⟩
+    have := congrArg Matrix.det H0
+    rw [det_mul, det_smul, det_mul, Fintype.card_fin] at this
+    exact mul_right_cancel₀ hg (by linear_combination this)
+  · rintro ⟨hA, e, he⟩
+    obtain ⟨-, -, hτ, -⟩ := ht.facts
+    obtain ⟨-, -, hτ', -⟩ := hs.facts
+    have hd : (t₀ * t₁).det ≠ 0 := by rw [det_mul]; exact mul_ne_zero dt0 dt1
+    have hd' : (s₀ * s₁).det ≠ 0 := by rw [det_mul]; exact mul_ne_zero ds0 ds1
+    obtain ⟨g, hg, p, r, T0, Tu⟩ := exists_normal ht
+    obtain ⟨g', hg', p', r', S0, Su⟩ := exists_normal hs
+    set τ := (t₀ * t₁).trace
+    set d := (t₀ * t₁).det
+    obtain ⟨c, hcdef⟩ : ∃ c : K, c = (s₀ * s₁).trace / τ := ⟨_, rfl⟩
+    have hc : c ≠ 0 := by rw [hcdef]; exact div_ne_zero hτ' hτ
+    have eτ : (s₀ * s₁).trace = c * τ := by rw [hcdef]; field_simp
+    have eA : τ ^ 2 * (s₀ * s₁).det = (s₀ * s₁).trace ^ 2 * d := by
+      unfold invA at hA
+      simp only [Ring.inverse_eq_inv'] at hA
+      field_simp at hA
+      linear_combination hA
+    have ed : (s₀ * s₁).det = c ^ 2 * d := by
+      rw [eτ] at eA
+      exact mul_left_cancel₀ (pow_ne_zero 2 hτ) (by linear_combination eA)
+    rw [eτ, ed] at S0 Su
+    obtain ⟨S0', Su'⟩ := scale_normal (τ := τ) (d := d) (p := p') (r := r') hc
+    set Dm : Matrix (Fin 2) (Fin 2) K := !![1, 0; 0, c⁻¹]
+    have hDm : Dm.det = c⁻¹ := by simp [Dm, det_fin_two]
+    set h' := g' * Dm
+    have hh' : h'.det ≠ 0 := by rw [det_mul, hDm]; exact mul_ne_zero hg' (inv_ne_zero hc)
+    have H0' : s₀ * h' = (1 : K) • (h' * invD τ d p' (c * r')) := by
+      rw [one_smul, ← Matrix.mul_assoc, S0, Matrix.mul_assoc, S0', Matrix.mul_assoc]
+    have Hu' : s₀ * s₁ * h' = c • (h' * compD τ d) := by
+      rw [← Matrix.mul_assoc, Su, Matrix.mul_assoc, Su', Matrix.mul_smul, Matrix.mul_assoc]
+    -- the norms
+    have nt : t₀.det = -normD τ d p r := by
+      have := congrArg Matrix.det T0
+      rw [det_mul, det_mul, det_invD] at this
+      exact mul_right_cancel₀ hg (by linear_combination this)
+    have ns : s₀.det = -normD τ d p' (c * r') := by
+      have := congrArg Matrix.det H0'
+      rw [one_smul, Matrix.det_mul s₀, Matrix.det_mul h', det_invD] at this
+      exact mul_right_cancel₀ hh' (by linear_combination this)
+    have he0 : e ≠ 0 := by rintro rfl; rw [zero_pow two_ne_zero, zero_mul] at he; exact dt0 he
+    have hB : normD τ d p' (c * r') ≠ 0 := fun h0 => ds0 (by rw [ns, h0, neg_zero])
+    obtain ⟨z, hz, c₂, Z0, Zu⟩ := hilbert90 (p := p) (r := r) hτ hB
+      (by linear_combination nt - e ^ 2 * ns - he) he0
+    have G0 : t₀ * (g * z) = c₂ • (g * z * invD τ d p' (c * r')) := by
+      rw [← Matrix.mul_assoc, T0, Matrix.mul_assoc, Z0, Matrix.mul_smul, Matrix.mul_assoc]
+    have Gu : t₀ * t₁ * (g * z) = (1 : K) • (g * z * compD τ d) := by
+      rw [one_smul, ← Matrix.mul_assoc, Tu, Matrix.mul_assoc, Zu, Matrix.mul_assoc]
+    have K0 := conj_trans hh' ds0 G0 H0'
+    have Ku := conj_trans hh' hd' Gu Hu'
+    have hΓ : (g * z * h'⁻¹).det ≠ 0 := by
+      rw [det_mul, det_mul]
+      exact mul_ne_zero (mul_ne_zero hg hz)
+        (Matrix.isUnit_nonsing_inv_det h' (isUnit_iff_ne_zero.2 hh')).ne_zero
+    have ha := ne_zero_of_conj dt0 hΓ K0
+    exact ⟨_, hΓ, _, _, K0, conj_t1 dt0 ha K0 Ku⟩
+
+/-- `det [t₀, t₁] = det u · (2 − α)`: the commutator is invertible iff `ρ = 2 − α ≠ 0`. -/
+theorem det_commD {t₀ t₁ : Matrix (Fin 2) (Fin 2) K} (h0 : t₀.trace = 0) (h1 : t₁.trace = 0)
+    (hd : (t₀ * t₁).det ≠ 0) :
+    (t₀ * t₁ - t₁ * t₀).det = (t₀ * t₁).det * (2 - invA (t₀ * t₁)) := by
+  rw [det_commutator, h0, h1, invA, Ring.inverse_eq_inv', det_mul]
+  rw [det_mul] at hd
+  have d0 := left_ne_zero_of_mul hd
+  have d1 := right_ne_zero_of_mul hd
+  field_simp
+  ring
+
+/-- `a t₀ + b t₀u = 0` forces `a = b = 0`. -/
+theorem eq_zero_of_t0 {t₀ t₁ : Matrix (Fin 2) (Fin 2) K} (h : DRep t₀ t₁) {a b : K}
+    (e : a • t₀ + b • (t₀ * (t₀ * t₁)) = 0) : a = 0 ∧ b = 0 := by
+  obtain ⟨h0, -, -, hu⟩ := h.facts
+  have dt0 := h.1
+  have e' := congrArg (t₀ * ·) e
+  simp only [Matrix.mul_add, Matrix.mul_smul, ← Matrix.mul_assoc, mul_self_of_trace_zero h0,
+    Matrix.smul_mul, Matrix.one_mul, Matrix.mul_zero, smul_smul] at e'
+  have hb : b = 0 := by
+    have k := (isScalar_smul_add_iff ((nps_iff_not_isScalar _).2 hu) (b * -t₀.det)
+      (a * -t₀.det)).1 ⟨0, by rw [add_comm, e', zero_smul]⟩
+    exact (mul_eq_zero.1 k).resolve_right (neg_ne_zero.2 dt0)
+  refine ⟨?_, hb⟩
+  rw [hb, zero_smul, add_zero] at e
+  rcases smul_eq_zero.1 e with e | e
+  · exact e
+  · exact absurd (by simp [e]) dt0
+
+/-- **Page 19: the automorphisms of a representation.** For `2 ≠ 0` in `K`, an element of
+`GL₂(K)` normalises `t₀` and `t₁` up to scalars if and only if it is scalar or a multiple of
+the commutator `t₀t₁ − t₁t₀` (the point of order 2 of the torus of `u`). -/
+theorem centralizer_iff {t₀ t₁ : Matrix (Fin 2) (Fin 2) K} (h : DRep t₀ t₁) (h2 : (2 : K) ≠ 0)
+    {g : Matrix (Fin 2) (Fin 2) K} (hg : g.det ≠ 0) :
+    (∃ c₀ c₁ : K, g * t₀ = c₀ • (t₀ * g) ∧ g * t₁ = c₁ • (t₁ * g)) ↔
+      IsScalar g ∨ ∃ c : K, g = c • (t₀ * t₁ - t₁ * t₀) := by
+  obtain ⟨h0, h1, hτ, hu⟩ := h.facts
+  have hgu := isUnit_iff_ne_zero.2 hg
+  set τ := (t₀ * t₁).trace
+  have hsum : t₀ * t₁ + t₁ * t₀ = τ • (1 : Matrix (Fin 2) (Fin 2) K) := by
+    have e := mul_add_mul t₀ t₁
+    rwa [h0, h1, zero_smul, zero_smul, add_zero, mul_zero, sub_zero, zero_add] at e
+  have hut : t₀ * t₁ * t₀ = τ • t₀ - t₀ * (t₀ * t₁) := by
+    rw [Matrix.mul_assoc, eq_sub_iff_add_eq, ← Matrix.mul_add, add_comm, hsum,
+      Matrix.mul_smul, Matrix.mul_one]
+  have hcomm : t₀ * t₁ - t₁ * t₀ = (2 : K) • (t₀ * t₁) - τ • 1 := by
+    rw [← sub_eq_zero]
+    linear_combination (norm := module) -hsum
+  constructor
+  · rintro ⟨c₀, c₁, H0, H1⟩
+    have Hu : g * (t₀ * t₁) = (c₀ * c₁) • (t₀ * t₁ * g) := by
+      rw [← Matrix.mul_assoc, H0, Matrix.smul_mul, Matrix.mul_assoc, H1, Matrix.mul_smul,
+        smul_smul, Matrix.mul_assoc]
+    have hc : c₀ * c₁ = 1 := by
+      have e : (g⁻¹ * (g * (t₀ * t₁))).trace = (g⁻¹ * ((c₀ * c₁) • (t₀ * t₁ * g))).trace := by
+        rw [Hu]
+      rw [Matrix.nonsing_inv_mul_cancel_left _ _ hgu, Matrix.mul_smul, Matrix.trace_smul,
+        ← Matrix.mul_assoc, trace_conj hgu, smul_eq_mul] at e
+      change τ = c₀ * c₁ * τ at e
+      exact mul_right_cancel₀ hτ (by linear_combination -e)
+    rw [hc, one_smul] at Hu
+    obtain ⟨p, q, hpq⟩ := commutant_eq ((nps_iff_not_isScalar _).2 hu) Hu
+    rw [hpq] at H0
+    simp only [Matrix.add_mul, Matrix.mul_add, Matrix.smul_mul, Matrix.mul_smul,
+      Matrix.one_mul, Matrix.mul_one, hut] at H0
+    obtain ⟨e1, e2⟩ := eq_zero_of_t0 h (a := p + q * τ - c₀ * p) (b := -q - c₀ * q)
+      (by linear_combination (norm := module) H0)
+    by_cases hq : q = 0
+    · exact Or.inl ⟨p, by rw [hpq, hq, zero_smul, add_zero]⟩
+    · have hc₀ : c₀ = -1 := mul_left_cancel₀ hq (by linear_combination -e2)
+      rw [hc₀] at e1
+      refine Or.inr ⟨q / 2, ?_⟩
+      rw [hpq, hcomm, smul_sub, smul_smul, smul_smul, div_mul_cancel₀ q h2,
+        show p = -(q / 2 * τ) by field_simp; linear_combination e1]
+      module
+  · rintro (⟨c, rfl⟩ | ⟨c, rfl⟩)
+    · exact ⟨1, 1, by simp, by simp⟩
+    · have hu1 : t₀ * t₁ * t₁ = (-t₁.det) • t₀ := by
+        rw [Matrix.mul_assoc, mul_self_of_trace_zero h1, Matrix.mul_smul, Matrix.mul_one]
+      have ht1 : t₁ * (t₀ * t₁) = τ • t₁ - (-t₁.det) • t₀ := by
+        rw [← hu1, eq_sub_iff_add_eq, ← Matrix.mul_assoc, ← Matrix.add_mul, add_comm, hsum,
+          Matrix.smul_mul, Matrix.one_mul]
+      refine ⟨-1, -1, ?_, ?_⟩
+      · rw [hcomm]
+        simp only [Matrix.sub_mul, Matrix.mul_sub, Matrix.smul_mul, Matrix.mul_smul,
+          Matrix.one_mul, Matrix.mul_one, hut]
+        linear_combination (norm := module)
+      · rw [hcomm]
+        simp only [Matrix.sub_mul, Matrix.mul_sub, Matrix.smul_mul, Matrix.mul_smul,
+          Matrix.one_mul, Matrix.mul_one, hu1, ht1]
+        linear_combination (norm := module)
+
+/-- The commutator is not scalar when `2 ≠ 0`: the two classes `1`, `[t₀, t₁]` are distinct. -/
+theorem commD_not_isScalar {t₀ t₁ : Matrix (Fin 2) (Fin 2) K} (h : DRep t₀ t₁) (h2 : (2 : K) ≠ 0) :
+    ¬ IsScalar (t₀ * t₁ - t₁ * t₀) := by
+  obtain ⟨h0, h1, -, hu⟩ := h.facts
+  have hsum : t₀ * t₁ + t₁ * t₀ = (t₀ * t₁).trace • (1 : Matrix (Fin 2) (Fin 2) K) := by
+    have e := mul_add_mul t₀ t₁
+    rwa [h0, h1, zero_smul, zero_smul, add_zero, mul_zero, sub_zero, zero_add] at e
+  have e : t₀ * t₁ - t₁ * t₀ = (2 : K) • (t₀ * t₁) + (-(t₀ * t₁).trace) • 1 := by
+    rw [← sub_eq_zero]; linear_combination (norm := module) -hsum
+  rw [e, isScalar_smul_add_iff ((nps_iff_not_isScalar _).2 hu)]
+  exact h2
+
+/-- **Which classes occur.** A representation with invariant `α` and `−det t₀ = δ` exists in
+`PGL₂(K)` if and only if `α + 2 ≠ 0`, `δ ≠ 0` and `δ` is a value of `p² + (α+2)pr + (α+2)r²`. -/
+theorem exists_dinfty_iff (α δ : K) :
+    (∃ t₀ t₁ : Matrix (Fin 2) (Fin 2) K, DRep t₀ t₁ ∧ invA (t₀ * t₁) = α ∧ -t₀.det = δ) ↔
+      α + 2 ≠ 0 ∧ δ ≠ 0 ∧ ∃ p r : K, δ = normD (α + 2) (α + 2) p r := by
+  constructor
+  · rintro ⟨t₀, t₁, ht, rfl, rfl⟩
+    obtain ⟨-, -, hτ, -⟩ := ht.facts
+    have hd : (t₀ * t₁).det ≠ 0 := by rw [det_mul]; exact mul_ne_zero ht.1 ht.2.1
+    obtain ⟨g, hg, p, r, T0, -⟩ := exists_normal ht
+    have nt : t₀.det = -normD (t₀ * t₁).trace (t₀ * t₁).det p r := by
+      have := congrArg Matrix.det T0
+      rw [det_mul, det_mul, det_invD] at this
+      exact mul_right_cancel₀ hg (by linear_combination this)
+    have hA : invA (t₀ * t₁) + 2 = (t₀ * t₁).trace ^ 2 / (t₀ * t₁).det := by
+      rw [invA, Ring.inverse_eq_inv']; ring
+    refine ⟨by rw [hA]; exact div_ne_zero (pow_ne_zero 2 hτ) hd, neg_ne_zero.2 ht.1,
+      p, r * (t₀ * t₁).det / (t₀ * t₁).trace, ?_⟩
+    rw [hA, nt, neg_neg]
+    unfold normD
+    field_simp
+  · rintro ⟨ha, hδ, p, r, rfl⟩
+    set a := α + 2
+    set t₀ := invD a a p r
+    have h0 : t₀.trace = 0 := by simp [t₀, invD, trace_fin_two]
+    have d0 : t₀.det = -normD a a p r := det_invD a a p r
+    have sq0 : t₀ * t₀ = normD a a p r • (1 : Matrix (Fin 2) (Fin 2) K) := by
+      rw [mul_self_of_trace_zero h0, d0, neg_neg]
+    have hC : (compD a a).det = a := by simp [compD, det_fin_two]
+    have hu : t₀ * ((normD a a p r)⁻¹ • (t₀ * compD a a)) = compD a a := by
+      rw [Matrix.mul_smul, ← Matrix.mul_assoc, sq0, Matrix.smul_mul, Matrix.one_mul, smul_smul,
+        inv_mul_cancel₀ hδ, one_smul]
+    have h1' : (t₀ * compD a a).trace = 0 := by
+      simp [t₀, invD, compD, trace_fin_two]; ring
+    have h1 : ((normD a a p r)⁻¹ • (t₀ * compD a a)).trace = 0 := by
+      rw [Matrix.trace_smul, h1', smul_zero]
+    refine ⟨t₀, _, ⟨by rw [d0]; exact neg_ne_zero.2 hδ, ?_, ⟨_, sq0⟩,
+      ⟨_, mul_self_of_trace_zero h1⟩, ?_⟩, ?_, by rw [d0, neg_neg]⟩
+    · rw [det_smul, det_mul, d0, hC, Fintype.card_fin]
+      exact mul_ne_zero (pow_ne_zero 2 (inv_ne_zero hδ)) (mul_ne_zero (neg_ne_zero.2 hδ) ha)
+    · rw [hu, isScalar_iff]
+      rintro ⟨-, h10, -⟩
+      apply ha
+      simpa [compD, Matrix.mul_apply, Fin.sum_univ_two] using h10
+    · rw [hu, invA, Ring.inverse_eq_inv', hC]
+      simp only [compD, trace_fin_two, of_apply, cons_val', cons_val_zero, cons_val_one,
+        empty_val', cons_val_fin_one]
+      field_simp
+      ring
+
+/-- **The page-17 equivalence fails as read, over `ℚ`.** Two representations with the same
+invariant `α = −6` (so `ρ = 8` invertible and `𝒰_ρ ≅ 𝔾_m`) that are not conjugate in
+`PGL₂(ℚ)`: `det t₀ = −1` and `det s₀ = 1` are in different square classes. -/
+theorem dinfty_not_conj_rat :
+    DRep !![(1 : ℚ), 0; 0, -1] !![1, 1; -2, -1] ∧ DRep !![(0 : ℚ), 1; -1, 0] !![1, 0; 2, -1] ∧
+    invA (!![(1 : ℚ), 0; 0, -1] * !![1, 1; -2, -1]) = -6 ∧
+    invA (!![(0 : ℚ), 1; -1, 0] * !![1, 0; 2, -1]) = -6 ∧
+    ¬ PConj !![(1 : ℚ), 0; 0, -1] !![1, 1; -2, -1] !![0, 1; -1, 0] !![1, 0; 2, -1] := by
+  have r1 : DRep !![(1 : ℚ), 0; 0, -1] !![1, 1; -2, -1] := by
+    refine ⟨by norm_num [det_fin_two], by norm_num [det_fin_two], (isScalar_iff _).2 ?_,
+      (isScalar_iff _).2 ?_, fun h => ?_⟩
+    · norm_num [Matrix.mul_apply, Fin.sum_univ_two]
+    · norm_num [Matrix.mul_apply, Fin.sum_univ_two]
+    · have := ((isScalar_iff _).1 h).1
+      norm_num [Matrix.mul_apply, Fin.sum_univ_two] at this
+  have r2 : DRep !![(0 : ℚ), 1; -1, 0] !![1, 0; 2, -1] := by
+    refine ⟨by norm_num [det_fin_two], by norm_num [det_fin_two], (isScalar_iff _).2 ?_,
+      (isScalar_iff _).2 ?_, fun h => ?_⟩
+    · norm_num [Matrix.mul_apply, Fin.sum_univ_two]
+    · norm_num [Matrix.mul_apply, Fin.sum_univ_two]
+    · have := ((isScalar_iff _).1 h).1
+      norm_num [Matrix.mul_apply, Fin.sum_univ_two] at this
+  have a1 : invA (!![(1 : ℚ), 0; 0, -1] * !![1, 1; -2, -1]) = -6 := by
+    simp [invA, trace_fin_two, det_fin_two]; norm_num
+  have a2 : invA (!![(0 : ℚ), 1; -1, 0] * !![1, 0; 2, -1]) = -6 := by
+    simp [invA, trace_fin_two, det_fin_two]; norm_num
+  refine ⟨r1, r2, a1, a2, fun h => ?_⟩
+  obtain ⟨-, e, he⟩ := (dinfty_conj_iff r1 r2).1 h
+  simp [det_fin_two] at he
+  nlinarith [sq_nonneg e]
+
+/-- « `u² ≠ 1` everywhere, that is `α + 2` invertible » is not an equivalence: `t₁ = t₀` has
+`u = 1`, `α = 2`, `α + 2 = 4 ≠ 0`. -/
+theorem dinfty_add_two_not_iff :
+    invA (!![(1 : ℚ), 0; 0, -1] * !![1, 0; 0, -1]) = 2 ∧
+      ¬ DRep !![(1 : ℚ), 0; 0, -1] !![1, 0; 0, -1] := by
+  refine ⟨by simp [invA, trace_fin_two, det_fin_two]; norm_num,
+    fun h => h.2.2.2.2 ((isScalar_iff _).2 ?_)⟩
+  simp [Matrix.mul_apply, Fin.sum_univ_two]
+
+end Dinfty
 
 end Grothendieck.Folder85

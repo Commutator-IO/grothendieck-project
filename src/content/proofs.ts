@@ -351,15 +351,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '85',
     batch: 2,
-    page: '4–10, 29–31, 40',
-    name: 'Rotations of order 5; representations of G₂ in PGL₂',
+    page: '4–10, 16–20, 29–31, 40',
+    name: 'Rotations of order 5; representations of G₂ and of 𝔻_∞ in PGL₂',
     statement:
-      'For g ∈ GL₂(R) nowhere scalar, with A(g) = Tr(g)²/det g − 2, g⁵ is scalar iff A(g)² + A(g) − 1 = 0, with an explicit (2,3,5) model over ℤ[ζ₅]. For G₂ → PGL₂, (*) at every point holds iff the τᵢ are traceless and (α₀ + 2)(α₁ + 2)(α₀ + α₁) is a unit; such representations are rigid, and realised by an explicit normal form over R[T]/(T² − α₀T + 1).',
+      'For g ∈ GL₂(R) nowhere scalar, with A(g) = Tr(g)²/det g − 2, g⁵ is scalar iff A(g)² + A(g) − 1 = 0, with an explicit (2,3,5) model over ℤ[ζ₅]. For G₂ → PGL₂, (*) at every point holds iff the τᵢ are traceless and (α₀ + 2)(α₁ + 2)(α₀ + α₁) is a unit; such representations are rigid, and realised by an explicit normal form over R[T]/(T² − α₀T + 1). For 𝔻_∞ → PGL₂(K) with u² ≠ 1 (p. 17), read as classified by α and a torsor under 𝒰_{2−α}, with automorphisms ₂𝒰_{2−α} (p. 19).',
     found:
-      'Everything holds over every base, characteristics 2, 3 and 5 included; each factor of the discriminant matches one condition of (*). An explicit split model needs the quadratic extension, which is why the pages speak of forms of PGL₂. In PGL₂, order 6 needs 6 invertible. Conjugacy is proved over a field containing a root of T² − α₀T + 1; representability and descent are not proved.',
+      'The order-5 and G₂ statements hold over every base, characteristics 2, 3 and 5 included; each factor of the discriminant matches one condition of (*). An explicit split model needs the quadratic extension, which is why the pages speak of forms of PGL₂. In PGL₂, order 6 needs 6 invertible. Conjugacy is proved over a field containing a root of T² − α₀T + 1; representability and descent are not proved. The 𝔻_∞ classification of p. 17 is false as read: over a field the classes are given by α and the square class of det t₀ (Hilbert 90 for K[u]), and over ℚ, α = −6 (𝒰_ρ ≅ 𝔾_m) carries two non-conjugate representations; the centraliser is {1, [t₀, t₁]}, ₂𝒰_ρ as p. 19 says.',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder85.lean',
-    theorems: ['sq_add_sub_of_pow_five', 'exists_model_adjoinRoot', 'discr_isUnit_of_star', 'star_of_discr_isUnit', 'rigid', 'conj_of_same_invariants', 'exists_normalForm_adjoinRoot', 'order_six_iff'],
+    theorems: ['sq_add_sub_of_pow_five', 'exists_model_adjoinRoot', 'discr_isUnit_of_star', 'star_of_discr_isUnit', 'rigid', 'conj_of_same_invariants', 'exists_normalForm_adjoinRoot', 'order_six_iff', 'dinfty_conj_iff', 'exists_dinfty_iff', 'centralizer_iff', 'det_commD', 'dinfty_not_conj_rat'],
   },
   {
     folder: '1',
