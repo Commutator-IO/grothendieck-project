@@ -4,8 +4,9 @@
  * Marked in red on the Quillen page. A year is marked for what the fonds says
  * — a page of Grothendieck's that names Quillen, a letter, a date. A notebook
  * is marked for what Glenys Luke's index of the notebooks says it holds (the
- * Clay's own catalogue, quoted in « »): nothing here comes from a reading of
- * the notebooks themselves, which are not transcribed.
+ * Clay's own catalogue, quoted in « »). Three notebooks were read on
+ * 18 October 2026 (1968-13, 1968-14, 1969-17); what that reading adds is said
+ * in a few words of ours, and no transcription is published (#36, #42).
  */
 
 export const YEAR_NOTES: Record<string, string> = {
@@ -23,9 +24,11 @@ export const YEAR_NOTES: Record<string, string> = {
 
 export const NOTEBOOK_NOTES: Record<string, string> = {
   '1968/1968-13':
-    'Fall 1968, « Every simplical set is homotopy equivalent to the singular complex of a category »; 10 December, « Construction of the category of motives over a point ».',
-  '1968/1968-14': '24 December 1968: « More motives. Motives over a base manifold. »',
-  '1969/1969-17': 'A typed paper, in French: « Voisinages tubulaires dans a topos localement annelés ».',
+    "Fall 1968, « Every simplical set is homotopy equivalent to the singular complex of a category »; 10 December, « Construction of the category of motives over a point ». Read: from 1 to 18 December Quillen builds a category of motives for bordism theories, and names Grothendieck twice on p. 55 — Grothendieck's version, he notes, seldom occurs in topology, where base change is a tensor product; and Galois descent. No page is dated September, so the notebook does not hold the « Tapis ».",
+  '1968/1968-14':
+    '24 December 1968: « More motives. Motives over a base manifold. » Read: motives over a base, 24–31 December, with Grothendieck\'s six operations carried into bordism; Quillen marks his own construction « mostly incorrect » and refutes his base change.',
+  '1969/1969-17':
+    'A typed paper, in French: « Voisinages tubulaires dans a topos localement annelés ». Read: the typescript (pp. 1–4) is in another hand than Quillen\'s, author unknown; pp. 5–8 are his notes on a talk by May.',
   '1970/1970-15': '20 September 1970: « Let G be a group in a topos T. When is the cohomology of the discrete group Γ(G) the same as the cohomology of TG? »',
   '1971/1971-4': 'March 1971: « For a small category C, to define C-bundles over a topos and prove a classifying theorem »; C-torsors and Mather\'s theorem.',
   '1971/1971-5': "April 1971: « Pull back of torsors in Topos T. Mather's theorem for general stacks »; 14 April, « Fibred topos ».",

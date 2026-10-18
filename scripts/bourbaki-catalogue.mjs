@@ -17,7 +17,8 @@
  *   - « named »: the archive's own title or description names him;
  *   - « fonds »: a rédaction whose number a leaf of the fonds carries — he
  *     wrote on its back (src/content/dated-leaves.json, records of kind
- *     « paper », issue #41), or a transcription names it (« rédaction n° 339 »).
+ *     « paper », issue #41), or a transcription names it (« rédaction n° 339 »);
+ *     likewise a congress report (« Tribu 59 ») whose fascicles he wrote on.
  * A shared subject alone is not evidence.
  */
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -72,10 +73,19 @@ const note = (n, folder, why) => {
   const list = fondsRedactions.get(n);
   if (!list.some((x) => x.folder === folder)) list.push({ folder, why });
 };
+const fondsTribus = new Map(); // congress report number → [{folder, why}]
+const noteTribu = (n, folder, why) => {
+  if (!fondsTribus.has(n)) fondsTribus.set(n, []);
+  const list = fondsTribus.get(n);
+  if (!list.some((x) => x.folder === folder)) list.push({ folder, why });
+};
 const leaves = JSON.parse(readFileSync(resolve(ROOT, 'src/content/dated-leaves.json'), 'utf8')).records;
 for (const r of leaves.filter((l) => l.kind === 'paper')) {
   for (const m of `${r.written} ${r.context}`.matchAll(/(?:n[°o]\s*|rédaction\s+)(\d{2,4})/gi))
     note(Number(m[1]), r.folder, `he wrote on the back of it (folder ${r.folder}, p. ${r.page})`);
+  // Congress reports (« La Tribu »), keyed by their own number.
+  for (const m of `${r.written} ${r.context}`.matchAll(/Tribu\s+(?:n[°o]\s*)?(\d{1,3})/gi))
+    noteTribu(Number(m[1]), r.folder, `he wrote on the back of its fascicles (folder ${r.folder}, p. ${r.page})`);
 }
 const T = resolve(ROOT, 'transcripts');
 for (const folder of readdirSync(T)) {
@@ -107,6 +117,9 @@ const records = items.map((it) => {
   if (!why.length && /grothendieck/i.test(`${title} ${description}`)) why.push({ kind: 'named', text: 'the archive’s description names Grothendieck' });
   if (num && fondsRedactions.has(Number(num)))
     for (const x of fondsRedactions.get(Number(num))) why.push({ kind: 'fonds', text: x.why, folder: x.folder });
+  const tribu = /^N°\s*(\d+)\b/.exec(title)?.[1];
+  if (tribu && fondsTribus.has(Number(tribu)))
+    for (const x of fondsTribus.get(Number(tribu))) why.push({ kind: 'fonds', text: x.why, folder: x.folder });
   return {
     id: it.id,
     type: it.item_type?.name ?? 'Autre',
