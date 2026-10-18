@@ -32,9 +32,16 @@ Congruences modulo `X^{r+1}` in `A⟦X⟧` are identities in `A[η]/(η^{r+1})`.
   `(r−1)! · y = 0`, `∏_{i=0}^{r} ((1 − iX)/(1 − y − iX))^{(−1)^i binom(r,i)} ≡ 1`
   modulo `X^{r+1}`. The denominator product is the numerator one rescaled by `(1 − y)^{-1}`,
   so the two agree modulo `X^{r+1}` once `(r−1)! (1 − (1 − y)^{-r}) = 0`.
+* `chernRatio`, `chernCurve`, `chernEllipticNB` (the N.B. of page 13, read in the second
+  transcription pass): the page itself gives the example, `X` an elliptic curve,
+  `x = (a) − (0)` with `a + a = 0`, `a ≠ 0`, and `r = 3`. With `p, q` the classes of the two
+  points (`p² = q² = 0` on a curve) and `r! (p − q) = 0`,
+  `∏ ((1 − p − iX)/(1 − q − iX))^{(−1)^i binom(r,i)} ≡ 1` modulo `X^{r+1}`; for `r = 3`
+  the hypothesis `2(p − q) = 0` given by `a + a = 0` suffices.
 
-That the class `i_!(O_Y)` is nonzero in `K(X × P^r)`, and the restriction `r ≥ 3`, are
-geometric and not formalised.
+That the classes `i_!(O_Y)` and `i_!(x)` are nonzero in `K(X × P^r)`, which the N.B.
+asserts, and the restriction `r ≥ 3`, are geometric and not formalised. Page 21 states
+`n ≥ 3` for its example itself (« si n − 1 > 1 i.e. n ≥ 3, CK a de la torsion »).
 -/
 
 open PowerSeries Finset
@@ -268,6 +275,106 @@ theorem chernImmersion_of_isNilpotent {r : ℕ} (hr : 1 ≤ r) {y : A} (hy : IsN
     X ^ (r + 1) ∣ (↑(∏ i ∈ range (r + 1),
       (lin 1 (i : A) * (lin hy.isUnit_one_sub.unit (i : A))⁻¹) ^ ε r i) : A⟦X⟧) - 1 :=
   chernImmersion hr hy.isUnit_one_sub h
+
+/-! ### Page 13, the N.B.: a class of degree zero on an elliptic curve
+
+The N.B. of page 13 takes `X` an elliptic curve with origin `0`, a point `a ≠ 0` with
+`a + a = 0`, `x = (a) − (0)` and `r = 3`, and states that `y = i_!(x)` is nonzero while
+the coefficients of its Chern class vanish. In the splitting-principle model,
+`x = [O_a] − [O_0] = [O(−0)] − [O(−a)]` and
+`i_!(x) = Σ_i (−1)^i binom(r, i) ([L^{-i} ⊗ O(−0)] − [L^{-i} ⊗ O(−a)])`, with
+`c(L^{-i} ⊗ O(−0)) = 1 − p − iη` and `c(L^{-i} ⊗ O(−a)) = 1 − q − iη`, `p, q ∈ A^1(X)` the
+classes of the two points: `p² = q² = 0` on a curve, and `a + a = 0` gives `2(p − q) = 0`. -/
+
+/-- The twist by a unit is a rescaling: `∏ (w − iX)^{ε} = ∏ (1 − i w^{-1} X)^{ε}`, the
+exponents summing to `0`. -/
+theorem altProd_lin {r : ℕ} (hr : 1 ≤ r) (w : Aˣ) :
+    altProd r (fun i => lin w (i : A)) =
+      Units.map (rescale (↑w⁻¹ : A)).toMonoidHom (altProd r fun i => lin 1 (i : A)) := by
+  have hlin (i : ℕ) : lin w (i : A) = Units.map (C (R := A)).toMonoidHom w *
+      Units.map (rescale (↑w⁻¹ : A)).toMonoidHom (lin 1 (i : A)) := by
+    refine Units.ext ?_
+    change C (w : A) - C (i : A) * X = C (w : A) * rescale (↑w⁻¹ : A) (C 1 - C (i : A) * X)
+    have hwa : C (w : A) * C (↑w⁻¹ : A) = 1 := by rw [← map_mul, Units.mul_inv, map_one]
+    rw [map_sub, map_mul, rescale_C, rescale_C, rescale_X, map_one]
+    linear_combination (C (i : A) * X) * hwa
+  have hsum : ∑ i ∈ range (r + 1), ε r i = 0 :=
+    Int.alternating_sum_range_choose_of_ne (by omega)
+  simp only [altProd, hlin, mul_zpow, prod_mul_distrib, prod_zpow_eq_zpow_sum, hsum, zpow_zero,
+    one_mul, map_prod, map_zpow]
+
+/-- **Page 13**, two twists: for units `u, v` of `A` with `(r−1)! (u^{-r} − v^{-r}) = 0`,
+`∏_{i=0}^{r} ((u − iη)/(v − iη))^{(−1)^i binom(r,i)} = 1` in `A[η]/(η^{r+1})`. -/
+theorem chernRatio {r : ℕ} (hr : 1 ≤ r) (u v : Aˣ)
+    (h : ((r - 1).factorial : A) * ((↑u⁻¹ : A) ^ r - (↑v⁻¹ : A) ^ r) = 0) :
+    X ^ (r + 1) ∣ (↑(∏ i ∈ range (r + 1),
+      (lin u (i : A) * (lin v (i : A))⁻¹) ^ ε r i) : A⟦X⟧) - 1 := by
+  set P : A⟦X⟧ := ↑(altProd r fun i => lin 1 (i : A))
+  set c : A := (-1) ^ (r - 1) * ((r - 1).factorial : A)
+  have hPc : ∀ n, n < r + 1 → coeff n P = coeff n (1 + C c * X ^ r) := fun n hn =>
+    sub_eq_zero.1 (by rw [← map_sub]; exact X_pow_dvd_iff.1 (chernPoint hr) n hn)
+  have hPQ : X ^ (r + 1) ∣ (↑(altProd r fun i => lin u (i : A)) : A⟦X⟧) -
+      (↑(altProd r fun i => lin v (i : A)) : A⟦X⟧) := by
+    rw [altProd_lin hr u, altProd_lin hr v, Units.coe_map, Units.coe_map]
+    change X ^ (r + 1) ∣ rescale (↑u⁻¹ : A) P - rescale (↑v⁻¹ : A) P
+    refine X_pow_dvd_iff.2 fun n hn => ?_
+    rw [map_sub, coeff_rescale, coeff_rescale, hPc n hn, map_add, coeff_C_mul_X_pow, coeff_one]
+    rcases n with _ | n
+    · simp
+    · obtain rfl | hnr := eq_or_ne (n + 1) r
+      · simp only [↓reduceIte, Nat.succ_ne_zero, zero_add]
+        linear_combination (-1) ^ (n + 1 - 1) * h
+      · simp [hnr]
+  have hprod : ∏ i ∈ range (r + 1), (lin u (i : A) * (lin v (i : A))⁻¹) ^ ε r i =
+      altProd r (fun i => lin u (i : A)) * (altProd r fun i => lin v (i : A))⁻¹ := by
+    simp only [altProd, mul_zpow, prod_mul_distrib, inv_zpow, prod_inv_distrib]
+  rw [hprod, Units.val_mul]
+  convert hPQ.mul_right (↑(altProd r fun i => lin v (i : A))⁻¹ : A⟦X⟧) using 1
+  linear_combination Units.mul_inv (altProd r fun i => lin v (i : A))
+
+theorem one_add_pow_of_sq_eq_zero {p : A} (hp : p ^ 2 = 0) (n : ℕ) :
+    (1 + p) ^ n = 1 + n * p := by
+  induction n with
+  | zero => simp
+  | succ n ih =>
+    rw [pow_succ, ih]; push_cast
+    linear_combination (n : A) * hp
+
+/-- `(1 − p)^{-1} = 1 + p` when `p² = 0`. -/
+theorem inv_one_sub_of_sq_eq_zero {p : A} (hp : p ^ 2 = 0) :
+    (↑(IsNilpotent.isUnit_one_sub ⟨2, hp⟩ : IsUnit (1 - p)).unit⁻¹ : A) = 1 + p := by
+  rw [Units.inv_eq_of_mul_eq_one_left]
+  simp only [IsUnit.unit_spec]
+  linear_combination -hp
+
+/-- **Page 13, N.B.**, on a curve: for `p, q` with `p² = q² = 0` and `r! (p − q) = 0`,
+`∏_{i=0}^{r} ((1 − p − iη)/(1 − q − iη))^{(−1)^i binom(r,i)} = 1` in `A[η]/(η^{r+1})`,
+that is `c(i_!(x)) = 1` for `x = [O(−0)] − [O(−a)]`. -/
+theorem chernCurve {r : ℕ} (hr : 1 ≤ r) {p q : A} (hp : p ^ 2 = 0) (hq : q ^ 2 = 0)
+    (h : (r.factorial : A) * (p - q) = 0) :
+    X ^ (r + 1) ∣ (↑(∏ i ∈ range (r + 1),
+      (lin (IsNilpotent.isUnit_one_sub ⟨2, hp⟩ : IsUnit (1 - p)).unit (i : A) *
+        (lin (IsNilpotent.isUnit_one_sub ⟨2, hq⟩ : IsUnit (1 - q)).unit (i : A))⁻¹) ^
+          ε r i) : A⟦X⟧) - 1 := by
+  refine chernRatio hr _ _ ?_
+  rw [inv_one_sub_of_sq_eq_zero hp, inv_one_sub_of_sq_eq_zero hq,
+    one_add_pow_of_sq_eq_zero hp, one_add_pow_of_sq_eq_zero hq]
+  obtain ⟨s, rfl⟩ := Nat.exists_eq_add_of_le' hr
+  rw [Nat.factorial_succ] at h
+  simp only [Nat.add_sub_cancel]
+  push_cast at h ⊢
+  linear_combination h
+
+/-- **Page 13, N.B.**, the example of the page: `r = 3` and `2(p − q) = 0` (a point `a ≠ 0`
+with `a + a = 0` on an elliptic curve) give `c(i_!(x)) = 1` in `A[η]/(η^4)`. -/
+theorem chernEllipticNB {p q : A} (hp : p ^ 2 = 0) (hq : q ^ 2 = 0) (h : 2 * (p - q) = 0) :
+    X ^ (3 + 1) ∣ (↑(∏ i ∈ range (3 + 1),
+      (lin (IsNilpotent.isUnit_one_sub ⟨2, hp⟩ : IsUnit (1 - p)).unit (i : A) *
+        (lin (IsNilpotent.isUnit_one_sub ⟨2, hq⟩ : IsUnit (1 - q)).unit (i : A))⁻¹) ^
+          ε 3 i) : A⟦X⟧) - 1 :=
+  chernCurve (by norm_num) hp hq (by
+    rw [show ((Nat.factorial 3 : ℕ) : A) = 3 * 2 by norm_num [Nat.factorial]]
+    linear_combination 3 * h)
 
 /-! ### Page 21: `φ_K` is not injective for `K = K(P^{n−1})`, `n ≥ 3`
 
