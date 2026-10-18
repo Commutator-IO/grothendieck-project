@@ -66,6 +66,25 @@ Soit $G$ un groupe. Les applications $\varphi_a : (x, y, z) \mapsto (x, a^{-1}z^
 (5) Si $s$ et $u$ sont liés, $\sigma_\beta u$ n'est pas lié à $s$ par~(3) appliqué au triangle vertical de $u$ ; il est donc lié à $\sigma_\alpha s$ par~(3) appliqué au triangle vertical de $s$. Les coordonnées de $\sigma x$ sont donc deux à deux liées, et $\sigma x \neq x$ puisque $\sigma_\alpha$ est sans point fixe.
 \end{proof}
 
+La décomposition autour de $t_0$, dont les sommets sont marqués $\alpha = 0, 1, 2$ : à chaque sommet $t_0(\alpha)$, un triangle vertical, formé de $t_0(\alpha)$, d'un point $x_\alpha$ de $\widetilde E_\alpha$ et de $\sigma_\alpha x_\alpha$ ; en tirets, un triangle supérieur $x = (x_0, x_1, x_2)$ ; son image $\sigma x$ relie de même les trois points $\sigma_\alpha x_\alpha$ (point~5). Chacun des points $x_\beta$, $\beta \neq \alpha$, est lié à un seul des deux points $x_\alpha$, $\sigma_\alpha x_\alpha$ (point~3).
+\begin{center}
+\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\small}]
+\tikzset{pt/.style={circle, fill, inner sep=1.4pt}}
+\foreach \a/\ang in {0/90,1/210,2/330} {
+  \node[pt] (t\a) at (\ang:1.0) {};
+  \node[pt] (x\a) at (\ang-10:2.8) {};
+  \node[pt] (y\a) at (\ang+10:2.8) {};
+  \draw (t\a)--(x\a)--(y\a)--(t\a);
+}
+\draw (t0)--(t1)--(t2)--(t0);
+\draw[densely dashed] (x0)--(x1)--(x2)--(x0);
+\foreach \a/\ang in {0/90,1/210,2/330} { \node[font=\scriptsize] at (\ang:0.5) {$\a$}; }
+\node[right] at (x0) {$x_0$}; \node[left] at (y0) {$\sigma_0 x_0$};
+\node[left] at (x1) {$x_1$}; \node[below left] at (y1) {$\sigma_1 x_1$};
+\node[below right] at (x2) {$x_2$}; \node[right] at (y2) {$\sigma_2 x_2$};
+\end{tikzpicture}
+\end{center}
+
 \begin{lemme}\label{lem:74-revetement}
 Soit $X$ un ensemble muni d'une involution sans point fixe $f$. Le choix d'un représentant dans chaque orbite donne une bijection $X \simeq X/f \times \{0, 1\}$ ; en particulier $|X| = 2\,|X/f|$.
 \end{lemme}

@@ -25,6 +25,14 @@ Si $(e, s, t)$ est un noyau scindé de $(u, v)$, alors $e$ est un noyau de $(u, 
 Soit $z : T \to Y$ avec $uz = vz$. Alors $z = tuz = tvz = e(sz)$, donc $z$ se factorise par $e$, et de façon unique, puisque $ez' = ez''$ entraîne $z' = sez' = sez'' = z''$. Les quatre conditions sont des égalités entre composés, qu'un foncteur conserve.
 \end{proof}
 
+Un noyau scindé se dessine ainsi, les flèches $s$ et $t$ allant en sens inverse :
+\[
+\begin{tikzcd}[column sep=huge]
+E \arrow[r, "e"] & Y \arrow[l, bend left=40, "s"] \arrow[r, shift left, "u"] \arrow[r, shift right, "v"'] & Z \arrow[l, bend left=40, "t"]
+\end{tikzcd}
+\qquad ue = ve, \quad se = 1_E, \quad tu = 1_Y, \quad tv = es.
+\]
+
 \begin{lemme}\label{lem:19-paire}
 Pour toute coalgèbre $(X, a)$, la double flèche $(\eta_{gX}, g(a)) : gX \rightrightarrows gfgX$ est $f$-scindée : $(a, \varepsilon_X, \varepsilon_{fgX})$ est un noyau scindé de $(f(\eta_{gX}), fg(a))$. Elle est de plus coréflexive : $g(\varepsilon_X)$ est une rétraction commune de $\eta_{gX}$ et de $g(a)$.
 \end{lemme}
@@ -183,6 +191,23 @@ Sur $\mathbb Z$, posons $e_m(x) = 2x + m$ et $r_m(x) = \lfloor (x - m)/2 \rfloor
 
 Chaque $B_k$ agit sur l'une des deux copies par un $e_m$, dont l'image évite une classe de parité. Soit $q$ un point de cette copie hors de l'image, et $p = q - 1$ : tout $B_k(c) \leqslant q$ vérifie $B_k(c) \leqslant p$, et $q \not\leqslant p$. Soient $h_q$ le préfaisceau représenté par $q$ et $G$ le préfaisceau $x \mapsto \{b \in \{0, 1\} : x \leqslant p \Rightarrow b = 0\}$, dont les restrictions remplacent $b$ par $0$ au-dessous de $p$. Les deux morphismes $h_q \to G$ de valeurs $0$ et $1$ en $q$ sont distincts, et leurs restrictions par $B_k$ coïncident, puisque ces restrictions ne voient que des points au-dessous de $p$. Donc $F_k$ n'est pas fidèle. La Proposition s'obtient en prenant $F_0, \ldots, F_{n-1}$ (Lean : \texttt{proposition\_page80}, \texttt{chain\_adj}, \texttt{chain\_not\_fullyFaithful}).
 \end{proof}
+
+Sur une copie de $\mathbb Z$, la chaîne $\cdots \dashv r_{-1} \dashv e_0 \dashv r_0 \dashv e_1 \dashv r_1 \dashv \cdots$ se lit sur la figure suivante : $e_0$ (en trait plein) envoie $x$ sur $2x$, $e_1$ (en tirets) sur $2x + 1$, et $r_0$ renvoie $2x$ et $2x + 1$ sur $x$. L'image de $e_0$ évite les impairs (cercles blancs) : c'est le point $q$ de la démonstration.
+\begin{center}
+\begin{tikzpicture}[x=0.8cm, y=1.5cm, >=stealth]
+\foreach \x in {-2,...,2} {
+  \fill (2*\x+0.5, 1) circle (1.6pt);
+  \node[above] at (2*\x+0.5, 1) {\small $\x$};
+  \draw[->, shorten >=2.5pt, shorten <=2.5pt] (2*\x+0.5, 1) -- (2*\x, 0);
+  \draw[->, dashed, shorten >=2.5pt, shorten <=2.5pt] (2*\x+0.5, 1) -- (2*\x+1, 0);
+}
+\foreach \y in {-4,-2,...,4} { \fill (\y, 0) circle (1.6pt); \node[below] at (\y, 0) {\small $\y$}; }
+\foreach \y in {-3,-1,...,5} { \draw[fill=white] (\y, 0) circle (1.6pt); \node[below] at (\y, 0) {\small $\y$}; }
+\node[left] at (-4.6, 1) {$\mathbb Z$};
+\node[left] at (-4.6, 0) {$\mathbb Z$};
+\end{tikzpicture}
+\end{center}
+Sur $C = \mathbb Z \sqcup \mathbb Z$, les deux copies sont décalées d'un cran : $B_{2m} = e_m \sqcup r_m$ et $B_{2m+1} = r_m \sqcup e_{m+1}$, de sorte que chaque $B_k$ agit sur l'une des copies par un $e$.
 
 \begin{remarque}
 La réunion disjointe est essentielle : sur une seule copie de $\mathbb Z$, un $e_m^*$ sur deux est pleinement fidèle, puisque $r_m e_m = \mathrm{id}$. Les deux copies décalées d'un cran font qu'aucun $F_k$ ne l'est. Une note de la lecture, à la page~81, tient une chaîne infinie dans les deux sens pour impossible \q{dans des situations très générales} ; l'exemple montre qu'elle existe entre topos de préfaisceaux. La suggestion de la page, un $g$ à la fois adjoint à gauche et à droite de $f$, n'est pas celle suivie ici.

@@ -6,6 +6,15 @@ La cote 115, \emph{\q{Correspondances} fonctorielles. Dualité des topos}, quato
 Pour tout noyau $K$ sur $A \times B$, ${}^sK$, vu comme foncteur $\widehat A \to (\widehat B)^{\mathrm{op}}$, est adjoint à gauche de ${}^dK$. Pour $B = A^{\mathrm{op}}$ et $K = \mathrm{Hom}_A$, les deux transformées sont exactement $\mathcal O(\Phi)(a) = \mathrm{Hom}(\Phi, y a)$ et $\mathrm{Spec}(\Psi)(a) = \mathrm{Hom}(\Psi, \mathrm{Hom}_A(a, -))$, et l'adjonction est $\mathcal O \dashv \mathrm{Spec} : \widehat A \rightleftarrows (A^\vee)^{\mathrm{op}}$. On a $\mathcal O(y a) \simeq \mathrm{Hom}_A(a, -)$, $\mathrm{Spec}(\mathrm{Hom}_A(a, -)) \simeq y a$, et $\mathcal O$ transforme les colimites de $\widehat A$ en limites de $A^\vee$.
 \end{theoreme}
 
+L'adjonction et ses valeurs sur les représentables, le triangle commutant à isomorphisme près :
+\[
+\begin{tikzcd}[column sep=huge, row sep=large]
+\widehat A \arrow[r, shift left=1.2ex, "\mathcal O"] & (A^\vee)^{\mathrm{op}} \arrow[l, shift left=1.2ex, "\mathrm{Spec}"] \\
+A \arrow[u, "y"] \arrow[ur, "{a \,\mapsto\, \mathrm{Hom}_A(a, -)}"'] &
+\end{tikzcd}
+\qquad \mathcal O(ya) \simeq \mathrm{Hom}_A(a, -), \quad \mathrm{Spec}(\mathrm{Hom}_A(a, -)) \simeq ya.
+\]
+
 L'énoncé tient tel que la lecture le donne. En Lean, le noyau est un foncteur $K : A^{\mathrm{op}} \to [C, \mathbf{Ens}]$, le cas de la page étant $C = B^{\mathrm{op}}$ ; l'adjonction générale est \texttt{kernelAdj}, la dualité \texttt{isbell}, obtenue en posant $K$ égal au foncteur de co-Yoneda, et les deux formules de la page~7 valent par définition (\texttt{isbellO\_obj\_obj}, \texttt{isbellSpec\_obj\_obj}). La question de la piste, savoir si une démonstration publiée obtient ainsi la dualité, relève de la littérature et reste ouverte.
 
 Ne sont pas démontrés ici : la roue des onze catégories de foncteurs de la page~5, l'extension aux familles finies $(A_i)$, la caractérisation de $\mathcal O$ et de $\mathrm{Spec}$ par leur restriction le long de $y$ et la dualité des topos des pages suivantes.

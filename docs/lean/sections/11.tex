@@ -28,6 +28,29 @@ Soit $E$ une famille finie d'arêtes, boucles et arêtes multiples permises, sur
 Par récurrence sur $|E|$. Sans arête, $V$ est un point et $\delta_E = 1 = \delta_V$. Une boucle en $i$ vaut $\chi\, y_i$ ; on la retire sans rompre la connexité, et l'on conclut par $y_i\,\delta_V = \prod_{v \in V} y_v$ et $y_i^2 = 0$. Une arête $(i, j)$ avec $i \neq j$ permet le transfert : la première identité donne $\delta_{ij}\,\iota_j(a) = \delta_{ij}\,\iota_i(a)$, donc, multiplié par $\delta_{ij}$, tout produit de classes reste le même quand on y remplace l'indice $j$ par $i$. On contracte ainsi l'arête : le reste devient un multigraphe connexe sur $V \smallsetminus \{j\}$, avec une arête et un sommet de moins, des arêtes parallèles à $(i,j)$ devenant des boucles. Il reste à voir que $\delta_{ij}$ fait repasser de $V \smallsetminus \{j\}$ à $V$ dans chacun des trois cas, ce que donnent le transfert, la symétrie de $\Delta$ et $y_i\,\delta_{ij} = y_iy_j$.
 \end{proof}
 
+Pour $k = 3$, trois relations de la page~50 se lisent sur trois multigraphes connexes à trois sommets, avec deux, trois et quatre arêtes :
+\begin{center}
+\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\small}]
+\tikzset{pt/.style={circle, fill, inner sep=1.4pt}}
+\begin{scope}
+\node[pt, label=below:$1$] (1) at (0,0) {}; \node[pt, label=below:$2$] (2) at (1.6,0) {}; \node[pt, label=above:$3$] (3) at (0.8,1.3) {};
+\draw (1)--(2) (2)--(3);
+\node at (0.8,-1) {$\delta_{12}\delta_{23} = \delta$};
+\end{scope}
+\begin{scope}[xshift=4.2cm]
+\node[pt, label=below:$1$] (1) at (0,0) {}; \node[pt, label=below:$2$] (2) at (1.6,0) {}; \node[pt, label=above:$3$] (3) at (0.8,1.3) {};
+\draw (1)--(2) (2)--(3) (1)--(3);
+\node at (0.8,-1) {$\delta_{13}\,\delta = \chi\, y_1y_2y_3$};
+\end{scope}
+\begin{scope}[xshift=8.4cm]
+\node[pt, label=below:$1$] (1) at (0,0) {}; \node[pt, label=below:$2$] (2) at (1.6,0) {}; \node[pt, label=above:$3$] (3) at (0.8,1.3) {};
+\draw (1) to[bend left=15] (2); \draw (1) to[bend right=15] (2);
+\draw (2) to[bend left=15] (3); \draw (2) to[bend right=15] (3);
+\node at (0.8,-1) {$\delta^2 = 0$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
 \begin{corollaire*}[Grothendieck, page 56, et la table de l'édition]
 Soient $R$ et $R'$ deux partitions des $k$ indices, à $s$ et $s'$ blocs, dont la borne supérieure est la partition grossière, et $\delta_R = \prod_{P \in R} \delta_P$. Alors $s + s' \leqslant k + 1$, et $\delta_R\,\delta_{R'}$ vaut la petite diagonale si $s + s' = k + 1$, $\chi\, y_1 \cdots y_k$ si $s + s' = k$, et $0$ si $s + s' < k$. Avec un bloc marqué d'un point, $y_j\,\delta_R\,\delta_{R'}$ vaut $y_1 \cdots y_k$ si $s + s' = k + 1$ et $0$ sinon ; avec deux, le produit est nul.
 \end{corollaire*}

@@ -10,6 +10,23 @@ Soit $K$ un corps où $2 \neq 0$, et $i \in K$ avec $i^2 = -1$. Si $z \mapsto az
 Les quatre points sont distincts, puisque $2 \neq 0$. Si $a = 0$, l'image de $0$ est $-1$, qui n'est aucun des quatre points. Sinon l'application est injective, donc permute les quatre points, et conserve leur somme, qui vaut~$1$ ; or elle la change en $a \cdot 1 + 4(a - 1) = 5a - 4$. D'où $5(a - 1) = 0$.
 \end{proof}
 
+Les six points de $\Delta$ sont les sommets d'un octaèdre dont les sommets opposés sont $0$ et $\infty$, $1$ et $-1$, $i$ et $-i$. Le fixateur de deux sommets non opposés, $\infty$ et $-1$ (cerclés), permute les quatre autres.
+\begin{center}
+\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\small}]
+\coordinate (inf) at (0,1.9); \coordinate (z) at (0,-1.9);
+\coordinate (p1) at (1.9,-0.25); \coordinate (m1) at (-1.9,0.25);
+\coordinate (pi) at (0.7,0.55); \coordinate (mi) at (-0.7,-0.55);
+\draw (m1)--(mi)--(p1); \draw[densely dashed] (p1)--(pi)--(m1);
+\foreach \v in {m1,mi,p1} { \draw (inf)--(\v); \draw (z)--(\v); }
+\draw[densely dashed] (inf)--(pi); \draw[densely dashed] (z)--(pi);
+\foreach \v in {inf,z,p1,m1,pi,mi} \fill (\v) circle (1.5pt);
+\draw (inf) circle (4pt); \draw (m1) circle (4pt);
+\node[above=3pt] at (inf) {$\infty$}; \node[below=2pt] at (z) {$0$};
+\node[right=2pt] at (p1) {$1$}; \node[left=3pt] at (m1) {$-1$};
+\node at (0.95,0.13) {$i$}; \node at (-1.02,-0.1) {$-i$};
+\end{tikzpicture}
+\end{center}
+
 \begin{contrexemple}[énoncé de l'édition, d'après la note de la lecture à la page 49]\label{ce:64-car5}
 En caractéristique~$5$, le fixateur de $\infty$ et $-1$ n'est pas trivial : $z \mapsto 2z + 1$ permute $\{0, 1, i, -i\}$. Sur $\mathbf F_5$, avec $i = 2$, la configuration $\Delta$ est $\mathbf P^1(\mathbf F_5)$ tout entier ; les bijections de $\mathbf P^1(\mathbf F_5)$ induites par $\mathrm{GL}_2(\mathbf F_5)$, qui préservent toutes $\Delta$, sont au nombre de $120$ et non de $24$, et le fixateur de $\infty$ et $-1$ est formé de l'identité et des $z \mapsto az + (a - 1)$ pour $a = 2, 3, 4$.
 \end{contrexemple}

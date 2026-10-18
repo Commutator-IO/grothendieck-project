@@ -16,6 +16,24 @@ La cote 86, \emph{[Polyèdres réguliers] : notes manuscrites (s.d.)}, trente-de
 Ce sont des énoncés finis sur l'icosaèdre, vérifiés par le noyau de Lean (\texttt{decide}), sans évaluation compilée. Pour~(2), on étiquette les trente arêtes par $\{0, \ldots, 4\}$ et l'on vérifie que deux arêtes ont la même étiquette si et seulement si la direction de l'une est celle de l'autre, de son image par $\rho$ ou de son image par $\rho^2$ : les étiquettes sont alors les orbites, et l'étiquetage n'est qu'un nom donné à chacune.
 \end{proof}
 
+L'icosaèdre des conventions, projeté depuis le sommet $11$ : $0$ au centre, le pentagone $1, \ldots, 5$ autour, le pentagone $6, \ldots, 10$ à l'extérieur, et $11$ à l'infini, joint à $6, \ldots, 10$ par les segments radiaux. En trait épais, l'un des cinq trièdres : les six arêtes $\{0,1\}$, $\{9,11\}$, $\{3,4\}$, $\{6,7\}$, $\{2,8\}$, $\{5,10\}$, deux à deux sans sommet commun, en trois directions formées chacune de deux arêtes antipodales.
+\begin{center}
+\begin{tikzpicture}[x=1cm, y=1cm, every node/.style={font=\small}]
+\coordinate (v0) at (0,0);
+\foreach \k in {1,...,5} { \coordinate (v\k) at ({90-72*(\k-1)}:1.15); }
+\coordinate (v7) at ({90-36}:2.5); \coordinate (v8) at ({90-108}:2.5); \coordinate (v9) at ({90-180}:2.5);
+\coordinate (v10) at ({90-252}:2.5); \coordinate (v6) at ({90-324}:2.5);
+\foreach \a/\b in {0/1,0/2,0/3,0/4,0/5,1/2,2/3,3/4,4/5,5/1,1/6,1/7,2/7,2/8,3/8,3/9,4/9,4/10,5/10,5/6,6/7,7/8,8/9,9/10,10/6} \draw[black!55] (v\a)--(v\b);
+\foreach \k/\ang in {7/54,8/-18,9/-90,10/-162,6/126} { \draw[black!55] (v\k)--(\ang:3.15); \node[black!55, font=\scriptsize] at (\ang:3.4) {$11$}; }
+\foreach \a/\b in {0/1,3/4,6/7,2/8,5/10} \draw[line width=1.6pt] (v\a)--(v\b);
+\draw[line width=1.6pt] (v9)--(-90:3.15);
+\foreach \k in {0,...,10} \fill (v\k) circle (1.5pt);
+\node[below right=-1pt] at (v0) {$0$};
+\foreach \k in {1,...,5} { \node at ({90-72*(\k-1)+20}:1.3) {$\k$}; }
+\foreach \k/\ang in {7/54,8/-18,9/-90,10/-162,6/126} { \node at (\ang+12:2.75) {$\k$}; }
+\end{tikzpicture}
+\end{center}
+
 \begin{encadre}
 \begin{theoreme}[Grothendieck, pages 20 à 25, l'action sur les trièdres\piste{86-combinatorial-five-triedres}]
 \begin{enumerate}
