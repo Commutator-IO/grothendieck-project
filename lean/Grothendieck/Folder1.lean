@@ -1232,9 +1232,8 @@ theorem corollaire2 (A B : Matrix n n ℂ) (k : ℕ) :
       (Real.sum_sqrt_mul_sqrt_le _ ha0 hb0))
   have hPk := (Complex.nonneg_iff.1 (alpha_nonneg hP k)).1
   have hQk := (Complex.nonneg_iff.1 (alpha_nonneg hQ k)).1
-  calc ‖alpha k T‖ ^ 2 ≤ (√((alpha k P).re) * √((alpha k Q).re)) ^ 2 :=
-        pow_le_pow_left₀ (norm_nonneg _) key 2
-    _ = _ := by rw [mul_pow, Real.sq_sqrt hPk, Real.sq_sqrt hQk]
+  exact (pow_le_pow_left₀ (norm_nonneg _) key 2).trans_eq
+    (by rw [mul_pow, Real.sq_sqrt hPk, Real.sq_sqrt hQk])
 
 theorem norm_alpha_le (A B : Matrix n n ℂ) (k : ℕ) :
     ‖alpha k (A + B)‖ ≤ √((alpha k (CFC.abs A + CFC.abs B)).re) *
@@ -1268,13 +1267,10 @@ theorem corollaire3 (A B : Matrix n n ℂ) :
     refine Finset.sum_le_sum fun k _ => ?_
     nlinarith [Real.sq_sqrt (ha k), Real.sq_sqrt (hb k), sq_nonneg (√((alpha k P).re) -
       √((alpha k Q).re))]
-  · have h2 := h1.trans (Real.sum_sqrt_mul_sqrt_le _ ha hb)
-    calc ‖det (1 + (A + B))‖ ^ 2 ≤ (√(∑ k ∈ Finset.range (Fintype.card n + 1), (alpha k P).re) *
-          √(∑ k ∈ Finset.range (Fintype.card n + 1), (alpha k Q).re)) ^ 2 :=
-          pow_le_pow_left₀ (norm_nonneg _) h2 2
-      _ = _ := by
-        rw [mul_pow, Real.sq_sqrt (Finset.sum_nonneg fun k _ => ha k),
-          Real.sq_sqrt (Finset.sum_nonneg fun k _ => hb k)]
+  · refine (pow_le_pow_left₀ (norm_nonneg _) (h1.trans
+      (Real.sum_sqrt_mul_sqrt_le _ ha hb)) 2).trans_eq ?_
+    rw [mul_pow, Real.sq_sqrt (Finset.sum_nonneg fun k _ => ha k),
+      Real.sq_sqrt (Finset.sum_nonneg fun k _ => hb k)]
 
 end Fredholm
 
