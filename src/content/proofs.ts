@@ -323,6 +323,19 @@ export const PROOFS: Proof[] = [
     theorems: ["biorder", "le_swap", "intervals_axioms", "intervals_segModel", "example_segModel"],
   },
   {
+    folder: '156-2',
+    batch: 1,
+    page: '14–15',
+    name: 'The rives of a closed subset: Riv(A, X) → Comp(Ã)',
+    statement:
+      'With Riv(A, X) the germs along A of the parts of V ∖ A open and closed in V ∖ A, and Ã the relative Stone spectrum of (j_*𝔽₂)|_A (points (x, χ), x ∈ A, χ a point of the spectrum of the stalk), the canonical map (*) Riv(A, X) → Comp(Ã) is a morphism of Boolean algebras with clopen values, and it is injective; Riv(A, X) = 0 iff A is open.',
+    found:
+      'Holds as the reading says, with no hypothesis: A need not be closed and X is arbitrary. Distinct germs at x are separated by evaluation along an ultrafilter finer than the neighbourhoods of x in X ∖ A. The bijectivity for X paracompact, the identification of Comp(Ã) with the sections over A, and the cut space of pp. 16–17 are not formalised.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder156_2.lean',
+    theorems: ['toComp_injective', 'toComp_mul', 'toComp_one', 'toSpecSet_compl', 'isOpen_toSpecSet', 'riv_one_eq_zero_iff'],
+  },
+  {
     folder: '156-3',
     batch: 1,
     page: '11–15',
