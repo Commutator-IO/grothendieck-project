@@ -4,6 +4,11 @@ import Mathlib.Data.Set.Card
 import Mathlib.Tactic.Group
 import Mathlib.Algebra.Group.ULift
 import Mathlib.Algebra.Group.TypeTags.Basic
+import Mathlib.CategoryTheory.FinCategory.Basic
+import Mathlib.CategoryTheory.Filtered.Basic
+import Mathlib.CategoryTheory.Endomorphism
+import Mathlib.Data.Fintype.Pigeonhole
+import Mathlib.SetTheory.Cardinal.Finite
 
 /-!
 # Folder 158, Proposition 1 (§5.1)
@@ -83,6 +88,29 @@ least object and no presentation of `π₁` (Proposition 1, p. 19): `ψ^p u = ψ
 `p = q` for every `u` because `uM ∋ ψ`. In the other case, that the minimal elements form
 `eM`, stable under left multiplication, is what makes `M → Perm(eM)` well defined, the step
 p. 41 leaves under its illegible words. The `H¹(−, ℚ)` variant of p. 39 is not formalised.
+## Finite categories (pages 50 to 53), finding `158-finite-category-cofiltered`
+
+A presheaf is `Psh X`, with the same cocycle form of « simply connected »; (H), `HypH X`,
+says every connected presheaf has a simply connected category of elements.
+
+* `common_ancestor` (the doubling lemma, any category): under (H), two elements of a
+  connected presheaf have a common ancestor — otherwise `F` glued to itself along the two
+  disjoint subpresheaves they generate is connected and carries a `ℤ`-cocycle that is not a
+  coboundary.
+* `cone_objs_of_H`, `square_of_H`: (H) with `X` connected gives cones over pairs of objects
+  (terminal presheaf) and squares over cospans (representables) — the step « (H) ⇒
+  pseudo-cofiltrant » that p. 53 asserts without argument, for any category.
+* `isCofiltered_of_H`: a finite, non-empty, connected category satisfying (H) is cofiltered
+  (Mathlib's `IsCofiltered`). Proof as on pp. 50–52: an object `e` mapping to every object, a
+  minimal idempotent `p` of `End e` (Proposition 1's step 1), the local system
+  `L(z) = Hom(e, z) p` on the least objects (bijective transitions by counting), constant by
+  (H), which gives `p c f = p c g`.
+* `discrete_counterexample`: the discrete category on two objects satisfies (H) and is not
+  cofiltered.
+
+What the formalisation found: as read (« a finite category X such that every connected
+presheaf… ») the statement is false for disconnected `X`; with `X` connected, as the page
+must intend, it holds, and the unargued step holds for every small category.
 -/
 
 namespace Grothendieck.Folder158
@@ -609,5 +637,438 @@ if every connected right `M`-set has a simply connected category of elements. -/
 theorem cofiltrant_iff_simplyConnected {ψ : M} (hψ : Minimal ψ) :
     Cofiltrant M ↔ ∀ X : RSet M, X.Connected → X.SimplyConnected :=
   ⟨simplyConnected_of_cofiltrant, cofiltrant_of_simplyConnected hψ⟩
+
+open CategoryTheory
+
+/-! ## Finite categories (pages 50 to 53), finding `158-finite-category-cofiltered` -/
+
+universe v w
+
+/-- A presheaf on `X`: `map k : F z → F z'` for `k : z' ⟶ z`. Its category of elements has
+the pairs `(z, t)` as objects and `k : (z', F k t) → (z, t)` as arrows. -/
+structure Psh (X : Type w) [Category.{v} X] where
+  /-- The value at an object. -/
+  obj : X → Type v
+  /-- The restriction along an arrow. -/
+  map : ∀ {z z' : X}, (z' ⟶ z) → obj z → obj z'
+  map_id : ∀ z t, map (𝟙 z) t = t
+  map_comp : ∀ {z z' z'' : X} (k' : z'' ⟶ z') (k : z' ⟶ z) t, map (k' ≫ k) t = map k' (map k t)
+
+namespace Psh
+
+variable {X : Type w} [Category.{v} X]
+
+/-- The category of elements of `F` is connected. -/
+def Connected (F : Psh X) : Prop :=
+  Nonempty (Σ z, F.obj z) ∧ ∀ a b : Σ z, F.obj z,
+    Relation.EqvGen (fun a b : Σ z, F.obj z => ∃ k : b.1 ⟶ a.1, b.2 = F.map k a.2) a b
+
+/-- The category of elements of `F` is simply connected: every functor from it to a group,
+i.e. every cocycle, is a coboundary. -/
+def SimplyConnected (F : Psh X) : Prop :=
+  ∀ (G : Type v) [Group G] (c : ∀ {z z' : X}, (z' ⟶ z) → F.obj z → G),
+    (∀ z t, c (𝟙 z) t = 1) →
+    (∀ {z z' z'' : X} (k' : z'' ⟶ z') (k : z' ⟶ z) t,
+      c (k' ≫ k) t = c k t * c k' (F.map k t)) →
+    ∃ g : ∀ z, F.obj z → G, ∀ {z z' : X} (k : z' ⟶ z) t, c k t = g z t * (g z' (F.map k t))⁻¹
+
+/-- The terminal presheaf; its category of elements is `X`. -/
+def terminal (X : Type w) [Category.{v} X] : Psh X where
+  obj _ := PUnit
+  map _ _ := PUnit.unit
+  map_id _ _ := rfl
+  map_comp _ _ _ := rfl
+
+/-- The representable presheaf `Hom(−, c)`. -/
+def yo {X : Type w} [Category.{v} X] (c : X) : Psh X where
+  obj z := z ⟶ c
+  map k f := k ≫ f
+  map_id _ _ := Category.id_comp _
+  map_comp _ _ _ := Category.assoc _ _ _
+
+theorem yo_connected (c : X) : (yo c).Connected := by
+  have h : ∀ a : Σ z, (yo c).obj z, Relation.EqvGen
+      (fun a b : Σ z, (yo c).obj z => ∃ k : b.1 ⟶ a.1, b.2 = (yo c).map k a.2) ⟨c, 𝟙 c⟩ a :=
+    fun a => Relation.EqvGen.rel _ _ ⟨a.2, (Category.comp_id _).symm⟩
+  exact ⟨⟨⟨c, 𝟙 c⟩⟩, fun a b => ((h a).symm _ _).trans _ _ _ (h b)⟩
+
+end Psh
+
+/-- Hypothesis (H): every connected presheaf has a simply connected category of elements. -/
+def HypH (X : Type w) [Category.{v} X] : Prop :=
+  ∀ F : Psh X, F.Connected → F.SimplyConnected
+
+/-- A predicate that respects a relation in both directions respects its equivalence
+closure. -/
+theorem eqvGen_iff {α : Type*} {r : α → α → Prop} {Q : α → Prop}
+    (h : ∀ a b, r a b → (Q a ↔ Q b)) {a b : α} (hab : Relation.EqvGen r a b) : Q a ↔ Q b := by
+  induction hab with
+  | rel a b hr => exact h a b hr
+  | refl => exact Iff.rfl
+  | symm _ _ _ ih => exact ih.symm
+  | trans _ _ _ _ _ ih₁ ih₂ => exact ih₁.trans ih₂
+
+section Doubling
+
+variable {X : Type w} [Category.{v} X]
+
+open Classical in
+/-- **The doubling lemma.** Under (H), any two elements `ξ`, `η` of a connected presheaf
+have a common ancestor. Otherwise the subpresheaves `T₁`, `T₂` they generate are disjoint,
+the presheaf `F ⊔_{T₁ ⊔ T₂} F` (two copies of `F` glued along `T₁ ⊔ T₂`) is connected, and
+counting the arrows from `T₁` into the second copy is a `ℤ`-valued cocycle that is not a
+coboundary. -/
+theorem common_ancestor (H : HypH X) (F : Psh X) (hF : F.Connected) {a b : X}
+    (ξ : F.obj a) (η : F.obj b) :
+    ∃ (w : X) (u : w ⟶ a) (u' : w ⟶ b), F.map u ξ = F.map u' η := by
+  by_contra hdis
+  push Not at hdis
+  -- the subpresheaves generated by `ξ` and `η`
+  let T₁ : ∀ z, F.obj z → Prop := fun z t => ∃ u : z ⟶ a, t = F.map u ξ
+  let T₂ : ∀ z, F.obj z → Prop := fun z t => ∃ u : z ⟶ b, t = F.map u η
+  have T₁map : ∀ {z z'} (k : z' ⟶ z) t, T₁ z t → T₁ z' (F.map k t) := by
+    rintro z z' k t ⟨u, rfl⟩; exact ⟨k ≫ u, (F.map_comp k u ξ).symm⟩
+  have T₂map : ∀ {z z'} (k : z' ⟶ z) t, T₂ z t → T₂ z' (F.map k t) := by
+    rintro z z' k t ⟨u, rfl⟩; exact ⟨k ≫ u, (F.map_comp k u η).symm⟩
+  have disj : ∀ z t, T₁ z t → T₂ z t → False := by
+    rintro z t ⟨u, rfl⟩ ⟨u', hu'⟩; exact hdis z u u' hu'
+  let T : ∀ z, F.obj z → Prop := fun z t => T₁ z t ∨ T₂ z t
+  have Tmap : ∀ {z z'} (k : z' ⟶ z) t, T z t → T z' (F.map k t) := fun k t h =>
+    h.imp (T₁map k t) (T₂map k t)
+  -- the doubled presheaf
+  let D : Psh X :=
+    { obj := fun z => {q : F.obj z × Bool // T z q.1 → q.2 = false}
+      map := fun {z z'} k q => ⟨(F.map k q.1.1, if T z' (F.map k q.1.1) then false else q.1.2),
+        fun h => by simp [h]⟩
+      map_id := fun z q => by
+        refine Subtype.ext (Prod.ext (F.map_id _ _) ?_)
+        simp only [F.map_id]
+        by_cases h : T z q.1.1
+        · simp [h, q.2 h]
+        · simp [h]
+      map_comp := fun k' k q => by
+        refine Subtype.ext (Prod.ext (F.map_comp _ _ _) ?_)
+        simp only [F.map_comp]
+        by_cases h'' : T _ (F.map k' (F.map k q.1.1))
+        · simp [h'']
+        · have h' : ¬ T _ (F.map k q.1.1) := fun h => h'' (Tmap k' _ h)
+          simp [h'', h'] }
+  have Dpos : ∀ {z z'} (k : z' ⟶ z) (t : F.obj z) (bb : Bool) (hv : T z t → bb = false),
+      T z' (F.map k t) → D.map k ⟨(t, bb), hv⟩ = ⟨(F.map k t, false), fun _ => rfl⟩ :=
+    fun k t bb hv h => Subtype.ext (Prod.ext rfl (by simp [D, h]))
+  have Dneg : ∀ {z z'} (k : z' ⟶ z) (t : F.obj z) (bb : Bool) (hv : T z t → bb = false)
+      (h : ¬ T z' (F.map k t)), D.map k ⟨(t, bb), hv⟩ = ⟨(F.map k t, bb), fun h' => absurd h' h⟩ :=
+    fun k t bb hv h => Subtype.ext (Prod.ext rfl (by simp [D, h]))
+  have Tξ : T a ξ := Or.inl ⟨𝟙 a, (F.map_id _ _).symm⟩
+  have Tη : T₂ b η := ⟨𝟙 b, (F.map_id _ _).symm⟩
+  -- `D` is connected
+  let base : Σ z, D.obj z := ⟨a, ⟨(ξ, false), fun _ => rfl⟩⟩
+  let RD := fun x y : Σ z, D.obj z => ∃ k : y.1 ⟶ x.1, y.2 = D.map k x.2
+  let P : (Σ z, F.obj z) → Prop := fun s => ∀ (bb : Bool) (hv : T s.1 s.2 → bb = false),
+    Relation.EqvGen RD ⟨s.1, ⟨(s.2, bb), hv⟩⟩ base
+  have Pinv : ∀ s s', (fun x y : Σ z, F.obj z => ∃ k : y.1 ⟶ x.1, y.2 = F.map k x.2) s s' →
+      (P s ↔ P s') := by
+    rintro ⟨z, t⟩ ⟨z', t'⟩ ⟨k, hk⟩
+    simp only at k hk
+    subst hk
+    constructor
+    · intro hP bb' hv'
+      by_cases hT' : T z' (F.map k t)
+      · obtain rfl := hv' hT'
+        refine (Relation.EqvGen.symm _ _ (Relation.EqvGen.rel _ _ ⟨k, ?_⟩)).trans _ _ _
+          (hP false fun _ => rfl)
+        exact (Dpos k t false (fun _ => rfl) hT').symm
+      · have hT : ¬ T z t := fun h => hT' (Tmap k t h)
+        refine (Relation.EqvGen.symm _ _ (Relation.EqvGen.rel _ _ ⟨k, ?_⟩)).trans _ _ _
+          (hP bb' fun h => absurd h hT)
+        exact (Dneg k t bb' _ hT').symm
+    · intro hP' bb hv
+      exact (Relation.EqvGen.rel _ _ ⟨k, rfl⟩).trans _ _ _
+        (hP' (D.map k ⟨(t, bb), hv⟩).1.2 (D.map k ⟨(t, bb), hv⟩).2)
+  have Pall : ∀ s, P s := fun s => by
+    refine (eqvGen_iff Pinv (hF.2 ⟨a, ξ⟩ s)).1 ?_
+    intro bb hv
+    obtain rfl := hv Tξ
+    exact Relation.EqvGen.refl _
+  have hD : D.Connected := by
+    refine ⟨⟨base⟩, fun x y => ?_⟩
+    have hx := Pall ⟨x.1, x.2.1.1⟩ x.2.1.2 x.2.2
+    have hy := Pall ⟨y.1, y.2.1.1⟩ y.2.1.2 y.2.2
+    exact hx.trans _ _ _ (hy.symm _ _)
+  -- the cocycle
+  let ind : ∀ {z z' : X}, (z' ⟶ z) → D.obj z → ℤ := fun {z z'} k q =>
+    if q.1.2 = true ∧ T₁ z' (F.map k q.1.1) then 1 else 0
+  have ind_id : ∀ z (q : D.obj z), ind (𝟙 z) q = 0 := by
+    intro z q
+    simp only [ind, F.map_id]
+    split_ifs with h
+    · rw [q.2 (Or.inl h.2)] at h
+      exact absurd h.1 Bool.false_ne_true
+    · rfl
+  have ind_comp : ∀ {z z' z'' : X} (k' : z'' ⟶ z') (k : z' ⟶ z) (q : D.obj z),
+      ind (k' ≫ k) q = ind k q + ind k' (D.map k q) := by
+    intro z z' z'' k' k q
+    obtain ⟨⟨t, bb⟩, hv⟩ := q
+    by_cases hT' : T z' (F.map k t)
+    · rw [Dpos k t bb hv hT']
+      have e : T₁ z'' (F.map (k' ≫ k) t) ↔ T₁ z' (F.map k t) := by
+        refine ⟨fun h => hT'.resolve_right fun h₂ => disj _ _ h ?_, fun h => ?_⟩
+        · rw [F.map_comp]; exact T₂map k' _ h₂
+        · rw [F.map_comp]; exact T₁map k' _ h
+      simp only [ind, e]
+      simp
+    · rw [Dneg k t bb hv hT']
+      have h₁ : ¬ T₁ z' (F.map k t) := fun h => hT' (Or.inl h)
+      simp only [ind, F.map_comp, h₁]
+      simp
+  let c : ∀ {z z' : X}, (z' ⟶ z) → D.obj z → Multiplicative (ULift.{v} ℤ) :=
+    fun k q => Multiplicative.ofAdd (ULift.up (ind k q))
+  obtain ⟨g, hg⟩ := H D hD _ c (fun z q => by simp only [c, ind_id]; rfl)
+    (fun k' k q => by simp only [c, ind_comp]; rfl)
+  let gz : ∀ z, D.obj z → ℤ := fun z q => (Multiplicative.toAdd (g z q)).down
+  have key : ∀ {z z' : X} (k : z' ⟶ z) (q : D.obj z), ind k q = gz z q - gz z' (D.map k q) := by
+    intro z z' k q
+    have := congrArg (fun m : Multiplicative (ULift.{v} ℤ) => (Multiplicative.toAdd m).down)
+      (hg k q)
+    simpa [c, gz, sub_eq_add_neg] using this
+  -- the difference between the two copies, off `T`
+  let vt : ∀ z (t : F.obj z), ¬ T z t → Bool → D.obj z := fun z t hT bb =>
+    ⟨(t, bb), fun h => absurd h hT⟩
+  let hh : ∀ z (t : F.obj z), ¬ T z t → ℤ := fun z t hT =>
+    gz z (vt z t hT true) - gz z (vt z t hT false)
+  have R1 : ∀ {z z' : X} (k : z' ⟶ z) (t : F.obj z) (hT : ¬ T z t)
+      (h' : ¬ T z' (F.map k t)), hh z t hT = hh z' (F.map k t) h' := by
+    intro z z' k t hT h'
+    have k1 := key k (vt z t hT true)
+    have k0 := key k (vt z t hT false)
+    rw [Dneg k t _ _ h'] at k1 k0
+    have n1 : ¬ T₁ z' (F.map k t) := fun h => h' (Or.inl h)
+    simp only [ind, vt, n1, and_false, ite_false] at k1 k0
+    simp only [hh, vt]
+    omega
+  have R2 : ∀ {z z' : X} (k : z' ⟶ z) (t : F.obj z) (hT : ¬ T z t)
+      (h' : T₁ z' (F.map k t)), hh z t hT = 1 := by
+    intro z z' k t hT h'
+    have k1 := key k (vt z t hT true)
+    have k0 := key k (vt z t hT false)
+    rw [Dpos k t _ _ (Or.inl h')] at k1 k0
+    simp only [ind, vt, h', and_true, ite_true, Bool.false_eq_true, ite_false] at k1 k0
+    simp only [hh, vt]
+    omega
+  have R3 : ∀ {z z' : X} (k : z' ⟶ z) (t : F.obj z) (hT : ¬ T z t)
+      (h' : T₂ z' (F.map k t)), hh z t hT = 0 := by
+    intro z z' k t hT h'
+    have k1 := key k (vt z t hT true)
+    have k0 := key k (vt z t hT false)
+    rw [Dpos k t _ _ (Or.inr h')] at k1 k0
+    have n1 : ¬ T₁ z' (F.map k t) := fun h => disj _ _ h h'
+    simp only [ind, vt, n1, and_false, ite_false] at k1 k0
+    simp only [hh, vt]
+    omega
+  -- propagate « in `T₁`, or off `T` with difference `1` » along `F`
+  let Q : (Σ z, F.obj z) → Prop := fun s => T₁ s.1 s.2 ∨ ∃ hT : ¬ T s.1 s.2, hh s.1 s.2 hT = 1
+  have Qinv : ∀ s s', (fun x y : Σ z, F.obj z => ∃ k : y.1 ⟶ x.1, y.2 = F.map k x.2) s s' →
+      (Q s ↔ Q s') := by
+    rintro ⟨z, t⟩ ⟨z', t'⟩ ⟨k, hk⟩
+    simp only at k hk
+    subst hk
+    constructor
+    · rintro (h | ⟨hT, h⟩)
+      · exact Or.inl (T₁map k t h)
+      · by_cases h₁ : T₁ z' (F.map k t)
+        · exact Or.inl h₁
+        by_cases h₂ : T₂ z' (F.map k t)
+        · exact absurd (h.symm.trans (R3 k t hT h₂)) one_ne_zero
+        have h' : ¬ T z' (F.map k t) := fun h => h.elim h₁ h₂
+        exact Or.inr ⟨h', (R1 k t hT h').symm.trans h⟩
+    · rintro (h | ⟨hT', h⟩)
+      · by_cases hT : T z t
+        · exact Or.inl (hT.resolve_right fun h₂ => disj _ _ h (T₂map k t h₂))
+        · exact Or.inr ⟨hT, R2 k t hT h⟩
+      · have hT : ¬ T z t := fun h => hT' (Tmap k t h)
+        exact Or.inr ⟨hT, (R1 k t hT hT').trans h⟩
+  have hQ := (eqvGen_iff Qinv (hF.2 ⟨a, ξ⟩ ⟨b, η⟩)).1 (Or.inl ⟨𝟙 a, (F.map_id _ _).symm⟩)
+  rcases hQ with h | ⟨hT, -⟩
+  · exact disj _ _ h Tη
+  · exact hT (Or.inr Tη)
+
+/-- **The step « (H) ⇒ pseudo-cofiltrant » of page 53**, for any category: (H) and `X`
+connected give cones over pairs of objects… -/
+theorem cone_objs_of_H (H : HypH X) (hX : (Psh.terminal X).Connected) (x y : X) :
+    ∃ (w : X) (_ : w ⟶ x), Nonempty (w ⟶ y) := by
+  obtain ⟨w, u, u', -⟩ := common_ancestor H _ hX (a := x) (b := y) PUnit.unit PUnit.unit
+  exact ⟨w, u, ⟨u'⟩⟩
+
+/-- … and (H) alone gives squares over cospans. -/
+theorem square_of_H (H : HypH X) {x y c : X} (u : x ⟶ c) (v : y ⟶ c) :
+    ∃ (w : X) (u' : w ⟶ x) (v' : w ⟶ y), u' ≫ u = v' ≫ v :=
+  common_ancestor H (Psh.yo c) (Psh.yo_connected c) u v
+
+end Doubling
+
+section Finite
+
+variable {X : Type v} [SmallCategory X] [FinCategory X]
+
+/-- A finite category with cones over pairs has an object mapping to every object. -/
+theorem exists_least (hne : Nonempty X)
+    (hc : ∀ x y : X, ∃ (w : X) (_ : w ⟶ x), Nonempty (w ⟶ y)) :
+    ∃ e : X, ∀ z : X, Nonempty (e ⟶ z) := by
+  classical
+  have key : ∀ s : Finset X, ∃ e : X, ∀ z ∈ s, Nonempty (e ⟶ z) := by
+    intro s
+    induction s using Finset.induction_on with
+    | empty => exact ⟨hne.some, by simp⟩
+    | insert a s _ ih =>
+      obtain ⟨e, he⟩ := ih
+      obtain ⟨w, u, ⟨v⟩⟩ := hc e a
+      refine ⟨w, (Finset.forall_mem_insert _ _ _).2 ⟨⟨v⟩, fun z hz => ?_⟩⟩
+      obtain ⟨k⟩ := he z hz
+      exact ⟨u ≫ k⟩
+  obtain ⟨e, he⟩ := key Finset.univ
+  exact ⟨e, fun z => he z (Finset.mem_univ z)⟩
+
+/-- In the monoid `End e` of an object mapping to every object, (H) gives a minimal
+idempotent `p` (finite and pseudo-cofiltered, as in Proposition 1). -/
+theorem exists_minimal_idem (H : HypH X) {e : X} (he : ∀ z : X, Nonempty (e ⟶ z)) :
+    ∃ p : End e, p * p = p ∧ Minimal p := by
+  have hpc : PseudoCofiltrant (End e) := fun u v => by
+    obtain ⟨w, a, b, hab⟩ := square_of_H H u.asHom v.asHom
+    obtain ⟨j⟩ := he w
+    exact ⟨End.of (j ≫ a), End.of (j ≫ b), End.ext (by simp [hab])⟩
+  have : Finite (End e) := Finite.of_equiv _ End.homEquiv.symm
+  obtain ⟨ψ, hψ⟩ := etape1 hpc
+  have hmin : Minimal ψ := fun u => (hψ u).imp fun _ h => h.symm
+  obtain ⟨r, s, hne, hrs⟩ := Finite.exists_ne_map_eq_of_infinite (fun n : ℕ => ψ ^ n)
+  obtain ⟨n, hn, hidem⟩ : ∃ n, 1 ≤ n ∧ ψ ^ n * ψ ^ n = ψ ^ n := by
+    rcases Nat.lt_or_gt_of_ne hne with hlt | hlt
+    · exact exists_idem_pow hlt hrs
+    · exact exists_idem_pow hlt hrs.symm
+  refine ⟨ψ ^ n, hidem, ?_⟩
+  rw [show n = 1 + (n - 1) by omega, pow_add, pow_one]
+  exact hmin.mul _
+
+/-- **Pages 50 to 53, for a connected finite category.** If `X` is finite, non-empty and
+connected, and every connected presheaf on `X` has a simply connected category of elements,
+then `X` is cofiltered. The equalising arrow is `p ≫ c` with `c : e ⟶ x`, `e` mapping to
+every object and `p` a minimal idempotent of `End e`: the local system
+`L(z) = Hom(e, z) p` on the least objects is constant by (H), which forces `p c f = p c g`. -/
+theorem isCofiltered_of_H (H : HypH X) (hX : (Psh.terminal X).Connected) : IsCofiltered X := by
+  classical
+  have hne : Nonempty X := ⟨hX.1.some.1⟩
+  obtain ⟨e, he⟩ := exists_least hne (cone_objs_of_H H hX)
+  obtain ⟨p, hidem, hmin⟩ := exists_minimal_idem H he
+  have hpp : p.asHom ≫ p.asHom = p.asHom := by simpa using congrArg End.asHom hidem
+  -- the local system `L(z) = Hom(e, z) p`
+  let L : X → Type v := fun z => {f : e ⟶ z // p.asHom ≫ f = f}
+  let Lmap : ∀ {z z' : X}, (z ⟶ z') → L z → L z' := fun k ℓ =>
+    ⟨ℓ.1 ≫ k, by rw [← Category.assoc, ℓ.2]⟩
+  have Lsurj : ∀ {z z' : X} (k : z ⟶ z'), Function.Surjective (Lmap k) := by
+    intro z z' k f'
+    obtain ⟨w, a, b, hab⟩ := square_of_H H k f'.1
+    obtain ⟨j⟩ := he w
+    obtain ⟨θ, hθ⟩ := hmin (End.of (j ≫ b))
+    have hθ' : θ.asHom ≫ j ≫ b = p.asHom := by simpa using congrArg End.asHom hθ
+    refine ⟨⟨p.asHom ≫ θ.asHom ≫ j ≫ a, by rw [← Category.assoc, hpp]⟩, Subtype.ext ?_⟩
+    change (p.asHom ≫ θ.asHom ≫ j ≫ a) ≫ k = f'.1
+    calc (p.asHom ≫ θ.asHom ≫ j ≫ a) ≫ k = p.asHom ≫ θ.asHom ≫ j ≫ (a ≫ k) := by
+          simp only [Category.assoc]
+      _ = p.asHom ≫ (θ.asHom ≫ j ≫ b) ≫ f'.1 := by rw [hab]; simp only [Category.assoc]
+      _ = f'.1 := by rw [hθ', ← Category.assoc, hpp, f'.2]
+  -- the least objects, where `L` is a local system
+  let X₀ : X → Prop := fun z => ∀ w, Nonempty (z ⟶ w)
+  have Lbij : ∀ {z z' : X}, X₀ z → X₀ z' → ∀ k : z ⟶ z', Function.Bijective (Lmap k) := by
+    intro z z' hz hz' k
+    obtain ⟨r⟩ := hz' z
+    have h₁ := Nat.card_le_card_of_surjective _ (Lsurj k)
+    have h₂ := Nat.card_le_card_of_surjective _ (Lsurj r)
+    exact (Lsurj k).bijective_of_nat_card_le (le_antisymm h₁ h₂).ge
+  have he₀ : X₀ e := he
+  let Lequiv : ∀ {z z' : X}, (z ⟶ z') → X₀ z → X₀ z' → (L z ≃ L z') := fun k hz hz' =>
+    Equiv.ofBijective _ (Lbij hz hz' k)
+  -- the presheaf of least objects: its category of elements is the full subcategory `X₀`
+  let S₀ : Psh X :=
+    { obj := fun z => {_u : PUnit.{v+1} // X₀ z}
+      map := fun k q => ⟨PUnit.unit, fun w => (q.2 w).map (k ≫ ·)⟩
+      map_id := fun _ _ => rfl
+      map_comp := fun _ _ _ => rfl }
+  have hS₀ : S₀.Connected := by
+    let base : Σ z, S₀.obj z := ⟨e, ⟨PUnit.unit, he₀⟩⟩
+    have hb : ∀ x : Σ z, S₀.obj z, Relation.EqvGen
+        (fun a b : Σ z, S₀.obj z => ∃ k : b.1 ⟶ a.1, b.2 = S₀.map k a.2) base x := fun x => by
+      obtain ⟨k⟩ := x.2.2 e
+      exact Relation.EqvGen.rel _ _ ⟨k, Subsingleton.elim _ _⟩
+    exact ⟨⟨base⟩, fun x y => ((hb x).symm _ _).trans _ _ _ (hb y)⟩
+  -- trivialise `L` on `X₀` with (H)
+  let jz : ∀ z, e ⟶ z := fun z => (he z).some
+  let β : ∀ z, X₀ z → (L z ≃ L e) := fun z hz => (Lequiv (jz z) he₀ hz).symm
+  let c : ∀ {z z' : X}, (z' ⟶ z) → S₀.obj z → Equiv.Perm (L e) := fun {z z'} k q =>
+    ((β z' (S₀.map k q).2).symm.trans (Lequiv k (S₀.map k q).2 q.2)).trans (β z q.2)
+  have Lid : ∀ {z} (ℓ : L z), Lmap (𝟙 z) ℓ = ℓ := fun ℓ => Subtype.ext (Category.comp_id _)
+  have Lcomp : ∀ {z z' z''} (k' : z'' ⟶ z') (k : z' ⟶ z) (ℓ : L z''),
+      Lmap (k' ≫ k) ℓ = Lmap k (Lmap k' ℓ) := fun _ _ ℓ =>
+    Subtype.ext (Category.assoc _ _ _).symm
+  obtain ⟨g, hg⟩ := H S₀ hS₀ (Equiv.Perm (L e)) c
+    (fun z q => Equiv.ext fun ℓ => by
+      simp only [c, Equiv.trans_apply, Lequiv, Equiv.ofBijective_apply, Lid,
+        Equiv.apply_symm_apply, Equiv.Perm.one_apply])
+    (fun k' k q => Equiv.ext fun ℓ => by
+      simp only [c, Equiv.trans_apply, Lequiv, Equiv.ofBijective_apply, Lcomp,
+        Equiv.Perm.mul_apply, Equiv.symm_apply_apply])
+  let ψE : ∀ z, X₀ z → (L z ≃ L e) := fun z hz => (β z hz).trans (g z ⟨PUnit.unit, hz⟩)⁻¹
+  have ψinv : ∀ {z z' : X} (k : z' ⟶ z) (hz : X₀ z) (hz' : X₀ z') (ℓ : L z'),
+      ψE z hz (Lmap k ℓ) = ψE z' hz' ℓ := by
+    intro z z' k hz hz' ℓ
+    have h := congrArg (fun σ : Equiv.Perm (L e) => σ (β z' hz' ℓ)) (hg k ⟨PUnit.unit, hz⟩)
+    simp only [c, Equiv.trans_apply, Lequiv, Equiv.ofBijective_apply, Equiv.symm_apply_apply,
+      Equiv.Perm.mul_apply] at h
+    simp only [ψE, Equiv.trans_apply]
+    rw [h]
+    exact Equiv.symm_apply_apply _ _
+  -- evaluation: `Φ(z, u)(s) = ψE⁻¹(s) ≫ u` depends only on the class of `(z, u)` over `y`
+  have Φinv : ∀ {y z z' : X} (k : z' ⟶ z) (hz : X₀ z) (hz' : X₀ z') (u : z ⟶ y) (s : L e),
+      ((ψE z' hz').symm s).1 ≫ k ≫ u = ((ψE z hz).symm s).1 ≫ u := by
+    intro y z z' k hz hz' u s
+    have h : (ψE z hz).symm s = Lmap k ((ψE z' hz').symm s) := by
+      rw [Equiv.symm_apply_eq, ψinv k hz hz', Equiv.apply_symm_apply]
+    rw [h, ← Category.assoc]
+  have hpL : p.asHom ≫ p.asHom = p.asHom := hpp
+  have equal : ∀ {x y : X} (f g : x ⟶ y), ∃ (w : X) (h : w ⟶ x), h ≫ f = h ≫ g := by
+    intro x y f g
+    obtain ⟨c₀⟩ := he x
+    obtain ⟨w, a, b, hab⟩ := square_of_H H (c₀ ≫ f) (c₀ ≫ g)
+    obtain ⟨j⟩ := he w
+    let s := ψE e he₀ ⟨p.asHom, hpL⟩
+    have key : ((ψE e he₀).symm s).1 ≫ c₀ ≫ f = ((ψE e he₀).symm s).1 ≫ c₀ ≫ g := by
+      rw [← Φinv (j ≫ a) he₀ he₀ (c₀ ≫ f) s, ← Φinv (j ≫ b) he₀ he₀ (c₀ ≫ g) s]
+      simp only [Category.assoc, hab]
+    simp only [s, Equiv.symm_apply_apply] at key
+    exact ⟨e, p.asHom ≫ c₀, by simpa only [Category.assoc] using key⟩
+  exact
+    { cone_objs := fun x y => by
+        obtain ⟨w, u, ⟨v⟩⟩ := cone_objs_of_H H hX x y
+        exact ⟨w, u, v, trivial⟩
+      cone_maps := fun _ _ f g => equal f g
+      nonempty := hne }
+
+/-- **The statement as read fails without connectedness.** The discrete category on two
+objects is finite, every presheaf on it (connected or not) has a simply connected category
+of elements, and it is not cofiltered. -/
+theorem discrete_counterexample :
+    HypH (Discrete Bool) ∧ ¬ (Psh.terminal (Discrete Bool)).Connected ∧
+      ¬ IsCofiltered (Discrete Bool) := by
+  refine ⟨fun F _ G _ c c1 _ => ⟨fun _ _ => 1, fun {z z'} k t => ?_⟩, fun h => ?_, fun h => ?_⟩
+  · obtain rfl : z' = z := Discrete.ext (Discrete.eq_of_hom k)
+    obtain rfl : k = 𝟙 _ := Subsingleton.elim _ _
+    rw [c1]; simp
+  · have hQ := (eqvGen_iff (Q := fun s : Σ z, (Psh.terminal (Discrete Bool)).obj z =>
+      s.1.as = true) (fun a b ⟨k, _⟩ => by simp only [Discrete.eq_of_hom k])
+      (h.2 ⟨⟨true⟩, PUnit.unit⟩ ⟨⟨false⟩, PUnit.unit⟩)).1 rfl
+    simp at hQ
+  · obtain ⟨w, u, v, -⟩ := h.cone_objs ⟨true⟩ ⟨false⟩
+    have := (Discrete.eq_of_hom u).symm.trans (Discrete.eq_of_hom v)
+    simp at this
+
+end Finite
 
 end Grothendieck.Folder158

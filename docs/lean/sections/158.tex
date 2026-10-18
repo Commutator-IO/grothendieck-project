@@ -1,4 +1,4 @@
-\section[Cote 158 : monoïdes finis, monoïdes à élément minimal]{Cote 158 : monoïdes finis, monoïdes à élément minimal\protect\verifie{Folder158}}\label{sec:158}
+\section[Cote 158 : monoïdes finis, monoïdes à élément minimal, catégories finies]{Cote 158 : monoïdes finis, monoïdes à élément minimal, catégories finies\protect\verifie{Folder158}}\label{sec:158}
 
 La cote 158, \emph{[Autour des Dérivateurs] : notes manuscrites (s.d.)}, quatre-vingt-cinq pages que l'inventaire date \q{[vers 1990-1991]}, étudie une seule question : une petite catégorie $X$ est-elle cofiltrante dès que tout objet $0$-connexe du topos des préfaisceaux sur $X$ est $1$-connexe ? Les pages~44 à~53, sous sa pagination~1 à~8, traitent le cas fini, en commençant par celui d'un monoïde, c'est-à-dire d'une catégorie à un objet. La proposition~1 est énoncée page~44 et démontrée jusqu'au haut de la page~46, qui conclut \q{cqfd} (\lot{158}{3}{44}). Sous l'énoncé, un premier paragraphe, barré de deux longues diagonales, commence par \q{L'unicité de $p$ est claire}. La démonstration reprend ensuite par la pseudo-cofiltrance et réalise $M$ comme monoïde d'endomorphismes d'un ensemble $E$, le mot \q{fini} devant $E$ étant biffé. Elle écrit : \q{comme $E_0$ est fini, on en conclut que $u(E_0) = E_0$} (\lot{158}{3}{45}).
 
@@ -76,11 +76,32 @@ Soit $M$ un monoïde ayant un élément minimal $\psi$. Si tout $M$-ensemble à 
 L'énoncé tient tel que la page~39 le donne, sous sa forme simplement connexe, et la dichotomie du corollaire marche avec $\varphi = \psi$. Les hypothèses (B) à (D) des pages~22 à~30 s'y réduisent à \q{les puissances de $\psi$ sont distinctes}, et le degré se passe du plus petit objet comme de la présentation de $\pi_1$ (proposition~1, page~19). Dans l'autre cas, la stabilité de $eM$ par multiplication à gauche est l'étape que la page~41 laisse sous ses mots illisibles. La variante \q{$H^1(X, \mathbf Q) = 0$} de la page~39 n'est pas traitée ici.
 \end{remarque}
 
-Ne sont pas démontrés ici : la présentation de $\pi_1$ par les crochets de la proposition~1 (pages~19 et~20), dont la preuve ci-dessus se passe ; la proposition~2 \q{(??)} et le corollaire \q{Faux !} ; les pages~50 à~53 ; $\mathrm{Ep}(E)$ et $\mathrm{Mon}(E)$ ; les pages~60 à~83.
+\noindent\emph{Les catégories finies (pages 50 à 53).} Le corollaire de la page~52 énonce : une catégorie finie $X$ dont tout objet $0$-connexe de $\widehat X$ est $1$-connexe est cofiltrante (\lot{158}{3}{52}). Un préfaisceau $F$ sur $X$ a pour catégorie d'éléments les couples $(z, t)$, $t \in F(z)$ ; la simple connexité s'entend comme plus haut, par les cocycles. Notons (H) l'hypothèse.
 
-\begin{encadre}
-\begin{theoreme*}[Grothendieck, pages 50 à 53, catégories finies cofiltrantes\piste{158-finite-category-cofiltered}]\nonverifie
-Une catégorie finie $X$ dont tout préfaisceau connexe a une catégorie d'éléments simplement connexe est cofiltrante.
-\end{theoreme*}
-\end{encadre}
-{\small Les feuillets en esquissent une démonstration incomplète (pages 50 à 53). Le passage de l'hypothèse à la pseudo-cofiltrance est affirmé page~53 sans argument\par}
+\begin{contrexemple}[énoncé de l'édition\piste{158-finite-category-cofiltered}]
+La catégorie discrète à deux objets vérifie (H) et n'est pas cofiltrante.
+\end{contrexemple}
+
+\begin{proof}
+Une flèche y est une identité, donc tout cocycle est trivial, pour tout préfaisceau. La catégorie n'est pas connexe.
+\end{proof}
+
+\begin{theoreme}[d'après la page 52, cas $X$ connexe]
+\begin{enumerate}
+\item (Pour toute petite catégorie.) Sous (H), deux éléments d'un préfaisceau connexe ont un ancêtre commun. En particulier, si $X$ est non vide et connexe, deux objets sont buts de flèches issues d'un même objet, et deux flèches $u : x \to c$, $v : y \to c$ se complètent en un carré $u u' = v v'$.
+\item Une catégorie finie, non vide et connexe, qui vérifie (H) est cofiltrante.
+\end{enumerate}
+\end{theoreme}
+
+\begin{proof}
+(1) Si $\xi$ et $\eta$ n'ont pas d'ancêtre commun, les sous-préfaisceaux $T_1$ et $T_2$ qu'ils engendrent sont disjoints. On recolle deux copies de $F$ le long de $T = T_1 \sqcup T_2$. Le préfaisceau obtenu est connexe, et compter $1$ pour chaque flèche d'un élément de $T_1$ vers un élément de la seconde copie hors de $T$ définit un cocycle à valeurs dans $\mathbf Z$. S'il était le cobord de $g$, la différence $h(t) = g(t, 2) - g(t, 1)$ entre les deux copies serait constante le long des flèches hors de $T$, égale à $1$ près de $T_1$ et à $0$ près de $T_2$. Un zigzag de $\xi$ à $\eta$ mène à une contradiction. On applique ce lemme au préfaisceau final pour les cônes, et à $\mathrm{Hom}(-, c)$ pour les carrés.
+
+(2) La finitude et~(1) donnent un objet $e$ qui envoie une flèche vers tout objet. Le monoïde $M = \mathrm{End}(e)$ est fini et pseudo-cofiltrant ; le lemme~\ref{lem:158-etape1} et une puissance donnent un idempotent $p$ minimal, $p \in uM$ pour tout $u$. Posons $L(z) = \{f : e \to z \mid fp = f\}$. Pour $k : z \to z'$, $f \mapsto kf$ envoie $L(z)$ sur $L(z')$ : pour $f' \in L(z')$, le carré $ka = f'b$, une flèche $j : e \to w$ et $p = bj\theta$ donnent $f' = k(aj\theta p)$. Entre deux objets de l'ouvert $X_0$ des plus petits objets, qui ont des flèches dans les deux sens, ces surjections entre ensembles finis sont des bijections. $X_0$ est la catégorie d'éléments d'un sous-préfaisceau connexe du préfaisceau final. Par (H), ce système local est constant : il existe des bijections $\varphi_z : L(z) \to L(e)$ avec $\varphi_{z'}(kf) = \varphi_z(f)$. Pour $u : z \to y$, $z \in X_0$, l'application $s \mapsto u\,\varphi_z^{-1}(s)$ ne change pas le long d'une flèche, et deux tels couples $(z, u)$ se relient par un carré. Pour $f, g : x \rightrightarrows y$ et $c : e \to x$, appliquée à $(e, fc)$, $(e, gc)$ et $s = \varphi_e(p)$, elle donne $fcp = gcp$.
+\end{proof}
+
+\begin{remarque}
+Tel que la page le donne, le corollaire est faux pour une catégorie non connexe ; il faut que l'objet final de $\widehat X$ soit lui-même $0$-connexe. Avec cette hypothèse elle tient, et le passage de (H) à la pseudo-cofiltrance, affirmé page~53 sans argument, vaut pour toute petite catégorie. La démonstration suit les pages~50 à~52, et l'ouvert $X_0$ y est le lieu où le système local $H_x$ de la page~51 a des transitions bijectives.
+\end{remarque}
+
+Ne sont pas démontrés ici : la présentation de $\pi_1$ par les crochets de la proposition~1 (pages~19 et~20), dont la preuve ci-dessus se passe ; la proposition~2 \q{(??)} et le corollaire \q{Faux !} ; $\mathrm{Ep}(E)$ et $\mathrm{Mon}(E)$ ; les pages~60 à~83.
+
