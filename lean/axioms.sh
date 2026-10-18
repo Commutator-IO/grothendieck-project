@@ -9,7 +9,7 @@ out="${TMPDIR:-/tmp}/Axioms.lean"
   echo 'import Grothendieck'
   for f in Grothendieck/*.lean; do
     awk '
-      /^namespace / { ns[++d] = $2; next }
+      /^namespace [A-Za-z_][A-Za-z0-9_.]*[[:space:]]*$/ { ns[++d] = $2; next }
       /^end / && d > 0 && $2 == ns[d] { d--; next }
       /^(private )?theorem / {
         name = ($1 == "private") ? $3 : $2
@@ -21,7 +21,7 @@ out="${TMPDIR:-/tmp}/Axioms.lean"
   done
 } > "$out"
 n=$(grep -c '^#print' "$out")
-res=$(lake env lean "$out" | perl -0pe 's/,\n\s+/, /g')
+res=$(lake env lean "$out" 2>&1 | perl -0pe 's/,\n\s+/, /g') || true
 echo "$res"
 standard='(propext|Classical\.choice|Quot\.sound)'
 if [ "$(echo "$res" | grep -c "axioms")" -ne "$n" ] ||

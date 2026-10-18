@@ -45,7 +45,7 @@ The bulk of the folder (2.1–2.14: abelian categories, cohomological functors,
 Eilenberg–Watts, associated primes of the representing module; the sheaf half,
 pp. 15–20; Corollaire 10 and the torsors of pp. 27–28) is not formalised here.
 Proposition 7 and Corollaire 8 (pp. 21–26, fibered categories) are, in the
-namespace `Grothendieck.Folder21.Stack` below.
+`Grothendieck.Folder21.Stack` namespace below.
 
 **What the formalisation finds.** Nothing false. The Artin–Rees containment
 the proof needs is `N ∩ IᵐA ⊆ IⁿN`, with the ambient module on the left — the
