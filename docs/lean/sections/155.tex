@@ -1,0 +1,25 @@
+\section[Cote 155 : le produit de Takeuchi comme quotient d'un idéalisateur]{Cote 155 : le produit de Takeuchi comme quotient d'un idéalisateur\protect\verifie{Folder155}}\label{sec:155}
+
+La cote 155 porte sur les catégories tannakiennes dont le foncteur fibre n'existe que sur une extension $k'$ du corps de base $k$. La page~1 traduit une telle catégorie en une algèbre $A$ sur laquelle $k'$ agit de deux façons, et demande que la comultiplication de $A$ soit un morphisme d'anneaux (\lot{155}{1}{1}). Elle l'écrit d'abord à valeurs dans $A \mathbin{\hat\otimes}_{k'} A$, puis se corrige : les valeurs sont dans $\tilde{\mathcal J}/\mathcal J$, où $J = \mathrm{Ker}(k' \otimes_k k' \to k')$, $\mathcal J = J \cdot (A \mathbin{\hat\otimes}_k A)$ et $\tilde{\mathcal J} = \{\lambda \mid \lambda\mathcal J \subset \mathcal J\}$.
+
+La correction a une raison simple. Quand $k'$ n'est pas central dans $A$, le produit $(a \otimes b)(c \otimes d) = ac \otimes bd$ n'est pas bien défini sur $A \otimes_{k'} A$ : on peut faire passer un scalaire d'un facteur à l'autre avant de multiplier, et le résultat change. Le quotient $(A \otimes_k A)/\mathcal J$ est seulement un groupe abélien. On garde les éléments $\lambda$ qui préservent $\mathcal J$ par multiplication à gauche ; sur eux, le produit passe au quotient. La lecture reconnaît là le produit de Takeuchi $A \times_{k'} A$, formé des $\sum a_i \otimes b_i$ tels que $\sum a_i x \otimes b_i = \sum a_i \otimes b_i x$ pour tout $x \in k'$. La piste note que la littérature lue ne présente pas ce produit comme un quotient d'idéalisateur.
+
+\noindent\emph{Conventions.} On travaille sans complétion. $k$ est un anneau commutatif, $K$ une $k$-algèbre commutative (le $k'$ de la page), $A$ un anneau muni d'un morphisme de $k$-algèbres $\iota : K \to A$ dont l'image n'est pas supposée centrale, et $A$ est un $K$-module par $x \cdot a = \iota(x)a$. Pour un sous-groupe $L$ d'un anneau $S$, on note $\mathbb I(L) = \{\lambda \in S \mid \lambda L \subset L\}$ son idéalisateur.
+
+\begin{enonce}[Énoncé de l'édition, l'idéalisateur]
+Si $L$ est un idéal à droite de $S$, $\mathbb I(L)$ est un sous-anneau de $S$ qui contient $L$, $L$ y est un idéal bilatère, et $\mathbb I(L)/L$ est un anneau. C'est le plus grand sous-anneau de $S$ où $L$ est un idéal bilatère.
+\end{enonce}
+
+\noindent Voir \texttt{idealiser}, \texttt{ringCon} et \texttt{le\_idealiser\_of}. La seule vérification est $ac - bd = a(c - d) + (a - b)d \in L$ pour $a, b \in \mathbb I(L)$, $a - b$ et $c - d$ dans $L$.
+
+\begin{encadre}
+\begin{theoreme}[D'après la page 1, sans complétion\piste{155-takeuchi-idealiser}]
+Soit $S = A \otimes_k A$ et $\mathcal J$ l'idéal à droite engendré par les $\iota(x) \otimes 1 - 1 \otimes \iota(x)$, $x \in K$ ; c'est $J \cdot S$, pour $J$ le noyau de la multiplication $K \otimes_k K \to K$. L'application $a \otimes b \mapsto a \otimes b$ de $S$ vers $A \otimes_K A$ est surjective, de noyau $\mathcal J$. Un élément $\lambda$ de $S$ est dans $\tilde{\mathcal J}$ si et seulement si son image $\sum a_i \otimes b_i$ vérifie $\sum a_i\iota(x) \otimes b_i = \sum a_i \otimes b_i\iota(x)$ dans $A \otimes_K A$ pour tout $x \in K$. Ainsi $\tilde{\mathcal J}/\mathcal J$ s'identifie au produit de Takeuchi $A \times_K A$.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Comme $J$ est engendré par les $x \otimes 1 - 1 \otimes x$ et que l'image de $K \otimes_k K$ dans $S$ est commutative, $J \cdot S$ est l'idéal à droite engendré par les $g_x = \iota(x) \otimes 1 - 1 \otimes \iota(x)$. L'application $a \otimes b \mapsto [a \otimes b]$ de $A \otimes_K A$ vers $S/\mathcal J$ est bien définie, car $\iota(x)a \otimes b - a \otimes \iota(x)b = g_x(a \otimes b)$ ; elle est inverse de la projection, d'où le noyau. Enfin $\lambda \in \tilde{\mathcal J}$ équivaut à $\lambda g_x \in \mathcal J$ pour tout $x$, puisque $\mathcal J$ est engendré à droite par les $g_x$, et l'image de $\lambda g_x$ dans $A \otimes_K A$ est $\sum a_i\iota(x) \otimes b_i - \sum a_i \otimes b_i\iota(x)$.
+\end{proof}
+
+\noindent La présentation de la page est donc juste dans ce cadre. La preuve n'utilise pas l'isomorphisme $\mathbb I(L)/L \simeq \mathrm{End}_S(S/L)$ que la piste invoquait. Lean ne vérifie ni le cas des produits tensoriels complétés de pro-objets, que mathlib n'a pas, ni la comultiplication elle-même.
