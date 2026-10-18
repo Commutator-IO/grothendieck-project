@@ -18,6 +18,12 @@
 % and Artin-Rees; the open mathlib PR n° 44724), and with the literature of the
 % matched finding on pp. 15-20 and 27-28 (SGA 2 XIV §1, Raynaud), which
 % confirms the lowered ranges of Cor. 10. Body unchanged otherwise.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — pp. 24-26, after the Lean
+%   check of Proposition 7 (lean/Grothendieck/Folder21.lean): it holds over a
+%   noetherian quasi-sober space, for a prestack for (P1), (P2) and a stack
+%   for covers by two opens for (P3); (i) => (ii) and Cor. 8 formal; in
+%   (ii) => (i) pointwise essential surjectivity alone suffices, without the
+%   (P1), (P2) the page assumes first. F_(x) of p. 23 not formalised.
 %
 % Scope: one document for the shelfmark, its two batches read as one argument.
 % Twenty-four of the twenty-eight leaves carry mathematics; pages 1 and 14 are
@@ -1177,7 +1183,16 @@ une partie fermée. Sont équivalentes :
 majuscule, là où c'est le point $x$ qui est en cause ; la transcription le
 signale. Pour $(P_{1})$ et $(P_{2})$, l'énoncé n'est autre que la Proposition 3
 appliquée aux faisceaux $\mathcal{H}om(f,g)$, ce que la page dit en une ligne :
-« Reste le cas $P_{3}$, quand $P_{1}$, $P_{2}$ sont déjà vérifiés. »}
+« Reste le cas $P_{3}$, quand $P_{1}$, $P_{2}$ sont déjà vérifiés. »}\footnote{La
+proposition est vérifiée en Lean (lean/Grothendieck/Folder21.lean,
+\texttt{proposition7\_P1}, \texttt{proposition7\_P2} et
+\texttt{proposition7\_P3}) sous des hypothèses un peu plus faibles : $X$
+noethérien et quasi-sobre (un espace noethérien spectral l'est), $\mathcal{F}$
+une catégorie fibrée scindée qui est un préchamp pour $(P_1)$ et $(P_2)$, et pour
+$(P_3)$ un champ, la descente n'étant demandée que pour les recouvrements par
+deux ouverts. Les $2$-colimites n'y sont pas construites : la condition en $x$
+est écrite dépliée, en germes de morphismes et d'objets. L'identification de la
+page 23 avec $\mathcal{F}_{(x)}$ sur $X_{(x)}$ n'est pas formalisée.}
 
 \emph{Corollaire 8.} Si $\mathcal{F}$ satisfait $(P_{1})$, resp. $(P_{2})$,
 resp. $(P_{3})$, relativement à $Y$, alors pour tout ouvert $X' \subset X$ et
@@ -1201,7 +1216,11 @@ L'implication (i) $\Rightarrow$ (ii) de la Proposition 7 s'obtient en appliquant
 la condition à $\overline{\{x\}}$ pour $x \in Y$ : pour tout voisinage ouvert
 $W$ de $\overline{\{x\}}$, le foncteur $\mathcal{F}(W) \to \mathcal{F}(W - W
 \cap \overline{\{x\}})$ est une équivalence, donc le reste après passage à la
-limite sur les $W$, ce qui est exactement la condition en $x$.\footnote{Le
+limite sur les $W$, ce qui est exactement la condition en $x$. Ce sens est
+formel : il vaut pour tout espace et toute catégorie fibrée, par le
+Corollaire 8 appliqué à $Y' = \overline{\{x\}}$, et le Corollaire 8 lui-même
+pour toute partie fermée $Y' \subset Y \cap X'$\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder21.lean).}.\footnote{Le
 feuillet abrège les trois énoncés — fidélité, pleine fidélité, équivalence — par
 une lettre $\mathcal{H}$ qu'il n'introduit nulle part et qu'il glose seulement
 par « l'un des types ». Elle n'est pas reprise ici ; les trois cas sont énoncés
@@ -1221,12 +1240,21 @@ $f'$ à $W \cap U$ deviennent isomorphes sur $V_{(x)} = X'_{(x)}$, donc — quit
 obtient un objet $f'_{1}$ de $\mathcal{F}(W \cup U)$ qui prolonge $f'$ ; le
 complémentaire de $W \cup U$ est un fermé strictement contenu dans $Y$, donc
 l'hypothèse de récurrence fait provenir $f'_{1}$ d'un objet de
-$\mathcal{F}(X)$.\footnote{C'est le seul pas du dossier qui demande à
+$\mathcal{F}(X)$. Ce pas n'utilise que la surjectivité essentielle ponctuelle :
+contrairement à ce que dit la page, il n'est pas besoin d'avoir déjà $(P_1)$ et
+$(P_2)$, et les trois propriétés se traitent séparément. La récurrence ne
+demande d'ailleurs à $X$ que ceci : tout fermé non vide de $Y$ a un point $x$
+muni d'un voisinage ouvert $W_0$ tel que $W_0 \cap Y \subset
+\overline{\{x\}}$\footnote{Vérifié en Lean (lean/Grothendieck/Folder21.lean,
+\texttt{proposition7\_P3}) : le recollement se fait au-dessus de
+$(V - Y') \cup W'$, par récurrence noethérienne sur un point maximal. La remarque
+que $(P_1)$ et $(P_2)$ ne servent pas est de l'édition.}.\footnote{C'est le seul pas du dossier qui demande à
 $\mathcal{F}$ plus que d'être une catégorie fibrée. Recoller $f_{0}$ sur $W$ et
 $f'$ sur $U$ le long d'un isomorphisme au-dessus de $W \cap U$, c'est
 l'effectivité de la descente pour le recouvrement ouvert $\{W, U\}$ :
-$\mathcal{F}$ doit être un \emph{champ}. La Définition 6 ne le demande pas, et
-aucun feuillet ne le dit. L'hypothèse est ajoutée ici parce que sans elle la
+$\mathcal{F}$ doit être un \emph{champ}, au moins pour les recouvrements par
+deux ouverts, ce qui suffit (vérifié en Lean). La Définition 6 ne le demande
+pas, et aucun feuillet ne le dit. L'hypothèse est ajoutée ici parce que sans elle la
 démonstration ne tient pas ; le vocabulaire — champ, préchamp, descente
 effective — est postérieur au dossier.}
 
