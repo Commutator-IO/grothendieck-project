@@ -1,4 +1,4 @@
-\section[Cote 158 : la proposition 1 sur les monoïdes finis]{Cote 158 : la proposition 1 sur les monoïdes finis\protect\verifie{Folder158}}\label{sec:158}
+\section[Cote 158 : monoïdes finis, monoïdes à élément minimal]{Cote 158 : monoïdes finis, monoïdes à élément minimal\protect\verifie{Folder158}}\label{sec:158}
 
 La cote 158, \emph{[Autour des Dérivateurs] : notes manuscrites (s.d.)}, quatre-vingt-cinq pages que l'inventaire date \q{[vers 1990-1991]}, étudie une seule question : une petite catégorie $X$ est-elle cofiltrante dès que tout objet $0$-connexe du topos des préfaisceaux sur $X$ est $1$-connexe ? Les pages~44 à~53, sous sa pagination~1 à~8, traitent le cas fini, en commençant par celui d'un monoïde, c'est-à-dire d'une catégorie à un objet. La proposition~1 est énoncée page~44 et démontrée jusqu'au haut de la page~46, qui conclut \q{cqfd} (\lot{158}{3}{44}). Sous l'énoncé, un premier paragraphe, barré de deux longues diagonales, commence par \q{L'unicité de $p$ est claire}. La démonstration reprend ensuite par la pseudo-cofiltrance et réalise $M$ comme monoïde d'endomorphismes d'un ensemble $E$, le mot \q{fini} devant $E$ étant biffé. Elle écrit : \q{comme $E_0$ est fini, on en conclut que $u(E_0) = E_0$} (\lot{158}{3}{45}).
 
@@ -58,14 +58,25 @@ La relation $up = p$ pour tout $u$ fait de $p$ un zéro à droite, et l'idéal �
 La proposition~1, avec sa réciproque, est proposée à mathlib : pour un monoïde fini, l'existence d'un zéro à droite équivaut aux deux conditions de la page (PR mathlib4~\#44702).
 \end{remarque}
 
-Ne sont pas démontrés ici : le groupe fondamental (pages~19 et~20) ; la catégorie $0$-connexe non $1$-connexe (pages~21 à~41) ; la proposition~2 \q{(??)} et le corollaire \q{Faux !} ; les pages~50 à~53 ; $\mathrm{Ep}(E)$ et $\mathrm{Mon}(E)$ ; les pages~60 à~83.
+\noindent\emph{Les monoïdes à élément minimal (pages 21 à 41).} Un $M$-ensemble à droite $X$ est un préfaisceau sur $B_M$ ; sa catégorie d'éléments a pour objets les éléments de $X$ et pour flèches $m : x\cdot m \to x$. Un foncteur de cette catégorie vers un groupe $G$ est un cocycle, $c(x, mn) = c(x, m)\,c(x\cdot m, n)$, et il est isomorphe au foncteur trivial si $c(x, m) = g(x)\,g(x\cdot m)^{-1}$. On dit la catégorie d'éléments \emph{simplement connexe} si tout cocycle, pour tout groupe $G$, est de cette forme ; pour une catégorie connexe, c'est $\pi_1 = 1$ (cette équivalence n'est pas formalisée). L'élément $\psi$ est \emph{minimal} si $\psi \in uM$ pour tout $u$.
 
-\begin{encadre}
-\begin{theoreme*}[Grothendieck, pages 21 à 41, monoïdes à élément minimal\piste{158-minimal-monoid-cofiltered}]\nonverifie
-Soit $M$ un monoïde possédant un élément $\psi$ tel que $\psi \in uM$ pour tout $u \in M$. Si tout $M$-ensemble à droite connexe a une catégorie d'éléments simplement connexe, $M$ est cofiltrant.
-\end{theoreme*}
-\end{encadre}
-{\small Les feuillets en esquissent une démonstration incomplète (pages 22 à 41). Le théorème de la page~39 s'interrompt ; la page~41 achève le cas b)\par}
+\begin{theoreme}[Grothendieck, corollaire de la page 39\piste{158-minimal-monoid-cofiltered}]
+Soit $M$ un monoïde ayant un élément minimal $\psi$. Si tout $M$-ensemble à droite connexe a une catégorie d'éléments simplement connexe, $M$ est cofiltrant. Réciproquement (énoncé de l'édition), pour tout monoïde cofiltrant, la catégorie d'éléments d'un $M$-ensemble connexe est simplement connexe.
+\end{theoreme}
+
+\begin{proof}
+\emph{Cas où les puissances de $\psi$ sont distinctes.} C'est la proposition~2 de la page~31 avec $\varphi = \psi$, comme au corollaire de la page~33. Soit $F = M/R_\psi$, où $u \sim v$ si $\psi^p u = \psi^q v$. Pour tout $u$, $\psi^p u = \psi^q u$ entraîne $p = q$ : avec $ut = \psi$, on obtient $\psi^{p+1} = \psi^{q+1}$. Le degré relatif $d(u, v) = q - p$ est donc bien défini sur chaque classe, additif, et invariant par multiplication à droite. Avec un représentant $s(x)$ de chaque classe, $c(x, m) = d(s(x)m, s(x\cdot m))$ est un cocycle à valeurs dans $\mathbf Z$. Pour $x$ la classe de $1 = \psi$, l'endomorphisme $\psi$ a le degré $1$, alors qu'un cobord y prend la valeur $g(x) - g(x) = 0$.
+
+\emph{Cas où $\psi^r = \psi^s$ avec $r \neq s$.} Une puissance $e = \psi^n$, $n \geq 1$, est idempotente et minimale. Les éléments minimaux forment $eM$, stable par multiplication à gauche : si $\lambda = u\lambda k$ et $\lambda = \lambda k j$, alors $u\lambda = \lambda j$. Avec $uek = e$ et $ekek_2 = e$, $x \mapsto ux$ est une bijection de $eM$, d'inverse $x \mapsto ek_2x$. On obtient ainsi un morphisme $\rho$ de $M$ dans le groupe des permutations de $eM$. Si $\rho$ est trivial, $ue = e$ pour tout $u$, et $M$ est cofiltrant ; sinon le point, dont la catégorie d'éléments est $B_M$, porte le cocycle non trivial $\rho$.
+
+\emph{Réciproque.} Si $M$ est cofiltrant, deux éléments d'un $M$-ensemble connexe ont un descendant commun, et deux flèches parallèles ont même valeur, puisqu'elles sont égalisées plus loin. On fixe $x_0$ et, pour chaque $x$, des $a, b$ avec $x\cdot a = x_0\cdot b$, et l'on pose $g(x) = c(x, a)\,c(x_0, b)^{-1}$. Ce choix n'importe pas, et $c$ est le cobord de $g$.
+\end{proof}
+
+\begin{remarque}
+L'énoncé tient tel que la page~39 le donne, sous sa forme simplement connexe, et la dichotomie du corollaire marche avec $\varphi = \psi$. Les hypothèses (B) à (D) des pages~22 à~30 s'y réduisent à \q{les puissances de $\psi$ sont distinctes}, et le degré se passe du plus petit objet comme de la présentation de $\pi_1$ (proposition~1, page~19). Dans l'autre cas, la stabilité de $eM$ par multiplication à gauche est l'étape que la page~41 laisse sous ses mots illisibles. La variante \q{$H^1(X, \mathbf Q) = 0$} de la page~39 n'est pas traitée ici.
+\end{remarque}
+
+Ne sont pas démontrés ici : la présentation de $\pi_1$ par les crochets de la proposition~1 (pages~19 et~20), dont la preuve ci-dessus se passe ; la proposition~2 \q{(??)} et le corollaire \q{Faux !} ; les pages~50 à~53 ; $\mathrm{Ep}(E)$ et $\mathrm{Mon}(E)$ ; les pages~60 à~83.
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 50 à 53, catégories finies cofiltrantes\piste{158-finite-category-cofiltered}]\nonverifie

@@ -5344,6 +5344,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Rogers’ two papers (arXiv 2004.10513, 2112.10198) for a statement linking cofilteredness of M (flatness of the terminal M-set) to the homotopy of X//M for connected X, and McDuff, « On the classifying spaces of discrete monoids », Topology 18 (1979); check also that p. 41’s case b), applied with the minimal-element hypothesis alone, gives Γ = 1 ⇒ uφ = φ for all u — the step under the \\ill{} of p. 41.',
+    lean: { file: 'lean/Grothendieck/Folder158.lean', found: "Holds as stated, in the simply connected form, with π₁ = 1 read as « every functor from the category of elements to a group is trivial » (cocycles): a monoid with a minimal ψ is cofiltered iff every connected right M-set has a simply connected category of elements (the converse holds for any monoid). If the powers of ψ are distinct, M/R_ψ carries the ℤ-valued relative degree, 1 on the endomorphism ψ of the class of 1 — Proposition 2 with φ = ψ, where (B)–(D) reduce to this and no presentation of π₁ is needed. Otherwise a power e of ψ is a minimal idempotent, the minimal elements eM are stable under left multiplication (the step under p. 41's illegible words), and M → Perm(eM) is trivial iff M is cofiltered. The H¹(−, ℚ) variant is not formalised." },
   },
   {
     id: '158-finite-category-cofiltered',

@@ -39,15 +39,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '158',
     batch: 3,
-    page: '44',
-    name: 'Proposition 1',
+    page: '21–41, 44',
+    name: 'Proposition 1; monoids with a minimal element',
     statement:
-      'A finite monoid M, pseudo-cofiltering (for all u, v there are u′, v′ with uu′ = vv′) and whose group completion is trivial, has an element p with up = p for every u — so p² = p and M is cofiltering.',
+      'A finite monoid M, pseudo-cofiltering (for all u, v there are u′, v′ with uu′ = vv′) and whose group completion is trivial, has an element p with up = p for every u — so p² = p and M is cofiltering. P. 39: a monoid with a minimal element ψ (ψ ∈ uM for all u) is cofiltered as soon as every connected right M-set has a simply connected category of elements.',
     found:
-      'The Proposition holds as the leaf states it, and finiteness is used exactly where the page says « comme E₀ est fini ». The reading’s modern gloss was false: it called p a left zero and the Rees kernel a point. In {1, a, b} with xa = a and xb = b, both a and b qualify and the kernel is {a, b}; p is a right zero, and not unique. The reading is corrected. Proposition 1 with its converse is proposed to mathlib (leanprover-community/mathlib4#44702).',
+      'The Proposition holds as the leaf states it, and finiteness is used exactly where the page says « comme E₀ est fini ». The reading’s modern gloss was false: it called p a left zero and the Rees kernel a point. In {1, a, b} with xa = a and xb = b, both a and b qualify and the kernel is {a, b}; p is a right zero, and not unique. The reading is corrected. Proposition 1 with its converse is proposed to mathlib (leanprover-community/mathlib4#44702). P. 39 holds, as an equivalence, with simply connected read as « every functor to a group is trivial »: M/R_ψ carries a ℤ-valued degree when the powers of ψ are distinct, and otherwise M acts on its minimal elements eM through a group, trivially iff M is cofiltered.',
     verdict: 'holds; the gloss was false',
     lean: 'lean/Grothendieck/Folder158.lean',
-    theorems: ['etape1', 'proposition1', 'contre_noyau_non_ponctuel'],
+    theorems: ['etape1', 'proposition1', 'contre_noyau_non_ponctuel', 'cofiltrant_iff_simplyConnected', 'quotPsi_not_simplyConnected', 'cofiltrant_iff_rhoMin', 'simplyConnected_of_cofiltrant'],
   },
   {
     folder: '153',
