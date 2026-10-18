@@ -17,6 +17,17 @@
 % Pass: Opus 5 (claude-opus-5), 2026-09-19 — first pass, unchecked against the
 % pages by a human. The model was named explicitly in the request; it is the
 % model this reading actually ran on.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — with the Lean check
+%   (lean/Grothendieck/Folder160.lean, E trivialised): A_0 = (-1)^n Delta_n^{p-1},
+%   the A_i polynomials, the relation and its uniqueness, the homogeneity of
+%   Delta_n footnoted at p. 9 (the factorisation of p. 7 and c not needed);
+%   the Corollary of p. 13 corrected to the (p-1)-th roots of (-1)^n a_0
+%   (refuted finding 160-special-linear-structures-sign, counterexample over
+%   F_3); the literature of the matched findings cited: Brion 2021, Lemmas
+%   4.1-4.2 and Brion, Ex. 2.1.7 (p. 6), Wilkerson 1983 / Sam 2011 (Dickson's
+%   theorem); « démontrée aux pages 2 à 6 » in the résumé changed to « énoncée
+%   à la page 6 », as the body already said; three « Ce que » turns removed.
+%   Batch files changed since the first pass by macro renames only.
 %
 % Scope: a SINGLE document for the whole folder. The shelfmark holds two
 % batches — pages 1-20 and pages 21-22 — read together in one pass, and no
@@ -49,6 +60,8 @@
 %     conflict.
 %   - page 11: A_i(X_1,...,X_{n-1},0) = A_{i-1}(X_1,...,X_{n-1})^p — the page
 %     omits the Frobenius twist.
+%   - page 13: the trivialisations of Lambda^n M are the (p-1)-th roots of
+%     (-1)^n a_0, not of a_0 (false for p and n odd).
 %   - page 21, right column: the first relation drops the term b(alpha-beta),
 %     and the three lines after it are the identity for b*alpha, not b.
 %
@@ -98,8 +111,8 @@ rang $p$, et pourtant ils ne se ressemblent pas.
 La question du dossier est alors naturelle : les sous-groupes finis du groupe
 additif $\mathbb{G}_a$ sont-ils \emph{tous} de cette forme, noyaux de
 polynômes additifs ? Et si oui, comment la famille de tous les sous-groupes
-d'un rang donné est-elle elle-même organisée ? La réponse, démontrée aux
-pages 2 à 6, est aussi nette qu'on peut l'espérer : pour tout schéma de base
+d'un rang donné est-elle elle-même organisée ? La réponse, énoncée à la
+page 6, est aussi nette qu'on peut l'espérer : pour tout schéma de base
 $S$ de caractéristique $p$, les sous-groupes finis localement libres de rang
 $p^n$ de $\mathbb{G}_{a,S}$ sont exactement les noyaux des
 $f_a(x) = x^{p^n} + a_{n-1}x^{p^{n-1}} + \dots + a_0 x$, et chacun ne
@@ -264,7 +277,7 @@ déduite de $u : E^{(p)} \xrightarrow{\ \sim\ } E$ par dualité. Les lire sur
 $E$ donnerait des énoncés faux.}
 
 \pagerange{1}{22}
-\subsection*{Ce que le contenu montre, et ce qu'il ne date pas}
+\subsection*{Le contenu, et ce qu'il ne date pas}
 
 Il faut le dire ici plutôt que de le taire. Le dossier appartient, dans
 l'inventaire de Montpellier, à un groupe intitulé « Dérivateurs » et daté
@@ -599,7 +612,14 @@ soit un sous-groupe force $f$ additif. Le dossier n'emprunte pas ce chemin :
 il démontre l'isomorphisme sur le réduit, pose la question de la réduction de
 $X_n$, et y répond au seul cas $n = 1$ et au seul point $0$. L'énoncé général
 est donc, dans ce dossier, annoncé et non établi ; c'est la plus grande
-lacune du feuillet, et elle ne tient pas à ce que la page soit abîmée.}
+lacune du feuillet, et elle ne tient pas à ce que la page soit abîmée.
+L'énoncé est imprimé : M. Brion, « Homogeneous varieties under split
+solvable algebraic groups » (2021), lemmes 4.1 et 4.2, le démontre sur une base
+localement noethérienne par exactement l'argument ci-dessus (polynôme
+caractéristique, puis additivité), en disant adapter Demazure--Gabriel,
+\emph{Groupes algébriques} I, IV, § 2, 1.1 ; l'unicité permet d'ôter
+l'hypothèse noethérienne par le même argument local. Le cas d'un corps est
+l'exemple 2.1.7 de M. Brion, « Some structure theorems for algebraic groups ».}
 
 \pagerange{7}{12}
 \section*{Le déterminant de Moore et les invariants de Dickson (pages 7 à 12)}
@@ -724,9 +744,22 @@ En particulier, pour $j = 0$, le mineur est $\det(X_j^{p^i})_{1 \leqslant i
 \footnote{La page écrit $\Delta_0 = \pm \Delta_n^p (-1)^n$, et le corollaire
 juste en dessous $A_0 = \pm \Delta_n^{p-1}$. Les deux ne sont pas en conflit :
 ils se déduisent l'un de l'autre par $A_0 = \Delta_0/\Delta_n$, et le
-transcripteur l'avait déjà noté. Ce que la normalisation ci-dessus apporte
-est de remplacer le $\pm$ flottant par le signe exact $(-1)^n$, qui vaut
-dans les deux identités.}
+transcripteur l'avait déjà noté. La normalisation ci-dessus remplace le
+$\pm$ flottant par le signe exact $(-1)^n$, qui vaut dans les deux
+identités.}\footnote{Vérifié en Lean (lean/Grothendieck/Folder160.lean) :
+$A_0 = (-1)^n \Delta_n^{p-1}$ (\texttt{A\_zero\_eval}) ; la factorisation
+$D(T) = \Delta_n \prod_\lambda (T - \lambda \cdot X)$ au signe près de
+l'ordre des colonnes, $\Delta_n \neq 0$, et donc le fait que les $A_i$ sont des
+polynômes (\texttt{D\_eq\_C\_mul\_P}, \texttt{Delta\_ne\_zero}) ; la relation
+$\xi_k^{p^n} + \sum A_i(\xi)\,\xi_k^{p^i} = 0$ en tout point de toute
+$\mathbf{F}_p$-algèbre, avec unicité des coefficients là où $\Delta_n(\xi)$ est
+inversible (\texttt{dickson\_unique}) ; et l'homogénéité $\Delta_n(c\xi) =
+c^{(p^n-1)/(p-1)}\Delta_n(\xi)$ sur tout anneau commutatif
+(\texttt{moore\_smul'}). La vérification n'a besoin que de ceci : les $p^n$
+formes $\lambda \cdot X$ sont des racines distinctes d'un polynôme de degré
+$p^n$ en $T$ dont le coefficient dominant $\pm\Delta_n$ est non nul. La
+factorisation de la page 7 et sa constante $c$ n'y servent pas, et ne sont pas
+vérifiées par machine.}
 
 \textbf{Corollaire.} $X_i^{p^n} + A_{n-1}X_i^{p^{n-1}} + \dots + A_0 X_i = 0$
 pour $1 \leqslant i \leqslant n$, et les $A_i$ sont caractérisés par cette
@@ -761,7 +794,16 @@ algèbre de polynômes sur les $n$ générateurs $A_i$, homogènes de degrés
 $p^n - p^i$.\footnote{Ce sont les \emph{invariants de Dickson}, établis par
 L. E. Dickson en 1911. La page ne le nomme pas et ne renvoie à rien. La
 démonstration donnée ici est géométrique et tire tout de la classification
-des sous-groupes ; ce n'est pas celle de Dickson, qui est algébrique.}
+des sous-groupes ; ce n'est pas celle de Dickson, qui est algébrique. Ses
+ingrédients sont pourtant ceux de la démonstration galoisienne de
+C. Wilkerson, « A primer on the Dickson invariants » (1983), que suivent les
+notes de S. V. Sam, « Dickson invariants » (2011) : invariants définis par le
+déterminant de Moore, intégralité sur l'algèbre qu'ils engendrent, groupe de
+Galois du corps de décomposition égal à $GL(V)$, normalité de l'anneau de
+polynômes. La quasi-finitude et la surjectivité tiennent ici la place de
+l'intégralité, la birationalité celle de l'égalité galoisienne. Le seul trait
+que nous n'avons pas vu dans ces sources est que la surjectivité vient de la
+classification des sous-groupes de $\mathbb{G}_a$.}
 
 \emph{Démonstration.} $A_*$ envoie $U_n = \mathbb{A}^n_{\Delta_n}$ sur
 l'ouvert $\mathbb{G}_m \times \mathbb{A}^{n-1}$ — c'est le corollaire
@@ -840,8 +882,11 @@ sont, mais ils ne sont pas des générateurs indépendants.}
   \end{array}
 \]
 a pour flèche de droite celle définie par l'inclusion
-$\mathbb{F}_p[A_1, \dots, A_{n-1}, \Delta_n^{p-1}] \subset
-\mathbb{F}_p[A_1, \dots, A_{n-1}, \Delta_n]$. Les deux flèches verticales
+\[
+  \mathbb{F}_p[A_1, \dots, A_{n-1}, \Delta_n^{p-1}] \subset
+  \mathbb{F}_p[A_1, \dots, A_{n-1}, \Delta_n] .
+\]
+Les deux flèches verticales
 sont des revêtements de groupe $\mathbb{F}_p^*$ identifiant le but au
 quotient de la source ; la flèche du haut est compatible aux deux actions,
 donc génériquement bijective et birationnelle, donc un isomorphisme puisque
@@ -863,15 +908,27 @@ de rang $p^n$, d'où $a$ avec $M = \operatorname{Ker} f_a$ ; supposons $a_0$
 inversible, c'est-à-dire $M$ étale. Alors l'ensemble des structures
 $\mathbb{F}_p$-spéciales linéaires de $M$ — les trivialisations de
 $\Lambda^n_{\mathbb{F}_p} M$ — est en correspondance biunivoque avec
-l'ensemble des racines $(p-1)$-ièmes de $a_0$. Plus précisément
+l'ensemble des racines $(p-1)$-ièmes de $(-1)^n a_0$. Plus précisément
 $(\Lambda^n_{\mathbb{F}_p} M)^*$ s'identifie au torseur, sous
-$\mu_{p-1,S} \simeq (\mathbb{F}_p^*)_S$, de l'image réciproque de $a_0$ par
-$\mathbb{G}_m \xrightarrow{\ x \mapsto x^{p-1}\ } \mathbb{G}_m$.
+$\mu_{p-1,S} \simeq (\mathbb{F}_p^*)_S$, de l'image réciproque de
+$(-1)^n a_0$ par
+$\mathbb{G}_m \xrightarrow{\ x \mapsto x^{p-1}\ } \mathbb{G}_m$\footnote{La
+page écrit « racines $(p-1)$-ièmes de $a_0$ », et c'est faux pour $p$ et $n$
+impairs. Sur $S = \mathrm{Spec}\,\mathbf{F}_3$, avec $n = 1$ et
+$M = \mathbf{F}_3 = \operatorname{Ker}(x^3 - x)$, on a $a_0 = -1$ ;
+$\Lambda^1 M = M$ a deux trivialisations sur $\mathbf{F}_3$, et $-1$ n'a pas de
+racine carrée dans $\mathbf{F}_3$. Une première version de cette lecture
+gardait $a_0$ en glosant « au signe près ». La correction est de l'édition ;
+elle découle du signe $A_0 = (-1)^n \Delta_n^{p-1}$ de la page 9, vérifié en
+Lean dans le cas trivialisé (lean/Grothendieck/Folder160.lean,
+\texttt{A\_zero\_eval}). La forme relative n'est pas formalisée.}.
 
 C'est la traduction exacte de $A_0 = (-1)^n \Delta_n^{p-1}$ : une racine
-$(p-1)$-ième de $a_0$ est, au signe près, une valeur de $\Delta_n$,
-c'est-à-dire un générateur de la puissance extérieure maximale, c'est-à-dire
-une trivialisation.
+$(p-1)$-ième de $(-1)^n a_0$ est une valeur de $\Delta_n$, c'est-à-dire un
+générateur de la puissance extérieure maximale, c'est-à-dire une
+trivialisation. Une racine $(p-1)$-ième de $a_0$ lui-même ne convient pas en
+général : si $y^{p-1} = a_0$, alors $(y/\Delta_n)^{p-1} = (-1)^n$, et $-1$
+n'est pas une puissance $(p-1)$-ième dans $\mathbf{F}_p$ pour $p$ impair.
 
 \textbf{N.B.} Se donner sur $S$ un faisceau en $\mathbb{F}_p$-espaces
 vectoriels de rang $n$, fini étale, équivaut à se donner un faisceau $E$
@@ -939,8 +996,11 @@ la page 15, et c'est ce qui rend la page 13 possible : la trivialisation de
 $(\Lambda^n \check{E})^{\otimes(p-1)}$ est ce qui permet de parler d'un
 torseur sous $\mu_{p-1}$ plutôt que d'une racine $(p-1)$-ième d'un scalaire.
 Le signe, ici, on le laisse comme la page le laisse : il vaut $(-1)^n$ dans
-la trivialisation du cas absolu, mais la trivialisation relative dépend de
-$u$ et le feuillet ne la normalise pas.}
+la trivialisation du cas absolu, ce que vérifie Lean
+(lean/Grothendieck/Folder160.lean, $E$ trivialisé et $u$ l'identité), mais la
+trivialisation relative dépend de $u$ et le feuillet ne la normalise pas ; la
+version relative et la trivialisation par $\Lambda^n \check{u}$ ne sont pas
+formalisées.}
 
 \pagerange{15}{16}
 \subsection*{La matrice compagnon, et le tableau qui reste ouvert (pages 15 et 16)}
@@ -1300,7 +1360,7 @@ surnage que $H_2$, trois lignes entre accolades à droite de $f$, $g$. Elles
 portaient sans doute l'énoncé que la page voulait atteindre. On ne le
 devine pas.}
 
-\section*{Ce que le dossier annonce et n'établit pas}
+\section*{Annoncé et non établi}
 
 Il vaut la peine de les rassembler, parce qu'aucun n'est dû à l'état du
 papier :
