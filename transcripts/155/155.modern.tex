@@ -65,6 +65,13 @@
 % k = End(1_C) suffice); the verification of the last compatibility, begun on
 % page 9 and abandoned mid-line; and the converse direction — that an antipode
 % gives back rigidity — which the pages never state.
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — page 1: footnote on the Lean
+%   check (lean/Grothendieck/Folder155.lean): in the uncompleted version the
+%   idealiser quotient J~/J is the Takeuchi product A x_{k'} A, as the page
+%   presents it; the Takeuchi footnote cites the nLab entry the finding
+%   records as read. No mathlib result invoked by name, no facsimile
+%   correction. Two « Ce que » turns removed.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -335,14 +342,31 @@ n'est qu'un module. Passer à l'idéalisateur $\widetilde{\mathcal{J}}$, c'est
 prendre le plus grand sous-anneau de $A \mathbin{\hat{\otimes}}_{k} A$ dans
 lequel $\mathcal{J}$ soit un idéal bilatère ; le quotient
 $\widetilde{\mathcal{J}}/\mathcal{J}$ est alors un anneau, et c'est le seul
-endroit où l'énoncé « $\Delta_{A}$ est multiplicative » ait un sens.
+endroit où l'énoncé « $\Delta_{A}$ est multiplicative » ait un sens.\footnote{Vérifié
+en Lean (lean/Grothendieck/Folder155.lean, \texttt{idealiser},
+\texttt{ringCon}, \texttt{le\_idealiser\_of}), dans la version sans
+complétion, $k$ un anneau commutatif et $k'$ une $k$-algèbre commutative dont
+l'image dans $A$ n'est pas supposée centrale. L'idéalisateur d'un idéal à droite
+est un sous-anneau où cet idéal est bilatère, et le plus grand. $\mathcal{J}$
+est l'idéal à droite engendré par les $x \otimes 1 - 1 \otimes x$, $x \in k'$ ;
+$A \otimes_{k} A \to A \otimes_{k'} A$ est surjective de noyau $\mathcal{J}$ ; et
+$\lambda$ est dans $\widetilde{\mathcal{J}}$ si et seulement si son image
+$\sum a_i \otimes b_i$ vérifie $\sum a_i x \otimes b_i = \sum a_i \otimes b_i x$
+pour tout $x \in k'$. Ainsi $\widetilde{\mathcal{J}}/\mathcal{J} \simeq A
+\times_{k'} A$ : la présentation de la page est juste dans ce cadre. Le cas des
+produits tensoriels complétés de pro-objets, et la comultiplication elle-même,
+ne sont pas vérifiés.}
 
 C'est, au dual près, le \emph{produit de Takeuchi} des algébroïdes de
 Hopf\footnote{Takeuchi, \emph{Groups of algebras over $A \otimes \bar{A}$}
 (1977), introduit pour la même raison le sous-anneau
 $B \times_{R} B \subset B \otimes_{R} B$ formé des tenseurs qui commutent aux
 deux actions de $R$. Le nom est de nous ; la page construit l'objet et ne le
-nomme pas.}. La même difficulté reparaît, vue de l'autre côté, dans la note
+nomme pas. L'article du nLab « Takeuchi product », lu par l'édition, donne la
+définition par les tenseurs équilibrés et une description comme fin d'un cofin, sans
+présentation comme quotient d'un idéalisateur ; il renvoie à Takeuchi (1977), à
+Sweedler (1974), à Brzeziński--Militaru (2002) et à Schauenburg (1998), que l'édition
+n'a pas lus.}. La même difficulté reparaît, vue de l'autre côté, dans la note
 marginale de la page 3 : la transposée $U \to U \otimes_{k} U$ de la
 multiplication de $A$ n'y respecte pas les unités, et il le note
 lui-même — « $\Delta_{U}(1) \neq 1$ en général ».
@@ -411,7 +435,7 @@ nilpotents et l'exactitude tombe\footnote{La page écrit « étale » là où
 portant sur $k' \otimes_{k} k'$ et la seconde sur $k'/k$.}. La fidélité, en
 revanche, est fausse telle quelle : dès que $k' \otimes_{k} k' \simeq k' \times
 R$ avec $R \neq 0$, un module concentré sur le facteur $R$ est tué par le
-foncteur. Ce que la condition demande réellement, c'est donc que les modules
+foncteur. La condition demande donc réellement que les modules
 provenant de $C$ soient concentrés sur la composante diagonale — et c'est
 précisément le genre d'énoncé que la question suivante cherche à obtenir de $C$
 seule\footnote{La distinction est de nous : la page demande « exact et
@@ -610,7 +634,7 @@ l'une ni l'autre. Ce qu'elle écrit, l'accouplement canonique sur le module
 régulier, est le cas particulier dont cet axiome est la forme générale.}.
 
 \pagerange{3}{9}
-\section*{IX. Ce que le dossier laisse ouvert}
+\section*{IX. Les questions laissées ouvertes}
 
 Quatre choses, et il vaut mieux les dire que les laisser deviner.
 
