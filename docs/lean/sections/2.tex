@@ -25,3 +25,27 @@ Si $Y \subset X$ est un diviseur dont la classe $x' \in A^1(X)$ est non nulle ma
 \end{theoreme*}
 \end{encadre}
 {\small La non-nullité de la classe et la restriction $r \geq 3$ relèvent de la géométrie. Le \q{0} final de la page~13 est incertain, et la page nomme la classe $[\mathcal O_{Y \times \mathbf P^r}]$ là où le calcul porte sur $Y \times \{\text{point}\}$. Mathlib n'a pas le groupe $K$ des faisceaux cohérents ni les classes de Chern. On se reportera aux notes de Grothendieck (\lot{2}{1}{9}).\par}
+
+La page~21 pose une question sur deux anneaux attachés à un $\lambda$-anneau $K$ muni d'éléments \q{géométriques} (\lot{2}{2}{21}). L'anneau de Chern $CK$ est engendré par des symboles $c^i(x)$, soumis aux règles que vérifient les classes de Chern : formule de Whitney, produit, et $c^i(E) = 0$ au-delà du rang pour un élément géométrique $E$. L'anneau $GK$ est le gradué de $K$ pour la filtration $\gamma$. Une flèche $\varphi_K : CK \to GK$ envoie $c^i(x)$ sur la classe de $\gamma^i(x - \varepsilon(x))$ ; elle est surjective et devient bijective après tensorisation par $\mathbf Q$. La page demande si elle est toujours bijective, répond \q{Non}, et donne l'exemple de $K = K(\mathbf P^{n-1}) = \mathbf Z[L]/(L - 1)^n$, avec $L$ pour seul élément géométrique : la relation $(L-1)^n = 0$ n'impose à $CK$ que $(n-1)!\,\zeta^n = 0$ en degré~$n$, alors que $GK$ est sans torsion.
+
+Dans cet exemple, $CK$ est engendré par $\zeta = c^1(L)$. On pose $\xi = 1 - L^{-1}$ ; comme $L$ est inversible, $\xi^n = 0$ équivaut à $(L - 1)^n = 0$. Avec $c(L^{-i}) = 1 - i\zeta$, la seule relation est $c(\xi^n) = 1$, c'est-à-dire l'annulation des composantes de degré $\geq 1$ de
+\[
+c(\xi^n) = \prod_{i=0}^{n} (1 - i\zeta)^{(-1)^i \binom ni} = 1 + (-1)^{n-1}(n-1)!\,\zeta^n + \cdots,
+\]
+le produit de la page~9 calculé plus haut. On prend donc $CK = \mathbf Z[\zeta]/I$, où $I$ est engendré par les $a_m \zeta^m$, $a_m$ le coefficient de $\zeta^m$ dans ce produit, et $GK = \mathbf Z[\zeta]/(\zeta^n)$. Les $a_m$ sont nuls pour $1 \leq m < n$, de sorte que $I \subset (\zeta^n)$ et que $\varphi_K$ est bien définie.
+
+Pour $n = 3$, la relation de degré~$3$ est $2\zeta^3 = 0$. La question est de savoir si $\zeta^3$ est lui-même nul dans $CK$ ; la page ne le montre pas.
+
+\begin{encadre}
+\begin{theoreme}[D'après la page 21, cas $n \geq 3$\piste{2-chern-ring-not-injective-pn}]
+Pour $n \geq 3$, $\zeta^n$ est non nul dans $CK$ et $(n-1)!\,\zeta^n = 0$ ; $GK$ est sans torsion, et $\varphi_K$ est surjective sans être injective. Pour $n \leq 2$, $\varphi_K$ est bijective.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+L'idéal $I$ est engendré par des monômes $a_m\zeta^m$ avec $m \geq n$, et $a_n = \pm(n-1)!$, d'où $(n-1)!\,\zeta^n = 0$. Pour voir que $\zeta^n \neq 0$, on envoie $\zeta$ sur $h$ dans $T = (\mathbf Z/(n-1)!)[h]/(h^{n+1})$. Les relations y sont satisfaites : $a_m h^m = 0$ pour $m > n$ parce que $h^{n+1} = 0$, et $a_n h^n = 0$ parce que $(n-1)! = 0$ dans $T$. Or $h^n \neq 0$ dans $T$ dès que $(n-1)! > 1$, c'est-à-dire $n \geq 3$. Dans $GK$, si $k f$ est divisible par $\zeta^n$ avec $k \neq 0$, les coefficients de $f$ de degré $< n$ sont nuls. Pour $n \leq 2$, $a_n = \pm 1$, donc $\zeta^n \in I$ et $I = (\zeta^n)$.
+\end{proof}
+
+{\sloppy \noindent Voir \texttt{$\varphi$\_not\_injective}, \texttt{$\zeta$\_pow\_ne\_zero}, \texttt{factorial\_mul\_$\zeta$\_pow}, \texttt{GK\_torsionFree}, \texttt{$\varphi$\_bijective\_of\_le\_two} et \texttt{exists\_chern} dans \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/Folder2.lean}{\texttt{Folder2.lean}}. L'anneau $T$ répond à la question que laissait la piste : il porte un homomorphisme de Chern avec $c(L) = 1 + h$, $c(\xi^n) = 1$, $h^n \neq 0$ et $(n-1)!\,h^n = 0$. L'exemple demande $n \geq 3$, ce que la page ne dit pas. Il dépend aussi de la famille géométrique : si l'on déclare géométrique la classe $n - L^{-1}$, de rang $n - 1$, sa classe de Chern $(1 - \zeta)^{-1}$ force $\zeta^n = 0$, et $CK = GK$ ; c'est sans doute ce que dit la note en diagonale, et ce point n'est pas formalisé.\par}
+
+Lean ne vérifie pas que la présentation de $CK$ par $\zeta$ et la seule relation $c(\xi^n) = 1$ découle des relations générales de la page~28 : c'est la réduction que fait la page, reprise par l'édition. Les $\lambda$-anneaux et la filtration $\gamma$ ne sont pas construits.
