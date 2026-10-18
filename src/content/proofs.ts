@@ -689,15 +689,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '82',
     batch: 4,
-    page: '77–78',
-    name: 'The conic in characteristic 2 and Frobenius, split case',
+    page: '26–27, 77–78',
+    name: 'The conic in characteristic 2 and Frobenius, split case; automorphisms of sl(2) in characteristic 2',
     statement:
-      'Over a base with 2 = 0, O_S·1 ⊂ g̃ is the kernel of φ(u, v) = Tr(uv) (58); sending an isotropic line to its φ-orthogonal factors through P(g̃/O_S) (60), which the page identifies with X^(2), (60) being the relative Frobenius, not a monomorphism. Split case (footnote of the reading): the orthogonal of O(s²X̃ + t²Ỹ + stH̃) is t²x + s²y = 0, containing H̃ = 1 and depending only on (s² : t²).',
+      'Over a base with 2 = 0, O_S·1 ⊂ g̃ is the kernel of φ(u, v) = Tr(uv) (58); sending an isotropic line to its φ-orthogonal factors through P(g̃/O_S) (60), which the page identifies with X^(2), (60) being the relative Frobenius, not a monomorphism. Split case (footnote of the reading): the orthogonal of O(s²X̃ + t²Ỹ + stH̃) is t²x + s²y = 0, containing H̃ = 1 and depending only on (s² : t²). Pages 26–27: over a base with 2 = 0, a form of sl(2) is a pair (V, E), E an extension of V by det V; its automorphisms form an affine group of dimension 6, those of a symplectic affine plane SL(V) ⋉ V, of dimension 5.',
     found:
-      'The split case holds as the edition’s footnote gives it, over any commutative ring with 2 = 0: H̃ = 1 spans the kernel of φ on g̃, the point (s : t) has orthogonal t²x + s²y = 0, which contains 1 and depends only on (s² : t²), so (60) is (s : t) ↦ (s² : t²); over 𝔽₂[ε]/(ε²) the distinct points (1 : ε) and (1 : 0) have the same image, so (60) is not a monomorphism. No unimodularity is needed for the orthogonal. Not formalised: the canonical isomorphism (61) with X^(2) for a twisted conic over a base, which needs conics over a base and the relative Frobenius, absent from mathlib.',
+      'The split case holds as the edition’s footnote gives it, over any commutative ring with 2 = 0: H̃ = 1 spans the kernel of φ on g̃, the point (s : t) has orthogonal t²x + s²y = 0, which contains 1 and depends only on (s² : t²), so (60) is (s : t) ↦ (s² : t²); over 𝔽₂[ε]/(ε²) the distinct points (1 : ε) and (1 : 0) have the same image, so (60) is not a monomorphism. No unimodularity is needed for the orthogonal. Not formalised: the canonical isomorphism (61) with X^(2) for a twisted conic over a base, which needs conics over a base and the relative Frobenius, absent from mathlib. Pages 26–27 hold in the split case, over any commutative ring with 2 = 0: sl(2) is the Heisenberg algebra, [u, u′] = (xy′ − yx′)H̃, with centre R·H̃ made of brackets; every Lie endomorphism is u ↦ g(x, y) + (ax + by + det g·z)H̃, an automorphism iff det g is a unit, so Aut(sl(2))(R) = GL₂(R) ⋉ R² with the composition law of GL(V) ⋉ Hom(V, det V); those fixing H̃ are SL₂(R) ⋉ R²; the derivations are free of rank 6, those killing H̃ of rank 5. Not formalised: forms over a base, gp(1) and the coupling, smoothness of the automorphism schemes.',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder82.lean',
-    theorems: ['coord_eq', 'coord_mul_self', 'traceless_iff', 'tH_eq_one', 'one_mem_traceless', 'ker_phi', 'vst_mul_self', 'trace_mul_vst', 'orth_iff', 'one_mem_orth', 'orth_smul', 'not_mono'],
+    theorems: ['lie_slMk', 'central_iff', 'lieHom_eq_autFun', 'autFun_inj', 'autFun_comp', 'bijective_iff', 'bijective_fix_iff', 'finrank_der', 'finrank_derFix', 'coord_eq', 'coord_mul_self', 'traceless_iff', 'tH_eq_one', 'one_mem_traceless', 'ker_phi', 'vst_mul_self', 'trace_mul_vst', 'orth_iff', 'one_mem_orth', 'orth_smul', 'not_mono'],
   },
   {
     folder: '62',
