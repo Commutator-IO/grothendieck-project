@@ -361,10 +361,9 @@ theorem edge_ofVertex {r : P → P → Prop} (hr : IsVertexOrder r) : edge (ofVe
     obtain ⟨z, hxz, hyz⟩ := hr.majorant x y h
     have hx : x ∈ V z := ⟨hr.isMin_left x y h, hxz⟩
     have hy : y ∈ V z := ⟨hr.isMin_right x y h, hyz⟩
-    obtain ⟨e, -, he⟩ := hP.exists_face z {x, y}
-      (Set.insert_subset hx (Set.singleton_subset_iff.2 hy)) (Set.insert_nonempty _ _)
-    have hne : x ≠ y := fun hxy => hr.irrefl x (hxy ▸ h)
-    exact ⟨e, he, hne, by rw [he]; simp, by rw [he]; simp, h⟩
+    obtain ⟨e, -, he⟩ := hP.exists_face z {x, y} (Set.pair_subset hx hy) (Set.insert_nonempty _ _)
+    exact ⟨e, he, fun hxy => hr.irrefl x (hxy ▸ h), he ▸ Set.mem_insert x {y},
+      he ▸ Set.mem_insert_of_mem x rfl, h⟩
 
 /-- Under (a), the edge relation of compatible simplex orders, when transitive, is a vertex order
 satisfying (b) and (c) (page 22). -/
@@ -383,10 +382,9 @@ theorem isVertexOrder_edge {o : P → P → P → Prop} (ho : IsCompatible o)
     exact ⟨z, (hz.symm ▸ Set.mem_insert x {y} : x ∈ V z).2,
       (hz.symm ▸ Set.mem_insert_of_mem x rfl : y ∈ V z).2⟩
   total d x hx y hy hxy := by
-    obtain ⟨e, -, he⟩ := hP.exists_face d {x, y}
-      (Set.insert_subset hx (Set.singleton_subset_iff.2 hy)) (Set.insert_nonempty _ _)
-    have hxe : x ∈ V e := by rw [he]; simp
-    have hye : y ∈ V e := by rw [he]; simp
+    obtain ⟨e, -, he⟩ := hP.exists_face d {x, y} (Set.pair_subset hx hy) (Set.insert_nonempty _ _)
+    have hxe : x ∈ V e := he ▸ Set.mem_insert x {y}
+    have hye : y ∈ V e := he ▸ Set.mem_insert_of_mem x rfl
     rcases ho.total e x hxe y hye hxy with h | h
     · exact Or.inl ⟨e, he, hxy, h⟩
     · exact Or.inr ⟨e, by rw [he, Set.pair_comm], hxy.symm, h⟩
@@ -399,10 +397,9 @@ theorem ofVertex_edge {o : P → P → P → Prop} (ho : IsCompatible o)
   apply propext
   constructor
   · rintro ⟨hx, hy, z, hz, hxy, hzo⟩
-    obtain ⟨e, hed, he⟩ := hP.exists_face d {x, y}
-      (Set.insert_subset hx (Set.singleton_subset_iff.2 hy)) (Set.insert_nonempty _ _)
-    have hxe : x ∈ V e := by rw [he]; simp
-    have hye : y ∈ V e := by rw [he]; simp
+    obtain ⟨e, hed, he⟩ := hP.exists_face d {x, y} (Set.pair_subset hx hy) (Set.insert_nonempty _ _)
+    have hxe : x ∈ V e := he ▸ Set.mem_insert x {y}
+    have hye : y ∈ V e := he ▸ Set.mem_insert_of_mem x rfl
     refine (ho.restrict e d hed x hxe y hye).1 ?_
     rcases ho.total e x hxe y hye hxy with h | h
     · exact h
@@ -413,10 +410,9 @@ theorem ofVertex_edge {o : P → P → P → Prop} (ho : IsCompatible o)
   · intro h
     obtain ⟨hx, hy⟩ := ho.support d x y h
     have hxy : x ≠ y := fun hxy => ho.irrefl d x (hxy ▸ h)
-    obtain ⟨e, hed, he⟩ := hP.exists_face d {x, y}
-      (Set.insert_subset hx (Set.singleton_subset_iff.2 hy)) (Set.insert_nonempty _ _)
-    have hxe : x ∈ V e := by rw [he]; simp
-    have hye : y ∈ V e := by rw [he]; simp
+    obtain ⟨e, hed, he⟩ := hP.exists_face d {x, y} (Set.pair_subset hx hy) (Set.insert_nonempty _ _)
+    have hxe : x ∈ V e := he ▸ Set.mem_insert x {y}
+    have hye : y ∈ V e := he ▸ Set.mem_insert_of_mem x rfl
     exact ⟨hx, hy, e, he, hxy, (ho.restrict e d hed x hxe y hye).2 h⟩
 
 /-- **The Proposition of pages 23–24**, on a poset satisfying (a): orders on `D₀` satisfying (b)
