@@ -69,6 +69,13 @@
 % beginning among the transcribed pages.
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — page 4: footnote on the Lean
+%   check (lean/Grothendieck/Folder5.lean): q_i is the multinomial coefficient
+%   of p blocks of size p^i and v_p(q_i) = 1, as the page states; mathlib's
+%   Legendre (padicValNat_factorial_mul) and DividedPowers.prod_dpow, with the
+%   references of its file. No literature recorded by the findings; the
+%   facsimile check of p. 49 (« numéro-ratrappage ») was already carried.
+%   Two « Ce que » turns removed.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -263,7 +270,7 @@ le nom « cristallin » dans le dossier n'est pas un détail : l'un a des
 puissances divisées, l'autre non, et en caractéristique $p$ ce sont deux
 théories différentes.
 
-\subsection*{Ce que le dossier annonce sans l'établir}
+\subsection*{Annoncé sans être établi}
 
 Que l'anneau $W^{(\nu)}$ de la page 4 porte bien des puissances divisées ;
 que la présentation de l'enveloppe des pages 31 à 34 en soit une (« à
@@ -403,6 +410,21 @@ satisfont alors, par la règle $\gamma_m(x)\gamma_n(x) = \binom{m+n}{m}
 q_i = \frac{(p^{i+1})!}{\bigl((p^{i})!\bigr)^{p}}, \qquad
 v_p(q_i) = 1 .
 \]
+\footnote{Vérifié en Lean (lean/Grothendieck/Folder5.lean,
+\texttt{factorial\_eq\_mul\_q}, \texttt{q\_eq\_multinomial},
+\texttt{padicValNat\_q}, \texttt{dpow\_pow\_eq\_q}). On a $((p^{i})!)^{p}\,
+q_i = (p^{i+1})!$ pour tout entier $p$ : $q_i$ est entier, c'est le coefficient
+multinomial de $p$ blocs de taille $p^{i}$. Pour $p$ premier, $(p - 1)\,
+v_p((p^{i})!) = p^{i} - 1$ et $v_p(q_i) = 1$, comme la page le « constate ».
+La valuation vient de la formule de Legendre sous la forme $v_p((pm)!) =
+v_p(m!) + m$, \texttt{padicValNat\_factorial\_mul} dans mathlib. La relation
+$\gamma_{p^{i}}(x)^{p} = q_i\, \gamma_{p^{i+1}}(x)$ vaut pour tout idéal à
+puissances divisées : c'est la formule du produit des puissances divisées,
+\texttt{DividedPowers.prod\_dpow} dans mathlib, dont le fichier renvoie à
+Berthelot, \emph{Cohomologie cristalline des schémas de caractéristique
+$p > 0$} (1974), à Berthelot--Ogus, \emph{Notes on crystalline cohomology}
+(1978), et à Roby (1963, 1965). L'universalité de la présentation, la forme
+normale et la constante $c(\nu)$ ne sont pas vérifiées.}
 D'où la candidate : avec des indéterminées $\Lambda_0, \ldots, \Lambda_\nu$
 (qui figureront $\gamma_{p^{i}}(p)$),
 \[
@@ -890,7 +912,7 @@ nilpotentes} si un tel $n$ existe pour chaque $x$.\footnote{La page porte
 trois formulations superposées et en partie biffées ; elle parle aussi de
 « nilidéal », et note que si $J$ est engendré par $N$ éléments, des
 puissances divisées nilpotentes entraînent $J^{N'} = 0$ pour un $N'$
-convenable. Ce que le logarithme et l'exponentielle demandent est la
+convenable. Le logarithme et l'exponentielle demandent la
 nilpotence locale, et c'est la définition que la page retient en dernier
 (« $\forall x$, $\exists n$ tel que $x^{(i)} = 0$ si $i > n$ »). Le nom
 moderne prête à confusion : chez Berthelot, « PD-nilpotent » désigne une
