@@ -105,14 +105,14 @@ export const PROOFS: Proof[] = [
     folder: '104',
     batch: 1,
     page: '6–10',
-    name: "Categories of models; well-foundedness; simplicial identities",
+    name: "Categories of models; well-foundedness; simplicial identities; pinned posets",
     statement:
-      "In a category of models, (*) is injective, the classes form an order, u_d = id, and the three examples have 2ⁿ⁺¹ − 1, 3ⁿ and 2n + 1 cells; a skeletal category of models whose strict relation is well-founded is a direct (Reedy) category, and conversely; in Example 1, the simplicial identities hold, every arrow factors through a face, and the category is direct.",
+      "In a category of models, (*) is injective, the classes form an order, u_d = id, and the three examples have 2ⁿ⁺¹ − 1, 3ⁿ and 2n + 1 cells; a skeletal category of models whose strict relation is well-founded is a direct (Reedy) category, and conversely; in Example 1, the simplicial identities hold, every arrow factors through a face, and the category is direct. On pages 12–16, for M skeletal, the admissible presheaves are equivalent to the M-pinned posets, and the class is stable under sums and pushouts along monomorphisms, X ↦ X̃ preserving them.",
     found:
-      "Nothing wrong. Well-foundedness is a real extra hypothesis, as the reading’s « dès que » says: ℤ as a category satisfies (i) and (ii) and is not direct. The Reedy statement needs the category skeletal (« rigide », p. 9); (i) is not used. Not proved: the full decomposition of an arrow into faces, M ≃ M₀. The characterisation of direct categories by well-foundedness is proposed to mathlib (leanprover-community/mathlib4#44731), and with it the direct Reedy structure of the semi-simplex category (#44732).",
+      "Nothing wrong. Well-foundedness is a real extra hypothesis, as the reading’s « dès que » says: ℤ as a category satisfies (i) and (ii) and is not direct. The Reedy statement needs the category skeletal (« rigide », p. 9); (i) is not used. Not proved: the full decomposition of an arrow into faces, M ≃ M₀. The characterisation of direct categories by well-foundedness is proposed to mathlib (leanprover-community/mathlib4#44731), and with it the direct Reedy structure of the semi-simplex category (#44732). The pinned-poset equivalence of pp. 12–16 holds: admissible means every element is a monomorphism (page 12's first condition suffices), X̃ is the category of elements, and anything mapping to an admissible presheaf is admissible.",
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder104.lean',
-    theorems: ["etoile_injective", "isIso_of_aller_retour", "id_of_idempotent_bijective", "reedyDirecte", "wf_of_degre", "entiers_relatifs_non_directe", "deltaInjReedy"],
+    theorems: ["etoile_injective", "isIso_of_aller_retour", "id_of_idempotent_bijective", "reedyDirecte", "wf_of_degre", "entiers_relatifs_non_directe", "deltaInjReedy", "admissible_iff", "versEpingle_isEquivalence", "mono_iff_injective_versEpingle", "admissible_coproduit", "admissible_pushout", "versEpingle_coproduit", "versEpingle_pushout"],
   },
   {
     folder: '125',
