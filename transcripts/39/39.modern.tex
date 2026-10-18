@@ -48,7 +48,8 @@
 %    henselian condition (H); « pleinement fidèle (?) » is faithful, not full;
 %    Hom_A(X, X_1) is the ideal of functions nilpotent at 0, not all of O_A(X).
 %  - Page 11: Cor. 1 as proved needs the substitution t_{n+1} = 1, which (S)
-%    does not allow — his own margin objection; the reading proves it with the
+%    does not allow — his own margin objection; it is false without (D)
+%    (Lean counterexample); the reading proves it with the
 %    coefficient condition (D) of page 14, which also gives the page's first
 %    form (any unit value at 0) directly, and with it f(0)^{-1} in A_0 — the
 %    fact his reductions between the forms use tacitly.
@@ -72,6 +73,13 @@
 %   finitely generated nil ideal) and the open mathlib PR n° 44725; the literature
 %   recorded by finding 39-inverse-function-axioms-henselian cited at the
 %   Weierstrass-system comparison; two « Ce que » headings renamed.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — pages 11-12, after the
+%   Lean check of the axiomatics (lean/Grothendieck/Folder39.lean): the pair
+%   (A_n, A_n cap m_n) is zariskian and henselian under (I), (S), (R), (H)
+%   alone, Cor. 3 not passing through Cor. 1, so the reading no longer holds
+%   the pair only under (D); Cor. 1 is false without (D) (series over Q with
+%   integral constant term), (D) being needed only for n = 0; mathlib's
+%   HenselianRing (Stacks 04GE) named.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -592,7 +600,23 @@ f \in A_n$\footnote{Une autre note marginale, en face de l'énoncé, parle d'une
 « condition de coefficientabilité » ; la lecture en est incertaine.}. La
 condition sur les coefficients $(\mathrm{D})$ de la page 14 suffit : $f^{-1}$ est
 le coefficient de $t_{n+1}$ dans $g$, donc est dans $A_n$. C'est sous cette
-hypothèse supplémentaire que nous tenons le corollaire pour démontré.
+hypothèse supplémentaire que nous tenons le corollaire pour démontré, et
+elle est nécessaire : sous $(\mathrm{I})$, $(\mathrm{S})$, $(\mathrm{R})$,
+$(\mathrm{H})$ seules, le corollaire est faux\footnote{Contre-exemple de
+l'édition, vérifié en Lean (lean/Grothendieck/Folder39.lean,
+\texttt{intConst\_isFormalClass} et \texttt{intConst\_not\_inv\_mem}) : sur
+$k = \mathbf{Q}$, les séries à terme constant entier,
+$A_n = \{f \in S_n : f(0) \in \mathbf{Z}\}$, satisfont $(\mathrm{I})$,
+$(\mathrm{S})$, $(\mathrm{R})$, $(\mathrm{H})$ (un nilpotent de $\mathbf{Q}$ est
+nul, une substitution par des séries sans terme constant conserve le terme
+constant, et un inverse pour la substitution est sans terme constant), et
+$2 \in A_0$, inversible dans $\mathbf{Q}$, n'a pas d'inverse dans $A_0$. Avec
+$(\mathrm{D})$ l'énoncé est vérifié (\texttt{inv\_mem}), et $(\mathrm{D})$ n'y
+sert que pour $n = 0$ : l'inverse de $s \mapsto f(0)s$ est dans $A_1$ par
+$(\mathrm{H})$, son coefficient $f(0)^{-1}$ dans $A_0$ par $(\mathrm{D})$, et le
+corollaire 3 appliqué à $fZ - 1$ donne $f^{-1}$.}. La conséquence sur le radical,
+elle, n'a pas besoin de $(\mathrm{D})$ : on la retrouve ci-dessous par le
+corollaire 3.
 
 La page passe ensuite, par des équivalences, aux formes « $f(0) = 1$ » et
 « $A_n \cap \mathfrak{m}_n \subset \mathrm{rad}\, A_n$ ». Revenir de là à la
@@ -605,12 +629,25 @@ unitaire, et $\zeta \in k_0$ une racine du polynôme réduit
 $P^\varepsilon(Z) = Z^N + a_1 Z^{N-1} + \cdots + a_N$, $a_i = f_i(0) \in k_0$, telle
 que $(P^\varepsilon)'(\zeta)$ soit inversible dans $k$. L'unique $F \in S_n$ tel que
 $P(F) = 0$ et $F(0) = \zeta$ est dans $A_n$. En d'autres termes, le couple
-$(A_n, A_n \cap \mathfrak{m}_n)$, déjà zariskien par le corollaire 1, est
-hensélien\footnote{« Zariskien » et « hensélien » sont les mots de la page pour
+$(A_n, A_n \cap \mathfrak{m}_n)$ est zariskien et
+hensélien\footnote{Vérifié en Lean (lean/Grothendieck/Folder39.lean,
+\texttt{hensel\_mem} et \texttt{henselianRing}, qui énonce la conclusion avec
+\texttt{HenselianRing} de mathlib, la notion de paire hensélienne du Stacks
+Project, tag 04GE) sous $(\mathrm{I})$, $(\mathrm{S})$, $(\mathrm{R})$,
+$(\mathrm{H})$ seules, sans la condition $(\mathrm{D})$ qu'une version
+antérieure de cette lecture ajoutait en faisant passer le couple par le
+corollaire 1. Le corollaire 3 ne dépend pas du corollaire 1 : la racine
+cherchée est $a_0 + F$, où $F$ est donné par le corollaire 3 appliqué à
+$P(a_0 + Z)$, et si $g \in A_n \cap \mathfrak{m}_n$ et $y \in A_n$, le
+polynôme $(1 + gy)Z - 1$ en $a_0 = 1$ donne l'inverse de $1 + gy$ dans $A_n$,
+d'où le caractère zariskien. C'est l'édition qui le remarque ; la page tire le
+caractère zariskien du corollaire 1.}\footnote{« Zariskien » et « hensélien » sont les mots de la page pour
 le couple $(A_n, \mathfrak{p}_n)$, et ce sont les termes d'aujourd'hui. La page
 ajoute que $(P^\varepsilon)'(\zeta)$, inversible dans $k$, est « en fait dans
-$k_0^*$ » : il est dans $k_0$, et son inverse aussi, par le corollaire 1 pour
-$n = 0$. Une première démonstration, par
+$k_0^*$ » : il est dans $k_0$, et son inverse aussi sous $(\mathrm{D})$, par
+le corollaire 1 pour $n = 0$ ; sans $(\mathrm{D})$ l'inverse peut manquer
+(l'exemple des séries à terme constant entier sur $\mathbf{Q}$), ce qui
+n'empêche pas le couple d'être hensélien. Une première démonstration, par
 l'automorphisme $(x, z) \mapsto (x, z^{N} + f_1(x) z^{N-1} + \cdots)$, a été
 encadrée et biffée.}.
 
@@ -622,7 +659,14 @@ $F(0) = 0$ est dans $A_n$.
 En effet, $u(x, z) = (x, P(x, z))$ est un $A$-morphisme de $X_{n+1}$ compatible
 aux projections sur $X_n$ et un isomorphisme formel ; par $(\mathrm{H})$ son
 inverse est de la forme $(x, z) \mapsto (x, \varphi(x, z))$ avec
-$\varphi \in A_{n+1}$, et $F = \varphi(t, 0) \in A_n$. Le corollaire 3 contient le
+$\varphi \in A_{n+1}$, et $F = \varphi(t, 0) \in A_n$\footnote{Vérifié en
+Lean (lean/Grothendieck/Folder39.lean, \texttt{implicit\_function} et
+\texttt{implicit\_mem}) sur un anneau commutatif quelconque, en lisant
+« isomorphisme formel » dans $(\mathrm{H})$ comme « admet un inverse pour la
+substitution ». L'existence et l'unicité de $F$ dans $S_n$, que la page tient
+pour acquises, sont obtenues par la division de Weierstrass de $Z$ par $P$
+dans $S_n[[Z]]$ : $P = q^{-1}(Z - r)$ avec $q$ inversible, et $F = r$.
+L'argument d'appartenance est celui de la page.}. Le corollaire 3 contient le
 corollaire 2 (translater $Z$ de $\zeta$) : c'est le théorème des fonctions
 implicites dans la classe.
 
