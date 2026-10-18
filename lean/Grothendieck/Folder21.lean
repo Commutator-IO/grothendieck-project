@@ -545,9 +545,8 @@ theorem P1_of_faithfulAt (hF : IsBinaryPrestack F) {Y : Set X} (hY : IsClosed Y)
     have hT'V : T ⊔ W' ≤ V := sup_le h (h'.trans inf_le_left)
     have := IH W' (h'.trans inf_le_right) hxW' hT'V (geom_sup h' hT)
     apply (res F hT'V).map_injective
-    refine hF.ext le_sup_left le_sup_right (Opens.coe_sup _ _) _ _ ?_ ?_
-    · rw [res_res_iff]; exact hab
-    · rw [res_res_iff]; exact hW'
+    exact hF.ext le_sup_left le_sup_right (Opens.coe_sup _ _) _ _ (by rwa [res_res_iff])
+      (by rwa [res_res_iff])
   · have := IH W₀ le_rfl hxW₀ h (geom_out hW₀ hxV hT)
     exact (res F h).map_injective hab
 
@@ -571,8 +570,7 @@ theorem full_of_fullAt (hF : IsBinaryPrestack F) {Y : Set X} (hY : IsClosed Y)
       hx x (hY'Y hxY') hTxW ⟨hxV, hxW₀⟩ hTx ((tr hW hTxW).symm (ρ hTxT c))
     have hρ' : ρ h₁ (tr hW h' a) = ρ (h₂.trans hTxT) c := by
       have := congrArg (tr hW (h₁.trans h')) hρ
-      rw [tr_ρ, tr_ρ, Equiv.apply_symm_apply, ρ_ρ] at this
-      exact this
+      rwa [tr_ρ, tr_ρ, Equiv.apply_symm_apply, ρ_ρ] at this
     have hT'V : T ⊔ W' ≤ V := sup_le h (h'.trans hW)
     obtain ⟨u, hu₁, hu₂⟩ := hF.glue (le_sup_left : T ≤ T ⊔ W') le_sup_right (h₂.trans hTxT) h₁
       (Opens.coe_sup _ _) (geom_inter hY'c hxY' hW₀ h' hT hS)
