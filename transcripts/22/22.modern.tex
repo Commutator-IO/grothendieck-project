@@ -26,6 +26,11 @@
 % invariant the check bears out is the ABSOLUTE module Ω_K. Cited from the
 % findings: the Stacks Project, tags 07EL and 07EM (formal smoothness of
 % K[[x]] for the adic topology only).
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — pp. 26-28: footnote on the
+%   Lean check of the differentials counterexample (lean/Grothendieck/Folder22.lean)
+%   in p. 28's specialisation a_i = 0 (i >= 2), for every prime p, by a route
+%   that does not compute k'; the general example unformalised. Two « Ce que »
+%   turns removed (p. 23, condition P).
 %
 % Scope: one document for the shelfmark, its two batches read as one argument.
 % Twenty-two of the twenty-nine leaves carry something; pages 4, 6, 7, 8 are
@@ -381,8 +386,8 @@ extension du corps de base.
 Deux notions du dossier ne sont pas définies dans le dossier, et il vaut mieux
 le dire d'emblée que de le laisser découvrir.
 
-La \emph{condition P} vient d'un numéro antérieur. Ce que le tapuscrit en
-utilise tient en deux points, et c'est tout ce qu'on en saura ici : elle
+La \emph{condition P} vient d'un numéro antérieur. Le tapuscrit n'en
+utilise que deux propriétés, et c'est tout ce qu'on en saura ici : elle
 implique la platitude, par le corollaire 3.5, dès que l'anneau de base est
 noethérien ; et elle est impliquée par la platitude sous les hypothèses
 noethériennes de 3.8, dont elle devient alors une reformulation. Le passage
@@ -1204,7 +1209,7 @@ discrète n'a été trouvée. — Le feuillet 22 porte en outre une prescription
 « $D(x_i) = 1/\alpha\,x_i$ » dont la lettre au dénominateur est une seule
 lettre, lue $\alpha$ sans certitude ; elle n'est pas utilisée ici.}
 
-\emph{Ce que la page 23 énonce.} Entre la conjecture et le contre-exemple, il
+\emph{L'énoncé de la page 23.} Entre la conjecture et le contre-exemple, il
 pose une proposition dont l'hypothèse est nette et dont la conclusion ne l'est
 pas : $k$ un corps, $K$ une extension telle que $\Omega_{K/k}$ soit \emph{de
 dimension finie} sur $K$, et $A = K[[t_1, \ldots, t_n]]$. De la conclusion, on
@@ -1324,14 +1329,31 @@ algébriquement indépendants de $x$ et de $y$.
 Donc $dx$ et $dy$ engendrent dans $\Omega^1_{k/k'} \otimes_k K$ un sous-espace
 de dimension deux sur $K$, dont l'image dans $\Omega^1_K$ est la droite
 $K\,dx$ : l'application n'est pas injective, et la remarque est
-tranchée.\footnote{Les deux feuillets portent, autour de cet argument, plusieurs
+tranchée\footnote{Vérifié en Lean (lean/Grothendieck/Folder22.lean,
+\texttt{contre\_exemple\_page26}, \texttt{a1\_not\_mem} et
+\texttt{triple\_injective}), pour tout nombre premier $p$, dans la
+spécialisation $a_i = 0$ pour $2 \leqslant i \leqslant p-1$ que propose la
+page 28 — pour $p = 2$, c'est l'exemple entier. Avec $K = \mathbf{F}_0(x, b_0,
+b_1)$, $a_i = b_i^p$ et $y = a_0 + a_1 x$, l'élément $1 \otimes dy - a_1 \otimes
+dx$ de $K \otimes_k \Omega^1_{k/k'}$ est non nul et s'annule dans
+$\Omega^1_{K/k'}$, qui est le $\Omega^1_K$ de la page puisque $k'$ est formé de
+puissances $p$-ièmes (cette identification n'est pas formalisée). La
+vérification suit une autre route que la page 28 pour la $p$-indépendance :
+elle ne calcule pas $k'$, mais montre que $\partial/\partial y$ le tue, car
+$\partial_x$ tue $K^p$ et la règle de dérivation des fonctions composées donne
+$\partial c/\partial x + a_1\,\partial c/\partial y = 0$ pour $c \in k'$,
+tandis que $a_1 \notin k$. Ce dernier point vient de l'indépendance algébrique
+de $x$, $y$, $a_1$, obtenue en écrivant $(x, y, a_1)$ comme un automorphisme
+triangulaire suivi d'un Frobenius partiel. L'exemple général, avec
+$a_2, \ldots, a_{p-1}$ non nuls, n'est pas formalisé.}.\footnote{Les deux feuillets portent, autour de cet argument, plusieurs
 essais biffés du même exemple — une version en $\alpha$, $y - \alpha x$ et
 $b = a^{1/p}$, et une réduction où l'on pose $a_i = 0$ pour
 $2 \leqslant i \leqslant p-1$, qui ramène au cas $y = a_0 + a_1 x$ — ainsi
 qu'une remarque finale
 indiquant que $\mathbf{F}$ peut être un corps fini. Ils ne sont pas rendus
 ici : ce sont des variantes du même contre-exemple, et aucune n'est écrite
-assez complètement pour être vérifiée. La reconstitution donnée ci-dessus est
+assez complètement pour être vérifiée sur la page ; la réduction à
+$y = a_0 + a_1 x$ a été vérifiée depuis par machine (note précédente). La reconstitution donnée ci-dessus est
 celle des fragments cohérents des pages 26 et 28 ; l'identification du corps de
 base $\mathbf{F}$, que le feuillet écrit tantôt $\mathbf{F}$ tantôt
 $\mathbf{F}_0$, est nôtre.}
