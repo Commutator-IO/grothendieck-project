@@ -312,8 +312,7 @@ variable {S : Type*} [CommRing S] [Algebra (ZMod p) S]
 Dickson relation holds at every point. -/
 theorem dickson_relation_eval {n : ℕ} (ξ : Fin n → S) (k : Fin n) :
     ξ k ^ p ^ n + ∑ i : Fin n, MvPolynomial.aeval ξ (A p n i) * ξ k ^ p ^ (i : ℕ) = 0 := by
-  have := congrArg (MvPolynomial.aeval ξ) (dickson_relation p k)
-  simpa using this
+  simpa using congrArg (MvPolynomial.aeval ξ) (dickson_relation p k)
 
 /-- **Where `Δₙ(ξ)` is invertible, the coefficients of the relation are unique, and are the
 values of the polynomials `A_i`**: the `A_i^E` of the complement of the zero divisor of `Δₙ`
