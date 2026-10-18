@@ -222,7 +222,7 @@ and the date.
 current notation. A second transcription pass
 ([issue #51](https://github.com/Commutator-IO/grothendieck-project/issues/51)),
 re-reading each page on 700 dpi tiles, has taken 61 batches of 15 folders so
-far. Statements of 62 folders are proved in Lean against mathlib
+far. Statements of 63 folders are proved in Lean against mathlib
 ([`lean/`](lean/)). None of it has been checked page by page by a person.
 `/method/` prices the steps separately, from the passes themselves:
 transcription carries almost all the cost, because it reads page images; the
