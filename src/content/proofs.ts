@@ -37,6 +37,19 @@ export const PROOFS: Proof[] = [
     theorems: ["lemme2_1", "lemme2_2", "isOpen_of_stableUnderGeneralization", "lemme1_faisceau", "proposition", "lemme2_page", "lemme1", "corollaire1"],
   },
   {
+    folder: '72',
+    batch: 2,
+    page: '37–38, 87–88',
+    name: 'The group 𝒰_ρ and the automorphisms of a realisation',
+    statement:
+      'For a non-degenerate realisation (E, (τᵢ)) of the universal regular n-carte by pseudo-reflections, 𝒰_ρ = Spec 𝒪_S[T]_{(1+ρT)}, with law λ + λ′ + ρλλ′, acts by u_λ = id + λπ ⊗ c̃, and 𝔾_m × 𝒰_ρ → Aut(E, (τᵢ)) is an isomorphism; D₀ ∖ {c, d} is a torsor under 𝒰_ρ, trivialised by s₀. In coordinates, on R-points.',
+    found:
+      'Holds on points over any commutative ring. λ ↦ 1 + ρλ is onto the units of every algebra iff ρ is a unit (tested on the dual numbers), and 𝒰₀ = 𝔾_a. The endomorphisms commuting with all τᵢ are exactly the c + tπ ⊗ c̃, with (c, t) unique, invertible iff c and c + tρ are units: Rˣ × 𝒰_ρ(R) ≅ Aut(E, (τᵢ)), and det u_λ = 1 + ρλ. The start points off c and d are the u_λs₀ = s₀ + λc̃, each for one λ. Not formalised: the group scheme, the projective statement over a base, the torsor of flags.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder72.lean',
+    theorems: ['toGm_bijective', 'forall_surjective_iff', 'τ_comm', 'eq_smul_vec', 'ρ_one', 'u_mul', 'u_comm', 'det_u', 'commute_iff', 'coeff_unique', 'isUnit_iff', 'mem_D0_iff', 'mem_startPoints_iff', 'u_e0_injective', 'u_u_e0'],
+  },
+  {
     folder: '160',
     batch: 1,
     page: '7–9, 14–15',
