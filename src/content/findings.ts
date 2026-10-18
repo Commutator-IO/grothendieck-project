@@ -7681,6 +7681,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Search for the inequality with |A|+|B| and |A*|+|B*| on the right in Simon, Trace Ideals, ch. 3, Bhatia, Matrix Analysis, IX (mixed Schwarz and Kato\'s inequality), Gohberg–Krein ch. II–IV, and the determinantal-inequality papers of M. Lin and F. Zhang (2010s). A web search in this pass (2026-10-10) surfaced only Seiler–Simon and a determinantal Cauchy–Schwarz for A*MB (Sidi 2024). That is a different statement, and neither was read.',
+    lean: { file: 'lean/Grothendieck/Folder1.lean', found: "Holds in finite dimension, as stated: for complex square matrices A, B and every k, |α_k(A+B)|² ≤ α_k(|A|+|B|) · α_k(|A*|+|B*|), α_k the coefficient of X^k in det(1 + XT), |A| = (A*A)^{1/2}; and Corollaire 3, |det(1+A+B)| ≤ ½[det(1+|A|+|B|) + det(1+|A*|+|B*|)], with the geometric-mean form |det(1+A+B)|² ≤ det(1+|A|+|B|) det(1+|A*|+|B*|). The proof is not the page's multilinear expansion: the block matrix [[|A|, A*], [A, |A*|]] is |H| + H for the self-adjoint H = [[0, A*], [A, 0]], hence positive; adding those of A and B and restricting to principal minors, the Schur complement and the monotonicity of det give |det T_S|² ≤ det P_S det Q_S, and Cauchy–Schwarz over the subsets S gives Corollaire 2. Trace-class operators are not formalised; whether the inequality is in print stays open." },
   },
   {
     id: '1-schatten-p-via-fredholm-determinant',

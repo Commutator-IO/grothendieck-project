@@ -1,4 +1,4 @@
-\section[Cote 1 : le système d'inégalités des valeurs singulières, cas $m \leq 2$]{Cote 1 : le système d'inégalités des valeurs singulières, cas $m \leq 2$\protect\verifie{Folder1}}\label{sec:1}
+\section[Cote 1 : le système d'inégalités des valeurs singulières, cas $m \leq 2$, coefficients de Fredholm]{Cote 1 : le système d'inégalités des valeurs singulières, cas $m \leq 2$, coefficients de Fredholm\protect\verifie{Folder1}}\label{sec:1}
 
 La cote 1, \emph{Analyse fonctionnelle : notes manuscrites (s.d.), lettre (1953)}, compte cent quarante-neuf pages, que l'inventaire date de 1953. Les pages~70 à~73 sont une mise au net sur les puissances extérieures des opérateurs à trace. La page~71 démontre, pour $u$, $v$ à trace, l'inégalité $\alpha_n(|u+v|) \leq \sum_{p} \alpha_p(|u|)\,\alpha_{n-p}(|v|)$ (corollaire~2, formule~(14), encadrée), par le développement de $\Lambda^n(u+v)$ en produits $(\Lambda^p u) \wedge (\Lambda^{n-p} v)$. Elle énonce ensuite le théorème~2 pour $u$, $v$ compacts : la forme produit~(15), encadrée, et \q{plus précisément} le système~(16), encadré lui aussi,
 \[
@@ -166,7 +166,22 @@ où $M^f$ est formé avec $(f_k)$, $(f'_l)$, $(y_i)$ et $M^e$ avec $(e_k)$, $(e'
 La démonstration suit la voie de la page~71 par $\Lambda^2$ sans construire l'espace hilbertien $\Lambda^2 E$ : le produit scalaire $\langle a \wedge b, c \wedge d\rangle = \langle a, c\rangle\langle b, d\rangle - \langle a, d\rangle\langle b, c\rangle$ y est remplacé par les mineurs $M_{kl,ij}$, et la formule de Cauchy--Binet et l'identité de Lagrange tiennent lieu de structure hilbertienne. Le terme mixte $B(u, v) + B(v, u)$ correspond à $u \wedge v + v \wedge u$, et sa borne $2\,\sigma_n^1(u)\sigma_n^1(v)$ est celle que donne la constante $p!\,q!/(p+q)! = 1/2$ de la page pour $p = q = 1$. Le terme pur $|B(T, T)| \leq 2\sigma_n^2(T)$ est la majoration de la proposition~3 pour $m = 2$, restreinte aux contractions de la forme $\sum_i x_i \langle y_i, \cdot\rangle$ à familles orthogonales. L'inégalité de Ky Fan appliquée à $\Lambda^2 T$ n'y suffirait pas : elle majore par la somme des $\binom n2$ plus grands produits $s_is_j$, qui peut dépasser $\sigma_n^2(T)$ (pour $n = 3$ et $s = (2, 1, 1, 1)$, elle vaut $6$ et $\sigma_3^2 = 5$). C'est la majoration des lignes $\sum_l \alpha_{kl} \leq (|I| - 1)\,p_k$, propre aux vecteurs décomposables, qui permet le lemme~\ref{lem:1-poids2}. L'énoncé vaut tel que la page l'écrit pour $m = 2$, sans hypothèse supplémentaire.
 \end{remarque}
 
-Ne sont pas démontrés ici : le système~(16) pour $3 \leq m \leq n$, qui demanderait les mineurs d'ordre $m$ et la borne $p!\,q!/(p+q)!$ générale (proposition~2 et corollaire~2 de la page~71) ; la proposition~3 en général (la minoration, et les contractions de rang $\leq n$ quelconques) ; la forme produit~(15) pour $n \geq 3$ ; le passage de la dimension finie aux opérateurs compacts entre espaces de Hilbert ; l'assertion de la page~73 sur l'optimalité du système ; la proposition~4 ; les pages~74 et~75, sur la sous-additivité des fonctions concaves des valeurs singulières.
+\paragraph{Coefficients de Fredholm (pages 123 et 124).} Pour un opérateur $T$, $\alpha_k(T)$ désigne le coefficient de $X^k$ dans $\det(1 + XT)$, c'est-à-dire la trace de $\Lambda^k T$ ; $|A| = (A^*A)^{1/2}$ et $|A^*| = (AA^*)^{1/2}$. La page~123 encadre le corollaire~2, la page~124 le corollaire~3, pour des opérateurs nucléaires (\lot{1}{7}{123}, \lot{1}{7}{124}).
+
+\begin{encadre}
+\begin{theoreme}[Grothendieck, pages 123 et 124, corollaires 2 et 3, en dimension finie\piste{1-mixed-schwarz-fredholm-coefficients}]
+Soient $A, B$ des matrices carrées complexes. Pour tout $k$,
+\[ |\alpha_k(A + B)|^2 \leq \alpha_k(|A| + |B|)\, \alpha_k(|A^*| + |B^*|), \]
+et $|\det(1 + A + B)| \leq \frac12 \big[\det(1 + |A| + |B|) + \det(1 + |A^*| + |B^*|)\big]$.
+\end{theoreme}
+\end{encadre}
+L'énoncé tient tel que la page l'écrit (Lean : \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/Folder1.lean}{\texttt{corollaire2}, \texttt{corollaire3}}). La même démonstration donne la forme géométrique, énoncé de l'édition : $|\det(1 + A + B)|^2 \leq \det(1 + |A| + |B|) \det(1 + |A^*| + |B^*|)$.
+
+\begin{remarque}
+La démonstration n'est pas le développement multilinéaire de la page. La matrice par blocs $\left(\begin{smallmatrix} |A| & A^* \\ A & |A^*| \end{smallmatrix}\right)$ est $|H| + H$ pour $H = \left(\begin{smallmatrix} 0 & A^* \\ A & 0 \end{smallmatrix}\right)$, donc positive ; on ajoute celles de $A$ et de $B$, on restreint aux mineurs principaux, où le complément de Schur et la croissance du déterminant donnent $|\det T_S|^2 \leq \det P_S \det Q_S$, puis on applique l'inégalité de Cauchy--Schwarz à la somme des mineurs. Le cas des opérateurs nucléaires n'est pas formalisé.
+\end{remarque}
+
+Ne sont pas démontrés ici : le système~(16) pour $3 \leq m \leq n$, qui demanderait les mineurs d'ordre $m$ et la borne $p!\,q!/(p+q)!$ générale (proposition~2 et corollaire~2 de la page~71) ; la proposition~3 en général (la minoration, et les contractions de rang $\leq n$ quelconques) ; la forme produit~(15) pour $n \geq 3$ ; le passage de la dimension finie aux opérateurs compacts entre espaces de Hilbert ; l'assertion de la page~73 sur l'optimalité du système ; la proposition~4 ; les pages~74 et~75, sur la sous-additivité des fonctions concaves des valeurs singulières ; les corollaires~2 et~3 des pages~123 et~124 pour des opérateurs nucléaires.
 
 \begin{encadre}
 \begin{theoreme}[Grothendieck, pages 71 à 73, le système (16)\piste{1-sigma-nm-system}]\nonverifie

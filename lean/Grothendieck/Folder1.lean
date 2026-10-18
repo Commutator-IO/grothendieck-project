@@ -35,6 +35,20 @@ constant `p! q!/(p+q)! = 1/2`), the pure terms by `2 σ_n^2` (`norm_bform_self_l
 weight lemma `sum_sum_mul_le_of_weights`). Not proved: (16) for `3 ≤ m ≤ n`, Prop. 3 in
 general, and the passage to compact operators. A proof says only that the claim holds as stated; whether
 the system is in the literature stays open.
+
+**Pages 123–124** (finding `1-mixed-schwarz-fredholm-coefficients`, issue #54), for complex
+square matrices, with `α_k(T)` the coefficient of `X^k` in `det(1 + X T)` (`alpha`; by mathlib,
+the sum of the principal `k × k` minors) and `|A| = (A*A)^{1/2}` mathlib's `CFC.abs`:
+
+* `corollaire2`: `|α_k(A + B)|² ≤ α_k(|A| + |B|) · α_k(|A*| + |B*|)` — Corollaire 2 holds;
+* `corollaire3`: `|det(1 + A + B)| ≤ ½[det(1 + |A| + |B|) + det(1 + |A*| + |B*|)]` (Corollaire 3)
+  and the geometric-mean form `|det(1 + A + B)|² ≤ det(1 + |A| + |B|) det(1 + |A*| + |B*|)`.
+
+The proof is not the page's multilinear expansion: `[[|A|, A*], [A, |A*|]]` is `|H| + H` for the
+self-adjoint `H = [[0, A*], [A, 0]]`, hence `≥ 0` (`block_posSemidef`); adding the blocks of `A`
+and `B` and restricting to `S ⊔ S`, each principal minor satisfies `|det T_S|² ≤ det P_S det Q_S`
+(`norm_det_sq_le`, by the Schur complement and the monotonicity of `det`, `det_le_det_add`), and
+Cauchy–Schwarz over the subsets `S` gives Corollaire 2. Trace-class operators are not formalised.
 -/
 
 namespace Grothendieck.Folder1
@@ -1033,5 +1047,235 @@ theorem prod_le_of_le_two (u v : E →ₗ[𝕜] F) {n : ℕ} (hn : n ≤ 2) {r :
   prod_le_of_sigma_system u v n (fun m hm => sigma_system_of_le_two u v n m (hm.trans hn)) hr
 
 end SigmaTwo
+
+/-! ### Pages 123–124: Fredholm coefficients and the mixed Schwarz inequality -/
+
+section Fredholm
+
+open Matrix Polynomial
+open scoped MatrixOrder ComplexOrder
+
+variable {n : Type*} [Fintype n] [DecidableEq n]
+
+/-- The `k`-th Fredholm coefficient `α_k(T)`, the coefficient of `X^k` in `det(1 + X T)`:
+the `k`-th elementary symmetric function of the eigenvalues, the trace of `Λᵏ T`. -/
+noncomputable def alpha (k : ℕ) (T : Matrix n n ℂ) : ℂ :=
+  (det (1 + (X : ℂ[X]) • T.map C)).coeff k
+
+theorem alpha_eq_sum_minors (k : ℕ) (T : Matrix n n ℂ) :
+    alpha k T = ∑ s ∈ Finset.univ.powersetCard k,
+      (T.submatrix (Subtype.val : s → n) (Subtype.val : s → n)).det :=
+  coeff_det_one_add_X_smul_eq_sum_minors T k
+
+theorem alpha_zero (T : Matrix n n ℂ) : alpha 0 T = 1 := by
+  rw [alpha_eq_sum_minors, Finset.powersetCard_zero, Finset.sum_singleton]
+  exact det_isEmpty
+
+/-- `α_k` of a positive semidefinite matrix is `≥ 0`: its principal minors are. -/
+theorem alpha_nonneg {T : Matrix n n ℂ} (hT : T.PosSemidef) (k : ℕ) : 0 ≤ alpha k T := by
+  rw [alpha_eq_sum_minors]
+  exact Finset.sum_nonneg fun s _ => (hT.submatrix _).det_nonneg
+
+/-- `det(1 + T) = ∑_k α_k(T)`. -/
+theorem det_one_add_eq_sum_alpha (T : Matrix n n ℂ) :
+    det (1 + T) = ∑ k ∈ Finset.range (Fintype.card n + 1), alpha k T := by
+  have hdeg : (det (1 + (X : ℂ[X]) • T.map C)).natDegree < Fintype.card n + 1 := by
+    have := natDegree_det_X_add_C_le T (1 : Matrix n n ℂ)
+    rw [Matrix.map_one _ (map_zero C) (map_one C), add_comm] at this
+    omega
+  have h := eval_eq_sum_range' hdeg 1
+  simp only [one_pow, mul_one] at h
+  simp only [alpha]
+  rw [← h, eval, ← coe_eval₂RingHom, RingHom.map_det]
+  congr 1
+  ext i j
+  by_cases hij : i = j <;> simp [hij]
+
+/-- `det(1 + R) ≥ 1` for `R ≥ 0`. -/
+theorem one_le_det_one_add {R : Matrix n n ℂ} (hR : R.PosSemidef) : 1 ≤ det (1 + R) := by
+  rw [det_one_add_eq_sum_alpha, ← alpha_zero R]
+  exact Finset.single_le_sum (fun k _ => alpha_nonneg hR k) (Finset.mem_range.2 (by omega))
+
+/-- Monotonicity of the determinant: `det S ≤ det (R + S)` for `R, S ≥ 0`. -/
+theorem det_le_det_add {R S : Matrix n n ℂ} (hR : R.PosSemidef) (hS : S.PosSemidef) :
+    det S ≤ det (R + S) := by
+  by_cases h0 : det S = 0
+  · rw [h0]; exact (hR.add hS).det_nonneg
+  have hS0 : 0 ≤ S := hS.nonneg
+  set s := CFC.sqrt S with hs
+  have hss : s * s = S := CFC.sqrt_mul_sqrt_self S
+  have hsH : sᴴ = s := (CFC.sqrt_nonneg S).posSemidef.isHermitian
+  have hdet : det s * det s = det S := by rw [← det_mul, hss]
+  have hsu : IsUnit (det s) := isUnit_iff_ne_zero.2 fun h => h0 (by rw [← hdet, h, zero_mul])
+  set R' := s⁻¹ * R * s⁻¹
+  have hR' : R'.PosSemidef := by
+    have := hR.conjTranspose_mul_mul_same s⁻¹
+    rwa [conjTranspose_nonsing_inv, hsH] at this
+  have hRS : R + S = s * (1 + R') * s := by
+    simp only [R', mul_add, add_mul, mul_one, ← mul_assoc, mul_nonsing_inv _ hsu, one_mul,
+      hss]
+    rw [mul_assoc, nonsing_inv_mul _ hsu, mul_one, add_comm]
+  have : det s * det (1 + R') * det s = det S * det (1 + R') := by rw [← hdet]; ring
+  rw [hRS, det_mul, det_mul, this]
+  exact le_mul_of_one_le_right hS.det_nonneg (one_le_det_one_add hR')
+
+/-- For a positive semidefinite block matrix `[[P, Xᴴ], [X, Q]]`, `|det X|² ≤ det P · det Q`. -/
+theorem norm_det_sq_le {m : Type*} [Fintype m] [DecidableEq m] {P Q X : Matrix m m ℂ}
+    (h : (fromBlocks P Xᴴ X Q).PosSemidef) : ((‖det X‖ ^ 2 : ℝ) : ℂ) ≤ det P * det Q := by
+  have hP : P.PosSemidef := by
+    have := h.submatrix Sum.inl
+    rwa [show (fromBlocks P Xᴴ X Q).submatrix Sum.inl Sum.inl = P by ext; rfl] at this
+  have hQ : Q.PosSemidef := by
+    have := h.submatrix Sum.inr
+    rwa [show (fromBlocks P Xᴴ X Q).submatrix Sum.inr Sum.inr = Q by ext; rfl] at this
+  have hX : ((‖det X‖ ^ 2 : ℝ) : ℂ) = det X * det Xᴴ := by
+    rw [det_conjTranspose, Complex.star_def, Complex.mul_conj, Complex.normSq_eq_norm_sq]
+  by_cases hP0 : det P = 0
+  · obtain ⟨v, hv, hPv⟩ := exists_mulVec_eq_zero_iff.2 hP0
+    have hw : star (Sum.elim v 0) ⬝ᵥ (fromBlocks P Xᴴ X Q *ᵥ Sum.elim v 0) = 0 := by
+      simp [fromBlocks_mulVec, hPv, dotProduct, Fintype.sum_sum_type]
+    have hMw := (h.dotProduct_mulVec_zero_iff).1 hw
+    have hXv : X *ᵥ v = 0 := by
+      ext i
+      have := congrFun hMw (Sum.inr i)
+      simpa [fromBlocks_mulVec] using this
+    have : det X = 0 := exists_mulVec_eq_zero_iff.1 ⟨v, hv, hXv⟩
+    rw [hX, this, hP0]; simp
+  have hPd : P.PosDef := hP.posDef_iff_det_ne_zero.2 hP0
+  have : Invertible P := invertibleOfIsUnitDet P (isUnit_iff_ne_zero.2 hP0)
+  have hschur : (Q - X * P⁻¹ * Xᴴ).PosSemidef := by
+    have := (PosDef.fromBlocks₁₁ Xᴴ Q hPd).1 (by rwa [conjTranspose_conjTranspose])
+    rwa [conjTranspose_conjTranspose] at this
+  have hS : (X * P⁻¹ * Xᴴ).PosSemidef := hPd.inv.posSemidef.mul_mul_conjTranspose_same X
+  have hle := det_le_det_add hschur hS
+  rw [sub_add_cancel] at hle
+  have hdS : det (X * P⁻¹ * Xᴴ) * det P = det X * det Xᴴ := by
+    rw [det_mul, det_mul, det_nonsing_inv, Ring.inverse_eq_inv']
+    field_simp
+  rw [hX, ← hdS, mul_comm (det P)]
+  exact mul_le_mul_of_nonneg_right hle hP.det_nonneg
+
+/-- `|H| = [[|A|, 0], [0, |A*|]]` for `H = [[0, A*], [A, 0]]`. -/
+theorem abs_block (A : Matrix n n ℂ) :
+    CFC.abs (fromBlocks 0 Aᴴ A 0) = fromBlocks (CFC.abs A) 0 0 (CFC.abs Aᴴ) := by
+  have hD : (fromBlocks (CFC.abs A) 0 0 (CFC.abs Aᴴ)).PosSemidef := by
+    have h1 := posSemidef_iff_dotProduct_mulVec.mp (CFC.abs_nonneg A).posSemidef
+    have h2 := posSemidef_iff_dotProduct_mulVec.mp (CFC.abs_nonneg Aᴴ).posSemidef
+    refine posSemidef_iff_dotProduct_mulVec.mpr ⟨by simp [IsHermitian, fromBlocks_conjTranspose,
+      h1.1.eq, h2.1.eq], fun x => ?_⟩
+    rw [(Sum.elim_comp_inl_inr x).symm, fromBlocks_mulVec]
+    simp only [zero_mulVec, add_zero, zero_add]
+    convert add_nonneg (h1.2 (x ∘ Sum.inl)) (h2.2 (x ∘ Sum.inr)) using 1
+    simp [dotProduct, Fintype.sum_sum_type]
+  rw [CFC.abs]
+  refine CFC.sqrt_unique ?_ hD.nonneg
+  rw [fromBlocks_multiply]
+  simp only [star_eq_conjTranspose, fromBlocks_conjTranspose, fromBlocks_multiply,
+    conjTranspose_zero, conjTranspose_conjTranspose, mul_zero, zero_mul, add_zero, zero_add]
+  rw [CFC.abs_mul_abs, CFC.abs_mul_abs]
+  simp [star_eq_conjTranspose]
+
+/-- `[[|A|, A*], [A, |A*|]] ≥ 0`: it is `|H| + H`, `H = [[0, A*], [A, 0]]`. -/
+theorem block_posSemidef (A : Matrix n n ℂ) :
+    (fromBlocks (CFC.abs A) Aᴴ A (CFC.abs Aᴴ)).PosSemidef := by
+  have hH : IsSelfAdjoint (fromBlocks 0 Aᴴ A 0 : Matrix (n ⊕ n) (n ⊕ n) ℂ) := by
+    simp [IsSelfAdjoint, star_eq_conjTranspose, fromBlocks_conjTranspose]
+  have h := CFC.abs_add_self _ hH
+  have h0 : 0 ≤ CFC.abs (fromBlocks 0 Aᴴ A 0 : Matrix (n ⊕ n) (n ⊕ n) ℂ) +
+      fromBlocks 0 Aᴴ A 0 := by
+    rw [h]; exact smul_nonneg (by norm_num) (CFC.posPart_nonneg _)
+  rw [abs_block, fromBlocks_add] at h0
+  simpa using h0.posSemidef
+
+/-- **Page 123, Corollaire 2, in finite dimension.** For complex square matrices `A`, `B`,
+`|α_k(A + B)|² ≤ α_k(|A| + |B|) · α_k(|A*| + |B*|)` for every `k`. -/
+theorem corollaire2 (A B : Matrix n n ℂ) (k : ℕ) :
+    ‖alpha k (A + B)‖ ^ 2 ≤
+      (alpha k (CFC.abs A + CFC.abs B)).re * (alpha k (CFC.abs Aᴴ + CFC.abs Bᴴ)).re := by
+  set P := CFC.abs A + CFC.abs B
+  set Q := CFC.abs Aᴴ + CFC.abs Bᴴ
+  set T := A + B
+  have hM : (fromBlocks P Tᴴ T Q).PosSemidef := by
+    have := (block_posSemidef A).add (block_posSemidef B)
+    rwa [fromBlocks_add, ← conjTranspose_add] at this
+  have hP : P.PosSemidef := (CFC.abs_nonneg A).posSemidef.add (CFC.abs_nonneg B).posSemidef
+  have hQ : Q.PosSemidef := (CFC.abs_nonneg Aᴴ).posSemidef.add (CFC.abs_nonneg Bᴴ).posSemidef
+  -- the principal minors
+  set a : Finset n → ℝ := fun s => (P.submatrix (Subtype.val : s → n) Subtype.val).det.re
+  set b : Finset n → ℝ := fun s => (Q.submatrix (Subtype.val : s → n) Subtype.val).det.re
+  have hdet : ∀ s : Finset n, ‖(T.submatrix (Subtype.val : s → n) Subtype.val).det‖ ≤
+      √(a s) * √(b s) := by
+    intro s
+    have hs := hM.submatrix (Sum.map (Subtype.val : s → n) (Subtype.val : s → n))
+    rw [show (fromBlocks P Tᴴ T Q).submatrix (Sum.map Subtype.val Subtype.val)
+        (Sum.map Subtype.val Subtype.val) = fromBlocks (P.submatrix (Subtype.val : s → n)
+          Subtype.val) (T.submatrix (Subtype.val : s → n) Subtype.val)ᴴ
+          (T.submatrix Subtype.val Subtype.val) (Q.submatrix Subtype.val Subtype.val) by
+      ext (i | i) (j | j) <;> rfl] at hs
+    have h := norm_det_sq_le hs
+    have ha := (hP.submatrix (Subtype.val : s → n)).det_nonneg
+    have hb := (hQ.submatrix (Subtype.val : s → n)).det_nonneg
+    rw [← Real.sqrt_mul (Complex.nonneg_iff.1 ha).1]
+    refine Real.le_sqrt_of_sq_le ?_
+    have h' := (Complex.le_def.1 h).1
+    rw [Complex.ofReal_re, Complex.mul_re, ← (Complex.nonneg_iff.1 ha).2,
+      ← (Complex.nonneg_iff.1 hb).2] at h'
+    simpa [a, b] using h'
+  have ha0 : ∀ s, 0 ≤ a s := fun s =>
+    (Complex.nonneg_iff.1 (hP.submatrix (Subtype.val : s → n)).det_nonneg).1
+  have hb0 : ∀ s, 0 ≤ b s := fun s =>
+    (Complex.nonneg_iff.1 (hQ.submatrix (Subtype.val : s → n)).det_nonneg).1
+  have key : ‖alpha k T‖ ≤ √((alpha k P).re) * √((alpha k Q).re) := by
+    rw [alpha_eq_sum_minors, alpha_eq_sum_minors, alpha_eq_sum_minors, Complex.re_sum,
+      Complex.re_sum]
+    exact (norm_sum_le _ _).trans ((Finset.sum_le_sum fun s _ => hdet s).trans
+      (Real.sum_sqrt_mul_sqrt_le _ ha0 hb0))
+  have hPk := (Complex.nonneg_iff.1 (alpha_nonneg hP k)).1
+  have hQk := (Complex.nonneg_iff.1 (alpha_nonneg hQ k)).1
+  calc ‖alpha k T‖ ^ 2 ≤ (√((alpha k P).re) * √((alpha k Q).re)) ^ 2 :=
+        pow_le_pow_left₀ (norm_nonneg _) key 2
+    _ = _ := by rw [mul_pow, Real.sq_sqrt hPk, Real.sq_sqrt hQk]
+
+theorem norm_alpha_le (A B : Matrix n n ℂ) (k : ℕ) :
+    ‖alpha k (A + B)‖ ≤ √((alpha k (CFC.abs A + CFC.abs B)).re) *
+      √((alpha k (CFC.abs Aᴴ + CFC.abs Bᴴ)).re) := by
+  have hP := (Complex.nonneg_iff.1 (alpha_nonneg
+    ((CFC.abs_nonneg A).posSemidef.add (CFC.abs_nonneg B).posSemidef) k)).1
+  rw [← Real.sqrt_mul hP]
+  exact Real.le_sqrt_of_sq_le (corollaire2 A B k)
+
+/-- **Page 124, Corollaire 3, in finite dimension**, and the geometric-mean form:
+`|det(1 + A + B)| ≤ ½ [det(1 + |A| + |B|) + det(1 + |A*| + |B*|)]` and
+`|det(1 + A + B)|² ≤ det(1 + |A| + |B|) · det(1 + |A*| + |B*|)`. -/
+theorem corollaire3 (A B : Matrix n n ℂ) :
+    ‖det (1 + (A + B))‖ ≤
+        ((det (1 + (CFC.abs A + CFC.abs B))).re + (det (1 + (CFC.abs Aᴴ + CFC.abs Bᴴ))).re) / 2 ∧
+      ‖det (1 + (A + B))‖ ^ 2 ≤
+        (det (1 + (CFC.abs A + CFC.abs B))).re * (det (1 + (CFC.abs Aᴴ + CFC.abs Bᴴ))).re := by
+  set P := CFC.abs A + CFC.abs B
+  set Q := CFC.abs Aᴴ + CFC.abs Bᴴ
+  have hP : P.PosSemidef := (CFC.abs_nonneg A).posSemidef.add (CFC.abs_nonneg B).posSemidef
+  have hQ : Q.PosSemidef := (CFC.abs_nonneg Aᴴ).posSemidef.add (CFC.abs_nonneg Bᴴ).posSemidef
+  have ha : ∀ k, 0 ≤ (alpha k P).re := fun k => (Complex.nonneg_iff.1 (alpha_nonneg hP k)).1
+  have hb : ∀ k, 0 ≤ (alpha k Q).re := fun k => (Complex.nonneg_iff.1 (alpha_nonneg hQ k)).1
+  have h1 : ‖det (1 + (A + B))‖ ≤ ∑ k ∈ Finset.range (Fintype.card n + 1),
+      √((alpha k P).re) * √((alpha k Q).re) := by
+    rw [det_one_add_eq_sum_alpha]
+    exact (norm_sum_le _ _).trans (Finset.sum_le_sum fun k _ => norm_alpha_le A B k)
+  rw [det_one_add_eq_sum_alpha P, det_one_add_eq_sum_alpha Q, Complex.re_sum, Complex.re_sum]
+  refine ⟨h1.trans ?_, ?_⟩
+  · rw [← Finset.sum_add_distrib, Finset.sum_div]
+    refine Finset.sum_le_sum fun k _ => ?_
+    nlinarith [Real.sq_sqrt (ha k), Real.sq_sqrt (hb k), sq_nonneg (√((alpha k P).re) -
+      √((alpha k Q).re))]
+  · have h2 := h1.trans (Real.sum_sqrt_mul_sqrt_le _ ha hb)
+    calc ‖det (1 + (A + B))‖ ^ 2 ≤ (√(∑ k ∈ Finset.range (Fintype.card n + 1), (alpha k P).re) *
+          √(∑ k ∈ Finset.range (Fintype.card n + 1), (alpha k Q).re)) ^ 2 :=
+          pow_le_pow_left₀ (norm_nonneg _) h2 2
+      _ = _ := by
+        rw [mul_pow, Real.sq_sqrt (Finset.sum_nonneg fun k _ => ha k),
+          Real.sq_sqrt (Finset.sum_nonneg fun k _ => hb k)]
+
+end Fredholm
 
 end Grothendieck.Folder1

@@ -365,14 +365,14 @@ export const PROOFS: Proof[] = [
     folder: '1',
     batch: 4,
     page: '71–73',
-    name: 'The σ_n^m system of singular values',
+    name: 'The σ_n^m system of singular values; Fredholm coefficients',
     statement:
-      'For linear maps u, v between finite-dimensional inner product spaces, σ_n^m(u + v) ≤ Σ_{p ≤ m} σ_n^p(u) σ_n^{m−p}(v), σ_n^m the elementary symmetric functions of the first n singular values; the system implies ∏(1 + r s_i(u + v)) ≤ ∏(1 + r s_i(u)) ∏(1 + r s_i(v)).',
+      'For linear maps u, v between finite-dimensional inner product spaces, σ_n^m(u + v) ≤ Σ_{p ≤ m} σ_n^p(u) σ_n^{m−p}(v), σ_n^m the elementary symmetric functions of the first n singular values; the system implies ∏(1 + r s_i(u + v)) ≤ ∏(1 + r s_i(u)) ∏(1 + r s_i(v)). For complex matrices A, B (pp. 123–124), |α_k(A + B)|² ≤ α_k(|A| + |B|) α_k(|A*| + |B*|), α_k the Fredholm coefficients, and |det(1 + A + B)| ≤ ½[det(1 + |A| + |B|) + det(1 + |A*| + |B*|)].',
     found:
-      'Proved for m ≤ 2 and every n. The case m = 1 is Ky Fan’s inequality, absent from mathlib; the case m = 2 follows the page’s Λ² route, written with 2×2 minors (Cauchy–Binet, Lagrange) instead of Hilbert exterior powers, with the mixed-term constant 1/2 of the page; Ky Fan applied to Λ²T alone would be too weak, and a row bound from decomposable vectors closes the gap. The implication from the system to the product form holds, hence (15) for n ≤ 2. The cases 3 ≤ m ≤ n and compact operators are not proved. Ky Fan’s inequality is proposed to mathlib (leanprover-community/mathlib4#44728).',
+      'Proved for m ≤ 2 and every n. The case m = 1 is Ky Fan’s inequality, absent from mathlib; the case m = 2 follows the page’s Λ² route, written with 2×2 minors (Cauchy–Binet, Lagrange) instead of Hilbert exterior powers, with the mixed-term constant 1/2 of the page; Ky Fan applied to Λ²T alone would be too weak, and a row bound from decomposable vectors closes the gap. The implication from the system to the product form holds, hence (15) for n ≤ 2. The cases 3 ≤ m ≤ n and compact operators are not proved. Ky Fan’s inequality is proposed to mathlib (leanprover-community/mathlib4#44728). Corollaires 2 and 3 of pp. 123–124 hold in finite dimension, with the geometric-mean form |det(1 + A + B)|² ≤ det(1 + |A| + |B|) det(1 + |A*| + |B*|); the route is not the page’s multilinear expansion but the positivity of [[|A|, A*], [A, |A*|]] = |H| + H, Schur complements on principal minors and Cauchy–Schwarz. Trace-class operators are not formalised.',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder1.lean',
-    theorems: ['sum_singularValues_add_le', 'sigma_system_of_le_one', 'prod_le_of_sigma_system', 'one_add_singularValues_zero_le', 'sigma_two_add_le', 'sigma_system_of_le_two', 'prod_le_of_le_two'],
+    theorems: ['sum_singularValues_add_le', 'sigma_system_of_le_one', 'prod_le_of_sigma_system', 'one_add_singularValues_zero_le', 'sigma_two_add_le', 'sigma_system_of_le_two', 'prod_le_of_le_two', 'corollaire2', 'corollaire3', 'block_posSemidef', 'norm_det_sq_le'],
   },
   {
     folder: '74',
