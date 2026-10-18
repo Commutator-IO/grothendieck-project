@@ -60,6 +60,12 @@
 % coefficientwise system, whose literature search is not done; the
 % « lettre (1953) » recorded as absent from the scan, the untranscribed
 % pages (1, 36, 42, 46, 105, 122, 140) being blank on the facsimile.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — pages 123-129: footnotes
+%   on the Lean checks of Corollaires 2 and 3 of p. 124 (finite dimension, by
+%   a block-matrix and Schur-complement route, mathlib's PosDef.fromBlocks₁₁)
+%   and of the deduction of S_p subadditivity from the determinant inequality
+%   (finite dimension, 0 < p < 1, the value of K_p not needed; unconditional
+%   for n <= 2). Both findings unsearched: no literature added.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -2204,7 +2210,22 @@ du produit des deux $\alpha_n$ correspondants, et Cauchy--Schwarz sur la
 somme en $k$ refait les deux $\alpha_n(|A| + |B|)$ et $\alpha_n(|A|' +
 |B|')$.
 \emph{Corollaire 3.} $|\det(1 + A + B)| \leq \frac12\bigl(\det(1 + |A| + |B|)
-+ \det(1 + |A|' + |B|')\bigr)$.
++ \det(1 + |A|' + |B|')\bigr)$.\footnote{Les corollaires 2 et 3 sont vérifiés
+en Lean pour des matrices complexes (lean/Grothendieck/Folder1.lean,
+\texttt{corollaire2} et \texttt{corollaire3}), $\alpha_k(T)$ étant le
+coefficient de $X^k$ dans $\det(1 + XT)$, avec la forme par la moyenne
+géométrique, $|\det(1 + A + B)|^2 \leq \det(1 + |A| + |B|)\,\det(1 + |A|' +
+|B|')$, dont le corollaire 3 se déduit. La démonstration n'est pas le
+développement multilinéaire de la page : la matrice par blocs
+$\bigl(\begin{smallmatrix} |A| & A^{*} \\ A & |A|' \end{smallmatrix}\bigr)$
+est $|H| + H$ pour l'hermitien $H = \bigl(\begin{smallmatrix} 0 & A^{*} \\ A &
+0 \end{smallmatrix}\bigr)$, donc positive ; on ajoute celles de $A$ et de $B$, on
+se restreint aux mineurs principaux, et le complément de Schur (le critère
+\texttt{Matrix.PosDef.fromBlocks₁₁} de mathlib) avec la croissance du
+déterminant donne $|\det T_S|^2 \leq \det P_S \det Q_S$ pour chaque partie
+$S$ ; Cauchy--Schwarz sur les parties $S$ donne le corollaire 2. Les opérateurs
+à trace en dimension infinie ne sont pas formalisés, et nous n'avons pas
+cherché si l'inégalité est imprimée.}
 \emph{Corollaire 4.} $|\det(1 + A + B)| \leq \det(1 + |A|)\,\det(1 + |B|)$.
 Il suffit, par le corollaire 3 et $\det(1 + |A|) = \det(1 + |A|')$, de le
 prouver pour $A = H$ et $B = K$ hermitiens positifs ; alors $1 + H + K =
@@ -2319,7 +2340,21 @@ en prenant $f(z) = \det(1 + z|A|)$, dont $M_{|A|}(v) = f(v)$.
 Pour la sous-additivité : $S_p(A + B) = S_p(|A + B|)$ est donné par cette
 intégrale, et $M_{|A+B|}(v) = \det(1 + v|A + B|) \leq \det(1 + v|A|)\det(1 +
 v|B|) = M_{|A|}(v)\,M_{|B|}(v)$ par le corollaire 5 de la page 124 ; on
-intègre et l'on réapplique le corollaire à $A$ et $B$.\footnote{C'est,
+intègre et l'on réapplique le corollaire à $A$ et $B$.\footnote{Cette
+déduction est vérifiée en Lean en dimension finie, pour $0 < p < 1$
+(lean/Grothendieck/Folder1.lean, \texttt{integral\_kernel} et
+\texttt{sum\_rpow\_le\_of\_prod\_le}) : avec $K_p = \int_0^\infty
+\log(1 + t)\,t^{-1-p}\,dt > 0$, on a $s^p K_p = \int_0^\infty \log(1 +
+vs)\,v^{-1-p}\,dv$ pour $s \geq 0$, et si $\prod_i(1 + r a_i) \leq \prod_i(1 +
+r b_i)\prod_i(1 + r c_i)$ pour tout $r \geq 0$, alors $\sum a_i^p \leq \sum
+b_i^p + \sum c_i^p$. La valeur $\pi/(p \sin \pi p)$ de $K_p$, qui est celle du
+lemme 1, n'y sert pas : seule sa positivité compte. Pour les valeurs
+singulières, cela donne la sous-additivité de $S_p$ sur les $n$ premières
+valeurs dès que la forme produit du théorème 2 des pages 71 à 73 vaut pour
+ce $n$, donc sans condition pour $n \leq 2$
+(\texttt{sum\_singularValues\_rpow\_add\_le\_of\_le\_two}) ; cette forme
+produit pour $n \geq 3$, le point 2) par la formule de Jensen et Hölder ne sont pas
+formalisés.}\footnote{C'est,
 mot pour mot, la déduction de l'inégalité de McCarthy--Rotfel'd à partir de
 l'inégalité de Seiler--Simon --- dans l'ordre inverse de la littérature, qui
 déduit la seconde de la première. Pour $A$, $B \notin \mathcal{S}_1$ le
