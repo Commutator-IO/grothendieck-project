@@ -479,10 +479,7 @@ theorem isUnit_iff (c t : R) :
       intro i hi
       have h1 : (↑g : Module.End R (Fin (n + 2) → R)) * τ n μ β i = τ n μ β i * ↑g := by
         rw [hg]; exact (commute_iff _).2 ⟨c, t, rfl⟩ i hi
-      calc (↑g⁻¹ : Module.End R (Fin (n + 2) → R)) * τ n μ β i
-          = ↑g⁻¹ * (τ n μ β i * ↑g) * ↑g⁻¹ := by simp [mul_assoc]
-        _ = ↑g⁻¹ * (↑g * τ n μ β i) * ↑g⁻¹ := by rw [h1]
-        _ = τ n μ β i * ↑g⁻¹ := by simp [← mul_assoc]
+      exact (Commute.units_inv_left h1).eq
     obtain ⟨c', t', hinv⟩ := (commute_iff _).1 hcomm
     have hmul : (c • (1 : Module.End R (Fin (n + 2) → R)) + t • P n μ β) *
         (c' • 1 + t' • P n μ β) = 1 := by rw [← hg, ← hinv]; simp
@@ -511,14 +508,10 @@ def centraliser (n : ℕ) (μ β : ℕ → R) : Subgroup (Module.End R (Fin (n +
   one_mem' := by intro i _; simp
   mul_mem' := by
     intro a b ha hb i hi
-    change (↑a * ↑b : Module.End R (Fin (n + 2) → R)) * τ n μ β i = τ n μ β i * (↑a * ↑b)
-    rw [mul_assoc, hb i hi, ← mul_assoc, ha i hi, mul_assoc]
+    exact (Commute.mul_left (ha i hi) (hb i hi)).eq
   inv_mem' := by
     intro a ha i hi
-    calc (↑a⁻¹ : Module.End R (Fin (n + 2) → R)) * τ n μ β i
-        = ↑a⁻¹ * (τ n μ β i * ↑a) * ↑a⁻¹ := by simp [mul_assoc]
-      _ = ↑a⁻¹ * (↑a * τ n μ β i) * ↑a⁻¹ := by rw [ha i hi]
-      _ = τ n μ β i * ↑a⁻¹ := by simp [← mul_assoc]
+    exact (Commute.units_inv_left (ha i hi)).eq
 
 lemma u_zero : u n μ β 0 = 1 := by simp [u]
 
