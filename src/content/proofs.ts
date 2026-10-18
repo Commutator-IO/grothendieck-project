@@ -24,6 +24,19 @@ export interface Proof {
 
 export const PROOFS: Proof[] = [
   {
+    folder: '1',
+    batch: 7,
+    page: '128–129',
+    name: 'S_p subadditivity through the Fredholm determinant',
+    statement:
+      'For 0 < p < 1, S_p(A) = (p sin πp/π)∫₀^∞ log det(1 + v|A|) v^{−1−p} dv, and det(1 + v|A + B|) ≤ det(1 + v|A|) det(1 + v|B|) then gives S_p(A + B) ≤ S_p(A) + S_p(B). Here in finite dimension.',
+    found:
+      'The representation holds with a constant K_p > 0 that need not be computed, and the deduction is correct: the determinant inequality for every r ≥ 0 gives the inequality of p-th power sums. Since the determinant inequality is proved only for n ≤ 2, so is the subadditivity on singular values. Not proved: the determinant inequality for n ≥ 3, Weyl via Jensen, Hölder.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder1.lean',
+    theorems: ['K_pos', 'integral_kernel', 'sum_rpow_mul_K', 'sum_rpow_le_of_prod_le', 'sum_singularValues_rpow_add_le_of_prod', 'sum_singularValues_rpow_add_le_of_le_two'],
+  },
+  {
     folder: '155',
     batch: 1,
     page: '1',

@@ -49,6 +49,20 @@ self-adjoint `H = [[0, A*], [A, 0]]`, hence `≥ 0` (`block_posSemidef`); adding
 and `B` and restricting to `S ⊔ S`, each principal minor satisfies `|det T_S|² ≤ det P_S det Q_S`
 (`norm_det_sq_le`, by the Schur complement and the monotonicity of `det`, `det_le_det_add`), and
 Cauchy–Schwarz over the subsets `S` gives Corollaire 2. Trace-class operators are not formalised.
+
+**Pages 126–139** (finding `1-schatten-p-via-fredholm-determinant`, issue #54), the route from
+the Fredholm determinant to the subadditivity of `S_p`, `0 < p < 1`, in finite dimension:
+
+* `integral_kernel`: `s^p · K_p = ∫₀^∞ log(1 + v s) v^{−1−p} dv` for `s ≥ 0`, with
+  `K_p = ∫₀^∞ log(1 + t) t^{−1−p} dt > 0` (`K_pos`; its value `π/(p sin πp)` is not needed);
+* `sum_rpow_le_of_prod_le`: if `∏ (1 + r aᵢ) ≤ ∏ (1 + r bᵢ) ∏ (1 + r cᵢ)` for all `r ≥ 0`, then
+  `Σ aᵢ^p ≤ Σ bᵢ^p + Σ cᵢ^p` — page 129's deduction;
+* `sum_singularValues_rpow_add_le_of_prod`: hence `S_p(u + v) ≤ S_p(u) + S_p(v)` on the first
+  `n` singular values whenever (15) holds for that `n`, and unconditionally for `n ≤ 2`
+  (`sum_singularValues_rpow_add_le_of_le_two`).
+
+Not proved: (15) for `n ≥ 3`, so the subadditivity in general; Weyl's inequality via Jensen's
+formula and the power trick; Hölder for all exponents.
 -/
 
 namespace Grothendieck.Folder1
@@ -1273,5 +1287,171 @@ theorem corollaire3 (A B : Matrix n n ℂ) :
       Real.sq_sqrt (Finset.sum_nonneg fun k _ => hb k)]
 
 end Fredholm
+
+/-! ### Pages 126–139: `S_p` through the Fredholm determinant, for `0 < p < 1` -/
+
+section Schatten
+
+open MeasureTheory Set Real
+
+/-- `v ↦ log(1 + c v) v^{−1−p}`, the integrand of the representation of page 128. -/
+noncomputable def kernel (p c v : ℝ) : ℝ := Real.log (1 + c * v) * v ^ (-1 - p)
+
+theorem kernel_nonneg {p c v : ℝ} (hc : 0 ≤ c) (hv : 0 < v) : 0 ≤ kernel p c v :=
+  mul_nonneg (Real.log_nonneg (by nlinarith)) (rpow_nonneg hv.le _)
+
+theorem integrableOn_kernel {p c : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (hc : 0 ≤ c) :
+    IntegrableOn (kernel p c) (Set.Ioi 0) := by
+  have hcont : ContinuousOn (kernel p c) (Set.Ioi 0) := by
+    refine ContinuousOn.mul ?_ ?_
+    · refine ContinuousOn.log (by fun_prop) fun v hv => ?_
+      have : (0 : ℝ) < v := hv
+      nlinarith
+    · exact ContinuousOn.rpow_const continuousOn_id fun v hv => Or.inl (ne_of_gt hv)
+  rw [← Set.Ioc_union_Ioi_eq_Ioi zero_le_one]
+  refine IntegrableOn.union ?_ ?_
+  · -- near `0`: `log(1 + c v) ≤ c v`, so the integrand is `≤ c v^{−p}`
+    have h0 : IntegrableOn (fun v : ℝ => v ^ (-p)) (Set.Ioc 0 1) := by
+      rw [integrableOn_Ioc_iff_integrableOn_Ioo]
+      exact (intervalIntegral.integrableOn_Ioo_rpow_iff zero_lt_one).mpr (by linarith)
+    have hg : IntegrableOn (fun v : ℝ => c * v ^ (-p)) (Set.Ioc 0 1) := h0.const_mul c
+    refine hg.mono' ((hcont.mono Set.Ioc_subset_Ioi_self).aestronglyMeasurable measurableSet_Ioc) ?_
+    refine (ae_restrict_iff' measurableSet_Ioc).mpr (Filter.Eventually.of_forall fun v hv => ?_)
+    have hv0 : 0 < v := hv.1
+    rw [Real.norm_of_nonneg (kernel_nonneg hc hv0), kernel]
+    have hl : Real.log (1 + c * v) ≤ c * v := by
+      have := Real.log_le_sub_one_of_pos (show 0 < 1 + c * v by nlinarith); linarith
+    calc Real.log (1 + c * v) * v ^ (-1 - p) ≤ c * v * v ^ (-1 - p) :=
+          mul_le_mul_of_nonneg_right hl (rpow_nonneg hv0.le _)
+      _ = c * v ^ (-p) := by
+          rw [mul_assoc, ← rpow_one_add' hv0.le (by linarith)]
+          ring_nf
+  · -- near `∞`: `log(1 + c v) ≤ ((1 + c) v)^{p/2} / (p/2)`
+    have hε : 0 < p / 2 := by linarith
+    have hg : IntegrableOn (fun v : ℝ => ((1 + c) ^ (p / 2) / (p / 2)) * v ^ (p / 2 - 1 - p))
+        (Set.Ioi 1) :=
+      Integrable.const_mul (integrableOn_Ioi_rpow_of_lt (by linarith) zero_lt_one) _
+    have hcont' : ContinuousOn (kernel p c) (Set.Ioi 1) :=
+      hcont.mono fun v (hv : 1 < v) => (show (0 : ℝ) < v by linarith)
+    refine hg.mono' (hcont'.aestronglyMeasurable measurableSet_Ioi) ?_
+    refine (ae_restrict_iff' measurableSet_Ioi).mpr (Filter.Eventually.of_forall fun v hv => ?_)
+    have hv1 : (1 : ℝ) < v := hv
+    have hv0 : 0 < v := by linarith
+    rw [Real.norm_of_nonneg (kernel_nonneg hc hv0), kernel]
+    have h1 : 1 + c * v ≤ (1 + c) * v := by nlinarith
+    have hl : Real.log (1 + c * v) ≤ ((1 + c) * v) ^ (p / 2) / (p / 2) :=
+      (Real.log_le_rpow_div (by nlinarith) hε).trans
+        (div_le_div_of_nonneg_right (rpow_le_rpow (by nlinarith) h1 hε.le) hε.le)
+    calc Real.log (1 + c * v) * v ^ (-1 - p)
+        ≤ ((1 + c) * v) ^ (p / 2) / (p / 2) * v ^ (-1 - p) :=
+          mul_le_mul_of_nonneg_right hl (rpow_nonneg hv0.le _)
+      _ = ((1 + c) ^ (p / 2) / (p / 2)) * v ^ (p / 2 - 1 - p) := by
+          rw [mul_rpow (by linarith) hv0.le, show p / 2 - 1 - p = p / 2 + (-1 - p) by ring,
+            rpow_add hv0]
+          ring
+
+/-- `K_p = ∫₀^∞ log(1 + t) t^{−1−p} dt`, which is `π / (p sin πp)`; only its
+positivity is used. -/
+noncomputable def K (p : ℝ) : ℝ := ∫ t in Set.Ioi 0, kernel p 1 t
+
+theorem K_pos {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) : 0 < K p := by
+  rw [K, setIntegral_pos_iff_support_of_nonneg_ae _ (integrableOn_kernel hp0 hp1 zero_le_one)]
+  · have : Function.support (kernel p 1) ∩ Set.Ioi 0 = Set.Ioi 0 := by
+      refine Set.inter_eq_right.mpr fun v (hv : 0 < v) => ?_
+      refine Function.mem_support.mpr (ne_of_gt (mul_pos (Real.log_pos (by linarith))
+        (rpow_pos_of_pos hv _)))
+    rw [this, Real.volume_Ioi]
+    exact ENNReal.zero_lt_top
+  · exact (ae_restrict_iff' measurableSet_Ioi).mpr
+      (Filter.Eventually.of_forall fun v hv => kernel_nonneg zero_le_one hv)
+
+/-- **The representation of page 128**: `s^p · K_p = ∫₀^∞ log(1 + v s) v^{−1−p} dv`
+for `s ≥ 0`, `0 < p < 1`. -/
+theorem integral_kernel {p s : ℝ} (hp0 : 0 < p) (hs : 0 ≤ s) :
+    ∫ v in Set.Ioi 0, kernel p s v = s ^ p * K p := by
+  rcases hs.eq_or_lt with rfl | hs
+  · simp [kernel, zero_rpow hp0.ne']
+  have h : ∀ v ∈ Set.Ioi (0 : ℝ), kernel p s v = s ^ (1 + p) * kernel p 1 (v * s) := by
+    intro v (hv : 0 < v)
+    simp only [kernel, one_mul]
+    rw [mul_rpow hv.le hs.le, mul_comm v s]
+    have : s ^ (1 + p) * s ^ (-1 - p) = 1 := by
+      rw [← rpow_add hs, show 1 + p + (-1 - p) = 0 by ring, rpow_zero]
+    calc Real.log (1 + s * v) * v ^ (-1 - p)
+        = Real.log (1 + s * v) * (v ^ (-1 - p) * (s ^ (1 + p) * s ^ (-1 - p))) := by
+          rw [this, mul_one]
+      _ = s ^ (1 + p) * (Real.log (1 + s * v) * (v ^ (-1 - p) * s ^ (-1 - p))) := by ring
+  rw [setIntegral_congr_fun measurableSet_Ioi h, integral_const_mul,
+    integral_comp_mul_right_Ioi (kernel p 1) 0 hs, zero_mul, smul_eq_mul, K, ← mul_assoc]
+  congr 1
+  rw [← rpow_neg_one, ← rpow_add hs]
+  ring_nf
+
+/-- `Σᵢ sᵢ^p · K_p = ∫₀^∞ log ∏ᵢ (1 + v sᵢ) · v^{−1−p} dv`. -/
+theorem sum_rpow_mul_K {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (a : ℕ → ℝ) (ha : ∀ i, 0 ≤ a i)
+    (n : ℕ) :
+    (∑ i ∈ range n, a i ^ p) * K p =
+      ∫ v in Set.Ioi 0, Real.log (∏ i ∈ range n, (1 + v * a i)) * v ^ (-1 - p) := by
+  have h : ∀ v ∈ Set.Ioi (0 : ℝ), Real.log (∏ i ∈ range n, (1 + v * a i)) * v ^ (-1 - p) =
+      ∑ i ∈ range n, kernel p (a i) v := by
+    intro v (hv : 0 < v)
+    rw [Real.log_prod fun i _ => by nlinarith [ha i], sum_mul]
+    refine sum_congr rfl fun i _ => ?_
+    rw [kernel, mul_comm (a i) v]
+  rw [setIntegral_congr_fun measurableSet_Ioi h,
+    integral_finsetSum _ fun i _ => integrableOn_kernel hp0 hp1 (ha i), sum_mul]
+  exact sum_congr rfl fun i _ => (integral_kernel hp0 (ha i)).symm
+
+/-- **Subadditivity from the determinant inequality** (page 129): for `0 < p < 1`,
+if `∏ (1 + r aᵢ) ≤ ∏ (1 + r bᵢ) ∏ (1 + r cᵢ)` for every `r ≥ 0`, then
+`Σ aᵢ^p ≤ Σ bᵢ^p + Σ cᵢ^p`. -/
+theorem sum_rpow_le_of_prod_le {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (a b c : ℕ → ℝ)
+    (ha : ∀ i, 0 ≤ a i) (hb : ∀ i, 0 ≤ b i) (hc : ∀ i, 0 ≤ c i) (n : ℕ)
+    (h : ∀ r : ℝ, 0 ≤ r → ∏ i ∈ range n, (1 + r * a i) ≤
+      (∏ i ∈ range n, (1 + r * b i)) * ∏ i ∈ range n, (1 + r * c i)) :
+    ∑ i ∈ range n, a i ^ p ≤ ∑ i ∈ range n, b i ^ p + ∑ i ∈ range n, c i ^ p := by
+  have hint : ∀ d : ℕ → ℝ, (∀ i, 0 ≤ d i) → IntegrableOn
+      (fun v => Real.log (∏ i ∈ range n, (1 + v * d i)) * v ^ (-1 - p)) (Set.Ioi 0) := by
+    intro d hd
+    refine (integrable_finsetSum (range n) fun i _ => integrableOn_kernel hp0 hp1 (hd i)).congr ?_
+    refine (ae_restrict_iff' measurableSet_Ioi).mpr (Filter.Eventually.of_forall fun v hv => ?_)
+    have hv0 : (0 : ℝ) < v := hv
+    dsimp only
+    rw [Real.log_prod fun i _ => by nlinarith [hd i], sum_mul]
+    exact sum_congr rfl fun i _ => by rw [kernel, mul_comm (d i) v]
+  refine le_of_mul_le_mul_right ?_ (K_pos hp0 hp1)
+  rw [add_mul, sum_rpow_mul_K hp0 hp1 a ha, sum_rpow_mul_K hp0 hp1 b hb,
+    sum_rpow_mul_K hp0 hp1 c hc, ← integral_add (hint b hb) (hint c hc)]
+  refine setIntegral_mono_on (hint a ha) ((hint b hb).add (hint c hc)) measurableSet_Ioi
+    fun v (hv : 0 < v) => ?_
+  have hpos : ∀ d : ℕ → ℝ, (∀ i, 0 ≤ d i) → 0 < ∏ i ∈ range n, (1 + v * d i) :=
+    fun d hd => prod_pos fun i _ => by nlinarith [hd i]
+  rw [← add_mul, ← Real.log_mul (hpos b hb).ne' (hpos c hc).ne']
+  exact mul_le_mul_of_nonneg_right (Real.log_le_log (hpos a ha) (h v hv.le))
+    (rpow_nonneg hv.le _)
+
+variable [FiniteDimensional 𝕜 E]
+  {F : Type*} [NormedAddCommGroup F] [InnerProductSpace 𝕜 F] [FiniteDimensional 𝕜 F]
+
+/-- Page 129 for operators: (15) for every `r ≥ 0` gives
+`Σ_{i<n} sᵢ(u + v)^p ≤ Σ_{i<n} sᵢ(u)^p + Σ_{i<n} sᵢ(v)^p`, `0 < p < 1`. -/
+theorem sum_singularValues_rpow_add_le_of_prod (u v : E →ₗ[𝕜] F) (n : ℕ) {p : ℝ}
+    (hp0 : 0 < p) (hp1 : p < 1)
+    (h15 : ∀ r : ℝ, 0 ≤ r → ∏ i ∈ range n, (1 + r * (u + v).singularValues i) ≤
+      (∏ i ∈ range n, (1 + r * u.singularValues i)) *
+        ∏ i ∈ range n, (1 + r * v.singularValues i)) :
+    ∑ i ∈ range n, (u + v).singularValues i ^ p ≤
+      ∑ i ∈ range n, u.singularValues i ^ p + ∑ i ∈ range n, v.singularValues i ^ p :=
+  sum_rpow_le_of_prod_le hp0 hp1 _ _ _ (fun i => (u + v).singularValues_nonneg i)
+    (fun i => u.singularValues_nonneg i) (fun i => v.singularValues_nonneg i) n h15
+
+/-- Unconditionally for the first two singular values, by (15) for `n ≤ 2`. -/
+theorem sum_singularValues_rpow_add_le_of_le_two (u v : E →ₗ[𝕜] F) {n : ℕ} (hn : n ≤ 2)
+    {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) :
+    ∑ i ∈ range n, (u + v).singularValues i ^ p ≤
+      ∑ i ∈ range n, u.singularValues i ^ p + ∑ i ∈ range n, v.singularValues i ^ p :=
+  sum_singularValues_rpow_add_le_of_prod u v n hp0 hp1 fun _ hr => prod_le_of_le_two u v hn hr
+
+end Schatten
 
 end Grothendieck.Folder1

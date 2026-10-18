@@ -7715,6 +7715,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check whether the log-det integral representation of S_p for p < 1, and the deduction of S_p subadditivity from the determinant inequality, appear in Simon, Trace Ideals (ch. 3, 5 and the notes to ch. 3), Gohberg–Krein ch. II and IV, McCarthy (Israel J. Math. 1967), or Rotfel\'d (1967/1969). If one of them proves it this way, mark matched.',
+    lean: { file: 'lean/Grothendieck/Folder1.lean', found: "Only the subadditivity route, in finite dimension, for 0 < p < 1. With K_p = ∫₀^∞ log(1 + t) t^{−1−p} dt > 0 (its value π/(p sin πp) is not needed), s^p·K_p = ∫₀^∞ log(1 + vs) v^{−1−p} dv for s ≥ 0, by the change of variable t = vs (integral_kernel). Summing, Σ aᵢ^p·K_p is the integral of log ∏(1 + v aᵢ), so ∏(1 + r aᵢ) ≤ ∏(1 + r bᵢ)∏(1 + r cᵢ) for all r ≥ 0 gives Σ aᵢ^p ≤ Σ bᵢ^p + Σ cᵢ^p (sum_rpow_le_of_prod_le): page 129's deduction holds. For singular values this gives S_p subadditivity on the first n values whenever the determinant inequality (15) holds for that n, hence unconditionally for n ≤ 2, the case of (15) proved in the same file. Not proved: (15) for n ≥ 3, Weyl's inequality via Jensen's formula and the power trick, Hölder for all exponents, trace-class operators." },
   },
   {
     id: '1-chronology-123-149-before-37-104',
