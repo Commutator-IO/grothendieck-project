@@ -250,3 +250,534 @@ theorem prec_trans (hσ : ∀ i j : Fin (n + 1), (i : ℕ) + 2 ≤ j → Commute
   · rw [res_res, ← hc₂, res_res]
 
 end Grothendieck.Folder76
+
+/-!
+# Folder 76, pages 20–24: semi-simplicial sets and orders on the vertices
+
+The reading (« Ensembles semi-simpliciaux et ordre sur les sommets ») takes a semi-simplicial
+set `D` satisfying (1) — the faces of a simplex are pairwise distinct — so that `D_* = ∐ D_m`,
+ordered by « is a face of », satisfies (a): each `{δ ≤ d}` is the poset of non-empty subsets of
+`Δ_m`. On `D₀` it sets `x ≺ y` iff some edge goes from `x` to `y`, transitive under (2 bis)
+(composable edges bound a 2-simplex), and states the Proposition: semi-simplicial sets with (1)
+and the transitivity (2°) correspond to posets with (a) carrying an order on `D₀` with (b) (`x ≺ y`
+has a common majorant) and (c) (total on each `I_d`). The page's « (1) et (2) » has an uncertain
+second numeral; the reading takes (2°), with the boundary of a triangle against (2 bis).
+
+What is formalised (namespace `Grothendieck.Folder76.Sommets`):
+
+* `NonSingular.isFlagGeom` — (1) gives (a), in vertex form (`IsFlagGeom`).
+* `NonSingular.isCompatible_ord`, `NonSingular.edge_ord_iff` — the semi-simplicial structure
+  gives compatible total orders on the simplices, whose edge relation is `≺`.
+* `vertexOrderEquiv` — on any poset with (a), orders on `D₀` with (b), (c) are in bijection
+  with compatible simplex orders whose edge relation is transitive, by restriction and `≺`.
+* `NonSingular.trans_iff_vertexOrder`, `NonSingular.vertexOrder_unique` — the Proposition from
+  the semi-simplicial side: (2°) holds iff the simplex orders come from one order on `D₀` with
+  (b), (c), and that order is `≺`; `NonSingular.not_prec_self`: `x ≺ x` is impossible by (1).
+* `NonSingular.trans_of_hornFill` — (2 bis) ⟹ (2°); `triangleBoundary_trans`,
+  `triangleBoundary_not_hornFill` — the boundary of a triangle satisfies (1) and (2°) and not
+  (2 bis), as the reading says.
+
+The passage from compatible simplex orders back to a semi-simplicial set (pages 17–18) is not
+redone here: it is the case `M = Δ_inj` of the equivalence `equivalence_page13` of
+`Folder104.lean`. The remark on the opposite order and the realisations are not formalised.
+
+**What the formalisation finds.** The Proposition holds with (2°), as the reading takes it. Of
+condition (a) on the poset side only one consequence is used: two vertices of a simplex span an
+edge below it (`IsFlagGeom.exists_face` for pairs); finiteness and the order isomorphism are not
+needed for the correspondence.
+-/
+
+namespace Grothendieck.Folder76.Sommets
+
+variable {P : Type*} [PartialOrder P]
+
+/-- `I_d`: the vertices of `d`, the minimal elements below it. -/
+def V (d : P) : Set P := {x | IsMin x ∧ x ≤ d}
+
+variable (P) in
+/-- Condition (a) of page 20, in vertex form: each `I_d` is finite and non-empty, and
+`e ↦ I_e` is an order isomorphism from `{e ≤ d}` onto the non-empty subsets of `I_d`. -/
+structure IsFlagGeom : Prop where
+  finite : ∀ d : P, (V d).Finite
+  nonempty : ∀ d : P, (V d).Nonempty
+  le_iff : ∀ d e e' : P, e ≤ d → e' ≤ d → (e ≤ e' ↔ V e ⊆ V e')
+  exists_face : ∀ (d : P) (S : Set P), S ⊆ V d → S.Nonempty → ∃ e ≤ d, V e = S
+
+/-- An order on the vertices `D₀` (as a strict order) satisfying (b) and (c) of page 22. -/
+structure IsVertexOrder (r : P → P → Prop) : Prop where
+  irrefl : ∀ x, ¬ r x x
+  trans : ∀ x y z, r x y → r y z → r x z
+  isMin_left : ∀ x y, r x y → IsMin x
+  isMin_right : ∀ x y, r x y → IsMin y
+  /-- (b) -/
+  majorant : ∀ x y, r x y → ∃ z, x ≤ z ∧ y ≤ z
+  /-- (c) -/
+  total : ∀ d, ∀ x ∈ V d, ∀ y ∈ V d, x ≠ y → r x y ∨ r y x
+
+/-- Compatible total orders on the simplices `I_d` (pages 17–18), the datum the reading
+identifies with a semi-simplicial structure satisfying (1): `o d` is a strict total order on
+`I_d`, and for `e ≤ d` the order of `I_e` is the one induced by `I_d`. -/
+structure IsCompatible (o : P → P → P → Prop) : Prop where
+  support : ∀ d x y, o d x y → x ∈ V d ∧ y ∈ V d
+  irrefl : ∀ d x, ¬ o d x x
+  trans : ∀ d x y z, o d x y → o d y z → o d x z
+  total : ∀ d, ∀ x ∈ V d, ∀ y ∈ V d, x ≠ y → o d x y ∨ o d y x
+  restrict : ∀ e d, e ≤ d → ∀ x ∈ V e, ∀ y ∈ V e, (o e x y ↔ o d x y)
+
+/-- The relation `x ≺ y` of page 22: there is an edge from `x` to `y`. -/
+def edge (o : P → P → P → Prop) (x y : P) : Prop := ∃ z, V z = {x, y} ∧ x ≠ y ∧ o z x y
+
+/-- The simplex orders induced by a vertex order. -/
+def ofVertex (r : P → P → Prop) (d x y : P) : Prop := x ∈ V d ∧ y ∈ V d ∧ r x y
+
+theorem V_mono {d d' : P} (h : d ≤ d') : V d ⊆ V d' := fun _ hx => ⟨hx.1, hx.2.trans h⟩
+
+theorem mem_V_self {x : P} (hx : IsMin x) : x ∈ V x := ⟨hx, le_rfl⟩
+
+theorem isCompatible_ofVertex {r : P → P → Prop} (hr : IsVertexOrder r) :
+    IsCompatible (ofVertex r) where
+  support _ _ _ h := ⟨h.1, h.2.1⟩
+  irrefl _ x h := hr.irrefl x h.2.2
+  trans _ _ _ _ h h' := ⟨h.1, h'.2.1, hr.trans _ _ _ h.2.2 h'.2.2⟩
+  total d x hx y hy hxy := (hr.total d x hx y hy hxy).imp (fun h => ⟨hx, hy, h⟩)
+    (fun h => ⟨hy, hx, h⟩)
+  restrict _ _ hed _ hx _ hy := ⟨fun h => ⟨V_mono hed hx, V_mono hed hy, h.2.2⟩,
+    fun h => ⟨hx, hy, h.2.2⟩⟩
+
+section Flag
+
+variable (hP : IsFlagGeom P)
+include hP
+
+/-- The edge relation of the simplex orders induced by a vertex order is that order: the order
+is recovered, which is what (b) ensures (page 23). -/
+theorem edge_ofVertex {r : P → P → Prop} (hr : IsVertexOrder r) : edge (ofVertex r) = r := by
+  funext x y
+  apply propext
+  constructor
+  · rintro ⟨z, -, -, h⟩
+    exact h.2.2
+  · intro h
+    obtain ⟨z, hxz, hyz⟩ := hr.majorant x y h
+    have hx : x ∈ V z := ⟨hr.isMin_left x y h, hxz⟩
+    have hy : y ∈ V z := ⟨hr.isMin_right x y h, hyz⟩
+    obtain ⟨e, -, he⟩ := hP.exists_face z {x, y}
+      (Set.insert_subset hx (Set.singleton_subset_iff.2 hy)) (Set.insert_nonempty _ _)
+    have hne : x ≠ y := fun hxy => hr.irrefl x (hxy ▸ h)
+    exact ⟨e, he, hne, by rw [he]; simp, by rw [he]; simp, h⟩
+
+/-- Under (a), the edge relation of compatible simplex orders, when transitive, is a vertex order
+satisfying (b) and (c) (page 22). -/
+theorem isVertexOrder_edge {o : P → P → P → Prop} (ho : IsCompatible o)
+    (htrans : ∀ x y z, edge o x y → edge o y z → edge o x z) : IsVertexOrder (edge o) where
+  irrefl x h := by obtain ⟨_, _, hne, _⟩ := h; exact hne rfl
+  trans := htrans
+  isMin_left x y h := by
+    obtain ⟨z, hz, -, -⟩ := h
+    exact (hz.symm ▸ Set.mem_insert x {y} : x ∈ V z).1
+  isMin_right x y h := by
+    obtain ⟨z, hz, -, -⟩ := h
+    exact (hz.symm ▸ Set.mem_insert_of_mem x rfl : y ∈ V z).1
+  majorant x y h := by
+    obtain ⟨z, hz, -, -⟩ := h
+    exact ⟨z, (hz.symm ▸ Set.mem_insert x {y} : x ∈ V z).2,
+      (hz.symm ▸ Set.mem_insert_of_mem x rfl : y ∈ V z).2⟩
+  total d x hx y hy hxy := by
+    obtain ⟨e, -, he⟩ := hP.exists_face d {x, y}
+      (Set.insert_subset hx (Set.singleton_subset_iff.2 hy)) (Set.insert_nonempty _ _)
+    have hxe : x ∈ V e := by rw [he]; simp
+    have hye : y ∈ V e := by rw [he]; simp
+    rcases ho.total e x hxe y hye hxy with h | h
+    · exact Or.inl ⟨e, he, hxy, h⟩
+    · exact Or.inr ⟨e, by rw [he, Set.pair_comm], hxy.symm, h⟩
+
+/-- Under (a) and the transitivity (2°), the simplex orders are the ones induced by the edge
+order: the vertex order determines the semi-simplicial structure (pages 23–24). -/
+theorem ofVertex_edge {o : P → P → P → Prop} (ho : IsCompatible o)
+    (htrans : ∀ x y z, edge o x y → edge o y z → edge o x z) : ofVertex (edge o) = o := by
+  funext d x y
+  apply propext
+  constructor
+  · rintro ⟨hx, hy, z, hz, hxy, hzo⟩
+    obtain ⟨e, hed, he⟩ := hP.exists_face d {x, y}
+      (Set.insert_subset hx (Set.singleton_subset_iff.2 hy)) (Set.insert_nonempty _ _)
+    have hxe : x ∈ V e := by rw [he]; simp
+    have hye : y ∈ V e := by rw [he]; simp
+    refine (ho.restrict e d hed x hxe y hye).1 ?_
+    rcases ho.total e x hxe y hye hxy with h | h
+    · exact h
+    · exfalso
+      obtain ⟨_, _, hne, _⟩ := htrans x y x ⟨z, hz, hxy, hzo⟩ ⟨e, by rw [he, Set.pair_comm],
+        hxy.symm, h⟩
+      exact hne rfl
+  · intro h
+    obtain ⟨hx, hy⟩ := ho.support d x y h
+    have hxy : x ≠ y := fun hxy => ho.irrefl d x (hxy ▸ h)
+    obtain ⟨e, hed, he⟩ := hP.exists_face d {x, y}
+      (Set.insert_subset hx (Set.singleton_subset_iff.2 hy)) (Set.insert_nonempty _ _)
+    have hxe : x ∈ V e := by rw [he]; simp
+    have hye : y ∈ V e := by rw [he]; simp
+    exact ⟨hx, hy, e, he, hxy, (ho.restrict e d hed x hxe y hye).2 h⟩
+
+/-- **The Proposition of pages 23–24**, on a poset satisfying (a): orders on `D₀` satisfying (b)
+and (c) correspond bijectively to compatible total orders on the simplices whose edge relation is
+transitive (2°), by `r ↦ (r restricted to each I_d)` and `o ↦ ≺`. -/
+noncomputable def vertexOrderEquiv :
+    {r : P → P → Prop // IsVertexOrder r} ≃
+      {o : P → P → P → Prop // IsCompatible o ∧ ∀ x y z, edge o x y → edge o y z → edge o x z}
+    where
+  toFun r := ⟨ofVertex r.1, isCompatible_ofVertex r.2, by
+    rw [edge_ofVertex hP r.2]; exact r.2.trans⟩
+  invFun o := ⟨edge o.1, isVertexOrder_edge hP o.2.1 o.2.2⟩
+  left_inv r := Subtype.ext (edge_ofVertex hP r.2)
+  right_inv o := Subtype.ext (ofVertex_edge hP o.2.1 o.2.2)
+
+
+end Flag
+
+/-! ### Semi-simplicial sets satisfying (1) -/
+
+/-- A semi-simplicial set: `D_m` for `m ∈ ℕ`, and `u^* : D_m → D_k` for every strictly increasing
+`u : Δ_k → Δ_m`, contravariantly functorial. -/
+structure SemiSimplicial where
+  /-- `D_m` -/
+  X : ℕ → Type
+  /-- `u ↦ u^*` -/
+  map : ∀ {k m : ℕ}, (Fin (k + 1) ↪o Fin (m + 1)) → X m → X k
+  map_id : ∀ {m : ℕ} (x : X m), map (RelEmbedding.refl _) x = x
+  map_comp : ∀ {k m n : ℕ} (u : Fin (k + 1) ↪o Fin (m + 1)) (v : Fin (m + 1) ↪o Fin (n + 1))
+    (x : X n), map (u.trans v) x = map u (map v x)
+
+/-- A semi-simplicial set satisfying (1) of page 18: the faces of a simplex are pairwise
+distinct, `u ↦ u^*(d)` is injective. -/
+structure NonSingular extends SemiSimplicial where
+  cond1 : ∀ {k m : ℕ} (x : X m) (u v : Fin (k + 1) ↪o Fin (m + 1)), map u x = map v x → u = v
+
+namespace NonSingular
+
+variable (D : NonSingular)
+
+/-- The vertex `i` of `Δ_m`, as a map `Δ_0 → Δ_m`. -/
+def pt {m : ℕ} (i : Fin (m + 1)) : Fin 1 ↪o Fin (m + 1) :=
+  OrderEmbedding.ofStrictMono (fun _ => i) fun a b h => by
+    rw [Subsingleton.elim a b] at h; exact absurd h (lt_irrefl _)
+
+/-- The relation `x ≺ y` of page 22 on `D₀`: an edge `z ∈ D₁` from `x` to `y`. -/
+def Prec (x y : D.X 0) : Prop := ∃ z : D.X 1, D.map (pt 0) z = x ∧ D.map (pt 1) z = y
+
+theorem le_of_emb {k m : ℕ} (u : Fin (k + 1) ↪o Fin (m + 1)) : k ≤ m := by
+  have := Fintype.card_le_of_injective u u.injective
+  simpa using this
+
+theorem emb_self_eq {m : ℕ} (u : Fin (m + 1) ↪o Fin (m + 1)) : u = RelEmbedding.refl _ := by
+  have h : (Finset.univ : Finset (Fin (m + 1))).card = m + 1 := by simp
+  exact (Finset.orderEmbOfFin_unique' h (f := u) fun _ => Finset.mem_univ _).trans
+    (Finset.orderEmbOfFin_unique' h (f := RelEmbedding.refl _) fun _ => Finset.mem_univ _).symm
+
+/-- The poset `D_* = ∐ D_m` of page 20: `δ ≤ d` iff `δ` is a face of `d`. -/
+instance : PartialOrder (Σ m, D.X m) where
+  le a b := ∃ u : Fin (a.1 + 1) ↪o Fin (b.1 + 1), a.2 = D.map u b.2
+  le_refl a := ⟨RelEmbedding.refl _, (D.map_id _).symm⟩
+  le_trans a b c := by
+    rintro ⟨u, hu⟩ ⟨v, hv⟩
+    exact ⟨u.trans v, by rw [D.map_comp, ← hv, hu]⟩
+  le_antisymm := by
+    rintro ⟨k, y⟩ ⟨m, x⟩ ⟨u, hu⟩ ⟨v, hv⟩
+    obtain rfl : k = m := le_antisymm (le_of_emb u) (le_of_emb v)
+    rw [emb_self_eq u, D.map_id] at hu
+    simp only at hu
+    rw [hu]
+
+theorem le_def {a b : Σ m, D.X m} :
+    a ≤ b ↔ ∃ u : Fin (a.1 + 1) ↪o Fin (b.1 + 1), a.2 = D.map u b.2 := Iff.rfl
+
+theorem isMin_iff (a : Σ m, D.X m) : IsMin a ↔ a.1 = 0 := by
+  constructor
+  · intro h
+    by_contra hne
+    have hle : (⟨0, D.map (pt 0) a.2⟩ : Σ m, D.X m) ≤ a := ⟨pt 0, rfl⟩
+    have := congrArg Sigma.fst (le_antisymm hle (h hle))
+    exact hne this.symm
+  · obtain ⟨m, x⟩ := a
+    rintro (rfl : m = 0) ⟨k, y⟩ ⟨u, hu⟩
+    obtain rfl : k = 0 := Nat.le_zero.1 (le_of_emb u)
+    refine ⟨RelEmbedding.refl _, ?_⟩
+    simp only at hu ⊢
+    rw [hu, emb_self_eq u, D.map_id, D.map_id]
+
+/-- The vertices of `d ∈ D_m` are its `m + 1` vertex faces. -/
+theorem V_eq (d : Σ m, D.X m) :
+    V d = Set.range fun i : Fin (d.1 + 1) => (⟨0, D.map (pt i) d.2⟩ : Σ m, D.X m) := by
+  ext a
+  constructor
+  · rintro ⟨ha, u, hu⟩
+    obtain ⟨k, y⟩ := a
+    obtain rfl : k = 0 := (D.isMin_iff _).1 ha
+    refine ⟨u 0, ?_⟩
+    simp only at hu ⊢
+    rw [hu]
+    congr 2
+    exact RelEmbedding.ext (fun j => by rw [Subsingleton.elim j 0]; rfl)
+  · rintro ⟨i, rfl⟩
+    exact ⟨(D.isMin_iff _).2 rfl, pt i, rfl⟩
+
+theorem vertex_inj {m : ℕ} (x : D.X m) {i j : Fin (m + 1)}
+    (h : D.map (pt i) x = D.map (pt j) x) : i = j :=
+  congrArg (fun u : Fin 1 ↪o Fin (m + 1) => u 0) (D.cond1 x _ _ h)
+
+/-- The vertices of a face: the vertex `i` of `u^* x` is the vertex `u i` of `x`. -/
+theorem map_pt {k m : ℕ} (u : Fin (k + 1) ↪o Fin (m + 1)) (x : D.X m) (i : Fin (k + 1)) :
+    D.map (pt i) (D.map u x) = D.map (pt (u i)) x := by
+  rw [← D.map_comp]; rfl
+
+/-- The simplex orders of `D`: on the vertices of `d`, the order of their indices. -/
+def ord (d a b : Σ m, D.X m) : Prop :=
+  ∃ i j : Fin (d.1 + 1), i < j ∧ a = ⟨0, D.map (pt i) d.2⟩ ∧ b = ⟨0, D.map (pt j) d.2⟩
+
+
+theorem vertex_eq_iff {p q : D.X 0} : (⟨0, p⟩ : Σ m, D.X m) = ⟨0, q⟩ ↔ p = q := by
+  simp
+
+/-- The vertex `i` of `d`, as an element of the poset. -/
+def vert (d : Σ m, D.X m) (i : Fin (d.1 + 1)) : Σ m, D.X m := ⟨0, D.map (pt i) d.2⟩
+
+theorem vert_inj (d : Σ m, D.X m) {i j : Fin (d.1 + 1)} (h : D.vert d i = D.vert d j) :
+    i = j :=
+  D.vertex_inj d.2 ((D.vertex_eq_iff).1 h)
+
+theorem V_eq' (d : Σ m, D.X m) : V d = Set.range (D.vert d) := D.V_eq d
+
+/-- The vertices of a face `e = u^* d`: vertex `i` of `e` is vertex `u i` of `d`. -/
+theorem vert_face {e d : Σ m, D.X m} {u : Fin (e.1 + 1) ↪o Fin (d.1 + 1)} (hu : e.2 = D.map u d.2)
+    (i : Fin (e.1 + 1)) : D.vert e i = D.vert d (u i) := by
+  simp only [vert, hu, map_pt]
+
+/-- Condition (1) gives (a) of page 20. -/
+theorem isFlagGeom : IsFlagGeom (Σ m, D.X m) where
+  finite d := by rw [D.V_eq']; exact Set.finite_range _
+  nonempty d := by rw [D.V_eq']; exact Set.range_nonempty _
+  le_iff d e e' he he' := by
+    refine ⟨fun h => V_mono h, fun h => ?_⟩
+    obtain ⟨u, hu⟩ := he
+    obtain ⟨u', hu'⟩ := he'
+    have key : ∀ i, ∃ j, u' j = u i := fun i => by
+      have : D.vert e i ∈ V e' := h (by rw [D.V_eq']; exact ⟨i, rfl⟩)
+      rw [D.V_eq'] at this
+      obtain ⟨j, hj⟩ := this
+      rw [D.vert_face hu', D.vert_face hu] at hj
+      exact ⟨j, D.vert_inj d hj⟩
+    choose w hw using key
+    have hwm : StrictMono w := fun a b hab => by
+      have := u.lt_iff_lt.2 hab
+      rw [← hw a, ← hw b] at this
+      exact u'.lt_iff_lt.1 this
+    refine ⟨OrderEmbedding.ofStrictMono w hwm, ?_⟩
+    rw [hu, hu', ← D.map_comp]
+    congr 1
+    exact RelEmbedding.ext fun i => (hw i).symm
+  exists_face d S hS hne := by
+    classical
+    set T := Finset.univ.filter fun i => D.vert d i ∈ S
+    obtain ⟨a, ha⟩ := hne
+    obtain ⟨i₀, hi₀⟩ : a ∈ Set.range (D.vert d) := D.V_eq' d ▸ hS ha
+    have hT : T.Nonempty := ⟨i₀, by simp [T, hi₀, ha]⟩
+    obtain ⟨t, ht⟩ : ∃ t, T.card = t + 1 := ⟨T.card - 1, by
+      have := hT.card_pos; omega⟩
+    set f := T.orderEmbOfFin ht
+    refine ⟨⟨t, D.map f d.2⟩, ⟨f, rfl⟩, ?_⟩
+    rw [D.V_eq']
+    ext b
+    constructor
+    · rintro ⟨i, rfl⟩
+      rw [D.vert_face (u := f) rfl]
+      have : f i ∈ T := Finset.orderEmbOfFin_mem T ht i
+      simpa [T] using this
+    · intro hb
+      obtain ⟨j, rfl⟩ : b ∈ Set.range (D.vert d) := D.V_eq' d ▸ hS hb
+      have hj : j ∈ T := by simp [T, hb]
+      have : j ∈ Set.range f := by rw [Finset.range_orderEmbOfFin]; exact hj
+      obtain ⟨i, hi⟩ := this
+      exact ⟨i, by rw [D.vert_face (u := f) rfl, hi]⟩
+
+/-- The simplex orders of `D` are compatible (pages 17–18). -/
+theorem isCompatible_ord : IsCompatible D.ord where
+  support d a b h := by
+    obtain ⟨i, j, -, rfl, rfl⟩ := h
+    rw [D.V_eq']
+    exact ⟨⟨i, rfl⟩, ⟨j, rfl⟩⟩
+  irrefl d a h := by
+    obtain ⟨i, j, hij, rfl, h2⟩ := h
+    exact hij.ne (D.vert_inj d h2)
+  trans d a b c h h' := by
+    obtain ⟨i, j, hij, rfl, rfl⟩ := h
+    obtain ⟨j', k, hjk, h1, rfl⟩ := h'
+    obtain rfl := D.vert_inj d h1
+    exact ⟨i, k, hij.trans hjk, rfl, rfl⟩
+  total d a ha b hb hab := by
+    rw [D.V_eq'] at ha hb
+    obtain ⟨i, rfl⟩ := ha
+    obtain ⟨j, rfl⟩ := hb
+    rcases lt_or_gt_of_ne (fun h : i = j => hab (h ▸ rfl)) with h | h
+    · exact Or.inl ⟨i, j, h, rfl, rfl⟩
+    · exact Or.inr ⟨j, i, h, rfl, rfl⟩
+  restrict e d hed a ha b hb := by
+    obtain ⟨u, hu⟩ := hed
+    rw [D.V_eq'] at ha hb
+    obtain ⟨i, rfl⟩ := ha
+    obtain ⟨j, rfl⟩ := hb
+    constructor
+    · rintro ⟨i', j', hij, h1, h2⟩
+      obtain rfl := D.vert_inj e h1
+      obtain rfl := D.vert_inj e h2
+      exact ⟨u i, u j, u.lt_iff_lt.2 hij, D.vert_face hu i, D.vert_face hu j⟩
+    · rintro ⟨i', j', hij, h1, h2⟩
+      change D.vert e i = D.vert d i' at h1
+      change D.vert e j = D.vert d j' at h2
+      rw [D.vert_face hu] at h1 h2
+      obtain rfl := D.vert_inj d h1
+      obtain rfl := D.vert_inj d h2
+      exact ⟨i, j, u.lt_iff_lt.1 hij, rfl, rfl⟩
+
+
+/-- The edge relation of the simplex orders is the relation `≺` of page 22. -/
+theorem edge_ord_iff (a b : Σ m, D.X m) :
+    edge D.ord a b ↔ ∃ z : D.X 1, a = ⟨0, D.map (pt 0) z⟩ ∧ b = ⟨0, D.map (pt 1) z⟩ := by
+  constructor
+  · rintro ⟨⟨n, w⟩, hV, hab, i, j, hij, rfl, rfl⟩
+    have hmem : ∀ k : Fin (n + 1), D.vert ⟨n, w⟩ k = D.vert ⟨n, w⟩ i ∨
+        D.vert ⟨n, w⟩ k = D.vert ⟨n, w⟩ j := fun k => by
+      have : D.vert ⟨n, w⟩ k ∈ V (⟨n, w⟩ : Σ m, D.X m) := by rw [D.V_eq']; exact ⟨k, rfl⟩
+      rw [hV] at this
+      exact this
+    have hn : n = 1 := by
+      have h1 : 1 ≤ n := by
+        have hj2 : (j : ℕ) < n + 1 := j.isLt
+        have : (i : ℕ) < j := hij
+        omega
+      by_contra hne
+      have h2 : 2 < n + 1 := by omega
+      have e := fun k : Fin (n + 1) => (hmem k).imp (D.vert_inj _) (D.vert_inj _)
+      rcases e ⟨0, by omega⟩ with h0 | h0 <;> rcases e ⟨1, by omega⟩ with h1' | h1' <;>
+        rcases e ⟨2, h2⟩ with h2' | h2' <;>
+        simp only [Fin.ext_iff] at h0 h1' h2' <;> omega
+    subst hn
+    have hij' : (i : ℕ) < j := hij
+    have hj2 : (j : ℕ) < 2 := j.isLt
+    have hi : i = 0 := Fin.ext (by simp; omega)
+    have hj : j = 1 := Fin.ext (by simp; omega)
+    subst hi hj
+    exact ⟨w, rfl, rfl⟩
+  · rintro ⟨z, rfl, rfl⟩
+    refine ⟨⟨1, z⟩, ?_, fun h => absurd (D.vert_inj ⟨1, z⟩ h) (by simp), 0, 1,
+      by simp, rfl, rfl⟩
+    rw [D.V_eq']
+    ext c
+    constructor
+    · rintro ⟨⟨k, hk⟩, rfl⟩
+      change k < 2 at hk
+      interval_cases k
+      · exact Or.inl rfl
+      · exact Or.inr rfl
+    · rintro (rfl | rfl)
+      · exact ⟨0, rfl⟩
+      · exact ⟨1, rfl⟩
+
+theorem prec_iff (x y : D.X 0) : D.Prec x y ↔ edge D.ord ⟨0, x⟩ ⟨0, y⟩ := by
+  rw [edge_ord_iff]
+  simp only [vertex_eq_iff, Prec]
+  exact ⟨fun ⟨z, h1, h2⟩ => ⟨z, h1.symm, h2.symm⟩, fun ⟨z, h1, h2⟩ => ⟨z, h1.symm, h2.symm⟩⟩
+
+/-- `x ≺ x` is impossible, by (1) (page 22). -/
+theorem not_prec_self (x : D.X 0) : ¬ D.Prec x x := by
+  rw [prec_iff]
+  rintro ⟨_, _, h, _⟩
+  exact h rfl
+
+theorem trans_iff : (∀ x y w : D.X 0, D.Prec x y → D.Prec y w → D.Prec x w) ↔
+    ∀ a b c, edge D.ord a b → edge D.ord b c → edge D.ord a c := by
+  constructor
+  · intro h a b c hab hbc
+    obtain ⟨z, rfl, rfl⟩ := (D.edge_ord_iff _ _).1 hab
+    obtain ⟨z', h1, rfl⟩ := (D.edge_ord_iff _ _).1 hbc
+    rw [vertex_eq_iff] at h1
+    rw [← prec_iff]
+    exact h _ _ _ ⟨z, rfl, rfl⟩ ⟨z', h1.symm, rfl⟩
+  · intro h x y w hxy hyw
+    rw [prec_iff] at *
+    exact h _ _ _ hxy hyw
+
+/-- **The Proposition of pages 22–24, from the semi-simplicial side.** For a semi-simplicial set
+satisfying (1), the poset `D_*` satisfies (a), and the transitivity (2°) of `≺` holds iff the
+orders of the simplices all come from one order on `D₀` satisfying (b) and (c); that order is then
+`≺`. -/
+theorem trans_iff_vertexOrder :
+    (∀ x y w : D.X 0, D.Prec x y → D.Prec y w → D.Prec x w) ↔
+      ∃ r, IsVertexOrder r ∧ ofVertex r = D.ord := by
+  rw [trans_iff]
+  constructor
+  · intro h
+    exact ⟨edge D.ord, isVertexOrder_edge D.isFlagGeom D.isCompatible_ord h,
+      ofVertex_edge D.isFlagGeom D.isCompatible_ord h⟩
+  · rintro ⟨r, hr, hro⟩
+    rw [← hro, edge_ofVertex D.isFlagGeom hr]
+    exact hr.trans
+
+theorem vertexOrder_unique {r : (Σ m, D.X m) → (Σ m, D.X m) → Prop} (hr : IsVertexOrder r)
+    (hro : ofVertex r = D.ord) : r = edge D.ord := by
+  rw [← hro, edge_ofVertex D.isFlagGeom hr]
+
+/-- (2 bis) of page 22: every pair of composable edges bounds a 2-simplex. -/
+def HornFill : Prop :=
+  ∀ z z' : D.X 1, D.map (pt 1) z = D.map (pt 0) z' →
+    ∃ u : D.X 2, D.map Fin.castSuccOrderEmb u = z ∧ D.map (Fin.succOrderEmb 2) u = z'
+
+/-- (2 bis) implies (2°) (page 22). -/
+theorem trans_of_hornFill (h : D.HornFill) (x y w : D.X 0) (hxy : D.Prec x y)
+    (hyw : D.Prec y w) : D.Prec x w := by
+  obtain ⟨z, rfl, rfl⟩ := hxy
+  obtain ⟨z', h1, rfl⟩ := hyw
+  obtain ⟨u, rfl, rfl⟩ := h z z' h1.symm
+  refine ⟨D.map (Fin.succAboveOrderEmb 1) u, ?_, ?_⟩ <;> rw [map_pt, map_pt] <;> rfl
+
+end NonSingular
+
+/-! ### The boundary of a triangle: (2°) without (2 bis) -/
+
+/-- The boundary of the triangle `{0 < 1 < 2}`: its simplices are the strictly increasing maps
+`Δ_m → {0, 1, 2}` with `m ≤ 1`. -/
+def triangleBoundary : NonSingular where
+  X m := {_f : Fin (m + 1) ↪o Fin 3 // m ≤ 1}
+  map u x := ⟨u.trans x.1, (NonSingular.le_of_emb u).trans x.2⟩
+  map_id _ := rfl
+  map_comp _ _ _ := rfl
+  cond1 x _ _ h := RelEmbedding.ext fun i => x.1.injective (congrArg (fun g => g.1 i) h)
+
+theorem triangleBoundary_trans (x y w : triangleBoundary.X 0) (hxy : triangleBoundary.Prec x y)
+    (hyw : triangleBoundary.Prec y w) : triangleBoundary.Prec x w := by
+  obtain ⟨z, rfl, rfl⟩ := hxy
+  obtain ⟨z', h1, rfl⟩ := hyw
+  have h1' : z.1 1 = z'.1 0 := (congrArg (fun g => g.1 0) h1).symm
+  have ha : z.1 0 < z.1 1 := z.1.lt_iff_lt.2 (show (0 : Fin 2) < 1 by decide)
+  have hb : z'.1 0 < z'.1 1 := z'.1.lt_iff_lt.2 (show (0 : Fin 2) < 1 by decide)
+  have hlt : z.1 0 < z'.1 1 := ha.trans (h1' ▸ hb)
+  refine ⟨⟨OrderEmbedding.ofStrictMono ![z.1 0, z'.1 1] ?_, le_rfl⟩, ?_, ?_⟩
+  · intro a b hab
+    fin_cases a <;> fin_cases b
+    · exact absurd hab (lt_irrefl _)
+    · exact hlt
+    · exact absurd hab (by decide)
+    · exact absurd hab (lt_irrefl _)
+  · apply Subtype.ext; apply RelEmbedding.ext; intro i
+    rw [Fin.fin_one_eq_zero i]; rfl
+  · apply Subtype.ext; apply RelEmbedding.ext; intro i
+    rw [Fin.fin_one_eq_zero i]; rfl
+
+theorem triangleBoundary_not_hornFill : ¬ triangleBoundary.HornFill := by
+  intro h
+  let e : Fin 2 ↪o Fin 3 := Fin.castSuccOrderEmb
+  let e' : Fin 2 ↪o Fin 3 := Fin.succOrderEmb 2
+  obtain ⟨u, -, -⟩ := h ⟨e, le_rfl⟩ ⟨e', le_rfl⟩ (Subtype.ext (RelEmbedding.ext fun i => by
+    rw [Fin.fin_one_eq_zero i]; rfl))
+  exact absurd u.2 (by decide)
+
+end Grothendieck.Folder76.Sommets
