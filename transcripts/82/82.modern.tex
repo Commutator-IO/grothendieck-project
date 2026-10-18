@@ -125,6 +125,12 @@
 % monomorphism. (61) for twisted conics stays unchecked. No mathlib
 % theorem carries the statement; the finding records no literature read.
 % No facsimile check since the first pass.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — pp. 26-27: footnote on the
+%   Lean check of the automorphisms of sl(2) in characteristic 2
+%   (lean/Grothendieck/Folder82.lean), split case over any ring with 2 = 0:
+%   Heisenberg bracket, Aut = GL_2(R) ⋉ R^2, those fixing H~ = SL_2(R) ⋉ R^2,
+%   derivations free of rank 6 and 5 (the page's dimensions). Two « Ce que »
+%   headings renamed. No literature recorded by the finding.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -271,7 +277,7 @@ déterminant de $f$ ; la forme $u \mapsto -\det u$ sur une algèbre de quaternio
 que la page 47 nomme aussi $\Delta$, est écrite ici $Q_{\mathcal{M}}$, et la quadrique
 qu'elle définit $\mathcal{Q}$.
 
-\subsection*{Ce que seule une lecture d'ensemble peut dire}
+\subsection*{Vu de l'ensemble du dossier}
 
 \begin{itemize}
   \item La page 31 annonce un isomorphisme $E \simeq \widetilde{\mathfrak{g}}$ et dit
@@ -300,7 +306,7 @@ qu'elle définit $\mathcal{Q}$.
     pages 52 et 53, écrit avant sa démonstration dans l'ordre des feuillets.
 \end{itemize}
 
-\subsection*{Ce que le dossier annonce sans l'établir}
+\subsection*{Annoncé sans être établi}
 
 L'isomorphisme $E \simeq \widetilde{\mathfrak{g}}$ pour un module spécial quadratique
 quelconque, avec ses propriétés (page 31) ; les équivalences de la page 46 et
@@ -839,7 +845,25 @@ leurs automorphismes est le groupe affine symplectique
 $\mathrm{SL}(V) \ltimes V$, lisse de dimension relative $5$, tandis que le groupe
 des automorphismes d'une forme de $\mathfrak{sl}(2)$, ou de $\mathfrak{gp}(1)$, est
 une forme du groupe affine $\mathrm{GL}(V) \ltimes V$, lisse de dimension relative
-$6$\footnote{La fin du premier paragraphe de la page 27 se lit mal, et ce qu'elle
+$6$\footnote{Dans le cas déployé, vérifié en Lean (lean/Grothendieck/Folder82.lean)
+sur tout anneau commutatif $R$ où $2 = 0$. En coordonnées
+$x\widetilde{X} + y\widetilde{Y} + z\widetilde{H}$, le crochet est
+$[u, u'] = (xy' - yx')\widetilde{H}$, et le centre $R\widetilde{H}$ est l'ensemble
+des crochets (\texttt{lie\_slMk}, \texttt{central\_iff}). Tout endomorphisme
+d'algèbres de Lie s'écrit de façon unique $u \mapsto g(x, y) + (ax + by + \det
+g \cdot z)\widetilde{H}$, ces endomorphismes se composent comme dans
+$\mathrm{GL}(V) \ltimes \mathrm{Hom}(V, \det V)$, et un tel endomorphisme est
+un automorphisme si et seulement si $\det g$ est inversible : $\mathrm{Aut}(
+\mathfrak{sl}(2))(R) \simeq \mathrm{GL}_2(R) \ltimes R^2$
+(\texttt{lieHom\_eq\_autFun}, \texttt{autFun\_comp}, \texttt{bijective\_iff}).
+Ceux qui fixent $\widetilde{H}$, c'est-à-dire qui agissent trivialement sur
+$\det V \simeq \mathcal{O}$, forment $\mathrm{SL}_2(R) \ltimes R^2$
+(\texttt{bijective\_fix\_iff}). Les dimensions $6$ et $5$ se lisent sur les
+algèbres de Lie : les dérivations forment $\mathfrak{gl}_2 \times R^2$, libre de
+rang $6$, et celles qui tuent $\widetilde{H}$ forment $\mathfrak{sl}_2 \times R^2$,
+libre de rang $5$ (\texttt{derEquiv}, \texttt{derFixEquiv}). Les formes sur une
+base, $\mathfrak{gp}(1)$ et le couplage avec $E'$, la lissité et la
+représentabilité des schémas d'automorphismes ne sont pas formalisés.}\footnote{La fin du premier paragraphe de la page 27 se lit mal, et ce qu'elle
 compare à une forme de $\mathrm{GP}(1)$ reste incertain. La conséquence qu'on en
 tire est de l'édition : comme $\mathrm{GP}(1)$ est de dimension $3$, le foncteur
 « algèbre de Lie » ne peut être une équivalence au-dessus d'une base de
