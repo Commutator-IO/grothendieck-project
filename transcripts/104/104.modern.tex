@@ -70,6 +70,14 @@
 %   « Ce que » run-in headings renamed. No literature added (the findings are
 %   unsearched or candidate on dating only); no facsimile change since
 %   2026-09-23 beyond a macro rename. mathlib PRs 44731/44732 closed, not cited.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — pp. 12-16, after the
+%   Lean check of the pinned-poset equivalence (lean/Grothendieck/Folder104.lean):
+%   it holds for M skeletal; admissible = non-singular (every element a
+%   monomorphism), the first condition of p. 12 sufficing; X~ is the category
+%   of elements, so the equivalence restricts presheaves = discrete fibrations
+%   (our remark); monomorphisms = injective maps; p. 16 checked, with the
+%   stronger statement that anything mapping to an admissible presheaf is
+%   admissible. Cisinski (finding status « unsearched ») not cited.
 %
 % Revised 2026-09-23 (Opus 5.5), after the find-novelty pass:
 % — page 11, question b): (P_n)_{<=xi} = P_{n'} replaced by
@@ -617,6 +625,31 @@ sorte qu'un morphisme d'objets admissibles envoie modèles sur modèles, et
 qu'un objet admissible est la limite inductive de ses sous-objets modèles
 indexée par $K$. Cette esquisse est la nôtre.}
 
+L'énoncé est juste, pour $M$ squelettique comme on le suppose depuis la
+page 9, et la vérification en dit davantage sur ce que sont les objets
+admissibles. Un préfaisceau $X$ est admissible si et seulement si tout élément
+$x \in X(D_n)$, vu comme morphisme $D_n \to X$, est un monomorphisme : la
+première condition de la page 12 suffit, et la seconde en découle par (i).
+L'ensemble ordonné $\widetilde{X}$ s'identifie alors à la catégorie des
+éléments de $X$, formée des couples $(D_n, x)$, ordonnés par
+$(D_{n'}, x') \leq (D_n, x)$ si $x' = X(a)(x)$ pour une flèche $a$, de type
+$(D_n, x) \mapsto n$ et épinglés par $u_{(D_n, x)}(a) = (D_{n'}, X(a)(x))$ ;
+c'est (ii), avec le caractère squelettique de $M$ et la condition précédente,
+qui en fait un ensemble ordonné. Le foncteur inverse envoie un ensemble ordonné
+épinglé $K$ sur le préfaisceau $D_n \mapsto \tau_K^{-1}(n)$, sur lequel une
+flèche agit par l'épinglage, et l'axiome (2) est exactement la fonctorialité.
+Un morphisme est un monomorphisme si et seulement si l'application
+$\widetilde{X} \to \widetilde{Y}$ est injective, comme la page 14 le
+suppose\footnote{Vérifié en Lean (lean/Grothendieck/Folder104.lean,
+\texttt{admissible\_iff}, \texttt{versEpingle\_isEquivalence} et
+\texttt{mono\_iff\_injective\_versEpingle}). Les préfaisceaux dont tout élément
+est un monomorphisme sont ce qu'on appelle aujourd'hui les préfaisceaux non
+singuliers, et l'équivalence de la page 13 est la restriction, aux préfaisceaux
+dont la catégorie des éléments est un ensemble ordonné, de l'équivalence
+classique entre préfaisceaux sur $M$ et catégories fibrées discrètes sur $M$.
+Le rapprochement est de l'édition ; la page ne dit rien de la catégorie des
+éléments.}.
+
 \pagerange{14}{15}
 \section*{Parties fermées, et épinglages par les éléments maximaux (pages 14 et 15)}
 
@@ -662,7 +695,13 @@ recollement est dans $X$ ou dans $Y$. D'autre part, tout sous-préfaisceau d'un
 modèle est réunion de modèles, puisque toutes les flèches de $M$ sont
 monomorphes, ce qui assure la seconde condition d'admissibilité. Enfin, un
 sous-objet d'un objet admissible est admissible, et $Z$ l'est donc. Ces
-vérifications sont les nôtres.}
+vérifications sont les nôtres. Elles sont faites en Lean
+(lean/Grothendieck/Folder104.lean) avec le critère de la page 13 : un élément
+d'une somme, ou d'une somme amalgamée le long de monomorphismes, provient d'un
+des termes par un monomorphisme, les préfaisceaux formant une catégorie
+extensive et adhésive, et reste donc un monomorphisme. Le même critère donne
+plus que la page : tout préfaisceau muni d'un morphisme vers un objet
+admissible est admissible.}
 
 \textbf{N.B.} Quand les $I_{n}$ sont finis, les objets admissibles de type fini
 correspondent aux ensembles ordonnés $M$-épinglés finis.
