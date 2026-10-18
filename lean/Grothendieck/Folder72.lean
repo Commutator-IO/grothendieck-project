@@ -642,4 +642,298 @@ theorem u_u_e0 (x y : U (ρ n μ β)) :
   rw [← Module.End.mul_apply, u_mul, U.mul_val]
   congr 2; ring
 
+/-! ## Invariant subspaces (pages 79–82)
+
+Finding `72-invariant-subspaces-string`, reading section XIV. Over a field, in the
+coordinates above (any `μᵢ`, characteristic 2 allowed), with `Z'ᵢ = H₀ ∩ ⋯ ∩ Hᵢ`
+(`Zp i`), `Z*ᵢ = Lin(h_{i+1}, …, hₙ)` (`Zs i`, the vectors whose coordinates
+`0, …, i+1` vanish), `C` the hyperplane `π = 0` (`Vh`) and `c` the line of `c̃`:
+
+* `invariant_iff` (the theorem of page 79): a subspace is stable under all `τᵢ` iff
+  it is `0`, `E`, `K c̃`, `Vh`, or `Z'ᵢ` or `Z*ᵢ` for some `i < n` with `βᵢ = 0`.
+* `Zs_le_Zp_iff`: `Z*ᵢ ⊂ Z'ᵢ` iff `βᵢ = 0` (with the « ∈ » of the margin of
+  page 79, not the « ∉ » of page 81).
+* `invariant_iff_of_ne_zero`: if all `βᵢ ≠ 0`, only the four.
+-/
+
+section Invariant
+
+/-- `Z'ᵢ = H₀ ∩ ⋯ ∩ Hᵢ`. -/
+def Zp (n : ℕ) (μ β : ℕ → R) (i : ℕ) : Submodule R (Fin (n + 2) → R) where
+  carrier := {x | ∀ k ≤ i, F n μ β k x = 0}
+  add_mem' := by intro a b ha hb k hk; simp [ha k hk, hb k hk]
+  zero_mem' := by intro k _; simp
+  smul_mem' := by intro c x hx k hk; simp [hx k hk]
+
+/-- `Z*ᵢ = Lin(h_{i+1}, …, hₙ) = Lin(e_{i+2}, …, e_{n+1})`. -/
+def Zs (n : ℕ) (i : ℕ) : Submodule R (Fin (n + 2) → R) where
+  carrier := {x | ∀ k ≤ i + 1, co n k x = 0}
+  add_mem' := by intro a b ha hb k hk; simp [ha k hk, hb k hk]
+  zero_mem' := by intro k _; simp
+  smul_mem' := by intro c x hx k hk; simp [hx k hk]
+
+/-- The hyperplane at infinity `C`, `π = 0`. -/
+def Vh (n : ℕ) : Submodule R (Fin (n + 2) → R) := LinearMap.ker (co n 0)
+
+/-- Stability under all the `τᵢ`. -/
+def Invariant (n : ℕ) (μ β : ℕ → R) (W : Submodule R (Fin (n + 2) → R)) : Prop :=
+  ∀ i ≤ n, ∀ w ∈ W, τ n μ β i w ∈ W
+
+lemma sum_e (x : Fin (n + 2) → R) : x = ∑ j : Fin (n + 2), x j • e n j := by
+  conv_lhs => rw [pi_eq_sum_univ x]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  congr 1; funext k; simp [e, Fin.ext_iff, eq_comm]
+
+lemma mem_of_coords (W : Submodule R (Fin (n + 2) → R)) (x : Fin (n + 2) → R)
+    (h : ∀ j : Fin (n + 2), x j = 0 ∨ e n j ∈ W) : x ∈ W := by
+  rw [sum_e x]
+  refine Submodule.sum_mem _ fun j _ => ?_
+  rcases h j with h | h
+  · simp [h]
+  · exact W.smul_mem _ h
+
+lemma F_e_succ_succ (i : ℕ) : F n μ β i (e n (i + 2)) = if i + 2 < n + 2 then β i else 0 := by
+  by_cases h : i + 2 < n + 2
+  · simp [F_apply, co_e _ _ h, h]
+  · have he : (e n (i + 2) : Fin (n + 2) → R) = 0 := by
+      funext j; simp [e]; omega
+    simp [he, h]
+
+theorem Zp_invariant {i : ℕ} (hi : i < n) (hβ : β i = 0) : Invariant n μ β (Zp n μ β i) := by
+  intro j hj w hw
+  by_cases hji : j ≤ i
+  · rw [τ_apply, hw j hji, zero_smul, add_zero]; exact hw
+  · refine (Zp n μ β i).add_mem hw ((Zp n μ β i).smul_mem _ ?_)
+    intro k hk
+    by_cases hk' : k = i ∧ j = i + 1
+    · obtain ⟨rfl, rfl⟩ := hk'
+      rw [F_e_succ_succ]; simp [hβ]
+    · exact F_e_far μ β (by omega) (by omega) (by omega)
+
+theorem Zs_invariant {i : ℕ} (hβ : β i = 0) : Invariant n μ β (Zs n i) := by
+  intro j hj w hw
+  by_cases hji : j ≤ i
+  · have hF : F n μ β j w = 0 := by
+      rw [F_apply, hw j (by omega), hw (j + 1) (by omega)]
+      rcases (show j + 2 ≤ i + 1 ∨ j = i by omega) with h | rfl
+      · rw [hw (j + 2) h]; ring
+      · rw [hβ]; ring
+    rw [τ_apply, hF, zero_smul, add_zero]; exact hw
+  · refine (Zs n i).add_mem hw ((Zs n i).smul_mem _ ?_)
+    intro k hk
+    exact co_e_ne (by omega)
+
+theorem Zs_le_Zp_iff {i : ℕ} (hi : i < n) : Zs n i ≤ Zp n μ β i ↔ β i = 0 := by
+  constructor
+  · intro h
+    have hm : (e n (i + 2) : Fin (n + 2) → R) ∈ Zs n i := fun k hk => co_e_ne (by omega)
+    have := h hm i le_rfl
+    rw [F_e_succ_succ] at this
+    simpa [show i + 2 < n + 2 by omega] using this
+  · intro hβ x hx k hk
+    rw [F_apply, hx k (by omega), hx (k + 1) (by omega)]
+    rcases (show k + 2 ≤ i + 1 ∨ k = i by omega) with h | rfl
+    · rw [hx (k + 2) h]; ring
+    · rw [hβ]; ring
+
+variable {K : Type u} [Field K] {μ' β' : ℕ → K}
+
+lemma stable_iff_of_field (W : Submodule K (Fin (n + 2) → K)) (i : ℕ) :
+    (∀ w ∈ W, τ n μ' β' i w ∈ W) ↔ e n (i + 1) ∈ W ∨ ∀ w ∈ W, F n μ' β' i w = 0 := by
+  constructor
+  · intro h
+    by_cases hall : ∀ w ∈ W, F n μ' β' i w = 0
+    · exact Or.inr hall
+    · push Not at hall
+      obtain ⟨w, hw, hne⟩ := hall
+      left
+      have h1 : F n μ' β' i w • e n (i + 1) ∈ W := by
+        have := W.sub_mem (h w hw) hw
+        rwa [τ_apply, add_sub_cancel_left] at this
+      have := W.smul_mem (F n μ' β' i w)⁻¹ h1
+      rwa [smul_smul, inv_mul_cancel₀ hne, one_smul] at this
+  · rintro (h | h) w hw
+    · rw [τ_apply]; exact W.add_mem hw (W.smul_mem _ h)
+    · rw [τ_apply, h w hw, zero_smul, add_zero]; exact hw
+
+/-- The low part `Σ_{k ≤ m} x_k e_k`. -/
+def low (m : ℕ) (x : Fin (n + 2) → K) : Fin (n + 2) → K := fun j => if (j : ℕ) ≤ m then x j else 0
+
+lemma co_low (m k : ℕ) (x : Fin (n + 2) → K) :
+    co n k (low m x) = if k ≤ m then co n k x else 0 := by
+  by_cases hk : k < n + 2
+  · simp [co_of_lt hk, low]
+  · simp [co_of_le (show n + 2 ≤ k by omega)]
+
+lemma sub_low_mem_Zs (i : ℕ) (x : Fin (n + 2) → K) : x - low (i + 1) x ∈ Zs n i := by
+  intro k hk; simp [co_low, hk]
+
+/-- **Page 79.** The subspaces stable under all the `τᵢ`. -/
+theorem invariant_iff (W : Submodule K (Fin (n + 2) → K)) :
+    Invariant n μ' β' W ↔
+      W = ⊥ ∨ W = ⊤ ∨ W = K ∙ ct n μ' β' ∨ W = Vh n ∨
+        ∃ i < n, β' i = 0 ∧ (W = Zp n μ' β' i ∨ W = Zs n i) := by
+  constructor
+  · intro hW
+    have hst : ∀ i ≤ n, e n (i + 1) ∈ W ∨ ∀ w ∈ W, F n μ' β' i w = 0 :=
+      fun i hi => (stable_iff_of_field W i).1 (hW i hi)
+    -- (a) the `i` with `W ⊂ Hᵢ` form an initial segment
+    have ha : ∀ i, 1 ≤ i → i ≤ n → (∀ w ∈ W, F n μ' β' i w = 0) →
+        ∀ w ∈ W, F n μ' β' (i - 1) w = 0 := by
+      intro i h1 h2 hI
+      rcases hst (i - 1) (by omega) with h | h
+      · have := hI _ h
+        rw [show i - 1 + 1 = i by omega, F_e_self i h2] at this
+        exact absurd this one_ne_zero
+      · exact h
+    -- (b) the `j` with `hⱼ ∈ W` form a final segment
+    have hb : ∀ j < n, e n (j + 1) ∈ W → e n (j + 2) ∈ W := by
+      intro j hj he
+      rcases hst (j + 1) (by omega) with h | h
+      · exact h
+      · have := h _ he
+        rw [F_e_self (j + 1) (by omega)] at this
+        exact absurd this one_ne_zero
+    by_cases hIn : ∀ w ∈ W, F n μ' β' n w = 0
+    · -- `W ⊂ H₀ ∩ ⋯ ∩ Hₙ = K c̃`
+      have hall : ∀ i ≤ n, ∀ w ∈ W, F n μ' β' i w = 0 := by
+        intro i hi
+        induction h : n - i generalizing i with
+        | zero => rwa [show i = n by omega]
+        | succ m ih =>
+          have := ha (i + 1) (by omega) (by omega) (ih (i + 1) (by omega) (by omega))
+          simpa using this
+      have hle : W ≤ K ∙ ct n μ' β' := by
+        intro w hw
+        rw [eq_smul_vec le_rfl w (fun k hk => co_of_le (by omega) w)
+          (fun i hi => hall i (by omega) w hw)]
+        exact Submodule.smul_mem _ _ (Submodule.mem_span_singleton_self _)
+      by_cases hct : ct n μ' β' ∈ W
+      · exact Or.inr (Or.inr (Or.inl (le_antisymm hle
+          ((Submodule.span_singleton_le_iff_mem _ _).2 hct))))
+      · left
+        rw [Submodule.eq_bot_iff]
+        intro w hw
+        obtain ⟨c, hc⟩ := Submodule.mem_span_singleton.1 (hle hw)
+        by_cases hc0 : c = 0
+        · rw [← hc, hc0, zero_smul]
+        · exact absurd (by
+            have := W.smul_mem c⁻¹ hw
+            rwa [← hc, smul_smul, inv_mul_cancel₀ hc0, one_smul] at this) hct
+    · have hen : e n (n + 1) ∈ W := (hst n le_rfl).resolve_right hIn
+      have hex : ∃ j, e n (j + 1) ∈ W := ⟨n, hen⟩
+      classical
+      set j0 := Nat.find hex with hj0def
+      have hj0 : e n (j0 + 1) ∈ W := Nat.find_spec hex
+      have hj0n : j0 ≤ n := Nat.find_min' hex hen
+      have hbelow : ∀ k < j0, ∀ w ∈ W, F n μ' β' k w = 0 :=
+        fun k hk => (hst k (by omega)).resolve_left (Nat.find_min hex hk)
+      have habove : ∀ k, j0 ≤ k → k ≤ n → e n (k + 1) ∈ W := by
+        intro k hk1 hk2
+        induction k with
+        | zero => rwa [show j0 = 0 by omega] at hj0
+        | succ k ih =>
+          rcases (show j0 = k + 1 ∨ j0 ≤ k by omega) with h | h
+          · rwa [h] at hj0
+          · exact hb k (by omega) (ih h (by omega))
+      have hej : ∀ j : Fin (n + 2), j0 + 1 ≤ (j : ℕ) → e n j ∈ W := by
+        intro j hj
+        have := habove ((j : ℕ) - 1) (by omega) (by omega)
+        rwa [show (j : ℕ) - 1 + 1 = j by omega] at this
+      rcases Nat.eq_zero_or_pos j0 with h0 | hpos
+      · -- `C ⊂ W`
+        have hV : Vh n ≤ W := by
+          intro x hx
+          refine mem_of_coords W x fun j => ?_
+          rcases Nat.eq_zero_or_pos (j : ℕ) with hj | hj
+          · left
+            have : co n 0 x = 0 := hx
+            rwa [co_of_lt (by omega), show (⟨0, by omega⟩ : Fin (n + 2)) = j from Fin.ext hj.symm]
+              at this
+          · exact Or.inr (hej j (by omega))
+        by_cases hw : ∃ w ∈ W, co n 0 w ≠ 0
+        · obtain ⟨w, hw, hne⟩ := hw
+          right; left
+          rw [eq_top_iff]
+          intro x _
+          have hm : x - (co n 0 x / co n 0 w) • w ∈ Vh n := by
+            change co n 0 _ = 0
+            rw [map_sub, map_smul, smul_eq_mul, div_mul_cancel₀ _ hne, sub_self]
+          have := W.add_mem (hV hm) (W.smul_mem (co n 0 x / co n 0 w) hw)
+          rwa [sub_add_cancel] at this
+        · push Not at hw
+          exact Or.inr (Or.inr (Or.inr (Or.inl (le_antisymm (fun w h => hw w h) hV))))
+      · obtain ⟨i, hi⟩ : ∃ i, j0 = i + 1 := ⟨j0 - 1, by omega⟩
+        have hin : i < n := by omega
+        have hβ : β' i = 0 := by
+          have := hbelow i (by omega) _
+            (show e n (i + 2) ∈ W by have h := hj0; rw [hi] at h; exact h)
+          rw [F_e_succ_succ] at this
+          simpa [show i + 2 < n + 2 by omega] using this
+        have hZsW : Zs n i ≤ W := by
+          intro x hx
+          refine mem_of_coords W x fun j => ?_
+          by_cases hj : (j : ℕ) ≤ i + 1
+          · left
+            have := hx j hj
+            rwa [co_of_lt j.isLt] at this
+          · exact Or.inr (hej j (by omega))
+        have hWZp : W ≤ Zp n μ' β' i := fun w hw k hk => hbelow k (by omega) w hw
+        have hlow : ∀ x ∈ Zp n μ' β' i, low (i + 1) x = co n (i + 1) x • vec μ' β' (i + 1) := by
+          intro x hx
+          have hhigh := (Zs_le_Zp_iff (μ := μ') hin).2 hβ (sub_low_mem_Zs i x)
+          have h := eq_smul_vec (μ := μ') (β := β') (show i + 1 ≤ n + 1 by omega) (low (i + 1) x)
+            (fun k hk => by rw [co_low]; simp [show ¬ k ≤ i + 1 by omega])
+            (fun k hk => by
+              have h1 := hhigh k (by omega)
+              rw [map_sub, hx k (by omega), zero_sub, neg_eq_zero] at h1
+              exact h1)
+          simp only [co_low, le_refl, ↓reduceIte] at h
+          exact h
+        right; right; right; right
+        refine ⟨i, hin, hβ, ?_⟩
+        by_cases hw : ∃ w ∈ W, co n (i + 1) w ≠ 0
+        · obtain ⟨w, hw, hne⟩ := hw
+          left
+          have hlw : low (i + 1) w ∈ W := by
+            have := W.sub_mem hw (hZsW (sub_low_mem_Zs i w))
+            rwa [sub_sub_cancel] at this
+          have hvec : vec μ' β' (i + 1) ∈ W := by
+            have := W.smul_mem (co n (i + 1) w)⁻¹ hlw
+            rwa [hlow w (hWZp hw), smul_smul, inv_mul_cancel₀ hne, one_smul] at this
+          refine le_antisymm hWZp fun x hx => ?_
+          have := W.add_mem (hZsW (sub_low_mem_Zs i x)) (W.smul_mem (co n (i + 1) x) hvec)
+          rwa [← hlow x hx, sub_add_cancel] at this
+        · push Not at hw
+          right
+          refine le_antisymm (fun w h => ?_) hZsW
+          have h1 := sub_low_mem_Zs i w
+          rwa [hlow w (hWZp h), hw w h, zero_smul, sub_zero] at h1
+  · rintro (rfl | rfl | rfl | rfl | ⟨i, hi, hβ, rfl | rfl⟩)
+    · intro i _ w hw; rw [Submodule.mem_bot] at hw ⊢; simp [hw]
+    · intro i _ w _; trivial
+    · intro i hi w hw
+      obtain ⟨c, rfl⟩ := Submodule.mem_span_singleton.1 hw
+      rw [map_smul, τ_apply, F_ct hi, zero_smul, add_zero]
+      exact Submodule.smul_mem _ _ (Submodule.mem_span_singleton_self _)
+    · intro i _ w hw
+      change co n 0 _ = 0
+      rw [co_τ_zero]; exact hw
+    · exact Zp_invariant hi hβ
+    · exact Zs_invariant hβ
+
+/-- Corollary (c) of page 80: if all `βᵢ` are nonzero, the four are the only ones. -/
+theorem invariant_iff_of_ne_zero (hβ : ∀ i < n, β' i ≠ 0) (W : Submodule K (Fin (n + 2) → K)) :
+    Invariant n μ' β' W ↔ W = ⊥ ∨ W = ⊤ ∨ W = K ∙ ct n μ' β' ∨ W = Vh n := by
+  rw [invariant_iff]
+  constructor
+  · rintro (h | h | h | h | ⟨i, hi, h0, _⟩)
+    exacts [Or.inl h, Or.inr (Or.inl h), Or.inr (Or.inr (Or.inl h)), Or.inr (Or.inr (Or.inr h)),
+      absurd h0 (hβ i hi)]
+  · rintro (h | h | h | h)
+    exacts [Or.inl h, Or.inr (Or.inl h), Or.inr (Or.inr (Or.inl h)),
+      Or.inr (Or.inr (Or.inr (Or.inl h)))]
+
+end Invariant
+
 end Grothendieck.Folder72

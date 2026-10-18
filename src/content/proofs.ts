@@ -39,15 +39,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '72',
     batch: 2,
-    page: '37–38, 87–88',
-    name: 'The group 𝒰_ρ and the automorphisms of a realisation',
+    page: '37–38, 79–82, 87–88',
+    name: 'The group 𝒰_ρ and the automorphisms of a realisation; the invariant subspaces',
     statement:
-      'For a non-degenerate realisation (E, (τᵢ)) of the universal regular n-carte by pseudo-reflections, 𝒰_ρ = Spec 𝒪_S[T]_{(1+ρT)}, with law λ + λ′ + ρλλ′, acts by u_λ = id + λπ ⊗ c̃, and 𝔾_m × 𝒰_ρ → Aut(E, (τᵢ)) is an isomorphism; D₀ ∖ {c, d} is a torsor under 𝒰_ρ, trivialised by s₀. In coordinates, on R-points.',
+      'For a non-degenerate realisation (E, (τᵢ)) of the universal regular n-carte by pseudo-reflections, 𝒰_ρ = Spec 𝒪_S[T]_{(1+ρT)}, with law λ + λ′ + ρλλ′, acts by u_λ = id + λπ ⊗ c̃, and 𝔾_m × 𝒰_ρ → Aut(E, (τᵢ)) is an isomorphism; D₀ ∖ {c, d} is a torsor under 𝒰_ρ, trivialised by s₀. In coordinates, on R-points. Over a field, the subspaces stable under all τᵢ are 0, E, the centre, the hyperplane at infinity C, and Z′ᵢ = H₀ ∩ ⋯ ∩ Hᵢ and Z*ᵢ = Lin(h_{i+1}, …, hₙ) for each i with βᵢ = 0.',
     found:
-      'Holds on points over any commutative ring. λ ↦ 1 + ρλ is onto the units of every algebra iff ρ is a unit (tested on the dual numbers), and 𝒰₀ = 𝔾_a. The endomorphisms commuting with all τᵢ are exactly the c + tπ ⊗ c̃, with (c, t) unique, invertible iff c and c + tρ are units: Rˣ × 𝒰_ρ(R) ≅ Aut(E, (τᵢ)), and det u_λ = 1 + ρλ. The start points off c and d are the u_λs₀ = s₀ + λc̃, each for one λ. Not formalised: the group scheme, the projective statement over a base, the torsor of flags.',
+      'Holds on points over any commutative ring. λ ↦ 1 + ρλ is onto the units of every algebra iff ρ is a unit (tested on the dual numbers), and 𝒰₀ = 𝔾_a. The endomorphisms commuting with all τᵢ are exactly the c + tπ ⊗ c̃, with (c, t) unique, invertible iff c and c + tρ are units: Rˣ × 𝒰_ρ(R) ≅ Aut(E, (τᵢ)), and det u_λ = 1 + ρλ. The start points off c and d are the u_λs₀ = s₀ + λc̃, each for one λ. The invariant subspaces hold as page 79 states them, for any μᵢ, in characteristic 2 too; Z*ᵢ ⊂ Z′ᵢ iff βᵢ = 0, the « ∈ » of the margin, not the « ∉ » of page 81. Not formalised: the group scheme, the projective statement over a base, the torsor of flags, the counts of pages 79–80.',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder72.lean',
-    theorems: ['toGm_bijective', 'forall_surjective_iff', 'τ_comm', 'eq_smul_vec', 'ρ_one', 'u_mul', 'u_comm', 'det_u', 'commute_iff', 'coeff_unique', 'isUnit_iff', 'mem_D0_iff', 'mem_startPoints_iff', 'u_e0_injective', 'u_u_e0'],
+    theorems: ['toGm_bijective', 'forall_surjective_iff', 'τ_comm', 'eq_smul_vec', 'ρ_one', 'u_mul', 'u_comm', 'det_u', 'commute_iff', 'coeff_unique', 'isUnit_iff', 'mem_D0_iff', 'mem_startPoints_iff', 'u_e0_injective', 'u_u_e0', 'Zp_invariant', 'Zs_invariant', 'Zs_le_Zp_iff', 'invariant_iff', 'invariant_iff_of_ne_zero'],
   },
   {
     folder: '160',

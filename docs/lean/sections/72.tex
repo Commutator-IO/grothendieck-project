@@ -10,4 +10,12 @@ Les $\lambda \in R$ avec $1 + \rho\lambda$ inversible forment un groupe commutat
 
 \noindent L'énoncé tient sur les points, pour tout anneau : voir \texttt{forall\_surjective\_iff}, \texttt{u\_mul}, \texttt{det\_u}, \texttt{commute\_iff}, \texttt{isUnit\_iff}, \texttt{centraliserEquiv}, \texttt{mem\_startPoints\_iff} et \texttt{u\_e0\_injective} dans \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/Folder72.lean}{\texttt{Folder72.lean}}. Le test de la réciproque est l'anneau des nombres duaux, où $1 + \varepsilon$ n'est atteint que si $\rho$ est inversible. Pour $n = 1$, $\rho = \mu_0\mu_1 - \beta_0$, soit $4 - \beta_0$ pour des réflexions, comme à la page~41.
 
-Ne sont pas démontrés ici : le schéma en groupes $\mathcal U_\rho$ et sa lissité, l'énoncé projectif sur une base (automorphismes de $X = \mathbf P(E)$ commutant aux $\tau_i$ projectifs), et le torseur des drapeaux de la page~87.
+Aux pages~79 à~82, sur un corps $k$, la cote décrit les sous-espaces invariants (\lot{72}{4}{79}). Avec $Z'_i = H_0 \cap \dots \cap H_i$ et $Z^*_i = \operatorname{Lin}(h_{i+1}, \dots, h_n)$, $h_i = k a_i$ et $H_i = \operatorname{Ker} a'_i$ :
+
+\begin{theoreme}[Grothendieck, page 79\piste{72-invariant-subspaces-string}]
+Sur un corps, les $\mu_i$ quelconques (caractéristique~$2$ comprise), un sous-espace de $E$ est stable par tous les $\tau_i$ si et seulement s'il est $0$, $E$, la droite $k\tilde c$ du centre, l'hyperplan $C$ d'équation $\pi = 0$, ou bien $Z'_i$ ou $Z^*_i$ pour un $i < n$ tel que $\beta_i = 0$.
+\end{theoreme}
+
+\noindent L'énoncé tient tel quel : voir \texttt{invariant\_iff} dans \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/Folder72.lean}{\texttt{Folder72.lean}}, avec le corollaire~(c) de la page~80 (\texttt{invariant\_iff\_of\_ne\_zero}). Pour $i < n$, $Z^*_i \subset Z'_i$ si et seulement si $\beta_i = 0$ (\texttt{Zs\_le\_Zp\_iff}) : c'est le \q{$\in$} de la marge de la page~79 que la lecture retient, non le \q{$\notin$} de la page~81.
+
+Ne sont pas démontrés ici : le schéma en groupes $\mathcal U_\rho$ et sa lissité, l'énoncé projectif sur une base (automorphismes de $X = \mathbf P(E)$ commutant aux $\tau_i$ projectifs), le torseur des drapeaux de la page~87, les comptes des pages~79 et~80 et l'irréductibilité sur $C$ des pages~80 à~82.
