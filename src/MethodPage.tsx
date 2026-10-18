@@ -666,12 +666,12 @@ const FIRST_BATCH = '2026-08-08';
 
 const PILOT = {
   /** Transcribed, counted off transcripts/ and excluding the specimen:
-      164 folders, 638 batches, 9,414 pages (17 October 2026). */
+      164 folders, 638 batches, 9,414 pages (18 October 2026). */
   batchesTranscribed: 638,
   /** Batches belonging to a folder that has a modernised reading. The reading
       is written per folder, taken whole, and covers every batch of it, so a
       folder is either wholly in this count or wholly out. All 164
-      transcribed folders are read (17 October 2026). */
+      transcribed folders are read (18 October 2026). */
   batchesModernised: 638,
   /** Per batch. `contextM` is every token the pass sent or received, cache
       reads included; `writtenK` is output alone. Transcription is the mean of
@@ -761,8 +761,9 @@ function CostAndHorizon({ manifest }: { manifest: ReturnType<typeof useManifest>
       <P id="cost-measured" className="prose-fonds mt-3">
         <strong>{PILOT.batchesTranscribed} batches</strong> have been transcribed, across 164
         folders and some 9,400 pages, and <strong>{PILOT.batchesModernised}</strong> of them have
-        their modernised reading; twelve transcribed folders are not yet read. At the per-batch
-        means below that comes to
+        their modernised reading, which is every transcribed folder. A second transcription
+        pass, re-reading each page on 700 dpi tiles, had taken 61 batches of 15 folders by 18
+        October 2026. At the per-batch means below that comes to
         about{' '}
         <strong>{hoursDone.toFixed(1)} h</strong> of model-active time,{' '}
         <strong>{fmtM(contextDoneM)} tokens</strong> of context and{' '}
@@ -774,7 +775,7 @@ function CostAndHorizon({ manifest }: { manifest: ReturnType<typeof useManifest>
       <P id="cost-plan" className="prose-fonds mt-3">
         In subscription terms, which is how the work is actually paid for: one twenty-page
         transcription uses about <strong>1 % of a week</strong> of a Claude Max 20× plan. The
-        638 batches transcribed have therefore cost on the order of six such weeks; the
+        {PILOT.batchesTranscribed} batches transcribed have therefore cost on the order of six such weeks; the
         modernised readings much less, since they read text rather than page images.
       </P>
       <P id="cost-pace" className="prose-fonds mt-3">

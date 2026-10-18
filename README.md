@@ -211,29 +211,22 @@ unused. Any failure fails the deploy; so does `npm run check-tei`, which
 compares the TEI reading view with the `.tex` one page by page. Locally it
 needs Java.
 
-**Fifty-two batches are transcribed so far — twenty-six folders, 661 pages.**
-The first five ran under Fable 5: folder 115 (fourteen pages — functorial
-correspondences and the duality of topoi) and folder 161-1 (nineteen pages —
-adjoint functors, the free symmetric monoidal category, theories, and a
-half-page sketch of Giraud's theorem) on 8 August 2026, then the three batches
-of folder 135 (fifty-eight pages, the whole folder — Gr-categories, their
-classification by a class in $H^3$, and the Picard envelope; the last thirteen
-pages are a manuscript in English) on 9 and 15 August. Most of the rest ran
-under Opus 5, including the four long folders — 19 (five batches), 29 (eleven),
-151 (four) and 161-3 (three) — and the run of one-batch folders that
-[issue #12](https://github.com/Commutator-IO/grothendieck-project/issues/12)
-tracks. Since 3 September 2026 Fable 5.1 is admitted alongside Opus 5, and has
-read folders 26 and 47 and batches 3 to 6 of folder 161-2 (111 pages — the
-Δ-envelope theorem, the classifying topoi of ring axioms, Gabriel–Ulmer
-duality, λ-types); each file's header names the model that read it.
+**As of 18 October 2026, 638 batches are transcribed — 164 folders, 9,414
+pages.** Every folder no edition covers has a first pass, and six folders
+an edition covers are partly transcribed as well. The first batches ran under
+Fable 5 and Fable 5.1, which are no longer admitted for new passes; the rest
+ran under Opus 5 and Opus 5.5. Each file's header names the model that read it
+and the date.
 
-**Twenty-five of the twenty-six folders also have their modernised reading**,
-covering 51 of the 52 batches. The exception is folder 139, and deliberately:
-it is two photographs of the Prix Émile Picard medal, and a modernised reading
-would be a file that reads nothing. None of it has been checked page by page by
-a person. `/method/` prices the two steps separately, from the passes
-themselves: transcription carries almost all the cost, because it reads page
-images; the modernised reading works from text.
+**Every transcribed folder also has its modernised reading**, taken whole, in
+current notation. A second transcription pass
+([issue #51](https://github.com/Commutator-IO/grothendieck-project/issues/51)),
+re-reading each page on 700 dpi tiles, has taken 61 batches of 15 folders so
+far. Statements of 62 folders are proved in Lean against mathlib
+([`lean/`](lean/)). None of it has been checked page by page by a person.
+`/method/` prices the steps separately, from the passes themselves:
+transcription carries almost all the cost, because it reads page images; the
+modernised reading works from text.
 
 ### The critical apparatus is the point
 

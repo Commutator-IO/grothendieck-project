@@ -63,7 +63,7 @@ export function documentsFor(cote: string): { doc: EditionDocument; edition: Pub
  * for, and the honest denominator for a progress figure.
  *
  * Counting against all 178 folders measures the fonds; counting against these
- * measures the job. The two differ by 24 folders and 5,822 pages — the
+ * measures the job. The two differ by 20 folders and 5,129 pages — the
  * Dérivateurs, the Long March, Pursuing Stacks, Esquisse d'un programme and a
  * handful more — which are already transcribed to a standard this project does
  * not claim to match, and which it would be waste rather than progress to do
@@ -71,7 +71,7 @@ export function documentsFor(cote: string): { doc: EditionDocument; edition: Pub
  *
  * Anything shown against this denominator has to show the other one too. A
  * ratio improves whenever its denominator shrinks, and a page that quietly
- * swapped 884 batches for 582 would be reporting a change in bookkeeping as
+ * swapped 884 batches for 618 would be reporting a change in bookkeeping as
  * though it were work done.
  */
 export const UNEDITED: Cote[] = COTES.filter((c) => !EDITED.has(c.id));

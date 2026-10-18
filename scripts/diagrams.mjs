@@ -4,7 +4,7 @@
  *
  *   node scripts/diagrams.mjs
  *
- * The diagrams are the language of this fonds, and they are scattered: 1,330
+ * The diagrams are the language of this fonds, and they are scattered: 2,000
  * of them across the folders read so far, each on its page, between a line of
  * prose and a formula. This puts them side by side, one page per folder, each
  * diagram captioned with the batch and page it stands on and linked back to

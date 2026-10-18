@@ -350,7 +350,7 @@ npm run dev                    # read it beside the facsimile`}</Code>
         </li>
         <li>
           <strong>poppler</strong> (<code>brew install poppler</code>) to mirror folders and to
-          crop pages at 400 dpi — which is what settles a hard word, and what most of the
+          cut pages into tiles at 700 dpi — which is what settles a hard word, and what most of the
           transcription pass is actually doing.
         </li>
         <li>

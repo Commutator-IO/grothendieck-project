@@ -62,6 +62,8 @@ interface Cell {
  * the Lean appendix. A blue lozenge on a folder whose proved statement bears on
  * a theorem of the Timeline; a red one on a folder with open candidates on the
  * Findings tab — statements that may not be in the literature, not established.
+ * A third, amber, marks a folder whose subject doctoral theses in progress in
+ * France take up (CURRENT_RESEARCH, themes only).
  */
 const OPEN = new Map<string, number>();
 for (const f of FINDINGS)
