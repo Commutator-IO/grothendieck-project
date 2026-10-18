@@ -53,11 +53,10 @@ theorem eq_zero_of_mem {M : Type*} [AddCommGroup M] [Module K M] (g : M →ₗ[K
   ext m
   by_contra hm
   obtain ⟨a, ha⟩ := hg (((algebraMap A K ϖ)⁻¹ * (g m)⁻¹) • m)
-  rw [map_smul, smul_eq_mul, mul_assoc, inv_mul_cancel₀ (by simpa using hm), mul_one] at ha
-  apply hϖ.not_isUnit
-  refine IsUnit.of_mul_eq_one a (IsFractionRing.injective A K ?_)
-  simp only [Algebra.linearMap_apply] at ha
-  rw [map_mul, ha, map_one, mul_inv_cancel₀ hp]
+  rw [Algebra.linearMap_apply, map_smul, smul_eq_mul, mul_assoc,
+    inv_mul_cancel₀ (by simpa using hm), mul_one] at ha
+  exact hϖ.not_isUnit (.of_mul_eq_one a (IsFractionRing.injective A K
+    (by rw [map_mul, ha, map_one, mul_inv_cancel₀ hp])))
 
 /-- Every element of `K` is `a / ϖⁿ` with `a ∈ A`. -/
 lemma exists_eq_div_pow {ϖ : A} (hϖ : Irreducible ϖ) (x : K) :
@@ -66,9 +65,7 @@ lemma exists_eq_div_pow {ϖ : A} (hϖ : Irreducible ϖ) (x : K) :
   obtain ⟨n, v, hv⟩ := IsDiscreteValuationRing.eq_unit_mul_pow_irreducible
     (nonZeroDivisors.ne_zero hb) hϖ
   refine ⟨a * ↑v⁻¹, n, ?_⟩
-  have hv' : algebraMap A K (↑v⁻¹ : A) = (algebraMap A K (v : A))⁻¹ :=
-    eq_inv_of_mul_eq_one_left (by rw [← map_mul, Units.inv_mul, map_one])
-  rw [hv, map_mul, map_mul, map_pow, hv', div_eq_mul_inv, mul_inv]
+  rw [hv, map_mul, map_mul, map_pow, map_units_inv, div_eq_mul_inv, mul_inv]
   ring
 
 section Complete
@@ -151,10 +148,8 @@ theorem lift_vs {M : Type*} [AddCommGroup M] [Module K M] [Module A M] [IsScalar
   choose c hc using fun i =>
     lift_K (h ∘ₗ ((LinearMap.toSpanSingleton K M (b i)).restrictScalars A))
   refine ⟨b.constr K c, fun m => ?_⟩
-  have hm : m = (b.repr m).sum fun i r => r • b i := by
-    rw [← Finsupp.linearCombination_apply, b.linearCombination_repr]
   change (Aₖ A K).mkQ (b.constr K c m) = h m
-  rw [hm]
+  rw [← b.linearCombination_repr m, Finsupp.linearCombination_apply]
   simp only [Finsupp.sum, map_sum]
   refine Finset.sum_congr rfl fun i _ => ?_
   have := hc i (b.repr m i)
@@ -169,12 +164,9 @@ and `K/A` divisible). -/
 theorem baer_KA : Module.Baer A (KA A K) := by
   intro I g
   obtain ⟨a, rfl⟩ := (IsPrincipalIdealRing.principal I).principal
-  by_cases ha : a = 0
-  · subst ha
-    refine ⟨0, fun x hx => ?_⟩
-    have hx0 : x = 0 := by simpa using hx
-    subst hx0
-    simp only [LinearMap.zero_apply]
+  rcases eq_or_ne a 0 with rfl | ha
+  · refine ⟨0, fun x hx => ?_⟩
+    obtain rfl : x = 0 := by simpa using hx
     exact (map_zero g).symm.trans (congrArg g (Subtype.ext rfl))
   obtain ⟨y, hy⟩ := Submodule.Quotient.mk_surjective (Aₖ A K)
     (g ⟨a, Ideal.mem_span_singleton_self a⟩)
@@ -206,14 +198,10 @@ variable (K) in
 /-- The image of `Hom_K(M₁, K) → Hom_A(M₀, K/A)`. -/
 def imD : Submodule A (M₀ →ₗ[A] KA A K) where
   carrier := {h | ∃ g : M₁ →ₗ[K] K, ∀ m, h m = Submodule.Quotient.mk (g (u m))}
-  add_mem' := by
-    rintro h h' ⟨g, hg⟩ ⟨g', hg'⟩
-    exact ⟨g + g', fun m => by simp [hg, hg']⟩
+  add_mem' := fun ⟨g, hg⟩ ⟨g', hg'⟩ => ⟨g + g', fun m => by simp [hg, hg']⟩
   zero_mem' := ⟨0, fun m => by simp⟩
-  smul_mem' := by
-    rintro a h ⟨g, hg⟩
-    refine ⟨algebraMap A K a • g, fun m => ?_⟩
-    simp [hg, Algebra.smul_def, ← Submodule.Quotient.mk_smul]
+  smul_mem' a _ := fun ⟨g, hg⟩ => ⟨algebraMap A K a • g, fun m => by
+    simp [hg, Algebra.smul_def, ← Submodule.Quotient.mk_smul]⟩
 
 variable (K) in
 /-- `Ext¹(X; F, O_X)`: the cokernel of `Hom_K(M₁, K) → Hom_A(M₀, K/A)`. -/
@@ -235,10 +223,7 @@ theorem duality_dim_one [IsAdicComplete (maximalIdeal A) A] :
   refine ⟨⟨fun g g' hgg => ?_, fun ψ => ?_⟩, ⟨?_, ?_⟩⟩
   · -- a): injectivity on `Ext⁰`
     have : g.1 - g'.1 = 0 := eq_zero_of_mem _ fun y => by
-      have := LinearMap.congr_fun hgg (Submodule.Quotient.mk y)
-      simp only [phi0, Submodule.liftQ_apply, LinearMap.coe_comp, Function.comp_apply,
-        LinearMap.coe_restrictScalars, Submodule.mkQ_apply] at this
-      simpa [Submodule.Quotient.eq] using this
+      simpa [phi0, Submodule.Quotient.eq] using LinearMap.congr_fun hgg (Submodule.Quotient.mk y)
     exact Subtype.ext (sub_eq_zero.1 this)
   · -- b): surjectivity on `Ext⁰`
     obtain ⟨g, hg⟩ := lift_vs (ψ ∘ₗ (LinearMap.range u).mkQ)
@@ -259,8 +244,7 @@ theorem duality_dim_one [IsAdicComplete (maximalIdeal A) A] :
     obtain ⟨g, hg⟩ := lift_vs (A := A) H
     refine ⟨g, fun m => ?_⟩
     rw [hg]
-    have := LinearMap.congr_fun hH (Submodule.Quotient.mk m)
-    simpa using this.symm
+    simpa using (LinearMap.congr_fun hH (Submodule.Quotient.mk m)).symm
   · -- c): surjectivity on `Ext¹`
     intro k
     obtain ⟨H, hH⟩ := baer_KA.extension_property (LinearMap.ker u).subtype
