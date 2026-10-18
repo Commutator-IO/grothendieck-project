@@ -7,16 +7,23 @@
 % Pass: Opus 5 (claude-opus-5), 2026-09-13 — first pass, unchecked against the
 % pages by a human. The folder was read whole; it holds one batch, pages 1-13.
 % Page 1 is a cover sheet carrying only the title, and takes no \pagerange.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — updated after the second transcription pass (#51).
 %
 % What the folder is. The Torelli theorem for a family of curves, written as a
 % statement about a moduli functor over a base S: given a principally
 % polarised abelian scheme A/S, the functor F of curves C/T with an
 % isomorphism of polarised jacobians J^0_{C/T} -> A_T. Three movements:
 % injectivity of Aut(C) -> Aut(J) and its corollaries (pages 2-4); the
-% representability of F through a rigidified F' and a quotient by A (pages
+% representability of F through F' (rigidified by a section of J^1, i.e. an
+% embedding of C in A, an open of Hilb_{A/S}) and a quotient by A (pages
 % 4-7); the infinitesimal Torelli theorem, reduced to Max Noether's theorem
-% (pages 8-9); and Matsusaka's criterion, which controls what a family of
-% jacobians can specialise to (pages 10-13).
+% (pages 8-9); and good reduction of curves whose jacobian reduces to a
+% jacobian, by Matsusaka's criterion (pages 9-13).
+%
+% Order of the leaves. The text runs from the foot of page 7 to the top of
+% page 6, and from the foot of page 6 to the top of page 8: leaves 6 and 7
+% look inverted on the film. The reading follows the argument (5, 7, 6, 8)
+% and says so in a footnote; the inference is ours.
 %
 % Notation fixed for the whole document. J^0_{C/S} = Pic^0_{C/S}, J^1_{C/S}
 % the Pic^0-torsor of degree-1 classes, in which C sits by the Abel map. His
@@ -27,8 +34,16 @@
 % Substantive departures from the pages, each footnoted where it occurs:
 % — page 3: the Lefschetz number of an automorphism acting trivially on
 %   H^1 is 1 - 2g + 1 = 2 - 2g, negative; the page writes -1 + 2g - 1 =
-%   2(g-1) > 0. What the argument needs is that it is non-zero, which holds
-%   either way; the reading gives the right sign.
+%   2(g-1) > 0, after striking a first version with the right value,
+%   1 - 2g + 1 = 2 - 2g. What the argument needs is that it is non-zero,
+%   which holds either way; the reading gives the right sign.
+% — page 5, the Théorème calls M -> S « radiciel » (uncertain reading) and
+%   « non ramifié »: true only up to -1 in Aut(A) (page 6's « à conjugaison
+%   près par Z/2 ») and off the hyperelliptic locus in genus >= 3.
+% — page 9: the cokernel in the hyperelliptic case has dimension g - 2, not
+%   « rang 1 »; the fibre of M is Spec k[t]/t^2 for g = 3 only.
+% — page 13, Cor. 3 (i): with S only reduced (« normal » struck) the
+%   sufficiency is false; the reading states it for S normal.
 % — page 3, the Lemme writes « induit par s » for the automorphism induced by
 %   sigma; and page 3's Cor. 2 writes a section « sur A » before A exists.
 % — page 9: H^0(omega) (x) H^0(omega) -> H^0(omega^2) is surjective iff C is
@@ -46,13 +61,16 @@
 % Modern names given and footnoted as ours: Torelli morphism of stacks
 % M_g -> A_g and its degree 2 onto its image (Oort-Steenbrink for the local
 % statement); Max Noether's theorem; Lefschetz fixed-point formula; the
-% Matsusaka-Hoyt-Ran criterion (the page names Matsusaka only); the
-% Kodaira-Spencer map.
+% Matsusaka-Hoyt-Ran criterion; the Néron mapping property; the
+% Kodaira-Spencer map. The page names Matsusaka and Hoyt (pages 10-12), and
+% sets Hoyt aside in the margin.
 %
-% What the folder announces and never establishes: the representability of
-% F' (« rédiger proprement »); the existence of the quotient; the argument of
-% the bottom two-thirds of page 10 (cancelled and illegible); the proofs of
-% the corollaries of pages 12-13.
+% What the folder announces and never establishes: the lemma that an
+% equivariant automorphism of J^1 is a translation (page 2, « lemme à
+% énoncer »); a clean write-up of the representability of F' (sketched on
+% page 6, « rédiger proprement »); the existence of the quotient (« résultat
+% général à démontrer »); the descent left implicit in the good-reduction
+% corollary (pages 9-12); the proof of Cor. 3 of page 13.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -93,17 +111,19 @@ triviale ? La réponse tient à un théorème du dix-neuvième siècle, celui de
 Noether sur les formes différentielles, et elle est oui, sauf pour les
 courbes hyperelliptiques --- celles qui sont des revêtements doubles de la
 droite --- où quelque chose se replie. Enfin, pour savoir ce qui arrive à la
-limite, quand une famille de jacobiennes dégénère, un critère de Matsusaka :
-une variété abélienne principalement polarisée qui contient une courbe de la
-bonne classe est une jacobienne, ou un produit de jacobiennes.
+limite, quand une famille de courbes se spécialise, un critère de Matsusaka :
+une variété abélienne principalement polarisée dont le diviseur thêta est
+irréductible, et qui contient une courbe de la bonne classe, est la jacobienne
+de cette courbe. Il en sort que si la jacobienne limite est encore une
+jacobienne, la courbe ne dégénère pas : elle « se réduit bien ».
 
-Le brouillon est rapide et souvent illisible, surtout aux pages 5 à 7 et 10 à
-12. Ce qui s'y lit nettement est le squelette d'un traitement moderne du
+Le brouillon est rapide et, par endroits, illisible, surtout aux pages 5, 7,
+10 et 12. Ce qui s'y lit nettement est le squelette d'un traitement moderne du
 morphisme de Torelli entre l'espace des modules des courbes et celui des
 variétés abéliennes : injectif sur les automorphismes, immersif hors du lieu
 hyperelliptique, et d'image fermée à des produits près.
 
-\keywords{Torelli theorem, Jacobian, principally polarized abelian scheme, Lefschetz fixed-point formula, infinitesimal Torelli, Max Noether theorem, Matsusaka criterion, Hilbert scheme}
+\keywords{Torelli theorem, Jacobian, principally polarized abelian scheme, Lefschetz fixed-point formula, infinitesimal Torelli, Max Noether theorem, Matsusaka criterion, Hilbert scheme, good reduction}
 \end{resume}
 
 \section*{Le fil du dossier, et les conventions}
@@ -115,13 +135,15 @@ translation de la jacobienne qui conserve la courbe est nulle ; les
 isomorphismes de courbes s'injectent dans ceux des jacobiennes.
 \item[2.] \emph{Le problème de modules} (pages 4 à 7). Le foncteur $F$ des
 courbes munies d'un isomorphisme de leur jacobienne polarisée sur $A$ ; une
-variante rigidifiée $F'$ représentable par un $M'$ quasi-projectif sur lequel
-$A$ opère ; $M = M'/A$.
+variante $F'$, rigidifiée par une section de $J^{1}$, c'est-à-dire par un
+plongement de la courbe dans $A$, représentable par un ouvert $M'$ du schéma
+de Hilbert de $A$ sur lequel $A$ opère librement ; $M = M'/A$.
 \item[3.] \emph{Torelli infinitésimal} (pages 8 et 9), réduit par dualité au
-théorème de Max Noether.
-\item[4.] \emph{Spécialisation et critère de Matsusaka} (pages 10 à 13), et les
-corollaires qui en sortent sur l'image de $M \to S$ et sur les isomorphismes
-de courbes au-dessus d'une base réduite.
+théorème de Max Noether : c'est la non-ramification de $M$.
+\item[4.] \emph{Bonne réduction et critère de Matsusaka} (pages 9 à 13) : par le
+critère valuatif, une courbe de la fibre générique se prolonge dès que la
+fibre spéciale de $A$ est une jacobienne ; puis les corollaires qui en sortent
+sur l'image de $M \to S$ et sur les courbes au-dessus d'une base réduite.
 \end{enumerate}
 
 \emph{Conventions.} Une courbe sur $S$ est un $S$-schéma lisse et propre à
@@ -138,15 +160,23 @@ certitude.} On note $\omega = \Omega^{1}_{C/k}$ sur un corps, $\theta$ ou
 $\Theta$ le diviseur de polarisation, et $n = g$ la dimension de $A$ ; il écrit
 $n$ aux pages 11 et 12 et $g$ au corollaire de la page 12.
 
-\emph{Deux rigidifications.} La page 5 rigidifie par des différentielles
-$h$-uples, la page 7 par le plongement de la courbe dans $A$, c'est-à-dire par
-un point du schéma de Hilbert de $A$. Les feuillets ne disent pas comment
-elles s'articulent, et on les garde distinctes.
+\emph{La rigidification.} La page 5 essaie d'abord des différentielles
+$h$-uples, puis annule ce bloc et rigidifie par une section de $J^{1}$ ; la
+page 7 décrit la même donnée comme un plongement de la courbe dans $A$,
+c'est-à-dire un point du schéma de Hilbert de $A$. C'est une seule
+rigidification, vue deux fois.
 
-\emph{Ce que le dossier annonce et n'établit pas} : la représentabilité de
-$F'$, qu'une note marginale renvoie à plus tard (« rédiger proprement ») ;
-l'existence du quotient $M'/A$ ; l'argument de la page 10, dont les deux tiers
-sont annulés ; les démonstrations des corollaires des pages 12 et 13.
+\emph{L'ordre des feuillets.} Les phrases enjambent du bas de la page 7 au
+haut de la page 6, et du bas de la page 6 au haut de la page 8 : les feuillets
+6 et 7 paraissent intervertis dans le film. On suit l'ordre de l'argument,
+5, 7, 6, 8, et on cite les pages par leur numéro de facsimilé.
+
+\emph{Ce que le dossier annonce et n'établit pas} : le lemme selon lequel un
+automorphisme équivariant de $J^{1}$ est une translation (page 2, « lemme à
+énoncer ») ; une rédaction de la représentabilité de $F'$, esquissée page 6
+mais renvoyée à plus tard (« rédiger proprement ») ; l'existence du quotient
+$M'/A$ (« résultat général à démontrer ») ; la démonstration du Corollaire 3
+de la page 13.
 
 \pagerange{2}{2}
 \section*{Automorphismes de la courbe et de sa jacobienne (page 2)}
@@ -161,10 +191,16 @@ est injectif.
 Principe. Soit $\sigma$ un automorphisme de $C$ qui induit l'identité sur
 $J^{0}_{C/S}$. L'automorphisme $\bar{\sigma}$ qu'il induit sur le torseur
 $J^{1}_{C/S}$ commute alors à l'action de $J^{0}$, donc est la translation
-$T_{s}$ par une section $s$ de $J^{0}_{C/S}$, et il faut voir que $s = 0$. Le
-cas d'un corps algébriquement clos est le Lemme de la page 3 ; l'énoncé
-relatif s'en déduit parce que les deux foncteurs sont non ramifiés sur $S$ ---
-« pas d'automorphismes infinitésimaux ! ».
+$T_{s}$ par une section $s$ de $J^{0}_{C/S}$,\footnote{La page renvoie ce point
+à un « lemme à énoncer », qui « moyennant descente devrait se ramener à
+l'énoncé ensembliste » ; elle avait d'abord écrit « d'ailleurs trivial »,
+puis l'a biffé. Il l'est en effet : localement pour la topologie fppf le
+torseur est trivial, un automorphisme d'un groupe commutatif qui commute aux
+translations est lui-même une translation, et ces translations se recollent.}
+et il faut voir que $s = 0$. Les deux membres étant non ramifiés sur $S$ ---
+« pas d'automorphismes infinitésimaux ! » ---, on est ramené, dit la page, à
+l'injectivité géométrique, sur les points à valeurs dans les corps
+algébriquement clos : c'est le Lemme de la page 3.
 
 \textbf{Corollaire 1.} Le morphisme ci-dessus est un monomorphisme, et même une
 immersion fermée.
@@ -175,10 +211,11 @@ morphisme est un sous-groupe fermé de $\mathrm{Aut}_{S}(C)$, fini et non
 ramifié sur $S$, dont les fibres géométriques sont réduites à l'élément neutre
 par le Lemme ; un tel $K$ est une immersion fermée dans $S$ qui admet une
 section, donc $K = S$. Un monomorphisme propre étant une immersion fermée,
-le corollaire suit.\footnote{La page énonce le corollaire et en indique les
-deux ingrédients --- $\mathrm{Aut}_{S}(C)$ « projectif sur $S$ » et les deux
-schémas « non ramifiés » ---, mais la ligne qui les assemble est illisible ;
-l'assemblage est le nôtre. Le passage « monomorphisme propre $\Rightarrow$
+le corollaire suit.\footnote{La page énonce le corollaire et en donne les
+ingrédients --- « si l'on se rappelle que $\mathrm{Aut}_{S}(C)$ est
+\emph{propre} sur $S$ », les deux membres « non ramifiés », d'où la réduction
+aux points géométriques ---, sans l'argument par le noyau $K$, qui est le
+nôtre ; « si l'on se » est une lecture incertaine. Le passage « monomorphisme propre $\Rightarrow$
 immersion fermée » est EGA~IV, 18.12.6. Deux lignes insérées puis biffées ne se
 lisent pas.}
 
@@ -213,8 +250,9 @@ avec le signe moins, et le nombre de Lefschetz vaut $2 - 2g$, qui est
 cela reste vrai. On peut d'ailleurs conclure plus vite : pour
 $\sigma \neq \mathrm{id}$ les points fixes sont isolés et comptent chacun avec
 une multiplicité positive, de sorte qu'un nombre de Lefschetz négatif est
-contradictoire par lui-même. Une première version du calcul, biffée sous
-celle qui reste, ne se lit pas.}
+contradictoire par lui-même. Sous l'expression qui reste, une première
+version est biffée : « $1 - 2g + 1 = 2 - 2g$ », la valeur exacte. Il l'avait
+donc écrite d'abord, puis remplacée par l'expression de signe opposé.}
 
 \textbf{Corollaire 2.} Sous les hypothèses du Théorème 1, une section $s$ de
 $J^{0}_{C/S}$ telle que la translation $T_{s}$ de $J^{1}_{C/S}$ conserve $C$
@@ -234,11 +272,14 @@ $A$ opère \emph{librement} sur les courbes tracées dans $A$.
 \pagerange{4}{4}
 \section*{Isomorphismes, et le problème de modules (page 4)}
 
-Le haut de la page reprend le Corollaire 2 au-dessus des nombres duaux
-$k[\varepsilon]$, puis d'une extension de carré nul
-$\mathcal{O}_{S} \oplus \mathcal{I}$, pour en tirer la version infinitésimale ;
-le bloc est encadré puis annulé.\footnote{Deux longues diagonales ; une
-partie seulement se lit, et un « Prop. » biffé le suit.}
+Le haut de la page applique le Corollaire 2 à
+$S' = \mathrm{Spec}(\mathcal{O}_{S} \oplus \mathcal{I})$, où $\mathcal{I}$
+est un faisceau cohérent de carré nul, pour en tirer les automorphismes de
+$C' = C \times_{S} S'$ qui induisent l'identité sur $C$ --- la version
+infinitésimale ; le bloc est encadré puis annulé, et s'arrête sur « on
+trouve ».\footnote{Deux longues diagonales. Le cas des nombres duaux,
+$S = \mathrm{Spec}(k[\varepsilon])$, écrit d'abord, est biffé dans le bloc
+même ; un « Prop. » biffé le suit.}
 
 \textbf{Corollaire 3.} Soient $C$, $C'$ deux courbes de genre $g \geq 2$ sur
 $S$. Alors
@@ -272,9 +313,10 @@ si $C_{0}$ n'est pas hyperelliptique, tandis que $-1$ provient de l'involution
 hyperelliptique si elle l'est. Ainsi $F(k)$ a \emph{deux} points au-dessus
 d'une jacobienne non hyperelliptique, et un seul au-dessus d'une jacobienne
 hyperelliptique.\footnote{Ce calcul est le nôtre ; il n'est pas sur la page 4.
-Il éclaire deux fragments illisibles de la suite : le « $\mathbb{Z}/2$ » de la
-page 6, et, page 9, la fibre de $M$ réduite à $\mathrm{Spec}\,k(s)$ dans le cas
-hyperelliptique. Dans la langue d'aujourd'hui, $F$ est la fibre du morphisme
+Il éclaire deux passages de la suite : le « à conjugaison près par le groupe
+$\mathbb{Z}/2 \subset \mathrm{Aut}_{S}(A)$ » de la page 6, et, page 9, la
+fibre de $M$ réduite à un seul point, double, dans le cas hyperelliptique.
+Dans la langue d'aujourd'hui, $F$ est la fibre du morphisme
 de Torelli $\mathcal{M}_{g} \to \mathcal{A}_{g}$ entre champs de modules
 au-dessus du point de $\mathcal{A}_{g}$ défini par $A$, et ce morphisme est de
 degré 2 sur son image, ramifié le long du lieu hyperelliptique.}
@@ -282,57 +324,109 @@ degré 2 sur son image, ramifié le long du lieu hyperelliptique.}
 \pagerange{5}{7}
 \section*{Rigidification, schéma de Hilbert, quotient (pages 5 à 7)}
 
-Ces trois pages sont écrites très vite et largement biffées ; on n'en donne
-que les articulations qui se lisent.
+Ces trois pages sont écrites vite et en partie biffées. On en suit l'argument
+dans l'ordre où il se lit, qui va de la page 5 à la page 7, puis à la page
+6.\footnote{Les phrases enjambent : le bas de la page 7 (« … par
+$J^{0}_{C/S} \to A_{T}$ devient … un ») se continue en haut de la page 6
+(« isom., on sait déjà … »), et le bas de la page 6 (« Pour ce dernier
+point, ») en haut de la page 8 (« … signifie ceci »). Les feuillets 6 et 7
+paraissent donc intervertis dans le film. La transcription garde l'ordre du
+film ; cette lecture suit celui de l'argument, et l'inversion est notre
+inférence.}
 
-\emph{Une première rigidification} (page 5). $F'(T)$ est l'ensemble analogue à
-$F(T)$ où l'on ajoute une rigidification par des éléments de
-$H^{0}(C, \omega^{\otimes h})$, $h \geq 3$. Le nombre qui intervient est
-\[
-  v = 2h(g-1) - (g-1) = (2h-1)(g-1) = \dim H^{0}(C, \omega^{\otimes h}),
-\]
-par le théorème de Riemann-Roch, puisque $\deg \omega^{\otimes h} = 2h(g-1)$
-dépasse $2g - 2$.\footnote{L'interprétation de $v$ comme dimension est la
-nôtre ; la page pose $v$ sans dire ce qu'il compte. Pour $h \geq 3$, le
-faisceau $\omega^{\otimes h}$ est très ample, ce qui explique la borne. Un bloc
-en biais dans la marge gauche mentionne des courbes hyperelliptiques, sans
-plus.}
+\emph{La rigidification} (page 5). Soit $F'(T)$ l'ensemble des classes de
+triplets $(C, \varphi, e)$, où $(C, \varphi)$ est dans $F(T)$ et $e$ une
+section de $J^{1}_{C/T}$ au-dessus de $T$ --- la « structure supplémentaire »
+de la page. Une telle section plonge $C$ dans $A_{T}$ par
+$x \mapsto \varphi(x - e)$, l'application d'Abel translatée de $e$, suivie de
+$\varphi$.\footnote{Le haut de la page, encadré et annulé de quatre
+diagonales, proposait d'abord une autre rigidification, par des éléments de
+$(\Omega^{1}_{C/T})^{\otimes h}$, $h \geq 3$, avec le nombre
+$v = 2h(g-1) - (g-1) = (2h-1)(g-1)$, qui est $\dim H^{0}(C,
+\omega^{\otimes h})$ par Riemann-Roch (interprétation qui est la nôtre). Elle
+est abandonnée plus bas pour « une section de $J^{1}_{C/S}$ sur $T$ ». Que
+cette section revienne à un plongement dans $A_{T}$ est notre explicitation ;
+c'est sous cette forme que la page 7 décrit $F'$. Un bloc en biais dans la
+marge gauche mentionne des courbes hyperelliptiques, sans plus.}
+Le schéma abélien $A$ opère sur $F'$ en changeant $e$, c'est-à-dire par
+translation de la courbe plongée, et $F' \to F$ est un torseur sous $A$ :
+$J^{1}_{C/T}$ a des sections localement pour la topologie étale, et deux
+sections diffèrent d'une unique section de $J^{0}_{C/T} \simeq A_{T}$. D'où
+$F' \times_{F} F' \simeq A \times F'$.\footnote{La page écrit
+$F' \times_{F} F' \rightrightarrows F'$ et « si $F'$ est représentable …
+$A \times M'$ … $M'$ par des opérations de groupe », entre des mots
+illisibles ; un « fibré principal homogène » est biffé dans l'énoncé du
+théorème. La formulation par un torseur est la nôtre.}
 
-\textbf{Théorème (annoncé).} Le foncteur $F'$ est représentable par un $M'$
-quasi-projectif sur $S$.\footnote{Suivi de fragments sur la relation
-d'équivalence $F' \times_{F} F' \rightrightarrows F'$ et de la mention
-« rédiger proprement » en marge. Rien de la démonstration ne se lit.}
+\textbf{Théorème.} Le foncteur $F'$ est représentable par un $S$-schéma $M'$
+quasi-projectif.\footnote{La page écrit « par un $M$ » ; on garde $M'$ pour
+$F'$ et $M$ pour $F$, comme elle le fait ensuite. « Proposition » est biffé au
+profit de « Théorème », et la marge porte « rédiger proprement ».}
 
-\emph{Le cas d'un corps} (page 6). Pour $S = \mathrm{Spec}(k)$, la page renvoie
-à la théorie de Hilbert et au théorème de Torelli « sous sa forme classique »,
-et parle d'un « $\mathbb{Z}/2$ » ; le dénombrement de la section précédente dit
-ce qu'il peut être.\footnote{La page est de la même farine que la précédente :
-les mots « Hilbert », « Torelli », « classique », « théorème » portent, la
-prose presque pas. Le $\mathbb{Z}/2$ est écrit « $\mathbb{Z}/2 \in A_{-g}(A)$ »,
-formule que cette lecture ne sait pas interpréter.}
+La page annonce aussi ce qu'elle veut savoir du morphisme structural
+$M \to S$ : qu'il soit « radiciel » et « non ramifié ». Ce qui est vrai est
+plus précis : les fibres géométriques de $M \to S$ ont au plus deux points,
+échangés par $-1 \in \mathrm{Aut}_{S}(A)$ --- c'est la réserve « à conjugaison
+près par le groupe $\mathbb{Z}/2$ » qu'ajoute la page 6 ---, et $M \to S$ est
+non ramifié aux points où la courbe n'est pas hyperelliptique, ou est de
+genre 2 (pages 8 et 9).\footnote{« Radiciel » est une lecture incertaine. Pris
+à la lettre, il est faux : au-dessus d'une jacobienne non hyperelliptique,
+$(C, \varphi)$ et $(C, -\varphi)$ sont deux points distincts de $M$ (page 4).
+« Non ramifié », ajouté en interligne, est faux au-dessus d'une jacobienne
+hyperelliptique de genre $g \geq 3$, où la page 9 trouve elle-même une fibre
+non réduite. À la page 6, « immersion » est biffé et remplacé par « morphisme
+radiciel ».}
 
-\emph{Le quotient} (page 7). Le schéma abélien $A$ opère sur $F'$ par
+\emph{Le quotient} (page 7). Le schéma abélien $A$ opère sur $M'$ par
 translation, et, d'après le Théorème 1 --- en fait son Corollaire 2 ---, il
-opère librement. Si $F'$ est représentable par $M'$, et si le quotient $M'/A$
-existe « universellement », alors $M = M'/A$ représente $F$ ; $A$ est propre
-et plat sur $S$.\footnote{Une action libre d'un schéma en groupes propre et
-plat donne un quotient au moins comme espace algébrique ; qu'il soit un schéma
-demande davantage, et la page, qui met « universellement » entre guillemets,
-ne dit pas quoi.}
+opère sans point fixe. D'après un résultat général, que la page annonce « à
+démontrer », le quotient $M'/A$ existe alors « universellement », et
+$M = M'/A$ représente $F$ ; il y sert que $A$ est propre et plat sur
+$S$.\footnote{Une action libre d'un schéma en groupes propre et plat donne un
+quotient au moins comme espace algébrique ; qu'il soit un schéma demande
+davantage, et la page, qui met « universellement » entre guillemets et
+demande $M'$ « universellement quasi-projectif », ne dit pas quoi. Une
+première rédaction de la phrase, en haut de la page, est biffée ; la marge
+porte « à dégager ».}
 
-\emph{La seconde rigidification.} $F'(T)$ s'explicite comme une partie de
-$\mathrm{Hilb}_{A/S}(T)$ : une courbe $C$ tracée dans $A_{T}$ par un plongement
-qui induit l'isomorphisme naturel $J^{0}_{C/T} \to A_{T}$. La page invoque le
-théorème de Hilbert --- la projectivité du schéma de Hilbert de $A$, polarisé
---- et le nom de Matsusaka, pour savoir quels sous-schémas de $A$ sont de telles
-courbes.\footnote{Le passage est une suite de fragments autour de
-« Hilb », « plongement $C \to A_{T}$ », « Matsusaka », « théorème de Hilbert »,
-« $\Theta$ » ; l'enchaînement est le nôtre, et il est celui que les pages 11 et
-12 suivent.}
+\emph{$F'$ dans le schéma de Hilbert} (pages 7 et 6). $F'(T)$ s'identifie à
+une partie de $\mathrm{Hilb}_{A/S}(T)$ : les courbes $C$ plongées dans
+$A_{T}$ telles que le morphisme $J^{0}_{C/T} \to A_{T}$ déduit du plongement
+soit un isomorphisme de schémas abéliens polarisés. La polarisation induite
+sur $C$ est de degré $g$ --- c'est $\Theta \cdot C = g$, puisque
+$C \equiv \Theta^{g-1}/(g-1)!$ ---, de sorte que le polynôme de Hilbert de $C$
+est fixé et que ces courbes vivent dans une partie quasi-projective du schéma
+de Hilbert ; la lissité de $C$ y est une condition ouverte, et la seconde
+condition, que $J^{0}_{C/T} \to A_{T}$ soit un isomorphisme compatible aux
+polarisations, en découpe un ouvert plus petit. Ainsi $F'$ est représentable
+par un $M'$ quasi-projectif, donc $F$ aussi, le quotient étant
+admis.\footnote{La page dit : « on sait déjà qu'il y a un ouvert
+quasi-projectif sur $S$ du schéma de Hilbert [car le degré de $C$ dans
+$A_{T}$ est connu …]. La deuxième condition elle aussi s'exprime par un
+ouvert plus petit », puis « on a ainsi prouvé que $F'$ est représentable
+quasi-projectivement, donc $F$ aussi ». Le calcul $\Theta \cdot C = g$ par la
+formule de Poincaré est le nôtre ; la projectivité locale de $A$ sur $S$,
+qu'il faut pour le schéma de Hilbert, vient de la polarisation et est
+sous-entendue. « Sait » et « elle aussi » sont des lectures incertaines.}
+
+\emph{Deux cas particuliers} (page 6). Pour la question essentielle --- ce que
+vaut $M \to S$ ---, la page se ramène à deux cas. Le premier,
+(i), est celui d'un corps $S = \mathrm{Spec}(k)$, algébriquement clos si l'on
+veut, et il a deux volets : a) $M$ a au plus un point à conjugaison près par
+$\mathbb{Z}/2$, c'est le théorème de Torelli sous sa forme classique, et le
+dénombrement de la page 4 dit ce qu'il en est ; b) $M \to \mathrm{Spec}(k)$ est
+non ramifié, c'est-à-dire que deux points de $M$ à valeurs dans
+$k[t]/t^{2}$ localisés au même point de $M$ sont égaux --- c'est l'objet des
+pages 8 et 9. Le second, (ii), est le critère valuatif de la page
+9.\footnote{Dans a), les mots qui disent « au plus un point » ne se lisent
+pas ; on les tire de « à conjugaison près » et de « théorème de Torelli sous sa
+forme classique ». Une addition en interligne, « En fait … $x \in M$ … », ne
+se lit pas au-delà.}
 
 \pagerange{8}{9}
 \section*{Le théorème de Torelli infinitésimal (pages 8 et 9)}
 
+C'est le point b) de la page 6 : la non-ramification de $M$ en un point.
 Soit $C$ une courbe sur un corps algébriquement clos $k$, plongée dans sa
 jacobienne $A$. La question est : \emph{toute déformation du premier ordre de
 $C$ dans $A$ provient-elle d'une translation infinitésimale de $A$ ?} Une telle
@@ -366,7 +460,9 @@ $A$, et la flèche envoie une déformation de la courbe sur celle qu'elle induit
 de sa jacobienne.\footnote{C'est l'application de Kodaira-Spencer du morphisme
 de Torelli ; le nom n'est pas sur la page. L'isomorphisme
 $H^{1}(C, V) \simeq H^{1}(A, T_{A})$ vient de
-$H^{1}(C, \mathcal{O}_{C}) \simeq H^{1}(A, \mathcal{O}_{A})$.} D'où l'énoncé :
+$H^{1}(C, \mathcal{O}_{C}) \simeq H^{1}(A, \mathcal{O}_{A})$. La page écrit
+$H^{0}(C, V)$ comme l'image de $H^{0}(A, T_{A})$, un premier terme biffé ; la
+restriction est un isomorphisme, les deux espaces étant de dimension $g$.} D'où l'énoncé :
 
 \textbf{Corollaire.} Si $C$ n'est pas hyperelliptique, ou si $g = 2$, toute
 déformation du premier ordre de $C$ qui induit une déformation triviale de
@@ -390,112 +486,194 @@ $H^{0}(\omega^{\otimes 2})$, de dimension $3g - 3 = 3$. Pour $C$
 hyperelliptique de genre $g \geq 3$, l'image est de dimension $2g - 1$ et le
 conoyau de dimension $g - 2$. Le nom de Max Noether n'est pas sur la page.}
 
-\emph{Le cas hyperelliptique.} Le noyau de $H^{1}(C, T) \to H^{1}(A, T_{A})$
-n'est alors pas nul, et la page en tire que la fibre de $M$ au-dessus du point
-correspondant se réduit à $\mathrm{Spec}\,k(s)$ : les deux points que $M$ a
-au-dessus d'une jacobienne générale, $(C, \varphi)$ et $(C, -\varphi)$, s'y
-confondent, et $M \to S$ y est ramifié.\footnote{La phrase est lacunaire ; on
-lit « de dimension 1 » et « la fibre de $M$ en $s$ … $\mathrm{Spec}\,k(s)$ »
-entre des mots illisibles. Si la dimension 1 porte sur le noyau ci-dessus,
-elle ne vaut que pour $g = 3$. Le résultat moderne correspondant --- le
+\emph{Le cas hyperelliptique.} Pour $g \geq 3$ la multiplication n'est plus
+surjective : son conoyau est de dimension $(3g-3) - (2g-1) = g - 2$, et c'est,
+par dualité, le noyau de $H^{1}(C, T) \to H^{1}(A, T_{A})$, c'est-à-dire le
+conoyau de $H^{0}(C, V) \to H^{0}(C, N)$. Ce noyau est l'espace tangent de la
+fibre de $M$ au point $(C, \varphi)$. Les deux points que $M$ a au-dessus d'une
+jacobienne non hyperelliptique, $(C, \varphi)$ et $(C, -\varphi)$, se
+confondent ici en un seul point, non réduit, et $M \to S$ y est ramifié. Pour
+$g = 3$, la fibre de $M$ en $s$ est $\mathrm{Spec}\, k[t]/t^{2}$, comme le dit
+la page.\footnote{La page écrit que le conoyau est « de rang 1 », donc que la
+fibre de $M$ en $s$ « est $\mathrm{Spec}\, k[t]/t^{2}$ », la justification
+entre parenthèses ne se lisant pas. Le rang 1 ne vaut que pour $g = 3$ ; en
+genre $g \geq 3$ le conoyau est de dimension $g - 2$, et la fibre a un espace
+tangent de dimension $g - 2$. Pour $g = 3$, elle est bien
+$\mathrm{Spec}\, k[t]/t^{2}$ : le morphisme de Torelli est alors fini et plat
+de degré 2 au-dessus de l'ouvert des variétés abéliennes à diviseur thêta
+irréductible, et un point unique de longueur 2 et d'espace tangent de
+dimension 1 est un $k[t]/t^{2}$. Le résultat moderne correspondant --- le
 morphisme de Torelli entre espaces de modules grossiers est une immersion hors
-du lieu hyperelliptique, et le morphisme de champs n'y est pas immersif --- est
-dû à Oort et Steenbrink (1980) ; on ne sait pas si les feuillets sont
-antérieurs, faute de datation.}
+du lieu hyperelliptique, et le morphisme de champs n'y est pas immersif ---
+est dû à Oort et Steenbrink (1980). La mention de Hoyt, page 10, place les
+feuillets après 1963 si c'est son article de cette année-là qui est visé ;
+rien ne dit s'ils sont antérieurs à Oort et Steenbrink.}
 
 \pagerange{9}{10}
-\section*{Relever une courbe (pages 9 et 10)}
+\section*{Bonne réduction (pages 9 et 10)}
 
-La fin de la page 9 et le haut de la page 10 tirent de ce qui précède un énoncé
-de relèvement : soit $s \in S$, et $C_{0}$ une courbe sur $k(s)$ munie d'un
-isomorphisme compatible aux polarisations
+Le second cas, (ii), est global : la page veut factoriser $M \to S$ en un
+morphisme fini suivi d'une immersion, et se ramène par le critère valuatif à
+l'énoncé suivant.\footnote{Les deux mots qui disent de quels morphismes la
+factorisation est faite ne se lisent pas ; « fini » est notre reconstruction.
+C'est ce que donnent ensemble l'énoncé qui suit, qui rend $M$ propre au-dessus
+de $f(M)$, et le Corollaire 1 de la page 12, qui fait de $f(M)$ un ouvert de
+son adhérence. La marge porte « dégager de façon … les compatibilités ».}
+
+\textbf{Corollaire (bonne réduction).} Soit $S = \mathrm{Spec}(V)$, où $V$ est
+un anneau de valuation discrète, de point générique $\eta$ et de point fermé
+$a$, et supposons $M \to S$ surjectif, c'est-à-dire que la fibre spéciale
+$A_{a}$ soit elle aussi une jacobienne. Soit $C_{\eta}$ une courbe sur
+$k(\eta)$ munie d'un isomorphisme compatible aux polarisations
 \[
-  J^{0}_{C_{0}/k(s)} \xrightarrow{\;\sim\;} A_{s}.
+  J^{0}_{C_{\eta}/k(\eta)} \xrightarrow{\;\sim\;} A_{\eta}.
 \]
-Il s'agit de prolonger $C_{0}$ en une courbe $C$ sur $S$ munie d'un
-isomorphisme $J^{0}_{C/S} \simeq A$, et de façon unique. C'est ce que donne un
-morphisme $M \to S$ non ramifié au point considéré, par le Corollaire des pages
-8 et 9.\footnote{Les deux énoncés (ii) et « Corollaire » de la page 9 sont
-presque entièrement illisibles, de même que le haut de la page 10 ; les deux
-tiers inférieurs de celle-ci sont un bloc encadré et annulé par une nappe de
-diagonales, qui n'est pas lisible. Ce qui est donné est ce que les formules
-lisibles et le mot « unique » permettent ; le lien avec la non-ramification est
-le nôtre. Une note en biais dans la marge gauche de la page 9 ne livre que le
-mot « finalement ».}
+Alors il existe une courbe $C$ sur $S$, de fibre générique $C_{\eta}$, et un
+isomorphisme $J^{0}_{C/S} \simeq A$ qui induit l'isomorphisme donné sur la
+fibre générique ; il est unique.
+
+En d'autres termes, dit la page, la courbe $C_{\eta}$ « se réduit
+bien ».\footnote{L'unicité est celle de l'isomorphisme : un morphisme de
+schémas abéliens sur un trait est déterminé par sa fibre générique. Le modèle
+lisse $C$ lui-même est unique à isomorphisme unique près, $C_{\eta}$ étant de
+genre $g \geq 2$ ; la page ne le dit pas.}
+
+\emph{Démonstration.} On peut supposer $V$ complet, et que $(C_{\eta},
+\varphi_{\eta})$ provient d'un point de $M'$ rationnel sur $k(\eta)$,
+c'est-à-dire que $J^{1}_{C_{\eta}}$ a un point rationnel ; $C_{\eta}$ est alors
+plongée dans $A_{\eta}$.\footnote{La page « prend déjà » ce point de $M'$. En
+général il faut pour cela une extension finie de $k(\eta)$, et revenir à $V$
+demande un argument de descente que la page ne donne pas : le modèle lisse sur
+l'extension est unique, et l'inertie, qui opère trivialement sur la fibre
+spéciale de $A$, opère trivialement sur celle de la courbe par le Théorème 1.
+On le signale sans le développer.} Soit $C$ l'adhérence de $C_{\eta}$ dans
+$A$ : c'est un sous-schéma fermé de $A$, plat sur $S$, dont la fibre spéciale
+$C_{a}$ a pour cycle la spécialisation de $C_{\eta}$. Il s'agit de voir que
+$C_{a}$ est une courbe lisse.\footnote{Le bas de la page 10 commence par un
+bloc encadré et annulé d'une nappe de diagonales, d'où se détachent
+« directement $C$ dans $A$ » et « $V$ est complet » ; la reprise qui le suit est
+celle qu'on donne. La page cite ensuite « un résultat de Hoyt (n'utilisant que
+le fait que $A_{a}$ est une jacobienne) » : $C_{a}$ a une composante de
+multiplicité 1, et $J^{0}_{C_{a}/k(a)}$ est isomorphe au produit des
+jacobiennes des composantes de $C_{a}$. Une note marginale l'écarte aussitôt :
+« On n'a pas besoin de Hoyt, mais seulement de Matsusaka ».}
 
 \pagerange{11}{12}
 \section*{Le critère de Matsusaka (pages 11 et 12)}
 
-Il faut maintenant savoir ce qui arrive à la limite : quand une famille de
-courbes $C_{y}$ tracées dans $A$ se spécialise en un cycle $C_{a}$, celui-ci
-est-il encore une courbe, et $A_{a}$ encore une jacobienne ?
-
 \textbf{Critère de Matsusaka.} Soit $A$ une variété abélienne de dimension $n$
-sur un corps algébriquement clos, $\Theta$ un diviseur positif définissant une
-polarisation principale, c'est-à-dire $\deg(\Theta^{n})/n! = 1$, et $Z$ un
-1-cycle positif tel que
+sur un corps algébriquement clos, $\Theta$ un diviseur positif
+\emph{irréductible} tel que $\deg(\Theta^{n})/n! = 1$ --- c'est-à-dire que
+$\Theta$ définit une polarisation principale ---, et $Z$ un 1-cycle positif
+tel que
 \[
-  \Theta^{\,n-1} \equiv (n-1)!\, Z .
+  \Theta^{\,n-1} \equiv (n-1)!\, Z
 \]
-Alors $Z$ est de multiplicité 1, et $(A, \Theta)$ est le produit, comme
-variété abélienne principalement polarisée, des jacobiennes des composantes de
-$Z$ ; en particulier, si $Z$ est irréductible, $(A, \Theta)$ est la jacobienne
-de la courbe $Z$.\footnote{La page attribue le résultat à Matsusaka, nom lu
-avec un doute léger, et en énonce la forme irréductible ; les mots
-« multiplicité 1 » et « produit des jacobiennes des composantes de $C_{a}$ »,
-dans le fragment qui précède, montrent qu'il en avait aussi la forme
-réductible. Historiquement : T.~Matsusaka, 1959, pour le cas d'une courbe
-irréductible ; W.~Hoyt, 1963, pour les produits ; Z.~Ran, 1981, pour une
-forme plus générale. On ne sait pas lesquels les feuillets connaissent.}
+(équivalence numérique). Alors $Z$ est une courbe irréductible non singulière,
+de multiplicité 1 ; de plus $A$ est isomorphe à la jacobienne de $Z$ par
+l'immersion $Z \to A$, et $\Theta$ en définit la polarisation
+canonique.\footnote{La page l'appelle un résultat « géométrique » de
+Matsusaka, et précise que la seconde conclusion ne servira pas ; une note
+marginale dit que la première condition signifie que $\Theta$ définit la
+polarisation. L'irréductibilité de $\Theta$ ne peut pas être omise : sur un
+produit de jacobiennes, la somme des courbes satisfait aux deux relations sans
+être irréductible. C'est la forme réductible du critère que la page vient
+d'écarter sous le nom de Hoyt. Historiquement : T.~Matsusaka, 1959, pour le cas
+irréductible ; W.~Hoyt, 1963, pour les produits ; Z.~Ran, 1981, pour une forme
+plus générale.}
 
-\emph{Application.} Dans la famille, les classes se conservent :
+\emph{Fin de la démonstration.} Soit $\Theta_{\eta}$ un diviseur de la
+polarisation de $A_{\eta}$, $\Theta$ son adhérence dans $A$ et $\Theta_{a}$ sa
+fibre spéciale. Les classes se conservent par spécialisation :
 \[
-  \frac{\deg \Theta_{y}^{n}}{n!} = \frac{\deg \Theta_{a}^{n}}{n!} = 1,
-  \qquad
-  \Theta_{y}^{\,n-1} \equiv (n-1)!\, C_{y},
-  \qquad
+  \frac{\deg \Theta_{\eta}^{n}}{n!} = 1,
+  \quad
+  \Theta_{\eta}^{\,n-1} \equiv (n-1)!\, C_{\eta},
+  \qquad\text{donc}\qquad
+  \frac{\deg \Theta_{a}^{n}}{n!} = 1,
+  \quad
   \Theta_{a}^{\,n-1} \equiv (n-1)!\, C_{a}.
 \]
-Le cycle limite $C_{a}$ satisfait donc aux hypothèses du critère : il est
-réduit, $(A_{a}, \Theta_{a})$ est un produit de jacobiennes, et c'est une
-jacobienne dès que $C_{a}$ est irréductible, ce qui arrive exactement quand
-$\Theta_{a}$ est irréductible.\footnote{La formule est écrite deux fois à la
-page 11, la première biffée ; la classe que l'énoncé général appelle $Z$ est ici
-la courbe elle-même. La conservation des classes dans une famille plate de
-cycles, et l'existence de la limite par propreté du schéma de Hilbert, sont
-sous-entendues. L'équivalence « $C_{a}$ irréductible si et seulement si
-$\Theta_{a}$ irréductible » est ce que le haut de la page 12, barré, paraît
-dire ; on la tire du critère lui-même : un produit non trivial de variétés
-abéliennes principalement polarisées a un diviseur thêta réductible, et une
-jacobienne l'a irréductible.}
+Comme $A_{a}$ est une jacobienne polarisée, un résultat d'unicité, que la page
+attribue lui aussi à Matsusaka, dit qu'il n'y a à translation près qu'un
+diviseur positif dans la classe de la polarisation : $\Theta_{a}$ est un
+translaté du diviseur thêta de la jacobienne, et il est donc irréductible. Le
+critère s'applique à $(A_{a}, \Theta_{a}, C_{a})$ : $C_{a}$ est une courbe
+irréductible et non singulière. Donc $C$ est lisse sur $S$, et « on achève
+maintenant facilement » : le morphisme de schémas abéliens
+$J^{0}_{C/S} \to A$ déduit du plongement est un isomorphisme sur la fibre
+générique, donc un isomorphisme.\footnote{La page n'écrit pas la fin. Deux
+points y sont sous-entendus. La fibre $C_{a}$, comme schéma, n'a pas de point
+immergé : son polynôme de Hilbert est celui de $C_{\eta}$, et celui de la
+courbe lisse de genre $g$ qui porte son cycle lui est déjà égal. Et un
+morphisme de schémas abéliens sur un trait qui est un isomorphisme sur la
+fibre générique est un isomorphisme (propriété de Néron) ; c'est ce qui rend
+inutile la seconde conclusion du critère. Que $\Theta_{a}$ soit translaté du
+diviseur thêta est vrai parce que la polarisation est principale ; son
+irréductibilité, celle de $W_{g-1}$, est la nôtre. Le haut de la page 12,
+encadré et traversé de deux diagonales, porte cette unicité ; avant lui, une
+première route biffée partait de « Si $C_{a}$ était irréductible, $\Theta_{a}$
+ne serait pas … ». « Polarisée » est une lecture incertaine. L'indice qu'une
+première lecture rendait $y$ est le $\eta$ du point générique.}
+
+La démonstration donne d'ailleurs ceci.
 
 \textbf{Corollaire 1.} Soit $f : M \to S$ le morphisme structural, et
 $T = \overline{f(M)}$. Un point $t \in T$ est dans $f(M)$ si et seulement si le
 diviseur de la polarisation de $A_{t}$ --- défini à translation près,
-$\deg \Theta^{g}/g! = 1$ --- est irréductible.
+$\deg \Theta^{g}/g! = 1$ --- est vraiment irréductible.
 
-Autrement dit : l'adhérence du lieu des jacobiennes est faite des produits de
-jacobiennes, et l'on reconnaît une jacobienne parmi eux à l'irréductibilité de
-son diviseur thêta.
+En effet, une jacobienne a un diviseur thêta irréductible ; et si $\Theta_{t}$
+est irréductible, on spécialise vers $t$, le long d'un trait, une courbe d'un
+point de $f(M)$ : l'argument ci-dessus n'a utilisé de $A_{a}$ que
+l'irréductibilité de $\Theta_{a}$, et montre que $A_{t}$ est la jacobienne de
+la courbe limite. Le lieu des jacobiennes est donc ouvert dans son adhérence,
+et on l'y reconnaît à l'irréductibilité du diviseur thêta.\footnote{Cette
+justification est la nôtre. Les autres points de l'adhérence sont des
+produits de jacobiennes munis de la polarisation produit : c'est le résultat
+de Hoyt, que la page n'utilise pas ici.}
 
 \pagerange{13}{13}
 \section*{Isomorphismes au-dessus d'une base réduite (page 13)}
 
 Un premier corollaire, qui comparait deux courbes $C$, $C'$ munies
-d'isomorphismes $\varphi : J^{0}_{C/S} \to A$ et
-$\varphi' : J^{0}_{C'/S} \to A$, est encadré puis annulé ; il est repris sous
-le numéro 3.
+d'isomorphismes de schémas abéliens polarisés $\varphi : J^{0}_{C/S} \to A$ et
+$\varphi' : J^{0}_{C'/S} \to A$ au-dessus d'une base supposée réduite, est
+encadré puis annulé ; il est repris sous le numéro 3.
 
-\textbf{Corollaire 3.} Soit $S$ réduit.
+\textbf{Corollaire 3.}
 
 \begin{enumerate}
-\item[(i)] La page énonce une condition nécessaire et suffisante pour que $A$
-soit une jacobienne polarisée, portant sur ses fibres et sur l'irréductibilité
-des diviseurs de Matsusaka.\footnote{L'énoncé (i) est très lacunaire ; il porte
-une hypothèse sur les points où $A_{s}$ est « hyperelliptique » et une
-condition sur les composantes de $S$, dont on ne lit pas l'articulation. On
-n'en donne que la forme, et cette lecture ne le garantit pas.}
-\item[(ii)] Supposons qu'en tout point $s \in S$, $A_{s}$ soit la jacobienne
+\item[(i)] Si $A$ est un schéma jacobien polarisé --- s'il existe une courbe
+$C$ sur $S$ et un isomorphisme de schémas abéliens polarisés
+$J^{0}_{C/S} \simeq A$ ---, ses fibres sont des jacobiennes polarisées et
+leurs diviseurs de polarisation sont irréductibles. Réciproquement, \emph{si
+$S$ est normal}, il suffit que les fibres génériques des composantes de $S$
+soient des jacobiennes polarisées et que les diviseurs de polarisation de
+toutes les fibres soient irréductibles.\footnote{La page écrit « Supposons que
+$S$ soit réduit, et » --- en interligne, après un « normal » biffé ---, puis une
+hypothèse sur les points $s$ où $A_{s}$ est une jacobienne hyperelliptique,
+dont le premier mot ne se lit pas ; puis : « il f.\ et s.\ que ses fibres le
+soient ; … que les fibres génériques (… composantes de $S$) le soient, et que
+les diviseurs de polarisation de leurs fibres puissent être pris
+irréductibles ». Avec $S$ seulement réduit et des fibres non
+hyperelliptiques, la suffisance est fausse : au-dessus du lieu non
+hyperelliptique, $M \to S$ est un revêtement double, $(C, \varphi) \mapsto
+(C, -\varphi)$, qui peut être non trivial sur une base réduite non normale
+tout en ayant des points rationnels dans chaque fibre, points génériques
+compris --- ainsi sur une cubique nodale, en tordant une jacobienne constante
+non hyperelliptique par $-1$ le long du revêtement double connexe de la
+cubique. Pour $S$ normal, l'énoncé est exact : par le Corollaire 1, $f(M)$
+est $S$ tout entier ; par la bonne réduction, $M$ est propre, donc fini, sur
+$S$ ; et l'adhérence d'un point de $M$ au-dessus de chaque point générique est
+finie et birationnelle sur $S$, donc isomorphe à $S$, ce qui donne une
+section. L'argument est le nôtre. On ne décide pas si l'hypothèse illisible
+sur les points hyperelliptiques suffit à rendre l'énoncé exact sur une base
+seulement réduite. De deux notes marginales, la première (« il suffit que $S$
+soit réduit … $s \in S$ … ») ne se lit pas assez pour dire ce qu'elle
+restreint ; la seconde est entourée, et son premier mot pourrait être
+« Faux ».}
+\item[(ii)] Supposons $S$ réduit, et qu'en tout point $s \in S$, $A_{s}$ soit la jacobienne
 d'une courbe hyperelliptique. Soient $C$, $C'$ deux courbes sur $S$ munies
 d'isomorphismes de jacobiennes polarisées
 \[
@@ -521,9 +699,10 @@ remplaçant $u_{s}$ par $u_{s} \circ \iota$. Ainsi $Z$ contient tous les points
 de $S$, et $Z = S$ puisque $S$ est réduit.\footnote{Sans l'hypothèse
 hyperelliptique, (ii) est faux : pour $C$ non hyperelliptique,
 $(C, \varphi)$ et $(C, -\varphi)$ ne sont pas isomorphes, et il n'existe aucun
-$u$ compatible avec $\varphi$ et $-\varphi$. L'hypothèse est à demi lisible
-sur la page (« … que $A_{s}$ soit \emph{hyperelliptique} ») et l'on lui donne
-cette forme. La réduction de $S$ est exactement ce qui fait passer d'un
+$u$ compatible avec $\varphi$ et $-\varphi$. La page écrit « Supposons que
+$S$ soit \emph{réduit} … $s \in S$ tels que $A_{s}$ soit
+\emph{hyperelliptique} », un mot manquant ; on lui donne la forme « en tout
+point ». La réduction de $S$ est exactement ce qui fait passer d'un
 sous-schéma fermé qui contient tous les points à $S$ lui-même. L'argument est
 le nôtre ; le feuillet s'arrête sur l'énoncé.}
 
