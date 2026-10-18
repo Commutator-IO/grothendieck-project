@@ -1,0 +1,15 @@
+\section[Cote 160 : le déterminant de Moore et les coefficients de Dickson]{Cote 160 : le déterminant de Moore et les coefficients de Dickson\protect\verifie{Folder160}}\label{sec:160}
+
+La cote 160, \emph{Schémas [en] groupes : notes manuscrites (s.d.)}, est rangée dans le groupe \q{Dérivateurs} que l'inventaire date de 1990-[1991] ; ses vingt-deux pages traitent des sous-groupes finis de $\mathbb G_a$ en caractéristique $p$. Aux pages~7 à~9, le déterminant de Moore $\Delta_n(\xi) = \det(\xi_j^{p^i})$ donne par la règle de Cramer les coefficients $A_i$ de la relation $\xi_k^{p^n} + A_{n-1}\xi_k^{p^{n-1}} + \dots + A_0 \xi_k = 0$, et la page~9 affirme sans raison que $\Delta_n$ divise les numérateurs (\lot{160}{1}{9}). Les pages~14 et~15 transposent la construction à un faisceau $E$ localement libre de rang~$n$ muni de $u : E^{(p)} \simeq E$ : $\Delta_n^E$ est homogène de degré $\frac{p^n-1}{p-1}$, les $A_i^E$, définis hors du diviseur des zéros de $\Delta_n^E$, s'étendent à $V(E)$ tout entier, et $A_0^E = \pm(\Delta_n^E)^{p-1}$ (\lot{160}{1}{14}). Ce qui suit est le cas où $E$ est trivialisé et $u$ l'identité.
+
+\begin{theoreme}[D'après les pages 9, 14 et 15, $E$ trivialisé\piste{160-relative-moore-determinant}]
+Soit $p$ premier. Sur tout anneau commutatif, $\Delta_n(c\xi) = c^{(p^n-1)/(p-1)}\Delta_n(\xi)$. Il existe des polynômes $A_0, \dots, A_{n-1} \in \mathbf F_p[X_1, \dots, X_n]$ tels que, pour toute $\mathbf F_p$-algèbre $S$ et tout $\xi \in S^n$, $\xi_k^{p^n} + \sum_i A_i(\xi)\, \xi_k^{p^i} = 0$ pour tout $k$ ; si $\Delta_n(\xi)$ est inversible, les $A_i(\xi)$ sont les seuls coefficients de cette relation. Enfin $A_0 = (-1)^n \Delta_n^{p-1}$.
+\end{theoreme}
+
+\noindent L'énoncé tient : voir \texttt{moore\_smul'}, \texttt{dickson\_relation\_eval}, \texttt{dickson\_unique} et \texttt{A\_zero\_eval} dans \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/Folder160.lean}{\texttt{Folder160.lean}}, avec le signe $(-1)^n$ que page et lecture laissent en $\pm$.
+
+\begin{remarque}
+Les $A_i$ sont les coefficients de $\prod_{\lambda \in \mathbf F_p^n}(T - \lambda \cdot X)$, et $\Delta_{n+1}(T, X_1, \dots, X_n) = (-1)^n \Delta_n \prod_\lambda (T - \lambda \cdot X)$ : les $p^n$ formes $\lambda \cdot X$ sont des racines distinctes d'un polynôme de degré $p^n$ en $T$ dont le coefficient dominant $\pm\Delta_n$ est non nul (par récurrence sur $n$). La factorisation de la page~7 et sa constante $c$ ne servent pas.
+\end{remarque}
+
+Ne sont pas démontrés ici : la version relative pour $(E, u)$ non trivial et la trivialisation $(\Lambda^n \check E)^{\otimes(p-1)} \simeq \mathcal O_S$ par $\Lambda^n \check u$ ; le théorème de Dickson (pages~9 à~12) ; la bijection $a \mapsto \operatorname{Ker} f_a$ des pages~2 à~6.

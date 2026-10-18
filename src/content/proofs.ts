@@ -37,6 +37,19 @@ export const PROOFS: Proof[] = [
     theorems: ["lemme2_1", "lemme2_2", "isOpen_of_stableUnderGeneralization", "lemme1_faisceau", "proposition", "lemme2_page", "lemme1", "corollaire1"],
   },
   {
+    folder: '160',
+    batch: 1,
+    page: '7–9, 14–15',
+    name: 'The Moore determinant and the Dickson coefficients',
+    statement:
+      'For E locally free of rank n with u : E⁽ᵖ⁾ ⥲ E, the Moore determinant Δₙᴱ(ξ) = ξ ∧ ξ⁽ᵖ⁾ ∧ ⋯ ∧ ξ⁽ᵖⁿ⁻¹⁾ is homogeneous of degree (pⁿ − 1)/(p − 1), the coefficients Aᵢᴱ of ξ⁽ᵖⁿ⁾ + Σ Aᵢᴱ(ξ) ξ⁽ᵖⁱ⁾ = 0, defined off the zero divisor of Δₙᴱ, extend to all of V(E), and A₀ᴱ = ±(Δₙᴱ)ᵖ⁻¹. In coordinates, E trivialised.',
+    found:
+      'Holds in coordinates, with the sign (−1)ⁿ. Over 𝔽_p[X₁, …, Xₙ], Δ_{n+1}(T, X) = (−1)ⁿ Δₙ · ∏_{λ ∈ 𝔽_pⁿ} (T − λ·X): the pⁿ forms λ·X are distinct roots of a polynomial of degree pⁿ with leading coefficient ±Δₙ ≠ 0. The Aᵢ are the coefficients of the product, so they are polynomials; the relation holds at every point of every 𝔽_p-algebra, its coefficients are unique where Δₙ is invertible, and A₀ = (−1)ⁿ Δₙᵖ⁻¹. The factorisation of page 7 and its constant c are not needed. Not formalised: the relative (E, u), the trivialisation of (ΛⁿĚ)^{⊗(p−1)}, Dickson’s theorem.',
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder160.lean',
+    theorems: ['moore_smul\'', 'Δ_ne_zero', 'D_eq_C_mul_P', 'roots_D', 'dickson_relation', 'A_zero', 'dickson_relation_eval', 'dickson_unique', 'A_zero_eval'],
+  },
+  {
     folder: '158',
     batch: 3,
     page: '21–41, 44, 50–53',
