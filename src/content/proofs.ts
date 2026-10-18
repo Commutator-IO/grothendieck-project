@@ -206,6 +206,19 @@ export const PROOFS: Proof[] = [
     theorems: ['proposition2_15', 'corollaire2_16', 'proposition7_P1', 'proposition7_P2', 'proposition7_P3', 'corollaire8_P1', 'corollaire8_P2', 'corollaire8_P3', 'essSurj_of_essSurjAt', 'exists_maximal_point'],
   },
   {
+    folder: '98',
+    batch: 1,
+    page: '10–12',
+    name: 'Axiomatic norms: the model of G-sets',
+    statement:
+      'Maps whose fibres all have r elements, with r as degree, satisfy (i)–(v) and (i bis)–(v bis), the fibre of (X^n_Y)/H → Y being E^n/H; Can_{X/Y}(y), the class of the points of the fibre, satisfies (i ter)–(iv ter), including the transitivity diagram of p. 11, and is compatible with the action of G.',
+    found:
+      'All hold. (ii ter), verified for no example in the folder, holds because the fibre of vu over z is the disjoint union of the fibres of u over the points of the fibre of v. The group plays no role beyond the equivariance of Can. Schemes (Example II), coverings (Example III) and the transitivity of pp. 6–8 are not formalised.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder98.lean',
+    theorems: ['hasDeg_id', 'hasDeg_comp', 'hasDeg_pullback', 'hasDeg_sum', 'hasDeg_quotPow', 'can_id', 'can_comp', 'can_pullback', 'can_sum', 'can_smul'],
+  },
+  {
     folder: '39',
     batch: 1,
     page: '11–14, 18',
