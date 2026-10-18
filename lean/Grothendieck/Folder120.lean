@@ -45,6 +45,29 @@ finiteness of the families is used, and « field » can be weakened to « no zer
 The reading's corrections `e_α ∈ R₀` (page 22) and `X ∖ Y` (page 23) are both needed: the
 first for the translation, the second because a family constant on `Y` cannot separate two
 points of `Y`.
+## Pushouts along tame embeddings (pages 8 to 13), finding `120-axiomatic-pushouts-along-embeddings`
+
+Axioms (M5′) `Unions` (∅ and binary unions), (M6) `M6` (a tame `Z ⊂ X` is a fibre `F⁻¹(e)`,
+`e ∈ R₀^A`, of a tame family injective off `Z`), (M7) `M7` (tame functions extend from tame
+subsets). Spaces are tame subsets `X ⊂ R^I`, maps are families with tame graph.
+
+* `graph_mem_of_coords`, `isTameFun_of_graph`: a finite family has a tame graph iff its
+  coordinates are tame functions ((M′1), (M′2), (M′4), induction on the index set).
+* `pushout_of_criterion` (pp. 10–11, sufficiency, with the principle of pp. 8 and 11):
+  compatible tame families `J₁`, `J₂` that are injective and separate the two sides off `Z`
+  give a tame `J₁(X₁) ∪ J₂(X₂)`, which is the set-theoretic pushout and has the universal
+  property for tame maps.
+* `side_data`, `pushout_exists` (pp. 12–13): under (M5′), (M6), (M7), two tame embeddings
+  `Z ↪ X₁`, `Z ↪ X₂` have such a pushout, by diagram (*): `X₁` on the level `e₂`, `X₂` on the
+  level `e₁` of `R^K × R^{A₁} × R^{A₂}`, the `R^K` coordinate extending `Z ⊂ R^K` by (M7).
+
+What the formalisation found: the Proposition holds, with the reading's restored
+conclusion (the two images meet exactly along `Z`). It needs `R` non-empty for the universal
+property, as a map into `R^L` must exist (the trivial cases of page 4 excluded); (M5′) is
+used only for the union `J₁(X₁) ∪ J₂(X₂)` and for the graph of the induced map; (M6) needs its
+« de plus » half (injectivity off `Z`), which the reading notes does not follow from the first
+over a general `R`. The category `Σ` of abstract tame spaces and the NB for finite diagrams
+are not formalised.
 -/
 
 namespace Grothendieck.Folder120
@@ -297,5 +320,326 @@ end TameModel
 theorem not_separates_on_zeroSet {R X C : Type*} [Zero R] (h : C → X → R) {x y : X}
     (hx : ∀ c, h c x = 0) (hy : ∀ c, h c y = 0) : ∀ c, h c x = h c y := fun c => by
   rw [hx, hy]
+
+namespace TameModel
+
+variable {R : Type u} (T : TameModel R)
+
+/-! ## Pushouts along tame embeddings (pages 8 to 13), finding
+`120-axiomatic-pushouts-along-embeddings` -/
+
+/-- (M5′) (page 9): each `𝓜_I` contains `∅` and is stable under binary unions. -/
+def Unions : Prop :=
+  ∀ (I : Type) [Finite I], ∅ ∈ T.M I ∧ ∀ A ∈ T.M I, ∀ B ∈ T.M I, A ∪ B ∈ T.M I
+
+/-- (M6) (page 12): a tame `Z ⊂ X` is the fibre `F⁻¹(e)` over a tame point of a finite tame
+family `F : X → R^A`, which may be taken injective off `Z`. -/
+def M6 : Prop :=
+  ∀ {I : Type} [Finite I] {X Z : Set (I → R)}, X ∈ T.M I → Z ∈ T.M I → Z ⊆ X →
+    ∃ (A : Type) (_ : Finite A) (F : (I → R) → A → R) (e : A → R),
+      graphOn X F ∈ T.M (I ⊕ A) ∧ (∀ a, e a ∈ T.R0) ∧ (∀ x ∈ X, x ∈ Z ↔ F x = e) ∧
+        Set.InjOn F (X \ Z)
+
+/-- (M7) (page 12), a tame Tietze theorem: a tame function on a tame `Z ⊂ X` extends to a
+tame function on `X`. -/
+def M7 : Prop :=
+  ∀ {I : Type} [Finite I] {X Z : Set (I → R)} {f : (I → R) → R}, X ∈ T.M I → Z ∈ T.M I →
+    Z ⊆ X → T.IsTameFun Z f → ∃ g : (I → R) → R, T.IsTameFun X g ∧ ∀ z ∈ Z, g z = f z
+
+/-- The coordinates of a family with tame graph are tame functions ((M′1)). -/
+theorem isTameFun_of_graph {I K : Type} [Finite I] [Finite K] {X : Set (I → R)}
+    {F : (I → R) → K → R} (hF : graphOn X F ∈ T.M (I ⊕ K)) (k : K) :
+    T.IsTameFun X (fun x => F x k) := by
+  unfold IsTameFun
+  convert T.m1 (Sum.elim Sum.inl fun _ => Sum.inr k : I ⊕ Unit → I ⊕ K) hF using 1
+  ext y
+  simp only [graphOn, Set.mem_ofPred_eq, Set.mem_image]
+  constructor
+  · rintro ⟨hy, hk⟩
+    refine ⟨Sum.elim (y ∘ Sum.inl) (F (y ∘ Sum.inl)), ⟨hy, fun _ => rfl⟩, funext fun j => ?_⟩
+    rcases j with j | _
+    · rfl
+    · exact (hk ()).symm
+  · rintro ⟨z, ⟨hz, hk⟩, rfl⟩
+    exact ⟨hz, fun _ => hk k⟩
+
+/-- A finite family of tame functions on a tame `X` has a tame graph ((M′1), (M′2), (M′4),
+by induction on the index set). -/
+theorem graph_mem_of_coords {I : Type} [Finite I] {X : Set (I → R)} (hX : X ∈ T.M I)
+    {K : Type} [Finite K] {F : (I → R) → K → R} (hF : ∀ k, T.IsTameFun X (fun x => F x k)) :
+    graphOn X F ∈ T.M (I ⊕ K) := by
+  suffices h : ∀ K : Type, Finite K → ∀ F : (I → R) → K → R,
+      (∀ k, T.IsTameFun X (fun x => F x k)) → graphOn X F ∈ T.M (I ⊕ K) from
+    h K inferInstance F hF
+  intro K hK
+  refine Finite.induction_empty_option (P := fun K : Type => Finite K →
+    ∀ F : (I → R) → K → R, (∀ k, T.IsTameFun X (fun x => F x k)) → graphOn X F ∈ T.M (I ⊕ K))
+    ?_ ?_ ?_ K hK
+  · intro α β e ih hβ F hF
+    have : Finite α := Finite.of_equiv _ e.symm
+    have hα := ih this (fun x a => F x (e a)) (fun a => hF (e a))
+    convert T.m1 (Sum.map id e.symm : I ⊕ β → I ⊕ α) hα using 1
+    ext y
+    simp only [graphOn, Set.mem_ofPred_eq, Set.mem_image]
+    constructor
+    · rintro ⟨hy, hk⟩
+      refine ⟨Sum.elim (y ∘ Sum.inl) (fun a => F (y ∘ Sum.inl) (e a)),
+        ⟨hy, fun _ => rfl⟩, funext fun j => ?_⟩
+      rcases j with j | b
+      · rfl
+      · simp [hk b]
+    · rintro ⟨z, ⟨hz, hk⟩, rfl⟩
+      refine ⟨hz, fun b => ?_⟩
+      have := hk (e.symm b)
+      rw [Equiv.apply_symm_apply] at this
+      exact this
+  · intro _ F _
+    convert T.m1 (Sum.elim id PEmpty.elim : I ⊕ PEmpty → I) hX using 1
+    ext y
+    simp only [graphOn, Set.mem_ofPred_eq, Set.mem_image]
+    constructor
+    · rintro ⟨hy, -⟩
+      refine ⟨y ∘ Sum.inl, hy, funext fun j => ?_⟩
+      cases j with
+      | inl j => rfl
+      | inr j => exact j.elim
+    · rintro ⟨z, hz, rfl⟩
+      exact ⟨hz, fun k => k.elim⟩
+  · intro α _ ih _ F hF
+    have hα := ih inferInstance (fun x a => F x (some a)) (fun a => hF (some a))
+    have hn := hF none
+    let w : (I ⊕ α) ⊕ (I ⊕ Unit) → I ⊕ Option α := fun
+      | .inl (.inl i) => .inl i
+      | .inl (.inr a) => .inr (some a)
+      | .inr (.inl i) => .inl i
+      | .inr (.inr _) => .inr none
+    have hw : Surjective w := by
+      rintro (i | (_ | a))
+      · exact ⟨.inl (.inl i), rfl⟩
+      · exact ⟨.inr (.inr ()), rfl⟩
+      · exact ⟨.inl (.inr a), rfl⟩
+    convert T.m2 w hw (T.m4 hα hn) using 1
+    ext y
+    simp only [graphOn, Set.mem_ofPred_eq, Set.mem_preimage]
+    constructor
+    · rintro ⟨hy, hk⟩
+      exact ⟨⟨hy, fun a => hk (some a)⟩, hy, fun _ => hk none⟩
+    · rintro ⟨⟨hy, hk⟩, -, hn'⟩
+      refine ⟨hy, fun o => ?_⟩
+      rcases o with _ | a
+      · exact hn' ()
+      · exact hk a
+
+/-- **The criterion of pages 10 and 11** (sufficiency, under (M5′)). Let `J₁`, `J₂` be tame
+families on `X₁`, `X₂` with values in `R^N` such that a) `J₁ i₁ = J₂ i₂` on `Z`, b) `J₁`,
+`J₂` are injective, c) `J₁ x₁ ≠ J₂ x₂` off `i₁(Z)`, `i₂(Z)`. Then `P = J₁(X₁) ∪ J₂(X₂)` is
+tame, it is the set-theoretic pushout (`J₁ x₁ = J₂ x₂` iff `x₁ = i₁ z`, `x₂ = i₂ z`), and it
+has the universal property for tame maps (the principle of pages 8 and 11). -/
+theorem pushout_of_criterion [Nonempty R] (hU : T.Unions) {I₁ I₂ K N : Type} [Finite I₁] [Finite I₂]
+    [Finite N] {X₁ : Set (I₁ → R)} {X₂ : Set (I₂ → R)} {Z : Set (K → R)}
+    (hX₁ : X₁ ∈ T.M I₁) (hX₂ : X₂ ∈ T.M I₂) {i₁ : (K → R) → I₁ → R} {i₂ : (K → R) → I₂ → R}
+    (hi₁ : Set.MapsTo i₁ Z X₁) (hi₂ : Set.MapsTo i₂ Z X₂)
+    {J₁ : (I₁ → R) → N → R} {J₂ : (I₂ → R) → N → R}
+    (hJ₁ : graphOn X₁ J₁ ∈ T.M (I₁ ⊕ N)) (hJ₂ : graphOn X₂ J₂ ∈ T.M (I₂ ⊕ N))
+    (ha : ∀ z ∈ Z, J₁ (i₁ z) = J₂ (i₂ z)) (hb₁ : Set.InjOn J₁ X₁) (hb₂ : Set.InjOn J₂ X₂)
+    (hc : ∀ x₁ ∈ X₁, (∀ z ∈ Z, x₁ ≠ i₁ z) → ∀ x₂ ∈ X₂, (∀ z ∈ Z, x₂ ≠ i₂ z) →
+      J₁ x₁ ≠ J₂ x₂) :
+    J₁ '' X₁ ∪ J₂ '' X₂ ∈ T.M N ∧
+    (∀ x₁ ∈ X₁, ∀ x₂ ∈ X₂, J₁ x₁ = J₂ x₂ ↔ ∃ z ∈ Z, x₁ = i₁ z ∧ x₂ = i₂ z) ∧
+    ∀ (L : Type) [Finite L] (f₁ : (I₁ → R) → L → R) (f₂ : (I₂ → R) → L → R),
+      graphOn X₁ f₁ ∈ T.M (I₁ ⊕ L) → graphOn X₂ f₂ ∈ T.M (I₂ ⊕ L) →
+      (∀ z ∈ Z, f₁ (i₁ z) = f₂ (i₂ z)) →
+      ∃ h : (N → R) → L → R, graphOn (J₁ '' X₁ ∪ J₂ '' X₂) h ∈ T.M (N ⊕ L) ∧
+        (∀ x ∈ X₁, h (J₁ x) = f₁ x) ∧ (∀ x ∈ X₂, h (J₂ x) = f₂ x) := by
+  classical
+  have glue : ∀ x₁ ∈ X₁, ∀ x₂ ∈ X₂, J₁ x₁ = J₂ x₂ ↔ ∃ z ∈ Z, x₁ = i₁ z ∧ x₂ = i₂ z := by
+    intro x₁ h₁ x₂ h₂
+    constructor
+    · intro e
+      by_cases hz₁ : ∃ z ∈ Z, x₁ = i₁ z
+      · obtain ⟨z, hz, rfl⟩ := hz₁
+        exact ⟨z, hz, rfl, hb₂ h₂ (hi₂ hz) (e.symm.trans (ha z hz))⟩
+      by_cases hz₂ : ∃ z ∈ Z, x₂ = i₂ z
+      · obtain ⟨z, hz, rfl⟩ := hz₂
+        exact ⟨z, hz, hb₁ h₁ (hi₁ hz) (e.trans (ha z hz).symm), rfl⟩
+      push Not at hz₁ hz₂
+      exact absurd e (hc x₁ h₁ hz₁ x₂ h₂ hz₂)
+    · rintro ⟨z, hz, rfl, rfl⟩
+      exact ha z hz
+  refine ⟨(hU N).2 _ (T.image_mem hJ₁) _ (T.image_mem hJ₂), glue, ?_⟩
+  intro L _ f₁ f₂ hf₁ hf₂ hf
+  let G₁ : (I₁ → R) → N ⊕ L → R := fun x => Sum.elim (J₁ x) (f₁ x)
+  let G₂ : (I₂ → R) → N ⊕ L → R := fun x => Sum.elim (J₂ x) (f₂ x)
+  have hG₁ : graphOn X₁ G₁ ∈ T.M (I₁ ⊕ (N ⊕ L)) := T.graph_mem_of_coords hX₁ fun k => by
+    rcases k with n | l
+    · exact T.isTameFun_of_graph hJ₁ n
+    · exact T.isTameFun_of_graph hf₁ l
+  have hG₂ : graphOn X₂ G₂ ∈ T.M (I₂ ⊕ (N ⊕ L)) := T.graph_mem_of_coords hX₂ fun k => by
+    rcases k with n | l
+    · exact T.isTameFun_of_graph hJ₂ n
+    · exact T.isTameFun_of_graph hf₂ l
+  let h : (N → R) → L → R := fun p =>
+    if hp : ∃ x ∈ X₁, J₁ x = p then f₁ hp.choose
+    else if hp' : ∃ x ∈ X₂, J₂ x = p then f₂ hp'.choose
+    else fun _ => Classical.ofNonempty
+  have h₁ : ∀ x ∈ X₁, h (J₁ x) = f₁ x := by
+    intro x hx
+    have hp : ∃ x' ∈ X₁, J₁ x' = J₁ x := ⟨x, hx, rfl⟩
+    simp only [h, hp, ↓reduceDIte]
+    rw [hb₁ hp.choose_spec.1 hx hp.choose_spec.2]
+  have h₂ : ∀ x ∈ X₂, h (J₂ x) = f₂ x := by
+    intro x hx
+    by_cases hp : ∃ x' ∈ X₁, J₁ x' = J₂ x
+    · simp only [h, hp, ↓reduceDIte]
+      obtain ⟨z, hz, e₁, e₂⟩ := (glue _ hp.choose_spec.1 x hx).1 hp.choose_spec.2
+      rw [e₁, e₂, hf z hz]
+    · have hp' : ∃ x' ∈ X₂, J₂ x' = J₂ x := ⟨x, hx, rfl⟩
+      simp only [h, hp, hp', ↓reduceDIte]
+      rw [hb₂ hp'.choose_spec.1 hx hp'.choose_spec.2]
+  refine ⟨h, ?_, h₁, h₂⟩
+  convert (hU (N ⊕ L)).2 _ (T.image_mem hG₁) _ (T.image_mem hG₂) using 1
+  ext y
+  simp only [graphOn, Set.mem_ofPred_eq, Set.mem_union, Set.mem_image]
+  constructor
+  · rintro ⟨⟨x, hx, ex⟩ | ⟨x, hx, ex⟩, hk⟩
+    · refine Or.inl ⟨x, hx, funext fun j => ?_⟩
+      rcases j with n | l
+      · exact congrFun ex n
+      · rw [hk l, ← ex, h₁ x hx]; rfl
+    · refine Or.inr ⟨x, hx, funext fun j => ?_⟩
+      rcases j with n | l
+      · exact congrFun ex n
+      · rw [hk l, ← ex, h₂ x hx]; rfl
+  · rintro (⟨x, hx, rfl⟩ | ⟨x, hx, rfl⟩)
+    · exact ⟨Or.inl ⟨x, hx, rfl⟩, fun l => (congrFun (h₁ x hx) l).symm⟩
+    · exact ⟨Or.inr ⟨x, hx, rfl⟩, fun l => (congrFun (h₂ x hx) l).symm⟩
+
+/-- One side of the construction of page 13: for a tame embedding `i : Z ↪ X`, a tame
+family `Φ : X → R^K` with `Φ ∘ i = id` ((M7) coordinate by coordinate) and a tame
+`F : X → R^A`, `e ∈ R₀^A`, with `i(Z) = F⁻¹(e)` and `F` injective off `i(Z)` ((M6)). -/
+theorem side_data [Nonempty R] (h6 : T.M6) (h7 : T.M7) {I K : Type} [Finite I] [Finite K]
+    {X : Set (I → R)} {Z : Set (K → R)} (hX : X ∈ T.M I) {i : (K → R) → I → R}
+    (hi : graphOn Z i ∈ T.M (K ⊕ I)) (hm : Set.MapsTo i Z X) (hinj : Set.InjOn i Z) :
+    ∃ (Φ : (I → R) → K → R) (A : Type) (_ : Finite A) (F : (I → R) → A → R) (e : A → R),
+      (∀ k, T.IsTameFun X (fun x => Φ x k)) ∧ (∀ z ∈ Z, Φ (i z) = z) ∧
+      graphOn X F ∈ T.M (I ⊕ A) ∧ (∀ a, e a ∈ T.R0) ∧
+      (∀ x ∈ X, x ∈ i '' Z ↔ F x = e) ∧ Set.InjOn F (X \ i '' Z) := by
+  classical
+  have hZ' : i '' Z ∈ T.M I := T.image_mem hi
+  have hsub : i '' Z ⊆ X := Set.image_subset_iff.2 hm
+  -- the inverse of `i` on `i(Z)`, a tame family
+  let inv : (I → R) → K → R := fun x =>
+    if h : ∃ z ∈ Z, i z = x then h.choose else fun _ => Classical.ofNonempty
+  have inv_spec : ∀ z ∈ Z, inv (i z) = z := by
+    intro z hz
+    have h : ∃ z' ∈ Z, i z' = i z := ⟨z, hz, rfl⟩
+    simp only [inv, h, ↓reduceDIte]
+    exact hinj h.choose_spec.1 hz h.choose_spec.2
+  have hinv : graphOn (i '' Z) inv ∈ T.M (I ⊕ K) := by
+    convert T.m1 (Sum.swap : I ⊕ K → K ⊕ I) hi using 1
+    ext y
+    simp only [graphOn, Set.mem_ofPred_eq, Set.mem_image]
+    constructor
+    · rintro ⟨⟨z, hz, ez⟩, hk⟩
+      refine ⟨Sum.elim z (i z), ⟨hz, fun _ => rfl⟩, funext fun j => ?_⟩
+      rcases j with j | k
+      · exact congrFun ez j
+      · simp only [comp_apply, Sum.swap_inr, Sum.elim_inl]
+        rw [hk k, ← ez, inv_spec z hz]
+    · rintro ⟨y', ⟨hy', hk⟩, rfl⟩
+      refine ⟨⟨y' ∘ Sum.inl, hy', funext fun j => (hk j).symm⟩, fun k => ?_⟩
+      have e : (y' ∘ Sum.swap) ∘ Sum.inl = i (y' ∘ Sum.inl) := funext fun j => hk j
+      rw [e, inv_spec _ hy']
+      rfl
+  -- (M7), coordinate by coordinate
+  have ext : ∀ k : K, ∃ g : (I → R) → R, T.IsTameFun X g ∧ ∀ x ∈ i '' Z, g x = inv x k :=
+    fun k => h7 hX hZ' hsub (T.isTameFun_of_graph hinv k)
+  choose φ hφ hφZ using ext
+  -- (M6)
+  obtain ⟨A, hA, F, e, hF, he, hfib, hFinj⟩ := h6 hX hZ' hsub
+  refine ⟨fun x k => φ k x, A, hA, F, e, hφ, fun z hz => funext fun k => ?_, hF, he, hfib,
+    hFinj⟩
+  change φ k (i z) = z k
+  rw [hφZ k (i z) ⟨z, hz, rfl⟩, inv_spec z hz]
+
+/-- **Pages 12 and 13, the Proposition.** Under (M5′), (M6) and (M7), two tame embeddings
+`i₁ : Z ↪ X₁`, `i₂ : Z ↪ X₂` have a pushout computed as in sets: tame embeddings
+`J₁`, `J₂` into some `R^N` (diagram (*): `X₁` on the level `e₂`, `X₂` on the level `e₁`)
+whose images meet exactly along `Z`, with tame union, and with the universal property for
+tame maps. -/
+theorem pushout_exists [Nonempty R] (hU : T.Unions) (h6 : T.M6) (h7 : T.M7)
+    {I₁ I₂ K : Type} [Finite I₁] [Finite I₂] [Finite K] {X₁ : Set (I₁ → R)}
+    {X₂ : Set (I₂ → R)} {Z : Set (K → R)} (hX₁ : X₁ ∈ T.M I₁) (hX₂ : X₂ ∈ T.M I₂)
+    {i₁ : (K → R) → I₁ → R} {i₂ : (K → R) → I₂ → R}
+    (hi₁ : graphOn Z i₁ ∈ T.M (K ⊕ I₁)) (hi₂ : graphOn Z i₂ ∈ T.M (K ⊕ I₂))
+    (hm₁ : Set.MapsTo i₁ Z X₁) (hm₂ : Set.MapsTo i₂ Z X₂)
+    (hinj₁ : Set.InjOn i₁ Z) (hinj₂ : Set.InjOn i₂ Z) :
+    ∃ (N : Type) (_ : Finite N) (J₁ : (I₁ → R) → N → R) (J₂ : (I₂ → R) → N → R),
+      graphOn X₁ J₁ ∈ T.M (I₁ ⊕ N) ∧ graphOn X₂ J₂ ∈ T.M (I₂ ⊕ N) ∧
+      Set.InjOn J₁ X₁ ∧ Set.InjOn J₂ X₂ ∧ (∀ z ∈ Z, J₁ (i₁ z) = J₂ (i₂ z)) ∧
+      J₁ '' X₁ ∪ J₂ '' X₂ ∈ T.M N ∧
+      (∀ x₁ ∈ X₁, ∀ x₂ ∈ X₂, J₁ x₁ = J₂ x₂ ↔ ∃ z ∈ Z, x₁ = i₁ z ∧ x₂ = i₂ z) ∧
+      ∀ (L : Type) [Finite L] (f₁ : (I₁ → R) → L → R) (f₂ : (I₂ → R) → L → R),
+        graphOn X₁ f₁ ∈ T.M (I₁ ⊕ L) → graphOn X₂ f₂ ∈ T.M (I₂ ⊕ L) →
+        (∀ z ∈ Z, f₁ (i₁ z) = f₂ (i₂ z)) →
+        ∃ h : (N → R) → L → R, graphOn (J₁ '' X₁ ∪ J₂ '' X₂) h ∈ T.M (N ⊕ L) ∧
+          (∀ x ∈ X₁, h (J₁ x) = f₁ x) ∧ (∀ x ∈ X₂, h (J₂ x) = f₂ x) := by
+  obtain ⟨Φ₁, A₁, _, F₁, e₁, hΦ₁, hΦ₁Z, hF₁, he₁, hfib₁, hinjF₁⟩ :=
+    T.side_data h6 h7 hX₁ hi₁ hm₁ hinj₁
+  obtain ⟨Φ₂, A₂, _, F₂, e₂, hΦ₂, hΦ₂Z, hF₂, he₂, hfib₂, hinjF₂⟩ :=
+    T.side_data h6 h7 hX₂ hi₂ hm₂ hinj₂
+  let J₁ : (I₁ → R) → K ⊕ (A₁ ⊕ A₂) → R := fun x => Sum.elim (Φ₁ x) (Sum.elim (F₁ x) e₂)
+  let J₂ : (I₂ → R) → K ⊕ (A₁ ⊕ A₂) → R := fun x => Sum.elim (Φ₂ x) (Sum.elim e₁ (F₂ x))
+  have hJ₁ : graphOn X₁ J₁ ∈ T.M (I₁ ⊕ (K ⊕ (A₁ ⊕ A₂))) := T.graph_mem_of_coords hX₁ fun j => by
+    rcases j with k | a | a
+    · exact hΦ₁ k
+    · exact T.isTameFun_of_graph hF₁ a
+    · exact T.isTameFun_const hX₁ (he₂ a)
+  have hJ₂ : graphOn X₂ J₂ ∈ T.M (I₂ ⊕ (K ⊕ (A₁ ⊕ A₂))) := T.graph_mem_of_coords hX₂ fun j => by
+    rcases j with k | a | a
+    · exact hΦ₂ k
+    · exact T.isTameFun_const hX₂ (he₁ a)
+    · exact T.isTameFun_of_graph hF₂ a
+  -- `F_j ∘ i_j = e_j`
+  have hFZ₁ : ∀ z ∈ Z, F₁ (i₁ z) = e₁ := fun z hz => (hfib₁ _ (hm₁ hz)).1 ⟨z, hz, rfl⟩
+  have hFZ₂ : ∀ z ∈ Z, F₂ (i₂ z) = e₂ := fun z hz => (hfib₂ _ (hm₂ hz)).1 ⟨z, hz, rfl⟩
+  have ha : ∀ z ∈ Z, J₁ (i₁ z) = J₂ (i₂ z) := by
+    intro z hz
+    funext j
+    rcases j with k | a | a
+    · simp only [J₁, J₂, Sum.elim_inl, hΦ₁Z z hz, hΦ₂Z z hz]
+    · simp only [J₁, J₂, Sum.elim_inr, Sum.elim_inl, hFZ₁ z hz]
+    · simp only [J₁, J₂, Sum.elim_inr, hFZ₂ z hz]
+  -- injectivity of each side
+  have inj : ∀ {I A : Type} {X : Set (I → R)} {i : (K → R) → I → R} {Φ : (I → R) → K → R}
+      {F : (I → R) → A → R} {e : A → R}, (∀ z ∈ Z, Φ (i z) = z) →
+      (∀ x ∈ X, x ∈ i '' Z ↔ F x = e) → Set.InjOn F (X \ i '' Z) →
+      ∀ x ∈ X, ∀ x' ∈ X, Φ x = Φ x' → F x = F x' → x = x' := by
+    intro I A X i Φ F e hΦZ hfib hinjF x hx x' hx' eΦ eF
+    by_cases hZx : x ∈ i '' Z
+    · have hZx' : x' ∈ i '' Z := (hfib x' hx').2 (eF ▸ (hfib x hx).1 hZx)
+      obtain ⟨z, hz, rfl⟩ := hZx
+      obtain ⟨z', hz', rfl⟩ := hZx'
+      rw [hΦZ z hz, hΦZ z' hz'] at eΦ
+      rw [eΦ]
+    · have hZx' : x' ∉ i '' Z := fun h => hZx ((hfib x hx).2 (eF.trans ((hfib x' hx').1 h)))
+      exact hinjF ⟨hx, hZx⟩ ⟨hx', hZx'⟩ eF
+  have hb₁ : Set.InjOn J₁ X₁ := fun x hx x' hx' e =>
+    inj hΦ₁Z hfib₁ hinjF₁ x hx x' hx' (funext fun k => congrFun e (.inl k))
+      (funext fun a => congrFun e (.inr (.inl a)))
+  have hb₂ : Set.InjOn J₂ X₂ := fun x hx x' hx' e =>
+    inj hΦ₂Z hfib₂ hinjF₂ x hx x' hx' (funext fun k => congrFun e (.inl k))
+      (funext fun a => congrFun e (.inr (.inr a)))
+  have hc : ∀ x₁ ∈ X₁, (∀ z ∈ Z, x₁ ≠ i₁ z) → ∀ x₂ ∈ X₂, (∀ z ∈ Z, x₂ ≠ i₂ z) →
+      J₁ x₁ ≠ J₂ x₂ := by
+    intro x₁ hx₁ hz₁ x₂ _ _ e
+    obtain ⟨z, hz, ez⟩ := (hfib₁ x₁ hx₁).2 (funext fun a => congrFun e (.inr (.inl a)))
+    exact hz₁ z hz ez.symm
+  obtain ⟨hP, hglue, huniv⟩ :=
+    T.pushout_of_criterion hU hX₁ hX₂ hm₁ hm₂ hJ₁ hJ₂ ha hb₁ hb₂ hc
+  exact ⟨_, inferInstance, J₁, J₂, hJ₁, hJ₂, hb₁, hb₂, ha, hP, hglue, huniv⟩
+
+
+end TameModel
 
 end Grothendieck.Folder120

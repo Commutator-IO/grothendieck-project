@@ -546,15 +546,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '120',
     batch: 2,
-    page: '20–23',
-    name: 'Collapsing a tame subset over a field',
+    page: '8–13, 20–23',
+    name: 'Pushouts along tame embeddings; collapsing a tame subset over a field',
     statement:
-      'Tame subsets 𝓜_I ⊂ 𝔓(R^I) satisfying (M′1)–(M′4), tame functions those with tame graph, R₀ the tame points; R a field with (M11). If Y = ⋂ f_α⁻¹(e_α) for finitely many tame functions f_α on a tame X and e_α ∈ R₀, and tame g_β embed X, then the functions f_α − e_α and (f_α − e_α)·g_β are tame, have Y as common zero set, and separate the points of X ∖ Y: the second half of axiom (M6) follows from the first, and X/Y is a tame space in the strict sense.',
+      'Tame subsets 𝓜_I ⊂ 𝔓(R^I) satisfying (M′1)–(M′4), tame functions those with tame graph, R₀ the tame points; R a field with (M11). If Y = ⋂ f_α⁻¹(e_α) for finitely many tame functions f_α on a tame X and e_α ∈ R₀, and tame g_β embed X, then the functions f_α − e_α and (f_α − e_α)·g_β are tame, have Y as common zero set, and separate the points of X ∖ Y: the second half of axiom (M6) follows from the first, and X/Y is a tame space in the strict sense. Pages 10–13: under (M5′), (M6), (M7), pushouts X₁ ⊔_Z X₂ along tame embeddings exist and are computed as in sets, by the criterion of compatible separating tame families.',
     found:
-      'Holds, more generally. The tame functions on a tame space form a ring containing R₀ and the coordinates, by the joint graph of two functions and a composition lemma; only (M′1), (M′2), (M′4) and (M11) b) are used, not (M3), (M5)–(M7), (M11) a) or c), nor finiteness. « Field » can be weakened to « no zero divisors », and cannot be dropped: over ℤ/4 the family 2, 2x does not separate 0 and 2. The edition’s two corrections are both needed: e_α ∈ R₀ (the page has e_α ∈ R) for the translation to e_α = 0, and X ∖ Y (the page has X), since a family vanishing on Y separates no two of its points. Not formalised: the pushouts along tame embeddings of pages 12–13 and the category Σ of tame spaces.',
+      'Holds, more generally. The tame functions on a tame space form a ring containing R₀ and the coordinates, by the joint graph of two functions and a composition lemma; only (M′1), (M′2), (M′4) and (M11) b) are used, not (M3), (M5)–(M7), (M11) a) or c), nor finiteness. « Field » can be weakened to « no zero divisors », and cannot be dropped: over ℤ/4 the family 2, 2x does not separate 0 and 2. The edition’s two corrections are both needed: e_α ∈ R₀ (the page has e_α ∈ R) for the translation to e_α = 0, and X ∖ Y (the page has X), since a family vanishing on Y separates no two of its points. The pushouts hold as stated: the criterion (sufficiency) gives a tame union which is the set-theoretic pushout with the universal property, and (M6), (M7) supply the families by diagram (*), the images meeting exactly along Z; R must be non-empty. Not formalised: the category Σ of tame spaces and the NB for finite diagrams.',
     verdict: 'holds, more generally',
     lean: 'lean/Grothendieck/Folder120.lean',
-    theorems: ['isTameFun_mul', 'isTameFun_sub', 'isTameFun_const', 'isTameFun_coord', 'isTameFun_comp', 'separates_off_zeroSet', 'not_separates_zmod4', 'not_separates_on_zeroSet', 'collapse_separation', 'exists_separating_family', 'exists_separating_family_of_field'],
+    theorems: ['isTameFun_mul', 'isTameFun_sub', 'isTameFun_const', 'isTameFun_coord', 'isTameFun_comp', 'separates_off_zeroSet', 'not_separates_zmod4', 'not_separates_on_zeroSet', 'collapse_separation', 'exists_separating_family', 'exists_separating_family_of_field', 'graph_mem_of_coords', 'pushout_of_criterion', 'pushout_exists'],
   },
   {
     folder: '145',
