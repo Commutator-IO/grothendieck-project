@@ -72,11 +72,15 @@ What is proved:
   `Algebra.FormallySmooth`), Jacobi–Zariski and projectivity of `Ω_{A/k}` would split
   `A ⊗_k Ω_{k/ℚ} → Ω_{A/ℚ}`, and the retraction composed with `d_A` would be such a
   `D`. So `ℚ(x_i)[[t]]` is not formally smooth over `ℚ(x_i)`.
-* `not_formallySmooth_of_field` — the same in every characteristic: for a field `K`
-  and any base `R` with `Ω_{K/R}` infinite-dimensional, `K[[t]]` is not formally
-  smooth over `K` for the discrete topology. Neither characteristic 0 nor the choice
-  of `ℚ(x_i)` is used: only a basis of `Ω` containing infinitely many `d aₙ`, which
-  over a field can always be extracted from the spanning family `(da)`.
+* `not_formallySmooth_of_field`, `no_derivation_of_field` — the Proposition of page 23,
+  which the second transcription pass reads in full: for a field `K` over a base `R` (the
+  page's `k`) with `Ω_{K/R}` of infinite dimension, `K[[t]]` with the discrete topology is
+  not formally smooth over `K`, and, « plus précisément », no derivation
+  `K[[t]] → K[[t]] ⊗_K Ω_{K/R}` induces `d_{K/R}`. Neither characteristic 0 nor the
+  choice of `ℚ(x_i)` is used: only a basis of `Ω` containing infinitely many `d aₙ`, which
+  over a field can always be extracted from the spanning family `(da)`. The page has
+  `n > 0` variables; only `n = 1` is formalised. Its « a fortiori … sur k » rests on a
+  relative notion the folder does not define and is not formalised.
 
 **What the formalisation finds.**
 
@@ -92,10 +96,12 @@ What is proved:
   hypothesis is strictly stronger.
 * Lemme 3.3 holds over any commutative ring with no further hypothesis, as
   stated.
-* The obstruction holds as the reading states it, and the step pages 22–23 carry
-  in illegible prose (the reduction to `D(t) = 0` through a finitely generated
-  subfield `k_0`) is not needed. The conclusion holds for every field with
-  infinite-dimensional `Ω`, in every characteristic, over any base ring.
+* The obstruction holds as the reading states it, and the step pages 22–23 carry out
+  (the reduction to `D(t) = 0` through a finitely generated subfield `k_0`, or `K'`) is
+  not needed. The conclusion holds for every field with infinite-dimensional `Ω`, in
+  every characteristic, over any base ring, which is the page 23 Proposition. Page 24
+  chooses `aₙ` with `d_{K/k} aₙ ≠ 0`, too weak for the construction; the struck
+  « `D_{iₙ}(aₙ) ≠ 0` » is what `no_derivation` uses (`D(aₙ) = 1 ⊗ b(iₙ)`).
 * Pages 26 and 28 (finding `22-differentials-kernel-counterexample`): the counterexample
   holds, in the page's own specialisation `a_i = 0` for `2 ≤ i ≤ p − 1`, for every prime `p`
   (`contre_exemple_page26`). With `K = 𝔽_p(x, b₀, b₁)`, `y = b₀ᵖ + b₁ᵖ x`, `k = 𝔽_p(x, y)` and
@@ -477,6 +483,23 @@ theorem not_formallySmooth_of_field (R K : Type*) [CommRing R] [Field K] [Algebr
   choose a ha using fun n => hs (e n).2
   exact not_formallySmooth_of_basis R K b e e.injective a fun n => by
     rw [ha, Module.Basis.mk_apply]
+
+/-- **The Proposition of page 23**, in the form « plus précisément » of the reading: for a
+field `K` over a base `R` (the page's `k`) with `Ω_{K/R}` infinite-dimensional, no derivation
+`D : K⟦t⟧ → K⟦t⟧ ⊗_K Ω_{K/R}` induces `d_{K/R}` on `K`. -/
+theorem no_derivation_of_field (R K : Type*) [CommRing R] [Field K] [Algebra R K]
+    (h : ¬ Module.Finite K Ω[K⁄R]) :
+    ¬ ∃ D : Derivation R K⟦X⟧ (K⟦X⟧ ⊗[K] Ω[K⁄R]),
+      ∀ c, D (C c) = 1 ⊗ₜ KaehlerDifferential.D R K c := by
+  rintro ⟨D, hD⟩
+  obtain ⟨s, hs, hspan, hli⟩ := exists_linearIndependent K (Set.range (KaehlerDifferential.D R K))
+  let b : Module.Basis s K Ω[K⁄R] := Module.Basis.mk hli (by
+    rw [Subtype.range_coe, hspan, KaehlerDifferential.span_range_derivation])
+  have : Infinite s := not_finite_iff_infinite.mp fun _ => h (.of_basis b)
+  let e := Infinite.natEmbedding s
+  choose a ha using fun n => hs (e n).2
+  exact no_derivation b e e.injective a D fun n => by
+    rw [hD, ha, Module.Basis.mk_apply]
 
 end Discrete
 
