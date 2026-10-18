@@ -24,6 +24,19 @@ export interface Proof {
 
 export const PROOFS: Proof[] = [
   {
+    folder: '50',
+    batch: 1,
+    page: '6–10',
+    name: 'The trace formula in the axiomatic frame',
+    statement:
+      'In the frame of pages 6–10 (duality, antisymmetric classes, cones N⁺ and N^>, an r-linear integer intersection form I, a degree ν with I(u*ξ₁, …, u*ξᵣ) = ν(u)I(ξ₁, …, ξᵣ)), ν(α + n) is a monic polynomial of degree 2r in n whose coefficients σᵢ(α) give tr(α) = r·I(ξ^{r−1}, D_ξ(α))/I(ξ^r); the Corollaire of page 6, read as Rosati positivity.',
+    found:
+      'The polynomial is well defined and monic of degree 2r with constant term ν(α), and ν is multiplicative. The trace formula needs I symmetric, which axiom (e) does not say: in a model of all the axioms with I(x, y) = x₁y₂ it fails in either slot. Rosati positivity does not follow from the axioms, even with I(ξ^{r−1}, η) > 0 on N⁺ ∖ 0: in ℍ[ℤ, 0, 0, 0], i ≠ 0 and tr(i′i) = 0. It follows if also α ≠ 0 ⇒ α*ξ ≠ 0. Page 6 writes α*ξ beside tr(αα′); the axioms give it beside tr(α′α). Not formalised: the category, Propriété fondamentale 1, pages 2 and 4.',
+    verdict: 'the reading dropped a hypothesis',
+    lean: 'lean/Grothendieck/Folder50.lean',
+    theorems: ['tr_mul_I', 'charPoly_unique', 'charPoly_monic', 'nu_mul', 'tr_star_mul_self_mul_I', 'not_trace_formula', 'tr_star_i_mul_i', 'tr_star_mul_self_pos'],
+  },
+  {
     folder: '42',
     batch: 1,
     page: '3–5',
