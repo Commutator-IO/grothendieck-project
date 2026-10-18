@@ -187,6 +187,12 @@
 % — spine: Voight 2016, Thm C / 4.3, cited for the classification of quadratic
 %   covers (affine, free), as the folder-84 pass read it.
 % No facsimile check since 2026-10-10.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — pp. 94-98: footnotes on the
+%   Lean check of the sphere as Weil restriction (lean/Grothendieck/Folder77.lean)
+%   on a field of characteristic != 2, E the pure quaternions of (a, b):
+%   (21 bis), f surjective with fibres the G_m^{S[i]}-orbits, with an explicit
+%   inverse t -> x - i tx and no étale localisation, and the lemma of p. 98
+%   over any such field. Scheme-level and twisted versions not formalised.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -1560,7 +1566,11 @@ $-ab\,\varphi(x, y)$. Il est nul ici.}. Il définit un ouvert $U =
 \[
   (21\,\text{bis}) \qquad q([x, y]) = -4\, q(x)\, q(y) + \varphi(x, y)^2
 \]
-\footnote{Vérifié pour $\gamma M$ des matrices $2 \times 2$ de trace nulle. La page
+\footnote{Vérifié en Lean (lean/Grothendieck/Folder77.lean,
+\texttt{qf\_commutator}) sur tout corps de caractéristique $\neq 2$, pour $E$ la
+partie pure d'une algèbre de quaternions $(a, b)$ et $q(u) = u^2$, qui est
+$-\det u$ sur les éléments de trace nulle ; les matrices $2 \times 2$ sont le
+cas $a = b = 1$. La page
 l'écrit d'abord $-4q(x)q(y)\sin^2(\widehat{x, y})$ avec $\sin^2 = 1 - \frac{1}{4}
 \varphi^2/q(x)q(y)$, la marge avertissant : « attention au signe et au facteur
 $4$ ! »}, de sorte que, sur $\tilde{U}$, $q([x, y]) = -4q(x)^2$, et, si $2$ est
@@ -1583,7 +1593,18 @@ des $[x', y']/2q(x')$ force $\lambda = 1$ : $\xi' = (a + \mathbf{i}b)\xi$.
 \emph{Épimorphisme.} Pour $t \in \Sigma$, $t^{\perp}$ est un plan supplémentaire de
 $\mathcal{O}_S t$ où $q$ est non dégénérée ; localement pour la topologie étale il a une
 base orthonormée $(x, y)$, et $\tilde{f}(x + \mathbf{i}\lambda y) = t$ pour le signe
-convenable $\lambda = \pm 1$.
+convenable $\lambda = \pm 1$\footnote{Sur un corps de caractéristique $\neq 2$,
+la proposition est vérifiée en Lean (lean/Grothendieck/Folder77.lean,
+\texttt{sphere\_quotient}) : $\tilde{f}$ envoie $\tilde{U}$ sur $\Sigma$, et deux
+couples ont la même image si et seulement s'ils diffèrent par un $c + \mathbf{i}d$,
+$c^2 + d^2 \neq 0$. La surjectivité n'y demande aucune localisation étale, et
+l'inverse est explicite : pour $t \in \Sigma$ et tout $x$ orthogonal à $t$ avec
+$q(x) \neq 0$, on a $\tilde{f}(x - \mathbf{i}\,tx) = t$, et tout $y$ tel que
+$(x, y) \in \tilde{U}$ ait pour image $t$ est $-tx$. L'injectivité modulo
+l'action vient de ce que $t$, $x$, $tx$ forment une base orthogonale de $E$.
+Sur une base quelconque, il faut encore un $x$ orthogonal à $t$ avec $q(x)$
+inversible, qu'on trouve localement ; la version schématique n'est pas
+formalisée.}.
 
 \textbf{Corollaire.} Si $2$ est inversible, $g = f^{-1}$ est une immersion ouverte
 \[
@@ -1616,7 +1637,11 @@ $\tilde{U}$ (c'est-à-dire $q(x) = q(y) = 0$) si et seulement s'il est de la for
 \mathbf{i}b)x_0$ avec $q(x_0) = 0$ et $a^2 + b^2 \neq 0$. En effet $x$ et $y$
 engendrent alors un sous-espace totalement isotrope d'une forme régulière de rang
 $3$, donc $y = \lambda x$ avec $\lambda^2 \neq -1$, et $x + \mathbf{i}y = (1 +
-\mathbf{i}\lambda)x$ ; la réciproque est immédiate. « O.K.… »
+\mathbf{i}\lambda)x$ ; la réciproque est immédiate. « O.K.… »\footnote{Le
+lemme est vérifié en Lean (lean/Grothendieck/Folder77.lean, \texttt{hors\_de\_U})
+sur un corps quelconque de caractéristique $\neq 2$, non nécessairement
+algébriquement clos : si $x + \mathbf{i}y$ est isotrope, non nul, et $q(x) = 0$,
+alors $x = c\,x_0$ et $y = d\,x_0$ avec $q(x_0) = 0$.}
 
 La suite de la page 99 essaie la caractéristique $2$ — $\mathbf{i} = 1 + \varepsilon$,
 $X^{S[\mathbf{i}]}$ devient le fibré tangent à $X$ — et est barrée. La page 97 (barrée)
