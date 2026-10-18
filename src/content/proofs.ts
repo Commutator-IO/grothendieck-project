@@ -533,15 +533,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '93',
     batch: 6,
-    page: '72, 115–123',
-    name: 'The Schwarzian with divided derivatives',
+    page: '72, 115–123, 233–235',
+    name: 'The Schwarzian with divided derivatives; the derived morphism defined by a torsor',
     statement:
-      'With Hasse derivatives D⁽ᵏ⁾ on R[X], over any commutative ring, G₀ = −D⁽³⁾s/D⁽¹⁾s + (D⁽²⁾s/D⁽¹⁾s)² satisfies G = 12 G₀, the cocycle relation for composition and invariance under homographies; in characteristic p the functions killed by D⁽¹⁾, D⁽²⁾, D⁽³⁾ are the polynomials in X^p for p > 3, in X⁴ for p = 2 and in X⁹ for p = 3.',
+      'With Hasse derivatives D⁽ᵏ⁾ on R[X], over any commutative ring, G₀ = −D⁽³⁾s/D⁽¹⁾s + (D⁽²⁾s/D⁽¹⁾s)² satisfies G = 12 G₀, the cocycle relation for composition and invariance under homographies; in characteristic p the functions killed by D⁽¹⁾, D⁽²⁾, D⁽³⁾ are the polynomials in X^p for p > 3, in X⁴ for p = 2 and in X⁹ for p = 3. Pages 233–235: a torsor P under G with u : P → Hom⁰(K′, K″), k : G → Hom⁻¹ and u(g + p) − u(p) = dk(g) + k(g)d define, through [G → Ḡ] ≃ ℤ, one morphism K′ → K″ in the derived category.',
     found:
-      'G₀ is defined in characteristics 2 and 3, and the cocycle needs no unit hypothesis once denominators are cleared. In characteristic 2, translating by t² changes G₀, and by t³ in characteristic 3, so level p² is needed there. The test value of p. 72 is 1/(4t²), as the reading corrects, not 1/(2t). The rigidity of pp. 121–123 holds in A[T]/(T^n) for α = 0 over any ring of characteristic p, with no Pic(A) hypothesis; the homography has a unit determinant, and the page’s added normalisation ad − bc = 1 is false (s = 2t over 𝔽₅). The reduction from α ≠ 0 is not proved. The general characteristic-p criterion for vanishing Hasse derivatives is proposed to mathlib (leanprover-community/mathlib4#44736), with the Lucas divisibility lemma it uses (#44735).',
+      'G₀ is defined in characteristics 2 and 3, and the cocycle needs no unit hypothesis once denominators are cleared. In characteristic 2, translating by t² changes G₀, and by t³ in characteristic 3, so level p² is needed there. The test value of p. 72 is 1/(4t²), as the reading corrects, not 1/(2t). The rigidity of pp. 121–123 holds in A[T]/(T^n) for α = 0 over any ring of characteristic p, with no Pic(A) hypothesis; the homography has a unit determinant, and the page’s added normalisation ad − bc = 1 is false (s = 2t over 𝔽₅). The reduction from α ≠ 0 is not proved. The general characteristic-p criterion for vanishing Hasse derivatives is proposed to mathlib (leanprover-community/mathlib4#44736), with the Lucas divisibility lemma it uses (#44735). The torsor construction holds for abelian groups: Ḡ built without a point, [G → Ḡ] quasi-isomorphic to ℤ, (k, φ⁰) a morphism of complexes, and the class of u(p) in the homotopy and derived categories independent of p; the sheaf version is not formalised.',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder93.lean',
-    theorems: ['G_eq', 'chain', 'N_comp', 'G0_comp', 'G0_homography', 'killed_iff_two', 'killed_iff_three', 'char_two', 'char_three', 'rigidity_of_gt', 'rigidity_iff_of_gt', 'rigidity_four', 'rigidity_nine', 'rigidity_char_zero', 'det_one_counterexample'],
+    theorems: ['G_eq', 'chain', 'N_comp', 'G0_comp', 'G0_homography', 'killed_iff_two', 'killed_iff_three', 'char_two', 'char_three', 'rigidity_of_gt', 'rigidity_iff_of_gt', 'rigidity_four', 'rigidity_nine', 'rigidity_char_zero', 'det_one_counterexample', 'ι_injective', 'j_eq_zero_iff', 'j_eq_one_iff', 'φ0_ι', 'δ_φ0', 'quotient_map_eq', 'derived_map_eq'],
   },
   {
     folder: '68',

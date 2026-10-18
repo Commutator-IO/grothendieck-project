@@ -5,6 +5,10 @@ import Mathlib.Algebra.CharP.Basic
 import Mathlib.Algebra.Field.ZMod
 import Mathlib.Algebra.Polynomial.Div
 import Mathlib.Data.Nat.Prime.Factorial
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
+import Mathlib.GroupTheory.FreeAbelianGroup
+import Mathlib.Algebra.Torsor.Defs
 
 /-!
 # Folder 93, pages 72, 115–123: the Schwarzian difference with divided derivatives
@@ -634,5 +638,215 @@ theorem det_one_counterexample :
     obtain ⟨v, hv⟩ := det_one_square 2 hdet
       (dvd_trans (pow_dvd_pow X (by norm_num)) h)
     revert v; decide
+
+open CategoryTheory CochainComplex HomComplex
+
+/-! ## Pages 233–235: the derived morphism defined by a torsor
+
+Finding `93-derived-morphism-homotopy-torsor`.
+
+The abelian-group version of pages 234–235: `P` a torsor under an abelian group `G`,
+`u : P → Hom⁰(K', K'')`, `k : G → Hom⁻¹(K', K'')` additive with `u(g + p) − u(p) = δ(k g)`
+(`δ` is Mathlib's differential of the Hom complex, `dk + kd`), and `u(p)` morphisms of complexes.
+
+* `Gbar`, `ι`, `j`, `e`: the extension `0 → G → Ḡ → ℤ → 0` with `j⁻¹(1) = P`, built as a quotient of
+  `G × ℤ[P]` without choosing a point; `ι_injective`, `j_eq_zero_iff`, `j_surjective` (so
+  `𝓛 = [G → Ḡ]` is quasi-isomorphic to `ℤ`), `e_injective`, `j_eq_one_iff` (`j⁻¹(1) = P`).
+* `φ0`, `φ0_e`, `φ0_ι`, `δ_φ0`: `φ⁰ : Ḡ → Hom⁰` with `φ⁰|_P = u`, `φ⁰ ∘ ι = δ ∘ k`, `δ ∘ φ⁰ = 0`:
+  `(k, φ⁰)` is a morphism of complexes `𝓛 → Hom•(K', K'')`.
+* `quotient_map_eq`, `derived_map_eq`: the class of `u(p)` in the homotopy category, and in the
+  derived category, does not depend on `p`; `φ0_of_j_eq_one`: it is the class `φ` gives on
+  `j⁻¹(1)`, the generator of `H⁰(𝓛) = ℤ`.
+
+Not formalised: the sheaf version (where `P` may have no global section and the point is that no
+covering is needed), and the de Rham application. -/
+
+section Torsor
+
+variable (G P : Type*) [AddCommGroup G] [AddTorsor G P]
+
+/-- The relations `e(g + p) − e(p) = g` defining `Ḡ`. -/
+def barRel : AddSubgroup (G × FreeAbelianGroup P) :=
+  AddSubgroup.closure (Set.range fun x : G × P =>
+    ((-x.1, FreeAbelianGroup.of (x.1 +ᵥ x.2) - FreeAbelianGroup.of x.2) : G × FreeAbelianGroup P))
+
+/-- `Ḡ`, the extension of `ℤ` by `G` with `j⁻¹(1) = P`, built without choosing a point. -/
+abbrev Gbar := (G × FreeAbelianGroup P) ⧸ barRel G P
+
+variable {G P}
+
+/-- `G → Ḡ`. -/
+def ι : G →+ Gbar G P := (QuotientAddGroup.mk' _).comp (AddMonoidHom.inl G _)
+
+/-- `P → Ḡ`. -/
+def e (p : P) : Gbar G P := QuotientAddGroup.mk' _ (0, FreeAbelianGroup.of p)
+
+/-- `j : Ḡ → ℤ`. -/
+def j : Gbar G P →+ ℤ :=
+  QuotientAddGroup.lift _ ((FreeAbelianGroup.lift fun _ : P => (1 : ℤ)).comp
+    (AddMonoidHom.snd G _)) (by
+    rw [barRel, AddSubgroup.closure_le]
+    rintro _ ⟨x, rfl⟩
+    simp)
+
+theorem j_ι (g : G) : j (ι (P := P) g) = 0 := by simp [j, ι]
+
+theorem j_e (p : P) : j (e (G := G) p) = 1 := by simp [j, e]
+
+theorem ι_add_e (g : G) (p : P) : ι g + e p = e (g +ᵥ p) := by
+  have h : ((-g, FreeAbelianGroup.of (g +ᵥ p) - FreeAbelianGroup.of p) :
+      G × FreeAbelianGroup P) ∈ barRel G P := AddSubgroup.subset_closure ⟨(g, p), rfl⟩
+  simp only [ι, e, AddMonoidHom.coe_comp, Function.comp_apply, AddMonoidHom.inl_apply,
+    QuotientAddGroup.coe_mk', ← QuotientAddGroup.mk_add, QuotientAddGroup.eq]
+  convert h using 1
+  ext <;> simp
+  abel
+
+/-- A retraction of `ι`, depending on a point `p₀`. -/
+def r (p₀ : P) : Gbar G P →+ G :=
+  QuotientAddGroup.lift _ ((AddMonoidHom.fst G _) +
+    (FreeAbelianGroup.lift fun p : P => p -ᵥ p₀).comp (AddMonoidHom.snd G _)) (by
+    rw [barRel, AddSubgroup.closure_le]
+    rintro _ ⟨x, rfl⟩
+    simp [vadd_vsub_assoc])
+
+theorem r_ι (p₀ : P) (g : G) : r p₀ (ι g) = g := by simp [r, ι]
+
+theorem ι_injective : Function.Injective (ι : G →+ Gbar G P) := by
+  obtain ⟨p₀⟩ := (inferInstance : Nonempty P)
+  exact Function.LeftInverse.injective (r_ι p₀)
+
+/-- Every element of `Ḡ` is `ι g + n • e p₀`. -/
+theorem eq_ι_add (p₀ : P) (x : Gbar G P) : x = ι (r p₀ x) + j x • e p₀ := by
+  let dif : Gbar G P →+ Gbar G P :=
+    AddMonoidHom.id _ - (ι.comp (r p₀) + (zmultiplesHom _ (e p₀)).comp j)
+  have hD : dif = 0 := by
+    refine QuotientAddGroup.addMonoidHom_ext _ ?_
+    set dif' := dif.comp (QuotientAddGroup.mk' (barRel G P))
+    have h1 : dif'.comp (AddMonoidHom.inl _ _) = 0 := by
+      ext g
+      simp [dif', dif, r, ι, j]
+    have h2 : dif'.comp (AddMonoidHom.inr _ _) = 0 := by
+      ext p
+      have h3 := ι_add_e (p -ᵥ p₀) p₀
+      rw [vsub_vadd] at h3
+      simp only [dif', dif, AddMonoidHom.coe_comp, Function.comp_apply, AddMonoidHom.inr_apply,
+        AddMonoidHom.sub_apply, AddMonoidHom.id_apply, AddMonoidHom.add_apply,
+        AddMonoidHom.zero_apply]
+      change e p - (ι (r p₀ (e p)) + zmultiplesHom _ (e p₀) (j (e p))) = 0
+      rw [j_e, ← h3, map_add, r_ι]
+      simp [r, e]
+    ext y
+    have hy : y = (AddMonoidHom.inl _ _ y.1) + (AddMonoidHom.inr _ _ y.2) := by ext <;> simp
+    rw [AddMonoidHom.zero_comp, AddMonoidHom.zero_apply, hy, map_add,
+      ← AddMonoidHom.comp_apply dif' (AddMonoidHom.inl _ _),
+      ← AddMonoidHom.comp_apply dif' (AddMonoidHom.inr _ _), h1, h2]
+    simp
+  have := congrArg (· x) hD
+  simpa [dif, sub_eq_zero] using this
+
+/-- The complex `𝓛 = [G → Ḡ]` is quasi-isomorphic to `ℤ`: `ι` is injective (above), its image is
+the kernel of `j`, and `j` is onto. -/
+theorem j_eq_zero_iff (x : Gbar G P) : j x = 0 ↔ ∃ g, ι g = x := by
+  obtain ⟨p₀⟩ := (inferInstance : Nonempty P)
+  refine ⟨fun h => ⟨r p₀ x, ?_⟩, fun ⟨g, hg⟩ => hg ▸ j_ι g⟩
+  conv_rhs => rw [eq_ι_add p₀ x, h, zero_zsmul, add_zero]
+
+theorem j_surjective : Function.Surjective (j : Gbar G P →+ ℤ) := by
+  obtain ⟨p₀⟩ := (inferInstance : Nonempty P)
+  exact fun n => ⟨n • e p₀, by rw [map_zsmul, j_e, smul_eq_mul, mul_one]⟩
+
+theorem r_e (p₀ p : P) : r p₀ (e (G := G) p) = p -ᵥ p₀ := by simp [r, e]
+
+/-- `j⁻¹(1) = P`: `e` is a bijection of `P` onto `j⁻¹(1)`. -/
+theorem e_injective : Function.Injective (e : P → Gbar G P) := by
+  obtain ⟨p₀⟩ := (inferInstance : Nonempty P)
+  intro p p' h
+  have := congrArg (r p₀) h
+  rw [r_e, r_e] at this
+  rw [← vsub_vadd p p₀, this, vsub_vadd]
+
+theorem j_eq_one_iff (x : Gbar G P) : j x = 1 ↔ ∃ p, e p = x := by
+  obtain ⟨p₀⟩ := (inferInstance : Nonempty P)
+  refine ⟨fun h => ⟨r p₀ x +ᵥ p₀, ?_⟩, fun ⟨p, hp⟩ => hp ▸ j_e p⟩
+  rw [← ι_add_e]
+  conv_rhs => rw [eq_ι_add p₀ x, h, one_zsmul]
+
+section Complex
+
+open CategoryTheory
+
+variable {C : Type*} [Category C] [Preadditive C] {K' K'' : CochainComplex C ℤ}
+  (k : G →+ Cochain K' K'' (-1)) (u : P → Cochain K' K'' 0)
+  (hu : ∀ (g : G) (p : P), u (g +ᵥ p) - u p = δ (-1) 0 (k g))
+
+/-- `φ⁰ : Ḡ → Hom⁰(K', K'')`, equal to `dk + kd` on `G` and to `u` on `P`. -/
+def φ0 : Gbar G P →+ Cochain K' K'' 0 :=
+  QuotientAddGroup.lift _ ((((δ_hom ℤ K' K'' (-1) 0).toAddMonoidHom.comp k).comp
+      (AddMonoidHom.fst G _)) + (FreeAbelianGroup.lift u).comp (AddMonoidHom.snd G _)) (by
+    rw [barRel, AddSubgroup.closure_le]
+    rintro _ ⟨x, rfl⟩
+    simp only [SetLike.mem_coe, AddMonoidHom.mem_ker, AddMonoidHom.add_apply,
+      AddMonoidHom.coe_comp, Function.comp_apply, AddMonoidHom.coe_fst, AddMonoidHom.coe_snd,
+      map_neg, map_sub, FreeAbelianGroup.lift_apply_of, LinearMap.toAddMonoidHom_coe]
+    rw [hu]
+    simp [δ_hom])
+
+theorem φ0_e (p : P) : φ0 k u hu (e p) = u p := by simp [φ0, e]
+
+/-- `φ⁰ ∘ ι = δ ∘ k`: the square of `φ : 𝓛 → Hom•(K', K'')` in degrees `−1 → 0`. -/
+theorem φ0_ι (g : G) : φ0 k u hu (ι g) = δ (-1) 0 (k g) := by simp [φ0, ι, δ_hom]
+
+variable (hc : ∀ p, δ 0 1 (u p) = 0)
+include hu hc
+
+/-- `δ ∘ φ⁰ = 0`: the square in degrees `0 → 1`, so `φ` is a morphism of complexes. -/
+theorem δ_φ0 (x : Gbar G P) : δ 0 1 (φ0 k u hu x) = 0 := by
+  obtain ⟨p₀⟩ := (inferInstance : Nonempty P)
+  rw [eq_ι_add p₀ x, map_add, map_zsmul, φ0_ι, φ0_e, δ_add, δ_δ, δ_smul, hc, smul_zero,
+    add_zero]
+
+/-- The morphism of complexes `u(p) : K' → K''`. -/
+def homOf' (p : P) : K' ⟶ K'' := Cocycle.homOf (Cocycle.mk (u p) 1 (zero_add 1) (hc p))
+
+/-- `k(p' − p)` is a homotopy from `u(p')` to `u(p)`. -/
+def homotopy (p p' : P) : Homotopy (homOf' u hc p') (homOf' u hc p) :=
+  (Cochain.equivHomotopy _ _).symm ⟨k (p' -ᵥ p), by
+    simp only [homOf', Cocycle.cochain_ofHom_homOf_eq_coe, Cocycle.mk_coe]
+    rw [← hu, vsub_vadd, sub_add_cancel]⟩
+
+/-- **Pages 234–235.** The class of `u(p)` in the homotopy category does not depend on `p`:
+the morphism defined by `(P, u, k)` needs no choice of a point. -/
+theorem quotient_map_eq (p p' : P) :
+    (HomotopyCategory.quotient C (ComplexShape.up ℤ)).map (homOf' u hc p) =
+      (HomotopyCategory.quotient C (ComplexShape.up ℤ)).map (homOf' u hc p') :=
+  (HomotopyCategory.eq_of_homotopy _ _ (homotopy k u hu hc p p')).symm
+
+omit hc in
+/-- The value of `φ⁰` on `j⁻¹(1)` is `u(p)` for some `p`: the class given by `φ` on the
+generator of `H⁰(𝓛) = ℤ` is the class of any `u(p)`. -/
+theorem φ0_of_j_eq_one (x : Gbar G P) (hx : j x = 1) : ∃ p, φ0 k u hu x = u p := by
+  obtain ⟨p, rfl⟩ := (j_eq_one_iff x).1 hx
+  exact ⟨p, φ0_e k u hu p⟩
+
+end Complex
+
+section Derived
+
+open CategoryTheory
+
+variable {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C] {K' K'' : CochainComplex C ℤ}
+  (k : G →+ Cochain K' K'' (-1)) (u : P → Cochain K' K'' 0)
+  (hu : ∀ (g : G) (p : P), u (g +ᵥ p) - u p = δ (-1) 0 (k g)) (hc : ∀ p, δ 0 1 (u p) = 0)
+include hu
+
+/-- The same in the derived category `D(C)`: `(P, u, k)` defines one morphism `K' → K''`. -/
+theorem derived_map_eq (p p' : P) :
+    DerivedCategory.Q.map (homOf' u hc p) = DerivedCategory.Q.map (homOf' u hc p') :=
+  (DerivedCategory.Q_map_eq_of_homotopy (h := homotopy k u hu hc p p')).symm
+
+end Derived
+
+end Torsor
 
 end Grothendieck.Folder93
