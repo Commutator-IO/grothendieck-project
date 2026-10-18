@@ -13,6 +13,15 @@
 % (81-100) or batch-06.fr.tex (101-112).
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — footnotes on the Lean checks
+%   (lean/Grothendieck/Folder72.lean): p. 38, the centraliser of the tau_i and
+%   the torsor D_0** on points over any ring; p. 79, the theorem as stated
+%   over any field, char. 2 included, and Z*_i in Z'_i iff beta_i = 0 (the
+%   margin's « ∈ » right, p. 81's « ∉ » wrong); p. 80, corollary (c);
+%   pp. 91-93 and 102, the classification by (lambda_i, beta_i) and (Ā) <=> (B̄)
+%   without the a'_i nowhere zero. No mathlib result, no literature (findings
+%   unsearched), no facsimile correction. Two « Ce que » headings renamed;
+%   a prose \S that the reading view showed raw written §.
 % The folder was read whole, its six batches together; this is one document
 % for the shelfmark. It was made on Opus 5.5 and has not been measured against
 % the reference reading of folder 115 (made on Opus 5). The literature named
@@ -272,7 +281,7 @@ page 33 a $\beta_i = 4\cos^2\theta_i$ et appelle $\alpha_i$
 a'_i \rangle)$ est, au signe des $a'_i$ près, une matrice de Cartan
 généralisée de type « chaîne », et le produit de ses deux coefficients non
 diagonaux vaut $\beta_i$ : c'est la représentation géométrique de Tits
-(Bourbaki, \emph{Groupes et algèbres de Lie}, ch.~V, \S\,4, 1968), sous la forme
+(Bourbaki, \emph{Groupes et algèbres de Lie}, ch.~V, §\,4, 1968), sous la forme
 plus libre des groupes de Coxeter linéaires de Vinberg (1971). Il pouvait
 connaître Bourbaki et le livre de Coxeter, \emph{Regular Polytopes} ; aucune
 page ne les cite.}.
@@ -325,7 +334,7 @@ $f_\varepsilon$, $\delta_\varepsilon$, pages 41, 42 et 52) est lu ici comme un
 $\mathcal{E}$ cursif : c'est la forme sur $\mathcal{E}$, ce que confirment les
 discriminants de la page 52.}.
 
-\subsection*{Ce que seule une lecture d'ensemble peut dire}
+\subsection*{Une lecture d'ensemble}
 
 Les pages 84 à 105 donnent la raison pour laquelle le reste du dossier peut
 calculer comme il le fait. Le théorème des pages 96 à 100, appliqué dans les
@@ -343,7 +352,7 @@ $\rho \to 0$. La reconnaissance du symbole de Schläfli dans les $\beta_i$, et
 celle de $\rho$ comme un multiple du déterminant de Schläfli, sont de cette
 lecture.
 
-\subsection*{Ce que le dossier annonce sans l'établir}
+\subsection*{Annoncé sans être établi}
 
 La proposition marquée « ?? » de la page 33, et sa suite de la page 34 ; le
 « Théorème » de la page 38, énoncé sans preuve ; l'équivalence de catégories de
@@ -914,7 +923,24 @@ de $D_0$ sont les $s_0 + \lambda\tilde c$ et $\tilde c$, $d$ est le point où
 $\pi(s_0 + \lambda\tilde c) = 1 + \rho\lambda$ s'annule, et $D_0^{**}$ est
 exactement $\{s_0 + \lambda\tilde c : 1 + \rho\lambda \text{ inversible}\} =
 \mathcal{U}_\rho \cdot s_0$. L'isomorphisme est repris, sous forme projective et
-avec la même absence de preuve, aux pages 87 et 88.}.
+avec la même absence de preuve, aux pages 87 et 88.}\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder72.lean, \texttt{forall\_surjective\_iff},
+\texttt{u\_mul}, \texttt{det\_u}, \texttt{commute\_iff},
+\texttt{centraliserEquiv}, \texttt{mem\_startPoints\_iff},
+\texttt{u\_e0\_injective}) sur les points, à valeurs dans un anneau commutatif
+quelconque, dans la base $(s_0, a_0, \ldots, a_n)$ de $E$, sous forme
+vectorielle. Les $\lambda$ avec $1 + \rho\lambda$ inversible forment un groupe
+commutatif pour $*_\rho$ ; $\lambda \mapsto 1 + \rho\lambda$ atteint tous les
+inversibles de toute algèbre si et seulement si $\rho$ est inversible (les
+nombres duaux servent de test). Un endomorphisme de $E$ commute à tous les
+$\tau_i$ si et seulement s'il s'écrit $c + t\,\pi \otimes \tilde c$, de façon
+unique, et il est inversible si et seulement si $c$ et $c + t\rho$ le sont ;
+d'où la bijection $(c, \lambda) \mapsto c\,u_\lambda$ de $R^\times \times
+\mathcal{U}_\rho(R)$ sur les automorphismes de $(E, (\tau_i))$. Les points de
+$D_0$ qui évitent $c$ et $d$, normalisés par $\langle s, a'_0 \rangle = 1$, sont
+exactement les $s_0 + \lambda\tilde c$, chacun pour un seul $\lambda$. Le
+schéma en groupes et sa lissité, et la forme projective sur une base, ne sont
+pas vérifiés.}.
 
 \emph{La forme} (pages 39 à 42). Supposons les $\lambda_i = -1$ : il y a sur $E$
 une forme invariante canonique $f_E$, unique par $f_E(s_0) = 0$, $f_E(a_0) =
@@ -1405,12 +1431,19 @@ aussi à $h_{i+1} \notin H_i$ i.e.\ $\beta_i = 0$ » ; c'est $\in$ qu'il faut,
 $\beta_i = \langle a_{i+1}, a'_i \rangle$ mesurant précisément l'appartenance de
 $h_{i+1}$ à $H_i$. La note de marge de la page 79 a la bonne équivalence. Les
 deux définitions de la page 79 échangent $Z^*_{-1}$ et $Z'_{-1}$ par rapport à
-la chaîne qui suit ; on suit la chaîne.}.
+la chaîne qui suit ; on suit la chaîne.}\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder72.lean, \texttt{Zs\_le\_Zp\_iff}) : pour $i < n$,
+$Z^*_i \subset Z'_i$ si et seulement si $\beta_i = 0$. Le « $\in$ » de la marge
+de la page 79 est juste, le « $\notin$ » de la page 81 ne l'est pas.}.
 
 \emph{Théorème} (page 79). Un sous-espace projectif $Z \subset X$ est invariant
 par $\mathfrak{G}_n$ si et seulement si ou bien $Z$ est l'un de $\emptyset$,
 $X$, $\{c\}$, $C$ ; ou bien il existe $0 \leqslant i \leqslant n-1$ avec $\beta_i
-= 0$, et $Z = Z'_i$ ou $Z = Z^*_i$.
+= 0$, et $Z = Z'_i$ ou $Z = Z^*_i$.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder72.lean, \texttt{invariant\_iff}), sous forme
+vectorielle, dans les coordonnées $(s_0, a_0, \ldots, a_n)$ : le théorème tient
+tel que la page l'énonce, sur tout corps, pour des $\mu_i$ quelconques,
+caractéristique $2$ comprise. La preuve suivie est celle de la page.}
 
 \emph{Démonstration} (pages 81 et 82). $Z$ est invariant par une
 pseudo-réflexion de centre $h$ et cocentre $H$ si et seulement si $h \in Z$ ou $Z
@@ -1436,7 +1469,10 @@ pour $i = 0$ ; si $\rho \neq 0$ ils sont tous distincts. D'où les corollaires :
     $2(n+2)$ si et seulement si tous les $\beta_i$ sont nuls et tous les $\mu_i$
     non nuls ;
   \item[(c)] il y a toujours $\emptyset$, $X$, $\{c\}$, $C$ ; pour que ce soient
-    les seuls, il suffit que tous les $\beta_i$ soient non nuls\footnote{La page
+    les seuls, il suffit que tous les $\beta_i$ soient non nuls\footnote{Ce
+« il suffit » est vérifié en Lean (lean/Grothendieck/Folder72.lean,
+\texttt{invariant\_iff\_of\_ne\_zero}), comme conséquence du théorème ; les
+comptes de (b) et les coïncidences ne le sont pas.}\footnote{La page
     poursuit par « il faut et suffit » avec une condition plus faible, qui
     épargne $\beta_0$ quand $\mu_0 = 0$ et $\beta_{n-1}$ quand $\mu_n = 0$ (en
     caractéristique $2$, seuls les $\beta_i$ intérieurs seraient requis). Les
@@ -1616,7 +1652,19 @@ avec le théorème de la section suivante, ils donnent la classification
 annoncée à la page 13\footnote{Cette conséquence est de cette lecture : dans
 ces coordonnées les conditions (B) du théorème sont satisfaites pour tous
 paramètres ($\nu_n = 1$), et l'on obtient une réalisation non dégénérée pour
-toute valeur des $\beta_i$ et toute valeur inversible des $\lambda_i$.}.
+toute valeur des $\beta_i$ et toute valeur inversible des $\lambda_i$.
+Elle est vérifiée en Lean (lean/Grothendieck/Folder72.lean,
+\texttt{pinned\_classification}, \texttt{pinned\_rigid},
+\texttt{model\_condB}, \texttt{model\_isUnit\_iff}, \texttt{invariants\_eq}),
+sur un anneau commutatif quelconque : une réalisation qui vérifie $(\bar B)$,
+normalisée par $\langle s_0, a'_0 \rangle = 1$ et $\langle a_{i-1}, a'_i \rangle
+= 1$, est isomorphe au modèle en coordonnées de paramètres $\mu_i = \langle a_i,
+a'_i \rangle$, $\beta_i = \langle a_{i+1}, a'_i \rangle$ par un unique
+isomorphisme qui fixe $s_0$ et conjugue les $\tau_i$ ; le modèle vérifie
+$(\bar B)$ pour tous paramètres, $\tau_i$ y est inversible si et seulement si
+$\lambda_i$ l'est, et une application linéaire compatible à $s_0$ et aux
+$\tau_i$ entre deux réalisations normalisées force l'égalité des $(\mu_i,
+\beta_i)$.}.
 
 La page 92, barrée et dont la place dans la suite des feuillets n'est pas sûre,
 renvoie à des formules (5), (8), (9) et à des sous-modules $F_n$ qui sont ceux du
@@ -1773,7 +1821,18 @@ on obtient des conditions équivalentes $(\bar A)$, $(\bar B)$ en renforçant (9
 page écrit (9') « $(a_i)_{0 \leqslant i \leqslant n+1}$ forment une base de $E$ »
 et (12') « $(a'_i)_{-1 \leqslant i \leqslant n}$ forment une base de $E$ » ; les
 indices et le module (les $a'_i$ sont des formes) indiquent la lecture
-ci-dessus, qui est celle de (26).}.
+ci-dessus, qui est celle de (26).}\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder72.lean, \texttt{condA\_iff\_condB}) pour
+$\mathcal{E}$ libre de rang $n+2$ sur un anneau commutatif quelconque :
+$(\bar A)$ équivaut à $(\bar B)$, et sans supposer les $a'_i$ partout non
+nulles. Sous $(\bar A)$, $s_{i+1} - s_i = \langle s_i, a'_i \rangle a_i$ dans
+une base force $\langle s_i, a'_i \rangle$ à être inversible, et c'est ce que
+l'argument de commutation de 2°) utilise à la place de cette hypothèse ; sous
+(10) et (11), $\langle s_i, a'_i \rangle = \nu_i$, et dans les deux sens la
+matrice de passage est triangulaire à diagonale inversible. La forme générale de
+(A) $\Leftrightarrow$ (B), avec « libre » au sens d'un facteur direct, le cas
+d'un module localement libre non libre et l'existence locale de $s_0$ des
+pages 102 à 105 ne sont pas vérifiés.}
 
 \emph{Proposition} (pages 102 et 103). Soient $\mathcal{E}$ localement libre de rang
 $n+2$ et $z_i = \mathrm{id} + a'_i \otimes a_i$ ($0 \leqslant i \leqslant n$) des
