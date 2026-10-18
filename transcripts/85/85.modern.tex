@@ -35,6 +35,14 @@
 % Rigidity and representability (pp. 4, 40) remain unverified. No mathlib
 % result is invoked; no finding records a literature reference read; no
 % facsimile check postdates the first pass.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — pp. 16-20, after the Lean
+%   check of the D_infty representations (lean/Grothendieck/Folder85.lean):
+%   the classification of p. 17 as read (torsors under U_{2-alpha}) is false
+%   — over Q, alpha = -6 carries two non-conjugate representations; over a
+%   field the classes are alpha plus the square class of det t_0, i.e.
+%   torsors under 2U_rho, as the automorphism group of p. 19 (confirmed)
+%   requires; Cor. 3 corrected accordingly; « u^2 != 1 iff alpha + 2
+%   invertible » is only an implication; a « Ce que » heading renamed.
 %
 % The transcription is thin. About eighteen \ill/\uncertain per page on
 % average; the prose is largely lost on pp. 2, 12-21 (the run on G_1), 44,
@@ -279,7 +287,7 @@ dossier 82 (page 33) supposait de $\Psi_n$.}. Sans indice, $\rho$ désigne un
 \emph{discriminant} au sens du dossier 72 : $2 - \alpha$ pour un polygone
 (pages 17 à 20), $-2(\alpha_0 + \alpha_1)$ pour un polyèdre (page 75).
 
-\textbf{Ce que le dossier annonce et n'établit pas.} Les « généralités » de
+\textbf{Annoncé dans le dossier, non établi.} Les « généralités » de
 la page 5 sur les $2$-polyèdres réguliers épinglés (elles sont, en substance,
 celles des dossiers 70 et 72) ; la structure de torseur de la page 18, dans
 la partie perdue ; l'élimination des types $(5, 3, 5')$ et $(3, 5, 5')$ de la
@@ -742,10 +750,52 @@ quasi-inverse est incertaine ; on ne lit pas ce que sont $c$ et $d$. La page
 17 écrit « si $R$ est un torseur sous $G_\alpha$ » : c'est sous
 $\mathcal{U}_{2-\alpha}$, comme dans l'énoncé de $C'$.}.
 
+Tel que nous le lisons, cet énoncé est faux, et c'est la classification qu'il
+faut corriger : les classes de $C$ correspondent, pour $\alpha$ fixé, aux
+torseurs sous ${}_2\mathcal{U}_{2-\alpha}$, le groupe des automorphismes que
+donne la page 19, et non aux torseurs sous $\mathcal{U}_{2-\alpha}$. Pour le
+groupe déployé sur un corps $K$, deux représentations sont conjuguées dans
+$\mathrm{PGL}_2(K)$ si et seulement si elles ont le même invariant $\alpha$
+et si $\det t_0$ et $\det s_0$ diffèrent d'un carré de $K^\times$ : la classe
+est repérée par un élément de $K^\times/K^{\times 2} = H^1(K, \mu_2)$. Une
+valeur $\delta = -\det t_0$ est atteinte si et seulement si elle est non nulle
+et représentée par la forme $p^2 + (\alpha + 2)pr + (\alpha + 2)r^2$. Sur
+$\mathbf{Q}$, pour $\alpha = -6$, $\rho = 8$ est inversible,
+$\mathcal{U}_\rho \simeq \mathbb{G}_m$ n'a pas de torseur non trivial, et
+pourtant il y a deux classes\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder85.lean, \texttt{dinfty\_conj\_iff},
+\texttt{exists\_dinfty\_iff} et \texttt{dinfty\_not\_conj\_rat}), pour le
+groupe déployé sur un corps, caractéristique $2$ comprise. Le critère de
+conjugaison est le théorème 90 de Hilbert pour l'algèbre $K[u]$, qui peut être
+un corps, $K \times K$ ou $K[\varepsilon]$. Les deux représentations de
+$\mathbf{Q}$ sont $\bigl(\mathrm{diag}(1, -1),
+\bigl(\begin{smallmatrix} 1 & 1 \\ -2 & -1 \end{smallmatrix}\bigr)\bigr)$ et
+$\bigl(\bigl(\begin{smallmatrix} 0 & 1 \\ -1 & 0 \end{smallmatrix}\bigr),
+\bigl(\begin{smallmatrix} 1 & 0 \\ 2 & -1 \end{smallmatrix}\bigr)\bigr)$ : même
+trace $2$ et même déterminant $-1$ pour $u$, mais $\det t_0 = -1$ et $1$, et
+$-1$ n'est pas un carré. Ce n'est pas un défaut de la page seule : le passage
+des pages 16 à 18 qui construit le torseur est en grande partie illisible, et
+c'est la lecture qui a écrit « torseur sous $\mathcal{U}_{2-\alpha}$ » ; la
+page 19, qui donne ${}_2\mathcal{U}_\rho$ pour les automorphismes, est en
+accord avec la forme corrigée. Les formes non déployées de $\mathrm{PGL}_2$ et
+les bases autres qu'un corps ne sont pas formalisées.}. La même contradiction
+se voit sur les automorphismes : ceux d'un objet $(\alpha, R)$ de $C'$ forment
+$\mathcal{U}_\rho(S)$, infini dans cet exemple, quand ceux d'un objet de $C$
+forment ${}_2\mathcal{U}_\rho \simeq \mu_2$. Enfin « $u_s^2 \neq 1$,
+c'est-à-dire $\alpha + 2$ inversible » est une implication et non une
+équivalence : $t_1 = t_0$ donne $u = 1$ et $\alpha = 2$\footnote{Remarque de
+l'édition, faite en Lean (lean/Grothendieck/Folder85.lean).}.
+
 On a $\underline{\mathrm{Aut}}(G, \varphi) \simeq {}_2\mathcal{U}_\rho$, le
 sous-groupe des points d'ordre divisant $2$, $\rho = 2 - \alpha$ (page 19) :
 le centralisateur de $\varphi(\mathbb{D}_\infty)$ est formé des éléments de
-l'image de $\mathcal{U}_\rho$ que $t_0$ inverse et fixe à la fois.
+l'image de $\mathcal{U}_\rho$ que $t_0$ inverse et fixe à la fois\footnote{Vérifié en Lean (lean/Grothendieck/Folder85.lean,
+\texttt{centralizer\_iff} et \texttt{det\_commD}) pour le groupe déployé sur
+un corps où $2 \neq 0$ : le centralisateur de $\{t_0, t_1\}$ dans
+$\mathrm{PGL}_2(K)$ est formé de $1$ et de la classe du commutateur
+$c = t_0t_1 - t_1t_0$, de déterminant $\det u \cdot (2 - \alpha)$ ; il a deux
+éléments si $\alpha \neq 2$, un seul si $\alpha = 2$, comme le disent les
+corollaires 1 et 2.}.
 
 \textbf{Corollaire 1.} Si $\rho = 2 - \alpha$ est inversible, $\mathcal{U}_\rho
 \xrightarrow{\sim} \mathbb{G}_m$ par $\lambda \mapsto 1 + \lambda\rho$ ; son
@@ -766,7 +816,9 @@ portaient d'abord trois cas 1) à 3), barrés.}.
 \times \gamma$, la catégorie des $(G, \varphi : \Gamma \to G(S))$ à restriction
 non dégénérée est équivalente à celle des triples $(\alpha, R, \varphi_0)$,
 $\alpha + 2$ inversible, $R$ torseur sous $\mathcal{U}_\rho$, $\varphi_0 :
-\gamma \to ({}_2\mathcal{U}_\rho)(S)$ un homomorphisme\footnote{Page 20, la
+\gamma \to ({}_2\mathcal{U}_\rho)(S)$ un homomorphisme\footnote{Ce corollaire
+hérite de l'erreur du théorème de la page 17 : $R$ doit y être un torseur sous
+${}_2\mathcal{U}_\rho$, non sous $\mathcal{U}_\rho$.}\footnote{Page 20, la
 page écrit $\mathcal{U}_{\rho = \alpha - 2}$ ; les pages 17 et 19 posent $\rho
 = 2 - \alpha$, qu'on suit.}.
 
