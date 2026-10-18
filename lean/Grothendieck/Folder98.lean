@@ -93,12 +93,8 @@ theorem hasDeg_pullback {u : X → Y} {r : ℕ} (hu : HasDeg u r) {Y' : Type*} (
   refine hasDeg_of_finset (fun y' => (fib hu (f y')).attach.map
     ⟨fun x => ⟨(x.1, y'), (mem_fib hu).1 x.2⟩, fun a b h => Subtype.ext (by
       simpa using congrArg (fun p : Pullback u f => p.1.1) h)⟩) (fun y' p => ?_) fun y' => ?_
-  · constructor
-    · simp only [Finset.mem_map, Finset.mem_attach, true_and]
-      rintro ⟨x, rfl⟩; rfl
-    · rintro rfl
-      simp only [Finset.mem_map, Finset.mem_attach, true_and]
-      exact ⟨⟨p.1.1, (mem_fib hu).2 p.2⟩, rfl⟩
+  · simp only [Finset.mem_map, Finset.mem_attach, true_and]
+    exact ⟨by rintro ⟨x, rfl⟩; rfl, by rintro rfl; exact ⟨⟨p.1.1, (mem_fib hu).2 p.2⟩, rfl⟩⟩
   · simp [card_fib]
 
 /-- (iv), (iv bis): `deg (u₁, u₂) = deg u₁ + deg u₂`. -/
