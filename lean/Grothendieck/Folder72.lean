@@ -19,8 +19,8 @@ pages.
 `⟨a_{i−1}, a'ᵢ⟩ = 1`, `⟨aᵢ, a'ᵢ⟩ = μᵢ`, `⟨a_{i+1}, a'ᵢ⟩ = βᵢ`, all other
 pairings `0` (the conventions of the reading). Here `a'ᵢ = F i`, so
 `F i x = x_i + μᵢ x_{i+1} + βᵢ x_{i+2}`, and `π` is the coordinate `x₀`. By the theorem
-of pages 96–100, every pinned non-degenerate realisation is isomorphic to this
-one.
+of pages 96–100 (`pinned_classification` below), every pinned non-degenerate
+realisation is isomorphic to this one.
 
 * `U ρ`: the `R`-points of `𝒰_ρ`, a commutative group; `toUnits : λ ↦ 1 + ρλ`
   is an isomorphism onto `Rˣ` when `ρ` is a unit (`toUnitsEquiv`), and
@@ -935,5 +935,432 @@ theorem invariant_iff_of_ne_zero (hβ : ∀ i < n, β' i ≠ 0) (W : Submodule K
       Or.inr (Or.inr (Or.inr (Or.inl h)))]
 
 end Invariant
+
+/-! ## Pinned realisations over a ring (pages 91–105)
+
+Finding `72-pinned-realisations-over-base`, reading sections XV–XVI. Over a
+commutative ring `k`, for a `k`-module `M`, pseudo-reflections
+`τᵢ = id + a'ᵢ ⊗ aᵢ` (`ps`), a start vector `s₀`, `s_{i+1} = τᵢ sᵢ` (`sv`) and
+`νᵢ = ⟨s₀, a'₀⟩⟨a₀, a'₁⟩⋯⟨a_{i−1}, a'ᵢ⟩`:
+
+* `condA_iff_condB` (the theorem of pages 96–100, in the form (Ā) ⇔ (B̄) of the
+  remark of page 102): « non-consecutive `τᵢ` commute, `τᵢ s₀ = s₀` for `i ≥ 1`,
+  `(s₀, …, s_{n+1})` a basis » iff « `⟨aᵢ, a'ⱼ⟩ = 0` for `i, j` non-consecutive,
+  `⟨s₀, a'ᵢ⟩ = 0` for `i ≥ 1`, `(s₀, a₀, …, aₙ)` a basis, `νₙ` a unit ». No
+  strictness of the `a'ᵢ` is assumed: the basis condition forces `⟨sᵢ, a'ᵢ⟩`
+  to be a unit.
+* `pinned_classification`: a realisation satisfying (B̄), normalised by
+  `⟨s₀, a'₀⟩ = 1` and `⟨a_{i−1}, a'ᵢ⟩ = 1`, is isomorphic, by a linear
+  isomorphism sending `s₀` to `e₀` and conjugating the `τᵢ`, to the coordinate
+  model `τ n μ β` above with `μᵢ = ⟨aᵢ, a'ᵢ⟩`, `βᵢ = ⟨a_{i+1}, a'ᵢ⟩`;
+  `pinned_rigid`: the isomorphism is unique.
+* `invariants_eq`: a linear map compatible with `s₀` and the `τᵢ` between two
+  normalised realisations forces equal `(μᵢ, βᵢ)`.
+* `model_condB`: the model satisfies (B̄), normalised, for all `μ`, `β`;
+  `model_isUnit_iff`: `τᵢ` is invertible iff `λᵢ = 1 + μᵢ` is a unit. Hence the
+  classification by the `2n + 1` parameters `(λ₀, β₀, …, β_{n−1}, λₙ)`,
+  `λᵢ` units, `βᵢ` arbitrary (margin of page 13).
+
+Not formalised: the local existence of the start vector (pages 102–105), the
+locally free (non-free) case, the projective version.
+-/
+
+section Pinned
+
+open Module
+
+variable {k : Type*} [CommRing k] {M : Type*} [AddCommGroup M] [Module k M]
+
+/-- The pseudo-reflection `τᵢ = id + a'ᵢ ⊗ aᵢ`. -/
+def ps (a : ℕ → M) (a' : ℕ → Module.Dual k M) (i : ℕ) : Module.End k M :=
+  1 + (a' i).smulRight (a i)
+
+/-- `s₀`, `s_{i+1} = τᵢ sᵢ`. -/
+def sv (a : ℕ → M) (a' : ℕ → Module.Dual k M) (s0 : M) : ℕ → M
+  | 0 => s0
+  | i + 1 => ps a a' i (sv a a' s0 i)
+
+/-- `νᵢ = ⟨s₀, a'₀⟩⟨a₀, a'₁⟩⋯⟨a_{i−1}, a'ᵢ⟩`. -/
+def ν (a : ℕ → M) (a' : ℕ → Module.Dual k M) (s0 : M) : ℕ → k
+  | 0 => a' 0 s0
+  | i + 1 => ν a a' s0 i * a' (i + 1) (a i)
+
+/-- The family `(s₀, a₀, a₁, …)`. -/
+def av (a : ℕ → M) (s0 : M) : ℕ → M
+  | 0 => s0
+  | i + 1 => a i
+
+variable (k) in
+/-- A family indexed by `Fin m` is a basis. -/
+def IsBasisFam {m : ℕ} (f : Fin m → M) : Prop :=
+  LinearIndependent k f ∧ Submodule.span k (Set.range f) = ⊤
+
+/-- Conditions (Ā): (7), (8) and `(s₀, …, s_{n+1})` a basis. -/
+def CondA (n : ℕ) (a : ℕ → M) (a' : ℕ → Module.Dual k M) (s0 : M) : Prop :=
+  (∀ i j, i + 2 ≤ j → j ≤ n → ps a a' i * ps a a' j = ps a a' j * ps a a' i) ∧
+  (∀ i, 1 ≤ i → i ≤ n → ps a a' i s0 = s0) ∧
+  IsBasisFam k (fun j : Fin (n + 2) => sv a a' s0 j)
+
+/-- Conditions (B̄): (10), (11), `(s₀, a₀, …, aₙ)` a basis, (13). -/
+def CondB (n : ℕ) (a : ℕ → M) (a' : ℕ → Module.Dual k M) (s0 : M) : Prop :=
+  (∀ i j, i + 2 ≤ j → j ≤ n → a' j (a i) = 0 ∧ a' i (a j) = 0) ∧
+  (∀ i, 1 ≤ i → i ≤ n → a' i s0 = 0) ∧
+  IsBasisFam k (fun j : Fin (n + 2) => av a s0 j) ∧
+  IsUnit (ν a a' s0 n)
+
+variable {a : ℕ → M} {a' : ℕ → Module.Dual k M} {s0 : M}
+
+lemma ps_apply (i : ℕ) (x : M) : ps a a' i x = x + a' i x • a i := rfl
+
+lemma sv_succ (i : ℕ) : sv a a' s0 (i + 1) = sv a a' s0 i + a' i (sv a a' s0 i) • a i := rfl
+
+lemma sv_eq_sum (j : ℕ) :
+    sv a a' s0 j = s0 + ∑ m ∈ Finset.range j, a' m (sv a a' s0 m) • a m := by
+  induction j with
+  | zero => simp [sv]
+  | succ j ih => rw [sv_succ, Finset.sum_range_succ, ← add_assoc, ← ih]
+
+/-- Under (10) and (11), `⟨sⱼ, a'ⱼ⟩ = νⱼ` (part 1° of the theorem). -/
+lemma d_eq_ν {n : ℕ} (h10 : ∀ i j, i + 2 ≤ j → j ≤ n → a' j (a i) = 0)
+    (h11 : ∀ i, 1 ≤ i → i ≤ n → a' i s0 = 0) : ∀ j ≤ n, a' j (sv a a' s0 j) = ν a a' s0 j := by
+  intro j
+  induction j with
+  | zero => intro _; rfl
+  | succ j ih =>
+    intro hj
+    rw [sv_eq_sum, map_add, map_sum, h11 (j + 1) (by omega) hj, zero_add, Finset.sum_range_succ,
+      Finset.sum_eq_zero (fun m hm => by
+        rw [map_smul, h10 m (j + 1) (by simp at hm; omega) hj, smul_zero]),
+      zero_add, map_smul, ih (by omega), smul_eq_mul, ν]
+
+lemma isUnit_ν_of_le {n : ℕ} (h : IsUnit (ν a a' s0 n)) : ∀ j ≤ n, IsUnit (ν a a' s0 j) := by
+  intro j hj
+  induction h' : n - j generalizing j with
+  | zero => rwa [show j = n by omega]
+  | succ m ih =>
+    have := ih (j + 1) (by omega) (by omega)
+    rw [ν] at this
+    exact isUnit_of_mul_isUnit_left this
+
+/-- The basis attached to a family that is one. -/
+noncomputable def bas {m : ℕ} {f : Fin m → M} (hf : IsBasisFam k f) : Basis (Fin m) k M :=
+  Basis.mk hf.1 hf.2.ge
+
+lemma bas_apply {m : ℕ} {f : Fin m → M} (hf : IsBasisFam k f) (j : Fin m) : bas hf j = f j :=
+  Basis.mk_apply hf.1 hf.2.ge j
+
+lemma bas_repr {m : ℕ} {f : Fin m → M} (hf : IsBasisFam k f) (j : Fin m) :
+    (bas hf).repr (f j) = Finsupp.single j 1 := by
+  rw [← bas_apply hf j, Basis.repr_self]
+
+/-- A family upper triangular in a basis, with invertible diagonal, is a basis. -/
+lemma isBasisFam_of_tri {m : ℕ} (b : Basis (Fin m) k M) (v : Fin m → M)
+    (hlow : ∀ i j : Fin m, j < i → b.repr (v j) i = 0) (hdiag : ∀ j, IsUnit (b.repr (v j) j)) :
+    IsBasisFam k v := by
+  refine b.is_basis_iff_det.2 ?_
+  rw [b.det_apply, Matrix.det_of_isUpperTriangular (by
+    intro i j h; rw [Basis.toMatrix_apply]; exact hlow i j h)]
+  have : (∏ i, b.toMatrix v i i) = ↑(∏ i, (hdiag i).unit) := by
+    simp [Units.coe_prod, Basis.toMatrix_apply]
+  rw [this]; exact Units.isUnit _
+
+lemma single_apply_fin {m : ℕ} (i j : Fin m) (c : k) :
+    Finsupp.single i c j = if (i : ℕ) = j then c else 0 := by
+  simp [Finsupp.single_apply, Fin.ext_iff]
+
+/-- (B̄) ⇒ (Ā). -/
+theorem condA_of_condB {n : ℕ} (hB : CondB n a a' s0) : CondA n a a' s0 := by
+  obtain ⟨h10, h11, hbas, hν⟩ := hB
+  have hd := d_eq_ν (fun i j h1 h2 => (h10 i j h1 h2).1) h11
+  refine ⟨fun i j hij hj => ?_, fun i h1 h2 => ?_, ?_⟩
+  · refine LinearMap.ext fun x => ?_
+    simp only [Module.End.mul_apply, ps_apply, map_add, map_smul, (h10 i j hij hj).1,
+      (h10 i j hij hj).2, zero_smul, add_zero]
+    abel
+  · rw [ps_apply, h11 i h1 h2, zero_smul, add_zero]
+  · set b := bas hbas
+    have hra : ∀ i (hi : i ≤ n), b.repr (a i) = Finsupp.single ⟨i + 1, by omega⟩ 1 :=
+      fun i hi => bas_repr hbas ⟨i + 1, by omega⟩
+    have hlow : ∀ j (hj : j < n + 2) (i : Fin (n + 2)), j < (i : ℕ) →
+        b.repr (sv a a' s0 j) i = 0 := by
+      intro j
+      induction j with
+      | zero =>
+        intro _ i hi
+        rw [show sv a a' s0 0 = av a s0 ((⟨0, by omega⟩ : Fin (n + 2)) : ℕ) from rfl,
+          bas_repr hbas, single_apply_fin]
+        simp only [ite_eq_right_iff]; omega
+      | succ j ih =>
+        intro hj i hi
+        rw [sv_succ, map_add, map_smul, hra j (by omega), Finsupp.add_apply,
+          ih (by omega) i (by omega), Finsupp.smul_apply, single_apply_fin]
+        split_ifs with h
+        · simp at h; omega
+        · simp
+    refine isBasisFam_of_tri b _ (fun i j h => hlow j j.isLt i h) (fun j => ?_)
+    obtain ⟨j, hj⟩ := j
+    rcases j with _ | j
+    · rw [show sv a a' s0 ((⟨0, hj⟩ : Fin (n + 2)) : ℕ) = av a s0 ((⟨0, hj⟩ : Fin (n + 2)) : ℕ)
+        from rfl, bas_repr hbas]
+      simp
+    · simp only
+      rw [sv_succ, map_add, map_smul, hra j (by omega), Finsupp.add_apply,
+        hlow j (by omega) ⟨j + 1, hj⟩ (by simp), Finsupp.smul_apply, Finsupp.single_eq_same,
+        zero_add, smul_eq_mul, mul_one, hd j (by omega)]
+      exact isUnit_ν_of_le hν j (by omega)
+
+/-- (Ā) ⇒ (B̄). -/
+theorem condB_of_condA {n : ℕ} (hA : CondA n a a' s0) : CondB n a a' s0 := by
+  obtain ⟨h7, h8, hbas⟩ := hA
+  set b := bas hbas
+  have hsv : ∀ j (hj : j < n + 2), b.repr (sv a a' s0 j) = Finsupp.single ⟨j, hj⟩ 1 :=
+    fun j hj => bas_repr hbas ⟨j, hj⟩
+  -- `dᵢ • aᵢ = s_{i+1} − sᵢ`
+  have hda : ∀ i (hi : i ≤ n) (l : Fin (n + 2)), a' i (sv a a' s0 i) * b.repr (a i) l =
+      (if (l : ℕ) = i + 1 then 1 else 0) - (if (l : ℕ) = i then 1 else 0) := by
+    intro i hi l
+    have h := congrArg (fun x => b.repr x l) (show a' i (sv a a' s0 i) • a i =
+      sv a a' s0 (i + 1) - sv a a' s0 i by rw [sv_succ]; abel)
+    simp only [map_smul, Finsupp.smul_apply, smul_eq_mul, map_sub, Finsupp.sub_apply,
+      hsv (i + 1) (by omega), hsv i (by omega), single_apply_fin] at h
+    rw [h]; simp [eq_comm]
+  have hdu : ∀ i ≤ n, IsUnit (a' i (sv a a' s0 i)) := by
+    intro i hi
+    have := hda i hi ⟨i + 1, by omega⟩
+    simp only [↓reduceIte, show i + 1 ≠ i by omega, sub_zero] at this
+    exact IsUnit.of_mul_eq_one _ this
+  have hdiag : ∀ i (hi : i ≤ n), IsUnit (b.repr (a i) ⟨i + 1, by omega⟩) := by
+    intro i hi
+    have := hda i hi ⟨i + 1, by omega⟩
+    simp only [↓reduceIte, show i + 1 ≠ i by omega, sub_zero] at this
+    exact IsUnit.of_mul_eq_one_right _ this
+  have hoff : ∀ i (hi : i ≤ n) (l : Fin (n + 2)), (l : ℕ) ≠ i → (l : ℕ) ≠ i + 1 →
+      b.repr (a i) l = 0 := by
+    intro i hi l h1 h2
+    have := hda i hi l
+    simp only [h1, h2, ↓reduceIte, sub_zero] at this
+    exact (hdu i hi).mul_right_eq_zero.1 this
+  -- smul-cancellation on `aᵢ` through the coordinate `i + 1`
+  have hcancel : ∀ i (hi : i ≤ n) (c : k), c • a i = 0 → c = 0 := by
+    intro i hi c h
+    have := congrArg (fun x => b.repr x ⟨i + 1, by omega⟩) h
+    simp only [map_smul, Finsupp.smul_apply, smul_eq_mul, map_zero, Finsupp.coe_zero,
+      Pi.zero_apply] at this
+    exact (hdiag i hi).mul_left_eq_zero.1 this
+  have h11 : ∀ i, 1 ≤ i → i ≤ n → a' i s0 = 0 := by
+    intro i h1 h2
+    have h := h8 i h1 h2
+    rw [ps_apply, add_eq_left] at h
+    exact hcancel i h2 _ h
+  have hcomm : ∀ i j, i + 2 ≤ j → j ≤ n → ∀ x,
+      (a' j x * a' i (a j)) • a i = (a' i x * a' j (a i)) • a j := by
+    intro i j hij hj x
+    have h := congrArg (fun f : Module.End k M => f x) (h7 i j hij hj)
+    simp only [Module.End.mul_apply, ps_apply, map_add, map_smul] at h
+    rw [mul_smul, mul_smul]
+    linear_combination (norm := module) h
+  have h10 : ∀ i j, i + 2 ≤ j → j ≤ n → a' j (a i) = 0 ∧ a' i (a j) = 0 := by
+    intro i j hij hj
+    constructor
+    · have h := congrArg (fun x => b.repr x ⟨j + 1, by omega⟩) (hcomm i j hij hj (sv a a' s0 i))
+      simp only [map_smul, Finsupp.smul_apply, smul_eq_mul,
+        hoff i (by omega) ⟨j + 1, by omega⟩ (by simp; omega) (by simp; omega), mul_zero] at h
+      have h' := h.symm
+      rw [mul_assoc] at h'
+      exact (hdiag j hj).mul_left_eq_zero.1 ((hdu i (by omega)).mul_right_eq_zero.1 h')
+    · have h := congrArg (fun x => b.repr x ⟨i + 1, by omega⟩) (hcomm i j hij hj (sv a a' s0 j))
+      simp only [map_smul, Finsupp.smul_apply, smul_eq_mul,
+        hoff j hj ⟨i + 1, by omega⟩ (by simp; omega) (by simp; omega), mul_zero] at h
+      rw [mul_assoc] at h
+      exact (hdiag i (by omega)).mul_left_eq_zero.1 ((hdu j hj).mul_right_eq_zero.1 h)
+  have hd := d_eq_ν (fun i j h1 h2 => (h10 i j h1 h2).1) h11
+  refine ⟨h10, h11, ?_, by rw [← hd n le_rfl]; exact hdu n le_rfl⟩
+  refine isBasisFam_of_tri b _ (fun l j hjl => ?_) (fun j => ?_)
+  · obtain ⟨j, hj⟩ := j
+    rcases j with _ | j
+    · change b.repr (sv a a' s0 0) l = 0
+      rw [hsv 0 hj, single_apply_fin]
+      simp only [ite_eq_right_iff]
+      intro h; exact absurd hjl (by rw [Fin.lt_def]; simp; omega)
+    · change b.repr (a j) l = 0
+      rw [Fin.lt_def] at hjl
+      exact hoff j (by omega) l (by simp at hjl; omega) (by simp at hjl; omega)
+  · obtain ⟨j, hj⟩ := j
+    rcases j with _ | j
+    · change IsUnit (b.repr (sv a a' s0 0) ⟨0, hj⟩)
+      rw [hsv 0 hj]; simp
+    · exact hdiag j (by omega)
+
+/-- **Pages 96–100.** (Ā) ⇔ (B̄). -/
+theorem condA_iff_condB (n : ℕ) : CondA n a a' s0 ↔ CondB n a a' s0 :=
+  ⟨condB_of_condA, condA_of_condB⟩
+
+/-! ### The classification -/
+
+lemma model_ps (n : ℕ) (μ β : ℕ → k) (i : ℕ) :
+    ps (fun i => e n (i + 1)) (F n μ β) i = τ n μ β i := rfl
+
+lemma av_model (n : ℕ) (j : Fin (n + 2)) :
+    av (fun i => (e n (i + 1) : Fin (n + 2) → k)) (e n 0) j = Pi.basisFun k (Fin (n + 2)) j := by
+  rw [Pi.basisFun_apply, e_val, one_smul]
+  obtain ⟨j, hj⟩ := j
+  rcases j with _ | j <;> rfl
+
+lemma ν_model (n : ℕ) (μ β : ℕ → k) (j : ℕ) (hj : j ≤ n) :
+    ν (fun i => (e n (i + 1) : Fin (n + 2) → k)) (F n μ β) (e n 0) j = 1 := by
+  induction j with
+  | zero => exact F_e_self 0 (by omega)
+  | succ j ih => rw [ν, ih (by omega), F_e_self (j + 1) hj, one_mul]
+
+/-- The model satisfies (B̄), normalised, for all parameters. -/
+theorem model_condB (n : ℕ) (μ β : ℕ → k) :
+    CondB n (fun i => (e n (i + 1) : Fin (n + 2) → k)) (F n μ β) (e n 0) ∧
+      F n μ β 0 (e n 0) = 1 ∧ ∀ i < n, F n μ β (i + 1) (e n (i + 1)) = 1 := by
+  refine ⟨⟨fun i j hij hj => ⟨F_e_far μ β (by omega) (by omega) (by omega),
+      F_e_far μ β (by omega) (by omega) (by omega)⟩, fun i h1 _ => F_e_zero h1, ?_, ?_⟩,
+    F_e_self 0 (by omega), fun i hi => F_e_self (i + 1) (by omega)⟩
+  · have : (fun j : Fin (n + 2) => av (fun i => (e n (i + 1) : Fin (n + 2) → k)) (e n 0) j) =
+        Pi.basisFun k (Fin (n + 2)) := funext (av_model n)
+    rw [this]
+    exact ⟨(Pi.basisFun k (Fin (n + 2))).linearIndependent, (Pi.basisFun k _).span_eq⟩
+  · rw [ν_model n μ β n le_rfl]; exact isUnit_one
+
+/-- In the model, `τᵢ` is invertible iff `λᵢ = 1 + μᵢ` is a unit. -/
+theorem model_isUnit_iff (n : ℕ) (μ β : ℕ → k) {i : ℕ} (hi : i ≤ n) :
+    IsUnit (τ n μ β i) ↔ IsUnit (1 + μ i) := by
+  have hτe : τ n μ β i (e n (i + 1)) = (1 + μ i) • e n (i + 1) := by
+    rw [τ_apply, add_smul, one_smul]
+    congr 2
+    simp [F_apply, co_e _ (i + 1) (show i + 1 < n + 2 by omega)]
+  have hF : F n μ β i (e n (i + 1)) = μ i := by
+    simp [F_apply, co_e _ (i + 1) (show i + 1 < n + 2 by omega)]
+  constructor
+  · rintro ⟨σ, hσ⟩
+    have h := congrArg (fun x => co n (i + 1) ((↑σ⁻¹ : Module.End k _) x)) hτe
+    rw [← hσ, ← Module.End.mul_apply, Units.inv_mul, Module.End.one_apply,
+      co_e_self (i + 1) (by omega)] at h
+    simp only [map_smul, smul_eq_mul] at h
+    exact IsUnit.of_mul_eq_one _ h.symm
+  · intro hl
+    have hu : (1 + μ i) * ↑hl.unit⁻¹ = 1 := hl.mul_val_inv
+    refine ⟨⟨τ n μ β i, 1 - (↑hl.unit⁻¹ : k) • (F n μ β i).smulRight (e n (i + 1)), ?_, ?_⟩, rfl⟩
+    all_goals
+      refine LinearMap.ext fun x => ?_
+      simp only [τ, Module.End.mul_apply, LinearMap.sub_apply, LinearMap.add_apply,
+        Module.End.one_apply, LinearMap.smul_apply, LinearMap.smulRight_apply, map_add, map_sub,
+        map_smul, hF]
+      linear_combination (norm := module) hu • ((-F n μ β i x) • (e n (i + 1) : Fin (n + 2) → k))
+
+/-- **The classification** (margin of page 13, with the coordinates of page 91): a
+normalised pinned realisation is isomorphic to the model with `μᵢ = ⟨aᵢ, a'ᵢ⟩`,
+`βᵢ = ⟨a_{i+1}, a'ᵢ⟩`. -/
+theorem pinned_classification {n : ℕ} (hB : CondB n a a' s0) (h0 : a' 0 s0 = 1)
+    (h1 : ∀ i < n, a' (i + 1) (a i) = 1) :
+    ∃ φ : M ≃ₗ[k] (Fin (n + 2) → k), φ s0 = e n 0 ∧ ∀ i ≤ n,
+      φ.toLinearMap ∘ₗ ps a a' i =
+        τ n (fun i => a' i (a i)) (fun i => a' i (a (i + 1))) i ∘ₗ φ.toLinearMap := by
+  obtain ⟨h10, h11, hbas, _⟩ := hB
+  set b := bas hbas
+  have hφ : ∀ j : Fin (n + 2), b.equivFun (av a s0 j) = (e n j : Fin (n + 2) → k) := by
+    intro j
+    change (bas hbas).equivFun (av a s0 j) = _
+    rw [← bas_apply hbas j]
+    funext l
+    rw [Basis.equivFun_self]
+    by_cases h : j = l
+    · subst h; simp [e]
+    · have h' : (l : ℕ) ≠ j := fun h'' => h (Fin.ext h''.symm)
+      simp [e, h, h']
+  refine ⟨b.equivFun, hφ ⟨0, by omega⟩, fun i hi => b.ext fun j => ?_⟩
+  have hai : b.equivFun (a i) = (e n (i + 1) : Fin (n + 2) → k) := hφ ⟨i + 1, by omega⟩
+  rw [show b j = av a s0 j from bas_apply hbas j]
+  simp only [LinearMap.coe_comp, LinearEquiv.coe_coe, Function.comp_apply]
+  rw [ps_apply, map_add, map_smul, hφ, hai, τ_apply]
+  congr 2
+  obtain ⟨j, hj⟩ := j
+  simp only [F_apply, co_e _ j hj]
+  -- `F i (e j) = ⟨av j, a'ᵢ⟩`
+  rcases (show j = i ∨ j = i + 1 ∨ j = i + 2 ∨ (j ≠ i ∧ j ≠ i + 1 ∧ j ≠ i + 2) by omega) with
+    rfl | rfl | rfl | ⟨hj1, hj2, hj3⟩
+  · rcases j with _ | j
+    · simp [av, h0]
+    · simp [av, h1 j (by omega)]
+  · simp [av]
+  · simp [av]
+  · simp only [Ne.symm hj1, Ne.symm hj2, Ne.symm hj3, ↓reduceIte, mul_zero, add_zero]
+    rcases j with _ | j
+    · exact h11 i (by omega) hi
+    · rcases (show j + 2 ≤ i ∨ i + 2 ≤ j by omega) with h | h
+      · exact (h10 j i h hi).1
+      · exact (h10 i j h (by omega)).2
+
+/-- A linear map compatible with `s₀` and the `τᵢ` agrees with any other on the `sⱼ`. -/
+lemma map_sv {M₂ : Type*} [AddCommGroup M₂] [Module k M₂] {b : ℕ → M₂}
+    {b' : ℕ → Module.Dual k M₂} {t0 : M₂} {n : ℕ} (φ : M →ₗ[k] M₂) (h0 : φ s0 = t0)
+    (hφ : ∀ i ≤ n, φ ∘ₗ ps a a' i = ps b b' i ∘ₗ φ) :
+    ∀ j ≤ n + 1, φ (sv a a' s0 j) = sv b b' t0 j := by
+  intro j hj
+  induction j with
+  | zero => exact h0
+  | succ j ih =>
+    have := congrArg (fun f => f (sv a a' s0 j)) (hφ j (by omega))
+    simp only [LinearMap.coe_comp, Function.comp_apply] at this
+    rw [sv, this, ih (by omega)]; rfl
+
+/-- Rigidity: the isomorphism with the model is unique. -/
+theorem pinned_rigid {n : ℕ} (hB : CondB n a a' s0) (μ β : ℕ → k)
+    (φ ψ : M →ₗ[k] (Fin (n + 2) → k)) (hφ0 : φ s0 = e n 0) (hψ0 : ψ s0 = e n 0)
+    (hφ : ∀ i ≤ n, φ ∘ₗ ps a a' i = τ n μ β i ∘ₗ φ)
+    (hψ : ∀ i ≤ n, ψ ∘ₗ ps a a' i = τ n μ β i ∘ₗ ψ) : φ = ψ := by
+  have hA := condA_of_condB hB
+  refine (bas hA.2.2).ext fun j => ?_
+  simp only [bas, Basis.mk_apply]
+  rw [map_sv (b := fun i => e n (i + 1)) (b' := F n μ β) φ hφ0 hφ j (by omega),
+    map_sv (b := fun i => e n (i + 1)) (b' := F n μ β) ψ hψ0 hψ j (by omega)]
+
+/-- Normalised, `aᵢ = s_{i+1} − sᵢ`. -/
+lemma a_eq_sub {n : ℕ} (hB : CondB n a a' s0) (h0 : a' 0 s0 = 1)
+    (h1 : ∀ i < n, a' (i + 1) (a i) = 1) : ∀ i ≤ n, a i = sv a a' s0 (i + 1) - sv a a' s0 i := by
+  intro i hi
+  have hν : ∀ j ≤ n, ν a a' s0 j = 1 := by
+    intro j hj
+    induction j with
+    | zero => exact h0
+    | succ j ih => rw [ν, ih (by omega), h1 j (by omega), one_mul]
+  rw [sv_succ, d_eq_ν (fun i j h h' => (hB.1 i j h h').1) hB.2.1 i hi, hν i hi, one_smul,
+    add_sub_cancel_left]
+
+/-- **The invariants**: a linear map compatible with `s₀` and the `τᵢ` between two
+normalised realisations forces the same `(μᵢ, βᵢ)`. -/
+theorem invariants_eq {M₂ : Type*} [AddCommGroup M₂] [Module k M₂] {b : ℕ → M₂}
+    {b' : ℕ → Module.Dual k M₂} {t0 : M₂} {n : ℕ}
+    (hB : CondB n a a' s0) (h0 : a' 0 s0 = 1) (h1 : ∀ i < n, a' (i + 1) (a i) = 1)
+    (hB₂ : CondB n b b' t0) (h0₂ : b' 0 t0 = 1) (h1₂ : ∀ i < n, b' (i + 1) (b i) = 1)
+    (φ : M →ₗ[k] M₂) (hφ0 : φ s0 = t0) (hφ : ∀ i ≤ n, φ ∘ₗ ps a a' i = ps b b' i ∘ₗ φ) :
+    (∀ i ≤ n, a' i (a i) = b' i (b i)) ∧ (∀ i < n, a' i (a (i + 1)) = b' i (b (i + 1))) := by
+  have hφa : ∀ i ≤ n, φ (a i) = b i := by
+    intro i hi
+    rw [a_eq_sub hB h0 h1 i hi, map_sub, map_sv φ hφ0 hφ (i + 1) (by omega),
+      map_sv φ hφ0 hφ i (by omega), a_eq_sub hB₂ h0₂ h1₂ i hi]
+  have hcancel : ∀ i ≤ n, ∀ c c' : k, c • b i = c' • b i → c = c' := by
+    intro i hi c c' h
+    have := congrArg (fun x => (bas hB₂.2.2.1).repr x ⟨i + 1, by omega⟩) h
+    simp only [map_smul, Finsupp.smul_apply, smul_eq_mul] at this
+    rwa [show b i = av b t0 ((⟨i + 1, by omega⟩ : Fin (n + 2)) : ℕ) from rfl, bas_repr,
+      Finsupp.single_eq_same, mul_one, mul_one] at this
+  have hτ : ∀ i ≤ n, ∀ x, φ (ps a a' i x) = ps b b' i (φ x) := fun i hi x =>
+    congrArg (fun f => f x) (hφ i hi)
+  constructor
+  · intro i hi
+    have h := hτ i hi (a i)
+    rw [ps_apply, ps_apply, map_add, map_smul, hφa i hi] at h
+    have h' : (a' i (a i)) • b i = (b' i (b i)) • b i := add_left_cancel h
+    exact hcancel i hi _ _ h'
+  · intro i hi
+    have h := hτ i (by omega) (a (i + 1))
+    rw [ps_apply, ps_apply, map_add, map_smul, hφa (i + 1) hi, hφa i (by omega)] at h
+    exact hcancel i (by omega) _ _ (add_left_cancel h)
+
+end Pinned
 
 end Grothendieck.Folder72
