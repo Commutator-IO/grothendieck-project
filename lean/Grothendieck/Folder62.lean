@@ -58,9 +58,8 @@ theorem one_sub_ne {t : K} (ht1 : t ≠ 1) : 1 - t ≠ 0 := sub_ne_zero.2 (Ne.sy
 theorem den_ne {t : K} (ht0 : t ≠ 0) (ht1 : t ≠ 1) : den t ≠ 0 :=
   mul_ne_zero ht0 (sub_one_ne ht1)
 
-theorem three_pow_ne (h3 : (3 : K) ≠ 0) : (27 : K) ≠ 0 := by
-  have : (27 : K) = 3 ^ 3 := by norm_num
-  rw [this]; exact pow_ne_zero 3 h3
+theorem three_pow_ne (h3 : (3 : K) ≠ 0) : (27 : K) ≠ 0 :=
+  (by norm_num : (3 : K) ^ 3 = 27) ▸ pow_ne_zero 3 h3
 
 /-- `j s − j t` as the product of the six factors `s − g(t)`, denominators cleared. -/
 theorem j_sub_j (h3 : (3 : K) ≠ 0) {s t : K} (hs0 : s ≠ 0) (hs1 : s ≠ 1) (ht0 : t ≠ 0)
@@ -83,9 +82,8 @@ theorem j_eq_iff (h2 : (2 : K) ≠ 0) (h3 : (3 : K) ≠ 0) {s t : K} (hs0 : s �
       s = (t - 1) / t := by
   have h1 := sub_one_ne ht1
   have h1' := one_sub_ne ht1
-  have hc : (4 / 27 : K) ≠ 0 := by
-    have : (4 : K) = 2 ^ 2 := by norm_num
-    rw [this]; exact div_ne_zero (pow_ne_zero 2 h2) (three_pow_ne h3)
+  have hc : (4 / 27 : K) ≠ 0 :=
+    div_ne_zero ((by norm_num : (2 : K) ^ 2 = 4) ▸ pow_ne_zero 2 h2) (three_pow_ne h3)
   have hd : den s ^ 2 * den t ^ 2 ≠ 0 :=
     mul_ne_zero (pow_ne_zero 2 (den_ne hs0 hs1)) (pow_ne_zero 2 (den_ne ht0 ht1))
   rw [← sub_eq_zero, j_sub_j h3 hs0 hs1 ht0 ht1, div_eq_zero_iff, or_iff_left hd,
@@ -101,23 +99,8 @@ theorem j_eq_iff (h2 : (2 : K) ≠ 0) (h3 : (3 : K) ≠ 0) {s t : K} (hs0 : s �
     ⟨fun h => by linear_combination h, fun h => by linear_combination h⟩
   have f6 : (t - 1) * s - t = 0 ↔ s = t / (t - 1) := by
     rw [eq_div_iff h1, sub_eq_zero, mul_comm]
-  constructor
-  · intro h
-    simp only [mul_eq_zero] at h
-    rcases h with ((h | h) | h) | ((h | h) | h)
-    · exact Or.inl (sub_eq_zero.1 h)
-    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl (f2.1 h)))))
-    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (f3.1 h)))))
-    · exact Or.inr (Or.inl (f4.1 h))
-    · exact Or.inr (Or.inr (Or.inl (f5.1 h)))
-    · exact Or.inr (Or.inr (Or.inr (Or.inl (f6.1 h))))
-  · rintro (h | h | h | h | h | h)
-    · simp only [sub_eq_zero.2 h, zero_mul]
-    · simp only [f4.2 h, zero_mul, mul_zero]
-    · simp only [f5.2 h, zero_mul, mul_zero]
-    · simp only [f6.2 h, mul_zero]
-    · simp only [f2.2 h, zero_mul, mul_zero]
-    · simp only [f3.2 h, zero_mul, mul_zero]
+  simp only [mul_eq_zero, sub_eq_zero (a := s), f2, f3, f4, f5, f6, or_assoc, or_comm,
+    or_left_comm]
 
 section
 
@@ -161,16 +144,9 @@ theorem j_eq_zero_iff (h3 : (3 : K) ≠ 0) {t : K} (ht0 : t ≠ 0) (ht1 : t ≠ 
   have h27 := three_pow_ne h3
   rw [j, mul_eq_zero, div_pow, div_eq_zero_iff, pow_eq_zero_iff two_ne_zero,
     pow_eq_zero_iff two_ne_zero, or_iff_left (den_ne ht0 ht1), num]
-  simp only [neg_eq_zero, one_div, inv_eq_zero, h27, false_or, mul_eq_zero]
-  constructor
-  · rintro ((h | h) | h)
-    · exact Or.inl (by linear_combination h)
-    · exact Or.inr (Or.inr (by linear_combination h))
-    · exact Or.inr (Or.inl (by linear_combination h))
-  · rintro (h | h | h)
-    · exact Or.inl (Or.inl (by linear_combination h))
-    · exact Or.inr (by linear_combination h)
-    · exact Or.inl (Or.inr (by linear_combination h))
+  simp only [neg_eq_zero, one_div, inv_eq_zero, h27, false_or, mul_eq_zero,
+    add_eq_zero_iff_eq_neg, sub_eq_zero]
+  tauto
 
 /-- `1 − j = (4/27) (t² − t + 1)³ / (t(t − 1))²`. -/
 theorem one_sub_j (h3 : (3 : K) ≠ 0) {t : K} (ht0 : t ≠ 0) (ht1 : t ≠ 1) :
@@ -185,9 +161,8 @@ theorem one_sub_j (h3 : (3 : K) ≠ 0) {t : K} (ht0 : t ≠ 0) (ht1 : t ≠ 1) :
 /-- `j t = 1` iff `t² − t + 1 = 0` (`t ∉ {0, 1}`, `6` invertible). -/
 theorem j_eq_one_iff (h2 : (2 : K) ≠ 0) (h3 : (3 : K) ≠ 0) {t : K} (ht0 : t ≠ 0)
     (ht1 : t ≠ 1) : j t = 1 ↔ t ^ 2 - t + 1 = 0 := by
-  have h4 : (4 / 27 : K) ≠ 0 := by
-    have : (4 : K) = 2 ^ 2 := by norm_num
-    rw [this]; exact div_ne_zero (pow_ne_zero 2 h2) (three_pow_ne h3)
+  have h4 : (4 / 27 : K) ≠ 0 :=
+    div_ne_zero ((by norm_num : (2 : K) ^ 2 = 4) ▸ pow_ne_zero 2 h2) (three_pow_ne h3)
   rw [eq_comm, ← sub_eq_zero, one_sub_j h3 ht0 ht1, div_eq_zero_iff,
     or_iff_left (pow_ne_zero 2 (den_ne ht0 ht1)), mul_eq_zero, or_iff_right h4,
     pow_eq_zero_iff (by norm_num)]
@@ -202,25 +177,12 @@ theorem stabilizer_trivial_iff (h2 : (2 : K) ≠ 0) (h3 : (3 : K) ≠ 0) {t : K}
   have h1 := sub_one_ne ht1
   have h1' := one_sub_ne ht1
   have e1 : 1 / t = t ↔ t = -1 := by
-    rw [div_eq_iff ht0]
-    constructor
-    · intro h
-      have : (t - 1) * (t + 1) = 0 := by linear_combination -h
-      rcases mul_eq_zero.1 this with h | h
-      · exact absurd h h1
-      · linear_combination h
-    · intro h; subst h; ring
+    rw [div_eq_iff ht0, eq_comm (a := (1 : K)), mul_self_eq_one_iff, or_iff_right ht1]
   have e2 : 1 - t = t ↔ 2 * t = 1 := ⟨fun h => by linear_combination -h, fun h => by
     linear_combination -h⟩
   have e3 : t / (t - 1) = t ↔ t = 2 := by
-    rw [div_eq_iff h1]
-    constructor
-    · intro h
-      have : t * (t - 2) = 0 := by linear_combination -h
-      rcases mul_eq_zero.1 this with h | h
-      · exact absurd h ht0
-      · linear_combination h
-    · intro h; subst h; ring
+    rw [div_eq_iff h1, eq_comm (b := t * (t - 1)), mul_eq_left₀ ht0, sub_eq_iff_eq_add,
+      one_add_one_eq_two]
   have e4 : 1 / (1 - t) = t ↔ t ^ 2 - t + 1 = 0 := by
     rw [div_eq_iff h1']
     exact ⟨fun h => by linear_combination h, fun h => by linear_combination h⟩
@@ -235,13 +197,9 @@ theorem j_eq_one_sub_jcl (h2 : (2 : K) ≠ 0) (h3 : (3 : K) ≠ 0) {t : K} (ht0 
     (ht1 : t ≠ 1) :
     j t = 1 - 256 * (t ^ 2 - t + 1) ^ 3 / (t ^ 2 * (t - 1) ^ 2) / 1728 := by
   have h1728 : (1728 : K) = 64 * 27 := by norm_num
-  have h64 : (64 : K) ≠ 0 := by
-    have : (64 : K) = 2 ^ 6 := by norm_num
-    rw [this]; exact pow_ne_zero 6 h2
-  have hd : t ^ 2 * (t - 1) ^ 2 = den t ^ 2 := by simp only [den]; ring
-  have := one_sub_j h3 ht0 ht1
-  have e : j t = 1 - (1 - j t) := by ring
-  rw [hd, h1728, e, this]
+  have h64 : (64 : K) ≠ 0 := (by norm_num : (2 : K) ^ 6 = 64) ▸ pow_ne_zero 6 h2
+  have hd : t ^ 2 * (t - 1) ^ 2 = den t ^ 2 := (mul_pow _ _ 2).symm
+  rw [hd, h1728, ← sub_sub_cancel 1 (j t), one_sub_j h3 ht0 ht1]
   have := den_ne ht0 ht1
   have := three_pow_ne h3
   field_simp
@@ -250,11 +208,7 @@ theorem j_eq_one_sub_jcl (h2 : (2 : K) ≠ 0) (h3 : (3 : K) ≠ 0) {t : K} (ht0 
 /-- `κ` is an involution (`2t ≠ 1`, `3` invertible). -/
 theorem kappa_kappa (h3 : (3 : K) ≠ 0) {t : K} (ht : 2 * t - 1 ≠ 0) : kappa (kappa t) = t := by
   have hk : kappa t * (2 * t - 1) = t - 2 := div_mul_cancel₀ _ ht
-  have h2k : 2 * kappa t - 1 ≠ 0 := by
-    intro h
-    have : (2 * kappa t - 1) * (2 * t - 1) = -3 := by linear_combination 2 * hk
-    rw [h, zero_mul] at this
-    exact h3 (by linear_combination this)
+  have h2k : 2 * kappa t - 1 ≠ 0 := fun h => h3 (by linear_combination 2 * hk - (2 * t - 1) * h)
   change (kappa t - 2) / (2 * kappa t - 1) = t
   rw [div_eq_iff h2k]
   linear_combination -hk
@@ -265,10 +219,7 @@ theorem j_kappa_mul (h3 : (3 : K) ≠ 0) {t : K} (ht0 : t ≠ 0) (ht1 : t ≠ 1)
   set k := kappa t with hkdef
   have hk : k * (2 * t - 1) = t - 2 := div_mul_cancel₀ _ ht
   have hk0 : k ≠ 0 := div_ne_zero ht2 ht
-  have hk1 : k ≠ 1 := by
-    intro h
-    rw [h, one_mul] at hk
-    exact htm (by linear_combination hk)
+  have hk1 : k ≠ 1 := fun h => htm (by linear_combination hk - (2 * t - 1) * h)
   have hA : num k * (2 * t - 1) ^ 3 = 27 * den t := by
     have e1 : (k + 1) * (2 * t - 1) = 3 * (t - 1) := by linear_combination hk
     have e2 : (2 * k - 1) * (2 * t - 1) = -3 := by linear_combination 2 * hk
