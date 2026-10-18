@@ -3,6 +3,7 @@ import { BY_ID, COTES, GROUPS } from '../content/catalogue.ts';
 import { FINDINGS } from '../content/findings.ts';
 import { THEOREM_LINKS } from '../content/theorem-links.ts';
 import { MAJOR_FINDINGS } from '../content/major-findings.ts';
+import { CURRENT_RESEARCH } from '../content/current-research.ts';
 import { batchCount } from '../lib/batches.ts';
 import type { Cote } from '../lib/types.ts';
 
@@ -319,6 +320,10 @@ export function FondsMosaic({
           </a>
           , of the weight of his main theorems or a conjecture he did not prove; not established
         </li>
+        <li className="flex items-center gap-1.5">
+          <Lozenge color="var(--color-encours-500)" />
+          its subject is the topic of doctoral theses in progress in France (theses.fr, October 2026)
+        </li>
       </ul>
 
       {/* The black ground is the rules: every block is inset, so what shows
@@ -389,10 +394,11 @@ export function FondsMosaic({
                       : FILL[c.state],
                 }}
               >
-                {(THEOREM_LINKS[c.cote.id] || OPEN.has(c.cote.id)) && (
+                {(THEOREM_LINKS[c.cote.id] || OPEN.has(c.cote.id) || CURRENT_RESEARCH[c.cote.id]) && (
                   <span className="absolute right-[3px] top-[3px] flex gap-[2px]">
                     {THEOREM_LINKS[c.cote.id] && <Lozenge color="var(--color-brand-600)" />}
                     {OPEN.has(c.cote.id) && <Lozenge color="var(--color-alerte-500)" />}
+                    {CURRENT_RESEARCH[c.cote.id] && <Lozenge color="var(--color-encours-500)" />}
                   </span>
                 )}
                 {big && (
@@ -426,6 +432,7 @@ export function FondsMosaic({
                 ` · bears on theorem ${THEOREM_LINKS[hover.cote.id].map((n) => CIRCLED[n]).join(' ')} of the Timeline`}
               {OPEN.has(hover.cote.id) &&
                 ` · ${OPEN.get(hover.cote.id)} major open finding${OPEN.get(hover.cote.id) === 1 ? '' : 's'} on Findings`}
+              {CURRENT_RESEARCH[hover.cote.id] && ` · current research: ${CURRENT_RESEARCH[hover.cote.id]}`}
             </span>
           </p>
         ) : (
