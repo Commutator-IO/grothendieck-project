@@ -827,3 +827,343 @@ theorem face_tangents :
   decide +kernel
 
 end Grothendieck.Folder70
+
+namespace Grothendieck.Folder70
+
+/-! ## The universal formulae (finding `70-universal-formulae-double-cosines`)
+
+Pages 9–25 of the reading write a regular affine realisation by reflections of
+`{p₁, …, pₙ}` in its vertex frame `(s₀, …, s_{n+1})`: in barycentric coordinates,
+`σᵢ = id + ℓᵢ ⊗ (s_{i+1} − sᵢ)` with `ℓᵢ = tᵢ − tᵢ₊₁ + (1 + αᵢ)(tᵢ₊₂ + ⋯ + t_{n+1})`
+(pages 23–25), and page 67 states, for `n = 2` and without proof,
+« `ρ_s^p = id ⇔ F_p(α) = 0` ». Here `usig n α i` is that `σᵢ`, acting linearly on
+`ℕ → R` (homogeneous barycentric coordinates; `sum_usig`: the affine space `Σ tⱼ = 1`
+is preserved), over any commutative ring and for every `n`.
+
+* `usig_mul_self`, `usig_comm`: the relations of the string Coxeter group,
+  `σᵢ² = 1` and `σᵢσⱼ = σⱼσᵢ` for `j ≥ i + 2`, whatever the `αᵢ` (page 19);
+  `usig_sv_self`, `usig_sv_succ`, `usig_sv_of_lt`, `usig_sv_of_le`: the table of page 25.
+* `rho_apply`, `rho_cubic`: `σₖσₖ₊₁ − 1` has its image in the plane of
+  `sₖ₊₁ − sₖ, sₖ₊₂ − sₖ₊₁`, and `(t − 1)(t² − αₖt + 1)` kills `σₖσₖ₊₁`.
+* `orderOf_rho_eq_three`, `orderOf_rho_eq_four`, `orderOf_rho_eq_five`: over every
+  nonzero commutative ring, `σₖσₖ₊₁` has order exactly `3`, `4`, `5` iff `αₖ = −1`,
+  `αₖ = 0`, `αₖ² + αₖ − 1 = 0` — the minimal polynomials of `2cos(2π/p)` for the
+  values of `p` that occur in the finite regular polytopes. No field, no `p` invertible.
+* `usig_emb`, `ico_orderOf`: the generators of pages 74–75 above are the case
+  `n = 2`, `(α₀, α₁) = (−1, α)`; tetrahedron `(−1, −1)`, cube `(0, −1)`, octahedron
+  `(−1, 0)` and dodecahedron `(α, −1)` are the other Platonic cases of the same theorems.
+
+Not formalised: the criterion for general `p` (it needs the minimal polynomial of
+`2cos(2π/p)`), the passage from the definition of a regular realisation to the normal
+form (pages 7–18). -/
+
+section Universal
+
+variable {R : Type*} [CommRing R] (n : ℕ) (α : ℕ → R)
+
+/-- The vertex `s_j` of the frame, in barycentric coordinates `(t₀, …, t_{n+1})`. -/
+def sv (j : ℕ) : ℕ → R := Pi.single j 1
+
+/-- The affine form `ℓᵢ = tᵢ − tᵢ₊₁ + (1 + αᵢ)(tᵢ₊₂ + ⋯ + t_{n+1})` of page 23. -/
+def ell (i : ℕ) : (ℕ → R) →ₗ[R] R :=
+  LinearMap.proj (R := R) (φ := fun _ : ℕ => R) i - LinearMap.proj (i + 1) +
+    (1 + α i) • ∑ j ∈ Finset.Ico (i + 2) (n + 2), LinearMap.proj j
+
+/-- The edge vector `s_{i+1} − sᵢ`. -/
+def wv (i : ℕ) : ℕ → R := sv (i + 1) - sv i
+
+/-- The universal reflection `σᵢ = id + ℓᵢ ⊗ (s_{i+1} − sᵢ)` of pages 23–25. -/
+def usig (i : ℕ) : Module.End R (ℕ → R) := 1 + (ell n α i).smulRight (wv i)
+
+variable {n α}
+
+theorem ell_apply (i : ℕ) (x : ℕ → R) :
+    ell n α i x = x i - x (i + 1) + (1 + α i) * ∑ j ∈ Finset.Ico (i + 2) (n + 2), x j := by
+  simp [ell]
+
+theorem usig_apply (i : ℕ) (x : ℕ → R) :
+    usig n α i x = x + ell n α i x • wv i := by
+  simp [usig]
+
+theorem ell_sv (i j : ℕ) : ell n α i (sv j) =
+    (if i = j then 1 else 0) - (if i + 1 = j then 1 else 0) +
+      (1 + α i) * (if i + 2 ≤ j ∧ j < n + 2 then 1 else 0) := by
+  simp [ell_apply, sv, Pi.single_apply]
+
+theorem ell_wv_self (i : ℕ) : ell n α i (wv i) = -2 := by
+  simp only [wv, map_sub, ell_sv]; simp; ring
+
+theorem ell_wv_of_le {i j : ℕ} (hij : i + 2 ≤ j) (hj : j ≤ n) : ell n α i (wv j) = 0 := by
+  simp only [wv, map_sub, ell_sv]
+  split_ifs <;> first | omega | ring
+
+theorem ell_wv_of_lt {i j : ℕ} (hij : i + 1 < j) : ell n α j (wv i) = 0 := by
+  simp only [wv, map_sub, ell_sv]
+  split_ifs <;> first | omega | ring
+
+theorem usig_wv_self (i : ℕ) : usig n α i (wv i) = -wv i := by
+  rw [usig_apply, ell_wv_self]; module
+
+/-- `σᵢ² = 1`, whatever the `αⱼ` (page 19). -/
+theorem usig_mul_self (i : ℕ) : usig n α i * usig n α i = 1 := by
+  refine LinearMap.ext fun x => ?_
+  rw [Module.End.mul_apply, Module.End.one_apply, usig_apply (x := x), map_add, map_smul,
+    usig_wv_self, usig_apply]
+  module
+
+/-- `σᵢ σⱼ = σⱼ σᵢ` for `j ≥ i + 2`, whatever the `αₖ` (page 19). -/
+theorem usig_comm {i j : ℕ} (hij : i + 2 ≤ j) (hj : j ≤ n) :
+    usig n α i * usig n α j = usig n α j * usig n α i := by
+  refine LinearMap.ext fun x => ?_
+  simp only [Module.End.mul_apply, usig_apply, map_add, map_smul,
+    ell_wv_of_le hij hj, ell_wv_of_lt (show i + 1 < j by omega)]
+  module
+
+/-- `σᵢ` preserves `t₀ + ⋯ + t_{n+1}`: it acts on the affine space `Σ tⱼ = 1`. -/
+theorem sum_usig (i : ℕ) (hi : i ≤ n) (x : ℕ → R) :
+    ∑ j ∈ Finset.range (n + 2), usig n α i x j = ∑ j ∈ Finset.range (n + 2), x j := by
+  simp only [usig_apply, wv, Pi.add_apply, Pi.smul_apply, Pi.sub_apply, sv, Pi.single_apply,
+    smul_eq_mul, Finset.sum_add_distrib, mul_sub, Finset.sum_sub_distrib]
+  simp [Finset.sum_ite_eq', Finset.mem_range, show i + 1 < n + 2 by omega,
+    show i < n + 2 by omega]
+
+/-- The table of page 25: `σᵢ sⱼ = sⱼ` for `j < i`. -/
+theorem usig_sv_of_lt {i j : ℕ} (h : j < i) : usig n α i (sv j) = sv j := by
+  rw [usig_apply, ell_sv, wv]; split_ifs <;> (try omega); simp
+
+/-- `σᵢ sᵢ = sᵢ₊₁`. -/
+theorem usig_sv_self (i : ℕ) : usig n α i (sv i) = sv (i + 1) := by
+  rw [usig_apply, ell_sv, wv]; split_ifs <;> (try omega); simp
+
+/-- `σᵢ sᵢ₊₁ = sᵢ`. -/
+theorem usig_sv_succ (i : ℕ) : usig n α i (sv (i + 1)) = sv i := by
+  rw [usig_apply, ell_sv, wv]; split_ifs <;> (try omega); simp
+
+/-- `σᵢ sⱼ = −(1 + αᵢ) sᵢ + (1 + αᵢ) sᵢ₊₁ + sⱼ` for `i + 2 ≤ j ≤ n + 1` (page 25). -/
+theorem usig_sv_of_le {i j : ℕ} (h1 : i + 2 ≤ j) (h2 : j ≤ n + 1) :
+    usig n α i (sv j) = sv j + (1 + α i) • wv i := by
+  rw [usig_apply, ell_sv, wv]; split_ifs <;> (try omega); simp
+
+/-! ### The rotations `σₖ σₖ₊₁` -/
+
+/-- The rotation `σₖ σₖ₊₁` of the polygon in `f_{k+2}`. -/
+def rho (k : ℕ) : Module.End R (ℕ → R) := usig n α k * usig n α (k + 1)
+
+theorem ell_succ_wv (k : ℕ) : ell n α (k + 1) (wv k) = 1 := by
+  simp only [wv, map_sub, ell_sv]
+  split_ifs <;> first | omega | ring
+
+theorem ell_wv_succ {k : ℕ} (hk : k + 1 ≤ n) : ell n α k (wv (k + 1)) = 2 + α k := by
+  simp only [wv, map_sub, ell_sv]
+  split_ifs <;> first | omega | ring
+
+theorem rho_wv {k : ℕ} (hk : k + 1 ≤ n) :
+    rho (n := n) (α := α) k (wv k) = (1 + α k) • wv k + wv (k + 1) := by
+  rw [rho, Module.End.mul_apply, usig_apply (i := k + 1), ell_succ_wv, one_smul, map_add,
+    usig_wv_self, usig_apply, ell_wv_succ hk]
+  module
+
+theorem rho_wv_succ {k : ℕ} (hk : k + 1 ≤ n) :
+    rho (n := n) (α := α) k (wv (k + 1)) = -((2 + α k) • wv k) - wv (k + 1) := by
+  rw [rho, Module.End.mul_apply, usig_wv_self, map_neg, usig_apply, ell_wv_succ hk]
+  module
+
+/-- `σₖ σₖ₊₁ − 1` takes its values in the plane of `sₖ₊₁ − sₖ` and `sₖ₊₂ − sₖ₊₁`. -/
+theorem rho_apply (k : ℕ) (x : ℕ → R) :
+    rho (n := n) (α := α) k x =
+      x + ell n α k (usig n α (k + 1) x) • wv k + ell n α (k + 1) x • wv (k + 1) := by
+  rw [rho, Module.End.mul_apply, usig_apply (i := k), usig_apply (i := k + 1)]
+  module
+
+/-- `f^m x = x + Σ_{j<m} f^j (f x − x)`. -/
+theorem pow_apply_eq (f : Module.End R (ℕ → R)) (m : ℕ) (x : ℕ → R) :
+    (f ^ m) x = x + ∑ j ∈ Finset.range m, (f ^ j) (f x - x) := by
+  induction m with
+  | zero => simp
+  | succ m ih =>
+    rw [pow_succ, Module.End.mul_apply, show f x = x + (f x - x) by abel, map_add, ih,
+      Finset.sum_range_succ]
+    abel_nf
+
+/-- A vector of the plane of `sₖ₊₁ − sₖ` and `sₖ₊₂ − sₖ₊₁`. -/
+def pl (k : ℕ) (a b : R) : ℕ → R := a • wv k + b • wv (k + 1)
+
+theorem rho_pl {k : ℕ} (hk : k + 1 ≤ n) (a b : R) :
+    rho (n := n) (α := α) k (pl k a b) = pl k ((1 + α k) * a - (2 + α k) * b) (a - b) := by
+  simp only [pl, map_add, map_smul, rho_wv hk, rho_wv_succ hk]
+  module
+
+theorem pl_add (k : ℕ) (a b c d : R) : pl k a b + pl k c d = pl k (a + c) (b + d) := by
+  simp only [pl]; module
+
+theorem pl_eq_zero {k : ℕ} {a b : R} (ha : a = 0) (hb : b = 0) : pl k a b = 0 := by
+  simp [pl, ha, hb]
+
+theorem rho_pow_eq_one {k : ℕ} (m : ℕ)
+    (h : ∀ a b : R, ∑ j ∈ Finset.range m, (rho (n := n) (α := α) k ^ j) (pl k a b) = 0) :
+    rho (n := n) (α := α) k ^ m = 1 := by
+  refine LinearMap.ext fun x => ?_
+  rw [pow_apply_eq, Module.End.one_apply, show rho k x - x = pl k _ _ by
+    rw [rho_apply, pl]; abel, h, add_zero]
+
+/-- A vector of the plane `⟨sₖ, sₖ₊₁, sₖ₊₂⟩`. -/
+def tri (k : ℕ) (a b c : R) : ℕ → R := a • sv k + b • sv (k + 1) + c • sv (k + 2)
+
+theorem rho_tri {k : ℕ} (hk : k + 1 ≤ n) (a b c : R) :
+    rho (n := n) (α := α) k (tri k a b c) =
+      tri k (c - (1 + α k) * b) (a + (1 + α k) * b) b := by
+  have h0 : rho (n := n) (α := α) k (sv k) = sv (k + 1) := by
+    rw [rho, Module.End.mul_apply, usig_sv_of_lt (by omega), usig_sv_self]
+  have h1 : rho (n := n) (α := α) k (sv (k + 1)) = sv (k + 2) + (1 + α k) • wv k := by
+    rw [rho, Module.End.mul_apply, usig_sv_self, usig_sv_of_le (by omega) (by omega)]
+  have h2 : rho (n := n) (α := α) k (sv (k + 2)) = sv k := by
+    rw [rho, Module.End.mul_apply, usig_sv_succ, usig_sv_succ]
+  simp only [tri, map_add, map_smul, h0, h1, h2, wv]
+  module
+
+theorem tri_apply (k : ℕ) (a b c : R) :
+    tri k a b c k = a ∧ tri k a b c (k + 1) = b ∧ tri k a b c (k + 2) = c := by
+  simp [tri, sv]
+
+/-- `σₖ σₖ₊₁` on `⟨sₖ, sₖ₊₁, sₖ₊₂⟩`, in coordinates. -/
+def step (α : ℕ → R) (k : ℕ) (t : R × R × R) : R × R × R :=
+  (t.2.2 - (1 + α k) * t.2.1, t.1 + (1 + α k) * t.2.1, t.2.1)
+
+theorem rho_pow_tri {k : ℕ} (hk : k + 1 ≤ n) (m : ℕ) (t : R × R × R) :
+    (rho (n := n) (α := α) k ^ m) (tri k t.1 t.2.1 t.2.2) =
+      tri k ((step α k)^[m] t).1 ((step α k)^[m] t).2.1 ((step α k)^[m] t).2.2 := by
+  induction m generalizing t with
+  | zero => simp
+  | succ m ih =>
+    rw [pow_succ, Module.End.mul_apply, rho_tri hk, Function.iterate_succ_apply]
+    exact ih (step α k t)
+
+/-- If `(σₖ σₖ₊₁)^m = 1`, the orbit of `sₖ` closes after `m` steps. -/
+theorem step_pow_of_rho_pow {k : ℕ} (hk : k + 1 ≤ n) {m : ℕ}
+    (h : rho (n := n) (α := α) k ^ m = 1) : (step α k)^[m] (1, 0, 0) = (1, 0, 0) := by
+  have e := rho_pow_tri (α := α) hk m (1, 0, 0)
+  rw [h, Module.End.one_apply] at e
+  have h1 := tri_apply k (1 : R) 0 0
+  have h2 := tri_apply k ((step α k)^[m] (1, 0, 0)).1 ((step α k)^[m] (1, 0, 0)).2.1
+    ((step α k)^[m] (1, 0, 0)).2.2
+  rw [← e] at h2
+  exact Prod.ext (h2.1.symm.trans h1.1) (Prod.ext (h2.2.1.symm.trans h1.2.1)
+    (h2.2.2.symm.trans h1.2.2))
+
+/-- If the orbit of `sₖ` does not close after `m` steps, `(σₖ σₖ₊₁)^m ≠ 1`. -/
+theorem rho_pow_ne_one {k : ℕ} (hk : k + 1 ≤ n) {m : ℕ}
+    (h : (step α k)^[m] (1, 0, 0) ≠ (1, 0, 0)) : rho (n := n) (α := α) k ^ m ≠ 1 :=
+  fun h' => h (step_pow_of_rho_pow hk h')
+
+/-- `(t − 1)(t² − αₖ t + 1)` kills `σₖ σₖ₊₁`, for every `n` and every ring. -/
+theorem rho_cubic {k : ℕ} (hk : k + 1 ≤ n) (x : ℕ → R) :
+    (rho (n := n) (α := α) k ^ 3) x - (1 + α k) • (rho (n := n) (α := α) k ^ 2) x +
+      (1 + α k) • (rho (n := n) (α := α) k ^ 1) x - x = 0 := by
+  have hy : rho (n := n) (α := α) k x - x =
+      pl k (ell n α k (usig n α (k + 1) x)) (ell n α (k + 1) x) := by
+    rw [rho_apply, pl]; abel
+  rw [pow_apply_eq _ 3, pow_apply_eq _ 2, pow_apply_eq _ 1, hy]
+  simp only [Finset.sum_range_succ, Finset.sum_range_zero, pow_succ, pow_zero,
+    Module.End.mul_apply, Module.End.one_apply, rho_pl hk, zero_add]
+  simp only [pl]
+  module
+
+theorem orderOf_rho_eq_three [Nontrivial R] {k : ℕ} (hk : k + 1 ≤ n) :
+    orderOf (rho (n := n) (α := α) k) = 3 ↔ α k = -1 := by
+  rw [orderOf_eq_iff (by norm_num)]
+  constructor
+  · rintro ⟨h, -⟩
+    have e := step_pow_of_rho_pow hk h
+    simp only [step, Function.iterate_succ_apply', Function.iterate_zero_apply,
+      Prod.mk.injEq] at e
+    linear_combination e.2.2
+  · intro h
+    refine ⟨rho_pow_eq_one 3 fun a b => ?_, fun m hm h0 => rho_pow_ne_one hk ?_⟩
+    · simp only [Finset.sum_range_succ, Finset.sum_range_zero, pow_succ, pow_zero,
+        Module.End.mul_apply, Module.End.one_apply, rho_pl hk, pl_add, zero_add]
+      apply pl_eq_zero
+      · linear_combination ((1 + α k) * a - (2 + α k) * b) * h
+      · linear_combination (a - b) * h
+    · obtain rfl | rfl : m = 1 ∨ m = 2 := by omega
+      all_goals simp [step, Function.iterate_succ_apply', Prod.ext_iff]
+
+theorem orderOf_rho_eq_four [Nontrivial R] {k : ℕ} (hk : k + 1 ≤ n) :
+    orderOf (rho (n := n) (α := α) k) = 4 ↔ α k = 0 := by
+  rw [orderOf_eq_iff (by norm_num)]
+  constructor
+  · rintro ⟨h, -⟩
+    have e := step_pow_of_rho_pow hk h
+    simp only [step, Function.iterate_succ_apply', Function.iterate_zero_apply,
+      Prod.mk.injEq] at e
+    linear_combination α k * e.2.2 - e.2.1
+  · intro h
+    refine ⟨rho_pow_eq_one 4 fun a b => ?_, fun m hm h0 => rho_pow_ne_one hk ?_⟩
+    · simp only [Finset.sum_range_succ, Finset.sum_range_zero, pow_succ, pow_zero,
+        Module.End.mul_apply, Module.End.one_apply, rho_pl hk, pl_add, zero_add]
+      apply pl_eq_zero <;> rw [h] <;> ring
+    · obtain rfl | rfl | rfl : m = 1 ∨ m = 2 ∨ m = 3 := by omega
+      all_goals
+        simp only [step, Function.iterate_succ_apply', Function.iterate_zero_apply, ne_eq,
+          Prod.mk.injEq]
+        intro e
+        apply one_ne_zero (α := R)
+      · linear_combination -e.1
+      · linear_combination e.2.2
+      · linear_combination e.2.2 - h
+
+theorem orderOf_rho_eq_five [Nontrivial R] {k : ℕ} (hk : k + 1 ≤ n) :
+    orderOf (rho (n := n) (α := α) k) = 5 ↔ α k ^ 2 + α k - 1 = 0 := by
+  rw [orderOf_eq_iff (by norm_num)]
+  constructor
+  · rintro ⟨h, -⟩
+    have e := step_pow_of_rho_pow hk h
+    simp only [step, Function.iterate_succ_apply', Function.iterate_zero_apply,
+      Prod.mk.injEq] at e
+    linear_combination α k * e.2.2 - e.2.1
+  · intro h
+    refine ⟨rho_pow_eq_one 5 fun a b => ?_, fun m hm h0 => rho_pow_ne_one hk ?_⟩
+    · simp only [Finset.sum_range_succ, Finset.sum_range_zero, pow_succ, pow_zero,
+        Module.End.mul_apply, Module.End.one_apply, rho_pl hk, pl_add, zero_add]
+      apply pl_eq_zero
+      · linear_combination (α k * ((1 + α k) * a - (2 + α k) * b) - a) * h
+      · linear_combination (α k * (a - b) - b) * h
+    · obtain rfl | rfl | rfl | rfl : m = 1 ∨ m = 2 ∨ m = 3 ∨ m = 4 := by omega
+      all_goals
+        simp only [step, Function.iterate_succ_apply', Function.iterate_zero_apply, ne_eq,
+          Prod.mk.injEq]
+        intro e
+        apply one_ne_zero (α := R)
+      · linear_combination -e.1
+      · linear_combination e.2.2
+      · linear_combination e.2.1 - h
+      · linear_combination e.2.2 - h
+
+/-! ### The icosahedron of pages 74–75 is the case `(α₀, α₁) = (−1, α)` -/
+
+/-- A point `(x, y, z)` of page 74 in barycentric coordinates `(1 − x − y − z, x, y, z)`. -/
+def emb (p : R × R × R) : ℕ → R := fun j =>
+  if j = 0 then 1 - p.1 - p.2.1 - p.2.2 else if j = 1 then p.1 else if j = 2 then p.2.1
+  else if j = 3 then p.2.2 else 0
+
+/-- The parameters of the icosahedron `{3, 5}`. -/
+def icoα (a : R) : ℕ → R := fun i => if i = 0 then -1 else a
+
+theorem usig_emb (a : R) (p : R × R × R) :
+    usig 2 (icoα a) 0 (emb p) = emb (sigma0 p) ∧
+      usig 2 (icoα a) 1 (emb p) = emb (sigma1 a p) ∧
+      usig 2 (icoα a) 2 (emb p) = emb (sigma2 p) := by
+  have e0 : Finset.Ico 2 4 = {2, 3} := by decide
+  have e1 : Finset.Ico 3 4 = {3} := by decide
+  refine ⟨funext fun j => ?_, funext fun j => ?_, funext fun j => ?_⟩ <;>
+    rcases j with _ | _ | _ | _ | j <;>
+    simp [usig_apply, ell_apply, wv, sv, emb, icoα, sigma0, sigma1, sigma2, e0, e1] <;> ring
+
+/-- The icosahedron's rotations have orders `3` and `5` exactly, over every nonzero ring
+with `α² + α − 1 = 0`. -/
+theorem ico_orderOf [Nontrivial R] {a : R} (h : a ^ 2 + a - 1 = 0) :
+    orderOf (rho (n := 2) (α := icoα a) 0) = 3 ∧ orderOf (rho (n := 2) (α := icoα a) 1) = 5 :=
+  ⟨(orderOf_rho_eq_three (by norm_num)).2 (by simp [icoα]),
+    (orderOf_rho_eq_five (by norm_num)).2 (by simpa [icoα] using h)⟩
+
+end Universal
+end Grothendieck.Folder70

@@ -7518,6 +7518,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Check whether the vertex-frame affine form with parameters 2cos(2π/p_i), defined over Z for the tetrahedron, cube and octahedron, appears in the literature on realisations of regular polytopes (McMullen–Schulte, Abstract Regular Polytopes, ch. 5; McMullen, Geometric Regular Polytopes, 2020) or in the Monson–Schulte series; if it does, this entry is matched and Ji’s discrepancy is resolved there rather than here.',
+    lean: { file: 'lean/Grothendieck/Folder70.lean', found: "Holds, more generally, for p = 3, 4, 5. In barycentric coordinates on the vertex frame, σᵢ = id + ℓᵢ ⊗ (s_{i+1} − sᵢ) satisfies σᵢ² = 1 and σᵢσⱼ = σⱼσᵢ (j ≥ i + 2) for all αᵢ, over any commutative ring and every n (usig_mul_self, usig_comm); (t − 1)(t² − αₖt + 1) kills σₖσₖ₊₁ (rho_cubic); and over every nonzero commutative ring σₖσₖ₊₁ has order exactly 3, 4 or 5 iff αₖ = −1, αₖ = 0 or αₖ² + αₖ − 1 = 0 (orderOf_rho_eq_three, _four, _five): page 67's criterion for the values of p in finite regular polytopes, with no field and no p invertible, characteristics 2, 3, 5 included. The icosahedron's generators of pp. 74–75 are the case (α₀, α₁) = (−1, α) (usig_emb); tetrahedron (−1, −1), cube (0, −1), octahedron (−1, 0) and dodecahedron (α, −1) are the other Platonic instances. Not formalised: the criterion for general p (the minimal polynomial of 2cos(2π/p)) and the derivation of the normal form from the definition (pp. 7–18)." },
   },
   {
     id: '72-invariant-subspaces-string',

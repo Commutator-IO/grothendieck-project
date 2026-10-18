@@ -494,15 +494,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '70',
     batch: 4,
-    page: '74–102',
-    name: 'The icosahedron over ℤ[α] and modulo 5',
+    page: '9–25, 67, 74–102',
+    name: 'The icosahedron over ℤ[α] and modulo 5; the universal formulae',
     statement:
-      'Over any nonzero ring with α² + α = 1, the twelve vertices of the icosahedron are distinct, no three are collinear and none lies in a face plane not containing it. Over 𝔽₅, the conic q₀ = 0 consists of the six vertex directions, and the 6 + 15 + 10 directions of vertices, edges and faces are the 31 points of ℙ²(𝔽₅).',
+      'Over any nonzero ring with α² + α = 1, the twelve vertices of the icosahedron are distinct, no three are collinear and none lies in a face plane not containing it. Over 𝔽₅, the conic q₀ = 0 consists of the six vertex directions, and the 6 + 15 + 10 directions of vertices, edges and faces are the 31 points of ℙ²(𝔽₅). In the vertex frame the reflections σᵢ = id + ℓᵢ ⊗ (s_{i+1} − sᵢ) satisfy the relations of the string Coxeter group for all parameters αᵢ, and σᵢ₋₁σᵢ has order pᵢ iff αᵢ₋₁ is a root of the minimal polynomial of 2cos(2π/pᵢ).',
     found:
-      'The incidences hold in characteristics 2 and 5 as well, by the page’s homogeneity argument with kernel-checked word tables and 30 unit minors; the margin « faux en car. 2 » does not concern them. In characteristic 2 the translation of p. 91 is (α′, α, α), not (α′, 1, 1). The 24 isotropic vectors mod 5 are the icosahedron and its double, and edge and face points are exterior and interior to the conic. The order of the group and the quadric statements are not proved.',
+      'The incidences hold in characteristics 2 and 5 as well, by the page’s homogeneity argument with kernel-checked word tables and 30 unit minors; the margin « faux en car. 2 » does not concern them. In characteristic 2 the translation of p. 91 is (α′, α, α), not (α′, 1, 1). The 24 isotropic vectors mod 5 are the icosahedron and its double, and edge and face points are exterior and interior to the conic. The universal formulae hold in every dimension over any commutative ring, and the order criterion for p = 3, 4, 5 (αₖ = −1, 0, a root of α² + α − 1) over every nonzero ring, without a field or p invertible; the icosahedron of pp. 74–75 is the case (−1, α). The order of the group, the quadric statements and the criterion for general p are not proved.',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder70.lean',
-    theorems: ['vert_injective_any', 'not_collinear_any', 'not_in_face_plane_any', 'iota_char_two', 'conic_iff', 'point_bijective', 'isotropic_card', 'edge_tangents'],
+    theorems: ['vert_injective_any', 'not_collinear_any', 'not_in_face_plane_any', 'iota_char_two', 'conic_iff', 'point_bijective', 'isotropic_card', 'edge_tangents', 'usig_mul_self', 'usig_comm', 'rho_cubic', 'orderOf_rho_eq_three', 'orderOf_rho_eq_four', 'orderOf_rho_eq_five', 'usig_emb'],
   },
   {
     folder: '86',
