@@ -37,6 +37,19 @@ export const PROOFS: Proof[] = [
     theorems: ["lemme2_1", "lemme2_2", "isOpen_of_stableUnderGeneralization", "lemme1_faisceau", "proposition", "lemme2_page", "lemme1", "corollaire1"],
   },
   {
+    folder: '121',
+    batch: 1,
+    page: '3–16',
+    name: 'The coarsest admissible cellular decomposition',
+    statement:
+      'Let 𝓕 be a Boolean algebra of parts of a topological space, closed under closure, each member containing a dense open part of its closure, and in which every decreasing sequence of closed members, each rare in the one before, ends at ∅. Every finite 𝓛 ⊂ 𝓕 admits an 𝓕-admissible cellular decomposition (frontier condition, distinct closures) of which the members of 𝓛 are unions of cells, and one coarser than all the others.',
+    found:
+      'Holds as stated, with d) read relative to the closure, as the reading does. The induction runs over closed members in place of X and stops by e); page 8’s lemma (the boundary of a member is rare) is proved in full. The page gives no argument for « la plus grossière »; the edition’s remark that a compatible cell meeting the boundary of Y lies in it supplies it. The connected cells of page 16 and the regular decompositions of page 17 are not formalised.',
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder121.lean',
+    theorems: ['page14', 'exists_coarsest', 'Tame.rare_bd', 'subset_bd', 'step'],
+  },
+  {
     folder: '69',
     batch: 2,
     page: '25–26',
