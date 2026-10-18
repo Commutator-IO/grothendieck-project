@@ -13,6 +13,14 @@
 % mathlib result, no literature beyond « unsearched » in the findings, no
 % facsimile correction since the pass; the pencil on the cover is left as the
 % transcription has it.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — pp. 10-13: footnotes on the
+%   tier-2 Lean check of the pushouts (Folder120.lean): the sufficiency of the
+%   criterion and the existence along tame embeddings hold, computed as in
+%   sets; R non-empty is needed for the universal property, (M6) with its
+%   « de plus » half. No mathlib result, no literature (finding unsearched),
+%   no facsimile correction. A backslash-newline inside $...$ in the p. 23
+%   footnote, which inverted text and mathematics in the reading view from
+%   there on, removed.
 % The folder was read whole: two batches, pages 1-24, both transcribed. Page 1
 % is the cover; it carries no \page in the transcription.
 %
@@ -618,7 +626,15 @@ hors de $Z$ d'un point de $X_2$ hors de $Z$, et un point $i_1(z)$ d'un point
 $x_2 \neq i_2(z)$ est séparé par $g$ grâce à a) et b). L'image $F(X) = f(X_1)
 \cup g(X_2)$ est modérée, on transporte sa structure à $X$, les $g_i$ sont
 modérées puisque $F \circ g_1 = f$ et $F \circ g_2 = g$ le sont, et la
-Proposition des pages 8 et 11 conclut. Inversement, si la somme existe et que
+Proposition des pages 8 et 11 conclut.\footnote{Cette suffisance est vérifiée
+en Lean (lean/Grothendieck/Folder120.lean, \texttt{pushout\_of\_criterion}),
+les espaces étant des parties modérées de puissances de $R$ et les applications
+modérées des familles à graphe modéré : sous (M5$'$), la réunion $f(X_1) \cup
+g(X_2)$ est modérée, c'est la somme amalgamée ensembliste, et toute paire
+d'applications modérées compatibles sur $Z$ s'y factorise par une application
+modérée. Il faut $R$ non vide pour la propriété universelle, puisqu'il faut une
+application vers une puissance de $R$ ; ce sont les cas triviaux que la page 4
+écarte. La nécessité du critère et le NB ne sont pas vérifiés.} Inversement, si la somme existe et que
 l'oubli la respecte, un plongement $F : X \hookrightarrow R^A$ donne $f = F
 \circ g_1$ et $g = F \circ g_2$.
 
@@ -730,7 +746,13 @@ coordonnée $R^I$ — qui est $\varphi$ sur $Z$ — dit qu'il provient du même 
 de $Z$. Les deux images se rencontrent donc exactement le long de l'image de
 $Z$, et leur réunion, modérée par (M5$'$), est en bijection avec la somme
 amalgamée ensembliste ; c'est le critère des pages 10 et 11, et la Proposition
-des pages 8 et 11 conclut.\footnote{La page s'arrête après le diagramme ; la
+des pages 8 et 11 conclut.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder120.lean, \texttt{pushout\_exists}), $R$ étant non
+vide : sous (M5$'$), (M6) et (M7), les familles du critère existent pour deux
+plongements modérés quelconques, par le diagramme (*), et les deux images se
+rencontrent exactement le long de $Z$, comme on le restitue ici. (M6) sert avec
+sa seconde moitié, l'injectivité hors de $Z$. La catégorie $\Sigma$ elle-même
+n'est pas construite dans cette vérification.}\footnote{La page s'arrête après le diagramme ; la
 conclusion est restituée. Les étages $\{e_1\}$, $\{e_2\}$ sont des parties
 modérées parce que $e_1, e_2$ sont des points modérés, ce que (M6) exige.}
 
@@ -1017,8 +1039,8 @@ puisque $\lambda \neq 0$ dans le corps $R$.\footnote{Vérifié en Lean
 (lean/Grothendieck/Folder120.lean, \texttt{separates\_off\_zeroSet}) : le pas
 est $\lambda\,(g_\beta(x) - g_\beta(y)) \neq 0$, qui ne demande à $R$ que de
 n'avoir pas de diviseur de zéro. On ne peut s'en passer : sur
-$\mathbf{Z}/4\mathbf{Z}$, avec $f = 2$ et $g = \mathrm{id}$, la famille $2,\
-2x$ ne sépare pas $0$ et $2$ (\texttt{not\_separates\_zmod4}), bien que
+$\mathbf{Z}/4\mathbf{Z}$, avec $f = 2$ et $g = \mathrm{id}$, la famille
+$(2, 2x)$ ne sépare pas $0$ et $2$ (\texttt{not\_separates\_zmod4}), bien que
 $f(0) \neq 0$ et $g(0) \neq g(2)$.}
 
 \textbf{Proposition (page 23).} Sous (M1) à (M7) et (M11), toute partie modérée
