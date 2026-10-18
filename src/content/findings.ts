@@ -5720,6 +5720,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Look in EGA 0_IV §21 (differentials in characteristic p, the imperfection module and the Cartier equality) and Matsumura, Commutative Ring Theory §26, for a description of the kernel of Ω_k ⊗_k K → Ω_K in terms of k ∩ K^p, and for this or a simpler counterexample. If the kernel is described there, or the failure is noted, mark matched. A small example such as this may well be standard exercise material.',
+    lean: { file: 'lean/Grothendieck/Folder22.lean', found: "Holds, in the specialisation a_i = 0 for 2 ≤ i ≤ p − 1 that page 28 offers (the whole example when p = 2), for every prime p: for K = 𝔽_p(x, b₀, b₁), a_i = b_iᵖ, y = a₀ + a₁x, k = 𝔽_p(x, y) and k′ = k ∩ Kᵖ, the element 1 ⊗ dy − a₁ ⊗ dx of K ⊗_k Ω_{k/k′} is nonzero and maps to 0 in Ω_{K/k′} (which is Ω_K, k′ consisting of p-th powers; that identification is not formalised). The proof never computes k′: it shows that ∂/∂y on k kills k′, because ∂/∂x on K kills Kᵖ and the chain rule gives ∂c/∂x + a₁ ∂c/∂y = 0 for c ∈ k′, while a₁ ∉ k. That last fact comes from the algebraic independence of x, y, a₁, proved by factoring (x, y, a₁) as a triangular automorphism followed by a partial Frobenius. The general example with a₂, …, a_{p−1} is not formalised." },
   },
   // Folder 28. Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5 (2026-09-12), under the one-way exception of /find-novelty.
   {
