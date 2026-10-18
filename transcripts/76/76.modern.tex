@@ -17,6 +17,12 @@
 % transitivity of p. 27 footnoted with the Lean check (Folder76.lean, flag_lemma,
 % prec_trans), which confirms them as read; no mathlib result, no literature
 % recorded by the findings, no facsimile correction since the pass.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — pp. 22-24: footnote on the
+%   Lean check of the vertex order (lean/Grothendieck/Folder76.lean): the
+%   Proposition holds with (2°), the vertex order is unique, (2 bis) => (2°)
+%   and the triangle boundary separates them, confirming the reading's choice
+%   of numeral; the way back is folder 104's equivalence. No literature
+%   recorded; two « Ce que » turns removed.
 % The folder was read whole, its four batches together; this is one document
 % for the shelfmark. It was made on Opus 5.5 and has not been measured against
 % the reference reading of folder 115 (made on Opus 5). The four
@@ -262,7 +268,7 @@ garde les deux rédactions distinctes.
   que $J \cap \sigma J = \emptyset$.
 \end{itemize}
 
-\emph{Ce que le dossier annonce et n'établit pas.} Les théorèmes 1 à 4 et 7
+\emph{Annoncé et non établi.} Les théorèmes 1 à 4 et 7
 sont énoncés sans démonstration, les théorèmes 5 et 6 seulement nommés ;
 « l'image essentielle » est à déterminer aux pages 4 et 7, et le reste ; la
 question de la page 19 et le programme de la page 29 restent ouverts ; le
@@ -799,7 +805,7 @@ hors de $|F|^\circ$ est dans un simplexe ouvert dont le dernier sommet précède
 $F$. L'égalité demande que tout simplexe de dernier sommet $F' < F$ soit face
 d'un simplexe de dernier sommet $F$, ce qui n'est pas
 automatique.\footnote{Cette discussion de l'égalité est la nôtre ; la page la
-marque d'un point d'interrogation. Ce que sont les $|F|$ --- des boules ou
+marque d'un point d'interrogation. La nature des $|F|$ --- des boules ou
 non --- est la question b) de la page 29.}
 
 \pagerange{20}{24}
@@ -897,7 +903,23 @@ et non (2 bis), plus forte : l'ensemble semi-simplicial associé à $(D_*,
 bord d'un triangle $\{0 < 1 < 2\}$, où $0 \prec 2$ est une arête mais aucun
 $2$-simplexe ne borde $(01, 12)$. À la page 24, la page écrit « $x_0 =
 \delta_0(z_1)$, $y_0 = \delta_0(z_1)$ » ; le second est $\delta_1$, comme à la
-page 23.}
+page 23.}\footnote{Vérifié en Lean (lean/Grothendieck/Folder76.lean,
+\texttt{trans\_iff\_vertexOrder}, \texttt{vertexOrder\_unique},
+\texttt{vertexOrderEquiv}, \texttt{trans\_of\_hornFill} et
+\texttt{triangleBoundary\_not\_hornFill}), avec (2°) comme on le lit. Pour un
+ensemble semi-simplicial satisfaisant (1), les ordres des simplexes sont
+compatibles et leur relation d'arête est $\prec$ ; $\prec$ est transitive si et
+seulement si tous ces ordres sont induits par un même ordre sur $D_0$
+satisfaisant (b) et (c), et cet ordre est alors $\prec$, donc unique. Du côté
+des ensembles ordonnés, les ordres sur $D_0$ satisfaisant (b) et (c)
+correspondent bijectivement aux familles d'ordres totaux compatibles sur les
+simplexes dont la relation d'arête est transitive ; de (a), seule sert
+l'existence, sous un simplexe, de l'arête qui joint deux de ses sommets. Enfin
+(2 bis) entraîne (2°), et le bord du triangle satisfait (1) et (2°) sans
+satisfaire (2 bis), ce qui confirme le choix fait ici. Le retour des ordres
+compatibles à l'ensemble semi-simplicial n'est pas refait dans ce fichier :
+c'est le cas $\Delta_{\mathrm{inj}}$ de l'équivalence vérifiée pour la cote 104
+(lean/Grothendieck/Folder104.lean).}
 
 \textbf{Remarque} (page 24). Si $\omega$ est un ordre sur $D_0$ satisfaisant
 (b) et (c), l'ordre opposé les satisfait aussi, et donne une autre structure
