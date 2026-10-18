@@ -7,6 +7,13 @@
 % Pass: Opus 5 (claude-opus-5), 2026-09-13 — first pass, unchecked against the
 % pages by a human. The folder was read whole; it holds one batch, pages 1-18,
 % all of them mathematics, dated 6 June 1986 (page 1) and 7 June (page 14).
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — pp. 14-15: footnotes on the
+%   Lean check of the rives (lean/Grothendieck/Folder156_2.lean): (*) has
+%   clopen values, is Boolean and is injective for any subset A of any space,
+%   the one-line argument of the first pass completed by the separation of
+%   germs by Stone points (ultrafilters); Riv(A, X) = 0 iff A open. The
+%   finding is unsearched: no literature added. Batch file changed since the
+%   first pass by macro renames only. A « Ce que » heading renamed.
 %
 % What the folder is. Chapter II (« GF II ») of Vers une géométrie des formes:
 % the first steps of a topology of « failles » — a space with two ends,
@@ -148,7 +155,7 @@ C$ et $F_{A,C} = (X_{A,C}, \{A,C\})$. $\mathrm{Comp}(Z)$ est l'anneau booléen d
 parties ouvertes et fermées de $Z$. Le mot « disjoints », appliqué à deux lieux,
 a toujours le sens fixé à la page 8, plus fort que l'intersection vide.
 
-\emph{Ce que le dossier annonce et n'établit pas} : les équivalences de
+\emph{Annoncé et non établi} : les équivalences de
 catégories des pages 7 à 9 entre failles munies de lieux et chaînes de failles
 recollées ; l'affirmation de la page 7 que tout lieu d'une faille composante est
 un lieu de la faille ; la symétrie de la compatibilité de deux mailles, sur
@@ -575,7 +582,23 @@ toujours injective, et bijective si $X$ est paracompact\footnote{L'injectivité
 n'utilise rien : une section sur $V$ nulle en germe en chaque point de $A$ est
 nulle sur un voisinage ouvert de $A$. La bijectivité est le théorème de Godement
 ci-dessus. La page écrit d'abord « bijective », puis ajoute « injective, et » au
-dessus de la ligne.}. Dans ce cas, choisir une rive, c'est choisir une partie
+dessus de la ligne.}\footnote{L'injectivité est vérifiée en Lean
+(lean/Grothendieck/Folder156\_2.lean, \texttt{toComp\_injective},
+\texttt{toComp\_mul}, \texttt{toComp\_one}), sans aucune hypothèse : ni la
+fermeture de $A$ ni rien sur $X$ ne sert. Les rives y sont codées par les
+germes le long de $A$ d'indicatrices localement constantes sur $V \smallsetminus
+A$, et $\widetilde{A}$ par les couples $(x, \chi)$, $x \in A$, $\chi$ un point du
+spectre de la fibre de $j_{*}\mathbf{F}_{2}$ en $x$, avec la topologie engendrée
+par les $\{(y, \chi) : y \in W,\ \chi(f_y) = 1\}$ ; c'est un choix de topologie
+que la page et cette lecture laissent ouvert. L'image de chaque rive est alors
+ouverte et fermée, et $(*)$ est un morphisme d'algèbres de Boole. L'argument
+d'une ligne donné ci-dessus ne suffit pas tel quel, car $(*)$ arrive dans
+$\mathrm{Comp}(\widetilde{A})$ et non dans les sections : il faut encore que deux
+germes distincts en $x$ soient séparés par un point du spectre de la fibre, ce
+que donne l'évaluation le long d'un ultrafiltre plus fin que le filtre des
+voisinages de $x$ dans $X \smallsetminus A$. La bijectivité pour $X$
+paracompact, l'identification $\mathrm{Comp}(\widetilde{A}) \simeq \Gamma(A,
+(j_{*}\mathbf{F}_{2,U})|_{A})$ et l'espace découpé ne sont pas formalisés.}. Dans ce cas, choisir une rive, c'est choisir une partie
 ouverte et fermée de $\widetilde{A}$. On pense à $\widetilde{A}$ comme au bord de
 l'espace obtenu en coupant $X$ le long de $A$ : pour une hypersurface bilatère,
 $\widetilde{A} = A \times \{\pm 1\}$ ; pour l'âme d'un ruban de Möbius,
@@ -592,7 +615,9 @@ $A$ \emph{déconnecte localement} $X$ s'il existe une bi-rive non triviale.
 Dans un anneau booléen, $\rho = \rho'$ et $\rho + \rho' = 1$ imposent $1 = 0$, ce
 qui arrive seulement si $A$ est ouvert ; une bi-rive a donc deux éléments distincts
 dès que $A$ n'est pas ouvert\footnote{La page écrit « si $A \neq \emptyset$ ». Pour
-$A$ ouvert et fermé non vide, $V = A$ est un voisinage et $\mathrm{Riv}(A,X) = 0$.}.
+$A$ ouvert et fermé non vide, $V = A$ est un voisinage et $\mathrm{Riv}(A,X) = 0$.
+Que $\mathrm{Riv}(A, X)$ soit nul exactement quand $A$ est ouvert est vérifié en
+Lean (lean/Grothendieck/Folder156\_2.lean, \texttt{riv\_one\_eq\_zero\_iff}).}.
 Une bi-rive découpe $\widetilde{A} = \widetilde{A}_{1} \sqcup \widetilde{A}_{2}$.
 Pour une hypersurface bilatère connexe, $\mathrm{Riv}(A,X)$ a quatre éléments, $0$,
 $1$ et les deux côtés, qui forment une bi-rive non triviale. L'âme $A$ du ruban de
