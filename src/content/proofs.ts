@@ -286,15 +286,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '98',
     batch: 1,
-    page: '10–12',
-    name: 'Axiomatic norms: the model of G-sets',
+    page: '10–12, 28–30',
+    name: 'Axiomatic norms: the model of G-sets; classes of sheaves over extensions of k',
     statement:
-      'Maps whose fibres all have r elements, with r as degree, satisfy (i)–(v) and (i bis)–(v bis), the fibre of (X^n_Y)/H → Y being E^n/H; Can_{X/Y}(y), the class of the points of the fibre, satisfies (i ter)–(iv ter), including the transitivity diagram of p. 11, and is compatible with the action of G.',
+      'Maps whose fibres all have r elements, with r as degree, satisfy (i)–(v) and (i bis)–(v bis), the fibre of (X^n_Y)/H → Y being E^n/H; Can_{X/Y}(y), the class of the points of the fibre, satisfies (i ter)–(iv ter), including the transitivity diagram of p. 11, and is compatible with the action of G. Pp. 28–30: k-equivalence of sheaves over extensions of k (Déf. 1) is an equivalence relation, 𝔉(X/k) is contravariant in X, and (Cor. 5) 𝔉(X/k) is the set of classes of sheaves on X ⊗_k K̃ modulo Aut(K̃/k).',
     found:
-      'All hold. (ii ter), verified for no example in the folder, holds because the fibre of vu over z is the disjoint union of the fibres of u over the points of the fibre of v. The group plays no role beyond the equivariance of Can. Schemes (Example II), coverings (Example III) and the transitivity of pp. 6–8 are not formalised.',
+      'All hold. (ii ter), verified for no example in the folder, holds because the fibre of vu over z is the disjoint union of the fibres of u over the points of the fibre of v. The group plays no role beyond the equivariance of Can. Schemes (Example II), coverings (Example III) and the transitivity of pp. 6–8 are not formalised. For Déf. 1, the page’s reason, that two extensions of k can always be dominated by a third, does not give transitivity: the two extensions of K₂ must be dominated compatibly with the embeddings of K₂, as the reading notes. Cor. 5 follows from the two halves of Prop. 1 and two properties of K̃ (every extension of finite type embeds in it, and two embeddings of one such extension differ by an automorphism of K̃), which are taken as hypotheses, as is Prop. 1.',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder98.lean',
-    theorems: ['hasDeg_id', 'hasDeg_comp', 'hasDeg_pullback', 'hasDeg_sum', 'hasDeg_quotPow', 'can_id', 'can_comp', 'can_pullback', 'can_sum', 'can_smul'],
+    theorems: ['hasDeg_id', 'hasDeg_comp', 'hasDeg_pullback', 'hasDeg_sum', 'hasDeg_quotPow', 'can_id', 'can_comp', 'can_pullback', 'can_sum', 'can_smul', 'kEquiv_equivalence', 'kEquiv_map', 'corollaire5_surj', 'corollaire5_iff'],
   },
   {
     folder: '39',

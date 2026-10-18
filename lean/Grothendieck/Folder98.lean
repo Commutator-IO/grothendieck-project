@@ -4,9 +4,11 @@ import Mathlib.GroupTheory.Perm.Basic
 import Mathlib.Algebra.Group.Subgroup.Defs
 import Mathlib.SetTheory.Cardinal.NatCard
 import Mathlib.Algebra.Group.Action.Defs
+import Mathlib.CategoryTheory.Iso
 
 /-!
-# Folder 98, pages 10–12: the axioms of a theory of norms in the model of G-sets
+# Folder 98: the axioms of a theory of norms in the model of G-sets (pages 10–12), and the
+# classes of sheaves over the extensions of the base field (pages 28–30)
 
 The modernised reading `transcripts/98/98.modern.tex` (« Une théorie axiomatique des normes »)
 gives, in a category with finite sums, a class `𝒩` of morphisms with (i) identities,
@@ -16,8 +18,9 @@ base change, (iv bis) additivity, (v bis) `deg ((X^n_Y)/H → Y) = card(E^n/H)` 
 `E = {1, …, r}`; and canonical sections `Can_{X/Y} : Y → Sym^r_Y(X)` with (i ter)
 `Can_{X/X} = id`, (ii ter) the transitivity diagram of page 11, (iii ter) base change,
 (iv ter) additivity. Example I: `G`-sets, `u` of degree `r` when all its fibres have `r`
-elements, `Can_{X/Y}(y)` the class of the points of the fibre « rangés dans un ordre
-quelconque »; the page says the axioms are « immédiats » and « se vérifient aussitôt ».
+elements, `Can_{X/Y}(y)` the class of the « suite de ses éléments rangés dans un ordre
+quelconque »; the page says (i)–(v) and (i bis)–(v bis) are « trivialement vérifiées » and that
+« on vérifie aussitôt » (i ter)–(iv ter).
 
 What is formalised, for maps of types (the action of `G` only has to be respected, `can_smul`):
 
@@ -29,15 +32,29 @@ What is formalised, for maps of types (the action of `G` only has to be respecte
   `can_id`, `can_comp`, `can_pullback`, `can_sum` — (i ter)–(iv ter), (ii ter) being the
   diagram of page 11 with `can : Sym^s_Z(Sym^r_Y X) → Sym^s_Z(Sym^r_Z X) → Sym^{rs}_Z X`.
 * `can_smul` — `Can` is compatible with the action of a group `G` when `u` is equivariant.
+* `kEquiv_equivalence` — Déf. 1 of page 28: `k`-equivalence of sheaves over extensions of `k`
+  is an equivalence relation, in a model where `C` is the category of extensions and `Φ K` the
+  classes of sheaves on `X ⊗_k K` with base change.
+* `kEquiv_map` — page 29: `𝔉(X/k)` is contravariant in `X`.
+* `corollaire5_surj`, `corollaire5_iff` — Cor. 5 of page 30: from Prop. 1 and the two
+  properties of `K̃`, `𝔉(X/k)` is the quotient of the classes on `X ⊗_k K̃` by `Aut(K̃/k)`.
 
 Not formalised: Example II (finite locally free morphisms of schemes, with the norm of page 2),
-Example III (covering spaces and `Φ(E) = X ×^Γ E`), and the transitivity of norms of pages 6–8.
+Example III (covering spaces and `Φ(E) = X ×^Γ E`), the transitivity of norms of pages 6–8;
+for pages 28–30, Prop. 1 itself and the universality and homogeneity of `K̃`, which are
+hypotheses.
 
 **What the formalisation finds.** Example I satisfies all the axioms, including (ii ter), which
 nothing in the folder verifies for any example: the fibre of `v ∘ u` over `z` is the disjoint
 union of the fibres of `u` over the `s` points of the fibre of `v`. The group plays no role
 beyond the equivariance of `Can`; (v bis) holds for every `n` and every `H`, with the fibre of
-`(X^n_Y)/H` identified with `E^n/H` by any enumeration of the fibre of `u`.
+`(X^n_Y)/H` identified with `E^n/H` by any enumeration of the fibre of `u`. For Déf. 1, the
+justification of page 28, that two extensions of `k` « peuvent toujours être “dominées” par une
+troisième », is not enough for transitivity: the two extensions `K'`, `K''` of `K₂` must be
+dominated by a third extension of `K₂`, compatibly with the two embeddings of `K₂`
+(`Amalgamation`), as the reading's note says. In Cor. 5, surjectivity uses only the first half
+of Prop. 1 and the embedding of the extensions of finite type in `K̃`; injectivity uses both
+halves and the homogeneity of `K̃`.
 
 What this certifies is that the reading holds together at this point, not that it is what the
 pages say (issue #26).
@@ -280,5 +297,117 @@ theorem can_smul {G : Type*} [Group G] [MulAction G X] [MulAction G Y] {u : X �
     rw [hequiv, hx, inv_smul_smul]
   · rintro ⟨x', hx', rfl⟩
     rw [hequiv, hx']
+
+
+/-! ### Pages 28–30: classes of sheaves over the extensions of the base field
+
+Déf. 1 of page 28 calls `F₁` on `X ⊗_k K₁` and `F₂` on `X ⊗_k K₂` `k`-equivalent when there are
+an extension `K'` and `k`-embeddings `u_i : K_i → K'` with `F₁ ⊗_{K₁} K' ≃ F₂ ⊗_{K₂} K'`; the
+page says it is an equivalence relation « en vertu de la transitivité de l'extension des
+scalaires et du fait que deux extensions de `k` peuvent toujours être “dominées” par une
+troisième ». Cor. 5 of page 30, for `K̃` algebraically closed of infinite transcendence degree,
+puts the classes `𝔉(X/k)` in bijection with the classes of sheaves on `X ⊗_k K̃` modulo
+`Aut(K̃/k)`.
+
+The model: a category `C` (the extensions of `k` and their `k`-embeddings), for each `K` a type
+`Φ K` (the isomorphism classes of sheaves on `X ⊗_k K`), and base change
+`bc u : Φ K → Φ K'`, functorial. -/
+
+section Classes
+
+open CategoryTheory
+
+universe v u w
+
+variable {C : Type u} [Category.{v} C] {Φ : C → Type w}
+  {bc : ∀ {K K' : C}, (K ⟶ K') → Φ K → Φ K'}
+
+variable (Φ bc) in
+/-- Déf. 1: `(K₁, F₁)` and `(K₂, F₂)` are `k`-equivalent when they become isomorphic over a
+common extension `K'`. -/
+def KEquiv (p q : Σ K, Φ K) : Prop :=
+  ∃ (K' : C) (u₁ : p.1 ⟶ K') (u₂ : q.1 ⟶ K'), bc u₁ p.2 = bc u₂ q.2
+
+variable (C) in
+/-- Two extensions `B`, `B'` of `A` are dominated by a third extension of `A`: a common
+extension `D` with embeddings that agree on `A` (for fields, a quotient of `B ⊗_A B'` by a
+maximal ideal). -/
+def Amalgamation : Prop :=
+  ∀ ⦃A B B' : C⦄ (f : A ⟶ B) (g : A ⟶ B'), ∃ (D : C) (f' : B ⟶ D) (g' : B' ⟶ D),
+    f ≫ f' = g ≫ g'
+
+/-- Déf. 1: `k`-equivalence is an equivalence relation, by the transitivity of base change and
+the domination of two extensions of `K₂` by a third extension of `K₂`. -/
+theorem kEquiv_equivalence
+    (hcomp : ∀ {K K' K''} (f : K ⟶ K') (g : K' ⟶ K'') a, bc (f ≫ g) a = bc g (bc f a))
+    (ham : Amalgamation C) : Equivalence (KEquiv Φ bc) where
+  refl p := ⟨p.1, 𝟙 _, 𝟙 _, rfl⟩
+  symm := fun ⟨K', u₁, u₂, h⟩ => ⟨K', u₂, u₁, h.symm⟩
+  trans := by
+    rintro p q r ⟨K', u₁, u₂, h⟩ ⟨K'', v₂, v₃, h'⟩
+    dsimp only at h h'
+    obtain ⟨D, a, b, hab⟩ := ham u₂ v₂
+    refine ⟨D, u₁ ≫ a, v₃ ≫ b, ?_⟩
+    dsimp only
+    rw [hcomp, hcomp, h, ← hcomp, hab, hcomp, h', ← hcomp]
+
+/-- Page 29: `𝔉(X/k)` is contravariant in `X`. A pullback `ρ` of sheaves along `X' → X`,
+compatible with base change, preserves `k`-equivalence. -/
+theorem kEquiv_map {Ψ : C → Type w} {bc' : ∀ {K K' : C}, (K ⟶ K') → Ψ K → Ψ K'}
+    (ρ : ∀ K, Φ K → Ψ K) (hρ : ∀ {K K'} (u : K ⟶ K') a, ρ K' (bc u a) = bc' u (ρ K a))
+    {p q : Σ K, Φ K} (h : KEquiv Φ bc p q) : KEquiv Ψ bc' ⟨p.1, ρ _ p.2⟩ ⟨q.1, ρ _ q.2⟩ := by
+  obtain ⟨K', u₁, u₂, h⟩ := h
+  exact ⟨K', u₁, u₂, by dsimp only at h ⊢; rw [← hρ, ← hρ, h]⟩
+
+/-! Cor. 5. `fg K` says that `K` is of finite type over `k`; `Ω` stands for `K̃`. The
+hypotheses are the two halves of Prop. 1, for `X` of finite type (`hdesc`: a sheaf is defined
+over a sub-extension of finite type; `hfin`: two equivalent sheaves defined over extensions of
+finite type become isomorphic over an extension of finite type), and the two consequences the
+reading draws from the page's hypotheses on `K̃`, algebraically closed of infinite
+transcendence degree (`huniv`: every extension of finite type embeds in `K̃`; `hhomog`: two
+embeddings of an extension of finite type differ by an automorphism of `K̃`). -/
+
+variable {fg : C → Prop} {Ω : C}
+  (hid : ∀ K (a : Φ K), bc (𝟙 K) a = a)
+  (hcomp : ∀ {K K' K''} (f : K ⟶ K') (g : K' ⟶ K'') a, bc (f ≫ g) a = bc g (bc f a))
+  (huniv : ∀ K, fg K → Nonempty (K ⟶ Ω))
+  (hhomog : ∀ K, fg K → ∀ f g : K ⟶ Ω, ∃ σ : Ω ≅ Ω, g = f ≫ σ.hom)
+  (hdesc : ∀ K (a : Φ K), ∃ (K₀ : C) (j : K₀ ⟶ K) (a₀ : Φ K₀), fg K₀ ∧ bc j a₀ = a)
+  (hfin : ∀ p q : Σ K, Φ K, fg p.1 → fg q.1 → KEquiv Φ bc p q →
+    ∃ (K' : C) (u₁ : p.1 ⟶ K') (u₂ : q.1 ⟶ K'), fg K' ∧ bc u₁ p.2 = bc u₂ q.2)
+
+include hcomp huniv hdesc in
+/-- Cor. 5, surjectivity: every class has a representative on `X ⊗_k K̃`. -/
+theorem corollaire5_surj (ham : Amalgamation C) (p : Σ K, Φ K) :
+    ∃ x : Φ Ω, KEquiv Φ bc p ⟨Ω, x⟩ := by
+  obtain ⟨K, a⟩ := p
+  obtain ⟨K₀, j, a₀, hK₀, rfl⟩ := hdesc K a
+  obtain ⟨e⟩ := huniv K₀ hK₀
+  obtain ⟨D, f, g, hfg⟩ := ham j e
+  exact ⟨bc e a₀, D, f, g, by dsimp only; rw [← hcomp, hfg, hcomp]⟩
+
+include hid hcomp huniv hhomog hdesc hfin in
+/-- Cor. 5, injectivity: two sheaves on `X ⊗_k K̃` are `k`-equivalent if and only if
+`F ≃ σ(G)` for an automorphism `σ` of `K̃`. -/
+theorem corollaire5_iff (x y : Φ Ω) :
+    KEquiv Φ bc ⟨Ω, x⟩ ⟨Ω, y⟩ ↔ ∃ σ : Ω ≅ Ω, x = bc σ.hom y := by
+  constructor
+  · rintro ⟨K', u₁, u₂, h⟩
+    dsimp only at h
+    obtain ⟨K₁, j₁, x₁, hK₁, rfl⟩ := hdesc Ω x
+    obtain ⟨K₂, j₂, y₂, hK₂, rfl⟩ := hdesc Ω y
+    obtain ⟨K'', w₁, w₂, hK'', hw⟩ := hfin ⟨K₁, x₁⟩ ⟨K₂, y₂⟩ hK₁ hK₂
+      ⟨K', j₁ ≫ u₁, j₂ ≫ u₂, by dsimp only; rw [hcomp, hcomp, h]⟩
+    dsimp only at hw
+    obtain ⟨e⟩ := huniv K'' hK''
+    obtain ⟨σ₁, hσ₁⟩ := hhomog K₁ hK₁ (w₁ ≫ e) j₁
+    obtain ⟨σ₂, hσ₂⟩ := hhomog K₂ hK₂ (w₂ ≫ e) j₂
+    refine ⟨σ₂.symm ≪≫ σ₁, ?_⟩
+    rw [hσ₁, hσ₂, Iso.trans_hom, Iso.symm_hom, hcomp, hcomp, hcomp, hcomp, ← hcomp σ₂.hom,
+      Iso.hom_inv_id, hid, hw, hcomp]
+  · rintro ⟨σ, rfl⟩
+    exact ⟨Ω, 𝟙 _, σ.hom, by dsimp only; rw [hid]⟩
+
+end Classes
 
 end Grothendieck.Folder98
