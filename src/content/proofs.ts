@@ -37,6 +37,19 @@ export const PROOFS: Proof[] = [
     theorems: ["lemme2_1", "lemme2_2", "isOpen_of_stableUnderGeneralization", "lemme1_faisceau", "proposition", "lemme2_page", "lemme1", "corollaire1"],
   },
   {
+    folder: '69',
+    batch: 2,
+    page: '25–26',
+    name: 'The automorphisms of the 27-line graph fixing a triangle',
+    statement:
+      'On the graph C of the 27 lines of a cubic surface, two lines joined when they meet, the group W_t of automorphisms preserving a triangle t has order 32 · 36 = 1152 (page 26); the subgroup fixing t pointwise has order 192 (page 25).',
+    found:
+      'Both orders hold, by a finite computation on the graph: a stabiliser chain with base a₀, b₁, a₁, a₂, a₃, a₄ has orbits of sizes 3, 2, 8, 4, 3, 2, each orbit contained in the vertices with the same incidences to the points already fixed and exhausted by explicit automorphisms checked by the kernel; the base separates the vertices. The description by a Q₈-Baer torsor, the exact sequence and the equivalence of categories of page 26 are not formalised.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder69.lean',
+    theorems: ['card_Wt', 'card_aut', 'card_pointwise', 'degree_eq', 'card_step'],
+  },
+  {
     folder: '5',
     batch: 1,
     page: '4',
