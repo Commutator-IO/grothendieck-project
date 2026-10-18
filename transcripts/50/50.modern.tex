@@ -41,10 +41,21 @@
 %
 % What the folder announces and never establishes: the Corollaire of page 6,
 % for which only the word is written — the positivity of the Rosati involution,
-% which the two formulas above it give at once, and which the reading supplies
-% as the edition's and not the page's; the ten-line diagonal note at the foot
+% which the reading supplies as the edition's and not the page's, and which
+% does not follow from the axioms as written (see the revision line below); the ten-line diagonal note at the foot
 % of page 8; the three words after "Le" on page 10; and the line of page 4 that
 % carries "critere de Weil" and "variations", of which nothing else reads.
+%
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — with the Lean checks
+%   (lean/Grothendieck/Folder50.lean): the trace formula of pages 8 and 6
+%   needs I symmetric, which axiom (e) does not say (counterexample on Z^2,
+%   I(x, y) = x1 y2); page 6's second formula is for alpha' alpha, not
+%   alpha alpha' (the axioms give alpha'^* xi for the latter); the Corollaire
+%   (Rosati positivity) does not follow from the axioms — the first pass gave
+%   a wrong argument — counterexample in the quaternions with i^2 = j^2 = 0;
+%   it holds with I(xi^{r-1}, eta) > 0 on N^+ minus 0 and alpha != 0 =>
+%   alpha^* xi != 0. Résumé adjusted. No mathlib result, no literature (the
+%   finding is unsearched), no facsimile correction. One « Ce que » turn removed.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -108,10 +119,11 @@ qui à $r$ classes associe un entier, $r$ étant la dimension. De ces deux
 données descendent le degré d'un endomorphisme, sa trace, son polynôme
 caractéristique, et pour finir le théorème vers lequel tout le dossier va :
 une formule qui exprime la trace comme un rapport de nombres d'intersection.
-Le corollaire qui en découle immédiatement — la positivité de l'involution de
-Rosati, c'est-à-dire que $\mathrm{tr}(\alpha\alpha')$ est strictement positif
-pour tout $\alpha$ non nul — est annoncé au dernier feuillet par son seul mot,
-« Corollaire », suivi d'une page blanche.
+Le corollaire visé — la positivité de l'involution de Rosati, c'est-à-dire que
+$\mathrm{tr}(\alpha\alpha')$ est strictement positif pour tout $\alpha$ non
+nul — est annoncé au dernier feuillet par son seul mot, « Corollaire », suivi
+d'une page blanche ; et il ne se déduit pas des axiomes tels qu'ils sont
+écrits, il y faut encore deux conditions de positivité.
 
 Un mot au crayon, dans la marge du feuillet 9, dit tout le projet : en face de
 la propriété qui décompose les classes d'un produit, il écrit « purement
@@ -439,7 +451,7 @@ non-additivité-là qu'il s'agit, et $\mathrm{Hom}(A, D(B))$ en est la mesure
 exacte.\footnote{Traduit dans la théorie classique, c'est la décomposition
 $\mathrm{NS}(A \times B) \simeq \mathrm{NS}(A) \oplus \mathrm{NS}(B) \oplus
 \mathrm{Hom}(A, B^{\vee})$, qu'on démontre d'ordinaire par le théorème du
-carré et le principe de la bascule. Ce que le feuillet fait voir, c'est qu'elle
+carré et le principe de la bascule. Le feuillet fait voir qu'elle
 ne doit rien à la géométrie.}
 
 \textbf{Propriété fondamentale 2.} \emph{Pour tout $A$ il existe des
@@ -603,7 +615,20 @@ de $n^{2r-i}$ à être de degré $i$.}
 \subsection*{La trace comme rapport de nombres d'intersection}
 
 Le haut du feuillet 8, qui prolonge ce qui précède, en tire la formule qui
-justifie tout l'appareil :
+justifie tout l'appareil, vraie pourvu que $I$ soit symétrique, ce que
+l'axiome (e) ne dit pas\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder50.lean, \texttt{tr\_mul\_I}), le cadre étant
+transporté dans $\mathrm{Hom}(A,A)$ par $\varphi_{\xi}^{-1}$ : si $I$ est
+symétrique, la formule tient pour tout $\alpha$. On développe $I\bigl((n^{2}\xi
++ n\,D_{\xi}(\alpha) + \alpha^{*}\xi)^{r}\bigr)$ par multilinéarité, et le
+coefficient de $n^{2r-1}$ est la somme des $r$ termes où $D_{\xi}(\alpha)$
+occupe une place ; la symétrie les rend égaux. Sans elle la formule est fausse
+dans un modèle de tous les axiomes, construit par l'édition : $N = \mathbf{Z}^{2}$
+avec l'involution triviale, $\alpha^{*}\eta = \alpha^{2}\eta$, $\xi = (1,1)$,
+$r = 2$, $I(x, y) = x_{1}y_{2}$ ; pour $\alpha = (1, 0)$, $\mathrm{tr}(\alpha) =
+2$, alors que le second membre vaut $4$ ou $0$ selon la place de
+$D_{\xi}(\alpha)$. Pour un nombre d'intersection la symétrie va de soi, et
+c'est sans doute pourquoi la page ne l'écrit pas ; on l'ajoute.} :
 \[
   \mathrm{tr}(\alpha) = \frac{r}{I(\xi, \ldots, \xi)}\,
   I\bigl(\xi, \ldots, \xi, D_{\xi}(\alpha)\bigr),
@@ -631,27 +656,50 @@ Rosati de $\mathrm{Hom}(A,A)_{\mathbb{Q}}$. Alors}
 \]
 \emph{d'où}
 \[
-  \mathrm{tr}(\alpha\alpha') = \frac{r}{I(\xi, \ldots, \xi)}\,
+  \mathrm{tr}(\alpha'\alpha) = \frac{r}{I(\xi, \ldots, \xi)}\,
   I\bigl(\xi, \ldots, \xi, 2\,\alpha^{*}\xi\bigr).
 \]
 
 Le passage de la première formule à la seconde est l'identité (3) du feuillet 9
-suivie d'un calcul d'une ligne : $D_{\xi}(\alpha,\alpha) = (2\alpha)^{*}\xi -
-2\,\alpha^{*}\xi = 2\,\alpha^{*}\xi$, puisque $\xi$ est quadratique.
+suivie d'un calcul d'une ligne : $D_{\xi}(\alpha'\alpha) = D_{\xi}(\alpha,\alpha)
+= (2\alpha)^{*}\xi - 2\,\alpha^{*}\xi = 2\,\alpha^{*}\xi$, puisque $\xi$ est
+quadratique.\footnote{Comme la formule du feuillet 8, ce théorème suppose $I$
+symétrique. La page écrit $\mathrm{tr}(\alpha\alpha')$ en regard de
+$\alpha^{*}\xi$. Les axiomes donnent $\alpha^{*}\xi$ pour $\alpha'\alpha$, et
+$\alpha'^{*}\xi$ pour $\alpha\alpha'$ ; l'égalité des deux formes reviendrait
+à $\mathrm{tr}(\alpha\alpha') = \mathrm{tr}(\alpha'\alpha)$, que le cadre ne
+fournit pas sans autre argument. On écrit donc $\alpha'\alpha$. Vérifié en
+Lean (lean/Grothendieck/Folder50.lean, \texttt{tr\_mul\_I}).}
 
 Puis, souligné, le mot \textbf{Corollaire} — et le feuillet s'arrête. Le reste
 de la page est blanc, et le dossier avec elle.
 
-Ce que les deux formules donnent immédiatement, et ce que le corollaire ne peut
-guère être, est la \emph{positivité de l'involution de Rosati} : pour tout
-$\alpha \neq 0$,
+Le corollaire ne peut guère être que la \emph{positivité de l'involution de
+Rosati} : pour tout $\alpha \neq 0$,
 \[
-  \mathrm{tr}(\alpha\alpha') > 0 .
+  \mathrm{tr}(\alpha'\alpha) > 0 ,
 \]
-En effet $\alpha^{*}\xi$ appartient au cône positif dès que $\xi$ y appartient,
-et l'axiome (e) 2) rend strictement positif le nombre d'intersection du second
-membre.\footnote{Cette reconstitution est de l'édition : la feuille ne porte
-que le mot. Elle est cependant contrainte de près — c'est l'énoncé pour lequel
+ou, ce qui revient au même en remplaçant $\alpha$ par $\alpha'$,
+$\mathrm{tr}(\alpha\alpha') > 0$. Elle ne suit pourtant pas des axiomes tels
+qu'ils sont écrits. L'argument qui vient à l'esprit, que $\alpha^{*}\xi$ est
+dans le cône positif et que l'axiome (e) 2) rend le second membre strictement
+positif, ne passe pas : (e) 2) ne porte que sur le cône fort $N^{>}$, où
+$\alpha^{*}\xi$ n'est pas en général, et rien n'empêche $\alpha^{*}\xi$ d'être
+nul pour $\alpha \neq 0$. La positivité vaut si l'on ajoute deux axiomes : que
+$I(\xi, \ldots, \xi, \eta) > 0$ pour toute $\eta \in N^{+}(A)$ non nulle, et
+que $\alpha^{*}\xi \neq 0$ pour tout $\alpha \neq 0$. Sur une variété
+abélienne les deux sont vrais, puisque $\alpha^{*}\xi$ est alors une classe
+numériquement positive non nulle.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder50.lean, \texttt{tr\_star\_mul\_self\_pos}) : avec $I$
+symétrique et ces deux axiomes, $\mathrm{tr}(\alpha'\alpha) > 0$ pour tout
+$\alpha \neq 0$. Sans le second, le corollaire est faux, même avec le premier,
+dans un modèle de l'édition : l'algèbre de quaternions $\mathbf{H}[\mathbf{Z}, 0,
+0, 0]$, où $i^{2} = j^{2} = 0$, munie de sa conjugaison, avec $N = \mathbf{Z}$,
+$r = 1$, $\xi = 1$, $I(x) = x$, $\alpha^{*}x = (\mathrm{re}\,\alpha)^{2}x$. Tous
+les axiomes y sont satisfaits, mais $i \neq 0$, $i^{*}\xi = 0$ et
+$\mathrm{tr}(i'i) = 0$. Une première version de cette lecture donnait l'argument
+ci-dessus comme une preuve.}\footnote{Cette reconstitution est de l'édition : la
+feuille ne porte que le mot. Elle est cependant contrainte de près — c'est l'énoncé pour lequel
 la positivité a été posée en axiome au feuillet 8, c'est celui qui fait de
 $\mathrm{Hom}(A,A)_{\mathbb{Q}}$ une algèbre semi-simple à involution positive,
 et c'est celui qui, dans le livre de Lang, suit la formule de la trace. Le
@@ -659,6 +707,8 @@ lecteur qui voudrait la lettre du dossier ne trouvera, lui, que « Corollaire »
 
 C'est là que le dossier s'interrompt, et l'endroit est parlant : tout ce qui
 précède avait pour objet de rendre cet énoncé démontrable sans géométrie, et il
-n'est pas écrit.
+n'est pas écrit. Tels qu'ils sont posés, les axiomes n'y suffisent pas ; il
+leur manque la positivité de $I(\xi, \ldots, \xi, \cdot)$ sur le cône faible
+et la non-annulation de $\alpha^{*}\xi$.
 
 \end{document}
