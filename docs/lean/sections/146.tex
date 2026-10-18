@@ -1,4 +1,4 @@
-\section[Cote 146 : l'exposant trivialisant de $L_4$ sur $M_{0,4}$]{Cote 146 : l'exposant trivialisant de $L_4$ sur $M_{0,4}$\protect\verifie{Folder146}}\label{sec:146}
+\section[Cote 146 : les exposants trivialisants de $L_4$ et de $L$ sur $M_{0,4}$]{Cote 146 : les exposants trivialisants de $L_4$ et de $L$ sur $M_{0,4}$\protect\verifie{Folder146}}\label{sec:146}
 
 La cote 146, \emph{Groupoïdes de Teichmüller}, cent trente-trois pages que l'inventaire date \q{[à partir de 1978]}, porte page~70 un tableau : pour $n = \operatorname{card} I = 4, 5, 6$, le plus petit exposant qui rend trivial, de façon compatible au groupe symétrique, le fibré $L = \bigotimes L_i$ sur $M_{0,I}$, et les fibrés $L_i$ attachés aux points marqués (\lot{146}{4}{70}). Pour $n = 4$ il donne $3$ pour $L$ et $6$ pour $L_i$ ; les colonnes $n = 5$ et~$6$ portent des points d'interrogation. La lecture ne vérifie pas le tableau, et la piste tombe si les valeurs pour $n = 4$ ne se vérifient pas.
 
@@ -22,11 +22,25 @@ La valeur $6$ du tableau tient, et la piste ne tombe pas. L'argument par les poi
 La fibre de $L_4$ en $\lambda$ est la droite des vecteurs tangents en $\lambda$, c'est-à-dire l'ensemble des points base tangentiels de Deligne \cite{deligne1989} au point mobile, privé de zéro ; l'exposant $6$ dit que $L_4^{\otimes 6}$, et aucune puissance plus petite, admet une section partout non nulle compatible à $\mathfrak S_3$. Le groupe et l'action sont ceux de la section~\ref{sec:62}, où le quotient de $U$ par $\mathfrak S_3$ est la fonction $j$, et de l'épinglage de Legendre de la section~\ref{sec:64}, où $\mathfrak S_3$ opère sur $U_{0,3} = U$ et sur un $\mu_4$-torseur ; le groupe profini $\hat\pi$ de $U$ est l'objet de la section~\ref{sec:145}. Les points fixes $-1$ et $\zeta$ de la démonstration sont les points de $U$ au-dessus de $j = 0$ et $j = 1$ dans la normalisation de la section~\ref{sec:62}, la seule où le stabilisateur n'est pas trivial.
 \end{remarque}
 
-Ne sont pas démontrés ici : le fait que le groupe de Picard équivariant soit $H^1(\mathfrak S_3, \mathcal O(U)^*)$, la valeur $3$ pour $L = \bigotimes L_i$ sous $\mathfrak S_4$, et les valeurs proposées pour $n = 5$ et~$6$, qui restent ouvertes :
+Passons à la seconde entrée de la colonne $n = 4$, celle du fibré $L = L_1 \otimes L_2 \otimes L_3 \otimes L_4$ sous le groupe $\mathfrak S_4$ tout entier. Une permutation des quatre points marqués induit un automorphisme de la fibre $\mathbf P^1$, et elle agit sur $L$ par le produit des dérivées de cet automorphisme aux quatre points. Deux remarques ramènent ce calcul à celui de $L_4$. D'abord, le groupe de Klein $V_4 \subset \mathfrak S_4$, formé des trois produits de deux transpositions disjointes, agit trivialement sur $U$ : la permutation $(12)(34)$ ne change pas le birapport. Il agit aussi trivialement sur $L$, car l'automorphisme échange les deux points de chaque paire et les dérivées en ces deux points ont pour produit~$1$. Le quotient $\mathfrak S_4/V_4$ s'identifie au stabilisateur $\mathfrak S_3$ du quatrième point. Ensuite, pour $g$ dans ce stabilisateur, les dérivées en $0$, $1$ et $\infty$ (dans la carte $1/\lambda$ en $\infty$) ont un produit constant, égal à la signature $\varepsilon(g)$, et la dérivée au point mobile est $g'(\lambda)$. Le cocycle de $L$ est donc $g \mapsto \varepsilon(g)\, g'(\lambda)$.
+
+\begin{theoreme}[Grothendieck, page 70, colonne $n = 4$, pour $L$\piste{146-equivariant-trivialising-exponents}]\label{thm:146-trois}
+Soit $K$ un corps où $3$ est inversible et qui contient une racine $\zeta$ de $\zeta^2 - \zeta + 1$. Le cocycle $g \mapsto \varepsilon(g)\,g'(\lambda)$ est d'ordre exactement~$3$ : sa puissance $m$-ième est le cobord $h(g\lambda)/h(\lambda)$ d'une fonction $h$ sans zéro sur $U(K)$ si et seulement si $3 \mid m$, et pour $m = 3$ on peut prendre $h = \lambda^2(1 - \lambda)^2$.
+\end{theoreme}
+
+\begin{proof}
+Pour $m = 3$, on vérifie l'égalité sur les six substitutions ; pour $g(\lambda) = 1/\lambda$, le cocycle vaut $(-1)\cdot(-\lambda^{-2}) = \lambda^{-2}$, son cube $\lambda^{-6}$, et $h(1/\lambda)/h(\lambda) = \lambda^{-4}(\lambda - 1)^2/(\lambda^2(1 - \lambda)^2) = \lambda^{-6}$. Les multiples de $3$ suivent en prenant $h^{m/3}$. Réciproquement, au point $\zeta$ fixé par $g(\lambda) = 1/(1 - \lambda)$, une permutation paire, le cocycle vaut $\zeta^2$ et le second membre vaut~$1$, d'où $3 \mid m$ comme pour $L_4$.
+\end{proof}
+
+La signature tue exactement le facteur d'ordre~$2$ : au point $-1$, fixé par $1/\lambda$, le cocycle de $L$ vaut $(-1)\cdot(-1) = 1$, et il ne reste que l'ordre~$3$ venu de $\zeta$. La valeur $3$ du tableau tient donc. La page~72 n'affirme, elle, que $L^{\otimes 6} \simeq 1$, ce qui est vrai et plus faible.
+
+\noindent Vérifié au niveau des cocycles (\texttt{sgn\_mul}, \texttt{derL\_mul}, \texttt{derL\_pow\_three}, \texttt{coboundary\_derL\_iff}). Lean ne démontre ni que $V_4$ agit trivialement, ni que le produit des dérivées en $0$, $1$, $\infty$ est la signature, ni que l'ordre sous $\mathfrak S_4$ est celui sous $\mathfrak S_3$ (injectivité de l'inflation $H^1(\mathfrak S_3, \cdot) \to H^1(\mathfrak S_4, \cdot)$) : ces trois points forment la traduction du fibré $L$ en cocycle, faite dans le texte ci-dessus.
+
+Ne sont pas démontrés ici : le fait que le groupe de Picard équivariant soit $H^1(\mathfrak S_3, \mathcal O(U)^*)$, et les valeurs proposées pour $n = 5$ et~$6$, qui restent ouvertes :
 
 \begin{encadre}
 \begin{conjecture*}[Grothendieck, pages 70, 72 et 73, exposants trivialisants sur $M_{0,I}$\piste{146-equivariant-trivialising-exponents}]
-Sur $M_{0,I}$, avec $n = \operatorname{card} I = 4$, le plus petit exposant qui rend trivial, de façon compatible au groupe symétrique, le fibré $L = \bigotimes L_i$ est $3$ ; pour $n = 5$ et~$6$, la table propose les valeurs $12$, $20$ et $60$, suivies de points d'interrogation.
+Sur $M_{0,I}$, pour $n = \operatorname{card} I = 5$ et~$6$, les plus petits exposants qui rendent triviaux, de façon compatible au groupe symétrique, les fibrés $L = \bigotimes L_i$ et $L_i$ sont ceux de la table, qui propose les valeurs $12$, $20$ et $60$, suivies de points d'interrogation.
 \end{conjecture*}
 \end{encadre}
-{\small La valeur $6$ pour $L_i$, $n = 4$, est le théorème~\ref{thm:146-six}. Mathlib n'a pas les espaces de modules $M_{0,n}$.\par}
+{\small Les valeurs pour $n = 4$, $6$ pour $L_i$ et $3$ pour $L$, sont les théorèmes~\ref{thm:146-six} et~\ref{thm:146-trois}. Mathlib n'a pas les espaces de modules $M_{0,n}$.\par}

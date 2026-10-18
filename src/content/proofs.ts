@@ -781,14 +781,14 @@ export const PROOFS: Proof[] = [
     folder: '146',
     batch: 4,
     page: '70',
-    name: 'The trivialising exponent of L₄ on M₀,₄',
+    name: 'The trivialising exponents of L₄ and L on M₀,₄',
     statement:
-      'The table of page 70 gives, for n = card I = 4, the smallest exponent making the tangent line bundles L_i trivial compatibly with the symmetric group on M₀,ᵢ: 6.',
+      'The table of page 70 gives, for n = card I = 4, the smallest exponent making the tangent line bundles L_i, and L = ⊗ L_i, trivial compatibly with the symmetric group on M₀,ᵢ: 6 for L_i and 3 for L.',
     found:
-      'Holds for L₄: on U = ℙ¹ ∖ {0, 1, ∞}, g ↦ g′(λ) under the six anharmonic substitutions is a cocycle whose sixth power is the coboundary of λ⁴(1 − λ)⁴, and no smaller power is a coboundary — at the fixed points −1 of 1/λ and ζ of 1/(1 − λ) the derivative is −1 and a primitive cube root of unity. So the order is exactly 6. Not formalised: the entry 3 for L, and n = 5, 6.',
+      'Holds for both entries, at the level of cocycles. For L₄: on U = ℙ¹ ∖ {0, 1, ∞}, g ↦ g′(λ) under the six anharmonic substitutions is a cocycle whose sixth power is the coboundary of λ⁴(1 − λ)⁴, and no smaller power is a coboundary — at the fixed points −1 of 1/λ and ζ of 1/(1 − λ) the derivative is −1 and a primitive cube root of unity. For L under 𝔖₄ the Klein group acts trivially and the cocycle is sgn g · g′(λ): its cube is the coboundary of λ²(1 − λ)², and its m-th power is a coboundary iff 3 ∣ m (the factor at ζ is ζ²). Page 72 claims only L^{⊗6} ≃ 1. Not formalised: the reduction from bundles under 𝔖₄ to these cocycles, and n = 5, 6.',
     verdict: 'holds',
     lean: 'lean/Grothendieck/Folder146.lean',
-    theorems: ['mul_group', 'anh_mul', 'der_mul', 'der_pow_six', 'six_dvd'],
+    theorems: ['mul_group', 'anh_mul', 'der_mul', 'der_pow_six', 'six_dvd', 'derL_mul', 'derL_pow_three', 'coboundary_derL_iff'],
   },
   {
     folder: '101',
