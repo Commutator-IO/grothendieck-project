@@ -217,6 +217,12 @@
 % — Ji 2023 (arXiv:2304.03345), read in full for the findings, cited with what
 %   it establishes, and the Esquisse § 4 as Ji quotes it. Monson-Schulte
 %   (abstracts only) not cited. No facsimile check since 2026-10-10.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — with the tier-2 Lean check
+%   of the universal formulae (Folder70.lean): pp. 19 and 25, the relations of
+%   the string Coxeter group for every n over any commutative ring; p. 67, the
+%   order criterion for p = 3, 4, 5 over every nonzero ring, without a field
+%   or p invertible, stated in the body after the Proposition. No new
+%   literature, no facsimile correction. Two « Ce que » headings renamed.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -407,7 +413,7 @@ affine ; « réflexion projective » quand cet hyperplan peut être à l'infini.
 garde le mot. En caractéristique $2$, une telle involution est une
 transvection.
 
-\subsection*{Ce que seule une lecture d'ensemble peut dire}
+\subsection*{Une lecture d'ensemble}
 
 \textbf{Le même calcul, refait.} La forme normale des générateurs est établie
 trois fois : en dimension quelconque (pages 9 à 25), sans l'hypothèse
@@ -438,7 +444,7 @@ drapeau ; c'est exactement la donnée que les pages 74 à 111 construisent pour
 l'icosaèdre. Le programme des pages 121 et 122 renverse la perspective : il
 part du modèle réel et lui cherche des réalisations sur un anneau.
 
-\subsection*{Ce que le dossier annonce sans l'établir}
+\subsection*{Annoncé sans être établi}
 
 Le calcul de $(\sigma_0\sigma_1)^p$ (page 19) et les deux « $\overset{?}{=}$ »
 de la page 20 restent ouverts (on les complète) ; la question d'injectivité
@@ -714,7 +720,12 @@ coordonnée et $\sigma_i$ que la $i$-ième et la $(i+1)$-ième, ce qui
 « implique » que $\sigma_i$ et $\sigma_j$ commutent pour $j \geq i + 2$. Il faut
 y ajouter que $\sigma_j$ conserve la somme $x_j + x_{j+1}$, donc $\Sigma_i$ et
 $\Sigma_0$, dont dépend $\sigma_i$\footnote{L'ajout est de l'édition ; on a
-vérifié les relations sur machine pour $n \leq 4$.}.
+vérifié les relations sur machine pour $n \leq 4$. Elles sont vérifiées en Lean
+(lean/Grothendieck/Folder70.lean, \texttt{usig\_mul\_self},
+\texttt{usig\_comm}, \texttt{sum\_usig}) pour tout $n$ et sur tout anneau
+commutatif, dans la forme barycentrique des pages 23 à 25 : $\sigma_i^2 = 1$ et
+$\sigma_i\sigma_j = \sigma_j\sigma_i$ pour $j \geq i + 2$, quels que soient les
+$\alpha_i$, avec le tableau encadré de la page 25.}.
 
 \emph{Les rotations.} La page calcule $\sigma_0\sigma_1(x) = \bigl(1 + \alpha_0
 x_1 - x_2 + (1 + \alpha_1 + 2\alpha_0 + \alpha_0\alpha_1)\Sigma_1,\ x_1 + (1 +
@@ -757,6 +768,26 @@ $\zeta = \pm 1$ donnerait un ordre $\leq 2$\footnote{Machine : le polynôme
 caractéristique pour $n = 2, 3, 4$ et tout $i$. L'énoncé pour $n = 2$ est celui
 de la page 67, « $\rho_s^p = \mathrm{id} \iff F_p(\alpha) = 0$ », sans
 démonstration.}.
+
+Pour $p_i = 3$, $4$ et $5$, les seules valeurs que prennent les polytopes
+réguliers finis, ni le corps ni l'inversibilité de $p_i$ ne servent : sur tout
+anneau commutatif non nul, en toute dimension, $\sigma_{i-1}\sigma_i$ est
+d'ordre exactement $3$, $4$ ou $5$ si et seulement si, respectivement,
+$\alpha_{i-1} = -1$, $\alpha_{i-1} = 0$ ou $\alpha_{i-1}^2 + \alpha_{i-1} - 1 =
+0$, caractéristiques $2$, $3$ et $5$ comprises. Le critère de la page 67 vaut
+donc pour ces ordres sans les hypothèses que la proposition
+ci-dessus suppose\footnote{Vérifié en Lean (lean/Grothendieck/Folder70.lean,
+\texttt{rho\_cubic}, \texttt{orderOf\_rho\_eq\_three},
+\texttt{orderOf\_rho\_eq\_four}, \texttt{orderOf\_rho\_eq\_five}). L'image de
+$\sigma_{i-1}\sigma_i - 1$ est dans le plan $\langle s_i - s_{i-1}, s_{i+1} -
+s_i \rangle$, où $\sigma_{i-1}\sigma_i$ est de trace $\alpha_{i-1}$ et de
+déterminant $1$, de sorte que $(t - 1)(t^2 - \alpha_{i-1} t + 1)$ l'annule sur
+tout anneau. La réciproque se lit sur les itérés de $s_{i-1}$ dans le repère
+$(s_{i-1}, s_i, s_{i+1})$. Les générateurs de l'icosaèdre des pages 74 et 75
+sont le cas $n = 2$, $(\alpha_0, \alpha_1) = (-1, \alpha)$
+(\texttt{usig\_emb}). Le critère pour $p$ quelconque, qui demande le polynôme
+minimal de $2\cos(2\pi/p)$, et le passage de la définition à la forme normale
+(pages 7 à 18) ne sont pas vérifiés.}.
 
 Ainsi, \emph{à choix du repère près, les réalisations affines régulières par
 réflexions du polytope $\{p_1, \dots, p_n\}$ sur un corps où les $p_i$ sont
