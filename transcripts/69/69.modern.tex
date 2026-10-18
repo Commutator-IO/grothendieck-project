@@ -14,6 +14,14 @@
 % batch-06.fr.tex (pp. 101-119).
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — p. 26: footnote on the Lean
+%   check (lean/Grothendieck/Folder69.lean): |W_t| = 1152 and the pointwise
+%   stabiliser 192, as the pages state. Literature of the matched finding
+%   69-triangle-q8-baer-torsor cited where the triangle is discussed: Kantor's
+%   coset construction in Payne-Thas §§ 10.4-10.6.1, Dolgachev (Rem. 9.1.10,
+%   § 9.5.2), Brouwer's Schläfli-graph page. Page 83: his hand in the three
+%   letters S, checked on the facsimile (2026-10-15). One « Ce que » turn
+%   removed.
 % The folder was read whole, its six batches together; this is one document
 % for the shelfmark. It was made on Opus 5.5 and has not been measured against
 % the reference reading of folder 115 (made on Opus 5). The literature named
@@ -31,8 +39,8 @@
 % Scope. Page 1 is a cover (pencilled « (34p) »), page 40 a pink separator
 % (« (23 p) »), pages 64, 65, 72, 76, 88, 93, 94, 99, 104, 106 blank
 % separators; page 83 is a typed course announcement (USTL, DEUG A, 1976,
-% « Polyèdres réguliers »), described only as far as its transcription note
-% goes. The inventory's « lettre (s.d.) » is not found in the transcriptions.
+% « Polyèdres réguliers »), his hand only in the three letters S (checked on
+% the facsimile, 2026-10-15); described, not restated. The inventory's « lettre (s.d.) » is not found in the transcriptions.
 % From page 95 on, the archivists' pencilled numbers run two ahead of the page
 % numbers used here (which follow the facsimile, as the transcriptions do).
 %
@@ -208,7 +216,10 @@ intercalaires vierges. La page 83 est dactylographiée : c'est l'annonce, par
 l'Université des Sciences et Techniques du Languedoc, d'un enseignement de
 DEUG A première année, option mathématique, pour 1976, intitulé
 « Polyèdres réguliers », en deux parties confiées à A.~Grothendieck et à
-C.~Contou-Carrère ; rien de sa main n'y figure, et sa date s'accorde avec celle
+C.~Contou-Carrère ; de sa main, il n'y a que les trois lettres $\mathfrak{S}$
+des groupes symétriques, ajoutées dans les blancs de la frappe\footnote{Vérifié
+sur le fac-similé par Michel Hua (2026-10-15) ; la transcription donne
+désormais la page en entier.}, et sa date s'accorde avec celle
 des archivistes. Les notes d'un cours de ce titre sont au dossier 86. Le
 titre de l'inventaire annonce aussi une lettre ; les transcriptions n'en
 trouvent pas. À partir de la page 95, les numéros que les archivistes ont
@@ -897,7 +908,16 @@ pour $i \neq j$, $x \in \widetilde P_i$ et $y \in \widetilde P_j$ liés si et
 seulement s'ils sont images d'un même point de $\widetilde P$. Ici $\widetilde
 P$ est l'ensemble $\widetilde\Gamma$ des 32 triangles extérieurs à $t$, et les
 $\widetilde P_i$ sont les $E(i)^*$ : c'est l'achèvement du programme de la
-page 8.
+page 8.\footnote{Reconstruire la configuration autour d'un point à partir d'un
+groupe d'ordre 32 qui opère simplement transitivement sur les 32 triangles
+disjoints de $t$, avec un sous-groupe d'ordre 4 par droite de $t$, c'est la
+construction par classes de Kantor (1980) du quadrangle $H(3, 4)$, dual de
+$\mathrm{GQ}(2, 4)$, telle que l'exposent Payne et Thas, \emph{Finite
+Generalized Quadrangles}, §§ 10.4 à 10.6.1 ; des formes anisotropes y tiennent
+le rôle des conditions de la page. On n'y trouve pas le groupe présenté comme
+produit de Baer des trois relevés de $Q_8$, ni l'unicité à isomorphisme unique
+près, ni l'énoncé en équivalence de catégories. Le groupe $\widetilde\Psi$ est
+le groupe extraspécial $2^{1+4}_+$ ; l'identification est de l'édition.}
 
 \textbf{Corollaire.} Le groupe $W_t$ des automorphismes de $(C, t)$ est
 l'ensemble des triples $(\tau, \rho, \varphi)$ d'une permutation de $t$, d'un
@@ -914,7 +934,21 @@ graphes cubiques munis d'un triangle\footnote{Le groupe $W(D_4) \rtimes
 \mathfrak{S}_3$ est isomorphe au groupe de Weyl $W(F_4)$, d'ordre 1152, et
 c'est le groupe des automorphismes du système de racines $D_4$ ; les ordres
 s'accordent. L'équivalence de catégories est son énoncé, non vérifié ici. Le
-nom $W(F_4)$ est de nous.}.
+nom $W(F_4)$ est de nous. Que le stabilisateur d'un triangle, c'est-à-dire d'un
+plan tritangent, soit un sous-groupe maximal d'indice 45 de $W(E_6)$, isomorphe
+à $W(F_4)$, se lit chez Dolgachev, \emph{Classical Algebraic Geometry}
+(remarque 9.1.10 et § 9.5.2, où il est décrit comme $2.(A_4 \times A_4).2.2$,
+d'ordre 1152) ; la page de Brouwer sur le graphe de Schläfli donne le
+stabilisateur d'une droite de $\mathrm{GQ}(2, 4)$ avec ses orbites $3 + 24$ sur
+les sommets. Ni l'un ni l'autre ne reconstruit le graphe autour du
+triangle.}\footnote{Vérifié en Lean (lean/Grothendieck/Folder69.lean,
+\texttt{card\_Wt}, \texttt{card\_aut}, \texttt{card\_pointwise}) sur le
+modèle classique des vingt-sept droites : les automorphismes qui conservent un
+triangle forment un groupe d'ordre $1152 = 32 \cdot 36$, comme le dit la page,
+et ceux qui le fixent point par point un groupe d'ordre $192$, comme le donne
+la suite exacte de la page 25. La preuve est un calcul fini par une chaîne de
+stabilisateurs. La description par $(t, V, \widetilde P)$, le produit de Baer
+et la suite exacte elle-même ne sont pas vérifiés.}.
 
 \textbf{Les 24 racines orthogonales à un triangle} (pages 27 et 28). Les bases
 $b$ telles que $b \cap E(i)$ ait deux éléments pour chaque $i \in t$ --- ce
@@ -1760,7 +1794,7 @@ racines non orthogonales ni proportionnelles à $s$, c'est-à-dire si toutes les
 racines ont même longueur ($A_r$, $D_r$, $E_6$, $E_7$, $E_8$), et alors
 $\lambda = 1$ : dans le cas simplement lacé, $\mathfrak{S}' = \mathfrak{S}
 \cup R$\footnote{La page 98 écrit « $\mathfrak{S}'_0 = \mathfrak{S}_0 \cup R$
-si toutes les racines sont de même longueur ». Ce que la page 97 démontre est
+si toutes les racines sont de même longueur ». La page 97 démontre
 l'énoncé sur $\mathfrak{S}'$, et c'est celui qu'on donne : une racine n'est
 en général pas dans $\mathfrak{S}'_0$ (dans $A_2$, $s$ et une racine $s'$ avec
 $(s, s') = -1$ donnent $s' - s$, qui n'est pas une racine).}. Pour $A_r$, enfin,
