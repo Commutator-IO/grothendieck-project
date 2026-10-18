@@ -731,3 +731,398 @@ theorem det_polar_one (x : Matrix (Fin 2) (Fin 2) R) :
 end Symmetry
 
 end Grothendieck.Folder77
+
+/-!
+# Folder 77, pages 89–98: the sphere as the Weil restriction of a conic
+
+Finding `77-affine-quadric-weil-restriction` (issue #54), coordinate statement. The special
+quadratic module `E` of rank `3` is the pure part of a quaternion algebra `(a, b)` over a field
+`K` of characteristic `≠ 2`, `q(u) = u² = a u₁² + b u₂² - ab u₃²` (`M₂`, `q = -det`, for
+`a = b = 1`). Proved: `qf_commutator` (21 bis), `q([x, y]) = -4q(x)q(y) + φ(x, y)²`;
+`ftilde_mem`, `act_mem`, `ftilde_surjective`, `ftilde_fibre`, gathered in `sphere_quotient`:
+`x + iy ↦ [x, y]/2q(x)` maps `Ũ` (`q(x) = q(y)` invertible, `φ(x, y) = 0`) onto `Σ : q = -1`,
+with fibres the orbits of `c + id`, `c² + d² ≠ 0`; and `hors_de_U`, the lemma of page 98: an
+isotropic `x + iy` with `q(x) = 0` is `(c + id)x₀`, `x₀` isotropic, so `X^{S[i]} ∖ X = U`.
+The inverse is explicit: `t ↦ x - i tx` for any `x ⟂ t` with `q(x) ≠ 0`, and every `y` with
+`(x, y) ∈ Ũ` is `-tx` (`ftilde_facts`). Monomorphism and epimorphism use only that `t`, `x`, `tx`
+form an orthogonal basis of the pure part (`eq_zero_of_anticomm`, `exists_perp`), no étale
+localisation. The scheme-level statement and the twisted version (pp. 102–116) are not
+formalised.
+-/
+
+namespace Grothendieck.Folder77
+
+section QuadriqueAffine
+
+open Quaternion
+
+variable {K : Type*} [Field K] {a b : K}
+
+/-- The quadratic form `q(u) = u²` on the pure quaternions of `(a, b)`:
+`q = a u₁² + b u₂² - ab u₃²`. On `M₂` (`a = b = 1`) it is `-det`. -/
+def qf (u : ℍ[K,a,b]) : K := a * u.imI ^ 2 + b * u.imJ ^ 2 - a * b * u.imK ^ 2
+
+/-- Its polar form `φ(u, v) = q(u + v) - q(u) - q(v)`. -/
+def pol (u v : ℍ[K,a,b]) : K :=
+  2 * (a * u.imI * v.imI + b * u.imJ * v.imJ - a * b * u.imK * v.imK)
+
+theorem mul_self_of_pure {u : ℍ[K,a,b]} (hu : u.re = 0) :
+    u * u = ((qf u : K) : ℍ[K,a,b]) := by
+  rw [show ((qf u : K) : ℍ[K,a,b]) = ⟨qf u, 0, 0, 0⟩ from rfl]
+  ext <;> simp [qf, hu] <;> ring
+
+theorem mul_add_mul_of_pure {u v : ℍ[K,a,b]} (hu : u.re = 0) (hv : v.re = 0) :
+    u * v + v * u = ((pol u v : K) : ℍ[K,a,b]) := by
+  rw [show ((pol u v : K) : ℍ[K,a,b]) = ⟨pol u v, 0, 0, 0⟩ from rfl]
+  ext <;> simp [pol, hu, hv] <;> ring
+
+theorem re_mul_of_pure {u v : ℍ[K,a,b]} (hu : u.re = 0) (hv : v.re = 0) :
+    2 * (u * v).re = pol u v := by
+  simp [pol, hu, hv]
+
+theorem pol_comm (u v : ℍ[K,a,b]) : pol u v = pol v u := by
+  simp only [pol]; ring
+
+theorem pol_self (u : ℍ[K,a,b]) : pol u u = 2 * qf u := by
+  simp only [pol, qf]; ring
+
+theorem pol_sub_smul (u v w z : ℍ[K,a,b]) (c d : K) :
+    pol (u - c • v - d • w) z = pol u z - c * pol v z - d * pol w z := by
+  simp [pol]; ring
+
+theorem pol_neg_right (u v : ℍ[K,a,b]) : pol u (-v) = -pol u v := by
+  simp [pol]; ring
+
+theorem qf_neg (u : ℍ[K,a,b]) : qf (-u) = qf u := by
+  simp [qf]
+
+theorem qf_smul (c : K) (u : ℍ[K,a,b]) : qf (c • u) = c ^ 2 * qf u := by
+  simp [qf]; ring
+
+theorem qf_smul_add_smul (c d : K) (u v : ℍ[K,a,b]) :
+    qf (c • u + d • v) = c ^ 2 * qf u + d ^ 2 * qf v + c * d * pol u v := by
+  simp [qf, pol]; ring
+
+theorem re_commutator {x y : ℍ[K,a,b]} (hx : x.re = 0) (hy : y.re = 0) :
+    (x * y - y * x).re = 0 := by
+  simp [hx, hy]; ring
+
+/-- **(21 bis)**: `q([x, y]) = -4 q(x) q(y) + φ(x, y)²`. -/
+theorem qf_commutator {x y : ℍ[K,a,b]} (hx : x.re = 0) (hy : y.re = 0) :
+    qf (x * y - y * x) = -4 * qf x * qf y + pol x y ^ 2 := by
+  simp [qf, pol, hx, hy]; ring
+
+theorem anticomm {u v : ℍ[K,a,b]} (hu : u.re = 0) (hv : v.re = 0) (h : pol u v = 0) :
+    v * u = -(u * v) := by
+  have := mul_add_mul_of_pure hu hv
+  rw [h, QuaternionAlgebra.coe_zero] at this
+  exact eq_neg_of_add_eq_zero_right this
+
+/-- `Σ`, the affine quadric `q = -1`: pure quaternions `t` with `t² = -1`. -/
+def Sphere : Set ℍ[K,a,b] := {t | t.re = 0 ∧ qf t = -1}
+
+/-- `Ũ`: the pairs `(x, y)` of pure quaternions such that `x + iy` is isotropic
+(`q(x) = q(y)`, `φ(x, y) = 0`) with `q(x)` invertible. -/
+def Utilde : Set (ℍ[K,a,b] × ℍ[K,a,b]) :=
+  {ξ | ξ.1.re = 0 ∧ ξ.2.re = 0 ∧ qf ξ.1 = qf ξ.2 ∧ pol ξ.1 ξ.2 = 0 ∧ qf ξ.1 ≠ 0}
+
+/-- `f̃(x + iy) = [x, y]/2q(x)`. -/
+noncomputable def ftilde (ξ : ℍ[K,a,b] × ℍ[K,a,b]) : ℍ[K,a,b] :=
+  (2 * qf ξ.1)⁻¹ • (ξ.1 * ξ.2 - ξ.2 * ξ.1)
+
+/-- The action of `α = c + id`: `α(x + iy) = (cx - dy) + i(dx + cy)`. -/
+def act (c d : K) (ξ : ℍ[K,a,b] × ℍ[K,a,b]) : ℍ[K,a,b] × ℍ[K,a,b] :=
+  (c • ξ.1 - d • ξ.2, d • ξ.1 + c • ξ.2)
+
+/-- `f̃` lands in `Σ`. -/
+theorem ftilde_mem (h2 : (2 : K) ≠ 0) {ξ : ℍ[K,a,b] × ℍ[K,a,b]} (hξ : ξ ∈ Utilde) :
+    ftilde ξ ∈ Sphere := by
+  obtain ⟨hx, hy, hq, hp, h0⟩ := hξ
+  refine ⟨by simp [ftilde, re_commutator hx hy], ?_⟩
+  rw [ftilde, qf_smul, qf_commutator hx hy, hp, ← hq]
+  field_simp
+  ring
+
+/-- `Ũ` is stable under `𝔾_m^{S[i]}`, and `f̃` is invariant. -/
+theorem act_mem {c d : K} (hcd : c ^ 2 + d ^ 2 ≠ 0) {ξ : ℍ[K,a,b] × ℍ[K,a,b]}
+    (hξ : ξ ∈ Utilde) : act c d ξ ∈ Utilde ∧ ftilde (act c d ξ) = ftilde ξ := by
+  obtain ⟨hx, hy, hq, hp, h0⟩ := hξ
+  have hq1 : qf (c • ξ.1 - d • ξ.2) = (c ^ 2 + d ^ 2) * qf ξ.1 := by
+    rw [sub_eq_add_neg, ← neg_smul, qf_smul_add_smul, hp, ← hq]; ring
+  have hq2 : qf (d • ξ.1 + c • ξ.2) = (c ^ 2 + d ^ 2) * qf ξ.1 := by
+    rw [qf_smul_add_smul, hp, ← hq]; ring
+  have hp' : pol (c • ξ.1 - d • ξ.2) (d • ξ.1 + c • ξ.2) = 0 := by
+    simp only [pol, qf] at hp hq ⊢
+    simp only [QuaternionAlgebra.imI_sub, QuaternionAlgebra.imI_add, QuaternionAlgebra.imI_smul,
+      QuaternionAlgebra.imJ_sub, QuaternionAlgebra.imJ_add, QuaternionAlgebra.imJ_smul,
+      QuaternionAlgebra.imK_sub, QuaternionAlgebra.imK_add, QuaternionAlgebra.imK_smul,
+      smul_eq_mul]
+    linear_combination (c ^ 2 - d ^ 2) * hp + 2 * c * d * hq
+  have hcomm : (c • ξ.1 - d • ξ.2) * (d • ξ.1 + c • ξ.2) - (d • ξ.1 + c • ξ.2) *
+      (c • ξ.1 - d • ξ.2) = (c ^ 2 + d ^ 2) • (ξ.1 * ξ.2 - ξ.2 * ξ.1) := by
+    ext <;> simp <;> ring
+  refine ⟨⟨by simp [act, hx, hy], by simp [act, hx, hy], by rw [act, hq1, hq2], hp',
+    by rw [act, hq1]; exact mul_ne_zero hcd h0⟩, ?_⟩
+  simp only [ftilde, act]
+  rw [hq1, hcomm, smul_smul]
+  congr 1
+  field_simp
+
+theorem coe_inj {u v : K} (h : ((u : K) : ℍ[K,a,b]) = (v : K)) : u = v :=
+  QuaternionAlgebra.coe_injective h
+
+theorem re_eq_zero_of_two_mul {u : K} (h2 : (2 : K) ≠ 0) (h : 2 * u = 0) : u = 0 :=
+  (mul_eq_zero.1 h).resolve_left h2
+
+/-- For `t ∈ Σ` and a pure `x ⟂ t`: `tx` is pure, `x` anticommutes with `t`, and
+`(tx)² = q(x)`. -/
+theorem perp_facts (h2 : (2 : K) ≠ 0) {t x : ℍ[K,a,b]} (ht : t ∈ Sphere) (hx : x.re = 0)
+    (hxt : pol x t = 0) :
+    (t * x).re = 0 ∧ x * t = -(t * x) ∧ qf (t * x) = qf x := by
+  have htx : (t * x).re = 0 :=
+    re_eq_zero_of_two_mul h2 (by rw [re_mul_of_pure ht.1 hx, pol_comm, hxt])
+  have hac : x * t = -(t * x) := anticomm ht.1 hx (by rw [pol_comm, hxt])
+  refine ⟨htx, hac, coe_inj (a := a) (b := b) ?_⟩
+  rw [← mul_self_of_pure htx, ← mul_self_of_pure hx]
+  calc t * x * (t * x) = t * (x * t) * x := by noncomm_ring
+    _ = -((t * t) * (x * x)) := by rw [hac]; noncomm_ring
+    _ = x * x := by
+      rw [mul_self_of_pure ht.1, ht.2, mul_self_of_pure hx]; simp
+
+/-- In a quaternion algebra, a pure `r` anticommuting with `t`, `x` and `tx` (with `x ⟂ t`,
+`t² = -1`, `q(x) ≠ 0`) is `0`: the three are an orthogonal basis of the pure part. -/
+theorem eq_zero_of_anticomm (h2 : (2 : K) ≠ 0) {r t x : ℍ[K,a,b]} (ht : t ∈ Sphere)
+    (hx : x.re = 0) (hxt : pol x t = 0) (hq : qf x ≠ 0)
+    (h1 : r * t = -(t * r)) (h3 : r * x = -(x * r)) (h4 : r * (t * x) = -((t * x) * r)) :
+    r = 0 := by
+  obtain ⟨htx, hac, hqtx⟩ := perp_facts h2 ht hx hxt
+  have e : r * (t * x) = t * x * r := by
+    calc r * (t * x) = (r * t) * x := by noncomm_ring
+      _ = -(t * (r * x)) := by rw [h1]; noncomm_ring
+      _ = t * x * r := by rw [h3]; noncomm_ring
+  have e2 : (2 * qf x : K) • r = 0 := by
+    have h5 : t * x * r = -(t * x * r) := e.symm.trans h4
+    have h6 := congrArg (fun z => (t * x) * z) h5
+    simp only [mul_neg] at h6
+    rw [← mul_assoc (t * x) (t * x) r] at h6
+    rw [mul_self_of_pure htx, hqtx, QuaternionAlgebra.coe_mul_eq_smul] at h6
+    rw [mul_smul, two_smul]
+    exact eq_neg_iff_add_eq_zero.1 h6
+  exact (smul_eq_zero.1 e2).resolve_left (mul_ne_zero h2 hq)
+
+/-- For `ξ = (x, y) ∈ Ũ` and `t = f̃(ξ)`: `x ⟂ t` and `y = -tx`. -/
+theorem ftilde_facts (h2 : (2 : K) ≠ 0) {ξ : ℍ[K,a,b] × ℍ[K,a,b]} (hξ : ξ ∈ Utilde) :
+    pol ξ.1 (ftilde ξ) = 0 ∧ ξ.2 = -(ftilde ξ * ξ.1) := by
+  obtain ⟨hx, hy, hq, hp, h0⟩ := hξ
+  have hyx := anticomm hx hy hp
+  have hxx := mul_self_of_pure hx
+  have k1 : (ξ.1 * ξ.2 - ξ.2 * ξ.1) * ξ.1 = -((2 * qf ξ.1 : K) • ξ.2) := by
+    calc (ξ.1 * ξ.2 - ξ.2 * ξ.1) * ξ.1 = ξ.1 * (ξ.2 * ξ.1) - ξ.2 * (ξ.1 * ξ.1) := by
+          noncomm_ring
+      _ = -((ξ.1 * ξ.1) * ξ.2) - ξ.2 * (ξ.1 * ξ.1) := by rw [hyx]; noncomm_ring
+      _ = _ := by
+        rw [hxx, QuaternionAlgebra.coe_mul_eq_smul, ← QuaternionAlgebra.coe_commutes,
+          QuaternionAlgebra.coe_mul_eq_smul, mul_smul, two_smul]; abel
+  have k2 : ξ.1 * (ξ.1 * ξ.2 - ξ.2 * ξ.1) = (2 * qf ξ.1 : K) • ξ.2 := by
+    calc ξ.1 * (ξ.1 * ξ.2 - ξ.2 * ξ.1) = (ξ.1 * ξ.1) * ξ.2 - ξ.1 * (ξ.2 * ξ.1) := by
+          noncomm_ring
+      _ = (ξ.1 * ξ.1) * ξ.2 + (ξ.1 * ξ.1) * ξ.2 := by rw [hyx]; noncomm_ring
+      _ = _ := by rw [hxx, QuaternionAlgebra.coe_mul_eq_smul, mul_smul, two_smul]
+  have h20 : (2 * qf ξ.1 : K) ≠ 0 := mul_ne_zero h2 h0
+  have htx : ftilde ξ * ξ.1 = -ξ.2 := by
+    rw [ftilde, smul_mul_assoc, k1, smul_neg, smul_smul, inv_mul_cancel₀ h20, one_smul]
+  have hxt : ξ.1 * ftilde ξ = ξ.2 := by
+    rw [ftilde, mul_smul_comm, k2, smul_smul, inv_mul_cancel₀ h20, one_smul]
+  refine ⟨coe_inj (a := a) (b := b) ?_, by rw [htx, neg_neg]⟩
+  have hft : (ftilde ξ).re = 0 := by simp [ftilde, re_commutator hx hy]
+  rw [← mul_add_mul_of_pure hx hft, hxt, htx, add_neg_cancel, QuaternionAlgebra.coe_zero]
+
+/-- A pure `x ⟂ t` with `q(x) ≠ 0` exists for every `t ∈ Σ`: among the projections of
+`i`, `j`, `k` on `t^⊥`, one is anisotropic, since otherwise `q(t) = -3`. -/
+theorem exists_perp (h2 : (2 : K) ≠ 0) (ha : a ≠ 0) (hb : b ≠ 0) {t : ℍ[K,a,b]}
+    (ht : t ∈ Sphere) : ∃ x : ℍ[K,a,b], x.re = 0 ∧ pol x t = 0 ∧ qf x ≠ 0 := by
+  obtain ⟨ht0, ht1⟩ := ht
+  have hqt : a * t.imI ^ 2 + b * t.imJ ^ 2 - a * b * t.imK ^ 2 = -1 := ht1
+  let xi : ℍ[K,a,b] := ⟨0, 1 + a * t.imI ^ 2, a * t.imI * t.imJ, a * t.imI * t.imK⟩
+  let xj : ℍ[K,a,b] := ⟨0, b * t.imJ * t.imI, 1 + b * t.imJ ^ 2, b * t.imJ * t.imK⟩
+  let xk : ℍ[K,a,b] := ⟨0, -(a * b) * t.imK * t.imI, -(a * b) * t.imK * t.imJ,
+    1 - a * b * t.imK ^ 2⟩
+  have pi : pol xi t = 0 := by
+    simp only [pol, xi]; linear_combination 2 * a * t.imI * hqt
+  have pj : pol xj t = 0 := by
+    simp only [pol, xj]; linear_combination 2 * b * t.imJ * hqt
+  have pk : pol xk t = 0 := by
+    simp only [pol, xk]; linear_combination -2 * a * b * t.imK * hqt
+  have qi : qf xi = a * (1 + a * t.imI ^ 2) := by
+    simp only [qf, xi]; linear_combination a ^ 2 * t.imI ^ 2 * hqt
+  have qj : qf xj = b * (1 + b * t.imJ ^ 2) := by
+    simp only [qf, xj]; linear_combination b ^ 2 * t.imJ ^ 2 * hqt
+  have qk : qf xk = -(a * b) * (1 - a * b * t.imK ^ 2) := by
+    simp only [qf, xk]; linear_combination a ^ 2 * b ^ 2 * t.imK ^ 2 * hqt
+  by_cases hi : qf xi = 0
+  · by_cases hj : qf xj = 0
+    · by_cases hk : qf xk = 0
+      · rw [qi] at hi; rw [qj] at hj; rw [qk] at hk
+        have e1 := (mul_eq_zero.1 hi).resolve_left ha
+        have e2 := (mul_eq_zero.1 hj).resolve_left hb
+        have e3 := (mul_eq_zero.1 hk).resolve_left (neg_ne_zero.2 (mul_ne_zero ha hb))
+        exact absurd (by linear_combination e1 + e2 + e3 - hqt) h2
+      · exact ⟨xk, rfl, pk, hk⟩
+    · exact ⟨xj, rfl, pj, hj⟩
+  · exact ⟨xi, rfl, pi, hi⟩
+
+/-- **Page 95–97, épimorphisme.** Every `t ∈ Σ` is `f̃(x + iy)` for some `(x, y) ∈ Ũ`:
+take a pure `x ⟂ t` with `q(x) ≠ 0` and `y = -tx`. -/
+theorem ftilde_surjective (h2 : (2 : K) ≠ 0) (ha : a ≠ 0) (hb : b ≠ 0) {t : ℍ[K,a,b]}
+    (ht : t ∈ Sphere) : ∃ ξ ∈ Utilde, ftilde ξ = t := by
+  obtain ⟨x, hx, hxt, hq⟩ := exists_perp h2 ha hb ht
+  obtain ⟨htx, hac, hqtx⟩ := perp_facts h2 ht hx hxt
+  have hp : pol x (-(t * x)) = 0 := by
+    rw [pol_neg_right, neg_eq_zero]
+    refine coe_inj (a := a) (b := b) ?_
+    rw [← mul_add_mul_of_pure hx htx, ← mul_assoc, hac, neg_mul, neg_add_cancel,
+      QuaternionAlgebra.coe_zero]
+  refine ⟨(x, -(t * x)), ⟨hx, by simp [htx], by simp [qf_neg, hqtx], hp, hq⟩, ?_⟩
+  have hc : x * -(t * x) - -(t * x) * x = (2 * qf x : K) • t := by
+    calc x * -(t * x) - -(t * x) * x = -((x * t) * x) + t * (x * x) := by noncomm_ring
+      _ = t * (x * x) + t * (x * x) := by rw [hac]; noncomm_ring
+      _ = _ := by
+        rw [mul_self_of_pure hx, QuaternionAlgebra.mul_coe_eq_smul, mul_smul, two_smul]
+  simp only [ftilde]
+  rw [hc, smul_smul, inv_mul_cancel₀ (mul_ne_zero h2 hq), one_smul]
+
+
+/-- **Pages 94–96, monomorphisme.** Two points of `Ũ` with the same image under `f̃` differ by
+the action of some `α = c + id`, `c² + d² ≠ 0`. -/
+theorem ftilde_fibre (h2 : (2 : K) ≠ 0) {ξ ξ' : ℍ[K,a,b] × ℍ[K,a,b]} (hξ : ξ ∈ Utilde)
+    (hξ' : ξ' ∈ Utilde) (h : ftilde ξ' = ftilde ξ) :
+    ∃ c d : K, c ^ 2 + d ^ 2 ≠ 0 ∧ ξ' = act c d ξ := by
+  set t := ftilde ξ with ht_def
+  have ht : t ∈ Sphere := ftilde_mem h2 hξ
+  obtain ⟨hxt, hy⟩ := ftilde_facts h2 hξ
+  obtain ⟨hxt', hy'⟩ := ftilde_facts h2 hξ'
+  rw [h] at hxt' hy'
+  obtain ⟨hx, -, -, -, hq⟩ := hξ
+  obtain ⟨hx', -, -, -, hq'⟩ := hξ'
+  obtain ⟨htx, hac, hqtx⟩ := perp_facts h2 ht hx hxt
+  have htt : t * t = -1 := by rw [mul_self_of_pure ht.1, ht.2]; simp
+  set x := ξ.1
+  set x' := ξ'.1
+  have h20 : (2 * qf x : K) ≠ 0 := mul_ne_zero h2 hq
+  set c := pol x x' / (2 * qf x) with hc
+  set d := pol (t * x) x' / (2 * qf x) with hd
+  have p1 : pol (t * x) t = 0 := by
+    refine coe_inj (a := a) (b := b) ?_
+    rw [← mul_add_mul_of_pure htx ht.1, QuaternionAlgebra.coe_zero, mul_assoc, hac, mul_neg,
+      ← mul_assoc, neg_add_cancel]
+  have p2 : pol (t * x) x = 0 := by
+    refine coe_inj (a := a) (b := b) ?_
+    rw [← mul_add_mul_of_pure htx hx, QuaternionAlgebra.coe_zero, ← mul_assoc, hac, neg_mul,
+      mul_assoc, add_neg_cancel]
+  set r := x' - c • x - d • (t * x) with hr_def
+  have hr : r.re = 0 := by simp [r, hx, hx', htx]
+  have prt : pol r t = 0 := by
+    rw [pol_sub_smul, hxt', hxt, p1]; ring
+  have prx : pol r x = 0 := by
+    rw [pol_sub_smul, pol_self, p2, pol_comm x' x, hc]; field_simp; ring
+  have prtx : pol r (t * x) = 0 := by
+    rw [pol_sub_smul, pol_self, hqtx, pol_comm x (t * x), p2, pol_comm x' (t * x), hd]
+    field_simp; ring
+  have hr0 : r = 0 := eq_zero_of_anticomm h2 ht hx hxt hq
+    (anticomm ht.1 hr (by rw [pol_comm]; exact prt))
+    (anticomm hx hr (by rw [pol_comm]; exact prx))
+    (anticomm htx hr (by rw [pol_comm]; exact prtx))
+  have hx'eq : x' = c • x + d • (t * x) := by
+    rw [hr_def, sub_sub, sub_eq_zero] at hr0; exact hr0
+  have hqx' : qf x' = (c ^ 2 + d ^ 2) * qf x := by
+    rw [hx'eq, qf_smul_add_smul, hqtx, pol_comm, p2]; ring
+  refine ⟨c, d, fun h0 => hq' (by rw [hqx', h0, zero_mul]), ?_⟩
+  refine Prod.ext ?_ ?_
+  · change x' = c • x - d • ξ.2
+    rw [hy, hx'eq, smul_neg, sub_neg_eq_add]
+  · change ξ'.2 = d • x + c • ξ.2
+    rw [hy', hy, hx'eq, mul_add, mul_smul_comm, mul_smul_comm, ← mul_assoc, htt, neg_one_mul,
+      smul_neg, smul_neg]
+    abel
+
+/-- For a ternary diagonal form `⟨d₁, d₂, d₃⟩` with `dᵢ ≠ 0`: if `x` is isotropic with
+`x₁ ≠ 0` and `z ⟂ x` is isotropic with `z₁ = 0`, then `z = 0`. -/
+theorem diag_aux {d₁ d₂ d₃ x₁ x₂ x₃ z₂ z₃ : K} (h₁ : d₁ ≠ 0) (h₂ : d₂ ≠ 0) (h₃ : d₃ ≠ 0)
+    (hx : x₁ ≠ 0) (hC : d₁ * x₁ ^ 2 + d₂ * x₂ ^ 2 + d₃ * x₃ ^ 2 = 0)
+    (hB : d₂ * x₂ * z₂ + d₃ * x₃ * z₃ = 0) (hA : d₂ * z₂ ^ 2 + d₃ * z₃ ^ 2 = 0) :
+    z₂ = 0 ∧ z₃ = 0 := by
+  have e : d₁ * d₃ * x₁ ^ 2 * z₃ ^ 2 = 0 := by
+    linear_combination d₃ * z₃ ^ 2 * hC - (d₃ * x₃ * z₃ - d₂ * x₂ * z₂) * hB - d₂ * x₂ ^ 2 * hA
+  have hz₃ : z₃ = 0 := by
+    simpa [h₁, h₃, hx] using e
+  refine ⟨?_, hz₃⟩
+  rw [hz₃] at hA
+  simpa [h₂] using hA
+
+/-- **Page 98, the lemma.** Over a field of characteristic `≠ 2`, a nonzero isotropic
+`x + iy` (`q(x) = q(y)`, `φ(x, y) = 0`) outside `Ũ` (`q(x) = 0`) is `(c + id) x₀` with `x₀`
+isotropic: a real point. So `X^{S[i]} ∖ X` is the open set `q(x) ≠ 0`. -/
+theorem hors_de_U (h2 : (2 : K) ≠ 0) (ha : a ≠ 0) (hb : b ≠ 0) {x y : ℍ[K,a,b]}
+    (hx : x.re = 0) (hy : y.re = 0) (hq : qf x = qf y) (hp : pol x y = 0) (h0 : qf x = 0) :
+    ∃ x₀ : ℍ[K,a,b], x₀.re = 0 ∧ qf x₀ = 0 ∧ ∃ c d : K, x = c • x₀ ∧ y = d • x₀ := by
+  by_cases hx0 : x = 0
+  · exact ⟨y, hy, hq ▸ h0, 0, 1, by simp [hx0], by simp⟩
+  suffices key : ∃ l : K, y = l • x by
+    obtain ⟨l, hl⟩ := key
+    exact ⟨x, hx, h0, 1, l, by simp, hl⟩
+  have hxne : x.imI ≠ 0 ∨ x.imJ ≠ 0 ∨ x.imK ≠ 0 := by
+    by_contra hc
+    push Not at hc
+    exact hx0 (QuaternionAlgebra.ext hx hc.1 hc.2.1 hc.2.2)
+  have hqx : a * x.imI ^ 2 + b * x.imJ ^ 2 + -(a * b) * x.imK ^ 2 = 0 := by
+    have := h0; simp only [qf] at this; linear_combination this
+  have hqy : a * y.imI ^ 2 + b * y.imJ ^ 2 + -(a * b) * y.imK ^ 2 = 0 := by
+    have := hq ▸ h0; simp only [qf] at this; linear_combination this
+  have hpxy : a * x.imI * y.imI + b * x.imJ * y.imJ + -(a * b) * x.imK * y.imK = 0 := by
+    have := hp; simp only [pol] at this
+    have := (mul_eq_zero.1 this).resolve_left h2
+    linear_combination this
+  have hab : -(a * b) ≠ 0 := neg_ne_zero.2 (mul_ne_zero ha hb)
+  rcases hxne with h1 | h1 | h1
+  · set l := y.imI / x.imI
+    have hz : y.imI - l * x.imI = 0 := by simp [l, div_mul_cancel₀ _ h1]
+    obtain ⟨e2, e3⟩ := diag_aux (x₂ := x.imJ) (x₃ := x.imK) (z₂ := y.imJ - l * x.imJ)
+      (z₃ := y.imK - l * x.imK) ha hb hab h1 hqx
+      (by linear_combination hpxy - l * hqx - a * x.imI * hz)
+      (by linear_combination hqy - 2 * l * hpxy + l ^ 2 * hqx - a * (y.imI - l * x.imI) * hz)
+    exact ⟨l, QuaternionAlgebra.ext (by simp [hx, hy]) (by simp; linear_combination hz)
+      (by simp; linear_combination e2) (by simp; linear_combination e3)⟩
+  · set l := y.imJ / x.imJ
+    have hz : y.imJ - l * x.imJ = 0 := by simp [l, div_mul_cancel₀ _ h1]
+    obtain ⟨e2, e3⟩ := diag_aux (x₂ := x.imI) (x₃ := x.imK) (z₂ := y.imI - l * x.imI)
+      (z₃ := y.imK - l * x.imK) hb ha hab h1 (by linear_combination hqx)
+      (by linear_combination hpxy - l * hqx - b * x.imJ * hz)
+      (by linear_combination hqy - 2 * l * hpxy + l ^ 2 * hqx - b * (y.imJ - l * x.imJ) * hz)
+    exact ⟨l, QuaternionAlgebra.ext (by simp [hx, hy]) (by simp; linear_combination e2)
+      (by simp; linear_combination hz) (by simp; linear_combination e3)⟩
+  · set l := y.imK / x.imK
+    have hz : y.imK - l * x.imK = 0 := by simp [l, div_mul_cancel₀ _ h1]
+    obtain ⟨e2, e3⟩ := diag_aux (x₂ := x.imI) (x₃ := x.imJ) (z₂ := y.imI - l * x.imI)
+      (z₃ := y.imJ - l * x.imJ) hab ha hb h1 (by linear_combination hqx)
+      (by linear_combination hpxy - l * hqx + a * b * x.imK * hz)
+      (by linear_combination hqy - 2 * l * hpxy + l ^ 2 * hqx +
+        a * b * (y.imK - l * x.imK) * hz)
+    exact ⟨l, QuaternionAlgebra.ext (by simp [hx, hy]) (by simp; linear_combination e2)
+      (by simp; linear_combination e3) (by simp; linear_combination hz)⟩
+
+/-- **Pages 94–98, the coordinate statement.** For a quaternion algebra `(a, b)` over a field of
+characteristic `≠ 2` (the twisted quaternion algebra `M` of the reading, its pure part the
+special quadratic module `E` of rank `3`, `q(u) = u²`), the map
+`x + iy ↦ [x, y]/2q(x)` sends `Ũ` onto the affine quadric `Σ : q = -1`, and its fibres are
+exactly the orbits of `α = c + id`, `c² + d² ≠ 0`: `Σ ≅ Ũ/𝔾_m^{S[i]}`. -/
+theorem sphere_quotient (h2 : (2 : K) ≠ 0) (ha : a ≠ 0) (hb : b ≠ 0) :
+    (∀ ξ ∈ (Utilde : Set (ℍ[K,a,b] × ℍ[K,a,b])), ftilde ξ ∈ Sphere) ∧
+      (∀ t ∈ (Sphere : Set ℍ[K,a,b]), ∃ ξ ∈ Utilde, ftilde ξ = t) ∧
+      ∀ ξ ∈ (Utilde : Set (ℍ[K,a,b] × ℍ[K,a,b])), ∀ ξ' ∈ Utilde,
+        ftilde ξ' = ftilde ξ ↔ ∃ c d : K, c ^ 2 + d ^ 2 ≠ 0 ∧ ξ' = act c d ξ :=
+  ⟨fun _ hξ => ftilde_mem h2 hξ, fun _ ht => ftilde_surjective h2 ha hb ht,
+    fun _ hξ _ hξ' => ⟨ftilde_fibre h2 hξ hξ', fun ⟨_, _, hcd, he⟩ => he ▸ (act_mem hcd hξ).2⟩⟩
+
+end QuadriqueAffine
+
+end Grothendieck.Folder77

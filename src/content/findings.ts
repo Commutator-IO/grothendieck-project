@@ -8014,6 +8014,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'A smooth quadric surface is classically the Weil restriction of a conic along its discriminant double cover (the exceptional isomorphism D₂ = A₁ × A₁); check Knus–Merkurjev–Rost–Tignol, The Book of Involutions, § 15, and Knus 1991 V, for the scheme-theoretic statement and for the affine complement Σ = X^Ω − X. If both are there, mark matched; the explicit formula and sign are then a computation, not a finding.',
+    lean: { file: 'lean/Grothendieck/Folder77.lean', found: "The coordinate statement holds on a field of characteristic ≠ 2, as pages 94–98 give it, with E the pure part of a quaternion algebra (a, b) and q(u) = u² (M₂ and −det for a = b = 1): q([x, y]) = −4q(x)q(y) + φ(x, y)² (21 bis); x + iy ↦ [x, y]/2q(x) maps the pairs with q(x) = q(y) ≠ 0, φ(x, y) = 0 onto the affine quadric q = −1, and two pairs have the same image iff they differ by c + id, c² + d² ≠ 0; and the lemma of p. 98: an isotropic x + iy with q(x) = 0 is (c + id)x₀ with x₀ isotropic, so the open set q(x) ≠ 0 is X^{S[i]} ∖ X. The inverse is explicit and needs no étale localisation: t ↦ x − i tx for any x ⟂ t with q(x) ≠ 0, and every y paired with x is −tx; injectivity modulo the action comes from t, x, tx being an orthogonal basis. The scheme-level statement over a base and the twisted version X^Ω ≅ Σ̂ with its sign (pp. 102–116) are not formalised." },
   },
   {
     id: '77-so-even-rank-smooth-connected-matched',

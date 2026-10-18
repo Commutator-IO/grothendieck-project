@@ -325,15 +325,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '77',
     batch: 4,
-    page: '68–71, 87, 117–124',
-    name: 'The universal discriminant; the canonical symmetry',
+    page: '68–71, 87, 94–98, 117–124',
+    name: 'The universal discriminant; the sphere as a Weil restriction; the canonical symmetry',
     statement:
-      'For the universal quadratic form of odd rank, 2 divides the determinant of the polar form in ℤ[Y], so δ′ is defined over any base; in every even rank 2n, (−1)ⁿΔ ≡ B² mod 4, B the hafnian of the off-diagonal coefficients. For (T, q, a) with q(a) = 1, σ = id − π ⊗ a is an involutive isometry fixing ker π.',
+      'For the universal quadratic form of odd rank, 2 divides the determinant of the polar form in ℤ[Y], so δ′ is defined over any base; in every even rank 2n, (−1)ⁿΔ ≡ B² mod 4, B the hafnian of the off-diagonal coefficients. For (T, q, a) with q(a) = 1, σ = id − π ⊗ a is an involutive isometry fixing ker π. Over a field of characteristic ≠ 2, with E the pure quaternions of (a, b) and q(u) = u², x + iy ↦ [x, y]/2q(x) maps the isotropic x + iy with q(x) ≠ 0 onto the affine quadric q = −1, its fibres the orbits of c + id; the remaining isotropic x + iy are real points (p. 98).',
     found:
-      'Both discriminant statements hold for every rank, without a Pfaffian: the odd case lifts to an antisymmetric matrix over ℤ[Y]; in even rank det K ≡ (1 − 2n) det P mod 4 and det K is a square in ℤ[Y] by integral closure. The opposite sign is refuted in ranks 2 and 4. The uniqueness of σ on p. 123 needs a connected base: in general the isometries fixing ker π are id − eπ ⊗ a, e idempotent. σ² = id needs π(a) = 2, where the page writes π(a) = 1.',
+      'Both discriminant statements hold for every rank, without a Pfaffian: the odd case lifts to an antisymmetric matrix over ℤ[Y]; in even rank det K ≡ (1 − 2n) det P mod 4 and det K is a square in ℤ[Y] by integral closure. The opposite sign is refuted in ranks 2 and 4. The uniqueness of σ on p. 123 needs a connected base: in general the isometries fixing ker π are id − eπ ⊗ a, e idempotent. σ² = id needs π(a) = 2, where the page writes π(a) = 1. The sphere statement of pp. 94–98 holds on a field as the page gives it, with (21 bis) and the lemma of p. 98; the inverse is explicit, t ↦ x − i tx for any x ⟂ t with q(x) ≠ 0, and no étale localisation is needed. The scheme-level and twisted versions are not formalised.',
     verdict: 'holds, more generally',
     lean: 'lean/Grothendieck/Folder77.lean',
-    theorems: ['two_dvd_det_polar', 'disc_rank_four', 'four_dvd_disc_sub_hafnian_sq', 'disc_even_rank', 'canSym_isometry', 'canSym_canSym', 'eq_of_isometry_fix', 'eq_id_or_canSym'],
+    theorems: ['two_dvd_det_polar', 'disc_rank_four', 'four_dvd_disc_sub_hafnian_sq', 'disc_even_rank', 'canSym_isometry', 'canSym_canSym', 'eq_of_isometry_fix', 'eq_id_or_canSym', 'qf_commutator', 'sphere_quotient', 'hors_de_U'],
   },
   {
     folder: '84',
