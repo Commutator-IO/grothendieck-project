@@ -7254,6 +7254,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Most likely a match. Check Sharp and Vámos, « Baire’s category theorem and prime avoidance in complete local rings », Arch. Math. 44 (1985), and Burch’s countable prime avoidance for complete local rings: if the dimension-one avoidance follows directly from countable prime avoidance, mark matched with that reference.',
+    lean: { file: 'lean/Grothendieck/Folder100.lean', found: 'Partly proved: the Corollary of page 38 for Θ = V⟦T⟧, V a complete discrete valuation ring, of dimension 2 (exists_avoid). For a ∈ 𝔪, V⟦T⟧/(T − a) ≃ V, since T − a is distinguished (quotEquiv); a nonzero f is a nonzero polynomial Q times a unit, by the content ϖ^v and Weierstrass preparation (exists_poly_mul_unit), so f ∈ (T − a) iff Q(a) = 0 and f excludes finitely many a (finite_bad); a complete discrete valuation ring is uncountable, whatever its residue field (uncountable); so countably many nonzero fᵢ leave some a ∈ 𝔪 with no fᵢ in (T − a). Counting replaces Baire here; with several variables one f excludes uncountably many points and Baire is needed. Not formalised: n ≥ 2, the reduction of a complete local domain to a finite extension of V⟦T₁, …, Tₙ⟧ (Cohen) and the lifting of points, and the Proposition of page 36.' },
   },
   {
     id: '100-neron-extension-p-divisible',

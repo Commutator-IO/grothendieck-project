@@ -791,6 +791,19 @@ export const PROOFS: Proof[] = [
     theorems: ['mul_group', 'anh_mul', 'der_mul', 'der_pow_six', 'six_dvd', 'derL_mul', 'derL_pow_three', 'coboundary_derL_iff'],
   },
   {
+    folder: '100',
+    batch: 2,
+    page: '38',
+    name: 'A point of dimension one off countably many divisors',
+    statement:
+      'In an integral complete local scheme, countably many nowhere-dense closed subsets miss some point of dimension one; the page passes to V[[T₁, …, Tₙ]], parametrises the homomorphisms to V by 𝔪ⁿ and concludes by Baire.',
+    found:
+      'Holds for V⟦T⟧, V a complete discrete valuation ring: for a ∈ 𝔪, V⟦T⟧/(T − a) ≃ V, and for countably many nonzero fᵢ there is a ∈ 𝔪 with no fᵢ in (T − a). Weierstrass preparation writes a nonzero f as a polynomial Q times a unit, so f excludes only the finitely many roots of Q; a complete discrete valuation ring is uncountable, so counting replaces Baire, with no hypothesis on the residue field. Not formalised: several variables, where Baire is needed, Cohen’s reduction, and the Proposition of page 36.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder100.lean',
+    theorems: ['exists_poly_mul_unit', 'finite_bad', 'uncountable', 'exists_avoid'],
+  },
+  {
     folder: '101',
     batch: 1,
     page: '10–11',
