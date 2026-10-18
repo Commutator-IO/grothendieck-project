@@ -182,15 +182,15 @@ export const PROOFS: Proof[] = [
   {
     folder: '39',
     batch: 1,
-    page: '18',
-    name: 'Formal preparation',
+    page: '11–14, 18',
+    name: 'Implicit functions in a class of formal series; formal preparation',
     statement:
-      'If A is I-adically complete, a₀, …, a_{N−1} ∈ I and a_N a unit, F is regular and every G is QF + r uniquely with deg r < N; the same when a₀, …, a_{N−1} are nilpotent.',
+      'Over any commutative ring k, for subrings A_n ⊆ k[[t₁, …, tₙ]] satisfying (I), (S), (R), (H): if P ∈ A_{n+1} has P(0) = 0 and ∂P/∂Z(0) a unit, the unique F with F(0) = 0 and P(F(t), t) = 0 is in A_n, and (A_n, A_n ∩ 𝔪_n) is a henselian pair; with (D), f(0) a unit implies f⁻¹ ∈ A_n, and A_n ⊆ A_0[[t]]. If A is I-adically complete, a₀, …, a_{N−1} ∈ I and a_N a unit, F is regular and every G is QF + r uniquely with deg r < N; the same when a₀, …, a_{N−1} are nilpotent.',
     found:
-      'Nothing wrong; it follows from classical Weierstrass division. Not proved: the general linearly topologised case, and the exact hypothesis aᵢ ∈ √I. Weierstrass division over an I-adically complete ring is already in mathlib; the missing completeness for a nilpotent ideal is proposed (#44725).',
-    verdict: 'partly proved',
+      'The henselian pair needs only (H): Corollary 3, proved by the page\'s inversion once the formal implicit function theorem is proved by Weierstrass division, does not use Corollary 1, against the reading, which holds the pair only under (D). Corollary 1 for f(0) a unit of k is false under (I), (S), (R), (H) alone (the series over ℚ with integral constant term) and holds with (D), used only for n = 0. Preparation: nothing wrong; it follows from classical Weierstrass division. Not proved: the general linearly topologised case, and the exact hypothesis aᵢ ∈ √I; the missing completeness for a nilpotent ideal is proposed (#44725).',
+    verdict: 'holds, more generally',
     lean: 'lean/Grothendieck/Folder39.lean',
-    theorems: ['preparation_adique', 'preparation_discrete'],
+    theorems: ['implicit_function', 'implicit_mem', 'hensel_mem', 'henselianRing', 'inv_mem', 'intConst_isFormalClass', 'intConst_not_inv_mem', 'coeff_mem', 'preparation_adique', 'preparation_discrete'],
   },
   {
     folder: '19',

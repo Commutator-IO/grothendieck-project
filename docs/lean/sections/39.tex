@@ -1,4 +1,4 @@
-\section[Cote 39 : le théorème de préparation « formel », cas adique et cas discret]{Cote 39 : le théorème de préparation « formel », cas adique et cas discret\protect\verifie{Folder39}}\label{sec:39}
+\section[Cote 39 : le théorème de préparation « formel » ; fonctions implicites dans une classe de séries]{Cote 39 : le théorème de préparation « formel » ; fonctions implicites dans une classe de séries\protect\verifie{Folder39}}\label{sec:39}
 
 La cote 39, \emph{Fonctions et structures \q{élémentaires} [Schémas formels, théorème de préparation] : notes manuscrites (s.d.)}, datée par l'inventaire \q{[vers 1960-1970]}, compte dix-neuf pages en trois ensembles séparés par des intercalaires vierges. Les deux premiers sont deux rédactions successives d'une axiomatique des classes de séries formelles (pages~2 à~7, puis~9 à~16). Le troisième, pages~18 et~19, énonce et démontre un théorème sous un titre souligné de sa main, \q{Th.\ de préparation “formel”} (\lot{39}{1}{18}). La démonstration commence par une réduction, \q{Comme $A$ est séparé et complet pour sa top.\ linéaire, on est ramené au cas où $A$ est discret}, puis précise que (i) \q{\textbf{signifie} que les $a_i$ ($0 \leq i \leq N-1$) sont nilpotents}. Un premier argument, par Nakayama et le gradué associé, est encadré et barré. Le second considère l'application $\varphi : ((b_i), Q) \mapsto \sum b_i Z^i + QF$ et conclut, par le gradué de la filtration $\mathfrak m$-adique, \q{finie}, que $\varphi$ est bijective (\lot{39}{1}{19}).
 
@@ -51,11 +51,34 @@ Pour la topologie $I$-adique, \q{topologiquement nilpotent} signifie $a_i \in \s
 La complétude pour un idéal nilpotent, dont le cas discret a besoin, est proposée à mathlib (PR mathlib4~\#44725).
 \end{remarque}
 
-Ne sont pas démontrés ici : la préparation (unité $\times$ polynôme distingué) ; les paires henséliennes ; les séries algébriques ; le cas d'une topologie linéaire quelconque ; le cas $I$-adique sous l'hypothèse $a_i \in \sqrt I$ ; l'axiomatique des pages~2 à~16.
+Ne sont pas démontrés ici : la préparation (unité $\times$ polynôme distingué) ; les séries algébriques ; le cas d'une topologie linéaire quelconque ; le cas $I$-adique sous l'hypothèse $a_i \in \sqrt I$.
 
-\begin{encadre}
-\begin{theoreme*}[D'après les pages 9 à 14, axiomatique des fonctions implicites, forme corrigée par l'édition\piste{39-inverse-function-axioms-henselian}]\nonverifie
-Soient $k$ un anneau commutatif et, pour tout $n$, $A_n \subset k[[t_1, \ldots, t_n]]$ un sous-anneau unitaire contenant les coordonnées, la famille étant stable par substitution d'arguments topologiquement nilpotents, par inversion des automorphismes formels de $X_n$ (H) et par extraction des coefficients de Hasse (D). Alors la famille est stable par le théorème des fonctions implicites, $(A_n, A_n \cap \mathfrak m_n)$ est une paire hensélienne zariskienne, et $A_n \subset k_0[[t]]$ avec $k_0 = A_0$. La page tire la paire hensélienne de (H) sans (D), par une substitution $t_{n+1} = 1$ que la stabilité par substitution interdit.
-\end{theoreme*}
-\end{encadre}
-{\small Démonstration donnée par l'édition, non vérifiée en Lean.\par}
+\paragraph{L'axiomatique des pages 9 à 14.} Sur un anneau commutatif $k$ quelconque, pour une famille $A_n \subset S_n = k[[t_1, \ldots, t_n]]$, la seconde rédaction pose (I) $t_i \in A_n$ ; (S) si $\varphi \in A_n$ et si $f_1, \ldots, f_n \in A_m$ ont des termes constants nilpotents, $\varphi(f_1, \ldots, f_n) \in A_m$ ; (R) les $A_n$ sont des sous-anneaux unitaires ; (H) l'inverse d'un $A$-morphisme $X_n \to X_n$ qui est un isomorphisme formel est un $A$-morphisme ; (D) les coefficients de $f \in A_{n+m}$ en ses $m$ dernières variables sont dans $A_n$. La page tire de (H) le corollaire~1 (si $f \in A_n$ et si $f(0)$ est inversible dans $k$, $f^{-1} \in A_n$), le corollaire~2 (le couple $(A_n, A_n \cap \mathfrak m_n)$ est zariskien et hensélien) et le corollaire~3 (les fonctions implicites), puis de (D) l'inclusion $A_n \subset k_0[[t]]$, $k_0 = A_0$ (\lot{39}{1}{11}, \lot{39}{1}{12}, \lot{39}{1}{14}). La démonstration du corollaire~1 substitue $t_{n+1} = 1$, ce que (S) interdit ; la lecture le démontre avec (D) et ne tient le couple pour hensélien que sous (D). On lit ici \q{isomorphisme formel} comme \q{admet un inverse pour la substitution}, et $\mathfrak m_n$ comme l'idéal des séries sans terme constant.
+
+\begin{theoreme}[Grothendieck, page 12, corollaires 2 et 3\piste{39-inverse-function-axioms-henselian}]\label{thm:39-hensel}
+Supposons (I), (S), (R), (H). Si $P \in A_{n+1}$, vu comme série en $(Z, t_1, \ldots, t_n)$, vérifie $P(0) = 0$ et si $\partial P/\partial Z\,(0)$ est inversible dans $k$, l'unique $F \in S_n$ tel que $F(0) = 0$ et $P(F(t), t) = 0$ est dans $A_n$. Le couple $(A_n, A_n \cap \mathfrak m_n)$ est hensélien, en particulier zariskien.
+\end{theoreme}
+
+\begin{proof}
+\emph{Existence et unicité de $F$.} Vu dans $S_n[[Z]]$, $P$ a son terme constant $g_0$ dans l'idéal $I$ des variables, pour lequel $S_n$ est séparé et complet, et son coefficient $g_1$ de $Z$ inversible. La division de Weierstrass de $Z$ par $P$ donne $Z = qP + r$, $r \in S_n$. Le coefficient de $Z$ donne $1 = g_0 q_1 + g_1 q_0$, et $g_0 \in I$ est dans le radical, donc $q_0$ et $q$ sont inversibles ; ainsi $P = q^{-1}(Z - r)$ avec $r = -g_0 q_0 \in I$. La substitution $Z \mapsto G$, $G(0) = 0$, est un morphisme d'anneaux $S_{n+1} \to S_n$ qui envoie $q^{-1}$ sur un inversible : $P(G, t) = 0$ si et seulement si $G = r$.
+
+\emph{Appartenance.} Appliquée à $P(W, t) - Z$, l'existence donne $\varphi(Z, t)$ avec $P(\varphi(Z, t), t) = Z$ ; appliquée à $P(W, t) - P(Z, t)$, dont $W = Z$ et $W = \varphi(P(Z, t), t)$ sont deux solutions, l'unicité donne $\varphi(P(Z, t), t) = Z$. Ainsi $(Z, t) \mapsto (\varphi, t)$ est l'inverse de l'$A$-morphisme $(Z, t) \mapsto (P, t)$ ; par (H), $\varphi \in A_{n+1}$, et par (S), $\varphi(0, t) \in A_n$. Comme $P(\varphi(0, t), t) = 0$, c'est $F$. C'est l'argument de la page.
+
+\emph{Le couple.} Soient $f$ unitaire à coefficients dans $A_n$ et $a_0 \in A_n$ tels que $f(a_0)(0) = 0$ et que $f'(a_0)$ soit inversible modulo $A_n \cap \mathfrak m_n$, donc $f'(a_0)(0)$ inversible dans $k$. La série $P(Z, t) = f(a_0 + Z)$ est dans $A_{n+1}$ par (S), avec $P(0) = 0$ et $\partial P/\partial Z\,(0) = f'(a_0)(0)$ ; la racine $a_0 + F$ est dans $A_n$ et congrue à $a_0$ modulo $\mathfrak m_n$. Si $g \in A_n \cap \mathfrak m_n$ et $y \in A_n$, le polynôme $(1 + gy)Z - 1$ et $a_0 = 1$ donnent un inverse de $1 + gy$ dans $A_n$.
+\end{proof}
+
+\noindent Le couple est donc hensélien sous (H) seul, sans la condition (D) que la lecture ajoute : le corollaire~3 ne passe pas par le corollaire~1. Voir \texttt{implicit\_function}, \texttt{implicit\_mem}, \texttt{hensel\_mem} et \texttt{henselianRing} dans \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/Folder39.lean}{\texttt{Folder39.lean}}. Seule la forme forte du corollaire~1 demande davantage.
+
+\begin{contrexemple}[énoncé de l'édition]\label{cex:39}
+Sur $k = \mathbb Q$, les séries à terme constant entier, $A_n = \{ f \in S_n : f(0) \in \mathbb Z \}$, vérifient (I), (S), (R), (H), et $2 \in A_0$, inversible dans $\mathbb Q$, n'a pas d'inverse dans $A_0$. Le corollaire~1 de la page~11 ne découle pas de (I), (S), (R), (H).
+\end{contrexemple}
+
+\begin{proof}
+Un nilpotent de $\mathbb Q$ est nul ; une substitution par des séries sans terme constant conserve le terme constant, et un inverse pour la substitution est sans terme constant.
+\end{proof}
+
+\begin{theoreme}[D'après les pages 11 et 14, avec (D)]
+Supposons (I), (S), (R), (H), (D). Si $f \in A_n$ et si $f(0)$ est inversible dans $k$, alors $f^{-1} \in A_n$. Sous (D) seule, $A_n \subset k_0[[t_1, \ldots, t_n]]$.
+\end{theoreme}
+
+\noindent L'énoncé tient, (D) ne servant au corollaire~1 que pour $n = 0$ : l'inverse de $s \mapsto f(0)s$ est dans $A_1$ par (H), son coefficient $f(0)^{-1}$ dans $A_0$ par (D), et le théorème~\ref{thm:39-hensel} appliqué à $fZ - 1$ en $a_0 = f(0)^{-1}$ donne $f^{-1}$. Voir \texttt{inv\_mem}, \texttt{coeff\_mem}, \texttt{intConst\_isFormalClass} et \texttt{intConst\_not\_inv\_mem}. Ne sont pas démontrés : la forme jacobienne de (H) pour un morphisme quelconque, les produits fibrés transversaux, les sous-schémas formels, les parties principales, la question de fidèle platitude de la page~12, et la première rédaction (pages~2 à~7).
