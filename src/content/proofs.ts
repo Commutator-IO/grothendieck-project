@@ -37,6 +37,19 @@ export const PROOFS: Proof[] = [
     theorems: ["lemme2_1", "lemme2_2", "isOpen_of_stableUnderGeneralization", "lemme1_faisceau", "proposition", "lemme2_page", "lemme1", "corollaire1"],
   },
   {
+    folder: '5',
+    batch: 1,
+    page: '4',
+    name: 'The coefficients qᵢ of the universal divided-power algebra',
+    statement:
+      'The universal artinian local W(k)-algebra whose maximal ideal carries divided powers killed in degrees ≥ p^{ν+1} is W[Λ₀, …, Λ_ν]/(Λᵢ^p − qᵢΛ_{i+1}, Λ_ν^p, Λ₀ − p), with qᵢ = (p^{i+1})!/((p^i)!)^p. Here only the qᵢ.',
+    found:
+      'The qᵢ are integers, the multinomial coefficients of p blocks of size p^i, for every p; for p prime, v_p(qᵢ) = 1, by Legendre: (p − 1)v_p((p^i)!) = p^i − 1. In a divided-power ideal, γ_{p^i}(x)^p = qᵢγ_{p^{i+1}}(x), mathlib’s prod_dpow specialised. Not formalised: the universal algebra, its normal form, c(ν), the quotients W^{(ν,r)}.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder5.lean',
+    theorems: ['q_eq_multinomial', 'factorial_eq_mul_q', 'sub_one_mul_padicValNat_factorial_pow', 'padicValNat_q', 'dpow_pow', 'dpow_pow_eq_q'],
+  },
+  {
     folder: '72',
     batch: 2,
     page: '37–38, 79–82, 87–88, 91–102',

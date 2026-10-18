@@ -4298,6 +4298,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'First prove necessity (that the set I′ cut out by a)–b) is stable under multiplication by each Θ_i) for all p and ν. Then look for an explicit W-module description of the PD envelope D_{W}(pW) = W⟨X⟩/(X − p) and its truncations in Berthelot, Cohomologie cristalline (LNM 407, 1974) ch. I, Berthelot–Ogus, Notes on crystalline cohomology §3, and the Stacks Project chapter « Divided Power Algebra »; if a normal form or the length formula is there, mark matched.',
+    lean: { file: 'lean/Grothendieck/Folder5.lean', found: "Only the arithmetic of the coefficients, the reachable piece: qᵢ = (p^{i+1})!/((p^i)!)^p satisfies ((p^i)!)^p · qᵢ = (p^{i+1})!, so it is an integer, the multinomial coefficient of p blocks of size p^i (factorial_eq_mul_q, q_eq_multinomial), for every p; for p prime, (p − 1)v_p((p^i)!) = p^i − 1 and v_p(qᵢ) = 1 (padicValNat_q), by Legendre in the form v_p((pm)!) = v_p(m!) + m, which confirms the value the pass's remark on the reading's footnote uses. In any ring with a divided-power ideal, γ_{p^i}(x)^p = qᵢ γ_{p^{i+1}}(x) (dpow_pow_eq_q), the relation of the presentation; it is mathlib's DividedPowers.prod_dpow specialised. Not formalised: the universality of W[Λ]/(…), the necessity half of the lemmas, the normal form in the Θᵢ, c(ν), the quotients W^{(ν,r)}, the bound of page 8." },
   },
   {
     id: '5-deligne-letter-ringed-duality',

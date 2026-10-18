@@ -1,0 +1,23 @@
+\section[Cote 5 : les coefficients $q_i$ de l'algèbre universelle à puissances divisées]{Cote 5 : les coefficients $q_i$ de l'algèbre universelle à puissances divisées\protect\verifie{Folder5}}\label{sec:5}
+
+La cote 5, \emph{Cristaux et cohomologie de De Rham : généralités, correspondances Deligne et Berthelot}, que l'inventaire date de 1965--1969, est un atelier des puissances divisées et des sites cristallins. À la page~4, l'algèbre locale artinienne universelle sur $W(k)$ dont l'idéal maximal porte des puissances divisées nulles en degrés $\geq p^{\nu+1}$ est présentée comme $W[\Lambda_0, \dots, \Lambda_\nu]/(\Lambda_i^p - q_i\Lambda_{i+1}, \Lambda_\nu^p, \Lambda_0 - p)$, où $\Lambda_i = \gamma_{p^i}(p)$ et $q_i = (p^{i+1})!/((p^i)!)^p$ (\lot{5}{1}{4}) ; la relation est $\gamma_{p^i}(x)^p = q_i\, \gamma_{p^{i+1}}(x)$. Une note de la lecture s'appuie sur $v_p(q_\nu) = 1$.
+
+\begin{theoreme}[Énoncé de l'édition, d'après la page 4\piste{5-universal-artinian-pd-normal-form}]
+Pour tout entier $p$ et tout $i$, $((p^i)!)^p\, q_i = (p^{i+1})!$ : $q_i$ est un entier, le coefficient multinomial de $p$ blocs de taille $p^i$. Si $p$ est premier, $(p-1)\, v_p((p^i)!) = p^i - 1$ et $v_p(q_i) = 1$.
+\end{theoreme}
+
+\noindent L'énoncé tient. La valuation vient de la formule de Legendre sous la forme $v_p((pm)!) = v_p(m!) + m$ ; voir les théorèmes \texttt{factorial\_eq\_mul\_q}, \texttt{q\_eq\_multinomial} et \texttt{padicValNat\_q} de \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/Folder5.lean}{\texttt{Folder5.lean}}.
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 4 à 8, algèbre artinienne universelle à puissances divisées\piste{5-universal-artinian-pd-normal-form}]\nonverifie
+La $W(k)$-algèbre locale artinienne universelle dont l'idéal maximal porte des puissances divisées nulles en degrés $\geq p^{\nu+1}$ est $W[\Lambda_0, \ldots, \Lambda_\nu]/(\Lambda_i^p - q_i\Lambda_{i+1}, \Lambda_\nu^p, \Lambda_0 - p)$, avec $q_i = (p^{i+1})!/((p^i)!)^p$. Dans les coordonnées $\Theta_i = \Lambda_i - p^{p^i}/(p^i)!$, elle a une forme normale explicite : le coefficient de $\Theta^a$ est pris modulo $p^i$, où $a_i$ est le premier exposant non nul, et le terme constant modulo $p^{c(\nu)}$, avec $c(\nu) = \nu + p\,[p^\nu - (p^{\nu-1} + \cdots + 1)]$.
+\end{theoreme*}
+\end{encadre}
+{\small Les feuillets en esquissent une démonstration incomplète (pages 4 à 7). La nécessité y est \q{laissée au lecteur}. L'intégralité des $q_i$ et leur valuation sont démontrées ci-dessus ; la forme normale demande des calculs dans les vecteurs de Witt, et la nécessité n'est vérifiée par l'édition qu'à la machine, pour quelques $(p, \nu)$.\par}
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 49 et 50, dualité étale pour les sites annelés\piste{5-deligne-letter-ringed-duality}]\nonverifie
+Soient $f : (X, B) \to (Y, A)$ un morphisme lisse compactifiable de sites annelés, $A$ un faisceau d'anneaux sur $Y$ tué par un entier $n$ premier aux caractéristiques résiduelles, et $B$ un faisceau d'anneaux muni de $f^{-1}(A) \to B$. La dualité étale vaut pour $f$, avec $f^!(K) = R\mathrm{Hom}_{f^{-1}(A)}(B, f^{-1}(K) \otimes T_{X/Y}[2d])$, et se ramène aux cas $f^{-1}(A) \simeq B$ et $f = \mathrm{id}$. La lettre du 10~décembre~1965 l'énonce sans démonstration.
+\end{theoreme*}
+\end{encadre}
+{\small Mathlib n'a pas la dualité étale. On se reportera aux notes de Grothendieck (\lot{5}{3}{49}).\par}
