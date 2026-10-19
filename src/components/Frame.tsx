@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { BOOKS } from '../content/books.ts';
 
 /**
  * Header and footer, shared by every page.
@@ -25,8 +24,8 @@ type Collection = 'fonds' | 'notebooks' | 'quillen' | 'bourbaki';
 
 const COLLECTIONS: { id: Collection; label: string; path: string }[] = [
   { id: 'fonds', label: 'Fonds', path: '/' },
-  // The Notebooks switch is off (2026-09-30): the five notebook pages are still
-  // built and their URLs still work, but the header no longer offers them.
+  // The Notebooks switch is off (2026-09-30), and the five notebook pages were
+  // removed on 2026-10-19; /notebooks/ alone remains, reached by its URL.
   // A second corpus, Daniel Quillen's notebooks at the Clay (#36): the other
   // side of the 1968 and 1983 exchanges, with a reading room of its own.
   { id: 'quillen', label: 'Quillen', path: '/quillen/' },
@@ -60,7 +59,7 @@ export const collectionOf = (path: string): Collection => {
   const h = path.endsWith('/') ? path : `${path}/`;
   if (h.startsWith('/quillen/')) return 'quillen';
   if (h.startsWith('/bourbaki/')) return 'bourbaki';
-  return h === '/notebooks/' || BOOKS.some((b) => b.path === h) ? 'notebooks' : 'fonds';
+  return h === '/notebooks/' ? 'notebooks' : 'fonds';
 };
 
 function isCurrent(path: string, here: string): boolean {
@@ -96,10 +95,8 @@ export function Header({ path }: { path: string }) {
     return () => document.removeEventListener('keydown', onKey);
   }, [open]);
 
-  // The folded-out menu has room for the full titles; only the inline row is
-  // short of space.
-  const notebookLinks = (full: boolean) =>
-    [{ path: '/notebooks/', label: 'All five' }, ...BOOKS.map((b) => ({ path: b.path, label: full ? b.title : (b.navTitle ?? b.title) }))];
+  // The notebooks have one page; each opens in the reader from there.
+  const notebookLinks = [{ path: '/notebooks/', label: 'All five' }];
 
   return (
     <header className="sticky top-0 z-40 border-b border-ink-200 bg-white/93 backdrop-blur-md backdrop-saturate-150">
@@ -148,7 +145,7 @@ export function Header({ path }: { path: string }) {
           ) : collection === 'bourbaki' ? (
             BOURBAKI_PAGES.map((p) => <Tab key={p.path} {...p} here={path} />)
           ) : (
-            notebookLinks(false).map((p) => <Tab key={p.path} {...p} here={path} />)
+            notebookLinks.map((p) => <Tab key={p.path} {...p} here={path} />)
           )}
         </nav>
 
@@ -169,7 +166,7 @@ export function Header({ path }: { path: string }) {
               <p className="px-2 py-1 text-[11px] font-semibold uppercase tracking-wider text-ink-400">
                 {c.label}
               </p>
-              {(c.id === 'fonds' ? [...FONDS_PAGES, ...PROJECT_PAGES] : c.id === 'quillen' ? QUILLEN_PAGES : c.id === 'bourbaki' ? BOURBAKI_PAGES : notebookLinks(true)).map((p) => (
+              {(c.id === 'fonds' ? [...FONDS_PAGES, ...PROJECT_PAGES] : c.id === 'quillen' ? QUILLEN_PAGES : c.id === 'bourbaki' ? BOURBAKI_PAGES : notebookLinks).map((p) => (
                 <a
                   key={p.path}
                   href={p.path}

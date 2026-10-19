@@ -3,8 +3,6 @@ import editionsRaw from './editions.json';
 import { BY_ID, COTES } from './catalogue.ts';
 import type {
   Book,
-  BookKey,
-  BookSection,
   Cote,
   EditionDocument,
   PublishedEdition,
@@ -20,14 +18,6 @@ const EDITIONS = editionsRaw as PublishedEdition[];
  * better that it show on start-up than when a pane opens empty.
  */
 export const BOOKS: Book[] = raw as Book[];
-
-export const BY_KEY = new Map(BOOKS.map((b) => [b.key, b]));
-
-export function book(key: BookKey): Book {
-  const b = BY_KEY.get(key);
-  if (!b) throw new Error(`Unknown book: ${key}`);
-  return b;
-}
 
 /**
  * Folders a scholarly edition already covers, and which edition.
@@ -118,7 +108,7 @@ export const IN_PROGRESS: ReadonlySet<string> = new Set([
 ]);
 
 /** Whether this book hides `id`, and therefore why. */
-export const hiddenBy = (b: Book, id: string) => (b.excludeEdited ? EDITED.get(id) : undefined);
+const hiddenBy = (b: Book, id: string) => (b.excludeEdited ? EDITED.get(id) : undefined);
 
 /**
  * A book's folders, in section order.
@@ -138,15 +128,6 @@ export function cotesOf(b: Book): Cote[] {
         return c;
       }),
   );
-}
-
-/** What a book leaves out, per section, so the page can say so where it happens. */
-export function excludedOf(b: Book, s: BookSection): { cote: Cote; edition: PublishedEdition }[] {
-  return s.cotes.flatMap((id) => {
-    const e = hiddenBy(b, id);
-    const c = BY_ID.get(id);
-    return e && c ? [{ cote: c, edition: e }] : [];
-  });
 }
 
 export const pagesOf = (b: Book) => cotesOf(b).reduce((s, c) => s + c.pages, 0);

@@ -458,9 +458,7 @@ function Progress4({ manifest }: { manifest: ReturnType<typeof useManifest> }) {
             <li key={b.key} className="card px-5 py-4">
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                 <h3 className="titre text-[17px] text-ink-900">
-                  <a href={b.path} className="hover:text-brand-700">
-                    {b.title}
-                  </a>
+                  {b.title}
                 </h3>
                 <p className="tabular ml-auto text-[12.5px] text-ink-500">
                   {batches.length} batches · {mirrored} mirrored ·{' '}

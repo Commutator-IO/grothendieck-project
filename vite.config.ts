@@ -126,17 +126,12 @@ export default defineConfig({
   base: process.env.BASE_PATH ?? '/',
   build: {
     rollupOptions: {
-      // One HTML entry per tab. Hosting is static: /motifs/ is served from its
+      // One HTML entry per tab. Hosting is static: /archive/ is served from its
       // own index.html, with no client-side router and no redirect trick. A URL
       // opened on one batch still works in six months, which matters when a
       // transcription stretches over months.
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
-        topos: resolve(import.meta.dirname, 'topos/index.html'),
-        motifs: resolve(import.meta.dirname, 'motifs/index.html'),
-        longueMarche: resolve(import.meta.dirname, 'longue-marche/index.html'),
-        tardifs: resolve(import.meta.dirname, 'tardifs/index.html'),
-        notesDispersees: resolve(import.meta.dirname, 'notes-dispersees/index.html'),
         archive: resolve(import.meta.dirname, 'archive/index.html'),
         method: resolve(import.meta.dirname, 'method/index.html'),
         contribute: resolve(import.meta.dirname, 'contribute/index.html'),

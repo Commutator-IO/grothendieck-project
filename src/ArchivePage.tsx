@@ -84,11 +84,9 @@ export function ArchivePage() {
   const started = [...workOn.values()].filter((w) => w.transcribed > 0).length;
 
   const inBook = useMemo(() => {
-    // Title for the badge, path for the way back in: a folder that has a
-    // modernised reading gets a link straight to its notebook page.
-    const m = new Map<string, { title: string; path: string }>();
-    for (const b of BOOKS)
-      for (const s of b.sections) for (const id of s.cotes) m.set(id, { title: b.title, path: b.path });
+    // Title for the badge: the notebook a folder belongs to.
+    const m = new Map<string, { title: string }>();
+    for (const b of BOOKS) for (const s of b.sections) for (const id of s.cotes) m.set(id, { title: b.title });
     return m;
   }, []);
 

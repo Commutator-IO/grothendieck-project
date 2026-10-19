@@ -39,9 +39,7 @@ export function NotebooksPage() {
                 <li key={b.key} className="card flex flex-col p-5">
                   <div className="flex items-baseline gap-2">
                     <h3 className="titre text-[20px] text-ink-900">
-                      <a href={b.path} className="hover:text-brand-700">
-                        {b.title}
-                      </a>
+                      {b.title}
                     </h3>
                     <span
                       className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
@@ -64,10 +62,10 @@ export function NotebooksPage() {
                     <span>{pagesOf(b).toLocaleString('en-GB')} pages</span>
                   </p>
                   <a
-                    href={b.path}
+                    href={`/#${cotes[0]?.id ?? ''}`}
                     className="mt-4 inline-block self-start rounded-lg bg-brand-600 px-3.5 py-1.5 text-[13px] font-medium text-white transition hover:bg-brand-700"
                   >
-                    Open the notebook
+                    Open in the reader
                   </a>
                 </li>
               );
