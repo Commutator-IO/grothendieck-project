@@ -14,6 +14,10 @@
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-10 — first pass, unchecked against the pages by a human.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-18 — updated after the second transcription pass (#51).
 % The folder was read whole, all three batches; every batch is transcribed.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-19 — p. 38, the Corollary:
+%   footnoted with the Lean check of the case n = 1, V[[T]] (quotEquiv,
+%   finite_bad, uncountable, exists_avoid), where counting replaces Baire;
+%   n >= 2 and the reduction by Cohen's structure theorem not formalised.
 %
 % What the folder is. Notes in blue ink (pp. 2-44, 51-52) and a four-leaf
 % typescript (pp. 47-50) around one statement: over a locally noetherian S,
@@ -1010,7 +1014,20 @@ une réunion dénombrable de fermés rares de $\mathfrak{m}^n$ n'est pas
 $\mathfrak{m}^n$ tout entier, et un $\varphi$ hors de cette réunion
 convient.\footnote{« Il est immédiat que c'est une partie fermée rare » :
 une série formelle non nulle ne s'annule identiquement sur aucun ouvert de
-$\mathfrak{m}^n$. Le nom de Baire n'est pas sur la page.}
+$\mathfrak{m}^n$. Le nom de Baire n'est pas sur la page. Lean vérifie le cas
+$n = 1$, celui de $\Theta = V[[T]]$, de dimension $2$
+(lean/Grothendieck/Folder100.lean, \texttt{quotEquiv},
+\texttt{exists\_poly\_mul\_unit}, \texttt{finite\_bad},
+\texttt{uncountable}, \texttt{exists\_avoid}) : $V[[T]]/(T - a) \simeq V$
+pour $a \in \mathfrak{m}$, et une famille dénombrable de séries non nulles
+laisse un $a$ tel qu'aucune ne soit dans $(T - a)$. Baire y est remplacé par
+un dénombrement : par la préparation de Weierstrass, chaque série n'exclut
+qu'un nombre fini de valeurs de $a$, et $\mathfrak{m}$ n'est pas dénombrable,
+$V$ étant complet, quel que soit son corps résiduel. Pour $n \geqslant 2$,
+une série comme $T_1$ exclut tout un hyperplan, et l'argument de la page est
+nécessaire ; ce cas n'est pas formalisé, ni la réduction par le théorème de
+structure de Cohen et la remontée des points de dimension $1$ à $S$ ; voir
+l'annexe Lean, section 100.}
 
 \pagerange{40}{44}
 \section*{Le cas d'un schéma propre et plat (pages 40 à 44)}
