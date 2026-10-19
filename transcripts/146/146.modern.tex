@@ -84,6 +84,10 @@
 % of the findings cited: Bakalov-Kirillov (2000) for G(I) of pp. 8-10 as the
 % mapping class group of the three-holed sphere. No mathlib result, no
 % facsimile correction since the pass.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-19 — p. 70: the 3 for L at
+%   n = 4 footnoted as checked at the level of cocycles (derL_pow_three,
+%   coboundary_derL_iff), the reduction from S_4 to S_3 in prose; the L_4
+%   footnote no longer lists it as unchecked; n = 5, 6 stay open.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -1073,9 +1077,24 @@ fonctions sans zéro quelconques sur $U(K)$ : en $\lambda = -1$, fixe sous
 $1/\lambda$, la dérivée vaut $-1$, et en $\zeta$, fixe sous $1/(1 - \lambda)$,
 elle vaut $\zeta^2$, racine primitive cubique de l'unité. Ne sont pas
 formalisés l'identification du groupe de Picard équivariant à
-$H^1(\mathfrak{S}_3, \mathcal{O}(U)^{*})$, la valeur $3$ pour $L$ sous
-$\mathfrak{S}_4$, ni les valeurs proposées pour $n = 5, 6$.} ; la valeur $3$
-pour $L$ et les colonnes $n = 5, 6$ ne sont pas vérifiées ici.
+$H^1(\mathfrak{S}_3, \mathcal{O}(U)^{*})$ ni les valeurs proposées pour
+$n = 5, 6$.} ; la valeur $3$ pour $L$ l'est aussi.\footnote{Le groupe de Klein
+$V_4 \subset \mathfrak{S}_4$ agit trivialement sur $U$ et sur $L$, et pour $g$
+dans le stabilisateur $\mathfrak{S}_3$ du quatrième point, le produit des
+dérivées en $0$, $1$, $\infty$ est la signature $\varepsilon(g)$ ; le
+cocycle de $L$ est donc $g \mapsto \varepsilon(g)\,g'(\lambda)$. Lean
+vérifie, sous les mêmes hypothèses sur le corps, que son cube est le cobord de
+$\lambda^2(1-\lambda)^2$ et que sa puissance $m$-ième est un cobord si et
+seulement si $3 \mid m$ (lean/Grothendieck/Folder146.lean,
+\texttt{derL\_pow\_three}, \texttt{coboundary\_derL\_iff}) : en $-1$ la
+signature compense la dérivée, et il ne reste que le facteur $\zeta^2$ en
+$\zeta$. La réduction du fibré sous $\mathfrak{S}_4$ à ce cocycle (action
+triviale de $V_4$, produit des dérivées, injectivité de l'inflation de
+$\mathfrak{S}_3$ à $\mathfrak{S}_4$) est faite en prose et n'est pas
+formalisée ; voir l'annexe Lean, section 146. La page 72 n'affirme que
+$L^{\otimes 6} \simeq 1$, ce qui est vrai et plus faible.} Les colonnes
+$n = 5, 6$, dont les valeurs sont suivies de points d'interrogation, restent
+ouvertes.
 
 Le cadre est la cohomologie équivariante. Comme $M_{0,K}$ est le complémentaire
 d'un arrangement d'hyperplans dans un espace affine, $\mathrm{Pic}(M_{0,K}) = 0$
