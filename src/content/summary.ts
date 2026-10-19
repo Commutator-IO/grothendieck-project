@@ -3,7 +3,7 @@ import type { PlainItem } from '../lib/types.ts';
 /**
  * What the edition has turned up, in plain words (#29, part 2).
  *
- * Twelve items drawn from `findings.ts`, chosen for being statable to a
+ * Eleven items drawn from `findings.ts`, chosen for being statable to a
  * non-specialist and worth someone's afternoon to check — not a ranking of
  * the mathematics. The register is the one the outreach letters had to be
  * written in: hypotheses, never results; no priority, since the folders are
@@ -38,17 +38,6 @@ export const PLAIN: PlainItem[] = [
       'Here the edition disagrees with the page. The leaf gives the name Λ₀ to two different operators, which agree only in rank one. The reading keeps the one the proof actually uses and says so in a footnote. If that call is wrong, this item is wrong with it.',
     settle:
       'Compare with the « Lefschetz algebras » of Hodge theory, and with the integral form of the enveloping algebra of sl₂ — which, because of that slip, this ring is not.',
-  },
-  {
-    id: 'any-algebraic-isomorphism',
-    cote: '16',
-    rows: ['16-algebraic-iso-suffices'],
-    title: 'Any algebraic isomorphism will do',
-    what:
-      'One of Grothendieck’s standard conjectures asks that the Lefschetz isomorphism between cohomology in complementary degrees come from an algebraic cycle. Folder 16 argues that it is enough to have some algebraic isomorphism in each degree — any one, not necessarily the Lefschetz map — together with a second conjecture, D(X). The argument is complete on the page.',
-    ours: 'Almost nothing: the typescript writes one relation in the letter u where its coefficients are those of w.',
-    settle:
-      'Checked, and it is in the books: Kleiman’s 1968 survey, Theorem 2.9 and Corollary 2.11, with the same Cayley–Hamilton argument, and again in his 1994 survey, Theorem 4-1. Only the variant that assumes D(X) instead of rational characteristic polynomials is not stated there.',
   },
   {
     id: 'products-of-spaces',

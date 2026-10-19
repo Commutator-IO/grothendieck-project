@@ -395,7 +395,7 @@ function PlainCard({ p }: { p: PlainItem }) {
 
   return (
     <li id={`plain-${p.id}`} className="card scroll-mt-16">
-      {/* Folded to one line, so the twelve items fit on a screen and the list
+      {/* Folded to one line, so the eleven items fit on a screen and the list
           and its search are not a dozen screens down. The claim and its
           caveats open together: nothing can be read without the other. */}
       <details className="group/plain">
