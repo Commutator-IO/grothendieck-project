@@ -169,11 +169,10 @@ function Skills() {
         >
           Claude Code
         </a>
-        . Each says at its head which models it accepts. Transcription and modernisation
-        accept Opus 5.5, the default, and Opus 5, and refuse to run on any other; the Fable
-        models some early batches were read on are no longer admitted. Tagging runs on whichever
-        of the two wrote the folder's modernised reading, since a folder's tags are the same
-        judgement as its résumé, so they are made by the same reader. Every file records in its header the model that produced it.
+        . Each says at its head which models it accepts. Since 19 October 2026 every
+        skill runs on Opus 5.5 and refuses any other model; Opus 5, which read most of the
+        fonds, and the Fable models of some early batches are no longer admitted for new
+        passes. Every file records in its header the model that produced it.
         Provenance is a fact about the file, not about whichever model happened to be selected
         that day.
       </p>

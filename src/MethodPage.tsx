@@ -151,11 +151,10 @@ export function MethodPage() {
             </P>
             <P id="derived-editions-pin-opus">
               The two derived passes — the modernised reading and the folder's tags — run on{' '}
-              <strong>Opus 5.5</strong> or <strong>Opus 5</strong> and on nothing else, and the
-              tags on whichever of the two wrote the folder's reading. They are not reading
-              handwriting, so there is nothing to compare; what they need is to be comparable
-              with each other and with the reading they are calibrated against. A folder's tags
-              are the same judgement as its résumé, sharpened, so the same reader makes both.
+              <strong>Opus 5.5</strong> and on nothing else since 19 October 2026; earlier
+              readings were made on Opus 5 and their headers say so. A folder's tags are the
+              same judgement as its résumé, sharpened; where they are made on another model than
+              the reading, the commit names both.
             </P>
             <H3 id="two-editions">Two editions, one source</H3>
             <P id="two-editions-both-french">
