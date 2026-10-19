@@ -31,6 +31,12 @@
 %   « sans conditions de finitude », M_i plat written (not struck), Cor.
 %   « décomposition ensembliste », T -> S' read as written; p. 42's
 %   « A-libres » now certain.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-19 — pp. 28-30 footnoted with
+%   the Lean check in an abstract model (kEquiv_equivalence, kEquiv_map,
+%   corollaire5_surj, corollaire5_iff): transitivity needs the amalgamation
+%   over K_2, as the footnote already said; contravariance in X checked;
+%   Cor. 5 derived from Prop. 1 and the two properties of K~, which are taken
+%   as hypotheses and not proved. No literature recorded by the findings.
 %
 % Scope: a single document for the whole folder, read whole (three batches,
 % pages 1-43) before any of it was written. Pages 1 and 25 are covers in his
@@ -911,7 +917,13 @@ transitivité, il faut dominer les deux extensions $K'$, $K''$ de $K_2$ qui
 réalisent les deux équivalences par une troisième extension \emph{de
 $K_2$}, c'est-à-dire compatiblement aux deux plongements de $K_2$ ; c'est
 encore vrai (un quotient de $K' \otimes_{K_2} K''$ par un idéal maximal),
-et c'est ce qu'on écrit.}
+et c'est ce qu'on écrit. Lean le confirme dans un modèle abstrait, où les
+extensions de $k$ forment une catégorie et où l'on ne garde des faisceaux
+que leurs classes d'isomorphisme et l'extension des scalaires
+(lean/Grothendieck/Folder98.lean, \texttt{kEquiv\_equivalence}) : la
+transitivité y est démontrée sous l'hypothèse d'amalgamation au-dessus de
+$K_2$, et la domination au-dessus de $k$ seul ne la donne pas ; voir
+l'annexe Lean, section 98.}
 
 \emph{Proposition 1} ($X$ de type fini sur $k$). Tout faisceau cohérent sur
 $X \otimes_k K'$ est équivalent à un faisceau défini sur
@@ -925,7 +937,10 @@ Par suite, pour étudier les classes de faisceaux sur $X$ à équivalence
 près, on peut se borner aux faisceaux définis sur des extensions de type
 fini de $k$ ; les classes d'équivalence forment donc un ensemble (dans un
 univers contenant $k$ et $X$), qu'on note $\mathfrak{F}(X/k)$. Pour $k$
-fixé, c'est un foncteur contravariant en $X$, par image inverse. Quant au
+fixé, c'est un foncteur contravariant en $X$, par image inverse.\footnote{Dans le même modèle, une image inverse compatible à
+l'extension des scalaires respecte la $k$-équivalence
+(\texttt{kEquiv\_map}) ; c'est tout ce que Lean vérifie de cette
+fonctorialité, les schémas et les faisceaux n'y figurant pas.} Quant au
 changement du corps $k$ en une extension $k'$, la page commence « il n'y a
 pas un » et s'interrompt au bas du feuillet.\footnote{Pages 28 et 29. Le
 premier corollaire est dit résulter de « Chap. V, § 1 », renvoi qu'on
@@ -962,7 +977,14 @@ de même cardinal infini, puis aux clôtures algébriques), ce qui
 donne l'injectivité.\footnote{Les deux hypothèses sont celles de la page,
 qui ne dit pas à quoi elles servent ; l'argument est le nôtre. Le numéro
 « 5 » du corollaire est d'une lecture incertaine ; les deux corollaires de
-la page 29 ne sont pas numérotés.}
+la page 29 ne sont pas numérotés. Lean déduit le corollaire des deux moitiés
+de la proposition 1 et des deux propriétés de $\widetilde{K}$
+(\texttt{corollaire5\_surj}, \texttt{corollaire5\_iff}) : la surjectivité
+n'emploie que la première moitié et le plongement dans $\widetilde{K}$,
+l'injectivité les deux moitiés et l'homogénéité. Ces hypothèses ne sont pas
+démontrées : la proposition 1, que la page renvoie à un « Chap. V, § 1 »
+non identifié, et les deux propriétés de $\widetilde{K}$ sont posées en
+hypothèses (annexe Lean, section 98).}
 
 \pagerange{31}{33}
 \subsection*{Opérations sur les classes (pages 30 à 33)}
