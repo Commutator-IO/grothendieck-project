@@ -9,7 +9,6 @@
  * candidate, and its status is read from FINDINGS at render time.
  */
 export const MAJOR_FINDINGS = new Set<string>([
-  '16-algebraic-iso-suffices',
   '16-weak-variants-imply-strong',
   '36-griffiths-conditional-l-adic',
   '4-vanishing-unit-root-bound',

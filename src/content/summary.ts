@@ -48,7 +48,7 @@ export const PLAIN: PlainItem[] = [
       'One of Grothendieck’s standard conjectures asks that the Lefschetz isomorphism between cohomology in complementary degrees come from an algebraic cycle. Folder 16 argues that it is enough to have some algebraic isomorphism in each degree — any one, not necessarily the Lefschetz map — together with a second conjecture, D(X). The argument is complete on the page.',
     ours: 'Almost nothing: the typescript writes one relation in the letter u where its coefficients are those of w.',
     settle:
-      'The argument is short enough that it is probably in the books already. Kleiman’s 1994 survey, § 2, is where it would be.',
+      'Checked, and it is in the books: Kleiman’s 1968 survey, Theorem 2.9 and Corollary 2.11, with the same Cayley–Hamilton argument, and again in his 1994 survey, Theorem 4-1. Only the variant that assumes D(X) instead of rational characteristic polynomials is not stated there.',
   },
   {
     id: 'products-of-spaces',
