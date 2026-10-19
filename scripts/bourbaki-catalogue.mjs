@@ -102,6 +102,25 @@ for (const folder of readdirSync(T)) {
   }
 }
 
+/* ---------- facsimiles ----------
+ * Each item's scan, read once here so the page never calls the API: the URL
+ * only, the file stays on the archive's server (it allows framing, so the
+ * pane shows it from there). An item may carry the AHP's own transcription as
+ * a second PDF; the facsimile is the other one, first in the item's order. */
+const pdfs = new Map();
+{
+  const queue = items.map((it) => it.id);
+  const worker = async () => {
+    for (let id; (id = queue.shift()) !== undefined; ) {
+      const files = (await getJson(`${BASE}/api/files?item=${id}`))
+        .filter((f) => f.mime_type === 'application/pdf' && f.file_urls?.original && !/transcri/i.test(f.original_filename ?? ''))
+        .sort((a, b) => (a.order ?? 1e9) - (b.order ?? 1e9) || a.id - b.id);
+      if (files[0]) pdfs.set(id, files[0].file_urls.original);
+    }
+  };
+  await Promise.all([worker(), worker(), worker()]);
+}
+
 /* ---------- records ---------- */
 const records = items.map((it) => {
   const all = (name) => it.element_texts.filter((e) => e.element.name === name).map((e) => strip(e.text));
@@ -134,6 +153,7 @@ const records = items.map((it) => {
     collection: it.collection ? collections.get(it.collection.id) ?? null : null,
     summary: description.slice(0, 300),
     url: `${BASE}/items/show/${it.id}`,
+    pdf: pdfs.get(it.id) ?? null,
     grothendieck: why,
   };
 });
@@ -143,7 +163,7 @@ writeFileSync(
   OUT,
   JSON.stringify(
     {
-      $why: 'Catalogue of the Bourbaki archive (archives-bourbaki.ahp-numerique.fr, Omeka API), built by scripts/bourbaki-catalogue.mjs. « grothendieck » lists only the evidence the script can point at: his name among the authors or those present, the archive naming him, or a rédaction whose number a leaf of the fonds carries. Nothing of the documents is copied.',
+      $why: 'Catalogue of the Bourbaki archive (archives-bourbaki.ahp-numerique.fr, Omeka API), built by scripts/bourbaki-catalogue.mjs. « grothendieck » lists only the evidence the script can point at: his name among the authors or those present, the archive naming him, or a rédaction whose number a leaf of the fonds carries. Nothing of the documents is copied: « pdf » is the address of the scan on the archive’s server.',
       built: new Date().toISOString().slice(0, 10),
       source: BASE,
       records,

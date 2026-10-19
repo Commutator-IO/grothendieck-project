@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { FacsimilePane, type OpenBatch } from './components/FacsimilePane.tsx';
 import { Footer, Header } from './components/Frame.tsx';
 import catalogueRaw from './content/bourbaki.json';
 import skimRaw from './content/bourbaki-skim.json';
@@ -10,7 +11,9 @@ import skimRaw from './content/bourbaki-skim.json';
  * Nicolas Bourbaki's papers — rédactions, congress reports, circulars, mostly
  * typescripts — at archives-bourbaki.ahp-numerique.fr. This page is their
  * catalogue only (scripts/bourbaki-catalogue.mjs reads the public API); each
- * document opens on the archive's own page.
+ * document opens on the archive's own page, and its scan in the facsimile pane
+ * on the right — framed from the archive's server, which allows it, as the
+ * Clay's are on the Quillen tab: nothing is copied and no relay is involved.
  *
  * A red ring marks a document that meets the Grothendieck fonds, and says how:
  * he wrote it, he was present, the archive names him, or a leaf of the fonds
@@ -37,6 +40,8 @@ interface Doc {
   collection: string | null;
   summary: string;
   url: string;
+  /** The scan on the archive's server, framed as it is. */
+  pdf: string | null;
   grothendieck: Why[];
 }
 const CATALOGUE = catalogueRaw as unknown as { built: string; source: string; records: Doc[] };
@@ -62,12 +67,59 @@ const KIND_LABEL: Record<Why['kind'], string> = {
   fonds: 'in the fonds',
 };
 
+/** The document the fragment names — `#doc/433` — if any. */
+function named(): Doc | undefined {
+  const m = /^#doc\/(\d+)$/.exec(location.hash);
+  return m ? DOCS.find((d) => d.id === Number(m[1]) && d.pdf) : undefined;
+}
+
 const fold = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
 export function BourbakiPage() {
   const [type, setType] = useState<string>('all');
   const [onlyHits, setOnlyHits] = useState(false);
   const [q, setQ] = useState('');
+  // The pane opens when a document is chosen, or when the link names one.
+  const [sel, setSel] = useState<Doc | undefined>(named);
+  const [batch, setBatch] = useState(1);
+
+  useEffect(() => {
+    const onHash = () => {
+      setSel(named());
+      setBatch(1);
+    };
+    addEventListener('hashchange', onHash);
+    return () => removeEventListener('hashchange', onHash);
+  }, []);
+
+  const view = (d: Doc) => {
+    history.replaceState(null, '', `#doc/${d.id}`);
+    setSel(d);
+    setBatch(1);
+  };
+  const close = () => {
+    history.replaceState(null, '', location.pathname + location.search);
+    setSel(undefined);
+  };
+  const facsimile: OpenBatch | null =
+    sel && sel.pdf
+      ? {
+          cote: String(sel.id),
+          title: sel.title,
+          date: sel.date ?? 's.d.',
+          batch,
+          pages: Number.parseInt(sel.pages ?? '', 10) || 0,
+          relay: 'ready',
+          source: {
+            file: sel.pdf,
+            original: sel.pdf,
+            heading: `Bourbaki · ${sel.identifier ?? sel.type} · ${sel.date ?? 's.d.'}`,
+            credit:
+              'Facsimile: Archives Henri Poincaré (ACNB), served from archives-bourbaki.ahp-numerique.fr, not copied here.',
+            pageOffset: 0,
+          },
+        }
+      : null;
 
   const hits = DOCS.filter((d) => d.grothendieck.length).length;
   const shown = useMemo(() => {
@@ -82,6 +134,9 @@ export function BourbakiPage() {
 
   return (
     <>
+      {/* The content shifts rather than sliding under the pane, as on the
+          Quillen tab; gated on `lg:` exactly as the pane is. */}
+      <div className={`transition-[padding] duration-150 ${facsimile ? 'lg:pr-[var(--pane,0px)]' : ''}`}>
       <Header path="/bourbaki/" />
       <main className="mx-auto max-w-6xl px-5 py-12">
         <header className="max-w-[46em]">
@@ -97,7 +152,7 @@ export function BourbakiPage() {
           <p className="mt-3 text-[14px] leading-relaxed text-ink-600">
             <span className="mr-1 inline-block h-3 w-3 rounded-sm align-[-1px] ring-2 ring-alerte-500" aria-hidden="true" />
             A red ring marks the {hits} documents that meet the fonds, and says how. Each title opens the
-            document on the archive's site. For {Object.keys(SKIM).length} of them, a skim of the facsimile
+            document on the archive's site; « View » opens its scan beside the list. For {Object.keys(SKIM).length} of them, a skim of the facsimile
             gives the pages where he appears, in a few words of ours (#50; machine-read, unchecked).
           </p>
         </header>
@@ -140,10 +195,12 @@ export function BourbakiPage() {
         <ul className="mt-3 grid gap-2">
           {shown.map((d) => {
             const hit = d.grothendieck.length > 0;
+            const current = sel?.id === d.id;
             return (
               <li
                 key={d.id}
-                className={`rounded-xl border bg-white px-4 py-3 ${hit ? 'border-alerte-200 ring-2 ring-alerte-500' : 'border-ink-200'}`}
+                aria-current={current ? 'true' : undefined}
+                className={`rounded-xl border px-4 py-3 ${current ? 'bg-brand-50/60' : 'bg-white'} ${hit ? 'border-alerte-200 ring-2 ring-alerte-500' : current ? 'border-brand-500' : 'border-ink-200'}`}
               >
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <a
@@ -155,6 +212,26 @@ export function BourbakiPage() {
                     {d.title} <span className="text-ink-400">↗</span>
                   </a>
                   <span className="tabular shrink-0 text-[12px] text-ink-500">{d.date ?? 's.d.'}</span>
+                  {d.pdf && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => view(d)}
+                        aria-pressed={current}
+                        className="hidden shrink-0 rounded-md border border-brand-500 px-2 py-0.5 text-[12px] font-medium text-brand-700 transition hover:bg-brand-50 aria-pressed:bg-brand-600 aria-pressed:text-white lg:inline-block"
+                      >
+                        View
+                      </button>
+                      <a
+                        href={d.pdf}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="shrink-0 rounded-md border border-brand-500 px-2 py-0.5 text-[12px] font-medium text-brand-700 lg:hidden"
+                      >
+                        Scan ↗
+                      </a>
+                    </>
+                  )}
                 </div>
                 <p className="mt-1 text-[12px] text-ink-500">
                   {[d.creators.join(', '), d.form, d.pages ? `${d.pages} p.` : null, d.identifier].filter(Boolean).join(' · ')}
@@ -202,6 +279,9 @@ export function BourbakiPage() {
         </p>
       </main>
       <Footer collection="bourbaki" />
+      </div>
+
+      {facsimile && <FacsimilePane open={facsimile} onClose={close} onBatch={setBatch} />}
     </>
   );
 }
