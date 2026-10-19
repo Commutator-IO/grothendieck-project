@@ -264,17 +264,11 @@ Use the header for what a reader cannot get from the body: the
 notation fixed for the folder, the substantive departures from the pages with
 their page numbers, and anything the folder announces and never establishes.
 
-It also carries its own legal notice, stronger than the transcription's,
-because this edition is doubly ours — an unauthorised working document *and*
-one reader's reading:
-
-```latex
-\watermark{Édition de démonstration\\interprétation personnelle de l'œuvre}
-```
-
-The preamble prints it in the title block and diagonally across every PDF
-page; the reading view shows it too. Never omit it, and never soften the
-second line: whoever cites this file must know it interprets. Structure with `\section*` and `\subsection*` following the argument.
+**No `\watermark` line** (since 2026-10-19, the user's decision): the modernised
+readings no longer carry the « Édition de démonstration / interprétation
+personnelle de l'œuvre » watermark, and a file without the line gets none. That
+the reading interprets is said by its title (« lecture modernisée »), by the
+header and by the footnotes, not by a stamp. Structure with `\section*` and `\subsection*` following the argument.
 Stay inside the LaTeX subset of the transcribe skill — the renderer raises on
 anything else — plus `\footnote{}`, which the reading view renders as
 numbered notes with backlinks, and `\pagerange{}{}`, described above.
