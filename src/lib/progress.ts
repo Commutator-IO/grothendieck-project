@@ -58,8 +58,6 @@ export const STATES: { key: State; label: string; help: string }[] = [
   },
 ];
 
-export const progressKey = (cote: string, batch: number) => `${cote}#${batch}`;
-
 /** How far along a state is, so evidence and claim can be compared. */
 const RANK: Record<State, number> = {
   todo: 0,

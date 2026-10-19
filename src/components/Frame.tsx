@@ -20,12 +20,10 @@ import { useEffect, useState } from 'react';
  * one's own pages second — the choice the Hopper site made for its ledgers and
  * diaries. Every URL is what it was.
  */
-type Collection = 'fonds' | 'notebooks' | 'quillen' | 'bourbaki';
+type Collection = 'fonds' | 'quillen' | 'bourbaki';
 
 const COLLECTIONS: { id: Collection; label: string; path: string }[] = [
   { id: 'fonds', label: 'Fonds', path: '/' },
-  // The Notebooks switch is off (2026-09-30), and the five notebook pages were
-  // removed on 2026-10-19; /notebooks/ alone remains, reached by its URL.
   // A second corpus, Daniel Quillen's notebooks at the Clay (#36): the other
   // side of the 1968 and 1983 exchanges, with a reading room of its own.
   { id: 'quillen', label: 'Quillen', path: '/quillen/' },
@@ -59,7 +57,7 @@ export const collectionOf = (path: string): Collection => {
   const h = path.endsWith('/') ? path : `${path}/`;
   if (h.startsWith('/quillen/')) return 'quillen';
   if (h.startsWith('/bourbaki/')) return 'bourbaki';
-  return h === '/notebooks/' ? 'notebooks' : 'fonds';
+  return 'fonds';
 };
 
 function isCurrent(path: string, here: string): boolean {
@@ -95,8 +93,6 @@ export function Header({ path }: { path: string }) {
     return () => document.removeEventListener('keydown', onKey);
   }, [open]);
 
-  // The notebooks have one page; each opens in the reader from there.
-  const notebookLinks = [{ path: '/notebooks/', label: 'All five' }];
 
   return (
     <header className="sticky top-0 z-40 border-b border-ink-200 bg-white/93 backdrop-blur-md backdrop-saturate-150">
@@ -142,10 +138,8 @@ export function Header({ path }: { path: string }) {
             </>
           ) : collection === 'quillen' ? (
             QUILLEN_PAGES.map((p) => <Tab key={p.path} {...p} here={path} />)
-          ) : collection === 'bourbaki' ? (
-            BOURBAKI_PAGES.map((p) => <Tab key={p.path} {...p} here={path} />)
           ) : (
-            notebookLinks.map((p) => <Tab key={p.path} {...p} here={path} />)
+            BOURBAKI_PAGES.map((p) => <Tab key={p.path} {...p} here={path} />)
           )}
         </nav>
 
@@ -166,7 +160,7 @@ export function Header({ path }: { path: string }) {
               <p className="px-2 py-1 text-[11px] font-semibold uppercase tracking-wider text-ink-400">
                 {c.label}
               </p>
-              {(c.id === 'fonds' ? [...FONDS_PAGES, ...PROJECT_PAGES] : c.id === 'quillen' ? QUILLEN_PAGES : c.id === 'bourbaki' ? BOURBAKI_PAGES : notebookLinks).map((p) => (
+              {(c.id === 'fonds' ? [...FONDS_PAGES, ...PROJECT_PAGES] : c.id === 'quillen' ? QUILLEN_PAGES : BOURBAKI_PAGES).map((p) => (
                 <a
                   key={p.path}
                   href={p.path}

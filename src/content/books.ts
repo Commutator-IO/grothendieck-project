@@ -69,44 +69,6 @@ export const UNEDITED: Cote[] = COTES.filter((c) => !EDITED.has(c.id));
 /** Its complement, for the sentence that has to name what was set aside. */
 export const EDITED_COTES: Cote[] = COTES.filter((c) => EDITED.has(c.id));
 
-/**
- * Folders inside a notebook that is being worked through now.
- *
- * Not a claim that any page of them is transcribed — that is read off the
- * files, and most of these have nothing yet. It is the weaker and still useful
- * fact that they are spoken for: someone is going through this notebook, and
- * the whole-fonds figure should not paint them the same colour as the hundred
- * folders nobody has opened. Driven by `inProgress` in books.json, so finishing
- * a notebook is an edit to the data.
- */
-/**
- * Folders in hand one at a time, outside any notebook marked `inProgress`.
- *
- * The notebook flag covers a whole thread being read through; this covers the
- * folders picked up singly. Expressing them as a notebook flag would mean
- * claiming a whole notebook is in hand, which would paint hundreds of pages
- * the wrong colour.
- *
- * Kept as a plain list because that is what it is: the work actually started,
- * edited as it starts and finishes. A folder here that later gets transcribed
- * needs no removal — the transcription outranks it — but the list is pruned
- * anyway, so that it says what is in hand rather than what once was.
- *
- * Empty again: 12 Généralités (sous-groupes de Galois motiviques) stood here
- * on 2026-09-23 while its batch 2 was read, and is transcribed and
- * modernised now. Before it, the queue of 2026-09-22, the next row of #24 — 67 Chirurgie
- * des surfaces conformes and 68 Jeux de position, which close the group
- * « Autour de l'enseignement » (66-89) — is transcribed. Before them,
- * 161-4, 161-5, 161-6 and 162-5 stood here, and before those 156-2, 141,
- * 158, 159 and 160 — all transcribed now.
- */
-const IN_PROGRESS_FOLDERS: string[] = [];
-
-export const IN_PROGRESS: ReadonlySet<string> = new Set([
-  ...BOOKS.filter((b) => b.inProgress).flatMap((b) => b.sections.flatMap((s) => s.cotes)),
-  ...IN_PROGRESS_FOLDERS,
-]);
-
 /** Whether this book hides `id`, and therefore why. */
 const hiddenBy = (b: Book, id: string) => (b.excludeEdited ? EDITED.get(id) : undefined);
 

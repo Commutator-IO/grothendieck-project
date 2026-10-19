@@ -282,14 +282,14 @@ export function MethodPage() {
               <em>AI-reviewed</em> — the modernisation pass reads the transcription critically and,
               held to being correct as it stands, catches things. It caught four on folder 115.
               That is a review, and calling it one is accurate. It is not a <em>human</em> review,
-              which is why <em>checked</em> is separate, stays a declaration kept in your browser,
+              which is why <em>checked</em> is separate, stays a declaration in <code>transcripts/status.json</code>,
               and means only what you meant by it. The site never claims a transcript is any good;
               only that it exists, and that a second pass has been over it.
             </LI>
             <LI id="not-claimed-our-groupings">
-              <strong>Three of the five notebooks are our groupings.</strong> “Cahier de Topos”,
+              <strong>Three of the five notebook groupings are ours.</strong> “Cahier de Topos”,
               “Cahiers tardifs” and “Notes techniques dispersées” do not exist in the inventory;
-              each says so at the head of its page. “Cahier de Motifs” and “La Longue Marche” reproduce inventory groups exactly.
+              the Archive page names them on the folders they gather. “Cahier de Motifs” and “La Longue Marche” reproduce inventory groups exactly.
             </LI>
             <LI id="not-claimed-authoritative">
               <strong>No transcription is authoritative.</strong> A machine pass over
@@ -423,8 +423,8 @@ function Progress4({ manifest }: { manifest: ReturnType<typeof useManifest> }) {
     <section className="mt-10">
       <H2 id="where-it-stands">Where it stands</H2>
       <P id="where-it-stands-bars" className="mt-2 max-w-[46em] text-[13.5px] leading-relaxed text-ink-600">
-        One bar per notebook. The grey portion is untouched, and the coloured portions are the
-        states you have marked on the notebook pages.
+        One bar per notebook grouping. The grey portion is untouched, and the coloured portions
+        are the states read off the files and declared in <code>transcripts/status.json</code>.
       </P>
 
       <ul className="mt-6 space-y-5">
