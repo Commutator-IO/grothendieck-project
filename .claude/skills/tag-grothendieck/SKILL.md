@@ -5,18 +5,17 @@ description: Writes or refreshes a folder's modern English keywords — the \key
 
 # Tagging a folder with its modern vocabulary
 
-**Runs on the model that wrote the folder's modernised reading** — Opus 5.5
-or Opus 5, whichever the reading's own `% Pass:` header names, and on nothing
-else. The frontmatter used to pin Opus 5, when every reading was made on it;
-the pin went on 2026-09-03 with `/modernize-grothendieck`'s, and what replaces
-it is a check you make yourself: open the reading, read its header, and stop
-if the session is on a different model. A tag is not a label applied to a
-finished text from outside; it is the same mathematical judgement the résumé's
-fourth question already made (*quels noms modernes chercher ensuite*), written
-in its sharpest form. Tagging on a different model than wrote the reading means
-a second reader silently overruling the first about what the folder is, in the
-one place a search will find it — and nothing in the file would record that it
-happened. Same reader, same judgement, comparable across folders.
+**Runs on Opus 5.5, and on nothing else** (since 2026-10-19; until then, on
+the model that wrote the reading, as its `% Pass:` header names). On a reading
+made by another model, a tag the reading's résumé does not support is not
+added silently: say so in the commit, which names both models.
+
+A tag is not a label applied to a finished text from outside; it is the same
+mathematical judgement the résumé's fourth question already made (*quels noms
+modernes chercher ensuite*), written in its sharpest form. A second reader
+silently overruling the first about what the folder is, in the one place a
+search will find it, would leave nothing in the file to record that it
+happened; naming both models in the commit is that record.
 
 ## What a tag is
 

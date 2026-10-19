@@ -6,18 +6,17 @@ description: Transcribes a batch of twenty handwritten pages from the Alexandre 
 # Transcribing a batch from the Grothendieck fonds
 
 
-**Runs on Opus 5.5 or Opus 5, and on nothing else.** The
+**Runs on Opus 5.5, and on nothing else.** The
 frontmatter used to pin Fable 5, which made the choice automatic; the pin is
 gone so that the models can be measured against one another. Since 2026-09-22
 the Fable models are no longer admitted for new passes; the batches they
-produced stay as they are, and their headers say so. What replaces the pin is
+produced stay as they are, and their headers say so; Opus 5 likewise since
+2026-10-19. What replaces the pin is
 a check you make yourself, before reading a single page:
 
-- **Opus 5.5 (`claude-opus-5-5`)** — the default since 2026-09-22, when it
-  was admitted; the successor to Opus 5. Choose it unless there is a reason
-  not to.
-- **Opus 5 (`claude-opus-5`)** — permitted; most batches so far were produced
-  with it.
+- **Opus 5.5 (`claude-opus-5-5`)** — the only model admitted since
+  2026-10-19 (the default since 2026-09-22); the successor to Opus 5, which
+  produced most batches so far.
 - **Anything else** — stop, say which model the session is on, and do not
   transcribe. A pass on a model nobody chose produces a file whose provenance
   is an accident, and the fonds is not the place to discover that later.

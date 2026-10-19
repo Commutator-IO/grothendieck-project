@@ -6,17 +6,17 @@ description: Produces the modernised reading of an already-transcribed folder of
 # The modernised reading of a folder
 
 
-**Runs on Opus 5.5 or Opus 5, and on nothing else.** The frontmatter used to
+**Runs on Opus 5.5, and on nothing else.** The frontmatter used to
 pin Opus 5, which made the choice automatic; the pin is gone since 2026-09-03.
 Fable 5.1 was admitted from then until 2026-09-22 and is no longer; the
-readings it produced stay as they are, and their headers say so. What replaces
+readings it produced stay as they are, and their headers say so. Opus 5 was
+admitted until 2026-10-19 and is no longer, on the same terms. What replaces
 the pin is a check you make yourself before reading a line of the
 transcription:
 
-- **Opus 5.5 (`claude-opus-5-5`)** — permitted since 2026-09-22, and the
-  default; the successor to Opus 5.
-- **Opus 5 (`claude-opus-5`)** — permitted; what every reading in the
-  repository before 2026-09-03 was produced with.
+- **Opus 5.5 (`claude-opus-5-5`)** — the only model admitted since
+  2026-10-19 (permitted since 2026-09-22); the successor to Opus 5, which made
+  every reading in the repository before 2026-09-03.
 - **Anything else** — stop, say which model the session is on, and do not
   write. A reading on a model nobody chose has a provenance nobody can vouch
   for.

@@ -18,11 +18,11 @@ this skill's.
 Since 2026-09-30 the user's instruction is to transcribe nothing yet. Run this
 skill only when they ask for a specific notebook in so many words.
 
-**Runs on Opus 5.5 or Opus 5, and on nothing else** — the same rule as
+**Runs on Opus 5.5, and on nothing else** — the same rule as
 `/transcribe-grothendieck`, for the same reason: this is a sustained visual
 attention task, and the file's header must say which model read the pages.
-Opus 5.5 (`claude-opus-5-5`) by default; Opus 5 (`claude-opus-5`) permitted;
-anything else, stop and say which model the session is on.
+Opus 5.5 (`claude-opus-5-5`) only; on anything else, stop and say which model
+the session is on.
 
 ## What this produces
 

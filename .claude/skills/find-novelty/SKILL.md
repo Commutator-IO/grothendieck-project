@@ -5,12 +5,11 @@ description: Reads a folder's modernised reading and its transcriptions and prop
 
 # Looking for what is not in the literature
 
-**Runs on the model that wrote the folder's modernised reading** — Opus 5.5
-or Opus 5, whichever that file's `% Pass:` header names, and on nothing else.
-The frontmatter used to pin Opus 5, when every reading was made on it; the pin
+**Runs on Opus 5.5, and on nothing else** (since 2026-10-19). Until then it ran
+on the model that wrote the folder's modernised reading, Opus 5.5 or Opus 5,
+whichever that file's `% Pass:` header names. The frontmatter used to pin Opus 5, when every reading was made on it; the pin
 went on 2026-09-03 with those of `/modernize-grothendieck` and
-`/tag-grothendieck`, and what replaces it is a check you make yourself: open
-the reading, read its header, stop if the session is on a different model. The
+`/tag-grothendieck`. Open the reading and read its header first. The
 judgement here is the same one the modernised reading makes when it names a
 modern theorem and footnotes whether the manuscript could have known it —
 sharpened, and pointed at the gap instead of the match. A different model at
@@ -18,17 +17,12 @@ this step would be a second reader silently disagreeing with the first about
 what the folder says, in the one place where the disagreement becomes a claim
 about other people's work.
 
-**One exception, since 2026-09-23: Opus 5.5 may run on a reading made by
-Opus 5.** Opus 5.5 is Opus 5's successor and the default for every other
-skill; waiting for an Opus 5 session left thirty-three folders without a
-pass. The disagreement the rule guards against is then made visible rather
-than prevented: where the pass reads the folder differently from the reading
+**On a reading made by another model** (Opus 5, or Fable for folders 1 and
+47), the disagreement this guards against is made visible rather than
+prevented, as it has been since 2026-09-23: where the pass reads the folder differently from the reading
 — a statement it thinks the reading gets wrong, a match the reading missed —
 it says so in the entry's `ours` field, and the commit names both models. It
-does not silently override the reading. The exception runs one way only:
-Opus 5 does not run on an Opus 5.5 reading. The two Fable readings (folders 1
-and 47) are passed by Opus 5.5, as decided on 2026-10-10, under the same terms:
-disagreements go in `ours`, and the commit names both models.
+does not silently override the reading.
 
 ## The thing this skill is for, and the thing it must not do
 

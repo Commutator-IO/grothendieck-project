@@ -14,7 +14,7 @@ excludes except for its preamble. Never `git add -f` one, never paste one into
 an issue, a PR, a commit message or the site, never quote more than a few
 words of one in chat.
 
-**Runs on Opus 5.5 or Opus 5, and on nothing else**, the same rule as
+**Runs on Opus 5.5, and on nothing else**, the same rule as
 `/transcribe-grothendieck`, and the header records which model read the pages.
 
 ## What these documents are
