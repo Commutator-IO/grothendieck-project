@@ -52,6 +52,11 @@
 % and is stated (normal vs conormal reading of T_{Y/X} footnoted), "Notons
 % qu'ici"; p. 41, "augmentations"; p. 43, f_*(O_X) of rank delta, and the
 % degree-2 term of Todd(Y)^{-1}, which the first reading had wrong.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-19 — p. 13 N.B. footnoted
+%   with the Lean check of the elliptic-curve example of the page (chernRatio,
+%   chernCurve, chernEllipticNB): Chern class 1 in the splitting model; the
+%   non-vanishing of y is not formalised. P. 21: the case n <= 2 marked as the
+%   edition's, the torsion statements as the page's.
 %
 % Scope: one document for the shelfmark, its three batches read as one folder.
 % Twenty-eight of the forty-four leaves carry mathematics; five are covers in
@@ -962,8 +967,15 @@ nulle ».\footnote{C'est le même calcul, appliqué à une classe de rang $0$
 au lieu de $[\mathcal{O}_{Y}]$ : $x$ n'ayant sur une courbe que
 $\operatorname{ch}_{1}(x) = x'$, la formule donnée en note à propos des $Q^{(r)}_{i}$ donne
 $c(i_{!}x) = 1 - (-1)^{r-1}\, r!\, x'\,\eta^{r}$, qui vaut $1$ dès que
-$2x' = 0$ et $r = 3$. La non-nullité de $y$ vient de ce que $x \neq 0$,
-puisque $c^{1}(x) = x' \neq 0$, et de l'injectivité de $i_{!}$. La première
+$2x' = 0$ et $r = 3$. Lean le vérifie dans le modèle du principe de
+scindage, en écrivant $x = [\mathcal{O}(-0)] - [\mathcal{O}(-a)]$ et en
+notant $p$, $q$ les classes des points $0$ et $a$, avec $p^{2} = q^{2} = 0$
+sur une courbe : le produit vaut $1$ dès que $r!\,(p - q) = 0$
+(\texttt{chernRatio}, \texttt{chernCurve}), et pour $r = 3$ il suffit que
+$2(p - q) = 0$ (\texttt{chernEllipticNB}) ; voir l'annexe Lean, section 2.
+La non-nullité de $y$ n'est pas formalisée. Elle vient de ce que $x \neq 0$,
+puisque $c^{1}(x) = x' \neq 0$, et de l'injectivité de $i_{!}$, que la page
+affirme sans les démontrer. La première
 version de cette lecture, faite sur une transcription où le \emph{N.B.}
 n'était pas lu, donnait l'exemple de la courbe elliptique comme le sien ; il
 est du feuillet.}
@@ -1316,7 +1328,10 @@ l'on déclare géométrique la classe $n - L^{-1}$, de rang $n - 1$, sa classe d
 Chern force $\zeta^{n} = 0$, et $CK = GK$. Un autre exemple de non-injectivité,
 en degré 3, pour une approximation finie du classifiant $BO^{+}(2n+1)$, est
 chez Mackall (2020, § 4, après le corollaire 4.2), qui renvoie à SGA 6 XIV ;
-l'exemple de $K(\mathbb{P}^{n-1})$ n'y figure pas.}\footnote{Le générateur de
+l'exemple de $K(\mathbb{P}^{n-1})$ n'y figure pas. Le cas $n \leqslant 2$ est
+de l'édition ; la page n'énonce que $n \geqslant 3$, et l'annexe Lean,
+section 2, attribue à la page l'énoncé de torsion du corollaire comme celui de
+l'exemple.}\footnote{Le générateur de
 $CK$ est écrit $\xi$ sur le feuillet ; il est écrit $\zeta$ ici, la lettre
 $\xi$ servant déjà à $1 - L^{-1}$ aux pages 9 à 13 et à une classe de $K(X)$
 aux pages 42 et 43. Que la torsion soit non nulle --- que $\zeta^{n} \neq 0$
