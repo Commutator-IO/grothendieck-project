@@ -44,6 +44,10 @@
 %   is the kernel of Ω_k ⊗ K → Ω_K, not a norm; p. 5's marginal reads « non
 %   ramifié »; p. 2's « faux si on ne suppose pas A → B injectif ?? »; p. 17's
 %   marginal now reads 4.1 / 4.6 (doubtful), weakening one numbering argument.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-19 — p. 23: the Proposition
+%   footnote now says the statement is the page's and names the Lean check of
+%   its « plus précisément » form (no_derivation_of_field) beside
+%   not_formallySmooth_of_field, one variable only; one cleft turn removed.
 %
 % Scope: one document for the shelfmark, its two batches read as one argument.
 % Twenty-two of the twenty-nine leaves carry something; pages 4, 6, 7, 8 are
@@ -1317,14 +1321,17 @@ c'est-à-dire qu'il n'existe pas de dérivation
 $D : A \to \Omega_{K/k} \otimes_K A$ qui induise $d_{K/k} \otimes_K A$ sur
 $K$.\footnote{La page conclut : « $A$ \ldots\ n'est pas f.\ lisse sur $K$
 relativement à $k$, et a fortiori n'est pas f.\ lisse sur $k$ » (« est » et
-« f.\ lisse » sont des lectures douteuses, « infinie » est net). Ce qui est
-énoncé ici est ce que l'édition vérifie : si $A$ était formellement lisse sur
-$K$, $\Omega_{K/k} \otimes_K A \to \Omega_{A/k}$ aurait une rétraction
-(lean/Grothendieck/Folder22.lean, \texttt{retraction\_of\_formallySmooth}, la
-base $R$ y étant le $k$ de la page), et une telle rétraction n'existe pas
-(\texttt{not\_formallySmooth\_of\_field}, pour $n = 1$ ; le cas $n > 1$ s'en
-déduit en ne dérivant que par rapport à $t_1$, ce que la machine ne vérifie
-pas). Le « relativement à $k$ » nomme vraisemblablement cette obstruction. Le
+« f.\ lisse » sont des lectures douteuses, « infinie » est net). L'énoncé
+est celui de la page, et Lean le vérifie pour une seule variable : si $A$
+était formellement lisse sur $K$, $\Omega_{K/k} \otimes_K A \to \Omega_{A/k}$
+aurait une rétraction (lean/Grothendieck/Folder22.lean,
+\texttt{retraction\_of\_formallySmooth}, la base $R$ y étant le $k$ de la
+page) ; aucune dérivation $D : K[[t]] \to K[[t]] \otimes_K \Omega_{K/k}$
+n'induit $d_{K/k}$ sur $K$, c'est la forme « plus précisément »
+(\texttt{no\_derivation\_of\_field}), et $K[[t]]$ n'est donc pas
+formellement lisse sur $K$ (\texttt{not\_formallySmooth\_of\_field}) ; voir
+l'annexe Lean, section 22. Le cas $n > 1$ s'en déduit en ne dérivant que par
+rapport à $t_1$, ce que Lean ne vérifie pas. Le « relativement à $k$ » nomme vraisemblablement cette obstruction. Le
 « a fortiori » sur $k$ suppose qu'une algèbre formellement lisse sur $k$ le
 soit sur $K$ relativement à $k$, au sens que la page ne définit pas ; il n'est
 ni vérifié ni affirmé ici.} La démonstration de la page est celle qu'on a vue :
@@ -1348,9 +1355,8 @@ proposition fausse, seulement une lecture fausse. L'exemple de la page 22 est
 le cas $k = \mathbf{Q}$ (ou le $k_0$ de la réduction), $K = \mathbf{Q}(x_i :
 i \in I)$, de cette proposition.}
 
-Ce qui unifie les deux cas, et qui est le vrai contenu de ces quatre feuillets,
-c'est la taille du module des différentielles du corps, et c'est la page
-elle-même qui le dit, en le relativisant à un corps de base $k$ : la marge de
+Les deux cas tiennent à la taille du module des différentielles du corps, qui
+est le contenu de ces quatre feuillets, et la page elle-même le dit, en le relativisant à un corps de base $k$ : la marge de
 la page 21 note « $\Omega_{K/k}$ est fini sur $K$ » du côté positif, la
 proposition de la page 23 suppose $\Omega_{K/k}$ de dimension infinie du côté
 négatif. En caractéristique $p$, l'hypothèse de la page 21, $K$ fini sur
