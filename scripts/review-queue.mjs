@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 /**
- * Builds the queue of the review page (/review/) from issue #35.
+ * Builds the queue of the review page (/review/) from the checklist of
+ * issue #35, kept in the repository since #35 was closed (2026-10-20):
  *
- *   gh issue view 35 --json body -q .body > /tmp/35.md
- *   node scripts/review-queue.mjs /tmp/35.md
+ *   node scripts/review-queue.mjs            # reads docs/review/issue-35.md
+ *   node scripts/review-queue.mjs <file.md>  # or another copy of the list
+ *
+ * Tick a box in docs/review/issue-35.md (or list the item in
+ * src/content/review-answered.json) when a check is applied.
  *
  * Reads the issue body from a file — never the network — together with
  * transcripts/, src/content/dated-leaves.json and src/content/letters.json,
@@ -38,11 +42,7 @@ import { join, resolve } from 'node:path';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const T = join(ROOT, 'transcripts');
-const bodyFile = process.argv[2];
-if (!bodyFile) {
-  console.error('usage: node scripts/review-queue.mjs <issue-35-body.md>');
-  process.exit(1);
-}
+const bodyFile = process.argv[2] ?? join(ROOT, 'docs/review/issue-35.md');
 const body = readFileSync(bodyFile, 'utf8');
 const MAX_WORDS = 15;
 const SAMPLES = { ill: 3, uncertain: 2, add: 8, supplied: 8 };
