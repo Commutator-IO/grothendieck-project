@@ -79,7 +79,7 @@ noncomputable def skew (n : ℕ) : Matrix (Fin n) (Fin n) (MvPolynomial (Sym2 (F
 
 theorem skew_transpose (n : ℕ) : (skew n)ᵀ = -skew n := by
   refine Matrix.ext fun i j => ?_
-  show skew n j i = -skew n i j
+  change skew n j i = -skew n i j
   simp only [skew]
   rw [Sym2.eq_swap (a := j) (b := i)]
   rcases lt_trichotomy i j with h | rfl | h
@@ -144,18 +144,19 @@ def polarOf {R : Type*} [CommRing R] {n : ℕ} (y : Sym2 (Fin n) → R) :
     Matrix (Fin n) (Fin n) R :=
   fun i j => if i = j then 2 * y s(i, i) else y s(i, j)
 
+theorem polar_map_aeval {R : Type*} [CommRing R] {n : ℕ} (y : Sym2 (Fin n) → R) :
+    (polar n).map (aeval y) = polarOf y := by
+  ext i j
+  simp only [map_apply, polar, polarOf]
+  split_ifs <;> simp
+
 /-- Over any commutative ring, in odd rank, the determinant of the polar form is
 twice the value of the universal half-discriminant: `δ'` is defined over any
 base. -/
 theorem det_polarOf_eq {R : Type*} [CommRing R] {n : ℕ} (hn : Odd n)
     (y : Sym2 (Fin n) → R) : (polarOf y).det = 2 * aeval y (halfDisc hn) := by
-  have h : (polar n).map (aeval y) = polarOf y := by
-    ext i j
-    simp only [map_apply, polar, polarOf]
-    split_ifs <;> simp
   have := AlgHom.map_det (aeval (R := ℤ) y) (polar n)
-  rw [det_polar_eq hn, map_mul, map_ofNat] at this
-  rw [← h]
+  rw [det_polar_eq hn, map_mul, map_ofNat, AlgHom.mapMatrix_apply, polar_map_aeval] at this
   exact this.symm
 
 /-! ## Even rank: `(-1)ⁿ Δ = B² - 4C` in ranks 2 and 4 -/
@@ -233,12 +234,6 @@ theorem skew_eq_upper (m : ℕ) : skew m = upper m - (upper m)ᵀ := by
   · simp
   · simp [h, h.le, not_le.mpr h, not_lt.mpr h.le, Sym2.eq_swap]
 
-theorem polar_map_aeval {R : Type*} [CommRing R] {n : ℕ} (y : Sym2 (Fin n) → R) :
-    (polar n).map (aeval y) = polarOf y := by
-  ext i j
-  simp only [map_apply, polar, polarOf]
-  split_ifs <;> simp
-
 /-- `Δ ≠ 0`: at `Yᵢ = 1`, `Yᵢⱼ = 0` it is `2 ^ m`. -/
 theorem det_polar_ne_zero (m : ℕ) : (polar m).det ≠ 0 := by
   intro h
@@ -251,7 +246,6 @@ theorem det_polar_ne_zero (m : ℕ) : (polar m).det ≠ 0 := by
   rw [h, map_zero, AlgHom.mapMatrix_apply, polar_map_aeval, hy, det_diagonal] at this
   simp only [Finset.prod_const, Finset.card_univ, Fintype.card_fin] at this
   exact pow_ne_zero m two_ne_zero this.symm
-
 
 theorem polar_transpose (m : ℕ) : (polar m)ᵀ = polar m := by
   rw [polar_eq_upper, transpose_add, transpose_transpose, add_comm]
@@ -348,8 +342,7 @@ theorem prod_fpf_eq_sq {S : Type*} [CommRing S] {m : ℕ}
   simp only [fpfInv, mem_filter, mem_univ, true_and] at hσ
   obtain ⟨hinv, hfix⟩ := hσ
   have hss : ∀ i, σ (σ i) = i := fun i => by
-    have := congrArg (fun τ : Equiv.Perm (Fin m) => τ i) hinv
-    simpa using this
+    simpa using congrArg (fun τ : Equiv.Perm (Fin m) => τ i) hinv
   have hsym : ∀ i j, M i j = M j i := fun i j => by
     simpa using congrFun (congrFun hM j) i
   rw [← prod_filter_mul_prod_filter_not univ (fun i => i < σ i), sq]
@@ -412,7 +405,6 @@ theorem det_eq_hafSum_sq {S : Type*} [CommRing S] [CharP S 2] {m : ℕ}
     · intro σ _; exact inv_inv σ
   rw [hzero, add_zero, filter_mem_eq_inter, univ_inter, hafSum, sum_pow_char]
   exact sum_congr rfl fun σ hσ => prod_fpf_eq_sq M hM hσ
-
 
 end
 
@@ -486,7 +478,6 @@ theorem det_skew_sq_field {k : Type*} [Field k] (h2 : (2 : k) ≠ 0) (n : ℕ)
   induction n with
   | zero => exact ⟨1, by simp⟩
   | succ n ih => exact det_skew_step h2 (2 * n) ih K hK
-
 
 theorem skew_map_transpose {k : Type*} [CommRing k] (m : ℕ)
     (φ : MvPolynomial (Sym2 (Fin m)) ℤ →+* k) : ((skew m).map φ)ᵀ = -(skew m).map φ := by
@@ -592,7 +583,8 @@ variable {R M : Type*} [CommRing R] [AddCommGroup M] [Module R M]
 /-- The linear form `π = φ(a, ·)`, `φ` the polar form of `Q` (page 117, (9)). -/
 def piForm (Q : QuadraticForm R M) (a : M) : M →ₗ[R] R := polarBilin Q a
 
-theorem piForm_apply (Q : QuadraticForm R M) (a x : M) : piForm Q a x = QuadraticMap.polar Q a x := rfl
+theorem piForm_apply (Q : QuadraticForm R M) (a x : M) :
+    piForm Q a x = QuadraticMap.polar Q a x := rfl
 
 /-- The canonical symmetry `σ = id - π ⊗ a` (page 123, (20)). -/
 def canSym (Q : QuadraticForm R M) (a : M) : M →ₗ[R] M :=
@@ -602,7 +594,8 @@ theorem canSym_apply (Q : QuadraticForm R M) (a x : M) :
     canSym Q a x = x - QuadraticMap.polar Q a x • a := rfl
 
 /-- `Q (x + y) = Q x + Q y + φ(x, y)`. -/
-theorem quad_map_add (Q : QuadraticForm R M) (x y : M) : Q (x + y) = Q x + Q y + QuadraticMap.polar Q x y := by
+theorem quad_map_add (Q : QuadraticForm R M) (x y : M) :
+    Q (x + y) = Q x + Q y + QuadraticMap.polar Q x y := by
   simp only [QuadraticMap.polar]; ring
 
 variable {Q : QuadraticForm R M} {a : M}
@@ -612,7 +605,8 @@ theorem piForm_self (ha : Q a = 1) : piForm Q a a = 2 := by
   rw [piForm_apply, polar_self, ha, two_smul, one_add_one_eq_two]
 
 /-- `Q (x + t a) = Q x + t (φ(a, x) + t Q a)` (page 122). -/
-theorem quad_map_add_smul (x : M) (t : R) : Q (x + t • a) = Q x + t * (QuadraticMap.polar Q a x + t * Q a) := by
+theorem quad_map_add_smul (x : M) (t : R) :
+    Q (x + t • a) = Q x + t * (QuadraticMap.polar Q a x + t * Q a) := by
   rw [quad_map_add, QuadraticMap.map_smul, polar_smul_right, polar_comm, smul_eq_mul, smul_eq_mul]
   ring
 
@@ -622,11 +616,9 @@ theorem canSym_isometry (ha : Q a = 1) (x : M) : Q (canSym Q a x) = Q x := by
 
 /-- **Page 123, (21).** `σ² = id`, because `π(a) = 2`. -/
 theorem canSym_canSym (ha : Q a = 1) (x : M) : canSym Q a (canSym Q a x) = x := by
-  have h := piForm_self ha
-  rw [piForm_apply] at h
+  have h : QuadraticMap.polar Q a a = 2 := piForm_self ha
   simp only [canSym_apply, polar_sub_right, polar_smul_right, h, smul_eq_mul]
   module
-
 
 /-- For `e` idempotent, `x ↦ x - e π(x) a` preserves `Q` (and fixes `ker π`). -/
 theorem isometry_of_idem (ha : Q a = 1) {e : R} (he : IsIdempotentElem e) (x : M) :
@@ -639,7 +631,8 @@ theorem isometry_of_idem (ha : Q a = 1) {e : R} (he : IsIdempotentElem e) (x : M
 is onto, a linear map fixing `ker π` pointwise and preserving `Q` is `x ↦ x - e π(x) a`
 with `e` idempotent (the page's `λ(λ + 1) = 0`, with `e = -λ`). -/
 theorem eq_of_isometry_fix (ha : Q a = 1)
-    (hnd : ∀ y, (∀ x, QuadraticMap.polar Q y x = 0) → y = 0) {b : M} (hb : QuadraticMap.polar Q a b = 1)
+    (hnd : ∀ y, (∀ x, QuadraticMap.polar Q y x = 0) → y = 0) {b : M}
+    (hb : QuadraticMap.polar Q a b = 1)
     (u : M →ₗ[R] M) (hu : ∀ v, QuadraticMap.polar Q a v = 0 → u v = v) (hQ : ∀ x, Q (u x) = Q x) :
     ∃ e : R, IsIdempotentElem e ∧ ∀ x, u x = x - (e * QuadraticMap.polar Q a x) • a := by
   set c := u b - b with hcdef
@@ -647,11 +640,10 @@ theorem eq_of_isometry_fix (ha : Q a = 1)
     intro x
     have h := hu (x - QuadraticMap.polar Q a x • b) (by
       rw [polar_sub_right, polar_smul_right, hb, smul_eq_mul, mul_one, sub_self])
-    rw [map_sub, map_smul] at h
-    rw [hcdef, smul_sub]
-    rw [sub_eq_iff_eq_add] at h
-    rw [h]; abel
-  have hg : ∀ x, QuadraticMap.polar Q a x * (QuadraticMap.polar Q a x * Q c + QuadraticMap.polar Q x c) = 0 := by
+    rw [map_sub, map_smul, sub_eq_iff_eq_add] at h
+    rw [h, hcdef, smul_sub]; abel
+  have hg : ∀ x, QuadraticMap.polar Q a x *
+      (QuadraticMap.polar Q a x * Q c + QuadraticMap.polar Q x c) = 0 := by
     intro x
     have := hQ x
     rw [hux, quad_map_add, QuadraticMap.map_smul, polar_smul_right, smul_eq_mul,
@@ -686,7 +678,8 @@ theorem eq_of_isometry_fix (ha : Q a = 1)
 /-- Over a base with no nontrivial idempotent, the isometries fixing `ker π` are `id`
 and `σ`. -/
 theorem eq_id_or_canSym (ha : Q a = 1)
-    (hnd : ∀ y, (∀ x, QuadraticMap.polar Q y x = 0) → y = 0) {b : M} (hb : QuadraticMap.polar Q a b = 1)
+    (hnd : ∀ y, (∀ x, QuadraticMap.polar Q y x = 0) → y = 0) {b : M}
+    (hb : QuadraticMap.polar Q a b = 1)
     (hR : ∀ e : R, IsIdempotentElem e → e = 0 ∨ e = 1)
     (u : M →ₗ[R] M) (hu : ∀ v, QuadraticMap.polar Q a v = 0 → u v = v) (hQ : ∀ x, Q (u x) = Q x) :
     u = LinearMap.id ∨ u = canSym Q a := by
@@ -697,11 +690,11 @@ theorem eq_id_or_canSym (ha : Q a = 1)
 
 /-- **Page 123.** If `2` is invertible, `a/2 ∈ E = π⁻¹(1)` and on `E` the projective map `σ`
 (represented by `-σ`, which preserves `E`) is the symmetry of centre `a/2`. -/
-theorem canSym_center [Invertible (2 : R)] (ha : Q a = 1) (x : M) (hx : QuadraticMap.polar Q a x = 1) :
+theorem canSym_center [Invertible (2 : R)] (ha : Q a = 1) (x : M)
+    (hx : QuadraticMap.polar Q a x = 1) :
     QuadraticMap.polar Q a (⅟(2 : R) • a) = 1 ∧ QuadraticMap.polar Q a (-canSym Q a x) = 1 ∧
       -canSym Q a x - ⅟(2 : R) • a = -(x - ⅟(2 : R) • a) := by
-  have h := piForm_self ha
-  rw [piForm_apply] at h
+  have h : QuadraticMap.polar Q a a = 2 := piForm_self ha
   refine ⟨?_, ?_, ?_⟩
   · rw [polar_smul_right, h, smul_eq_mul, invOf_mul_self]
   · rw [canSym_apply, polar_neg_right, polar_sub_right, polar_smul_right, hx, h]; norm_num
@@ -712,7 +705,8 @@ theorem canSym_center [Invertible (2 : R)] (ha : Q a = 1) (x : M) (hx : Quadrati
 /-- **Page 123.** If `2 = 0`, `π(a) = 0`: `a ∈ ker π`, `σ` preserves each level of `π` and
 acts on `E` as `x ↦ x - a`; `σ` is the transvection `id - π ⊗ a`. -/
 theorem canSym_char_two (h2 : (2 : R) = 0) (ha : Q a = 1) :
-    QuadraticMap.polar Q a a = 0 ∧ (∀ x, QuadraticMap.polar Q a (canSym Q a x) = QuadraticMap.polar Q a x) ∧
+    QuadraticMap.polar Q a a = 0 ∧
+      (∀ x, QuadraticMap.polar Q a (canSym Q a x) = QuadraticMap.polar Q a x) ∧
       ∀ x, QuadraticMap.polar Q a x = 1 → canSym Q a x = x - a := by
   have h := piForm_self ha
   rw [piForm_apply, h2] at h
@@ -991,7 +985,6 @@ theorem ftilde_surjective (h2 : (2 : K) ≠ 0) (ha : a ≠ 0) (hb : b ≠ 0) {t 
   simp only [ftilde]
   rw [hc, smul_smul, inv_mul_cancel₀ (mul_ne_zero h2 hq), one_smul]
 
-
 /-- **Pages 94–96, monomorphisme.** Two points of `Ũ` with the same image under `f̃` differ by
 the action of some `α = c + id`, `c² + d² ≠ 0`. -/
 theorem ftilde_fibre (h2 : (2 : K) ≠ 0) {ξ ξ' : ℍ[K,a,b] × ℍ[K,a,b]} (hξ : ξ ∈ Utilde)
@@ -1033,7 +1026,7 @@ theorem ftilde_fibre (h2 : (2 : K) ≠ 0) {ξ ξ' : ℍ[K,a,b] × ℍ[K,a,b]} (h
     (anticomm hx hr (by rw [pol_comm]; exact prx))
     (anticomm htx hr (by rw [pol_comm]; exact prtx))
   have hx'eq : x' = c • x + d • (t * x) := by
-    rw [hr_def, sub_sub, sub_eq_zero] at hr0; exact hr0
+    rwa [hr_def, sub_sub, sub_eq_zero] at hr0
   have hqx' : qf x' = (c ^ 2 + d ^ 2) * qf x := by
     rw [hx'eq, qf_smul_add_smul, hqtx, pol_comm, p2]; ring
   refine ⟨c, d, fun h0 => hq' (by rw [hqx', h0, zero_mul]), ?_⟩
