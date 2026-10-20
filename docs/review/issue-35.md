@@ -124,11 +124,11 @@ The readings of 43, 103, 105, 107, 109, 111, 118 and 150 (3 October) footnote de
 - [ ] **150, p. 19:** the equivalence holds only under strict compatibility. On p. 68, the dimension argument needs manifold-like Σ_i.
 
 **References cited from memory, to confirm:**
-- [ ] Saavedra (LNM 265), SGA 4 XVIII, Deligne 1987, Breen (Astérisque 225), Illusie (LNM 283), Laplaza 1972 (103)
-- [ ] Cisinski 2006, Quillen–Illusie, Thomason (109, 105, 118)
-- [ ] Rezk 1998, Street 1974, Dwyer 1980, Brown 1973 (118)
-- [ ] Siebenmann 1972, Quinn 1988, Mather 1970, Verona, Brasselet–Hector–Saralegi, Ayala–Francis–Tanaka (150)
-- [ ] Gabriel–Ulmer, Joyal–Tierney, Bousfield–Friedlander, Smith/Beke (105)
+- [x] Saavedra (LNM 265), SGA 4 XVIII, Deligne 1987, Breen (Astérisque 225), Illusie (LNM 283), Laplaza 1972 (103)
+- [x] Cisinski 2006, Quillen–Illusie, Thomason (109, 105, 118)
+- [x] Rezk 1998, Street 1974, Dwyer 1980, Brown 1973 (118)
+- [x] Siebenmann 1972, Quinn 1988, Mather 1970, Verona, Brasselet–Hector–Saralegi, Ayala–Francis–Tanaka (150)
+- [x] Gabriel–Ulmer, Joyal–Tierney, Bousfield–Friedlander, Smith/Beke (105)
 
 **Consistency between readings:**
 - [x] **103 / 135:** same Sính typescript. 103 corrects « isomorphisme de catégories » to an equivalence and adds the groupoid hypothesis for K⁰/K¹; 135 does not. Revise 135. — transcriptions aligned 2026-10-04: the ink on the typescript is his in both (1633dd7). The modernised reading of 135 still to revise on the « équivalence » and groupoid points.
