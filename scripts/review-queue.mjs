@@ -17,11 +17,14 @@
  * build with the switch off carries none of them. A snippet is at most fifteen
  * words.
  *
- * Only unchecked boxes of #35 are read. A box covers either named places
- * (« 105 « 06/09/82 » », « 109 pp. 9–10 ») — one item each — or a kind of
- * error spread over the corpus (§1 the unread words of a batch, §2 the
+ * A box covers either named places (« 105 « 06/09/82 » », « 109 pp. 9–10 »)
+ * — one item each, read only while the box is unchecked — or a kind of error
+ * spread over the corpus (§1 the unread words of a batch, §2 the
  * \add/\supplied residue), for which a few occurrences are sampled from the
- * transcriptions. Boxes that name no place (« spot-check the skips ») and the
+ * current transcriptions whether or not the box is ticked: a ticked box says
+ * the batch was sampled, not that every sampled spot was answered. An item
+ * leaves the queue when its id is in src/content/review-answered.json (the
+ * issue that answered it), or when an applied answer removed its mark. Boxes that name no place (« spot-check the skips ») and the
  * comparison of folder 12 with a transcription made elsewhere are left out:
  * neither is a question about one spot of a page. They are listed on stderr.
  */
@@ -38,6 +41,8 @@ if (!bodyFile) {
 const body = readFileSync(bodyFile, 'utf8');
 const MAX_WORDS = 15;
 const SAMPLES = { ill: 3, uncertain: 2, add: 8, supplied: 8 };
+const answeredItems = JSON.parse(readFileSync(join(ROOT, 'src/content/review-answered.json'), 'utf8')).items;
+const answered = new Set(Object.keys(answeredItems));
 
 const leaves = JSON.parse(readFileSync(join(ROOT, 'src/content/dated-leaves.json'), 'utf8')).records;
 const letters = JSON.parse(readFileSync(join(ROOT, 'src/content/letters.json'), 'utf8')).records;
@@ -222,6 +227,27 @@ function occurrences(cote, batch, test) {
 /** `n` items spread evenly over a list. */
 const spread = (xs, n) => (xs.length <= n ? xs : Array.from({ length: n }, (_, i) => xs[Math.floor(((i + 0.5) * xs.length) / n)]));
 
+/**
+ * The sample of a batch, kept as it was before answers were applied: an
+ * applied answer removed its mark, so a placeholder stands where the mark was
+ * (after the other occurrences of its page) and the spread picks the same
+ * occurrences as before; the placeholders are then dropped. An answer that
+ * left a mark on the spot (a doubt narrowed to one word) is `markKept`: the
+ * mark is still an occurrence, excluded by its id, and needs no stand-in.
+ */
+function sampleOf(prefix, occ, n) {
+  const gone = Object.entries(answeredItems)
+    .filter(([id, a]) => a.result === 'applied' && !a.markKept && id.startsWith(`${prefix}-p`))
+    .map(([id]) => Number(/-p(\d+)$/.exec(id)?.[1]))
+    .filter(Boolean);
+  const xs = [...occ];
+  for (const page of gone) {
+    const at = xs.findIndex((o) => o.page > page);
+    xs.splice(at < 0 ? xs.length : at, 0, { page, gone: true });
+  }
+  return spread(xs, n).filter((o) => !o.gone);
+}
+
 /** A snippet around `needle`, on a given line or near it, else on the page. */
 function snippetAt(cote, batch, { line, page, needle }) {
   const ls = lines(cote, batch);
@@ -253,6 +279,7 @@ function push(it, snip) {
   let id = it.id;
   for (let n = 2; ids.has(id); n++) id = `${it.id}-${n}`;
   ids.add(id);
+  if (answered.has(id)) return;
   const page = it.page ?? null;
   const batch = it.batch ?? (page ? batchOf(page) : 1);
   const edition = it.edition ?? 'fr';
@@ -290,23 +317,28 @@ for (const raw of body.split('\n')) {
     if (h[1] === '#') sub = '';
     continue;
   }
-  const box = /^\s*- \[ \]\s+(.*)$/.exec(raw);
+  const box = /^\s*- \[([ xX])\]\s+(.*)$/.exec(raw);
   if (!box) {
     if (/^\*\*(Arguments|References)/.test(raw)) sub = `${sub.split(' · ')[0]} · ${raw.replace(/\*/g, '')}`;
     continue;
   }
-  const text = box[1].trim();
+  const text = box[2].trim();
   const fromMoved = /Moved from #48/.test(section);
   const n = fromMoved ? `#48 ${sub.split(' · ')[0]}` : sub;
+  // A ticked box closes a named spot; the sampled kinds (§1, §2) stay open
+  // until each item is answered.
+  const sampled = !fromMoved && (sub.startsWith('1.') || sub.startsWith('2.'));
+  if (box[1] !== ' ' && !sampled) continue;
 
   // §1 — the unread words of the densest batches.
   if (!fromMoved && sub.startsWith('1.')) {
     const cote = /^(\S+)/.exec(text)[1];
-    for (const m of text.matchAll(/batch (\d+)/g)) {
-      const batch = Number(m[1]);
-      for (const o of spread(occurrences(cote, batch, (t) => t.k === 'ill'), SAMPLES.ill))
+    // « 58 batch 1 — 689 · batch 2 — 570 — sampled …: batch 1 p. 4 … »: the
+    // batches are those given with their count, once each.
+    for (const batch of new Set([...text.matchAll(/batch (\d+) — \d/g)].map((m) => Number(m[1])))) {
+      for (const o of sampleOf(`ill-${cote}-${batch}`, occurrences(cote, batch, (t) => t.k === 'ill'), SAMPLES.ill))
         push({ id: `ill-${cote}-${batch}-p${o.page}`, section: n, kind: 'ill', cote, batch, page: o.page, question: QUESTIONS.ill, context: `One of the densest batches for unread words (#35 §1).` }, o.snippet);
-      for (const o of spread(occurrences(cote, batch, (t) => t.k === 'unc' && t.s.split(' ').length <= 3 && t.s.length > 1), SAMPLES.uncertain))
+      for (const o of sampleOf(`unc-${cote}-${batch}`, occurrences(cote, batch, (t) => t.k === 'unc' && t.s.split(' ').length <= 3 && t.s.length > 1), SAMPLES.uncertain))
         push({ id: `unc-${cote}-${batch}-p${o.page}`, section: n, kind: 'uncertain', cote, batch, page: o.page, question: QUESTIONS.uncertain(o.snippet.word), context: `Doubtful readings in the same batch (#35 §1).` }, o.snippet);
     }
     continue;
