@@ -128,7 +128,7 @@ variable {α}
 
 /-- The twelve vertices lie on the quadric `q = 0` (page 101). -/
 theorem q_vert (h : α ^ 2 + α - 1 = 0) (i : Fin 12) : q α (vert α i) = 0 := by
-  fin_cases i <;> simp [q, vert, iota] <;>
+  fin_cases i <;> simp only [q, vert, iota, Fin.reduceFinMk, Matrix.cons_val] <;>
     first | ring1 | linear_combination (-2 - α) * h | linear_combination (-1 - α) * h
 
 theorem sigma0_vert (i : Fin 12) : sigma0 (vert α i) = vert α (perm0 i) := by
@@ -138,7 +138,7 @@ theorem sigma0_vert (i : Fin 12) : sigma0 (vert α i) = vert α (perm0 i) := by
 theorem sigma1_vert (h : α ^ 2 + α - 1 = 0) (i : Fin 12) :
     sigma1 α (vert α i) = vert α (perm1 i) := by
   fin_cases i <;> refine Prod.ext ?_ (Prod.ext ?_ ?_) <;>
-    simp [sigma1, vert, iota, perm1] <;>
+    simp only [sigma1, vert, iota, perm1, Fin.reduceFinMk, Fin.isValue, Matrix.cons_val] <;>
     first | ring1 | linear_combination (-1 : R) * h | linear_combination h
 
 theorem sigma2_vert (i : Fin 12) : sigma2 (vert α i) = vert α (perm2 i) := by
@@ -148,7 +148,8 @@ theorem sigma2_vert (i : Fin 12) : sigma2 (vert α i) = vert α (perm2 i) := by
 /-- The thirty edges have `q₀ = 1` (the normalisation of page 75). -/
 theorem q0_edge (h : α ^ 2 + α - 1 = 0) (e : Fin 30) :
     q0 α (vert α (edge e).2 - vert α (edge e).1) = 1 := by
-  fin_cases e <;> simp [q0, vert, iota, edge] <;>
+  fin_cases e <;> simp only [q0, vert, iota, edge, Fin.reduceFinMk, Fin.isValue, Matrix.cons_val,
+    Prod.fst_sub, Prod.snd_sub] <;>
     first | ring1 | linear_combination (-α) * h | linear_combination (1 + α) * h
 
 /-- Page 94: the nine vertices off the face `(s₀, s₁, s₂)` have a unit `z`-coordinate,
@@ -214,22 +215,13 @@ theorem sigmaOf_plane (k : Fin 3) {p r u w : R × R × R} (H : InPlane p r u w) 
     Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at hst
   obtain ⟨h1, h2, h3⟩ := hst
   refine ⟨s, t, ?_⟩
-  fin_cases k
-  · show sigma0 p - sigma0 r = s • (sigma0 u - sigma0 r) + t • (sigma0 w - sigma0 r)
-    simp only [sigma0, Prod.ext_iff, Prod.fst_sub,
-      Prod.snd_sub, Prod.fst_add, Prod.snd_add, Prod.smul_fst, Prod.smul_snd, smul_eq_mul]
-    exact ⟨by linear_combination -h1 - h2 - h3, by linear_combination h2,
+  fin_cases k <;> simp only [sigmaOf, Fin.reduceFinMk, Matrix.cons_val, sigma0, sigma1, sigma2,
+    Prod.ext_iff, Prod.fst_sub, Prod.snd_sub, Prod.fst_add, Prod.snd_add, Prod.smul_fst,
+    Prod.smul_snd, smul_eq_mul]
+  · exact ⟨by linear_combination -h1 - h2 - h3, by linear_combination h2, by linear_combination h3⟩
+  · exact ⟨by linear_combination h2 + (-1 - α) * h3, by linear_combination h1 - (-1 - α) * h3,
       by linear_combination h3⟩
-  · show sigma1 α p - sigma1 α r = s • (sigma1 α u - sigma1 α r) + t • (sigma1 α w - sigma1 α r)
-    simp only [sigma1, Prod.ext_iff, Prod.fst_sub,
-      Prod.snd_sub, Prod.fst_add, Prod.snd_add, Prod.smul_fst, Prod.smul_snd, smul_eq_mul]
-    exact ⟨by linear_combination h2 + (-1 - α) * h3, by linear_combination h1 - (-1 - α) * h3,
-      by linear_combination h3⟩
-  · show sigma2 p - sigma2 r = s • (sigma2 u - sigma2 r) + t • (sigma2 w - sigma2 r)
-    simp only [sigma2, Prod.ext_iff, Prod.fst_sub,
-      Prod.snd_sub, Prod.fst_add, Prod.snd_add, Prod.smul_fst, Prod.smul_snd, smul_eq_mul]
-    exact ⟨by linear_combination h1, by linear_combination h3,
-      by linear_combination h2⟩
+  · exact ⟨by linear_combination h1, by linear_combination h3, by linear_combination h2⟩
 
 theorem sigmaOf_line (k : Fin 3) {p r u : R × R × R} (H : OnLine p r u) :
     OnLine (sigmaOf α k p) (sigmaOf α k r) (sigmaOf α k u) := by
@@ -244,9 +236,7 @@ theorem plane_of_word (h : α ^ 2 + α - 1 = 0) (w : List (Fin 3)) {m a b c : Fi
   induction w with
   | nil => exact H
   | cons k w ih =>
-    have := sigmaOf_plane (α := α) k ih
-    simp only [sigmaOf_vert h] at this
-    exact this
+    simpa only [sigmaOf_vert h, app, List.foldr_cons] using sigmaOf_plane (α := α) k ih
 
 theorem line_of_word (h : α ^ 2 + α - 1 = 0) (w : List (Fin 3)) {i j k : Fin 12}
     (H : OnLine (vert α k) (vert α i) (vert α j)) :
@@ -254,18 +244,14 @@ theorem line_of_word (h : α ^ 2 + α - 1 = 0) (w : List (Fin 3)) {i j k : Fin 1
   induction w with
   | nil => exact H
   | cons c w ih =>
-    have := sigmaOf_line (α := α) c ih
-    simp only [sigmaOf_vert h] at this
-    exact this
+    simpa only [sigmaOf_vert h, app, List.foldr_cons] using sigmaOf_line (α := α) c ih
 
 theorem eq_of_word (h : α ^ 2 + α - 1 = 0) (w : List (Fin 3)) {i j : Fin 12}
     (H : vert α i = vert α j) : vert α (app w i) = vert α (app w j) := by
   induction w with
   | nil => exact H
   | cons c w ih =>
-    have := congrArg (sigmaOf α c) ih
-    simp only [sigmaOf_vert h] at this
-    exact this
+    simpa only [sigmaOf_vert h, app, List.foldr_cons] using congrArg (sigmaOf α c) ih
 
 theorem app_injective (w : List (Fin 3)) : Function.Injective (app w) := by
   have hp : ∀ k : Fin 3, Function.Injective (permOf k) := by
@@ -277,20 +263,54 @@ theorem app_injective (w : List (Fin 3)) : Function.Injective (app w) := by
 /-- For `i ≠ j`, a word sending `i` to `s₀` and `j` to `s₁`, `s''₃` or `ι s₀`. -/
 def pairWord : Fin 12 → Fin 12 → List (Fin 3) :=
   ![![[], [], [1], [1, 2], [1, 2, 1], [], [], [2, 1, 2, 1], [2, 1, 2], [2, 1], [2], [1, 2, 1, 2]],
-    ![[0], [], [1, 0], [1, 2, 0], [0], [1, 2, 1, 0], [2, 1, 2, 1, 0], [0], [2, 1, 2, 0], [2, 1, 0], [1, 2, 1, 2, 0], [2, 0]],
-    ![[0, 1], [0, 1, 0], [], [0, 1], [1, 2, 0, 1], [1, 2, 0, 1, 0], [2, 1, 2, 0, 1, 0], [2, 1, 2, 0, 1], [0, 1], [1, 2, 1, 2, 0, 1], [2, 0, 1, 0], [2, 0, 1]],
-    ![[0, 1, 2], [0, 1, 2, 0], [0, 1, 2], [], [2, 0, 1, 2], [2, 0, 1, 2, 0], [2, 1, 2, 0, 1, 2, 0], [2, 1, 2, 0, 1, 2], [1, 2, 1, 2, 0, 1, 2], [0, 1, 2], [1, 2, 0, 1, 2, 0], [1, 2, 0, 1, 2]],
-    ![[0, 1, 2, 1], [0, 1, 2, 1], [0, 1, 2, 0, 1], [2, 0, 1, 2, 1], [], [2, 0, 1, 2, 0, 1], [2, 1, 2, 0, 1, 2, 0, 1], [1, 2, 1, 2, 0, 1, 2, 1], [2, 1, 2, 0, 1, 2, 1], [1, 2, 0, 1, 2, 0, 1], [0, 1, 2, 1], [1, 2, 0, 1, 2, 1]],
-    ![[0, 1, 2, 1, 0], [0, 1, 2, 1, 0], [0, 1, 2, 0, 1, 0], [2, 0, 1, 2, 1, 0], [2, 0, 1, 2, 0, 1, 0], [], [1, 2, 1, 2, 0, 1, 2, 1, 0], [2, 1, 2, 0, 1, 2, 0, 1, 0], [2, 1, 2, 0, 1, 2, 1, 0], [1, 2, 0, 1, 2, 0, 1, 0], [1, 2, 0, 1, 2, 1, 0], [0, 1, 2, 1, 0]],
-    ![[0, 1, 2, 1, 2, 0, 1, 2, 1, 0], [0, 1, 2, 1, 2, 0, 1, 2, 1, 0], [0, 1, 2, 1, 2, 0, 1, 2, 0, 1, 0], [2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 1, 0], [2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 0], [0, 1, 2, 1, 2, 0, 1, 2, 1, 0], [], [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 0], [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 1, 0], [0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 0], [0, 1, 2, 0, 1, 2, 0, 1, 2, 1, 0], [2, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 1, 0]],
-    ![[0, 1, 2, 1, 2, 0, 1, 2, 1], [0, 1, 2, 1, 2, 0, 1, 2, 1], [0, 1, 2, 1, 2, 0, 1, 2, 0, 1], [2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 1], [0, 1, 2, 1, 2, 0, 1, 2, 1], [2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1], [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1], [], [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 1], [0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1], [2, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 1], [0, 1, 2, 0, 1, 2, 0, 1, 2, 1]],
-    ![[0, 1, 2, 1, 2, 0, 1, 2], [0, 1, 2, 1, 2, 0, 1, 2, 0], [0, 1, 2, 1, 2, 0, 1, 2], [0, 1, 2, 1, 2, 0, 1, 2], [2, 0, 1, 2, 0, 1, 2, 0, 1, 2], [2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0], [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0], [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2], [], [2, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2], [0, 1, 2, 0, 1, 2, 0, 1, 2, 0], [0, 1, 2, 0, 1, 2, 0, 1, 2]],
-    ![[0, 1, 2, 1, 2, 0, 1], [0, 1, 2, 1, 2, 0, 1, 0], [0, 1, 2, 1, 2, 0, 1], [0, 1, 2, 1, 2, 0, 1], [0, 1, 2, 0, 1, 2, 0, 1], [0, 1, 2, 0, 1, 2, 0, 1, 0], [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 0], [1, 2, 0, 1, 2, 0, 1, 2, 0, 1], [2, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1], [], [2, 0, 1, 2, 0, 1, 2, 0, 1, 0], [2, 0, 1, 2, 0, 1, 2, 0, 1]],
-    ![[0, 1, 2, 1, 2, 0], [0, 1, 2, 1, 2, 0], [0, 1, 2, 1, 2, 1, 0], [0, 1, 2, 0, 1, 2, 0], [0, 1, 2, 1, 2, 0], [0, 1, 2, 0, 1, 2, 1, 0], [1, 2, 0, 1, 2, 0, 1, 2, 1, 0], [2, 1, 2, 0, 1, 2, 0, 1, 2, 0], [1, 2, 0, 1, 2, 0, 1, 2, 0], [2, 0, 1, 2, 0, 1, 2, 1, 0], [], [2, 0, 1, 2, 0, 1, 2, 0]],
-    ![[0, 1, 2, 1, 2], [0, 1, 2, 1, 2], [0, 1, 2, 1, 2, 1], [0, 1, 2, 0, 1, 2], [0, 1, 2, 0, 1, 2, 1], [0, 1, 2, 1, 2], [2, 1, 2, 0, 1, 2, 0, 1, 2], [1, 2, 0, 1, 2, 0, 1, 2, 1], [1, 2, 0, 1, 2, 0, 1, 2], [2, 0, 1, 2, 0, 1, 2, 1], [2, 0, 1, 2, 0, 1, 2], []]]
+    ![[0], [], [1, 0], [1, 2, 0], [0], [1, 2, 1, 0], [2, 1, 2, 1, 0], [0], [2, 1, 2, 0], [2, 1, 0],
+      [1, 2, 1, 2, 0], [2, 0]],
+    ![[0, 1], [0, 1, 0], [], [0, 1], [1, 2, 0, 1], [1, 2, 0, 1, 0], [2, 1, 2, 0, 1, 0],
+      [2, 1, 2, 0, 1], [0, 1], [1, 2, 1, 2, 0, 1], [2, 0, 1, 0], [2, 0, 1]],
+    ![[0, 1, 2], [0, 1, 2, 0], [0, 1, 2], [], [2, 0, 1, 2], [2, 0, 1, 2, 0], [2, 1, 2, 0, 1, 2, 0],
+      [2, 1, 2, 0, 1, 2], [1, 2, 1, 2, 0, 1, 2], [0, 1, 2], [1, 2, 0, 1, 2, 0], [1, 2, 0, 1, 2]],
+    ![[0, 1, 2, 1], [0, 1, 2, 1], [0, 1, 2, 0, 1], [2, 0, 1, 2, 1], [], [2, 0, 1, 2, 0, 1],
+      [2, 1, 2, 0, 1, 2, 0, 1], [1, 2, 1, 2, 0, 1, 2, 1], [2, 1, 2, 0, 1, 2, 1],
+      [1, 2, 0, 1, 2, 0, 1], [0, 1, 2, 1], [1, 2, 0, 1, 2, 1]],
+    ![[0, 1, 2, 1, 0], [0, 1, 2, 1, 0], [0, 1, 2, 0, 1, 0], [2, 0, 1, 2, 1, 0],
+      [2, 0, 1, 2, 0, 1, 0], [], [1, 2, 1, 2, 0, 1, 2, 1, 0], [2, 1, 2, 0, 1, 2, 0, 1, 0],
+      [2, 1, 2, 0, 1, 2, 1, 0], [1, 2, 0, 1, 2, 0, 1, 0], [1, 2, 0, 1, 2, 1, 0], [0, 1, 2, 1, 0]],
+    ![[0, 1, 2, 1, 2, 0, 1, 2, 1, 0], [0, 1, 2, 1, 2, 0, 1, 2, 1, 0],
+      [0, 1, 2, 1, 2, 0, 1, 2, 0, 1, 0], [2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 1, 0],
+      [2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 0], [0, 1, 2, 1, 2, 0, 1, 2, 1, 0], [],
+      [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 0], [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 1, 0],
+      [0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 0], [0, 1, 2, 0, 1, 2, 0, 1, 2, 1, 0],
+      [2, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 1, 0]],
+    ![[0, 1, 2, 1, 2, 0, 1, 2, 1], [0, 1, 2, 1, 2, 0, 1, 2, 1], [0, 1, 2, 1, 2, 0, 1, 2, 0, 1],
+      [2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 1], [0, 1, 2, 1, 2, 0, 1, 2, 1],
+      [2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1], [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1], [],
+      [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 1], [0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1],
+      [2, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 1], [0, 1, 2, 0, 1, 2, 0, 1, 2, 1]],
+    ![[0, 1, 2, 1, 2, 0, 1, 2], [0, 1, 2, 1, 2, 0, 1, 2, 0], [0, 1, 2, 1, 2, 0, 1, 2],
+      [0, 1, 2, 1, 2, 0, 1, 2], [2, 0, 1, 2, 0, 1, 2, 0, 1, 2], [2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0],
+      [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0], [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2], [],
+      [2, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2], [0, 1, 2, 0, 1, 2, 0, 1, 2, 0],
+      [0, 1, 2, 0, 1, 2, 0, 1, 2]],
+    ![[0, 1, 2, 1, 2, 0, 1], [0, 1, 2, 1, 2, 0, 1, 0], [0, 1, 2, 1, 2, 0, 1], [0, 1, 2, 1, 2, 0, 1],
+      [0, 1, 2, 0, 1, 2, 0, 1], [0, 1, 2, 0, 1, 2, 0, 1, 0], [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 0],
+      [1, 2, 0, 1, 2, 0, 1, 2, 0, 1], [2, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1], [],
+      [2, 0, 1, 2, 0, 1, 2, 0, 1, 0], [2, 0, 1, 2, 0, 1, 2, 0, 1]],
+    ![[0, 1, 2, 1, 2, 0], [0, 1, 2, 1, 2, 0], [0, 1, 2, 1, 2, 1, 0], [0, 1, 2, 0, 1, 2, 0],
+      [0, 1, 2, 1, 2, 0], [0, 1, 2, 0, 1, 2, 1, 0], [1, 2, 0, 1, 2, 0, 1, 2, 1, 0],
+      [2, 1, 2, 0, 1, 2, 0, 1, 2, 0], [1, 2, 0, 1, 2, 0, 1, 2, 0], [2, 0, 1, 2, 0, 1, 2, 1, 0], [],
+      [2, 0, 1, 2, 0, 1, 2, 0]],
+    ![[0, 1, 2, 1, 2], [0, 1, 2, 1, 2], [0, 1, 2, 1, 2, 1], [0, 1, 2, 0, 1, 2],
+      [0, 1, 2, 0, 1, 2, 1], [0, 1, 2, 1, 2], [2, 1, 2, 0, 1, 2, 0, 1, 2],
+      [1, 2, 0, 1, 2, 0, 1, 2, 1], [1, 2, 0, 1, 2, 0, 1, 2], [2, 0, 1, 2, 0, 1, 2, 1],
+      [2, 0, 1, 2, 0, 1, 2], []]]
 /-- A word sending the face `f`, in order, to `(s₀, s₁, s₂)`. -/
 def faceWord : Fin 20 → List (Fin 3) :=
-  ![[], [2], [2, 1], [2, 1, 2], [2, 1, 2, 1], [2, 1, 0], [2, 1, 2, 0], [2, 1, 2, 1, 0], [2, 1, 2, 0, 1], [2, 1, 2, 0, 1, 0], [1, 2, 1, 2, 0, 1, 2, 0], [1, 2, 1, 2, 0, 1, 2], [1, 2, 1, 2, 0, 1, 2, 0, 1], [1, 2, 1, 2, 0, 1, 2, 1], [1, 2, 1, 2, 0, 1, 2, 0, 1, 0], [1, 2, 1, 2, 0, 1, 2, 1, 0], [2, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 0], [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 0], [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 1, 0], [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 1]]
+  ![[], [2], [2, 1], [2, 1, 2], [2, 1, 2, 1], [2, 1, 0], [2, 1, 2, 0], [2, 1, 2, 1, 0],
+    [2, 1, 2, 0, 1], [2, 1, 2, 0, 1, 0], [1, 2, 1, 2, 0, 1, 2, 0], [1, 2, 1, 2, 0, 1, 2],
+    [1, 2, 1, 2, 0, 1, 2, 0, 1], [1, 2, 1, 2, 0, 1, 2, 1], [1, 2, 1, 2, 0, 1, 2, 0, 1, 0],
+    [1, 2, 1, 2, 0, 1, 2, 1, 0], [2, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 0],
+    [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 0], [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 1, 0],
+    [1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 1]]
 
 theorem pairWord_spec : ∀ i j : Fin 12, i ≠ j → app (pairWord i j) i = 0 ∧
     (app (pairWord i j) j = 1 ∨ app (pairWord i j) j = 5 ∨ app (pairWord i j) j = 6) := by
@@ -302,293 +322,71 @@ theorem faceWord_spec : ∀ f : Fin 20, app (faceWord f) (face f).1 = 0 ∧
 
 variable [Nontrivial R]
 
-private theorem bl_1_2 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 2 ≠ a • vert α 1 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1) * (0 * h1 - (1) * h2) + 0 * h)
-
-private theorem bl_1_3 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 3 ≠ a • vert α 1 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1) * (0 * h1 - (1) * h3) + 0 * h)
-
-private theorem bl_1_4 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 4 ≠ a • vert α 1 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 * α) * (0 * h1 - (1) * h2) + (-1) * h)
-
-private theorem bl_1_5 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 5 ≠ a • vert α 1 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 * α) * (0 * h1 - (1) * h2) + (-1) * h)
-
-private theorem bl_1_6 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 6 ≠ a • vert α 1 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 + α) * (0 * h1 - (1) * h2) + (1) * h)
-
-private theorem bl_1_7 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 7 ≠ a • vert α 1 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 + α) * (0 * h1 - (1) * h2) + (1) * h)
-
-private theorem bl_1_8 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 8 ≠ a • vert α 1 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 * α) * (0 * h1 - (1) * h2) + (-1) * h)
-
-private theorem bl_1_9 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 9 ≠ a • vert α 1 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 + α) * (0 * h1 - (1) * h2) + (1) * h)
-
-private theorem bl_1_10 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 10 ≠ a • vert α 1 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1) * (0 * h1 - (1) * h2) + 0 * h)
-
-private theorem bl_1_11 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 11 ≠ a • vert α 1 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1) * (0 * h1 - (1) * h2) + 0 * h)
-
 theorem base_line_1 (h : α ^ 2 + α - 1 = 0) (k : Fin 12) (hk0 : k ≠ 0) (hkj : k ≠ 1)
     (a : R) : vert α k ≠ a • vert α 1 := by
-  fin_cases k
+  intro H
+  have h1 := congrArg Prod.fst H
+  have h2 := congrArg (fun p => p.2.1) H
+  have h3 := congrArg (fun p => p.2.2) H
+  apply one_ne_zero (α := R)
+  fin_cases k <;> simp only [vert, iota, Fin.reduceFinMk, Fin.isValue, Matrix.cons_val,
+    Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
   · exact absurd rfl hk0
   · exact absurd rfl hkj
-  · exact bl_1_2 h a
-  · exact bl_1_3 h a
-  · exact bl_1_4 h a
-  · exact bl_1_5 h a
-  · exact bl_1_6 h a
-  · exact bl_1_7 h a
-  · exact bl_1_8 h a
-  · exact bl_1_9 h a
-  · exact bl_1_10 h a
-  · exact bl_1_11 h a
-
-private theorem bl_5_1 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 1 ≠ a • vert α 5 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (α) * ((1 + α) * h1 - 0 * h2) + (-1) * h)
-
-private theorem bl_5_2 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 2 ≠ a • vert α 5 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (1) * ((1) * h2 - (1 + α) * h3) + 0 * h)
-
-private theorem bl_5_3 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 3 ≠ a • vert α 5 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 * α) * ((1) * h2 - (1 + α) * h3) + (-1) * h)
-
-private theorem bl_5_4 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 4 ≠ a • vert α 5 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 + α) * ((1 + α) * h1 - 0 * h2) + (α) * h)
-
-private theorem bl_5_6 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 6 ≠ a • vert α 5 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 + α) * ((1 + α) * h1 - 0 * h2) + (α) * h)
-
-private theorem bl_5_7 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 7 ≠ a • vert α 5 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (1 + -2 * α) * ((1 + α) * h1 - 0 * h2) + (-3 + -2 * α) * h)
-
-private theorem bl_5_8 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 8 ≠ a • vert α 5 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 + α) * ((1 + α) * h1 - 0 * h2) + (α) * h)
-
-private theorem bl_5_9 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 9 ≠ a • vert α 5 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 + α) * ((1 + α) * h1 - 0 * h2) + (α) * h)
-
-private theorem bl_5_10 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 10 ≠ a • vert α 5 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 * α) * ((1) * h2 - (1 + α) * h3) + (-1 + -1 * α) * h)
-
-private theorem bl_5_11 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 11 ≠ a • vert α 5 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 + α) * ((1 + α) * h1 - 0 * h2) + (α) * h)
+  · linear_combination h2
+  · linear_combination h3
+  · linear_combination α * h2 - h
+  · linear_combination α * h2 - h
+  · linear_combination (1 - α) * h2 + h
+  · linear_combination (1 - α) * h2 + h
+  · linear_combination α * h2 - h
+  · linear_combination (1 - α) * h2 + h
+  · linear_combination h2
+  · linear_combination h2
 
 theorem base_line_5 (h : α ^ 2 + α - 1 = 0) (k : Fin 12) (hk0 : k ≠ 0) (hkj : k ≠ 5)
     (a : R) : vert α k ≠ a • vert α 5 := by
-  fin_cases k
+  intro H
+  have h1 := congrArg Prod.fst H
+  have h2 := congrArg (fun p => p.2.1) H
+  have h3 := congrArg (fun p => p.2.2) H
+  apply one_ne_zero (α := R)
+  fin_cases k <;> simp only [vert, iota, Fin.reduceFinMk, Fin.isValue, Matrix.cons_val,
+    Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
   · exact absurd rfl hk0
-  · exact bl_5_1 h a
-  · exact bl_5_2 h a
-  · exact bl_5_3 h a
-  · exact bl_5_4 h a
+  · linear_combination α * (1 + α) * h1 - h
+  · linear_combination h2 - (1 + α) * h3
+  · linear_combination -α * (h2 - (1 + α) * h3) - h
+  · linear_combination (α - 1) * (1 + α) * h1 + α * h
   · exact absurd rfl hkj
-  · exact bl_5_6 h a
-  · exact bl_5_7 h a
-  · exact bl_5_8 h a
-  · exact bl_5_9 h a
-  · exact bl_5_10 h a
-  · exact bl_5_11 h a
-
-private theorem bl_6_1 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 1 ≠ a • vert α 6 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (1 + -1 * α) * ((2 + α) * h1 - (-1 + -1 * α) * h2) + (1) * h)
-
-private theorem bl_6_2 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 2 ≠ a • vert α 6 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (α) * ((2 + α) * h1 - (-1 + -1 * α) * h2) + (-1) * h)
-
-private theorem bl_6_3 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 3 ≠ a • vert α 6 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (α) * ((2 + α) * h1 - (-1 + -1 * α) * h3) + (-1) * h)
-
-private theorem bl_6_4 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 4 ≠ a • vert α 6 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 * α) * ((2 + α) * h1 - (-1 + -1 * α) * h2) + (-1) * h)
-
-private theorem bl_6_5 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 5 ≠ a • vert α 6 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (1 + -1 * α) * ((2 + α) * h1 - (-1 + -1 * α) * h2) + (α) * h)
-
-private theorem bl_6_7 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 7 ≠ a • vert α 6 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 + α) * ((2 + α) * h1 - (-1 + -1 * α) * h2) + (1) * h)
-
-private theorem bl_6_8 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 8 ≠ a • vert α 6 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 * α) * ((2 + α) * h1 - (-1 + -1 * α) * h2) + (-1) * h)
-
-private theorem bl_6_9 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 9 ≠ a • vert α 6 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 * α) * ((2 + α) * h1 - (-1 + -1 * α) * h3) + (-1) * h)
-
-private theorem bl_6_10 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 10 ≠ a • vert α 6 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (α) * ((2 + α) * h1 - (-1 + -1 * α) * h2) + (-1) * h)
-
-private theorem bl_6_11 (h : α ^ 2 + α - 1 = 0) (a : R) : vert α 11 ≠ a • vert α 6 := by
-  intro H
-  have h1 := congrArg Prod.fst H
-  have h2 := congrArg (fun p => p.2.1) H
-  have h3 := congrArg (fun p => p.2.2) H
-  simp only [vert, iota, Matrix.cons_val, Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
-  exact one_ne_zero (show (1 : R) = 0 by linear_combination (-1 + α) * ((2 + α) * h1 - (-1 + -1 * α) * h2) + (α) * h)
+  · linear_combination (α - 1) * (1 + α) * h1 + α * h
+  · linear_combination (1 - 2 * α) * (1 + α) * h1 - (3 + 2 * α) * h
+  · linear_combination (α - 1) * (1 + α) * h1 + α * h
+  · linear_combination (α - 1) * (1 + α) * h1 + α * h
+  · linear_combination -α * (h2 - (1 + α) * h3) - (1 + α) * h
+  · linear_combination (α - 1) * (1 + α) * h1 + α * h
 
 theorem base_line_6 (h : α ^ 2 + α - 1 = 0) (k : Fin 12) (hk0 : k ≠ 0) (hkj : k ≠ 6)
     (a : R) : vert α k ≠ a • vert α 6 := by
-  fin_cases k
+  intro H
+  have h1 := congrArg Prod.fst H
+  have h2 := congrArg (fun p => p.2.1) H
+  have h3 := congrArg (fun p => p.2.2) H
+  apply one_ne_zero (α := R)
+  fin_cases k <;> simp only [vert, iota, Fin.reduceFinMk, Fin.isValue, Matrix.cons_val,
+    Prod.smul_fst, Prod.smul_snd, smul_eq_mul] at h1 h2 h3
   · exact absurd rfl hk0
-  · exact bl_6_1 h a
-  · exact bl_6_2 h a
-  · exact bl_6_3 h a
-  · exact bl_6_4 h a
-  · exact bl_6_5 h a
+  · linear_combination (1 - α) * ((2 + α) * h1 + (1 + α) * h2) + h
+  · linear_combination α * ((2 + α) * h1 + (1 + α) * h2) - h
+  · linear_combination α * ((2 + α) * h1 + (1 + α) * h3) - h
+  · linear_combination -α * ((2 + α) * h1 + (1 + α) * h2) - h
+  · linear_combination (1 - α) * ((2 + α) * h1 + (1 + α) * h2) + α * h
   · exact absurd rfl hkj
-  · exact bl_6_7 h a
-  · exact bl_6_8 h a
-  · exact bl_6_9 h a
-  · exact bl_6_10 h a
-  · exact bl_6_11 h a
+  · linear_combination (α - 1) * ((2 + α) * h1 + (1 + α) * h2) + h
+  · linear_combination -α * ((2 + α) * h1 + (1 + α) * h2) - h
+  · linear_combination -α * ((2 + α) * h1 + (1 + α) * h3) - h
+  · linear_combination α * ((2 + α) * h1 + (1 + α) * h2) - h
+  · linear_combination (α - 1) * ((2 + α) * h1 + (1 + α) * h2) + α * h
 
 omit [Nontrivial R] in
 theorem vert_zero : vert α 0 = 0 := by simp [vert]
@@ -766,7 +564,8 @@ theorem card_proj : Nat.card (Projectivization (ZMod 5) V5) = 31 := by
   simp
 
 /-- Every vertex direction is one of the six. -/
-theorem vertDir_cover : ∀ i : Fin 12, ∃ k : Fin 6, ∃ a : ZMod 5, cv i = a • rep (.inl k) := by
+theorem vertDir_cover :
+    ∀ i : Fin 12, ∃ k : Fin 6, ∃ a : ZMod 5, cv i = a • rep (.inl k) := by
   decide +kernel
 
 /-- Each of the thirty edges is along one of the fifteen chosen edge directions. -/
