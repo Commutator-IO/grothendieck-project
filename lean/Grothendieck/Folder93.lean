@@ -9,6 +9,14 @@ import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
 import Mathlib.GroupTheory.FreeAbelianGroup
 import Mathlib.Algebra.Torsor.Defs
+import Mathlib.RingTheory.Derivation.Basic
+import Mathlib.Algebra.Polynomial.Derivative
+import Mathlib.Algebra.Polynomial.Degree.Lemmas
+import Mathlib.Algebra.Polynomial.Degree.SmallDegree
+import Mathlib.Data.Nat.Choose.Sum
+import Mathlib.Algebra.Algebra.Bilinear
+import Mathlib.Data.Int.GCD
+import Mathlib.Data.Nat.Choose.Dvd
 
 /-!
 # Folder 93, pages 72, 115–123: the Schwarzian difference with divided derivatives
@@ -850,3 +858,260 @@ end Derived
 end Torsor
 
 end Grothendieck.Folder93
+
+/-!
+## Pages 193–194 and 208: the `p`-curvature in rank one
+
+Over a commutative ring `A` of characteristic `p` with a derivation `D`, in `Module.End ℤ A`
+(`μ c` is multiplication by `c`):
+
+* `iterate_leibniz`, `pDerivation`: `Dᵖ` is again a derivation;
+* `jacobson`: `(D + μ a)ᵖ = Dᵖ + μ (aᵖ + D^{p-1} a)` (Jacobson's formula in rank one), proved by
+  differentiating `(D + t·μ a)ᵖ` in `t` (`Polynomial` over `Module.End ℤ A`);
+* `pCurvature_eq_zero`: if `y` is a unit with `D y + a y = 0`, the connection `∇ = D + a` with
+  form `ω = -dy/y` has `(∇_D)ᵖ = ∇_{Dᵖ}`: its `p`-curvature vanishes (the easy direction);
+* `jacobson_logDeriv`, `jacobson_logDeriv_of_pow_eq_zero`: hence `aᵖ + D^{p-1} a = -(Dᵖ y)/y`,
+  and `aᵖ + D^{p-1} a = 0` when `Dᵖ = 0`.
+-/
+
+namespace Grothendieck.Folder93.PCurvature
+
+open Finset Polynomial
+
+section CharLemmas
+
+variable {R : Type*} [Ring R] (p : ℕ) [hp : Fact p.Prime] (hR : (p : R) = 0)
+include hR
+
+theorem nsmul_choose_eq_zero {k : ℕ} (hk0 : k ≠ 0) (hkp : k < p) (z : R) :
+    p.choose k • z = 0 := by
+  obtain ⟨j, hj⟩ := Nat.Prime.dvd_choose_self hp.out hk0 hkp
+  rw [nsmul_eq_mul, hj, Nat.cast_mul, hR, zero_mul, zero_mul]
+
+theorem eq_zero_of_mul_natCast {n : ℕ} (hn0 : 0 < n) (hnp : n < p) {z : R}
+    (h : z * n = 0) : z = 0 := by
+  obtain ⟨k, -, hk⟩ := Nat.exists_mul_mod_eq_one_of_coprime
+    (Nat.coprime_of_lt_prime hn0.ne' hnp hp.out).symm (Nat.Prime.one_lt hp.out)
+  have h1 : ((n * k : ℕ) : R) = 1 := by
+    rw [← Nat.div_add_mod (n * k) p, hk, Nat.cast_add, Nat.cast_mul, hR, zero_mul, zero_add,
+      Nat.cast_one]
+  rw [← mul_one z, ← h1, Nat.cast_mul, ← mul_assoc, h, zero_mul]
+
+end CharLemmas
+
+section Abstract
+
+variable {A R : Type*} [Ring R] (M : A → R) (D : A → A) (L : R)
+  (hL : ∀ c, L * M c = M c * L + M (D c))
+include hL
+
+/-- Leibniz's rule for `Lⁿ` against a family `M c` with `[L, M c] = M (D c)`. -/
+theorem pow_mul_eq_sum (n : ℕ) (c : A) :
+    L ^ n * M c = ∑ ij ∈ antidiagonal n, n.choose ij.1 • (M (D^[ij.1] c) * L ^ ij.2) := by
+  have key : ∀ x j, L * (M x * L ^ j) = M x * L ^ (j + 1) + M (D x) * L ^ j := fun x j => by
+    rw [← mul_assoc, hL, add_mul, mul_assoc, ← pow_succ']
+  induction n with
+  | zero => simp
+  | succ n ih =>
+    rw [sum_antidiagonal_choose_succ_nsmul (fun i j => M (D^[i] c) * L ^ j) n, pow_succ',
+      mul_assoc, ih, mul_sum]
+    simp only [mul_smul_comm, key, smul_add, sum_add_distrib, Function.iterate_succ_apply']
+    congr 1
+    refine sum_congr rfl fun ⟨i, j⟩ hij => ?_
+    rw [n.choose_symm_of_eq_add (mem_antidiagonal.1 hij).symm]
+
+variable (p : ℕ) [hp : Fact p.Prime] (hR : (p : R) = 0)
+include hR
+
+/-- In characteristic `p`, `[Lᵖ, M c] = M (Dᵖ c)`. -/
+theorem pow_char_mul (c : A) : L ^ p * M c = M c * L ^ p + M (D^[p] c) := by
+  rw [pow_mul_eq_sum M D L hL, Nat.sum_antidiagonal_eq_sum_range_succ
+    (fun i j => p.choose i • (M (D^[i] c) * L ^ j)), sum_range_succ', sum_eq_single (p - 1)]
+  · simp [Nat.sub_add_cancel (Nat.Prime.one_le hp.out), add_comm]
+  · intro k hk hne
+    exact nsmul_choose_eq_zero p hR (Nat.succ_ne_zero k) (by simp at hk; omega) _
+  · intro h; simp at h; have := (Nat.Prime.one_le hp.out); omega
+
+/-- In characteristic `p`, `∑ᵢ Lⁱ (M c) L^{p-1-i} = M (D^{p-1} c)`. -/
+theorem sum_pow_mul_pow (c : A) :
+    ∑ i ∈ range p, L ^ i * M c * L ^ (p - 1 - i) = M (D^[p - 1] c) := by
+  have hs : ∀ n k, ∑ i ∈ range n, i.choose k = n.choose (k + 1) := fun n k => by
+    induction n with
+    | zero => simp
+    | succ n ih => rw [sum_range_succ, ih, Nat.choose_succ_succ', add_comm]
+  have step : ∀ i ∈ range p, L ^ i * M c * L ^ (p - 1 - i) =
+      ∑ k ∈ range p, i.choose k • (M (D^[k] c) * L ^ (p - 1 - k)) := by
+    intro i hi
+    rw [mem_range] at hi
+    rw [pow_mul_eq_sum M D L hL, Nat.sum_antidiagonal_eq_sum_range_succ
+      (fun k j => i.choose k • (M (D^[k] c) * L ^ j)), sum_mul]
+    symm
+    rw [← sum_subset (range_subset_range.2 (by omega : i + 1 ≤ p)) fun k _ hk => by
+      rw [Nat.choose_eq_zero_of_lt (by simp at hk; omega), zero_smul]]
+    refine sum_congr rfl fun k hk => ?_
+    rw [mem_range] at hk
+    rw [smul_mul_assoc, mul_assoc, ← pow_add]
+    congr 3
+    omega
+  rw [sum_congr rfl step, sum_comm]
+  simp_rw [← sum_smul, hs]
+  rw [sum_eq_single (p - 1)]
+  · simp [Nat.sub_add_cancel (Nat.Prime.one_le hp.out)]
+  · intro k hk hne
+    exact nsmul_choose_eq_zero p hR (Nat.succ_ne_zero k) (by simp at hk; omega) _
+  · intro h; simp at h; have := (Nat.Prime.one_le hp.out); omega
+
+end Abstract
+
+section Ring
+
+variable {A : Type*} [CommRing A] (D : Derivation ℤ A A)
+
+local notation "μ" => LinearMap.mulLeft ℤ
+local notation "δ" => (D : Module.End ℤ A)
+
+/-- Leibniz's rule as an identity of operators: `D ∘ μ c = μ c ∘ D + μ (D c)`. -/
+theorem comm_mulLeft (c : A) :
+    (D : Module.End ℤ A) * μ c = μ c * (D : Module.End ℤ A) + μ (D c) := by
+  ext x; simp [Derivation.leibniz, smul_eq_mul]; ring
+
+variable (p : ℕ) [hp : Fact p.Prime] [CharP A p]
+
+omit hp in
+theorem natCast_end : ((p : ℕ) : Module.End ℤ A) = 0 := by
+  ext x; simp [Module.End.natCast_apply, nsmul_eq_mul]
+
+/-- **Statement 1.** In characteristic `p`, the iterate `Dᵖ` satisfies Leibniz's rule. -/
+theorem iterate_leibniz (x y : A) : D^[p] (x * y) = x * D^[p] y + D^[p] x * y := by
+  have := congrArg (· y) (pow_char_mul μ D (D : Module.End ℤ A) (comm_mulLeft D) p
+    (natCast_end p) x)
+  simpa [Module.End.pow_apply, mul_comm] using this
+
+/-- `Dᵖ` packaged as a derivation. -/
+def pDerivation : Derivation ℤ A A :=
+  Derivation.mk' ((D : Module.End ℤ A) ^ p) fun x y => by
+    simp [Module.End.pow_apply, iterate_leibniz, smul_eq_mul]; ring
+
+theorem pDerivation_apply (x : A) : pDerivation D p x = D^[p] x := by
+  simp [pDerivation, Module.End.pow_apply]
+
+/-- **Statement 2 (Jacobson's formula in rank one).** -/
+theorem jacobson (a : A) :
+    ((D : Module.End ℤ A) + μ a) ^ p = (D : Module.End ℤ A) ^ p + μ (a ^ p + D^[p - 1] a) := by
+  set q : (Module.End ℤ A)[X] := C δ + X * C (μ a) with hqdef
+  clear_value q
+  have hq : ∀ c, q * C (μ c) = C (μ c) * q + C (μ (D c)) := by
+    intro c
+    have hc : μ a * μ c = μ c * μ a := by ext x; simp; ring
+    have hX : C (μ c) * (X * C (μ a)) = X * (C (μ a) * C (μ c)) := by
+      rw [← mul_assoc, ← X_mul, mul_assoc, ← C_mul, ← C_mul, hc]
+    rw [hqdef, add_mul, mul_add, ← C_mul, comm_mulLeft, C_add, mul_assoc, hX, C_mul]
+    abel
+  have hP : ((p : ℕ) : (Module.End ℤ A)[X]) = 0 := by
+    rw [← map_natCast C, natCast_end, C_0]
+  have dq : derivative q = C (μ a) := by simp [hqdef]
+  have hdpow : ∀ n, derivative (q ^ n) = ∑ i ∈ range n, q ^ i * C (μ a) * q ^ (n - 1 - i) := by
+    intro n
+    induction n with
+    | zero => simp
+    | succ n ih =>
+      rw [pow_succ, derivative_mul, ih, dq, sum_range_succ, sum_mul]
+      refine congrArg₂ (· + ·) (sum_congr rfl fun i hi => ?_) ?_
+      · rw [mem_range] at hi
+        rw [mul_assoc, ← pow_succ, show n - 1 - i + 1 = n + 1 - 1 - i by omega]
+      · simp
+  have hd : derivative (q ^ p) = C (μ (D^[p - 1] a)) := by
+    rw [hdpow, sum_pow_mul_pow (fun c => C (μ c)) D q hq p hP a]
+  have hdeg : q.natDegree ≤ 1 := by
+    rw [hqdef, X_mul, add_comm]; exact natDegree_linear_le (a := μ a) (b := δ)
+  have ev : ∀ x : Module.End ℤ A, (∀ r, Commute r x) →
+      eval₂ (RingHom.id _) x (q ^ p) = (δ + μ a * x) ^ p := by
+    intro x hx
+    have := map_pow (eval₂RingHom' (RingHom.id _) x hx) q p
+    simpa [hqdef, eval₂_X_mul, (hx _).eq] using this
+  have key : q ^ p = C (δ ^ p) + C (μ (D^[p - 1] a)) * X + C (μ a ^ p) * X ^ p := by
+    ext n : 1
+    simp only [coeff_add, coeff_C, coeff_C_mul_X, coeff_C_mul_X_pow]
+    have hp2 := (Nat.Prime.two_le hp.out)
+    rcases lt_trichotomy n p with h | rfl | h
+    · rcases Nat.eq_zero_or_pos n with rfl | hn0
+      · rw [coeff_zero_eq_eval_zero, eval, ev 0 fun r => Commute.zero_right r]
+        simp; omega
+      · have hd' := congrArg (coeff · (n - 1)) hd
+        simp only [coeff_derivative, coeff_C, Nat.sub_add_cancel hn0] at hd'
+        by_cases hn1 : n = 1
+        · subst hn1; simpa [show (1 : ℕ) ≠ p by omega] using hd'
+        · simp only [show n - 1 ≠ 0 by omega, ite_false] at hd'
+          simp only [show n ≠ 0 by omega, hn1, show n ≠ p by omega, ite_false, add_zero]
+          refine eq_zero_of_mul_natCast p (natCast_end p) (z := (q ^ p).coeff n) hn0 h ?_
+          rwa [← Nat.cast_add_one, Nat.sub_add_cancel hn0] at hd'
+    · simp only [show n ≠ 0 by omega, show n ≠ 1 by omega, ite_false, ite_true, zero_add]
+      have hc := coeff_pow_of_natDegree_le (m := n) hdeg
+      rw [mul_one] at hc
+      rw [hc, hqdef]
+      simp
+    · rw [coeff_eq_zero_of_natDegree_lt (natDegree_pow_le.trans_lt (by nlinarith))]
+      simp only [show n ≠ 0 by omega, show n ≠ 1 by omega, show n ≠ p by omega, ite_false,
+        add_zero]
+  have h1 := ev 1 fun r => Commute.one_right r
+  rw [key, C_mul_X_pow_eq_monomial, C_mul_X_eq_monomial] at h1
+  simp only [eval₂_add, eval₂_C, eval₂_monomial, RingHom.id_apply, one_pow, mul_one] at h1
+  rw [← h1, LinearMap.pow_mulLeft]
+  ext x; simp; ring
+
+
+omit [CharP A p] in
+theorem iterate_one : D^[p] (1 : A) = 0 := by
+  obtain ⟨m, hm⟩ : ∃ m, p = m + 1 := ⟨p - 1, (Nat.sub_add_cancel (Nat.Prime.one_le hp.out)).symm⟩
+  rw [hm, Function.iterate_succ_apply, Derivation.map_one_eq_zero,
+    Function.iterate_fixed (map_zero D)]
+
+/-- **Statement 3 (the easy direction in rank one).** If the unit `y` is horizontal for the
+connection `D + a` on `A`, i.e. `D y + a y = 0`, then `(D + a)ᵖ = Dᵖ + ω(Dᵖ)` with
+`ω = -dy/y` the connection form: the `p`-curvature `(∇_D)ᵖ - ∇_{Dᵖ}` vanishes. -/
+theorem pCurvature_eq_zero (y z a : A) (hu : y * z = 1) (hy : D y + a * y = 0) :
+    (δ + μ a) ^ p = δ ^ p + μ (-(D^[p] y) * z) := by
+  have h1 : y * D z + z * D y = 0 := by
+    have := congrArg D hu
+    rw [Derivation.leibniz, Derivation.map_one_eq_zero, smul_eq_mul, smul_eq_mul] at this
+    linear_combination this
+  have hinv : μ z * μ y = 1 := by ext x; simp [← mul_assoc, mul_comm z y, hu]
+  have hconj : δ + μ a = μ y * δ * μ z := by
+    ext x
+    simp only [LinearMap.add_apply, Module.End.mul_apply, LinearMap.mulLeft_apply,
+      Derivation.coeFn_coe, Derivation.leibniz, smul_eq_mul]
+    linear_combination (-D x - a * x) * hu - x * h1 + x * z * hy
+  have hpow : ∀ n, (μ y * δ * μ z) ^ (n + 1) = μ y * δ ^ (n + 1) * μ z := by
+    intro n
+    induction n with
+    | zero => simp
+    | succ n ih =>
+      rw [pow_succ, ih, pow_succ δ (n + 1)]
+      calc μ y * δ ^ (n + 1) * μ z * (μ y * δ * μ z)
+          = μ y * δ ^ (n + 1) * (μ z * μ y) * δ * μ z := by
+            simp only [mul_assoc]
+        _ = _ := by rw [hinv, mul_one]; simp only [mul_assoc]
+  have hl := iterate_leibniz D p y z
+  rw [hu, iterate_one] at hl
+  obtain ⟨m, hm⟩ : ∃ m, p = m + 1 := ⟨p - 1, (Nat.sub_add_cancel (Nat.Prime.one_le hp.out)).symm⟩
+  rw [hconj, hm, hpow, ← hm, mul_assoc,
+    pow_char_mul μ D δ (comm_mulLeft D) p (natCast_end p)]
+  ext x
+  simp [Module.End.pow_apply, mul_add]
+  linear_combination (D^[p] x) * hu - x * hl
+
+/-- Statements 2 and 3 together: `a ^ p + D^{p-1} a = -(Dᵖ y)/y` for `a = -Dy/y`. -/
+theorem jacobson_logDeriv (y z a : A) (hu : y * z = 1) (hy : D y + a * y = 0) :
+    a ^ p + D^[p - 1] a = -(D^[p] y) * z := by
+  have h := congrArg (· 1) ((jacobson D p a).symm.trans (pCurvature_eq_zero D p y z a hu hy))
+  simpa [Module.End.pow_apply, iterate_one] using h
+
+/-- When `Dᵖ = 0` (as for `d/dX` on `𝔽_p(X)`), a logarithmic derivative `a = -Dy/y`
+satisfies `a ^ p + D^{p-1} a = 0`. -/
+theorem jacobson_logDeriv_of_pow_eq_zero (hD : ∀ x, D^[p] x = 0) (y z a : A) (hu : y * z = 1)
+    (hy : D y + a * y = 0) : a ^ p + D^[p - 1] a = 0 := by
+  rw [jacobson_logDeriv D p y z a hu hy, hD, neg_zero, zero_mul]
+
+end Ring
+
+end Grothendieck.Folder93.PCurvature
