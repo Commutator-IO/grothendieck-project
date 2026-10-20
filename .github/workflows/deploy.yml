@@ -211,6 +211,9 @@ jobs:
           # Transcriptions of Quillen's notebooks are shown only when this is
           # true (#36); unset, the Quillen page shows the Clay's facsimiles alone.
           VITE_RENDER_QUILLEN: ${{ vars.RENDER_QUILLEN == 'true' }}
+          # The review page (/review/) quotes a few words of the current reading
+          # for each check; with the transcriptions switched off it quotes none.
+          VITE_RENDER_TRANSCRIPTS: ${{ env.RENDER_TRANSCRIPTS }}
 
       # GitHub Pages drops the custom domain on deploy unless a CNAME file
       # sits at the root of the artifact. `public/CNAME` is copied verbatim by

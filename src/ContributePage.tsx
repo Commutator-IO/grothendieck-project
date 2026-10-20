@@ -79,6 +79,7 @@ export function ContributePage() {
 
         <Routes />
         <Comments />
+        <Review />
         <Skills />
         <RunABatch />
         <PullRequest />
@@ -170,6 +171,24 @@ function Comments() {
       <p className="prose-fonds mt-3">
         A useful report names the page, says what the reading has, and what you read on the
         facsimile instead. A doubt is worth sending too: say what makes you doubt.
+      </p>
+    </section>
+  );
+}
+
+/** The review page: the open checks of #35, one at a time. */
+function Review() {
+  return (
+    <section id="review" className="mt-14 max-w-[52em] scroll-mt-16">
+      <h2 className="titre text-[22px] text-ink-900">Checking readings against the page</h2>
+      <p className="prose-fonds mt-3">
+        If you read French handwriting, the <a href="/review/">review page</a> puts the open checks of
+        issue #35 in front of you one at a time: an unread or doubtful word, a date on a leaf, a
+        letter's writer, an insertion that may be his or ours. The question and a few words of the
+        current reading sit on the left, Montpellier's facsimile at that page on the right. Answer
+        « Reading is right », « I read something else », « Can't tell » or skip; your answers stay in
+        your browser until you send them, all at once, as a prefilled GitHub issue. No mathematics
+        is needed.
       </p>
     </section>
   );
