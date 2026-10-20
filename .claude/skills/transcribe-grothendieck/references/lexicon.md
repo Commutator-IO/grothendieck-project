@@ -42,7 +42,7 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | conditions | 1587 | choix | 451 | l'homomorphisme | 276 |
 | type | 1558 | diagramme | 448 | suivant | 275 |
 | non | 1535 | revient | 448 | filtration | 274 |
-| foncteur | 1529 | prop | 444 | ramené | 273 |
+| foncteur | 1528 | prop | 444 | ramené | 273 |
 | condition | 1496 | exacte | 440 | l'un | 272 |
 | d'où | 1453 | notons | 438 | vide | 272 |
 | donnée | 1326 | inverse | 437 | compatibles | 271 |
@@ -82,10 +82,10 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | d'ordre | 738 | sections | 374 | comp | 247 |
 | élément | 733 | satisfait | 372 | s'identifie | 247 |
 | modules | 724 | algèbre | 369 | ayant | 246 |
-| définit | 706 | fibré | 367 | opération | 246 |
+| définit | 706 | fibré | 366 | opération | 246 |
 | ex | 698 | figure | 365 | formes | 245 |
 | connexe | 670 | notion | 365 | picard | 245 |
-| lemme | 664 | régulier | 365 | quelconque | 245 |
+| lemme | 666 | régulier | 365 | quelconque | 245 |
 | prouver | 658 | sait | 365 | courbe | 244 |
 | opère | 657 | déduit | 364 | droites | 244 |
 | lisse | 656 | fonction | 364 | topologique | 244 |
