@@ -13,11 +13,11 @@ Densest batches, prose `\ill{}` only:
 - [x] 1 batch 5 — 719 · batch 2 — 572 · batch 4 — 548 — reviewed 2026-10-04: heavy crossings-out and struck text are on the page; nothing to correct
 - [x] 58 batch 1 — 689 · batch 2 — 570 — sampled on the facsimile by Michel Hua, 2026-10-20 (#61, 04126b3): batch 1 p. 4 « on partira d'une partie finie »; batch 2 p. 24 « utilisant » confirmed, p. 34 « $i = n-1, n$ » (#61: still illegible: batch 1 p. 8, two places, and p. 18)
 - [x] 154 batch 3 — 686 · batch 2 — 507 — sampled on the facsimile by Michel Hua, 2026-10-20 (#61, af4b11e): batch 3 p. 41 « tiré » confirmed, p. 44 « en termes », p. 45 « les systèmes affines correspondant »; batch 2 p. 37 « en modifiant un peu la définition » (#61: still illegible: batch 2 pp. 24, 30, 33)
-- [x] 62 batch 1 — 532 — sampled on the facsimile by Michel Hua, 2026-10-20 (#61, 9c8a671): p. 3 « d'équations … », p. 6 the illegible word is struck out
+- [x] 62 batch 1 — 532 — sampled on the facsimile by Michel Hua, 2026-10-20 (#61, 9c8a671): p. 3 « d'équations … », p. 6 the illegible word is struck out; (#70, 0387974): p. 12 « pour », p. 15 « et en supposant que $sx=-x$, » and « qui ici ne fait qu'exprimer que les solutions »
 - [ ] 161-2 batch 3 — 472
 - [ ] 10 batch 9 — 448
-- [ ] 101 batch 2 — 427
-- [x] 98 batch 2 — 410 — sampled on the facsimile by Michel Hua, 2026-10-20 (#63, 3163b7a): p. 23 « donc » confirmed (#63: still doubtful: p. 37 « sait »)
+- [x] 101 batch 2 — 427 — sampled on the facsimile by Michel Hua, 2026-10-20 (#70, 5434c20): p. 24 the doubtful « car » is not on the page; p. 28 no word, only a space; p. 35 « l'expression » (or « l'expansion »), still doubtful; p. 39 « donc (lemme) il est injectif » (#70: still illegible: p. 33)
+- [x] 98 batch 2 — 410 — sampled on the facsimile by Michel Hua, 2026-10-20 (#63, 3163b7a): p. 23 « donc » confirmed (#63: still doubtful: p. 37 « sait »); (#70, 0ffb0b1): p. 28 « cohérents », p. 34 « [lemme] », p. 36 « choisit »
 
 Rule: a word is filled in only where the ink supports it. `references/lexicon.md` narrows the candidates; it never settles one.
 
@@ -25,8 +25,8 @@ Rule: a word is filled in only where the ink supports it. `references/lexicon.md
 
 The macro that used to carry both senses was split by a rule on the file, not by a reading (238f80a): **529** uses glued to the word they complete became `\supplied{}` (ours), **5,615** standing free stayed `\add{}` (his). Both errors of the rule are ink questions:
 
-- [x] a free-standing `\add{}` that is in fact a supply — « = » expanded to « même », a parenthesis restored at a clipped edge, a word the page never had → make it `\supplied{}` — sampled on the facsimile by Michel Hua, 2026-10-20 (#63): seven free-standing insertions (7 p. 69, 34 p. 2, 74 p. 3, 84 p. 54, 145 p. 11, 156-1 p. 15, 161-2 p. 10) are all his; none is a supply
-- [x] a glued `\supplied{}` that is in fact his — an inserted prefix such as `\add{quasi-}torseur` → make it `\add{}` — sampled 2026-10-20 (#63, a272a52): 6 batch 1 p. 1 « R- » before « préschémas » is his, now `\add{}`
+- [x] a free-standing `\add{}` that is in fact a supply — « = » expanded to « même », a parenthesis restored at a clipped edge, a word the page never had → make it `\supplied{}` — sampled on the facsimile by Michel Hua, 2026-10-20 (#63): seven free-standing insertions (7 p. 69, 34 p. 2, 74 p. 3, 84 p. 54, 145 p. 11, 156-1 p. 15, 161-2 p. 10) are all his; none is a supply; (#70, 79bcfbc): 125 batch 1 p. 3 « de » is not on the page, now `\supplied{}`
+- [x] a glued `\supplied{}` that is in fact his — an inserted prefix such as `\add{quasi-}torseur` → make it `\add{}` — sampled 2026-10-20 (#63, a272a52): 6 batch 1 p. 1 « R- » before « préschémas » is his, now `\add{}`; (#70–71): 82 batch 3 p. 48 and 121 batch 1 p. 15 « sous- » are his, now `\add{}` (2aed13b, 0ba7bf3); 6 p. 8, 10 p. 60, 31 p. 15 are typed corrections, now plain text (57dd7f4, a9d6cc0, 0cd5a93); 55 p. 8 the « c » is not on the page (e942fae); 154 p. 87 confirmed a supply (#71: can't tell: 137 batch 2 p. 22)
 - [x] on the sixteen typescript batches where `\add{}` marks **his ink on a typed page** by declared convention (headers of 10 batches 2–4, 27 batch 1, 29 batches 5–6, 31 batch 2, 36 batch 1, 103 batch 1, 111 batch 1, 162-5 batch 3, among others): confirm the ink is his and not a typist's correction — sampled 2026-10-04: **27** batch 1 pp. 2-6 is a typist's ink (now plain text, 629df20); **36** batch 1 p. 2 pencil is his (05cf860); **135** Sính typescript ink is his (1633dd7); **111/162-5** « Tapis de Quillen » ink is his (d7b8a92). The other typescript batches keep the declared convention.
 
 ## 3. Dates written on the leaves — 160 records
