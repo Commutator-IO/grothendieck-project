@@ -90,8 +90,8 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | opère | 657 | déduit | 364 | droites | 244 |
 | lisse | 656 | fonction | 364 | topologique | 244 |
 | resp | 655 | réduit | 363 | clos | 243 |
-| foncteurs | 654 | espace | 358 | composé | 243 |
-| sommets | 654 | équivalentes | 357 | lorsque | 243 |
+| sommets | 654 | espace | 358 | composé | 243 |
+| foncteurs | 653 | équivalentes | 357 | lorsque | 243 |
 | l'image | 653 | doit | 356 | abélien | 239 |
 | voit | 644 | forment | 356 | admet | 239 |
 | extension | 632 | complexe | 355 | bis | 239 |
@@ -116,8 +116,8 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | pt | 551 | valeurs | 333 | savoir | 227 |
 | question | 549 | finies | 332 | applications | 226 |
 | signifie | 548 | graphe | 331 | complexes | 226 |
-| th | 548 | homomorphisme | 330 | montre | 226 |
-| morphismes | 546 | petit | 330 | fonctions | 225 |
+| th | 548 | homomorphisme | 330 | fonctions | 226 |
+| morphismes | 546 | petit | 330 | montre | 226 |
 | alg | 545 | flèches | 328 | évidemment | 224 |
 | application | 544 | donner | 325 | relative | 224 |
 | parties | 541 | engendré | 325 | projective | 222 |
@@ -235,7 +235,7 @@ Macros counted inside mathematics — what the notation of this fonds actually c
 | \subset | 4316 | \sim | 1487 | \varinjlim | 624 |
 | \beta | 3844 | \mapsto | 1486 | \bigcup | 598 |
 | \leq | 3719 | \emph | 1433 | \mathrel | 594 |
-| \Delta | 3624 | \psi | 1409 | \hookrightarrow | 592 |
+| \Delta | 3625 | \psi | 1409 | \hookrightarrow | 592 |
 | \tau | 3610 | \check | 1383 | \item | 584 |
 | \tilde | 3568 | \geq | 1359 | \supset | 573 |
 | \bigl | 3541 | \partial | 1294 | \colon | 571 |
