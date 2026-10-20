@@ -6626,7 +6626,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: 'matched',
     settle:
-      'Nothing to settle about novelty: the question is answered in Milnor 1962 and Bousfield–Kan IX. What remains is editorial — check the edition’s example against Milnor’s sequence with the two texts open, and recover the illegible word after π₀ on page 24 from the facsimile.',
+      'Nothing to settle about novelty: the question is answered in Milnor 1962 and Bousfield–Kan IX. What remains is editorial — check the edition’s example against Milnor’s sequence with the two texts open, and recover the illegible word after π₀ on page 24 from the facsimile. The edition’s argument and example (page 24) were read and found to hold by Michel Hua on 20 October 2026 (#62); the illegible word remains.',
   },
   {
     id: '107-relative-square-rectification',
