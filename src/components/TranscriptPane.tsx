@@ -9,6 +9,7 @@ import {
 } from '../lib/batches.ts';
 import { documentsFor, editionOf } from '../content/books.ts';
 import type { Edition, PaneView, TranscriptEntry } from '../lib/types.ts';
+import { attachNotes } from '../lib/notes.ts';
 
 /**
  * The transcript, rendered from LaTeX, in the left pane.
@@ -238,6 +239,57 @@ export function TranscriptPane({
       detach();
     };
   }, [present, isCommunity, url, onPage]);
+
+  /**
+   * Comments on a passage (src/lib/notes.ts). The reading view is a
+   * same-origin frame, so the selection is read in it and the panel drawn
+   * here. The page is the nearest \page marker above the selection. The
+   * modernised reading is one document for the folder, so its notes are
+   * scoped to the folder, not the batch.
+   */
+  useEffect(() => {
+    if (!present || isCommunity) return;
+    const el = frame.current;
+    if (!el) return;
+    let detach = () => {};
+    const attach = () => {
+      detach();
+      const doc = el.contentDocument;
+      const root = doc?.querySelector('.ltx_document');
+      if (!doc || !root) return;
+      const marks = Array.from(doc.querySelectorAll<HTMLElement>('[data-page]'));
+      const label = view === 'modern' ? `n° ${cote} · modernised reading` : `n° ${cote} · batch ${batch} · transcription`;
+      detach = attachNotes({
+        root,
+        scope: view === 'modern' ? `reading:${cote}:modern` : `reading:${cote}:${batch}:fr`,
+        title: label,
+        contextOf: (range) => {
+          let page: number | undefined;
+          for (const m of marks) {
+            if (m.compareDocumentPosition(range.startContainer) & Node.DOCUMENT_POSITION_FOLLOWING) {
+              const n = Number.parseInt(m.dataset.page ?? '', 10);
+              if (Number.isFinite(n)) page = n;
+            } else break;
+          }
+          return {
+            kind: 'reading',
+            label,
+            cote,
+            batch: view === 'modern' ? undefined : batch,
+            page,
+            edition: view,
+            link: `https://grothendieck.commutator.io/#${cote}/${batch}/${view}${page ? `/p${page}` : ''}`,
+          };
+        },
+      });
+    };
+    el.addEventListener('load', attach);
+    if (el.contentDocument?.readyState === 'complete') attach();
+    return () => {
+      el.removeEventListener('load', attach);
+      detach();
+    };
+  }, [present, isCommunity, url, view, cote, batch]);
 
   return (
     <section className="card mt-6 overflow-hidden">

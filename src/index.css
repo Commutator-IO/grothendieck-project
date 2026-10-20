@@ -150,3 +150,42 @@
     }
   }
 }
+
+/* Comments on a passage: see src/lib/notes.ts. The same tokens as the
+   « Report a reading » button — white, ink border, brand on hover. */
+::highlight(gn-note) { background-color: rgb(241 220 159 / 0.65); }
+.gn-ui { font-family: var(--font-sans); font-size: 13.5px; line-height: 1.5; color: var(--color-ink-800); }
+.gn-ui[hidden] { display: none; }
+.gn-fab { position: absolute; z-index: 60; padding: 0.35rem 0.85rem; border: 0; border-radius: 999px;
+  background: var(--color-brand-600); color: #fff; font-weight: 600; font-size: 12.5px; cursor: pointer;
+  box-shadow: 0 4px 14px rgb(19 18 16 / 0.18); }
+.gn-fab:hover { background: var(--color-brand-700); }
+.gn-fab-bottom { position: fixed; left: 50%; bottom: 1rem; top: auto; transform: translateX(-50%); }
+.gn-panel, .gn-list { position: fixed; z-index: 70; right: 1rem; bottom: 1rem; width: min(26rem, calc(100vw - 2rem));
+  max-height: min(80vh, 40rem); overflow: auto; background: #fff; border: 1px solid var(--color-ink-200);
+  border-radius: 12px; box-shadow: 0 12px 40px rgb(19 18 16 / 0.18); padding: 1rem; }
+.gn-quote { margin: 0 0 0.5rem; padding: 0.3rem 0.7rem; border-left: 3px solid var(--color-encours-200);
+  background: var(--color-encours-50); color: var(--color-ink-700); font-family: var(--font-serif); font-size: 14px; }
+.gn-where { margin: 0 0 0.45rem; color: var(--color-ink-500); font-size: 12px; font-weight: 500; }
+.gn-text { box-sizing: border-box; width: 100%; min-height: 6.5rem; padding: 0.5rem 0.65rem; resize: vertical;
+  border: 1px solid var(--color-ink-200); border-radius: 8px; font: inherit; }
+.gn-text:focus { outline: 2px solid var(--color-brand-400); outline-offset: 1px; }
+.gn-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+.gn-btn { padding: 0.35rem 0.7rem; border: 1px solid var(--color-ink-200); border-radius: 8px; background: #fff;
+  color: var(--color-ink-600); font: inherit; font-size: 12.5px; font-weight: 500; cursor: pointer; }
+.gn-btn:hover { border-color: var(--color-brand-400); color: var(--color-brand-700); }
+.gn-btn:focus-visible, .gn-fab:focus-visible, .gn-list-btn:focus-visible { outline: 2px solid var(--color-brand-400); outline-offset: 2px; }
+.gn-btn-primary { background: var(--color-brand-600); border-color: var(--color-brand-600); color: #fff; }
+.gn-btn-primary:hover { background: var(--color-brand-700); color: #fff; }
+.gn-btn-quiet { border-color: transparent; color: var(--color-ink-500); padding: 0.25rem 0.45rem; }
+.gn-hint { margin: 0.7rem 0 0; color: var(--color-ink-500); font-size: 12px; }
+.gn-list-btn { position: fixed; z-index: 50; right: 1rem; bottom: 1rem; padding: 0.4rem 0.8rem;
+  border: 1px solid var(--color-ink-200); border-radius: 999px; background: #fff; cursor: pointer;
+  box-shadow: 0 4px 14px rgb(19 18 16 / 0.08); font-weight: 600; font-size: 12.5px; color: var(--color-ink-600); }
+.gn-list-btn:hover { border-color: var(--color-brand-400); color: var(--color-brand-700); }
+.gn-list-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+.gn-item { border-top: 1px solid var(--color-ink-100); padding: 0.7rem 0 0.3rem; }
+.gn-comment { margin: 0.3rem 0 0; white-space: pre-wrap; }
+@media (max-width: 40rem) {
+  .gn-panel, .gn-list { left: 0.5rem; right: 0.5rem; bottom: 0.5rem; width: auto; }
+}

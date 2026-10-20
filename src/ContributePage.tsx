@@ -78,6 +78,7 @@ export function ContributePage() {
         </header>
 
         <Routes />
+        <Comments />
         <Skills />
         <RunABatch />
         <PullRequest />
@@ -141,6 +142,35 @@ function Routes() {
           </a>
         </div>
       ))}
+    </section>
+  );
+}
+
+/** Comments on a passage: src/lib/notes.ts. */
+function Comments() {
+  return (
+    <section id="comments" className="mt-14 max-w-[52em] scroll-mt-16">
+      <h2 className="titre text-[22px] text-ink-900">Commenting on a passage</h2>
+      <p className="prose-fonds mt-3">
+        Select a few words in a transcription or a modernised reading, on the Findings page (a
+        finding, an item in plain words, a Lean proof), on the Timeline (a proposed dating, a date
+        written on a leaf) or in the register of letters, then press <strong>Comment</strong>. On a
+        phone, long-press to select; the button appears at the foot of the screen. Every entry on
+        those pages also has its own Comment button, which needs no selection and works from the
+        keyboard; in a reading, Alt+C opens the comment once a passage is selected.
+      </p>
+      <p className="prose-fonds mt-3">
+        Write what you have to say, then choose. <strong>Keep as a note</strong> stores it in your
+        browser only: nothing is sent, the passage is highlighted, and the Notes button in the corner
+        lists your notes on the page. <strong>Open an issue on GitHub</strong> opens a prefilled
+        issue for you to submit; it needs a GitHub account, and the issue is public. So it carries
+        only a short quote of the passage — fifteen words at most from a reading or a letter — with
+        the shelfmark, the batch, the edition and the nearest page.
+      </p>
+      <p className="prose-fonds mt-3">
+        A useful report names the page, says what the reading has, and what you read on the
+        facsimile instead. A doubt is worth sending too: say what makes you doubt.
+      </p>
     </section>
   );
 }

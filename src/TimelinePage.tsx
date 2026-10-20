@@ -4,6 +4,8 @@ import { COTES } from './content/catalogue.ts';
 import datedRaw from './content/dated-leaves.json';
 import handRaw from './content/hand.json';
 import proposedRaw from './content/proposed-datings.json';
+import { CommentButton, commentData, useComments } from './components/Comments.tsx';
+import type { CommentContext } from './lib/report.ts';
 import { openEnd, parseDating, type Dating } from './lib/dating.ts';
 
 /**
@@ -572,6 +574,30 @@ function Ranges() {
 }
 
 /** Every proposed dating beside the inventory's, each piece of evidence with the line it rests on. */
+const SITE = 'https://grothendieck.commutator.io';
+const proposalCtx = (p: Proposal): CommentContext => ({
+  kind: 'dating',
+  label: `n° ${p.folder}: ${interval(p)} (${p.confidence} confidence)`,
+  cote: p.folder,
+  ref: p.folder,
+  details: [
+    `**Inventory** « ${p.inventory} »`,
+    `**Proposed** ${interval(p)}, ${p.confidence} confidence`,
+    ...p.evidence.map((e) => `- ${e.kind}: ${e.text} (${e.where})`),
+  ],
+  link: `${SITE}/timeline/#dating-${p.folder}`,
+});
+const leafCtx = (l: Leaf): CommentContext => ({
+  kind: 'leaf',
+  label: `n° ${l.folder}, p. ${l.page}: « ${l.written} »`,
+  cote: l.folder,
+  batch: l.batch,
+  page: Number.parseInt(l.page, 10) || undefined,
+  ref: `${l.folder}/p${l.page}`,
+  details: [`**Written** « ${l.written} »${l.iso ? ` → ${l.iso}` : ''}`, `**Kind** ${l.kind}, ${l.context}`, `**Source** ${l.where}`],
+  link: `${SITE}/#${l.folder}/${l.batch}/p${l.page}`,
+});
+
 function Proposals() {
   const drawn = new Set(ROWS.map((r) => r.id));
   const list = [...PROPOSALS].sort((a, b) => byShelfmark(a.folder, b.folder));
@@ -582,7 +608,7 @@ function Proposals() {
       </summary>
       <ul className="mt-2 space-y-2">
         {list.map((p) => (
-          <li key={p.folder}>
+          <li key={p.folder} id={`dating-${p.folder}`} className="scroll-mt-16" {...commentData(proposalCtx(p))}>
             <a href={`/#${p.folder}/1`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
               n° {p.folder}
             </a>{' '}
@@ -590,7 +616,8 @@ function Proposals() {
             <span className="tabular" style={{ color: PROP }}>
               {interval(p)}
             </span>{' '}
-            <span className="text-ink-400">· {p.confidence} confidence{drawn.has(p.folder) ? '' : ' · not drawn: the inventory gives no dating'}</span>
+            <span className="text-ink-400">· {p.confidence} confidence{drawn.has(p.folder) ? '' : ' · not drawn: the inventory gives no dating'}</span>{' '}
+            <CommentButton scope="timeline" ctx={proposalCtx(p)} text={p.summary} />
             <p>{p.summary}</p>
             <ul className="pl-4 text-ink-500">
               {p.evidence.map((e, i) => (
@@ -783,11 +810,12 @@ function Register() {
             <span className="tabular font-semibold text-ink-900">n° {f}</span>
             <ul className="pl-4">
               {ls.map((l, i) => (
-                <li key={i}>
+                <li key={i} {...commentData(leafCtx(l))}>
                   <a href={`/#${l.folder}/${l.batch}`} className="tabular hover:text-brand-700">
                     p. {l.page}
                   </a>{' '}
-                  « {l.written} » <span className="text-ink-400">— {l.kind}, {l.context} · {l.where}</span>
+                  « {l.written} » <span className="text-ink-400">— {l.kind}, {l.context} · {l.where}</span>{' '}
+                  <CommentButton scope="timeline" ctx={leafCtx(l)} text={`« ${l.written} » — ${l.context}`} />
                 </li>
               ))}
             </ul>
@@ -799,13 +827,14 @@ function Register() {
 }
 
 export function TimelinePage() {
+  const commentRoot = useComments<HTMLElement>('timeline', 'Timeline');
   const inferred = ROWS.filter((r) => !r.read).length;
   const foldersWithLeaves = new Set(LEAVES.map((l) => l.folder)).size;
   return (
     <>
       <Header path="/timeline/" />
 
-      <main className="mx-auto max-w-5xl px-5 py-12">
+      <main ref={commentRoot} className="mx-auto max-w-5xl px-5 py-12">
         <header className="max-w-[44em]">
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink-400">Timeline</p>
           <h1 className="titre mt-2 text-[30px] leading-tight text-ink-900">

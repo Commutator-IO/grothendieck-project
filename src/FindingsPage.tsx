@@ -8,6 +8,18 @@ import { PLAIN } from './content/summary.ts';
 import { BY_ID } from './content/catalogue.ts';
 import type { Finding, PlainItem } from './lib/types.ts';
 import { notation } from './lib/notation.tsx';
+import { CommentButton, commentData, useComments } from './components/Comments.tsx';
+import type { CommentContext } from './lib/report.ts';
+
+const SITE = 'https://grothendieck.commutator.io';
+const findingCtx = (n: Finding): CommentContext => ({
+  kind: 'finding',
+  label: `n° ${n.cote}, pages ${n.pages}`,
+  cote: n.cote,
+  ref: n.id,
+  details: [`**Pages** ${n.pages}`, `**Status** ${n.status}`],
+  link: `${SITE}/findings/#${n.id}`,
+});
 
 /**
  * What the readings turned up that the inventory does not record.
@@ -181,7 +193,7 @@ function Field({
 function Row({ n, withCote }: { n: Finding; withCote?: boolean }) {
   const c = withCote ? BY_ID.get(n.cote) : undefined;
   return (
-    <li id={n.id} className="card group scroll-mt-16 p-5">
+    <li id={n.id} className="card group scroll-mt-16 p-5" {...commentData(findingCtx(n))}>
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5">
         {/* Without the group heading above, the card has to name its folder
             itself — the one case where the repetition the heading saves is
@@ -199,9 +211,10 @@ function Row({ n, withCote }: { n: Finding; withCote?: boolean }) {
         {/* The identifier is what a commit message or an issue cites, so it
             has to be reachable from the page it names. Hidden until hover so
             that forty-nine of them do not sit in the margin shouting. */}
+        <CommentButton scope="findings" ctx={findingCtx(n)} text={n.claim} className="ml-auto" />
         <a
           href={`#${n.id}`}
-          className="ml-auto select-none text-[11px] text-ink-300 opacity-0 transition-opacity hover:text-brand-600 focus:opacity-100 group-hover:opacity-100"
+          className="select-none text-[11px] text-ink-300 opacity-0 transition-opacity hover:text-brand-600 focus:opacity-100 group-hover:opacity-100"
           aria-label={`Link to ${n.id}`}
         >
           #{n.id}
@@ -392,9 +405,17 @@ function PlainCard({ p }: { p: PlainItem }) {
   // One badge per status present, so two rows that agree print one badge.
   const statuses = [...new Set(rows.map((n) => n.status))];
   const c = BY_ID.get(p.cote);
+  const plainCtx: CommentContext = {
+    kind: 'plain',
+    label: `« ${p.title} », n° ${p.cote}`,
+    cote: p.cote,
+    ref: `plain-${p.id}`,
+    details: [`**Rows** ${p.rows.join(', ')}`],
+    link: `${SITE}/findings/#plain-${p.id}`,
+  };
 
   return (
-    <li id={`plain-${p.id}`} className="card scroll-mt-16">
+    <li id={`plain-${p.id}`} className="card scroll-mt-16" {...commentData(plainCtx)}>
       {/* Folded to one line, so the eleven items fit on a screen and the list
           and its search are not a dozen screens down. The claim and its
           caveats open together: nothing can be read without the other. */}
@@ -428,7 +449,8 @@ function PlainCard({ p }: { p: PlainItem }) {
               any dispute the transcription governs. Nothing here says who was first.
             </Field>
           </dl>
-          <p className="mt-3 text-[12.5px] text-ink-500">
+          <p className="mt-3 flex flex-wrap items-baseline gap-x-1 text-[12.5px] text-ink-500">
+            <CommentButton scope="findings" ctx={plainCtx} text={`${p.title}. ${p.what}`} className="order-last ml-auto" />
             {rows.length === 1 ? 'The row in full: ' : 'The rows in full: '}
             {rows.map((n, i) => (
               <span key={n.id}>
@@ -485,6 +507,16 @@ function Pager({
  * statement holds, under the hypotheses written and those alone — not that
  * the reading is what the page says.
  */
+const proofCtx = (p: (typeof PROOFS)[number]): CommentContext => ({
+  kind: 'proof',
+  label: `n° ${p.folder} · ${p.name}`,
+  cote: p.folder,
+  batch: p.batch,
+  ref: p.lean,
+  details: [`**Pages** ${p.page}`, `**Theorems** ${p.theorems.map((t) => `\`${t}\``).join(', ')}`, `**Verdict** ${p.verdict}`],
+  link: `${SITE}/findings/#lean`,
+});
+
 function ProvedInLean() {
   const link = 'text-brand-700 underline decoration-brand-200 underline-offset-2';
   // Ten cards at a time, as the list below: sixty-three folders already.
@@ -514,13 +546,14 @@ function ProvedInLean() {
       </p>
       <div className="mt-4 space-y-3">
         {shown.map((p) => (
-          <article key={p.lean} className="card px-4 py-3">
+          <article key={p.lean} className="card px-4 py-3" {...commentData(proofCtx(p))}>
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
               <a href={`/#${p.folder}/${p.batch}/p${p.page}`} className="text-[14px] font-semibold text-ink-900 hover:text-brand-700">
                 n° {p.folder} · {p.name}
               </a>
               <span className="text-[12.5px] text-ink-500">{BY_ID.get(p.folder)?.title.replace(/\s*:.*$/, '')}</span>
-              <span className="ml-auto rounded-full bg-ink-800 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+              <CommentButton scope="findings" ctx={proofCtx(p)} text={p.statement} className="ml-auto" />
+              <span className="rounded-full bg-ink-800 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
                 {p.verdict}
               </span>
             </div>
@@ -545,6 +578,7 @@ function ProvedInLean() {
 
 export function FindingsPage() {
   useHashTarget();
+  const commentRoot = useComments<HTMLElement>('findings', 'Findings');
 
   const [query, setQuery] = useState('');
   const [only, setOnly] = useState<string | null>(null);
@@ -634,7 +668,7 @@ export function FindingsPage() {
     <>
       <Header path="/findings/" />
 
-      <main className="mx-auto max-w-4xl px-5 py-12">
+      <main ref={commentRoot} className="mx-auto max-w-4xl px-5 py-12">
         <header className="max-w-[44em]">
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink-400">
             Findings from the readings

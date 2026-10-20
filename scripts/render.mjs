@@ -1022,6 +1022,9 @@ export function readingPage({ meta, lang, name, html, extraStyle = '' }) {
              font: 12px/1.5 ui-monospace, monospace; color: #575348;
              background: #f8f7f3; border: 1px solid #e4e0d5; border-radius: .4rem;
              padding: .6rem .8rem; }
+  /* A passage the reader has kept a note on (src/lib/notes.ts, which runs in
+     the parent page and paints this frame's own highlight registry). */
+  ::highlight(gn-note) { background-color: rgb(241 220 159 / .65); }
 ${extraStyle}</style>
 </head>
 <body>

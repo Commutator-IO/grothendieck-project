@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import { BY_ID } from './content/catalogue.ts';
 import lettersRaw from './content/letters.json';
+import { CommentButton, commentData, useComments } from './components/Comments.tsx';
+import type { CommentContext } from './lib/report.ts';
 
 /**
  * The correspondence the folders hold, as a register.
@@ -213,6 +215,23 @@ function Correspondents({ onPick, picked }: { onPick: (c: string | null) => void
   );
 }
 
+const letterCtx = (l: Letter, names: string): CommentContext => ({
+  kind: 'letter',
+  label: `n° ${l.folder}, p. ${l.pages}: ${l.direction === 'from' ? 'his letter to' : l.direction === 'to' ? 'letter to him from' : 'letter,'} ${names || 'unidentified'}`,
+  cote: l.folder,
+  batch: l.batch,
+  page: Number.parseInt(l.pages, 10) || undefined,
+  ref: letterKey(l),
+  details: [
+    `**Pages** ${l.pages}`,
+    `**Date** ${l.date ?? (l.iso ? `[${l.iso}], inferred` : 's.d.')}`,
+    l.place ? `**Place** ${l.place}` : null,
+    `**Correspondent** ${names || 'unidentified'} (letter ${DIR[l.direction].label})`,
+    `**Source** ${l.where}`,
+  ].filter((x): x is string => x !== null),
+  link: `https://grothendieck.commutator.io/#${l.folder}/${l.batch}`,
+});
+
 function Register({ picked }: { picked: string | null }) {
   const rows = picked
     ? RECORDS.filter((l) => (l.correspondent ?? 'Not named here') === picked)
@@ -246,7 +265,7 @@ function Register({ picked }: { picked: string | null }) {
             {rows.map((l, i) => {
               const others = RECORDS.filter((r) => letterKey(r) === letterKey(l)).map(who);
               return (
-                <tr key={i} className="border-b border-ink-100 align-top last:border-0">
+                <tr key={i} className="border-b border-ink-100 align-top last:border-0" {...commentData(letterCtx(l, (picked ? [who(l)] : others).join(', ')))}>
                   <td className="whitespace-nowrap px-3 py-2">
                     <a href={`/#${l.folder}/${l.batch}`} className="tabular font-semibold text-ink-900 hover:text-brand-700" title={BY_ID.get(l.folder)?.title}>
                       n° {l.folder}
@@ -270,7 +289,10 @@ function Register({ picked }: { picked: string | null }) {
                       {l.form}, {LANG[l.language] ?? l.language}
                     </span>
                   </td>
-                  <td className="px-2 py-2 text-ink-600">{l.summary}</td>
+                  <td className="px-2 py-2 text-ink-600">
+                    {l.summary}{' '}
+                    <CommentButton scope="letters" ctx={letterCtx(l, (picked ? [who(l)] : others).join(', '))} text={l.summary} />
+                  </td>
                 </tr>
               );
             })}
@@ -282,6 +304,7 @@ function Register({ picked }: { picked: string | null }) {
 }
 
 export function LettersPage() {
+  const commentRoot = useComments<HTMLElement>('letters', 'Letters');
   const [picked, setPicked] = useState<string | null>(null);
   const named = new Set(RECORDS.map((l) => l.correspondent).filter(Boolean)).size;
   const dated = LETTERS.filter((l) => l.dating === 'written').length;
@@ -293,7 +316,7 @@ export function LettersPage() {
     <>
       <Header path="/letters/" />
 
-      <main className="mx-auto max-w-5xl px-5 py-12">
+      <main ref={commentRoot} className="mx-auto max-w-5xl px-5 py-12">
         <header className="max-w-[44em]">
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink-400">Letters</p>
           <h1 className="titre mt-2 text-[30px] leading-tight text-ink-900">
