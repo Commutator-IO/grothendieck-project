@@ -13,29 +13,56 @@ wants to *read*: folders filed by accession number, each titled with whatever
 Grothendieck had pencilled on the cover, each a single PDF of between 4 MB and
 270 MB.
 
-This site does two things the inventory cannot. It offers five ways in — five
-notebooks, each saying plainly whether its grouping is the archive's or ours.
-And it puts the LaTeX transcription of a page **beside the page itself**, so
+This site puts the LaTeX transcription of a page **beside the page itself**, so
 that scrolling the transcript turns the facsimile's pages. Every reading can be
 checked against the handwriting it came from, on one screen, without a second
-window.
+window. Around that reader it builds what only a reading of the whole fonds
+can give: an index, a timeline, a register of letters, the diagrams and
+formulas, measurements of the hand, maps, and findings that may not stand in
+the literature.
+
+The five notebook pages that used to be the ways in (*Cahier de Topos*,
+*Cahier de Motifs*, *La Longue Marche*, the late notebooks, the scattered notes) were
+removed on 19 October 2026. Their groupings survive as badges on the folders
+of the front page and as progress figures on `/method/`, which also says that
+three of the five are ours and two reproduce an inventory group — citing "the
+Cahier de Topos" does not commit you to the same thing as citing folder 19.
 
 ## The site
 
+The header has three collections — **Fonds**, **Quillen**, **Bourbaki** — and,
+for the fonds, its tabs and then the pages about the project.
+
 | Page | Contents |
 |---|---|
-| [`/`](https://grothendieck.commutator.io/) | What the fonds is, where the work stands, and all 178 folders in Grothendieck's filing order, searchable |
-| [`/notebooks/`](https://grothendieck.commutator.io/notebooks/) | The five notebooks, and how Grothendieck wrote |
-| [`/topos/`](https://grothendieck.commutator.io/topos/) | **Cahier de Topos** — folders 19, 161-3, the categorical footing, SGA 4, the late stratified topos *(our grouping)* |
-| [`/motifs/`](https://grothendieck.commutator.io/motifs/) | **Cahier de Motifs** — the inventory's *Théorie des motifs*, folders 10–18, 946 pages *(the archive's grouping)* |
-| [`/longue-marche/`](https://grothendieck.commutator.io/longue-marche/) | **La Longue Marche** — 1,584 pages through Galois theory, plus the Teichmüller notes around it *(the archive's grouping)* |
-| [`/tardifs/`](https://grothendieck.commutator.io/tardifs/) | **Cahiers tardifs** — *Vers une géométrie des formes* (1986) and *Dérivateurs* (1990–91) *(our grouping)* |
-| [`/notes-dispersees/`](https://grothendieck.commutator.io/notes-dispersees/) | **Notes techniques dispersées** — the 35 folders belonging to no work, 1953–1984 *(our grouping)* |
-| [`/method/`](https://grothendieck.commutator.io/method/) | How he took notes, how transcription proceeds, what this site does not claim |
+| [`/`](https://grothendieck.commutator.io/) | **Whole fonds** — what the fonds is, where the work stands, all 178 folders in Grothendieck's filing order, searchable, and the reader: transcription on the left, Montpellier's facsimile on the right. Also the published editions that cover a folder. `/archive/` stays as a door to it, for links posted before 26 September |
+| [`/index/`](https://grothendieck.commutator.io/index/) | The people, his works cited and the subjects, each to the folder and the batch where it occurs |
+| [`/timeline/`](https://grothendieck.commutator.io/timeline/) | When the folders were written, and how anyone knows: the inventory's datings as ranges, deduced or read, and the dates written on the leaves |
+| [`/letters/`](https://grothendieck.commutator.io/letters/) | A register of the letters found in the transcribed folders: when, with whom, where, and how the site gives them |
+| [`/hand/`](https://grothendieck.commutator.io/hand/) | The hand, measured from the transcriptions: words unread and doubtful, strike-outs, margins, diagrams and languages, folder by folder |
+| [`/diagrams/`](https://grothendieck.commutator.io/diagrams/) | The 2,000 commutative diagrams, the richest first, each linked to its transcription and to the facsimile page |
+| [`/formulas/`](https://grothendieck.commutator.io/formulas/) | The 25,946 displayed formulas, the same way |
+| [`/maps/`](https://grothendieck.commutator.io/maps/) | Five maps: folders and what is in print, the mathematical lineage, who is named together, the mathematics by subject, what the folders cite |
+| [`/findings/`](https://grothendieck.commutator.io/findings/) | Leaves bound backwards, manuscripts interleaved, results that may not stand in the literature — each with what would settle it — and the statements proved in Lean |
+| [`/method/`](https://grothendieck.commutator.io/method/) | How he took notes, how transcription proceeds, what it costs, and what this site does not claim |
+| [`/contribute/`](https://grothendieck.commutator.io/contribute/) | How to install the skills, run a batch, check readings and open a pull request |
+| [`/review/`](https://grothendieck.commutator.io/review/) | The open checks against the facsimile, one spot of a page at a time — linked from Contribute, not in the header |
+| [`/quillen/`](https://grothendieck.commutator.io/quillen/) | Daniel Quillen's 630 research notebooks, 1968–2003, as the Clay Mathematics Institute publishes them, with the index the Clay publishes, searchable |
+| [`/bourbaki/`](https://grothendieck.commutator.io/bourbaki/) | The Bourbaki archive's catalogue (Archives Henri Poincaré) — rédactions, congress reports, circulars — with the documents that meet the fonds ringed in red |
 
-Two of the five notebooks reproduce an inventory group exactly; three are ours.
-Each says which at the head of its page, because citing "the Cahier de Topos"
-does not commit you to the same thing as citing folder 19.
+Quillen and Bourbaki open their documents in the same facsimile pane as the
+fonds, framed straight from claymath.org and from the archive's own server,
+which both allow it: nothing is copied and no relay is involved. The articles
+are served under `/article/` (below), and
+[`/llms.txt`](https://grothendieck.commutator.io/llms.txt) describes the site
+for language models, one line per page.
+
+**Any passage can be commented on.** Select text in a reading view, on
+Findings, on the Timeline or on Letters, and a panel offers to keep the comment
+as a note — in the browser's `localStorage`, nowhere else — or to open a
+prefilled GitHub issue quoting the passage and naming where it sits
+(`src/lib/notes.ts`). The site is static: nothing leaves the browser until the
+reader submits GitHub's own form.
 
 ## Nothing of the fonds is stored, anywhere
 
@@ -90,6 +117,13 @@ Left unset, the deployed site has no facsimiles and every batch says so plainly
 rather than offering a new tab — reading side by side is the point of the view,
 and a tab that steals the window is not a lesser version of it.
 
+The same relay serves the published editions listed on the front page whose
+host forbids framing — but only the exact files in
+[`relay/allowed.json`](relay/allowed.json), generated from
+`src/content/editions.json` by `npm run relay:allowlist` (the build fails if it
+is stale), so that it can never become an open proxy for someone else's
+server.
+
 ### Mirroring, which reading no longer needs
 
 Still worth having for transcription: handing a transcriber a twenty-page file
@@ -103,21 +137,43 @@ npm run archive -- 19 --batches 1-3 # a beginning
 Files land in `archives/`, outside `public/` so a build can never carry them,
 and git-ignored so a commit never can either.
 
+## The rights switch
+
+The rights in the manuscripts belong to Grothendieck's heirs (see
+[`RIGHTS.md`](RIGHTS.md)), and whether transcriptions may be shown online is an
+open question with the institutions involved. So the deploy has a switch,
+`RENDER_TRANSCRIPTS`, a repository variable set by hand through the
+« Transcriptions switch » workflow. Off, nothing turns `transcripts/*.tex`
+into a reading view, a TEI file, a PDF or a gallery page, and the review page
+quotes no reading: the deployed site carries none of their text, while the
+facsimile pane, the inventory and the registers stay as they are. It deletes
+nothing and rewrites no history — the `.tex` stay in the repository, and
+switching back on restores the site at the next deploy.
+
+Quillen and Bourbaki go further: their transcriptions are never committed at
+all. `transcripts-quillen/` and `transcripts-bourbaki/` are git-ignored except
+for their preambles, and the Quillen page would show a transcription only in a
+build made with `RENDER_QUILLEN` set. The facsimiles need no switch, in any
+collection: they are always streamed from the holder's own server and never
+stored.
+
 ## Transcription
 
-Two editions, one skill each, run in order — plus a third skill for the
-folder's tags. All installed under `.claude/skills/`. Modernisation and tagging
-pin Opus 5 in their frontmatter. Transcription used to pin Fable 5 and no
-longer pins anything, so that Opus 5 can be measured against it on a hard
-hand — it accepts those two models, refuses any other, and records in each
-file's header the one that read the pages, so that a batch's provenance stays a
-fact about the file rather than about whichever model happened to be selected:
+Every skill lives under `.claude/skills/` and, since 19 October 2026, runs on
+Opus 5.5 and nothing else; earlier passes ran under Fable 5, Fable 5.1 and
+Opus 5, which are no longer admitted. Each file's header records the model
+that read its pages and the date, so that a batch's provenance stays a fact
+about the file rather than about whichever model happened to be selected.
 
 | Skill | Produces |
 |---|---|
-| [`/transcribe-grothendieck`](.claude/skills/transcribe-grothendieck/SKILL.md) | the transcription — the pages as written, with the critical apparatus |
-| [`/modernize-grothendieck`](.claude/skills/modernize-grothendieck/SKILL.md) | the modernised reading — a résumé, then current notation and names, footnotes instead of apparatus |
+| [`/transcribe-grothendieck`](.claude/skills/transcribe-grothendieck/SKILL.md) | the transcription of a twenty-page batch — the pages as written, with the critical apparatus |
+| [`/modernize-grothendieck`](.claude/skills/modernize-grothendieck/SKILL.md) | the modernised reading of a whole folder — a résumé, then current notation and names, footnotes instead of apparatus |
 | [`/tag-grothendieck`](.claude/skills/tag-grothendieck/SKILL.md) | the folder's tags — the `\keywords{}` line closing the résumé |
+| [`/find-novelty`](.claude/skills/find-novelty/SKILL.md) | candidate findings, written as claims about the literature and never about priority, into `src/content/findings.ts` |
+| [`/contribute-to-mathlib`](.claude/skills/contribute-to-mathlib/SKILL.md) | a general lemma a Lean proof needed, proposed to mathlib as a draft pull request |
+| [`/transcribe-quillen`](.claude/skills/transcribe-quillen/SKILL.md) | a batch of one of Quillen's notebooks, same apparatus — local only, in `transcripts-quillen/` |
+| [`/transcribe-bourbaki`](.claude/skills/transcribe-bourbaki/SKILL.md) | a Bourbaki document, keeping apart what the machine typed and what a hand added — local only, in `transcripts-bourbaki/` |
 
 **Batches can run in parallel.** Transcription is one batch per fresh context,
 but the batches of a folder need not wait for each other: run them as Claude
@@ -149,37 +205,61 @@ someone who has not met the subject, and closes that résumé with a line of
 English keywords — the modern vocabulary to search under, three to six terms
 for a short folder and many more for a long one. Those keywords are
 the **single source** of the folder's tags: `npm run manifest` extracts them,
-and the archive page's search matches on them. There is deliberately no tags
+and the front page's search matches on them. There is deliberately no tags
 file, so no tag can describe content nobody has read.
 
-Every batch also carries a **Report a reading** button, in the reading view and
-on each transcribed folder's card, opening a prefilled GitHub issue with the
-shelfmark, the batch and the page currently on screen. Everything here is
-first-pass machine work; corrections are the point of publishing it.
+### Reporting a reading, and checking one
+
+Everything here is first-pass machine work; corrections are the point of
+publishing it. There are three ways to send one:
+
+- the **Report a reading** button, in each batch's download row, opens a
+  prefilled GitHub issue with the shelfmark, the batch and the page on screen;
+- the **comment** feature (above) quotes the exact passage selected;
+- the **review page**, `/review/`, puts the open checks in front of a reader
+  of French handwriting one at a time — an unread or doubtful word, a date on a
+  leaf, a letter's writer, an insertion that may be his or ours — with the
+  question on the left and the facsimile at that page on the right. The
+  answers (« Reading is right », « I read something else », « Can't tell »)
+  stay in the browser until they are sent, all at once, as one prefilled
+  issue. No mathematics is needed.
+
+The queue is built by `scripts/review-queue.mjs` from
+[`docs/review/issue-35.md`](docs/review/issue-35.md), the archived checklist of
+issue #35, into `src/content/review-queue.json` (and the few words of current
+reading around each spot into `review-snippets.json`, which the rights switch
+leaves out). An answer is applied at the source only once a person has checked
+it on the facsimile: the `.tex` is corrected, or confirmed, and gains a
+`% Revised` line saying what was checked and in which issue, which becomes a `<change>` in the
+TEI. The item is then recorded in `src/content/review-answered.json` — applied,
+confirmed as it stood, or still illegible — and leaves the queue.
 
 ```bash
 npm run render      # transcripts/*.tex → the reading views the left pane shows
+npm run tikz        # compile the transcriptions' tikzpictures to committed SVGs
 npm run pdf         # → the PDFs the download buttons offer
 npm run tei         # → a TEI P5 file per transcription, for archives and deposits
 npm run manifest    # tell the site which files now exist
 ```
 
 The `.tex` under `transcripts/` is the source of record and the only thing
-versioned. HTML, PDF and TEI are derived, and rebuilt.
+versioned, with the SVGs of its pictures. HTML, PDF and TEI are derived, and
+rebuilt.
 
 ### The TEI export
 
 `npm run tei` writes `batch-NN.fr.xml` beside each transcription's HTML and
 PDF, and the download row offers it as **TEI**. It is produced from the `.tex`
-alone, mechanically, and re-reads no page: the eight apparatus macros map one
+alone, mechanically, and re-reads no page: the nine apparatus macros map one
 to one onto TEI's own elements — `\ill{}` to `<gap reason="illegible"/>`,
 `\uncertain{}` to `<unclear>`, `\supplied{}` to `<supplied>`, `\add{}` to
-`<add>`, `\struck{}` to
-`<del>`, `\note{}` to an editorial `<note>`, `\marginal{}` to an authorial one
+`<add>`, `\struck{}` to `<del>`, `\note{}` to an editorial `<note>`,
+`\drawing{}` to a `<note>` of type drawing, `\marginal{}` to an authorial one
 in the margin, `\page{}` to `<pb>` with a `facs` link into Montpellier's PDF at
 the right offset. Mathematics travels untouched as TeX inside `<formula>`;
-commutative diagrams as `tikz-cd` inside `<figure>`. The header carries what
-the file's comment carries — the model that read the pages and the date, and
+commutative diagrams as `tikz-cd` inside `<figure>`, and his other figures,
+redrawn in TikZ, as a `<figure>` holding the SVG and its source. The header
+carries what the file's comment carries — the model that read the pages and the date, and
 every revision since (each `% Revised` line becomes a `<change>` in
 `<revisionDesc>`, pointing at the model that made it), the « Édition de
 démonstration » status, the shelfmark and the inventory's dating — as
@@ -211,26 +291,25 @@ unused. Any failure fails the deploy; so does `npm run check-tei`, which
 compares the TEI reading view with the `.tex` one page by page. Locally it
 needs Java.
 
-**As of 18 October 2026, 638 batches are transcribed — 164 folders, 9,414
-pages.** Every folder no edition covers has a first pass, and six folders
-an edition covers are partly transcribed as well. The first batches ran under
-Fable 5 and Fable 5.1, which are no longer admitted for new passes; the rest
-ran under Opus 5 and Opus 5.5. Each file's header names the model that read it
-and the date.
-
-**Every transcribed folder also has its modernised reading**, taken whole, in
-current notation. A second transcription pass
+**As of 21 October 2026, 638 batches are transcribed — 164 folders, 9,415
+pages.** Every folder no edition covers has a first pass, and six folders an
+edition covers are partly transcribed as well. Every transcribed folder also
+has its modernised reading, taken whole, in current notation. A second
+transcription pass
 ([issue #51](https://github.com/Commutator-IO/grothendieck-project/issues/51)),
 re-reading each page on 700 dpi tiles, has taken 61 batches of 15 folders so
-far. Statements of 63 folders are proved in Lean against mathlib
-([`lean/`](lean/)). None of it has been checked page by page by a person.
-`/method/` prices the steps separately, from the passes themselves:
-transcription carries almost all the cost, because it reads page images; the
-modernised reading works from text.
+far. Statements of 63 folders are proved in Lean (below).
+
+None of it has been read through page by page by a person. What has been
+checked on the facsimile, by the author, is spot readings: 125 in 54 folders,
+with 31 entries of the letters register and 57 dates, the checks recorded in
+the transcription files as `% Revised` lines. `/method/` prices the steps separately, from the
+passes themselves: transcription carries almost all the cost, because it reads
+page images; the modernised reading works from text.
 
 ### The critical apparatus is the point
 
-`transcripts/preamble/grothendieck.sty` defines eight macros for the
+`transcripts/preamble/grothendieck.sty` defines nine macros for the
 transcription, and they carry the whole honesty of the exercise:
 
 | Macro | Meaning |
@@ -242,6 +321,7 @@ transcription, and they carry the whole honesty of the exercise:
 | `\supplied{…}` | what the transcriber supplies and the page does not carry — a missing letter, a clipped word-end; set in [brackets] |
 | `\struck{…}` | struck out by Grothendieck — a deletion often shows where the thought turned |
 | `\note{…}` | the transcriber's note on the state of the page |
+| `\drawing{…}` | a drawing of his, described by the transcriber rather than redrawn |
 | `\marginal{…}` | a marginal note **of his**, distinct from the body |
 
 `\add{}` and `\supplied{}` were one macro, declared as the supply, until 26
@@ -270,20 +350,63 @@ mathematics stays selectable text rather than becoming a picture. It covers the
 documented arrow subset and **raises on anything else**, because a diagram
 rendered with an arrow missing asserts a commutation nobody wrote.
 
+## The Lean appendix
+
+[`lean/`](lean/README.md) proves in Lean 4, against mathlib, statements the
+modernised readings make: 63 folders, one file each, and one Bourbaki
+rédaction, **1,966 theorems** (`cat lean/Grothendieck/*.lean | grep -c
+'^theorem'`). CI builds it with every warning an error, refuses `sorry`,
+`native_decide` and `axiom`, and `lean/axioms.sh` fails on any axiom beyond
+Lean's three standard ones. A proof says that what a reading states **holds
+together**, not that it is what the page says: a perfectly formalised
+statement can be a perfectly formalised misreading. Several proofs found the
+reading's gloss false, or the page itself wrong, and say so.
+
+Each statement, its proof written out in French and what the verification
+found are in the appendix [`docs/lean/article.tex`](docs/lean/article.tex),
+served as [/article/grothendieck-lean.pdf](https://grothendieck.commutator.io/article/grothendieck-lean.pdf)
+and linked from Findings and Method. General lemmas the proofs needed are
+proposed upstream to mathlib as draft pull requests, through
+`/contribute-to-mathlib` (issue
+[#52](https://github.com/Commutator-IO/grothendieck-project/issues/52)).
+
+## The articles
+
+| Source | Article | Served at |
+|---|---|---|
+| [`docs/rhm/`](docs/rhm/README.md) | *Dater, reprendre, déplacer* — the working notes as a mathematical practice, in French, for the *Revue d'histoire des mathématiques* | [/article/grothendieck-rhm.pdf](https://grothendieck.commutator.io/article/grothendieck-rhm.pdf) |
+| [`docs/study/`](docs/study/README.md) | *A Machine Reads Grothendieck's Working Notes* — the method and the encoding, for the *Journal of the TEI*, with its TEI submission | [/article/grothendieck-jtei.pdf](https://grothendieck.commutator.io/article/grothendieck-jtei.pdf) and `.xml` |
+| [`docs/lean/`](docs/lean/article.tex) | The Lean appendix, in French | [/article/grothendieck-lean.pdf](https://grothendieck.commutator.io/article/grothendieck-lean.pdf) |
+| [`docs/conjectures/`](docs/conjectures/article.tex) | *Conjectures in Grothendieck's working notes* — dated first appearances, open questions, what can be formalised | not yet on the site |
+
+Each PDF is compiled locally and committed, excepted by name from `*.pdf` in
+`.gitignore`, since these are ours and not the fonds'. The deploy
+copies the served ones into `public/article/` (`npm run article-tei`, which
+also builds and validates the jTEI submission).
+
 ## The repository
 
 | Path | Role |
 |---|---|
 | `src/content/catalogue.ts` | The inventory — 178 folders, 22 groups — generated, never hand-edited |
-| `src/content/books.json` | The five notebooks, read by the site *and* by the mirroring script |
+| `src/content/books.json` | The five notebook groupings, now only the front page's badges, Method's progress figures and the mirroring script's shorthands (`npm run archive -- motives`) |
+| `src/content/findings.ts` | The candidate findings the Findings tab renders, written by `/find-novelty` |
+| `src/content/dated-leaves.json`, `letters.json` | The dates written on the leaves and the register of letters, every record resting on a file and a line |
+| `src/content/editions.json` | The published editions that cover a folder, and how their shelfmarks correspond |
+| `src/content/review-queue.json`, `review-answered.json` | The review page's open checks, and the ones already answered, by issue |
 | `transcripts/status.json` | The three states no file can prove — `running`, `checked`, `skipped` — reviewable in a diff |
-| `src/components/FacsimilePane.tsx` | The right pane: the streamed folder PDF, resizable, page-anchored |
+| `transcripts-quillen/`, `transcripts-bourbaki/` | Local transcriptions of the other collections, git-ignored but for their preambles |
+| `src/components/FacsimilePane.tsx` | The right pane: the streamed PDF, resizable, page-anchored — shared by the fonds, Quillen, Bourbaki and Review |
 | `src/components/TranscriptPane.tsx` | The left pane: the transcript in its own frame, reporting the page being read |
+| `src/lib/notes.ts` | Select a passage, keep a note or open a prefilled issue |
 | `scripts/catalogue.mjs` | Re-reads Montpellier's inventory into typed data |
 | `scripts/archive.mjs` | Downloads and cuts folders into batches — for transcription, not for reading |
 | `scripts/render.mjs` | LaTeX subset → the reading view, in ar5iv's stylesheet |
-| `relay/server.mjs` | The production relay: same job as the dev middleware, deployable |
-| `vite.config.ts` | Also relays `/source/*.pdf` from Montpellier in dev, forwarding range requests |
+| `scripts/review-queue.mjs` | Builds the review queue from `docs/review/issue-35.md` |
+| `relay/server.mjs`, `relay/allowed.json` | The production relay, and the exact third-party files it may fetch |
+| `vite.config.ts` | One HTML entry per tab; also relays `/source/*.pdf` from Montpellier in dev, forwarding range requests |
+| `lean/` | The Lean proofs, against a pinned mathlib |
+| `tei/grothendieck.odd` | The TEI customisation the export is validated against |
 
 ### Why the transcript pane is an iframe
 
@@ -309,9 +432,21 @@ same twenty pages.
 npm install && npm run dev
 ```
 
-`pdfinfo` is needed to mirror folders (`brew install poppler`); a LaTeX engine
-is needed only to compile transcript PDFs (`brew install --cask
-mactex-no-gui`). Neither is needed to browse the inventory.
+Browsing needs nothing else. The other tools are needed only for what uses
+them:
+
+- `pdfinfo` and `pdftoppm` to mirror folders and cut tiles (`brew install
+  poppler`);
+- [tectonic](https://tectonic-typesetting.github.io/) to compile transcript
+  PDFs and the articles (`brew install tectonic`) — `npm run pdf` falls back
+  on a local XeLaTeX, never pdfLaTeX, since the preamble uses fontspec;
+- Java for `npm run tei:validate` and `npm run article-tei`, which fetch
+  their own pinned jing, Saxon and TEI Stylesheets;
+- [elan](https://github.com/leanprover/elan) for `lean/`: `cd lean && lake exe
+  cache get && lake build`.
+
+`npm run build` checks the relay allowlist, writes the manifest, type-checks
+with `tsc -b` and builds; CI also runs `npm run lint` first.
 
 ## Credit and limits
 
