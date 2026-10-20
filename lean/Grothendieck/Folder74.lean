@@ -173,9 +173,8 @@ theorem row_bijective {Γ A B D : Type*} (f : Γ → A) (g : Γ → B) (h : Γ �
     Bijective fun b => h ((Equiv.ofBijective _ hfg).symm (a, b)) := by
   have key : ∀ b, f ((Equiv.ofBijective _ hfg).symm (a, b)) = a ∧
       g ((Equiv.ofBijective _ hfg).symm (a, b)) = b := fun b => by
-    have := (Equiv.ofBijective _ hfg).apply_symm_apply (a, b)
-    simp only [Equiv.ofBijective_apply, Prod.mk.injEq] at this
-    exact this
+    simpa only [Equiv.ofBijective_apply, Prod.mk.injEq] using
+      (Equiv.ofBijective _ hfg).apply_symm_apply (a, b)
   refine ⟨fun b₁ b₂ e => ?_, fun d => ?_⟩
   · have hx : (Equiv.ofBijective _ hfg).symm (a, b₁) = (Equiv.ofBijective _ hfg).symm (a, b₂) :=
       hfh.1 (by simp only [Prod.mk.injEq]; exact ⟨(key b₁).1.trans (key b₂).1.symm, e⟩)
@@ -239,10 +238,8 @@ theorem apex_mem {α : Fin 3} (s : C.Et α) :
     C.apex s ∉ Set.range C.t ∧ C.G.Adj (C.apex s) (C.t α) := by
   refine ⟨?_, (C.apex_spec s).1.symm⟩
   rintro ⟨β, hβ⟩
-  have h1 := (C.apex_spec s).1
-  rw [← hβ] at h1
-  have h2 := (C.apex_spec s).2
-  rw [← hβ] at h2
+  obtain ⟨h1, h2⟩ := C.apex_spec s
+  rw [← hβ] at h1 h2
   exact h1.ne (congrArg C.t (C.off_unique s.2.1 s.2.2 h2))
 
 /-- Page 93, Prop. 1: the involution `σ_α` of `Ẽ_α`. -/
@@ -278,9 +275,7 @@ theorem prop5 {α β : Fin 3} (hab : α ≠ β) (s : C.Et α) (u : C.Et β) :
   have n2 : u.1 ≠ s.1 := fun h => hab (C.et_disjoint s u h.symm)
   have n3 : u.1 ≠ (C.sig s).1 := fun h => hab (C.et_disjoint (C.sig s) u h.symm)
   rcases C.ax2 _ _ _ s.2.2.symm (C.adj_sig s) (C.apex_spec s).1 u.1 n1 n2 n3 with h | h | h
-  · exact absurd (C.off_unique u.2.1 u.2.2 h) (Ne.symm hab)
-  · exact Or.inl h
-  · exact Or.inr h
+  exacts [absurd (C.off_unique u.2.1 u.2.2 h) (Ne.symm hab), Or.inl h, Or.inr h]
 
 /-- Props 2 and 5: exactly one of `s, σ_α s` is adjacent to `u ∈ Ẽ_β`. -/
 theorem adj_sig_iff {α β : Fin 3} (hab : α ≠ β) (s : C.Et α) (u : C.Et β) :
@@ -362,9 +357,8 @@ noncomputable def sigUT (x : C.UT) : C.UT :=
 
 theorem pr_sigUT (x : C.UT) (α : Fin 3) : C.pr (C.sigUT x) α = C.sig (C.pr x α) := rfl
 
-theorem sigUT_sigUT (x : C.UT) : C.sigUT (C.sigUT x) = x := by
-  apply Subtype.ext; funext α
-  exact congrArg Subtype.val (C.sig_sig (C.pr x α))
+theorem sigUT_sigUT (x : C.UT) : C.sigUT (C.sigUT x) = x :=
+  Subtype.ext <| funext fun α => congrArg Subtype.val (C.sig_sig (C.pr x α))
 
 theorem sigUT_ne (x : C.UT) : C.sigUT x ≠ x := fun h =>
   C.sig_ne (C.pr x 0) (by rw [← pr_sigUT, h])
@@ -560,13 +554,11 @@ theorem Ka.kaPage {D : Scholie X} (hK : D.Ka) : D.KaPage := by
     ((hs 2 0 (by decide)).trans (hs 1 0 (by decide)).symm)
     ((hs 2 1 (by decide)).trans (hs 0 1 (by decide)).symm)
     ((hs 1 2 (by decide)).trans (hs 0 2 (by decide)).symm)
-  have h0 : s 0 = t 2 0 := (hs 2 0 (by decide)).symm
-  have h1 : s 1 = t 2 1 := (hs 2 1 (by decide)).symm
-  have h2 : s 2 = t 2 2 := by rw [e]; exact (hs 1 2 (by decide)).symm
   have : s = t 2 := by
     funext δ
     fin_cases δ
-    exacts [h0, h1, h2]
+    exacts [(hs 2 0 (by decide)).symm, (hs 2 1 (by decide)).symm,
+      by rw [e]; exact (hs 1 2 (by decide)).symm]
   rw [this]; exact ht 2
 
 theorem ka_of_kaPage (hS : D.Star) (hP : D.KaPage) : D.Ka := by
@@ -730,9 +722,7 @@ theorem upper_triangle (hB : D.Beta) (hK : D.Ka) {p q r : Pt X}
     (hpq : D.graph.Adj (.inr p) (.inr q)) (hqr : D.graph.Adj (.inr q) (.inr r))
     (hpr : D.graph.Adj (.inr p) (.inr r)) :
     ∃ τ ∈ D.T, p.1 ≠ q.1 ∧ p = vx τ p.1 ∧ q = vx τ q.1 ∧ r = vx τ (third p.1 q.1) := by
-  have hpq' := hpq
-  simp only [adj_inr_inr] at hpq'
-  rcases hpq' with rfl | hl
+  rcases (D.adj_inr_inr p q).1 hpq with rfl | hl
   · exact (D.not_adj_orbit hB p r hpr hqr).elim
   obtain ⟨hne, τ, hτ, e1, e2⟩ := hl
   have hp := eq_vx e1
@@ -809,7 +799,7 @@ theorem ax2_upper (hB : D.Beta) (hK : D.Ka) {τ : ∀ α, X α} (hτ : τ ∈ D.
   · exact ⟨δ, rfl⟩
   · by_cases hw' : w = D.σ δ (τ δ)
     · refine ⟨δ, Or.inl ?_⟩
-      show (⟨δ, τ δ⟩ : Pt X) = ⟨δ, D.σ δ w⟩
+      change (⟨δ, τ δ⟩ : Pt X) = ⟨δ, D.σ δ w⟩
       rw [hw', D.σσ]
     · by_contra hcon'
       have hcon := not_exists.mp hcon'
@@ -874,10 +864,8 @@ theorem ka_of_axiom1 (hS : D.Star) (h1 : Axiom1 D.graph) : D.Ka := by
   have w2 : D.graph.Adj (.inr (vx τ β)) (.inr (vx ρ₁ γ)) :=
     Or.inr ⟨hbc, ρ₂, hρ₂, e2.symm, e3.symm⟩
   have e := (h1 _ _ hadj).unique ⟨u1, u2⟩ ⟨w1, w2⟩
-  have hγ : τ γ = ρ₁ γ := by
-    simp only [Sum.inr.injEq, vx, Sigma.mk.inj_iff, heq_eq_eq, true_and] at e
-    exact e
-  exact hS τ hτ ρ₁ hρ₁ α γ hac e1 hγ
+  exact hS τ hτ ρ₁ hρ₁ α γ hac e1
+    (by simpa only [Sum.inr.injEq, vx, Sigma.mk.inj_iff, heq_eq_eq, true_and] using e)
 
 /-- Under (*) and `β_Γ̃`, the graph satisfies axiom 1 if and only if (Ka) holds;
 it then satisfies axiom 2. -/
@@ -956,7 +944,7 @@ theorem beta : L.toScholie.Beta := by
     have e1 : L.φ α (L.q x) = L.φ α (L.q y) := by rw [← L.lies_over, ← L.lies_over, px, py]
     have e2 : L.φ β (L.q x) = L.φ β (L.q y) := by rw [← L.lies_over, ← L.lies_over, hx, hy]
     exact L.pb_inj β x y ((L.latin α β hab').1 (Prod.ext e1 e2)) (hx.trans hy.symm)
-  show L.toScholie.Lk ⟨α, L.σ α s⟩ ⟨β, u⟩ ↔ ¬ L.toScholie.Lk ⟨α, s⟩ ⟨β, u⟩
+  change L.toScholie.Lk ⟨α, L.σ α s⟩ ⟨β, u⟩ ↔ ¬ L.toScholie.Lk ⟨α, s⟩ ⟨β, u⟩
   rw [L.lk_iff, L.lk_iff]
   constructor
   · rintro ⟨-, x, hx1, hx2⟩ ⟨-, y, hy1, hy2⟩
@@ -1082,7 +1070,7 @@ theorem toV_adj (a b : Fin 3 ⊕ Pt C.Et) :
     · subst hab
       have hl : ¬ C.scholie.Lk ⟨α, s⟩ ⟨α, u⟩ := fun h => h.1 rfl
       simp only [hl, or_false]
-      show _ ↔ (⟨α, u⟩ : Pt C.Et) = ⟨α, C.sig s⟩
+      change _ ↔ (⟨α, u⟩ : Pt C.Et) = ⟨α, C.sig s⟩
       rw [Sigma.mk.inj_iff]
       simp only [heq_eq_eq, true_and]
       exact ⟨fun h => Subtype.ext (C.sig_unique s u.2.2.symm h),
@@ -1141,7 +1129,7 @@ theorem ka_needed : ex.Star ∧ ex.Beta ∧ ¬ ex.Ka ∧ ¬ Axiom1 ex.graph := b
     rw [ex_star_aux a b α β h h1 h2]
   have hB : ex.Beta := by
     rintro ⟨α, s⟩ ⟨β, u⟩ h
-    show ex.Lk ⟨α, (s.1, !s.2)⟩ ⟨β, u⟩ ↔ ¬ ex.Lk ⟨α, s⟩ ⟨β, u⟩
+    change ex.Lk ⟨α, (s.1, !s.2)⟩ ⟨β, u⟩ ↔ ¬ ex.Lk ⟨α, s⟩ ⟨β, u⟩
     rw [ex_lk, ex_lk]
     exact ex_beta_aux α β s u h
   have hK : ¬ ex.Ka := by
@@ -1154,6 +1142,14 @@ theorem ka_needed : ex.Star ∧ ex.Beta ∧ ¬ ex.Ka ∧ ¬ Axiom1 ex.graph := b
 
 /-! ## Page 116: the group is an elementary abelian 2-group -/
 
+/-- If every element of `G` has order dividing 2, `G` is commutative (page 116). -/
+theorem p116_comm {G : Type*} [Group G] (h : ∀ g : G, g * g = 1) (g k : G) :
+    g * k = k * g := by
+  have hinv : ∀ g : G, g⁻¹ = g := fun g => inv_eq_of_mul_eq_one_right (h g)
+  calc g * k = (g * k)⁻¹ := (hinv _).symm
+    _ = k⁻¹ * g⁻¹ := mul_inv_rev g k
+    _ = k * g := by rw [hinv, hinv]
+
 /-- Page 116: on the relation `xyz = 1` of a group `G`, the maps
 `φ_a : (x, y, z) ↦ (x, a⁻¹z⁻¹, a⁻¹y⁻¹)` all preserve the relation if and only if
 every element of `G` has order dividing 2. -/
@@ -1162,26 +1158,14 @@ theorem p116 {G : Type*} [Group G] :
       ∀ g : G, g * g = 1 := by
   constructor
   · intro h g
-    have := h g⁻¹ 1 1 1 (by simp)
-    simpa using this
+    simpa using h g⁻¹ 1 1 1 (by simp)
   · intro h a x y z hxyz
     have hinv : ∀ g : G, g⁻¹ = g := fun g => inv_eq_of_mul_eq_one_right (h g)
-    have comm : ∀ g k : G, g * k = k * g := fun g k => by
-      calc g * k = (g * k)⁻¹ := (hinv _).symm
-        _ = k⁻¹ * g⁻¹ := mul_inv_rev g k
-        _ = k * g := by rw [hinv, hinv]
+    have comm := p116_comm h
     rw [hinv, hinv, hinv]
     rw [show x * (a * z) * (a * y) = x * (a * (z * a) * y) by group, comm z a,
       show x * (a * (a * z) * y) = x * ((a * a) * z * y) by group, h a, one_mul, comm z y,
       ← mul_assoc, hxyz]
-
-/-- And then `G` is commutative. -/
-theorem p116_comm {G : Type*} [Group G] (h : ∀ g : G, g * g = 1) (g k : G) :
-    g * k = k * g := by
-  have hinv : ∀ g : G, g⁻¹ = g := fun g => inv_eq_of_mul_eq_one_right (h g)
-  calc g * k = (g * k)⁻¹ := (hinv _).symm
-    _ = k⁻¹ * g⁻¹ := mul_inv_rev g k
-    _ = k * g := by rw [hinv, hinv]
 
 
 /-! ## The autotopisms of the Klein table
@@ -1217,14 +1201,14 @@ theorem autotopism_iff (f g h : A ≃ A) :
   constructor
   · intro H
     refine ⟨normAdd f g h H, f 0, g 0, fun x => ?_, fun y => ?_, fun z => ?_⟩
-    · show f x = f x - f 0 + f 0
+    · change f x = f x - f 0 + f 0
       abel
-    · show g y = f y - f 0 + g 0
+    · change g y = f y - f 0 + g 0
       have h1 : f 0 + g y = h y := by simpa using H 0 y
       have h2 : f y + g 0 = h y := by simpa using H y 0
       rw [eq_sub_of_add_eq' h1, ← h2]
       abel
-    · show h z = f z - f 0 + f 0 + g 0
+    · change h z = f z - f 0 + f 0 + g 0
       rw [← show f z + g 0 = h z by simpa using H z 0]
       abel
   · rintro ⟨φ, cf, cg, hf, hg, hh⟩ x y
@@ -1246,13 +1230,7 @@ def autotopismEquiv (A : Type*) [AddCommGroup A] : (A ≃+ A) × A × A ≃ Auto
   invFun t := (normAdd t.1.1 t.1.2.1 t.1.2.2 t.2, t.1.1 0, t.1.2.1 0)
   left_inv p := by
     obtain ⟨φ, a, b⟩ := p
-    refine Prod.ext (AddEquiv.ext fun x => ?_) (Prod.ext ?_ ?_)
-    · show φ x + a - (φ 0 + a) = φ x
-      simp
-    · show φ 0 + a = a
-      simp
-    · show φ 0 + b = b
-      simp
+    refine Prod.ext (AddEquiv.ext fun x => ?_) (Prod.ext ?_ ?_) <;> simp [normAdd]
   right_inv t := by
     obtain ⟨⟨f, g, h⟩, H⟩ := t
     have hg : ∀ y, f y - f 0 + g 0 = g y := fun y => by
@@ -1265,7 +1243,7 @@ def autotopismEquiv (A : Type*) [AddCommGroup A] : (A ≃+ A) × A × A ≃ Auto
       abel
     refine Subtype.ext (Prod.ext (Equiv.ext fun x => ?_) (Prod.ext (Equiv.ext fun y => ?_)
       (Equiv.ext fun z => ?_)))
-    · show f x - f 0 + f 0 = f x
+    · change f x - f 0 + f 0 = f x
       abel
     · exact hg y
     · exact hh z
