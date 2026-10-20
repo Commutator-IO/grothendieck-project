@@ -127,8 +127,8 @@ theorem map_anti (g : Aut) (x : Fin 12) : g (anti x) = anti (g x) := by
   obtain ⟨h1, h2, h3⟩ := (anti_iff x (anti x)).1 rfl
   refine (anti_iff (g x) (g (anti x))).2 ⟨fun e => h1 (g.injective e),
     fun e => h2 (g.map_rel_iff.1 e), fun z hz e => ?_⟩
-  have := h3 (g.symm z) (by simpa using g.map_rel_iff.1 (by simpa using hz))
-  exact this (g.map_rel_iff.1 (by simpa using e))
+  exact h3 (g.symm z) (by simpa using g.map_rel_iff.1 (by simpa using hz))
+    (g.map_rel_iff.1 (by simpa using e))
 
 /-- The automorphism sending the flag `(0, 1, 2)` to `(x, y, z)`, computed vertex by vertex
 with `other`. -/
@@ -146,8 +146,6 @@ def ext (x y z : Fin 12) (v : Fin 12) : Fin 12 :=
 
 /-- An automorphism is determined by the image of one flag. -/
 theorem eq_ext (g : Aut) : ⇑g = ext (g 0) (g 1) (g 2) := by
-  have t : ∀ {a b c : Fin 12}, Tri a b c → Tri (g a) (g b) (g c) := fun h =>
-    ⟨g.map_rel_iff.2 h.1, g.map_rel_iff.2 h.2.1, g.map_rel_iff.2 h.2.2⟩
   have h5 : g 5 = other (g 0) (g 1) (g 2) := by
     rw [← map_other g (by decide)]; rfl
   have h3 : g 3 = other (g 0) (g 2) (g 1) := by
@@ -166,7 +164,6 @@ theorem eq_ext (g : Aut) : ⇑g = ext (g 0) (g 1) (g 2) := by
     rw [← map_other g (by decide)]; rfl
   have h11 : g 11 = other (g 6) (g 7) (g 1) := by
     rw [← map_other g (by decide)]; rfl
-  clear t
   funext v
   fin_cases v <;> simp only [ext] <;> first
     | rfl
@@ -346,8 +343,7 @@ theorem map_rho0 (g : Aut) (p : Fin 12 × Fin 12) (hp : IsEdge p) :
   simp only [gP] at hg ⊢
   rw [h1, h2, h3]
   rcases hg with ⟨a, b⟩ | ⟨a, b⟩
-  · exact Or.inl ⟨a.symm, b.symm⟩
-  · exact Or.inr ⟨b.symm, a.symm⟩
+  exacts [Or.inl ⟨a.symm, b.symm⟩, Or.inr ⟨b.symm, a.symm⟩]
 
 theorem sameDir_trans' : ∀ a, IsEdge a → ∀ b, SameDir a b → ∀ c, SameDir b c →
     SameDir a c := by decide +kernel
@@ -379,9 +375,8 @@ theorem map_sameTri (g : Aut) {p q : Fin 12 × Fin 12} (hp : IsEdge p) (hq : IsE
   rcases h with h | h | h
   · exact Or.inl (map_sameDir g h)
   · exact Or.inr (Or.inl (sameDir_trans _ _ _ gq (isEdge_map g hp1) (map_sameDir g h) m1))
-  · refine Or.inr (Or.inr ?_)
-    exact sameDir_trans _ _ _ gq (isEdge_map g hp2) (map_sameDir g h)
-      (sameDir_trans _ _ _ (isEdge_map g hp2) (rho0_edge _ (isEdge_map g hp1)) m2 m3)
+  · exact Or.inr (Or.inr (sameDir_trans _ _ _ gq (isEdge_map g hp2) (map_sameDir g h)
+      (sameDir_trans _ _ _ (isEdge_map g hp2) (rho0_edge _ (isEdge_map g hp1)) m2 m3)))
 
 /-- A vertex adjacent to `0` in each trièdre. -/
 def nb0 : Fin 5 → Fin 12 := ![1, 2, 3, 4, 5]
@@ -399,8 +394,7 @@ theorem col_map (g : Aut) {p : Fin 12 × Fin 12} (hp : IsEdge p) :
     (map_sameTri g hp h0 this))
 
 theorem actT_mul (g h : Aut) (c : Fin 5) : actT (g * h) c = actT g (actT h c) := by
-  have := col_map g (isEdge_map h (nb0_spec c).1)
-  simpa [actT, gP] using this
+  simpa [actT, gP] using col_map g (isEdge_map h (nb0_spec c).1)
 
 theorem actT_one (c : Fin 5) : actT 1 c = c := (nb0_spec c).2
 
@@ -443,8 +437,7 @@ theorem permT_eq_one_iff (g : Aut) : permT g = 1 ↔ g = 1 ∨ g = antiAut := by
     · right; apply RelIso.ext; intro v
       rw [congrFun (eq_ext g) v, a, b, c, ext_anti]; rfl
   · rintro (rfl | rfl)
-    · exact map_one _
-    · exact permT_antiAut
+    exacts [map_one _, permT_antiAut]
 
 theorem sign_aux : ∀ x y z (h : Tri x y z), Equiv.Perm.sign (permT (mkAut x y z h)) = 1 := by
   decide +kernel
@@ -498,12 +491,12 @@ def autEquivFlag : Aut ≃ {p : Fin 12 × Fin 12 × Fin 12 // Tri p.1 p.2.1 p.2.
   left_inv g := (eq_mkAut g).symm
   right_inv _ := rfl
 
-theorem card_flags : Fintype.card {p : Fin 12 × Fin 12 × Fin 12 // Tri p.1 p.2.1 p.2.2} = 120 := by
+theorem card_flags :
+    Fintype.card {p : Fin 12 × Fin 12 × Fin 12 // Tri p.1 p.2.1 p.2.2} = 120 := by
   decide +kernel
 
 theorem card_aut : Nat.card Aut = 120 := by
   rw [Nat.card_congr autEquivFlag, Nat.card_eq_fintype_card, card_flags]
-
 
 /-! ## The hemi-icosahedron from the oriented five-set (pages 26–32) -/
 
@@ -526,16 +519,13 @@ theorem numb_map (g : Aut) {s t u : Fin 12} (h : Tri s t u) :
   have e1 := map_other g h
   have e2 := map_other g hsv
   have e3 := map_other g hsu
-  have cm : ∀ x, Adj s x → colTab (g s) (g x) = actT g (colTab s x) := fun x hx => col_map g (p := (s, x)) hx
+  have cm : ∀ x, Adj s x → colTab (g s) (g x) = actT g (colTab s x) := fun x hx =>
+    col_map g (p := (s, x)) hx
   funext k
   simp only [numb, Function.comp]
   rw [← e1, ← e2, ← e3]
   fin_cases k
-  · exact cm _ h.1
-  · exact cm _ hv1
-  · exact cm _ a1
-  · exact cm _ a2
-  · exact cm _ h.2.1
+  exacts [cm _ h.1, cm _ hv1, cm _ a1, cm _ a2, cm _ h.2.1]
 
 /-- The reversal of places `(a₁, a₂, a₃, a₄, a₅) ↦ (a₁, a₅, a₄, a₃, a₂)`. -/
 def w0 : Equiv.Perm (Fin 5) := Equiv.swap 1 4 * Equiv.swap 2 3
@@ -787,13 +777,8 @@ theorem incidence_dictionary (p q : Fin 12 × Fin 12 × Fin 12) (hp : p ∈ triL
   · rw [samePent_map, ← b1]
     simp only [flagOf, RelIso.mul_apply, ← map_anti, g.injective.eq_iff]
   · rw [samePart_map, ← b2]
-    constructor
-    · intro hd
-      have := map_sameDir g⁻¹ hd
-      simpa [gP, flagOf] using this
-    · intro hd
-      have := map_sameDir g hd
-      simpa [gP, flagOf] using this
+    exact ⟨fun hd => by simpa [gP, flagOf] using map_sameDir g⁻¹ hd,
+      fun hd => by simpa [gP, flagOf] using map_sameDir g hd⟩
   · rw [faceSet_map, faceSet_map, (Finset.image_injective (permT g).injective).eq_iff, ← b3]
     have f1 : faceOf (flagOf g) = (faceOf (0, 1, 2)).image g := by rw [e0, faceOf_mul]; rfl
     have f2 : faceOf (flι (flagOf g)) = (faceOf (flι (0, 1, 2))).image g := by
