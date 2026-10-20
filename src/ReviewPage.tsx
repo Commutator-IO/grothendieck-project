@@ -35,6 +35,9 @@ const ITEMS = [...(QUEUE.items as ReviewItem[])].sort((a, b) => Number(isMaths(a
 const AUDIENCE = { readers: 'Reading the hand', maths: 'For mathematicians' } as const;
 type Filter = ReviewKind | 'all' | keyof typeof AUDIENCE;
 const audienceOf = (k: ReviewKind): keyof typeof AUDIENCE => (isMaths(k) ? 'maths' : 'readers');
+/** Answered here, with anything but « Skip »: such items leave the list unless « Show answered » is on. */
+const isAnswered = (a: Answer | undefined) => !!a && a.verdict !== 'skip';
+const ORDER = new Map(ITEMS.map((i, n) => [i.id, n]));
 
 const KIND_NAME: Record<ReviewKind, string> = {
   ill: 'Unread word',
@@ -74,11 +77,19 @@ export function ReviewPage() {
   const [pane, setPane] = useState(true);
   const [paneBatch, setPaneBatch] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
+  const [showAnswered, setShowAnswered] = useState(false);
 
-  const shown = useMemo(
-    () => (kind === 'all' ? ITEMS : ITEMS.filter((i) => (kind in AUDIENCE ? audienceOf(i.kind) === kind : i.kind === kind))),
+  // The items listed: answered ones (not skipped) are hidden unless asked for, so the list is what is left to do.
+  const listed = useMemo(
+    () => (showAnswered ? ITEMS : ITEMS.filter((i) => !isAnswered(answers[i.id]))),
+    [answers, showAnswered],
+  );
+  const inKind = useCallback(
+    (i: ReviewItem) => kind === 'all' || (kind in AUDIENCE ? audienceOf(i.kind) === kind : i.kind === kind),
     [kind],
   );
+  const shown = useMemo(() => listed.filter(inKind), [listed, inKind]);
+  const answeredHere = ITEMS.filter((i) => inKind(i) && isAnswered(answers[i.id])).length;
   const item = ITEMS.find((i) => i.id === id) ?? ITEMS[0];
   const index = shown.findIndex((i) => i.id === item.id);
   const answer = answers[item.id];
@@ -97,10 +108,14 @@ export function ReviewPage() {
     return () => removeEventListener('hashchange', onHash);
   }, [go]);
 
+  // Previous / Next walk the list as shown; from an item no longer in it (just answered), the nearest neighbour.
   const step = (d: number) => {
-    const list = shown.length ? shown : ITEMS;
-    const i = list.findIndex((x) => x.id === item.id);
-    go(list[(i + d + list.length) % list.length].id);
+    if (!shown.length) return;
+    const i = shown.findIndex((x) => x.id === item.id);
+    if (i >= 0) return go(shown[(i + d + shown.length) % shown.length].id);
+    const at = ORDER.get(item.id) ?? 0;
+    const next = d > 0 ? (shown.find((x) => ORDER.get(x.id)! > at) ?? shown[0]) : ([...shown].reverse().find((x) => ORDER.get(x.id)! < at) ?? shown[shown.length - 1]);
+    go(next.id);
   };
 
   const record = (verdict: Verdict, extra: Partial<Answer> = {}, advance = true) => {
@@ -109,9 +124,10 @@ export function ReviewPage() {
     setAnswers(next);
     saveAnswers(next);
     if (advance) {
-      const list = shown.length ? shown : ITEMS;
-      const i = list.findIndex((x) => x.id === item.id);
-      const after = [...list.slice(i + 1), ...list.slice(0, i)].find((x) => !next[x.id]);
+      // The next item with no answer at all, in the order of the list and after this one.
+      const at = ORDER.get(item.id) ?? 0;
+      const list = ITEMS.filter((x) => x.id !== item.id && inKind(x) && !next[x.id]);
+      const after = list.find((x) => ORDER.get(x.id)! > at) ?? list[0];
       if (after) go(after.id);
     }
   };
@@ -135,6 +151,8 @@ export function ReviewPage() {
   // A browser lets one click open one window: several parts are offered as links.
   const [parts, setParts] = useState(false);
   const send = () => {
+    // Sent answers stay hidden from the list; they leave the queue for good once applied (review-answered.json).
+    setShowAnswered(false);
     if (issues.length === 1) window.open(issues[0].url, '_blank', 'noopener');
     else setParts(true);
   };
@@ -196,17 +214,17 @@ export function ReviewPage() {
                 onChange={(e) => setKind(e.target.value as Filter)}
                 className="mt-1 w-full rounded-md border border-ink-200 bg-white px-2 py-1.5 text-[13px]"
               >
-                <option value="all">All checks ({ITEMS.length})</option>
+                <option value="all">All checks ({listed.length})</option>
                 {(Object.keys(AUDIENCE) as (keyof typeof AUDIENCE)[]).map((au) => (
                   <optgroup key={au} label={AUDIENCE[au]}>
                     <option value={au}>
-                      All: {AUDIENCE[au].toLowerCase()} ({ITEMS.filter((i) => audienceOf(i.kind) === au).length})
+                      All: {AUDIENCE[au].toLowerCase()} ({listed.filter((i) => audienceOf(i.kind) === au).length})
                     </option>
                     {(Object.keys(KIND_NAME) as ReviewKind[])
                       .filter((k) => audienceOf(k) === au)
                       .map((k) => {
-                        const n = ITEMS.filter((i) => i.kind === k).length;
-                        return n ? (
+                        const n = listed.filter((i) => i.kind === k).length;
+                        return ITEMS.some((i) => i.kind === k) ? (
                           <option key={k} value={k}>
                             {KIND_NAME[k]} ({n})
                           </option>
@@ -215,7 +233,21 @@ export function ReviewPage() {
                   </optgroup>
                 ))}
               </select>
-              <ol className="mt-2 max-h-[40vh] overflow-y-auto 2xl:max-h-[70vh] rounded-md border border-ink-200 text-[12.5px]">
+              <label className="mt-2 flex items-center gap-2 text-[12.5px] text-ink-600">
+                <input
+                  type="checkbox"
+                  checked={showAnswered}
+                  onChange={(e) => setShowAnswered(e.target.checked)}
+                  className="h-4 w-4 accent-brand-700"
+                />
+                Show answered ({answeredHere})
+              </label>
+              {!shown.length && (
+                <p className="mt-2 rounded-md border border-ink-200 px-2 py-2 text-[12.5px] text-ink-500">
+                  {answeredHere ? 'Every check in this view is answered.' : 'No checks in this view.'}
+                </p>
+              )}
+              <ol hidden={!shown.length} className="mt-2 max-h-[40vh] overflow-y-auto 2xl:max-h-[70vh] rounded-md border border-ink-200 text-[12.5px]">
                 {shown.map((i, n) => {
                   const a = answers[i.id];
                   const au = audienceOf(i.kind);
