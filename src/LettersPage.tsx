@@ -31,6 +31,7 @@ interface Letter {
   treatment: 'full' | 'summarised' | 'named';
   summary: string;
   where: string;
+  checked?: string;
 }
 const RAW = (lettersRaw as unknown as { built: string; records: Letter[] });
 const RECORDS = RAW.records;
@@ -288,6 +289,14 @@ function Register({ picked }: { picked: string | null }) {
                     <span className="text-[11.5px] text-ink-400">
                       {l.form}, {LANG[l.language] ?? l.language}
                     </span>
+                    {l.checked && (
+                      <>
+                        <br />
+                        <span className="text-[11.5px] text-ink-400" title={`Checked: ${l.checked}`}>
+                          ✓ checked on the facsimile
+                        </span>
+                      </>
+                    )}
                   </td>
                   <td className="px-2 py-2 text-ink-600">
                     {l.summary}{' '}
