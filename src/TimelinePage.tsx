@@ -31,7 +31,7 @@ interface Leaf {
   context: string;
   where: string;
 }
-const LEAVES = ((datedRaw as unknown as { records: Leaf[] }).records ?? []).filter((l) => l.iso && l.kind !== 'paper');
+const LEAVES = ((datedRaw as unknown as { records: Leaf[] }).records ?? []).filter((l) => l.iso && l.kind !== 'paper' && l.kind !== 'label');
 /**
  * A machine stamp — the banner of a computer listing he wrote on the back of,
  * a postmark — dates the paper, not the writing: the leaf can be no older, and
