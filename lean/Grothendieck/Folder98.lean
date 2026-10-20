@@ -361,8 +361,8 @@ theorem kEquiv_map {Ψ : C → Type w} {bc' : ∀ {K K' : C}, (K ⟶ K') → Ψ 
 
 /-! Cor. 5. `fg K` says that `K` is of finite type over `k`; `Ω` stands for `K̃`. The
 hypotheses are the two halves of Prop. 1, for `X` of finite type (`hdesc`: a sheaf is defined
-over a sub-extension of finite type; `hfin`: two equivalent sheaves defined over extensions of
-finite type become isomorphic over an extension of finite type), and the two consequences the
+over a sub-extension of finite type; `hfin`: two equivalent coherent sheaves defined over extensions
+of finite type become isomorphic over an extension of finite type), and the two consequences the
 reading draws from the page's hypotheses on `K̃`, algebraically closed of infinite
 transcendence degree (`huniv`: every extension of finite type embeds in `K̃`; `hhomog`: two
 embeddings of an extension of finite type differ by an automorphism of `K̃`). -/
