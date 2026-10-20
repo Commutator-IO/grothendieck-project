@@ -10,6 +10,11 @@
  * and writes two files:
  *
  *   src/content/review-queue.json     the checks: where, what is asked
+ *
+ * Each item carries a `prompt` (one plain question for the reader), a `hint`
+ * (where on the facsimile to look), `choices` (the answers offered as
+ * buttons), and, where it helps, the register `entry` of a letter or the
+ * edition's `claim` to check; #35's own wording is kept as `details`.
  *   src/content/review-snippets.json  the current reading around each doubt
  *
  * They are apart because of the rights hold (#31): the page loads the snippets
@@ -290,21 +295,164 @@ function push(it, snip) {
     cote: it.cote,
     batch,
     page,
-    question: it.question,
+    prompt: it.prompt,
+    hint: it.hint,
+    choices: it.choices,
+    entry: it.entry ?? null,
+    claim: it.claim ?? null,
+    details: it.details ?? null,
     context: it.context ?? null,
     link: `/#${it.cote}/${batch}/${edition}${page ? `/p${page}` : ''}`,
   });
   if (snip) snippets[id] = snip;
 }
 
-// The questions name no word of the reading: that is in the snippet, which a
-// build with the transcriptions switched off does not carry.
-const QUESTIONS = {
-  ill: 'An unread word: can you read it on the page?',
-  uncertain: () => 'A doubtful reading: is the marked word what the page has?',
-  add: () => 'The marked word is given as his insertion. Is it in his ink, or a word the transcriber supplied?',
-  supplied: () => 'The marked word is given as supplied by the transcriber. Is it on the page, inserted in his hand?',
+/* ---------- what is asked ---------- */
+
+// The prompts name no word of the transcription beyond a date or a label as
+// written: the passage is in the snippet, which a build with the
+// transcriptions switched off does not carry. Each choice is a button; its
+// `verdict` colours the answer, `ask` opens a field for the reader's words.
+const C = (value, verdict, ask) => ({ value, verdict, ...(ask ? { ask } : {}) });
+const pagesText = (ps) =>
+  ps.length === 1
+    ? `p. ${ps[0]}`
+    : ps.length > 2 && ps.every((x, i) => i === 0 || x === ps[i - 1] + 1)
+      ? `pp. ${ps[0]}–${ps.at(-1)}`
+      : `pp. ${ps.slice(0, -1).join(', ')} and ${ps.at(-1)}`;
+const firstPage = (r) => Number(String(r.page ?? r.pages).split(/[-–]/)[0]) || null;
+const MONTHS = 'January February March April May June July August September October November December'.split(' ');
+const human = (iso) => {
+  const [y, m, d] = String(iso).split('-');
+  return [d ? Number(d) : null, m ? MONTHS[Number(m) - 1] : null, y].filter(Boolean).join(' ');
 };
+const slug = (w) =>
+  w
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/([a-z]{3})[a-z]*/g, '$1')
+    .replace(/[^a-z0-9]/g, '');
+/**
+ * A record gets its date in the id when one clause gives several items, or
+ * when it is not the first record of its page: the plain id stays with the
+ * record it named before, so an answer kept in a browser keeps its item.
+ */
+const dateId = (cote, rec, p, split) =>
+  `date-${cote}-p${p}${split || leaves.find((r) => r.folder === cote && firstPage(r) === p) !== rec ? `-${slug(rec.written)}` : ''}`;
+const looksLike = (rec) =>
+  rec?.kind === 'stamp'
+    ? 'a printed banner or stamp with a date'
+    : rec?.hand === 'typed' || rec?.kind === 'typescript'
+      ? 'a typed date'
+      : rec?.hand === 'his'
+        ? 'a date in his hand'
+        : 'a date';
+const facsimileAt = (ps) => `Look on the facsimile at ${pagesText(ps)}`;
+
+const ASK = {
+  ill: {
+    prompt: 'Can you read the illegible word, shown as […] in the highlighted spot?',
+    choices: [C('I can read it', 'other', 'What the word reads'), C('Illegible to me too', 'illegible')],
+  },
+  uncertain: {
+    prompt: 'Is the highlighted word what the page has?',
+    choices: [C('Yes, the page has it', 'right'), C('The page has something else', 'other', 'What you read on the page (a few words)')],
+  },
+  add: {
+    prompt: 'Is the highlighted word written in his hand as an insertion, above the line or in the margin?',
+    choices: [C('Yes, inserted in his hand', 'right'), C('No, it is not on the page', 'other'), C('Something else', 'other', 'What the page has')],
+  },
+  supplied: {
+    prompt: 'Is the highlighted word on the page, inserted in his hand, or did the transcriber supply it?',
+    choices: [C('Supplied: it is not on the page', 'right'), C('On the page, in his hand', 'other'), C('Something else', 'other', 'What the page has')],
+  },
+};
+const sampledAsk = (kind, o) => ({
+  ...ASK[kind],
+  hint: `${facsimileAt([o.page])} and find the quoted words; the highlighted one is the spot to check.`,
+});
+
+/** The pages a date not settled on one leaf may stand on. */
+function candidates(rec, clause) {
+  const ctx = /\bon ((?:\d+, )*\d+ or \d+)/.exec(rec.context ?? '');
+  if (ctx) return ctx[1].split(/, | or /).map(Number);
+  const or = /pp?\. (\d+) or pp?\. (\d+)/.exec(clause);
+  if (or) return [Number(or[1]), Number(or[2])];
+  const [a, b] = String(rec.page).split(/[-–]/).map(Number);
+  if (b && b > a && b - a <= 12) return Array.from({ length: b - a + 1 }, (_, i) => a + i);
+  return [a];
+}
+
+/** One item of §3: what to ask about one record, by the kind of doubt #35 names. */
+function dateAsk(label, rec, p, clause, pages) {
+  const w = rec.written;
+  const look = looksLike(rec);
+  if (/page not settled/i.test(label)) {
+    const cands = candidates(rec, clause);
+    if (cands.length > 1)
+      return {
+        page: cands[0],
+        prompt: `On which page is the date « ${w} » written? Look at ${pagesText(cands)}.`,
+        choices: [...cands.map((c) => C(`p. ${c}`, 'right')), C('Not on these pages', 'other', 'Where it is, if you found it')],
+        hint: `${facsimileAt(cands)} for ${look}.`,
+      };
+    return {
+      page: cands[0],
+      prompt: `Is the date « ${w} » written on p. ${cands[0]}?`,
+      choices: [C(`Yes, on p. ${cands[0]}`, 'right'), C('On another page', 'other', 'Which page')],
+      hint: `${facsimileAt(cands)} and the pages around it for ${look}.`,
+    };
+  }
+  if (/neighbouring leaf/i.test(label))
+    return {
+      prompt: `Is a year written with the date « ${w} » on p. ${p} (it is dated ${String(rec.iso).slice(0, 4)} from a neighbouring leaf)?`,
+      choices: [C('No year on the leaf', 'right'), C('A year is written', 'other', 'The year as written')],
+      hint: `${facsimileAt([p])} for ${look}, and for a year anywhere near it.`,
+    };
+  if (/paraphrased/i.test(label))
+    return {
+      prompt: `How is the date written on ${pagesText(pages)}? It is recorded, in paraphrase, as « ${w} ».`,
+      choices: [C(`Exactly « ${w} »`, 'right'), C('Otherwise', 'other', 'The date exactly as written'), C('No date there', 'other')],
+      hint: `${facsimileAt(pages)} for ${look}, and copy it letter for letter.`,
+    };
+  if (/labels/i.test(label))
+    return {
+      prompt: `On p. ${p}, is « ${w} » the date the page was written, or a label added to it (a title, a filing mark)?`,
+      choices: [C('The date of writing', 'right'), C('A label or title', 'other'), C('Something else', 'other', 'What it is')],
+      hint: `${facsimileAt([p])} for « ${w} »${/hand/.test(clause) ? ', and whether it is in his hand' : ''}.`,
+    };
+  return {
+    prompt: `Is the date on p. ${p} « ${w} », meaning ${human(rec.iso)}?`,
+    choices: [C('Yes', 'right'), C('No, something else', 'other', 'What the date reads, and what it means')],
+    hint: `${facsimileAt([p])} for ${look}; check each figure${/\d+[./-]\d+[./-]\d+/.test(w) ? ', and which is the day and which the month' : ''}.`,
+  };
+}
+
+const LANGUAGE = { fr: 'French', en: 'English', de: 'German', unknown: 'not stated' };
+/** A register entry as the reading to check: who writes, to whom, when, where. */
+function entryOf(rec) {
+  if (!rec) return null;
+  const who = rec.correspondent ?? (rec.correspondentNote ? `unnamed: ${rec.correspondentNote}` : 'unnamed');
+  const parties =
+    rec.direction === 'from'
+      ? [['From', 'Grothendieck'], ['To', who]]
+      : rec.direction === 'to'
+        ? [['From', who], ['To', 'Grothendieck']]
+        : [['Correspondent', who], ['Direction', 'between others, or unclear']];
+  return [...parties, ['Date', rec.date ?? 'undated'], ['Place', rec.place ?? 'not given'], ['Form', rec.form], ['Language', LANGUAGE[rec.language] ?? rec.language], ['Pages', String(rec.pages ?? '?')]];
+}
+const letterPages = (rec, p) => {
+  const ps = String(rec?.pages ?? p ?? '');
+  if (/,/.test(ps)) return [...ps.matchAll(/\d+/g)].map((x) => Number(x[0]));
+  const [a, b] = ps.split(/[-–]/).map(Number);
+  return b && b > a ? Array.from({ length: b - a + 1 }, (_, i) => a + i) : a ? [a] : [];
+};
+const LETTER = {
+  prompt: 'Is this a letter, and is the entry right? Check who writes, to whom, the date and the place.',
+  choices: [C('Yes, the entry is right', 'right'), C('Not a letter', 'other', 'What it is instead'), C('Something in the entry is wrong', 'other', 'What is wrong: writer, addressee, date or place')],
+};
+const letterHint = (cote, ps) => (ps.length ? `${facsimileAt(ps)} for the heading, the salutation, the signature, and any date or place.` : `Leaf through the facsimile of folder ${cote} for the heading, the salutation and the signature.`);
 
 let section = '';
 let sub = '';
@@ -337,9 +485,9 @@ for (const raw of body.split('\n')) {
     // batches are those given with their count, once each.
     for (const batch of new Set([...text.matchAll(/batch (\d+) — \d/g)].map((m) => Number(m[1])))) {
       for (const o of sampleOf(`ill-${cote}-${batch}`, occurrences(cote, batch, (t) => t.k === 'ill'), SAMPLES.ill))
-        push({ id: `ill-${cote}-${batch}-p${o.page}`, section: n, kind: 'ill', cote, batch, page: o.page, question: QUESTIONS.ill, context: `One of the densest batches for unread words (#35 §1).` }, o.snippet);
+        push({ id: `ill-${cote}-${batch}-p${o.page}`, section: n, kind: 'ill', cote, batch, page: o.page, ...sampledAsk('ill', o), context: `One of the densest batches for unread words (#35 §1).` }, o.snippet);
       for (const o of sampleOf(`unc-${cote}-${batch}`, occurrences(cote, batch, (t) => t.k === 'unc' && t.s.split(' ').length <= 3 && t.s.length > 1), SAMPLES.uncertain))
-        push({ id: `unc-${cote}-${batch}-p${o.page}`, section: n, kind: 'uncertain', cote, batch, page: o.page, question: QUESTIONS.uncertain(o.snippet.word), context: `Doubtful readings in the same batch (#35 §1).` }, o.snippet);
+        push({ id: `unc-${cote}-${batch}-p${o.page}`, section: n, kind: 'uncertain', cote, batch, page: o.page, ...sampledAsk('uncertain', o), context: `Doubtful readings in the same batch (#35 §1).` }, o.snippet);
     }
     continue;
   }
@@ -371,7 +519,7 @@ for (const raw of body.split('\n')) {
       if (hit) found.push(hit);
     }
     for (const o of spread(found, SAMPLES[kind]))
-      push({ id: `${kind}-${o.cote}-${o.batch}-p${o.page}`, section: n, kind, cote: o.cote, batch: o.batch, page: o.page, question: QUESTIONS[kind](o.snippet.word), context: kind === 'add' ? 'A free-standing \\add{} that may be a supply (#35 §2).' : 'A glued \\supplied{} that may be his insertion (#35 §2).' }, o.snippet);
+      push({ id: `${kind}-${o.cote}-${o.batch}-p${o.page}`, section: n, kind, cote: o.cote, batch: o.batch, page: o.page, ...sampledAsk(kind, o), context: kind === 'add' ? 'A free-standing \\add{} that may be a supply (#35 §2).' : 'A glued \\supplied{} that may be his insertion (#35 §2).' }, o.snippet);
     continue;
   }
 
@@ -383,26 +531,41 @@ for (const raw of body.split('\n')) {
       continue;
     }
     const label = m[1];
-    const clauses = m[3].split(/;\s*/);
-    for (const clause of clauses) {
+    const Label = `${label[0].toUpperCase()}${label.slice(1)}`;
+    // One item per record: a clause naming several dates gives several items.
+    const dateItem = (cote, rec, clause, pages, split) => {
+      const p0 = pages[0] ?? firstPage(rec);
+      const ask = dateAsk(label, rec, p0, clause, pages.length ? pages : [p0]);
+      const p = ask.page ?? p0;
+      const b = rec.batch ?? (p ? batchOf(p) : 1);
+      const s = snippetAt(cote, b, { line: Number(rec.where.split(':')[1]) || null, page: p, needle: rec.written });
+      push({ id: dateId(cote, rec, p, split), section: n, kind: 'date', cote, batch: b, page: p, prompt: ask.prompt, hint: ask.hint, choices: ask.choices, details: `${Label}: ${clause.trim()}`, context: `Recorded as « ${rec.written} » (${rec.hand}, ${rec.kind}${rec.iso ? `, ${rec.iso}` : ''}).` }, s?.snippet ?? null);
+    };
+    for (const clause of m[3].split(/;\s*/)) {
       const lead = /^(\d+(?:-\d+)?)\b(.*)$/.exec(clause.trim());
       if (lead && isCote(lead[1])) {
         const cote = lead[1];
         const rest = lead[2];
         const batch = Number(/batch (\d+)/.exec(rest)?.[1]) || null;
-        const page = Number(/pp?\. (\d+)/.exec(rest)?.[1]) || null;
+        const many = /batches (\d+)[–-](\d+)/.exec(rest);
+        const pages = many ? [] : [...(/pp?\. ([\d, –]+)/.exec(rest)?.[1] ?? '').matchAll(/\d+/g)].map((x) => Number(x[0]));
+        const page = pages[0] ?? null;
         const quote = /«\s*([^»]+?)\s*»/.exec(rest)?.[1] ?? null;
         const norm = (x) => x.replace(/\s+/g, '').toLowerCase();
-        const rec =
-          leaves.find((r) => r.folder === cote && quote && norm(r.written).includes(norm(quote).slice(0, 8))) ??
-          leaves.find((r) => r.folder === cote && page && String(r.page).split(/[-–]/)[0] === String(page)) ??
-          (batch ? leaves.find((r) => r.folder === cote && r.batch === batch) : null) ??
-          (!page && !batch ? leaves.find((r) => r.folder === cote) : null);
-        const p = page ?? (rec ? Number(String(rec.page).split(/[-–]/)[0]) || null : null);
-        const b = batch ?? rec?.batch ?? (p ? batchOf(p) : 1);
-        const line = rec && rec.folder === cote && Number(rec.where.split(':')[1]);
-        const s = snippetAt(cote, b, { line: line || null, page: p, needle: quote ?? rec?.written ?? null });
-        push({ id: `date-${cote}-p${p ?? b}`, section: n, kind: 'date', cote, batch: b, page: p, question: `${label[0].toUpperCase()}${label.slice(1)}: ${clause.trim()}`, context: rec ? `Recorded as « ${rec.written} » (${rec.hand}, ${rec.kind}).` : null }, s?.snippet ?? null);
+        let recs;
+        if (many)
+          // « 154 batches 5–9 »: a few of the dates in those batches given in words.
+          recs = spread(leaves.filter((r) => r.folder === cote && r.batch >= Number(many[1]) && r.batch <= Number(many[2]) && !/[-–]/.test(String(r.page)) && /[A-Z][a-z]+ \d{4}/.test(r.written)), 3);
+        else if (/page not settled/i.test(label) && batch && !quote) recs = leaves.filter((r) => r.folder === cote && r.batch === batch && /[-–]/.test(String(r.page)));
+        else
+          recs = [
+            leaves.find((r) => r.folder === cote && quote && norm(r.written).includes(norm(quote).slice(0, 8))) ??
+              leaves.find((r) => r.folder === cote && page && firstPage(r) === page) ??
+              (batch ? leaves.find((r) => r.folder === cote && r.batch === batch) : null) ??
+              (!page && !batch ? leaves.find((r) => r.folder === cote) : null),
+          ].filter(Boolean);
+        if (!recs.length) skipped.push(`${label}: ${clause}`);
+        for (const rec of recs) dateItem(cote, rec, clause, many ? [] : pages, recs.length > 1 && !many);
         continue;
       }
       // « the day-only dates of 154 (24.12, 25.12), 67 (…) » — cotes named in passing.
@@ -412,13 +575,8 @@ for (const raw of body.split('\n')) {
         continue;
       }
       for (const cote of new Set(cotes)) {
-        const yearless = leaves.filter((r) => r.folder === cote && !/\d{4}|\.\d\d$|\/\d\d$/.test(r.written.replace(/^(\d+\.\d+)$/, '$1')));
-        const recs = yearless.length ? yearless : leaves.filter((r) => r.folder === cote).slice(0, 1);
-        for (const rec of recs.slice(0, 3)) {
-          const p = Number(String(rec.page).split(/[-–]/)[0]) || null;
-          const s = snippetAt(cote, rec.batch, { line: Number(rec.where.split(':')[1]), page: p, needle: rec.written });
-          push({ id: `date-${cote}-p${p ?? rec.batch}`, section: n, kind: 'date', cote, batch: rec.batch, page: p, question: `${label[0].toUpperCase()}${label.slice(1)}: « ${rec.written} » — is the year on the leaf, or taken from a neighbour?`, context: `Recorded as ${rec.iso} (${rec.hand}, ${rec.kind}).` }, s?.snippet ?? null);
-        }
+        const borrowed = leaves.filter((r) => r.folder === cote && /year from (a )?neighbouring leaf/.test(r.context ?? ''));
+        for (const rec of borrowed.length ? borrowed : leaves.filter((r) => r.folder === cote).slice(0, 1)) dateItem(cote, rec, clause, []);
       }
     }
     continue;
@@ -437,14 +595,31 @@ for (const raw of body.split('\n')) {
         const p = page ?? (rec ? Number(String(rec.pages).split(/[-–]/)[0]) || null : null);
         const b = rec?.batch ?? (p ? batchOf(p) : 1);
         const s = rec ? snippetAt(cote, b, { line: Number(rec.where.split(':')[1]), page: p, needle: rec.date }) : null;
-        push({ id: `letter-${cote}-p${p ?? b}`, section: n, kind: 'letter', cote, batch: b, page: p, question: `${part.trim()} — ${m[2]}`, context: rec ? `Register: ${rec.direction} ${rec.correspondent ?? 'an unnamed correspondent'}, ${rec.date ?? 'undated'}, ${rec.form}, ${rec.language}.` : null }, s?.snippet ?? null);
+        const ask = rec
+          ? LETTER
+          : {
+              prompt: 'Is this a letter? If so, note who writes, to whom, the date and the place.',
+              choices: [C('Yes, a letter', 'other', 'Who writes, to whom, the date and the place'), C('Not a letter', 'other', 'What it is instead')],
+            };
+        push({ id: `letter-${cote}-p${p ?? b}`, section: n, kind: 'letter', cote, batch: b, page: p, ...ask, hint: letterHint(cote, letterPages(rec, p)), entry: entryOf(rec), details: `${part.trim()} — ${m[2]}`, context: null }, s?.snippet ?? null);
       }
       continue;
     }
     const named = [...text.matchAll(/\*\*(\d+(?:-\d+)?)\*\*\s*«\s*([^»]+?)\s*»/g)];
     if (named.length) {
       for (const [, cote, what] of named)
-        push({ id: `letter-${cote}-missing`, section: n, kind: 'letter', cote, batch: 1, page: null, question: `The inventory lists « ${what} » in folder ${cote}, and the transcriptions found no such letter. Is it in the folder, and on which page?` }, null);
+        push({
+          id: `letter-${cote}-missing`,
+          section: n,
+          kind: 'letter',
+          cote,
+          batch: 1,
+          page: null,
+          prompt: `Is there a letter in folder ${cote} (the inventory lists « ${what} »), and on which page?`,
+          choices: [C('Yes, I found it', 'other', 'The page, and who writes to whom'), C('No letter in the folder', 'right')],
+          hint: `Leaf through the facsimile of folder ${cote} for a page with a salutation, a signature or an envelope; the transcriptions found none.`,
+          details: `The inventory lists « ${what} » in folder ${cote}, and the transcriptions found no such letter.`,
+        }, null);
       continue;
     }
     if (/unnamed as a private person/.test(text)) {
@@ -452,7 +627,19 @@ for (const raw of body.split('\n')) {
         const wl = Number(rec.where.split(':')[1]);
         const ls = lines(rec.folder, rec.batch);
         const p = Number(String(rec.pages).split(/[-–]/)[0]) || (ls && wl ? pagesOf(ls)[wl - 1] : null) || null;
-        push({ id: `letter-${rec.folder}-p${p}`, section: n, kind: 'letter', cote: rec.folder, batch: rec.batch, page: p, question: 'The correspondent is left unnamed as a private person. Is the writer or addressee in fact a public figure?', context: rec.correspondentNote ?? null }, null);
+        push({
+          id: `letter-${rec.folder}-p${p}`,
+          section: n,
+          kind: 'letter',
+          cote: rec.folder,
+          batch: rec.batch,
+          page: p,
+          prompt: 'Is the unnamed correspondent of this letter a public figure (a mathematician, an official), who should then be named?',
+          choices: [C('A private person: leave unnamed', 'right'), C('A public figure', 'other', 'Who, and in what role')],
+          hint: `${letterHint(rec.folder, letterPages(rec, p))} A letterhead or a title under the signature can tell.`,
+          entry: entryOf(rec),
+          details: text,
+        }, null);
       }
       continue;
     }
@@ -460,19 +647,47 @@ for (const raw of body.split('\n')) {
     continue;
   }
 
-  // #48 §2 — the edition's own arguments and the references cited from memory.
+  // #48 §2 — the edition's own arguments and the references cited from memory:
+  // questions for a mathematician, not for a reader of the hand.
   if (fromMoved && sub.startsWith('2.')) {
     const arg = /^\*\*(\d+(?:-\d+)?)(?:,\s*pp?\.\s*([\d–, -]+))?:\*\*\s*(.*)$/.exec(text);
     if (arg && isCote(arg[1])) {
       const page = Number(/\d+/.exec(arg[2] ?? '')?.[0]) || null;
-      push({ id: `argument-${arg[1]}-p${page ?? 0}`, section: n, kind: 'argument', cote: arg[1], page, edition: 'modern', question: arg[3], context: `A footnote of the modernised reading gives an argument of the edition's own, unchecked (#48 → #35).` }, null);
+      const ps = arg[2]?.trim();
+      const at = ps ? ` at ${/–/.test(ps) ? `pp. ${ps}` : pagesText([...ps.matchAll(/\d+/g)].map((x) => Number(x[0])))}` : '';
+      push({
+        id: `argument-${arg[1]}-p${page ?? 0}`,
+        section: n,
+        kind: 'argument',
+        cote: arg[1],
+        page,
+        edition: 'modern',
+        prompt: `Does this argument, given in a footnote of the modernised reading of folder ${arg[1]}${at}, hold?`,
+        choices: [C('It holds', 'right'), C('It does not hold', 'other', 'What fails, in a few words')],
+        hint: `Open the modernised reading of folder ${arg[1]}${at} and read the footnote; the facsimile shows what his page itself says.`,
+        claim: `${arg[3][0].toUpperCase()}${arg[3].slice(1)}`,
+        details: text.replace(/\*\*/g, ''),
+        context: `A footnote of the modernised reading gives an argument of the edition's own, unchecked (#48 → #35).`,
+      }, null);
       continue;
     }
     const refs = /\(([\d, ]+)\)\s*$/.exec(text);
     if (refs) {
       const cotes = refs[1].split(/,\s*/).filter(isCote);
       if (cotes.length) {
-        push({ id: `reference-${cotes.join('-')}`, section: n, kind: 'reference', cote: cotes[0], page: null, edition: 'modern', question: `References cited from memory in the modernised readings of ${cotes.join(', ')}: ${text.replace(/\s*\([\d, ]+\)\s*$/, '')}. Do they say what the footnotes say?`, context: null }, null);
+        push({
+          id: `reference-${cotes.join('-')}`,
+          section: n,
+          kind: 'reference',
+          cote: cotes[0],
+          page: null,
+          edition: 'modern',
+          prompt: 'Are these references right: author, title, year, and the place in the work they are cited for?',
+          choices: [C('They are right', 'right'), C('One is not right', 'other', 'Which one, and what is wrong')],
+          hint: `The footnotes of the modernised reading${cotes.length > 1 ? 's' : ''} of ${cotes.join(', ')} cite them from memory; check each against the work itself.`,
+          claim: text.replace(/\s*\([\d, ]+\)\s*$/, ''),
+          details: `References cited from memory in the modernised readings of ${cotes.join(', ')} (#48 → #35).`,
+        }, null);
         continue;
       }
     }

@@ -19,7 +19,18 @@ export interface ReviewItem {
   cote: string;
   batch: number;
   page: number | null;
-  question: string;
+  /** The question put to the reader, in one plain sentence. */
+  prompt: string;
+  /** Where on the facsimile (or in the reading) to look. */
+  hint: string;
+  /** The answers offered as buttons; « Can't tell » and « Skip » are always there. */
+  choices: Choice[];
+  /** A letter's register entry, as the reading to check: [field, value]. */
+  entry: [string, string][] | null;
+  /** The edition's own argument or references, for the mathematicians. */
+  claim: string | null;
+  /** #35's own wording of the check. */
+  details: string | null;
   context: string | null;
   /** The reading view at that page, on this site. */
   link: string;
@@ -36,8 +47,17 @@ export interface Snippet {
 
 export type Verdict = 'right' | 'other' | 'illegible' | 'skip';
 
+/** One answer offered as a button: `ask` opens a field for the reader's words. */
+export interface Choice {
+  value: string;
+  verdict: Verdict;
+  ask?: string;
+}
+
 export interface Answer {
   verdict: Verdict;
+  /** The button chosen (a page, « Not a letter » …); absent in answers saved before the choices. */
+  choice?: string;
   /** What the reader reads instead, for « other ». */
   reading?: string;
   note?: string;
@@ -51,8 +71,15 @@ export const VERDICT_NAME: Record<Verdict, string> = {
   skip: 'Skipped',
 };
 
-/** Questions about the mathematics rather than the ink: the verdicts read differently. */
+/** Questions about the mathematics rather than the ink: a section of their own. */
 export const isMaths = (k: ReviewKind) => k === 'argument' || k === 'reference';
+
+/** What an answer says, in words: the button chosen, else the verdict. */
+export function answerName(it: ReviewItem, a: Answer): string {
+  if (a.choice) return a.choice;
+  if (a.verdict === 'skip') return VERDICT_NAME.skip;
+  return it.choices.find((c) => c.verdict === a.verdict)?.value ?? (a.verdict === 'illegible' ? "Can't tell" : VERDICT_NAME[a.verdict]);
+}
 
 const KEY = 'gn-review:35';
 
@@ -76,15 +103,15 @@ export function saveAnswers(a: Record<string, Answer>) {
 
 const SITE = 'https://grothendieck.commutator.io';
 
+/** French quotation marks as plain ones, for the Markdown of an issue. */
+const plain = (s: string) => s.replace(/«\s*/g, '"').replace(/\s*»/g, '"');
+
 /** One answer as a Markdown list item. A proposed reading is cut to fifteen words. */
 export function answerLine(it: ReviewItem, a: Answer): string {
   const where = [`folder ${it.cote}`, batchName(it.batch), it.page ? `p. ${it.page}` : null].filter(Boolean).join(', ');
-  const verdict = isMaths(it.kind)
-    ? { right: 'checks out', other: 'does not hold', illegible: "can't tell", skip: 'skipped' }[a.verdict]
-    : VERDICT_NAME[a.verdict];
-  const parts = [`- \`${it.id}\` — ${where} — **${verdict}**`];
-  if (a.verdict === 'other' && a.reading?.trim()) parts.push(`: « ${shortQuote(a.reading, 15).replace(/[«»]/g, '"')} »`);
-  const lines = [parts.join('')];
+  const parts = [`- \`${it.id}\` — ${where} — **${plain(answerName(it, a))}**`];
+  if (a.reading?.trim()) parts.push(`: « ${plain(shortQuote(a.reading, 15))} »`);
+  const lines = [parts.join(''), `  - Asked: ${plain(it.prompt)}`];
   if (a.note?.trim()) lines.push(`  - Note: ${a.note.trim().replace(/\s*\n\s*/g, ' ')}`);
   lines.push(`  - ${SITE}/review/#${it.id}`);
   return lines.join('\n');
@@ -93,7 +120,7 @@ export function answerLine(it: ReviewItem, a: Answer): string {
 const HEAD = (n: number) =>
   [
     `Answers from the review page (${SITE}/review/) to #35, checked against Montpellier's facsimile.`,
-    `${n} answer${n === 1 ? '' : 's'}. Each line: item, folder, batch, page, verdict, the reading proposed (fifteen words at most), the reader's note.`,
+    `${n} answer${n === 1 ? '' : 's'}. Each line: item, folder, batch, page, the answer chosen (a page, a verdict), the reading proposed (fifteen words at most), then the question asked and the reader's note.`,
     '',
   ].join('\n');
 

@@ -6,12 +6,13 @@ import QUEUE from './content/review-queue.json';
 import { batchRange, pdfIndexOf, sourceUrl, useFacsimileProxy } from './lib/batches.ts';
 import {
   answerIssues,
+  answerName,
   answersMarkdown,
   isMaths,
   loadAnswers,
   saveAnswers,
-  VERDICT_NAME,
   type Answer,
+  type Choice,
   type ReviewItem,
   type ReviewKind,
   type Snippet,
@@ -29,7 +30,11 @@ import {
  */
 const SHOW_READINGS = import.meta.env.VITE_RENDER_TRANSCRIPTS !== 'false';
 
-const ITEMS = QUEUE.items as ReviewItem[];
+// Readers of the hand first, then the questions for mathematicians.
+const ITEMS = [...(QUEUE.items as ReviewItem[])].sort((a, b) => Number(isMaths(a.kind)) - Number(isMaths(b.kind)));
+const AUDIENCE = { readers: 'Reading the hand', maths: 'For mathematicians' } as const;
+type Filter = ReviewKind | 'all' | keyof typeof AUDIENCE;
+const audienceOf = (k: ReviewKind): keyof typeof AUDIENCE => (isMaths(k) ? 'maths' : 'readers');
 
 const KIND_NAME: Record<ReviewKind, string> = {
   ill: 'Unread word',
@@ -64,13 +69,16 @@ export function ReviewPage() {
   const snippets = useSnippets();
   const relay = useFacsimileProxy();
   const [answers, setAnswers] = useState<Record<string, Answer>>(loadAnswers);
-  const [kind, setKind] = useState<ReviewKind | 'all'>('all');
+  const [kind, setKind] = useState<Filter>('all');
   const [id, setId] = useState<string>(() => idFromHash() ?? ITEMS.find((i) => !loadAnswers()[i.id])?.id ?? ITEMS[0].id);
   const [pane, setPane] = useState(true);
   const [paneBatch, setPaneBatch] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
 
-  const shown = useMemo(() => (kind === 'all' ? ITEMS : ITEMS.filter((i) => i.kind === kind)), [kind]);
+  const shown = useMemo(
+    () => (kind === 'all' ? ITEMS : ITEMS.filter((i) => (kind in AUDIENCE ? audienceOf(i.kind) === kind : i.kind === kind))),
+    [kind],
+  );
   const item = ITEMS.find((i) => i.id === id) ?? ITEMS[0];
   const index = shown.findIndex((i) => i.id === item.id);
   const answer = answers[item.id];
@@ -96,8 +104,8 @@ export function ReviewPage() {
   };
 
   const record = (verdict: Verdict, extra: Partial<Answer> = {}, advance = true) => {
-    const next = { ...answers, [item.id]: { ...answers[item.id], verdict, ...extra, date: new Date().toISOString() } };
-    if (verdict !== 'other') delete next[item.id].reading;
+    // A new answer replaces the old one whole (its choice, its reading), keeping only the note.
+    const next = { ...answers, [item.id]: { note: answers[item.id]?.note, ...extra, verdict, date: new Date().toISOString() } };
     setAnswers(next);
     saveAnswers(next);
     if (advance) {
@@ -167,9 +175,10 @@ export function ReviewPage() {
               <a className="text-brand-700 underline" href="https://github.com/Commutator-IO/grothendieck-project/issues/35">
                 issue #35
               </a>{' '}
-              that need a reader of French handwriting, not of the mathematics: one spot of a page at a time, with
-              Montpellier’s facsimile beside it. Your answers stay in this browser until you send them as a prefilled
-              GitHub issue.
+              that need a reader of French handwriting: one spot of a page at a time, with Montpellier’s facsimile
+              beside it, each a plain question with its answers as buttons. A few, under « For mathematicians », ask
+              instead whether an argument or a reference of the edition holds. Your answers stay in this browser until
+              you send them as a prefilled GitHub issue.
             </p>
             <p className="mt-2 text-[13px] text-ink-500">
               {done} of {ITEMS.length} answered · built from #35 on {QUEUE.built}
@@ -184,24 +193,40 @@ export function ReviewPage() {
               <select
                 id="kind"
                 value={kind}
-                onChange={(e) => setKind(e.target.value as ReviewKind | 'all')}
+                onChange={(e) => setKind(e.target.value as Filter)}
                 className="mt-1 w-full rounded-md border border-ink-200 bg-white px-2 py-1.5 text-[13px]"
               >
                 <option value="all">All checks ({ITEMS.length})</option>
-                {(Object.keys(KIND_NAME) as ReviewKind[]).map((k) => {
-                  const n = ITEMS.filter((i) => i.kind === k).length;
-                  return n ? (
-                    <option key={k} value={k}>
-                      {KIND_NAME[k]} ({n})
+                {(Object.keys(AUDIENCE) as (keyof typeof AUDIENCE)[]).map((au) => (
+                  <optgroup key={au} label={AUDIENCE[au]}>
+                    <option value={au}>
+                      All: {AUDIENCE[au].toLowerCase()} ({ITEMS.filter((i) => audienceOf(i.kind) === au).length})
                     </option>
-                  ) : null;
-                })}
+                    {(Object.keys(KIND_NAME) as ReviewKind[])
+                      .filter((k) => audienceOf(k) === au)
+                      .map((k) => {
+                        const n = ITEMS.filter((i) => i.kind === k).length;
+                        return n ? (
+                          <option key={k} value={k}>
+                            {KIND_NAME[k]} ({n})
+                          </option>
+                        ) : null;
+                      })}
+                  </optgroup>
+                ))}
               </select>
               <ol className="mt-2 max-h-[40vh] overflow-y-auto 2xl:max-h-[70vh] rounded-md border border-ink-200 text-[12.5px]">
-                {shown.map((i) => {
+                {shown.map((i, n) => {
                   const a = answers[i.id];
+                  const au = audienceOf(i.kind);
+                  const head = n === 0 ? shown.some((x) => audienceOf(x.kind) !== au) : audienceOf(shown[n - 1].kind) !== au;
                   return (
                     <li key={i.id}>
+                      {head && (
+                        <p className="sticky top-0 border-b border-ink-200 bg-ink-50 px-2 py-1 text-[11px] font-semibold uppercase tracking-wider text-ink-500">
+                          {AUDIENCE[au]}
+                        </p>
+                      )}
                       <button
                         type="button"
                         onClick={() => go(i.id)}
@@ -211,7 +236,7 @@ export function ReviewPage() {
                         }`}
                       >
                         <span
-                          aria-label={a ? VERDICT_NAME[a.verdict] : 'Not answered'}
+                          aria-label={a ? answerName(i, a) : 'Not answered'}
                           className={`h-2 w-2 shrink-0 rounded-full ${
                             !a
                               ? 'border border-ink-300'
@@ -238,6 +263,9 @@ export function ReviewPage() {
             <section className="order-1 min-w-0 2xl:order-2" aria-live="polite">
               <div className="rounded-xl border border-ink-200 bg-white p-4 sm:p-5">
                 <p className="flex flex-wrap items-center gap-x-2 text-[11.5px] font-semibold uppercase tracking-wider text-ink-400">
+                  {isMaths(item.kind) && (
+                    <span className="rounded bg-brand-700 px-1.5 py-0.5 text-white">{AUDIENCE.maths}</span>
+                  )}
                   <span className="rounded bg-ink-100 px-1.5 py-0.5 text-ink-600">{KIND_NAME[item.kind]}</span>
                   <span>
                     Folder {item.cote} · batch {item.batch}
@@ -247,24 +275,36 @@ export function ReviewPage() {
                     {index >= 0 ? index + 1 : '–'} / {shown.length}
                   </span>
                 </p>
-                <h2 className="mt-2 text-[17px] font-semibold leading-snug text-ink-900">{item.question}</h2>
+                <h2 className="mt-2 text-[17px] font-semibold leading-snug text-ink-900">{item.prompt}</h2>
                 {cote && <p className="mt-1 text-[12.5px] text-ink-500">{cote.title}</p>}
 
-                {SHOW_READINGS ? (
-                  snippets?.[item.id] ? (
-                    <Reading s={snippets[item.id]} />
-                  ) : (
-                    <p className="mt-3 text-[13px] italic text-ink-500">
-                      {snippets ? 'No passage quoted for this check: the question says where to look.' : 'Loading the reading…'}
-                    </p>
-                  )
-                ) : (
+                {item.entry && <Entry rows={item.entry} />}
+                {item.claim && (
+                  <blockquote className="mt-3 rounded-md border-l-4 border-brand-300 bg-ink-50 px-3 py-2 text-[14.5px] leading-relaxed text-ink-800">
+                    <span className="block text-[11px] font-semibold uppercase tracking-wider text-ink-400">
+                      {item.kind === 'reference' ? 'The references' : 'The edition’s claim'}
+                    </span>
+                    {item.claim}
+                  </blockquote>
+                )}
+                {SHOW_READINGS && snippets?.[item.id] && <Reading s={snippets[item.id]} />}
+                {!SHOW_READINGS && ['ill', 'uncertain', 'add', 'supplied'].includes(item.kind) && (
                   <p className="mt-3 rounded-md bg-ink-50 px-3 py-2 text-[13px] text-ink-600">
-                    The transcriptions are not shown on the site at the moment, so the current reading is not quoted
-                    here. The question and the facsimile are enough to answer from the page.
+                    The transcriptions are not shown on the site at the moment, so the passage is not quoted here.
                   </p>
                 )}
-                {item.context && <p className="mt-2 text-[12.5px] text-ink-500">{item.context}</p>}
+                <p className="mt-3 text-[13.5px] text-ink-700">
+                  <span className="font-semibold text-ink-900">Where to look: </span>
+                  {item.hint}
+                </p>
+                <details className="mt-2 text-[12.5px] text-ink-500">
+                  <summary className="cursor-pointer select-none">Details</summary>
+                  <p className="mt-1">
+                    From #35, « {item.section} »{item.details ? ':' : '.'}
+                  </p>
+                  {item.details && <p className="mt-1 text-ink-600">{item.details}</p>}
+                  {item.context && <p className="mt-1">{item.context}</p>}
+                </details>
 
                 <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[13px]">
                   {SHOW_READINGS && (
@@ -394,6 +434,20 @@ function Tex({ text }: { text: string }) {
   );
 }
 
+/** A letter's register entry, the reading to check. */
+function Entry({ rows }: { rows: [string, string][] }) {
+  return (
+    <dl className="mt-3 grid grid-cols-[6.5rem_minmax(0,1fr)] gap-x-3 gap-y-1 rounded-md border-l-4 border-brand-300 bg-ink-50 px-3 py-2 text-[13.5px]">
+      {rows.map(([k, v]) => (
+        <div key={k} className="contents">
+          <dt className="text-ink-500">{k}</dt>
+          <dd className="text-ink-800">{v}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
 function Answering({
   item,
   answer,
@@ -405,13 +459,13 @@ function Answering({
   onRecord: (v: Verdict, extra?: Partial<Answer>, advance?: boolean) => void;
   onClear: () => void;
 }) {
-  const [other, setOther] = useState(answer?.verdict === 'other');
+  // An answer saved before the choices has a verdict only: it lights the first button of that verdict.
+  const isChosen = (c: Choice) =>
+    !!answer && (answer.choice ? answer.choice === c.value : item.choices.find((x) => x.verdict === answer.verdict) === c);
+  const [asking, setAsking] = useState<Choice | null>(() => item.choices.find((c) => c.ask && isChosen(c)) ?? null);
   const [reading, setReading] = useState(answer?.reading ?? '');
   const [note, setNote] = useState(answer?.note ?? '');
-  const maths = isMaths(item.kind);
-  const label: Record<Exclude<Verdict, 'skip'>, string> = maths
-    ? { right: 'It checks out', other: 'It does not hold', illegible: "Can't tell" }
-    : { right: VERDICT_NAME.right, other: VERDICT_NAME.other, illegible: VERDICT_NAME.illegible };
+  const cantTell = !item.choices.some((c) => c.verdict === 'illegible');
   const btn = (on: boolean) =>
     `rounded-md border px-3 py-1.5 text-[13px] font-medium transition ${
       on ? 'border-brand-700 bg-brand-700 text-white' : 'border-ink-300 bg-white text-ink-800 hover:border-brand-500'
@@ -420,29 +474,55 @@ function Answering({
   return (
     <div className="mt-4 border-t border-ink-100 pt-4">
       <div className="flex flex-wrap gap-2">
-        <button type="button" className={btn(answer?.verdict === 'right')} onClick={() => onRecord('right', { note })}>
-          {label.right}
-        </button>
-        <button type="button" className={btn(other)} onClick={() => setOther(true)}>
-          {label.other}
-        </button>
-        <button type="button" className={btn(answer?.verdict === 'illegible')} onClick={() => onRecord('illegible', { note })}>
-          {label.illegible}
-        </button>
-        <button type="button" className={btn(answer?.verdict === 'skip')} onClick={() => onRecord('skip')}>
+        {item.choices.map((c) => (
+          <button
+            key={c.value}
+            type="button"
+            className={btn(asking ? asking === c : isChosen(c))}
+            onClick={() => {
+              if (c.ask) setAsking(c);
+              else {
+                setAsking(null);
+                onRecord(c.verdict, { choice: c.value, note });
+              }
+            }}
+          >
+            {c.value}
+          </button>
+        ))}
+        {cantTell && (
+          <button
+            type="button"
+            className={btn(!asking && answer?.verdict === 'illegible')}
+            onClick={() => {
+              setAsking(null);
+              onRecord('illegible', { note });
+            }}
+          >
+            Can’t tell
+          </button>
+        )}
+        <button
+          type="button"
+          className={btn(!asking && answer?.verdict === 'skip')}
+          onClick={() => {
+            setAsking(null);
+            onRecord('skip', { note });
+          }}
+        >
           Skip
         </button>
       </div>
-      {other && (
+      {asking && (
         <form
           className="mt-3"
           onSubmit={(e) => {
             e.preventDefault();
-            onRecord('other', { reading: reading.trim(), note });
+            onRecord(asking.verdict, { choice: asking.value, reading: reading.trim(), note });
           }}
         >
           <label className="block text-[12.5px] text-ink-600" htmlFor="reading">
-            {maths ? 'What is wrong, in a few words' : 'What you read on the page (a few words)'}
+            {asking.ask} (fifteen words at most)
           </label>
           <div className="mt-1 flex gap-2">
             <input
@@ -465,13 +545,13 @@ function Answering({
         id="note"
         value={note}
         onChange={(e) => setNote(e.target.value)}
-        onBlur={() => answer && note !== (answer.note ?? '') && onRecord(answer.verdict, { note }, false)}
+        onBlur={() => answer && note !== (answer.note ?? '') && onRecord(answer.verdict, { ...answer, note }, false)}
         rows={2}
         className="mt-1 w-full rounded-md border border-ink-300 px-2 py-1.5 text-[13px]"
       />
       {answer && (
         <p className="mt-1 text-[12px] text-ink-500">
-          Your answer: {maths && answer.verdict !== 'skip' ? label[answer.verdict] : VERDICT_NAME[answer.verdict]}
+          Your answer: {answerName(item, answer)}
           {answer.reading ? ` — « ${answer.reading} »` : ''}.{' '}
           <button type="button" className="underline" onClick={onClear}>
             Clear
