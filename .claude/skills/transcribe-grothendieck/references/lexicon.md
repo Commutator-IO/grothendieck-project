@@ -33,7 +33,7 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | deux | 2384 | l'application | 465 | localement | 283 |
 | groupe | 2083 | local | 464 | l'opération | 281 |
 | catégorie | 1959 | proposition | 462 | noyau | 281 |
-| d'une | 1848 | supposer | 462 | prenant | 281 |
+| d'une | 1849 | supposer | 462 | prenant | 281 |
 | structure | 1765 | connexes | 461 | s'il | 281 |
 | c'est | 1731 | l'on | 461 | veut | 280 |
 | fini | 1696 | premier | 460 | diviseur | 279 |
@@ -50,8 +50,8 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | existe | 1152 | fidèle | 432 | exact | 270 |
 | loc | 1134 | schémas | 432 | trouver | 270 |
 | forme | 1126 | d'autre | 428 | bord | 269 |
-| soient | 1095 | équivalence | 425 | situation | 266 |
-| groupes | 1075 | cf | 424 | utilisant | 266 |
+| soient | 1095 | équivalence | 425 | utilisant | 267 |
+| groupes | 1075 | cf | 424 | situation | 266 |
 | relation | 1061 | gauche | 421 | grâce | 265 |
 | supposons | 1060 | points | 420 | puisque | 265 |
 | corps | 1059 | d'ailleurs | 418 | dém | 263 |
@@ -64,13 +64,13 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | isom | 980 | propre | 410 | topologie | 260 |
 | ii | 961 | surjectif | 406 | isomorphe | 259 |
 | base | 944 | iso | 405 | l'identité | 259 |
-| partie | 941 | faisceaux | 402 | restriction | 259 |
+| partie | 942 | faisceaux | 402 | restriction | 259 |
 | suffit | 937 | trois | 402 | propriétés | 258 |
 | canonique | 930 | déjà | 401 | syst | 258 |
 | considérons | 929 | maintenant | 401 | coh | 257 |
 | n'est | 909 | via | 400 | provient | 256 |
 | hom | 892 | dire | 392 | entier | 255 |
-| termes | 873 | algébrique | 391 | somme | 255 |
+| termes | 874 | algébrique | 391 | somme | 255 |
 | finie | 870 | aura | 386 | d'abord | 254 |
 | qu'on | 865 | libre | 386 | automorphismes | 253 |
 | façon | 855 | lieu | 381 | contient | 253 |
@@ -104,12 +104,12 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | compatible | 593 | seulement | 348 | strict | 234 |
 | iii | 592 | arêtes | 347 | dualité | 233 |
 | satisfaisant | 587 | composantes | 347 | cardinal | 232 |
-| affine | 577 | l'ensemble | 347 | faudrait | 231 |
+| affine | 576 | l'ensemble | 347 | faudrait | 231 |
 | topos | 576 | projectif | 347 | désigne | 230 |
 | structures | 573 | système | 346 | quadratique | 230 |
 | ssi | 571 | classes | 340 | remarque | 230 |
-| torseur | 569 | image | 340 | descente | 229 |
-| correspondant | 568 | associé | 339 | propriété | 229 |
+| correspondant | 569 | image | 340 | descente | 229 |
+| torseur | 569 | associé | 339 | propriété | 229 |
 | implique | 568 | finis | 336 | axiomes | 228 |
 | degré | 565 | cohomologie | 334 | combinatoire | 227 |
 | pts | 559 | inv | 334 | équivalente | 227 |
@@ -145,7 +145,7 @@ Grothendieck's. Grammar words of both languages are filtered; the rest stands.
 | définition | 492 | nul | 292 | fermés | 207 |
 | plat | 488 | inversible | 291 | libres | 207 |
 | définie | 487 | l'action | 291 | rel | 207 |
-| étale | 484 | ordonné | 290 | affines | 205 |
+| étale | 484 | ordonné | 290 | affines | 206 |
 | équivaut | 475 | dimension | 289 | couple | 205 |
 | donné | 472 | pose | 289 | n'a | 204 |
 
