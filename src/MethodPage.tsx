@@ -409,6 +409,25 @@ export function MethodPage() {
               <code className="text-[12px]">lean/</code>
             </span>
           </p>
+
+          <P id="article-cicm" className="prose-fonds mt-6">
+            <em>Formalising a Mathematician's Working Notes: 1,966 Lean Theorems from the Grothendieck
+            Archive</em>{' '}
+            — a paper prepared for the Conference on Intelligent Computer Mathematics (CICM), the
+            complement of the first: how the statements of the readings are chosen, formalised and
+            attributed, what the proofs found, and how the lemmas proposed to Mathlib were received.
+          </P>
+          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
+            <a
+              href="/article/grothendieck-cicm.pdf"
+              className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
+            >
+              PDF
+            </a>
+            <span className="text-ink-400">
+              built from <code className="text-[12px]">docs/cicm/article.tex</code>
+            </span>
+          </p>
         </section>
       </main>
 

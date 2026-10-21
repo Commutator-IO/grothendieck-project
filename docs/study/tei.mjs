@@ -818,6 +818,8 @@ copyFileSync(resolve(root, 'docs/rhm/article.pdf'), resolve(served, 'grothendiec
 // The third, the readings' statements proved in Lean (lean/), with their
 // proofs written out: linked from /findings/.
 copyFileSync(resolve(root, 'docs/lean/article.pdf'), resolve(served, 'grothendieck-lean.pdf'));
+// The fourth, for CICM: the formalisation of the statements (docs/cicm/).
+copyFileSync(resolve(root, 'docs/cicm/article.pdf'), resolve(served, 'grothendieck-cicm.pdf'));
 
 const elements = [...new Set([...xml.matchAll(/<([a-zA-Z]+)[\s>/]/g)].map((m) => m[1]))].sort();
 process.stdout.write(

@@ -377,6 +377,7 @@ proposed upstream to mathlib as draft pull requests, through
 | [`docs/rhm/`](docs/rhm/README.md) | *Dater, reprendre, déplacer* — the working notes as a mathematical practice, in French, for the *Revue d'histoire des mathématiques* | [/article/grothendieck-rhm.pdf](https://grothendieck.commutator.io/article/grothendieck-rhm.pdf) |
 | [`docs/study/`](docs/study/README.md) | *A Machine Reads Grothendieck's Working Notes* — the method and the encoding, for the *Journal of the TEI*, with its TEI submission | [/article/grothendieck-jtei.pdf](https://grothendieck.commutator.io/article/grothendieck-jtei.pdf) and `.xml` |
 | [`docs/lean/`](docs/lean/article.tex) | The Lean appendix, in French | [/article/grothendieck-lean.pdf](https://grothendieck.commutator.io/article/grothendieck-lean.pdf) |
+| [`docs/cicm/`](docs/cicm/README.md) | *Formalising a Mathematician's Working Notes* — the statements formalised in Lean, for CICM (LNCS) | [/article/grothendieck-cicm.pdf](https://grothendieck.commutator.io/article/grothendieck-cicm.pdf) |
 | [`docs/conjectures/`](docs/conjectures/article.tex) | *Conjectures in Grothendieck's working notes* — dated first appearances, open questions, what can be formalised | not yet on the site |
 
 Each PDF is compiled locally and committed, excepted by name from `*.pdf` in

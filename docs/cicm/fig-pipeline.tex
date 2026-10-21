@@ -1,0 +1,39 @@
+% The pipeline from the page to the Lean theorem, and the two places a person enters.
+%
+% Drawn rather than generated, because it states decisions and not data.
+\begin{figure}[t]\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+  font=\small,
+  st/.style={draw, rounded corners=2pt, align=center, inner sep=3pt,
+             minimum height=13mm, text width=22mm},
+  src/.style={st, fill=black!4},
+  lbl/.style={font=\scriptsize, text=black!60, align=center},
+  arr/.style={-{Stealth[length=4pt]}, draw=black!60},
+  human/.style={arr, dashed},
+]
+\node[src] (P) {\textbf{Page}\\[1pt]\scriptsize Montpellier's PDF,\\\scriptsize never stored};
+\node[st, right=9mm of P] (T) {\textbf{Transcription}\\[1pt]\scriptsize restricted \LaTeX,\\\scriptsize apparatus macros};
+\node[st, right=9mm of T] (M) {\textbf{Modernised reading}\\[1pt]\scriptsize current notation,\\\scriptsize one per folder};
+\node[st, right=9mm of M] (S) {\textbf{Statement}\\[1pt]\scriptsize chosen and\\\scriptsize triaged (tiers)};
+\node[st, right=9mm of S] (L) {\textbf{Lean file}\\[1pt]\scriptsize one per folder,\\\scriptsize pinned Mathlib};
+\node[st, below=9mm of L] (C) {\textbf{CI}\\[1pt]\scriptsize build, no warning;\\\scriptsize three axioms};
+\node[st, below=9mm of S] (A) {\textbf{Appendix, card}\\[1pt]\scriptsize proof written out;\\\scriptsize verdict};
+\node[st, below=9mm of M] (F) {\textbf{Findings}\\[1pt]\scriptsize claim about\\\scriptsize the literature};
+
+\draw[arr] (P) -- node[lbl, above=1pt]{model} (T);
+\draw[arr] (T) -- node[lbl, above=1pt]{model} (M);
+\draw[arr] (M) -- node[lbl, above=1pt]{model} (S);
+\draw[arr] (S) -- node[lbl, above=1pt]{model} (L);
+\draw[arr] (L) -- (C);
+\draw[arr] (C) -- (A);
+\draw[arr] (A) -- (F);
+\draw[arr, draw=black!40] (A.north west) -- node[lbl, left=1pt, pos=0.55]{corrects} (M.south east);
+
+\node[st, dashed, fill=black!4, below=9mm of T, text width=24mm] (H)
+  {\textbf{A person}\\[1pt]\scriptsize the hand on the facsimile\\\scriptsize (review page)};
+\draw[human] (H.north) -- (T.south);
+\draw[human] (P.south) |- (H.west);
+\end{tikzpicture}}
+\caption{From the page to the theorem. Every arrow marked \emph{model} is written by a language model under written rules; the dashed loop is the only place a person compares the text with the page. A failed proof or a counterexample goes back to the modernised reading (grey arrow), never to the transcription, which only a reading of the hand may change.}\label{fig:pipeline}
+\end{figure}
