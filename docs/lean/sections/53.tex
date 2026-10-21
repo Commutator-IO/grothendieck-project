@@ -1,0 +1,50 @@
+\section[Cote 53 : un monoïde simplifiable est un groupe]{Cote 53 : un monoïde simplifiable est un groupe\protect\verifie{Folder53}}\label{sec:53}
+
+La cote 53, \emph{Groupes algébriques : notes manuscrites (s.d.), lettre (1973)}, trente-trois pages, garde des notes pour un cours sur les groupes algébriques : sur un corps aux pages 2 à 15, sur un anneau aux pages 21 à 33 (distributions, comodules, plongements linéaires). Entre les deux, une lettre d'une autre main, de juin 1973, objecte au cours qu'un monoïde affine de type fini ne se plonge pas toujours dans $\mathrm{GL}_n$ : le monoïde $\{0, 1\}$ muni de la multiplication en est un exemple. La page~21 s'ouvre sur une \q{Rectification} : le plongement fermé multiplicatif se fait dans l'espace des matrices $\mathrm M_n$, et non dans $\mathrm{GL}_n$ (\lot{53}{2}{21}) ; à la page~30, le $\mathrm M$ de la proposition est écrit par-dessus un $\mathrm{GL}$ (\lot{53}{2}{30}).
+
+La page donne aussitôt la raison. Un monoïde $G$ de présentation finie sur un anneau, \q{tel que les translations à g.\ (à dr.)\ sont} suivi de deux mots illisibles, par exemple un monoïde qui se plonge dans un groupe, serait un groupe ; la fin de la phrase, \q{objet gr.-pr.}, est elle-même incertaine. La lecture modernisée complète les deux mots par \q{des monomorphismes} et propose une démonstration par le théorème d'Ax--Grothendieck (EGA~IV, 10.4.11 \cite{ega4-3}). L'énoncé repose donc sur une reconstruction : seul le fac-similé dira si les deux mots sont bien ceux-là. Ce qui suit démontre sa forme classique, pour les points sur un corps algébriquement clos.
+
+\noindent\emph{Pourquoi un monoïde fermé de $\mathrm{GL}_n$ serait un groupe.} Dans un groupe, on simplifie : $ax = ay$ entraîne $x = y$. Un sous-monoïde $S$ de $\mathrm{GL}_n$ hérite de cette propriété, et la multiplication à gauche par $a \in S$ est une application injective de $S$ dans lui-même. Si $S$ était fini, une injection d'un ensemble fini dans lui-même serait une bijection, il existerait $b \in S$ avec $ab = 1$, et $S$ serait un groupe. Pour un ensemble infini, l'argument tombe : dans $\mathbb C^*$, le sous-monoïde $\{1, 2, 4, 8, \ldots\}$ est simplifiable et n'est pas un groupe, la multiplication par~$2$ y est injective sans être surjective. Mais ce sous-monoïde n'est pas une variété : il n'est défini par aucun système d'équations polynomiales.
+
+\noindent\emph{Le théorème d'Ax--Grothendieck.} Sur un corps algébriquement clos $K$, une application polynomiale injective d'une variété affine dans elle-même est surjective \cite{ax1968, borel1969}. L'idée d'Ax est de se ramener au cas fini. Une application polynomiale ne fait intervenir qu'un nombre fini de coefficients. Sur la clôture algébrique de $\mathbb F_p$, ces coefficients vivent dans un corps fini $\mathbb F_q$, et la clôture est la réunion des $\mathbb F_{q^r}$ : sur chacun, l'application envoie un ensemble fini dans lui-même, injectivement, donc surjectivement, et tout point de la variété est atteint. Le passage aux autres corps algébriquement clos, en caractéristique nulle en particulier, se fait par la logique : \q{injective entraîne surjective} s'écrit, à degrés bornés, comme un énoncé du premier ordre, vrai dans tous les corps algébriquement clos de caractéristique $p$ pour $p$ assez grand, donc dans ceux de caractéristique nulle. L'hypothèse \q{algébriquement clos} est nécessaire : sur $\mathbb Q$, $x \mapsto x^3$ est injective et ne prend pas la valeur~$2$. Mathlib contient ce théorème, démontré par la théorie des modèles, sous la forme \texttt{MvPolynomial.ax\_grothendieck\_zeroLocus} : pour le lieu des zéros $S \subset K^\iota$ d'un idéal de polynômes et une application polynomiale $S \to S$ injective, elle est surjective sur~$S$.
+
+\noindent\emph{Le cadre.} Un monoïde de points d'une variété affine, à loi polynomiale, est un monoïde $M$ muni d'une application injective $\varphi : M \to K^\iota$, $\iota$ fini, dont l'image est le lieu des zéros d'un idéal de $K[X_i]$, et de polynômes $m_i$ en deux jeux de variables tels que $\varphi(xy) = m(\varphi(x), \varphi(y))$. La translation à gauche par $x$ est alors, dans les coordonnées, l'application polynomiale $v \mapsto m(\varphi(x), v)$. On dit que $M$ est simplifiable à gauche si $xy = xz$ entraîne $y = z$.
+
+\begin{encadre}
+\begin{enonce}[D'après la page 21, forme reconstituée par l'édition, sur les points\piste{53-cancellative-monoid-is-group}]
+Soient $K$ un corps algébriquement clos et $M$ un monoïde de points d'une variété affine sur $K$, à loi polynomiale. Si $M$ est simplifiable à gauche, tout élément de $M$ est inversible : $M$ est un groupe.
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+Soit $x \in M$. La translation $y \mapsto xy$ est injective, puisque $M$ est simplifiable. Lue dans les coordonnées, c'est l'application polynomiale $v \mapsto m(\varphi(x), v)$ du lieu des zéros $\varphi(M)$ dans lui-même, injective sur ce lieu puisque $\varphi$ l'est. Par Ax--Grothendieck, elle est surjective, et $\varphi(1)$ est atteint : il existe $y$ avec $\varphi(xy) = \varphi(1)$, donc $xy = 1$. Alors $x(yx) = (xy)x = x = x \cdot 1$, et la simplification donne $yx = 1$. L'élément $y$ est un inverse de $x$ des deux côtés.
+\end{proof}
+
+\begin{encadre}
+\begin{enonce}[D'après la page 21, sous-monoïdes fermés de $\mathrm{GL}_n$]
+Sur un corps algébriquement clos $K$, un sous-monoïde de $\mathrm{GL}_n(K)$ fermé dans $\mathrm{GL}_n$, c'est-à-dire défini par des équations polynomiales en les coefficients de la matrice et en l'inverse de son déterminant, est un sous-groupe.
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+On repère une matrice inversible $A$ par ses $n^2$ coefficients et par $t = \det(A)^{-1}$ : $\mathrm{GL}_n$ devient le lieu des zéros de $t \det(A) - 1$ dans $K^{n^2 + 1}$, et le sous-monoïde $S$ le lieu des zéros de ses équations et de celle-ci. La loi $(A, t)(B, s) = (AB, ts)$ est polynomiale, et $S$ est simplifiable, comme partie d'un groupe. L'énoncé précédent donne, pour $A \in S$, un $B \in S$ avec $AB = 1$, c'est-à-dire $A^{-1} = B \in S$.
+\end{proof}
+
+\begin{remarque}
+La démonstration n'utilise que la simplification à gauche, là où la page suppose les translations à gauche et à droite injectives. Le passage de $xy = 1$ à $yx = 1$ est un argument de monoïde, sans géométrie. Un sous-monoïde fermé de $\mathrm{M}_n$ contenu dans $\mathrm{GL}_n$ est fermé dans $\mathrm{GL}_n$ ; c'est un cas particulier du second énoncé. Un sous-monoïde fermé de $\mathrm M_n$ qui contient une matrice non inversible, comme $\{0, 1\}$, n'est évidemment pas un groupe : c'est pourquoi le cours doit plonger les monoïdes dans $\mathrm M_n$.
+\end{remarque}
+
+\begin{remarque}
+L'énoncé est classique. Brion \cite[§\,2.2, prop.~3]{brion2014} démontre par le même argument (une translation injective est surjective, par le théorème~C d'Ax) qu'un élément d'un monoïde algébrique qui a un inverse à gauche est inversible, et que si $1$ est le seul idempotent, le monoïde est un groupe. Un monoïde simplifiable n'a pas d'autre idempotent que $1$, car $e^2 = e = e \cdot 1$ donne $e = 1$ ; l'énoncé encadré en découle. Pour les monoïdes algébriques linéaires, le livre de Putcha \cite{putcha1988} est la référence que Brion cite ; il n'a pas été relu ici. La fiche de la piste reste \q{non cherchée} pour la forme sur un anneau, avec des monomorphismes de schémas.
+\end{remarque}
+
+\noindent\emph{Portée de la vérification.} Lean formalise un monoïde de points à loi polynomiale par les données $(\varphi, I, m)$ ci-dessus et démontre les deux énoncés (\texttt{isUnit\_of\_isLeftCancelMul} et \texttt{inv\_mem\_of\_isClosed}) par \texttt{ax\_grothendieck\_zeroLocus} ; les translations y sont écrites comme polynômes par substitution (\texttt{translation}, \texttt{eval\_translation}). La forme de la page n'est pas formalisée : un schéma en monoïdes de présentation finie sur un anneau quelconque, des translations qui sont des monomorphismes de schémas, et la surjectivité des endomorphismes radiciels d'EGA~IV, 10.4.11, qui la démontrerait. Mathlib n'a pas les schémas en monoïdes. Le plongement dans $\mathrm M_n$ de la page~30 n'est pas formalisé non plus.
+
+Ne sont pas démontrés ici, de la même cote :
+
+\begin{encadre}
+\begin{theoreme*}[Page 9, forme corrigée par l'édition, critère d'irréductibilité géométrique\piste{53-geometric-irreducibility-criterion}]\nonverifie
+Soit $X$ un schéma irréductible sur un corps $k$. Si un $k$-schéma géométriquement irréductible $Z$ s'envoie dans $X$ avec une image non contenue dans l'ensemble des points où passent plusieurs composantes irréductibles de $X_{\bar k}$, alors $X$ est géométriquement irréductible ; un point géométriquement normal de $X_{\mathrm{red}}$ dans l'image suffit. Sans la seconde hypothèse, $x^2 + y^2 = 0$ sur $\mathbf R$, avec pour $Z$ l'origine, est un contre-exemple.
+\end{theoreme*}
+\end{encadre}
+{\small La page n'écrit pas \q{$X$ irréductible} ; sa démonstration l'utilise et la lecture l'ajoute. Sans cette hypothèse l'énoncé est faux (deux droites disjointes et un point de l'une). Mathlib n'a pas l'irréductibilité géométrique des schémas sur un corps. On se reportera aux notes de Grothendieck (\lot{53}{1}{9}).\par}

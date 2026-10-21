@@ -868,4 +868,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder128.lean',
     theorems: ['eq_bot_or_eq_ker', 'isEquivalenceIdeal_bot', 'isEquivalenceIdeal_ker'],
   },
+  {
+    folder: '53',
+    batch: 2,
+    page: '21',
+    name: 'A cancellative algebraic monoid is a group',
+    statement:
+      'The « Rectification » of page 21: an affine monoid of finite type over a field embeds as a closed submonoid of M_n, not of GL_n, because a monoid of finite presentation whose left (right) translations are « … … » — for example one embedded in a group — is a group. The two words qualifying the translations are illegible; the reading supplies « monomorphisms » and proposes Ax–Grothendieck.',
+    found:
+      'Holds over an algebraically closed field, on points, with left cancellation only: a monoid M with an injective φ : M → K^ι (ι finite) onto the zero locus of an ideal and a polynomial law φ(xy) = m(φx, φy), whose left multiplications are injective, is a group. Left translation by x is an injective polynomial self-map of the zero locus, so surjective by Ax–Grothendieck (Mathlib’s ax_grothendieck_zeroLocus): xy = 1, and x(yx) = x gives yx = 1. Hence a submonoid of GL_n(K) closed in GL_n (equations in the entries and det⁻¹) is a subgroup — why the course must use M_n. The result is classical (Brion 2014, §2.2, Prop. 3). Monoid schemes over a ring, scheme-theoretic monomorphisms and the embedding of page 30 are not formalised.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder53.lean',
+    theorems: ['isUnit_of_isLeftCancelMul', 'inv_mem_of_isClosed', 'eval_translation'],
+  },
 ];

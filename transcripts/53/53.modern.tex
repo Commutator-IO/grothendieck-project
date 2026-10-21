@@ -12,6 +12,10 @@
 % and batch-02.fr.tex.
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-21 — p. 21, the Rectification:
+%   footnoted with the Lean check over an algebraically closed field, on points
+%   (isUnit_of_isLeftCancelMul, inv_mem_of_isClosed); monoid schemes over a
+%   ring and monomorphisms not formalised.
 % The folder was read whole — two batches, pages 1-33, both transcribed —
 % before any of this was written. Page 1 is the folder cover; pages 16-20 are
 % a letter to him in another hand (June 1973), skipped by the transcription
@@ -863,7 +867,15 @@ le mot qui qualifie les translations est illisible. Notre lecture : une
 translation $G \to G$ qui est un monomorphisme d'un schéma de présentation
 finie dans lui-même est surjective (théorème d'Ax--Grothendieck, EGA~IV,
 10.4.11, sous sa forme de surjectivité des endomorphismes radiciels), d'où
-l'existence d'inverses. La reconstruction est la nôtre.}
+l'existence d'inverses. La reconstruction est la nôtre. Lean vérifie la
+forme classique, sur les points d'un corps algébriquement clos $K$
+(lean/Grothendieck/Folder53.lean, \texttt{isUnit\_of\_isLeftCancelMul},
+\texttt{inv\_mem\_of\_isClosed}) : un monoïde de points d'une variété affine
+à loi polynomiale, simplifiable à gauche, est un groupe, et un sous-monoïde
+de $\mathrm{GL}_{n}(K)$ fermé dans $\mathrm{GL}_{n}$ est un sous-groupe ; la
+translation à gauche, injective, est surjective par Ax--Grothendieck. Les
+schémas en monoïdes sur un anneau et les monomorphismes ne sont pas
+formalisés ; voir l'annexe Lean, section 53.}
 
 Soit $X = \mathrm{Spec}\, A$ un schéma affine sur l'anneau $k$. Ses
 \emph{distributions à valeurs dans} $k'$ sont les formes linéaires sur $A$ :
