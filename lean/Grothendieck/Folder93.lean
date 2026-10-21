@@ -1271,15 +1271,12 @@ theorem pCurvature_smul (Γ : Matrix (Fin n) (Fin n) A) (c : A) (v : Fin n → A
 /-- **Statement 5.** `ψ` is the matrix `Γ_p`. -/
 theorem pCurvature_apply (Γ : Matrix (Fin n) (Fin n) A) (v : Fin n → A) :
     pCurvature D p Γ v = (curvMat D Γ p).mulVec v := by
-  have hcol : ∀ j, pCurvature D p Γ (fun i => (1 : Matrix (Fin n) (Fin n) A) i j) =
+  have hcol j : pCurvature D p Γ (fun i => (1 : Matrix (Fin n) (Fin n) A) i j) =
       fun i => curvMat D Γ p i j := by
-    intro j
     rw [pCurvature, LinearMap.sub_apply, nabla_zero_pow, nabla_pow_col]
     funext i
     rw [Pi.sub_apply, Matrix.one_apply]
-    split_ifs
-    · simp [iterate_one D p]
-    · simp [Function.iterate_fixed (map_zero D)]
+    split_ifs <;> simp [iterate_one D p, Function.iterate_fixed (map_zero D)]
   have hv : v = ∑ j, v j • fun i => (1 : Matrix (Fin n) (Fin n) A) i j := by
     funext i; simp [Matrix.one_apply]
   conv_lhs => rw [hv]
@@ -1331,10 +1328,7 @@ noncomputable def dX : @Derivation ℤ (ZMod p)[X] (ZMod p)[X] _ _ _ (Ring.toInt
 
 theorem dX_apply (f : (ZMod p)[X]) : dX p f = derivative f := rfl
 
-theorem dX_iterate (k : ℕ) (f : (ZMod p)[X]) : (dX p)^[k] f = derivative^[k] f := by
-  induction k generalizing f with
-  | zero => rfl
-  | succ k ih => rw [Function.iterate_succ_apply, Function.iterate_succ_apply, ih, dX_apply]
+theorem dX_iterate (k : ℕ) (f : (ZMod p)[X]) : (dX p)^[k] f = derivative^[k] f := rfl
 
 /-- `(d/dx)ᵖ = 0` on `𝔽_p[x]`. -/
 theorem dX_iterate_char (f : (ZMod p)[X]) : (dX p)^[p] f = 0 := by
@@ -1354,8 +1348,7 @@ theorem not_horizontal_unipotent_X_pow :
       Y * Z = 1 ∧ Y.map (dX p) + !![0, X ^ (p - 1); 0, 0] * Y = 0 := by
   rintro ⟨Y, Z, hYZ, hY⟩
   have := curvMat_eq_zero_of_horizontal (dX p) p (dX_iterate_char p) _ Y Z hYZ hY
-  rw [curvMat_unipotent_X_pow] at this
-  simpa using congrFun (congrFun this 0) 1
+  simpa [curvMat_unipotent_X_pow] using congrFun (congrFun this 0) 1
 
 end Concrete
 

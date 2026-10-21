@@ -334,44 +334,30 @@ def h5 (p : K × K) : K := p.2 ^ 6 * (1 - p.2) ^ 6 * (p.1 - p.2) ^ 6 / (p.1 ^ 2 
 
 lemma hL_ne {p : K × K} (hp : U5 p) : hL p ≠ 0 := by
   obtain ⟨a0, a1, b0, b1, ab⟩ := hp
-  simp only [hL]
-  have := sub_ne_zero.2 (Ne.symm a1); have := sub_ne_zero.2 (Ne.symm b1)
-  have := sub_ne_zero.2 ab
-  positivity
+  have := sub_ne_zero.2 a1.symm; have := sub_ne_zero.2 b1.symm; have := sub_ne_zero.2 ab
+  simp only [hL]; positivity
 
 lemma h5_ne {p : K × K} (hp : U5 p) : h5 p ≠ 0 := by
   obtain ⟨a0, a1, b0, b1, ab⟩ := hp
-  simp only [h5]
-  have := sub_ne_zero.2 (Ne.symm a1); have := sub_ne_zero.2 (Ne.symm b1)
-  have := sub_ne_zero.2 ab
-  positivity
+  have := sub_ne_zero.2 a1.symm; have := sub_ne_zero.2 b1.symm; have := sub_ne_zero.2 ab
+  simp only [h5]; positivity
 
 /-- `L^{⊗4}` is equivariantly trivial: `cL(s)⁴ = h(sx)/h(x)` on the generators, with
 `h = (λμ(1 − λ)(1 − μ)(λ − μ))²`. -/
 theorem cL_pow_four (i : Fin 4) {p : K × K} (hp : U5 p) :
     cL i p ^ 4 = hL (act5 i p) / hL p := by
-  obtain ⟨p1, p2⟩ := p
   obtain ⟨a0, a1, b0, b1, ab⟩ := hp
-  simp only at a0 a1 b0 b1 ab
-  have a1' : p1 - 1 ≠ 0 := sub_ne_zero.2 a1
-  have b1' : p2 - 1 ≠ 0 := sub_ne_zero.2 b1
-  have ab' : p1 - p2 ≠ 0 := sub_ne_zero.2 ab
-  have a1'' : 1 - p1 ≠ 0 := sub_ne_zero.2 (Ne.symm a1)
-  have b1'' : 1 - p2 ≠ 0 := sub_ne_zero.2 (Ne.symm b1)
+  have := sub_ne_zero.2 a1; have := sub_ne_zero.2 b1; have := sub_ne_zero.2 ab
+  have := sub_ne_zero.2 a1.symm; have := sub_ne_zero.2 b1.symm
   fin_cases i <;> simp [cL, act5, hL] <;> field_simp <;> ring
 
 /-- `L₅^{⊗12}` is equivariantly trivial under `𝔖₄`: `c5(s)¹² = h(sx)/h(x)` on the generators,
 with `h = μ⁶(1 − μ)⁶(λ − μ)⁶/(λ²(1 − λ)²)`. -/
 theorem c5_pow_twelve (i : Fin 3) {p : K × K} (hp : U5 p) :
     c5 i p ^ 12 = h5 (act4 i p) / h5 p := by
-  obtain ⟨p1, p2⟩ := p
   obtain ⟨a0, a1, b0, b1, ab⟩ := hp
-  simp only at a0 a1 b0 b1 ab
-  have a1' : p1 - 1 ≠ 0 := sub_ne_zero.2 a1
-  have b1' : p2 - 1 ≠ 0 := sub_ne_zero.2 b1
-  have ab' : p1 - p2 ≠ 0 := sub_ne_zero.2 ab
-  have a1'' : 1 - p1 ≠ 0 := sub_ne_zero.2 (Ne.symm a1)
-  have b1'' : 1 - p2 ≠ 0 := sub_ne_zero.2 (Ne.symm b1)
+  have := sub_ne_zero.2 a1; have := sub_ne_zero.2 b1; have := sub_ne_zero.2 ab
+  have := sub_ne_zero.2 a1.symm; have := sub_ne_zero.2 b1.symm
   fin_cases i <;> simp [c5, act4, act5, h5] <;> field_simp <;> ring
 
 /-- `i` is a primitive fourth root of unity when `2 ≠ 0`: `i^m = 1` forces `4 ∣ m`. -/
@@ -421,15 +407,14 @@ lemma fix_four (h2 : (2 : K) ≠ 0) {ι : K} (hι : ι ^ 2 = -1) :
       show (-1 - ι : K) ^ 2 = 2 * ι by linear_combination hι]
     field_simp
     linear_combination -2 * hι
-  refine ⟨⟨by norm_num, fun h => h2 (by linear_combination -h), hι0, hι1, fun h => hιm h.symm⟩,
-    ?_, ?_, ?_, ?_⟩
-  · change act5 0 (act5 1 (act5 2 ((-1 : K), ι))) = _
+  have hfix : wAct act5 [0, 1, 2] ((-1 : K), ι) = (-1, ι) := by
+    change act5 0 (act5 1 (act5 2 ((-1 : K), ι))) = _
     rw [s2, s1, s0]
+  refine ⟨⟨by norm_num, fun h => h2 (by linear_combination -h), hι0, hι1, fun h => hιm h.symm⟩,
+    hfix, ?_, hfix, ?_⟩
   · change cL 0 (act5 1 (act5 2 ((-1 : K), ι))) * (cL 1 (act5 2 ((-1 : K), ι)) *
       (cL 2 ((-1 : K), ι) * 1)) = ι
     rw [s2, s1]; exact hv
-  · change act5 0 (act5 1 (act5 2 ((-1 : K), ι))) = _
-    rw [s2, s1, s0]
   · change c5 0 (act5 1 (act5 2 ((-1 : K), ι))) * (c5 1 (act5 2 ((-1 : K), ι)) *
       (c5 2 ((-1 : K), ι) * 1)) = ι
     rw [s2, s1]
@@ -468,14 +453,11 @@ theorem coboundary_cL_iff (h2 : (2 : K) ≠ 0) {ι : K} (hι : ι ^ 2 = -1) (m :
   constructor
   · rintro ⟨h, hh, hc⟩
     obtain ⟨hU, hfix, hcoc, -, -⟩ := fix_four h2 hι
-    have e := hc [0, 1, 2] _ hU
-    rw [hfix, hcoc, div_self (hh _ hU)] at e
-    exact four_dvd_of_pow h2 hι m e
+    exact four_dvd_of_pow h2 hι m <| by
+      simpa only [hfix, hcoc, div_self (hh _ hU)] using hc [0, 1, 2] _ hU
   · rintro ⟨t, rfl⟩
-    refine ⟨fun p => hL p ^ t, fun p hp => zpow_ne_zero _ (hL_ne hp), ?_⟩
-    refine wCoc_zpow (V := U5) (h := fun p => hL p ^ t) (fun i p hp => act5_U5 i hp)
-      (fun p hp => zpow_ne_zero _ (hL_ne hp)) ?_
-    intro i p hp
+    have hh p (hp : U5 p) : hL p ^ t ≠ (0 : K) := zpow_ne_zero _ (hL_ne hp)
+    refine ⟨_, hh, wCoc_zpow (fun i p hp => act5_U5 i hp) hh fun i p hp => ?_⟩
     rw [zpow_mul, show cL i p ^ (4 : ℤ) = _ by exact_mod_cast cL_pow_four i hp, div_zpow]
 
 /-- The entry « 12 ? » of page 70 for `L_i`, `n = 5`, checks: a power `m` of the cocycle of
@@ -497,10 +479,8 @@ theorem coboundary_c5_iff (h2 : (2 : K) ≠ 0) (h3 : (3 : K) ≠ 0) {ι : K} (h�
     have := three_dvd_of_pow h3 hζ m e'
     omega
   · rintro ⟨t, rfl⟩
-    refine ⟨fun p => h5 p ^ t, fun p hp => zpow_ne_zero _ (h5_ne hp), ?_⟩
-    refine wCoc_zpow (V := U5) (h := fun p => h5 p ^ t) (fun i p hp => act5_U5 _ hp)
-      (fun p hp => zpow_ne_zero _ (h5_ne hp)) ?_
-    intro i p hp
+    have hh p (hp : U5 p) : h5 p ^ t ≠ (0 : K) := zpow_ne_zero _ (h5_ne hp)
+    refine ⟨_, hh, wCoc_zpow (fun i p hp => act5_U5 i.castSucc hp) hh fun i p hp => ?_⟩
     rw [zpow_mul, show c5 i p ^ (12 : ℤ) = _ by exact_mod_cast c5_pow_twelve i hp, div_zpow]
 
 /-! ## The column `n = 6`: `L` has order `5`, `L₆` has order `20`
@@ -590,25 +570,22 @@ def g6 (p : K × K × K) : K :=
 lemma hL6_ne {p : K × K × K} (hp : U6 p) : hL6 p ≠ 0 := by
   obtain ⟨⟨a0, a1, b0, b1, ab⟩, ⟨-, -, c0, c1, ac⟩, bc⟩ := hp
   dsimp only at a0 a1 b0 b1 ab c0 c1 ac
-  simp only [hL6]
-  have := sub_ne_zero.2 (Ne.symm a1); have := sub_ne_zero.2 (Ne.symm b1)
-  have := sub_ne_zero.2 (Ne.symm c1); have := sub_ne_zero.2 ab; have := sub_ne_zero.2 ac
-  have := sub_ne_zero.2 bc
-  positivity
+  have := sub_ne_zero.2 a1.symm; have := sub_ne_zero.2 b1.symm; have := sub_ne_zero.2 c1.symm
+  have := sub_ne_zero.2 ab; have := sub_ne_zero.2 ac; have := sub_ne_zero.2 bc
+  simp only [hL6]; positivity
 
 lemma g6_num_ne {p : K × K × K} (hp : U6 p) :
     (p.2.2 * (1 - p.2.2) * (p.1 - p.2.2) * (p.2.1 - p.2.2)) ^ 4 ≠ 0 := by
   obtain ⟨-, ⟨-, -, c0, c1, ac⟩, bc⟩ := hp
   dsimp only at c0 c1 ac
-  have := sub_ne_zero.2 (Ne.symm c1); have := sub_ne_zero.2 ac; have := sub_ne_zero.2 bc
+  have := sub_ne_zero.2 c1.symm; have := sub_ne_zero.2 ac; have := sub_ne_zero.2 bc
   positivity
 
 lemma g6_den_ne {p : K × K × K} (hp : U6 p) :
     p.1 * p.2.1 * (1 - p.1) * (1 - p.2.1) * (p.1 - p.2.1) ≠ 0 := by
   obtain ⟨⟨a0, a1, b0, b1, ab⟩, -, -⟩ := hp
   dsimp only at a0 a1 b0 b1 ab
-  have := sub_ne_zero.2 (Ne.symm a1); have := sub_ne_zero.2 (Ne.symm b1)
-  have := sub_ne_zero.2 ab
+  have := sub_ne_zero.2 a1.symm; have := sub_ne_zero.2 b1.symm; have := sub_ne_zero.2 ab
   positivity
 
 lemma g6_ne {p : K × K × K} (hp : U6 p) : g6 p ≠ 0 :=
@@ -621,15 +598,9 @@ theorem cL6_pow_five (i : Fin 5) {p : K × K × K} (hp : U6 p) :
   obtain ⟨l, m, n⟩ := p
   obtain ⟨⟨a0, a1, b0, b1, ab⟩, ⟨-, -, c0, c1, ac⟩, bc⟩ := hp
   simp only at a0 a1 b0 b1 ab c0 c1 ac bc
-  have a1' : l - 1 ≠ 0 := sub_ne_zero.2 a1
-  have b1' : m - 1 ≠ 0 := sub_ne_zero.2 b1
-  have c1' : n - 1 ≠ 0 := sub_ne_zero.2 c1
-  have ab' : l - m ≠ 0 := sub_ne_zero.2 ab
-  have ac' : l - n ≠ 0 := sub_ne_zero.2 ac
-  have bc' : m - n ≠ 0 := sub_ne_zero.2 bc
-  have a1'' : 1 - l ≠ 0 := sub_ne_zero.2 (Ne.symm a1)
-  have b1'' : 1 - m ≠ 0 := sub_ne_zero.2 (Ne.symm b1)
-  have c1'' : 1 - n ≠ 0 := sub_ne_zero.2 (Ne.symm c1)
+  have := sub_ne_zero.2 a1; have := sub_ne_zero.2 b1; have := sub_ne_zero.2 c1
+  have := sub_ne_zero.2 ab; have := sub_ne_zero.2 ac; have := sub_ne_zero.2 bc
+  have := sub_ne_zero.2 a1.symm; have := sub_ne_zero.2 b1.symm; have := sub_ne_zero.2 c1.symm
   fin_cases i <;> simp [cL6, act6, hL6] <;> field_simp <;> ring
 
 /-- On the generators, the factor `c` of `L₆` satisfies `c(s)¹⁰ = −g(sx)/g(x)`. -/
@@ -640,13 +611,9 @@ theorem c6_pow_ten (i : Fin 4) {p : K × K × K} (hp : U6 p) :
   obtain ⟨l, m, n⟩ := p
   obtain ⟨⟨a0, a1, b0, b1, ab⟩, ⟨-, -, c0, c1, ac⟩, bc⟩ := hp
   simp only at a0 a1 b0 b1 ab c0 c1 ac bc
-  have a1' : l - 1 ≠ 0 := sub_ne_zero.2 a1
-  have b1' : m - 1 ≠ 0 := sub_ne_zero.2 b1
-  have c1' : n - 1 ≠ 0 := sub_ne_zero.2 c1
-  have ab' : l - m ≠ 0 := sub_ne_zero.2 ab
-  have ac' : l - n ≠ 0 := sub_ne_zero.2 ac
-  have a1'' : 1 - l ≠ 0 := sub_ne_zero.2 (Ne.symm a1)
-  have c1'' : 1 - n ≠ 0 := sub_ne_zero.2 (Ne.symm c1)
+  have := sub_ne_zero.2 a1; have := sub_ne_zero.2 b1; have := sub_ne_zero.2 c1
+  have := sub_ne_zero.2 ab; have := sub_ne_zero.2 ac
+  have := sub_ne_zero.2 a1.symm; have := sub_ne_zero.2 c1.symm
   fin_cases i <;> simp [c6, act6s, act6] <;> field_simp <;> ring
 
 /-- A root `ω` of `ω⁴ + ω³ + ω² + ω + 1` is a primitive fifth root of unity when `5 ≠ 0`:
@@ -729,9 +696,11 @@ lemma fix_five {ω : K} (hω : ω ^ 4 + ω ^ 3 + ω ^ 2 + ω + 1 = 0) :
       ω ^ 3 := by
     rw [div_eq_iff (pow_ne_zero 2 hd)]
     linear_combination (ω ^ 2 - ω ^ 3 + ω ^ 4 - ω ^ 5 - ω ^ 6 - ω ^ 7) * hω
-  refine ⟨⟨⟨ha, ha1, hb, hb1, hab⟩, ⟨ha, ha1, hc, hc1, hac⟩, sub_ne_zero.1 hd⟩, ?_, ?_, ?_, ?_⟩
-  · change act6 0 (act6 1 (act6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4)))) = _
+  have hfix : wAct act6 [0, 1, 2, 3] ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4) =
+      (ω ^ 2 + ω ^ 3, 1 + ω ^ 2 + ω ^ 3, -ω ^ 4) := by
+    change act6 0 (act6 1 (act6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4)))) = _
     rw [s4, s3, s2, s1]
+  refine ⟨⟨⟨ha, ha1, hb, hb1, hab⟩, ⟨ha, ha1, hc, hc1, hac⟩, sub_ne_zero.1 hd⟩, hfix, ?_, hfix, ?_⟩
   · change cL6 0 (act6 1 (act6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4)))) *
       (cL6 1 (act6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4))) *
       (cL6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4)) *
@@ -752,8 +721,6 @@ lemma fix_five {ω : K} (hω : ω ^ 4 + ω ^ 3 + ω ^ 2 + ω + 1 = 0) :
           rw [div_eq_iff (mul_ne_zero (pow_ne_zero 2 d4) (pow_ne_zero 2 hd))]
           linear_combination (-ω ^ 3 + 2 * ω ^ 4 - ω ^ 5 + ω ^ 6 + 2 * ω ^ 7 + ω ^ 8) * hω]
     linear_combination (-ω + ω ^ 2) * hω
-  · change act6 0 (act6 1 (act6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4)))) = _
-    rw [s4, s3, s2, s1]
   · change c6 0 (act6 1 (act6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4)))) *
       (c6 1 (act6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4))) *
       (c6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4)) *
@@ -789,22 +756,12 @@ lemma fix_four6 (h2 : (2 : K) ≠ 0) {ι : K} (hι : ι ^ 2 = -1) :
     change ((1 - 2 : K), 1 - (ι + 1), 1 - (1 - ι)) = _
     simp only [Prod.mk.injEq]
     exact ⟨by norm_num, by ring, by ring⟩
-  have hv : (-1 : K) * (-1 / ((2 - 1) ^ 2 * (ι + 1 - 1) ^ 2) * (-1 * (-1 - 1) / (-1 - ι) ^ 2 * 1))
-      = ι := by
-    rw [show (ι + 1 - 1 : K) ^ 2 = -1 by linear_combination hι,
-      show (-1 - ι : K) ^ 2 = 2 * ι by linear_combination hι]
-    field_simp
-    linear_combination -2 * hι
   refine ⟨⟨⟨by norm_num, fun h => h2 (by linear_combination -h), neg_ne_zero.2 hι0,
     fun h => hιm (by linear_combination -h), fun h => hι1 (by linear_combination h)⟩,
-    (fix_four h2 hι).1, fun h => h2 (by linear_combination ι * h + 2 * hι)⟩, ?_, ?_⟩
-  · change act6 0 (act6 1 (act6 2 ((-1 : K), -ι, ι))) = _
-    rw [t3, t2, t1]
-  · change c6 0 (act6 1 (act6 2 ((-1 : K), -ι, ι))) * (c6 1 (act6 2 ((-1 : K), -ι, ι)) *
-      (c6 2 ((-1 : K), -ι, ι) * 1)) = ι
-    rw [t3]
-    exact (by norm_num : (-1 : K) * (-1 / (ι + 1 - 1) ^ 2 * (-1 * (-1 - 1) / (-1 - ι) ^ 2 * 1))
-      = _).trans hv
+    (fix_four h2 hι).1, fun h => h2 (by linear_combination ι * h + 2 * hι)⟩, ?_,
+    (fix_four h2 hι).2.2.2.2⟩
+  change act6 0 (act6 1 (act6 2 ((-1 : K), -ι, ι))) = _
+  rw [t3, t2, t1]
 
 /-- The entry « 20 ? » of page 70 for `L`, `n = 6`, does not check: a power `m` of the cocycle
 of `L` is the coboundary of a nowhere-zero function on `M_{0,6}(K)` iff `5 ∣ m` (`5 ≠ 0`, a root
@@ -815,14 +772,11 @@ theorem coboundary_cL6_iff (h5 : (5 : K) ≠ 0) {ω : K} (hω : ω ^ 4 + ω ^ 3 
   constructor
   · rintro ⟨h, hh, hc⟩
     obtain ⟨hU, hfix, hcoc, -, -⟩ := fix_five hω
-    have e := hc [0, 1, 2, 3] _ hU
-    rw [hfix, hcoc, div_self (hh _ hU)] at e
-    exact five_dvd_of_pow h5 hω m e
+    exact five_dvd_of_pow h5 hω m <| by
+      simpa only [hfix, hcoc, div_self (hh _ hU)] using hc [0, 1, 2, 3] _ hU
   · rintro ⟨t, rfl⟩
-    refine ⟨fun p => hL6 p ^ t, fun p hp => zpow_ne_zero _ (hL6_ne hp), ?_⟩
-    refine wCoc_zpow (V := U6) (h := fun p => hL6 p ^ t) (fun i p hp => act6_U6 i hp)
-      (fun p hp => zpow_ne_zero _ (hL6_ne hp)) ?_
-    intro i p hp
+    have hh p (hp : U6 p) : hL6 p ^ t ≠ (0 : K) := zpow_ne_zero _ (hL6_ne hp)
+    refine ⟨_, hh, wCoc_zpow (fun i p hp => act6_U6 i hp) hh fun i p hp => ?_⟩
     rw [zpow_mul, show cL6 i p ^ (5 : ℤ) = _ by exact_mod_cast cL6_pow_five i hp, div_zpow]
 
 /-- The entry « 60 ? » of page 70 for `L_i`, `n = 6`, does not check: a power `m` of the cocycle
@@ -844,10 +798,8 @@ theorem coboundary_c6_iff (h2 : (2 : K) ≠ 0) (h5 : (5 : K) ≠ 0) {ι : K} (h�
     have := four_dvd_of_pow h2 hι m e'
     omega
   · rintro ⟨t, rfl⟩
-    refine ⟨fun p => (g6 p ^ 2) ^ t, fun p hp => zpow_ne_zero _ (pow_ne_zero _ (g6_ne hp)), ?_⟩
-    refine wCoc_zpow (V := U6) (h := fun p => (g6 p ^ 2) ^ t) (fun i p hp => act6_U6 _ hp)
-      (fun p hp => zpow_ne_zero _ (pow_ne_zero _ (g6_ne hp))) ?_
-    intro i p hp
+    have hh p (hp : U6 p) : (g6 p ^ 2) ^ t ≠ (0 : K) := zpow_ne_zero _ (pow_ne_zero _ (g6_ne hp))
+    refine ⟨_, hh, wCoc_zpow (fun i p hp => act6_U6 i.castSucc hp) hh fun i p hp => ?_⟩
     rw [zpow_mul, show c6 i p ^ (20 : ℤ) = g6 (act6s i p) ^ 2 / g6 p ^ 2 by
       rw [show (20 : ℤ) = ((10 * 2 : ℕ) : ℤ) by norm_num, zpow_natCast, pow_mul,
         c6_pow_ten i hp]; ring, div_zpow]

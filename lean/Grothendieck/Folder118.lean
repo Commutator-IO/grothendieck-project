@@ -217,16 +217,10 @@ theorem not_condition_c (G : Type u) [Group G] [Nontrivial G] : ¬ condition_c G
 /-- (c) holds for `A = BG` exactly when `G` is trivial. -/
 theorem condition_c_iff_subsingleton (G : Type u) [Group G] :
     condition_c G ↔ Subsingleton G := by
-  refine ⟨fun h => ?_, fun _ X Y _ _ => ?_⟩
-  · by_contra hG
-    have := not_subsingleton_iff_nontrivial.1 hG
-    exact not_condition_c G h
-  · refine ⟨fun y => ⟨y, 1, one_smul _ _⟩, fun x x' k hk => ⟨1, ?_⟩,
-      fun x k _ => ⟨1, one_smul _ _, Subsingleton.elim _ _⟩,
-      fun _ g _ _ => Subsingleton.elim _ _⟩
-    rw [Subsingleton.elim k 1, one_smul] at hk
-    rw [one_smul]
-    exact hk
+  refine ⟨fun h => not_nontrivial_iff_subsingleton.1 fun _ => not_condition_c G h,
+    fun _ X Y _ _ => ⟨fun y => ⟨y, 1, one_smul _ _⟩, fun x x' k hk => ⟨1, ?_⟩,
+      fun x k _ => ⟨1, one_smul _ _, Subsingleton.elim _ _⟩, fun _ g _ _ => Subsingleton.elim _ _⟩⟩
+  rw [one_smul]; rwa [Subsingleton.elim k 1, one_smul] at hk
 
 /-- **Cisinski, Proposition 4.3.2, (g) ⇏ (c)**, for `A = BG`, `G ≠ 1`, in the model: `𝒲_A`
 is stable under finite products, while `A/(X × Y) → A/X × A/Y` is not always a weak
