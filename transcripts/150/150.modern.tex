@@ -40,6 +40,10 @@
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
 % Revised: Opus 5.5 (claude-opus-5-5), 2026-10-21 — references checked against zbMATH/Crossref; the arguments at p. 19 (holds; the definition of strict compatibility now carries the condition the footnote chose) and p. 68 (holds) reviewed by a machine second reading.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-21 — p. 19, the footnote to the Proposition:
+%   the counterexample on [0, 1] footnoted with its Lean check (compatible_not_determined,
+%   not_strictlyCompatible_singleton_zero, eq_of_strictlyCompatible); the categories
+%   of the Proposition and the general functor not formalised.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -439,7 +443,7 @@ $X^{\sharp}$ ; on passe du second au premier par $X = X^{\sharp}
 seulement compatible. Elle est fausse sous cette forme : la trace $X_i \cap Y$
 n'est pas déterminée par les données de droite dès qu'elle déborde l'image de
 $\dot X_i$. Il faut soit la strictité au sens $X_i \cap Y = f(\dot X_i)$, que
-la page impose elle-même en bas de la page 16, soit ajouter les $X_i \cap Y$ aux données. On a retenu la première. Argument revu par une seconde lecture automatique (Opus 5.5), 21 octobre 2026 : l'objection tient : pour $X = [0,1]$, $Y = \{0\}$, $T = [0,\frac12]$, les fermés $X_1 = \{0\}$ et $X_1 = \emptyset$ sont compatibles avec $T$ et ont les mêmes données de droite. Elle vaut encore si l'on demande seulement que $T$ soit strict, comme le faisait la définition de « strictement compatible » donnée plus haut ; on y a donc ajouté la condition $X_i \cap Y = f(\dot X_i)$, que cette note retenait.}. Le voisinage $T$ est strict et transverse
+la page impose elle-même en bas de la page 16, soit ajouter les $X_i \cap Y$ aux données. On a retenu la première. Argument revu par une seconde lecture automatique (Opus 5.5), 21 octobre 2026 : l'objection tient : pour $X = [0,1]$, $Y = \{0\}$, $T = [0,\frac12]$, les fermés $X_1 = \{0\}$ et $X_1 = \emptyset$ sont compatibles avec $T$ et ont les mêmes données de droite. Elle vaut encore si l'on demande seulement que $T$ soit strict, comme le faisait la définition de « strictement compatible » donnée plus haut ; on y a donc ajouté la condition $X_i \cap Y = f(\dot X_i)$, que cette note retenait. Lean vérifie ce contre-exemple (lean/Grothendieck/Folder150.lean, \texttt{compatible\_not\_determined}, \texttt{not\_strictlyCompatible\_singleton\_zero}, \texttt{eq\_of\_strictlyCompatible}) : avec $T = [0, \frac12]$, contracté par $t \mapsto \lambda t$, et le collier $[\frac12, \frac34]$ de $\dot T = \{\frac12\}$ dans $X^{\sharp} = [\frac12, 1]$, les fermés $\{0\}$ et $\emptyset$ sont compatibles avec $T$ et avec le collier et ont la même trace sur $X^{\sharp}$ ; $\{0\}$ ne vérifie pas $X_1 \cap Y = f(\dot X_1)$ ; et, sous cette condition, tout fermé compatible est déterminé par sa trace sur $X^{\sharp}$. Seul l'exemple est formalisé, non les catégories de la proposition ; voir l'annexe Lean, section 150.}. Le voisinage $T$ est strict et transverse
 aux $X_i$ si et seulement si $\dot X$ est à collier dans $X^{\sharp}$, compatible
 avec les $X^{\sharp}_i$ ; il est équisingulier pour les $X_i$ si et seulement si
 $\dot X \to Y$, avec les $\dot X_i = X_i \cap \dot X$, est une fibration

@@ -298,7 +298,7 @@ has its modernised reading, taken whole, in current notation. A second
 transcription pass
 ([issue #51](https://github.com/Commutator-IO/grothendieck-project/issues/51)),
 re-reading each page on 700 dpi tiles, has taken 61 batches of 15 folders so
-far. Statements of 66 folders are proved in Lean (below).
+far. Statements of 67 folders are proved in Lean (below).
 
 None of it has been read through page by page by a person. What has been
 checked on the facsimile, by the author, is spot readings: 125 in 54 folders,
@@ -353,8 +353,8 @@ rendered with an arrow missing asserts a commutation nobody wrote.
 ## The Lean appendix
 
 [`lean/`](lean/README.md) proves in Lean 4, against mathlib, statements the
-modernised readings make: 66 folders, one file each, and two Bourbaki
-rédactions, **2,031 theorems** (`cat lean/Grothendieck/*.lean | grep -c
+modernised readings make: 67 folders, one file each, and two Bourbaki
+rédactions, **2,036 theorems** (`cat lean/Grothendieck/*.lean | grep -c
 '^theorem'`). CI builds it with every warning an error, refuses `sorry`,
 `native_decide` and `axiom`, and `lean/axioms.sh` fails on any axiom beyond
 Lean's three standard ones. A proof says that what a reading states **holds

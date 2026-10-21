@@ -1,0 +1,55 @@
+\section[Cote 150 : voisinages coniques, un contre-exemple sur {[0, 1]}]{Cote 150 : voisinages coniques, un contre-exemple sur $[0, 1]$\protect\verifie{Folder150}}\label{sec:150}
+
+La cote 150, \emph{Espaces stratifiés et voisinages côniques (ou : déploiement des espaces stratifiés)}, quatre-vingt-dix-huit pages de décembre 1981 et janvier 1982, cherche à déplier un espace stratifié : remplacer chaque strate par une version rognée, sans jointure, et garder la trace de la façon dont les morceaux se recollaient. Les pages~11 à~19 en posent le vocabulaire. Un \emph{voisinage conique} d'un fermé $Y$ dans un espace $X$ est un voisinage $T$ de $Y$ muni d'une action $(\lambda, t) \mapsto \lambda t$ du monoïde multiplicatif $\mathbf I = [0, 1]$, qui fixe $Y$ et écrase $T$ sur $Y$ pour $\lambda = 0$. Son bord $\dot T$ est la base du cône, et $f : \dot T \to Y$, $t \mapsto 0 \cdot t$, envoie chaque point du bord sur la pointe de son segment. Ôter l'intérieur de $T$ laisse un espace à bord $X^\sharp = X \smallsetminus \mathring T$, que la page note $X^{*}$, dont le bord est $\dot T$.
+
+La page~19 énonce une proposition de reconstruction (\lot{150}{1}{19}). Les systèmes $(X, Y, (X_i)_{i \in I}, T)$, où les $X_i$ sont des fermés et $T$ un voisinage conique de $Y$ compatible avec eux, seraient équivalents, en ne gardant pour morphismes que les isomorphismes, aux systèmes $(X^\sharp, \dot X, (X_i^\sharp), Y, f : \dot X \to Y)$, où $\dot X = \dot T$ et $X_i^\sharp = X_i \cap X^\sharp$. Dans l'autre sens, on recolle à $X^\sharp$, le long de $\dot X$, le cylindre de l'application $f$. L'idée est simple : couper le voisinage conique ne perd rien, puisque le cône se reconstruit à partir de sa base et de la projection sur la pointe.
+
+\noindent\emph{Les définitions.} Une partie $T' \subset T$ est \emph{conique} quand elle est formée des segments issus de sa trace sur le bord et de sa trace sur $Y$ : $T' = \mathbf I \cdot (T' \cap \dot T) \cup (T' \cap Y)$. C'est la remarque de la page~15 (\lot{150}{1}{15}) ; elle contient la stabilité par l'action. Le voisinage $T$ est \emph{compatible} avec un fermé $X'$ si $X' \cap T$ est conique. Un \emph{collier} de $\dot T$ dans $X^\sharp$ est un voisinage $E$ de $\dot T$ identifié à $\dot T \times [0, 1]$, et $X'$ lui est compatible si $X' \cap E$ s'écrit $X'_0 \times [0, 1]$. La partie conique $T'$ est \emph{stricte} si sa trace sur $Y$ se réduit aux pointes de ses segments, $T' \cap Y = 0 \cdot (T' \cap \dot T)$ : c'est la condition que la page~16 ajoute au bas du feuillet et entoure (\lot{150}{1}{16}).
+
+\noindent\emph{Pourquoi la proposition demande une condition.} Les données de droite ne voient de $X_i$ que sa partie hors de l'intérieur de $T$. Dans $T$, la compatibilité reconstruit les segments à partir de leur base $X_i \cap \dot T$, mais elle laisse libre un morceau de $Y$ que $X_i$ peut contenir sans qu'aucun segment n'y aboutisse. Ce morceau est invisible à droite. L'exemple le plus petit est sur un segment.
+
+\noindent\emph{L'exemple.} On prend $X = [0, 1]$, $Y = \{0\}$ et $T = [0, \frac12]$, avec l'action $(\lambda, t) \mapsto \lambda t$. Le bord est $\dot T = \{\frac12\}$, l'application $f$ envoie $\frac12$ sur $0$, et $X^\sharp = [\frac12, 1]$. Le collier est $E = [\frac12, \frac34]$, identifié à $\dot T \times [0, 1]$ par $(\frac12, s) \mapsto \frac12 + \frac s4$. Le voisinage $T$ est strict, au sens de la page~14 : c'est $\frac12 \cdot X$, et $X$ est lui-même un voisinage conique de $Y$ pour la même action.
+
+\begin{encadre}
+\begin{contrexemple}[contre-exemple de l'édition, page~19]
+Dans l'exemple ci-dessus, les fermés $X_1 = \{0\}$ et $X_1 = \emptyset$ de $[0, 1]$ sont tous deux compatibles avec $T$ et avec le collier $E$, et ils ont la même trace, vide, sur $X^\sharp$. Les deux systèmes ont donc les mêmes données de droite, mais ils ne sont pas isomorphes, puisque l'un des fermés est vide et l'autre non. Le fermé $\{0\}$ ne vérifie pas la condition $X_1 \cap Y = f(\dot X_1)$, où $\dot X_1 = X_1 \cap \dot T$.
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+Pour $X_1 = \{0\}$ : $X_1 \cap T = \{0\}$, sa trace sur le bord est vide et sa trace sur $Y$ est $\{0\}$, de sorte que $\mathbf I \cdot \emptyset \cup \{0\} = \{0\}$ : la partie est conique. Elle ne rencontre pas $E$, et $X_1 \cap E = \emptyset = \emptyset \times [0, 1]$. Pour $X_1 = \emptyset$, tout est vide. Les deux traces sur $X^\sharp = [\frac12, 1]$ sont vides. Enfin $\{0\} \cap Y = \{0\}$, alors que $\dot X_1 = \emptyset$ et $f(\emptyset) = \emptyset$.
+\end{proof}
+
+Le contre-exemple tient encore si l'on demande que $T$ soit strict, comme le faisait la première définition de \q{strictement compatible} de la lecture, et si l'on ajoute le collier : ni l'une ni l'autre condition ne regarde la trace de $X_1$ sur $Y$. La lecture a donc mis dans la définition la condition $X_i \cap Y = f(\dot X_i)$, que la page impose elle-même au bas de la page~16. Sous cette condition, l'exemple ne présente plus d'ambiguïté.
+
+\begin{encadre}
+\begin{enonce}[énoncé de l'édition, page~19, dans l'exemple]
+Dans l'exemple ci-dessus, soient $X_1$ et $X_2$ deux fermés de $[0, 1]$ compatibles avec $T$ et avec le collier, qui vérifient $X_k \cap Y = f(\dot X_k)$. Si $X_1 \cap X^\sharp = X_2 \cap X^\sharp$, alors $X_1 = X_2$.
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+Une partie conique $C$ de $T$ est $T$ tout entier si elle contient $\frac12$, puisqu'elle contient alors le segment $\mathbf I \cdot \frac12 = [0, \frac12]$ ; sinon sa trace sur le bord est vide et $C = C \cap Y \subset \{0\}$. Sous la condition stricte, le second cas donne $C \cap Y = f(\emptyset) = \emptyset$, donc $C = \emptyset$. Ainsi $X_k \cap T$ vaut $T$ ou $\emptyset$ selon que $\frac12$ est dans $X_k$ ou non. Or $\frac12$ appartient à $X^\sharp$, et l'on lit sur la trace $X_k \cap X^\sharp$ s'il est dans $X_k$. Comme $[0, 1] = T \cup X^\sharp$, on a $X_k = (X_k \cap T) \cup (X_k \cap X^\sharp)$, et les deux morceaux sont déterminés par la trace sur $X^\sharp$.
+\end{proof}
+
+\begin{remarque}
+Le collier ne sert pas à la démonstration de l'énoncé : dans l'exemple, la condition stricte suffit. La page laisse deux réparations possibles : demander la condition stricte, ou ajouter les traces $X_i \cap Y$ aux données de droite. La lecture a retenu la première, et l'exemple montre qu'elle répare le défaut qu'il met en évidence ; il ne démontre pas la proposition corrigée en général.
+\end{remarque}
+
+\noindent\emph{Portée de la vérification.} Lean traite l'exemple seul, dans $\mathbb R$ : les parties $X$, $Y$, $T$, $\dot T$, $X^\sharp$ et le collier y sont des intervalles explicites, et les notions de partie conique, de compatibilité, de compatibilité au collier et de compatibilité stricte y sont écrites pour cette action. Il démontre que $T$ est conique et strict (\texttt{isConic\_T}, \texttt{T\_eq\_half\_smul}), le contre-exemple (\texttt{compatible\_not\_determined}, \texttt{not\_strictlyCompatible\_singleton\_zero}) et l'énoncé (\texttt{eq\_of\_strictlyCompatible}). Ne sont pas formalisés : les deux catégories de la proposition et le foncteur de recollement $X = X^\sharp \amalg_{\dot X} \mathcal C(f)$ pour des espaces quelconques, la transversalité et l'équisingularité de la même page. Mathlib n'a pas les espaces stratifiés ni les voisinages coniques.
+
+Ne sont pas démontrés ici, de la même cote :
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 1 et 45 à 47, lissité des fibrations de drapeaux\piste{150-flag-fibration-smoothness}]\nonverifie
+Dans le déploiement d'une stratification équisingulière non singulière, présenté comme foncteur sur les drapeaux de $I$, soit $d = (i_1, \dots, i_p)$ un segment initial de $d' = (i_1, \dots, i_n)$. Le bord des fibres de $\Sigma_{d'} \to \Sigma_d$ est stratifié cylindriquement par les drapeaux non vides de la somme ordinale $I_{]i_p,i_{p+1}[} \sqcup \dots \sqcup I_{]i_{n-1},i_n[}$. La fibration est donc à fibres sans bord exactement quand $i_{k+1}$ couvre $i_k$ dans $I$ pour $p \leq k < n$, condition où $i_1, \dots, i_{p-1}$ n'interviennent pas.
+\end{theoreme*}
+\end{encadre}
+{\small Le mot qui qualifie \q{successeur} à la page~47 est une addition incertaine ; le critère est fixé par la page~46, lisible. Mathlib n'a pas les stratifications équisingulières ni leurs déploiements. On se reportera aux notes de Grothendieck (\lot{150}{1}{1}).\par}
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 47 à 66 et 70, le déploiement comme espace ordonné\piste{150-unfolding-as-ordered-space}]\nonverifie
+Les données déployées d'une stratification équisingulière indexée par un ensemble ordonné fini $I$ (strates déployées $\Sigma_i$, tubes de raccord $\Sigma_{ij}$ fibrés sur $\Sigma_i$ et plongés de façon fermée, avec collier, dans $\Sigma_j$) équivalent à un seul espace topologique ordonné $\Sigma$, dont le graphe de l'ordre est la réunion des tubes. Cet espace est soumis à des conditions de propreté, de transversalité et de finitude, chaque $\Sigma_{<x}$ étant fini et totalement ordonné, et muni d'une application strictement croissante $\pi_0(\Sigma) \to I$, non nécessairement surjective.
+\end{theoreme*}
+\end{encadre}
+{\small Les feuillets en esquissent une démonstration incomplète (pages 57 à 70). Seules la reconstitution de l'ordre et la condition~b) y sont démontrées, et l'argument de dimension des pages 67 à 69 demande des hypothèses que l'édition ajoute. Mathlib n'a pas les stratifications équisingulières. On se reportera aux notes de Grothendieck (\lot{150}{3}{47}).\par}

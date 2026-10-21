@@ -894,4 +894,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder46.lean',
     theorems: ['ker_trivial', 'ker_trivial_of_pow_smul_eq_bot', 'isCoboundary_of_map_isCoboundary', 'not_isCoboundary_signCocycle'],
   },
+  {
+    folder: '150',
+    batch: 1,
+    page: '19',
+    name: 'The reconstruction of page 19 needs Xᵢ ∩ Y = f(Ẋᵢ)',
+    statement:
+      'Page 19 states that the systems (X, Y, (Xᵢ), T), T a conic neighbourhood of Y compatible with the closed Xᵢ, are equivalent (isomorphisms only) to the systems (X^♯, Ẋ, (Xᵢ^♯), Y, f : Ẋ → Y), X^♯ = X ∖ T° and f(t) = 0·t. The reading objects that the trace Xᵢ ∩ Y is not recovered unless Xᵢ ∩ Y = f(Ẋᵢ), the strictness the page circles at the foot of page 16, and adds it to « strictement compatible ».',
+    found:
+      'The edition’s counterexample holds: on X = [0, 1], with Y = {0}, T = [0, 1/2] contracted by t ↦ λt (T strict, T = ½·X), Ṫ = {1/2} and the collar [1/2, 3/4] ≃ Ṫ × [0, 1], the closed sets {0} and ∅ are both compatible with T and with the collar and have the same (empty) trace on X^♯ = [1/2, 1], so the same right-hand data, while one is empty and the other not; {0} fails Xᵢ ∩ Y = f(Ẋᵢ). Asking only that T be strict, or adding the collar, does not help. With the condition, a compatible closed set is determined by its trace on X^♯ (a conic part of T is T or lies in Y), so the reading’s correction repairs the example. Only this example is formalised: not the two categories, the gluing X = X^♯ ⊔_Ẋ 𝒞(f) for general spaces, transversality or equisingularity.',
+    verdict: 'false on the page',
+    lean: 'lean/Grothendieck/Folder150.lean',
+    theorems: ['compatible_not_determined', 'not_strictlyCompatible_singleton_zero', 'eq_of_strictlyCompatible', 'T_eq_half_smul'],
+  },
 ];
