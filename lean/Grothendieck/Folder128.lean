@@ -86,8 +86,7 @@ lemma exists_smul_delta (h2 : Module.finrank k A = 2) {x : A} (hx : ∀ c : k, c
     ∃ a : A, a • ((1 : A) ⊗ₜ[k] x - x ⊗ₜ 1) = t := by
   obtain ⟨f₀, f₁, hf, -⟩ := coords h2 hx
   have ht' : t ∈ Submodule.span A (Set.range fun s : A => (1 : A) ⊗ₜ[k] s - s ⊗ₜ 1) := by
-    rw [KaehlerDifferential.submodule_span_range_eq_ideal]
-    exact ht
+    rwa [KaehlerDifferential.submodule_span_range_eq_ideal]
   rw [← Submodule.mem_span_singleton (R := A)]
   refine Submodule.span_le.2 ?_ ht'
   rintro _ ⟨s, rfl⟩
@@ -95,13 +94,11 @@ lemma exists_smul_delta (h2 : Module.finrank k A = 2) {x : A} (hx : ∀ c : k, c
     conv_lhs => rw [← hf s]
     simp only [tmul_add, add_tmul, tmul_smul, ← smul_tmul', smul_sub]
     abel
-  change (1 : A) ⊗ₜ[k] s - s ⊗ₜ 1 ∈ Submodule.span A {(1 : A) ⊗ₜ[k] x - x ⊗ₜ 1}
-  rw [this]
-  exact Submodule.smul_of_tower_mem _ _ (Submodule.mem_span_singleton_self _)
+  simpa only [this, SetLike.mem_coe] using
+    Submodule.smul_of_tower_mem _ _ (Submodule.mem_span_singleton_self _)
 
 lemma smul_mem {I : Ideal (A ⊗[k] A)} (a : A) {t : A ⊗[k] A} (ht : t ∈ I) : a • t ∈ I := by
-  rw [Algebra.smul_def]
-  exact I.mul_mem_left _ ht
+  rw [Algebra.smul_def]; exact I.mul_mem_left _ ht
 
 /-- If `δ = 1 ⊗ x − x ⊗ 1 ∈ I` then `Δ ⊂ I`. -/
 lemma ker_le (h2 : Module.finrank k A = 2) {x : A} (hx : ∀ c : k, c • (1 : A) ≠ x)
@@ -143,15 +140,13 @@ lemma idem_case (h2 : Module.finrank k A = 2) {I : Ideal (A ⊗[k] A)} (hI : IsE
       simp only [mul_sub, mul_add, mul_smul_comm, Algebra.TensorProduct.tmul_mul_tmul, he,
         one_mul, mul_one]
       module
-    · simp only [map_sub, Algebra.TensorProduct.comm_tmul]
-      abel
+    · simp only [map_sub, Algebra.TensorProduct.comm_tmul]; abel
   · refine key ((1 : A) ⊗ₜ[k] e - e ⊗ₜ e) (mem_of_smul_mem hc ?_) ?_
     · convert I.mul_mem_left ((1 : A) ⊗ₜ[k] (1 : A) - e ⊗ₜ 1) ht using 1
       simp only [sub_mul, mul_sub, mul_add, mul_smul_comm, Algebra.TensorProduct.tmul_mul_tmul,
         he, one_mul, mul_one]
       module
-    · simp only [map_sub, Algebra.TensorProduct.comm_tmul]
-      abel
+    · simp only [map_sub, Algebra.TensorProduct.comm_tmul]; abel
 
 /-- The case of `e ∉ k` with `e² = 0` (`A ≃ k[ε]`): transitivity. -/
 lemma nil_case (h2 : Module.finrank k A = 2) {I : Ideal (A ⊗[k] A)} (hI : IsEquivalenceIdeal I)
@@ -159,11 +154,9 @@ lemma nil_case (h2 : Module.finrank k A = 2) {I : Ideal (A ⊗[k] A)} (hI : IsEq
     I = ⊥ ∨ (1 : A) ⊗ₜ[k] e - e ⊗ₜ 1 ∈ I := by
   obtain ⟨f₀, f₁, hf, h01, h0e, -, h1e⟩ := coords h2 hx
   have he' : e * e = (0 : k) • e := by rw [zero_smul, he]
-  by_contra! hne
-  obtain ⟨hI0, hδ⟩ := hne
+  refine or_iff_not_imp_left.2 fun hI0 => by_contra fun hδ => ?_
   -- every element of `I` is a multiple of `e ⊗ e`
-  have claim : ∀ t ∈ I, ∃ d : k, t = d • (e ⊗ₜ[k] e) := by
-    intro t ht
+  have claim : ∀ t ∈ I, ∃ d : k, t = d • (e ⊗ₜ[k] e) := fun t ht => by
     obtain ⟨a, rfl⟩ := exists_smul_delta h2 hx (hI.refl ht)
     obtain ⟨c, d, rfl⟩ : ∃ c d : k, c • 1 + d • e = a := ⟨_, _, hf a⟩
     rw [smul_delta he'] at ht ⊢
@@ -253,18 +246,10 @@ theorem isEquivalenceIdeal_bot : IsEquivalenceIdeal (⊥ : Ideal (A ⊗[k] A)) w
 theorem isEquivalenceIdeal_ker :
     IsEquivalenceIdeal (RingHom.ker (Algebra.TensorProduct.lmul' k : A ⊗[k] A →ₐ[k] A)) where
   refl := le_rfl
-  symm t ht := by
-    have h (u : A ⊗[k] A) : Algebra.TensorProduct.lmul' k (Algebra.TensorProduct.comm k A A u) =
-        Algebra.TensorProduct.lmul' k u := by
-      induction u with
-      | tmul a b => simp [mul_comm]
-      | add a b ha hb => simp_all
-    rwa [RingHom.mem_ker, h]
+  symm t ht := RingHom.mem_ker.2 <| (LinearMap.mul'_comm (R := k) t).trans ht
   trans := by
-    have hk : RingHom.ker (Algebra.TensorProduct.lmul' k : A ⊗[k] A →ₐ[k] A) =
-        Ideal.span (Set.range fun s : A => (1 : A) ⊗ₜ[k] s - s ⊗ₜ 1) :=
-      (KaehlerDifferential.span_range_eq_ideal k A).symm
-    rw [hk, Ideal.map_span, Ideal.span_le]
+    rw [show RingHom.ker _ = _ from (KaehlerDifferential.span_range_eq_ideal k A).symm,
+      Ideal.map_span, Ideal.span_le]
     rintro _ ⟨_, ⟨s, rfl⟩, rfl⟩
     have : p13 k A ((1 : A) ⊗ₜ[k] s - s ⊗ₜ 1) =
         p12 k A ((1 : A) ⊗ₜ[k] s - s ⊗ₜ 1) + p23 k A ((1 : A) ⊗ₜ[k] s - s ⊗ₜ 1) := by

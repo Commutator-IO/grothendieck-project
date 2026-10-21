@@ -75,10 +75,9 @@ lemma cone_half : cone Tdot = T := by
   · rintro ⟨h0, h1⟩
     exact ⟨2 * x, 1 / 2, ⟨⟨by linarith, by linarith⟩, rfl⟩, by ring⟩
 
-theorem isConic_T : IsConic T := by
-  refine ⟨subset_rfl, ?_⟩
-  have : T ∩ Tdot = Tdot := inter_eq_right.2 (by norm_num [Tdot, T])
-  rw [this, cone_half, union_eq_left.2 inter_subset_left]
+theorem isConic_T : IsConic T := ⟨subset_rfl, by
+  rw [(inter_eq_right.2 (by norm_num [Tdot, T]) : T ∩ Tdot = Tdot), cone_half,
+    union_eq_left.2 inter_subset_left]⟩
 
 /-- `T` is strict: `T = ½ · X`, with `X = [0, 1]` itself conic for the same action. -/
 theorem T_eq_half_smul : T = (fun t => 1 / 2 * t) '' X := by
@@ -91,8 +90,7 @@ theorem T_eq_half_smul : T = (fun t => 1 / 2 * t) '' X := by
 lemma IsConic.cases {C : Set ℝ} (h : IsConic C) :
     ((1 / 2 : ℝ) ∈ C → C = T) ∧ ((1 / 2 : ℝ) ∉ C → C ⊆ Y) := by
   refine ⟨fun hc => h.1.antisymm ?_, fun hc => ?_⟩
-  · have : C ∩ Tdot = Tdot := inter_eq_right.2 (singleton_subset_iff.2 hc)
-    rw [h.2, this, cone_half]
+  · rw [h.2, (inter_eq_right.2 (singleton_subset_iff.2 hc) : C ∩ Tdot = Tdot), cone_half]
     exact subset_union_left
   · rw [h.2, Tdot, inter_singleton_eq_empty.2 hc]
     simp [cone]
@@ -117,8 +115,7 @@ theorem compatible_not_determined :
 /-- `{0}` is not strictly compatible: `{0} ∩ Y = {0}`, while `Ẋ₁ = ∅`. -/
 theorem not_strictlyCompatible_singleton_zero : ¬ IsStrictlyCompatible {0} := by
   rintro ⟨-, -, h⟩
-  have : ({0} : Set ℝ) ∩ Tdot = ∅ := by norm_num [Tdot]
-  rw [this, image_empty] at h
+  rw [show ({0} : Set ℝ) ∩ Tdot = ∅ by norm_num [Tdot], image_empty] at h
   simp [Y] at h
 
 open Classical in
@@ -128,9 +125,8 @@ lemma IsStrictlyCompatible.inter_T {X₁ : Set ℝ} (h : IsStrictlyCompatible X�
   have hc := h.1.2.2.cases
   split_ifs with h2
   · exact hc.1 ⟨h2, by norm_num [T]⟩
-  · have hY : X₁ ∩ Y = ∅ := by
-      rw [h.2.2, Tdot, inter_singleton_eq_empty.2 h2, image_empty]
-    refine subset_empty_iff.1 fun x hx => hY ▸ ⟨hx.1, hc.2 (fun h' => h2 h'.1) hx⟩
+  · have hY : X₁ ∩ Y = ∅ := by rw [h.2.2, Tdot, inter_singleton_eq_empty.2 h2, image_empty]
+    exact subset_empty_iff.1 fun x hx => hY ▸ ⟨hx.1, hc.2 (fun h' => h2 h'.1) hx⟩
 
 /-- With `X₁ ∩ Y = f(Ẋ₁)`, a strictly compatible `X₁` is determined by its trace on `X*`. -/
 theorem eq_of_strictlyCompatible {X₁ X₂ : Set ℝ} (h₁ : IsStrictlyCompatible X₁)
@@ -140,10 +136,9 @@ theorem eq_of_strictlyCompatible {X₁ X₂ : Set ℝ} (h₁ : IsStrictlyCompati
     refine hZ.trans fun x ⟨h0, h1⟩ => ?_
     by_cases hx : x ≤ 1 / 2
     exacts [Or.inl ⟨h0, hx⟩, Or.inr ⟨by linarith, h1⟩]
-  have half : (1 / 2 : ℝ) ∈ X₁ ↔ (1 / 2 : ℝ) ∈ X₂ := by
-    have hm : (1 / 2 : ℝ) ∈ Xstar := by norm_num [Xstar]
-    have := Set.ext_iff.1 h (1 / 2)
-    exact ⟨fun a => (this.1 ⟨a, hm⟩).1, fun a => (this.2 ⟨a, hm⟩).1⟩
+  have hm : (1 / 2 : ℝ) ∈ Xstar := by norm_num [Xstar]
+  have half : (1 / 2 : ℝ) ∈ X₁ ↔ (1 / 2 : ℝ) ∈ X₂ := ⟨fun a => ((Set.ext_iff.1 h _).1 ⟨a, hm⟩).1,
+    fun a => ((Set.ext_iff.1 h _).2 ⟨a, hm⟩).1⟩
   rw [split X₁ h₁.1.2.1, split X₂ h₂.1.2.1, h₁.inter_T, h₂.inter_T, h, half]
 
 end Grothendieck.Folder150

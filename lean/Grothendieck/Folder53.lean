@@ -106,38 +106,31 @@ theorem inv_mem_of_isClosed {n : ℕ} (S : Submonoid (GL (Fin n) K))
     (J : Ideal (MvPolynomial (Option (Fin n × Fin n)) K))
     (hS : ∀ g, g ∈ S ↔ glCoords g ∈ zeroLocus K J) {g : GL (Fin n) K} (hg : g ∈ S) :
     g⁻¹ ∈ S := by
-  have hinj : Function.Injective fun x : S => glCoords x.1 := by
-    intro x y h
-    ext i j
-    exact congrFun h (some (i, j))
+  have hinj : Function.Injective fun x : S => glCoords x.1 := fun x y h =>
+    Subtype.ext <| Units.ext <| Matrix.ext fun i j => congrFun h (some (i, j))
   have hrange : Set.range (fun x : S => glCoords x.1) =
       zeroLocus K (J ⊔ Ideal.span {X none * detPoly n - 1}) := by
     ext v
     simp only [Set.mem_range, mem_zeroLocus_iff, Submodule.mem_sup, Ideal.mem_span_singleton]
     constructor
     · rintro ⟨x, rfl⟩ p ⟨a, ha, _, ⟨c, rfl⟩, rfl⟩
-      have h1 := (mem_zeroLocus_iff.1 ((hS x).1 x.2)) a ha
-      replace h1 : eval (glCoords x.1) a = 0 := by simpa using h1
+      have h1 : eval (glCoords x.1) a = 0 := by simpa using mem_zeroLocus_iff.1 ((hS x).1 x.2) a ha
       simp only [aeval_eq_eval, map_add, h1, map_mul, map_sub, eval_X, glCoords,
         Matrix.coe_units_inv, Matrix.det_nonsing_inv, Ring.inverse_eq_inv', eval_detPoly, entries,
         map_one, zero_add, mul_eq_zero]
       exact .inl (sub_eq_zero.2 (inv_mul_cancel₀ (Matrix.isUnits_det_units x.1).ne_zero))
     · intro hv
       have hdet : v none * (entries v).det = 1 := by
-        have := hv (X none * detPoly n - 1) ⟨0, zero_mem _, _, dvd_rfl, zero_add _⟩
-        simpa [eval_detPoly, sub_eq_zero] using this
+        simpa [eval_detPoly, sub_eq_zero] using hv _ ⟨0, zero_mem _, _, dvd_rfl, zero_add _⟩
       let g : GL (Fin n) K := Matrix.GeneralLinearGroup.mkOfDetNeZero (entries v)
         (right_ne_zero_of_mul_eq_one hdet)
       have hc : glCoords g = v := by
-        funext o
-        rcases o with _ | ⟨i, j⟩
+        ext (_ | ⟨i, j⟩)
         · simp [glCoords, g, Matrix.coe_units_inv, eq_inv_of_mul_eq_one_left hdet]
         · rfl
       exact ⟨⟨g, (hS g).2 (hc ▸ fun p hp => hv p ⟨p, hp, 0, dvd_zero _, add_zero p⟩)⟩, hc⟩
-  have hm : ∀ x y : S, glCoords (x * y).1 = law (glLaw n) (glCoords x.1) (glCoords y.1) := by
-    intro x y
-    funext o
-    rcases o with _ | ⟨i, j⟩
+  have hm (x y : S) : glCoords (x * y).1 = law (glLaw n) (glCoords x.1) (glCoords y.1) := by
+    ext (_ | ⟨i, j⟩)
     · simp [glCoords, law, glLaw, mul_comm]
     · simp [glCoords, law, glLaw, Matrix.mul_apply]
   obtain ⟨u, hu⟩ := isUnit_of_isLeftCancelMul _ hinj _ hrange _ hm ⟨g, hg⟩

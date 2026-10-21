@@ -89,8 +89,7 @@ theorem eq_sum_cyl {n : ℕ} {f : Cantor → k} (hf : DependsOn f (Set.Iio n)) :
   ext z
   rw [Finset.sum_apply, Finset.sum_eq_single (fun i : Fin n ↦ z i)]
   · simp [cyl, ← eq_extendWord hf]
-  · intro v _ hv
-    simp [cyl, Ne.symm hv]
+  · exact fun v _ hv ↦ by simp [cyl, Ne.symm hv]
   · simp
 
 /-- Every element of `A` is a root of a separable polynomial that splits over `k`. -/
@@ -108,8 +107,7 @@ theorem exists_separable_splits (f : cantorAlg k) :
     (aeval_algHom_apply (Pi.evalAlgHom k (fun _ ↦ k) z) f _).symm]
   simp only [map_prod, map_sub, aeval_X, aeval_C, Algebra.algebraMap_self, RingHom.id_apply]
   exact Finset.prod_eq_zero (s := s)
-    (Finset.mem_image.2 ⟨_, Finset.mem_univ _, (eq_extendWord hf z).symm⟩)
-    (sub_self _)
+    (Finset.mem_image.2 ⟨_, Finset.mem_univ _, (eq_extendWord hf z).symm⟩) (sub_self _)
 
 instance : Algebra.IsIntegral k (cantorAlg k) :=
   ⟨fun f ↦ let ⟨p, hm, _, _, hp⟩ := exists_separable_splits f; ⟨p, hm, hp⟩⟩
@@ -134,8 +132,7 @@ def eval (Ω : Type*) [Ring Ω] [Algebra k Ω] (x : Cantor) : cantorAlg k →ₐ
 /-- Distinct points give distinct `k`-algebra maps `A → Ω`. -/
 theorem eval_injective (Ω : Type*) [Ring Ω] [Nontrivial Ω] [Algebra k Ω] :
     Injective (eval k Ω) := by
-  intro x y hxy
-  by_contra hne
+  refine fun x y hxy ↦ by_contra fun hne ↦ ?_
   obtain ⟨n, hn⟩ := Function.ne_iff.1 hne
   let f : cantorAlg k := ⟨fun z ↦ if z n then 1 else 0, n + 1, fun a b h ↦ by
     simp [h n (Set.mem_Iio.2 n.lt_succ_self)]⟩

@@ -72,12 +72,10 @@ theorem isCoboundary_of_isUnit_sum {c : Γ → Aˣ} (hc : IsCocycle c) (w : A)
     (hb : IsUnit (∑ s, (c s : A) * s • w)) : IsCoboundary c := by
   obtain ⟨b, hb⟩ := hb
   refine ⟨b⁻¹, fun g => ?_⟩
-  have h := mul_smul_sum hc w g
-  rw [← hb] at h
-  rw [inv_inv]
+  have h : (c g : A) * g • (b : A) = b := hb ▸ mul_smul_sum hc w g
   calc (c g : A) = c g * (g • (b : A) * g • ((b⁻¹ : Aˣ) : A)) := by
         rw [← smul_mul', Units.mul_inv, smul_one, mul_one]
-    _ = _ := by rw [← mul_assoc, h]
+    _ = _ := by rw [← mul_assoc, h, inv_inv]
 
 /-- An element with a unit of the form `1 + x`, `x ∈ I`, on either side, `I` an ideal with
 `1 + I ⊂ Aˣ`, is a unit: the case of an element invertible modulo `I`. -/
@@ -113,12 +111,11 @@ theorem isCoboundary_of_map_isCoboundary (π : A →+* B) (hπ : Function.Surjec
     (hker : ∀ x, π x = 0 → IsUnit (1 + x)) (hn : IsUnit (Fintype.card Γ : A))
     {c : Γ → Aˣ} (hc : IsCocycle c) (hπc : ∃ v : Bˣ, ∀ g, π (c g) = ↑v⁻¹ * g • (v : B)) :
     IsCoboundary c := by
-  have hI : ∀ x ∈ RingHom.ker π, IsUnit (1 + x) := fun x hx => hker x hx
   obtain ⟨v, hv⟩ := hπc
   obtain ⟨w, hw⟩ := hπ ↑v⁻¹
   obtain ⟨w', hw'⟩ := hπ ↑v
-  have hwu : IsUnit w := isUnit_of_mul_sub_one_mem _ hI (a' := w')
-    (by simp [RingHom.mem_ker, hw, hw']) (by simp [RingHom.mem_ker, hw, hw'])
+  have hwu : IsUnit w := isUnit_of_mul_sub_one_mem (RingHom.ker π) (fun x hx => hker x hx)
+    (a' := w') (by simp [RingHom.mem_ker, hw, hw']) (by simp [RingHom.mem_ker, hw, hw'])
   refine isCoboundary_of_isUnit_sum hc w ?_
   obtain ⟨m, hm⟩ := hn.mul hwu
   set x := ∑ s, (c s : A) * s • w - m
@@ -246,21 +243,17 @@ theorem signCocycle_isCocycle : IsCocycle signCocycle := by
 /-- `signCocycle` is trivial modulo `𝔪 = (2)`, where `𝔪² = 0`. -/
 theorem signCocycle_sub_one_mem (g : Multiplicative (ZMod 2)) :
     (signCocycle g : ZMod 4) - 1 ∈ Ideal.span {(2 : ZMod 4)} := by
-  refine Ideal.mem_span_singleton.2 ?_
-  unfold signCocycle
+  rw [Ideal.mem_span_singleton, signCocycle]
   split_ifs
-  · exact ⟨0, by decide⟩
-  · exact ⟨1, by decide⟩
+  exacts [⟨0, by decide⟩, ⟨1, by decide⟩]
 
 /-- The edition's counterexample: for `p = 2 = |Γ|`, a cocycle trivial modulo `𝔪` need not be
 a coboundary, so `p ∤ |Γ|` cannot be dropped. -/
 theorem not_isCoboundary_signCocycle : ¬ IsCoboundary signCocycle := by
   rintro ⟨u, hu⟩
-  have h := hu (Multiplicative.ofAdd 1)
-  change _ = ↑u⁻¹ * (u : ZMod 4) at h
+  have h : _ = ↑u⁻¹ * (u : ZMod 4) := hu (Multiplicative.ofAdd 1)
   rw [Units.inv_mul] at h
-  revert h
-  decide
+  exact absurd h (by decide)
 
 end Counterexample
 
