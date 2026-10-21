@@ -6713,6 +6713,7 @@ export const FINDINGS: Finding[] = [
     status: 'matched',
     settle:
       'Nothing to settle: the statement and its proof are in Maltsiniotis’s Proposition 7.1, which presents itself as an exposition of Pursuing Stacks.',
+    lean: { file: 'lean/Grothendieck/Folder118.lean', found: 'Page 35’s « (iv) est visiblement stable par sommes » is false, in mathlib’s category theory (connectedProducts_not_stable_under_sums). With a × b the presheaf c ↦ Hom(c, a) × Hom(c, b) and A_{/X} the category of elements, for a ∈ A₁ and b ∈ A₂ the category A_{/a × b} in A₁ ⊔ A₂ is empty, no object mapping to both summands (isEmpty_elements_sum), and the empty category is not connected (not_isConnected_of_isEmpty). Only the consequence « A_{/a × b} non-empty and connected for all a, b » of (iv) is used — any notion of asphericity implies it — so (iv) fails for every sum of two non-empty categories (not_connectedProducts_sum) while the point satisfies it (connectedProducts_point). It also forces a non-empty A to be connected, through the span a ← c → b (isConnected_of_connectedProducts). The step from connected to aspherical (Cisinski, Proposition 4.3.2, last sentence), hence (iv) ⇒ (i) for non-empty A, and the equivalence of (iv) with the asphericity of the a × b are not formalised.' },
   },
   {
     id: '118-strong-saturation',

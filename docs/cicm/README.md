@@ -38,8 +38,8 @@ review is double-blind: if it is, an anonymous version is needed).
 
 ## What remains to check
 
-- Every figure is read from the repository at commit time (2,036 theorems,
-  69 files, 39,110 lines, 463 findings, 69 proof cards and their verdicts,
+- Every figure is read from the repository at commit time (2,042 theorems,
+  69 files, 39,184 lines, 463 findings, 69 proof cards and their verdicts,
   the triage of #54, the review figures of 21 October, 41 pull requests).
   They move: rerun `figures.mjs` and recount before submission.
 - Folder 146, column n = 5: in progress and uncommitted when this was

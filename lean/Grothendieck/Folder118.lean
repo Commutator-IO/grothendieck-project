@@ -237,4 +237,78 @@ theorem g_not_imp_c (G : Type u) [Group G] [Nontrivial G] :
 
 end Cisinski
 
+/-! ### Page 35: condition (iv) is not stable under sums
+
+The page says (iv) is « visiblement stable par sommes (i.e. si des `A_α` y satisfont,
+`∐ A_α` aussi), mais la condition (i) non ». The second reading of the edition corrects this:
+for `a`, `b` in two different summands, `a × b` is the empty presheaf, `A_{/a × b}` is the
+empty category, and the empty category is not aspherical. So (iv) is not stable under sums,
+and, for `A` non-empty, (iv) already forces `A` to be connected.
+
+Here `A` is any small category of mathlib and `a × b` is the presheaf
+`c ↦ Hom(c, a) × Hom(c, b)` (`FunctorToTypes.prod` of the two representables, the product in
+`Â`). `A_{/X}` is the category of elements `X.Elements` (mathlib orients its arrows the other
+way, which changes neither emptiness nor connectedness). Asphericity of a category (its nerve
+weakly contractible) is not defined here: only its consequence « non-empty and connected »
+(`π₀` of the nerve is the set of components) is used, as `IsConnected`. So `ConnectedProducts A`
+is a consequence of (iv), « `A_{/a × b}` aspherical for all `a`, `b` », and its failure is the
+failure of (iv) for any notion of asphericity that includes connectedness, among them the
+1-truncated one above.
+-/
+
+section Sums
+
+open CategoryTheory
+
+/-- The presheaf `a × b` on `A`, product of the representables `a` and `b`. -/
+abbrev prodRep {A : Type*} [Category A] (a b : A) : Aᵒᵖ ⥤ Type _ :=
+  FunctorToTypes.prod (yoneda.obj a) (yoneda.obj b)
+
+/-- The connectedness part of (iv): `A_{/a × b}` is non-empty and connected for all `a`, `b`. -/
+def ConnectedProducts (A : Type*) [Category A] : Prop :=
+  ∀ a b : A, IsConnected (prodRep a b).Elements
+
+/-- For `a ∈ A₁`, `b ∈ A₂`, `A_{/a × b}` is empty in `A₁ ⊔ A₂`: no `c` maps to both. -/
+theorem isEmpty_elements_sum {A₁ A₂ : Type*} [Category A₁] [Category A₂] (a : A₁) (b : A₂) :
+    IsEmpty (prodRep (Sum.inl a : A₁ ⊕ A₂) (Sum.inr b)).Elements := by
+  refine ⟨fun x => ?_⟩
+  rcases x with @⟨⟨_ | _⟩, f, g⟩
+  exacts [hom_inl_inr_false A₁ A₂ (Y := b) g, hom_inr_inl_false A₂ A₁ (Y := a) f]
+
+/-- The empty category is not connected, hence not aspherical. -/
+theorem not_isConnected_of_isEmpty (C : Type*) [Category C] [IsEmpty C] : ¬ IsConnected C :=
+  fun h => isEmptyElim h.is_nonempty.some
+
+/-- (iv) fails for a sum of two non-empty categories. -/
+theorem not_connectedProducts_sum {A₁ A₂ : Type*} [Category A₁] [Category A₂] [Nonempty A₁]
+    [Nonempty A₂] : ¬ ConnectedProducts (A₁ ⊕ A₂) := fun h =>
+  @not_isConnected_of_isEmpty _ _ (isEmpty_elements_sum (Classical.arbitrary A₁)
+    (Classical.arbitrary A₂)) (h _ _)
+
+/-- The point satisfies (iv): `A_{/e × e}` is the point. -/
+theorem connectedProducts_point : ConnectedProducts (Discrete PUnit) := by
+  rintro ⟨⟨⟩⟩ ⟨⟨⟩⟩
+  have : Nonempty (prodRep (A := Discrete PUnit) ⟨⟨⟩⟩ ⟨⟨⟩⟩).Elements :=
+    ⟨Functor.elementsMk _ (Opposite.op ⟨⟨⟩⟩) (𝟙 _, 𝟙 _)⟩
+  refine zigzag_isConnected fun x y => ?_
+  rcases x with @⟨⟨⟨⟨⟩⟩⟩, ⟨⟨_⟩⟩, ⟨⟨_⟩⟩⟩
+  rcases y with @⟨⟨⟨⟨⟩⟩⟩, ⟨⟨_⟩⟩, ⟨⟨_⟩⟩⟩
+  rfl
+
+/-- **Page 35, corrected**: (iv) is not stable under sums — the point satisfies it, the sum of
+two points does not. -/
+theorem connectedProducts_not_stable_under_sums :
+    ConnectedProducts (Discrete PUnit) ∧ ¬ ConnectedProducts (Discrete PUnit ⊕ Discrete PUnit) :=
+  ⟨connectedProducts_point, not_connectedProducts_sum⟩
+
+/-- (iv) forces a non-empty `A` to be connected: an object of `A_{/a × b}` is a span
+`a ← c → b`. -/
+theorem isConnected_of_connectedProducts {A : Type*} [Category A] [Nonempty A]
+    (h : ConnectedProducts A) : IsConnected A :=
+  zigzag_isConnected fun a b => by
+    obtain @⟨⟨c⟩, f, g⟩ := (h a b).is_nonempty.some
+    exact Zigzag.of_inv_hom f g
+
+end Sums
+
 end Grothendieck.Folder118
