@@ -6693,7 +6693,7 @@ export const FINDINGS: Finding[] = [
     basis:
       'Page 34 reduces (iv) to A_{/X×Y} → A_{/X} × A_{/Y} ∈ 𝒲, specialises to X = a, Y = b, and proves the converse via the slice isomorphism; page 33 proves (i) ⇔ (ii) + « A asphérique ».',
     ours:
-      'The reading restates the page’s « conditions équivalentes » lemma, false as stated, as what pages 33–35 prove. « tot. » is \\uncertain{} throughout, as are « le second membre » and « conclut » on page 34.',
+      'The reading restates the page’s « conditions équivalentes » lemma, false as stated, as what pages 33–35 prove. « tot. » is \\uncertain{} throughout, as are « le second membre » and « conclut » on page 34. A machine second reading (Opus 5.5, 2026-10-21) found page 35’s « (iv) est visiblement stable par sommes » false — for a and b in two summands a × b is empty and A_{/∅} is not aspherical — so (iv) alone gives (i) for non-empty A, as the last sentence of Cisinski’s Proposition 4.3.2 says; the reading now says so.',
     literature: [
       'Maltsiniotis, La théorie de l’homotopie de Grothendieck, version provisoire août 2001, Proposition 7.1 (a) ⇔ (b) ⇔ (b′), with the same isomorphism (A/(F × G))/((a,p),(b,q)) ≃ A/a × b, and Définition 7.2',
       'Cisinski, Astérisque 308 (2006), 4.3.1 and Proposition 4.3.2 (a) ⇔ (c) ⇔ (d)',
