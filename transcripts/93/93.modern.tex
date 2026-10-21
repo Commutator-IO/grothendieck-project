@@ -34,6 +34,10 @@
 %   (k, phi^0) a morphism of complexes, the class of u(p) independent of p;
 %   the sheaf case and de Rham not checked. No literature (the finding is
 %   unsearched). One « Ce que » turn removed.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-21 — p. 208: footnote on the
+%   Lean check of the p-curvature on the trivial bundle of rank n (pCurvature_smul,
+%   pCurvature_apply, curvMat_unipotent_X_pow): A-linear, given by the recursion
+%   Gamma_{k+1} = D Gamma_k + Gamma Gamma_k; p-linearity in D not checked.
 %
 % Reading is thin. The transcription carries about 12.6 \ill/\uncertain per
 % page; on pp. 97-99, 109-112, 127-139, 188-197, 202-203, 205-217 whole
@@ -2299,7 +2303,18 @@ $K \in \Gamma(X, \underline{\mathrm{End}}(E) \otimes (\Omega^1)^{\otimes p})$
 ?\footnote{La réponse est oui (N.~Katz, 1970) : $\psi(D) = \nabla(D)^p -
 \nabla(D^{[p]})$ est $p$-linéaire en $D$, et définit une section de
 $\underline{\mathrm{End}}(E) \otimes F^*_{X/S}\Omega^1_{X'/S}$, ce qui ne coïncide avec
-$(\Omega^1)^{\otimes p}$ qu'en dimension relative $1$.}
+$(\Omega^1)^{\otimes p}$ qu'en dimension relative $1$. Lean vérifie
+le cas du fibré trivial $A^n$ et d'un seul champ $D$
+(lean/Grothendieck/Folder93.lean, \texttt{pCurvature\_smul},
+\texttt{pCurvature\_apply}) : en caractéristique $p$, pour $\nabla = D +
+\Gamma$, l'opérateur $\nabla^p - D^p$ est $A$-linéaire et vaut la matrice
+$\Gamma_p$, avec $\Gamma_0 = 1$ et $\Gamma_{k+1} = D(\Gamma_k) +
+\Gamma\Gamma_k$ ; en rang deux, sur $\mathbf{F}_p[x]$, la connexion de
+matrice $\bigl(\begin{smallmatrix} 0 & x^{p-1} \\ 0 & 0
+\end{smallmatrix}\bigr)$ a pour $p$-courbure $\bigl(\begin{smallmatrix} 0 &
+-1 \\ 0 & 0 \end{smallmatrix}\bigr)$ (\texttt{curvMat\_unipotent\_X\_pow}).
+Ce sont des illustrations de l'édition ; la $p$-linéarité en $D$ n'est pas
+vérifiée.}
 
 Pour un schéma abélien $B$, l'extension $P^{cip,0}$ de $B$ par
 $\alpha_B = \operatorname{Ker}(V_B)$ serait l'extension universelle de cette

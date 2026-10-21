@@ -354,7 +354,7 @@ rendered with an arrow missing asserts a commutation nobody wrote.
 
 [`lean/`](lean/README.md) proves in Lean 4, against mathlib, statements the
 modernised readings make: 65 folders, one file each, and two Bourbaki
-rédactions, **1,994 theorems** (`cat lean/Grothendieck/*.lean | grep -c
+rédactions, **2,016 theorems** (`cat lean/Grothendieck/*.lean | grep -c
 '^theorem'`). CI builds it with every warning an error, refuses `sorry`,
 `native_decide` and `axiom`, and `lean/axioms.sh` fails on any axiom beyond
 Lean's three standard ones. A proof says that what a reading states **holds

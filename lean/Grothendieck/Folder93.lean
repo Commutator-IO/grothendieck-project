@@ -2,7 +2,7 @@ import Mathlib.Algebra.Polynomial.HasseDeriv
 import Mathlib.Tactic.LinearCombination
 import Mathlib.Data.Nat.Choose.Lucas
 import Mathlib.Algebra.CharP.Basic
-import Mathlib.Algebra.Field.ZMod
+import Mathlib.NumberTheory.Wilson
 import Mathlib.Algebra.Polynomial.Div
 import Mathlib.Data.Nat.Prime.Factorial
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
@@ -14,7 +14,7 @@ import Mathlib.Algebra.Polynomial.Derivative
 import Mathlib.Algebra.Polynomial.Degree.Lemmas
 import Mathlib.Algebra.Polynomial.Degree.SmallDegree
 import Mathlib.Data.Nat.Choose.Sum
-import Mathlib.Algebra.Algebra.Bilinear
+import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.Data.Int.GCD
 import Mathlib.Data.Nat.Choose.Dvd
 
@@ -1113,5 +1113,250 @@ theorem jacobson_logDeriv_of_pow_eq_zero (hD : ∀ x, D^[p] x = 0) (y z a : A) (
   rw [jacobson_logDeriv D p y z a hu hy, hD, neg_zero, zero_mul]
 
 end Ring
+
+/-!
+## Page 193, an illustration in rank `n` (rank `2` for the examples)
+
+The edition's illustration, not a statement of the page. On `Aⁿ` (`A` commutative of
+characteristic `p`, `D` a derivation), the connection `∇ = D + Γ` acts by
+`v ↦ D v + Γ v`, `D` applied to each coordinate (`nabla`, `nabla 0` is `D` itself):
+
+* `nabla_comm`: `[∇, c] = D c`, the rule that made `Dᵖ` a derivation in rank one;
+* `pCurvature`, `pCurvature_smul`: `ψ = ∇ᵖ - Dᵖ` is `A`-linear (it is `∇ᵖ - ∇_{Dᵖ}` when
+  `Dᵖ = 0`, as for `d/dx` on `𝔽_p[x]`);
+* `curvMat`, `pCurvature_apply`: `ψ v = Γ_p v` with `Γ₀ = 1`, `Γ_{k+1} = D Γ_k + Γ Γ_k`;
+* `curvMat_mul_horizontal`, `curvMat_eq_zero_of_horizontal`: an invertible matrix `Y` of
+  horizontal columns gives `Γ_p Y = -Dᵖ Y`, hence `ψ = 0` when `Dᵖ = 0` (the easy direction);
+* `curvMat_diagonal_char`: for `Γ` diagonal, `ψ` is diagonal with the rank-one `p`-curvatures
+  `aᵖ + D^{p-1} a`;
+* `curvMat_unipotent_char`: for `Γ = [[0, f], [0, 0]]`, `ψ = [[0, D^{p-1} f], [0, 0]]`; on
+  `𝔽_p[x]` with `f = x^{p-1}`, `ψ = [[0, -1], [0, 0]] ≠ 0` (`curvMat_unipotent_X_pow`), so
+  there is no basis of horizontal sections (`not_horizontal_unipotent_X_pow`), although the
+  sub-bundle and the quotient are trivial;
+* `curvMat_airy_three`, `curvMat_airy_five`: for the Airy connection `Γ = [[0, 1], [x, 0]]`
+  (`Dx = 1`), `ψ = [[-1, x], [x², 1]]` in characteristic `3` and
+  `ψ = [[x, x²], [x³ - 1, -x]]` in characteristic `5`.
+-/
+
+section Rank
+
+variable {A : Type*} [CommRing A] (D : Derivation ℤ A A) {n : ℕ}
+
+/-- The connection `∇ = D + Γ` on `Aⁿ`. -/
+def nabla (Γ : Matrix (Fin n) (Fin n) A) : Module.End ℤ (Fin n → A) where
+  toFun v i := D (v i) + Γ.mulVec v i
+  map_add' v w := by ext i; simp [Matrix.mulVec_add]; ring
+  map_smul' m v := by
+    ext i; simp only [Pi.smul_apply, map_zsmul, Matrix.mulVec_smul, smul_add, RingHom.id_apply]
+
+/-- Multiplication by `c ∈ A` on `Aⁿ`. -/
+def smulEnd (c : A) : Module.End ℤ (Fin n → A) where
+  toFun v := c • v
+  map_add' := smul_add c
+  map_smul' m v := smul_comm c m v
+
+/-- Leibniz's rule `∇ ∘ c = c ∘ ∇ + D c`. -/
+theorem nabla_comm (Γ : Matrix (Fin n) (Fin n) A) (c : A) :
+    nabla D Γ * smulEnd c = smulEnd c * nabla D Γ + smulEnd (D c) := by
+  refine LinearMap.ext fun v => funext fun i => ?_
+  simp [nabla, smulEnd, Matrix.mulVec_smul, smul_eq_mul]; ring
+
+theorem nabla_col (Γ M : Matrix (Fin n) (Fin n) A) (j : Fin n) :
+    nabla D Γ (fun i => M i j) = fun i => (M.map D + Γ * M) i j := by
+  funext i; simp [nabla, Matrix.mulVec, Matrix.mul_apply, dotProduct]
+
+/-- `Γ₀ = 1`, `Γ_{k+1} = D Γ_k + Γ Γ_k`: the columns of `Γ_k` are `∇ᵏ` of the basis. -/
+def curvMat (Γ : Matrix (Fin n) (Fin n) A) : ℕ → Matrix (Fin n) (Fin n) A
+  | 0 => 1
+  | k + 1 => (curvMat Γ k).map D + Γ * curvMat Γ k
+
+theorem nabla_pow_col (Γ : Matrix (Fin n) (Fin n) A) (k : ℕ) (j : Fin n) :
+    (nabla D Γ ^ k) (fun i => (1 : Matrix (Fin n) (Fin n) A) i j) =
+      fun i => curvMat D Γ k i j := by
+  induction k with
+  | zero => rfl
+  | succ k ih => rw [pow_succ', Module.End.mul_apply, ih, nabla_col]; rfl
+
+theorem nabla_zero_pow (k : ℕ) (v : Fin n → A) :
+    (nabla D 0 ^ k) v = fun i => D^[k] (v i) := by
+  induction k with
+  | zero => rfl
+  | succ k ih =>
+    rw [pow_succ', Module.End.mul_apply, ih]
+    funext i; simp [nabla, Function.iterate_succ_apply']
+
+theorem curvMat_diagonal (d : Fin n → A) (k : ℕ) : curvMat D (Matrix.diagonal d) k =
+    Matrix.diagonal fun i => (((D : Module.End ℤ A) + LinearMap.mulLeft ℤ (d i)) ^ k) 1 := by
+  induction k with
+  | zero => simp [curvMat]
+  | succ k ih =>
+    rw [curvMat, ih, Matrix.diagonal_map (map_zero D), Matrix.diagonal_mul_diagonal,
+      Matrix.diagonal_add]
+    congr 1; funext i; simp [pow_succ']
+
+theorem curvMat_unipotent (f : A) (k : ℕ) :
+    curvMat D !![0, f; 0, 0] (k + 1) = !![0, D^[k] f; 0, 0] := by
+  induction k with
+  | zero => ext i j; fin_cases i <;> fin_cases j <;> simp [curvMat]
+  | succ k ih =>
+    rw [curvMat, ih]
+    ext i j; fin_cases i <;> fin_cases j <;> simp [Function.iterate_succ_apply']
+
+theorem curvMat_succ_fin_two (Γ : Matrix (Fin 2) (Fin 2) A) (k : ℕ) (a b c d : A)
+    (h : curvMat D Γ k = !![a, b; c, d]) : curvMat D Γ (k + 1) =
+      !![D a + (Γ 0 0 * a + Γ 0 1 * c), D b + (Γ 0 0 * b + Γ 0 1 * d);
+        D c + (Γ 1 0 * a + Γ 1 1 * c), D d + (Γ 1 0 * b + Γ 1 1 * d)] := by
+  rw [curvMat, h]; ext i j; fin_cases i <;> fin_cases j <;> simp [Matrix.mul_apply]
+
+/-- The Airy connection `Γ = [[0, 1], [x, 0]]` with `D x = 1`: `Γ₂, …, Γ₅` over any ring. -/
+theorem curvMat_airy (x : A) (hx : D x = 1) :
+    curvMat D !![0, 1; x, 0] 3 = !![2, x; x ^ 2, 1] ∧
+      curvMat D !![0, 1; x, 0] 5 = !![6 * x, x ^ 2; x ^ 3 + 4, 4 * x] := by
+  set Γ : Matrix (Fin 2) (Fin 2) A := !![0, 1; x, 0] with hΓ
+  have d2 : D 2 = 0 := by exact_mod_cast D.map_natCast 2
+  have d4 : D 4 = 0 := by exact_mod_cast D.map_natCast 4
+  have h1 : curvMat D Γ 1 = !![0, 1; x, 0] := by
+    rw [curvMat_succ_fin_two D Γ 0 1 0 0 1 (Matrix.one_fin_two)]
+    ext i j; fin_cases i <;> fin_cases j <;> simp [hΓ]
+  have h2 : curvMat D Γ 2 = !![x, 0; 1, x] := by
+    rw [curvMat_succ_fin_two D Γ 1 _ _ _ _ h1]
+    ext i j; fin_cases i <;> fin_cases j <;> simp [hΓ, hx]
+  have h3 : curvMat D Γ 3 = !![2, x; x ^ 2, 1] := by
+    rw [curvMat_succ_fin_two D Γ 2 _ _ _ _ h2]
+    ext i j; fin_cases i <;> fin_cases j <;> simp [hΓ, hx] <;> ring
+  have h4 : curvMat D Γ 4 = !![x ^ 2, 2; 4 * x, x ^ 2] := by
+    rw [curvMat_succ_fin_two D Γ 3 _ _ _ _ h3]
+    ext i j; fin_cases i <;> fin_cases j <;> simp [hΓ, hx, d2, Derivation.leibniz_pow] <;> ring
+  refine ⟨h3, ?_⟩
+  rw [curvMat_succ_fin_two D Γ 4 _ _ _ _ h4]
+  ext i j; fin_cases i <;> fin_cases j <;> simp [hΓ, hx, d2, d4, Derivation.leibniz_pow] <;> ring
+
+/-- In characteristic `3`, the Airy connection has `ψ = [[-1, x], [x², 1]]`. -/
+theorem curvMat_airy_three [CharP A 3] (x : A) (hx : D x = 1) :
+    curvMat D !![0, 1; x, 0] 3 = !![-1, x; x ^ 2, 1] := by
+  have h3 : (3 : A) = 0 := by exact_mod_cast CharP.cast_eq_zero A 3
+  rw [(curvMat_airy D x hx).1]
+  ext i j; fin_cases i <;> fin_cases j <;> simp; linear_combination h3
+
+/-- In characteristic `5`, the Airy connection has `ψ = [[x, x²], [x³ - 1, -x]]`. -/
+theorem curvMat_airy_five [CharP A 5] (x : A) (hx : D x = 1) :
+    curvMat D !![0, 1; x, 0] 5 = !![x, x ^ 2; x ^ 3 - 1, -x] := by
+  have h5 : (5 : A) = 0 := by exact_mod_cast CharP.cast_eq_zero A 5
+  rw [(curvMat_airy D x hx).2]
+  ext i j; fin_cases i <;> fin_cases j <;>
+    simp only [Fin.zero_eta, Fin.mk_one, Fin.isValue, Matrix.of_apply, Matrix.cons_val',
+      Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_fin_one] <;>
+    first | linear_combination h5 | linear_combination x * h5
+
+variable (p : ℕ) [hp : Fact p.Prime] [CharP A p]
+
+omit hp in
+theorem natCast_endPi : ((p : ℕ) : Module.End ℤ (Fin n → A)) = 0 :=
+  LinearMap.ext fun v => funext fun i => by simp [Module.End.natCast_apply, nsmul_eq_mul]
+
+/-- The `p`-curvature `ψ = ∇ᵖ - Dᵖ`. -/
+def pCurvature (Γ : Matrix (Fin n) (Fin n) A) : Module.End ℤ (Fin n → A) :=
+  nabla D Γ ^ p - nabla D 0 ^ p
+
+/-- **Statement 4.** In characteristic `p`, the `p`-curvature is `A`-linear. -/
+theorem pCurvature_smul (Γ : Matrix (Fin n) (Fin n) A) (c : A) (v : Fin n → A) :
+    pCurvature D p Γ (c • v) = c • pCurvature D p Γ v := by
+  have h : pCurvature D p Γ * smulEnd c = smulEnd c * pCurvature D p Γ := by
+    rw [pCurvature, sub_mul, mul_sub,
+      pow_char_mul smulEnd D (nabla D Γ) (nabla_comm D Γ) p (natCast_endPi p),
+      pow_char_mul smulEnd D (nabla D 0) (nabla_comm D 0) p (natCast_endPi p)]
+    abel
+  simpa [smulEnd] using congrArg (· v) h
+
+/-- **Statement 5.** `ψ` is the matrix `Γ_p`. -/
+theorem pCurvature_apply (Γ : Matrix (Fin n) (Fin n) A) (v : Fin n → A) :
+    pCurvature D p Γ v = (curvMat D Γ p).mulVec v := by
+  have hcol : ∀ j, pCurvature D p Γ (fun i => (1 : Matrix (Fin n) (Fin n) A) i j) =
+      fun i => curvMat D Γ p i j := by
+    intro j
+    rw [pCurvature, LinearMap.sub_apply, nabla_zero_pow, nabla_pow_col]
+    funext i
+    rw [Pi.sub_apply, Matrix.one_apply]
+    split_ifs
+    · simp [iterate_one D p]
+    · simp [Function.iterate_fixed (map_zero D)]
+  have hv : v = ∑ j, v j • fun i => (1 : Matrix (Fin n) (Fin n) A) i j := by
+    funext i; simp [Matrix.one_apply]
+  conv_lhs => rw [hv]
+  simp only [map_sum, pCurvature_smul, hcol]
+  funext i; simp [Matrix.mulVec, dotProduct, mul_comm]
+
+/-- **Statement 6 (the easy direction).** If the columns of `Y` are horizontal,
+`D Y + Γ Y = 0`, then `Γ_p Y = -Dᵖ Y`. -/
+theorem curvMat_mul_horizontal (Γ Y : Matrix (Fin n) (Fin n) A) (hY : Y.map D + Γ * Y = 0) :
+    curvMat D Γ p * Y = -Y.map D^[p] := by
+  ext i j
+  have hcol : nabla D Γ (fun i => Y i j) = 0 := by rw [nabla_col, hY]; rfl
+  obtain ⟨m, hm⟩ : ∃ m, p = m + 1 := ⟨p - 1, (Nat.sub_add_cancel hp.out.one_le).symm⟩
+  have h := congrFun (pCurvature_apply D p Γ fun i => Y i j) i
+  rw [pCurvature, LinearMap.sub_apply, nabla_zero_pow, hm, pow_succ, Module.End.mul_apply,
+    hcol, map_zero, ← hm] at h
+  simpa [Matrix.mul_apply, Matrix.mulVec, dotProduct, eq_neg_iff_add_eq_zero, add_comm] using
+    h.symm
+
+/-- A basis of horizontal sections forces `ψ = 0` when `Dᵖ = 0`. -/
+theorem curvMat_eq_zero_of_horizontal (hD : ∀ x, D^[p] x = 0) (Γ Y Z : Matrix (Fin n) (Fin n) A)
+    (hYZ : Y * Z = 1) (hY : Y.map D + Γ * Y = 0) : curvMat D Γ p = 0 := by
+  have h0 : Y.map D^[p] = 0 := by ext; simp [hD]
+  rw [← mul_one (curvMat D Γ p), ← hYZ, ← mul_assoc, curvMat_mul_horizontal D p Γ Y hY, h0]
+  simp
+
+/-- For `Γ` diagonal, `ψ` is diagonal with the rank-one `p`-curvatures. -/
+theorem curvMat_diagonal_char (d : Fin n → A) :
+    curvMat D (Matrix.diagonal d) p = Matrix.diagonal fun i => d i ^ p + D^[p - 1] (d i) := by
+  rw [curvMat_diagonal]
+  congr 1; funext i
+  simp [jacobson, Module.End.pow_apply, iterate_one]
+
+omit [CharP A p] in
+theorem curvMat_unipotent_char (f : A) :
+    curvMat D !![0, f; 0, 0] p = !![0, D^[p - 1] f; 0, 0] := by
+  simpa [Nat.sub_add_cancel hp.out.one_le] using curvMat_unipotent D f (p - 1)
+
+end Rank
+
+section Concrete
+
+variable (p : ℕ) [hp : Fact p.Prime]
+
+/-- `d/dx` on `𝔽_p[x]`, as a `ℤ`-derivation. -/
+noncomputable def dX : @Derivation ℤ (ZMod p)[X] (ZMod p)[X] _ _ _ (Ring.toIntAlgebra _) _ _ :=
+  Derivation.mk' ((derivative : (ZMod p)[X] →ₗ[ZMod p] (ZMod p)[X]).restrictScalars ℤ)
+    fun f g => by simp [derivative_mul, smul_eq_mul]; ring
+
+theorem dX_apply (f : (ZMod p)[X]) : dX p f = derivative f := rfl
+
+theorem dX_iterate (k : ℕ) (f : (ZMod p)[X]) : (dX p)^[k] f = derivative^[k] f := by
+  induction k generalizing f with
+  | zero => rfl
+  | succ k ih => rw [Function.iterate_succ_apply, Function.iterate_succ_apply, ih, dX_apply]
+
+/-- `(d/dx)ᵖ = 0` on `𝔽_p[x]`. -/
+theorem dX_iterate_char (f : (ZMod p)[X]) : (dX p)^[p] f = 0 := by
+  rw [dX_iterate, iterate_derivative_eq_factorial_smul_sum, nsmul_eq_mul,
+    (CharP.cast_eq_zero_iff (ZMod p)[X] p _).2 (Nat.dvd_factorial hp.out.pos le_rfl), zero_mul]
+
+/-- On `𝔽_p[x]`, `∇ = d/dx + [[0, x^{p-1}], [0, 0]]` has `ψ = [[0, -1], [0, 0]]`. -/
+theorem curvMat_unipotent_X_pow :
+    curvMat (dX p) !![0, X ^ (p - 1); 0, 0] p = !![0, -1; 0, 0] := by
+  rw [curvMat_unipotent_char, dX_iterate, iterate_derivative_X_pow_eq_smul,
+    Nat.descFactorial_self, ZMod.wilsons_lemma]
+  simp
+
+/-- Hence no invertible matrix of horizontal sections exists for it. -/
+theorem not_horizontal_unipotent_X_pow :
+    ¬ ∃ Y Z : Matrix (Fin 2) (Fin 2) (ZMod p)[X],
+      Y * Z = 1 ∧ Y.map (dX p) + !![0, X ^ (p - 1); 0, 0] * Y = 0 := by
+  rintro ⟨Y, Z, hYZ, hY⟩
+  have := curvMat_eq_zero_of_horizontal (dX p) p (dX_iterate_char p) _ Y Z hYZ hY
+  rw [curvMat_unipotent_X_pow] at this
+  simpa using congrFun (congrFun this 0) 1
+
+end Concrete
 
 end Grothendieck.Folder93.PCurvature
