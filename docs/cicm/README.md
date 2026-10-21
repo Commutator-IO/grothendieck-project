@@ -39,7 +39,7 @@ review is double-blind: if it is, an anonymous version is needed).
 ## What remains to check
 
 - Every figure is read from the repository at commit time (2,046 theorems,
-  69 files, 39,535 lines, 463 findings, 69 proof cards and their verdicts,
+  69 files, 39,474 lines, 463 findings, 69 proof cards and their verdicts,
   the triage of #54, the review figures of 21 October, 41 pull requests).
   They move: rerun `figures.mjs` and recount before submission.
 - Folder 146: the columns n = 5 and n = 6 of page 70 are in Lean (L of
