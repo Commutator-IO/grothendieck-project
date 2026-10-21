@@ -12,6 +12,31 @@ Soit $K$ un corps où $2$ et $3$ sont inversibles et qui contient une racine $\z
 L'égalité pour $m = 6$ se vérifie sur les six substitutions ; par exemple, pour $g(\lambda) = 1/\lambda$, $g'(\lambda)^6 = \lambda^{-12}$ et $h(1/\lambda) = \lambda^{-8}(\lambda - 1)^4$. Réciproquement, en un point $\lambda_0$ fixé par $g$, le second membre vaut~$1$. Le point $-1$ est fixé par $g(\lambda) = 1/\lambda$, et $g'(-1) = -1$, d'où $(-1)^m = 1$ et $2 \mid m$. Le point $\zeta$ est fixé par $g(\lambda) = 1/(1 - \lambda)$, car $\zeta(1 - \zeta) = 1$, et $g'(\zeta) = 1/(1 - \zeta)^2 = \zeta^2$, racine primitive cubique de l'unité puisque $3 \neq 0$ ; d'où $3 \mid m$.
 \end{proof}
 
+La figure~\ref{fig:146-m04} montre où se trouvent ces points fixes. Sur la droite réelle, chacune des trois transpositions fixe un point de $U$ : $1/\lambda$ fixe $-1$, $1 - \lambda$ fixe $1/2$ et $\lambda/(\lambda - 1)$ fixe $2$, et la dérivée y vaut $-1$ dans les trois cas. Les deux $3$-cycles permutent circulairement ces trois points et ne fixent que $\zeta$ et $\bar\zeta$, les sommets des deux triangles équilatéraux de base $[0, 1]$, où la dérivée est une racine primitive cubique de l'unité. Ce sont les seuls points de $U$ de stabilisateur non trivial.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=2cm, y=2cm, >=stealth, every node/.style={font=\small}]
+\draw[black!45] (-1.7,0) -- (2.8,0) node[right] {$\mathbf R$};
+\draw[black!30, dashed] (0,0) -- (0.5,0.866) -- (1,0) (0,0) -- (0.5,-0.866) -- (1,0);
+\foreach \x/\l in {0/0, 1/1} { \draw[fill=white] (\x,0) circle (2pt); \node[below=3pt] at (\x,0) {$\l$}; }
+\node[right] at (2.8,0.25) {$\infty$ retiré};
+\foreach \x/\l in {-1/-1, 0.5/\tfrac12, 2/2} { \fill (\x,0) circle (2pt); \node[below=3pt, fill=white, inner sep=1pt] at (\x,0) {$\l$}; }
+\fill (0.5,0.866) circle (2pt) node[above right] {$\zeta$};
+\fill (0.5,-0.866) circle (2pt) node[below right] {$\bar\zeta$};
+\draw[->, shorten >=3pt, shorten <=3pt] (-1,0) to[bend left=35] (0.5,0);
+\draw[->, shorten >=3pt, shorten <=3pt] (0.5,0) to[bend left=35] (2,0);
+\draw[->, shorten >=3pt, shorten <=3pt] (2,0) to[bend right=32] node[pos=0.82, above left=-1pt] {\footnotesize $\frac{1}{1-\lambda}$} (-1,0);
+\node[black!70] at (-1,-0.36) {\footnotesize $1/\lambda$};
+\node[black!70, fill=white, inner sep=1pt] at (0.5,-0.38) {\footnotesize $1 - \lambda$};
+\node[black!70] at (2,-0.36) {\footnotesize $\lambda/(\lambda - 1)$};
+\node[align=left, anchor=west] at (0.75,0.86) {fixé par $\frac{1}{1-\lambda}$, dérivée $\zeta^2$};
+\node[align=left, anchor=west] at (0.75,-0.86) {fixé par $\frac{1}{1-\lambda}$, dérivée $\bar\zeta^2$};
+\end{tikzpicture}
+\caption{$M_{0,4} = \mathbf P^1 \setminus \{0, 1, \infty\}$ et ses points de stabilisateur non trivial. Les points $-1$, $1/2$, $2$ sont fixés par les transpositions $1/\lambda$, $1 - \lambda$, $\lambda/(\lambda - 1)$ ; les flèches figurent le $3$-cycle $\lambda \mapsto 1/(1 - \lambda)$, qui les permute et fixe $\zeta$ et $\bar\zeta$. Le facteur $-1$ force $2 \mid m$, le facteur $\zeta^2$ force $3 \mid m$.}
+\label{fig:146-m04}
+\end{figure}
+
 \begin{remarque}
 La valeur $6$ du tableau tient, et la piste ne tombe pas. L'argument par les points fixes est celui que la lecture de la cote 140-1 donne pour $\mathcal O(1)$ sur $\mathbf P(V_J)$ (§\,\ref{sec:140-1}) ; il ne demande pas de calculer les unités de~$U$, et la minoration vaut même parmi toutes les fonctions sans zéro sur~$U(K)$.
 \end{remarque}
@@ -51,6 +76,34 @@ Sur un produit de générateurs, le facteur se calcule par la règle de cocycle 
 
 \noindent\emph{Le calcul.} Les fonctions inversibles sur $M_{0,5}$ sont, à une constante près, les monômes en $\lambda$, $\mu$, $1 - \lambda$, $1 - \mu$ et $\lambda - \mu$. Chercher $h$ revient à résoudre un système linéaire sur les exposants de ces cinq facteurs, plus une condition de signe sur la constante. Un calcul formel (sympy), qui retrouve d'abord les valeurs $3$ et $6$ pour $n = 4$, donne l'ordre $4$ pour $L$ et l'ordre $12$ pour $L_5$, avec les fonctions $h$ ci-dessous. Pour minorer, on raisonne comme pour $n = 4$ par les points fixes. Prenons $i$ avec $i^2 = -1$. Le $4$-cycle $s_1 s_2 s_3$ fixe le point $(\lambda, \mu) = (-1, i)$ : l'homographie correspondante est $z \mapsto (z + 1)/(1 - z)$, qui envoie $0 \mapsto 1 \mapsto \infty \mapsto -1 \mapsto 0$ et fixe $i$. Sa dérivée en $i$ vaut $2/(1 - i)^2 = i$, une racine primitive quatrième de l'unité. Le $3$-cycle $s_1 s_2$, lui, fixe $(1 - \zeta, \zeta)$, où $\zeta^2 - \zeta + 1 = 0$ ; l'homographie est $z \mapsto 1/(1 - z)$, et sa dérivée en $\zeta$ vaut $\zeta^2$.
 
+La figure~\ref{fig:146-m05} dessine la partie réelle de ce modèle. Les cinq droites retirées sont les lieux d'annulation des cinq unités $\lambda$, $\mu$, $1 - \lambda$, $1 - \mu$, $\lambda - \mu$, d'où le système linéaire sur leurs exposants. Deux des générateurs s'y voient : $s_4$ est la symétrie par rapport à la diagonale, $s_1$ la symétrie de centre $(1/2, 1/2)$. Les deux points fixes qui servent de certificats sont complexes et ne figurent que par leurs coordonnées.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.4cm, y=1.4cm, >=stealth, every node/.style={font=\small}]
+\fill[black!4] (-1.2,-1.2) rectangle (2.2,2.2);
+\draw[thick] (0,-1.2) -- (0,2.2);
+\draw[thick] (1,-1.2) -- (1,2.2) node[above] {$\lambda = 1$};
+\draw[thick] (-1.2,0) -- (2.2,0);
+\draw[thick] (-1.2,1) -- (2.2,1) node[right] {$\mu = 1$};
+\draw[thick] (-1.2,-1.2) -- (2.2,2.2) node[above right] {$\lambda = \mu$};
+\node[above left] at (0,2.2) {$\lambda = 0$};
+\node[below right] at (2.2,0) {$\mu = 0$};
+\fill (0.5,0.5) circle (1.6pt);
+\draw[black!50] (0.5,0.5) -- (1.5,-0.6) node[right] {\footnotesize centre de $s_1$};
+\draw[<->, black!60] (2.0,0.8) to[bend right=25] (0.8,2.0) node[left] {\footnotesize $s_4$};
+\end{tikzpicture}
+\qquad
+\begin{minipage}[b]{0.36\textwidth}\small\raggedright
+Points complexes fixes :\\[2pt]
+$(-1, i)$, fixé par le $4$-cycle $s_1 s_2 s_3$, facteur $i$ sur $L_5$ et sur $L$ ;\\[2pt]
+$(1 - \zeta, \zeta)$, fixé par le $3$-cycle $s_1 s_2$, facteur $\zeta^2$ sur $L_5$, $1$ sur $L$.\\[6pt]
+\end{minipage}
+\caption{La partie réelle de $M_{0,5}$ dans les coordonnées $(\lambda, \mu)$ : le complémentaire des cinq droites $\lambda = 0$, $\lambda = 1$, $\mu = 0$, $\mu = 1$, $\lambda = \mu$. Les points fixes qui donnent les minorations $4 \mid m$ et $3 \mid m$ ne sont pas réels.}
+\label{fig:146-m05}
+\end{figure}
+
+
 \begin{theoreme}[Grothendieck, page 70, colonne $n = 5$, pour $L_i$, valeur suivie de \q{?}\piste{146-equivariant-trivialising-exponents}]\label{thm:146-douze}
 Soit $K$ un corps où $2$ et $3$ sont inversibles, qui contient $i$ avec $i^2 = -1$ et une racine $\zeta$ de $\zeta^2 - \zeta + 1$. La puissance $m$-ième du cocycle $c_5$ de $L_5$ sous $\mathfrak S_4$ est le cobord d'une fonction sans zéro sur $M_{0,5}(K)$ si et seulement si $12 \mid m$. Pour $m = 12$ on peut prendre
 \[
@@ -72,11 +125,35 @@ Sur les générateurs, $c_L(s)^4 = h(sx)/h(x)$ se vérifie directement ; par exe
 
 Le $12$ de la page pour $L$ est donc un exposant qui trivialise, celui que donne le calcul $(L^4)^3 \simeq \mathcal O$, mais pas le meilleur ; c'est la même situation que pour $n = 4$, où la page~72 trouvait $L^{\otimes 6} \simeq 1$ quand l'ordre est $3$.
 
+\begin{sloppypar}
 \noindent Vérifié au niveau des cocycles (\texttt{cL\_pow\_four}, \texttt{coboundary\_cL\_iff}, \texttt{c5\_pow\_twelve}, \texttt{coboundary\_c5\_iff}). Lean manipule les mots en $s_1, \ldots, s_4$ : la substitution d'un mot est la composée, son facteur est donné par la règle de cocycle (\texttt{wAct}, \texttt{wCoc}), et l'énoncé \q{pour tout élément du groupe} devient \q{pour tout mot}. Ne sont pas démontrés en Lean : que les substitutions et les facteurs vérifient les relations de Coxeter de $\mathfrak S_5$, de sorte que les mots passent au groupe (vérifié par le calcul formel), et la dérivation des facteurs $c_L$, $c_5$ à partir des homographies, faite ci-dessus.
+\end{sloppypar}
 
 \begin{remarque}
-Le même calcul pour $n = 6$, avec trois coordonnées et neuf facteurs inversibles, donne l'ordre $5$ pour $L$ et l'ordre $20$ pour $L_6$, au lieu des valeurs \q{$20\,?$} et \q{$60\,?$} du tableau. Les minorations viennent des points fixes : la configuration formée de $0$ et des racines cinquièmes de l'unité, fixée par $z \mapsto e^{2i\pi/5} z$, donne une racine primitive cinquième ; celle de $0$, $\infty$ et des racines quatrièmes, fixée par $z \mapsto iz$, donne $i$ pour $L_6$ (pour $L$, les facteurs en $0$ et en $\infty$ se compensent). Sur les trois colonnes, $L$ est d'ordre $n - 1$ et $L_i$ d'ordre $(n - 1)(n - 2)$, le nombre de la première ligne du tableau. Ce calcul n'est pas formalisé.
+Le même calcul pour $n = 6$, avec trois coordonnées et neuf facteurs inversibles, donne l'ordre $5$ pour $L$ et l'ordre $20$ pour $L_6$, au lieu des valeurs \q{$20\,?$} et \q{$60\,?$} du tableau. Les minorations viennent des points fixes : la configuration formée de $0$ et des racines cinquièmes de l'unité, fixée par $z \mapsto e^{2i\pi/5} z$, donne une racine primitive cinquième ; celle de $0$, $\infty$ et des racines quatrièmes, fixée par $z \mapsto iz$, donne $i$ pour $L_6$ (pour $L$, les facteurs en $0$ et en $\infty$ se compensent). Sur les trois colonnes, $L$ est d'ordre $n - 1$ et $L_i$ d'ordre $(n - 1)(n - 2)$, le nombre de la première ligne du tableau.\footnote{Le groupe lui-même est connu : $H^1(\mathfrak S_n, \mathcal O(M_{0,n})^*) = \mathrm{Pic}\,[M_{0,n}/\mathfrak S_n]$ est cyclique d'ordre $2(n - 1)$ pour $n$ pair (Gorchinskiy--Viviani \cite[th.~3.6]{gorchinskiyviviani2008} ; voir aussi Arsie--Vistoli \cite[th.~5.1]{arsievistoli2004}) ; les ordres de $L$ et des $L_i$ en découlent, mais ne sont énoncés pour ces fibrés dans aucun texte trouvé.} Ce calcul n'est pas formalisé.
 \end{remarque}
+
+Le tableau~\ref{tab:146-exposants} met en regard les valeurs de la page et les ordres calculés.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+& $n = 4$ & $n = 5$ & $n = 6$ \\
+\midrule
+$L$, page~70 & $3$ & $12\,?$ & $20\,?$ \\
+$L$, ordre calculé, $n - 1$ & $3$ & $\mathbf 4$ & $\mathbf 5$ \\
+\addlinespace
+$L_i$, page~70 & $6$ & $12\,?$ & $60\,?$ \\
+$L_i$, ordre calculé, $(n - 1)(n - 2)$ & $6$ & $12$ & $\mathbf{20}$ \\
+\midrule
+statut & Lean & Lean & calcul formel \\
+& th.~\ref{thm:146-six}, \ref{thm:146-trois} & th.~\ref{thm:146-douze}, c.-ex.~\ref{ce:146-quatre} & seulement \\
+\bottomrule
+\end{tabular}
+\caption{Le tableau de la page~70 et les ordres calculés. En gras, les valeurs qui diffèrent de celles de la page ; les points d'interrogation sont ceux du manuscrit.}
+\label{tab:146-exposants}
+\end{table}
 
 Ne sont pas démontrés ici : le fait que le groupe de Picard équivariant soit le $H^1$ des unités, et la colonne $n = 6$, qui reste au rang de conjecture corrigée :
 

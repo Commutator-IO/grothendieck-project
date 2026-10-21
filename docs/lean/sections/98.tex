@@ -26,4 +26,19 @@ Plus loin, la cote se demande quand deux faisceaux, définis sur $X$ après deux
 La raison donnée par la page ne suffit pas telle quelle. Que deux extensions de $k$ soient dominées par une troisième ne donne pas la transitivité : il faut dominer les deux extensions $K'$ et $K''$ de $K_2$ par une extension de $K_2$, de façon que les deux plongements de $K_2$ coïncident, faute de quoi les deux images de $F_2$ dans $D$ n'ont pas de raison d'être isomorphes. Pour des corps, un quotient de $K' \otimes_{K_2} K''$ par un idéal maximal convient, comme le note la lecture. Au corollaire~5, la surjectivité n'utilise que la première moitié de la proposition~1 et le plongement dans $\widetilde K$ ; l'injectivité utilise les deux moitiés et l'homogénéité de $\widetilde K$, qui n'est vraie que pour les extensions de type fini et explique le détour par la proposition~1.
 \end{remarque}
 
+La figure~\ref{fig:98-amalgame} reprend la démonstration de (a). Le losange central doit commuter : $D$ est une extension de $K_2$, et non seulement de $k$.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzcd}[column sep=small, row sep=normal]
+& & D & & \\
+& K' \arrow[ur, dashed] & & K'' \arrow[ul, dashed] & \\
+K_1 \arrow[ur] & & K_2 \arrow[ul] \arrow[ur] & & K_3 \arrow[ul] \\
+& & k \arrow[ull, no head] \arrow[u, no head] \arrow[urr, no head] & &
+\end{tikzcd}
+\caption{Transitivité de la $k$-équivalence. $F_1 \sim F_2$ est réalisée dans $K'$, $F_2 \sim F_3$ dans $K''$ ; les plongements en tirets de $K'$ et $K''$ dans $D$ coïncident sur $K_2$, de sorte que les deux images de $F_2$ dans $D$ sont la même. Deux plongements quelconques de $K'$ et $K''$ dans une extension commune de $k$ ne le garantissent pas.}
+\label{fig:98-amalgame}
+\end{figure}
+
+
 \noindent Voir \texttt{kEquiv\_equivalence}, \texttt{kEquiv\_map}, \texttt{corollaire5\_surj} et \texttt{corollaire5\_iff} dans \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/Folder98.lean}{\texttt{Folder98.lean}}. Ne sont pas démontrés : la proposition~1, renvoyée par la page à un \q{Chap.~V, §~1} qu'on n'identifie pas, ni les deux propriétés de $\widetilde K$, classiques (prolongement à des bases de transcendance de même cardinal infini, puis aux clôtures algébriques) et prises ici pour hypothèses.

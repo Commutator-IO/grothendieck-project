@@ -10,9 +10,31 @@ On a $H^1(\mathfrak S_3, V(J)) \simeq \mathbf Z/3$ et $H^1(\mathfrak S_3, k^*) \
 
 \noindent Vérifié tel quel (\texttt{H1\_VJ}, \texttt{card\_H1\_VJ}, \texttt{card\_H1\_triv}, \texttt{card\_mu2\_dvd}, \texttt{card\_H1\_dvd}). La classe d'un cocycle $f$ à valeurs dans $V(J)$ est $\sum_j m_j \bmod 3$, où $m_j = -f(\tau_j)_j$, $\tau_j$ la transposition de $0$ et~$j$ : c'est la forme explicite de $H^1(\mathfrak S_3, \mathbf Z^J) = 0$ et du bord $\mathbf Z \to H^1(\mathfrak S_3, V(J))$.
 
-Ne sont pas déLa majoration ne dit pas encore que le groupe vaut $\mathbf Z/6$ : il faut une classe d'ordre exactement~$6$. La page~24 la cherche du côté de $\mathcal O(1)$. On en prend ici une autre, plus facile à manier, la classe du fibré tangent, et l'on travaille dans un modèle explicite des unités.
+La majoration ne dit pas encore que le groupe vaut $\mathbf Z/6$ : il faut une classe d'ordre exactement~$6$. La page~24 la cherche du côté de $\mathcal O(1)$. On en prend ici une autre, plus facile à manier, la classe du fibré tangent, et l'on travaille dans un modèle explicite des unités.
 
 \noindent\emph{Le modèle.} Sur un corps $k$, les unités de $U_{0,3} = \mathrm{Spec}\, k[\lambda, 1/\lambda, 1/(1-\lambda)]$ sont les $c\,\lambda^a(1-\lambda)^b$, $c \in k^*$, $a, b \in \mathbf Z$. On les code par le couple $(c, v)$, où $v = (a, b, -a-b) \in V(J)$ est le diviseur sur les points $0$, $1$, $\infty$. Une permutation $\sigma$ de ces trois points est induite par une unique substitution anharmonique, et $\sigma$ envoie $f$ sur $f \circ h$, où $h$ est la substitution qui induit $\sigma^{-1}$. Sur le diviseur, l'action permute les coordonnées. Sur la constante, elle fait apparaître des signes : par exemple $\lambda/(\lambda - 1) = -\lambda(1-\lambda)^{-1}$, de sorte que composer $\lambda^a$ avec cette substitution multiplie la constante par $(-1)^a$. C'est ce signe qui rend l'extension $0 \to k^* \to \mathcal O(U_{0,3})^* \to V(J) \to 0$ de la note marginale non scindée en général. Lean définit ce module, sur un anneau intègre~$k$, par cette formule, et vérifie sur un corps qu'il est bien celui des unités : évaluées en un point $x$ de $U(k)$, les images de $\lambda$ et de $1 - \lambda$ par $\sigma$ valent $h(x)$ et $1 - h(x)$, et les constantes sont fixes.
+
+La figure~\ref{fig:140-1-reseau} montre le réseau $V(J)$ des diviseurs d'unités, dessiné dans le plan $a + b + c = 0$ de $\mathbf Z^J$. Les six diviseurs les plus courts sont ceux de $\lambda$, $1 - \lambda$, $\lambda/(\lambda - 1)$ et de leurs inverses ; $\mathfrak S_3$ agit par les symétries d'axes les trois droites en tirets, une par transposition. Le $\mathfrak S_3$-module $V(J)$ ne voit pas les constantes : le signe de $\lambda/(\lambda - 1) = -\lambda(1 - \lambda)^{-1}$, que le modèle garde, est invisible sur le dessin, et c'est lui qui porte la partie d'ordre~$2$.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.95cm, y=0.95cm, >=stealth, every node/.style={font=\small}]
+\foreach \p in {(2.598,-1.50), (0.000,-3.00), (0.866,-1.50), (1.732,0.00), (2.598,1.50), (-0.866,-1.50), (0.866,1.50), (-2.598,-1.50), (-1.732,0.00), (-0.866,1.50), (0.000,3.00), (-2.598,1.50)} \fill[black!35] \p circle (1.3pt);
+\draw[dashed, black!50] (0,0)+(30:-3.6) -- +(30:3.6) node[right] {$1/\lambda$, $(0\ \infty)$};
+\draw[dashed, black!50] (0,0)+(-30:-3.6) -- +(-30:3.6) node[right] {$1 - \lambda$, $(0\ 1)$};
+\draw[dashed, black!50] (0,-3.4) -- (0,3.4) node[above] {$\lambda/(\lambda - 1)$, $(1\ \infty)$};
+\fill (0,0) circle (1.6pt);
+\draw[->, thick] (0,0) -- (-0.866,1.5) node[above left] {$\lambda$};
+\draw[->, thick] (0,0) -- (0.866,-1.5) node[below right] {$\lambda^{-1}$};
+\draw[->, thick] (0,0) -- (-1.732,0) node[left] {$1 - \lambda$};
+\draw[->, thick] (0,0) -- (1.732,0) node[right] {$(1 - \lambda)^{-1}$};
+\draw[->, thick] (0,0) -- (0.866,1.5) node[above right] {$\frac{\lambda}{\lambda - 1}$};
+\draw[->, thick] (0,0) -- (-0.866,-1.5) node[below left] {$\frac{\lambda - 1}{\lambda}$};
+\end{tikzpicture}
+\caption{Le réseau $V(J) = \operatorname{Ker}(\mathbf Z^J \to \mathbf Z)$, $J = \{0, 1, \infty\}$, et les six unités de diviseur minimal : $\operatorname{div} \lambda = [0] - [\infty]$, $\operatorname{div}(1 - \lambda) = [1] - [\infty]$, $\operatorname{div} \frac{\lambda}{\lambda - 1} = [0] - [1]$. Chaque transposition, induite par la substitution indiquée, agit par la symétrie d'axe la droite en tirets correspondante.}
+\label{fig:140-1-reseau}
+\end{figure}
+
 
 \noindent\emph{La classe tangente.} Le cocycle $\sigma \mapsto (h^{-1})'(\lambda)$, $h$ comme ci-dessus, décrit l'action de $\mathfrak S_3$ sur la droite tangente au point mobile ; c'est le cocycle de la cote~146 (§\,\ref{sec:146}). Dans le modèle, sa constante est la signature de $\sigma$ et son diviseur est $2[\infty] - 2[\sigma(\infty)]$. Par exemple, pour $h = 1/\lambda$, qui échange $0$ et $\infty$, on trouve $-\lambda^{-2}$.
 
@@ -26,7 +48,9 @@ L'ordre du groupe divise $6$, et $3$ si $2 = 0$, par le théorème~\ref{thm:140-
 
 La minoration n'utilise ni racine de $\zeta^2 - \zeta + 1$ ni l'hypothèse $3 \neq 0$ : la caractéristique~$3$ est couverte, comme la lecture l'annonce. Dans la cote~146, l'ordre $6$ du même cocycle se lit aux points fixes $-1$ et $\zeta$ ; ici la partie d'ordre~$3$ se lit sur le diviseur et la partie d'ordre~$2$ sur la constante.
 
+\begin{sloppypar}
 \noindent Vérifié dans le modèle (\texttt{card\_H1\_units\_dvd}, \texttt{dvd\_of\_zsmul\_tan}, \texttt{H1\_units}, \texttt{H1\_units\_char\_two}) ; le modèle est comparé aux substitutions et aux dérivées de la cote~146 par \texttt{ev\_smul\_lam}, \texttt{ev\_smul\_lam'}, \texttt{smul\_incl} et \texttt{ev\_tan}. Lean ne démontre pas que les unités de $U_{0,3}$ sont celles du modèle, qui est le calcul classique des unités de $k[\lambda, 1/\lambda, 1/(1-\lambda)]$.
+\end{sloppypar}
 
 Ne sont pas démontrés ici : $\mathrm{Pic}(U_{0,3}) = 0$ et la suite de Hochschild--Serre, qui identifient le groupe de Picard du champ quotient à ce $H^1$, et le choix de la page, qui prend pour générateur $\mathcal O(1)$ sur $\mathbf P(V_J)$ au lieu de la classe tangente. L'énoncé de la page reste donc ouvert sous sa forme géométrique :
 
