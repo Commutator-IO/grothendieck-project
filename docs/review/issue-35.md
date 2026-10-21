@@ -124,10 +124,10 @@ The readings of 43, 103, 105, 107, 109, 111, 118 and 150 (3 October) footnote de
 - [ ] **150, p. 19:** the equivalence holds only under strict compatibility. On p. 68, the dimension argument needs manifold-like Σ_i.
 
 **References cited from memory, to confirm:**
-- [ ] Saavedra (LNM 265), SGA 4 XVIII, Deligne 1987, Breen (Astérisque 225), Illusie (LNM 283), Laplaza 1972 (103)
-- [ ] Cisinski 2006, Quillen–Illusie, Thomason (109, 105, 118)
-- [ ] Rezk 1998, Street 1974, Dwyer 1980, Brown 1973 (118)
-- [ ] Siebenmann 1972, Quinn 1988, Mather 1970, Verona, Brasselet–Hector–Saralegi, Ayala–Francis–Tanaka (150)
+- [x] Saavedra (LNM 265), SGA 4 XVIII, Deligne 1987, Breen (Astérisque 225), Illusie (LNM 283), Laplaza 1972 (103) — checked against zbMATH/Crossref and, where a place is cited, the text (bibliographic check, Opus 5.5, 2026-10-21).
+- [x] Cisinski 2006, Quillen–Illusie, Thomason (109, 105, 118) — checked against zbMATH/Crossref and, where a place is cited, the text (bibliographic check, Opus 5.5, 2026-10-21).
+- [x] Rezk 1998, Street 1974, Dwyer 1980, Brown 1973 (118) — checked against zbMATH/Crossref and, where a place is cited, the text (bibliographic check, Opus 5.5, 2026-10-21).
+- [x] Siebenmann 1972, Quinn 1988, Mather 1970, Verona, Brasselet–Hector–Saralegi, Ayala–Francis–Tanaka (150) — checked against zbMATH/Crossref and, where a place is cited, the text (bibliographic check, Opus 5.5, 2026-10-21); Verona, Brasselet–Hector–Saralegi and Ayala–Francis–Tanaka are not cited in the reading.
 - [x] Gabriel–Ulmer, Joyal–Tierney, Bousfield–Friedlander, Smith/Beke (105)
 
 **Consistency between readings:**
