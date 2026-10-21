@@ -93,6 +93,10 @@
 %   coboundary_c5_iff, coboundary_cL6_iff, coboundary_c6_iff): L of order 4
 %   and 5, L_i of order 12 and 20; the « restent ouvertes » sentence and the
 %   L_4 footnote's clause on n = 5, 6 replaced.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-21 — p. 70: the n = 5, 6
+%   footnote now records the general formula proved in Lean for every n in a
+%   homogeneous model (trivL_iff, trivLi_iff): L of order n - 1, L_i of order
+%   (n - 1)(n - 2); the dictionary to line bundles is not formalised.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -1118,9 +1122,18 @@ cinquièmes de l'unité, fixée par un $5$-cycle, où le facteur vaut une racine
 primitive cinquième $\omega$, et le point $(-1, -i, i)$, fixé par un
 $4$-cycle, où le facteur de $L_6$ vaut $i$. Sur les trois colonnes, $L$ est
 d'ordre $n - 1$ et $L_i$ d'ordre $(n-1)(n-2)$, le nombre de la première ligne
-du tableau. Ne sont pas formalisés les relations de Coxeter de
-$\mathfrak{S}_n$ pour ces substitutions (vérifiées par le calcul formel) ni le
-passage des fibrés aux cocycles.}
+du tableau. Lean démontre cette règle pour tout $n$
+(\texttt{trivL\_iff}, \texttt{trivLi\_iff}) dans un modèle homogène : les
+points sont des vecteurs de $K^2$ de crochets $[v_i\,v_j]$ non nuls, et une
+trivialisation de $L_i^{\otimes m}$ est une fonction sans zéro de poids
+$t^{2m}$ en $v_i$ et $\det(g)^m$ sous $\mathrm{GL}_2(K)$, invariante par
+renumérotation. Le produit des crochets sur les couples ordonnés trivialise
+$L^{\otimes(n-1)}$ ; les configurations $\{0\} \cup \mu_{n-1}$ et
+$\{0, \infty\} \cup \mu_{n-2}$, que font tourner $z \mapsto \omega z$ et
+$z \mapsto \zeta z$ (racines primitives d'ordres $n - 1$ et $n - 2$),
+donnent les minorations. Ne sont pas formalisés les relations de Coxeter de
+$\mathfrak{S}_n$ pour ces substitutions (vérifiées par le calcul formel), le
+passage des fibrés aux cocycles, ni celui des fibrés au modèle homogène.}
 
 Le cadre est la cohomologie équivariante. Comme $M_{0,K}$ est le complémentaire
 d'un arrangement d'hyperplans dans un espace affine, $\mathrm{Pic}(M_{0,K}) = 0$

@@ -45,6 +45,10 @@ end of the file at the level of cocycles: `L` has order `4` (`coboundary_cL_iff`
 order `12` (`coboundary_c5_iff`). The column `n = 6` (« 20 ? » for `L`, « 60 ? » for `L_i`) is
 settled after it: `L` has order `5` (`coboundary_cL6_iff`), `L₆` has order `20`
 (`coboundary_c6_iff`).
+
+The last section proves the general formula, for every `n`, in a homogeneous model of
+`M_{0,n}` (configurations of vectors of `K²`, functions of weight instead of cocycles): `L`
+has order `n − 1` (`trivL_iff`) and `L_i` has order `(n − 1)(n − 2)` (`trivLi_iff`).
 -/
 
 namespace Grothendieck.Folder146
@@ -803,5 +807,286 @@ theorem coboundary_c6_iff (h2 : (2 : K) ≠ 0) (h5 : (5 : K) ≠ 0) {ι : K} (h�
     rw [zpow_mul, show c6 i p ^ (20 : ℤ) = g6 (act6s i p) ^ 2 / g6 p ^ 2 by
       rw [show (20 : ℤ) = ((10 * 2 : ℕ) : ℤ) by norm_num, zpow_natCast, pow_mul,
         c6_pow_ten i hp]; ring, div_zpow]
+
+/-! ## All `n`: `L` has order `n − 1`, `L_i` has order `(n − 1)(n − 2)`
+
+The three columns above suggest a pattern, `n − 1` for `L` and `(n − 1)(n − 2)` for `L_i`, and
+this section proves it for every `n`, in a model where the cocycle no longer has to be written
+in normalised coordinates.
+
+The model. A point of `ℙ¹(K)` is a nonzero vector of `K²` up to a scalar, and `n` points are
+distinct iff all the brackets `[vᵢ vⱼ] = vᵢ₁vⱼ₂ − vᵢ₂vⱼ₁`, `i ≠ j`, are nonzero (`Conf`). A
+function on `M_{0,n}(K)` is a function of such a configuration invariant under `GL₂(K)` and
+under rescaling each `vᵢ`. The tangent line of `ℙ¹` at the point `⟨v⟩` is
+`Hom(⟨v⟩, K²/⟨v⟩) ≃ ⟨v⟩^{⊗−2} ⊗ det K²`, so a nowhere-zero section of `L_i^{⊗m}` invariant under
+`PGL₂(K)` is, up to inverting it, a nowhere-zero function of weight `t^{2m}` when `vᵢ` is
+multiplied by `t`, weight `1` in the other vectors, and weight `det(g)^m` under `g ∈ GL₂(K)`;
+for `L = L₁ ⊗ ⋯ ⊗ Lₙ` the weights are `tᵢ^{2m}` in each vector and `det(g)^{mn}`. An
+equivariant trivialisation of `L^{⊗m}` (`TrivL`), of `L_i^{⊗m}` under the stabiliser of the
+`i`-th point (`TrivLi`), is such a function invariant under relabelling the points. As in the
+sections above, the function is not required to be regular. Not formalised: this dictionary
+between line bundles on `M_{0,n}` and functions of weight on configurations, and its agreement
+with the cocycles `derL`, `cL`, `c5`, `cL6`, `c6` of the normalised coordinates.
+
+* Upper bounds, for every `n` and every field (`trivL_of_dvd`, `trivLi_of_dvd`): the product
+  `disc` of the brackets over the ordered pairs (`± Δ²`, `Δ` the Vandermonde-type product)
+  trivialises `L^{⊗(n−1)}`; with the `n`-th point `p` and the `k = n − 1` others,
+  `(∏ᵢ [vᵢ p])^{2(k−1)} / disc(v)` trivialises `Lₙ^{⊗k(k−1)}`. These generalise
+  `(λμ(1 − λ)(1 − μ)(λ − μ))²` and its companions above.
+* Lower bounds, by isotropy points: the configuration `{0} ∪ μ_{n−1}` is fixed by the
+  `(n − 1)`-cycle together with `z ↦ ωz`, of determinant `ω`, which forces `ω^{mn} = 1` for
+  `L` and `ω^m = 1` for `Lₙ` (`0` the `n`-th point); the configuration `{0, ∞} ∪ μ_{n−2}`
+  (`0` the `n`-th point) gives `ζ^m = 1` with `ζ` of order `n − 2`. As `n − 1` and `n − 2` are
+  coprime, `(n − 1)(n − 2) ∣ m`.
+
+`trivL_iff`: over a field with a primitive `(n − 1)`-th root of unity, `L^{⊗m}` is equivariantly
+trivial iff `(n − 1) ∣ m`; `trivLi_iff`: with primitive roots of orders `n − 1` and `n − 2`,
+`Lₙ^{⊗m}` is iff `(n − 1)(n − 2) ∣ m`. For `n = 4, 5, 6` this gives `3, 4, 5` and `6, 12, 20`,
+the values found above. -/
+
+/-- The bracket `[v w] = v₁w₂ − v₂w₁`: it vanishes iff `v` and `w` give the same point of
+`ℙ¹(K)` (or one of them is zero). -/
+def br (v w : K × K) : K := v.1 * w.2 - v.2 * w.1
+
+/-- The linear substitution `(x, y) ↦ (ax + by, cx + dy)`. -/
+def lin (a b c d : K) (v : K × K) : K × K := (a * v.1 + b * v.2, c * v.1 + d * v.2)
+
+/-- `n` vectors of `K²` giving `n` distinct points of `ℙ¹(K)`. -/
+def Conf {n : ℕ} (v : Fin n → K × K) : Prop := ∀ i j, i ≠ j → br (v i) (v j) ≠ 0
+
+/-- The product of the brackets `[vᵢ vⱼ]` over the ordered pairs `i ≠ j`. -/
+def disc {n : ℕ} (v : Fin n → K × K) : K := ∏ i, ∏ j, if i = j then 1 else br (v i) (v j)
+
+/-- The product of the brackets `[vᵢ p]`. -/
+def brp {k : ℕ} (p : K × K) (v : Fin k → K × K) : K := ∏ i, br (v i) p
+
+variable (K) in
+/-- An equivariant trivialisation of `L^{⊗m}`, `L = L₁ ⊗ ⋯ ⊗ Lₙ`, on `M_{0,n}(K)`. -/
+def TrivL (n : ℕ) (m : ℤ) : Prop :=
+  ∃ F : (Fin n → K × K) → K, ∀ v, Conf v → F v ≠ 0 ∧
+    (∀ t : Fin n → K, (∀ i, t i ≠ 0) → F (fun i => t i • v i) = (∏ i, t i) ^ (2 * m) * F v) ∧
+    (∀ a b c d : K, a * d - b * c ≠ 0 →
+      F (fun i => lin a b c d (v i)) = (a * d - b * c) ^ (m * n) * F v) ∧
+    ∀ σ : Equiv.Perm (Fin n), F (v ∘ σ) = F v
+
+variable (K) in
+/-- An equivariant trivialisation of `Lₙ^{⊗m}` on `M_{0,n}(K)`, `n = k + 1`, under the
+stabiliser `𝔖_k` of the `n`-th point `p`; `v` are the `k` other points. -/
+def TrivLi (k : ℕ) (m : ℤ) : Prop :=
+  ∃ F : K × K → (Fin k → K × K) → K, ∀ p v, Conf v → (∀ i, br p (v i) ≠ 0) → F p v ≠ 0 ∧
+    (∀ (s : K) (t : Fin k → K), s ≠ 0 → (∀ i, t i ≠ 0) →
+      F (s • p) (fun i => t i • v i) = s ^ (2 * m) * F p v) ∧
+    (∀ a b c d : K, a * d - b * c ≠ 0 →
+      F (lin a b c d p) (fun i => lin a b c d (v i)) = (a * d - b * c) ^ m * F p v) ∧
+    ∀ σ : Equiv.Perm (Fin k), F p (v ∘ σ) = F p v
+
+lemma br_lin (a b c d : K) (v w : K × K) :
+    br (lin a b c d v) (lin a b c d w) = (a * d - b * c) * br v w := by
+  simp only [br, lin]; ring
+
+lemma br_smul (s t : K) (v w : K × K) : br (s • v) (t • w) = s * t * br v w := by
+  simp only [br, Prod.smul_fst, Prod.smul_snd, smul_eq_mul]; ring
+
+lemma prod_ite_ne {n : ℕ} (i : Fin n) (c : K) :
+    ∏ j, (if i = j then 1 else c) = c ^ (n - 1) := by
+  simp [Finset.prod_ite, Finset.filter_ne]
+
+/-- Counting the factors of a product over the ordered pairs `i ≠ j`. -/
+lemma prod_offdiag {n : ℕ} (c : K) (u : Fin n → K) (e : Fin n → Fin n → K) :
+    ∏ i, ∏ j, (if i = j then 1 else c * u i * u j * e i j) =
+      c ^ (n * (n - 1)) * (∏ i, u i) ^ (2 * (n - 1)) * ∏ i, ∏ j, if i = j then 1 else e i j := by
+  have h (i j) : (if i = j then 1 else c * u i * u j * e i j) = (if i = j then 1 else c) *
+      (if i = j then 1 else u i) * (if j = i then 1 else u j) * if i = j then 1 else e i j := by
+    by_cases h : i = j <;> simp [h, eq_comm]
+  have hC : ∏ i, ∏ j, (if j = i then (1 : K) else u j) = ∏ j, u j ^ (n - 1) := by
+    rw [Finset.prod_comm]; exact Finset.prod_congr rfl fun j _ => prod_ite_ne j _
+  simp only [h, Finset.prod_mul_distrib, hC, prod_ite_ne, Finset.prod_const, Finset.card_univ,
+    Fintype.card_fin, Finset.prod_pow]
+  ring
+
+lemma disc_smul {n : ℕ} (t : Fin n → K) (v : Fin n → K × K) :
+    disc (fun i => t i • v i) = (∏ i, t i) ^ (2 * (n - 1)) * disc v := by
+  simpa [disc, br_smul] using prod_offdiag 1 t fun i j => br (v i) (v j)
+
+lemma disc_lin {n : ℕ} (a b c d : K) (v : Fin n → K × K) :
+    disc (fun i => lin a b c d (v i)) = (a * d - b * c) ^ (n * (n - 1)) * disc v := by
+  simpa [disc, br_lin] using prod_offdiag (a * d - b * c) 1 fun i j => br (v i) (v j)
+
+lemma disc_perm {n : ℕ} (v : Fin n → K × K) (σ : Equiv.Perm (Fin n)) :
+    disc (v ∘ σ) = disc v := by
+  let f i j := if i = j then (1 : K) else br (v i) (v j)
+  have e : disc (v ∘ σ) = ∏ i, ∏ j, f (σ i) (σ j) := by simp [disc, f, σ.injective.eq_iff]
+  rw [e]
+  exact (Finset.prod_congr rfl fun i _ => Equiv.prod_comp σ (f (σ i))).trans
+    (Equiv.prod_comp σ fun i => ∏ j, f i j)
+
+lemma disc_ne {n : ℕ} {v : Fin n → K × K} (hv : Conf v) : disc v ≠ 0 :=
+  Finset.prod_ne_zero_iff.2 fun i _ => Finset.prod_ne_zero_iff.2 fun j _ => by
+    split_ifs with h
+    exacts [one_ne_zero, hv i j h]
+
+/-- `L^{⊗(n−1)}` is equivariantly trivial on `M_{0,n}`, trivialised by `disc`, for every `n`
+and every field. -/
+theorem trivL_of_dvd {n : ℕ} {m : ℤ} (h : ((n - 1 : ℕ) : ℤ) ∣ m) : TrivL K n m := by
+  obtain ⟨q, rfl⟩ := h
+  refine ⟨fun v => disc v ^ q, fun v hv => ⟨zpow_ne_zero _ (disc_ne hv), fun t ht => ?_,
+    fun a b c d hd => ?_, fun σ => by simp only [disc_perm]⟩⟩
+  · simp only [disc_smul, mul_zpow, ← zpow_natCast, ← zpow_mul]
+    congr 2; push_cast; ring
+  · simp only [disc_lin, mul_zpow, ← zpow_natCast, ← zpow_mul]
+    congr 2; push_cast; ring
+
+/-- `Lₙ^{⊗(n−1)(n−2)}` is equivariantly trivial on `M_{0,n}`, `n = k + 1`, trivialised by
+`(∏ᵢ [vᵢ p])^{2(k−1)} / disc(v)`, for every `n` and every field. -/
+theorem trivLi_of_dvd {k : ℕ} {m : ℤ} (h : ((k * (k - 1) : ℕ) : ℤ) ∣ m) : TrivLi K k m := by
+  obtain ⟨q, rfl⟩ := h
+  have hR (p : K × K) (v : Fin k → K × K) (hp : ∀ i, br p (v i) ≠ 0) : brp p v ≠ 0 :=
+    Finset.prod_ne_zero_iff.2 fun i _ => by
+      rw [show br (v i) p = -br p (v i) by simp only [br]; ring]; exact neg_ne_zero.2 (hp i)
+  refine ⟨fun p v => (brp p v ^ (2 * (k - 1)) / disc v) ^ q, fun p v hv hp =>
+    ⟨zpow_ne_zero _ (div_ne_zero (pow_ne_zero _ (hR p v hp)) (disc_ne hv)), fun s t hs ht => ?_,
+    fun a b c d hd => ?_, fun σ => ?_⟩⟩
+  · have hT : ∏ i, t i ≠ 0 := Finset.prod_ne_zero_iff.2 fun i _ => ht i
+    have : brp (s • p) (fun i => t i • v i) ^ (2 * (k - 1)) / disc (fun i => t i • v i) =
+        s ^ (2 * (k * (k - 1))) * (brp p v ^ (2 * (k - 1)) / disc v) := by
+      simp only [brp, br_smul, Finset.prod_mul_distrib, Finset.prod_const, Finset.card_univ,
+        Fintype.card_fin, disc_smul]
+      field_simp
+      ring
+    dsimp only; rw [this]; simp only [mul_zpow, ← zpow_natCast, ← zpow_mul]
+    congr 2; push_cast; ring
+  · have : brp (lin a b c d p) (fun i => lin a b c d (v i)) ^ (2 * (k - 1)) /
+        disc (fun i => lin a b c d (v i)) =
+        (a * d - b * c) ^ (k * (k - 1)) * (brp p v ^ (2 * (k - 1)) / disc v) := by
+      simp only [brp, br_lin, Finset.prod_mul_distrib, Finset.prod_const, Finset.card_univ,
+        Fintype.card_fin, disc_lin]
+      field_simp
+      ring
+    dsimp only; rw [this]; simp only [mul_zpow, ← zpow_natCast, ← zpow_mul]
+  · simp only [disc_perm, brp, Function.comp_apply]
+    rw [Equiv.prod_comp σ fun i => br (v i) p]
+
+/-- The `k`-th roots of unity `ω^i`, as points `(ω^i, 1)`. -/
+def rts (ω : K) (k : ℕ) (i : Fin k) : K × K := (ω ^ (i : ℕ), 1)
+
+lemma rts_rot {k : ℕ} {ω : K} (hω : ω ^ k = 1) :
+    rts ω k ∘ finRotate k = fun i => lin ω 0 0 1 (rts ω k i) := by
+  funext i
+  cases k with
+  | zero => exact i.elim0
+  | succ k =>
+    simp only [Function.comp_apply, rts, lin, coe_finRotate]
+    split_ifs with h
+    · subst h; simp [Fin.val_last, ← pow_succ', hω]
+    · simp [pow_succ']
+
+lemma conf_rts {k : ℕ} {ω : K} (hω : IsPrimitiveRoot ω k) : Conf (rts ω k) := fun i j hij => by
+  simp only [rts, br, mul_one, one_mul]
+  exact sub_ne_zero.2 fun h => hij (Fin.ext (hω.pow_inj i.isLt j.isLt h))
+
+lemma rts_ne {k : ℕ} {ω : K} (hω : IsPrimitiveRoot ω k) (i : Fin k) : ω ^ (i : ℕ) ≠ 0 :=
+  pow_ne_zero _ (hω.ne_zero (by have := i.isLt; omega))
+
+lemma conf_cons {k : ℕ} {q : K × K} {r : Fin k → K × K} (hq : ∀ i, br q (r i) ≠ 0)
+    (hr : Conf r) : Conf (Fin.cons q r : Fin (k + 1) → K × K) := fun i j hij => by
+  cases i using Fin.cases <;> cases j using Fin.cases
+  · exact absurd rfl hij
+  · simpa using hq _
+  · simp only [Fin.cons_succ, Fin.cons_zero]
+    rw [show ∀ v w : K × K, br v w = -br w v by intro v w; simp only [br]; ring]
+    exact neg_ne_zero.2 (hq _)
+  · simpa using hr _ _ fun h => hij (by rw [h])
+
+lemma conf_comp {k : ℕ} {v : Fin k → K × K} (hv : Conf v) (σ : Equiv.Perm (Fin k)) :
+    Conf (v ∘ σ) := fun _ _ h => hv _ _ (σ.injective.ne h)
+
+/-- The cycle of the points `1, …, k`, fixing the point `0`. -/
+def cyc (k : ℕ) : Equiv.Perm (Fin (k + 1)) := Equiv.Perm.decomposeFin.symm (0, finRotate k)
+
+lemma cons_rot {k : ℕ} {ω : K} (hω : ω ^ k = 1) (q : K × K) :
+    (Fin.cons q (rts ω k) : Fin (k + 1) → K × K) ∘ cyc k =
+      Fin.cons q fun i => lin ω 0 0 1 (rts ω k i) := by
+  funext i
+  cases i using Fin.cases
+  · simp [cyc]
+  · simpa [cyc] using congrFun (rts_rot hω) _
+
+lemma cons_lin (a b c d : K) {k : ℕ} (q : K × K) (r : Fin k → K × K) :
+    (fun i => lin a b c d ((Fin.cons q r : Fin (k + 1) → K × K) i)) =
+      Fin.cons (lin a b c d q) fun i => lin a b c d (r i) := by
+  funext i; cases i using Fin.cases <;> simp
+
+/-- The isotropy point `{0} ∪ μ_{n−1}` for `L`, `n = j + 2`: `ω^{mn} = 1` forces
+`(n − 1) ∣ m`. -/
+theorem dvd_of_trivL {j : ℕ} {ω : K} (hω : IsPrimitiveRoot ω (j + 1)) {m : ℤ}
+    (h : TrivL K (j + 2) m) : ((j + 1 : ℕ) : ℤ) ∣ m := by
+  obtain ⟨F, hF⟩ := h
+  let v : Fin (j + 2) → K × K := Fin.cons (0, 1) (rts ω (j + 1))
+  have hc : Conf v := conf_cons (fun i => by simpa [br, rts] using rts_ne hω i) (conf_rts hω)
+  obtain ⟨h0, -, hg, hσ⟩ := hF v hc
+  have e := hg ω 0 0 1 (by simpa using hω.ne_zero (by omega))
+  rw [cons_lin, ← cons_rot hω.pow_eq_one, show lin ω 0 0 1 ((0 : K), (1 : K)) = (0, 1) by
+    simp [lin], hσ] at e
+  have e1 := hω.zpow_eq_one_iff_dvd _ |>.1 <| by
+    simpa using mul_right_cancel₀ h0 (e.symm.trans (one_mul _).symm)
+  have : ((j + 1 : ℕ) : ℤ) ∣ m * ((j + 1 : ℕ) : ℤ) + m := by
+    convert e1 using 1; push_cast; ring
+  exact (dvd_add_right (dvd_mul_left _ _)).1 this
+
+/-- The isotropy points `{0} ∪ μ_{n−1}` and `{0, ∞} ∪ μ_{n−2}` for `Lₙ`, `n = j + 3`, `0` the
+`n`-th point: `ω^m = 1` and `ζ^m = 1` force `(n − 1)(n − 2) ∣ m`. -/
+theorem dvd_of_trivLi {j : ℕ} {ω ζ : K} (hω : IsPrimitiveRoot ω (j + 2))
+    (hζ : IsPrimitiveRoot ζ (j + 1)) {m : ℤ} (h : TrivLi K (j + 2) m) :
+    (((j + 2) * (j + 1) : ℕ) : ℤ) ∣ m := by
+  obtain ⟨F, hF⟩ := h
+  have hp0 : lin ω 0 0 1 ((0 : K), (1 : K)) = (0, 1) := by simp [lin]
+  have hp0' : lin ζ 0 0 1 ((0 : K), (1 : K)) = (0, 1) := by simp [lin]
+  -- the point `{0} ∪ μ_{n−1}`
+  have hc := conf_rts hω
+  have hp : ∀ i, br ((0 : K), (1 : K)) (rts ω (j + 2) i) ≠ 0 := fun i => by
+    simpa [br, rts] using rts_ne hω i
+  obtain ⟨h0, -, hg, hσ⟩ := hF _ _ hc hp
+  have e := hg ω 0 0 1 (by simpa using hω.ne_zero (by omega))
+  rw [hp0, show (fun i => lin ω 0 0 1 (rts ω (j + 2) i)) = _ from (rts_rot hω.pow_eq_one).symm,
+    hσ] at e
+  have d1 := hω.zpow_eq_one_iff_dvd _ |>.1 <| by
+    simpa using mul_right_cancel₀ h0 (e.symm.trans (one_mul _).symm)
+  -- the point `{0, ∞} ∪ μ_{n−2}`
+  let v : Fin (j + 2) → K × K := Fin.cons (1, 0) (rts ζ (j + 1))
+  have hc' : Conf v := conf_cons (fun i => by simp [br, rts]) (conf_rts hζ)
+  have hp' : ∀ i, br ((0 : K), (1 : K)) (v i) ≠ 0 := fun i => by
+    cases i using Fin.cases
+    · simp [v, br]
+    · simpa [v, br, rts] using rts_ne hζ _
+  obtain ⟨h0', -, hg', hσ'⟩ := hF _ _ hc' hp'
+  obtain ⟨-, hs, -, -⟩ := hF _ _ (conf_comp hc' (cyc (j + 1))) fun i => hp' _
+  have e' := hg' ζ 0 0 1 (by simpa using hζ.ne_zero (by omega))
+  have hv : (fun i => lin ζ 0 0 1 (v i)) =
+      fun i => (Fin.cons ζ fun _ => 1 : Fin (j + 2) → K) i • (v ∘ cyc (j + 1)) i := by
+    rw [cons_lin, cons_rot hζ.pow_eq_one]
+    funext i; cases i using Fin.cases <;> simp [lin]
+  rw [hp0', hv, ← one_smul K ((0 : K), (1 : K)),
+    hs 1 _ one_ne_zero fun i => by cases i using Fin.cases <;> simp [hζ.ne_zero], one_zpow,
+    one_mul, one_smul, hσ'] at e'
+  have d2 := hζ.zpow_eq_one_iff_dvd _ |>.1 <| by
+    simpa using mul_right_cancel₀ h0' (e'.symm.trans (one_mul _).symm)
+  push_cast at d1 d2 ⊢
+  exact IsCoprime.mul_dvd ⟨1, -1, by ring⟩ d1 d2
+
+/-- The general formula for `L`: over a field with a primitive `(n − 1)`-th root of unity, `n ≥ 2`,
+`L^{⊗m}` is equivariantly trivial on `M_{0,n}` iff `(n − 1) ∣ m` (énoncé de l'édition). -/
+theorem trivL_iff {n : ℕ} (hn : 2 ≤ n) {ω : K} (hω : IsPrimitiveRoot ω (n - 1)) (m : ℤ) :
+    TrivL K n m ↔ ((n - 1 : ℕ) : ℤ) ∣ m := by
+  obtain ⟨j, rfl⟩ : ∃ j, n = j + 2 := ⟨n - 2, by omega⟩
+  exact ⟨dvd_of_trivL hω, trivL_of_dvd⟩
+
+/-- The general formula for `L_i`: over a field with primitive roots of unity of orders `n − 1`
+and `n − 2`, `n ≥ 3`, `Lₙ^{⊗m}` is equivariantly trivial on `M_{0,n}` under the stabiliser of
+the `n`-th point iff `(n − 1)(n − 2) ∣ m` (énoncé de l'édition). -/
+theorem trivLi_iff {n : ℕ} (hn : 3 ≤ n) {ω ζ : K} (hω : IsPrimitiveRoot ω (n - 1))
+    (hζ : IsPrimitiveRoot ζ (n - 2)) (m : ℤ) :
+    TrivLi K (n - 1) m ↔ (((n - 1) * (n - 2) : ℕ) : ℤ) ∣ m := by
+  obtain ⟨j, rfl⟩ : ∃ j, n = j + 3 := ⟨n - 3, by omega⟩
+  exact ⟨dvd_of_trivLi hω hζ, trivLi_of_dvd⟩
 
 end Grothendieck.Folder146

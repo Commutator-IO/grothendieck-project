@@ -1,4 +1,4 @@
-\section[Cote 146 : les exposants trivialisants de $L_i$ et de $L$ sur $M_{0,4}$, $M_{0,5}$ et $M_{0,6}$]{Cote 146 : les exposants trivialisants de $L_i$ et de $L$ sur $M_{0,4}$, $M_{0,5}$ et $M_{0,6}$\protect\verifie{Folder146}}\label{sec:146}
+\section[Cote 146 : les exposants trivialisants de $L_i$ et de $L$ sur $M_{0,n}$]{Cote 146 : les exposants trivialisants de $L_i$ et de $L$ sur $M_{0,n}$\protect\verifie{Folder146}}\label{sec:146}
 
 La cote 146, \emph{Groupoïdes de Teichmüller}, cent trente-trois pages que l'inventaire date \q{[à partir de 1978]}, porte page~70 un tableau : pour $n = \operatorname{card} I = 4, 5, 6$, le plus petit exposant qui rend trivial, de façon compatible au groupe symétrique, le fibré $L = \bigotimes L_i$ sur $M_{0,I}$, et les fibrés $L_i$ attachés aux points marqués (\lot{146}{4}{70}). Pour $n = 4$ il donne $3$ pour $L$ et $6$ pour $L_i$ ; les colonnes $n = 5$ et~$6$ portent des points d'interrogation. La lecture ne vérifie pas le tableau, et la piste tombe si les valeurs pour $n = 4$ ne se vérifient pas.
 
@@ -205,11 +205,35 @@ statut & Lean & Lean & Lean \\
 \label{tab:146-exposants}
 \end{table}
 
-Ne sont pas démontrés ici : le fait que le groupe de Picard équivariant soit le $H^1$ des unités, et la formule générale, qui reste au rang de conjecture :
+\subsection*{Tous les $n$}
+
+Les trois colonnes suggèrent une règle : $n - 1$ pour $L$ et $(n - 1)(n - 2)$ pour $L_i$. Elle se démontre pour tout $n$, à condition de changer de modèle. Les coordonnées normalisées des colonnes précédentes, où trois points sont envoyés en $0$, $1$ et $\infty$, obligent à écrire une homographie de renormalisation par permutation, et leur forme dépend de $n$. Le modèle homogène évite cette étape.
+
+Un point de $\mathbb P^1(K)$ est un vecteur non nul $v = (v_1, v_2)$ de $K^2$, à un scalaire près. Deux vecteurs donnent le même point si et seulement si leur crochet $[v\,w] = v_1 w_2 - v_2 w_1$ est nul. Une configuration de $n$ points distincts est donc une famille $v_1, \ldots, v_n$ de vecteurs dont tous les crochets $[v_i\,v_j]$, $i \neq j$, sont non nuls. Une fonction sur $M_{0,n}(K)$ est une fonction de la configuration invariante par $\mathrm{GL}_2(K)$ et par le changement de chaque $v_i$ en un multiple. La droite tangente à $\mathbb P^1$ au point $\langle v\rangle$ est $\mathrm{Hom}(\langle v\rangle, K^2/\langle v\rangle)$, isomorphe à $\langle v\rangle^{\otimes -2} \otimes \det K^2$. Une section partout non nulle de $L_i^{\otimes m}$ devient ainsi, quitte à l'inverser, une fonction sans zéro qui est multipliée par $t^{2m}$ quand $v_i$ est multiplié par $t$, qui ne change pas quand on multiplie les autres vecteurs, et qui est multipliée par $\det(g)^m$ sous $g \in \mathrm{GL}_2(K)$. Pour $L = L_1 \otimes \cdots \otimes L_n$, les poids sont $t_i^{2m}$ pour chaque vecteur et $\det(g)^{mn}$. Trivialiser $L^{\otimes m}$ de façon compatible au groupe symétrique, c'est trouver une telle fonction invariante par toute renumérotation des points ; pour $L_n$, invariante par les renumérotations qui fixent le $n$-ième point. Comme dans les colonnes précédentes, la fonction n'est pas supposée régulière.
 
 \begin{encadre}
-\begin{conjecture*}[de l'édition, d'après le tableau de la page 70\piste{146-equivariant-trivialising-exponents}]
-Sur $M_{0,n}$, $n \geq 4$, les plus petits exposants qui rendent triviaux, de façon compatible au groupe symétrique, les fibrés $L$ et $L_i$ sont $n - 1$ et $(n - 1)(n - 2)$.
-\end{conjecture*}
+\begin{theoreme}[énoncé de l'édition, d'après le tableau de la page 70\piste{146-equivariant-trivialising-exponents}]\label{thm:146-general}
+Soit $n \geq 3$ et soit $K$ un corps qui contient une racine primitive $(n - 1)$-ième de l'unité $\omega$ et une racine primitive $(n - 2)$-ième de l'unité $\zeta$. Dans le modèle homogène :
+\begin{enumerate}
+\item $L^{\otimes m}$ se trivialise de façon compatible à $\mathfrak S_n$ si et seulement si $n - 1$ divise $m$ (pour cette partie, $n \geq 2$ et seule $\omega$ sert) ;
+\item $L_n^{\otimes m}$ se trivialise de façon compatible au stabilisateur $\mathfrak S_{n-1}$ du $n$-ième point si et seulement si $(n - 1)(n - 2)$ divise $m$.
+\end{enumerate}
+Les fonctions qui trivialisent existent sur tout corps.
+\end{theoreme}
 \end{encadre}
-{\small Les valeurs pour $n = 4$ sont les théorèmes~\ref{thm:146-six} et~\ref{thm:146-trois} ; pour $n = 5$, le théorème~\ref{thm:146-douze} et le contre-exemple~\ref{ce:146-quatre} ; pour $n = 6$, les contre-exemples~\ref{ce:146-cinq} et~\ref{ce:146-vingt}. Mathlib n'a pas les espaces de modules $M_{0,n}$.\par}
+
+Pour $n = 4$, $5$ et $6$ on retrouve $3$, $4$, $5$ et $6$, $12$, $20$, les ordres trouvés plus haut dans les coordonnées normalisées.
+
+\begin{proof}
+Les fonctions qui trivialisent sont des produits de crochets. Soit $D$ le produit des crochets $[v_i\,v_j]$ sur les couples ordonnés $i \neq j$ ; c'est, au signe près, le carré du produit de Vandermonde $\prod_{i < j}[v_i\,v_j]$, et le carré efface le signe que fait apparaître une permutation. Chaque indice figure dans $2(n - 1)$ facteurs : multiplier $v_i$ par $t_i$ multiplie $D$ par $t_i^{2(n-1)}$, et $g$ le multiplie par $\det(g)^{n(n-1)}$, car $[g v\,g w] = \det(g)\,[v\,w]$. Ce sont les poids de $L^{\otimes (n-1)}$ : $D$ trivialise $L^{\otimes(n-1)}$. Pour $L_n$, notons $p$ le $n$-ième point et $v_1, \ldots, v_k$ les $k = n - 1$ autres, et posons
+\[
+F = \frac{\bigl(\prod_i [v_i\,p]\bigr)^{2(k-1)}}{D(v_1, \ldots, v_k)}.
+\]
+Chaque $v_i$ figure $2(k - 1)$ fois au numérateur et $2(k - 1)$ fois au dénominateur, donc son poids est nul ; $p$ a le poids $2k(k - 1)$, et $\det(g)$ l'exposant $2k(k - 1) - k(k - 1) = k(k - 1)$. Ce sont les poids de $L_n^{\otimes k(k-1)}$, avec $k(k - 1) = (n - 1)(n - 2)$. Pour $n = 5$, avec $p = \mu$ et les autres points en $0$, $1$, $\infty$, $\lambda$, on reconnaît en coordonnées affines, au signe près, la fonction $\mu^6(1 - \mu)^6(\lambda - \mu)^6/(\lambda^2(1 - \lambda)^2)$ du théorème~\ref{thm:146-douze}.
+
+Pour la minoration, on cherche des configurations qu'une renumérotation $\sigma$ envoie sur leur image par une matrice $g$. Si $F$ trivialise, $F(v) = F(v \circ \sigma) = F(g v)$, qui vaut $F(v)$ multiplié par le poids de $g$, et ce poids vaut donc $1$. Pour $L$, on prend le point $0$ et les $n - 1$ racines $(n-1)$-ièmes de l'unité, que la matrice $g = \mathrm{diag}(\omega, 1)$, de déterminant $\omega$, fait tourner ; on obtient $\omega^{mn} = 1$, donc $n - 1$ divise $mn$, et comme $n \equiv 1$ modulo $n - 1$, il divise $m$. Pour $L_n$, le $n$-ième point est en $0$. La même configuration donne $\omega^m = 1$, d'où $n - 1 \mid m$. La configuration formée de $0$, de $\infty$ et des racines $(n-2)$-ièmes de l'unité, que $\mathrm{diag}(\zeta, 1)$ fait tourner en fixant $0$ et $\infty$, donne $\zeta^m = 1$, d'où $n - 2 \mid m$. Le vecteur $(1, 0)$ de $\infty$ y est multiplié par $\zeta$, ce qui ne compte pas, car $F$ ne voit pas les multiples des autres points. Comme $n - 1$ et $n - 2$ sont premiers entre eux, leur produit divise $m$.
+\end{proof}
+
+\begin{sloppypar}
+\noindent Vérifié (\texttt{br}, \texttt{Conf}, \texttt{disc}, \texttt{TrivL}, \texttt{TrivLi}, \texttt{disc\_smul}, \texttt{disc\_lin}, \texttt{disc\_perm}, \texttt{trivL\_of\_dvd}, \texttt{trivLi\_of\_dvd}, \texttt{dvd\_of\_trivL}, \texttt{dvd\_of\_trivLi}, \texttt{trivL\_iff}, \texttt{trivLi\_iff}). Ne sont pas démontrés en Lean : le dictionnaire entre fibrés en droites équivariants sur $M_{0,n}$ et fonctions de poids sur les configurations, l'accord de ce modèle avec les cocycles des coordonnées normalisées pour $n = 4$, $5$, $6$, et le fait que le groupe de Picard équivariant soit le $H^1$ des unités. Mathlib n'a pas les espaces de modules $M_{0,n}$.
+\end{sloppypar}
