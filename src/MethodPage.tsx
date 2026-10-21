@@ -411,7 +411,7 @@ export function MethodPage() {
           </p>
 
           <P id="article-cicm" className="prose-fonds mt-6">
-            <em>Formalising a Mathematician's Working Notes: 1,985 Lean Theorems from the Grothendieck
+            <em>Formalising a Mathematician's Working Notes: 1,994 Lean Theorems from the Grothendieck
             Archive</em>{' '}
             — a paper prepared for the Conference on Intelligent Computer Mathematics (CICM), the
             complement of the first: how the statements of the readings are chosen, formalised and

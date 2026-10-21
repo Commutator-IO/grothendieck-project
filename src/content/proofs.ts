@@ -733,10 +733,10 @@ export const PROOFS: Proof[] = [
     statement:
       'For A a connected groupoid with automorphism group G ≠ 1 (A = BG) and the usual weak equivalences, 𝒲_A consists of the isomorphisms only, hence is stable under finite products, while A is not aspherical: condition (ii) of the lemma of pages 32–35 does not imply asphericity.',
     found:
-      'Holds, in a model where weak equivalences of groupoids are read 1-truncated (bijective on components, isomorphisms on automorphism groups), a classical characterisation taken as definition. A map of G-sets is in 𝒲_A iff it is bijective, so 𝒲_A is stable under products of any family, finite or not — infinite products being left open by the page in general. For G ≠ 1 neither A nor a × a (a the regular G-set) is aspherical, so for BG Cisinski’s condition (g) holds while (a) fails. Not formalised: the identification of the model with the nerve, and the equivalences of pages 33–34.',
+      'Holds, in a model where weak equivalences of groupoids are read 1-truncated (bijective on components, isomorphisms on automorphism groups), a classical characterisation taken as definition. A map of G-sets is in 𝒲_A iff it is bijective, so 𝒲_A is stable under products of any family, finite or not — infinite products being left open by the page in general. For G ≠ 1 neither A nor a × a (a the regular G-set) is aspherical, so for BG Cisinski’s condition (g) holds while (a) fails. Modelling the canonical functor A/(X × Y) → A/X × A/Y as (X × Y)//G → (X × Y)//(G × G), g ↦ (g, g), (g) holds and (c) fails for every G ≠ 1 — (G × G)//G has one component per element of G, G//G × G//G only one — so (g) ⇏ (c) in Proposition 4.3.2 of Astérisque 308, as Cisinski confirmed on MathOverflow; (c) holds iff G = 1. Not formalised: the identification of the model with the nerve, and the equivalences of pages 33–34.',
     verdict: 'holds',
     lean: 'lean/Grothendieck/Folder118.lean',
-    theorems: ['isWeq_iff_bijective', 'isWeq_prod', 'isWeq_pi', 'not_aspherical_point', 'not_aspherical_regular_prod', 'answer_page_35'],
+    theorems: ['isWeq_iff_bijective', 'isWeq_prod', 'isWeq_pi', 'not_aspherical_point', 'not_aspherical_regular_prod', 'answer_page_35', 'isWeqOver_id_iff', 'condition_g_holds', 'not_isWeqOver_regular', 'not_isWeqOver_point', 'not_condition_c', 'condition_c_iff_subsingleton', 'g_not_imp_c'],
   },
   {
     folder: '29',

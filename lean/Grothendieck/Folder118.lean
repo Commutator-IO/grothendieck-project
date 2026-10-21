@@ -113,4 +113,128 @@ theorem answer_page_35 [Nontrivial G] :
     ¬ Aspherical G PUnit ∧ ¬ Aspherical G (G × G) :=
   ⟨fun _ _ hf hf' => isWeq_prod hf hf', not_aspherical_point, not_aspherical_regular_prod⟩
 
+/-! ### Cisinski, Astérisque 308, Proposition 4.3.2: (g) does not imply (c)
+
+The comparison of this section with Cisinski's book is the edition's, not the page's.
+Cisinski (*Les préfaisceaux comme modèles des types d'homotopie*, Astérisque 308, 2006,
+doi:10.24033/ast.715), Proposition 4.3.2, lists conditions on a small category `A` claimed
+equivalent, among them (c): for presheaves `X`, `Y` on `A`, the canonical functor
+`A/(X × Y) → A/X × A/Y` is a weak equivalence, and (g): `𝒲_A` is stable under finite
+products. For `A = BG`, `G ≠ 1`, (g)
+holds (`condition_g_holds`) and (c) fails (`not_condition_c`; witnesses
+`not_isWeqOver_regular`, `not_isWeqOver_point`), so (g) does not imply (c) (`g_not_imp_c`).
+Cisinski confirmed on MathOverflow (https://mathoverflow.net/questions/516223, answer of
+21 October 2026) that (g) ⇒ (c) needs a further assumption, e.g. that `A` be a test category.
+
+Same 1-truncated model as above. A functor of action groupoids `X//G → Y//H` is given by a
+group morphism `φ : G →* H` and a map `f : X → Y` with `f (g • x) = φ g • f x`; it is a weak
+equivalence (`IsWeqOver`) iff it is bijective on orbits and `Stab(x) → Stab(f x)`, `g ↦ φ g`,
+is bijective — again a definition, not proved from nerves. `A/X × A/Y` is the action
+groupoid of `G × G` on `ExtProd X Y = X × Y`, and the canonical functor is
+`(X × Y)//G → (X × Y)//(G × G)`, `(x, y) ↦ (x, y)`, `g ↦ (g, g)`. The direction (c) ⇒ (g),
+which Cisinski keeps, holds in the model only because (g) always does (`condition_g_of_c`).
+-/
+
+section Cisinski
+
+universe u
+
+/-- A functor `X//G → Y//H` given by `φ` and `f` is a weak equivalence, read 1-truncated:
+surjective and injective on orbits, surjective and injective on automorphism groups. -/
+def IsWeqOver {G H X Y : Type*} [Group G] [Group H] [MulAction G X] [MulAction H Y]
+    (φ : G →* H) (f : X → Y) : Prop :=
+  (∀ y : Y, ∃ (x : X) (h : H), h • f x = y) ∧
+  (∀ (x x' : X) (h : H), h • f x = f x' → ∃ g : G, g • x = x') ∧
+  (∀ (x : X) (h : H), h • f x = f x → ∃ g : G, g • x = x ∧ φ g = h) ∧
+  (∀ (x : X) (g : G), g • x = x → φ g = 1 → g = 1)
+
+/-- Over the identity of `G`, `IsWeqOver` is `IsWeq`. -/
+theorem isWeqOver_id_iff {X Y : Type*} [MulAction G X] [MulAction G Y] (f : X →[G] Y) :
+    IsWeqOver (MonoidHom.id G) f ↔ IsWeq G f := by
+  simp only [IsWeqOver, IsWeq, MonoidHom.id_apply, exists_eq_right]
+  exact ⟨fun ⟨h₁, h₂, h₃, _⟩ => ⟨h₁, h₂, h₃⟩, fun ⟨h₁, h₂, h₃⟩ => ⟨h₁, h₂, h₃, fun _ _ _ => id⟩⟩
+
+/-- `X × Y` with `G × H` acting factorwise: the objects of `X//G × Y//H`. -/
+def ExtProd (X Y : Type*) : Type _ := X × Y
+
+instance {G H X Y : Type*} [Group G] [Group H] [MulAction G X] [MulAction H Y] :
+    MulAction (G × H) (ExtProd X Y) where
+  smul g p := ((g.1 • p.1 : X), (g.2 • p.2 : Y))
+  one_smul p := Prod.ext (one_smul G p.1) (one_smul H p.2)
+  mul_smul g g' p := Prod.ext (mul_smul g.1 g'.1 p.1) (mul_smul g.2 g'.2 p.2)
+
+theorem extProd_smul {G H X Y : Type*} [Group G] [Group H] [MulAction G X] [MulAction H Y]
+    (g : G × H) (p : ExtProd X Y) : g • p = ((g.1 • p.1 : X), (g.2 • p.2 : Y)) := rfl
+
+/-- The diagonal `G →* G × G`, on arrows of `A/(X × Y) → A/X × A/Y`. -/
+abbrev diagHom (G : Type*) [Group G] : G →* G × G := (MonoidHom.id G).prod (MonoidHom.id G)
+
+/-- The canonical functor `A/(X × Y) → A/X × A/Y` for `A = BG`, on objects. -/
+def canonical (X Y : Type*) : X × Y → ExtProd X Y := id
+
+/-- Condition (c) of Cisinski's Proposition 4.3.2 for `A = BG`, in the model. -/
+def condition_c (G : Type u) [Group G] : Prop :=
+  ∀ (X Y : Type u) [MulAction G X] [MulAction G Y], IsWeqOver (diagHom G) (canonical X Y)
+
+/-- Condition (g) of Cisinski's Proposition 4.3.2 for `A = BG`, in the model. -/
+def condition_g (G : Type u) [Group G] : Prop :=
+  ∀ (X Y X' Y' : Type u) [MulAction G X] [MulAction G Y] [MulAction G X'] [MulAction G Y']
+    (f : X →[G] Y) (f' : X' →[G] Y'), IsWeq G f → IsWeq G f' → IsWeq G (prodHom f f')
+
+/-- (g) holds for `A = BG`: `isWeq_prod`. -/
+theorem condition_g_holds (G : Type u) [Group G] : condition_g G :=
+  fun _ _ _ _ _ _ _ _ _ _ => isWeq_prod
+
+/-- (c) ⇒ (g) in the model, only because (g) always holds there. -/
+theorem condition_g_of_c {G : Type u} [Group G] (_ : condition_c G) : condition_g G :=
+  condition_g_holds G
+
+/-- For `X = Y = a` the regular `G`-set and `G ≠ 1`, the canonical functor
+`(G × G)//G → G//G × G//G` is not a weak equivalence: `(1, 1)` and `(1, a)`, `a ≠ 1`, lie in
+one component of the target (which is a point) but in two components of the source (which
+has one per element of `G`, the orbit of `(g, h)` being labelled by `g⁻¹ h`). -/
+theorem not_isWeqOver_regular [Nontrivial G] : ¬ IsWeqOver (diagHom G) (canonical G G) := by
+  rintro ⟨-, h, -⟩
+  obtain ⟨a, ha⟩ := exists_ne (1 : G)
+  obtain ⟨g, hg⟩ := h (1, 1) (1, a) (1, a) (Prod.ext (mul_one 1) (mul_one a))
+  simp only [Prod.smul_mk, smul_eq_mul, mul_one, Prod.mk.injEq] at hg
+  exact ha (hg.2.symm.trans hg.1)
+
+/-- For `X = Y = e` the terminal `G`-set and `G ≠ 1`, the canonical functor `BG → BG × BG`
+is not a weak equivalence: the diagonal `G → G × G` misses `(1, a)`, `a ≠ 1`. -/
+theorem not_isWeqOver_point [Nontrivial G] :
+    ¬ IsWeqOver (diagHom G) (canonical PUnit PUnit) := by
+  rintro ⟨-, -, h, -⟩
+  obtain ⟨a, ha⟩ := exists_ne (1 : G)
+  obtain ⟨g, -, hg⟩ := h (PUnit.unit, PUnit.unit) (1, a) rfl
+  simp only [MonoidHom.prod_apply, MonoidHom.id_apply, Prod.mk.injEq] at hg
+  exact ha (hg.2.symm.trans hg.1)
+
+/-- (c) fails for `A = BG`, `G ≠ 1`. -/
+theorem not_condition_c (G : Type u) [Group G] [Nontrivial G] : ¬ condition_c G :=
+  fun h => not_isWeqOver_regular (h G G)
+
+/-- (c) holds for `A = BG` exactly when `G` is trivial. -/
+theorem condition_c_iff_subsingleton (G : Type u) [Group G] :
+    condition_c G ↔ Subsingleton G := by
+  refine ⟨fun h => ?_, fun _ X Y _ _ => ?_⟩
+  · by_contra hG
+    have := not_subsingleton_iff_nontrivial.1 hG
+    exact not_condition_c G h
+  · refine ⟨fun y => ⟨y, 1, one_smul _ _⟩, fun x x' k hk => ⟨1, ?_⟩,
+      fun x k _ => ⟨1, one_smul _ _, Subsingleton.elim _ _⟩,
+      fun _ g _ _ => Subsingleton.elim _ _⟩
+    rw [Subsingleton.elim k 1, one_smul] at hk
+    rw [one_smul]
+    exact hk
+
+/-- **Cisinski, Proposition 4.3.2, (g) ⇏ (c)**, for `A = BG`, `G ≠ 1`, in the model: `𝒲_A`
+is stable under finite products, while `A/(X × Y) → A/X × A/Y` is not always a weak
+equivalence. -/
+theorem g_not_imp_c (G : Type u) [Group G] [Nontrivial G] :
+    condition_g G ∧ ¬ condition_c G :=
+  ⟨condition_g_holds G, not_condition_c G⟩
+
+end Cisinski
+
 end Grothendieck.Folder118
