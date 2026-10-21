@@ -881,4 +881,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder53.lean',
     theorems: ['isUnit_of_isLeftCancelMul', 'inv_mem_of_isClosed', 'eval_translation'],
   },
+  {
+    folder: '46',
+    batch: 5,
+    page: '90–92',
+    name: 'Reduction mod 𝔪 of H¹(Γ, A*) when p ∤ |Γ|',
+    statement:
+      'For 𝒪 local of residue characteristic p, Γ finite and A a finite (𝒪, Γ)-algebra, possibly noncommutative (the margin has M_n(𝒪)), page 90 claims H¹(Γ, A*) → H¹(Γ, (A/𝔪A)*) × H¹(Λ, A*) injective, Λ a Sylow p-subgroup, and « en particulier » H¹(Γ, A*) → H¹(Γ, (A/𝔪A)*) injective when p ∤ |Γ|; the reading keeps the trivial-kernel form. The proof (pp. 91–92) corrects a cocycle modulo each 𝔪ⁿA and uses the margin’s hypothesis, largely illegible, that A^Γ → A/𝔪A is onto.',
+    found:
+      'The case p ∤ |Γ| holds, more generally: for O local commutative and A any O-algebra with Γ acting by ring automorphisms, with 𝔪ᴺA = 0 or A finite over O, a cocycle c(gh) = c(g)·g(c(h)) in Aˣ whose reduction mod 𝔪A (or along any surjective equivariant map with kernel in 𝔪A) is a coboundary is one. One average does the page’s induction at once: b = Σ c(σ)σ(w) satisfies c(γ)γ(b) = b, and b ≡ |Γ|w is a unit when w lifts the inverse of the trivialising element, since 1 + 𝔪A ⊂ Aˣ (nilpotence, or Nakayama). Neither the margin’s surjectivity nor Γ trivial on the residue field is used. C₂ acting trivially on ℤ/4 with γ ↦ −1 shows p ∤ |Γ| is needed. The commutative case follows from Lorenz (J. Algebra 214, 1999, §3.6). The Sylow form and the reduction of injectivity to the kernel are not formalised.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder46.lean',
+    theorems: ['ker_trivial', 'ker_trivial_of_pow_smul_eq_bot', 'isCoboundary_of_map_isCoboundary', 'not_isCoboundary_signCocycle'],
+  },
 ];

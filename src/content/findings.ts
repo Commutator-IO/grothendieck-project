@@ -6446,10 +6446,13 @@ export const FINDINGS: Finding[] = [
       'Page 90 states injectivity of H¹(Γ, A*) → H¹(Γ, (A/𝔪A)*) × H¹(Λ, A*); pages 91–92 prove triviality mod 𝔪ⁿ by induction, reducing each step to additive cohomology H¹(Γ, 𝔪ⁿA/𝔪ⁿ⁺¹A), using the hypothesis on Λ, an invariant lift v ∈ A^Γ of ε(u), and injectivity of restriction to Λ since [Γ:Λ] is invertible on A.',
     ours:
       'The hypothesis A^Γ → A/𝔪A surjective is the margin\'s, which is largely \\ill{} and \\uncertain{} (« plus généralement supposons que … surjectif »); the main text\'s hypothesis (Γ trivial on A/𝔪A) does not imply it for an imperfect residue field. The reading states only the trivial-kernel form, because the page\'s reduction of injectivity to the kernel by twisting needs the hypothesis to survive the twist, which the page does not check; the final passage to the limit is by Artin–Rees, made explicit by the reading.',
-    literature: [],
+    literature: [
+      'M. Lorenz, « K₀ of invariant rings and nonabelian H¹ », J. Algebra 214 (1999), 458–478, doi:10.1006/jabr.1998.7725; the Lemma of §3.6 read in the arXiv preprint math/9808032 (2026-10-21), the published version not consulted: for S commutative with surjective trace S → S^G (e.g. |G| invertible), H¹(G, GL_n(S)) → H¹(G, GL_n(S/rad S)) has trivial kernel. With n = 1 and 𝔪A ⊂ rad A this gives the commutative case of « reduction mod 𝔪 has trivial kernel when p ∤ |Γ| »; the noncommutative case and the Sylow form are not there.',
+    ],
     status: 'unsearched',
     settle:
       'Compare with Lorenz 1998 (arXiv math/9808032), Lemma 3.6 (reduction modulo the Jacobson radical has trivial kernel) and with the standard Sylow-restriction argument in Serre, Corps locaux / Cohomologie galoisienne; and re-read the margin of page 90 on the facsimile, since the hypothesis the proof uses rests on illegible words.',
+    lean: { file: 'lean/Grothendieck/Folder46.lean', found: 'Partly: the case p ∤ |Γ| (the page’s « en particulier »), more generally than stated — for O local commutative and A any O-algebra, possibly noncommutative, with Γ acting by ring automorphisms, and either 𝔪ᴺA = 0 or A finite over O, a cocycle Γ → Aˣ whose reduction mod 𝔪A is a coboundary is a coboundary (ker_trivial_of_pow_smul_eq_bot, ker_trivial), by the Hilbert-90 average b = Σ c(σ)σ(w), which replaces the page’s induction on 𝔪ⁿ. Neither the margin’s A^Γ → A/𝔪A onto nor Γ trivial on the residue field is used, nor any action on O; the finite case needs no Artin–Rees (Nakayama). Γ = C₂ acting trivially on ℤ/4 with γ ↦ −1 shows p ∤ |Γ| is needed (not_isCoboundary_signCocycle). The Sylow form (the factor H¹(Λ, A*)) and the reduction of injectivity to the kernel are not formalised.' },
   },
   {
     id: '46-homeomorphism-affine',

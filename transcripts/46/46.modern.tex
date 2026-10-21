@@ -70,6 +70,11 @@
 % off), and the conclusion of p. 94.
 %
 % Pass: Opus 5.5 (claude-opus-5-5), 2026-10-03 — first pass, unchecked against the pages by a human.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-21 — pp. 90-92, the case p not
+%   dividing |Gamma|: footnoted with the Lean check (ker_trivial,
+%   ker_trivial_of_pow_smul_eq_bot, not_isCoboundary_signCocycle), which uses
+%   neither the margin's surjectivity nor the trivial action on k; the Sylow
+%   form not formalised.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -1779,7 +1784,19 @@ $H^1(\Gamma, A^{*}) \to H^1(\Gamma, (A/\mathfrak{m}A)^{*}) \times H^1(\Lambda,
 A^{*})$ (après avoir biffé « bijective ») et se ramène à $g = 1$. La réduction
 de l'injectivité au noyau, par torsion, demande que l'hypothèse sur
 $A^{\Gamma}$ survive à la torsion, ce que la page ne vérifie pas ; on énonce ce
-qui est démontré.}
+qui est démontré. Lean vérifie le cas où $p$ ne divise pas $|\Gamma|$
+(lean/Grothendieck/Folder46.lean, \texttt{ker\_trivial},
+\texttt{ker\_trivial\_of\_pow\_smul\_eq\_bot}), pour une algèbre $A$
+quelconque, non nécessairement commutative, avec $\mathfrak{m}^{N}A = 0$ ou
+$A$ finie sur $\mathcal{O}$ : un cocycle trivial dans $H^1(\Gamma,
+(A/\mathfrak{m}A)^{*})$ l'est dans $H^1(\Gamma, A^{*})$. Une seule moyenne,
+$b = \sum_{\sigma} f(\sigma)\,\sigma(w)$, qui vérifie $f(\gamma)\,\gamma(b) =
+b$, remplace la récurrence ; ni la surjectivité de $A^{\Gamma} \to
+A/\mathfrak{m}A$ ni l'action triviale sur $k$ ne servent dans ce cas, et le
+cas fini se passe d'Artin--Rees. Le cocycle $\gamma \mapsto -1$ de
+$\mathbf{Z}/2$, opérant trivialement sur $\mathbf{Z}/4$, montre que
+l'hypothèse sur $p$ est nécessaire. La forme de Sylow n'est pas formalisée ;
+voir l'annexe Lean, section 46.}
 
 \emph{Démonstration.} Soit $\varepsilon : A \to A/\mathfrak{m}A$ la réduction.
 On montre par récurrence sur $n$ que $f$ est trivial modulo $\mathfrak{m}^{n}A$
