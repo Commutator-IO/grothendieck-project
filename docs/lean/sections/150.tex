@@ -8,7 +8,35 @@ La page~19 énonce une proposition de reconstruction (\lot{150}{1}{19}). Les sys
 
 \noindent\emph{Pourquoi la proposition demande une condition.} Les données de droite ne voient de $X_i$ que sa partie hors de l'intérieur de $T$. Dans $T$, la compatibilité reconstruit les segments à partir de leur base $X_i \cap \dot T$, mais elle laisse libre un morceau de $Y$ que $X_i$ peut contenir sans qu'aucun segment n'y aboutisse. Ce morceau est invisible à droite. L'exemple le plus petit est sur un segment.
 
-\noindent\emph{L'exemple.} On prend $X = [0, 1]$, $Y = \{0\}$ et $T = [0, \frac12]$, avec l'action $(\lambda, t) \mapsto \lambda t$. Le bord est $\dot T = \{\frac12\}$, l'application $f$ envoie $\frac12$ sur $0$, et $X^\sharp = [\frac12, 1]$. Le collier est $E = [\frac12, \frac34]$, identifié à $\dot T \times [0, 1]$ par $(\frac12, s) \mapsto \frac12 + \frac s4$. Le voisinage $T$ est strict, au sens de la page~14 : c'est $\frac12 \cdot X$, et $X$ est lui-même un voisinage conique de $Y$ pour la même action.
+\noindent\emph{L'exemple.} On prend $X = [0, 1]$, $Y = \{0\}$ et $T = [0, \frac12]$, avec l'action $(\lambda, t) \mapsto \lambda t$. Le bord est $\dot T = \{\frac12\}$, l'application $f$ envoie $\frac12$ sur $0$, et $X^\sharp = [\frac12, 1]$. Le collier est $E = [\frac12, \frac34]$, identifié à $\dot T \times [0, 1]$ par $(\frac12, s) \mapsto \frac12 + \frac s4$. Le voisinage $T$ est strict, au sens de la page~14 : c'est $\frac12 \cdot X$, et $X$ est lui-même un voisinage conique de $Y$ pour la même action (figure~\ref{fig:150-segment}).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=9.5cm, y=1cm, >=stealth, every node/.style={font=\small}]
+% X = [0, 1] et ses morceaux
+\fill[black!10] (0.5,-0.09) rectangle (0.75,0.09);
+\draw[thick] (0,0) -- (1,0);
+\foreach \x/\l in {0/0, 0.5/\tfrac12, 0.75/\tfrac34, 1/1} { \draw (\x,-0.1) -- (\x,0.1); \node[below=2pt] at (\x,-0.1) {$\l$}; }
+\fill[piste] (0,0) circle (2pt);
+\node[piste, left=4pt] at (0,0) {$Y = \{0\}$};
+\fill (0.5,0) circle (2pt);
+\node[above] at (0.5,0.1) {$\dot T = \{\frac12\}$};
+\node[black!65] at (0.625,-0.36) {\footnotesize collier $E$};
+\draw[decorate, decoration={brace, amplitude=5pt}] (0.005,0.75) -- node[above=5pt] {$T = [0, \frac12]$} (0.495,0.75);
+\draw[->, black!65] (0.41,0.35) -- node[above] {\footnotesize $t \mapsto \lambda t$} (0.06,0.35);
+\draw[decorate, decoration={brace, amplitude=5pt, mirror}] (0.5,-0.72) -- node[below=5pt] {$X^\sharp = [\frac12, 1]$, de bord $\dot T$} (1,-0.72);
+% les deux fermés
+\foreach \y/\l/\p in {-2.1/{$X_1 = \{0\}$}/1, -2.9/{$X_1 = \emptyset$}/0} {
+  \draw[black!30] (0,\y) -- (1,\y);
+  \draw[black!30, line width=3pt] (0.5,\y) -- (1,\y);
+  \node[anchor=east] at (-0.03,\y) {\l};
+  \ifnum\p=1 \fill[piste] (0,\y) circle (2pt); \fi
+  \node[black!65, anchor=west] at (1.02,\y) {\footnotesize trace vide};
+}
+\end{tikzpicture}
+\caption{L'exemple de la page~19 sur $X = [0, 1]$. Le voisinage conique $T$ de $Y$ est écrasé sur $0$ par l'action $t \mapsto \lambda t$, son bord est le point $\frac12$, et $X^\sharp$ est ce qui reste quand on ôte l'intérieur de $T$. Les deux fermés du bas sont compatibles avec $T$ et avec le collier, et leur trace sur $X^\sharp$, en gris épais, est vide dans les deux cas : les données de droite ne les distinguent pas. Le point $0$ du premier n'est la pointe d'aucun segment issu du bord, puisque $\dot X_1$ est vide ; c'est la condition $X_1 \cap Y = f(\dot X_1)$ qui l'exclut.}
+\label{fig:150-segment}
+\end{figure}
 
 \begin{encadre}
 \begin{contrexemple}[contre-exemple de l'édition, page~19]

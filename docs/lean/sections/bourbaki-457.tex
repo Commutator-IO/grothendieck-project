@@ -8,7 +8,39 @@ Cette section ne porte pas sur une cote du fonds de Montpellier. La rédaction n
 
 \emph{La page.} Le corollaire~6 de la proposition~14 (PDF, p.~32--33) considère une algèbre $A$ entière et séparable sur $k$, c'est-à-dire réunion filtrante de sous-algèbres étales de degré fini $A_i$, et affirme que son degré $[A:k]$ est égal au cardinal de $P(A)$ ; en particulier, $A$ est de degré fini si et seulement si $P(A)$ est fini. La démonstration ne traite que ce dernier point. Les $P(A_i)$ sont finis, $P(A)$ est leur limite projective, et les applications de transition sont surjectives ; un lemme sur les limites projectives d'ensembles finis non vides donne alors des surjections de $P(A)$ sur chaque $P(A_i)$, dont les cardinaux tendent vers l'infini. On a donc montré que $P(A)$ est infini lorsque $A$ est de degré infini, et rien de plus. Une note dactylographiée le reconnaît : le rédacteur y constate qu'il a donné à \q{card} la seule valeur $\infty$ pour tout ensemble infini. Un lecteur a écrit à l'encre, à droite de la formule, que l'égalité est fausse en dimension infinie, avec les mots \q{dénombrable} et \q{continu}. Le contre-exemple qui suit rend précise cette objection.
 
-\emph{Pourquoi l'égalité échoue en degré infini.} Une base dénombrable ne voit que des combinaisons finies, tandis qu'un point de $A$ est un choix compatible à tous les étages $A_i$ à la fois. L'ensemble de Cantor $C = \{0, 1\}^{\mathbf N}$ montre l'écart. Ses parties à la fois ouvertes et fermées sont les réunions finies de cylindres, un cylindre étant l'ensemble des suites qui commencent par un mot fini donné ; il n'y en a qu'une infinité dénombrable. Ses points sont les suites infinies de $0$ et de $1$, qui ont la puissance du continu. Les fonctions localement constantes $C \to k$ sont les combinaisons finies d'indicatrices de cylindres : elles forment une algèbre de dimension dénombrable, et chaque point de $C$ en donne un point, l'évaluation en ce point. Étage par étage, les fonctions qui ne dépendent que des $n$ premiers termes forment l'algèbre étale $k^{\{0,1\}^n}$, de degré $2^n$ et à $2^n$ points ; chaque étage double les deux nombres, mais à la limite la dimension reste dénombrable et les points deviennent les suites infinies.
+\emph{Pourquoi l'égalité échoue en degré infini.} Une base dénombrable ne voit que des combinaisons finies, tandis qu'un point de $A$ est un choix compatible à tous les étages $A_i$ à la fois. L'ensemble de Cantor $C = \{0, 1\}^{\mathbf N}$ montre l'écart. Ses parties à la fois ouvertes et fermées sont les réunions finies de cylindres, un cylindre étant l'ensemble des suites qui commencent par un mot fini donné ; il n'y en a qu'une infinité dénombrable. Ses points sont les suites infinies de $0$ et de $1$, qui ont la puissance du continu. Les fonctions localement constantes $C \to k$ sont les combinaisons finies d'indicatrices de cylindres : elles forment une algèbre de dimension dénombrable, et chaque point de $C$ en donne un point, l'évaluation en ce point. Étage par étage, les fonctions qui ne dépendent que des $n$ premiers termes forment l'algèbre étale $k^{\{0,1\}^n}$, de degré $2^n$ et à $2^n$ points ; chaque étage double les deux nombres, mais à la limite la dimension reste dénombrable et les points deviennent les suites infinies (figure~\ref{fig:457-cantor}).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.62cm, y=0.95cm, >=stealth, every node/.style={font=\small}]
+% le cylindre [01] : les branches qui passent par le noeud 01
+\fill[piste!12] (-2,-2) -- (-3.95,-4.75) -- (-0.05,-4.75) -- cycle;
+\foreach \d in {0,...,3} {
+  \pgfmathtruncatemacro{\n}{2^\d - 1}
+  \foreach \i in {0,...,\n} {
+    \pgfmathsetmacro{\x}{(\i + 0.5)*2^(4 - \d) - 8}
+    \pgfmathsetmacro{\xl}{(2*\i + 0.5)*2^(3 - \d) - 8}
+    \pgfmathsetmacro{\xr}{(2*\i + 1.5)*2^(3 - \d) - 8}
+    \draw[black!55] (\x,-\d) -- (\xl,-\d-1);
+    \draw[black!55] (\x,-\d) -- (\xr,-\d-1);
+    \fill (\x,-\d) circle (1.6pt);
+  }
+}
+\foreach \i in {0,...,15} { \fill (\i + 0.5 - 8,-4) circle (1.6pt); \draw[black!40, dotted] (\i + 0.5 - 8,-4) -- (\i + 0.5 - 8,-4.6); }
+\node[above left=-1pt] at (-2,-0.5) {\footnotesize $0$};
+\node[above right=-1pt] at (2,-0.5) {\footnotesize $1$};
+% la branche 1011...
+\draw[frise, very thick] (0,0) -- (4,-1) -- (2,-2) -- (3,-3) -- (3.5,-4);
+\draw[frise, very thick, dotted] (3.5,-4) -- (3.5,-4.6);
+\node[frise, below, align=center] at (3.5,-4.6) {\footnotesize branche $1011\ldots$,\\\footnotesize un point de $C$};
+\node[piste, below, align=center] at (-2,-4.6) {\footnotesize cylindre des suites\\\footnotesize qui commencent par $01$};
+\fill[piste] (-2,-2) circle (2.2pt);
+\node[piste, above left] at (-2,-2) {\footnotesize $01$};
+\foreach \d in {0,...,4} { \pgfmathtruncatemacro{\p}{2^\d} \node[black!65, anchor=west] at (8.4,-\d) {\footnotesize $2^{\d} = \p$}; }
+\end{tikzpicture}
+\caption{L'arbre binaire des mots finis, jusqu'à la longueur~$4$. Chaque n\oe ud est un mot $v$ et donne le cylindre des suites qui commencent par $v$ : il y en a $2^n$ à l'étage~$n$, une infinité dénombrable en tout, et leurs indicatrices engendrent l'algèbre $A$. Un point de $C$ est une branche infinie de l'arbre, un choix à chaque étage : il y en a la puissance du continu. La branche dessinée appartient aux cylindres $1$, $10$, $101$, $1011$, et non au cylindre $01$.}
+\label{fig:457-cantor}
+\end{figure}
 
 \begin{contrexemple}[Bourbaki, rédaction n\textsuperscript{o}\,457, corollaire~6]
 Soient $k$ un corps, $C = \{0, 1\}^{\mathbf N}$ et $A$ la sous-$k$-algèbre de $k^C$ formée des fonctions qui ne dépendent que d'un nombre fini de termes de la suite. Tout élément de $A$ est racine d'un polynôme unitaire séparable scindé sur $k$ ; en particulier $A$ est entière et séparable sur $k$. On a $[A:k] \leq \aleph_0$, et, pour toute $k$-algèbre non nulle $\Omega$, en particulier toute extension algébriquement close de $k$, l'ensemble des homomorphismes de $k$-algèbres $A \to \Omega$ a au moins la puissance du continu. Donc $[A:k] < \operatorname{card} P(A)$.

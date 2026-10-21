@@ -26,7 +26,36 @@ Soit $G$ un groupe non trivial et $A = BG$. La condition (g) est satisfaite, et 
 La condition (g) est la stabilité par produits établie plus haut. Pour (c), prenons $X = Y = a$, le $G$-ensemble régulier $G$. Dans $a/\!/G \times a/\!/G$, on passe de $(1, 1)$ à n'importe quel $(g, h)$ par la flèche $(g, h)$ : le but est connexe, et même équivalent au point, puisque l'action de $G \times G$ sur $G \times G$ est libre et transitive. Dans $(G \times G)/\!/G$, en revanche, $k$ envoie $(g, h)$ sur $(kg, kh)$ et conserve $g^{-1}h$ : il y a une composante par élément de $G$, et chacune est un point puisque l'action reste libre. Pour $a \neq 1$, les objets $(1, 1)$ et $(1, a)$ sont dans une même composante du but et dans deux composantes de la source ; le foncteur n'est pas bijectif sur les composantes. Avec $X = Y = e$, l'échec se lit sur les automorphismes : le foncteur $BG \to BG \times BG$ est la diagonale $G \to G \times G$, qui n'atteint pas $(1, a)$. Enfin, si $G = 1$, les orbites sont des points et les stabilisateurs triviaux, et le foncteur canonique est l'identité.
 \end{proof}
 
-Ce découpage de $A_{/a \times a}$ en $|G|$ morceaux, face au point $A_{/a} \times A_{/a}$, est ce qui sépare les deux conditions : la stabilité de $\mathcal W$ par produits finis dans $\mathsf{Cat}$ donne (c) $\Rightarrow$ (g), et le sens réciproque demande l'hypothèse supplémentaire évoquée plus haut. Lean démontre, dans le modèle tronqué, que (g) est satisfaite et (c) non pour tout $G \neq 1$ (\texttt{g\_not\_imp\_c}, avec les deux témoins \texttt{not\_isWeqOver\_regular} et \texttt{not\_isWeqOver\_point}), et que (c) équivaut à $G = 1$ (\texttt{condition\_c\_iff\_subsingleton}). L'implication (c) $\Rightarrow$ (g), qui vaut en général, n'y est vraie que parce que (g) l'est toujours (\texttt{condition\_g\_of\_c}) : elle n'est pas démontrée en général, pas plus que les autres conditions de la proposition~4.3.2 pour une catégorie $A$ quelconque.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.35cm, y=0.95cm, >=stealth, every node/.style={font=\scriptsize}, obj/.style={inner sep=1.5pt}, hl/.style={text=piste, draw=piste, rounded corners=2pt, inner sep=1.5pt}]
+% source : (G x G)//G, une composante par valeur de g^{-1}h
+\foreach \r/\c/\A/\B/\C/\s in {0/1/{(1,1)}/{(a,a)}/{(a^2,a^2)}/hl, 1/a/{(1,a)}/{(a,a^2)}/{(a^2,1)}/hl, 2/a^2/{(1,a^2)}/{(a,1)}/{(a^2,a)}/obj} {
+  \draw[black!45, rounded corners=6pt] (-0.5,-\r*1.25-0.42) rectangle (2.5,-\r*1.25+0.42);
+  \node[\s] (u0) at (0,-\r*1.25) {$\A$};
+  \node[obj] (u1) at (1,-\r*1.25) {$\B$};
+  \node[obj] (u2) at (2,-\r*1.25) {$\C$};
+  \draw[black!35] (u0) -- (u1) -- (u2);
+  \draw[black!35] (u0.north) to[bend left=20] (u2.north);
+  \node[black!60, anchor=east] at (-0.55,-\r*1.25) {$g^{-1}h = \c$};
+}
+\node[font=\small, align=center] at (1,1.05) {$(G \times G)/\!/G = A_{/a \times a}$\\[-1pt]{\scriptsize trois composantes, chacune un point}};
+% but : G//G x G//G, une seule composante
+\begin{scope}[xshift=6.6cm]
+\draw[black!45, rounded corners=8pt] (-0.5,-2.92) rectangle (2.5,0.42);
+\foreach \i/\g in {0/1, 1/a, 2/a^2} \foreach \j/\h in {0/1, 1/a, 2/a^2} {
+  \pgfmathtruncatemacro{\hlq}{(\i == 0) && (\j < 2)}
+  \ifnum\hlq=1 \node[hl] at (\j,-\i*1.25) {$(\g,\h)$}; \else \node[obj] at (\j,-\i*1.25) {$(\g,\h)$}; \fi
+}
+\node[font=\small, align=center] at (1,1.05) {$G/\!/G \times G/\!/G = A_{/a} \times A_{/a}$\\[-1pt]{\scriptsize une composante, équivalente au point}};
+\end{scope}
+\draw[->, thick] (2.6,-1.25) -- node[above] {$k \mapsto (k, k)$} (4.3,-1.25);
+\end{tikzpicture}
+\caption{Le foncteur canonique de la condition (c) pour $A = BG$, $G = \{1, a, a^2\}$ cyclique d'ordre~$3$, et $X = Y$ le $G$-ensemble régulier. À gauche, $k$ envoie $(g, h)$ sur $(kg, kh)$ et conserve $g^{-1}h$ : les neuf objets se répartissent en trois composantes, et deux objets d'une même composante sont reliés par une seule flèche. À droite, $G \times G$ agit librement et transitivement : la flèche $(1, a)$ relie $(1, 1)$ à $(1, a)$, encadrés, qui sont à gauche dans deux composantes distinctes. Le foncteur, bijectif sur les objets, n'est pas bijectif sur les composantes.}
+\label{fig:118-composantes}
+\end{figure}
+
+Ce découpage de $A_{/a \times a}$ en $|G|$ morceaux, face au point $A_{/a} \times A_{/a}$ (figure~\ref{fig:118-composantes}), est ce qui sépare les deux conditions : la stabilité de $\mathcal W$ par produits finis dans $\mathsf{Cat}$ donne (c) $\Rightarrow$ (g), et le sens réciproque demande l'hypothèse supplémentaire évoquée plus haut. Lean démontre, dans le modèle tronqué, que (g) est satisfaite et (c) non pour tout $G \neq 1$ (\texttt{g\_not\_imp\_c}, avec les deux témoins \texttt{not\_isWeqOver\_regular} et \texttt{not\_isWeqOver\_point}), et que (c) équivaut à $G = 1$ (\texttt{condition\_c\_iff\_subsingleton}). L'implication (c) $\Rightarrow$ (g), qui vaut en général, n'y est vraie que parce que (g) l'est toujours (\texttt{condition\_g\_of\_c}) : elle n'est pas démontrée en général, pas plus que les autres conditions de la proposition~4.3.2 pour une catégorie $A$ quelconque.
 
 \noindent\emph{Les sommes, page~35.} Pour montrer que (iv) est strictement plus faible que (i), la page avance que (iv) est \q{visiblement} stable par sommes de catégories, alors que (i) ne l'est pas, une somme n'étant pas connexe (\lot{118}{2}{35}). La seconde lecture a trouvé l'argument faux, et Lean le vérifie cette fois sans modèle tronqué, dans les catégories de mathlib. Soit $A = A_1 \amalg A_2$, avec $a$ dans $A_1$ et $b$ dans $A_2$. Le préfaisceau $a \times b$ associe à un objet $c$ l'ensemble des couples de flèches $c \to a$, $c \to b$ ; or aucun objet de la somme n'a de flèche vers les deux morceaux à la fois. Donc $a \times b$ est le préfaisceau vide, et $A_{/a \times b}$ est la catégorie vide. Une catégorie asphérique a un nerf contractile, elle est donc non vide et connexe, et la catégorie vide ne l'est pas. Lean n'emploie que cette conséquence, la connexité : l'échec vaut ainsi pour toute définition de l'asphéricité qui l'entraîne, celle du modèle tronqué comprise.
 

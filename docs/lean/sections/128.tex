@@ -10,7 +10,35 @@ La cote 128, \emph{Descente non plate. Modules formels}, trente et une pages non
 \end{itemize}
 La dernière condition dit que le sous-schéma de $X^3$ formé des $(x, y, z)$ avec $(x, y) \in R$ et $(y, z) \in R$ s'envoie dans $R$ par $(x, y, z) \mapsto (x, z)$. Les deux idéaux extrêmes sont $J = \Delta$, la diagonale, relation la plus fine, et $J = 0$, le produit tout entier, relation la moins fine.
 
-\noindent\emph{L'intuition.} Une $k$-algèbre de rang~$2$ est un \q{schéma à deux points}, au sens géométrique : deux points distincts ($k \times k$), un point double ($k[\varepsilon]$, $\varepsilon^2 = 0$), ou un seul point de degré~$2$ (une extension quadratique de $k$). Pour deux points, la question est celle des relations d'équivalence sur un ensemble à deux éléments, et il y en a deux. Pour le point double, on pourrait craindre une relation intermédiaire, qui identifierait le point à lui-même \q{à l'ordre un} sans l'identifier à son vecteur tangent ; la transitivité l'interdit.
+\noindent\emph{L'intuition.} Une $k$-algèbre de rang~$2$ est un \q{schéma à deux points}, au sens géométrique : deux points distincts ($k \times k$), un point double ($k[\varepsilon]$, $\varepsilon^2 = 0$), ou un seul point de degré~$2$ (une extension quadratique de $k$). Pour deux points, la question est celle des relations d'équivalence sur un ensemble à deux éléments, et il y en a deux. Pour le point double, on pourrait craindre une relation intermédiaire, qui identifierait le point à lui-même \q{à l'ordre un} sans l'identifier à son vecteur tangent ; la transitivité l'interdit (figure~\ref{fig:128-rang-deux}).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1cm, y=1cm, >=stealth, every node/.style={font=\small}]
+% Spec(k x k) : deux points, le carré a quatre points
+\draw[black!35] (0,-0.5) -- (2.6,-0.5) (-0.5,0) -- (-0.5,2.6);
+\foreach \x/\l in {0.6/x, 2/y} { \fill (\x,-0.5) circle (1.6pt); \node[below] at (\x,-0.5) {$\l$}; \fill (-0.5,\x) circle (1.6pt); \node[left] at (-0.5,\x) {$\l$}; }
+\draw[frise, thick, dashed] (0.2,0.2) -- (2.4,2.4) node[above right=-2pt] {$\Delta$};
+\foreach \x in {0.6, 2} \foreach \y in {0.6, 2} \draw[fill=white] (\x,\y) circle (2.2pt);
+\fill[frise] (0.6,0.6) circle (2.2pt) (2,2) circle (2.2pt);
+\node[align=center] at (1.05,-1.55) {$\operatorname{Spec}(k \times k)$ : \\ $0$ garde les quatre points, \\ $\Delta$ les deux de la diagonale};
+% Spec(k[eps]) : un point double ; trois sous-schémas du carré
+\begin{scope}[xshift=5.2cm]
+\foreach \c/\t/\col/\q/\ds/\dd in {0/{$J = 0$}/black/1/1/0, 3.2/{$J = k\,\varepsilon_1\varepsilon_2$}/piste/0/1/0, 6.4/{$J = \Delta$}/frise/0/0/1} {
+  \begin{scope}[xshift=\c cm]
+  \ifnum\q=1 \fill[black!15] (0,0) rectangle (1.1,1.1); \fi
+  \ifnum\ds=1 \draw[->, thick, \col] (0,0) -- (1.5,0) node[below] {$\varepsilon_1$}; \draw[->, thick, \col] (0,0) -- (0,1.5) node[left] {$\varepsilon_2$}; \fi
+  \ifnum\dd=1 \draw[->, thick, \col] (0,0) -- (1.2,1.2) node[above right=-2pt] {$\varepsilon_1 = \varepsilon_2$}; \fi
+  \fill (0,0) circle (2pt);
+  \node[\col] at (0.75,-0.75) {\t};
+  \end{scope}
+}
+\node[align=center] at (4,-1.55) {$\operatorname{Spec}(k[\varepsilon] \otimes_k k[\varepsilon]) = \operatorname{Spec} k[\varepsilon_1, \varepsilon_2]/(\varepsilon_1^2, \varepsilon_2^2)$ : un seul point, \\ avec ses directions tangentes $\varepsilon_1$, $\varepsilon_2$ et le terme croisé $\varepsilon_1 \varepsilon_2$ (en gris)};
+\end{scope}
+\end{tikzpicture}
+\caption{Les sous-schémas du carré $\operatorname{Spec}(A \otimes_k A)$ pour les deux modèles de rang~$2$. Pour $k \times k$, deux points, les relations $0$ et $\Delta$ sont le carré entier et sa diagonale. Pour $k[\varepsilon]$, un point double, le carré est un seul point épaissi ; $\Delta$ ne garde que la direction diagonale, et l'idéal intermédiaire $k\,\varepsilon_1\varepsilon_2$ ôte le seul terme croisé. Il n'est pas transitif : dans $A^{\otimes 3}$, placer le point du milieu à l'origine annule $\varepsilon_1\varepsilon_2$ et $\varepsilon_2\varepsilon_3$, mais pas $\varepsilon_1\varepsilon_3$.}
+\label{fig:128-rang-deux}
+\end{figure}
 
 \begin{theoreme}[Grothendieck, page 12, proposition~1 (i), cas d'un corps]\label{thm:128-deux}
 Soient $k$ un corps et $A$ une $k$-algèbre commutative de dimension~$2$. Les idéaux d'équivalence de $A \otimes_k A$ sont exactement $0$ et~$\Delta$.

@@ -231,8 +231,33 @@ F = \frac{\bigl(\prod_i [v_i\,p]\bigr)^{2(k-1)}}{D(v_1, \ldots, v_k)}.
 \]
 Chaque $v_i$ figure $2(k - 1)$ fois au numérateur et $2(k - 1)$ fois au dénominateur, donc son poids est nul ; $p$ a le poids $2k(k - 1)$, et $\det(g)$ l'exposant $2k(k - 1) - k(k - 1) = k(k - 1)$. Ce sont les poids de $L_n^{\otimes k(k-1)}$, avec $k(k - 1) = (n - 1)(n - 2)$. Pour $n = 5$, avec $p = \mu$ et les autres points en $0$, $1$, $\infty$, $\lambda$, on reconnaît en coordonnées affines, au signe près, la fonction $\mu^6(1 - \mu)^6(\lambda - \mu)^6/(\lambda^2(1 - \lambda)^2)$ du théorème~\ref{thm:146-douze}.
 
-Pour la minoration, on cherche des configurations qu'une renumérotation $\sigma$ envoie sur leur image par une matrice $g$. Si $F$ trivialise, $F(v) = F(v \circ \sigma) = F(g v)$, qui vaut $F(v)$ multiplié par le poids de $g$, et ce poids vaut donc $1$. Pour $L$, on prend le point $0$ et les $n - 1$ racines $(n-1)$-ièmes de l'unité, que la matrice $g = \mathrm{diag}(\omega, 1)$, de déterminant $\omega$, fait tourner ; on obtient $\omega^{mn} = 1$, donc $n - 1$ divise $mn$, et comme $n \equiv 1$ modulo $n - 1$, il divise $m$. Pour $L_n$, le $n$-ième point est en $0$. La même configuration donne $\omega^m = 1$, d'où $n - 1 \mid m$. La configuration formée de $0$, de $\infty$ et des racines $(n-2)$-ièmes de l'unité, que $\mathrm{diag}(\zeta, 1)$ fait tourner en fixant $0$ et $\infty$, donne $\zeta^m = 1$, d'où $n - 2 \mid m$. Le vecteur $(1, 0)$ de $\infty$ y est multiplié par $\zeta$, ce qui ne compte pas, car $F$ ne voit pas les multiples des autres points. Comme $n - 1$ et $n - 2$ sont premiers entre eux, leur produit divise $m$.
+Pour la minoration, on cherche des configurations qu'une renumérotation $\sigma$ envoie sur leur image par une matrice $g$ (figure~\ref{fig:146-rotations}). Si $F$ trivialise, $F(v) = F(v \circ \sigma) = F(g v)$, qui vaut $F(v)$ multiplié par le poids de $g$, et ce poids vaut donc $1$. Pour $L$, on prend le point $0$ et les $n - 1$ racines $(n-1)$-ièmes de l'unité, que la matrice $g = \mathrm{diag}(\omega, 1)$, de déterminant $\omega$, fait tourner ; on obtient $\omega^{mn} = 1$, donc $n - 1$ divise $mn$, et comme $n \equiv 1$ modulo $n - 1$, il divise $m$. Pour $L_n$, le $n$-ième point est en $0$. La même configuration donne $\omega^m = 1$, d'où $n - 1 \mid m$. La configuration formée de $0$, de $\infty$ et des racines $(n-2)$-ièmes de l'unité, que $\mathrm{diag}(\zeta, 1)$ fait tourner en fixant $0$ et $\infty$, donne $\zeta^m = 1$, d'où $n - 2 \mid m$. Le vecteur $(1, 0)$ de $\infty$ y est multiplié par $\zeta$, ce qui ne compte pas, car $F$ ne voit pas les multiples des autres points. Comme $n - 1$ et $n - 2$ sont premiers entre eux, leur produit divise $m$.
 \end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.45cm, y=1.45cm, >=stealth, every node/.style={font=\small}]
+% {0} U mu_5, tournée par z -> omega z
+\draw[black!35] (0,0) circle (1);
+\foreach \k/\l in {0/1, 1/\omega, 2/\omega^2, 3/\omega^3, 4/\omega^4} { \fill (\k*72:1) circle (2pt); \node at (\k*72:1.28) {$\l$}; }
+\fill[piste] (0,0) circle (2.3pt); \node[piste, below=2pt] at (0,0) {$0$};
+\draw[->, frise, thick] (12:0.55) arc (12:60:0.55);
+\node[frise] at (36:0.33) {\footnotesize $\omega$};
+\node[align=center] at (0,-1.75) {$\{0\} \cup \mu_5$, tournée par $z \mapsto \omega z$ \\ \footnotesize ($L$, et $L_n$ avec le $n$-ième point en $0$)};
+% {0, infini} U mu_4, tournée par z -> zeta z
+\begin{scope}[xshift=6.6cm]
+\draw[black!35] (0,0) circle (1);
+\foreach \k/\l in {0/1, 1/\zeta, 2/\zeta^2, 3/\zeta^3} { \fill (\k*90:1) circle (2pt); \node at (\k*90:1.27) {$\l$}; }
+\fill[piste] (0,0) circle (2.3pt); \node[piste, below=2pt] at (0,0) {$0$};
+\draw[->, frise, thick] (15:0.55) arc (15:75:0.55);
+\node[frise] at (45:0.33) {\footnotesize $\zeta$};
+\fill (1.25,1.15) circle (2pt); \node[right] at (1.25,1.15) {$\infty$, fixe};
+\node[align=center] at (0,-1.75) {$\{0, \infty\} \cup \mu_4$, tournée par $z \mapsto \zeta z$ \\ \footnotesize ($L_n$, le $n$-ième point en $0$)};
+\end{scope}
+\end{tikzpicture}
+\caption{Les deux configurations de la minoration, pour $n = 6$. À gauche, $0$ et les $n - 1 = 5$ racines cinquièmes de l'unité ; la matrice $\mathrm{diag}(\omega, 1)$ les fait tourner, ce qui revient à les renuméroter, et fixe $0$. À droite, $0$, $\infty$ et les $n - 2 = 4$ racines quatrièmes de l'unité, que $\mathrm{diag}(\zeta, 1)$ fait tourner en fixant $0$ et $\infty$. Le point $0$, qui porte $L_n$, est fixe, et le poids $\det(g)^m$ de la matrice doit valoir~$1$ : $\omega^m = 1$ à gauche, $\zeta^m = 1$ à droite, d'où $5 \mid m$ et $4 \mid m$, donc $20 \mid m$ pour $L_6$.}
+\label{fig:146-rotations}
+\end{figure}
 
 \begin{sloppypar}
 \noindent Vérifié (\texttt{br}, \texttt{Conf}, \texttt{disc}, \texttt{TrivL}, \texttt{TrivLi}, \texttt{disc\_smul}, \texttt{disc\_lin}, \texttt{disc\_perm}, \texttt{trivL\_of\_dvd}, \texttt{trivLi\_of\_dvd}, \texttt{dvd\_of\_trivL}, \texttt{dvd\_of\_trivLi}, \texttt{trivL\_iff}, \texttt{trivLi\_iff}). Ne sont pas démontrés en Lean : le dictionnaire entre fibrés en droites équivariants sur $M_{0,n}$ et fonctions de poids sur les configurations, l'accord de ce modèle avec les cocycles des coordonnées normalisées pour $n = 4$, $5$, $6$, et le fait que le groupe de Picard équivariant soit le $H^1$ des unités. Mathlib n'a pas les espaces de modules $M_{0,n}$.
