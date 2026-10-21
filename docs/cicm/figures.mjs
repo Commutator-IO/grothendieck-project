@@ -32,7 +32,7 @@ for (const f of files) {
 const total = Object.values(count).reduce((a, b) => a + b, 0);
 
 // Section name in the appendix -> Lean file stem.
-const stem = (s) => (s === 'bourbaki-288' ? 'Bourbaki288' : 'Folder' + s.replace(/-/g, '_'));
+const stem = (s) => (s.startsWith('bourbaki-') ? 'Bourbaki' + s.slice(9) : 'Folder' + s.replace(/-/g, '_'));
 
 // The appendix's parts, in its order, with English names.
 const english = {
