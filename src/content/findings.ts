@@ -3816,6 +3816,7 @@ export const FINDINGS: Finding[] = [
       'Page 12–13 Prop. 1 (A′/A ≅ k gives 𝔪A′ = 𝔪, reduces to a rank-2 k-algebra); pages 14–18 Prop. 2, split into the non-radicial case (reduced to A′₀ ≅ kⁿ, « on trouve n = 2 ») and the radicial case (Ω = Δ/Δ², 𝔪′² ⊂ 𝔪, reduction to A′ = k ⊕ V with V² = 0).',
     ours:
       'Much of the proof is the edition’s: the case k[ε] of Prop. 1 (i) (the page breaks off after « ε² = 0 »), the count 2(n−1) = n² − n behind « n = 2 », the justification that J is nilpotent, and the whole end of page 18 (dim V = 1), where the page stops at « il faut prouver ». The hypothesis on residue extensions is a marginal addition the reading folds into the statement; the case-split word « n’est pas [radiciel] » on page 14 is \\uncertain{} in the transcription.',
+    lean: { file: 'lean/Grothendieck/Folder128.lean', found: 'Partly: the last assertion in the case A = k only — for a commutative algebra of dimension 2 over any field, the equivalence ideals of A ⊗_k A are exactly 0 and Δ (eq_bot_or_eq_ker), k[ε] failing transitivity and k × k symmetry. The artinian reduction to that case (Prop. 3, Cor. 2 of N° 1) and the colength criterion of Prop. 2 are not formalised.' },
     literature: [],
     status: 'unsearched',
     settle:

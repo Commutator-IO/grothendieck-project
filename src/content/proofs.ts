@@ -855,4 +855,17 @@ export const PROOFS: Proof[] = [
     lean: 'lean/Grothendieck/Folder62.lean',
     theorems: ['sub_one_ne', 'one_sub_ne', 'den_ne', 'three_pow_ne', 'j_sub_j', 'j_eq_iff', 'j_inv', 'j_one_sub', 'j_div_sub_one', 'j_one_div_one_sub', 'j_sub_one_div', 'j_eq_zero_iff', 'one_sub_j', 'j_eq_one_iff', 'stabilizer_trivial_iff', 'j_eq_one_sub_jcl', 'kappa_kappa', 'j_kappa_mul'],
   },
+  {
+    folder: '128',
+    batch: 1,
+    page: '12–13',
+    name: 'The equivalence ideals of a rank-2 algebra over a field',
+    statement:
+      'Prop. 1 (i), page 12: if A′/A ≅ A/𝔪, Spec A′ carries exactly two equivalence relations over Spec A, the finest and the coarsest. Page 13 reduces it to A = k a field and A′ of rank 2 over k, treats k × k and stops after « A′ ≃ k[ε] ». An equivalence ideal J of A′ ⊗ A′ is contained in Δ = Ker(A′ ⊗ A′ → A′), stable under the exchange, and p₁₃(J) ⊂ p₁₂(J) + p₂₃(J).',
+    found:
+      'Holds in the field case, more generally than the page proves it: for any field k (not only algebraically closed) and any commutative k-algebra A of dimension 2 — k × k, k[ε] and quadratic extensions at once, without classifying them — the equivalence ideals of A ⊗_k A are exactly 0 and Δ (eq_bot_or_eq_ker, and both are equivalence ideals). For x ∉ k, Δ = A·(1 ⊗ x − x ⊗ 1); if A is a field a nonzero element of J gives δx ∈ J; an idempotent f ∉ k gives δf ∈ J by symmetry; for e² = 0, J ⊂ k(e ⊗ e) unless δe ∈ J, and e ⊗ e fails transitivity, e ⊗ 1 ⊗ e surviving a ⊗ b ⊗ c ↦ χ(b) a ⊗ c, which kills p₁₂(J) and p₂₃(J). The k[ε] case, missing on the page, is the edition’s. Not formalised: the real content, the reduction to the field case through Prop. 3 and its Cor. 2 (the artinian reduction modulo 𝔪, pp. 9–11), the passage from ideals to closed subschemes, and (ii)–(iii).',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder128.lean',
+    theorems: ['eq_bot_or_eq_ker', 'isEquivalenceIdeal_bot', 'isEquivalenceIdeal_ker'],
+  },
 ];

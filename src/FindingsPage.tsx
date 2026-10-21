@@ -519,7 +519,7 @@ const proofCtx = (p: (typeof PROOFS)[number]): CommentContext => ({
 
 function ProvedInLean() {
   const link = 'text-brand-700 underline decoration-brand-200 underline-offset-2';
-  // Ten cards at a time, as the list below: sixty-three folders already.
+  // Ten cards at a time, as the list below: sixty-four folders already.
   const [page, setPage] = useState(0);
   const shown = PROOFS.slice(page * PAGE, (page + 1) * PAGE);
   const turn = (p: number) => {

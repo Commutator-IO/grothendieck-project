@@ -1,0 +1,62 @@
+\section[Cote 128 : les idéaux d'équivalence d'une algèbre de rang deux]{Cote 128 : les idéaux d'équivalence d'une algèbre de rang deux\protect\verifie{Folder128}}\label{sec:128}
+
+La cote 128, \emph{Descente non plate. Modules formels}, trente et une pages non datées, compare le complexe d'Amitsur d'une extension $A \subset A'$ à celui de sa réduction modulo un idéal nilpotent. Sept pages (12 à 18) y sont consacrées à des \q{résultats auxiliaires sur les relations d'équivalence}. La proposition~1 de la page~12 affirme que, si $A'/A$ est isomorphe au corps résiduel $k = A/\mathfrak m$, il n'y a sur $\operatorname{Spec} A'$, au-dessus de $\operatorname{Spec} A$, que deux relations d'équivalence : la plus fine et la moins fine (\lot{128}{1}{12}). La page~13 ramène l'énoncé au cas où $A = k$ est un corps et $A'$ une $k$-algèbre de rang~$2$, traite $k \times k$ et s'arrête sur \q{$A' \simeq k[\varepsilon]$} (\lot{128}{1}{13}). C'est ce cas d'un corps qui est démontré ici.
+
+\noindent\emph{Idéaux d'équivalence.} Sur un ensemble $X$, une relation d'équivalence est une partie $R \subset X \times X$ qui contient la diagonale, est stable par l'échange $(x, y) \mapsto (y, x)$ et vérifie : si $(x, y)$ et $(y, z)$ sont dans $R$, $(x, z)$ aussi. Pour $X = \operatorname{Spec} A$ au-dessus d'un corps $k$, le produit $X \times_k X$ est $\operatorname{Spec}(A \otimes_k A)$, et un sous-schéma fermé de ce produit est donné par un idéal $J$ de $A \otimes_k A$, d'autant plus petit que le sous-schéma est gros. Les trois axiomes se traduisent alors ainsi (la lecture les énonce après la proposition~3 du n\textsuperscript{o}~1, pages 9 à~11) :
+\begin{itemize}
+\item réflexivité : $R$ contient la diagonale, c'est-à-dire $J \subset \Delta = \operatorname{Ker}(A \otimes_k A \to A, \ a \otimes b \mapsto ab)$ ;
+\item symétrie : $J$ est stable par l'échange $a \otimes b \mapsto b \otimes a$ ;
+\item transitivité : $p_{13}(J) \subset p_{12}(J) + p_{23}(J)$ dans $A \otimes_k A \otimes_k A$, où $p_{12}(a \otimes b) = a \otimes b \otimes 1$, $p_{13}(a \otimes b) = a \otimes 1 \otimes b$ et $p_{23}(a \otimes b) = 1 \otimes a \otimes b$ engendrent des idéaux.
+\end{itemize}
+La dernière condition dit que le sous-schéma de $X^3$ formé des $(x, y, z)$ avec $(x, y) \in R$ et $(y, z) \in R$ s'envoie dans $R$ par $(x, y, z) \mapsto (x, z)$. Les deux idéaux extrêmes sont $J = \Delta$, la diagonale, relation la plus fine, et $J = 0$, le produit tout entier, relation la moins fine.
+
+\noindent\emph{L'intuition.} Une $k$-algèbre de rang~$2$ est un \q{schéma à deux points}, au sens géométrique : deux points distincts ($k \times k$), un point double ($k[\varepsilon]$, $\varepsilon^2 = 0$), ou un seul point de degré~$2$ (une extension quadratique de $k$). Pour deux points, la question est celle des relations d'équivalence sur un ensemble à deux éléments, et il y en a deux. Pour le point double, on pourrait craindre une relation intermédiaire, qui identifierait le point à lui-même \q{à l'ordre un} sans l'identifier à son vecteur tangent ; la transitivité l'interdit.
+
+\begin{theoreme}[Grothendieck, page 12, proposition~1 (i), cas d'un corps]\label{thm:128-deux}
+Soient $k$ un corps et $A$ une $k$-algèbre commutative de dimension~$2$. Les idéaux d'équivalence de $A \otimes_k A$ sont exactement $0$ et~$\Delta$.
+\end{theoreme}
+
+\begin{proof}
+Les deux idéaux $0$ et $\Delta$ sont d'équivalence : pour $\Delta$, la symétrie vient de la commutativité de $A$, et la transitivité de l'identité $p_{13}(\delta s) = p_{12}(\delta s) + p_{23}(\delta s)$, où $\delta s = 1 \otimes s - s \otimes 1$, ces éléments engendrant~$\Delta$.
+
+Réciproquement, soit $J$ un idéal d'équivalence. Pour $x \in A$ hors de $k$, $(1, x)$ est une base de $A$, et $\Delta = A \cdot \delta x$ : le $A$-module $\Delta$ est engendré par les $\delta s$, et $\delta(c + dx) = d\,\delta x$. Tout élément de $J$ s'écrit donc $a \cdot \delta x = a \otimes x - ax \otimes 1$, et il suffit de montrer que $J = 0$ ou que $\delta x \in J$ pour un tel~$x$.
+
+Si tout élément non nul de $A$ est inversible, un élément non nul $a \cdot \delta x$ de $J$ donne $\delta x = a^{-1} \cdot (a \cdot \delta x) \in J$. Sinon, soit $e$ non nul et non inversible ; il n'est pas dans $k$, et $e^2 = s + re$ avec $s, r \in k$. Si $s \neq 0$, $e \cdot s^{-1}(e - r) = 1$ ; donc $s = 0$ et $e^2 = re$.
+
+Si $r \neq 0$, $f = e/r$ est un idempotent hors de $k$ (c'est le cas $k \times k$). Un élément de $J$ s'écrit $t = c\,(1 \otimes f) + d\,(f \otimes f) - (c + d)(f \otimes 1)$. On calcule $(f \otimes 1)\,t = (c + d)\,w_1$ et $(1 \otimes 1 - f \otimes 1)\,t = c\,w_2$, avec $w_1 = f \otimes f - f \otimes 1$ et $w_2 = 1 \otimes f - f \otimes f$. Si $t \neq 0$, l'un des scalaires $c + d$, $c$ est non nul, donc $w_1$ ou $w_2$ est dans~$J$. Or $w - \sigma(w) = \delta f$ pour $w = w_1$ comme pour $w = w_2$, où $\sigma$ est l'échange, et la symétrie donne $\delta f \in J$.
+
+Si $r = 0$, $e^2 = 0$ (c'est le cas $k[\varepsilon]$). Un élément de $J$ s'écrit $t = c\,\delta e + d\,(e \otimes e)$, et $(e \otimes 1)\,t = c\,(e \otimes e)$. Supposons $\delta e \notin J$. Si $c \neq 0$, $e \otimes e \in J$, puis $c\,\delta e = t - d\,(e \otimes e) \in J$, contradiction ; donc $J \subset k\,(e \otimes e)$. Si de plus $J \neq 0$, $e \otimes e \in J$. Soit $\chi : A \to k$ le caractère $c + de \mapsto c$, et $\varphi : A^{\otimes 3} \to A^{\otimes 2}$ le morphisme d'algèbres $a \otimes b \otimes c \mapsto \chi(b)\, a \otimes c$, qui \q{oublie le point du milieu}. Il annule $p_{12}(e \otimes e) = e \otimes e \otimes 1$ et $p_{23}(e \otimes e) = 1 \otimes e \otimes e$, donc les idéaux $p_{12}(J)$ et $p_{23}(J)$, mais envoie $p_{13}(e \otimes e) = e \otimes 1 \otimes e$ sur $e \otimes e \neq 0$. La transitivité est en défaut ; donc $J = 0$.
+
+Dans tous les cas, $J = 0$ ou $\delta x \in J$ pour un $x \notin k$, et alors $\Delta = A \cdot \delta x \subset J \subset \Delta$.
+\end{proof}
+
+\begin{remarque}
+La démonstration n'utilise ni la clôture algébrique de $k$, que la page s'accorde en interligne, ni la classification des algèbres de rang~$2$ : elle couvre d'un coup les extensions quadratiques, séparables ou non. Le cas $k[\varepsilon]$, que la page laisse après \q{$\varepsilon^2 = 0$}, est celui de la lecture : l'idéal $k\,\varepsilon_1\varepsilon_2$ est réflexif et symétrique, mais pas transitif. Le cas $k \times k$ se règle, lui, par la seule symétrie : les idéaux $k\,(f \otimes (1 - f))$ et $k\,((1 - f) \otimes f)$, réflexifs et transitifs, correspondent aux deux relations non symétriques d'un ensemble à deux éléments.
+\end{remarque}
+
+\noindent\emph{Portée de la vérification.} Lean formalise la définition des idéaux d'équivalence par les trois conditions ci-dessus, pour $A$ commutative de dimension~$2$ sur un corps quelconque, et démontre le théorème~\ref{thm:128-deux} dans les deux sens. L'idéal $\Delta$ y est le noyau de la multiplication \texttt{Algebra.TensorProduct.lmul'}, et le fait que les $\delta s$ l'engendrent comme $A$-module vient de mathlib, où il sert à définir les différentielles de Kähler.
+
+Le vrai contenu de la proposition~1 (i) est ailleurs : la réduction du cas général au cas d'un corps. Elle passe par la proposition~3 du n\textsuperscript{o}~1 et son corollaire~2 (pages 9 à~11) : la réduction modulo $\mathfrak m$ induit une bijection entre les idéaux d'équivalence de $A' \otimes_A A'$ et ceux de $A'_0 \otimes_k A'_0$, parce que l'idéal d'augmentation se réduit isomorphiquement (lemme du serpent). Ni cette réduction artinienne, ni la traduction entre idéaux et sous-schémas fermés, ni les points (ii) et (iii) de la proposition ne sont formalisés.
+
+Ne sont pas démontrés ici, de la même cote :
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 4 à 9, descente plate dans un carré de Milnor\piste{128-nilpotent-conductor-flat-descent}]\nonverifie
+Soit $I$ un idéal nilpotent de $A$ qui s'envoie isomorphiquement sur un idéal de $A'$. Si $\operatorname{Spec} A'/IA' \to \operatorname{Spec} A/I$ est un morphisme de descente effective pour les modules plats, $\operatorname{Spec} A' \to \operatorname{Spec} A$ l'est aussi, et le reste après changement de base plat.
+\end{theoreme*}
+\end{encadre}
+{\small Les feuillets en esquissent une démonstration incomplète : le dernier pas de la page~6, l'isomorphisme $E \otimes A' \to E'$, est illisible et reconstitué par l'édition, qui écrit aussi la récurrence sur l'ordre de nilpotence de~$I$.\par}
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 12 à 18, colongueur un\piste{128-colength-one-equivalence-criterion}]\nonverifie
+Soient $A$ local artinien et $A'$ une $A$-algèbre finie à extensions résiduelles triviales. Si un idéal d'équivalence $J$ rend exacte $A \to A' \rightrightarrows (A' \otimes_A A')/J$ et si $\delta(x') = p_2(x') - p_1(x')$ engendre l'idéal $\Delta$ pour tout $x' \notin A$, alors $\mathrm{long}(A'/A) \leq 1$ ; si $A'/A \simeq A/\mathfrak m$, $\operatorname{Spec} A'$ porte exactement deux relations d'équivalence sur $\operatorname{Spec} A$.
+\end{theoreme*}
+\end{encadre}
+{\small Le théorème~\ref{thm:128-deux} en est le cas $A = k$ de la dernière assertion. Les feuillets esquissent une démonstration incomplète du reste : le cas \q{$n = 2$} est annoncé sans le calcul, et la page~18 s'achève sur \q{il faut prouver}.\par}
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 19 à 29, descente infinitésimale\piste{128-infinitesimal-descent-theorem}]\nonverifie
+Soient $A$ un anneau semi-local noethérien de radical $\mathfrak m$, $A'$ une $A$-algèbre finie, $A_n = A/\mathfrak m^{n+1}$ et $A'_n = A' \otimes_A A_n$. Les trois conditions suivantes, imposées pour tout $n$, sont équivalentes : $H^1(A'_n/A_n) = 0$ ; $H^1(A'_n/A_n, \mathrm{GL}_r)$ est trivial ; la descente des modules quasi-cohérents plats le long de $\operatorname{Spec} A'_n \to \operatorname{Spec} H^0(A'_n/A_n)$ est effective. Elles entraînent la descente effective des modules plats de type fini le long de $\operatorname{Spec} A' \to \operatorname{Spec} H^0(A'/A)$.
+\end{theoreme*}
+\end{encadre}
+{\small Mathlib n'a pas la descente ni $H^1(A'/A, \mathrm{GL}_r)$. On se reportera aux notes de Grothendieck (\lot{128}{1}{19}).\par}
