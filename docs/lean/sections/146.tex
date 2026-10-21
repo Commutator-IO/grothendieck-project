@@ -1,4 +1,4 @@
-\section[Cote 146 : les exposants trivialisants de $L_i$ et de $L$ sur $M_{0,4}$ et $M_{0,5}$]{Cote 146 : les exposants trivialisants de $L_i$ et de $L$ sur $M_{0,4}$ et $M_{0,5}$\protect\verifie{Folder146}}\label{sec:146}
+\section[Cote 146 : les exposants trivialisants de $L_i$ et de $L$ sur $M_{0,4}$, $M_{0,5}$ et $M_{0,6}$]{Cote 146 : les exposants trivialisants de $L_i$ et de $L$ sur $M_{0,4}$, $M_{0,5}$ et $M_{0,6}$\protect\verifie{Folder146}}\label{sec:146}
 
 La cote 146, \emph{Groupoïdes de Teichmüller}, cent trente-trois pages que l'inventaire date \q{[à partir de 1978]}, porte page~70 un tableau : pour $n = \operatorname{card} I = 4, 5, 6$, le plus petit exposant qui rend trivial, de façon compatible au groupe symétrique, le fibré $L = \bigotimes L_i$ sur $M_{0,I}$, et les fibrés $L_i$ attachés aux points marqués (\lot{146}{4}{70}). Pour $n = 4$ il donne $3$ pour $L$ et $6$ pour $L_i$ ; les colonnes $n = 5$ et~$6$ portent des points d'interrogation. La lecture ne vérifie pas le tableau, et la piste tombe si les valeurs pour $n = 4$ ne se vérifient pas.
 
@@ -129,9 +129,59 @@ Le $12$ de la page pour $L$ est donc un exposant qui trivialise, celui que donne
 \noindent Vérifié au niveau des cocycles (\texttt{cL\_pow\_four}, \texttt{coboundary\_cL\_iff}, \texttt{c5\_pow\_twelve}, \texttt{coboundary\_c5\_iff}). Lean manipule les mots en $s_1, \ldots, s_4$ : la substitution d'un mot est la composée, son facteur est donné par la règle de cocycle (\texttt{wAct}, \texttt{wCoc}), et l'énoncé \q{pour tout élément du groupe} devient \q{pour tout mot}. Ne sont pas démontrés en Lean : que les substitutions et les facteurs vérifient les relations de Coxeter de $\mathfrak S_5$, de sorte que les mots passent au groupe (vérifié par le calcul formel), et la dérivation des facteurs $c_L$, $c_5$ à partir des homographies, faite ci-dessus.
 \end{sloppypar}
 
-\begin{remarque}
-Le même calcul pour $n = 6$, avec trois coordonnées et neuf facteurs inversibles, donne l'ordre $5$ pour $L$ et l'ordre $20$ pour $L_6$, au lieu des valeurs \q{$20\,?$} et \q{$60\,?$} du tableau. Les minorations viennent des points fixes : la configuration formée de $0$ et des racines cinquièmes de l'unité, fixée par $z \mapsto e^{2i\pi/5} z$, donne une racine primitive cinquième ; celle de $0$, $\infty$ et des racines quatrièmes, fixée par $z \mapsto iz$, donne $i$ pour $L_6$ (pour $L$, les facteurs en $0$ et en $\infty$ se compensent). Sur les trois colonnes, $L$ est d'ordre $n - 1$ et $L_i$ d'ordre $(n - 1)(n - 2)$, le nombre de la première ligne du tableau.\footnote{Le groupe lui-même est connu : $H^1(\mathfrak S_n, \mathcal O(M_{0,n})^*) = \mathrm{Pic}\,[M_{0,n}/\mathfrak S_n]$ est cyclique d'ordre $2(n - 1)$ pour $n$ pair (Gorchinskiy--Viviani \cite[th.~3.6]{gorchinskiyviviani2008} ; voir aussi Arsie--Vistoli \cite[th.~5.1]{arsievistoli2004}) ; les ordres de $L$ et des $L_i$ en découlent, mais ne sont énoncés pour ces fibrés dans aucun texte trouvé.} Ce calcul n'est pas formalisé.
-\end{remarque}
+Passons à la colonne $n = 6$, où la page porte \q{$20\,?$} pour $L$ et \q{$60\,?$} pour $L_i$.
+
+\noindent\emph{Le modèle.} On envoie encore les trois premiers points en $0$, $1$, $\infty$ ; il reste trois coordonnées $(\lambda, \mu, \nu)$, hors de $\{0, 1\}$ et deux à deux distinctes. Les cinq transpositions $s_1, \ldots, s_5$ agissent comme pour $n = 5$, la troisième coordonnée suivant la deuxième :
+\[
+s_1 : (1 - \lambda,\ 1 - \mu,\ 1 - \nu), \qquad s_2 : \Bigl(\frac{\lambda}{\lambda - 1},\ \frac{\mu}{\mu - 1},\ \frac{\nu}{\nu - 1}\Bigr),
+\]
+\[
+s_3 : \Bigl(1 - \lambda,\ \frac{\mu(\lambda - 1)}{\lambda - \mu},\ \frac{\nu(\lambda - 1)}{\lambda - \nu}\Bigr), \qquad s_4 : (\mu, \lambda, \nu), \qquad s_5 : (\lambda, \nu, \mu).
+\] Le facteur sur $L_6$ est la dérivée de l'homographie au sixième point, pour le groupe $\mathfrak S_5$ engendré par $s_1, \ldots, s_4$ ; le facteur sur $L$ est le produit des six dérivées. On trouve, pour $s_1, \ldots, s_5$ et $s_1, \ldots, s_4$ :
+\[
+c_L = 1,\ \ \frac{1}{(\lambda - 1)^2(\mu - 1)^2(\nu - 1)^2},\ \ \frac{\lambda^2(\lambda - 1)^2}{(\lambda - \mu)^2(\lambda - \nu)^2},\ \ 1,\ \ 1 ;
+\]
+\[
+c_6 = -1,\ \ \frac{-1}{(\nu - 1)^2},\ \ \frac{\lambda(\lambda - 1)}{(\lambda - \nu)^2},\ \ 1.
+\]
+
+\noindent\emph{Le calcul.} Les unités de $M_{0,6}$ sont, à une constante près, les monômes en neuf facteurs : $\lambda$, $\mu$, $\nu$, $1 - \lambda$, $1 - \mu$, $1 - \nu$, $\lambda - \mu$, $\lambda - \nu$, $\mu - \nu$. Chaque générateur envoie chacun d'eux sur un monôme, au signe près ; par exemple $s_2$ envoie $\lambda - \mu$ sur $(\mu - \lambda)/((\lambda - 1)(\mu - 1))$. Chercher $h$ revient donc encore à un système linéaire en neuf inconnues entières, plus une condition de signe. Un programme d'algèbre linéaire exacte sur $\mathbf Z$ le résout. Pour $L$, la solution est simple : $c_L^5$ est le cobord du carré du produit des neuf unités. Pour $L_6$, le système a une solution dès $m = 10$, avec
+\[
+g = \frac{\nu^4 (1 - \nu)^4 (\lambda - \nu)^4 (\mu - \nu)^4}{\lambda\mu(1 - \lambda)(1 - \mu)(\lambda - \mu)},
+\]
+mais le signe ne suit pas : $c_6(s)^{10} = -g(sx)/g(x)$ pour chacun des quatre générateurs. Une constante ne corrige pas ce signe, puisqu'elle disparaît du quotient $h(sx)/h(x)$. Il faut donc passer à $m = 20$, où $c_6^{20}$ est le cobord de $g^2$.
+
+\noindent\emph{Les points fixes.} Pour minorer, on cherche comme pour $n = 5$ des points fixés par un élément d'ordre $5$ et par un élément d'ordre $4$. Le $5$-cycle $s_1 s_2 s_3 s_4$ correspond à une homographie $\psi$ d'ordre $5$ qui envoie $0 \mapsto 1 \mapsto \infty \mapsto \lambda \mapsto \mu \mapsto 0$ et fixe $\nu$. Une telle homographie est conjuguée à la rotation $z \mapsto \omega z$, où $\omega$ est une racine primitive cinquième de l'unité ; la configuration est celle de $0$ et des cinq racines cinquièmes de l'unité, à une homographie près. Dans nos coordonnées, avec $\omega^4 + \omega^3 + \omega^2 + \omega + 1 = 0$, c'est le point
+\[
+(\lambda, \mu, \nu) = (\omega^2 + \omega^3,\ 1 + \omega^2 + \omega^3,\ -\omega^4).
+\]
+Le facteur de $L_6$ y est la dérivée $\psi'(\nu)$, qui vaut $\omega$. Celui de $L$ aussi : les cinq autres points forment un seul cycle, et le produit des dérivées le long de ce cycle est la dérivée de $\psi^5 = \mathrm{id}$, soit $1$. Les coordonnées de ce point et les dénominateurs rencontrés en chemin sont des unités de $\mathbf Z[\omega]$ : il n'y faut aucune hypothèse sur le corps. Seule la conclusion $\omega^m = 1 \Rightarrow 5 \mid m$ demande que $5$ soit inversible. Le $4$-cycle $s_1 s_2 s_3$ correspond, comme pour $n = 5$, à $z \mapsto (z + 1)/(1 - z)$, qui fixe $i$ et $-i$ ; il fixe donc le point $(-1, -i, i)$. Le facteur de $L_6$ y vaut $i$. Celui de $L$ vaut $i \cdot (-i) = 1$, car les dérivées aux deux points fixes se compensent.
+
+\begin{contrexemple}[page 70, colonne $n = 6$, pour $L$ : le \q{$20\,?$} n'est pas le meilleur exposant\piste{146-equivariant-trivialising-exponents}]\label{ce:146-cinq}
+Soit $K$ un corps où $5$ est inversible et qui contient une racine $\omega$ de $\omega^4 + \omega^3 + \omega^2 + \omega + 1$. La puissance $m$-ième du cocycle $c_L$ de $L$ sous $\mathfrak S_6$ est le cobord d'une fonction sans zéro sur $M_{0,6}(K)$ si et seulement si $5 \mid m$. Pour $m = 5$ on peut prendre
+\[
+h = \bigl(\lambda\mu\nu(1 - \lambda)(1 - \mu)(1 - \nu)(\lambda - \mu)(\lambda - \nu)(\mu - \nu)\bigr)^2.
+\]
+Le meilleur exposant pour $L$ est donc $5$, et non $20$.
+\end{contrexemple}
+
+\begin{proof}
+Sur les générateurs, $c_L(s)^5 = h(sx)/h(x)$ se vérifie directement. Par exemple pour $s_2$, le produit $H$ des neuf unités vérifie $H(s_2 x)/H(x) = \pm 1/((\lambda - 1)(\mu - 1)(\nu - 1))^5$ : pour $x = \lambda$, le facteur $\lambda - 1$ vient de l'image de $\lambda$, de celle de $1 - \lambda$, des images des deux différences où $\lambda$ figure, et du facteur $1 - \lambda$ de $H(x)$. Au carré, on trouve $c_L(s_2)^5$. Les mots en suivent par la règle de cocycle. Au point fixé par $s_1 s_2 s_3 s_4$, le second membre vaut $1$ et le cocycle vaut $\omega$, d'où $\omega^m = 1$ et $5 \mid m$.
+\end{proof}
+
+\begin{contrexemple}[page 70, colonne $n = 6$, pour $L_i$ : le \q{$60\,?$} n'est pas le meilleur exposant\piste{146-equivariant-trivialising-exponents}]\label{ce:146-vingt}
+Soit $K$ un corps où $2$ et $5$ sont inversibles, qui contient $i$ avec $i^2 = -1$ et une racine $\omega$ de $\omega^4 + \omega^3 + \omega^2 + \omega + 1$. La puissance $m$-ième du cocycle $c_6$ de $L_6$ sous $\mathfrak S_5$ est le cobord d'une fonction sans zéro sur $M_{0,6}(K)$ si et seulement si $20 \mid m$. Pour $m = 20$ on peut prendre $h = g^2$, avec $g$ ci-dessus. Le meilleur exposant pour $L_i$ est donc $20$, et non $60$.
+\end{contrexemple}
+
+\begin{proof}
+Sur les générateurs, $c_6(s)^{10} = -g(sx)/g(x)$, d'où $c_6(s)^{20} = g(sx)^2/g(x)^2$, et les mots en suivent. Au point fixé par $s_1 s_2 s_3 s_4$, le cocycle vaut $\omega$, d'où $5 \mid m$ ; au point $(-1, -i, i)$, fixé par $s_1 s_2 s_3$, il vaut $i$, d'où $4 \mid m$.
+\end{proof}
+
+Les deux valeurs de la page sont des exposants qui trivialisent, puisque $5 \mid 20$ et $20 \mid 60$, mais aucune n'est la plus petite. L'ordre $3$, que suggère le $60 = 3 \cdot 20$ de la page, n'apparaît pas : comme $c_6^{20}$ est un cobord, le facteur $f$ en un point fixé par un $3$-cycle vérifie $f^{20} = 1$ et $f^3 = 1$, donc $f = 1$. Sur les trois colonnes, $L$ est d'ordre $n - 1$ et $L_i$ d'ordre $(n - 1)(n - 2)$, le nombre de la première ligne du tableau.\footnote{Le groupe lui-même est connu : $H^1(\mathfrak S_n, \mathcal O(M_{0,n})^*) = \mathrm{Pic}\,[M_{0,n}/\mathfrak S_n]$ est cyclique d'ordre $2(n - 1)$ pour $n$ pair (Gorchinskiy--Viviani \cite[th.~3.6]{gorchinskiyviviani2008} ; voir aussi Arsie--Vistoli \cite[th.~5.1]{arsievistoli2004}) ; les ordres de $L$ et des $L_i$ en découlent, mais ne sont énoncés pour ces fibrés dans aucun texte trouvé.}
+
+\begin{sloppypar}
+\noindent Vérifié au niveau des cocycles (\texttt{act6\_U6}, \texttt{cL6\_pow\_five}, \texttt{c6\_pow\_ten}, \texttt{fix\_five}, \texttt{fix\_four6}, \texttt{coboundary\_cL6\_iff}, \texttt{coboundary\_c6\_iff}), avec les mots en $s_1, \ldots, s_5$ comme pour $n = 5$ (\texttt{wAct}, \texttt{wCoc}). Ne sont pas démontrés en Lean : les relations de Coxeter de $\mathfrak S_6$ pour ces substitutions et ces facteurs (vérifiées par le calcul formel), la dérivation des facteurs à partir des homographies, et la résolution du système linéaire, dont Lean ne vérifie que la solution.
+\end{sloppypar}
 
 Le tableau~\ref{tab:146-exposants} met en regard les valeurs de la page et les ordres calculés.
 
@@ -147,19 +197,19 @@ $L$, ordre calculé, $n - 1$ & $3$ & $\mathbf 4$ & $\mathbf 5$ \\
 $L_i$, page~70 & $6$ & $12\,?$ & $60\,?$ \\
 $L_i$, ordre calculé, $(n - 1)(n - 2)$ & $6$ & $12$ & $\mathbf{20}$ \\
 \midrule
-statut & Lean & Lean & calcul formel \\
-& th.~\ref{thm:146-six}, \ref{thm:146-trois} & th.~\ref{thm:146-douze}, c.-ex.~\ref{ce:146-quatre} & seulement \\
+statut & Lean & Lean & Lean \\
+& th.~\ref{thm:146-six}, \ref{thm:146-trois} & th.~\ref{thm:146-douze}, c.-ex.~\ref{ce:146-quatre} & c.-ex.~\ref{ce:146-cinq}, \ref{ce:146-vingt} \\
 \bottomrule
 \end{tabular}
 \caption{Le tableau de la page~70 et les ordres calculés. En gras, les valeurs qui diffèrent de celles de la page ; les points d'interrogation sont ceux du manuscrit.}
 \label{tab:146-exposants}
 \end{table}
 
-Ne sont pas démontrés ici : le fait que le groupe de Picard équivariant soit le $H^1$ des unités, et la colonne $n = 6$, qui reste au rang de conjecture corrigée :
+Ne sont pas démontrés ici : le fait que le groupe de Picard équivariant soit le $H^1$ des unités, et la formule générale, qui reste au rang de conjecture :
 
 \begin{encadre}
-\begin{conjecture*}[d'après Grothendieck, page 70, colonne $n = 6$\piste{146-equivariant-trivialising-exponents}]
-Sur $M_{0,6}$, les plus petits exposants qui rendent triviaux, de façon compatible au groupe symétrique, les fibrés $L$ et $L_i$ sont $5$ et $20$ ; la page propose $20$ et $60$, suivis de points d'interrogation.
+\begin{conjecture*}[de l'édition, d'après le tableau de la page 70\piste{146-equivariant-trivialising-exponents}]
+Sur $M_{0,n}$, $n \geq 4$, les plus petits exposants qui rendent triviaux, de façon compatible au groupe symétrique, les fibrés $L$ et $L_i$ sont $n - 1$ et $(n - 1)(n - 2)$.
 \end{conjecture*}
 \end{encadre}
-{\small Les valeurs pour $n = 4$ sont les théorèmes~\ref{thm:146-six} et~\ref{thm:146-trois} ; pour $n = 5$, le théorème~\ref{thm:146-douze} et le contre-exemple~\ref{ce:146-quatre}. Mathlib n'a pas les espaces de modules $M_{0,n}$.\par}
+{\small Les valeurs pour $n = 4$ sont les théorèmes~\ref{thm:146-six} et~\ref{thm:146-trois} ; pour $n = 5$, le théorème~\ref{thm:146-douze} et le contre-exemple~\ref{ce:146-quatre} ; pour $n = 6$, les contre-exemples~\ref{ce:146-cinq} et~\ref{ce:146-vingt}. Mathlib n'a pas les espaces de modules $M_{0,n}$.\par}

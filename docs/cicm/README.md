@@ -38,13 +38,13 @@ review is double-blind: if it is, an anonymous version is needed).
 
 ## What remains to check
 
-- Every figure is read from the repository at commit time (2,042 theorems,
-  69 files, 39,184 lines, 463 findings, 69 proof cards and their verdicts,
+- Every figure is read from the repository at commit time (2,046 theorems,
+  69 files, 39,535 lines, 463 findings, 69 proof cards and their verdicts,
   the triage of #54, the review figures of 21 October, 41 pull requests).
   They move: rerun `figures.mjs` and recount before submission.
-- Folder 146, column n = 5: in progress and uncommitted when this was
-  written; the paper says so. Update Section 5 and the conjectures section
-  if it lands.
+- Folder 146: the columns n = 5 and n = 6 of page 70 are in Lean (L of
+  order 4 and 5, L_i of order 12 and 20); Section 5, the abstract and the
+  conjectures section say so. The general formula is not formalised.
 - The Mathlib section reports the record of the pull requests on 21 October
   2026 only; recheck the states before submission, and keep to what the
   threads say.

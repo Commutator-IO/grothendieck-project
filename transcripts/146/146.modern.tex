@@ -88,6 +88,11 @@
 %   n = 4 footnoted as checked at the level of cocycles (derL_pow_three,
 %   coboundary_derL_iff), the reduction from S_4 to S_3 in prose; the L_4
 %   footnote no longer lists it as unchecked; n = 5, 6 stay open.
+% Revised: Opus 5.5 (claude-opus-5-5), 2026-10-21 — p. 70: columns n = 5, 6
+%   footnoted as checked at the level of cocycles (coboundary_cL_iff,
+%   coboundary_c5_iff, coboundary_cL6_iff, coboundary_c6_iff): L of order 4
+%   and 5, L_i of order 12 and 20; the « restent ouvertes » sentence and the
+%   L_4 footnote's clause on n = 5, 6 replaced.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -1077,8 +1082,7 @@ fonctions sans zéro quelconques sur $U(K)$ : en $\lambda = -1$, fixe sous
 $1/\lambda$, la dérivée vaut $-1$, et en $\zeta$, fixe sous $1/(1 - \lambda)$,
 elle vaut $\zeta^2$, racine primitive cubique de l'unité. Ne sont pas
 formalisés l'identification du groupe de Picard équivariant à
-$H^1(\mathfrak{S}_3, \mathcal{O}(U)^{*})$ ni les valeurs proposées pour
-$n = 5, 6$.} ; la valeur $3$ pour $L$ l'est aussi.\footnote{Le groupe de Klein
+$H^1(\mathfrak{S}_3, \mathcal{O}(U)^{*})$.} ; la valeur $3$ pour $L$ l'est aussi.\footnote{Le groupe de Klein
 $V_4 \subset \mathfrak{S}_4$ agit trivialement sur $U$ et sur $L$, et pour $g$
 dans le stabilisateur $\mathfrak{S}_3$ du quatrième point, le produit des
 dérivées en $0$, $1$, $\infty$ est la signature $\varepsilon(g)$ ; le
@@ -1093,8 +1097,30 @@ triviale de $V_4$, produit des dérivées, injectivité de l'inflation de
 $\mathfrak{S}_3$ à $\mathfrak{S}_4$) est faite en prose et n'est pas
 formalisée ; voir l'annexe Lean, section 146. La page 72 n'affirme que
 $L^{\otimes 6} \simeq 1$, ce qui est vrai et plus faible.} Les colonnes
-$n = 5, 6$, dont les valeurs sont suivies de points d'interrogation, restent
-ouvertes.
+$n = 5, 6$ portent des valeurs suivies de points d'interrogation ; le calcul de
+l'édition donne pour $L$ les ordres $4$ et $5$, pour $L_i$ les ordres $12$ et
+$20$. Le « $12\,?$ » de $L_i$ pour $n = 5$ est donc juste ; les trois autres
+valeurs sont des exposants qui trivialisent, mais non les plus
+petits.\footnote{Vérifié en Lean au niveau des cocycles
+(lean/Grothendieck/Folder146.lean, \texttt{coboundary\_cL\_iff} et
+\texttt{coboundary\_c5\_iff} pour $n = 5$, \texttt{coboundary\_cL6\_iff} et
+\texttt{coboundary\_c6\_iff} pour $n = 6$) ; le calcul est de l'édition. Les
+transpositions adjacentes agissent sur $M_{0,n}$ par des substitutions
+explicites, et sur les droites tangentes par la dérivée de l'homographie qui
+renvoie les trois premiers points en $0$, $1$, $\infty$. Les fonctions $h$ qui
+trivialisent viennent d'un système linéaire sur les exposants des unités ; pour
+$n = 6$, celle de $L^{\otimes 5}$ est le carré du produit des neuf unités
+$\lambda$, $\mu$, $\nu$, $1 - \lambda$, $1 - \mu$, $1 - \nu$,
+$\lambda - \mu$, $\lambda - \nu$, $\mu - \nu$. Les minorations viennent des
+points fixes : pour $n = 5$, les facteurs $i$ en $(-1, i)$ et $\zeta^2$ en
+$(1 - \zeta, \zeta)$ ; pour $n = 6$, la configuration de $0$ et des racines
+cinquièmes de l'unité, fixée par un $5$-cycle, où le facteur vaut une racine
+primitive cinquième $\omega$, et le point $(-1, -i, i)$, fixé par un
+$4$-cycle, où le facteur de $L_6$ vaut $i$. Sur les trois colonnes, $L$ est
+d'ordre $n - 1$ et $L_i$ d'ordre $(n-1)(n-2)$, le nombre de la première ligne
+du tableau. Ne sont pas formalisés les relations de Coxeter de
+$\mathfrak{S}_n$ pour ces substitutions (vérifiées par le calcul formel) ni le
+passage des fibrés aux cocycles.}
 
 Le cadre est la cohomologie équivariante. Comme $M_{0,K}$ est le complémentaire
 d'un arrangement d'hyperplans dans un espace affine, $\mathrm{Pic}(M_{0,K}) = 0$

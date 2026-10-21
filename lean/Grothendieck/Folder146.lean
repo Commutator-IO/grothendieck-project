@@ -1,7 +1,7 @@
 import Mathlib
 
 /-!
-# Folder 146, page 70: the trivialising exponents of `L_i` and `L` on `M_{0,4}` and `M_{0,5}`
+# Folder 146, page 70: the trivialising exponents of `L_i` and `L` on `M_{0,n}`, `n = 4, 5, 6`
 
 The modernised reading `transcripts/146/146.modern.tex` (« Les fibrés `L_i` et le groupe de
 Picard équivariant », pages 70 to 73) describes the table of page 70: for `n = card I`, the
@@ -42,7 +42,9 @@ reduction from `𝔖₄` to `𝔖₃` and the formula `sgn g · g′(λ)` for th
 
 The column `n = 5`, queried on the page (« 12 ? » for `L` and for `L_i`), is settled at the
 end of the file at the level of cocycles: `L` has order `4` (`coboundary_cL_iff`), `L₅` has
-order `12` (`coboundary_c5_iff`). The column `n = 6` (« 20 ? », « 60 ? ») is not formalised.
+order `12` (`coboundary_c5_iff`). The column `n = 6` (« 20 ? » for `L`, « 60 ? » for `L_i`) is
+settled after it: `L` has order `5` (`coboundary_cL6_iff`), `L₆` has order `20`
+(`coboundary_c6_iff`).
 -/
 
 namespace Grothendieck.Folder146
@@ -500,5 +502,354 @@ theorem coboundary_c5_iff (h2 : (2 : K) ≠ 0) (h3 : (3 : K) ≠ 0) {ι : K} (h�
       (fun p hp => zpow_ne_zero _ (h5_ne hp)) ?_
     intro i p hp
     rw [zpow_mul, show c5 i p ^ (12 : ℤ) = _ by exact_mod_cast c5_pow_twelve i hp, div_zpow]
+
+/-! ## The column `n = 6`: `L` has order `5`, `L₆` has order `20`
+
+`M_{0,6}` is the set of `(λ, μ, ν)` with `λ, μ, ν ∉ {0, 1}` pairwise distinct (`U6`), the six
+points being `0, 1, ∞, λ, μ, ν`. As for `n = 5`, the adjacent transpositions `s₁, …, s₅` act by
+renormalising the permuted points to `0, 1, ∞` (`act6`), with factor `cL6` on `L = L₁ ⊗ ⋯ ⊗ L₆`
+and `c6` on `L₆` under the stabiliser `𝔖₅` of the sixth point (`s₁, …, s₄`, `act6s`). The units
+of `O(M_{0,6})` are, up to constants, the monomials in the nine functions `λ, μ, ν, 1 − λ, 1 − μ,
+1 − ν, λ − μ, λ − ν, μ − ν`; the functions `h` below come from solving the linear system on their
+exponents. Not formalised, as for `n = 5`: the Coxeter relations of `𝔖₆` for `act6`, `cL6`, `c6`
+(checked by computer algebra) and the derivation of the factors.
+
+* `cL6_pow_five`: `cL6⁵` is the coboundary of the square of the product of the nine units;
+  `coboundary_cL6_iff`: a power `m` of `cL6` is a coboundary iff `5 ∣ m` — at the configuration
+  `0, ω, …, ω⁴` (`fix_five`), fixed by the `5`-cycle `s₁s₂s₃s₄`, the factor is `ω`.
+* `c6_pow_ten`: `c6¹⁰ = −g(sx)/g(x)`, so `c6²⁰` is the coboundary of `g²`;
+  `coboundary_c6_iff`: a power `m` of `c6` is a coboundary iff `20 ∣ m` — the factor is `ω` at the
+  same point, and `i` at `(−1, −i, i)` (`fix_four6`), fixed by the `4`-cycle `s₁s₂s₃`.
+So the entries « 20 ? » for `L` and « 60 ? » for `L_i` of page 70 do not check: the orders are
+`5` and `20`. -/
+
+/-- `M_{0,6}`: `λ, μ, ν ∉ {0, 1}`, pairwise distinct; that is, `(λ, μ)` and `(λ, ν)` are points
+of `M_{0,5}` and `μ ≠ ν`. -/
+def U6 (p : K × K × K) : Prop := U5 (p.1, p.2.1) ∧ U5 (p.1, p.2.2) ∧ p.2.1 ≠ p.2.2
+
+/-- The adjacent transpositions `s₁, …, s₅` of the six labels. -/
+def act6 : Fin 5 → K × K × K → K × K × K
+  | 0 => fun p => (1 - p.1, 1 - p.2.1, 1 - p.2.2)
+  | 1 => fun p => (p.1 / (p.1 - 1), p.2.1 / (p.2.1 - 1), p.2.2 / (p.2.2 - 1))
+  | 2 => fun p => (1 - p.1, p.2.1 * (p.1 - 1) / (p.1 - p.2.1), p.2.2 * (p.1 - 1) / (p.1 - p.2.2))
+  | 3 => fun p => (p.2.1, p.1, p.2.2)
+  | 4 => fun p => (p.1, p.2.2, p.2.1)
+
+/-- Their factor on `L = L₁ ⊗ ⋯ ⊗ L₆`. -/
+def cL6 : Fin 5 → K × K × K → K
+  | 0 => fun _ => 1
+  | 1 => fun p => 1 / ((p.1 - 1) ^ 2 * (p.2.1 - 1) ^ 2 * (p.2.2 - 1) ^ 2)
+  | 2 => fun p => p.1 ^ 2 * (p.1 - 1) ^ 2 / ((p.1 - p.2.1) ^ 2 * (p.1 - p.2.2) ^ 2)
+  | 3 => fun _ => 1
+  | 4 => fun _ => 1
+
+/-- The factor of `s₁, …, s₄` on `L₆`. -/
+def c6 : Fin 4 → K × K × K → K
+  | 0 => fun _ => -1
+  | 1 => fun p => -1 / (p.2.2 - 1) ^ 2
+  | 2 => fun p => p.1 * (p.1 - 1) / (p.1 - p.2.2) ^ 2
+  | 3 => fun _ => 1
+
+/-- `s₁, …, s₄` as substitutions. -/
+def act6s (i : Fin 4) : K × K × K → K × K × K := act6 i.castSucc
+
+lemma act6_U6 (i : Fin 5) {p : K × K × K} (hp : U6 p) : U6 (act6 i p) := by
+  obtain ⟨l, m, n⟩ := p
+  obtain ⟨hm, hn, mn⟩ := hp
+  dsimp only at hm hn mn
+  obtain ⟨a0, a1, b0, b1, ab⟩ := id hm
+  obtain ⟨-, -, c0, c1, ac⟩ := id hn
+  have a1' : l - 1 ≠ 0 := sub_ne_zero.2 a1
+  fin_cases i
+  · refine ⟨act5_U5 0 hm, act5_U5 0 hn, fun e => mn ?_⟩
+    change 1 - m = 1 - n at e
+    linear_combination -e
+  · refine ⟨act5_U5 1 hm, act5_U5 1 hn, fun e => mn ?_⟩
+    change m / (m - 1) = n / (n - 1) at e
+    rw [div_eq_div_iff (sub_ne_zero.2 b1) (sub_ne_zero.2 c1)] at e
+    linear_combination -e
+  · refine ⟨act5_U5 2 hm, act5_U5 2 hn, fun e => mul_ne_zero (mul_ne_zero a1' a0)
+      (sub_ne_zero.2 mn) ?_⟩
+    change m * (l - 1) / (l - m) = n * (l - 1) / (l - n) at e
+    rw [div_eq_div_iff (sub_ne_zero.2 ab) (sub_ne_zero.2 ac)] at e
+    linear_combination e
+  · exact ⟨act5_U5 3 hm, (⟨b0, b1, c0, c1, mn⟩ : U5 (m, n)), ac⟩
+  · exact ⟨hn, hm, Ne.symm mn⟩
+
+/-- `h = (λμν(1 − λ)(1 − μ)(1 − ν)(λ − μ)(λ − ν)(μ − ν))²`, the square of the product of the nine
+units. -/
+def hL6 (p : K × K × K) : K :=
+  (p.1 * p.2.1 * p.2.2 * (1 - p.1) * (1 - p.2.1) * (1 - p.2.2) * (p.1 - p.2.1) * (p.1 - p.2.2) *
+    (p.2.1 - p.2.2)) ^ 2
+
+/-- `g = ν⁴(1 − ν)⁴(λ − ν)⁴(μ − ν)⁴/(λμ(1 − λ)(1 − μ)(λ − μ))`; `g²` trivialises `L₆^{⊗20}`. -/
+def g6 (p : K × K × K) : K :=
+  (p.2.2 * (1 - p.2.2) * (p.1 - p.2.2) * (p.2.1 - p.2.2)) ^ 4 /
+    (p.1 * p.2.1 * (1 - p.1) * (1 - p.2.1) * (p.1 - p.2.1))
+
+lemma hL6_ne {p : K × K × K} (hp : U6 p) : hL6 p ≠ 0 := by
+  obtain ⟨⟨a0, a1, b0, b1, ab⟩, ⟨-, -, c0, c1, ac⟩, bc⟩ := hp
+  dsimp only at a0 a1 b0 b1 ab c0 c1 ac
+  simp only [hL6]
+  have := sub_ne_zero.2 (Ne.symm a1); have := sub_ne_zero.2 (Ne.symm b1)
+  have := sub_ne_zero.2 (Ne.symm c1); have := sub_ne_zero.2 ab; have := sub_ne_zero.2 ac
+  have := sub_ne_zero.2 bc
+  positivity
+
+lemma g6_num_ne {p : K × K × K} (hp : U6 p) :
+    (p.2.2 * (1 - p.2.2) * (p.1 - p.2.2) * (p.2.1 - p.2.2)) ^ 4 ≠ 0 := by
+  obtain ⟨-, ⟨-, -, c0, c1, ac⟩, bc⟩ := hp
+  dsimp only at c0 c1 ac
+  have := sub_ne_zero.2 (Ne.symm c1); have := sub_ne_zero.2 ac; have := sub_ne_zero.2 bc
+  positivity
+
+lemma g6_den_ne {p : K × K × K} (hp : U6 p) :
+    p.1 * p.2.1 * (1 - p.1) * (1 - p.2.1) * (p.1 - p.2.1) ≠ 0 := by
+  obtain ⟨⟨a0, a1, b0, b1, ab⟩, -, -⟩ := hp
+  dsimp only at a0 a1 b0 b1 ab
+  have := sub_ne_zero.2 (Ne.symm a1); have := sub_ne_zero.2 (Ne.symm b1)
+  have := sub_ne_zero.2 ab
+  positivity
+
+lemma g6_ne {p : K × K × K} (hp : U6 p) : g6 p ≠ 0 :=
+  div_ne_zero (g6_num_ne hp) (g6_den_ne hp)
+
+/-- `L^{⊗5}` is equivariantly trivial: `cL(s)⁵ = h(sx)/h(x)` on the generators, with `h` the
+square of the product of the nine units. -/
+theorem cL6_pow_five (i : Fin 5) {p : K × K × K} (hp : U6 p) :
+    cL6 i p ^ 5 = hL6 (act6 i p) / hL6 p := by
+  obtain ⟨l, m, n⟩ := p
+  obtain ⟨⟨a0, a1, b0, b1, ab⟩, ⟨-, -, c0, c1, ac⟩, bc⟩ := hp
+  simp only at a0 a1 b0 b1 ab c0 c1 ac bc
+  have a1' : l - 1 ≠ 0 := sub_ne_zero.2 a1
+  have b1' : m - 1 ≠ 0 := sub_ne_zero.2 b1
+  have c1' : n - 1 ≠ 0 := sub_ne_zero.2 c1
+  have ab' : l - m ≠ 0 := sub_ne_zero.2 ab
+  have ac' : l - n ≠ 0 := sub_ne_zero.2 ac
+  have bc' : m - n ≠ 0 := sub_ne_zero.2 bc
+  have a1'' : 1 - l ≠ 0 := sub_ne_zero.2 (Ne.symm a1)
+  have b1'' : 1 - m ≠ 0 := sub_ne_zero.2 (Ne.symm b1)
+  have c1'' : 1 - n ≠ 0 := sub_ne_zero.2 (Ne.symm c1)
+  fin_cases i <;> simp [cL6, act6, hL6] <;> field_simp <;> ring
+
+/-- On the generators, the factor `c` of `L₆` satisfies `c(s)¹⁰ = −g(sx)/g(x)`. -/
+theorem c6_pow_ten (i : Fin 4) {p : K × K × K} (hp : U6 p) :
+    c6 i p ^ 10 = -(g6 (act6s i p) / g6 p) := by
+  have hq : U6 (act6s i p) := act6_U6 i.castSucc hp
+  rw [g6, g6, div_div_div_eq, ← neg_div, eq_div_iff (mul_ne_zero (g6_den_ne hq) (g6_num_ne hp))]
+  obtain ⟨l, m, n⟩ := p
+  obtain ⟨⟨a0, a1, b0, b1, ab⟩, ⟨-, -, c0, c1, ac⟩, bc⟩ := hp
+  simp only at a0 a1 b0 b1 ab c0 c1 ac bc
+  have a1' : l - 1 ≠ 0 := sub_ne_zero.2 a1
+  have b1' : m - 1 ≠ 0 := sub_ne_zero.2 b1
+  have c1' : n - 1 ≠ 0 := sub_ne_zero.2 c1
+  have ab' : l - m ≠ 0 := sub_ne_zero.2 ab
+  have ac' : l - n ≠ 0 := sub_ne_zero.2 ac
+  have a1'' : 1 - l ≠ 0 := sub_ne_zero.2 (Ne.symm a1)
+  have c1'' : 1 - n ≠ 0 := sub_ne_zero.2 (Ne.symm c1)
+  fin_cases i <;> simp [c6, act6s, act6] <;> field_simp <;> ring
+
+/-- A root `ω` of `ω⁴ + ω³ + ω² + ω + 1` is a primitive fifth root of unity when `5 ≠ 0`:
+`ω^m = 1` forces `5 ∣ m`. -/
+lemma five_dvd_of_pow (h5 : (5 : K) ≠ 0) {ω : K} (hω : ω ^ 4 + ω ^ 3 + ω ^ 2 + ω + 1 = 0)
+    (m : ℤ) (e : ω ^ m = 1) : 5 ∣ m := by
+  have hω0 : ω ≠ 0 := fun h => by simp [h] at hω
+  have w5 : ω ^ 5 = 1 := by linear_combination (ω - 1) * hω
+  have w1 : ω ≠ 1 := fun h => h5 (by rw [h] at hω; linear_combination hω)
+  obtain ⟨q, r, hr, rfl⟩ : ∃ q r : ℤ, (r = 0 ∨ r = 1 ∨ r = 2 ∨ r = 3 ∨ r = 4) ∧ m = 5 * q + r :=
+    ⟨m / 5, m % 5, by omega, by omega⟩
+  rw [zpow_add₀ hω0, zpow_mul, show ω ^ (5 : ℤ) = 1 by exact_mod_cast w5, one_zpow,
+    one_mul] at e
+  rcases hr with rfl | rfl | rfl | rfl | rfl
+  · simp
+  · exact absurd (by simpa using e) w1
+  · have : ω ^ 2 = 1 := by simpa using e
+    exact absurd (by linear_combination (ω - 1) * hω - (ω ^ 3 + ω) * this) w1
+  · have : ω ^ 3 = 1 := by simpa using e
+    exact absurd (by linear_combination (1 + ω ^ 3) * this - ω * (ω - 1) * hω) w1
+  · have : ω ^ 4 = 1 := by simpa using e
+    exact absurd (by linear_combination (ω - 1) * hω - ω * this) w1
+
+/-- The point `(ω² + ω³, 1 + ω² + ω³, −ω⁴)` of `M_{0,6}`, the configuration `0, 1, ω, …, ω⁴`
+up to a homography, is fixed by the `5`-cycle `s₁s₂s₃s₄`, where the factor on `L`, and on `L₆`,
+is `ω`. -/
+lemma fix_five {ω : K} (hω : ω ^ 4 + ω ^ 3 + ω ^ 2 + ω + 1 = 0) :
+    U6 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4) ∧
+      wAct act6 [0, 1, 2, 3] ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4) =
+        (ω ^ 2 + ω ^ 3, 1 + ω ^ 2 + ω ^ 3, -ω ^ 4) ∧
+      wCoc act6 cL6 [0, 1, 2, 3] ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4) = ω ∧
+      wAct act6s [0, 1, 2, 3] ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4) =
+        (ω ^ 2 + ω ^ 3, 1 + ω ^ 2 + ω ^ 3, -ω ^ 4) ∧
+      wCoc act6s c6 [0, 1, 2, 3] ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4) = ω := by
+  -- each quantity below is a unit of `ℤ[ω]`: `A x + B (ω⁴ + ω³ + ω² + ω + 1) = 1`
+  have ne : ∀ {x : K} (A B : K), A * x + B * (ω ^ 4 + ω ^ 3 + ω ^ 2 + ω + 1) = 1 → x ≠ 0 :=
+    fun A B h e => one_ne_zero (h.symm.trans (by rw [e, hω]; ring))
+  have ha : ω ^ 2 + ω ^ 3 ≠ 0 := ne (1 + ω ^ 2 + ω ^ 3) (1 - ω - ω ^ 2) (by ring)
+  have ha1 : ω ^ 2 + ω ^ 3 ≠ 1 :=
+    sub_ne_zero.1 (ne (-2 - ω ^ 2 - ω ^ 3) (-1 + ω + ω ^ 2) (by ring))
+  have hb : 1 + ω ^ 2 + ω ^ 3 ≠ 0 := ne (ω ^ 2 + ω ^ 3) (1 - ω - ω ^ 2) (by ring)
+  have hb1 : 1 + ω ^ 2 + ω ^ 3 ≠ 1 :=
+    sub_ne_zero.1 (ne (1 + ω ^ 2 + ω ^ 3) (1 - ω - ω ^ 2) (by ring))
+  have hab : ω ^ 2 + ω ^ 3 ≠ 1 + ω ^ 2 + ω ^ 3 := sub_ne_zero.1 (ne (-1) 0 (by ring))
+  have hc : -ω ^ 4 ≠ 0 := ne (-ω) (1 - ω) (by ring)
+  have hc1 : -ω ^ 4 ≠ 1 := sub_ne_zero.1 (ne (-1 - ω - ω ^ 3) (-ω + ω ^ 2 - ω ^ 3) (by ring))
+  have hac : ω ^ 2 + ω ^ 3 ≠ -ω ^ 4 := sub_ne_zero.1 (ne (ω + ω ^ 3) (1 - ω - ω ^ 3) (by ring))
+  have hd : 1 + ω ^ 2 + ω ^ 3 - -ω ^ 4 ≠ 0 :=
+    ne (1 + ω + ω ^ 2 + ω ^ 3) (-ω - ω ^ 2 - ω ^ 3) (by ring)
+  have d1 : -ω ^ 2 - ω ^ 3 - 1 ≠ 0 := ne (-ω ^ 2 - ω ^ 3) (1 - ω - ω ^ 2) (by ring)
+  have d2 : 1 - ω ^ 2 - ω ^ 3 - 1 ≠ 0 := ne (-1 - ω ^ 2 - ω ^ 3) (1 - ω - ω ^ 2) (by ring)
+  have d3 : 1 + ω - 1 ≠ 0 := ne (-1 - ω - ω ^ 2 - ω ^ 3) 1 (by ring)
+  have d4 : 1 + ω ^ 2 + ω ^ 3 - (ω ^ 2 + ω ^ 3) ≠ 0 := ne 1 0 (by ring)
+  have s4 : act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4) =
+      (1 + ω ^ 2 + ω ^ 3, ω ^ 2 + ω ^ 3, -ω ^ 4) := rfl
+  have s3 : act6 2 ((1 + ω ^ 2 + ω ^ 3 : K), ω ^ 2 + ω ^ 3, -ω ^ 4) =
+      (-ω ^ 2 - ω ^ 3, 1 - ω ^ 2 - ω ^ 3, 1 + ω) := by
+    change (1 - (1 + ω ^ 2 + ω ^ 3), (ω ^ 2 + ω ^ 3) * (1 + ω ^ 2 + ω ^ 3 - 1) /
+      (1 + ω ^ 2 + ω ^ 3 - (ω ^ 2 + ω ^ 3)), -ω ^ 4 * (1 + ω ^ 2 + ω ^ 3 - 1) /
+      (1 + ω ^ 2 + ω ^ 3 - -ω ^ 4)) = _
+    simp only [Prod.mk.injEq]
+    refine ⟨by ring, ?_, ?_⟩
+    · rw [div_eq_iff d4]; linear_combination (-1 + ω + ω ^ 2) * hω
+    · rw [div_eq_iff hd]; linear_combination (-1 - ω ^ 3) * hω
+  have s2 : act6 1 ((-ω ^ 2 - ω ^ 3 : K), 1 - ω ^ 2 - ω ^ 3, 1 + ω) =
+      (1 - ω ^ 2 - ω ^ 3, -ω ^ 2 - ω ^ 3, 1 + ω ^ 4) := by
+    change ((-ω ^ 2 - ω ^ 3) / (-ω ^ 2 - ω ^ 3 - 1), (1 - ω ^ 2 - ω ^ 3) / (1 - ω ^ 2 - ω ^ 3 - 1),
+      (1 + ω) / (1 + ω - 1)) = _
+    simp only [Prod.mk.injEq]
+    refine ⟨?_, ?_, ?_⟩
+    · rw [div_eq_iff d1]; linear_combination (1 - ω - ω ^ 2) * hω
+    · rw [div_eq_iff d2]; linear_combination (1 - ω - ω ^ 2) * hω
+    · rw [div_eq_iff d3]; linear_combination (1 - ω) * hω
+  have s1 : act6 0 ((1 - ω ^ 2 - ω ^ 3 : K), -ω ^ 2 - ω ^ 3, 1 + ω ^ 4) =
+      (ω ^ 2 + ω ^ 3, 1 + ω ^ 2 + ω ^ 3, -ω ^ 4) := by
+    change ((1 - (1 - ω ^ 2 - ω ^ 3) : K), 1 - (-ω ^ 2 - ω ^ 3), 1 - (1 + ω ^ 4)) = _
+    simp only [Prod.mk.injEq]
+    exact ⟨by ring, by ring, by ring⟩
+  have e3 : (1 + ω ^ 2 + ω ^ 3) * (1 + ω ^ 2 + ω ^ 3 - 1) / (1 + ω ^ 2 + ω ^ 3 - -ω ^ 4) ^ 2 =
+      ω ^ 3 := by
+    rw [div_eq_iff (pow_ne_zero 2 hd)]
+    linear_combination (ω ^ 2 - ω ^ 3 + ω ^ 4 - ω ^ 5 - ω ^ 6 - ω ^ 7) * hω
+  refine ⟨⟨⟨ha, ha1, hb, hb1, hab⟩, ⟨ha, ha1, hc, hc1, hac⟩, sub_ne_zero.1 hd⟩, ?_, ?_, ?_, ?_⟩
+  · change act6 0 (act6 1 (act6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4)))) = _
+    rw [s4, s3, s2, s1]
+  · change cL6 0 (act6 1 (act6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4)))) *
+      (cL6 1 (act6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4))) *
+      (cL6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4)) *
+      (cL6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4) * 1))) = ω
+    rw [s4, s3]
+    change (1 : K) * (1 / ((-ω ^ 2 - ω ^ 3 - 1) ^ 2 * (1 - ω ^ 2 - ω ^ 3 - 1) ^ 2 *
+      (1 + ω - 1) ^ 2) * ((1 + ω ^ 2 + ω ^ 3) ^ 2 * (1 + ω ^ 2 + ω ^ 3 - 1) ^ 2 /
+      ((1 + ω ^ 2 + ω ^ 3 - (ω ^ 2 + ω ^ 3)) ^ 2 * (1 + ω ^ 2 + ω ^ 3 - -ω ^ 4) ^ 2) *
+      (1 * 1))) = ω
+    rw [show (1 : K) / ((-ω ^ 2 - ω ^ 3 - 1) ^ 2 * (1 - ω ^ 2 - ω ^ 3 - 1) ^ 2 *
+        (1 + ω - 1) ^ 2) = ω ^ 3 by
+          rw [div_eq_iff (mul_ne_zero (mul_ne_zero (pow_ne_zero 2 d1) (pow_ne_zero 2 d2))
+            (pow_ne_zero 2 d3))]
+          linear_combination
+            (1 - ω + ω ^ 5 - ω ^ 6 - ω ^ 9 - 2 * ω ^ 11 - 3 * ω ^ 12 - ω ^ 13) * hω,
+      show (1 + ω ^ 2 + ω ^ 3) ^ 2 * (1 + ω ^ 2 + ω ^ 3 - 1) ^ 2 /
+        ((1 + ω ^ 2 + ω ^ 3 - (ω ^ 2 + ω ^ 3)) ^ 2 * (1 + ω ^ 2 + ω ^ 3 - -ω ^ 4) ^ 2) = ω ^ 3 by
+          rw [div_eq_iff (mul_ne_zero (pow_ne_zero 2 d4) (pow_ne_zero 2 hd))]
+          linear_combination (-ω ^ 3 + 2 * ω ^ 4 - ω ^ 5 + ω ^ 6 + 2 * ω ^ 7 + ω ^ 8) * hω]
+    linear_combination (-ω + ω ^ 2) * hω
+  · change act6 0 (act6 1 (act6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4)))) = _
+    rw [s4, s3, s2, s1]
+  · change c6 0 (act6 1 (act6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4)))) *
+      (c6 1 (act6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4))) *
+      (c6 2 (act6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4)) *
+      (c6 3 ((ω ^ 2 + ω ^ 3 : K), 1 + ω ^ 2 + ω ^ 3, -ω ^ 4) * 1))) = ω
+    rw [s4, s3]
+    change (-1 : K) * (-1 / (1 + ω - 1) ^ 2 * ((1 + ω ^ 2 + ω ^ 3) * (1 + ω ^ 2 + ω ^ 3 - 1) /
+      (1 + ω ^ 2 + ω ^ 3 - -ω ^ 4) ^ 2 * (1 * 1))) = ω
+    rw [e3, show (-1 : K) / (1 + ω - 1) ^ 2 = -ω ^ 3 by
+      rw [div_eq_iff (pow_ne_zero 2 d3)]; linear_combination (-1 + ω) * hω]
+    linear_combination (-ω + ω ^ 2) * hω
+
+/-- The point `(−1, −i, i)` of `M_{0,6}` is fixed by the `4`-cycle `s₁s₂s₃`, where the factor on
+`L₆` is `i`. -/
+lemma fix_four6 (h2 : (2 : K) ≠ 0) {ι : K} (hι : ι ^ 2 = -1) :
+    U6 ((-1 : K), -ι, ι) ∧ wAct act6s [0, 1, 2] ((-1 : K), -ι, ι) = (-1, -ι, ι) ∧
+      wCoc act6s c6 [0, 1, 2] ((-1 : K), -ι, ι) = ι := by
+  have hι0 : ι ≠ 0 := fun h => h2 (by rw [h] at hι; linear_combination 2 * hι)
+  have hι1 : ι ≠ 1 := fun h => h2 (by rw [h] at hι; linear_combination hι)
+  have hιm : ι ≠ -1 := fun h => h2 (by rw [h] at hι; linear_combination hι)
+  have t3 : act6 2 ((-1 : K), -ι, ι) = (2, 1 - ι, ι + 1) := by
+    change ((1 - -1 : K), -ι * (-1 - 1) / (-1 - -ι), ι * (-1 - 1) / (-1 - ι)) = _
+    simp only [Prod.mk.injEq]
+    refine ⟨by norm_num, ?_, ?_⟩
+    · rw [div_eq_iff (fun h => hι1 (by linear_combination h))]; linear_combination hι
+    · rw [div_eq_iff (fun h => hιm (by linear_combination -h))]; linear_combination hι
+  have t2 : act6 1 ((2 : K), 1 - ι, ι + 1) = (2, ι + 1, 1 - ι) := by
+    change ((2 : K) / (2 - 1), (1 - ι) / (1 - ι - 1), (ι + 1) / (ι + 1 - 1)) = _
+    simp only [Prod.mk.injEq]
+    refine ⟨by norm_num, ?_, ?_⟩
+    · rw [div_eq_iff (fun h => hι0 (by linear_combination -h))]; linear_combination hι
+    · rw [div_eq_iff (fun h => hι0 (by linear_combination h))]; linear_combination hι
+  have t1 : act6 0 ((2 : K), ι + 1, 1 - ι) = (-1, -ι, ι) := by
+    change ((1 - 2 : K), 1 - (ι + 1), 1 - (1 - ι)) = _
+    simp only [Prod.mk.injEq]
+    exact ⟨by norm_num, by ring, by ring⟩
+  have hv : (-1 : K) * (-1 / ((2 - 1) ^ 2 * (ι + 1 - 1) ^ 2) * (-1 * (-1 - 1) / (-1 - ι) ^ 2 * 1))
+      = ι := by
+    rw [show (ι + 1 - 1 : K) ^ 2 = -1 by linear_combination hι,
+      show (-1 - ι : K) ^ 2 = 2 * ι by linear_combination hι]
+    field_simp
+    linear_combination -2 * hι
+  refine ⟨⟨⟨by norm_num, fun h => h2 (by linear_combination -h), neg_ne_zero.2 hι0,
+    fun h => hιm (by linear_combination -h), fun h => hι1 (by linear_combination h)⟩,
+    (fix_four h2 hι).1, fun h => h2 (by linear_combination ι * h + 2 * hι)⟩, ?_, ?_⟩
+  · change act6 0 (act6 1 (act6 2 ((-1 : K), -ι, ι))) = _
+    rw [t3, t2, t1]
+  · change c6 0 (act6 1 (act6 2 ((-1 : K), -ι, ι))) * (c6 1 (act6 2 ((-1 : K), -ι, ι)) *
+      (c6 2 ((-1 : K), -ι, ι) * 1)) = ι
+    rw [t3]
+    exact (by norm_num : (-1 : K) * (-1 / (ι + 1 - 1) ^ 2 * (-1 * (-1 - 1) / (-1 - ι) ^ 2 * 1))
+      = _).trans hv
+
+/-- The entry « 20 ? » of page 70 for `L`, `n = 6`, does not check: a power `m` of the cocycle
+of `L` is the coboundary of a nowhere-zero function on `M_{0,6}(K)` iff `5 ∣ m` (`5 ≠ 0`, a root
+`ω` of `ω⁴ + ω³ + ω² + ω + 1`). -/
+theorem coboundary_cL6_iff (h5 : (5 : K) ≠ 0) {ω : K} (hω : ω ^ 4 + ω ^ 3 + ω ^ 2 + ω + 1 = 0)
+    (m : ℤ) : (∃ h : K × K × K → K, (∀ p, U6 p → h p ≠ 0) ∧
+      ∀ w p, U6 p → wCoc act6 cL6 w p ^ m = h (wAct act6 w p) / h p) ↔ 5 ∣ m := by
+  constructor
+  · rintro ⟨h, hh, hc⟩
+    obtain ⟨hU, hfix, hcoc, -, -⟩ := fix_five hω
+    have e := hc [0, 1, 2, 3] _ hU
+    rw [hfix, hcoc, div_self (hh _ hU)] at e
+    exact five_dvd_of_pow h5 hω m e
+  · rintro ⟨t, rfl⟩
+    refine ⟨fun p => hL6 p ^ t, fun p hp => zpow_ne_zero _ (hL6_ne hp), ?_⟩
+    refine wCoc_zpow (V := U6) (h := fun p => hL6 p ^ t) (fun i p hp => act6_U6 i hp)
+      (fun p hp => zpow_ne_zero _ (hL6_ne hp)) ?_
+    intro i p hp
+    rw [zpow_mul, show cL6 i p ^ (5 : ℤ) = _ by exact_mod_cast cL6_pow_five i hp, div_zpow]
+
+/-- The entry « 60 ? » of page 70 for `L_i`, `n = 6`, does not check: a power `m` of the cocycle
+of `L₆` under `𝔖₅` is the coboundary of a nowhere-zero function on `M_{0,6}(K)` iff `20 ∣ m`
+(`2 ≠ 0`, `5 ≠ 0`, `i² = −1`, `ω⁴ + ω³ + ω² + ω + 1 = 0`). -/
+theorem coboundary_c6_iff (h2 : (2 : K) ≠ 0) (h5 : (5 : K) ≠ 0) {ι : K} (hι : ι ^ 2 = -1)
+    {ω : K} (hω : ω ^ 4 + ω ^ 3 + ω ^ 2 + ω + 1 = 0) (m : ℤ) :
+    (∃ h : K × K × K → K, (∀ p, U6 p → h p ≠ 0) ∧
+      ∀ w p, U6 p → wCoc act6s c6 w p ^ m = h (wAct act6s w p) / h p) ↔ 20 ∣ m := by
+  constructor
+  · rintro ⟨h, hh, hc⟩
+    obtain ⟨hU, -, -, hfix, hcoc⟩ := fix_five hω
+    have e := hc [0, 1, 2, 3] _ hU
+    rw [hfix, hcoc, div_self (hh _ hU)] at e
+    obtain ⟨hU', hfix', hcoc'⟩ := fix_four6 h2 hι
+    have e' := hc [0, 1, 2] _ hU'
+    rw [hfix', hcoc', div_self (hh _ hU')] at e'
+    have := five_dvd_of_pow h5 hω m e
+    have := four_dvd_of_pow h2 hι m e'
+    omega
+  · rintro ⟨t, rfl⟩
+    refine ⟨fun p => (g6 p ^ 2) ^ t, fun p hp => zpow_ne_zero _ (pow_ne_zero _ (g6_ne hp)), ?_⟩
+    refine wCoc_zpow (V := U6) (h := fun p => (g6 p ^ 2) ^ t) (fun i p hp => act6_U6 _ hp)
+      (fun p hp => zpow_ne_zero _ (pow_ne_zero _ (g6_ne hp))) ?_
+    intro i p hp
+    rw [zpow_mul, show c6 i p ^ (20 : ℤ) = g6 (act6s i p) ^ 2 / g6 p ^ 2 by
+      rw [show (20 : ℤ) = ((10 * 2 : ℕ) : ℤ) by norm_num, zpow_natCast, pow_mul,
+        c6_pow_ten i hp]; ring, div_zpow]
 
 end Grothendieck.Folder146
