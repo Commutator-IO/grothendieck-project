@@ -1,4 +1,4 @@
-\section[Cote 146 : les exposants trivialisants de $L_4$ et de $L$ sur $M_{0,4}$]{Cote 146 : les exposants trivialisants de $L_4$ et de $L$ sur $M_{0,4}$\protect\verifie{Folder146}}\label{sec:146}
+\section[Cote 146 : les exposants trivialisants de $L_i$ et de $L$ sur $M_{0,4}$ et $M_{0,5}$]{Cote 146 : les exposants trivialisants de $L_i$ et de $L$ sur $M_{0,4}$ et $M_{0,5}$\protect\verifie{Folder146}}\label{sec:146}
 
 La cote 146, \emph{Groupoïdes de Teichmüller}, cent trente-trois pages que l'inventaire date \q{[à partir de 1978]}, porte page~70 un tableau : pour $n = \operatorname{card} I = 4, 5, 6$, le plus petit exposant qui rend trivial, de façon compatible au groupe symétrique, le fibré $L = \bigotimes L_i$ sur $M_{0,I}$, et les fibrés $L_i$ attachés aux points marqués (\lot{146}{4}{70}). Pour $n = 4$ il donne $3$ pour $L$ et $6$ pour $L_i$ ; les colonnes $n = 5$ et~$6$ portent des points d'interrogation. La lecture ne vérifie pas le tableau, et la piste tombe si les valeurs pour $n = 4$ ne se vérifient pas.
 
@@ -36,11 +36,53 @@ La signature tue exactement le facteur d'ordre~$2$ : au point $-1$, fixé par $1
 
 \noindent Vérifié au niveau des cocycles (\texttt{sgn\_mul}, \texttt{derL\_mul}, \texttt{derL\_pow\_three}, \texttt{coboundary\_derL\_iff}). Lean ne démontre ni que $V_4$ agit trivialement, ni que le produit des dérivées en $0$, $1$, $\infty$ est la signature, ni que l'ordre sous $\mathfrak S_4$ est celui sous $\mathfrak S_3$ (injectivité de l'inflation $H^1(\mathfrak S_3, \cdot) \to H^1(\mathfrak S_4, \cdot)$) : ces trois points forment la traduction du fibré $L$ en cocycle, faite dans le texte ci-dessus.
 
-Ne sont pas démontrés ici : le fait que le groupe de Picard équivariant soit $H^1(\mathfrak S_3, \mathcal O(U)^*)$, et les valeurs proposées pour $n = 5$ et~$6$, qui restent ouvertes :
+Passons à la colonne $n = 5$. Le tableau y porte \q{$12\,?$} pour $L$ comme pour $L_i$, et, plus bas sur la même page, un calcul aboutit à $(L^4)^3 \simeq \mathcal O$, c'est-à-dire $L^{\otimes 12} \simeq \mathcal O$. La question est donc de savoir si $12$ est le meilleur exposant dans les deux cas.
+
+\noindent\emph{Le modèle.} Un point de $M_{0,5}$ est une droite projective munie de cinq points distincts ; on envoie les trois premiers en $0$, $1$, $\infty$, et il reste deux coordonnées $(\lambda, \mu)$, avec $\lambda, \mu \notin \{0, 1\}$ et $\lambda \neq \mu$. Le groupe $\mathfrak S_5$ est engendré par les quatre transpositions $s_1 = (12)$, $s_2 = (23)$, $s_3 = (34)$, $s_4 = (45)$. Chacune permute les étiquettes ; on renvoie alors les trois premiers points en $0$, $1$, $\infty$ par une homographie $\varphi$, ce qui donne une substitution rationnelle :
+\[
+s_1 : (1 - \lambda,\ 1 - \mu), \quad s_2 : \Bigl(\frac{\lambda}{\lambda - 1},\ \frac{\mu}{\mu - 1}\Bigr), \quad s_3 : \Bigl(1 - \lambda,\ \frac{\mu(\lambda - 1)}{\lambda - \mu}\Bigr), \quad s_4 : (\mu, \lambda).
+\]
+L'homographie $\varphi$ agit aussi sur les droites tangentes aux points marqués, par sa dérivée. Sur $L_5$, la tangente au cinquième point, le facteur est $\varphi'(\mu)$ ; il n'a de sens que pour les permutations qui fixent le cinquième point, d'où le groupe $\mathfrak S_4$ engendré par $s_1, s_2, s_3$. Sur $L$, le facteur est le produit des dérivées aux cinq points (dans la carte $1/z$ en $\infty$). On trouve, pour $s_1, s_2, s_3, s_4$ :
+\[
+c_L = -1,\ \ \frac{-1}{(\lambda - 1)^2(\mu - 1)^2},\ \ \frac{\lambda(\lambda - 1)}{(\lambda - \mu)^2},\ \ 1 ; \qquad
+c_5 = -1,\ \ \frac{-1}{(\mu - 1)^2},\ \ \frac{\lambda(\lambda - 1)}{(\lambda - \mu)^2}.
+\]
+Sur un produit de générateurs, le facteur se calcule par la règle de cocycle $c(gh)(x) = c(g)(hx)\,c(h)(x)$, qui n'est autre que la dérivation des fonctions composées. Comme pour $n = 4$, $M_{0,5}$ est le complémentaire d'un arrangement de droites, son groupe de Picard est nul, et l'exposant cherché est l'ordre de la classe du cocycle : le plus petit $m \geq 1$ tel que $c^m$ soit le cobord $h(gx)/h(x)$ d'une fonction $h$ sans zéro.
+
+\noindent\emph{Le calcul.} Les fonctions inversibles sur $M_{0,5}$ sont, à une constante près, les monômes en $\lambda$, $\mu$, $1 - \lambda$, $1 - \mu$ et $\lambda - \mu$. Chercher $h$ revient à résoudre un système linéaire sur les exposants de ces cinq facteurs, plus une condition de signe sur la constante. Un calcul formel (sympy), qui retrouve d'abord les valeurs $3$ et $6$ pour $n = 4$, donne l'ordre $4$ pour $L$ et l'ordre $12$ pour $L_5$, avec les fonctions $h$ ci-dessous. Pour minorer, on raisonne comme pour $n = 4$ par les points fixes. Prenons $i$ avec $i^2 = -1$. Le $4$-cycle $s_1 s_2 s_3$ fixe le point $(\lambda, \mu) = (-1, i)$ : l'homographie correspondante est $z \mapsto (z + 1)/(1 - z)$, qui envoie $0 \mapsto 1 \mapsto \infty \mapsto -1 \mapsto 0$ et fixe $i$. Sa dérivée en $i$ vaut $2/(1 - i)^2 = i$, une racine primitive quatrième de l'unité. Le $3$-cycle $s_1 s_2$, lui, fixe $(1 - \zeta, \zeta)$, où $\zeta^2 - \zeta + 1 = 0$ ; l'homographie est $z \mapsto 1/(1 - z)$, et sa dérivée en $\zeta$ vaut $\zeta^2$.
+
+\begin{theoreme}[Grothendieck, page 70, colonne $n = 5$, pour $L_i$, valeur suivie de \q{?}\piste{146-equivariant-trivialising-exponents}]\label{thm:146-douze}
+Soit $K$ un corps où $2$ et $3$ sont inversibles, qui contient $i$ avec $i^2 = -1$ et une racine $\zeta$ de $\zeta^2 - \zeta + 1$. La puissance $m$-ième du cocycle $c_5$ de $L_5$ sous $\mathfrak S_4$ est le cobord d'une fonction sans zéro sur $M_{0,5}(K)$ si et seulement si $12 \mid m$. Pour $m = 12$ on peut prendre
+\[
+h = \frac{\mu^6 (1 - \mu)^6 (\lambda - \mu)^6}{\lambda^2 (1 - \lambda)^2}.
+\]
+\end{theoreme}
+
+\begin{proof}
+Pour $m = 12$, l'égalité $c_5(s)^{12} = h(sx)/h(x)$ se vérifie sur les trois générateurs, par exemple pour $s_1$ : $c_5 = -1$, et $h$ est invariante par $(\lambda, \mu) \mapsto (1 - \lambda, 1 - \mu)$. Elle passe aux produits de générateurs, puisque les deux membres suivent la même règle de cocycle. Réciproquement, au point $(-1, i)$, fixé par $s_1 s_2 s_3$, le second membre vaut $1$ et le cocycle vaut $i$, d'où $i^m = 1$ et $4 \mid m$ ; au point $(1 - \zeta, \zeta)$, fixé par $s_1 s_2$, il vaut $\zeta^2$, d'où $3 \mid m$.
+\end{proof}
+
+\begin{contrexemple}[page 70, colonne $n = 5$, pour $L$ : le \q{$12\,?$} n'est pas le meilleur exposant\piste{146-equivariant-trivialising-exponents}]\label{ce:146-quatre}
+Sous les mêmes hypothèses (il suffit que $2$ soit inversible et que $i$ existe), la puissance $m$-ième du cocycle $c_L$ de $L$ sous $\mathfrak S_5$ est un cobord si et seulement si $4 \mid m$. Pour $m = 4$ on peut prendre $h = \bigl(\lambda\mu(1 - \lambda)(1 - \mu)(\lambda - \mu)\bigr)^2$. Le meilleur exposant pour $L$ est donc $4$, et non $12$.
+\end{contrexemple}
+
+\begin{proof}
+Sur les générateurs, $c_L(s)^4 = h(sx)/h(x)$ se vérifie directement ; par exemple pour $s_4$, $c_L = 1$ et $h$ est symétrique en $\lambda$, $\mu$. Au point $(-1, i)$, le facteur de $L$ est encore $i$ : les quatre autres points forment un seul cycle, et le produit des dérivées le long d'un cycle de longueur $4$ est la dérivée de $\varphi^4 = \mathrm{id}$, soit $1$. D'où $4 \mid m$. L'ordre $3$ disparaît : au point $(1 - \zeta, \zeta)$, les dérivées aux deux points fixes $\zeta$ et $1 - \zeta$ sont inverses l'une de l'autre, comme la signature compensait la dérivée en $-1$ pour $n = 4$.
+\end{proof}
+
+Le $12$ de la page pour $L$ est donc un exposant qui trivialise, celui que donne le calcul $(L^4)^3 \simeq \mathcal O$, mais pas le meilleur ; c'est la même situation que pour $n = 4$, où la page~72 trouvait $L^{\otimes 6} \simeq 1$ quand l'ordre est $3$.
+
+\noindent Vérifié au niveau des cocycles (\texttt{cL\_pow\_four}, \texttt{coboundary\_cL\_iff}, \texttt{c5\_pow\_twelve}, \texttt{coboundary\_c5\_iff}). Lean manipule les mots en $s_1, \ldots, s_4$ : la substitution d'un mot est la composée, son facteur est donné par la règle de cocycle (\texttt{wAct}, \texttt{wCoc}), et l'énoncé \q{pour tout élément du groupe} devient \q{pour tout mot}. Ne sont pas démontrés en Lean : que les substitutions et les facteurs vérifient les relations de Coxeter de $\mathfrak S_5$, de sorte que les mots passent au groupe (vérifié par le calcul formel), et la dérivation des facteurs $c_L$, $c_5$ à partir des homographies, faite ci-dessus.
+
+\begin{remarque}
+Le même calcul pour $n = 6$, avec trois coordonnées et neuf facteurs inversibles, donne l'ordre $5$ pour $L$ et l'ordre $20$ pour $L_6$, au lieu des valeurs \q{$20\,?$} et \q{$60\,?$} du tableau. Les minorations viennent des points fixes : la configuration formée de $0$ et des racines cinquièmes de l'unité, fixée par $z \mapsto e^{2i\pi/5} z$, donne une racine primitive cinquième ; celle de $0$, $\infty$ et des racines quatrièmes, fixée par $z \mapsto iz$, donne $i$ pour $L_6$ (pour $L$, les facteurs en $0$ et en $\infty$ se compensent). Sur les trois colonnes, $L$ est d'ordre $n - 1$ et $L_i$ d'ordre $(n - 1)(n - 2)$, le nombre de la première ligne du tableau. Ce calcul n'est pas formalisé.
+\end{remarque}
+
+Ne sont pas démontrés ici : le fait que le groupe de Picard équivariant soit le $H^1$ des unités, et la colonne $n = 6$, qui reste au rang de conjecture corrigée :
 
 \begin{encadre}
-\begin{conjecture*}[Grothendieck, pages 70, 72 et 73, exposants trivialisants sur $M_{0,I}$\piste{146-equivariant-trivialising-exponents}]
-Sur $M_{0,I}$, pour $n = \operatorname{card} I = 5$ et~$6$, les plus petits exposants qui rendent triviaux, de façon compatible au groupe symétrique, les fibrés $L = \bigotimes L_i$ et $L_i$ sont ceux de la table, qui propose les valeurs $12$, $20$ et $60$, suivies de points d'interrogation.
+\begin{conjecture*}[d'après Grothendieck, page 70, colonne $n = 6$\piste{146-equivariant-trivialising-exponents}]
+Sur $M_{0,6}$, les plus petits exposants qui rendent triviaux, de façon compatible au groupe symétrique, les fibrés $L$ et $L_i$ sont $5$ et $20$ ; la page propose $20$ et $60$, suivis de points d'interrogation.
 \end{conjecture*}
 \end{encadre}
-{\small Les valeurs pour $n = 4$, $6$ pour $L_i$ et $3$ pour $L$, sont les théorèmes~\ref{thm:146-six} et~\ref{thm:146-trois}. Mathlib n'a pas les espaces de modules $M_{0,n}$.\par}
+{\small Les valeurs pour $n = 4$ sont les théorèmes~\ref{thm:146-six} et~\ref{thm:146-trois} ; pour $n = 5$, le théorème~\ref{thm:146-douze} et le contre-exemple~\ref{ce:146-quatre}. Mathlib n'a pas les espaces de modules $M_{0,n}$.\par}
