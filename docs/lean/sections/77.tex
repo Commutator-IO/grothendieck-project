@@ -84,6 +84,32 @@ Soient $K$ un corps de caractéristique différente de~$2$, $a, b \in K^\times$,
 \end{encadre}
 L'énoncé tient tel que la page l'écrit, sur un corps (Lean : \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/Folder77.lean}{\texttt{qf\_commutator}, \texttt{sphere\_quotient}, \texttt{hors\_de\_U}}).
 
+
+Sur $\mathbf R$, avec $a = b = -1$, l'algèbre est celle des quaternions de Hamilton et l'énoncé se voit (figure~\ref{fig:77-sphere}). $E$ est l'espace euclidien des quaternions purs, $q(u) = u^2 = -\|u\|^2$, $\varphi(x, y) = -2\,x \cdot y$ et $[x, y] = 2\,x \times y$. Un couple de $\tilde U$ est un couple de vecteurs orthogonaux de même norme, son image $[x, y]/2q(x) = -x \times y/\|x\|^2$ est le vecteur unitaire normal à leur plan, et $\Sigma$ est la sphère unité. Comme $q$ est définie, le cas du point~3 ne se présente pas : la conique n'a pas de point réel.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1cm, y=1cm, >=stealth, every node/.style={font=\small}]
+\def\R{2.1}
+\fill[black!5] (0,0) circle (\R);
+\draw[black!60] (0,0) circle (\R);
+\draw[black!45, densely dashed] (\R,0) arc[start angle=0, end angle=180, x radius=\R, y radius=0.35*\R];
+\draw[black!45] (-\R,0) arc[start angle=180, end angle=360, x radius=\R, y radius=0.35*\R];
+\node[black!55] at (-1.55,-0.95) {$t^\perp$};
+\draw[black!45, dotted, thick] (0,0) ellipse[x radius=1.3, y radius=0.455];
+\draw[->, thick] (0,0) -- (1.066,-0.26) node[right=1pt] {$x$};
+\draw[->, thick] (0,0) -- (-0.746,-0.373) node[below left=-1pt] {$y$};
+\draw[->, thick] (0,0) -- (0,0.94*\R) node[above right=-1pt] {$t$};
+\fill (0,0.94*\R) circle (1.6pt);
+\fill (0,0) circle (1.2pt);
+\node[anchor=west] at (1.15,1.55) {$\Sigma : q = -1$};
+\draw[->, black!70] (105:1.5 and 0.56) arc[start angle=105, end angle=165, x radius=1.5, y radius=0.56];
+\node[black!70, anchor=south east] at (-0.75,0.62) {\footnotesize $c + \mathbf i d$};
+\end{tikzpicture}
+\caption{La sphère comme quotient des couples isotropes, sur $\mathbf R$ et pour les quaternions de Hamilton. Le couple $(x, y)$, orthogonal et de même norme, a pour image le point $t = [x, y]/2q(x)$ de la sphère unité $\Sigma$, normal au plan $t^\perp$ de $x$ et $y$, avec $(y, x, t)$ direct. Les couples de même image, dont l'un est $(x, -tx)$ pour chaque $x \in t^\perp$ non nul, se déduisent de $(x, y)$ par les $c + \mathbf i d$, qui les font tourner et les dilatent dans $t^\perp$ ; le cercle pointillé en figure les extrémités, à norme fixée.}
+\label{fig:77-sphere}
+\end{figure}
+
 \begin{remarque}
 L'inverse est explicite et ne demande aucune localisation étale : pour $t \in \Sigma$ et tout $x$ orthogonal à $t$ avec $q(x) \neq 0$, $\tilde f(x - \mathbf i\,tx) = t$, et tout $(x, y) \in \tilde U$ d'image $t$ vérifie $y = -tx$. L'injectivité modulo l'action vient de ce que $t$, $x$ et $tx$ forment une base orthogonale de $E$. La version schématique et la version tordue des pages~102 à~116 ne sont pas formalisées.
 \end{remarque}

@@ -10,6 +10,33 @@ Les $\lambda \in R$ avec $1 + \rho\lambda$ inversible forment un groupe commutat
 
 \noindent L'énoncé tient sur les points, pour tout anneau : voir \texttt{forall\_surjective\_iff}, \texttt{u\_mul}, \texttt{det\_u}, \texttt{commute\_iff}, \texttt{isUnit\_iff}, \texttt{centraliserEquiv}, \texttt{mem\_startPoints\_iff} et \texttt{u\_e0\_injective} dans \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/Folder72.lean}{\texttt{Folder72.lean}}. Le test de la réciproque est l'anneau des nombres duaux, où $1 + \varepsilon$ n'est atteint que si $\rho$ est inversible. Pour $n = 1$, $\rho = \mu_0\mu_1 - \beta_0$, soit $4 - \beta_0$ pour des réflexions, comme à la page~41.
 
+Les points de $D_0$ sont la direction $c$ de $\tilde c$, le centre, et les $s_0 + \lambda\tilde c$ ; le point $d = D_0 \cap C$ est celui où $\pi(s_0 + \lambda\tilde c) = 1 + \rho\lambda$ s'annule. Comme $u_\mu(s_0 + \lambda\tilde c) = s_0 + (\lambda * \mu)\tilde c$ et $\lambda * \mu + 1/\rho = (1 + \rho\mu)(\lambda + 1/\rho)$ quand $\rho$ est inversible, $u_\mu$ agit sur la coordonnée $\lambda$ par l'homothétie de centre $d$ et de rapport $1 + \rho\mu$ ; pour $\rho = 0$, $d$ et $c$ se confondent et $u_\mu$ est la translation de~$\mu$ (figure~\ref{fig:72-torseur}).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=2.2cm, y=1cm, >=stealth, every node/.style={font=\small}]
+\begin{scope}
+\draw[black!55, <->] (-2.25,0) -- (3.2,0) node[right] {$c$};
+\draw[fill=white] (-1,0) circle (2.2pt);
+\node[below=3pt] at (-1,0) {$d$};
+\node[below=16pt, black!60] at (-1,0) {\footnotesize $\lambda = -1/\rho$};
+\foreach \x/\l in {0/s_0, 0.6/u_\mu s_0, 1.56/u_\mu^2 s_0} { \fill (\x,0) circle (2pt); \node[below=3pt] at (\x,0) {$\l$}; }
+\draw[->, black!70, shorten >=3pt, shorten <=3pt] (0,0) to[bend left=40] (0.6,0);
+\draw[->, black!70, shorten >=3pt, shorten <=3pt] (0.6,0) to[bend left=40] (1.56,0);
+\node[anchor=west] at (-2.25,1.05) {$\rho$ inversible : homothétie de centre $d$, de rapport $1 + \rho\mu$ ; $\mathcal U_\rho \simeq \mathbb G_m$};
+\end{scope}
+\begin{scope}[yshift=-2.6cm]
+\draw[black!55, <->] (-2.25,0) -- (3.2,0) node[right] {$c = d$};
+\foreach \x/\l in {0/s_0, 0.8/u_\mu s_0, 1.6/u_\mu^2 s_0} { \fill (\x,0) circle (2pt); \node[below=3pt] at (\x,0) {$\l$}; }
+\draw[->, black!70, shorten >=3pt, shorten <=3pt] (0,0) to[bend left=40] (0.8,0);
+\draw[->, black!70, shorten >=3pt, shorten <=3pt] (0.8,0) to[bend left=40] (1.6,0);
+\node[anchor=west] at (-2.25,1.05) {$\rho = 0$ : translation de $\mu$ ; $\mathcal U_0 = \mathbb G_a$};
+\end{scope}
+\end{tikzpicture}
+\caption{La droite projective $D_0$ des points de départ, dans la carte $\langle s, a'_0\rangle = 1$, où $s_0 + \lambda\tilde c$ a pour coordonnée $\lambda$ et où le centre $c$ est à l'infini. En haut, $\rho$ inversible : $D_0 \smallsetminus \{c, d\}$ est l'orbite de $s_0$, et $u_\mu$ en multiplie la distance à $d$ par $1 + \rho\mu$. En bas, $\rho = 0$ : $c = d$, et $D_0 \smallsetminus \{c\}$ est une droite affine sur laquelle $\mathcal U_0$ agit par translations. Les points sont dessinés pour $\rho = 1$, $\mu = 0{,}6$, puis $\rho = 0$, $\mu = 0{,}8$.}
+\label{fig:72-torseur}
+\end{figure}
+
 Aux pages~79 à~82, sur un corps $k$, la cote décrit les sous-espaces invariants (\lot{72}{4}{79}). Avec $Z'_i = H_0 \cap \dots \cap H_i$ et $Z^*_i = \operatorname{Lin}(h_{i+1}, \dots, h_n)$, $h_i = k a_i$ et $H_i = \operatorname{Ker} a'_i$ :
 
 \begin{theoreme}[Grothendieck, page 79\piste{72-invariant-subspaces-string}]

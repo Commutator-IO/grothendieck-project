@@ -36,6 +36,40 @@ Soient $a, b \in D$. Comme $\rho_C$ n'a qu'un cycle et que $D$ est fini, il exis
 Si $\rho_\Gamma = \rho_\Gamma \sigma_\Gamma$, la composition à gauche par $\rho_\Gamma^{-1}$ donne $\sigma_\Gamma = \mathrm{id}$, et tout arc serait un point fixe de $\sigma_\Gamma$, ce qui est exclu dès qu'il y a un arc.
 \end{proof}
 
+La figure~\ref{fig:152-arbre} suit le dictionnaire sur l'arbre plan à trois arêtes issues d'un même sommet. Les six arcs sont numérotés de sorte que $1$, $2$, $3$ partent du centre et que $\sigma_\Gamma$ échange $1$ et $4$, $2$ et $5$, $3$ et $6$ ; la rotation est $\rho_\Gamma = (1\,2\,3)$, qui fixe $4$, $5$, $6$. Alors $\rho_C = \rho_\Gamma\sigma_\Gamma$ envoie $1$ sur $\rho_\Gamma(4) = 4$, $4$ sur $\rho_\Gamma(1) = 2$, et ainsi de suite : $\rho_C = (1\,4\,2\,5\,3\,6)$ n'a qu'un cycle, le contour est un hexagone, et l'énoncé de connexité s'applique. Les sommets se lisent aux coins de l'hexagone : entre le côté $x$ et le côté $\rho_C x$ se trouve l'orbite de $\rho_\Gamma$ qui contient $\rho_C x$.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1cm, y=1cm, >=stealth, every node/.style={font=\small}]
+\begin{scope}
+\foreach \ang/\o/\r in {90/1/4, 210/2/5, 330/3/6} {
+  \begin{scope}[rotate=\ang]
+  \draw[black!35, line width=2.4pt] (0,0) -- (2,0);
+  \draw[->, shorten >=5pt, shorten <=5pt] (0,-0.17) -- (2,-0.17);
+  \draw[<-, shorten >=5pt, shorten <=5pt] (0,0.17) -- (2,0.17);
+  \fill (2,0) circle (1.8pt);
+  \end{scope}
+  \node at ([shift={(\ang-90:0.36)}]\ang:1.05) {$\o$};
+  \node at ([shift={(\ang+90:0.36)}]\ang:1.05) {$\r$};
+}
+\fill (0,0) circle (1.8pt);
+\draw[->, black!60] (105:0.5) arc[start angle=105, end angle=195, radius=0.5];
+\node[black!60] at (150:0.8) {\footnotesize $\rho_\Gamma$};
+\end{scope}
+\begin{scope}[xshift=6.3cm, yshift=0.15cm]
+\foreach \k in {0,...,5} \coordinate (h\k) at ({90-60*\k}:1.8);
+\fill[black!8] (h0)--(h1)--(h2)--(h3)--(h4)--(h5)--cycle;
+\foreach \a/\b in {0/1, 1/2, 2/3, 3/4, 4/5, 5/0} \draw[->, shorten >=2pt, shorten <=2pt] (h\a) -- (h\b);
+\foreach \k/\l in {0/1, 1/4, 2/2, 3/5, 4/3, 5/6} \node at ({60-60*\k}:1.33) {$\l$};
+\foreach \k in {0,...,5} \fill (h\k) circle (1.5pt);
+\foreach \k/\v in {0/{1,2,3}, 1/{4}, 2/{1,2,3}, 3/{5}, 4/{1,2,3}, 5/{6}} \node[black!70] at ({90-60*\k}:2.28) {\footnotesize $\{\v\}$};
+\node[black!60] at (0,0) {\footnotesize $\rho_C$};
+\end{scope}
+\end{tikzpicture}
+\caption{À gauche, un arbre plan à trois arêtes et ses six arcs : $\sigma_\Gamma$ échange les deux arcs d'une même arête, $\rho_\Gamma = (1\,2\,3)$ tourne autour du centre. À droite, le contour obtenu en découpant le plan le long de l'arbre : un seul polygone, dont les côtés se succèdent selon $\rho_C = \rho_\Gamma\sigma_\Gamma = (1\,4\,2\,5\,3\,6)$, et que $\sigma_C = \sigma_\Gamma$ recolle en identifiant les côtés $1$ et $4$, $2$ et $5$, $3$ et $6$. Les coins portent les sommets, orbites de $\rho_C\sigma_C = \rho_\Gamma$ : le centre trois fois, chaque feuille une fois.}
+\label{fig:152-arbre}
+\end{figure}
+
 \begin{remarque}
 L'équivalence n'utilise que $\sigma_\Gamma^2 = \mathrm{id}$. C'est le dictionnaire classique des cartes combinatoires, où les faces sont les cycles du produit de la rotation et de l'involution. Il remonte aux systèmes de rotation d'Edmonds (1960) ; sa forme par une paire de permutations est celle de Jacques (1968) \cite{jacques1968} et de Cori (1975) \cite{cori1975}. L'inventaire date la cote \q{[à partir de 1982]}.
 \end{remarque}

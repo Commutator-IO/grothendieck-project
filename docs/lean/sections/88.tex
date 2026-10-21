@@ -72,6 +72,30 @@ Par le lemme~\ref{lem:88-invol}, $\sigma_{\ell-2}\sigma_{\ell-1}$ a le même ord
 Pour $p, q \geq 1$, $\frac1p + \frac1q > \frac12$, $= \frac12$, $< \frac12$ équivalent respectivement à $pq < 2(p + q)$, $pq = 2(p + q)$, $pq > 2(p + q)$, c'est-à-dire à $(p-2)(q-2) < 4$, $= 4$, $> 4$. Si $p \geq 7$, $pq < 2(p+q)$ entraîne $q \leq 2$, et symétriquement ; hors de ces cas, il reste un nombre fini de couples avec $p, q \leq 6$, qu'on examine un à un. Pour~(1), $p = 2$ ou $q = 2$ donnent $0 < 4$ ; $p = 1$ n'est permis qu'avec $q = 2$, et $q = 1$ qu'avec $p = 2$ ; pour $p, q \geq 3$, $(p-2)(q-2) \in \{1, 2, 3\}$ laisse exactement $(3,3)$, $(3,4)$, $(4,3)$, $(3,5)$, $(5,3)$. Pour~(2), $p$ ou $q$ égal à $1$ ou $2$ est exclu, puisque $(p-2)(q-2)$ vaut alors $0$, ou $2 - q$ ou $2 - p$, qui est au plus $1$ ; pour $p, q \geq 3$, $(p-2)(q-2) = 4$ donne $(3,6)$, $(4,4)$, $(6,3)$. Pour~(3), les couples $p, q \geq 3$ qui ne vérifient pas $(p-2)(q-2) > 4$ sont les huit couples obtenus en~(1) et~(2). Six d'entre eux, les cinq de~(1) et $(4,4)$, sont exactement les couples $p, q \geq 3$ de somme au plus~$8$ ; les deux autres, $(3,6)$ et $(6,3)$, sont de somme~$9$. Un couple $p, q \geq 3$ vérifie donc $(p-2)(q-2) > 4$ si et seulement si $p + q \geq 9$ et $(p, q) \neq (3,6), (6,3)$.
 \end{proof}
 
+La figure~\ref{fig:88-types} place les types $(p, q)$ autour de l'hyperbole $(p - 2)(q - 2) = 4$, qui porte les trois types euclidiens et sépare les sphériques, en dessous, des hyperboliques, au-dessus. La droite $p + q = 9$ du point~(3) passe par $(3, 6)$ et $(6, 3)$, sur l'hyperbole, et laisse en dessous les six autres couples $p, q \geq 3$ qui ne sont pas hyperboliques.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.62cm, y=0.62cm, >=stealth, every node/.style={font=\small}]
+\draw[->, black!55] (0.4,0.4) -- (8.9,0.4) node[right] {$p$};
+\draw[->, black!55] (0.4,0.4) -- (0.4,8.9) node[above] {$q$};
+\foreach \k in {1,...,8} { \node[below, black!70] at (\k,0.4) {\footnotesize $\k$}; \node[left, black!70] at (0.4,\k) {\footnotesize $\k$}; }
+\draw[black!45, densely dashed] (0.9,8.1) -- (8.1,0.9) node[right, black!60] {\footnotesize $p + q = 9$};
+\draw[black!70] plot[domain=2.62:8.45, samples=80, smooth] (\x, {2 + 4/(\x - 2)});
+\node[black!70, anchor=west] at (8.55,2.62) {\footnotesize $(p - 2)(q - 2) = 4$};
+\foreach \p/\q in {1/2, 2/1, 2/2, 2/3, 2/4, 2/5, 2/6, 2/7, 2/8, 3/2, 3/3, 3/4, 3/5, 4/2, 4/3, 5/2, 5/3, 6/2, 7/2, 8/2} \fill (\p,\q) circle (3pt);
+\foreach \p/\q in {3/6, 4/4, 6/3} \fill[frise] (\p,\q) circle (3.4pt);
+\foreach \p/\q in {3/7, 3/8, 4/5, 4/6, 4/7, 4/8, 5/4, 5/5, 5/6, 5/7, 5/8, 6/4, 6/5, 6/6, 6/7, 6/8, 7/3, 7/4, 7/5, 7/6, 7/7, 7/8, 8/3, 8/4, 8/5, 8/6, 8/7, 8/8} \draw[fill=white] (\p,\q) circle (2.6pt);
+\begin{scope}[xshift=10.2cm, yshift=3.1cm]
+\fill (0,1.2) circle (3pt); \node[anchor=west] at (0.4,1.2) {sphérique, $\frac1p + \frac1q > \frac12$};
+\fill[frise] (0,0) circle (3.4pt); \node[anchor=west] at (0.4,0) {euclidien, $\frac1p + \frac1q = \frac12$};
+\draw[fill=white] (0,-1.2) circle (2.6pt); \node[anchor=west] at (0.4,-1.2) {hyperbolique, $\frac1p + \frac1q < \frac12$};
+\end{scope}
+\end{tikzpicture}
+\caption{Les types $(p, q)$ atteints, $p, q \leq 8$. Les sphériques sont les $(2, q)$, les $(p, 2)$ et les cinq types platoniciens $(3, 3)$, $(3, 4)$, $(4, 3)$, $(3, 5)$, $(5, 3)$ ; les euclidiens, sur l'hyperbole, sont $(4, 4)$, $(3, 6)$, $(6, 3)$. Parmi les $p, q \geq 3$, les hyperboliques sont les couples de somme au moins~$9$, hors de $(3, 6)$ et $(6, 3)$. Les types $(1, q)$, $q \neq 2$, et $(p, 1)$, $p \neq 2$, sont exclus.}
+\label{fig:88-types}
+\end{figure}
+
 \begin{remarque}
 La proposition demande seulement un groupe $W$ opérant librement et transitivement sur $R$ et une application $\varphi$ vérifiant a) et $\varphi(r, i)^2 = 1$. Que $W$ soit un groupe de Weyl, la condition b), la présentation c) et le graphe de Coxeter d) n'interviennent pas.
 \end{remarque}
