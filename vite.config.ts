@@ -145,6 +145,7 @@ export default defineConfig({
         formulas: resolve(import.meta.dirname, 'formulas/index.html'),
         quillen: resolve(import.meta.dirname, 'quillen/index.html'),
         bourbaki: resolve(import.meta.dirname, 'bourbaki/index.html'),
+        illusie: resolve(import.meta.dirname, 'illusie/index.html'),
         review: resolve(import.meta.dirname, 'review/index.html'),
       },
     },

@@ -20,7 +20,7 @@ import { useEffect, useState } from 'react';
  * one's own pages second — the choice the Hopper site made for its ledgers and
  * diaries. Every URL is what it was.
  */
-type Collection = 'fonds' | 'quillen' | 'bourbaki';
+type Collection = 'fonds' | 'quillen' | 'bourbaki' | 'illusie';
 
 const COLLECTIONS: { id: Collection; label: string; path: string }[] = [
   { id: 'fonds', label: 'Fonds', path: '/' },
@@ -30,9 +30,15 @@ const COLLECTIONS: { id: Collection; label: string; path: string }[] = [
   // A third: the Bourbaki archive (AHP, Nancy), mostly typescripts — the
   // rédactions he wrote for Bourbaki, and the ones he wrote on the back of.
   { id: 'bourbaki', label: 'Bourbaki', path: '/bourbaki/' },
+  // A fourth: the Fonds Grothendieck–Illusie at the IHÉS (#85), as an
+  // inventory only — the scans stay on the IHÉS's server, pending its answer.
+  { id: 'illusie', label: 'Illusie', path: '/illusie/' },
 ];
 const QUILLEN_PAGES: { path: string; label: string }[] = [{ path: '/quillen/', label: 'Research notebooks' }];
 const BOURBAKI_PAGES: { path: string; label: string }[] = [{ path: '/bourbaki/', label: 'Archive' }];
+const ILLUSIE_PAGES: { path: string; label: string }[] = [{ path: '/illusie/', label: 'Inventory' }];
+const pagesOf = (c: Collection) =>
+  c === 'fonds' ? [...FONDS_PAGES, ...PROJECT_PAGES] : c === 'quillen' ? QUILLEN_PAGES : c === 'bourbaki' ? BOURBAKI_PAGES : ILLUSIE_PAGES;
 
 // The readings of the whole fonds, and then — after a rule — the pages about
 // the project rather than about the folders.
@@ -57,6 +63,7 @@ export const collectionOf = (path: string): Collection => {
   const h = path.endsWith('/') ? path : `${path}/`;
   if (h.startsWith('/quillen/')) return 'quillen';
   if (h.startsWith('/bourbaki/')) return 'bourbaki';
+  if (h.startsWith('/illusie/')) return 'illusie';
   return 'fonds';
 };
 
@@ -136,10 +143,8 @@ export function Header({ path }: { path: string }) {
                 <Tab key={p.path} {...p} here={path} />
               ))}
             </>
-          ) : collection === 'quillen' ? (
-            QUILLEN_PAGES.map((p) => <Tab key={p.path} {...p} here={path} />)
           ) : (
-            BOURBAKI_PAGES.map((p) => <Tab key={p.path} {...p} here={path} />)
+            pagesOf(collection).map((p) => <Tab key={p.path} {...p} here={path} />)
           )}
         </nav>
 
@@ -160,7 +165,7 @@ export function Header({ path }: { path: string }) {
               <p className="px-2 py-1 text-[11px] font-semibold uppercase tracking-wider text-ink-400">
                 {c.label}
               </p>
-              {(c.id === 'fonds' ? [...FONDS_PAGES, ...PROJECT_PAGES] : c.id === 'quillen' ? QUILLEN_PAGES : BOURBAKI_PAGES).map((p) => (
+              {pagesOf(c.id).map((p) => (
                 <a
                   key={p.path}
                   href={p.path}
@@ -195,13 +200,26 @@ function Mark() {
   );
 }
 
-export function Footer({ collection = 'fonds' }: { collection?: 'fonds' | 'quillen' | 'bourbaki' }) {
+export function Footer({ collection = 'fonds' }: { collection?: Collection }) {
   const quillen = collection === 'quillen';
   const bourbaki = collection === 'bourbaki';
+  const illusie = collection === 'illusie';
   return (
     <footer className="mt-16 border-t border-ink-200 bg-white">
       <div className="mx-auto max-w-6xl px-5 py-8 text-[12.5px] leading-relaxed text-ink-500">
-        {bourbaki ? (
+        {illusie ? (
+          <>
+            <p className="max-w-[52em]">
+              The <strong className="font-semibold text-ink-700">Fonds Grothendieck–Illusie</strong> is
+              held by the Institut des Hautes Études Scientifiques (IHÉS), Bures-sur-Yvette, which has
+              digitised it and keeps the scans on its file server, repo-archives.ihes.fr.
+            </p>
+            <p className="mt-3 max-w-[52em]">
+              This site lists its inventory only, read from the IHÉS's item records, and links each item
+              to its directory there. No scan, image or text of the documents is copied or shown here.
+            </p>
+          </>
+        ) : bourbaki ? (
           <>
             <p className="max-w-[52em]">
               The documents are the{' '}
@@ -250,12 +268,22 @@ export function Footer({ collection = 'fonds' }: { collection?: 'fonds' | 'quill
             than a citation. */}
         <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1">
           <a
-            href={quillen ? 'https://www.claymath.org/online-resources/quillen-notebooks/' : 'https://grothendieck.umontpellier.fr/'}
+            href={
+              illusie
+                ? 'https://repo-archives.ihes.fr/FONDS_GROTHENDIECK_ILLUSIE/'
+                : quillen
+                  ? 'https://www.claymath.org/online-resources/quillen-notebooks/'
+                  : 'https://grothendieck.umontpellier.fr/'
+            }
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
           >
-            {quillen ? 'claymath.org · Quillen notebooks ↗' : 'grothendieck.umontpellier.fr ↗'}
+            {illusie
+              ? 'repo-archives.ihes.fr · Fonds Grothendieck–Illusie ↗'
+              : quillen
+                ? 'claymath.org · Quillen notebooks ↗'
+                : 'grothendieck.umontpellier.fr ↗'}
           </a>
           <span aria-hidden="true" className="text-ink-300">
             ·

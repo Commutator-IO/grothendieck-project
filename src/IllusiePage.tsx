@@ -1,0 +1,166 @@
+import { useMemo, useState } from 'react';
+import { Footer, Header } from './components/Frame.tsx';
+import inventoryRaw from './content/illusie.json';
+
+/**
+ * The Fonds Grothendieck–Illusie, as an inventory (#85).
+ *
+ * The IHÉS holds this fonds — Grothendieck's letters to Luc Illusie, his
+ * correspondence with colleagues, notes, EGA and SGA papers — and keeps its
+ * scans on a bare file server, repo-archives.ihes.fr, outside its public
+ * catalogue. Until the IHÉS answers on their use, this page is metadata only:
+ * the titles, dates and page counts its own item records give
+ * (scripts/illusie-catalogue.mjs), each linking out to the item's directory
+ * there. No scan is framed, relayed, mirrored or thumbnailed, and nothing is
+ * transcribed — so there is no facsimile pane and no switch to gate.
+ */
+
+interface Item {
+  id: string;
+  series: string;
+  title: string | null;
+  creator: string | null;
+  recipient: string | null;
+  date: string | null;
+  sort: string | null;
+  pages: number;
+  url: string;
+  metadata?: false;
+}
+interface Inventory {
+  built: string;
+  source: string;
+  series: { id: string; label: string }[];
+  unreadable: { id: string; why: string }[];
+  items: Item[];
+}
+const INV = inventoryRaw as unknown as Inventory;
+const ITEMS = INV.items;
+const PAGES = ITEMS.reduce((n, i) => n + i.pages, 0);
+
+const fold = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const byId = (a: Item, b: Item) => a.id.localeCompare(b.id, 'en', { numeric: true });
+/** The records write names in capitals (« GROTHENDIECK »); shown in title case. */
+const name = (s: string | null) =>
+  s ? s.toLowerCase().replace(/(^|[\s\-'’(,;/])(\p{L})/gu, (_, p: string, c: string) => p + c.toUpperCase()) : null;
+
+export function IllusiePage() {
+  const [q, setQ] = useState('');
+
+  const groups = useMemo(() => {
+    const needle = fold(q.trim());
+    return INV.series
+      .map((s) => ({
+        ...s,
+        items: ITEMS.filter(
+          (i) =>
+            i.series === s.id &&
+            (!needle || fold(`${i.id} ${i.title ?? ''} ${i.creator ?? ''} ${i.recipient ?? ''} ${i.date ?? ''}`).includes(needle)),
+        ).sort(byId),
+      }))
+      .filter((g) => g.items.length);
+  }, [q]);
+  const shown = groups.reduce((n, g) => n + g.items.length, 0);
+
+  return (
+    <>
+      <Header path="/illusie/" />
+      <main className="mx-auto max-w-6xl px-5 py-12">
+        <header className="max-w-[46em]">
+          <p className="text-[11px] font-bold uppercase tracking-[0.11em] text-brand-600">Illusie</p>
+          <h1 className="titre mt-2 text-[34px] leading-[1.1] text-ink-900">The Fonds Grothendieck–Illusie</h1>
+          <p className="mt-4 text-[15px] leading-relaxed text-ink-600">
+            Papers of Grothendieck from Luc Illusie's archives, now held by the Institut des Hautes Études
+            Scientifiques: letters to Illusie, letters with colleagues, mathematical notes, and papers of EGA
+            and SGA. This page is their inventory, as the IHÉS's own item records describe them — title,
+            date, number of pages — with each item linked to its directory on the IHÉS's server.
+          </p>
+          <p className="tabular mt-3 text-[14px] text-ink-700">
+            {ITEMS.length} items in {INV.series.length} series, {PAGES.toLocaleString('en')} pages.
+          </p>
+        </header>
+
+        <aside className="mt-6 max-w-[46em] rounded-xl border border-ink-200 bg-ink-50 px-4 py-3 text-[13px] leading-relaxed text-ink-700">
+          The fonds is held by the IHÉS. Its scans are on the IHÉS's file server and are not reproduced
+          here: no image, PDF or transcription of them is shown or stored on this site. The correspondence
+          is under its authors' rights. For any use of the documents, contact the IHÉS archives,{' '}
+          <a href="mailto:archives@ihes.fr" className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2">
+            archives@ihes.fr
+          </a>
+          .
+        </aside>
+
+        <nav className="mt-8 flex flex-wrap gap-2" aria-label="Series">
+          {INV.series.map((s) => (
+            <a
+              key={s.id}
+              href={`#${s.id}`}
+              className="rounded-lg border border-ink-200 px-3 py-1 text-[12.5px] text-ink-700 hover:border-brand-500 hover:bg-brand-50"
+            >
+              {s.label} · {ITEMS.filter((i) => i.series === s.id).length}
+            </a>
+          ))}
+        </nav>
+
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          <input
+            type="search"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="Search titles, names, dates, shelfmarks…"
+            className="w-full rounded-lg border border-ink-200 px-3 py-1.5 text-[13px] sm:w-80"
+          />
+          <p className="tabular text-[12px] text-ink-500">{shown} shown</p>
+        </div>
+
+        {groups.map((g) => (
+          <section key={g.id} id={g.id} className="mt-10 scroll-mt-20">
+            <h2 className="text-[18px] font-semibold text-ink-900">{g.label}</h2>
+            <p className="tabular mt-0.5 text-[12px] text-ink-500">
+              {g.items.length} items · {g.items.reduce((n, i) => n + i.pages, 0).toLocaleString('en')} pages ·{' '}
+              <a href={`${INV.source}${g.id}/`} target="_blank" rel="noreferrer" className="hover:text-brand-700">
+                {g.id} ↗
+              </a>
+            </p>
+            <ul className="mt-3 grid gap-2">
+              {g.items.map((i) => (
+                <li key={i.id} className="rounded-xl border border-ink-200 bg-white px-4 py-3">
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <a
+                      href={i.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="min-w-0 flex-1 text-[14px] font-medium text-ink-900 hover:text-brand-700"
+                    >
+                      {i.title ?? <span className="italic text-ink-500">No readable record</span>}{' '}
+                      <span className="text-ink-400">↗</span>
+                    </a>
+                    <span className="tabular shrink-0 text-[12px] text-ink-500">{i.date ?? i.sort ?? 's.d.'}</span>
+                  </div>
+                  <p className="mt-1 text-[12px] text-ink-500">
+                    {[
+                      i.id,
+                      i.creator || i.recipient
+                        ? [name(i.creator), name(i.recipient)].filter(Boolean).join(' → ')
+                        : null,
+                      i.pages ? `${i.pages} p.` : null,
+                    ]
+                      .filter(Boolean)
+                      .join(' · ')}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+
+        <p className="mt-10 text-[12px] text-ink-400">
+          Fonds Grothendieck–Illusie, Institut des Hautes Études Scientifiques. Inventory read from the item
+          records at {INV.source} on {INV.built}
+          {INV.unreadable.length ? `; ${INV.unreadable.length} items have no readable record and are listed by shelfmark` : ''}.
+        </p>
+      </main>
+      <Footer collection="illusie" />
+    </>
+  );
+}
