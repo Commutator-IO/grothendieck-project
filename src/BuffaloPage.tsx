@@ -1,6 +1,72 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import catalogueRaw from './content/buffalo.json';
+import type { Board } from './components/Blackboard.tsx';
+
+// The reconstructed boards (git-ignored transcripts-buffalo/) are shown only
+// with RENDER_BUFFALO and in the dev server; otherwise the chunk is dropped.
+const RENDER_BUFFALO = import.meta.env.DEV || import.meta.env.VITE_RENDER_BUFFALO === 'true';
+const Blackboard = RENDER_BUFFALO
+  ? lazy(() => import('./components/Blackboard.tsx').then((m) => ({ default: m.Blackboard })))
+  : null;
+
+/** The tape side a second falls in: boards are filed by video and side. */
+const sideOf = (v: { segments: { start: number }[] }, t: number) =>
+  v.segments.reduce((s, x) => (x.start <= t ? x.start : s), 0);
+
+interface YTPlayer {
+  getCurrentTime(): number;
+  seekTo(t: number, allow: boolean): void;
+  destroy(): void;
+}
+declare global {
+  interface Window {
+    YT?: { Player: new (el: HTMLElement, o: object) => YTPlayer };
+    onYouTubeIframeAPIReady?: () => void;
+  }
+}
+let api: Promise<void> | null = null;
+const loadApi = () =>
+  (api ??= new Promise<void>((ok) => {
+    if (window.YT?.Player) return ok();
+    window.onYouTubeIframeAPIReady = () => ok();
+    const s = document.createElement('script');
+    s.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(s);
+  }));
+
+/** The YouTube player, through its API, so that the board can follow it. */
+function Player({ id, t, onTime, seek }: { id: string; t: number; onTime: (s: number) => void; seek: { t: number } | null }) {
+  const el = useRef<HTMLDivElement>(null);
+  const player = useRef<YTPlayer | null>(null);
+  useEffect(() => {
+    let alive = true;
+    let tick = 0;
+    loadApi().then(() => {
+      if (!alive || !el.current || !window.YT) return;
+      player.current = new window.YT.Player(el.current, {
+        videoId: id,
+        host: 'https://www.youtube-nocookie.com',
+        playerVars: { start: t, autoplay: 1, rel: 0 },
+      });
+      tick = window.setInterval(() => {
+        const s = player.current?.getCurrentTime?.();
+        if (typeof s === 'number') onTime(Math.floor(s));
+      }, 500);
+    });
+    return () => {
+      alive = false;
+      clearInterval(tick);
+      player.current?.destroy();
+      player.current = null;
+    };
+  }, [id, t, onTime]);
+  useEffect(() => {
+    if (seek) player.current?.seekTo(seek.t, true);
+  }, [seek]);
+  return <div ref={el} className="h-full w-full" />;
+}
+
 
 /**
  * The Buffalo lectures of 1973: Grothendieck's three courses at the State
@@ -67,6 +133,21 @@ export function BuffaloPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   const video = playing && CAT.courses.flatMap((c) => c.videos).find((v) => v.id === playing.id);
+  const [now, setNow] = useState(0);
+  const [seek, setSeek] = useState<{ t: number } | null>(null);
+  const [board, setBoard] = useState<Board | null>(null);
+  const side = video && playing ? sideOf(video, Math.max(now, playing.t)) : null;
+  useEffect(() => {
+    if (!RENDER_BUFFALO || !video || side === null) return setBoard(null);
+    let alive = true;
+    fetch(`/transcripts-buffalo/${video.id}-${String(side).padStart(4, '0')}.json`)
+      .then((r) => (r.ok && r.headers.get('content-type')?.includes('json') ? r.json() : null))
+      .then((b: Board | null) => alive && setBoard(b))
+      .catch(() => alive && setBoard(null));
+    return () => {
+      alive = false;
+    };
+  }, [video, side]);
 
   return (
     <>
@@ -115,15 +196,18 @@ export function BuffaloPage() {
                 Close
               </button>
             </div>
-            <div className="mt-2 aspect-video w-full overflow-hidden rounded-xl border border-ink-200 bg-ink-900">
-              <iframe
-                key={`${playing.id}@${playing.t}`}
-                src={`https://www.youtube-nocookie.com/embed/${playing.id}?start=${playing.t}&autoplay=1`}
-                title={video.title}
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
-                className="h-full w-full"
-              />
+            {/* The videos are a still photograph over the sound, so the board gets the room. */}
+            <div className={`mt-2 grid gap-4 ${board && Blackboard ? 'lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]' : ''}`}>
+              <div className="aspect-video w-full self-start overflow-hidden rounded-xl border border-ink-200 bg-ink-900">
+                <Player id={playing.id} t={playing.t} onTime={setNow} seek={seek} />
+              </div>
+              {board && Blackboard && (
+                <div className="h-[70vh]">
+                  <Suspense fallback={null}>
+                    <Blackboard board={board} now={now} onSeek={(s) => setSeek({ t: s })} />
+                  </Suspense>
+                </div>
+              )}
             </div>
           </section>
         )}
