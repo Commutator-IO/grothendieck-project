@@ -1,6 +1,5 @@
 import { batchesOf, ReadingView } from './ReadingView.tsx';
 import { batchName, useManifest } from '../lib/batches.ts';
-import pagesRaw from '../content/illusie-pages.json';
 
 /**
  * The reading view of one item of the Fonds Grothendieck–Illusie: the
@@ -12,10 +11,10 @@ import pagesRaw from '../content/illusie-pages.json';
  * turns the facsimile's pages. The facsimile is the IHÉS's
  * own jpg views, loaded from its server; nothing is relayed or copied.
  *
- * This module is imported only by a build made with RENDER_ILLUSIE (and by
- * the dev server): the IHÉS has not published the fonds, and until it agrees,
- * the deployed site carries neither this view nor the page addresses it reads
- * from src/content/illusie-pages.json.
+ * The page addresses come as a prop: from src/content/illusie-pages.json in a
+ * build made with RENDER_ILLUSIE (and in the dev server), otherwise only for
+ * the exceptions of src/content/illusie-public.ts — the IHÉS has not published
+ * the fonds, and until it agrees the deployed site carries no other item's.
  */
 
 export interface IllusieItem {
@@ -28,10 +27,11 @@ export interface IllusieItem {
   url: string;
 }
 
-const VIEWS = (pagesRaw as unknown as { views: Record<string, { jpg: string[]; pdf: string | null }> }).views;
+export type IllusieView = { jpg: string[]; pdf: string | null };
 
 export function IllusieReader({
   item,
+  view,
   batch,
   page,
   onBatch,
@@ -39,6 +39,8 @@ export function IllusieReader({
   onClose,
 }: {
   item: IllusieItem;
+  /** The item's page views on the IHÉS server: all items from illusie-pages.json with RENDER_ILLUSIE, else the exceptions of illusie-public.ts. */
+  view: IllusieView | undefined;
   batch: number;
   page?: number;
   onBatch: (batch: number) => void;
@@ -46,7 +48,6 @@ export function IllusieReader({
   onClose: () => void;
 }) {
   const manifest = useManifest();
-  const view = VIEWS[item.id];
   const jpg = view?.jpg ?? [];
   const pages = item.pages || jpg.length;
   const transcribed = batchesOf(manifest?.illusie, item.id, 'fr');

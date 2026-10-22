@@ -2,6 +2,8 @@ import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react
 import { Footer, Header } from './components/Frame.tsx';
 import inventoryRaw from './content/illusie.json';
 import { ITEM_NOTES } from './content/illusie-highlights.ts';
+import { PUBLIC_VIEWS } from './content/illusie-public.ts';
+import type { IllusieView } from './components/IllusieReader.tsx';
 
 /**
  * The Fonds Grothendieck–Illusie, as an inventory (#85).
@@ -24,9 +26,9 @@ import { ITEM_NOTES } from './content/illusie-highlights.ts';
  */
 
 const RENDER_ILLUSIE = import.meta.env.DEV || import.meta.env.VITE_RENDER_ILLUSIE === 'true';
-const IllusieReader = RENDER_ILLUSIE
-  ? lazy(() => import('./components/IllusieReader.tsx').then((m) => ({ default: m.IllusieReader })))
-  : null;
+const IllusieReader = lazy(() => import('./components/IllusieReader.tsx').then((m) => ({ default: m.IllusieReader })));
+/** Whether an item opens in the reading view: every item with RENDER_ILLUSIE, else only the exceptions. */
+const readable = (id: string) => RENDER_ILLUSIE || id in PUBLIC_VIEWS;
 
 /** `#FG_IL_2_GIRAUD69/1/p3`: an item, a batch of twenty pages, a page. As on the fonds' pages. */
 function fromHash(): { id: string; batch: number; page?: number } | null {
@@ -66,15 +68,25 @@ const name = (s: string | null) =>
 export function IllusiePage() {
   const [q, setQ] = useState('');
   const [onlyHits, setOnlyHits] = useState(false);
-  const [open, setOpen] = useState(() => (RENDER_ILLUSIE ? fromHash() : null));
-
+  const [open, setOpen] = useState(() => {
+    const h = fromHash();
+    return h && readable(h.id) ? h : null;
+  });
+  // All page addresses only in a build that shows every item; otherwise the exceptions'.
+  const [views, setViews] = useState<Record<string, IllusieView>>(PUBLIC_VIEWS);
   useEffect(() => {
     if (!RENDER_ILLUSIE) return;
+    void import('./content/illusie-pages.json').then((m) =>
+      setViews((m.default as unknown as { views: Record<string, IllusieView> }).views),
+    );
+  }, []);
+
+  useEffect(() => {
     // A series anchor (#FG_IL_3_…) is not an item: it moves the page and
     // leaves the reading view as it is.
     const onHash = () => {
       const h = fromHash();
-      if (h) setOpen(h);
+      if (h && readable(h.id)) setOpen(h);
     };
     addEventListener('hashchange', onHash);
     return () => removeEventListener('hashchange', onHash);
@@ -137,8 +149,9 @@ export function IllusiePage() {
           ) : (
             <>
               The fonds is held by the IHÉS. Its scans are on the IHÉS's file server and are not reproduced
-              here: no image, PDF or transcription of them is shown or stored on this site. The correspondence
-              is under its authors' rights.
+              here: no image, PDF or transcription of them is stored on this site, and only the letter to
+              Giraud of 13 June 1969 opens with its page views, loaded from the IHÉS's server. The
+              correspondence is under its authors' rights.
             </>
           )} For any use of the documents, contact the IHÉS archives,{' '}
           <a href="mailto:archives@ihes.fr" className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2">
@@ -147,10 +160,11 @@ export function IllusiePage() {
           .
         </aside>
 
-        {IllusieReader && item && open && (
+        {item && open && readable(item.id) && (
           <Suspense fallback={null}>
             <IllusieReader
               item={item}
+              view={views[item.id]}
               batch={open.batch}
               page={open.page}
               onBatch={(b) => goTo(item.id, b)}
@@ -201,7 +215,7 @@ export function IllusiePage() {
               {g.items.map((i) => (
                 <li key={i.id} className={`rounded-xl border bg-white px-4 py-3 ${ITEM_NOTES[i.id] ? 'border-alerte-500 ring-1 ring-alerte-500' : 'border-ink-200'}`}>
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    {IllusieReader ? (
+                    {readable(i.id) ? (
                       <span className="min-w-0 flex-1">
                         <a
                           href={`#${i.id}/1`}
