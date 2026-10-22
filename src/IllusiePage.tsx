@@ -65,6 +65,7 @@ const name = (s: string | null) =>
 
 export function IllusiePage() {
   const [q, setQ] = useState('');
+  const [onlyHits, setOnlyHits] = useState(false);
   const [open, setOpen] = useState(() => (RENDER_ILLUSIE ? fromHash() : null));
 
   useEffect(() => {
@@ -98,11 +99,12 @@ export function IllusiePage() {
         items: ITEMS.filter(
           (i) =>
             i.series === s.id &&
+            (!onlyHits || ITEM_NOTES[i.id] !== undefined) &&
             (!needle || fold(`${i.id} ${i.title ?? ''} ${i.creator ?? ''} ${i.recipient ?? ''} ${i.date ?? ''}`).includes(needle)),
         ).sort(byId),
       }))
       .filter((g) => g.items.length);
-  }, [q]);
+  }, [q, onlyHits]);
   const shown = groups.reduce((n, g) => n + g.items.length, 0);
 
   return (
@@ -178,6 +180,10 @@ export function IllusiePage() {
             placeholder="Search titles, names, dates, shelfmarks…"
             className="w-full rounded-lg border border-ink-200 px-3 py-1.5 text-[13px] sm:w-80"
           />
+          <label className="flex items-center gap-1.5 text-[12.5px] text-ink-700">
+            <input type="checkbox" checked={onlyHits} onChange={(e) => setOnlyHits(e.target.checked)} />
+            Only those meeting the fonds
+          </label>
           <p className="tabular text-[12px] text-ink-500">{shown} shown</p>
           <p className="text-[12px] text-alerte-600">In red, the items that meet the Montpellier fonds or an open question of the edition.</p>
         </div>
