@@ -4,11 +4,13 @@ import catalogueRaw from './content/buffalo.json';
 import type { Board } from './components/Blackboard.tsx';
 
 // The reconstructed boards (git-ignored transcripts-buffalo/) are shown only
-// with RENDER_BUFFALO and in the dev server; otherwise the chunk is dropped.
+// with RENDER_BUFFALO and in the dev server, with one exception: the first
+// tape side of the topos course, published as a demonstration (2026-10-22).
 const RENDER_BUFFALO = import.meta.env.DEV || import.meta.env.VITE_RENDER_BUFFALO === 'true';
-const Blackboard = RENDER_BUFFALO
-  ? lazy(() => import('./components/Blackboard.tsx').then((m) => ({ default: m.Blackboard })))
-  : null;
+const Blackboard = lazy(() => import('./components/Blackboard.tsx').then((m) => ({ default: m.Blackboard })));
+const PUBLIC_BOARDS: Record<string, () => Promise<{ default: unknown }>> = {
+  'URU5jgTvjhU-0000': () => import('./content/buffalo-board-URU5jgTvjhU-0000.json'),
+};
 
 /** The tape side a second falls in: boards are filed by video and side. */
 const sideOf = (v: { segments: { start: number }[] }, t: number) =>
@@ -138,12 +140,16 @@ export function BuffaloPage() {
   const [board, setBoard] = useState<Board | null>(null);
   const side = video && playing ? sideOf(video, Math.max(now, playing.t)) : null;
   useEffect(() => {
-    if (!RENDER_BUFFALO || !video || side === null) return setBoard(null);
+    const key = video && side !== null ? `${video.id}-${String(side).padStart(4, '0')}` : null;
+    if (!key || (!RENDER_BUFFALO && !(key in PUBLIC_BOARDS))) return setBoard(null);
     let alive = true;
-    fetch(`/transcripts-buffalo/${video.id}-${String(side).padStart(4, '0')}.json`)
-      .then((r) => (r.ok && r.headers.get('content-type')?.includes('json') ? r.json() : null))
-      .then((b: Board | null) => alive && setBoard(b))
-      .catch(() => alive && setBoard(null));
+    const load: Promise<Board | null> =
+      key in PUBLIC_BOARDS
+        ? PUBLIC_BOARDS[key]().then((m) => m.default as Board)
+        : fetch(`/transcripts-buffalo/${key}.json`).then((r) =>
+            r.ok && r.headers.get('content-type')?.includes('json') ? r.json() : null,
+          );
+    load.then((b) => alive && setBoard(b)).catch(() => alive && setBoard(null));
     return () => {
       alive = false;
     };
@@ -170,7 +176,9 @@ export function BuffaloPage() {
 
         <aside className="mt-6 max-w-[46em] rounded-xl border border-ink-200 bg-ink-50 px-4 py-3 text-[13px] leading-relaxed text-ink-700">
           The recordings are on Erwin Schulhoff's YouTube channel and are played from there; no sound is copied
-          to this site, and the lectures are not transcribed here. Tape sides marked « bad tape » are so marked
+          to this site, and the lectures are not transcribed here, with one exception: as a demonstration, the
+          first tape side of the topos course (4 April, from 0:00:00) opens beside a blackboard reconstructed from
+          the recording's automatic captions. Tape sides marked « bad tape » are so marked
           in the videos' descriptions. For the content of the topos course, see Colin McLarty,{' '}
           <a href="https://www.youtube.com/watch?v=5AR55ZsHmKI" target="_blank" rel="noopener noreferrer" className={link}>
             « Grothendieck's 1973 Topos Lectures » ↗
@@ -197,11 +205,11 @@ export function BuffaloPage() {
               </button>
             </div>
             {/* The videos are a still photograph over the sound, so the board gets the room. */}
-            <div className={`mt-2 grid gap-4 ${board && Blackboard ? 'lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]' : ''}`}>
+            <div className={`mt-2 grid gap-4 ${board ? 'lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]' : ''}`}>
               <div className="aspect-video w-full self-start overflow-hidden rounded-xl border border-ink-200 bg-ink-900">
                 <Player id={playing.id} t={playing.t} onTime={setNow} seek={seek} />
               </div>
-              {board && Blackboard && (
+              {board && (
                 <div className="h-[70vh]">
                   <Suspense fallback={null}>
                     <Blackboard board={board} now={now} onSeek={(s) => setSeek({ t: s })} />

@@ -221,8 +221,8 @@ export function Footer({ collection = 'fonds' }: { collection?: Collection }) {
               by John Duskin and William Lawvere, and published by Erwin Schulhoff on YouTube.
             </p>
             <p className="mt-3 max-w-[52em]">
-              This site lists the tapes and plays them from YouTube. No sound or transcription of the lectures
-              is copied or published here.
+              This site lists the tapes and plays them from YouTube. No sound is copied here, and the lectures
+              are not transcribed, except one tape side reconstructed as a blackboard for demonstration.
             </p>
           </>
         ) : illusie ? (
