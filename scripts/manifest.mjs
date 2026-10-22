@@ -28,6 +28,8 @@ const PUBLIC = resolve(ROOT, 'public');
 const BATCHES = resolve(ROOT, 'archives', 'batches');
 const TRANSCRIPTS = resolve(PUBLIC, 'transcripts');
 const ILLUSIE = resolve(PUBLIC, 'transcripts-illusie');
+const QUILLEN = resolve(PUBLIC, 'transcripts-quillen');
+const BOURBAKI = resolve(PUBLIC, 'transcripts-bourbaki');
 const RAW = resolve(ROOT, 'archives', 'raw');
 const STATUS = resolve(ROOT, 'transcripts', 'status.json');
 
@@ -52,6 +54,20 @@ async function pageCount(pdf) {
     // legitimate way to reclaim tens of gigabytes, and the batches keep working.
     return 0;
   }
+}
+
+/** A collection's rendered reading views, `<folder>#<batch>` → editions. */
+async function readingViews(root) {
+  const out = {};
+  for (const d of await dirs(root)) {
+    for (const f of await readdir(resolve(root, d.name))) {
+      const m = /^batch-(\d+)\.(fr|en|modern)\.html$/.exec(f);
+      if (!m) continue;
+      const list = (out[`${d.name}#${Number(m[1])}`] ??= []);
+      if (!list.includes(m[2])) list.push(m[2]);
+    }
+  }
+  return out;
 }
 
 export async function writeManifest() {
@@ -148,14 +164,35 @@ export async function writeManifest() {
    * which the deploy does only with RENDER_ILLUSIE set: switched off, this is
    * empty and the Illusie page, built without its reading view, never asks.
    */
-  const illusie = {};
-  for (const d of await dirs(ILLUSIE)) {
-    for (const f of await readdir(resolve(ILLUSIE, d.name))) {
-      const m = /^batch-(\d+)\.(fr|modern)\.html$/.exec(f);
-      if (!m) continue;
-      const list = (illusie[`${d.name}#${Number(m[1])}`] ??= []);
-      if (!list.includes(m[2])) list.push(m[2]);
+  const illusie = await readingViews(ILLUSIE);
+
+  /**
+   * Quillen's notebooks and the Bourbaki archive, the same way, keyed
+   * `<notebook label>#<batch>` and `<folder>#<batch>`. Their sources,
+   * transcripts-quillen/ and transcripts-bourbaki/, are git-ignored and live
+   * only on the machine that transcribed them (#36, #50), so these are filled
+   * only there, after `npm run render:local`; in CI they are always empty, and
+   * a local build made with the switches off drops them (vite.config.ts).
+   *
+   * A Bourbaki folder is named by its rédaction number (`457`, `383bis`) or
+   * `item-<id>` for an unnumbered document, and several AHP records can share
+   * a number; the AHP record it transcribes is the one its header cites
+   * (« From the facsimile …/items/show/792 »), so `bourbakiItems` maps that
+   * record's id to the folder.
+   */
+  const quillen = await readingViews(QUILLEN);
+  const bourbaki = await readingViews(BOURBAKI);
+  const bourbakiItems = {};
+  for (const d of await dirs(BOURBAKI)) {
+    for (const f of (await readdir(resolve(BOURBAKI, d.name))).filter((f) => f.endsWith('.tex')).sort()) {
+      const id = /items\/show\/(\d+)/.exec(await readFile(resolve(BOURBAKI, d.name, f), 'utf8'))?.[1];
+      if (id) {
+        bourbakiItems[id] ??= d.name;
+        break;
+      }
     }
+    const item = /^item-(\d+)$/.exec(d.name)?.[1];
+    if (item) bourbakiItems[item] ??= d.name;
   }
 
   /**
@@ -187,6 +224,9 @@ export async function writeManifest() {
         read: Object.fromEntries(Object.entries(read).map(([k, v]) => [k, v.size])),
         declared,
         illusie,
+        quillen,
+        bourbaki,
+        bourbakiItems,
       },
       null,
       2,

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { FacsimilePane, type OpenBatch } from "./components/FacsimilePane.tsx";
 import { Footer, Header } from "./components/Frame.tsx";
 import catalogueRaw from "./content/quillen.json";
@@ -15,11 +15,15 @@ import { NOTEBOOK_NOTES, YEAR_NOTES } from "./content/quillen-highlights.ts";
  * holds is told by Glenys Luke's index, which the Clay publishes; the page
  * shows its entry, credited, and searches it.
  *
- * No notebook is transcribed. When one is, it is shown only if the build was
- * made with RENDER_QUILLEN set: Quillen died in 2011, the notebooks are in
- * copyright, and nothing transcribed from them goes online before the Clay and
- * the family agree (#36). The facsimile needs no such switch — it is the
- * Clay's publication, not a copy.
+ * Transcriptions (transcripts-quillen/, rendered by `npm run render --
+ * --quillen`) are read in components/QuillenReader.tsx, beside the facsimile,
+ * at #<notebook>/<batch>/p<page> (#1968/1968-13/1/p3). That reader is compiled
+ * in only in the dev server and in a build made with RENDER_QUILLEN: Quillen
+ * died in 2011, the notebooks are in copyright, and nothing transcribed from
+ * them goes online before the Clay and the family agree (#36). The
+ * transcriptions are git-ignored besides, so no deployed build has any to
+ * show. The facsimile needs no switch — it is the Clay's publication, not a
+ * copy.
  */
 
 interface Notebook {
@@ -41,7 +45,17 @@ const CATALOGUE = catalogueRaw as unknown as {
 };
 const NOTEBOOKS = CATALOGUE.notebooks;
 
-const RENDER_TRANSCRIPTS = import.meta.env.VITE_RENDER_QUILLEN === "true";
+// Off, the condition is a constant `false` and the lazy import goes with it:
+// no reader chunk in the build.
+const RENDER_QUILLEN =
+  import.meta.env.DEV || import.meta.env.VITE_RENDER_QUILLEN === "true";
+const QuillenReader = RENDER_QUILLEN
+  ? lazy(() =>
+      import("./components/QuillenReader.tsx").then((m) => ({
+        default: m.QuillenReader,
+      })),
+    )
+  : null;
 
 const YEARS = Array.from({ length: 2003 - 1968 + 1 }, (_, i) =>
   String(1968 + i),
@@ -75,11 +89,25 @@ const fold = (s: string) =>
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase();
 
-/** The notebook the fragment names — `#1968/1968-1` — or the first of 1968. */
-function named(): Notebook | undefined {
-  const id = decodeURIComponent(location.hash.slice(1));
-  return NOTEBOOKS.find((n) => n.id === id);
+/**
+ * The notebook the fragment names — `#1968/1968-1` — and, for the reading
+ * view, a batch and a page: `#1968/1968-13/1/p3`.
+ */
+function parsed(): { nb: Notebook; batch: number; page?: number } | undefined {
+  const h = decodeURIComponent(location.hash.slice(1));
+  const whole = NOTEBOOKS.find((n) => n.id === h);
+  if (whole) return { nb: whole, batch: 1 };
+  const m = /^(.+)\/(\d+)(?:\/p(\d+))?$/.exec(h);
+  const nb = m && NOTEBOOKS.find((n) => n.id === m[1]);
+  return nb
+    ? {
+        nb,
+        batch: Math.max(1, Number(m[2])),
+        page: m[3] ? Number(m[3]) : undefined,
+      }
+    : undefined;
 }
+const named = (): Notebook | undefined => parsed()?.nb;
 const fromHash = (): Notebook => named() ?? inGroup("1968")[0] ?? NOTEBOOKS[0];
 
 export function QuillenPage() {
@@ -87,7 +115,8 @@ export function QuillenPage() {
   const [group, setGroup] = useState(nb.group);
   // The facsimile opens when a notebook is chosen, or when the link names one.
   const [pane, setPane] = useState(() => named() !== undefined);
-  const [batch, setBatch] = useState(1);
+  const [batch, setBatch] = useState(() => parsed()?.batch ?? 1);
+  const [page, setPage] = useState(() => parsed()?.page);
   const [query, setQuery] = useState("");
   const [whole, setWhole] = useState(false);
 
@@ -96,7 +125,8 @@ export function QuillenPage() {
       const n = fromHash();
       setNb(n);
       setGroup(n.group);
-      setBatch(1);
+      setBatch(parsed()?.batch ?? 1);
+      setPage(parsed()?.page);
       setPane(true);
     };
     addEventListener("hashchange", onHash);
@@ -107,9 +137,24 @@ export function QuillenPage() {
     history.replaceState(null, "", `#${n.id}`);
     setNb(n);
     setBatch(1);
+    setPage(undefined);
     setWhole(false);
     setPane(true);
   };
+  // The reading view's own moves: another batch, the page being read, close.
+  const toBatch = useCallback(
+    (b: number) => {
+      history.replaceState(null, "", `#${nb.id}/${b}`);
+      setBatch(b);
+      setPage(undefined);
+    },
+    [nb.id],
+  );
+  const onPage = useCallback((p: number) => setPage(p), []);
+  const closeReader = useCallback(() => {
+    history.replaceState(null, "", `#${nb.id}`);
+    setPane(false);
+  }, [nb.id]);
   const list = useMemo(() => inGroup(group), [group]);
   const q = fold(query.trim());
   const found = useMemo(
@@ -341,7 +386,7 @@ export function QuillenPage() {
                   onClick={() => setPane(true)}
                   className="hidden rounded-lg border border-brand-500 px-3 py-1.5 text-[13px] font-medium text-brand-700 transition hover:bg-brand-50 lg:inline-block"
                 >
-                  Show the facsimile
+                  {QuillenReader ? "Open the reading" : "Show the facsimile"}
                 </button>
               )}
             </div>
@@ -393,12 +438,9 @@ export function QuillenPage() {
             </div>
 
             <p className="mt-5 text-[14px] leading-relaxed text-ink-600">
-              No notebook is transcribed yet. When one is, its reading will
-              stand here, page by page beside the facsimile, as it does for the
-              Grothendieck fonds
-              {RENDER_TRANSCRIPTS
-                ? "."
-                : " — once the Clay Mathematics Institute and Quillen's family have agreed to it."}
+              {QuillenReader
+                ? "Where a notebook is transcribed, its reading stands below, page by page beside the facsimile, as it does for the Grothendieck fonds. The transcriptions are kept on the machine that made them, until the Clay Mathematics Institute and Quillen's family have agreed to their publication."
+                : "No notebook is transcribed here. When one is, its reading will stand here, page by page beside the facsimile, as it does for the Grothendieck fonds — once the Clay Mathematics Institute and Quillen's family have agreed to it."}
             </p>
             <p className="mt-3 text-[13px] leading-relaxed text-ink-500">
               Quillen died in 2011: the notebooks are in copyright, and the
@@ -428,6 +470,20 @@ export function QuillenPage() {
             </p>
           </section>
 
+          {QuillenReader && pane && (
+            <Suspense fallback={null}>
+              <QuillenReader
+                nb={nb}
+                heading={groupLabel(nb.group)}
+                batch={batch}
+                page={page}
+                onBatch={toBatch}
+                onPage={onPage}
+                onClose={closeReader}
+              />
+            </Suspense>
+          )}
+
           <p className="mt-10 max-w-[46em] text-[12px] leading-relaxed text-ink-400">
             The list of notebooks is read from the Clay's file listing
             (src/content/quillen.json, {CATALOGUE.built}); copies the Clay files
@@ -441,7 +497,7 @@ export function QuillenPage() {
         <Footer collection="quillen" />
       </div>
 
-      {pane && (
+      {!QuillenReader && pane && (
         <FacsimilePane
           open={facsimile}
           onClose={() => setPane(false)}

@@ -47,9 +47,18 @@ jobs:
     # transcription beside the IHÉS's page views, loaded from its server. Off,
     # the tab is the inventory alone: no pane, no image address, no reading
     # view, since the IHÉS has not published the fonds (#85).
+    #
+    # RENDER_BOURBAKI is the Bourbaki tab's, built the same way: off unless the
+    # repository variable is exactly `true`. On, the build compiles in the
+    # tab's reading view — a transcription beside the AHP's scan. But the
+    # transcriptions themselves, transcripts-bourbaki/, are git-ignored and
+    # never reach this runner until the AHP and the ACNB agree (#50), so even
+    # switched on the pane says « no transcription yet » for every document.
+    # (RENDER_QUILLEN, below, does the same for the Quillen tab, #36.)
     env:
       RENDER_TRANSCRIPTS: ${{ (vars.RENDER_TRANSCRIPTS == 'false' || (github.event_name == 'workflow_dispatch' && !inputs.render_transcripts)) && 'false' || 'true' }}
       RENDER_ILLUSIE: ${{ vars.RENDER_ILLUSIE == 'true' && 'true' || 'false' }}
+      RENDER_BOURBAKI: ${{ vars.RENDER_BOURBAKI == 'true' && 'true' || 'false' }}
     steps:
       - uses: actions/checkout@v7
 
@@ -89,6 +98,12 @@ jobs:
       - name: Render the Illusie transcripts
         if: env.RENDER_ILLUSIE == 'true'
         run: npm run render -- --illusie
+
+      # The Bourbaki archive's, likewise — a no-op here as long as
+      # transcripts-bourbaki/ is not versioned: the renderer finds no directory.
+      - name: Render the Bourbaki transcripts
+        if: env.RENDER_BOURBAKI == 'true'
+        run: npm run render -- --bourbaki
 
       # The TEI export is derived from the same .tex, for the same reason: a
       # committed XML would drift from its source. Like the renderer, it fails
@@ -224,6 +239,8 @@ jobs:
           VITE_RELAY: ${{ vars.RELAY_URL }}
           # Transcriptions of Quillen's notebooks are shown only when this is
           # true (#36); unset, the Quillen page shows the Clay's facsimiles alone.
+          # The reading view is compiled in with it; transcripts-quillen/ is
+          # git-ignored, so here the pane says « no transcription yet ».
           VITE_RENDER_QUILLEN: ${{ vars.RENDER_QUILLEN == 'true' }}
           # The review page (/review/) quotes a few words of the current reading
           # for each check; with the transcriptions switched off it quotes none.
@@ -231,6 +248,9 @@ jobs:
           # The Illusie tab's reading view is compiled in only when this is
           # true; otherwise the tab is the inventory alone (#85).
           VITE_RENDER_ILLUSIE: ${{ env.RENDER_ILLUSIE }}
+          # The Bourbaki tab's reading view, likewise; off, the tab is the
+          # catalogue and the AHP scan as before (#50).
+          VITE_RENDER_BOURBAKI: ${{ env.RENDER_BOURBAKI }}
 
       # GitHub Pages drops the custom domain on deploy unless a CNAME file
       # sits at the root of the artifact. `public/CNAME` is copied verbatim by

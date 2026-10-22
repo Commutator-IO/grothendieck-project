@@ -1,5 +1,6 @@
-import { defineConfig, type Plugin } from 'vite'
+import { defineConfig, loadEnv, type Plugin } from 'vite'
 import { request } from 'node:https'
+import { existsSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import allowedEditions from './relay/allowed.json'
 import react from '@vitejs/plugin-react'
@@ -118,8 +119,48 @@ function montpellierSource(): Plugin {
   }
 }
 
-export default defineConfig({
-  plugins: [react(), tailwindcss(), montpellierSource()],
+/**
+ * Keeps the local-only transcriptions out of a build made with their switch off.
+ *
+ * Quillen's notebooks (#36) and the Bourbaki archive (#50) are transcribed
+ * into git-ignored directories and rendered into git-ignored
+ * public/transcripts-quillen/ and public/transcripts-bourbaki/, which the dev
+ * server serves as it serves public/transcripts/. But Vite copies the whole of
+ * public/ into dist/, so a build on the machine that holds them would carry
+ * them too. Unless the build is made with VITE_RENDER_QUILLEN (resp.
+ * VITE_RENDER_BOURBAKI) exactly `true`, the copy is deleted from dist/ and the
+ * collection's entries are dropped from dist/manifest.json. In CI the
+ * directories never exist, so this only ever acts on a local build.
+ */
+function localTranscripts(env: Record<string, string>): Plugin {
+  const collections = [
+    { dir: 'transcripts-quillen', on: env.VITE_RENDER_QUILLEN === 'true', keys: ['quillen'] },
+    { dir: 'transcripts-bourbaki', on: env.VITE_RENDER_BOURBAKI === 'true', keys: ['bourbaki', 'bourbakiItems'] },
+  ]
+  let outDir = 'dist'
+  return {
+    name: 'local-transcripts',
+    apply: 'build',
+    configResolved: (c) => void (outDir = resolve(c.root, c.build.outDir)),
+    closeBundle() {
+      const off = collections.filter((c) => !c.on)
+      for (const c of off) rmSync(resolve(outDir, c.dir), { recursive: true, force: true })
+      const path = resolve(outDir, 'manifest.json')
+      if (!off.length || !existsSync(path)) return
+      const manifest = JSON.parse(readFileSync(path, 'utf8'))
+      for (const c of off) for (const k of c.keys) delete manifest[k]
+      writeFileSync(path, JSON.stringify(manifest, null, 2))
+    },
+  }
+}
+
+export default defineConfig(({ mode }) => ({
+  plugins: [
+    react(),
+    tailwindcss(),
+    montpellierSource(),
+    localTranscripts({ ...loadEnv(mode, process.cwd(), 'VITE_'), ...process.env } as Record<string, string>),
+  ],
   // GitHub Pages serves a project site under /<repo>/; the deploy workflow
   // would fill BASE_PATH in that case. Here the site is published on the
   // custom domain grothendieck.commutator.io, so the root is correct.
@@ -153,4 +194,4 @@ export default defineConfig({
   server: {
     port: process.env.PORT ? Number(process.env.PORT) : 5173,
   },
-})
+}))

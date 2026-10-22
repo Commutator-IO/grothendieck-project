@@ -2,7 +2,8 @@ name: Transcriptions switch
 
 # Sets the repository variable RENDER_TRANSCRIPTS, then publishes the site with
 # it (#31). It may also set RENDER_ILLUSIE, the Illusie tab's switch (#85),
-# which is off unless set to true and is left alone by default. Run by hand only, with the box ticked or not. The daily 16:00
+# which is off unless set to true and is left alone by default, and
+# RENDER_BOURBAKI, the Bourbaki tab's (#50), the same way. Run by hand only, with the box ticked or not. The daily 16:00
 # switch-off was scheduled until 2 October 2026 and removed: GitHub never
 # started a single one of those runs.
 #
@@ -21,6 +22,11 @@ on:
         default: false
       render_illusie:
         description: Show the Illusie tab's reading view — transcriptions and IHÉS facsimiles (sets RENDER_ILLUSIE; « unchanged » leaves it as it is)
+        type: choice
+        options: [unchanged, 'false', 'true']
+        default: unchanged
+      render_bourbaki:
+        description: Compile in the Bourbaki tab's reading view (sets RENDER_BOURBAKI; the transcriptions stay local, so the deployed pane says « no transcription yet »; « unchanged » leaves it as it is)
         type: choice
         options: [unchanged, 'false', 'true']
         default: unchanged
@@ -71,6 +77,15 @@ jobs:
         run: |
           gh variable set RENDER_ILLUSIE --repo "$REPO" --body "$VALUE"
           gh variable list --repo "$REPO" | grep RENDER_ILLUSIE
+
+      - name: Set RENDER_BOURBAKI
+        if: inputs.render_bourbaki == 'true' || inputs.render_bourbaki == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.RENDER_SWITCH_TOKEN }}
+          VALUE: ${{ inputs.render_bourbaki }}
+        run: |
+          gh variable set RENDER_BOURBAKI --repo "$REPO" --body "$VALUE"
+          gh variable list --repo "$REPO" | grep RENDER_BOURBAKI
 
       # A deploy already queued or running took the old value when it was
       # triggered, and would publish it; it is cancelled before a new one starts.

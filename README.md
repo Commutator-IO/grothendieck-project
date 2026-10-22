@@ -151,11 +151,40 @@ nothing and rewrites no history — the `.tex` stay in the repository, and
 switching back on restores the site at the next deploy.
 
 Quillen and Bourbaki go further: their transcriptions are never committed at
-all. `transcripts-quillen/` and `transcripts-bourbaki/` are git-ignored except
-for their preambles, and the Quillen page would show a transcription only in a
-build made with `RENDER_QUILLEN` set. The facsimiles need no switch, in any
-collection: they are always streamed from the holder's own server and never
-stored.
+all, and so never reach the deploy. `transcripts-quillen/` and
+`transcripts-bourbaki/` are git-ignored except for their preambles, and so are
+their reading views, `public/transcripts-quillen/` and
+`public/transcripts-bourbaki/`, which only the machine that holds the sources
+can render:
+
+```sh
+npm run render:local     # = npm run render -- --quillen, then -- --bourbaki
+npm run dev              # the dev server serves them as it serves public/transcripts/
+```
+
+In the dev server, the Quillen and Bourbaki tabs then open the same reading
+layout as a Montpellier folder — the transcription on the left, landing on the
+page the fragment names, the holder's PDF in the facsimile pane at `#page=N`,
+following the page being read: `/quillen/#1968/1968-13/1/p3` (notebook, batch,
+page; `#1968/1968-13` still opens the notebook at batch 1) and
+`/bourbaki/#doc/792/1/p3` (AHP record 792 = rédaction n° 457, transcribed in
+`transcripts-bourbaki/457/`; `#doc/792` still works). A Bourbaki folder is
+named by the rédaction number or `item-<id>`, and is matched to its AHP record
+by the `items/show/<id>` its header cites. A document with no rendered batch
+says « no transcription yet ».
+
+In a build, each reader is compiled in only with its switch:
+`VITE_RENDER_QUILLEN=true` (repository variable `RENDER_QUILLEN`) and
+`VITE_RENDER_BOURBAKI=true` (repository variable `RENDER_BOURBAKI`, set from
+the « Transcriptions switch » workflow, whose Bourbaki choice defaults to
+« unchanged »). Both are off by default; off, the tab is the catalogue and the
+facsimile pane as before, with no reader chunk in the build, and a local build
+also drops its copy of `public/transcripts-{quillen,bourbaki}/` and their
+manifest entries from `dist/`. Switched on in CI, the reader is there but has
+nothing to read: the transcription directories do not exist on the runner, so
+every document says « no transcription yet ». The facsimiles need no switch,
+in any collection: they are always streamed from the holder's own server and
+never stored.
 
 The Illusie tab has a switch of its own, `RENDER_ILLUSIE`, off unless the
 repository variable is exactly `true` (set it from the « Transcriptions

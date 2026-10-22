@@ -9,6 +9,14 @@
  *                                  public/transcripts-illusie/ — same subset,
  *                                  same reading view; run by the deploy only
  *                                  when RENDER_ILLUSIE is set
+ *   npm run render -- --quillen    Quillen's notebooks, transcripts-quillen/ →
+ *                                  public/transcripts-quillen/
+ *   npm run render -- --bourbaki   the Bourbaki archive, transcripts-bourbaki/
+ *                                  → public/transcripts-bourbaki/. Both
+ *                                  sources are git-ignored and exist only on
+ *                                  the machine that transcribed them, so these
+ *                                  two run locally (the dev server); in CI the
+ *                                  directories are absent and nothing renders
  *
  * The `.tex` under `transcripts/` is the source of record: it is what gets
  * cited, corrected, compiled and folded into a larger document. This script
@@ -36,14 +44,20 @@ import { FIGURES, pictureHash } from './tikz.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
 // Another collection's transcriptions go through the very same renderer, from
-// their own directory into their own: `--illusie` reads transcripts-illusie/.
-const COLLECTION = process.argv.includes('--illusie') ? 'transcripts-illusie' : 'transcripts';
+// their own directory into their own: `--illusie` reads transcripts-illusie/,
+// `--quillen` transcripts-quillen/, `--bourbaki` transcripts-bourbaki/.
+const COLLECTION =
+  ['illusie', 'quillen', 'bourbaki']
+    .filter((c) => process.argv.includes(`--${c}`))
+    .map((c) => `transcripts-${c}`)[0] ?? 'transcripts';
 const SOURCE = resolve(ROOT, COLLECTION);
 const OUT = resolve(ROOT, 'public', COLLECTION);
 
 export const EDITION_LABELS = {
   fr: { lang: 'fr', name: 'Transcription' },
   modern: { lang: 'fr', name: 'Lecture modernisée' },
+  // Quillen's notebooks are in English, and so are their transcriptions.
+  en: { lang: 'en', name: 'Transcription' },
 };
 
 // ---------------------------------------------------------------------------
@@ -143,6 +157,10 @@ function liftMath(tex) {
     // Pictures and tikz-cd first: both hold $, &, \\ and braces that every
     // later pass would mangle.
     .replace(/\\begin\{tikzpicture\}[\s\S]*?\\end\{tikzpicture\}/g, (m) => keep(m, 'picture'))
+    // A diagram set inside \[ … \], as LaTeX allows, is the same diagram:
+    // the display brackets go, or KaTeX would be handed the tikz-cd source.
+    // One diagram alone between them only: two side by side are left as they were.
+    .replace(/\\\[\s*(\\begin\{tikzcd\}(?:(?!\\end\{tikzcd\})[\s\S])*\\end\{tikzcd\})\s*\\\]/g, (_, m) => keep(m, 'diagram'))
     .replace(/\\begin\{tikzcd\}[\s\S]*?\\end\{tikzcd\}/g, (m) => keep(m, 'diagram'))
     .replace(/\\begin\{(equation\*?|align\*?|gather\*?|cases|matrix|pmatrix|bmatrix|array)\}[\s\S]*?\\end\{\1\}/g,
       (m) => keep(m, true))
@@ -344,6 +362,15 @@ function parseArrow(spec) {
     const bend = /^bend (left|right)(?:\s*=\s*(\d+))?$/.exec(part);
     if (bend) {
       arrow.bend = (bend[1] === 'left' ? 1 : -1) * Number(bend[2] ?? 30);
+      continue;
+    }
+    // A parallel pair — two maps between the same objects, the source and
+    // target of a coequaliser, or a pair of adjoints — is drawn as two arrows
+    // shifted apart, as tikz-cd does: to the left of travel, or to the right.
+    // Quillen's notebooks write them so; superposed, the two would be one.
+    const shift = /^shift (left|right)(?:\s*=\s*(\d+(?:\.\d+)?))?$/.exec(part);
+    if (shift) {
+      arrow.shift = (shift[1] === 'left' ? 1 : -1) * Number(shift[2] ?? 1);
       continue;
     }
     if (!seenDirection && /^[udlr]+$/.test(part)) {
@@ -739,8 +766,20 @@ function renderBlock(block) {
 function readMeta(tex) {
   const one = (name) => new RegExp(`\\\\${name}\\{([^{}]*)\\}`).exec(tex)?.[1] ?? '';
   const pages = /\\pages\{(\d+)\}\{(\d+)\}/.exec(tex);
+  // Quillen's notebooks and the Bourbaki rédactions name their unit with
+  // macros of their own preambles, \notebook{} and \redaction{}.
+  const [unit, folder] = one('folder')
+    ? ['Cote n°', one('folder')]
+    : one('notebook')
+      ? ['Notebook', one('notebook')]
+      : /^item-(\d+)$/.test(one('redaction'))
+        ? ['AHP item', one('redaction').slice(5)]
+        : one('redaction')
+          ? ['Rédaction n°', one('redaction')]
+          : ['Cote n°', ''];
   return {
-    folder: one('folder'),
+    unit,
+    folder,
     batch: one('batch'),
     title: one('foldertitle'),
     // Montpellier's own dating, brackets and all. Optional: a folder may have
@@ -883,7 +922,7 @@ export function readingPage({ meta, lang, name, html, extraStyle = '' }) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cote n° ${meta.folder}, pages ${meta.first}–${meta.last} — ${name}</title>
+<title>${meta.unit ?? 'Cote n°'} ${meta.folder}, pages ${meta.first}–${meta.last} — ${name}</title>
 <!-- The ar5iv stylesheet, verbatim: the same one LaTeXML produces for arXiv
      articles. Serving this view as its own document is what lets the sheet be
      used unmodified rather than scoped by hand. -->
@@ -1037,7 +1076,7 @@ ${extraStyle}</style>
 </head>
 <body>
 <article class="ltx_document">
-<p class="tr-head">Cote n° ${meta.folder}${meta.batch ? ` · batch ${meta.batch}` : ''} · pages ${meta.first}–${meta.last}
+<p class="tr-head">${meta.unit ?? 'Cote n°'} ${meta.folder}${meta.batch ? ` · batch ${meta.batch}` : ''} · pages ${meta.first}–${meta.last}
  · ${name}${meta.title ? ` · ${escapeHtml(meta.title)}` : ''}${
    meta.dating
      ? `<br><span class="tr-dating">Datation de l’inventaire : ${escapeHtml(meta.dating)}</span>`
@@ -1192,6 +1231,13 @@ function drawDiagram(cd) {
 
     var p1 = edge(b1, ux, uy, 6);
     var p2 = edge(b2, -ux, -uy, 6);
+    // shift left / shift right: the whole arrow moved off the chord, left
+    // of travel being (uy, -ux) on screen, by 4px a unit (tikz-cd's 0.56ex).
+    if (a.shift) {
+      var sh = 4 * a.shift;
+      p1 = { x: p1.x + uy * sh, y: p1.y - ux * sh };
+      p2 = { x: p2.x + uy * sh, y: p2.y - ux * sh };
+    }
 
     var ns = 'http://www.w3.org/2000/svg';
 
@@ -1401,7 +1447,7 @@ async function main() {
       // saying `folder`, so that a file downloaded on its own still says which
       // folder it is; requiring it to equal the directory keeps the two from
       // drifting apart unnoticed.
-      const m = /^(?:batch-(\d+)|(.+?))\.(fr|modern)\.tex$/.exec(file);
+      const m = /^(?:batch-(\d+)|(.+?))\.(fr|en|modern)\.tex$/.exec(file);
       if (!m || (m[2] !== undefined && m[2] !== folder)) {
         refused.push(`${folder}/${file}`);
         process.stderr.write(`  ✗ ${folder}/${file}: name outside the convention, skipped\n`);

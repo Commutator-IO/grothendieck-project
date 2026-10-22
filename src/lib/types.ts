@@ -202,6 +202,17 @@ export interface Manifest {
    * batch has. Rendered only in a build made with RENDER_ILLUSIE.
    */
   illusie?: Record<string, Edition[]>;
+  /**
+   * Reading views of Quillen's notebooks (`public/transcripts-quillen/`, keyed
+   * `<label>#<batch>`, edition `en`) and of the Bourbaki archive
+   * (`public/transcripts-bourbaki/`, keyed `<folder>#<batch>`). Their sources
+   * are git-ignored and local: filled only on the machine that transcribed
+   * them, empty in CI.
+   */
+  quillen?: Record<string, string[]>;
+  bourbaki?: Record<string, string[]>;
+  /** AHP record id → its folder under transcripts-bourbaki/ (`792` → `457`). */
+  bourbakiItems?: Record<string, string>;
 }
 
 /** Keyed by `<cote>#<batch>`. */

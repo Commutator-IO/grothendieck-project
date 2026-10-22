@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { FacsimilePane, type OpenBatch } from './components/FacsimilePane.tsx';
 import { Footer, Header } from './components/Frame.tsx';
 import catalogueRaw from './content/bourbaki.json';
@@ -19,7 +19,21 @@ import skimRaw from './content/bourbaki-skim.json';
  * he wrote it, he was present, the archive names him, or a leaf of the fonds
  * carries its rédaction number — he wrote his notes on its back, or a
  * transcription names it. Only that: a shared subject is not a link.
+ *
+ * The reading view — a document's transcription (transcripts-bourbaki/,
+ * rendered by `npm run render -- --bourbaki`) beside its scan, the layout of
+ * the Montpellier folders (components/BourbakiReader.tsx), at
+ * #doc/<id>/<batch>/p<page> — is compiled in only in the dev server and in a
+ * build made with RENDER_BOURBAKI. The transcriptions stay local until the AHP
+ * and the ACNB agree (#50): they are git-ignored, so no deployed build has
+ * any. Off, the condition below is a constant `false`, the lazy import goes
+ * with it, and the page is the catalogue and the scan as before.
  */
+
+const RENDER_BOURBAKI = import.meta.env.DEV || import.meta.env.VITE_RENDER_BOURBAKI === 'true';
+const BourbakiReader = RENDER_BOURBAKI
+  ? lazy(() => import('./components/BourbakiReader.tsx').then((m) => ({ default: m.BourbakiReader })))
+  : null;
 
 interface Why {
   kind: 'author' | 'present' | 'named' | 'fonds';
@@ -67,11 +81,15 @@ const KIND_LABEL: Record<Why['kind'], string> = {
   fonds: 'in the fonds',
 };
 
-/** The document the fragment names — `#doc/433` — if any. */
-function named(): Doc | undefined {
-  const m = /^#doc\/(\d+)$/.exec(location.hash);
-  return m ? DOCS.find((d) => d.id === Number(m[1]) && d.pdf) : undefined;
+/** The document the fragment names — `#doc/433`, or `#doc/792/1/p3` for the reading view — if any. */
+function parsed(): { doc: Doc; batch: number; page?: number } | undefined {
+  const m = /^#doc\/(\d+)(?:\/(\d+)(?:\/p(\d+))?)?$/.exec(location.hash);
+  const doc = m ? DOCS.find((d) => d.id === Number(m[1]) && d.pdf) : undefined;
+  return doc && m
+    ? { doc, batch: Math.max(1, Number(m[2] ?? 1)), page: m[3] ? Number(m[3]) : undefined }
+    : undefined;
 }
+const named = (): Doc | undefined => parsed()?.doc;
 
 const fold = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
@@ -81,12 +99,15 @@ export function BourbakiPage() {
   const [q, setQ] = useState('');
   // The pane opens when a document is chosen, or when the link names one.
   const [sel, setSel] = useState<Doc | undefined>(named);
-  const [batch, setBatch] = useState(1);
+  const [batch, setBatch] = useState(() => parsed()?.batch ?? 1);
+  const [page, setPage] = useState(() => parsed()?.page);
 
   useEffect(() => {
     const onHash = () => {
-      setSel(named());
-      setBatch(1);
+      const h = parsed();
+      setSel(h?.doc);
+      setBatch(h?.batch ?? 1);
+      setPage(h?.page);
     };
     addEventListener('hashchange', onHash);
     return () => removeEventListener('hashchange', onHash);
@@ -96,7 +117,19 @@ export function BourbakiPage() {
     history.replaceState(null, '', `#doc/${d.id}`);
     setSel(d);
     setBatch(1);
+    setPage(undefined);
+    // The reading view opens above the list, as on the Illusie tab.
+    if (BourbakiReader) scrollTo({ top: 0, behavior: 'instant' });
   };
+  const toBatch = useCallback(
+    (b: number) => {
+      if (sel) history.replaceState(null, '', `#doc/${sel.id}/${b}`);
+      setBatch(b);
+      setPage(undefined);
+    },
+    [sel],
+  );
+  const onPage = useCallback((p: number) => setPage(p), []);
   const close = () => {
     history.replaceState(null, '', location.pathname + location.search);
     setSel(undefined);
@@ -156,6 +189,19 @@ export function BourbakiPage() {
             gives the pages where he appears, in a few words of ours (#50; machine-read, unchecked).
           </p>
         </header>
+
+        {BourbakiReader && sel && sel.pdf && (
+          <Suspense fallback={null}>
+            <BourbakiReader
+              doc={sel}
+              batch={batch}
+              page={page}
+              onBatch={toBatch}
+              onPage={onPage}
+              onClose={close}
+            />
+          </Suspense>
+        )}
 
         <div className="mt-8 flex flex-wrap items-center gap-2">
           <button
@@ -281,7 +327,7 @@ export function BourbakiPage() {
       <Footer collection="bourbaki" />
       </div>
 
-      {facsimile && <FacsimilePane open={facsimile} onClose={close} onBatch={setBatch} />}
+      {!BourbakiReader && facsimile && <FacsimilePane open={facsimile} onClose={close} onBatch={setBatch} />}
     </>
   );
 }
