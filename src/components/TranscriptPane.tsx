@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type RefObject } from 'react';
 import {
   BATCH_SIZE,
   batchRange,
@@ -42,56 +42,20 @@ export const EDITIONS: { key: Edition; label: string; help: string }[] = [
   },
 ];
 
-export function TranscriptPane({
-  cote,
-  batch,
-  pages,
-  available,
-  edition,
-  onEdition,
-  onPage,
-}: {
-  cote: string;
-  batch: number;
-  pages: number;
-  available: TranscriptEntry;
-  edition: PaneView;
-  onEdition: (e: PaneView) => void;
-  /** Called with the archive page currently at the top of the reading area. */
-  onPage: (page: number) => void;
-}) {
-  const frame = useRef<HTMLIFrameElement>(null);
+/**
+ * What makes a reading view a pane rather than a frame: grown to its content,
+ * landed on the page a fragment names (`/p28`), and reporting the page being
+ * read so the facsimile beside it follows. Shared by every collection's
+ * reading view — the fonds' here, the Fonds Grothendieck–Illusie's in
+ * IllusieReader — so that they cannot drift apart. Returns the frame's height.
+ */
+export function useReadingFrame(
+  frame: RefObject<HTMLIFrameElement | null>,
+  url: string,
+  enabled: boolean,
+  onPage: (page: number) => void,
+): number {
   const [height, setHeight] = useState(600);
-  const { first, last } = batchRange(batch, pages);
-  // Somebody else's transcription of this folder, if one is online in a form
-  // a browser will embed. Not a file this repository holds, so it is not in
-  // the manifest and cannot be looked up there.
-  const community = documentsFor(cote);
-  // Guarded on the documents existing, not merely on the fragment asking: a
-  // bookmarked `#119/1/community` outlives the edition it named, and the pane
-  // must fall back to the normal view rather than destructure an empty list.
-  const isCommunity = edition === 'community' && community.length > 0;
-  // His own printed text rather than somebody's transcription: the tab says
-  // so, since « Community » would credit Dieudonné's EGA to the community.
-  const printOnly = community.length > 0 && community.every((c) => c.doc.relation === 'print');
-  // Which of *our* editions the non-community path is showing. A fragment
-  // asking for a community edition that no longer exists lands on the
-  // transcription, which is the tab a reader would have opened anyway.
-  // The hidden `tei` view is the transcription rendered from its TEI export:
-  // same edition, same tab, another file beside it.
-  const isTei = edition === 'tei';
-  const view: Edition = edition === 'community' || isTei ? 'fr' : edition;
-  const present = isCommunity || available.html.includes(view);
-  const manifest = useManifest();
-  // The modernised reading is one file for the whole folder, so every batch of
-  // that folder opens the same document; a per-batch URL would 404 on batches
-  // 2 and 3. `editionUrl` picks whichever file actually covers these pages.
-  const texUrl = isCommunity ? '' : editionUrl(manifest, cote, batch, view, 'html');
-  const url = isTei ? texUrl.replace(/\.fr\.html$/, '.fr.tei.html') : texUrl;
-  // Folder-wide, not batch-wide: the modernised edition's precondition is that
-  // every batch of the folder is transcribed, so an empty Modernised tab has to
-  // report on the folder even though the reader is looking at one batch of it.
-  const folder = folderTranscription(manifest, cote, pages);
 
   /**
    * The frame is grown to its content, so it never scrolls.
@@ -102,7 +66,7 @@ export function TranscriptPane({
    * document element catches all of it, and the pane's own resize handle too.
    */
   useEffect(() => {
-    if (!present || isCommunity) return;
+    if (!enabled) return;
     const el = frame.current;
     if (!el) return;
 
@@ -122,7 +86,7 @@ export function TranscriptPane({
       el.removeEventListener('load', attachHeight);
       observer?.disconnect();
     };
-  }, [present, isCommunity, url]);
+  }, [enabled, url]);
 
   /**
    * Land on the page the fragment names — #140-1/2/p28, as the diagram and
@@ -131,7 +95,7 @@ export function TranscriptPane({
    * times over the first seconds, and not once the reader has scrolled.
    */
   useEffect(() => {
-    if (!present || isCommunity) return;
+    if (!enabled) return;
     const want = /\/p([\w-]+)$/.exec(location.hash)?.[1];
     const el = frame.current;
     if (!want || !el) return;
@@ -174,7 +138,7 @@ export function TranscriptPane({
       removeEventListener('keydown', stop);
       clearTimeout(timer);
     };
-  }, [present, isCommunity, url]);
+  }, [enabled, url]);
 
   /**
    * Scrolling the transcript turns the facsimile's pages.
@@ -195,7 +159,7 @@ export function TranscriptPane({
    * shifted by the frame's own offset to land in page coordinates.
    */
   useEffect(() => {
-    if (!present || isCommunity) return;
+    if (!enabled) return;
     const el = frame.current;
     if (!el) return;
 
@@ -238,7 +202,62 @@ export function TranscriptPane({
       el.removeEventListener('load', attach);
       detach();
     };
-  }, [present, isCommunity, url, onPage]);
+  }, [enabled, url, onPage]);
+
+  return height;
+}
+
+export function TranscriptPane({
+  cote,
+  batch,
+  pages,
+  available,
+  edition,
+  onEdition,
+  onPage,
+}: {
+  cote: string;
+  batch: number;
+  pages: number;
+  available: TranscriptEntry;
+  edition: PaneView;
+  onEdition: (e: PaneView) => void;
+  /** Called with the archive page currently at the top of the reading area. */
+  onPage: (page: number) => void;
+}) {
+  const frame = useRef<HTMLIFrameElement>(null);
+  const { first, last } = batchRange(batch, pages);
+  // Somebody else's transcription of this folder, if one is online in a form
+  // a browser will embed. Not a file this repository holds, so it is not in
+  // the manifest and cannot be looked up there.
+  const community = documentsFor(cote);
+  // Guarded on the documents existing, not merely on the fragment asking: a
+  // bookmarked `#119/1/community` outlives the edition it named, and the pane
+  // must fall back to the normal view rather than destructure an empty list.
+  const isCommunity = edition === 'community' && community.length > 0;
+  // His own printed text rather than somebody's transcription: the tab says
+  // so, since « Community » would credit Dieudonné's EGA to the community.
+  const printOnly = community.length > 0 && community.every((c) => c.doc.relation === 'print');
+  // Which of *our* editions the non-community path is showing. A fragment
+  // asking for a community edition that no longer exists lands on the
+  // transcription, which is the tab a reader would have opened anyway.
+  // The hidden `tei` view is the transcription rendered from its TEI export:
+  // same edition, same tab, another file beside it.
+  const isTei = edition === 'tei';
+  const view: Edition = edition === 'community' || isTei ? 'fr' : edition;
+  const present = isCommunity || available.html.includes(view);
+  const manifest = useManifest();
+  // The modernised reading is one file for the whole folder, so every batch of
+  // that folder opens the same document; a per-batch URL would 404 on batches
+  // 2 and 3. `editionUrl` picks whichever file actually covers these pages.
+  const texUrl = isCommunity ? '' : editionUrl(manifest, cote, batch, view, 'html');
+  const url = isTei ? texUrl.replace(/\.fr\.html$/, '.fr.tei.html') : texUrl;
+  // Folder-wide, not batch-wide: the modernised edition's precondition is that
+  // every batch of the folder is transcribed, so an empty Modernised tab has to
+  // report on the folder even though the reader is looking at one batch of it.
+  const folder = folderTranscription(manifest, cote, pages);
+
+  const height = useReadingFrame(frame, url, present && !isCommunity, onPage);
 
   /**
    * Comments on a passage (src/lib/notes.ts). The reading view is a

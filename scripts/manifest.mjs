@@ -27,6 +27,7 @@ const ROOT = resolve(import.meta.dirname, '..');
 const PUBLIC = resolve(ROOT, 'public');
 const BATCHES = resolve(ROOT, 'archives', 'batches');
 const TRANSCRIPTS = resolve(PUBLIC, 'transcripts');
+const ILLUSIE = resolve(PUBLIC, 'transcripts-illusie');
 const RAW = resolve(ROOT, 'archives', 'raw');
 const STATUS = resolve(ROOT, 'transcripts', 'status.json');
 
@@ -142,6 +143,22 @@ export async function writeManifest() {
   }
 
   /**
+   * The Fonds Grothendieck–Illusie's reading views, keyed `<item>#<batch>` like
+   * the fonds' own. Present only when `npm run render -- --illusie` has run,
+   * which the deploy does only with RENDER_ILLUSIE set: switched off, this is
+   * empty and the Illusie page, built without its reading view, never asks.
+   */
+  const illusie = {};
+  for (const d of await dirs(ILLUSIE)) {
+    for (const f of await readdir(resolve(ILLUSIE, d.name))) {
+      const m = /^batch-(\d+)\.(fr|modern)\.html$/.exec(f);
+      if (!m) continue;
+      const list = (illusie[`${d.name}#${Number(m[1])}`] ??= []);
+      if (!list.includes(m[2])) list.push(m[2]);
+    }
+  }
+
+  /**
    * The declared states, carried through from the repository.
    *
    * Only the three no file can prove: a pass in flight, a human comparison
@@ -169,6 +186,7 @@ export async function writeManifest() {
         tags,
         read: Object.fromEntries(Object.entries(read).map(([k, v]) => [k, v.size])),
         declared,
+        illusie,
       },
       null,
       2,

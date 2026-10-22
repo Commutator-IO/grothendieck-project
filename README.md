@@ -157,6 +157,20 @@ build made with `RENDER_QUILLEN` set. The facsimiles need no switch, in any
 collection: they are always streamed from the holder's own server and never
 stored.
 
+The Illusie tab has a switch of its own, `RENDER_ILLUSIE`, off unless the
+repository variable is exactly `true` (set it from the « Transcriptions
+switch » workflow, whose Illusie choice defaults to « unchanged », or with
+`gh variable set RENDER_ILLUSIE`). The IHÉS has not published the Fonds
+Grothendieck–Illusie, so off — the default — the deployed tab is the inventory
+alone, with no facsimile pane, no image address and no reading view. On, the
+deploy runs `npm run render -- --illusie` over `transcripts-illusie/` (versioned,
+like `transcripts/`) and builds with `VITE_RENDER_ILLUSIE=true`, and each item
+opens the same reading layout as a Montpellier folder, at
+`/illusie/#<item>/<batch>/p<page>`: the transcription on the left, the IHÉS's
+jpg page views in the facsimile pane, loaded from its server and never copied.
+The dev server always shows that view; `VITE_RENDER_ILLUSIE=true npm run build`
+reproduces it in a build.
+
 ## Transcription
 
 Every skill lives under `.claude/skills/` and, since 19 October 2026, runs on

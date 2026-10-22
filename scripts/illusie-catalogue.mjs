@@ -17,6 +17,14 @@
  * Writes src/content/illusie.json: metadata only, with each item's IHÉS
  * directory. Nothing of the scans is copied, framed or relayed; the page only
  * links out, pending the IHÉS's answer on the use of the fonds.
+ *
+ * Writes also src/content/illusie-pages.json: for each item, the names of its
+ * page views as the listing gives them (the `_NN.jpg` files, in order) and the
+ * PDF to link to when there are none (`_web.pdf`, else `<name>.pdf`). Names
+ * only, read from the listing; no file is fetched. The reading view's
+ * facsimile pane loads those views from the IHÉS server itself — and only in a
+ * build made with RENDER_ILLUSIE, which alone imports this file: a build
+ * without it carries neither the pane nor a single image address.
  */
 
 import { writeFileSync } from 'node:fs';
@@ -24,6 +32,7 @@ import { resolve } from 'node:path';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const OUT = resolve(ROOT, 'src/content/illusie.json');
+const PAGES_OUT = resolve(ROOT, 'src/content/illusie-pages.json');
 const BASE = 'https://repo-archives.ihes.fr/FONDS_GROTHENDIECK_ILLUSIE/';
 const UA = 'grothendieck.commutator.io inventory (+https://grothendieck.commutator.io/illusie/)';
 const DELAY = 1000;
@@ -103,6 +112,9 @@ const SERIES = [
 
 const items = [];
 const unreadable = [];
+/** id → { jpg: page views in order, pdf: the file to link to without them }. */
+const views = {};
+const natural = (a, b) => a.localeCompare(b, 'en', { numeric: true });
 let requests = 0;
 
 async function visit(series, path) {
@@ -140,6 +152,9 @@ async function visit(series, path) {
       rec.metadata = false;
     }
     items.push(rec);
+    const jpgs = files.filter((f) => /\.jpe?g$/i.test(f)).sort(natural);
+    const pdf = files.find((f) => f === `${name}_web.pdf`) ?? files.find((f) => f === `${name}.pdf`) ?? null;
+    views[name] = { jpg: jpgs, pdf };
     process.stdout.write(`${name}  ${rec.pages} p.  ${rec.title ?? '(no metadata)'}\n`);
   }
   for (const d of dirs) await visit(series, [...path, d]);
@@ -164,6 +179,17 @@ writeFileSync(
       series,
       unreadable,
       items,
+    },
+    null,
+    1,
+  ) + '\n',
+);
+writeFileSync(
+  PAGES_OUT,
+  JSON.stringify(
+    {
+      $why: 'Page views of the Fonds Grothendieck–Illusie items, by name, from the directory listings on repo-archives.ihes.fr (scripts/illusie-catalogue.mjs). « jpg » lists the views in page order, « pdf » the file linked to when there are none. Names only: the files stay on the IHÉS server. Imported only by a build made with RENDER_ILLUSIE.',
+      views,
     },
     null,
     1,

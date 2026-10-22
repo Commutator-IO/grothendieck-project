@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import inventoryRaw from './content/illusie.json';
 
@@ -11,9 +11,27 @@ import inventoryRaw from './content/illusie.json';
  * catalogue. Until the IHÉS answers on their use, this page is metadata only:
  * the titles, dates and page counts its own item records give
  * (scripts/illusie-catalogue.mjs), each linking out to the item's directory
- * there. No scan is framed, relayed, mirrored or thumbnailed, and nothing is
- * transcribed — so there is no facsimile pane and no switch to gate.
+ * there. No scan is framed, relayed, mirrored or thumbnailed.
+ *
+ * The reading view — each item's transcription beside its facsimile, the
+ * layout of the Montpellier folders (components/IllusieReader.tsx) — is built
+ * but switched off: it is compiled in only when the build is made with
+ * RENDER_ILLUSIE (repository variable, read by the deploy as
+ * VITE_RENDER_ILLUSIE), and in the dev server. Off, the condition below is a
+ * constant `false`, the lazy import goes with it, and the deployed page is the
+ * inventory alone, without the pane or a single image address.
  */
+
+const RENDER_ILLUSIE = import.meta.env.DEV || import.meta.env.VITE_RENDER_ILLUSIE === 'true';
+const IllusieReader = RENDER_ILLUSIE
+  ? lazy(() => import('./components/IllusieReader.tsx').then((m) => ({ default: m.IllusieReader })))
+  : null;
+
+/** `#FG_IL_2_GIRAUD69/1/p3`: an item, a batch of twenty pages, a page. As on the fonds' pages. */
+function fromHash(): { id: string; batch: number; page?: number } | null {
+  const h = /^#([\w-]+)\/(\d+)(?:\/fr)?(?:\/p(\d+))?$/.exec(decodeURIComponent(location.hash));
+  return h ? { id: h[1], batch: Math.max(1, Number(h[2])), page: h[3] ? Number(h[3]) : undefined } : null;
+}
 
 interface Item {
   id: string;
@@ -46,6 +64,30 @@ const name = (s: string | null) =>
 
 export function IllusiePage() {
   const [q, setQ] = useState('');
+  const [open, setOpen] = useState(() => (RENDER_ILLUSIE ? fromHash() : null));
+
+  useEffect(() => {
+    if (!RENDER_ILLUSIE) return;
+    // A series anchor (#FG_IL_3_…) is not an item: it moves the page and
+    // leaves the reading view as it is.
+    const onHash = () => {
+      const h = fromHash();
+      if (h) setOpen(h);
+    };
+    addEventListener('hashchange', onHash);
+    return () => removeEventListener('hashchange', onHash);
+  }, []);
+
+  const goTo = useCallback((id: string, batch: number) => {
+    history.replaceState(null, '', `#${id}/${batch}`);
+    setOpen({ id, batch });
+  }, []);
+  const onPage = useCallback((page: number) => setOpen((o) => (o && o.page !== page ? { ...o, page } : o)), []);
+  const close = useCallback(() => {
+    history.replaceState(null, '', location.pathname);
+    setOpen(null);
+  }, []);
+  const item = open ? ITEMS.find((i) => i.id === open.id) : undefined;
 
   const groups = useMemo(() => {
     const needle = fold(q.trim());
@@ -64,6 +106,8 @@ export function IllusiePage() {
 
   return (
     <>
+      {/* The content shifts rather than sliding under the facsimile pane, as on the fonds' pages. */}
+      <div className={item ? 'transition-[padding] duration-150 lg:pr-[var(--pane,0px)]' : undefined}>
       <Header path="/illusie/" />
       <main className="mx-auto max-w-6xl px-5 py-12">
         <header className="max-w-[46em]">
@@ -81,14 +125,37 @@ export function IllusiePage() {
         </header>
 
         <aside className="mt-6 max-w-[46em] rounded-xl border border-ink-200 bg-ink-50 px-4 py-3 text-[13px] leading-relaxed text-ink-700">
-          The fonds is held by the IHÉS. Its scans are on the IHÉS's file server and are not reproduced
-          here: no image, PDF or transcription of them is shown or stored on this site. The correspondence
-          is under its authors' rights. For any use of the documents, contact the IHÉS archives,{' '}
+          {RENDER_ILLUSIE ? (
+            <>
+              The fonds is held by the IHÉS. Its scans are on the IHÉS's file server and are not reproduced
+              here: the facsimile pane loads the IHÉS's page views from that server, and no image or PDF of
+              them is stored on this site. The correspondence is under its authors' rights.
+            </>
+          ) : (
+            <>
+              The fonds is held by the IHÉS. Its scans are on the IHÉS's file server and are not reproduced
+              here: no image, PDF or transcription of them is shown or stored on this site. The correspondence
+              is under its authors' rights.
+            </>
+          )} For any use of the documents, contact the IHÉS archives,{' '}
           <a href="mailto:archives@ihes.fr" className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2">
             archives@ihes.fr
           </a>
           .
         </aside>
+
+        {IllusieReader && item && open && (
+          <Suspense fallback={null}>
+            <IllusieReader
+              item={item}
+              batch={open.batch}
+              page={open.page}
+              onBatch={(b) => goTo(item.id, b)}
+              onPage={onPage}
+              onClose={close}
+            />
+          </Suspense>
+        )}
 
         <nav className="mt-8 flex flex-wrap gap-2" aria-label="Series">
           {INV.series.map((s) => (
@@ -126,15 +193,35 @@ export function IllusiePage() {
               {g.items.map((i) => (
                 <li key={i.id} className="rounded-xl border border-ink-200 bg-white px-4 py-3">
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <a
-                      href={i.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="min-w-0 flex-1 text-[14px] font-medium text-ink-900 hover:text-brand-700"
-                    >
-                      {i.title ?? <span className="italic text-ink-500">No readable record</span>}{' '}
-                      <span className="text-ink-400">↗</span>
-                    </a>
+                    {IllusieReader ? (
+                      <span className="min-w-0 flex-1">
+                        <a
+                          href={`#${i.id}/1`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            goTo(i.id, 1);
+                            scrollTo({ top: 0, behavior: 'instant' });
+                          }}
+                          aria-current={open?.id === i.id ? 'true' : undefined}
+                          className={`text-[14px] font-medium hover:text-brand-700 ${open?.id === i.id ? 'text-brand-700' : 'text-ink-900'}`}
+                        >
+                          {i.title ?? <span className="italic text-ink-500">No readable record</span>}
+                        </a>{' '}
+                        <a href={i.url} target="_blank" rel="noreferrer" className="text-[12px] text-ink-400 hover:text-brand-700">
+                          IHÉS ↗
+                        </a>
+                      </span>
+                    ) : (
+                      <a
+                        href={i.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="min-w-0 flex-1 text-[14px] font-medium text-ink-900 hover:text-brand-700"
+                      >
+                        {i.title ?? <span className="italic text-ink-500">No readable record</span>}{' '}
+                        <span className="text-ink-400">↗</span>
+                      </a>
+                    )}
                     <span className="tabular shrink-0 text-[12px] text-ink-500">{i.date ?? i.sort ?? 's.d.'}</span>
                   </div>
                   <p className="mt-1 text-[12px] text-ink-500">
@@ -161,6 +248,7 @@ export function IllusiePage() {
         </p>
       </main>
       <Footer collection="illusie" />
+      </div>
     </>
   );
 }

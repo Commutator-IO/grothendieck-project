@@ -4,6 +4,11 @@
  *
  *   npm run render                 every transcript
  *   npm run render -- 19           one folder
+ *   npm run render -- --illusie    the Fonds Grothendieck–Illusie, from
+ *                                  transcripts-illusie/ into
+ *                                  public/transcripts-illusie/ — same subset,
+ *                                  same reading view; run by the deploy only
+ *                                  when RENDER_ILLUSIE is set
  *
  * The `.tex` under `transcripts/` is the source of record: it is what gets
  * cited, corrected, compiled and folded into a larger document. This script
@@ -30,8 +35,11 @@ import { fileURLToPath } from 'node:url';
 import { FIGURES, pictureHash } from './tikz.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
-const SOURCE = resolve(ROOT, 'transcripts');
-const OUT = resolve(ROOT, 'public', 'transcripts');
+// Another collection's transcriptions go through the very same renderer, from
+// their own directory into their own: `--illusie` reads transcripts-illusie/.
+const COLLECTION = process.argv.includes('--illusie') ? 'transcripts-illusie' : 'transcripts';
+const SOURCE = resolve(ROOT, COLLECTION);
+const OUT = resolve(ROOT, 'public', COLLECTION);
 
 export const EDITION_LABELS = {
   fr: { lang: 'fr', name: 'Transcription' },
@@ -1372,7 +1380,7 @@ async function main() {
       .filter((d) => d.isDirectory() && d.name !== 'preamble' && d.name !== 'figures')
       .map((d) => d.name);
   } catch {
-    process.stdout.write('No transcripts/ directory yet — nothing to render.\n');
+    process.stdout.write(`No ${COLLECTION}/ directory yet — nothing to render.\n`);
     return;
   }
   if (only.length) folders = folders.filter((f) => only.includes(f));
@@ -1426,7 +1434,7 @@ async function main() {
     }
   }
 
-  process.stdout.write(`${n} reading views → public/transcripts/\n`);
+  process.stdout.write(`${n} reading views → public/${COLLECTION}/\n`);
   // A refused file used to be a warning on a green run: the batch simply had
   // no reading view, and the deploy published the site without it. The
   // refusal is the renderer saying the transcription left the subset, and

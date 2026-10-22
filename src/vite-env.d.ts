@@ -6,4 +6,6 @@ interface ImportMetaEnv {
   readonly VITE_RENDER_QUILLEN?: string;
   /** `false` when the transcriptions are switched off (repository variable RENDER_TRANSCRIPTS, #31); the review page then quotes no reading. */
   readonly VITE_RENDER_TRANSCRIPTS?: string;
+  /** `true` when the build carries the Illusie tab's reading view — transcription and IHÉS facsimile (repository variable RENDER_ILLUSIE, off by default); the dev server always does. */
+  readonly VITE_RENDER_ILLUSIE?: string;
 }

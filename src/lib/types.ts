@@ -196,6 +196,12 @@ export interface Manifest {
    * say how much of an unopened folder is likely to be readable at all.
    */
   read?: Record<string, number>;
+  /**
+   * Reading views of the Fonds Grothendieck–Illusie under
+   * `public/transcripts-illusie/`, keyed `<item>#<batch>`: the editions each
+   * batch has. Rendered only in a build made with RENDER_ILLUSIE.
+   */
+  illusie?: Record<string, Edition[]>;
 }
 
 /** Keyed by `<cote>#<batch>`. */

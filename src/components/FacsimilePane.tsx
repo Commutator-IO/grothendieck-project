@@ -74,8 +74,20 @@ export interface OpenBatch {
    * as it always was for the fonds.
    */
   source?: {
-    /** The PDF to frame, served by its owner. */
+    /**
+     * The PDF to frame, served by its owner. Empty when there is nothing the
+     * pane may embed: it then says so and offers `original` in a tab.
+     */
     file: string;
+    /**
+     * The pages as images rather than a PDF — the Fonds Grothendieck–Illusie's
+     * jpg views, loaded from the IHÉS server — one address per page, page N at
+     * index N-1. When present, the pane shows the batch's pages as a column of
+     * images, scrolled to the page being read, in place of the frame.
+     */
+    images?: string[];
+    /** Said in the pane when `file` is empty, under « Not shown here ». */
+    why?: string;
     /** Where a reader opens it in a tab of its own. */
     original: string;
     /** The header's first line, in place of « Cote n° … ». */
@@ -104,6 +116,8 @@ function clamp(w: number): number {
  * a batch wants to be.
  */
 function address(b: OpenBatch): string {
+  // Images or nothing to embed: no frame, so no address.
+  if (b.source && (b.source.images || !b.source.file)) return '';
   const url = b.source ? b.source.file : facsimileUrl(b.cote);
   // Pages not counted: no batch to open on, the file from its first page.
   if (b.source && b.pages <= 0) return url;
@@ -372,7 +386,17 @@ export function FacsimilePane({
           Pointed at a relay still starting up, it would frame the host's own
           start-up page — a stranger's loading screen inside the reading
           workspace, which is worse than saying plainly that we are waiting. */}
-      {open.relay === 'ready' ? (
+      {open.source?.images ? (
+        <PageImages
+          images={open.source.images}
+          first={first}
+          last={last}
+          page={open.page}
+          title={open.title}
+        />
+      ) : open.source && !open.source.file ? (
+        <NotEmbedded href={open.source.original} why={open.source.why} />
+      ) : open.relay === 'ready' ? (
         <iframe
           // The key forces a remount when the address changes — changing only
           // the `#page=` fragment does not make an already-loaded frame
@@ -396,6 +420,93 @@ export function FacsimilePane({
           : 'Facsimile from the Grothendieck fonds, University of Montpellier. Scanned versos are often unrelated to the notes and may appear upside down.'}
       </p>
     </aside>
+  );
+}
+
+/**
+ * A batch as page images, for a holder that serves views rather than a PDF.
+ *
+ * The images are loaded from the holder's own server, lazily, and nothing is
+ * copied. The column follows the reading: when the transcript reports a page,
+ * that page's image is scrolled to the top of the pane — the same promise the
+ * PDF frame keeps with `#page=`.
+ */
+function PageImages({
+  images,
+  first,
+  last,
+  page,
+  title,
+}: {
+  images: string[];
+  first: number;
+  last: number;
+  page?: number;
+  title: string;
+}) {
+  const box = useRef<HTMLDivElement>(null);
+  const pages: number[] = [];
+  for (let p = first; p <= Math.min(last, images.length); p++) pages.push(p);
+  useEffect(() => {
+    const b = box.current;
+    if (!b) return;
+    // The images above the page arrive one by one and push it down, so the
+    // column is aligned again as each loads — until the reader scrolls it.
+    let moved = false;
+    const stop = () => {
+      moved = true;
+    };
+    const align = () => {
+      const el = b.querySelector<HTMLElement>(`[data-view="${page ?? first}"]`);
+      if (el && !moved) b.scrollTo({ top: el.offsetTop - 8, behavior: 'instant' });
+    };
+    align();
+    b.addEventListener('load', align, true);
+    b.addEventListener('wheel', stop, { passive: true });
+    b.addEventListener('touchmove', stop, { passive: true });
+    return () => {
+      b.removeEventListener('load', align, true);
+      b.removeEventListener('wheel', stop);
+      b.removeEventListener('touchmove', stop);
+    };
+  }, [page, first]);
+  return (
+    <div ref={box} className="relative min-h-0 flex-1 overflow-auto bg-ink-100 px-3 py-2">
+      {pages.length ? (
+        pages.map((p) => (
+          <figure key={p} data-view={p} className="mb-3">
+            <img
+              src={images[p - 1]}
+              alt={`${title}, page ${p}`}
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              className="block w-full bg-white shadow-[0_1px_3px_rgb(19_18_16/.15)]"
+            />
+            <figcaption className="tabular mt-1 text-center text-[11px] text-ink-500">page {p}</figcaption>
+          </figure>
+        ))
+      ) : (
+        <p className="px-3 py-6 text-[13px] text-ink-600">No page view in this range.</p>
+      )}
+    </div>
+  );
+}
+
+/** Nothing the pane may embed: say why, and offer the holder's file in a tab. */
+function NotEmbedded({ href, why }: { href: string; why?: string }) {
+  return (
+    <div className="flex min-h-0 flex-1 flex-col items-start gap-3 overflow-auto bg-ink-100 px-6 py-8">
+      <p className="text-[13px] font-semibold text-ink-800">Not shown here.</p>
+      {why && <p className="max-w-[34em] text-[13px] leading-relaxed text-ink-600">{why}</p>}
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-[12.5px] font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 transition hover:text-brand-700"
+      >
+        Open it at its holder's, in a new tab ↗
+      </a>
+    </div>
   );
 }
 
