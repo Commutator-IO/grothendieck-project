@@ -8,7 +8,7 @@ La page~2 écrit les polynômes binomiaux $F_n = \binom{T}{n} \in \mathbf Q[T]$,
 Soit $K_0$ une $k_0$-algèbre commutative ; on note $\iota : k_0 \to K_0$ le morphisme structural. On pose $\Omega = \{F \in K_0[T] \mid F(\iota(\lambda)) \in \iota(k_0) \ \forall \lambda \in k_0\}$ ; c'est une sous-$k_0$-algèbre de $K_0[T]$, les valeurs d'une somme et d'un produit étant la somme et le produit des valeurs, et un polynôme constant $\iota(c)$ y appartenant. Pour un $k_0$-module $M$, $x \in k_0$ et $F \in K_0[T] \otimes_{k_0} M$, on note $F(x) \in K_0 \otimes_{k_0} M$ l'image de $F$ par $\mathrm{ev}_x \otimes \mathrm{id}_M$, où $\mathrm{ev}_x : K_0[T] \to K_0$ est l'évaluation en $\iota(x)$, et l'on dit que $F(x) \in M$ lorsque $F(x)$ est dans l'image de $M \to K_0 \otimes_{k_0} M$, $m \mapsto 1 \otimes m$. On note $\Omega_M$ l'ensemble des $F$ tels que $F(x) \in M$ pour tout $x \in k_0$. Enfin \q{$\Omega_M$ s'identifie à $\Omega \otimes_{k_0} M$} est lu : l'application canonique $\Omega \otimes_{k_0} M \to K_0[T] \otimes_{k_0} M$ est injective, et son image est $\Omega_M$.
 \end{definition}
 
-\begin{enonce}[Lemme, page 3\mathlibpr{44717}]
+\begin{enonce}[Lemme, page 3]
 Soit $M$ un $k_0$-module libre, de base $(e_i)_{i \in I}$, et écrivons tout $F \in K_0[T] \otimes_{k_0} M$ sous la forme $\sum_i F_i \otimes e_i$, les $F_i \in K_0[T]$ étant presque tous nuls.
 \begin{enumerate}
 \item $F \in \Omega_M$ si et seulement si $F_i \in \Omega$ pour tout $i$.
@@ -134,7 +134,7 @@ L'hypothèse de la lecture, $K_0[X] \otimes_{k_0} K_0[Y] = K_0[X, Y]$, revient �
 \medskip
 \noindent\textit{Pólya et Vandermonde (page~2).} Pour $k_0 = \mathbf Z \subset K_0 = \mathbf Q$, $\Omega = \mathrm{Int}(\mathbf Z)$ ; on pose $F_n = \binom{T}{n} = T(T-1)\cdots(T-n+1)/n!$, et l'on note $\Delta f(x) = f(x+1) - f(x)$ la différence finie.
 
-\begin{enonce}[Page 2, théorème de Pólya\mathlibpr{44722}]
+\begin{enonce}[Page 2, théorème de Pólya]
 Les $F_n$ sont dans $\mathrm{Int}(\mathbf Z)$ et linéairement indépendants sur $\mathbf Z$. Tout $P \in \mathrm{Int}(\mathbf Z)$ de degré $d$ s'écrit $P = \sum_{k \le d} c_k F_k$ avec $c_k = (\Delta^k P)(0) \in \mathbf Z$. Ainsi $(F_n)_{n \in \mathbf N}$ est une base du $\mathbf Z$-module $\mathrm{Int}(\mathbf Z)$.
 \end{enonce}
 
@@ -198,10 +198,6 @@ La matrice de Pascal $P_N = \bigl(\binom{p+q}{p}\bigr)_{p, q < N}$ est de déter
 
 \begin{remarque}
 Le contre-exemple de~3a) pour $\mathrm{Appl}(A, A)$ est établi pour $A$ unitaire, commutatif, non nul et infini. La page ne parle pas de~3), et la lecture dit \q{pour $A$ infini}. Pour $k[[T]]^+$, la matrice des coefficients de $F(X + Y)$ diffère de la matrice de Pascal, que nomme la note de la lecture, par le coefficient $(0,0)$, nul puisque $F$ n'a pas de terme constant ; l'argument coûte donc un rang de plus. Le déterminant de la matrice de Pascal valant $1$ sur $\mathbf Z$, le contre-exemple vaut en toute caractéristique. L'énoncé Lean porte sur les coefficients. Le passage aux séries, où le coefficient de $X^p Y^q$ d'un produit $a(X) b(Y)$ est $a_p b_q$, est celui de la note.
-\end{remarque}
-
-\begin{remarque}
-Le théorème de Pólya (la base des polynômes binomiaux de l'anneau des polynômes à valeurs entières) est proposé à mathlib (PR mathlib4~\#44722 ; voir \cite[chap.~I]{cahen1997}), ainsi que le critère d'appartenance à l'image de $N \otimes M$ par les coordonnées dans une base de $M$ (\#44717). L'écriture d'un élément de $P \otimes M$ par ses coordonnées y figurait déjà.
 \end{remarque}
 
 Ne sont pas démontrés ici : l'isomorphisme $(\Omega_A)_0 \simeq \Gamma A$ pour un anneau d'un topos et l'exemple $\mathrm{End}(W_k(A))$ ; les constantes de $k[[T]]^+$ et les séries à terme constant nilpotent ; les co-opérations sous la seule hypothèse $K_0 \otimes_{k_0} K_0 = K_0$, sans platitude ; le contre-exemple de 3a) pour $\mathrm{Appl}(A,A)$, $A$ pseudo-anneau infini quelconque ; les analyseurs des puissances divisées et des $\lambda$-anneaux.

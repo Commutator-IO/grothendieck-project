@@ -74,7 +74,7 @@ Dans $R[X]$, $N(X^2) = 1$ et $D^{(1)}(X^2) = 2X$ ; $N(X^3) = 6X^2$ et $D^{(1)}(X
 $D^{(k)} X^n = \binom nk X^{n-k}$. Pour $X^2$ : $D^{(2)} = 1$, $D^{(3)} = 0$. Pour $X^3$ : $D^{(1)} = 3X^2$, $D^{(2)} = 3X$, $D^{(3)} = 1$, et $9X^2 - 3X^2 = 6X^2$.
 \end{proof}
 
-\begin{enonce}[Marge de la page 121, les fonctions tuées\piste{93-integral-schwarzian-level-p2}\mathlibpr{44735}\mathlibpr{44736}]
+\begin{enonce}[Marge de la page 121, les fonctions tuées\piste{93-integral-schwarzian-level-p2}]
 Soit $R$ de caractéristique $p$ première.
 \begin{enumerate}
 \item $f \in R[X]$ est tué si et seulement si, pour tout $n$ tel que le coefficient de $X^n$ dans $f$ soit non nul, $p$ divise $n$ si $p > 3$, $4$ divise $n$ si $p = 2$, $9$ divise $n$ si $p = 3$.
@@ -114,7 +114,7 @@ Soient $A$ un anneau commutatif, $s \in A[X]$, $a, b, c, d \in A$, $q = cX + d$ 
 (1) On a $D^{(1)} q = c$ et $D^{(2)} q = D^{(3)} q = 0$, donc par Leibniz $D^{(2)} r = D^{(2)}s\,q + c\,D^{(1)}s$ et $D^{(3)} r = D^{(3)}s\,q + c\,D^{(2)}s$. Alors $D^{(2)} s \cdot D^{(2)} r - D^{(1)} s \cdot D^{(3)} r = q\,\bigl((D^{(2)}s)^2 - D^{(3)}s\,D^{(1)}s\bigr)$, les termes en $c$ se compensant. (2) Soit $e = r - (aX + b)$. Les dérivées $D^{(2)}$ et $D^{(3)}$ tuent $aX + b$, donc $D^{(k)} r = D^{(k)} e$ pour $k = 2, 3$. Le coefficient de $X^i$ dans $D^{(k)} e$ est $\binom{i+k}{k} e_{i+k}$, nul si $i + k < j + 3$. Donc $X^{j+1}$ divise $D^{(2)} e$ et $X^j$ divise $D^{(3)} e$, dont le coefficient de $X^j$ est $\binom{j+3}{3} e_{j+3} = \binom{j+3}{3} r_{j+3}$, puisque $j + 3 \geq 2$. Dans~(1), le premier produit n'a pas de terme en $X^j$, et le terme en $X^j$ du second est $(D^{(1)}s)_0 \binom{j+3}{3} r_{j+3} = s_1 \binom{j+3}{3} r_{j+3}$.
 \end{proof}
 
-\begin{enonce}[Pages 121 à 123, la rigidité\piste{93-integral-schwarzian-level-p2}\mathlibpr{44755}\mathlibpr{44756}]
+\begin{enonce}[Pages 121 à 123, la rigidité\piste{93-integral-schwarzian-level-p2}]
 Soient $A$ un anneau commutatif et $n$ un entier tel que $\binom k3$ soit inversible dans $A$ pour $3 \leq k < n$. Soit $s \in A[X]$ avec $s_1 \in A^*$, et supposons nuls les coefficients de $X^m$ dans $N(s)$ pour $m + 3 < n$ (c'est le cas si $X^n \mid N(s)$). Posons $c = -s_2/s_1$, $b = s_0$, $a = s_1 + c\,s_0$. Alors $a - bc = s_1$ et $X^n$ divise $s\,(cX + 1) - (aX + b)$ : dans $B_n$, $s = (at + b)/(ct + 1)$. En particulier :
 \begin{enumerate}
 \item si $A$ est de caractéristique $p$ première et $n = p$, sans autre hypothèse sur $A$ ; et si de plus $p > 3$, pour $s_1 \in A^*$, $X^p \mid N(s)$ équivaut à l'existence de $a, b, c \in A$ avec $X^p \mid s\,(cX + 1) - (aX + b)$ ;
@@ -295,9 +295,9 @@ Le facteur $12$, la relation de cocycle et la rigidité pour $\alpha = 0$ sont d
 \end{demopage}
 
 \begin{remarque}
-La caractérisation des polynômes tués par les dérivées de Hasse d'ordre $0 < k < p^e$ en caractéristique~$p$ (ce sont les polynômes en $X^{p^e}$) est proposée à mathlib sous sa forme générale (PR mathlib4~\#44736), avec le critère de divisibilité qu'elle utilise, tiré du théorème de Lucas (1878) \cite{lucas1878} sur les coefficients binomiaux modulo~$p$ (\#44735). Pour $p = 3$ elle porte sur les ordres $k < 9$, quand la marge n'emploie que $D^{(1)}$, $D^{(2)}$, $D^{(3)}$.
+La caractérisation des polynômes tués par les dérivées de Hasse d'ordre $0 < k < p^e$ en caractéristique~$p$ (ce sont les polynômes en $X^{p^e}$) vaut sous cette forme générale, avec le critère de divisibilité qu'elle utilise, tiré du théorème de Lucas (1878) \cite{lucas1878} sur les coefficients binomiaux modulo~$p$. Pour $p = 3$ elle porte sur les ordres $k < 9$, quand la marge n'emploie que $D^{(1)}$, $D^{(2)}$, $D^{(3)}$.
 \end{remarque}
 
 \begin{remarque}
-Deux lemmes de la démonstration de la rigidité sont proposés à mathlib : le passage des dérivées de Hasse d'ordre $< p^e$ à travers la multiplication par $X^{p^e}$ (PR mathlib4~\#44755, sur \#44736), et le critère selon lequel un polynôme $P$ est premier à $X - a$ si et seulement si $P(a)$ est inversible (\#44756). Pour $a = 0$, il dit qu'un polynôme de terme constant inversible est premier à $X$, donc à $X^n$, ce qu'emploie la démonstration.
+Deux lemmes servent à la démonstration de la rigidité : le passage des dérivées de Hasse d'ordre $< p^e$ à travers la multiplication par $X^{p^e}$, et le critère selon lequel un polynôme $P$ est premier à $X - a$ si et seulement si $P(a)$ est inversible. Pour $a = 0$, il dit qu'un polynôme de terme constant inversible est premier à $X$, donc à $X^n$, ce qu'emploie la démonstration.
 \end{remarque}
