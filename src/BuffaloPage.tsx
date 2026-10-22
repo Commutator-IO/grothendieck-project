@@ -42,6 +42,11 @@ const day = (d: string) => DAY.format(new Date(`${d}T00:00:00Z`));
 const hours = (c: Course) => Math.round(c.videos.reduce((n, v) => n + v.duration, 0) / 3600);
 const TOTAL = Math.round(CAT.courses.reduce((n, c) => n + c.videos.reduce((m, v) => m + v.duration, 0), 0) / 3600);
 
+const SEGMENTS = (c: Course) => c.videos.flatMap((v) => v.segments);
+const SIDES = CAT.courses.reduce((n, c) => n + SEGMENTS(c).length, 0);
+// A session is a course on a day; most fill two to four tape sides.
+const SESSIONS = CAT.courses.reduce((n, c) => n + new Set(SEGMENTS(c).flatMap((s) => (s.date ? [s.date] : []))).size, 0);
+
 function fromHash(): { id: string; t: number } | null {
   const m = /^#([\w-]{11})(?:@(\d+))?$/.exec(location.hash);
   return m ? { id: m[1], t: Number(m[2] ?? 0) } : null;
@@ -77,8 +82,8 @@ export function BuffaloPage() {
             page lists each tape side with its date, and plays it from YouTube.
           </p>
           <p className="tabular mt-3 text-[14px] text-ink-700">
-            {CAT.courses.length} courses, {CAT.courses.reduce((n, c) => n + c.videos.length, 0)} videos, about{' '}
-            {TOTAL} hours.
+            {CAT.courses.length} courses, {SESSIONS} dated sessions on {SIDES} tape sides, {CAT.courses.reduce((n, c) => n + c.videos.length, 0)}{' '}
+            videos, about {TOTAL} hours.
           </p>
         </header>
 
