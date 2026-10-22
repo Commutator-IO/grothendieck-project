@@ -187,6 +187,7 @@ export default defineConfig(({ mode }) => ({
         quillen: resolve(import.meta.dirname, 'quillen/index.html'),
         bourbaki: resolve(import.meta.dirname, 'bourbaki/index.html'),
         illusie: resolve(import.meta.dirname, 'illusie/index.html'),
+        buffalo: resolve(import.meta.dirname, 'buffalo/index.html'),
         review: resolve(import.meta.dirname, 'review/index.html'),
       },
     },

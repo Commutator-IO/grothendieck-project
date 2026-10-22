@@ -20,7 +20,7 @@ import { useEffect, useState } from 'react';
  * one's own pages second — the choice the Hopper site made for its ledgers and
  * diaries. Every URL is what it was.
  */
-type Collection = 'fonds' | 'quillen' | 'bourbaki' | 'illusie';
+type Collection = 'fonds' | 'quillen' | 'bourbaki' | 'illusie' | 'buffalo';
 
 const COLLECTIONS: { id: Collection; label: string; path: string }[] = [
   { id: 'fonds', label: 'Fonds', path: '/' },
@@ -33,12 +33,16 @@ const COLLECTIONS: { id: Collection; label: string; path: string }[] = [
   // A fourth: the Fonds Grothendieck–Illusie at the IHÉS (#85), as an
   // inventory only — the scans stay on the IHÉS's server, pending its answer.
   { id: 'illusie', label: 'Illusie', path: '/illusie/' },
+  // A fifth, of sound rather than paper: the 1973 Buffalo lectures, played
+  // from Erwin Schulhoff's YouTube videos, tape side by tape side.
+  { id: 'buffalo', label: 'Buffalo', path: '/buffalo/' },
 ];
 const QUILLEN_PAGES: { path: string; label: string }[] = [{ path: '/quillen/', label: 'Research notebooks' }];
 const BOURBAKI_PAGES: { path: string; label: string }[] = [{ path: '/bourbaki/', label: 'Archive' }];
 const ILLUSIE_PAGES: { path: string; label: string }[] = [{ path: '/illusie/', label: 'Inventory' }];
+const BUFFALO_PAGES: { path: string; label: string }[] = [{ path: '/buffalo/', label: 'Lectures' }];
 const pagesOf = (c: Collection) =>
-  c === 'fonds' ? [...FONDS_PAGES, ...PROJECT_PAGES] : c === 'quillen' ? QUILLEN_PAGES : c === 'bourbaki' ? BOURBAKI_PAGES : ILLUSIE_PAGES;
+  c === 'fonds' ? [...FONDS_PAGES, ...PROJECT_PAGES] : c === 'quillen' ? QUILLEN_PAGES : c === 'bourbaki' ? BOURBAKI_PAGES : c === 'illusie' ? ILLUSIE_PAGES : BUFFALO_PAGES;
 
 // The readings of the whole fonds, and then — after a rule — the pages about
 // the project rather than about the folders.
@@ -64,6 +68,7 @@ export const collectionOf = (path: string): Collection => {
   if (h.startsWith('/quillen/')) return 'quillen';
   if (h.startsWith('/bourbaki/')) return 'bourbaki';
   if (h.startsWith('/illusie/')) return 'illusie';
+  if (h.startsWith('/buffalo/')) return 'buffalo';
   return 'fonds';
 };
 
@@ -204,10 +209,23 @@ export function Footer({ collection = 'fonds' }: { collection?: Collection }) {
   const quillen = collection === 'quillen';
   const bourbaki = collection === 'bourbaki';
   const illusie = collection === 'illusie';
+  const buffalo = collection === 'buffalo';
   return (
     <footer className="mt-16 border-t border-ink-200 bg-white">
       <div className="mx-auto max-w-6xl px-5 py-8 text-[12.5px] leading-relaxed text-ink-500">
-        {illusie ? (
+        {buffalo ? (
+          <>
+            <p className="max-w-[52em]">
+              The recordings of Grothendieck's{' '}
+              <strong className="font-semibold text-ink-700">1973 lectures at Buffalo</strong> were preserved
+              by John Duskin and William Lawvere, and published by Erwin Schulhoff on YouTube.
+            </p>
+            <p className="mt-3 max-w-[52em]">
+              This site lists the tapes and plays them from YouTube. No sound or transcription of the lectures
+              is copied or published here.
+            </p>
+          </>
+        ) : illusie ? (
           <>
             <p className="max-w-[52em]">
               The <strong className="font-semibold text-ink-700">Fonds Grothendieck–Illusie</strong> is
@@ -269,7 +287,9 @@ export function Footer({ collection = 'fonds' }: { collection?: Collection }) {
         <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1">
           <a
             href={
-              illusie
+              buffalo
+                ? 'https://www.youtube.com/watch?v=URU5jgTvjhU'
+                : illusie
                 ? 'https://repo-archives.ihes.fr/FONDS_GROTHENDIECK_ILLUSIE/'
                 : quillen
                   ? 'https://www.claymath.org/online-resources/quillen-notebooks/'
@@ -279,7 +299,9 @@ export function Footer({ collection = 'fonds' }: { collection?: Collection }) {
             rel="noopener noreferrer"
             className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
           >
-            {illusie
+            {buffalo
+              ? 'youtube.com · Grothendieck at Buffalo 1973 ↗'
+              : illusie
               ? 'repo-archives.ihes.fr · Fonds Grothendieck–Illusie ↗'
               : quillen
                 ? 'claymath.org · Quillen notebooks ↗'

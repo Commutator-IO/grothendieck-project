@@ -1,0 +1,185 @@
+import { useEffect, useState } from 'react';
+import { Footer, Header } from './components/Frame.tsx';
+import catalogueRaw from './content/buffalo.json';
+
+/**
+ * The Buffalo lectures of 1973: Grothendieck's three courses at the State
+ * University of New York at Buffalo, from April to July 1973, as Erwin
+ * Schulhoff published the tapes on YouTube (John Duskin's and William
+ * Lawvere's copies). The page lists every tape side with its date, from the
+ * videos' own descriptions, and plays it from YouTube at that point. No sound
+ * is copied, and nothing of the lectures is transcribed here.
+ *
+ * `#URU5jgTvjhU@2951` opens a video at a given second, as the Conferences tab
+ * of the morphology site does.
+ */
+
+interface Segment {
+  start: number;
+  date: string | null;
+  tape: string;
+  bad: boolean;
+}
+interface Video {
+  id: string;
+  part: number;
+  of: number;
+  title: string;
+  duration: number;
+  segments: Segment[];
+}
+interface Course {
+  id: string;
+  title: string;
+  videos: Video[];
+}
+const CAT = catalogueRaw as unknown as { built: string; courses: Course[] };
+
+const hms = (s: number) =>
+  [Math.floor(s / 3600), Math.floor((s % 3600) / 60), s % 60].map((x, i) => (i ? String(x).padStart(2, '0') : x)).join(':');
+const DAY = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', timeZone: 'UTC' });
+const day = (d: string) => DAY.format(new Date(`${d}T00:00:00Z`));
+const hours = (c: Course) => Math.round(c.videos.reduce((n, v) => n + v.duration, 0) / 3600);
+const TOTAL = Math.round(CAT.courses.reduce((n, c) => n + c.videos.reduce((m, v) => m + v.duration, 0), 0) / 3600);
+
+function fromHash(): { id: string; t: number } | null {
+  const m = /^#([\w-]{11})(?:@(\d+))?$/.exec(location.hash);
+  return m ? { id: m[1], t: Number(m[2] ?? 0) } : null;
+}
+
+const link = 'font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700';
+
+export function BuffaloPage() {
+  const [playing, setPlaying] = useState(fromHash);
+  useEffect(() => {
+    const onHash = () => setPlaying(fromHash());
+    addEventListener('hashchange', onHash);
+    return () => removeEventListener('hashchange', onHash);
+  }, []);
+  const play = (id: string, t: number) => {
+    history.replaceState(null, '', `#${id}@${t}`);
+    setPlaying({ id, t });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  const video = playing && CAT.courses.flatMap((c) => c.videos).find((v) => v.id === playing.id);
+
+  return (
+    <>
+      <Header path="/buffalo/" />
+      <main className="mx-auto max-w-6xl px-5 py-12">
+        <header className="max-w-[46em]">
+          <p className="text-[11px] font-bold uppercase tracking-[0.11em] text-brand-600">Buffalo</p>
+          <h1 className="titre mt-2 text-[34px] leading-[1.1] text-ink-900">The Buffalo lectures, 1973</h1>
+          <p className="mt-4 text-[15px] leading-relaxed text-ink-600">
+            From April to July 1973, Grothendieck taught three courses at the State University of New York at
+            Buffalo: topos theory, algebraic geometry and the theory of algebraic groups. The tapes were kept by
+            John Duskin and William Lawvere, and published in ten videos by Erwin Schulhoff in October 2025. This
+            page lists each tape side with its date, and plays it from YouTube.
+          </p>
+          <p className="tabular mt-3 text-[14px] text-ink-700">
+            {CAT.courses.length} courses, {CAT.courses.reduce((n, c) => n + c.videos.length, 0)} videos, about{' '}
+            {TOTAL} hours.
+          </p>
+        </header>
+
+        <aside className="mt-6 max-w-[46em] rounded-xl border border-ink-200 bg-ink-50 px-4 py-3 text-[13px] leading-relaxed text-ink-700">
+          The recordings are on Erwin Schulhoff's YouTube channel and are played from there; no sound is copied
+          to this site, and the lectures are not transcribed here. Tape sides marked « bad tape » are so marked
+          in the videos' descriptions. For the content of the topos course, see Colin McLarty,{' '}
+          <a href="https://www.youtube.com/watch?v=5AR55ZsHmKI" target="_blank" rel="noopener noreferrer" className={link}>
+            « Grothendieck's 1973 Topos Lectures » ↗
+          </a>{' '}
+          (ENS, 2018). Montpellier folder 161-4, pp. 22–31, may be notes for the algebraic geometry course; that
+          is not checked.
+        </aside>
+
+        {video && playing && (
+          <section className="mt-8" aria-label="Player">
+            <div className="flex items-baseline justify-between gap-3">
+              <p className="text-[13px] font-semibold text-ink-800">
+                {video.title}, from {hms(playing.t)}
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  history.replaceState(null, '', location.pathname);
+                  setPlaying(null);
+                }}
+                className="rounded-lg border border-ink-200 px-2.5 py-1 text-[12px] text-ink-600 hover:bg-ink-50"
+              >
+                Close
+              </button>
+            </div>
+            <div className="mt-2 aspect-video w-full overflow-hidden rounded-xl border border-ink-200 bg-ink-900">
+              <iframe
+                key={`${playing.id}@${playing.t}`}
+                src={`https://www.youtube-nocookie.com/embed/${playing.id}?start=${playing.t}&autoplay=1`}
+                title={video.title}
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+                className="h-full w-full"
+              />
+            </div>
+          </section>
+        )}
+
+        <nav className="mt-8 flex flex-wrap gap-2" aria-label="Courses">
+          {CAT.courses.map((c) => (
+            <a
+              key={c.id}
+              href={`#${c.id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById(c.id)?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="rounded-lg border border-ink-200 px-3 py-1 text-[12.5px] text-ink-700 hover:border-brand-500 hover:bg-brand-50"
+            >
+              {c.title} · {hours(c)} h
+            </a>
+          ))}
+        </nav>
+
+        {CAT.courses.map((c) => (
+          <section key={c.id} id={c.id} className="mt-10 scroll-mt-20">
+            <h2 className="titre text-[22px] text-ink-900">{c.title}</h2>
+            {c.videos.map((v) => (
+              <div key={v.id} className="mt-5">
+                <p className="text-[13.5px] font-semibold text-ink-800">
+                  Part {v.part} of {v.of} · {hms(v.duration)}{' '}
+                  <a href={`https://www.youtube.com/watch?v=${v.id}`} target="_blank" rel="noopener noreferrer" className={`ml-1 text-[12px] ${link}`}>
+                    YouTube ↗
+                  </a>
+                </p>
+                <ul className="mt-2 grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
+                  {v.segments.map((s) => (
+                    <li key={s.start}>
+                      <button
+                        type="button"
+                        onClick={() => play(v.id, s.start)}
+                        aria-current={playing?.id === v.id && playing.t === s.start ? 'true' : undefined}
+                        className="flex w-full items-baseline justify-between gap-2 rounded-lg border border-ink-200 px-3 py-1.5 text-left text-[12.5px] text-ink-700 hover:border-brand-500 hover:bg-brand-50 aria-[current=true]:border-brand-500 aria-[current=true]:bg-brand-50"
+                      >
+                        <span>
+                          <span className="font-medium text-ink-900">{s.date ? day(s.date) : 'Undated'}</span> · {s.tape}
+                          {s.bad && <span className="text-ink-400"> · bad tape</span>}
+                        </span>
+                        <span className="tabular shrink-0 text-[11.5px] text-ink-400">{hms(s.start)}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </section>
+        ))}
+
+        <p className="mt-10 text-[12px] text-ink-400">
+          Grothendieck at Buffalo 1973, tapes preserved and transmitted by John Duskin and William Lawvere,
+          published by Erwin Schulhoff on YouTube on 27 October 2025. Tape list read from the videos'
+          descriptions on {CAT.built}.
+        </p>
+      </main>
+      <Footer collection="buffalo" />
+    </>
+  );
+}
