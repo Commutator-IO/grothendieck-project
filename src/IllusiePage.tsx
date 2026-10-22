@@ -1,6 +1,7 @@
 import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import inventoryRaw from './content/illusie.json';
+import { ITEM_NOTES } from './content/illusie-highlights.ts';
 
 /**
  * The Fonds Grothendieck–Illusie, as an inventory (#85).
@@ -178,6 +179,7 @@ export function IllusiePage() {
             className="w-full rounded-lg border border-ink-200 px-3 py-1.5 text-[13px] sm:w-80"
           />
           <p className="tabular text-[12px] text-ink-500">{shown} shown</p>
+          <p className="text-[12px] text-alerte-600">In red, the items that meet the Montpellier fonds or an open question of the edition.</p>
         </div>
 
         {groups.map((g) => (
@@ -191,7 +193,7 @@ export function IllusiePage() {
             </p>
             <ul className="mt-3 grid gap-2">
               {g.items.map((i) => (
-                <li key={i.id} className="rounded-xl border border-ink-200 bg-white px-4 py-3">
+                <li key={i.id} className={`rounded-xl border bg-white px-4 py-3 ${ITEM_NOTES[i.id] ? 'border-alerte-500 ring-1 ring-alerte-500' : 'border-ink-200'}`}>
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                     {IllusieReader ? (
                       <span className="min-w-0 flex-1">
@@ -235,6 +237,7 @@ export function IllusiePage() {
                       .filter(Boolean)
                       .join(' · ')}
                   </p>
+                  {ITEM_NOTES[i.id] && <p className="mt-1.5 text-[12.5px] leading-relaxed text-alerte-700">{ITEM_NOTES[i.id]}</p>}
                 </li>
               ))}
             </ul>
