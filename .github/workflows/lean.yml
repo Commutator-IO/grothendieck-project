@@ -32,10 +32,16 @@ jobs:
           fi
 
       # Installs the toolchain lean/lean-toolchain names, fetches mathlib's
-      # prebuilt cache, and runs `lake build`.
+      # prebuilt cache, and runs `lake build`. Then two checks lean-action has
+      # had since 1.6: axiom-audit fails if any declaration of the library
+      # depends on an axiom beyond propext, Classical.choice and Quot.sound
+      # (sorry and native_decide included), and leanchecker re-checks the
+      # compiled files with an independent checker.
       - uses: leanprover/lean-action@v1
         with:
           lake-package-directory: lean
+          axiom-audit: true
+          leanchecker: true
 
       # The axioms every theorem rests on, in the build log: anything beyond
       # Lean's three standard ones fails. The names are read from the files.
