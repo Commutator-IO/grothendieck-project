@@ -1,6 +1,6 @@
 ---
 name: contribute-to-mathlib
-description: Proposes to Mathlib (leanprover-community/mathlib4) a general lemma that a Lean proof of this repository needed or proved — checks that the gap is real, writes it to Mathlib's conventions and style guide, compiles it against the project's pinned Mathlib without `lake build`, pushes a branch to the fork mycaule/mathlib4 and opens a draft PR, then handles CI and reviews. Use when someone asks to upstream a lemma from lean/Grothendieck/*.lean, open or fix a mathlib4 PR, improve the open PRs of issue #52, answer a review, or repair a PR's CI. Also covers bringing a merged PR back into the Lean appendix and the Findings tab.
+description: Prepares a general lemma that a Lean proof of this repository needed for Mathlib (leanprover-community/mathlib4) — checks that the gap is real, points Michel to the Mathematics in Lean chapters to learn before he writes it by hand (Mathlib closed all his AI-written PRs on 2026-10-22), reviews his code against Mathlib's conventions and style guide, compiles it against the project's pinned Mathlib without `lake build`, pushes a branch to the fork mycaule/mathlib4 and opens a draft PR, then handles CI and reviews. Use when someone asks to upstream a lemma from lean/Grothendieck/*.lean, open or fix a mathlib4 PR, improve the open PRs of issue #52, answer a review, or repair a PR's CI. Also covers bringing a merged PR back into the Lean appendix and the Findings tab.
 ---
 
 # Contributing to Mathlib from this repository
@@ -24,7 +24,39 @@ LLM-written GitHub and Zulip comments. So:
 - Editing a PR's **title and description** when the code changes is part of the fix, and
   allowed. So are commits on the PR's branch.
 - The `LLM-generated` label is added by the bot or by Michel; it is expected.
-- Michel is fine with many open PRs; do not advise him to close or merge them into fewer.
+
+**Since 22 October 2026.** Mathlib's triage account closed all 39 of Michel's PRs under its AI
+policy: reviewers want a human who learns from the review, and model-written code from a new
+contributor, opened in numbers without discussion, is closed without comment, with suspension as
+the next step. The declarations are kept in `lean/Grothendieck/Upstream/` and specified for Tau
+Ceti (TauCetiProject/TauCetiRoadmap#1431). From now on:
+
+- **One PR at a time**, discussed on Zulip first, and only one Michel has **written by hand**
+  and can defend line by line without help. The skill's work is to find the gap, to point to
+  the material to learn, and to review his code; it does not write the PR's Lean.
+- **Learn from *Mathematics in Lean*** (leanprover-community.github.io/mathematics_in_lean,
+  Avigad and Massot) before writing, the chapters matching the lemma:
+
+  | Area of the lemma | MIL chapters |
+  |---|---|
+  | rewriting, `calc`, algebraic identities | 2 Basics |
+  | quantifiers, `↔`, `∃`, sequences | 3 Logic |
+  | sets, images, `Function.Injective` | 4 Sets and Functions |
+  | `Nat`, primes, induction, binomials | 5 Elementary Number Theory |
+  | `Finset`, sums, counting | 6 Discrete Mathematics |
+  | new structures, instances, coercions | 7 Structures, 8 Hierarchies |
+  | groups, rings, ideals, quotients | 9 Groups and Rings |
+  | modules, linear maps, bases, matrices | 10 Linear algebra |
+  | filters, topology, metric spaces | 11 Topology |
+  | derivatives, normed spaces | 12 Differential Calculus |
+  | integrals, measures | 13 Integration and Measure Theory |
+
+  MIL's proofs are also the house style a reviewer expects: structured `calc` blocks, named
+  `have`s, `obtain`, `rw`/`simp` with explicit lemma lists, the right level of `Finset` and
+  filter API. When proposing a lemma, say which sections to read and which MIL exercise is
+  closest to it.
+- Tau Ceti welcomes AI-written code; route a lemma there when Michel does not want to write it
+  himself.
 
 ## 1. Check that the gap is real
 
