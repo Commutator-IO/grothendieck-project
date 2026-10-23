@@ -40,3 +40,18 @@ and `\ill{}` stands.
 - Underlined Ω (single or double) marks a sheaf: \underline{\Omega}.
 - \add{} inside display math takes no inner $…$ (\add{{} = 0}); with $…$ it
   breaks the compile.
+
+## 2026-10-23 — 1983-2, batch 3 (pages 41-60)
+
+- A heading can carry a slip of the year (p. 50: « February 22, 1984 » between
+  1983 entries): keep it as written, with a \note.
+- A lecture number may stand beside the date (p. 59: « Lecture 5 »); the date is
+  sometimes repeated small at the head of the next page (p. 53: « Feb. 23 »);
+  neither opens a new entry.
+- Short horizontal rules separate topics within an entry; \noindent\rule{…}
+  keeps them.
+- Proper names can be misspelt (« Keiper's thm » for Kuiper): keep and note.
+- Tilde and bar over the same letter mark different bundles (\tilde{E} upstairs,
+  \bar{E} after descent); the bar is faint at 120 dpi, check at 300.
+- For zooms, crop a full-page 300 dpi pdftoppm render with magick; pdftoppm's own
+  -x/-y crop returned blank images on this file.
