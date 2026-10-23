@@ -53,3 +53,28 @@ reading and never settles one.
   (\mathfrak{J}), the radical as a curled K (\mathfrak{R}), and a double-barred Q (\mathbb{Q}, noted; a
   typed plain Q beside it stays Q). Typed underlined « Hom » is the sheaf Hom, \underline{\mathrm{Hom}}.
 - Blanks the fill-in hand forgot (an arrow, a ≥, a § number) are kept empty with a \note, not supplied.
+
+## 2026-10-23 — rédaction 326 bis (ENS copy, item 1008, EGA I typescript, 437 pp.), Opus 5.5
+- A composite file: the typescript of chs. 0-III with the sheets of additions and corrections bound in
+  where they were received (English instructions « P. 31, before prop. 7, add : », French text). Each
+  sheet has its own numbering (roman, « II-i », « 0-i », « III-i »), and the chapters restart theirs
+  (ch. 0 roman, ch. I arabic, then « II-n », « III-n »). The offset PDF − typist changes many times
+  (−17, −20, −35, −36, −189, −200, −338, −328): give it per batch in the header. Duplicate scans
+  (129/130, 175-176 = 179-180, 333-335 = 336-338) are transcribed once; pages the copy lacks
+  (typist's 29, III-11 to III-20, the end of II-75) are noted, not supplied. Inserted « bis/ter » pages
+  and an old and a new version of the same page are both kept.
+- At least three typewriters: the first has a symbol ball (ε for ∈ → \in, circled x → \otimes); the later
+  ones have none and a fill-in hand draws Greek letters, Γ, Φ, arrows, ∈, ⊂ in the blanks (no apparatus).
+  Forgotten blanks stay empty with a \note.
+- A small grey cursive, apparently on the stencil, makes real mathematical corrections in all chapters
+  (insertions, wavy strikes, marginal references). Set \add/\struck/\marginal, « main non identifiée »:
+  no initials or signature anywhere. Typed interlinear insertions (caret or arc) are running text —
+  check each at 300 dpi.
+- Typed letters kept as typed: ideals plain (a, p, j_x) in the first typescript, underlined later
+  (\underline{p}, \underline{j}_y); underlined sheaves/algebras \underline{S}, \underline{A}(X); the
+  barred ψ, φ of a morphism of ringed spaces \underline{\psi}; ᵃφ is {}^{a}\varphi; a typed tilde
+  \widetilde{}, after a parenthesis (…)^{\sim}; « lim » with arrow \varinjlim / \varprojlim. The residue
+  field follows the page: \kappa where a kappa stands beside a typed base field k, k(x) where typed k.
+- Practicalities: braces round a tikz-cd label containing a comma; no \hfill or \qquad in prose; an
+  underlined letter in prose goes inside $…$; a long struck passage is \struck{\ill{}} with any guess in
+  a \note (a long struck \uncertain overflows).
