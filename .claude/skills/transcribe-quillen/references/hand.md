@@ -81,3 +81,15 @@ and `\ill{}` stands.
 - The Dirac slash: \not{D} renders it.
 - Later in the notebook the Luke index dates can differ from the page (index
   « March 6, 9 », page « March 7 » then « March 9 »): the page wins.
+
+## 2026-10-23 — 1983-2, making batches 1-5 renderable
+
+- `node scripts/render.mjs --quillen` refuses tabular, center, alignat*, and
+  tikz-cd `phantom` / `equal` arrows, and reports only the first per file. Write
+  instead: a list of his with page numbers as itemize; a table as `array` with
+  `\text{}` inside `\[…\]`; a boxed formula as `\[\boxed{…}\]` (aligned inside
+  for several lines); alignat* as `\[\begin{aligned}…\end{aligned}\]`; a topic
+  rule as `\[\rule{9em}{0.4pt}\]` (em units, KaTeX takes them; at most 15em);
+  ∪, ≀ or = between two rows of a diagram as an extra row of `\cup`, `\wr`,
+  `\Vert` nodes, the vertical arrows of the other columns lengthened to `dd`.
+  No `\hfill`, `\fbox`, `\parbox`, `\noindent`.
