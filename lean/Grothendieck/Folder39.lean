@@ -3,6 +3,7 @@ import Mathlib.RingTheory.Noetherian.Nilpotent
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.RingTheory.Henselian
+import Grothendieck.Upstream.IsAdicCompleteOfIsNilpotent
 
 /-!
 # Folder 39, the formal preparation theorem (pages 18–19): the adic and discrete cases
@@ -63,19 +64,8 @@ open PowerSeries Polynomial
 variable {A : Type*} [CommRing A]
 
 /-- A ring is complete and separated for a nilpotent ideal. -/
-theorem isAdicComplete_of_nilpotent {I : Ideal A} (hI : IsNilpotent I) : IsAdicComplete I A := by
-  obtain ⟨k, hk⟩ := hI
-  have hk' : ∀ n, k ≤ n → (I ^ n • ⊤ : Submodule A A) = ⊥ := fun n hn => by
-    rw [Ideal.smul_eq_mul, Ideal.mul_top, eq_bot_iff, ← Ideal.zero_eq_bot, ← hk]
-    exact Ideal.pow_le_pow_right hn
-  refine { haus' := fun x hx => ?_, prec' := fun f hf => ⟨f k, fun n => ?_⟩ }
-  · have := hx k
-    rwa [hk' k le_rfl, SModEq.zero, Submodule.mem_bot] at this
-  · rcases le_total n k with h | h
-    · exact hf h
-    · have := hf h
-      rw [hk' k le_rfl, SModEq.bot] at this
-      rw [← this]
+theorem isAdicComplete_of_nilpotent {I : Ideal A} (hI : IsNilpotent I) : IsAdicComplete I A :=
+  IsAdicComplete.of_isNilpotent A hI
 
 /-- **Formal preparation, adic case.** `A` complete and separated for the
 `I`-adic topology, `aᵢ ∈ I` for `i < N`, `a_N` a unit: `F` is regular, and every

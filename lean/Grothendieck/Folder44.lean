@@ -1,4 +1,5 @@
 import Mathlib
+import Grothendieck.Upstream.RatSmulMemIndivisible
 
 /-!
 # Folder 44, page 4: integrality of the Cartan numbers from the axioms
@@ -44,22 +45,8 @@ def Indivisible {V : Type*} [AddCommGroup V] (P : AddSubgroup V) (α : V) : Prop
 integer. -/
 theorem int_of_smul_mem {V : Type*} [AddCommGroup V] [Module ℚ V]
     {P : AddSubgroup V} {α : V} (hα : α ∈ P) (hind : Indivisible P α) {q : ℚ}
-    (hq : q • α ∈ P) : ∃ n : ℤ, q = n := by
-  have hcop : IsCoprime q.num (q.den : ℤ) := by
-    rw [Int.isCoprime_iff_gcd_eq_one]
-    simpa [Int.gcd, Int.natAbs_natCast] using q.reduced
-  obtain ⟨u, v, huv⟩ := hcop
-  have hy : u • (q • α) + v • α ∈ P := P.add_mem (P.zsmul_mem hq u) (P.zsmul_mem hα v)
-  have key : α = (q.den : ℤ) • (u • (q • α) + v • α) := by
-    have h1 : ((q.den : ℤ) : ℚ) * q = (q.num : ℚ) := by
-      push_cast; exact Rat.den_mul_eq_num q
-    rw [smul_add, smul_comm ((q.den : ℤ)) u, ← Int.cast_smul_eq_zsmul ℚ ((q.den : ℤ)) (q • α),
-      smul_smul, h1, Int.cast_smul_eq_zsmul, smul_smul, smul_smul, ← add_smul,
-      show u * q.num + (q.den : ℤ) * v = 1 by linarith, one_smul]
-  have hu := hind _ hy _ key
-  have hden : (q.den : ℤ) = 1 :=
-    (Int.isUnit_iff.mp hu).resolve_right (by have := q.den_pos; omega)
-  exact ⟨q.num, (Rat.coe_int_num_of_den_eq_one (by exact_mod_cast hden)).symm⟩
+    (hq : q • α ∈ P) : ∃ n : ℤ, q = n :=
+  (AddSubgroup.rat_smul_mem_iff hα hind).1 hq
 
 /-- **The step the leaf takes.** If `α ∈ P` is indivisible in `P` and the symmetry
 `x ↦ x - f x • α` maps `P` into `P`, then every Cartan number `f x`, `x ∈ P`, is an
