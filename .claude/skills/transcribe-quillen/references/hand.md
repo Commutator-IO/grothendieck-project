@@ -119,3 +119,18 @@ and `\ill{}` stands.
 - Check KaTeX with your own script in a subfolder of the scratchpad: the
   scratchpad is shared with other passes running at the same time, and a file
   with a common name (kcheck.cjs) can be overwritten under you.
+
+## 2026-10-23 — 1983-4 to 1983-6 (render subset, more refusals)
+
+- render.mjs also refuses: tikz-cd `mapsto` arrows (use a plain arrow and say
+  « ↦ in the notebook » in a \note), a nested itemize (flatten: `\item[]` for
+  the indented lines), and a tikz-cd that shares its \[…\] with anything else
+  (a label, \qquad, a second formula): give the diagram its own display and
+  put the label in a \note or a following display.
+- `\add{$…$}` inside display math breaks the compile; `\add{…}` with the math
+  bare works in both engines. `\S` is not in the prose subset: write §.
+- Notebook numbering can restart in an inserted run (« new 930 », « new 931 »
+  in 1983-6 after 932) as well as the lettered run of 1983-3: quote the
+  number as written.
+- 1983-4 to 1983-6 open with a cover leaf (page span and dates only, or a
+  contents leaf with page numbers): transcribe it as page 1, like 1983-2.
