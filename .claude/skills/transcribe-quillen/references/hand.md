@@ -70,3 +70,14 @@ and `\ill{}` stands.
 - His page numbers are sometimes corrected in place (« 611 » over « 610 »).
 - Inclusions drawn as ∪ under a row of a diagram: tikz-cd phantom arrow with
   "\cup" description.
+
+## 2026-10-23 — 1983-2, batch 5 (pages 81-100)
+
+- Entries are not always in date order (p. 84: « March 5 » after March 6, then
+  March 6 again); keep each heading as written, note the order once.
+- His superscript 1 is a short stroke that reads as a prime (V', ψ'_D, θ');
+  where it pairs with a superscript 0 (V°, ψ°_D) it is 1. Say so in the header.
+- A heavy dot as superscript (V^•_λ) stands for both degrees.
+- The Dirac slash: \not{D} renders it.
+- Later in the notebook the Luke index dates can differ from the page (index
+  « March 6, 9 », page « March 7 » then « March 9 »): the page wins.
