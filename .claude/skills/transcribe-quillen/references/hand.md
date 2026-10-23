@@ -13,3 +13,30 @@ to work out again:
 Like the fonds' `hand.md`, this narrows the candidates for a reading and never
 settles one: where the page will not support what it suggests, the page wins
 and `\ill{}` stands.
+
+## 2026-10-23 — 1983-2, batch 1 (pages 1-20)
+
+- 1983 notebooks: one page per PDF page, unruled, black ink; a contents leaf in
+  his hand opens the file (PDF p. 1: page span « 547-647 », dates, topics with
+  page numbers). His running pagination continues across notebooks (547 on
+  PDF p. 2), top right; give it once per page in a \note.
+- Entry dates are full and underlined, top left: « January 27, 1983 ».
+- 120 dpi grayscale renders (pdftoppm -r 120 -gray) were enough for nearly all
+  of it; the hand is a fluent, slanted cursive, denser than in 1968.
+- Script letters: script a for the space of connections (\mathcal{A}), script G
+  for the gauge group (\mathcal{G}), a curled script a for a coefficient ring
+  (rendered \mathfrak{a}), fraktur-like g for Lie algebras. Underlined G
+  (\underline{G}) for the fibre of G_d -> G.
+- Struck words still blotted solid; struck formulas sometimes scribbled into a
+  boxed block. « Tr_(reg) », « F.P. » (finite part), « fmla », « diff'l »,
+  « repns. », « coh. », « isom. », « thru ».
+
+## 2026-10-23 — 1983-2, batch 2 (pages 21-40)
+
+- Later corrections in a lighter (grey/pencil) ink appear (p. 24: « NO should
+  be A »): transcribe as \marginal with a \note on the ink.
+- Struck paragraphs crossed with a diagonal lattice stay readable; transcribe
+  them inside \struck{} whole.
+- Underlined Ω (single or double) marks a sheaf: \underline{\Omega}.
+- \add{} inside display math takes no inner $…$ (\add{{} = 0}); with $…$ it
+  breaks the compile.
