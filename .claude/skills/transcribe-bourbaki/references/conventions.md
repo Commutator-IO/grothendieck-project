@@ -46,3 +46,10 @@ reading and never settles one.
   derivations (looks like a « Y » with a tail, read \mathfrak{G}) and a second one from p. 20
   (\mathfrak{A}; a gothic B joins it on p. 43, which settles the reading). KaTeX has no lowercase \mathscr: do not try it.
 - Show-through from the verso (vertical strokes, pp. 29, 34) is not a reader's mark.
+- § 4 (p. 134 on) restarts the formula numbers at (1), and the typist reuses numbers inside § 3
+  ((57) twice, pp. 114 and 120; (38) twice, pp. 163-164): keep them as typed, note once.
+- In the sheaf part the fill-in hand draws a script O for the structure sheaf (\mathscr{O}), a cursive
+  « m » for maximal ideals (\mathfrak{m}), a gothic J of augmentation ideals like a « y » with a tail
+  (\mathfrak{J}), the radical as a curled K (\mathfrak{R}), and a double-barred Q (\mathbb{Q}, noted; a
+  typed plain Q beside it stays Q). Typed underlined « Hom » is the sheaf Hom, \underline{\mathrm{Hom}}.
+- Blanks the fill-in hand forgot (an arrow, a ≥, a § number) are kept empty with a \note, not supplied.
