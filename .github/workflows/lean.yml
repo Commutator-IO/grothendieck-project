@@ -42,6 +42,9 @@ jobs:
           lake-package-directory: lean
           axiom-audit: true
           leanchecker: true
+          # Only this library's modules: the whole environment, Mathlib
+          # included, exhausts the runner.
+          leanchecker-args: Grothendieck
 
       # The axioms every theorem rests on, in the build log: anything beyond
       # Lean's three standard ones fails. The names are read from the files.
