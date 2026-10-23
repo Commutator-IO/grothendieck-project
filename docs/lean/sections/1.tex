@@ -60,13 +60,7 @@ Soient $T : E \to F$ linéaire, $I$ un ensemble fini à au plus $n$ éléments, 
 \]
 \end{lemme}
 
-\begin{proof}
-Écrivons $s_j = s_j(T)$. En développant $x_i = \sum_j \langle e_j, x_i\rangle e_j$ et en utilisant $Te_j = s_j f_j$ (lemme~\ref{lem:1-schmidt}),
-\[
-  \sum_{i} \langle y_i, Tx_i\rangle = \sum_{j < d} \sum_i \langle e_j, x_i\rangle\, s_j\, \langle y_i, f_j\rangle .
-\]
-Posons $a_j = \sum_i |\langle x_i, e_j\rangle|^2$ et $b_j = \sum_i |\langle y_i, f_j\rangle|^2$. Par l'inégalité $\alpha\beta \leq (\alpha^2 + \beta^2)/2$, le module du membre de droite est au plus $\sum_j s_j c_j$, où $c_j = (a_j + b_j)/2$. Le lemme~\ref{lem:1-bessel}, appliqué à la famille $(x_i)$ et à $z = e_j$, donne $a_j \leq 1$, et appliqué à $(y_i)$ et à $z = f_j$, donne $b_j \leq \|f_j\|^2 \leq 1$. Appliqué à la famille orthonormée $(e_j)$ et à $z = x_i$, il donne $\sum_j |\langle e_j, x_i\rangle|^2 \leq \|x_i\|^2 \leq 1$, d'où $\sum_j a_j \leq |I| \leq n$ ; appliqué à la famille $(f_j)$ et à $z = y_i$, il donne de même $\sum_j b_j \leq n$. Les $c_j$ sont donc dans $[0,1]$, de somme $\leq n$, et le lemme~\ref{lem:1-poids} conclut, la suite $(s_j)$ étant positive et décroissante.
-\end{proof}
+\general{SingularValuesSigmaTwo}
 
 \begin{proof}[Démonstration du premier énoncé]
 (1) Appliquons le lemme~\ref{lem:1-schmidt} à $w = u + v$, et soit $I$ l'ensemble des $j < d$ tels que $j < n$ ; il a $\min(n, d)$ éléments. Comme $s_j(w) = 0$ pour $j \geq d$, $\sum_{j < n} s_j(w) = \sum_{j \in I} s_j(w) = \sum_{j \in I} \langle f_j, w e_j\rangle$, et cette somme est égale à
@@ -116,9 +110,7 @@ somme des mineurs principaux mixtes d'ordre~$2$ des matrices $(\langle y_i, Tx_j
 Pour des scalaires $a_i$, $b_i$ indexés par un ensemble fini $I$, $\sum_{i,j \in I} |a_i b_j - a_j b_i|^2 \leq 2 \sum_i |a_i|^2 \sum_i |b_i|^2$. En particulier $\Lambda_{kl} \leq 2\,p_k\,p'_l$, où $p'_l$ est formé avec $(g'_l)$.
 \end{lemme}
 
-\begin{proof}
-On développe $|a_ib_j - a_jb_i|^2 = |a_i|^2|b_j|^2 + |a_j|^2|b_i|^2 - 2\operatorname{Re}(z_i \bar z_j)$ avec $z_i = \bar a_i b_i$. En sommant, le terme croisé donne $2\operatorname{Re}\bigl(\sum_i z_i \cdot \overline{\sum_j z_j}\bigr) = 2\,|\sum_i z_i|^2 \geq 0$.
-\end{proof}
+\general{SingularValuesSigmaTwo}
 
 \begin{lemme}[poids pour $\sigma^2$]\label{lem:1-poids2}
 Soient $K$ un ensemble fini, $G \subseteq K$, des réels $s_k \geq 0$ et $\theta \geq 0$ avec $s_k \geq \theta$ pour $k \in G$ et $s_k \leq \theta$ pour $k \notin G$. Soient $(\alpha_{kl})$ symétrique, à coefficients dans $[0,1]$, de diagonale nulle, et $p_k \in [0,1]$ avec $\sum_k p_k \leq |G|$ et $\sum_l \alpha_{kl} \leq (|G| - 1)\,p_k$ pour tout~$k$. Alors
