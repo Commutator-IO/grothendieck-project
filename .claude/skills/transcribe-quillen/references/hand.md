@@ -93,3 +93,29 @@ and `\ill{}` stands.
   ∪, ≀ or = between two rows of a diagram as an extra row of `\cup`, `\wr`,
   `\Vert` nodes, the vertical arrows of the other columns lengthened to `dd`.
   No `\hfill`, `\fbox`, `\parbox`, `\noindent`.
+
+## 2026-10-23 — 1983-2 batch 6 and 1983-3, batches 1-3 (pages 1-60)
+
+- 1983-3 opens, like 1983-2, with his contents leaf (« 648-730 »), which warns
+  « there is an extra 670-699 »: after 699 his numbering starts again at 670
+  (PDF p. 53), and from 695 on a small letter (a, b, c, ...) beside or above
+  the number marks the pages of that stretch. Quote the number as written, in
+  quotation marks for the second run, with the letter. A number can also be
+  missing (no 685 after 684, PDF p. 38-39): say so in the \note of the page.
+- Places stand beside the date (« March 20, 1983. (In Marseille) »), and states
+  (« (very dizzy) »): keep them in the heading.
+- His tilde over the Dirac slash: \tilde{\not{D}} renders in both TeX and KaTeX.
+  Calligraphic B for the space of (0,1)-forms (\mathcal{B}), plain B for its
+  elements; his double-struck 1 for the trivial bundle has no amssymb glyph:
+  \mathbf{1} and a \note.
+- His underlined words in prose (« Thm », « Summary », « Setup ») are given
+  plain: \underline is refused in prose by the renderer (it survives only in
+  math). A matrix with blank entries: pmatrix with empty cells, which both
+  engines take.
+- A horizontal « = » between two objects of a diagram: tikz-cd with « = » as a
+  node in a middle column, never a phantom arrow (refused by render.mjs).
+- A long display followed by prose (« which integrates to 1 if ... ») runs past
+  the margin inside \[…\]: end the display and put the words in the paragraph.
+- Check KaTeX with your own script in a subfolder of the scratchpad: the
+  scratchpad is shared with other passes running at the same time, and a file
+  with a common name (kcheck.cjs) can be overwritten under you.
