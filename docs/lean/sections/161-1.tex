@@ -16,8 +16,9 @@ La seconde condition du membre de gauche n'est pas surabondante : la pleine fid�
 \begin{enonce}[Adjonctions idempotentes, page 5]
 Les conditions \q{$\eta v : v \to vuv$ est un isomorphisme} et \q{$\varepsilon u : uvu \to u$ est un isomorphisme} de la condition~2 du manuscrit sont redondantes : chacune des quatre conditions ($\eta v$, $v\varepsilon$, $\varepsilon u$, $u\eta$ inversible) implique les trois autres.
 \end{enonce}
+\general{AdjunctionIdempotent}
 
-Les identités triangulaires disent que les deux composés suivants sont des identités ; dans chaque ligne, une flèche est donc inversible si et seulement si l'autre l'est. Ce que l'énoncé ajoute est le passage d'une ligne à l'autre.
+Les identités triangulaires disent que les deux composés suivants sont des identités ; dans chaque ligne, une flèche est donc inversible si et seulement si l'autre l'est. L'énoncé ajoute le passage d'une ligne à l'autre.
 \[
 \begin{tikzcd}
 v \arrow[r, "\eta v"] \arrow[rr, bend right=30, "\mathrm{id}_v"'] & vuv \arrow[r, "v\varepsilon"] & v
@@ -50,22 +51,6 @@ Réciproquement, soit $Y \in E'$ ; par hypothèse il existe $Z \in E'$ et un iso
 
 \begin{proof}[L'exemple demandé en marge]
 Prenons pour $E$ la catégorie des ensembles, pour $F$ la catégorie ponctuelle, pour $u$ l'unique foncteur $E \to F$ et pour $v$ le foncteur qui pointe un ensemble à un élément $\{*\}$ ; on a $u \dashv v$ parce que $\{*\}$ est final. Soit $E' = \{\varnothing\}$, réduite à un objet. Alors $u|E'$ est pleinement fidèle, puisque $\operatorname{Hom}(\varnothing, \varnothing)$ et $\operatorname{Hom}(u\varnothing, u\varnothing)$ ont chacun un seul élément ; mais $vu(\varnothing) = \{*\}$ n'est pas isomorphe à $\varnothing$, et $\eta_\varnothing : \varnothing \to \{*\}$ n'est pas un isomorphisme. La condition $vu(E') \subset \overline{E}'$ est donc nécessaire à l'équivalence~(1).
-\end{proof}
-
-\begin{proof}[Démonstration de l'énoncé sur les adjonctions idempotentes]
-On note (a) $\eta_{vP}$ inversible pour tout $P$, (b) $v(\varepsilon_P)$ inversible pour tout $P$, (c) $\varepsilon_{uX}$ inversible pour tout $X$, (d) $u(\eta_X)$ inversible pour tout $X$. On utilise que si $f\,;g$ est une identité et que l'une de $f$, $g$ est un isomorphisme, l'autre en est un, inverse de la première.
-
-(a)~$\Leftrightarrow$~(b) et (c)~$\Leftrightarrow$~(d) résultent de là et des identités triangulaires $\eta_{vP}\,;v(\varepsilon_P) = \mathrm{id}$ et $u(\eta_X)\,;\varepsilon_{uX} = \mathrm{id}$.
-
-(a)~$\Rightarrow$~(c). Soit $X \in E$. Par (a)~$\Rightarrow$~(b) en $P = uX$, $v(\varepsilon_{uX})$ est inversible. Or $vu(\eta_X)$ et $\eta_{vuX}$ en sont deux sections : $vu(\eta_X)\,;v(\varepsilon_{uX}) = v\bigl(u(\eta_X)\,;\varepsilon_{uX}\bigr) = \mathrm{id}$, et $\eta_{vuX}\,;v(\varepsilon_{uX}) = \mathrm{id}$ par l'identité triangulaire ; elles sont donc égales. Montrons que $u(\eta_X)$ est inverse de $\varepsilon_{uX}$. On a déjà $u(\eta_X)\,;\varepsilon_{uX} = \mathrm{id}$. La naturalité de $\varepsilon$ appliquée à $u(\eta_X) : uX \to uvuX$ donne
-\[
-  \varepsilon_{uX}\,;u(\eta_X) = uv\bigl(u(\eta_X)\bigr)\,;\varepsilon_{uvuX} = u(\eta_{vuX})\,;\varepsilon_{uvuX} = \mathrm{id},
-\]
-la deuxième égalité par ce qui précède, la troisième par l'identité triangulaire en $vuX$.
-
-(c)~$\Rightarrow$~(a) est l'énoncé dual. Soit $P \in F$. Par (c)~$\Rightarrow$~(d) en $X = vP$, $u(\eta_{vP})$ est inversible ; $uv(\varepsilon_P)$ et $\varepsilon_{uvP}$ en sont deux rétractions ($u(\eta_{vP})\,;uv(\varepsilon_P) = u(\eta_{vP}\,;v(\varepsilon_P)) = \mathrm{id}$, et l'identité triangulaire), donc sont égales. Alors $\eta_{vP}\,;v(\varepsilon_P) = \mathrm{id}$, et la naturalité de $\eta$ appliquée à $v(\varepsilon_P)$ donne $v(\varepsilon_P)\,;\eta_{vP} = \eta_{vuvP}\,;vuv(\varepsilon_P) = \eta_{vuvP}\,;v(\varepsilon_{uvP}) = \mathrm{id}$.
-
-Les quatre conditions sont donc équivalentes ; en particulier la condition~2 du manuscrit, $\eta v$ \emph{et} $\varepsilon u$ inversibles, équivaut à sa première moitié.
 \end{proof}
 
 \begin{proof}[Démonstration de l'énoncé sur les objets locaux]
@@ -124,7 +109,7 @@ La condition~1), $\operatorname{Im} v \subset E_0$ et $\operatorname{Im} u \subs
 \begin{proof}
 \emph{Condition~1).} $Y = vP$ est dans $E_0$ si et seulement si $\eta_{vP}$ est inversible, et $uX \in F_0$ si et seulement si $\varepsilon_{uX}$ l'est : c'est l'énoncé sur les adjonctions idempotentes.
 
-\emph{Le réflecteur.} Si $\operatorname{Im} u \subset F_0$, alors $vu(X) \in E_0$ pour tout $X$, par le second fait ; le foncteur $X \mapsto vu(X)$ arrive dans $E_0$. On prend pour unité $\eta_X : X \to vu(X)$ et pour coünité, en $Y \in E_0$, $\eta_Y^{-1} : vu(Y) \to Y$, naturelle parce que $\eta$ l'est. L'identité triangulaire du côté de $E_0$ est $\eta_Y\,;\eta_Y^{-1} = \mathrm{id}$. Celle du côté de $E$ demande $vu(\eta_X)\,;\eta_{vuX}^{-1} = \mathrm{id}$, c'est-à-dire $vu(\eta_X) = \eta_{vuX}$ ; c'est l'égalité établie dans la démonstration de (a)~$\Rightarrow$~(c), l'adjonction étant idempotente par cet énoncé. C'est le calcul de Hom de la page~5. Le coréflecteur se traite de même, avec la coünité $\varepsilon_P$, l'unité $\varepsilon_Q^{-1}$ en $Q \in F_0$, et l'égalité $uv(\varepsilon_P) = \varepsilon_{uvP}$ ; c'est le calcul entre crochets de la page~4.
+\emph{Le réflecteur.} Si $\operatorname{Im} u \subset F_0$, le foncteur $X \mapsto vu(X)$ arrive dans $E_0$, et il est adjoint à gauche de l'inclusion $E_0 \subset E$, d'unité $\eta_X : X \to vu(X)$ et de coünité $\eta_Y^{-1}$ en $Y \in E_0$ ; c'est le calcul de Hom de la page~5. Dualement, si $\operatorname{Im} v \subset E_0$, le foncteur $P \mapsto uv(P)$ est adjoint à droite de l'inclusion $F_0 \subset F$, de coünité $\varepsilon_P$ ; c'est le calcul entre crochets de la page~4. Ces deux adjonctions sont démontrées en Lean dans le même fichier général que l'énoncé sur les adjonctions idempotentes.
 
 \emph{Limites.} Un adjoint à gauche commute aux limites inductives, un adjoint à droite aux limites projectives. Une sous-catégorie réflexive a les limites inductives de la catégorie ambiante : on réfléchit la limite inductive calculée dans $E$.
 
