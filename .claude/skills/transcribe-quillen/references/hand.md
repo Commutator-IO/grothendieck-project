@@ -55,3 +55,18 @@ and `\ill{}` stands.
   \bar{E} after descent); the bar is faint at 120 dpi, check at 300.
 - For zooms, crop a full-page 300 dpi pdftoppm render with magick; pdftoppm's own
   -x/-y crop returned blank images on this file.
+
+## 2026-10-23 — 1983-2, batch 4 (pages 61-80)
+
+- His « dot » for an infinitesimal variation is a small circle over the letter
+  (D̊, N̊, g̊): \mathring{D}; after a bracket, ( )° as a superscript \circ.
+- Roman-numeral subscripts I, II for the pieces of an exact sequence
+  (E_I, E_II): \mathrm{I}, \mathrm{II}.
+- Cancelling terms are marked by a stroke through the matching factors in each
+  term, not by deleting the terms: \struck{} on those factors only (it compiles
+  inside display math).
+- Re-inked words (written over, heavier) recur for emphasis: note once, do not
+  treat as underlining.
+- His page numbers are sometimes corrected in place (« 611 » over « 610 »).
+- Inclusions drawn as ∪ under a row of a diagram: tikz-cd phantom arrow with
+  "\cup" description.
