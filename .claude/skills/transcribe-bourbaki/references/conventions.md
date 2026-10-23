@@ -38,3 +38,11 @@ reading and never settles one.
 - Typed interlinear corrections (a word or syllable typed above the line with a caret) are running
   text; only ink is apparatus.
 - Bibliographic blanks « (réf) », « prop. » with no number, « (   ) » are kept as typed.
+
+## 2026-10-23 — rédaction 270 (ENS copy, item 782), Opus 5.5
+- No cover sheet; PDF page = typist's « - n - ». ENS diagonal ink mention p. 1 (« Archives Grothendieck. Juin 57 »).
+- Fill-in hand draws a lowercase script k for the base ring (set $k$, as the typist also types plain k in
+  the same role), Omega, wedge, tensor, theta, delta, and two gothic capitals: the Lie algebra of
+  derivations (looks like a « Y » with a tail, read \mathfrak{G}) and a second one from p. 20
+  (\mathfrak{A}; a gothic B joins it on p. 43, which settles the reading). KaTeX has no lowercase \mathscr: do not try it.
+- Show-through from the verso (vertical strokes, pp. 29, 34) is not a reader's mark.
