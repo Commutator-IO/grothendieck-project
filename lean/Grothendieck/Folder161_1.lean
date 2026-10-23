@@ -4,6 +4,7 @@ import Mathlib.CategoryTheory.Discrete.Basic
 import Mathlib.Tactic.TFAE
 import Mathlib.CategoryTheory.Monad.Limits
 import Mathlib.CategoryTheory.Adjunction.PartialAdjoint
+import Grothendieck.Upstream.AdjunctionIdempotent
 
 /-!
 # Folder 161-1: the fixed part of an adjunction, idempotent adjunctions, local objects
@@ -177,36 +178,8 @@ theorem uv_counit_eq (h : ∀ X, IsIso (adj.counit.app (u.obj X))) (P : F) :
 invertible are equivalent. -/
 theorem idempotent_tfae :
     List.TFAE [∀ P, IsIso (adj.unit.app (v.obj P)), ∀ P, IsIso (v.map (adj.counit.app P)),
-      ∀ X, IsIso (adj.counit.app (u.obj X)), ∀ X, IsIso (u.map (adj.unit.app X))] := by
-  tfae_have 1 ↔ 2 := by
-    refine ⟨fun h P => ?_, fun h P => ?_⟩ <;>
-    · have := isIso_of_eq_id (adj.right_triangle_components P)
-      have := h P
-      first
-        | exact IsIso.of_isIso_comp_left (adj.unit.app (v.obj P)) (v.map (adj.counit.app P))
-        | exact IsIso.of_isIso_comp_right (adj.unit.app (v.obj P)) (v.map (adj.counit.app P))
-  tfae_have 3 ↔ 4 := by
-    refine ⟨fun h X => ?_, fun h X => ?_⟩ <;>
-    · have := isIso_of_eq_id (adj.left_triangle_components X)
-      have := h X
-      first
-        | exact IsIso.of_isIso_comp_right (u.map (adj.unit.app X)) (adj.counit.app (u.obj X))
-        | exact IsIso.of_isIso_comp_left (u.map (adj.unit.app X)) (adj.counit.app (u.obj X))
-  tfae_have 1 → 3 := by
-    intro h X
-    refine ⟨u.map (adj.unit.app X), ?_, adj.left_triangle_components X⟩
-    have nat := adj.counit.naturality (u.map (adj.unit.app X))
-    dsimp at nat
-    rw [← nat, vu_unit_eq adj h]
-    simp
-  tfae_have 3 → 1 := by
-    intro h P
-    refine ⟨v.map (adj.counit.app P), adj.right_triangle_components P, ?_⟩
-    have nat := adj.unit.naturality (v.map (adj.counit.app P))
-    dsimp at nat
-    rw [nat, uv_counit_eq adj h]
-    simp
-  tfae_finish
+      ∀ X, IsIso (adj.counit.app (u.obj X)), ∀ X, IsIso (u.map (adj.unit.app X))] :=
+  Adjunction.idempotent_tfae adj
 
 /-- The manuscript's condition 2, `ηv` and `εu` both invertible, is equivalent to
 its first half alone: the pair is redundant. -/

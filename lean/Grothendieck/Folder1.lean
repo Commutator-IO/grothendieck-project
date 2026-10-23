@@ -1,4 +1,5 @@
 import Mathlib
+import Grothendieck.Upstream.SingularValuesSigmaTwo
 
 /-!
 # Folder 1: the system (16) of page 71 for `m ≤ 2`, and (16) ⟹ (15)
@@ -300,33 +301,8 @@ theorem sum_range_singularValues_eq (T : E →ₗ[𝕜] F) (n : ℕ) :
 `s_0(u+v) + ⋯ + s_{n-1}(u+v) ≤ (s_0(u) + ⋯ + s_{n-1}(u)) + (s_0(v) + ⋯ + s_{n-1}(v))`. -/
 theorem sum_singularValues_add_le (u v : E →ₗ[𝕜] F) (n : ℕ) :
     ∑ j ∈ range n, (u + v).singularValues j ≤
-      ∑ j ∈ range n, u.singularValues j + ∑ j ∈ range n, v.singularValues j := by
-  obtain ⟨S, hS⟩ : ∃ S : Finset (Fin (finrank 𝕜 E)),
-      S = univ.filter (fun j : Fin (finrank 𝕜 E) => (j : ℕ) < n) := ⟨_, rfl⟩
-  have hSn : #S ≤ n := by rw [hS, Fin.card_filter_val_lt]; exact min_le_right _ _
-  rw [sum_range_singularValues_eq, ← hS]
-  have key : ((∑ j ∈ S, (u + v).singularValues j : ℝ) : 𝕜) =
-      ∑ j ∈ S, ⟪fvec (u + v) j, u (ebasis (u + v) j)⟫_𝕜 +
-        ∑ j ∈ S, ⟪fvec (u + v) j, v (ebasis (u + v) j)⟫_𝕜 := by
-    rw [← sum_add_distrib, RCLike.ofReal_sum]
-    refine sum_congr rfl fun j _ => ?_
-    rw [← inner_add_right, ← LinearMap.add_apply, inner_fvec_apply_ebasis]
-  have hxo : ∀ i ∈ S, ∀ j ∈ S, i ≠ j → ⟪ebasis (u + v) i, ebasis (u + v) j⟫_𝕜 = 0 :=
-    fun i _ j _ h => (ebasis (u + v)).orthonormal.2 h
-  have hx1 : ∀ i ∈ S, ‖ebasis (u + v) i‖ ≤ 1 := fun i _ => ((ebasis (u + v)).orthonormal.1 i).le
-  have hyo : ∀ i ∈ S, ∀ j ∈ S, i ≠ j → ⟪fvec (u + v) i, fvec (u + v) j⟫_𝕜 = 0 :=
-    fun i _ j _ h => inner_fvec_of_ne (u + v) h
-  have hy1 : ∀ i ∈ S, ‖fvec (u + v) i‖ ≤ 1 := fun i _ => norm_fvec_le (u + v) i
-  have hu := norm_sum_inner_le S (ebasis (u + v)) (fvec (u + v)) hxo hx1 hyo hy1 u hSn
-  have hv := norm_sum_inner_le S (ebasis (u + v)) (fvec (u + v)) hxo hx1 hyo hy1 v hSn
-  calc ∑ j ∈ S, (u + v).singularValues j
-      = ‖((∑ j ∈ S, (u + v).singularValues j : ℝ) : 𝕜)‖ := by
-        rw [RCLike.norm_ofReal,
-          abs_of_nonneg (sum_nonneg fun j _ => (u + v).singularValues_nonneg _)]
-    _ ≤ ‖∑ j ∈ S, ⟪fvec (u + v) j, u (ebasis (u + v) j)⟫_𝕜‖ +
-        ‖∑ j ∈ S, ⟪fvec (u + v) j, v (ebasis (u + v) j)⟫_𝕜‖ := by
-        rw [key]; exact norm_add_le _ _
-    _ ≤ _ := add_le_add hu hv
+      ∑ j ∈ range n, u.singularValues j + ∑ j ∈ range n, v.singularValues j :=
+  LinearMap.sum_singularValues_add_le u v n
 
 /-- `σ_n^m(T)`, the elementary symmetric function of degree `m` of the first `n` singular
 values `s_0(T), …, s_{n-1}(T)` (page 71, (17)). -/
@@ -997,50 +973,8 @@ theorem bform_ebasis_fvec (w : E →ₗ[𝕜] F) (n : ℕ) :
 /-- **The system (16) of page 71 for `m = 2`**:
 `σ_n^2(u+v) ≤ σ_n^2(u) + σ_n^1(u) σ_n^1(v) + σ_n^2(v)`, for every `n`. -/
 theorem sigma_two_add_le (u v : E →ₗ[𝕜] F) (n : ℕ) :
-    sigma n 2 (u + v) ≤ sigma n 2 u + sigma n 1 u * sigma n 1 v + sigma n 2 v := by
-  rcases Nat.eq_zero_or_pos n with rfl | hn
-  · have h0 : ∀ T : E →ₗ[𝕜] F, sigma 0 2 T = 0 := fun T => by
-      rw [sigma, range_zero, powersetCard_eq_empty.mpr (by simp), sum_empty]
-    simp [h0, sigma_one]
-  obtain ⟨G, hG⟩ : ∃ G : Finset (Fin (finrank 𝕜 E)), G = univ.filter (fun j : Fin (finrank 𝕜 E) => (j : ℕ) < n) :=
-    ⟨_, rfl⟩
-  have hGn : #G ≤ n := by rw [hG, Fin.card_filter_val_lt]; exact min_le_right _ _
-  have hord1 : ∀ T : E →ₗ[𝕜] F, ∀ k ∈ G, T.singularValues (n - 1) ≤ T.singularValues k :=
-    fun T k hk => T.singularValues_antitone (by rw [hG, mem_filter] at hk; omega)
-  have hord2 : ∀ T : E →ₗ[𝕜] F, ∀ k ∉ G, T.singularValues k ≤ T.singularValues (n - 1) :=
-    fun T k hk => T.singularValues_antitone (by
-      rw [hG, mem_filter, not_and, not_lt] at hk; have := hk (mem_univ _); omega)
-  have hσ : ∀ T : E →ₗ[𝕜] F, 2 * sigma n 2 T =
-      (∑ k ∈ G, T.singularValues k) ^ 2 - ∑ k ∈ G, T.singularValues k ^ 2 := fun T => by
-    rw [hG]; exact two_mul_sigma_two T n
-  have hbw : bform G (ebasis (u + v)) (fvec (u + v)) (u + v) (u + v) =
-      ((2 * sigma n 2 (u + v) : ℝ) : 𝕜) := by rw [hG]; exact bform_ebasis_fvec _ n
-  have hx : ∀ i ∈ G, ∀ j ∈ G, i ≠ j → ⟪ebasis (u + v) i, ebasis (u + v) j⟫_𝕜 = 0 :=
-    fun i _ j _ h => (ebasis (u + v)).orthonormal.2 h
-  have hx1 : ∀ i ∈ G, ‖ebasis (u + v) i‖ ≤ 1 := fun i _ => ((ebasis (u + v)).orthonormal.1 i).le
-  have hy : ∀ i ∈ G, ∀ j ∈ G, i ≠ j → ⟪fvec (u + v) i, fvec (u + v) j⟫_𝕜 = 0 :=
-    fun i _ j _ h => inner_fvec_of_ne (u + v) h
-  have hy1 : ∀ i ∈ G, ‖fvec (u + v) i‖ ≤ 1 := fun i _ => norm_fvec_le (u + v) i
-  have Buu := norm_bform_self_le G _ _ hx hx1 hy hy1 u G (u.singularValues_nonneg _)
-    (hord1 u) (hord2 u) le_rfl
-  have Bvv := norm_bform_self_le G _ _ hx hx1 hy hy1 v G (v.singularValues_nonneg _)
-    (hord1 v) (hord2 v) le_rfl
-  have Buv := norm_bform_le_mul G _ _ hx hx1 hy hy1 u v hGn
-  have Bvu := norm_bform_le_mul G _ _ hx hx1 hy hy1 v u hGn
-  rw [← hσ] at Buu Bvv
-  rw [← sigma_one, ← sigma_one] at Buv Bvu
-  have hw := bform_add G (ebasis (u + v)) (fvec (u + v)) u v
-  rw [hbw] at hw
-  have h0 := sigma_nonneg n 2 (u + v)
-  have hn2 : 2 * sigma n 2 (u + v) = ‖((2 * sigma n 2 (u + v) : ℝ) : 𝕜)‖ := by
-    rw [RCLike.norm_ofReal, abs_of_nonneg (by linarith)]
-  rw [hw] at hn2
-  set x := ebasis (u + v)
-  set y := fvec (u + v)
-  have t1 := norm_add_le (bform G x y u u + bform G x y u v + bform G x y v u) (bform G x y v v)
-  have t2 := norm_add_le (bform G x y u u + bform G x y u v) (bform G x y v u)
-  have t3 := norm_add_le (bform G x y u u) (bform G x y u v)
-  linarith
+    sigma n 2 (u + v) ≤ sigma n 2 u + sigma n 1 u * sigma n 1 v + sigma n 2 v :=
+  by rw [sigma_one, sigma_one]; exact LinearMap.sum_powersetCard_two_prod_singularValues_add_le u v n
 
 /-- **The system (16) of page 71 for `m ≤ 2`** and every `n`. -/
 theorem sigma_system_of_le_two (u v : E →ₗ[𝕜] F) (n m : ℕ) (hm : m ≤ 2) :

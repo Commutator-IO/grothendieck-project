@@ -1,4 +1,5 @@
 import Mathlib
+import Grothendieck.Upstream.NoetherianIsOpenOfStableUnderGeneralization
 
 /-!
 # Folder 42: Lemme 1, the proposition of page 3, Lemme 2, Corollaire 1
@@ -128,44 +129,8 @@ under generization that contains, with each of its points `x`, a nonempty open o
 sets in which `Eᶜ` is dense. -/
 theorem isOpen_of_stableUnderGeneralization [NoetherianSpace X] [QuasiSober X] {E : Set X}
     (hgen : StableUnderGeneralization E)
-    (hloc : ∀ x ∈ E, ∃ W : Set X, IsOpen W ∧ x ∈ W ∧ W ∩ closure {x} ⊆ E) : IsOpen E := by
-  have key : ∀ Z : Closeds X, (Z : Set X) ⊆ closure ((Z : Set X) ∩ Eᶜ) →
-      (Z : Set X) ∩ E = ∅ := by
-    intro Z
-    induction Z using WellFoundedLT.induction with
-    | _ Z IH =>
-    intro hd
-    rw [Set.eq_empty_iff_forall_notMem]
-    rintro y ⟨hyZ, hyE⟩
-    by_cases h₁ : IsPreirreducible (Z : Set X)
-    · have hirr : IsIrreducible (Z : Set X) := ⟨⟨y, hyZ⟩, h₁⟩
-      have hg := hirr.isGenericPoint_genericPoint Z.isClosed
-      have hzE : hirr.genericPoint ∈ E := hgen (hg.specializes hyZ) hyE
-      obtain ⟨W, hW, hzW, hWE⟩ := hloc _ hzE
-      obtain ⟨w, hwW, ⟨hwZ, hwE⟩⟩ := mem_closure_iff.1 (hd hg.mem) W hW hzW
-      exact hwE (hWE ⟨hwW, by rw [hg.def]; exact hwZ⟩)
-    · simp only [isPreirreducible_iff_isClosed_union_isClosed, not_forall, not_or] at h₁
-      obtain ⟨z₁, z₂, hz₁, hz₂, h, hz₁', hz₂'⟩ := h₁
-      have piece : ∀ z : Set X, IsClosed z → ¬ (Z : Set X) ⊆ z →
-          ∃ Z' : Closeds X, Z' < Z ∧ (Z' : Set X) ∩ E = ∅ ∧
-            closure ((Z : Set X) ∩ z ∩ Eᶜ) ⊆ Z' := by
-        intro z hz hz'
-        let Z' : Closeds X := ⟨closure ((Z : Set X) ∩ z ∩ Eᶜ), isClosed_closure⟩
-        have sub : (Z' : Set X) ⊆ (Z : Set X) ∩ z :=
-          closure_minimal (fun x hx => hx.1) (Z.isClosed.inter hz)
-        have lt : Z' < Z := lt_of_le_of_ne (fun x hx => (sub hx).1) fun e =>
-          hz' fun x hx => (sub (e.symm ▸ hx : x ∈ (Z' : Set X))).2
-        exact ⟨Z', lt, IH Z' lt (closure_mono fun x hx => ⟨subset_closure hx, hx.2⟩), subset_rfl⟩
-      obtain ⟨Z₁, -, e₁, s₁⟩ := piece z₁ hz₁ hz₁'
-      obtain ⟨Z₂, -, e₂, s₂⟩ := piece z₂ hz₂ hz₂'
-      have hsplit : (Z : Set X) ∩ Eᶜ ⊆ ((Z : Set X) ∩ z₁ ∩ Eᶜ) ∪ ((Z : Set X) ∩ z₂ ∩ Eᶜ) :=
-        fun x ⟨hxZ, hxE⟩ => (h hxZ).imp (fun h' => ⟨⟨hxZ, h'⟩, hxE⟩) fun h' => ⟨⟨hxZ, h'⟩, hxE⟩
-      rcases closure_union.subset (closure_mono hsplit (hd hyZ)) with h' | h'
-      · exact (Set.eq_empty_iff_forall_notMem.1 e₁) y ⟨s₁ h', hyE⟩
-      · exact (Set.eq_empty_iff_forall_notMem.1 e₂) y ⟨s₂ h', hyE⟩
-  let T : Closeds X := ⟨closure Eᶜ, isClosed_closure⟩
-  have hT := key T (closure_mono fun x hx => ⟨subset_closure hx, hx⟩)
-  exact isClosed_compl_iff.1 (closure_subset_iff_isClosed.1 fun x hx hxE => hT.subset ⟨hx, hxE⟩)
+    (hloc : ∀ x ∈ E, ∃ W : Set X, IsOpen W ∧ x ∈ W ∧ W ∩ closure {x} ⊆ E) : IsOpen E :=
+  TopologicalSpace.NoetherianSpace.isOpen_of_stableUnderGeneralization hgen hloc
 
 end Topology
 

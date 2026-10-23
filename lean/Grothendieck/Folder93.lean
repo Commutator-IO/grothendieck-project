@@ -17,6 +17,7 @@ import Mathlib.Data.Nat.Choose.Sum
 import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.Data.Int.GCD
 import Mathlib.Data.Nat.Choose.Dvd
+import Grothendieck.Upstream.HasseDerivXPowMul
 
 /-!
 # Folder 93, pages 72, 115–123: the Schwarzian difference with divided derivatives
@@ -558,15 +559,8 @@ theorem rigidity_char_zero [Algebra ℚ R] (s : R[X]) (hs : IsUnit (s.coeff 1)) 
 /-- In characteristic `p`, `D⁽ᵏ⁾` for `k < p^N` is `A[X^(p^N)]`-linear on multiples of
 `X^(p^N)`; hence it passes to `A[T]/(T^(p^N))`. -/
 theorem hasseDeriv_X_pow_mul (p M : ℕ) [hp : Fact p.Prime] [CharP R p] {k : ℕ}
-    (hk : k < p ^ M) (g : R[X]) : D k (X ^ (p ^ M) * g) = X ^ (p ^ M) * D k g := by
-  rw [hasseDeriv_mul, Finset.sum_eq_single (0, k)]
-  · simp
-  · rintro ⟨i, j⟩ hij hne
-    rw [Finset.mem_antidiagonal] at hij
-    have hi : i ≠ 0 := by rintro rfl; simp_all
-    rw [D_X_pow, (CharP.cast_eq_zero_iff R[X] p _).2
-      (Nat.Prime.dvd_choose_pow hp.out hi (by omega)), zero_mul, zero_mul]
-  · simp
+    (hk : k < p ^ M) (g : R[X]) : D k (X ^ (p ^ M) * g) = X ^ (p ^ M) * D k g :=
+  Polynomial.hasseDeriv_X_pow_mul p hk g
 
 /-- `N(s)` modulo `X^(p^N)` depends only on `s` modulo `X^(p^N)` (`3 < p^N`), so
 `G₀(t, s) = 0` in `A[T]/(T^(p^N))` reads `X^(p^N) ∣ N(s)`. -/

@@ -1,4 +1,5 @@
 import Mathlib
+import Grothendieck.Upstream.ChoosePrimePowSubOne
 
 /-!
 # Folder 136, pages 19–31: the binomial lemma behind the « ombres »
@@ -68,12 +69,8 @@ theorem choose_pow_sub_one_zmod {p : ℕ} (hp : p.Prime) (r : ℕ) :
     linear_combination h0
 
 theorem not_dvd_choose_pow_sub_one {p : ℕ} (hp : p.Prime) (r b : ℕ)
-    (hb : b ≤ p ^ r - 1) : ¬ p ∣ (p ^ r - 1).choose b := by
-  have := Fact.mk hp
-  intro h
-  have h1 := choose_pow_sub_one_zmod hp r b hb
-  rw [(ZMod.natCast_eq_zero_iff _ _).2 h] at h1
-  exact (pow_ne_zero b (neg_ne_zero.2 one_ne_zero) h1.symm).elim
+    (hb : b ≤ p ^ r - 1) : ¬ p ∣ (p ^ r - 1).choose b :=
+  have := Fact.mk hp; Choose.not_dvd_choose_pow_sub_one hb
 
 /-- `binom(k+l, l) binom(k, i) = binom(k+l, i) binom(k+l−i, l)` for all `k, l, i`. -/
 theorem choose_add_mul_choose (k l i : ℕ) :
