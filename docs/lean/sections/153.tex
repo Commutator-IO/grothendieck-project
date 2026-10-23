@@ -189,8 +189,9 @@ Soit $k$ un anneau commutatif non nul et $F = \sum_{m \ge 1} T^m$. Les coefficie
 \end{enonce}
 
 \begin{proof}
-La matrice de Pascal $P_N = \bigl(\binom{p+q}{p}\bigr)_{p, q < N}$ est de déterminant $1$ : elle vaut $L L^{\mathsf T}$ avec $L = \bigl(\binom{p}{j}\bigr)_{p, j < N}$, par l'identité $\binom{p+q}{p} = \sum_j \binom{p}{j}\binom{q}{j}$, conséquence de Vandermonde, et $L$ est triangulaire à diagonale unité. Si les coefficients étaient $\sum_{i < n} a_{i,p} b_{i,q}$, ceux de $P_{n+2}$ seraient $\sum_{i < n} a_{i,p} b_{i,q} + [p = 0][q = 0]$, et $P_{n+2}$ serait le produit d'une matrice à $n + 1$ colonnes par une matrice à $n + 1$ lignes, de rang au plus $n + 1$, alors qu'elle est inversible, de rang $n + 2$.
+La matrice de Pascal $P_N = \bigl(\binom{p+q}{p}\bigr)_{p, q < N}$ est de déterminant $1$, énoncé général rappelé à la suite de la démonstration. Si les coefficients étaient $\sum_{i < n} a_{i,p} b_{i,q}$, ceux de $P_{n+2}$ seraient $\sum_{i < n} a_{i,p} b_{i,q} + [p = 0][q = 0]$, et $P_{n+2}$ serait le produit d'une matrice à $n + 1$ colonnes par une matrice à $n + 1$ lignes, de rang au plus $n + 1$, alors qu'elle est inversible, de rang $n + 2$.
 \end{proof}
+\general{DetPascalMatrix}
 
 \begin{remarque}
 Le contre-exemple de~3a) pour $\mathrm{Appl}(A, A)$ est établi pour $A$ unitaire, commutatif, non nul et infini. La page ne parle pas de~3), et la lecture dit \q{pour $A$ infini}. Pour $k[[T]]^+$, la matrice des coefficients de $F(X + Y)$ diffère de la matrice de Pascal, que nomme la note de la lecture, par le coefficient $(0,0)$, nul puisque $F$ n'a pas de terme constant ; l'argument coûte donc un rang de plus. Le déterminant de la matrice de Pascal valant $1$ sur $\mathbf Z$, le contre-exemple vaut en toute caractéristique. L'énoncé Lean porte sur les coefficients. Le passage aux séries, où le coefficient de $X^p Y^q$ d'un produit $a(X) b(Y)$ est $a_p b_q$, est celui de la note.
