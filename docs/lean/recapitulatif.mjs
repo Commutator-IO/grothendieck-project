@@ -26,7 +26,7 @@ const VERDICT = {
 };
 const BOURBAKI = {
   'bourbaki-288': 'holds, more generally',
-  'bourbaki-457': 'false on the page',
+  'bourbaki-457': ['false on the page', 'holds'],
 };
 
 const verdicts = {};
@@ -59,7 +59,7 @@ for (const m of article.matchAll(/\\part\{([^}]*(?:\{[^}]*\}[^}]*)*)\}|\\input\{
   const statement = bare.charAt(0).toLocaleUpperCase('fr') + bare.slice(1);
   const cote = name.startsWith('bourbaki-') ? `Bourbaki ${name.slice(9)}` : name;
   const [, base = '\\leanblob', file] = tex.match(/\\verifie(?:\[([^\]]*)\])?\{([^}]+)\}/);
-  const vs = [...new Set(verdicts[name] ?? [BOURBAKI[name]])];
+  const vs = [...new Set(verdicts[name] ?? [BOURBAKI[name]].flat())];
   if (!vs.length || vs.some((v) => !VERDICT[v])) throw new Error(`verdict of ${name}: ${vs}`);
   rows.push(
     `${cote} & ${statement} & ${vs.map((v) => VERDICT[v]).join(' ; ')} & \\href{${base}/${file}.lean}{\\texttt{\\detokenize{${file}}}} & \\ref{sec:${name}}\\\\`,

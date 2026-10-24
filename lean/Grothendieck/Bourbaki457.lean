@@ -35,8 +35,15 @@ identification is not formalised here, and `A` is defined directly.
   an equality of cardinals.
 
 The degree of `A` is in fact `ℵ₀` and, for `Ω` a field, `P(A)` is in bijection with `C`; Lean
-proves only the two inequalities, which is all the refutation needs. The finite-degree case of
-Cor. 6 and its last assertion (finite degree if and only if `P(A)` finite), which are true, are
+proves only the two inequalities, which is all the refutation needs.
+
+* `finrank_eq_card_points`: the true case, `[A : k] = card P(A)` for `A` étale over `k` (a
+  finite product of finite separable extensions `Kᵢ`, `Algebra.Etale.iff_exists_algEquiv_prod`)
+  and `Ω` algebraically closed: the maps `Kᵢ → Ω` composed with the projections are distinct
+  (the idempotents separate the factors), there are `[Kᵢ : k]` of them for each `i`, and there
+  are at most `[A : k]` maps in all (`card_algHom_le_finrank`, Dedekind).
+
+The last assertion of Cor. 6 (finite degree if and only if `P(A)` finite), which is true, is
 not formalised.
 -/
 
@@ -165,5 +172,40 @@ theorem not_corollary6 {k : Type u} [Field k] (Ω : Type v) [Field Ω] [Algebra 
   ⟨cantorAlg k, inferInstance,
     fun f ↦ let ⟨p, _, hs, hp, h⟩ := exists_separable_splits f; ⟨p, hs, hp, h⟩,
     (rank_lt_card_points Ω).ne⟩
+
+/-- The true case of Cor. 6: for `A` étale over `k` (a finite product of finite separable
+extensions) and `Ω` an algebraically closed extension, `[A : k] = card P(A)`. -/
+theorem finrank_eq_card_points {k : Type*} [Field k] {A : Type*} [CommRing A] [Algebra k A]
+    [Algebra.Etale k A] (Ω : Type*) [Field Ω] [Algebra k Ω] [IsAlgClosed Ω] :
+    Module.finrank k A = Nat.card (A →ₐ[k] Ω) := by
+  classical
+  have := Algebra.FormallyUnramified.finite_of_free k A
+  refine le_antisymm ?_ (card_algHom_le_finrank k A Ω)
+  obtain ⟨I, _, K, _, _, e, hK⟩ := (Algebra.Etale.iff_exists_algEquiv_prod k A).1 ‹_›
+  have := Fintype.ofFinite I
+  have := fun i => (hK i).1
+  have hc : ∀ i, Nat.card (K i →ₐ[k] Ω) = Module.finrank k (K i) := fun i => by
+    have := (hK i).1; have := (hK i).2
+    rw [← Field.finSepDegree_eq_of_isAlgClosed, Field.finSepDegree_eq_finrank_of_isSeparable]
+  have hfin : ∀ i, Finite (K i →ₐ[k] Ω) := fun i => by
+    have := (hK i).1
+    exact Nat.finite_of_card_ne_zero (by rw [hc]; exact Module.finrank_pos.ne')
+  -- `(i, f) ↦ f ∘ prᵢ ∘ e` is injective
+  let φ : (Σ i, K i →ₐ[k] Ω) → (A →ₐ[k] Ω) := fun f =>
+    (f.2.comp (Pi.evalAlgHom k K f.1)).comp e.toAlgHom
+  have hφ : Injective φ := by
+    rintro ⟨i, f⟩ ⟨j, g⟩ h
+    have hij : i = j := by
+      by_contra hij
+      have := DFunLike.congr_fun h (e.symm (Pi.single i 1))
+      simp [φ, Ne.symm hij] at this
+    subst hij
+    refine Sigma.ext rfl (heq_of_eq (AlgHom.ext fun x => ?_))
+    have := DFunLike.congr_fun h (e.symm (Pi.single i x))
+    simpa [φ] using this
+  calc Module.finrank k A = ∑ i, Module.finrank k (K i) := by
+        rw [e.toLinearEquiv.finrank_eq, Module.finrank_pi_fintype]
+    _ = Nat.card (Σ i, K i →ₐ[k] Ω) := by rw [Nat.card_sigma]; exact Finset.sum_congr rfl fun i _ => (hc i).symm
+    _ ≤ _ := Nat.card_le_card_of_injective φ hφ
 
 end Grothendieck.Bourbaki457
