@@ -6,6 +6,16 @@
  * proof written out. The notation is the findings' hybrid (Unicode operators,
  * TeX indices), rendered by lib/notation.tsx.
  */
+export type Verdict =
+  | 'holds'
+  | 'holds, more generally'
+  | 'holds; the gloss was false'
+  | 'false on the page'
+  | 'conjecture of the page refuted'
+  | 'the reading dropped a hypothesis'
+  | 'partly proved'
+  | 'already in mathlib';
+
 export interface Proof {
   folder: string;
   /** Where the reading's statement is, as the reader addresses it. */
@@ -16,8 +26,8 @@ export interface Proof {
   statement: string;
   /** What the formalisation turned up — the point of doing it. */
   found: string;
-  /** The verdict in one word, for the badge. */
-  verdict: 'holds' | 'holds, more generally' | 'holds; the gloss was false' | 'false on the page' | 'the reading dropped a hypothesis' | 'partly proved' | 'already in mathlib';
+  /** The verdict in one word, for the badge; several when the card's statements differ. */
+  verdict: Verdict | Verdict[];
   lean: string;
   theorems: string[];
 }
@@ -162,7 +172,7 @@ export const PROOFS: Proof[] = [
       'Two multistrates are disjoint when they are compatible and have no common lower bound; the cosupport of Φ is the set of multistrates disjoint from all of Φ, a part is saturated when it is the cosupport of its cosupport, and page 68 presumes that the saturated parts form a Boolean algebra (« ultra-stonienne »).',
     found:
       'The presumption fails. For any poset and any symmetric relation the saturated parts form a complete ortholattice: closed under arbitrary intersections, with the cosupport an inclusion-reversing involution such that S ∩ cosupp S = ∅ and supp(S ∪ cosupp S) = 𝓜. In the seven-element model a, b, c, d with v_ab, v_bc, v_cd above the pairs ab, bc, cd, R generated inside each 𝓜_{≤v} (reflexive, symmetric, inherited downwards, 𝓜 connected so C 4 is vacuous), the saturated parts are ∅, {b}, {c}, {a, c}, {b, d}, 𝓜, a non-distributive hexagon: {b, d} ∧ ({b} ∨ {c}) = {b, d} but ({b, d} ∧ {b}) ∨ ({b, d} ∧ {c}) = {b}. Checked by exhaustive computation in the kernel. The figures and the axioms C 1–C 3 on them are not encoded.',
-    verdict: 'false on the page',
+    verdict: 'conjecture of the page refuted',
     lean: 'lean/Grothendieck/Folder156_4.lean',
     theorems: ['isSaturated_iInter', 'isSaturated_cosupp', 'inter_cosupp_eq_empty', 'supp_union_cosupp', 'hexagon_hyp', 'hexagon_saturated', 'hexagon_not_distrib'],
   },
@@ -201,7 +211,7 @@ export const PROOFS: Proof[] = [
       'The four irreducible components of M′₃ ∩ V(c₄), the locus j = 0 in the level-3 moduli space over ℤ[1/3, ζ₃], meet at one point a over 𝔽₄; page 99 opens « … aux composantes irréductibles sont égales » and the reading concludes that they share their tangent there.',
     found:
       'The four tangents are pairwise distinct. In the Hesse parameter t, with c₄ = t(t³ + 8) up to units (taken as given), t³ + 8 = (t + 2)(t + 2ζ)(t + 2ζ²) over ℤ[ζ], and in P/P², P = (2, t), the tangent forms t, t + 2, t + 2ζ, t + 2ζ² are pairwise independent over R[t]/P = 𝔽₄: a·f + b·g ∈ P² forces a, b ∈ P, because each difference of 0, 1, ζ, ζ² is a unit modulo 2. The Hesse involution t ↦ (t + 2)/(t − 1) acts on P/P² as the transvection t ↦ t + 2, so the splitting V₁ × V₂ that page 99 asserts is not stable. Not formalised: that the Hesse family is the level-3 moduli space and the formula for c₄.',
-    verdict: 'holds; the gloss was false',
+    verdict: ['false on the page', 'holds; the gloss was false'],
     lean: 'lean/Grothendieck/Folder63.lean',
     theorems: ['factor', 'branch_mem', 'tangents_distinct', 'involution_transvection'],
   },
@@ -227,7 +237,7 @@ export const PROOFS: Proof[] = [
       'A finite monoid M, pseudo-cofiltering (for all u, v there are u′, v′ with uu′ = vv′) and whose group completion is trivial, has an element p with up = p for every u — so p² = p and M is cofiltering. P. 39: a monoid with a minimal element ψ (ψ ∈ uM for all u) is cofiltered as soon as every connected right M-set has a simply connected category of elements. P. 52: a finite category in which every connected presheaf has a simply connected category of elements is cofiltered.',
     found:
       'The Proposition holds as the leaf states it, and finiteness is used exactly where the page says « comme E₀ est fini ». The reading’s modern gloss was false: it called p a left zero and the Rees kernel a point. In {1, a, b} with xa = a and xb = b, both a and b qualify and the kernel is {a, b}; p is a right zero, and not unique. The reading is corrected. Proposition 1 with its converse is proposed to mathlib (leanprover-community/mathlib4#44702). P. 39 holds, as an equivalence, with simply connected read as « every functor to a group is trivial »: M/R_ψ carries a ℤ-valued degree when the powers of ψ are distinct, and otherwise M acts on its minimal elements eM through a group, trivially iff M is cofiltered. P. 52 is false as read for disconnected X (the discrete category on two objects); for X connected it holds, and the unargued step (H) ⇒ pseudo-cofiltrant of p. 53 holds for every small category.',
-    verdict: 'holds; the gloss was false',
+    verdict: ['holds; the gloss was false', 'false on the page'],
     lean: 'lean/Grothendieck/Folder158.lean',
     theorems: ['etape1', 'proposition1', 'contre_noyau_non_ponctuel', 'cofiltrant_iff_simplyConnected', 'quotPsi_not_simplyConnected', 'cofiltrant_iff_rhoMin', 'simplyConnected_of_cofiltrant', 'common_ancestor', 'square_of_H', 'isCofiltered_of_H', 'discrete_counterexample'],
   },
@@ -240,7 +250,7 @@ export const PROOFS: Proof[] = [
       "The lemma on integer-valued polynomials and free modules; the co-addition and co-multiplication of Int(k₀) exist, are unique and obey the composition rules (Ω free and K₀ ⊗ Ω → K₀[T] injective: K₀ a localisation of k₀, or K₀ flat over k₀ with K₀ ⊗ K₀ = K₀); the Pólya basis and Vandermonde for Int(ℤ); the decomposition Ω = Ω₀ ⊕ Ω⁰; the examples and counterexamples of p. 7 (Appl, k[T], 𝔽_q, k[[T]]⁺).",
     found:
       "Holds. The inclusion k₀ ⊂ K₀ is never used. The co-operations need only that K₀ ⊗_{k₀} Ω → K₀[T] be injective (it is always surjective, k₀[T] ⊂ Ω); this holds for K₀ a localisation and for K₀ flat over k₀ with K₀ ⊗ K₀ = K₀, the relative-Int finding’s hypothesis plus flatness; whether K₀ ⊗ K₀ = K₀ alone suffices is left open. The decomposition needs neither axiom 3) nor the unit T. Appl(A, A) fails 3a) for every infinite non-zero unital A. The reading’s footnote on k[[T]]⁺: the matrix is Pascal’s without its (0, 0) entry; the counterexample holds in every characteristic. Pólya’s basis is proposed to mathlib (leanprover-community/mathlib4#44722), as is the coordinate criterion for the range of N ⊗ M (#44717); the coordinate expansion itself was already there.",
-    verdict: 'holds, more generally',
+    verdict: ['holds, more generally', 'partly proved'],
     lean: 'lean/Grothendieck/Folder153.lean',
     theorems: ["lemme_injective", "lemme_range", "Phi_injective", "coaddition_existsUnique", "coaddition_existsUnique_of_injective", "omegaBaseChange_surjective", "omegaBaseChange_injective_of_flat", "polya", "vandermonde", "isCompl_constants_zeroPart", "appl_not_coaddition", "geom_not_finite_coaddition"],
   },
@@ -396,7 +406,7 @@ export const PROOFS: Proof[] = [
       'For an adjunction f ⊣ g with comparison functor h: a) if A has equalizers and f preserves them, h is essentially surjective; b) h is an equivalence if and only if f is conservative and, for every pair (u, v) whose image under f has an equalizer, the equalizer of (u, v) exists and f preserves it (condition C). Over a product base B = ∏ Bᵢ (pp. 7–9), the comonad fg is a matrix φ_ji = f_j g_i with comultiplication λ_kji, determined by its entries when the f_j preserve products; with fully faithful g′, g″ it collapses to two crossed functors and two units.',
     found:
       'a) and the « if » of b) hold — Beck’s theorem. The « only if » of b) is false as the page states it: the inclusion of the pairs of sets (X, Y) with Y ≠ ∅ ⇒ X ≠ ∅ is coreflective, hence comonadic and conservative, yet the pair (∗, ∗) ⇉ ({0, 1}, ∗) has equalizer (∅, ∗) below and (∅, ∅) above. The reading had called condition C Beck’s f-split condition; it is not, and the reading is corrected. Gabriel–Popescu holds in the reading’s form and is classical. On p. 7, the proviso « ou I fini » is false: a left adjoint need not preserve finite products (f = Bool × − on sets gives 2 elements against 4); exactness is the hypothesis that works. Beck’s comonadicity theorem as an iff is proposed to mathlib (#44727); both directions were already there separately. The Proposition of p. 80 (n successive adjoints between presheaf topoi, none fully faithful) holds and extends to a chain infinite in both directions on presheaves on ℤ ⊔ ℤ, none faithful, which answers the page’s Question against a note of the reading.',
-    verdict: 'false on the page',
+    verdict: ['partly proved', 'false on the page'],
     lean: 'lean/Grothendieck/Folder19.lean',
     theorems: ['theoreme_a', 'theoreme_b_suffisance', 'theoreme_b_necessite_fausse', 'beck_iff', 'gabriel_popescu', 'matrice', 'comult_matrice', 'lam_isIso_left', 'deuxFacteurs_left', 'matrice_fini_fausse', 'proposition_page80', 'chain_adj', 'chain_not_fullyFaithful'],
   },
@@ -435,7 +445,7 @@ export const PROOFS: Proof[] = [
       "On a primitive vector of weight μ, ΛL^{k+1}x = (k+1)(μ−k)L^k x, and the sl₂ Λ satisfies (6.7) only when μ = 1; in a graded ring, one-sided inverses of L^{n−i} put every grading projector in the ring, over ℤ, with no module (no. 5, (6.3)); any algebraic isomorphism H^{2n−i} → H^i makes the inverse of L^{n−i} algebraic, by Cayley–Hamilton (pp. 47–48). Hodge algebras of order 2 (pp. 24–28): from an alternating φ on V, ψ : Λ²V → W and a symmetric Q on W, the product on k ⊕ V ⊕ (kξ ⊕ W) ⊕ V̌ ⊕ kξ² is a unital graded-anticommutative bilinear law; it is associative iff φ(x,y)φ(t,z) + Q(ψ(x,y), ψ(t,z)) = φ(t,x)φ(y,z) + Q(ψ(t,x), ψ(y,z)); Lefschetz iff φ is non-degenerate, Poincaré iff Q is; xyzt = χ(x,y,z,t)ξ², and the reformulation by (W̃, Q̃, α, ξ) with Q̃(ξ,ξ) = 1.",
     found:
       "Confirms the reading’s correction of p. 13. Finds the reading wrong on one point: its universal ring Φ₀ = ℤ[L₀, Λ₀], with Λ₀ in the sense of (6.15), does not exist over ℤ for n ≥ 2, since ξ₀ⁿ is divisible by n! and no y has ξ₀ⁿ ∧ y = vol; over ℚ the obstruction disappears. The Hodge algebras of pp. 24–28 hold as stated: of the associativity conditions only the triple H¹ × H¹ × H¹ is not automatic, and it is the quadrilinear identity, which is also exactly « χ is alternating »; each of the two conditions reads on one datum, Lefschetz using that V is finite-dimensional (ξ : V → V̌ injective ⇒ onto) and Poincaré needing no finiteness; construction and associativity hold over any commutative ring. In the reformulation, Q̃ is non-degenerate iff its restriction to ξ^⊥ is, because Q̃(ξ,ξ) = 1. Not proved: the finiteness question of p. 28; Λ and the primitive projectors in the ring, the universal property of Φ₀, Hard Lefschetz. The Cayley–Hamilton lemma is proposed to mathlib in a more general form, for integral units of a subalgebra over an Artinian ring (leanprover-community/mathlib4#44708).",
-    verdict: 'partly proved',
+    verdict: ['partly proved', 'holds; the gloss was false'],
     lean: 'lean/Grothendieck/Folder16.lean',
     theorems: ["sl2_normalisation", "identification_seulement_si", "lambda0_L0_un_ne_un", "projecteurs_mem_lefschetz", "inverse_Lefschetz_algebrique", "not_exists_xi₀_pow_mul_eq_vol", "DonneesHodge.produit_force", "DonneesHodge.mul_anticomm_of_impair", "DonneesHodge.assoc_iff", "DonneesHodge.lefschetz_iff", "DonneesHodge.poincare_iff", "DonneesHodge.identite_iff_chi", "reformulation_spec"],
   },
@@ -669,7 +679,7 @@ export const PROOFS: Proof[] = [
       'For (P, Δ) with Δ finite generating P, reduced (na ∉ Δ for n ∈ ℚ, n ≠ ±1) and stable under a symmetry S_a for each root, write S_α x = x − ⟨γ_α, x⟩α with γ_α ∈ (P′)^ℚ; the leaf says that in fact γ_α ∈ P′, the Cartan numbers ⟨γ_α, β⟩ being integers because α is indivisible in P.',
     found:
       'Indivisibility does give integrality, in any subgroup of a ℚ-vector space. The three axioms alone do not: Δ = {±3e₁, ±3e₂, ±(e₁ ± e₂)} ⊂ ℤ² satisfies them, its symmetry of 3e₁ is unique and ⟨γ_{3e₁}, e₁ + e₂⟩ = 2/3, with 3e₁ divisible. The simple system {3e₁, e₂ − e₁} of its reflection group is one only with rational coefficients, so the bracket’s appeal to a fundamental system is not refuted; whether the page asserts, proposes or asks is still unread.',
-    verdict: 'holds',
+    verdict: 'holds; the gloss was false',
     lean: 'lean/Grothendieck/Folder44.lean',
     theorems: ['cartan_int_of_indivisible', 'generates', 'reduced_rat', 'symmetries', 'cartan_eq_two_thirds', 'cartan_exists', 'axioms_not_integral', 'not_integral_base'],
   },
@@ -812,7 +822,7 @@ export const PROOFS: Proof[] = [
       'For A a connected groupoid with automorphism group G ≠ 1 (A = BG) and the usual weak equivalences, 𝒲_A consists of the isomorphisms only, hence is stable under finite products, while A is not aspherical: condition (ii) of the lemma of pages 32–35 does not imply asphericity.',
     found:
       'Holds, in a model where weak equivalences of groupoids are read 1-truncated (bijective on components, isomorphisms on automorphism groups), a classical characterisation taken as definition. A map of G-sets is in 𝒲_A iff it is bijective, so 𝒲_A is stable under products of any family, finite or not — infinite products being left open by the page in general. For G ≠ 1 neither A nor a × a (a the regular G-set) is aspherical, so for BG Cisinski’s condition (g) holds while (a) fails. Modelling the canonical functor A/(X × Y) → A/X × A/Y as (X × Y)//G → (X × Y)//(G × G), g ↦ (g, g), (g) holds and (c) fails for every G ≠ 1 — (G × G)//G has one component per element of G, G//G × G//G only one — so (g) ⇏ (c) in Proposition 4.3.2 of Astérisque 308, as Cisinski confirmed on MathOverflow; (c) holds iff G = 1. The same page’s « (iv) est visiblement stable par sommes » is false, proved without the model in mathlib’s categories: for a and b in two summands of A₁ ⊔ A₂, a × b is the empty presheaf and A_{/a × b} the empty category, which is not connected, so (iv) holds for the point and fails for the sum of two points; and (iv) forces a non-empty A to be connected. Not formalised: the identification of the model with the nerve, the equivalences of pages 33–34, and the step from connected to aspherical that gives (iv) ⇒ (i) for non-empty A.',
-    verdict: 'holds',
+    verdict: ['holds', 'false on the page'],
     lean: 'lean/Grothendieck/Folder118.lean',
     theorems: ['isWeq_iff_bijective', 'isWeq_prod', 'isWeq_pi', 'not_aspherical_point', 'not_aspherical_regular_prod', 'answer_page_35', 'isWeqOver_id_iff', 'condition_g_holds', 'not_isWeqOver_regular', 'not_isWeqOver_point', 'not_condition_c', 'condition_c_iff_subsingleton', 'g_not_imp_c', 'isEmpty_elements_sum', 'not_isConnected_of_isEmpty', 'not_connectedProducts_sum', 'connectedProducts_point', 'connectedProducts_not_stable_under_sums', 'isConnected_of_connectedProducts'],
   },

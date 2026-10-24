@@ -513,7 +513,7 @@ const proofCtx = (p: (typeof PROOFS)[number]): CommentContext => ({
   cote: p.folder,
   batch: p.batch,
   ref: p.lean,
-  details: [`**Pages** ${p.page}`, `**Theorems** ${p.theorems.map((t) => `\`${t}\``).join(', ')}`, `**Verdict** ${p.verdict}`],
+  details: [`**Pages** ${p.page}`, `**Theorems** ${p.theorems.map((t) => `\`${t}\``).join(', ')}`, `**Verdict** ${[p.verdict].flat().join('; ')}`],
   link: `${SITE}/findings/#lean`,
 });
 
@@ -554,7 +554,7 @@ function ProvedInLean() {
               <span className="text-[12.5px] text-ink-500">{BY_ID.get(p.folder)?.title.replace(/\s*:.*$/, '')}</span>
               <CommentButton scope="findings" ctx={proofCtx(p)} text={p.statement} className="ml-auto" />
               <span className="rounded-full bg-ink-800 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
-                {p.verdict}
+                {[p.verdict].flat().join(' · ')}
               </span>
             </div>
             <p className="mt-2 text-[14px] leading-relaxed text-ink-800">{notation(p.statement)}</p>

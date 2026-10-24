@@ -20,6 +20,7 @@ const VERDICT = {
   'holds, more generally': 'plus général',
   'partly proved': 'partiel',
   'false on the page': 'faux sur la page (contre-exemple)',
+  'conjecture of the page refuted': 'conjecture de la page réfutée',
   'the reading dropped a hypothesis': 'correction de la lecture (hypothèse omise)',
   'holds; the gloss was false': 'correction de la lecture (glose fausse)',
 };
@@ -29,8 +30,9 @@ const BOURBAKI = {
 };
 
 const verdicts = {};
-for (const m of proofs.matchAll(/folder: '([^']+)',[\s\S]*?verdict: '([^']+)'/g)) {
-  (verdicts[m[1]] ??= []).push(m[2]);
+// A card's verdict is one string or an array of them.
+for (const m of proofs.matchAll(/folder: '([^']+)',[\s\S]*?verdict: (\[[^\]]*\]|'[^']+')/g)) {
+  (verdicts[m[1]] ??= []).push(...[...m[2].matchAll(/'([^']+)'/g)].map((v) => v[1]));
 }
 
 /** The argument of \cmd[...] with balanced brackets, starting at the [. */
@@ -69,7 +71,7 @@ const kept = rows.filter((r, i) => !(r.startsWith('\\multicolumn') && (i + 1 ===
 const out = `% Engendré par recapitulatif.mjs : ne pas modifier à la main.
 \\section*{Tableau récapitulatif}\\addcontentsline{toc}{section}{Tableau récapitulatif}
 
-Une ligne par section, dans l'ordre des parties : la cote, l'énoncé démontré en quelques mots, le verdict, le fichier Lean et la section. \\emph{Confirmé tel que lu} : l'énoncé tient sous les hypothèses que la lecture écrit ; \\emph{plus général} : il tient sous des hypothèses plus faibles ; \\emph{partiel} : une partie seulement est démontrée, ou dans un modèle, ce que la section précise ; \\emph{correction de la lecture} : la lecture omettait une hypothèse de la page ou glosait faussement un énoncé juste ; \\emph{faux sur la page} : un contre-exemple réfute l'affirmation du feuillet.
+Une ligne par section, dans l'ordre des parties : la cote, l'énoncé démontré en quelques mots, le verdict, le fichier Lean et la section. \\emph{Confirmé tel que lu} : l'énoncé tient sous les hypothèses que la lecture écrit ; \\emph{plus général} : il tient sous des hypothèses plus faibles ; \\emph{partiel} : une partie seulement est démontrée, ou dans un modèle, ce que la section précise ; \\emph{correction de la lecture} : la lecture omettait une hypothèse de la page ou glosait faussement un énoncé juste ; \\emph{faux sur la page} : un contre-exemple réfute une affirmation du feuillet ; \\emph{conjecture de la page réfutée} : de même pour ce que le feuillet présume sans l'affirmer. Une section qui démontre plusieurs énoncés peut porter plusieurs verdicts.
 
 \\begin{landscape}
 {\\small\\setlength{\\tabcolsep}{4pt}
