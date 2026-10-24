@@ -9,6 +9,7 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Mathlib.RingTheory.Spectrum.Maximal.Defs
 import Mathlib.RingTheory.Ideal.Nonunits
 import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+import Grothendieck.Upstream.SemilocalStableRange
 
 /-!
 # Folder 79: coset graphs with homotheties, and the polyhedra `P_{M,i}` of `(Z/n)²`
@@ -1006,35 +1007,13 @@ theorem matA_sq (hR : Exceptional R) : (matA : Matrix (Fin 2) (Fin 2) R) * matA 
 
 /-- Stable range one for a semi-local ring (finitely many maximal ideals):
 if `(d, d')` is unimodular, some `a d + d'` is a unit. This is the input that
-page 20 cites as known (« on sait que »). -/
+page 20 cites as known (« on sait que »); it is `IsCoprime.exists_isUnit_add_mul`
+(`Upstream/`). -/
 theorem exists_isUnit_mul_add [Finite (MaximalSpectrum R)] {d d' a₀ b₀ : R}
     (h : a₀ * d + b₀ * d' = 1) : ∃ a : R, IsUnit (a * d + d') := by
-  classical
-  have hcop : Pairwise (Function.onFun IsCoprime fun i : MaximalSpectrum R => i.asIdeal) :=
-    fun i j hij => Ideal.isCoprime_of_isMaximal (fun e => hij (MaximalSpectrum.ext e))
-  let x : MaximalSpectrum R → R := fun i =>
-    if hd : d ∈ i.asIdeal then 0 else (i.isMaximal.exists_inv hd).choose * (1 - d')
-  obtain ⟨a, ha⟩ := Ideal.exists_forall_sub_mem_ideal hcop x
-  refine ⟨a, ?_⟩
-  by_contra hu
-  obtain ⟨I, hI, hmem⟩ := exists_max_ideal_of_mem_nonunits hu
-  have hai := ha ⟨I, hI⟩
-  apply hI.ne_top
-  rw [Ideal.eq_top_iff_one]
-  by_cases hd : d ∈ I
-  · have hx : x ⟨I, hI⟩ = 0 := dite_eq_left hd
-    rw [hx, sub_zero] at hai
-    have hd' : d' ∈ I := by simpa using I.sub_mem hmem (I.mul_mem_left a hd)
-    rw [← h]
-    exact I.add_mem (I.mul_mem_left _ hd) (I.mul_mem_left _ hd')
-  · obtain ⟨k, hk, hy⟩ := (hI.exists_inv hd).choose_spec
-    have hx : x ⟨I, hI⟩ = (hI.exists_inv hd).choose * (1 - d') := dite_eq_right hd
-    rw [hx] at hai
-    have e : (1 : R) = (a * d + d') - (a - (hI.exists_inv hd).choose * (1 - d')) * d
-        + (1 - d') * k := by
-      linear_combination (-(1 - d')) * hy
-    rw [e]
-    exact I.add_mem (I.sub_mem hmem (I.mul_mem_right _ hai)) (I.mul_mem_left _ hk)
+  obtain ⟨a, ha⟩ := IsCoprime.exists_isUnit_add_mul (a := d') (b := d)
+    ⟨b₀, a₀, by linear_combination h⟩
+  exact ⟨a, by rwa [add_comm]⟩
 
 /-- **Page 20, (47).** Over a semi-local ring, for any gauge `e ∈ R*` and any
 two unimodular `x`, `y` of `R²`, there are unimodular `z₁`, `z₂` with
