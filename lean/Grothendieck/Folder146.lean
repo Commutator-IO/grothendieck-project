@@ -48,7 +48,10 @@ settled after it: `L` has order `5` (`coboundary_cL6_iff`), `L₆` has order `20
 
 The last section proves the general formula, for every `n`, in a homogeneous model of
 `M_{0,n}` (configurations of vectors of `K²`, functions of weight instead of cocycles): `L`
-has order `n − 1` (`trivL_iff`) and `L_i` has order `(n − 1)(n − 2)` (`trivLi_iff`).
+has order `n − 1` (`trivL_iff`) and `L_i` has order `(n − 1)(n − 2)` (`trivLi_iff`). The
+final section shows that, for `n = 4, 5, 6`, the two models agree: a trivialisation in the
+homogeneous model restricts to one of the normalised cocycles (`coboundary_cL_of_trivL` and
+its companions, `trivL_five_iff` and its companions).
 -/
 
 namespace Grothendieck.Folder146
@@ -825,8 +828,9 @@ for `L = L₁ ⊗ ⋯ ⊗ Lₙ` the weights are `tᵢ^{2m}` in each vector and `
 equivariant trivialisation of `L^{⊗m}` (`TrivL`), of `L_i^{⊗m}` under the stabiliser of the
 `i`-th point (`TrivLi`), is such a function invariant under relabelling the points. As in the
 sections above, the function is not required to be regular. Not formalised: this dictionary
-between line bundles on `M_{0,n}` and functions of weight on configurations, and its agreement
-with the cocycles `derL`, `cL`, `c5`, `cL6`, `c6` of the normalised coordinates.
+between line bundles on `M_{0,n}` and functions of weight on configurations; its agreement
+with the cocycles `derL`, `der`, `cL`, `c5`, `cL6`, `c6` of the normalised coordinates is the
+last section.
 
 * Upper bounds, for every `n` and every field (`trivL_of_dvd`, `trivLi_of_dvd`): the product
   `disc` of the brackets over the ordered pairs (`± Δ²`, `Δ` the Vandermonde-type product)
@@ -1088,5 +1092,472 @@ theorem trivLi_iff {n : ℕ} (hn : 3 ≤ n) {ω ζ : K} (hω : IsPrimitiveRoot �
     TrivLi K (n - 1) m ↔ (((n - 1) * (n - 2) : ℕ) : ℤ) ∣ m := by
   obtain ⟨j, rfl⟩ : ∃ j, n = j + 3 := ⟨n - 3, by omega⟩
   exact ⟨dvd_of_trivLi hω hζ, trivLi_of_dvd⟩
+
+/-! ## The two models agree, `n = 4, 5, 6` (#83)
+
+The homogeneous model of the last section and the normalised cocycles of the first sections
+describe the same line bundles. Put the points in normal position: `0, 1, ∞, λ` (`cfg4`),
+`0, 1, ∞, λ, μ` (`cfg5`), `0, 1, ∞, λ, μ, ν` (`cfg6`), as vectors `(0, 1), (1, 1), (1, 0),
+(λ, 1), …` of `K²`. A generator relabels the points; the substitution `g` of the
+normalisation carries the relabelled configuration back to normal position up to rescaling
+each vector by some `tᵢ` (`step4`, `step5`, `step5i`, `step6`, `step6i`, where the matrices
+and the `tᵢ` are written out). A function `F` of weight `t^{2m}` and `det(g)^{mn}` then
+satisfies `F(cfg(gx)) = ((∏ tᵢ)² det(g)ⁿ)^m F(cfg x)` (`trivL_step`; `trivLi_step` for `L_i`,
+with `s² det(g)`), and the factor `(∏ tᵢ)² det(g)ⁿ` is exactly `derL`, `cL`, `cL6` (and
+`s² det(g)` is `der`, `c5`, `c6`): `cob_of_trivL`, `cob_of_trivLi`.
+
+* `coboundary_derL_of_trivL`, `coboundary_der_of_trivLi`, `coboundary_cL_of_trivL`,
+  `coboundary_c5_of_trivLi`, `coboundary_cL6_of_trivL`, `coboundary_c6_of_trivLi`: an
+  equivariant trivialisation of the homogeneous model restricts to `h = F ∘ cfg`, whose
+  coboundary is the `m`-th power of the normalised cocycle, with no hypothesis on `K`.
+* `trivL_four_iff`, `trivLi_four_iff`, `trivL_five_iff`, `trivLi_five_iff`, `trivL_six_iff`,
+  `trivLi_six_iff`: the two conditions are equivalent, under the hypotheses on `K` of the
+  normalised sections (the converse goes through the orders computed there and
+  `trivL_of_dvd`, `trivLi_of_dvd`, not through an extension of `h`). -/
+
+/-- Clear denominators in one or two coordinate equations. -/
+local macro "field_ring" : tactic =>
+  `(tactic| first | (constructor <;> (field_simp; try ring)) | (field_simp; try ring))
+
+/-- One step of the restriction: a trivialisation of `L^{⊗m}` evaluated at
+`tᵢ · g(v_{σ i})` picks up `((∏ tᵢ)² det(g)ⁿ)^m`. -/
+lemma trivL_step {n : ℕ} {m : ℤ} {F : (Fin n → K × K) → K}
+    (hF : ∀ v, Conf v → F v ≠ 0 ∧
+      (∀ t : Fin n → K, (∀ i, t i ≠ 0) → F (fun i => t i • v i) = (∏ i, t i) ^ (2 * m) * F v) ∧
+      (∀ a b c d : K, a * d - b * c ≠ 0 →
+        F (fun i => lin a b c d (v i)) = (a * d - b * c) ^ (m * n) * F v) ∧
+      ∀ σ : Equiv.Perm (Fin n), F (v ∘ σ) = F v)
+    {v : Fin n → K × K} (hv : Conf v) (σ : Equiv.Perm (Fin n)) {a b c d : K}
+    (hd : a * d - b * c ≠ 0) {t : Fin n → K} (ht : ∀ i, t i ≠ 0) :
+    F (fun i => t i • lin a b c d (v (σ i))) =
+      ((∏ i, t i) ^ 2 * (a * d - b * c) ^ n) ^ m * F v := by
+  have hw := conf_comp hv σ
+  have hw' : Conf fun i => lin a b c d ((v ∘ σ) i) := fun i j hij => by
+    rw [br_lin]; exact mul_ne_zero hd (hw i j hij)
+  change F (fun i => t i • lin a b c d ((v ∘ σ) i)) = _
+  rw [(hF _ hw').2.1 t ht, (hF _ hw).2.2.1 a b c d hd, (hF v hv).2.2.2 σ, mul_zpow,
+    ← mul_assoc, ← zpow_natCast, ← zpow_natCast, ← zpow_mul, ← zpow_mul]
+  congr 3; ring
+
+/-- The same for `L_i^{⊗m}`: `((s)² det(g))^m`. -/
+lemma trivLi_step {k : ℕ} {m : ℤ} {F : K × K → (Fin k → K × K) → K}
+    (hF : ∀ p v, Conf v → (∀ i, br p (v i) ≠ 0) → F p v ≠ 0 ∧
+      (∀ (s : K) (t : Fin k → K), s ≠ 0 → (∀ i, t i ≠ 0) →
+        F (s • p) (fun i => t i • v i) = s ^ (2 * m) * F p v) ∧
+      (∀ a b c d : K, a * d - b * c ≠ 0 →
+        F (lin a b c d p) (fun i => lin a b c d (v i)) = (a * d - b * c) ^ m * F p v) ∧
+      ∀ σ : Equiv.Perm (Fin k), F p (v ∘ σ) = F p v)
+    {p : K × K} {v : Fin k → K × K} (hv : Conf v) (hp : ∀ i, br p (v i) ≠ 0)
+    (σ : Equiv.Perm (Fin k)) {a b c d : K} (hd : a * d - b * c ≠ 0) {s : K} {t : Fin k → K}
+    (hs : s ≠ 0) (ht : ∀ i, t i ≠ 0) :
+    F (s • lin a b c d p) (fun i => t i • lin a b c d (v (σ i))) =
+      (s ^ 2 * (a * d - b * c)) ^ m * F p v := by
+  have hw := conf_comp hv σ
+  have hpw : ∀ i, br p ((v ∘ σ) i) ≠ 0 := fun i => hp (σ i)
+  have hw' : Conf fun i => lin a b c d ((v ∘ σ) i) := fun i j hij => by
+    rw [br_lin]; exact mul_ne_zero hd (hw i j hij)
+  have hpw' : ∀ i, br (lin a b c d p) (lin a b c d ((v ∘ σ) i)) ≠ 0 := fun i => by
+    rw [br_lin]; exact mul_ne_zero hd (hpw i)
+  change F _ (fun i => t i • lin a b c d ((v ∘ σ) i)) = _
+  rw [(hF _ _ hw' hpw').2.1 s t hs ht, (hF _ _ hw hpw).2.2.1 a b c d hd, (hF p v hv hp).2.2.2 σ,
+    mul_zpow, ← mul_assoc, ← zpow_natCast, ← zpow_mul]
+  rfl
+
+/-- Restricting a trivialisation of `L^{⊗m}` to normalised configurations `cfg x` gives a
+function `h` whose coboundary is the `m`-th power of the cocycle `c`, provided each generator
+`i` moves `cfg x` to `cfg (act i x)` by a relabelling `σ i`, a substitution `g` and rescalings
+`t`, with `c i x = (∏ t)² det(g)ⁿ`. -/
+lemma cob_of_trivL {ι α : Type*} {n : ℕ} {m : ℤ} {V : α → Prop} {act : ι → α → α}
+    {c : ι → α → K} (cfg : α → Fin n → K × K) (σ : ι → Equiv.Perm (Fin n))
+    (hconf : ∀ x, V x → Conf (cfg x))
+    (hstep : ∀ i x, V x → ∃ (a b c' d : K) (t : Fin n → K), a * d - b * c' ≠ 0 ∧
+      (∀ k, t k ≠ 0) ∧ cfg (act i x) = (fun k => t k • lin a b c' d (cfg x (σ i k))) ∧
+      (∏ k, t k) ^ 2 * (a * d - b * c') ^ n = c i x)
+    (h : TrivL K n m) :
+    ∃ h : α → K, (∀ x, V x → h x ≠ 0) ∧ ∀ i x, V x → c i x ^ m = h (act i x) / h x := by
+  obtain ⟨F, hF⟩ := h
+  refine ⟨fun x => F (cfg x), fun x hx => (hF _ (hconf x hx)).1, fun i x hx => ?_⟩
+  obtain ⟨a, b, c', d, t, hd, ht, he, hc⟩ := hstep i x hx
+  rw [eq_div_iff (hF _ (hconf x hx)).1]
+  dsimp only
+  rw [he, trivL_step hF (hconf x hx) _ hd ht, hc]
+
+/-- The same for `L_i`, the moving point being `pt x`, `s` its rescaling. -/
+lemma cob_of_trivLi {ι α : Type*} {k : ℕ} {m : ℤ} {V : α → Prop} {act : ι → α → α}
+    {c : ι → α → K} (pt : α → K × K) (cfg : α → Fin k → K × K) (σ : ι → Equiv.Perm (Fin k))
+    (hconf : ∀ x, V x → Conf (cfg x)) (hpt : ∀ x, V x → ∀ i, br (pt x) (cfg x i) ≠ 0)
+    (hstep : ∀ i x, V x → ∃ (a b c' d s : K) (t : Fin k → K), a * d - b * c' ≠ 0 ∧ s ≠ 0 ∧
+      (∀ j, t j ≠ 0) ∧ pt (act i x) = s • lin a b c' d (pt x) ∧
+      cfg (act i x) = (fun j => t j • lin a b c' d (cfg x (σ i j))) ∧
+      s ^ 2 * (a * d - b * c') = c i x)
+    (h : TrivLi K k m) :
+    ∃ h : α → K, (∀ x, V x → h x ≠ 0) ∧ ∀ i x, V x → c i x ^ m = h (act i x) / h x := by
+  obtain ⟨F, hF⟩ := h
+  refine ⟨fun x => F (pt x) (cfg x), fun x hx => (hF _ _ (hconf x hx) (hpt x hx)).1,
+    fun i x hx => ?_⟩
+  obtain ⟨a, b, c', d, s, t, hd, hs, ht, hp, he, hc⟩ := hstep i x hx
+  rw [eq_div_iff (hF _ _ (hconf x hx) (hpt x hx)).1]
+  dsimp only
+  rw [hp, he,
+    trivLi_step hF (hconf x hx) (hpt x hx) _ hd hs ht, hc]
+
+/-- `M_{0,5}` in the homogeneous model: the points `0, 1, ∞, λ, μ`. -/
+def cfg5 (p : K × K) : Fin 5 → K × K := ![(0, 1), (1, 1), (1, 0), (p.1, 1), (p.2, 1)]
+
+lemma conf_cfg5 {p : K × K} (hp : U5 p) : Conf (cfg5 p) := by
+  obtain ⟨h0, h1, h0', h1', h⟩ := hp
+  have : (1 : K) - p.1 ≠ 0 := sub_ne_zero.2 (Ne.symm h1)
+  have : (1 : K) - p.2 ≠ 0 := sub_ne_zero.2 (Ne.symm h1')
+  have : p.1 - p.2 ≠ 0 := sub_ne_zero.2 h
+  have : p.1 - 1 ≠ 0 := sub_ne_zero.2 h1
+  have : p.2 - 1 ≠ 0 := sub_ne_zero.2 h1'
+  intro i j hij
+  fin_cases i <;> fin_cases j <;> simp_all [cfg5, br, sub_eq_zero, eq_comm]
+
+lemma step5 (i : Fin 4) {p : K × K} (hp : U5 p) : ∃ (a b c d : K) (t : Fin 5 → K),
+    a * d - b * c ≠ 0 ∧ (∀ k, t k ≠ 0) ∧
+    cfg5 (act5 i p) = (fun k => t k • lin a b c d (cfg5 p (Equiv.swap i.castSucc i.succ k))) ∧
+    (∏ k, t k) ^ 2 * (a * d - b * c) ^ 5 = cL i p := by
+  obtain ⟨h0, h1, h0', h1', h⟩ := hp
+  have e1 : p.1 - 1 ≠ 0 := sub_ne_zero.2 h1
+  have e1' : p.2 - 1 ≠ 0 := sub_ne_zero.2 h1'
+  have e2 : 1 - p.1 ≠ 0 := sub_ne_zero.2 (Ne.symm h1)
+  have e3 : p.2 - p.1 ≠ 0 := sub_ne_zero.2 (Ne.symm h)
+  have e3' : p.1 - p.2 ≠ 0 := sub_ne_zero.2 h
+  fin_cases i
+  · refine ⟨-1, 1, 0, 1, ![1, 1, -1, 1, 1], by norm_num, ?_, ?_, ?_⟩
+    · intro k; fin_cases k <;> simp
+    · funext k; fin_cases k <;> simp [cfg5, lin, act5, Equiv.swap_apply_def] <;> ring
+    · simp [Fin.prod_univ_succ, cL]; norm_num
+  · refine ⟨1, 0, 1, -1, ![-1, 1, 1, 1 / (p.1 - 1), 1 / (p.2 - 1)], by norm_num, ?_, ?_, ?_⟩
+    · intro k; fin_cases k <;> simp [e1, e1']
+    · funext k; fin_cases k <;> simp [cfg5, lin, act5, Equiv.swap_apply_def] <;>
+        (try refine ⟨?_, ?_⟩) <;> (field_simp; try ring)
+    · simp [Fin.prod_univ_succ, cL]; field_simp
+  · refine ⟨1 - p.1, 0, 1, -p.1, ![-1 / p.1, 1 / (1 - p.1), 1 / (p.1 * (1 - p.1)), 1,
+      1 / (p.2 - p.1)], ?_, ?_, ?_, ?_⟩
+    · simp [h0, e2]
+    · intro k; fin_cases k <;> simp [h0, e2, e3]
+    · funext k; fin_cases k <;> simp [cfg5, lin, act5, Equiv.swap_apply_def] <;>
+        (try refine ⟨?_, ?_⟩) <;> (field_simp; try ring)
+    · simp [Fin.prod_univ_succ, cL]; field_simp; ring
+  · refine ⟨1, 0, 0, 1, ![1, 1, 1, 1, 1], by norm_num, ?_, ?_, ?_⟩
+    · intro k; fin_cases k <;> simp
+    · funext k; fin_cases k <;> simp [cfg5, lin, act5, Equiv.swap_apply_def]
+    · simp [Fin.prod_univ_succ, cL]
+
+/-- **The two models agree for `L`, `n = 5`**: restricting a trivialisation of the homogeneous
+model to `0, 1, ∞, λ, μ` trivialises the normalised cocycle `cL`. -/
+theorem coboundary_cL_of_trivL {m : ℤ} (h : TrivL K 5 m) :
+    ∃ h : K × K → K, (∀ p, U5 p → h p ≠ 0) ∧
+      ∀ w p, U5 p → wCoc act5 cL w p ^ m = h (wAct act5 w p) / h p := by
+  obtain ⟨h, hh, hc⟩ := cob_of_trivL cfg5 (fun i : Fin 4 => Equiv.swap i.castSucc i.succ)
+    (fun p hp => conf_cfg5 hp) (fun i p hp => step5 i hp) h
+  exact ⟨h, hh, wCoc_zpow (fun i p hp => act5_U5 i hp) hh hc⟩
+
+theorem trivL_five_iff (h2 : (2 : K) ≠ 0) {ι : K} (hι : ι ^ 2 = -1) (m : ℤ) :
+    TrivL K 5 m ↔ ∃ h : K × K → K, (∀ p, U5 p → h p ≠ 0) ∧
+      ∀ w p, U5 p → wCoc act5 cL w p ^ m = h (wAct act5 w p) / h p :=
+  ⟨coboundary_cL_of_trivL, fun H => trivL_of_dvd (by simpa using (coboundary_cL_iff h2 hι m).1 H)⟩
+
+/-- The four points `0, 1, ∞, λ` other than `μ`. -/
+def pts4 (p : K × K) : Fin 4 → K × K := ![(0, 1), (1, 1), (1, 0), (p.1, 1)]
+
+lemma conf_pts4 {p : K × K} (hp : U5 p) : Conf (pts4 p) ∧ ∀ i, br (p.2, 1) (pts4 p i) ≠ 0 := by
+  obtain ⟨h0, h1, h0', h1', h⟩ := hp
+  have : (1 : K) - p.1 ≠ 0 := sub_ne_zero.2 (Ne.symm h1)
+  have : (1 : K) - p.2 ≠ 0 := sub_ne_zero.2 (Ne.symm h1')
+  have : p.1 - p.2 ≠ 0 := sub_ne_zero.2 h
+  have : p.1 - 1 ≠ 0 := sub_ne_zero.2 h1
+  have : p.2 - 1 ≠ 0 := sub_ne_zero.2 h1'
+  refine ⟨fun i j hij => ?_, fun i => ?_⟩
+  · fin_cases i <;> fin_cases j <;> simp_all [pts4, br, sub_eq_zero, eq_comm]
+  · fin_cases i <;> simp_all [pts4, br, sub_eq_zero, eq_comm]
+
+lemma step5i (i : Fin 3) {p : K × K} (hp : U5 p) : ∃ (a b c d s : K) (t : Fin 4 → K),
+    a * d - b * c ≠ 0 ∧ s ≠ 0 ∧ (∀ k, t k ≠ 0) ∧
+    ((act4 i p).2, (1 : K)) = s • lin a b c d (p.2, 1) ∧
+    pts4 (act4 i p) = (fun k => t k • lin a b c d (pts4 p (Equiv.swap i.castSucc i.succ k))) ∧
+    s ^ 2 * (a * d - b * c) = c5 i p := by
+  obtain ⟨h0, h1, h0', h1', h⟩ := hp
+  have e1 : p.1 - 1 ≠ 0 := sub_ne_zero.2 h1
+  have e1' : p.2 - 1 ≠ 0 := sub_ne_zero.2 h1'
+  have e2 : 1 - p.1 ≠ 0 := sub_ne_zero.2 (Ne.symm h1)
+  have e3 : p.2 - p.1 ≠ 0 := sub_ne_zero.2 (Ne.symm h)
+  have e3' : p.1 - p.2 ≠ 0 := sub_ne_zero.2 h
+  fin_cases i
+  · refine ⟨-1, 1, 0, 1, 1, ![1, 1, -1, 1], by norm_num, one_ne_zero, ?_, ?_, ?_, ?_⟩
+    · intro k; fin_cases k <;> simp
+    · simp [act4, act5, lin]; ring
+    · funext k; fin_cases k <;> (simp [pts4, lin, act4, act5, Equiv.swap_apply_def]; try ring)
+    · simp [c5]
+  · refine ⟨1, 0, 1, -1, 1 / (p.2 - 1), ![-1, 1, 1, 1 / (p.1 - 1)], by norm_num, by simp [e1'],
+      ?_, ?_, ?_, ?_⟩
+    · intro k; fin_cases k <;> simp [e1]
+    · simp [act4, act5, lin]; refine ⟨?_, ?_⟩ <;> (field_simp; try ring)
+    · funext k
+      fin_cases k <;> (simp [pts4, lin, act4, act5, Equiv.swap_apply_def]
+                       try field_ring)
+    · simp [c5]; field_simp
+  · refine ⟨1 - p.1, 0, 1, -p.1, 1 / (p.2 - p.1), ![-1 / p.1, 1 / (1 - p.1),
+      1 / (p.1 * (1 - p.1)), 1], by simp [h0, e2], by simp [e3], ?_, ?_, ?_, ?_⟩
+    · intro k; fin_cases k <;> simp [h0, e2]
+    · simp [act4, act5, lin]; refine ⟨?_, ?_⟩ <;> (field_simp; try ring)
+    · funext k; fin_cases k <;> simp [pts4, lin, act4, act5, Equiv.swap_apply_def] <;>
+        (try refine ⟨?_, ?_⟩) <;> (field_simp; try ring)
+    · simp [c5]; field_simp; ring
+
+/-- **The two models agree for `L₅`, `n = 5`**: restricting a trivialisation of `L₅^{⊗m}` in
+the homogeneous model trivialises the normalised cocycle `c5`. -/
+theorem coboundary_c5_of_trivLi {m : ℤ} (h : TrivLi K 4 m) :
+    ∃ h : K × K → K, (∀ p, U5 p → h p ≠ 0) ∧
+      ∀ w p, U5 p → wCoc act4 c5 w p ^ m = h (wAct act4 w p) / h p := by
+  obtain ⟨h, hh, hc⟩ := cob_of_trivLi (fun p : K × K => (p.2, (1 : K))) pts4
+    (fun i : Fin 3 => Equiv.swap i.castSucc i.succ) (fun p hp => (conf_pts4 hp).1)
+    (fun p hp => (conf_pts4 hp).2) (fun i p hp => step5i i hp) h
+  exact ⟨h, hh, wCoc_zpow (fun i p hp => act5_U5 i.castSucc hp) hh hc⟩
+
+theorem trivLi_five_iff (h2 : (2 : K) ≠ 0) (h3 : (3 : K) ≠ 0) {ι : K} (hι : ι ^ 2 = -1)
+    {ζ : K} (hζ : ζ ^ 2 - ζ + 1 = 0) (m : ℤ) :
+    TrivLi K 4 m ↔ ∃ h : K × K → K, (∀ p, U5 p → h p ≠ 0) ∧
+      ∀ w p, U5 p → wCoc act4 c5 w p ^ m = h (wAct act4 w p) / h p :=
+  ⟨coboundary_c5_of_trivLi, fun H =>
+    trivLi_of_dvd (by simpa using (coboundary_c5_iff h2 h3 hι hζ m).1 H)⟩
+
+/-- `M_{0,6}` in the homogeneous model: the points `0, 1, ∞, λ, μ, ν`. -/
+def cfg6 (p : K × K × K) : Fin 6 → K × K :=
+  ![(0, 1), (1, 1), (1, 0), (p.1, 1), (p.2.1, 1), (p.2.2, 1)]
+
+/-- The five points other than `ν`. -/
+def pts5 (p : K × K × K) : Fin 5 → K × K := ![(0, 1), (1, 1), (1, 0), (p.1, 1), (p.2.1, 1)]
+
+lemma conf_cfg6 {p : K × K × K} (hp : U6 p) :
+    Conf (cfg6 p) ∧ Conf (pts5 p) ∧ ∀ i, br (p.2.2, 1) (pts5 p i) ≠ 0 := by
+  obtain ⟨⟨h0, h1, h0', h1', h⟩, ⟨-, -, h0'', h1'', h'⟩, h''⟩ := hp
+  dsimp only at *
+  have : (1 : K) - p.1 ≠ 0 := sub_ne_zero.2 (Ne.symm h1)
+  have : (1 : K) - p.2.1 ≠ 0 := sub_ne_zero.2 (Ne.symm h1')
+  have : (1 : K) - p.2.2 ≠ 0 := sub_ne_zero.2 (Ne.symm h1'')
+  have : p.1 - p.2.1 ≠ 0 := sub_ne_zero.2 h
+  have : p.1 - p.2.2 ≠ 0 := sub_ne_zero.2 h'
+  have : p.2.1 - p.2.2 ≠ 0 := sub_ne_zero.2 h''
+  have : p.1 - 1 ≠ 0 := sub_ne_zero.2 h1
+  have : p.2.1 - 1 ≠ 0 := sub_ne_zero.2 h1'
+  have : p.2.2 - 1 ≠ 0 := sub_ne_zero.2 h1''
+  refine ⟨fun i j hij => ?_, fun i j hij => ?_, fun i => ?_⟩
+  · fin_cases i <;> fin_cases j <;> simp_all [cfg6, br, sub_eq_zero, eq_comm]
+  · fin_cases i <;> fin_cases j <;> simp_all [pts5, br, sub_eq_zero, eq_comm]
+  · fin_cases i <;> simp_all [pts5, br, sub_eq_zero, eq_comm]
+
+lemma step6 (i : Fin 5) {p : K × K × K} (hp : U6 p) : ∃ (a b c d : K) (t : Fin 6 → K),
+    a * d - b * c ≠ 0 ∧ (∀ k, t k ≠ 0) ∧
+    cfg6 (act6 i p) = (fun k => t k • lin a b c d (cfg6 p (Equiv.swap i.castSucc i.succ k))) ∧
+    (∏ k, t k) ^ 2 * (a * d - b * c) ^ 6 = cL6 i p := by
+  obtain ⟨⟨h0, h1, h0', h1', h⟩, ⟨-, -, h0'', h1'', h'⟩, h''⟩ := hp
+  dsimp only at *
+  have e1 : p.1 - 1 ≠ 0 := sub_ne_zero.2 h1
+  have e1' : p.2.1 - 1 ≠ 0 := sub_ne_zero.2 h1'
+  have e1'' : p.2.2 - 1 ≠ 0 := sub_ne_zero.2 h1''
+  have e2 : 1 - p.1 ≠ 0 := sub_ne_zero.2 (Ne.symm h1)
+  have e3 : p.2.1 - p.1 ≠ 0 := sub_ne_zero.2 (Ne.symm h)
+  have e3' : p.1 - p.2.1 ≠ 0 := sub_ne_zero.2 h
+  have e4 : p.2.2 - p.1 ≠ 0 := sub_ne_zero.2 (Ne.symm h')
+  have e4' : p.1 - p.2.2 ≠ 0 := sub_ne_zero.2 h'
+  fin_cases i
+  · refine ⟨-1, 1, 0, 1, ![1, 1, -1, 1, 1, 1], by norm_num, ?_, ?_, ?_⟩
+    · intro k; fin_cases k <;> simp
+    · funext k
+      fin_cases k <;> (simp [cfg6, lin, act6, Equiv.swap_apply_def]; try ring)
+    · simp [Fin.prod_univ_succ, cL6]; norm_num
+  · refine ⟨1, 0, 1, -1, ![-1, 1, 1, 1 / (p.1 - 1), 1 / (p.2.1 - 1), 1 / (p.2.2 - 1)],
+      by norm_num, ?_, ?_, ?_⟩
+    · intro k; fin_cases k <;> simp [e1, e1', e1'']
+    · funext k
+      fin_cases k <;> (simp [cfg6, lin, act6, Equiv.swap_apply_def]
+                       try field_ring)
+    · simp [Fin.prod_univ_succ, cL6]; field_simp
+  · refine ⟨1 - p.1, 0, 1, -p.1, ![-1 / p.1, 1 / (1 - p.1), 1 / (p.1 * (1 - p.1)), 1,
+      1 / (p.2.1 - p.1), 1 / (p.2.2 - p.1)], by simp [h0, e2], ?_, ?_, ?_⟩
+    · intro k; fin_cases k <;> simp [h0, e2, e3, e4]
+    · funext k
+      fin_cases k <;> (simp [cfg6, lin, act6, Equiv.swap_apply_def]
+                       try field_ring)
+    · simp [Fin.prod_univ_succ, cL6]; field_simp; ring
+  · refine ⟨1, 0, 0, 1, ![1, 1, 1, 1, 1, 1], by norm_num, ?_, ?_, ?_⟩
+    · intro k; fin_cases k <;> simp
+    · funext k; fin_cases k <;> simp [cfg6, lin, act6, Equiv.swap_apply_def]
+    · simp [Fin.prod_univ_succ, cL6]
+  · refine ⟨1, 0, 0, 1, ![1, 1, 1, 1, 1, 1], by norm_num, ?_, ?_, ?_⟩
+    · intro k; fin_cases k <;> simp
+    · funext k; fin_cases k <;> simp [cfg6, lin, act6, Equiv.swap_apply_def]
+    · simp [Fin.prod_univ_succ, cL6]
+
+lemma step6i (i : Fin 4) {p : K × K × K} (hp : U6 p) : ∃ (a b c d s : K) (t : Fin 5 → K),
+    a * d - b * c ≠ 0 ∧ s ≠ 0 ∧ (∀ k, t k ≠ 0) ∧
+    ((act6s i p).2.2, (1 : K)) = s • lin a b c d (p.2.2, 1) ∧
+    pts5 (act6s i p) = (fun k => t k • lin a b c d (pts5 p (Equiv.swap i.castSucc i.succ k))) ∧
+    s ^ 2 * (a * d - b * c) = c6 i p := by
+  obtain ⟨⟨h0, h1, h0', h1', h⟩, ⟨-, -, h0'', h1'', h'⟩, h''⟩ := hp
+  dsimp only at *
+  have e1 : p.1 - 1 ≠ 0 := sub_ne_zero.2 h1
+  have e1' : p.2.1 - 1 ≠ 0 := sub_ne_zero.2 h1'
+  have e1'' : p.2.2 - 1 ≠ 0 := sub_ne_zero.2 h1''
+  have e2 : 1 - p.1 ≠ 0 := sub_ne_zero.2 (Ne.symm h1)
+  have e3 : p.2.1 - p.1 ≠ 0 := sub_ne_zero.2 (Ne.symm h)
+  have e3' : p.1 - p.2.1 ≠ 0 := sub_ne_zero.2 h
+  have e4 : p.2.2 - p.1 ≠ 0 := sub_ne_zero.2 (Ne.symm h')
+  have e4' : p.1 - p.2.2 ≠ 0 := sub_ne_zero.2 h'
+  fin_cases i
+  · refine ⟨-1, 1, 0, 1, 1, ![1, 1, -1, 1, 1], by norm_num, one_ne_zero, ?_, ?_, ?_, ?_⟩
+    · intro k; fin_cases k <;> simp
+    · simp [act6s, act6, lin]; ring
+    · funext k
+      fin_cases k <;> (simp [pts5, lin, act6s, act6, Equiv.swap_apply_def]; try ring)
+    · simp [c6]
+  · refine ⟨1, 0, 1, -1, 1 / (p.2.2 - 1), ![-1, 1, 1, 1 / (p.1 - 1), 1 / (p.2.1 - 1)],
+      by norm_num, by simp [e1''], ?_, ?_, ?_, ?_⟩
+    · intro k; fin_cases k <;> simp [e1, e1']
+    · simp [act6s, act6, lin]; refine ⟨?_, ?_⟩ <;> (field_simp; try ring)
+    · funext k
+      fin_cases k <;> (simp [pts5, lin, act6s, act6, Equiv.swap_apply_def]
+                       try field_ring)
+    · simp [c6]; field_simp
+  · refine ⟨1 - p.1, 0, 1, -p.1, 1 / (p.2.2 - p.1), ![-1 / p.1, 1 / (1 - p.1),
+      1 / (p.1 * (1 - p.1)), 1, 1 / (p.2.1 - p.1)], by simp [h0, e2], by simp [e4], ?_, ?_,
+      ?_, ?_⟩
+    · intro k; fin_cases k <;> simp [h0, e2, e3]
+    · simp [act6s, act6, lin]; refine ⟨?_, ?_⟩ <;> (field_simp; try ring)
+    · funext k
+      fin_cases k <;> (simp [pts5, lin, act6s, act6, Equiv.swap_apply_def]
+                       try field_ring)
+    · simp [c6]; field_simp; ring
+  · refine ⟨1, 0, 0, 1, 1, ![1, 1, 1, 1, 1], by norm_num, one_ne_zero, ?_, ?_, ?_, ?_⟩
+    · intro k; fin_cases k <;> simp
+    · simp [act6s, act6, lin]
+    · funext k; fin_cases k <;> simp [pts5, lin, act6s, act6, Equiv.swap_apply_def]
+    · simp [c6]
+
+/-- **The two models agree for `L`, `n = 6`.** -/
+theorem coboundary_cL6_of_trivL {m : ℤ} (h : TrivL K 6 m) :
+    ∃ h : K × K × K → K, (∀ p, U6 p → h p ≠ 0) ∧
+      ∀ w p, U6 p → wCoc act6 cL6 w p ^ m = h (wAct act6 w p) / h p := by
+  obtain ⟨h, hh, hc⟩ := cob_of_trivL cfg6 (fun i : Fin 5 => Equiv.swap i.castSucc i.succ)
+    (fun p hp => (conf_cfg6 hp).1) (fun i p hp => step6 i hp) h
+  exact ⟨h, hh, wCoc_zpow (fun i p hp => act6_U6 i hp) hh hc⟩
+
+theorem trivL_six_iff (h5 : (5 : K) ≠ 0) {ω : K} (hω : ω ^ 4 + ω ^ 3 + ω ^ 2 + ω + 1 = 0)
+    (m : ℤ) : TrivL K 6 m ↔ ∃ h : K × K × K → K, (∀ p, U6 p → h p ≠ 0) ∧
+      ∀ w p, U6 p → wCoc act6 cL6 w p ^ m = h (wAct act6 w p) / h p :=
+  ⟨coboundary_cL6_of_trivL, fun H =>
+    trivL_of_dvd (by simpa using (coboundary_cL6_iff h5 hω m).1 H)⟩
+
+/-- **The two models agree for `L₆`, `n = 6`.** -/
+theorem coboundary_c6_of_trivLi {m : ℤ} (h : TrivLi K 5 m) :
+    ∃ h : K × K × K → K, (∀ p, U6 p → h p ≠ 0) ∧
+      ∀ w p, U6 p → wCoc act6s c6 w p ^ m = h (wAct act6s w p) / h p := by
+  obtain ⟨h, hh, hc⟩ := cob_of_trivLi (fun p : K × K × K => (p.2.2, (1 : K))) pts5
+    (fun i : Fin 4 => Equiv.swap i.castSucc i.succ) (fun p hp => (conf_cfg6 hp).2.1)
+    (fun p hp => (conf_cfg6 hp).2.2) (fun i p hp => step6i i hp) h
+  exact ⟨h, hh, wCoc_zpow (fun i p hp => act6_U6 i.castSucc hp) hh hc⟩
+
+theorem trivLi_six_iff (h2 : (2 : K) ≠ 0) (h5 : (5 : K) ≠ 0) {ι : K} (hι : ι ^ 2 = -1)
+    {ω : K} (hω : ω ^ 4 + ω ^ 3 + ω ^ 2 + ω + 1 = 0) (m : ℤ) :
+    TrivLi K 5 m ↔ ∃ h : K × K × K → K, (∀ p, U6 p → h p ≠ 0) ∧
+      ∀ w p, U6 p → wCoc act6s c6 w p ^ m = h (wAct act6s w p) / h p :=
+  ⟨coboundary_c6_of_trivLi, fun H =>
+    trivLi_of_dvd (by simpa using (coboundary_c6_iff h2 h5 hι hω m).1 H)⟩
+
+/-- `M_{0,4}` in the homogeneous model: the points `0, 1, ∞, λ`. -/
+def cfg4 (x : K) : Fin 4 → K × K := ![(0, 1), (1, 1), (1, 0), (x, 1)]
+
+/-- The three fixed points `0, 1, ∞`. -/
+def pts3 : Fin 3 → K × K := ![(0, 1), (1, 1), (1, 0)]
+
+/-- The relabelling of `0, 1, ∞` by the six substitutions. -/
+def perm4 {n : ℕ} : Fin 6 → Equiv.Perm (Fin (n + 3))
+  | 0 => 1
+  | 1 => Equiv.swap 0 2
+  | 2 => Equiv.swap 0 1
+  | 3 => Equiv.swap 1 2
+  | 4 => Equiv.swap 0 1 * Equiv.swap 0 2
+  | 5 => Equiv.swap 0 2 * Equiv.swap 0 1
+
+/-- The substitutions as matrices `(a, b, c, d)`. -/
+def mat4 : Fin 6 → K × K × K × K
+  | 0 => (1, 0, 0, 1)
+  | 1 => (0, 1, 1, 0)
+  | 2 => (-1, 1, 0, 1)
+  | 3 => (1, 0, 1, -1)
+  | 4 => (0, 1, -1, 1)
+  | 5 => (1, -1, 1, 0)
+
+/-- The rescalings at `0, 1, ∞, λ`. -/
+def t4 : Fin 6 → K → Fin 4 → K
+  | 0 => fun _ => ![1, 1, 1, 1]
+  | 1 => fun x => ![1, 1, 1, 1 / x]
+  | 2 => fun _ => ![1, 1, -1, 1]
+  | 3 => fun x => ![-1, 1, 1, 1 / (x - 1)]
+  | 4 => fun x => ![-1, 1, 1, 1 / (1 - x)]
+  | 5 => fun x => ![1, 1, -1, 1 / x]
+
+lemma conf_cfg4 {x : K} (hx : U x) :
+    Conf (cfg4 x) ∧ Conf (pts3 (K := K)) ∧ ∀ i, br (x, 1) (pts3 i) ≠ 0 := by
+  obtain ⟨h0, h1⟩ := hx
+  have : (1 : K) - x ≠ 0 := sub_ne_zero.2 (Ne.symm h1)
+  have : x - 1 ≠ 0 := sub_ne_zero.2 h1
+  refine ⟨fun i j hij => ?_, fun i j hij => ?_, fun i => ?_⟩
+  · fin_cases i <;> fin_cases j <;> simp_all [cfg4, br, eq_comm]
+  · fin_cases i <;> fin_cases j <;> simp_all [pts3, br]
+  · fin_cases i <;> simp_all [pts3, br, eq_comm]
+
+lemma step4 (a : Fin 6) {x : K} (hx : U x) :
+    (mat4 (K := K) a).1 * (mat4 a).2.2.2 - (mat4 a).2.1 * (mat4 a).2.2.1 ≠ 0 ∧ (∀ k, t4 a x k ≠ 0) ∧
+    cfg4 (anh a x) = (fun k => t4 a x k •
+      lin (mat4 a).1 (mat4 a).2.1 (mat4 a).2.2.1 (mat4 a).2.2.2 (cfg4 x (perm4 a k))) ∧
+    (pts3 : Fin 3 → K × K) = (fun k => t4 a x k.castSucc •
+      lin (mat4 a).1 (mat4 a).2.1 (mat4 a).2.2.1 (mat4 a).2.2.2 (pts3 (perm4 a k))) ∧
+    (∏ k, t4 a x k) ^ 2 *
+      ((mat4 a).1 * (mat4 a).2.2.2 - (mat4 a).2.1 * (mat4 a).2.2.1) ^ 4 = derL a x ∧
+    t4 a x 3 ^ 2 * ((mat4 a).1 * (mat4 a).2.2.2 - (mat4 a).2.1 * (mat4 a).2.2.1) =
+      der a x := by
+  obtain ⟨h0, h1⟩ := hx
+  have e1 : x - 1 ≠ 0 := sub_ne_zero.2 h1
+  have e2 : 1 - x ≠ 0 := sub_ne_zero.2 (Ne.symm h1)
+  fin_cases a <;> refine ⟨by simp [mat4], fun k => by fin_cases k <;> simp [t4, h0, e1, e2],
+    funext fun k => ?_, funext fun k => ?_, ?_, ?_⟩
+  all_goals first
+    | (fin_cases k <;> (simp [mat4, t4, cfg4, pts3, perm4, lin, anh, Equiv.swap_apply_def]
+                        try field_ring))
+    | (simp [mat4, t4, der, derL, sgn, Fin.prod_univ_succ]; try field_ring)
+
+/-- **The two models agree for `L`, `n = 4`**: restricting a trivialisation of the homogeneous
+model to `0, 1, ∞, λ` trivialises the cocycle `derL` of the anharmonic group. -/
+theorem coboundary_derL_of_trivL {m : ℤ} (h : TrivL K 4 m) :
+    ∃ h : K → K, (∀ x, U x → h x ≠ 0) ∧ ∀ a x, U x → derL a x ^ m = h (anh a x) / h x :=
+  cob_of_trivL cfg4 perm4 (fun x hx => (conf_cfg4 hx).1) (fun a x hx => by
+    obtain ⟨hd, ht, hv, -, hL, -⟩ := step4 a hx
+    exact ⟨_, _, _, _, _, hd, ht, hv, hL⟩) h
+
+theorem trivL_four_iff (h3 : (3 : K) ≠ 0) {ζ : K} (hζ : ζ ^ 2 - ζ + 1 = 0) (m : ℤ) :
+    TrivL K 4 m ↔
+      ∃ h : K → K, (∀ x, U x → h x ≠ 0) ∧ ∀ a x, U x → derL a x ^ m = h (anh a x) / h x :=
+  ⟨coboundary_derL_of_trivL, fun H =>
+    trivL_of_dvd (by simpa using (coboundary_derL_iff h3 hζ m).1 H)⟩
+
+/-- **The two models agree for `L₄`, `n = 4`**: the cocycle `der` (`g ↦ g′(λ)`). -/
+theorem coboundary_der_of_trivLi {m : ℤ} (h : TrivLi K 3 m) :
+    ∃ h : K → K, (∀ x, U x → h x ≠ 0) ∧ ∀ a x, U x → der a x ^ m = h (anh a x) / h x :=
+  cob_of_trivLi (fun x : K => (x, (1 : K))) (fun _ => pts3) perm4
+    (fun x hx => (conf_cfg4 hx).2.1) (fun x hx => (conf_cfg4 hx).2.2) (fun a x hx => by
+      obtain ⟨hd, ht, hv, hw, -, hs⟩ := step4 a hx
+      refine ⟨_, _, _, _, _, _, hd, ht 3, fun k => ht _, ?_, hw, hs⟩
+      have h3 : perm4 a (3 : Fin 4) = 3 := by fin_cases a <;> rfl
+      simpa [cfg4, h3] using congrFun hv 3) h
+
+theorem trivLi_four_iff (h2 : (2 : K) ≠ 0) (h3 : (3 : K) ≠ 0) {ζ : K}
+    (hζ : ζ ^ 2 - ζ + 1 = 0) (m : ℤ) : TrivLi K 3 m ↔
+      ∃ h : K → K, (∀ x, U x → h x ≠ 0) ∧ ∀ a x, U x → der a x ^ m = h (anh a x) / h x :=
+  ⟨coboundary_der_of_trivLi, fun ⟨h, hh, hc⟩ =>
+    trivLi_of_dvd (by simpa using six_dvd h2 h3 hζ m h hh hc)⟩
 
 end Grothendieck.Folder146

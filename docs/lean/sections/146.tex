@@ -260,7 +260,44 @@ Pour la minoration, on cherche des configurations qu'une renumérotation $\sigma
 \end{figure}
 
 \begin{sloppypar}
-\noindent Vérifié (\texttt{br}, \texttt{Conf}, \texttt{disc}, \texttt{TrivL}, \texttt{TrivLi}, \texttt{disc\_smul}, \texttt{disc\_lin}, \texttt{disc\_perm}, \texttt{trivL\_of\_dvd}, \texttt{trivLi\_of\_dvd}, \texttt{dvd\_of\_trivL}, \texttt{dvd\_of\_trivLi}, \texttt{trivL\_iff}, \texttt{trivLi\_iff}). Ne sont pas démontrés en Lean : le dictionnaire entre fibrés en droites équivariants sur $M_{0,n}$ et fonctions de poids sur les configurations, l'accord de ce modèle avec les cocycles des coordonnées normalisées pour $n = 4$, $5$, $6$, et le fait que le groupe de Picard équivariant soit le $H^1$ des unités. Mathlib n'a pas les espaces de modules $M_{0,n}$.
+\noindent Vérifié (\texttt{br}, \texttt{Conf}, \texttt{disc}, \texttt{TrivL}, \texttt{TrivLi}, \texttt{disc\_smul}, \texttt{disc\_lin}, \texttt{disc\_perm}, \texttt{trivL\_of\_dvd}, \texttt{trivLi\_of\_dvd}, \texttt{dvd\_of\_trivL}, \texttt{dvd\_of\_trivLi}, \texttt{trivL\_iff}, \texttt{trivLi\_iff}). Ne sont pas démontrés en Lean : le dictionnaire entre fibrés en droites équivariants sur $M_{0,n}$ et fonctions de poids sur les configurations, et le fait que le groupe de Picard équivariant soit le $H^1$ des unités. Mathlib n'a pas les espaces de modules $M_{0,n}$.
 \end{sloppypar}
 
 Pour $n$ pair, ces ordres sont dans la littérature. Edidin et Hu, partant de la présentation de Pernice par un sous-groupe de Borel \cite{pernice2022}, présentent $[M_{0,2g+2}/\mathfrak S_{2g+1}]$ comme le champ des formes binaires de degré $2g+2$ munies d'une racine marquée, et calculent son anneau de Chow entier, $\mathbf Z[l]/(2g(2g+1)\,l)$ pour $g \geqslant 2$ \cite[théorème~1.3]{edidinhu2025} : le groupe de Picard est cyclique d'ordre $(n-1)(n-2)$ pour $n = 2g+2 \geqslant 6$, et $L_n$, qui y est d'ordre $(n-1)(n-2)$, l'engendre. Pour $n = 4$, $M_{1,1}$ est une gerbe en $\mu_2$ au-dessus de $[M_{0,4}/\mathfrak S_3]$, et $\operatorname{Pic}(M_{1,1}) = \mathbf Z/12$ \cite{mumford1965,fultonolsson2010} donne l'ordre~$6$. Pour $n$ impair, en particulier pour la colonne $n = 5$ de la page, aucun énoncé imprimé n'a été trouvé ; la même méthode donne le même ordre.
+
+\subsection*{Les deux modèles s'accordent}
+
+Les colonnes $n = 4$, $5$, $6$ ont été traitées par des cocycles en coordonnées normalisées, la règle générale par des fonctions de poids sur des configurations. Les deux calculs donnent les mêmes ordres, mais rien ne disait encore qu'ils parlent du même objet. On le vérifie ici en restreignant le modèle homogène aux configurations normalisées.
+
+\noindent\emph{Restreindre.} Pour $n = 5$, la configuration normalisée de $(\lambda, \mu)$ est la famille de vecteurs
+\[
+(0, 1),\ (1, 1),\ (1, 0),\ (\lambda, 1),\ (\mu, 1),
+\]
+qui représente les points $0$, $1$, $\infty$, $\lambda$, $\mu$. Une fonction $F$ de poids, qui trivialise $L^{\otimes m}$ dans le modèle homogène, donne par restriction une fonction sans zéro sur $M_{0,5}(K)$,
+\[
+h(\lambda, \mu) = F\bigl((0,1), (1,1), (1,0), (\lambda,1), (\mu,1)\bigr).
+\]
+ La question est de savoir comment $h$ change sous les générateurs $s_1, \ldots, s_4$.
+
+\noindent\emph{Un générateur.} Prenons $s_3$, qui échange les étiquettes de $\infty$ et de $\lambda$. Après échange, les trois premiers points sont $0$, $1$, $\lambda$, et la substitution de renormalisation est l'homographie $g(z) = (1 - \lambda)z/(z - \lambda)$, qui les envoie sur $0$, $1$, $\infty$ ; elle envoie le nouveau quatrième point, $\infty$, sur $1 - \lambda$, et $\mu$ sur $\mu(\lambda - 1)/(\lambda - \mu)$. C'est la substitution $s_3$ de la colonne $n = 5$. En vecteurs, $g$ est la matrice $\begin{pmatrix} 1 - \lambda & 0 \\ 1 & -\lambda \end{pmatrix}$, de déterminant $\lambda(\lambda - 1)$, et elle envoie chaque vecteur de la configuration renumérotée sur un multiple du vecteur normalisé correspondant : $(0, 1) \mapsto (0, -\lambda)$, $(1, 1) \mapsto (1 - \lambda)(1, 1)$, $(\lambda, 1) \mapsto \lambda(1 - \lambda)(1, 0)$, $(1, 0) \mapsto (1 - \lambda, 1)$ et $(\mu, 1) \mapsto (\mu - \lambda)\bigl(\mu(1 - \lambda)/(\mu - \lambda), 1\bigr)$. Les poids de $F$ donnent
+\[
+h(s_3(\lambda, \mu)) = \Bigl(\bigl(\textstyle\prod_i t_i\bigr)^2 \det(g)^5\Bigr)^m\, h(\lambda, \mu),
+\qquad \prod_i t_i = \frac{-1}{\lambda^2(1-\lambda)^2(\mu - \lambda)},
+\]
+où les $t_i$ sont les inverses des multiples ci-dessus, et l'invariance de $F$ par renumérotation absorbe l'échange. Le facteur vaut $\lambda(\lambda - 1)/(\lambda - \mu)^2$ : c'est exactement le facteur de $s_3$ sur $L$ dans la colonne $n = 5$. Les autres générateurs se traitent de même, avec des matrices plus simples. Pour $L_5$, seul le cinquième vecteur porte un poids, et le facteur devient $t_5^2 \det(g)$, qui redonne le cocycle de $L_5$.
+
+\begin{encadre}
+\begin{enonce}[De l'édition : accord des deux modèles\piste{146-equivariant-trivialising-exponents}]
+Pour $n = 4$, $5$, $6$, sur tout corps $K$, une trivialisation de $L^{\otimes m}$ (resp.\ de $L_n^{\otimes m}$ sous le stabiliseur du $n$-ième point) dans le modèle homogène se restreint aux configurations normalisées en une fonction sans zéro $h$ dont le cobord est la puissance $m$-ième du cocycle des coordonnées normalisées : $\mathrm{sgn}\,g \cdot g'(\lambda)$ et $g'(\lambda)$ pour $n = 4$, les cocycles de $L$ et de $L_5$ pour $n = 5$, ceux de $L$ et de $L_6$ pour $n = 6$. Sous les hypothèses sur $K$ des colonnes, les deux conditions sont équivalentes.
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+Pour chaque générateur, on écrit la matrice de renormalisation et les multiples, comme pour $s_3$ ci-dessus, et l'on vérifie que $(\prod_i t_i)^2 \det(g)^n$, resp.\ $t_n^2\det(g)$, est le facteur du cocycle ; pour $n = 4$, on le fait pour les six éléments de $\mathfrak S_3$. La relation de cobord passe des générateurs aux mots par la règle de cocycle. Pour la réciproque, une puissance $m$-ième du cocycle qui est un cobord force $m$ à être multiple de l'ordre calculé dans la colonne, et la fonction de poids de l'énoncé général trivialise alors $L^{\otimes m}$ ou $L_n^{\otimes m}$.
+\end{proof}
+
+La réciproque passe donc par les nombres, non par la construction : on ne prolonge pas $h$ en une fonction de poids sur toutes les configurations. Le sens direct suffit à relier les deux calculs : toute trivialisation du modèle homogène en donne une des cocycles normalisés, par simple restriction.
+
+\begin{sloppypar}
+\noindent Vérifié, après l'étiquette, dans \href{\leanblobmain/Folder146.lean}{\texttt{Folder146.lean}} : \texttt{trivL\_step} et \texttt{trivLi\_step} pour le changement d'une fonction de poids sous une renormalisation, \texttt{cob\_of\_trivL} et \texttt{cob\_of\_trivLi} pour la restriction, \texttt{step4}, \texttt{step5}, \texttt{step5i}, \texttt{step6} et \texttt{step6i} pour les matrices et les multiples, \texttt{coboundary\_derL\_of\_trivL}, \texttt{coboundary\_der\_of\_trivLi}, \texttt{coboundary\_cL\_of\_trivL}, \texttt{coboundary\_c5\_of\_trivLi}, \texttt{coboundary\_cL6\_of\_trivL} et \texttt{coboundary\_c6\_of\_trivLi} pour le sens direct, et \texttt{trivL\_four\_iff}, \texttt{trivLi\_four\_iff}, \texttt{trivL\_five\_iff}, \texttt{trivLi\_five\_iff}, \texttt{trivL\_six\_iff}, \texttt{trivLi\_six\_iff} pour l'équivalence. Le dictionnaire avec les fibrés équivariants reste hors de portée.
+\end{sloppypar}
