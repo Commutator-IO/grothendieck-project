@@ -18,6 +18,8 @@ import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.Data.Int.GCD
 import Mathlib.Data.Nat.Choose.Dvd
 import Grothendieck.Upstream.HasseDerivXPowMul
+import Grothendieck.Upstream.PolynomialIsCoprimeX
+import Grothendieck.Upstream.DerivationLieMulLeft
 
 /-!
 # Folder 93, pages 72, 115–123: the Schwarzian difference with divided derivatives
@@ -571,16 +573,10 @@ theorem N_add_X_pow_mul (p M : ℕ) [Fact p.Prime] [CharP R p] (hM : 3 < p ^ M) 
   exact ⟨2 * D 2 s * D 2 g + X ^ (p ^ M) * D 2 g ^ 2 - D 3 s * D 1 g - D 3 g * D 1 s
     - X ^ (p ^ M) * D 3 g * D 1 g, by ring⟩
 
+/-- `cX + d` with `d` a unit is coprime to `X` (`Polynomial.isCoprime_X_iff`), hence to `Xⁿ`. -/
 lemma X_pow_dvd_of_mul_lin {n : ℕ} {c d : R} (hd : IsUnit d) {F : R[X]}
-    (h : X ^ n ∣ F * (C c * X + C d)) : X ^ n ∣ F := by
-  rw [X_pow_dvd_iff] at h ⊢
-  intro i hi
-  induction i with
-  | zero => exact hd.mul_right_eq_zero.1 ((coeff_mul_lin_zero F c d).symm.trans (h 0 hi))
-  | succ i ih =>
-    have := (coeff_mul_lin_succ F c d i).symm.trans (h _ hi)
-    rw [ih (by omega), mul_zero, zero_add] at this
-    exact hd.mul_right_eq_zero.1 this
+    (h : X ^ n ∣ F * (C c * X + C d)) : X ^ n ∣ F :=
+  (Polynomial.isCoprime_X_iff.2 (by simpa using hd)).pow_left.dvd_of_dvd_mul_right h
 
 /-- The converse in `A[T]/(T^(p^N))`, `3 < p^N`: a homography `(at + b)/(ct + d)` with
 `a, b, c, d ∈ A` and `d` a unit has `G₀ = 0`. -/
@@ -964,10 +960,11 @@ variable {A : Type*} [CommRing A] (D : Derivation ℤ A A)
 local notation "μ" => LinearMap.mulLeft ℤ
 local notation "δ" => (D : Module.End ℤ A)
 
-/-- Leibniz's rule as an identity of operators: `D ∘ μ c = μ c ∘ D + μ (D c)`. -/
+/-- Leibniz's rule as an identity of operators: `D ∘ μ c = μ c ∘ D + μ (D c)`
+(`Derivation.lie_mulLeft`). -/
 theorem comm_mulLeft (c : A) :
     (D : Module.End ℤ A) * μ c = μ c * (D : Module.End ℤ A) + μ (D c) := by
-  ext x; simp [Derivation.leibniz, smul_eq_mul]; ring
+  rw [← D.lie_mulLeft, Ring.lie_def, add_sub_cancel]
 
 variable (p : ℕ) [hp : Fact p.Prime] [CharP A p]
 
@@ -1065,16 +1062,15 @@ connection `D + a` on `A`, i.e. `D y + a y = 0`, then `(D + a)ᵖ = Dᵖ + ω(D�
 `ω = -dy/y` the connection form: the `p`-curvature `(∇_D)ᵖ - ∇_{Dᵖ}` vanishes. -/
 theorem pCurvature_eq_zero (y z a : A) (hu : y * z = 1) (hy : D y + a * y = 0) :
     (δ + μ a) ^ p = δ ^ p + μ (-(D^[p] y) * z) := by
-  have h1 : y * D z + z * D y = 0 := by
-    have := congrArg D hu
-    rw [Derivation.leibniz, Derivation.map_one_eq_zero, smul_eq_mul, smul_eq_mul] at this
-    linear_combination this
   have hinv : μ z * μ y = 1 := by ext x; simp [← mul_assoc, mul_comm z y, hu]
+  -- conjugation by the unit `y` (`Derivation.mulLeft_mul_mul_mulLeft_inv`)
   have hconj : δ + μ a = μ y * δ * μ z := by
+    rw [show μ y * δ * μ z = _ from D.mulLeft_mul_mul_mulLeft_inv (Units.mkOfMulEqOne y z hu)]
+    have hza : a = -(z * D y) := by linear_combination z * hy - a * hu
     ext x
-    simp only [LinearMap.add_apply, Module.End.mul_apply, LinearMap.mulLeft_apply,
-      Derivation.coeFn_coe, Derivation.leibniz, smul_eq_mul]
-    linear_combination (-D x - a * x) * hu - x * h1 + x * z * hy
+    simp only [LinearMap.add_apply, LinearMap.sub_apply, LinearMap.mulLeft_apply, hza]
+    change _ = _ - z * D y * x
+    ring
   have hpow : ∀ n, (μ y * δ * μ z) ^ (n + 1) = μ y * δ ^ (n + 1) * μ z := by
     intro n
     induction n with
