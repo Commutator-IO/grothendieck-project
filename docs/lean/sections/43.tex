@@ -1,0 +1,46 @@
+\section[Cote 43 : polynômes additifs modulo $F - 1$ et perfection]{Cote 43 : polynômes additifs modulo $F - 1$ et perfection\protect\verifie[\leanblobmain]{Folder43}}\label{sec:43}
+
+La cote 43, \emph{Dualité des groupes. Jacobiennes généralisées etc}, réunit des liasses sur le corps de classes, les jacobiennes généralisées de Rosenlicht, la dualité de Cartier et les accouplements de Tate et de Lang ; la carte la date de 1964--1965. Aux pages~165 à~169, un lemme identifie $\mathrm{Ext}^1_{S\text{-gr}}(G, \Gamma)$ aux classes primitives de $H^1(G, \Gamma)$, puis la page~169 écrit, pour une base $S$ de caractéristique~$p$ (\lot{43}{9}{165}) :
+\[
+\mathrm{Ext}^1_{S\text{-gr}}(\mathbb G_a, \mathbb Z/p\mathbb Z) \simeq \Gamma(S, \mathcal O^{p^{-\infty}}), \qquad \mathcal O^{p^{-\infty}} = \varinjlim\bigl(\mathcal O \xrightarrow{x \mapsto x^p} \mathcal O \xrightarrow{x \mapsto x^p} \cdots\bigr).
+\]
+La perfection apparaît ainsi. Une extension de $\mathbb G_a$ par $\mathbb Z/p\mathbb Z$ sur $S = \mathrm{Spec}\,R$ est un revêtement d'Artin--Schreier $x^p - x = f(t)$, et elle est compatible à l'addition quand $f$ est un \emph{polynôme additif}, $f(t) = \sum_i a_i t^{p^i}$ ; deux tels $f$ donnent la même classe quand ils diffèrent d'un $g^p - g$, $g$ additif. La lecture remarque que, modulo ces $g^p - g$, tout polynôme additif se ramène à un seul terme $a\,t$ avec $a$ dans la perfection. C'est ce cœur algébrique qui est démontré ici, sur une base affine quelconque.
+
+\noindent\emph{Notations.} Soient $p$ premier et $R$ un anneau commutatif de caractéristique~$p$. On note $R\{F\}$ le groupe des polynômes additifs $\sum_i a_i t^{p^i}$, suites presque nulles $(a_i)$ d'éléments de $R$. La composition à gauche par $F : t \mapsto t^p$ envoie $\sum a_i t^{p^i}$ sur $\sum a_i^p t^{p^{i+1}}$, qui est $(\sum a_i t^{p^i})^p$ en caractéristique~$p$ ; on pose $D = F - 1$, de sorte que $D(f) = f^p - f$. La perfection $R^{p^{-\infty}}$ est l'ensemble des classes de couples $(i, a)$, où $(i, a)$ représente $a^{p^{-i}}$ et $(i + 1, a^p)$ s'identifie à $(i, a)$ ; on note $[a]_i$ cette classe.
+
+\begin{encadre}
+\begin{theoreme*}[D'après la lecture des pages 165 à 169, $S$ affine\piste{43-ext-ga-zp-perfection}]
+L'application $\Phi : R\{F\} \to R^{p^{-\infty}}$, $\sum_i a_i t^{p^i} \mapsto \sum_i [a_i]_i$, est un homomorphisme surjectif de groupes, de noyau exactement l'image de $D = F - 1$. Elle induit un isomorphisme de groupes
+\[
+R\{F\}/(F - 1)R\{F\} \;\simeq\; R^{p^{-\infty}}.
+\]
+De plus, modulo l'image de $D$, tout polynôme additif est égal à un seul terme $c\,t^{p^M}$, pour tout $M$ assez grand.
+\end{theoreme*}
+\end{encadre}
+
+\begin{proof}
+L'application $a \mapsto [a]_i$ est additive : $[a]_i + [b]_i = [a^{p^i} + b^{p^i}]_{2i} = [(a + b)^{p^i}]_{2i} = [a + b]_i$, par la règle de somme de la perfection et l'additivité de Frobenius. Donc $\Phi$ est additive. Elle tue l'image de $D$ : $\Phi(F(a\,t^{p^i})) = [a^p]_{i+1} = [a]_i$, d'où $\Phi \circ F = \Phi$ et $\Phi \circ D = 0$. Elle est surjective, puisque $[a]_n = \Phi(a\,t^{p^n})$.
+
+Pour le noyau, on monte d'un cran : $a\,t^{p^N} - a^p\,t^{p^{N+1}} = -D(a\,t^{p^N})$, et par récurrence $a\,t^{p^N} \equiv a^{p^z}\,t^{p^{N+z}}$ modulo l'image de $D$ pour tout $z$. Un polynôme $\sum_{i \leq N} a_i t^{p^i}$ est donc congru à $c\,t^{p^M}$ pour tout $M \geq N$, avec $c = \sum_i a_i^{p^{M-i}}$ : c'est la dernière assertion. Si $\Phi(f) = 0$ et $f \equiv c\,t^{p^M}$, alors $[c]_M = 0$ dans la perfection, ce qui signifie $c^{p^z} = 0$ pour un $z$. Alors $c\,t^{p^M} \equiv c^{p^z} t^{p^{M+z}} = 0$, et $f$ est dans l'image de $D$. L'isomorphisme s'en déduit par passage au quotient.
+\end{proof}
+
+\begin{remarque}
+Aucune hypothèse de réduction ni de noethérianité n'intervient : les éléments $x$ tels que $x^{p^z} = 0$, qui forment le noyau de $R \to R^{p^{-\infty}}$, sont absorbés par $F - 1$. La parenthèse de la page qui semble évoquer \q{l'hypothèse noethérienne} n'a donc pas lieu d'être pour ce cœur algébrique. En Lean, $R\{F\}$ est représenté par les suites presque nulles, et l'identification $D(f) = f^p - f$ avec le polynôme est vérifiée dans $R[t]$.
+\end{remarque}
+
+Ne sont pas démontrés ici les deux énoncés suivants de la cote. Le premier est la formule de la page~169 telle qu'elle est écrite : il y faut en outre le lemme des pages~166 à~168, qui identifie $\mathrm{Ext}^1_{S\text{-gr}}(G, \Gamma)$ aux classes primitives de $H^1(G, \Gamma)$, son invariance par homéomorphisme universel, le passage à une base non affine et la représentabilité par des pro-schémas parfaits.
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 165 à 169, $\mathrm{Ext}^1(\mathbf G_a, \mathbf Z/p\mathbf Z)$ et perfection\piste{43-ext-ga-zp-perfection}]\nonverifie
+Sur une base quelconque $S$ de caractéristique~$p$, $\mathrm{Ext}^1_{S\text{-gr}}(\mathbf G_a, \mathbf Z/p\mathbf Z) \simeq \Gamma(S, \mathcal O^{p^{-\infty}})$, sections globales de la perfection $\varinjlim(\mathcal O \to \mathcal O \to \cdots)$ pour $x \mapsto x^p$. Le foncteur $\mathrm{Ext}^1(\mathbf G_a, \mathbf Z/p\mathbf Z)$ est donc représentable parmi les pro-schémas parfaits sur~$S$.
+\end{theoreme*}
+\end{encadre}
+{\small Les feuillets en esquissent une démonstration incomplète (pages 166 à 168) : ils démontrent le lemme qui identifie $\mathrm{Ext}^1$ aux classes primitives de $H^1(G, \Gamma)$ et son invariance par homéomorphisme universel, mais pas la formule elle-même, et le mot \q{parfaits} est incertain. Mathlib n'a pas les $\mathrm{Ext}$ de schémas en groupes. On se reportera aux notes de Grothendieck (\lot{43}{9}{165}).\par}
+
+\begin{encadre}
+\begin{theoreme*}[D'après les pages 70 à 74, forme corrigée par l'édition, concentration de la cohomologie locale\piste{43-local-cohomology-concentration}]\nonverifie
+Soient $A$ un anneau local régulier de dimension $d$ contenant un corps algébriquement clos $k$, et $G$ un groupe algébrique commutatif sur $k$. La cohomologie locale de Zariski $H^i_{\mathfrak a}(\operatorname{Spec} A, G)$ au point fermé est nulle pour $i \neq d$ ; elle vaut $G(K)/G(A)$ pour $d = 1$ et $H^{d-1}(\operatorname{Spec} A - \mathfrak a, U)$ pour $d \geq 2$, où $U$ est la partie unipotente de $G$. Le foncteur $G \mapsto H^d_{\mathfrak a}(G)$ est donc exact sur les suites localement triviales, ce qui sert à définir la jacobienne locale $J_{A/k}$ de la page~74.
+\end{theoreme*}
+\end{encadre}
+{\small La clôture algébrique de $k$ est ajoutée par l'édition, et presque tous les mots de la prose sont de lecture incertaine. Mathlib n'a pas la cohomologie locale à valeurs dans un groupe algébrique. On se reportera aux notes de Grothendieck (\lot{43}{4}{70}).\par}
+

@@ -5878,6 +5878,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check over a non-perfect field and over a general base: Serre, Groupes algébriques et corps de classes VII (the field case, and the p. 183 the page cites); Oort, Commutative group schemes (LNM 15, 1966); Demazure–Gabriel, Groupes algébriques III.6 and V; SGA 7 VII–VIII. Over a perfect field the formula reduces to the known Ext¹(𝔾_a, ℤ/pℤ) ≅ k, so the only possibly unrecorded part is the arbitrary base. One web query (2026-10-10) returned nothing that states the base-S form, but no source was read in full, so it does not count as a search.',
+    lean: { file: 'lean/Grothendieck/Folder43.lean', found: 'Partly: the algebraic core, over any commutative 𝔽_p-algebra R (S = Spec R affine), with no reducedness or noetherian hypothesis (quotientEquiv, ker_Φ, exists_single): additive polynomials Σ aᵢt^{pⁱ}, written as finitely supported sequences, modulo the image of f ↦ fᵖ − f (toPoly_D) are isomorphic as groups to PerfectClosure R p by Σ aᵢt^{pⁱ} ↦ Σ [aᵢ]ᵢ; modulo F − 1 every additive polynomial is a single term at any high enough level. Not formalised: the identification of Ext¹_{S-gr}(G, Γ) with primitive classes of H¹(G, Γ) (pp. 166–168), the invariance under universal homeomorphisms, non-affine bases, the representability.' },
   },
   {
     id: '43-local-cohomology-concentration',

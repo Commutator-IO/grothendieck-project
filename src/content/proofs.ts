@@ -193,6 +193,19 @@ export const PROOFS: Proof[] = [
     theorems: ['flat', 'residue_surjective', 'ker_residue', 'generic_nontrivial', 'comul', 'saturation_eq', 'not_fg_saturation'],
   },
   {
+    folder: '43',
+    batch: 9,
+    page: '165–169',
+    name: 'Ext¹(𝔾_a, ℤ/pℤ) and the perfection',
+    statement:
+      'Over a base S of characteristic p, Ext¹_{S-gr}(𝔾_a, ℤ/pℤ) ≅ Γ(S, 𝒪^{p^{−∞}}), the sections of the perfection colim(𝒪 → 𝒪 → ⋯, x ↦ xᵖ) (page 169); the reading explains it by additive polynomials modulo the image of f ↦ fᵖ − f.',
+    found:
+      'The algebraic core holds over every commutative 𝔽_p-algebra R, reduced or not, with no noetherian hypothesis: additive polynomials Σ aᵢt^{pⁱ} modulo the image of f ↦ fᵖ − f are isomorphic as groups to the perfection of R, by Σ aᵢt^{pⁱ} ↦ Σ aᵢ^{p^{−i}}; modulo F − 1 every additive polynomial is a single term, and the elements with some x^{pᵏ} = 0 are absorbed by F − 1. Not formalised: the identification of Ext¹ with primitive classes of H¹(G, Γ) (pp. 166–168), the invariance under universal homeomorphisms, non-affine bases, the representability.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder43.lean',
+    theorems: ['toPoly_Fr', 'toPoly_D', 'Φ_D', 'Φ_surjective', 'exists_single', 'ker_Φ', 'quotientEquiv'],
+  },
+  {
     folder: '158',
     batch: 3,
     page: '21–41, 44, 50–53',
