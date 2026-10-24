@@ -71,8 +71,9 @@ const out = `% Engendré par recapitulatif.mjs : ne pas modifier à la main.
 
 Une ligne par section, dans l'ordre des parties : la cote, l'énoncé démontré en quelques mots, le verdict, le fichier Lean et la section. \\emph{Confirmé tel que lu} : l'énoncé tient sous les hypothèses que la lecture écrit ; \\emph{plus général} : il tient sous des hypothèses plus faibles ; \\emph{partiel} : une partie seulement est démontrée, ou dans un modèle, ce que la section précise ; \\emph{correction de la lecture} : la lecture omettait une hypothèse de la page ou glosait faussement un énoncé juste ; \\emph{faux sur la page} : un contre-exemple réfute l'affirmation du feuillet.
 
-{\\small\\setlength{\\tabcolsep}{3pt}
-\\begin{longtable}{@{}p{1.5cm}p{6.3cm}p{2.9cm}p{2.9cm}r@{}}
+\\begin{landscape}
+{\\small\\setlength{\\tabcolsep}{4pt}
+\\begin{longtable}{@{}>{\\raggedright\\arraybackslash}p{1.8cm}>{\\raggedright\\arraybackslash}p{12cm}>{\\raggedright\\arraybackslash}p{3.4cm}p{3.4cm}r@{}}
 \\toprule
 Cote & Énoncé & Verdict & Fichier Lean & \\S\\\\
 \\midrule
@@ -80,6 +81,7 @@ Cote & Énoncé & Verdict & Fichier Lean & \\S\\\\
 ${kept.join('\n')}
 \\bottomrule
 \\end{longtable}}
+\\end{landscape}
 `;
 writeFileSync(resolve(here, 'recapitulatif.tex'), out);
 process.stdout.write(`recapitulatif.tex: ${kept.filter((r) => !r.startsWith('\\multicolumn')).length} rows\n`);
