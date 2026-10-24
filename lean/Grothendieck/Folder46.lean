@@ -41,7 +41,13 @@ triviality of `Γ` on `A/𝔪A` nor the surjectivity of `A^Γ → A/𝔪A` is us
   `u = Σ_σ c'(σ) σ(w) c(σ)⁻¹` satisfies `c'(γ) γ(u) = u c(γ)`; this is the averaging for the
   action twisted by `c'` (pages 86–89), written without changing the action.
 
-Not formalised: the Sylow form (the factor `H¹(Λ, A*)`), the semi-local base with its
+* `mul_smul_sum_cosets`, `isCoboundary_of_restrict`, `ker_trivial_restrict`,
+  `ker_trivial_sylow`: the Sylow form, the page's full statement at the level of the kernel:
+  with `Λ` a Sylow `p`-subgroup (any subgroup of index prime to `p`) and the margin's
+  surjectivity `A^Λ → A/𝔪A` (implied by `A^Γ → A/𝔪A`), a cocycle trivial modulo `𝔪A` and on
+  `Λ` is a coboundary — the average over `Γ/Λ`.
+
+Not formalised: injectivity in the Sylow form for noncommutative `A`, the semi-local base with its
 decomposition and inertia groups (pages 84–89), and the passage from `𝔪ⁿA` to `A` by
 Artin–Rees (which the finite case here makes unnecessary).
 -/
@@ -336,5 +342,131 @@ theorem not_isCoboundary_signCocycle : ¬ IsCoboundary signCocycle := by
   exact absurd h (by decide)
 
 end Counterexample
+
+/-! ### The Sylow form (page 90, with the margin), #83
+
+For `Λ` a subgroup of index prime to `p` (a Sylow `p`-subgroup), the average is taken over the
+cosets `Γ/Λ` instead of `Γ`: if `c(λ) λ(z) = z` on `Λ`, the summand `c(g) g(z)` only depends on
+`gΛ` and `b = Σ_{gΛ} c(g) g(z)` satisfies `c(γ) γ(b) = b` (`mul_smul_sum_cosets`). When `c` is a
+coboundary `u⁻¹ λ(u)` on `Λ` and trivialised by `v` modulo `𝔪A`, the element `z = u⁻¹ w`, with
+`w ∈ A^Λ` lifting `π(u) v⁻¹` (the margin's surjectivity `A^Λ → A/𝔪A`, which `A^Γ → A/𝔪A`
+implies), satisfies this, and `b ≡ [Γ : Λ] v⁻¹` is a unit: `isCoboundary_of_restrict`,
+`ker_trivial_restrict`, `ker_trivial_sylow`. This is the kernel of
+`H¹(Γ, A*) → H¹(Γ, (A/𝔪A)*) × H¹(Λ, A*)`; for `A` commutative it is injectivity. -/
+
+section Sylow
+
+variable {Γ A B : Type*} [Group Γ] [Fintype Γ] [Ring A] [MulSemiringAction Γ A] [Ring B]
+  [MulSemiringAction Γ B]
+
+omit [Fintype Γ] in
+/-- The cocycle rule on the summands of the average over cosets. -/
+theorem mul_smul_cocycle {c : Γ → Aˣ} (hc : IsCocycle c) (z : A) (g h : Γ) :
+    (c g : A) * g • ((c h : A) * h • z) = (c (g * h) : A) * (g * h) • z := by
+  rw [smul_mul', ← mul_assoc, ← hc, smul_smul]
+
+omit [Fintype Γ] in
+/-- If `c(γ) γ(b) = b` for a unit `b`, then `c` is a coboundary. -/
+theorem isCoboundary_of_fixed {c : Γ → Aˣ} (b : Aˣ) (h : ∀ g, (c g : A) * g • (b : A) = b) :
+    IsCoboundary c := by
+  refine ⟨b⁻¹, fun g => ?_⟩
+  calc (c g : A) = c g * (g • (b : A) * g • ((b⁻¹ : Aˣ) : A)) := by
+        rw [← smul_mul', Units.mul_inv, smul_one, mul_one]
+    _ = _ := by rw [← mul_assoc, h, inv_inv]
+
+open scoped Classical in
+/-- The average over the cosets `Γ/Λ`: if `c(λ) λ(z) = z` for `λ ∈ Λ`, then
+`b = Σ_{gΛ} c(g) g(z)` is well defined and satisfies `c(γ) γ(b) = b`. -/
+theorem mul_smul_sum_cosets {c : Γ → Aˣ} (hc : IsCocycle c) (Λ : Subgroup Γ) (z : A)
+    (hz : ∀ l ∈ Λ, (c l : A) * l • z = z) (g : Γ) :
+    (c g : A) * g • ∑ q : Γ ⧸ Λ, (c q.out : A) * q.out • z =
+      ∑ q : Γ ⧸ Λ, (c q.out : A) * q.out • z := by
+  have hf : ∀ h, ∀ l ∈ Λ, (c (h * l) : A) * (h * l) • z = (c h : A) * h • z := fun h l hl => by
+    rw [← mul_smul_cocycle hc, hz l hl]
+  rw [smul_sum, mul_sum]
+  simp_rw [mul_smul_cocycle hc]
+  refine (Equiv.sum_comp (MulAction.toPerm g) _).symm.trans (sum_congr rfl fun q _ => ?_) |>.symm
+  obtain ⟨⟨l, hl⟩, hq⟩ := QuotientGroup.mk_out_eq_mul Λ (g * q.out)
+  have e : (MulAction.toPerm g q : Γ ⧸ Λ) = (g * q.out : Γ) := by
+    conv_lhs => rw [← q.out_eq']
+    rfl
+  simp only [e, hq, hf _ l hl]
+
+open scoped Classical in
+/-- **The Sylow form, at the level of rings.** For a surjective equivariant `π : A → B` with
+`1 + Ker π ⊂ Aˣ`, a subgroup `Λ` of index invertible in `A` and `A^Λ → B` onto (the margin of
+page 90), a cocycle `c` that is a coboundary modulo `Ker π` and on `Λ` is a coboundary. -/
+theorem isCoboundary_of_restrict (π : A →+* B) (hπ : Function.Surjective π)
+    (hequiv : ∀ (g : Γ) (a : A), π (g • a) = g • π a)
+    (hker : ∀ x, π x = 0 → IsUnit (1 + x)) (Λ : Subgroup Γ) (hn : IsUnit (Λ.index : A))
+    (hlift : ∀ y, ∃ w, (∀ l ∈ Λ, l • w = w) ∧ π w = y) {c : Γ → Aˣ} (hc : IsCocycle c)
+    (hΛ : ∃ u : Aˣ, ∀ l ∈ Λ, (c l : A) = ↑u⁻¹ * l • (u : A))
+    (hπc : ∃ v : Bˣ, ∀ g, π (c g) = ↑v⁻¹ * g • (v : B)) : IsCoboundary c := by
+  obtain ⟨u, hu⟩ := hΛ
+  obtain ⟨v, hv⟩ := hπc
+  obtain ⟨w, hwΛ, hw⟩ := hlift (π u * ↑v⁻¹)
+  set z := ↑u⁻¹ * w
+  have hz : ∀ l ∈ Λ, (c l : A) * l • z = z := fun l hl => by
+    rw [hu l hl, smul_mul', hwΛ l hl, mul_assoc, ← mul_assoc (l • (u : A)), ← smul_mul',
+      Units.mul_inv, smul_one, one_mul]
+  have hπz : π z = ↑v⁻¹ := by
+    rw [map_mul, hw, ← mul_assoc, ← map_mul, Units.inv_mul, map_one, one_mul]
+  obtain ⟨z', hz'⟩ := hπ ↑v
+  have hzu : IsUnit z := isUnit_of_mul_sub_one_mem (RingHom.ker π) (fun x hx => hker x hx)
+    (a' := z') (by simp [RingHom.mem_ker, hπz, hz']) (by simp [RingHom.mem_ker, hπz, hz'])
+  obtain ⟨m, hm⟩ := hn.mul hzu
+  set b := ∑ q : Γ ⧸ Λ, (c q.out : A) * q.out • z
+  set x := b - m
+  have hx : π x = 0 := by
+    have : ∀ s : Γ, π ((c s : A) * s • z) = ↑v⁻¹ := fun s => by
+      rw [map_mul, hv, hequiv, hπz, mul_assoc, ← smul_mul', Units.mul_inv, smul_one, mul_one]
+    have hm' : π (m : A) = (Λ.index : B) * ↑v⁻¹ := by rw [hm, map_mul, map_natCast, hπz]
+    simp only [x, b, map_sub, map_sum, this, sum_const, card_univ, hm', nsmul_eq_mul,
+      sub_eq_zero, Λ.index_eq_card, Nat.card_eq_fintype_card]
+  have hb : b = m * (1 + ↑m⁻¹ * x) := by
+    rw [mul_add, mul_one, ← mul_assoc, Units.mul_inv, one_mul, add_sub_cancel]
+  obtain ⟨b', hb'⟩ : IsUnit b := hb ▸ m.isUnit.mul (hker _ (by rw [map_mul, hx, mul_zero]))
+  exact isCoboundary_of_fixed b' fun g => hb' ▸ mul_smul_sum_cosets hc Λ z hz g
+
+end Sylow
+
+section SylowLocal
+
+variable {O A : Type*} [CommRing O] [Ring A] [Algebra O A] [IsLocalRing O]
+  {Γ B : Type*} [Group Γ] [Fintype Γ] [MulSemiringAction Γ A] [Ring B] [MulSemiringAction Γ B]
+
+omit [Fintype Γ] [MulSemiringAction Γ A] in
+/-- `p ∤ [Γ : Λ]` makes the index invertible in `A`. -/
+theorem isUnit_index (Λ : Subgroup Γ) (hp : ¬ ringChar (ResidueField O) ∣ Λ.index) :
+    IsUnit (Λ.index : A) := by
+  have : IsUnit (Λ.index : O) := by
+    rw [← residue_ne_zero_iff_isUnit, map_natCast]
+    exact fun h => hp ((ringChar.spec _ _).1 h)
+  simpa using this.map (algebraMap O A)
+
+/-- **Pages 90–92, the Sylow form** (forme reconstituée par l'édition): `A` finite over `𝒪`,
+`π : A → B` onto with kernel in `𝔪A`, `Λ` of index prime to `p` and `A^Λ → B` onto. The kernel
+of `H¹(Γ, A*) → H¹(Γ, B*) × H¹(Λ, A*)` is trivial. -/
+theorem ker_trivial_restrict [Module.Finite O A] (Λ : Subgroup Γ)
+    (hp : ¬ ringChar (ResidueField O) ∣ Λ.index) (π : A →+* B) (hπ : Function.Surjective π)
+    (hequiv : ∀ (g : Γ) (a : A), π (g • a) = g • π a)
+    (hker : ∀ x, π x = 0 → x ∈ maximalIdeal O • (⊤ : Submodule O A))
+    (hlift : ∀ y, ∃ w, (∀ l ∈ Λ, l • w = w) ∧ π w = y) {c : Γ → Aˣ} (hc : IsCocycle c)
+    (hΛ : ∃ u : Aˣ, ∀ l ∈ Λ, (c l : A) = ↑u⁻¹ * l • (u : A))
+    (hπc : ∃ v : Bˣ, ∀ g, π (c g) = ↑v⁻¹ * g • (v : B)) : IsCoboundary c :=
+  isCoboundary_of_restrict π hπ hequiv (fun x hx => isUnit_one_add_of_mem_smul_top (hker x hx))
+    Λ (isUnit_index Λ hp) hlift hc hΛ hπc
+
+/-- The statement of page 90 with `Λ` a Sylow `p`-subgroup, `p` the residue characteristic. -/
+theorem ker_trivial_sylow [Module.Finite O A] [Fact (ringChar (ResidueField O)).Prime]
+    (Λ : Sylow (ringChar (ResidueField O)) Γ) (π : A →+* B) (hπ : Function.Surjective π)
+    (hequiv : ∀ (g : Γ) (a : A), π (g • a) = g • π a)
+    (hker : ∀ x, π x = 0 → x ∈ maximalIdeal O • (⊤ : Submodule O A))
+    (hlift : ∀ y, ∃ w, (∀ l ∈ (Λ : Subgroup Γ), l • w = w) ∧ π w = y) {c : Γ → Aˣ}
+    (hc : IsCocycle c) (hΛ : ∃ u : Aˣ, ∀ l ∈ (Λ : Subgroup Γ), (c l : A) = ↑u⁻¹ * l • (u : A))
+    (hπc : ∃ v : Bˣ, ∀ g, π (c g) = ↑v⁻¹ * g • (v : B)) : IsCoboundary c :=
+  ker_trivial_restrict (Λ : Subgroup Γ) Λ.not_dvd_index π hπ hequiv hker hlift hc hΛ hπc
+
+end SylowLocal
 
 end Grothendieck.Folder46
