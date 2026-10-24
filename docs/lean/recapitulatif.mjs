@@ -1,7 +1,7 @@
 // Writes recapitulatif.tex: the summary table that opens the appendix, one row
 // per section, in the order article.tex \inputs them, under the name of each
-// part. The statement is the section's short title; the verdict is the one of
-// its card in src/content/proofs.ts (the two Bourbaki sections have no card
+// part. The statement is the section's short title; the verdicts are those of
+// its cards in src/content/proofs.ts (the two Bourbaki sections have no card
 // and take theirs from BOURBAKI below); the file is the one its \verifie names.
 //
 //   node docs/lean/recapitulatif.mjs
@@ -56,11 +56,11 @@ for (const m of article.matchAll(/\\part\{([^}]*(?:\{[^}]*\}[^}]*)*)\}|\\input\{
   const bare = short.replace(/^(Cote [^:]+|Rédaction Bourbaki [^:]+) : /, '');
   const statement = bare.charAt(0).toLocaleUpperCase('fr') + bare.slice(1);
   const cote = name.startsWith('bourbaki-') ? `Bourbaki ${name.slice(9)}` : name;
-  const file = tex.match(/\\verifie\{([^}]+)\}/)[1];
+  const [, base = '\\leanblob', file] = tex.match(/\\verifie(?:\[([^\]]*)\])?\{([^}]+)\}/);
   const vs = [...new Set(verdicts[name] ?? [BOURBAKI[name]])];
-  if (vs.length !== 1 || !VERDICT[vs[0]]) throw new Error(`verdict of ${name}: ${vs}`);
+  if (!vs.length || vs.some((v) => !VERDICT[v])) throw new Error(`verdict of ${name}: ${vs}`);
   rows.push(
-    `${cote} & ${statement} & ${VERDICT[vs[0]]} & \\href{\\leanblob/${file}.lean}{\\texttt{\\detokenize{${file}}}} & \\ref{sec:${name}}\\\\`,
+    `${cote} & ${statement} & ${vs.map((v) => VERDICT[v]).join(' ; ')} & \\href{${base}/${file}.lean}{\\texttt{\\detokenize{${file}}}} & \\ref{sec:${name}}\\\\`,
   );
 }
 // Parts with no section of their own (the empty ones) leave a heading with no row.
