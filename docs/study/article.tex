@@ -177,6 +177,30 @@ The edition has a customisation of its own, modelled on the one for the Hopper l
 
 The RELAX NG schema is derived from the ODD on every build and published beside it, and every exported file names it in an \texttt{xml-model} processing instruction. The build validates every file with jing against unmodified \texttt{tei\_all} and against the derived schema, with every input pinned by version and digest. It also compares the ODD with the export in both directions and fails on an element used but not declared, or declared but never used. A further check typesets every formula of the TEI's reading view and of the \texttt{.tex}'s with KaTeX and compares them page by page. Two things are not validated: the Schematron rules that \texttt{tei\_all} embeds, which are not run over the corpus, and the TeX inside each \texttt{<formula>}, which the schema sees as a string and only KaTeX reads.
 
+\subsection{Several witnesses of one text}
+
+Some texts survive in more than one copy, and the copies do not carry the same marks. The \emph{Tapis de Quillen}, sixteen typed pages dated 10 September 1968, has four witnesses. In folder \texttt{162-5} of the Montpellier fonds, the typed top copy carries his corrections in blue ink, and a black photocopy taken after the ink adds marks of its own; folder 111 is another photocopy of that second state. A fourth copy, in the Fonds Grothendieck--Illusie of the IHÉS (item 2ILL3), was photocopied from the inked top copy before those later marks, and carries pencil notes written on it alone. The letter to Tate of May 1966 is in Montpellier folder 6 and, as a photocopy of the same annotated sheets taken before Montpellier's numbering, in the IHÉS item FG\_IL\_2\_TATE66. Pages 168--185 of folder 93, on the Cartier operation, are also IHÉS item FG\_IL\_3\_2, which keeps a corner that the Montpellier sheet has lost.
+
+The copies were identified from internal evidence: the same typed master, with the same line breaks and the same typewriter x-outs, and a page-to-view correspondence that holds through the whole item (view \(N\) of the Tate letter is page \(N+1\) of folder 6). Each witness is transcribed in its own file, against its own images. When another witness settles a reading, the correction is made in the file it concerns, and its header records a revision that names the witness and the view it was read on. A note in the body then says which witnesses carry the mark. This is how the edition corrected some thirty readings in folders 6, 93 and 111 from the IHÉS copies, among them two marginal blocks of the \emph{Tapis} that folder 111 had given as unreadable.
+
+TEI offers more than this. A parallel-segmentation apparatus would declare the witnesses once in a \texttt{<listWit>} and record each variant where it occurs, as in this schematic case from leaf 3 of the \emph{Tapis}, where a marginal \qq{Si !} with its bracket is on three witnesses and absent from the top copy:
+
+\begin{lstlisting}
+<listWit>
+  <witness xml:id="B">Montpellier 162-5, typed top copy, blue ink</witness>
+  <witness xml:id="A">Montpellier 162-5, black photocopy with its own marks</witness>
+  <witness xml:id="M">Montpellier 111, photocopy of A's state</witness>
+  <witness xml:id="I">IHÉS 2ILL3, photocopy of the inked top copy</witness>
+</listWit>
+[...]
+<app>
+  <rdg wit="#A #M #I"><note place="margin">Si !</note></rdg>
+  <rdg wit="#B"/>
+</app>
+\end{lstlisting}
+
+The edition does not do this yet. Each exported file encodes one witness, and the agreement between witnesses lives in prose notes, which a TEI processor cannot query. An apparatus of this kind would also need the mathematics to be segmented, since a variant often falls inside a formula, where the TeX string has no internal structure (Section 6.2).
+
 \section{Interface and reproducibility}
 
 \subsection{The facsimile}
