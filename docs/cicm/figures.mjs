@@ -23,7 +23,8 @@ const git = (...a) => execFileSync('git', a, { cwd: root, encoding: 'utf8', maxB
 const today = new Date().toISOString().slice(0, 10);
 
 // Theorems per file, at HEAD.
-const files = git('ls-tree', '--name-only', 'HEAD', 'lean/Grothendieck/').trim().split('\n');
+// Files only: the Upstream/ directory of shared general lemmas belongs to no part.
+const files = git('ls-tree', '--name-only', 'HEAD', 'lean/Grothendieck/').trim().split('\n').filter((f) => f.endsWith('.lean'));
 const count = {};
 for (const f of files) {
   const n = git('show', `HEAD:${f}`).split('\n').filter((l) => l.startsWith('theorem')).length;
