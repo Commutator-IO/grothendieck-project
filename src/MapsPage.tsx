@@ -35,10 +35,10 @@ export function MapsPage() {
             Maps of the fonds
           </p>
           <h1 className="titre mt-2 text-[30px] leading-tight text-ink-900">
-            How the folders connect — to print, to people, to each other
+            How the folders connect to print, to people and to each other
           </h1>
           <p className="mt-4 text-[15.5px] leading-relaxed text-ink-600">
-            Five pictures of the same transcriptions. Every edge rests on something one can
+            Five maps drawn from the same transcriptions. Every edge rests on something one can
             open: a line of a transcript, a page of a published edition, an entry of the
             Mathematics Genealogy Project. None is a judgement of influence, and a folder not
             yet transcribed has nothing to draw, so each map is as incomplete as the reading

@@ -48,7 +48,7 @@ export function CommentButton({
       type="button"
       data-notes-skip
       onClick={() => openComment(scope, { start: -1, text, ctx })}
-      title="Comment on this entry — keep a note in this browser or open a prefilled GitHub issue"
+      title="Comment on this entry: keep a note in this browser or open a prefilled GitHub issue"
       className={`inline-flex select-none items-center gap-1 rounded-md px-1.5 py-0.5 text-[11px] font-medium text-ink-400 transition hover:bg-ink-50 hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-brand-400 ${className}`}
     >
       <svg viewBox="0 0 16 16" className="h-3 w-3" aria-hidden="true" fill="none">

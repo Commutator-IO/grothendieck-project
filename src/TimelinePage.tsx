@@ -180,7 +180,7 @@ const LIFE: { year: number; what: string; source: string }[] = [
   { year: 1970, what: 'Leaves the IHÉS', source: MACTUTOR },
   { year: 1973, what: 'Professor at the University of Montpellier', source: MACTUTOR },
   { year: 1988, what: 'Retires', source: MACTUTOR },
-  { year: 1990, what: 'Hands his mathematical papers to Jean Malgoire — a second part follows on 28 July 1995 — which later form this fonds', source: FONDS },
+  { year: 1990, what: 'Hands his mathematical papers to Jean Malgoire (a second part follows on 28 July 1995); they later form this fonds', source: FONDS },
 ];
 
 /* ---------- the works, sourced ---------- */
@@ -279,9 +279,9 @@ function Works() {
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
         His treatises, seminars and long manuscripts, on the axis of the folders above: a volume
         at the year it appeared, a seminar or a run of talks over the years it was held, a
-        manuscript at the date its reference gives. The row of theorems, numbered, puts his main
-        results at the paper or talk that proves them. Hover one for its reference; the list under
-        the figure gives them all, with where each date is taken from.
+        manuscript at the date its reference gives. The numbered row of theorems places each main
+        result at the paper or talk that proves it. Hover a mark for its reference; the list under
+        the figure gives every work with the source of its date.
       </p>
       <div className="mt-3 overflow-x-auto" onMouseLeave={() => setSel(null)}>
         <svg
@@ -419,15 +419,14 @@ function Ranges() {
       <H2 id="ranges">Every dated folder: the inventory's range, and the dates on the leaves</H2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
         One bar per folder, placed by where its dating starts; folders that do not overlap share
-        a row. A dark bar is a dating the
-        archivists read on the pages; a light one is a dating they deduced, in their square
-        brackets; a bar that fades is open-ended — « à partir de 1982 », from 1982 with no end
-        given. The dots are dates written on the leaves themselves, found by the transcriptions.
-        A hollow dot is a stamp printed on the paper — most often the banner of a computer
-        listing whose back he wrote on — which dates the paper, not the writing. Folders not yet
-        begun are drawn fainter: they can have no dots. The thin green bar under some folders is
-        the project's own proposed dating, argued from those leaves; it stands beside the
-        inventory's dating and never replaces it.
+        a row. A dark bar is a dating the archivists read on the pages, a light one a dating they
+        deduced (their square brackets). A bar that fades is open-ended, as in « à partir de
+        1982 », from 1982 with no end given. The dots are dates written on the leaves themselves,
+        found by the transcriptions. A hollow dot is a stamp printed on the paper, most often the
+        banner of a computer listing whose back he wrote on; it dates the paper, not the writing.
+        Folders not yet begun are drawn fainter, since they can have no dots. The thin green bar
+        under some folders is the project's own proposed dating, argued from those leaves. It is
+        drawn beside the inventory's dating and never replaces it.
       </p>
       <ul className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1 text-[12px] text-ink-500">
         <li className="flex items-center gap-1.5">
@@ -443,7 +442,7 @@ function Ranges() {
           <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: DOT }} /> a date written on a leaf
         </li>
         <li className="flex items-center gap-1.5">
-          <span className="inline-block h-2.5 w-2.5 rounded-full border-[1.5px] bg-white" style={{ borderColor: DOT }} /> a machine stamp on the paper — the leaf is no older
+          <span className="inline-block h-2.5 w-2.5 rounded-full border-[1.5px] bg-white" style={{ borderColor: DOT }} /> a machine stamp on the paper (the leaf is no older)
         </li>
         <li className="flex items-center gap-1.5">
           <span className="inline-flex gap-0.5">
@@ -451,7 +450,7 @@ function Ranges() {
             <span className="inline-block h-[3px] w-3 rounded-sm" style={{ background: PROP, opacity: 0.5 }} />
             <span className="inline-block h-[3px] w-3 rounded-sm border-[0.9px] bg-white" style={{ borderColor: PROP }} />
           </span>{' '}
-          proposed dating (project) — high, medium, low confidence
+          proposed dating (project): high, medium, low confidence
         </li>
       </ul>
       <div className="mt-3 overflow-x-auto" onMouseLeave={() => setSel(null)}>
@@ -489,7 +488,7 @@ function Ranges() {
           ))}
           {LIFE.map((e) => (
             <line key={e.year} x1={x(e.year + 0.5)} x2={x(e.year + 0.5)} y1={H - 18} y2={H - 8} stroke="var(--color-ink-500)" strokeWidth="1.5">
-              <title>{`${e.year} — ${e.what}`}</title>
+              <title>{`${e.year}: ${e.what}`}</title>
             </line>
           ))}
           {ROWS.map((r, i) => {
@@ -555,7 +554,7 @@ function Ranges() {
                 <span className="font-semibold" style={{ color: PROP }}>
                   Proposed dating (project):
                 </span>{' '}
-                <span className="tabular text-ink-900">{interval(sel.proposal)}</span> · {sel.proposal.confidence} confidence —{' '}
+                <span className="tabular text-ink-900">{interval(sel.proposal)}</span> · {sel.proposal.confidence} confidence.{' '}
                 {sel.proposal.summary} <span className="text-ink-400">Shown beside the inventory's dating, not in its place.</span>
               </p>
             )}
@@ -724,8 +723,9 @@ function Calendar() {
       <H2 id="days">The days he dated</H2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
         Every year with five leaves or more dated to the day, a week to a column, stamps left out.
-        A darker cell, more dated leaves that day. The late notebooks are why this exists: some runs are dated day by
-        day, and the calendar shows the rhythm of the work as the ranges above cannot.
+        The darker the cell, the more leaves dated that day. Some runs of the late notebooks are
+        dated day by day, and the calendar shows the rhythm of that work, which the ranges above
+        cannot.
       </p>
       <div className="mt-3 space-y-1.5 overflow-x-auto">
         {years.map((y) => {
@@ -759,7 +759,7 @@ function Calendar() {
                     onMouseEnter={() => c.n && setSel(c.iso)}
                     style={{ cursor: c.n ? 'pointer' : 'default' }}
                   >
-                    <title>{`${c.iso}${c.n ? ` — ${c.n}` : ''}`}</title>
+                    <title>{`${c.iso}${c.n ? `: ${c.n}` : ''}`}</title>
                   </rect>
                 ))}
               </svg>
@@ -776,7 +776,7 @@ function Calendar() {
                 <a href={`/#${l.folder}/${l.batch}`} className="tabular font-semibold text-ink-900 hover:text-brand-700">
                   n° {l.folder}
                 </a>{' '}
-                p. {l.page} — « {l.written} », {l.context}
+                p. {l.page}: « {l.written} », {l.context}
               </li>
             ))}
           </ul>
@@ -814,8 +814,8 @@ function Register() {
                   <a href={`/#${l.folder}/${l.batch}`} className="tabular hover:text-brand-700">
                     p. {l.page}
                   </a>{' '}
-                  « {l.written} » <span className="text-ink-400">— {l.kind}, {l.context} · {l.where}</span>{' '}
-                  <CommentButton scope="timeline" ctx={leafCtx(l)} text={`« ${l.written} » — ${l.context}`} />
+                  « {l.written} » <span className="text-ink-400">· {l.kind}, {l.context} · {l.where}</span>{' '}
+                  <CommentButton scope="timeline" ctx={leafCtx(l)} text={`« ${l.written} », ${l.context}`} />
                 </li>
               ))}
             </ul>
@@ -842,12 +842,12 @@ export function TimelinePage() {
           </h1>
           <p className="mt-4 text-[15.5px] leading-relaxed text-ink-600">
             Almost nothing in the fonds is dated. The inventory proposes a dating for most folders,
-            but of the {ROWS.length} it dates, {inferred} rest at least in part on a deduction of the
-            archivists' — a verso, a letter, a neighbouring folder — and {UNDATED.length} more carry
-            none at all. The transcriptions have so far found {LEAVES.length} dates on the leaves
-            themselves, in {foldersWithLeaves} folders — {LEAVES.filter(isStamp).length} of them
-            machine stamps on reused paper, which date the paper rather than the writing. This page
-            keeps them all apart.
+            but of the {ROWS.length} it dates, {inferred} rest at least in part on the archivists'
+            deduction from a verso, a letter or a neighbouring folder, and {UNDATED.length} more
+            carry no dating at all. The transcriptions have so far found {LEAVES.length} dates on
+            the leaves themselves, in {foldersWithLeaves} folders; {LEAVES.filter(isStamp).length} of
+            them are machine stamps on reused paper, which date the paper rather than the writing.
+            The figures below keep each kind of date apart.
           </p>
         </header>
 
@@ -860,7 +860,7 @@ export function TimelinePage() {
         <section className="mt-12">
           <H2 id="life">The life, where it is sourced</H2>
           <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
-            Only what a reference work states, for orientation against the ranges above — not a
+            Events a reference work states, given as landmarks for the ranges above; this is not a
             biography.
           </p>
           <ul className="mt-3 space-y-1.5 text-[13px] text-ink-700">

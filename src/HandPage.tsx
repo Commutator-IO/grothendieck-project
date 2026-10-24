@@ -118,8 +118,8 @@ function InHisWords() {
     <section className="mt-12">
       <H2 id="words">In his words</H2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
-        {QUOTES.length} passages where the notes stop proving and say something — about the work,
-        his mistakes, what he hoped for, what he made of others’ work. Chosen by reading, from{' '}
+        {QUOTES.length} passages where the notes stop proving and say something about the work,
+        his mistakes, what he hoped for, or what he made of others’ work. They were chosen by reading, from{' '}
         {new Set(QUOTES.map((q) => q.folder)).size} folders; letters already printed in the
         correspondence with Serre are left out, and so are texts in other hands. The words are the
         machine transcription’s: each links to its page, beside Montpellier’s facsimile.
@@ -187,10 +187,10 @@ function LegibilityOverTime() {
     <section className="mt-12">
       <H2 id="over-time">What could not be read, folder by folder, against the inventory's dating</H2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
-        Each dot is a folder, placed at the middle of the archivists' dating — a guess from a
-        verso more often than a date he wrote — and at the share of its words the first pass left{' '}
-        <code className="rounded bg-ink-100 px-1 text-[12px]">\ill{'{}'}</code>. A larger dot, more pages
-        read. Undated folders stand in the column at the right.
+        Each dot is a folder. It sits at the middle of the archivists' dating, which is more often a
+        guess from a verso than a date he wrote, and at the share of its words the first pass left{' '}
+        <code className="rounded bg-ink-100 px-1 text-[12px]">\ill{'{}'}</code>. A larger dot means more
+        pages read. Undated folders stand in the column at the right.
       </p>
       <div className="mt-3 overflow-x-auto" onMouseLeave={() => setSel(null)}>
         <svg
@@ -234,7 +234,7 @@ function LegibilityOverTime() {
                     stroke="#fff"
                     strokeWidth="1.5"
                   />
-                  <title>{`n° ${f.id} — ${pct(unread(f))} unread`}</title>
+                  <title>{`n° ${f.id}: ${pct(unread(f))} unread`}</title>
                 </g>
               );
             })}
@@ -299,7 +299,7 @@ function FolderTable() {
     <section className="mt-12">
       <H2 id="folders">Every folder read so far</H2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
-        Rates rather than counts, so that a folder of forty pages sits beside one of four hundred.
+        The columns give rates, so that a folder of forty pages sits beside one of four hundred.
         Sort by any column; the bars are scaled to the column's largest value.
       </p>
       <div className="mt-3 max-h-[34rem] overflow-auto rounded-[var(--radius-card)] border border-ink-200 bg-white">
@@ -371,8 +371,8 @@ function Multiples() {
     <section className="mt-12">
       <H2 id="strips">The same measures across the fonds, in shelfmark order</H2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
-        One strip per measure, one bar per folder, the folders in the inventory's order — which is
-        roughly by subject: crystals, motives, topoi, then the long runs of the 1980s. Hover a bar
+        One strip per measure and one bar per folder, with the folders in the inventory's order,
+        which is roughly by subject: crystals, motives, topoi, then the long runs of the 1980s. Hover a bar
         to read the folder across all five.
       </p>
       <div className="mt-3 overflow-x-auto" onMouseLeave={() => setSel(null)}>
@@ -427,7 +427,7 @@ function Multiples() {
       <p className="tabular mt-2 min-h-[1.5em] text-[12.5px] text-ink-600">
         {sel ? (
           <>
-            <span className="font-semibold text-ink-900">n° {sel.id}</span> {shortTitle(sel.title)} —{' '}
+            <span className="font-semibold text-ink-900">n° {sel.id}</span> {shortTitle(sel.title)}:{' '}
             {measures.map((m) => `${m.label.toLowerCase()} ${m.fmt(sel)}`).join(' · ')}
           </>
         ) : (
@@ -449,9 +449,9 @@ function Languages() {
     <section className="mt-12">
       <H2 id="languages">The languages he wrote in</H2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
-        {french} of the {FOLDERS.length} folders are in French throughout. The others, where a second
-        language carries at least a fifth as many of its common words as the first — letters to
-        and from colleagues abroad, notes written for them:
+        {french} of the {FOLDERS.length} folders are in French throughout. In the others, listed
+        below, a second language carries at least a fifth as many of its common words as the first.
+        They are letters to and from colleagues abroad, and notes written for them.
       </p>
       <ul className="mt-2 grid gap-x-6 gap-y-1 text-[12.5px] text-ink-600 sm:grid-cols-2">
         {mixed.map((f) => (
@@ -521,9 +521,9 @@ export function HandPage() {
           </h1>
           <p className="mt-4 text-[15.5px] leading-relaxed text-ink-600">
             He wrote fast, in ink and pencil, over and between his own lines, and struck as freely as
-            he wrote. This page counts what the transcriptions record of that: words left
-            unread, readings marked doubtful, strike-outs and insertions, margins, diagrams and
-            drawings — folder by folder, across the {FOLDERS.length} folders begun so far.
+            he wrote. The counts below are what the transcriptions record of that, folder by folder
+            across the {FOLDERS.length} folders begun so far: words left unread, readings marked
+            doubtful, strike-outs and insertions, margins, diagrams and drawings.
           </p>
         </header>
 

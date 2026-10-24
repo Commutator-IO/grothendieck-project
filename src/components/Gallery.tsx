@@ -147,7 +147,7 @@ export function Gallery({
         <iframe
           key={src}
           src={src}
-          title={`${noun[1]} — ${folder ? `folder ${folder.id}` : richestLabel}`}
+          title={`${noun[1]}, ${folder ? `folder ${folder.id}` : richestLabel.toLowerCase()}`}
           className="mt-3 h-[36rem] w-full rounded-[var(--radius-card)] border border-ink-200 bg-white"
         />
         <p className="mt-2 text-[12px] text-ink-400">‹ › or the arrow keys, once the frame has the focus, turn the slides.</p>

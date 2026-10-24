@@ -193,8 +193,8 @@ export function ReviewPage() {
               <a className="text-brand-700 underline" href="https://github.com/Commutator-IO/grothendieck-project/issues/35">
                 issue #35
               </a>{' '}
-              that need a reader of French handwriting: one spot of a page at a time, with Montpellier’s facsimile
-              beside it, each a plain question with its answers as buttons. A few, under « For mathematicians », ask
+              that need a reader of French handwriting. Each is one spot of a page, shown beside Montpellier’s
+              facsimile, with a plain question and its answers as buttons. A few, under « For mathematicians », ask
               instead whether an argument or a reference of the edition holds. Your answers stay in this browser until
               you send them as a prefilled GitHub issue.
             </p>
@@ -378,10 +378,10 @@ export function ReviewPage() {
                     ? `${sendable.length} answer${sendable.length === 1 ? '' : 's'} to send (skipped checks are left out). `
                     : 'No answers yet. '}
                   Sending opens GitHub’s new-issue form, prefilled and referencing #35; nothing is published until you
-                  submit it, and it needs a GitHub account. Only your verdict, your reading (fifteen words at most) and
-                  your note go into it — no transcription text.
+                  submit it, and it needs a GitHub account. The issue carries only your verdict, your reading (fifteen
+                  words at most) and your note, and no transcription text.
                   {issues.length > 1 &&
-                    ` The answers are too many for one link: they go in ${issues.length} issues, one per part, or copy them as Markdown into one.`}
+                    ` There are too many answers for one link, so they go in ${issues.length} issues, one per part; you can also copy them as Markdown into a single issue.`}
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   <button
@@ -571,7 +571,7 @@ function Answering({
         </form>
       )}
       <label className="mt-3 block text-[12.5px] text-ink-600" htmlFor="note">
-        Note (optional) — what makes you sure, or unsure
+        Note (optional): what makes you sure or unsure
       </label>
       <textarea
         id="note"
@@ -584,7 +584,7 @@ function Answering({
       {answer && (
         <p className="mt-1 text-[12px] text-ink-500">
           Your answer: {answerName(item, answer)}
-          {answer.reading ? ` — « ${answer.reading} »` : ''}.{' '}
+          {answer.reading ? `, « ${answer.reading} »` : ''}.{' '}
           <button type="button" className="underline" onClick={onClear}>
             Clear
           </button>

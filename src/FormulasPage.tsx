@@ -31,9 +31,9 @@ export function FormulasPage() {
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink-400">Formulas</p>
           <h1 className="titre mt-2 text-[30px] leading-tight text-ink-900">The displayed formulas, one at a time</h1>
           <p className="mt-4 text-[15.5px] leading-relaxed text-ink-600">
-            Every formula he set apart from the text — {FM.total.toLocaleString('en-GB')} of them in{' '}
-            {FM.folders.length} folders — as the transcriptions give them, with what could not be read left unread: an
-            illegible index stays illegible. The richest come first, then a folder at a time.
+            The {FM.total.toLocaleString('en-GB')} formulas he set apart from the text, in {FM.folders.length} folders,
+            as the transcriptions give them. What could not be read is left unread, so an illegible index stays
+            illegible. The richest come first, then a folder at a time.
           </p>
         </header>
 
@@ -66,13 +66,13 @@ export function FormulasPage() {
         />
 
         <section className="mt-12 max-w-[46em] text-[13px] leading-relaxed text-ink-500">
-          <h2 className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">How this page is made</h2>
+          <h2 className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">How the formulas are counted</h2>
           <p className="mt-2">
-            A formula counts here when the transcription sets it apart — <code>\[…\]</code>, <code>equation</code>,{' '}
-            <code>align</code>, <code>gather</code> — and not when it runs in the text. « Richest » is a count, not a
-            judgement: the distinct symbols a formula uses — a letter in a given alphabet, so that 𝒞 is not C, a named
-            symbol such as ⊗ or lim, an operator — and, after that, how many it writes. It finds the formulas that
-            carry the most, not the ones that matter most, which no count can find. So far {progress.transcribed} of
+            A formula counts here when the transcription sets it apart (<code>\[…\]</code>, <code>equation</code>,{' '}
+            <code>align</code>, <code>gather</code>), not when it runs in the text. « Richest » is a count: first the
+            distinct symbols a formula uses (a letter in a given alphabet, so that 𝒞 is not C; a named symbol such as ⊗
+            or lim; an operator), then how many it writes. It finds the formulas that carry the most, which are not
+            always the ones that matter most; no count can find those. So far {progress.transcribed} of
             the {progress.total} batches nobody else has edited are transcribed ({progress.share}); none has been
             checked against the facsimile by a person.
           </p>

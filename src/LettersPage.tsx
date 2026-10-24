@@ -333,16 +333,16 @@ export function LettersPage() {
           </h1>
           <p className="mt-4 text-[15.5px] leading-relaxed text-ink-600">
             The fonds is working notes, not a correspondence, but letters turn up in it: carbons of
-            his, answers filed with the mathematics they answer, drafts broken off. This is a register
-            of those the transcriptions have found so far — where each one is, when, with whom, and
-            how the site gives it.
+            his, answers filed with the mathematics they answer, drafts broken off. The register below
+            lists those the transcriptions have found so far, with where each one is, when it was
+            written, with whom, and how the site gives it.
           </p>
         </header>
 
         <div className="mt-6 max-w-[44em] rounded-[var(--radius-card)] border border-encours-200 bg-encours-50 px-4 py-3 text-[13px] leading-relaxed text-ink-700">
           <strong className="font-semibold">A register, not the letters.</strong> Letters from others
-          may not be circulated without permission, and those already published — the
-          Grothendieck–Serre correspondence — stay condensed. People who are not public figures are
+          may not be circulated without permission, and those already published (the
+          Grothendieck–Serre correspondence) stay condensed. People who are not public figures are
           not named. The count grows only as folders are read: {ys.length ? `${Math.min(...ys)}–${Math.max(...ys)}` : ''} is
           the span found so far, not the span of his correspondence.
         </div>
@@ -360,8 +360,8 @@ export function LettersPage() {
 
         <p className="mt-12 max-w-[44em] text-[12px] leading-relaxed text-ink-400">
           src/content/letters.json, built on {RAW.built} by reading the transcriptions' headers and
-          pages; every record carries the file and line it rests on. Letters only referred to — « ma
-          lettre à Verdier » — are left out unless the folder holds them.
+          pages; every record carries the file and line it rests on. Letters only referred to, such
+          as « ma lettre à Verdier », are left out unless the folder holds them.
         </p>
       </main>
 

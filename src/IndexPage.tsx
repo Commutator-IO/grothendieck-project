@@ -161,7 +161,7 @@ function Subjects({ list }: { list: Subject[] }) {
             {other ? (
               <details className="mt-2">
                 <summary className="cursor-pointer text-[12.5px] text-ink-500">
-                  Keywords the thirty subjects do not place — shown on request
+                  Keywords the thirty subjects do not place (open to show)
                 </summary>
                 {body}
               </details>
@@ -207,9 +207,9 @@ export function IndexPage() {
             Names, works and subjects, to the folder and the batch
           </h1>
           <p className="mt-4 text-[15.5px] leading-relaxed text-ink-600">
-            A way into the {IDX.coverage.folders} folders begun so far for a reader who arrives with
-            a name or a subject in mind. Every entry leads to the batch where it occurs, and the
-            batch opens beside its facsimile.
+            For a reader who arrives with a name or a subject in mind, a way into the{' '}
+            {IDX.coverage.folders} folders begun so far. Every entry leads to the batch where it
+            occurs, and the batch opens beside its facsimile.
           </p>
         </header>
 
@@ -218,8 +218,8 @@ export function IndexPage() {
           <ul className="mt-2 list-disc space-y-1.5 pl-5">
             <li>
               <strong>People</strong> are those the folders hold a letter to or from, a text by, or an
-              attribution to — « th. de Hodge », « d'après Deligne » — and not an object that merely
-              bears a name, « groupe de Galois ». People who are not public figures are not named.
+              attribution to (« th. de Hodge », « d'après Deligne »). An object that merely bears a
+              name, such as « groupe de Galois », does not count. People who are not public figures are not named.
             </li>
             <li>
               <strong>His works cited</strong> are EGA, SGA and FGA where a leaf names a volume, the
@@ -267,8 +267,8 @@ export function IndexPage() {
         {facet === 'works' && (
           <>
             <p className="mt-4 max-w-[44em] text-[12.5px] text-ink-500">
-              After each batch, the precise references where the leaf gives them — the exposé, the
-              section, the number.
+              After each batch come the precise references where the leaf gives them: the exposé,
+              the section, the number.
             </p>
             <Entries list={works} letters={false} />
           </>
