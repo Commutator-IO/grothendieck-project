@@ -455,8 +455,7 @@ also builds and validates the jTEI submission).
 ### Why the transcript pane is an iframe
 
 It wears [ar5iv](https://github.com/dginev/ar5iv-css)'s stylesheet — the one
-LaTeXML produces for arXiv articles, shared verbatim with
-[tipe.commutator.io](https://tipe.commutator.io) — which claims `:root`, `body`
+LaTeXML produces for arXiv articles — which claims `:root`, `body`
 and a hundred generic element selectors. Dropped into a Tailwind page it would
 fight everything; scoped by hand it would no longer be the same stylesheet. A
 same-origin frame keeps it verbatim, and still lets the parent watch it scroll.

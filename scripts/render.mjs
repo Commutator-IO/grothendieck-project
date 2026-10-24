@@ -932,8 +932,7 @@ export function readingPage({ meta, lang, name, html, extraStyle = '' }) {
   /* ar5iv exposes its body font through a token, and its default is Noto
      Serif — a font this document does not load, so the value was resolving to
      a generic serif and the text was set in whatever the browser had. Hooking
-     the site's own stack into the token fixes every selector at once, which is
-     what tipe.commutator.io does with the same stylesheet. */
+     the site's own stack into the token fixes every selector at once. */
   :root {
     color-scheme: light;
     --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
