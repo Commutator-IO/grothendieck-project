@@ -396,8 +396,8 @@ rendered with an arrow missing asserts a commutation nobody wrote.
 ## The Lean appendix
 
 [`lean/`](lean/README.md) proves in Lean 4, against mathlib, statements the
-modernised readings make: 72 folders, one file each, and two Bourbaki
-rédactions, **2,146 theorems** (`cat lean/Grothendieck/*.lean | grep -c
+modernised readings make: 73 folders, one file each, and two Bourbaki
+rédactions, **2,149 theorems** (`cat lean/Grothendieck/*.lean | grep -c
 '^theorem'`). CI builds it with every warning an error, and lean-action's axiom audit fails
 on any axiom beyond Lean's three standard ones (`sorry` and `native_decide`
 included). A proof says that what a reading states **holds

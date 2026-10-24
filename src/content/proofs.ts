@@ -424,6 +424,19 @@ export const PROOFS: Proof[] = [
     theorems: ['monadicite', 'descente', 'caracterisation_gabriel_ulmer', 'lemme_ind'],
   },
   {
+    folder: '161-3',
+    batch: 1,
+    page: '10–11',
+    name: 'Topos of a product, the converse',
+    statement:
+      'If every non-empty locally closed subset of X has a point with a quasi-compact neighbourhood in it, Top(X × Y) → Top(X) × Top(Y) is an equivalence for every space Y. In the model the page works in: a set S of pairs (U, V) of opens, stable under shrinking and under unions in each variable, contains every rectangle U × V covered by its own rectangles.',
+    found:
+      'Holds as the reading completes it, for arbitrary X and Y, by the page’s maximality argument; the step the page skips, U″ ⊂ U′ ∪ ⋃ Uᵢ, is a two-line case split. It follows that such sets S correspond one to one with the opens of X × Y (eq_rect, iUnion_rect). Not formalised: the dictionary between these sets, the frame coproduct of the open-set frames and the 2-product of topoi — mathlib has neither frame coproducts nor 2-products of topoi. Isbell 1981 (Th. 4) proves the same statement under a neighbouring hypothesis.',
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder161_3.lean',
+    theorems: ['covering', 'iUnion_rect', 'eq_rect'],
+  },
+  {
     folder: '11',
     batch: 3,
     page: '50–56',

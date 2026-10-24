@@ -36,6 +36,7 @@ export const FINDINGS: Finding[] = [
     status: 'matched',
     settle:
       'Matched: Isbell 1981, Theorem 4, proves the same statement — the localic product of X with every space Y is the space X × Y if every non-empty closed subset of X has a point with a quasi-locally compact neighbourhood in it — by transfinite induction from the tube argument (his Theorem 1); the converse holds for completely regular X. For sober X his hypothesis implies the page’s, and they coincide for Hausdorff X (the edition’s remark); the page’s single maximality argument replaces the induction. Whether the page’s hypothesis is strictly weaker for non-Hausdorff sober spaces is open.',
+    lean: { file: 'lean/Grothendieck/Folder161_3.lean', found: 'The covering argument holds as the reading completes it, for arbitrary X and Y (covering): under the page’s hypothesis, a set of pairs of opens stable under shrinking and under unions in each variable contains every rectangle its rectangles cover, so these sets correspond one to one with the opens of X × Y (eq_rect, iUnion_rect). The identification of these sets with the frame coproduct, and of that with the 2-product of topoi, is not formalised: mathlib has no frame coproducts.' },
   },
   {
     id: '161-3-infinite-product-criterion',
