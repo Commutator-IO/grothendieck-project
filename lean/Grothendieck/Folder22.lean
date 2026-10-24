@@ -10,6 +10,7 @@ import Mathlib.LinearAlgebra.TensorProduct.Basis
 import Mathlib.Algebra.MvPolynomial.Expand
 import Mathlib.Algebra.CharP.Frobenius
 import Mathlib.Algebra.Field.ZMod
+import Mathlib.RingTheory.PowerSeries.Substitution
 
 /-!
 # Folder 22, Lemme 3.3, Corollaires 3.4, 3.5, and the obstruction of pp. 22, 24
@@ -78,8 +79,12 @@ What is proved:
   not formally smooth over `K`, and, « plus précisément », no derivation
   `K[[t]] → K[[t]] ⊗_K Ω_{K/R}` induces `d_{K/R}`. Neither characteristic 0 nor the
   choice of `ℚ(x_i)` is used: only a basis of `Ω` containing infinitely many `d aₙ`, which
-  over a field can always be extracted from the spanning family `(da)`. The page has
-  `n > 0` variables; only `n = 1` is formalised. Its « a fortiori … sur k » rests on a
+  over a field can always be extracted from the spanning family `(da)`.
+* `incl`, `proj`, `no_derivation_mv` — the page's `n > 0` variables (finding
+  `22-p23-proposition-reconstruction`): no derivation
+  `K⟦t₁, …, tₙ⟧ → K⟦t₁, …, tₙ⟧ ⊗_K Ω_{K/R}` induces `d_{K/R}`. Restricting along
+  `t ↦ t_{i₀}` and projecting along `t_i ↦ 0` for `i ≠ i₀` (a retraction of `K`-algebras)
+  turns such a derivation into one in a single variable. Its « a fortiori … sur k » rests on a
   relative notion the folder does not define and is not formalised.
 
 **What the formalisation finds.**
@@ -748,5 +753,71 @@ theorem contre_exemple_page26 :
   exact zero_ne_one h1
 
 end Contre
+
+/-! ### Page 23 in `n` variables -/
+
+section SeveralVariables
+
+open PowerSeries
+
+variable {R K : Type*} [CommRing R] [Field K] [Algebra R K] {σ : Type*} [Finite σ]
+  [DecidableEq σ]
+
+/-- `f(t) ↦ f(t_{i₀})`, from `K⟦t⟧` to `K⟦t₁, …, tₙ⟧`. -/
+noncomputable def incl (i₀ : σ) : K⟦X⟧ →ₐ[K] MvPowerSeries σ K :=
+  PowerSeries.substAlgHom (PowerSeries.HasSubst.of_constantCoeff_zero (by simp))
+    (a := MvPowerSeries.X i₀)
+
+/-- `t_{i₀} ↦ t`, `t_i ↦ 0` for `i ≠ i₀`. -/
+noncomputable def proj (i₀ : σ) : MvPowerSeries σ K →ₐ[K] K⟦X⟧ :=
+  MvPowerSeries.substAlgHom (MvPowerSeries.hasSubst_of_constantCoeff_zero
+    (a := fun s : σ => if s = i₀ then (PowerSeries.X : K⟦X⟧) else 0) fun s => by
+      split_ifs
+      exacts [PowerSeries.constantCoeff_X, map_zero _])
+
+theorem proj_incl (i₀ : σ) (f : K⟦X⟧) : proj i₀ (incl i₀ f) = f := by
+  simp only [proj, incl, MvPowerSeries.coe_substAlgHom, PowerSeries.coe_substAlgHom]
+  rw [PowerSeries.subst_def, MvPowerSeries.subst_comp_subst_apply
+    (PowerSeries.HasSubst.of_constantCoeff_zero (by simp)).const
+    (MvPowerSeries.hasSubst_of_constantCoeff_zero fun s => by
+      split_ifs
+      exacts [PowerSeries.constantCoeff_X, map_zero _])]
+  rw [MvPowerSeries.subst_X (MvPowerSeries.hasSubst_of_constantCoeff_zero fun s => by
+      split_ifs
+      exacts [PowerSeries.constantCoeff_X, map_zero _])]
+  simp only
+  exact PowerSeries.X_subst f
+
+/-- **Page 23's Proposition in `n ≥ 1` variables**: for a field `K` over `R` with `Ω_{K/R}`
+infinite-dimensional, no derivation `K⟦t₁, …, tₙ⟧ → K⟦t₁, …, tₙ⟧ ⊗_K Ω_{K/R}` induces
+`d_{K/R}` on `K`. Restricting along `t ↦ t_{i₀}` and projecting along `t_i ↦ 0`, `i ≠ i₀`,
+gives such a derivation in one variable, which `no_derivation_of_field` excludes. -/
+theorem no_derivation_mv (i₀ : σ) (h : ¬ Module.Finite K Ω[K⁄R]) :
+    ¬ ∃ D : Derivation R (MvPowerSeries σ K) (MvPowerSeries σ K ⊗[K] Ω[K⁄R]),
+      ∀ c, D (MvPowerSeries.C c) = 1 ⊗ₜ KaehlerDifferential.D R K c := by
+  rintro ⟨D, hD⟩
+  let φ : MvPowerSeries σ K ⊗[K] Ω[K⁄R] →ₗ[K] K⟦X⟧ ⊗[K] Ω[K⁄R] :=
+    LinearMap.rTensor _ (proj i₀).toLinearMap
+  have hφ : ∀ (a : MvPowerSeries σ K) (t : MvPowerSeries σ K ⊗[K] Ω[K⁄R]),
+      φ (a • t) = proj i₀ a • φ t := by
+    intro a t
+    induction t using TensorProduct.inductionOn with
+    | tmul x ω => simp [φ, TensorProduct.smul_tmul']
+    | add x y hx hy => rw [smul_add, map_add, hx, hy, map_add, smul_add]
+  let L : K⟦X⟧ →ₗ[R] K⟦X⟧ ⊗[K] Ω[K⁄R] :=
+    (φ.restrictScalars R) ∘ₗ D.toLinearMap ∘ₗ ((incl i₀).restrictScalars R).toLinearMap
+  have hL : ∀ f, L f = φ (D (incl i₀ f)) := fun _ => rfl
+  refine no_derivation_of_field R K h ⟨Derivation.mk' L fun f g => ?_, fun c => ?_⟩
+  · rw [hL, hL, hL, map_mul, Derivation.leibniz, map_add, hφ, hφ, proj_incl, proj_incl]
+  · change L (C c) = _
+    rw [hL]
+    have : incl i₀ (C c) = MvPowerSeries.C c := by
+      have h := (incl i₀).commutes c
+      rw [PowerSeries.algebraMap_apply, Algebra.algebraMap_self, RingHom.id_apply] at h
+      rw [h, MvPowerSeries.c_eq_algebraMap]
+    rw [this, hD]
+    simp [φ]
+
+end SeveralVariables
 
 end Grothendieck.Folder22
