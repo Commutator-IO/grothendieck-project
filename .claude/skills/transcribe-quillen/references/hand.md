@@ -161,3 +161,16 @@ and `\ill{}` stands.
 - A heredoc line `\end{document}` typed through `echo` without `-e`-safe
   quoting can arrive as ESC + « nd{document} » (invalid character at the
   last line): append it with printf '%s\n' or inside the heredoc.
+
+## 2026-10-24 — 1983 unnumbered files (Ideas, notes, lecture notes 0-15)
+
+- For a label with spaces (« 1983-Lecture Notes 5 Quillen ») the directory
+  takes underscores but `\notebook{}` must keep the spaces: an underscore
+  in `\notebook{}` breaks the compile (« Missing $ inserted »).
+- The lecture-notes files mix his notes of others' talks with leaves of his
+  own (graduate-class preparation in LN 6, a Kronecker-foliation
+  calculation in LN 11, Hall-effect reflections in LN 14): say in the
+  header which leaves are which. Several files end with blank leaves; give
+  them a \page and a « blank leaf » note so the page count matches.
+- « Contents template2.pdf » is a typeset contents list, not his hand:
+  skipped.
