@@ -334,7 +334,7 @@ unused. Any failure fails the deploy; so does `npm run check-tei`, which
 compares the TEI reading view with the `.tex` one page by page. Locally it
 needs Java.
 
-**As of 21 October 2026, 638 batches are transcribed — 164 folders, 9,415
+**As of 24 October 2026, 638 batches are transcribed — 164 folders, 9,414
 pages.** Every folder no edition covers has a first pass, and six folders an
 edition covers are partly transcribed as well. Every transcribed folder also
 has its modernised reading, taken whole, in current notation. A second

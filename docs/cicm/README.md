@@ -9,14 +9,19 @@ of the statements in Lean (`lean/`), with the appendix
 
 - `article.tex` — the paper, in `llncs` (tectonic fetches the class and
   `splncs04.bst` from CTAN; nothing is vendored); `references.bib` its
-  bibliography, every entry checked on 21 October 2026 (DOIs on Crossref,
-  arXiv identifiers on the arXiv API, two items on zbMATH Open, URLs by
-  request).
+  bibliography, every entry checked on 21 October 2026 and those added since
+  on 25 October (DOIs on Crossref, arXiv identifiers on the arXiv API, two
+  items on zbMATH Open, URLs by request).
 - `fig-pipeline.tex` — the pipeline from page to theorem, drawn by hand,
   because it states decisions and not data.
-- `figures.mjs` — draws `fig-themes.tex`, the theorems per part of the Lean
-  appendix, from the Lean files **as committed at HEAD** (not the working
-  tree) and the `\part`s of `docs/lean/article.tex`.
+- `figures.mjs` — reads the repository **at one commit** (`SNAPSHOT`, now
+  8aecaa3; never the working tree) and writes `fig-themes.tex`, the theorems
+  per part of the Lean appendix, and `fig-counts.tex`, every count the text
+  cites as a `\cnt…` macro: Lean files, lines and declarations, proof cards
+  and verdicts, the appendix's labels and pages, commits, findings,
+  transcription totals, review answers. Moving `SNAPSHOT` is deliberate:
+  rerun, then reread the prose around the numbers (the errors on the page,
+  folder 146).
 - `article.pdf` — built and committed; the deploy copies it to
   `public/article/grothendieck-cicm.pdf` (`npm run article-tei`), linked from
   the Method page, `public/llms.txt` and the repository README.
@@ -31,31 +36,30 @@ CICM 2027 is announced for 19–23 July 2027 in Erlangen; its call for papers
 was not yet online on 21 October 2026 (the 2027 page still showed the 2026
 call). The 2026 call allowed regular papers and project and survey papers of
 **up to 15 pages plus bibliography** in LNCS style, submitted on EasyChair;
-the 2026 deadlines were in April. This draft is 12 pages, the body ending on
-page 11, references included, so there are about four pages to spare.
+the 2026 deadlines were in April. This draft is 16 pages, the body ending on
+page 13 and the references after it, so there are about two pages to spare.
+It fits the « project and survey » category best. Springer compiles with
+pdfLaTeX; the site copy is built with XeTeX (tectonic), and the pdfLaTeX
+branch of the preamble has not been run here.
 Check the 2027 call when it appears (limit, category, deadlines, whether the
 review is double-blind: if it is, an anonymous version is needed).
 
 ## What remains to check
 
-- Every figure is read from the repository at commit time (2,052 theorems,
-  69 files, 39,722 lines, 463 findings, 69 proof cards and their verdicts,
-  the triage of #54, the review figures of 21 October, 41 pull requests).
-  They move: rerun `figures.mjs` and recount before submission.
-- Folder 146: the columns n = 5 and n = 6 of page 70 are in Lean (L of
-  order 4 and 5, L_i of order 12 and 20); Section 5, the abstract and the
-  conjectures section say so. The general formula is not formalised.
-- The Mathlib section reports the record of the pull requests on 21 October
-  2026 only; recheck the states before submission, and keep to what the
-  threads say.
+- The counts are frozen at 8aecaa3 (24 October 2026). Before submission,
+  move `SNAPSHOT`, rerun `figures.mjs` and reread the paragraphs that comment
+  on the numbers.
+- The pull requests (39, all closed, 36 by the triage account) were counted
+  on 25 October 2026; recheck before submission. J. Riou's and E. Wieser's
+  public comments are paraphrased: consider telling them.
 - The conjectures table is taken from `docs/conjectures/article.tex`, whose
   readings are machine transcriptions; its dates and pages are not checked
-  on the facsimile.
-- Bost–Charles 2016 and Grothendieck 1966/1969 are cited in the table by
-  name only, without bibliography entries: add them, verified, if the table
-  stays.
-- Co-authors, acknowledgements, and the AI declaration's final wording are
-  the author's to decide.
+  on the facsimile (the caption says so).
+- Folder 146: the odd-n Picard groups were recomputed by the edition and are
+  not checked; the paper says so.
+- Kleiman 1968 and 1994, Cisinski 2006, Maltsiniotis 2005, Williams 1969:
+  theorem numbers taken from the repository's readings, not rechecked.
+- Co-authors and acknowledgements are the author's to decide.
 
 ## Licence
 
