@@ -5,6 +5,7 @@ import Mathlib.Topology.NoetherianSpace
 import Mathlib.Topology.Sober
 import Mathlib.Topology.Category.TopCat.Opens
 import Mathlib.CategoryTheory.Category.Cat
+import Grothendieck.Upstream.PrimaryComponentInjective
 
 /-!
 # Folder 21, Proposition 2.15 and Corollaire 2.16: `I`-torsion and injectivity
@@ -38,7 +39,8 @@ What is proved, as the reading states it:
 * `proposition2_15` — for `A` Noetherian and `H` of `I`-power torsion,
   `H` injective ⟺ `Hom(-,H)` exact on `𝒞`. The proof is the typescript's:
   Baer's criterion, the image of `u` killed by one power `Iⁿ`, Artin–Rees in
-  the form `N ∩ I^{n+k} ⊆ IⁿN`, and the extension along `N/(N ∩ Iᵐ) ↪ A/Iᵐ`.
+  the form `N ∩ I^{n+k} ⊆ IⁿN`, and the extension along `N/(N ∩ Iᵐ) ↪ A/Iᵐ`; that
+  argument is `Ideal.injective_of_primaryComponent_eq_top` (`Upstream/`).
 * `corollaire2_16` — `Γ_I` preserves injectives over a Noetherian ring.
 
 The bulk of the folder (2.1–2.14: abelian categories, cohomological functors,
@@ -96,25 +98,6 @@ def gammaI (K : Type*) [AddCommGroup K] [Module A K] : Submodule A K where
     rintro c x ⟨n, hn⟩
     exact ⟨n, fun a ha => by rw [smul_comm, hn a ha, smul_zero]⟩
 
-/-- A finitely generated module all of whose elements are killed by powers of `I`
-is killed by a single power: « son image est un sous-module de type fini de `H`,
-donc annulé par une puissance de `I` ». -/
-theorem tue_de_type_fini {H M : Type*} [AddCommGroup H] [Module A H] [AddCommGroup M]
-    [Module A M] [Module.Finite A M] (hH : TorsionI I H) (g : M →ₗ[A] H) :
-    ∃ n : ℕ, ∀ a ∈ I ^ n, ∀ x : M, a • g x = 0 := by
-  classical
-  obtain ⟨k, s, hs⟩ := Module.Finite.exists_fin (R := A) (M := M)
-  choose e he using fun i => hH (g (s i))
-  refine ⟨Finset.univ.sup e, fun a ha x => ?_⟩
-  have hx : x ∈ Submodule.span A (Set.range s) := hs ▸ Submodule.mem_top
-  induction hx using Submodule.span_induction with
-  | mem y hy =>
-    obtain ⟨i, rfl⟩ := hy
-    exact he i a (Ideal.pow_le_pow_right (Finset.le_sup (Finset.mem_univ i)) ha)
-  | zero => rw [map_zero, smul_zero]
-  | add y z _ _ hy hz => rw [map_add, smul_add, hy, hz, add_zero]
-  | smul c y _ hy => rw [map_smul, smul_comm, hy, smul_zero]
-
 /-- **Proposition 2.15.** Over a Noetherian ring, an `I`-power-torsion module `H`
 is injective if and only if `Hom(-,H)` is right exact on `𝒞`. -/
 theorem proposition2_15 [IsNoetherianRing A] (H : Type u) [AddCommGroup H] [Module A H]
@@ -122,50 +105,17 @@ theorem proposition2_15 [IsNoetherianRing A] (H : Type u) [AddCommGroup H] [Modu
   constructor
   · -- La nécessité est triviale.
     exact fun hinj M _ _ _ _ N f => hinj.out N.subtype N.injective_subtype f
-  · intro hC
-    refine Module.Baer.injective fun J g => ?_
-    -- The image of `g` is killed by one power `Iⁿ` …
-    obtain ⟨n, hn⟩ := tue_de_type_fini I hH g
-    -- … so `g` vanishes on `IⁿJ`.
-    have hgIJ : ∀ x (hx : x ∈ I ^ n • J), g ⟨x, Submodule.smul_le_right hx⟩ = 0 := by
-      intro x hx
-      induction hx using Submodule.smul_induction_on' with
-      | smul a ha y hy =>
-        have : (⟨a • y, Submodule.smul_le_right (Submodule.smul_mem_smul ha hy)⟩ : J) =
-          a • ⟨y, hy⟩ := rfl
-        rw [this, map_smul, hn a ha]
-      | add x hx y hy hx' hy' =>
-        have : (⟨x + y, Submodule.smul_le_right (Submodule.add_mem _ hx hy)⟩ : J) =
-          ⟨x, Submodule.smul_le_right hx⟩ + ⟨y, Submodule.smul_le_right hy⟩ := rfl
-        rw [this, map_add, hx', hy', add_zero]
-    -- Artin–Rees: `J ∩ I^{n+k} ⊆ IⁿJ`.
-    obtain ⟨k, hk⟩ := Ideal.exists_pow_inf_eq_pow_smul I J
-    set m := n + k
-    have hAR : ∀ x ∈ J, x ∈ I ^ m → x ∈ I ^ n • J := by
-      intro x hxJ hxm
-      have h1 : x ∈ I ^ m • (⊤ : Ideal A) ⊓ J := ⟨by rwa [Ideal.smul_eq_mul, Ideal.mul_top], hxJ⟩
-      rw [hk m (by omega), show m - k = n by omega] at h1
-      exact Submodule.smul_mono le_rfl inf_le_right h1
-    -- `J → A/Iᵐ`, whose kernel is `J ∩ Iᵐ`, on which `g` vanishes.
-    let φ : J →ₗ[A] A ⧸ I ^ m := (I ^ m).mkQ ∘ₗ J.subtype
-    have hker : LinearMap.ker φ ≤ LinearMap.ker g := by
-      intro x hx
-      have h0 : Ideal.Quotient.mk (I ^ m) (x : A) = 0 := by simpa [φ] using hx
-      simpa using hgIJ x (hAR x x.2 (Ideal.Quotient.eq_zero_iff_mem.1 h0))
-    let u' : LinearMap.range φ →ₗ[A] H :=
-      (LinearMap.ker φ).liftQ g hker ∘ₗ φ.quotKerEquivRange.symm.toLinearMap
-    -- `A/Iᵐ` is in `𝒞`, so `u'` extends to it.
-    have hM : TueParPuissance I (A ⧸ I ^ m) := by
-      refine ⟨m, fun a ha x => ?_⟩
+  · -- `H = Γ_I(H)`, and `A ⧸ Iⁿ` is in `𝒞` (`Ideal.injective_of_primaryComponent_eq_top`).
+    intro hC
+    refine Ideal.injective_of_primaryComponent_eq_top I (eq_top_iff.2 fun x _ => ?_)
+      fun n N f => ?_
+    · obtain ⟨n, hn⟩ := hH x
+      exact (Ideal.primaryComponent_mem H I x).2
+        ⟨n, (Submodule.mem_torsionBySet_iff _ _).2 fun a => hn a a.2⟩
+    · refine hC (A ⧸ I ^ n) inferInstance ⟨n, fun a ha x => ?_⟩ N f
       obtain ⟨b, rfl⟩ := Submodule.Quotient.mk_surjective _ x
       rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.mk_eq_zero, smul_eq_mul]
       exact Ideal.mul_mem_right b _ ha
-    obtain ⟨w, hw⟩ := hC (A ⧸ I ^ m) inferInstance hM (LinearMap.range φ) u'
-    refine ⟨w ∘ₗ (I ^ m).mkQ, fun x hx => ?_⟩
-    have := hw ⟨φ ⟨x, hx⟩, LinearMap.mem_range_self φ _⟩
-    simp only [LinearMap.coe_comp, Function.comp_apply, u', LinearEquiv.coe_coe,
-      LinearMap.quotKerEquivRange_symm_apply_image] at this
-    exact this
 
 /-- **Corollaire 2.16.** Over a Noetherian ring, if `K` is injective then so is
 `H⁰_I(K)`. -/
