@@ -193,6 +193,19 @@ export const PROOFS: Proof[] = [
     theorems: ['flat', 'residue_surjective', 'ker_residue', 'generic_nontrivial', 'comul', 'saturation_eq', 'not_fg_saturation'],
   },
   {
+    folder: '63',
+    batch: 5,
+    page: '97–99',
+    name: 'The tangents of the four components of j = 0 at p = 2',
+    statement:
+      'The four irreducible components of M′₃ ∩ V(c₄), the locus j = 0 in the level-3 moduli space over ℤ[1/3, ζ₃], meet at one point a over 𝔽₄; page 99 opens « … aux composantes irréductibles sont égales » and the reading concludes that they share their tangent there.',
+    found:
+      'The four tangents are pairwise distinct. In the Hesse parameter t, with c₄ = t(t³ + 8) up to units (taken as given), t³ + 8 = (t + 2)(t + 2ζ)(t + 2ζ²) over ℤ[ζ], and in P/P², P = (2, t), the tangent forms t, t + 2, t + 2ζ, t + 2ζ² are pairwise independent over R[t]/P = 𝔽₄: a·f + b·g ∈ P² forces a, b ∈ P, because each difference of 0, 1, ζ, ζ² is a unit modulo 2. The Hesse involution t ↦ (t + 2)/(t − 1) acts on P/P² as the transvection t ↦ t + 2, so the splitting V₁ × V₂ that page 99 asserts is not stable. Not formalised: that the Hesse family is the level-3 moduli space and the formula for c₄.',
+    verdict: 'holds; the gloss was false',
+    lean: 'lean/Grothendieck/Folder63.lean',
+    theorems: ['factor', 'branch_mem', 'tangents_distinct', 'involution_transvection'],
+  },
+  {
     folder: '43',
     batch: 9,
     page: '165–169',

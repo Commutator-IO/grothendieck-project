@@ -3409,6 +3409,7 @@ export const FINDINGS: Finding[] = [
     status: 'refuted',
     settle:
       'What still stands: four components, meeting only over 2 and all at a single point a over F_4, M′_3 connected — the page’s statements before the tangent question are consistent with the Hesse model. To close the refutation, a person checks two things: that the minimal-model c_4 of the Hesse family over W(F_4)[[t]] is a unit times t(t³ + 8) (Katz–Mazur, Arithmetic Moduli of Elliptic Curves, ch. 2 and 12, or a direct computation), and, against the facsimile of p. 99, whether « égales » really has « tangentes » as its subject. If the page says something else there, rewrite the claim; the edition’s footnoted orbit argument and the sentence « Les quatre branches ont en a la même tangente » in 63.modern.tex need correcting either way.',
+    lean: { file: 'lean/Grothendieck/Folder63.lean', found: 'The refutation is checked in the Hesse parameter, R = ℤ[ζ₃] (AdjoinRoot of X² + X + 1), P = (2, t) ⊂ R[t]: t(t³ + 8) is the product of the four branches t, t + 2, t + 2ζ, t + 2ζ², all in P (factor, branch_mem); for i ≠ j, a·branch i + b·branch j ∈ P² forces a, b ∈ P, so the four tangent forms are pairwise independent in P/P² over R[t]/P (tangents_distinct); (t + 2) − (t − 1)(t + 2) ∈ P² and t − 1 ∉ P, so the involution t ↦ (t + 2)/(t − 1) acts on P/P² as the transvection t ↦ t + 2 (involution_transvection). That c₄ is t(t³ + 8) up to units, and that the Hesse family is the level-3 moduli space, are taken as given.' },
   },
   {
     id: '63-pages-97-99-order',
