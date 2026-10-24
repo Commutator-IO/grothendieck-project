@@ -1,4 +1,5 @@
 import Mathlib
+import Grothendieck.Upstream.DerivationLeibnizProd
 
 /-!
 # Folder 2, pages 9 and 13: a nonzero class with trivial total Chern class
@@ -77,23 +78,17 @@ theorem derivative_pow_units (u : A⟦X⟧ˣ) (n : ℕ) :
 
 theorem derivative_zpow_units (u : A⟦X⟧ˣ) (n : ℤ) :
     d⁄dX (↑(u ^ n) : A⟦X⟧) = n * (↑(u ^ n) * ↑u⁻¹ * d⁄dX (↑u : A⟦X⟧)) := by
-  rcases n with n | n
-  · simpa using derivative_pow_units u n
-  · rw [zpow_negSucc, derivative_inv, derivative_pow_units]
-    simp only [Int.cast_negSucc, Nat.cast_add, Nat.cast_one]
-    linear_combination (-(↑(u ^ (n + 1))⁻¹ : A⟦X⟧) * ↑u⁻¹ * d⁄dX (↑u : A⟦X⟧) *
-      ((n : A⟦X⟧) + 1)) * Units.mul_inv (u ^ (n + 1))
+  rw [Derivation.leibniz_zpow_units, zpow_sub_one, Units.val_mul, zsmul_eq_mul, smul_eq_mul]
 
 theorem derivative_prod_units {ι : Type*} (s : Finset ι) (w : ι → A⟦X⟧ˣ) :
     d⁄dX (↑(∏ i ∈ s, w i) : A⟦X⟧) =
       ↑(∏ i ∈ s, w i) * ∑ i ∈ s, ↑(w i)⁻¹ * d⁄dX (↑(w i) : A⟦X⟧) := by
   classical
-  induction s using Finset.induction_on with
-  | empty => simp
-  | insert a s ha ih =>
-    rw [prod_insert ha, sum_insert ha, Units.val_mul, Derivation.leibniz, ih]
-    simp only [smul_eq_mul]
-    linear_combination (-(↑(∏ i ∈ s, w i) * d⁄dX (↑(w a) : A⟦X⟧))) * Units.mul_inv (w a)
+  rw [Units.coe_prod, Derivation.leibniz_prod, mul_sum]
+  refine sum_congr rfl fun i hi => ?_
+  rw [smul_eq_mul, ← mul_prod_erase s (fun j => (w j : A⟦X⟧)) hi]
+  linear_combination (-((∏ j ∈ s.erase i, (w j : A⟦X⟧)) * d⁄dX (↑(w i) : A⟦X⟧))) *
+    Units.mul_inv (w i)
 
 theorem coe_lin_one_inv (a : A) : (↑(lin 1 a)⁻¹ : A⟦X⟧) = mk fun m => a ^ m := by
   rw [Units.inv_eq_of_mul_eq_one_left]
