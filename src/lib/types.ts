@@ -317,6 +317,22 @@ export interface Finding {
    * literature, so it never changes `status`.
    */
   lean?: { file: string; found: string };
+  /**
+   * For an open mathematical row with no Lean proof: whether Lean can reach it
+   * today. `reachable` — mathlib has the theory; `beyond` — it needs a theory
+   * mathlib lacks (`theory` names it); `imprecise` — the page or the reading
+   * does not yet fix a statement; `doubtful` — there is a concrete reason to
+   * think it false as read; `open-problem` — an open question in the
+   * literature. A judgement of the edition's, not a proof of anything.
+   */
+  reach?: 'reachable' | 'beyond' | 'imprecise' | 'doubtful' | 'open-problem';
+  theory?: string;
+  /**
+   * What his own leaves do with the statement: `proved` — a complete argument;
+   * `partial` — a sketch, an argument with gaps, or a special case; `stated` —
+   * asserted or asked without an argument (his conjecture or question).
+   */
+  onPage?: 'proved' | 'partial' | 'stated';
 }
 
 /**

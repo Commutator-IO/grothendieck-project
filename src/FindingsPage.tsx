@@ -5,6 +5,7 @@ import { Footer, Header } from './components/Frame.tsx';
 import { FINDINGS } from './content/findings.ts';
 import { PROOFS } from './content/proofs.ts';
 import { PLAIN } from './content/summary.ts';
+import { FindingsChart } from './components/FindingsChart.tsx';
 import { BY_ID } from './content/catalogue.ts';
 import type { Finding, PlainItem } from './lib/types.ts';
 import { notation } from './lib/notation.tsx';
@@ -691,6 +692,8 @@ export function FindingsPage() {
             edition supplied rather than the page, and what would settle it.
           </p>
         </header>
+
+        <FindingsChart />
 
         <PlainSummary />
 

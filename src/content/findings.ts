@@ -52,6 +52,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Compare with the standard statement that a product of locales is spatial when almost all factors are compact and the rest locally compact, and check whether the two-clause form is a genuine weakening or a restatement. An external review of the folder (Kimi, shared conversation of 2026-08) compares the two-clause form directly with Johnstone’s « locally compact + compact » and calls the extra precision debatable — possibly novel, possibly implicit in the standard proof. That is the sharpest statement of the question so far and it is still the question, so the status is unchanged.',
+    reach: 'beyond',
+    theory: "topoi",
+    onPage: 'proved',
   },
   {
     id: '161-3-fields-partition',
@@ -87,6 +90,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check whether the epimorphism form of flatness appears as a definition of hypercovering for a general index category, rather than only as the "covering flat" condition in Diaconescu-type theorems. Sources to try: SGA 4 V appendix and Artin–Mazur (simplicial hypercoverings); Dugger–Hollander–Isaksen, Hypercovers and simplicial presheaves (2004); Kondô–Yasuda and Shulman on covering-flat functors. If a category-indexed notion with this axiom is there, mark matched. An external review of the folder (Kimi, shared conversation of 2026-08) reads the displayed condition as covering flatness — flatness relative to the topology — standing in for Diaconescu flatness when A has no finite limits. That names the shelf to search rather than settling anything.',
+    reach: 'beyond',
+    theory: "topoi",
+    onPage: 'proved',
   },
   {
     id: '151-tube-gluing-covering-pairs',
@@ -103,6 +109,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check whether the reconstruction from covering pairs alone, rather than from the whole poset or the full exit-path category, is the standard statement. Sources to try: Quinn, Homotopically stratified sets (1988), on homotopy links; Hughes on teardrop neighbourhoods; Lurie, Higher Algebra A.9; Ayala–Francis–Tanaka, Local structures on stratified spaces; Douteau on stratified homotopy theory. If the covering-pair form is there, mark matched.',
+    reach: 'imprecise',
+    onPage: 'partial',
   },
   {
     id: '151-mixed-tubes',
@@ -119,6 +127,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check whether a poset-indexed family of tubular neighbourhoods interpolating between a stratum’s punctured tube and its full tube has a counterpart — Goresky–MacPherson’s stratified neighbourhoods, the generalised links of Thom–Mather theory, or the "unstable" strata of a filtration. If the object is standard under another name, mark matched. Note that the entry is a claim about the corrected definition, not about the sentence on the page.',
+    reach: 'beyond',
+    theory: "other: algebraic topology and stratified spaces",
+    onPage: 'stated',
   },
   {
     id: '151-letterhead-1990',
@@ -383,6 +394,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Establish first which definition of test category is in play, since the page uses the term without defining it and the notion was still moving; then check the answer against the definitive treatments of test categories and modelizers. Until the definition is fixed the statement is not yet in a form that can be looked up, which is why this entry is unsearched rather than a candidate.',
+    reach: 'beyond',
+    theory: "derivators and homotopy theory of categories",
+    onPage: 'stated',
   },
   {
     id: '115-wheel-eleven-curryings',
@@ -568,6 +582,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read the three-suprema argument against the proof in Stone Spaces and against Isbell’s papers on locale products, and decide whether it is the same argument in other clothes or a distinct one. The claim here is about a proof, not a theorem: the theorem is certainly published, and what would make this row a finding is that the argument is not. An external review (Kimi, shared conversation of 2026-08) names it one of the three strongest items in the folders it read.',
+    reach: 'reachable',
+    onPage: 'proved',
   },
   {
     id: '161-3-two-product-by-intersection',
@@ -586,6 +602,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Compare with the construction in SGA 4 IV and with the later treatments of 2-limits of topoi, and establish whether the intersection argument appears anywhere in print. Like the row above, the claim is about the route and not the theorem.',
+    reach: 'beyond',
+    theory: "topoi",
+    onPage: 'proved',
   },
   {
     id: '115-isbell-duality-derived-from-kernels',
@@ -624,6 +643,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Compare the marginal strings with the string-diagram calculus as it was eventually published, and decide whether this is the same device or a private notation that resembles it. Note that the folder is undated, so this row cannot become a statement about who drew such diagrams first, whatever the comparison shows.',
+    reach: 'imprecise',
+    onPage: 'stated',
   },
   {
     id: '161-1-epsilon-sign-obstruction',
@@ -696,6 +717,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Establish whether the failure of the 1-truncated gluing datum on a stratified sphere, and its repair by a 2-level datum, is stated anywhere in the stratified-homotopy literature — exit-path categories, conically stratified spaces, and the higher van Kampen theorems are where to look. The mathematics is certainly known; whether this diagnosis-and-repair is written down is not.',
+    reach: 'beyond',
+    theory: "other: algebraic topology and stratified spaces",
+    onPage: 'proved',
   },
   {
     id: '112-linearization-beyond-the-simplex',
@@ -712,6 +736,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check the generalised Dold–Kan literature — Dold–Puppe, and the later work on Kan extensions of the correspondence along functors out of Δ — for a statement of this equivalence over a general small category. Note that this row rests on a folder the transcription reports as partly illegible, so the claim may not be recoverable in the form stated.',
+    reach: 'imprecise',
+    onPage: 'stated',
   },
   {
     id: '29-ramification-domain-axioms',
@@ -730,6 +756,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Three of R1–R4 read cleanly; R4 carries three \\ill{} in its statement and is not fully recoverable, and page 193 is cancelled by long diagonals, so the equivalence rests on a page its author struck. Any search should therefore first settle what R4 says, which is /transcribe-grothendieck’s work and not this skill’s. Then compare with the modern axiomatisations of a Galois category without a fibre functor (finite limits, disjoint distributive coproducts, an effective descent morphism to the terminal object with a finite decomposition property) and with the stack-theoretic treatments of tame coverings — Kerz–Schmidt, Generators and relations for the étale fundamental group, arXiv math/0703139, which reduces statements about open varieties to proper stacks by Abhyankar’s lemma. An orienting web search found the axiomatisation of Galois categories without a fibre functor, and the stack-theoretic treatment of tame π₁, but no axiomatisation of a stack of such categories carrying a realisation functor. That is a reason to look, not a search of the sources. Checked on 2026-09-26 against Abbes–Saito 2002, the one axiomatic passage of their ramification theory: §2 works inside a single Galois category (C, F) of finite étale K-algebras over one complete discrete valuation field, and axiomatises quotients F → F′ of its fibre functor (surjectivity and a cocartesian condition, Proposition 2.1; filtrations by such quotients, Definition 2.3) so as to cut out closed normal subgroups G^a. There is no base scheme, no stack over Ét(S), no realisation functor into schemes and nothing corresponding to R1–R4 or to R2 ⟺ r faithful; it does not bear on this row, and nothing was found there. The status stays unsearched, not candidate, because of R4 and the struck page 193, not for want of that check. Kerz–Schmidt and the fibre-functor-free axiomatisations named above remain unread.',
+    reach: 'beyond',
+    theory: "stacks, gerbes, Picard categories",
+    onPage: 'partial',
   },
   {
     id: '29-domram-morphisms-fully-faithful',
@@ -746,6 +775,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'A rigidity statement of this shape — no non-trivial collapsing morphism between such objects — should be checked against the 2-categorical literature on stacks of Galois covers: Ramified Galois covers via monoidal functors (Transformation Groups 2016, arXiv 1507.05309) and Stacks of ramified Galois covers (arXiv 1307.1116) are where an equivalent statement would sit. Neither surfaced in an orienting search, which is not the same as their not containing it.',
+    reach: 'beyond',
+    theory: "stacks, gerbes, Picard categories",
+    onPage: 'stated',
   },
   {
     id: '29-degree-n-as-primitive',
@@ -762,6 +794,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Item (3) and the Conclusion read cleanly, but items (2) and (1) of the same sheet are largely illegible — « Tous les monomorphismes […] […] un […] » and « Existence des lim← finies […] » — so the four conditions A(iv) are not recoverable as a list and only the degree axioms themselves can be claimed. Compare with the fibre-functor-free axiomatisation of a Galois category, where the decomposition property already appears as part of the definition rather than as data: if the two coincide this is a match. An orienting web search located that axiomatisation but not the degree-as-primitive form nor the uniqueness statement.',
+    reach: 'reachable',
+    onPage: 'proved',
   },
   {
     id: '29-formal-tame-pi1-self-intersection',
@@ -782,6 +816,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Checked on 2026-09-26. SGA 1 XIII 5.3 and 5.6 give the tame fundamental group of the strict localisation at a point of a normal crossings divisor, ∏_{ℓ≠p} Z_ℓ[1]^r with one factor per branch — the fibre of the extension, not the extension. Illusie’s overview gives the log fundamental group of an fs log scheme (4.6), the exact sequence 1 → I^log → π₁^log(s) → π₁(s) → 1 with I^log ≅ Hom(M̄^gp, Z′(1)) at a log point (4.7 (a)), and its identification with the Grothendieck–Murre tame fundamental group for a regular scheme with a normal crossings divisor (4.7 (c), citing Kato); it computes no global extension over a component of the divisor and nowhere relates an extension class to a normal bundle or a self-intersection. Neither source contains the statement; nothing was found. Abbes–Saito do not bear: the 2002 paper treats the ramification filtration of one complete discrete valuation field, where the tame part is only G^{0+}_log = wild inertia, and « Ramification and cleanliness » bounds wild ramification of torsors and sheaves along an snc divisor over a perfect field, invoking SGA 1 XIII 5.2 and 5.4 for the tame part (proof of 7.19). What remains, and would most likely settle it: Grothendieck–Murre, The tame fundamental group of a formal neighbourhood of a divisor with normal crossings on a scheme (LNM 208, 1971), whose subject is exactly this situation — not read, no copy reachable from here; Kato–Nakayama’s own papers; and, for the P¹ case, the classical computation of the local fundamental group at a contracted smooth rational curve of self-intersection −d (cyclic of order d over C), which is what the example should reduce to and was not looked up. Transcription: « auto » in « d’auto-intersection » (Lemme 2, page 89) and « du degré » (page 97) are \\uncertain{}; the general conclusion on page 95, « [self-intersection de X_o dans 𝔛] », reads cleanly, and page 89’s formula 𝓛_{X_o/𝔛} ≃ i*(L(X_o)) fixes the meaning independently of the uncertain word. Pages 91 and 93 are the faintest of the run and much of their connective prose is illegible, so what can be claimed is the two lemmas and the two examples, not the passage between them.',
+    reach: 'beyond',
+    theory: "étale or ℓ-adic cohomology",
+    onPage: 'partial',
   },
   {
     id: '29-fundamental-group-scheme-via-torsors',
@@ -838,6 +875,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Compare with the pro-étale fundamental group of Bhatt–Scholze (2015) and with the enlarged fundamental group of SGA 3 X, both of which classify locally constant objects with infinite fibres, and check whether the four comparison statements across these five classes are recorded anywhere in that form. The complete-local statement H¹_{C_i}(V,−) ≃ H¹_{C_i}(k,−) is the one most likely to be standard and is the place to start.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'stated',
   },
   {
     id: '29-inertia-matrix-determinant',
@@ -1073,6 +1113,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Open Johnstone 1977 and Caramello 0808.1519 and read which site each takes for the theory of fields. If it is the finitely presented rings with the covers {A_f, A/f}, the passage to the absolutely flat site is an exercise on the comparison lemma and the entry becomes matched; if the absolutely flat site appears there, matched outright.',
+    reach: 'beyond',
+    theory: "topoi",
+    onPage: 'partial',
   },
   {
     id: '161-2-vn-regular-cartesian-presheaf-classifier',
@@ -1113,6 +1156,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Two checks: whether « rings of definite characteristic » occurs as an example of a non-coherent quotient of the theory of rings anywhere (Johnstone 1977, Elephant D3, Hutzler); and whether the join sup(V, W) in Elephant A4.5 terms is the glued topos the page describes, which would make the criterion a corollary of the general theory of joins.',
+    reach: 'beyond',
+    theory: "topoi",
+    onPage: 'partial',
   },
   {
     id: '161-2-irreducible-and-zero-dimensional-not-coherent',
@@ -1133,6 +1179,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Find « ring with irreducible spectrum » or « zero-dimensional ring » treated as a geometric theory with its classifying topos (Johnstone 1977 treats dimension of rings in a topos; the Elephant’s D3 examples), and whether non-coherence or the existence of points is stated there.',
+    reach: 'beyond',
+    theory: "topoi",
+    onPage: 'stated',
   },
   {
     id: '31-phi-specialisation-criterion',
@@ -1177,6 +1226,8 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Conjecture 4°) holds, in sharper form, for U a non-empty affine open of Spec A[1/p] and A excellent: Gabber–Orgogozo Théorème 6.1 gives cd_p(U) = dim A + dim_p(k), and dim_p(k) ≤ ν(k) + cd_p(k) — this pass’s step: Ω^{ν+1}_k = 0, and H^{ν+1}_p(k′) = H¹(k′, Ω^ν_log) vanishes when cd_p(k′) = 0, with cd_p(k′) ≤ cd_p(k) and ν(k′) = ν(k) for k′/k finite. The words around « ouvert » in 4°) are illegible on the leaf, so whether the page means affine, and whether U may meet V(ℓ), is not known; for U meeting V(ℓ) nothing was found. The qualitative idea — [k : k^ℓ] in the bound — is printed in SGA 4 X 3.0. Conjecture 2°), the global affine bound sup(cd_ℓ k(x), ν(V(ℓ)) + 3), was not found in any source read: 2°) follows from Gabber–Orgogozo 1.2 and 6.1 only when X ⊂ Spec A[1/p], Mathew Prop. 4.5 gives the same shape for rings henselian along p, and the only global bound found, Clausen–Mathew Cor. 3.29, carries an extra dim X. On the constant, an observation of this pass, not found in print: Spec ℤ with p odd seems to show that « + 3 » cannot be lowered to « + 2 » — ν(V(p)) = 0 and cd_p ℚ = 2, while Artin–Verdier duality (Milne, Arithmetic Duality Theorems, II.3) gives H³(Spec ℤ, j_!μ_p) ≅ ℤ/p, so cd_p(Spec ℤ) = 3. What would settle it: a printed statement of 2°) (or of a bound with an explicit shift) for an arbitrary affine scheme of mixed characteristic, or a counterexample to the « + 3 ».',
+    reach: 'open-problem',
+    onPage: 'stated',
   },
   {
     id: '31-local-ring-cd-lower-bound',
@@ -1197,6 +1248,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'The inequality itself is SGA 4 X 2.4 when r is invertible in A, with the cruder exception « some residue field orderable » and the page’s marginal example; when r is the residue characteristic and char K = 0 it follows, for A excellent henselian, from Gabber–Orgogozo § 3. Not found in what was read: the finer exception b) (an orderable k(x) with cd₂ k(x)(√−1) finite), the refinement to « k itself real » for A catenary and universally japanese, and the disappearance of the exception for A regular — nor the case r = residue characteristic for a non-henselian or non-excellent A. Serre, Cohomologie galoisienne II § 4, could not be opened here. His margin, « cette restriction est-elle essentielle ??? », still stands as the open point.',
+    reach: 'beyond',
+    theory: "étale or ℓ-adic cohomology",
+    onPage: 'stated',
   },
   {
     id: '31-torsion-module-leaves-out-of-order',
@@ -1309,6 +1363,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'The equivalence with C(Y) + A⁰(X×X) and the descent along hyperplane sections are Kleiman 1968, Theorem 2.13, and are not the novelty. What remains is the step A′⁰(T) + A″⁰(T) ⇒ A⁰(T) — the critical-dimension Lefschetz statement split into an injectivity condition (a class whose restriction to the section is algebraic is algebraic) and a surjectivity condition (every algebraic class is a Gysin image of an algebraic class on the section) — searched in the sources listed and not found. Still to read: André, Une introduction aux motifs (2004), ch. 5, and the literature on the « Lefschetz-type » forms of the variational Hodge conjecture. Note that the folder’s letters use A, C and D in senses of January 1967 that do not match the published labels, so the comparison is made statement by statement.',
+    reach: 'beyond',
+    theory: "motives",
+    onPage: 'partial',
   },
   {
     id: '16-hodge-algebras-order-2',
@@ -1387,6 +1444,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'The bound holds over ℂ for the stalks of Rⁱj_* of an open immersion (the edition’s argument in « ours »: Durfee’s weight spectral sequence and Hodge III 8.2.4), and sharpens to level ≤ min(i, 2n − 1 − i); it was not found stated in what was read, the isolated case being implicit in the literature on links. What would settle the entry: the box in print (Durfee 1983 in full, Peters–Steenbrink Ch. 6, Steenbrink’s surveys), or a person checking the argument. Open: the ℓ-adic meaning of « level » on the page (Frobenius divisibility, SGA 7 XXI 5.5.3, Esnault–Wan arXiv:2201.06013), and the relative case with n = d_y(f).',
+    reach: 'beyond',
+    theory: "étale or ℓ-adic cohomology",
+    onPage: 'partial',
   },
   {
     id: '12-weights-paper-typescript',
@@ -1454,6 +1514,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read A. Weil, « Sur les critères d’équivalence en géométrie algébrique » (Math. Ann. 128, 1954), which the margin of page 23 itself says to consult, and P. Samuel, « Relations d’équivalence en géométrie algébrique » (ICM Edinburgh, 1958), for this relation under any name; then U. Jannsen, « Equivalence relations on algebraic cycles » (The Arithmetic and Geometry of Algebraic Cycles, 2000), and the filtrations of Bloch, S. Saito and Murre, where products of algebraically trivial classes fall into a second filtration step. Th. 1.6 is close to formal once the relation is defined, so the question is whether the relation itself — the adequate relation generated by the Albanese kernels of parameter varieties — is defined in print. If Weil 1954 has it, mark matched.',
+    reach: 'beyond',
+    theory: "other: algebraic cycles, intersection theory, K-theory",
+    onPage: 'partial',
   },
   {
     id: '14-nakai-euler-characteristic-criterion',
@@ -1470,6 +1533,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Look for « χ(L^{⊗n}|Z) → +∞ », or « h⁰(L^{⊗n}|Z) → +∞ », in place of « (L^{dim Z} · Z) > 0 » in Y. Nakai, « A criterion of an ample sheaf on a projective scheme » (Amer. J. Math. 85, 1963), S. Kleiman, « Toward a numerical theory of ampleness » (Ann. of Math. 84, 1966), ch. III, and R. Hartshorne, Ample subvarieties of algebraic varieties (LNM 156, 1970), ch. I. The page credits the theorem to Mumford and Nakai and both lemmas to a letter of Mumford, so this form may well be Nakai’s own or Mumford’s; if it is in any of these, mark matched.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '14-two-albanese-redactions',
@@ -1526,6 +1592,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Deligne and Milne, « Tannakian categories » (LNM 900, 1982) §5, on Tannakian categories over ℝ, polarisations and the remark on supersingular elliptic curves; Milne, « Motives over finite fields » (Motives, Proc. Sympos. Pure Math. 55.1, 1994) §§2–3, on fibre functors of the category of motives over 𝔽_q and its even-weight part; and Saavedra Rivano, Catégories tannakiennes (LNM 265, 1972) ch. V–VI. If the criterion « real fibre functor ⟺ Ker(ε|G°) connected », or the corollary for even weights, is stated there for commutative bands, mark matched.',
+    reach: 'beyond',
+    theory: "other: Tannakian categories",
+    onPage: 'partial',
   },
   {
     id: '15-brandt-picard-category',
@@ -1542,6 +1611,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Look for a symmetric — in particular strictly commutative — monoidal structure on the Picard groupoid of invertible bimodules of a maximal order, independent of a base object, in A. Fröhlich, « The Picard group of noncommutative rings, in particular of orders » (Trans. AMS 180, 1973), H. Bass, Algebraic K-theory (1968) ch. II, I. Reiner, Maximal Orders (1975) §§22 and 37, and the thesis of Hoàng Xuân Sính on Gr-catégories (1975). If the structure, or the description of these categories as torsors under one Picard category, is there, mark matched.',
+    reach: 'beyond',
+    theory: "stacks, gerbes, Picard categories",
+    onPage: 'partial',
   },
   {
     id: '15-leaf-141-read-after-142',
@@ -1635,6 +1707,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'The page itself credits the Picard statement to Koizumi (p. 20), so the question is only whether the published hypotheses already allow a special fibre singular in codimension 2, or require it non-singular. Read S. Koizumi’s paper on the specialisation of Albanese and Picard varieties (Mem. Coll. Sci. Univ. Kyoto, c. 1960) and G. Shimura, « Reduction of algebraic varieties with respect to a discrete valuation of the basic field » (Amer. J. Math. 77, 1955), both cited from memory. Then read FGA, exposé 236, M. Raynaud, « Spécialisation du foncteur de Picard » (Publ. Math. IHÉS 38, 1970), and Bosch–Lütkebohmert–Raynaud, Néron Models, ch. 8–9. The ℓ-adic form of the same argument is short: H¹ of X_K̄ injects into H¹ of a Lefschetz curve with good reduction, so it is unramified. The statement may therefore stand in print as a remark rather than a theorem, and Serre–Tate, « Good reduction of abelian varieties » (Ann. of Math. 88, 1968), is the place to look for that form. If the codimension-2 hypothesis is in any of these, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+    reach: 'beyond',
+    theory: "other: group schemes over a base (abelian schemes, p-divisible groups, Néron models, Picard schemes, reductive groups)",
+    onPage: 'partial',
   },
   {
     id: '51-author-number-11-on-page-21',
@@ -1856,6 +1931,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'The difference between the characteristics is classical: in characteristic 0 a non-trivial extension of an abelian variety by a vector group can have trivial affine quotient, in characteristic p it cannot (M. Rosenlicht, « Extensions of vector groups by abelian varieties », Amer. J. Math. 80, 1958; M. Brion, « Anti-affine algebraic groups », J. Algebra 321, 2009). The question is whether the consequence for families is stated. Look in SGA 3, exposé VI_B, on affine quotients of group schemes over a base; in M. Raynaud, Faisceaux amples sur les schémas en groupes et les espaces homogènes (LNM 119, 1970); in Brion, « Some structure theorems for algebraic groups » (Proc. Sympos. Pure Math. 94, 2017); and in the work on anti-affine group schemes over a base. All are cited from memory. If the non-constructibility is stated in any of them, mark matched, and the equal-characteristic assertion becomes the thing to look up. No web search was available for this pass (2026-09-23), so nothing has been read.',
+    reach: 'beyond',
+    theory: "other: group schemes over a base (abelian schemes, p-divisible groups, Néron models, Picard schemes, reductive groups)",
+    onPage: 'partial',
   },
   {
     id: '133-dating-cannot-support-precedence',
@@ -2071,6 +2149,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'The equivalence of formal groupoids with Lie algebroids in characteristic 0, for Ω locally free of finite rank, is expected to be in the books, and that case alone does not settle the entry. The question is the flat, non-finite case, and categories with no inverse assumed. Look in Grothendieck, « Crystals and the de Rham cohomology of schemes » (Dix exposés, 1968), on formal groupoids and stratifications; P. Berthelot, Cohomologie cristalline des schémas de caractéristique p > 0 (LNM 407, 1974), chapter II; L. Illusie, Complexe cotangent et déformations II (LNM 283, 1972); M. Kapranov, « Free Lie algebroids and the space of paths » (Selecta Math. 13, 2007); D. Gaitsgory and N. Rozenblyum, A Study in Derived Algebraic Geometry, vol. II (2017), on formal groupoids and Lie algebroids. For X₀ a point with Ω infinite-dimensional, look in the literature on Lie coalgebras (W. Michaelis) and on formal groups (Dieudonné, Lazard, and Milnor and Moore, 1965). All are cited from memory. If any of them states the equivalence with Ω flat and no finiteness, or proves that a formal category in this sense is automatically a groupoid, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+    reach: 'beyond',
+    theory: "crystalline or de Rham cohomology",
+    onPage: 'stated',
   },
   {
     id: '162-5-de-rham-hochschild-flat-formal-category',
@@ -2087,6 +2168,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'The question is only a general formal category with flat, not necessarily finite, Ω. Look in Grothendieck’s « Crystals » exposé (1968), on Čech–Alexander complexes; P. Berthelot and A. Ogus, Notes on Crystalline Cohomology (1978); M. Crainic, « Differentiable and algebroid cohomology, van Est isomorphisms, and characteristic classes » (Comment. Math. Helv. 78, 2003); and Gaitsgory and Rozenblyum, vol. II (2017), on the cohomology of formal groupoids. All are cited from memory. If the comparison is stated for formal groupoids, or for formal categories, with flat Ω over a base of characteristic 0, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+    reach: 'beyond',
+    theory: "crystalline or de Rham cohomology",
+    onPage: 'stated',
   },
   {
     id: '162-5-bordism-correspondences-universal',
@@ -2103,6 +2187,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Without the bordism relation this is the universal property of spans with base change: look in R. Dawson, R. Paré and D. Pronk, « Universal properties of Span » (Theory Appl. Categ. 13, 2004), and in J. Bénabou (1967). The candidate is only that homotopy invariance and transverse base change force bordant correspondences to act alike. Look in D. Quillen, « Elementary proofs of some results of cobordism theory using Steenrod operations » (Adv. Math. 7, 1971), § 1; W. Fulton and R. MacPherson, Categorical Framework for the Study of Singular Spaces (Mem. Amer. Math. Soc. 243, 1981), on the universal bivariant theory; S. Yokura, « Oriented bivariant theories, I » (Internat. J. Math. 20, 2009); H. Emerson and R. Meyer, « Bivariant K-theory via correspondences » (Adv. Math. 225, 2010); and M. Levine and F. Morel, Algebraic Cobordism (2007), chapter 2. All are cited from memory. If any of them states this universal property of the bordism correspondence category, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+    reach: 'beyond',
+    theory: "other: differential topology (bordism)",
+    onPage: 'partial',
   },
   {
     id: '162-5-photocopy-taken-after-ink',
@@ -2181,6 +2268,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'The link between a polarisation of Rep(G) and a Cartan involution given by C is expected to be in the books, and the reading footnotes it; the question is only the torsor statement and the free action. Look in N. Saavedra Rivano, Catégories tannakiennes (LNM 265, 1972), chapters V–VI on polarisations; in P. Deligne and J. S. Milne, « Tannakian categories » (LNM 900, 1982), § 5, on polarisations of Rep(G) attached to an element C with C² central; and in P. Deligne, « La conjecture de Weil pour les surfaces K3 » (Invent. Math. 15, 1972), § 2, on Weil forms. All are cited from memory. If any of them says how the polarisation depends on C, up to conjugation and central elements of order 2, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+    reach: 'beyond',
+    theory: "other: Tannakian categories",
+    onPage: 'partial',
   },
   {
     id: '10-numerical-character-rank-one-torus',
@@ -2197,6 +2287,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'The injectivity itself is a one-line consequence of Hilbert 90; the question is whether the determination of a tannakian category, or a gerbe with abelian band, by these numerical data has been stated. Look in J. Giraud, Cohomologie non abélienne (1971), IV.3, on gerbes with abelian band; in Saavedra, Catégories tannakiennes (LNM 265, 1972), chapter III; in Deligne–Milne (LNM 900, 1982), § 3; for the general case, in J.-J. Sansuc, « Groupe de Brauer et arithmétique des groupes algébriques linéaires sur un corps de nombres » (J. reine angew. Math. 327, 1981), on H² of tori; and, for the finite-group side, in P. Etingof and S. Gelaki, « Isocategorical groups » (IMRN 2001). All are cited from memory. If the rank-one case, or a general criterion containing it, is there, mark matched. No web search was available for this pass (2026-09-23), so nothing has been read.',
+    reach: 'beyond',
+    theory: "stacks, gerbes, Picard categories",
+    onPage: 'partial',
   },
   {
     id: '10-split-ring-ga-rtimes-gm',
@@ -2372,6 +2465,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check whether the equivalence, for special objects, is stated or follows at once from the description of commutative Frobenius algebras by a Frobenius comultiplication: L. Abrams, « Two-dimensional topological quantum field theories and Frobenius algebras » (J. Knot Theory Ramifications 5, 1996) and « Modules, comodules, and cotensor products over Frobenius algebras » (J. Algebra 219, 1999); J. Kock, Frobenius Algebras and 2D Topological Quantum Field Theories (LMS Student Texts 59, 2004), chapters 2–3; A. Carboni and R. F. C. Walters, « Cartesian bicategories I » (J. Pure Appl. Algebra 49, 1987); S. Lack, « Composing PROPs » (Theory Appl. Categ. 13, 2004); R. Rosebrugh, N. Sabadini and R. F. C. Walters, « Generic commutative separable algebras and cospans of graphs » (Theory Appl. Categ. 15, 2005). If it is there in substance for graded commutative Frobenius algebras, mark matched and keep the note on the two meanings of « special ». All are cited from memory. No web search was available for this pass (2026-09-23), so nothing has been read.',
+    reach: 'imprecise',
+    onPage: 'stated',
   },
   {
     id: '11-tautological-diagonal-product-rule',
@@ -2484,6 +2579,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Look for the statement that an Artin gluing is a presheaf topos if and only if both parts are and the gluing functor preserves all limits — equivalently, that presheaf topoi with an open subtopos are exactly the collages of profunctors — in SGA 4, IV 9.5 and the exercises that follow it; P. T. Johnstone, Sketches of an Elephant (2002), A2.1 and A4.5, on Artin glueing and open and closed subtoposes; G. C. Wraith, « Artin glueing » (J. Pure Appl. Algebra 4, 1974); A. Carboni and P. T. Johnstone, « Connected limits, familial representability and Artin glueing » (Math. Structures Comput. Sci. 5, 1995). If both halves are there, mark matched. All are cited from memory. No web search was available for this pass (2026-09-23), so nothing has been read.',
+    reach: 'beyond',
+    theory: "topoi",
+    onPage: 'stated',
   },
   {
     id: '116-leaves-undated-vocabulary-dates-nothing',
@@ -2522,6 +2620,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Hartshorne, Ample Subvarieties, III, Theorems 3.3–3.4, and check that the comparison is stated there as an equivalence with cd(X − Y) for X smooth projective; if so, mark matched (the forward direction is cited in that form by Halic). Otherwise read also R. Hartshorne, « Cohomological dimension of algebraic varieties » (Ann. of Math. 88, 1968); SGA 2, exposé XII, on a projective scheme and its formal completion; R. Hartshorne, Local Cohomology (LNM 41, 1967), for H^p_Y = lim Ext^p(O_{Y_n}, −) and H^p(X − Y, −) = lim Ext^p(J^n, −); A. Ogus, « Local cohomological dimension of algebraic varieties » (Ann. of Math. 98, 1973). All are cited from memory and none was read.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'stated',
   },
   {
     id: '125-typescript-leaves-unattributed',
@@ -2578,6 +2679,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Look for the sheaf-level statement — pinned Picard stacks, strict or not, up to equivalence, as an extension of (a subsheaf of) Hom(M, ₂N) by Ext²(M,N) — in SGA 4, exposé XVIII, 1.4 (Deligne); P. Deligne, « Le déterminant de la cohomologie » (Contemp. Math. 67, 1987), § 4; Hoàng Xuân Sính, Gr-catégories (thèse, Paris VII, 1975); L. Breen, « Extensions du groupe additif » (Publ. Math. IHÉS 48, 1978), on the spectral sequence for stable Ext; L. Breen, « On the classification of 2-gerbes and 2-stacks » (Astérisque 225, 1994); N. Johnson and A. M. Osorno, « Modeling stable one-types » (Theory Appl. Categ. 26, 2012). If the left-exact part is there for stacks on a topos, mark matched. All are cited from memory. No web search was available for this pass (2026-09-23), so nothing has been read.',
+    reach: 'beyond',
+    theory: "stacks, gerbes, Picard categories",
+    onPage: 'partial',
   },
   {
     id: '134-1-sign-realisation-universal-argument',
@@ -2594,6 +2698,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Decide whether Moore spectra truncated above π₁ admit a functorial choice on finitely presented abelian groups — equivalently, whether the universal obstruction in Ext³ on the classifying topos of abelian groups vanishes. Look in H.-J. Baues, Homotopy Type and Homology (Oxford, 1996), on the homotopy category of Moore spaces as a linear extension; H.-J. Baues and W. Dreckmann, « The cohomology of homotopy categories and the general linear group » (K-Theory 3, 1989); M. Jibladze and T. Pirashvili, « Cohomology of algebraic theories » (J. Algebra 137, 1991), for Mac Lane cohomology as Ext in functor categories; L. Breen, « Extensions du groupe additif » (Publ. Math. IHÉS 48, 1978); P. Deligne, « Le déterminant de la cohomologie » (Contemp. Math. 67, 1987), § 4. If a functorial choice exists, the page’s claim stands and this pass’s doubt is withdrawn; if not, the page’s statement holds over a point and for free M only. All are cited from memory. No web search was available for this pass (2026-09-23), so nothing has been read.',
+    reach: 'beyond',
+    theory: "stacks, gerbes, Picard categories",
+    onPage: 'stated',
   },
   {
     id: '134-1-first-four-of-eight-pages',
@@ -2655,6 +2762,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Look for a published proof of X 8.7 outside SGA 3 — SGA 7 IX (Néron models and semi-stable reduction), Bosch–Lütkebohmert–Raynaud, Néron Models, chapter 7, and the literature on Chevalley decompositions over a base (Conrad, Brion) — and check whether the Gille–Polo re-edition answers its own note (71) elsewhere. If a proof is there, mark matched and say whether it takes this route; if not, what an expert should judge is the argument on pages 32–36, and in particular the constructibility the reduction to a trait takes for granted.',
+    reach: 'beyond',
+    theory: "other: group schemes over a base (abelian schemes, p-divisible groups, Néron models, Picard schemes, reductive groups)",
+    onPage: 'partial',
   },
 // find-novelty pass on folder 8, Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (8.modern.tex, Pass 2026-10-03). Three entries, all unsearched.
 // Dropped as matches already footnoted in the reading: n_G = ω_G for BT_1 (p. 12), the Hodge–Tate weights of the Lubin–Tate character (pp. 51–55), ℓ^{D(M)} ≃ M ⊗^L O_S and the Postnikov class ξ as a mod-p² lifting obstruction (pp. 77–80; the page itself cites Illusie).
@@ -2674,6 +2784,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Look for this route to Lubin–Tate, lifting the Hodge filtration as A ⊗ A-modules by Grothendieck–Messing, in Messing, The crystals associated to Barsotti–Tate groups (LNM 264, 1972), Fontaine, Groupes p-divisibles sur les corps locaux (Astérisque 47–48, 1977), and Hopkins–Gross on Lubin–Tate spaces. If it appears there, mark the entry matched. Also settle whether the hypothesis must be e < p − 1. A web search (2026-10-10) did not turn up a direct treatment. That search opened no source, so it does not count as a search of the literature.',
+    reach: 'beyond',
+    theory: "crystalline or de Rham cohomology",
+    onPage: 'partial',
   },
   {
     id: '8-dim-one-A-module-homs',
@@ -2690,6 +2803,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'First, a person reads the stained sign on page 41 in the facsimile. Then compare with the classification of one-dimensional formal A-modules and their homomorphisms over 𝔽_q in Hazewinkel, Formal groups and applications (1978, chapters on formal A-modules), and in Drinfeld, Coverings of p-adic symmetric domains (1976). The non-strict cases ν ≠ 0, where A acts on Lie through a Frobenius twist, are the part to check: the strict case ν = 0 is very likely a restatement of Lubin–Tate.',
+    reach: 'beyond',
+    theory: "other: group schemes over a base (abelian schemes, p-divisible groups, Néron models, Picard schemes, reductive groups)",
+    onPage: 'partial',
   },
   {
     id: '8-interleaved-typescripts',
@@ -2722,6 +2838,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check whether the identity α_x(Ě) = α_x(E)^∨(−1) — equivalently, an unadjusted functional equation for the L-function built from the semisimplified local representations — is stated in Deligne, « Les constantes des équations fonctionnelles des fonctions L » (Antwerp II, LNM 349, 1973) §8, or in Tate, « Number theoretic background » (Corvallis 1979) §4.1–4.2, where L and ε of a Weil–Deligne representation are compared with those of its N-forgotten part (Tate 4.1.6). If it is there, mark matched; the averaging construction would then be a different route to a known object, and the entry should say which.',
+    reach: 'beyond',
+    theory: "étale or ℓ-adic cohomology",
+    onPage: 'partial',
   },
   {
     id: '62-bourbaki-versos',
@@ -2860,6 +2979,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'The case of degree prime to p is matched (Katz, Serre–Tate local moduli, 1981; Deligne–Illusie 1981), and the reading says so. What is open is the case p | degree: check Norman and Oort, Moduli of abelian varieties (Ann. of Math. 1980), Oort’s 1971 Compositio paper on local moduli of abelian varieties, and de Jong, The moduli spaces of polarized abelian varieties (Math. Ann. 1993), for the local structure of the ordinary locus of A_{g,d} when p divides d. If it is stated there, mark matched.',
+    reach: 'beyond',
+    theory: "moduli of curves or abelian varieties",
+    onPage: 'partial',
   },
   {
     id: '6-formal-group-not-in-abelian-variety',
@@ -2876,6 +2998,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Look for the statement that not every p-divisible (or formal) group over a finite field is a subgroup, up to isogeny, of that of an abelian variety, with the transcendental-norm twist or the integrality of the Frobenius characteristic polynomial as the obstruction: Tate, Endomorphisms of abelian varieties over finite fields (1966); Honda (1968); Manin, The theory of commutative formal groups over fields of finite characteristic (1963); and Oort’s surveys on p-divisible groups of abelian varieties. It is likely to be standard; if it is stated in any of them, mark matched.',
+    reach: 'beyond',
+    theory: "other: group schemes over a base (abelian schemes, p-divisible groups, Néron models, Picard schemes, reductive groups)",
+    onPage: 'partial',
   },
   {
     id: '6-same-formal-group-not-isogenous',
@@ -2892,6 +3017,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Probably a match: isogeny classes are countable while the p-rank-one stratum of A_2 is positive-dimensional. Check Manin 1963 (Russian Math. Surveys 18), Oort, Subvarieties of moduli spaces (Invent. Math. 1974), and Oort, Foliations in moduli spaces of abelian varieties (JAMS 2004), on isogeny leaves; mark matched with the reference if the statement is there.',
+    reach: 'beyond',
+    theory: "moduli of curves or abelian varieties",
+    onPage: 'partial',
   },
   {
     id: '6-leaves-35-36-reversed',
@@ -2963,6 +3091,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'The relative-dimension-1 case, with h = ∏ h_i^{n_i}, appears to be the Oda / Asada–Matsumoto–Oda description; read AMO95 §2 to confirm, and if so the open part is only relative dimension ≥ 2 with fibres normal-crossings off codimension 2. For that part, look in the logarithmic literature (Fujiwara–Kato log purity; Illusie, « An overview of the work of K. Fujiwara, K. Kato and C. Nakayama on logarithmic étale cohomology », Astérisque 279, 2002) and in Kisin 2000 §1. Before any search counts, the hypotheses (a)–(d) must be re-read against the facsimile of p. 167: the status stays unsearched because the statement rests on unread words.',
+    reach: 'beyond',
+    theory: "étale or ℓ-adic cohomology",
+    onPage: 'partial',
   },
   {
     id: '34-lci-local-1-asphericity',
@@ -2982,6 +3113,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read SGA 7 I, Exposé I (Deligne’s « Résumé des premiers exposés de A. Grothendieck »), the part on vanishing cycles and depth, and SGA 2 XIII–XIV: if the statement or its 1-asphericity form is there, mark matched. The cohomological shadow for d = 0 is the classical simple-connectedness of the Milnor fibre of an isolated complete-intersection singularity of dimension ≥ 2 (Hamm, over ℂ), which is a reason to expect it is known, not a search.',
+    reach: 'beyond',
+    theory: "étale or ℓ-adic cohomology",
+    onPage: 'partial',
   },
   {
     id: '36-h1-invariant-cycle-defect',
@@ -2998,6 +3132,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read M. Raynaud, « Spécialisation du foncteur de Picard » (Publ. Math. IHÉS 38, 1970), §§ 6–8, and SGA 7 I, exposé IX, §§ 11–12 (component groups and the comparison of H¹ of a regular model with inertia invariants), then Bosch–Lütkebohmert–Raynaud, Néron Models, ch. 9. If the sequence with cokernel Ker wₙ, or the ℓ-adic form with defect R ⊗ Z_ℓ, is stated there, mark matched. Two web searches on 2026-10-10 returned no relevant result, and no source was read, so the status stays unsearched.',
+    reach: 'beyond',
+    theory: "étale or ℓ-adic cohomology",
+    onPage: 'partial',
   },
   {
     id: '36-orthogonality-regular-adic-base',
@@ -3014,6 +3151,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read SGA 7 I, exposé IX (Grothendieck, « Modèles de Néron et monodromie »), §§ 2 and 4–5, to see whether the orthogonality theorem or its arithmetic proof is stated there over a regular complete adic base with arbitrary flat group schemes, rather than over a trait; then exposé VIII for the pairing. If the higher-dimensional form is there or in a later paper on degenerating abelian schemes (e.g. Faltings–Chai, Degeneration of Abelian Varieties, ch. III), mark matched. One web search on 2026-10-10 returned nothing relevant and no source was read.',
+    reach: 'beyond',
+    theory: "étale or ℓ-adic cohomology",
+    onPage: 'partial',
   },
   {
     id: '36-griffiths-conditional-l-adic',
@@ -3030,6 +3170,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read N. Katz, SGA 7 II, exposés XX and XXII, and S. Bloch, Lectures on Algebraic Cycles (1980), on Griffiths groups in positive characteristic; then C. Voisin, Hodge Theory and Complex Algebraic Geometry II, ch. 8, for the normal-function proof. If an ℓ-adic proof conditional on a Lefschetz-type correspondence and a coniveau hypothesis on the generic section is in print, mark matched. One web search on 2026-10-10 found only characteristic-0 work (Kahn, « Albanese kernels and Griffiths groups », Tunisian J. Math. 3, 2021, abstract only) and no source was read, so the status stays unsearched.',
+    reach: 'beyond',
+    theory: "étale or ℓ-adic cohomology",
+    onPage: 'partial',
   },
   // Folder 57 (Picard: annotated typescript, letters, 1962–[vers 1968]). Pass of 2026-10-10 on
   // claude-opus-5-5, the model of the reading (Opus 5.5, 2026-10-04). Most of the reading's
@@ -3109,6 +3252,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read SGA 6 XIII, 3.11–3.12, for the Pic^τ and generic-section forms. Then test Corollary 1 (H¹(X, 𝒪_X) → H¹(Y_K̄, 𝒪) injective) against the known characteristic-p failures of Kodaira vanishing, Raynaud’s surfaces with H¹(L⁻¹) ≠ 0 for L ample. If Corollary 1 fails there, the theorem of p. 98 is refuted for 𝐆_a and α_p, and only the finite unipotent kernel of the corollary stands, which is then matched by Kleiman. The status stays unsearched because the statement’s scope rests on uncertain readings and SGA 6 XIII was not read.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '57-rigid-subgroups-one-fibre',
@@ -3125,6 +3271,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Compare with SGA 3, Exp. IX–X (rigidity of groups of multiplicative type) and Exp. XV, and with Mumford, GIT 6.1 (rigidity for abelian schemes). Both theorems cover special cases of the notion: tori and abelian schemes are rigid in this sense. The question is whether the unified “prime-to-p torsion dense” hypothesis, covering for instance non-split extensions of an abelian scheme by 𝐆_a in characteristic 0, appears in print. A general web search on 2026-10-10 found nothing beyond the standard density of prime-to-ℓ torsion in tori and abelian varieties, and that is not a search of the named sources.',
+    reach: 'beyond',
+    theory: "other: group schemes over a base (abelian schemes, p-divisible groups, Néron models, Picard schemes, reductive groups)",
+    onPage: 'partial',
   },
   {
     id: '57-analytic-pic-completion-criterion',
@@ -3140,6 +3289,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Look for the “iff finite length” criterion and the projectivity corollary in Bingener’s work on formal and analytic Picard groups, in Artin’s approximation papers (1968–1969), and in SGA 2 XII and EGA III 5.4. The algebraic projectivity statement for X proper over a complete local ring (X projective iff every X_n is) is classical, EGA III 5.4.5. The candidate is the analytic germ version and its necessary-and-sufficient condition (iii). The same letter is online as a CSG transcription (see 57-csg-letters-transcribed); that is the same text, not a literature match.',
+    reach: 'beyond',
+    theory: "other: complex analytic spaces",
+    onPage: 'proved',
   },
 // 136: three candidates. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (% Pass header of 136.modern.tex, 2026-10-10). Dropped as matches the reading already footnotes: Lucas/Kummer (pp. 19–22), the Dirichlet evaluation of the Stokes integral (p. 140, the edition's own), Dold–Puppe/Dold–Kan, Eilenberg–Zilber, the décalage formulas, Serre–Cartan on K(F_p,n), Breen's Ext(G_a,G_a) (pp. 356–375, notes attributed to nobody), the divided-power filtration of Z_2 (p. 240). Dropped as repaired by the edition: the negative-degree proposition of p. 42 (p-divisible for « divisible »), Γ^iΨ and Sym^iΨ « are K(k,i) » (p. 226, false as written).
   {
@@ -3160,6 +3312,8 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'The construction itself — the simplex of size ϑ with divided powers over ℤ — is in Kageyama 2022 § 2.1, so only the cohomology statement remains open. Read Cenkl–Porter, « De Rham theorem with cubical forms », Pacific J. Math. 112 (1984) (a web search summary says they work over ℤ[1/2, …, 1/q], not with divided powers; not read), Cenkl, Pacific J. Math. 140 (1989), and the literature on integral models of cochains (Mandell 2006; binomial-ring models, e.g. Horel) for a computation of H of divided-power forms as τ_{≥q}(H^q ⊗ Γ(T)). If found, mark matched; the reading’s Koszul exactness is the step a reader should check first.',
+    reach: 'reachable',
+    onPage: 'partial',
   },
   {
     id: '136-shadow-full-faithfulness',
@@ -3195,6 +3349,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check whether the automorphisms (or simplicial-ring endomorphisms) of the simplicial algebra of polynomial forms — Sullivan’s ∇(•, •), A_PL — have been computed rationally (Bousfield–Gugenheim, Memoirs AMS 179, 1976; Félix–Halperin–Thomas, Rational Homotopy Theory, § 10) or for the divided-power version (Kageyama, arXiv:2211.03289). A rational computation would match only the case 2 invertible; the ₂𝐆_a factors are the part to look for. If found, mark matched.',
+    reach: 'beyond',
+    theory: "crystalline or de Rham cohomology",
+    onPage: 'partial',
   },
   {
     id: '7-catalogue-date-1967',
@@ -3251,6 +3408,8 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Compare with A. Ogus, « F-isocrystals and de Rham cohomology II — Convergent isocrystals » (Duke Math. J. 51, 1984), whose enlargements are p-adic formal schemes T with a map from (T₀)_red to X₀. Up to flatness and the closed-immersion condition, these look like the objects of page 17. If they coincide, mark matched. Then decide test a). From memory, convergent cohomology of a smooth affine X₀ is not Washnitzer–Monsky cohomology (for the affine line it is the de Rham cohomology of the closed disc, of infinite rank), which is the obstruction the folder’s own pages 38–40 show for W{t} and the one §7.5 of the published text avoids by passing to weakly complete algebras. If that holds, the site as proposed fails its own test a).',
+    reach: 'imprecise',
+    onPage: 'stated',
   },
   {
     id: '37-ind-topos-exercise',
@@ -3270,6 +3429,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Johnstone, Sketches of an Elephant, D3.3 (locally finitely presentable toposes) and C2.2, Gabriel–Ulmer, Lokal präsentierbare Kategorien (LNM 221, 1971), and Adámek–Rosický, Locally Presentable and Accessible Categories, for a characterisation of the small C with Ind(C) a topos in terms of finite colimits in C (or its Karoubi envelope) and the finitary topology. If (ii) or (iii) is there, mark matched; if not, verify (ii) ⇔ (i) before calling it a candidate, since the edition has not.',
+    reach: 'beyond',
+    theory: "topoi",
+    onPage: 'stated',
   },
   {
     id: '37-sga4-viii-section-10',
@@ -3347,6 +3509,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read M. Raynaud, « Théorèmes de Lefschetz en cohomologie des faisceaux cohérents et en cohomologie étale » (Ann. Sci. ÉNS 7, 1974), which SGA 2’s editorial notes cite for improvements of X 2.1 and XII 3.1, and R. Hartshorne, Ample Subvarieties of Algebraic Varieties (LNM 156, 1970), ch. IV and V. If either proves that Lef or (LG)_n passes from (X, Y) to a projective flat W, mark matched. Otherwise, check the reading’s proof sketch of (i) in full, in particular the hypercohomology five-lemma step at degree n+1.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'stated',
   },
   {
     id: '58-local-hom-comparison-depth-off-y',
@@ -3366,6 +3531,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read Raynaud 1974 (Ann. Sci. ÉNS 7), Corollaires I.1.4 and I.5. If they drop the depth condition along Y′, mark matched. If not, complete or refute the t-regular step that page 47 leaves at « ? ». A test case is a coherent G that is the ideal of a height-two prime containing t, which has depth 1 at a closed point of Y′, in A = k[[x, y, z]] with t = x.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '58-typed-leaf-sga2-xii-3-1',
@@ -3481,6 +3649,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'The statement rests on an uncertain interlinear « univ. ouvert », so the transcription of page 17 should be checked against the facsimile first. Then look for the factorisation (the « étale part » of a finite morphism, π₀ of X/Y) in EGA IV 18.2 and 18.12, SGA 1 IX, and the Stacks Project chapters on étale morphisms and fundamental groups (pione), and see whether it is stated under universal openness or only for finite flat (locally free) morphisms. Two general web searches on 2026-10-10 did not surface the statement in either form; that is not a reading of those sources, hence the status.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '126-nilpotent-deformation-quotient',
@@ -3497,6 +3668,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Look for deformation of quotients by flat equivalence relations in SGA 3, exposés V and VI_A (quotients by flat groupoids), and in the Stacks Project chapters on groupoids and deformation theory. A match for the statement as completed would settle it. Pages 4–7 have had their second transcription pass; if no match is found, the entry can go to candidate, with R₀ = R ×_X X₀ and « (M) » named as the edition’s.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '126-generic-descent',
@@ -3513,6 +3687,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read A. Weil, « The field of definition of a variety » (Amer. J. Math. 78, 1956), and SGA 3, exposé XVIII (M. Artin, birational group laws), for a descent statement for a rational descent datum in this generality — an arbitrary fibred category with flat surjective maps of descent; also EGA IV § 9 and § 20 on generic properties. If the general form is there, mark matched; if only the case of varieties or group laws is, the fibred-category form is the candidate.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'proved',
   },
   {
     id: '126-interposed-leaves-13-19',
@@ -3548,6 +3725,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Look for the statement that cochain complexes in ℬ are the left-exact functors out of bounded complexes of free modules (or, equivalently through Dold–Kan, out of strictly perfect simplicial modules) in: Mitchell, « Rings with several objects » (Adv. Math. 8, 1972), on complexes as additive functors on a ringoid; Keller, « Chain complexes and stable categories » (Manuscripta Math. 67, 1990) and « Deriving DG categories » (1994); Bühler, « Exact categories » (Expo. Math. 28, 2010); Illusie, Complexe cotangent I, ch. I, on Dold–Puppe in additive categories; and, in ∞-categorical form, Lurie, Higher Algebra 1.3.3 and 1.2.4 (universal property of D⁻ and of the Dold–Kan correspondence). If it is in any of these, even as an exercise, mark matched.',
+    reach: 'imprecise',
+    onPage: 'partial',
   },
   {
     id: '137-polynomial-categories-pd-tensor-categories',
@@ -3566,6 +3745,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Decide whether either notion, or the equivalence, is in print: Roby, « Lois polynomes et lois formelles » (Ann. ENS 80, 1963) and « Lois polynômes multiplicatives » (1980); Friedlander–Suslin (Invent. Math. 127, 1997) § 2; Bousfield, « Operations on derived functors of non-additive functors » (1967); Joyal’s analytic functors and the theory of Γ-rings / Tambara functors for exponential structures; and the literature on categories with polynomial (non-additive) hom-structures, such as Blute–Cockett–Seely differential categories and Ehrhard’s models of differential linear logic, where Hom(!X, Y) plays the role of Hom(Γ X, Y). A match would most likely be a « !-coalgebra / Seely category » formulation; check that its morphisms and composition coincide with 𝐏_p(X, Y) = Hom(Γ^p X, Y) and g ∘ Γ^q(f) ∘ α_{q,p} before marking matched.',
+    reach: 'reachable',
+    onPage: 'partial',
   },
   // Folder 9 — find-novelty pass, Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5.5 (pass header 2026-10-03).
   {
@@ -3586,6 +3767,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Chai’s « Families of ordinary abelian varieties » (Serre–Tate coordinates and p-adic monodromy sections), Katz « Serre–Tate local moduli » (LNM 868, 1981) and Faltings–Chai, Degeneration of Abelian Varieties, V.1–V.3 (ordinary locus, Igusa tower, det of the étale quotient vs. ω^{p−1}) for an isomorphism det T_p(A)_ét ≃ det T_p(A^t)_ét, or equivalently a trivialisation of det T_p(A)_ét ⊗ det T_p(A^t)_ét^∨ over the ordinary locus. If it is there, or follows in a line from the Weil pairing plus the standard description of the unit-root crystal, mark matched.',
+    reach: 'beyond',
+    theory: "other: group schemes over a base (abelian schemes, p-divisible groups, Néron models, Picard schemes, reductive groups)",
+    onPage: 'partial',
   },
   {
     id: '9-symmetric-positive-det-sqrt-degree',
@@ -3604,6 +3788,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check Mumford, Abelian Varieties §21 (Rosati involution, positivity, deg u as a norm) together with the unit-root factorisation of the characteristic polynomial for ordinary A (Deligne, « Variétés abéliennes ordinaires sur un corps fini », Invent. Math. 8, 1969; Serre–Tate canonical lift): if the identity follows there from the norm form of the totally real symmetric subalgebra in a line, mark matched; otherwise it is a candidate.',
+    reach: 'beyond',
+    theory: "other: group schemes over a base (abelian schemes, p-divisible groups, Néron models, Picard schemes, reductive groups)",
+    onPage: 'partial',
   },
 // Folder 40 — find-novelty pass, Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading, 2026-10-10.
 // Pool from 40.modern.tex: Hopf-algebra dictionary (pp. 1-4), pseudo-torsor criteria (pp. 9-15),
@@ -3669,6 +3856,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read Katz–Mazur, Arithmetic Moduli of Elliptic Curves (1985), on the Legendre family and level-2 structures, and Deligne–Rapoport (LNM 349) on Γ(2). Look for a rigidification of M(2) over Z[1/2] by a tangent vector at the origin together with a choice of √−1, represented by A¹ − {0, 1} over Z[1/2, i]. If it is there, mark matched. Antieau–Meier’s torsor X → M(2) already kills the generic μ₂ by a square root, without √−1. What the folder adds is the price of i and the strict 𝔖₃-equivariance, and that is the question.',
+    reach: 'beyond',
+    theory: "moduli of curves or abelian varieties",
+    onPage: 'stated',
   },
   {
     id: '64-octahedral-configurations-relative',
@@ -3760,6 +3950,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'The statement itself, that simultaneous resolution needs the base change by W, is classical (the reading’s footnote cites Brieskorn, Nice 1970, and Slodowy 1980), so only the route is in question. Read Slodowy, Simple Singularities and Simple Algebraic Groups (LNM 815, 1980), ch. 4, and Brieskorn, ICM Nice 1970, for the argument used. If a Picard-group or ample-cone argument appears there, or in Springer’s or Steinberg’s treatment of the group case, mark matched.',
+    reach: 'imprecise',
+    onPage: 'partial',
   },
   {
     id: '123-grothendieck-springer-pic-twisted-torus',
@@ -3778,6 +3970,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check SGA 3 (Exp. XXII–XXVI) and Demazure’s thesis for Pic of the scheme of Borels over a base in the non-split case. Then check Sansuc, « Groupe de Brauer et arithmétique des groupes algébriques linéaires » (Crelle 327, 1981), §6, where Pic of a torus and of a group is H¹(Γ, X*) by the same route, for whether the comparison with G̃ is stated. Also check whether the iff for regular S is really on page 12 by re-reading the facsimile with /transcribe-grothendieck. If the statement is found, mark matched.',
+    reach: 'beyond',
+    theory: "other: group schemes over a base (abelian schemes, p-divisible groups, Néron models, Picard schemes, reductive groups)",
+    onPage: 'partial',
   },
   {
     id: '123-kostant-rigidifications-count',
@@ -3796,6 +3991,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Prove or refute |N(T) ∩ N(T′)| = h·z·φ(h) (the image in W should be W_K ≅ P∨/Q∨ extended by (ℤ/hℤ)*). Then look for the count in Kostant 1959 §§6–9, Springer, « Regular elements of finite reflection groups » (1974), and the literature on Coxeter tori and Kostant–Coxeter pairs. A small-rank computer check (A₂, B₂, G₂) of orbit counts would settle the number independently.',
+    reach: 'beyond',
+    theory: "other: group schemes over a base (abelian schemes, p-divisible groups, Néron models, Picard schemes, reductive groups)",
+    onPage: 'stated',
   },
   // Folder 128 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over the Opus 5.5 reading of 2026-10-03.
   // Web searches (search-engine snippets only, no source read in full) located Ferrand 2003 and Ferrand–Olivier 1970 as the places to check; neither was read, so nothing below is beyond `unsearched`.
@@ -3814,6 +4012,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read D. Ferrand, « Conducteur, descente et pincement », Bull. SMF 131 (2003), §2 (modules over a fibre product of rings, Th. 2.2) and its descent sections: if flat modules over the Milnor square glue as Ferrand shows, the statement may follow formally, without nilpotence — then mark matched. Also check the Stacks Project chapters on descent and on pushouts/pinchings, and Mesablishvili’s results on effective descent for modules (pure morphisms).',
+    reach: 'reachable',
+    onPage: 'partial',
   },
   {
     id: '128-colength-one-equivalence-criterion',
@@ -3847,6 +4047,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'First decide Lemme 1: either prove Ker(H¹(A′/A, G_m) → H¹(A′₀/A₀, G_m)) ≅ Ker(… G_a …) under the stated hypothesis or find an Amitsur-complex counterexample. Only if it holds, compare the theorem with SGA 1 VIII and IX (descent, formal and infinitesimal), EGA III §5 and EGA IV §18, and Ferrand 2003, where descent along finite non-flat morphisms is decided on infinitesimal neighbourhoods.',
+    reach: 'reachable',
+    onPage: 'partial',
   },
   {
     id: '138-operations-belyi-extending',
@@ -3866,6 +4068,8 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read J. Ellenberg, « Galois invariants of dessins d’enfants » (in Arithmetic Fundamental Groups and Noncommutative Algebra, Proc. Sympos. Pure Math. 70, 2002), which Wood credits with defining these maps; G. A. Jones and D. Pinto, « Hypermap operations of finite order » (Discrete Math. 155, 1996); and G. A. Jones and J. S. Thornton, « Operations on maps, and outer automorphisms » (J. Combin. Theory B 35, 1983) — all cited from memory. If any of them proves that an operation given by an isotopy class of graphs on the reference sphere, functorial along all ramified covers, is composition with a Belyi-extending map, mark matched. Jones–Thornton treats only invertible operations (Out of the cartographic group), so it is unlikely to bear on subdivision-type operations.',
+    reach: 'imprecise',
+    onPage: 'stated',
   },
   {
     id: '138-operations-subset-criterion',
@@ -3882,6 +4086,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'First re-read page 124 against the facsimile (/transcribe-grothendieck) to fix where the boxed addition goes and what b) says; if b) concerns the components of S ∖ A rather than A, rewrite the claim accordingly. Then search the same sources as 138-operations-belyi-extending (Wood 2006 §3, Ellenberg 2002, Jones–Pinto 1996) for a criterion on graphs in the reference sphere that define operations on all dessins.',
+    reach: 'doubtful',
+    onPage: 'stated',
   },
   {
     id: '138-pages-122-127-order',
@@ -3918,6 +4124,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'A person checks the composition argument in the ours field: the equivariance of L ↦ det L̂ along φ(δ)~, and φφ(δ) = δ for surfaces. Then two tests. First, look for an abelian surface over a number field with a polarisation of even χ (type (1,2), say) and c_λ ≠ 0; one such surface refutes the claim. Second, check a sharp consequence. Since c is additive and killed by 2, the claim forces c_θ = 0 for any genus-2 curve C/k whose Jacobian has real multiplication by O_D, D ≡ 1 mod 8, defined over k: θ is then a sum of two classes of even χ, so Pic^1_C would have a k-point. Also read Moret-Bailly, « Pinceaux de variétés abéliennes » (Astérisque 129, 1985), and Polishchuk, « Abelian varieties, theta functions and the Fourier transform » (2003), for the statement.',
+    reach: 'beyond',
+    theory: "other: group schemes over a base (abelian schemes, p-divisible groups, Néron models, Picard schemes, reductive groups)",
+    onPage: 'partial',
   },
   {
     id: '59-determinant-canonical-section',
@@ -3934,6 +4143,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check whether this trivialisation, or the map φ with its degree-(n−1) polynomiality, appears in Moret-Bailly (« Pinceaux de variétés abéliennes », Astérisque 129, and his work on the key formula), in Faltings–Chai, « Degeneration of abelian varieties », I.5, or in Polishchuk’s book on the determinant bundle and the Fourier transform. The abelian-scheme case (φ(δ)~ ∘ δ̃ = −χ(δ)) is in substance Mukai 1981 and the dual polarisation of Birkenhake–Lange §14.4. If the general form is there too, mark matched.',
+    reach: 'beyond',
+    theory: "other: group schemes over a base (abelian schemes, p-divisible groups, Néron models, Picard schemes, reductive groups)",
+    onPage: 'partial',
   },
   // Folder 120 — find-novelty pass, Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5.5 (pass header 2026-10-03).
   {
@@ -3993,6 +4205,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read EGA IV §11.8 (valuative criterion of flatness, reduced base) and §11.10 (universally schematically dense opens, the Ass criterion 11.10.9–10), and Raynaud–Gruson, « Critères de platitude et de projectivité » (Invent. Math. 13, 1971), Part I §§4–5 (pure modules, flattening, valuative criteria). Ask whether the two-sided criterion — artinian base changes and traits together — for the flatness and universal density of Im(F → i_*G_U) appears there, with or without the formal-fibre hypothesis. Before any search, settle « artinien » on page 15 against the facsimile; that is /transcribe-grothendieck’s work.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '127-non-flat-descent-artinian-epimorphism',
@@ -4009,6 +4224,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Decide first whether the lemma is true as stated; no proof is given. Then look for descent of flatness of a determined quotient along non-flat (universally injective or epimorphic) morphisms: Raynaud–Gruson 1971, Part I; Ferrand, « Conducteur, descente et pincement » (Bull. SMF 131, 2003); Mesablishvili on pure morphisms and effective descent for modules. Also look at the Stacks Project chapter on descent along non-flat morphisms. If the statement there is the same, with the uniqueness of Im(F → i_*G_U) doing the work, mark matched.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'stated',
   },
   {
     id: '127-hironaka-reduced-base-openness',
@@ -4027,6 +4245,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Kollár 2011 (arXiv 0910.1076), §1 and the statement attributed to Hironaka with its reference. Read also EGA IV 5.12.8, 15.2.2–15.2.3 and 12.1–12.2, and Kollár, Families of varieties of general type (2023), on Hironaka-type flatness. The question is whether the version over a reduced base — universally open and equidimensional in place of regular, with geometrically normal formal fibres — is in print. If it is, mark matched. If only the regular-base case is, the status becomes candidate, but the sketch on page 12 rests on uncertain readings and on the unproved Cor. 1.6–1.7.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '127-ega-iv-typescript-leaf',
@@ -4102,6 +4323,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'First have the transcription re-read the word « inv. » on page 95 against the facsimile. Then compute 𝐸𝑥𝑡²_ℤ(α_p, 𝔾_a) over a perfect field of odd characteristic. The tools are Breen, « Extensions du groupe additif » (Publ. IHÉS 48, 1978) and Illusie, Astérisque 127 §2–4. If it is non-zero, the NB as read is refuted. If not, look for the vanishing in Astérisque 127.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'stated',
   },
   {
     id: '129-drafts-of-montreal-volume',
@@ -4189,6 +4413,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read R. L. Taylor, « Compound group extensions I », Trans. AMS 75 (1953), 106–135, and « Covering groups of nonconnected topological groups », Proc. AMS 5 (1954), 753–768 (cited from Brown–Mucuk’s bibliography and from memory), and K. Mackenzie’s account for Lie groupoids that Brown–Mucuk cite: Brown–Mucuk say results of this type were known to Taylor. If either gives the (G̃₀, φ) description, or if it is a direct translation of Brown–Mucuk 6.3 via the crossed module π → H̃, mark matched.',
+    reach: 'beyond',
+    theory: "other: algebraic topology and stratified spaces",
+    onPage: 'partial',
   },
   {
     id: '132-taylor-obstruction',
@@ -4223,6 +4450,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Compare with Zieschang–Vogt–Coldewey, Surfaces and Planar Discontinuous Groups (LNM 835, 1980), ch. 5, and Farb–Margalit, A Primer on Mapping Class Groups, ch. 8 (Dehn–Nielsen–Baer with boundary, cited from memory), and with any treatment of the mapping class group rel boundary as automorphisms of the fundamental groupoid with one base point on each boundary component. If the multi-boundary, rel-boundary statement is there in groupoid form, mark matched; the computation of π₁ (disc, cylinder) is the algebraic shadow of the known homotopy types of their homeomorphism groups and is not itself a candidate.',
+    reach: 'beyond',
+    theory: "other: algebraic topology and stratified spaces",
+    onPage: 'partial',
   },
   {
     id: '132-teichmuller-boundary-sequence',
@@ -4259,6 +4489,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read R. Brown, « Fibrations of groupoids », J. Algebra 15 (1970), and Topology and Groupoids (ch. 7 and 10), and Brown–Heath–Kamps 1983. The statement is almost certainly the low-degree part of the Mayer–Vietoris sequence of a homotopy pullback; if it is stated there, mark matched.',
+    reach: 'beyond',
+    theory: "other: algebraic topology and stratified spaces",
+    onPage: 'partial',
   },
   {
     id: '132-page-18-interleaved',
@@ -4294,6 +4527,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check whether this exact sequence, or the inequality (8.5.6) for the vanishing part, follows from or appears in the de Rham–Witt treatment of slopes and unit-root parts (Illusie, « Complexe de de Rham–Witt et cohomologie cristalline », 1979, II.7; Bloch, Illusie), in Katz, SGA 7 exposé XXII, or in Illusie, « Ordinarité des intersections complètes générales » (1990); and whether crystalline weak Lefschetz with torsion is established (Berthelot, LNM 407), since without it the statement is conditional. If it is there, mark matched.',
+    reach: 'imprecise',
+    onPage: 'partial',
   },
   {
     id: '4-revision-reverses-surjectivity',
@@ -4345,6 +4580,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read SGA 4 XVIII (Deligne, « La formule de dualité globale »), §§ 3.1–3.2: whether duality is stated there for a sheaf of rings A on Y and B on X as in the letter, and whether its proof avoids relative purity by the induction the letter proposes. If either is there, mark matched (the letter is addressed to the author of that exposé).',
+    reach: 'beyond',
+    theory: "étale or ℓ-adic cohomology",
+    onPage: 'stated',
   },
   {
     id: '5-ega-iv-typescript-versos',
@@ -4399,6 +4637,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Look for the statement for étale cohomology with arbitrary torsion coefficients in SGA 4½ « Cycle » (§ 2, Gysin and degree) and SGA 4 XVIII 2–3, Fulton, Intersection Theory § 1.4 and Ex. 19.1 (cycle-class compatibility of proper push-forward), and Colliot-Thélène–Skorobogatov, The Brauer–Grothendieck Group (index arguments). The mechanism is the standard restriction–corestriction one; if any of these states it, or it follows in a line from the trace formula f_*f* = deg for generically finite proper maps to a smooth target, mark matched.',
+    reach: 'beyond',
+    theory: "étale or ℓ-adic cohomology",
+    onPage: 'partial',
   },
   {
     id: '119-foliation-quotient-topos-equivalence',
@@ -4419,6 +4660,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read SGA 4 IV around p. 478 (the Grothendieck–Verdier passage on local equivalence relations), and the full texts of Kock–Moerdijk 1992 (§§2–7) and 1996, for a 2-categorical or categorical equivalence between spaces with (locally open, locally connected) local equivalence relations and locally open, locally connected geometric morphisms out of Top(X); if found, mark matched. Before that, the illegible third condition on page 145 must be re-read against the facsimile (/transcribe-grothendieck), since the statement may be false or trivial without it — which is why the status stays unsearched although sources were read.',
+    reach: 'beyond',
+    theory: "topoi",
+    onPage: 'stated',
   },
   {
     id: '119-page-157-interleaved-leaf',
@@ -4455,6 +4699,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Bosch–Lorenzini, « Grothendieck’s pairing on component groups of Jacobians » (Invent. Math. 2002), §4, and Néron, « Quasi-fonctions et hauteurs sur les variétés abéliennes » (Ann. of Math. 1965), for the decomposition of the local symbol as intersection on the Néron model plus a component-group term with denominator dividing m; if either has it for abelian varieties (not only Jacobians via regular models of curves), mark matched. An orienting web search surfaced Bosch–Lorenzini and Pépin, « Néron’s pairing and relative algebraic equivalence » (arXiv 1103.0570), as the neighbourhood; no section was read, so the status stays unsearched.',
+    reach: 'beyond',
+    theory: "other: group schemes over a base (abelian schemes, p-divisible groups, Néron models, Picard schemes, reductive groups)",
+    onPage: 'stated',
   },
   {
     id: '130-quasi-function-sheaf',
@@ -4471,6 +4718,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check Lang, Fundamentals of Diophantine Geometry (1983) ch. 10, and Vojta’s CIME notes « Diophantine approximation and Nevanlinna theory » (2011) §8, for Weil functions presented as a sheaf extension of Div_X by locally M_K-bounded functions. If it is there, or if the sheaf form adds nothing beyond Lang’s existence theorem, mark matched. An orienting web search found no such sequence stated, which is not a search of those texts.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '130-interleaved-44-48',
@@ -4849,6 +5099,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check whether the unfolding (resolution) of a Thom–Mather or conically smooth stratified space into manifolds with corners is anywhere presented as one ordered space with proper collared target map and fibred source, with the index poset recovered as a quotient of π₀ rather than given. Sources to try: Albin–Leichtnam–Mazzeo–Piazza, The signature package on Witt spaces (Ann. Sci. ÉNS 2012), on resolution to manifolds with iterated fibration structure; Ayala–Francis–Tanaka, Local structures on stratified spaces (Adv. Math. 2017), the « unzip » construction; Verona, Stratified mappings — structure and triangulability (LNM 1102, 1984); Mather, Notes on topological stability (1970; Bull. AMS 2012). If the index-free ordered-space form is there, mark matched; the indexed form alone is almost certainly matched by ALMP and AFT and is not the claim.',
+    reach: 'imprecise',
+    onPage: 'partial',
   },
   {
     id: '150-flag-fibration-smoothness',
@@ -4865,6 +5117,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check whether the boundary-face combinatorics of the fibres of the iterated boundary fibrations of a resolved stratified space — faces indexed by flags of the open intervals of the stratum poset, smooth fibres iff consecutive strata are adjacent — is stated in Albin–Leichtnam–Mazzeo–Piazza (2012, §2 on iterated fibration structures), Ayala–Francis–Tanaka (2017) on links of unzipped strata, or Debord–Lescure–Rochon (2015) on manifolds with fibred corners. If stated there, mark matched; this is the more likely outcome, since the link of stratum i in stratum j is classically stratified by the strata between them.',
+    reach: 'beyond',
+    theory: "other: algebraic topology and stratified spaces",
+    onPage: 'proved',
   },
   {
     id: '150-leaves-swapped',
@@ -4926,6 +5181,8 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read Pop 2019 (tripod variants), whose subcategories are built from finite étale covers of P¹ ∖ {0, 1, ∞}: if it proves that automorphisms of the geometric fundamental groups of the covers of one hyperbolic curve (or of U_{0,3}), compatible with the morphisms among them, come from Galois, mark matched with the section number. Also check H. Nakamura’s and Y. Ihara’s surveys of the GT/I/OM programme and Mochizuki’s Hom-form of the anabelian conjecture for a single-curve formulation with inertia. Nothing here is a priority claim; the folder is dated only « [à partir de 1978] » and, by its mention of Belyi, after 1979.',
+    reach: 'open-problem',
+    onPage: 'stated',
   },
   {
     id: '142-teichmuller-galois-category-etale',
@@ -4944,6 +5201,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read the Teichmüller-tower literature where categories rather than groupoids appear: P. Lochak and L. Schneps (eds.), Geometric Galois Actions 1 (LMS LN 242, 1997), in particular Hatcher–Lochak–Schneps and Lochak–Nakamura–Schneps; Nakamura–Schneps on the profinite Teichmüller modular groups; and any construction of a « profinite completion of a category with profinite Aut groups » (e.g. in the profinite-groupoid literature). If a category of hyperbolic curves with finite étale maps, completed profinitely and carrying a Galois action, appears, mark matched; independently, a proof or counterexample for the identification (17) under (*) decides whether the general completion holds as stated.',
+    reach: 'beyond',
+    theory: "moduli of curves or abelian varieties",
+    onPage: 'partial',
   },
   {
     id: '142-run-I-leaf-order',
@@ -5105,6 +5365,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'A person checks on the facsimile that pages 62 and 64 are single leaves with nothing numbered on their versos. Then the other Teichmüller folders (143–145, 147–148) are searched for a manuscript whose formulas run to (52) before « points base à l’infini », or to (25) just before the monogon. That decides whether these are stray leaves of another redaction or drafts of 144’s pp. 7 ff.',
+    reach: 'imprecise',
+    onPage: 'stated',
   },
 // 147: two entries. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (% Pass header of 147.modern.tex, 2026-10-10); no disagreement with the reading. Dropped as matches already named in the reading: the Deligne–Mumford–Knudsen compactification and its stratification by stable graphs (pp. 21–30), codimension = number of edges (p. 27), the orbifold Euler characteristics χ(M_{0,4}) = −1, χ(M_{1,1}) = −1/12 (pp. 61–63), the Petersen graph as dual graph of the boundary of M̄_{0,5} (p. 67, the ten lines of the quintic del Pezzo surface), the « two-level » impression of p. 59 (Hatcher–Lochak–Schneps 2000), the Lego–Teichmüller Programme of p. 103 (Esquisse, 1984), Dehn twists as the ℤ^C of (101)–(103). Dropped as repairs or as not established: (37) as a closed immersion (false, the reading repairs it), the claim that every subgroup of S_4 is an image Γ_G → S_4 (p. 57, « sauf erreur », unverified by page and pass), the connectedness of the boundary for dim ≥ 2 (pp. 71–74: page 74 read with much uncertainty, and the statement is very probably standard via the connectedness of the curve complex; not searched), the structure of M̄_{1,2} at infinity (p. 71, « J'y renonce »), the Scholie of p. 176 (posed « heuristiquement »).
 {
@@ -5163,6 +5425,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Bakalov–Kirillov, « On the Lego-Teichmüller game » (Transform. Groups 5, 2000; arXiv math/9809057), Hatcher–Lochak–Schneps, « On the Teichmüller tower of mapping class groups » (Crelle 521, 2000), and Funar–Kapoudjian on the universal mapping class groups, for whether a groupoid with r(a) marked points per circle and the uniform erasure / over-marking operations appears there; the versions this pass knows use one marked point per boundary circle. Also compare with surfaces with marked points on the boundary in Fomin–Shapiro–Thurston (Acta Math. 201, 2008), which carry several boundary points but not these operations. A web search of 2026-10-10 returned only the Bakalov–Kirillov abstract and was not a reading of any source, so it is not listed as searched.',
+    reach: 'imprecise',
+    onPage: 'partial',
   },
   {
     id: '148-m05-special-structures-chart',
@@ -5179,6 +5443,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'First recount the 1620 arrows from the chart on the facsimile of page 30, since the reading could not reconcile three arrow types. Then compare with presentations of the genus-0, five-point Teichmüller groupoid on special or tangential base points: Lochak–Schneps, « The universal Ptolemy–Teichmüller groupoid » (1997), Hatcher–Lochak–Schneps (Crelle 521, 2000), and Bakalov–Kirillov (2000). If one of them uses this set of 542 base points or an equivalent one, mark the entry matched. A web search of 2026-10-10 for « 542 » with M_{0,5} and tangential base points found nothing; that is not a reading of those papers.',
+    reach: 'imprecise',
+    onPage: 'stated',
   },
   {
     id: '148-pages-36-37-reversed',
@@ -5195,6 +5461,8 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'A person checks on the facsimile whether pages 36 and 37 are the two faces of one listing sheet, in which case the « reversal » is just which face was scanned first, or two separate sheets filed in the wrong order.',
+    reach: 'imprecise',
+    onPage: 'stated',
   },
 // 149: three entries. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (% Pass header of 149.modern.tex, 2026-10-10); no disagreement with the reading. Dropped as matches already named in the reading: Thm 1 (trivial centralisers of open subgroups of G_K), Thm 2 (faithfulness of K ↦ G_K over G_Q), Thm 3 (injectivity of points into section classes for subvarieties of semi-abelian varieties), the cuspidal splittings as a torsor under K*^ (tangential base points), the Zariski–Riemann proposition, the dual complex, the « dominant » Hom form (Mochizuki 1999), Oda's good-reduction criterion. Dropped as not established by the folder: every conjecture of §§2–4, the injectivity of G_k → Out(Δ_K) (p. 20), the conormal identification of c_i (p. 80, sign undecided), presumptions 1°) and 2°) of p. 129. Dropped as repairs: the Lemma of p. 36 as stated (false for types (1,1), (1,2)), d) ⇒ a) of p. 100, p. 121, p. 123, p. 129 2°).
 {
@@ -5270,6 +5538,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Sturmfels–Ziegler 1993 and Björner, Las Vergnas, Sturmfels, White, Ziegler, Oriented Matroids (2nd ed.), ch. 7 (single-element extensions, Las Vergnas’s localisation theorem), together with Goodman–Pollack on allowable sequences (« Semispaces of configurations, cell complexes of arrangements », JCTA 37, 1984), for any statement about the cyclic order of the elements along a moving extension and its monodromy. Independently, check the half-turn value n − 1 in the realisable case, where positions are points of the dual plane off the lines δ_iδ_j and Pol(D) is the doubled cyclic order of the lines from that point to the δ_j. Until a source is read the status stays unsearched.',
+    reach: 'beyond',
+    theory: "other: pseudoline arrangements",
+    onPage: 'partial',
   },
   {
     id: '154-generisation-cube',
@@ -5286,6 +5557,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check against Las Vergnas’s characterisation of single-element extensions by signatures on cocircuits (Björner et al., Oriented Matroids, §7.1): if the independence of the signs at the cocircuits on the new element is stated or immediate there, mark matched. Then decide, from Sturmfels–Ziegler 1993, how the extension poset is made into a cell complex near a non-generic extension, which settles whether page 150’s surface can contain the positions of specialty ≥ 3.',
+    reach: 'imprecise',
+    onPage: 'stated',
   },
   {
     id: '154-cyclic-order-determines-position',
@@ -5302,6 +5575,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check the pass’s sketch against Björner et al., Oriented Matroids, §7.1 (extensions determined by their localisations) and the topological representation theorem (§5.2), keeping track of the passage from the sphere to the projective plane. If it holds as sketched, mark matched: the statement is then a standard consequence, and the entry stays only to correct the reading’s footnote.',
+    reach: 'beyond',
+    theory: "other: pseudoline arrangements",
+    onPage: 'stated',
   },
   {
     id: '154-rectification-b-page-159',
@@ -5699,6 +5975,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Search the literature on conjugate varieties and their Betti lattices inside adelic cohomology — Serre 1964 (non-homeomorphic conjugate varieties), Deligne–Milne–Ogus–Shih LNM 900 I §2 (absolute Hodge cycles, the 𝔸_f-comparison of H_B(σX)), and André, Une introduction aux motifs §7.5 and ch. 23 (period torsors, several embeddings) — for a cocycle Gal(k/k₀) → G(k) built from the archimedean component of the lattice comparison, and for a transcendence bound in the number of embeddings. Until then it is a list item, not a candidate.',
+    reach: 'beyond',
+    theory: "motives",
+    onPage: 'partial',
   },
   {
     id: '18-p6-foreign-typescript',
@@ -5846,6 +6125,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'First make the statement legible: re-read pages 8–10 against the facsimile with /transcribe-grothendieck, especially the theorem’s first condition and condition (iii). Then read Romagny 2011 §2–3 in full, and EGA IV 15.5–15.6 and 14.5, for an existence result for the topological functor of components (generic-point sections, as on page 3) under universal openness without geometrically reduced fibres, and for a trait criterion for its separation. The status stays unsearched because the statement rests on illegible words, not because nothing was read.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'stated',
   },
   {
     id: '41-chapter-number',
@@ -5900,6 +6182,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Look for Zariski local cohomology with coefficients in a commutative algebraic group, and for a « local Jacobian » or « local Albanese » representing H^d_a(−) at a point of dimension d ≥ 2. Search in Serre, Groupes proalgébriques (1960) and Corps locaux; in Kato–Russell on Albanese varieties with modulus; and in the literature on higher local class field theory (Parshin, Kato). If H^d_a(G) or its representing pro-group appears there, mark matched.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'proved',
   },
   {
     id: '43-leaves-59-60-reversed',
@@ -5932,6 +6217,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'First decide whether Lemma 4 can be repaired (a conjugacy statement for Cartan subalgebras of a restricted Lie algebra under the infinitesimal group acting on it, or another way to reduce a non-commutative height-one kernel to commutative ones). Then check whether the statement for non-smooth G over imperfect fields is in Serre, Cohomologie galoisienne III.2 (Steinberg’s theorem and its corollaries), Borel–Springer 1968 (imperfect fields), or later work on fppf cohomology of non-smooth groups. For smooth connected linear G it is the matched case (Serre’s Conjecture I, Steinberg 1965; Borel–Springer 1968).',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '45-bands-tsen-field',
@@ -5948,6 +6236,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check Giraud, Cohomologie non abélienne (1971), ch. IV and VI, and Douai’s work on H² of bands over fields of dimension ≤ 1 (Douai 1976 and later; also Borovoi on bands over such fields) for the scope of the neutrality theorem: if they cover only smooth (or connected reductive) bands, the non-smooth case — finite radicial and non-reduced bands — is the candidate, and it stands or falls with the conjugacy step of case (ii).',
+    reach: 'beyond',
+    theory: "stacks, gerbes, Picard categories",
+    onPage: 'partial',
   },
   {
     id: '45-delzant-referee-letter-1961',
@@ -6025,6 +6316,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read EGA IV₂ §4.5, where 4.5.13 is the connected analogue with a geometrically connected Z, together with the Stacks Project chapter « Varieties », sections on geometrically irreducible schemes and on geometrically unibranch points. Look for the irreducible analogue with a geometrically irreducible source Z and the condition on the image. If it is there, even only in the case where Z is a point, mark the entry matched.',
+    reach: 'reachable',
+    onPage: 'proved',
   },
   {
     id: '53-cancellative-monoid-is-group',
@@ -6104,6 +6397,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'First have someone read page 45 against the facsimile where the transcription has \\ill{} and \\uncertain{} in the setup. Then check Grothendieck’s Les Dérivateurs (Künzer–Malgoire–Maltsiniotis edition) and Cisinski, Astérisque 308 ch. 4–6 and « Propriétés universelles et extensions de Kan dérivées » (TAC 20, 2008), for a statement that W_𝔻, or every basic localiser, satisfies this excision for a cover by two sieves; if it is there, or follows in one line from a stated stability of basic localisers under homotopy pushouts, mark matched.',
+    reach: 'beyond',
+    theory: "derivators and homotopy theory of categories",
+    onPage: 'partial',
   },
   {
     id: '105-french-run-missing-opening',
@@ -6223,6 +6519,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'The Q̄-coefficient version (group of the smallest subtorsor over K = Q̄; invariants = Q̄-de Rham–Betti classes) is in Kreutz–Shen–Vial Prop. 3.1, so what remains is the page’s form: invariants in V itself of the k-subgroup H obtained by pushing R down along G_K → G, for an arbitrary tower k ⊂ K ⊂ L and an arbitrary tensor category. Read André, Une introduction aux motifs (2004) §7.5 and Huber–Müller-Stach, Periods and Nori motives (2017) ch. 13 for this k-rational form; if it is there, mark matched. Independently, check the descent step of page 34 (R ⊂ G_{x,K} ⇔ p(R) ⊂ G_x, which holds because G_{x,K} = p⁻¹(G_x)) against the facsimile’s illegible words before anything rests on it.',
+    reach: 'beyond',
+    theory: "other: Tannakian categories",
+    onPage: 'partial',
   },
   {
     id: '13-double-niveau-de-rham-betti',
@@ -6336,6 +6635,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read EGA IV 6.11–6.12 and 7.8 (openness of S_k loci, Nagata rings, finiteness of normalisation), EGA IV 5.11 (coherence of i_* across codimension 2), Nagata, Local Rings, ch. V, Matsumura, Commutative Ring Theory §§ 31–32, and the Stacks Project chapter on Japanese/Nagata rings; if a criterion reducing finiteness of the normalisation to the height-one non-regular primes, under « quotient of a regular (or CM) ring », is in any of them, mark matched.',
+    reach: 'beyond',
+    theory: "other: commutative algebra (Serre criterion, S2-ification)",
+    onPage: 'partial',
   },
   // Folder 39 — find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, over a reading made by Opus 5 (claude-opus-5, 2026-09-13).
   // Pool reviewed and dropped as matches: Weierstrass division over a linearly topologised ring (pp. 18–19; Bourbaki AC VII §3 per the reading),
@@ -6401,6 +6703,8 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Search EGA I (2nd ed., 1971) and EGA IV § 8 for a statement that Hom_S(X, Y) is the limit of Hom_S(Spec O_{X,x}, Y) over the specialization order for Y locally of finite presentation and separated, and the Stacks project chapters on limits of schemes; the searches so far were web searches and one note, which is thin. If the statement is there, mark matched.',
+    reach: 'reachable',
+    onPage: 'stated',
   },
   {
     id: '42-reseau-theorem-needs-hypothesis',
@@ -6511,6 +6815,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Compare with the local flatness criterion of EGA IV_3 §11.3 (around 11.3.7) and the Stacks Project, Lemma 10.99.1 (u : N → M, M flat over R, u ⊗ k injective ⇒ u injective with flat cokernel), to see whether either covers a target that is a pushforward along φ rather than a module over the same local ring; one web query pointed to the Stacks lemma but neither source has been read for this, so nothing is recorded under literature. First decide whether the statement holds at all without a finiteness hypothesis on φ at the points above y, and settle the reading of clause c) against the facsimile.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'stated',
   },
 // Candidate findings for folder 52, written by /find-novelty on Opus 5.5 (claude-opus-5-5), 2026-10-10,
 // on a reading and a transcription both made by Opus 5 (52.modern.tex and batch-01.fr.tex, 2026-09-13), under the 2026-09-23 exception.
@@ -6556,6 +6863,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'First decide whether (i)–(v) actually imply the conclusion for an abstract ringed space (a proof or a counterexample); then compare (v) with the hypotheses of J. Frisch, « Points de platitude d’un morphisme d’espaces analytiques complexes », Invent. Math. 4 (1967) 118–138, Th. I.9, and Y.-T. Siu, « Noetherianness of rings of holomorphic functions on Stein compact subsets », Proc. AMS 21 (1969) 483–489. Both were located by title in this pass but not read, so the status stays unsearched. If either states an identity-principle criterion of this form, mark matched.',
+    reach: 'reachable',
+    onPage: 'stated',
   },
   {
     id: '55-page-11-before-9',
@@ -6614,6 +6923,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Breen, Astérisque 225 (1994), the chapters on gr-stacks and 2-gerbes, for a classification of gr-stacks with π₀ ≃ G non-commutative and π₁ ≃ N by (relative) cohomology of the classifying topos B_G; also L. Breen, « Bitorseurs et cohomologie non abélienne » (Grothendieck Festschrift I, 1990), and Hoàng Xuân Sính, Gr-catégories (thèse, Paris VII, 1975). If the statement, or H³(B_G mod X, N) as the group of classes, is there, mark matched. Nothing has been read beyond search snippets.',
+    reach: 'beyond',
+    theory: "stacks, gerbes, Picard categories",
+    onPage: 'stated',
   },
   {
     id: '103-letter-leaf-order-missing-leaf',
@@ -6673,6 +6985,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Quillen, Homotopical Algebra (LNM 43, 1967), ch. II §2, prop. 4, with page 20 open: if the criterion is that proposition or an immediate consequence, mark matched. Otherwise look for the « homotopy-commutative lifting square » lemma in Hovey, Model Categories, ch. 1, and Hirschhorn, Model Categories and their Localizations, ch. 7; it is most likely folklore, and a pass should expect to mark it matched.',
+    reach: 'reachable',
+    onPage: 'partial',
   },
 // 111: no new entry. The folder is a third witness of the typescript « Tapis de Quillen » already read in 162-5 (pp. 2-17, 32-48); its one surviving mathematical candidate (pp. 11-13, the universal bordism correspondence category) is 162-5-bordism-correspondences-universal, and its relation to the other witnesses is in 162-5-photocopy-taken-after-ink and 162-5-karoubi-note-later-than-typescript; the rest of the reading is matches (Quillen/Illusie Ho(Cat) ≃ Ho(sSet), Dold-Kan, Deligne SGA 4 XVIII), conjectures the page announces without establishing (pp. 3-4, 9), or corrections of the page that are the edition's (pp. 3, 4, 8, 16), none of which qualifies.
   {
@@ -6713,6 +7027,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Search Thomason, Cat as a closed model category (1980), on Dwyer maps, and Cisinski §5.2 and Maltsiniotis Astérisque 301 for a pushout criterion stated through (op)fibration hypotheses on the opposite sides; then check whether the square of the Theorem reduces to a pushout along a Dwyer map or formal cofibration, in which case mark matched.',
+    reach: 'beyond',
+    theory: "derivators and homotopy theory of categories",
+    onPage: 'partial',
   },
   {
     id: '118-product-condition-iv',
@@ -6773,6 +7090,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Look for the locally quasi-finite statement with explicit conditions in M. Artin, « Algebraization of formal moduli I » (1969) and « Algebraic approximation of structures over complete local rings » (Publ. IHÉS 36, 1969), Knutson, Algebraic Spaces (1971), and the Stacks Project chapters « Artin’s Axioms » and « More on Morphisms of Spaces » (separated locally quasi-finite spaces over a scheme are schemes): if a criterion with a local and a generic openness-of-versality condition plus finite pro-representing hulls is there, mark matched. Murre’s remark shows the generalisation was announced in 1965; the candidate is only the explicit list of conditions (5), (7), (8), not the existence of such a theorem, and nothing here dates the folder relative to the exposé.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '131-unramified-and-etale-corollaries',
@@ -6944,6 +7264,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Thomason, « Equivariant resolution, linearization, and Hilbert’s fourteenth problem over arbitrary base schemes », Adv. Math. 65 (1987), §§ 1–2, and SGA 3, exposé VI_B § 11, for whether the smallest stable subsheaf and its finiteness are proved there for a non-noetherian base under this hypothesis on the coalgebra; if they are, mark matched.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '90-saturated-subcoalgebras',
@@ -7048,6 +7371,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Artin, Algebraization of formal moduli I (1969) §3–5 and Versal deformations and algebraic stacks (Invent. Math. 1974) §5, and the Stacks Project chapters « Artin’s Axioms » and « Criteria for Representability », for a statement that a formally étale monomorphism between limit-preserving fpqc sheaves with effective formal objects is an open immersion. It is likely to be there as a lemma on the way to Artin’s representability theorem, in which case mark matched; the scheme case (Tag 025F) is matched already and is not the claim.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'stated',
   },
   {
     id: '94-representability-criterion',
@@ -7066,6 +7392,8 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read Auslander, « Coherent functors » (1966), Hartshorne, « Coherent functors », Adv. Math. 140 (1998) §§2–5, and Grothendieck’s Bourbaki exposé 195 for a representability criterion on Mod(A) without a products condition; also check whether the folder’s conditions in fact imply product preservation by a short argument, which would reduce Th. 12 to Hall’s Example 3.10. If either holds, mark matched. Independently, settle whether the normal-locus hypothesis of Rem. 5 bis holds for every quotient of a regular ring.',
+    reach: 'imprecise',
+    onPage: 'partial',
   },
   {
     id: '94-rank-constructibility',
@@ -7082,6 +7410,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'First re-read p. 7 against the facsimile (/transcribe-grothendieck) to see whether the converse can be recovered; then check whether a fibre-rank constructibility criterion for generic representability of such functors appears in Hartshorne, « Coherent functors » (1998), or in Hall–Rydh’s work on coherent functors.',
+    reach: 'imprecise',
+    onPage: 'partial',
   },
   {
     id: '94-generic-tor-regular-sequences',
@@ -7098,6 +7428,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Look for this statement in EGA IV₂ §6 (around 6.9, generic flatness) and IV₃ §11, and in the Stacks project chapter « More on Flatness »; if it is there, or is an immediate consequence of a stated lemma there, mark matched.',
+    reach: 'reachable',
+    onPage: 'partial',
   },
 // Folder 80 — candidate entries from /find-novelty (Opus 5.5, claude-opus-5-5, 2026-10-10), on the Opus 5.5 reading of the same date.
   {
@@ -7120,6 +7452,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read Felsner–Goodman ch. 5 and Felsner 2004 ch. 6 for a statement that the local sequences (cyclic, unoriented) of a projective arrangement determine it up to isomorphism together with its automorphisms; then check whether the 1-skeleton of a bigon-free projective arrangement has face-width ≥ 3 and whether Mohar–Thomassen, Graphs on Surfaces (2001) ch. 5, gives uniqueness of the projective-plane embedding at that face-width. Either one stating the result makes the entry matched; independently, (A1)–(A6) for maps still need a proof before the folder’s argument can be said to establish it.',
+    reach: 'beyond',
+    theory: "other: pseudoline arrangements",
+    onPage: 'partial',
   },
   {
     id: '80-crucial-arrangements-theorem',
@@ -7153,6 +7488,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Prove or refute the dichotomy directly for pseudoline arrangements (the pass checked only that the counterexample to the p. 24 Théorème satisfies it), then search Grünbaum, Arrangements and Spreads (1972), and the literature on near-pencils and Sylvester–Gallai-type structure of arrangements without simple sub-arrangements of size five.',
+    reach: 'beyond',
+    theory: "other: pseudoline arrangements",
+    onPage: 'partial',
   },
   {
     id: '80-lattice-criterion',
@@ -7169,6 +7507,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check sufficiency on the small cases (III_6, II′_{3,2}, the six-line arrangement of 80-crucial-arrangements-theorem), then search for the intersection property of the cell complex of a projective (rank 3) oriented matroid — Björner, Las Vergnas, Sturmfels, White, Ziegler, Oriented Matroids, §4.3–4.5 on the face lattice and regular cell complexes, and Felsner–Goodman ch. 5.',
+    reach: 'beyond',
+    theory: "other: pseudoline arrangements",
+    onPage: 'stated',
   },
   {
     id: '101-sheaf-duality-dim-one',
@@ -7202,6 +7543,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'First prove or refute the non-surjectivity (the page gives only the qualitative reason); then search the same sources as 101-sheaf-duality-dim-one — Hartshorne, Residues and Duality V.6; SGA 2, Exp. II–IV; Alonso, Jeremías and Lipman (1997) — for local duality stated for arbitrary O_X-modules, and for the topological-dual version page 15 announces. If a published statement already restricts local duality to quasi-coherent or coherent data because of such an example, mark matched.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '101-plan-articles-five-six',
@@ -7256,6 +7600,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Look for the statement « Hom_S(A, B) → Hom_S(A[p^∞], B[p^∞]) is bijective once it is bijective over an open U meeting every connected component, the residue characteristics off U being p » in Faltings–Chai, Degeneration of Abelian Varieties (ch. I and V), de Jong, Invent. Math. 134 (1998), Messing, LNM 264, and Grothendieck’s Nice 1970 address. If it is stated there, or is an immediate corollary of Serre–Tate as written there, mark matched. Separately, the existence of the closed subscheme S_v needs a source.',
+    reach: 'beyond',
+    theory: "other: group schemes over a base (abelian schemes, p-divisible groups, Néron models, Picard schemes, reductive groups)",
+    onPage: 'partial',
   },
   {
     id: '100-proper-epimorphism-hom-descent',
@@ -7272,6 +7619,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Compare with descent for unramified and étale morphisms along non-flat maps: SGA 1 IX §§2–4, EGA IV 18.12, and Rydh, « Submersions and effective descent of étale morphisms », Bull. SMF 138 (2010), which works with universally subtrusive maps. The point to decide is whether exactness of Hom into formally unramified X is known for proper f under bare schematic dominance (O_S ⊂ f_*O_{S′}), which is not stable under base change. If Rydh or SGA 1 covers it, mark matched.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '100-formal-abelian-curve-criterion',
@@ -7288,6 +7638,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Check whether this curve criterion for algebraizing a formal abelian scheme (or for the existence of a formal polarisation) is in the literature: EGA III 5.4.5 and its uses for polarisations, Faltings–Chai ch. I and V, Moret-Bailly, « Pinceaux de variétés abéliennes » (Astérisque 129), and work on Néron–Severi jumping such as Maulik–Poonen (2012). Before that, someone should check the (ii′) ⇒ (i) step, the weakest link: it rests on an unidentified descent result and on a gluing the page waves through.',
+    reach: 'beyond',
+    theory: "other: group schemes over a base (abelian schemes, p-divisible groups, Néron models, Picard schemes, reductive groups)",
+    onPage: 'partial',
   },
   {
     id: '100-baire-dimension-one-points',
@@ -7321,6 +7674,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Look for the extension of homomorphisms from p-divisible groups into Néron models in SGA 7 I, exposé IX (Grothendieck, « Modèles de Néron et monodromie », §5 on p-divisible groups and good reduction) and in Bosch–Lütkebohmert–Raynaud, Néron Models (ch. 7 and 10). If the statement for an arbitrary Néron model is there, mark matched; if only the semi-abelian case is, the reduction of pages 51–52 is the point to check.',
+    reach: 'beyond',
+    theory: "other: group schemes over a base (abelian schemes, p-divisible groups, Néron models, Picard schemes, reductive groups)",
+    onPage: 'partial',
   },
   {
     id: '98-versos-bourbaki-redactions',
@@ -7818,6 +8174,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read Deninger–Murre, « Motivic decomposition of abelian schemes and the Fourier transform », J. reine angew. Math. 422 (1991), §2, and Künnemann’s follow-ups, for the Fourier transform on CH_Q of an abelian scheme over a smooth quasi-projective base: whether they state F(x * y) = F(x)F(y) and F(xy) = (−1)^g F(x) * F(y) with no Todd factor, and whether they prove pr_*(exp ℓ) = (−1)^g[e(S)] exactly. If they do, the over-base formulas are matched and the factor of the reading equals 1; if a Todd-type correction appears there, compare it with the reading’s.',
+    reach: 'beyond',
+    theory: "other: algebraic cycles, intersection theory, K-theory",
+    onPage: 'partial',
   },
   {
     id: '47-cup-to-pontrjagin-sign-kleiman',
@@ -7852,6 +8211,9 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Look for the integrality of binom(χ, k)·δ′^k/χ^k (equivalently, of the Chern classes of the Fourier transform of a non-degenerate line bundle expressed through the dual polarisation) in Mukai 1981 §3, Birkenhake–Lange, Complex Abelian Varieties, ch. 14 (dual polarisation and Fourier–Mukai), and Beauville 1983. If it is stated there, or is read off Mukai 3.11 in a published remark, mark matched. Separately, someone should check the page’s overwritten argument of φ_L against the facsimile before anything rests on the exponent.',
+    reach: 'beyond',
+    theory: "other: algebraic cycles, intersection theory, K-theory",
+    onPage: 'partial',
   },
   {
     id: '74-gq2t-latin-square-reduction',
@@ -8065,6 +8427,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Over ℤ and rings of integers this is the classical statement that K(√Δ) is unramified above 2 iff Δ is a square mod 4 (Hecke); check whether the ring-theoretic version (2 regular, A/2A normal) is in Knus 1991 III, in Voight 2016 § 4, or in the literature on quadratic algebras with given discriminant, before treating it as anything more than that. Also decide whether « étale » struck on p. 85 is a slip the page meant to keep.',
+    reach: 'reachable',
+    onPage: 'partial',
   },
   {
     id: '77-affine-quadric-weil-restriction',
@@ -8119,6 +8483,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read Deligne, SGA 7 II, Exposé XII (« Quadriques »), which from memory treats quadrics over an arbitrary base, their maximal isotropic subspaces and characteristic 2; and Knus 1991 IV § 5 and VIII. If either defines the Arf/Dickson double cover as the Stein factorisation of the maximal isotropic Grassmannian over a general base, mark matched — which this pass expects.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '77-biregular-affine-quadric-symmetry',
@@ -8454,6 +8821,8 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read Knus, Quadratic and Hermitian Forms over Rings, ch. V (quaternion algebras, generalised crossed products), and Gross–Lucianovic 2009 for a description of the quaternion rings containing two given quadratic subalgebras H, H′ with H + H′ of rank 3 as a torsor under (L ⊗ L′)^∨, and for its discriminant-zero locus. Then read Voight GTM 288 chapters 22 and 30 rather than searching them by keyword. If any of them identifies that locus with Spec of the product H * H′, mark matched. This pass found it neither in Voight 2011 § 4 nor in Voight 2016, and searched GTM 288 by keyword only.',
+    reach: 'reachable',
+    onPage: 'partial',
   },
   {
     id: '83-leaves-from-folder-79-section-xi',
@@ -8515,6 +8884,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read Matsumura–Oort 1967 (§§ 1–2, the reduction to finite subschemes) for the morphism Hom(X,Y;φ) → Hom(Z,Y) as unramified over an arbitrary base S. If it is there only over a field and for Aut, the relative form remains the point to check. Then check whether Anantharaman’s thesis (Mém. SMF 33, 1973), the addressee’s published work, states it. Murre exp. 294 only reports, without a statement, that Grothendieck had such results.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '91-res-representable-by-scheme',
@@ -8537,6 +8909,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Look for a scheme-valued representability theorem for Res_{X/S}(P) or Hom_S(X,Y) under hypotheses like (a)–(c), or for X with geometrically integral fibres and a section along which it is smooth. Read Matsumura–Oort 1967, FGA TDTE IV § 4.c, Artin 1969 (Algebraization of formal moduli I, § 6) and Anantharaman, Mém. SMF 33 (1973). If one of them states it, mark matched. The sources read here give an algebraic space (Stacks 0D1C) or a closed subscheme only for a closed immersion (Romagny A.6). A refutation would be a proper flat X with such a section and a P for which Res is not a scheme.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'stated',
   },
   {
     id: '91-centraliser-condition-R',
@@ -8558,6 +8933,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'The connected-fibre case is matched: for H flat of finite presentation with connected fibres, centralisers of any u : H → G are closed in separated G, by SGA 3 VI_B 6.9 d) with 6.2.4 e) (new edition), after Raynaud–Gruson 1971. Transporters and normalisers are matched by Romagny 2022, Cor. A.8. What remains is (R) itself. Purity implies (R) (this pass’s step, in ours), so the page’s hypothesis is at least as weak as purity. Decide whether (R) is strictly weaker for flat groups of finite type over a local noetherian base. Also look for the variant in which finitely many finite subschemes meet every geometric component, in Raynaud–Gruson I § 3 and in CGP A.8. If (R) turns out equivalent to purity for groups, mark matched.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '91-weil-restriction-finite-etale-criterion',
@@ -8580,6 +8958,9 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read Conrad–Gabber–Prasad A.5 (A.5.2 and the examples after A.5.5 on Res of proper or finite schemes along non-étale finite flat maps), BLR §7.6 Proposition 5, and EGA IV 6.8 / 18.2 for the equivalence (i)–(iv); also D. Ferrand, « Un foncteur norme », Bull. SMF 126 (1998), for the norm of finite étale algebras along finite locally free maps. If (i) ⇔ (ii) is there, mark matched. The relative π₀ of a finite locally free T → S with ν locally constant is not given by Romagny 2.5.2 (fibres not reduced) and stays the open part.',
+    reach: 'beyond',
+    theory: "schemes beyond basics",
+    onPage: 'partial',
   },
   {
     id: '91-local-functor-right-adjoint',
@@ -8640,6 +9021,8 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'The statement for morphisms is in Sebag 2004 (6.2.2, 6.2.5, 7.2.2). What remains is the rational-map version: check Loeser–Sebag, Duke Math. J. 119 (2003), and Nicaise–Sebag, Invent. Math. 168 (2007), for change of variables along morphisms of generic fibres (rigid or algebraic) between smooth models, BLR ch. 3–4 (Néron smoothening, weak Néron models and the extension of rational maps), and, for characteristic-zero residue fields, Cluckers–Loeser (Invent. Math. 173, 2008) on definable maps. If images of cylinders under maps induced by generically étale rational maps X_K ⇢ Y_K with Y proper are shown constructible there, mark matched. Because « d’indice fini » and the hypothesis of Proposition 1 rest on \\uncertain{} readings, the claim itself should be re-read against batch transcriptions before more effort is spent.',
+    reach: 'imprecise',
+    onPage: 'stated',
   },
 // 33: no entry. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (% Pass header of 33.modern.tex, 2026-10-04); no disagreement with the reading. The folder is working notes for SGA 5 and every statement it establishes is a match to SGA 4, SGA 4½ or SGA 5, cited from memory, not re-read in this pass. Proper and smooth base change, comparison, Artin vanishing, purity, constructibility and Rf_! by compactification (pp. 1–19): SGA 4 XII, XIII, XVI, XIV, XVII; the relative comparison over an analytic base (p. 5) is marked « À prouver » and the absolute purity and finiteness for f of finite type (pp. 13, 15) are posed, not proved (Gabber later). Local class by Kummer, trace of a smooth morphism and their compatibility (pp. 21–35): SGA 4 XVIII, SGA 4½ Cycle; the p. 35 diagram is the edition's reconstruction. i^! for an immersion, relative purity from duality, Rf^! by factorisation through a smooth morphism and Hartshorne's independence argument, virtual relative dimension and Gysin maps between smooth S-schemes (pp. 49–83): SGA 4 XVIII 3; global duality itself is a title alone (p. 45) and smooth base change from duality is « ce que je n'ai pas fait » (p. 57). The six-operation table, projection, induction and exchange formulas, Künneth for Rf_! and its flat special case (pp. 85–119): SGA 4 XVII 5, XVIII 3; the induction formula for all F is the edition's formal argument, the Rf_* projection proposition has identical sides on the page and is the edition's restatement. Trace of an endomorphism of a perfect complex and the pairing Tr(vu) (pp. 123–137): SGA 6 I, SGA 4½ Rapport 4; Tor-amplitude of Rf_! in [a, b+2d] (pp. 139–141): SGA 4 XVII 5.5. Cohomological correspondences, the pairing on Z, Künneth for RHom and Rf^!, the Lefschetz–Verdier formula and local terms (pp. 143–161): SGA 5 III (Illusie) and Verdier; the local Künneth formula rests on resolution on the page, removed in SGA 4½ Th. finitude. « Compléments dualité » (pp. 163–179): biduality and the anti-equivalences of D_c on an excellent scheme are offered as « énoncés plausibles » (p. 169), the exchange of Tor-dimension and (pseudo-)injective dimension under D_X is sketched in one direction and is SGA 5 I; the theorem Ext^i(F, G) = 0 for i > 2n (p. 171) is marked « à vérifier ! », its proof stops on an open question (is a sheaf with injective fibres a filtered colimit of constructible such sheaves? p. 173), and its statement (i) as read is false over a non-separably-closed field by the reading's own example. No codicological entry: nothing was checked against the facsimile.
 // 122: no entry. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (% Pass header of 122.modern.tex, 2026-10-03); no disagreement with the reading. Every statement the folder establishes is a match, already named in the reading's footnotes and cited from memory, not re-read in this pass. Manifolds with boundary, collar, Poincaré–Lefschetz duality, the sequences of (W, P), (W, Q), (W, R) and Mayer–Vietoris with their pairing by duality (pp. 2–10): textbook; compactness and a self-injective Λ are the edition's, and the Thom-isomorphism degree on p. 6 is the edition's correction. The open-book model and its dictionary with the Milnor fibre over the punctured disc (pp. 12–16): Milnor, Singular points of complex hypersurfaces (1968), the name open book Winkelnkemper (1973); posed without proof, and the count « 40, en fait 80 » breaks off on « mais ». Triangles (a)–(e), the duality map u (the intersection form of the Milnor fibre) and their self-transposition (pp. 19–25): Poincaré–Lefschetz and Verdier duality; the class of u in H^{2n}(π, K⊗K), the shift of RΓ^π against duals and the pairing (d)↔(e) are the edition's, the page's sign is left « ? ». Cohomology-sphere criterion via the Gysin residue (pp. 27, 33): elementary from the Gysin sequence, the closed-connected hypothesis supplied by the edition. Local Lefschetz, H^i(M) = 0 for i > n and the middle-degree six-term sequence around u (pp. 27–31): SGA 2, Milnor 1968 (link (n−2)-connected, Milnor fibre a bouquet of n-spheres), Andreotti–Frankel, Artin's affine Lefschetz (SGA 4 XIV); the page's bound and its « surj » were repaired by the edition, and the page stops before the ker/coker-of-the-intersection-form statement the reading footnotes as Milnor's. Page 33's « H^i(V_s) = 0 si i ≠ 0, n−1, n » is false for the link in degree 2n−1 as read and is a doubt in the reading. Page 34 (finiteness conditions on a-adic ind-systems not stable under kernels under AB5) rests on \ill{} and \uncertain{} words and its example is struck through and stops on « Q = »: not a checkable claim. No codicological entry: nothing was checked against the facsimile; no literature searched in this pass.
