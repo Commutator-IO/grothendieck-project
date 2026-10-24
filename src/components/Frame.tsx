@@ -247,7 +247,7 @@ export function Footer({ collection = 'fonds' }: { collection?: Collection }) {
             </p>
             <p className="mt-3 max-w-[52em]">
               This site lists their catalogue only, read from the archive's public API, and links each
-              document to its page there. Nothing of the documents is copied.
+              document to its page there. No part of the documents is copied.
             </p>
           </>
         ) : quillen ? (
@@ -271,12 +271,12 @@ export function Footer({ collection = 'fonds' }: { collection?: Collection }) {
               <strong className="font-semibold text-ink-700">Alexandre Grothendieck fonds</strong> at
               the University of Montpellier, given by Jean Malgoire and catalogued in 2015–2016 by
               Hélène Rodriguez and Frédéric Troilo under the direction of Sophie Dikoff. Of the fonds'
-              some 28,000 pages, about 18,000 may be circulated: third-party correspondence cannot be,
-              without permission.
+              some 28,000 pages, about 18,000 may be circulated; third-party correspondence may not be
+              circulated without permission.
             </p>
             <p className="mt-3 max-w-[52em]">
-              This site neither hosts nor redistributes the fonds. It gives the inventory, and reads
-              the files one has downloaded from Montpellier oneself.
+              This site neither hosts nor redistributes the fonds. It gives the inventory and reads
+              the files you have downloaded from Montpellier yourself.
             </p>
           </>
         )}

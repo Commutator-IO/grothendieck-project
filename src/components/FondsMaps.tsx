@@ -218,9 +218,9 @@ export function MathMap() {
       <h2 className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">A map of the mathematics in the fonds</h2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
         The subjects of the {coverage.folders} folders that have a modernised reading, drawn close to those they share
-        folders with more often than their sizes alone would give; a larger dot, more folders. Each reading closes on a list of modern keywords, and each keyword is
-        filed under the coarse subjects of a vocabulary kept with the site — {coverage.mapped} of {coverage.keywords}{' '}
-        keywords find a subject so far, and the rest are listed with the data. Folders without a modernised reading are
+        folders with more often than their sizes alone would give; the larger the dot, the more folders. Each reading closes on a list of modern keywords, and each keyword is
+        filed under the coarse subjects of a vocabulary kept with the site. So far {coverage.mapped} of {coverage.keywords}{' '}
+        keywords find a subject, and the rest are listed with the data. Folders without a modernised reading are
         not on this map yet.
       </p>
 
@@ -249,8 +249,8 @@ export function MathMap() {
         <>
           <Swatches items={[...DATING.map((d) => ({ label: d.label, fill: d.fill })), { label: 'undated', fill: OTHER }]} />
           <p className="mt-1.5 max-w-[44em] text-[12px] leading-relaxed text-ink-400">
-            The mean, over a subject's folders, of the midpoint of each folder's dating in the inventory — which nearly
-            always infers it from a verso or a letterhead, and brackets it to say so. A shade here is a tendency, not a
+            The mean, over a subject's folders, of the midpoint of each folder's dating in the inventory. The inventory nearly
+            always infers that dating from a verso or a letterhead, and brackets it to say so. A shade here is a tendency, not a
             date.
           </p>
         </>
@@ -376,12 +376,12 @@ export function CitationMap() {
     <section id="citation-map" className="mt-12 scroll-mt-16">
       <h2 className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">Folders linked by what they cite</h2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
-        {folders} folders (dots) and the {texts} volumes of his published work they refer to (squares) — SGA, EGA, FGA —
+        {folders} folders (dots) and the {texts} volumes of his published work they refer to (squares: SGA, EGA, FGA),
         joined by how often the folder cites the volume, so that folders working on the same part of his corpus fall
         together. Read from the leaves alone: the transcriber's notes and the header comments are cut out first, so what
         counts is what is on the page, his text and the letters to him in the folder. Only references in the usual
-        forms are caught — « SGA 4 VIII », « SGA A », « EGA IV 16.9 », « TDTE » — and a volume given only by a year, or an
-        exposé without its seminar, is not. Folder 162-1, a register of papers lent, is left out.
+        forms are caught, such as « SGA 4 VIII », « SGA A », « EGA IV 16.9 » or « TDTE »; a volume given only by a year, or
+        an exposé without its seminar, is not. Folder 162-1, a register of papers lent, is left out.
       </p>
 
       <TimeScrubber

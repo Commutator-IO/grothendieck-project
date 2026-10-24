@@ -315,7 +315,7 @@ export function FacsimilePane({
     <aside
       className="fixed right-0 top-0 z-50 hidden h-dvh flex-col border-l border-ink-200 bg-white shadow-[-8px_0_24px_-16px_rgb(19_18_16/.35)] lg:flex"
       style={{ width: widthCss }}
-      aria-label={open.source ? `Facsimile — ${open.title}` : `Facsimile — folder ${open.cote}, pages ${first} to ${last}`}
+      aria-label={open.source ? `Facsimile: ${open.title}` : `Facsimile of folder ${open.cote}, pages ${first} to ${last}`}
     >
       <div
         role="separator"
@@ -646,8 +646,8 @@ function Waking({ cote }: { cote: string }) {
       <p className="text-[13px] font-semibold text-ink-800">Waking the facsimile relay…</p>
       <p className="max-w-[34em] text-[13px] leading-relaxed text-ink-600">
         The scans are streamed from Montpellier through a small relay, which sleeps when nobody
-        is reading and takes up to a minute to start. The scan appears here by itself once it
-        answers — nothing to click.
+        is reading and takes up to a minute to start. Once it answers, the scan appears here on
+        its own, without a click.
       </p>
       <a
         href={sourceUrl(cote)}
@@ -670,9 +670,9 @@ function NoProxy({ cote }: { cote: string }) {
       <p className="max-w-[34em] text-[13px] leading-relaxed text-ink-600">
         Folder {cote} is served by Montpellier, which sends{' '}
         <code className="font-mono">X-Frame-Options: SAMEORIGIN</code> and whose certificate
-        expired on 10 December 2025. Your browser enforces both against their origin, so the scan
-        can only appear here by passing through this one — and that relay is currently
-        unreachable.
+        expired on 10 December 2025. Your browser enforces both against Montpellier's origin, so
+        the scan can appear here only by passing through this site's own origin, and the relay that
+        does this cannot be reached right now.
       </p>
       <button
         type="button"
@@ -683,8 +683,8 @@ function NoProxy({ cote }: { cote: string }) {
       </button>
       <p className="max-w-[34em] text-[12.5px] leading-relaxed text-ink-500">
         Locally, <code className="font-mono">npm run dev</code> relays it. In production it is a
-        small Node service — <code className="font-mono">relay/server.mjs</code> — and it has to
-        be Node, for a reason worth reading before trying to fix this.
+        small Node service, <code className="font-mono">relay/server.mjs</code>. It has to be
+        Node, and the reason is worth reading before you try to fix this.
       </p>
       {/* The panel says what is broken; this says where the fixing is being
           done. Someone who hits this is exactly the person who might solve
@@ -696,7 +696,7 @@ function NoProxy({ cote }: { cote: string }) {
         rel="noopener noreferrer"
         className="inline-flex items-center gap-1.5 text-[12.5px] font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 transition hover:text-brand-700"
       >
-        Follow or help with this — issue #1 ↗
+        Follow or help with this in issue #1 ↗
       </a>
     </div>
   );

@@ -241,8 +241,8 @@ export function Reader({
       />
 
       <p className="mt-4 max-w-[46em] text-[12.5px] leading-relaxed text-ink-500">
-        Scrolling the transcript turns the facsimile: whichever source page is marked highest in
-        the reading area is the one shown on the right. Use ← and → to step between batches, and
+        Scrolling the transcript turns the facsimile on the right, which shows the source page marked
+        highest in the reading area. Use ← and → to step between batches, and
         Escape to close the facsimile.
       </p>
     </>

@@ -355,8 +355,8 @@ export function TranscriptPane({
               aria-selected={isCommunity}
               title={
                 printOnly
-                  ? 'His printed text, which this folder drafts or annotates — read it against the same pages.'
-                  : `${community[0].edition.editors} — read their transcription against the same pages.`
+                  ? 'His printed text, which this folder drafts or annotates. Read it against the same pages.'
+                  : `Transcription by ${community[0].edition.editors}. Read it against the same pages.`
               }
               onClick={() => onEdition('community')}
               className={`rounded-md px-2.5 py-1 text-[12px] font-medium transition ${
@@ -479,15 +479,15 @@ function CommunityPane({
       <iframe
         key={doc.url}
         src={doc.framable === false ? editionDocUrl(doc.url) : doc.url}
-        title={`${doc.title} — ${edition.editors}`}
+        title={`${doc.title}, ${edition.editors}`}
         className="h-[75vh] w-full border-0 bg-white"
       />
 
       <p className="border-t border-ink-200 bg-ink-50 px-4 py-2.5 text-[12px] leading-relaxed text-ink-500">
         {doc.framable === false ? (
           <>
-            {new URL(doc.url).hostname} forbids other sites from framing its files, so this one is
-            fetched by a relay and streamed through — nothing is stored or copied, and the file is{' '}
+            {new URL(doc.url).hostname} forbids other sites from framing its files, so a relay fetches
+            this one and streams it through. Nothing is stored or copied, and the file stays{' '}
             <a
               href={doc.url}
               target="_blank"
@@ -500,9 +500,9 @@ function CommunityPane({
           </>
         ) : (
           <>
-            Served from {new URL(doc.url).hostname}, not copied here. Scrolling it does not turn the
-            facsimile — the file is on another origin and a browser will not let this page read its
-            position — so the two panes are aligned at the folder, not the page.
+            Served from {new URL(doc.url).hostname}, not copied here. The file is on another origin
+            and a browser will not let this page read its position, so scrolling it does not turn
+            the facsimile: the two panes are aligned at the folder, not the page.
           </>
         )}{' '}
         {doc.relation === 'print' ? (
@@ -512,10 +512,7 @@ function CommunityPane({
           </>
         ) : doc.pages && facsimilePages ? (
           <>
-            <strong className="font-semibold text-ink-700">
-              {doc.pages} typeset pages against {facsimilePages} scanned sheets
-            </strong>{' '}
-            in folder n° {cote}. That ratio measures how much of the folder this document covers,
+            {doc.pages} typeset pages against {facsimilePages} scanned sheets in folder n° {cote}. That ratio measures how much of the folder this document covers,
             not how well: typesetting compresses a manuscript, and most of these transcribe one
             piece of a folder rather than the whole of it.
           </>
@@ -601,7 +598,7 @@ function MissingTranscript({
         // this panel otherwise says.
         published && (
           <p className="max-w-[40em] rounded-[var(--radius-card)] border border-relu-200 bg-relu-50/60 px-4 py-3 text-[13.5px] leading-relaxed text-ink-700">
-            This folder has been edited by {published.editors} —{' '}
+            This folder has been edited by {published.editors}:{' '}
             <a
               href={published.url}
               target="_blank"
@@ -621,7 +618,7 @@ function MissingTranscript({
       {edition === 'modern' ? (
         <>
           <p className="max-w-[40em] text-[13.5px] leading-relaxed text-ink-600">
-            <Skill>modernize-grothendieck</Skill> derives this edition — a « Résumé » that
+            <Skill>modernize-grothendieck</Skill> derives this edition: a « Résumé » that
             orients a reader new to the subject, then the mathematics in current notation and
             current names, in French. It reads the transcription, never the facsimile, and it
             takes the folder whole rather than one batch: the argument it restates runs across
@@ -648,7 +645,7 @@ function MissingTranscript({
                 <strong className="font-semibold text-ink-800">
                   It cannot run on this folder yet.
                 </strong>{' '}
-                Because it takes the folder whole, it needs every batch transcribed first —{' '}
+                Because it takes the folder whole, it needs every batch transcribed first:{' '}
                 {folder.done} of {folder.total} {folder.total === 1 ? 'is' : 'are'} done, and{' '}
                 {folder.missing.length === 1
                   ? `batch ${folder.missing[0]} is missing`
@@ -671,14 +668,14 @@ function MissingTranscript({
           <p className="max-w-[40em] text-[13.5px] leading-relaxed text-ink-600">
             <Skill>transcribe-grothendieck</Skill> reads the very facsimile shown on the right
             and writes the LaTeX transcription. It works one batch at a time, {BATCH_SIZE} pages
-            per pass — past that the quality of reading falls away with nothing to signal it.
+            per pass. Past that, the reading gets worse with nothing to signal it.
           </p>
           <code className="w-full max-w-[40em] rounded-lg border border-ink-200 bg-ink-50 px-3 py-2 font-mono text-[12.5px] text-ink-900">
             /transcribe-grothendieck {cote} {batch}
           </code>
           <p className="max-w-[40em] text-[12.5px] leading-relaxed text-ink-500">
-            The facsimile must be mirrored first — the skill refuses to work from anything but
-            the local batch file.
+            The facsimile must be mirrored first: the skill refuses to work from anything but the
+            local batch file.
           </p>
         </>
       )}
@@ -687,7 +684,7 @@ function MissingTranscript({
         href="/contribute/"
         className="text-[12.5px] font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 transition hover:text-brand-700"
       >
-        Want to help? See how to install the skills and open a pull request.
+        To help, see how to install the skills and open a pull request.
       </a>
     </div>
   );

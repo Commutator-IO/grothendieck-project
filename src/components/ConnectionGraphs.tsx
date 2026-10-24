@@ -269,11 +269,11 @@ export function FoldersToPrint() {
         Where these folders meet the published texts
       </h2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
-        Each transcribed folder that shares something concrete with a text already in print — his
-        own published writings as the Grothendieck Circle gives them, and the editions others have
-        made. A shared subject is not an edge. No folder so far is a draft of a published text as a
-        whole; what the lines show is how local the overlaps are, and where the notes go past what
-        was printed. These are leads from reading the texts side by side, not a specialist's
+        Each transcribed folder is joined to the texts already in print with which it shares
+        something concrete: his own published writings as the Grothendieck Circle gives them, and
+        the editions others have made. A shared subject alone makes no line. No folder so far is a
+        draft of a published text as a whole; the lines show how local the overlaps are, and where
+        the notes go past what was printed. These are leads from reading the texts side by side, not a specialist's
         verdict.
       </p>
       <Key kinds={['draft', 'partial', 'open', 'edition'] as LinkKind[]} style={LINK_STYLE} />
@@ -457,12 +457,12 @@ export function LineageToFolders() {
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
         Above the rule, Grothendieck's {LIN.root.students} doctoral students as the Mathematics
         Genealogy Project records them, with those of their own students who turn up in these
-        folders — {LIN.root.descendants} descendants in all, most of whom do not. Below it, the
+        folders ({LIN.root.descendants} descendants in all, most of whom do not). Below it, the
         people who have worked on the archives without being in that line: who kept the fonds,
-        catalogued it, edited or transcribed what came out of it. A line to a folder means
-        something on the leaves or in a finding below — a letter, a text of theirs, his naming
-        them, their published work as what would settle a finding — or, for the second group, a
-        documented piece of work covering that folder. It says nothing about influence, and
+        catalogued it, edited or transcribed what came out of it. A line to a folder rests on
+        something on the leaves or in a finding below (a letter, a text of theirs, his naming
+        them, or their published work as what would settle a finding), or, for the second group,
+        on a documented piece of work covering that folder. It says nothing about influence, and
         nothing about who has been or will be asked to read anything.
       </p>
       <Key

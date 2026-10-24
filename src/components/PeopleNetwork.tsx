@@ -110,11 +110,12 @@ export function PeopleNetwork() {
       </h2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
         {nodes.length} people, each named in a folder with at least one other, drawn close to those
-        they share folders with; a larger dot, more folders. The colours are communities found by
+        they share folders with; the larger the dot, the more folders. The colours are communities found by
         the layout, not a classification of anyone's work. A person counts here when the folder
         holds a letter to or from them, a text of theirs, or his naming them where the words make
-        it an attribution — « th. de Hodge », « d'après Deligne », « lettre à Verdier » — and not an
-        object that merely bears a name, « groupe de Galois » or « espace de Hilbert ». Folder
+        it an attribution (« th. de Hodge », « d'après Deligne », « lettre à Verdier »). An object
+        that merely bears a name, such as « groupe de Galois » or « espace de Hilbert », does not
+        count. Folder
         162-1, a register of papers he lent, is left out.
       </p>
 
@@ -265,8 +266,8 @@ export function PeopleNetwork() {
 
       <p className="mt-3 max-w-[44em] text-[12px] leading-relaxed text-ink-400">
         Built on {NET.built} from the folders transcribed that morning; `npm run people-network`
-        rebuilds it from src/content/people-evidence.json. Co-occurrence is counted fractionally —
-        a folder naming n people gives each pair 1/(n−1) — the communities are found by modularity
+        rebuilds it from src/content/people-evidence.json. Co-occurrence is counted fractionally (a
+        folder naming n people gives each pair 1/(n−1)); the communities are found by modularity
         and the positions by a force layout, both computed once.
       </p>
     </section>

@@ -99,18 +99,17 @@ function Disclaimer() {
         <strong className="font-semibold text-ink-900">Claude Opus 5.5</strong>, and for part of
         them by <strong className="font-semibold text-ink-900">Claude Fable 5</strong> and{' '}
         <strong className="font-semibold text-ink-900">Claude Fable 5.1</strong>, which are no
-        longer used for new passes — a folder at a time, the transcriptions twenty pages at a
-        time. Which model made which file is not a
-        detail we keep a tally of here — <strong className="font-semibold text-ink-900">each
-        file records the model and the date of its pass in its own header, and that header is
-        the authority</strong>, not this sentence. A disputed reading years from now needs to
-        know what produced it, and the file is the only place that cannot drift.
+        longer used for new passes. They worked a folder at a time, and the transcriptions twenty
+        pages at a time. This page keeps no tally of which model made which file: each file
+        records the model and the date of its pass in its own header, and that header is the
+        authority. A disputed reading years from now needs to know what produced it, and the file
+        is the only place that cannot drift.
       </p>
       <p className="mt-2 text-[13.5px] leading-relaxed text-ink-700">
         <strong className="font-semibold text-ink-900">None of it is a scholarly edition, and
         none of it has been verified by a person</strong> unless the batch says so. A machine pass
-        over seventy-year-old handwriting produces a reading — checkable against the facsimile on
-        the same screen, which is its whole value and its whole claim. Where an established
+        over seventy-year-old handwriting produces a reading that can be checked against the
+        facsimile on the same screen, and it claims nothing more. Where an established
         edition exists, it is marked in{' '}
         <a
           href="#folders"
@@ -160,7 +159,7 @@ function Progress({
       </div>
 
       <p className="mt-1 text-[12.5px] leading-relaxed text-ink-500">
-        Counted against what nobody has edited, not against the whole fonds.
+        Counted against the folders nobody has edited. The share of the whole fonds is given below.
       </p>
 
       <div className="tabular mt-3 flex flex-wrap gap-x-7 gap-y-2 text-[13.5px] text-ink-600">
@@ -190,12 +189,12 @@ function Progress({
       <p className="mt-3 text-[12.5px] leading-relaxed text-ink-500">
         <strong className="font-semibold text-ink-700">
           {setAside.batches} batches are set aside as already edited
-        </strong>{' '}
-        — {setAside.pages.toLocaleString('en-GB')} pages in {setAside.folders} folders, among them
+        </strong>
+        : {setAside.pages.toLocaleString('en-GB')} pages in {setAside.folders} folders, among them
         the Dérivateurs, the Long March, Pursuing Stacks and Esquisse d'un programme, all
-        transcribed by mathematicians. Re-doing them would be waste, not progress, so they are not
-        counted as work outstanding. Against the whole fonds — all{' '}
-        {whole.toLocaleString('en-GB')} batches — the figure above would be{' '}
+        transcribed by mathematicians. Re-doing them would be wasted work, so they are not counted
+        as work outstanding. Against the whole fonds (all{' '}
+        {whole.toLocaleString('en-GB')} batches), the figure above would be{' '}
         {((done.transcribed / whole) * 100).toFixed(1)}%.{' '}
         <a
           href="#folders"
@@ -207,9 +206,9 @@ function Progress({
       </p>
 
       <p className="mt-3 text-[12.5px] leading-relaxed text-ink-500">
-        Counted from the files themselves, not from a tally kept by hand. A batch counts as
-        transcribed once its LaTeX exists, and as modernised once the modernised reading does —
-        neither claims anyone has checked it against the pages.{' '}
+        These figures are counted from the files themselves rather than kept by hand. A batch counts as transcribed once
+        its LaTeX exists, and as modernised once the modernised reading does; neither status means
+        anyone has checked it against the pages.{' '}
         <a
           href="/method/"
           className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"

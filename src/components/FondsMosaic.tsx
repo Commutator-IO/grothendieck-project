@@ -268,8 +268,8 @@ export function FondsMosaic({
       <h2 className="titre text-[19px] text-ink-900">Where the work is</h2>
       <p className="mt-2 max-w-[52em] text-[13px] leading-relaxed text-ink-600">
         All {cells.length} folders, {allPages.toLocaleString()} pages, each block sized by its page
-        count and nested inside the inventory group it belongs to — the archivists' own division,
-        which is the only structure this fonds has. Colour is what has been done to a folder, not
+        count and nested inside the inventory group it belongs to: the archivists' own division,
+        and the only structure this fonds has. Colour shows what has been done to a folder, not
         what is in it.
       </p>
 
@@ -439,9 +439,8 @@ export function FondsMosaic({
           </p>
         ) : (
           <p className="text-ink-400">
-            Hover a block for its folder, or a group's name for its full title. Nothing is left out:
-            all {COTES.length} folders are here, in the {groups.length} groups the inventory
-            records.
+            Hover a block for its folder, or a group's name for its full title. All{' '}
+            {COTES.length} folders are here, in the {groups.length} groups the inventory records.
           </p>
         )}
       </div>
