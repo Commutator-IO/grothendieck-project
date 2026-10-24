@@ -30,12 +30,12 @@ export const FINDINGS: Finding[] = [
     ours:
       'The reading supplies one step the page omits: the inclusion U″ ⊂ U′ ∪ ⋃_{i∈I_y} U_i, without which the contradiction does not follow. The hypothesis is the page’s; that link in the argument is the edition’s.',
     literature: [
-      'J. R. Isbell, Product spaces in locales, Proc. AMS 81 (1981) — the product X × Y of sober spaces is the locale product when X is quasi-locally compact; for X completely regular, it is so for every Y iff every closed subset of X is locally compact somewhere',
+      'J. R. Isbell, Product spaces in locales, Proc. AMS 81 (1981), 116–118 — Th. 1 (X quasi-locally compact), Th. 4 (every closed subset has a point with a quasi-locally compact neighbourhood in it; converse for completely regular X)',
       'T. Plewe, Localic products of spaces, Proc. LMS 73 (1996) — spatiality of localic products characterised by a topological game; spatial multipliers among metrizable spaces',
     ],
     status: 'matched',
     settle:
-      'Matched in substance: Sh(X) × Sh(Y) is the topos of the locale product, so the page’s equivalence is Isbell’s preservation of products, and for completely regular X his criterion (every closed subset locally compact somewhere) is the page’s hypothesis. What remains is narrower: the page states the sufficient direction for any space, with locally closed subsets and relatively quasi-compact neighbourhoods; compare it with Isbell’s proof and with Plewe’s game before calling that variant his.',
+      'Matched: Isbell 1981, Theorem 4, proves the same statement — the localic product of X with every space Y is the space X × Y if every non-empty closed subset of X has a point with a quasi-locally compact neighbourhood in it — by transfinite induction from the tube argument (his Theorem 1); the converse holds for completely regular X. For sober X his hypothesis implies the page’s, and they coincide for Hausdorff X (the edition’s remark); the page’s single maximality argument replaces the induction. Whether the page’s hypothesis is strictly weaker for non-Hausdorff sober spaces is open.',
   },
   {
     id: '161-3-infinite-product-criterion',
