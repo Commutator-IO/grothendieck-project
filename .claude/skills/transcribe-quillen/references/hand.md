@@ -142,3 +142,22 @@ and `\ill{}` stands.
 - In an `array` (or any `\\`-separated environment), a row beginning with `[`
   is read as the optional spacing argument of `\\` and breaks the compile
   (« Missing number »): start such a row with `{}`.
+
+## 2026-10-24 — 1983-10 to 1983-15
+
+- His pagination runs on from 1983-7 (restart at 1) through 1983-15 (351);
+  1983-10 numbers p. 125 a second time, and 1983-14 has his own inserted
+  pages « 305a », « 306a » after 306: quote them as written.
+- 1983-15's Clay scan holds only five pages (cover leaf + his pp. 351-354
+  of « 351-395 »): say so in the header rather than looking for the rest.
+- More render/KaTeX refusals: `\multicolumn` in an array (drop it, put the
+  spanning header in a \note), `\rotatebox` (use \cup or \cap plus a note),
+  tikz-cd arrow options with `bend` or `near end` (keep plain labels),
+  `phantom` nodes (use `{}` or a hook arrow and a note), `flushright` (plain
+  paragraphs plus a note that the closing stands at the right), and a
+  tikz-cd followed by text in the same display (« \qquad is cartesian »,
+  « over »): close the display first. `\xmapsto` is not in KaTeX: use
+  `\overset{…}{\longmapsto}`.
+- A heredoc line `\end{document}` typed through `echo` without `-e`-safe
+  quoting can arrive as ESC + « nd{document} » (invalid character at the
+  last line): append it with printf '%s\n' or inside the heredoc.
