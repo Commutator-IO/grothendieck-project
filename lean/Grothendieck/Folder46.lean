@@ -36,9 +36,14 @@ triviality of `Γ` on `A/𝔪A` nor the surjectivity of `A^Γ → A/𝔪A` is us
   `Γ = C₂` acting trivially on `ℤ/4` (`𝔪 = (2)`, `𝔪² = 0`, `p = 2 = |Γ|`), `γ ↦ ±1` is a
   cocycle trivial modulo `𝔪` and not a coboundary: `p ∤ |Γ|` cannot be dropped.
 
-Not formalised: the Sylow form (the factor `H¹(Λ, A*)`), the reduction of injectivity to the
-kernel by twisting, and the passage from `𝔪ⁿA` to `A` by Artin–Rees (which the finite case
-here makes unnecessary).
+* `mul_smul_sum_twist`, `isCohomologous_of_map`, `injective`: injectivity itself, not only
+  the trivial kernel: two cocycles with cohomologous images are cohomologous. The average
+  `u = Σ_σ c'(σ) σ(w) c(σ)⁻¹` satisfies `c'(γ) γ(u) = u c(γ)`; this is the averaging for the
+  action twisted by `c'` (pages 86–89), written without changing the action.
+
+Not formalised: the Sylow form (the factor `H¹(Λ, A*)`), the semi-local base with its
+decomposition and inertia groups (pages 84–89), and the passage from `𝔪ⁿA` to `A` by
+Artin–Rees (which the finite case here makes unnecessary).
 -/
 
 open Finset IsLocalRing
@@ -124,6 +129,69 @@ theorem isCoboundary_of_map_isCoboundary (π : A →+* B) (hπ : Function.Surjec
       rw [map_mul, hv, hequiv, hw, mul_assoc, ← smul_mul', Units.mul_inv, smul_one, mul_one]
     simp [x, this, hm, hw]
   have : ∑ s, (c s : A) * s • w = m * (1 + ↑m⁻¹ * x) := by
+    rw [mul_add, mul_one, ← mul_assoc, Units.mul_inv, one_mul, add_sub_cancel]
+  rw [this]
+  exact m.isUnit.mul (hker _ (by rw [map_mul, hx, mul_zero]))
+
+/-! ### Injectivity: comparing two cocycles (pages 86–90) -/
+
+omit [Fintype Γ] in
+theorem smul_inv_eq {c : Γ → Aˣ} (hc : IsCocycle c) (g s : Γ) :
+    g • ((↑(c s)⁻¹ : Aˣ) : A) = ↑(c (g * s))⁻¹ * c g := by
+  rw [Units.eq_inv_mul_iff_mul_eq, hc, mul_assoc, ← smul_mul', Units.mul_inv, smul_one, mul_one]
+
+/-- The averaging for two cocycles: `u = Σ_σ c'(σ) σ(w) c(σ)⁻¹` satisfies
+`c'(γ) γ(u) = u c(γ)`. This is the averaging of the twisted action
+`γ ⋆ a = c'(γ) γ(a) c'(γ)⁻¹` of pages 86–89, written without changing the action. -/
+theorem mul_smul_sum_twist {c c' : Γ → Aˣ} (hc : IsCocycle c) (hc' : IsCocycle c') (w : A)
+    (g : Γ) :
+    (c' g : A) * g • ∑ s, (c' s : A) * s • w * ↑(c s)⁻¹ =
+      (∑ s, (c' s : A) * s • w * ↑(c s)⁻¹) * c g := by
+  rw [smul_sum, mul_sum, sum_mul,
+    ← Equiv.sum_comp (Equiv.mulLeft g) (fun s => (c' s : A) * s • w * ↑(c s)⁻¹ * c g)]
+  refine sum_congr rfl fun s _ => ?_
+  simp only [Equiv.coe_mulLeft]
+  rw [smul_mul', smul_mul', smul_inv_eq hc, smul_smul, hc' g s]
+  simp only [mul_assoc]
+
+/-- If the average is a unit `u`, then `c(γ) = u⁻¹ c'(γ) γ(u)`: `c` and `c'` are cohomologous. -/
+theorem isCohomologous_of_isUnit_sum {c c' : Γ → Aˣ} (hc : IsCocycle c) (hc' : IsCocycle c')
+    (w : A) (hb : IsUnit (∑ s, (c' s : A) * s • w * ↑(c s)⁻¹)) :
+    ∃ u : Aˣ, ∀ g, (c g : A) = ↑u⁻¹ * c' g * g • (u : A) := by
+  obtain ⟨u, hu⟩ := hb
+  refine ⟨u, fun g => ?_⟩
+  have h := mul_smul_sum_twist hc hc' w g
+  rw [← hu] at h
+  rw [mul_assoc, h, ← mul_assoc, Units.inv_mul, one_mul]
+
+/-- **`H¹(Γ, A*) → H¹(Γ, B*)` is injective** (not only of trivial kernel) for a surjective
+`Γ`-equivariant ring map `π : A → B` with `1 + Ker π ⊂ Aˣ`, when `|Γ|` is invertible in `A`:
+two cocycles whose images are cohomologous are cohomologous. -/
+theorem isCohomologous_of_map (π : A →+* B) (hπ : Function.Surjective π)
+    (hequiv : ∀ (g : Γ) (a : A), π (g • a) = g • π a)
+    (hker : ∀ x, π x = 0 → IsUnit (1 + x)) (hn : IsUnit (Fintype.card Γ : A))
+    {c c' : Γ → Aˣ} (hc : IsCocycle c) (hc' : IsCocycle c')
+    (hπc : ∃ v : Bˣ, ∀ g, π (c g) = ↑v⁻¹ * π (c' g) * g • (v : B)) :
+    ∃ u : Aˣ, ∀ g, (c g : A) = ↑u⁻¹ * c' g * g • (u : A) := by
+  obtain ⟨v, hv⟩ := hπc
+  obtain ⟨w, hw⟩ := hπ ↑v
+  obtain ⟨w', hw'⟩ := hπ ↑v⁻¹
+  have hwu : IsUnit w := isUnit_of_mul_sub_one_mem (RingHom.ker π) (fun x hx => hker x hx)
+    (a' := w') (by simp [RingHom.mem_ker, hw, hw']) (by simp [RingHom.mem_ker, hw, hw'])
+  refine isCohomologous_of_isUnit_sum hc hc' w ?_
+  obtain ⟨m, hm⟩ := hn.mul hwu
+  set x := ∑ s, (c' s : A) * s • w * ↑(c s)⁻¹ - m
+  have hx : π x = 0 := by
+    have : ∀ s : Γ, π ((c' s : A) * s • w * ↑(c s)⁻¹) = ↑v := fun s => by
+      have h1 : π (c s) * π ↑(c s)⁻¹ = 1 := by rw [← map_mul, Units.mul_inv, map_one]
+      rw [hv s] at h1
+      rw [map_mul, map_mul, hequiv, hw]
+      calc π (c' s) * s • (v : B) * π ↑(c s)⁻¹
+          = ↑v * (↑v⁻¹ * π (c' s) * s • (v : B) * π ↑(c s)⁻¹) := by
+            simp only [← mul_assoc, Units.mul_inv, one_mul]
+        _ = ↑v := by rw [h1, mul_one]
+    simp [x, this, hm, hw]
+  have : ∑ s, (c' s : A) * s • w * ↑(c s)⁻¹ = m * (1 + ↑m⁻¹ * x) := by
     rw [mul_add, mul_one, ← mul_assoc, Units.mul_inv, one_mul, add_sub_cancel]
   rw [this]
   exact m.isUnit.mul (hker _ (by rw [map_mul, hx, mul_zero]))
@@ -216,6 +284,18 @@ theorem ker_trivial [Module.Finite O A] (hp : ¬ ringChar (ResidueField O) ∣ F
     IsCoboundary c :=
   isCoboundary_of_map_isCoboundary π hπ hequiv
     (fun x hx => isUnit_one_add_of_mem_smul_top (hker x hx)) (isUnit_card hp) hc hπc
+
+/-- **Page 90, injectivity**, `A` finite over `𝒪` and `p ∤ |Γ|`: two cocycles `Γ → A*` whose
+images in `B = A/𝔪A` (or any surjective equivariant image with kernel in `𝔪A`) are cohomologous
+are cohomologous. -/
+theorem injective [Module.Finite O A] (hp : ¬ ringChar (ResidueField O) ∣ Fintype.card Γ)
+    (π : A →+* B) (hπ : Function.Surjective π) (hequiv : ∀ (g : Γ) (a : A), π (g • a) = g • π a)
+    (hker : ∀ x, π x = 0 → x ∈ maximalIdeal O • (⊤ : Submodule O A)) {c c' : Γ → Aˣ}
+    (hc : IsCocycle c) (hc' : IsCocycle c')
+    (hπc : ∃ v : Bˣ, ∀ g, π (c g) = ↑v⁻¹ * π (c' g) * g • (v : B)) :
+    ∃ u : Aˣ, ∀ g, (c g : A) = ↑u⁻¹ * c' g * g • (u : A) :=
+  isCohomologous_of_map π hπ hequiv
+    (fun x hx => isUnit_one_add_of_mem_smul_top (hker x hx)) (isUnit_card hp) hc hc' hπc
 
 end LocalRing
 

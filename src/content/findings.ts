@@ -6448,6 +6448,7 @@ export const FINDINGS: Finding[] = [
     status: 'candidate',
     settle:
       'Read Lorenz 1998 in full, Serre, Cohomologie galoisienne I §5.8 and the Lemme 1 it cites, and Chase–Harrison–Rosenberg (Memoirs AMS 52), and check whether injectivity (rather than trivial kernel) of H¹(Γ, A*) → H¹(Γ_i, A_𝔪*) for non-commutative finite A over a semi-local base, without assuming 𝒪 normal, is stated there; then decide whether the « on sait que » step needs a normality hypothesis. The single source here was read only in summary, so the status is weak.',
+    lean: { file: 'lean/Grothendieck/Folder46.lean', found: 'Partly: injectivity, not only trivial kernel, in the local case with p ∤ |Γ| (isCohomologous_of_map, injective): for A finite over a local ring 𝒪 and π : A → B a surjective Γ-equivariant ring map with kernel in 𝔪A, two cocycles Γ → A* whose images are cohomologous in B* are cohomologous, by the average u = Σ_σ c′(σ) σ(w) c(σ)⁻¹, which satisfies c′(γ) γ(u) = u c(γ) — the twisted averaging of pp. 86–89 without changing the action. Not formalised: the semi-local base, the decomposition and inertia groups, the completion and the Artin–Rees descent of pp. 84–89, and p | |Γ|.' },
   },
   {
     id: '46-sylow-reduction-criterion',
