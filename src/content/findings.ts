@@ -7127,6 +7127,7 @@ export const FINDINGS: Finding[] = [
     status: 'refuted',
     settle:
       'What still stands is the version with the intended extra hypothesis: a bigon-free arrangement containing neither II_5 nor II′_{3,2} is II_4 or III_6 (the reading’s correction, since IV_7 contains II′_{3,2}). That version is unproved on the page and unsearched; see 80-bigon-free-five-line-dichotomy.',
+    lean: { file: 'lean/Grothendieck/Folder80.lean', found: 'The counterexample is checked with straight lines, as integer triples with concurrency by determinant (six_concurrent, six_not_two_pencils, six_no_II5, six_not_III6): AB : y = 0, BC : x + y = 1, CA : x = 0, a : y = 2x, b : y = 3x − 3, c : y = 5x + 1 have exactly the three triple points A, B, C, no two vertices through which every line passes, a concurrent triple in every five of them, and three triple points rather than the four of III₆. They contain a II′₃,₂ (six_has_II32), and in IV₇ the five lines AB, AD, AC, BD, EF have a single triple point (seven_has_II32), the reading’s correction. Pseudolines in general and bigons are not formalised.' },
   },
   {
     id: '80-bigon-free-five-line-dichotomy',

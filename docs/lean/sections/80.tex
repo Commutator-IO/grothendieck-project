@@ -1,0 +1,50 @@
+\section[Cote 80 : un contre-exemple au théorème des arrangements cruciaux]{Cote 80 : un contre-exemple au théorème des arrangements cruciaux\protect\verifie[\leanblobmain]{Folder80}}\label{sec:80}
+
+La cote 80, \emph{Systèmes de pseudo-droites}, n'est pas datée de sa main ; l'inventaire la date \q{à partir de 1981}, ce qu'appuie une notice administrative du 13~mai 1981 à la page~27. Un arrangement de pseudo-droites est une famille finie de courbes fermées simples du plan projectif réel qui se coupent deux à deux en un seul point ; les droites en sont l'exemple. Les pages~20 à~28 cherchent les arrangements \q{cruciaux} et leur donnent des noms (\lot{80}{2}{22}) : $\mathrm{I}_N$, $\mathrm{I}_{p,q}$ et $\mathrm{II}'_{p,q}$ sont formés de deux faisceaux, c'est-à-dire que deux sommets suffisent pour que chaque pseudo-droite passe par l'un d'eux ; $\mathrm{II}_4$ et $\mathrm{II}_5$ sont quatre et cinq pseudo-droites en position générale, sans trois concourantes ; $\mathrm{III}_6$ est le quadrangle complet, les six droites qui joignent quatre points dont trois ne sont jamais alignés (quatre points triples) ; $\mathrm{IV}_7$ est un quadrilatère complet et ses trois diagonales. La page~24 énonce (\lot{80}{2}{24}) :
+
+\begin{quote}
+\emph{Théorème : supposons qu'il n'existe pas deux sommets tels que les ps.\ droites passent par l'un d'eux [\dots]. Supposons de plus que K ne contienne pas de sous-arrangement du type $\mathrm{II}_5$ ; elle est de l'un des types suivants : $\mathrm{III}_6$, $\mathrm{IV}_7$.}
+\end{quote}
+
+\noindent Pour le réfuter, des droites suffisent. On écrit une droite $u_0x + u_1y + u_2z = 0$ du plan projectif comme un triplet d'entiers $u$ ; trois droites $u, v, w$ sont concourantes si et seulement si le déterminant de la matrice de lignes $u, v, w$ est nul. Toutes les vérifications deviennent alors des calculs finis sur des entiers.
+
+\begin{encadre}
+\begin{contrexemple}[Énoncé de l'édition, page 24]
+Soient $A = (0, 0)$, $B = (1, 0)$, $C = (0, 1)$ dans le plan affine, et les six droites
+\[
+AB : y = 0, \quad BC : x + y = 1, \quad CA : x = 0, \quad a : y = 2x, \quad b : y = 3x - 3, \quad c : y = 5x + 1,
+\]
+les trois dernières passant respectivement par $A$, $B$ et $C$. Cet arrangement a exactement trois points triples, $A$, $B$ et $C$ ; il n'existe pas deux sommets par l'un desquels passe chacune des six droites ; cinq quelconques d'entre elles contiennent trois droites concourantes, de sorte qu'il ne contient pas de $\mathrm{II}_5$ ; il n'est ni $\mathrm{III}_6$, qui a quatre points triples, ni $\mathrm{IV}_7$, qui a sept droites.
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+Les triplets sont $(0, 1, 0)$, $(1, 1, -1)$, $(1, 0, 0)$, $(2, -1, 0)$, $(3, -1, -3)$ et $(5, -1, 1)$. Parmi les vingt triples de droites, trois seulement ont un déterminant nul : $\{AB, CA, a\}$, $\{AB, BC, b\}$ et $\{BC, CA, c\}$, qui concourent en $A$, $B$ et $C$. Deux droites distinctes sont toujours non proportionnelles, puisque chacune forme avec l'autre et une troisième un déterminant non nul. Un sommet est l'intersection de deux droites, et une droite y passe si elle est l'une des deux ou si elle forme avec elles un triple concourant. Chaque point triple porte trois droites et chaque point double deux, et deux points triples distincts ont une droite commune, un côté du triangle : deux sommets portent au plus cinq droites, jamais six. Cinq droites parmi six en omettent une. Si c'est un côté, disons $BC$, les droites $AB$, $CA$ et $a$ restent et concourent en $A$ ; si c'est $a$, il reste $AB$, $BC$ et $b$, qui concourent en $B$, et de même pour $b$ et $c$. Enfin il y a trois points triples et non quatre, et six droites et non sept. En Lean, ces assertions sont décidées par calcul sur les entiers.
+\end{proof}
+
+\begin{remarque}
+Le contre-exemple contient un $\mathrm{II}'_{3,2}$, trois pseudo-droites par un point et deux par un autre sans droite de jonction : les cinq droites $AB$, $CA$, $a$, $b$, $c$ n'ont qu'un triple concourant, $\{AB, CA, a\}$. La forme encadrée de la page~24, et la version corrigée par la lecture où l'on exclut aussi $\mathrm{II}'_{3,2}$, ne sont donc pas atteintes. La lecture corrige d'ailleurs la parenthèse de la page parce que $\mathrm{IV}_7$ contient lui aussi un $\mathrm{II}'_{3,2}$, et cela se vérifie de la même façon : pour le carré $A = (0, 0)$, $B = (1, 0)$, $C = (1, 1)$, $D = (0, 1)$, avec $E = AB \cap CD$ et $F = AD \cap BC$ à l'infini, les sept droites $AB$, $BC$, $CD$, $DA$, $AC$, $BD$, $EF$ ont six points triples, et parmi elles $AB$, $AD$, $AC$, $BD$, $EF$ n'ont que le triple $\{AB, AD, AC\}$.
+\end{remarque}
+
+Le calcul porte sur des droites. Un arrangement de droites est un arrangement de pseudo-droites, et le contre-exemple vaut donc pour l'énoncé de la page tel qu'il est écrit ; les pseudo-droites en général ne sont pas formalisées. Ne sont pas démontrés ici les énoncés suivants de la cote.
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 20, 24 et 28, arrangements sans bigones\piste{80-bigon-free-five-line-dichotomy}]\nonverifie
+Tout arrangement de pseudo-droites du plan projectif réel sans pseudo-droite bigonale est l'arrangement simple de quatre pseudo-droites ($\mathrm{II}_4$), ou contient un sous-arrangement de l'un de trois types : cinq pseudo-droites en position générale ($\mathrm{II}_5$), un faisceau de trois et un faisceau de deux sans la droite qui joint leurs centres ($\mathrm{II}'_{3,2}$), ou le quadrangle complet ($\mathrm{III}_6$).
+\end{theoreme*}
+\end{encadre}
+{\small La page tire cet énoncé du théorème de la page~24, faux tel qu'il est écrit, et ne donne pour le lemme de la page~28 qu'une \q{idée} ; le nom $\mathrm{II}'_{3,2}$ est de la lecture. Mathlib n'a pas les arrangements de pseudo-droites. On se reportera aux notes de Grothendieck (\lot{80}{1}{20}).\par}
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 24 et 26, cas latticiel\piste{80-lattice-criterion}]\nonverifie
+Pour un arrangement de pseudo-droites du plan projectif réel, les cellules fermées de la décomposition induite se coupent deux à deux suivant le vide ou une seule cellule fermée si et seulement si aucune pseudo-droite n'est bigonale et l'arrangement n'est pas l'arrangement simple de quatre pseudo-droites~$\mathrm{II}_4$.
+\end{theoreme*}
+\end{encadre}
+{\small La page~26 l'énonce sans démonstration. La nécessité de la première condition se voit sur trois droites ; la suffisance n'est pas vérifiée. Mathlib n'a pas les arrangements de pseudo-droites. On se reportera aux notes de Grothendieck (\lot{80}{2}{24}).\par}
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 39 à 54, squelette d'un arrangement sans bigones\piste{80-skeleton-full-faithfulness}]\nonverifie
+Un arrangement combinatoire de pseudo-droites du plan projectif réel sans pseudo-droite bigonale est déterminé par son $1$-squelette muni de la décomposition des arêtes en pseudo-droites, et cela fonctoriellement : le foncteur des arrangements sans bigones vers les arrangements de dimension~$1$ sans bigones est pleinement fidèle, de sorte que tout automorphisme du squelette décomposé vient de la carte.
+\end{theoreme*}
+\end{encadre}
+{\small Les feuillets en esquissent une démonstration incomplète (pages 41 à 54). Les conditions (A1) à (A6) y sont dites satisfaites \q{bien entendu}, sans démonstration, et l'indépendance des choix en~(34) n'est pas vérifiée. Mathlib n'a pas les arrangements de pseudo-droites ni les cartes. On se reportera aux notes de Grothendieck (\lot{80}{2}{39}).\par}

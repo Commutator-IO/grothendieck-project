@@ -167,6 +167,19 @@ export const PROOFS: Proof[] = [
     theorems: ['isSaturated_iInter', 'isSaturated_cosupp', 'inter_cosupp_eq_empty', 'supp_union_cosupp', 'hexagon_hyp', 'hexagon_saturated', 'hexagon_not_distrib'],
   },
   {
+    folder: '80',
+    batch: 2,
+    page: '24',
+    name: 'The Théorème on crucial arrangements',
+    statement:
+      'An arrangement of pseudolines not covered by two pencils (no two vertices through which every pseudoline passes) and containing no five pseudolines in general position (II₅) is of type III₆ (the complete quadrangle) or IV₇ (a complete quadrilateral and its three diagonals).',
+    found:
+      'False as stated, already for straight lines: the sides AB, BC, CA of a triangle and one further line through each vertex, a : y = 2x, b : y = 3x − 3, c : y = 5x + 1 for A = (0, 0), B = (1, 0), C = (0, 1), have exactly three triple points, no covering pair of vertices, a concurrent triple in every five lines, and are neither III₆ (four triple points) nor IV₇ (seven lines). Lines are integer triples and concurrency a vanishing 3 × 3 determinant, so every check is a finite computation. The example contains a II′₃,₂ (AB, CA, a through A; b, c), and so does IV₇ (AB, AD, AC, BD, EF), which is the reading’s correction of the page’s parenthesis. Pseudolines in general are not formalised.',
+    verdict: 'false on the page',
+    lean: 'lean/Grothendieck/Folder80.lean',
+    theorems: ['det3_eq_det', 'six_concurrent', 'six_not_two_pencils', 'six_no_II5', 'six_not_III6', 'six_has_II32', 'seven_has_II32'],
+  },
+  {
     folder: '158',
     batch: 3,
     page: '21–41, 44, 50–53',
