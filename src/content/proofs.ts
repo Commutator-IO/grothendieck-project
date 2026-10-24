@@ -141,6 +141,19 @@ export const PROOFS: Proof[] = [
     theorems: ['moore_smul\'', 'Δ_ne_zero', 'D_eq_C_mul_P', 'roots_D', 'dickson_relation', 'A_zero', 'dickson_relation_eval', 'dickson_unique', 'A_zero_eval'],
   },
   {
+    folder: '160',
+    batch: 1,
+    page: '13',
+    name: 'The sign in the Corollary on special linear structures',
+    statement:
+      'For an étale M = Ker f_a ⊂ 𝔾_a of rank pⁿ, page 13 asserts that the trivialisations of Λⁿ_{𝔽_p}M correspond bijectively to the (p − 1)-th roots of a₀, after page 9’s A₀ = ±Δₙ^{p−1} with the sign left floating.',
+    found:
+      'False as stated for p and n odd: over 𝔽₃ with n = 1, M = 𝔽₃ = Ker(x³ − x) has a₀ = −1, which has no square root in 𝔽₃, while Λ¹M = M has two trivialisations. The corrected form holds over a field K of characteristic p: Δₙ(g·e) = det g · Δₙ(e) for g over 𝔽_p (its coefficients are fixed by Frobenius), Δₙ(e) is a (p − 1)-th root of (−1)ⁿa₀, every such root is Δₙ(g·e) for some g ∈ GLₙ(𝔽_p) when Δₙ(e) ≠ 0 and n ≥ 1 (the solutions of cᵖ = c in K are 𝔽_p), and the fibres are the SLₙ(𝔽_p)-orbits. Not formalised: that two bases of M differ by GLₙ(𝔽_p), and the relative form over S.',
+    verdict: 'false on the page',
+    lean: 'lean/Grothendieck/Folder160.lean',
+    theorems: ['corollaire_page13_faux', 'moore_act', 'moore_pow_sub_one', 'moore_act_surj', 'moore_act_eq_iff'],
+  },
+  {
     folder: '158',
     batch: 3,
     page: '21–41, 44, 50–53',

@@ -12,4 +12,24 @@ Soit $p$ premier. Sur tout anneau commutatif, $\Delta_n(c\xi) = c^{(p^n-1)/(p-1)
 Les $A_i$ sont les coefficients de $\prod_{\lambda \in \mathbf F_p^n}(T - \lambda \cdot X)$, et $\Delta_{n+1}(T, X_1, \dots, X_n) = (-1)^n \Delta_n \prod_\lambda (T - \lambda \cdot X)$ : les $p^n$ formes $\lambda \cdot X$ sont des racines distinctes d'un polynôme de degré $p^n$ en $T$ dont le coefficient dominant $\pm\Delta_n$ est non nul (par récurrence sur $n$). La factorisation de la page~7 et sa constante $c$ ne servent pas.
 \end{remarque}
 
-Ne sont pas démontrés ici : la version relative pour $(E, u)$ non trivial et la trivialisation $(\Lambda^n \check E)^{\otimes(p-1)} \simeq \mathcal O_S$ par $\Lambda^n \check u$ ; le théorème de Dickson (pages~9 à~12) ; la bijection $a \mapsto \operatorname{Ker} f_a$ des pages~2 à~6.
+\noindent\emph{Le signe du corollaire de la page~13.} Pour un sous-groupe étale $M = \operatorname{Ker} f_a$ de $\mathbb G_a$ de rang $p^n$, $f_a = x^{p^n} + a_{n-1}x^{p^{n-1}} + \dots + a_0 x$, la page~13 affirme que les trivialisations de $\Lambda^n_{\mathbf F_p} M$ correspondent bijectivement aux racines $(p-1)$-ièmes de $a_0$ (\lot{160}{1}{13}). Le signe laissé en $\pm$ à la page~9 compte ici. Sur un corps, une base $e = (e_1, \dots, e_n)$ de $M$ donne la trivialisation $e_1 \wedge \dots \wedge e_n$, et $\Delta_n(e)$ en est la valeur ; le théorème précédent donne $a_0 = A_0(e) = (-1)^n \Delta_n(e)^{p-1}$.
+
+\begin{encadre}
+\begin{contrexemple}[Énoncé de l'édition, page 13]
+Sur $\mathbf F_3$, avec $n = 1$ et $M = \mathbf F_3 = \operatorname{Ker}(x^3 - x)$, on a $a_0 = -1$, qui n'a pas de racine carrée dans $\mathbf F_3$, alors que $\Lambda^1 M = M$ a deux trivialisations, ses deux éléments non nuls. Le corollaire est faux dès que $p$ et $n$ sont impairs.
+\end{contrexemple}
+\end{encadre}
+
+\noindent En effet $A_0(1) = (-1)^1 \cdot 1^2 = -1$, et les carrés de $\mathbf F_3$ sont $0$ et $1$. En général, si $y^{p-1} = a_0$, alors $(y/\Delta_n)^{p-1} = (-1)^n$, et $-1$ n'est pas une puissance $(p-1)$-ième dans $\mathbf F_p$ pour $p$ impair. La forme corrigée suit.
+
+\begin{encadre}
+\begin{enonce}[Énoncé de l'édition, forme corrigée sur un corps]
+Soient $K$ un corps de caractéristique $p$, $n \geq 1$ et $e \in K^n$ avec $\Delta_n(e) \neq 0$. Pour une matrice $g$ à coefficients dans $\mathbf F_p$, notons $g \cdot e$ la famille $\bigl(\sum_k g_{jk} e_k\bigr)_j$. Alors $\Delta_n(g \cdot e) = \det(g)\,\Delta_n(e)$ ; $\Delta_n(e)$ est une racine $(p-1)$-ième de $(-1)^n a_0$, où $a_0 = A_0(e)$ ; toute racine $(p-1)$-ième de $(-1)^n a_0$ est de la forme $\Delta_n(g \cdot e)$ avec $g \in \mathrm{GL}_n(\mathbf F_p)$ ; et $\Delta_n(g \cdot e) = \Delta_n(h \cdot e)$ si et seulement si $\det g = \det h$. Les trivialisations correspondent donc aux racines $(p-1)$-ièmes de $(-1)^n a_0$, les fibres étant les orbites de $\mathrm{SL}_n(\mathbf F_p)$.
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+Les coefficients de $g$ sont fixes par Frobenius, donc $\bigl(\sum_k g_{jk} e_k\bigr)^{p^i} = \sum_k g_{jk} e_k^{p^i}$ : la matrice de Moore de $g \cdot e$ est celle de $e$ multipliée par la transposée de $g$, et les déterminants se multiplient. La deuxième assertion est le théorème précédent, puisque $(-1)^n A_0(e) = \Delta_n(e)^{p-1}$. Soit $y$ avec $y^{p-1} = \Delta_n(e)^{p-1}$ ; alors $y \neq 0$, et $c = y/\Delta_n(e)$ vérifie $c^{p-1} = 1$, donc $c^p = c$. Les solutions de $c^p = c$ dans $K$ sont les $p$ éléments de $\mathbf F_p$, puisqu'un polynôme de degré $p$ a au plus $p$ racines : $c \in \mathbf F_p^\times$, et la matrice diagonale $g = \mathrm{diag}(c, 1, \dots, 1)$ donne $\Delta_n(g \cdot e) = c\,\Delta_n(e) = y$. La dernière assertion vient de la première, $\Delta_n(e)$ étant non nul et $\mathbf F_p \to K$ injectif.
+\end{proof}
+
+Ne sont pas démontrés ici : la version relative pour $(E, u)$ non trivial et la trivialisation $(\Lambda^n \check E)^{\otimes(p-1)} \simeq \mathcal O_S$ par $\Lambda^n \check u$ ; le théorème de Dickson (pages~9 à~12) ; la bijection $a \mapsto \operatorname{Ker} f_a$ des pages~2 à~6 ; que deux bases d'un même $M$ diffèrent d'un élément de $\mathrm{GL}_n(\mathbf F_p)$, et la forme relative du corollaire de la page~13 sur une base $S$.

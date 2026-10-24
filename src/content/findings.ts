@@ -5555,6 +5555,7 @@ export const FINDINGS: Finding[] = [
     status: 'refuted',
     settle:
       'What still stands is the corrected statement: (Λⁿ_{𝔽ₚ}M)^× is the μ_{p−1}-torsor of (p−1)-th roots of (−1)ⁿa₀. A person confirms the counterexample and the reading’s Corollary on page 13 is amended accordingly (/modernize-grothendieck). Whether the corrected relative form is in print is the open question of 160-relative-moore-determinant.',
+    lean: { file: 'lean/Grothendieck/Folder160.lean', found: 'The counterexample is checked (corollaire_page13_faux): over 𝔽₃ with n = 1, A₀(1) = −1, which has no square root in 𝔽₃, while 𝔽₃ has two nonzero elements. The corrected form is proved over a field K of characteristic p (moore_act, moore_pow_sub_one, moore_act_surj, moore_act_eq_iff): for g a matrix over 𝔽_p, Δₙ(g·e) = det g · Δₙ(e); Δₙ(e) is a (p−1)-th root of (−1)ⁿa₀; when Δₙ(e) ≠ 0 every (p−1)-th root of (−1)ⁿa₀ is some Δₙ(g·e) with g invertible (n ≥ 1); and Δₙ(g·e) = Δₙ(h·e) iff det g = det h, so the fibres are the SLₙ(𝔽_p)-orbits. That two bases of the same M differ by an element of GLₙ(𝔽_p), and the relative form over S, are not formalised.' },
   },
   {
     id: '160-relative-moore-determinant',

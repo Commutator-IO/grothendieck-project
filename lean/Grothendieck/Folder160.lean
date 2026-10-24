@@ -37,6 +37,16 @@ Moore determinant is then `det(ξ_j^{p^i})` (pages 7–9, the absolute case).
   only coefficients: the `A_i^E` extend from the complement of the zero divisor of `Δₙ` to
   all of `V(E)`, and `A₀ = (−1)ⁿ Δₙ^{p−1}` everywhere.
 
+* `corollaire_page13_faux` (finding `160-special-linear-structures-sign`): the Corollary of
+  page 13, trivialisations of `ΛⁿM` « ↔ » `(p − 1)`-th roots of `a₀`, fails for `p` and `n`
+  odd: over `𝔽₃`, `M = 𝔽₃ = Ker(x³ − x)`, `a₀ = −1` has no square root while `Λ¹M` has two
+  trivialisations.
+* `moore_act`, `moore_pow_sub_one`, `moore_act_surj`, `moore_act_eq_iff`: the corrected form
+  over a field `K` of characteristic `p`: `Δₙ(g · e) = det g · Δₙ(e)` for `g` over `𝔽_p`,
+  `Δₙ(e)` is a `(p − 1)`-th root of `(−1)ⁿ a₀`, every such root is a `Δₙ(g · e)`, and
+  `Δₙ(g · e) = Δₙ(h · e)` iff `det g = det h`: the trivialisations correspond to the roots of
+  `(−1)ⁿ a₀`, with fibres the `SLₙ(𝔽_p)`-orbits.
+
 **What the formalisation finds.** The statement holds in coordinates, with the sign `(−1)ⁿ`
 that page and reading leave as `±`. The extension rests on the factorisation of `D(T)`, which
 needs only that the `p^n` forms `λ · X` are distinct roots of a polynomial of degree `pⁿ` with
@@ -341,5 +351,100 @@ theorem A_zero_eval {n : ℕ} (ξ : Fin n → S) :
     (MvPolynomial.X : Fin n → MvPolynomial (Fin n) (ZMod p))
   simp only [AlgHom.toRingHom_eq_coe, RingHom.coe_coe] at this
   rw [this]; congr 1; ext k; simp
+
+/-! ### Page 13: the sign in the Corollary -/
+
+/-- **The Corollary of page 13 fails as stated.** Over `𝔽₃`, with `n = 1` and `M = 𝔽₃`, the
+kernel of `x³ − x`, one has `a₀ = A₀(1) = −1`, which has no square root in `𝔽₃`, while
+`Λ¹M = M` has two trivialisations (its two nonzero elements). -/
+theorem corollaire_page13_faux :
+    MvPolynomial.aeval (fun _ : Fin 1 => (1 : ZMod 3)) (A 3 1 0) = -1 ∧
+      (¬ ∃ y : ZMod 3, y ^ (3 - 1) = -1) ∧ Fintype.card {t : ZMod 3 // t ≠ 0} = 2 := by
+  refine ⟨?_, by decide, by decide⟩
+  rw [A_zero_eval]
+  simp [moore, mooreMat, det_unique]
+
+/-- `g · e`, with `(g · e)_j = Σ_k g_{jk} e_k`, for a matrix `g` over `𝔽_p`. -/
+def act {n : ℕ} (g : Matrix (Fin n) (Fin n) (ZMod p)) (e : Fin n → S) : Fin n → S :=
+  fun j => ∑ k, algebraMap (ZMod p) S (g j k) * e k
+
+/-- **`Δₙ(g · e) = det g · Δₙ(e)`**: the coefficients of `g` are fixed by the Frobenius, so the
+Moore matrix of `g · e` is that of `e` times `gᵀ`. -/
+theorem moore_act [CharP S p] {n : ℕ} (g : Matrix (Fin n) (Fin n) (ZMod p)) (e : Fin n → S) :
+    moore p (act p g e) = algebraMap (ZMod p) S g.det * moore p e := by
+  have h : mooreMat p (act p g e) = mooreMat p e * (g.map (algebraMap (ZMod p) S))ᵀ := by
+    ext i j
+    simp only [mooreMat, act, of_apply, mul_apply, transpose_apply, map_apply]
+    rw [sum_pow_char_pow]
+    refine Finset.sum_congr rfl fun k _ => ?_
+    rw [mul_pow, ← map_pow, ZMod.pow_card_pow, mul_comm]
+  rw [moore, h, det_mul, det_transpose, RingHom.map_det, RingHom.mapMatrix_apply, mul_comm, moore]
+
+/-- `Δₙ(e)` is a `(p − 1)`-th root of `(−1)ⁿ a₀`, `a₀ = A₀(e)`. -/
+theorem moore_pow_sub_one {n : ℕ} (e : Fin n → S) :
+    moore p e ^ (p - 1) = (-1) ^ n * MvPolynomial.aeval e (A p n 0) := by
+  rw [A_zero_eval, ← mul_assoc, ← mul_pow, neg_one_mul, neg_neg, one_pow, one_mul]
+
+variable {K : Type*} [Field K] [Algebra (ZMod p) K]
+
+/-- In a field of characteristic `p`, the solutions of `c^p = c` are the elements of `𝔽_p`. -/
+theorem eq_algebraMap_of_pow_eq (c : K) (hc : c ^ p = c) :
+    ∃ a : ZMod p, algebraMap (ZMod p) K a = c := by
+  classical
+  by_contra h
+  simp only [not_exists] at h
+  have hQ : (X ^ p - X : K[X]) ≠ 0 := FiniteField.X_pow_card_sub_X_ne_zero K hp.out.one_lt
+  have hroot : ∀ x : K, x ^ p = x → x ∈ (X ^ p - X : K[X]).roots := fun x hx => by
+    rw [mem_roots hQ, IsRoot.def, eval_sub, eval_pow, eval_X, hx, sub_self]
+  set s : Finset K := insert c (Finset.univ.image (algebraMap (ZMod p) K))
+  have hs : s.val ≤ (X ^ p - X : K[X]).roots := by
+    rw [Multiset.le_iff_subset s.nodup]
+    intro x hx
+    rcases Finset.mem_insert.1 hx with rfl | hx
+    · exact hroot _ hc
+    · obtain ⟨a, -, rfl⟩ := Finset.mem_image.1 hx
+      exact hroot _ (by rw [← map_pow, ZMod.pow_card])
+  have hcard : s.card = p + 1 := by
+    rw [Finset.card_insert_of_notMem (by simp [h]),
+      Finset.card_image_of_injective _ (algebraMap (ZMod p) K).injective, Finset.card_univ,
+      ZMod.card]
+  have := (Multiset.card_le_card hs).trans (card_roots' _)
+  rw [Finset.card_val, hcard, FiniteField.X_pow_card_sub_X_natDegree_eq K hp.out.one_lt] at this
+  omega
+
+/-- **The corrected Corollary, over a field.** For `e ∈ Kⁿ` with `Δₙ(e) ≠ 0` (a basis of an
+`n`-dimensional `𝔽_p`-subspace `M ⊂ K`), every `(p − 1)`-th root of `(−1)ⁿ a₀` is `Δₙ(g · e)`
+for some `g ∈ GLₙ(𝔽_p)`. -/
+theorem moore_act_surj {n : ℕ} (hn : 0 < n) (e : Fin n → K) (he : moore p e ≠ 0) (y : K)
+    (hy : y ^ (p - 1) = (-1) ^ n * MvPolynomial.aeval e (A p n 0)) :
+    ∃ g : Matrix (Fin n) (Fin n) (ZMod p), IsUnit g.det ∧ moore p (act p g e) = y := by
+  have := charP_of_injective_algebraMap (algebraMap (ZMod p) K).injective p
+  have hp1 : p - 1 ≠ 0 := by have := hp.out.two_le; omega
+  rw [← moore_pow_sub_one] at hy
+  have hy0 : y ≠ 0 := by
+    rintro rfl
+    rw [zero_pow hp1] at hy
+    exact he ((pow_eq_zero_iff hp1).1 hy.symm)
+  set c := y / moore p e with hcdef
+  have hc1 : c ^ (p - 1) = 1 := by rw [div_pow, hy, div_self (pow_ne_zero _ he)]
+  have hc : c ^ p = c := by
+    rw [← Nat.sub_add_cancel hp.out.one_le, pow_succ, hc1, one_mul]
+  obtain ⟨a, ha⟩ := eq_algebraMap_of_pow_eq p c hc
+  have ha0 : a ≠ 0 := by
+    rintro rfl
+    rw [map_zero] at ha
+    exact div_ne_zero hy0 he ha.symm
+  have hdet : (diagonal (Function.update 1 (⟨0, hn⟩ : Fin n) a)).det = a := by
+    rw [det_diagonal, Finset.prod_update_of_mem (Finset.mem_univ _)]
+    simp
+  refine ⟨diagonal (Function.update 1 (⟨0, hn⟩ : Fin n) a), by rw [hdet]; exact ha0.isUnit, ?_⟩
+  rw [moore_act, hdet, ha, hcdef, div_mul_cancel₀ _ he]
+
+/-- **The fibres are the `SLₙ(𝔽_p)`-orbits**: `Δₙ(g · e) = Δₙ(h · e)` iff `det g = det h`. -/
+theorem moore_act_eq_iff {n : ℕ} (e : Fin n → K) (he : moore p e ≠ 0)
+    (g h : Matrix (Fin n) (Fin n) (ZMod p)) :
+    moore p (act p g e) = moore p (act p h e) ↔ g.det = h.det := by
+  have := charP_of_injective_algebraMap (algebraMap (ZMod p) K).injective p
+  rw [moore_act, moore_act, mul_left_inj' he, (algebraMap (ZMod p) K).injective.eq_iff]
 
 end Grothendieck.Folder160
