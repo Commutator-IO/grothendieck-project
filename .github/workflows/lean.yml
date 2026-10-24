@@ -21,21 +21,11 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      # `sorry` is caught by the build, since lakefile.toml makes every warning
-      # an error; `native_decide` trusts the compiler and an `axiom` is an
-      # assumption, so neither may appear.
-      - name: No sorry, native_decide or axiom
-        run: |
-          if grep -rnE '\b(sorry|native_decide)\b|^axiom ' lean/Grothendieck --include='*.lean'; then
-            echo "::error::a proof must be proved and kernel-checked."
-            exit 1
-          fi
-
       # Installs the toolchain lean/lean-toolchain names, fetches mathlib's
-      # prebuilt cache, and runs `lake build`. Then a check lean-action has had
-      # since 1.6: axiom-audit fails if any declaration of the library
-      # depends on an axiom beyond propext, Classical.choice and Quot.sound
-      # (sorry and native_decide included). leanchecker, the independent
+      # prebuilt cache, and runs `lake build` (every warning an error, so a
+      # `sorry` fails it). Then axiom-audit fails if any declaration of the
+      # library depends on an axiom beyond propext, Classical.choice and
+      # Quot.sound; sorry and native_decide count as such axioms. leanchecker, the independent
       # re-check, is left out: it got the runner stopped, even restricted to
       # the Grothendieck modules (runs 39902170011, 39917152591).
       - uses: leanprover/lean-action@v1
@@ -43,9 +33,3 @@ jobs:
           lake-package-directory: lean
           axiom-audit: true
 
-      # The axioms every theorem rests on, in the build log: anything beyond
-      # Lean's three standard ones fails. The names are read from the files.
-      - name: List the axioms
-        working-directory: lean
-        shell: bash
-        run: ./axioms.sh

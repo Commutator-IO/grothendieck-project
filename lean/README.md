@@ -24,8 +24,8 @@ Sixty-seven folders: the eighteen of issue #26 (tier 1, and the five rows of tie
 what the verification found are in the appendix
 [`docs/lean/article.pdf`](../docs/lean/article.pdf), served at
 <https://grothendieck.commutator.io/article/grothendieck-lean.pdf>, and on the
-site's Findings page. `./axioms.sh`, run after `lake build`, lists the axioms
-of every theorem and fails on any beyond Lean's three standard ones.
+site's Findings page. In CI, lean-action's axiom audit fails if any
+declaration depends on an axiom beyond Lean's three standard ones.
 
 | Folder | File | Scope | Found |
 |---|---|---|---|

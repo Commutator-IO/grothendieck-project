@@ -398,9 +398,9 @@ rendered with an arrow missing asserts a commutation nobody wrote.
 [`lean/`](lean/README.md) proves in Lean 4, against mathlib, statements the
 modernised readings make: 72 folders, one file each, and two Bourbaki
 rédactions, **2,119 theorems** (`cat lean/Grothendieck/*.lean | grep -c
-'^theorem'`). CI builds it with every warning an error, refuses `sorry`,
-`native_decide` and `axiom`, and `lean/axioms.sh` fails on any axiom beyond
-Lean's three standard ones. A proof says that what a reading states **holds
+'^theorem'`). CI builds it with every warning an error, and lean-action's axiom audit fails
+on any axiom beyond Lean's three standard ones (`sorry` and `native_decide`
+included). A proof says that what a reading states **holds
 together**, not that it is what the page says: a perfectly formalised
 statement can be a perfectly formalised misreading. Several proofs found the
 reading's gloss false, or the page itself wrong, and say so.
