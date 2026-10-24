@@ -28,14 +28,14 @@ function dropCommand(s, cmd) {
 
 /** The cote a statement belongs to, from its \piste identifier or its section. */
 function coteOf(title, file, section) {
-  const piste = title.match(/\\piste\{(\d+(?:-\d+)?)-[a-z]/);
+  const piste = title.match(/\\piste(?:resolue)?\{(\d+(?:-\d+)?)-[a-z]/);
   if (piste) return piste[1];
   const label = section?.match(/^sec:(.+)$/);
   return label ? label[1] : file.replace(/^sections\/|\.tex$/g, '');
 }
 
 function clean(title) {
-  let t = dropCommand(title, 'piste');
+  let t = dropCommand(dropCommand(title, 'piste'), 'pisteresolue');
   t = t.replace(/\s*;\s*voir aussi[^;]*$/, '');
   t = t.replace(/^Grothendieck,\s*/, '');
   return t.trim();
