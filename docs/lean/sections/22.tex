@@ -7,14 +7,14 @@ Soient $A$ un anneau, $(P_i)_{i \in I}$ une famille de $A$-modules, $P = \prod_i
 \end{enonce}
 
 \begin{enonce}[Corollaire 3.4 ; cas noethérien du théorème de Chase]
-Supposons que tout $A$-module de type fini soit de présentation finie --- par exemple $A$ noethérien. Alors tout produit de $A$-modules plats est plat.
+Supposons que tout $A$-module de type fini soit de présentation finie (par exemple $A$ noethérien). Alors tout produit de $A$-modules plats est plat.
 \end{enonce}
 
 \begin{enonce}[Corollaire 3.5]
 Supposons $A$ comme en 3.4, par exemple noethérien. Soit $P$ un $A$-module isomorphe à la limite projective d'un système projectif strict, admettant un système cofinal dénombrable, de $A$-modules projectifs. Alors $P$ est un $A$-module plat.
 \end{enonce}
 
-\noindent Le corollaire~3.5 est démontré ici sous la forme à laquelle la lecture le ramène : un système $(P_n)_{n \in \mathbb N}$ dont les applications de transition $\pi_n : P_{n+1} \to P_n$ sont surjectives, sa limite étant le sous-module de $\prod_n P_n$ formé des suites $(x_n)$ telles que $\pi_n(x_{n+1}) = x_n$ pour tout $n$.
+\noindent Le corollaire~3.5 est démontré ici sous la forme à laquelle la lecture le ramène : un système $(P_n)_{n \in \mathbb N}$ dont les applications de transition $\pi_n : P_{n+1} \to P_n$ sont surjectives ; sa limite est le sous-module de $\prod_n P_n$ formé des suites $(x_n)$ telles que $\pi_n(x_{n+1}) = x_n$ pour tout $n$.
 
 Pour un homomorphisme $g : M \to N$, notons $c_M : M \otimes P \to \prod_i (M \otimes P_i)$ l'homomorphisme canonique, $m \otimes (p_i)_i \mapsto (m \otimes p_i)_i$. Il est naturel en $M$ : $c_N \circ (g \otimes P) = \bigl(\prod_i (g \otimes P_i)\bigr) \circ c_M$, comme on le voit sur les tenseurs purs.
 
@@ -25,7 +25,7 @@ Pour tout entier $n$, $c_{A^n}$ est bijectif.
 \general{FinitePresentationPiRightHomBijective}
 
 \begin{proof}[Démonstration du lemme 3.3]
-C'est celle du feuillet. Le module $M$ étant de présentation finie, il existe une suite exacte $A^m \xrightarrow{f} A^n \xrightarrow{g} M \to 0$ de modules libres \emph{de type fini}. Le produit tensoriel étant exact à droite, on obtient deux suites exactes
+C'est celle du feuillet. Le module $M$ étant de présentation finie, il existe une suite exacte $A^m \xrightarrow{f} A^n \xrightarrow{g} M \to 0$ de modules libres \emph{de type fini}. Comme le produit tensoriel est exact à droite, on obtient deux suites exactes
 \[
 \begin{tikzcd}
 A^m \otimes P \arrow[r] \arrow[d, "c_{A^m}"'] & A^n \otimes P \arrow[r] \arrow[d, "c_{A^n}"'] & M \otimes P \arrow[r] \arrow[d, "c_M"'] & 0 \\
@@ -56,15 +56,15 @@ Le produit de deux modules plats est plat.
 \general{FlatProdPi}
 
 \begin{proof}[Démonstration du corollaire 3.5, pour un système indexé par $\mathbb N$]
-Chaque $\pi_n : P_{n+1} \to P_n$ est surjective et $P_n$ est projectif, donc $\pi_n$ admet une section $s_n : P_n \to P_{n+1}$, $\pi_n \circ s_n = \mathrm{id}$. Le noyau $K_n$ de $\pi_n$ est un facteur direct de $P_{n+1}$, un projecteur sur $K_n$ étant $\mathrm{id} - s_n \circ \pi_n$ ; il est donc projectif, en particulier plat. Soit $\Phi : \varprojlim_n P_n \to P_0 \times \prod_n K_n$ l'application
+Chaque $\pi_n : P_{n+1} \to P_n$ est surjective et $P_n$ est projectif, donc $\pi_n$ admet une section $s_n : P_n \to P_{n+1}$, $\pi_n \circ s_n = \mathrm{id}$. Le noyau $K_n$ de $\pi_n$ est un facteur direct de $P_{n+1}$ (un projecteur sur $K_n$ est $\mathrm{id} - s_n \circ \pi_n$), donc projectif, en particulier plat. Soit $\Phi : \varprojlim_n P_n \to P_0 \times \prod_n K_n$ l'application
 \[
   (x_n)_n \longmapsto \bigl(x_0,\ (x_{n+1} - s_n(x_n))_n\bigr),
 \]
-bien définie car $\pi_n(x_{n+1} - s_n(x_n)) = x_n - x_n = 0$, et linéaire. Elle est injective : si deux suites ont même image, elles ont même terme d'indice $0$, et par récurrence, $x_{n+1} = s_n(x_n) + k_n$ déterminant $x_{n+1}$ à partir de $x_n$, mêmes termes à tout indice. Elle est surjective : étant donnés $y \in P_0$ et $(k_n) \in \prod_n K_n$, la suite définie par $x_0 = y$ et $x_{n+1} = s_n(x_n) + k_n$ vérifie $\pi_n(x_{n+1}) = x_n + 0$, est donc dans la limite, et a pour image $(y, (k_n))$. Ainsi $\varprojlim P_n \simeq P_0 \times \prod_n K_n$. Par le corollaire~3.4, $\prod_n K_n$ est plat ; par le lemme~\ref{lem:22-prod2}, $P_0 \times \prod_n K_n$ l'est, et la platitude passe à un module isomorphe.
+bien définie car $\pi_n(x_{n+1} - s_n(x_n)) = x_n - x_n = 0$, et linéaire. Elle est injective : si deux suites ont même image, elles ont même terme d'indice $0$ et, comme $x_{n+1} = s_n(x_n) + k_n$ détermine $x_{n+1}$ à partir de $x_n$, mêmes termes à tout indice par récurrence. Elle est surjective : étant donnés $y \in P_0$ et $(k_n) \in \prod_n K_n$, la suite définie par $x_0 = y$ et $x_{n+1} = s_n(x_n) + k_n$ vérifie $\pi_n(x_{n+1}) = x_n + 0$, est donc dans la limite, et a pour image $(y, (k_n))$. Ainsi $\varprojlim P_n \simeq P_0 \times \prod_n K_n$. Par le corollaire~3.4, $\prod_n K_n$ est plat ; par le lemme~\ref{lem:22-prod2}, $P_0 \times \prod_n K_n$ l'est, et la platitude passe à un module isomorphe.
 \end{proof}
 
 \begin{remarque}
-Le lemme~3.3 vaut sur tout anneau commutatif. Sa réciproque, qu'un module pour lequel ces flèches sont bijectives pour toute famille $(P_i)$ est de présentation finie, est due à Lenzing (1969) \cite{lenzing1969}. L'addition manuscrite \q{de type fini} permet à la démonstration du feuillet de se ramener aux modules $A^n$.
+Le lemme~3.3 vaut sur tout anneau commutatif. Sa réciproque, qu'un module pour lequel ces flèches sont bijectives pour toute famille $(P_i)$ est de présentation finie, est due à Lenzing (1969) \cite{lenzing1969}. Avec l'addition manuscrite \q{de type fini}, la démonstration du feuillet se ramène aux modules $A^n$.
 \end{remarque}
 
 \begin{remarque}
@@ -72,10 +72,10 @@ L'hypothèse de~3.4, que tout module de type fini soit de présentation finie, �
 \end{remarque}
 
 \begin{remarque}
-Le corollaire~3.4 est un cas du théorème de Chase, publié en 1960 \cite{chase1960} : sur un anneau cohérent, tout produit de modules plats est plat. L'inventaire date le dossier \q{1963-[vers 1967]}. La démonstration ci-dessus n'applique le lemme~3.3 qu'aux idéaux de type fini.
+Le corollaire~3.4 est un cas du théorème de Chase, publié en 1960 \cite{chase1960}, avant les dates que l'inventaire donne au dossier : sur un anneau cohérent, tout produit de modules plats est plat. La démonstration ci-dessus n'applique le lemme~3.3 qu'aux idéaux de type fini.
 \end{remarque}
 
-\noindent\emph{L'obstruction des pages~22 et~24.} On note $A = k[[t]]$ et, pour un $k$-module $M$, $A \otimes_k M$ le $A$-module obtenu par extension des scalaires. Une dérivation est prise sur une base quelconque $R$ (pour la page, $R = \mathbf Q$) ; seules servent l'additivité et la règle de Leibniz. \q{Formellement lisse pour la topologie discrète} est la lissité formelle de mathlib, $\mathtt{Algebra.FormallySmooth}$ : $\Omega_{A/k}$ projectif et $H_1(L_{A/k}) = 0$, ce qui équivaut au relèvement des morphismes à travers les idéaux de carré nul.
+\noindent\emph{L'obstruction des pages~22 et~24.} On note $A = k[[t]]$ et, pour un $k$-module $M$, $A \otimes_k M$ le $A$-module obtenu par extension des scalaires. Une dérivation est prise sur une base quelconque $R$ (pour la page, $R = \mathbf Q$) ; seules servent l'additivité et la règle de Leibniz. \q{Formellement lisse pour la topologie discrète} est la lissité formelle de mathlib, $\mathtt{Algebra.FormallySmooth}$ : $\Omega_{A/k}$ projectif et $H_1(L_{A/k}) = 0$, condition équivalente au relèvement des morphismes à travers les idéaux de carré nul.
 
 \begin{lemme}\label{lem:22-obstruction}
 Soient $k$ un anneau commutatif non nul, $M$ un $k$-module libre de base $(b_i)_{i \in I}$, $(i_n)_{n \in \mathbb N}$ une suite injective d'indices et $(a_n)$ une suite d'éléments de $k$. Il n'existe pas de dérivation $D : A \to A \otimes_k M$ telle que $D(a_n) = 1 \otimes b_{i_n}$ pour tout $n$.
@@ -96,18 +96,18 @@ Les $dx_i$ forment une base de $\Omega_{P/\mathbf Q}$, pour $P = \mathbf Q[x_i :
 
 Supposons $A$ formellement lisse sur $k$. La suite de Jacobi--Zariski
 \[ H_1(L_{A/k}) \xrightarrow{\ \delta\ } A \otimes_k \Omega_{k/\mathbf Q} \xrightarrow{\ \iota\ } \Omega_{A/\mathbf Q} \longrightarrow \Omega_{A/k} \longrightarrow 0 \]
-est exacte. Comme $H_1(L_{A/k}) = 0$ et que $\Omega_{A/k}$ est projectif, elle est scindée, et $\iota$ a une rétraction $A$-linéaire $r$ : c'est l'énoncé général rappelé à la suite de la démonstration. Alors $D = r \circ d_A$ est une dérivation de $A$ dans $A \otimes_k \Omega_{k/\mathbf Q}$, et $D(c) = r(\iota(1 \otimes dc)) = 1 \otimes dc$ pour $c \in k$, ce qui vient d'être exclu.
+est exacte. Comme $H_1(L_{A/k}) = 0$ et que $\Omega_{A/k}$ est projectif, elle est scindée, et $\iota$ a une rétraction $A$-linéaire $r$ : c'est l'énoncé général rappelé à la suite de la démonstration. Alors $D = r \circ d_A$ est une dérivation de $A$ dans $A \otimes_k \Omega_{k/\mathbf Q}$, et $D(c) = r(\iota(1 \otimes dc)) = 1 \otimes dc$ pour $c \in k$ : c'est le cas exclu au paragraphe précédent.
 \end{proof}
 \general{FormallySmoothMapBaseChange}
 
-La page~23 dit la même chose pour tout corps. La première lecture du feuillet y voyait une hypothèse de dimension \emph{finie} et ne lisait pas la conclusion ; la seconde lit \q{de dimension infinie} et une conclusion négative. L'énoncé ainsi lu est celui que l'édition avait démontré en partant de l'exemple.
+La page~23 dit la même chose pour tout corps : sous l'hypothèse \q{de dimension infinie}, elle conclut par la négative. C'est l'énoncé que l'édition avait démontré en partant de l'exemple.
 
 \begin{theoreme}[Grothendieck, page 23, pour une seule variable]\label{prop:22-corps}
 Soient $k$ un anneau commutatif et $K$ un corps qui est une $k$-algèbre, avec $\Omega_{K/k}$ de dimension infinie sur $K$. Aucune dérivation $D : K[[t]] \to K[[t]] \otimes_K \Omega_{K/k}$ ne vérifie $D(c) = 1 \otimes dc$ pour tout $c \in K$, et $K[[t]]$ n'est pas formellement lisse sur $K$ pour la topologie discrète.
 \end{theoreme}
 
 \begin{proof}
-Les $da$, $a \in K$, engendrent $\Omega_{K/k}$ ; on en extrait une base, infinie par hypothèse, et une suite injective $da_0, da_1, \ldots$ de vecteurs de cette base. Le lemme~\ref{lem:22-obstruction} exclut alors $D$, et la seconde moitié de la démonstration précédente, où $\mathbf Q$ est remplacé par $k$, montre que la lissité formelle fournirait une telle $D$.
+Les $da$, $a \in K$, engendrent $\Omega_{K/k}$ ; on en extrait une base, infinie par hypothèse, et une suite injective $da_0, da_1, \ldots$ de vecteurs de cette base. Le lemme~\ref{lem:22-obstruction} exclut alors $D$, et la seconde moitié de la démonstration précédente, où $\mathbf Q$ est remplacé par $k$, montre que la lissité formelle donnerait une telle $D$.
 \end{proof}
 
 \noindent Voir \texttt{no\_derivation\_of\_field} et \texttt{not\_formallySmooth\_of\_field} dans \href{\leanblob/Folder22.lean}{\texttt{Folder22.lean}}. La page prend $n > 0$ variables $t_1, \ldots, t_n$ ; l'énoncé suivant ramène ce cas à une seule variable. Elle conclut que $A$ \q{n'est pas f.\ lisse sur $K$ relativement à $k$, et a fortiori n'est pas f.\ lisse sur $k$} : le \q{relativement à $k$} nomme vraisemblablement l'obstruction ci-dessus, et le \q{a fortiori} suppose une notion relative que le dossier ne définit pas ; il n'est pas démontré ici. Pour $k = \mathbf Q$ et $K = \mathbf Q(x_i : i \in I)$, c'est l'exemple des pages~22 et~24.
@@ -125,12 +125,12 @@ Soit $\iota : K[[t]] \to A$ le morphisme de $K$-algèbres $f(t) \mapsto f(t_1)$,
 \noindent Voir \texttt{incl}, \texttt{proj} et \texttt{no\_derivation\_mv} dans \href{\leanblob/Folder22.lean}{\texttt{Folder22.lean}}, où les variables sont indexées par un ensemble fini non vide quelconque. Que $A$ ne soit pas formellement lisse sur $K$ s'en déduirait comme pour une variable ; ce pas n'est pas vérifié en Lean pour $n > 1$.
 
 \begin{remarque}
-La conclusion de l'exemple est de la lecture, la page~24 s'arrêtant sur la construction de la série. Les pages~22 et~23 se ramènent d'abord au cas $D(t) = 0$ : $D(t)$ est une combinaison linéaire finie de $dx_i$, $i \in J$, et l'on remplace $\mathbf Q$ par le sous-corps $k_0$ engendré par les $x_i$, $i \in J$ (à la page~23, $k$ par une extension de type fini $K'$). Ce pas n'est pas nécessaire : il suffit de prendre $n$ assez grand pour que la coordonnée d'indice $i_n$ de $D(t)$ soit déjà nulle. La page~24 choisit ensuite $a_n$ tel que $d_{K/k}\,a_n \neq 0$, après avoir biffé $D_{i_n}(a_n) \neq 0$. La condition retenue ne suffit pas : si tous les $a_n$ sont égaux et $D(t) = 0$, $D(\sum a_n t^n)$ n'a qu'une coordonnée non nulle. C'est la condition biffée, une coordonnée d'indice $i_n$ non nulle, dont se sert le lemme~\ref{lem:22-obstruction}. La caractéristique~$0$ ne sert pas : le théorème~\ref{prop:22-corps} vaut en caractéristique $p$, par exemple pour $\mathbb F_p(x_i : i \in I)$, $I$ infini. La piste demande si l'exemple figure dans EGA~$0_{\mathrm{IV}}$ ou chez Matsumura ; le projet Stacks n'énonce la lissité formelle de $K[[x]]$ que pour la topologie $(x)$-adique \cite[tags 07EL et 07EM]{stacks}.
+La conclusion de l'exemple est de la lecture : la page~24 s'arrête sur la construction de la série. Les pages~22 et~23 se ramènent d'abord au cas $D(t) = 0$ : $D(t)$ est une combinaison linéaire finie de $dx_i$, $i \in J$, et l'on remplace $\mathbf Q$ par le sous-corps $k_0$ engendré par les $x_i$, $i \in J$ (à la page~23, $k$ par une extension de type fini $K'$). Ce pas n'est pas nécessaire : il suffit de prendre $n$ assez grand pour que la coordonnée d'indice $i_n$ de $D(t)$ soit déjà nulle. La page~24 choisit ensuite $a_n$ tel que $d_{K/k}\,a_n \neq 0$, après avoir biffé $D_{i_n}(a_n) \neq 0$. La condition retenue ne suffit pas : si tous les $a_n$ sont égaux et $D(t) = 0$, $D(\sum a_n t^n)$ n'a qu'une coordonnée non nulle. C'est la condition biffée, une coordonnée d'indice $i_n$ non nulle, dont se sert le lemme~\ref{lem:22-obstruction}. La caractéristique~$0$ ne sert pas : le théorème~\ref{prop:22-corps} vaut en caractéristique $p$, par exemple pour $\mathbb F_p(x_i : i \in I)$, $I$ infini. La piste demande si l'exemple figure dans EGA~$0_{\mathrm{IV}}$ ou chez Matsumura ; le projet Stacks n'énonce la lissité formelle de $K[[x]]$ que pour la topologie $(x)$-adique \cite[tags 07EL et 07EM]{stacks}.
 \end{remarque}
 
 \paragraph{Différentielles en caractéristique $p$ (pages 25 à 28).} La page~26 dessine le carré $k \subset K$, $k \cap K^p \subset K^p$, énonce que $\Omega^1_{k/k \cap K^p} \otimes_k K \to \Omega^1_K$ peut ne pas être injective, ou, ce qui revient au même, que le noyau $N_{K/k}$ de $\Omega^1_k \otimes_k K \to \Omega^1_K$ peut ne pas être engendré par les $dx \otimes 1$, $x \in k \cap K^p$, et annonce \q{Voici un contre-exemple} ; la page~28 établit par l'absurde la $p$-liberté de $(x, y)$ sur $k \cap K^p$ et propose la spécialisation $a_i = 0$ pour $2 \leq i \leq p - 1$ (\lot{22}{2}{26}, \lot{22}{2}{28}).
 
-Le carré de la page~26, les traits étant des inclusions de corps :
+Le carré de la page~26, où les traits sont des inclusions de corps :
 \[
 \begin{tikzcd}
 k' = k \cap K^p \arrow[r, no head] \arrow[d, no head] & K^p \arrow[d, no head] \\
@@ -149,7 +149,7 @@ Toute dérivation de $K$ tue les puissances $p$-ièmes, donc $dy = a_1\,dx$ dans
 \end{proof}
 
 \begin{remarque}
-La démonstration ne calcule pas $k'$ : elle établit seulement que $\partial/\partial y$ le tue, ce qui est la $p$-liberté de $(x, y)$ sur $k'$ que la page~28 démontre par l'absurde. Le but est $\Omega_{K/k'}$, qui est le $\Omega^1_K$ de la page puisque $k'$ est formé de puissances $p$-ièmes ; l'identification n'est pas formalisée. Seule la spécialisation $a_i = 0$ pour $2 \leq i \leq p-1$, que la page~28 propose, est démontrée ; pour $p = 2$ c'est l'exemple entier.
+La démonstration ne calcule pas $k'$ : elle établit seulement que $\partial/\partial y$ le tue, c'est-à-dire la $p$-liberté de $(x, y)$ sur $k'$ que la page~28 démontre par l'absurde. Le but est $\Omega_{K/k'}$, qui est le $\Omega^1_K$ de la page puisque $k'$ est formé de puissances $p$-ièmes ; l'identification n'est pas formalisée. Seule la spécialisation $a_i = 0$ pour $2 \leq i \leq p-1$, que la page~28 propose, est démontrée ; pour $p = 2$ c'est l'exemple entier.
 \end{remarque}
 
 Ne sont pas démontrés ici : la lissité, la non-ramification et l'étalitude formelles pour des topologies préadiques, et leurs critères de relèvement ; en particulier la moitié $t$-adique de l'obstruction ; dans le corollaire~3.5, la réduction à un système indexé par $\mathbb N$ ; les numéros~3.2 et~3.6 à~3.13 (algèbres de Cohen, homomorphismes réguliers) ; la proposition de la page~23 pour plus d'une variable ; le contre-exemple des pages~26 et~28 pour $a_2, \ldots, a_{p-1}$ non nuls ; les pages~1 à~8, 18 à~21, 25 et~27.
