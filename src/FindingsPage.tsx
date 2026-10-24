@@ -65,7 +65,7 @@ const STATUS: Record<
 > = {
   unsearched: {
     label: 'not looked up',
-    help: 'Nobody has searched the literature for this yet. It is a question, not a finding.',
+    help: 'Nobody has searched the literature for this yet, so it is still a question.',
     className: 'bg-ink-100 text-ink-600',
   },
   candidate: {
@@ -87,7 +87,7 @@ const STATUS: Record<
        but « not true as written ». Printing the two alike would tell a reader
        a false statement is in the books. The site's warning ramp. */
     label: 'refuted',
-    help: 'Shown false as stated — by a counterexample from the literature, or one checked in the row. Kept so nobody takes it for a result.',
+    help: 'Shown false as stated, by a counterexample from the literature or one checked in the row. Kept so nobody takes it for a result.',
     className: 'bg-alerte-100 text-alerte-700',
   },
   confirmed: {
@@ -232,7 +232,7 @@ function Row({ n, withCote }: { n: Finding; withCote?: boolean }) {
             carries this alone" from "nobody said", and an absent row says the
             second while meaning the first. */}
         <Field label="Ours, not his" muted={!n.ours}>
-          {n.ours ? notation(n.ours) : 'Nothing — the page carries the statement alone.'}
+          {n.ours ? notation(n.ours) : 'Nothing: the page carries the statement alone.'}
         </Field>
 
         {n.lean && (
@@ -241,7 +241,7 @@ function Row({ n, withCote }: { n: Finding; withCote?: boolean }) {
             <a href={`https://github.com/Commutator-IO/grothendieck-project/blob/main/${n.lean.file}`} className="text-brand-700 hover:underline">
               {n.lean.file.replace('lean/', '')}
             </a>
-            {' '}— the statement holds as written; whether it is in the literature is still the question below.
+            . The statement holds as written; whether it is in the literature is still the question below.
           </Field>
         )}
 
@@ -368,9 +368,9 @@ function PlainSummary() {
       </h2>
       <div className="mt-2 max-w-[44em] space-y-2 text-[14px] leading-relaxed text-ink-600">
         <p>
-          A dozen items from the list below, restated for a reader who is not a specialist
-          in the field. They were chosen for being statable and worth checking, not ranked
-          by importance. Every one is a <strong>hypothesis, not a result</strong>: a
+          A dozen items from the list below, restated for readers outside the field. They
+          were chosen because they can be stated simply and are worth checking; the order is
+          not a ranking of importance. Every one is a <strong>hypothesis, not a result</strong>: a
           language model flagged a statement that might not be in the literature, and
           nobody has yet shown that it is not.
         </p>
@@ -380,8 +380,8 @@ function PlainSummary() {
           all, {count('matched')} turned out to be in the books
           {count('refuted') > 0 && <>, and {count('refuted')} turned out to be false as stated</>}.
           The survey covers{' '}
-          {surveyed} folders; the other transcribed folders have not been looked at, and
-          this page says nothing about them.
+          {surveyed} folders. Nobody has looked at the other transcribed folders, and this
+          page says nothing about them.
         </p>
         <p>
           <a href="#full-list" className="text-brand-700 underline underline-offset-2">
@@ -532,8 +532,8 @@ function ProvedInLean() {
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
         Where a reading states something crisp in commutative algebra, finite combinatorics or
         elementary category theory, the statement is proved in the Lean proof assistant against
-        mathlib, as the reading gives it, with no hypothesis added. What that checks is the
-        reading’s mathematics — a false statement, a hidden hypothesis, one that is not needed —
+        mathlib, as the reading gives it, with no hypothesis added. This checks the reading’s
+        mathematics (a false statement, a hidden hypothesis, a hypothesis that is not needed),
         never its fidelity to the page. The statements with their proofs written out are in{' '}
         <a href="/article/grothendieck-lean.pdf" className={link}>
           a PDF (in French)
@@ -679,15 +679,15 @@ export function FindingsPage() {
           <p className="mt-4 text-[15.5px] leading-relaxed text-ink-600">
             Reading a folder end to end turns things up: a leaf bound backwards, two
             manuscripts interleaved, a theorem proved under a hypothesis weaker than the
-            one in the books. This page lists them, and lists what each one still needs
-            before anyone should believe it.
+            one in the books. Each is listed here with what it still needs before anyone
+            should believe it.
           </p>
           <p className="mt-3 text-[15.5px] leading-relaxed text-ink-600">
             Nothing here claims priority. A claim that something is <em>new</em> is a
             claim about the literature, and the literature can be searched but never
             exhausted; a claim that something came <em>first</em> needs a date, and these
-            folders are undated — the inventory's «&nbsp;vers 1963-1973&nbsp;» is an
-            archivist's guess from a verso. So each row says what was searched, what the
+            folders are undated (the inventory's «&nbsp;vers 1963-1973&nbsp;» is an
+            archivist's guess from a verso). So each row says what was searched, what the
             edition supplied rather than the page, and what would settle it.
           </p>
         </header>
@@ -748,7 +748,7 @@ export function FindingsPage() {
             role="group"
             aria-label="Order"
             className="ml-auto flex items-center gap-1 text-[12px]"
-            title="Most checkable first: mathematical rows, then by status, then the rows restated in plain words, then those the page carries alone. An order on what each row records — not a ranking of importance."
+            title="Most checkable first: mathematical rows, then by status, then the rows restated in plain words, then those the page carries alone. The order uses only what each row records and does not rank importance."
           >
             <span className="mr-1 text-ink-400">Order</span>
             {(
@@ -836,7 +836,7 @@ export function FindingsPage() {
 
         <Section
           title="Shown false as stated"
-          note="Candidates that a counterexample, from the literature or checked in the row, shows to be false as written. Kept for the same reason as the matched ones — and because the folder's statement is still the folder's: what is refuted is the claim, and the row says what part of it still stands."
+          note="Candidates that a counterexample, from the literature or checked in the row, shows to be false as written. They stay for the same reason as the matched ones, and because the folder's statement is still the folder's: the refutation is of the claim, and the row says what part of it still stands."
           rows={here(refuted)}
           all={refuted}
           flat={order === 'checkable'}
@@ -845,12 +845,11 @@ export function FindingsPage() {
         <Pager page={current} count={ordered.length} onPage={turn} />
 
         <p className="mt-12 max-w-[44em] text-[13.5px] leading-relaxed text-ink-500">
-          The figures that used to close this page — folders and what is in print, the lineage,
-          who is named together, the mathematics by subject, what the folders cite — are on{' '}
           <a href="/maps/" className="text-brand-700 underline decoration-brand-200 underline-offset-2">
             Maps
-          </a>
-          .
+          </a>{' '}
+          has the figures: folders and what is in print, the lineage, who is named together, the
+          mathematics by subject, and what the folders cite.
         </p>
 
         <section className="mt-12 max-w-[44em] text-[13.5px] leading-relaxed text-ink-500">
@@ -860,16 +859,17 @@ export function FindingsPage() {
           <p className="mt-2">
             By <code className="rounded bg-ink-100 px-1 py-0.5 text-[12px]">/find-novelty</code>,
             a skill that reads a folder's transcriptions and its modernised reading and
-            proposes candidates — never the facsimile, which is the transcription's job.
-            It is written around refusing to overclaim: it may not assert priority, it
+            proposes candidates. It does not read the facsimile, which is the
+            transcription's job. Its rules are written against overclaiming: it may not
+            assert priority, it
             must name the sources it searched, and it must separate what the page carries
             from what the edition supplied. It may not mark anything{' '}
             <em>checked by a person</em>; only a person may.
           </p>
           <p className="mt-2">
-            None of these has been reviewed by a mathematician. If one of them is wrong —
-            and the mathematical ones are the likeliest things on this site to be wrong —
-            the fastest way to say so is an issue against the folder.
+            No mathematician has reviewed any of these, and the mathematical ones are the
+            likeliest things on this site to be wrong. The fastest way to report an error is
+            an issue against the folder.
           </p>
         </section>
       </main>

@@ -34,13 +34,13 @@ export function MethodPage() {
           <h1 className="titre text-[34px] leading-tight text-ink-900">Method &amp; progress</h1>
           <P id="intro" className="mt-3 text-[15.5px] leading-relaxed text-ink-700">
             How these pages are turned into LaTeX, what the process refuses to do, and how far it
-            has got. The refusals matter more than the method: a transcription that silently
-            guesses is worse than no transcription, because nothing on the page tells you which
-            words were read and which were invented.
+            has got. The refusals matter most: a transcription that guesses silently is worse than
+            none, because nothing on the page tells you which words were read and which were
+            invented.
           </P>
           <p className="mt-2 text-[12.5px] text-ink-400">
-            Every paragraph below has its own address: hover one and the mark in the margin copies
-            a link straight to it.
+            Each paragraph below has its own address. Hovering over one shows a mark in the margin
+            that copies a link to it.
           </p>
         </header>
 
@@ -52,13 +52,13 @@ export function MethodPage() {
           <div className="prose-fonds">
             <H2 id="how-he-wrote">How Grothendieck wrote</H2>
             <P id="how-he-wrote-working-notes" className="mt-3">
-              Everything downstream follows from this, so it is worth stating plainly. These are
-              not fair copies. They are working notes, written for one reader, and the archive's
-              own description of the fonds names the traits that make them hard:
+              These are working notes written for one reader, not fair copies, and the rest of the
+              method follows from that. The archive's own description of the fonds names the traits
+              that make them hard to read:
             </P>
             <H3 id="versos">Versos carry other people's paper</H3>
             <P id="versos-unrelated">
-              He wrote on the back of whatever was to hand — letters from the university
+              He wrote on the back of whatever was to hand: letters from the university
               administration, offprints, Bourbaki seminar notes, typescripts his secretary had
               returned. The digitisation kept the versos, and they are frequently unrelated to the
               recto. They were also scanned in whatever orientation preserved the physical
@@ -66,7 +66,7 @@ export function MethodPage() {
             </P>
             <H3 id="numbering">Two numbering systems, sometimes three</H3>
             <P id="numbering-archive-pages">
-              Grothendieck paginated some drafts himself — the Long March runs 1 to 787 across
+              Grothendieck paginated some drafts himself; the Long March runs 1 to 787 across
               four boxes. The archivists then numbered every page in pencil, bottom left. The PDF
               adds a third count of its own, one page ahead of the archive's because of the
               generated cover sheet. This site counts in archive pages throughout, and the
@@ -75,14 +75,14 @@ export function MethodPage() {
             <H3 id="neutral-sheets">Neutral sheets are part of the record</H3>
             <P id="neutral-sheets-not-artefacts">
               Where staples or paper clips once held a bundle together, the archivists inserted a
-              blank separator and scanned it. A blank page in the facsimile is therefore
-              information about the original grouping, not an artefact to be dropped.
+              blank separator and scanned it. A blank page in the facsimile therefore records how
+              the original was grouped, and it is kept.
             </P>
             <H3 id="dating">Dates are mostly inferred</H3>
             <P id="dating-from-versos">
               Outside correspondence, almost nothing is dated. The ranges in the inventory come
               from versos: a letter of 1980 on the back places the folder at 1980 or later. The
-              late notebooks are the exception, and the reason they are worth starting with —{' '}
+              late notebooks are the exception, which makes them a good place to start:{' '}
               <em>Vers une géométrie des formes</em> dates nearly every chapter to the day.
             </P>
           </div>
@@ -93,26 +93,23 @@ export function MethodPage() {
               One batch of {BATCH_SIZE} pages per pass, always from the local facsimile file and
               never from a re-render of it. The batch is the unit of transcription: the file
               shown in the pane is the file read, and the LaTeX it produces covers those pages
-              and no others. It is not the unit of the modernised reading, which takes the folder
-              whole — the difference is set out below.
+              and no others. The modernised reading takes the folder whole instead, as set out
+              below.
             </P>
             <H3 id="microbatches">Microbatches, and why twenty</H3>
             <P id="why-twenty">
-              Each transcription pass runs on <strong>Opus 5.5</strong> or{' '}
-              <strong>Opus 5</strong> — on nothing else since the Fable models were set aside,
-              and the file's header says which — in a fresh context, on one batch and never two. The limit is not arbitrary: past
-              roughly twenty handwritten pages the
-              quality of machine reading degrades towards the end of the pass, and nothing in the
-              output signals where it began to slip. A transcription whose weakening point is
-              unknown cannot be used at all — so the batch is sized to keep page 18 read as
-              carefully as page 2, and each file records in its header which model produced it
-              and when.
+              Each transcription pass runs in a fresh context, on one batch and never two, on Opus
+              5.5 or Opus 5 (nothing else since the Fable models were set aside; the file's header
+              says which). Past roughly twenty handwritten pages, machine reading degrades towards
+              the end of the pass, and nothing in the output shows where it began to slip. A
+              transcription whose weak point is unknown cannot be used at all, so the batch is
+              sized to keep page 18 read as carefully as page 2, and each file records in its
+              header which model produced it and when.
             </P>
             <H3 id="parallel-batches">Batches of a folder, in parallel</H3>
             <P id="parallel-background-tasks">
-              A fresh context per batch does not mean one batch after another. The batches of a
-              folder can be read at the same time as <strong>Claude Code background tasks</strong>:
-              the session mirrors the folder and cuts every batch into tiles first, then launches
+              The batches of a folder can be read at the same time, each in its own fresh context,
+              as Claude Code background tasks: the session mirrors the folder and cuts every batch into tiles first, then launches
               one background subagent per batch. Each subagent starts with an empty context, reads
               its twenty pages and nothing else, writes only its own{' '}
               <code>batch-NN.fr.tex</code>, and checks that it renders. The parent session waits
@@ -122,9 +119,9 @@ export function MethodPage() {
               time of one.
             </P>
             <P id="parallel-what-it-costs">
-              Running in parallel changes the wall-clock time, not the cost: each batch still
-              costs what a single pass costs, and the twenty-page ceiling is unchanged. What it
-              gives up is continuity. A batch no longer sees the transcription of the batch before
+              Running in parallel shortens the wall-clock time and leaves the cost alone: each
+              batch still costs what a single pass costs, and the twenty-page ceiling is unchanged.
+              It does give up continuity. A batch no longer sees the transcription of the batch before
               it, so each fixes its notation on its own and records any run that crosses a batch
               boundary in a note, looking at the neighbouring sheets if it needs to. Subagents
               should also be given separate scratch folders, since they share the session's.
@@ -134,37 +131,37 @@ export function MethodPage() {
             <H3 id="typescripts">Typescripts are not handwriting</H3>
             <P id="typescripts-read-faster">
               A good part of the fonds is typed rather than written: carbons and photocopies of
-              carbons, annotated by hand in the margins. Thirty-nine folders — some four thousand
-              pages, counting the mixed ones whole — carry a typescript, and the seven volumes of
+              carbons, annotated by hand in the margins. Thirty-nine folders (some four thousand
+              pages, counting the mixed ones whole) carry a typescript, and the seven volumes of{' '}
               <em>À la poursuite des champs</em> are typed throughout. These read far faster and
-              far more surely than a hand of 1962, because the letterforms are regular and the
-              only real difficulty is the overtyped strikeout and the symbol the machine did not
-              carry — arrows, Greek capitals, square brackets — left as a gap on the page.
+              far more surely than a hand of 1962, because the letterforms are regular. The only
+              real difficulties are overtyped strikeouts and the symbols the machine did not carry
+              (arrows, Greek capitals, square brackets), which are left as gaps on the page.
             </P>
             <P id="typescripts-ceiling-is-for-handwriting">
-              This does not move the twenty-page ceiling, which is a limit on sustained visual
-              attention to handwriting and is kept for every batch so that the batches remain
-              comparable. What it does change is where a pass is worth spending: a typed folder
-              yields a usable transcription for a fraction of the effort, and its handwritten
-              marginalia — which is the part that carries the mathematics being reconsidered —
-              is short enough to read with the care the whole page would otherwise consume.
+              The twenty-page ceiling stays. It limits sustained visual attention to handwriting,
+              and keeping it for every batch keeps the batches comparable. Typing changes where a
+              pass is worth spending: a typed folder yields a usable transcription for a fraction
+              of the effort, and its handwritten marginalia, the part that carries the mathematics
+              being reconsidered, are short enough to read with the care the whole page would
+              otherwise take.
             </P>
             <P id="derived-editions-pin-opus">
-              The two derived passes — the modernised reading and the folder's tags — run on{' '}
-              <strong>Opus 5.5</strong> and on nothing else since 19 October 2026; earlier
+              The two derived passes, the modernised reading and the folder's tags, have run only
+              on Opus 5.5 since 19 October 2026; earlier
               readings were made on Opus 5 and their headers say so. A folder's tags are the
               same judgement as its résumé, sharpened; where they are made on another model than
               the reading, the commit names both.
             </P>
             <H3 id="two-editions">Two editions, one source</H3>
             <P id="two-editions-both-french">
-              Each batch yields a <strong>transcription</strong> — Grothendieck wrote in French,
-              and it stays in his language, his notation and his paragraphing — and each folder,
-              once every batch of it is transcribed, yields a{' '}
-              <strong>modernised reading</strong>, the same mathematics in current notation,
-              opening with a summary for someone who has not met the subject. Both in
-              French: the notions were thought in that language, and an English translation was
-              one more artifact to keep in step for no gain the other two did not give.
+              Each batch yields a <strong>transcription</strong>, which stays in Grothendieck's
+              French, his notation and his paragraphing. Each folder, once every batch of it is
+              transcribed, yields a <strong>modernised reading</strong>: the same mathematics in
+              current notation, opening with a summary for someone who has not met the subject.
+              Both are in French. The notions were thought in that language, and an English
+              translation was one more artifact to keep in step, for no gain the other two did not
+              give.
             </P>
             <P id="modern-reads-the-transcription">
               The modernised reading works from the transcription, never from the page directly.
@@ -172,12 +169,11 @@ export function MethodPage() {
               say which was right.
             </P>
             <P id="modern-takes-the-folder-whole">
-              It also works on the <strong>whole folder at once</strong>, which is the one place
-              the two editions part company. Twenty pages is the transcription's ceiling because
+              It also works on the whole folder at once, which is where the two editions part
+              company. Twenty pages is the transcription's ceiling because
               that is as far as one pass of reading handwriting carries. The modernised reading
-              reads typed LaTeX, so it has no such ceiling — and it has the opposite need, since
-              its job is to make an argument run continuously and the arguments do not stop at
-              page 20. Folder 151's semi-simplicial formalism opens on page 44 and is still being
+              reads typed LaTeX, so it has no such ceiling, and it has the opposite need: its job
+              is to make an argument run continuously, and the arguments do not stop at page 20. Folder 151's semi-simplicial formalism opens on page 44 and is still being
               built on page 74. Modernised batch by batch it would be restated three times by
               three passes that never saw each other, each guessing where it was going. So the
               folder has to be transcribed end to end before the second pass can start, and the
@@ -185,12 +181,11 @@ export function MethodPage() {
               facsimile pages it covers.
             </P>
             <P id="modern-folder-whole-in-practice">
-              Folder 151 is the first read under that scope, and what it bought is specific
-              enough to record. The conventions governing its pages 2 to 8 are only written
+              Folder 151 was the first folder read this way. The conventions governing its pages 2 to 8 are only written
               down on page 21, in the next batch: read back from there, two relations that
               look wrong turn out to be wrong in a nameable way. A disagreement the
-              transcription flagged on page 21 — a boxed relation against the coordinates on
-              the same page — resolves once both regimes are in view. And a definition on page
+              transcription flagged on page 21, between a boxed relation and the coordinates on
+              the same page, resolves once both regimes are in view. And a definition on page
               59 had to be corrected by one index, because the two identities the page draws
               from it three lines later are false as written and true after. None of the three
               is visible to a pass that sees twenty pages.
@@ -199,8 +194,8 @@ export function MethodPage() {
               The modernised reading is the one that is allowed to depart from the page, and it is
               held to a different standard: <strong>correct as it stands</strong>. Where the
               manuscript is loose or elliptical it states what is true and footnotes what the page
-              has. It carries no brackets and no page markers — it groups by argument rather than
-              by sheet — so the facsimile stays put while it is open. Everything the apparatus
+              has. It groups by argument rather than by sheet and carries no brackets or page
+              markers, so the facsimile stays put while it is open. Everything the apparatus
               carried is in its footnotes instead.
             </P>
             <H3 id="uncertainty">Uncertainty is marked, not resolved</H3>
@@ -219,8 +214,8 @@ export function MethodPage() {
             </P>
             <H3 id="mathematics-first">Mathematics before prose</H3>
             <P id="mathematics-first-prose-summarised">
-              Where the two compete — a diagram crammed into a margin, a formula overwritten three
-              times — the mathematics is transcribed and the surrounding prose is summarised, with
+              Where the two compete, as with a diagram crammed into a margin or a formula
+              overwritten three times, the mathematics is transcribed and the surrounding prose is summarised, with
               the omission marked. The reverse is easy to produce and worthless.
             </P>
             <H3 id="checked-on-the-facsimile">Checked on the facsimile, one reading at a time</H3>
@@ -229,15 +224,15 @@ export function MethodPage() {
               beside it: dates, a doubtful word, whose hand a margin is in, who a letter is from. Each
               reading settled that way is corrected at its source and carries a note saying who
               checked it and when («&nbsp;Vérifié sur le fac-similé par…&nbsp;»); the registers of
-              dates and letters follow. It is a check of a reading, not of a batch: a batch is
-              declared <em>checked</em> only when every page of it has been compared, and none has
+              dates and letters follow. This checks single readings: a batch is declared{' '}
+              <em>checked</em> only when every page of it has been compared, and none has been
               yet. The list of what can be settled this way, by a reader of the hand rather than of
-              the mathematics, is 
+              the mathematics, is{' '}
               <a href="https://github.com/Commutator-IO/grothendieck-project/issues/35" className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700">
                 issue #35
               </a>
-              . The first sessions moved dates the articles rely on — folder 154's winter of
-              pseudo-lines runs to 2 February 1984, not 7 January — which is the point of doing it.
+              . The first sessions already moved dates the articles rely on: folder 154's winter
+              of pseudo-lines runs to 2 February 1984, not 7 January.
             </P>
             <H3 id="proved-in-lean">Proved, where the mathematics allows</H3>
             <P id="proved-in-lean-what">
@@ -246,18 +241,19 @@ export function MethodPage() {
               proved in the Lean proof assistant against mathlib, as the reading gives it, with no
               hypothesis added: seventy-two folders so far, every theorem checked by the kernel on
               each change and resting on Lean's standard axioms only. A proof checks the reading's
-              mathematics, never its fidelity to the page. It has found what it is for — a gloss
-              that was false (158), a hypothesis a reading had dropped (114), and once a statement
-              false on the page itself (19, a necessity in Théorème 1.12) — and it has found many
-              hypotheses that are not needed. The statements with their proofs written out are in 
+              mathematics, never its fidelity to the page. It has found what it is meant to find:
+              a false gloss (158), a hypothesis a reading had dropped (114), and once a statement
+              false on the page itself (19, a necessity in Théorème 1.12). It has also found many
+              hypotheses that are not needed. The statements with their proofs written out are
+              in{' '}
               <a href="/article/grothendieck-lean.pdf" className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700">
                 an appendix
-              </a> 
-              (in French), each folder a card on 
+              </a>{' '}
+              (in French), each folder a card on{' '}
               <a href="/findings/#lean" className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700">
                 Findings
               </a>
-              , the Lean files in 
+              , the Lean files in{' '}
               <a href="https://github.com/Commutator-IO/grothendieck-project/tree/main/lean" className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700">
                 lean/
               </a>
@@ -279,12 +275,12 @@ export function MethodPage() {
               <strong>Most of the progress table is observed; the last step is claimed.</strong>{' '}
               Which files exist is a fact, read from the manifest: a transcribed batch shows as{' '}
               <em>drafted</em>, and one that also has a modernised reading shows as{' '}
-              <em>AI-reviewed</em> — the modernisation pass reads the transcription critically and,
-              held to being correct as it stands, catches things. It caught four on folder 115.
-              That is a review, and calling it one is accurate. It is not a <em>human</em> review,
-              which is why <em>checked</em> is separate, stays a declaration in <code>transcripts/status.json</code>,
-              and means only what you meant by it. The site never claims a transcript is any good;
-              only that it exists, and that a second pass has been over it.
+              <em>AI-reviewed</em>. The modernisation pass reads the transcription critically and,
+              because it is held to being correct as it stands, catches mistakes: four on folder
+              115. That is a review, though not a <em>human</em> one, which is why{' '}
+              <em>checked</em> is separate, stays a declaration in <code>transcripts/status.json</code>,
+              and means only what you meant by it. The site never claims a transcript is any good,
+              only that it exists and that a second pass has been over it.
             </LI>
             <LI id="not-claimed-our-groupings">
               <strong>Three of the five notebook groupings are ours.</strong> “Cahier de Topos”,
@@ -300,7 +296,7 @@ export function MethodPage() {
             <LI id="not-claimed-whole-fonds">
               <strong>About 10,000 pages of the fonds are not here at all.</strong> Third-party
               correspondence cannot be circulated without permission, and the non-mathematical
-              papers — the 1978 trial plea, the reflections — are under 5% of the fonds and not in
+              papers (the 1978 trial plea, the reflections) are under 5% of the fonds and not in
               open access.
             </LI>
           </ul>
@@ -320,7 +316,7 @@ export function MethodPage() {
               A Machine Reads Grothendieck's Working Notes: Transcribing and Encoding Mathematical
               Manuscripts
             </em>{' '}
-            — the paper on this edition's method, prepared for the{' '}
+            is the paper on this edition's method, prepared for the{' '}
             <a
               href="https://journal.tei-c.org/"
               target="_blank"
@@ -331,7 +327,7 @@ export function MethodPage() {
             </a>
             . It describes the fonds, the transcription rules, the two registers, how the TEI
             carries the mathematics, the facsimile the edition does not hold, and the registers
-            derived from the reading — and then what the method does not do, which is the half
+            derived from the reading, and then what the method does not do, which is the half
             worth reading. Licensed CC BY 4.0.
           </P>
           <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
@@ -365,7 +361,7 @@ export function MethodPage() {
               Dater, reprendre, déplacer. Les notes de travail d'Alexandre Grothendieck et une
               pratique mathématique (fonds de Montpellier, 1949–1991)
             </em>{' '}
-            — a second paper, in French, prepared for the{' '}
+            is a second paper, in French, prepared for the{' '}
             <a
               href="https://smf.emath.fr/publications/revue-dhistoire-des-mathematiques"
               target="_blank"
@@ -374,7 +370,7 @@ export function MethodPage() {
             >
               Revue d'histoire des mathématiques
             </a>
-            . Not about the method but about what the notes show: how the fonds came to be dated,
+            . Its subject is what the notes show: how the fonds came to be dated,
             how he wrote, and what recurs and what stops across thirty years. Several readings it
             depends on have been checked against the facsimile; the rest are the machine's, and
             an annex lists what remains to check.
@@ -392,10 +388,10 @@ export function MethodPage() {
           </p>
 
           <P id="article-lean" className="prose-fonds mt-6">
-            <em>Annexe. Énoncés des lectures modernisées démontrés</em> — its appendix, in French:
-            for each of the seventy-two folders proved in Lean, the leaf in context, the statement as
-            the reading gives it, a proof written out for a mathematician, remarks, and what is not
-            proved; the parts follow the themes of the fonds in chronological order.
+            <em>Annexe. Énoncés des lectures modernisées démontrés</em> is its appendix, in French.
+            For each of the seventy-two folders proved in Lean it gives the leaf in context, the
+            statement as the reading has it, a proof written out for a mathematician, remarks, and
+            what is not proved. The parts follow the themes of the fonds in chronological order.
           </P>
           <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
             <a
@@ -413,9 +409,10 @@ export function MethodPage() {
           <P id="article-cicm" className="prose-fonds mt-6">
             <em>Formalising a Mathematician's Working Notes: 2,052 Lean Theorems from the Grothendieck
             Archive</em>{' '}
-            — a paper prepared for the Conference on Intelligent Computer Mathematics (CICM), the
-            complement of the first: how the statements of the readings are chosen, formalised and
-            attributed, what the proofs found, and how the lemmas proposed to Mathlib were received.
+            is a paper prepared for the Conference on Intelligent Computer Mathematics (CICM). It
+            complements the first, covering how the statements of the readings are chosen,
+            formalised and attributed, what the proofs found, and how the lemmas proposed to
+            Mathlib were received.
           </P>
           <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
             <a
@@ -544,15 +541,15 @@ const CONTRIBUTORS: { name: string; url?: string; work: string }[] = [
       'the archives were given to him personally, he kept them at home until 2010, and he ' +
       'deposited them at the university. He edited the first thirty-seven sections of the Long ' +
       'March in 1995, co-edited the D\u00e9rivateurs and the Motifs transcription, and worked ' +
-      'beside the archivists during the 2015 cataloguing \u2014 deciphering the handwriting and ' +
+      'beside the archivists during the 2015 cataloguing, deciphering the handwriting and ' +
       'identifying the themes that the inventory\u2019s groups now record.',
   },
   {
     name: 'Georges Maltsiniotis',
     url: 'https://webusers.imj-prg.fr/~georges.maltsiniotis/ps.html',
     work:
-      'Editor of Pursuing Stacks \u2014 volume I published by the Soci\u00e9t\u00e9 ' +
-      'math\u00e9matique de France as Documents math\u00e9matiques 20 \u2014 and co-editor of ' +
+      'Editor of Pursuing Stacks (volume I published by the Soci\u00e9t\u00e9 ' +
+      'math\u00e9matique de France as Documents math\u00e9matiques 20) and co-editor of ' +
       'the D\u00e9rivateurs. His pages at the IMJ-PRG are where the homotopy-theoretic ' +
       'manuscripts have been made available for two decades, together with the scholarly work ' +
       '(Ast\u00e9risque 301, and Cisinski\u2019s 308) that made them legible as mathematics ' +
@@ -561,10 +558,10 @@ const CONTRIBUTORS: { name: string; url?: string; work: string }[] = [
   {
     name: 'Matthias Künzer',
     work:
-      'Transcribed the D\u00e9rivateurs into LaTeX \u2014 roughly two thousand manuscript pages, ' +
-      'the fullest transcription of any single folder in the fonds \u2014 and edited the ' +
-      'Grothendieck\u2013Brown correspondence. If one wants a sense of what this work costs when ' +
-      'done properly, it is this.',
+      'Transcribed the D\u00e9rivateurs into LaTeX (roughly two thousand manuscript pages, ' +
+      'the fullest transcription of any single folder in the fonds) and edited the ' +
+      'Grothendieck\u2013Brown correspondence. That is what this work costs when it is done ' +
+      'properly.',
   },
   {
     name: 'Leila Schneps and Pierre Lochak',
@@ -578,7 +575,7 @@ const CONTRIBUTORS: { name: string; url?: string; work: string }[] = [
   {
     name: 'Hélène Rodriguez, Frédéric Troilo and Sophie Dikoff',
     work:
-      'Not transcribers but the condition of transcription. In six months of 2015\u201316 they ' +
+      'The archivists who made transcription possible. In six months of 2015\u201316 they ' +
       'catalogued the whole fonds, kept Grothendieck\u2019s own folder titles, proposed the ' +
       'bracketed ones where he left none, dated folders from their versos, and numbered every ' +
       'page in pencil. Every shelfmark and every date on this site is theirs.',
@@ -592,14 +589,14 @@ function Contributors() {
       <P id="before-us-use-theirs" className="prose-fonds mt-3">
         Large parts of the fonds have already been transcribed by hand, over decades, by people
         who knew the mathematics. Where their edition exists it is better than anything produced
-        here and should be used instead — the{' '}
+        here and should be used instead; the{' '}
         <a
           href="/#folders"
           className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
         >
           list of folders
         </a>{' '}
-        marks which folders those are. This site is for the rest.
+        marks which those are. This site is for the rest.
       </P>
 
       <ul className="mt-6 space-y-4">
@@ -795,46 +792,45 @@ function CostAndHorizon({ manifest }: { manifest: ReturnType<typeof useManifest>
         modernised readings much less, since they read text rather than page images.
       </P>
       <P id="cost-pace" className="prose-fonds mt-3">
-        The figure a reader actually wants is not hours but weeks, so here it is, observed the
-        same way: <strong>{transcribedNow} batches</strong> in the{' '}
+        The pace in weeks is observed the same way: <strong>{transcribedNow} batches</strong> in the{' '}
         <strong>{daysElapsed} days</strong> since the first was committed, which is{' '}
         <strong>{perWeek.toFixed(1)} a week</strong> counted flat across every day, working or
-        not. The folders nobody has edited — {openBatches} batches — are all transcribed. What
+        not. The folders nobody has edited ({openBatches} batches) are all transcribed. What
         is left of the open-access fonds is the folders that published editions already cover;
         transcribing them as well would take about <strong>{weeksLeft(allBatches)} weeks</strong>
-        more at the same pace. The figure moves on its own as the manifest and the calendar do,
-        which is the only way a claim like this stays true.
+        more at the same pace. The figure follows the manifest and the calendar, so it stays
+        current without anyone updating it.
       </P>
       <P id="cost-context-vs-written" className="prose-fonds mt-3">
-        Those last two numbers are the same work counted twice, and keeping them apart is the
-        point. A pass holds twenty page images and its own growing draft in context and sends
+        The context and written figures count the same work twice, and they are kept apart on
+        purpose. A pass holds twenty page images and its own growing draft in context and sends
         the lot again at every step, so it <em>re-reads</em> roughly three hundred times what it{' '}
         <em>writes</em>. Context is billed at a fraction of fresh input and output at several
         times it, so the two columns below do not add up to anything and should not be added:
         the left one says how big the job is, the right one says how much of it is the
         document. An earlier version of this page quoted a single figure of 175k tokens per
         batch. It was a declared estimate, never measured, and it was wrong by two orders of
-        magnitude — the numbers here are read off the session transcripts of the passes
+        magnitude. The numbers here are read off the session transcripts of the passes
         themselves.
       </P>
       <P id="cost-split" className="prose-fonds mt-3">
-        The split between the two steps is the other useful fact: transcription carries
-        almost all of the cost, because it reads page images — the batch at full page scale,
-        then dozens of high-resolution crops to settle a word — while the modernised reading
+        Transcription carries almost all of the cost, because it reads page images (the batch
+        at full page scale, then dozens of high-resolution crops to settle a word), while the
+        modernised reading
         works from the transcription's text and never opens an image. The heaviest
         passes run near 45 M: folder 135's batches at about 40 M each (twenty dense pages,
         two hands, a manuscript half in English) and folder 143's at 41 and 46 M. Treat the ranges below as a first anchor, to be corrected by the
         next batches.
       </P>
       <P id="cost-typed" className="prose-fonds mt-3">
-        Typed pages are the cheapest in the fonds, and now measured rather than supposed.
-        Folder 29's first batch — nine typed pages of a 1967 sketch on ramification data,
-        alongside eleven of correspondence — moved{' '}
+        Typed pages are the cheapest in the fonds, and this has now been measured. Folder 29's
+        first batch (nine typed pages of a 1967 sketch on ramification data, alongside eleven
+        of correspondence) moved{' '}
         <strong>{PILOT.transcribeTyped.contextM} M</strong> and wrote{' '}
         <strong>{PILOT.transcribeTyped.writtenK}k</strong>, against{' '}
         {PILOT.transcribe.contextM} M for the handwritten mean and 40 M for folder 135. The
-        saving is not in the twenty page images, which are loaded and re-sent whatever is on
-        them: it is in the <em>crops</em>. Settling a word in a hand of 1962 takes dozens of
+        twenty page images are loaded and re-sent whatever is on them, so the saving comes from
+        the <em>crops</em>. Settling a word in a hand of 1962 takes dozens of
         high-resolution re-reads of the same leaf, quadrant by quadrant, and each one is
         another image in context; a typed line is settled at first sight, and the crops that
         remain go to the overtyped strikeouts and the handwritten marginalia. Thirty-nine
@@ -845,7 +841,7 @@ function CostAndHorizon({ manifest }: { manifest: ReturnType<typeof useManifest>
         thirty-nine folders are typescript alone; the rest pair a typescript with manuscript
         notes or letters, and the typed fraction of a mixed folder is unknown until someone
         opens it. So the ranges keep the handwritten mean, and the typed measurement is best
-        read as a floor — what a batch costs when the reading is easy.
+        read as a floor: what a batch costs when the reading is easy.
       </P>
 
       <div className="mt-5 overflow-x-auto">
@@ -897,8 +893,8 @@ function CostAndHorizon({ manifest }: { manifest: ReturnType<typeof useManifest>
               <td className="py-2 pr-4 font-medium text-ink-900">
                 Done so far
                 <span className="block text-[11.5px] font-normal text-ink-400">
-                  {PILOT.batchesTranscribed} transcribed, {PILOT.batchesModernised} modernised
-                  — count × measured mean
+                  {PILOT.batchesTranscribed} transcribed, {PILOT.batchesModernised} modernised;
+                  count × measured mean
                 </span>
               </td>
               <td className="py-2 pr-4">{PILOT.batchesTranscribed}</td>
@@ -937,13 +933,12 @@ function CostAndHorizon({ manifest }: { manifest: ReturnType<typeof useManifest>
       </div>
 
       <P id="cost-caveats" className="mt-4 text-[12.5px] leading-relaxed text-ink-500">
-        The upper bounds assume dense continuous prose — the Long March, not folder 115's
-        formula-dominated pages. Hours are model-active time, measured between consecutive
+        The upper bounds assume dense continuous prose like the Long March, rather than folder
+        115's formula-dominated pages. Hours are model-active time, measured between consecutive
         messages of a pass with gaps over five minutes dropped; the human page-by-page check
         that turns <em>Drafted</em> into <em>Checked</em> is not in the table at all, and it
         is the slower half of the work. Per-pass figures are read off conversation windows, so
-        each carries a little of the exchange around it — they are measurements with a margin,
-        not meter readings. Folder 29's typed figure was cut at the render and PDF check,
+        each carries a little of the exchange around it: they are measurements with a margin. Folder 29's typed figure was cut at the render and PDF check,
         before that session went on to other work, so it excludes what followed and includes
         the whole of the reading. Folders already edited by the community (marked on the archive
         page) should be subtracted from any plan rather than re-transcribed.
@@ -971,11 +966,11 @@ function Pipeline() {
     <section className="mt-12 max-w-[52em]">
       <H2 id="pipeline">The pipeline</H2>
       <P id="pipeline-two-skills" className="prose-fonds mt-3">
-        Two skills, run in order — the first on one batch of twenty pages at a time, the second
-        on the folder once every batch of it is transcribed. The modernised reading closes its
-        résumé with a <code className="text-[13px]">\keywords{'{}'}</code> line — English search
-        terms — which the manifest extracts as the folder's tags. The last step is the one no
-        file can vouch for.
+        Two skills run in order: the first on one batch of twenty pages at a time, the second
+        on the whole folder once every batch of it is transcribed. The modernised reading
+        closes its résumé with a <code className="text-[13px]">\keywords{'{}'}</code> line of
+        English search terms, which the manifest extracts as the folder's tags. No file can
+        vouch for the last step.
       </P>
 
       <div className="card mt-5 overflow-x-auto px-4 py-5">
@@ -1021,7 +1016,7 @@ function Pipeline() {
             batch-NN.fr.tex
           </text>
           <text x="394" y="84" textAnchor="middle" fontSize="10.5" fill="#726d5f">
-            the transcription — apparatus,
+            transcription with apparatus,
           </text>
           <text x="394" y="97" textAnchor="middle" fontSize="10.5" fill="#726d5f">
             page by page
@@ -1086,7 +1081,7 @@ function Pipeline() {
             CHECKED
           </text>
           <text x="710" y="228" textAnchor="middle" fontSize="10.5" fill="#128a5f">
-            a person, page by page — declared
+            a person, page by page; declared
           </text>
 
           {/* Derived outputs */}
@@ -1138,8 +1133,8 @@ function StatusSequence() {
         A batch moves through these in order. Nothing here can be changed from the browser: three
         of the six are read off the files themselves, and the other three are written in{' '}
         <code>transcripts/status.json</code>, in the repository, where a change is a diff somebody
-        can review. A mark kept in a visitor's browser told them something nobody else could see,
-        and told them nothing from a second machine.
+        can review. A mark kept in a visitor's browser would be visible to nobody else, and lost
+        on a second machine.
       </P>
 
       <div className="mt-5 overflow-x-auto">
@@ -1183,14 +1178,14 @@ function StatusSequence() {
         Evidence only ever moves a batch forward. A batch marked <em>checked</em> has been through
         a comparison the manifest cannot contradict, and one marked <em>skipped</em> records a
         decision that a file appearing later does not undo. <em>Drafted</em> and <em>reviewed</em>
-        {' '}are never written down at all — they are read off the files, so they cannot go stale.
+        {' '}are never written down at all: they are read off the files, so they cannot go stale.
       </P>
 
       <P id="six-states-report" className="prose-fonds mt-4">
-        The step from <em>AI-reviewed</em> to <em>checked</em> is a person reading against the
-        pages, and readers are how it happens. Every folder that has been transcribed carries a{' '}
+        The step from <em>AI-reviewed</em> to <em>checked</em> is a reader comparing the
+        transcription with the pages. Every folder that has been transcribed carries a{' '}
         <strong className="font-semibold text-ink-800">Report</strong> button, and so does every
-        open batch, beside the source links — it opens an issue on the repository with the
+        open batch, beside the source links. It opens an issue on the repository with the
         shelfmark, the batch and the page on screen already filled in. A disputed reading then
         sits in public, next to the file it disputes, which is what an apparatus is for.
       </P>
