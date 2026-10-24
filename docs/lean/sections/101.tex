@@ -2,9 +2,9 @@
 
 La cote 101, \emph{Cohomologie locale : notes manuscrites (s.d.)}, quarante-deux pages que l'inventaire date \q{[à partir de 1967-1968]}, énonce page~10, pour $A$ local régulier complet de dimension $n$, $X = \operatorname{Spec} A$ et $I = H^n_x(\mathcal O_X)$, que les applications de dualité $\varphi^i_F : \mathrm{Ext}^{n-i}(X; F, \mathcal O_X) \to \mathrm{Hom}(H^i_x(F), I)$ sont des isomorphismes pour tout $\mathcal O_X$-module $F$, \q{pas nécessairement quasi-cohérent} (\lot{101}{1}{10}). Pour $n = 1$, les pages~10 et~11 le démontrent. Un $\mathcal O_X$-module est un triplet $(M_0, M_1, u)$ : un $A$-module $M_0$, un $K$-espace vectoriel $M_1$ et une application $A$-linéaire $u : M_0 \to M_1$, avec $H^0_x(F) = \mathrm{Ker}\, u$ et $H^1_x(F) = \mathrm{Coker}\, u$. La résolution injective $\mathcal O_X \to \underline K_X \to \underline K_X/\mathcal O_X$ donne $\mathrm{Ext}^\bullet(X; F, \mathcal O_X)$ comme cohomologie du complexe $\mathrm{Hom}_K(M_1, K) \to \mathrm{Hom}_A(M_0, K/A)$, $g \mapsto g \circ u \bmod A$. La page conclut par trois faits : a) un homomorphisme d'un $K$-espace vectoriel dans $A$ est nul ; b) $\mathrm{Ext}^1_A(K, A) = 0$, parce que $A$ est complet ; c) $K/A$ est injectif.
 
-\noindent\emph{Conventions.} On travaille dans le modèle de la page : l'équivalence entre $\mathcal O_X$-modules et triplets et le calcul des $\mathrm{Ext}$ par la résolution sont la réduction de la page, et ne sont pas démontrés ici. $\mathrm{Ext}^0$ est le noyau et $\mathrm{Ext}^1$ le conoyau de $g \mapsto g \circ u \bmod A$.
+\noindent\emph{Conventions.} On travaille dans le modèle de la page, dont on admet la réduction : l'équivalence entre $\mathcal O_X$-modules et triplets, et le calcul des $\mathrm{Ext}$ par la résolution. $\mathrm{Ext}^0$ est le noyau et $\mathrm{Ext}^1$ le conoyau de $g \mapsto g \circ u \bmod A$.
 
-Le complexe et les deux applications de dualité du théorème ci-dessous, la flèche horizontale du milieu étant $g \mapsto g \circ u \bmod A$ :
+Le diagramme suivant montre le complexe et les deux applications de dualité du théorème ci-dessous ; la flèche horizontale du milieu est $g \mapsto g \circ u \bmod A$ :
 \[
 \begin{tikzcd}[column sep=small]
 \mathrm{Ext}^0 \arrow[r, hook] \arrow[d] & \mathrm{Hom}_K(M_1, K) \arrow[r] & \mathrm{Hom}_A(M_0, K/A) \arrow[r, two heads] & \mathrm{Ext}^1 \arrow[d] \\
@@ -26,7 +26,7 @@ L'injectivité sur $\mathrm{Ext}^0$ est a) appliqué à une différence. Pour la
 L'énoncé tient tel que la page le démontre ; la complétude ne sert qu'en b). La fin de l'argument d'injectivité, en partie illisible sur la page, est rétablie par la lecture dans cet ordre, et Lean la confirme. Les deux pages ne numérotent pas les applications de la même façon. La page~10 les indexe par le degré de cohomologie locale, si bien que $\varphi^1$ part de $\mathrm{Ext}^0$ ; la page~11 écrit au contraire $E^0 \xrightarrow{\varphi^0} \mathrm{Hom}(\mathrm{Coker}\, u, K/A)$. Les noms \texttt{phi0} et \texttt{phi1} du code Lean suivent la page~11.
 \end{remarque}
 
-Ne sont pas démontrés ici : l'équivalence entre $\mathcal O_X$-modules et triplets, le calcul des $\mathrm{Ext}$ et des $H^i_x$ dans ce modèle, et l'équivalence entre $\mathrm{Ext}^1_A(K, A) = 0$ et la complétude, que la lecture cite de mémoire. En dimension~$2$ la dualité échoue, ce que la page~14 découvre (piste \texttt{101-sheaf-duality-dim-two-fails}, ci-dessous) :
+Ne sont pas démontrés ici : l'équivalence entre $\mathcal O_X$-modules et triplets, le calcul des $\mathrm{Ext}$ et des $H^i_x$ dans ce modèle, et l'équivalence entre $\mathrm{Ext}^1_A(K, A) = 0$ et la complétude, que la lecture cite de mémoire. En dimension~$2$ la dualité échoue, et la page~14 le découvre (piste \texttt{101-sheaf-duality-dim-two-fails}, ci-dessous) :
 
 \begin{encadre}
 \begin{contrexemple*}[pages 10, 14 et 15, dualité locale en dimension deux\piste{101-sheaf-duality-dim-two-fails}]\nonverifie
