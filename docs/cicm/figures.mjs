@@ -30,7 +30,7 @@ import { resolve } from 'node:path';
 const here = import.meta.dirname;
 const root = resolve(here, '../..');
 const git = (...a) => execFileSync('git', a, { cwd: root, encoding: 'utf8', maxBuffer: 1 << 28 });
-const SNAPSHOT = '8aecaa3c8f2599e66fbe6c6be710f53b9abe114a';
+const SNAPSHOT = '81dcfafa2269617b8a02c39a86304cf7359aa78e';
 const at = (path) => git('show', `${SNAPSHOT}:${path}`);
 const short = SNAPSHOT.slice(0, 7);
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

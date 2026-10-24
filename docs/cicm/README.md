@@ -15,7 +15,7 @@ of the statements in Lean (`lean/`), with the appendix
 - `fig-pipeline.tex` — the pipeline from page to theorem, drawn by hand,
   because it states decisions and not data.
 - `figures.mjs` — reads the repository **at one commit** (`SNAPSHOT`, now
-  8aecaa3; never the working tree) and writes `fig-themes.tex`, the theorems
+  81dcfaf; never the working tree) and writes `fig-themes.tex`, the theorems
   per part of the Lean appendix, and `fig-counts.tex`, every count the text
   cites as a `\cnt…` macro: Lean files, lines and declarations, proof cards
   and verdicts, the appendix's labels and pages, commits, findings,
@@ -46,7 +46,7 @@ review is double-blind: if it is, an anonymous version is needed).
 
 ## What remains to check
 
-- The counts are frozen at 8aecaa3 (24 October 2026). Before submission,
+- The counts are frozen at 81dcfaf (24 October 2026). Before submission,
   move `SNAPSHOT`, rerun `figures.mjs` and reread the paragraphs that comment
   on the numbers.
 - The pull requests (39, all closed, 36 by the triage account) were counted
