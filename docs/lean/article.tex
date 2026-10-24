@@ -40,8 +40,12 @@
 % Le fichier de la preuve vérifiée, une fois par section.
 % Un lemme général que la bibliothèque du projet démontre une fois pour toutes (lean/Grothendieck/Upstream/) :
 % on le cite sans en recopier la démonstration.
-\newcommand{\general}[1]{\par\noindent\textit{Résultat général, démontré en Lean dans}\newline\href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/Upstream/#1.lean}{\texttt{Upstream/\detokenize{#1}.lean}}\textit{ ; la démonstration n'est pas reprise ici.}\par}
-\newcommand{\verifie}[1]{\footnote{Preuve vérifiée : \href{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Grothendieck/#1.lean}{\texttt{lean/Grothendieck/\detokenize{#1}.lean}}.}}
+% Les liens vers le code Lean pointent vers l'étiquette git de la version publiée,
+% pas vers main : le code continue d'évoluer après la publication.
+\newcommand{\leanref}{article-lean-2026-10}
+\newcommand{\leanblob}{https://github.com/Commutator-IO/grothendieck-project/blob/\leanref/lean/Grothendieck}
+\newcommand{\general}[1]{\par\noindent\textit{Résultat général, démontré en Lean dans}\newline\href{\leanblob/Upstream/#1.lean}{\texttt{Upstream/\detokenize{#1}.lean}}\textit{ ; la démonstration n'est pas reprise ici.}\par}
+\newcommand{\verifie}[1]{\footnote{Preuve vérifiée : \href{\leanblob/#1.lean}{\texttt{lean/Grothendieck/\detokenize{#1}.lean}}.}}
 % Un énoncé lié à l'un des théorèmes numérotés de la frise des œuvres (onglet
 % Timeline du site) : un losange et le numéro, qui renvoient à la frise.
 \definecolor{frise}{HTML}{2F4DA8}
@@ -52,7 +56,10 @@
 \newcommand{\piste}[1]{\,\href{https://grothendieck.commutator.io/findings/\##1}{\textcolor{piste}{\ensuremath{\blacklozenge}}}}
 % La démonstration de la page, résumée, pour un énoncé non démontré en Lean : marquée dans la marge.
 % Un théorème de Grothendieck que Lean ne vérifie pas : marque dans la marge.
-\newcommand{\nonverifie}{\marginnote{\raggedright\footnotesize\textcolor{piste}{\ensuremath{\lozenge}}~non vérifié en Lean}}
+% Chaque occurrence pose une étiquette nv:N, que l'annexe des énoncés non vérifiés
+% (annexe-nonverifies.tex, engendrée par nonverifies.mjs dans l'ordre des \input) cite.
+\newcounter{nonverif}
+\newcommand{\nonverifie}{\stepcounter{nonverif}\label{nv:\arabic{nonverif}}\marginnote{\raggedright\footnotesize\textcolor{piste}{\ensuremath{\lozenge}}~non vérifié en Lean}}
 \newenvironment{demopage}[1][]{\par\smallskip\noindent\marginpar{\raggedright\footnotesize\textcolor{piste}{\ensuremath{\lozenge}}~non vérifiée en Lean}\textit{Démonstration de la page}\if\relax\detokenize{#1}\relax\else{} (#1)\fi.~}{\par\smallskip}
 % Sous le titre de chaque partie : les lettres du fonds qui datent et situent la partie.
 \newcommand{\lettres}[1]{{\small #1\par}\medskip}
@@ -285,6 +292,8 @@ Sous le titre de chaque partie, quand le fonds en conserve, un paragraphe donne 
 \part*{Bilan}
 \input{sections/reste}
 
+\input{annexe-nonverifies}
+
 \section*{Déclaration sur l'usage de l'intelligence artificielle}\addcontentsline{toc}{section}{Déclaration sur l'usage de l'intelligence artificielle}
 
 Les énoncés démontrés ici sont tirés des lectures modernisées du fonds. Celles-ci dérivent de transcriptions produites par des modèles de langage (Claude Opus~5, Opus~5.5, Fable~5 et Fable~5.1, d'Anthropic) sous des règles éditoriales écrites par l'auteur ; ces transcriptions n'ont pas été relues en entier par une personne. Les preuves formelles ont été écrites en Lean~4 par Claude Opus~5.5, sous la direction de l'auteur, et Lean en vérifie mécaniquement la correction contre la bibliothèque mathlib. Le même modèle en a tiré les démonstrations rédigées de cette annexe. L'auteur a relu le choix des énoncés, les corrections apportées aux lectures et le texte, et en assume l'entière responsabilité. Lean garantit qu'un énoncé tient sous les hypothèses écrites. Il ne garantit ni que l'énoncé rend fidèlement le feuillet, ni qu'il est nouveau.
@@ -327,9 +336,11 @@ Les énoncés démontrés ici sont tirés des lectures modernisées du fonds. Ce
 \bibitem{deligne1989} P.~Deligne, « Le groupe fondamental de la droite projective moins trois points », dans \emph{Galois Groups over $\mathbf Q$}, Mathematical Sciences Research Institute Publications 16, Springer, New York, 1989, 79--297.
 \bibitem{deningermurre1991} C.~Deninger et J.~Murre, « Motivic decomposition of abelian schemes and the Fourier transform », \emph{Journal für die reine und angewandte Mathematik} 422 (1991), 201--219.
 \bibitem{drinfeld1990} V.~G.~Drinfeld, « On quasitriangular quasi-Hopf algebras and on a group that is closely connected with $\mathrm{Gal}(\overline{\mathbf Q}/\mathbf Q)$ », \emph{Algebra i Analiz} 2 (1990), n\textsuperscript{o}\,4, 149--181 ; traduction anglaise, \emph{Leningrad Mathematical Journal} 2 (1991), 829--860.
+\bibitem{edidinhu2025} D.~Edidin et Z.~Hu, « The integral Chow rings of the stacks of hyperelliptic Weierstrass points », \emph{Michigan Mathematical Journal} (2025) ; doi:10.1307/mmj/20236479, arXiv:2208.00556.
 \bibitem{elliott2010} J.~Elliott, « Birings and plethories of integer-valued polynomials », \emph{Actes des rencontres du CIRM} 2 (2010), n\textsuperscript{o}\,2, 53--58 ; version développée, arXiv:1109.3848.
 \bibitem{fan1951} K.~Fan, « Maximum properties and inequalities for the eigenvalues of completely continuous operators », \emph{Proceedings of the National Academy of Sciences of the USA} 37 (1951), 760--766.
 \bibitem{ferrand1966} D.~Ferrand, « Sur les modules qui sont limite projective de leurs localisés », \emph{Comptes rendus de l'Académie des sciences, Paris, série~A} 262 (1966), 609--611.
+\bibitem{fultonolsson2010} W.~Fulton et M.~Olsson, « The Picard group of $\mathcal M_{1,1}$ », \emph{Algebra \& Number Theory} 4 (2010), 87--104 ; arXiv:0704.2214.
 \bibitem{furusho2010} H.~Furusho, « Pentagon and hexagon equations », \emph{Annals of Mathematics} (2) 171 (2010), 545--556.
 \bibitem{gabberorgogozo2008} O.~Gabber et F.~Orgogozo, « Sur la $p$-dimension des corps », \emph{Inventiones mathematicae} 174 (2008), 47--80 ; arXiv:0706.0671.
 \bibitem{gabrielulmer1971} P.~Gabriel et F.~Ulmer, \emph{Lokal präsentierbare Kategorien}, Lecture Notes in Mathematics 221, Springer, Berlin, 1971.
