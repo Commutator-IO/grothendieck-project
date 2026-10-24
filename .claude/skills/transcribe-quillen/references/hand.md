@@ -134,3 +134,11 @@ and `\ill{}` stands.
   number as written.
 - 1983-4 to 1983-6 open with a cover leaf (page span and dates only, or a
   contents leaf with page numbers): transcribe it as page 1, like 1983-2.
+
+## 2026-10-24 — 1983-7, batch 1
+
+- 1983-7 restarts his pagination at 1 (after 1983-6 ended at 1014): PDF p. 2
+  = his p. 1. Say so in the header; do not continue the old count.
+- In an `array` (or any `\\`-separated environment), a row beginning with `[`
+  is read as the optional spacing argument of `\\` and breaks the compile
+  (« Missing number »): start such a row with `{}`.
