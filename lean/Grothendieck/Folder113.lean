@@ -2,6 +2,7 @@ import Mathlib.CategoryTheory.Idempotents.FunctorExtension
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Mathlib.CategoryTheory.Preadditive.Opposite
 import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Grothendieck.Upstream.KaroubiAdditiveFunctors
 
 /-!
 # Folder 113, page 3: the Karoubi envelope and Morita invariance (partial)
@@ -95,11 +96,6 @@ instance restriction_isEquivalence [IsIdempotentComplete D] :
   exact inferInstanceAs ((Functor.whiskeringLeft _ _ D).obj (opKaroubi P) ⋙
     (Functor.whiskeringLeft _ _ D).obj (toKaroubi Pᵒᵖ)).IsEquivalence
 
-/-- Every morphism of `Kar P` factors through the embedding. -/
-theorem decomp {Q₁ Q₂ : Karoubi P} (f : Q₁ ⟶ Q₂) :
-    f = decompId_i Q₁ ≫ (toKaroubi P).map f.f ≫ decompId_p Q₂ := by
-  ext; simp
-
 variable [Preadditive P] [Preadditive D]
 
 /-- A functor on `(Kar P)°` is additive as soon as its restriction to `P°` is. -/
@@ -109,7 +105,7 @@ theorem additive_of_toKaroubi_op (F : (Karoubi P)ᵒᵖ ⥤ D)
     have key : ∀ h : Q₁ ⟶ Q₂, F.map h = F.map (decompId_p Q₁.unop).op ≫
         ((toKaroubi P).op ⋙ F).map h.unop.f.op ≫ F.map (decompId_i Q₂.unop).op := by
       intro h
-      conv_lhs => rw [← Quiver.Hom.op_unop h, decomp P h.unop]
+      conv_lhs => rw [← Quiver.Hom.op_unop h, Karoubi.hom_eq_decompId_i_comp h.unop]
       rw [op_comp, op_comp, F.map_comp, F.map_comp, Functor.comp_map, Functor.op_map,
         Quiver.Hom.unop_op, Category.assoc]
     rw [key, key f, key g, unop_add, show (f.unop + g.unop).f = f.unop.f + g.unop.f from rfl,
