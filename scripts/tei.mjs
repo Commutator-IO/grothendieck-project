@@ -24,8 +24,9 @@
  *   \supplied{x}       <supplied resp="#pass">x</supplied>   the transcriber's
  *   \add{x}            <add>x</add>                        Grothendieck's own
  *   \struck{x}         <del>x</del>
- *   \note{x}           <note type="editorial" resp="#pass">x</note>
- *   \drawing{x}        <note type="drawing" resp="#pass">x</note>
+ *   \note{x}           <note type="editorial" resp="#pass">x</note>   or resp="#mh"
+ *   \drawing{x}        <note type="drawing" resp="#pass">x</note>     when it records
+ *                                                     the editor's check (HUMAN_CHECK)
  *   \marginal{x}       <note type="authorial" place="margin">x</note>
  *   $…$  \[…\]  envs   <formula notation="TeX">…</formula>, display marked
  *   tikzcd             <figure type="diagram"><formula notation="tikz-cd">
@@ -79,6 +80,50 @@ const ODD_SOURCE = resolve(ROOT, 'tei', 'grothendieck.odd');
 const escapeXml = (s) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const escapeAttr = (s) => escapeXml(s).replace(/"/g, '&quot;');
+
+// ---------------------------------------------------------------------------
+// Who answers for a note: the model, or the editor who checked the page.
+
+/**
+ * The edition's editor, declared in every header as `<editor xml:id="mh">`.
+ * Every editorial note and every revision is the model's (`#pass`, or the
+ * revising model's own id) unless its text records a check he made on the
+ * facsimile; then it points to `#mh`.
+ *
+ * The rule is a list of phrasings, each of which ties his name to the
+ * facsimile: the page was looked at, and by him. A note or a revision record
+ * is his when one of them occurs in its text, whitespace and case aside:
+ *
+ *   … sur le fac-similé par Michel Hua     (vérifié, lu, recomposé …)
+ *   … par Michel Hua sur le fac-similé
+ *   … d'après le fac-similé (Michel Hua, <date>)
+ *   … on the facsimile by Michel Hua       (checked, resolved, read again,
+ *   … against the facsimile by Michel Hua   confirmed as …, placed …)
+ *   … by Michel Hua on the facsimile       (settled, identified as …)
+ *   … at Michel Hua's decision … he checked on the facsimile
+ *
+ * It is deliberately narrow. A re-reading « on the facsimile at 400 dpi » that
+ * names nobody was the model's, and stays `#pass`; so does a mention of his
+ * name that does not say he looked (« at Michel Hua's decision » alone), and a
+ * recomposition « d'après le fac-similé » with a date and no name. A check the
+ * patterns miss is credited to the model, which understates the edition; a
+ * note wrongly credited to him would overstate it. A new phrasing in the
+ * transcriptions is a new line here.
+ */
+const EDITOR = { id: 'mh', name: 'Michel Hua' };
+const HUMAN_CHECK = [
+  /\b(?:sur|contre) le fac-similé,? par Michel Hua\b/i,
+  /\bpar Michel Hua,? sur le fac-similé\b/i,
+  /\bd['’]après le fac-similé \(Michel Hua\b/i,
+  /\b(?:on|against) the facsimile,? by Michel Hua\b/i,
+  /\bby Michel Hua,? on the facsimile\b/i,
+  /\bMichel Hua['’]s decision\b[^.]*?\bhe checked on the facsimile\b/i,
+];
+const recordsHumanCheck = (text) => {
+  const flat = text.replace(/\s+/g, ' ');
+  return HUMAN_CHECK.some((re) => re.test(flat));
+};
+const noteResp = (text) => (recordsHumanCheck(text) ? `#${EDITOR.id}` : '#pass');
 
 // A private-use codepoint delimits the marker, for the reasons render.mjs
 // gives: it cannot occur in a transcription, and if it ever leaked it would
@@ -166,8 +211,8 @@ const BRACED = [
   ['supplied', (a) => `<supplied resp="#pass">${a}</supplied>`],
   ['add', (a) => `<add>${a}</add>`],
   ['struck', (a) => `<del>${a}</del>`],
-  ['note', (a) => `<note type="editorial" resp="#pass">${a}</note>`],
-  ['drawing', (a) => `<note type="drawing" resp="#pass">${a}</note>`],
+  ['note', (a) => `<note type="editorial" resp="${noteResp(a)}">${a}</note>`],
+  ['drawing', (a) => `<note type="drawing" resp="${noteResp(a)}">${a}</note>`],
   ['marginal', (a) => `<note type="authorial" place="margin">${a}</note>`],
   ['emph', (a) => `<hi rend="italic">${a}</hi>`],
   ['textit', (a) => `<hi rend="italic">${a}</hi>`],
@@ -562,14 +607,23 @@ function document(meta, body) {
 
   // Each revision points at the model that made it: #pass when it is the
   // model of the first pass, and otherwise a name of its own, declared once
-  // per model in a respStmt of its own.
-  const who = (r) => (r.id === meta.modelId ? '#pass' : `#rev-${r.id}`);
+  // per model in a respStmt of its own. A revision that records a check the
+  // editor made on the facsimile (HUMAN_CHECK) points at him instead.
+  const ed = `#${EDITOR.id}`;
+  const who = (r) => (recordsHumanCheck(r.text) ? ed : r.id === meta.modelId ? '#pass' : `#rev-${r.id}`);
   const dates = (rs) => rs.map((r) => `<date when="${t(r.date)}">${t(r.date)}</date>`).join(', ');
   const byPass = meta.revisions.filter((r) => who(r) === '#pass');
-  const others = [...new Map(meta.revisions.filter((r) => who(r) !== '#pass').map((r) => [r.id, r])).values()];
+  const byEditor = meta.revisions.filter((r) => who(r) === ed);
+  // His checks recorded in notes carry dates in free prose; the header gives
+  // the dates of the revision records only, which are machine-readable.
+  const checked = byEditor.length > 0 || body.includes(`resp="${ed}"`);
+  const checkDates = [...new Set(byEditor.map((r) => r.date))].sort();
+  const others = [
+    ...new Map(meta.revisions.filter((r) => who(r) !== '#pass' && who(r) !== ed).map((r) => [r.id, r])).values(),
+  ];
   const reviserLines = others
     .map((m) => {
-      const theirs = meta.revisions.filter((r) => r.id === m.id);
+      const theirs = meta.revisions.filter((r) => r.id === m.id && who(r) !== ed);
       return `
         <respStmt>
           <resp>révision automatique, non vérifiée contre les pages par une personne (${dates(theirs)})</resp>
@@ -598,10 +652,19 @@ function document(meta, body) {
       <titleStmt>
         <title>${t(title)}</title>
         <author>Alexandre Grothendieck</author>
+        <editor xml:id="${EDITOR.id}">${EDITOR.name}</editor>
         <respStmt>
-          <resp>transcription automatique — première passe, non vérifiée contre les pages par une personne${
+          <resp>transcription automatique — première passe, non vérifiée ${
+            checked ? 'dans son ensemble ' : ''
+          }contre les pages par une personne${
             meta.passDate ? ` (<date when="${t(meta.passDate)}">${t(meta.passDate)}</date>)` : ''
-          }${byPass.length ? ` ; révisée par le même modèle (${dates(byPass)})` : ''}</resp>
+          }${byPass.length ? ` ; révisée par le même modèle (${dates(byPass)})` : ''}${
+            checked
+              ? ` ; lectures ponctuelles vérifiées sur le fac-similé par l'éditeur${
+                  checkDates.length ? ` (${checkDates.map((d) => `<date when="${t(d)}">${t(d)}</date>`).join(', ')})` : ''
+                }`
+              : ''
+          }</resp>
           ${modelLine}
         </respStmt>${reviserLines}
         <respStmt>
@@ -619,7 +682,7 @@ function document(meta, body) {
         <availability status="restricted">
           <p>Le fonds Alexandre Grothendieck est sous droits. Cette transcription
           est une édition de démonstration, non autorisée, produite par une
-          machine et non vérifiée ; aucune image du fonds n'est reproduite. La
+          machine et non vérifiée${checked ? ' dans son ensemble' : ''} ; aucune image du fonds n'est reproduite. La
           source LaTeX dont ce fichier dérive est publiée sous ${t(REPO)}.</p>
         </availability>
         <ref target="${SITE}/">${SITE}</ref>
@@ -688,6 +751,15 @@ function document(meta, body) {
         transcripteur) ; <hi rend="monospace">\\marginal</hi> devient
         <hi rend="monospace">note[@type='authorial'][@place='margin']</hi> (de l'auteur) ;
         <hi rend="monospace">\\page</hi> devient <hi rend="monospace">pb</hi>.</p>
+        <p>Une note du transcripteur pointe vers le modèle
+        (<hi rend="monospace">resp="#pass"</hi>), sauf quand elle consigne une
+        lecture vérifiée sur le fac-similé par l'éditeur : elle pointe alors
+        vers lui (<hi rend="monospace">resp="#mh"</hi>). De même pour les
+        révisions de <hi rend="monospace">revisionDesc</hi>. La règle est une
+        liste de tournures où il est nommé comme celui qui a regardé la page
+        (<hi rend="monospace">HUMAN_CHECK</hi> dans
+        <hi rend="monospace">scripts/tei.mjs</hi>) ; une vérification qu'elle
+        ne reconnaît pas reste attribuée au modèle.</p>
         <p>Restitution et ajout de l'auteur n'ont longtemps fait qu'une macro. Ils
         ont été séparés le 26 septembre 2026 par une règle vérifiable dans le
         fichier, non par une relecture : un ajout accolé au mot qu'il complète

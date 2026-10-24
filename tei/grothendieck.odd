@@ -37,7 +37,7 @@
         <head>What this declares</head>
 
         <p>TEI P5 has some six hundred elements. The export of this corpus uses
-           sixty-four, and they are not a sample of the six hundred: they are
+           sixty-six, and they are not a sample of the six hundred: they are
            the exact reach of a mechanical conversion from a LaTeX subset of
            eight private macros, a handful of list and heading commands, and
            mathematics carried as TeX. Every element in the body exists because
@@ -110,11 +110,11 @@
           <!-- The reading: text, lists, headings, page breaks, and the
                apparatus. -->
           <moduleRef key="core"
-                     include="add author bibl date del gap graphic head hi item label list name note p pb
+                     include="add author bibl date del editor gap graphic head hi item label list name note p pb
                               pubPlace publisher quote ref resp respStmt title unclear"/>
 
           <!-- Provenance: which model read the pages and when, every revision
-               since, the export, and the legal status. -->
+               since, the editor, the export, and the legal status. -->
           <moduleRef key="header"
                      include="appInfo application availability change edition editionStmt
                               editorialDecl encodingDesc fileDesc idno langUsage language
@@ -241,12 +241,14 @@
                 <valList type="closed" mode="replace">
                   <valItem ident="editorial">
                     <desc>The transcriber's remark, always with
-                       <att>resp</att>.</desc>
+                       <att>resp</att>: <code>#pass</code>, the model, or
+                       <code>#mh</code>, the editor, when the note records a
+                       reading he checked on the facsimile.</desc>
                   </valItem>
                   <valItem ident="drawing">
                     <desc>The transcriber's description of a drawing of his,
                        which the edition does not redraw; always with
-                       <att>resp</att>.</desc>
+                       <att>resp</att>, on the same rule.</desc>
                   </valItem>
                   <valItem ident="authorial">
                     <desc>Grothendieck's own note in the margin, always with
@@ -311,8 +313,10 @@
                   <valItem ident="model">
                     <desc>A language model that read the pages, named as the
                        transcription's header names it, with its identifier.
-                       The only person-like agent the export names: no human
-                       has checked a transcription against the pages.</desc>
+                       The one person the export names is the editor, in
+                       <gi>editor</gi>, who has checked readings on the
+                       facsimile here and there but no transcription
+                       whole.</desc>
                   </valItem>
                 </valList>
               </attDef>
@@ -366,8 +370,9 @@
         <p>Any failure fails the deploy. The Schematron constraints that
            <code>tei_all</code> embeds are not run over the corpus; the ones
            that bear on this subset are the pointer checks, and the export
-           writes every pointer it uses (<code>#pass</code>, <code>#ed</code>
-           and one per revising model) together with its target.</p>
+           writes every pointer it uses (<code>#pass</code>, <code>#mh</code>,
+           <code>#ed</code> and one per revising model) together with its
+           target.</p>
       </div>
 
       <div>

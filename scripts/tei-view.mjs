@@ -137,7 +137,7 @@ function unexpected(el, where) {
 
 /** Every element the header may contain, and nothing else. */
 const HEADER_ELEMENTS = new Set([
-  'teiHeader', 'fileDesc', 'titleStmt', 'title', 'author', 'respStmt', 'resp', 'date',
+  'teiHeader', 'fileDesc', 'titleStmt', 'title', 'author', 'editor', 'respStmt', 'resp', 'date',
   'name', 'orgName', 'editionStmt', 'edition', 'publicationStmt', 'publisher', 'pubPlace',
   'availability', 'p', 'ref', 'sourceDesc', 'msDesc', 'msIdentifier', 'country',
   'settlement', 'repository', 'collection', 'idno', 'head', 'msContents', 'summary',

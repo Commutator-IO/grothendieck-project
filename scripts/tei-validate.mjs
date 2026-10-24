@@ -32,7 +32,7 @@
  *    cannot say at all.
  *
  * Beyond the grammar, two things no schema checks across a file: every
- * `#pointer` the export writes (`resp="#pass"`, `who="#rev-…"`) lands on an
+ * `#pointer` the export writes (`resp="#pass"`, `resp="#mh"`, `who="#rev-…"`) lands on an
  * `xml:id` in the same file, and every file names the schema and the ODD it
  * is to be read against.
  *
