@@ -29,10 +29,13 @@ export const FINDINGS: Finding[] = [
       'Page 10 proves the sufficient direction by the tube lemma, then argues the converse by maximality — taking the largest open U′ with S ≥ U′ × V and deriving a contradiction from a point of U \\ U′ having a quasi-compact relative neighbourhood.',
     ours:
       'The reading supplies one step the page omits: the inclusion U″ ⊂ U′ ∪ ⋃_{i∈I_y} U_i, without which the contradiction does not follow. The hypothesis is the page’s; that link in the argument is the edition’s.',
-    literature: [],
-    status: 'unsearched',
+    literature: [
+      'J. R. Isbell, Product spaces in locales, Proc. AMS 81 (1981) — the product X × Y of sober spaces is the locale product when X is quasi-locally compact; for X completely regular, it is so for every Y iff every closed subset of X is locally compact somewhere',
+      'T. Plewe, Localic products of spaces, Proc. LMS 73 (1996) — spatiality of localic products characterised by a topological game; spatial multipliers among metrizable spaces',
+    ],
+    status: 'matched',
     settle:
-      'Check whether this dévissage hypothesis, rather than local or core-compactness, appears in Johnstone (Stone Spaces II.4, Elephant C1.1 and C4.1) or in Isbell’s papers on locale products. If it is there, mark matched. An external review of the folder (Kimi, shared conversation of 2026-08) singles this proof out as one of the folder’s three strongest items and reports finding no such self-contained argument in the standard texts. That is a reason to search, not a search: the status stays unsearched until someone reads Johnstone with the page open.',
+      'Matched in substance: Sh(X) × Sh(Y) is the topos of the locale product, so the page’s equivalence is Isbell’s preservation of products, and for completely regular X his criterion (every closed subset locally compact somewhere) is the page’s hypothesis. What remains is narrower: the page states the sufficient direction for any space, with locally closed subsets and relatively quasi-compact neighbourhoods; compare it with Isbell’s proof and with Plewe’s game before calling that variant his.',
   },
   {
     id: '161-3-infinite-product-criterion',
