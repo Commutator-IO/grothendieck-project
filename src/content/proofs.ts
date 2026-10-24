@@ -429,12 +429,12 @@ export const PROOFS: Proof[] = [
     page: '10–11',
     name: 'Topos of a product, the converse',
     statement:
-      'If every non-empty locally closed subset of X has a point with a quasi-compact neighbourhood in it, Top(X × Y) → Top(X) × Top(Y) is an equivalence for every space Y. In the model the page works in: a set S of pairs (U, V) of opens, stable under shrinking and under unions in each variable, contains every rectangle U × V covered by its own rectangles.',
+      'If every non-empty locally closed subset of X has a point with a quasi-compact neighbourhood in it, Top(X × Y) → Top(X) × Top(Y) is an equivalence for every space Y. In the model the page works in: a set S of pairs (U, V) of opens, stable under shrinking and under unions in each variable, contains every rectangle U × V covered by its own rectangles. In terms of frames: these sets form the coproduct Opens X ⊗ Opens Y, and under the hypothesis the comparison map to Opens(X × Y) is an isomorphism.',
     found:
-      'Holds as the reading completes it, for arbitrary X and Y, by the page’s maximality argument; the step the page skips, U″ ⊂ U′ ∪ ⋃ Uᵢ, is a two-line case split. It follows that such sets S correspond one to one with the opens of X × Y (eq_rect, iUnion_rect). Not formalised: the dictionary between these sets, the frame coproduct of the open-set frames and the 2-product of topoi — mathlib has neither frame coproducts nor 2-products of topoi. Isbell 1981 (Th. 4) proves the same statement under a neighbouring hypothesis.',
+      'Holds as the reading completes it, for arbitrary X and Y, by the page’s maximality argument; the step the page skips, U″ ⊂ U′ ∪ ⋃ Uᵢ, is a two-line case split. It follows that such sets S correspond one to one with the opens of X × Y (eq_rect, iUnion_rect). With no hypothesis on X or Y, these sets form a frame (meets are intersections, joins are generated sets; distributivity from span_inter) which is the coproduct of Opens X and Opens Y: for frame maps f, g to any frame L, S ↦ ⨆ f U ⊓ g V is the unique frame map through inl, inr (existsUnique_lift). The comparison map to Opens(X × Y), S ↦ ⋃ U × V, is always onto, and under the hypothesis it is an isomorphism of frames (frameEquiv). Not formalised: the passage from frames to topoi, the 2-product Top(X) × Top(Y) as sheaves on the product locale — mathlib has no 2-category of topoi. Isbell 1981 (Th. 4) proves the same statement under a neighbouring hypothesis.',
     verdict: 'partly proved',
     lean: 'lean/Grothendieck/Folder161_3.lean',
-    theorems: ['covering', 'iUnion_rect', 'eq_rect'],
+    theorems: ['covering', 'iUnion_rect', 'eq_rect', 'CIdeal.instFrame', 'CIdeal.span_inter', 'CIdeal.eq_iSup_rect', 'CIdeal.lift_comp_inl', 'CIdeal.lift_comp_inr', 'CIdeal.lift_unique', 'CIdeal.existsUnique_lift', 'toOpens_surjective', 'toOpens_le_toOpens_iff', 'frameEquiv'],
   },
   {
     folder: '11',
