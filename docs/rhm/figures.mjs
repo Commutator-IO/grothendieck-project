@@ -143,7 +143,7 @@ ${nodes}
 ${labels}
 ${legend}
 \\end{tikzpicture}
-\\caption{Carte des mathématiques du fonds : les trente sujets sous lesquels se rangent les mots-clés de ${map.coverage.folders} lectures modernisées (${map.coverage.mapped} des ${map.coverage.keywords} mots-clés sont rattachés). Deux sujets sont proches quand ils partagent des cotes, et reliés quand ils en partagent plus que ne le voudrait le hasard (force d'association au moins égale à 1) ; un disque plus grand, plus de cotes. La couleur donne la datation moyenne des cotes du sujet, calculée sur les milieux des fourchettes de l'inventaire : un ordre de grandeur, non une date. Les mots-clés sont une interprétation, et la disposition est calculée une fois, à graine fixe. D'après \\texttt{src/content/math-map.json}, comme la carte du site (onglet « Maps »).}\\label{fig:carte}
+\\caption{Carte des mathématiques du fonds : les trente sujets sous lesquels se rangent les mots-clés de ${map.coverage.folders} lectures modernisées (${map.coverage.mapped} des ${map.coverage.keywords} mots-clés sont rattachés). Deux sujets sont proches quand ils partagent des cotes, et reliés quand ils en partagent plus que ne le voudrait le hasard (force d'association au moins égale à 1) ; un disque plus grand, plus de cotes. La couleur donne la datation moyenne des cotes du sujet, calculée sur les milieux des fourchettes de l'inventaire : un ordre de grandeur, non une date. Les mots-clés sont une interprétation, et la disposition est calculée une fois, à graine fixe. D'après le registre des sujets\\ifdefined\\anonyme\\else{} (\\texttt{src/content/math-map.json}), qui donne aussi la carte du site (onglet « Maps »)\\fi.}\\label{fig:carte}
 \\end{figure}
 `,
 );
