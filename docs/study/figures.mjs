@@ -135,7 +135,11 @@ ${rows.map((r) => r.join(' ')).join('\n')}
     return { from: a.year, to: b.q === 'from' ? b.year + 5 : b.year, inferred: a.inferred || b.inferred };
   }
   const ranges = datings.map(parse).filter(Boolean);
-  const leaves = J('src/content/dated-leaves.json').records.filter((l) => l.iso && l.kind !== 'paper' && !(l.kind === 'stamp' || l.hand === 'machine'));
+  const allLeaves = J('src/content/dated-leaves.json').records;
+  const leaves = allLeaves.filter((l) => l.iso && l.kind !== 'paper' && !(l.kind === 'stamp' || l.hand === 'machine'));
+  const noYear = allLeaves.filter((l) => !l.iso).length;
+  const ofPaper = allLeaves.filter((l) => l.iso && l.kind === 'paper').length;
+  const byMachine = allLeaves.filter((l) => l.iso && l.kind !== 'paper' && (l.kind === 'stamp' || l.hand === 'machine')).length;
   const years = Array.from({ length: 1992 - 1949 }, (_, i) => 1949 + i);
   const cover = years.map((y) => ranges.filter((r) => r.from <= y && y <= r.to).length);
   const read = years.map((y) => ranges.filter((r) => !r.inferred && r.from <= y && y <= r.to).length);
@@ -161,7 +165,7 @@ ${rows.map((r) => r.join(' ')).join('\n')}
 \\addplot[fill=black!65,draw=none] coordinates {${coords(onLeaves)}};
 \\end{axis}
 \\end{tikzpicture}
-\\caption{Two kinds of date on one axis, each on its own scale. Above: for each year, how many of the ${ranges.length} dated folders the inventory's ranges cover (an open end, « à partir de 1982 », counted five years on), and, darker, how many of them rest on a range the archivists read on the pages rather than deduced in their square brackets; ${s} folders are « s.d. ». Below: the ${leaves.length} dates the transcriptions have found written on the leaves themselves, machine stamps on reused paper left out. From \\texttt{src/content/catalogue.ts} and \\texttt{src/content/dated-leaves.json} (${J('src/content/dated-leaves.json').built}), after the site's page \\emph{Timeline}.}\\label{fig:dating}
+\\caption{Two kinds of date on one axis, each on its own scale. Above: for each year, how many of the ${ranges.length} dated folders the inventory's ranges cover (an open end, « à partir de 1982 », counted five years on), and, darker, how many of them rest on a range the archivists read on the pages rather than deduced in their square brackets; ${s} folders are « s.d. ». Below: ${leaves.length} of the ${allLeaves.length} dates of the register of dated leaves, those written on the leaves with a year; left out are ${byMachine} printed by a machine, ${ofPaper} that date the paper rather than the writing, and ${noYear} without a year. From \\texttt{src/content/catalogue.ts} and \\texttt{src/content/dated-leaves.json} (${J('src/content/dated-leaves.json').built}), after the site's page \\emph{Timeline}.}\\label{fig:dating}
 \\end{figure}
 `,
   );
