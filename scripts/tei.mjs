@@ -24,9 +24,9 @@
  *   \supplied{x}       <supplied resp="#pass">x</supplied>   the transcriber's
  *   \add{x}            <add>x</add>                        Grothendieck's own
  *   \struck{x}         <del>x</del>
- *   \note{x}           <note type="editorial" resp="#pass">x</note>   or resp="#mh"
- *   \drawing{x}        <note type="drawing" resp="#pass">x</note>     when it records
- *                                                     the editor's check (HUMAN_CHECK)
+ *   \note{x}           <note type="editorial" resp="#pass">x</note>   "#mh" or
+ *   \drawing{x}        <note type="drawing" resp="#pass">x</note>     "#pass #mh" when
+ *                                                     it records the editor's check
  *   \marginal{x}       <note type="authorial" place="margin">x</note>
  *   $…$  \[…\]  envs   <formula notation="TeX">…</formula>, display marked
  *   tikzcd             <figure type="diagram"><formula notation="tikz-cd">
@@ -88,7 +88,17 @@ const escapeAttr = (s) => escapeXml(s).replace(/"/g, '&quot;');
  * The edition's editor, declared in every header as `<editor xml:id="mh">`.
  * Every editorial note and every revision is the model's (`#pass`, or the
  * revising model's own id) unless its text records a check he made on the
- * facsimile; then it points to `#mh`.
+ * facsimile. Then:
+ *
+ *   - a note that is nothing but his check — one sentence, no `;`, the
+ *     check not in parentheses — is his alone: resp="#mh";
+ *   - a note where the check is one part among the transcriber's own text
+ *     (a description, then « vérifié sur le fac-similé par … ») is both:
+ *     resp="#pass #mh". Where the split cannot be told, it is both;
+ *   - a revision record is a decision or a check of his that a model wrote
+ *     into the file: who="#mh #pass" (or "#mh #rev-<model>"), the editor
+ *     first, the model that made the edit second, and that model keeps its
+ *     respStmt.
  *
  * The rule is a list of phrasings, each of which ties his name to the
  * facsimile: the page was looked at, and by him. A note or a revision record
@@ -123,7 +133,25 @@ const recordsHumanCheck = (text) => {
   const flat = text.replace(/\s+/g, ' ');
   return HUMAN_CHECK.some((re) => re.test(flat));
 };
-const noteResp = (text) => (recordsHumanCheck(text) ? `#${EDITOR.id}` : '#pass');
+/**
+ * Whether a note that records his check is that check and nothing else: one
+ * sentence of one clause, with no `;` where the transcriber's gloss could
+ * follow his finding, and the check not in parentheses. A sentence ends at a
+ * full stop followed by a capital or a guillemet; an abbreviation that splits
+ * a note wrongly makes it « both », the safe side.
+ */
+const checkOnly = (text) => {
+  const flat = text.replace(/\s+/g, ' ').trim();
+  if (flat.split(/(?<=\.)\s+(?=[A-ZÀ-ÖØ-Þ«])/).length > 1) return false;
+  const at = Math.min(...HUMAN_CHECK.map((re) => flat.search(re)).filter((i) => i >= 0));
+  // Inside parentheses, the check qualifies the transcriber's sentence around
+  // it. A list label « a) » closes what nothing opened, hence the floor at 0.
+  let depth = 0;
+  for (const ch of flat.slice(0, at)) depth = ch === '(' ? depth + 1 : ch === ')' ? Math.max(0, depth - 1) : depth;
+  return depth === 0 && !flat.includes(';');
+};
+const noteResp = (text) =>
+  !recordsHumanCheck(text) ? '#pass' : checkOnly(text) ? `#${EDITOR.id}` : `#pass #${EDITOR.id}`;
 
 // A private-use codepoint delimits the marker, for the reasons render.mjs
 // gives: it cannot occur in a transcription, and if it ever leaked it would
@@ -608,25 +636,32 @@ function document(meta, body) {
   // Each revision points at the model that made it: #pass when it is the
   // model of the first pass, and otherwise a name of its own, declared once
   // per model in a respStmt of its own. A revision that records a check the
-  // editor made on the facsimile (HUMAN_CHECK) points at him instead.
+  // editor made on the facsimile (HUMAN_CHECK) points at him first and at
+  // that model second: the check is his, the edit the model's.
   const ed = `#${EDITOR.id}`;
-  const who = (r) => (recordsHumanCheck(r.text) ? ed : r.id === meta.modelId ? '#pass' : `#rev-${r.id}`);
+  const model = (r) => (r.id === meta.modelId ? '#pass' : `#rev-${r.id}`);
+  const isCheck = (r) => recordsHumanCheck(r.text);
+  const who = (r) => (isCheck(r) ? `${ed} ${model(r)}` : model(r));
   const dates = (rs) => rs.map((r) => `<date when="${t(r.date)}">${t(r.date)}</date>`).join(', ');
-  const byPass = meta.revisions.filter((r) => who(r) === '#pass');
-  const byEditor = meta.revisions.filter((r) => who(r) === ed);
+  const byPass = meta.revisions.filter((r) => model(r) === '#pass' && !isCheck(r));
+  const appliedByPass = meta.revisions.some((r) => model(r) === '#pass' && isCheck(r));
+  const byEditor = meta.revisions.filter(isCheck);
   // His checks recorded in notes carry dates in free prose; the header gives
   // the dates of the revision records only, which are machine-readable.
-  const checked = byEditor.length > 0 || body.includes(`resp="${ed}"`);
+  const checked = byEditor.length > 0 || /resp="[^"]*#mh\b/.test(body);
   const checkDates = [...new Set(byEditor.map((r) => r.date))].sort();
-  const others = [
-    ...new Map(meta.revisions.filter((r) => who(r) !== '#pass' && who(r) !== ed).map((r) => [r.id, r])).values(),
-  ];
+  const others = [...new Map(meta.revisions.filter((r) => model(r) !== '#pass').map((r) => [r.id, r])).values()];
   const reviserLines = others
     .map((m) => {
-      const theirs = meta.revisions.filter((r) => r.id === m.id && who(r) !== ed);
+      const theirs = meta.revisions.filter((r) => r.id === m.id && !isCheck(r));
+      const applied = meta.revisions.filter((r) => r.id === m.id && isCheck(r));
+      const what = [
+        ...(theirs.length ? [`révision automatique, non vérifiée contre les pages par une personne (${dates(theirs)})`] : []),
+        ...(applied.length ? [`report dans la source des vérifications de l'éditeur (${dates(applied)})`] : []),
+      ].join(' ; ');
       return `
         <respStmt>
-          <resp>révision automatique, non vérifiée contre les pages par une personne (${dates(theirs)})</resp>
+          <resp>${what}</resp>
           <name xml:id="rev-${t(m.id)}" type="model">${t(m.model)} (${t(m.id)})</name>
         </respStmt>`;
     })
@@ -662,7 +697,7 @@ function document(meta, body) {
             checked
               ? ` ; lectures ponctuelles vérifiées sur le fac-similé par l'éditeur${
                   checkDates.length ? ` (${checkDates.map((d) => `<date when="${t(d)}">${t(d)}</date>`).join(', ')})` : ''
-                }`
+                }${appliedByPass ? ', reportées dans la source par le même modèle' : ''}`
               : ''
           }</resp>
           ${modelLine}
@@ -753,9 +788,15 @@ function document(meta, body) {
         <hi rend="monospace">\\page</hi> devient <hi rend="monospace">pb</hi>.</p>
         <p>Une note du transcripteur pointe vers le modèle
         (<hi rend="monospace">resp="#pass"</hi>), sauf quand elle consigne une
-        lecture vérifiée sur le fac-similé par l'éditeur : elle pointe alors
-        vers lui (<hi rend="monospace">resp="#mh"</hi>). De même pour les
-        révisions de <hi rend="monospace">revisionDesc</hi>. La règle est une
+        lecture vérifiée sur le fac-similé par l'éditeur : elle pointe vers lui
+        seul (<hi rend="monospace">resp="#mh"</hi>) si elle n'est que cette
+        vérification, vers les deux (<hi rend="monospace">resp="#pass #mh"</hi>)
+        si la vérification s'ajoute au texte du transcripteur ou si le partage
+        ne peut être établi. Une révision de
+        <hi rend="monospace">revisionDesc</hi> qui reporte une vérification de
+        l'éditeur pointe vers lui puis vers le modèle qui a fait la
+        modification (<hi rend="monospace">who="#mh #pass"</hi>, ou l'identifiant
+        du modèle réviseur), et ce modèle reste déclaré. La règle est une
         liste de tournures où il est nommé comme celui qui a regardé la page
         (<hi rend="monospace">HUMAN_CHECK</hi> dans
         <hi rend="monospace">scripts/tei.mjs</hi>) ; une vérification qu'elle

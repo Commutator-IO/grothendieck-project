@@ -134,7 +134,10 @@ for (const folder of folders) {
       }
       rename.set(id, entry.id);
     }
-    const repoint = (s) => s.replace(/(resp|who)="#([^"]+)"/g, (all, attr, id) => `${attr}="#${rename.get(id) ?? id}"`);
+    // A pointer attribute may hold several (`resp="#pass #mh"`); each is renamed.
+    const repoint = (s) =>
+      s.replace(/(resp|who)="([^"]+)"/g, (all, attr, v) =>
+        `${attr}="${v.split(/\s+/).map((p) => (p.startsWith('#') ? `#${rename.get(p.slice(1)) ?? p.slice(1)}` : p)).join(' ')}"`);
     for (const c of between(d.xml, '<revisionDesc>', '</revisionDesc>', d.f).match(/<change[\s\S]*?<\/change>/g) ?? [])
       changes.push(repoint(c));
     const span = /pages (\d+)–(\d+)/.exec(between(d.xml, '<title>', '</title>', d.f));
