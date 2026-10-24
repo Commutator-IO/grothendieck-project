@@ -174,3 +174,65 @@ and `\ill{}` stands.
   them a \page and a « blank leaf » note so the page count matches.
 - « Contents template2.pdf » is a typeset contents list, not his hand:
   skipped.
+
+## 2026-10-24 — 1984-5 (pages 1-50)
+
+- 1984-5 opens with a cover leaf (« Feb 29, - Mar 12, 1984 », « 552-600 »);
+  his running numbers continue from earlier 1984 notebooks (552 on PDF p. 2).
+- His creation/annihilation operators a*, a and the slashed D recur; struck
+  formulas are blotted into solid boxes, struck lines crossed by loops.
+- A small blank-ish leaf can carry struck notes in a hurried hand (p. 23,
+  « Stuff added Mar 12 to use up paper »?): zoom at 300 dpi with magick crop.
+
+## 2026-10-24 — 1984-3 and 1984-4 (whole notebooks)
+
+- Both open with a cover leaf in his hand (date span and his page span:
+  « 455-501 », « 502-551 »); his pagination runs on across the 1984 files
+  (1984-3 PDF p. 2 = his 455). The 1984-4 scans are taller than the leaf,
+  with blank paper below it.
+- His Planck constant is a plain h, not ℏ. « Kuiper » is spelt both
+  « Keiper » and « Kuiper » within one entry (1984-3, p. 42).
+- « Grothendieck » occurs in these files only as « Grothendieck group » and
+  « the Grothendieck type formula » (RR for maps): no Pursuing Stacks echo,
+  despite what one might expect from early 1984.
+- Two-row diagrams with dotted or labelled verticals, and exact sequences
+  with « ‖ » under the ends, render most safely as an `array` with `\Vert`
+  rows rather than tikz-cd.
+
+## 2026-10-24 — 1984-1 (pp. 1-41) and 1984-2 (pp. 1-62)
+
+- His pagination runs on from 1983-15: 1984-1 is « 355 »-« 395 » (no cover
+  leaf; the first date is written « 1983 » with the 4 over the 3), 1984-2
+  opens with a cover leaf « Jan. 10, 1984 — Feb. 4, 1984 », « 396-454 ».
+- 1984-2 has two leaves scanned in reverse order (PDF p. 49 = « 443 », PDF
+  p. 50 = « 442 »; the text runs 441 → 442 → 443) and the number « 443 »
+  occurs twice (PDF pp. 49 and 51). A « 413½ » also occurs (PDF p. 20).
+  Follow the text, keep the PDF order, and say so in the header.
+- Conversation notes (Connes, Atiyah « Michael », Katz-Gabber-Deligne,
+  Roe) are in his hand and are his: transcribe in full. A list of topics
+  goes well as itemize with `\item[]`.
+- `\rightleftarrows`, `\rtimes`, `\not{D}`, `\substack` under an
+  underbrace and `\begin{cases}` all pass both engines.
+
+## 2026-10-24 — 1968-16, batches 1-3 (pages 1-22)
+
+- A fair-copy prose draft, not a diary: one page per PDF page, his page numbers
+  top right equal the PDF pages, no dates at all. Large letters, about ten words
+  a line; 120 dpi is ample. Struck passages are often boxed and crossed with big
+  loops or an X lattice, still partly legible; split them into several \struck
+  paragraphs. Blank citations « [ ] » and « ( ) » stand for references to fill.
+- « ? » is used as a placeholder variable (St(π_1?; A), [?, Z]_0): keep it.
+- Self-corrections addressed to himself appear boxed at a page head (p. 12:
+  « necessary to add … to get correct statement », with « OKAY »).
+
+## 2026-10-24 — 1968-15, batches 1-7 (pages 1-64)
+
+- A mixed file: pencil drafts on ruled paper (pp. 1-25, 53-64) and ink fair
+  copies on unruled or ruled paper, each section renumbered from 1 at top right
+  (pp. 26-52). Say in each header which numbering runs where.
+- Fair copies underline whole statements (Propositions, Corollaries): \emph.
+- Faint pencil remarks in a margin or at the head of a page may be in another
+  hand (p. 36 « Druck μ », a printing note); p. 56 « Atlantic City ». Zoom at
+  300 dpi before reading them.
+- He reuses sheets: p. 25 carries a struck passage from another draft (a p-adic
+  lemma) above unrelated K-theory.
