@@ -266,7 +266,7 @@ export function ArchivePage() {
                               <button
                                 type="button"
                                 onClick={() => goTo(id, 1, 'fr')}
-                                title={`${work.transcribed} of ${work.batches} batches transcribed — open the transcription beside the pages`}
+                                title={`${work.transcribed} of ${work.batches} batches transcribed. Opens the transcription beside the pages`}
                                 className="ml-2 whitespace-nowrap rounded-full bg-relu-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-relu-700 transition hover:bg-relu-200"
                               >
                                 {work.transcribed === work.batches
@@ -278,7 +278,7 @@ export function ArchivePage() {
                               <button
                                 type="button"
                                 onClick={() => goTo(id, 1, 'modern')}
-                                title={`${work.modernised} of ${work.batches} batches modernised — open the reading beside the pages. Read again by machine, not by a person`}
+                                title={`${work.modernised} of ${work.batches} batches modernised. Opens the reading beside the pages. Read again by machine, not by a person`}
                                 className="ml-1.5 whitespace-nowrap rounded-full bg-brand-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700 transition hover:bg-brand-200"
                               >
                                 {work.modernised === work.batches
@@ -395,8 +395,8 @@ function ExistingEditions() {
       <p className="mt-2 max-w-[48em] text-[14px] leading-relaxed text-ink-600">
         Parts of the fonds have been transcribed or published by mathematicians, in some cases at
         enormous length. Those folders are marked in the list above with a green rule. Before
-        transcribing anything, look here first — where a scholarly edition exists it is better
-        than anything produced here, and should be used instead.
+        transcribing anything, look here: where a scholarly edition exists, it is better than
+        anything produced here and should be used instead.
       </p>
 
       <ul className="mt-6 space-y-3">
@@ -437,9 +437,9 @@ function ExistingEditions() {
 
       <h3 className="titre mt-8 text-[17px] text-ink-900">Editions we cannot place</h3>
       <p className="mt-1.5 max-w-[48em] text-[13.5px] leading-relaxed text-ink-600">
-        These exist, and relate to material in the fonds, but no source gives a shelfmark and the
-        titles are not close enough to guess from. Listed so that nobody transcribes a folder
-        these already cover without knowing they might.
+        These editions relate to material in the fonds, but no source gives a shelfmark and the
+        titles are not close enough to guess from. They are listed so that nobody transcribes a
+        folder one of them may already cover without knowing it.
       </p>
       <ul className="mt-3 space-y-2">
         {unmapped.map((e) => (
@@ -474,7 +474,7 @@ function ExistingEditions() {
         <a href="https://webusers.imj-prg.fr/~georges.maltsiniotis/ps.html" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-brand-600">
           Georges Maltsiniotis' pages
         </a>
-        . Almost certainly incomplete, and not a substitute for asking the editors.
+        . The list is almost certainly incomplete and does not replace asking the editors.
       </p>
     </section>
   );

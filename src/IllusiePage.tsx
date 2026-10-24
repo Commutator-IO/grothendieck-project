@@ -131,8 +131,8 @@ export function IllusiePage() {
           <p className="mt-4 text-[15px] leading-relaxed text-ink-600">
             Papers of Grothendieck from Luc Illusie's archives, now held by the Institut des Hautes Études
             Scientifiques: letters to Illusie, letters with colleagues, mathematical notes, and papers of EGA
-            and SGA. This page is their inventory, as the IHÉS's own item records describe them — title,
-            date, number of pages — with each item linked to its directory on the IHÉS's server.
+            and SGA. Below is their inventory as the IHÉS's own item records give it (title, date, number
+            of pages), with each item linked to its directory on the IHÉS's server.
           </p>
           <p className="tabular mt-3 text-[14px] text-ink-700">
             {ITEMS.length} items in {INV.series.length} series, {PAGES.toLocaleString('en')} pages.

@@ -82,7 +82,7 @@ export function IllusieReader({
               original: item.url,
               heading: `Fonds Grothendieck–Illusie · ${item.id}`,
               credit:
-                'Facsimile: Fonds Grothendieck–Illusie, IHÉS — the page views are loaded from its server, repo-archives.ihes.fr, and not copied here. Under its authors’ rights; for any use, archives@ihes.fr.',
+                'Facsimile: Fonds Grothendieck–Illusie, IHÉS. The page views are loaded from its server, repo-archives.ihes.fr, and not copied here. Under its authors’ rights; for any use, archives@ihes.fr.',
               pageOffset: 0,
             }
           : {

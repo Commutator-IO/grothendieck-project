@@ -226,11 +226,12 @@ export function QuillenPage() {
               Daniel Quillen's research notebooks, 1968–2003
             </h1>
             <p className="mt-4 text-[15px] leading-relaxed text-ink-600">
-              The working notes of the other side of the exchanges the fonds
-              records — Grothendieck's notes on Quillen's lectures of September
-              1968 (folders 162-5 and 111), and{" "}
+              Quillen stands on the other side of exchanges the fonds records:
+              Grothendieck's notes on Quillen's lectures of September 1968
+              (folders 162-5 and 111), and{" "}
               <em>À la poursuite des champs</em>, which began in 1983 as a
-              letter to him. Quillen kept them as a diary, year by year. The
+              letter to him. These are Quillen's working notes, kept as a diary,
+              year by year. The
               Clay Mathematics Institute has scanned them since 2013 and
               publishes them as {NOTEBOOKS.length} PDFs ({totalGB} GB, {totalPages} pages counted); Glenys
               Luke and Graeme Segal are cataloguing them. Each notebook here is
@@ -292,8 +293,8 @@ export function QuillenPage() {
                 aria-hidden="true"
                 className="inline-block h-2.5 w-2.5 rounded-sm bg-alerte-500"
               />
-              In red, the years and notebooks that meet the Grothendieck fonds;
-              hover or open one for the reason.
+              Years and notebooks in red meet the Grothendieck fonds; hover over
+              one or open it to see why.
             </p>
             <div className="mt-3 flex flex-wrap gap-2 text-[12.5px]">
               {GROUPS.slice(YEARS.length).map((g) => (
@@ -418,8 +419,7 @@ export function QuillenPage() {
                 </>
               ) : (
                 <p className="mt-1.5 text-[13.5px] text-ink-500">
-                  No entry of its own: the index lists it under no name of this
-                  form.
+                  The index has no entry under a name of this form.
                 </p>
               )}
               <p className="mt-2 text-[12px] text-ink-400">
@@ -439,8 +439,8 @@ export function QuillenPage() {
 
             <p className="mt-5 text-[14px] leading-relaxed text-ink-600">
               {QuillenReader
-                ? "Where a notebook is transcribed, its reading stands below, page by page beside the facsimile, as it does for the Grothendieck fonds. The transcriptions are kept on the machine that made them, until the Clay Mathematics Institute and Quillen's family have agreed to their publication."
-                : "No notebook is transcribed here. When one is, its reading will stand here, page by page beside the facsimile, as it does for the Grothendieck fonds — once the Clay Mathematics Institute and Quillen's family have agreed to it."}
+                ? "Where a notebook is transcribed, its reading stands below, page by page beside the facsimile, as it does for the Grothendieck fonds. The transcriptions stay on the machine that made them until the Clay Mathematics Institute and Quillen's family agree to their publication."
+                : "No notebook is transcribed here. Once the Clay Mathematics Institute and Quillen's family have agreed, a transcribed notebook's reading will stand here, page by page beside the facsimile, as it does for the Grothendieck fonds."}
             </p>
             <p className="mt-3 text-[13px] leading-relaxed text-ink-500">
               Quillen died in 2011: the notebooks are in copyright, and the

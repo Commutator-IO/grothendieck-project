@@ -177,8 +177,8 @@ export function BourbakiPage() {
           <h1 className="titre mt-2 text-[34px] leading-[1.1] text-ink-900">The Bourbaki archive</h1>
           <p className="mt-4 text-[15px] leading-relaxed text-ink-600">
             The papers of the Association des Collaborateurs de Nicolas Bourbaki, as the Archives Henri
-            Poincaré publish them: {DOCS.length} documents, most of them typescripts — the numbered
-            rédactions of the treatise, the reports of the congresses, the circulars. Grothendieck's name
+            Poincaré publish them: {DOCS.length} documents, most of them typescripts: the numbered
+            rédactions of the treatise, the reports of the congresses and the circulars. Grothendieck's name
             is in the congress reports from 1950 to 1965; he wrote rédactions of his own, and he wrote
             notes on the backs of others', which is how some of them reached the fonds.
           </p>
@@ -286,7 +286,7 @@ export function BourbakiPage() {
                   <ul className="mt-2 flex flex-wrap gap-1.5">
                     {d.grothendieck.map((w, i) => (
                       <li key={i} className="rounded-md bg-alerte-50 px-2 py-0.5 text-[11.5px] text-alerte-700">
-                        <strong className="font-semibold">{KIND_LABEL[w.kind]}</strong> — {w.text}
+                        <strong className="font-semibold">{KIND_LABEL[w.kind]}</strong>: {w.text}
                         {w.folder && (
                           <>
                             {' '}

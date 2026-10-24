@@ -165,8 +165,8 @@ export function BuffaloPage() {
           <p className="mt-4 text-[15px] leading-relaxed text-ink-600">
             From April to July 1973, Grothendieck taught three courses at the State University of New York at
             Buffalo: topos theory, algebraic geometry and the theory of algebraic groups. The tapes were kept by
-            John Duskin and William Lawvere, and published in ten videos by the YouTube channel « Erwin Schulhoff » in October 2025. This
-            page lists each tape side with its date, and plays it from YouTube.
+            John Duskin and William Lawvere, and published in ten videos by the YouTube channel « Erwin Schulhoff » in October 2025. Each
+            tape side is listed below with its date and plays from YouTube.
           </p>
           <p className="tabular mt-3 text-[14px] text-ink-700">
             {CAT.courses.length} courses, {SESSIONS} dated sessions on {SIDES} tape sides, {CAT.courses.reduce((n, c) => n + c.videos.length, 0)}{' '}
@@ -178,8 +178,8 @@ export function BuffaloPage() {
           The recordings are on the « Erwin Schulhoff » YouTube channel and are played from there; no sound is copied
           to this site, and the lectures are not transcribed here, with one exception: as a demonstration, the
           first tape side of the topos course (4 April, from 0:00:00) opens beside a blackboard reconstructed from
-          the recording's automatic captions. Tape sides marked « bad tape » are so marked
-          in the videos' descriptions. For the content of the topos course, see Colin McLarty,{' '}
+          the recording's automatic captions. The « bad tape » marks come from the videos'
+          descriptions. For the content of the topos course, see Colin McLarty,{' '}
           <a href="https://www.youtube.com/watch?v=5AR55ZsHmKI" target="_blank" rel="noopener noreferrer" className={link}>
             « Grothendieck's 1973 Topos Lectures » ↗
           </a>{' '}
