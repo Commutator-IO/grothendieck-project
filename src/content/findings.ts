@@ -6919,6 +6919,7 @@ export const FINDINGS: Finding[] = [
     status: 'refuted',
     settle:
       'What still stands is the finite-type case: for G flat, affine and of finite type over a Dedekind ring, is « R[G] specially locally finite » (equivalently, Lemma 1 a) for R[G]) equivalent to every irreducible component of G meeting every closed fibre? That is the question Duong–Hai leave open in Question 3.1.6, and the page’s criterion would answer it; check the later literature citing arXiv:1311.1134 (dos Santos, « On the structure of affine flat group schemes over discrete valuation rings », arXiv:1701.06518, and Hai–dos Santos) before treating it as a candidate, and have a person verify the counterexample above.',
+    lean: { file: 'lean/Grothendieck/Folder90.lean', found: 'The counterexample is checked over any discrete valuation ring R with fraction field K, for B = {f ∈ K[T] : f(0) ∈ R}: B is a domain, flat over R (flat), f ↦ f(0) mod ϖ maps B onto the residue field with kernel ϖB (residue_surjective, ker_residue), K ⊗_R B ≠ 0 (generic_nontrivial), f(x + y) = Σ bᵢ(x)cᵢ(y) with bᵢ, cᵢ ∈ B for all x, y ∈ K (comul), and the saturation of R·T in B is K·T (saturation_eq), not finitely generated over R (not_fg_saturation). The antipode, the counit and the identification of Spec B with a group scheme are not written out.' },
   },
   {
     id: '90-equivariant-resolution-general-base',

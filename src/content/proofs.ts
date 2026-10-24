@@ -180,6 +180,19 @@ export const PROOFS: Proof[] = [
     theorems: ['det3_eq_det', 'six_concurrent', 'six_not_two_pencils', 'six_no_II5', 'six_not_III6', 'six_has_II32', 'seven_has_II32'],
   },
   {
+    folder: '90',
+    batch: 1,
+    page: '9',
+    name: 'Lemma 1 and the components of a flat group',
+    statement:
+      'For a flat affine group G over a Dedekind ring, page 9 says in a parenthesis that the algebra B satisfies the conditions of Lemma 1 (saturations of finitely generated submodules finitely generated) exactly when the irreducible components of G have non-empty fibres.',
+    found:
+      'False without finite type. Over a discrete valuation ring R with fraction field K and uniformiser ϖ, B = {f ∈ K[T] : f(0) ∈ R} is a domain (Spec B irreducible), flat over R, with B/ϖB the residue field and K ⊗_R B ≠ 0 (both fibres non-empty); f(x + y) = Σ bᵢ(x)cᵢ(y) with bᵢ, cᵢ ∈ B, so the comultiplication of 𝔾_a preserves B; and the saturation of R·T in B is K·T, which is not finitely generated, since K would otherwise be finite, hence integral, over R and ϖ⁻¹ would lie in R. The antipode and counit are not written out.',
+    verdict: 'false on the page',
+    lean: 'lean/Grothendieck/Folder90.lean',
+    theorems: ['flat', 'residue_surjective', 'ker_residue', 'generic_nontrivial', 'comul', 'saturation_eq', 'not_fg_saturation'],
+  },
+  {
     folder: '158',
     batch: 3,
     page: '21–41, 44, 50–53',

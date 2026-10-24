@@ -1,0 +1,44 @@
+\section[Cote 90 : un groupe plat irréductible dont un saturé n'est pas de type fini]{Cote 90 : un groupe plat irréductible dont un saturé n'est pas de type fini\protect\verifie[\leanblobmain]{Folder90}}\label{sec:90}
+
+La cote 90, \emph{KG (X)}, est datée par l'inventaire \q{à partir de 1964} ; ses notes sont écrites au dos de feuillets dactylographiés d'EGA~IV, §\,18. Elles préparent l'existence de résolutions équivariantes. La page~1 pose, sur un anneau de Dedekind $A$, la notion de \emph{saturé} : pour un sous-module $N$ d'un module sans torsion $M$, le saturé $\widetilde N$ est l'ensemble des $y \in M$ dont un multiple non nul est dans $N$. Le lemme~1 donne des conditions équivalentes pour que le saturé de tout sous-module de type fini soit de type fini (\lot{90}{1}{1}). La page~9 applique ces conditions à l'algèbre $B$ d'un groupe affine et plat $G$ sur $A$, et dit dans une parenthèse (\lot{90}{1}{9}) :
+
+\begin{quote}
+\emph{cela signifie que pour les composantes irréd.\ de G, leurs fibres sont non vides}
+\end{quote}
+
+\noindent Pour un groupe de type fini, la parenthèse est raisonnable. Sans cette hypothèse, que la proposition ne pose pas, elle tombe en défaut.
+
+\noindent\emph{Le contre-exemple.} Soient $R$ un anneau de valuation discrète, $K$ son corps des fractions, $\varpi$ une uniformisante et $k = R/\varpi R$ le corps résiduel. On pose
+\[
+B = \{ f \in K[T] \;:\; f(0) \in R \},
+\]
+les polynômes à coefficients dans $K$ dont le terme constant est entier. C'est la réunion des dilatations successives $R[T/\varpi^n]$ du groupe additif en l'origine : on autorise des dénominateurs arbitraires partout, sauf au point $T = 0$ de la fibre spéciale.
+
+\begin{encadre}
+\begin{contrexemple}[Énoncé de l'édition, page 9]
+L'anneau $B$ est intègre, de sorte que $\mathrm{Spec}\,B$ est irréductible ; il est plat sur $R$ ; l'application $f \mapsto f(0) \bmod \varpi$ est surjective de $B$ sur $k$, de noyau $\varpi B$, de sorte que $B/\varpi B \simeq k$ ; et $K \otimes_R B \neq 0$. Les deux fibres sont donc non vides. Pour tout $f \in B$, il existe $b_i, c_i \in B$ en nombre fini tels que $f(x + y) = \sum_i b_i(x)\,c_i(y)$ pour tous $x, y \in K$ : la comultiplication du groupe additif préserve $B$. Pourtant le saturé de $R \cdot T$ dans $B$ est $K \cdot T$, qui n'est pas un $R$-module de type fini.
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+$B$ est un sous-anneau de $K[T]$, donc intègre. Il est sans torsion : si $r \neq 0$ et $r f = 0$ dans $K[T]$, alors $f = 0$, puisque $r$ est inversible dans $K$. Sur un anneau principal, un module sans torsion est plat.
+
+Soit $f \in B$ avec $f(0) \in \varpi R$, disons $f(0) = a\varpi$. Alors $g = \varpi^{-1} f$ a pour terme constant $a \in R$, donc $g \in B$ et $f = \varpi g \in \varpi B$. Réciproquement, un élément de $\varpi B$ a un terme constant dans $\varpi R$. Le noyau de $f \mapsto f(0) \bmod \varpi$ est donc $\varpi B$, et l'application est surjective puisque les constantes de $R$ sont dans $B$. Pour la fibre générique, l'application $K \otimes_R B \to K[T]$, $\lambda \otimes f \mapsto \lambda f$, envoie $1 \otimes 1$ sur $1 \neq 0$.
+
+Pour la comultiplication, écrivons $f = \sum_{k \leq d} f_k T^k$ avec $f_0 \in R$. La formule du binôme donne $f(x + y) = \sum_k \sum_{j \leq k} \binom{k}{j} f_k\, x^j y^{k-j}$. On répartit chaque terme en un produit de deux éléments de $B$ : pour $k = j = 0$, $f_0 \cdot 1$ ; pour $j = 0 < k$, le facteur $1$ en $x$ et $f_k y^k$ en $y$, de terme constant nul ; pour $j \geq 1$, le facteur $\binom{k}{j} f_k x^j$, de terme constant nul, et $y^{k-j}$. Tous ces facteurs sont dans $B$.
+
+Le saturé. Si $r \neq 0$ et $r f = a T$ avec $a \in R$, alors $f = (a/r) T \in K \cdot T$. Inversement, pour $c \in K$, écrivons $c = a/s$ avec $a, s \in R$, $s \neq 0$ ; alors $s \cdot cT = aT \in R \cdot T$. Le saturé est donc $K \cdot T$, contenu dans $B$ puisque $cT$ s'annule en~$0$. L'application $cT \mapsto c$ est un isomorphisme de $R$-modules de $K \cdot T$ sur $K$. Si $K$ était de type fini sur $R$, il serait entier sur $R$ ; or $R$ est intégralement clos, donc $\varpi^{-1}$ serait dans $R$, et $\varpi$ serait inversible, ce qui n'est pas.
+\end{proof}
+
+\begin{remarque}
+Le lemme~1 de la page~1 dit que, pour un module sans torsion sur un anneau de Dedekind, les saturés des sous-modules de type fini sont de type fini si et seulement si le module est réunion filtrante de sous-modules de type fini saturés. Ici $R \cdot T$ est de type fini et son saturé ne l'est pas : $B$ ne satisfait pas les conditions du lemme~1, alors que les composantes de $\mathrm{Spec}\,B$, il n'y en a qu'une, ont leurs deux fibres non vides. Que $B$ soit une algèbre de Hopf n'est vérifié que par l'identité de comultiplication, point par point sur $K$ ; comme $K$ est infini, c'est une identité de polynômes. L'antipode, $f(T) \mapsto f(-T)$, et la counité, $f \mapsto f(0)$, préservent visiblement $B$, mais ne sont pas écrites en Lean.
+\end{remarque}
+
+Ne sont pas démontrés ici : le lemme~1 lui-même, et l'énoncé suivant de la cote.
+
+\begin{encadre}
+\begin{theoreme*}[Grothendieck, pages 13 à 23, sous-modules équivariants sur une base quelconque\piste{90-equivariant-resolution-general-base}]\nonverifie
+Soient $S$ un schéma et $G$ un $S$-schéma en groupes plat et affine, dont l'algèbre est réunion filtrante de sous-cogèbres localement libres de rang fini à quotients plats, opérant sur un $S$-schéma $X$ quasi-compact et quasi-séparé muni d'un faisceau ample relatif $G$-linéarisé. Tout sous-module quasi-cohérent d'un $G$-module quasi-cohérent $E$ sur $X$ est contenu dans un plus petit sous-module quasi-cohérent $G$-stable, compatible au changement de base plat sur $S$ et de type fini quand le premier l'est.
+\end{theoreme*}
+\end{encadre}
+{\small Les feuillets en esquissent une démonstration incomplète (pages 19 à 23). L'argument s'arrête sur \q{Rédiger mieux ce début}. Mathlib n'a pas les modules quasi-cohérents équivariants. On se reportera aux notes de Grothendieck (\lot{90}{1}{13}).\par}
