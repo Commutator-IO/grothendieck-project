@@ -1342,4 +1342,245 @@ theorem not_horizontal_unipotent_X_pow :
 
 end Concrete
 
+/-!
+## Cartier's converse in rank one (#83)
+
+The edition's complement to page 193, not a statement of the page: the converse of
+`pCurvature_eq_zero`, the easy case of the content of Grothendieck–Katz. Over `A` commutative of
+characteristic `p`, with a derivation `D` such that `Dᵖ = 0` and an `x` with `D x = 1` (as `d/dx`
+on `𝔽_p[x]`, `𝔽_p(x)`, `𝔽_p[[x]]`), and `u k = 1/k!` for `k < p`:
+
+* `exp_mul_exp`: `(∑ xʲ Tʲ/j!)(∑ (-x)ᵏ Tᵏ/k!) ≡ 1` modulo `Tᵖ`;
+* `proj`, `mul_proj`: if `∇ᵖ = 0`, Cartier's projector `P = ∑_{k<p} (-x)ᵏ/k! ∇ᵏ` lands in the
+  horizontal sections; `taylor`: `∑_{j<p} xʲ/j! P ∇ʲ = 1` (both in any ring of operators `E`
+  with `[∇, c] = D c`);
+* `horizontal_generate`, `horizontal_span`: if `ψ = 0`, the horizontal sections generate, in
+  rank one and in rank `n`;
+* `horizontal_unit_iff`: over a local ring, `D + a` has a horizontal basis iff
+  `aᵖ + D^{p-1} a = 0`;
+* `horizontal_unit_iff_Fp`: the same over `𝔽_p[x]`, where both sides say `a = 0`.
+-/
+
+section Cartier
+
+variable {A : Type*} [CommRing A] (p : ℕ) [hp : Fact p.Prime] [CharP A p]
+
+omit hp in
+lemma isUnit_natCast_of_coprime {m : ℕ} (h : m.Coprime p) : IsUnit (m : A) := by
+  simpa using (ZMod.unitOfCoprime m h).isUnit.map (ZMod.castHom (dvd_refl p) A)
+
+lemma isUnit_factorial {k : ℕ} (hk : k < p) : IsUnit (k.factorial : A) :=
+  isUnit_natCast_of_coprime p <| (Nat.coprime_comm.1 <|
+    (Nat.Prime.coprime_iff_not_dvd hp.out).2 fun h => by
+      have := (Nat.Prime.dvd_factorial hp.out).1 h; omega)
+
+/-- `u k = 1/k!`, defined for `k < p`. -/
+noncomputable def u (k : ℕ) : A := Ring.inverse (k.factorial : A)
+
+lemma u_mul {k : ℕ} (hk : k < p) : u k * (k.factorial : A) = 1 :=
+  Ring.inverse_mul_cancel _ (isUnit_factorial p hk)
+
+lemma u_zero : u 0 = (1 : A) := by simp [u]
+
+lemma succ_mul_u {k : ℕ} (hk : k + 1 < p) : ((k + 1 : ℕ) : A) * u (k + 1) = u k := by
+  have h1 := u_mul (A := A) p hk
+  have h0 := u_mul (A := A) p (k := k) (by omega)
+  rw [Nat.factorial_succ, Nat.cast_mul] at h1
+  linear_combination (u k) * h1 - (((k + 1 : ℕ) : A) * u (k + 1)) * h0
+
+lemma u_mul_u {i j : ℕ} (hij : i + j < p) :
+    u i * u j = ((i + j).choose j : A) * u (i + j) := by
+  have hi := u_mul (A := A) p (k := i) (by omega)
+  have hj := u_mul (A := A) p (k := j) (by omega)
+  have hm := u_mul (A := A) p hij
+  have hf : (((i + j).choose j : ℕ) : A) * i.factorial * j.factorial = (i + j).factorial := by
+    rw [← Nat.cast_mul, ← Nat.cast_mul, Nat.add_choose_mul_factorial_mul_factorial]
+  linear_combination (-(u i * u j)) * hm + (-(u i * u j * u (i + j))) * hf
+    + (((i + j).choose j : A) * u (i + j) * u j * j.factorial) * hi
+    + (((i + j).choose j : A) * u (i + j)) * hj
+
+/-- The truncated exponentials `exp(xT)` and `exp(-xT)` modulo `T^p` are inverse. -/
+theorem exp_mul_exp (x : A) :
+    ∃ r : A[X], (∑ j ∈ range p, monomial j (x ^ j * u j)) *
+      (∑ k ∈ range p, monomial k ((-x) ^ k * u k)) = 1 + r * X ^ p := by
+  obtain ⟨r, hr⟩ : X ^ p ∣ (∑ j ∈ range p, monomial j (x ^ j * u j)) *
+      (∑ k ∈ range p, monomial k ((-x) ^ k * u k)) - 1 := by
+    refine X_pow_dvd_iff.2 fun m hm => ?_
+    simp only [coeff_sub, coeff_mul, finsetSum_coeff, coeff_monomial, sum_ite_eq',
+      mem_range, coeff_one]
+    have hs : ∑ ij ∈ antidiagonal m, (if ij.1 < p then x ^ ij.1 * u ij.1 else 0) *
+        (if ij.2 < p then (-x) ^ ij.2 * u ij.2 else 0) =
+        (∑ ij ∈ antidiagonal m, m.choose ij.1 • (x ^ ij.1 * (-x) ^ ij.2)) * u m := by
+      rw [sum_mul]
+      refine sum_congr rfl fun ⟨i, j⟩ hij => ?_
+      obtain rfl : i + j = m := mem_antidiagonal.1 hij
+      simp only [show i < p by omega, show j < p by omega, ↓reduceIte, nsmul_eq_mul]
+      rw [mul_mul_mul_comm, u_mul_u p hm, Nat.choose_symm_add]; ring
+    rw [hs, ← (Commute.all x (-x)).add_pow', add_neg_cancel]
+    rcases Nat.eq_zero_or_pos m with rfl | hm0
+    · simp [u_zero]
+    · simp [hm0.ne', zero_pow hm0.ne']
+  exact ⟨r, by rw [mul_comm r]; linear_combination hr⟩
+
+
+lemma D_u (D : Derivation ℤ A A) {k : ℕ} (hk : k < p) : D (u k) = 0 := by
+  have h := congrArg D (u_mul (A := A) p hk)
+  rw [Derivation.leibniz, Derivation.map_natCast, Derivation.map_one_eq_zero, smul_zero,
+    zero_add, smul_eq_mul] at h
+  linear_combination (u k) * h - D (u k) * u_mul (A := A) p hk
+
+lemma D_g (D : Derivation ℤ A A) (x : A) (hx : D x = 1) {k : ℕ} (hk : k + 1 < p) :
+    D ((-x) ^ (k + 1) * u (k + 1)) = -((-x) ^ k * u k) := by
+  rw [Derivation.leibniz, D_u p D hk, Derivation.leibniz_pow, map_neg, hx]
+  simp only [smul_eq_mul, nsmul_eq_mul, Nat.add_sub_cancel]
+  rw [← succ_mul_u p hk]; push_cast; ring
+
+variable {E : Type*} [Ring E] (S : A →+* E) (D : Derivation ℤ A A) (N : E) (x : A)
+
+/-- Cartier's projector `P = ∑_{k<p} (-x)ᵏ/k! ∇ᵏ` onto the horizontal sections. -/
+noncomputable def proj : E := ∑ k ∈ range p, S ((-x) ^ k * u k) * N ^ k
+
+variable {S D N x}
+
+/-- If `∇ᵖ = 0` (`ψ = 0` and `Dᵖ = 0`), `∇ ∘ P = 0`: `P` takes values in horizontal sections. -/
+theorem mul_proj (hN : ∀ c, N * S c = S c * N + S (D c)) (hx : D x = 1) (hNp : N ^ p = 0) :
+    N * proj p S N x = 0 := by
+  obtain ⟨q, hq⟩ : ∃ q, p = q + 1 := ⟨p - 1, (Nat.sub_add_cancel hp.out.one_le).symm⟩
+  have hD : ∀ k ∈ range q, S (D ((-x) ^ (k + 1) * u (k + 1))) * N ^ (k + 1) =
+      -(S ((-x) ^ k * u k) * N ^ (k + 1)) := fun k hk => by
+    rw [D_g p D x hx (by simp at hk; omega), map_neg, neg_mul]
+  simp only [proj, mul_sum, ← mul_assoc, hN, add_mul, sum_add_distrib]
+  rw [hq, sum_range_succ (fun k => S ((-x) ^ k * u k) * N * N ^ k),
+    sum_range_succ' (fun k => S (D ((-x) ^ k * u k)) * N ^ k), sum_congr rfl hD, sum_neg_distrib]
+  simp only [mul_assoc, ← pow_succ', ← hq, hNp, mul_zero, pow_zero, mul_one, u_zero, mul_one,
+    Derivation.map_one_eq_zero, map_zero, add_zero]
+  abel
+
+/-- Taylor's formula: `∑_{j<p} xʲ/j! P ∇ʲ = 1` when `∇ᵖ = 0`. -/
+theorem taylor (hNp : N ^ p = 0) :
+    ∑ j ∈ range p, S (x ^ j * u j) * proj p S N x * N ^ j = 1 := by
+  obtain ⟨r, hr⟩ := exp_mul_exp (A := A) p x
+  have h : ∑ j ∈ range p, S (x ^ j * u j) * proj p S N x * N ^ j =
+      ((∑ j ∈ range p, monomial j (x ^ j * u j)) *
+        (∑ k ∈ range p, monomial k ((-x) ^ k * u k))).eval₂ S N := by
+    rw [sum_mul_sum]
+    simp only [monomial_mul_monomial, eval₂_finsetSum, eval₂_monomial, proj,
+      mul_sum, sum_mul, map_mul, pow_add, mul_assoc]
+    refine sum_congr rfl fun j _ => sum_congr rfl fun k _ => ?_
+    rw [← pow_add, ← pow_add, add_comm]
+  rw [h, hr, eval₂_add, eval₂_one, eval₂_mul_noncomm, eval₂_X_pow, hNp, mul_zero, add_zero]
+  intro k; rw [coeff_X_pow]; split_ifs <;> simp
+
+end Cartier
+
+section CartierApply
+
+variable {A : Type*} [CommRing A] (D : Derivation ℤ A A) (p : ℕ) [hp : Fact p.Prime] [CharP A p]
+
+/-- Multiplication `A → End_ℤ(A)` as a ring morphism. -/
+def mulLeftHom : A →+* Module.End ℤ A where
+  toFun := LinearMap.mulLeft ℤ
+  map_one' := by ext; simp
+  map_mul' a b := by ext; simp
+  map_zero' := by ext; simp
+  map_add' a b := by ext; simp [add_mul]
+
+/-- Scalar multiplication `A → End_ℤ(Aⁿ)` as a ring morphism. -/
+def smulHom (n : ℕ) : A →+* Module.End ℤ (Fin n → A) where
+  toFun := smulEnd
+  map_one' := by ext; simp [smulEnd]
+  map_mul' a b := by ext; simp [smulEnd, mul_assoc]
+  map_zero' := by ext; simp [smulEnd]
+  map_add' a b := by ext; simp [smulEnd, add_mul]
+
+/-- **Cartier in rank one.** If `Dᵖ = 0`, `D x = 1` and the `p`-curvature `aᵖ + D^{p-1} a` of
+`∇ = D + a` vanishes, the horizontal sections generate `A`: `∑_{j<p} xʲ/j! yⱼ = 1` with
+`D yⱼ + a yⱼ = 0`. -/
+theorem horizontal_generate (hD : ∀ y, D^[p] y = 0) (x : A) (hx : D x = 1) (a : A)
+    (hψ : a ^ p + D^[p - 1] a = 0) :
+    ∃ y : ℕ → A, ∑ j ∈ range p, x ^ j * u j * y j = 1 ∧ ∀ j, D (y j) + a * y j = 0 := by
+  set N := (D : Module.End ℤ A) + LinearMap.mulLeft ℤ a
+  have hN : ∀ c, N * mulLeftHom c = mulLeftHom c * N + mulLeftHom (D c) := fun c => by
+    have hc : LinearMap.mulLeft ℤ a * LinearMap.mulLeft ℤ c =
+        LinearMap.mulLeft ℤ c * LinearMap.mulLeft ℤ a := by ext; simp; ring
+    simp only [N, mulLeftHom, RingHom.coe_mk, MonoidHom.coe_mk, OneHom.coe_mk, add_mul, mul_add,
+      comm_mulLeft, hc]
+    abel
+  have hNp : N ^ p = 0 := by
+    rw [jacobson, hψ]
+    ext y; simp [Module.End.pow_apply, hD]
+  refine ⟨fun j => (proj p mulLeftHom N x * N ^ j) 1, ?_, fun j => ?_⟩
+  · simpa [Module.End.mul_apply, LinearMap.sum_apply, mulLeftHom, mul_assoc] using
+      congrArg (· 1) (taylor p (S := mulLeftHom) (x := x) hNp)
+  · have := congrArg (· ((N ^ j) 1)) (mul_proj p hN hx hNp)
+    simpa [N, Module.End.mul_apply] using this
+
+/-- **Cartier in rank one, over a local ring** (a field such as `𝔽_p(x)`, or `𝔽_p[[x]]`): if
+`Dᵖ = 0` and `D x = 1`, the connection `D + a` has a horizontal basis iff its `p`-curvature
+vanishes. The converse of `jacobson_logDeriv_of_pow_eq_zero`. -/
+theorem horizontal_unit_iff [IsLocalRing A] (hD : ∀ y, D^[p] y = 0) (x : A) (hx : D x = 1)
+    (a : A) : (∃ y z, y * z = 1 ∧ D y + a * y = 0) ↔ a ^ p + D^[p - 1] a = 0 := by
+  refine ⟨fun ⟨y, z, hu, hy⟩ => jacobson_logDeriv_of_pow_eq_zero D p hD y z a hu hy,
+    fun hψ => ?_⟩
+  obtain ⟨y, hsum, hy⟩ := horizontal_generate D p hD x hx a hψ
+  by_contra hne
+  have hmem : ∀ j, y j ∈ IsLocalRing.maximalIdeal A := fun j =>
+    (IsLocalRing.mem_maximalIdeal _).2 fun hj => hne <| by
+      obtain ⟨z, hz⟩ := hj.exists_right_inv
+      exact ⟨y j, z, hz, hy j⟩
+  exact (IsLocalRing.maximalIdeal.isMaximal A).ne_top <| (Ideal.eq_top_iff_one _).2 <|
+    hsum ▸ Ideal.sum_mem _ fun j _ => Ideal.mul_mem_left _ _ (hmem j)
+
+/-- **Cartier in rank `n`.** If `Dᵖ = 0`, `D x = 1` and `ψ = 0` for `∇ = D + Γ` on `Aⁿ`, every
+`v` is `∑_{j<p} xʲ/j! wⱼ` with `wⱼ = P ∇ʲ v` horizontal. -/
+theorem horizontal_span {n : ℕ} (hD : ∀ y, D^[p] y = 0) (x : A) (hx : D x = 1)
+    (Γ : Matrix (Fin n) (Fin n) A) (hψ : curvMat D Γ p = 0) (v : Fin n → A) :
+    ∃ w : ℕ → Fin n → A, ∑ j ∈ range p, (x ^ j * u j) • w j = v ∧
+      ∀ j, nabla D Γ (w j) = 0 := by
+  have hNp : nabla D Γ ^ p = 0 := by
+    have h := fun v => pCurvature_apply D p Γ v
+    simp only [hψ, Matrix.zero_mulVec, pCurvature, LinearMap.sub_apply, nabla_zero_pow, hD] at h
+    refine LinearMap.ext fun v => funext fun i => ?_
+    simpa using congrFun (sub_eq_zero.1 (h v)) i
+  refine ⟨fun j => (proj p (smulHom n) (nabla D Γ) x * nabla D Γ ^ j) v, ?_, fun j => ?_⟩
+  · simpa [Module.End.mul_apply, LinearMap.sum_apply, smulHom, smulEnd, mul_assoc] using
+      congrArg (· v) (taylor p (S := smulHom n) (x := x) hNp)
+  · simpa [Module.End.mul_apply] using
+      congrArg (· ((nabla D Γ ^ j) v)) (mul_proj p (nabla_comm D Γ) hx hNp)
+
+end CartierApply
+
+section CartierFp
+
+variable (p : ℕ) [hp : Fact p.Prime]
+
+/-- On `𝔽_p[x]`, a nonzero `y` with `y' + a y = 0` forces `a = 0`. -/
+lemma eq_zero_of_horizontal {a y : (ZMod p)[X]} (hy0 : y ≠ 0) (hy : derivative y + a * y = 0) :
+    a = 0 := by
+  by_contra ha
+  have e : derivative y = -(a * y) := eq_neg_of_add_eq_zero_left hy
+  by_cases hd : y.natDegree = 0
+  · rw [derivative_of_natDegree_zero hd, zero_eq_neg] at e
+    exact mul_ne_zero ha hy0 e
+  · have h1 := natDegree_derivative_lt hd
+    rw [e, natDegree_neg, natDegree_mul ha hy0] at h1
+    omega
+
+/-- **Cartier in rank one over `𝔽_p[x]`.** `∇ = d/dx + a` has a horizontal basis iff
+`ψ = aᵖ + a^{(p-1)} = 0`; both say `a = 0`, the units of `𝔽_p[x]` being constants. -/
+theorem horizontal_unit_iff_Fp (a : (ZMod p)[X]) :
+    (∃ y z, y * z = 1 ∧ dX p y + a * y = 0) ↔ a ^ p + (dX p)^[p - 1] a = 0 := by
+  refine ⟨fun ⟨y, z, hu, hy⟩ =>
+    jacobson_logDeriv_of_pow_eq_zero (dX p) p (dX_iterate_char p) y z a hu hy, fun hψ => ?_⟩
+  obtain ⟨y, hsum, hy⟩ := horizontal_generate (dX p) p (dX_iterate_char p) X
+    (by simp [dX_apply]) a hψ
+  obtain ⟨j, -, hj⟩ : ∃ j ∈ range p, y j ≠ 0 := by
+    by_contra! h
+    rw [sum_eq_zero fun j hj => by rw [h j hj, mul_zero]] at hsum
+    exact zero_ne_one hsum
+  obtain rfl := eq_zero_of_horizontal p hj (hy j)
+  exact ⟨1, 1, one_mul 1, by simp⟩
+
+end CartierFp
+
 end Grothendieck.Folder93.PCurvature
