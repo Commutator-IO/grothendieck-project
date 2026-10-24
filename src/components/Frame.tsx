@@ -34,7 +34,7 @@ const COLLECTIONS: { id: Collection; label: string; path: string }[] = [
   // inventory only — the scans stay on the IHÉS's server, pending its answer.
   { id: 'illusie', label: 'Illusie', path: '/illusie/' },
   // A fifth, of sound rather than paper: the 1973 Buffalo lectures, played
-  // from Erwin Schulhoff's YouTube videos, tape side by tape side.
+  // from the « Erwin Schulhoff » channel's YouTube videos, tape side by tape side.
   { id: 'buffalo', label: 'Buffalo', path: '/buffalo/' },
 ];
 const QUILLEN_PAGES: { path: string; label: string }[] = [{ path: '/quillen/', label: 'Research notebooks' }];
@@ -218,7 +218,7 @@ export function Footer({ collection = 'fonds' }: { collection?: Collection }) {
             <p className="max-w-[52em]">
               The recordings of Grothendieck's{' '}
               <strong className="font-semibold text-ink-700">1973 lectures at Buffalo</strong> were preserved
-              by John Duskin and William Lawvere, and published by Erwin Schulhoff on YouTube.
+              by John Duskin and William Lawvere, and published by the « Erwin Schulhoff » channel on YouTube.
             </p>
             <p className="mt-3 max-w-[52em]">
               This site lists the tapes and plays them from YouTube. No sound is copied here, and the lectures

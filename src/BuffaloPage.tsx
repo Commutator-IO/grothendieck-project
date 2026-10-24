@@ -73,7 +73,7 @@ function Player({ id, t, onTime, seek }: { id: string; t: number; onTime: (s: nu
 /**
  * The Buffalo lectures of 1973: Grothendieck's three courses at the State
  * University of New York at Buffalo, from April to July 1973, as Erwin
- * Schulhoff published the tapes on YouTube (John Duskin's and William
+ * The « Erwin Schulhoff » channel (a pseudonym) published the tapes on YouTube (John Duskin's and William
  * Lawvere's copies). The page lists every tape side with its date, from the
  * videos' own descriptions, and plays it from YouTube at that point. No sound
  * is copied, and nothing of the lectures is transcribed here.
@@ -165,7 +165,7 @@ export function BuffaloPage() {
           <p className="mt-4 text-[15px] leading-relaxed text-ink-600">
             From April to July 1973, Grothendieck taught three courses at the State University of New York at
             Buffalo: topos theory, algebraic geometry and the theory of algebraic groups. The tapes were kept by
-            John Duskin and William Lawvere, and published in ten videos by Erwin Schulhoff in October 2025. This
+            John Duskin and William Lawvere, and published in ten videos by the YouTube channel « Erwin Schulhoff » in October 2025. This
             page lists each tape side with its date, and plays it from YouTube.
           </p>
           <p className="tabular mt-3 text-[14px] text-ink-700">
@@ -175,7 +175,7 @@ export function BuffaloPage() {
         </header>
 
         <aside className="mt-6 max-w-[46em] rounded-xl border border-ink-200 bg-ink-50 px-4 py-3 text-[13px] leading-relaxed text-ink-700">
-          The recordings are on Erwin Schulhoff's YouTube channel and are played from there; no sound is copied
+          The recordings are on the « Erwin Schulhoff » YouTube channel and are played from there; no sound is copied
           to this site, and the lectures are not transcribed here, with one exception: as a demonstration, the
           first tape side of the topos course (4 April, from 0:00:00) opens beside a blackboard reconstructed from
           the recording's automatic captions. Tape sides marked « bad tape » are so marked
@@ -272,7 +272,7 @@ export function BuffaloPage() {
 
         <p className="mt-10 text-[12px] text-ink-400">
           Grothendieck at Buffalo 1973, tapes preserved and transmitted by John Duskin and William Lawvere,
-          published by Erwin Schulhoff on YouTube on 27 October 2025. Tape list read from the videos'
+          published by the « Erwin Schulhoff » YouTube channel on 27 October 2025. Tape list read from the videos'
           descriptions on {CAT.built}.
         </p>
       </main>
