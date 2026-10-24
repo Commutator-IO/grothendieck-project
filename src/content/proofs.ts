@@ -154,6 +154,19 @@ export const PROOFS: Proof[] = [
     theorems: ['corollaire_page13_faux', 'moore_act', 'moore_pow_sub_one', 'moore_act_surj', 'moore_act_eq_iff'],
   },
   {
+    folder: '156-4',
+    batch: 4,
+    page: '65–68',
+    name: 'Supports, cosupports and the presumed Boolean algebra',
+    statement:
+      'Two multistrates are disjoint when they are compatible and have no common lower bound; the cosupport of Φ is the set of multistrates disjoint from all of Φ, a part is saturated when it is the cosupport of its cosupport, and page 68 presumes that the saturated parts form a Boolean algebra (« ultra-stonienne »).',
+    found:
+      'The presumption fails. For any poset and any symmetric relation the saturated parts form a complete ortholattice: closed under arbitrary intersections, with the cosupport an inclusion-reversing involution such that S ∩ cosupp S = ∅ and supp(S ∪ cosupp S) = 𝓜. In the seven-element model a, b, c, d with v_ab, v_bc, v_cd above the pairs ab, bc, cd, R generated inside each 𝓜_{≤v} (reflexive, symmetric, inherited downwards, 𝓜 connected so C 4 is vacuous), the saturated parts are ∅, {b}, {c}, {a, c}, {b, d}, 𝓜, a non-distributive hexagon: {b, d} ∧ ({b} ∨ {c}) = {b, d} but ({b, d} ∧ {b}) ∨ ({b, d} ∧ {c}) = {b}. Checked by exhaustive computation in the kernel. The figures and the axioms C 1–C 3 on them are not encoded.',
+    verdict: 'false on the page',
+    lean: 'lean/Grothendieck/Folder156_4.lean',
+    theorems: ['isSaturated_iInter', 'isSaturated_cosupp', 'inter_cosupp_eq_empty', 'supp_union_cosupp', 'hexagon_hyp', 'hexagon_saturated', 'hexagon_not_distrib'],
+  },
+  {
     folder: '158',
     batch: 3,
     page: '21–41, 44, 50–53',
