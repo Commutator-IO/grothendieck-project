@@ -19,6 +19,7 @@ import Mathlib.CategoryTheory.Limits.Types.Coproducts
 import Mathlib.CategoryTheory.Limits.MonoCoprod
 import Mathlib.CategoryTheory.Extensive
 import Mathlib.CategoryTheory.Adjunction.Limits
+import Grothendieck.Upstream.SemiSimplexCategoryReedy
 
 /-!
 # Folder 104: categories of models, their three examples, and the globular complex
@@ -178,28 +179,15 @@ theorem strict_of_not_identities (hsk : Skeletal M) {X Y : M} (f : X ⟶ Y)
   rw [hend f]
   exact MorphismProperty.ofHoms.mk _
 
-/-- The factorisation of `f` as `𝟙 ≫ f` is the only one with first factor an identity. -/
-theorem factorisation_unique {X Y : M} (f : X ⟶ Y) :
-    Nonempty (Unique ((MorphismProperty.identities M).MapFactorizationData ⊤ f)) :=
-  ⟨{ default := ⟨X, 𝟙 X, f, by simp, MorphismProperty.ofHoms.mk _, trivial⟩
-     uniq := by
-       rintro ⟨Z, i, p, fac, hi, hp⟩
-       cases hi
-       simp only [Category.id_comp] at fac
-       subst fac
-       rfl }⟩
-
 include hend in
 /-- **Reedy.** A skeletal category satisfying (ii) whose strict order on
-objects is well founded is a direct category: the rank of an object for that
-order is a degree that every non-identity arrow strictly raises. -/
+objects is well founded is a direct category: the relation « there is a
+non-identity arrow `X ⟶ Y` » is contained in the strict order, hence well founded,
+and `ReedyStructure.ofWellFounded` (`Upstream/`) takes the rank for it as degree. -/
 noncomputable def reedyDirecte (hsk : Skeletal M) (hwf : WellFounded (Strict (M := M))) :
     HomotopicalAlgebra.ReedyStructure (MorphismProperty.identities M) ⊤ Ordinal.{u} :=
-  haveI : WellFounded (Strict (M := M)) := hwf
-  { deg := WellFounded.rank Strict
-    lt₁ := fun _ hf hf' => absurd hf hf'
-    lt₂ := fun f _ hf' => WellFounded.rank_lt_of_rel (strict_of_not_identities hend hsk f hf')
-    nonempty_unique := factorisation_unique }
+  HomotopicalAlgebra.ReedyStructure.ofWellFounded
+    (Subrelation.wf (fun ⟨f, hf⟩ => strict_of_not_identities hend hsk f hf) hwf)
 
 /-- Conversely, a degree into a well-founded order that every non-identity arrow
 raises makes the strict order well founded. -/
