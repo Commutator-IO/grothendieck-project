@@ -654,4 +654,91 @@ theorem hypG_not_hypI :
   ⟨ℕ → K, inferInstance, inferInstance, inferInstance, hypG_pi fun _ => K.scattered,
     not_hypI_pi⟩
 
+/-! ### The product locale is spatial
+
+The page asks whether every rectangle covered set-theoretically by rectangles `Uᵢ × Vᵢ` is
+their supremum in the product locale; in the model, whether every `CIdeal` contains the rectangles
+covered by its own rectangles (`Covers`). Under that property the product locale is spatial:
+`Opens (X × Y)`, with the inverse images along the two projections, is itself the coproduct of
+`Opens X` and `Opens Y` in frames (`existsUnique_opens_prod`). The property holds under (G)
+(`covers_of_hypG`, the maximality argument of pages 10–11), and, by the page's own proof in three
+passages to the supremum, when `X` is locally compact (`covers_of_locallyCompact`, pages 9–10). -/
+
+/-- Every rectangle covered set-theoretically by the rectangles of a `CIdeal` belongs to it: the
+equality `π = π'` of the page, i.e. the spatiality of the product locale. -/
+def Covers (X Y : Type*) [TopologicalSpace X] [TopologicalSpace Y] : Prop :=
+  ∀ (S : CIdeal X Y) (U : Opens X) (V : Opens Y),
+    (U : Set X) ×ˢ (V : Set Y) ⊆ ⋃ p ∈ S.carrier, (p.1 : Set X) ×ˢ (p.2 : Set Y) →
+      (U, V) ∈ S.carrier
+
+theorem covers_of_hypG (hG : HypG X) : Covers X Y := covering hG
+
+/-- Pages 9–10, the proof in three passages to the supremum: for `x ∈ U` a compact neighbourhood
+`K ⊆ U`, and for `y ∈ V` finitely many rectangles covering `K × {y}`, whose sup contains
+`int K × V_{x,y}` (first passage); the sup over `y` gives `int K × V` (second), the sup over `x`
+gives `U × V` (third). -/
+theorem covers_of_locallyCompact [LocallyCompactSpace X] : Covers X Y := by
+  intro S U V h
+  refine S.mem_of_le_sSup_left (s := {W | (W, V) ∈ S.carrier}) (fun x hxU => ?_)
+    fun W hW => S.mono hW inf_le_right le_rfl
+  obtain ⟨K, hKx, hKU, hK⟩ := local_compact_nhds (U.2.mem_nhds hxU)
+  let K' : Opens X := ⟨interior K, isOpen_interior⟩
+  have hK' : (K', V) ∈ S.carrier := by
+    refine S.mem_of_le_sSup_right (s := {W | (K', W) ∈ S.carrier}) (fun y hy => ?_)
+      fun W hW => S.mono hW le_rfl inf_le_right
+    obtain ⟨A, B, hAB, hyB, hKA⟩ : ∃ A B, (A, B) ∈ S.carrier ∧ y ∈ B ∧ K ⊆ A := by
+      refine hK.induction_on (p := fun s => ∃ A B, (A, B) ∈ S.carrier ∧ y ∈ B ∧ s ⊆ A)
+        ⟨⊥, ⊤, S.bot_top, trivial, empty_subset _⟩ ?_ ?_ ?_
+      · exact fun s t hst ⟨A, B, h1, h2, h3⟩ => ⟨A, B, h1, h2, hst.trans h3⟩
+      · rintro s t ⟨A, B, h1, h2, h3⟩ ⟨A', B', h1', h2', h3'⟩
+        exact ⟨A ⊔ A', B ⊓ B', S.sup_left (S.mono h1 le_rfl inf_le_left)
+          (S.mono h1' le_rfl inf_le_right), ⟨h2, h2'⟩, union_subset_union h3 h3'⟩
+      · intro t ht
+        obtain ⟨A, hA, B, hAB, hyB⟩ := by simpa using h (mk_mem_prod (hKU ht) hy)
+        exact ⟨A, mem_nhdsWithin_of_mem_nhds (A.2.mem_nhds hA), A, B, hAB, hyB, subset_rfl⟩
+    exact Opens.mem_sSup.2 ⟨B, S.mono hAB (interior_subset.trans hKA) le_rfl, hyB⟩
+  exact Opens.mem_sSup.2 ⟨K', hK', mem_interior_iff_mem_nhds.2 hKx⟩
+
+theorem toOpens_injective_of_covers (hc : Covers X Y) :
+    Function.Injective (toOpens : CIdeal X Y → Opens (X × Y)) := by
+  have key (S : CIdeal X Y) : S = rect (toOpens S : Set (X × Y)) := CIdeal.ext <| by
+    refine subset_antisymm (fun p hp => ?_) fun p hp => hc S p.1 p.2 ?_
+    · rw [rect, mem_ofPred_eq, coe_toOpens]
+      exact subset_biUnion_of_mem (u := fun p : Opens X × Opens Y =>
+        (p.1 : Set X) ×ˢ (p.2 : Set Y)) hp
+    · rw [← coe_toOpens]; exact hp
+  exact fun S T h => (key S).trans (h ▸ (key T).symm)
+
+/-- Under `Covers X Y`, `toOpens` is an isomorphism of frames. -/
+noncomputable def coversEquiv (hc : Covers X Y) : CIdeal X Y ≃o Opens (X × Y) where
+  __ := Equiv.ofBijective toOpens ⟨toOpens_injective_of_covers hc, toOpens_surjective⟩
+  map_rel_iff' {S T} := show toOpens S ≤ toOpens T ↔ S ≤ T by
+    rw [← inf_eq_left, ← map_inf, (toOpens_injective_of_covers hc).eq_iff, inf_eq_left]
+
+/-- The spatiality of the product locale: under `Covers X Y` (hence under (G), or for `X` locally
+compact), `Opens (X × Y)` with the inverse images along the two projections is the coproduct of
+the frames `Opens X` and `Opens Y`. -/
+theorem existsUnique_opens_prod (hc : Covers X Y) {L : Type*} [Order.Frame L]
+    (f : FrameHom (Opens X) L) (g : FrameHom (Opens Y) L) :
+    ∃! h : FrameHom (Opens (X × Y)) L, h.comp (Opens.comap ContinuousMap.fst) = f ∧
+      h.comp (Opens.comap ContinuousMap.snd) = g := by
+  let e := coversEquiv (X := X) (Y := Y) hc
+  let e' : FrameHom (Opens (X × Y)) (CIdeal X Y) :=
+    { toFun := e.symm, map_inf' := map_inf e.symm, map_top' := map_top e.symm,
+      map_sSup' := map_sSup e.symm }
+  have he (S : CIdeal X Y) : e' (toOpens S) = S := e.symm_apply_apply S
+  refine ⟨(lift f g).comp e', ⟨FrameHom.ext fun U => ?_, FrameHom.ext fun V => ?_⟩,
+    fun h ⟨h₁, h₂⟩ => FrameHom.ext fun W => ?_⟩
+  · show lift f g (e' (Opens.comap _ U)) = f U
+    rw [← toOpens_comp_inl, FrameHom.comp_apply, he]
+    exact DFunLike.congr_fun (lift_comp_inl f g) U
+  · show lift f g (e' (Opens.comap _ V)) = g V
+    rw [← toOpens_comp_inr, FrameHom.comp_apply, he]
+    exact DFunLike.congr_fun (lift_comp_inr f g) V
+  · have hl : h.comp toOpens = lift f g := lift_unique f g _
+      (by rw [FrameHom.comp_assoc, toOpens_comp_inl, h₁])
+      (by rw [FrameHom.comp_assoc, toOpens_comp_inr, h₂])
+    have : toOpens (e' W) = W := e.apply_symm_apply W
+    rw [FrameHom.comp_apply, ← hl, FrameHom.comp_apply, this]
+
 end Grothendieck.Folder161_3

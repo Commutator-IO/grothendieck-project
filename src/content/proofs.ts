@@ -437,6 +437,19 @@ export const PROOFS: Proof[] = [
     theorems: ['covering', 'iUnion_rect', 'eq_rect', 'CIdeal.instFrame', 'CIdeal.span_inter', 'CIdeal.eq_iSup_rect', 'CIdeal.lift_comp_inl', 'CIdeal.lift_comp_inr', 'CIdeal.lift_unique', 'CIdeal.existsUnique_lift', 'toOpens_surjective', 'toOpens_le_toOpens_iff', 'frameEquiv', 'quasiSober_pi', 'K.scattered', 'K.not_coreCompact', 'hypG_pi', 'not_hypI_pi', 'hypG_not_hypI'],
   },
   {
+    folder: '161-3',
+    batch: 1,
+    page: '9–10',
+    name: 'Spatiality of the product locale, in three passages to the supremum',
+    statement:
+      'If every point of X has a fundamental system of quasi-compact neighbourhoods, every set-theoretic covering U × V = ⋃ Uᵢ × Vᵢ is a covering in the product locale: Sup Uᵢ × Vᵢ = U × V. Hence the product locale of X and Y is spatial: Opens(X × Y), with the inverse images along the two projections, is the coproduct of the frames Opens X and Opens Y.',
+    found:
+      'Holds, by the page’s own proof. For x ∈ U a compact neighbourhood K ⊂ U; for y ∈ V the tube lemma over K × {y} gives finitely many rectangles whose sup contains int K × V_{x,y} (first passage), the sup over y gives int K × V (second), the sup over x gives U × V (third). The one equality of the chain, (Sup Uᵢ) × V′ = Sup (Uᵢ × V′), is the closure of a C-ideal under unions in one variable, built into the frame coproduct. From the covering property (Covers), whether obtained this way or from the maximality argument of pages 10–11 under the weaker hypothesis (G), the comparison map from the coproduct is an isomorphism of frames (coversEquiv), and Opens(X × Y) has the universal property of the coproduct (existsUnique_opens_prod). Not formalised: the topos side, π = π′ and the 2-product of topoi as sheaves on the product locale.',
+    verdict: 'holds',
+    lean: 'lean/Grothendieck/Folder161_3.lean',
+    theorems: ['covers_of_locallyCompact', 'covers_of_hypG', 'toOpens_injective_of_covers', 'coversEquiv', 'existsUnique_opens_prod'],
+  },
+  {
     folder: '11',
     batch: 3,
     page: '50–56',

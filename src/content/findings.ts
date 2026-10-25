@@ -583,9 +583,7 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read the three-suprema argument against the proof in Stone Spaces and against Isbell’s papers on locale products, and decide whether it is the same argument in other clothes or a distinct one. The claim here is about a proof, not a theorem: the theorem is certainly published, and what would make this row a finding is that the argument is not. An external review (Kimi, shared conversation of 2026-08) names it one of the three strongest items in the folders it read.',
-    reach: 'beyond',
-    theory: "topoi",
-    onPage: 'proved',
+    lean: { file: 'lean/Grothendieck/Folder161_3.lean', found: 'Holds; the product locale is spatial. The frame coproduct of Opens X and Opens Y is built in the same file (CIdeal, CIdeal.existsUnique_lift). The page’s question, whether every rectangle covered set-theoretically by rectangles of a C-ideal lies in it, is Covers X Y; under it, Opens(X × Y) with the inverse images along the two projections is itself the coproduct of the frames (existsUnique_opens_prod, through the frame isomorphism coversEquiv). The page’s proof in three passages to the supremum is formalised as it stands, for X locally compact (covers_of_locallyCompact): the tube over K × {y} for a compact neighbourhood K of x gives int K × V_{x,y} (first passage), the sup over y gives int K × V (second), the sup over x gives U × V (third); the one equality of the chain is the closure of a C-ideal under unions in one variable. Under the page’s weaker hypothesis of pages 10–11, Covers X Y is the maximality argument (covers_of_hypG). Not formalised: the topos side, π = π′ as Grothendieck topologies and the 2-product of topoi as sheaves on the product locale (mathlib has no 2-category of topoi). Proving the argument says nothing about whether it is in print, which is the open question of this row.' },
   },
   {
     id: '161-3-two-product-by-intersection',
