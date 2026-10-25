@@ -580,6 +580,75 @@ function ProvedInLean() {
   );
 }
 
+// « Vers une géométrie des formes » (June–July 1986), folders 156-1 to 156-8: the
+// unpublished manuscript described in Grothendieck's letter to Yamashita. The
+// counts are read from FINDINGS, so the table follows the rows as they change.
+const FORMES = ['156-1', '156-2', '156-3', '156-4', '156-5', '156-6', '156-7', '156-8'];
+const FORMES_COLUMNS = [
+  { key: 'unsearched', label: 'Unsearched', test: (n: Finding) => n.kind === 'mathematical' && n.status === 'unsearched' },
+  { key: 'candidate', label: 'Candidate', test: (n: Finding) => n.kind === 'mathematical' && n.status === 'candidate' },
+  { key: 'matched', label: 'Matched', test: (n: Finding) => n.kind === 'mathematical' && n.status === 'matched' },
+  { key: 'refuted', label: 'Refuted', test: (n: Finding) => n.kind === 'mathematical' && n.status === 'refuted' },
+  { key: 'codicological', label: 'About the leaves', test: (n: Finding) => n.kind === 'codicological' },
+  { key: 'lean', label: 'Proved in Lean', test: (n: Finding) => n.lean !== undefined },
+] as const;
+
+function GeometryOfForms() {
+  const rows = FORMES.map((cote) => {
+    const here = FINDINGS.filter((n) => n.cote === cote);
+    return { cote, title: BY_ID.get(cote)?.title ?? '', counts: FORMES_COLUMNS.map((c) => here.filter(c.test).length), total: here.length };
+  });
+  const totals = FORMES_COLUMNS.map((_, i) => rows.reduce((a, r) => a + r.counts[i], 0));
+  const all = rows.reduce((a, r) => a + r.total, 0);
+  return (
+    <section id="geometrie-des-formes" className="mt-10 scroll-mt-16">
+      <h2 className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">
+        Vers une géométrie des formes (1986)
+      </h2>
+      <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
+        Eight chapters written between 5 June and 4 July 1986, dated in his hand, 691 pages up to 15 July
+        according to the inventory: the manuscript he describes to Jun-Ichi Yamashita in a letter of
+        9 July 1986. It has never been edited. The table counts the rows below for each folder, by
+        outcome; « proved in Lean » counts rows whose statement has a Lean proof, whatever their outcome.
+      </p>
+      <div className="mt-3 overflow-x-auto">
+        <table className="w-full min-w-[640px] border-collapse text-[12.5px]">
+          <thead>
+            <tr className="text-left text-ink-500">
+              <th className="py-1 pr-3 font-semibold">Folder</th>
+              {FORMES_COLUMNS.map((c) => (
+                <th key={c.key} className="py-1 pr-3 text-right font-semibold">{c.label}</th>
+              ))}
+              <th className="py-1 text-right font-semibold">All rows</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r.cote} className="border-t border-ink-100">
+                <td className="py-1 pr-3 text-ink-800">
+                  <a href={`/#${r.cote}`} className="font-semibold hover:text-brand-700">n° {r.cote}</a>{' '}
+                  <span className="text-ink-500">{r.title.replace(/\s*:.*$/, '')}</span>
+                </td>
+                {r.counts.map((k, i) => (
+                  <td key={FORMES_COLUMNS[i].key} className="py-1 pr-3 text-right tabular-nums">{k || '·'}</td>
+                ))}
+                <td className="py-1 text-right tabular-nums">{r.total}</td>
+              </tr>
+            ))}
+            <tr className="border-t border-ink-300 font-semibold">
+              <td className="py-1 pr-3 text-ink-800">All eight</td>
+              {totals.map((k, i) => (
+                <td key={FORMES_COLUMNS[i].key} className="py-1 pr-3 text-right tabular-nums">{k}</td>
+              ))}
+              <td className="py-1 text-right tabular-nums">{all}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
+
 export function FindingsPage() {
   useHashTarget();
   const commentRoot = useComments<HTMLElement>('findings', 'Findings');
@@ -703,6 +772,8 @@ export function FindingsPage() {
         <PlainSummary />
 
         <ProvedInLean />
+
+        <GeometryOfForms />
 
         <div id="full-list" className="scroll-mt-16" />
 
