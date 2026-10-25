@@ -156,3 +156,20 @@ Several findings say a statement of his is false as stated, by a counterexample 
 - [ ] **94, p. 7:** the converse of Rem. 5 bis as read: under the local finiteness of Lemme 5 (F(M) finitely generated for M of finite length over A_𝔭), constant rank on an open of each V(𝔭) gives representability there. Check the finiteness hypothesis the page actually writes (local, or F(M) finitely generated for every finitely generated M), « Nor(B) », « codimension » and « normal », since a telescope on k[x, y] refutes the local form and the global form holds.
 - [ ] **7, pp. 16–18:** the site of p. 17 as read: p-adically complete W-algebras B with a surjection B → A₀ whose kernel is nilpotent mod p (« isomorphisme nilpotent »), and its test a) against Monsky–Washnitzer cohomology. Check « isomorphisme nilpotent » and the parenthesis after it, and whether B is required weakly complete (dagger) rather than p-adically complete, since with p-adic completion test a) fails on the affine line.
 
+# Datings against the inventory (#90, 2026-10-25)
+
+### Do the leaves contradict the inventory's dating?
+
+A systematic pass on the imprecisely dated folders (src/content/proposed-datings.json) found pages whose own evidence disagrees with the inventory. Each box names the pages and the evidence; the facsimile decides, and the inventory is never overwritten — a confirmed disagreement is recorded beside it.
+
+- [ ] **2, pp. 15–18, 32–37:** inventory [1957] (« antérieures à 1958 »); the pages speak of « topos annelé » and of D_parf(f) as a « catégorie triangulée », which point to 1963 at the earliest (p. 32 perhaps about 1966). Check the words and whether these leaves belong to the folder's 1957 layer.
+- [ ] **25, pp. 134–135:** inventory « à partir de 1967 »; the letter to Dieudonné is read as dated « 29.9.1965 » in his hand. Check the date as written.
+- [ ] **12, pp. 104–122:** the title's « 1964 ? »; the pages cite Leray degeneration « d'après Deligne » (1968) and p. 120 speaks of the IHÉS seminar of 1966/67 as finished. Check the citation and the tense.
+- [ ] **15, pp. 2–13:** the title's « (1965) »; the pages cite « Tate–Honda » (1968). Check the reading of the names.
+- [ ] **79, pp. 33–35:** inventory « à partir de 1980 »; the pages compare the work with a « formulaire 1981 » and say « l'an dernier », hence 1982 at the earliest. Check « 1981 » and « l'an dernier ».
+- [ ] **108, p. 1:** inventory « [à partir de 1973] », taken from a verso; « contracteur » with i_A, j_A and question 17 match Pursuing Stacks §§ 92 and 95 (July 1983). Check the verso and whether the recto can be of 1973.
+- [ ] **134-1, pp. 3–6:** the inventory title lists letters of 1974, 1975–1976 and 1984; the six pages hold only the letter to Deligne « Lodève le 27.8.74 ». Check whether the other letters are elsewhere in 134.
+- [ ] **134-2, pp. 78, 114:** inventory « 19/02–22/02/1983 »; note (11) « Added 23.2.83 » (p. 78) and the P.S. « (23.2) » (p. 114) go one day past it. Check both dates.
+- [ ] **134-8, p. 63:** inventory [1983], typed dates 22.10 to 12.11; p. 63 asks for copies of typescript pp. 259–381 and its P.S. (« absent … jusque vers le six août ») points to late July or early August 1983. Check the P.S.
+- [ ] **138, pp. 105, 109:** inventory « vers 1976–1978 »; p. 105 is on a letter dated 11.1.1977 and p. 109 on a notice of 12.12.1977, so these pages are not of 1976. Check the two versos.
+

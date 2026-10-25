@@ -480,6 +480,32 @@ for (const raw of body.split('\n')) {
 
   // #90 — the hypotheses a counterexample of the edition's is set against: read
   // on the facsimile before the verdict is taken to hold of the page.
+  // #90 — pages whose own evidence disagrees with the inventory's dating
+  // (src/content/proposed-datings.json): a question for a reader of the hand.
+  if (section.startsWith('Datings against the inventory')) {
+    const dat = /^\*\*(\d+(?:-\d+)?)(?:,\s*pp?\.\s*([\d–, -]+))?:\*\*\s*(.*)$/.exec(text);
+    if (dat && isCote(dat[1])) {
+      const ps = (dat[2] ?? '').split(/,\s*/).flatMap((r) => {
+        const [a, b] = r.split('–').map(Number);
+        return b > a ? Array.from({ length: b - a + 1 }, (_, i) => a + i) : a ? [a] : [];
+      });
+      push({
+        id: `dating-${dat[1]}-p${ps[0] ?? 0}`,
+        section: n,
+        kind: 'date',
+        cote: dat[1],
+        page: ps[0] ?? null,
+        prompt: `Do these pages of folder ${dat[1]} disagree with the inventory's dating, as the edition reads them?`,
+        choices: [C('Yes, the evidence is read right', 'right'), C('No, a date or name is misread', 'other', 'What the page has'), C('The pages are not what the edition says', 'other', 'What they are')],
+        hint: `${ps.length ? facsimileAt(ps) : `Leaf through the facsimile of folder ${dat[1]}`}: read the dates, names and citations the box quotes, and the versos.`,
+        claim: `${dat[3][0].toUpperCase()}${dat[3].slice(1)}`,
+        details: text.replace(/\*\*/g, ''),
+        context: 'A dating proposed from the leaves’ own evidence disagrees with the inventory; the inventory is kept, and a confirmed disagreement is recorded beside it (#90).',
+      }, null);
+      continue;
+    }
+  }
+
   if (section.startsWith('Hypotheses behind')) {
     const hyp = /^\*\*(\d+(?:-\d+)?)(?:,\s*pp?\.\s*([\d–, -]+))?:\*\*\s*(.*)$/.exec(text);
     if (hyp && isCote(hyp[1])) {
