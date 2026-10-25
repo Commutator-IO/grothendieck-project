@@ -197,10 +197,10 @@ export const PROOFS: Proof[] = [
     statement:
       'For a flat affine group G over a Dedekind ring, page 9 says in a parenthesis that the algebra B satisfies the conditions of Lemma 1 (saturations of finitely generated submodules finitely generated) exactly when the irreducible components of G have non-empty fibres.',
     found:
-      'False without finite type. Over a discrete valuation ring R with fraction field K and uniformiser ϖ, B = {f ∈ K[T] : f(0) ∈ R} is a domain (Spec B irreducible), flat over R, with B/ϖB the residue field and K ⊗_R B ≠ 0 (both fibres non-empty); f(x + y) = Σ bᵢ(x)cᵢ(y) with bᵢ, cᵢ ∈ B, so the comultiplication of 𝔾_a preserves B; and the saturation of R·T in B is K·T, which is not finitely generated, since K would otherwise be finite, hence integral, over R and ϖ⁻¹ would lie in R. The antipode and counit are not written out.',
+      'False without finite type. Over a discrete valuation ring R with fraction field K and uniformiser ϖ, B = {f ∈ K[T] : f(0) ∈ R} is a domain (Spec B irreducible), flat over R, with B/ϖB the residue field and K ⊗_R B ≠ 0 (both fibres non-empty); f(x + y) = Σ bᵢ(x)cᵢ(y) with bᵢ, cᵢ ∈ B, so the comultiplication of 𝔾_a preserves B; and the saturation of R·T in B is K·T, which is not finitely generated, since K would otherwise be finite, hence integral, over R and ϖ⁻¹ would lie in R. The antipode and counit are not written out. In finite type, the commutative-algebra core of the edition’s argument is checked, for π in a commutative ring A and d(A) = ⋂ πⁿA: a minimal prime 𝔭 with 𝔭 + πA = A gives d(A) ≠ 0, and for A Noetherian and reduced d(A) = 0 exactly when every minimal prime meets V(π) (Krull in each A/𝔭). Hai–dos Santos II, Prop. 6.19, and Kaplansky, which turn d(R[G]) = 0 into R[G] free, are cited, not formalised; the non-reduced case is open.',
     verdict: 'false on the page',
     lean: 'lean/Grothendieck/Folder90.lean',
-    theorems: ['flat', 'residue_surjective', 'ker_residue', 'generic_nontrivial', 'comul', 'saturation_eq', 'not_fg_saturation'],
+    theorems: ['flat', 'residue_surjective', 'ker_residue', 'generic_nontrivial', 'comul', 'saturation_eq', 'not_fg_saturation', 'iInf_pow_ne_bot_of_minimalPrime', 'iInf_pow_eq_bot_of_minimalPrimes', 'iInf_pow_eq_bot_iff'],
   },
   {
     folder: '63',
@@ -1391,7 +1391,7 @@ export const PROOFS: Proof[] = [
     name: "The Azumaya criterion for M(b, c; b′, c′; t)",
     statement: "Over any commutative ring k and for all b, c, b′, c′, t ∈ k, the algebra M(b, c; b′, c′; t), free on 1, u, v, uv with u² = bu − c, v² = b′v − c′ and Tr(uv) = t, is an Azumaya algebra if and only if Q = t² − bb′t + b²c′ + b′²c − 4cc′ is invertible, that is, iff det is non-degenerate on k1 + ku + kv. In particular M(0, 0; 0, 0; t) is Azumaya iff t is a unit.",
     found: "Holds as stated, characteristic 2 included and without assuming δδ′ invertible; the page proves only necessity over an algebraically closed field and leaves sufficiency unwritten. In the bases (eᵢ ⊗ eⱼ) and (E_rs) the map M ⊗ Mᵒᵖ → End M, a ⊗ a′ ↦ (x ↦ axa′), has a 16 × 16 matrix D; since Tr(x ↦ axa′) = Tr(a)Tr(a′), composing with the trace pairing of End M gives the Kronecker square of the trace form, of determinant (−Q²)⁸, so ± det(D)² = Q¹⁶. The argument uses only the determinant of the trace form, not its non-degeneracy, which fails in characteristic 2. The intrinsic form (two transverse rank-2 subalgebras of a locally free rank-4 algebra) is not formalised.",
-    verdict: "proved",
+    verdict: "holds",
     lean: "lean/Grothendieck/Folder83.lean",
     theorems: ["MAlg.isAzumaya_iff", "MAlg.isAzumaya_iff_deltaPB", "MAlg.isAzumaya_iff_ne_zero", "MAlg.isAzumaya_nilpotent_iff", "MAlg.bijective_mulLeftRight_iff", "MAlg.isUnit_sandwichMatrix_iff", "MAlg.sandwich_gram", "MAlg.sandwich_det_sq", "MAlg.sum_diag_mul"],
   },

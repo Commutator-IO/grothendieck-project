@@ -34,6 +34,31 @@ Le saturé. Si $r \neq 0$ et $r f = a T$ avec $a \in R$, alors $f = (a/r) T \in 
 Le lemme~1 de la page~1 dit que, pour un module sans torsion sur un anneau de Dedekind, les saturés des sous-modules de type fini sont de type fini si et seulement si le module est réunion filtrante de sous-modules de type fini saturés. Ici $R \cdot T$ est de type fini et son saturé ne l'est pas : $B$ ne satisfait pas les conditions du lemme~1, alors que $\mathrm{Spec}\,B$, qui n'a qu'une composante irréductible, a ses deux fibres non vides. Que $B$ soit une algèbre de Hopf n'est vérifié que par l'identité de comultiplication, point par point sur $K$ ; comme $K$ est infini, c'est une identité de polynômes. L'antipode, $f(T) \mapsto f(-T)$, et la counité, $f \mapsto f(0)$, préservent visiblement $B$, mais ne sont pas écrites en Lean.
 \end{remarque}
 
+\noindent\emph{Le cas de type fini et réduit.} Pour un groupe de type fini, la parenthèse se ramène à une question d'algèbre commutative sur l'idéal $d(A) = \bigcap_n \pi^n A$ des éléments infiniment divisibles par l'uniformisante. On en démontre ici le cœur, valable pour tout élément $\pi$ d'un anneau commutatif.
+
+\begin{encadre}
+\begin{enonce}[Composantes et éléments infiniment divisibles, énoncé de l'édition]\verifie[\leanblobmain]{Folder90}
+Soient $A$ un anneau commutatif, $\pi \in A$ et $d(A) = \bigcap_{n} \pi^n A$.
+\begin{enumerate}
+\item[(a)] Si un idéal premier minimal $\mathfrak p$ de $A$ vérifie $\mathfrak p + \pi A = A$, autrement dit si la composante irréductible $V(\mathfrak p)$ de $\mathrm{Spec}\,A$ ne rencontre pas la fibre spéciale $V(\pi)$, alors $d(A) \neq 0$.
+\item[(b)] Si $A$ est noethérien et réduit et si tout premier minimal $\mathfrak p$ vérifie $\mathfrak p + \pi A \neq A$, alors $d(A) = 0$.
+\end{enumerate}
+Pour $A$ noethérien et réduit, $d(A) = 0$ si et seulement si toutes les composantes irréductibles de $\mathrm{Spec}\,A$ rencontrent la fibre spéciale.
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+(a) Comme $\mathfrak p + \pi A = A$, il existe $c \in A$ tel que $1 - c\pi \in \mathfrak p$. Dans un anneau commutatif, tout élément d'un premier minimal est diviseur de zéro : il existe $a \neq 0$ tel que $a(1 - c\pi) = 0$. Alors $a = ac\pi$ et, par récurrence, $a = a(c\pi)^n = (ac^n)\,\pi^n$ pour tout $n$ : $a$ est un élément non nul de $d(A)$. L'idée : sur une composante qui évite la fibre spéciale, $\pi$ est inversible, et une fonction portée par cette composante est divisible par toutes les puissances de $\pi$. Cette partie n'utilise ni l'hypothèse noethérienne ni le théorème de Krull.
+
+(b) Soit $\mathfrak p$ un premier minimal. L'anneau $A/\mathfrak p$ est intègre et noethérien, et l'image de $\pi$ y engendre un idéal propre, puisque $\mathfrak p + \pi A \neq A$. Le théorème d'intersection de Krull donne $\bigcap_n \bar\pi^n (A/\mathfrak p) = 0$ ; l'image de $d(A)$ dans $A/\mathfrak p$ est donc nulle, et $d(A) \subseteq \mathfrak p$. L'intersection des premiers minimaux est le nilradical, nul puisque $A$ est réduit : $d(A) = 0$.
+\end{proof}
+
+\noindent Lean : \href{\leanblobmain/Folder90.lean}{\texttt{iInf\_pow\_ne\_bot\_of\_minimalPrime}} pour (a), \href{\leanblobmain/Folder90.lean}{\texttt{iInf\_pow\_eq\_bot\_of\_minimalPrimes}} pour (b) et \href{\leanblobmain/Folder90.lean}{\texttt{iInf\_pow\_eq\_bot\_iff}} pour l'équivalence.
+
+\begin{remarque}
+Pour $A = R[G]$, algèbre d'un groupe affine et plat de type fini sur un anneau de valuation discrète complet $R$ d'uniformisante $\pi$, la proposition~6.19 de Hai et dos Santos \cite{haidossantos2018} et le théorème de Kaplansky sur les modules projectifs traduisent $d(A) = 0$ en deux propriétés : $G$ est \emph{spécialement localement fini}, et $R[G]$ est un $R$-module libre. Avec l'énoncé ci-dessus, on obtient le critère de la page~9 quand $R[G]$ est réduit, ce qui est toujours le cas en caractéristique générique nulle. Ces deux résultats sont cités, non formalisés. Le cas non réduit, en caractéristique générique $p$, reste ouvert.
+\end{remarque}
+
 Ne sont pas démontrés ici : le lemme~1 lui-même, et l'énoncé suivant de la cote.
 
 \begin{encadre}

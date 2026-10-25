@@ -34,6 +34,22 @@ irreducible, flat, with both fibres non-empty, and still the saturation of a cyc
 is not finitely generated. That `B` is a Hopf algebra is checked only through the
 comultiplication identity, pointwise on `K` (an infinite field, so the identity is one of
 polynomials); the antipode and counit are not written out.
+
+**The edition's argument in finite type, reduced case.** For `π` in a commutative ring `A`,
+write `d(A) = ⋂ₙ πⁿA`. Proved here, as a statement of the edition (not of the page):
+
+* `iInf_pow_ne_bot_of_minimalPrime`: if a minimal prime `𝔭` satisfies `𝔭 + πA = A` (the
+  component `V(𝔭)` misses the special fibre), then `d(A) ≠ 0`; no Noetherian hypothesis;
+* `iInf_pow_eq_bot_of_minimalPrimes`: if `A` is Noetherian and reduced and every minimal prime
+  meets `V(π)`, then `d(A) = 0` (Krull's intersection theorem in each `A/𝔭`);
+* `iInf_pow_eq_bot_iff`: hence, for `A` Noetherian and reduced, `d(A) = 0` if and only if every
+  irreducible component of `Spec A` meets the special fibre.
+
+Remark, not formalised: for `A = R[G]` with `G` flat affine of finite type over a complete
+discrete valuation ring, Hai–dos Santos II (arXiv:1802.06377), Prop. 6.19, together with
+Kaplansky's theorem on projective modules, turn `d(A) = 0` into « `G` specially locally finite »
+and « `R[G]` free over `R` », which gives the criterion of page 9 in the reduced case. The
+non-reduced case stays open.
 -/
 
 open Polynomial TensorProduct
@@ -256,5 +272,63 @@ theorem not_fg_saturation : ¬ (KT R K).FG := by
   apply hϖ.not_isUnit
   refine IsUnit.of_mul_eq_one y (IsFractionRing.injective R K ?_)
   rw [map_mul, hy, mul_inv_cancel₀ hϖ0, map_one]
+
+/-! ### The commutative-algebra core of the edition's argument for page 9
+
+For an element `π` of a commutative ring `A`, write `d(A) = ⋂ₙ πⁿA`. -/
+
+section Components
+
+variable {A : Type*} [CommRing A] (π : A)
+
+/-- **A component missing the special fibre gives `d(A) ≠ 0`.** If a minimal prime `𝔭`
+satisfies `𝔭 + πA = A`, write `1 - cπ ∈ 𝔭`; it is a zero divisor, say `a(1 - cπ) = 0`
+with `a ≠ 0`, and then `a = a(cπ)ⁿ ∈ πⁿA` for all `n`. -/
+theorem iInf_pow_ne_bot_of_minimalPrime {p : Ideal A} (hp : p ∈ minimalPrimes A)
+    (h : p ⊔ Ideal.span {π} = ⊤) : ⨅ n : ℕ, Ideal.span {π} ^ n ≠ ⊥ := by
+  obtain ⟨y, hy, z, hz, hyz⟩ := Submodule.mem_sup.1 (h ▸ Submodule.mem_top (x := (1 : A)))
+  obtain ⟨c, rfl⟩ := Ideal.mem_span_singleton'.1 hz
+  have hy' := Set.disjoint_left.1 (Ideal.disjoint_nonZeroDivisors_of_mem_minimalPrimes hp) hy
+  rw [SetLike.mem_coe, mem_nonZeroDivisors_iff_right] at hy'
+  push Not at hy'
+  obtain ⟨a, hay, ha⟩ := hy'
+  have h1 : a * (c * π) = a := by
+    linear_combination (-1 : A) * hay + a * hyz
+  have hn : ∀ n : ℕ, a * (c * π) ^ n = a := fun n => by
+    induction n with
+    | zero => simp
+    | succ n ih => rw [pow_succ', ← mul_assoc, h1, ih]
+  intro hbot
+  refine ha (Ideal.mem_bot.1 (hbot ▸ Ideal.mem_iInf.2 fun n => ?_))
+  rw [Ideal.span_singleton_pow, Ideal.mem_span_singleton']
+  exact ⟨a * c ^ n, by rw [mul_assoc, ← mul_pow, hn]⟩
+
+/-- **Components meeting the special fibre give `d(A) = 0`, for `A` reduced and Noetherian.**
+For a minimal prime `𝔭`, `A/𝔭` is a Noetherian domain in which `π` generates a proper ideal,
+so `⋂ₙ πⁿ(A/𝔭) = 0` by Krull's intersection theorem: `d(A) ⊆ 𝔭`. The intersection of the
+minimal primes is the nilradical, which is `0`. -/
+theorem iInf_pow_eq_bot_of_minimalPrimes [IsNoetherianRing A] [IsReduced A]
+    (h : ∀ p ∈ minimalPrimes A, p ⊔ Ideal.span {π} ≠ ⊤) :
+    ⨅ n : ℕ, Ideal.span {π} ^ n = ⊥ := by
+  refine eq_bot_iff.2 fun x hx => ?_
+  rw [← Ideal.radical_bot_of_isReduced, ← Ideal.sInf_minimalPrimes, Ideal.mem_sInf]
+  intro p hp
+  have := hp.isPrime
+  let f := Ideal.Quotient.mk p
+  have hI : (Ideal.span {π}).map f ≠ ⊤ := fun hI => h p hp (by
+    simpa [f, Ideal.comap_map_of_surjective' f Ideal.Quotient.mk_surjective, sup_comm] using
+      congrArg (Ideal.comap f) hI)
+  rw [← Ideal.Quotient.eq_zero_iff_mem, ← Ideal.mem_bot, ← Ideal.iInf_pow_eq_bot_of_isDomain _ hI]
+  exact Ideal.mem_iInf.2 fun n => Ideal.map_pow f _ n ▸ Ideal.mem_map_of_mem f
+    (Ideal.mem_iInf.1 hx n)
+
+/-- **The criterion for `A` reduced and Noetherian**: `⋂ₙ πⁿA = 0` if and only if every
+irreducible component of `Spec A` meets the special fibre `V(π)`. -/
+theorem iInf_pow_eq_bot_iff [IsNoetherianRing A] [IsReduced A] :
+    ⨅ n : ℕ, Ideal.span {π} ^ n = ⊥ ↔ ∀ p ∈ minimalPrimes A, p ⊔ Ideal.span {π} ≠ ⊤ :=
+  ⟨fun h0 _ hp h => iInf_pow_ne_bot_of_minimalPrime π hp h h0,
+    iInf_pow_eq_bot_of_minimalPrimes π⟩
+
+end Components
 
 end Grothendieck.Folder90
