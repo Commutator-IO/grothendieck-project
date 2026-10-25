@@ -33,7 +33,7 @@ function outcomeParts(): Part[] {
     { key: 'refuted', label: 'Shown false as stated', note: 'a counterexample or a contradiction', fill: '#d55181', rows: rows.filter((n) => !n.lean && n.status === 'refuted') },
     { key: 'reachable', label: 'Open, within reach of Lean', note: 'mathlib has the theory the statement needs', fill: '#c9900c', rows: reach('reachable') },
     { key: 'beyond', label: 'Open, beyond mathlib today', note: 'needs a theory mathlib does not have (schemes, étale cohomology, topoi, stacks…): provable in principle, not now', fill: '#4a3aa7', rows: reach('beyond') },
-    { key: 'other', label: 'Open, statement not settled', note: 'to be made precise, doubtful as read, or an open problem', fill: '#eb6834', rows: reach('other') },
+    { key: 'other', label: 'Open: doubtful, imprecise or an open problem', note: 'judged: the statement is doubtful as read, too imprecise to formalise as written, or a known open problem', fill: '#eb6834', rows: reach('other') },
   ];
 }
 

@@ -5383,6 +5383,9 @@ export const FINDINGS: Finding[] = [
   status: 'unsearched',
   settle:
     'Decide first whether the invariant is in print: look in the literature on orbifold / stringy Euler characteristics and « motivic » or inertia-weighted classes of Deligne–Mumford stacks (e.g. Ekedahl 2009, Bergh, and treatments of [M_{1,1}] over ℤ in K₀ of stacks) for a class defined by coarse spaces of constant-stabiliser strata divided by card H, and for its value on M_{1,1} over Spec ℤ. If the invariant appears with this value, mark matched; if the invariant itself is not in print, the entry is about the edition’s reconstruction as much as the page and should say so in its claim.',
+  reach: 'beyond',
+  theory: 'stacks, gerbes, Picard categories',
+  onPage: 'partial',
 },
 {
   id: '147-deleted-neighbourhood-codim-two',
@@ -5402,6 +5405,9 @@ export const FINDINGS: Finding[] = [
   status: 'unsearched',
   settle:
     'Look for the statement that the boundary of the real oriented blow-up (equivalently the Kato–Nakayama space of the log structure, or the deleted neighbourhood) of a normal-crossings divisor is the homotopy colimit of torus bundles over the open strata, and for the resulting van Kampen presentation by codimension 1 and 2 — in the literature on real oriented blow-ups and Kato–Nakayama spaces, in Looijenga’s and Boggi’s work on the boundary of M̄_{g,n} and its fundamental groups, and in Hatcher–Lochak–Schneps 2000; and check whether, for M_{g,n}, the hypothesis of Corollary 3 (end and interior with the same Π₁) is the simple connectivity of the curve complex (Harer). If the general statement is in print, mark matched.',
+  reach: 'beyond',
+  theory: 'other: algebraic topology and stratified spaces',
+  onPage: 'stated',
 },
   // Folder 148 (Teichmüller, 1983), find-novelty pass on Opus 5.5 (claude-opus-5-5), 2026-10-10, on a reading made by Opus 5.5.
   // Dropped as matches already footnoted in the reading: stable graphs (p. 47), Hatcher–Thurston pants complex (pp. 30–32),
@@ -5478,6 +5484,9 @@ export const FINDINGS: Finding[] = [
   status: 'unsearched',
   settle:
     'Over ℂ the statement for the discrete fundamental group follows from the classical rigidity of non-constant holomorphic maps into hyperbolic Riemann surfaces (homotopic ⇒ equal; cf. the de Franchis–Severi circle, Imayoshi’s generalisations, harmonic-map uniqueness); check those sources, and Stix’s Rational Points and Arithmetic of Fundamental Groups (LNM 2054) and Mochizuki 1999 (§ on « Hom » forms), for the profinite form, i.e. for whether equality of outer maps into the profinite completion — a weaker hypothesis than homotopy — is already known to suffice. If either is stated, mark matched.',
+  reach: 'beyond',
+  theory: "étale or ℓ-adic cohomology",
+  onPage: 'partial',
 },
 {
   id: '149-cusp-specialisation-index',
@@ -5496,6 +5505,9 @@ export const FINDINGS: Finding[] = [
   status: 'unsearched',
   settle:
     'Read Stix, LNM 2054 (chapters on cuspidal sections and on the specialisation of sections / good reduction), Nakamura’s papers on cuspidal sections and tangential base points, and Saïdi’s « Good sections » for the statement that the specialisation of a point-section at a place where the point meets a cusp is a cuspidal section through an index-(intersection multiplicity) subgroup of the cusp’s decomposition group. It is a local computation in tame ramification and is likely stated; if so, mark matched.',
+  reach: 'beyond',
+  theory: "étale or ℓ-adic cohomology",
+  onPage: 'stated',
 },
 {
   id: '149-leaf-82-83-misplaced',
