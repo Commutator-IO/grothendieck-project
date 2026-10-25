@@ -98,6 +98,7 @@ import Grothendieck.Upstream.NoetherianIsOpenOfStableUnderGeneralization
 import Grothendieck.Upstream.PolynomialIntegerValued
 import Grothendieck.Upstream.PolynomialIsCoprimeX
 import Grothendieck.Upstream.PrimaryComponentInjective
+import Grothendieck.Upstream.QuasiSoberPiCoreCompact
 import Grothendieck.Upstream.RatSmulMemIndivisible
 import Grothendieck.Upstream.SemiSimplexCategoryReedy
 import Grothendieck.Upstream.SemilocalStableRange
