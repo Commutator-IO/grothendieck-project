@@ -412,7 +412,14 @@ Hyp 1, Hyp 2, Hyp 2${}'$.\footnote{La démonstration que b) et c) sur les
 représentables impliquent leur version générale est menée à la page 17, sur des
 $\varinjlim$ indexées par $A/F$ et $A/G$ ; elle utilise que ces catégories
 d'indices sont filtrantes deux à deux au sens voulu, ce que la page ne dit pas
-mais que la construction du produit dans $\widehat{A}$ fournit.}
+mais que la construction du produit dans $\widehat{A}$ fournit.}\footnote{La
+réduction de l'axiome unique à trois formes de diagrammes est celle de
+M.~Shulman, « Exact completions and small sheaves », \emph{Theory Appl. Categ.}
+27 (2012), n\textsuperscript{o}~7 (arXiv:1203.4318v2), §4, corollaire~4.11 :
+la platitude relative aux recouvrements s'y ramène aux objets pré-terminaux, aux
+pré-produits binaires et aux pré-égaliseurs locaux. C'est le même découpage,
+à ceci près que Shulman prend des égaliseurs là où la page prend des produits
+fibrés.}
 
 Ce que dit (Hyp) est net : \emph{$\varphi_{!}$ commute aux limites finies, à
 un recouvrement près}. Si l'on y remplace « épi » par « iso », on obtient
@@ -438,7 +445,31 @@ exact ? Quand ?
 C'est exactement la question de l'écart entre la platitude et sa forme locale.
 L'écart est réel — les deux conditions ne coïncident pas en général, et c'est
 pour cela que la seconde a reçu un nom propre, \emph{covering flat} — mais le
-dossier n'y revient pas.\footnote{La condition (Hyp) est, mot pour mot, celle
+dossier n'y revient pas.\footnote{L'axiome (Hyp), pour les diagrammes finis de
+représentables, est la définition d'un foncteur \emph{covering-flat} vers un
+topos muni de sa topologie canonique : M.~Shulman, « Exact completions and
+small sheaves », \emph{Theory Appl. Categ.} 27 (2012), n\textsuperscript{o}~7
+(arXiv:1203.4318v2), §4, définition~4.1 et lemme~4.5 ; les cônes de sommet $c$
+sur un diagramme $g$ sont les éléments de $(\varprojlim y \circ g)(c)$, ce qui
+donne exactement l'épimorphisme de la page. C'est le même énoncé. Le même
+article répond à la question de la page, et par la négative : pour $A$ petite
+et $X$ un topos de Grothendieck, être covering-flat équivaut à la platitude
+interne au sens de Diaconescu, c'est-à-dire à l'exactitude à gauche de
+$\varphi_{!}$ (exemple~4.6 et proposition~4.16). Dans ce cadre, (Hyp) ne peut
+donc pas être vérifiée sans que $\varphi_{!}$ soit exact, et la phrase
+ci-dessus selon laquelle « l'écart est réel » ne vaut pas ici : l'écart entre
+les deux notions n'apparaît que pour des sites plus généraux qu'un topos avec
+sa topologie canonique. Shulman attribue la notion à Kock (1989) et à Karazeris
+(2004), que nous n'avons pas lus. O.~Bartoli et O.~Caramello, « On morphisms of
+relative toposes », arXiv:2310.20691 (2023), §3.2.1, énoncent la même
+équivalence, globalement et non condition par condition, sous la forme de
+familles épimorphiques, et la renvoient à Mac Lane et Moerdijk. Nous ne
+connaissons ces derniers (\emph{Sheaves in Geometry and Logic}, 1992, VII.8 et
+VII.9.1) qu'à travers l'article « flat functor » du nLab, lu le 25 octobre 2026,
+et non dans le livre. SGA~4, exposé~IV, 4.9.1 à 4.9.4 (Grothendieck et
+Verdier, LNM~269, 1972), ne donne la correspondance entre morphismes de topos
+et foncteurs exacts à gauche que lorsque la catégorie d'indices a les limites
+finies, sans forme épimorphique.}\footnote{La condition (Hyp) est, mot pour mot, celle
 qu'on appelle aujourd'hui platitude relative à la topologie ; elle est ce qui
 remplace la platitude dans l'énoncé de Diaconescu lorsque la catégorie
 d'indices n'a pas les limites finies. Ces pages en donnent la formulation
@@ -1707,7 +1738,23 @@ et ne le répare pas.}
 $\widetilde{I}$ formé par les $X_{i}^{*}$, les $\mathcal{V}^{*}_{i,j}$ et les
 $\mathcal{V}_{i,j}$, pour $i,j \in I$ avec $j$ successeur de $i$, et par les
 trois types de flèches en trait plein du diagramme fondamental. Alors $X$
-s'identifie à la limite inductive de ce diagramme.}
+s'identifie à la limite inductive de ce diagramme.}\footnote{Vérifié en Lean,
+dans \texttt{lean/Grothendieck/Folder151.lean}, et l'énoncé est faux dès la
+profondeur~2, lu comme une limite inductive dans les espaces topologiques.
+Le contre-exemple est $X = \mathbb{R}^{2} \supset \mathbb{R} \times \{0\}
+\supset \{0\}$, avec des tubes quelconques contenant leurs âmes : les sept
+sommets de $\widetilde{I}$ et ses six flèches sont des inclusions
+(\texttt{piece\_subset\_of\_mem\_arrows}), et l'ensemble $\mathbb{R}^{2}$ muni de
+la topologie finale des sept sommets est la limite inductive de $\widetilde{I}$
+(\texttt{exists\_unique\_desc}). Mais cette topologie n'est pas celle du plan
+(\texttt{colimTop\_ne}) : le plan privé de l'axe vertical épointé y est ouvert
+(\texttt{isOpen\_colimTop\_U}) et n'est pas un voisinage de $0$ dans
+$\mathbb{R}^{2}$ (\texttt{not\_isOpen\_U}). Le point $0$ ne voit que l'axe
+horizontal ; son voisinage dans le plan est le tube du couple non couvrant
+$0 < 2$, qui n'entre pas dans le diagramme. L'application de comparaison est
+donc une bijection continue qui n'est pas un homéomorphisme. Ne sont pas
+formalisés : la lecture comme limite inductive homotopique, la lecture dans les
+topos, le cadre stratifié général, et la profondeur~1, où l'énoncé est vrai.}
 
 Le mot que le manuscrit emploie pour l'opération est illisible ; « au topos »
 est écrit puis barré juste avant, ce qui indique une hésitation sur la catégorie

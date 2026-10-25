@@ -292,8 +292,7 @@ cover meets the pseudolines of `Σ`. In oriented-matroid terms (rank 3, Folkman�
 the added pseudoline is a single-element extension, and its cyclic crossing order is the
 rank-2 contraction at the new element.
 
-Only the statement is here, as a `Prop`, with no proof and no `sorry`. In this form it
-follows from alternation alone: the triples through the new element are read off the
+The statement is here as a `Prop`, proved (`problem17_holds`) from alternation alone: the triples through the new element are read off the
 contraction, the others off `Σ`. What the page asks needs, in addition, the dictionary from
 pseudolines to chirotopes (the topological representation theorem) and from the cyclic order
 to the contraction, which Mathlib does not have. -/
@@ -325,6 +324,38 @@ def problem17 : Prop :=
       ∀ a b : E, N₁.χ (some a) (some b) none = s * N₂.χ (some a) (some b) none) →
     ∃ s : SignType, s ≠ 0 ∧ ∀ x y z : Option E,
       N₁.χ x y z = (if none = x ∨ none = y ∨ none = z then s else 1) * N₂.χ x y z
+
+lemma signType_eq_zero_of_eq_neg {x : SignType} (h : x = -x) : x = 0 := by
+  cases x <;> simp_all
+
+/-- Alternation: a chirotope vanishes when its first two arguments coincide. -/
+lemma Chirotope3.eq_zero₁₂ {E : Type} (N : Chirotope3 E) (a c : E) : N.χ a a c = 0 :=
+  signType_eq_zero_of_eq_neg (N.swap12 a a c)
+
+/-- Alternation: a chirotope vanishes when its last two arguments coincide. -/
+lemma Chirotope3.eq_zero₂₃ {E : Type} (N : Chirotope3 E) (a b : E) : N.χ a b b = 0 :=
+  signType_eq_zero_of_eq_neg (N.swap23 a b b)
+
+/-- Alternation: a chirotope vanishes when its first and last arguments coincide. -/
+lemma Chirotope3.eq_zero₁₃ {E : Type} (N : Chirotope3 E) (a b : E) : N.χ a b a = 0 := by
+  simpa [N.eq_zero₁₂] using N.swap23 a a b
+
+/-- Alternation: moving the first argument to the last place is an even permutation. -/
+lemma Chirotope3.eq_first {E : Type} (N : Chirotope3 E) (a b c : E) :
+    N.χ c a b = N.χ a b c := by
+  rw [N.swap12, N.swap23, neg_neg]
+
+/-- Problem 17 holds in this form, by alternation alone: the triples without the new element
+are those of `M`, those with exactly one are, up to the sign of a permutation, read off the
+contraction, and those with two or three vanish. -/
+theorem problem17_holds : problem17 := by
+  rintro E M N₁ N₂ h₁ h₂ ⟨s, hs, hc⟩
+  refine ⟨s, hs, ?_⟩
+  rintro (_ | a) (_ | b) (_ | c) <;> simp [Chirotope3.eq_zero₁₂, Chirotope3.eq_zero₂₃, Chirotope3.eq_zero₁₃]
+  · rw [N₁.eq_first, N₂.eq_first]; exact hc _ _
+  · rw [N₁.swap23, N₂.swap23, hc, mul_neg]
+  · exact hc _ _
+  · rw [h₁, h₂]
 
 end Problem17
 

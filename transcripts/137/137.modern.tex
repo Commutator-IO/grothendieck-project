@@ -1118,7 +1118,15 @@ foncteur $k$-linéaire sur $\mathcal{A}$ est une suite d'objets $B^{i}$ et de
 flèches $B^{i} \to B^{i+1}$, de composés nuls puisque
 $\operatorname{Hom}(\mathbb{C}^{i}, \mathbb{C}^{i+2}) = 0$. Autrement dit,
 $\mathbb{K}$ est la catégorie $k$-additive \emph{librement engendrée par un
-complexe de cochaînes}.
+complexe de cochaînes}.\footnote{Vérifié en Lean pour la première réalisation
+(\texttt{lean/Grothendieck/Folder137.lean}), sur un anneau commutatif $k$
+quelconque, avec pour $\mathcal{P}$ les complexes de chaînes de $k$-modules
+libres de type fini en degrés $\geqslant 0$, nuls en grand degré : la condition
+a) vaut, $\operatorname{End}(\mathbb{C}^{n}) = k \cdot \mathrm{id}$,
+$\operatorname{Hom}(\mathbb{C}^{n}, \mathbb{C}^{n+1}) = k \cdot d^{n}$ et
+$\operatorname{Hom}(\mathbb{C}^{n}, \mathbb{C}^{j}) = 0$ sinon
+(\texttt{disc\_endo}, \texttt{disc\_succ}, \texttt{disc\_zero}). La réalisation
+simpliciale n'est pas formalisée.}
 
 \subsection*{Les réalisations de $\mathbb{K}$}
 
@@ -1305,7 +1313,24 @@ $\mathcal{B}$.}
 catégorie des foncteurs $k$-linéaires $\mathcal{P} \to \mathcal{B}$ qui
 transforment les suites de $\Sigma$ en suites exactes à gauche (« $\Sigma$-exacts à gauche ») vers $\mathcal{B}^{\bullet}$, est pleinement fidèle ;
 si tout morphisme de $\mathcal{B}$ a un $\Sigma$-noyau, c'est une
-équivalence.}
+équivalence.}\footnote{Vérifié en Lean (\texttt{lean/Grothendieck/Folder137.lean}),
+pour $k$ commutatif quelconque, $\mathcal{P}$ formée des complexes de $k$-modules
+libres de type fini en degrés $\geqslant 0$, nuls en grand degré, et $\Sigma$ des
+suites exactes degré par degré ; les foncteurs $\Sigma$-exacts à gauche sont ceux
+qui envoient chaque suite de $\Sigma$ sur un diagramme de noyau. La pleine
+fidélité vaut pour toute catégorie $k$-linéaire $\mathcal{B}$, sans noyaux ni
+platitude (\texttt{ρFullyFaithful}), ce qui répond, pour cette moitié, au doute
+de la marge de la page 52 ; la démonstration ne suit pas la récurrence sur la
+longueur des pages 53 et 54, mais écrit tout $L$ comme noyau de la suite
+$0 \to L \to I(L) \to L[1] \to 0$ de $\Sigma$, $I(L)$ le cône de l'identité,
+somme finie de disques (\texttt{isSigma\_cone}). L'équivalence vaut aussi
+(\texttt{ρEquivalence}, avec \texttt{σFun} et \texttt{σIso}), avec
+$\sigma(C^{\bullet})(L) = \operatorname{Hom}^{\bullet}_{k}(L^{\bullet},
+C^{\bullet})$ construit par noyaux, mais elle demande à $\mathcal{B}$, outre les
+noyaux, des sommes directes finies, que la page ne nomme pas
+($F(\mathbb{C}^{0} \oplus \mathbb{C}^{0})$ en est une). Ne sont pas formalisés
+la forme karoubienne avec une classe $\Sigma$ sur $\mathcal{B}$, la partie b),
+les propositions 2 et 3, ni la version cosimpliciale.}
 \item[b)] \emph{Il induit une équivalence entre les foncteurs qui
 transforment $\Sigma$ en $\Sigma$ et les $\Sigma$-résolutions.}
 \end{itemize}
@@ -1863,7 +1888,27 @@ $\otimes$ et $\Gamma^{*}$ avec toutes les propriétés envisagées ; une
 catégorie additive $\mathbf{P}_{1}$ munie de $\otimes$ et $\Gamma^{*}$ avec
 les structures décrites est une $\otimes$-pd-catégorie.} « Les deux notions
 sont donc équivalentes » — c'est affirmé, à partir des deux constructions
-ci-dessus, non démontré en détail. Les versions $k$-linéaires demandent
+ci-dessus, non démontré en détail.\footnote{Le cœur de cette équivalence est
+vérifié en Lean (\texttt{lean/Grothendieck/Folder137.lean}), et plus
+généralement : pour toute catégorie $C$ de flèches de degré un, sans additivité
+ni produit tensoriel. Une structure $(\Gamma^{n}, \alpha_{p,q}, \Gamma^{1} \simeq
+\mathrm{id})$ satisfaisant le carré de la page 80 et les conditions d'unité est
+une comonade graduée par le monoïde $(\mathbf{N}, \cdot)$, et $\mathbf{P}_{p}(X,
+Y) = \operatorname{Hom}(\Gamma^{p}X, Y)$, avec la composition $g \circ
+\Gamma^{q}(f) \circ \alpha_{q,p}$, en est la catégorie de Kleisli
+(\texttt{PDCategory.toPoly}, \texttt{PDCategory.representation}), additive en la
+variable extérieure quand $C$ est préadditive (\texttt{PDCategory.toPoly\_comp\_add}).
+Réciproquement, une catégorie polynomiale dont les $\mathbf{P}_{n}(X, -)$ sont
+représentables redonne $\Gamma$ et $\alpha$
+(\texttt{PolynomialCategory.Representation.toPD}), et les deux allers-retours
+rendent $\Gamma$, $\alpha$ et $\Gamma^{1} \simeq \mathrm{id}$ exactement, et
+$\mathbf{P}$ à isomorphisme près (\texttt{PDCategory.toPD\_representation\_Γ\_map},
+\texttt{PDCategory.toPD\_representation\_α},
+\texttt{PDCategory.toPD\_representation\_ε},
+\texttt{PolynomialCategory.Representation.toPDToPolyIso}). Ne sont pas formalisés les produits et
+l'additivité (axiomes a) à c)), les multidegrés et l'homogénéité (d)), les
+axiomes f) et g), $\mathbf{1} \simeq \Gamma^{q}(\mathbf{1})$, les produits
+tensoriels stricts, la formule exponentielle, ni l'exemple des $k$-modules.} Les versions $k$-linéaires demandent
 $k \to \operatorname{End}(\mathrm{id}_{\mathbf{P}_{1}})$ et l'homogénéité
 $f \circ (\lambda_{1}, \ldots, \lambda_{r}) = \lambda_{1}^{\nu_{1}} \cdots
 \lambda_{r}^{\nu_{r}} f$ pour $f \in \mathbf{P}_{\nu}$, $\lambda \in k^{r}$

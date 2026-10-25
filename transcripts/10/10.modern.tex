@@ -1280,7 +1280,19 @@ par une extension quadratique $Z$, la suite exacte
 \xrightarrow{\ N_{Z/k}\ } \mathbf{G}_{m} \longrightarrow 0
 \]
 donne que le noyau de $H^{2}(k,G) \to H^{2}(k, \underline{Z}^{*})$ est un
-quotient de $H^{1}(k, \mathbf{G}_{m})$, nul par Hilbert 90. Le caractère
+quotient de $H^{1}(k, \mathbf{G}_{m})$, nul par Hilbert 90.\footnote{Vérifié
+en Lean à chaque niveau galoisien fini (lean/Grothendieck/Folder10.lean,
+\texttt{torus\_H2\_injective}, \texttt{norm\_one\_torus\_H2\_injective},
+\texttt{norm\_one\_torus\_H2\_injective\_quadratic}). Pour $L/k$ galoisienne
+finie contenant $Z$, de groupe $\Gamma$, la suite $1 \to G(L) \to (Z
+\otimes_{k} L)^{*} \to L^{*} \to 1$, la norme à droite, et le théorème 90 de
+Hilbert de mathlib rendent injective $H^{2}(\Gamma, G(L)) \to H^{2}(\Gamma, (Z
+\otimes_{k} L)^{*})$, et, par Shapiro, $H^{2}(\Gamma, G(L)) \to
+H^{2}(\operatorname{Gal}(L/Z), L^{*})$. L'énoncé de la page tient donc à tout
+niveau fini, cas déployé compris. Ne sont pas formalisés l'identification de
+ce dernier groupe à $\operatorname{Br}(L/Z)$, le passage à la limite sur $L$,
+ni la conclusion tannakienne, que le caractère numérique détermine
+$\mathcal{M}$ : mathlib n'a ni catégories tannakiennes, ni gerbes, ni liens.} Le caractère
 numérique détermine donc $\mathcal{M}$ dans ce cas. L'\emph{Exemple 2},
 sur $G' = \operatorname{Ker}(n \cdot \mathrm{id}_{G})$, est annulé par de
 longues diagonales et le tapuscrit s'interrompt là.
@@ -3698,7 +3710,18 @@ $k+1 \geqslant 2$ ; et comme pour $k = 0$ on retrouve le cas précédent, il est
 naturel de poser $e_{n,1} = \sigma_{n}$.
 
 \begin{quote}
-\textbf{Proposition.} Les représentations indécomposables de $G = k \rtimes
+\textbf{Proposition.}\footnote{Pour $p = 1$ (le sous-groupe de Borel de
+$\mathrm{PGL}_{2}$), cette classification est imprimée chez H.-L. Huang et
+Y. Yang, « The Green rings of minimal Hopf quivers », \emph{Proc. Edinburgh
+Math. Soc.} 59 (2016), no~1, 107--141 (arXiv:1401.1885, 2014), § 4 : leur
+algèbre de Hopf $kA(1)$ du carquois linéaire infini (lemme~4.1(1), $q = 1$)
+est l'algèbre des fonctions de $\mathbf{G}_{a} \rtimes \mathbf{G}_{m}$, action
+de poids $1$, sur un corps algébriquement clos de caractéristique nulle, et
+leurs $V(i, l)$ (§ 4.2), chaînes de poids $i, \ldots, i + l$, sont la liste
+complète des comodules indécomposables, nos $e_{i,l+1}$. C'est le même énoncé
+dans ce cas. Le cas $p \geqslant 2$ et la formule du dual n'y sont pas ; ils
+se déduisent du cas $p = 1$ en regraduant, mais nous ne les avons trouvés
+écrits nulle part.} Les représentations indécomposables de $G = k \rtimes
 k^{*}$ sont, à équivalence près, les
 \[
 e_{n,k} , \qquad n \in \mathbf{Z} , \quad k \geqslant 1 ,
@@ -3817,7 +3840,15 @@ sans hypothèse sur $p$ ni sur la caractéristique. L'anneau $R(G) =
 classification et le théorème de Krull--Schmidt, absents de mathlib.}
 
 \begin{quote}
-\textbf{Proposition (page 197).} $R(G)$ est l'algèbre de polynômes sur
+\textbf{Proposition (page 197).}\footnote{Pour $p = 1$, c'est le
+théorème~4.8 de Huang et Yang (\emph{Proc. Edinburgh Math. Soc.} 59 (2016),
+107--141, cas $q = 1$) : l'anneau de Green est $\mathbf{Z}[x, x^{-1}, y]$, avec
+$x = [V(1,0)]$ et $y = [V(0,1)]$, c'est-à-dire $\mathbf{Z}[\mathbf{Z}][\xi]$
+avec $\xi = e_{0,2}$ ; leur corollaire~4.6 donne la règle de Clebsch--Gordan
+$V(s,l) \otimes V(t,m) = \bigoplus_{i=0}^{l} V(s+t+i, l+m-2i)$, dont la
+décomposition de $\xi \otimes e_{n,k}$ donnée plus haut est le cas $l = 1$. Même énoncé
+pour $p = 1$ ; pour $p \geqslant 2$, et pour $\check{\xi}$, nous n'avons pas
+trouvé de source imprimée.} $R(G)$ est l'algèbre de polynômes sur
 $\Lambda = \mathbf{Z}[\Gamma]$, $\Gamma = \mathbf{Z}$, engendrée par
 $\xi = e_{0,2}$ ; l'augmentation de $\Lambda$ est l'augmentation usuelle,
 \[

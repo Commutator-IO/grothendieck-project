@@ -735,7 +735,15 @@ des positions non supercritiques vers les ordres cycliques de $\widetilde{I}$,
 dont « il ne devrait pas être difficile de montrer » qu'elle est
 injective.\footnote{Rien, dans le dossier, ne le montre. En termes d'aujourd'hui,
 cette application associe à une position l'ordre dans lequel elle rencontre les
-pseudo-droites orientées ; nous ne savons pas si cet ordre la détermine.} Il
+pseudo-droites orientées ; nous ne savons pas si cet ordre la détermine.}\footnote{En partie vérifié en
+Lean, dans \texttt{lean/Grothendieck/Folder154.lean} (\texttt{problem17\_holds}),
+sous la forme qu'elle prend pour les matroïdes orientés de rang~3 : deux
+extensions à un élément d'un même chirotope qui ont, au signe près, la même
+contraction en l'élément ajouté coïncident à la réorientation de cet élément
+près. La traduction de l'énoncé de la page dans ces termes n'est pas formalisée :
+elle demande le passage des pseudo-droites aux chirotopes (le théorème de
+représentation topologique) et celui de l'ordre cyclique à la contraction, que
+Mathlib n'a pas.} Il
 resterait, pour bien faire, à voir (1) comment se raccordent les polygones
 $\widehat{\operatorname{Pol}}$ le long d'une flèche de spécialisation et (2)
 comment lire toute la structure de graphe orienté — plongement, poids des arêtes
@@ -2390,7 +2398,23 @@ arêtes, et l'incidence est la relation de spécialisation.}\footnote{Page 153.
 La justification (l'indépendance des choix aux différents sommets) est la
 nôtre ; la page donne l'énoncé et les deux nombres. Elle ajoute « Produit des
 diagonales d'un polygone convexe (\ldots) $2\nu$ », que nous ne savons pas
-interpréter.} La même page pose une question qu'elle laisse ouverte :
+interpréter.}\footnote{Vérifié en Lean, dans
+\texttt{lean/Grothendieck/Folder154.lean}, dans le modèle combinatoire de cette
+édition : une position y est une signature de cocircuits au sens de Las Vergnas,
+valide droite par droite. L'énoncé tient, et plus généralement : pour tout
+$\nu$ et sans les axiomes d'arrangement. Une droite valide porte au plus un zéro
+d'une position (\texttt{IsPosition.eq\_of\_zero\_on\_line}), tout vecteur de
+signes qui généralise une position en est une (\texttt{IsPosition.of\_spec}), et
+la restriction aux $\nu$ zéros de $D$ est une bijection croissante des
+générisations de $D$ sur $\lbrace -, 0, + \rbrace^{\nu}$ (\texttt{genEquiv},
+\texttt{genEquiv\_spec\_iff}), identifié au treillis des faces de
+$[-1, 1]^{\nu}$ (\texttt{cubeFace\_subset\_iff},
+\texttt{cubeFace\_eq\_singleton}). D'où $3^{\nu}$ générisations, $2^{\nu}$
+stables et $\nu 2^{\nu-1}$ sous-stables (\texttt{card\_gen},
+\texttt{card\_gen\_stable}, \texttt{card\_gen\_substable}). Ne sont pas
+formalisés : les pseudo-droites topologiques (le théorème de Folkman et
+Lawrence), la tension avec la page 150 pour $\nu \geqslant 3$, et la question
+de la page 153.} La même page pose une question qu'elle laisse ouverte :
 \emph{toute position principale — donc critique — qui passe par $S \cap D$
 est-elle une spécialisation de $D$ ?}
 

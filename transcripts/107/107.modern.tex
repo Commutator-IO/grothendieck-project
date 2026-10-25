@@ -802,7 +802,22 @@ d'homotopies simpliciales
 k : \varphi i \longrightarrow g, \qquad h : p \varphi \longrightarrow g',
 \]
 et tout revient à pouvoir les choisir \emph{compatibles} à $i$ et à $p$,
-c'est-à-dire avec $p \circ k = h \circ (i \otimes J)$ ; si $Y'$ est l'objet
+c'est-à-dire avec $p \circ k = h \circ (i \otimes J)$\footnote{Vérifié en
+Lean sous cette forme stricte (lean/Grothendieck/Folder107.lean,
+\texttt{rectification}, \texttt{compatible\_of\_rectification},
+\texttt{rectification\_iff}, \texttt{rectification\_of\_isTerminal},
+\texttt{rectification\_modelCategory}) : le critère tient tel que la page 22
+l'énonce. Des homotopies compatibles donnent $\overline{\varphi}$ et une
+homotopie $\varphi \sim \overline{\varphi}$ qui prolonge $k$ et relève $h$ ;
+réciproquement, un tel $\overline{\varphi}$ fournit un couple compatible ; et
+pour $Y'$ final la condition est automatique. Le seul ingrédient homotopique
+est l'extension des homotopies le long de $i \otimes J$ au-dessus de $p$, que
+l'axiome de relèvement des catégories de modèles de mathlib donne dès que la
+flèche de coin $X \otimes J \sqcup_{X} X' \to X' \otimes J$ est une
+cofibration triviale ; l'existence de tels cylindres est prise en hypothèse.
+Ne sont pas formalisés la version de la marge de la page 20, à homotopie près
+relativement aux extrémités, ni le contre-exemple de la fibration des chemins
+sur $S^{1}$.} ; si $Y'$ est l'objet
 final, c'est automatique.\footnote{« by assumption » et « simplicial » sont
 ajoutés au-dessus de la ligne ; la lettre de la première homotopie est tracée
 comme un $h$, mais les diagrammes de cette page et de la page 23 la nomment
@@ -913,9 +928,12 @@ $X_{i}$ dans $\mathrm{Hot}$, et $\widehat{\Delta} \to \mathrm{Hot}$ ne commute
 pas aux limites inductives dénombrables filtrantes, même le long de
 monomorphismes.\footnote{Ce paragraphe est entièrement le nôtre : le dossier
 s'arrête sur la question. La suite exacte est de J. Milnor (« On axiomatic
-homology theory », 1962) ; la surjectivité de $\pi_{0}$ de la limite d'une
+homology theory », \emph{Pacific J. Math.} 12 (1962), la suite exacte en
+$\varprojlim^{1}$ d'un télescope) ; la surjectivité de $\pi_{0}$ de la limite d'une
 tour de fibrations vers la limite des $\pi_{0}$ est chez Bousfield et Kan
-(1972). Une flèche $X_{\infty} \to Y$ nulle sur chaque $X_{i}$ sans l'être
+(\emph{Homotopy Limits, Completions and Localizations}, LNM 304, 1972,
+chap.~IX). Ces deux textes répondent à la question de la page ; ils sont cités
+de mémoire, sans avoir été relus pour cette lecture. Une flèche $X_{\infty} \to Y$ nulle sur chaque $X_{i}$ sans l'être
 est l'analogue, pour une suite, de ce qu'on appelle une application fantôme.
 L'exemple ne dit pas que $\mathrm{Hot}$ manque de limites inductives
 dénombrables, seulement que $X_{\infty}$ n'en est pas une ; le dossier ne
