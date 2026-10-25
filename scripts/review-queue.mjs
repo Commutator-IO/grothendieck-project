@@ -478,8 +478,8 @@ for (const raw of body.split('\n')) {
   const sampled = !fromMoved && (sub.startsWith('1.') || sub.startsWith('2.'));
   if (box[1] !== ' ' && !sampled) continue;
 
-  // #90 — the hypotheses a « shown false as stated » verdict rests on: read on
-  // the facsimile before the counterexample is taken to refute the page.
+  // #90 — the hypotheses a counterexample of the edition's is set against: read
+  // on the facsimile before the verdict is taken to hold of the page.
   if (/^Hypotheses behind/.test(section)) {
     const hyp = /^\*\*(\d+(?:-\d+)?)(?:,\s*pp?\.\s*([\d–, -]+))?:\*\*\s*(.*)$/.exec(text);
     if (hyp && isCote(hyp[1])) {
@@ -494,12 +494,12 @@ for (const raw of body.split('\n')) {
         kind: 'hypothesis',
         cote: hyp[1],
         page: ps[0] ?? null,
-        prompt: `Is the statement the edition refutes in folder ${hyp[1]} written on the page with exactly these hypotheses?`,
+        prompt: `Is this statement of folder ${hyp[1]} written on the page with exactly these hypotheses?`,
         choices: [C('Yes, read as on the page', 'right'), C('A hypothesis is missing from the reading', 'other', 'Which, and where on the page'), C('A word is misread', 'other', 'Which word, and what the page has')],
         hint: `${ps.length ? facsimileAt(ps) : `Leaf through the facsimile of folder ${hyp[1]}`}: read the statement, the lines just before it and the margins.`,
         claim: `${hyp[3][0].toUpperCase()}${hyp[3].slice(1)}`,
         details: text.replace(/\*\*/g, ''),
-        context: 'A finding says this statement is false as stated, by a counterexample of the edition’s own (#90).',
+        context: 'A finding’s verdict on this statement rests on a counterexample of the edition’s own, which a misread hypothesis would make beside the point (#90).',
       }, null);
       continue;
     }

@@ -48,7 +48,7 @@ const KIND_NAME: Record<ReviewKind, string> = {
   letter: 'Letter',
   argument: 'Edition’s argument',
   reference: 'Reference',
-  hypothesis: 'Hypothesis of a refuted statement',
+  hypothesis: 'Hypothesis behind a counterexample',
 };
 
 function useSnippets(): Record<string, Snippet> | null {
