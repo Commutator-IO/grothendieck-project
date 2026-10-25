@@ -49,8 +49,8 @@ réciproque »), together with its translation into frames.
 * **(G) against Isbell's hypothesis.** Isbell (Proc. AMS 81 (1981), Th. 4) proves
   the same statement under `HypI X`: every nonempty closed set has a point with
   a core-compact neighbourhood in it (`WayBelowOpen`, `CoreCompact`). For sober
-  spaces (I) implies (G), but not conversely: the counterexample of MathOverflow
-  answer 516370 (to question 516361) is formalised here. The space `K` has a
+  spaces (I) implies (G), but not conversely: the counterexample of a MathOverflow
+  answer to question 516361 is formalised here. The space `K` has a
   point `bot` whose only neighbourhood is `K`, a point `p`, and isolated points
   `d n m`, the neighbourhoods of `p` containing all rows `{n} × ℕ` for `n` large.
   It is scattered (`K.scattered`), hence sober (`Scattered.quasiSober`,
@@ -648,7 +648,7 @@ theorem not_hypI_pi {ι : Type*} [Infinite ι] : ¬ HypI (ι → K) := by
     ((continuous_apply j).comp continuous_subtype_val) (fun k => update_self ..) hN
 
 /-- (G) is strictly weaker than (I) for sober spaces: `ℕ → K` is sober and satisfies (G) but
-not (I) (the counterexample of MathOverflow answer 516370). -/
+not (I) (the counterexample of a MathOverflow answer to question 516361). -/
 theorem hypG_not_hypI :
     ∃ (X : Type) (_ : TopologicalSpace X), QuasiSober X ∧ T0Space X ∧ HypG X ∧ ¬ HypI X :=
   ⟨ℕ → K, inferInstance, inferInstance, inferInstance, hypG_pi fun _ => K.scattered,
