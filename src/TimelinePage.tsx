@@ -368,6 +368,171 @@ function Works() {
   );
 }
 
+
+/* ---------- the works as volumes ---------- */
+
+// Words per page, so that a typed or printed page weighs more than a handwritten
+// one. Handwritten and typed are measured on the transcriptions (median over
+// 107 handwritten folders, mean over the 3 typescript folders transcribed);
+// printed is an estimate for the IHÉS Publications and the Lecture Notes, not
+// a measurement.
+const WPP = { hand: 140, typed: 200, printed: 450 } as const;
+type VolumeKind = keyof typeof WPP;
+type VolumeStatus = 'printed' | 'edited' | 'unedited' | 'bnf';
+type Volume = { title: string; short?: string; years: string; kind: VolumeKind; status: VolumeStatus; pages: number; cotes?: string[]; note?: string };
+
+const pagesOf = (cotes: string[]) => cotes.reduce((a, c) => a + (COTES.find((k) => k.id === c)?.pages ?? 0), 0);
+const range = (p: string, a: number, b: number) => Array.from({ length: b - a + 1 }, (_, i) => `${p}${a + i}`);
+
+const VOLUMES: Volume[] = ([
+  { title: 'EGA I', years: '1960', kind: 'printed', status: 'printed', pages: 228, note: 'Publ. Math. IHÉS 4' },
+  { title: 'SGA 1', years: '1960–61', kind: 'printed', status: 'printed', pages: 447, note: 'LNM 224 (1971)' },
+  { title: 'EGA II', years: '1961', kind: 'printed', status: 'printed', pages: 222, note: 'Publ. Math. IHÉS 8' },
+  { title: 'EGA III', years: '1961–63', kind: 'printed', status: 'printed', pages: 258, note: 'Publ. Math. IHÉS 11, 17' },
+  { title: 'SGA 2', years: '1962', kind: 'printed', status: 'printed', pages: 290, note: 'approximate' },
+  { title: 'SGA 3', years: '1962–64', kind: 'printed', status: 'printed', pages: 1750, note: 'LNM 151–153, approximate' },
+  { title: 'SGA 4', years: '1963–64', kind: 'printed', status: 'printed', pages: 1580, note: 'LNM 269, 270, 305, approximate' },
+  { title: 'EGA IV', years: '1964–67', kind: 'printed', status: 'printed', pages: 1106, note: 'Publ. Math. IHÉS 20, 24, 28, 32' },
+  { title: 'SGA 5', years: '1965–66', kind: 'printed', status: 'printed', pages: 480, note: 'LNM 589, approximate' },
+  { title: 'SGA 6', years: '1966–67', kind: 'printed', status: 'printed', pages: 700, note: 'LNM 225, approximate' },
+  { title: 'SGA 7', years: '1967–69', kind: 'printed', status: 'printed', pages: 960, note: 'LNM 288, 340, approximate' },
+  { title: 'La Longue Marche', short: 'Longue Marche', years: '1981', kind: 'hand', status: 'unedited', pages: 0, cotes: range('140-', 1, 4), note: '§ 1–37 edited by Malgoire (1995), the rest unedited' },
+  { title: 'Teichmülleries', years: '1981–83', kind: 'hand', status: 'unedited', pages: 0, cotes: ['144'] },
+  { title: 'À la poursuite des champs', short: 'Poursuite des champs', years: '1983', kind: 'typed', status: 'edited', pages: 0, cotes: range('134-', 2, 8), note: 'volume I edited by Maltsiniotis (2022)' },
+  { title: "Esquisse d'un programme", short: 'Esquisse', years: '1984', kind: 'printed', status: 'edited', pages: 44, note: 'as printed in Geometric Galois Actions 1 (1997)' },
+  { title: 'Vers une géométrie des formes', short: 'Géométrie des formes', years: '1986', kind: 'hand', status: 'unedited', pages: 0, cotes: range('156-', 1, 9) },
+  { title: 'Les Dérivateurs', short: 'Dérivateurs', years: '1990–91', kind: 'hand', status: 'edited', pages: 0, cotes: range('157-', 1, 5), note: 'edited by Künzer, Malgoire and Maltsiniotis' },
+  { title: 'Géométrie élémentaire schématique', short: 'Géom. élém. schématique', years: '1992', kind: 'hand', status: 'bnf', pages: 1098, note: 'BnF, box 3: 549 leaves written on both sides' },
+  { title: 'Trialité', years: '1995', kind: 'hand', status: 'bnf', pages: 89, note: 'BnF, box 43: 89 leaves (counted as pages)' },
+] as Volume[]).map((v) => (v.cotes ? { ...v, pages: pagesOf(v.cotes) } : v));
+
+const VOLUME_STYLE: Record<VolumeStatus, { fill: string; stroke: string; dash?: string; label: string }> = {
+  printed: { fill: 'var(--color-ink-300)', stroke: 'var(--color-ink-500)', label: 'Printed by him (EGA, SGA)' },
+  edited: { fill: 'var(--color-brand-600)', stroke: 'var(--color-brand-700)', label: 'Manuscript, edited (in whole or part)' },
+  unedited: { fill: '#fff', stroke: 'var(--color-brand-600)', label: 'Manuscript, unedited (Montpellier)' },
+  bnf: { fill: '#fff', stroke: 'var(--color-brand-600)', dash: '3 2', label: 'Manuscript, unedited and not transcribed (BnF)' },
+};
+
+function Volumes() {
+  const [sel, setSel] = useState<Volume | null>(null);
+  const W = 900;
+  const PAD = 12;
+  const SHELF = 150;
+  const BOOK = 118;
+  const GAP = 2;
+  const PER_PX = 2000; // words per pixel of thickness
+  const words = (v: Volume) => v.pages * WPP[v.kind];
+  // Fill shelves left to right in reading order; a book never splits.
+  const placed: { v: Volume; x: number; w: number; row: number }[] = [];
+  let x = PAD;
+  let row = 0;
+  for (const v of VOLUMES) {
+    const w = Math.max(3, words(v) / PER_PX);
+    if (x + w > W - PAD) {
+      row += 1;
+      x = PAD;
+    }
+    placed.push({ v, x, w, row });
+    x += w + GAP;
+  }
+  const H = (row + 1) * SHELF + 8;
+  const fmt = (n: number) => n.toLocaleString('en-US');
+  return (
+    <section className="mt-12">
+      <H2 id="volumes">The works as volumes</H2>
+      <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
+        EGA, SGA and the long manuscripts as books on a shelf, in the order they were written. Each
+        spine's thickness is proportional to an estimate of its length in words, not in pages: a
+        handwritten page of his carries about {WPP.hand} words, a typed page about {WPP.typed}, a
+        printed page of EGA or SGA about {WPP.printed}. The first two figures are measured on the
+        transcriptions; the printed one is an estimate, and the SGA page counts are approximate.
+        Hover a spine for its pages and words.
+      </p>
+      <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[12px] text-ink-600">
+        {(Object.keys(VOLUME_STYLE) as VolumeStatus[]).map((k) => (
+          <span key={k} className="inline-flex items-center gap-1.5">
+            <svg width="12" height="14" aria-hidden="true">
+              <rect x="1" y="1" width="10" height="12" rx="1.5" fill={VOLUME_STYLE[k].fill} stroke={VOLUME_STYLE[k].stroke} strokeWidth="1.5" strokeDasharray={VOLUME_STYLE[k].dash} />
+            </svg>
+            {VOLUME_STYLE[k].label}
+          </span>
+        ))}
+      </div>
+      <div className="mt-3 overflow-x-auto" onMouseLeave={() => setSel(null)}>
+        <svg
+          viewBox={`0 0 ${W} ${H}`}
+          className="w-full min-w-[640px] rounded-[var(--radius-card)] border border-ink-200 bg-white"
+          role="img"
+          aria-label="EGA, SGA and the long manuscripts as book spines whose thickness is proportional to their length in words"
+        >
+          {Array.from({ length: row + 1 }, (_, r) => (
+            <line key={r} x1={PAD - 4} x2={W - PAD + 4} y1={r * SHELF + 14 + BOOK + 1} y2={r * SHELF + 14 + BOOK + 1} stroke="var(--color-ink-400)" strokeWidth={2} />
+          ))}
+          {placed.map(({ v, x: bx, w, row: r }) => {
+            const st = VOLUME_STYLE[v.status];
+            const y0 = r * SHELF + 14;
+            const on = sel === null || sel === v;
+            return (
+              <g key={v.title} opacity={on ? 1 : 0.35} onMouseEnter={() => setSel(v)} style={{ cursor: 'pointer' }}>
+                <rect x={bx} y={y0} width={w} height={BOOK} rx={2} fill={st.fill} stroke={st.stroke} strokeWidth={1.5} strokeDasharray={st.dash} />
+                {w >= 13 && (
+                  <text
+                    transform={`translate(${bx + w / 2 + 3.5} ${y0 + BOOK - 6}) rotate(-90)`}
+                    style={{ fontSize: 10, fill: v.status === 'edited' ? '#fff' : 'var(--color-ink-800)', fontWeight: 600 }}
+                  >
+                    {(() => { const t = v.short ?? v.title; return t.length > 20 ? t.slice(0, 19) + '…' : t; })()}
+                  </text>
+                )}
+                <text x={bx + w / 2} y={y0 + BOOK + 14} textAnchor="middle" className="tabular" style={{ fontSize: 9, fill: 'var(--color-ink-500)' }}>
+                  {w >= 22 ? v.years.slice(0, 4) : ''}
+                </text>
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+      <p className="mt-2 min-h-[2.5em] text-[12.5px] leading-relaxed text-ink-600">
+        {sel ? (
+          <>
+            <span className="font-semibold text-ink-900">{sel.title}</span> ({sel.years}) · {fmt(sel.pages)} {sel.kind === 'printed' ? 'printed' : sel.kind === 'typed' ? 'typed' : 'handwritten'} pages · about {fmt(Math.round(words(sel) / 1000) * 1000)} words
+            {sel.cotes && <> · folders {sel.cotes[0]}–{sel.cotes[sel.cotes.length - 1].split('-').pop()}</>}
+            {sel.note && <> · {sel.note}</>}
+          </>
+        ) : (
+          <span className="text-ink-400">Hover a spine for the work, its pages and its estimated length.</span>
+        )}
+      </p>
+      <details className="mt-2 text-[12.5px] text-ink-600">
+        <summary className="cursor-pointer text-ink-500 hover:text-brand-700">The figures as a table</summary>
+        <table className="mt-2 w-full max-w-[52em] border-collapse">
+          <thead>
+            <tr className="text-left text-ink-500">
+              <th className="py-1 pr-3 font-semibold">Work</th>
+              <th className="py-1 pr-3 font-semibold">Years</th>
+              <th className="py-1 pr-3 text-right font-semibold">Pages</th>
+              <th className="py-1 pr-3 font-semibold">Kind</th>
+              <th className="py-1 pr-3 text-right font-semibold">Words (est.)</th>
+              <th className="py-1 font-semibold">Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            {VOLUMES.map((v) => (
+              <tr key={v.title} className="border-t border-ink-100">
+                <td className="py-1 pr-3 text-ink-800">{v.title}</td>
+                <td className="tabular py-1 pr-3">{v.years}</td>
+                <td className="tabular py-1 pr-3 text-right">{fmt(v.pages)}</td>
+                <td className="py-1 pr-3">{v.kind}</td>
+                <td className="tabular py-1 pr-3 text-right">{fmt(Math.round(words(v) / 1000) * 1000)}</td>
+                <td className="py-1 text-ink-500">{[VOLUME_STYLE[v.status].label, v.note].filter(Boolean).join(' · ')}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </details>
+    </section>
+  );
+}
+
 /* ---------- figure 1: the ranges and the dots ---------- */
 
 /**
@@ -853,6 +1018,7 @@ export function TimelinePage() {
 
         <Ranges />
         <Works />
+        <Volumes />
         <Strips />
         <Calendar />
         <Register />
