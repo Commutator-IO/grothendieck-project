@@ -284,4 +284,48 @@ theorem card_gen_substable (hD : A.IsPosition σD) :
 
 end Arrangement
 
+/-! ## Problem 17 of `docs/problems/article.tex`: an added pseudoline and its crossing order (statement only)
+
+Page 18 asserts, « il ne devrait pas être difficile de montrer », that the position of an
+added pseudoline is determined by the antipody-compatible cyclic order in which its double
+cover meets the pseudolines of `Σ`. In oriented-matroid terms (rank 3, Folkman–Lawrence),
+the added pseudoline is a single-element extension, and its cyclic crossing order is the
+rank-2 contraction at the new element.
+
+Only the statement is here, as a `Prop`, with no proof and no `sorry`. In this form it
+follows from alternation alone: the triples through the new element are read off the
+contraction, the others off `Σ`. What the page asks needs, in addition, the dictionary from
+pseudolines to chirotopes (the topological representation theorem) and from the cyclic order
+to the contraction, which Mathlib does not have. -/
+
+section Problem17
+
+/-- Rank-3 chirotopes: alternating, not identically zero, and satisfying the three-term
+Grassmann–Plücker relations (Björner–Las Vergnas–Sturmfels–White–Ziegler, Def. 3.5.3). -/
+structure Chirotope3 (E : Type) where
+  χ : E → E → E → SignType
+  nonzero : ∃ a b c, χ a b c ≠ 0
+  swap12 : ∀ a b c, χ b a c = -χ a b c
+  swap23 : ∀ a b c, χ a c b = -χ a b c
+  gp : ∀ x₁ x₂ y₁ y₂ y₃ y₄ : E,
+    let s : Fin 4 → SignType := ![χ x₁ x₂ y₁ * χ y₂ y₃ y₄, -(χ x₁ x₂ y₂ * χ y₁ y₃ y₄),
+      χ x₁ x₂ y₃ * χ y₁ y₂ y₄, -(χ x₁ x₂ y₄ * χ y₁ y₂ y₃)]
+    (∀ i, s i = 0) ∨ ((∃ i, s i = 1) ∧ (∃ i, s i = -1))
+
+/-- `N` is a single-element extension of `M`, the new element being `none`. -/
+def IsExtension {E : Type} (M : Chirotope3 E) (N : Chirotope3 (Option E)) : Prop :=
+  ∀ a b c : E, N.χ (some a) (some b) (some c) = M.χ a b c
+
+/-- Problem 17 (oriented-matroid form): two extensions with the same contraction at the new
+element, up to a global sign, agree up to reorientation of the new element. -/
+def problem17 : Prop :=
+  ∀ (E : Type) (M : Chirotope3 E) (N₁ N₂ : Chirotope3 (Option E)),
+    IsExtension M N₁ → IsExtension M N₂ →
+    (∃ s : SignType, s ≠ 0 ∧
+      ∀ a b : E, N₁.χ (some a) (some b) none = s * N₂.χ (some a) (some b) none) →
+    ∃ s : SignType, s ≠ 0 ∧ ∀ x y z : Option E,
+      N₁.χ x y z = (if none = x ∨ none = y ∨ none = z then s else 1) * N₂.χ x y z
+
+end Problem17
+
 end Grothendieck.Folder154

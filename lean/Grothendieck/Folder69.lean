@@ -3,6 +3,7 @@ import Mathlib.GroupTheory.GroupAction.Quotient
 import Mathlib.Combinatorics.SimpleGraph.Maps
 import Mathlib.Data.Fintype.Perm
 import Mathlib.Data.Fin.VecNotation
+import Mathlib.GroupTheory.SpecificGroups.Quaternion
 
 /-!
 # Folder 69, pages 25–26: the automorphisms of the 27-line graph fixing a triangle
@@ -356,5 +357,39 @@ theorem card_aut : Nat.card {f : C ≃g C // ∀ v, f v ∈ t ↔ v ∈ t} = 115
     exact Bool.eq_iff_iff.2 this
   · change meets (σ.1 u) (σ.1 v) = true ↔ meets u v = true
     rw [σ.2.1 u v]
+
+/-! ## Problem 18 of `docs/problems/article.tex`: the group of a marked triangle (statement only)
+
+Pages 25 and 26 describe `Aut(C, t)` as an extension of `𝔖_t × 𝔖_{V*}` by a group `Ψ̃` of
+order 32, the Baer product of the three pull-backs of the quaternion group `Q₈ = Ṽ` along the
+projections of `Ψ(V, t) = Ker(V^t → V)`. Concretely, `Ψ̃` is the group of triples
+`(q₁, q₂, q₃)` of quaternions whose product is central (so that their images in `V = Q₈/{±1}`
+sum to zero), modulo the central triples `(ε₁, ε₂, ε₃)` with `ε₁ε₂ε₃ = 1`.
+
+Only the statement is here, as a `Prop`, with no proof and no `sorry`. The order 1152 is
+proved above (`card_Wt`); the rest of the page (the reconstruction of the graph from
+`(t, V, P̃)`, the characterisation of `Ψ̃` by the anisotropy conditions, the equivalence of
+categories) is not formalised. -/
+
+section Problem18
+
+/-- The quaternion group of order 8. -/
+abbrev Q8 := QuaternionGroup 2
+
+/-- Problem 18 (group part): there is a surjection `Wt → 𝔖₃ × 𝔖₃` whose kernel is the Baer
+product of the three pull-backs of `Q₈`, presented as the triples with central product
+modulo the central triples of product one. -/
+def problem18 : Prop :=
+  ∃ H : Subgroup (Q8 × Q8 × Q8),
+    (∀ x : Q8 × Q8 × Q8, x ∈ H ↔ x.1 * x.2.1 * x.2.2 ∈ Subgroup.center Q8) ∧
+    ∃ φ : Wt →* Perm (Fin 3) × Perm (Fin 3), Function.Surjective φ ∧
+      ∃ f : H →* φ.ker, Function.Surjective f ∧
+        ∀ x : H, f x = 1 ↔
+          ((x : Q8 × Q8 × Q8).1 ∈ Subgroup.center Q8 ∧
+            (x : Q8 × Q8 × Q8).2.1 ∈ Subgroup.center Q8 ∧
+            (x : Q8 × Q8 × Q8).2.2 ∈ Subgroup.center Q8 ∧
+            (x : Q8 × Q8 × Q8).1 * (x : Q8 × Q8 × Q8).2.1 * (x : Q8 × Q8 × Q8).2.2 = 1)
+
+end Problem18
 
 end Grothendieck.Folder69
