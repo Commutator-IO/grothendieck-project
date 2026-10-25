@@ -239,7 +239,7 @@ export function MethodPage() {
               Where a modernised reading states something crisp in commutative algebra, finite
               combinatorics, elementary category theory or homotopical algebra, the statement is
               proved in the Lean proof assistant against mathlib, as the reading gives it, with no
-              hypothesis added: seventy-two folders so far, every theorem checked by the kernel on
+              hypothesis added: seventy-three folders so far, every theorem checked by the kernel on
               each change and resting on Lean's standard axioms only. A proof checks the reading's
               mathematics, never its fidelity to the page. It has found what it is meant to find:
               a false gloss (158), a hypothesis a reading had dropped (114), and once a statement
@@ -389,7 +389,7 @@ export function MethodPage() {
 
           <P id="article-lean" className="prose-fonds mt-6">
             <em>Annexe. Énoncés des lectures modernisées démontrés</em> is its appendix, in French.
-            For each of the seventy-two folders proved in Lean it gives the leaf in context, the
+            For each of the seventy-three folders proved in Lean it gives the leaf in context, the
             statement as the reading has it, a proof written out for a mathematician, remarks, and
             what is not proved. The parts follow the themes of the fonds in chronological order.
           </P>

@@ -341,7 +341,7 @@ has its modernised reading, taken whole, in current notation. A second
 transcription pass
 ([issue #51](https://github.com/Commutator-IO/grothendieck-project/issues/51)),
 re-reading each page on 700 dpi tiles, has taken 61 batches of 15 folders so
-far. Statements of 72 folders are proved in Lean (below).
+far. Statements of 73 folders are proved in Lean (below).
 
 None of it has been read through page by page by a person. What has been
 checked on the facsimile, by the author, is spot readings: 125 in 54 folders,
