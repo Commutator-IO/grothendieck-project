@@ -583,7 +583,8 @@ export const FINDINGS: Finding[] = [
     status: 'unsearched',
     settle:
       'Read the three-suprema argument against the proof in Stone Spaces and against Isbell’s papers on locale products, and decide whether it is the same argument in other clothes or a distinct one. The claim here is about a proof, not a theorem: the theorem is certainly published, and what would make this row a finding is that the argument is not. An external review (Kimi, shared conversation of 2026-08) names it one of the three strongest items in the folders it read.',
-    reach: 'reachable',
+    reach: 'beyond',
+    theory: "topoi",
     onPage: 'proved',
   },
   {
