@@ -48,6 +48,7 @@ const KIND_NAME: Record<ReviewKind, string> = {
   letter: 'Letter',
   argument: 'Edition’s argument',
   reference: 'Reference',
+  hypothesis: 'Hypothesis of a refuted statement',
 };
 
 function useSnippets(): Record<string, Snippet> | null {
@@ -314,7 +315,7 @@ export function ReviewPage() {
                 {item.claim && (
                   <blockquote className="mt-3 rounded-md border-l-4 border-brand-300 bg-ink-50 px-3 py-2 text-[14.5px] leading-relaxed text-ink-800">
                     <span className="block text-[11px] font-semibold uppercase tracking-wider text-ink-400">
-                      {item.kind === 'reference' ? 'The references' : 'The edition’s claim'}
+                      {item.kind === 'reference' ? 'The references' : item.kind === 'hypothesis' ? 'The statement as read' : 'The edition’s claim'}
                     </span>
                     {item.claim}
                   </blockquote>
@@ -341,7 +342,7 @@ export function ReviewPage() {
                 <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[13px]">
                   {SHOW_READINGS && (
                     <a className="text-brand-700 underline" href={item.link}>
-                      {isMaths(item.kind) ? 'Open the modernised reading' : 'Open the reading at this page'}
+                      {isMaths(item.kind) && item.kind !== 'hypothesis' ? 'Open the modernised reading' : 'Open the reading at this page'}
                     </a>
                   )}
                   <a

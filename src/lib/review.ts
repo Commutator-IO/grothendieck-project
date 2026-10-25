@@ -9,7 +9,7 @@ import { REPO, shortQuote } from './report.ts';
  * and then only GitHub's own form opens, for the reader to submit or not.
  */
 
-export type ReviewKind = 'ill' | 'uncertain' | 'add' | 'supplied' | 'date' | 'letter' | 'argument' | 'reference';
+export type ReviewKind = 'ill' | 'uncertain' | 'add' | 'supplied' | 'date' | 'letter' | 'argument' | 'reference' | 'hypothesis';
 
 export interface ReviewItem {
   id: string;
@@ -72,7 +72,7 @@ export const VERDICT_NAME: Record<Verdict, string> = {
 };
 
 /** Questions about the mathematics rather than the ink: a section of their own. */
-export const isMaths = (k: ReviewKind) => k === 'argument' || k === 'reference';
+export const isMaths = (k: ReviewKind) => k === 'argument' || k === 'reference' || k === 'hypothesis';
 
 /** What an answer says, in words: the button chosen, else the verdict. */
 export function answerName(it: ReviewItem, a: Answer): string {

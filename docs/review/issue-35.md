@@ -141,3 +141,13 @@ None of these makes a batch `checked`. They are checks of the modernised reading
 
 
 
+
+# Hypotheses behind « shown false as stated » (#90, 2026-10-25)
+
+### Is the refuted statement on the page as read?
+
+Three findings say a statement of his is false as stated, by a counterexample of the edition's own. Before that verdict stands, the hypotheses have to be read on the facsimile: a missed or misread hypothesis would make the counterexample beside the point.
+
+- [ ] **114, pp. 3–5:** Proposition 4 as read: for a basic localizer W satisfying Loc 4), totally W∞-aspherical ⟺ totally W-aspherical ⟺ non-empty with a × b 0-connected. Check that no further hypothesis on A or W is written (a test category, connections, W ⊆ W₀, a word before « namely »), since the category of cubes □ satisfies the last condition without being totally W∞-aspherical.
+- [ ] **18, pp. 35, 37:** the boxed chain of p. 35 as read: f_∞ = 1 ⟺ all periods real ⟺ « M est engendré par ℚ(−2n) » ⟺ G ≃ G_m or {e}; and the Remarque of p. 37: f_∞ = id_M forces M to be a sum of tensor powers of ℚ(2). Check whether the margin of p. 35 (« engendré par ℚ tordu et par ℚ(2) ») names the sign-twisted Tate motive ℚ(−1) ⊗ ε, which would mean the page saw the correction, and whether « directe » on p. 37 is right.
+- [ ] **42, pp. 1–2, 6:** the theorem of p. 2 as read: p : S_{0/S} → R_{/S} fully faithful on all S-preschemes locally of finite type over a locally noetherian S, and Corollaire 3 of p. 6. Check that neither the statement nor the definitions of p. 1 restrict Y (separated, quasi-compact, « de type fini » rather than « localement de type fini »), since the counterexample uses a non-quasi-compact, non-separated Y.

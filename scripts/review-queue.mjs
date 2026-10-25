@@ -478,6 +478,33 @@ for (const raw of body.split('\n')) {
   const sampled = !fromMoved && (sub.startsWith('1.') || sub.startsWith('2.'));
   if (box[1] !== ' ' && !sampled) continue;
 
+  // #90 — the hypotheses a « shown false as stated » verdict rests on: read on
+  // the facsimile before the counterexample is taken to refute the page.
+  if (/^Hypotheses behind/.test(section)) {
+    const hyp = /^\*\*(\d+(?:-\d+)?)(?:,\s*pp?\.\s*([\d–, -]+))?:\*\*\s*(.*)$/.exec(text);
+    if (hyp && isCote(hyp[1])) {
+      // « 3–5 » is the range 3, 4, 5; « 35, 37 » the two pages.
+      const ps = (hyp[2] ?? '').split(/,\s*/).flatMap((r) => {
+        const [a, b] = r.split('–').map(Number);
+        return b > a ? Array.from({ length: b - a + 1 }, (_, i) => a + i) : a ? [a] : [];
+      });
+      push({
+        id: `hypothesis-${hyp[1]}-p${ps[0] ?? 0}`,
+        section: n,
+        kind: 'hypothesis',
+        cote: hyp[1],
+        page: ps[0] ?? null,
+        prompt: `Is the statement the edition refutes in folder ${hyp[1]} written on the page with exactly these hypotheses?`,
+        choices: [C('Yes, read as on the page', 'right'), C('A hypothesis is missing from the reading', 'other', 'Which, and where on the page'), C('A word is misread', 'other', 'Which word, and what the page has')],
+        hint: `${ps.length ? facsimileAt(ps) : `Leaf through the facsimile of folder ${hyp[1]}`}: read the statement, the lines just before it and the margins.`,
+        claim: `${hyp[3][0].toUpperCase()}${hyp[3].slice(1)}`,
+        details: text.replace(/\*\*/g, ''),
+        context: 'A finding says this statement is false as stated, by a counterexample of the edition’s own (#90).',
+      }, null);
+      continue;
+    }
+  }
+
   // §1 — the unread words of the densest batches.
   if (!fromMoved && sub.startsWith('1.')) {
     const cote = /^(\S+)/.exec(text)[1];
