@@ -165,10 +165,42 @@ Les conditions équivalentes qui définissent une adjonction idempotente et l'é
 La théorie des topos se sert de ces énoncés. Un sous-topos d'un topos $E$ est une sous-catégorie pleine réflexive dont le réflecteur est exact à gauche, et le faisceau associé est ce réflecteur ; les objets locaux des pages~6 et~7 sont alors les faisceaux, et $\Sigma$ la classe des flèches bicouvrantes. La page~15 du dossier, que l'onglet Findings range parmi les pistes déjà publiées, en tire en une demi-page le critère de reconnaissance de Giraud sous sa forme de localisation exacte à gauche d'un topos de préfaisceaux (SGA~4, exposé~IV \cite{sga4-1}). Les sous-topos classifiants de la cote~161-2 (section~\ref{sec:161-2}) et le $2$-produit de topos de la cote~161-3 (partie \q{Topos et sites}) s'écrivent dans ce langage ; l'adjonction $\mathcal O \dashv \mathrm{Spec}$ de la section~\ref{sec:115} en est un exemple.
 \end{remarque}
 
-Ne sont pas démontrés ici : la reconstruction d'une adjonction idempotente à partir de $(E_0, F_0, E_0 \simeq F_0)$ (page~5) ; les pages~9 à~19, dont les contractions des pages~11 et~12.
+Ne sont pas démontrés ici : la reconstruction d'une adjonction idempotente à partir de $(E_0, F_0, E_0 \simeq F_0)$ (page~5) ; les pages~9 à~19, sauf la relation de la page~12 entre les deux trivialisations de $L' \otimes L$, démontrée ci-dessous. Le calcul des contractions des pages~11 et~12 est une notation et non un énoncé ; l'édition retient comme énoncé la question que la page~12 pose et résout par ses ficelles.
 
 \begin{encadre}
 \begin{definition}[Grothendieck, pages 11 et 12, contractions\piste{161-1-contractions-string-calculus}]
 La catégorie monoïdale symétrique libre $\Phi(A)$ sur $A$ est étendue par des contractions, accouplements $L'_j \otimes L''_j \to \mathbf 1$ qui évaluent chaque facteur apparié contre son partenaire. On obtient un calcul diagrammatique pour les catégories monoïdales à duaux ; les ficelles dessinées en marge de la page~12 notent quel facteur est apparié à quel autre.
 \end{definition}
 \end{encadre}
+
+\begin{theoreme*}[Grothendieck, page 12, \q{Relations entre $\varphi_{L',L}$ et $\psi_{L',L}$ ?}]\verifie[\leanblobmain]{Folder161_1}
+Soient $C$ une catégorie monoïdale symétrique, de symétrie $s$, et $L$ un objet inversible, d'inverse $L'$ donné par un isomorphisme $\varphi_{L,L'} : L \otimes L' \xrightarrow{\sim} \mathbf 1$. Posons $\varphi_{L',L} = \varphi_{L,L'} \circ s_{L',L} : L' \otimes L \xrightarrow{\sim} \mathbf 1$. Il existe un unique morphisme $\psi_{L',L} : L' \otimes L \to \mathbf 1$ tel que
+\[
+  \varphi_{L,L'} \otimes \mathrm{id}_L = \mathrm{id}_L \otimes \psi_{L',L} \ :\ L \otimes L' \otimes L \longrightarrow L
+\]
+(aux contraintes d'associativité et d'unité près), et c'est un isomorphisme. Pour un scalaire $e \in \operatorname{End}(\mathbf 1)$, on a $\varphi_{L',L} = e \cdot \psi_{L',L}$ si et seulement si la symétrie $s_{L,L}$ agit sur $L \otimes L$ par $e$. En particulier
+\[
+  \varphi_{L',L} = \varepsilon(L) \cdot \psi_{L',L},
+\]
+où $\varepsilon(L) \in \operatorname{Aut}(\mathbf 1)$ est le scalaire par lequel $s_{L,L}$ agit sur $L \otimes L$ ; il ne dépend que de $L$, non de l'inverse $(L', \varphi_{L,L'})$ choisi, et $\varepsilon(L)^2 = 1$.
+\end{theoreme*}
+
+Un scalaire $e : \mathbf 1 \to \mathbf 1$ agit sur tout objet $X$ par $e \cdot \mathrm{id}_X = e \otimes \mathrm{id}_X$, lu à travers $\mathbf 1 \otimes X \simeq X$ ; cette action commute à toutes les flèches, et $e \cdot \mathrm{id}_{X \otimes Y} = (e \cdot \mathrm{id}_X) \otimes \mathrm{id}_Y$. Sur $\mathbf 1$, elle redonne $e$. Comme précédemment, on écrit $f\,;g$ pour « $f$ puis $g$ ».
+
+\begin{proof}
+\emph{Existence et unicité de $\psi$.} Comme $L' \otimes L \simeq \mathbf 1$ (par $\varphi_{L',L}$) et $L \otimes L' \simeq \mathbf 1$, le foncteur $L \otimes -$ est une équivalence de $C$, de quasi-inverse $L' \otimes -$ ; il est donc pleinement fidèle, et $\psi_{L',L}$ est l'unique antécédent de l'isomorphisme $\varphi_{L,L'} \otimes \mathrm{id}_L$, lu de $L \otimes (L' \otimes L)$ vers $L \otimes \mathbf 1$. De même $L' \otimes -$ est pleinement fidèle, et, la symétrie échangeant $f \otimes \mathrm{id}_Z$ et $\mathrm{id}_Z \otimes f$, on peut simplifier par $- \otimes L$ ou $- \otimes L'$.
+
+\emph{Le carré de naturalité de la page.} Posons $\varepsilon = \psi_{L',L}^{-1}\,;\varphi_{L',L}$, de sorte que $\varphi_{L',L} = \psi_{L',L}\,;\varepsilon$ ; comme $s_{L,L'}\,;s_{L',L} = \mathrm{id}$, on a $\varphi_{L,L'} = \chi\,;\varepsilon$ avec $\chi = s_{L,L'}\,;\psi_{L',L}$. La naturalité de la symétrie $s_{L,-}$ appliquée à $\varphi_{L,L'} : L \otimes L' \to \mathbf 1$ donne, à l'identification $L \otimes \mathbf 1 \simeq L \simeq \mathbf 1 \otimes L$ près,
+\[
+  \mathrm{id}_L \otimes \varphi_{L,L'} = s_{L,\, L \otimes L'}\,;(\varphi_{L,L'} \otimes \mathrm{id}_L).
+\]
+L'hexagone décompose $s_{L,\,L \otimes L'} = (s_{L,L} \otimes \mathrm{id}_{L'})\,;(\mathrm{id}_L \otimes s_{L,L'})$, et l'identité triangulaire remplace $\varphi_{L,L'} \otimes \mathrm{id}_L$ par $\mathrm{id}_L \otimes \psi_{L',L}$ : le membre de droite devient $(s_{L,L} \otimes \mathrm{id}_{L'})\,;(\mathrm{id}_L \otimes \chi)$. Celui de gauche vaut $(\mathrm{id}_L \otimes \chi)\,;(\mathrm{id}_L \otimes \varepsilon)$, et $\mathrm{id}_L \otimes \varepsilon$ est l'action de $\varepsilon$ sur $L$ (encore par la symétrie, $s_{L,\mathbf 1}$ échangeant $\mathrm{id}_L \otimes \varepsilon$ et $\varepsilon \otimes \mathrm{id}_L$). Comme les scalaires commutent aux flèches, il vient
+\[
+  (\varepsilon \cdot \mathrm{id}_{L \otimes L \otimes L'})\,;(\mathrm{id}_L \otimes \chi) = (s_{L,L} \otimes \mathrm{id}_{L'})\,;(\mathrm{id}_L \otimes \chi),
+\]
+et l'isomorphisme $\mathrm{id}_L \otimes \chi$ se simplifie : $s_{L,L} \otimes \mathrm{id}_{L'} = (\varepsilon \cdot \mathrm{id}_{L \otimes L}) \otimes \mathrm{id}_{L'}$, puis $s_{L,L} = \varepsilon \cdot \mathrm{id}_{L \otimes L}$ en simplifiant par $- \otimes L'$.
+
+\emph{Unicité du scalaire.} Si $e \cdot \mathrm{id}_{L \otimes L} = e' \cdot \mathrm{id}_{L \otimes L}$, on simplifie deux fois par $- \otimes L$ et l'on trouve $e = e'$. Ainsi $\varepsilon$ est le seul scalaire qui agisse comme $s_{L,L}$, ce qui donne l'équivalence de l'énoncé, l'indépendance de $\varepsilon(L)$ vis-à-vis de $(L', \varphi_{L,L'})$, et $\varepsilon(L)^2 = 1$ puisque $s_{L,L}\,;s_{L,L} = \mathrm{id}$. Enfin, $\psi_{L',L}\,;\varepsilon$ s'écrit $(\varepsilon \cdot \mathrm{id}_{L' \otimes L})\,;\psi_{L',L}$, la forme $\varepsilon(L) \cdot \psi_{L',L}$ de l'énoncé.
+\end{proof}
+
+L'énoncé tient tel que la lecture le donne, dans toute catégorie monoïdale symétrique, sans supposer que tous les objets soient inversibles (Lean : \href{\leanblobmain/Folder161_1.lean}{\texttt{psi\_triangle}, \texttt{psi\_unique}, \texttt{braiding\_self\_eq\_scalar}, \texttt{phiSwap\_eq\_iff}, \texttt{phiSwap\_eq\_scalar\_comp}, \texttt{epsilon\_eq\_of\_inverse}, \texttt{epsilon\_mul\_self}}). La symétrie ne sert qu'à deux endroits : la naturalité de $s_{L,-}$ et l'hexagone, qui sont le carré et les trois colonnes de ficelles sur lesquels la page s'interrompt. Ne sont pas vérifiés en Lean : le calcul diagrammatique des contractions lui-même et la catégorie $\Phi(A)$ ; l'exemple des super-espaces vectoriels, où $\varepsilon(L) = -1$ pour une droite impaire et où les deux trivialisations diffèrent donc d'un signe.

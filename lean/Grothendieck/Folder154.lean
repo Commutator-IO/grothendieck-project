@@ -1,0 +1,303 @@
+import Mathlib
+
+/-!
+# Folder 154, page 153: the cube of generisations
+
+Finding `154-generisation-cube` (`src/content/findings.ts`), on the reading
+`transcripts/154/154.modern.tex` (« Le cube des générisations »). Page 153: for a position `D`
+of an added pseudoline passing through `ν ≥ 2` vertices of the arrangement `Σ`, « les
+générisations stables de `D` correspondent aux sommets d'un cube de dimension `ν`, dont les
+arêtes sont les générisations sous-stables », with the counts `2^ν` and `ν 2^(ν−1)`.
+
+**The model** (the edition's precise statement, mathlib having no oriented matroids). A position
+of an added pseudoline is a single-element extension of the rank-3 oriented matroid of `Σ`,
+given by Las Vergnas's signature on the cocircuits (the vertices); since `σ(−Y) = −σ(Y)`, it is
+a map `σ : V → SignType` on one chosen representative of each vertex. A line `ℓ` of `Σ` is the
+sequence of the vertices it carries, read along its double cover from a base point, each with a
+sign `ori ℓ i = ±1` comparing the chosen representative with the orientation of `ℓ`
+(`Arrangement`). Las Vergnas's criterion, checked line by line (`ValidSeq`, `IsPosition`): along
+each line the signs `ori ℓ i · σ(vᵢ)` read `+ … + (0) − … −` up to reversal, at most one `0`,
+not all zero. `σ` is a specialisation of `τ` (`Spec σ τ`) when `τ = σ` wherever `σ ≠ 0`.
+
+* `ValidSeq.eq_of_eq_zero`, `IsPosition.eq_of_zero_on_line`: a line carries at most one zero of
+  a position — two vertices of `D` never lie on a common line of `Σ`;
+* `ValidSeq.of_agree`, `IsPosition.of_spec`: every sign vector more generic than a position is a
+  position — the « unsticking » at each vertex of `D` is a free choice of sign, independently;
+* `genEquiv`, `genEquiv_spec_iff`: the positions `σ ≥ σ_D` are in bijection with all the sign
+  vectors on the `ν` zeros of `σ_D`, specialisation corresponding to specialisation;
+* `cubeFace_subset_iff`, `cubeFace_eq_singleton`: those sign vectors, ordered by
+  specialisation, are the faces of the cube `[−1, 1]^ν` ordered by reverse inclusion, the
+  vectors without zero being its vertices;
+* `card_gen`, `card_gen_stable`, `card_gen_substable`: there are `3^ν` generisations of `D`,
+  `2^ν` stable ones (no zero) and `ν · 2^(ν−1)` sub-stable ones (exactly one zero).
+
+The hypothesis `ν ≥ 2` is not needed, nor the axioms of an arrangement (two lines meet in one
+vertex, …): the statement holds for any such data. Not formalised: positions as topological
+pseudolines (that would need the topological representation theorem of Folkman–Lawrence), the
+surface `X*` of page 150 and the tension with it for `ν ≥ 3`, and the question of page 153.
+-/
+
+namespace Grothendieck.Folder154
+
+/-! ## Las Vergnas's condition on one line -/
+
+/-- The signs read along a line are valid: not all zero, and of the form `a … a (x) −a … −a`
+with `a = ±1`, the middle `x` (at position `c`) being `a`, `0` or `−a`: that is
+`+ … + (0) − … −` up to reversal, with at most one zero. -/
+def ValidSeq {n : ℕ} (s : Fin n → SignType) : Prop :=
+  (∃ i, s i ≠ 0) ∧ ∃ a : SignType, a ≠ 0 ∧ ∃ c : ℕ,
+    (∀ i : Fin n, (i : ℕ) < c → s i = a) ∧ (∀ i : Fin n, c < (i : ℕ) → s i = -a)
+
+lemma neg_ne_zero' {a : SignType} (ha : a ≠ 0) : -a ≠ 0 := by
+  cases a <;> simp_all
+
+/-- A valid sequence has at most one zero. -/
+theorem ValidSeq.eq_of_eq_zero {n : ℕ} {s : Fin n → SignType} (h : ValidSeq s) {i j : Fin n}
+    (hi : s i = 0) (hj : s j = 0) : i = j := by
+  obtain ⟨-, a, ha, c, h1, h2⟩ := h
+  have key : ∀ k : Fin n, s k = 0 → (k : ℕ) = c := by
+    intro k hk
+    rcases lt_trichotomy (k : ℕ) c with h | h | h
+    · exact absurd ((h1 k h).symm.trans hk) ha
+    · exact h
+    · exact absurd ((h2 k h).symm.trans hk) (neg_ne_zero' ha)
+  exact Fin.ext ((key i hi).trans (key j hj).symm)
+
+/-- A sequence agreeing with a valid one wherever the latter is nonzero is valid. -/
+theorem ValidSeq.of_agree {n : ℕ} {s t : Fin n → SignType} (h : ValidSeq s)
+    (hst : ∀ i, s i ≠ 0 → t i = s i) : ValidSeq t := by
+  obtain ⟨⟨j, hj⟩, a, ha, c, h1, h2⟩ := h
+  refine ⟨⟨j, by rw [hst j hj]; exact hj⟩, a, ha, c, fun i hi => ?_, fun i hi => ?_⟩
+  · rw [hst i (by rw [h1 i hi]; exact ha), h1 i hi]
+  · rw [hst i (by rw [h2 i hi]; exact neg_ne_zero' ha), h2 i hi]
+
+/-! ## Arrangements and positions -/
+
+/-- The combinatorial data of an arrangement `Σ`: vertices `V` (one representative cocircuit
+for each antipodal pair), lines `L`; line `ℓ` carries the vertices `vert ℓ 0, …` in the order
+of its double cover from a base point, `ori ℓ i = ±1` comparing the representative of
+`vert ℓ i` with the orientation of `ℓ`. -/
+structure Arrangement (V : Type*) (L : Type*) where
+  /-- The number of vertices on a line. -/
+  len : L → ℕ
+  /-- The vertices of a line, in order. -/
+  vert : (ℓ : L) → Fin (len ℓ) → V
+  vert_injective : ∀ ℓ, Function.Injective (vert ℓ)
+  /-- The sign correcting the chosen representative of each vertex along the line. -/
+  ori : (ℓ : L) → Fin (len ℓ) → SignType
+  ori_ne_zero : ∀ ℓ i, ori ℓ i ≠ 0
+
+/-- `σ` is a specialisation of `τ` (`τ` a generisation of `σ`): `τ = σ` wherever `σ ≠ 0`. -/
+def Spec {X : Type*} (σ τ : X → SignType) : Prop := ∀ x, σ x ≠ 0 → τ x = σ x
+
+namespace Arrangement
+
+variable {V L : Type*} (A : Arrangement V L)
+
+/-- The signs of a signature read along the line `ℓ`. -/
+def restr (σ : V → SignType) (ℓ : L) : Fin (A.len ℓ) → SignType :=
+  fun i => A.ori ℓ i * σ (A.vert ℓ i)
+
+/-- A position of an added pseudoline: a cocircuit signature valid on every line of `Σ`
+(Las Vergnas's criterion, with the edition's exclusion of the lines of `Σ` themselves). -/
+def IsPosition (σ : V → SignType) : Prop := ∀ ℓ, ValidSeq (A.restr σ ℓ)
+
+variable {A}
+
+/-- Two zeros of a position never lie on a common line of `Σ`. -/
+theorem IsPosition.eq_of_zero_on_line {σ : V → SignType} (h : A.IsPosition σ) (ℓ : L)
+    {i j : Fin (A.len ℓ)} (hi : σ (A.vert ℓ i) = 0) (hj : σ (A.vert ℓ j) = 0) : i = j :=
+  (h ℓ).eq_of_eq_zero (by simp [restr, hi]) (by simp [restr, hj])
+
+/-- Independence of the choices: every generisation, as a sign vector, of a position is a
+position. -/
+theorem IsPosition.of_spec {σ τ : V → SignType} (h : A.IsPosition σ) (hst : Spec σ τ) :
+    A.IsPosition τ := fun ℓ =>
+  (h ℓ).of_agree fun i hi => by
+    simp only [restr] at hi ⊢
+    rw [hst _ (right_ne_zero_of_mul hi)]
+
+/-- The positions `σ ≥ σ_D` are exactly the sign vectors `σ ≥ σ_D`. -/
+theorem isPosition_and_spec_iff {σD σ : V → SignType} (hD : A.IsPosition σD) :
+    A.IsPosition σ ∧ Spec σD σ ↔ Spec σD σ :=
+  ⟨And.right, fun h => ⟨hD.of_spec h, h⟩⟩
+
+/-- The generisations of the position `σ_D`. -/
+abbrev Gen (A : Arrangement V L) (σD : V → SignType) :=
+  {σ : V → SignType // A.IsPosition σ ∧ Spec σD σ}
+
+/-- The generisations of `σ_D` are the sign vectors on the zeros of `σ_D`: restriction. -/
+def genEquiv {σD : V → SignType} (hD : A.IsPosition σD) :
+    A.Gen σD ≃ ({v // σD v = 0} → SignType) where
+  toFun σ z := σ.1 z.1
+  invFun w := ⟨fun v => if h : σD v = 0 then w ⟨v, h⟩ else σD v,
+    (isPosition_and_spec_iff hD).2 fun v hv => by simp [hv]⟩
+  left_inv σ := by
+    refine Subtype.ext (funext fun v => ?_)
+    by_cases h : σD v = 0
+    · simp [h]
+    · simp [h, σ.2.2 v h]
+  right_inv w := funext fun z => by simp [z.2]
+
+/-- Specialisation among the generisations of `σ_D` is specialisation of the sign vectors on
+the zeros of `σ_D`. -/
+theorem genEquiv_spec_iff {σD : V → SignType} (hD : A.IsPosition σD) (σ τ : A.Gen σD) :
+    Spec σ.1 τ.1 ↔ Spec (genEquiv hD σ) (genEquiv hD τ) := by
+  constructor
+  · intro h z hz
+    exact h z.1 hz
+  · intro h v hv
+    by_cases hz : σD v = 0
+    · exact h ⟨v, hz⟩ hv
+    · rw [τ.2.2 v hz, σ.2.2 v hz]
+
+end Arrangement
+
+/-! ## The cube -/
+
+section Cube
+
+variable {X : Type*}
+
+/-- The face of the cube `[−1, 1]^X` with sign vector `w`: coordinate `z` is fixed to `w z`
+where `w z ≠ 0`, free where `w z = 0`. -/
+def cubeFace (w : X → SignType) : Set (X → ℝ) :=
+  {x | (∀ z, |x z| ≤ 1) ∧ ∀ z, w z ≠ 0 → x z = (w z : ℝ)}
+
+lemma cast_injective : Function.Injective (fun s : SignType => (s : ℝ)) := by
+  intro a b h
+  cases a <;> cases b <;> norm_num at h <;> rfl
+
+lemma abs_cast_le_one (s : SignType) : |(s : ℝ)| ≤ 1 := by
+  cases s <;> simp
+
+/-- Incidence of faces is specialisation: the face `w` lies in the face `w'` iff `w'` is a
+specialisation of `w`. -/
+theorem cubeFace_subset_iff (w w' : X → SignType) : cubeFace w ⊆ cubeFace w' ↔ Spec w' w := by
+  constructor
+  · intro h z hz
+    have hx : (fun z => (w z : ℝ)) ∈ cubeFace w :=
+      ⟨fun z => abs_cast_le_one _, fun _ _ => rfl⟩
+    have := (h hx).2 z hz
+    simp only at this
+    exact cast_injective this
+  · rintro h x ⟨hx1, hx2⟩
+    refine ⟨hx1, fun z hz => ?_⟩
+    rw [hx2 z (by rw [h z hz]; exact hz), h z hz]
+
+/-- A sign vector without zero is a vertex of the cube. -/
+theorem cubeFace_eq_singleton {w : X → SignType} (hw : ∀ z, w z ≠ 0) :
+    cubeFace w = {fun z => (w z : ℝ)} := by
+  ext x
+  simp only [cubeFace, Set.mem_ofPred_eq, Set.mem_singleton_iff]
+  constructor
+  · rintro ⟨-, h⟩
+    exact funext fun z => h z (hw z)
+  · rintro rfl
+    exact ⟨fun z => abs_cast_le_one _, fun _ _ => rfl⟩
+
+/-- The unique zero of a sign vector with exactly one zero. -/
+noncomputable def theZero (w : {w : X → SignType // ∃! z, w z = 0}) : X :=
+  w.2.exists.choose
+
+lemma theZero_spec (w : {w : X → SignType // ∃! z, w z = 0}) : w.1 (theZero w) = 0 :=
+  w.2.exists.choose_spec
+
+lemma eq_theZero (w : {w : X → SignType // ∃! z, w z = 0}) {z : X} (hz : w.1 z = 0) :
+    z = theZero w :=
+  w.2.unique hz (theZero_spec w)
+
+variable [Fintype X]
+
+/-- `3^ν` faces. -/
+theorem card_signVectors : Nat.card (X → SignType) = 3 ^ Fintype.card X := by
+  simp [Nat.card_pi, Nat.card_eq_fintype_card]
+  rfl
+
+lemma card_ne_zero_signType : Nat.card {s : SignType // s ≠ 0} = 2 := by
+  rw [Nat.card_eq_fintype_card]; rfl
+
+/-- `2^ν` vertices: the sign vectors without zero. -/
+theorem card_stable : Nat.card {w : X → SignType // ∀ z, w z ≠ 0} = 2 ^ Fintype.card X := by
+  rw [Nat.card_congr (Equiv.subtypePiEquivPi (β := fun _ : X => SignType)
+    (p := fun _ s => s ≠ 0)), Nat.card_pi]
+  simp only [card_ne_zero_signType, Finset.prod_const, Finset.card_univ]
+
+variable [DecidableEq X]
+
+/-- The sign vectors with exactly one zero, at `z`, are the sign vectors without zero on the
+other coordinates. -/
+noncomputable def fiberEquiv (z : X) :
+    {w : {w : X → SignType // ∃! z, w z = 0} // theZero w = z} ≃
+      ({y // y ≠ z} → {s : SignType // s ≠ 0}) where
+  toFun w y := ⟨w.1.1 y.1, fun h => y.2 ((eq_theZero w.1 h).trans w.2)⟩
+  invFun g :=
+    have hg : ∃! y, (fun y => if h : y = z then 0 else (g ⟨y, h⟩).1) y = 0 :=
+      ⟨z, by simp, fun y hy => by
+        by_contra hne
+        simp only [hne, dite_false] at hy
+        exact (g ⟨y, hne⟩).2 hy⟩
+    ⟨⟨_, hg⟩, (eq_theZero ⟨_, hg⟩ (by simp)).symm⟩
+  left_inv w := by
+    refine Subtype.ext (Subtype.ext (funext fun y => ?_))
+    by_cases h : y = z
+    · subst h
+      simp only [dite_true]
+      have := theZero_spec w.1
+      rw [w.2] at this
+      exact this.symm
+    · simp [h]
+  right_inv g := funext fun y => Subtype.ext (by simp [y.2])
+
+/-- `ν · 2^(ν−1)` edges: the sign vectors with exactly one zero. -/
+theorem card_substable :
+    Nat.card {w : X → SignType // ∃! z, w z = 0} =
+      Fintype.card X * 2 ^ (Fintype.card X - 1) := by
+  rw [← Nat.card_congr (Equiv.sigmaFiberEquiv theZero), Nat.card_sigma]
+  simp_rw [Nat.card_congr (fiberEquiv _), Nat.card_pi, card_ne_zero_signType]
+  simp [Fintype.card_subtype_compl]
+
+end Cube
+
+/-! ## The cube of generisations (page 153) -/
+
+namespace Arrangement
+
+variable {V L : Type*} [Fintype V] {A : Arrangement V L} {σD : V → SignType}
+
+/-- The generisations of `D`: `3^ν`, one for each face of the `ν`-cube, `ν` the number of
+vertices through which `D` passes. -/
+theorem card_gen (hD : A.IsPosition σD) :
+    Nat.card (A.Gen σD) = 3 ^ Fintype.card {v // σD v = 0} := by
+  rw [Nat.card_congr (genEquiv hD), card_signVectors]
+
+/-- Page 153: the stable generisations of `D` (no zero) are `2^ν`, the vertices of the cube. -/
+theorem card_gen_stable (hD : A.IsPosition σD) :
+    Nat.card {σ : A.Gen σD // ∀ v, σ.1 v ≠ 0} = 2 ^ Fintype.card {v // σD v = 0} := by
+  rw [← card_stable]
+  refine Nat.card_congr ((genEquiv hD).subtypeEquiv fun σ => ⟨fun h z => h z.1, fun h v => ?_⟩)
+  by_cases hz : σD v = 0
+  · exact h ⟨v, hz⟩
+  · rw [σ.2.2 v hz]; exact hz
+
+/-- Page 153: the sub-stable generisations of `D` (exactly one zero) are `ν · 2^(ν−1)`, the
+edges of the cube. -/
+theorem card_gen_substable (hD : A.IsPosition σD) :
+    Nat.card {σ : A.Gen σD // ∃! v, σ.1 v = 0} =
+      Fintype.card {v // σD v = 0} * 2 ^ (Fintype.card {v // σD v = 0} - 1) := by
+  classical
+  rw [← card_substable]
+  refine Nat.card_congr ((genEquiv hD).subtypeEquiv fun σ => ?_)
+  have hzero : ∀ v, σ.1 v = 0 → σD v = 0 := fun v hv => by
+    by_contra h
+    rw [σ.2.2 v h] at hv
+    exact h hv
+  constructor
+  · rintro ⟨v, hv, hu⟩
+    exact ⟨⟨v, hzero v hv⟩, hv, fun z hz => Subtype.ext (hu z.1 hz)⟩
+  · rintro ⟨z, hz, hu⟩
+    exact ⟨z.1, hz, fun v hv => congrArg Subtype.val (hu ⟨v, hzero v hv⟩ hv)⟩
+
+end Arrangement
+
+end Grothendieck.Folder154

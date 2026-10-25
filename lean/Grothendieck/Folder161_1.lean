@@ -5,6 +5,8 @@ import Mathlib.Tactic.TFAE
 import Mathlib.CategoryTheory.Monad.Limits
 import Mathlib.CategoryTheory.Adjunction.PartialAdjoint
 import Grothendieck.Upstream.AdjunctionIdempotent
+import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+import Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
 
 /-!
 # Folder 161-1: the fixed part of an adjunction, idempotent adjunctions, local objects
@@ -695,5 +697,202 @@ theorem descent_isLeftAdjoint {G : Type*} [Category.{v₁} G] (β : E₁ ⥤ G)
 
 end Descent
 
-end Grothendieck.Folder161_1
+/-! ## Pages 11–12: inverses of an invertible object and the sign `ε(L)`
 
+Page 12 takes an invertible object `L` of a symmetric monoidal category `C`
+with an inverse `L'`, `φ_{L,L'} : L ⊗ L' ≅ 𝟙`, and compares two trivialisations
+of `L' ⊗ L`: `φ_{L',L} = φ_{L,L'} ∘ s_{L',L}`, obtained through the symmetry,
+and `ψ_{L',L}`, defined by the triangle identity
+`φ_{L,L'} ⊗ id_L = id_L ⊗ ψ_{L',L} : L ⊗ L' ⊗ L → L`.
+« Relations entre `φ_{L',L}` et `ψ_{L',L}` ? » The reading's answer: they
+differ by the sign `ε(L) ∈ Aut(𝟙)` by which the symmetry acts on `L ⊗ L`.
+
+* `scalar e X` — the action of `e : 𝟙 ⟶ 𝟙` on an object, `λ⁻¹ ≫ e ▷ X ≫ λ`;
+  it is natural in `X` (`scalar_naturality`).
+* `psi`, `psi_triangle`, `psi_unique` — `ψ_{L',L}` exists, is an isomorphism, and
+  is the only morphism satisfying the triangle identity (tensoring with `L` is
+  an equivalence, `tensorLeftEquivOfInverse`).
+* `epsilon φ := ψ⁻¹ ≫ φ_{L',L}`, and the answer to the page's question:
+  `braiding_self_eq_scalar` — `s_{L,L} = ε · id_{L⊗L}`; `phiSwap_eq_iff` — for any
+  scalar `e`, `φ_{L',L} = e · ψ_{L',L}` iff `s_{L,L} = e · id_{L⊗L}`; hence
+  `phiSwap_eq_scalar_comp` : `φ_{L',L} = ε(L) · ψ_{L',L}`.
+* `epsilon_eq_of_inverse` — `ε(L)` depends on `L` only, not on the inverse
+  `(L', φ)` chosen; `epsilon_mul_self` — `ε(L)² = 1`.
+-/
+
+section Contractions
+
+open MonoidalCategory
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+
+/-- The action of a scalar `e ∈ End(𝟙)` on an object `X`. -/
+def scalar (e : 𝟙_ C ⟶ 𝟙_ C) (X : C) : X ⟶ X :=
+  (λ_ X).inv ≫ e ▷ X ≫ (λ_ X).hom
+
+/-- Scalars commute with every morphism. -/
+@[reassoc]
+lemma scalar_naturality (e : 𝟙_ C ⟶ 𝟙_ C) {X Y : C} (f : X ⟶ Y) :
+    f ≫ scalar e Y = scalar e X ≫ f := by
+  simp only [scalar, leftUnitor_inv_naturality_assoc, whisker_exchange_assoc,
+    Category.assoc, leftUnitor_naturality]
+
+lemma scalar_tensor (e : 𝟙_ C ⟶ 𝟙_ C) (X Y : C) :
+    scalar e (X ⊗ Y) = scalar e X ▷ Y := by
+  simp [scalar]
+
+lemma scalar_comp (e e' : 𝟙_ C ⟶ 𝟙_ C) (X : C) :
+    scalar (e ≫ e') X = scalar e X ≫ scalar e' X := by
+  simp [scalar]
+
+lemma scalar_id (X : C) : scalar (𝟙 (𝟙_ C)) X = 𝟙 X := by
+  simp [scalar]
+
+lemma scalar_unit (e : 𝟙_ C ⟶ 𝟙_ C) : scalar e (𝟙_ C) = e := by
+  rw [scalar, unitors_equal]
+  simp [unitors_inv_equal]
+
+/-- If `Y ⊗ X ≅ 𝟙` and `X ⊗ Y ≅ 𝟙`, tensoring on the left with `X` is an
+equivalence, with quasi-inverse tensoring with `Y`. -/
+def tensorLeftEquivOfInverse {X Y : C} (i : Y ⊗ X ≅ 𝟙_ C) (j : X ⊗ Y ≅ 𝟙_ C) : C ≌ C :=
+  CategoryTheory.Equivalence.mk (tensorLeft X) (tensorLeft Y)
+    (NatIso.ofComponents (fun Z => (λ_ Z).symm ≪≫ whiskerRightIso i.symm Z ≪≫ α_ Y X Z)
+      (by
+        intro _ _ f
+        dsimp
+        simp only [whiskerRightIso_hom, Iso.symm_hom, Category.assoc]
+        rw [leftUnitor_inv_naturality_assoc, whisker_exchange_assoc]
+        simp))
+    (NatIso.ofComponents (fun Z => (α_ X Y Z).symm ≪≫ whiskerRightIso j Z ≪≫ λ_ Z)
+      (by
+        intro _ _ f
+        dsimp
+        simp only [whiskerRightIso_hom, Category.assoc]
+        rw [associator_inv_naturality_right_assoc, whisker_exchange_assoc]
+        simp))
+
+variable [SymmetricCategory C] {L L' : C}
+
+open BraidedCategory
+
+/-- `φ_{L',L} = φ_{L,L'} ∘ s_{L',L}`, the trivialisation of `L' ⊗ L` through the
+symmetry (page 12). -/
+def phiSwap (φ : L ⊗ L' ≅ 𝟙_ C) : L' ⊗ L ≅ 𝟙_ C := β_ L' L ≪≫ φ
+
+/-- Tensoring with an invertible `L` is fully faithful. -/
+def fullyFaithfulL (φ : L ⊗ L' ≅ 𝟙_ C) : (tensorLeft L).FullyFaithful :=
+  (tensorLeftEquivOfInverse (phiSwap φ) φ).fullyFaithfulFunctor
+
+/-- Tensoring with the inverse `L'` is fully faithful. -/
+def fullyFaithfulL' (φ : L ⊗ L' ≅ 𝟙_ C) : (tensorLeft L').FullyFaithful :=
+  (tensorLeftEquivOfInverse φ (phiSwap φ)).fullyFaithfulFunctor
+
+/-- `ψ_{L',L} : L' ⊗ L ≅ 𝟙`, defined by the triangle identity
+`φ_{L,L'} ⊗ id_L = id_L ⊗ ψ_{L',L}` (page 12). -/
+def psi (φ : L ⊗ L' ≅ 𝟙_ C) : L' ⊗ L ≅ 𝟙_ C :=
+  (fullyFaithfulL φ).preimageIso
+    ((α_ L L' L).symm ≪≫ whiskerRightIso φ L ≪≫ λ_ L ≪≫ (ρ_ L).symm)
+
+/-- The triangle identity defining `ψ_{L',L}`, with associator and unitors. -/
+lemma psi_triangle (φ : L ⊗ L' ≅ 𝟙_ C) :
+    φ.hom ▷ L ≫ (λ_ L).hom = (α_ L L' L).hom ≫ L ◁ (psi φ).hom ≫ (ρ_ L).hom := by
+  have h : L ◁ (psi φ).hom = (α_ L L' L).inv ≫ φ.hom ▷ L ≫ (λ_ L).hom ≫ (ρ_ L).inv :=
+    (fullyFaithfulL φ).map_preimage _
+  simp [h]
+
+/-- `ψ_{L',L}` is the only morphism satisfying the triangle identity. -/
+lemma psi_unique (φ : L ⊗ L' ≅ 𝟙_ C) (ψ' : L' ⊗ L ⟶ 𝟙_ C)
+    (h : φ.hom ▷ L ≫ (λ_ L).hom = (α_ L L' L).hom ≫ L ◁ ψ' ≫ (ρ_ L).hom) :
+    ψ' = (psi φ).hom := by
+  apply (fullyFaithfulL φ).map_injective
+  change L ◁ ψ' = L ◁ (psi φ).hom
+  have h' := psi_triangle φ
+  rw [h] at h'
+  simpa using h'
+
+lemma whiskerRight_injective {Z : C} (hZ : (tensorLeft Z).FullyFaithful) {X Y : C}
+    {f g : X ⟶ Y} (h : f ▷ Z = g ▷ Z) : f = g :=
+  hZ.map_injective (by
+    change Z ◁ f = Z ◁ g
+    rw [← cancel_epi (β_ X Z).hom, ← braiding_naturality_left, h, braiding_naturality_left])
+
+/-- `ε := ψ_{L',L}⁻¹ ≫ φ_{L',L} ∈ Aut(𝟙)`; `braiding_self_eq_scalar` shows that
+it is the sign of the symmetry of `L ⊗ L`. -/
+def epsilon (φ : L ⊗ L' ≅ 𝟙_ C) : 𝟙_ C ⟶ 𝟙_ C := (psi φ).inv ≫ (phiSwap φ).hom
+
+lemma whiskerLeft_scalar_rightUnitor (e : 𝟙_ C ⟶ 𝟙_ C) (X : C) :
+    X ◁ e ≫ (ρ_ X).hom = (ρ_ X).hom ≫ scalar e X := by
+  have := braiding_naturality_right X e
+  rw [← braiding_leftUnitor, Category.assoc, reassoc_of% this]
+  simp only [scalar, Iso.hom_inv_id_assoc]
+
+/-- **Page 12, the answer.** The symmetry of `L ⊗ L` is the scalar `ε`:
+`s_{L,L} = ε · id_{L⊗L}`. The proof follows the page's naturality square: the
+symmetry `s_{L, L ⊗ L'}` is natural against `φ_{L,L'}`, the hexagon splits it as
+`(s_{L,L} ⊗ L') ; (L ⊗ s_{L,L'})`, the triangle identity replaces `φ ⊗ L` by
+`L ⊗ ψ`, and the isomorphism `L ⊗ (ψ ∘ s_{L,L'})` cancels. -/
+theorem braiding_self_eq_scalar (φ : L ⊗ L' ≅ 𝟙_ C) :
+    (β_ L L).hom = scalar (epsilon φ) (L ⊗ L) := by
+  set ψ := psi φ
+  have T := psi_triangle φ
+  have A : L ◁ φ.hom ≫ (ρ_ L).hom = (β_ L (L ⊗ L')).hom ≫ φ.hom ▷ L ≫ (λ_ L).hom := by
+    rw [← braiding_leftUnitor, ← braiding_naturality_right_assoc]
+  have hφ : φ.hom = ((β_ L L').hom ≫ ψ.hom) ≫ epsilon φ := by
+    simp [epsilon, phiSwap]
+  rw [T, hφ, MonoidalCategory.whiskerLeft_comp, Category.assoc,
+    whiskerLeft_scalar_rightUnitor, ← Category.assoc, ← Category.assoc,
+    scalar_naturality] at A
+  rw [braiding_tensor_right_hom] at A
+  have B : scalar (epsilon φ) (L ⊗ (L ⊗ L')) =
+      (α_ L L L').inv ≫ (β_ L L).hom ▷ L' ≫ (α_ L L L').hom := by
+    rw [← cancel_mono (L ◁ ((β_ L L').hom ≫ ψ.hom) ≫ (ρ_ L).hom), A]
+    simp [ψ]
+  have N := scalar_naturality (epsilon φ) (α_ L L L').inv
+  apply whiskerRight_injective (fullyFaithfulL' φ)
+  rw [← scalar_tensor, ← Iso.hom_inv_id_assoc (α_ L L L') (scalar _ _), N, B]
+  simp
+
+/-- A scalar is determined by its action on `L ⊗ L`, `L` invertible. -/
+lemma scalar_injective (φ : L ⊗ L' ≅ 𝟙_ C) {e e' : 𝟙_ C ⟶ 𝟙_ C}
+    (h : scalar e (L ⊗ L) = scalar e' (L ⊗ L)) : e = e' := by
+  rw [scalar_tensor, scalar_tensor] at h
+  have h1 := whiskerRight_injective (fullyFaithfulL φ) h
+  have h2 : e ▷ L = e' ▷ L := by
+    have := congrArg (fun f => (λ_ L).hom ≫ f ≫ (λ_ L).inv) h1
+    simpa [scalar] using this
+  exact whiskerRight_injective (fullyFaithfulL φ) h2
+
+/-- **Page 12, « Relations entre `φ_{L',L}` et `ψ_{L',L}` ? »** For a scalar `e`,
+`φ_{L',L} = e · ψ_{L',L}` if and only if the symmetry acts on `L ⊗ L` by `e`. -/
+theorem phiSwap_eq_iff (φ : L ⊗ L' ≅ 𝟙_ C) (e : 𝟙_ C ⟶ 𝟙_ C) :
+    (phiSwap φ).hom = (psi φ).hom ≫ e ↔ (β_ L L).hom = scalar e (L ⊗ L) := by
+  constructor
+  · intro h
+    have : e = epsilon φ := by simp [epsilon, h]
+    rw [this]
+    exact braiding_self_eq_scalar φ
+  · intro h
+    have := scalar_injective φ (h.symm.trans (braiding_self_eq_scalar φ))
+    rw [this]
+    simp [epsilon]
+
+/-- `φ_{L',L} = ε(L) · ψ_{L',L}`, the scalar acting on `L' ⊗ L`. -/
+theorem phiSwap_eq_scalar_comp (φ : L ⊗ L' ≅ 𝟙_ C) :
+    (phiSwap φ).hom = scalar (epsilon φ) (L' ⊗ L) ≫ (psi φ).hom := by
+  rw [← scalar_naturality, scalar_unit]
+  simp [epsilon]
+
+/-- `ε(L)` does not depend on the inverse `(L', φ)` chosen. -/
+theorem epsilon_eq_of_inverse {L₁ L₂ : C} (φ₁ : L ⊗ L₁ ≅ 𝟙_ C) (φ₂ : L ⊗ L₂ ≅ 𝟙_ C) :
+    epsilon φ₁ = epsilon φ₂ :=
+  scalar_injective φ₁ ((braiding_self_eq_scalar φ₁).symm.trans (braiding_self_eq_scalar φ₂))
+
+/-- `ε(L)² = 1`. -/
+theorem epsilon_mul_self (φ : L ⊗ L' ≅ 𝟙_ C) : epsilon φ ≫ epsilon φ = 𝟙 _ :=
+  scalar_injective φ (by
+    rw [scalar_comp, ← braiding_self_eq_scalar, scalar_id]
+    exact SymmetricCategory.symmetry L L)
+
+end Contractions
+
+end Grothendieck.Folder161_1
