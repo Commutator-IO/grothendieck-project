@@ -6,6 +6,7 @@ import { FINDINGS } from './content/findings.ts';
 import { PROOFS } from './content/proofs.ts';
 import { PLAIN } from './content/summary.ts';
 import { FindingsChart } from './components/FindingsChart.tsx';
+import { SeeAlso, ThreadsSection } from './components/Threads.tsx';
 import { BY_ID } from './content/catalogue.ts';
 import type { Finding, PlainItem } from './lib/types.ts';
 import { notation } from './lib/notation.tsx';
@@ -274,6 +275,8 @@ function Row({ n, withCote }: { n: Finding; withCote?: boolean }) {
           {notation(n.settle)}
         </p>
       </details>
+
+      <SeeAlso id={n.id} />
     </li>
   );
 }
@@ -694,6 +697,8 @@ export function FindingsPage() {
         </header>
 
         <FindingsChart />
+
+        <ThreadsSection />
 
         <PlainSummary />
 

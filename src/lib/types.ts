@@ -336,6 +336,55 @@ export interface Finding {
 }
 
 /**
+ * How two findings connect. Never a claim of influence or priority: a link
+ * says that an object, a notation or a question recurs or is carried on.
+ */
+export type LinkKind = 'continues' | 'uses' | 'generalises' | 'corrects' | 'same-question';
+
+/**
+ * What a link rests on. `cross-reference` — a modernised reading names the
+ * other folder (`where` gives file and line); `same-object` — the same
+ * notation, statement or pages; `date` — dates on the leaves place the two;
+ * `edition` — our inference alone (« rapprochement de l'édition »).
+ */
+export type LinkBasis = 'cross-reference' | 'same-object' | 'date' | 'edition';
+
+/** A typed link between two findings, outside or across threads. Read as « from kind to ». */
+export interface FindingLink {
+  from: string; // Finding.id
+  to: string; // Finding.id
+  kind: LinkKind;
+  basis: LinkBasis;
+  /** One sentence saying what recurs. */
+  note: string;
+  /** For `cross-reference`: « 74.modern.tex l. 246 ». */
+  where?: string;
+}
+
+/** One step of a thread: a finding, and how it follows the previous step. */
+export interface ThreadStep {
+  id: string; // Finding.id
+  /** Absent on the first step. */
+  from?: { sentence: string; basis: LinkBasis; where?: string };
+}
+
+/**
+ * A thread: an ordered line of thought across folders. The order is that of
+ * the question, not a chronology. Dates are not stored here: the page reads
+ * them at render time from the inventory (catalogue.ts), dated-leaves.json and
+ * proposed-datings.json, so a corrected dating corrects every thread.
+ */
+export interface Thread {
+  id: string;
+  title: string;
+  /** One paragraph: what the thread follows. */
+  intro: string;
+  /** The thread follows physical pieces, not a mathematical question. */
+  codicological?: boolean;
+  steps: ThreadStep[];
+}
+
+/**
  * One item of the plain-language summary above the findings list (#29).
  *
  * It restates rows of `FINDINGS` for a reader who is not a specialist, and
