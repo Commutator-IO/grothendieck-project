@@ -74,8 +74,15 @@ Sur $\mathbf P^1_{\mathbf C} \simeq S^2$, stratifié par un point, un plan et un
 {\small Mathlib n'a pas la théorie de l'homotopie des espaces stratifiés ni les gerbes. On se reportera aux notes de Grothendieck (\lot{151}{4}{61}).\par}
 
 \begin{encadre}
-\begin{theoreme*}[Grothendieck, pages 62 à 68, recollement par les paires de couverture\piste{151-tube-gluing-covering-pairs}]\nonverifie
+\begin{theoreme*}[Grothendieck, pages 62 à 68, recollement par les paires de couverture\piste{151-tube-gluing-covering-pairs}]
 Un espace stratifié est la limite inductive d'un diagramme indexé par les seules paires $(i, j)$ de l'ensemble ordonné des strates où $j$ couvre $i$, avec trois flèches par paire, $X_i^* \to V_{i,j} \leftarrow V^*_{i,j} \to X_j^*$ ; aucune comparaison entre strates non adjacentes n'est nécessaire.
 \end{theoreme*}
 \end{encadre}
 {\small Les feuillets en esquissent une démonstration incomplète (pages 62 et 63) : ils établissent, sous trois hypothèses, que ces trois inclusions sont les seules entre les pièces élémentaires. Le théorème de recollement de la page~68 est sans démonstration, et le mot qui y nomme l'opération est illisible. Mathlib n'a pas les espaces stratifiés. On se reportera aux notes de Grothendieck (\lot{151}{4}{62}).\par}
+
+\begin{encadre}
+\begin{contrexemple}[Pages 62 à 68, le recollement en profondeur deux]\verifie[\leanblobmain]{Folder151}
+Soit $X = \mathbf R^2 \supset X_1 = \mathbf R \times \{0\} \supset X_0 = \{0\}$, et des tubes $\overline V_{0,1} \subset X_1$, $\overline V_{1,2} \subset \mathbf R^2$ quelconques contenant leurs âmes. Les hypothèses de recensement des pages~62 et~63 sont satisfaites ; la limite inductive, dans les espaces topologiques, du diagramme des paires de couverture $0 \lessdot 1 \lessdot 2$ est $\mathbf R^2$ muni de la topologie finale des sept pièces, strictement plus fine que celle de $\mathbf R^2$ : le plan privé de l'axe vertical épointé y est ouvert, et ne l'est pas dans $\mathbf R^2$.
+\end{contrexemple}
+\end{encadre}
+{\small \emph{Démonstration.} Les sept pièces et les six flèches du diagramme sont des inclusions, et une famille compatible d'applications continues sur les pièces se recolle en une unique application continue sur $\mathbf R^2$ muni de la topologie finale (\texttt{exists\_unique\_desc}) : c'est la limite inductive. Le point $0$ ne voit que l'axe horizontal ; son voisinage dans $\mathbf R^2$ est le tube de la paire non adjacente $0 < 2$, qui n'entre pas dans le diagramme (\texttt{colimTop\_ne}). Lue comme limite inductive homotopique, l'affirmation échoue aussi : la caractéristique d'Euler du diagramme est $14 - 17 + 2 = -1$, et non $1$ ; ce calcul est fait à la main, non en Lean. Reste la lecture \q{au topos}, que le mot barré juste avant suggère, et que le fac-similé doit trancher. Un énoncé juste doit faire intervenir les comparaisons entre strates non adjacentes, comme la catégorie des chemins de sortie, ou se borner à la profondeur un.\par}
