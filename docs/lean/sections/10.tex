@@ -23,3 +23,29 @@ Cet isomorphisme rend triangulaire, à coefficient dominant $1$, l'écriture de 
 \end{remarque}
 
 Ne sont pas démontrés ici : que toute représentation indécomposable soit une chaîne (lemmes~1 et~2 des pages~192 à~194), et l'anneau $R(G) = \mathbf Z[\mathbf Z][\xi]$ lui-même, qui demande cette classification et le théorème de Krull--Schmidt, absents de mathlib ; le passage du groupe algébrique à son algèbre de Lie.
+
+\subsection*{Page 65 : le $H^2$ d'un tore de norme un}
+
+L'Exemple~1 de la page~65 traite d'une catégorie tannakienne de lien un tore $G$ de dimension~$1$, déployé par une extension quadratique $Z/k$. La suite exacte $0 \to G \to Z^* \to \mathbf G_m \to 0$, où $Z^* = R_{Z/k}\mathbf G_m$ et la flèche de droite est la norme, donne \q{par Hilbert 90} que le noyau de $H^2(k, G) \to H^2(k, Z^*) = \mathrm{Br}(Z)$ est nul. La page en conclut que le caractère numérique détermine la catégorie. Lean démontre le pas cohomologique, à un niveau galoisien fini. Il ne démontre ni le passage à la cohomologie galoisienne de $k$, ni la conclusion tannakienne (finding \texttt{10-numerical-character-rank-one-torus}).
+
+\noindent\emph{Conventions.} Soient $L/K$ une extension galoisienne finie, $\Gamma = \mathrm{Gal}(L/K)$ et $\chi \colon \Gamma \to \{\pm 1\}$ un caractère, le signe d'une sous-extension quadratique $Z \subset L$ (\texttt{quadChar}). Pour un $\Gamma$-module $M$ (ici $M = L^\times$, noté additivement), on note $M_\chi$ le module $M$ tordu par $\chi$, soit $\gamma \star x = \chi(\gamma)\,\gamma x$, c'est-à-dire $\gamma(x)^{\chi(\gamma)}$ sur $L^\times$. On note $\mathrm{Ind}\,M$ le module $M \times M$, sur lequel $\gamma$ agit par $(\gamma x, \gamma y)$ si $\chi(\gamma) = 1$ et par $(\gamma y, \gamma x)$ sinon. Sur $L^\times$, ce sont les $L$-points de $G$ et de $Z^*$ : $(Z \otimes_K L)^\times$ s'écrit dans la base des deux idempotents.
+
+\begin{encadre}
+\begin{enonce}[Grothendieck, page 65, Exemple 1, à un niveau fini\piste{10-numerical-character-rank-one-torus}]\verifie[\leanblobmain]{Folder10}
+\begin{enumerate}
+\item[(a)] Pour tout $\Gamma$-module $M$, la suite $0 \to M_\chi \xrightarrow{x \mapsto (x, -x)} \mathrm{Ind}\,M \xrightarrow{(x,y) \mapsto x + y} M \to 0$ est exacte. Si $H^1(\Gamma, M) = 0$, l'application $H^2(\Gamma, M_\chi) \to H^2(\Gamma, \mathrm{Ind}\,M)$ est injective.
+\item[(b)] Pour $M = L^\times$, la suite est $1 \to G(L) \to (Z \otimes_K L)^\times \xrightarrow{N} L^\times \to 1$, et $H^2(\Gamma, G(L)) \to H^2(\Gamma, (Z \otimes_K L)^\times)$ est injective.
+\item[(c)] Si $\chi$ est le signe d'une sous-extension quadratique $Z$, on a $H^2(\Gamma, \mathrm{Ind}\,L^\times) \simeq H^2(\mathrm{Gal}(L/Z), L^\times)$, et le composé $H^2(\Gamma, G(L)) \to H^2(\mathrm{Gal}(L/Z), L^\times)$ est injectif.
+\end{enumerate}
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+(a) Le noyau de $(x, y) \mapsto x + y$ est formé des $(x, -x)$, et $(x, 0)$ est un antécédent de $x$. Les deux flèches sont équivariantes : si $\chi(\gamma) = -1$, l'échange des facteurs envoie $(\gamma x, -\gamma x)$ sur $(-\gamma x, \gamma x)$, image de $\gamma \star x = -\gamma x$, et ne change pas la somme. La suite exacte longue donne l'exactitude de $H^1(\Gamma, M) \xrightarrow{\delta} H^2(\Gamma, M_\chi) \to H^2(\Gamma, \mathrm{Ind}\,M)$, et le noyau est l'image d'un groupe nul. (b) La forme de Noether du théorème~90 de Hilbert donne $H^1(\mathrm{Gal}(L/K), L^\times) = 0$. (c) Soit $\tau$ hors de $\mathrm{Ker}\,\chi = \mathrm{Gal}(L/Z)$. L'application qui envoie $(x, y)$ sur la fonction $h \mapsto h x$ si $\chi(h) = 1$ et $h \mapsto h y$ sinon est un isomorphisme de $\mathrm{Ind}\,M$ sur le coinduit de $M|_{\mathrm{Ker}\,\chi}$, d'inverse $f \mapsto (f(1), \tau^{-1} f(\tau))$. On conclut par le lemme de Shapiro. Un tel $\tau$ existe, puisque $Z \neq K$.
+\end{proof}
+
+\noindent Lean : \href{\leanblobmain/Folder10.lean}{\texttt{torusSeq\_shortExact}} et \href{\leanblobmain/Folder10.lean}{\texttt{torus\_H2\_injective}} pour (a), \href{\leanblobmain/Folder10.lean}{\texttt{norm\_one\_torus\_H2\_injective}}, \href{\leanblobmain/Folder10.lean}{\texttt{torusIncl\_units}} et \href{\leanblobmain/Folder10.lean}{\texttt{normMap\_units}} pour (b), \href{\leanblobmain/Folder10.lean}{\texttt{indShapiro}} et \href{\leanblobmain/Folder10.lean}{\texttt{norm\_one\_torus\_H2\_injective\_quadratic}} pour (c).
+
+\begin{remarque}
+L'énoncé (a) vaut pour tout caractère $\chi$, y compris le caractère trivial, cas où $Z = K \times K$ est déployée et où $G = \mathbf G_m$. Lean n'identifie pas le module $\mathrm{Ind}\,L^\times$ à $(Z \otimes_K L)^\times$ : il prend le modèle des deux idempotents comme définition. Il n'identifie pas non plus $H^2(\mathrm{Gal}(L/Z), L^\times)$ au groupe de Brauer relatif $\mathrm{Br}(L/Z)$. Restent hors de portée le passage à la limite sur $L$, qui donne $H^2(k, G) \to \mathrm{Br}(Z)$, et l'énoncé tannakien que la page en tire : que le caractère numérique détermine $\mathcal M$ à équivalence près. Ce dernier demande les catégories tannakiennes, leurs gerbes et leurs liens, absents de mathlib.
+\end{remarque}

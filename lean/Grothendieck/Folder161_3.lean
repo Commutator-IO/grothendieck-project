@@ -676,3 +676,666 @@ theorem existsUnique_opens_prod (hc : Covers X Y) {L : Type*} [Order.Frame L]
     rw [FrameHom.comp_apply, ← hl, FrameHom.comp_apply, this]
 
 end Grothendieck.Folder161_3
+
+/-! ### Infinite products (pages 11–12)
+
+Pages 11 and 12 pass to an arbitrary family `(X i)`: if all the factors but at most one have
+fundamental systems of quasi-compact neighbourhoods, and all but at most one are quasi-compact,
+then `Top(∏ X i) → ∏ᵗᵒᵖ Top(X i)` is an equivalence. As for two factors, the page argues on the
+restricted product `∏' 𝒪_{X i}`, the families `(Uᵢ)` with `Uᵢ = X i` for almost all `i`, and the
+statement formalised is its frame form.
+
+* **The coproduct.** `Box X` is the restricted product; a `PIdeal X` is a set of boxes stable
+  under shrinking and under unions in each coordinate separately. They form a frame
+  (`PIdeal.instFrame`), which with `PIdeal.inj i U` (the boxes with `i`-th coordinate in `U`) is the
+  coproduct of the frames `Opens (X i)` (`PIdeal.existsUnique_lift`; uniqueness because every
+  `PIdeal` is the join of its boxes, `PIdeal.eq_iSup_box`, and a box is a finite meet of
+  injections). No hypothesis on the `X i`.
+* **The comparison.** `piToOpens`, the lift of the projections, sends `S` to the union of its
+  boxes (`coe_piToOpens`) and is onto (`piToOpens_surjective`); under `PiCovers X` (every box
+  covered by the boxes of a `PIdeal` belongs to it) it is an isomorphism of frames
+  (`piCoversEquiv`) and `Opens (∏ X i)` is itself the coproduct (`existsUnique_opens_pi`).
+* **The covering argument.** A product of compact sets covered by boxes of `S` lies in one box of
+  `S` (`PIdeal.exists_box_of_isCompact`: Tychonoff, then the tube lemma coordinate by coordinate,
+  `PIdeal.exists_box_of_finset`). Then the page's passages to the supremum: through compact
+  neighbourhoods on each locally compact coordinate of the finite set `G` where the box or the
+  space is not everything, and last over the points of the exceptional coordinate
+  (`piCovers_of_forall_ne`).
+* **The statement.** `piCovers`: all factors but at most one locally compact, all but finitely
+  many compact — the footnote's remark that the argument uses compactness only off a finite set.
+  `piFrameEquiv`: the page's two clauses, « tous sauf au plus un » twice.
+
+Not formalised: the passage from frames to topoi, and the page's route through the finite
+products `∏_{i ∈ J_α}` and the filtered limit over `α`, which the direct argument replaces.
+-/
+namespace Grothendieck.Folder161_3
+
+open TopologicalSpace Set Function
+
+noncomputable section InfiniteProduct
+
+open scoped Classical
+
+variable {ι : Type*} (X : ι → Type*) [∀ i, TopologicalSpace (X i)]
+
+/-- The boxes of the restricted product `∏' 𝒪_{Xᵢ}`: families of opens `(Uᵢ)` with `Uᵢ = Xᵢ` for
+all but finitely many `i`. -/
+def Box : Type _ := {u : ∀ i, Opens (X i) // {i | u i ≠ ⊤}.Finite}
+
+variable {X}
+
+namespace Box
+
+instance : SemilatticeInf (Box X) :=
+  Subtype.semilatticeInf fun u v hu hv => (hu.union hv).subset fun i hi => by
+    by_contra h
+    simp only [mem_union, mem_ofPred_eq, not_or, not_not] at h
+    exact hi (by simp [h.1, h.2])
+
+instance : OrderTop (Box X) := Subtype.orderTop (by simp)
+
+lemma le_def {u v : Box X} : u ≤ v ↔ ∀ i, u.1 i ≤ v.1 i := Iff.rfl
+
+@[simp] lemma inf_apply (u v : Box X) (i : ι) : (u ⊓ v).1 i = u.1 i ⊓ v.1 i := rfl
+
+@[simp] lemma top_apply (i : ι) : (⊤ : Box X).1 i = ⊤ := rfl
+
+/-- `u` with its `i`-th coordinate replaced by `W`. -/
+def replace (u : Box X) (i : ι) (W : Opens (X i)) : Box X :=
+  ⟨update u.1 i W, (u.2.insert i).subset fun j hj => by
+    by_cases h : j = i
+    · exact Or.inl h
+    · exact Or.inr (by simpa [update_of_ne h] using hj)⟩
+
+@[simp] lemma replace_apply_self (u : Box X) (i : ι) (W : Opens (X i)) :
+    (u.replace i W).1 i = W := update_self ..
+
+lemma replace_apply_ne (u : Box X) {i j : ι} (h : j ≠ i) (W : Opens (X i)) :
+    (u.replace i W).1 j = u.1 j := update_of_ne h ..
+
+@[simp] lemma replace_self (u : Box X) (i : ι) : u.replace i (u.1 i) = u :=
+  Subtype.ext (update_eq_self i u.1)
+
+lemma replace_le_iff {u v : Box X} {i : ι} {W : Opens (X i)} :
+    u.replace i W ≤ v ↔ W ≤ v.1 i ∧ ∀ j ≠ i, u.1 j ≤ v.1 j := by
+  refine ⟨fun h => ⟨by simpa using le_def.1 h i, fun j hj => by
+    simpa [replace_apply_ne _ hj] using le_def.1 h j⟩, fun h => le_def.2 fun j => ?_⟩
+  by_cases hj : j = i
+  · subst hj; simpa using h.1
+  · simpa [replace_apply_ne _ hj] using h.2 j hj
+
+lemma le_replace_iff {u v : Box X} {i : ι} {W : Opens (X i)} :
+    v ≤ u.replace i W ↔ v.1 i ≤ W ∧ ∀ j ≠ i, v.1 j ≤ u.1 j := by
+  refine ⟨fun h => ⟨by simpa using le_def.1 h i, fun j hj => by
+    simpa [replace_apply_ne _ hj] using le_def.1 h j⟩, fun h => le_def.2 fun j => ?_⟩
+  by_cases hj : j = i
+  · subst hj; simpa using h.1
+  · simpa [replace_apply_ne _ hj] using h.2 j hj
+
+/-- The box `∏ Uᵢ` as a subset of `∏ Xᵢ`. -/
+def toSet (u : Box X) : Set (∀ i, X i) := univ.pi fun i => (u.1 i : Set (X i))
+
+lemma mem_toSet {u : Box X} {z : ∀ i, X i} : z ∈ u.toSet ↔ ∀ i, z i ∈ u.1 i := by
+  simp [toSet]
+
+lemma isOpen_toSet (u : Box X) : IsOpen u.toSet := by
+  have : u.toSet = {i | u.1 i ≠ ⊤}.pi fun i => (u.1 i : Set (X i)) := by
+    ext z
+    simp only [toSet, mem_pi, mem_univ, true_implies, mem_ofPred_eq]
+    refine forall_congr' fun i => ⟨fun h _ => h, fun h => ?_⟩
+    by_cases hi : u.1 i = ⊤ <;> simp_all
+  rw [this]
+  exact isOpen_set_pi u.2 fun i _ => (u.1 i).2
+
+lemma toSet_mono {u v : Box X} (h : u ≤ v) : u.toSet ⊆ v.toSet := fun _ hz =>
+  mem_toSet.2 fun i => le_def.1 h i (mem_toSet.1 hz i)
+
+end Box
+
+/-- A set of boxes stable under shrinking and under arbitrary unions in each coordinate
+separately: an element of the frame coproduct of the `Opens (X i)`, the « S » of pages 11–12. -/
+@[ext]
+structure PIdeal (X : ι → Type*) [∀ i, TopologicalSpace (X i)] where
+  carrier : Set (Box X)
+  mono : ∀ {u v : Box X}, u ∈ carrier → v ≤ u → v ∈ carrier
+  sSup_mem : ∀ (u : Box X) (i : ι) (s : Set (Opens (X i))),
+    (∀ W ∈ s, u.replace i W ∈ carrier) → u.replace i (sSup s) ∈ carrier
+
+namespace PIdeal
+
+variable (S : PIdeal X)
+
+/-- Closure under `sSup` in the coordinate `i`, in the form used below. -/
+lemma mem_of_le_sSup {u : Box X} {i : ι} {s : Set (Opens (X i))} (hu : u.1 i ≤ sSup s)
+    (h : ∀ W ∈ s, u.replace i (u.1 i ⊓ W) ∈ S.carrier) : u ∈ S.carrier := by
+  have := S.sSup_mem u i _ (forall_mem_image.2 h)
+  rwa [sSup_image, ← inf_sSup_eq, inf_eq_left.2 hu, Box.replace_self] at this
+
+/-- A box with an empty coordinate belongs to every `PIdeal`. -/
+lemma mem_of_eq_bot {u : Box X} {i : ι} (h : u.1 i = ⊥) : u ∈ S.carrier := by
+  simpa [← h] using S.sSup_mem u i ∅ (by simp)
+
+lemma isLowerSet : IsLowerSet S.carrier := fun _ _ h hp => S.mono hp h
+
+instance : PartialOrder (PIdeal X) := PartialOrder.lift carrier fun _ _ => PIdeal.ext
+
+lemma le_def {S T : PIdeal X} : S ≤ T ↔ S.carrier ⊆ T.carrier := Iff.rfl
+
+lemma mem_of_le {S T : PIdeal X} (h : S ≤ T) {u} (hu : u ∈ S.carrier) : u ∈ T.carrier := h hu
+
+instance : InfSet (PIdeal X) where
+  sInf s :=
+    { carrier := ⋂ S ∈ s, S.carrier
+      mono := fun h hvu => mem_iInter₂.2 fun S hS => S.mono (mem_iInter₂.1 h S hS) hvu
+      sSup_mem := fun u i t h => mem_iInter₂.2 fun S hS =>
+        S.sSup_mem u i t fun W hW => mem_iInter₂.1 (h W hW) S hS }
+
+lemma carrier_sInf (s : Set (PIdeal X)) : (sInf s).carrier = ⋂ S ∈ s, S.carrier := rfl
+
+/-- Meets are intersections; the join of a family is the `PIdeal` generated by its union. -/
+instance : CompleteLattice (PIdeal X) :=
+  completeLatticeOfInf _ fun _ =>
+    ⟨fun _ hS => biInter_subset_of_mem hS, fun _ hT => subset_iInter₂ hT⟩
+
+@[simp] lemma carrier_inf (S T : PIdeal X) : (S ⊓ T).carrier = S.carrier ∩ T.carrier := by
+  change (⋂ U ∈ ({S, T} : Set (PIdeal X)), U.carrier) = _
+  simp
+
+@[simp] lemma carrier_top : (⊤ : PIdeal X).carrier = univ := by
+  change (⋂ U ∈ (∅ : Set (PIdeal X)), U.carrier) = _
+  simp
+
+@[simp] lemma carrier_iInf {κ : Type*} (S : κ → PIdeal X) :
+    (⨅ k, S k).carrier = ⋂ k, (S k).carrier := by
+  change (sInf (range S)).carrier = _
+  simp [carrier_sInf]
+
+/-- The `PIdeal` generated by a set of boxes. -/
+def span (D : Set (Box X)) : PIdeal X := sInf {S | D ⊆ S.carrier}
+
+lemma subset_span (D : Set (Box X)) : D ⊆ (span D).carrier :=
+  subset_iInter₂ fun _ h => h
+
+lemma span_le {D : Set (Box X)} {S : PIdeal X} (h : D ⊆ S.carrier) : span D ≤ S :=
+  sInf_le h
+
+lemma sSup_eq_span (s : Set (PIdeal X)) : sSup s = span (⋃ S ∈ s, S.carrier) :=
+  le_antisymm (sSup_le fun _ hS => (subset_biUnion_of_mem hS).trans (subset_span _))
+    (span_le (iUnion₂_subset fun _ hS => (le_sSup hS : _ ≤ sSup s)))
+
+/-- The `PIdeal` generated by a down-set `D` meets a down-set `A` inside the one generated by
+`D ∩ A`: the distributive law of the frame. -/
+lemma span_inter {D A : Set (Box X)} (hD : IsLowerSet D) (hA : IsLowerSet A) :
+    (span D).carrier ∩ A ⊆ (span (D ∩ A)).carrier := by
+  let T : PIdeal X :=
+    { carrier := {p | ∀ q ≤ p, q ∈ A → q ∈ (span (D ∩ A)).carrier}
+      mono := fun h hvu q hq => h q (hq.trans hvu)
+      sSup_mem := fun u i s h q hq hqA => by
+        obtain ⟨hqi, hqj⟩ := Box.le_replace_iff.1 hq
+        refine (span _).mem_of_le_sSup hqi fun W hW => h W hW _ ?_ (hA ?_ hqA)
+        · exact Box.replace_le_iff.2 ⟨by simp, fun j hj => by
+            rw [Box.replace_apply_ne _ hj]; exact hqj j hj⟩
+        · exact Box.replace_le_iff.2 ⟨inf_le_left, fun _ _ => le_rfl⟩ }
+  rintro p ⟨hp, hpA⟩
+  exact span_le (S := T) (fun q hq r hr hrA => subset_span _ ⟨hD hr hq, hrA⟩) hp p le_rfl hpA
+
+/-- The `PIdeal`s form a frame. -/
+instance instFrame : Order.Frame (PIdeal X) := .ofMinimalAxioms ⟨fun a s p hp => by
+  rw [carrier_inf, sSup_eq_span] at hp
+  refine span_le (fun q hq => ?_) (span_inter (isLowerSet_iUnion₂ fun S _ => S.isLowerSet)
+    a.isLowerSet ⟨hp.2, hp.1⟩)
+  obtain ⟨S, hS, hqS⟩ := mem_iUnion₂.1 hq.1
+  exact mem_of_le (le_biSup (a ⊓ ·) hS) (by simp [hq.2, hqS])⟩
+
+/-! #### The coproduct of the frames `Opens (X i)` -/
+
+/-- The `i`-th injection `U ↦ pr_i⁻¹(U)`: the boxes whose `i`-th coordinate lies in `U`, and
+those with an empty coordinate. -/
+def inj (i : ι) : FrameHom (Opens (X i)) (PIdeal X) where
+  toFun U :=
+    { carrier := {u | u.1 i ≤ U ∨ ∃ j, u.1 j = ⊥}
+      mono := fun h hvu => h.imp (fun h => (Box.le_def.1 hvu i).trans h)
+        fun ⟨j, hj⟩ => ⟨j, le_bot_iff.1 (hj ▸ Box.le_def.1 hvu j)⟩
+      sSup_mem := fun u j s h => by
+        by_cases hb : ∃ k, k ≠ j ∧ u.1 k = ⊥
+        · obtain ⟨k, hk, hb⟩ := hb
+          exact Or.inr ⟨k, by rw [Box.replace_apply_ne _ hk, hb]⟩
+        push Not at hb
+        have key : ∀ W ∈ s, (u.replace j W).1 i ≤ U ∨ W = ⊥ := fun W hW =>
+          (h W hW).imp_right fun ⟨k, hk⟩ => by
+            by_cases hkj : k = j
+            · subst hkj; simpa using hk
+            · exact (hb k hkj (by rwa [Box.replace_apply_ne _ hkj] at hk)).elim
+        by_cases hij : i = j
+        · subst hij
+          refine Or.inl ?_
+          simp only [Box.replace_apply_self]
+          exact sSup_le fun W hW => (key W hW).elim (by simpa using ·) fun h => h ▸ bot_le
+        · by_cases hu : u.1 i ≤ U
+          · exact Or.inl (by rwa [Box.replace_apply_ne _ hij])
+          · refine Or.inr ⟨j, ?_⟩
+            rw [Box.replace_apply_self]
+            exact sSup_eq_bot.2 fun W hW =>
+              (key W hW).resolve_left (by rwa [Box.replace_apply_ne _ hij]) }
+  map_inf' U U' := PIdeal.ext <| by
+    ext u
+    simp only [carrier_inf, mem_inter_iff, mem_ofPred_eq, le_inf_iff]
+    exact and_or_right
+  map_top' := PIdeal.ext <| by ext; simp
+  map_sSup' s := by
+    refine le_antisymm ?_ (sSup_le ?_)
+    · rintro u (h | ⟨j, hj⟩)
+      exacts [mem_of_le_sSup _ h fun U hU =>
+        mem_of_le (le_sSup (mem_image_of_mem _ hU)) (.inl (by simp)), mem_of_eq_bot _ hj]
+    exact forall_mem_image.2 fun _ hU _ hp => hp.imp (le_trans · (le_sSup hU)) id
+
+@[simp] lemma mem_inj {u : Box X} {i : ι} {U : Opens (X i)} :
+    u ∈ (inj i U : PIdeal X).carrier ↔ u.1 i ≤ U ∨ ∃ j, u.1 j = ⊥ := Iff.rfl
+
+/-- The box `u` lies in `S` exactly when `⨅ i, inj i (u i) ≤ S`. -/
+lemma iInf_inj_le_iff {u : Box X} : ⨅ i, inj i (u.1 i) ≤ S ↔ u ∈ S.carrier := by
+  refine ⟨fun h => h (by simp), fun h v hv => ?_⟩
+  simp only [carrier_iInf, mem_iInter, mem_inj] at hv
+  by_cases hb : ∃ j, v.1 j = ⊥
+  · exact hb.elim fun _ => S.mem_of_eq_bot
+  · exact S.mono h (Box.le_def.2 fun i => (hv i).resolve_right hb)
+
+/-- Every `PIdeal` is the join of its boxes. -/
+theorem eq_iSup_box : S = ⨆ u ∈ S.carrier, ⨅ i, inj i (u.1 i) := by
+  refine le_antisymm (le_def.2 fun u hu => ?_) (iSup₂_le fun _ => (iInf_inj_le_iff S).2)
+  exact mem_of_le (le_biSup (fun u : Box X => ⨅ i, (inj i (u.1 i) : PIdeal X)) hu) (by simp)
+
+/-- An infinite meet whose terms are `⊤` off a finite set is a finite meet. -/
+lemma iInf_eq_finset_inf {α : Type*} [CompleteLattice α] (g : ι → α) (F : Finset ι)
+    (hg : ∀ i ∉ F, g i = ⊤) : ⨅ i, g i = F.inf g :=
+  le_antisymm (Finset.le_inf fun i _ => iInf_le _ i) (le_iInf fun i => by
+    by_cases hi : i ∈ F
+    exacts [Finset.inf_le hi, by simp [hg i hi]])
+
+variable {L : Type*} [Order.Frame L] (f : ∀ i, FrameHom (Opens (X i)) L)
+
+lemma iInf_replace (u : Box X) (i : ι) (W : Opens (X i)) :
+    ⨅ j, f j ((u.replace i W).1 j) = f i W ⊓ ⨅ (j) (_ : j ≠ i), f j (u.1 j) := by
+  rw [iInf_split_single _ i, Box.replace_apply_self]
+  congr 1
+  exact iInf_congr fun j => iInf_congr fun hj => by rw [Box.replace_apply_ne _ hj]
+
+/-- The sup `⨆_{u ∈ D} ⨅ᵢ fᵢ uᵢ` does not change when `D` is replaced by the `PIdeal` it
+generates. -/
+lemma iSup_span (D : Set (Box X)) :
+    ⨆ u ∈ (span D).carrier, ⨅ i, f i (u.1 i) = ⨆ u ∈ D, ⨅ i, f i (u.1 i) := by
+  refine le_antisymm ?_ (biSup_mono (subset_span D))
+  let T : PIdeal X :=
+    { carrier := {u | ⨅ i, f i (u.1 i) ≤ ⨆ u ∈ D, ⨅ i, f i (u.1 i)}
+      mono := fun h hvu =>
+        (iInf_mono fun i => OrderHomClass.mono (f i) (Box.le_def.1 hvu i)).trans h
+      sSup_mem := fun u i s h => by
+        show ⨅ j, f j ((u.replace i (sSup s)).1 j) ≤ _
+        rw [iInf_replace, map_sSup, sSup_image, iSup₂_inf_eq]
+        exact iSup₂_le fun W hW => by
+          have := h W hW
+          rwa [mem_ofPred_eq, iInf_replace] at this }
+  exact iSup₂_le fun u hu =>
+    span_le (S := T) (fun v hv => show ⨅ i, f i (v.1 i) ≤ _ from
+      le_iSup₂ (f := fun v _ => ⨅ i, f i (v.1 i)) v hv) hu
+
+/-- The map out of the coproduct: `S ↦ ⨆_{u ∈ S} ⨅ᵢ fᵢ uᵢ`. -/
+def lift : FrameHom (PIdeal X) L where
+  toFun S := ⨆ u ∈ S.carrier, ⨅ i, f i (u.1 i)
+  map_inf' S T := by
+    show ⨆ u ∈ (S ⊓ T).carrier, _ = (⨆ u ∈ S.carrier, _) ⊓ ⨆ u ∈ T.carrier, _
+    rw [carrier_inf]
+    refine le_antisymm (iSup₂_le fun u hu => le_inf (le_iSup₂_of_le u hu.1 le_rfl)
+      (le_iSup₂_of_le u hu.2 le_rfl)) ?_
+    simp only [iSup₂_inf_eq, inf_iSup₂_eq]
+    exact iSup₂_le fun v hv => iSup₂_le fun u hu => le_iSup₂_of_le (u ⊓ v)
+      ⟨S.mono hu inf_le_left, T.mono hv inf_le_right⟩
+      (by simp only [Box.inf_apply, map_inf, iInf_inf_eq]; exact le_rfl)
+  map_top' := top_le_iff.1 <| le_iSup₂_of_le ⊤ (by simp) (by simp)
+  map_sSup' s := by simp only [sSup_eq_span, iSup_span, sSup_image, iSup_iUnion]
+
+lemma lift_apply (S : PIdeal X) : lift f S = ⨆ u ∈ S.carrier, ⨅ i, f i (u.1 i) := rfl
+
+theorem lift_comp_inj (i : ι) : (lift f).comp (inj i) = f i := FrameHom.ext fun U =>
+  le_antisymm (iSup₂_le fun u hu => hu.elim
+      (fun h => (iInf_le _ i).trans (OrderHomClass.mono (f i) h))
+      fun ⟨j, hj⟩ => (iInf_le _ j).trans (by simp [hj]))
+    (le_iSup₂_of_le ((⊤ : Box X).replace i U) (Or.inl (by simp)) (le_iInf fun j => by
+      by_cases hj : j = i
+      · subst hj; simp
+      · simp [Box.replace_apply_ne _ hj]))
+
+theorem lift_unique (h : FrameHom (PIdeal X) L) (hf : ∀ i, h.comp (inj i) = f i) :
+    h = lift f := by
+  ext S
+  conv_lhs => rw [eq_iSup_box S]
+  rw [map_iSup₂, lift_apply]
+  refine iSup_congr fun u => iSup_congr fun _ => ?_
+  have hF : ∀ i ∉ u.2.toFinset, u.1 i = ⊤ := fun i hi => by simpa using hi
+  rw [iInf_eq_finset_inf _ u.2.toFinset fun i hi => by simp [hF i hi],
+    iInf_eq_finset_inf _ u.2.toFinset fun i hi => by simp [hF i hi], map_finset_inf]
+  exact Finset.inf_congr rfl fun i _ => DFunLike.congr_fun (hf i) (u.1 i)
+
+/-- The universal property of the coproduct `⨂ᵢ Opens (X i)` of frames. -/
+theorem existsUnique_lift :
+    ∃! h : FrameHom (PIdeal X) L, ∀ i, h.comp (inj i) = f i :=
+  ⟨lift f, lift_comp_inj f, fun h hh => lift_unique f h hh⟩
+
+end PIdeal
+
+/-! #### The comparison with `Opens (∏ X i)` -/
+
+open PIdeal
+
+/-- The `i`-th projection `∏ X j → X i`. -/
+def proj (i : ι) : C((∀ j, X j), X i) := ⟨fun z => z i, continuous_apply i⟩
+
+/-- A box as an open of the product. -/
+def Box.toOpens (u : Box X) : Opens (∀ i, X i) := ⟨u.toSet, u.isOpen_toSet⟩
+
+lemma iInf_comap_proj (u : Box X) : ⨅ i, Opens.comap (proj i) (u.1 i) = u.toOpens :=
+  le_antisymm (fun _ hz => Box.mem_toSet.2 fun i =>
+      (iInf_le (fun i => Opens.comap (proj i) (u.1 i)) i : _) hz)
+    (le_iInf fun i _ hz => Box.mem_toSet.1 hz i)
+
+/-- The comparison map `S ↦ ⋃_{u ∈ S} ∏ uᵢ`, the map out of the coproduct given by the
+projections. -/
+def piToOpens : FrameHom (PIdeal X) (Opens (∀ i, X i)) := lift fun i => Opens.comap (proj i)
+
+lemma coe_piToOpens (S : PIdeal X) :
+    (piToOpens S : Set (∀ i, X i)) = ⋃ u ∈ S.carrier, u.toSet := by
+  simp [piToOpens, lift_apply, iInf_comap_proj, Box.toOpens]
+
+theorem piToOpens_comp_inj (i : ι) : piToOpens.comp (inj i) = Opens.comap (proj i : C(_, X i)) :=
+  lift_comp_inj _ i
+
+/-- The boxes contained in `W ⊆ ∏ X i`. -/
+def piRect (W : Set (∀ i, X i)) : PIdeal X where
+  carrier := {u | u.toSet ⊆ W}
+  mono h hvu := (Box.toSet_mono hvu).trans h
+  sSup_mem u i s h z hz := by
+    have hz' := Box.mem_toSet.1 hz
+    obtain ⟨W, hW, hzW⟩ := Opens.mem_sSup.1 (by simpa using hz' i)
+    refine h W hW (Box.mem_toSet.2 fun j => ?_)
+    by_cases hj : j = i
+    · subst hj; simpa using hzW
+    · have := hz' j
+      rw [Box.replace_apply_ne _ hj] at this ⊢
+      exact this
+
+/-- An open `W` of the product is the union of the boxes inside it. -/
+theorem iUnion_piRect {W : Set (∀ i, X i)} (hW : IsOpen W) :
+    ⋃ u ∈ (piRect W).carrier, u.toSet = W := by
+  refine subset_antisymm (iUnion₂_subset fun u hu => hu) fun z hz => ?_
+  obtain ⟨I, t, ht, hIt⟩ := isOpen_pi_iff.1 hW z hz
+  let b : Box X := ⟨fun i => if h : i ∈ I then ⟨t i, (ht i h).1⟩ else ⊤,
+    I.finite_toSet.subset fun i hi => by
+      by_contra h
+      exact hi (by simp [show i ∉ I by simpa using h])⟩
+  refine mem_biUnion (x := b) (show b.toSet ⊆ W from fun y hy => hIt fun i hi => ?_) ?_
+  · simpa [b, Finset.mem_coe.1 hi] using Box.mem_toSet.1 hy i
+  · refine Box.mem_toSet.2 fun i => ?_
+    by_cases hi : i ∈ I
+    · simpa [b, hi] using (ht i hi).2
+    · simp [b, hi]
+
+/-- Unconditionally, every open of the product comes from a `PIdeal`. -/
+theorem piToOpens_surjective :
+    Function.Surjective (piToOpens : PIdeal X → Opens (∀ i, X i)) :=
+  fun W => ⟨piRect W, Opens.ext <| (coe_piToOpens _).trans (iUnion_piRect W.2)⟩
+
+/-- Every box covered set-theoretically by the boxes of a `PIdeal` belongs to it: the spatiality
+of the product locale of the `X i`. -/
+def PiCovers (X : ι → Type*) [∀ i, TopologicalSpace (X i)] : Prop :=
+  ∀ (S : PIdeal X) (u : Box X), u.toSet ⊆ ⋃ v ∈ S.carrier, v.toSet → u ∈ S.carrier
+
+theorem piToOpens_injective_of_piCovers (hc : PiCovers X) :
+    Function.Injective (piToOpens : PIdeal X → Opens (∀ i, X i)) := by
+  have key (S : PIdeal X) : S = piRect (piToOpens S : Set (∀ i, X i)) := PIdeal.ext <| by
+    refine subset_antisymm (fun u hu => ?_) fun u hu => hc S u ?_
+    · show u.toSet ⊆ _
+      rw [coe_piToOpens]
+      exact subset_biUnion_of_mem (u := fun v : Box X => v.toSet) hu
+    · rw [← coe_piToOpens]; exact hu
+  exact fun S T h => (key S).trans (h ▸ (key T).symm)
+
+/-- Under `PiCovers X`, `piToOpens` is an isomorphism of frames. -/
+def piCoversEquiv (hc : PiCovers X) : PIdeal X ≃o Opens (∀ i, X i) where
+  __ := Equiv.ofBijective piToOpens ⟨piToOpens_injective_of_piCovers hc, piToOpens_surjective⟩
+  map_rel_iff' {S T} := show piToOpens S ≤ piToOpens T ↔ S ≤ T by
+    rw [← inf_eq_left, ← map_inf, (piToOpens_injective_of_piCovers hc).eq_iff, inf_eq_left]
+
+@[simp] lemma piCoversEquiv_apply (hc : PiCovers X) (S : PIdeal X) :
+    piCoversEquiv hc S = piToOpens S := rfl
+
+/-- Under `PiCovers X`, `Opens (∏ X i)` with the inverse images along the projections is the
+coproduct of the frames `Opens (X i)`. -/
+theorem existsUnique_opens_pi (hc : PiCovers X) {L : Type*} [Order.Frame L]
+    (f : ∀ i, FrameHom (Opens (X i)) L) :
+    ∃! h : FrameHom (Opens (∀ i, X i)) L, ∀ i, h.comp (Opens.comap (proj i)) = f i := by
+  let e := piCoversEquiv hc
+  let e' : FrameHom (Opens (∀ i, X i)) (PIdeal X) :=
+    { toFun := e.symm, map_inf' := map_inf e.symm, map_top' := map_top e.symm,
+      map_sSup' := map_sSup e.symm }
+  have he (S : PIdeal X) : e' (piToOpens S) = S := e.symm_apply_apply S
+  refine ⟨(lift f).comp e', fun i => FrameHom.ext fun U => ?_, fun h hh => FrameHom.ext fun W => ?_⟩
+  · show lift f (e' (Opens.comap _ U)) = f i U
+    rw [← piToOpens_comp_inj, FrameHom.comp_apply, he]
+    exact DFunLike.congr_fun (lift_comp_inj f i) U
+  · have hl : h.comp piToOpens = lift f := lift_unique f _ fun i => by
+      rw [FrameHom.comp_assoc, piToOpens_comp_inj, hh]
+    have : piToOpens (e' W) = W := e.apply_symm_apply W
+    rw [FrameHom.comp_apply, ← hl, FrameHom.comp_apply, this]
+
+/-! #### The covering argument -/
+
+/-- The tube lemma in finitely many coordinates: if the boxes of `S` supported in `H₀` cover
+`∏ Kᵢ`, with `Kᵢ` compact for `i ∈ H₀`, then one box of `S` supported in `H₀` contains it.
+Induction on the coordinates: for `h` the next one, `IsCompact.induction_on` on `K h`,
+the other coordinates frozen at a point by the induction hypothesis. -/
+theorem PIdeal.exists_box_of_finset (S : PIdeal X) (H₀ : Finset ι) (K : ∀ i, Set (X i))
+    (hK : ∀ i ∈ H₀, IsCompact (K i)) (hne : ∀ i, (K i).Nonempty)
+    (hcov : ∀ z ∈ univ.pi K, ∃ v ∈ S.carrier, (∀ i ∉ H₀, v.1 i = ⊤) ∧ ∀ i ∈ H₀, z i ∈ v.1 i) :
+    ∃ w ∈ S.carrier, (∀ i ∉ H₀, w.1 i = ⊤) ∧ ∀ i ∈ H₀, K i ⊆ w.1 i := by
+  suffices ∀ H : Finset ι, H ⊆ H₀ → ∀ K : ∀ i, Set (X i), (∀ i ∈ H₀, IsCompact (K i)) →
+      (∀ i, (K i).Nonempty) → (∀ i ∈ H₀, i ∉ H → (K i).Subsingleton) →
+      (∀ z ∈ univ.pi K, ∃ v ∈ S.carrier, (∀ i ∉ H₀, v.1 i = ⊤) ∧ ∀ i ∈ H₀, z i ∈ v.1 i) →
+      ∃ w ∈ S.carrier, (∀ i ∉ H₀, w.1 i = ⊤) ∧ ∀ i ∈ H₀, K i ⊆ w.1 i from
+    this H₀ subset_rfl K hK hne (fun i hi hi' => (hi' hi).elim) hcov
+  intro H
+  induction H using Finset.induction_on with
+  | empty =>
+    intro _ K _ hne hsub hcov
+    obtain ⟨v, hv, hvt, hz⟩ :=
+      hcov (fun i => (hne i).some) (mem_univ_pi.2 fun i => (hne i).some_mem)
+    refine ⟨v, hv, hvt, fun i hi x hx => ?_⟩
+    rw [hsub i hi (Finset.notMem_empty i) hx (hne i).some_mem]
+    exact hz i hi
+  | insert h H hh ih =>
+    intro hH K hK hne hsub hcov
+    have hh₀ : h ∈ H₀ := hH (Finset.mem_insert_self _ _)
+    have key : ∃ w ∈ S.carrier, (∀ i ∉ H₀, w.1 i = ⊤) ∧ K h ⊆ w.1 h ∧
+        ∀ i ∈ H₀, i ≠ h → K i ⊆ w.1 i := by
+      refine (hK h hh₀).induction_on (p := fun t => ∃ w ∈ S.carrier, (∀ i ∉ H₀, w.1 i = ⊤) ∧
+        t ⊆ w.1 h ∧ ∀ i ∈ H₀, i ≠ h → K i ⊆ w.1 i) ?_ ?_ ?_ ?_
+      · refine ⟨(⊤ : Box X).replace h ⊥, S.mem_of_eq_bot (i := h) (by simp), fun i hi => ?_,
+          empty_subset _, fun i _ hih => ?_⟩
+        · rw [Box.replace_apply_ne _ (ne_of_mem_of_not_mem hh₀ hi).symm]; rfl
+        · simp [Box.replace_apply_ne _ hih]
+      · exact fun s t hst ⟨w, h1, h2, h3, h4⟩ => ⟨w, h1, h2, hst.trans h3, h4⟩
+      · rintro s t ⟨w, h1, h2, h3, h4⟩ ⟨w', h1', h2', h3', h4'⟩
+        refine ⟨(w ⊓ w').replace h (w.1 h ⊔ w'.1 h), ?_, fun i hi => ?_, ?_, fun i hi hih => ?_⟩
+        · have := S.sSup_mem (w ⊓ w') h {w.1 h, w'.1 h} (by
+            rintro W (rfl | rfl)
+            exacts [S.mono h1 (Box.replace_le_iff.2 ⟨le_rfl, fun j _ => by simp⟩),
+              S.mono h1' (Box.replace_le_iff.2 ⟨le_rfl, fun j _ => by simp⟩)])
+          rwa [sSup_pair] at this
+        · rw [Box.replace_apply_ne _ (ne_of_mem_of_not_mem hh₀ hi).symm, Box.inf_apply,
+            h2 i hi, h2' i hi, top_inf_eq]
+        · simpa using union_subset_union h3 h3'
+        · rw [Box.replace_apply_ne _ hih, Box.inf_apply, Opens.coe_inf]
+          exact subset_inter (h4 i hi hih) (h4' i hi hih)
+      · intro a ha
+        obtain ⟨w, hw, hwt, hwK⟩ := ih (fun i hi => hH (Finset.mem_insert_of_mem hi))
+          (update K h {a})
+          (fun i hi => by
+            by_cases hih : i = h
+            · subst hih; simp
+            · rw [update_of_ne hih]; exact hK i hi)
+          (fun i => by
+            by_cases hih : i = h
+            · subst hih; simp
+            · rw [update_of_ne hih]; exact hne i)
+          (fun i hi hiH => by
+            by_cases hih : i = h
+            · subst hih; simp
+            · rw [update_of_ne hih]; exact hsub i hi (by simp [hih, hiH]))
+          (fun z hz => hcov z (mem_univ_pi.2 fun i => by
+            have := mem_univ_pi.1 hz i
+            by_cases hih : i = h
+            · subst hih; simp only [update_self, mem_singleton_iff] at this; exact this ▸ ha
+            · rwa [update_of_ne hih] at this))
+        have haw : a ∈ w.1 h := by simpa using hwK h hh₀
+        refine ⟨w.1 h, mem_nhdsWithin_of_mem_nhds ((w.1 h).2.mem_nhds haw), w, hw, hwt,
+          subset_rfl, fun i hi hih => ?_⟩
+        have := hwK i hi
+        rwa [update_of_ne hih] at this
+    obtain ⟨w, hw, hwt, hwh, hwK⟩ := key
+    exact ⟨w, hw, hwt, fun i hi => if hih : i = h then hih ▸ hwh else hwK i hi hih⟩
+
+/-- A product of compact sets covered set-theoretically by the boxes of `S` lies in one box of
+`S`. No hypothesis on the spaces: Tychonoff gives finitely many covering boxes, whose supports
+lie in a finite `H₀`, and `exists_box_of_finset` concludes. -/
+theorem PIdeal.exists_box_of_isCompact (S : PIdeal X) (K : ∀ i, Set (X i))
+    (hK : ∀ i, IsCompact (K i)) (hcov : univ.pi K ⊆ ⋃ v ∈ S.carrier, v.toSet) :
+    ∃ w ∈ S.carrier, ∀ i, K i ⊆ w.1 i := by
+  by_cases hne : ∀ i, (K i).Nonempty
+  swap
+  · push Not at hne
+    obtain ⟨i, hi⟩ := hne
+    refine ⟨(⊤ : Box X).replace i ⊥, S.mem_of_eq_bot (i := i) (by simp), fun j => ?_⟩
+    by_cases hj : j = i
+    · subst hj; simp [hi]
+    · simp [Box.replace_apply_ne _ hj]
+  obtain ⟨t, ht⟩ := (isCompact_univ_pi hK).elim_finite_subcover (fun v : S.carrier => v.1.toSet)
+    (fun v => v.1.isOpen_toSet) (hcov.trans fun z hz => by
+      obtain ⟨v, hv, hzv⟩ := mem_iUnion₂.1 hz
+      exact mem_iUnion.2 ⟨⟨v, hv⟩, hzv⟩)
+  let H₀ : Finset ι := t.biUnion fun v => v.1.2.toFinset
+  obtain ⟨w, hw, hwt, hwK⟩ := S.exists_box_of_finset H₀ K (fun i _ => hK i) hne fun z hz => by
+    obtain ⟨v, hvt, hzv⟩ := mem_iUnion₂.1 (ht hz)
+    refine ⟨v.1, v.2, fun i hi => ?_, fun i _ => Box.mem_toSet.1 hzv i⟩
+    by_contra hvi
+    exact hi (Finset.mem_biUnion.2 ⟨v, hvt, by simpa using hvi⟩)
+  refine ⟨w, hw, fun i => ?_⟩
+  by_cases hi : i ∈ H₀
+  · exact hwK i hi
+  · simp [hwt i hi]
+
+/-- Pages 11–12, with an exceptional index `e`: if every `X i` with `i ≠ e` is locally compact
+and all but finitely many are compact, the product locale is spatial. For `u` a box, `G` the
+finite set of its nontrivial coordinates and of the non-compact factors: passages to the
+supremum over the coordinates of `G` other than `e`, each through compact neighbourhoods
+(`step`), then over the points `y` of the `e`-th coordinate (`base`), where the compact set
+`∏_{i ∈ G, i ≠ e} Kᵢ × {y} × ∏_{i ∉ G} X i` lies in one box of `S`
+(`exists_box_of_isCompact`). -/
+theorem piCovers_of_forall_ne (e : ι) (hLC : ∀ i, i ≠ e → LocallyCompactSpace (X i))
+    (hC : {i | ¬ CompactSpace (X i)}.Finite) : PiCovers X := by
+  intro S u hu
+  set G : Finset ι := u.2.toFinset ∪ hC.toFinset
+  have hG : ∀ i ∉ G, u.1 i = ⊤ ∧ CompactSpace (X i) := fun i hi => by
+    simpa [G, not_or] using hi
+  set G' := G.erase e
+  have base : ∀ w : Box X, w ≤ u → (∀ i ∈ G', ∃ K : Set (X i), IsCompact K ∧
+      (w.1 i : Set (X i)) ⊆ K ∧ K ⊆ u.1 i) → w ∈ S.carrier := by
+    intro w hwu hw
+    choose K hK hwK hKu using hw
+    refine S.mem_of_le_sSup (i := e) (s := {B | w.replace e (w.1 e ⊓ B) ∈ S.carrier})
+      (fun y hy => ?_) fun B hB => hB
+    let Kt : ∀ i, Set (X i) :=
+      update (fun i => if h : i ∈ G' then K i h else (univ : Set (X i))) e {y}
+    have hKt : ∀ i, i ≠ e → Kt i = if h : i ∈ G' then K i h else univ := fun i hi => by
+      simp only [Kt, update_of_ne hi]
+    obtain ⟨w', hw', hKw'⟩ := S.exists_box_of_isCompact Kt (fun i => by
+        by_cases hie : i = e
+        · subst hie; simp [Kt]
+        rw [hKt i hie]
+        split_ifs with h
+        · exact hK i h
+        · have := (hG i fun hG => h (Finset.mem_erase.2 ⟨hie, hG⟩)).2
+          exact isCompact_univ)
+      ((show univ.pi Kt ⊆ u.toSet from fun z hz => Box.mem_toSet.2 fun i => by
+        have hz := mem_univ_pi.1 hz i
+        by_cases hie : i = e
+        · subst hie
+          simp only [Kt, update_self, mem_singleton_iff] at hz
+          exact hz ▸ Box.le_def.1 hwu i hy
+        rw [hKt i hie] at hz
+        split_ifs at hz with h
+        · exact hKu i h hz
+        · rw [(hG i fun hG => h (Finset.mem_erase.2 ⟨hie, hG⟩)).1]; trivial).trans hu)
+    have hwKt : ∀ j, j ≠ e → (w.1 j : Set (X j)) ⊆ Kt j := fun j hj => by
+      rw [hKt j hj]
+      split_ifs with h
+      exacts [hwK j h, subset_univ _]
+    refine Opens.mem_sSup.2 ⟨w'.1 e, S.mono hw' (Box.replace_le_iff.2 ⟨inf_le_right,
+      fun j hj => show (w.1 j : Set (X j)) ⊆ w'.1 j from (hwKt j hj).trans (hKw' j)⟩), ?_⟩
+    exact hKw' e (by simp [Kt])
+  have step : ∀ H : Finset ι, H ⊆ G' → ∀ w : Box X, w ≤ u → (∀ i ∈ G', i ∉ H →
+      ∃ K : Set (X i), IsCompact K ∧ (w.1 i : Set (X i)) ⊆ K ∧ K ⊆ u.1 i) → w ∈ S.carrier := by
+    intro H
+    induction H using Finset.induction_on with
+    | empty => exact fun _ w hwu hw => base w hwu fun i hi => hw i hi (Finset.notMem_empty i)
+    | insert h H hh ih =>
+      intro hH w hwu hw
+      have hhe : h ≠ e := (Finset.mem_erase.1 (hH (Finset.mem_insert_self _ _))).1
+      have := hLC h hhe
+      refine S.mem_of_le_sSup (i := h) (s := {W | w.replace h (w.1 h ⊓ W) ∈ S.carrier})
+        (fun x hx => ?_) fun W hW => hW
+      obtain ⟨K, hKx, hKw, hK⟩ := local_compact_nhds ((w.1 h).2.mem_nhds hx)
+      let W : Opens (X h) := ⟨interior K, isOpen_interior⟩
+      refine Opens.mem_sSup.2 ⟨W, ih (fun i hi => hH (Finset.mem_insert_of_mem hi)) _ ?_
+        fun i hi hiH => ?_, mem_interior_iff_mem_nhds.2 hKx⟩
+      · exact Box.replace_le_iff.2 ⟨inf_le_left.trans (Box.le_def.1 hwu h),
+      fun j _ => Box.le_def.1 hwu j⟩
+      · by_cases hih : i = h
+        · subst hih
+          refine ⟨K, hK, fun z hz => interior_subset (show z ∈ (w.1 i : Set (X i)) ∩ interior K by
+            simpa [W] using hz).2,
+            fun z hz => Box.le_def.1 hwu i (hKw hz)⟩
+        · rw [Box.replace_apply_ne _ hih]
+          exact hw i hi (by simp [hih, hiH])
+  exact step G' subset_rfl u le_rfl fun i hi hi' => (hi' hi).elim
+
+/-- **Pages 11–12, strongest form.** If all the `X i` but at most one are locally compact
+(« systèmes fondamentaux de voisinages quasi-compacts ») and all but finitely many are compact,
+the product locale is spatial. -/
+theorem piCovers (hLC : {i | ¬ LocallyCompactSpace (X i)}.Subsingleton)
+    (hC : {i | ¬ CompactSpace (X i)}.Finite) : PiCovers X := by
+  by_cases hι : IsEmpty ι
+  · intro S u hu
+    obtain ⟨v, hv, -⟩ := mem_iUnion₂.1 (hu (Box.mem_toSet.2 fun i => isEmptyElim i :
+      (isEmptyElim : ∀ i, X i) ∈ u.toSet))
+    rwa [show u = v from Subtype.ext (funext isEmptyElim)]
+  rw [not_isEmpty_iff] at hι
+  obtain ⟨e, he⟩ : ∃ e, ∀ i, i ≠ e → LocallyCompactSpace (X i) := by
+    by_cases h : ∃ e, ¬ LocallyCompactSpace (X e)
+    · obtain ⟨e, he⟩ := h
+      exact ⟨e, fun i hi => Classical.byContradiction fun h' => hi (hLC h' he)⟩
+    · push Not at h
+      exact ⟨Classical.arbitrary ι, fun i _ => h i⟩
+  exact piCovers_of_forall_ne e he hC
+
+/-- **Pages 11–12, the page's statement.** If all the `X i` but at most one have fundamental
+systems of quasi-compact neighbourhoods, and all but at most one are quasi-compact, the coproduct
+of the frames `Opens (X i)` is the frame of opens of `∏ X i`, by the comparison map `piToOpens`. -/
+def piFrameEquiv (hLC : {i | ¬ LocallyCompactSpace (X i)}.Subsingleton)
+    (hC : {i | ¬ CompactSpace (X i)}.Subsingleton) : PIdeal X ≃o Opens (∀ i, X i) :=
+  piCoversEquiv (piCovers hLC hC.finite)
+
+@[simp] lemma piFrameEquiv_apply (hLC : {i | ¬ LocallyCompactSpace (X i)}.Subsingleton)
+    (hC : {i | ¬ CompactSpace (X i)}.Subsingleton) (S : PIdeal X) :
+    piFrameEquiv hLC hC S = piToOpens S := rfl
+
+end InfiniteProduct
+end Grothendieck.Folder161_3

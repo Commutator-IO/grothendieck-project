@@ -56,7 +56,7 @@ Le théorème \texttt{hypG\_not\_hypI} rassemble ces faits : un espace sobre peu
 
 \noindent\emph{Portée de la vérification.} Les noms cités sont ceux de \href{\leanblobmain/Folder161_3.lean}{\texttt{Folder161\_3.lean}}, sauf \texttt{quasiSober\_pi}, \texttt{Scattered.quasiSober} et \texttt{Scattered.t0Space}, résultats généraux que la bibliothèque du projet démontre une fois pour toutes dans \href{\leanblobmain/Upstream/QuasiSoberPiCoreCompact.lean}{\texttt{Upstream/\allowbreak QuasiSoberPiCoreCompact.lean}}. Lean démontre l'argument de la page dans le modèle des familles de rectangles, les trois passages à la borne supérieure des pages~9 et~10, la bijection avec les ouverts de $X \times Y$, la propriété universelle du coproduit des cadres, la spatialité du locale produit sous l'une ou l'autre hypothèse, puis le contre-exemple \texttt{hypG\_not\_hypI}. Reste le côté des topos : l'égalité $\pi = \pi'$ des topologies elles-mêmes, et l'identification des faisceaux sur le locale produit au $2$-produit $\mathrm{Top}(X) \times \mathrm{Top}(Y)$. Mathlib n'a pas de $2$-catégorie des topos, et l'équivalence de l'énoncé n'est démontrée qu'au niveau des cadres. Lean ne vérifie pas non plus la remarque de l'édition selon laquelle, pour $X$ sobre, l'hypothèse d'Isbell entraîne celle de la page. Elle repose sur le théorème de Hofmann et Lawson : un espace sobre quasi localement compact est localement quasi-compact \cite[cor.~4.6]{hofmannlawson1978}.
 
-Ne sont pas démontrés ici : la construction du $2$-produit de topos (pages~3 à~8) ; le cas d'un produit infini (pages~11 et~12) ; la question de la page~14, sur des facteurs discrets, que la page laisse sur un point d'interrogation.
+Ne sont pas démontrés ici : la construction du $2$-produit de topos (pages~3 à~8) ; le cas d'un produit infini (pages~11 et~12) au-delà des cadres d'ouverts, démontré ci-dessous ; la question de la page~14, sur des facteurs discrets, que la page laisse sur un point d'interrogation.
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 3 à 8 ; voir aussi Artin, Grothendieck et Verdier 1972 \cite{sga4-1}, 2-produit de topos\piste{161-3-two-product-by-intersection}]\nonverifie
@@ -76,3 +76,28 @@ Pour une famille quelconque d'espaces $(X_i)$, $\mathrm{Top}(\prod X_i) \to \pro
 \begin{demopage}[pages 11 et 12]
 Le cas fini se tire du cas de deux facteurs (p.~11). En général, $I$ étant réunion filtrante de parties finies $J_\alpha$, le 2-produit est le topos des faisceaux sur la catégorie $\mathcal O'_Z$ des ouverts de $Z = \prod X_i$ venus d'un $Z_\alpha = \prod_{i \in J_\alpha} X_i$, pour la topologie limite ; il reste à voir qu'elle est la topologie induite par $Z$. Pour $W = U \times Z'_\alpha$ recouvert par des $V_\lambda$, la quasi-compacité de $Z'_\alpha = \prod_{i \notin J_\alpha} X_i$ donne pour chaque $z \in U$ un voisinage $U_z$ tel que $U_z \times Z'_\alpha$ soit majoré par la borne supérieure $S$ des $V_\lambda$, d'où $S \geq W$ (p.~12). Cet argument suppose quasi-compacts tous les facteurs hors d'un nombre fini.
 \end{demopage}
+
+\noindent\emph{Le cas des cadres d'ouverts.} Comme pour deux facteurs, la page raisonne sur le produit restreint $\prod' \mathcal O_{X_i}$, au niveau des cadres d'ouverts. C'est cette forme de l'énoncé que Lean démontre, sous une hypothèse un peu plus faible que celle de la page, celle que dégage la note de la lecture.
+
+\begin{encadre}
+\begin{enonce}[Grothendieck, pages 11 et 12, forme des cadres d'ouverts]\verifie[\leanblobmain]{Folder161_3}
+Soit $(X_i)_{i \in I}$ une famille quelconque d'espaces topologiques. On appelle \emph{pavé} une famille $(U_i)$ d'ouverts avec $U_i = X_i$ sauf pour un nombre fini d'indices, et on note $\bigotimes_i \mathcal O(X_i)$ le cadre des ensembles de pavés stables par rétrécissement et par réunion quelconque en chaque coordonnée séparément.
+\begin{enumerate}
+\item[(a)] Muni des injections $U \mapsto \mathrm{pr}_i^{-1}(U)$, $\bigotimes_i \mathcal O(X_i)$ est le coproduit des cadres $\mathcal O(X_i)$.
+\item[(b)] Si tous les $X_i$ sauf un au plus sont localement quasi-compacts, et si tous sauf un nombre fini sont quasi-compacts, l'application $S \mapsto \bigcup_{(U_i) \in S} \prod_i U_i$ est un isomorphisme de cadres de $\bigotimes_i \mathcal O(X_i)$ sur $\mathcal O(\prod_i X_i)$. Le cadre $\mathcal O(\prod_i X_i)$, muni des images réciproques par les projections, est alors le coproduit des $\mathcal O(X_i)$ : le locale produit est spatial.
+\end{enumerate}
+En particulier, l'hypothèse de la page (« tous sauf au plus un », deux fois) suffit.
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+(a) Un élément $S$ est la borne supérieure de ses pavés, et un pavé est la borne inférieure \emph{finie} des $\mathrm{pr}_i^{-1}(U_i)$, $U_i \neq X_i$ ; un morphisme de cadres est donc déterminé par ses composées avec les injections, et $S \mapsto \bigvee_{(U_i) \in S} \bigwedge_i f_i(U_i)$ le fournit. La loi distributive se démontre comme pour deux facteurs.
+
+(b) L'application est surjective sans hypothèse, car tout ouvert du produit est réunion des pavés qu'il contient. Pour l'injectivité, il faut voir qu'un $S$ contient tout pavé $u$ que ses pavés recouvrent ensemblistement. D'abord un lemme du tube, sans hypothèse : un produit de parties compactes $\prod_i K_i$ recouvert par les pavés de $S$ est contenu dans un seul pavé de $S$. Par Tychonoff, un nombre fini de pavés suffisent, à supports dans une partie finie $H$, et l'on raisonne coordonnée par coordonnée sur $H$, par la récurrence des parties compactes, les autres coordonnées étant figées en un point. Soient ensuite $e$ l'indice exceptionnel et $G$ la partie finie des indices où $u_i \neq X_i$ ou bien $X_i$ n'est pas quasi-compact. On passe à la borne supérieure sur chaque coordonnée de $G$ autre que $e$, au moyen de voisinages compacts $K_i \subset u_i$. On passe enfin à la borne supérieure sur les points $y$ de la coordonnée $e$ : le compact $\prod_{i \in G \setminus \{e\}} K_i \times \{y\} \times \prod_{i \notin G \cup \{e\}} X_i$ est dans $\prod u_i$, donc dans un pavé de $S$, ce qui donne un voisinage de $y$.
+\end{proof}
+
+\noindent Lean : \href{\leanblobmain/Folder161_3.lean}{\texttt{PIdeal.existsUnique\_lift}} pour (a) ; \href{\leanblobmain/Folder161_3.lean}{\texttt{PIdeal.exists\_box\_of\_isCompact}} pour le lemme du tube, \href{\leanblobmain/Folder161_3.lean}{\texttt{piCovers}} pour la spatialité, \href{\leanblobmain/Folder161_3.lean}{\texttt{piCoversEquiv}} et \href{\leanblobmain/Folder161_3.lean}{\texttt{existsUnique\_opens\_pi}} pour (b), \href{\leanblobmain/Folder161_3.lean}{\texttt{piFrameEquiv}} pour l'hypothèse de la page.
+
+\begin{remarque}
+La démonstration de Lean ne suit pas le chemin de la page, qui passe par les produits finis $\prod_{i \in J_\alpha} X_i$ et la limite filtrante sur $\alpha$ : elle va directement au produit restreint, et les passages à la borne supérieure sont ceux des pages~9 et~10. Reste le côté des topos : l'identification des faisceaux sur le locale produit au $2$-produit $\prod^{\mathrm{top}} \mathrm{Top}(X_i)$. Mathlib n'a pas de $2$-catégorie des topos.
+\end{remarque}

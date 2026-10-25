@@ -470,3 +470,275 @@ theorem xi_tensor_string (hk : ((m : K) + 2) ≠ 0) :
 end Tensor
 
 end Grothendieck.Folder10
+
+/-!
+# Folder 10, page 65: `H²` of a norm-one torus (finding `10-numerical-character-rank-one-torus`)
+
+Exemple 1 of page 65: `G` a one-dimensional torus split by a quadratic `Z/k`, the exact
+sequence `0 → G → Z^* → 𝔾_m → 0` (`Z^* = R_{Z/k} 𝔾_m`, the norm on the right), and « par
+Hilbert 90 » the kernel of `H²(k, G) → H²(k, Z^*) = Br(Z)` is zero. Formalised at a finite
+Galois level `L ⊇ Z`, with `Γ = Gal(L/K)` and `χ : Γ → {±1}` the sign of `Z`:
+`M` any `Γ`-module, `G = M` twisted by `χ` (`twistRep`), `Z^* = M × M` with `Γ` swapping the
+factors outside `Ker χ` (`indRep`), `x ↦ (x, -x)` and `(x, y) ↦ x + y` (`torusSeq`, short exact).
+
+* `torus_H2_injective`: `H¹(Γ, M) = 0 ⟹ H²(Γ, G) → H²(Γ, Z^*)` injective (long exact sequence).
+* `norm_one_torus_H2_injective`: for `M = Lˣ`, by mathlib's Hilbert 90.
+* `indShapiro`, `norm_one_torus_H2_injective_quadratic`: `H²(Γ, Z^*) ≅ H²(Gal(L/Z), Lˣ)`, and
+  the composite is injective, `Z` a quadratic subextension, `quadChar` its sign.
+
+Not formalised: the limit over `L` (Galois cohomology of `k`), the identification of
+`H²(Gal(L/Z), Lˣ)` with `Br(L/Z)`, and the tannakian statement the page draws from it.
+-/
+
+namespace Grothendieck.Folder10.NormOneTorus
+
+open CategoryTheory groupCohomology
+
+variable {k Γ : Type} [CommRing k] [Group Γ] (χ : Γ →* ℤˣ) (M : Rep.{0} k Γ)
+
+/-- `M` twisted by the sign `χ`: `g ⋆ x = χ(g) · g x`. For `M = Lˣ` this is the norm-one torus
+`G = Ker(N : R_{Z/k} 𝔾_m → 𝔾_m)` on `L`-points, `g ⋆ x = g(x)^{χ g}`. -/
+def twistRep : Representation k Γ M.V where
+  toFun g := (χ g : ℤ) • M.ρ g
+  map_one' := by simp
+  map_mul' g h := by
+    rw [map_mul, map_mul, Units.val_mul, smul_mul_smul_comm]
+
+/-- The identity of `M × M` when `χ g = 1`, the swap of the two factors otherwise. -/
+def swapLin (g : Γ) : M.V × M.V →ₗ[k] M.V × M.V :=
+  if χ g = 1 then LinearMap.id else (LinearMap.snd k M.V M.V).prod (LinearMap.fst k M.V M.V)
+
+lemma swapLin_apply (g : Γ) (v : M.V × M.V) :
+    swapLin χ M g v = if χ g = 1 then v else (v.2, v.1) := by
+  unfold swapLin; split_ifs <;> rfl
+
+/-- `M × M` with `g · (x, y) = (g x, g y)` if `χ g = 1` and `(g y, g x)` otherwise: for
+`M = Lˣ` and `χ` the sign of a quadratic `Z ⊆ L`, this is `(Z ⊗_k L)ˣ`, the `L`-points of
+`R_{Z/k} 𝔾_m`, written in the basis of the two idempotents. -/
+def indRep : Representation k Γ (M.V × M.V) where
+  toFun g := ((M.ρ g).prodMap (M.ρ g)) ∘ₗ swapLin χ M g
+  map_one' := by
+    ext v <;> simp [swapLin_apply]
+  map_mul' g h := by
+    refine LinearMap.ext fun v => ?_
+    simp only [LinearMap.comp_apply, swapLin_apply, map_mul, Module.End.mul_apply]
+    rcases Int.units_eq_one_or (χ g) with hg | hg <;>
+      rcases Int.units_eq_one_or (χ h) with hh | hh <;> simp [hg, hh]
+
+lemma indRep_apply (g : Γ) (v : M.V × M.V) :
+    indRep χ M g v = if χ g = 1 then (M.ρ g v.1, M.ρ g v.2) else (M.ρ g v.2, M.ρ g v.1) := by
+  change (M.ρ g).prodMap (M.ρ g) (swapLin χ M g v) = _
+  rw [swapLin_apply]; split_ifs <;> rfl
+
+lemma twistRep_apply (g : Γ) (v : M.V) : twistRep χ M g v = (χ g : ℤ) • M.ρ g v := rfl
+
+/-- `x ↦ (x, -x)`. -/
+def torusIncl : (twistRep χ M).IntertwiningMap (indRep χ M) :=
+  LinearMap.intertwiningMap_of_isIntertwiningMap (twistRep χ M) (indRep χ M)
+    (LinearMap.id.prod (-LinearMap.id))
+    fun g v => by
+      rw [indRep_apply, twistRep_apply]
+      rcases Int.units_eq_one_or (χ g) with hg | hg <;> simp [hg]
+
+/-- `(x, y) ↦ x + y`. -/
+def normMap : (indRep χ M).IntertwiningMap M.ρ :=
+  LinearMap.intertwiningMap_of_isIntertwiningMap (indRep χ M) M.ρ
+    (LinearMap.coprod LinearMap.id LinearMap.id)
+    fun g v => by
+      rw [indRep_apply]
+      split_ifs <;> simp [add_comm]
+
+lemma torusIncl_apply (v : M.V) : torusIncl χ M v = (v, -v) := rfl
+lemma normMap_apply (v : M.V × M.V) : normMap χ M v = v.1 + v.2 := rfl
+
+/-- `0 → G → Z^* → 𝔾_m → 0` of page 65, at the level of `Γ`-modules. -/
+def torusSeq : ShortComplex (Rep.{0} k Γ) where
+  X₁ := Rep.of (twistRep χ M)
+  X₂ := Rep.of (indRep χ M)
+  X₃ := M
+  f := Rep.ofHom (torusIncl χ M)
+  g := Rep.ofHom (normMap χ M)
+  zero := by
+    ext v
+    simp [torusIncl_apply, normMap_apply]
+
+lemma torusSeq_shortExact : (torusSeq χ M).ShortExact where
+  exact := (forget₂ (Rep.{0} k Γ) (ModuleCat k)).reflects_exact_of_faithful _ <|
+    (ShortComplex.moduleCat_exact_iff _).2 fun x hx => by
+      obtain ⟨a, b⟩ := x
+      refine ⟨a, ?_⟩
+      change torusIncl χ M a = (a, b)
+      rw [torusIncl_apply, ← eq_neg_of_add_eq_zero_right (show a + b = 0 from hx)]
+  mono_f := (Rep.mono_iff_injective _).2 fun _ _ h => congrArg Prod.fst h
+  epi_g := (Rep.epi_iff_surjective _).2 fun x => ⟨((x, 0) : M.V × M.V), by
+    change normMap χ M (x, 0) = x
+    rw [normMap_apply, add_zero]⟩
+
+/-- The long exact sequence: if `Hⁿ(G, X₃) = 0` then `Hⁿ⁺¹(G, X₁) → Hⁿ⁺¹(G, X₂)` is
+injective. -/
+theorem map_succ_injective {G : Type} [Group G]
+    {X : ShortComplex (Rep.{0} k G)} (hX : X.ShortExact) (n : ℕ)
+    (h : Subsingleton (groupCohomology X.X₃ n)) :
+    Function.Injective (map (MonoidHom.id G) X.f (n + 1)).hom := by
+  have : Subsingleton (mapShortComplex₁ hX (i := n) (j := n + 1) rfl).X₁ := h
+  exact (ModuleCat.mono_iff_injective _).1
+    ((mapShortComplex₁_exact hX (i := n) (j := n + 1) rfl).mono_g
+      ((ModuleCat.isZero_of_subsingleton _).eq_of_src _ _))
+
+/-- Page 65, abstractly: `H²(Γ, G) → H²(Γ, Z^*)` is injective as soon as `H¹(Γ, M) = 0`. -/
+theorem torus_H2_injective (h : Subsingleton (groupCohomology M 1)) :
+    Function.Injective (map (MonoidHom.id Γ) (A := Rep.of (twistRep χ M)) (torusSeq χ M).f 2).hom :=
+  map_succ_injective (torusSeq_shortExact χ M) 1 h
+
+section Shapiro
+
+/-- `v ↦ (h ↦ ρ(h) v₁ if χ h = 1, ρ(h) v₂ otherwise)`. -/
+def toCoindFun : M.V × M.V →ₗ[k] (Γ → M.V) :=
+  LinearMap.pi fun h =>
+    if χ h = 1 then M.ρ h ∘ₗ LinearMap.fst k M.V M.V else M.ρ h ∘ₗ LinearMap.snd k M.V M.V
+
+lemma toCoindFun_apply (v : M.V × M.V) (h : Γ) :
+    toCoindFun χ M v h = if χ h = 1 then M.ρ h v.1 else M.ρ h v.2 := by
+  simp only [toCoindFun, LinearMap.pi_apply]
+  split_ifs <;> rfl
+
+lemma toCoindFun_mem (v : M.V × M.V) :
+    toCoindFun χ M v ∈ Representation.coindV χ.ker.subtype (Rep.res χ.ker.subtype M).ρ := by
+  intro s h
+  have hs : χ s = 1 := s.2
+  simp only [toCoindFun_apply, Subgroup.subtype_apply, map_mul, hs, one_mul, Module.End.mul_apply]
+  split_ifs <;> rfl
+
+noncomputable def toCoind :
+    (indRep χ M).IntertwiningMap (Rep.coind χ.ker.subtype (Rep.res χ.ker.subtype M)).ρ :=
+  LinearMap.intertwiningMap_of_isIntertwiningMap _ _
+    ((toCoindFun χ M).codRestrict _ (toCoindFun_mem χ M))
+    fun g v => by
+      ext h
+      change toCoindFun χ M (indRep χ M g v) h = toCoindFun χ M v (h * g)
+      simp only [toCoindFun_apply, indRep_apply, map_mul, Module.End.mul_apply]
+      rcases Int.units_eq_one_or (χ g) with hg | hg <;>
+        rcases Int.units_eq_one_or (χ h) with hh | hh <;> simp [hg, hh]
+
+lemma toCoind_apply (v : M.V × M.V) (h : Γ) : (toCoind χ M v).1 h = toCoindFun χ M v h := rfl
+
+lemma rho_inv_apply (g : Γ) (x : M.V) : M.ρ g⁻¹ (M.ρ g x) = x := by
+  rw [← Module.End.mul_apply, ← map_mul, inv_mul_cancel, map_one, Module.End.one_apply]
+
+lemma toCoind_bijective {τ : Γ} (hτ : χ τ ≠ 1) : Function.Bijective (toCoind χ M) := by
+  have hτ' : χ τ = -1 := (Int.units_eq_one_or _).resolve_left hτ
+  constructor
+  · intro a b hab
+    have h1 : toCoindFun χ M a 1 = toCoindFun χ M b 1 := congrArg (fun f => f.1 1) hab
+    have h2 : toCoindFun χ M a τ = toCoindFun χ M b τ := congrArg (fun f => f.1 τ) hab
+    simp only [toCoindFun_apply, map_one, Module.End.one_apply, ite_true] at h1
+    simp only [toCoindFun_apply, hτ, ite_false] at h2
+    exact Prod.ext h1 (by simpa only [rho_inv_apply] using congrArg (M.ρ τ⁻¹) h2)
+  · intro f
+    refine ⟨(f.1 1, M.ρ τ⁻¹ (f.1 τ)), Subtype.ext (funext fun h => ?_)⟩
+    change toCoindFun χ M _ h = f.1 h
+    rw [toCoindFun_apply]
+    split_ifs with hh
+    · have := f.2 ⟨h, hh⟩ 1
+      simp only [Subgroup.subtype_apply, mul_one] at this
+      rw [this]; rfl
+    · have hm : χ (h * τ⁻¹) = 1 := by
+        rw [map_mul, map_inv, hτ', (Int.units_eq_one_or _).resolve_left hh]; rfl
+      have := f.2 ⟨h * τ⁻¹, hm⟩ τ
+      simp only [Subgroup.subtype_apply, inv_mul_cancel_right] at this
+      rw [this]
+      change M.ρ h (M.ρ τ⁻¹ (f.1 τ)) = M.ρ (h * τ⁻¹) (f.1 τ)
+      rw [map_mul, Module.End.mul_apply]
+
+/-- Shapiro (`coindIso`): when `χ` is non-trivial, `H^n(Γ, Ind) ≅ H^n(Ker χ, M)`. -/
+noncomputable def indShapiro {τ : Γ} (hτ : χ τ ≠ 1) (n : ℕ) :
+    groupCohomology (Rep.of (indRep χ M)) n ≅ groupCohomology (Rep.res χ.ker.subtype M) n :=
+  have : IsIso (Rep.ofHom (toCoind χ M)) := by
+    have hb := toCoind_bijective χ M hτ
+    have : Mono (Rep.ofHom (toCoind χ M)) := (Rep.mono_iff_injective _).2 hb.1
+    have : Epi (Rep.ofHom (toCoind χ M)) := (Rep.epi_iff_surjective _).2 hb.2
+    exact isIso_of_mono_of_epi _
+  (functor k Γ n).mapIso (asIso (Rep.ofHom (toCoind χ M))) ≪≫ coindIso _ n
+
+/-- The composite `H²(Γ, T) → H²(Γ, Ind) ≅ H²(Ker χ, M)` is injective when `H¹(Γ, M) = 0`. -/
+theorem torus_H2_injective_res {τ : Γ} (hτ : χ τ ≠ 1) (h : Subsingleton (groupCohomology M 1)) :
+    Function.Injective
+      ((map (MonoidHom.id Γ) (A := Rep.of (twistRep χ M)) (torusSeq χ M).f 2) ≫
+        (indShapiro χ M hτ 2).hom).hom := by
+  have hi : Function.Injective (indShapiro χ M hτ 2).hom.hom :=
+    (ModuleCat.mono_iff_injective _).1 inferInstance
+  exact fun a b hab => torus_H2_injective χ M h (hi hab)
+
+end Shapiro
+
+variable (K L : Type) [Field K] [Field L] [Algebra K L] [FiniteDimensional K L]
+
+/-- Page 65, Exemple 1, at a finite level: by Hilbert 90 (`H1ofAutOnUnitsUnique`),
+`H²(Gal(L/K), G(L)) → H²(Gal(L/K), (Z ⊗_K L)ˣ)` is injective, for every sign `χ`. -/
+theorem norm_one_torus_H2_injective (χ : Gal(L/K) →* ℤˣ) :
+    Function.Injective
+      (map (MonoidHom.id _) (A := Rep.of (twistRep χ (Rep.ofAlgebraAutOnUnits K L)))
+        (torusSeq χ (Rep.ofAlgebraAutOnUnits K L)).f 2).hom :=
+  torus_H2_injective χ _ inferInstance
+
+omit [FiniteDimensional K L] in
+open Additive in
+/-- On `Lˣ` the twisted action is `γ ⋆ x = γ(x)^{χ γ}`. -/
+lemma twist_units_apply (χ : Gal(L/K) →* ℤˣ) (γ : Gal(L/K)) (x : Lˣ) :
+    toMul (twistRep χ (Rep.ofAlgebraAutOnUnits K L) γ (ofMul x)) = (γ • x) ^ (χ γ : ℤ) := rfl
+
+/-- The sign character of a quadratic subextension. -/
+noncomputable def quadChar [IsGalois K L] (Z : IntermediateField K L)
+    [Algebra.IsQuadraticExtension K Z] : Gal(L/K) →* ℤˣ :=
+  have : Algebra.IsSeparable K Z := Algebra.isSeparable_tower_bot_of_isSeparable K Z L
+  have hZ : Nat.card Gal(Z/K) = 2 := by
+    rw [IsGalois.card_aut_eq_finrank,
+      Algebra.IsQuadraticExtension.finrank_eq_two]
+  have : Fact (Nat.Prime 2) := ⟨Nat.prime_two⟩
+  (mulEquivOfPrimeCardEq hZ (by rw [Nat.card_eq_fintype_card]; rfl)).toMonoidHom.comp
+    (AlgEquiv.restrictNormalHom Z)
+
+lemma quadChar_eq_one_iff [IsGalois K L] (Z : IntermediateField K L)
+    [Algebra.IsQuadraticExtension K Z] (γ : Gal(L/K)) :
+    quadChar K L Z γ = 1 ↔ ∀ z ∈ Z, γ z = z := by
+  unfold quadChar
+  rw [MonoidHom.comp_apply, MulEquiv.coe_toMonoidHom, MulEquiv.map_eq_one_iff,
+    ← MonoidHom.mem_ker, IntermediateField.restrictNormalHom_ker,
+    IntermediateField.mem_fixingSubgroup_iff]
+
+lemma exists_quadChar_ne_one [IsGalois K L] (Z : IntermediateField K L)
+    [Algebra.IsQuadraticExtension K Z] : ∃ τ, quadChar K L Z τ ≠ 1 := by
+  by_contra! h
+  have hle : Z ≤ ⊥ := fun z hz => by
+    rw [← IsGalois.fixedField_top (F := K) (E := L)]
+    exact fun γ => (quadChar_eq_one_iff K L Z γ.1).1 (h γ.1) z hz
+  have := IntermediateField.finrank_eq_one_iff.2 (le_antisymm hle bot_le)
+  rw [Algebra.IsQuadraticExtension.finrank_eq_two] at this
+  exact absurd this (by norm_num)
+
+omit [FiniteDimensional K L] in
+open Additive in
+/-- On `Lˣ` the inclusion of the torus is `x ↦ (x, x⁻¹)`. -/
+lemma torusIncl_units (χ : Gal(L/K) →* ℤˣ) (x : Lˣ) :
+    torusIncl χ (Rep.ofAlgebraAutOnUnits K L) (ofMul x) = (ofMul x, ofMul x⁻¹) := rfl
+
+omit [FiniteDimensional K L] in
+open Additive in
+/-- On `Lˣ` the map to `𝔾_m` is `(x, y) ↦ x y`, the norm. -/
+lemma normMap_units (χ : Gal(L/K) →* ℤˣ) (x y : Lˣ) :
+    normMap χ (Rep.ofAlgebraAutOnUnits K L) (ofMul x, ofMul y) = ofMul (x * y) := rfl
+
+/-- Page 65, Exemple 1, for a quadratic `Z ⊆ L` with `L/K` finite Galois: the composite
+`H²(Gal(L/K), G(L)) → H²(Gal(L/K), (Z ⊗_K L)ˣ) ≅ H²(Gal(L/Z), Lˣ)` (Shapiro) is injective;
+`H²(Gal(L/Z), Lˣ)` is the relative Brauer group `Br(L/Z)`. -/
+theorem norm_one_torus_H2_injective_quadratic [IsGalois K L] (Z : IntermediateField K L)
+    [Algebra.IsQuadraticExtension K Z] :
+    Function.Injective
+      ((map (MonoidHom.id _) (A := Rep.of (twistRep (quadChar K L Z) (Rep.ofAlgebraAutOnUnits K L)))
+        (torusSeq (quadChar K L Z) (Rep.ofAlgebraAutOnUnits K L)).f 2) ≫
+        (indShapiro (quadChar K L Z) (Rep.ofAlgebraAutOnUnits K L)
+          (exists_quadChar_ne_one K L Z).choose_spec 2).hom).hom :=
+  torus_H2_injective_res _ _ _ inferInstance
+
+
+end Grothendieck.Folder10.NormOneTorus

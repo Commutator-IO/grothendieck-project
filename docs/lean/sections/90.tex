@@ -67,3 +67,48 @@ Soient $S$ un schéma et $G$ un $S$-schéma en groupes plat et affine, dont l'al
 \end{theoreme*}
 \end{encadre}
 {\small Les feuillets en esquissent une démonstration incomplète (pages 19 à 23). L'argument s'arrête sur \q{Rédiger mieux ce début}. Mathlib n'a pas les modules quasi-cohérents équivariants. On se reportera aux notes de Grothendieck (\lot{90}{1}{13}).\par}
+
+\subsection*{Le plus petit sous-comodule, sur $\mathrm{Spec}\,A$ (pages 7--9 et 13--15)\protect\verifie{Folder90Comodules}}\label{sec:90-comodules}
+
+La page~13 (\lot{90}{1}{13}) énonce, pour un groupe affine sur une base quelconque dont l'algèbre $B$ est réunion filtrante de sous-modules $B_i$ avec 1)~$B/B_i$ plat, 2)~$\Delta B_i \subset B_i \otimes B_i$, 3)~$B_i$ localement libre de type fini, et pour un $G$-module quasi-cohérent $E$ à action triviale :
+
+\begin{quote}
+\emph{1) tout sous-module quasi-cohérent $F$ de $E$ est contenu dans un plus petit sous-module quasi-cohérent $F'$ stable par $G$ ; sa formation commute à tout changement de base plat ; si $F$ est de type fini, $F'$ aussi ; 2) si $X$ est quasi-compact et quasi-séparé, $E$ est réunion filtrante de sous-modules quasi-cohérents de type fini stables par $G$.}
+\end{quote}
+
+\noindent La page n'en donne pas de démonstration ; la lecture propose la formule $F' = \sum_i U_i \cdot (F \cap E_i)$, $U_i = \check B_i$, tirée de la description des pages~7 et~9. On démontre ici le cas de l'anneau, $X = S = \mathrm{Spec}\,A$, que la page énonce et argumente. Mathlib a les cogèbres mais pas les comodules : un comodule est un $A$-module $E$ muni d'une coaction $\delta \colon E \to B \otimes E$ counitaire et coassociative, et $N \subset E$ est un sous-comodule si $\delta N$ est contenu dans l'image de $B \otimes N$.
+
+\begin{encadre}
+\begin{enonce}[Pages 13--15, cas affine]\verifie[\leanblobmain]{Folder90Comodules}
+Soient $A$ un anneau commutatif et $B$ une $A$-cogèbre, réunion filtrante de sous-modules $B_i$ projectifs de type fini, avec $B/B_i$ plat et $\Delta B_i \subset \mathrm{Im}(B_i \otimes B_i \to B \otimes B)$. Soit $E$ un $B$-comodule.
+\begin{enumerate}
+  \item Tout sous-module $F$ de $E$ est contenu dans un plus petit sous-comodule $F'$, à savoir le sous-module engendré par les $(u \otimes \mathrm{id})(y)$, où $y \in B_i \otimes E$ relève $\delta f$, $f \in F$ et $u \in U_i = \mathrm{Hom}_A(B_i, A)$.
+  \item Si $F$ est de type fini, $F'$ l'est, et $F' = U_i \cdot F$ pour un seul indice $i$.
+  \item Tout élément de $E$ est dans un sous-comodule de type fini ; ceux-ci sont stables par somme, et $E$ en est la réunion filtrante.
+  \item Pour tout morphisme de comodules $\varphi$, $\varphi(F') = (\varphi F)'$.
+  \item Pour toute $A$-algèbre $A'$, $A' \otimes E$ est un comodule sur la $A'$-cogèbre $A' \otimes B$, et l'image de $A' \otimes F'$ dans $A' \otimes E$ est le plus petit sous-comodule contenant l'image de $A' \otimes F$. Si $A'$ est plat sur $A$, cette image est $A' \otimes F'$.
+\end{enumerate}
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+\emph{L'étape de platitude.} Comme $B/B_i$ est plat, $B_i \otimes M \to B \otimes M$ est injectif pour tout $M$ (suite exacte $0 \to B_i \to B \to B/B_i \to 0$, lemme du serpent sur une présentation de $M$). Il en découle l'égalité de la lecture, $(B_i \otimes E) \cap (B \otimes N) = B_i \otimes N$ : si $y \in B_i \otimes E$ a son image dans $B \otimes N$, son image dans $B_i \otimes (E/N)$ s'envoie sur $0$ dans $B \otimes (E/N)$, donc est nulle, et $y$ provient de $B_i \otimes N$ par exactitude à droite.
+
+\emph{$F'$ contient $F$.} Pour $f \in F$, $\delta f$ est une somme finie, donc dans un $B_i \otimes E$ ; la coünité restreinte à $B_i$ donne $(\varepsilon \otimes \mathrm{id})(y) = (\varepsilon \otimes \mathrm{id})\,\delta f = f$.
+
+\emph{Minimalité.} Si $N \supset F$ est un sous-comodule et $y \in B_i \otimes E$ relève $\delta f$, $f \in F$, l'image de $y$ est dans $B \otimes N$, donc $y \in B_i \otimes N$ par l'étape de platitude, et $(u \otimes \mathrm{id})(y) \in N$.
+
+\emph{Stabilité.} Le module projectif de type fini $B_i$ a une base duale finie $(b_k, b_k^*)$, et $\Delta$ se relève en $\Delta_i \colon B_i \to B_i \otimes B_i$ par projectivité. La coassociativité et l'injectivité de $B_i \otimes (B \otimes E) \to B \otimes (B \otimes E)$ donnent $(\mathrm{id} \otimes \delta)(y) = (\Delta_i \otimes \mathrm{id})(y)$ dans $B_i \otimes B \otimes E$, d'où
+\[
+\delta\big((u \otimes \mathrm{id})\,y\big) = \sum_k b_k \otimes \big((u * b_k^*) \otimes \mathrm{id}\big)(y), \qquad u * v = (u \otimes v) \circ \Delta_i ,
+\]
+et les coefficients sont encore des générateurs de $F'$.
+
+\emph{Finitude.} Si $F$ est engendré par $f_1, \dots, f_m$, on choisit un $i$ commun (la famille est filtrante) et des relèvements $y_j$ de $\delta f_j$. Le sous-module $G$ engendré par les $(b_k^* \otimes \mathrm{id})(y_j)$ contient tous les $(u \otimes \mathrm{id})(y_j)$, puisque $u = \sum_k u(b_k)\, b_k^*$ ; il est stable par la formule précédente et contient $F$ ; donc $F' \subset G \subset F'$, et $F'$ est de type fini. Le point~3 s'en déduit avec $F = A e$.
+
+\emph{Morphismes et changement de base.} Un morphisme $\varphi$ envoie les générateurs de $F'$ sur des générateurs de $(\varphi F)'$, et $\varphi(F')$ est un sous-comodule contenant $\varphi F$. Pour $A'$, l'application $e \mapsto 1 \otimes e$ est un morphisme de $B$-comodules $E \to A' \otimes E$ ; un sous-comodule de $A' \otimes E$ sur $A' \otimes B$ en est un sur $B$, par $(a \otimes b) \otimes n \mapsto b \otimes a n$ ; et l'image de $A' \otimes F'$ est le $A'$-module engendré par $1 \otimes F'$. Si $A'$ est plat, $A' \otimes F' \to A' \otimes E$ est injectif.
+\end{proof}
+
+\begin{remarque}
+L'énoncé~1 tient sur tout anneau commutatif tel que la lecture le complète, et la compatibilité au changement de base tient pour toute $A$-algèbre $A'$ dès qu'on l'énonce avec des images ; la platitude de $A'$ ne sert qu'à identifier l'image à $A' \otimes F'$. La platitude de $B/B_i$ n'intervient que par l'injectivité de $B_i \otimes M \to B \otimes M$. Ne sont pas formalisés : les modules quasi-cohérents sur un schéma $X$ au-dessus d'une base $S$ quelconque (recollement, hypothèse « quasi-compact et quasi-séparé » de 2)), les énoncés~3) et~4), l'équivalence de la page~7 entre comodules $i$-admissibles et $U_i$-modules, et l'action de $G$ sur $X$ des pages~17 à~23, qui est l'objet de la trouvaille. Noms Lean : \texttt{Comodule}, \texttt{IsSubcomodule}, \texttt{Exhaustion}, \texttt{Exhaustion.closure}, \texttt{Exhaustion.isLeast\_closure}, \texttt{Exhaustion.closure\_fg}, \texttt{Exhaustion.exists\_fg\_isSubcomodule}, \texttt{IsSubcomodule.sup}, \texttt{Exhaustion.map\_closure}, \texttt{Exhaustion.coact\_coeff}, \texttt{Exhaustion.mem\_range\_lTensor\_of\_rTensor\_mem}, \texttt{comoduleBaseChange}, \texttt{isLeast\_closure\_baseChange}, \texttt{baseChange\_closure\_injective}.
+\end{remarque}
