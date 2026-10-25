@@ -1,5 +1,6 @@
 import Mathlib.Topology.Sets.Opens
 import Mathlib.Topology.LocallyClosed
+import Mathlib.Topology.Sober
 
 /-!
 # Folder 161-3: the topos of a product, the converse on pages 10–11
@@ -45,13 +46,32 @@ réciproque »), together with its translation into frames.
   `frameEquiv_apply`, `toOpens_comp_inl`, `toOpens_comp_inr`. Under (G), the
   coproduct of the frames of opens of `X` and `Y` is the frame of opens of
   `X × Y`.
+* **(G) against Isbell's hypothesis.** Isbell (Proc. AMS 81 (1981), Th. 4) proves
+  the same statement under `HypI X`: every nonempty closed set has a point with
+  a core-compact neighbourhood in it (`WayBelowOpen`, `CoreCompact`). For sober
+  spaces (I) implies (G), but not conversely: the counterexample of MathOverflow
+  answer 516370 (to question 516361) is formalised here. The space `K` has a
+  point `bot` whose only neighbourhood is `K`, a point `p`, and isolated points
+  `d n m`, the neighbourhoods of `p` containing all rows `{n} × ℕ` for `n` large.
+  It is scattered (`K.scattered`), hence sober (`Scattered.quasiSober`,
+  `Scattered.t0Space`), compact, and not core-compact at `p`
+  (`K.not_coreCompact`). Its countable power `ℕ → K` is sober (products of
+  quasi-sober spaces are quasi-sober, `quasiSober_pi`), satisfies (G) as does
+  every product of compact scattered spaces (`hypG_pi`: pin down the finitely
+  many coordinates of a basic open with `exists_isolated_pi`, the fibre is
+  compact by Tychonoff), and fails (I) (`not_hypI_pi`: every open leaves a
+  coordinate free, along which `K` is a retract of the neighbourhood, and the
+  argument at `p` applies to any space of which `K` is a retract,
+  `K.not_coreCompact_of_retract`). Hence `hypG_not_hypI`.
 
 **What the formalisation finds.** Nothing false: the argument holds as the
 reading completes it, for arbitrary `X` and `Y`.
 
 **Not formalised.** The last step of the dictionary, from frames to topoi: the
 2-product `Top(X) ×_top Top(Y)` as the sheaves on the product locale (mathlib
-has no 2-category of topoi). Nor the rest of the folder (pages 3–8 on the
+has no 2-category of topoi). Nor the implication (I) ⇒ (G) for sober spaces, a
+remark of the edition which rests on the Hofmann–Lawson theory of core-compact
+sober spaces. Nor the rest of the folder (pages 3–8 on the
 2-product as an intersection of subtopoi, pages 11–14 on infinite products).
 
 What this certifies is that the reading holds together, not that it is what the
@@ -412,5 +432,226 @@ noncomputable def frameEquiv (hG : HypG X) : CIdeal X Y ≃o Opens (X × Y) wher
 
 @[simp] lemma frameEquiv_apply (hG : HypG X) (S : CIdeal X Y) :
     frameEquiv hG S = toOpens S := rfl
+
+/-! ### (G) is strictly weaker than Isbell's hypothesis -/
+
+open Function (eval update update_of_ne update_self)
+
+/-- `V` is way below `U` among the opens: `V ⊆ U`, and every nonempty directed family of opens
+whose union contains `U` has a member containing `V`. -/
+def WayBelowOpen {X : Type*} [TopologicalSpace X] (V U : Set X) : Prop :=
+  V ⊆ U ∧ ∀ 𝒲 : Set (Set X), 𝒲.Nonempty → DirectedOn (· ⊆ ·) 𝒲 → (∀ W ∈ 𝒲, IsOpen W) →
+    U ⊆ ⋃₀ 𝒲 → ∃ W ∈ 𝒲, V ⊆ W
+
+/-- Core-compactness: every point `x` of an open `U` has an open neighbourhood way below `U`. -/
+def CoreCompact (X : Type*) [TopologicalSpace X] : Prop :=
+  ∀ U : Set X, IsOpen U → ∀ x ∈ U, ∃ V, IsOpen V ∧ x ∈ V ∧ WayBelowOpen V U
+
+/-- Isbell's hypothesis (Proc. AMS 81 (1981), Th. 4): every nonempty closed `H ⊆ X` has a point
+`x` with a neighbourhood `N` in `H` (`O ∩ H ⊆ N ⊆ H` for an open `O ∋ x`) which is core-compact
+as a subspace. -/
+def HypI (X : Type*) [TopologicalSpace X] : Prop :=
+  ∀ H : Set X, IsClosed H → H.Nonempty →
+    ∃ x ∈ H, ∃ N ⊆ H, (∃ O : Set X, IsOpen O ∧ x ∈ O ∧ O ∩ H ⊆ N) ∧ CoreCompact N
+
+/-- Every nonempty subset has a relatively isolated point. -/
+def Scattered (X : Type*) [TopologicalSpace X] : Prop :=
+  ∀ A : Set X, A.Nonempty → ∃ x ∈ A, ∃ W, IsOpen W ∧ x ∈ W ∧ ∀ y ∈ A, y ∈ W → y = x
+
+section Scattered
+
+variable {Z : Type*} [TopologicalSpace Z]
+
+theorem Scattered.t0Space (h : Scattered Z) : T0Space Z := by
+  refine (t0Space_iff_inseparable _).2 fun x y hxy => ?_
+  obtain ⟨z, hz | hz, W, hW, hzW, hiso⟩ := h {x, y} (insert_nonempty _ _) <;> subst hz
+  · exact (hiso y (by simp) ((inseparable_iff_forall_isOpen.1 hxy W hW).1 hzW)).symm
+  · exact hiso x (by simp) ((inseparable_iff_forall_isOpen.1 hxy W hW).2 hzW)
+
+/-- An isolated point of an irreducible closed set is its generic point. -/
+theorem Scattered.quasiSober (h : Scattered Z) : QuasiSober Z where
+  sober {S} hS hc := by
+    obtain ⟨x, hx, W, hW, hxW, hiso⟩ := h S hS.nonempty
+    refine ⟨x, (closure_minimal (singleton_subset_iff.2 hx) hc).antisymm fun y hy => ?_⟩
+    rw [← specializes_iff_mem_closure, specializes_iff_forall_open]
+    intro V hV hyV
+    obtain ⟨z, hzS, hzW, hzV⟩ := hS.2 W V hW hV ⟨x, hx, hxW⟩ ⟨y, hy, hyV⟩
+    exact hiso z hzS hzW ▸ hzV
+
+end Scattered
+
+/-- An arbitrary product of quasi-sober spaces is quasi-sober: the generic point of an
+irreducible closed `S` has for coordinates the generic points of the closures of the
+projections of `S`. -/
+instance quasiSober_pi {ι : Type*} {π : ι → Type*} [∀ i, TopologicalSpace (π i)]
+    [∀ i, QuasiSober (π i)] : QuasiSober (∀ i, π i) where
+  sober {S} hS hc := by
+    classical
+    have hi i : IsIrreducible (eval i '' S) := hS.image _ (continuous_apply i).continuousOn
+    set x : ∀ i, π i := fun i => (hi i).genericPoint
+    have hx i : closure {x i} = closure (eval i '' S) := (hi i).genericPoint_closure_eq
+    have hxS : x ∈ S := by
+      rw [← hc.closure_eq, mem_closure_iff]
+      intro o ho hxo
+      obtain ⟨I, u, hu, hIo⟩ := isOpen_pi_iff.1 ho x hxo
+      suffices (S ∩ (I : Set ι).pi u).Nonempty from
+        let ⟨y, hyS, hyI⟩ := this; ⟨y, hIo hyI, hyS⟩
+      clear hIo
+      induction I using Finset.induction_on with
+      | empty => simpa using hS.nonempty
+      | insert a I ha ih =>
+        rw [Finset.coe_insert, insert_pi]
+        have hua := hu a (Finset.mem_insert_self _ _)
+        obtain ⟨_, hy, y, hyS, rfl⟩ :=
+          mem_closure_iff.1 (hx a ▸ subset_closure rfl : x a ∈ closure (eval a '' S)) _ hua.1 hua.2
+        exact hS.2 _ _ (hua.1.preimage (continuous_apply a))
+          (isOpen_set_pi I.finite_toSet fun b hb => (hu b (Finset.mem_insert_of_mem hb)).1)
+          ⟨y, hyS, hy⟩ (ih fun b hb => hu b (Finset.mem_insert_of_mem hb))
+    refine ⟨x, (closure_minimal (singleton_subset_iff.2 hxS) hc).antisymm fun y hy => ?_⟩
+    rw [← specializes_iff_mem_closure, specializes_pi]
+    exact fun i => specializes_iff_mem_closure.2 (hx i ▸ subset_closure (mem_image_of_mem _ hy))
+
+/-- The space of the MathOverflow answer: a point `bot`, a point `p`, and points `d n m`
+indexed by `ℕ × ℕ`. -/
+inductive K
+  | bot
+  | p
+  | d (n m : ℕ)
+
+namespace K
+
+/-- The opens of `K`: a set containing `bot` is everything; a set containing `p` contains the
+rows `{n} × ℕ` for all `n` large enough. -/
+instance : TopologicalSpace K where
+  IsOpen W := (bot ∈ W → W = univ) ∧ (p ∈ W → ∃ N, ∀ n ≥ N, ∀ m, d n m ∈ W)
+  isOpen_univ := ⟨fun _ => rfl, fun _ => ⟨0, fun _ _ _ => trivial⟩⟩
+  isOpen_inter s t hs ht := ⟨fun h => by rw [hs.1 h.1, ht.1 h.2, univ_inter], fun h =>
+    let ⟨N, hN⟩ := hs.2 h.1
+    let ⟨N', hN'⟩ := ht.2 h.2
+    ⟨max N N', fun n hn m => ⟨hN n (le_of_max_le_left hn) m, hN' n (le_of_max_le_right hn) m⟩⟩⟩
+  isOpen_sUnion S hS := ⟨fun ⟨s, hs, hb⟩ => eq_univ_of_univ_subset ((hS s hs).1 hb ▸
+    subset_sUnion_of_mem hs), fun ⟨s, hs, hp⟩ =>
+    let ⟨N, hN⟩ := (hS s hs).2 hp
+    ⟨N, fun n hn m => ⟨s, hs, hN n hn m⟩⟩⟩
+
+lemma isOpen_iff {W : Set K} :
+    IsOpen W ↔ (bot ∈ W → W = univ) ∧ (p ∈ W → ∃ N, ∀ n ≥ N, ∀ m, d n m ∈ W) := Iff.rfl
+
+/-- The only open containing `bot` is `K`. -/
+instance : CompactSpace K := ⟨isCompact_iff_finite_subcover.2 fun U hU hcov => by
+  obtain ⟨i, hi⟩ := mem_iUnion.1 (hcov (mem_univ bot))
+  exact ⟨{i}, by simp [(hU i).1 hi]⟩⟩
+
+lemma isOpen_ne_bot : IsOpen {k : K | k ≠ bot} :=
+  isOpen_iff.2 ⟨fun h => (h rfl).elim, fun _ => ⟨0, fun _ _ _ => by simp⟩⟩
+
+/-- `K` is scattered: isolate a point `d n m` if there is one, else `p`, else `bot`. -/
+theorem scattered : Scattered K := by
+  intro A hA
+  by_cases hd : ∃ n m, d n m ∈ A
+  · obtain ⟨n, m, h⟩ := hd
+    exact ⟨_, h, {d n m}, isOpen_iff.2 ⟨by simp, by simp⟩, rfl, fun y _ hy => hy⟩
+  by_cases hp : p ∈ A
+  · refine ⟨p, hp, _, isOpen_ne_bot, by simp, ?_⟩
+    rintro (_ | _ | ⟨n, m⟩) hy hne
+    exacts [(hne rfl).elim, rfl, (hd ⟨n, m, hy⟩).elim]
+  · have h : ∀ y ∈ A, y = bot := by
+      rintro (_ | _ | ⟨n, m⟩) hy
+      exacts [rfl, (hp hy).elim, (hd ⟨n, m, hy⟩).elim]
+    obtain ⟨y, hy⟩ := hA
+    exact ⟨bot, h y hy ▸ hy, univ, isOpen_univ, trivial, fun y hy _ => h y hy⟩
+
+instance : QuasiSober K := scattered.quasiSober
+
+instance : T0Space K := scattered.t0Space
+
+/-- A space through which `K` retracts (`q ∘ L = id`, both continuous) is not core-compact: no
+open neighbourhood of `L p` is way below `q⁻¹(K \ {bot})`. -/
+theorem not_coreCompact_of_retract {Y : Type*} [TopologicalSpace Y] {L : K → Y} {q : Y → K}
+    (hL : Continuous L) (hq : Continuous q) (hqL : ∀ k, q (L k) = k) : ¬ CoreCompact Y := by
+  intro hY
+  obtain ⟨V, hV, hLV, -, hwb⟩ := hY _ (isOpen_ne_bot.preimage hq) (L p) (by simp [hqL])
+  obtain ⟨N, hN⟩ := (isOpen_iff.1 (hV.preimage hL)).2 hLV
+  let T (m₀ : ℕ) : Set K := {k | k ≠ bot ∧ ∀ m, k = d N m → m < m₀}
+  have hT m₀ : IsOpen (T m₀) := isOpen_iff.2 ⟨fun h => (h.1 rfl).elim, fun _ =>
+    ⟨N + 1, fun n hn m => ⟨by simp, fun m' h => by injection h; omega⟩⟩⟩
+  have hcov (k : K) : ∃ m₀, ∀ m, k = d N m → m < m₀ := by
+    rcases k with _ | _ | ⟨n, m⟩
+    exacts [⟨0, by simp⟩, ⟨0, by simp⟩, ⟨m + 1, fun m' h => by injection h; omega⟩]
+  obtain ⟨_, ⟨m₀, rfl⟩, hVW⟩ := hwb (range fun m₀ => q ⁻¹' T m₀) (range_nonempty _)
+    (directedOn_range.2 <| Monotone.directed_le fun a b hab k hk =>
+      ⟨hk.1, fun m h => (hk.2 m h).trans_le hab⟩)
+    (forall_mem_range.2 fun m₀ => (hT m₀).preimage hq)
+    (fun y hy => let ⟨m₀, hm₀⟩ := hcov (q y); ⟨_, ⟨m₀, rfl⟩, hy, hm₀⟩)
+  exact lt_irrefl _ ((hVW (hN N le_rfl m₀)).2 m₀ (hqL _))
+
+/-- `K` is not core-compact, at the point `p`. -/
+theorem not_coreCompact : ¬ CoreCompact K :=
+  not_coreCompact_of_retract continuous_id continuous_id fun _ => rfl
+
+end K
+
+/-- In a product of scattered spaces, finitely many coordinates can be pinned down: a nonempty
+`A` has a point `a` with an open `O ∋ a` whose points in `A` agree with `a` on `J`. -/
+theorem exists_isolated_pi {ι : Type*} {π : ι → Type*} [∀ i, TopologicalSpace (π i)]
+    (h : ∀ i, Scattered (π i)) (J : Finset ι) (A : Set (∀ i, π i)) (hA : A.Nonempty) :
+    ∃ a ∈ A, ∃ O, IsOpen O ∧ a ∈ O ∧ ∀ b ∈ A, b ∈ O → ∀ j ∈ J, b j = a j := by
+  classical
+  induction J using Finset.induction_on generalizing A with
+  | empty => obtain ⟨a, ha⟩ := hA; exact ⟨a, ha, univ, isOpen_univ, trivial, by simp⟩
+  | insert i J hi ih =>
+    obtain ⟨_, ⟨a₀, ha₀, rfl⟩, W, hW, hW₀, hiso⟩ := h i (eval i '' A) (hA.image _)
+    obtain ⟨a, ⟨haA, hai⟩, O, hO, haO, hJ⟩ := ih {b ∈ A | b i = a₀ i} ⟨a₀, ha₀, rfl⟩
+    refine ⟨a, haA, O ∩ eval i ⁻¹' W, hO.inter (hW.preimage (continuous_apply i)),
+      ⟨haO, show a i ∈ W from hai ▸ hW₀⟩, fun b hb hbO => ?_⟩
+    have hbi : b i = a₀ i := hiso _ (mem_image_of_mem _ hb) hbO.2
+    simp only [Finset.mem_insert, forall_eq_or_imp]
+    exact ⟨hbi.trans hai.symm, hJ b ⟨hb, hbi⟩ hbO.1⟩
+
+/-- A product of compact scattered spaces satisfies (G): in `Z = U ∩ H`, pin down the finitely
+many coordinates of a basic open inside `U`; the fibre over the pinned point is compact
+(Tychonoff), and its trace on `H` is a compact neighbourhood in `Z`. -/
+theorem hypG_pi {ι : Type*} {π : ι → Type*} [∀ i, TopologicalSpace (π i)]
+    [∀ i, CompactSpace (π i)] (h : ∀ i, Scattered (π i)) : HypG (∀ i, π i) := by
+  classical
+  rintro _ ⟨U, H, hU, hH, rfl⟩ ⟨z, hzU, hzH⟩
+  obtain ⟨J, u, hu, hJU⟩ := isOpen_pi_iff.1 hU z hzU
+  have hB : IsOpen ((J : Set ι).pi u) := isOpen_set_pi J.finite_toSet fun j hj => (hu j hj).1
+  obtain ⟨a, ⟨haH, haB⟩, O, hO, haO, hiso⟩ :=
+    exists_isolated_pi h J (H ∩ (J : Set ι).pi u) ⟨z, hzH, fun j hj => (hu j hj).2⟩
+  have hF : {b : ∀ i, π i | ∀ j ∈ J, b j = a j} =
+      univ.pi fun i => if i ∈ J then {a i} else univ := by
+    ext b
+    simp only [mem_ofPred_eq, mem_univ_pi]
+    refine forall_congr' fun i => ?_
+    split_ifs with hi <;> simp [hi]
+  refine ⟨a, ⟨hJU haB, haH⟩, {b | ∀ j ∈ J, b j = a j} ∩ H,
+    fun b hb => ⟨hJU fun j hj => by rw [hb.1 j hj]; exact haB j hj, hb.2⟩, ?_,
+    O ∩ (J : Set ι).pi u, hO.inter hB, ⟨haO, haB⟩,
+    fun b ⟨⟨hbO, hbB⟩, _, hbH⟩ => ⟨hiso b ⟨hbH, hbB⟩ hbO, hbH⟩⟩
+  rw [hF]
+  exact (isCompact_univ_pi fun i => by
+    split_ifs; exacts [isCompact_singleton, isCompact_univ]).inter_right hH
+
+/-- `K^ι` for infinite `ι` fails (I): a neighbourhood of `x` contains a basic open, which leaves
+some coordinate `j` free, so `K` retracts through the neighbourhood by `k ↦ x[j ↦ k]`. -/
+theorem not_hypI_pi {ι : Type*} [Infinite ι] : ¬ HypI (ι → K) := by
+  classical
+  intro hI
+  obtain ⟨x, -, N, -, ⟨O, hO, hxO, hON⟩, hN⟩ := hI univ isClosed_univ ⟨fun _ => K.bot, trivial⟩
+  obtain ⟨I, u, hu, hIO⟩ := isOpen_pi_iff.1 hO x hxO
+  obtain ⟨j, hj⟩ := Infinite.exists_notMem_finset I
+  have hL k : update x j k ∈ N := hON ⟨hIO fun i hi => by
+    rw [update_of_ne (ne_of_mem_of_not_mem hi hj)]; exact (hu i hi).2, trivial⟩
+  exact K.not_coreCompact_of_retract (L := fun k => ⟨update x j k, hL k⟩) (q := (·.1 j))
+    ((continuous_const.update j continuous_id : Continuous (update x j ·)).subtype_mk hL)
+    ((continuous_apply j).comp continuous_subtype_val) (fun k => update_self ..) hN
+
+/-- (G) is strictly weaker than (I) for sober spaces: `ℕ → K` is sober and satisfies (G) but
+not (I) (the counterexample of MathOverflow answer 516370). -/
+theorem hypG_not_hypI :
+    ∃ (X : Type) (_ : TopologicalSpace X), QuasiSober X ∧ T0Space X ∧ HypG X ∧ ¬ HypI X :=
+  ⟨ℕ → K, inferInstance, inferInstance, inferInstance, hypG_pi fun _ => K.scattered,
+    not_hypI_pi⟩
 
 end Grothendieck.Folder161_3
