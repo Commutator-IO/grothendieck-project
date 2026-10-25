@@ -22,7 +22,46 @@ Le dénombrement ne remplace Baire qu'en une variable. Pour $n \geq 2$, une sér
 
 \noindent Vérifié tel quel (\texttt{quotEquiv}, \texttt{exists\_poly\_mul\_unit}, \texttt{finite\_bad}, \texttt{uncountable}, \texttt{exists\_avoid}), avec le théorème de préparation de Weierstrass et l'isomorphisme $V[T]/(g) \simeq V[[T]]/(g)$ de mathlib pour un polynôme distingué~$g$.
 
-Ne sont pas démontrés ici : le cas de plusieurs variables, où Baire est nécessaire ; la réduction d'un anneau local complet intègre à une extension finie de $V[[T_1, \ldots, T_n]]$ (théorème de structure de Cohen) et la remontée des points de dimension un le long de cette extension ; la proposition de la page~36, qui s'en déduit. L'énoncé général reste ouvert, comme les autres pistes de la cote :
+\begin{encadre}
+\begin{theoreme}[Pages 36 à 38, forme corrigée par l'édition, points de dimension un\piste{100-baire-dimension-one-points}]\label{thm:100-baire}
+Soit $R$ un anneau local noethérien complet, d'idéal maximal $\mathfrak m$.
+\begin{enumerate}
+\item (Proposition, page~36.) Dans $\operatorname{Spec} R$, une famille dénombrable de fermés dont la réunion contient tous les points $x$ tels que $\dim \overline{\{x\}} \leq 1$ a une sous-famille finie qui recouvre le spectre.
+\item (Corollaire, page~38.) Si $R$ est intègre et n'est pas un corps, une famille dénombrable de fermés rares de $\operatorname{Spec} R$ laisse échapper un point $x$ tel que $\dim \overline{\{x\}} = 1$.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+{\small La page barre \q{complet}, que l'édition rétablit : sans cette hypothèse l'énoncé est faux. Les feuillets démontrent le cas de dimension $\leq 1$ et le corollaire, par Cohen et une propriété de Baire sur les $\mathfrak m^n$ ; le cas général de la proposition s'interrompt page~36 sur des lignes illisibles et annulées, et le passage du corollaire à la proposition n'est pas écrit. Le cas d'une variable de l'argument de la page est le théorème~\ref{thm:100-points}.\par}
+
+\noindent\emph{Conventions.} Un point $x$ de $\operatorname{Spec} R$ est un idéal premier $\mathfrak p$, et $\overline{\{x\}} = V(\mathfrak p) \simeq \operatorname{Spec} R/\mathfrak p$ : la dimension de $\overline{\{x\}}$ est la longueur maximale d'une chaîne de premiers commençant en $\mathfrak p$, que Lean appelle la cohauteur de $x$ dans l'ensemble ordonné $\operatorname{Spec} R$. Elle est finie, $R$ étant local noethérien. Dans $\operatorname{Spec} R$ intègre, irréductible, un fermé est rare si et seulement s'il est propre, et c'est sous cette forme, un peu plus générale, que Lean énonce le corollaire.
+
+La démonstration ne passe ni par le théorème de structure de Cohen ni par Baire sur $\mathfrak m^n$. La complétude n'intervient qu'une fois, par le lemme suivant, connu sous le nom d'évitement dénombrable des idéaux premiers (on l'attribue à Burch ; voir aussi Sharp et Vámos, 1985).
+
+\begin{lemme}[évitement dénombrable]\label{lem:100-evitement}
+Si $R$ est local noethérien complet, $\mathfrak m$ n'est pas contenu dans la réunion d'une famille dénombrable $(\mathfrak p_j)_{j \in \mathbf N}$ d'idéaux premiers distincts de $\mathfrak m$.
+\end{lemme}
+
+\begin{proof}
+On construit par récurrence des $x_k \in R$ et des entiers $N_0 < N_1 < \cdots$, avec $x_0 = 0$, $N_0 = 1$, tels que $x_k \notin \mathfrak p_j + \mathfrak m^{N_k}$ pour tout $j < k$ et $x_{k+1} - x_k \in \mathfrak m^{N_k}$. Si $x_k \notin \mathfrak p_k$, on garde $x' = x_k$ ; sinon, $\mathfrak m^{N_k} \not\subset \mathfrak p_k$ puisque $\mathfrak p_k$ est premier et ne contient pas $\mathfrak m$, et l'on pose $x' = x_k + y$ avec $y \in \mathfrak m^{N_k} \setminus \mathfrak p_k$. Dans les deux cas $x' \notin \mathfrak p_k$. Le théorème d'intersection de Krull dans l'anneau local noethérien $R/\mathfrak p_k$, où $\bigcap_N \mathfrak m^N = 0$, donne un $M$ tel que $x' \notin \mathfrak p_k + \mathfrak m^M$ : les premiers sont fermés pour la topologie $\mathfrak m$-adique. On pose $x_{k+1} = x'$ et $N_{k+1} = \max(N_k + 1, M)$ ; les conditions pour $j < k$ subsistent, puisque $x_{k+1} \equiv x_k \pmod{\mathfrak m^{N_k}}$.
+
+La suite $(x_k)$ est de Cauchy, avec $x_n - x_k \in \mathfrak m^{N_k}$ pour $n \geq k$ ; comme $R$ est complet, elle a une limite $L$, et $L - x_k \in \mathfrak m^{N_k}$ pour tout $k$. En particulier $L \in x_0 + \mathfrak m = \mathfrak m$, et si $L$ était dans $\mathfrak p_j$, alors $x_{j+1} = L - (L - x_{j+1})$ serait dans $\mathfrak p_j + \mathfrak m^{N_{j+1}}$, ce que la construction exclut. C'est l'argument de Baire, rendu explicite sur l'espace complet $\mathfrak m$.
+\end{proof}
+
+\begin{proof}[Démonstration du théorème]
+Écrivons $Z_i = V(I_i)$, avec $I_i$ l'idéal des fonctions nulles sur $Z_i$ : un point $\mathfrak q$ est dans $Z_i$ si et seulement si $I_i \subset \mathfrak q$.
+
+\emph{Montée.} Soient $\mathfrak p$ un premier ne contenant aucun $I_i$, et une chaîne $\mathfrak p \subsetneq \mathfrak a \subsetneq \mathfrak b$ de premiers (c'est dire que $\dim \overline{\{\mathfrak p\}} \geq 2$). Alors il existe un premier $\mathfrak q \supsetneq \mathfrak p$ qui ne contient aucun $I_i$. Supposons le contraire, et soit $S$ l'ensemble des premiers distincts de $\mathfrak m$ minimaux sur l'un des $\mathfrak p + I_i$ : chaque $\mathfrak p + I_i$ n'a qu'un nombre fini de premiers minimaux, et $S$ est dénombrable. Le lemme~\ref{lem:100-evitement} donne $x \in \mathfrak m$ hors de tous les premiers de $S$. Si $x \in \mathfrak p$, comme $\mathfrak a$ contient un $I_i$, un premier minimal sur $\mathfrak p + I_i$ contenu dans $\mathfrak a$ est dans $S$ et contient $x$. Si $x \notin \mathfrak p$, soit $\mathfrak q$ un premier minimal sur $\mathfrak p + (x)$. Le théorème de l'idéal principal de Krull, appliqué dans $R/\mathfrak p$, dit qu'il n'y a pas de chaîne $\mathfrak p \subsetneq \mathfrak c \subsetneq \mathfrak q$ ; en particulier $\mathfrak q \neq \mathfrak m$, à cause de la chaîne $\mathfrak p \subsetneq \mathfrak a \subsetneq \mathfrak m$. Par hypothèse $\mathfrak q$ contient un $I_i$, donc un premier $\mathfrak q'$ minimal sur $\mathfrak p + I_i$ ; $\mathfrak q' \neq \mathfrak p$ puisque $I_i \not\subset \mathfrak p$, et donc $\mathfrak q' = \mathfrak q$. Ainsi $\mathfrak q \in S$ et $x \in \mathfrak q$. Les deux cas contredisent le choix de $x$.
+
+\emph{Proposition.} Supposons qu'aucune sous-famille finie ne recouvre le spectre. Les premiers minimaux de $R$ sont en nombre fini et tout point en spécialise un ; si chacun était dans un $Z_i$, ces $Z_i$, fermés, recouvriraient le spectre. Il existe donc un premier minimal $\mathfrak p$ hors de tous les $Z_i$. Tant que $\dim \overline{\{\mathfrak p\}} \geq 2$, la montée remplace $\mathfrak p$ par un $\mathfrak q \supsetneq \mathfrak p$ hors de tous les $Z_i$, et $\dim \overline{\{\mathfrak q\}} < \dim \overline{\{\mathfrak p\}}$. On aboutit à un point de dimension $\leq 1$ hors de la réunion des $Z_i$, contre l'hypothèse.
+
+\emph{Corollaire.} On ajoute à la famille le fermé $\{\mathfrak m\}$. Le point générique $(0)$ n'est dans aucun $Z_i$, puisqu'un fermé qui le contient est le spectre entier, ni égal à $\mathfrak m$, puisque $R$ n'est pas un corps : aucune sous-famille finie ne recouvre le spectre. La proposition donne un point $x$ de dimension $\leq 1$ hors des $Z_i$ et distinct de $\mathfrak m$, le seul point de dimension~$0$ : $\dim \overline{\{x\}} = 1$.
+\end{proof}
+
+La complétude n'est utilisée que par le lemme~\ref{lem:100-evitement}, et c'est là qu'elle est nécessaire : pour l'anneau local de $\mathbf Q[x, y]$ à l'origine, qui n'a qu'un ensemble dénombrable d'idéaux premiers, $\mathfrak m$ est la réunion des premiers de hauteur un. Le nombre de variables $\dim S$ ou $\dim S - 1$ que la page donne à $V[[T_1, \ldots, T_n]]$ n'intervient plus.
+
+\noindent\emph{Portée de la vérification.} Lean démontre ces énoncés dans \href{\leanblob/Folder100.lean}{\texttt{Folder100.lean}}, espace \texttt{Baire} : \texttt{exists\_notMem\_sup\_pow} pour la fermeture des premiers, \texttt{exists\_mem\_maximalIdeal\_forall\_notMem} et \texttt{exists\_mem\_maximalIdeal\_notMem\_of\_countable} pour le lemme~\ref{lem:100-evitement}, \texttt{not\_chain\_of\_mem\_minimalPrimes} pour le théorème de l'idéal principal au-dessus de $\mathfrak p$, \texttt{exists\_isPrime\_gt} pour la montée, \texttt{exists\_coheight\_le\_one} pour la descente sur la dimension, \texttt{exists\_finite\_subcover} et \texttt{exists\_finite\_subcover\_of\_countable} pour la proposition, \texttt{exists\_coheight\_eq\_one} pour le corollaire. La dimension de $\overline{\{x\}}$ y est la cohauteur de $x$ dans $\operatorname{Spec} R$ ; l'égalité avec la dimension topologique de l'adhérence, qui est la définition, n'est pas énoncée en Lean. La voie de la page, par Cohen et Baire sur $\mathfrak m^n$, n'est pas formalisée au-delà d'une variable, et l'application à l'algébrisation des schémas abéliens formels reste hors de portée.
+
+Ne sont pas démontrés ici, pour la voie de la page : le cas de plusieurs variables, où Baire est nécessaire ; la réduction d'un anneau local complet intègre à une extension finie de $V[[T_1, \ldots, T_n]]$ (théorème de structure de Cohen) et la remontée des points de dimension un le long de cette extension. La proposition de la page~36 et le corollaire de la page~38 en toute dimension sont démontrés ci-dessus par une autre voie (théorème~\ref{thm:100-baire}). Les autres pistes de la cote restent ouvertes :
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 2, 3 et 20, pleine fidélité et composantes connexes\piste{100-full-faithfulness-connected-components}]\nonverifie
@@ -44,13 +83,6 @@ Soit $R$ un anneau local noethérien complet. Un schéma abélien formel sur $\o
 \end{theoreme*}
 \end{encadre}
 {\small Les feuillets en esquissent une démonstration incomplète (pages 32 à 38). Mathlib n'a pas l'algébrisation des schémas formels. On se reportera aux notes de Grothendieck (\lot{100}{2}{30}).\par}
-
-\begin{encadre}
-\begin{theoreme*}[Pages 36 à 38, forme corrigée par l'édition, points de dimension un\piste{100-baire-dimension-one-points}]\nonverifie
-Dans le spectre d'un anneau local noethérien complet, une famille dénombrable de fermés dont la réunion contient tous les points $x$ tels que $\dim \overline{\{x\}} \leq 1$ a une sous-famille finie qui recouvre le spectre.
-\end{theoreme*}
-\end{encadre}
-{\small La page barre \q{complet}, que l'édition rétablit : sans cette hypothèse l'énoncé est faux. Les feuillets démontrent le cas de dimension $\leq 1$ et le corollaire, une propriété de Baire sur les $\mathfrak m^n$ ; le cas général de la proposition s'interrompt page~36 sur des lignes illisibles et annulées, et le passage du corollaire à la proposition n'est pas écrit. Le cas d'une variable du corollaire est le théorème~\ref{thm:100-points}.\par}
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 47 à 52, prolongement vers un modèle de Néron\piste{100-neron-extension-p-divisible}]\nonverifie

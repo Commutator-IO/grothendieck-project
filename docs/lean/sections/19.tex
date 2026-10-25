@@ -211,11 +211,35 @@ Sur $C = \mathbb Z \sqcup \mathbb Z$, les deux copies sont décalées d'un cran 
 La réunion disjointe est nécessaire : sur une seule copie de $\mathbb Z$, un $e_m^*$ sur deux est pleinement fidèle, puisque $r_m e_m = \mathrm{id}$. Les deux copies décalées d'un cran font qu'aucun $F_k$ ne l'est. Une note de la lecture, à la page~81, tient une chaîne infinie dans les deux sens pour impossible \q{dans des situations très générales} ; l'exemple montre qu'elle existe entre topos de préfaisceaux. La suggestion de la page, un $g$ à la fois adjoint à gauche et à droite de $f$, n'est pas celle suivie ici.
 \end{remarque}
 
-Ne sont pas démontrés ici : l'énoncé de Morita (équivalence si et seulement si $U$ est petit et projectif) ; la Conclusion des pages~4 à~6 (adjonctions et comonades) ; la reconstruction de l'adjonction ; les topos de coalgèbres (page~6) ; les relations de coünité et de coassociativité entre les $\lambda_{kji}$ et la description de la catégorie par les quadruplets $(X', X'', u', u'')$ (pages~9 et~10) ; les pages~7 à~95 (résolutions standard, cohomologie relative, SGA~4, localisation, recollement, catégories fibrées).
+Ne sont pas démontrés ici : l'énoncé de Morita (équivalence si et seulement si $U$ est petit et projectif) ; la Conclusion des pages~4 à~6 (adjonctions et comonades) ; la reconstruction de l'adjonction ; les topos de coalgèbres (page~6) ; le cas dégénéré des pages~10 et~11 (images essentielles de $g'$ et $g''$, intersection ponctuelle) ; les pages~7 à~95 (résolutions standard, cohomologie relative, SGA~4, localisation, recollement, catégories fibrées).
 
 \begin{encadre}
-\begin{theoreme}[Grothendieck, pages 7 à 11, comonade sur une base produit\piste{19-comonad-matrix-product-base}]\nonverifie
-Pour une adjonction sur une base produit $B = \prod_i B_i$, les transformations $\lambda_{kji} : \varphi_{ki} \to \varphi_{kj}\varphi_{ji}$ vérifient les relations de coünité et de coassociativité d'une comonade écrite en matrice $(\varphi_{ji})$. Pour deux facteurs, avec $g'$ et $g''$ pleinement fidèles, la catégorie se décrit par les quadruplets $(X', X'', u', u'')$, au moyen des seuls foncteurs croisés $\varphi'$, $\varphi''$ et des unités $\lambda'$, $\lambda''$ (pages~9 et~10).
+\begin{theoreme}[Grothendieck, pages 7 à 11, comonade sur une base produit\piste{19-comonad-matrix-product-base}]\label{thm:19-quadruplets}
+On reprend les adjonctions $f_i \dashv g_i$, $f_i : A \to B_i$, $A$ ayant les produits indexés par $I$.
+\begin{enumerate}
+\item Sans autre hypothèse, la matrice $(\varphi_{ji}, \varepsilon_i, \lambda_{kji})$ vérifie les relations de coünité et de coassociativité :
+\[
+\varphi_{ki}(\varepsilon_i) \circ \lambda_{kii} = 1, \qquad \varepsilon_k \varphi_{ki} \circ \lambda_{kki} = 1, \qquad \varphi_{lk}(\lambda_{kji}) \circ \lambda_{lki} = \lambda_{lkj}\varphi_{ji} \circ \lambda_{lji}.
+\]
+\item Si les $f_j$ commutent aux produits indexés par $I$, une flèche $a : X \to \varphi X$, d'entrées $u_{ki} = f_k(\mathrm{pr}_i) \circ a_k : X_k \to \varphi_{ki}(X_i)$, est une coalgèbre si et seulement si $\varepsilon_k \circ u_{kk} = 1$ et $\lambda_{kji}(X_i) \circ u_{ki} = \varphi_{kj}(u_{ji}) \circ u_{kj}$ pour tous $k, j, i$ ; une flèche $t : X \to Y$ vers une coalgèbre $(Y, b)$ d'entrées $v_{ki}$ est un morphisme de coalgèbres si et seulement si $v_{ki} \circ t_k = \varphi_{ki}(t_i) \circ u_{ki}$ pour tous $k, i$.
+\item Deux facteurs, $B = B' \times B''$, $g'$ et $g''$ pleinement fidèles, $f'$ et $f''$ commutant aux produits binaires : la catégorie des $\varphi$-coalgèbres est équivalente à celle des quadruplets $(X', X'', u', u'')$, $u' : X' \to \varphi'(X'')$, $u'' : X'' \to \varphi''(X')$, tels que
+\[
+\lambda'(X') = \varphi'(u'') \circ u', \qquad \lambda''(X'') = \varphi''(u') \circ u'',
+\]
+un morphisme de quadruplets étant un couple $(t', t'')$ qui commute à $u'$ et à $u''$. Si de plus $f = (f', f'')$ est comonadique, $A$ est équivalente à la catégorie des quadruplets, par $Y \mapsto (f'Y, f''Y, f'(\eta''_Y), f''(\eta'_Y))$.
+\end{enumerate}
 \end{theoreme}
 \end{encadre}
+
+\begin{proof}
+(1) Avec $\lambda_{kji}(X) = f_k(\eta_{j, g_i X})$, la première relation est $f_k$ appliqué à l'identité triangulaire $g_i(\varepsilon_{i, X}) \circ \eta_{i, g_i X} = 1$, la deuxième est l'identité triangulaire $\varepsilon_{k, f_k Y} \circ f_k(\eta_{k, Y}) = 1$ en $Y = g_i X$. Les deux membres de la troisième sont $f_l$ appliqué à $g_k f_k(\eta_{j, g_i X}) \circ \eta_{k, g_i X}$ et à $\eta_{k, g_j f_j g_i X} \circ \eta_{j, g_i X}$, égaux par naturalité de $\eta_k$ (Lean : \texttt{lam\_counit\_right}, \texttt{lam\_counit\_left}, \texttt{lam\_coassoc}).
+
+(2) La coünité de $\varphi$ a pour composante $k$ la flèche $\varepsilon_k \circ f_k(\mathrm{pr}_k)$ (énoncé des pages~7 et~8, point~3) : la condition de coünité, composante par composante, est $\varepsilon_k \circ u_{kk} = 1$, et ceci sans hypothèse. Pour la coassociativité, on compose les deux membres de $\delta \circ a = \varphi(a) \circ a$, en la composante $k$, avec les flèches $f_k g_j f_j(\mathrm{pr}_i) \circ f_k(\mathrm{pr}_j)$. Le membre de gauche donne $\lambda_{kji}(X_i) \circ u_{ki}$ par (3.9). Celui de droite donne $\varphi_{kj}(u_{ji}) \circ u_{kj}$, puisque $\varphi(a)$ suivi de $f_k(\mathrm{pr}_j)$ vaut $f_k g_j(a_j) \circ f_k(\mathrm{pr}_j)$. Ces flèches séparent les morphismes à valeurs dans $(\varphi^2 X)_k$ quand les $f_j$ commutent aux produits (même argument que pour (3.9)). Les morphismes se traitent de même avec les seules projections $f_k(\mathrm{pr}_i)$ (Lean : \texttt{counit\_iff}, \texttt{coassoc\_iff}, \texttt{hom\_iff}).
+
+(3) Les $g_i$ étant pleinement fidèles, $\varepsilon_i$ est inversible et la coünité impose $u_{kk} = \varepsilon_k^{-1}$ : c'est en ce sens que \q{l'axiome de coünité est automatiquement satisfait}. Il reste les deux entrées croisées $u' = u_{12}$ et $u'' = u_{21}$. Des huit relations de coassociativité, celles où $j = i$ se réduisent à $\lambda_{kii} = \varphi_{ki}(\varepsilon_i^{-1})$, conséquence de (1) ; celles où $k = j \neq i$ à $\lambda_{kki} = \varepsilon_k^{-1}\varphi_{ki}$ et à la naturalité de $\varepsilon_k^{-1}$ ; les deux qui restent, $k = i \neq j$, sont exactement les deux triangles, puisque $\lambda' = \lambda_{iji} \circ \varepsilon_i^{-1}$. Dans l'autre sens, un quadruplet donne une flèche $a$ dont la composante $k$ a pour entrées $u_{kk} = \varepsilon_k^{-1}$, $u'$, $u''$, ce qui la définit puisque $(\varphi X)_k$ est un produit des $\varphi_{ki}(X_i)$, et (2) montre que c'est une coalgèbre. Le foncteur des coalgèbres vers les quadruplets, qui retient les entrées croisées, est donc fidèle, plein (les conditions diagonales sur un morphisme sont la naturalité de $\varepsilon_k^{-1}$) et essentiellement surjectif. Si $f$ est comonadique, on le compose avec le foncteur de comparaison $h$ ; l'entrée $u'$ de $h(Y)$ est $f'(\mathrm{pr}'') \circ f'(\eta_Y) = f'(\eta''_Y)$ (Lean : \texttt{versQuadruplets\_isEquivalence}, \texttt{quadruplets}, \texttt{quadruplet\_u'}, \texttt{quadruplet\_u''}).
+\end{proof}
+
+\begin{remarque}
+Le manuscrit écrit \q{il semble qu'on trouve} et biffe le calcul : il est juste, à condition d'ajouter l'hypothèse que la page tient de son cadre général, la commutation de $f'$ et $f''$ aux produits binaires, et, pour décrire $A$ elle-même et non les coalgèbres, la comonadicité de $f$, qui est le propos du théorème~1.12. Le cas dégénéré qui suit (pages~10 et~11, $\varphi'\varphi''$ et $\varphi''\varphi'$ constants de valeur l'objet final, images essentielles de $g'$ et $g''$, intersection ponctuelle) n'est pas formalisé.
+\end{remarque}
 

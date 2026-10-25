@@ -1332,4 +1332,499 @@ theorem zmod_scal_dist_three {n : ℕ} (hn : 1 < n) (e : (ZMod n)ˣ) {μ : (ZMod
 
 end RankTwo
 
+/-! ## The « fait mirifique » and To 6 (pages 136 to 140, 184 to 187)
+
+A polygon structure on a set `E` with `n` elements is the cycle graph of a
+bijection `φ : Z/n ≃ E`; its `ν`-th star polygon joins `φ k` and `φ (k ± ν)`.
+`(Z/n)*` acts on polygon structures through `(Z/n)*/±1`, faithfully for `n ≥ 3`
+(`polygonAction`, `twist_eq_twist_iff`). To 6 is then stated for an abstract
+graph (`ToSix`), with its consequences, and checked in the model `P_{M, ±e}`. -/
+
+section StarPolygon
+
+variable {n : ℕ} {E : Type*}
+
+/-- The `ν`-th star polygon of the indexing `φ`: `a ~ b` iff `φ⁻¹ b - φ⁻¹ a = ± ν`. -/
+def cyc (φ : ZMod n ≃ E) (ν : ZMod n) (a b : E) : Prop :=
+  φ.symm b - φ.symm a = ν ∨ φ.symm b - φ.symm a = -ν
+
+variable (n) in
+/-- `P` is a polygon structure: the cycle graph `k ~ k ± 1` of some indexing by `Z/n`. -/
+def IsPolygon (P : E → E → Prop) : Prop := ∃ φ : ZMod n ≃ E, P = cyc φ 1
+
+variable (n E) in
+/-- `Pol(E)`, the polygon structures on `E`. -/
+def Pol := {P : E → E → Prop // IsPolygon n P}
+
+theorem two_ne_zero_of_lt (hn : 2 < n) : (2 : ZMod n) ≠ 0 := by
+  intro h
+  have : ((2 : ℕ) : ZMod n) = 0 := by exact_mod_cast h
+  rw [ZMod.natCast_eq_zero_iff] at this
+  have := Nat.le_of_dvd (by omega) this
+  omega
+
+theorem pm_one_mul {d x ν : ZMod n} (hd : d = 1 ∨ d = -1) :
+    (d * x = ν ∨ d * x = -ν) ↔ (x = ν ∨ x = -ν) := by
+  rcases hd with rfl | rfl
+  · simp
+  · simp only [neg_one_mul, neg_eq_iff_eq_neg, neg_neg]; tauto
+
+/-- An injective map of `Z/n` (`n ≥ 3`) preserving the cycle `k ~ k + 1` is
+`k ↦ ± k + c`: the automorphisms of the `n`-gon are dihedral. -/
+theorem affine_of_adj (hn : 2 < n) (f : ZMod n → ZMod n) (hinj : Function.Injective f)
+    (hf : ∀ a b : ZMod n, b - a = 1 → f b - f a = 1 ∨ f b - f a = -1) :
+    ∃ d : ZMod n, (d = 1 ∨ d = -1) ∧ ∀ k, f k = d * k + f 0 := by
+  have : NeZero n := ⟨by omega⟩
+  have h2 := two_ne_zero_of_lt hn
+  obtain ⟨d, hd⟩ : ∃ d, d = f 1 - f 0 := ⟨_, rfl⟩
+  have hd1 : d = 1 ∨ d = -1 := hd ▸ hf 0 1 (by ring)
+  have key : ∀ m : ℕ, f m = d * m + f 0 ∧ f (m + 1) = d * (m + 1) + f 0 := by
+    intro m
+    induction m with
+    | zero => simp [hd]
+    | succ m ih =>
+      refine ⟨by push_cast; exact ih.2, ?_⟩
+      have h := hf ((m : ZMod n) + 1) ((m : ZMod n) + 1 + 1) (by ring)
+      have hne : f ((m : ZMod n) + 1 + 1) ≠ f m := fun h' => h2 (by
+        have := hinj h'; linear_combination this)
+      push_cast
+      rcases hd1 with hd1 | hd1 <;> rcases h with h | h
+      · linear_combination h + ih.2 - hd1
+      · exact absurd (by linear_combination h + ih.2 - ih.1 + hd1) hne
+      · exact absurd (by linear_combination h + ih.2 - ih.1 + hd1) hne
+      · linear_combination h + ih.2 - hd1
+  refine ⟨d, hd1, fun k => ?_⟩
+  have := (key k.val).1
+  rwa [ZMod.natCast_zmod_val] at this
+
+/-- The `ν`-th star polygon depends only on the polygon, not on its indexing. -/
+theorem cyc_congr (hn : 2 < n) {φ ψ : ZMod n ≃ E} (h : cyc φ 1 = cyc ψ 1) (ν : ZMod n) :
+    cyc φ ν = cyc ψ ν := by
+  obtain ⟨d, hd, hf⟩ := affine_of_adj hn (fun k => ψ.symm (φ k))
+    (ψ.symm.injective.comp φ.injective) (fun a b hab => by
+      have : cyc φ 1 (φ a) (φ b) := by simp [cyc, hab]
+      rw [h] at this; exact this)
+  have hx : ∀ x, ψ.symm x = d * φ.symm x + ψ.symm (φ 0) := fun x => by
+    simpa using hf (φ.symm x)
+  funext a b
+  apply propext
+  simp only [cyc]
+  rw [hx a, hx b, show d * φ.symm b + ψ.symm (φ 0) - (d * φ.symm a + ψ.symm (φ 0)) =
+    d * (φ.symm b - φ.symm a) by ring, pm_one_mul hd]
+
+/-- Re-indexing a polygon by `k ↦ ν k`. -/
+def reindex (φ : ZMod n ≃ E) (ν : (ZMod n)ˣ) : ZMod n ≃ E := (Units.mulLeft ν).trans φ
+
+theorem cyc_reindex (φ : ZMod n ≃ E) (ν : (ZMod n)ˣ) (μ : ZMod n) :
+    cyc (reindex φ ν) μ = cyc φ (ν * μ) := by
+  funext a b
+  apply propext
+  have hs : ∀ x, (reindex φ ν).symm x = ↑ν⁻¹ * φ.symm x := fun x => by
+    simp [reindex, Units.mulLeft]
+  simp only [cyc, hs, ← mul_sub]
+  constructor
+  · rintro (h | h)
+    · left; rw [← h, ← mul_assoc]; simp
+    · right; rw [← mul_neg, ← h, ← mul_assoc]; simp
+  · rintro (h | h)
+    · left; rw [h, ← mul_assoc]; simp
+    · right; rw [h, ← mul_neg, ← mul_assoc]; simp
+
+
+theorem cyc_neg (φ : ZMod n ≃ E) (ν : ZMod n) : cyc φ (-ν) = cyc φ ν := by
+  funext a b; simp only [cyc, neg_neg]; exact propext or_comm
+
+theorem isPolygon_cyc (φ : ZMod n ≃ E) (ν : (ZMod n)ˣ) : IsPolygon n (cyc φ ν) :=
+  ⟨reindex φ ν, by rw [cyc_reindex, mul_one]⟩
+
+/-- The `ν`-th star polygon of a polygon structure. -/
+noncomputable def twist (ν : (ZMod n)ˣ) (P : Pol n E) : Pol n E :=
+  ⟨cyc P.2.choose ν, isPolygon_cyc _ ν⟩
+
+theorem twist_of_eq (hn : 2 < n) (ν : (ZMod n)ˣ) {P : Pol n E} {φ : ZMod n ≃ E}
+    (h : P.1 = cyc φ 1) : (twist ν P).1 = cyc φ ν :=
+  cyc_congr hn (P.2.choose_spec.symm.trans h) ν
+
+theorem twist_one (hn : 2 < n) (P : Pol n E) : twist 1 P = P :=
+  Subtype.ext ((twist_of_eq hn 1 P.2.choose_spec).trans P.2.choose_spec.symm)
+
+theorem twist_twist (hn : 2 < n) (μ ν : (ZMod n)ˣ) (P : Pol n E) :
+    twist μ (twist ν P) = twist (ν * μ) P := by
+  obtain ⟨φ, hφ⟩ := P.2
+  apply Subtype.ext
+  have h1 : (twist ν P).1 = cyc (reindex φ ν) 1 := by
+    rw [twist_of_eq hn ν hφ, cyc_reindex, mul_one]
+  rw [twist_of_eq hn μ h1, twist_of_eq hn _ hφ, cyc_reindex, Units.val_mul]
+
+theorem twist_neg (ν : (ZMod n)ˣ) (P : Pol n E) : twist (-ν) P = twist ν P :=
+  Subtype.ext (by simp only [twist, Units.val_neg, cyc_neg])
+
+theorem twist_eq_self_iff (hn : 2 < n) (ν : (ZMod n)ˣ) (P : Pol n E) :
+    twist ν P = P ↔ ν = 1 ∨ ν = -1 := by
+  constructor
+  · intro h
+    obtain ⟨φ, hφ⟩ := P.2
+    have h1 := congrArg Subtype.val h
+    rw [twist_of_eq hn ν hφ, hφ] at h1
+    have : cyc φ ν (φ 0) (φ ν) := by simp [cyc]
+    rw [h1] at this
+    simp only [cyc, Equiv.symm_apply_apply, sub_zero] at this
+    rcases this with h | h
+    · left; exact Units.ext h
+    · right; exact Units.ext (by simp [h])
+  · rintro (rfl | rfl)
+    · exact twist_one hn P
+    · rw [twist_neg, twist_one hn]
+
+theorem twist_eq_twist_iff (hn : 2 < n) (ν ν' : (ZMod n)ˣ) (P : Pol n E) :
+    twist ν' P = twist ν P ↔ ν' = ν ∨ ν' = -ν := by
+  have key : twist ν' P = twist ν P ↔ twist (ν' * ν⁻¹) P = P := by
+    constructor
+    · intro h; rw [← twist_twist hn, h, twist_twist hn, mul_inv_cancel, twist_one hn]
+    · intro h
+      have := congrArg (twist ν) h
+      rwa [twist_twist hn, show ν' * ν⁻¹ * ν = ν' by group] at this
+  rw [key, twist_eq_self_iff hn]
+  constructor
+  · rintro (h | h)
+    · left; simpa using congrArg (· * ν) h
+    · right; simpa using congrArg (· * ν) h
+  · rintro (rfl | rfl)
+    · left; simp
+    · right; simp
+
+/-- **The « fait mirifique » (page 138).** `(Z/n)*` acts on the polygon
+structures of `E`, through `(Z/n)*/±1`. -/
+noncomputable instance polygonAction [Fact (2 < n)] : MulAction (ZMod n)ˣ (Pol n E) where
+  smul := twist
+  one_smul := twist_one Fact.out
+  mul_smul a b P := by
+    change twist (a * b) P = twist a (twist b P)
+    rw [twist_twist Fact.out, mul_comm]
+
+/-- The rotation `φ k ↦ φ (k + 1)` of an indexed polygon. -/
+def rot (φ : ZMod n ≃ E) : Equiv.Perm E := φ.symm.trans ((Equiv.addRight 1).trans φ)
+
+theorem rot_pow (φ : ZMod n ≃ E) (k : ℕ) (x : E) : (rot φ ^ k) x = φ (φ.symm x + k) := by
+  induction k generalizing x with
+  | zero => simp
+  | succ k ih =>
+    rw [pow_succ, Equiv.Perm.mul_apply, ih]
+    simp only [rot, Equiv.trans_apply, Equiv.coe_addRight, Equiv.symm_apply_apply]
+    push_cast; ring_nf
+
+/-- **Pages 184 to 187.** Two polygon structures on `E` with the same group of
+rotations differ by a star twist. -/
+theorem exists_twist_of_zpowers_rot (hn : 0 < n) {φ ψ : ZMod n ≃ E}
+    (h : Subgroup.zpowers (rot ψ) = Subgroup.zpowers (rot φ)) :
+    ∃ ν : (ZMod n)ˣ, cyc ψ 1 = cyc φ ν := by
+  have : NeZero n := ⟨by omega⟩
+  have : Finite E := Finite.of_equiv _ φ
+  have hm : rot ψ ∈ Subgroup.zpowers (rot φ) := h ▸ Subgroup.mem_zpowers _
+  rw [← mem_powers_iff_mem_zpowers] at hm
+  obtain ⟨m, hm⟩ := hm
+  set c := φ.symm (ψ 0)
+  have hk : ∀ k : ZMod n, φ.symm (ψ k) = c + m * k := by
+    intro k
+    have h1 : ψ k = (rot ψ ^ k.val) (ψ 0) := by
+      rw [rot_pow]; simp
+    rw [h1, ← hm, ← pow_mul, rot_pow]
+    simp [c]
+  have hx : ∀ x, φ.symm x = c + m * ψ.symm x := fun x => by
+    simpa using hk (ψ.symm x)
+  obtain ⟨k, hk1⟩ := φ.symm.surjective.comp ψ.surjective (c + 1)
+  have hmk : (m : ZMod n) * k = 1 := by
+    have := hk k; simp only [Function.comp_apply] at hk1; rw [hk1] at this
+    linear_combination -this
+  let u : (ZMod n)ˣ := ⟨m, k, hmk, by rw [mul_comm]; exact hmk⟩
+  refine ⟨u, ?_⟩
+  funext a b
+  apply propext
+  simp only [cyc, hx]
+  rw [show c + m * ψ.symm b - (c + m * ψ.symm a) = m * (ψ.symm b - ψ.symm a) by ring]
+  have := pm_mul_cancel (a := ψ.symm b - ψ.symm a) (b := 1) u
+  simp only [mul_one] at this
+  exact this.symm
+
+
+theorem rot_reindex_pow (φ : ZMod n ≃ E) (ν : (ZMod n)ˣ) (k : ℕ) (x : E) :
+    (rot (reindex φ ν) ^ k) x = φ (φ.symm x + ν * k) := by
+  rw [rot_pow]
+  simp only [reindex, Units.mulLeft, Equiv.trans_apply, Equiv.coe_fn_mk,
+    Equiv.symm_trans_apply, Equiv.coe_fn_symm_mk, mul_add, ← mul_assoc,
+    Units.mul_inv, one_mul]
+
+/-- Conversely, the twists of a polygon structure have its group of rotations:
+the polygon structures with a given rotation group form one orbit. -/
+theorem zpowers_rot_reindex [NeZero n] (φ : ZMod n ≃ E) (ν : (ZMod n)ˣ) :
+    Subgroup.zpowers (rot (reindex φ ν)) = Subgroup.zpowers (rot φ) := by
+  have h1 : rot (reindex φ ν) = rot φ ^ (ν : ZMod n).val := by
+    ext x
+    rw [rot_pow, ← pow_one (rot (reindex φ ν)), rot_reindex_pow]
+    simp
+  have h2 : rot φ = rot (reindex φ ν) ^ ((ν⁻¹ : (ZMod n)ˣ) : ZMod n).val := by
+    ext x
+    rw [rot_reindex_pow, ← pow_one (rot φ), rot_pow]
+    simp
+  apply le_antisymm
+  · rw [Subgroup.zpowers_le, h1]; exact Subgroup.pow_mem _ (Subgroup.mem_zpowers _) _
+  · rw [Subgroup.zpowers_le, h2]; exact Subgroup.pow_mem _ (Subgroup.mem_zpowers _) _
+
+end StarPolygon
+
+/-! ### To 6, in the abstract (pages 138 to 140) -/
+
+section ToSix
+
+variable {n : ℕ} {S : Type*} (A : S → S → Prop)
+
+/-- The star `Et(s)` of a vertex: its neighbours. -/
+def star (s : S) : Set S := {t | A s t}
+
+/-- The graph `B` induced on the star of `s` for `A`. -/
+def onStar (B : S → S → Prop) (s : S) : star A s → star A s → Prop := fun a b => B a b
+
+/-- `A_λ`: `u` and `t` are joined when `λ⁻¹ u` and `t` are joined in `A`. The
+star of `λ s` for `A_λ` is, as a set, the star of `s` for `A`. -/
+def twistGraph (l : Equiv.Perm S) : S → S → Prop := fun u t => A (l⁻¹ u) t
+
+theorem star_twistGraph (l : Equiv.Perm S) (s : S) : star (twistGraph A l) (l s) = star A s := by
+  ext t; simp [star, twistGraph]
+
+/-- **To 6.** `A` induces a polygon on every star, and `A_λ` induces on every
+star `Et(s) = Et_{A_λ}(λ s)` the `ν`-th star polygon of it. -/
+def ToSix (hpol : ∀ s, IsPolygon n (onStar A A s)) (l : Equiv.Perm S) (ν : (ZMod n)ˣ) : Prop :=
+  ∀ s, onStar A (twistGraph A l) s = (twist ν (⟨_, hpol s⟩ : Pol n _)).1
+
+variable {A}
+
+/-- Under To 6, `ν` is determined by `λ` up to sign. -/
+theorem toSix_unique (hn : 2 < n) {hpol : ∀ s, IsPolygon n (onStar A A s)} [Nonempty S]
+    {l : Equiv.Perm S} {ν ν' : (ZMod n)ˣ} (h : ToSix A hpol l ν) (h' : ToSix A hpol l ν') :
+    ν' = ν ∨ ν' = -ν := by
+  obtain ⟨s⟩ := ‹Nonempty S›
+  exact (twist_eq_twist_iff hn ν ν' _).1 (Subtype.ext ((h' s).symm.trans (h s)))
+
+/-- Under To 6, `A_λ` is determined by `ν` (`A_λ = A₀^{(ν)}`), as soon as each of
+its edges lies in a triangle. -/
+theorem twistGraph_eq_of_toSix (hn : 2 < n) {hpol : ∀ s, IsPolygon n (onStar A A s)}
+    {l l' : Equiv.Perm S} {ν ν' : (ZMod n)ˣ} (h : ToSix A hpol l ν) (h' : ToSix A hpol l' ν')
+    (hν : ν' = ν ∨ ν' = -ν)
+    (hl : ∀ u t, twistGraph A l u t → ∃ w, twistGraph A l w u ∧ twistGraph A l w t)
+    (hl' : ∀ u t, twistGraph A l' u t → ∃ w, twistGraph A l' w u ∧ twistGraph A l' w t) :
+    twistGraph A l = twistGraph A l' := by
+  have tw : ∀ s, twist ν' ⟨_, hpol s⟩ = twist ν ⟨_, hpol s⟩ := fun s =>
+    (twist_eq_twist_iff hn ν ν' _).2 hν
+  funext u t
+  apply propext
+  constructor
+  · intro e
+    obtain ⟨w, hu, ht⟩ := hl u t e
+    have := congrFun (congrFun (h (l⁻¹ w)) ⟨u, hu⟩) ⟨t, ht⟩
+    have h2 := congrFun (congrFun (h' (l⁻¹ w)) ⟨u, hu⟩) ⟨t, ht⟩
+    rw [tw] at h2
+    exact (h2.trans this.symm).mpr e
+  · intro e
+    obtain ⟨w, hu, ht⟩ := hl' u t e
+    have := congrFun (congrFun (h (l'⁻¹ w)) ⟨u, hu⟩) ⟨t, ht⟩
+    have h2 := congrFun (congrFun (h' (l'⁻¹ w)) ⟨u, hu⟩) ⟨t, ht⟩
+    rw [tw] at h2
+    exact (this.trans h2.symm).mpr e
+
+/-- **Pages 139 and 140: `Z ↪ Z'_n`, except for the octahedron.** If no two
+vertices have the same star (the octahedron excepted, page 275) and the twisted
+graphs are triangulated, two homotheties with the same `ν ∈ Z'_n` are equal. -/
+theorem eq_of_toSix (hn : 2 < n) {hpol : ∀ s, IsPolygon n (onStar A A s)}
+    (hstar : ∀ s s', star A s = star A s' → s = s')
+    {l l' : Equiv.Perm S} {ν ν' : (ZMod n)ˣ} (h : ToSix A hpol l ν) (h' : ToSix A hpol l' ν')
+    (hν : ν' = ν ∨ ν' = -ν)
+    (hl : ∀ u t, twistGraph A l u t → ∃ w, twistGraph A l w u ∧ twistGraph A l w t)
+    (hl' : ∀ u t, twistGraph A l' u t → ∃ w, twistGraph A l' w u ∧ twistGraph A l' w t) :
+    l = l' := by
+  have e := twistGraph_eq_of_toSix hn h h' hν hl hl'
+  have : l⁻¹ = l'⁻¹ := by
+    ext u
+    exact hstar _ _ (Set.ext fun t => by
+      simpa [star, twistGraph] using congrFun (congrFun e u) t)
+  simpa using congrArg (·⁻¹) this
+
+
+/-- An automorphism `g` of `A` carries the star of `s` onto the star of `g s`. -/
+def starEquiv {g : Equiv.Perm S} (hg : ∀ a b, A (g a) (g b) ↔ A a b) (s : S) :
+    star A s ≃ star A (g s) :=
+  Equiv.subtypeEquiv g (fun a => by simp [star, hg])
+
+theorem onStar_starEquiv {g : Equiv.Perm S} (hg : ∀ a b, A (g a) (g b) ↔ A a b) (s : S)
+    {B : S → S → Prop} (hB : ∀ a b, B (g a) (g b) ↔ B a b) (a b : star A (g s)) :
+    onStar A B (g s) a b ↔ onStar A B s ((starEquiv hg s).symm a) ((starEquiv hg s).symm b) := by
+  obtain ⟨a, rfl⟩ := (starEquiv hg s).surjective a
+  obtain ⟨b, rfl⟩ := (starEquiv hg s).surjective b
+  simp only [Equiv.symm_apply_apply]
+  exact hB a b
+
+/-- **Pages 184 to 187, (29): `ν` does not depend on the vertex.** If an
+automorphism `g` of `A` commutes with `λ`, the star twist `ν` that `A_λ`
+induces at `s` is the one it induces at `g s`. -/
+theorem toSix_at_smul (hn : 2 < n) (hpol : ∀ s, IsPolygon n (onStar A A s))
+    {l g : Equiv.Perm S} (hg : ∀ a b, A (g a) (g b) ↔ A a b) (hgl : g * l = l * g)
+    {ν : (ZMod n)ˣ} {s : S} (h : onStar A (twistGraph A l) s = (twist ν (⟨_, hpol s⟩ : Pol n _)).1) :
+    onStar A (twistGraph A l) (g s) = (twist ν (⟨_, hpol (g s)⟩ : Pol n _)).1 := by
+  obtain ⟨φ, hφ⟩ := hpol s
+  have hA : onStar A A (g s) = cyc (φ.trans (starEquiv hg s)) 1 := by
+    funext a b
+    apply propext
+    rw [onStar_starEquiv hg s hg, hφ]
+    rfl
+  have hgl' : ∀ u, l⁻¹ (g u) = g (l⁻¹ u) := fun u => by
+    have : l⁻¹ * g = g * l⁻¹ := by
+      rw [inv_mul_eq_iff_eq_mul, ← mul_assoc, ← hgl, mul_assoc, mul_inv_cancel, mul_one]
+    exact congrArg (· u) (congrArg DFunLike.coe this)
+  have hB : ∀ a b, twistGraph A l (g a) (g b) ↔ twistGraph A l a b := fun a b => by
+    simp only [twistGraph, hgl', hg]
+  refine Eq.trans ?_ (twist_of_eq hn ν (P := (⟨_, hpol (g s)⟩ : Pol n _)) hA).symm
+  replace h := h.trans (twist_of_eq hn ν hφ)
+  funext a b
+  apply propext
+  rw [onStar_starEquiv hg s hB, h]
+  rfl
+
+/-- Hence, if the automorphisms of `A` commuting with `λ` are transitive on the
+vertices, To 6 at one vertex gives To 6 everywhere, with the same `ν`. -/
+theorem toSix_of_transitive (hn : 2 < n) (hpol : ∀ s, IsPolygon n (onStar A A s))
+    {l : Equiv.Perm S}
+    (htr : ∀ s s' : S, ∃ g : Equiv.Perm S, (∀ a b, A (g a) (g b) ↔ A a b) ∧ g * l = l * g ∧
+      g s = s')
+    {ν : (ZMod n)ˣ} {s : S} (h : onStar A (twistGraph A l) s = (twist ν (⟨_, hpol s⟩ : Pol n _)).1) :
+    ToSix A hpol l ν := fun s' => by
+  obtain ⟨g, hg, hgl, rfl⟩ := htr s s'
+  exact toSix_at_smul hn hpol hg hgl h
+
+end ToSix
+
+/-! ### To 6 in the model `P_{M, ±e}` over `Z/n` (pages 136 to 140) -/
+
+section ModelToSix
+
+variable {n : ℕ}
+
+theorem scal_scal {R : Type*} [CommRing R] (c c' : Rˣ) (v : Vtx R) :
+    scal c (scal c' v) = scal (c * c') v := by
+  induction v using Vtx.ind with
+  | H x y h => rw [scal_vtx, scal_vtx, scal_vtx, vtx_eq_iff]; left; rw [smul_smul]; simp
+
+/-- The homothety `T_μ` of `S_M`, as a permutation. -/
+def scalPerm {R : Type*} [CommRing R] (μ : Rˣ) : Equiv.Perm (Vtx R) where
+  toFun := scal μ
+  invFun := scal μ⁻¹
+  left_inv v := by simp [scal_scal, scal_one]
+  right_inv v := by simp [scal_scal, scal_one]
+
+/-- `A_{T_μ}` of `P_{M, ±e}` is `P_{M, ±μe}`. -/
+theorem twistGraph_scal {R : Type*} [CommRing R] (e μ : Rˣ) :
+    twistGraph (Adj R e) (scalPerm μ) = Adj R (μ * e) := by
+  funext u t
+  apply propext
+  induction u using Vtx.ind with
+  | H x y h =>
+  induction t using Vtx.ind with
+  | H z w h' =>
+    change Adj R e (scal μ⁻¹ (vtx h)) (vtx h') ↔ _
+    rw [scal_vtx, adj_vtx, adj_vtx, det2_smul_left]
+    have := pm_mul_cancel (a := det2 x z) (b := (μ : R) * e) μ⁻¹
+    rwa [← mul_assoc, Units.inv_mul, one_mul] at this
+
+variable (hn : 2 < n) (e : (ZMod n)ˣ) {x y₀ : Fin 2 → ZMod n} (hx : det2 x y₀ = 1)
+
+include hx in
+theorem det2_starPt (k : ZMod n) :
+    det2 ((e : ZMod n) • y₀ + k • x) (-(↑e⁻¹ : ZMod n) • x) = 1 := by
+  simp only [det2_add_left, det2_smul_left, det2_smul_right, det2_self,
+    det2_swap x y₀, hx]
+  simp
+
+/-- The point `(y + k x)˙` of the star of `ẋ` in `P_{M, ±e}`, `y = e y₀`. -/
+def starPt (k : ZMod n) : star (Adj (ZMod n) e) (vtx hx) :=
+  ⟨vtx (det2_starPt e hx k), by
+    change det2 x _ = _ ∨ _
+    left
+    simp [det2_add_right, det2_smul_right, det2_self, hx]⟩
+
+include hn in
+theorem starPt_bijective : Function.Bijective (starPt e hx) := by
+  constructor
+  · intro k k' h
+    have h := congrArg Subtype.val h
+    simp only [starPt, vtx_eq_iff] at h
+    rcases h with h | h
+    · have := congrArg (det2 · y₀) h
+      simp only [det2_add_left, det2_smul_left, det2_self, hx] at this
+      simpa using this
+    · have := congrArg (det2 x ·) h
+      simp only [det2_add_right, det2_smul_right, det2_neg_right, det2_self, hx] at this
+      have h2 : (2 : ZMod n) * e = 0 := by linear_combination this
+      exact absurd (by simpa using congrArg (· * (↑e⁻¹ : ZMod n)) h2) (two_ne_zero_of_lt hn)
+  · rintro ⟨v, hv⟩
+    induction v using Vtx.ind with
+    | H z w h =>
+    have hy : det2 x ((e : ZMod n) • y₀) = e := by rw [det2_smul_right, hx, mul_one]
+    rcases hv with hv | hv
+    · refine ⟨det2 z ((↑e⁻¹ : ZMod n) • ((e : ZMod n) • y₀)), Subtype.ext ?_⟩
+      simp only [starPt, vtx_eq_iff]
+      left; exact (star_line e hy hv).symm
+    · have hv' : det2 x (-z) = e := by rw [det2_neg_right, hv, neg_neg]
+      refine ⟨det2 (-z) ((↑e⁻¹ : ZMod n) • ((e : ZMod n) • y₀)), Subtype.ext ?_⟩
+      simp only [starPt, vtx_eq_iff]
+      right; exact (star_line e hy hv').symm
+
+/-- The star of `ẋ`, indexed by `Z/n`: `k ↦ (y + k x)˙`. -/
+noncomputable def starIndex : ZMod n ≃ star (Adj (ZMod n) e) (vtx hx) :=
+  Equiv.ofBijective _ (starPt_bijective hn e hx)
+
+include hn in
+/-- On the star of `ẋ`, the edges of type `± μ e` form the `μ`-th star polygon
+of the indexing: `(y + k x)˙ ~ (y + k' x)˙` iff `k' - k = ± μ`. -/
+theorem onStar_adj (μ : (ZMod n)ˣ) :
+    onStar (Adj (ZMod n) e) (Adj (ZMod n) (μ * e)) (vtx hx) = cyc (starIndex hn e hx) μ := by
+  funext a b
+  obtain ⟨k, rfl⟩ := (starIndex hn e hx).surjective a
+  obtain ⟨k', rfl⟩ := (starIndex hn e hx).surjective b
+  apply propext
+  have hy : det2 x ((e : ZMod n) • y₀) = e := by rw [det2_smul_right, hx, mul_one]
+  simp only [cyc, Equiv.symm_apply_apply]
+  change Adj (ZMod n) _ (vtx (det2_starPt e hx k)) (vtx (det2_starPt e hx k')) ↔ _
+  rw [adj_vtx, link_polygon e μ hy]
+  constructor
+  · rintro (h | h)
+    · right; linear_combination -h
+    · left; linear_combination -h
+  · rintro (h | h)
+    · right; linear_combination -h
+    · left; linear_combination -h
+
+include hn in
+/-- Every star of `P_{M, ±e}` over `Z/n` is a polygon. -/
+theorem isPolygon_adj (v : Vtx (ZMod n)) :
+    IsPolygon n (onStar (Adj (ZMod n) e) (Adj (ZMod n) e) v) := by
+  induction v using Vtx.ind with
+  | H x y h =>
+    refine ⟨starIndex hn e h, ?_⟩
+    have := onStar_adj hn e h 1
+    rwa [Units.val_one, one_mul] at this
+
+/-- **To 6 holds in the model, with `ν = μ` (pages 138 and 139).** Over `Z/n`,
+`n ≥ 3`, the homothety `T_μ` of `P_{M, ±e}` satisfies To 6 with `ν = μ`: on each
+star, `A_{T_μ}` induces the `μ`-th star polygon of the polygon induced by
+`P_{M, ±e}`. So `T_μ ↦ μ` is the map `Z → Z'_n` of page 139. -/
+theorem toSix_scal (μ : (ZMod n)ˣ) :
+    ToSix (Adj (ZMod n) e) (isPolygon_adj hn e) (scalPerm μ) μ := by
+  intro v
+  induction v using Vtx.ind with
+  | H x y h =>
+    rw [twistGraph_scal]
+    refine (onStar_adj hn e h μ).trans (twist_of_eq hn μ ?_).symm
+    have := onStar_adj hn e h 1
+    rwa [Units.val_one, one_mul] at this
+
+end ModelToSix
+
 end Grothendieck.Folder79

@@ -1584,3 +1584,399 @@ theorem horizontal_unit_iff_Fp (a : (ZMod p)[X]) :
 end CartierFp
 
 end Grothendieck.Folder93.PCurvature
+
+/-!
+# Folder 93, pages 121–123: the reduction from `T^(p^N) − α` to `T^(p^N)`
+
+The Proposition of pages 121–123 is stated in `B = A[T]/(T^(p^N) − α)` and the page reduces
+to `α = 0` without argument (« OPS »). The rigidity for `α = 0` is `rigidity` above; this
+section proves the reduction, with `B = AdjoinRoot (T^(p^N) − α)`.
+
+* `θ`: the Taylor map `A[X] → B[Y]`, `f ↦ f(β + Y)`, `β` the class of `T`; `θ_coeff`
+  (its coefficients are the classes of the divided derivatives), `θ_D` (it commutes with them),
+  `θ_P` (`θ(T^(p^N) − α) = Y^(p^N)`, Frobenius), `θ_N`. Over `B`, `θ(s)` satisfies the
+  hypotheses of the case `α = 0`: this is the base change `A → B`, where
+  `T^(p^N) − α = (T − β)^(p^N)`.
+* The osculating homography at `β` is `(a(T − β) + s)/(c(T − β) + 1)`, `c = −D⁽²⁾s/D⁽¹⁾s`,
+  `a = D⁽¹⁾s + c s`, with coefficient vector `v = (a, s − aT, c, 1 − cT)` in `B⁴`. `Good`:
+  `(cY + 1)^k · θ(x) ≡ x` modulo `Y^(p^N)`; the four coordinates of `v` are good of weight `1`,
+  so every product of `p^N` of their `A`-combinations is good of weight `p^N`, where
+  `(cY + 1)^(p^N) ≡ 1`; `descent` then puts it in `A` (`Good.top`, `descent`).
+* `rigidity_alpha`: over any `A` of characteristic `p` with `C(k,3)` a unit for `3 ≤ k < p^N`,
+  for every `ℓ = λc + μ(1 − cT)` (`λ, μ ∈ A`) there are `a, b, c', d ∈ A` with
+  `s · (c'T + d) = aT + b` in `B`, `c'T + d = ℓ^(p^N − 1)` and `ℓ^(p^N) ∈ A`.
+* `rigidity_alpha_local`, `rigidity_alpha_of_gt`, `rigidity_alpha_four`, `rigidity_alpha_nine`:
+  for `A` local (hence `Pic(A) = 0`), `s = (aT + b)/(cT + d)` in `B` with `a, b, c, d ∈ A` and
+  `cT + d` a unit of `B`: one of `c^(p^N)`, `(1 − cT)^(p^N) = 1 − c^(p^N) α` is a unit of `A`.
+
+Not proved: the case of a non-local `A` with `Pic(A) = 0` (the vectors `ℓ^(p^N − 1) v` lie in
+`A⁴` and span a rank-one module; that it is free is where `Pic(A) = 0` would enter).
+-/
+
+
+namespace Grothendieck.Folder93.Alpha
+
+open Polynomial
+open scoped Ring
+
+local notation "D" => Polynomial.hasseDeriv
+
+variable {A : Type*} [CommRing A] (p n : ℕ) (α : A)
+
+/-- `T^(p^n) − α`. -/
+noncomputable abbrev P : A[X] := X ^ p ^ n - C α
+
+/-- `B = A[T]/(T^(p^n) − α)`. -/
+abbrev B := AdjoinRoot (P p n α)
+
+lemma q_pos [hp : Fact p.Prime] : 0 < p ^ n := pow_pos hp.out.pos n
+
+lemma P_monic [Fact p.Prime] : (P p n α).Monic := monic_X_pow_sub_C α (q_pos p n).ne'
+
+/-- A multiple of `T^(p^n) − α` of degree `< p^n` is `0`. -/
+lemma eq_zero_of_P_dvd [Fact p.Prime] {f : A[X]} (h : P p n α ∣ f)
+    (hf : ∀ m, p ^ n ≤ m → f.coeff m = 0) : f = 0 := by
+  rcases subsingleton_or_nontrivial A with hA | hA
+  · exact Subsingleton.elim _ _
+  have hd : f.degree < (P p n α).degree := by
+    rw [degree_X_pow_sub_C (q_pos p n), degree_lt_iff_coeff_zero]
+    intro m hm
+    exact hf m (by exact_mod_cast hm)
+  rw [← (modByMonic_eq_self_iff (P_monic p n α)).2 hd]
+  exact (modByMonic_eq_zero_iff_dvd (P_monic p n α)).2 h
+
+variable [Fact p.Prime] in
+lemma of_injective : Function.Injective (AdjoinRoot.of (P p n α)) := by
+  rw [injective_iff_map_eq_zero]
+  intro a ha
+  rw [← AdjoinRoot.mk_C, AdjoinRoot.mk_eq_zero] at ha
+  have := eq_zero_of_P_dvd p n α ha fun m hm => by
+    rw [coeff_C, ite_eq_right_iff.2 fun h => absurd h (by have := q_pos p n; omega)]
+  exact C_eq_zero.1 this
+
+instance charP_B [Fact p.Prime] [CharP A p] : CharP (B p n α) p := charP_of_injective_ringHom (of_injective p n α) p
+
+/-- The Taylor map `f ↦ f(β + Y)`, `β` the class of `T` in `B`. -/
+noncomputable def θ : A[X] →ₐ[A] (B p n α)[X] := aeval (X + C (AdjoinRoot.root (P p n α)))
+
+theorem θ_coeff (f : A[X]) (k : ℕ) :
+    (θ p n α f).coeff k = AdjoinRoot.mk (P p n α) (D k f) := by
+  have e : θ p n α f = taylor (AdjoinRoot.root (P p n α)) (f.map (AdjoinRoot.of (P p n α))) := by
+    rw [taylor_apply, comp, eval₂_map, θ, aeval_def]
+    rfl
+  rw [e, taylor_coeff, hasseDeriv_map, eval_map, ← AdjoinRoot.aeval_eq, aeval_def,
+    AdjoinRoot.algebraMap_eq]
+
+theorem θ_D (f : A[X]) (k : ℕ) : θ p n α (D k f) = D k (θ p n α f) := by
+  ext j
+  rw [θ_coeff, hasseDeriv_coeff, θ_coeff]
+  have := LinearMap.congr_fun (hasseDeriv_comp (R := A) j k) f
+  simp only [LinearMap.coe_comp, Function.comp_apply, LinearMap.smul_apply] at this
+  rw [this, nsmul_eq_mul, map_mul, map_natCast, Nat.choose_symm_add]
+
+theorem θ_X : θ p n α X = X + C (AdjoinRoot.root (P p n α)) := by simp [θ]
+
+theorem θ_C (a : A) : θ p n α (C a) = C (AdjoinRoot.mk (P p n α) (C a)) := by
+  simp [θ, AdjoinRoot.mk_C]
+
+theorem root_pow : AdjoinRoot.root (P p n α) ^ p ^ n = AdjoinRoot.mk (P p n α) (C α) := by
+  have : AdjoinRoot.mk (P p n α) (X ^ p ^ n - C α) = 0 := AdjoinRoot.mk_self
+  rwa [map_sub, map_pow, AdjoinRoot.mk_X, sub_eq_zero] at this
+
+theorem θ_P [Fact p.Prime] [CharP A p] : θ p n α (P p n α) = X ^ p ^ n := by
+  have hr := root_pow p n α
+  change θ p n α (X ^ p ^ n - C α) = _
+  rw [map_sub, map_pow, θ_X, θ_C, add_pow_char_pow, ← C_pow, hr]
+  ring
+
+theorem θ_N (f : A[X]) : θ p n α (N f) = N (θ p n α f) := by
+  simp only [N, map_sub, map_pow, map_mul, θ_D]
+
+
+theorem θ_of_mk_eq_zero [Fact p.Prime] [CharP A p] {f : A[X]} (h : AdjoinRoot.mk (P p n α) f = 0) :
+    X ^ p ^ n ∣ θ p n α f := by
+  obtain ⟨g, rfl⟩ := AdjoinRoot.mk_eq_zero.1 h
+  rw [map_mul, θ_P]
+  exact dvd_mul_right _ _
+
+/-- Descent: if the Taylor expansion `f(β + Y)` of `f` is constant modulo `Y^(p^n)`, then `f` is
+congruent to a constant of `A` modulo `T^(p^n) − α`. -/
+theorem descent [Fact p.Prime] [CharP A p] (x : A[X])
+    (h : X ^ p ^ n ∣ θ p n α x - C (AdjoinRoot.mk (P p n α) x)) :
+    ∃ x₀ : A, P p n α ∣ x - C x₀ := by
+  rcases subsingleton_or_nontrivial A with hA | hA
+  · exact ⟨0, dvd_of_eq (Subsingleton.elim _ _)⟩
+  set r := x %ₘ P p n α
+  have hx : x = r + P p n α * (x /ₘ P p n α) := (modByMonic_add_div x (P p n α)).symm
+  have hr : ∀ m, p ^ n ≤ m → r.coeff m = 0 := fun m hm =>
+    coeff_eq_zero_of_degree_lt ((degree_modByMonic_lt x (P_monic p n α)).trans_le
+      (by rw [degree_X_pow_sub_C (q_pos p n)]; exact_mod_cast hm))
+  have hmk : AdjoinRoot.mk (P p n α) x = AdjoinRoot.mk (P p n α) r := by
+    rw [hx, map_add, map_mul, AdjoinRoot.mk_self, zero_mul, add_zero]
+  have h' : X ^ p ^ n ∣ θ p n α r - C (AdjoinRoot.mk (P p n α) r) := by
+    have hθx : θ p n α x = θ p n α r + X ^ p ^ n * θ p n α (x /ₘ P p n α) := by
+      conv_lhs => rw [hx]
+      rw [map_add, map_mul, θ_P]
+    have e : θ p n α r - C (AdjoinRoot.mk (P p n α) r) =
+        (θ p n α x - C (AdjoinRoot.mk (P p n α) x)) - X ^ p ^ n * θ p n α (x /ₘ P p n α) := by
+      rw [hθx, hmk]; ring
+    rw [e]
+    exact dvd_sub h (dvd_mul_right _ _)
+  have hk : ∀ k, 0 < k → k < p ^ n → r.coeff k = 0 := by
+    intro k hk0 hkq
+    have h1 := X_pow_dvd_iff.1 h' k hkq
+    rw [coeff_sub, coeff_C, ite_eq_right_iff.2 fun h => absurd h (by omega), sub_zero, θ_coeff, AdjoinRoot.mk_eq_zero] at h1
+    have h2 := eq_zero_of_P_dvd p n α h1 fun m hm => by
+      rw [hasseDeriv_coeff, hr _ (by omega), mul_zero]
+    simpa [hasseDeriv_coeff] using congrArg (coeff · 0) h2
+  refine ⟨r.coeff 0, ⟨x /ₘ P p n α, ?_⟩⟩
+  have hrC : r = C (r.coeff 0) := by
+    ext m
+    rcases m with _ | m
+    · simp
+    · rw [coeff_C, ite_eq_right_iff.2 fun h => absurd h (by omega)]
+      rcases lt_or_ge (m + 1) (p ^ n) with hm | hm
+      · exact hk _ (by omega) hm
+      · exact hr _ hm
+  rw [sub_eq_iff_eq_add', ← hrC]
+  exact hx
+
+/-- `x` is good of weight `k` for the denominator `L = c̄Y + 1` when
+`L^k · x(β + Y) ≡ x(β)` modulo `Y^(p^n)`. -/
+def Good (cb : B p n α) (k : ℕ) (x : A[X]) : Prop :=
+  X ^ p ^ n ∣ (C cb * X + 1) ^ k * θ p n α x - C (AdjoinRoot.mk (P p n α) x)
+
+variable {p n α}
+
+lemma Good.C_mul_left {cb : B p n α} {k : ℕ} {x : A[X]} (h : Good p n α cb k x) (l : A) :
+    Good p n α cb k (C l * x) := by
+  unfold Good at *
+  have e : (C cb * X + 1) ^ k * θ p n α (C l * x) - C (AdjoinRoot.mk (P p n α) (C l * x)) =
+      C (AdjoinRoot.mk (P p n α) (C l)) *
+        ((C cb * X + 1) ^ k * θ p n α x - C (AdjoinRoot.mk (P p n α) x)) := by
+    rw [map_mul, θ_C, map_mul, Polynomial.C_mul]; ring
+  rw [e]; exact h.mul_left _
+
+lemma Good.add {cb : B p n α} {k : ℕ} {x y : A[X]} (hx : Good p n α cb k x)
+    (hy : Good p n α cb k y) : Good p n α cb k (x + y) := by
+  unfold Good at *
+  have e : (C cb * X + 1) ^ k * θ p n α (x + y) - C (AdjoinRoot.mk (P p n α) (x + y)) =
+      ((C cb * X + 1) ^ k * θ p n α x - C (AdjoinRoot.mk (P p n α) x)) +
+        ((C cb * X + 1) ^ k * θ p n α y - C (AdjoinRoot.mk (P p n α) y)) := by
+    rw [map_add, map_add, C_add]; ring
+  rw [e]; exact dvd_add hx hy
+
+lemma Good.mul {cb : B p n α} {k m : ℕ} {x y : A[X]} (hx : Good p n α cb k x)
+    (hy : Good p n α cb m y) : Good p n α cb (k + m) (x * y) := by
+  unfold Good at *
+  have e : (C cb * X + 1) ^ (k + m) * θ p n α (x * y) - C (AdjoinRoot.mk (P p n α) (x * y)) =
+      ((C cb * X + 1) ^ k * θ p n α x - C (AdjoinRoot.mk (P p n α) x)) *
+          ((C cb * X + 1) ^ m * θ p n α y) +
+        C (AdjoinRoot.mk (P p n α) x) *
+          ((C cb * X + 1) ^ m * θ p n α y - C (AdjoinRoot.mk (P p n α) y)) := by
+    rw [map_mul, map_mul, Polynomial.C_mul]; ring
+  rw [e]; exact dvd_add (hx.mul_right _) (hy.mul_left _)
+
+lemma Good.pow {cb : B p n α} {x : A[X]} (hx : Good p n α cb 1 x) (m : ℕ) :
+    Good p n α cb m (x ^ m) := by
+  induction m with
+  | zero => simp [Good, θ]
+  | succ m ih => rw [pow_succ]; exact ih.mul hx
+
+/-- Weight `p^n`: `L^(p^n) = 1 + c̄^(p^n) Y^(p^n)`, so `x(β + Y) ≡ x(β)` modulo `Y^(p^n)`. -/
+lemma Good.top [Fact p.Prime] [CharP A p] {cb : B p n α} {x : A[X]}
+    (hx : Good p n α cb (p ^ n) x) :
+    X ^ p ^ n ∣ θ p n α x - C (AdjoinRoot.mk (P p n α) x) := by
+  unfold Good at hx
+  rw [add_pow_char_pow, one_pow, mul_pow, ← C_pow] at hx
+  have e : θ p n α x - C (AdjoinRoot.mk (P p n α) x) =
+      ((C (cb ^ p ^ n) * X ^ p ^ n + 1) * θ p n α x - C (AdjoinRoot.mk (P p n α) x)) -
+        X ^ p ^ n * (C (cb ^ p ^ n) * θ p n α x) := by ring
+  rw [e]; exact dvd_sub hx (dvd_mul_right _ _)
+
+
+variable (p n α)
+
+/-- The combination `λ · c + μ · (1 − c T)` of the two denominator coefficients of the
+osculating homography, `c = −D⁽²⁾s · g`, `g` an inverse of `D⁽¹⁾s` modulo `T^(p^n) − α`. -/
+noncomputable def denom (s g : A[X]) (l m : A) : A[X] :=
+  C l * -(D 2 s * g) + C m * (1 + D 2 s * g * X)
+
+/-- The reduction to `α = 0` (pages 121–123), over any commutative ring `A` of characteristic `p`
+in which `C(k,3)` is a unit for `3 ≤ k < p^n`. -/
+theorem rigidity_alpha [Fact p.Prime] [CharP A p] (hq : 3 < p ^ n)
+    (hC : ∀ k, 3 ≤ k → k < p ^ n → IsUnit ((k.choose 3 : ℕ) : A))
+    (s g : A[X]) (hg : AdjoinRoot.mk (P p n α) (D 1 s * g) = 1)
+    (hN : AdjoinRoot.mk (P p n α) (N s) = 0) (l m : A) :
+    ∃ a b c d : A,
+      AdjoinRoot.mk (P p n α) (s * (C c * X + C d)) = AdjoinRoot.mk (P p n α) (C a * X + C b) ∧
+      AdjoinRoot.mk (P p n α) (C c * X + C d) =
+        AdjoinRoot.mk (P p n α) (denom s g l m) ^ (p ^ n - 1) ∧
+      ∃ γ : A, AdjoinRoot.mk (P p n α) (denom s g l m) ^ p ^ n = AdjoinRoot.mk (P p n α) (C γ) := by
+  set π := AdjoinRoot.mk (P p n α)
+  set c : A[X] := -(D 2 s * g) with hc
+  set a : A[X] := D 1 s + c * s with ha
+  set S := θ p n α s
+  set β := AdjoinRoot.root (P p n α)
+  have hS : ∀ k, S.coeff k = π (D k s) := fun k => θ_coeff p n α s k
+  have hπg : π (D 1 s) * π g = 1 := by rw [← map_mul]; exact hg
+  have hunit : IsUnit (S.coeff 1) := by rw [hS]; exact IsUnit.of_mul_eq_one _ hπg
+  have hinv : (S.coeff 1)⁻¹ʳ = π g := by
+    have hu : IsUnit (π (D 1 s)) := by rw [← hS]; exact hunit
+    rw [hS]
+    calc (π (D 1 s))⁻¹ʳ = (π (D 1 s))⁻¹ʳ * (π (D 1 s) * π g) := by rw [hπg, mul_one]
+      _ = π g := by rw [← mul_assoc, Ring.inverse_mul_cancel _ hu, one_mul]
+  have hC' : ∀ k, 3 ≤ k → k < p ^ n → IsUnit ((k.choose 3 : ℕ) : B p n α) := fun k h1 h2 => by
+    simpa using (hC k h1 h2).map (AdjoinRoot.of (P p n α))
+  have hNS : X ^ p ^ n ∣ N S := by rw [← θ_N]; exact θ_of_mk_eq_zero p n α hN
+  have hrig := Grothendieck.Folder93.rigidity_explicit (p ^ n) hC' S hunit
+    (fun m hm => X_pow_dvd_iff.1 hNS m (by omega))
+  have e2 : -(S.coeff 2 * (S.coeff 1)⁻¹ʳ) = π c := by rw [hinv, hS, hc, map_neg, map_mul]
+  have e1 : S.coeff 1 + π c * S.coeff 0 = π a := by rw [hS, hS, ha]; simp
+  rw [e2, e1, hS 0, hasseDeriv_zero, LinearMap.id_apply] at hrig
+  set cb := π c with hcb
+  obtain ⟨r, hr⟩ := hrig
+  have hL := D_lin cb 1
+  rw [map_one] at hL
+  have hl := D_lin (π a) (π s)
+  have hq1 : 1 < p ^ n := by omega
+  have hq2 : 2 < p ^ n := by omega
+  have E1 : D 1 S * (C cb * X + 1) + S * C cb - C (π a) = X ^ p ^ n * D 1 r := by
+    have := congrArg (D 1) hr
+    rwa [map_sub, D_mul_one, hL.1, hl.1, hasseDeriv_X_pow_mul p n hq1] at this
+  have E2 : D 2 S * (C cb * X + 1) + D 1 S * C cb = X ^ p ^ n * D 2 r := by
+    have := congrArg (D 2) hr
+    rwa [map_sub, D_mul_two, hL.1, hL.2.1, hl.2.1, hasseDeriv_X_pow_mul p n hq2, mul_zero,
+      add_zero, sub_zero] at this
+  obtain ⟨u, hu⟩ : X ^ p ^ n ∣ D 1 S * θ p n α g - 1 := by
+    have h0 : π (D 1 s * g - 1) = 0 := by rw [map_sub, hg, map_one, sub_self]
+    have := θ_of_mk_eq_zero p n α h0
+    rwa [map_sub, map_mul, θ_D, map_one] at this
+  have θc : θ p n α c = -(D 2 S * θ p n α g) := by rw [hc, map_neg, map_mul, θ_D]
+  have G3 : Good p n α cb 1 c := by
+    refine ⟨-θ p n α g * D 2 r + C cb * u, ?_⟩
+    rw [pow_one, θc]
+    linear_combination (-θ p n α g) * E2 + C cb * hu
+  obtain ⟨w3, hw3⟩ := G3
+  have G1 : Good p n α cb 1 a := by
+    refine ⟨D 1 r + S * w3, ?_⟩
+    rw [pow_one] at hw3 ⊢
+    rw [ha, map_add, map_mul, θ_D]
+    linear_combination E1 + S * hw3
+  obtain ⟨w1, hw1⟩ := G1
+  have G2 : Good p n α cb 1 (s - a * X) := by
+    refine ⟨r - (X + C β) * w1, ?_⟩
+    rw [pow_one] at hw1 ⊢
+    simp only [map_sub, map_mul, θ_X, AdjoinRoot.mk_X]
+    linear_combination hr - (X + C β) * hw1
+  have G4 : Good p n α cb 1 (1 - c * X) := by
+    refine ⟨-(X + C β) * w3, ?_⟩
+    rw [pow_one] at hw3 ⊢
+    simp only [map_sub, map_mul, map_one, θ_X, AdjoinRoot.mk_X]
+    linear_combination (-(X + C β)) * hw3
+  have G3 : Good p n α cb 1 c := ⟨w3, hw3⟩
+  have G1 : Good p n α cb 1 a := ⟨w1, hw1⟩
+  have hden : denom s g l m = C l * c + C m * (1 - c * X) := by
+    simp only [denom, hc]; ring
+  have Gl : Good p n α cb 1 (denom s g l m) := by
+    rw [hden]; exact (G3.C_mul_left l).add (G4.C_mul_left m)
+  have hq0 : p ^ n - 1 + 1 = p ^ n := Nat.sub_add_cancel (q_pos p n)
+  have top : ∀ v, Good p n α cb 1 v → ∃ x₀ : A,
+      π (C x₀) = π (denom s g l m ^ (p ^ n - 1) * v) := fun v hv => by
+    have := (Gl.pow (p ^ n - 1)).mul hv
+    rw [hq0] at this
+    obtain ⟨x₀, hx₀⟩ := descent p n α _ this.top
+    exact ⟨x₀, (AdjoinRoot.mk_eq_mk.2 hx₀).symm⟩
+  obtain ⟨m1, k1⟩ := top a G1
+  obtain ⟨m2, k2⟩ := top _ G2
+  obtain ⟨m3, k3⟩ := top c G3
+  obtain ⟨m4, k4⟩ := top _ G4
+  obtain ⟨γ, kγ⟩ := descent p n α _ (Gl.pow (p ^ n)).top
+  refine ⟨m1, m2, m3, m4, ?_, ?_, γ, ?_⟩
+  · simp only [map_mul, map_add] at k1 k2 k3 k4 ⊢
+    rw [k1, k2, k3, k4]
+    simp only [map_mul, map_sub, map_one]
+    ring
+  · simp only [map_mul, map_add] at k3 k4 ⊢
+    rw [k3, k4]
+    simp only [map_mul, map_sub, map_one, map_pow]
+    ring
+  · rw [← map_pow]; exact AdjoinRoot.mk_eq_mk.2 kγ
+
+
+/-- The Proposition of pages 121–123 in `B = A[T]/(T^(p^n) − α)` for a local ring `A`
+(so `Pic(A) = 0`), `α` arbitrary: if `C(k,3)` is a unit for `3 ≤ k < p^n`, `D⁽¹⁾s` is a unit
+of `B` and `G₀(t, s) = 0` in `B`, then `s = (at + b)/(ct + d)` in `B` with `a, b, c, d ∈ A`
+and `ct + d` a unit of `B`. -/
+theorem rigidity_alpha_local [IsLocalRing A] [Fact p.Prime] [CharP A p] (hq : 3 < p ^ n)
+    (hC : ∀ k, 3 ≤ k → k < p ^ n → IsUnit ((k.choose 3 : ℕ) : A)) (s : A[X])
+    (hs : IsUnit (AdjoinRoot.mk (P p n α) (D 1 s))) (hN : AdjoinRoot.mk (P p n α) (N s) = 0) :
+    ∃ a b c d : A,
+      AdjoinRoot.mk (P p n α) (s * (C c * X + C d)) = AdjoinRoot.mk (P p n α) (C a * X + C b) ∧
+      IsUnit (AdjoinRoot.mk (P p n α) (C c * X + C d)) := by
+  set π := AdjoinRoot.mk (P p n α)
+  obtain ⟨u, hu⟩ := hs
+  obtain ⟨g, hg⟩ : ∃ g, π g = ↑u⁻¹ :=
+    AdjoinRoot.induction_on (f := P p n α) (↑u⁻¹ : B p n α) fun g => ⟨g, rfl⟩
+  have hg1 : π (D 1 s * g) = 1 := by rw [map_mul, ← hu, hg, Units.mul_inv]
+  have hq0 : p ^ n ≠ 0 := (q_pos p n).ne'
+  obtain ⟨a, b, c, d, h1, h2, γ, h3⟩ := rigidity_alpha p n α hq hC s g hg1 hN 1 0
+  by_cases hγ : IsUnit γ
+  · refine ⟨a, b, c, d, h1, ?_⟩
+    rw [h2]
+    have : IsUnit (π (denom s g 1 0) ^ p ^ n) := by
+      rw [h3, AdjoinRoot.mk_C]; exact hγ.map _
+    exact ((isUnit_pow_iff hq0).1 this).pow _
+  · obtain ⟨a, b, c, d, h1, h2, -⟩ := rigidity_alpha p n α hq hC s g hg1 hN 0 1
+    refine ⟨a, b, c, d, h1, ?_⟩
+    rw [h2]
+    have e1 : π (denom s g 1 0) = -(π (D 2 s) * π g) := by simp [π, denom]
+    have e2 : π (denom s g 0 1) = 1 - π (denom s g 1 0) * AdjoinRoot.root (P p n α) := by
+      rw [e1]; simp [π, denom]
+    have e3 : π (denom s g 0 1) ^ p ^ n = π (C (1 - γ * α)) := by
+      rw [e2, sub_pow_char_pow, mul_pow, h3, root_pow, one_pow, ← map_mul]
+      simp [π]
+    have hu1 : IsUnit (1 - γ * α) :=
+      (IsLocalRing.isUnit_or_isUnit_one_sub_self (γ * α)).resolve_left
+        fun h => hγ (isUnit_of_mul_isUnit_left h)
+    have : IsUnit (π (denom s g 0 1) ^ p ^ n) := by
+      rw [e3, AdjoinRoot.mk_C]; exact hu1.map _
+    exact ((isUnit_pow_iff hq0).1 this).pow _
+
+/-- `p > 3`, `B = A[T]/(T^p − α)` (page 122), `A` local. -/
+theorem rigidity_alpha_of_gt [IsLocalRing A] [hp : Fact p.Prime] [CharP A p] (hp3 : 3 < p)
+    (s : A[X]) (hs : IsUnit (AdjoinRoot.mk (P p 1 α) (D 1 s)))
+    (hN : AdjoinRoot.mk (P p 1 α) (N s) = 0) :
+    ∃ a b c d : A,
+      AdjoinRoot.mk (P p 1 α) (s * (C c * X + C d)) = AdjoinRoot.mk (P p 1 α) (C a * X + C b) ∧
+      IsUnit (AdjoinRoot.mk (P p 1 α) (C c * X + C d)) := by
+  refine rigidity_alpha_local p 1 α (by simpa using hp3) (fun k hk3 hkp => ?_) s hs hN
+  refine natCast_isUnit p fun hdvd => ?_
+  have hf : p ∣ k.factorial := by
+    rw [← Nat.choose_mul_factorial_mul_factorial (show 3 ≤ k from hk3), mul_assoc]
+    exact hdvd.mul_right _
+  exact absurd ((Nat.Prime.dvd_factorial hp.out).1 hf) (by simp at hkp; omega)
+
+/-- `p = 2`, `B = A[T]/(T^4 − α)` (page 123), `A` local. -/
+theorem rigidity_alpha_four [IsLocalRing A] [CharP A 2] (s : A[X])
+    (hs : IsUnit (AdjoinRoot.mk (P 2 2 α) (D 1 s))) (hN : AdjoinRoot.mk (P 2 2 α) (N s) = 0) :
+    ∃ a b c d : A,
+      AdjoinRoot.mk (P 2 2 α) (s * (C c * X + C d)) = AdjoinRoot.mk (P 2 2 α) (C a * X + C b) ∧
+      IsUnit (AdjoinRoot.mk (P 2 2 α) (C c * X + C d)) := by
+  have : Fact (Nat.Prime 2) := ⟨Nat.prime_two⟩
+  refine rigidity_alpha_local 2 2 α (by norm_num) (fun k hk3 hk4 => ?_) s hs hN
+  obtain rfl : k = 3 := by norm_num at hk4; omega
+  simp
+
+/-- `p = 3`, `B = A[T]/(T^9 − α)` (page 123, right-hand column), `A` local. -/
+theorem rigidity_alpha_nine [IsLocalRing A] [CharP A 3] (s : A[X])
+    (hs : IsUnit (AdjoinRoot.mk (P 3 2 α) (D 1 s))) (hN : AdjoinRoot.mk (P 3 2 α) (N s) = 0) :
+    ∃ a b c d : A,
+      AdjoinRoot.mk (P 3 2 α) (s * (C c * X + C d)) = AdjoinRoot.mk (P 3 2 α) (C a * X + C b) ∧
+      IsUnit (AdjoinRoot.mk (P 3 2 α) (C c * X + C d)) := by
+  have : Fact (Nat.Prime 3) := ⟨Nat.prime_three⟩
+  refine rigidity_alpha_local 3 2 α (by norm_num) (fun k hk3 hk9 => natCast_isUnit 3 ?_) s hs hN
+  norm_num at hk9
+  interval_cases k <;> decide
+
+end Grothendieck.Folder93.Alpha
