@@ -269,7 +269,7 @@ function NoticeBody({ n }: { n: Notice }) {
           </>
         ) : (
           <p>
-            {n.inventoryTitle} <span className="text-ink-400">(titre de l’inventaire ; dossier non encore lu)</span>
+            {n.inventoryTitle} <span className="text-ink-400">(titre de l’inventaire ; dossier pas encore lu)</span>
           </p>
         )}
       </Field>
@@ -487,18 +487,17 @@ export function NoticesPage() {
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink-400">Notices</p>
           <h1 className="titre mt-2 text-[30px] leading-tight text-ink-900">Notices du fonds, dossier par dossier</h1>
           <p className="mt-4 text-[15.5px] leading-relaxed text-ink-600" lang="fr">
-            Notices rédigées sur le modèle de la BnF (« Archives et manuscrits »), générées à partir de l’inventaire de
-            Montpellier et des transcriptions du projet ; première passe. Une notice par cote ({DATA.notices.length}),
-            dans l’ordre de l’inventaire : cote, titre, date, description physique, langue, présentation du contenu, table
-            des matières de l’auteur quand une transcription en donne une, historique, sources, index et état de
-            l’édition. {transcribed} dossiers sont transcrits ; {withToc} donnent une table ou un plan de sa main.
+            Une notice pour chacune des {DATA.notices.length} cotes, dans l’ordre de l’inventaire de Montpellier, sur le
+            modèle de celles de la BnF (« Archives et manuscrits ») : ce que contient le dossier, quand il a été écrit, à
+            quoi il ressemble. Elles sont tirées de l’inventaire et des transcriptions du projet. {transcribed} dossiers
+            sont transcrits, et {withToc} gardent une table ou un plan de la main de Grothendieck.
           </p>
         </header>
 
         <div className="mt-6 max-w-[44em] rounded-[var(--radius-card)] border border-encours-200 bg-encours-50 px-4 py-3 text-[13px] leading-relaxed text-ink-700">
-          <strong className="font-semibold">Première passe, non vérifiée sur le fac-similé.</strong> Les dates de
-          l’inventaire, celles écrites sur les feuillets et les datations proposées par le projet sont données séparément,
-          jamais l’une pour l’autre. Les noms ne sont indexés que lorsqu’un registre du projet les relève.
+          <strong className="font-semibold">Première passe, non vérifiée sur le fac-similé.</strong> Trois sortes de
+          dates restent toujours distinctes : celle de l’inventaire, celles qu’on lit sur les feuillets et celles que le
+          projet propose. Un nom n’est indexé que si un registre du projet le relève.
         </div>
 
         <div className="mt-6">
@@ -572,10 +571,10 @@ export function NoticesPage() {
         </section>
 
         <p className="mt-12 max-w-[44em] text-[12px] leading-relaxed text-ink-400">
-          src/content/notices.json, généré le {DATA.built} par scripts/notices.mjs à partir de l’inventaire
-          (catalogue.ts), de hand.json, dated-leaves.json, proposed-datings.json, editions.json, people-evidence.json,
-          letters.json, findings.ts, proofs.ts et des transcriptions (tables des matières, mots-clés et résumés des
-          lectures modernisées).
+          Généré le {DATA.built} par scripts/notices.mjs (src/content/notices.json), à partir de l’inventaire
+          (catalogue.ts), des registres du projet (hand.json, dated-leaves.json, proposed-datings.json, editions.json,
+          people-evidence.json, letters.json, findings.ts, proofs.ts) et des transcriptions, dont il reprend les tables
+          des matières ainsi que les mots-clés et les résumés des lectures modernisées.
         </p>
       </main>
 
