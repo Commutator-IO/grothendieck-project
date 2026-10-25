@@ -285,4 +285,49 @@ theorem no_finitePresentation_inducing (A : Type*) [CommRing A] (f : ∀ n, A �
     exact Jn_not_generated k n (p + 1) w hw
   exact absurd (bound (p + 1)) (by omega)
 
+/-! ## Page 22: when is `Ind C` a topos? (statement only)
+
+A typed exercise on page 22, pencilled « SGA 4 VI 2 », states without proof that for a
+small category `C` with Karoubi envelope `C'` the following are equivalent, among
+others: (i) `Ind C` is a topos; (ii) `C'` has finite colimits and its canonical functor
+to the sheaves for the topology of finite epimorphic (or effective universal epimorphic)
+families preserves them. It is Problem 8 of `docs/problems/article.tex`.
+
+Only the statement is here, as a `Prop`, with no proof and no `sorry`. Two choices are
+the edition's: « topos » is read as Grothendieck topos (equivalent to sheaves of sets on
+a small site), and the topology of (ii) as Mathlib's `coherentTopology`, the topology of
+finite effective epimorphic families, which needs `C'` precoherent; precoherence is
+therefore part of condition (ii) here. -/
+
+section Problem8
+
+open CategoryTheory Limits
+
+universe u
+
+/-- A category is a Grothendieck topos if it is equivalent to the category of sheaves of
+sets on a small site. -/
+def IsGrothendieckTopos (E : Type (u+1)) [Category.{u} E] : Prop :=
+  ∃ (D : Type u) (_ : SmallCategory D) (J : GrothendieckTopology D),
+    Nonempty (E ≌ Sheaf J (Type u))
+
+/-- Condition (i bis) of page 22, as the reading corrects it: the inclusion of `Ind C`
+into presheaves has a left exact left adjoint. The page asks for a right adjoint. -/
+def IndReflectiveLeftExact (C : Type u) [SmallCategory C] : Prop :=
+  ∃ L : (Cᵒᵖ ⥤ Type u) ⥤ Ind C, Nonempty (L ⊣ Ind.inclusion C) ∧ PreservesFiniteLimits L
+
+/-- Condition (ii) of page 22: the Karoubi envelope has finite colimits, and its
+canonical functor to the sheaves for the topology of finite effective epimorphic
+families preserves them. -/
+def KaroubiFinitaryCondition (C : Type u) [SmallCategory C] : Prop :=
+  HasFiniteColimits (Idempotents.Karoubi C) ∧
+    ∃ _ : Precoherent (Idempotents.Karoubi C),
+      PreservesFiniteColimits (coherentTopology (Idempotents.Karoubi C)).yoneda
+
+/-- Problem 8, the open equivalence (i) ⇔ (ii) of page 22. -/
+def problem8 : Prop :=
+  ∀ (C : Type u) [SmallCategory C], IsGrothendieckTopos (Ind C) ↔ KaroubiFinitaryCondition C
+
+end Problem8
+
 end Grothendieck.Folder37
