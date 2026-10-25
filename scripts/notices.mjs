@@ -782,7 +782,9 @@ const books = [
     date: '1986',
     cotes: range('156', 1, 9),
     source: 'd’après l’inventaire (titres des chapitres et dates portés sur les chemises)',
-    edition: null,
+    edition:
+      'Inédit. Grothendieck comptait le publier : « ce sera là le premier texte mathématique que je publierai, après mon départ de 1970 » (lettre à Tsuji du 4 juillet 1986, citée par J. A. Cruz Morales, 2021, qui donne aussi la liste des neuf chapitres).',
+    editionUrl: 'https://arxiv.org/abs/2105.08799',
     entries: chaptersFromInventory(range('156', 1, 9), (t) => t.replace(/^\[Chapitre\]\s*/, '')).map((e) => {
       const m = /^([IVX]+(?: et [IVX]+ bis)?)\.\s*(.*)$/.exec(e.text);
       return m ? { ...e, label: m[1], text: m[2] } : e;
