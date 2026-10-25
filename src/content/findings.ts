@@ -32,7 +32,7 @@ export const FINDINGS: Finding[] = [
     literature: [
       'J. R. Isbell, Product spaces in locales, Proc. AMS 81 (1981), 116–118 — Th. 1 (X quasi-locally compact), Th. 4 (every closed subset has a point with a quasi-locally compact neighbourhood in it; converse for completely regular X)',
       'T. Plewe, Localic products of spaces, Proc. LMS 73 (1996) — spatiality of localic products characterised by a topological game; spatial multipliers among metrizable spaces',
-      'M. Broneur, answer 516370 to MathOverflow question 516361 (25 October 2026), https://mathoverflow.net/a/516370 — a sober space satisfying the page’s hypothesis but not Isbell’s: the countable power of a scattered compact space that is not core-compact',
+      'Answer 516370 to MathOverflow question 516361 (25 October 2026), https://mathoverflow.net/a/516370 — a sober space satisfying the page’s hypothesis but not Isbell’s: the countable power of a scattered compact space that is not core-compact',
     ],
     status: 'matched',
     settle:
