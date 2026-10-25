@@ -50,6 +50,7 @@ const FONDS_PAGES: { path: string; label: string }[] = [
   { path: '/', label: 'Whole fonds' },
   { path: '/index/', label: 'Index' },
   { path: '/timeline/', label: 'Timeline' },
+  { path: '/notices/', label: 'Notices' },
   { path: '/letters/', label: 'Letters' },
   { path: '/hand/', label: 'The hand' },
   { path: '/diagrams/', label: 'Diagrams' },
@@ -83,7 +84,7 @@ function Tab({ path, label, here }: { path: string; label: string; here: string 
     <a
       href={path}
       aria-current={on ? 'page' : undefined}
-      className={`whitespace-nowrap rounded-full px-2 py-1 transition xl:px-2.5 ${
+      className={`whitespace-nowrap rounded-full px-2 py-1 transition ${
         on ? 'bg-ink-100 font-semibold text-ink-900' : 'hover:bg-ink-50 hover:text-brand-700'
       }`}
     >
