@@ -941,7 +941,7 @@ theorem gen {C : Type*} [Semiring C] [Algebra k C] :
         simpa [SFun.kun] using congr($(h (Fin.last (n + 1))) b)
     ext x
     obtain ⟨z, rfl⟩ := (hA.kunneth n).2 x
-    exact congrArg (· z) (congrArg DFunLike.coe hc)
+    exact AlgHom.congr_fun hc z
 
 end Special
 
@@ -1115,9 +1115,7 @@ theorem kunT_bijective (n : ℕ) : Function.Bijective (kunT (k := k) (P := P) n)
     refine Fin.lastCases ?_ (fun i => ?_) j
     · simp [finSumFinEquiv_symm_last]
     · simp [finSumFinEquiv_symm_apply_castSucc]
-  have h2 : (kunT (k := k) (P := P) n : _ → _) = L := congrArg DFunLike.coe this
-  rw [h2]
-  exact L.bijective
+  exact (congrArg DFunLike.coe this : (kunT (k := k) (P := P) n : _ → _) = L) ▸ L.bijective
 
 theorem kunT_gauge (n : ℕ) (z : Pow k P n ⊗[k] Pow k P 0) :
     powGauge κ (n + 1) (kunT (k := k) (P := P) n z) = tgauge (powGauge κ n) (powGauge κ 0) z := by

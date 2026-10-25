@@ -43,24 +43,15 @@ namespace Grothendieck.Folder148
 /-- An anti-isomorphism of the torsor `ℤ/r` (a map with `u (x + 1) = u x - 1`) is `x ↦ u 0 - x`. -/
 theorem antiIso_eq {r : ℕ} (u : ZMod r → ZMod r) (hu : ∀ x, u (x + 1) = u x - 1) (x : ZMod r) :
     u x = u 0 - x := by
-  have key : ∀ n : ℕ, u n = u 0 - n := by
-    intro n
-    induction n with
-    | zero => simp
-    | succ n ih => push_cast; rw [hu, ih]; ring
-  have hx : ((x.cast : ℤ) : ZMod r) = x := ZMod.intCast_zmod_cast x
-  obtain ⟨n, hn | hn⟩ := Int.eq_nat_or_neg (x.cast : ℤ)
-  · rw [← hx, hn]; push_cast; exact key n
-  · -- `x = -n`; use `u (y + n) = u y - n` backwards
-    have key' : ∀ (m : ℕ) (y : ZMod r), u (y + m) = u y - m := by
-      intro m
-      induction m with
-      | zero => simp
-      | succ m ih => intro y; push_cast; rw [← add_assoc, hu, ih]; ring
-    have := key' n (-(n : ZMod r))
-    rw [neg_add_cancel] at this
-    rw [← hx, hn]; push_cast
-    linear_combination -this
+  obtain ⟨z, rfl⟩ := ZMod.intCast_surjective x
+  induction z using Int.induction_on with
+  | zero => simp
+  | succ m ih => push_cast at ih ⊢; rw [hu, ih]; ring
+  | pred m ih =>
+    have := hu (-(m : ZMod r) - 1)
+    rw [sub_add_cancel] at this
+    push_cast at ih ⊢
+    linear_combination ih - this
 
 /-! ### Circles with `r` marked points -/
 
@@ -80,9 +71,7 @@ variable {r : ℕ} (P : Marking r)
 /-- The standard marking by the points `k / r`. -/
 noncomputable def std (r : ℕ) (hr : 0 < r) : Marking r where
   pt k := k / r
-  strictMono := fun a b h => by
-    have : (0 : ℝ) < r := by exact_mod_cast hr
-    exact div_lt_div_of_pos_right (by exact_mod_cast h) this
+  strictMono a b h := div_lt_div_of_pos_right (by exact_mod_cast h) (by exact_mod_cast hr)
   periodic k := by
     have : (r : ℝ) ≠ 0 := by exact_mod_cast hr.ne'
     push_cast; field_simp
@@ -99,9 +88,8 @@ theorem pt_add_mul (k m : ℤ) : P.pt (k + r * m) = P.pt k + m := by
     push_cast at this ⊢; linarith
 
 theorem r_pos (P : Marking r) : 0 < r := by
-  rcases Nat.eq_zero_or_pos r with h | h
-  · have := P.periodic 0; subst h; simp at this
-  · exact h
+  refine Nat.pos_of_ne_zero fun h => ?_
+  have := P.periodic 0; subst h; simp at this
 
 /-- The piecewise-linear interpolation of the marked points: `interp k = pt k`, affine on each
 `[k, k + 1]`. -/
@@ -207,20 +195,15 @@ theorem gluings_nonempty (P Q : Marking r) (c : ℤ) : (gluings P Q c).Nonempty 
     exact Q.continuous_interp.comp (continuous_const.sub P.interpHomeomorph.symm.continuous)⟩,
     ?_, ?_, ?_⟩
   · intro x y hxy
-    simp only [ContinuousMap.coe_mk]
-    apply Q.strictMono_interp
     have := P.interpHomeomorph_symm_strictMono hxy
-    linarith
+    exact Q.strictMono_interp (by linarith)
   · intro x
-    simp only [ContinuousMap.coe_mk]
-    rw [Marking.interpHomeomorph_symm_add, show (c : ℝ) - (P.interpHomeomorph.symm x + r) =
-      (c - P.interpHomeomorph.symm x - r) by ring]
     have := Q.interp_add (c - P.interpHomeomorph.symm x - r)
-    rw [sub_add_cancel] at this
+    simp only [ContinuousMap.coe_mk, Marking.interpHomeomorph_symm_add, sub_add_cancel,
+      ← sub_sub] at this ⊢
     linarith
   · intro k
-    simp only [ContinuousMap.coe_mk]
-    rw [Marking.interpHomeomorph_symm_pt, ← Q.interp_intCast]; push_cast; rfl
+    simp [Marking.interpHomeomorph_symm_pt, ← Q.interp_intCast]
 
 /-- The space of gluings is convex in `C(ℝ, ℝ)`. -/
 theorem convex_gluings (P Q : Marking r) (c : ℤ) : Convex ℝ (gluings P Q c) := by
@@ -256,10 +239,8 @@ theorem surjective_of_mem_gluings {P Q : Marking r} {c : ℤ} {F : C(ℝ, ℝ)}
   set a : ℝ := ((⌊F 0 - t⌋ : ℤ) : ℝ)
   set b : ℝ := ((⌈F 0 - t⌉ : ℤ) : ℝ)
   have hab : a ≤ b := by simp only [a, b]; exact_mod_cast Int.floor_le_ceil _
-  have hFa : F a = F 0 - a := by rw [← gluings_add_intCast hF 0, zero_add]
-  have hFb : F b = F 0 - b := by rw [← gluings_add_intCast hF 0, zero_add]
   have ht : t ∈ Icc (F b) (F a) := by
-    rw [hFa, hFb]
+    rw [← zero_add a, ← zero_add b, gluings_add_intCast hF, gluings_add_intCast hF]
     exact ⟨by linarith [Int.le_ceil (F 0 - t)], by linarith [Int.floor_le (F 0 - t)]⟩
   obtain ⟨y, -, hy⟩ := intermediate_value_Icc' hab F.continuous.continuousOn ht
   exact ⟨y, hy⟩

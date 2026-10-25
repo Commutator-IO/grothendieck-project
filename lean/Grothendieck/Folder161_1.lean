@@ -796,9 +796,8 @@ def psi (φ : L ⊗ L' ≅ 𝟙_ C) : L' ⊗ L ≅ 𝟙_ C :=
 /-- The triangle identity defining `ψ_{L',L}`, with associator and unitors. -/
 lemma psi_triangle (φ : L ⊗ L' ≅ 𝟙_ C) :
     φ.hom ▷ L ≫ (λ_ L).hom = (α_ L L' L).hom ≫ L ◁ (psi φ).hom ≫ (ρ_ L).hom := by
-  have h : L ◁ (psi φ).hom = (α_ L L' L).inv ≫ φ.hom ▷ L ≫ (λ_ L).hom ≫ (ρ_ L).inv :=
-    (fullyFaithfulL φ).map_preimage _
-  simp [h]
+  simp [show L ◁ (psi φ).hom = (α_ L L' L).inv ≫ φ.hom ▷ L ≫ (λ_ L).hom ≫ (ρ_ L).inv from
+    (fullyFaithfulL φ).map_preimage _]
 
 /-- `ψ_{L',L}` is the only morphism satisfying the triangle identity. -/
 lemma psi_unique (φ : L ⊗ L' ≅ 𝟙_ C) (ψ' : L' ⊗ L ⟶ 𝟙_ C)
@@ -806,9 +805,7 @@ lemma psi_unique (φ : L ⊗ L' ≅ 𝟙_ C) (ψ' : L' ⊗ L ⟶ 𝟙_ C)
     ψ' = (psi φ).hom := by
   apply (fullyFaithfulL φ).map_injective
   change L ◁ ψ' = L ◁ (psi φ).hom
-  have h' := psi_triangle φ
-  rw [h] at h'
-  simpa using h'
+  simpa using h.symm.trans (psi_triangle φ)
 
 lemma whiskerRight_injective {Z : C} (hZ : (tensorLeft Z).FullyFaithful) {X Y : C}
     {f g : X ⟶ Y} (h : f ▷ Z = g ▷ Z) : f = g :=
@@ -834,33 +831,29 @@ symmetry `s_{L, L ⊗ L'}` is natural against `φ_{L,L'}`, the hexagon splits it
 theorem braiding_self_eq_scalar (φ : L ⊗ L' ≅ 𝟙_ C) :
     (β_ L L).hom = scalar (epsilon φ) (L ⊗ L) := by
   set ψ := psi φ
-  have T := psi_triangle φ
   have A : L ◁ φ.hom ≫ (ρ_ L).hom = (β_ L (L ⊗ L')).hom ≫ φ.hom ▷ L ≫ (λ_ L).hom := by
     rw [← braiding_leftUnitor, ← braiding_naturality_right_assoc]
   have hφ : φ.hom = ((β_ L L').hom ≫ ψ.hom) ≫ epsilon φ := by
     simp [epsilon, phiSwap]
-  rw [T, hφ, MonoidalCategory.whiskerLeft_comp, Category.assoc,
+  rw [psi_triangle φ, hφ, MonoidalCategory.whiskerLeft_comp, Category.assoc,
     whiskerLeft_scalar_rightUnitor, ← Category.assoc, ← Category.assoc,
-    scalar_naturality] at A
-  rw [braiding_tensor_right_hom] at A
+    scalar_naturality, braiding_tensor_right_hom] at A
   have B : scalar (epsilon φ) (L ⊗ (L ⊗ L')) =
       (α_ L L L').inv ≫ (β_ L L).hom ▷ L' ≫ (α_ L L L').hom := by
     rw [← cancel_mono (L ◁ ((β_ L L').hom ≫ ψ.hom) ≫ (ρ_ L).hom), A]
     simp [ψ]
-  have N := scalar_naturality (epsilon φ) (α_ L L L').inv
   apply whiskerRight_injective (fullyFaithfulL' φ)
-  rw [← scalar_tensor, ← Iso.hom_inv_id_assoc (α_ L L L') (scalar _ _), N, B]
+  rw [← scalar_tensor, ← Iso.hom_inv_id_assoc (α_ L L L') (scalar _ _),
+    scalar_naturality (epsilon φ) (α_ L L L').inv, B]
   simp
 
 /-- A scalar is determined by its action on `L ⊗ L`, `L` invertible. -/
 lemma scalar_injective (φ : L ⊗ L' ≅ 𝟙_ C) {e e' : 𝟙_ C ⟶ 𝟙_ C}
     (h : scalar e (L ⊗ L) = scalar e' (L ⊗ L)) : e = e' := by
   rw [scalar_tensor, scalar_tensor] at h
-  have h1 := whiskerRight_injective (fullyFaithfulL φ) h
-  have h2 : e ▷ L = e' ▷ L := by
-    have := congrArg (fun f => (λ_ L).hom ≫ f ≫ (λ_ L).inv) h1
-    simpa [scalar] using this
-  exact whiskerRight_injective (fullyFaithfulL φ) h2
+  refine whiskerRight_injective (fullyFaithfulL φ) ?_
+  simpa [scalar] using congrArg (fun f => (λ_ L).hom ≫ f ≫ (λ_ L).inv)
+    (whiskerRight_injective (fullyFaithfulL φ) h)
 
 /-- **Page 12, « Relations entre `φ_{L',L}` et `ψ_{L',L}` ? »** For a scalar `e`,
 `φ_{L',L} = e · ψ_{L',L}` if and only if the symmetry acts on `L ⊗ L` by `e`. -/
@@ -868,12 +861,10 @@ theorem phiSwap_eq_iff (φ : L ⊗ L' ≅ 𝟙_ C) (e : 𝟙_ C ⟶ 𝟙_ C) :
     (phiSwap φ).hom = (psi φ).hom ≫ e ↔ (β_ L L).hom = scalar e (L ⊗ L) := by
   constructor
   · intro h
-    have : e = epsilon φ := by simp [epsilon, h]
-    rw [this]
+    rw [show e = epsilon φ by simp [epsilon, h]]
     exact braiding_self_eq_scalar φ
   · intro h
-    have := scalar_injective φ (h.symm.trans (braiding_self_eq_scalar φ))
-    rw [this]
+    rw [scalar_injective φ (h.symm.trans (braiding_self_eq_scalar φ))]
     simp [epsilon]
 
 /-- `φ_{L',L} = ε(L) · ψ_{L',L}`, the scalar acting on `L' ⊗ L`. -/

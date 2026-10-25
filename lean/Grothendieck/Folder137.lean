@@ -628,8 +628,7 @@ lemma smul_f_apply {X Y : ChainComplex (ModuleCat.{u} k) ℕ} (c : k) (f : X ⟶
 /-- Proposition 1 (p. 40), the endomorphisms of a disc: `End(ℂⁿ) = k · id`. -/
 lemma disc_endo {n : ℕ} (f : disc k n ⟶ disc k n) :
     f = dv k ((f.f (n + 1)).hom (one k n)) • 𝟙 _ := by
-  apply disc_hom_ext
-  apply disc_ext
+  refine disc_hom_ext (disc_ext k ?_)
   rw [smul_f_apply]
   change _ = _ * dv k (one k n)
   rw [dv_one, mul_one]
@@ -637,14 +636,12 @@ lemma disc_endo {n : ℕ} (f : disc k n ⟶ disc k n) :
 /-- Proposition 1 (p. 40): `Hom(ℂⁿ, ℂⁿ⁺¹) = k · dⁿ`. -/
 lemma disc_succ {n : ℕ} (f : disc k n ⟶ disc k (n + 1)) :
     f = dv k ((f.f (n + 1)).hom (one k n)) • dmap k n := by
-  apply disc_hom_ext
-  apply disc_ext
+  refine disc_hom_ext (disc_ext k ?_)
   rw [smul_f_apply, dv_smul, dv_dmap, ite_eq_left rfl, dv_one, mul_one]
 
 /-- Proposition 1 (p. 40): `Hom(ℂⁿ, ℂʲ) = 0` for `j ∉ {n, n + 1}`. -/
 lemma disc_zero {n j : ℕ} (f : disc k n ⟶ disc k j) (h₁ : j ≠ n) (h₂ : j ≠ n + 1) : f = 0 := by
-  apply disc_hom_ext
-  apply disc_ext
+  refine disc_hom_ext (disc_ext k ?_)
   rw [dv_eq_zero k (by omega)]
   rfl
 
@@ -753,10 +750,7 @@ def coneπ : cone L ⟶ shift L :=
 
 lemma coneι_comp_coneπ : coneι L ≫ coneπ L = 0 := by
   ext m : 1
-  refine ModuleCat.hom_ext (LinearMap.ext fun x => ?_)
-  change ((coneπ L).f m).hom (((coneι L).f m).hom x) = 0
-  rw [coneι_apply, coneπ_apply]
-  exact sub_self _
+  exact ModuleCat.hom_ext (LinearMap.ext fun x => sub_self _)
 
 variable {L} {M : ChainComplex (ModuleCat.{u} k) ℕ}
 
@@ -827,8 +821,8 @@ lemma cone_perfect {L : ChainComplex (ModuleCat.{u} k) ℕ} (hL : perfect k L) :
     perfect k (cone L) := by
   obtain ⟨N, hN⟩ := hL.2
   refine ⟨fun m => ?_, ⟨N + 1, fun m hm => ?_⟩⟩
-  · have := (hL.1 m).1; have := (hL.1 m).2
-    have := (Lp_perfect hL m).1; have := (Lp_perfect hL m).2
+  · obtain ⟨_, _⟩ := hL.1 m
+    obtain ⟨_, _⟩ := Lp_perfect hL m
     exact ⟨inferInstanceAs (Module.Free k (L.X m × Lp L m)),
       inferInstanceAs (Module.Finite k (L.X m × Lp L m))⟩
   · have := hN m (by omega)
@@ -897,8 +891,7 @@ lemma isSigma_cone (L : Perf k) : IsSigma (ιP L) (πP L) where
     obtain ⟨a, b⟩ := x
     change b - dL L.obj m a = 0 ↔ ∃ y, (y, dL L.obj m y) = (a, b)
     constructor
-    · intro h
-      exact ⟨a, by rw [sub_eq_zero.mp h]⟩
+    · exact fun h => ⟨a, by rw [sub_eq_zero.mp h]⟩
     · rintro ⟨y, hy⟩
       obtain ⟨rfl, rfl⟩ := Prod.mk.inj hy
       exact sub_self _
@@ -1029,8 +1022,7 @@ lemma total_apply (m : ℕ) (x : (cone L.obj).X m) :
       refine Finset.sum_eq_zero fun b _ => ?_
       rw [vv_fst_ne L n b m (Ne.symm hn), smul_zero]
     · intro hm
-      have := bound_spec L m (by simp at hm; omega)
-      exact Subsingleton.elim _ _
+      exact @Subsingleton.elim _ (bound_spec L m (by simp at hm; omega)) _ _
   · rw [Prod.snd_sum]
     simp_rw [Prod.snd_sum, Prod.smul_snd]
     cases m with
@@ -1046,8 +1038,7 @@ lemma total_apply (m : ℕ) (x : (cone L.obj).X m) :
         refine Finset.sum_eq_zero fun b _ => ?_
         rw [vv_snd_ne L n b (m + 1) (by omega), smul_zero]
       · intro hm
-        have := bound_spec L m (by simp at hm; omega)
-        exact Subsingleton.elim (α := L.obj.X m) _ _
+        exact @Subsingleton.elim (L.obj.X m) (bound_spec L m (by simp at hm; omega)) _ _
 
 lemma hom_sum {X Y : Perf k} {ι : Type*} (s : Finset ι) (f : ι → (X ⟶ Y)) :
     (∑ i ∈ s, f i).hom = ∑ i ∈ s, (f i).hom := (perfect k).ι.map_sum f s
@@ -1100,8 +1091,8 @@ lemma lex_mono (F : Lex k B) (L : Perf k) : Mono (F.obj.map (ιP L)) := by
 /-- The kernel property of `F(L) → F(I(L)) → F(L[1])`. -/
 def lexLimit (F : Lex k B) (L : Perf k) :
     IsLimit (KernelFork.ofι (F.obj.map (ιP L)) (by
-      rw [← F.obj.map_comp, ιP_comp_πP, F.obj.map_zero])) := by
-  exact (F.property.2.2 _ _ (isSigma_cone L)).choose_spec.some
+      rw [← F.obj.map_comp, ιP_comp_πP, F.obj.map_zero])) :=
+  (F.property.2.2 _ _ (isSigma_cone L)).choose_spec.some
 
 variable (k B) in
 /-- `ρ(F) = F(ℂ^•)`, the cochain complex `F(ℂ⁰) → F(ℂ¹) → ⋯` of `ℬ`. -/

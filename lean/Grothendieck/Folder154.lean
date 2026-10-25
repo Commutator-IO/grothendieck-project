@@ -49,14 +49,13 @@ def ValidSeq {n : ℕ} (s : Fin n → SignType) : Prop :=
     (∀ i : Fin n, (i : ℕ) < c → s i = a) ∧ (∀ i : Fin n, c < (i : ℕ) → s i = -a)
 
 lemma neg_ne_zero' {a : SignType} (ha : a ≠ 0) : -a ≠ 0 := by
-  cases a <;> simp_all
+  simpa
 
 /-- A valid sequence has at most one zero. -/
 theorem ValidSeq.eq_of_eq_zero {n : ℕ} {s : Fin n → SignType} (h : ValidSeq s) {i j : Fin n}
     (hi : s i = 0) (hj : s j = 0) : i = j := by
   obtain ⟨-, a, ha, c, h1, h2⟩ := h
-  have key : ∀ k : Fin n, s k = 0 → (k : ℕ) = c := by
-    intro k hk
+  have key : ∀ k : Fin n, s k = 0 → (k : ℕ) = c := fun k hk => by
     rcases lt_trichotomy (k : ℕ) c with h | h | h
     · exact absurd ((h1 k h).symm.trans hk) ha
     · exact h
@@ -67,9 +66,8 @@ theorem ValidSeq.eq_of_eq_zero {n : ℕ} {s : Fin n → SignType} (h : ValidSeq 
 theorem ValidSeq.of_agree {n : ℕ} {s t : Fin n → SignType} (h : ValidSeq s)
     (hst : ∀ i, s i ≠ 0 → t i = s i) : ValidSeq t := by
   obtain ⟨⟨j, hj⟩, a, ha, c, h1, h2⟩ := h
-  refine ⟨⟨j, by rw [hst j hj]; exact hj⟩, a, ha, c, fun i hi => ?_, fun i hi => ?_⟩
-  · rw [hst i (by rw [h1 i hi]; exact ha), h1 i hi]
-  · rw [hst i (by rw [h2 i hi]; exact neg_ne_zero' ha), h2 i hi]
+  exact ⟨⟨j, by rwa [hst j hj]⟩, a, ha, c, fun i hi => by rw [hst i (by rwa [h1 i hi]), h1 i hi],
+    fun i hi => by rw [hst i (by rw [h2 i hi]; exact neg_ne_zero' ha), h2 i hi]⟩
 
 /-! ## Arrangements and positions -/
 
@@ -134,22 +132,17 @@ def genEquiv {σD : V → SignType} (hD : A.IsPosition σD) :
     (isPosition_and_spec_iff hD).2 fun v hv => by simp [hv]⟩
   left_inv σ := by
     refine Subtype.ext (funext fun v => ?_)
-    by_cases h : σD v = 0
-    · simp [h]
-    · simp [h, σ.2.2 v h]
+    by_cases h : σD v = 0 <;> simp [h, σ.2.2 v]
   right_inv w := funext fun z => by simp [z.2]
 
 /-- Specialisation among the generisations of `σ_D` is specialisation of the sign vectors on
 the zeros of `σ_D`. -/
 theorem genEquiv_spec_iff {σD : V → SignType} (hD : A.IsPosition σD) (σ τ : A.Gen σD) :
     Spec σ.1 τ.1 ↔ Spec (genEquiv hD σ) (genEquiv hD τ) := by
-  constructor
-  · intro h z hz
-    exact h z.1 hz
-  · intro h v hv
-    by_cases hz : σD v = 0
-    · exact h ⟨v, hz⟩ hv
-    · rw [τ.2.2 v hz, σ.2.2 v hz]
+  refine ⟨fun h z hz => h z.1 hz, fun h v hv => ?_⟩
+  by_cases hz : σD v = 0
+  · exact h ⟨v, hz⟩ hv
+  · rw [τ.2.2 v hz, σ.2.2 v hz]
 
 end Arrangement
 
@@ -176,14 +169,10 @@ specialisation of `w`. -/
 theorem cubeFace_subset_iff (w w' : X → SignType) : cubeFace w ⊆ cubeFace w' ↔ Spec w' w := by
   constructor
   · intro h z hz
-    have hx : (fun z => (w z : ℝ)) ∈ cubeFace w :=
-      ⟨fun z => abs_cast_le_one _, fun _ _ => rfl⟩
-    have := (h hx).2 z hz
-    simp only at this
-    exact cast_injective this
+    exact cast_injective ((h (a := fun z => (w z : ℝ)) ⟨fun z => abs_cast_le_one _,
+      fun _ _ => rfl⟩).2 z hz)
   · rintro h x ⟨hx1, hx2⟩
-    refine ⟨hx1, fun z hz => ?_⟩
-    rw [hx2 z (by rw [h z hz]; exact hz), h z hz]
+    exact ⟨hx1, fun z hz => by rw [hx2 z (by rwa [h z hz]), h z hz]⟩
 
 /-- A sign vector without zero is a vertex of the cube. -/
 theorem cubeFace_eq_singleton {w : X → SignType} (hw : ∀ z, w z ≠ 0) :
@@ -191,8 +180,7 @@ theorem cubeFace_eq_singleton {w : X → SignType} (hw : ∀ z, w z ≠ 0) :
   ext x
   simp only [cubeFace, Set.mem_ofPred_eq, Set.mem_singleton_iff]
   constructor
-  · rintro ⟨-, h⟩
-    exact funext fun z => h z (hw z)
+  · exact fun ⟨_, h⟩ => funext fun z => h z (hw z)
   · rintro rfl
     exact ⟨fun z => abs_cast_le_one _, fun _ _ => rfl⟩
 
@@ -242,10 +230,7 @@ noncomputable def fiberEquiv (z : X) :
     refine Subtype.ext (Subtype.ext (funext fun y => ?_))
     by_cases h : y = z
     · subst h
-      simp only [dite_true]
-      have := theZero_spec w.1
-      rw [w.2] at this
-      exact this.symm
+      simpa [w.2] using (theZero_spec w.1).symm
     · simp [h]
   right_inv g := funext fun y => Subtype.ext (by simp [y.2])
 
@@ -278,7 +263,7 @@ theorem card_gen_stable (hD : A.IsPosition σD) :
   refine Nat.card_congr ((genEquiv hD).subtypeEquiv fun σ => ⟨fun h z => h z.1, fun h v => ?_⟩)
   by_cases hz : σD v = 0
   · exact h ⟨v, hz⟩
-  · rw [σ.2.2 v hz]; exact hz
+  · rwa [σ.2.2 v hz]
 
 /-- Page 153: the sub-stable generisations of `D` (exactly one zero) are `ν · 2^(ν−1)`, the
 edges of the cube. -/
@@ -290,8 +275,7 @@ theorem card_gen_substable (hD : A.IsPosition σD) :
   refine Nat.card_congr ((genEquiv hD).subtypeEquiv fun σ => ?_)
   have hzero : ∀ v, σ.1 v = 0 → σD v = 0 := fun v hv => by
     by_contra h
-    rw [σ.2.2 v h] at hv
-    exact h hv
+    exact h (σ.2.2 v h ▸ hv)
   constructor
   · rintro ⟨v, hv, hu⟩
     exact ⟨⟨v, hzero v hv⟩, hv, fun z hz => Subtype.ext (hu z.1 hz)⟩
