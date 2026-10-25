@@ -1219,3 +1219,659 @@ end Theorem
 end
 
 end Grothendieck.Folder137.Perfect
+
+/-!
+# Folder 137, page 50, a), second half: `σ(C^•)` and the essential surjectivity
+
+For a cochain complex `C^•` of a `k`-linear category `ℬ`, page 50 builds the inverse
+`σ(C^•)(L) = Hom^•_k(L^•, C^•)`. Here it is built through what it represents: for an object
+`T` of `ℬ`, `Hom(T, C^•)` is a cochain complex of `k`-modules `M`, and the maps `T → σ(C^•)(L)`
+are the cycles `Φ_T(L) ⊆ ∏ₙ Lₙ ⊗ Mⁿ`, the families `zₙ` with `(1 ⊗ d) zₙ = (d ⊗ 1) zₙ₊₁` (the
+chain maps `L^∨ → M`, `Lₙ ⊗ Mⁿ = Hom(Lₙ^∨, Mⁿ)` as `Lₙ` is free of finite rank).
+
+* `Phi`, `PhiMap`, `PhiPre`: `Φ_T(L)`, functorial in `L` and `T`; it is left exact on `Σ`
+  (`PhiMap_injective`, `PhiMap_exact`): the sequences of `Σ` split in each degree, `L''ₙ`
+  being free, so `- ⊗ Mⁿ` keeps them exact.
+* `Rep C L X`: `X` represents `T ↦ Φ_T(L)`. The disc `ℂⁿ` is represented by `Cⁿ`
+  (`discRep`); `I(L)`, a finite sum of discs, by a finite biproduct of the `Cⁿ` (`coneRep`,
+  which uses that the `e_{n,b}`, `p_{n,b}` of `total` are orthogonal); `L` by the kernel of the
+  map `σ(I(L)) → σ(I(L[1]))` that represents `I(L) → L[1] → I(L[1])` (`kerRep`).
+* `σFun k C : 𝒫 ⥤ ℬ`, `k`-linear and `Σ`-left exact (`σLex`), with `ρ(σ(C^•)) ≅ C^•`
+  (`σIso`).
+  With `ρFullyFaithful`, `ρ` is an equivalence (`ρEquivalence`).
+
+The hypotheses on `ℬ`: `k`-linear, with kernels **and finite biproducts** (`ℬ` additive).
+Kernels are what page 50 asks; the biproducts are needed as well, since a `k`-linear functor
+sends `ℂⁿ ⊕ ℂⁿ` to a biproduct `F(ℂⁿ) ⊕ F(ℂⁿ)`: in the full subcategory `{0, k}` of the
+`k`-vector spaces (`k` a field), which has kernels but not `k ⊕ k`, the complex `k` in degree
+`0` is not of the form `F(ℂ^•)` (this necessity is an argument of the edition, not
+formalised).
+-/
+
+namespace Grothendieck.Folder137.Perfect
+
+open CategoryTheory Limits TensorProduct
+
+universe u v₂ u₂
+
+noncomputable section
+
+variable {k : Type u} [CommRing k]
+variable {B : Type u₂} [Category.{v₂} B] [Preadditive B] [Linear k B]
+
+/-! ### The cycles `Φ_T(L)` -/
+
+section Phi
+
+lemma lTensor_rTensor_apply {A A' N N' : Type*} [AddCommGroup A] [AddCommGroup A']
+    [AddCommGroup N] [AddCommGroup N'] [Module k A] [Module k A'] [Module k N] [Module k N']
+    (f : A →ₗ[k] A') (g : N →ₗ[k] N') (t : A ⊗[k] N) :
+    g.lTensor A' (f.rTensor N t) = f.rTensor N' (g.lTensor A t) := by
+  rw [← LinearMap.comp_apply, ← LinearMap.comp_apply, LinearMap.lTensor_comp_rTensor,
+    LinearMap.rTensor_comp_lTensor]
+
+variable (C : CochainComplex B ℕ)
+
+/-- `Φ_T(L)`: the families `zₙ ∈ Lₙ ⊗ Hom(T, Cⁿ)` with `(1 ⊗ d) zₙ = (d ⊗ 1) zₙ₊₁`, the maps
+`T → σ(C^•)(L)`. -/
+def Phi (T : B) (L : ChainComplex (ModuleCat.{u} k) ℕ) :
+    Submodule k (∀ n, L.X n ⊗[k] (T ⟶ C.X n)) where
+  carrier := {z | ∀ n, (Linear.rightComp k T (C.d n (n + 1))).lTensor (L.X n) (z n) =
+      (L.d (n + 1) n).hom.rTensor (T ⟶ C.X (n + 1)) (z (n + 1))}
+  add_mem' {a b} ha hb n := by
+    simp only [Pi.add_apply, map_add]
+    exact congrArg₂ (· + ·) (ha n) (hb n)
+  zero_mem' n := by simp
+  smul_mem' c a ha n := by
+    simp only [Pi.smul_apply, map_smul]
+    exact congrArg (c • ·) (ha n)
+
+variable {C}
+
+@[ext]
+lemma Phi_ext {T : B} {L : ChainComplex (ModuleCat.{u} k) ℕ} {z z' : Phi C T L}
+    (h : ∀ n, z.1 n = z'.1 n) : z = z' :=
+  Subtype.ext (funext h)
+
+/-- `Φ_T` on a chain map `g : L → L'`: `z ↦ (g ⊗ 1) z`. -/
+def PhiMap {T : B} {L L' : ChainComplex (ModuleCat.{u} k) ℕ} (g : L ⟶ L') :
+    Phi C T L →ₗ[k] Phi C T L' where
+  toFun z := ⟨fun n => (g.f n).hom.rTensor _ (z.1 n), fun n => by
+    change (Linear.rightComp k T (C.d n (n + 1))).lTensor _ ((g.f n).hom.rTensor _ (z.1 n)) =
+      (L'.d (n + 1) n).hom.rTensor _ ((g.f (n + 1)).hom.rTensor _ (z.1 (n + 1)))
+    rw [lTensor_rTensor_apply, z.2 n, ← LinearMap.rTensor_comp_apply,
+      ← LinearMap.rTensor_comp_apply, ← ModuleCat.hom_comp, ← ModuleCat.hom_comp,
+      g.comm (n + 1) n]⟩
+  map_add' a b := Phi_ext fun n => LinearMap.map_add _ (a.1 n) (b.1 n)
+  map_smul' c a := Phi_ext fun n => LinearMap.map_smul _ c (a.1 n)
+
+lemma PhiMap_apply {T : B} {L L' : ChainComplex (ModuleCat.{u} k) ℕ} (g : L ⟶ L')
+    (z : Phi C T L) (n : ℕ) : (PhiMap g z).1 n = (g.f n).hom.rTensor _ (z.1 n) := rfl
+
+lemma PhiMap_comp {T : B} {L L' L'' : ChainComplex (ModuleCat.{u} k) ℕ} (g : L ⟶ L')
+    (g' : L' ⟶ L'') (z : Phi C T L) : PhiMap (g ≫ g') z = PhiMap g' (PhiMap g z) :=
+  Phi_ext fun n => by simp [PhiMap_apply, LinearMap.rTensor_comp_apply]
+
+lemma PhiMap_id {T : B} {L : ChainComplex (ModuleCat.{u} k) ℕ} (z : Phi C T L) :
+    PhiMap (𝟙 L) z = z :=
+  Phi_ext fun n => by simp [PhiMap_apply]
+
+lemma PhiMap_add {T : B} {L L' : ChainComplex (ModuleCat.{u} k) ℕ} (g g' : L ⟶ L')
+    (z : Phi C T L) : PhiMap (g + g') z = PhiMap g z + PhiMap g' z :=
+  Phi_ext fun n => by simp [PhiMap_apply]
+
+lemma PhiMap_zero {T : B} {L L' : ChainComplex (ModuleCat.{u} k) ℕ} (z : Phi C T L) :
+    PhiMap (0 : L ⟶ L') z = 0 :=
+  Phi_ext fun n => by simp [PhiMap_apply]
+
+lemma PhiMap_smul {T : B} {L L' : ChainComplex (ModuleCat.{u} k) ℕ} (c : k) (g : L ⟶ L')
+    (z : Phi C T L) : PhiMap (c • g) z = c • PhiMap g z :=
+  Phi_ext fun n => by simp [PhiMap_apply]
+
+lemma PhiMap_sum {T : B} {L L' : ChainComplex (ModuleCat.{u} k) ℕ} {ι : Type*} (s : Finset ι)
+    (g : ι → (L ⟶ L')) (z : Phi C T L) : PhiMap (∑ i ∈ s, g i) z = ∑ i ∈ s, PhiMap (g i) z := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simp [PhiMap_zero]
+  | insert a s ha ih => rw [Finset.sum_insert ha, Finset.sum_insert ha, PhiMap_add, ih]
+
+/-- `Φ` on a map `h : T' → T`: `z ↦ (1 ⊗ h^*) z`. -/
+def PhiPre {T T' : B} {L : ChainComplex (ModuleCat.{u} k) ℕ} (h : T' ⟶ T) :
+    Phi C T L →ₗ[k] Phi C T' L where
+  toFun z := ⟨fun n => (Linear.leftComp k (C.X n) h).lTensor _ (z.1 n), fun n => by
+    change (Linear.rightComp k T' (C.d n (n + 1))).lTensor _
+        ((Linear.leftComp k (C.X n) h).lTensor _ (z.1 n)) =
+      (L.d (n + 1) n).hom.rTensor _ ((Linear.leftComp k (C.X (n + 1)) h).lTensor _ (z.1 (n + 1)))
+    rw [← lTensor_rTensor_apply, ← z.2 n, ← LinearMap.lTensor_comp_apply,
+      ← LinearMap.lTensor_comp_apply]
+    congr 2
+    exact LinearMap.ext fun x => by simp⟩
+  map_add' a b := Phi_ext fun n => LinearMap.map_add _ (a.1 n) (b.1 n)
+  map_smul' c a := Phi_ext fun n => LinearMap.map_smul _ c (a.1 n)
+
+lemma PhiPre_apply {T T' : B} {L : ChainComplex (ModuleCat.{u} k) ℕ} (h : T' ⟶ T)
+    (z : Phi C T L) (n : ℕ) :
+    (PhiPre h z).1 n = (Linear.leftComp k (C.X n) h).lTensor _ (z.1 n) := rfl
+
+lemma PhiPre_PhiMap {T T' : B} {L L' : ChainComplex (ModuleCat.{u} k) ℕ} (h : T' ⟶ T)
+    (g : L ⟶ L') (z : Phi C T L) : PhiPre h (PhiMap g z) = PhiMap g (PhiPre h z) :=
+  Phi_ext fun _ => lTensor_rTensor_apply _ _ _
+
+lemma PhiPre_comp {T T' T'' : B} {L : ChainComplex (ModuleCat.{u} k) ℕ} (h' : T'' ⟶ T')
+    (h : T' ⟶ T) (z : Phi C T L) : PhiPre (h' ≫ h) z = PhiPre h' (PhiPre h z) :=
+  Phi_ext fun n => by
+    rw [PhiPre_apply, PhiPre_apply, PhiPre_apply, ← LinearMap.lTensor_comp_apply]
+    congr 2
+    exact LinearMap.ext fun x => Category.assoc _ _ _
+
+lemma PhiPre_id {T : B} {L : ChainComplex (ModuleCat.{u} k) ℕ} (z : Phi C T L) :
+    PhiPre (𝟙 T) z = z :=
+  Phi_ext fun n => by
+    simp [PhiPre_apply, show Linear.leftComp k (C.X n) (𝟙 T) = LinearMap.id from
+      LinearMap.ext fun x => Category.id_comp x]
+
+lemma PhiPre_add {T T' : B} {L : ChainComplex (ModuleCat.{u} k) ℕ} (h h' : T' ⟶ T)
+    (z : Phi C T L) : PhiPre (h + h') z = PhiPre h z + PhiPre h' z :=
+  Phi_ext fun n => by
+    simp [PhiPre_apply, show Linear.leftComp k (C.X n) (h + h') = Linear.leftComp k (C.X n) h +
+      Linear.leftComp k (C.X n) h' from LinearMap.ext fun x => Preadditive.add_comp _ _ _ _ _ _]
+
+lemma PhiPre_zero {T T' : B} {L : ChainComplex (ModuleCat.{u} k) ℕ} (z : Phi C T L) :
+    PhiPre (0 : T' ⟶ T) z = 0 :=
+  Phi_ext fun n => by
+    rw [PhiPre_apply, show Linear.leftComp k (C.X n) (0 : T' ⟶ T) = 0 from
+      LinearMap.ext fun x => zero_comp, LinearMap.lTensor_zero]; rfl
+
+lemma PhiPre_smul {T T' : B} {L : ChainComplex (ModuleCat.{u} k) ℕ} (c : k) (h : T' ⟶ T)
+    (z : Phi C T L) : PhiPre (c • h) z = c • PhiPre h z :=
+  Phi_ext fun n => by
+    simp [PhiPre_apply, show Linear.leftComp k (C.X n) (c • h) = c • Linear.leftComp k (C.X n) h
+      from LinearMap.ext fun x => Linear.smul_comp _ _ _ _ _ _]
+
+end Phi
+
+/-! ### `Φ` is left exact on `Σ` -/
+
+section Exact
+
+variable {C : CochainComplex B ℕ} {T : B} {L' L L'' : Perf k} {f : L' ⟶ L} {g : L ⟶ L''}
+
+lemma IsSigma.exact' (hs : IsSigma f g) (m : ℕ) :
+    Function.Exact (f.hom.f m).hom (g.hom.f m).hom :=
+  fun y => hs.exact m y
+
+/-- A sequence of `Σ` splits in each degree (`L''ₘ` is free), so `- ⊗ N` keeps it injective. -/
+lemma IsSigma.rTensor_injective (hs : IsSigma f g) (m : ℕ) (N : Type*) [AddCommGroup N]
+    [Module k N] : Function.Injective ((f.hom.f m).hom.rTensor N) := by
+  have := (L''.property.1 m).1
+  obtain ⟨l, hl⟩ := LinearMap.exists_rightInverse_of_surjective (g.hom.f m).hom
+    (LinearMap.range_eq_top.2 (hs.surjective m))
+  obtain ⟨e, he, -⟩ := (hs.exact' m).splitSurjectiveEquiv (hs.injective m) ⟨l, hl⟩
+  let r := LinearMap.fst k _ _ ∘ₗ e.toLinearMap
+  have hr : r ∘ₗ (f.hom.f m).hom = LinearMap.id := by
+    rw [he]
+    exact LinearMap.ext fun x => by simp [r]
+  intro _ _ h
+  have := congrArg (r.rTensor N) h
+  rwa [← LinearMap.rTensor_comp_apply, ← LinearMap.rTensor_comp_apply, hr,
+    LinearMap.rTensor_id_apply, LinearMap.rTensor_id_apply] at this
+
+lemma PhiMap_injective (hs : IsSigma f g) : Function.Injective (PhiMap (C := C) (T := T) f.hom) :=
+  fun _ _ h => Phi_ext fun n => hs.rTensor_injective n _ (congrArg (fun z => z.1 n) h)
+
+lemma PhiMap_exact (hs : IsSigma f g) (z : Phi C T L.obj) (hz : PhiMap g.hom z = 0) :
+    ∃ z', PhiMap f.hom z' = z := by
+  have hw : ∀ n, ∃ w, (f.hom.f n).hom.rTensor _ w = z.1 n := fun n =>
+    (_root_.rTensor_exact _ (hs.exact' n) (hs.surjective n) (z.1 n)).mp
+      (congrArg (fun z => z.1 n) hz)
+  choose w hw using hw
+  refine ⟨⟨w, fun n => ?_⟩, Phi_ext fun n => hw n⟩
+  apply hs.rTensor_injective n
+  rw [← lTensor_rTensor_apply, hw n, z.2 n, ← hw (n + 1), ← LinearMap.rTensor_comp_apply,
+    ← LinearMap.rTensor_comp_apply, ← ModuleCat.hom_comp, ← ModuleCat.hom_comp,
+    f.hom.comm (n + 1) n]
+
+end Exact
+
+/-! ### Representing objects -/
+
+section Rep
+
+variable (C : CochainComplex B ℕ)
+
+/-- `X` represents `T ↦ Φ_T(L)`: `Hom(T, X) ≃ Φ_T(L)`, naturally in `T`. -/
+structure Rep (L : ChainComplex (ModuleCat.{u} k) ℕ) (X : B) where
+  /-- The bijections. -/
+  e : ∀ T : B, (T ⟶ X) ≃ Phi C T L
+  nat : ∀ {T T' : B} (h : T' ⟶ T) (x : T ⟶ X), e T' (h ≫ x) = PhiPre h (e T x)
+
+variable {C}
+
+namespace Rep
+
+variable {L L' L'' : ChainComplex (ModuleCat.{u} k) ℕ} {X Y Z : B}
+
+lemma e_eq (R : Rep C L X) {T : B} (x : T ⟶ X) : R.e T x = PhiPre x (R.e X (𝟙 X)) := by
+  rw [← R.nat, Category.comp_id]
+
+lemma e_add (R : Rep C L X) {T : B} (x y : T ⟶ X) : R.e T (x + y) = R.e T x + R.e T y := by
+  rw [e_eq, R.e_eq x, R.e_eq y, PhiPre_add]
+
+lemma e_zero (R : Rep C L X) {T : B} : R.e T 0 = 0 := by
+  rw [e_eq, PhiPre_zero]
+
+lemma e_smul (R : Rep C L X) {T : B} (c : k) (x : T ⟶ X) : R.e T (c • x) = c • R.e T x := by
+  rw [e_eq, R.e_eq x, PhiPre_smul]
+
+/-- The map `X → Y` representing `Φ(g)` (Yoneda). -/
+def map (R : Rep C L X) (S : Rep C L' Y) (g : L ⟶ L') : X ⟶ Y :=
+  (S.e X).symm (PhiMap g (R.e X (𝟙 X)))
+
+lemma e_map (R : Rep C L X) (S : Rep C L' Y) (g : L ⟶ L') :
+    S.e X (R.map S g) = PhiMap g (R.e X (𝟙 X)) :=
+  Equiv.apply_symm_apply _ _
+
+lemma map_spec (R : Rep C L X) (S : Rep C L' Y) (g : L ⟶ L') {T : B} (x : T ⟶ X) :
+    S.e T (x ≫ R.map S g) = PhiMap g (R.e T x) := by
+  rw [S.nat, e_map, PhiPre_PhiMap, ← e_eq]
+
+lemma ext' (S : Rep C L' Y) {a b : X ⟶ Y} (h : S.e X a = S.e X b) : a = b :=
+  (S.e X).injective h
+
+lemma map_comp (R : Rep C L X) (S : Rep C L' Y) (U : Rep C L'' Z) (g : L ⟶ L') (g' : L' ⟶ L'') :
+    R.map S g ≫ S.map U g' = R.map U (g ≫ g') := by
+  apply U.ext'
+  rw [map_spec, e_map, e_map, PhiMap_comp]
+
+lemma map_id (R : Rep C L X) : R.map R (𝟙 L) = 𝟙 X :=
+  R.ext' (by rw [e_map, PhiMap_id])
+
+/-- Two objects representing the same `Φ(L)` are isomorphic. -/
+def iso (R : Rep C L X) (S : Rep C L Y) : X ≅ Y where
+  hom := R.map S (𝟙 L)
+  inv := S.map R (𝟙 L)
+  hom_inv_id := by rw [map_comp, Category.comp_id, map_id]
+  inv_hom_id := by rw [map_comp, Category.comp_id, map_id]
+
+end Rep
+
+end Rep
+
+/-! ### The disc `ℂⁿ` is represented by `Cⁿ` -/
+
+section DiscRep
+
+variable (n : ℕ)
+
+/-- `x ⊗ m ↦ x • m` on a component of the disc `ℂⁿ`. -/
+def evD (j : ℕ) (N : Type*) [AddCommGroup N] [Module k N] :
+    (disc k n).X j ⊗[k] N →ₗ[k] N :=
+  (TensorProduct.lid k N).toLinearMap ∘ₗ (discS k n j).subtype.rTensor N
+
+variable {N N' : Type*} [AddCommGroup N] [Module k N] [AddCommGroup N'] [Module k N']
+
+lemma evD_tmul (j : ℕ) (x : (disc k n).X j) (m : N) : evD n j N (x ⊗ₜ m) = dv k x • m := by
+  simp [evD, dv]
+
+/-- The generator of `ℂⁿ` in degrees `n` and `n + 1` (`0` elsewhere). -/
+def gD (j : ℕ) : (disc k n).X j :=
+  ⟨if j = n ∨ j = n + 1 then 1 else 0, by
+    split_ifs with h
+    · exact mem_discS_of_eq k n j h 1
+    · exact zero_mem _⟩
+
+lemma dv_gD (j : ℕ) : dv k (gD (k := k) n j) = if j = n ∨ j = n + 1 then 1 else 0 := rfl
+
+lemma tmul_evD {j : ℕ} (h : j = n ∨ j = n + 1) (t : (disc k n).X j ⊗[k] N) :
+    gD n j ⊗ₜ evD n j N t = t := by
+  induction t with
+  | tmul x m =>
+    rw [evD_tmul, TensorProduct.tmul_smul, TensorProduct.smul_tmul']
+    congr 1
+    exact disc_ext k (by rw [dv_smul, dv_gD, ite_eq_left h, mul_one])
+  | add a b ha hb => simp [ha, hb, TensorProduct.tmul_add]
+
+lemma disc_tensor_eq_zero {j : ℕ} (h : ¬ (j = n ∨ j = n + 1)) (t : (disc k n).X j ⊗[k] N) :
+    t = 0 := by
+  induction t with
+  | tmul x m =>
+    rw [show x = 0 from disc_ext k (by rw [dv_eq_zero k h, dv_zero]), TensorProduct.zero_tmul]
+  | add a b ha hb => simp [ha, hb]
+
+lemma evD_injective {j : ℕ} (h : j = n ∨ j = n + 1) : Function.Injective (evD (k := k) n j N) :=
+  fun a b e => by rw [← tmul_evD n h a, ← tmul_evD n h b, e]
+
+lemma evD_lTensor (j : ℕ) (φ : N →ₗ[k] N') (t : (disc k n).X j ⊗[k] N) :
+    evD n j N' (φ.lTensor _ t) = φ (evD n j N t) := by
+  induction t with
+  | tmul x m => rw [LinearMap.lTensor_tmul, evD_tmul, evD_tmul, map_smul]
+  | add a b ha hb => rw [map_add, map_add, ha, hb, map_add, map_add]
+
+lemma evD_d (j : ℕ) (t : (disc k n).X (j + 1) ⊗[k] N) :
+    evD n j N (((disc k n).d (j + 1) j).hom.rTensor N t) =
+      if j = n then evD n (j + 1) N t else 0 := by
+  induction t with
+  | tmul x m =>
+    rw [LinearMap.rTensor_tmul, evD_tmul, evD_tmul, disc_d_apply]
+    split_ifs <;> simp
+  | add a b ha hb =>
+    rw [map_add, map_add, ha, hb]
+    split_ifs <;> simp
+
+lemma evD_dmap (t : (disc k n).X (n + 1) ⊗[k] N) :
+    evD (n + 1) (n + 1) N (((dmap k n).f (n + 1)).hom.rTensor N t) = evD n (n + 1) N t := by
+  induction t with
+  | tmul x m => rw [LinearMap.rTensor_tmul, evD_tmul, evD_tmul, dv_dmap, ite_eq_left rfl]
+  | add a b ha hb => simp [ha, hb]
+
+variable (C : CochainComplex B ℕ)
+
+omit [Linear k B] in
+/-- The components of the cycle of `ℂⁿ` attached to `x : T → Cⁿ`: `x` in degree `n`, `dx` in
+degree `n + 1` (and `0` elsewhere, through the shape of `C`). -/
+def wD {T : B} (x : T ⟶ C.X n) (j : ℕ) : T ⟶ C.X j :=
+  if h : n = j then x ≫ eqToHom (congrArg C.X h) else x ≫ C.d n j
+
+omit [Linear k B] in
+lemma wD_self {T : B} (x : T ⟶ C.X n) : wD n C x n = x := by simp [wD]
+
+omit [Linear k B] in
+lemma wD_succ {T : B} (x : T ⟶ C.X n) : wD n C x (n + 1) = x ≫ C.d n (n + 1) := by simp [wD]
+
+omit [Linear k B] in
+lemma wD_comp {T T' : B} (h : T' ⟶ T) (x : T ⟶ C.X n) (j : ℕ) :
+    wD n C (h ≫ x) j = h ≫ wD n C x j := by
+  unfold wD
+  split_ifs <;> simp
+
+variable (k) in
+/-- `Hom(T, Cⁿ) ≃ Φ_T(ℂⁿ)`: a cycle of `ℂⁿ` is its component in degree `n`. -/
+def eDisc (T : B) : (T ⟶ C.X n) ≃ Phi C T (disc k n) where
+  toFun x := ⟨fun j => gD n j ⊗ₜ wD n C x j, fun j => by
+    change (Linear.rightComp k T (C.d j (j + 1))).lTensor _ (gD n j ⊗ₜ wD n C x j) =
+      ((disc k n).d (j + 1) j).hom.rTensor _ (gD n (j + 1) ⊗ₜ wD n C x (j + 1))
+    by_cases hj : j = n ∨ j = n + 1
+    · apply evD_injective n hj
+      rw [evD_lTensor, evD_tmul, evD_d, Linear.rightComp_apply, dv_gD, ite_eq_left hj, one_smul]
+      rcases hj with rfl | rfl
+      · rw [ite_eq_left rfl, evD_tmul, dv_gD, ite_eq_left (Or.inr rfl), one_smul, wD_self, wD_succ]
+      · rw [ite_eq_right (by omega), wD_succ, Category.assoc, C.d_comp_d, comp_zero]
+    · exact (disc_tensor_eq_zero n hj _).trans (disc_tensor_eq_zero n hj _).symm⟩
+  invFun z := evD n n _ (z.1 n)
+  left_inv x := by
+    change evD n n _ (gD n n ⊗ₜ wD n C x n) = x
+    rw [evD_tmul, dv_gD, ite_eq_left (Or.inl rfl), one_smul, wD_self]
+  right_inv z := by
+    ext j
+    change gD n j ⊗ₜ wD n C (evD n n _ (z.1 n)) j = z.1 j
+    by_cases h1 : j = n
+    · subst h1
+      rw [wD_self, tmul_evD _ (Or.inl rfl)]
+    by_cases h2 : j = n + 1
+    · subst h2
+      have := congrArg (evD n n _) (z.2 n)
+      rw [evD_lTensor, evD_d, ite_eq_left rfl, Linear.rightComp_apply] at this
+      rw [wD_succ, this, tmul_evD _ (Or.inr rfl)]
+    · exact (disc_tensor_eq_zero n (by omega) _).trans (disc_tensor_eq_zero n (by omega) _).symm
+
+lemma eDisc_apply {T : B} (x : T ⟶ C.X n) (j : ℕ) :
+    (eDisc k n C T x).1 j = gD n j ⊗ₜ wD n C x j := rfl
+
+lemma eDisc_nat {T T' : B} (h : T' ⟶ T) (x : T ⟶ C.X n) :
+    eDisc k n C T' (h ≫ x) = PhiPre h (eDisc k n C T x) :=
+  Phi_ext fun j => by
+    rw [PhiPre_apply, eDisc_apply, eDisc_apply, LinearMap.lTensor_tmul, Linear.leftComp_apply,
+      wD_comp]
+
+variable (k) in
+/-- `Cⁿ` represents `Φ(ℂⁿ)`. -/
+def discRep : Rep C (disc k n) (C.X n) := ⟨eDisc k n C, fun h x => eDisc_nat n C h x⟩
+
+/-- The differential of `C^•` represents `Φ(dⁿ)`. -/
+lemma discRep_d : C.d n (n + 1) = (discRep k n C).map (discRep k (n + 1) C) (dmap k n) := by
+  apply (discRep k (n + 1) C).ext'
+  rw [Rep.e_map]
+  change eDisc k (n + 1) C _ _ = _
+  rw [← Equiv.eq_symm_apply]
+  change _ = evD (n + 1) (n + 1) _ (((dmap k n).f (n + 1)).hom.rTensor _ (gD n (n + 1) ⊗ₜ
+    wD n C (𝟙 (C.X n)) (n + 1)))
+  rw [evD_dmap, evD_tmul, dv_gD, ite_eq_left (Or.inr rfl), one_smul, wD_succ, Category.id_comp]
+
+end DiscRep
+
+/-! ### `I(L)` is represented by a finite biproduct of the `Cⁿ` -/
+
+section ConeRep
+
+variable (L : Perf k)
+
+lemma eDec_pDec_apply (n m : ℕ) (b : Bi L n) (c : Bi L m) :
+    dv k (((eDec L n b ≫ pDec L m c).hom.f (n + 1)).hom (one k n)) =
+      ψ L m c (n + 1) (vv L n b (n + 1)) := by
+  change ψ L m c (n + 1) (dv k (one k n) • vv L n b (n + 1)) = _
+  rw [dv_one, one_smul]
+
+open Classical in
+/-- The `e_{n,b}` and `p_{n,c}` are orthogonal: `p_{n,c} e_{n,b} = δ_{b,c}`. -/
+lemma eDec_pDec_self (n : ℕ) (b c : Bi L n) :
+    eDec L n b ≫ pDec L n c = if b = c then 𝟙 _ else 0 := by
+  ext : 1
+  refine disc_hom_ext (disc_ext k ?_)
+  rw [eDec_pDec_apply, ψ_succ, vv_snd_succ]
+  change (bas L n).coord c (bas L n b) = _
+  rw [Module.Basis.coord_apply, Module.Basis.repr_self, Finsupp.single_apply]
+  split_ifs <;> rfl
+
+/-- `p_{m,c} e_{n,b} = 0` for `m ≠ n`. -/
+lemma eDec_pDec_ne {n m : ℕ} (h : n ≠ m) (b : Bi L n) (c : Bi L m) :
+    eDec L n b ≫ pDec L m c = 0 := by
+  ext : 1
+  refine disc_hom_ext (disc_ext k ?_)
+  rw [eDec_pDec_apply, ψ_apply, vv_fst_ne L n b (n + 1) (by omega), map_zero, zero_add,
+    Pi.single_eq_of_ne (show n + 1 ≠ m + 1 by omega)]
+  rfl
+
+/-- The index set of the decomposition of `I(L)`: pairs `(n, b)`, `b` in the basis of `Lₙ`. -/
+abbrev Idx := Σ i : Fin (bound L + 1), Bi L i
+
+lemma total' : ∑ j : Idx L, pDec L j.1 j.2 ≫ eDec L j.1 j.2 = 𝟙 (coneP L) := by
+  rw [Fintype.sum_sigma, ← total L, Finset.sum_range]
+
+lemma eDec_pDec_idx {i j : Idx L} (h : i ≠ j) : eDec L i.1 i.2 ≫ pDec L j.1 j.2 = 0 := by
+  obtain ⟨n, b⟩ := i
+  obtain ⟨m, c⟩ := j
+  by_cases hnm : (n : ℕ) = m
+  · obtain rfl : n = m := Fin.ext hnm
+    rw [eDec_pDec_self, ite_eq_right (fun (hbc : b = c) => h (by rw [hbc]))]
+  · exact eDec_pDec_ne L hnm b c
+
+variable [HasFiniteBiproducts B] (C : CochainComplex B ℕ)
+
+/-- The object `⊕_{n,b} Cⁿ` of `ℬ`. -/
+abbrev coneObj : B := ⨁ fun j : Idx L => C.X j.1
+
+/-- `Hom(T, ⊕_{n,b} Cⁿ) ≃ Φ_T(I(L))`, through `I(L) = ⊕_{n,b} ℂⁿ`. -/
+def eCone (T : B) : (T ⟶ coneObj L C) ≃ Phi C T (cone L.obj) where
+  toFun x := ∑ j : Idx L, PhiMap (eDec L j.1 j.2).hom (eDisc k j.1 C T (x ≫ biproduct.π _ j))
+  invFun z := biproduct.lift fun j => (eDisc k j.1 C T).symm (PhiMap (pDec L j.1 j.2).hom z)
+  left_inv x := by
+    refine biproduct.hom_ext _ _ fun j => ?_
+    rw [biproduct.lift_π, map_sum, Finset.sum_eq_single j]
+    · rw [← PhiMap_comp, show (eDec L j.1 j.2).hom ≫ (pDec L j.1 j.2).hom = 𝟙 _ from
+        congrArg (fun f : D k j.1 ⟶ D k j.1 => f.hom)
+          ((eDec_pDec_self L _ _ _).trans (ite_eq_left rfl)), PhiMap_id,
+        Equiv.symm_apply_apply]
+    · intro i _ hij
+      rw [← PhiMap_comp, show (eDec L i.1 i.2).hom ≫ (pDec L j.1 j.2).hom = 0 from
+        congrArg (fun f : D k i.1 ⟶ D k j.1 => f.hom) (eDec_pDec_idx L hij), PhiMap_zero]
+    · simp
+  right_inv z := by
+    simp only [biproduct.lift_π, Equiv.apply_symm_apply]
+    simp_rw [← PhiMap_comp]
+    rw [← PhiMap_sum]
+    rw [show ∑ j : Idx L, (pDec L j.1 j.2).hom ≫ (eDec L j.1 j.2).hom = 𝟙 _ from
+      (hom_sum Finset.univ (fun j : Idx L => pDec L j.1 j.2 ≫ eDec L j.1 j.2)).symm.trans
+        (congrArg (fun f : coneP L ⟶ coneP L => f.hom) (total' L)), PhiMap_id]
+
+lemma eCone_nat {T T' : B} (h : T' ⟶ T) (x : T ⟶ coneObj L C) :
+    eCone L C T' (h ≫ x) = PhiPre h (eCone L C T x) := by
+  simp only [eCone, Equiv.coe_fn_mk, map_sum, PhiPre_PhiMap, eDisc_nat, PhiPre_comp]
+
+/-- `⊕_{n,b} Cⁿ` represents `Φ(I(L))`. -/
+def coneRep : Rep C (cone L.obj) (coneObj L C) := ⟨eCone L C, fun h x => eCone_nat L C h x⟩
+
+end ConeRep
+
+/-! ### `L` is represented by a kernel -/
+
+section KerRep
+
+/-- `Hom(T, ker f) ≃ {x : T → X // x f = 0}`. -/
+def kernelHomEquiv {X Y : B} (f : X ⟶ Y) [HasKernel f] (T : B) :
+    (T ⟶ kernel f) ≃ {x : T ⟶ X // x ≫ f = 0} where
+  toFun y := ⟨y ≫ kernel.ι f, by simp⟩
+  invFun x := kernel.lift f x.1 x.2
+  left_inv y := by ext; simp
+  right_inv x := Subtype.ext (kernel.lift_ι _ _ _)
+
+variable [HasKernels B] {C : CochainComplex B ℕ} {L : Perf k} {X Y : B} (R : Rep C (cone L.obj) X)
+  (S : Rep C (cone (shift L.obj)) Y)
+
+/-- The map `σ(I(L)) → σ(I(L[1]))` representing `I(L) → L[1] → I(L[1])`. -/
+abbrev kmap : X ⟶ Y := R.map S (πP L ≫ ιP (shiftP L)).hom
+
+omit [HasKernels B] in
+lemma PhiMap_πι_ι {T : B} (z : Phi C T L.obj) :
+    PhiMap (πP L ≫ ιP (shiftP L)).hom (PhiMap (ιP L).hom z) = 0 := by
+  rw [← PhiMap_comp, show (ιP L).hom ≫ (πP L ≫ ιP (shiftP L)).hom = 0 from
+    congrArg (fun f : L ⟶ coneP (shiftP L) => f.hom)
+      (show ιP L ≫ πP L ≫ ιP (shiftP L) = 0 by rw [← Category.assoc, ιP_comp_πP, zero_comp]),
+    PhiMap_zero]
+
+/-- `Φ_T(L)` is the kernel of `Φ_T(I(L)) → Φ_T(I(L[1]))`. -/
+def kerBij (T : B) :
+    Phi C T L.obj ≃ {w : Phi C T (cone L.obj) // PhiMap (πP L ≫ ιP (shiftP L)).hom w = 0} :=
+  Equiv.ofBijective (fun z => ⟨PhiMap (ιP L).hom z, PhiMap_πι_ι z⟩)
+    ⟨fun _ _ h => PhiMap_injective (isSigma_cone L) (congrArg Subtype.val h), fun ⟨w, hw⟩ => by
+      obtain ⟨z, hz⟩ := PhiMap_exact (isSigma_cone L) w
+        (PhiMap_injective (isSigma_cone (shiftP L)) (by rw [← PhiMap_comp, map_zero]; exact hw))
+      exact ⟨z, Subtype.ext hz⟩⟩
+
+/-- `Hom(T, ker) ≃ Φ_T(L)`. -/
+def kerE (T : B) : (T ⟶ kernel (kmap R S)) ≃ Phi C T L.obj :=
+  (kernelHomEquiv _ T).trans ((Equiv.subtypeEquiv (R.e T) (fun x =>
+    ⟨fun h => by rw [← Rep.map_spec, h, Rep.e_zero],
+      fun h => (S.e T).injective (by rw [Rep.map_spec, h, Rep.e_zero])⟩)).trans (kerBij T).symm)
+
+lemma kerE_spec {T : B} (y : T ⟶ kernel (kmap R S)) :
+    PhiMap (ιP L).hom (kerE R S T y) = R.e T (y ≫ kernel.ι _) :=
+  congrArg Subtype.val ((kerBij T).apply_symm_apply _)
+
+lemma kerE_nat {T T' : B} (h : T' ⟶ T) (y : T ⟶ kernel (kmap R S)) :
+    kerE R S T' (h ≫ y) = PhiPre h (kerE R S T y) := by
+  apply PhiMap_injective (isSigma_cone L)
+  rw [kerE_spec, ← PhiPre_PhiMap, kerE_spec, Category.assoc, R.nat]
+
+/-- `ker(σ(I(L)) → σ(I(L[1])))` represents `Φ(L)`. -/
+def kerRep : Rep C L.obj (kernel (kmap R S)) := ⟨kerE R S, fun h y => kerE_nat R S h y⟩
+
+end KerRep
+
+/-! ### The functor `σ(C^•)` and the theorem -/
+
+section Sigma
+
+variable (k) [HasKernels B] [HasFiniteBiproducts B] (C : CochainComplex B ℕ)
+
+/-- `σ(C^•)(L) = Hom^•_k(L^•, C^•)`, as the kernel of `⊕_{n,b} Cⁿ → ⊕_{n,b} Cⁿ` over the
+decompositions of `I(L)` and `I(L[1])`. -/
+def σObj (L : Perf k) : B := kernel (kmap (coneRep L C) (coneRep (shiftP L) C))
+
+/-- `σ(C^•)(L)` represents `Φ(L)`. -/
+def σRep (L : Perf k) : Rep C L.obj (σObj k C L) := kerRep (coneRep L C) (coneRep (shiftP L) C)
+
+/-- The functor `σ(C^•) : 𝒫 → ℬ` of p. 50. -/
+def σFun : Perf k ⥤ B where
+  obj := σObj k C
+  map {L M} g := (σRep k C L).map (σRep k C M) g.hom
+  map_id L := (σRep k C L).map_id
+  map_comp f g := ((σRep k C _).map_comp (σRep k C _) (σRep k C _) f.hom g.hom).symm
+
+lemma σ_map_spec {L M : Perf k} (g : L ⟶ M) {T : B} (x : T ⟶ (σFun k C).obj L) :
+    (σRep k C M).e T (x ≫ (σFun k C).map g) = PhiMap g.hom ((σRep k C L).e T x) :=
+  Rep.map_spec _ _ _ _
+
+instance : (σFun k C).Additive where
+  map_add {L M f g} := (σRep k C M).ext' (by
+    change (σRep k C M).e _ ((σRep k C L).map (σRep k C M) (f + g).hom) =
+      (σRep k C M).e _ ((σRep k C L).map (σRep k C M) f.hom + (σRep k C L).map (σRep k C M) g.hom)
+    rw [Rep.e_add, Rep.e_map, Rep.e_map, Rep.e_map, ← PhiMap_add]
+    rfl)
+
+instance : (σFun k C).Linear k where
+  map_smul {L M} f c := (σRep k C M).ext' (by
+    change (σRep k C M).e _ ((σRep k C L).map (σRep k C M) (c • f).hom) =
+      (σRep k C M).e _ (c • (σRep k C L).map (σRep k C M) f.hom)
+    rw [Rep.e_smul, Rep.e_map, Rep.e_map, ← PhiMap_smul]
+    rfl)
+
+/-- `σ(C^•)` carries the sequences of `Σ` to kernel diagrams. -/
+lemma σ_sigmaLeftExact : SigmaLeftExact (σFun k C) := by
+  intro L' L L'' f g hs
+  have hfg : f ≫ g = 0 := by
+    ext m : 2
+    exact ModuleCat.hom_ext (LinearMap.ext fun x => (hs.exact m _).mpr ⟨x, rfl⟩)
+  have key : ∀ {T : B} (x : T ⟶ (σFun k C).obj L), x ≫ (σFun k C).map g = 0 →
+      PhiMap g.hom ((σRep k C L).e T x) = 0 := fun x hx =>
+    (σ_map_spec k C g x).symm.trans ((congrArg ((σRep k C L'').e _) hx).trans (Rep.e_zero _))
+  refine ⟨by rw [← Functor.map_comp, hfg, Functor.map_zero], ⟨KernelFork.IsLimit.ofι _ _
+    (fun {T} x hx => ((σRep k C L').e T).symm (PhiMap_exact hs _ (key x hx)).choose)
+    (fun {T} x hx => ((σRep k C L).e T).injective ?_) (fun {T} x hx m hm => ?_)⟩⟩
+  · refine (σ_map_spec k C f _).trans ?_
+    rw [Equiv.apply_symm_apply]
+    exact (PhiMap_exact hs _ (key x hx)).choose_spec
+  · refine (Equiv.eq_symm_apply _).mpr (PhiMap_injective hs ?_)
+    exact (σ_map_spec k C f m).symm.trans ((congrArg ((σRep k C L).e T) hm).trans
+      (PhiMap_exact hs _ (key x hx)).choose_spec.symm)
+
+/-- `σ(C^•)` as an object of `Fonct_{k, Σ-sex}(𝒫, ℬ)`. -/
+def σLex : Lex k B := ⟨σFun k C, ⟨inferInstance, inferInstance, σ_sigmaLeftExact k C⟩⟩
+
+/-- `σ(C^•)(ℂⁿ) ≅ Cⁿ`: both represent `Φ(ℂⁿ)`. -/
+def σIsoX (n : ℕ) : (σFun k C).obj (D k n) ≅ C.X n := Rep.iso (σRep k C (D k n)) (discRep k n C)
+
+/-- **Theorem (p. 50, a), second half).** `ρ(σ(C^•)) = σ(C^•)(ℂ^•) ≅ C^•`. -/
+def σIso : (ρ k B).obj (σLex k C) ≅ C :=
+  HomologicalComplex.Hom.isoOfComponents (fun n => σIsoX k C n) (by
+    rintro i j (rfl : i + 1 = j)
+    rw [ρ_d]
+    change (σRep k C (D k i)).map (discRep k i C) (𝟙 _) ≫ C.d i (i + 1) =
+      (σRep k C (D k i)).map (σRep k C (D k (i + 1))) (dmap k i) ≫
+        (σRep k C (D k (i + 1))).map (discRep k (i + 1) C) (𝟙 _)
+    rw [discRep_d (k := k) i C, Rep.map_comp, Rep.map_comp, Category.id_comp, Category.comp_id])
+
+end Sigma
+
+section Equivalence
+
+universe v₃ u₃
+
+variable {B' : Type u₃} [Category.{v₃} B'] [Preadditive B'] [Linear k B'] [HasKernels B']
+  [HasFiniteBiproducts B']
+
+instance : (ρ k B').EssSurj where
+  mem_essImage C := ⟨σLex k C, ⟨σIso k C⟩⟩
+
+instance : (ρ k B').IsEquivalence where
+
+variable (k B') in
+/-- **Theorem (p. 50, a)).** For `ℬ` `k`-linear with kernels and finite biproducts,
+`F ↦ F(ℂ^•)` is an equivalence from the `k`-linear `Σ`-left exact functors `𝒫 → ℬ` to the
+cochain complexes of `ℬ`. -/
+def ρEquivalence : Lex k B' ≌ CochainComplex B' ℕ := (ρ k B').asEquivalence
+
+end Equivalence
+
+end
+
+end Grothendieck.Folder137.Perfect

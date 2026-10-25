@@ -1654,3 +1654,708 @@ theorem mem_H0_iff (hB : ∀ b : B, algebraMap B S b ∈ H0 A S) (s : S) :
 end Tensor
 
 end Grothendieck.Folder128.Infinitesimal
+
+
+/-!
+## Pages 14–18, Prop. 2 over a local base: the reduction to `A = k`
+
+The remainder of Prop. 2 (`Colength` above treats the field case only): `A` local artinian with
+maximal ideal `𝔪` and residue field `k`, `A'` finite over `A` with trivial residue extensions,
+`J` an equivalence ideal with `A → A' ⇉ (A' ⊗_A A')/J` exact and `δ(x')` generating `Δ/J` for
+`x' ∉ A`. Here `B` is the reading's `A'`, and the base only needs to be noetherian, with `𝔪` any
+maximal ideal under which all the points of `B` lie (`hres`):
+* `ColengthLocal.map_le_range`: `𝔪B ⊂ A`, i.e. `𝔪A' = 𝔪`;
+* `ColengthLocal.colength_le_one`: moreover `B/A` has length `≤ 1` (`Module.length`), for any
+  ideal `J ⊂ Δ`;
+* `ColengthLocal.eq_bot_of_length_eq_one`: if `J` is an equivalence ideal (`IsEquivIdeal`) and the
+  length is `1`, then `J = 0`;
+* `ColengthLocal.prop2`: the three together for `A` local noetherian (so local artinian);
+* `ColengthLocal.prop1_i` (Prop. 1 (i), pages 12–13): over any commutative ring `A`, if `A → B`
+  is injective and `B/A ≅ A/𝔪`, the equivalence ideals of `B ⊗_A B` are exactly `0` and `Δ`
+  (`isEquivIdeal_bot`, `isEquivIdeal_diag`).
+
+The proof does not follow the page's split (radiciel / non radiciel, `J` nilpotent, `Ω = Δ/Δ²`).
+(1) `𝔪A' ⊂ A`: if `x ∈ 𝔪A'` were not in `A`, `δ(x) ∈ 𝔪Δ ⊂ 𝔫Δ` for every maximal `𝔫` of `A'`, so
+`Δ ⊂ (δx) + J ⊂ J + 𝔫Δ` and `Δ ⊂ J` by Nakayama on `A'`, against exactness. (2) The field
+argument of `Colength.finrank_le_two`, run in `B₀ = B/𝔪B` through
+`φ_χ : a ⊗ b ↦ χ(a) b̄ : B ⊗_A B → B₀` (`phi`), gives `dim_k B₀ ≤ 2` or `Δ ⊂ J`
+(`finrank_le_two_or`); every `t ∈ Δ` is `δ(s)` modulo `𝔫Δ` (`exists_sub_dl_mem`), which replaces
+the field case's `t ≡ δ(φ_χ t)`. Then `B/A ≅ B₀/k` has length `≤ 1`. (3) For the last assertion,
+the reduction `Θ : B ⊗_A B → B₀ ⊗_k B₀` (`theta`, through `equivOfCompatibleSMul`) has kernel
+inside `𝔪(B ⊗_A B)` (right exactness), whose elements are `1 ⊗ μ(t)` since `𝔪B ⊂ A`, so `Θ` is
+injective on `Δ` (`eq_zero_of_theta`: Prop. 3 of N° 1 for `I = 𝔪`); `Θ(J)` is an equivalence
+ideal (`isEquivalenceIdeal_map`: Cor. 2 in the direction used), `dim_k B₀ = 2`, and
+`eq_bot_or_eq_ker` concludes.
+
+Not formalised: Prop. 3 and its corollaries for a general nilpotent conductor ideal `I` (only
+`I = 𝔪` with `𝔪A' ⊂ A`, and only the injectivity on `Δ` and the transport of equivalence ideals
+from `A'` to `A'₀`, are proved), Prop. 1 (ii) and (iii), and the passage from ideals to closed
+subschemes.
+-/
+
+namespace Grothendieck.Folder128.ColengthLocal
+
+open Module
+
+variable {A B : Type*} [CommRing A] [CommRing B] [Algebra A B] (𝔪 : Ideal A)
+
+variable (A B) in
+/-- `δ(x) = 1 ⊗ x − x ⊗ 1`, `A`-linear. -/
+noncomputable def dl : B →ₗ[A] B ⊗[A] B :=
+  TensorProduct.mk A B B 1 - (TensorProduct.mk A B B).flip 1
+
+lemma dl_apply (x : B) : dl A B x = (1 : B) ⊗ₜ[A] x - x ⊗ₜ 1 := rfl
+
+variable (A B) in
+/-- `Δ = Ker(B ⊗_A B → B)`. -/
+noncomputable abbrev diag : Ideal (B ⊗[A] B) :=
+  RingHom.ker (Algebra.TensorProduct.lmul' A : B ⊗[A] B →ₐ[A] B)
+
+lemma dl_mem (x : B) : dl A B x ∈ diag A B := by
+  simp [dl_apply, RingHom.mem_ker]
+
+lemma dl_algebraMap (c : A) : dl A B (algebraMap A B c) = 0 := by
+  simp [dl_apply, Algebra.algebraMap_eq_smul_one]
+
+lemma mem_span_dl {t : B ⊗[A] B} (ht : t ∈ diag A B) :
+    t ∈ Submodule.span B (Set.range (dl A B)) := by
+  rwa [show Set.range (dl A B) = Set.range fun s : B => (1 : B) ⊗ₜ[A] s - s ⊗ₜ 1 from rfl,
+    KaehlerDifferential.submodule_span_range_eq_ideal]
+
+/-- A point `χ : B → A/𝔪` kills `𝔪B`. -/
+lemma map_le_ker (χ : B →ₐ[A] A ⧸ 𝔪) : 𝔪.map (algebraMap A B) ≤ RingHom.ker χ := by
+  rw [Ideal.map_le_iff_le_comap]
+  intro m hm
+  simp [RingHom.mem_ker, Ideal.Quotient.eq_zero_iff_mem.2 hm]
+
+/-- `φ_χ : a ⊗ b ↦ χ(a) b̄ ∈ B/𝔪B`. -/
+noncomputable def phi (χ : B →ₐ[A] A ⧸ 𝔪) : B ⊗[A] B →ₐ[A] B ⧸ 𝔪.map (algebraMap A B) :=
+  Algebra.TensorProduct.lift ((IsScalarTower.toAlgHom A (A ⧸ 𝔪) _).comp χ)
+    (Ideal.Quotient.mkₐ A _) fun _ _ => Commute.all _ _
+
+lemma phi_tmul (χ : B →ₐ[A] A ⧸ 𝔪) (a b : B) :
+    phi 𝔪 χ (a ⊗ₜ b) = algebraMap (A ⧸ 𝔪) _ (χ a) * Ideal.Quotient.mk _ b := by
+  simp [phi]
+
+lemma phi_dl (χ : B →ₐ[A] A ⧸ 𝔪) (x : B) :
+    phi 𝔪 χ (dl A B x) = Ideal.Quotient.mk _ x - algebraMap (A ⧸ 𝔪) _ (χ x) := by
+  simp [dl_apply, phi_tmul]
+
+lemma phi_smul (χ : B →ₐ[A] A ⧸ 𝔪) (a : B) (t : B ⊗[A] B) :
+    phi 𝔪 χ (a • t) = algebraMap (A ⧸ 𝔪) _ (χ a) * phi 𝔪 χ t := by
+  rw [Algebra.smul_def, map_mul, show algebraMap B (B ⊗[A] B) a = a ⊗ₜ 1 from rfl, phi_tmul,
+    map_one, mul_one]
+
+/-- `χ̄ : B/𝔪B → A/𝔪`, as an `A/𝔪`-algebra map. -/
+noncomputable def chibar (χ : B →ₐ[A] A ⧸ 𝔪) : B ⧸ 𝔪.map (algebraMap A B) →ₐ[A ⧸ 𝔪] A ⧸ 𝔪 :=
+  AlgHom.extendScalarsOfSurjective Ideal.Quotient.mk_surjective
+    (Ideal.Quotient.liftₐ _ χ fun _ ha => map_le_ker 𝔪 χ ha)
+
+lemma chibar_mk (χ : B →ₐ[A] A ⧸ 𝔪) (b : B) : chibar 𝔪 χ (Ideal.Quotient.mk _ b) = χ b := rfl
+
+lemma chibar_phi (χ : B →ₐ[A] A ⧸ 𝔪) (t : B ⊗[A] B) :
+    chibar 𝔪 χ (phi 𝔪 χ t) = χ (Algebra.TensorProduct.lmul' A t) := by
+  induction t using TensorProduct.inductionOn with
+  | tmul a b => simp [phi_tmul, chibar_mk]
+  | add s t hs ht => simp only [map_add, hs, ht]
+
+
+/-- Every `t ∈ Δ` is `δ(s)` modulo `𝔫 Δ`, for `𝔫 = Ker χ` (residue field `A/𝔪`). -/
+lemma exists_sub_dl_mem (χ : B →ₐ[A] A ⧸ 𝔪) {t : B ⊗[A] B} (ht : t ∈ diag A B) :
+    ∃ s : B, t - dl A B s ∈ RingHom.ker χ • (diag A B).restrictScalars B := by
+  suffices ∀ t ∈ Submodule.span B (Set.range (dl A B)),
+      ∃ s : B, t - dl A B s ∈ RingHom.ker χ • (diag A B).restrictScalars B from
+    this t (mem_span_dl ht)
+  intro t ht
+  induction ht using Submodule.span_induction with
+  | mem x hx => obtain ⟨s, rfl⟩ := hx; exact ⟨s, by simp⟩
+  | zero => exact ⟨0, by simp⟩
+  | add x y _ _ hx hy =>
+    obtain ⟨s, hs⟩ := hx; obtain ⟨s', hs'⟩ := hy
+    exact ⟨s + s', by convert add_mem hs hs' using 1; simp only [map_add]; abel⟩
+  | smul a x hx' hx =>
+    obtain ⟨s, hs⟩ := hx
+    have hxD : x ∈ (diag A B).restrictScalars B := by
+      rw [← KaehlerDifferential.submodule_span_range_eq_ideal]; exact hx'
+    obtain ⟨c, hc⟩ := Ideal.Quotient.mk_surjective (χ a)
+    have hn : a - algebraMap A B c ∈ RingHom.ker χ := by
+      simp [RingHom.mem_ker, ← hc]
+    refine ⟨c • s, ?_⟩
+    have h1 := Submodule.smul_mem_smul hn hxD
+    have h2 := Submodule.smul_of_tower_mem _ c hs
+    convert add_mem h1 h2 using 1
+    rw [map_smul, sub_smul, algebraMap_smul, smul_sub]
+    abel
+
+/-- `φ_χ` kills `𝔫 Δ`. -/
+lemma phi_eq_zero (χ : B →ₐ[A] A ⧸ 𝔪) {t : B ⊗[A] B}
+    (ht : t ∈ RingHom.ker χ • (diag A B).restrictScalars B) : phi 𝔪 χ t = 0 := by
+  refine Submodule.smul_induction_on ht (fun r hr n _ => ?_) fun x y hx hy => ?_
+  · rw [phi_smul, (RingHom.mem_ker).1 hr, map_zero, zero_mul]
+  · rw [map_add, hx, hy, add_zero]
+
+/-- `δ(𝔪B) ⊂ 𝔫 Δ`. -/
+lemma dl_mem_smul (χ : B →ₐ[A] A ⧸ 𝔪) {w : B} (hw : w ∈ 𝔪.map (algebraMap A B)) :
+    dl A B w ∈ RingHom.ker χ • (diag A B).restrictScalars B := by
+  rw [← Submodule.restrictScalars_mem A, ← Ideal.smul_top_eq_map] at hw
+  refine Submodule.smul_induction_on hw (fun m hm b _ => ?_) fun x y hx hy => ?_
+  · rw [map_smul, ← algebraMap_smul B m (dl A B b)]
+    exact Submodule.smul_mem_smul (map_le_ker 𝔪 χ (Ideal.mem_map_of_mem _ hm)) (dl_mem b)
+  · rw [map_add]; exact add_mem hx hy
+
+
+/-- The hypothesis `Δ ⊂ (δ z) + J` read in `B/𝔪B` through `φ_χ`. -/
+lemma phi_decomp {J : Ideal (B ⊗[A] B)}
+    (hgen : ∀ x : B, x ∉ Set.range (algebraMap A B) → diag A B ≤ Ideal.span {dl A B x} ⊔ J)
+    (χ : B →ₐ[A] A ⧸ 𝔪) {z : B ⧸ 𝔪.map (algebraMap A B)} (hz : z ∈ RingHom.ker (chibar 𝔪 χ))
+    (hz0 : z ≠ 0) {y : B ⧸ 𝔪.map (algebraMap A B)} (hy : y ∈ RingHom.ker (chibar 𝔪 χ)) :
+    ∃ u : B ⊗[A] B, ∃ j ∈ J, phi 𝔪 χ u * z + phi 𝔪 χ j = y := by
+  obtain ⟨z, rfl⟩ := Ideal.Quotient.mk_surjective z
+  obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective y
+  rw [RingHom.mem_ker, chibar_mk] at hz hy
+  have hzk : z ∉ Set.range (algebraMap A B) := by
+    rintro ⟨c, rfl⟩
+    apply hz0
+    rw [← Ideal.Quotient.algebraMap_quotient_map_quotient]
+    rw [AlgHom.commutes] at hz
+    have hc : Ideal.Quotient.mk 𝔪 c = 0 := hz
+    rw [hc, map_zero]
+  obtain ⟨u, j, hj, e⟩ := Ideal.mem_span_singleton_sup.1 (hgen z hzk (dl_mem y))
+  refine ⟨u, j, hj, ?_⟩
+  have := congr(phi 𝔪 χ $e)
+  rw [map_add, map_mul, phi_dl, phi_dl, hz, hy] at this
+  simpa using this
+
+/-- The residue fields of `B/𝔪B` are `A/𝔪` when those of `B` are. -/
+lemma exists_chibar
+    (hres : ∀ n : Ideal B, n.IsMaximal → ∃ χ : B →ₐ[A] A ⧸ 𝔪, RingHom.ker χ = n)
+    (m : Ideal (B ⧸ 𝔪.map (algebraMap A B))) (hm : m.IsMaximal) :
+    ∃ ψ : B ⧸ 𝔪.map (algebraMap A B) →ₐ[A ⧸ 𝔪] A ⧸ 𝔪, RingHom.ker ψ = m := by
+  obtain ⟨χ, hχ⟩ := hres _ (Ideal.comap_isMaximal_of_surjective
+    (Ideal.Quotient.mk (𝔪.map (algebraMap A B))) Ideal.Quotient.mk_surjective (K := m) (H := hm))
+  refine ⟨chibar 𝔪 χ, Ideal.ext fun c => ?_⟩
+  obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective c
+  rw [RingHom.mem_ker, chibar_mk, ← RingHom.mem_ker, hχ, Ideal.mem_comap]
+
+/-- Nakayama on `B`: if `Δ ⊂ J + 𝔫 Δ` at every point, `Δ ⊂ J`. -/
+lemma diag_le_of [Module.Finite A B] [IsNoetherianRing A]
+    (hres : ∀ n : Ideal B, n.IsMaximal → ∃ χ : B →ₐ[A] A ⧸ 𝔪, RingHom.ker χ = n)
+    {J : Ideal (B ⊗[A] B)} (h : ∀ χ : B →ₐ[A] A ⧸ 𝔪, (diag A B).restrictScalars B ≤
+      J.restrictScalars B ⊔ RingHom.ker χ • (diag A B).restrictScalars B) :
+    diag A B ≤ J := by
+  have : IsNoetherian A (B ⊗[A] B) := isNoetherian_of_isNoetherianRing_of_finite A _
+  have : IsNoetherian B (B ⊗[A] B) := isNoetherian_of_tower A inferInstance
+  have hD := Colength.le_of_forall_le_sup_smul (IsNoetherian.noetherian _) fun n hn => by
+    obtain ⟨χ, rfl⟩ := hres n hn
+    exact h χ
+  exact fun t ht => hD ht
+
+/-- `𝔫 Δ` is an ideal of `B ⊗ B`. -/
+lemma mul_mem_smul (χ : B →ₐ[A] A ⧸ 𝔪) (u : B ⊗[A] B) {t : B ⊗[A] B}
+    (ht : t ∈ RingHom.ker χ • (diag A B).restrictScalars B) :
+    u * t ∈ RingHom.ker χ • (diag A B).restrictScalars B := by
+  refine Submodule.smul_induction_on ht (fun r hr n hn => ?_) fun x y hx hy => ?_
+  · rw [mul_smul_comm]
+    exact Submodule.smul_mem_smul hr (Ideal.mul_mem_left _ u hn)
+  · rw [mul_add]; exact add_mem hx hy
+
+/-- `𝔪B ⊂ A`: an `x ∈ 𝔪B` outside `A` would have `δ(x) ∈ 𝔫 Δ` at every point, so `Δ ⊂ J` by
+Nakayama, and exactness would put `x` in `A`. -/
+theorem map_le_range [Module.Finite A B] [IsNoetherianRing A]
+    (hres : ∀ n : Ideal B, n.IsMaximal → ∃ χ : B →ₐ[A] A ⧸ 𝔪, RingHom.ker χ = n)
+    {J : Ideal (B ⊗[A] B)}
+    (hexact : ∀ x : B, dl A B x ∈ J → x ∈ Set.range (algebraMap A B))
+    (hgen : ∀ x : B, x ∉ Set.range (algebraMap A B) → diag A B ≤ Ideal.span {dl A B x} ⊔ J)
+    {w : B} (hw : w ∈ 𝔪.map (algebraMap A B)) : w ∈ Set.range (algebraMap A B) := by
+  by_contra hwA
+  refine hwA (hexact w (diag_le_of 𝔪 hres (fun χ t ht => ?_) (dl_mem w)))
+  obtain ⟨u, j, hj, e⟩ := Ideal.mem_span_singleton_sup.1 (hgen w hwA ht)
+  rw [← e]
+  exact add_mem (Submodule.mem_sup_right (mul_mem_smul 𝔪 χ u (dl_mem_smul 𝔪 χ hw)))
+    (Submodule.mem_sup_left hj)
+
+
+/-- The field-case argument run in `B/𝔪B`: either `dim_{A/𝔪} B/𝔪B ≤ 2`, or `Δ ⊂ J`. -/
+theorem finrank_le_two_or [𝔪.IsMaximal] [Module.Finite A B] [IsNoetherianRing A]
+    (hres : ∀ n : Ideal B, n.IsMaximal → ∃ χ : B →ₐ[A] A ⧸ 𝔪, RingHom.ker χ = n)
+    {J : Ideal (B ⊗[A] B)} (hJ : J ≤ diag A B)
+    (hgen : ∀ x : B, x ∉ Set.range (algebraMap A B) → diag A B ≤ Ideal.span {dl A B x} ⊔ J) :
+    finrank (A ⧸ 𝔪) (B ⧸ 𝔪.map (algebraMap A B)) ≤ 2 ∨ diag A B ≤ J := by
+  refine or_iff_not_imp_left.2 fun hC => diag_le_of 𝔪 hres fun χ => ?_
+  have : Module.Finite (A ⧸ 𝔪) (B ⧸ 𝔪.map (algebraMap A B)) :=
+    Module.Finite.of_restrictScalars_finite A _ _
+  -- at each point, `J` meets the fibre, so `𝔫_χ/𝔪B ⊂ φ_χ(J)`
+  have hfib : ∀ y ∈ RingHom.ker (chibar 𝔪 χ), ∃ f ∈ J, phi 𝔪 χ f = y := by
+    by_cases hK : ∃ f ∈ J, phi 𝔪 χ f ≠ 0
+    · obtain ⟨f, hf, hf0⟩ := hK
+      have hfm : phi 𝔪 χ f ∈ RingHom.ker (chibar 𝔪 χ) := by
+        rw [RingHom.mem_ker, chibar_phi, (RingHom.mem_ker).1 (hJ hf), map_zero]
+      intro y hy
+      obtain ⟨u, j, hj, e⟩ := phi_decomp 𝔪 hgen χ hfm hf0 hy
+      exact ⟨u * f + j, J.add_mem (J.mul_mem_left u hf) hj, by rw [map_add, map_mul, e]⟩
+    · push Not at hK
+      refine (hC ?_).elim
+      let := Ideal.Quotient.field 𝔪
+      refine Colength.finrank_le_two_of_simple (k := A ⧸ 𝔪) (A := B ⧸ 𝔪.map (algebraMap A B))
+        (exists_chibar 𝔪 hres) (chibar 𝔪 χ)
+        fun z hz hz0 y hy => ?_
+      obtain ⟨u, j, hj, e⟩ := phi_decomp 𝔪 hgen χ hz hz0 hy
+      rw [hK j hj, add_zero] at e
+      exact Ideal.mem_span_singleton'.2 ⟨_, e⟩
+  -- so `δ(x) ∈ J + 𝔫 Δ` for every `x`
+  intro t ht
+  rw [Submodule.restrictScalars_mem, ← Submodule.restrictScalars_mem B,
+    ← KaehlerDifferential.submodule_span_range_eq_ideal] at ht
+  refine (Submodule.span_le.2 ?_) ht
+  rintro _ ⟨x, rfl⟩
+  obtain ⟨f, hf, e⟩ := hfib (Ideal.Quotient.mk _ x - algebraMap (A ⧸ 𝔪) _ (χ x))
+    (by simp [RingHom.mem_ker, chibar_mk])
+  obtain ⟨s, hs⟩ := exists_sub_dl_mem 𝔪 χ (hJ hf)
+  have e2 : phi 𝔪 χ (dl A B s) = phi 𝔪 χ (dl A B x) := by
+    rw [phi_dl 𝔪 χ x, ← e, ← sub_eq_zero, ← map_sub, ← neg_sub, map_neg, phi_eq_zero 𝔪 χ hs,
+      neg_zero]
+  rw [phi_dl, phi_dl] at e2
+  obtain ⟨c, hc⟩ := Ideal.Quotient.mk_surjective (χ x - χ s)
+  have hw : x - s - algebraMap A B c ∈ 𝔪.map (algebraMap A B) := by
+    rw [← Ideal.Quotient.eq_zero_iff_mem, map_sub, map_sub,
+      ← Ideal.Quotient.algebraMap_quotient_map_quotient, hc, map_sub]
+    linear_combination (-1 : B ⧸ 𝔪.map (algebraMap A B)) * e2
+  have : (1 : B) ⊗ₜ[A] x - x ⊗ₜ 1 = f - (f - dl A B s) + dl A B (x - s - algebraMap A B c) := by
+    rw [map_sub, map_sub, dl_algebraMap, dl_apply, dl_apply]; abel
+  change (1 : B) ⊗ₜ[A] x - x ⊗ₜ 1 ∈ _
+  rw [this]
+  exact add_mem (sub_mem (Submodule.mem_sup_left hf) (Submodule.mem_sup_right hs))
+    (Submodule.mem_sup_right (dl_mem_smul 𝔪 χ hw))
+
+
+/-- `1, z̄` are independent in `B/𝔪B` over `A/𝔪` when `z ∉ A` and `𝔪B ⊂ A`. -/
+lemma linearIndependent_one_mk [𝔪.IsMaximal]
+    (hI : ∀ w ∈ 𝔪.map (algebraMap A B), w ∈ Set.range (algebraMap A B))
+    {z : B} (hz : z ∉ Set.range (algebraMap A B)) :
+    let := Ideal.Quotient.field 𝔪
+    LinearIndependent (A ⧸ 𝔪) ![1, Ideal.Quotient.mk (𝔪.map (algebraMap A B)) z] := by
+  let := Ideal.Quotient.field 𝔪
+  have hz' : ∀ c : A ⧸ 𝔪, algebraMap (A ⧸ 𝔪) (B ⧸ 𝔪.map (algebraMap A B)) c ≠
+      Ideal.Quotient.mk (𝔪.map (algebraMap A B)) z := by
+    intro c hc
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective c
+    rw [Ideal.Quotient.algebraMap_quotient_map_quotient, Ideal.Quotient.eq] at hc
+    obtain ⟨b, hb⟩ := hI _ hc
+    exact hz ⟨a - b, by rw [map_sub, hb]; abel⟩
+  have hnt : Nontrivial (B ⧸ 𝔪.map (algebraMap A B)) :=
+    ⟨⟨0, Ideal.Quotient.mk _ z, by simpa using hz' 0⟩⟩
+  refine LinearIndependent.pair_iff.2 fun s t hst => ?_
+  by_cases ht : t = 0
+  · subst ht
+    rw [zero_smul, add_zero, Algebra.smul_def, mul_one] at hst
+    exact ⟨(map_eq_zero_iff _ (algebraMap (A ⧸ 𝔪) _).injective).1 hst, rfl⟩
+  · refine (hz' (-(t⁻¹ * s)) ?_).elim
+    rw [Algebra.smul_def, Algebra.smul_def, mul_one] at hst
+    have hinv : algebraMap (A ⧸ 𝔪) (B ⧸ 𝔪.map (algebraMap A B)) t⁻¹ *
+        algebraMap (A ⧸ 𝔪) (B ⧸ 𝔪.map (algebraMap A B)) t = 1 := by
+      rw [← map_mul, inv_mul_cancel₀ ht, map_one]
+    rw [map_neg, map_mul]
+    linear_combination (-algebraMap (A ⧸ 𝔪) (B ⧸ 𝔪.map (algebraMap A B)) t⁻¹) * hst +
+      Ideal.Quotient.mk (𝔪.map (algebraMap A B)) z * hinv
+
+/-- `B = A + A z` for every `z ∉ A`, once `𝔪B ⊂ A` and `dim_{A/𝔪} B/𝔪B ≤ 2`. -/
+lemma exists_sub_smul_mem [𝔪.IsMaximal]
+    (hI : ∀ w ∈ 𝔪.map (algebraMap A B), w ∈ Set.range (algebraMap A B))
+    [Module.Finite (A ⧸ 𝔪) (B ⧸ 𝔪.map (algebraMap A B))]
+    (h2 : finrank (A ⧸ 𝔪) (B ⧸ 𝔪.map (algebraMap A B)) ≤ 2)
+    {z : B} (hz : z ∉ Set.range (algebraMap A B)) (y : B) :
+    ∃ a : A, y - a • z ∈ Set.range (algebraMap A B) := by
+  let := Ideal.Quotient.field 𝔪
+  have mk_alg (a : A) : Ideal.Quotient.mk (𝔪.map (algebraMap A B)) (algebraMap A B a) =
+      algebraMap (A ⧸ 𝔪) _ (Ideal.Quotient.mk 𝔪 a) :=
+    (Ideal.Quotient.algebraMap_quotient_map_quotient a).symm
+  have hli := linearIndependent_one_mk 𝔪 hI hz
+  have htop : Submodule.span (A ⧸ 𝔪) (Set.range ![1, Ideal.Quotient.mk (𝔪.map (algebraMap A B)) z])
+      = ⊤ := by
+    refine Submodule.eq_top_of_finrank_eq (le_antisymm (Submodule.finrank_le _) ?_)
+    rw [finrank_span_eq_card hli, Fintype.card_fin]
+    exact h2
+  have hy := htop ▸ Submodule.mem_top (x := Ideal.Quotient.mk (𝔪.map (algebraMap A B)) y)
+  obtain ⟨c, hc⟩ := (Submodule.mem_span_range_iff_exists_fun _).1 hy
+  rw [Fin.sum_univ_two, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_zero] at hc
+  obtain ⟨a₀, ha₀⟩ := Ideal.Quotient.mk_surjective (c 0)
+  obtain ⟨a₁, ha₁⟩ := Ideal.Quotient.mk_surjective (c 1)
+  refine ⟨a₁, ?_⟩
+  have hw : y - a₁ • z - algebraMap A B a₀ ∈ 𝔪.map (algebraMap A B) := by
+    rw [← Ideal.Quotient.eq_zero_iff_mem, map_sub, map_sub, ← hc, ← ha₀, ← ha₁, Algebra.smul_def,
+      Algebra.smul_def, Algebra.smul_def, map_mul, mk_alg, mk_alg, mul_one]
+    ring
+  obtain ⟨b, hb⟩ := hI _ hw
+  exact ⟨b + a₀, by rw [map_add, hb]; abel⟩
+
+
+/-- **Folder 128, Prop. 2, first assertion, over a noetherian base** (Grothendieck, pages
+14–18). Let `𝔪` be a maximal ideal of a noetherian ring `A`, `B` a finite `A`-algebra (the page's
+`A'`) every maximal ideal of which is the kernel of an `A`-algebra map `B → A/𝔪` (all lie over
+`𝔪`, with trivial residue extensions), and `J ⊂ Δ` an ideal of `B ⊗_A B` such that
+* (exactness of `A → B ⇉ (B ⊗_A B)/J`) `δ(x) ∈ J` only for `x ∈ A`;
+* (`δ(x)` generates `Δ/J`) `Δ ⊂ (δ(x)) + J` for every `x ∉ A`.
+Then `𝔪B ⊂ A` (so `𝔪B = 𝔪` when `A → B` is injective) and `B/A` has length `≤ 1`.
+Neither symmetry nor transitivity of `J` is used. -/
+theorem colength_le_one [𝔪.IsMaximal] [Module.Finite A B] [IsNoetherianRing A]
+    (hres : ∀ n : Ideal B, n.IsMaximal → ∃ χ : B →ₐ[A] A ⧸ 𝔪, RingHom.ker χ = n)
+    {J : Ideal (B ⊗[A] B)} (hJ : J ≤ diag A B)
+    (hexact : ∀ x : B, dl A B x ∈ J → x ∈ Set.range (algebraMap A B))
+    (hgen : ∀ x : B, x ∉ Set.range (algebraMap A B) → diag A B ≤ Ideal.span {dl A B x} ⊔ J) :
+    (∀ w ∈ 𝔪.map (algebraMap A B), w ∈ Set.range (algebraMap A B)) ∧
+      Module.length A (B ⧸ LinearMap.range (Algebra.linearMap A B)) ≤ 1 := by
+  have hI := fun w (hw : w ∈ 𝔪.map (algebraMap A B)) => map_le_range 𝔪 hres hexact hgen hw
+  refine ⟨hI, ?_⟩
+  have : Module.Finite (A ⧸ 𝔪) (B ⧸ 𝔪.map (algebraMap A B)) :=
+    Module.Finite.of_restrictScalars_finite A _ _
+  -- `B = A + A z` for every `z ∉ A`
+  have key : ∀ z : B, z ∉ Set.range (algebraMap A B) → ∀ y : B,
+      ∃ a : A, y - a • z ∈ Set.range (algebraMap A B) := by
+    rcases finrank_le_two_or 𝔪 hres hJ hgen with h2 | hD
+    · exact fun z hz y => exists_sub_smul_mem 𝔪 hI h2 hz y
+    · exact fun z hz => (hz (hexact z (hD (dl_mem z)))).elim
+  set Q := B ⧸ LinearMap.range (Algebra.linearMap A B)
+  have hmem (x : B) : x ∈ LinearMap.range (Algebra.linearMap A B) ↔
+      x ∈ Set.range (algebraMap A B) := by simp [Set.mem_range]
+  by_cases hQ : Subsingleton Q
+  · rw [Module.length_eq_zero_iff.2 hQ]; exact zero_le_one
+  rw [not_subsingleton_iff_nontrivial] at hQ
+  have : IsSimpleOrder (Submodule A Q) := ⟨fun N => by
+    refine or_iff_not_imp_left.2 fun hN => ?_
+    obtain ⟨q, hq, hq0⟩ := Submodule.exists_mem_ne_zero_of_ne_bot hN
+    obtain ⟨z, rfl⟩ := Submodule.Quotient.mk_surjective _ q
+    have hz : z ∉ Set.range (algebraMap A B) := fun h =>
+      hq0 ((Submodule.Quotient.mk_eq_zero _).2 ((hmem z).2 h))
+    refine eq_top_iff.2 fun p _ => ?_
+    obtain ⟨y, rfl⟩ := Submodule.Quotient.mk_surjective _ p
+    obtain ⟨a, ha⟩ := key z hz y
+    have : Submodule.Quotient.mk (p := LinearMap.range (Algebra.linearMap A B)) y =
+        a • Submodule.Quotient.mk z := by
+      rw [← Submodule.Quotient.mk_smul, eq_comm, Submodule.Quotient.eq, ← neg_sub, neg_mem_iff]
+      exact (hmem _).2 ha
+    rw [this]
+    exact N.smul_mem a hq⟩
+  have : IsSimpleModule A Q := ⟨⟩
+  rw [Module.length_eq_one_iff.2 this]
+
+/-!
+### Prop. 2, last assertion: reduction modulo `𝔪` (Prop. 3 and Cor. 2 of N° 1)
+-/
+
+variable (A B) in
+/-- `p₁₂ : a ⊗ b ↦ a ⊗ b ⊗ 1`, over `A`. -/
+noncomputable abbrev q12 : B ⊗[A] B →ₐ[A] (B ⊗[A] B) ⊗[A] B :=
+  Algebra.TensorProduct.includeLeft
+
+variable (A B) in
+/-- `p₁₃ : a ⊗ b ↦ a ⊗ 1 ⊗ b`, over `A`. -/
+noncomputable abbrev q13 : B ⊗[A] B →ₐ[A] (B ⊗[A] B) ⊗[A] B :=
+  Algebra.TensorProduct.map Algebra.TensorProduct.includeLeft (AlgHom.id A B)
+
+variable (A B) in
+/-- `p₂₃ : a ⊗ b ↦ 1 ⊗ a ⊗ b`, over `A`. -/
+noncomputable abbrev q23 : B ⊗[A] B →ₐ[A] (B ⊗[A] B) ⊗[A] B :=
+  Algebra.TensorProduct.map Algebra.TensorProduct.includeRight (AlgHom.id A B)
+
+/-- An equivalence ideal of `B ⊗_A B` over any commutative ring `A` (as `IsEquivalenceIdeal`
+over a field). -/
+structure IsEquivIdeal (I : Ideal (B ⊗[A] B)) : Prop where
+  /-- Reflexivity: `I ⊂ Δ`. -/
+  refl : I ≤ diag A B
+  /-- Symmetry: `I` is stable under `a ⊗ b ↦ b ⊗ a`. -/
+  symm : ∀ t ∈ I, Algebra.TensorProduct.comm A B B t ∈ I
+  /-- Transitivity: `p₁₃(I) ⊂ p₁₂(I) + p₂₃(I)`. -/
+  trans : I.map (q13 A B) ≤ I.map (q12 A B) ⊔ I.map (q23 A B)
+
+/-- Scalars of `A/𝔪` pass across `⊗_A` on `B/𝔪B`. -/
+instance compatibleSMul : CompatibleSMul A (A ⧸ 𝔪) (B ⧸ 𝔪.map (algebraMap A B))
+    (B ⧸ 𝔪.map (algebraMap A B)) where
+  smul_tmul c m n := by
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective c
+    change (algebraMap A (A ⧸ 𝔪) a • m) ⊗ₜ n = m ⊗ₜ (algebraMap A (A ⧸ 𝔪) a • n)
+    rw [algebraMap_smul, algebraMap_smul, smul_tmul]
+
+/-- Reduction modulo `𝔪`: `Θ : B ⊗_A B → B₀ ⊗_k B₀`, `B₀ = B/𝔪B`, `k = A/𝔪`. -/
+noncomputable def theta : B ⊗[A] B →ₐ[A]
+    (B ⧸ 𝔪.map (algebraMap A B)) ⊗[A ⧸ 𝔪] (B ⧸ 𝔪.map (algebraMap A B)) :=
+  (Algebra.TensorProduct.equivOfCompatibleSMul (A ⧸ 𝔪) A A _ _).toAlgHom.comp
+    (Algebra.TensorProduct.map (Ideal.Quotient.mkₐ A _) (Ideal.Quotient.mkₐ A _))
+
+lemma theta_tmul (a b : B) :
+    theta 𝔪 (a ⊗ₜ b) = Ideal.Quotient.mk _ a ⊗ₜ Ideal.Quotient.mk _ b := rfl
+
+/-- `Θ₃ : B ⊗_A B ⊗_A B → B₀ ⊗_k B₀ ⊗_k B₀`. -/
+noncomputable def theta3 : (B ⊗[A] B) ⊗[A] B →ₐ[A]
+    ((B ⧸ 𝔪.map (algebraMap A B)) ⊗[A ⧸ 𝔪] (B ⧸ 𝔪.map (algebraMap A B))) ⊗[A ⧸ 𝔪]
+      (B ⧸ 𝔪.map (algebraMap A B)) :=
+  Algebra.TensorProduct.lift
+    (((Algebra.TensorProduct.includeLeft (R := A ⧸ 𝔪) (S := A ⧸ 𝔪)).restrictScalars A).comp
+      (theta 𝔪))
+    (((Algebra.TensorProduct.includeRight (R := A ⧸ 𝔪)).restrictScalars A).comp
+      (Ideal.Quotient.mkₐ A _))
+    fun _ _ => Commute.all (S := ((B ⧸ 𝔪.map (algebraMap A B)) ⊗[A ⧸ 𝔪]
+      (B ⧸ 𝔪.map (algebraMap A B))) ⊗[A ⧸ 𝔪] (B ⧸ 𝔪.map (algebraMap A B))) _ _
+
+lemma theta_surjective : Function.Surjective (theta 𝔪 : B ⊗[A] B → _) :=
+  (Algebra.TensorProduct.equivOfCompatibleSMul (A ⧸ 𝔪) A A _ _).surjective.comp
+    (Algebra.TensorProduct.map_surjective _ _ Ideal.Quotient.mk_surjective
+      Ideal.Quotient.mk_surjective)
+
+lemma theta_comm (t : B ⊗[A] B) : theta 𝔪 (Algebra.TensorProduct.comm A B B t) =
+    Algebra.TensorProduct.comm (A ⧸ 𝔪) _ _ (theta 𝔪 t) := by
+  induction t using TensorProduct.inductionOn with
+  | tmul a b => rfl
+  | add s t hs ht => simp only [map_add, hs, ht]
+
+lemma theta_lmul (t : B ⊗[A] B) : Algebra.TensorProduct.lmul' (A ⧸ 𝔪) (theta 𝔪 t) =
+    Ideal.Quotient.mk _ (Algebra.TensorProduct.lmul' A t) := by
+  induction t using TensorProduct.inductionOn with
+  | tmul a b => simp [theta_tmul]
+  | add s t hs ht => simp only [map_add, hs, ht]
+
+/-- `Ker Θ ⊂ 𝔪 (B ⊗_A B)` (right exactness of `⊗`). -/
+lemma ker_theta_le {t : B ⊗[A] B} (ht : theta 𝔪 t = 0) :
+    t ∈ 𝔪.map (algebraMap A (B ⊗[A] B)) := by
+  have h0 : Algebra.TensorProduct.map (Ideal.Quotient.mkₐ A (𝔪.map (algebraMap A B)))
+      (Ideal.Quotient.mkₐ A (𝔪.map (algebraMap A B))) t = 0 :=
+    (Algebra.TensorProduct.equivOfCompatibleSMul (A ⧸ 𝔪) A A _ _).injective (by
+      rw [map_zero]; exact ht)
+  rw [← RingHom.mem_ker, Algebra.TensorProduct.map_ker _ _ Ideal.Quotient.mk_surjective
+    Ideal.Quotient.mk_surjective] at h0
+  have hIK (f : B →ₐ[A] B ⊗[A] B) :
+      𝔪.map (algebraMap A B) ≤ (𝔪.map (algebraMap A (B ⊗[A] B))).comap f :=
+    Ideal.map_le_iff_le_comap.2 fun m hm => by
+      rw [Ideal.mem_comap, Ideal.mem_comap, AlgHom.commutes]
+      exact Ideal.mem_map_of_mem _ hm
+  refine (sup_le (Ideal.map_le_iff_le_comap.2 fun b hb => hIK _ ?_)
+    (Ideal.map_le_iff_le_comap.2 fun b hb => hIK _ ?_)) h0 <;>
+    exact Ideal.Quotient.eq_zero_iff_mem.1 hb
+
+/-- Prop. 3 of N° 1 for `I = 𝔪`: when `𝔪B ⊂ A`, every `t ∈ 𝔪 (B ⊗_A B)` is `1 ⊗ μ(t)`, so
+`Δ ∩ 𝔪 (B ⊗_A B) = 0`. -/
+lemma eq_tmul_lmul (hI : ∀ w ∈ 𝔪.map (algebraMap A B), w ∈ Set.range (algebraMap A B))
+    {t : B ⊗[A] B} (ht : t ∈ 𝔪.map (algebraMap A (B ⊗[A] B))) :
+    t = 1 ⊗ₜ Algebra.TensorProduct.lmul' A t := by
+  rw [← Submodule.restrictScalars_mem A, ← Ideal.smul_top_eq_map] at ht
+  refine Submodule.smul_induction_on ht (fun m hm s hs => ?_) fun x y hx hy => ?_
+  · clear hs
+    induction s using TensorProduct.inductionOn with
+    | tmul a b =>
+      have hma : m • a ∈ 𝔪.map (algebraMap A B) := by
+        rw [Algebra.smul_def]; exact Ideal.mul_mem_right _ _ (Ideal.mem_map_of_mem _ hm)
+      obtain ⟨c, hc⟩ := hI _ hma
+      rw [smul_tmul', ← hc, Algebra.TensorProduct.lmul'_apply_tmul, Algebra.algebraMap_eq_smul_one,
+        smul_tmul, smul_mul_assoc, one_mul]
+    | add s₁ s₂ h₁ h₂ => rw [smul_add, map_add, tmul_add, ← h₁, ← h₂]
+  · rw [map_add, tmul_add, ← hx, ← hy]
+
+/-- `Θ` is injective on `Δ` once `𝔪B ⊂ A` (Prop. 3 of N° 1: `Δ ≅ Δ₀`). -/
+lemma eq_zero_of_theta (hI : ∀ w ∈ 𝔪.map (algebraMap A B), w ∈ Set.range (algebraMap A B))
+    {t : B ⊗[A] B} (htD : t ∈ diag A B) (ht : theta 𝔪 t = 0) : t = 0 := by
+  rw [eq_tmul_lmul 𝔪 hI (ker_theta_le 𝔪 ht), (RingHom.mem_ker).1 htD, tmul_zero]
+
+section Field
+
+variable [𝔪.IsMaximal]
+
+attribute [local instance] Ideal.Quotient.field
+
+lemma theta_dl (x : B) :
+    theta 𝔪 (dl A B x) = Colength.delta (A ⧸ 𝔪) _ (Ideal.Quotient.mk _ x) := by
+  rw [dl_apply, map_sub, theta_tmul, theta_tmul, map_one, Colength.delta_apply]
+
+lemma theta3_q12 (t : B ⊗[A] B) : theta3 𝔪 (q12 A B t) = p12 (A ⧸ 𝔪) _ (theta 𝔪 t) := by
+  induction t using TensorProduct.inductionOn with
+  | tmul a b => simp [theta3, theta_tmul]
+  | add s t hs ht => simp only [map_add, hs, ht]
+
+lemma theta3_q13 (t : B ⊗[A] B) : theta3 𝔪 (q13 A B t) = p13 (A ⧸ 𝔪) _ (theta 𝔪 t) := by
+  induction t using TensorProduct.inductionOn with
+  | tmul a b => simp [theta3, theta_tmul]
+  | add s t hs ht => simp only [map_add, hs, ht]
+
+lemma theta3_q23 (t : B ⊗[A] B) : theta3 𝔪 (q23 A B t) = p23 (A ⧸ 𝔪) _ (theta 𝔪 t) := by
+  induction t using TensorProduct.inductionOn with
+  | tmul a b => simp [theta3, theta_tmul]
+  | add s t hs ht => simp only [map_add, hs, ht]
+
+/-- Cor. 2 of N° 1 in the direction used: the reduction `Θ(J)` of an equivalence ideal is an
+equivalence ideal of `B₀ ⊗_k B₀`. -/
+lemma isEquivalenceIdeal_map {J : Ideal (B ⊗[A] B)} (hJ : IsEquivIdeal J) :
+    IsEquivalenceIdeal (J.map (theta 𝔪)) where
+  refl := Ideal.map_le_iff_le_comap.2 fun j hj => by
+    rw [Ideal.mem_comap, RingHom.mem_ker, theta_lmul, (RingHom.mem_ker).1 (hJ.refl hj), map_zero]
+  symm t ht := by
+    obtain ⟨j, hj, rfl⟩ := (Ideal.mem_map_iff_of_surjective _ (theta_surjective 𝔪)).1 ht
+    rw [← theta_comm]
+    exact Ideal.mem_map_of_mem _ (hJ.symm j hj)
+  trans := by
+    rw [Ideal.map_le_iff_le_comap, Ideal.map_le_iff_le_comap]
+    intro j hj
+    rw [Ideal.mem_comap, Ideal.mem_comap, ← theta3_q13]
+    have h := Ideal.mem_map_of_mem (theta3 𝔪) (hJ.trans (Ideal.mem_map_of_mem (q13 A B) hj))
+    refine (Ideal.map_le_iff_le_comap.2 (sup_le ?_ ?_)) h <;>
+      refine Ideal.map_le_iff_le_comap.2 fun i hi => ?_ <;>
+      rw [Ideal.mem_comap, Ideal.mem_comap]
+    · rw [theta3_q12]
+      exact Ideal.mem_sup_left (Ideal.mem_map_of_mem _ (Ideal.mem_map_of_mem _ hi))
+    · rw [theta3_q23]
+      exact Ideal.mem_sup_right (Ideal.mem_map_of_mem _ (Ideal.mem_map_of_mem _ hi))
+
+/-- **Folder 128, Prop. 2, last assertion, over a noetherian base** (pages 14–18): under the
+hypotheses of `colength_le_one`, if `J` is moreover an equivalence ideal and `B/A` has length
+`1`, then `J = 0`, i.e. `(B ⊗_A B)/J = B ⊗_A B`. The proof is the page's reduction: `𝔪B ⊂ A`, so
+`Θ : B ⊗_A B → B₀ ⊗_k B₀` is injective on `Δ` (Prop. 3 of N° 1), `Θ(J)` is an equivalence ideal
+(Cor. 2), `dim_k B₀ = 2`, and `eq_bot_or_eq_ker` leaves `Θ(J) = 0` or `Θ(J) = Δ₀`; the second
+would put `δ(z)` in `J` for some `z ∉ A`. -/
+theorem eq_bot_of_length_eq_one [Module.Finite A B] [IsNoetherianRing A]
+    (hres : ∀ n : Ideal B, n.IsMaximal → ∃ χ : B →ₐ[A] A ⧸ 𝔪, RingHom.ker χ = n)
+    {J : Ideal (B ⊗[A] B)} (hJ : IsEquivIdeal J)
+    (hexact : ∀ x : B, dl A B x ∈ J → x ∈ Set.range (algebraMap A B))
+    (hgen : ∀ x : B, x ∉ Set.range (algebraMap A B) → diag A B ≤ Ideal.span {dl A B x} ⊔ J)
+    (h1 : Module.length A (B ⧸ LinearMap.range (Algebra.linearMap A B)) = 1) : J = ⊥ := by
+  have hI := fun w (hw : w ∈ 𝔪.map (algebraMap A B)) => map_le_range 𝔪 hres hexact hgen hw
+  obtain ⟨z, hz⟩ : ∃ z : B, z ∉ Set.range (algebraMap A B) := by
+    by_contra! h
+    have : Subsingleton (B ⧸ LinearMap.range (Algebra.linearMap A B)) :=
+      subsingleton_of_forall_eq 0 fun q => by
+        obtain ⟨y, rfl⟩ := Submodule.Quotient.mk_surjective _ q
+        obtain ⟨c, hc⟩ := h y
+        exact (Submodule.Quotient.mk_eq_zero _).2 ⟨c, hc⟩
+    rw [Module.length_eq_zero_iff.2 this] at h1
+    exact zero_ne_one h1
+  have : Module.Finite (A ⧸ 𝔪) (B ⧸ 𝔪.map (algebraMap A B)) :=
+    Module.Finite.of_restrictScalars_finite A _ _
+  have h2 : finrank (A ⧸ 𝔪) (B ⧸ 𝔪.map (algebraMap A B)) = 2 := by
+    rcases finrank_le_two_or 𝔪 hres hJ.refl hgen with h | hD
+    · refine le_antisymm h ?_
+      simpa using (linearIndependent_one_mk 𝔪 hI hz).fintype_card_le_finrank
+    · exact absurd (hexact z (hD (dl_mem z))) hz
+  rcases eq_bot_or_eq_ker h2 (isEquivalenceIdeal_map 𝔪 hJ) with h0 | hD0
+  · refine eq_bot_iff.2 fun j hj => (Ideal.mem_bot).2 (eq_zero_of_theta 𝔪 hI (hJ.refl hj) ?_)
+    rw [← Ideal.mem_bot, ← h0]
+    exact Ideal.mem_map_of_mem _ hj
+  · have hzJ : theta 𝔪 (dl A B z) ∈ J.map (theta 𝔪) := by
+      rw [hD0, theta_dl]; exact Colength.delta_mem _
+    obtain ⟨j, hj, e⟩ := (Ideal.mem_map_iff_of_surjective _ (theta_surjective 𝔪)).1 hzJ
+    have := eq_zero_of_theta 𝔪 hI (sub_mem (hJ.refl hj) (dl_mem z)) (by rw [map_sub, e, sub_self])
+    rw [sub_eq_zero] at this
+    exact (hz (hexact z (this ▸ hj))).elim
+
+end Field
+
+/-- **Folder 128, Prop. 2, as stated** (Grothendieck, pages 14–18), for `A` local noetherian (in
+particular local artinian) with maximal ideal `𝔪` and residue field `k = A/𝔪`, `B` (the page's
+`A'`) a finite `A`-algebra with trivial residue extensions, and `J` an equivalence ideal of
+`B ⊗_A B` such that `A → B ⇉ (B ⊗_A B)/J` is exact and `δ(x)` generates `Δ/J` for every
+`x ∉ A`: `𝔪B ⊂ A`, `B/A` has length `≤ 1`, and if the length is `1` then `J = 0`. -/
+theorem prop2 [IsLocalRing A] [IsNoetherianRing A] [Module.Finite A B]
+    (hres : ∀ n : Ideal B, n.IsMaximal →
+      ∃ χ : B →ₐ[A] A ⧸ IsLocalRing.maximalIdeal A, RingHom.ker χ = n)
+    {J : Ideal (B ⊗[A] B)} (hJ : IsEquivIdeal J)
+    (hexact : ∀ x : B, dl A B x ∈ J → x ∈ Set.range (algebraMap A B))
+    (hgen : ∀ x : B, x ∉ Set.range (algebraMap A B) → diag A B ≤ Ideal.span {dl A B x} ⊔ J) :
+    (∀ w ∈ (IsLocalRing.maximalIdeal A).map (algebraMap A B), w ∈ Set.range (algebraMap A B)) ∧
+      Module.length A (B ⧸ LinearMap.range (Algebra.linearMap A B)) ≤ 1 ∧
+      (Module.length A (B ⧸ LinearMap.range (Algebra.linearMap A B)) = 1 → J = ⊥) :=
+  have h := colength_le_one _ hres hJ.refl hexact hgen
+  ⟨h.1, h.2, eq_bot_of_length_eq_one _ hres hJ hexact hgen⟩
+
+end Grothendieck.Folder128.ColengthLocal
+
+namespace Grothendieck.Folder128.ColengthLocal
+
+open Module
+
+variable {A B : Type*} [CommRing A] [CommRing B] [Algebra A B] (𝔪 : Ideal A)
+
+/-- `0` is an equivalence ideal of `B ⊗_A B`. -/
+theorem isEquivIdeal_bot : IsEquivIdeal (⊥ : Ideal (B ⊗[A] B)) where
+  refl := bot_le
+  symm t ht := by rw [Ideal.mem_bot.1 ht, map_zero]; exact zero_mem _
+  trans := by rw [Ideal.map_bot]; exact bot_le
+
+/-- `Δ` is an equivalence ideal of `B ⊗_A B`. -/
+theorem isEquivIdeal_diag : IsEquivIdeal (diag A B) where
+  refl := le_rfl
+  symm t ht := RingHom.mem_ker.2 <| (LinearMap.mul'_comm (R := A) t).trans ht
+  trans := by
+    rw [show diag A B = _ from (KaehlerDifferential.span_range_eq_ideal A B).symm,
+      Ideal.map_span, Ideal.span_le]
+    rintro _ ⟨_, ⟨s, rfl⟩, rfl⟩
+    rw [show q13 A B ((1 : B) ⊗ₜ[A] s - s ⊗ₜ 1) =
+        q12 A B ((1 : B) ⊗ₜ[A] s - s ⊗ₜ 1) + q23 A B ((1 : B) ⊗ₜ[A] s - s ⊗ₜ 1) by
+      simp [sub_tmul]]
+    exact add_mem (Ideal.mem_sup_left (Ideal.mem_map_of_mem _ (Ideal.subset_span ⟨s, rfl⟩)))
+      (Ideal.mem_sup_right (Ideal.mem_map_of_mem _ (Ideal.subset_span ⟨s, rfl⟩)))
+
+section Field
+
+variable [𝔪.IsMaximal]
+
+attribute [local instance] Ideal.Quotient.field
+
+/-- **Folder 128, Prop. 1 (i)** (Grothendieck, pages 12–13), over any commutative ring: if
+`A → B` is injective and `B/A ≅ A/𝔪` as `A`-modules, the equivalence ideals of `B ⊗_A B` are
+exactly `0` and `Δ`. The page's reduction: `𝔪B ⊂ A`, `Θ` is injective on `Δ` (Prop. 3 of N° 1),
+`Θ(J)` is an equivalence ideal of `B₀ ⊗_k B₀` with `dim_k B₀ = 2` (Cor. 2), and
+`eq_bot_or_eq_ker` is the case `A = k`. -/
+theorem prop1_i (e : (B ⧸ LinearMap.range (Algebra.linearMap A B)) ≃ₗ[A] A ⧸ 𝔪)
+    {J : Ideal (B ⊗[A] B)} : IsEquivIdeal J ↔ J = ⊥ ∨ J = diag A B := by
+  refine ⟨fun hJ => ?_, by rintro (rfl | rfl); exacts [isEquivIdeal_bot, isEquivIdeal_diag]⟩
+  have hmem : ∀ x : B, x ∈ LinearMap.range (Algebra.linearMap A B) ↔
+      x ∈ Set.range (algebraMap A B) := fun x => by simp [Set.mem_range]
+  have hmk : ∀ x : B, e (Submodule.Quotient.mk x) = 0 → x ∈ Set.range (algebraMap A B) :=
+    fun x hx => (hmem x).1 ((Submodule.Quotient.mk_eq_zero _).1
+      (e.injective (hx.trans (map_zero e).symm)))
+  -- `𝔪B ⊂ A`, since `𝔪` kills `B/A ≅ A/𝔪`
+  have hI : ∀ w ∈ 𝔪.map (algebraMap A B), w ∈ Set.range (algebraMap A B) := by
+    intro w hw
+    rw [← hmem]
+    rw [← Submodule.restrictScalars_mem A, ← Ideal.smul_top_eq_map] at hw
+    refine Submodule.smul_induction_on hw (fun m hm b _ => (hmem _).2 (hmk _ ?_))
+      fun x y hx hy => add_mem hx hy
+    rw [Submodule.Quotient.mk_smul, map_smul, Algebra.smul_def,
+      Ideal.Quotient.algebraMap_eq, Ideal.Quotient.eq_zero_iff_mem.2 hm, zero_mul]
+  obtain ⟨z, hz1⟩ := Submodule.Quotient.mk_surjective _ (e.symm 1)
+  have hz1' : e (Submodule.Quotient.mk z) = 1 := by rw [hz1, e.apply_symm_apply]
+  have hz : z ∉ Set.range (algebraMap A B) := fun h => by
+    have := hz1'
+    rw [(Submodule.Quotient.mk_eq_zero _).2 ((hmem z).2 h), map_zero] at this
+    exact zero_ne_one this
+  -- `B₀ = k ⊕ k z̄`
+  have hli := linearIndependent_one_mk 𝔪 hI hz
+  have hsp : ⊤ ≤ Submodule.span (A ⧸ 𝔪)
+      (Set.range ![1, Ideal.Quotient.mk (𝔪.map (algebraMap A B)) z]) := by
+    intro q _
+    obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective q
+    obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective (e (Submodule.Quotient.mk y))
+    obtain ⟨c, hc⟩ := hmk (y - a • z) (by
+      rw [Submodule.Quotient.mk_sub, Submodule.Quotient.mk_smul, map_sub, map_smul, hz1', ← ha,
+        Algebra.smul_def, mul_one, Ideal.Quotient.algebraMap_eq, sub_self])
+    rw [show y = algebraMap A B c + a • z by rw [hc]; abel, map_add, Algebra.smul_def, map_mul,
+      ← Ideal.Quotient.algebraMap_quotient_map_quotient,
+      ← Ideal.Quotient.algebraMap_quotient_map_quotient, Algebra.algebraMap_eq_smul_one,
+      ← Algebra.smul_def]
+    exact add_mem (Submodule.smul_mem _ _ (Submodule.subset_span ⟨0, rfl⟩))
+      (Submodule.smul_mem _ _ (Submodule.subset_span ⟨1, rfl⟩))
+  let bas := Basis.mk hli hsp
+  have : Module.Finite (A ⧸ 𝔪) (B ⧸ 𝔪.map (algebraMap A B)) := Module.Finite.of_basis bas
+  have h2 : finrank (A ⧸ 𝔪) (B ⧸ 𝔪.map (algebraMap A B)) = 2 := by
+    rw [Module.finrank_eq_card_basis bas, Fintype.card_fin]
+  rcases eq_bot_or_eq_ker h2 (isEquivalenceIdeal_map 𝔪 hJ) with h0 | hD0
+  · refine Or.inl (eq_bot_iff.2 fun j hj => (Ideal.mem_bot).2
+      (eq_zero_of_theta 𝔪 hI (hJ.refl hj) ?_))
+    rw [← Ideal.mem_bot, ← h0]
+    exact Ideal.mem_map_of_mem _ hj
+  · refine Or.inr (le_antisymm hJ.refl fun d hd => ?_)
+    have hdJ : theta 𝔪 d ∈ J.map (theta 𝔪) := by
+      rw [hD0, RingHom.mem_ker, theta_lmul, (RingHom.mem_ker).1 hd, map_zero]
+    obtain ⟨j, hj, hjd⟩ := (Ideal.mem_map_iff_of_surjective _ (theta_surjective 𝔪)).1 hdJ
+    have := eq_zero_of_theta 𝔪 hI (sub_mem hd (hJ.refl hj)) (by rw [map_sub, hjd, sub_self])
+    rw [sub_eq_zero] at this
+    exact this ▸ hj
+
+end Field
+
+end Grothendieck.Folder128.ColengthLocal

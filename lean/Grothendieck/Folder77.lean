@@ -1243,3 +1243,390 @@ theorem extension_across_two_counterexample :
 end ExtensionAcrossTwoExample
 
 end Grothendieck.Folder77
+
+
+/-!
+## Page 85: the Proposition with « finie étale », c) ⇒ a)
+
+The reading restores « finie étale » in condition c) of the Proposition of page 85: `2` regular
+in `A`, `A₀ = A/2A` an integrally closed domain, `Δ ∉ 2A`; if a finite étale `A_Δ`-algebra `B_Δ`
+satisfies `(B_Δ)₂ ≅ A_{2Δ}[U]/(U² − Δ)`, then `Δ = b² − 4c` in `A` (`prop85_c_imp_a`). No
+noetherian hypothesis is used. The proof does not pass through a monogenic presentation. With
+`R = (A_Δ)_{2A_Δ}` (local, maximal ideal `2R`) and `C = R ⊗ B_Δ` realised as a localisation of
+`B_Δ`, `C` is finite, unramified, `2`-torsion free and contains `v` with `v² = 4ⁿΔ`. Then
+(`prop85_local`): `C/2C` is unramified over the residue field, hence reduced, so `v` descends to
+`u ∈ C` with `u² = Δ`; at a maximal ideal `Q` of `C` over `2R`, `C/Q` is separable over `R/2R`
+(characteristic `2`), so `u mod Q` lies in `R/2R` and `Δ ≡ c² (mod 2R)`; reducedness of `C/2C`
+again gives `u = c + 2s`, whence `Δ − c² ∈ 4C ∩ R = 4R`. Back in `A` (`exists_of_sq_sub`), the
+root of `Δ₀` in `Frac A₀` is integral, hence in `A₀`, and `τ ∉ 2A`, `τ y ∈ 4A ⇒ y ∈ 4A`.
+Consequences: `B_Δ = ℤ[1/3][U]/(U² − 3)` is not étale (`B3_not_etale`), and an isomorphism
+between two such extensions compatible with the identifications after inverting `2` is unique
+(`prop85_iso_unique`). That such an isomorphism exists, a) ⇒ c), and Corollary 3 (p. 63) are
+not formalised.
+-/
+
+namespace Grothendieck.Folder77
+
+section Prop85Local
+
+open IsLocalRing Polynomial
+
+variable {R C : Type*} [CommRing R] [IsLocalRing R] [CommRing C] [Algebra R C]
+
+/-- A quotient of a finite unramified algebra over a local ring `R` by an ideal over the maximal
+ideal is finite and unramified over the residue field. -/
+theorem quot_unramified_finite [Algebra.FormallyUnramified R C] [Module.Finite R C]
+    (I : Ideal C) [I.LiesOver (maximalIdeal R)] :
+    Algebra.FormallyUnramified (R ⧸ maximalIdeal R) (C ⧸ I) ∧
+      Module.Finite (R ⧸ maximalIdeal R) (C ⧸ I) := by
+  have : Algebra.FormallyUnramified R (C ⧸ I) := inferInstance
+  exact ⟨.of_restrictScalars R _ _, .of_restrictScalars_finite R _ _⟩
+
+/-- Such a quotient is reduced. -/
+theorem quot_isReduced [Algebra.FormallyUnramified R C] [Module.Finite R C]
+    (I : Ideal C) [I.LiesOver (maximalIdeal R)] : IsReduced (C ⧸ I) := by
+  obtain ⟨_, _⟩ := quot_unramified_finite (R := R) I
+  let := Ideal.Quotient.field (maximalIdeal R)
+  exact Algebra.FormallyUnramified.isReduced_of_field (R ⧸ maximalIdeal R) (C ⧸ I)
+
+/-- In a reduced quotient `C/I`, `x² ∈ I` implies `x ∈ I`. -/
+theorem sq_mem_quot {I : Ideal C} (hI : IsReduced (C ⧸ I)) {x : C} (hx : x ^ 2 ∈ I) : x ∈ I := by
+  rw [← Ideal.Quotient.eq_zero_iff_mem] at hx ⊢
+  exact IsReduced.eq_zero _ ⟨2, by rw [← map_pow]; exact hx⟩
+
+/-- In a field `L` of characteristic `2`, separable over `K`, an element whose square lies in
+`K` lies in `K`. -/
+theorem mem_range_of_sq_of_char_two {K L : Type*} [Field K] [Field L] [Algebra K L]
+    [Algebra.IsSeparable K L] (h2 : (2 : K) = 0) {x : L} (hx : x ^ 2 ∈ (algebraMap K L).range) :
+    x ∈ (algebraMap K L).range := by
+  have : CharP K 2 := (CharP.charP_iff_prime_eq_zero Nat.prime_two).2 (by exact_mod_cast h2)
+  have : ExpChar K 2 := ExpChar.prime Nat.prime_two
+  have hdeg := (minpoly.natSepDegree_eq_one_iff_pow_mem (q := 2) (x := x)).2 ⟨1, by simpa using hx⟩
+  rwa [(Algebra.IsSeparable.isSeparable K x).natSepDegree_eq_natDegree,
+    minpoly.natDegree_eq_one_iff] at hdeg
+
+/-- **The local step.** `R` local with maximal ideal `2R`, `C` a nonzero finite unramified
+`R`-algebra without `2`-torsion, `v ∈ C` with `v² = 4ⁿΔ`. Then `Δ = b² − 4c` in `R`. -/
+theorem prop85_local [Algebra.FormallyUnramified R C] [Module.Finite R C] [Nontrivial C]
+    (hm : maximalIdeal R = Ideal.span {2}) (h2C : ∀ x : C, 2 * x = 0 → x = 0)
+    {Δ : R} {v : C} {n : ℕ} (hv : v ^ 2 = 4 ^ n * algebraMap R C Δ) :
+    ∃ b c : R, b ^ 2 - 4 * c = Δ := by
+  have hker : RingHom.ker (algebraMap R C) ≤ maximalIdeal R :=
+    le_maximalIdeal (RingHom.ker_ne_top _)
+  obtain ⟨Q, hQ, hQu⟩ := Ideal.exists_ideal_over_maximal_of_isIntegral (maximalIdeal R) hker
+  have h2m : (2 : R) ∈ maximalIdeal R := hm ▸ Ideal.mem_span_singleton_self 2
+  have h2Q : (2 : C) ∈ Q := by
+    have : (2 : R) ∈ Q.under R := hQu ▸ h2m
+    rwa [Ideal.under, Ideal.mem_comap, map_ofNat] at this
+  set I : Ideal C := Ideal.span {2}
+  have hIu : I.under R = maximalIdeal R :=
+    le_antisymm (hQu ▸ Ideal.comap_mono ((Ideal.span_singleton_le_iff_mem _).2 h2Q))
+      (by rw [hm, Ideal.span_le, Set.singleton_subset_iff, SetLike.mem_coe, Ideal.under,
+        Ideal.mem_comap, map_ofNat]
+          exact Ideal.mem_span_singleton_self 2)
+  have : I.LiesOver (maximalIdeal R) := ⟨hIu.symm⟩
+  have : Q.LiesOver (maximalIdeal R) := ⟨hQu.symm⟩
+  have hred := quot_isReduced (R := R) I
+  have h2I : ∀ x : C, x ^ 2 ∈ I → ∃ y, x = 2 * y := fun x hx => by
+    obtain ⟨y, hy⟩ := Ideal.mem_span_singleton'.1 (sq_mem_quot hred hx)
+    exact ⟨y, by rw [← hy, mul_comm]⟩
+  have hdesc : ∀ k : ℕ, ∀ v : C, v ^ 2 = 4 ^ k * algebraMap R C Δ →
+      ∃ u : C, u ^ 2 = algebraMap R C Δ := by
+    intro k
+    induction k with
+    | zero => exact fun v hv => ⟨v, by simpa using hv⟩
+    | succ k ih =>
+      intro v hv
+      obtain ⟨y, rfl⟩ := h2I v (by
+        rw [hv]; exact Ideal.mem_span_singleton'.2 ⟨2 * 4 ^ k * algebraMap R C Δ, by ring⟩)
+      refine ih y (sub_eq_zero.1 (h2C _ (h2C _ ?_)))
+      linear_combination hv
+  obtain ⟨u, hu⟩ := hdesc n v hv
+  let := Ideal.Quotient.field (maximalIdeal R)
+  let := Ideal.Quotient.field Q
+  obtain ⟨_, _⟩ := quot_unramified_finite (R := R) Q
+  have : Algebra.IsSeparable (R ⧸ maximalIdeal R) (C ⧸ Q) :=
+    Algebra.FormallyUnramified.isSeparable _ _
+  have h20 : (2 : R ⧸ maximalIdeal R) = 0 := by
+    rw [← map_ofNat (Ideal.Quotient.mk _), Ideal.Quotient.eq_zero_iff_mem]; exact h2m
+  obtain ⟨c0, hc0⟩ := mem_range_of_sq_of_char_two h20 (x := Ideal.Quotient.mk Q u)
+    ⟨Ideal.Quotient.mk _ Δ, by rw [Ideal.Quotient.algebraMap_mk_of_liesOver, ← map_pow, hu]⟩
+  obtain ⟨c, rfl⟩ := Ideal.Quotient.mk_surjective c0
+  rw [Ideal.Quotient.algebraMap_mk_of_liesOver, Ideal.Quotient.eq] at hc0
+  have hΔc : Δ - c ^ 2 ∈ maximalIdeal R := by
+    rw [← hQu, Ideal.under, Ideal.mem_comap, map_sub, map_pow, ← hu]
+    rw [show u ^ 2 - (algebraMap R C c) ^ 2 = (u - algebraMap R C c) * (u + algebraMap R C c) by
+      ring]
+    exact Q.mul_mem_right _ (by rw [← neg_sub]; exact Q.neg_mem hc0)
+  obtain ⟨y, hy⟩ := Ideal.mem_span_singleton'.1 (hm ▸ hΔc)
+  obtain ⟨s, hs⟩ := h2I (u - algebraMap R C c) (by
+    refine Ideal.mem_span_singleton'.2
+      ⟨algebraMap R C y + algebraMap R C c ^ 2 - u * algebraMap R C c, ?_⟩
+    have := congrArg (algebraMap R C) hy
+    simp only [map_mul, map_sub, map_pow, map_ofNat] at this
+    linear_combination this - hu)
+  have hyI : algebraMap R C y ∈ I := by
+    have := congrArg (algebraMap R C) hy
+    simp only [map_mul, map_sub, map_pow, map_ofNat] at this
+    refine Ideal.mem_span_singleton'.2 ⟨algebraMap R C c * s + s ^ 2, ?_⟩
+    have e : u = algebraMap R C c + 2 * s := by rw [← hs]; ring
+    refine (sub_eq_zero.1 (h2C _ (h2C _ ?_))).symm
+    rw [e] at hu
+    linear_combination 2 * this - 2 * hu
+  obtain ⟨d, hd⟩ := Ideal.mem_span_singleton'.1 (hm ▸ (hIu ▸ hyI : y ∈ maximalIdeal R))
+  exact ⟨c, -d, by linear_combination hy + 2 * hd⟩
+
+end Prop85Local
+
+section Prop85Global
+
+open IsLocalRing Polynomial
+
+variable {A : Type*} [CommRing A]
+
+/-- If `x` is regular in `A`, its image in a localization of `R` is regular. -/
+theorem isLocalization_mul_regular {S : Type*} [CommRing S] [Algebra A S] (M : Submonoid A)
+    [IsLocalization M S] {x : A} (hx : ∀ y : A, x * y = 0 → y = 0) (z : S)
+    (hz : algebraMap A S x * z = 0) : z = 0 := by
+  obtain ⟨y, s, rfl⟩ := IsLocalization.mk'_surjective M z
+  rw [← IsLocalization.mk'_one (M := M) S x, ← IsLocalization.mk'_mul, one_mul,
+    IsLocalization.mk'_eq_zero_iff] at hz
+  obtain ⟨m, hm⟩ := hz
+  rw [IsLocalization.mk'_eq_zero_iff]
+  exact ⟨m, hx _ (by rw [← hm]; ring)⟩
+
+/-- `2` regular and `2A` prime: if `τ ∉ 2A` and `τ y ∈ 4A`, then `y ∈ 4A`. -/
+theorem dvd_four_of_mul (h2 : ∀ x : A, 2 * x = 0 → x = 0) (hp : (Ideal.span {(2 : A)}).IsPrime)
+    {τ y z : A} (hτ : τ ∉ Ideal.span {(2 : A)}) (h : τ * y = 4 * z) : ∃ w, y = 4 * w := by
+  have step : ∀ {y z : A}, τ * y = 2 * z → ∃ w, y = 2 * w := fun {y z} h => by
+    obtain ⟨w, hw⟩ := Ideal.mem_span_singleton'.1 ((hp.mem_or_mem
+      (Ideal.mem_span_singleton'.2 ⟨z, by rw [h, mul_comm]⟩ : τ * y ∈ _)).resolve_left hτ)
+    exact ⟨w, by rw [← hw, mul_comm]⟩
+  obtain ⟨w, rfl⟩ := step (z := 2 * z) (by rw [h]; ring)
+  obtain ⟨w', rfl⟩ := step (y := w) (z := z) (sub_eq_zero.1 (h2 _ (by linear_combination h)))
+  exact ⟨w', by ring⟩
+
+/-- The descent from `A_{2A}` to `A`: if `α² − τ²Δ ∈ 4A` with `τ ∉ 2A`, `2` regular and
+`A/2A` an integrally closed domain, then `Δ = b² − 4c` in `A`. -/
+theorem exists_of_sq_sub (h2 : ∀ x : A, 2 * x = 0 → x = 0) [hp : (Ideal.span {(2 : A)}).IsPrime]
+    [IsIntegrallyClosed (A ⧸ Ideal.span {(2 : A)})] {Δ α τ z : A}
+    (hτ : τ ∉ Ideal.span {(2 : A)}) (h : α ^ 2 - τ ^ 2 * Δ = 4 * z) :
+    ∃ b c : A, b ^ 2 - 4 * c = Δ := by
+  set p := Ideal.span {(2 : A)}
+  let K := FractionRing (A ⧸ p)
+  have hτ0 : algebraMap (A ⧸ p) K (Ideal.Quotient.mk p τ) ≠ 0 := by
+    rwa [ne_eq, IsFractionRing.to_map_eq_zero_iff, Ideal.Quotient.eq_zero_iff_mem]
+  have h4 : (4 : A ⧸ p) = 0 := by
+    rw [← map_ofNat (Ideal.Quotient.mk p), Ideal.Quotient.eq_zero_iff_mem]
+    exact Ideal.mem_span_singleton'.2 ⟨2, by norm_num⟩
+  have hsq : (algebraMap (A ⧸ p) K (Ideal.Quotient.mk p α) /
+      algebraMap (A ⧸ p) K (Ideal.Quotient.mk p τ)) ^ 2 =
+      algebraMap (A ⧸ p) K (Ideal.Quotient.mk p Δ) := by
+    have e := congrArg (fun x => algebraMap (A ⧸ p) K (Ideal.Quotient.mk p x)) h
+    simp only [map_sub, map_mul, map_pow, map_ofNat, h4, map_zero, zero_mul] at e
+    rw [div_pow, div_eq_iff (pow_ne_zero 2 hτ0)]
+    linear_combination e
+  obtain ⟨β, hβ⟩ := IsIntegrallyClosed.exists_algebraMap_eq_of_isIntegral_pow (R := A ⧸ p)
+    (n := 2) two_pos (by rw [hsq]; exact isIntegral_algebraMap)
+  obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective β
+  have hab : α - b * τ ∈ p := by
+    rw [← Ideal.Quotient.eq_zero_iff_mem]
+    apply IsFractionRing.injective (A ⧸ p) K
+    rw [eq_div_iff hτ0] at hβ
+    simp only [map_sub, map_mul, map_zero, hβ, sub_self]
+  obtain ⟨x, hx⟩ := Ideal.mem_span_singleton'.1 hab
+  obtain ⟨w, hw⟩ := dvd_four_of_mul h2 hp (y := τ * (b ^ 2 - Δ)) (z := z - b * τ * x - x ^ 2)
+    hτ (by
+      have e : α = b * τ + x * 2 := by linear_combination -hx
+      rw [e] at h
+      linear_combination h)
+  obtain ⟨w', hw'⟩ := dvd_four_of_mul h2 hp hτ hw
+  exact ⟨b, w', by linear_combination hw'⟩
+
+/-- **Page 85, c) ⇒ a), with « finie étale ».** Let `2` be regular in `A`, `A₀ = A/2A` an
+integrally closed domain, `Δ ∉ 2A`. If `B_Δ` is a finite étale `A_Δ`-algebra with
+`(B_Δ)₂ ≅ A_{2Δ}[U]/(U² − Δ)` as `A_Δ`-algebras, then `Δ = b² − 4c` with `b, c ∈ A`.
+No noetherian hypothesis is needed. -/
+theorem prop85_c_imp_a {Δ : A} (h2 : ∀ x : A, 2 * x = 0 → x = 0)
+    [hp : (Ideal.span {(2 : A)}).IsPrime] [IsIntegrallyClosed (A ⧸ Ideal.span {(2 : A)})]
+    (hΔ : Δ ∉ Ideal.span {(2 : A)})
+    (B : Type*) [CommRing B] [Algebra (Localization.Away Δ) B]
+    [Algebra.Etale (Localization.Away Δ) B] [Module.Finite (Localization.Away Δ) B]
+    (e : Localization.Away (algebraMap (Localization.Away Δ) B 2) ≃ₐ[Localization.Away Δ]
+      quadAlg (algebraMap A (Localization.Away (2 : Localization.Away Δ)) Δ)) :
+    ∃ b c : A, b ^ 2 - 4 * c = Δ := by
+  set p := Ideal.span {(2 : A)}
+  let AΔ := Localization.Away Δ
+  have hdisj : Disjoint (Submonoid.powers Δ : Set A) p := by
+    rw [Set.disjoint_left]; rintro _ ⟨k, rfl⟩ hk; exact hΔ (hp.mem_of_pow_mem k hk)
+  set P : Ideal AΔ := p.map (algebraMap A AΔ) with hPdef
+  have hP : P.IsPrime := IsLocalization.isPrime_of_isPrime_disjoint _ _ p hp hdisj
+  have hPu : P.under A = p := IsLocalization.under_map_of_isPrime_disjoint _ _ hp hdisj
+  have hP2 : P = Ideal.span {2} := by
+    rw [hPdef, Ideal.map_span, Set.image_singleton, map_ofNat]
+  let R := Localization.AtPrime P
+  have hm : maximalIdeal R = Ideal.span {2} := by
+    rw [← Localization.AtPrime.map_eq_maximalIdeal, congrArg (Ideal.map (algebraMap AΔ R)) hP2,
+      Ideal.map_span, Set.image_singleton, map_ofNat]
+  have h2Δ : ∀ z : AΔ, 2 * z = 0 → z = 0 := fun z hz =>
+    isLocalization_mul_regular (Submonoid.powers Δ) h2 z (by rwa [map_ofNat])
+  have : Nontrivial AΔ :=
+    ⟨⟨0, 1, fun h => hP.ne_top (by rw [Ideal.eq_top_iff_one, ← h]; exact P.zero_mem)⟩⟩
+  let A2 := Localization.Away (2 : AΔ)
+  have h2nzd : (2 : AΔ) ∈ nonZeroDivisors AΔ :=
+    mem_nonZeroDivisors_iff_right.2 fun x hx => h2Δ x (by rw [mul_comm]; exact hx)
+  have hA2 : Function.Injective (algebraMap AΔ A2) :=
+    IsLocalization.injective A2 (Submonoid.powers_le.2 h2nzd)
+  have : Nontrivial A2 := hA2.nontrivial
+  set δ : A2 := algebraMap A A2 Δ
+  let Q := quadAlg δ
+  have hQ : Function.Injective (algebraMap AΔ Q) := by
+    rw [IsScalarTower.algebraMap_eq AΔ A2 Q]
+    refine (AdjoinRoot.of.injective_of_monic_of_degree_pos (quadAlg_monic δ) ?_).comp hA2
+    rw [Polynomial.degree_X_pow_sub_C two_pos]; norm_num
+  let B2 := Localization.Away (algebraMap AΔ B 2)
+  have hB : Function.Injective (algebraMap AΔ B) := by
+    intro x y hxy
+    apply hQ
+    rw [← e.commutes, ← e.commutes, IsScalarTower.algebraMap_apply AΔ B B2,
+      IsScalarTower.algebraMap_apply AΔ B B2 y, hxy]
+  have h2B : ∀ z : B, 2 * z = 0 → z = 0 := fun z hz =>
+    Module.Flat.isSMulRegular_of_nonZeroDivisors (M := B) h2nzd
+      (show (2 : AΔ) • z = (2 : AΔ) • (0 : B) by
+        rw [smul_zero, Algebra.smul_def, map_ofNat]; exact hz)
+  -- the square root of `Δ` in `B` up to a power of `2`
+  have hroot : (AdjoinRoot.root (X ^ 2 - C δ) : Q) ^ 2 = algebraMap AΔ Q (algebraMap A AΔ Δ) := by
+    rw [← IsScalarTower.algebraMap_apply, IsScalarTower.algebraMap_apply A A2 Q,
+      AdjoinRoot.algebraMap_eq, ← sub_eq_zero, ← AdjoinRoot.mk_C, ← AdjoinRoot.mk_X, ← map_pow,
+      ← map_sub, AdjoinRoot.mk_self]
+  set δB := algebraMap AΔ B (algebraMap A AΔ Δ)
+  obtain ⟨n, v, hv⟩ : ∃ (n : ℕ) (v : B), v ^ 2 = (2 ^ n) ^ 2 * δB := by
+    set u0 := e.symm (AdjoinRoot.root _)
+    have hu0 : u0 ^ 2 = algebraMap B B2 δB := by
+      apply e.injective
+      rw [map_pow, e.apply_symm_apply, hroot, ← e.commutes, IsScalarTower.algebraMap_apply AΔ B B2]
+    obtain ⟨⟨b, s⟩, hbs⟩ :=
+      IsLocalization.mk'_surjective (Submonoid.powers (algebraMap AΔ B 2)) u0
+    obtain ⟨k, hk⟩ := s.2
+    have hspec := IsLocalization.mk'_spec B2 b s
+    rw [show IsLocalization.mk' B2 b s = u0 from hbs] at hspec
+    have : algebraMap B B2 (b ^ 2) = algebraMap B B2 ((s : B) ^ 2 * δB) := by
+      rw [map_pow, ← hspec, map_mul, map_pow, ← hu0]; ring
+    obtain ⟨c, hc⟩ := (IsLocalization.eq_iff_exists
+      (Submonoid.powers (algebraMap AΔ B 2)) B2).1 this
+    obtain ⟨m, hm⟩ := c.2
+    refine ⟨m + k, (c : B) * b, ?_⟩
+    rw [← hm]
+    rw [← hm, ← hk] at hc
+    simp only [map_ofNat] at hc ⊢
+    linear_combination (2 : B) ^ m * hc
+  -- localise at `2A`
+  let S := Algebra.algebraMapSubmonoid B P.primeCompl
+  let C := Localization S
+  have : IsLocalization (P.primeCompl.map (algebraMap AΔ B)) C := Localization.isLocalization
+  have : IsScalarTower AΔ R C := isScalarTower_localizationAlgebra P.primeCompl B
+  have : Algebra.FormallyUnramified R C :=
+    Algebra.FormallyUnramified.localization_map P.primeCompl (Rₘ := R) (Sₘ := C) (S := B)
+  have : Module.Finite R C := Module.Finite.of_isLocalization AΔ B P.primeCompl
+  have : Nontrivial C := by
+    refine ⟨⟨1, 0, fun h => ?_⟩⟩
+    rw [← map_one (algebraMap B C), ← map_zero (algebraMap B C),
+      IsLocalization.eq_iff_exists S C] at h
+    obtain ⟨⟨_, t, ht, rfl⟩, h⟩ := h
+    simp only [mul_one, mul_zero] at h
+    exact ht (by rw [hB (h.trans (map_zero _).symm)]; exact P.zero_mem)
+  have h2C : ∀ z : C, 2 * z = 0 → z = 0 := fun z hz =>
+    isLocalization_mul_regular S h2B z (by rwa [map_ofNat])
+  obtain ⟨b', c', hbc⟩ := prop85_local (R := R) (C := C) hm h2C (n := n)
+    (Δ := algebraMap AΔ R (algebraMap A AΔ Δ)) (v := algebraMap B C v) (by
+      have e1 : algebraMap B C δB = algebraMap R C (algebraMap AΔ R (algebraMap A AΔ Δ)) := by
+        rw [← IsScalarTower.algebraMap_apply AΔ R C, IsScalarTower.algebraMap_apply AΔ B C]
+      have e2 : ((2 : C) ^ n) ^ 2 = 4 ^ n := by rw [← pow_mul, mul_comm, pow_mul]; norm_num
+      rw [← map_pow, hv, map_mul, map_pow, map_pow, map_ofNat, e1, e2])
+  -- back to `A`
+  have : IsLocalization.AtPrime R p := by
+    have := IsLocalization.isLocalization_isLocalization_atPrime_isLocalization
+      (Submonoid.powers Δ) R P
+    have hPu' : P.comap (algebraMap A AΔ) = p := hPu
+    have hM : (P.comap (algebraMap A AΔ)).primeCompl = p.primeCompl := by
+      ext x; simp only [Ideal.primeCompl, Submonoid.mem_mk, Subsemigroup.mem_mk, Set.mem_compl_iff,
+        SetLike.mem_coe, hPu']
+    have this' : IsLocalization (P.comap (algebraMap A AΔ)).primeCompl R := this
+    change IsLocalization p.primeCompl R
+    rw [← hM]; exact this'
+  obtain ⟨⟨a1, s1⟩, rfl⟩ := IsLocalization.mk'_surjective p.primeCompl b'
+  obtain ⟨⟨a2, s2⟩, rfl⟩ := IsLocalization.mk'_surjective p.primeCompl c'
+  have h1 := IsLocalization.mk'_spec R a1 s1
+  have h2' := IsLocalization.mk'_spec R a2 s2
+  rw [← IsScalarTower.algebraMap_apply] at hbc
+  have key : algebraMap A R (a1 ^ 2 * s2 - 4 * a2 * s1 ^ 2) =
+      algebraMap A R (Δ * s1 ^ 2 * s2) := by
+    simp only [map_sub, map_mul, map_pow, map_ofNat]
+    rw [← h1, ← h2', ← hbc]; ring
+  obtain ⟨⟨t, ht⟩, htk⟩ := (IsLocalization.eq_iff_exists p.primeCompl R).1 key
+  have hτ : t * s2 * s1 ∉ p :=
+    p.primeCompl.mul_mem (p.primeCompl.mul_mem ht s2.2) s1.2
+  exact exists_of_sq_sub h2 (α := t * s2 * a1) (z := t * (t * s2) * a2 * (s1 : A) ^ 2) hτ
+    (by linear_combination (t * s2) * htk)
+
+end Prop85Global
+
+section Prop85Consequences
+
+/-- **Page 85, uniqueness of the isomorphism.** Two `A_Δ`-algebra maps `B_Δ → B'_Δ` compatible
+with given identifications of `(B_Δ)₂` and `(B'_Δ)₂` with `A_{2Δ}[U]/(U² − Δ)` are equal, as
+soon as `2` is regular in `A` and `B'_Δ` is flat (here, étale): `B'_Δ ⊂ (B'_Δ)₂`. -/
+theorem prop85_iso_unique {A : Type*} [CommRing A] {Δ : A} (h2 : ∀ x : A, 2 * x = 0 → x = 0)
+    (B B' : Type*) [CommRing B] [CommRing B'] [Algebra (Localization.Away Δ) B]
+    [Algebra (Localization.Away Δ) B'] [Algebra.Etale (Localization.Away Δ) B']
+    (e : Localization.Away (algebraMap (Localization.Away Δ) B 2) ≃ₐ[Localization.Away Δ]
+      quadAlg (algebraMap A (Localization.Away (2 : Localization.Away Δ)) Δ))
+    (e' : Localization.Away (algebraMap (Localization.Away Δ) B' 2) ≃ₐ[Localization.Away Δ]
+      quadAlg (algebraMap A (Localization.Away (2 : Localization.Away Δ)) Δ))
+    (φ ψ : B →ₐ[Localization.Away Δ] B')
+    (hφ : ∀ x, e' (algebraMap B' _ (φ x)) = e (algebraMap B _ x))
+    (hψ : ∀ x, e' (algebraMap B' _ (ψ x)) = e (algebraMap B _ x)) : φ = ψ := by
+  let AΔ := Localization.Away Δ
+  have h2Δ : ∀ z : AΔ, 2 * z = 0 → z = 0 := fun z hz =>
+    isLocalization_mul_regular (Submonoid.powers Δ) h2 z (by rwa [map_ofNat])
+  have h2nzd : (2 : AΔ) ∈ nonZeroDivisors AΔ :=
+    mem_nonZeroDivisors_iff_right.2 fun x hx => h2Δ x (by rw [mul_comm]; exact hx)
+  have hr : IsSMulRegular B' (2 : AΔ) := Module.Flat.isSMulRegular_of_nonZeroDivisors h2nzd
+  have h2B : algebraMap AΔ B' 2 ∈ nonZeroDivisors B' :=
+    mem_nonZeroDivisors_iff_right.2 fun z hz => hr (by
+      change (2 : AΔ) • z = (2 : AΔ) • (0 : B')
+      rw [smul_zero, Algebra.smul_def, mul_comm]; exact hz)
+  have hinj : Function.Injective
+      (algebraMap B' (Localization.Away (algebraMap AΔ B' 2))) :=
+    IsLocalization.injective _ (Submonoid.powers_le.2 h2B)
+  ext x
+  exact hinj (e'.injective ((hφ x).trans (hψ x).symm))
+
+instance : (Ideal.span {(2 : ℤ)}).IsMaximal :=
+  ((Ideal.span_singleton_prime (by norm_num)).2 Int.prime_two).isMaximal (by simp)
+
+instance : IsIntegrallyClosed (ℤ ⧸ Ideal.span {(2 : ℤ)}) := by
+  let := Ideal.Quotient.field (Ideal.span {(2 : ℤ)})
+  infer_instance
+
+/-- **Page 85, the struck « étale ».** `B_Δ = ℤ[1/3][U]/(U² − 3)` is not étale over `ℤ[1/3]`:
+otherwise the Proposition with « finie étale » would give `3 = b² − 4c` in `ℤ`. -/
+theorem B3_not_etale : ¬ Algebra.Etale Z3 B3 := by
+  intro hB
+  obtain ⟨e⟩ := quadAlg_away (3 : Z3) (2 : Z3)
+  let e₁ := e.trans (AdjoinRoot.algEquivOfEq (R := Z6)
+    (Polynomial.X ^ 2 - Polynomial.C (algebraMap Z3 Z6 (3 : Z3)))
+    (Polynomial.X ^ 2 - Polynomial.C (algebraMap ℤ Z6 (3 : ℤ)))
+    (by rw [map_ofNat (algebraMap Z3 Z6), map_ofNat (algebraMap ℤ Z6)])).toRingEquiv
+  have hc : ∀ x : Z3, e₁ (algebraMap Z3 _ x) = algebraMap Z3 _ x := by
+    have := IsLocalization.ringHom_ext (Submonoid.powers (3 : ℤ)) (S := Z3)
+      (j := e₁.toRingHom.comp (algebraMap Z3 _)) (k := algebraMap Z3 _) (RingHom.ext_int _ _)
+    exact fun x => RingHom.congr_fun this x
+  obtain ⟨b, c, h⟩ := prop85_c_imp_a (A := ℤ) (Δ := 3)
+    (fun x hx => by omega) (by rw [Ideal.mem_span_singleton]; decide) B3
+    (AlgEquiv.ofRingEquiv (f := e₁) hc)
+  exact sq_sub_four_mul_ne_three b c h
+
+end Prop85Consequences
+
+end Grothendieck.Folder77

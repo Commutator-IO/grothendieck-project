@@ -875,3 +875,686 @@ theorem padicInt_isUnit_natCast [Fact p.Prime] (n : ℕ) (hn : ¬ p ∣ n) : IsU
   exact_mod_cast this
 
 end Grothendieck.Folder5
+
+/-!
+## The necessity half of the lemma of page 5: the normal form of `W^{(ν)}` in the `Θᵢ`
+
+Added 2026-10-25 (finding `5-universal-artinian-pd-normal-form`). Same hypotheses as above:
+`W` a domain of characteristic zero in which the integers prime to `p` are units, `λᵢ ∈ W` with
+`λ₀ = p`, `λᵢ^p = qᵢλᵢ₊₁` and `λ_ν = p^m · unit`, `Θᵢ = Λᵢ − λᵢ`, `c(ν) = ν + p m`. For a box
+exponent `a` (`0 ≤ aᵢ < p`), `ord a` is the first index `i` with `aᵢ ≠ 0`, or `c(ν)` if `a = 0`.
+
+* `Θ_pow_castSucc`, `Θ_pow_last`: `Θᵢ^p = qᵢΘᵢ₊₁ − Σ_{0<k<p} C(p,k)λᵢ^{p−k}Θᵢ^k` and
+  `Θ_ν^p = −λ_ν^p − Σ_{0<k<p} C(p,k)λ_ν^{p−k}Θ_ν^k` (the carry of page 8, in the `Θᵢ`);
+* `Θ_mul_tmono_mem`, `mul_mem_S`: the `W`-span `S_n` of the `p^{min(ord a, n)} Θ^a` is an
+  ideal of `A^{(ν)}` — the verification the page leaves to the reader, by descending induction on
+  the index of the factor `Θⱼ`, using only `v_p(qᵢ) ≥ 1`;
+* `span_tmono`, `tmono_linearIndependent`: the `Θ^a` form a basis of `A^{(ν)}` (they span, by
+  `S_0 = A^{(ν)}`; a surjective endomorphism of a finite module over a commutative ring is
+  injective, against the basis `Λ^a`, `mono_linearIndependent`);
+* **`normalForm`** (the lemma of page 5, both halves): `Σ w_a Θ^a ∈ (Θ₀) = (Λ₀ − p)` iff
+  `p^{ord a} ∣ w_a` for every `a` (`Kp_le_S`, `S_le_Kp`);
+* **`WνEquiv`** (the corollary of page 6): `W^{(ν)} ≃ ⊕_a W/p^{ord a}` as `W`-modules;
+* **`p_pow_eq_zero_iff`**: if `p` is not a unit, `p^k = 0` in `W^{(ν)}` iff `k ≥ c(ν)`;
+* **`length_Wν`, `length_Wν_eq`**: over a discrete valuation ring with uniformiser `p`, `W^{(ν)}`
+  has length `Σ_a ord a = p + p² + ⋯ + p^ν + p m` (`sum_ord`), which equals the reading's
+  `c(ν) + Σ_{i=1}^{ν} i(p−1)p^{ν−i}`;
+* `exists_lamStd`, `p_pow_eq_zero_iff_std`, `length_Wν_std`, `padicInt_Wν`: with the usual
+  `λᵢ = p^{p^i}/(p^i)!`, `m = p^ν − v_p((p^ν)!)`; for `W = ℤ_p` the order of `1` is exactly
+  `p^{c(ν)}` and the length is `p + ⋯ + p^ν + p(p^ν − v_p((p^ν)!))` (4 for `p = 2`, `ν = 1`).
+
+Not formalised: the quotients `W^{(ν,r)}` of page 7.
+-/
+
+namespace Grothendieck.Folder5
+
+open Nat MvPolynomial
+
+section NormalForm
+
+variable (p ν : ℕ)
+
+open Classical in
+/-- The weight of a box exponent `a`: the first index `i` with `aᵢ ≠ 0`, or `c` if `a = 0`. -/
+noncomputable def ord (c : ℕ) (a : Fin (ν + 1) → Fin p) : ℕ :=
+  if h : ∃ k, ∃ i : Fin (ν + 1), (i : ℕ) = k ∧ (a i : ℕ) ≠ 0 then Nat.find h else c
+
+variable {p ν} {c : ℕ}
+
+theorem ord_le {a : Fin (ν + 1) → Fin p} {i : Fin (ν + 1)} (hi : (a i : ℕ) ≠ 0) : ord p ν c a ≤ i := by
+  have h : ∃ k, ∃ j : Fin (ν + 1), (j : ℕ) = k ∧ (a j : ℕ) ≠ 0 := ⟨i, i, rfl, hi⟩
+  classical
+  simp only [ord, h, ↓reduceDIte]
+  exact Nat.find_min' h ⟨i, rfl, hi⟩
+
+theorem ord_spec {a : Fin (ν + 1) → Fin p} {i : Fin (ν + 1)} (hi : (a i : ℕ) ≠ 0) :
+    ∃ j : Fin (ν + 1), (j : ℕ) = ord p ν c a ∧ (a j : ℕ) ≠ 0 := by
+  have h : ∃ k, ∃ j : Fin (ν + 1), (j : ℕ) = k ∧ (a j : ℕ) ≠ 0 := ⟨i, i, rfl, hi⟩
+  classical
+  simp only [ord, h, ↓reduceDIte]
+  exact Nat.find_spec h
+
+theorem ord_of_forall {a : Fin (ν + 1) → Fin p} (h : ∀ i, (a i : ℕ) = 0) : ord p ν c a = c := by
+  classical
+  simp only [ord, dite_eq_right_iff]
+  rintro ⟨k, i, -, hi⟩
+  exact absurd (h i) hi
+
+theorem ord_le_max (a : Fin (ν + 1) → Fin p) : ord p ν c a ≤ ν ∨ ord p ν c a = c := by
+  by_cases h : ∃ i, (a i : ℕ) ≠ 0
+  · obtain ⟨i, hi⟩ := h
+    obtain ⟨j, hj, -⟩ := ord_spec (c := c) hi
+    exact Or.inl (hj ▸ Nat.lt_succ_iff.mp j.2)
+  · exact Or.inr (ord_of_forall (by simpa using h))
+
+/-- Changing one exponent `aⱼ` does not raise the weight past `ord a` unless `ord a = j`. -/
+theorem ord_update_le {a : Fin (ν + 1) → Fin p} {j : Fin (ν + 1)} (hj : (a j : ℕ) ≠ 0) (v : Fin p)
+    (h : (ord p ν c a : ℕ) ≠ j) : ord p ν c (Function.update a j v) ≤ ord p ν c a := by
+  obtain ⟨i, hi, hai⟩ := ord_spec (c := c) hj
+  have hij : i ≠ j := fun e => h (by rw [← hi, e])
+  rw [← hi]
+  exact ord_le (by rwa [Function.update_of_ne hij])
+
+theorem ord_update_le' {a : Fin (ν + 1) → Fin p} {j : Fin (ν + 1)} {v : Fin p} (hv : (v : ℕ) ≠ 0)
+    (hc : ν ≤ c) : ord p ν c (Function.update a j v) ≤ ord p ν c a := by
+  have hb : (Function.update a j v j : ℕ) ≠ 0 := by rwa [Function.update_self]
+  by_cases ha : ∃ i, (a i : ℕ) ≠ 0
+  · obtain ⟨i, hai⟩ := ha
+    obtain ⟨k, hk, hak⟩ := ord_spec (c := c) hai
+    by_cases hkj : k = j
+    · rw [← hk, hkj]; exact ord_le hb
+    · rw [← hk]; exact ord_le (by rwa [Function.update_of_ne hkj])
+  · push Not at ha
+    rw [ord_of_forall ha]
+    exact (ord_le hb).trans (by have := j.2; omega)
+
+
+end NormalForm
+
+section ThetaBasis
+
+variable (W : Type*) [CommRing W] (p ν : ℕ) (lam : ℕ → W)
+
+/-- The monomial `Θ^a = Θ₀^{a₀} ⋯ Θ_ν^{a_ν}`, `0 ≤ aᵢ < p`. -/
+noncomputable def tmono (a : Fin (ν + 1) → Fin p) : Aν W p ν := ∏ i, Θ W p ν lam i ^ (a i : ℕ)
+
+theorem tmono_eq (a : Fin (ν + 1) → Fin p) (j : Fin (ν + 1)) :
+    tmono W p ν lam a = Θ W p ν lam j ^ (a j : ℕ) *
+      ∏ i ∈ Finset.univ.erase j, Θ W p ν lam i ^ (a i : ℕ) :=
+  (Finset.mul_prod_erase _ _ (Finset.mem_univ j)).symm
+
+theorem tmono_update (a : Fin (ν + 1) → Fin p) (j : Fin (ν + 1)) (v : Fin p) :
+    tmono W p ν lam (Function.update a j v) = Θ W p ν lam j ^ (v : ℕ) *
+      ∏ i ∈ Finset.univ.erase j, Θ W p ν lam i ^ (a i : ℕ) := by
+  rw [tmono_eq W p ν lam _ j, Function.update_self]
+  congr 1
+  exact Finset.prod_congr rfl fun i hi => by rw [Function.update_of_ne (Finset.ne_of_mem_erase hi)]
+
+theorem tmono_zero (a : Fin (ν + 1) → Fin p) (h : ∀ i, (a i : ℕ) = 0) : tmono W p ν lam a = 1 :=
+  Finset.prod_eq_one fun i _ => by rw [h i, pow_zero]
+
+theorem Lam_eq_Θ (i : Fin (ν + 1)) :
+    Lam W p ν i = Θ W p ν lam i + algebraMap W (Aν W p ν) (lam i) := by
+  rw [Θ]; ring
+
+/-- The binomial expansion of `Λᵢ^p = (Θᵢ + λᵢ)^p`. -/
+theorem Θ_pow (hp : 0 < p) (i : Fin (ν + 1)) :
+    Θ W p ν lam i ^ p = Lam W p ν i ^ p - algebraMap W (Aν W p ν) (lam i) ^ p -
+      ∑ k ∈ Finset.Ico 1 p, ((p.choose k : W) * lam i ^ (p - k)) • Θ W p ν lam i ^ k := by
+  rw [Lam_eq_Θ W p ν lam, add_pow, Finset.sum_range_succ, Finset.range_eq_Ico,
+    Finset.sum_eq_sum_Ico_succ_bot hp]
+  simp only [pow_zero, Nat.sub_zero, Nat.choose_zero_right, Nat.cast_one, mul_one, one_mul,
+    Nat.sub_self, Nat.choose_self, zero_add]
+  have : ∑ k ∈ Finset.Ico 1 p, Θ W p ν lam i ^ k * algebraMap W (Aν W p ν) (lam i) ^ (p - k) *
+      (p.choose k : Aν W p ν) =
+      ∑ k ∈ Finset.Ico 1 p, ((p.choose k : W) * lam i ^ (p - k)) • Θ W p ν lam i ^ k :=
+    Finset.sum_congr rfl fun k _ => by
+      rw [Algebra.smul_def (R := W) (A := Aν W p ν), map_mul, map_natCast, map_pow]; ring
+  rw [this]; ring
+
+/-- `Θᵢ^p = qᵢΘᵢ₊₁ − Σ_{0<k<p} C(p,k) λᵢ^{p−k} Θᵢ^k` for `i < ν`. -/
+theorem Θ_pow_castSucc (hp : 0 < p) (hlam : ∀ i, lam i ^ p = q p i * lam (i + 1)) (i : Fin ν) :
+    Θ W p ν lam i.castSucc ^ p = (q p i : W) • Θ W p ν lam i.succ -
+      ∑ k ∈ Finset.Ico 1 p, ((p.choose k : W) * lam i ^ (p - k)) •
+        Θ W p ν lam i.castSucc ^ k := by
+  rw [Θ_pow W p ν lam hp, Lam_pow_castSucc, Lam_eq_Θ W p ν lam i.succ, Fin.val_castSucc,
+    ← map_pow, hlam, Fin.val_succ, Algebra.smul_def (R := W) (A := Aν W p ν), map_mul, map_natCast]
+  ring
+
+/-- `Θ_ν^p = −λ_ν^p − Σ_{0<k<p} C(p,k) λ_ν^{p−k} Θ_ν^k`. -/
+theorem Θ_pow_last (hp : 0 < p) :
+    Θ W p ν lam (Fin.last ν) ^ p = -algebraMap W (Aν W p ν) (lam ν ^ p) -
+      ∑ k ∈ Finset.Ico 1 p, ((p.choose k : W) * lam ν ^ (p - k)) •
+        Θ W p ν lam (Fin.last ν) ^ k := by
+  rw [Θ_pow W p ν lam hp, Lam_last_pow, Fin.val_last, map_pow]
+  ring
+
+/-- `S_n`, the `W`-span of the `p^{min(ord a, n)} Θ^a`; `S_0` is the span of the `Θ^a` and
+`S_c` the lattice of the lemma of page 5. -/
+noncomputable def S (c n : ℕ) : Submodule W (Aν W p ν) :=
+  Submodule.span W (Set.range fun a => (p : W) ^ min (ord p ν c a) n • tmono W p ν lam a)
+
+theorem mem_S {c n k : ℕ} (b : Fin (ν + 1) → Fin p) (hk : min (ord p ν c b) n ≤ k) :
+    (p : W) ^ k • tmono W p ν lam b ∈ S W p ν lam c n := by
+  rw [← Nat.sub_add_cancel hk, pow_add, mul_smul]
+  exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨b, rfl⟩)
+
+theorem pow_mul_tmono_update (a : Fin (ν + 1) → Fin p) (j : Fin (ν + 1)) {k : ℕ} (hk : k < p) :
+    Θ W p ν lam j ^ k * tmono W p ν lam (Function.update a j ⟨0, by omega⟩) =
+      tmono W p ν lam (Function.update a j ⟨k, hk⟩) := by
+  rw [tmono_update, tmono_update, pow_zero, one_mul]
+
+variable {W p ν lam}
+
+theorem smul_mem_S_of {c n e : ℕ} {y : Aν W p ν} (e' : ℕ) (he : e' ≤ e)
+    (hy : (p : W) ^ e' • y ∈ S W p ν lam c n) : (p : W) ^ e • y ∈ S W p ν lam c n := by
+  rw [← Nat.sub_add_cancel he, pow_add, mul_smul]
+  exact Submodule.smul_mem _ _ hy
+
+variable [Fact p.Prime]
+
+/-- The terms `C(p,k) λⱼ^{p−k} Θⱼ^k Θ^{a'}`, `0 < k < p`, of the carry stay in `S_n`. -/
+theorem carry_sum_mem {m n : ℕ} (a : Fin (ν + 1) → Fin p) (j : Fin (ν + 1)) (μ : W)
+    (hoj : ord p ν (ν + p * m) a ≤ j) :
+    (p : W) ^ min (min (ord p ν (ν + p * m) a) j) n •
+      ∑ k ∈ Finset.Ico 1 p, ((p.choose k : W) * μ ^ (p - k)) •
+        (Θ W p ν lam j ^ k * tmono W p ν lam
+          (Function.update a j ⟨0, (Fact.out : p.Prime).pos⟩)) ∈
+      S W p ν lam (ν + p * m) n := by
+  rw [Finset.smul_sum]
+  refine Submodule.sum_mem _ fun k hk => ?_
+  obtain ⟨hk1, hkp⟩ := Finset.mem_Ico.mp hk
+  rw [pow_mul_tmono_update W p ν lam a j hkp, smul_comm]
+  refine Submodule.smul_mem _ _ (mem_S W p ν lam _ ?_)
+  have := ord_update_le' (c := ν + p * m) (a := a) (j := j) (v := ⟨k, hkp⟩)
+    (by simp only; omega) (Nat.le_add_right _ _)
+  omega
+
+/-- **The carry**: `p^{min(ord a, j, n)} Θⱼ Θ^a ∈ S_n`, by descending induction on `j`. -/
+theorem Θ_mul_tmono_mem (hlam : ∀ i, lam i ^ p = q p i * lam (i + 1)) {m : ℕ} {u : W}
+    (hm : lam ν = p ^ m * u) (n : ℕ) (j : Fin (ν + 1)) (a : Fin (ν + 1) → Fin p) :
+    (p : W) ^ min (min (ord p ν (ν + p * m) a) j) n • (Θ W p ν lam j * tmono W p ν lam a) ∈
+      S W p ν lam (ν + p * m) n := by
+  have hp : 0 < p := (Fact.out : p.Prime).pos
+  have hp2 : 2 ≤ p := (Fact.out : p.Prime).two_le
+  have hc : ν ≤ ν + p * m := Nat.le_add_right _ _
+  -- the case `aⱼ + 1 < p`: no carry
+  have small : ∀ (j : Fin (ν + 1)) (a : Fin (ν + 1) → Fin p), (a j : ℕ) + 1 < p →
+      (p : W) ^ min (min (ord p ν (ν + p * m) a) j) n • (Θ W p ν lam j * tmono W p ν lam a) ∈
+        S W p ν lam (ν + p * m) n := by
+    intro j a h
+    rw [tmono_eq W p ν lam a j, ← mul_assoc, ← _root_.pow_succ',
+      show (a j : ℕ) + 1 = ((⟨_, h⟩ : Fin p) : ℕ) from rfl, ← tmono_update]
+    apply mem_S
+    have h1 := ord_le (c := ν + p * m) (a := Function.update a j ⟨_, h⟩) (i := j)
+      (by rw [Function.update_self]; simp)
+    have h2 := ord_update_le' (c := ν + p * m) (a := a) (j := j) (v := ⟨_, h⟩) (by simp) hc
+    omega
+  -- the case `aⱼ = p − 1`: `Θⱼ Θ^a = Θⱼ^p Θ^{a'}`
+  have big : ∀ (j : Fin (ν + 1)) (a : Fin (ν + 1) → Fin p), (a j : ℕ) + 1 = p →
+      Θ W p ν lam j * tmono W p ν lam a =
+        Θ W p ν lam j ^ p * tmono W p ν lam (Function.update a j ⟨0, hp⟩) := by
+    intro j a h
+    rw [tmono_eq W p ν lam a j, tmono_update, ← mul_assoc, ← _root_.pow_succ', h]
+    simp
+  induction j using Fin.reverseInduction generalizing a with
+  | last =>
+    by_cases h : (a (Fin.last ν) : ℕ) + 1 < p
+    · exact small _ a h
+    have h' : (a (Fin.last ν) : ℕ) + 1 = p := by have := (a (Fin.last ν)).2; omega
+    have hne : (a (Fin.last ν) : ℕ) ≠ 0 := by omega
+    have hoj := ord_le (c := ν + p * m) hne
+    have hoa' := ord_update_le (c := ν + p * m) hne ⟨0, hp⟩
+    have hoa'c : ord p ν (ν + p * m) (Function.update a (Fin.last ν) ⟨0, hp⟩) ≤ ν + p * m :=
+      (ord_le_max _).elim (fun h => by omega) (fun h => h.le)
+    rw [Fin.val_last] at hoj hoa'
+    rw [big _ a h', Θ_pow_last W p ν lam hp, sub_mul, Finset.sum_mul, smul_sub]
+    refine Submodule.sub_mem _ ?_ ?_
+    · have e : -algebraMap W (Aν W p ν) (lam ν ^ p) *
+          tmono W p ν lam (Function.update a (Fin.last ν) ⟨0, hp⟩) =
+          -(u ^ p • ((p : W) ^ (p * m) • tmono W p ν lam (Function.update a (Fin.last ν) ⟨0, hp⟩))) := by
+        rw [Algebra.smul_def (R := W) (A := Aν W p ν), Algebra.smul_def (R := W) (A := Aν W p ν), hm]
+        simp only [map_mul, map_pow, map_natCast]
+        ring
+      rw [e, smul_neg, smul_comm ((p : W) ^ _) (u ^ p), smul_smul ((p : W) ^ _) ((p : W) ^ (p * m)),
+        ← pow_add]
+      refine Submodule.neg_mem _ (Submodule.smul_mem _ _ (mem_S W p ν lam _ ?_))
+      rw [Fin.val_last]
+      omega
+    · simp only [smul_mul_assoc]
+      exact carry_sum_mem a _ _ (by rw [Fin.val_last]; exact hoj)
+  | cast i ih =>
+    by_cases h : (a i.castSucc : ℕ) + 1 < p
+    · exact small _ a h
+    have h' : (a i.castSucc : ℕ) + 1 = p := by have := (a i.castSucc).2; omega
+    have hne : (a i.castSucc : ℕ) ≠ 0 := by omega
+    have hoj := ord_le (c := ν + p * m) hne
+    have hoa' := ord_update_le (c := ν + p * m) hne ⟨0, hp⟩
+    rw [Fin.val_castSucc] at hoj hoa'
+    rw [big _ a h', Θ_pow_castSucc W p ν lam hp hlam, sub_mul, Finset.sum_mul, smul_sub]
+    refine Submodule.sub_mem _ ?_ ?_
+    · obtain ⟨r, -, hq⟩ := q_eq_p_mul p i
+      have hih := ih (Function.update a i.castSucc ⟨0, hp⟩)
+      rw [Fin.val_succ] at hih
+      have e : ((q p i : W) • Θ W p ν lam i.succ) *
+          tmono W p ν lam (Function.update a i.castSucc ⟨0, hp⟩) =
+          (r : W) • ((p : W) • (Θ W p ν lam i.succ *
+            tmono W p ν lam (Function.update a i.castSucc ⟨0, hp⟩))) := by
+        rw [smul_mul_assoc, hq, Nat.cast_mul, mul_comm (p : W), mul_smul]
+      rw [e, smul_comm ((p : W) ^ _) (r : W), smul_smul ((p : W) ^ _) (p : W), ← _root_.pow_succ]
+      refine Submodule.smul_mem _ _ (smul_mem_S_of _ ?_ hih)
+      rw [Fin.val_castSucc]
+      omega
+    · simp only [smul_mul_assoc]
+      exact carry_sum_mem a _ _ hoj
+
+omit [Fact p.Prime] in
+theorem ord_le_c {m : ℕ} (a : Fin (ν + 1) → Fin p) : ord p ν (ν + p * m) a ≤ ν + p * m :=
+  (ord_le_max a).elim (fun h => by omega) (fun h => h.le)
+
+variable (hlam : ∀ i, lam i ^ p = q p i * lam (i + 1)) {m : ℕ} {u : W} (hm : lam ν = p ^ m * u)
+
+include hlam hm in
+theorem Θ_mul_mem_S {n : ℕ} (j : Fin (ν + 1)) {x : Aν W p ν}
+    (hx : x ∈ S W p ν lam (ν + p * m) n) : Θ W p ν lam j * x ∈ S W p ν lam (ν + p * m) n := by
+  induction hx using Submodule.span_induction with
+  | mem x hx =>
+    obtain ⟨a, rfl⟩ := hx
+    rw [mul_smul_comm]
+    exact smul_mem_S_of _ (by omega) (Θ_mul_tmono_mem hlam hm n j a)
+  | zero => simp
+  | add x y _ _ hx hy => rw [mul_add]; exact Submodule.add_mem _ hx hy
+  | smul w x _ hx => rw [mul_smul_comm]; exact Submodule.smul_mem _ w hx
+
+include hlam hm in
+/-- **`S_n` is an ideal** of `A^{(ν)}` (the point the page leaves to the reader, with a « ! »). -/
+theorem mul_mem_S {n : ℕ} (y : Aν W p ν) {x : Aν W p ν}
+    (hx : x ∈ S W p ν lam (ν + p * m) n) : y * x ∈ S W p ν lam (ν + p * m) n := by
+  obtain ⟨f, rfl⟩ := Ideal.Quotient.mk_surjective y
+  induction f using MvPolynomial.induction_on generalizing x with
+  | C w =>
+    rw [← MvPolynomial.algebraMap_eq, ← Ideal.Quotient.mkₐ_eq_mk W, AlgHom.commutes,
+      ← Algebra.smul_def]
+    exact Submodule.smul_mem _ w hx
+  | add f g hf hg => rw [map_add, add_mul]; exact Submodule.add_mem _ (hf hx) (hg hx)
+  | mul_X f j hf =>
+    rw [map_mul, mul_assoc]
+    apply hf
+    change Lam W p ν j * x ∈ _
+    rw [Lam_eq_Θ W p ν lam, add_mul, ← Algebra.smul_def]
+    exact Submodule.add_mem _ (Θ_mul_mem_S hlam hm j hx) (Submodule.smul_mem _ _ hx)
+
+include hlam hm in
+/-- The `Θ^a`, `0 ≤ aᵢ < p`, span `A^{(ν)}`. -/
+theorem span_tmono : Submodule.span W (Set.range (tmono W p ν lam)) = ⊤ := by
+  have hp : 0 < p := (Fact.out : p.Prime).pos
+  have hS : S W p ν lam (ν + p * m) 0 = Submodule.span W (Set.range (tmono W p ν lam)) := by
+    simp [S]
+  rw [← hS, eq_top_iff]
+  rintro y -
+  have h1 : (1 : Aν W p ν) ∈ S W p ν lam (ν + p * m) 0 := by
+    have := mem_S W p ν lam (c := ν + p * m) (n := 0) (k := 0) (fun _ => ⟨0, hp⟩) (by simp)
+    rwa [pow_zero, one_smul, tmono_zero W p ν lam _ fun _ => rfl] at this
+  simpa using mul_mem_S hlam hm y h1
+
+omit [Fact p.Prime] in
+/-- The box monomials `Λ^a` are linearly independent (the argument of `psi_injective`). -/
+theorem mono_linearIndependent [IsDomain W] [CharZero W] :
+    LinearIndependent W (mono W p ν) := by
+  rw [Fintype.linearIndependent_iff]
+  intro w hx
+  set K := FractionRing W
+  have hinj : Function.Injective (algebraMap W K) := IsFractionRing.injective W K
+  set P : Polynomial K := ∑ a, Polynomial.C (algebraMap W K (w a) *
+    ∏ i : Fin (ν + 1), cf p K (i : ℕ) ^ (a i : ℕ)) * Polynomial.X ^ deg p a with hP
+  have hmk : Ideal.Quotient.mk _ P = psi W p ν K (∑ a, w a • mono W p ν a) := by
+    simp only [hP, map_sum, map_mul, map_smul, psi_mono, map_pow]
+    refine Finset.sum_congr rfl fun a _ => ?_
+    rw [← algebraMap_smul K (w a), Algebra.smul_def (R := K) (A := Bν p ν K), xb,
+      algebraMap_Bν, algebraMap_Bν]
+    ring
+  rw [hx, map_zero, Ideal.Quotient.eq_zero_iff_mem, Ideal.mem_span_singleton,
+    Polynomial.X_pow_dvd_iff] at hmk
+  intro b
+  have h := hmk (deg p b) (deg_lt p b)
+  rw [hP, Polynomial.finsetSum_coeff] at h
+  simp only [Polynomial.coeff_C_mul_X_pow] at h
+  rw [Finset.sum_eq_single b (fun a _ hab => ite_eq_right_iff.mpr fun h' =>
+    absurd (deg_injective p h').symm hab) (by simp)] at h
+  simp only [ite_true] at h
+  have := (mul_eq_zero.mp h).resolve_right
+    (Finset.prod_ne_zero_iff.mpr fun i _ => pow_ne_zero _ (cf_ne_zero p K (i : ℕ)))
+  exact hinj (by rw [this, map_zero])
+
+include hlam hm in
+/-- **The `Θ^a`, `0 ≤ aᵢ < p`, form a basis of `A^{(ν)}`**: they span, and a surjective
+endomorphism of a finite module over a commutative ring is injective. -/
+theorem tmono_linearIndependent [IsDomain W] [CharZero W] :
+    LinearIndependent W (tmono W p ν lam) := by
+  have hp : 0 < p := (Fact.out : p.Prime).pos
+  rw [linearIndependent_iff_injective_fintypeLinearCombination]
+  classical
+  have : Module.Finite W (Aν W p ν) := ⟨⟨Finset.univ.image (mono W p ν), by
+    rw [Finset.coe_image, Finset.coe_univ, Set.image_univ]; exact boxSpan_eq_top W p ν hp⟩⟩
+  refine OrzechProperty.injective_of_surjective_of_injective
+    (Fintype.linearCombination W (mono W p ν)) _ ?_ ?_
+  · exact linearIndependent_iff_injective_fintypeLinearCombination.mp
+      (mono_linearIndependent (W := W) (p := p) (ν := ν))
+  · rw [← LinearMap.range_eq_top, Fintype.range_linearCombination]
+    exact span_tmono hlam hm
+
+include hlam hm in
+theorem Θ_zero_mem_S (n : ℕ) : Θ W p ν lam 0 ∈ S W p ν lam (ν + p * m) n := by
+  have hp : 0 < p := (Fact.out : p.Prime).pos
+  have := Θ_mul_tmono_mem hlam hm n 0 (fun _ => ⟨0, hp⟩)
+  rwa [tmono_zero W p ν lam _ fun _ => rfl, mul_one, Fin.val_zero, Nat.min_zero, Nat.zero_min,
+    pow_zero, one_smul] at this
+
+include hlam hm in
+/-- **Necessity**: `(Λ₀ − p) ⊆ S_n`. -/
+theorem Kp_le_S (hlam0 : lam 0 = p) (n : ℕ) {x : Aν W p ν} (hx : x ∈ Kp W p ν) :
+    x ∈ S W p ν lam (ν + p * m) n := by
+  obtain ⟨y, rfl⟩ := Ideal.mem_span_singleton'.mp hx
+  have h0 : Lam W p ν 0 - (p : Aν W p ν) = Θ W p ν lam 0 := by
+    rw [Θ, Fin.val_zero, hlam0, map_natCast]
+  rw [h0]
+  exact mul_mem_S hlam hm y (Θ_zero_mem_S hlam hm n)
+
+include hlam hm in
+/-- **Sufficiency** (from `p_pow_mul_Θ_mem`, `p_pow_mem_Kp`): `S_c ⊆ (Λ₀ − p)`. -/
+theorem S_le_Kp (hW : ∀ n : ℕ, ¬ p ∣ n → IsUnit (n : W)) (hlam0 : lam 0 = p) (hu : IsUnit u)
+    {x : Aν W p ν} (hx : x ∈ S W p ν lam (ν + p * m) (ν + p * m)) : x ∈ Kp W p ν := by
+  induction hx using Submodule.span_induction with
+  | mem x hx =>
+    obtain ⟨a, rfl⟩ := hx
+    dsimp only
+    rw [min_eq_left (ord_le_c a)]
+    by_cases ha : ∃ i, (a i : ℕ) ≠ 0
+    · obtain ⟨i, hi⟩ := ha
+      obtain ⟨j, hj, haj⟩ := ord_spec (c := ν + p * m) hi
+      rw [← hj, tmono_eq W p ν lam a j, ← Nat.sub_add_cancel (Nat.pos_of_ne_zero haj),
+        _root_.pow_succ, Algebra.smul_def (R := W) (A := Aν W p ν), map_pow, map_natCast]
+      have := p_pow_mul_Θ_mem W p ν hW lam hlam0 hlam j
+      have e : (p : Aν W p ν) ^ (j : ℕ) * (Θ W p ν lam j ^ ((a j : ℕ) - 1) * Θ W p ν lam j *
+          ∏ i ∈ Finset.univ.erase j, Θ W p ν lam i ^ (a i : ℕ)) =
+          (p : Aν W p ν) ^ (j : ℕ) * Θ W p ν lam j * (Θ W p ν lam j ^ ((a j : ℕ) - 1) *
+          ∏ i ∈ Finset.univ.erase j, Θ W p ν lam i ^ (a i : ℕ)) := by ring
+      rw [e]
+      exact Ideal.mul_mem_right _ _ this
+    · push Not at ha
+      rw [ord_of_forall ha, tmono_zero W p ν lam a ha, Algebra.smul_def (R := W) (A := Aν W p ν),
+        mul_one, map_pow, map_natCast]
+      exact p_pow_mem_Kp W p ν hW lam hlam0 hlam hu hm
+  | zero => exact Submodule.zero_mem _
+  | add x y _ _ hx hy => exact Submodule.add_mem _ hx hy
+  | smul w x _ hx =>
+    rw [Algebra.smul_def (R := W) (A := Aν W p ν)]
+    exact Ideal.mul_mem_left _ _ hx
+
+include hlam hm in
+/-- **The lemma of page 5** (both halves). For `w : box → W`, `Σ_a w_a Θ^a ∈ (Λ₀ − p)` iff
+`p^{ord a} ∣ w_a` for every `a`: `p^i ∣ w_a` when `aᵢ` is the first nonzero exponent, and
+`p^{c(ν)} ∣ w_0`, `c(ν) = ν + p m`, `λ_ν = p^m · unit`. -/
+theorem normalForm [IsDomain W] [CharZero W] (hW : ∀ n : ℕ, ¬ p ∣ n → IsUnit (n : W))
+    (hlam0 : lam 0 = p) (hu : IsUnit u) (w : (Fin (ν + 1) → Fin p) → W) :
+    ∑ a, w a • tmono W p ν lam a ∈ Kp W p ν ↔
+      ∀ a, (p : W) ^ ord p ν (ν + p * m) a ∣ w a := by
+  constructor
+  · intro h
+    obtain ⟨v, hv⟩ := (Submodule.mem_span_range_iff_exists_fun W).mp
+      (Kp_le_S hlam hm hlam0 (ν + p * m) h)
+    have := (Fintype.linearIndependent_iffₛ.mp (tmono_linearIndependent hlam hm)) w
+      (fun a => v a * (p : W) ^ min (ord p ν (ν + p * m) a) (ν + p * m))
+      (by rw [← hv]; simp_rw [smul_smul])
+    intro a
+    rw [this a, min_eq_left (ord_le_c a)]
+    exact dvd_mul_left _ _
+  · intro h
+    refine Submodule.sum_mem _ fun a _ => ?_
+    obtain ⟨t, ht⟩ := h a
+    rw [ht, mul_comm, mul_smul]
+    refine Submodule.smul_of_tower_mem _ t (S_le_Kp hlam hm hW hlam0 hu (mem_S W p ν lam a ?_))
+    exact min_le_left _ _
+
+include hlam hm in
+/-- **The exact order of `1`**: `p^k = 0` in `W^{(ν)}` iff `k ≥ c(ν) = ν + p m`, when `p` is not
+a unit of `W`. -/
+theorem p_pow_eq_zero_iff [IsDomain W] [CharZero W] (hW : ∀ n : ℕ, ¬ p ∣ n → IsUnit (n : W))
+    (hlam0 : lam 0 = p) (hu : IsUnit u) (hpu : ¬ IsUnit (p : W)) (k : ℕ) :
+    (p : Wν W p ν) ^ k = 0 ↔ ν + p * m ≤ k := by
+  classical
+  have hp : 0 < p := (Fact.out : p.Prime).pos
+  set a0 : Fin (ν + 1) → Fin p := fun _ => ⟨0, hp⟩
+  have hsum : ∑ a, (Pi.single a0 ((p : W) ^ k) : (Fin (ν + 1) → Fin p) → W) a •
+      tmono W p ν lam a = (p : Aν W p ν) ^ k := by
+    rw [Fintype.sum_eq_single a0 (fun a ha => by rw [Pi.single_eq_of_ne ha, zero_smul]),
+      Pi.single_eq_same, tmono_zero W p ν lam a0 fun _ => rfl,
+      Algebra.smul_def (R := W) (A := Aν W p ν), mul_one,
+      map_pow, map_natCast]
+  rw [← map_natCast (Ideal.Quotient.mk (Kp W p ν)), ← map_pow, Ideal.Quotient.eq_zero_iff_mem,
+    ← hsum, normalForm hlam hm hW hlam0 hu]
+  have hp0 : (p : W) ≠ 0 := Nat.cast_ne_zero.mpr (Fact.out : p.Prime).ne_zero
+  constructor
+  · intro h
+    have := h a0
+    rwa [Pi.single_eq_same, ord_of_forall (fun _ => rfl), pow_dvd_pow_iff hp0 hpu] at this
+  · intro hk a
+    by_cases ha : a = a0
+    · rw [ha, Pi.single_eq_same, ord_of_forall (fun _ => rfl)]
+      exact pow_dvd_pow _ hk
+    · rw [Pi.single_eq_of_ne ha]
+      exact dvd_zero _
+
+include hlam hm in
+/-- The coordinates in the basis `Θ^a`: `(w_a) ↦ Σ_a w_a Θ^a`, an isomorphism `W^{box} ≃ A^{(ν)}`. -/
+noncomputable def tmonoEquiv [IsDomain W] [CharZero W] :
+    ((Fin (ν + 1) → Fin p) → W) ≃ₗ[W] Aν W p ν :=
+  LinearEquiv.ofBijective (Fintype.linearCombination W (tmono W p ν lam))
+    ⟨linearIndependent_iff_injective_fintypeLinearCombination.mp (tmono_linearIndependent hlam hm),
+      by rw [← LinearMap.range_eq_top, Fintype.range_linearCombination]; exact span_tmono hlam hm⟩
+
+include hlam hm in
+theorem map_Kp_tmonoEquiv_symm [IsDomain W] [CharZero W] (hW : ∀ n : ℕ, ¬ p ∣ n → IsUnit (n : W))
+    (hlam0 : lam 0 = p) (hu : IsUnit u) :
+    ((Kp W p ν).restrictScalars W).map (tmonoEquiv hlam hm).symm.toLinearMap =
+      Submodule.pi Set.univ fun a => Ideal.span {(p : W) ^ ord p ν (ν + p * m) a} := by
+  ext v
+  rw [Submodule.mem_map_equiv, LinearEquiv.symm_symm, Submodule.restrictScalars_mem]
+  change Fintype.linearCombination W (tmono W p ν lam) v ∈ Kp W p ν ↔ _
+  rw [Fintype.linearCombination_apply, normalForm hlam hm hW hlam0 hu]
+  simp [Submodule.mem_pi, Ideal.mem_span_singleton]
+
+include hlam hm in
+/-- **The corollary of page 6 (normal form of `W^{(ν)}`).** As a `W`-module,
+`W^{(ν)} ≃ ⊕_a W/p^{ord a}`, `a` over the box `0 ≤ aᵢ < p`: every element is uniquely
+`Σ_a w_a Θ^a` with `w_a` taken mod `p^i` when `aᵢ` is the first nonzero exponent and `w_0` mod
+`p^{c(ν)}` (and `w_a = 0` when `a₀ ≠ 0`). -/
+noncomputable def WνEquiv [IsDomain W] [CharZero W] (hW : ∀ n : ℕ, ¬ p ∣ n → IsUnit (n : W))
+    (hlam0 : lam 0 = p) (hu : IsUnit u) :
+    Wν W p ν ≃ₗ[W] ((a : Fin (ν + 1) → Fin p) → W ⧸ Ideal.span {(p : W) ^ ord p ν (ν + p * m) a}) :=
+  (Submodule.Quotient.restrictScalarsEquiv W (Kp W p ν)).symm ≪≫ₗ
+    Submodule.Quotient.equiv _ _ (tmonoEquiv hlam hm).symm
+      (map_Kp_tmonoEquiv_symm hlam hm hW hlam0 hu) ≪≫ₗ
+    Submodule.quotientPi _
+
+include hlam hm in
+/-- **The length of `W^{(ν)}`** over a discrete valuation ring `W` with uniformiser `p`
+(`W(k)`, `ℤ_p`): `Σ_a ord a`. -/
+theorem length_Wν [IsDomain W] [IsDiscreteValuationRing W] [CharZero W]
+    (hW : ∀ n : ℕ, ¬ p ∣ n → IsUnit (n : W)) (hlam0 : lam 0 = p) (hu : IsUnit u)
+    (hmax : IsLocalRing.maximalIdeal W = Ideal.span {(p : W)}) :
+    Module.length W (Wν W p ν) = ∑ a : Fin (ν + 1) → Fin p, (ord p ν (ν + p * m) a : ℕ∞) := by
+  rw [(WνEquiv hlam hm hW hlam0 hu).length_eq, Module.length_pi_of_fintype]
+  refine Finset.sum_congr rfl fun a _ => ?_
+  rw [← Ideal.span_singleton_pow, ← hmax,
+    IsDiscreteValuationRing.length_quotient_pow_maximalIdeal]
+
+section Count
+
+variable {p : ℕ}
+
+theorem ord_cons {ν c : ℕ} (hc : ν + 1 ≤ c) (x : Fin p) (a : Fin (ν + 1) → Fin p) :
+    ord p (ν + 1) c (Fin.cons x a : Fin (ν + 1 + 1) → Fin p) =
+      if (x : ℕ) = 0 then ord p ν (c - 1) a + 1 else 0 := by
+  split_ifs with hx
+  · by_cases ha : ∃ i, (a i : ℕ) ≠ 0
+    · obtain ⟨i, hi⟩ := ha
+      obtain ⟨j, hj, haj⟩ := ord_spec (c := c - 1) hi
+      have hj' : ((Fin.cons x a : Fin (ν + 1 + 1) → Fin p) j.succ : ℕ) ≠ 0 := by
+        rwa [Fin.cons_succ]
+      have h1 := ord_le (c := c) hj'
+      obtain ⟨k, hk, hak⟩ := ord_spec (c := c) hj'
+      have h2 : ord p ν (c - 1) a + 1 ≤ ord p (ν + 1) c (Fin.cons x a) := by
+        rw [← hk]
+        cases k using Fin.cases with
+        | zero => rw [Fin.cons_zero] at hak; exact absurd hx hak
+        | succ k =>
+          rw [Fin.cons_succ] at hak
+          have := ord_le (c := c - 1) hak
+          simp only [Fin.val_succ]; omega
+      simp only [Fin.val_succ] at h1
+      omega
+    · push Not at ha
+      rw [ord_of_forall ha, ord_of_forall]
+      · omega
+      · intro i
+        cases i using Fin.cases with
+        | zero => rwa [Fin.cons_zero]
+        | succ i => rw [Fin.cons_succ]; exact ha i
+  · have h0 : ((Fin.cons x a : Fin (ν + 1 + 1) → Fin p) 0 : ℕ) ≠ 0 := by rwa [Fin.cons_zero]
+    have := ord_le (c := c) h0
+    simp only [Fin.val_zero] at this
+    omega
+
+/-- **The count**: `Σ_a ord a + ν + 1 = (1 + p + ⋯ + p^ν) + c`, `a` over the box. -/
+theorem sum_ord (hp : 0 < p) (ν c : ℕ) (hc : ν ≤ c) :
+    ∑ a : Fin (ν + 1) → Fin p, ord p ν c a + ν + 1 = ∑ j ∈ Finset.range (ν + 1), p ^ j + c := by
+  induction ν generalizing c with
+  | zero =>
+    have h : ∀ a : Fin 1 → Fin p, ord p 0 c a = if (a 0 : ℕ) = 0 then c else 0 := by
+      intro a
+      split_ifs with ha
+      · exact ord_of_forall fun i => by rwa [Fin.fin_one_eq_zero i]
+      · have := ord_le (c := c) ha
+        simp only [Fin.val_zero] at this
+        omega
+    simp_rw [h]
+    rw [Fintype.sum_eq_single (fun _ => ⟨0, hp⟩) fun a ha => ?_]
+    · have e : ((fun _ => (⟨0, hp⟩ : Fin p)) (0 : Fin 1) : ℕ) = 0 := rfl
+      rw [ite_eq_left_of_eq_true _ _ (eq_true e), Finset.sum_range_one, pow_zero]
+      omega
+    · exact ite_eq_right_iff.mpr fun h0 =>
+        absurd (_root_.funext fun i => by rw [Fin.fin_one_eq_zero i]; exact Fin.ext h0) ha
+  | succ ν ih =>
+    rw [← (Fin.consEquiv fun _ => Fin p).sum_comp, Fintype.sum_prod_type]
+    have hcons : ∀ (x : Fin p) (a : Fin (ν + 1) → Fin p),
+        (Fin.consEquiv fun _ => Fin p) (x, a) = Fin.cons x a :=
+      fun x a => _root_.funext fun i => Fin.consEquiv_apply _ _ i
+    simp_rw [hcons, ord_cons (by omega : ν + 1 ≤ c)]
+    rw [Fintype.sum_eq_single (⟨0, hp⟩ : Fin p) fun x hx => ?_]
+    · simp only [↓reduceIte]
+      rw [Finset.sum_add_distrib, Finset.sum_const, Finset.card_univ, Fintype.card_fun,
+        Fintype.card_fin, Fintype.card_fin, smul_eq_mul, mul_one, Finset.sum_range_succ _ (ν + 1)]
+      have := ih (c - 1) (by omega)
+      omega
+    · have : (x : ℕ) ≠ 0 := fun h0 => hx (Fin.ext h0)
+      simp [this]
+
+end Count
+
+include hlam hm in
+/-- **The length of `W^{(ν)}`**: `p + p² + ⋯ + p^ν + p m`, i.e. `c(ν) + Σ_{i=1}^{ν} i(p−1)p^{ν−i}`
+with `c(ν) = ν + p m`, `m = v_p(λ_ν)`. -/
+theorem length_Wν_eq [IsDomain W] [IsDiscreteValuationRing W] [CharZero W]
+    (hW : ∀ n : ℕ, ¬ p ∣ n → IsUnit (n : W)) (hlam0 : lam 0 = p) (hu : IsUnit u)
+    (hmax : IsLocalRing.maximalIdeal W = Ideal.span {(p : W)}) :
+    Module.length W (Wν W p ν) = ((∑ j ∈ Finset.range ν, p ^ (j + 1) + p * m : ℕ) : ℕ∞) := by
+  rw [length_Wν hlam hm hW hlam0 hu hmax, ← Nat.cast_sum]
+  congr 1
+  have := sum_ord (Fact.out : p.Prime).pos ν (ν + p * m) (Nat.le_add_right _ _)
+  rw [Finset.sum_range_succ'] at this
+  simp only [pow_zero] at this
+  omega
+
+end ThetaBasis
+
+section Standard
+
+/-! ### The usual divided powers `λᵢ = p^{p^i}/(p^i)!` -/
+
+variable (W : Type*) [CommRing W] [IsDomain W] [CharZero W] (p ν : ℕ) [Fact p.Prime]
+  (hW : ∀ n : ℕ, ¬ p ∣ n → IsUnit (n : W))
+
+omit [IsDomain W] [CharZero W] in
+include hW in
+/-- In `W`, `(p^i)! = p^{v_p((p^i)!)} · unit`. -/
+theorem factorial_mul_unit (i : ℕ) :
+    ∃ u : W, IsUnit u ∧ (((p ^ i)! : ℕ) : W) * u = (p : W) ^ padicValNat p (p ^ i)! := by
+  have hp : p.Prime := Fact.out
+  set n := (p ^ i)!
+  have hn : n ≠ 0 := factorial_ne_zero _
+  obtain ⟨U, hU⟩ := hW _ (Nat.not_dvd_ordCompl hp hn)
+  refine ⟨↑U⁻¹, U⁻¹.isUnit, ?_⟩
+  conv_lhs => rw [← Nat.ordProj_mul_ordCompl_eq_self n p]
+  rw [Nat.cast_mul, Nat.cast_pow, ← hU, mul_assoc, Units.mul_inv, mul_one,
+    Nat.factorization_def n hp]
+
+include hW in
+/-- **The usual divided powers of `p`** exist in `W`: `λᵢ (p^i)! = p^{p^i}`, so `λ₀ = p`,
+`λᵢ^p = qᵢ λᵢ₊₁`, and `λᵢ = p^{p^i − v_p((p^i)!)} · unit`. -/
+theorem exists_lamStd : ∃ lam : ℕ → W, lam 0 = p ∧ (∀ i, lam i ^ p = q p i * lam (i + 1)) ∧
+    ∀ i, ∃ u : W, IsUnit u ∧ lam i = (p : W) ^ (p ^ i - padicValNat p (p ^ i)!) * u := by
+  choose u hu hfac using factorial_mul_unit W p hW
+  have hv : ∀ i, padicValNat p (p ^ i)! ≤ p ^ i := fun i => by
+    have := sub_one_mul_padicValNat_factorial_pow p i
+    have h2 : 1 ≤ p - 1 := by have := (Fact.out : p.Prime).two_le; omega
+    have := Nat.le_mul_of_pos_left (padicValNat p (p ^ i)!) h2
+    omega
+  set lam : ℕ → W := fun i => (p : W) ^ (p ^ i - padicValNat p (p ^ i)!) * u i
+  have hL : ∀ i, lam i * (((p ^ i)! : ℕ) : W) = (p : W) ^ (p ^ i) := fun i => by
+    simp only [lam]
+    rw [mul_assoc, mul_comm (u i), hfac, ← pow_add, Nat.sub_add_cancel (hv i)]
+  have hF : ∀ i, (((p ^ i)! : ℕ) : W) ≠ 0 := fun i => Nat.cast_ne_zero.mpr (factorial_ne_zero _)
+  refine ⟨lam, ?_, fun i => ?_, fun i => ⟨u i, hu i, rfl⟩⟩
+  · have := hL 0
+    rw [pow_zero, pow_one, factorial_one, Nat.cast_one, mul_one] at this
+    exact this
+  · apply mul_right_cancel₀ (pow_ne_zero p (hF i))
+    have h1 := hL (i + 1)
+    have h2 := congrArg (fun n : ℕ => (n : W)) (factorial_eq_mul_q p i)
+    simp only [Nat.cast_mul, Nat.cast_pow] at h2
+    rw [← mul_pow, hL, ← pow_mul, ← _root_.pow_succ, mul_assoc, mul_comm (lam (i + 1)),
+      ← mul_assoc, mul_comm (q p i : W), ← h2, mul_comm, h1]
+
+include hW in
+/-- **The exact order of `1` in `W^{(ν)}` is `p^{c(ν)}`**, `c(ν) = ν + p(p^ν − v_p((p^ν)!))`
+(page 5), when `p` is not a unit of `W` (`W(k)`, `ℤ_p`). -/
+theorem p_pow_eq_zero_iff_std (hpu : ¬ IsUnit (p : W)) (k : ℕ) :
+    (p : Wν W p ν) ^ k = 0 ↔ ν + p * (p ^ ν - padicValNat p (p ^ ν)!) ≤ k := by
+  obtain ⟨lam, h0, hrec, hlam⟩ := exists_lamStd W p hW
+  obtain ⟨u, hu, hm⟩ := hlam ν
+  exact p_pow_eq_zero_iff hrec hm hW h0 hu hpu k
+
+include hW in
+/-- **The length of `W^{(ν)}`** over a discrete valuation ring with uniformiser `p`:
+`p + p² + ⋯ + p^ν + p(p^ν − v_p((p^ν)!))`. -/
+theorem length_Wν_std [IsDiscreteValuationRing W]
+    (hmax : IsLocalRing.maximalIdeal W = Ideal.span {(p : W)}) :
+    Module.length W (Wν W p ν) = ((∑ j ∈ Finset.range ν, p ^ (j + 1) +
+      p * (p ^ ν - padicValNat p (p ^ ν)!) : ℕ) : ℕ∞) := by
+  obtain ⟨lam, h0, hrec, hlam⟩ := exists_lamStd W p hW
+  obtain ⟨u, hu, hm⟩ := hlam ν
+  exact length_Wν_eq hrec hm hW h0 hu hmax
+
+end Standard
+
+/-- **For `W = ℤ_p`**: in `ℤ_p^{(ν)}`, `p^k = 0` iff `k ≥ c(ν) = ν + p(p^ν − v_p((p^ν)!))`, and
+`ℤ_p^{(ν)}` has length `p + ⋯ + p^ν + p(p^ν − v_p((p^ν)!))`. -/
+theorem padicInt_Wν (p ν : ℕ) [Fact p.Prime] :
+    (∀ k, (p : Wν ℤ_[p] p ν) ^ k = 0 ↔ ν + p * (p ^ ν - padicValNat p (p ^ ν)!) ≤ k) ∧
+      Module.length ℤ_[p] (Wν ℤ_[p] p ν) = ((∑ j ∈ Finset.range ν, p ^ (j + 1) +
+        p * (p ^ ν - padicValNat p (p ^ ν)!) : ℕ) : ℕ∞) :=
+  ⟨p_pow_eq_zero_iff_std ℤ_[p] p ν (padicInt_isUnit_natCast p) PadicInt.p_nonunit,
+    length_Wν_std ℤ_[p] p ν (padicInt_isUnit_natCast p) PadicInt.maximalIdeal_eq_span_p⟩
+
+end Grothendieck.Folder5

@@ -519,3 +519,278 @@ theorem twist_conj (φ : Hq b c →ₐ[k] K) (φ' : Hq b' c' →ₐ[k] K) :
 end Product
 
 end Grothendieck.Folder83
+
+
+namespace Grothendieck.Folder83
+
+open TensorProduct
+
+/-! ## The criterion « Azumaya iff `Q` invertible » (page 98)
+
+`MAlg b c b' c' t` is `M(b, c; b', c'; t)` made a `k`-algebra (`k⁴` with `mulM`).
+Its Azumaya property (Mathlib's `IsAzumaya`: finite, projective, faithful, and
+`AlgHom.mulLeftRight : M ⊗ Mᵐᵒᵖ → End M`, `a ⊗ b ↦ (x ↦ axb)`, bijective) is decided
+by a determinant. In the bases `(eᵢ ⊗ eⱼ)` and `(E_{rs})` the map has the `16 × 16`
+matrix `sandwichMatrix` (`mulLeftRight_coords`). The trace of `x ↦ axa'` is
+`Tr(a) Tr(a')` (`sum_diag_mul`), so composing with the trace pairing of `End M`
+(a permutation of the coordinates) gives the Kronecker square of the trace form
+(`sandwich_gram`); with `det_traceForm`, `± det² = Q¹⁶` (`sandwich_det_sq`). Hence
+`IsAzumaya k (MAlg b c b' c' t) ↔ IsUnit (Q b c b' c' t)` (`isAzumaya_iff`), over any
+commutative ring, characteristic `2` included, with no hypothesis on `δ`, `δ'`;
+equivalently `det` is non-degenerate on `B = k1 + ku + kv` (`isAzumaya_iff_deltaPB`);
+over a field, iff `Q(t) ≠ 0` (`isAzumaya_iff_ne_zero`); for `b = c = b' = c' = 0`,
+iff `t` is a unit (page 97, `isAzumaya_nilpotent_iff`). The intrinsic form (two
+transverse rank-`2` subalgebras of a locally free rank-`4` algebra) is not formalised.
+-/
+
+section Azumaya
+
+open scoped Kronecker
+
+variable {k : Type*} [CommRing k]
+
+/-- `M(b, c; b', c'; t)` as a type: `k⁴`, coordinates in the basis `(1, u, v, uv)`. -/
+def MAlg (_b _c _b' _c' _t : k) : Type _ := Fin 4 → k
+
+namespace MAlg
+
+variable {b c b' c' t : k}
+
+instance : AddCommGroup (MAlg b c b' c' t) := inferInstanceAs (AddCommGroup (Fin 4 → k))
+instance : Module k (MAlg b c b' c' t) := inferInstanceAs (Module k (Fin 4 → k))
+
+/-- The coordinates of an element of `MAlg`, as an element of `P k`. -/
+def toP (x : MAlg b c b' c' t) : P k := ⟨x 0, x 1, x 2, x 3⟩
+
+/-- The element of `MAlg` with given coordinates. -/
+def ofP (x : P k) : MAlg b c b' c' t := ![x.x0, x.x1, x.x2, x.x3]
+
+omit [CommRing k] in
+lemma toP_injective : Function.Injective (toP : MAlg b c b' c' t → P k) := by
+  intro x y h
+  simp only [toP, P.mk.injEq] at h
+  funext i; fin_cases i <;> simp [h]
+
+lemma toP_add (x y : MAlg b c b' c' t) : toP (x + y) = toP x + toP y := rfl
+lemma toP_smul (a : k) (x : MAlg b c b' c' t) : toP (a • x) = a • toP x := rfl
+lemma toP_zero : toP (0 : MAlg b c b' c' t) = ⟨0, 0, 0, 0⟩ := rfl
+
+instance : Mul (MAlg b c b' c' t) := ⟨fun x y => ofP (mulM b c b' c' t (toP x) (toP y))⟩
+instance : One (MAlg b c b' c' t) := ⟨ofP P.one⟩
+
+lemma toP_mul (x y : MAlg b c b' c' t) : toP (x * y) = mulM b c b' c' t (toP x) (toP y) := rfl
+lemma toP_one : toP (1 : MAlg b c b' c' t) = P.one := rfl
+
+instance : Ring (MAlg b c b' c' t) :=
+  { (inferInstance : AddCommGroup (MAlg b c b' c' t)) with
+    mul_assoc := fun x y z => toP_injective (by simp only [toP_mul]; exact mulM_assoc ..)
+    one_mul := fun x => toP_injective (by rw [toP_mul, toP_one, one_mulM])
+    mul_one := fun x => toP_injective (by rw [toP_mul, toP_one, mulM_one])
+    left_distrib := fun x y z => toP_injective (by
+      rw [toP_mul, toP_add, toP_add, mulM_add, toP_mul, toP_mul])
+    right_distrib := fun x y z => toP_injective (by
+      rw [toP_mul, toP_add, toP_add, add_mulM, toP_mul, toP_mul])
+    zero_mul := fun x => toP_injective (by rw [toP_mul, toP_zero]; ext <;> simp [mulM])
+    mul_zero := fun x => toP_injective (by rw [toP_mul, toP_zero]; ext <;> simp [mulM]) }
+
+instance : Algebra k (MAlg b c b' c' t) :=
+  Algebra.ofModule
+    (fun a x y => toP_injective (by rw [toP_mul, toP_smul, smul_mulM, toP_smul, toP_mul]))
+    (fun a x y => toP_injective (by rw [toP_mul, toP_smul, mulM_smul, toP_smul, toP_mul]))
+
+instance : Module.Free k (MAlg b c b' c' t) := inferInstanceAs (Module.Free k (Fin 4 → k))
+instance : Module.Finite k (MAlg b c b' c' t) := inferInstanceAs (Module.Finite k (Fin 4 → k))
+
+instance : FaithfulSMul k (MAlg b c b' c' t) :=
+  ⟨fun {r s} h => by
+    simpa [toP_smul, toP_one, P.one] using congrArg (fun x => (toP x).x0) (h 1)⟩
+
+lemma mul_apply_zero (x y : MAlg b c b' c' t) : (x * y) 0 = (mulM b c b' c' t (toP x) (toP y)).x0 :=
+  rfl
+lemma mul_apply_one (x y : MAlg b c b' c' t) : (x * y) 1 = (mulM b c b' c' t (toP x) (toP y)).x1 :=
+  rfl
+lemma mul_apply_two (x y : MAlg b c b' c' t) : (x * y) 2 = (mulM b c b' c' t (toP x) (toP y)).x2 :=
+  rfl
+lemma mul_apply_three (x y : MAlg b c b' c' t) :
+    (x * y) 3 = (mulM b c b' c' t (toP x) (toP y)).x3 := rfl
+
+/-- The reduced trace `Tr` of `M(b, c; b', c'; t)`. -/
+def trd (x : MAlg b c b' c' t) : k := trM b b' t (toP x)
+
+/-- The basis `(1, u, v, uv)` of `M(b, c; b', c'; t)`. -/
+noncomputable def bA : Module.Basis (Fin 4) k (MAlg b c b' c' t) := Pi.basisFun k (Fin 4)
+
+lemma bA_apply (i : Fin 4) : (bA i : MAlg b c b' c' t) = Pi.single i 1 :=
+  Pi.basisFun_apply k (Fin 4) i
+
+lemma bA_repr (x : MAlg b c b' c' t) (i : Fin 4) : bA.repr x i = x i := rfl
+
+lemma toP_bA (i : Fin 4) : toP (bA i : MAlg b c b' c' t) = basisP i := by
+  fin_cases i <;> ext <;> simp [toP, bA_apply, basisP, P.one, P.u, P.v, P.w]
+
+/-- `x ↦ axb` is linear: `∑ᵣ yᵣ (a eᵣ b)ₛ = (a y b)ₛ`. -/
+lemma sum_coord_mul (y a a' : MAlg b c b' c' t) (s : Fin 4) :
+    ∑ r, y r * ((a * bA r * a' : MAlg b c b' c' t) s) = (a * y * a') s := by
+  fin_cases s <;>
+    simp only [Fin.sum_univ_four, Fin.zero_eta, Fin.mk_one, Fin.reduceFinMk, mul_apply_zero,
+      mul_apply_one, mul_apply_two, mul_apply_three, toP_mul] <;>
+    simp [toP, bA_apply, mulM] <;> ring
+
+/-- The trace of `x ↦ a x a'` on `M(b, c; b', c'; t)` is `Tr(a) Tr(a')`. -/
+lemma sum_diag_mul (a a' : MAlg b c b' c' t) :
+    ∑ s, (a * bA s * a' : MAlg b c b' c' t) s = trd a * trd a' := by
+  simp only [Fin.sum_univ_four, mul_apply_zero, mul_apply_one, mul_apply_two, mul_apply_three,
+    toP_mul, trd]
+  simp [toP, bA_apply, mulM, trM]
+  ring
+
+lemma trd_mul_comm (x y : MAlg b c b' c' t) : trd (x * y) = trd (y * x) := by
+  simp only [trd, toP_mul, trM, mulM]; ring
+
+variable (b c b' c' t) in
+/-- The matrix of `AlgHom.mulLeftRight : M ⊗ Mᵐᵒᵖ → End M` in the bases
+`(eᵢ ⊗ eⱼ)` and `(E_{rs})`: its entry at `((r, s), (i, j))` is the coordinate `r` of
+`eᵢ eₛ eⱼ`. -/
+noncomputable def sandwichMatrix : Matrix (Fin 4 × Fin 4) (Fin 4 × Fin 4) k :=
+  Matrix.of fun q p => ((bA p.1 * bA q.2 * bA p.2 : MAlg b c b' c' t) q.1)
+
+variable (b c b' c' t) in
+/-- The trace form `Tr(eᵢeⱼ)` of `MAlg`. -/
+noncomputable def trdForm : Matrix (Fin 4) (Fin 4) k :=
+  Matrix.of fun i j => trd ((bA i : MAlg b c b' c' t) * bA j)
+
+lemma trdForm_eq : trdForm b c b' c' t = traceForm b c b' c' t := by
+  ext i j
+  simp [trdForm, traceForm, trd, toP_mul, toP_bA]
+
+/-- The Gram identity: composing the sandwich matrix with the trace pairing of
+`End M` gives the Kronecker square of the trace form. -/
+lemma sandwich_gram :
+    Matrix.transpose ((sandwichMatrix b c b' c' t).submatrix (Equiv.prodComm (Fin 4) (Fin 4)) id)
+        * sandwichMatrix b c b' c' t
+      = trdForm b c b' c' t ⊗ₖ trdForm b c b' c' t := by
+  ext ⟨i, j⟩ ⟨k', l⟩
+  simp only [Matrix.mul_apply, Matrix.transpose_apply, Matrix.submatrix_apply, id,
+    Equiv.prodComm_apply, Prod.fst_swap, Prod.snd_swap, sandwichMatrix, Matrix.of_apply,
+    Fintype.sum_prod_type, Matrix.kroneckerMap_apply, trdForm]
+  simp_rw [sum_coord_mul]
+  have : ∀ r : Fin 4, (bA k' * (bA i * bA r * bA j) * bA l : MAlg b c b' c' t) r
+      = (bA k' * bA i * bA r * (bA j * bA l) : MAlg b c b' c' t) r := fun r => by
+    simp only [mul_assoc]
+  simp_rw [this, sum_diag_mul, trd_mul_comm (bA k') (bA i)]
+
+lemma sandwich_det_sq :
+    Equiv.Perm.sign (Equiv.prodComm (Fin 4) (Fin 4)) * (sandwichMatrix b c b' c' t).det ^ 2
+      = Q b c b' c' t ^ 16 := by
+  have h := congrArg Matrix.det (sandwich_gram (b := b) (c := c) (b' := b') (c' := c') (t := t))
+  rw [Matrix.det_mul, Matrix.det_transpose, Matrix.det_permute, Matrix.det_kronecker,
+    trdForm_eq, det_traceForm] at h
+  simp only [Fintype.card_fin] at h
+  linear_combination h
+
+/-- The sign of the swap of `Fin 4 × Fin 4` is a unit of `k`. -/
+lemma isUnit_sign_prodComm :
+    IsUnit ((Equiv.Perm.sign (Equiv.prodComm (Fin 4) (Fin 4)) : ℤ) : k) := by
+  simpa using (Units.isUnit (Equiv.Perm.sign (Equiv.prodComm (Fin 4) (Fin 4)))).map (Int.castRingHom k)
+
+/-- `det` of the sandwich matrix is a unit iff `Q` is: its square is `±Q¹⁶`. -/
+theorem isUnit_sandwichMatrix_iff :
+    IsUnit (sandwichMatrix b c b' c' t) ↔ IsUnit (Q b c b' c' t) := by
+  rw [Matrix.isUnit_iff_isUnit_det,
+    ← isUnit_pow_iff (M := k) (a := Q b c b' c' t) (n := 16) (by norm_num), ← sandwich_det_sq]
+  exact ⟨fun h => isUnit_sign_prodComm.mul (h.pow 2),
+    fun h => (isUnit_pow_iff (by norm_num)).mp (isUnit_of_mul_isUnit_right h)⟩
+
+lemma mulVec_bijective_iff {n : Type*} [Fintype n] [DecidableEq n] (A : Matrix n n k) :
+    Function.Bijective A.mulVec ↔ IsUnit A := by
+  refine ⟨fun h => Matrix.mulVec_surjective_iff_isUnit.mp h.2, fun h => ?_⟩
+  have hd := (Matrix.isUnit_iff_isUnit_det A).mp h
+  refine Function.bijective_iff_has_inverse.mpr ⟨A⁻¹.mulVec, fun v => ?_, fun v => ?_⟩
+  · simp [Matrix.mulVec_mulVec, Matrix.nonsing_inv_mul A hd]
+  · simp [Matrix.mulVec_mulVec, Matrix.mul_nonsing_inv A hd]
+
+/-- The basis `(1, u, v, uv)` of the opposite algebra. -/
+noncomputable def bAop : Module.Basis (Fin 4) k (MAlg b c b' c' t)ᵐᵒᵖ :=
+  bA.map (MulOpposite.opLinearEquiv k)
+
+variable (b c b' c' t) in
+/-- The basis `(eᵢ ⊗ eⱼ)` of `M ⊗ Mᵐᵒᵖ`. -/
+noncomputable def basisT :
+    Module.Basis (Fin 4 × Fin 4) k (MAlg b c b' c' t ⊗[k] (MAlg b c b' c' t)ᵐᵒᵖ) :=
+  bA.tensorProduct bAop
+
+variable (b c b' c' t) in
+/-- The basis `(E_{rs})` of `End M`. -/
+noncomputable def basisEnd : Module.Basis (Fin 4 × Fin 4) k (Module.End k (MAlg b c b' c' t)) :=
+  bA.end
+
+/-- In the bases `(eᵢ ⊗ eⱼ)` of `M ⊗ Mᵐᵒᵖ` and `(E_{rs})` of `End M`,
+`AlgHom.mulLeftRight` has matrix `sandwichMatrix`. -/
+theorem mulLeftRight_coords (v : Fin 4 × Fin 4 → k) :
+    (basisEnd b c b' c' t).equivFun
+        (AlgHom.mulLeftRight k (MAlg b c b' c' t) ((basisT b c b' c' t).equivFun.symm v))
+      = (sandwichMatrix b c b' c' t).mulVec v := by
+  set e1 := basisT b c b' c' t
+  have hlin : ((basisEnd b c b' c' t).equivFun.toLinearMap
+      ∘ₗ (AlgHom.mulLeftRight k (MAlg b c b' c' t)).toLinearMap
+      ∘ₗ e1.equivFun.symm.toLinearMap)
+      = Matrix.toLin' (sandwichMatrix b c b' c' t) := by
+    refine (Pi.basisFun k _).ext fun p => ?_
+    have h1 : e1.equivFun.symm (Pi.basisFun k _ p) = e1 p := by
+      rw [LinearEquiv.symm_apply_eq]
+      funext q
+      simp [Module.Basis.equivFun_self, Pi.single_apply, eq_comm]
+    simp only [LinearMap.coe_comp, LinearEquiv.coe_coe, Function.comp_apply, h1]
+    funext q
+    have hs : ∀ (A : Matrix (Fin 4) (Fin 4) k) (q : Fin 4 × Fin 4),
+        (Matrix.stdBasis k (Fin 4) (Fin 4)).repr A q = A q.1 q.2 := fun _ _ => rfl
+    simp [e1, basisT, basisEnd, Module.Basis.tensorProduct_apply', bAop, Matrix.toLin'_apply, hs,
+      sandwichMatrix, LinearMap.toMatrix_apply, bA_repr]
+  exact congrArg (fun f => f v) hlin
+
+/-- `AlgHom.mulLeftRight : M ⊗ Mᵐᵒᵖ → End M` is bijective iff the sandwich matrix is
+invertible. -/
+theorem bijective_mulLeftRight_iff :
+    Function.Bijective (AlgHom.mulLeftRight k (MAlg b c b' c' t)) ↔
+      IsUnit (sandwichMatrix b c b' c' t) := by
+  set e1 := basisT b c b' c' t
+  set e2 := basisEnd b c b' c' t
+  rw [← mulVec_bijective_iff, ← Equiv.comp_bijective _ e2.equivFun.toEquiv,
+    ← Equiv.bijective_comp e1.equivFun.symm.toEquiv]
+  have : ((e2.equivFun.toEquiv ∘ (AlgHom.mulLeftRight k (MAlg b c b' c' t)))
+      ∘ e1.equivFun.symm.toEquiv) = (sandwichMatrix b c b' c' t).mulVec :=
+    funext fun v => mulLeftRight_coords v
+  rw [this]
+
+/-- **Theorem of page 98.** `M(b, c; b', c'; t)` is an Azumaya algebra over `k`
+(`IsAzumaya`: finite, projective, faithful, with `M ⊗ Mᵐᵒᵖ → End M` bijective) if and
+only if `Q(t) = t² − bb't + b²c' + b'²c − 4cc'` is invertible in `k`. Over any
+commutative ring, characteristic `2` included. -/
+theorem isAzumaya_iff : IsAzumaya k (MAlg b c b' c' t) ↔ IsUnit (Q b c b' c' t) := by
+  rw [← isUnit_sandwichMatrix_iff, ← bijective_mulLeftRight_iff]
+  exact ⟨fun h => h.bij, fun h =>
+    { toProjective := inferInstance, toFaithfulSMul := inferInstance,
+      toFinite := inferInstance, bij := h }⟩
+
+/-- Page 98, second form: `M(b, c; b', c'; t)` is Azumaya iff the form `det` on
+`B = k1 + ku + kv` is non-degenerate, i.e. its half discriminant `δ_{P,B}` is a unit. -/
+theorem isAzumaya_iff_deltaPB :
+    IsAzumaya k (MAlg b c b' c' t) ↔ IsUnit (halfDisc3 1 c c' b b' (b * b' - t)) := by
+  rw [deltaPB_eq, IsUnit.neg_iff, isAzumaya_iff]
+
+/-- Over a field, `M(b, c; b', c'; t)` is Azumaya iff `Q(t) ≠ 0`: the non-Azumaya
+locus of the line of twists is `S̃ = {Q = 0}`. -/
+theorem isAzumaya_iff_ne_zero {F : Type*} [Field F] {b c b' c' t : F} :
+    IsAzumaya F (MAlg b c b' c' t) ↔ Q b c b' c' t ≠ 0 := by
+  rw [isAzumaya_iff, isUnit_iff_ne_zero]
+
+/-- Page 97: `M(0, 0; 0, 0; t)` (`u`, `v` nilpotent) is Azumaya iff `t` is a unit. -/
+theorem isAzumaya_nilpotent_iff : IsAzumaya k (MAlg (0 : k) 0 0 0 t) ↔ IsUnit t := by
+  rw [isAzumaya_iff]
+  simp [Q, isUnit_pow_iff]
+
+end MAlg
+
+end Azumaya
+
+end Grothendieck.Folder83

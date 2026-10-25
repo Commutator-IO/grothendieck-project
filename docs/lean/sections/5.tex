@@ -40,14 +40,43 @@ Récurrence sur $i$, comme à la page~6 : $\Theta_0 = \Lambda_0 - p = 0$. Si $p^
 
 \noindent Pour $\lambda_\nu = p^{p^\nu}/(p^\nu)!$, $m = p^\nu - (p^\nu - 1)/(p-1)$ (par \texttt{sub\_one\_mul\_padicValNat\_factorial\_pow}) et $\nu + pm = c(\nu)$ : c'est le \q{$p^{c(\nu)} \in I$} de la page~6. Lean : \texttt{p\_pow\_mul\_Θ\_mem}, \texttt{p\_pow\_mul\_lam\_pow\_mem}, \texttt{p\_pow\_mem\_Kp}, énoncés comme appartenances à l'idéal $(\Lambda_0 - p)$ de $A^{(\nu)}$.
 
-Reste hors de la vérification la nécessité, que la page laisse \q{au lecteur} :
+La nécessité, que la page laisse \q{au lecteur} avec un point d'exclamation en marge, est démontrée elle aussi. Pour un exposant $a = (a_0, \ldots, a_\nu)$, $0 \leq a_i < p$, notons $\operatorname{ord}(a)$ l'indice du premier exposant non nul de $a$, et $\operatorname{ord}(0) = c(\nu) = \nu + pm$.
+
+\begin{theoreme}[Grothendieck, pages 5 et 6, le lemme et son corollaire\piste{5-universal-artinian-pd-normal-form}]
+Soient $\lambda_i$ comme ci-dessus, avec $\lambda_\nu = p^m u$, $u$ inversible, et $\Theta_i = \Lambda_i - \lambda_i$.
+\begin{enumerate}
+\item Les monômes $\Theta^a$, $0 \leq a_i < p$, forment une base du $W$-module $A^{(\nu)}$.
+\item \emph{(Le lemme de la page 5.)} $\sum_a w_a\Theta^a$ appartient à $(\Lambda_0 - p)$ si et seulement si $p^{\operatorname{ord}(a)}$ divise $w_a$ pour tout $a$ : $w_a \in p^iW$ si $a_i$ est le premier exposant non nul, et $w_0 \in p^{c(\nu)}W$.
+\item \emph{(Le corollaire de la page 6.)} $W^{(\nu)} \simeq \bigoplus_a W/p^{\operatorname{ord}(a)}W$ comme $W$-module.
+\item Si $p$ n'est pas inversible dans $W$, $p^k = 0$ dans $W^{(\nu)}$ si et seulement si $k \geq c(\nu)$ : l'ordre de $1$ est exactement $p^{c(\nu)}$.
+\item Si $W$ est un anneau de valuation discrète d'uniformisante $p$, $W^{(\nu)}$ est de longueur $\sum_a \operatorname{ord}(a) = p + p^2 + \cdots + p^\nu + pm$.
+\end{enumerate}
+\end{theoreme}
+
+\begin{proof}
+\emph{La retenue dans les $\Theta_i$.} En développant $\Lambda_i^p = (\Theta_i + \lambda_i)^p$ et en utilisant $\lambda_i^p = q_i\lambda_{i+1}$, on trouve
+\[
+\Theta_i^p = q_i\Theta_{i+1} - \sum_{0<k<p}\binom pk\lambda_i^{p-k}\Theta_i^k \quad (i < \nu), \qquad \Theta_\nu^p = -\lambda_\nu^p - \sum_{0<k<p}\binom pk\lambda_\nu^{p-k}\Theta_\nu^k .
+\]
+Pour $i < \nu$ le terme constant $\lambda_i^p$ disparaît : c'est ce qui rend la retenue compatible avec les conditions a) et b).
+
+\emph{Un idéal.} Soit $S_n$ le sous-$W$-module engendré par les $p^{\min(\operatorname{ord}(a), n)}\Theta^a$. On montre, par récurrence descendante sur $j$, que $p^{\min(\operatorname{ord}(a), j, n)}\,\Theta_j\Theta^a \in S_n$ pour tout $a$. Si $a_j < p - 1$, $\Theta_j\Theta^a$ est un monôme de la base, d'ordre au plus $\min(\operatorname{ord}(a), j)$. Si $a_j = p - 1$, soit $a'$ l'exposant $a$ où l'on a remplacé $a_j$ par $0$ ; alors $\Theta_j\Theta^a = \Theta_j^p\Theta^{a'}$, et l'on remplace $\Theta_j^p$ par la formule ci-dessus. Les termes en $\Theta_j^k\Theta^{a'}$, $0 < k < p$, sont des monômes de la base d'ordre au plus $\operatorname{ord}(a)$. Le terme $q_j\Theta_{j+1}\Theta^{a'}$ relève de l'hypothèse de récurrence : l'ordre ne monte que de $1$ au plus, de $j$ à $j+1$, et le facteur $p$ de $q_j$ le compense. Pour $j = \nu$, le terme $\lambda_\nu^p\Theta^{a'}$ porte le facteur $p^{pm}$, qui compense le passage de l'ordre $\nu$ à l'ordre $c(\nu) = \nu + pm$ quand $a' = 0$. Comme $\Lambda_j = \Theta_j + \lambda_j$, $S_n$ est stable par multiplication par les $\Lambda_j$ : c'est un idéal.
+
+\emph{La base.} $S_0$ est un idéal qui contient $1$ : les $\Theta^a$ engendrent $A^{(\nu)}$. Comme les $\Lambda^a$ en forment une base (c'est la seconde moitié de l'injectivité de $\psi$), l'application $(w_a) \mapsto \sum_a w_a\Theta^a$ est une surjection d'un module libre de rang $p^{\nu+1}$ sur un module libre de même rang, donc une bijection : sur un anneau commutatif, un endomorphisme surjectif d'un module de type fini est injectif.
+
+\emph{Le lemme et ses conséquences.} $S_{c(\nu)}$ est un idéal qui contient $\Theta_0 = \Lambda_0 - p$, donc contient $(\Lambda_0 - p)$ : c'est la nécessité. La suffisance (théorème précédent) donne l'inclusion inverse. L'unicité des coordonnées dans la base des $\Theta^a$ donne alors (2), puis (3). Pour (4), on applique (2) à $p^k = p^k\,\Theta^0$ : il faut et il suffit que $p^{c(\nu)}$ divise $p^k$. Pour (5), $W/p^kW$ est de longueur $k$, et l'on compte : si $a_0 \neq 0$, l'ordre est $0$, et si $a_0 = 0$, l'ordre est celui de $(a_1, \ldots, a_\nu)$ augmenté de $1$. Par récurrence sur $\nu$, $\sum_a \operatorname{ord}(a) + \nu + 1 = 1 + p + \cdots + p^\nu + c(\nu)$.
+\end{proof}
+
+\noindent L'énoncé tient. La seule propriété des $q_i$ dont la nécessité ait besoin est $p \mid q_i$. La longueur $p + \cdots + p^\nu + pm$ vaut, par télescopage, la formule $c(\nu) + \sum_{i=1}^{\nu} i(p-1)p^{\nu-i}$ de la lecture ; pour $p = 2$ et $\nu = 1$, on retrouve la longueur $4$ et $c(1) = 3$ de la note de la lecture. Pour les $\lambda_i$ usuels, définis par $\lambda_i\,(p^i)! = p^{p^i}$, on a $m = p^\nu - v_p((p^\nu)!)$, et pour $W = \mathbf Z_p$ l'ordre de $1$ est exactement $p^{c(\nu)}$. Lean : \texttt{normalForm}, \texttt{tmono\_linearIndependent}, \texttt{span\_tmono}, \texttt{WνEquiv}, \texttt{p\_pow\_eq\_zero\_iff}, \texttt{length\_Wν}, \texttt{length\_Wν\_eq} ; pour les étapes, \texttt{Θ\_pow\_castSucc} et \texttt{Θ\_pow\_last} (la retenue), \texttt{Θ\_mul\_tmono\_mem} et \texttt{mul\_mem\_S} (l'idéal), \texttt{mono\_linearIndependent}, \texttt{Kp\_le\_S} (la nécessité), \texttt{S\_le\_Kp}, \texttt{sum\_ord} (le dénombrement) ; pour les $\lambda_i$ usuels, \texttt{exists\_lamStd}, \texttt{p\_pow\_eq\_zero\_iff\_std}, \texttt{length\_Wν\_std} et \texttt{padicInt\_Wν}, dans \href{\leanblob/Folder5.lean}{\texttt{Folder5.lean}}.
+
+Reste hors de la vérification le lemme de la page~7 :
 
 \begin{encadre}
-\begin{theoreme*}[Grothendieck, pages 5 à 7, forme normale dans les $\Theta_i$\piste{5-universal-artinian-pd-normal-form}]\nonverifie
-Dans les coordonnées $\Theta_i = \Lambda_i - p^{p^i}/(p^i)!$, $W^{(\nu)}$ a une forme normale explicite : $\sum w_a\Theta^a$ est nul si et seulement si le coefficient de $\Theta^a$ est dans $p^iW$, où $a_i$ est le premier exposant non nul, et le terme constant dans $p^{c(\nu)}W$, avec $c(\nu) = \nu + p\,[p^\nu - (p^{\nu-1} + \cdots + 1)]$ ; de même pour les quotients $W^{(\nu,r)}$, avec $p^{i-r}$ et $p^{c(\nu)-r}$.
+\begin{theoreme*}[Grothendieck, page 7, les quotients $W^{(\nu,r)}$\piste{5-universal-artinian-pd-normal-form}]\nonverifie
+Pour $1 \leq r \leq \nu$, soit $W^{(\nu,r)}$ le quotient de $W^{(\nu)}$ par $\Theta_1, \ldots, \Theta_r$. Alors $\sum w_a\Theta^a$ est dans $(\Theta_0, \ldots, \Theta_r)$ si et seulement si $w_a \in p^{i-r}W$ lorsque le premier exposant non nul $a_i$ a un indice $i > r$, et $w_0 \in p^{c(\nu)-r}W$.
 \end{theoreme*}
 \end{encadre}
-{\small La suffisance (les conditions a) et b) donnent des éléments nuls) est démontrée ci-dessus. La nécessité, c'est-à-dire que ces conditions découpent un idéal, et avec elle la forme normale, la longueur, l'ordre exact $p^{c(\nu)}$ de $1$ et les quotients $W^{(\nu,r)}$ de la page~7, n'est pas formalisée ; l'édition ne l'a vérifiée qu'à la machine, pour quelques $(p, \nu)$. Le plongement $\psi$ en donne un cadre : $W^{(\nu)}$ est $A^{(\nu)}$, libre de base les $\Lambda^a$, modulo $(\Lambda_0 - p)$.\par}
+{\small La forme normale de $W^{(\nu)}$ est démontrée ci-dessus. Pour les quotients $W^{(\nu,r)}$, l'édition n'a fait qu'une vérification à la machine, pour quelques $(p, \nu)$.\par}
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 49 et 50, dualité étale pour les sites annelés\piste{5-deligne-letter-ringed-duality}]\nonverifie
