@@ -1119,3 +1119,134 @@ theorem sphere_quotient (h2 : (2 : K) ≠ 0) (ha : a ≠ 0) (hb : b ≠ 0) :
 end QuadriqueAffine
 
 end Grothendieck.Folder77
+
+
+/-!
+## Page 85: condition c) without « étale » does not imply a)
+
+The Proposition of page 85 (`A` noetherian, `2` regular, `A/2A` a normal domain, `Δ ∉ 2A`)
+states a) `Δ = b² − 4c`, b) and c) « il existe une extension finie de `A_Δ` qui redonne
+`A_{2Δ}[U]/(U² − Δ)` quand on inverse `2` », the word « étale » struck on the page. The reading
+restores « finie étale ». As the page writes it, c) does not imply a): for `A = ℤ`, `Δ = 3`,
+`B_Δ = ℤ[1/3][U]/(U² − 3)` is finite and free of rank `2`, inverting `2` gives
+`ℤ[1/6][U]/(U² − 3)`, and `3 ≠ b² − 4c` since `b² − 4c ≡ 0, 1 (mod 4)`. This is finding
+`77-discriminant-extension-across-2`. That `B_Δ` is not étale over `ℤ[1/3]` (it ramifies at `2`),
+and the Proposition with « finie étale », are not formalised.
+-/
+
+namespace Grothendieck.Folder77
+
+section ExtensionAcrossTwo
+
+open Polynomial
+
+variable {R : Type*} [CommRing R]
+
+/-- The quadratic algebra `R[U]/(U² − d)`. -/
+abbrev quadAlg (d : R) : Type _ := AdjoinRoot (X ^ 2 - C d : R[X])
+
+theorem quadAlg_monic (d : R) : (X ^ 2 - C d : R[X]).Monic := monic_X_pow_sub_C _ two_ne_zero
+
+instance (d : R) : Module.Finite R (quadAlg d) := (AdjoinRoot.powerBasis' (quadAlg_monic d)).finite
+
+instance (d : R) : Module.Free R (quadAlg d) :=
+  .of_basis (AdjoinRoot.powerBasis' (quadAlg_monic d)).basis
+
+theorem finrank_quadAlg [Nontrivial R] (d : R) : Module.finrank R (quadAlg d) = 2 := by
+  rw [(AdjoinRoot.powerBasis' (quadAlg_monic d)).finrank]
+  simp [AdjoinRoot.powerBasis']
+
+/-- Inverting `s` commutes with forming `R[U]/(U² − d)`:
+`(R[U]/(U² − d))_s ≅ R_s[U]/(U² − d)`. -/
+theorem quadAlg_away (d s : R) :
+    Nonempty (Localization.Away (algebraMap R (quadAlg d) s) ≃+*
+      quadAlg (algebraMap R (Localization.Away s) d)) := by
+  set B := quadAlg d
+  set Rs := Localization.Away s
+  set Bs := Localization.Away (algebraMap R B s)
+  have hdiv : (X ^ 2 - C (algebraMap R Rs d)) ∣ (X ^ 2 - C d : R[X]).map (algebraMap R Rs) := by
+    simp
+  let g := AdjoinRoot.map (algebraMap R Rs) _ _ hdiv
+  have hg : ∀ r : R, g (algebraMap R B r) = AdjoinRoot.of _ (algebraMap R Rs r) := fun r => by
+    show g (AdjoinRoot.of _ r) = _
+    simp [g, AdjoinRoot.map]
+  have hgu : IsUnit (g (algebraMap R B s)) := by
+    rw [hg]
+    exact (IsLocalization.Away.algebraMap_isUnit s).map _
+  let ψ : Bs →+* quadAlg (algebraMap R Rs d) := IsLocalization.Away.lift _ hgu
+  let i : Rs →+* Bs := IsLocalization.Away.map Rs Bs (algebraMap R B) s
+  have hi : ∀ r : R, i (algebraMap R Rs r) = algebraMap B Bs (algebraMap R B r) := fun r =>
+    IsLocalization.map_eq _ _
+  have h0 : (AdjoinRoot.root (X ^ 2 - C d) : B) ^ 2 - algebraMap R B d = 0 := by
+    rw [AdjoinRoot.algebraMap_eq, ← AdjoinRoot.mk_C, ← AdjoinRoot.mk_X, ← map_pow, ← map_sub,
+      AdjoinRoot.mk_self]
+  have hroot : (X ^ 2 - C (algebraMap R Rs d)).eval₂ i
+      (algebraMap B Bs (AdjoinRoot.root _)) = 0 := by
+    rw [eval₂_sub, eval₂_X_pow, eval₂_C, hi, ← map_pow, ← map_sub, h0, map_zero]
+  let φ : quadAlg (algebraMap R Rs d) →+* Bs := AdjoinRoot.lift i _ hroot
+  have hψ : ∀ x : B, ψ (algebraMap B Bs x) = g x := fun x => IsLocalization.Away.lift_eq _ _ x
+  have key : ψ.comp i = AdjoinRoot.of _ :=
+    IsLocalization.ringHom_ext (Submonoid.powers s) (RingHom.ext fun r => by
+      simp only [RingHom.comp_apply, hi, hψ, hg])
+  refine ⟨RingEquiv.ofRingHom ψ φ ?_ ?_⟩
+  · refine Ideal.Quotient.ringHom_ext (Polynomial.ringHom_ext (fun a => ?_) ?_)
+    · show ψ (φ (AdjoinRoot.of _ a)) = AdjoinRoot.of _ a
+      rw [AdjoinRoot.lift_of]
+      exact RingHom.congr_fun key a
+    · show ψ (φ (AdjoinRoot.root _)) = AdjoinRoot.root _
+      rw [AdjoinRoot.lift_root, hψ]
+      simp [g, AdjoinRoot.map]
+  · refine IsLocalization.ringHom_ext (Submonoid.powers (algebraMap R B s))
+      (Ideal.Quotient.ringHom_ext (Polynomial.ringHom_ext (fun a => ?_) ?_))
+    · show φ (ψ (algebraMap B Bs (algebraMap R B a))) = algebraMap B Bs (algebraMap R B a)
+      rw [hψ, hg, AdjoinRoot.lift_of, hi]
+    · show φ (ψ (algebraMap B Bs (AdjoinRoot.root _))) = algebraMap B Bs (AdjoinRoot.root _)
+      rw [hψ]
+      simp [g, AdjoinRoot.map, φ, AdjoinRoot.lift_root]
+
+/-- `3` is not of the form `b² − 4c` in `ℤ`: `b² − 4c ≡ 0` or `1 (mod 4)`. -/
+theorem sq_sub_four_mul_ne_three (b c : ℤ) : b ^ 2 - 4 * c ≠ 3 := by
+  intro h
+  have h' := congrArg (Int.cast : ℤ → ZMod 4) h
+  push_cast at h'
+  generalize (b : ZMod 4) = x at h'
+  generalize (c : ZMod 4) = y at h'
+  revert x y
+  decide
+
+end ExtensionAcrossTwo
+
+section ExtensionAcrossTwoExample
+
+/-- `ℤ[1/3]`. -/
+abbrev Z3 : Type := Localization.Away (3 : ℤ)
+
+/-- `ℤ[1/3]` is not the zero ring. -/
+instance : Nontrivial Z3 :=
+  (IsLocalization.Away.lift (S := Z3) (3 : ℤ) (g := Int.castRingHom ℚ)
+    (isUnit_iff_ne_zero.mpr (by norm_num))).domain_nontrivial
+
+/-- `ℤ[1/6]`, as `ℤ[1/3][1/2]`. -/
+abbrev Z6 : Type := Localization.Away (2 : Z3)
+
+/-- `B_Δ = ℤ[1/3][U]/(U² − 3)`. -/
+abbrev B3 : Type := quadAlg (3 : Z3)
+
+/-- `A_{2Δ}[U]/(U² − Δ) = ℤ[1/6][U]/(U² − 3)`. -/
+abbrev C6 : Type := quadAlg (3 : Z6)
+
+/-- **Page 85, condition c) without « étale ».** For `A = ℤ`, `Δ = 3` (`2` regular, `A/2A` a
+field, `Δ ∉ 2A`), `B_Δ = ℤ[1/3][U]/(U² − 3)` is finite (free of rank `2`) over `A_Δ = ℤ[1/3]`,
+and inverting `2` gives `A_{2Δ}[U]/(U² − Δ)`; yet `Δ ≠ b² − 4c` for all `b, c ∈ ℤ`. So c),
+with « étale » struck as on the page, does not imply a). -/
+theorem extension_across_two_counterexample :
+    ¬ (2 : ℤ) ∣ 3 ∧ Module.Finite Z3 B3 ∧ Module.Free Z3 B3 ∧ Module.finrank Z3 B3 = 2 ∧
+      Nonempty (Localization.Away (algebraMap Z3 B3 2) ≃+* C6) ∧
+      ¬ ∃ b c : ℤ, b ^ 2 - 4 * c = 3 :=
+  ⟨by decide, inferInstance, inferInstance, finrank_quadAlg _, (quadAlg_away (3 : Z3) (2 : Z3)).map fun e =>
+      e.trans (AdjoinRoot.algEquivOfEq (R := Z6) _ _ (by simp; exact map_ofNat _ _)).toRingEquiv,
+    fun ⟨b, c, h⟩ => sq_sub_four_mul_ne_three b c h⟩
+
+end ExtensionAcrossTwoExample
+
+end Grothendieck.Folder77

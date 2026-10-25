@@ -225,16 +225,48 @@ $w = u \circ v$ est dans $\mathcal A_V$, et inversible comme composé de deux bi
 L'argument de la lettre vaut tel quel, avec la relation de Cayley--Hamilton écrite en $w = uv$, comme la lecture la rétablit ; le tapuscrit l'écrit en $u$ avec les coefficients de $w$. L'hypothèse que $u$ soit un isomorphisme sert seulement à rendre $w$ inversible. Que $v$, induit par $L^{n-i}$, en soit un aussi est l'axiome de Lefschetz de la cohomologie, que la lettre suppose.
 \end{remarque}
 
-Ne sont pas démontrés ici : le théorème de Lefschetz difficile par $\mathfrak{sl}_2$ et la représentation de $\mathfrak{sl}_2$ engendrée par $(L_0, \Lambda_0)$ ; dans le théorème du n\textsuperscript{o}~6, $\Lambda$ et les projecteurs primitifs (pages~9 à~12) ; l'existence et l'unicité de l'homomorphisme $\Phi_0 \to \mathcal E$ et le corollaire de la page~16\piste{16-universal-lefschetz-ring} ; le contre-exemple de la page~21 ; dans les algèbres de Hodge, l'exemple $\chi = \varphi^2$ de la page~28 et la question, restée sans réponse, de la finitude d'une orbite sous $u$ ; les pages~2 à~5, 29 à~46 et~48 à~54, dont les sections hyperplanes, le corollaire de la page~48, les variantes de la page~49 et le lemme.
+Ne sont pas démontrés ici : le théorème de Lefschetz difficile par $\mathfrak{sl}_2$ et la représentation de $\mathfrak{sl}_2$ engendrée par $(L_0, \Lambda_0)$ ; dans le théorème du n\textsuperscript{o}~6, l'existence de la décomposition primitive et les réciproques (pages~9 à~12) ; l'existence et l'unicité de l'homomorphisme $\Phi_0 \to \mathcal E$ et le corollaire de la page~16\piste{16-universal-lefschetz-ring} ; le contre-exemple de la page~21 ; dans les algèbres de Hodge, l'exemple $\chi = \varphi^2$ de la page~28 et la question, restée sans réponse, de la finitude d'une orbite sous $u$ ; les pages~2 à~5, 29 à~46 et~48 à~54, dont les sections hyperplanes, le corollaire de la page~48, les variantes de la page~49 et le lemme.
+
+\noindent\emph{Conventions.} On lit la décomposition primitive dans l'anneau $E$ lui-même, sans module : $p_{j,\beta}$ est le projecteur sur $L^\beta P^j \subset M^{j+2\beta}$, pour $0 \leqslant j \leqslant n$ et $0 \leqslant \beta \leqslant n - j$, de sorte que le $\pi_{i,\alpha}$ de la lecture est $p_{i-2\alpha,\alpha}$ si $i \leqslant n$, et que $\pi_{2n-i,\alpha}$ est $p_{i-2\alpha,\,n-i+\alpha}$. On demande : les $p_{j,\beta}$ sont des idempotents orthogonaux de somme~$1$ ; $\pi_a p_{j,\beta} = p_{j,\beta}\pi_a$ vaut $p_{j,\beta}$ si $a = j + 2\beta$ et $0$ sinon ; $L p_{j,\beta} = p_{j,\beta+1} L$ pour $\beta < n - j$ et $L p_{j,n-j} = 0$ ; enfin $p_{j,\beta} \in L^\beta p_{j,0} E$, ce qui dit que l'image est $L^\beta P^j$ et non un supplémentaire quelconque. C'est la décomposition que le dossier \q{admet} (structure \texttt{DecompositionPrimitive}).
 
 \begin{encadre}
-\begin{theoreme}[Grothendieck, pages 4 à 17, critère de Lefschetz dans un anneau gradué\piste{16-graded-ring-lefschetz-criterion}]\nonverifie
-Soient $\mathcal E$ un anneau gradué et $L \in \mathcal E$ de degré~$2$. S'il existe dans $\mathcal E$ des inverses d'un côté $w_i$ des $L^{n-i}$, les projecteurs de la graduation, le pseudo-inverse $\Lambda$ et tous les projecteurs de la décomposition primitive appartiennent à $\mathcal E$, sans module sous-jacent et sur $\mathbf Z$.
+\begin{theoreme}[Grothendieck, pages 4 à 17, critère de Lefschetz dans un anneau gradué\piste{16-graded-ring-lefschetz-criterion}]
+Soient $E$ un anneau gradué par des idempotents orthogonaux $\pi_a$ de somme~$1$ ($0 \leqslant a \leqslant 2n$), $\mathcal E \subset E$ un sous-anneau, $L \in \mathcal E$ de degré~$2$, et, pour $i \leqslant n$, $w_i \in \mathcal E$ de degré $-(2n-2i)$ avec $(w_i L^{n-i} - 1)\pi_i = 0$ et $(L^{n-i} w_i - 1)\pi_{2n-i} = 0$, c'est-à-dire $(6.3)_i$. Alors, sans module sous-jacent et sur~$\mathbf Z$ :
+\begin{enumerate}
+\item les projecteurs $\pi_a$ de la graduation sont dans $\mathcal E$ ;
+\item tous les projecteurs $p_{j,\beta}$ de la décomposition primitive sont dans $\mathcal E$ ;
+\item $\Lambda = \sum_{j}\sum_{\beta < n-j} L^{\beta} w_j L^{n-j-\beta-1} p_{j,\beta+1}$ est dans $\mathcal E$, de degré $-2$, et vérifie~(6.7) : $L\Lambda = 1 - \sum_j p_{j,0}$ et $\Lambda L = 1 - \sum_j p_{j,n-j}$.
+\end{enumerate}
 \end{theoreme}
 \end{encadre}
+
 \begin{demopage}[pages 4 à 12]
 Le n\textsuperscript{o}~4 remplace les conditions portant sur un module par la condition interne $(4.4)_i$ (pp.~4 à~6) ; le n\textsuperscript{o}~5, sur le feuillet \q{5 bis} (p.~7), en tire $\pi_i \in \mathcal E$ par $v'_i = \pi_{2n-i}v_i\pi_i$ et $w'_i = \pi_i w_i \pi_{2n-i}$, dont les produits sont $\pi_i$ et $\pi_{2n-i}$. Le n\textsuperscript{o}~6 prend $v_i = L^{n-i}$ et obtient les $\pi_{i,\alpha}$ et $\pi_{2n-i,\alpha}$ par une double récurrence descendante, formules (6.9) et (6.10) (p.~11), puis $\Lambda$ par (6.11) à (6.13) (pp.~11 et~12) ; la décomposition primitive y est admise. La liste d'énoncés de la page~9 est biffée et renumérotée, et l'implication marquée \q{Démonstration à fournir} (p.~12) est hors des clauses encadrées.
 \end{demopage}
+
+\begin{proof}
+(1) est le n\textsuperscript{o}~5 (\texttt{projecteurs\_mem}, \texttt{projecteurs\_mem\_lefschetz}). Tout le reste repose sur un calcul de bloc : pour $\beta \leqslant n - j$,
+\[
+L^{\beta}\, w_j\, L^{n-j-\beta}\, p_{j,\beta} = p_{j,\beta}.
+\]
+En effet $p_{j,\beta} = L^\beta p_{j,0}\, y$, donc $L^{n-j-\beta} p_{j,\beta} = L^{n-j}\pi_j\, p_{j,0}\, y$, puis $w_j L^{n-j} \pi_j = \pi_j$ ramène à $p_{j,0}\,y$, et $L^\beta$ redonne $p_{j,\beta}$ (\texttt{inverse\_bloc}). Par ailleurs $L^k p_{j,\beta}$ vaut $p_{j,\beta+k} L^k$ tant que $\beta + k \leqslant n - j$ et $0$ au-delà (\texttt{pow\_mul\_of\_le}, \texttt{pow\_mul\_eq\_zero}) ; en particulier $L^{n-j+1} p_{j,0} = 0$, les $p_{j,0}$ projettent sur des classes primitives.
+
+(2) Récurrence sur le degré primitif $j$, qui est la récurrence descendante du dossier sur~$\alpha$. Si $a = j + 2\beta \leqslant n$, posons $S_j = \sum_{j' < j}\sum_{\beta'} p_{j',\beta'}$, dans $\mathcal E$ par récurrence. Dans $\pi_a(1 - S_j)$ ne restent que les blocs de degré~$a$ et de degré primitif $j' \geqslant j$ ; pour $j' > j$, l'exposant $n - j - \beta$ dépasse la longueur restante de la chaîne et $L^{n-j-\beta}$ les tue. Le calcul de bloc donne alors la formule~(6.9)
+\[
+p_{j,\beta} = L^{\beta}\, w_j\, L^{n-j-\beta}\, \pi_a\, (1 - S_j) \in \mathcal E \qquad (\texttt{formule\_bas}).
+\]
+Si $a \geqslant n$, soit $i = 2n - a = j + 2\beta''$ avec $\beta'' = n - j - \beta$ ; alors $L^{a-n}p_{j,\beta''} = p_{j,\beta}L^{a-n}$ et $L^{a-n} w_i \pi_a = \pi_a$, d'où la formule~(6.10)
+\[
+p_{j,\beta} = L^{a-n}\, p_{j,\beta''}\, w_i\, \pi_a \in \mathcal E \qquad (\texttt{formule\_haut}),
+\]
+avec $p_{j,\beta''}$ déjà obtenu, puisque $i \leqslant n$ (\texttt{projecteurs\_primitifs\_mem}).
+
+(3) Chaque terme de $\Lambda$ est un produit d'éléments de $\mathcal E$, de degré $2\beta - 2(n-j) + 2(n-j-\beta-1) = -2$ (\texttt{homogene\_pseudoInverse}). Par le calcul de bloc, $L \cdot L^{\beta} w_j L^{n-j-\beta-1} p_{j,\beta+1} = p_{j,\beta+1}$ : $L\Lambda$ est la somme des blocs qui ne sont pas en bas de chaîne, soit $1 - \sum_j p_{j,0}$ (\texttt{mul\_pseudoInverse}). De même $p_{j,\beta+1} L = L p_{j,\beta}$ donne $L^{\beta} w_j L^{n-j-\beta-1} p_{j,\beta+1} L = p_{j,\beta}$ pour $\beta < n - j$ : $\Lambda L$ est la somme des blocs qui ne sont pas en haut de chaîne, soit $1 - \sum_j p_{j,n-j}$ (\texttt{pseudoInverse\_mul}). Le tout est rassemblé dans \texttt{critere\_lefschetz}.
+\end{proof}
+
+\begin{remarque}
+L'énoncé tient sur~$\mathbf Z$ et pour un sous-anneau quelconque, sans module, et sans que les relations $(L^{n-i}w_i - 1)\pi_{2n-i} = 0$ servent au-delà du n\textsuperscript{o}~5 et de la formule~(6.10). La récurrence double du dossier se réduit à une récurrence simple, une fois les $\pi_a$ connus. Pour $\Lambda$ sur un bloc du bas, la formule affichée par la lecture, $\Lambda\pi_{i,\alpha} = w_{i-2\alpha}L^{n-i+\alpha}\pi_{i,\alpha}$, est de degré $-2\alpha$ et non $-2$ : il y manque un facteur $L^{\alpha-1}$ à gauche, et la forme juste est $\Lambda\pi_{i,\alpha} = L^{\alpha-1} w_{i-2\alpha} L^{n-i+\alpha}\pi_{i,\alpha}$, qui coïncide avec celle de la lecture pour $\alpha = 1$ ; la formule pour les blocs du haut est juste telle quelle. Ne sont pas démontrés : l'existence de la décomposition primitive à partir de~$(6.3)$, que le dossier admet ; les réciproques (2)~$\Rightarrow$~(1) et (3)~$\Rightarrow$~(1) du théorème de la page~9 ; la caractérisation de la \emph{Remarque} en $L$ et $\Lambda$ seuls ($\pi_{i,\alpha} = L^{\alpha}\Lambda^{n-i+2\alpha}L^{n-i+\alpha}(\cdots)$).
+\end{remarque}
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, page 49, variantes en dimension critique\piste{16-weak-variants-imply-strong}]\nonverifie

@@ -547,7 +547,7 @@ function ProvedInLean() {
       </p>
       <div className="mt-4 space-y-3">
         {shown.map((p) => (
-          <article key={p.lean} className="card px-4 py-3" {...commentData(proofCtx(p))}>
+          <article key={`${p.lean}#${p.page}#${p.name}`} className="card px-4 py-3" {...commentData(proofCtx(p))}>
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
               <a href={`/#${p.folder}/${p.batch}/p${p.page}`} className="text-[14px] font-semibold text-ink-900 hover:text-brand-700">
                 n° {p.folder} · {p.name}

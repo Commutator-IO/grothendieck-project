@@ -963,4 +963,258 @@ end Corps
 
 end AlgebresHodge
 
+section DecompositionPrimitive
+
+/-! ### No. 6, pages 8–12: `Λ` and the primitive projectors in `ℰ`
+
+Finding `16-graded-ring-lefschetz-criterion`. The folder takes the primitive decomposition
+as known (« la décomposition primitive y est admise ») and computes, from the inverses `wⱼ`
+of `L^{n-j}`, each of its projectors and `Λ` as polynomials in `L`, the `wⱼ` and the `πₐ`.
+The decomposition is read here inside the ring `E`, with no module: `p j β` is the projector
+onto `L^β P^j ⊂ M^{j+2β}` (`j ≤ n`, `β ≤ n - j`), so that the reading's `π_{i,α}` is
+`p (i-2α) α` for `i ≤ n` and `π_{2n-i,α}` is `p (i-2α) (n-i+α)`. -/
+
+variable {E : Type*} [Ring E] {π : ℤ → E} {n : ℕ}
+
+theorem homogene_congr {d d' : ℤ} (h : d = d') {x : E} (hx : Homogene π d x) :
+    Homogene π d' x := h ▸ hx
+
+theorem homogene_sum {ι : Type*} (s : Finset ι) {d : ℤ} {f : ι → E}
+    (h : ∀ i ∈ s, Homogene π d (f i)) : Homogene π d (∑ i ∈ s, f i) := by
+  intro a b hab
+  rw [Finset.mul_sum, Finset.sum_mul]
+  exact Finset.sum_eq_zero fun i hi => h i hi a b hab
+
+/-- The primitive decomposition `M^a = ⊕ L^β P^j` (`j + 2β = a`), read in the ring `E`:
+orthogonal idempotents `p j β` of sum `1`, `p j β` living in degree `j + 2β`, `L` carrying
+the block `(j, β)` to `(j, β + 1)` and killing the top `(j, n - j)` of each chain, and the
+image of `p j β` contained in `L^β` times the image of `p j 0` (`L^β P^j`, not merely a
+complement). -/
+structure DecompositionPrimitive (π : ℤ → E) (n : ℕ) (L : E) (p : ℕ → ℕ → E) : Prop where
+  idem : ∀ j ≤ n, ∀ β ≤ n - j, p j β * p j β = p j β
+  orth : ∀ j ≤ n, ∀ β ≤ n - j, ∀ k ≤ n, ∀ γ ≤ n - k, (j, β) ≠ (k, γ) → p j β * p k γ = 0
+  sum : ∑ j ∈ Finset.range (n + 1), ∑ β ∈ Finset.range (n - j + 1), p j β = 1
+  left : ∀ j ≤ n, ∀ β ≤ n - j, ∀ a : ℤ,
+    π a * p j β = if a = (j : ℤ) + 2 * β then p j β else 0
+  right : ∀ j ≤ n, ∀ β ≤ n - j, ∀ a : ℤ,
+    p j β * π a = if a = (j : ℤ) + 2 * β then p j β else 0
+  comm : ∀ j ≤ n, ∀ β < n - j, L * p j β = p j (β + 1) * L
+  top : ∀ j ≤ n, L * p j (n - j) = 0
+  image : ∀ j ≤ n, ∀ β ≤ n - j, ∃ y, p j β = L ^ β * p j 0 * y
+
+/-- The pseudo-inverse of pages 11–12, block by block:
+`Λ = ∑_j ∑_{β < n-j} L^β wⱼ L^{n-j-β-1} p_{j,β+1}`, and `Λ` kills the bottoms `p j 0`. -/
+def pseudoInverse (n : ℕ) (L : E) (w : ℕ → E) (p : ℕ → ℕ → E) : E :=
+  ∑ j ∈ Finset.range (n + 1), ∑ β ∈ Finset.range (n - j),
+    L ^ β * w j * L ^ (n - j - (β + 1)) * p j (β + 1)
+
+namespace DecompositionPrimitive
+
+variable {L : E} {p : ℕ → ℕ → E} (D : DecompositionPrimitive π n L p)
+include D
+
+theorem pow_mul_of_le {j β k : ℕ} (hj : j ≤ n) (h : β + k ≤ n - j) :
+    L ^ k * p j β = p j (β + k) * L ^ k := by
+  induction k with
+  | zero => simp
+  | succ k ih =>
+    calc L ^ (k + 1) * p j β = L * (L ^ k * p j β) := by rw [pow_succ', mul_assoc]
+      _ = L * p j (β + k) * L ^ k := by rw [ih (by omega), mul_assoc]
+      _ = p j (β + k + 1) * (L * L ^ k) := by rw [D.comm j hj (β + k) (by omega), mul_assoc]
+      _ = _ := by rw [← pow_succ', add_assoc]
+
+theorem pow_mul_eq_zero {j β k : ℕ} (hj : j ≤ n) (hβ : β ≤ n - j) (h : n - j < β + k) :
+    L ^ k * p j β = 0 := by
+  obtain ⟨m, rfl⟩ : ∃ m, k = m + 1 + (n - j - β) := ⟨k - 1 - (n - j - β), by omega⟩
+  calc L ^ (m + 1 + (n - j - β)) * p j β = L ^ m * (L * p j (n - j)) * L ^ (n - j - β) := by
+        rw [pow_add, mul_assoc, D.pow_mul_of_le hj (by omega : β + (n - j - β) ≤ n - j),
+          show β + (n - j - β) = n - j by omega, pow_succ]
+        simp only [mul_assoc]
+    _ = 0 := by rw [D.top j hj, mul_zero, zero_mul]
+
+/-- The bottom `p j 0` projects onto primitive classes: `L^{n-j+1} p_{j,0} = 0`. -/
+theorem primitif {j : ℕ} (hj : j ≤ n) : L ^ (n - j + 1) * p j 0 = 0 :=
+  D.pow_mul_eq_zero hj (Nat.zero_le _) (by omega)
+
+theorem homogene_zero {j β : ℕ} (hj : j ≤ n) (hβ : β ≤ n - j) : Homogene π 0 (p j β) := by
+  intro a b hab
+  rw [D.left j hj β hβ b]
+  split_ifs with h
+  · rw [D.right j hj β hβ a, ite_eq_right (by omega)]
+  · rw [zero_mul]
+
+/-- The key computation of page 11: on `L^β P^j`, `L^β wⱼ L^{n-j-β}` is the identity. -/
+theorem inverse_bloc {w : ℕ → E} (h₁ : ∀ i ≤ n, w i * L ^ (n - i) * π i = π i)
+    {j β : ℕ} (hj : j ≤ n) (hβ : β ≤ n - j) :
+    L ^ β * w j * L ^ (n - j - β) * p j β = p j β := by
+  obtain ⟨y, hy⟩ := D.image j hj β hβ
+  have hp0 : π j * p j 0 = p j 0 := by
+    rw [D.left j hj 0 (Nat.zero_le _) j]; simp
+  have e : L ^ (n - j - β) * L ^ β = L ^ (n - j) := by rw [← pow_add]; congr 1; omega
+  rw [hy]
+  calc L ^ β * w j * L ^ (n - j - β) * (L ^ β * p j 0 * y)
+      = L ^ β * (w j * (L ^ (n - j - β) * L ^ β) * π j * p j 0) * y := by
+        rw [mul_assoc _ (π (j : ℤ)), hp0]; simp only [mul_assoc]
+    _ = L ^ β * p j 0 * y := by rw [e, h₁ j hj, hp0]
+
+/-- **Page 11, formula (6.9).** Below the middle (`j + 2β ≤ n`), with `α = β`, `i = j + 2β`:
+`π_{i,α} = L^α w_{i-2α} L^{n-i+α} πᵢ (1 - ∑_{α' > α} π_{i,α'})`; the sum is written over all
+blocks with a smaller primitive degree, `πᵢ` keeping those of degree `i`. -/
+theorem formule_bas {w : ℕ → E} (h₁ : ∀ i ≤ n, w i * L ^ (n - i) * π i = π i)
+    {j β : ℕ} (hj : j ≤ n) (hjβ : j + 2 * β ≤ n) :
+    p j β = L ^ β * w j * L ^ (n - j - β) * π ((j : ℤ) + 2 * β) *
+      (1 - ∑ j' ∈ Finset.range j, ∑ β' ∈ Finset.range (n - j' + 1), p j' β') := by
+  have hβ : β ≤ n - j := by omega
+  have hS : 1 - ∑ j' ∈ Finset.range j, ∑ β' ∈ Finset.range (n - j' + 1), p j' β' =
+      ∑ j' ∈ Finset.Ico j (n + 1), ∑ β' ∈ Finset.range (n - j' + 1), p j' β' := by
+    rw [← D.sum, ← Finset.sum_range_add_sum_Ico _ (by omega : j ≤ n + 1)]; abel
+  have key : L ^ (n - j - β) * π ((j : ℤ) + 2 * β) *
+      (∑ j' ∈ Finset.Ico j (n + 1), ∑ β' ∈ Finset.range (n - j' + 1), p j' β') =
+      L ^ (n - j - β) * p j β := by
+    rw [Finset.mul_sum, Finset.sum_eq_single j]
+    · rw [Finset.mul_sum, Finset.sum_eq_single β]
+      · rw [mul_assoc, D.left j hj β hβ, ite_eq_left rfl]
+      · intro β' hβ' hne
+        rw [Finset.mem_range] at hβ'
+        rw [mul_assoc, D.left j hj β' (by omega), ite_eq_right (by omega), mul_zero]
+      · intro h; exact absurd (Finset.mem_range.2 (by omega)) h
+    · intro j' hj' hne
+      rw [Finset.mem_Ico] at hj'
+      rw [Finset.mul_sum]
+      refine Finset.sum_eq_zero fun β' hβ' => ?_
+      rw [Finset.mem_range] at hβ'
+      rw [mul_assoc, D.left j' (by omega) β' (by omega)]
+      split_ifs with h
+      · exact D.pow_mul_eq_zero (by omega) (by omega) (by omega)
+      · rw [mul_zero]
+    · intro h; exact absurd (Finset.mem_Ico.2 ⟨le_rfl, by omega⟩) h
+  rw [hS]
+  have h' := congrArg (fun x => L ^ β * w j * x) key
+  have K := D.inverse_bloc h₁ hj hβ
+  simp only [mul_assoc] at h' K ⊢
+  rw [h', K]
+
+/-- **Page 11, formula (6.10).** Above the middle (`n ≤ j + 2β`), with `i = 2n - j - 2β`:
+`π_{2n-i,α} = L^{n-i} π_{i,α} wᵢ π_{2n-i}`. -/
+theorem formule_haut {w : ℕ → E}
+    (h₂ : ∀ i ≤ n, L ^ (n - i) * w i * π (2 * n - i) = π (2 * n - i))
+    {j β : ℕ} (hj : j ≤ n) (hβ : β ≤ n - j) (hn : n ≤ j + 2 * β) :
+    p j β = L ^ (j + 2 * β - n) * p j (n - j - β) * w (j + 2 * (n - j - β)) *
+      π ((j : ℤ) + 2 * β) := by
+  have h := h₂ (j + 2 * (n - j - β)) (by omega)
+  rw [show n - (j + 2 * (n - j - β)) = j + 2 * β - n by omega,
+    show (2 * n - ((j + 2 * (n - j - β) : ℕ) : ℤ)) = (j : ℤ) + 2 * β by omega] at h
+  calc p j β = p j β * π ((j : ℤ) + 2 * β) := by rw [D.right j hj β hβ, ite_eq_left rfl]
+    _ = p j β * (L ^ (j + 2 * β - n) * w (j + 2 * (n - j - β)) * π ((j : ℤ) + 2 * β)) := by
+        rw [h]
+    _ = _ := by
+        rw [D.pow_mul_of_le (β := n - j - β) (k := j + 2 * β - n) hj (by omega),
+          show n - j - β + (j + 2 * β - n) = β by omega]
+        simp only [mul_assoc]
+
+/-- **Pages 10–11 (no. 6), (1) ⇒ (3), over `ℤ` and with no module.** If `L ∈ ℰ` has degree `2`
+and the one-sided inverses `wᵢ` of `L^{n-i}` of `(6.3)` lie in `ℰ`, every projector of the
+primitive decomposition lies in `ℰ`. Induction on the primitive degree `j` (the folder's
+descending induction on `α`), through `formule_bas` and `formule_haut`. -/
+theorem projecteurs_primitifs_mem (ℰ : Subring E) (G : Graduation π n) (hLE : L ∈ ℰ)
+    (hL : Homogene π 2 L) {w : ℕ → E} (hwE : ∀ i ≤ n, w i ∈ ℰ)
+    (hw : ∀ i ≤ n, Homogene π (-(2 * ((n : ℤ) - i))) (w i))
+    (h₁ : ∀ i ≤ n, w i * L ^ (n - i) * π i = π i)
+    (h₂ : ∀ i ≤ n, L ^ (n - i) * w i * π (2 * n - i) = π (2 * n - i)) :
+    ∀ j ≤ n, ∀ β ≤ n - j, p j β ∈ ℰ := by
+  have hπ := projecteurs_mem_lefschetz ℰ G hLE hL w hwE hw h₁ h₂
+  intro j
+  induction j using Nat.strong_induction_on with
+  | _ j ih =>
+    intro hj
+    have hS : (1 - ∑ j' ∈ Finset.range j, ∑ β' ∈ Finset.range (n - j' + 1), p j' β') ∈ ℰ :=
+      ℰ.sub_mem ℰ.one_mem (ℰ.sum_mem fun j' hj' => ℰ.sum_mem fun β' hβ' => by
+        rw [Finset.mem_range] at hj' hβ'
+        exact ih j' hj' (by omega) β' (by omega))
+    have bas : ∀ β, j + 2 * β ≤ n → p j β ∈ ℰ := fun β hβ => by
+      rw [D.formule_bas h₁ hj hβ]
+      exact ℰ.mul_mem (ℰ.mul_mem (ℰ.mul_mem (ℰ.mul_mem (ℰ.pow_mem hLE _) (hwE j hj))
+        (ℰ.pow_mem hLE _)) (hπ _)) hS
+    intro β hβ
+    by_cases hn : j + 2 * β ≤ n
+    · exact bas β hn
+    · rw [D.formule_haut h₂ hj hβ (by omega)]
+      exact ℰ.mul_mem (ℰ.mul_mem (ℰ.mul_mem (ℰ.pow_mem hLE _) (bas _ (by omega)))
+        (hwE _ (by omega))) (hπ _)
+
+/-- **Page 9, `(6.7)`, first relation.** `LΛ = 1 - ∑_{0 ≤ i ≤ n} π_{i,0}`. -/
+theorem mul_pseudoInverse {w : ℕ → E} (h₁ : ∀ i ≤ n, w i * L ^ (n - i) * π i = π i) :
+    L * pseudoInverse n L w p = 1 - ∑ j ∈ Finset.range (n + 1), p j 0 := by
+  rw [eq_sub_iff_add_eq, ← D.sum]
+  simp only [pseudoInverse]
+  rw [Finset.mul_sum, ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun j hj => ?_
+  rw [Finset.mem_range] at hj
+  rw [Finset.sum_range_succ', Finset.mul_sum]
+  congr 1
+  refine Finset.sum_congr rfl fun β hβ => ?_
+  rw [Finset.mem_range] at hβ
+  have K := D.inverse_bloc h₁ (by omega : j ≤ n) (by omega : β + 1 ≤ n - j)
+  rw [pow_succ'] at K
+  simp only [mul_assoc] at K ⊢
+  exact K
+
+/-- **Page 9, `(6.7)`, second relation.** `ΛL = 1 - ∑_{n ≤ i ≤ 2n} π_{i,0}`, the tops of the
+chains. -/
+theorem pseudoInverse_mul {w : ℕ → E} (h₁ : ∀ i ≤ n, w i * L ^ (n - i) * π i = π i) :
+    pseudoInverse n L w p * L = 1 - ∑ j ∈ Finset.range (n + 1), p j (n - j) := by
+  rw [eq_sub_iff_add_eq, ← D.sum]
+  simp only [pseudoInverse]
+  rw [Finset.sum_mul, ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun j hj => ?_
+  rw [Finset.mem_range] at hj
+  rw [Finset.sum_range_succ, Finset.sum_mul]
+  congr 1
+  refine Finset.sum_congr rfl fun β hβ => ?_
+  rw [Finset.mem_range] at hβ
+  rw [mul_assoc _ (p j (β + 1)) L, ← D.comm j (by omega) β hβ]
+  calc _ = L ^ β * w j * (L ^ (n - j - (β + 1)) * L) * p j β := by simp only [mul_assoc]
+    _ = p j β := by
+      rw [← pow_succ, show n - j - (β + 1) + 1 = n - j - β by omega,
+        D.inverse_bloc h₁ (by omega) (by omega)]
+
+theorem homogene_pseudoInverse (G : Graduation π n) (hL : Homogene π 2 L) {w : ℕ → E}
+    (hw : ∀ i ≤ n, Homogene π (-(2 * ((n : ℤ) - i))) (w i)) :
+    Homogene π (-2) (pseudoInverse n L w p) := by
+  refine homogene_sum _ fun j hj => homogene_sum _ fun β hβ => ?_
+  rw [Finset.mem_range] at hj hβ
+  refine homogene_congr ?_ (G.homogene_mul (G.homogene_mul (G.homogene_mul
+    (G.homogene_pow hL β) (hw j (by omega))) (G.homogene_pow hL _))
+    (D.homogene_zero (β := β + 1) (by omega) (by omega)))
+  omega
+
+end DecompositionPrimitive
+
+/-- **Pages 4–12, the criterion of no. 6, (1) ⇒ (2) and (3), over `ℤ` and with no module**
+(finding `16-graded-ring-lefschetz-criterion`). In a ring `E` graded by orthogonal idempotents
+`π_a` (`a ∈ [0, 2n]`), let `ℰ` be a subring containing `L` of degree `2` and one-sided inverses
+`wᵢ` of `L^{n-i}` (`(6.3)ᵢ`), and let `p` be the primitive decomposition, read in `E`. Then the
+grading projectors, every primitive projector and the pseudo-inverse `Λ` lie in `ℰ`; `Λ` has
+degree `-2` and satisfies `(6.7)`. -/
+theorem critere_lefschetz (ℰ : Subring E) (G : Graduation π n) {L : E} (hLE : L ∈ ℰ)
+    (hL : Homogene π 2 L) {w : ℕ → E} (hwE : ∀ i ≤ n, w i ∈ ℰ)
+    (hw : ∀ i ≤ n, Homogene π (-(2 * ((n : ℤ) - i))) (w i))
+    (h₁ : ∀ i ≤ n, w i * L ^ (n - i) * π i = π i)
+    (h₂ : ∀ i ≤ n, L ^ (n - i) * w i * π (2 * n - i) = π (2 * n - i))
+    {p : ℕ → ℕ → E} (D : DecompositionPrimitive π n L p) :
+    (∀ a, π a ∈ ℰ) ∧ (∀ j ≤ n, ∀ β ≤ n - j, p j β ∈ ℰ) ∧
+      ∃ Λ ∈ ℰ, Homogene π (-2) Λ ∧
+        L * Λ = 1 - ∑ j ∈ Finset.range (n + 1), p j 0 ∧
+        Λ * L = 1 - ∑ j ∈ Finset.range (n + 1), p j (n - j) := by
+  have hp := D.projecteurs_primitifs_mem ℰ G hLE hL hwE hw h₁ h₂
+  refine ⟨projecteurs_mem_lefschetz ℰ G hLE hL w hwE hw h₁ h₂, hp,
+    pseudoInverse n L w p, ?_, D.homogene_pseudoInverse G hL hw, D.mul_pseudoInverse h₁,
+    D.pseudoInverse_mul h₁⟩
+  refine ℰ.sum_mem fun j hj => ℰ.sum_mem fun β hβ => ?_
+  rw [Finset.mem_range] at hj hβ
+  exact ℰ.mul_mem (ℰ.mul_mem (ℰ.mul_mem (ℰ.pow_mem hLE _) (hwE j (by omega)))
+    (ℰ.pow_mem hLE _)) (hp j (by omega) (β + 1) (by omega))
+
+end DecompositionPrimitive
+
 end Grothendieck.Folder16

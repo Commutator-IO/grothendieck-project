@@ -5,6 +5,8 @@ import Mathlib.LinearAlgebra.Projectivization.Basic
 import Mathlib.Tactic.LinearCombination
 import Mathlib.Tactic.FinCases
 import Mathlib.Tactic.NormNum.Prime
+import Mathlib.LinearAlgebra.Matrix.Nondegenerate
+import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 
 /-!
 # Folder 70, pages 74–78 and 89–102: the icosahedron over `ℤ[α]` and modulo 5
@@ -965,4 +967,185 @@ theorem ico_orderOf [Nontrivial R] {a : R} (h : a ^ 2 + a - 1 = 0) :
     (orderOf_rho_eq_five (by norm_num)).2 (by simpa [icoα] using h)⟩
 
 end Universal
+end Grothendieck.Folder70
+
+namespace Grothendieck.Folder70
+
+/-! ## The quadric of the icosahedron (pages 101, 102 and 106)
+
+Finding `70-icosahedron-integral-faithful`, the quadric part. Over any commutative ring with
+`α² + α − 1 = 0`: `quadric_unique` (a quadratic function vanishing at nine of the vertices
+is a multiple of `q`, which is invariant, `q_sigma`, and vanishes at all twelve, `q_vert`),
+`halfDisc_q` (`δ'(q₀) = 1`), `det_qMat4` (the homogenised quadric has discriminant
+`−α − 3`), `norm_disc` (of norm `5`), `isUnit_det_qMat4_iff` and `qHom_smooth` (smooth
+wherever `5` is invertible). In characteristic 5: `qMat4_ker_char_five` (the singular locus
+is the centre `(1, 2, 2)`, a cone) and, over a field, `qHom_singular_iff`.
+-/
+
+section Quadric
+
+open Matrix
+
+variable {R : Type*} [CommRing R] {α : R}
+
+/-- A quadratic function `a x² + b y² + c z² + u yz + v zx + w xy + d x + e y + f z + k` on
+`R³`, by its ten coefficients. -/
+@[ext] structure QuadFn (R : Type*) where
+  (a b c u v w d e f k : R)
+
+/-- The value of a quadratic function at a point. -/
+def QuadFn.eval (Q : QuadFn R) (p : R × R × R) : R :=
+  Q.a * p.1 ^ 2 + Q.b * p.2.1 ^ 2 + Q.c * p.2.2 ^ 2 + Q.u * (p.2.1 * p.2.2)
+    + Q.v * (p.2.2 * p.1) + Q.w * (p.1 * p.2.1) + Q.d * p.1 + Q.e * p.2.1 + Q.f * p.2.2 + Q.k
+
+/-- A scalar multiple of a quadratic function. -/
+def QuadFn.smul (r : R) (Q : QuadFn R) : QuadFn R :=
+  ⟨r * Q.a, r * Q.b, r * Q.c, r * Q.u, r * Q.v, r * Q.w, r * Q.d, r * Q.e, r * Q.f, r * Q.k⟩
+
+variable (α) in
+/-- The coefficients of the invariant function `q` of pages 95 and 101. -/
+def qFn : QuadFn R := ⟨1, 1, 1, -α, 1, 1, -1, -1, -1, 0⟩
+
+theorem eval_qFn (p : R × R × R) : (qFn α).eval p = q α p := by
+  simp only [QuadFn.eval, qFn, q]; ring
+
+/-- `q` is invariant under the three generators (page 95), for any `α`. -/
+theorem q_sigma (p : R × R × R) :
+    q α (sigma0 p) = q α p ∧ q α (sigma1 α p) = q α p ∧ q α (sigma2 p) = q α p := by
+  obtain ⟨x, y, z⟩ := p
+  refine ⟨?_, ?_, ?_⟩ <;> simp only [q, sigma0, sigma1, sigma2] <;> ring
+
+/-- **Page 101: uniqueness of the quadric.** Over any commutative ring with `α² + α − 1 = 0`,
+a quadratic function vanishing at the nine vertices `s₀, s₁, s₂, s₃, s'₃, s''₃, ι s₀, ι s₁,
+ι s₂` is `a · q`, `a` its coefficient of `x²`: the `9 × 9` minor of the linear system is
+`13α + 21`, a unit of `ℤ[α]` (of inverse `13α − 8`). -/
+theorem quadric_unique (h : α ^ 2 + α - 1 = 0) (Q : QuadFn R)
+    (hQ : ∀ i : Fin 12, i.val < 9 → Q.eval (vert α i) = 0) : Q = QuadFn.smul Q.a (qFn α) := by
+  have h0 := hQ 0 (by decide); have h1 := hQ 1 (by decide); have h2 := hQ 2 (by decide)
+  have h3 := hQ 3 (by decide); have h4 := hQ 4 (by decide); have h5 := hQ 5 (by decide)
+  have h6 := hQ 6 (by decide); have h7 := hQ 7 (by decide); have h8 := hQ 8 (by decide)
+  obtain ⟨a, b, c, u, v, w, d, e, f, k⟩ := Q
+  simp only [QuadFn.eval, vert, iota, Matrix.cons_val] at h0 h1 h2 h3 h4 h5 h6 h7 h8
+  simp only [QuadFn.smul, qFn, QuadFn.mk.injEq]
+  refine ⟨by ring, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · linear_combination (-1) * h1 + (1) * h2 + (1) * h3 + (-1) * h4 + (α) * h7 + (-α) * h8 + (-a - b - u + v + w) * h
+  · linear_combination (-α) * h0 + (1) * h2 + (1 - α) * h3 + (-1) * h5 + (α) * h6 + (α - 1) * h7 + (-2*a*α - 3*a - 2*b*α - 4*b - 2*c*α - 5*c + 2*d - 2*e - 2*f - 2*u*α - 5*u + 2*v*α + 4*v + 2*w*α + 4*w) * h
+  · linear_combination (1) * h0 + (α) * h1 + (-α - 1) * h2 + (-2*α) * h3 + (α) * h4 + (α) * h5 + (α - 1) * h7 + (1 - α) * h8 + (-a*α - 3*a - 2*b*α - 4*b + d - 2*e - 3*u + 2*v + w*α + 3*w) * h
+  · linear_combination (-α) * h0 + (α) * h1 + (1) * h4 + (-1) * h5 + (1) * h6 + (-1) * h7 + (-a + w) * h
+  · linear_combination (1) * h0 + (-1) * h1 + (-1) * h4 + (1) * h5 + (-α) * h6 + (α) * h7 + (-a + v) * h
+  · linear_combination (-1) * h0 + (1) * h1
+  · linear_combination (-1) * h0 + (1) * h1 + (-1) * h3 + (1) * h4 + (-α) * h7 + (α) * h8 + (a + b + u - v - w) * h
+  · linear_combination (α - 1) * h0 + (-1) * h2 + (α) * h3 + (1) * h5 + (-α) * h6 + (1 - α) * h7 + (2*a*α + 3*a + 2*b*α + 4*b + 2*c*α + 5*c - 2*d + 2*e + 2*f + 2*u*α + 5*u - 2*v*α - 4*v - 2*w*α - 4*w) * h
+  · linear_combination h0
+
+/-- The half-discriminant `δ'` of the ternary form `a x² + b y² + c z² + u yz + v zx + w xy`:
+half the determinant of its polar matrix, a polynomial in the coefficients. -/
+def QuadFn.halfDisc (Q : QuadFn R) : R :=
+  4 * Q.a * Q.b * Q.c + Q.u * Q.v * Q.w - Q.a * Q.u ^ 2 - Q.b * Q.v ^ 2 - Q.c * Q.w ^ 2
+
+/-- The polar matrix of the quadratic part. -/
+def QuadFn.polarMat (Q : QuadFn R) : Matrix (Fin 3) (Fin 3) R :=
+  !![2 * Q.a, Q.w, Q.v; Q.w, 2 * Q.b, Q.u; Q.v, Q.u, 2 * Q.c]
+
+theorem QuadFn.det_polarMat (Q : QuadFn R) : Q.polarMat.det = 2 * Q.halfDisc := by
+  rw [QuadFn.polarMat, Matrix.det_fin_three]; simp [QuadFn.halfDisc]; ring
+
+/-- **Pages 101–102: `δ'(q₀) = 1`** (« merveille ! »), over any commutative ring with
+`α² + α − 1 = 0`, characteristic 2 included; the polar matrix
+`[[2, 1, 1], [1, 2, −α], [1, −α, 2]]` has determinant `2`. -/
+theorem halfDisc_q (h : α ^ 2 + α - 1 = 0) :
+    (qFn α).halfDisc = 1 ∧ (qFn α).polarMat.det = 2 := by
+  have e : (qFn α).halfDisc = 1 := by
+    simp only [QuadFn.halfDisc, qFn]; linear_combination (-1 : R) * h
+  exact ⟨e, by rw [QuadFn.det_polarMat, e, mul_one]⟩
+
+variable (α) in
+/-- The matrix (22) of page 102: `q` homogenised by a fourth variable `t`,
+`Q(x, y, z, t) = q₀(x, y, z) − (x + y + z) t`, polar matrix. Its rows are the partial
+derivatives of `Q`. -/
+def qMat4 : Matrix (Fin 4) (Fin 4) R :=
+  !![2, 1, 1, -1; 1, 2, -α, -1; 1, -α, 2, -1; -1, -1, -1, 0]
+
+variable (α) in
+/-- The homogenised quadric `Q(x, y, z, t) = q₀(x, y, z) − (x + y + z) t`. -/
+def qHom (v : Fin 4 → R) : R := q0 α (v 0, v 1, v 2) - (v 0 + v 1 + v 2) * v 3
+
+theorem qMat4_mulVec (v : Fin 4 → R) : qMat4 α *ᵥ v =
+    ![2 * v 0 + v 1 + v 2 - v 3, v 0 + 2 * v 1 - α * v 2 - v 3,
+      v 0 - α * v 1 + 2 * v 2 - v 3, -(v 0 + v 1 + v 2)] := by
+  ext i; fin_cases i <;> simp [qMat4, Matrix.mulVec, dotProduct, Fin.sum_univ_four] <;> ring
+
+/-- Euler's identity: `v · (M v) = 2 Q(v)`. -/
+theorem dot_qMat4 (v : Fin 4 → R) : v ⬝ᵥ (qMat4 α *ᵥ v) = 2 * qHom α v := by
+  rw [qMat4_mulVec]; simp [dotProduct, Fin.sum_univ_four, qHom, q0]; ring
+
+/-- **Page 102: the discriminant is `−α − 3`** (« sauf erreur de calcul » — there is none). -/
+theorem det_qMat4 (h : α ^ 2 + α - 1 = 0) : (qMat4 α).det = -α - 3 := by
+  rw [qMat4, Matrix.det_succ_row_zero]
+  simp [Fin.sum_univ_succ, Matrix.det_fin_three, Fin.succAbove]
+  linear_combination h
+
+/-- Its norm is `5`: `(−α − 3)(−α' − 3) = 5` with `α' = −1 − α`. -/
+theorem norm_disc (h : α ^ 2 + α - 1 = 0) : (-α - 3) * (-(-1 - α) - 3) = 5 := by
+  linear_combination (-1 : R) * h
+
+/-- The discriminant is a unit exactly when `5` is: `(−α − 3)(α − 2) = 5` and
+`(−α − 3)² = 5 (α + 2)`. -/
+theorem isUnit_det_qMat4_iff (h : α ^ 2 + α - 1 = 0) :
+    IsUnit (qMat4 α).det ↔ IsUnit (5 : R) := by
+  rw [det_qMat4 h]
+  refine ⟨fun hu => isUnit_of_dvd_unit ⟨α + 2, by linear_combination h⟩ (hu.pow 2),
+    fun hu => isUnit_of_mul_isUnit_left (y := α - 2) ?_⟩
+  convert hu using 1; linear_combination (-1 : R) * h
+
+/-- **Page 102: the quadric is smooth when `5` is invertible.** Over any commutative ring with
+`α² + α − 1 = 0` in which `5` is a unit, the only common zero of the four partial derivatives
+of `Q` (the rows of `qMat4`) is `0`; characteristic 2 included. -/
+theorem qHom_smooth (h : α ^ 2 + α - 1 = 0) (h5 : IsUnit (5 : R)) {v : Fin 4 → R}
+    (hv : qMat4 α *ᵥ v = 0) : v = 0 :=
+  Matrix.eq_zero_of_det_mem_nonZeroDivisors_of_mulVec_eq_zero
+    ((isUnit_det_qMat4_iff h).2 h5).mem_nonZeroDivisors hv
+
+/-- **Pages 102 and 106: in characteristic 5 the quadric is a cone.** If `5 = 0` and `α = 2`
+(the only root over a field of characteristic 5), the singular points are the multiples of
+`(1, 2, 2, 1)`, the centre `o = (1, 2, 2)` of the icosahedron, which lies on the quadric. -/
+theorem qMat4_ker_char_five (h5 : (5 : R) = 0) (hα : α = 2) (v : Fin 4 → R) :
+    qMat4 α *ᵥ v = 0 ↔ v = v 3 • ![1, 2, 2, 1] := by
+  subst hα
+  rw [qMat4_mulVec]
+  constructor
+  · intro hv
+    have r0 := congrFun hv 0; have r1 := congrFun hv 1
+    have r2 := congrFun hv 2; have r3 := congrFun hv 3
+    simp at r0 r1 r2 r3
+    ext i; fin_cases i <;> simp
+    · linear_combination (-2) * r0 - r1 - r2 - 2 * r3 + (v 0 - v 3) * h5
+    · linear_combination (-2) * r0 - r1 + (v 0 + v 1 - v 3) * h5
+    · linear_combination (-2) * r0 - r2 + (v 0 + v 2 - v 3) * h5
+  · intro hv
+    rw [hv]; ext i; fin_cases i <;> simp <;>
+      first | linear_combination (v 3) * h5 | linear_combination (-v 3) * h5
+
+/-- With `α = 2`, the point `(1, 2, 2, 1)` lies on the quadric, in any ring. -/
+theorem qHom_centre : qHom 2 ![(1 : R), 2, 2, 1] = 0 := by
+  simp [qHom, q0]; norm_num
+
+/-- **Pages 102 and 106, over a field.** The projective quadric `Q = 0` has a singular point
+if and only if the characteristic is `5`. -/
+theorem qHom_singular_iff {K : Type*} [Field K] {α : K} (h : α ^ 2 + α - 1 = 0) :
+    (∃ v : Fin 4 → K, v ≠ 0 ∧ qHom α v = 0 ∧ qMat4 α *ᵥ v = 0) ↔ (5 : K) = 0 := by
+  constructor
+  · rintro ⟨v, hv0, -, hv⟩
+    by_contra h5
+    exact hv0 (qHom_smooth h (Ne.isUnit h5) hv)
+  · intro h5
+    have hα : α = 2 := by
+      have : (α - 2) ^ 2 = 0 := by linear_combination h + (1 - α) * h5
+      linear_combination pow_eq_zero_iff (two_ne_zero) |>.1 this
+    subst hα
+    refine ⟨![1, 2, 2, 1], fun h0 => one_ne_zero (congrFun h0 0), qHom_centre,
+      (qMat4_ker_char_five h5 rfl _).2 (by simp)⟩
+
+end Quadric
+
 end Grothendieck.Folder70

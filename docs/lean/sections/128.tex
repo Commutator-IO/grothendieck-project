@@ -66,6 +66,29 @@ La démonstration n'utilise ni la clôture algébrique de $k$, que la page s'acc
 
 La partie difficile de la proposition~1 (i) est la réduction du cas général au cas d'un corps. Elle passe par la proposition~3 du n\textsuperscript{o}~1 et son corollaire~2 (pages 9 à~11) : la réduction modulo $\mathfrak m$ induit une bijection entre les idéaux d'équivalence de $A' \otimes_A A'$ et ceux de $A'_0 \otimes_k A'_0$, parce que l'idéal d'augmentation se réduit isomorphiquement (lemme du serpent). Ni cette réduction artinienne, ni la traduction entre idéaux et sous-schémas fermés, ni les points (ii) et (iii) de la proposition ne sont formalisés.
 
+\noindent\emph{Le critère sur un corps.} Prenons $A = k$ et notons, comme dans le théorème~\ref{thm:128-deux}, $A$ l'algèbre finie (le $A'$ de la page). L'hypothèse \q{$\delta(x)$ engendre l'idéal $\Delta$ de $A'' = (A \otimes_k A)/J$} se lit dans $A \otimes_k A$ : $\Delta \subset (\delta x) + J$. L'exactitude de $k \to A \rightrightarrows A''$ dit que $\delta x \in J$ seulement pour $x \in k$. Les feuillets distinguent deux cas : $A$ non radiciel, ramené à $k^n$ où un décompte donne $n = 2$, et $A$ radiciel, ramené à $k \oplus V$ avec $V^2 = 0$, où la page~18 s'arrête sur \q{il faut prouver} $\dim V = 1$. La démonstration ci-dessous évite cette distinction : elle regarde $J$ point par point.
+
+\begin{theoreme}[Grothendieck, pages 14 à 18, proposition~2, cas d'un corps]\label{thm:128-colongueur}
+Soient $k$ un corps, $A$ une $k$-algèbre commutative de dimension finie dont tous les corps résiduels sont $k$, et $J \subset \Delta$ un idéal de $A \otimes_k A$. On suppose que $\delta x \in J$ entraîne $x \in k$, et que $\Delta \subset (\delta x) + J$ pour tout $x \notin k$. Alors $\dim_k A \leq 2$, c'est-à-dire $\mathrm{long}(A/k) \leq 1$. Si de plus $J$ est un idéal d'équivalence et $\dim_k A = 2$, alors $J = 0$, c'est-à-dire $A'' = A \otimes_k A$.
+\end{theoreme}
+
+\begin{proof}
+Un point $\chi : A \to k$ (un morphisme de $k$-algèbres, d'idéal $\mathfrak m_\chi = \operatorname{Ker} \chi$) donne le morphisme $\varphi_\chi : A \otimes_k A \to A$, $a \otimes b \mapsto \chi(a)\, b$, qui \q{fixe le premier point en $\chi$}. Il envoie $\delta x$ sur $x - \chi(x)$, et $\Delta$ dans $\mathfrak m_\chi$. Pour $0 \neq z \in \mathfrak m_\chi$ (donc $z \notin k$) et $y \in \mathfrak m_\chi$, écrivons $\delta y = u\, \delta z + j$ avec $j \in J$ ; en appliquant $\varphi_\chi$, $y = \varphi_\chi(u)\, z + \varphi_\chi(j)$. Ainsi $\mathfrak m_\chi \subset A z + \varphi_\chi(J)$.
+
+Premier cas : $\varphi_\chi(J) = 0$ pour un point $\chi$. Alors tout $z \neq 0$ de $\mathfrak m_\chi$ l'engendre. Si $\mathfrak m_\chi = 0$, $A = k$. Sinon, soit $z \neq 0$ dans $\mathfrak m_\chi$ et $\mathfrak n$ un idéal maximal contenant l'annulateur de $z$ ; c'est le noyau d'un point $\chi'$. Pour $w \in \mathfrak n$, si $wz \neq 0$, il engendre $\mathfrak m_\chi$ : $z = bwz$, donc $1 - bw$ annule $z$ et serait dans $\mathfrak n$ avec $bw$, absurde. Donc $\mathfrak n z = 0$, et $bz = \chi'(b)\, z$ pour tout $b$ : $\mathfrak m_\chi = kz$ et $A = k \oplus kz$.
+
+Second cas : $\mathfrak m_\chi \subset \varphi_\chi(J)$ pour tout $\chi$ (si $\varphi_\chi(J)$ contient $y_0 \neq 0$, on prend $z = y_0$ ci-dessus). Pour $f \in \Delta$, $f \equiv \delta(\varphi_\chi f)$ modulo $\mathfrak m_\chi \Delta$ (où $A$ agit sur le premier facteur) : c'est vrai pour $f = \delta s$, car $\delta$ s'annule sur $k$, et le passage à $a \cdot f$ ajoute $(a - \chi(a)) \cdot f \in \mathfrak m_\chi \Delta$. Pour $x \in A$, choisissons $f \in J$ avec $\varphi_\chi(f) = x - \chi(x)$ ; alors $\delta x = \delta(\varphi_\chi f) \in J + \mathfrak m_\chi \Delta$. Ainsi $\Delta \subset J + \mathfrak m \Delta$ pour tout idéal maximal $\mathfrak m$, puisque tous sont des $\mathfrak m_\chi$. Par le lemme de Nakayama, appliqué en chaque idéal maximal au $A$-module de type fini $(\Delta + J)/J$, $\Delta \subset J$ ; l'exactitude donne alors $x \in k$ pour tout $x$, soit $A = k$.
+
+Enfin, si $\dim_k A = 2$ et si $J$ est un idéal d'équivalence, le théorème~\ref{thm:128-deux} donne $J = 0$ ou $J = \Delta$, et $J = \Delta$ contredirait l'exactitude.
+\end{proof}
+
+\begin{remarque}
+La première assertion n'utilise de $J$ que l'inclusion $J \subset \Delta$ : ni la symétrie, ni la transitivité, ni la nilpotence de $J$ que la page souligne sans la justifier. Le décompte \q{$2(n-1) = n^2 - n$} du cas non radiciel et le calcul de $\dim V$ de la page~18 sont deux instances du premier cas, $\varphi_\chi(J) = 0$ ; le second cas est celui où la relation ne relie $\chi$ à aucun autre point, ni infinitésimalement.
+\end{remarque}
+
+\noindent\emph{Portée de la vérification.} Lean démontre le théorème~\ref{thm:128-colongueur} sous ces hypothèses (\texttt{Colength.finrank\_le\_two}, \texttt{Colength.eq\_bot\_of\_finrank\_eq\_two}, réunis dans \texttt{Colength.prop2}) ; l'hypothèse sur les corps résiduels y est écrite \q{tout idéal maximal est le noyau d'un morphisme $A \to k$}, et le lemme de Nakayama en tout idéal maximal y est \texttt{Colength.le\_of\_forall\_le\_sup\_smul}. La réduction du cas local artinien au cas d'un corps n'est pas formalisée.
+
+
 Ne sont pas démontrés ici, de la même cote :
 
 \begin{encadre}
@@ -80,7 +103,7 @@ Soit $I$ un idéal nilpotent de $A$ qui s'envoie isomorphiquement sur un idéal 
 Soient $A$ local artinien et $A'$ une $A$-algèbre finie à extensions résiduelles triviales. Si un idéal d'équivalence $J$ rend exacte $A \to A' \rightrightarrows (A' \otimes_A A')/J$ et si $\delta(x') = p_2(x') - p_1(x')$ engendre l'idéal $\Delta$ pour tout $x' \notin A$, alors $\mathrm{long}(A'/A) \leq 1$ ; si $A'/A \simeq A/\mathfrak m$, $\operatorname{Spec} A'$ porte exactement deux relations d'équivalence sur $\operatorname{Spec} A$.
 \end{theoreme*}
 \end{encadre}
-{\small Le théorème~\ref{thm:128-deux} en est le cas $A = k$ de la dernière assertion. Les feuillets esquissent une démonstration incomplète du reste : le cas \q{$n = 2$} est annoncé sans le calcul, et la page~18 s'achève sur \q{il faut prouver}.\par}
+{\small Le cas $A = k$ est démontré plus haut (théorème~\ref{thm:128-colongueur}), et le théorème~\ref{thm:128-deux} en donne la dernière assertion. Reste non vérifié le passage de $A$ local artinien au cas d'un corps : établir $\mathfrak m A' = \mathfrak m$ (la page le tire de la distinction radiciel / non radiciel, en s'appuyant sur la nilpotence de $J$) puis réduire modulo $\mathfrak m$ par la proposition~3 du n\textsuperscript{o}~1 et son corollaire~2.\par}
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 19 à 29, descente infinitésimale\piste{128-infinitesimal-descent-theorem}]\nonverifie

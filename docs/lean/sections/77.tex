@@ -140,8 +140,15 @@ La lecture adopte la normalisation $\pi = \varphi(a, \cdot)$, que la page~117 bi
 Ne sont pas démontrés ici : une expression de $C$ en rang pair $2n \geq 6$ ; le développement de $\Delta$ en graphes des pages~65 à~67 ; les équivalences de la page~127 entre l'inversibilité de $\delta'(q)$, la lissité de $V(q)$ et l'isomorphie locale à la forme standard ; l'invariance de $q$ à une unité près et $\lambda = 1$ en rang au moins~$3$ (page~123) ; l'équivalence du Scholie (page~120) entre les $(P, Q, H)$ et les $(T, q, a)$ ; la version schématique et la version tordue de la sphère (pages~98 à~116) ; la symétrie (22) du rang impair et la structure $G \simeq G^0 \times \mathbf Z/2$ annoncée page~125 ; les parties I à~III et~V du dossier : revêtements quadratiques, extension à travers~$2$, groupes orthogonaux.
 
 \begin{encadre}
-\begin{contrexemple}[page 85, extension à travers $2$\piste{77-discriminant-extension-across-2}]\nonverifie
+\begin{contrexemple}[page 85, extension à travers $2$\piste{77-discriminant-extension-across-2}]
 La proposition de la page~85 porte sur $A$ noethérien où $2$ est régulier, $A/2A$ intègre et normal, $\Delta \notin 2A$ ; sa condition c) demande que $A_{2\Delta}[U]/(U^2 - \Delta)$ se prolonge en une extension finie de $A_\Delta$, le mot \q{étale} étant biffé. Ainsi écrite, c) n'entraîne pas a). Pour $A = \mathbf Z$ et $\Delta = 3$, l'algèbre $\mathbf Z[1/3][\sqrt 3]$ est finie sur $\mathbf Z[1/3]$ et redonne $\mathbf Z[1/6][\sqrt 3]$ quand on inverse~$2$, mais $3$ n'est pas de la forme $b^2 - 4c$ avec $b, c \in \mathbf Z$, puisque $b^2 - 4c \equiv 0$ ou $1 \pmod 4$.
 \end{contrexemple}
 \end{encadre}
+
+\begin{proof}
+Posons $A_\Delta = \mathbf Z[1/3]$ et $B_\Delta = A_\Delta[U]/(U^2 - 3)$. Le polynôme $U^2 - 3$ est unitaire de degré~$2$, donc $B_\Delta$ est libre de base $1, U$ sur $A_\Delta$ : c'est une extension finie, et même quadratique. Inverser $2$ dans $B_\Delta$ revient à inverser $2$ dans les coefficients : les deux morphismes évidents, $(B_\Delta)_2 \to A_{2\Delta}[U]/(U^2 - 3)$, qui envoie $U$ sur $U$ et existe parce que $2$ y est inversible, et $A_{2\Delta}[U]/(U^2 - 3) \to (B_\Delta)_2$, qui envoie $U$ sur l'image de $U$, sont inverses l'un de l'autre, comme on le vérifie sur les coefficients et sur $U$. Enfin, si $b^2 - 4c = 3$, on réduit modulo~$4$ : $b^2 \equiv 3$, alors que les carrés modulo~$4$ sont $0$ et~$1$.
+\end{proof}
+
+Le contre-exemple est formalisé tel que la page écrit c), avec $\mathbf Z[1/6]$ réalisé comme $\mathbf Z[1/3][1/2]$ ; le lemme \texttt{quadAlg\_away} établit, sur un anneau commutatif quelconque $R$, l'isomorphisme $(R[U]/(U^2 - d))_s \simeq R_s[U]/(U^2 - d)$ (Lean : \href{\leanblob/Folder77.lean}{\texttt{extension\_across\_two\_counterexample}, \texttt{quadAlg\_away}, \texttt{sq\_sub\_four\_mul\_ne\_three}}). Ici $B_\Delta$ n'est pas étale sur $\mathbf Z[1/3]$, puisque son discriminant $12$ n'y est pas inversible : le contre-exemple ne contredit donc pas la proposition lue avec \q{finie étale}, et ce fait n'est pas formalisé.
+
 {\small Avec \q{finie étale} dans c), comme le lit l'édition, la proposition et son corollaire~3 (page~63) ne sont pas démontrés ici.\par}
