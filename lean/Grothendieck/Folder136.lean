@@ -257,27 +257,19 @@ variable {k : Type*} [CommRing k] {σ : Type*} [LinearOrder σ]
 theorem sub_single_add_single {β : σ → ℕ} {j : σ} (hβ : β j ≠ 0) :
     β - Pi.single j 1 + Pi.single j 1 = β := by
   ext x
-  by_cases hx : x = j
-  · subst hx; simp; omega
-  · simp [hx]
+  by_cases hx : x = j <;> simp [hx]; omega
 
 /-- `(β + e_j) − e_j = β`. -/
 theorem add_single_sub_single (β : σ → ℕ) (j : σ) :
     β + Pi.single j 1 - Pi.single j 1 = β := by
   ext x
-  by_cases hx : x = j
-  · subst hx; simp
-  · simp [hx]
+  by_cases hx : x = j <;> simp [hx]
 
 /-- `(β + e_i) − e_j = (β − e_j) + e_i` for `i ≠ j`. -/
 theorem add_sub_comm_single (β : σ → ℕ) {i j : σ} (hij : i ≠ j) :
     β + Pi.single i 1 - Pi.single j 1 = β - Pi.single j 1 + Pi.single i 1 := by
   ext x
-  by_cases hx : x = j
-  · subst hx; simp [Ne.symm hij]
-  · by_cases hx' : x = i
-    · subst hx'; simp [hx]
-    · simp [hx, hx']
+  by_cases hx : x = j <;> by_cases hx' : x = i <;> simp [*, Ne.symm hij]
 
 /-- Removing `j > i` from `J` does not change the number of its elements below `i`. -/
 theorem card_filter_lt_erase_of_lt {J : Finset σ} {i j : σ} (hij : i < j) :
@@ -324,8 +316,7 @@ theorem pdD_pdD (f : ℕ → (σ → ℕ) → Finset σ → k) : pdD (pdD f) = 0
     rw [← mul_assoc, ← mul_assoc, kSign_swap hi hj hij, add_right_comm β, erase_right_comm]
     ring
   · rintro ⟨j, i⟩ hx _ h
-    simp only [mem_sigma, mem_erase] at hx
-    simp only [Sigma.mk.inj_iff] at h
+    simp only [mem_sigma, mem_erase, Sigma.mk.inj_iff] at hx h
     exact hx.2.1 h.1
   · rintro ⟨j, i⟩ hx
     simp only [mem_sigma, mem_erase] at hx ⊢
@@ -360,7 +351,7 @@ theorem pdH_of_least {f : ℕ → (σ → ℕ) → Finset σ → k} {a : ℕ} {�
     pdH f a β I = if j ∈ I then 0 else f a (β - Pi.single j 1) (insert j I) := by
   have h : (pdSupp β I).Nonempty := ⟨j, hj⟩
   have e : (pdSupp β I).min' h = j := le_antisymm (min'_le _ _ hj) (le_min' _ _ _ hmin)
-  simp only [pdH, h, e, dite_true]
+  simp [pdH, h, e]
 
 /-- `H` vanishes on the constants. -/
 theorem pdH_of_empty {f : ℕ → (σ → ℕ) → Finset σ → k} {a : ℕ} {β : σ → ℕ} {I : Finset σ}
@@ -371,17 +362,13 @@ theorem pdH_of_empty {f : ℕ → (σ → ℕ) → Finset σ → k} {a : ℕ} {�
 theorem pdSupp_add_erase {β : σ → ℕ} {I : Finset σ} {i : σ} (hi : i ∈ I) :
     pdSupp (β + Pi.single i 1) (I.erase i) = pdSupp β I := by
   ext x
-  by_cases hx : x = i
-  · subst hx; simp [pdSupp, hi]
-  · simp [pdSupp, hx, Pi.single_apply]
+  by_cases hx : x = i <;> simp [pdSupp, hx, hi, Pi.single_apply]
 
 /-- Moving `Y_j` into `dY_I` keeps the variables involved. -/
 theorem pdSupp_sub_insert {β : σ → ℕ} {I : Finset σ} {j : σ} (hβ : β j ≠ 0) :
     pdSupp (β - Pi.single j 1) (insert j I) = pdSupp β I := by
   ext x
-  by_cases hx : x = j
-  · subst hx; simp [pdSupp, hβ]
-  · simp [pdSupp, hx, Pi.single_apply]
+  by_cases hx : x = j <;> simp [pdSupp, hx, hβ, Pi.single_apply]
 
 /-- **The homotopy formula**: `H d + d H = 1 − P`, `P` the projection on the constants. -/
 theorem pdH_pdD_add (f : ℕ → (σ → ℕ) → Finset σ → k) (a : ℕ) (β : σ → ℕ) (I : Finset σ) :
@@ -508,10 +495,7 @@ theorem exact_of_pos {n q : ℕ} {f : ℕ → (σ → ℕ) → Finset σ → k} 
       simp at this
     · rfl
   rw [hd, hP, sub_zero] at h
-  have h0 : pdH (0 : ℕ → (σ → ℕ) → Finset σ → k) a β I = 0 := by
-    unfold Grothendieck.Folder136.pdH; split_ifs <;> rfl
-  rw [h0, zero_add] at h
-  exact h
+  simpa [pdH] using h
 
 /-- The class `T^{(n)}`: the coefficient function of `T^{(n)} Y^{(0)} dY_∅`. -/
 def tPow (n : ℕ) : ℕ → (σ → ℕ) → Finset σ → k :=
@@ -543,14 +527,13 @@ theorem tPow_isBideg (n : ℕ) : IsBideg n 0 (tPow n : ℕ → (σ → ℕ) → 
 theorem pdD_tPow (n : ℕ) : pdD (tPow n : ℕ → (σ → ℕ) → Finset σ → k) = 0 := by
   funext a β J
   refine sum_eq_zero fun j _ => ?_
-  have : β + Pi.single j 1 ≠ 0 := fun h => by
-    have := congrFun h j; simp at this
+  have : β + Pi.single j 1 ≠ 0 := fun h => by simpa using congrFun h j
   simp [tPow, this]
 
 /-- `H 0 = 0`. -/
 theorem pdH_zero : pdH (0 : ℕ → (σ → ℕ) → Finset σ → k) = 0 := by
   funext a β I
-  unfold Grothendieck.Folder136.pdH; split_ifs <;> rfl
+  simp [pdH]
 
 /-- `H` kills exterior degree `0`. -/
 theorem pdH_eq_zero_of_isBideg_zero {n : ℕ} {f : ℕ → (σ → ℕ) → Finset σ → k}
@@ -592,8 +575,7 @@ theorem cocycle_zero {n : ℕ} {f : ℕ → (σ → ℕ) → Finset σ → k} (h
 /-- The augmentation `1 ↦ T^{(n)}` is injective. -/
 theorem smul_tPow_eq_zero {n : ℕ} {c : k} (h : c • (tPow n : ℕ → (σ → ℕ) → Finset σ → k) = 0) :
     c = 0 := by
-  have := congrFun (congrFun (congrFun h n) 0) ∅
-  simpa [tPow] using this
+  simpa [tPow] using congrFun (congrFun (congrFun h n) 0) ∅
 
 /-- Multiplication by `T^{(j)}`: `T^{(j)} T^{(a)} = c_{j,a} T^{(a+j)}`, so the coefficient of
 `T^{(a)}` in `T^{(j)} f` is `binom(a, j)` times that of `T^{(a−j)}` in `f`. -/
@@ -671,11 +653,9 @@ theorem pd_row_cohomology (n : ℕ) :
   refine ⟨fun q f hf hd => ⟨_, exact_of_pos hf hd⟩, fun f hf hd => ⟨_, cocycle_zero hf hd, ?_⟩,
     ⟨tPow_isBideg n, pdD_tPow n⟩, fun q f h hf => hf.eq_zero_of_gt h, fun j => tMul_tPow j n⟩
   intro c hc
-  apply eq_of_sub_eq_zero
-  apply smul_tPow_eq_zero (n := n) (σ := σ)
+  refine eq_of_sub_eq_zero (smul_tPow_eq_zero (n := n) (σ := σ) ?_)
   rw [sub_smul, ← hc, ← cocycle_zero hf hd, sub_self]
 
 end PDKoszul
-
 
 end Grothendieck.Folder136

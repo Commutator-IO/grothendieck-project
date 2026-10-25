@@ -158,8 +158,7 @@ theorem dpow_split {R : Type*} [CommSemiring R] (p : ℕ) [Fact p.Prime] {I : Id
     ∃ e, p ^ e ≤ k ∧ ¬ p ∣ choose k (p ^ e) ∧
       (choose k (p ^ e) : R) * hI.dpow k x = hI.dpow (p ^ e) x * hI.dpow (k - p ^ e) x := by
   obtain ⟨e, hle, hnd⟩ := exists_pow_le_not_dvd_choose p hk
-  refine ⟨e, hle, hnd, ?_⟩
-  rw [hI.mul_dpow hx, Nat.add_sub_cancel' hle]
+  exact ⟨e, hle, hnd, by rw [hI.mul_dpow hx, Nat.add_sub_cancel' hle]⟩
 
 
 variable (W : Type*) [CommRing W] (p ν : ℕ)
@@ -198,8 +197,7 @@ theorem mono_update (a : Fin (ν + 1) → Fin p) (j : Fin (ν + 1)) (v : Fin p) 
       ∏ i ∈ Finset.univ.erase j, Lam W p ν i ^ (a i : ℕ) := by
   rw [mono_eq W p ν _ j, Function.update_self]
   congr 1
-  refine Finset.prod_congr rfl fun i hi => ?_
-  rw [Function.update_of_ne (Finset.ne_of_mem_erase hi)]
+  exact Finset.prod_congr rfl fun i hi => by rw [Function.update_of_ne (Finset.ne_of_mem_erase hi)]
 
 /-- The `W`-span of the box monomials. -/
 noncomputable def boxSpan : Submodule W (Aν W p ν) := Submodule.span W (Set.range (mono W p ν))
@@ -272,10 +270,8 @@ noncomputable def cf (i : ℕ) : K := (((p ^ i)! : ℕ) : K)⁻¹
 theorem cf_pow (i : ℕ) : cf p K i ^ p = (q p i : K) * cf p K (i + 1) := by
   have h := congrArg (fun n : ℕ => (n : K)) (factorial_eq_mul_q p i)
   simp only [Nat.cast_mul, Nat.cast_pow] at h
-  have h1 : (((p ^ i)! : ℕ) : K) ≠ 0 := by exact_mod_cast (factorial_ne_zero _)
   have h2 : (((p ^ (i + 1))! : ℕ) : K) ≠ 0 := by exact_mod_cast (factorial_ne_zero _)
-  have h3 : (q p i : K) ≠ 0 := by
-    intro h0; rw [h0, mul_zero] at h; exact h2 h
+  have h3 : (q p i : K) ≠ 0 := fun h0 => h2 (by rw [h, h0, mul_zero])
   rw [cf, cf, inv_pow, h]
   field_simp
 
@@ -286,14 +282,12 @@ noncomputable def psi0 : MvPolynomial (Fin (ν + 1)) W →ₐ[W] Bν p ν K :=
 
 theorem rel_le_ker : rel W p ν ≤ RingHom.ker (psi0 W p ν K) := by
   rw [rel, Ideal.span_le]
-  rintro _ (⟨i, rfl⟩ | h)
+  rintro _ (⟨i, rfl⟩ | rfl)
   · simp only [SetLike.mem_coe, RingHom.mem_ker, map_sub, map_mul, map_pow, map_natCast,
       psi0, aeval_X, Fin.val_castSucc, Fin.val_succ]
     rw [mul_pow, ← pow_mul, ← _root_.pow_succ, ← map_pow, cf_pow, map_mul, map_natCast]
     ring
-  · rw [Set.mem_singleton_iff] at h
-    subst h
-    simp only [SetLike.mem_coe, RingHom.mem_ker, map_pow, psi0, aeval_X, Fin.val_last]
+  · simp only [SetLike.mem_coe, RingHom.mem_ker, map_pow, psi0, aeval_X, Fin.val_last]
     rw [mul_pow, ← pow_mul, ← _root_.pow_succ, xb_pow_eq_zero p ν K le_rfl, mul_zero]
 
 /-- `ψ : A^{(ν)} → K[X]/(X^{p^{ν+1}})`. -/
@@ -305,6 +299,10 @@ theorem psi_Lam (i : Fin (ν + 1)) :
       algebraMap (K) (Bν p ν K) (cf p K i) * xb p ν K ^ (p ^ (i : ℕ)) := by
   change psi0 W p ν K (X i) = _
   simp [psi0]
+
+theorem psi_Lam_zero : psi W p ν K (Lam W p ν 0) = xb p ν K := by
+  rw [psi_Lam, Fin.val_zero, pow_zero, pow_one, cf, pow_zero, factorial_one, Nat.cast_one,
+    inv_one, map_one, one_mul]
 
 /-- The degree `Σ aᵢ p^i` of a box monomial. -/
 def deg {m : ℕ} (a : Fin m → Fin p) : ℕ := ∑ i, (a i : ℕ) * p ^ (i : ℕ)
@@ -445,9 +443,7 @@ theorem ratDP_xb_eq_zero {J : Ideal (Bν p ν K)} (hx : xb p ν K ∈ J) {k : �
   rw [DividedPowers.RatAlgebra.dpow_apply, ite_eq_left hx, xb_pow_eq_zero p ν K hk, mul_zero]
 
 theorem xb_mem_map : xb p ν K ∈ (Ibar W p ν).map (psi W p ν K) := by
-  have h := Ideal.mem_map_of_mem (psi W p ν K) (Lam_mem_Ibar W p ν 0)
-  rwa [psi_Lam, Fin.val_zero, pow_zero, pow_one, cf, pow_zero, factorial_one, Nat.cast_one,
-    inv_one, map_one, one_mul] at h
+  simpa [psi_Lam_zero] using Ideal.mem_map_of_mem (psi W p ν K) (Lam_mem_Ibar W p ν 0)
 
 theorem psi_Lam_eq_dpow (i : Fin (ν + 1)) :
     psi W p ν K (Lam W p ν i) =
@@ -536,23 +532,19 @@ noncomputable def dpIbar (hW : ∀ n : ℕ, ¬ p ∣ n → IsUnit (n : W)) : Div
 
 variable (hW : ∀ n : ℕ, ¬ p ∣ n → IsUnit (n : W))
 
+private theorem psi_inj_frac : Function.Injective (psi W p ν (FractionRing W)) :=
+  psi_injective W p ν _ (IsFractionRing.injective W _) (Fact.out : p.Prime).pos
+
 theorem psi_dpIbar {n : ℕ} {x : Aν W p ν} (hx : x ∈ Ibar W p ν) :
     psi W p ν (FractionRing W) ((dpIbar W p ν hW).dpow n x) =
       (ratDP p ν (FractionRing W) ((Ibar W p ν).map (psi W p ν (FractionRing W)))).dpow n
         (psi W p ν (FractionRing W) x) :=
   DividedPowers.ofInjective_dpow_apply _ _ _ _ _ _ _ hx
 
-omit [IsDomain W] [CharZero W] [Fact p.Prime] in
-theorem psi_Lam_zero (K : Type*) [Field K] [CharZero K] [Algebra W K] :
-    psi W p ν K (Lam W p ν 0) = xb p ν K := by
-  rw [psi_Lam, Fin.val_zero, pow_zero, pow_one, cf, pow_zero, factorial_one, Nat.cast_one,
-    inv_one, map_one, one_mul]
-
 /-- `γ_{p^i}(Λ₀) = Λᵢ` in `A^{(ν)}`. -/
 theorem dpIbar_Lam_zero (i : Fin (ν + 1)) :
     (dpIbar W p ν hW).dpow (p ^ (i : ℕ)) (Lam W p ν 0) = Lam W p ν i := by
-  apply psi_injective W p ν (FractionRing W) (IsFractionRing.injective W _)
-    (Fact.out : p.Prime).pos
+  apply psi_inj_frac
   rw [psi_dpIbar W p ν hW (Lam_mem_Ibar W p ν 0), psi_Lam_zero, psi_Lam_eq_dpow]
 
 omit [IsDomain W] [CharZero W] in
@@ -567,8 +559,7 @@ theorem map_Ibar_le (K : Type*) [Field K] [CharZero K] [Algebra W K] :
 /-- The divided powers of `(Λ)` vanish in degrees `≥ p^{ν+1}`. -/
 theorem dpIbar_eq_zero {n : ℕ} (hn : p ^ (ν + 1) ≤ n) {x : Aν W p ν} (hx : x ∈ Ibar W p ν) :
     (dpIbar W p ν hW).dpow n x = 0 := by
-  apply psi_injective W p ν (FractionRing W) (IsFractionRing.injective W _)
-    (Fact.out : p.Prime).pos
+  apply psi_inj_frac
   rw [psi_dpIbar W p ν hW hx, map_zero, DividedPowers.RatAlgebra.dpow_apply,
     ite_eq_left (Ideal.mem_map_of_mem _ hx)]
   obtain ⟨a, ha⟩ := Ideal.mem_span_singleton'.mp
@@ -579,9 +570,7 @@ omit [IsDomain W] [CharZero W] [Fact p.Prime] in
 theorem rel_le_ker_constantCoeff (hp : p ≠ 0) :
     rel W p ν ≤ RingHom.ker (constantCoeff : MvPolynomial (Fin (ν + 1)) W →+* W) := by
   rw [rel, Ideal.span_le]
-  rintro _ (⟨i, rfl⟩ | h)
-  · simp [zero_pow hp]
-  · rw [Set.mem_singleton_iff] at h; subst h; simp [zero_pow hp]
+  rintro _ (⟨i, rfl⟩ | rfl) <;> simp [zero_pow hp]
 
 /-- The augmentation `ε : A^{(ν)} → W`, `Λᵢ ↦ 0`. -/
 noncomputable def eps : Aν W p ν →+* W :=
@@ -686,12 +675,11 @@ include hpI hnil in
 theorem rel_le_ker_lift :
     rel W p ν ≤ RingHom.ker (aeval (R := W) fun i : Fin (ν + 1) => hI.dpow (p ^ (i : ℕ)) (p : T)) := by
   rw [rel, Ideal.span_le]
-  rintro _ (⟨i, rfl⟩ | h)
+  rintro _ (⟨i, rfl⟩ | rfl)
   · simp only [SetLike.mem_coe, RingHom.mem_ker, map_sub, map_mul, map_pow, map_natCast,
       aeval_X, Fin.val_castSucc, Fin.val_succ]
     rw [dpow_pow_eq_q hI hpI, sub_self]
-  · rw [Set.mem_singleton_iff] at h; subst h
-    simp only [SetLike.mem_coe, RingHom.mem_ker, map_pow, aeval_X, Fin.val_last]
+  · simp only [SetLike.mem_coe, RingHom.mem_ker, map_pow, aeval_X, Fin.val_last]
     rw [dpow_pow_eq_q hI hpI, hnil _ le_rfl, mul_zero]
 
 /-- `Λᵢ ↦ γ_{p^i}(p)` on `A^{(ν)}`. -/
@@ -785,8 +773,7 @@ theorem universal {T : Type*} [CommRing T] [Algebra W T] {I : Ideal T} (hI : Div
   rw [lift_Lam, ← dpWν_p W p ν hW]
   have := hg.map_dpow (n := p ^ (i : ℕ)) (p_mem_Jν W p ν)
   rw [RingHom.coe_coe] at this
-  rw [this]
-  exact congrArg _ (map_natCast g p)
+  rw [this, map_natCast g p]
 
 end Universal
 
@@ -845,10 +832,9 @@ theorem p_pow_mul_Θ_mem (i : Fin (ν + 1)) :
     have h3 := Ideal.mul_mem_left _ (algebraMap W (Aν W p ν) ↑u⁻¹) h2
     rw [Fin.val_succ, pow_succ]
     convert h3 using 1
-    rw [show algebraMap W (Aν W p ν) ↑u⁻¹ * ((p : Aν W p ν) ^ (i : ℕ) *
-        ((p : Aν W p ν) * algebraMap W (Aν W p ν) ↑u * Θ W p ν lam i.succ)) =
-        algebraMap W (Aν W p ν) (↑u⁻¹ * ↑u) * ((p : Aν W p ν) ^ (i : ℕ) * p *
-          Θ W p ν lam i.succ) by rw [map_mul]; ring, Units.inv_mul, map_one, one_mul]
+    have hv : algebraMap W (Aν W p ν) ↑u⁻¹ * algebraMap W (Aν W p ν) ↑u = 1 := by
+      rw [← map_mul, Units.inv_mul, map_one]
+    linear_combination (-((p : Aν W p ν) ^ (i : ℕ) * p * Θ W p ν lam i.succ)) * hv
 
 include hW hlam0 hlam in
 /-- **`p^ν λ_ν^p = 0` in `W^{(ν)}`** (page 6): `p^ν λ_ν^p ∈ (Λ₀ − p)`. -/
@@ -873,14 +859,11 @@ theorem p_pow_mem_Kp {m : ℕ} {u : W} (hu : IsUnit u) (hm : lam ν = p ^ m * u)
   obtain ⟨v, rfl⟩ := hu
   have h3 := Ideal.mul_mem_left _ (algebraMap W (Aν W p ν) (↑v⁻¹ ^ p)) h
   convert h3 using 1
-  have hv : algebraMap W (Aν W p ν) ↑v⁻¹ * algebraMap W (Aν W p ν) ↑v = 1 := by
-    rw [← map_mul, Units.inv_mul, map_one]
+  have hv : (algebraMap W (Aν W p ν) ↑v⁻¹ * algebraMap W (Aν W p ν) ↑v) ^ p = 1 := by
+    rw [← map_mul, Units.inv_mul, map_one, one_pow]
   rw [hm]
   simp only [map_mul, map_pow, map_natCast]
-  rw [show algebraMap W (Aν W p ν) ↑v⁻¹ ^ p * ((p : Aν W p ν) ^ ν *
-      ((p : Aν W p ν) ^ m * algebraMap W (Aν W p ν) ↑v) ^ p) =
-      (algebraMap W (Aν W p ν) ↑v⁻¹ * algebraMap W (Aν W p ν) ↑v) ^ p *
-        (p : Aν W p ν) ^ (ν + p * m) by ring, hv, one_pow, one_mul]
+  linear_combination (-(p : Aν W p ν) ^ (ν + p * m)) * hv
 
 end Sufficiency
 

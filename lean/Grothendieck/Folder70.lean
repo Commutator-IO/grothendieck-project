@@ -1128,7 +1128,7 @@ theorem qMat4_ker_char_five (h5 : (5 : R) = 0) (hα : α = 2) (v : Fin 4 → R) 
 
 /-- With `α = 2`, the point `(1, 2, 2, 1)` lies on the quadric, in any ring. -/
 theorem qHom_centre : qHom 2 ![(1 : R), 2, 2, 1] = 0 := by
-  simp [qHom, q0]; norm_num
+  norm_num [qHom, q0]
 
 /-- **Pages 102 and 106, over a field.** The projective quadric `Q = 0` has a singular point
 if and only if the characteristic is `5`. -/
@@ -1139,9 +1139,9 @@ theorem qHom_singular_iff {K : Type*} [Field K] {α : K} (h : α ^ 2 + α - 1 = 
     by_contra h5
     exact hv0 (qHom_smooth h (Ne.isUnit h5) hv)
   · intro h5
-    have hα : α = 2 := by
-      have : (α - 2) ^ 2 = 0 := by linear_combination h + (1 - α) * h5
-      linear_combination pow_eq_zero_iff (two_ne_zero) |>.1 this
+    have hα : α = 2 :=
+      sub_eq_zero.1 ((pow_eq_zero_iff two_ne_zero).1 (by linear_combination h + (1 - α) * h5 :
+        (α - 2) ^ 2 = 0))
     subst hα
     refine ⟨![1, 2, 2, 1], fun h0 => one_ne_zero (congrFun h0 0), qHom_centre,
       (qMat4_ker_char_five h5 rfl _).2 (by simp)⟩

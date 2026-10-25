@@ -1115,9 +1115,8 @@ theorem isCoverHom_iff [Module.Invertible R L'] (b : L) (c : L ⊗[R] L) (b' : L
 
 /-- The identity is a morphism, and morphisms compose: `(ψ, s) ∘ (φ, t) = (ψφ, s + ψ(t))`.
 The quadratic covers with `L` invertible over `R` form a groupoid. -/
-theorem isCoverHom_refl (b : L) (c : L ⊗[R] L) : IsCoverHom b c b c (LinearEquiv.refl R L) 0 := by
-  intro u
-  simp [TensorProduct.map_id]
+theorem isCoverHom_refl (b : L) (c : L ⊗[R] L) : IsCoverHom b c b c (LinearEquiv.refl R L) 0 :=
+  fun u => by simp [TensorProduct.map_id]
 
 theorem isCoverHom_trans {b : L} {c : L ⊗[R] L} {b' : L'} {c' : L' ⊗[R] L'} {b'' : L''}
     {c'' : L'' ⊗[R] L''} {φ : L ≃ₗ[R] L'} {ψ : L' ≃ₗ[R] L''} {t : L'} {s : L''}
@@ -1168,8 +1167,7 @@ theorem tripletCond_iff_forall [Module.Invertible R L] (δ : L ⊗[R] L) (T₀ :
     rw [sub_eq_iff_eq_add] at hk
     rw [hk]
     module
-  · rintro ⟨⟨τ, hτ⟩, h⟩
-    exact ⟨τ, hτ, h τ hτ⟩
+  · rintro ⟨⟨τ, hτ⟩, h⟩; exact ⟨τ, hτ, h τ hτ⟩
 
 /-- **The functor on objects** (page 47): `(L, b, c) ↦ (L, δ, T₀)` with `T₀ = b mod 2`
 satisfies `T₀² ≡ δ (mod 4)`, over any base. -/
@@ -1240,9 +1238,8 @@ theorem triplet_classification (h2 : ∀ x : R, 2 * x = 0 → x = 0)
     (∃ t : L', IsCoverHom b c b' c' φ t) ↔
       TensorProduct.map (φ : L →ₗ[R] L') (φ : L →ₗ[R] L') (discL b c) = discL b' c' ∧
         mod2 (φ : L →ₗ[R] L') (Submodule.Quotient.mk b) = Submodule.Quotient.mk b' := by
-  constructor
-  · rintro ⟨t, h⟩; exact isCoverHom_triplet h
-  · rintro ⟨hδ, hT⟩; exact (triplet_full_faithful h2 b c b' c' φ hδ hT).exists
+  exact ⟨fun ⟨_, h⟩ => isCoverHom_triplet h,
+    fun ⟨hδ, hT⟩ => (triplet_full_faithful h2 b c b' c' φ hδ hT).exists⟩
 
 /-- On isomorphism classes: two quadratic covers with `L`, `L'` invertible are
 isomorphic iff their triplets are. -/
@@ -1461,12 +1458,9 @@ instance : MonoidalCategoryStruct (ChiExt χ) where
   whiskerRight p Y := tensorHom p (𝟙 Y)
   tensorHom := tensorHom
   tensorUnit := ⟨𝟙_ _, 𝟙_ _, 𝟙 _⟩
-  associator X Y Z := strictIso (α_ X.M Y.M Z.M) (α_ X.L Y.L Z.L) (by
-    simp)
-  leftUnitor X := strictIso (λ_ X.M) (λ_ X.L) (by
-    simp)
-  rightUnitor X := strictIso (ρ_ X.M) (ρ_ X.L) (by
-    simp)
+  associator X Y Z := strictIso (α_ X.M Y.M Z.M) (α_ X.L Y.L Z.L) (by simp)
+  leftUnitor X := strictIso (λ_ X.M) (λ_ X.L) (by simp)
+  rightUnitor X := strictIso (ρ_ X.M) (ρ_ X.L) (by simp)
 
 @[simp] lemma tensorHom_f' {X X' Y Y' : ChiExt χ} (p : X ⟶ X') (q : Y ⟶ Y') :
     (p ⊗ₘ q).f = p.f ⊗ₘ q.f := rfl
@@ -1564,10 +1558,8 @@ instance : SymmetricCategory (ChiExt χ) where
   braiding := braiding
   braiding_naturality_right X _ _ f := by refine hom_ext ?_ ?_ ?_ <;> simp
   braiding_naturality_left f Z := by refine hom_ext ?_ ?_ ?_ <;> simp
-  hexagon_forward X Y Z := by
-    refine hom_ext ?_ ?_ ?_ <;> simp
-  hexagon_reverse X Y Z := by
-    refine hom_ext ?_ ?_ ?_ <;> simp
+  hexagon_forward X Y Z := by refine hom_ext ?_ ?_ ?_ <;> simp
+  hexagon_reverse X Y Z := by refine hom_ext ?_ ?_ ?_ <;> simp
   symmetry X Y := by refine hom_ext ?_ ?_ ?_ <;> simp
 
 /-- A morphism whose components on `M` and on `L` are isomorphisms is an isomorphism. -/
@@ -1577,10 +1569,7 @@ theorem isIso_of {X Y : ChiExt χ} (p : X ⟶ Y) [IsIso p.f] [IsIso p.φ] : IsIs
     simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id, Preadditive.add_comp,
       Preadditive.comp_add, IsIso.inv_hom_id_assoc, Linear.smul_comp, Linear.comp_smul] at h
     rw [h, smul_neg]; abel
-  · refine hom_ext (by simp) (by simp) ?_
-    simp
-  · refine hom_ext (by simp) (by simp) ?_
-    simp
+  all_goals refine hom_ext (by simp) (by simp) ?_; simp
 
 /-- An isomorphism has isomorphisms as components on `L`. -/
 def isoL {X Y : ChiExt χ} (e : X ≅ Y) : X.L ≅ Y.L where
@@ -1624,14 +1613,12 @@ theorem invertible_iff_generates (L : ModuleCat.{u} R) (b : L) :
     set y := Y.b.hom m'
     have hc : φ (b ⊗ₜ y) = 1 + χ * w ((1 : R) ⊗ₜ m') := by
       have := LinearMap.congr_fun hcomm ((1 : R) ⊗ₜ m')
-      simp only [LinearMap.comp_apply, TensorProduct.map_tmul, LinearMap.toSpanSingleton_apply,
-        one_smul, LinearMap.add_apply, LinearMap.smul_apply, ht, smul_eq_mul] at this
-      exact this
+      simpa only [LinearMap.comp_apply, TensorProduct.map_tmul, LinearMap.toSpanSingleton_apply,
+        one_smul, LinearMap.add_apply, LinearMap.smul_apply, ht, smul_eq_mul] using this
     have key : φ (b ⊗ₜ y) • x = φ (x ⊗ₜ y) • b := by
       have h1 := congrArg (fun z => TensorProduct.rid R L (LinearMap.lTensor L φ
         (TensorProduct.assoc R L L Y.L (z ⊗ₜ y)))) (Module.Invertible.tmul_comm (m₁ := x) (m₂ := b))
-      simp only [LinearMap.lTensor_tmul, TensorProduct.assoc_tmul, TensorProduct.rid_tmul] at h1
-      exact h1
+      simpa only [LinearMap.lTensor_tmul, TensorProduct.assoc_tmul, TensorProduct.rid_tmul] using h1
     refine ⟨φ (x ⊗ₜ y), -(w ((1 : R) ⊗ₜ m')) • x, ?_⟩
     rw [← key, hc]
     module

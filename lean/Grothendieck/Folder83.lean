@@ -200,8 +200,7 @@ theorem nrdM_mulM (x y : P k) :
 /-- Distinct twists give distinct structures: the structures `M(b, c; b', c'; t)`
 are parametrised injectively by `t ∈ k`. -/
 theorem mulM_inj {t t' : k} (h : mulM b c b' c' t = mulM b c b' c' t') : t = t' := by
-  have := congrArg (fun m => (m (v : P k) u).x0) h
-  simpa [mulM, P.u, P.v] using this
+  simpa [mulM, P.u, P.v] using congrArg (fun m => (m (v : P k) u).x0) h
 
 /-- The realisation map `x ↦ x₀ + x₁u + x₂v + x₃uv` into a `k`-algebra `A`. -/
 def realise {A : Type*} [Ring A] [Algebra k A] (uA vA : A) (x : P k) : A :=
@@ -218,11 +217,9 @@ theorem realise_mulM {A : Type*} [Ring A] [Algebra k A] (T : A →ₗ[k] k) (N :
     ∃ t : k, ∀ x y : P k,
       realise uA vA (mulM b c b' c' t x y) = realise uA vA x * realise uA vA y := by
   have uu : uA * uA = b • uA - c • (1 : A) := by
-    have := hHC uA; rw [hTu, hNu] at this
-    rw [← sub_eq_zero, ← this]; abel
+    rw [← sub_eq_zero, ← hHC uA, hTu, hNu]; abel
   have vv : vA * vA = b' • vA - c' • (1 : A) := by
-    have := hHC vA; rw [hTv, hNv] at this
-    rw [← sub_eq_zero, ← this]; abel
+    rw [← sub_eq_zero, ← hHC vA, hTv, hNv]; abel
   set t := b * b' + c + c' - N (uA + vA) with ht
   refine ⟨t, ?_⟩
   have vu : vA * uA = (t - b * b') • (1 : A) + b' • uA + b • vA - uA * vA := by
@@ -263,9 +260,7 @@ theorem realise_unique {A : Type*} [Ring A] [Algebra k A] {uA vA : A}
     (ht' : ∀ x y : P k,
       realise uA vA (mulM b c b' c' t' x y) = realise uA vA x * realise uA vA y) :
     t = t' := by
-  have h := hinj ((ht v u).trans (ht' v u).symm)
-  have := congrArg P.x0 h
-  simpa [mulM, P.u, P.v] using this
+  simpa [mulM, P.u, P.v] using congrArg P.x0 (hinj ((ht v u).trans (ht' v u).symm))
 
 end Line
 
@@ -509,8 +504,8 @@ theorem productMap_star_root (φ : Hq b c →ₐ[k] K) (φ' : Hq b' c' →ₐ[k]
     (Algebra.TensorProduct.productMap φ φ' (star b c b' c')) ^ 2
         - algebraMap k K (b * b') * Algebra.TensorProduct.productMap φ φ' (star b c b' c')
         + algebraMap k K (b ^ 2 * c' + b' ^ 2 * c - 4 * c * c') = 0 := by
-  have := congrArg (Algebra.TensorProduct.productMap φ φ') (star_root b c b' c')
-  simpa only [map_add, map_sub, map_mul, map_pow, AlgHom.commutes, map_zero] using this
+  simpa only [map_add, map_sub, map_mul, map_pow, AlgHom.commutes, map_zero] using
+    congrArg (Algebra.TensorProduct.productMap φ φ') (star_root b c b' c')
 
 /-- Page 141: replacing `φ` by the conjugate character `φ ∘ σ` sends the twist `t`
 to `bb' − t`, the involution of `S̃`. -/

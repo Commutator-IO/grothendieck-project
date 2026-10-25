@@ -385,8 +385,7 @@ theorem isOpen_of_stableUnderGeneralization_of_locally [QuasiSober T]
   have : QuasiSober U := U.isOpenEmbedding'.quasiSober
   have hE' : IsOpen (Subtype.val ⁻¹' E : Set U) := by
     refine isOpen_of_stableUnderGeneralization ?_ ?_
-    · intro a b hab hb
-      exact hgen ((subtype_specializes_iff _ _).1 hab) hb
+    · exact fun a b hab hb => hgen ((subtype_specializes_iff _ _).1 hab) hb
     · intro y hy
       obtain ⟨W, hW, hyW, hWE⟩ := hloc y hy
       refine ⟨Subtype.val ⁻¹' W, hW.preimage continuous_subtype_val, hyW, ?_⟩
@@ -394,10 +393,7 @@ theorem isOpen_of_stableUnderGeneralization_of_locally [QuasiSober T]
       refine hWE ⟨hzW, ?_⟩
       rw [← specializes_iff_mem_closure] at hzc ⊢
       exact (subtype_specializes_iff _ _).1 hzc
-  refine ⟨Subtype.val '' (Subtype.val ⁻¹' E : Set U), ?_,
-    U.isOpen.isOpenMap_subtype_val _ hE', ⟨⟨x, hxU⟩, hx, rfl⟩⟩
-  rintro _ ⟨z, hz, rfl⟩
-  exact hz
+  exact ⟨_, Set.image_preimage_subset _ _, U.isOpen.isOpenMap_subtype_val _ hE', ⟨x, hxU⟩, hx, rfl⟩
 
 end Topology
 
@@ -650,8 +646,7 @@ theorem toReseau_surjective [IsLocallyNoetherian X] [LocallyOfFiniteType sY] [Is
     intro x y
     have : IsLocallyNoetherian (pullback (𝒰.f x) (𝒰.f y)) :=
       isLocallyNoetherian_of_isOpenImmersion (pullback.fst _ _ ≫ 𝒰.f x)
-    refine eq_of_fromSpecStalk_comp fun p => ?_
-    exact (Φ.matches_comp (pullback.fst _ _) rfl p (hmatch x _)).trans
+    exact eq_of_fromSpecStalk_comp fun p => (Φ.matches_comp (pullback.fst _ _) rfl p (hmatch x _)).trans
       (Φ.matches_comp (pullback.snd _ _) pullback.condition.symm p (hmatch y _)).symm
   let F := 𝒰.glueMorphisms g hglue
   have hF : ∀ x, 𝒰.f x ≫ F = g x := 𝒰.ι_glueMorphisms g hglue
@@ -664,10 +659,8 @@ theorem toReseau_surjective [IsLocallyNoetherian X] [LocallyOfFiniteType sY] [Is
   let v : (V z).toScheme := ⟨⟨z, hxU z⟩, hx z⟩
   have h1 := hmatch z v
   unfold ReseauHom.Matches at h1
-  have hF' : ((V z).ι ≫ (U z).ι) ≫ F = g z := hF z
-  have h2 := Scheme.SpecMap_stalkMap_fromSpecStalk_assoc ((V z).ι ≫ (U z).ι)
-    (x := v) F
-  rw [hF'] at h2
+  have h2 := Scheme.SpecMap_stalkMap_fromSpecStalk_assoc ((V z).ι ≫ (U z).ι) (x := v) F
+  rw [hF z] at h2
   have := epi_SpecMap_stalkMap ((V z).ι ≫ (U z).ι) v
   exact this.left_cancellation _ _ (h2.trans h1)
 

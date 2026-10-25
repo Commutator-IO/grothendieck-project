@@ -1153,8 +1153,7 @@ instance (d : R) : Module.Free R (quadAlg d) :=
   .of_basis (AdjoinRoot.powerBasis' (quadAlg_monic d)).basis
 
 theorem finrank_quadAlg [Nontrivial R] (d : R) : Module.finrank R (quadAlg d) = 2 := by
-  rw [(AdjoinRoot.powerBasis' (quadAlg_monic d)).finrank]
-  simp [AdjoinRoot.powerBasis']
+  simp [(AdjoinRoot.powerBasis' (quadAlg_monic d)).finrank, AdjoinRoot.powerBasis']
 
 /-- Inverting `s` commutes with forming `R[U]/(U² − d)`:
 `(R[U]/(U² − d))_s ≅ R_s[U]/(U² − d)`. -/
@@ -1164,15 +1163,13 @@ theorem quadAlg_away (d s : R) :
   set B := quadAlg d
   set Rs := Localization.Away s
   set Bs := Localization.Away (algebraMap R B s)
-  have hdiv : (X ^ 2 - C (algebraMap R Rs d)) ∣ (X ^ 2 - C d : R[X]).map (algebraMap R Rs) := by
-    simp
-  let g := AdjoinRoot.map (algebraMap R Rs) _ _ hdiv
+  let g := AdjoinRoot.map (algebraMap R Rs) _ _
+    (show (X ^ 2 - C (algebraMap R Rs d)) ∣ (X ^ 2 - C d : R[X]).map (algebraMap R Rs) by simp)
   have hg : ∀ r : R, g (algebraMap R B r) = AdjoinRoot.of _ (algebraMap R Rs r) := fun r => by
     show g (AdjoinRoot.of _ r) = _
     simp [g, AdjoinRoot.map]
-  have hgu : IsUnit (g (algebraMap R B s)) := by
-    rw [hg]
-    exact (IsLocalization.Away.algebraMap_isUnit s).map _
+  have hgu : IsUnit (g (algebraMap R B s)) :=
+    hg s ▸ (IsLocalization.Away.algebraMap_isUnit s).map _
   let ψ : Bs →+* quadAlg (algebraMap R Rs d) := IsLocalization.Away.lift _ hgu
   let i : Rs →+* Bs := IsLocalization.Away.map Rs Bs (algebraMap R B) s
   have hi : ∀ r : R, i (algebraMap R Rs r) = algebraMap B Bs (algebraMap R B r) := fun r =>
@@ -1186,23 +1183,20 @@ theorem quadAlg_away (d s : R) :
   let φ : quadAlg (algebraMap R Rs d) →+* Bs := AdjoinRoot.lift i _ hroot
   have hψ : ∀ x : B, ψ (algebraMap B Bs x) = g x := fun x => IsLocalization.Away.lift_eq _ _ x
   have key : ψ.comp i = AdjoinRoot.of _ :=
-    IsLocalization.ringHom_ext (Submonoid.powers s) (RingHom.ext fun r => by
-      simp only [RingHom.comp_apply, hi, hψ, hg])
+    IsLocalization.ringHom_ext (Submonoid.powers s) (RingHom.ext fun r => by simp [hi, hψ, hg])
   refine ⟨RingEquiv.ofRingHom ψ φ ?_ ?_⟩
   · refine Ideal.Quotient.ringHom_ext (Polynomial.ringHom_ext (fun a => ?_) ?_)
     · show ψ (φ (AdjoinRoot.of _ a)) = AdjoinRoot.of _ a
       rw [AdjoinRoot.lift_of]
       exact RingHom.congr_fun key a
     · show ψ (φ (AdjoinRoot.root _)) = AdjoinRoot.root _
-      rw [AdjoinRoot.lift_root, hψ]
-      simp [g, AdjoinRoot.map]
+      simp [φ, hψ, g, AdjoinRoot.map]
   · refine IsLocalization.ringHom_ext (Submonoid.powers (algebraMap R B s))
       (Ideal.Quotient.ringHom_ext (Polynomial.ringHom_ext (fun a => ?_) ?_))
     · show φ (ψ (algebraMap B Bs (algebraMap R B a))) = algebraMap B Bs (algebraMap R B a)
       rw [hψ, hg, AdjoinRoot.lift_of, hi]
     · show φ (ψ (algebraMap B Bs (AdjoinRoot.root _))) = algebraMap B Bs (AdjoinRoot.root _)
-      rw [hψ]
-      simp [g, AdjoinRoot.map, φ, AdjoinRoot.lift_root]
+      simp [hψ, g, AdjoinRoot.map, φ]
 
 /-- `3` is not of the form `b² − 4c` in `ℤ`: `b² − 4c ≡ 0` or `1 (mod 4)`. -/
 theorem sq_sub_four_mul_ne_three (b c : ℤ) : b ^ 2 - 4 * c ≠ 3 := by
@@ -1211,8 +1205,7 @@ theorem sq_sub_four_mul_ne_three (b c : ℤ) : b ^ 2 - 4 * c ≠ 3 := by
   push_cast at h'
   generalize (b : ZMod 4) = x at h'
   generalize (c : ZMod 4) = y at h'
-  revert x y
-  decide
+  revert x y; decide
 
 end ExtensionAcrossTwo
 

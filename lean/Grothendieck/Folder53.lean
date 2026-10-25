@@ -214,8 +214,7 @@ theorem irreducibleSpace_of_stable [QuasiSober X'] [QuasiSober X] [IrreducibleSp
   have hstab : ∀ g : G, g • C = C := by
     intro g
     refine huniq _ (smul_mem_irreducibleComponents hC g) _ hC ?_ (hSC hs)
-    have : g⁻¹ • s ∈ S := hSG g⁻¹ (Set.smul_mem_smul_set hs)
-    exact Set.mem_smul_set.2 ⟨g⁻¹ • s, hSC this, by simp⟩
+    exact Set.mem_smul_set.2 ⟨g⁻¹ • s, hSC (hSG g⁻¹ (Set.smul_mem_smul_set hs)), by simp⟩
   -- so `C` is saturated for `p`
   have hsat : ∀ x y, x ∈ C → p x = p y → y ∈ C := by
     intro x y hx hxy
@@ -227,15 +226,14 @@ theorem irreducibleSpace_of_stable [QuasiSober X'] [QuasiSober X] [IrreducibleSp
   obtain ⟨η, hη⟩ := QuasiSober.sober (IrreducibleSpace.isIrreducible_univ X) isClosed_univ
   obtain ⟨x, hxc, rfl⟩ := hpg (hη.specializes (Set.mem_univ (p c)))
   have hxC : x ∈ C := by
-    have h1 : IsIrreducible (closure {x}) := isIrreducible_singleton.closure
     have h2 : C ⊆ closure {x} := by
       rw [← hc.def]; exact closure_minimal (Set.singleton_subset_iff.2
         (specializes_iff_mem_closure.1 hxc)) isClosed_closure
-    exact hC.2 h1 h2 (subset_closure rfl)
+    exact hC.2 isIrreducible_singleton.closure h2 (subset_closure rfl)
   have himg : p '' C = Set.univ := by
     have := (hpc C hCc).closure_subset_iff.2 (Set.singleton_subset_iff.2 ⟨x, hxC, rfl⟩)
     rw [hη.def] at this
-    exact Set.eq_univ_of_univ_subset this
+    exact Set.univ_subset_iff.1 this
   have hCuniv : C = Set.univ := by
     refine Set.eq_univ_of_forall fun y => ?_
     obtain ⟨z, hz, hzy⟩ : p y ∈ p '' C := himg ▸ Set.mem_univ _
@@ -256,8 +254,7 @@ theorem irreducibleSpace_of_map [QuasiSober X'] [QuasiSober X] [IrreducibleSpace
     ((IrreducibleSpace.isIrreducible_univ Z').image f' hf'.continuousOn) ?_
     (s := f' z) ⟨z, trivial, rfl⟩ huniq
   rintro g _ ⟨_, ⟨w, -, rfl⟩, rfl⟩
-  obtain ⟨w', hw'⟩ := hG g w
-  exact ⟨w', trivial, hw'⟩
+  exact (hG g w).imp fun _ h => ⟨trivial, h⟩
 
 
 end GaloisStep
@@ -305,15 +302,12 @@ theorem ker_toLines : RingHom.ker toLines = Ideal.span {sumSq ℝ} := by
   · intro f hf
     rw [RingHom.mem_ker] at hf
     set r := f %ₘ sumSq ℝ with hr
-    have hdeg : r.degree ≤ 1 := by
-      have := Polynomial.degree_modByMonic_lt f (monic_sumSq ℝ)
-      rw [show (sumSq ℝ).degree = 2 from Polynomial.degree_X_pow_add_C two_pos _] at this
-      have h2 : r.degree < 2 := this
-      exact Order.le_of_lt_succ h2
+    have hdeg : r.degree ≤ 1 := Order.le_of_lt_succ
+      ((Polynomial.degree_modByMonic_lt f (monic_sumSq ℝ)).trans_eq
+        (Polynomial.degree_X_pow_add_C two_pos _))
     have hrf : toLines r = 0 := by
-      have := Polynomial.modByMonic_add_div f (sumSq ℝ)
-      rw [← this, map_add, map_mul, toLines_sumSq, zero_mul, add_zero] at hf
-      exact hf
+      rwa [← Polynomial.modByMonic_add_div f (sumSq ℝ), map_add, map_mul, toLines_sumSq,
+        zero_mul, add_zero] at hf
     have hreq := Polynomial.eq_X_add_C_of_degree_le_one hdeg
     have hev : ∀ t : ℝ, (r.coeff 0).eval t = 0 ∧ t * (r.coeff 1).eval t = 0 := by
       intro t
@@ -324,9 +318,8 @@ theorem ker_toLines : RingHom.ker toLines = Ideal.span {sumSq ℝ} := by
     have h0 : r.coeff 0 = 0 := Polynomial.funext fun t => by simpa using (hev t).1
     have h1 : Polynomial.X * r.coeff 1 = 0 := Polynomial.funext fun t => by simpa using (hev t).2
     have h1' : r.coeff 1 = 0 := (mul_eq_zero.1 h1).resolve_left Polynomial.X_ne_zero
-    have hr0 : r = 0 := by rw [hreq, h0, h1']; simp
     rw [Ideal.mem_span_singleton]
-    exact (Polynomial.modByMonic_eq_zero_iff_dvd (monic_sumSq ℝ)).1 hr0
+    exact (Polynomial.modByMonic_eq_zero_iff_dvd (monic_sumSq ℝ)).1 (by rw [← hr, hreq, h0, h1']; simp)
   · rw [Ideal.span_le, Set.singleton_subset_iff]
     exact toLines_sumSq
 
@@ -371,12 +364,10 @@ theorem not_irreducibleSpace_complex :
     rw [← map_mul, Ideal.Quotient.eq_zero_iff_mem.2 ?_]
     · exact zero_mem _
     · refine Ideal.mem_span_singleton.2 ⟨1, ?_⟩
-      simp only [sumSq, mul_one]
-      ring_nf
       have hI : (Polynomial.C (Polynomial.C I) ^ 2 : ℂ[X][X]) = -1 := by
         rw [← Polynomial.C_pow, ← Polynomial.C_pow, I_sq]; simp
-      rw [hI, Polynomial.C_pow]
-      ring
+      simp only [sumSq, mul_one, Polynomial.C_pow]
+      linear_combination (-(Polynomial.X : ℂ[X][X]) ^ 2) * hI
   rcases hprime.mem_or_mem hprod with h | h
   · have := hnil 1 (-I) (by simp) _ h
     norm_num [evalAt] at this

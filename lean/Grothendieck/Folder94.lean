@@ -61,7 +61,7 @@ theorem isWeaklyRegular_of_subsingleton [Subsingleton N] (rs : List A) : IsWeakl
   induction rs generalizing N with
   | nil => exact IsWeaklyRegular.nil A N
   | cons x rs ih =>
-    exact IsWeaklyRegular.cons (fun a b _ => Subsingleton.elim a b) (ih)
+    exact IsWeaklyRegular.cons (fun a b _ => Subsingleton.elim a b) ih
 
 /-- A retract inherits weak regularity. -/
 theorem isWeaklyRegular_of_retract {i : N →ₗ[A] N'} {p : N' →ₗ[A] N}
@@ -71,10 +71,8 @@ theorem isWeaklyRegular_of_retract {i : N →ₗ[A] N'} {p : N' →ₗ[A] N}
   | nil => exact IsWeaklyRegular.nil A N
   | cons x rs ih =>
     rw [isWeaklyRegular_cons_iff] at h
-    have hinj : Injective i := fun a b hab => by
-      have := congrArg p hab
-      rwa [← LinearMap.comp_apply, ← LinearMap.comp_apply, hpi] at this
-    refine IsWeaklyRegular.cons (h.1.of_injective i hinj) (ih (i := QuotSMulTop.map x i)
+    refine IsWeaklyRegular.cons (h.1.of_injective i (LeftInverse.injective (g := p)
+      (LinearMap.congr_fun hpi))) (ih (i := QuotSMulTop.map x i)
       (p := QuotSMulTop.map x p) ?_ h.2)
     rw [← QuotSMulTop.map_comp, hpi, QuotSMulTop.map_id]
 
@@ -82,10 +80,9 @@ theorem isWeaklyRegular_of_retract {i : N →ₗ[A] N'} {p : N' →ₗ[A] N}
 on the left. -/
 theorem injective_map_of_exact {f : M' →ₗ[A] M} {g : M →ₗ[A] M''} (hf : Injective f)
     (hfg : Exact f g) {x : A} (hx : IsSMulRegular M'' x) : Injective (QuotSMulTop.map x f) := by
-  have h0 : Exact (0 : PUnit →ₗ[A] M') f := (LinearMap.exact_zero_iff_injective _ f).mpr hf
-  have := QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last h0 hfg hx
-  rw [map_zero] at this
-  exact (LinearMap.exact_zero_iff_injective _ _).mp this
+  have := QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last
+    ((LinearMap.exact_zero_iff_injective (PUnit : Type) f).mpr hf) hfg hx
+  rwa [map_zero, LinearMap.exact_zero_iff_injective] at this
 
 /-- **Two out of three.** For a short exact sequence `0 → M' → M → M'' → 0` and `rs` weakly
 regular on `M''`, `rs` is weakly regular on `M'` iff it is on `M`. -/
@@ -107,13 +104,12 @@ theorem isWeaklyRegular_iff_of_exact {f : M' →ₗ[A] M} {g : M →ₗ[A] M''} 
 theorem injective_mapQ_of_exact {f : M' →ₗ[A] M} {g : M →ₗ[A] M''} (hf : Injective f)
     (hfg : Exact f g) (hg : Surjective g) {rs : List A} (h'' : IsWeaklyRegular M'' rs) :
     Injective (mapQ _ _ f (smul_top_le_comap_smul_top (Ideal.ofList rs) f)) := by
-  have h0 : Exact (0 : PUnit →ₗ[A] M') f := (LinearMap.exact_zero_iff_injective _ f).mpr hf
-  have := map_first_exact_on_four_term_right_exact_of_isSMulRegular_last h0 hfg hg h''
+  have := map_first_exact_on_four_term_right_exact_of_isSMulRegular_last
+    ((LinearMap.exact_zero_iff_injective (PUnit : Type) f).mpr hf) hfg hg h''
   rw [← LinearMap.exact_zero_iff_injective (PUnit : Type)]
   refine fun y => ⟨fun hy => ?_, fun ⟨z, hz⟩ => ?_⟩
   · obtain ⟨z, rfl⟩ := (this y).mp hy
-    induction z using Submodule.Quotient.induction_on with
-    | H z => exact ⟨0, by simp⟩
+    exact ⟨0, by simp⟩
   · rw [← hz]; simp
 
 end Exact
@@ -157,9 +153,7 @@ theorem exact_layerToQuot (k : ℕ) :
   | H m =>
     constructor
     · intro hm
-      have hm' : m ∈ filt J M k := by
-        simpa [quotToQuot] using hm
-      exact ⟨Submodule.Quotient.mk ⟨m, hm'⟩, rfl⟩
+      exact ⟨Submodule.Quotient.mk ⟨m, by simpa [quotToQuot] using hm⟩, rfl⟩
     · rintro ⟨z, hz⟩
       rw [← hz]
       induction z using Submodule.Quotient.induction_on with
@@ -171,8 +165,7 @@ theorem isWeaklyRegular_quotient_filt {rs : List A} :
     ∀ j, (∀ k < j, IsWeaklyRegular (layer J M k) rs) →
       IsWeaklyRegular (M ⧸ filt J M j) rs
   | 0, _ => by
-    have : Subsingleton (M ⧸ filt J M 0) := by
-      rw [filt_zero]; infer_instance
+    have : Subsingleton (M ⧸ filt J M 0) := by rw [filt_zero]; infer_instance
     exact isWeaklyRegular_of_subsingleton rs
   | j + 1, h =>
     (isWeaklyRegular_iff_of_exact (layerToQuot_injective j) (exact_layerToQuot j)
@@ -198,8 +191,8 @@ theorem isWeaklyRegular_of_flat (N : Type*) [AddCommGroup N] [Module (A ⧸ J) N
     (h : IsWeaklyRegular (A ⧸ J) rs) : IsWeaklyRegular N rs := by
   rw [← isWeaklyRegular_map_algebraMap_iff (A ⧸ J) N]
   rw [← isWeaklyRegular_map_algebraMap_iff (A ⧸ J) (A ⧸ J)] at h
-  have := h.isWeaklyRegular_lTensor (M₂ := N)
-  exact ((TensorProduct.rid (A ⧸ J) N).isWeaklyRegular_congr _).mp this
+  exact ((TensorProduct.rid (A ⧸ J) N).isWeaklyRegular_congr _).mp
+    (h.isWeaklyRegular_lTensor (M₂ := N))
 
 /-- **The induction step of Lemme 6.** If `JⁿM = 0`, `M ≠ 0` and every layer `grᵏ_J(M)` is a free
 `A/J`-module, every sequence weakly regular on `M` has weakly regular image in `A/J`. The last
@@ -217,10 +210,10 @@ theorem isWeaklyRegular_quotient_of_layers_free {M : Type*} [AddCommGroup M] [Mo
   have hm : filt J M (m + 1) = ⊥ := Nat.find_spec hex
   have hm0 : filt J M m ≠ ⊥ := by
     intro h0
-    rcases Nat.eq_zero_or_eq_succ_pred m with hz | hs
+    rcases m.eq_zero_or_pos with hz | hs
     · rw [hz, filt_zero] at h0
       exact top_ne_bot h0
-    · have := Nat.find_min' hex (m := m.pred) (by rw [show m.pred + 1 = m by omega]; exact h0)
+    · have := Nat.find_min' hex (m := m - 1) (by rwa [Nat.sub_add_cancel hs])
       omega
   have hcomap : (filt J M (m + 1)).comap (filt J M m).subtype = ⊥ := by
     rw [hm, comap_bot, ker_subtype]
@@ -230,7 +223,7 @@ theorem isWeaklyRegular_quotient_of_layers_free {M : Type*} [AddCommGroup M] [Mo
     by_contra hι
     rw [not_nonempty_iff] at hι
     have : Subsingleton ↥(filt J M m) := eL.toEquiv.subsingleton
-    exact hm0 (Submodule.eq_bot_of_subsingleton)
+    exact hm0 Submodule.eq_bot_of_subsingleton
   obtain ⟨i⟩ := hne
   induction rs using List.reverseRecOn with
   | nil => exact IsWeaklyRegular.nil _ _
@@ -241,20 +234,17 @@ theorem isWeaklyRegular_quotient_of_layers_free {M : Type*} [AddCommGroup M] [Mo
       ((e k).isWeaklyRegular_congr rs).mpr (isWeaklyRegular_of_flat _ h0)
     have hq : IsWeaklyRegular (M ⧸ filt J M m) rs :=
       isWeaklyRegular_quotient_filt m fun k _ => hlay k
-    have hf : Injective (filt J M m).subtype := Submodule.injective_subtype _
-    have hfg : Exact (filt J M m).subtype (filt J M m).mkQ := LinearMap.exact_subtype_mkQ _
+    have hf := Submodule.injective_subtype (filt J M m)
+    have hfg := LinearMap.exact_subtype_mkQ (filt J M m)
     have hg := (filt J M m).mkQ_surjective
-    have hL : IsWeaklyRegular (filt J M m) rs := (isWeaklyRegular_iff_of_exact hf hfg hg hq).mpr h.1
     have hinj := injective_mapQ_of_exact hf hfg hg hq
-    have hL' : IsWeaklyRegular (filt J M m) (rs ++ [y]) := by
-      rw [isWeaklyRegular_append_iff]
-      refine ⟨hL, ?_⟩
-      have h2 := h.2
-      rw [isWeaklyRegular_singleton_iff] at h2 ⊢
-      exact h2.of_injective _ hinj
-    have hF := (eL.isWeaklyRegular_congr _).mp hL'
-    exact isWeaklyRegular_of_retract (i := Finsupp.lsingle (R := A) i)
-      (p := Finsupp.lapply (R := A) i) (by ext; simp) hF
+    refine isWeaklyRegular_of_retract (i := Finsupp.lsingle (R := A) i)
+      (p := Finsupp.lapply (R := A) i) (by ext; simp) ((eL.isWeaklyRegular_congr _).mp ?_)
+    rw [isWeaklyRegular_append_iff]
+    refine ⟨(isWeaklyRegular_iff_of_exact hf hfg hg hq).mpr h.1, ?_⟩
+    have h2 := h.2
+    rw [isWeaklyRegular_singleton_iff] at h2 ⊢
+    exact h2.of_injective _ hinj
 
 /-- **Lemmes 6 b) and 16, key step.** Let `J` be a nilpotent ideal of `A` (`Jⁿ = 0`), `A₀ = A/J`.
 If every layer `grᵏ_J(A)` is a free `A₀`-module and every layer `grᵏ_J(R)` is a flat
@@ -292,17 +282,16 @@ theorem isWeaklyRegular_of_gr_flat_of_isLocalRing [IsLocalRing A] [IsNoetherianR
     [∀ k, IsScalarTower A (A ⧸ J) (N k)] [∀ k, Module.Flat (A ⧸ J) (N k)]
     (eR : ∀ k, layer J R k ≃ₗ[A] N k) {rs : List A} (h : IsWeaklyRegular A rs) :
     IsWeaklyRegular R rs := by
-  have hJ : J ≠ ⊤ := by
+  have : Nontrivial (A ⧸ J) := Ideal.Quotient.nontrivial_iff.mpr (by
     rintro rfl
     rw [Ideal.top_pow] at hn
-    exact top_ne_bot hn
-  have : Nontrivial (A ⧸ J) := Ideal.Quotient.nontrivial_iff.mpr hJ
+    exact top_ne_bot hn)
   have : IsLocalRing (A ⧸ J) :=
     IsLocalRing.of_surjective' (Ideal.Quotient.mk J) Ideal.Quotient.mk_surjective
   have hfin : ∀ k, Module.Finite (A ⧸ J) (P k) := fun k =>
     have : Module.Finite A (P k) := Module.Finite.equiv (eA k)
     Module.Finite.of_restrictScalars_finite A (A ⧸ J) (P k)
-  have hfree : ∀ k, Module.Free (A ⧸ J) (P k) := fun k => Module.free_of_flat_of_isLocalRing
+  have hfree : ∀ k, Module.Free (A ⧸ J) (P k) := fun _ => Module.free_of_flat_of_isLocalRing
   exact isWeaklyRegular_of_gr hn (fun k => Module.Free.ChooseBasisIndex (A ⧸ J) (P k))
     (fun k => (eA k).trans ((Module.Free.chooseBasis (A ⧸ J) (P k)).repr.restrictScalars A))
     N eR h

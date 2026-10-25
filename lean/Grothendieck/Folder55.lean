@@ -60,7 +60,7 @@ namespace Subsheaf
 
 @[ext]
 theorem ext {S T : Subsheaf F} (h : ∀ U, S.sections U = T.sections U) : S = T := by
-  cases S; cases T; congr; funext U; exact h U
+  cases S; cases T; congr; exact funext h
 
 instance : PartialOrder (Subsheaf F) where
   le S T := ∀ U, S.sections U ⊆ T.sections U
@@ -102,9 +102,7 @@ theorem stationary_of_locally_stationary [CompactSpace X] (S : ℕ → Subsheaf 
   obtain ⟨x, hxt, hyx⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ y))
   have hkx : k x ≤ t.sup k := Finset.le_sup hxt
   refine ⟨U ⊓ W x, inf_le_left, ⟨hy, hyx⟩, ?_⟩
-  have h1 := (S K).restrict (inf_le_left : U ⊓ W x ≤ U) hs
-  rw [hk x K (hkx.trans hK) (U ⊓ W x) inf_le_right] at h1
-  exact hS hkx _ h1
+  exact hS hkx _ (hk x K (hkx.trans hK) _ inf_le_right ▸ (S K).restrict inf_le_left hs)
 
 /-- **Lemme B, with the identity principle replaced by the uniformity it is meant to give.**
 On a quasi-compact space, let `S` be an increasing sequence of subsheaves. Suppose that
@@ -143,13 +141,10 @@ theorem isNoetherianRing_of_tilde {A P : Type*} [CommRing A] [PartialOrder P] (C
     (htilde_mem : ∀ I : Ideal A, I.FG → C (tilde I))
     (hΓ : ∀ I : Ideal A, I.FG → Γ (tilde I) = I) :
     IsNoetherianRing A := by
-  refine isNoetherian_iff_fg_wellFounded.2 ?_
-  refine wellFoundedGT_iff_monotone_chain_condition.2 fun a => ?_
+  refine isNoetherian_iff_fg_wellFounded.2 (wellFoundedGT_iff_monotone_chain_condition.2 fun a => ?_)
   obtain ⟨k₀, hk₀⟩ := hB (fun k => tilde (a k).1)
     (fun i j hij => htilde_mono _ _ (a i).2 (a j).2 (a.mono hij)) (fun k => htilde_mem _ (a k).2)
-  refine ⟨k₀, fun m hm => Subtype.ext ?_⟩
-  rw [← hΓ _ (a k₀).2, ← hΓ _ (a m).2]
-  exact congrArg Γ (hk₀ m hm).symm
+  exact ⟨k₀, fun m hm => Subtype.ext <| by rw [← hΓ _ (a k₀).2, ← hΓ _ (a m).2, hk₀ m hm]⟩
 
 /-! ### Without the uniformity, quasi-compactness and stabilisation of germs do not suffice
 
@@ -176,7 +171,7 @@ def accumulating (k : ℕ) : Subsheaf boolFun where
 theorem accumulating_mono : Monotone accumulating := by
   intro k l hkl U f hf y hy
   obtain ⟨n, hn, h⟩ := hf y hy
-  exact ⟨n, lt_of_lt_of_le hn hkl, h⟩
+  exact ⟨n, hn.trans_le hkl, h⟩
 
 /-- The germs of `accumulating` stabilise at every point of `ℕ ∪ {∞}`. -/
 theorem accumulating_germs (x : Npt) :

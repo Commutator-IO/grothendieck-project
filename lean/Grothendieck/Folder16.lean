@@ -1048,8 +1048,7 @@ theorem inverse_bloc {w : ℕ → E} (h₁ : ∀ i ≤ n, w i * L ^ (n - i) * π
     {j β : ℕ} (hj : j ≤ n) (hβ : β ≤ n - j) :
     L ^ β * w j * L ^ (n - j - β) * p j β = p j β := by
   obtain ⟨y, hy⟩ := D.image j hj β hβ
-  have hp0 : π j * p j 0 = p j 0 := by
-    rw [D.left j hj 0 (Nat.zero_le _) j]; simp
+  have hp0 : π j * p j 0 = p j 0 := by simp [D.left j hj 0 (Nat.zero_le _)]
   have e : L ^ (n - j - β) * L ^ β = L ^ (n - j) := by rw [← pow_add]; congr 1; omega
   rw [hy]
   calc L ^ β * w j * L ^ (n - j - β) * (L ^ β * p j 0 * y)
@@ -1077,7 +1076,7 @@ theorem formule_bas {w : ℕ → E} (h₁ : ∀ i ≤ n, w i * L ^ (n - i) * π 
       · intro β' hβ' hne
         rw [Finset.mem_range] at hβ'
         rw [mul_assoc, D.left j hj β' (by omega), ite_eq_right (by omega), mul_zero]
-      · intro h; exact absurd (Finset.mem_range.2 (by omega)) h
+      · exact fun h => absurd (Finset.mem_range.2 (by omega)) h
     · intro j' hj' hne
       rw [Finset.mem_Ico] at hj'
       rw [Finset.mul_sum]
@@ -1087,7 +1086,7 @@ theorem formule_bas {w : ℕ → E} (h₁ : ∀ i ≤ n, w i * L ^ (n - i) * π 
       split_ifs with h
       · exact D.pow_mul_eq_zero (by omega) (by omega) (by omega)
       · rw [mul_zero]
-    · intro h; exact absurd (Finset.mem_Ico.2 ⟨le_rfl, by omega⟩) h
+    · exact fun h => absurd (Finset.mem_Ico.2 ⟨le_rfl, by omega⟩) h
   rw [hS]
   have h' := congrArg (fun x => L ^ β * w j * x) key
   have K := D.inverse_bloc h₁ hj hβ
@@ -1156,8 +1155,7 @@ theorem mul_pseudoInverse {w : ℕ → E} (h₁ : ∀ i ≤ n, w i * L ^ (n - i)
   rw [Finset.mem_range] at hβ
   have K := D.inverse_bloc h₁ (by omega : j ≤ n) (by omega : β + 1 ≤ n - j)
   rw [pow_succ'] at K
-  simp only [mul_assoc] at K ⊢
-  exact K
+  simpa only [mul_assoc] using K
 
 /-- **Page 9, `(6.7)`, second relation.** `ΛL = 1 - ∑_{n ≤ i ≤ 2n} π_{i,0}`, the tops of the
 chains. -/
@@ -1183,10 +1181,9 @@ theorem homogene_pseudoInverse (G : Graduation π n) (hL : Homogene π 2 L) {w :
     Homogene π (-2) (pseudoInverse n L w p) := by
   refine homogene_sum _ fun j hj => homogene_sum _ fun β hβ => ?_
   rw [Finset.mem_range] at hj hβ
-  refine homogene_congr ?_ (G.homogene_mul (G.homogene_mul (G.homogene_mul
+  exact homogene_congr (by omega) (G.homogene_mul (G.homogene_mul (G.homogene_mul
     (G.homogene_pow hL β) (hw j (by omega))) (G.homogene_pow hL _))
     (D.homogene_zero (β := β + 1) (by omega) (by omega)))
-  omega
 
 end DecompositionPrimitive
 

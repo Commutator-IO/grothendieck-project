@@ -547,9 +547,7 @@ theorem sum_inertia_eq_zero (a : Γ → k) (h : ∀ μ : k, ∑ s, a s * s • �
 theorem exists_sum_smul_ne_zero (hN : ((inertia Γ k).card : k) ≠ 0) :
     ∃ μ : k, ∑ s : Γ, s • μ ≠ 0 := by
   by_contra! h
-  apply hN
-  have := sum_inertia_eq_zero (fun _ => (1 : k)) (fun μ => by simpa using h μ)
-  simpa using this
+  simpa using hN <| by simpa using sum_inertia_eq_zero (fun _ => (1 : k)) fun μ => by simpa using h μ
 
 variable {B : Type*} [Ring B] [Algebra k B] [MulSemiringAction Γ B]
 
@@ -584,16 +582,12 @@ theorem mem_span_fixed (hB : ∀ (g : Γ) (μ : k), g • algebraMap k B μ = al
 
 theorem isCocycle_one_eq {Γ A : Type*} [Group Γ] [Ring A] [MulSemiringAction Γ A]
     {c : Γ → Aˣ} (hc : IsCocycle c) : c 1 = 1 := by
-  have h := hc 1 1
-  rw [mul_one, one_smul] at h
-  exact mul_eq_left.1 (Units.ext h.symm)
+  simpa using (Units.ext (by simpa using hc 1 1) : c 1 = c 1 * c 1)
 
 /-- The fixed field `k^Γ` is infinite when `k` is (`[k : k^Γ] ≤ |Γ|`). -/
 theorem infinite_fixedPoints [Infinite k] :
     (FixedPoints.subfield Γ k : Set k).Infinite := by
-  rw [← Set.infinite_coe_iff]
-  by_contra h
-  rw [not_infinite_iff_finite] at h
+  refine Set.infinite_coe_iff.1 ⟨fun h => ?_⟩
   have : Finite k := Module.finite_of_finite (FixedPoints.subfield Γ k)
   exact not_finite k
 
@@ -733,8 +727,7 @@ theorem exists_sum_smul_eq_one (hN : ((inertia Γ (ResidueField O)).card : Resid
   have hTi : ∀ g : Γ, g • (↑T⁻¹ : O) = ↑T⁻¹ := fun g => by
     have h : g • (↑T⁻¹ : O) * T = 1 := by
       rw [hT, ← hg g, ← hT, ← smul_mul', Units.inv_mul, smul_one]
-    calc g • (↑T⁻¹ : O) = g • (↑T⁻¹ : O) * T * ↑T⁻¹ := by rw [mul_assoc, Units.mul_inv, mul_one]
-      _ = ↑T⁻¹ := by rw [h, one_mul]
+    simpa using congrArg (· * (↑T⁻¹ : O)) h
   simp_rw [smul_mul', hTi, ← sum_mul]
   rw [show (∑ i : Γ, i • l₀) = T from hT.symm, Units.mul_inv]
 
@@ -785,8 +778,7 @@ theorem isCohomologous_of_restrict_inertia [Module.Finite O A] [Infinite (Residu
   obtain ⟨u₀, hu₀⟩ := hres
   set c'' := fun g => u₀⁻¹ * c' g * Units.map (MulSemiringAction.toRingHom Γ A g : A →* A) u₀
   have hc'' : IsCocycle c'' := isCocycle_twist hc' u₀
-  have hval : ∀ g, (c'' g : A) = ↑u₀⁻¹ * c' g * g • (u₀ : A) := fun g => by
-    simp [c'']
+  have hval : ∀ g, (c'' g : A) = ↑u₀⁻¹ * c' g * g • (u₀ : A) := fun g => by simp [c'']
   obtain ⟨v, hv⟩ := isCohomologous_of_eqOn_inertia hB hN (isCocycle_map π hequiv hc)
     (isCocycle_map π hequiv hc'') fun n hn => by
       ext; simp only [Units.coe_map, MonoidHom.coe_ofClass, hu₀ n hn, hval]
@@ -813,9 +805,7 @@ theorem isCohomologous_of_faithful [Module.Finite O A] [Infinite (ResidueField O
   have h1 : inertia Γ (ResidueField O) = {1} := by
     ext g
     simp only [mem_inertia, mem_singleton]
-    refine ⟨fun h => FaithfulSMul.eq_of_smul_eq_smul fun μ => by rw [h, one_smul], ?_⟩
-    rintro rfl μ
-    exact one_smul _ μ
+    exact ⟨fun h => FaithfulSMul.eq_of_smul_eq_smul fun μ => by rw [h, one_smul], by rintro rfl μ; exact one_smul _ μ⟩
   refine isCohomologous_of_restrict_inertia hO hB (by simp [h1]) π hπ hequiv hker hc hc'
     ⟨1, fun n hn => ?_⟩
   rw [h1, mem_singleton] at hn

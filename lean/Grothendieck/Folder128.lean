@@ -407,8 +407,7 @@ lemma finrank_le_two_of_simple [Module.Finite k A]
     simp only [f, LinearMap.coprod_apply, LinearMap.toSpanSingleton_apply, ← e, hb,
       ← Algebra.algebraMap_eq_smul_one, add_sub_cancel]
   have := LinearMap.finrank_range_le f
-  rw [LinearMap.range_eq_top.2 hf, finrank_top, Module.finrank_prod, Module.finrank_self] at this
-  exact this
+  rwa [LinearMap.range_eq_top.2 hf, finrank_top, Module.finrank_prod, Module.finrank_self] at this
 
 /-- For `0 ≠ z ∈ 𝔪_χ` and `y ∈ 𝔪_χ`, the hypothesis `Δ ⊂ (δ z) + J` read through `φ_χ`. -/
 lemma phi_decomp {J : Ideal (A ⊗[k] A)}
@@ -622,7 +621,7 @@ lemma rTensor_subtype_injective_of_flat [Module.Flat A G]
   let r : L →ₗ[A] Lb :=
     { toFun := fun x => ⟨(I • ⊤ : Submodule A G).mkQ x, x, x.2, rfl⟩
       map_add' := fun x y => Subtype.ext (map_add _ _ _)
-      map_smul' := fun c x => Subtype.ext (map_smul (I • ⊤ : Submodule A G).mkQ c (x : G)) }
+      map_smul' := fun c x => Subtype.ext (map_smul _ c (x : G)) }
   have hr : Function.Surjective r := by
     rintro ⟨_, x, hx, rfl⟩
     exact ⟨⟨x, hx⟩, rfl⟩
@@ -653,10 +652,10 @@ lemma rTensor_subtype_injective_of_flat [Module.Flat A G]
     rw [map_zero, ← LinearMap.rTensor_comp_apply, hcomp, LinearMap.rTensor_comp_apply, hy,
       map_zero]
   obtain ⟨z, rfl⟩ := (rTensor_exact M hex hr y).1 hry
-  have hz : z = 0 := by
+  obtain rfl : z = 0 := by
     apply rTensor_smulMap_injective h1
     rw [map_zero, ← hφ, LinearMap.rTensor_comp_apply, hy]
-  rw [hz, map_zero]
+  rw [map_zero]
 
 /-- `Tor₁(F/K, M) = 0` whenever `I F ⊂ K`: for `u : K → F` injective with `I F ⊂ u(K)`,
 `K ⊗ M → F ⊗ M` is injective (reduction to a free module mapping onto `F`). -/
@@ -685,7 +684,7 @@ lemma rTensor_injective_of_smul_le (h0 : Module.Flat (A ⧸ I) ((A ⧸ I) ⊗[A]
     rw [← LinearMap.comp_apply, huq]; exact hg
   have hker : LinearMap.ker p ≤ L := fun g hg => by
     show p g ∈ LinearMap.range u
-    rw [LinearMap.mem_ker.1 hg]; exact zero_mem _
+    simp [LinearMap.mem_ker.1 hg]
   let ι := Submodule.inclusion hker
   have hqι : q ∘ₗ ι = 0 := by
     ext x
@@ -1207,11 +1206,11 @@ theorem flat_and_bijective_of_reduce (h : IsConductorIdeal S I) (hI : IsNilpoten
     rw [← span_invariants_eq_top h hI d h₀]
     congr 1
     ext e
-    exact ⟨by rintro ⟨n, rfl⟩; exact hrange n, fun he => hrange' e he⟩
+    exact ⟨by rintro ⟨n, rfl⟩; exact hrange n, hrange' e⟩
   set g := projInv I h d ι hrange
   have hg := projInv_surjective h d ι hrange hrange'
-  have hg0 : ∀ n, proj (S := S) I (ι n) = 0 → n ∈ (I • ⊤ : Submodule A N) := fun n hn =>
-    mem_smul_of_proj_eq_zero h ι hι hspan hn
+  have hg0 : ∀ n, proj (S := S) I (ι n) = 0 → n ∈ (I • ⊤ : Submodule A N) := fun _ =>
+    mem_smul_of_proj_eq_zero h ι hι hspan
   set α := LinearMap.liftBaseChange S ι
   have hsurj : Function.Surjective α := by
     rw [← LinearMap.range_eq_top, LinearMap.range_liftBaseChange]
@@ -1239,8 +1238,8 @@ theorem flat_and_bijective_of_reduce (h : IsConductorIdeal S I) (hI : IsNilpoten
       rw [map_sub, map_sub, this, sub_self]
     have := exists_tmul_of_red_eq_zero (M₀ := (d.reduce I).invariants) (z := t) h g hg hk
     obtain ⟨y, -, rfl⟩ := this h0
-    have : y = 0 := hι (by simpa [α] using ht)
-    rw [this, TensorProduct.tmul_zero]
+    obtain rfl : y = 0 := hι (by simpa [α] using ht)
+    rw [TensorProduct.tmul_zero]
   refine ⟨flat_of_isNilpotent hI ?_ ?_, hinj, hsurj⟩
   · -- `A/I ⊗_A N ≅ E₀^{ψ₀}`, flat over `A/I`
     let φ := LinearMap.liftBaseChange (A ⧸ I) g
@@ -1287,13 +1286,10 @@ theorem flat_and_bijective_of_reduce (h : IsConductorIdeal S I) (hI : IsNilpoten
       simp [algebraMap_smul]
       exact congr_arg _ (LinearMap.liftBaseChange_one_tmul _ _ _)
     have hΦinj : Function.Injective Φ := by
-      have h1 : Function.Injective (j.rTensor N) := by
-        have : j.rTensor N = (LinearEquiv.ofBijective j hj).rTensor N := rfl
-        rw [this, LinearEquiv.coe_rTensor]
-        exact (LinearEquiv.rTensor N (LinearEquiv.ofBijective j hj)).injective
-      have h3 : Function.Injective (αe.toLinearMap.lTensor I') := by
-        rw [← LinearEquiv.coe_lTensor]
-        exact (LinearEquiv.lTensor I' αe).injective
+      have h1 : Function.Injective (j.rTensor N) :=
+        (LinearEquiv.rTensor N (LinearEquiv.ofBijective j hj)).injective
+      have h3 : Function.Injective (αe.toLinearMap.lTensor I') :=
+        (LinearEquiv.lTensor I' αe).injective
       have h4 : Function.Injective (I'.subtype.rTensor E) :=
         Module.Flat.rTensor_preserves_injective_linearMap _ Subtype.val_injective
       exact (TensorProduct.lid S E).injective.comp (h4.comp (h3.comp
@@ -1309,9 +1305,8 @@ Neither `A ≅ H⁰(S/A)` nor `H¹(S/A) = 0` is needed. -/
 theorem isEffective_of_reduce (h : IsConductorIdeal S I) (hI : IsNilpotent I)
     [Module.Flat S E] (d : DescentDatum A S E) (h₀ : (d.reduce I).IsEffective) :
     d.IsEffective := by
-  obtain ⟨h1, h2⟩ := flat_and_bijective_of_reduce h hI d h₀ (N := d.invariants)
+  exact flat_and_bijective_of_reduce h hI d h₀ (N := d.invariants)
     d.invariants.subtype Subtype.val_injective (fun n => n.2) (fun e he => ⟨⟨e, he⟩, rfl⟩)
-  exact ⟨h1, h2⟩
 
 end DescentDatum
 
@@ -1339,7 +1334,7 @@ theorem isEffectiveDescentFlat_of_quotient (h : IsConductorIdeal S I) (hI : IsNi
   let gM : M →ₗ[A] (A ⧸ I) ⊗[A] M := TensorProduct.mk A (A ⧸ I) M 1
   have hgM : Function.Surjective gM := mk_quot_surjective M
   have hk : ∀ a b, gM a = gM b → a - b ∈ (I • ⊤ : Submodule A M) := fun a b hab => by
-    rw [← mk_quot_eq_zero, map_sub, sub_eq_zero]; exact hab
+    rwa [← mk_quot_eq_zero, map_sub, sub_eq_zero]
   have hred1 : ∀ m, red (S := S) I gM (1 ⊗ₜ m) = 1 ⊗ₜ gM m := fun m => by
     rw [red_tmul, map_one]
   constructor

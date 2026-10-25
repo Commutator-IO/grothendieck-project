@@ -112,9 +112,8 @@ theorem rectification (hR : CoveringHomotopyExtension R p) {g : X ⟶ Y} {g' : X
       i ≫ φbar = g ∧ φbar ≫ p = g' ∧ IsHomotopy R.P' L φ φbar ∧
         R.iJ ≫ L = k ∧ L ≫ p = h := by
   obtain ⟨L, h₀, h₁, h₂⟩ := hR φ k h hk.1 hh.1 hcompat
-  refine ⟨R.P'.i₁ ≫ L, L, ?_, ?_, ⟨h₀, rfl⟩, h₁, h₂⟩
-  · rw [← Category.assoc, ← R.w₁, Category.assoc, h₁, hk.2]
-  · rw [Category.assoc, h₂, hh.2]
+  exact ⟨R.P'.i₁ ≫ L, L, by rw [← R.w₁_assoc, h₁, hk.2], by rw [Category.assoc, h₂, hh.2],
+    ⟨h₀, rfl⟩, h₁, h₂⟩
 
 /-- **The reading's necessity.** If `φ̄` makes both triangles commute and
 `K : φ ⟶ φ̄` is a homotopy on `X' ⊗ J`, then `k = (i ⊗ J) ≫ K` and `h = K ≫ p`
@@ -140,12 +139,10 @@ theorem rectification_iff (hR : CoveringHomotopyExtension R p) {g : X ⟶ Y} {g'
         i ≫ φbar = g ∧ φbar ≫ p = g' ∧ IsHomotopy R.P' K φ φbar) ↔
       ∃ (k : R.P.I ⟶ Y) (h : R.P'.I ⟶ Y'),
         IsHomotopy R.P k (i ≫ φ) g ∧ IsHomotopy R.P' h (φ ≫ p) g' ∧ k ≫ p = R.iJ ≫ h := by
-  constructor
-  · rintro ⟨φbar, K, hg, hg', hK⟩
-    obtain ⟨h1, h2, h3⟩ := compatible_of_rectification R φ φbar hg hg' K hK
+  refine ⟨fun ⟨φbar, K, hg, hg', hK⟩ => ?_, fun ⟨k, h, hk, hh, hc⟩ => ?_⟩
+  · obtain ⟨h1, h2, h3⟩ := compatible_of_rectification R φ φbar hg hg' K hK
     exact ⟨_, _, h1, h2, h3⟩
-  · rintro ⟨k, h, hk, hh, hc⟩
-    obtain ⟨φbar, L, h1, h2, h3, -, -⟩ := rectification R hR φ k h hk hh hc
+  · obtain ⟨φbar, L, h1, h2, h3, -, -⟩ := rectification R hR φ k h hk hh hc
     exact ⟨φbar, L, h1, h2, h3⟩
 
 /-- **Page 22, « in case `Y'` is final object we are evidently through ».**

@@ -1451,12 +1451,8 @@ theorem alpha_fromBlocks_zero {o : Type*} [Fintype o] [DecidableEq o] (P : Matri
 theorem det_fromBlocks_le {o : Type*} [Fintype o] [DecidableEq o] {A : Matrix n n ℂ}
     {B : Matrix n o ℂ} {D : Matrix o o ℂ} (h : (fromBlocks A B Bᴴ D).PosSemidef) :
     det (fromBlocks A B Bᴴ D) ≤ det A * det D := by
-  have hA : A.PosSemidef := by
-    have := h.submatrix Sum.inl
-    rwa [show (fromBlocks A B Bᴴ D).submatrix Sum.inl Sum.inl = A by ext; rfl] at this
-  have hD : D.PosSemidef := by
-    have := h.submatrix Sum.inr
-    rwa [show (fromBlocks A B Bᴴ D).submatrix Sum.inr Sum.inr = D by ext; rfl] at this
+  have hA : A.PosSemidef := h.submatrix Sum.inl
+  have hD : D.PosSemidef := h.submatrix Sum.inr
   by_cases hA0 : det A = 0
   · obtain ⟨v, hv, hAv⟩ := exists_mulVec_eq_zero_iff.2 hA0
     have hw : star (Sum.elim v 0) ⬝ᵥ (fromBlocks A B Bᴴ D *ᵥ Sum.elim v 0) = 0 := by
@@ -1468,9 +1464,8 @@ theorem det_fromBlocks_le {o : Type*} [Fintype o] [DecidableEq o] {A : Matrix n 
     rw [this, hA0, zero_mul]
   have hAd : A.PosDef := hA.posDef_iff_det_ne_zero.2 hA0
   have : Invertible A := invertibleOfIsUnitDet A (isUnit_iff_ne_zero.2 hA0)
-  have hschur : (D - Bᴴ * A⁻¹ * B).PosSemidef := (PosDef.fromBlocks₁₁ B D hAd).1 h
-  have hS : (Bᴴ * A⁻¹ * B).PosSemidef := hAd.inv.posSemidef.conjTranspose_mul_mul_same B
-  have hle := det_le_det_add hS hschur
+  have hle := det_le_det_add (hAd.inv.posSemidef.conjTranspose_mul_mul_same B)
+    ((PosDef.fromBlocks₁₁ B D hAd).1 h)
   rw [add_sub_cancel] at hle
   rw [det_fromBlocks₁₁, invOf_eq_nonsing_inv]
   exact mul_le_mul_of_nonneg_left hle hA.det_nonneg
@@ -1630,9 +1625,8 @@ theorem eigenvalues₀_le_of_conj_diagonal (s : ℕ → ℝ) (hs : Antitone s) (
         le_antisymm ((single_le_sum (fun k _ => by positivity) (mem_univ k)).trans hb)
           (by positivity)
       simp [hw]
-  have hzpos : 0 < ‖z‖ ^ 2 := by positivity
   rw [hlam]
-  exact le_of_mul_le_mul_right (hlow.trans hup) hzpos
+  exact le_of_mul_le_mul_right (hlow.trans hup) (by positivity)
 
 /-- Reindexing a sum of products over the `p`-subsets along an equivalence. -/
 theorem sum_powersetCard_prod_equiv {α β R : Type*} [Fintype α] [Fintype β] [DecidableEq β]
@@ -1702,10 +1696,9 @@ theorem alpha_conj_diagonal_le (s : ℕ → ℝ) (hs : Antitone s) (hs0 : ∀ k,
     (alpha p (Ψᴴ * diagonal (fun k : Fin d => ((s k : ℝ) : ℂ)) * Ψ)).re ≤
       ∑ t ∈ (range N).powersetCard p, ∏ i ∈ t, s i := by
   set A := Ψᴴ * diagonal (fun k : Fin d => ((s k : ℝ) : ℂ)) * Ψ
-  have hPSD : A.PosSemidef := by
-    refine PosSemidef.conjTranspose_mul_mul_same ?_ Ψ
-    refine (posSemidef_diagonal_iff).2 fun k => ?_
-    exact_mod_cast hs0 k
+  have hPSD : A.PosSemidef :=
+    PosSemidef.conjTranspose_mul_mul_same (posSemidef_diagonal_iff.2 fun k => by
+      exact_mod_cast hs0 k) Ψ
   have hA := hPSD.1
   set g : ℕ → ℝ := fun k => if k < N then s k else 0
   set σ := (Fintype.equivOfCardEq (Fintype.card_fin _) :
@@ -1714,12 +1707,9 @@ theorem alpha_conj_diagonal_le (s : ℕ → ℝ) (hs : Antitone s) (hs0 : ∀ k,
   have hle : ∀ i, hA.eigenvalues i ≤ g (σ i) := fun i => by
     rw [hev]; exact eigenvalues₀_le_of_conj_diagonal s hs hs0 N Ψ hΨ hA (σ i)
   rw [alpha_eq_sum_eigenvalues hA, Complex.re_sum]
-  calc ∑ K ∈ (univ : Finset (Fin d)).powersetCard p,
-        (∏ i ∈ K, ((hA.eigenvalues i : ℝ) : ℂ)).re
-      = ∑ K ∈ (univ : Finset (Fin d)).powersetCard p, ∏ i ∈ K, hA.eigenvalues i := by
-        refine sum_congr rfl fun K _ => ?_
-        rw [← Complex.ofReal_prod, Complex.ofReal_re]
-    _ ≤ ∑ K ∈ (univ : Finset (Fin d)).powersetCard p, ∏ i ∈ K, g (σ i) :=
+  simp only [← Complex.ofReal_prod, Complex.ofReal_re]
+  calc ∑ K ∈ (univ : Finset (Fin d)).powersetCard p, ∏ i ∈ K, hA.eigenvalues i
+      ≤ ∑ K ∈ (univ : Finset (Fin d)).powersetCard p, ∏ i ∈ K, g (σ i) :=
         sum_le_sum fun K _ => prod_le_prod₀ (fun i _ => hPSD.eigenvalues_nonneg i)
           fun i _ => hle i
     _ = ∑ t ∈ (range (Fintype.card (Fin d))).powersetCard p, ∏ i ∈ t, g i := by

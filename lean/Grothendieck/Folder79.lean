@@ -1358,9 +1358,7 @@ def Pol := {P : E → E → Prop // IsPolygon n P}
 
 theorem two_ne_zero_of_lt (hn : 2 < n) : (2 : ZMod n) ≠ 0 := by
   intro h
-  have : ((2 : ℕ) : ZMod n) = 0 := by exact_mod_cast h
-  rw [ZMod.natCast_eq_zero_iff] at this
-  have := Nat.le_of_dvd (by omega) this
+  have := Nat.le_of_dvd (by omega) ((ZMod.natCast_eq_zero_iff 2 n).1 (by exact_mod_cast h))
   omega
 
 theorem pm_one_mul {d x ν : ZMod n} (hd : d = 1 ∨ d = -1) :
@@ -1486,12 +1484,8 @@ theorem twist_eq_twist_iff (hn : 2 < n) (ν ν' : (ZMod n)ˣ) (P : Pol n E) :
       rwa [twist_twist hn, show ν' * ν⁻¹ * ν = ν' by group] at this
   rw [key, twist_eq_self_iff hn]
   constructor
-  · rintro (h | h)
-    · left; simpa using congrArg (· * ν) h
-    · right; simpa using congrArg (· * ν) h
-  · rintro (rfl | rfl)
-    · left; simp
-    · right; simp
+  · rintro (h | h) <;> [left; right] <;> simpa using congrArg (· * ν) h
+  · rintro (rfl | rfl) <;> [left; right] <;> simp
 
 /-- **The « fait mirifique » (page 138).** `(Z/n)*` acts on the polygon
 structures of `E`, through `(Z/n)*/±1`. -/
@@ -1640,13 +1634,10 @@ theorem eq_of_toSix (hn : 2 < n) {hpol : ∀ s, IsPolygon n (onStar A A s)}
     (hν : ν' = ν ∨ ν' = -ν)
     (hl : ∀ u t, twistGraph A l u t → ∃ w, twistGraph A l w u ∧ twistGraph A l w t)
     (hl' : ∀ u t, twistGraph A l' u t → ∃ w, twistGraph A l' w u ∧ twistGraph A l' w t) :
-    l = l' := by
+    l = l' :=
   have e := twistGraph_eq_of_toSix hn h h' hν hl hl'
-  have : l⁻¹ = l'⁻¹ := by
-    ext u
-    exact hstar _ _ (Set.ext fun t => by
-      simpa [star, twistGraph] using congrFun (congrFun e u) t)
-  simpa using congrArg (·⁻¹) this
+  inv_injective (Equiv.ext fun u => hstar _ _ (Set.ext fun t => by
+    simpa [star, twistGraph] using congrFun (congrFun e u) t))
 
 
 /-- An automorphism `g` of `A` carries the star of `s` onto the star of `g s`. -/
@@ -1793,13 +1784,8 @@ theorem onStar_adj (μ : (ZMod n)ˣ) :
   simp only [cyc, Equiv.symm_apply_apply]
   change Adj (ZMod n) _ (vtx (det2_starPt e hx k)) (vtx (det2_starPt e hx k')) ↔ _
   rw [adj_vtx, link_polygon e μ hy]
-  constructor
-  · rintro (h | h)
-    · right; linear_combination -h
-    · left; linear_combination -h
-  · rintro (h | h)
-    · right; linear_combination -h
-    · left; linear_combination -h
+  constructor <;> rintro (h | h) <;>
+    first | (right; linear_combination -h) | (left; linear_combination -h)
 
 include hn in
 /-- Every star of `P_{M, ±e}` over `Z/n` is a polygon. -/
@@ -1807,9 +1793,7 @@ theorem isPolygon_adj (v : Vtx (ZMod n)) :
     IsPolygon n (onStar (Adj (ZMod n) e) (Adj (ZMod n) e) v) := by
   induction v using Vtx.ind with
   | H x y h =>
-    refine ⟨starIndex hn e h, ?_⟩
-    have := onStar_adj hn e h 1
-    rwa [Units.val_one, one_mul] at this
+    exact ⟨starIndex hn e h, by simpa using onStar_adj hn e h 1⟩
 
 /-- **To 6 holds in the model, with `ν = μ` (pages 138 and 139).** Over `Z/n`,
 `n ≥ 3`, the homothety `T_μ` of `P_{M, ±e}` satisfies To 6 with `ν = μ`: on each
@@ -1821,9 +1805,7 @@ theorem toSix_scal (μ : (ZMod n)ˣ) :
   induction v using Vtx.ind with
   | H x y h =>
     rw [twistGraph_scal]
-    refine (onStar_adj hn e h μ).trans (twist_of_eq hn μ ?_).symm
-    have := onStar_adj hn e h 1
-    rwa [Units.val_one, one_mul] at this
+    exact (onStar_adj hn e h μ).trans (twist_of_eq hn μ (by simpa using onStar_adj hn e h 1)).symm
 
 end ModelToSix
 
@@ -1860,9 +1842,8 @@ theorem cyc_same_nbrs (hn : 2 < n) {i j : ZMod n} (hij : i ≠ j)
   · exact absurd (by linear_combination -h2) (two_ne_zero_of_lt hn)
 
 theorem eq_four_of_four_eq_zero (hn : 2 < n) (h : (4 : ZMod n) = 0) : n = 4 := by
-  have : ((4 : ℕ) : ZMod n) = 0 := by exact_mod_cast h
-  rw [ZMod.natCast_eq_zero_iff] at this
-  have := Nat.le_of_dvd (by norm_num) this
+  have h4 := (ZMod.natCast_eq_zero_iff 4 n).1 (by exact_mod_cast h)
+  have := Nat.le_of_dvd (by norm_num) h4
   interval_cases n <;> omega
 
 /-- Adjacency inside a star, read on a polygon indexing of it. -/

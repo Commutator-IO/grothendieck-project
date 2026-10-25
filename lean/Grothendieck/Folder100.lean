@@ -258,8 +258,7 @@ lemma step {f : ℕ → Ideal R} (hf : ∀ j, (f j).IsPrime) (hfm : ∀ j, f j �
   rcases Nat.lt_succ_iff_lt_or_eq.1 hj with hj | rfl
   · intro hmem
     apply h j hj
-    have : x = x' - (x' - x) := by ring
-    rw [this]
+    rw [← sub_sub_cancel x' x]
     exact sub_mem (sup_le_sup_left hle _ hmem) (Ideal.mem_sup_right hx')
   · have hle' : maximalIdeal R ^ max (N + 1) M ≤ maximalIdeal R ^ M :=
       Ideal.pow_le_pow_right (le_max_right _ _)
@@ -291,10 +290,8 @@ theorem exists_mem_maximalIdeal_forall_notMem (f : ℕ → Ideal R) (hf : ∀ j,
     | refl => simp
     | step hle ih =>
       rename_i m
-      have h1 := Ideal.pow_le_pow_right (hNmono.monotone hle) (hstep m).1
-      have : a (m + 1) - a k = (a (m + 1) - a m) + (a m - a k) := by ring
-      rw [this]
-      exact add_mem h1 ih
+      rw [← sub_add_sub_cancel]
+      exact add_mem (Ideal.pow_le_pow_right (hNmono.monotone hle) (hstep m).1) ih
   have hsm : ∀ n, (maximalIdeal R ^ n • ⊤ : Submodule R R) = maximalIdeal R ^ n := fun n => by
     rw [smul_eq_mul, Ideal.mul_top]
   obtain ⟨L, hL⟩ := IsPrecomplete.prec (I := maximalIdeal R) inferInstance (f := a)
@@ -304,18 +301,13 @@ theorem exists_mem_maximalIdeal_forall_notMem (f : ℕ → Ideal R) (hf : ∀ j,
   have hLk : ∀ k, L - a k ∈ maximalIdeal R ^ N k := fun k => by
     have h2 := hL (N k)
     rw [SModEq.sub_mem, hsm] at h2
-    have : L - a k = (a (N k) - a k) - (a (N k) - L) := by ring
-    rw [this]
+    rw [← sub_sub_sub_cancel_left (c := a (N k))]
     exact sub_mem (hcauchy k (N k) (hN k)) h2
   refine ⟨L, ?_, fun j hj => ?_⟩
-  · have := hLk 0
-    have h0 : a 0 = 0 := rfl
-    have h1 : N 0 = 1 := rfl
-    rwa [h0, h1, sub_zero, pow_one] at this
+  · simpa [a, N, s, seq] using hLk 0
   · apply (s (j + 1)).2 j (Nat.lt_succ_self j)
     show a (j + 1) ∈ f j ⊔ maximalIdeal R ^ N (j + 1)
-    have : a (j + 1) = L - (L - a (j + 1)) := by ring
-    rw [this]
+    rw [← sub_sub_cancel L (a (j + 1))]
     exact sub_mem (Ideal.mem_sup_left hj) (Ideal.mem_sup_right (hLk _))
 
 /-- Countable prime avoidance, for a countable set of primes. -/
@@ -427,8 +419,7 @@ theorem exists_coheight_le_one (I : ℕ → Ideal R) (n : ℕ) :
 
 omit [IsAdicComplete (maximalIdeal R) R] in
 lemma coheight_lt_top (x : PrimeSpectrum R) : Order.coheight x < ⊤ := by
-  have h := (Order.coheight_le_krullDim x).trans_lt (ringKrullDim_lt_top (R := R))
-  exact WithBot.coe_lt_coe.1 (h.trans_le (by simp))
+  exact WithBot.coe_lt_coe.1 (((Order.coheight_le_krullDim x).trans_lt ringKrullDim_lt_top).trans_le (by simp))
 
 /-- **Proposition of page 36**, in the form corrected by the edition. In the spectrum of a
 complete noetherian local ring, countably many closed subsets whose union contains every point

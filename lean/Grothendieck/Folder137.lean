@@ -111,8 +111,7 @@ def toPoly : PolynomialCategory C where
   Hom p X Y := (G.Γ p).obj X ⟶ Y
   comp {p q n X Y Z} f g h := (G.α q p n h).app X ≫ (G.Γ q).map f ≫ g
   id X := G.ε.hom.app X
-  id_comp {q X Y} g := by
-    rw [G.α_one_right'_assoc]
+  id_comp {q X Y} g := by rw [G.α_one_right'_assoc]
   comp_id {p X Y} f := by
     have := G.ε.hom.naturality f
     simp only [Functor.id_map] at this
@@ -132,7 +131,7 @@ def toPoly : PolynomialCategory C where
     simp only [Equiv.coe_fn_mk, Functor.map_comp, Category.assoc]
     have n1 := G.ε.hom.naturality f
     have n2 := G.ε.hom.naturality (G.ε.hom.app X)
-    simp only [Functor.id_map, Functor.id_obj] at n1 n2
+    simp only [Functor.id_map] at n1 n2
     rw [reassoc_of% n1, reassoc_of% n2, G.α_one_left'_assoc]
 
 end PDCategory
@@ -228,7 +227,6 @@ lemma rep_αApp (p q n : ℕ) (h : p * q = n) (X : C) :
 noncomputable def εHom (X : C) : R.obj 1 X ⟶ X := (R.rep 1 X X).symm (P.id X)
 
 lemma rep_εHom (X : C) : R.rep 1 X X (R.εHom X) = P.id X := rep_symm_apply _ _
-
 
 lemma map_αApp (p q n : ℕ) (h : p * q = n) {X X' : C} (f : X ⟶ X') :
     R.map n f ≫ R.αApp p q n h X' = R.αApp p q n h X ≫ R.map p (R.map q f) := by
@@ -363,8 +361,7 @@ theorem toPD_representation_Γ_map (n : ℕ) {X X' : C} (f : X ⟶ X') :
   apply G.representation.hom_ext
   change G.representation.rep n X _ (G.representation.map n f) =
     G.representation.rep n X _ ((G.Γ n).map f)
-  rw [G.representation.rep_map,
-    representation_rep]
+  rw [G.representation.rep_map, representation_rep]
   change (G.α n 1 n _).app X ≫ (G.Γ n).map (G.ε.hom.app X ≫ f) ≫ 𝟙 _ = _
   rw [Category.comp_id, Functor.map_comp, G.α_one_right'_assoc]
 

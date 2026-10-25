@@ -1640,8 +1640,7 @@ lemma eq_zero_of_P_dvd [Fact p.Prime] {f : A[X]} (h : P p n α ∣ f)
   · exact Subsingleton.elim _ _
   have hd : f.degree < (P p n α).degree := by
     rw [degree_X_pow_sub_C (q_pos p n), degree_lt_iff_coeff_zero]
-    intro m hm
-    exact hf m (by exact_mod_cast hm)
+    exact fun m hm => hf m (by exact_mod_cast hm)
   rw [← (modByMonic_eq_self_iff (P_monic p n α)).2 hd]
   exact (modByMonic_eq_zero_iff_dvd (P_monic p n α)).2 h
 
@@ -1650,9 +1649,8 @@ lemma of_injective : Function.Injective (AdjoinRoot.of (P p n α)) := by
   rw [injective_iff_map_eq_zero]
   intro a ha
   rw [← AdjoinRoot.mk_C, AdjoinRoot.mk_eq_zero] at ha
-  have := eq_zero_of_P_dvd p n α ha fun m hm => by
+  exact C_eq_zero.1 <| eq_zero_of_P_dvd p n α ha fun m hm => by
     rw [coeff_C, ite_eq_right_iff.2 fun h => absurd h (by have := q_pos p n; omega)]
-  exact C_eq_zero.1 this
 
 instance charP_B [Fact p.Prime] [CharP A p] : CharP (B p n α) p := charP_of_injective_ringHom (of_injective p n α) p
 
@@ -1789,10 +1787,8 @@ lemma Good.top [Fact p.Prime] [CharP A p] {cb : B p n α} {x : A[X]}
     X ^ p ^ n ∣ θ p n α x - C (AdjoinRoot.mk (P p n α) x) := by
   unfold Good at hx
   rw [add_pow_char_pow, one_pow, mul_pow, ← C_pow] at hx
-  have e : θ p n α x - C (AdjoinRoot.mk (P p n α) x) =
-      ((C (cb ^ p ^ n) * X ^ p ^ n + 1) * θ p n α x - C (AdjoinRoot.mk (P p n α) x)) -
-        X ^ p ^ n * (C (cb ^ p ^ n) * θ p n α x) := by ring
-  rw [e]; exact dvd_sub hx (dvd_mul_right _ _)
+  convert dvd_sub hx (dvd_mul_right (X ^ p ^ n) (C (cb ^ p ^ n) * θ p n α x)) using 1
+  ring
 
 
 variable (p n α)
@@ -1819,13 +1815,12 @@ theorem rigidity_alpha [Fact p.Prime] [CharP A p] (hq : 3 < p ^ n)
   set S := θ p n α s
   set β := AdjoinRoot.root (P p n α)
   have hS : ∀ k, S.coeff k = π (D k s) := fun k => θ_coeff p n α s k
-  have hπg : π (D 1 s) * π g = 1 := by rw [← map_mul]; exact hg
+  have hπg : π (D 1 s) * π g = 1 := by rw [← map_mul, hg]
   have hunit : IsUnit (S.coeff 1) := by rw [hS]; exact IsUnit.of_mul_eq_one _ hπg
   have hinv : (S.coeff 1)⁻¹ʳ = π g := by
-    have hu : IsUnit (π (D 1 s)) := by rw [← hS]; exact hunit
     rw [hS]
     calc (π (D 1 s))⁻¹ʳ = (π (D 1 s))⁻¹ʳ * (π (D 1 s) * π g) := by rw [hπg, mul_one]
-      _ = π g := by rw [← mul_assoc, Ring.inverse_mul_cancel _ hu, one_mul]
+      _ = π g := by rw [← mul_assoc, Ring.inverse_mul_cancel _ (hS 1 ▸ hunit), one_mul]
   have hC' : ∀ k, 3 ≤ k → k < p ^ n → IsUnit ((k.choose 3 : ℕ) : B p n α) := fun k h1 h2 => by
     simpa using (hC k h1 h2).map (AdjoinRoot.of (P p n α))
   have hNS : X ^ p ^ n ∣ N S := by rw [← θ_N]; exact θ_of_mk_eq_zero p n α hN
@@ -1857,13 +1852,13 @@ theorem rigidity_alpha [Fact p.Prime] [CharP A p] (hq : 3 < p ^ n)
     refine ⟨-θ p n α g * D 2 r + C cb * u, ?_⟩
     rw [pow_one, θc]
     linear_combination (-θ p n α g) * E2 + C cb * hu
-  obtain ⟨w3, hw3⟩ := G3
+  obtain ⟨w3, hw3⟩ := id G3
   have G1 : Good p n α cb 1 a := by
     refine ⟨D 1 r + S * w3, ?_⟩
     rw [pow_one] at hw3 ⊢
     rw [ha, map_add, map_mul, θ_D]
     linear_combination E1 + S * hw3
-  obtain ⟨w1, hw1⟩ := G1
+  obtain ⟨w1, hw1⟩ := id G1
   have G2 : Good p n α cb 1 (s - a * X) := by
     refine ⟨r - (X + C β) * w1, ?_⟩
     rw [pow_one] at hw1 ⊢
@@ -1874,8 +1869,6 @@ theorem rigidity_alpha [Fact p.Prime] [CharP A p] (hq : 3 < p ^ n)
     rw [pow_one] at hw3 ⊢
     simp only [map_sub, map_mul, map_one, θ_X, AdjoinRoot.mk_X]
     linear_combination (-(X + C β)) * hw3
-  have G3 : Good p n α cb 1 c := ⟨w3, hw3⟩
-  have G1 : Good p n α cb 1 a := ⟨w1, hw1⟩
   have hden : denom s g l m = C l * c + C m * (1 - c * X) := by
     simp only [denom, hc]; ring
   have Gl : Good p n α cb 1 (denom s g l m) := by

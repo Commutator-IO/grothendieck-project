@@ -241,8 +241,7 @@ lemma isInitial_of_epi [FinitaryExtensive C] {X Y : C} (hX : IsInitial X) (f : X
   have hpb := FinitaryExtensive.isPullback_initial_to_binaryCofan (coprodIsCoprod Y Y)
   have heq : (coprod.inl : Y ⟶ Y ⨿ Y) = coprod.inr := by
     rw [← cancel_epi f]; exact hX.hom_ext _ _
-  have := hpb.lift (𝟙 Y) (𝟙 Y) (by simpa using heq)
-  exact ⟨IsInitial.ofStrict this initialIsInitial⟩
+  exact ⟨IsInitial.ofStrict (hpb.lift (𝟙 Y) (𝟙 Y) (by simpa using heq)) initialIsInitial⟩
 
 /-- If `X' = X ⊔ Z` over `X` (the first summand a section of `q`), the pullback of `q` along
 `h : W ⟶ X` is `W ⊔ (Z ×_X W)` over `W`. -/
@@ -340,8 +339,8 @@ theorem triv_imp_deg [HasPullbacks C] [FinitaryExtensive C] {E' : MorphismProper
     have big := hS.paste_horiz sq
     rw [hR.w] at big
     have hw : (pullback.fst snd (pullback.fst g (ι k)) ≫ fst) ≫ f =
-        (pullback.snd snd (pullback.fst g (ι k)) ≫ pullback.snd g (ι k)) ≫ ι k := by
-      exact big.w.trans (Category.assoc _ _ _).symm
+        (pullback.snd snd (pullback.fst g (ι k)) ≫ pullback.snd g (ι k)) ≫ ι k :=
+      big.w.trans (Category.assoc _ _ _).symm
     have left : IsPullback (hsq.lift _ _ hw) (pullback.snd snd (pullback.fst g (ι k)))
         sqk (pullback.snd g (ι k)) := by
       refine IsPullback.of_right ?_ (hsq.lift_snd _ _ _) hsq
@@ -402,8 +401,7 @@ theorem atMost_ne (D : DegreeAxioms E) (hu : D.UniqueDegree) (Y : C)
     (hY : IsEmpty (IsInitial Y)) : D.deg ≠ D.atMost.deg := by
   intro h
   have h2 : D.atMost.deg 2 (𝟙 Y) := ⟨1, by omega, by omega, D.iso _⟩
-  rw [← h] at h2
-  exact hY.false (hu _ (D.iso (𝟙 Y)) h2 (by omega)).some
+  exact hY.false (hu _ (D.iso (𝟙 Y)) (h ▸ h2) (by omega)).some
 
 end Folder29.Degree
 
@@ -481,13 +479,9 @@ abbrev piece {X Y : FintypeCat.{0}} (f : X ⟶ Y) (k : ℕ) : FintypeCat.{0} :=
 noncomputable def pieceCofanIsColimit {X Y : FintypeCat.{0}} (f : X ⟶ Y) :
     IsColimit (Cofan.mk Y fun k => (homMk Subtype.val : piece f k ⟶ Y)) :=
   Cofan.IsColimit.mk _ (fun t => homMk fun y => t.inj (Nat.card {x : X // f x = y}) ⟨y, rfl⟩)
-    (fun t k => by
-      ext ⟨y, hy⟩
-      subst hy
-      rfl)
+    (fun t k => by ext ⟨y, hy⟩; subst hy; rfl)
     (fun t m hm => by
-      ext y
-      exact ConcreteCategory.congr_hom (hm (Nat.card {x : X // f x = y})) ⟨y, rfl⟩)
+      ext y; exact ConcreteCategory.congr_hom (hm (Nat.card {x : X // f x = y})) ⟨y, rfl⟩)
 
 /-- The part of `X` over `Yₖ`. -/
 abbrev pieceTotal {X Y : FintypeCat.{0}} (f : X ⟶ Y) (k : ℕ) : FintypeCat.{0} :=
@@ -504,8 +498,7 @@ def pieceSnd {X Y : FintypeCat.{0}} (f : X ⟶ Y) (k : ℕ) : pieceTotal f k ⟶
 /-- `X ×_Y Yₖ` is the pullback. -/
 lemma piece_isPullback {X Y : FintypeCat.{0}} (f : X ⟶ Y) (k : ℕ) :
     IsPullback (pieceFst f k) (pieceSnd f k) f (homMk Subtype.val) := by
-  have w : pieceFst f k ≫ f = pieceSnd f k ≫ homMk Subtype.val := by
-    ext x; rfl
+  have w : pieceFst f k ≫ f = pieceSnd f k ≫ homMk Subtype.val := by ext; rfl
   apply IsPullback.of_map (forget FintypeCat) w
   rw [Types.isPullback_iff]
   refine ⟨by rw [← Functor.map_comp, w, Functor.map_comp], fun a b h => Subtype.ext h.1, ?_⟩
