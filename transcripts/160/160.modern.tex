@@ -802,7 +802,15 @@ Galois du corps de décomposition égal à $GL(V)$, normalité de l'anneau de
 polynômes. La quasi-finitude et la surjectivité tiennent ici la place de
 l'intégralité, la birationalité celle de l'égalité galoisienne. Le seul trait
 que nous n'avons pas vu dans ces sources est que la surjectivité vient de la
-classification des sous-groupes de $\mathbb{G}_a$.}
+classification des sous-groupes de $\mathbb{G}_a$.}\footnote{Les sources
+imprimées du théorème, que nous n'avons pas lues : L. E. Dickson,
+« A fundamental system of invariants of the general modular linear group with
+a solution of the form problem », \emph{Trans. Amer. Math. Soc.} 12 (1911),
+où figure le même énoncé, cas $SL$ compris ; et R. Steinberg, « On Dickson's
+theorem on invariants », \emph{J. Fac. Sci. Univ. Tokyo} 34 (1987), que nous
+ne connaissons que par un résultat de recherche et qui redémontre le même
+théorème. Reste à y regarder si la surjectivité y vient, comme ici, des
+sous-groupes de $\mathbb{G}_a$.}
 
 \emph{Démonstration.} $A_*$ envoie $U_n = \mathbb{A}^n_{\Delta_n}$ sur
 l'ouvert $\mathbb{G}_m \times \mathbb{A}^{n-1}$ — c'est le corollaire
@@ -920,7 +928,19 @@ racine carrée dans $\mathbf{F}_3$. Une première version de cette lecture
 gardait $a_0$ en glosant « au signe près ». La correction est de l'édition ;
 elle découle du signe $A_0 = (-1)^n \Delta_n^{p-1}$ de la page 9, vérifié en
 Lean dans le cas trivialisé (lean/Grothendieck/Folder160.lean,
-\texttt{A\_zero\_eval}). La forme relative n'est pas formalisée.}.
+\texttt{A\_zero\_eval}). La forme relative n'est pas formalisée.}\footnote{Vérifié en Lean dans le même fichier
+(lean/Grothendieck/Folder160.lean). L'énoncé de la page est faux tel quel :
+le contre-exemple sur $\mathbf{F}_3$ est \texttt{corollaire\_page13\_faux}.
+La forme corrigée tient sur un corps $K$ de caractéristique $p$ :
+$\Delta_n(g \cdot e) = \det g \cdot \Delta_n(e)$ pour $g$ à coefficients dans
+$\mathbf{F}_p$ (\texttt{moore\_act}), toute racine $(p-1)$-ième de
+$(-1)^n a_0$ est un $\Delta_n(g \cdot e)$ avec $g \in GL_n(\mathbf{F}_p)$
+(\texttt{moore\_pow\_sub\_one}, \texttt{moore\_act\_surj}), les fibres sont
+les orbites de $SL_n(\mathbf{F}_p)$ (\texttt{moore\_act\_eq\_iff}), et deux
+bases d'un même $M$ diffèrent d'un élément de $GL_n(\mathbf{F}_p)$
+(\texttt{exists\_act\_eq\_of\_span\_eq}, \texttt{moore\_eq\_of\_span\_eq}).
+Ni la forme relative sur $S$ ni le lien avec $\Lambda^n_{\mathbf{F}_p} M$ ne
+sont formalisés.}.
 
 C'est la traduction exacte de $A_0 = (-1)^n \Delta_n^{p-1}$ : une racine
 $(p-1)$-ième de $(-1)^n a_0$ est une valeur de $\Delta_n$, c'est-à-dire un

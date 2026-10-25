@@ -908,7 +908,23 @@ pseudo-droites tel qu'il n'existe pas deux sommets par l'un desquels passe
 chaque pseudo-droite --- c'est-à-dire qui n'est d'aucun des types
 $\mathrm{I}_N$, $\mathrm{I}_{p,q}$, $\mathrm{II}'_{p,q}$ --- et qui ne contient
 pas de sous-arrangement de type $\mathrm{II}_5$. Alors $K$ est de type
-$\mathrm{III}_6$ ou $\mathrm{IV}_7$.
+$\mathrm{III}_6$ ou $\mathrm{IV}_7$.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder80.lean) : le théorème est faux tel qu'il est
+écrit sur la page, déjà pour de vraies droites. Les trois côtés d'un
+triangle $A = (0,0)$, $B = (1,0)$, $C = (0,1)$ et une droite de plus par
+chaque sommet, $a : y = 2x$, $b : y = 3x - 3$, $c : y = 5x + 1$, ont
+exactement trois points triples, $A$, $B$, $C$ ; aucun couple de sommets ne
+couvre les six droites, cinq quelconques d'entre elles en contiennent trois
+concourantes, et l'arrangement n'est ni $\mathrm{III}_6$ (quatre points
+triples) ni $\mathrm{IV}_7$ (sept droites) (\texttt{six\_concurrent},
+\texttt{six\_not\_two\_pencils}, \texttt{six\_no\_II5},
+\texttt{six\_not\_III6}). Il contient un $\mathrm{II}'_{3,2}$
+(\texttt{six\_has\_II32}), si bien que la forme encadrée ci-dessous et la
+correction de la parenthèse ne sont pas touchées : c'est l'hypothèse
+« sans $\mathrm{II}'_{3,2}$ » qui manque à l'énoncé. Les droites sont codées
+par des triplets d'entiers et la concourance par un déterminant $3 \times 3$
+(\texttt{det3\_eq\_det}) ; les pseudo-droites en général et les bigones ne
+sont pas formalisés.}
 
 La page en tire une forme encadrée : \emph{tout arrangement sans bigone est
 de type $\mathrm{II}_4$ ou contient un sous-arrangement de l'un des types}
@@ -945,7 +961,10 @@ $\mathrm{II}_4$ ou $\mathrm{III}_6$}\footnote{La correction et le
 contre-exemple sont de nous. On vérifie aussi que $\mathrm{III}_6$ ne
 contient ni $\mathrm{II}_5$ ni $\mathrm{II}'_{3,2}$ : ôter une pseudo-droite
 du quadrangle complet laisse deux points triples. La forme encadrée n'est pas
-touchée.}.
+touchée. Que les cinq droites $AB$, $AD$, $AC$, $BD$, $EF$ de
+$\mathrm{IV}_7$ forment un $\mathrm{II}'_{3,2}$ est vérifié en Lean, pour de
+vraies droites (lean/Grothendieck/Folder80.lean,
+\texttt{seven\_has\_II32}).}.
 
 \pagerange{26}{26}
 \subsection*{Le cas latticiel (page 26)}

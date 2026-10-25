@@ -449,7 +449,16 @@ S \;\geqslant\; \operatorname*{Sup}_{x \in U}
 \bigl(\mathring{U}_{x} \times V\bigr) = U \times V,
 \]
 puisque les $V_{x,y}$ recouvrent $V$ et les $\mathring{U}_{x}$ recouvrent $U$.
-D'où l'égalité cherchée.
+D'où l'égalité cherchée.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder161\_3.lean) : l'argument tient tel qu'il est écrit.
+Tout recouvrement ensembliste $U \times V = \bigcup U_i \times V_i$ est un
+recouvrement dans le produit de locales (\texttt{covers\_of\_locallyCompact}),
+donc l'application de comparaison du coproduit des treillis d'ouverts vers
+$\mathcal{O}(X \times Y)$ est un isomorphisme de cadres
+(\texttt{coversEquiv}), et $\mathcal{O}(X \times Y)$ a la propriété
+universelle du coproduit (\texttt{existsUnique\_opens\_prod}). Le côté topos,
+le 2-produit comme faisceaux sur le produit de locales, n'est pas formalisé :
+mathlib n'a pas la 2-catégorie des topos.}
 
 \pagerange{10}{11}
 \subsection*{Le sens réciproque}
@@ -457,7 +466,12 @@ D'où l'égalité cherchée.
 La page 10 poursuit par une réciproque, sous une hypothèse plus faible que la
 compacité locale : \emph{supposons que toute partie localement fermée non vide
 de $X$ possède un point admettant, dans elle, un voisinage relatif
-quasi-compact.} Alors $(*)$ est encore une équivalence.\footnote{C'est, sous une hypothèse voisine, le théorème~4 d'Isbell (J.~R.~Isbell, « Product spaces in locales », \emph{Proc. Amer. Math. Soc.} 81 (1981), 116--118) : si toute partie fermée non vide de $X$ a un point qui y possède un voisinage quasi localement compact (dont les ouverts forment un treillis continu), le produit de locales de $X$ et de tout espace $Y$ est l'espace $X \times Y$ ; la réciproque vaut pour $X$ complètement régulier. Isbell procède par récurrence transfinie à partir de l'argument du tube (son théorème~1, le cas quasi localement compact). Pour $X$ sobre, son hypothèse entraîne celle de la page, et les deux coïncident pour $X$ séparé ; l'argument de maximalité ci-dessous fait en un pas ce que fait sa récurrence. Ces comparaisons sont les nôtres. Un contre-exemple (réponse à la question 516361 de MathOverflow, 25 octobre 2026) montre que, pour $X$ sobre, l'hypothèse de la page est strictement plus faible que celle d'Isbell.}
+quasi-compact.} Alors $(*)$ est encore une équivalence.\footnote{C'est, sous une hypothèse voisine, le théorème~4 d'Isbell (J.~R.~Isbell, « Product spaces in locales », \emph{Proc. Amer. Math. Soc.} 81 (1981), 116--118) : si toute partie fermée non vide de $X$ a un point qui y possède un voisinage quasi localement compact (dont les ouverts forment un treillis continu), le produit de locales de $X$ et de tout espace $Y$ est l'espace $X \times Y$ ; la réciproque vaut pour $X$ complètement régulier. Isbell procède par récurrence transfinie à partir de l'argument du tube (son théorème~1, le cas quasi localement compact). Pour $X$ sobre, son hypothèse entraîne celle de la page, et les deux coïncident pour $X$ séparé ; l'argument de maximalité ci-dessous fait en un pas ce que fait sa récurrence. Ces comparaisons sont les nôtres. Un contre-exemple (réponse à la question 516361 de MathOverflow, 25 octobre 2026) montre que, pour $X$ sobre, l'hypothèse de la page est strictement plus faible que celle d'Isbell.}\footnote{La question générale est traitée par T. Plewe,
+« Localic products of spaces », \emph{Proc. London Math. Soc.} (3) 73 (1996) :
+il caractérise par un jeu topologique quand le produit de locales de deux
+espaces est spatial, et détermine parmi les espaces métrisables ceux dont le
+produit avec tout espace l'est. C'est un cadre plus général que celui de la
+page, qui ne donne qu'une condition suffisante portant sur $X$ seul.}
 
 L'argument est un argument de maximalité, et il faut le compléter d'un pas que
 la page passe. Soit $U'$ le plus grand ouvert de $U$ tel que
@@ -483,7 +497,24 @@ $S \geqslant \operatorname{Sup}(U', U_{i}\ i \in I_{y}) \times V_{y}
 \geqslant (U' \cup U'') \times V_{y}$. Elle est immédiate, et sans elle la
 conclusion ne suit pas. Le reste de la page est correct tel quel.} Faisant
 varier $y$, on obtient $S \geqslant (U' \cup U'') \times V$, ce qui contredit
-la maximalité de $U'$ puisque $x \in U'' \setminus U'$. Donc $U' = U$.
+la maximalité de $U'$ puisque $x \in U'' \setminus U'$. Donc $U' = U$.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder161\_3.lean), pour $X$ et $Y$ quelconques et avec le
+pas ajouté ci-dessus : sous l'hypothèse de la page, un ensemble de couples
+d'ouverts stable par rétrécissement et par réunion en chaque variable contient
+tout rectangle que ses rectangles recouvrent (\texttt{covering}), de sorte que
+ces ensembles correspondent aux ouverts de $X \times Y$ (\texttt{eq\_rect},
+\texttt{iUnion\_rect}) ; ils forment le coproduit des cadres $\mathcal{O}(X)$
+et $\mathcal{O}(Y)$ (\texttt{CIdeal.existsUnique\_lift}), et l'application
+de comparaison vers $\mathcal{O}(X \times Y)$ est un isomorphisme de cadres
+(\texttt{frameEquiv}, \texttt{covers\_of\_hypG}). Le contre-exemple de
+MathOverflow est vérifié aussi (\texttt{hypG\_not\_hypI}) : la puissance
+dénombrable d'un espace compact dispersé non core-compact est sobre
+(\texttt{quasiSober\_pi}), satisfait l'hypothèse de la page
+(\texttt{hypG\_pi}) et non celle d'Isbell (\texttt{not\_hypI\_pi},
+\texttt{K.not\_coreCompact}). Vérification partielle : ne sont pas formalisés
+le passage des cadres aux topos, faute de 2-catégorie des topos dans mathlib,
+ni l'implication de l'hypothèse d'Isbell vers celle de la page pour $X$
+sobre.}
 
 \pagerange{11}{14}
 \subsection*{Produits infinis}
@@ -520,7 +551,21 @@ de ses parties finies. Le cas fini étant acquis, on écrit
 et l'on reprend le même dévissage : tout $W$ du produit restreint est de la
 forme $U \times Z'_{\alpha}$ avec $Z'_{\alpha} = \prod_{i \notin J_{\alpha}} X_{i}$
 quasi-compact, et une famille $(V_{\lambda})$ le recouvrant se raffine, en
-chaque point, sur un $J_{\beta} \supset J_{\alpha}$ fini.
+chaque point, sur un $J_{\beta} \supset J_{\alpha}$ fini.\footnote{Vérifié en
+Lean (lean/Grothendieck/Folder161\_3.lean) au niveau des cadres d'ouverts,
+sous une hypothèse un peu plus faible que celle de la page : tous les facteurs
+sauf au plus un localement compacts, tous sauf un nombre fini compacts. Sans
+hypothèse, les ensembles de pavés stables par rétrécissement et par réunion
+en chaque coordonnée forment le coproduit des $\mathcal{O}(X_i)$
+(\texttt{PIdeal.existsUnique\_lift}), et un produit de compacts recouvert
+par des pavés d'un tel ensemble est dans l'un d'eux
+(\texttt{PIdeal.exists\_box\_of\_isCompact}) ; sous l'hypothèse, le produit
+de locales est spatial (\texttt{piCovers}, \texttt{piCoversEquiv},
+\texttt{piFrameEquiv} pour les deux clauses de la page) et
+$\mathcal{O}(\prod X_i)$ est le coproduit (\texttt{existsUnique\_opens\_pi}).
+La preuve va droit au produit restreint, sans passer par la limite filtrante
+sur les $J_{\alpha}$. L'identification avec le 2-produit des topos
+$\operatorname{Top}(X_i)$ n'est pas formalisée.}
 
 La page 14 aborde enfin les \emph{contre-exemples}, avec tous les $X_{i}$
 discrets, écrit le système fondamental de voisinages
@@ -1309,7 +1354,12 @@ précisément sous la forme trouvée ici : le morphisme
 $\mathcal{C}^{\times} + \{0\} \to \mathcal{C}$ est un isomorphisme. C'est
 l'axiome sous lequel les corps apparaissent dans le topos de Zariski, chez
 Hakim (\emph{Topos annelés et schémas relatifs}, 1972). Les pages ne sont pas
-datées, et rien n'indique de quel côté de cette date elles tombent.}
+datées, et rien n'indique de quel côté de cette date elles tombent.}\footnote{Pour
+le cadre général : P. T. Johnstone, \emph{Sketches of an Elephant: A Topos
+Theory Compendium}, vol. 2 (Oxford University Press, 2002), chapitre D3, sur
+les théories géométriques et leurs topos classifiants. L'axiome des corps
+trouvé ici en est un cas particulier, et la distinction entre théories
+essentiellement algébriques et géométriques y est classique.}
 
 \pagerange{43}{43}
 \section*{Catégories $\lambda$-abstraites (pages 43, 45, 47)}

@@ -129,8 +129,9 @@ points se confondent et les symétries deviennent $24$ ou $12$. Les pages
 décrivent les deux lieux spéciaux, comptent les courbes qui y vivent sur
 $\mathbf{Z}[\tfrac16]$ ($72$ et $32$), disent où ils cessent d'être lisses, puis
 regardent ce qu'ils deviennent quand on marque les points d'ordre $3$ : quatre
-branches qui se rejoignent toutes en un seul point au-dessus de $2$, et dont
-l'argument montre qu'elles y ont la même tangente.
+branches qui se rejoignent toutes en un seul point au-dessus de $2$. La page
+conclut qu'elles y ont la même tangente ; la vérification en Lean montre au
+contraire que les quatre tangentes sont distinctes.
 
 Les noms à chercher ensuite : algorithme de Tate, modèle de Néron, formes
 modulaires entières de Deligne, décomposition de Hodge et quasi-périodes,
@@ -872,7 +873,21 @@ d'orbites est le nôtre, construit sur les éléments lisibles des deux pages :
 la décomposition $V_1 \times V_2$, l'action via $\mathbf{F}_4^{*}$, la
 transitivité. La page ajoute qu'il faudrait encore déterminer lequel des deux
 isomorphismes $G'/P' \simeq \mathbf{F}_4^{*}$ intervient ; elle ne le fait
-pas.} C'est cohérent avec la page 95 : quatre branches transverses à la fibre,
+pas.}\footnote{Cette conclusion est fausse, et la vérification en Lean le
+montre : \texttt{lean/Grothendieck/Folder63.lean}. Dans le paramètre de Hesse
+$t$, avec $c_4 = t(t^3 + 8)$ à une unité près (pris comme donné), on a
+$t(t^3+8) = t\,(t+2)(t+2\zeta)(t+2\zeta^2)$ (\texttt{factor}), chaque facteur
+est dans $P = (2, t)$ (\texttt{branch\_mem}), et les quatre formes tangentes
+$t$, $t+2$, $t+2\zeta$, $t+2\zeta^2$ sont deux à deux indépendantes dans
+$P/P^2$ sur $\mathbf{F}_4$ (\texttt{tangents\_distinct}), parce que les
+différences de $0, 1, \zeta, \zeta^2$ sont des unités modulo $2$ : les quatre
+branches ont en $a$ quatre tangentes distinctes. L'involution de Hesse
+$t \mapsto (t+2)/(t-1)$ agit sur $P/P^2$ par la transvection
+$t \mapsto t+2$ (\texttt{involution\_transvection}), de sorte que le
+scindage $V_1 \times V_2$ affirmé à la page 99 n'est pas stable ; c'est là que
+l'argument d'orbites ci-dessus est en défaut. Ne sont pas formalisés : que la
+famille de Hesse soit l'espace des modules de niveau $3$, et la formule de
+$c_4$.} C'est cohérent avec la page 95 : quatre branches transverses à la fibre,
 chacune de multiplicité $1$, donnent la multiplicité $4$ de $M'$ en $p = 2$,
 et quatre branches par un même point sont la non-régularité qu'elle y
 constatait.

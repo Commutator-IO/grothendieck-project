@@ -390,7 +390,21 @@ dans $Y$ tel que toute section de $\mathcal{O}_{Y}$ sur $U$ nulle au voisinage
 de $y$ soit nulle sur $U$.
 \end{enumerate}
 Alors, pour tout $F$ cohérent, toute suite croissante de sous-Modules cohérents
-de $F$ est stationnaire.
+de $F$ est stationnaire.\footnote{Vérifié en partie en Lean, dans
+\texttt{lean/Grothendieck/Folder55.lean}. Le lemme B y est démontré avec (v)
+remplacé par l'uniformité qu'elle doit fournir : sur un espace
+quasi-compact, une suite croissante de sous-faisceaux dont les germes se
+stabilisent en chaque point (ce que donnent des fibres noethériennes,
+\texttt{germs\_stabilize\_of\_noetherian}), et dont l'égalité des germes en $x$
+s'étend à un voisinage uniforme de $x$, est stationnaire
+(\texttt{stationary\_of\_locally\_stationary}, \texttt{stationary\_of\_germs}).
+Cette uniformité ne peut pas être omise : sur $\mathbb{N} \cup \{\infty\}$, une
+suite strictement croissante a des germes stationnaires partout
+(\texttt{not\_stationary\_without\_uniformity}). Le corollaire tient
+abstraitement (\texttt{isNoetherianRing\_of\_tilde}). Ne sont pas formalisés
+le passage de (v) à l'uniformité, qui demande les faisceaux cohérents et la
+décomposition primaire, ni les $\widetilde{I}$ du lemme A ; que (i) à (v)
+suffisent pour un espace annelé quelconque reste ouvert.}
 
 \textbf{Corollaire.} Sous (i) à (v), et sous les hypothèses du lemme A,
 $A = \Gamma(X, \mathcal{O}_{X})$ est noethérien.

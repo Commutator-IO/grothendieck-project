@@ -3392,7 +3392,21 @@ dévissage semi-direct sur un corps parfait, le calcul sur une variété abélie
 et la dualité de Cartier sont dans une lettre du 18 août 1959, publiée dans la
 \emph{Correspondance Grothendieck--Serre}. Elle ne constate rien de plus : aucune filiation n'est ici affirmée,
 et la question de savoir ce que la littérature publiée établit à ce sujet n'est
-pas de la compétence de cette édition.}
+pas de la compétence de cette édition.}\footnote{Les articles de Nori sont
+« On the representations of the fundamental group », \emph{Compositio Math.}
+33 (1976), et « The fundamental group-scheme », \emph{Proc. Indian Acad. Sci.
+Math. Sci.} 91 (1982). Le second donne aussi une construction par la
+catégorie, filtrante, des torseurs pointés sous les schémas en groupes finis,
+le schéma en groupes fondamental étant la limite projective des groupes qui
+y figurent : c'est la voie de la lettre, et le calcul sur une variété
+abélienne avec sa dualité de Cartier est son théorème. C. Gasbarri obtient de
+même le schéma en groupes fondamental d'un schéma intègre sur une base de
+Dedekind connexe comme limite projective des schémas en groupes finis et plats
+des torseurs pointés (titre et référence non vérifiés : la fiche ne les donne
+pas). La lettre travaille sur
+une base seulement réduite, connexe et pointée ; que la construction ait été
+menée à ce degré de généralité est une autre question, que nous laissons
+ouverte.}
 
 \subsection*{Le calendrier}
 
@@ -5203,7 +5217,18 @@ logarithmique associé, appartient à la géométrie logarithmique de Kato, Illu
 et Nakayama, dans les années 1990. Aucun de ces mots n'est disponible ici, et
 rien dans cette note n'affirme de filiation : elle constate que l'objet, sa
 gerbe, sa classe d'obstruction et la description de ses revêtements sont
-construits dans ces pages.}
+construits dans ces pages.}\footnote{Les sources imprimées de l'objet et de
+l'identification, qui sont les mêmes que celles de ces pages : C. Cadman,
+« Using stacks to impose tangency conditions on curves », \emph{Amer. J.
+Math.} 129 (2007), et Abramovich--Graber--Vistoli, pour la construction du
+champ des racines ; D. Abramovich, M. Olsson, A. Vistoli, « Tame stacks in
+positive characteristic », \emph{Ann. Inst. Fourier} 58 (2008), pour les
+champs modérés ; I. Biswas, N. Borne, « Tamely ramified torsors and parabolic
+bundles », pour les torseurs modérément ramifiés comme torseurs sur le champ
+des racines ; M. Kerz, A. Schmidt, « Generators and relations for the étale
+fundamental group », arXiv math/0703139, qui traitent le $\pi_1$ modéré par
+réduction aux champs propres. L'identification des revêtements modérés d'un
+couple aux revêtements étales de ce champ y est standard.}
 
 \subsection*{Le boitement, avoué}
 
@@ -5701,7 +5726,22 @@ devient $[1, n]$ après un tel changement de base, et la page en tire
 l'unicité.\footnote{La page ne démontre que ce sens, et ne dit pas qu'un
 morphisme ainsi trivialisé est de degré $n$, ce que l'équivalence affirme
 aussi. La récurrence s'appuie en outre sur les conditions (0) à (2), et non
-sur les seules propriétés a) à e) de (3).}
+sur les seules propriétés a) à e) de (3).}\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder29.lean), et l'unicité est fausse telle qu'on la
+lit : de tout degré on en tire un autre (« degré $k$ pour un
+$1 \leqslant k \leqslant n$ ») qui satisfait aussi a) à e)
+(\texttt{atMost\_ne}), et dans les ensembles finis, avec les surjections pour
+descente, les deux diffèrent (\texttt{degree\_not\_unique}). Le pas « par
+additivité, $X'_1 \to Y'$ est de degré $n - 1$ » demande une simplification
+que les six conditions ne donnent pas. Avec la condition manquante, qu'un
+morphisme de deux degrés différents ait une base vide
+(\texttt{DegreeAxioms.UniqueDegree}), la récurrence par la diagonale tient
+(\texttt{deg\_imp\_triv}), la réciproque aussi dès que les morphismes de
+descente sont des épimorphismes universels (\texttt{triv\_imp\_deg}), d'où
+l'équivalence et l'unicité (\texttt{deg\_iff\_triv}, \texttt{unique}), dans
+toute catégorie extensive finitaire où les monomorphismes ont un complément. La
+classe des morphismes de descente effective universelle est un paramètre : mathlib
+ne la définit pas.}
 
 C'est-à-dire : \emph{un morphisme est de degré $n$ s'il devient l'ensemble
 constant à $n$ éléments après un changement de base convenable}, et cette

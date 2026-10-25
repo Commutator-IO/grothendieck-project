@@ -1156,7 +1156,12 @@ calcul par prolongement des identités algébriques, en se plaçant sur l'ouvert
 où $\delta$ et $\delta'$ sont inversibles et en réalisant presque tout $t$
 dans $M_2$\footnote{Nous avons vérifié la table ; l'associativité aussi se
 vérifie directement. La marge de la page 122 met en garde contre un cercle
-vicieux à éviter si l'on veut se dispenser de cette vérification.}.
+vicieux à éviter si l'on veut se dispenser de cette vérification. Vérifié en
+Lean (lean/Grothendieck/Folder83.lean), sur tout anneau commutatif,
+caractéristique $2$ comprise : pour tout $t$, la table définit une algèbre
+associative unitaire où tout élément vérifie Hamilton--Cayley et où $\det$ est
+multiplicatif (\texttt{mulM\_assoc}, \texttt{hamilton\_cayley},
+\texttt{nrdM\_mulM}).}.
 
 \pagerange{85}{91}
 \subsection*{L'invariant anharmonique (pages 85 à 91)}
@@ -1248,7 +1253,19 @@ forme $\det$ sur $k \oplus ku \oplus kv$ soit non dégénérée, c'est-à-dire q
 \[
   Q = t^2 - bb't + b^2c' + b'^2c - 4cc'
 \]
-soit inversible. Intrinsèquement : si $M$ est une algèbre localement libre de
+soit inversible.\footnote{Le critère se lit chez J.~Voight,
+« Characterizing quaternion rings over an arbitrary base », J.\ reine angew.\
+Math.\ 657 (2011), arXiv:0904.4310 : à la fin du § 4, après la démonstration du
+théorème A, un anneau de quaternions est d'Azumaya si et seulement si son
+discriminant $D(B)$ est l'idéal unité ; au § 3, (3.2)--(3.3) et
+proposition 3.1, $D(B)$ est engendré par les $\operatorname{trd}([x, y]z)$.
+Le rapprochement passe par une identité qui n'est pas chez Voight et qui a été
+vérifiée par calcul symbolique sur des matrices $2 \times 2$ génériques :
+$\operatorname{Tr}([u, v]\,uv) = Q$. Avec elle, l'énoncé de Voight donne le
+critère de la page sur toute base noethérienne, caractéristique $2$ comprise :
+c'est le même énoncé, sous l'hypothèse noethérienne de Voight. Il ne dit rien
+de la proposition sur les sous-modules de rang $3$ (page 108) sur une base non
+réduite.} Intrinsèquement : si $M$ est une algèbre localement libre de
 rang $4$, munie de $\operatorname{Tr}$ et $\det$ avec les propriétés
 habituelles, et $A_1$, $A_2$ deux sous-algèbres de rang $2$ transverses dont la
 somme est un sous-module de rang $3$, $M$ est Azumaya si et seulement si $\det$
@@ -1267,7 +1284,20 @@ de sorte que $Q$ inversible rend la forme trace non dégénérée, ce qui (pour 
 algèbre de rang $4$ dont tout élément satisfait Hamilton--Cayley) fait de $M$
 une algèbre d'Azumaya\footnote{Le calcul est de nous. En caractéristique $2$,
 la forme trace est dégénérée et l'argument ne s'applique pas ; on ne sait pas
-ce que la page comptait faire. La station X (pages 121 à 126) revient sur la
+ce que la page comptait faire. Vérifié en Lean
+(lean/Grothendieck/Folder83.lean) : le théorème vaut tel qu'il est énoncé en
+coordonnées, sur tout anneau commutatif, caractéristique $2$ comprise et sans
+supposer $\delta\delta'$ inversible. $M$ est d'Azumaya si et seulement si $Q$
+est inversible (\texttt{MAlg.isAzumaya\_iff}), c'est-à-dire si $\delta_{P,B}$
+l'est (\texttt{MAlg.isAzumaya\_iff\_deltaPB}), et sur un corps si et
+seulement si $Q \neq 0$ (\texttt{MAlg.isAzumaya\_iff\_ne\_zero}) ; la
+proposition de la page 97 aussi (\texttt{MAlg.isAzumaya\_nilpotent\_iff}).
+La suffisance passe par la matrice $16 \times 16$ de $M \otimes M^{\mathrm{op}}
+\to \operatorname{End} M$, dont le carré du déterminant vaut $\pm Q^{16}$
+(\texttt{MAlg.sandwich\_det\_sq}) ; seul sert le déterminant de la forme trace,
+$-Q^2$ (\texttt{det\_traceForm}), non sa non-dégénérescence. La forme
+intrinsèque, pour deux sous-algèbres de rang $2$ transverses, n'est pas
+formalisée. La station X (pages 121 à 126) revient sur la
 réalisabilité, et y constate que l'invariant $\rho$ était « une complication
 inutile ».}.
 
@@ -1488,7 +1518,15 @@ l'élévation au carré, donc un morphisme fini surjectif de degré $2$.
 
 En coordonnées, $\underline{L}_P$ est l'axe des $t$, l'algèbre associée à $t$
 est $M(b, c; b', c'; t)$, et $\delta_{P,B}$ est $t \mapsto Q(t)$ au signe près :
-c'est la description intrinsèque de la station IX.
+c'est la description intrinsèque de la station IX.\footnote{Vérifié en
+Lean (lean/Grothendieck/Folder83.lean), en coordonnées seulement, pour $H$ et
+$H'$ libres : toute algèbre de Hamilton--Cayley contenant $u$ et $v$ reçoit
+$M(b, c; b', c'; t)$ pour un unique $t$, et deux $t$ distincts donnent deux
+structures distinctes (\texttt{realise\_mulM}, \texttt{realise\_unique},
+\texttt{mulM\_inj}) : les structures forment bien la droite des $t$. Sur cette
+droite, $\delta_{P,B} = -Q(t)$ (\texttt{deltaPB\_eq}) et $\operatorname{disc} Q
+= \delta\delta'$ (\texttt{disc\_Q}). Les torseurs intrinsèques sur une base et
+la chaîne $AZ_P \to \cdots \to \underline{L}_P$ ne sont pas formalisés.}
 
 \pagerange{137}{147}
 \subsection*{Le produit contracté $X \wedge X'$ (pages 137 à 147)}
@@ -1514,7 +1552,11 @@ comme $b^2b' + b'^2b - 4cc'$, et $(2z' - b)^2$ pour $(2z' - b')^2$ ; elle trouve
 la formule par l'heuristique $2t - bb' = \pm(2z - b)(2z' - b')$ en
 caractéristique différente de $2$, et ajoute que la vérification de $tt' =
 b^2c' + b'^2c - 4cc'$ est « immédiate ». Géométriquement, $\delta(t_{\varphi,
-\varphi'}) = 0$ dit que pour ce twist, $H$ et $H'$ ont un point fixe commun.}.
+\varphi'}) = 0$ dit que pour ce twist, $H$ et $H'$ ont un point fixe commun.
+Vérifié en Lean (lean/Grothendieck/Folder83.lean, \texttt{twist\_root},
+\texttt{twist\_conj}) : pour des caractères à valeurs dans toute $k$-algèbre
+commutative, $t_{\varphi, \varphi'}$ est un twist et une racine de $Q$, envoyé
+sur $bb' - t$ quand on conjugue $\varphi$.}.
 L'involution canonique $T \mapsto T'$, $T'(u, v) = T(u', v) = T(u, v')$, de
 $\underline{L}_P$ (page 140 : $\operatorname{Tr}(u'v) = \operatorname{Tr}(uv')$
 dans l'algèbre associée) s'écrit $t \mapsto bb' - t$ et induit l'involution
@@ -1542,7 +1584,15 @@ accents mal visibles ; la valeur juste est le terme constant de $Q$, puisque
 $u * v$ annule $Q$. Le produit $H \wedge H'$ est le produit des algèbres
 quadratiques que l'on trouve chez Knus (\emph{Quadratic and Hermitian Forms
 over Rings}), et c'est l'opération $A_1 * A_2$ du dossier 84 (ses pages 62 à
-106). Noms et rapprochement de nous.}. On récupère $\underline{L}_P$ comme
+106). Noms et rapprochement de nous. Vérifié en Lean
+(lean/Grothendieck/Folder83.lean), sur tout anneau commutatif : $u * v$ est
+racine de $Q$ dans $H \otimes H'$, d'où $k[t]/(Q) \to H \otimes H'$
+(\texttt{star\_root}, \texttt{starHom}), les deux conjugaisons l'envoient sur
+$bb' - u * v$ (\texttt{conjL\_star}, \texttt{conjR\_star}), et $(\varphi
+\otimes \varphi')(u * v) = t_{\varphi, \varphi'}$ (\texttt{productMap\_star}) ;
+la valeur $\det(u * v) = b^2c' + b'^2c - 4cc'$ est confirmée. L'identification
+de $X \wedge X'$ au quotient de $X \times X'$ n'est pas formalisée ici ; son
+cœur algébrique est dans le dossier 84.}. On récupère $\underline{L}_P$ comme
 l'espace affine enveloppant de $\widetilde{S}$, et $\delta$ comme son
 discriminant (page 143).
 

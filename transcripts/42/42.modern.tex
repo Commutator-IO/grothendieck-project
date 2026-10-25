@@ -404,7 +404,10 @@ n'avons pas lue ; selon la note, la démonstration de 1966 prolonge chaque
 $x(\mathfrak p)$ en une section sur un ouvert et recolle, la route des pages 3
 à 5. L'inventaire date la cote « [années 1960-1970] ». Le critère faisceautique
 de la page 3, pour un faisceau quelconque vérifiant $(\mathrm{H})$, n'a pas
-été retrouvé dans la littérature consultée.}
+été retrouvé dans la littérature consultée. La note de 2004 cite aussi
+F.~Nordström, \emph{Recovering a module from its local structure}, mémoire de
+master, KTH Stockholm, 2003, que nous n'avons pas lu non plus : c'est, avec
+la note de 1966, là qu'il reste à chercher ce critère.}
 
 \pagerange{5}{6}
 \section*{Des morphismes, et non plus des fonctions (pages 5 et 6)}
@@ -462,7 +465,21 @@ alors $f = g$.
 $S$-préschémas localement de type fini, $Y$ séparé sur $S$. Alors
 \[ \mathrm{Hom}_S(X, Y) \;\xrightarrow{\ \sim\ }\;
    \mathrm{Hom}_{p(S)}\bigl(p(X), p(Y)\bigr), \]
-ce qui est le théorème de la page 2.
+ce qui est le théorème de la page 2.\footnote{Vérifié en Lean
+(lean/Grothendieck/Folder42.lean, \texttt{Reseau.corollaire3},
+\texttt{Reseau.toReseau\_bijective}) : l'énoncé tient, et plus généralement,
+avec $X$ seulement localement noethérien et $S$ quelconque. L'injectivité
+(\texttt{Reseau.toReseau\_injective}) n'utilise ni la séparation ni le type
+fini de $Y$. La séparation ne sert qu'une fois, à l'étape locale du lemme 3
+(\texttt{Reseau.ext\_of\_injective\_of\_isSeparated} : l'égaliseur est fermé
+et de noyau nul) ; le lieu où deux germes coïncident est ouvert par le
+lemme 1, appliqué sur des ouverts affines noethériens
+(\texttt{Reseau.ReseauHom.isOpen\_matches}) ; le type fini de $Y$ n'entre que
+par le passage à la limite d'EGA IV, pris dans mathlib. La démonstration
+travaille sur les germes, non par le faisceau $\mathrm{Hom}_S(-, Y)$ et la
+proposition. Ne sont pas formalisés : le lemme 3 sous sa forme
+faisceautique, la question de la page 6 sur l'hypothèse noethérienne sur
+$S$, et le cas non séparé.}
 \end{quote}
 
 L'injectivité est le corollaire 2. Pour la surjectivité, un homomorphisme de

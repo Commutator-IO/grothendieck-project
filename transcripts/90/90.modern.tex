@@ -83,8 +83,9 @@
 % Cor. 11.10 (Lemma 11.8 for the formula), in the case X = S and for a
 % locally projective cogebra; cited at p. 15 with the difference and the
 % dates. Thomason 1987 is still not read (named in SGA 3's N.D.E. to
-% 11.10.bis for a G-scheme X); the footnote of pp. 21-23 says so. No Lean
-% file, no mathlib, no facsimile check since the first pass.
+% 11.10.bis for a G-scheme X); the footnote of pp. 21-23 says so. Lean:
+% Folder90.lean (p. 9) and Folder90Comodules.lean (pp. 7-9, 13-15, ring case),
+% cited in footnotes; no facsimile check since the first pass.
 \documentclass[11pt,a4paper]{article}
 \input{../preamble/grothendieck}
 
@@ -301,7 +302,14 @@ démonstration le vise (« $\widetilde{N}$ \ldots\ de t.f. »).}, tel que
   \item[b)] $\Delta N \subset N \otimes N$.
 \end{itemize}
 Un tel $N$, sans torsion et de type fini, est projectif ; b) en fait une
-sous-cogèbre de $B$.
+sous-cogèbre de $B$.\footnote{Les Lemmes 1 et 2 se lisent, dans un autre
+vocabulaire, chez N.~D.~Duong et P.~H.~Hai, « Tannakian duality over Dedekind
+rings and applications », arXiv:1311.1134 (2013), § 3.1 : la définition 3.1.1
+(cogèbre « specially locally finite », réunion filtrante de sous-cogèbres de
+type fini saturées) et la proposition 3.1.5 (une telle cogèbre est de
+Mittag-Leffler, projective si elle est dénombrablement engendrée, et toute
+cogèbre projective l'est). C'est le même contenu ; ce rapprochement ne dit
+rien de l'ordre des textes.}
 
 \emph{Démonstration.} On fait opérer $G \times G$ sur $B$ par
 \[
@@ -325,7 +333,10 @@ l'argument est restitué par cette lecture.} :
     « Groupes de Grothendieck des schémas en groupes réductifs déployés »
     (Publ.\ IHÉS 34, 1968), § 1 ; citation de mémoire, non vérifiée, et sans
     rien dire de l'ordre des deux textes, que les pages ne permettent pas de
-    fixer.} ;
+    fixer. Duong et Hai (art.\ cité à la note du Lemme 2, § 1.1.10 et § 1.2)
+l'attribuent à Serre, loc.\ cit., corollaire 2 et proposition 3 : les comodules
+sur un anneau de Dedekind sont localement finis, sans l'hypothèse du Lemme 1.
+La référence est lue à travers eux et n'a pas été vérifiée dans Serre.} ;
   \item le saturé $N = \widetilde{N_0}$ est de type fini par le Lemme 1 a),
     et il reste stable : si $x \in N$ et $ax \in N_0$, $a \neq 0$, alors
     $a\,\Delta x \in N \otimes B$, et $(B \otimes B)/(N \otimes B) = (B/N)
@@ -444,7 +455,22 @@ groupe obtenu en ôtant du groupe constant $\mathbf{Z}/2$ le point non
 neutre de la fibre spéciale a pour algèbre $\mathbf{Z}_p \times
 \mathbf{Q}_p$ ; sa composante $\mathrm{Spec}\,\mathbf{Q}_p$ a une fibre
 spéciale vide, et le saturé de $\mathbf{Z}_p \cdot (0,1)$ est $0 \times
-\mathbf{Q}_p$, qui n'est pas de type fini.}. Soit $S'$ un schéma
+\mathbf{Q}_p$, qui n'est pas de type fini. Vérifié en Lean
+(lean/Grothendieck/Folder90.lean) : la parenthèse est fausse sans
+l'hypothèse « de type fini ». Sur un anneau de valuation discrète $R$ de corps
+des fractions $K$, $B = \{f \in K[T] : f(0) \in R\}$ est intègre, plat sur
+$R$, à fibres non vides, stable par la comultiplication de $\mathbb{G}_a$, et
+le saturé de $R \cdot T$ y est $K \cdot T$, qui n'est pas de type fini
+(\texttt{flat}, \texttt{residue\_surjective}, \texttt{ker\_residue},
+\texttt{generic\_nontrivial}, \texttt{comul}, \texttt{saturation\_eq},
+\texttt{not\_fg\_saturation}) ; c'est l'exemple de SGA~3, exposé VI$_B$,
+13.3. L'antipode et la coünité ne sont pas écrites. En type fini et pour
+$B$ réduit, le cœur d'algèbre commutative de l'argument de l'édition est
+vérifié (\texttt{iInf\_pow\_ne\_bot\_of\_minimalPrime},
+\texttt{iInf\_pow\_eq\_bot\_of\_minimalPrimes},
+\texttt{iInf\_pow\_eq\_bot\_iff}) ; le passage à « $B$ libre » (Hai et dos
+Santos, Kaplansky) est cité, non formalisé, et le cas non réduit reste
+ouvert.}. Soit $S'$ un schéma
 quasi-compact sur $S$ sur lequel tout module quasi-cohérent de type fini
 est quotient d'un module localement libre de type fini — par exemple $S'$
 muni d'un faisceau inversible ample, ou noethérien régulier et
@@ -456,7 +482,13 @@ $i$, est ajoutée ici. « schéma », « localement libre » et « p.\ ex. » so
 des lectures incertaines, et plusieurs mots de l'hypothèse sur $S'$ sont
 illisibles.}. Alors tout $G_{S'}$-module quasi-cohérent de type fini est
 quotient d'un $G_{S'}$-module quasi-cohérent de type fini qui est de plus
-\emph{localement libre}.
+\emph{localement libre}.\footnote{Pour $S' = S$, la littérature a
+l'énoncé plus général : Duong et Hai, arXiv:1311.1134 (2013), § 1.1.10 et
+§ 1.2, citant Serre (Publ.\ IHÉS 34, 1968, corollaire 2 et proposition 3),
+donnent que tout comodule fini sur une cogèbre plate sur un anneau de
+Dedekind est quotient d'un comodule fini projectif, sans l'hypothèse du
+Lemme 1 que la page emploie. La référence à Serre est lue à travers Duong et
+Hai.}
 
 La démonstration n'est pas écrite. Elle tient aux deux sections
 précédentes : par le Lemme 2, $B$ est réunion filtrante de sous-cogèbres
@@ -535,7 +567,22 @@ un $U_i$-module, et $E = \bigcup_i E_i$. Alors
 C'est un sous-$G$-module contenant $F$ (la coünité est dans $U_i$) ; et
 tout sous-$G$-module $E''$ contenant $F$ est stable par chaque $U_i$, car la
 platitude de $\mathcal{B}/\mathcal{B}_i$ donne $(\mathcal{B}_i \otimes E)
-\cap (\mathcal{B} \otimes E'') = \mathcal{B}_i \otimes E''$. La formation de
+\cap (\mathcal{B} \otimes E'') = \mathcal{B}_i \otimes E''$.\footnote{Vérifié
+en Lean (lean/Grothendieck/Folder90Comodules.lean), en partie : dans le cas
+d'un anneau, $X = S = \mathrm{Spec}\,A$ et action triviale, sur tout anneau
+commutatif $A$. Mathlib n'ayant pas de comodules, le fichier les définit.
+Sous l'hypothèse de la page sur $B$, tout sous-module $F$ d'un comodule $E$
+est contenu dans un plus petit sous-comodule $F' = \sum_i U_i \cdot (F \cap
+E_i)$ (\texttt{Exhaustion.isLeast\_closure}), de type fini si $F$ l'est
+(\texttt{Exhaustion.closure\_fg}) ; $E$ est réunion filtrante de ses
+sous-comodules de type fini (\texttt{Exhaustion.exists\_fg\_isSubcomodule}) ;
+le changement de base vaut, plus généralement, pour toute $A$-algèbre $A'$,
+énoncé avec les images, la platitude de $A'$ ne servant qu'à identifier
+l'image à $A' \otimes F'$ (\texttt{isLeast\_closure\_baseChange},
+\texttt{baseChange\_closure\_injective}). Ne sont pas formalisés : les
+$G$-modules quasi-cohérents sur un schéma $X$ au-dessus d'une base $S$
+quelconque, les énoncés 3) et 4), l'équivalence de la page 7 avec les
+$U_i$-modules, et l'action sur $X$ des pages 17 à 23.} La formation de
 $E_i$ et des images commute aux changements de base plats. Si $F$ est de
 type fini, localement $F \subset E_{i_0}$ et $F' = U_{i_0} \cdot F$, image
 de $\check{\mathcal{B}}_{i_0} \otimes F$, est de type fini — ce qui donne

@@ -1188,7 +1188,23 @@ figures étant les parties fermées finies dont les éléments sont deux à deux
 compatibles\footnote{La page 60 écrit « $A \in \mathcal{M}$ » pour $A \subset
 \mathcal{M}$, et la marge renvoie à « Cont 2 de p. 33 », c'est-à-dire à Fig 2.
 Le chapitre VI (dossier 156-6, page 16) se référera à ces conditions C 1 à C 3
-comme à ce que GF IV avait « explicité en long et en large ».}.
+comme à ce que GF IV avait « explicité en long et en large ».}\footnote{Sous cette forme finie, c'est une notion connue en informatique
+théorique : en prenant pour relation de conflit $\#$ le complémentaire de $R$,
+$(\mathcal{M}, \leq, \#)$ est une \emph{structure d'événements premiers} à
+conflit binaire --- causes finies ($\mathcal{M}_{\leq X}$ fini), conflit
+héréditaire ($R$ héréditaire) --- et les figures de la page 61 sont exactement
+ses \emph{configurations} finies, parties fermées à gauche et sans conflit
+(F.~W.~Vaandrager, « A simple definition for parallel composition of prime
+event structures », rapport CWI CS-R8903, 1989, définitions 2.1 et 2.3). C'est
+le même énoncé, du côté de $(\mathcal{M}, \leq, R)$. Vaandrager rapporte ces
+structures à M.~Nielsen, G.~Plotkin et G.~Winskel, « Petri nets, event
+structures and domains, Part I », \emph{Theoret. Comput. Sci.} 13 (1981),
+85--108, dont le théorème de représentation (domaines premiers algébriques
+cohérents finitaires et structures d'événements premiers) devrait donner
+l'autre sens de l'équivalence ; cet article n'a pas été ouvert, ni G.~Winskel,
+« Event structures », LNCS 255 (1987), 325--392, de sorte que la comparaison de
+ses hypothèses avec C 1 à C 3 et la sup-primalité reste à faire. Le
+rapprochement est celui de l'édition.}.
 
 \pagerange{61}{65}
 \section*{XII. Composantes connexes (pages 61 à 65)}
@@ -1287,7 +1303,25 @@ du forcing ---, qui est bien une algèbre de Boole complète. L'espace de Stone
 d'une algèbre de Boole complète est extrêmement discontinu (M.~H.~Stone, 1937 ;
 A.~Gleason, 1958) ; c'est vraisemblablement ce que la page appelle
 « ultra-stonien », plutôt que les espaces « hyperstoniens » de J.~Dixmier
-(1951), qui sont autre chose. La présomption reste non démontrée.}.
+(1951), qui sont autre chose. La présomption reste non démontrée.}\footnote{Vérifié en Lean (lean/Grothendieck/Folder156\_4.lean) : la
+présomption est fausse avec les axiomes posés jusqu'à la page 64. Pour un
+ensemble ordonné et une relation symétrique quelconques, les parties saturées
+sont stables par intersections quelconques et le cosupport est une
+orthocomplémentation (\texttt{isSaturated\_iInter},
+\texttt{isSaturated\_cosupp}, \texttt{inter\_cosupp\_eq\_empty},
+\texttt{supp\_union\_cosupp}) : $\Sigma$ est toujours un treillis complet
+orthocomplémenté. Mais sur sept multistrates --- quatre minimales $a$, $b$,
+$c$, $d$ et trois $v_{ab}$, $v_{bc}$, $v_{cd}$ au-dessus des paires $ab$, $bc$,
+$cd$, $R$ engendrée par les couples de chaque $\mathcal{M}_{\leq v}$, si bien que
+$R$ est héréditaire et $\mathcal{M}$ connexe (\texttt{hexagon\_hyp}) ---, les
+parties saturées sont $\emptyset$, $\{b\}$, $\{c\}$, $\{a,c\}$, $\{b,d\}$ et
+$\mathcal{M}$ (\texttt{hexagon\_saturated}), un hexagone non distributif :
+$\{b,d\} \wedge (\{b\} \vee \{c\}) = \{b,d\}$ mais $(\{b,d\} \wedge \{b\}) \vee
+(\{b,d\} \wedge \{c\}) = \{b\}$ (\texttt{hexagon\_not\_distrib}), vérifié par
+calcul exhaustif dans le noyau. Seule la structure $(\mathcal{M}, \leq, R)$ est
+formalisée, non les figures ni les axiomes C 1 à C 3 ; reste ouvert si les
+axiomes de disjonction posés plus loin, ou dans les dossiers 156-6 à 156-8,
+rétablissent la distributivité.}.
 
 Tout cela ne dépend que de $(\mathcal{M}, \leq, R)$, et non de l'ensemble des
 figures : le cosupport d'une partie $\mathcal{M}'$ de $\mathcal{M}$ est
