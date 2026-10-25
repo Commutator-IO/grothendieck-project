@@ -315,4 +315,231 @@ theorem isRegular_of_gr_flat_of_isLocalRing [IsLocalRing A] [IsNoetherianRing A]
 
 end Local
 
+/-!
+## Page 7: a counterexample to the converse of Remarque 5 bis (local finiteness only)
+
+Finding `94-rank-constructibility`. Remarque 5 bis claims that, under (i)–(iv) of Lemme 5
+(left exactness, filtered colimits, completion at every `𝔭`, `F(M)` finite for `M` of finite
+length over `A_𝔭`), condition (v) — `F` representable on a non-empty open of each `V(𝔭)` —
+follows from the constructibility of `𝔭 ↦ dim F(k(𝔭))`. It does not. Take `A = k[x, y]`
+(written `k[X][X]`, `x` the inner variable), distinct `a_j ∈ k`, `h_j = x − a_j`, and
+`F(M) = colim(M →h M →h M → ⋯)`, the telescope `Tele` (a filtered colimit of copies of
+`Hom(A, −)`, hence left exact and commuting with filtered colimits).
+
+* `tele_atPrime_bijective`: at every prime `𝔭`, all but at most one `h_j` are units in `A_𝔭`, so
+  from some stage on `F(M) ≅ M` for every `A_𝔭`-module (in particular every `Â_𝔭`-module):
+  completion and local finiteness hold;
+* `finrank_tele_field`: for every field `K` receiving `A` (every residue field `k(𝔭)`),
+  `dim_K F(K) = 1` — the rank function is constant;
+* `not_finite_tele_away`, `not_representable_away`: for every `g ≠ 0`, `F(A_g)` is not a finite
+  `A_g`-module, so `F` restricted to `A_g`-modules is `Hom(Q, −)` for no finite `Q`: (v) fails
+  at `𝔭 = 0`.
+
+The general tools are `teleOf_bijective` (a telescope whose maps are eventually units is its
+stage) and `exists_isUnit_of_finite` (a finite telescope of a ring along non-zero-divisors has
+eventually invertible maps). Left exactness and commutation with filtered colimits are the
+standard properties of filtered colimits of representables and are not restated.
+-/
+
+open Polynomial
+
+noncomputable section
+
+universe u
+
+section Telescope
+
+variable {R : Type*} [CommRing R] (c : ℕ → R) (M : Type*) [AddCommGroup M] [Module R M]
+
+/-- The transition maps of the telescope `M →c M →c M → ⋯` from stage `i` to stage `j`:
+multiplication by `∏_{i < l ≤ j} c l`. -/
+def teleMap (i j : ℕ) (_ : i ≤ j) : M →ₗ[R] M := (∏ l ∈ Finset.Ioc i j, c l) • LinearMap.id
+
+instance teleMap_directedSystem :
+    DirectedSystem (fun _ : ℕ => M) (fun i j h => teleMap c M i j h) where
+  map_self i x := by simp [teleMap]
+  map_map k j i hij hjk x := by
+    simp only [teleMap, LinearMap.smul_apply, LinearMap.id_apply, smul_smul]
+    rw [mul_comm, Finset.prod_Ioc_consecutive _ hij hjk]
+
+/-- The functor `F(M) = colim(M →c M →c M → ⋯)` of the counterexample. -/
+abbrev Tele : Type _ := Module.DirectLimit (fun _ : ℕ => M) (teleMap c M)
+
+/-- The insertion of stage `i`. -/
+abbrev teleOf (i : ℕ) : M →ₗ[R] Tele c M := Module.DirectLimit.of R ℕ (fun _ => M) (teleMap c M) i
+
+variable {c M}
+
+theorem teleOf_eq {i j : ℕ} (h : i ≤ j) (x : M) :
+    teleOf c M i x = teleOf c M j ((∏ l ∈ Finset.Ioc i j, c l) • x) := by
+  rw [← Module.DirectLimit.of_f (hij := h)]; rfl
+
+theorem teleOf_bijective {N : ℕ} (hc : ∀ l, N < l → IsUnit (c l)) : Bijective (teleOf c M N) := by
+  have hP : ∀ j, IsUnit (∏ l ∈ Finset.Ioc N j, c l) := fun j =>
+    IsUnit.prod_iff.2 (fun l hl => hc l (Finset.mem_Ioc.1 hl).1)
+  constructor
+  · intro x y hxy
+    obtain ⟨j, hj, h⟩ := Module.DirectLimit.exists_eq_of_of_eq hxy
+    simpa [teleMap, (hP j).smul_left_cancel] using h
+  · intro z
+    obtain ⟨i, x, rfl⟩ := Module.DirectLimit.exists_of z
+    rcases le_total i N with h | h
+    · exact ⟨_, (teleOf_eq h x).symm⟩
+    · obtain ⟨u, hu⟩ := hP i
+      refine ⟨u⁻¹ • x, ?_⟩
+      rw [teleOf_eq h, ← hu]
+      congr 1
+      exact smul_inv_smul u x
+
+theorem range_teleOf_mono {i j : ℕ} (h : i ≤ j) :
+    LinearMap.range (teleOf c M i) ≤ LinearMap.range (teleOf c M j) := by
+  rintro _ ⟨x, rfl⟩
+  exact ⟨_, (teleOf_eq h x).symm⟩
+
+theorem exists_isUnit_of_finite (hc : ∀ l, c l ∈ nonZeroDivisors R)
+    [Module.Finite R (Tele c R)] : ∃ N, ∀ l, N < l → IsUnit (c l) := by
+  classical
+  have key : ∀ s : Finset (Tele c R), ∃ N, ∀ z ∈ s, z ∈ LinearMap.range (teleOf c R N) := by
+    intro s
+    induction s using Finset.induction_on with
+    | empty => exact ⟨0, by simp⟩
+    | insert z s _ ih =>
+      obtain ⟨N, hN⟩ := ih
+      obtain ⟨i, x, rfl⟩ := Module.DirectLimit.exists_of z
+      refine ⟨max N i, fun w hw => ?_⟩
+      rcases Finset.mem_insert.1 hw with rfl | hw
+      · exact range_teleOf_mono (le_max_right N i) ⟨x, rfl⟩
+      · exact range_teleOf_mono (le_max_left N i) (hN w hw)
+  obtain ⟨s, hs⟩ := Module.Finite.fg_top (R := R) (M := Tele c R)
+  obtain ⟨N, hN⟩ := key s
+  have htop : LinearMap.range (teleOf c R N) = ⊤ := by
+    rw [eq_top_iff, ← hs, Submodule.span_le]; exact hN
+  refine ⟨N, fun l hl => ?_⟩
+  obtain ⟨m, hm⟩ : teleOf c R l 1 ∈ LinearMap.range (teleOf c R N) := htop ▸ trivial
+  rw [teleOf_eq hl.le] at hm
+  obtain ⟨k, hk, h⟩ := Module.DirectLimit.exists_eq_of_of_eq hm
+  simp only [teleMap, LinearMap.smul_apply, LinearMap.id_apply, smul_eq_mul] at h
+  have hQ : (∏ j ∈ Finset.Ioc l k, c j) ∈ nonZeroDivisors R :=
+    Submonoid.prod_mem _ (fun j _ => hc j)
+  have h1 : (∏ j ∈ Finset.Ioc N l, c j) * m = 1 := by
+    have h2 : (∏ j ∈ Finset.Ioc l k, c j) * ((∏ j ∈ Finset.Ioc N l, c j) * m - 1) = 0 := by
+      rw [mul_sub, sub_eq_zero]; simpa using h
+    exact sub_eq_zero.1 ((mem_nonZeroDivisors_iff.1 hQ).1 _ h2)
+  exact IsUnit.prod_iff.1 (IsUnit.of_mul_eq_one _ h1) l (Finset.mem_Ioc.2 ⟨hl, le_rfl⟩)
+
+/-- If at most one index is bad, all large indices are good. -/
+theorem exists_forall_gt_not {bad : ℕ → Prop} (h : ∀ i j, bad i → bad j → i = j) :
+    ∃ N, ∀ l, N < l → ¬ bad l := by
+  by_cases hb : ∃ j, bad j
+  · obtain ⟨j, hj⟩ := hb
+    exact ⟨j, fun l hl hl' => hl.ne (h j l hj hl')⟩
+  · exact ⟨0, fun l _ hl => hb ⟨l, hl⟩⟩
+
+end Telescope
+
+section Plane
+
+variable {k : Type*} [Field k]
+
+/-- `x − a` in `k[x, y]`, written `k[X][X]` with `x` the inner variable. -/
+abbrev hx (a : k) : k[X][X] := C (X - C a)
+
+theorem hx_prime (a : k) : Prime (hx a) := Polynomial.prime_C_iff.2 (Polynomial.prime_X_sub_C a)
+
+theorem hx_sub (a b : k) : hx a - hx b = C (C (b - a)) := by
+  rw [← map_sub]; congr 1; rw [map_sub]; ring
+
+theorem isUnit_hx_sub {a b : k} (hab : a ≠ b) : IsUnit (hx a - hx b) := by
+  rw [hx_sub]; exact isUnit_C.2 (isUnit_C.2 (sub_ne_zero.2 hab.symm).isUnit)
+
+/-- For `g ≠ 0`, only finitely many `x − a_j` divide `g`. -/
+theorem finite_setOf_hx_dvd {a : ℕ → k} (ha : Injective a) {g : k[X][X]} (hg : g ≠ 0) :
+    {j | hx (a j) ∣ g}.Finite := by
+  have hq : g.leadingCoeff ≠ 0 := leadingCoeff_ne_zero.2 hg
+  refine ((Polynomial.finite_setOfPred_isRoot hq).preimage ha.injOn).subset fun j hj => ?_
+  have := (Polynomial.C_dvd_iff_dvd_coeff _ _).1 hj g.natDegree
+  exact (Polynomial.dvd_iff_isRoot).1 this
+
+theorem dvd_of_isUnit_away {D : Type*} [CommRing D] [IsDomain D] {g h : D} (hg : g ≠ 0)
+    (hh : Prime h) (hu : IsUnit (algebraMap D (Localization.Away g) h)) : h ∣ g := by
+  obtain ⟨U, hU⟩ := hu
+  obtain ⟨⟨b, ⟨s, hs⟩⟩, e⟩ := IsLocalization.surj (Submonoid.powers g) (↑U⁻¹ : Localization.Away g)
+  obtain ⟨n, rfl⟩ := hs
+  simp only at e
+  have hinj := IsLocalization.injective (Localization.Away g)
+    (powers_le_nonZeroDivisors_of_noZeroDivisors hg)
+  have : g ^ n = h * b := by
+    apply hinj
+    rw [map_mul, ← e, ← mul_assoc, ← hU, Units.mul_inv, one_mul]
+  exact hh.dvd_of_dvd_pow (Dvd.intro b this.symm)
+
+/-- `F(A_g)` is not finitely generated over `A_g` for any `g ≠ 0`. -/
+theorem not_finite_tele_away {a : ℕ → k} (ha : Injective a) {g : k[X][X]} (hg : g ≠ 0) :
+    ¬ Module.Finite (Localization.Away g)
+      (Tele (fun j => algebraMap k[X][X] (Localization.Away g) (hx (a j))) (Localization.Away g)) := by
+  intro hfin
+  have : IsDomain (Localization.Away g) :=
+    IsLocalization.isDomain_localization (powers_le_nonZeroDivisors_of_noZeroDivisors hg)
+  have hinj := IsLocalization.injective (Localization.Away g)
+    (powers_le_nonZeroDivisors_of_noZeroDivisors hg)
+  obtain ⟨N, hN⟩ := exists_isUnit_of_finite (R := Localization.Away g)
+    (c := fun j => algebraMap k[X][X] (Localization.Away g) (hx (a j)))
+    (fun l => mem_nonZeroDivisors_of_ne_zero
+      ((map_ne_zero_iff _ hinj).2 (hx_prime (a l)).ne_zero))
+  obtain ⟨N', hN'⟩ := (finite_setOf_hx_dvd ha hg).bddAbove
+  have hl := dvd_of_isUnit_away hg (hx_prime _) (hN (max N N' + 1) (by omega))
+  have := hN' hl
+  omega
+
+/-- A noetherian ring: the dual of a finite module is finite. -/
+theorem finite_dual {R : Type*} [CommRing R] [IsNoetherianRing R] (Q : Type*) [AddCommGroup Q]
+    [Module R Q] [Module.Finite R Q] : Module.Finite R (Q →ₗ[R] R) := by
+  obtain ⟨n, π, hπ⟩ := Module.Finite.exists_fin' R Q
+  exact Module.Finite.of_injective π.dualMap (LinearMap.dualMap_injective_of_surjective hπ)
+
+/-- Hence `F` restricted to `A_g`-modules is representable by no finite module, for any
+`g ≠ 0`: the case `𝔭 = 0` of Lemma 5 (v) fails. -/
+theorem not_representable_away {a : ℕ → k} (ha : Injective a) {g : k[X][X]} (hg : g ≠ 0)
+    (Q : Type*) [AddCommGroup Q] [Module (Localization.Away g) Q]
+    [Module.Finite (Localization.Away g) Q]
+    (e : (Q →ₗ[Localization.Away g] Localization.Away g) ≃ₗ[Localization.Away g]
+      Tele (fun j => algebraMap k[X][X] (Localization.Away g) (hx (a j))) (Localization.Away g)) :
+    False := by
+  have := finite_dual (R := Localization.Away g) Q
+  exact not_finite_tele_away ha hg (Module.Finite.equiv e)
+
+/-- Two of the `x − a_j` never vanish together in a field. -/
+theorem eq_of_map_hx_eq_zero {K : Type*} [Field K] (φ : k[X][X] →+* K) {a : ℕ → k}
+    (ha : Injective a) (i j : ℕ) (hi : φ (hx (a i)) = 0) (hj : φ (hx (a j)) = 0) : i = j := by
+  by_contra hij
+  have := (isUnit_hx_sub (ha.ne hij)).map φ
+  rw [map_sub, hi, hj, sub_zero] at this
+  exact not_isUnit_zero this
+
+/-- Over any field `K` receiving `k[x, y]` (e.g. a residue field `k(𝔭)`), `F(K)` is
+one-dimensional: the fibre rank of `F` is constant, equal to `1`. -/
+theorem finrank_tele_field {K : Type*} [Field K] (φ : k[X][X] →+* K) {a : ℕ → k}
+    (ha : Injective a) : Module.finrank K (Tele (fun j => φ (hx (a j))) K) = 1 := by
+  obtain ⟨N, hN⟩ := exists_forall_gt_not (eq_of_map_hx_eq_zero φ ha)
+  let e := LinearEquiv.ofBijective _ (teleOf_bijective (c := fun j => φ (hx (a j))) (M := K)
+    (N := N) fun l hl => (Ne.isUnit (hN l hl)))
+  rw [← e.finrank_eq, Module.finrank_self]
+
+/-- At every prime `𝔭`, all but at most one `x − a_j` are units of `A_𝔭`, so from some stage
+on `F(M) ≅ M` for every `A_𝔭`-module `M` (and every `Â_𝔭`-module): the completion and local
+finiteness conditions hold. -/
+theorem tele_atPrime_bijective (p : Ideal k[X][X]) [p.IsPrime] {a : ℕ → k} (ha : Injective a) :
+    ∃ N, ∀ (M : Type u) [AddCommGroup M] [Module (Localization.AtPrime p) M],
+      Bijective (teleOf (fun j => algebraMap k[X][X] (Localization.AtPrime p) (hx (a j))) M N) := by
+  obtain ⟨N, hN⟩ := exists_forall_gt_not (bad := fun j => hx (a j) ∈ p) fun i j hi hj => by
+    by_contra hij
+    exact (Ideal.IsPrime.ne_top ‹_›)
+      (Ideal.eq_top_of_isUnit_mem _ (p.sub_mem hi hj) (isUnit_hx_sub (ha.ne hij)))
+  exact ⟨N, fun M _ _ => teleOf_bijective fun l hl =>
+    (IsLocalization.AtPrime.isUnit_to_map_iff _ p _).2 (hN l hl)⟩
+
+end Plane
+
+end
+
 end Grothendieck.Folder94
