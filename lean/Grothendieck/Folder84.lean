@@ -987,4 +987,707 @@ theorem no_gamma_four : ¬ ∃ γ : ℤ, γ * 4 = 2 := by
 
 end ChiSplit
 
+/-! ## The theorem of page 48 with `L` invertible, over an affine base
+
+Finding `84-two-regular-triplet-classification`, the case `L` not trivial. Over
+an affine base `Spec R` the reading's quadratic cover is, by page 45, a triple
+`(L, P₁, Q)`: `L` invertible, `P₁` an `L`-torsor (trivial on an affine base, so
+`P₁ = L` once an origin `x₀` is chosen) and `Q(x₀ + u) = u² + bu + c` with
+`b ∈ L`, `c ∈ L^{⊗2}`. A morphism is `φ : L ≅ L'` with a map of torsors
+`x₀ + u ↦ x'₀ + t + φ(u)` carrying `Q` to `Q'` (`IsCoverHom`). The triplet is
+`(L, δ, T₀)` with `δ = b² − 4c ∈ L^{⊗2}` (`discL`) and `T₀ = b mod 2L` in
+`L/2L = Γ(V(2), L₀)`; `T₀² ≡ δ (mod 4)` is `TripletCond`.
+
+* `isCoverHom_iff`: morphisms in coordinates, `φ(b) = b' + 2t`,
+  `φ(c) = c' + b't + t²`, any `R`; `isCoverHom_refl`, `isCoverHom_trans`,
+  `isCoverHom_symm`: a groupoid;
+* `tripletCond_iff_forall` (page 47, `L` invertible): the congruence does not
+  depend on the lift; `tripletCond_discL` and `isCoverHom_triplet`: the functor,
+  any `R`;
+* `triplet_full_faithful`, `triplet_ess_surj`, `triplet_classification` and
+  `cover_iso_iff_triplet_iso`: if `2` is a non-zero-divisor in `R`, the functor
+  is fully faithful (each triplet isomorphism lifts to exactly one morphism) and
+  essentially surjective (any `R`): page 48 for every invertible `L`.
+
+Symmetry of `L ⊗ L` (`Module.Invertible.tmul_comm`) is used for `b·u = u·b`;
+`2` regular on `L ⊗ L` follows from projectivity
+(`two_smul_injective_of_projective`). Not formalised: that `(L, P₁, Q)` is the
+same as a quadratic algebra (page 45), non-affine bases, base change, and the
+reconstruction of `E`, `A`, trace, norm and product of pages 49 to 52. -/
+section Triplets
+
+variable {R : Type*} [CommRing R]
+variable {L L' L'' : Type*} [AddCommGroup L] [Module R L] [AddCommGroup L'] [Module R L']
+  [AddCommGroup L''] [Module R L'']
+
+/-- If `2` is regular in `R`, it is regular on every projective `R`-module, in
+particular on `L` and on `L ⊗ L` for `L` invertible. -/
+theorem two_smul_injective_of_projective (h2 : ∀ x : R, 2 * x = 0 → x = 0)
+    {M : Type*} [AddCommGroup M] [Module R M] [Module.Projective R M] {x : M}
+    (hx : (2 : R) • x = 0) : x = 0 := by
+  obtain ⟨s, hs⟩ := Module.projective_def.1 (inferInstance : Module.Projective R M)
+  have h0 : s x = 0 := by
+    have e : (2 : R) • s x = 0 := by rw [← map_smul, hx, map_zero]
+    ext i
+    exact h2 _ (by simpa using congrArg (· i) e)
+  rw [← hs x, h0, map_zero]
+
+lemma four_smul_injective (h2 : ∀ x : R, 2 * x = 0 → x = 0)
+    {M : Type*} [AddCommGroup M] [Module R M] [Module.Projective R M] {x y : M}
+    (h : (4 : R) • x = (4 : R) • y) : x = y := by
+  rw [← sub_eq_zero]
+  apply two_smul_injective_of_projective h2
+  apply two_smul_injective_of_projective h2
+  rw [smul_smul, smul_sub, show (2 : R) * 2 = 4 by norm_num, h, sub_self]
+
+/-- For `L` invertible, `x ⊗ w = 0` for every `w` forces `x = 0`. -/
+theorem eq_zero_of_tmul_eq_zero [Module.Invertible R L] {x : L}
+    (h : ∀ w : L, x ⊗ₜ[R] w = 0) : x = 0 := by
+  obtain ⟨z, hz⟩ := (Module.Invertible.bijective (R := R) (M := L)).2 1
+  let F : Module.Dual R L ⊗[R] L →ₗ[R] L := (contractLeft R L).smulRight x
+  have hF : F = 0 := by
+    apply TensorProduct.ext'
+    intro γ w
+    have e := congrArg (fun y => TensorProduct.rid R L (LinearMap.lTensor L γ y)) (h w)
+    simp only [LinearMap.lTensor_tmul, rid_tmul, map_zero] at e
+    simpa [F] using e
+  have : F z = x := by simp [F, hz]
+  rw [← this, hF, LinearMap.zero_apply]
+
+/-- `2L`, the submodule whose quotient `L/2L` is `Γ(V(2), L₀)` over an affine base. -/
+def twoL (R L : Type*) [CommRing R] [AddCommGroup L] [Module R L] : Submodule R L :=
+  LinearMap.range (LinearMap.lsmul R L (2 : R))
+
+lemma mem_twoL {x : L} : x ∈ twoL R L ↔ ∃ t, (2 : R) • t = x := by
+  simp [twoL]
+
+lemma twoL_le_comap (φ : L →ₗ[R] L') : twoL R L ≤ (twoL R L').comap φ := by
+  rintro x hx
+  obtain ⟨t, rfl⟩ := mem_twoL.1 hx
+  exact mem_twoL.2 ⟨φ t, by simp⟩
+
+/-- The map `L/2L → L'/2L'` induced by `φ`, that is `φ₀ : L₀ → L'₀` on `V(2)`. -/
+def mod2 (φ : L →ₗ[R] L') : L ⧸ twoL R L →ₗ[R] L' ⧸ twoL R L' :=
+  (twoL R L).mapQ (twoL R L') φ (twoL_le_comap φ)
+
+@[simp] lemma mod2_mk (φ : L →ₗ[R] L') (x : L) :
+    mod2 φ (Submodule.Quotient.mk x) = Submodule.Quotient.mk (φ x) := rfl
+
+/-- The quadratic function `Q(x₀ + u) = u² + bu + c` of page 45 on the torsor
+`P₁ = L` with origin `x₀`, with values in `L^{⊗2}`; `b = 2x₀ − T`. -/
+def qform (b : L) (c : L ⊗[R] L) (u : L) : L ⊗[R] L := u ⊗ₜ u + b ⊗ₜ u + c
+
+/-- A morphism of quadratic covers `(L, P₁, Q) → (L', P'₁, Q')`, the torsors
+trivialised (an affine base): `φ : L ≅ L'` and the map of torsors
+`x₀ + u ↦ x'₀ + t + φ(u)`, carrying `Q` to `Q'`. -/
+def IsCoverHom (b : L) (c : L ⊗[R] L) (b' : L') (c' : L' ⊗[R] L') (φ : L ≃ₗ[R] L') (t : L') :
+    Prop :=
+  ∀ u : L, qform b' c' (t + φ u) = TensorProduct.map (φ : L →ₗ[R] L') (φ : L →ₗ[R] L') (qform b c u)
+
+lemma map_tmul' (φ : L ≃ₗ[R] L') (x y : L) :
+    TensorProduct.map (φ : L →ₗ[R] L') (φ : L →ₗ[R] L') (x ⊗ₜ y) = φ x ⊗ₜ φ y := rfl
+
+/-- **Morphisms in coordinates.** For `L'` invertible, `(φ, t)` is a morphism iff
+`φ(b) = b' + 2t` and `φ(c) = c' + b't + t²`, over any base. -/
+theorem isCoverHom_iff [Module.Invertible R L'] (b : L) (c : L ⊗[R] L) (b' : L')
+    (c' : L' ⊗[R] L') (φ : L ≃ₗ[R] L') (t : L') :
+    IsCoverHom b c b' c' φ t ↔
+      φ b = b' + (2 : R) • t ∧
+        TensorProduct.map (φ : L →ₗ[R] L') (φ : L →ₗ[R] L') c = c' + b' ⊗ₜ t + t ⊗ₜ t := by
+  constructor
+  · intro h
+    have h0 := h 0
+    simp only [qform, map_zero, add_zero, tmul_zero, zero_add] at h0
+    refine ⟨?_, by rw [← h0]; abel⟩
+    rw [← sub_eq_zero]
+    apply eq_zero_of_tmul_eq_zero (R := R)
+    intro w
+    have hu := h (φ.symm w)
+    simp only [qform, map_add, LinearEquiv.apply_symm_apply, map_tmul', add_tmul, tmul_add,
+      ← h0] at hu
+    rw [Module.Invertible.tmul_comm (m₁ := w) (m₂ := t)] at hu
+    rw [sub_tmul, sub_eq_zero, add_tmul, two_smul, add_tmul]
+    linear_combination (norm := module) -hu
+  · rintro ⟨hb, hc⟩ u
+    simp only [qform, map_add, map_tmul', hb, hc, add_tmul, tmul_add, two_smul]
+    rw [Module.Invertible.tmul_comm (m₁ := φ u) (m₂ := t)]
+    abel
+
+/-- The identity is a morphism, and morphisms compose: `(ψ, s) ∘ (φ, t) = (ψφ, s + ψ(t))`.
+The quadratic covers with `L` invertible over `R` form a groupoid. -/
+theorem isCoverHom_refl (b : L) (c : L ⊗[R] L) : IsCoverHom b c b c (LinearEquiv.refl R L) 0 := by
+  intro u
+  simp [TensorProduct.map_id]
+
+theorem isCoverHom_trans {b : L} {c : L ⊗[R] L} {b' : L'} {c' : L' ⊗[R] L'} {b'' : L''}
+    {c'' : L'' ⊗[R] L''} {φ : L ≃ₗ[R] L'} {ψ : L' ≃ₗ[R] L''} {t : L'} {s : L''}
+    (h : IsCoverHom b c b' c' φ t) (h' : IsCoverHom b' c' b'' c'' ψ s) :
+    IsCoverHom b c b'' c'' (φ.trans ψ) (s + ψ t) := by
+  intro u
+  have e : s + ψ t + (φ.trans ψ) u = s + ψ (t + φ u) := by simp [add_assoc]
+  rw [e, h', h, ← LinearMap.comp_apply, ← TensorProduct.map_comp]
+  rfl
+
+/-- The inverse of a morphism: `(φ, t)⁻¹ = (φ⁻¹, −φ⁻¹(t))`. -/
+theorem isCoverHom_symm {b : L} {c : L ⊗[R] L} {b' : L'} {c' : L' ⊗[R] L'} {φ : L ≃ₗ[R] L'}
+    {t : L'} (h : IsCoverHom b c b' c' φ t) : IsCoverHom b' c' b c φ.symm (-φ.symm t) := by
+  intro u
+  have e := h (-φ.symm t + φ.symm u)
+  simp only [map_add, map_neg, LinearEquiv.apply_symm_apply, add_neg_cancel_left] at e
+  have hinv : TensorProduct.map (φ.symm : L' →ₗ[R] L) (φ.symm : L' →ₗ[R] L)
+      (TensorProduct.map (φ : L →ₗ[R] L') (φ : L →ₗ[R] L') (qform b c (-φ.symm t + φ.symm u)))
+        = qform b c (-φ.symm t + φ.symm u) := by
+    rw [← LinearMap.comp_apply, ← TensorProduct.map_comp]
+    simp [TensorProduct.map_id]
+  rw [← hinv, ← e]
+
+/-- The discriminant `δ = b² − 4c = T² − 4N`, a section of `L^{⊗2}`. -/
+def discL (b : L) (c : L ⊗[R] L) : L ⊗[R] L := b ⊗ₜ b - (4 : R) • c
+
+/-- The triplet condition of page 47, `T₀² ≡ δ (mod 4)`: some lift `τ ∈ L` of
+`T₀ ∈ L/2L` has `τ² − δ ∈ 4L^{⊗2}`. -/
+def TripletCond (δ : L ⊗[R] L) (T₀ : L ⧸ twoL R L) : Prop :=
+  ∃ τ : L, Submodule.Quotient.mk τ = T₀ ∧ ∃ k : L ⊗[R] L, τ ⊗ₜ τ - δ = (4 : R) • k
+
+/-- Page 47: for `L` invertible the condition does not depend on the lift,
+`(τ + 2a)² ≡ τ² (mod 4)`. -/
+theorem tripletCond_iff_forall [Module.Invertible R L] (δ : L ⊗[R] L) (T₀ : L ⧸ twoL R L) :
+    TripletCond δ T₀ ↔
+      (∃ τ : L, Submodule.Quotient.mk τ = T₀) ∧
+        ∀ τ : L, Submodule.Quotient.mk τ = T₀ → ∃ k : L ⊗[R] L, τ ⊗ₜ τ - δ = (4 : R) • k := by
+  constructor
+  · rintro ⟨τ, hτ, k, hk⟩
+    refine ⟨⟨τ, hτ⟩, fun τ' hτ' => ?_⟩
+    rw [← hτ', Submodule.Quotient.eq] at hτ
+    obtain ⟨a, ha⟩ := mem_twoL.1 hτ
+    have e : τ' = τ - (2 : R) • a := by rw [ha]; abel
+    refine ⟨k - τ ⊗ₜ a + a ⊗ₜ a, ?_⟩
+    rw [e]
+    simp only [sub_tmul, tmul_sub, ← smul_tmul', tmul_smul, smul_sub]
+    rw [Module.Invertible.tmul_comm (m₁ := a) (m₂ := τ)]
+    rw [sub_eq_iff_eq_add] at hk
+    rw [hk]
+    module
+  · rintro ⟨⟨τ, hτ⟩, h⟩
+    exact ⟨τ, hτ, h τ hτ⟩
+
+/-- **The functor on objects** (page 47): `(L, b, c) ↦ (L, δ, T₀)` with `T₀ = b mod 2`
+satisfies `T₀² ≡ δ (mod 4)`, over any base. -/
+theorem tripletCond_discL (b : L) (c : L ⊗[R] L) :
+    TripletCond (discL b c) (Submodule.Quotient.mk b) :=
+  ⟨b, rfl, c, by simp [discL]⟩
+
+/-- **The functor on morphisms**, over any base: a morphism `(φ, t)` of quadratic
+covers carries `δ` to `δ'` and `T₀` to `T'₀`. -/
+theorem isCoverHom_triplet [Module.Invertible R L'] {b : L} {c : L ⊗[R] L} {b' : L'}
+    {c' : L' ⊗[R] L'} {φ : L ≃ₗ[R] L'} {t : L'} (h : IsCoverHom b c b' c' φ t) :
+    TensorProduct.map (φ : L →ₗ[R] L') (φ : L →ₗ[R] L') (discL b c) = discL b' c' ∧
+      mod2 (φ : L →ₗ[R] L') (Submodule.Quotient.mk b) = Submodule.Quotient.mk b' := by
+  obtain ⟨hb, hc⟩ := (isCoverHom_iff b c b' c' φ t).1 h
+  constructor
+  · simp only [discL, map_sub, map_smul, map_tmul', hb, hc, add_tmul, tmul_add, ← smul_tmul',
+      tmul_smul]
+    rw [Module.Invertible.tmul_comm (m₁ := t) (m₂ := b')]
+    module
+  · rw [mod2_mk, LinearEquiv.coe_coe, hb, Submodule.Quotient.eq]
+    exact mem_twoL.2 ⟨t, by abel⟩
+
+/-- **Full faithfulness** (page 48). If `2` is a non-zero-divisor in `R` and `L`, `L'`
+are invertible, every isomorphism `φ : L ≅ L'` of triplets (`φ(δ) = δ'`,
+`φ₀(T₀) = T'₀`) lifts to exactly one morphism `(φ, t)` of quadratic covers. -/
+theorem triplet_full_faithful (h2 : ∀ x : R, 2 * x = 0 → x = 0)
+    [Module.Invertible R L'] (b : L) (c : L ⊗[R] L) (b' : L') (c' : L' ⊗[R] L')
+    (φ : L ≃ₗ[R] L')
+    (hδ : TensorProduct.map (φ : L →ₗ[R] L') (φ : L →ₗ[R] L') (discL b c) = discL b' c')
+    (hT : mod2 (φ : L →ₗ[R] L') (Submodule.Quotient.mk b) = Submodule.Quotient.mk b') :
+    ∃! t : L', IsCoverHom b c b' c' φ t := by
+  rw [mod2_mk, LinearEquiv.coe_coe, Submodule.Quotient.eq] at hT
+  obtain ⟨t, ht⟩ := mem_twoL.1 hT
+  have hb : φ b = b' + (2 : R) • t := by rw [ht]; abel
+  refine ⟨t, (isCoverHom_iff b c b' c' φ t).2 ⟨hb, ?_⟩, ?_⟩
+  · apply four_smul_injective h2
+    have e : (4 : R) • TensorProduct.map (φ : L →ₗ[R] L') (φ : L →ₗ[R] L') c
+        = φ b ⊗ₜ φ b - discL b' c' := by
+      rw [← hδ]; simp only [discL, map_sub, map_smul, map_tmul']; abel
+    rw [e, hb]
+    simp only [discL, add_tmul, tmul_add, ← smul_tmul', tmul_smul]
+    rw [Module.Invertible.tmul_comm (m₁ := t) (m₂ := b')]
+    module
+  · intro t' h'
+    obtain ⟨hb', -⟩ := (isCoverHom_iff b c b' c' φ t').1 h'
+    rw [← sub_eq_zero]
+    apply two_smul_injective_of_projective h2
+    rw [smul_sub, sub_eq_zero]
+    exact add_left_cancel (hb'.symm.trans hb)
+
+/-- **Essential surjectivity** (page 48), over any base: every triplet `(L, δ, T₀)`
+with `T₀² ≡ δ (mod 4)` comes from a quadratic cover on the same `L`, namely
+`b = τ`, `c = (τ² − δ)/4` for a lift `τ` of `T₀`. -/
+theorem triplet_ess_surj (δ : L ⊗[R] L) (T₀ : L ⧸ twoL R L) (h : TripletCond δ T₀) :
+    ∃ (b : L) (c : L ⊗[R] L), discL b c = δ ∧ Submodule.Quotient.mk b = T₀ := by
+  obtain ⟨τ, hτ, k, hk⟩ := h
+  exact ⟨τ, k, by rw [discL, ← hk]; abel, hτ⟩
+
+/-- **Théorème (page 48), `L` invertible, over an affine base.** If `2` is a
+non-zero-divisor in `R`, then for invertible `L`, `L'` and an isomorphism
+`φ : L ≅ L'`, the morphisms `(φ, t)` of quadratic covers `(L, b, c) → (L', b', c')`
+exist iff `φ` is an isomorphism of triplets, and are then unique; every triplet
+occurs. Together: the groupoid of quadratic covers is equivalent, by
+`(L, b, c) ↦ (L, δ, T₀)`, to the groupoid of triplets. -/
+theorem triplet_classification (h2 : ∀ x : R, 2 * x = 0 → x = 0)
+    [Module.Invertible R L'] (b : L) (c : L ⊗[R] L) (b' : L') (c' : L' ⊗[R] L')
+    (φ : L ≃ₗ[R] L') :
+    (∃ t : L', IsCoverHom b c b' c' φ t) ↔
+      TensorProduct.map (φ : L →ₗ[R] L') (φ : L →ₗ[R] L') (discL b c) = discL b' c' ∧
+        mod2 (φ : L →ₗ[R] L') (Submodule.Quotient.mk b) = Submodule.Quotient.mk b' := by
+  constructor
+  · rintro ⟨t, h⟩; exact isCoverHom_triplet h
+  · rintro ⟨hδ, hT⟩; exact (triplet_full_faithful h2 b c b' c' φ hδ hT).exists
+
+/-- On isomorphism classes: two quadratic covers with `L`, `L'` invertible are
+isomorphic iff their triplets are. -/
+theorem cover_iso_iff_triplet_iso (h2 : ∀ x : R, 2 * x = 0 → x = 0)
+    [Module.Invertible R L'] (b : L) (c : L ⊗[R] L) (b' : L') (c' : L' ⊗[R] L') :
+    (∃ (φ : L ≃ₗ[R] L') (t : L'), IsCoverHom b c b' c' φ t) ↔
+      ∃ φ : L ≃ₗ[R] L',
+        TensorProduct.map (φ : L →ₗ[R] L') (φ : L →ₗ[R] L') (discL b c) = discL b' c' ∧
+          mod2 (φ : L →ₗ[R] L') (Submodule.Quotient.mk b) = Submodule.Quotient.mk b' := by
+  simp only [← triplet_classification h2]
+
+end Triplets
+
+end Grothendieck.Folder84
+
+/-! ## The symmetric monoidal category of `χ`-split extensions (pages 65 to 79)
+
+Continuation of the `χ`-split coordinates above, for finding
+`84-chi-trivialised-extension-product`. An object is a split extension
+`0 → L → M ⊕ L → M → 0` with the `χ`-scindage of `b : M → L` (`ChiExt`); a morphism is a map
+of extensions compatible with the scindages, recorded as `(f, φ, w)` with
+`φ ∘ b = b' ∘ f + χ w` (`extMap`, `eq_extMap`, `extMap_pi_iff`, `extMap_varpi_iff`). The
+product is `b₁ ⊗ b₂` (page 78), that of morphisms carries the datum `u` of page 129. Over
+any commutative ring, without dividing by `χ` or `2`:
+
+* `ChiExt.instMonoidalCategory`, `ChiExt.instSymmetricCategory`: a symmetric monoidal
+  category (all coherence axioms checked by Lean);
+* `ChiExt.isIso_of`: a morphism is invertible as soon as it is on `M` and on `L`;
+* `ChiExt.invertible_iff_generates` (page 79, for any `L`): `(𝒪, L, b)` is invertible iff
+  `L` is an invertible module and `b` generates `L` modulo `χ`; `generates_iff_span` is the
+  form « `T₀` generates `L₀` on `V(χ)` », used in `ChiExt.invertible_iff_span`.
+
+The intrinsic product by amalgamated sum for a non-split extension (pages 68 to 70), the
+universal property of bi-affine maps (pages 75 and 76) and the passage from an affine base
+to a scheme are not formalised.
+-/
+
+open CategoryTheory MonoidalCategory TensorProduct
+
+namespace Grothendieck.Folder84
+
+section ChiCategory
+
+variable {R : Type u} [CommRing R]
+
+section ExtMap
+
+variable (χ : R) {M L M' L' : Type*} [AddCommGroup M] [Module R M] [AddCommGroup L]
+  [Module R L] [AddCommGroup M'] [Module R M'] [AddCommGroup L'] [Module R L']
+
+/-- The map `(η, ξ) ↦ (f η, φ ξ + w η)` of `M ⊕ L → M' ⊕ L'`. -/
+def extMap (f : M →ₗ[R] M') (φ : L →ₗ[R] L') (w : M →ₗ[R] L') : M × L →ₗ[R] M' × L' :=
+  LinearMap.prod (f ∘ₗ LinearMap.fst R M L) (φ ∘ₗ LinearMap.snd R M L + w ∘ₗ LinearMap.fst R M L)
+
+/-- Every map of split extensions inducing `f` on `M` and `φ` on `L` is an `extMap`. -/
+theorem eq_extMap (F : M × L →ₗ[R] M' × L') (f : M →ₗ[R] M') (φ : L →ₗ[R] L')
+    (h₁ : LinearMap.fst R M' L' ∘ₗ F = f ∘ₗ LinearMap.fst R M L)
+    (h₂ : F ∘ₗ LinearMap.inr R M L = LinearMap.inr R M' L' ∘ₗ φ) :
+    F = extMap f φ (LinearMap.snd R M' L' ∘ₗ F ∘ₗ LinearMap.inl R M L) := by
+  apply LinearMap.prod_ext
+  · ext η
+    · simpa [extMap] using LinearMap.congr_fun h₁ (η, 0)
+    · simp [extMap]
+  · ext ξ
+    · simpa [extMap] using congrArg Prod.fst (LinearMap.congr_fun h₂ ξ)
+    · simpa [extMap, Prod.mk_zero_zero] using congrArg Prod.snd (LinearMap.congr_fun h₂ ξ)
+
+/-- A map of extensions respects the `χ`-retractions iff `φ ∘ b = b' ∘ f + χw`. -/
+theorem extMap_pi_iff (b : M →ₗ[R] L) (b' : M' →ₗ[R] L') (f : M →ₗ[R] M') (φ : L →ₗ[R] L')
+    (w : M →ₗ[R] L') :
+    piOf χ b' ∘ₗ extMap f φ w = φ ∘ₗ piOf χ b ↔ φ ∘ₗ b = b' ∘ₗ f + χ • w := by
+  constructor
+  · intro h
+    ext η
+    simpa [piOf, extMap] using (LinearMap.congr_fun h (η, 0)).symm
+  · intro h
+    apply LinearMap.prod_ext
+    · ext η
+      simpa [piOf, extMap] using (LinearMap.congr_fun h η).symm
+    · ext ξ
+      simp [piOf, extMap]
+
+/-- A map of extensions respects the `χ`-sections iff `φ ∘ b = b' ∘ f + χw`. -/
+theorem extMap_varpi_iff (b : M →ₗ[R] L) (b' : M' →ₗ[R] L') (f : M →ₗ[R] M') (φ : L →ₗ[R] L')
+    (w : M →ₗ[R] L') :
+    extMap f φ w ∘ₗ varpiOf χ b = varpiOf χ b' ∘ₗ f ↔ φ ∘ₗ b = b' ∘ₗ f + χ • w := by
+  constructor
+  · intro h
+    ext η
+    have := congrArg Prod.snd (LinearMap.congr_fun h η)
+    simp [extMap, varpiOf] at this
+    simp
+    linear_combination (norm := module) -this
+  · intro h
+    ext η
+    · simp [extMap, varpiOf]
+    · have := LinearMap.congr_fun h η
+      simp at this
+      simp [extMap, varpiOf, this]
+
+open scoped Pointwise in
+/-- `b` generates `L` modulo `χ` iff its class generates `L/χL`. -/
+theorem generates_iff_span (b : L) :
+    (∀ x : L, ∃ (r : R) (y : L), x = r • b + χ • y) ↔
+      Submodule.span R {Submodule.Quotient.mk (p := χ • (⊤ : Submodule R L)) b} = ⊤ := by
+  constructor
+  · intro h
+    refine eq_top_iff.mpr fun q _ => ?_
+    obtain ⟨x, rfl⟩ := Submodule.Quotient.mk_surjective _ q
+    obtain ⟨r, y, rfl⟩ := h x
+    refine Submodule.mem_span_singleton.mpr ⟨r, ?_⟩
+    rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.eq]
+    simpa using Submodule.smul_mem_pointwise_smul y χ ⊤ trivial
+  · intro h x
+    obtain ⟨r, hr⟩ := Submodule.mem_span_singleton.mp (h ▸ Submodule.mem_top :
+      Submodule.Quotient.mk (p := χ • (⊤ : Submodule R L)) x ∈ _)
+    rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.eq] at hr
+    obtain ⟨y, -, hy⟩ := Submodule.mem_smul_pointwise_iff_exists _ _ _ |>.mp
+      (Submodule.neg_mem _ hr)
+    exact ⟨r, y, by rw [hy]; abel⟩
+end ExtMap
+
+/-- A split extension `0 → L → M ⊕ L → M → 0` with the `χ`-scindage of `b : M → L`,
+`π(η, ξ) = b(η) + χξ`, `ϖ(η) = (χη, −b(η))` (`piOf`, `varpiOf`; every `χ`-scindage of a
+split extension is of this form, `chiSplitting_eq`). -/
+structure ChiExt (χ : R) where
+  M : ModuleCat.{u} R
+  L : ModuleCat.{u} R
+  b : M ⟶ L
+
+/-- Scalars pass through `⊗ₘ` in `ModuleCat` (left factor). -/
+lemma smul_tensorHom' {A B C D : ModuleCat.{u} R} (r : R) (f : A ⟶ B) (g : C ⟶ D) :
+    (r • f) ⊗ₘ g = r • (f ⊗ₘ g) :=
+  ModuleCat.MonoidalCategory.tensor_ext fun x y => by
+    simp [ModuleCat.MonoidalCategory.tensorHom_tmul]; rw [TensorProduct.smul_tmul']
+
+/-- Scalars pass through `⊗ₘ` in `ModuleCat` (right factor). -/
+lemma tensorHom_smul' {A B C D : ModuleCat.{u} R} (r : R) (f : A ⟶ B) (g : C ⟶ D) :
+    f ⊗ₘ (r • g) = r • (f ⊗ₘ g) :=
+  ModuleCat.MonoidalCategory.tensor_ext fun x y => by
+    simp [ModuleCat.MonoidalCategory.tensorHom_tmul, TensorProduct.tmul_smul]
+
+namespace ChiExt
+variable {χ : R}
+
+/-- A morphism `(M, L, b) → (M', L', b')`: the map `(η, ξ) ↦ (f η, φ ξ + w η)` of
+`M ⊕ L → M' ⊕ L'` (a map of extensions inducing `f` on `M` and `φ` on `L`), compatible
+with the `χ`-scindages: `φ ∘ b = b' ∘ f + χ w` (`extMap_pi_iff`, `extMap_varpi_iff`). -/
+@[ext]
+structure Hom (X Y : ChiExt χ) where
+  f : X.M ⟶ Y.M
+  φ : X.L ⟶ Y.L
+  w : X.M ⟶ Y.L
+  comm : X.b ≫ φ = f ≫ Y.b + χ • w
+
+/-- Composition: `(f, φ, w)` then `(g, ψ, v)` is `(gf, ψφ, ψw + vf)`. -/
+instance : Category (ChiExt χ) where
+  Hom := Hom
+  id X := ⟨𝟙 _, 𝟙 _, 0, by simp⟩
+  comp p q := ⟨p.f ≫ q.f, p.φ ≫ q.φ, p.w ≫ q.φ + p.f ≫ q.w, by
+    rw [← Category.assoc, p.comm, Preadditive.add_comp, Category.assoc, q.comm]
+    simp only [Preadditive.comp_add, Linear.smul_comp, Linear.comp_smul, smul_add, Category.assoc]
+    abel⟩
+  assoc p q r := by
+    refine Hom.ext (Category.assoc _ _ _) (Category.assoc _ _ _) ?_
+    simp only [Preadditive.comp_add, Preadditive.add_comp, Category.assoc]; abel
+
+@[ext]
+lemma hom_ext {X Y : ChiExt χ} {p q : X ⟶ Y} (h₁ : p.f = q.f) (h₂ : p.φ = q.φ)
+    (h₃ : p.w = q.w) : p = q := Hom.ext h₁ h₂ h₃
+
+@[simp] lemma id_f (X : ChiExt χ) : Hom.f (𝟙 X) = 𝟙 _ := rfl
+@[simp] lemma id_φ (X : ChiExt χ) : Hom.φ (𝟙 X) = 𝟙 _ := rfl
+@[simp] lemma id_w (X : ChiExt χ) : Hom.w (𝟙 X) = 0 := rfl
+@[simp] lemma comp_f {X Y Z : ChiExt χ} (p : X ⟶ Y) (q : Y ⟶ Z) :
+    (p ≫ q).f = p.f ≫ q.f := rfl
+@[simp] lemma comp_φ {X Y Z : ChiExt χ} (p : X ⟶ Y) (q : Y ⟶ Z) :
+    (p ≫ q).φ = p.φ ≫ q.φ := rfl
+@[simp] lemma comp_w {X Y Z : ChiExt χ} (p : X ⟶ Y) (q : Y ⟶ Z) :
+    (p ≫ q).w = p.w ≫ q.φ + p.f ≫ q.w := rfl
+
+/-- Page 78: the product of `(M₁, L₁, b₁)` and `(M₂, L₂, b₂)` is
+`(M₁ ⊗ M₂, L₁ ⊗ L₂, b₁ ⊗ b₂)`, « Il n'y a pas plus simple ! ». -/
+abbrev tensorObj (X Y : ChiExt χ) : ChiExt χ := ⟨X.M ⊗ Y.M, X.L ⊗ Y.L, X.b ⊗ₘ Y.b⟩
+
+/-- The product of morphisms (page 129): `w = b′₁f₁ ⊗ w₂ + w₁ ⊗ b′₂f₂ + χ w₁ ⊗ w₂`. -/
+def tensorHom {X X' Y Y' : ChiExt χ} (p : X ⟶ X') (q : Y ⟶ Y') :
+    tensorObj X Y ⟶ tensorObj X' Y' :=
+  ⟨p.f ⊗ₘ q.f, p.φ ⊗ₘ q.φ, (p.f ≫ X'.b) ⊗ₘ q.w + p.w ⊗ₘ (q.f ≫ Y'.b) + χ • (p.w ⊗ₘ q.w), by
+    change (X.b ⊗ₘ Y.b) ≫ _ = (p.f ⊗ₘ q.f) ≫ (X'.b ⊗ₘ Y'.b) + _
+    rw [tensorHom_comp_tensorHom, tensorHom_comp_tensorHom, p.comm, q.comm]
+    simp only [MonoidalPreadditive.add_tensor, MonoidalPreadditive.tensor_add,
+      smul_tensorHom', tensorHom_smul', smul_add, smul_smul]
+    abel⟩
+
+@[simp] lemma tensorHom_f {X X' Y Y' : ChiExt χ} (p : X ⟶ X') (q : Y ⟶ Y') :
+    (tensorHom p q).f = p.f ⊗ₘ q.f := rfl
+@[simp] lemma tensorHom_φ {X X' Y Y' : ChiExt χ} (p : X ⟶ X') (q : Y ⟶ Y') :
+    (tensorHom p q).φ = p.φ ⊗ₘ q.φ := rfl
+@[simp] lemma tensorHom_w {X X' Y Y' : ChiExt χ} (p : X ⟶ X') (q : Y ⟶ Y') :
+    (tensorHom p q).w = (p.f ≫ X'.b) ⊗ₘ q.w + p.w ⊗ₘ (q.f ≫ Y'.b) + χ • (p.w ⊗ₘ q.w) := rfl
+
+/-- An isomorphism of underlying `M` and `L` commuting strictly with `b` (`w = 0`). -/
+@[simps]
+def strictIso {X Y : ChiExt χ} (eM : X.M ≅ Y.M) (eL : X.L ≅ Y.L)
+    (h : X.b ≫ eL.hom = eM.hom ≫ Y.b) : X ≅ Y where
+  hom := ⟨eM.hom, eL.hom, 0, by simp [h]⟩
+  inv := ⟨eM.inv, eL.inv, 0, by
+    rw [smul_zero, add_zero, Iso.eq_inv_comp, ← Category.assoc, ← h]; simp⟩
+  hom_inv_id := by ext <;> simp
+  inv_hom_id := by ext <;> simp
+
+instance : MonoidalCategoryStruct (ChiExt χ) where
+  tensorObj := tensorObj
+  whiskerLeft X _ _ q := tensorHom (𝟙 X) q
+  whiskerRight p Y := tensorHom p (𝟙 Y)
+  tensorHom := tensorHom
+  tensorUnit := ⟨𝟙_ _, 𝟙_ _, 𝟙 _⟩
+  associator X Y Z := strictIso (α_ X.M Y.M Z.M) (α_ X.L Y.L Z.L) (by
+    simp)
+  leftUnitor X := strictIso (λ_ X.M) (λ_ X.L) (by
+    simp)
+  rightUnitor X := strictIso (ρ_ X.M) (ρ_ X.L) (by
+    simp)
+
+@[simp] lemma tensorHom_f' {X X' Y Y' : ChiExt χ} (p : X ⟶ X') (q : Y ⟶ Y') :
+    (p ⊗ₘ q).f = p.f ⊗ₘ q.f := rfl
+@[simp] lemma tensorHom_φ' {X X' Y Y' : ChiExt χ} (p : X ⟶ X') (q : Y ⟶ Y') :
+    (p ⊗ₘ q).φ = p.φ ⊗ₘ q.φ := rfl
+@[simp] lemma tensorHom_w' {X X' Y Y' : ChiExt χ} (p : X ⟶ X') (q : Y ⟶ Y') :
+    (p ⊗ₘ q).w = (p.f ≫ X'.b) ⊗ₘ q.w + p.w ⊗ₘ (q.f ≫ Y'.b) + χ • (p.w ⊗ₘ q.w) := rfl
+@[simp] lemma tensorObj_M (X Y : ChiExt χ) : (X ⊗ Y).M = X.M ⊗ Y.M := rfl
+@[simp] lemma tensorObj_L (X Y : ChiExt χ) : (X ⊗ Y).L = X.L ⊗ Y.L := rfl
+@[simp] lemma tensorObj_b (X Y : ChiExt χ) : (X ⊗ Y).b = X.b ⊗ₘ Y.b := rfl
+@[simp] lemma unit_M : (𝟙_ (ChiExt χ)).M = 𝟙_ _ := rfl
+@[simp] lemma unit_L : (𝟙_ (ChiExt χ)).L = 𝟙_ _ := rfl
+@[simp] lemma unit_b : (𝟙_ (ChiExt χ)).b = 𝟙 _ := rfl
+@[simp] lemma associator_hom_f (X Y Z : ChiExt χ) :
+    (α_ X Y Z).hom.f = (α_ X.M Y.M Z.M).hom := rfl
+@[simp] lemma associator_hom_φ (X Y Z : ChiExt χ) :
+    (α_ X Y Z).hom.φ = (α_ X.L Y.L Z.L).hom := rfl
+@[simp] lemma associator_hom_w (X Y Z : ChiExt χ) : (α_ X Y Z).hom.w = 0 := rfl
+@[simp] lemma leftUnitor_hom_f (X : ChiExt χ) : (λ_ X).hom.f = (λ_ X.M).hom := rfl
+@[simp] lemma leftUnitor_hom_φ (X : ChiExt χ) : (λ_ X).hom.φ = (λ_ X.L).hom := rfl
+@[simp] lemma leftUnitor_hom_w (X : ChiExt χ) : (λ_ X).hom.w = 0 := rfl
+@[simp] lemma rightUnitor_hom_f (X : ChiExt χ) : (ρ_ X).hom.f = (ρ_ X.M).hom := rfl
+@[simp] lemma rightUnitor_hom_φ (X : ChiExt χ) : (ρ_ X).hom.φ = (ρ_ X.L).hom := rfl
+@[simp] lemma rightUnitor_hom_w (X : ChiExt χ) : (ρ_ X).hom.w = 0 := rfl
+
+/-- The product is a bifunctor. -/
+theorem tensorHom_comp_tensorHom' {X₁ Y₁ Z₁ X₂ Y₂ Z₂ : ChiExt χ} (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂)
+    (g₁ : Y₁ ⟶ Z₁) (g₂ : Y₂ ⟶ Z₂) :
+    (f₁ ⊗ₘ f₂) ≫ (g₁ ⊗ₘ g₂) = (f₁ ≫ g₁) ⊗ₘ (f₂ ≫ g₂) := by
+  refine hom_ext (by simp) (by simp) ?_
+  simp only [comp_w, tensorHom_w', tensorHom_φ', tensorHom_f', comp_f, Preadditive.add_comp,
+    Linear.smul_comp, tensorHom_comp_tensorHom, Category.assoc]
+  rw [g₁.comm, g₂.comm]
+  simp only [Preadditive.comp_add, Linear.comp_smul, MonoidalPreadditive.add_tensor,
+    MonoidalPreadditive.tensor_add, smul_tensorHom', tensorHom_smul', smul_add]
+  simp only [tensorHom_comp_tensorHom]
+  abel
+
+/-- Naturality of the associativity constraint `(x₁ * x₂) * x₃ ↦ x₁ * (x₂ * x₃)`. -/
+theorem associator_naturality' {X₁ X₂ X₃ Y₁ Y₂ Y₃ : ChiExt χ} (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂)
+    (f₃ : X₃ ⟶ Y₃) :
+    ((f₁ ⊗ₘ f₂) ⊗ₘ f₃) ≫ (α_ Y₁ Y₂ Y₃).hom = (α_ X₁ X₂ X₃).hom ≫ (f₁ ⊗ₘ (f₂ ⊗ₘ f₃)) := by
+  refine hom_ext (by simp) (by simp) ?_
+  simp only [comp_w, tensorHom_w', tensorHom_φ', tensorHom_f', associator_hom_w,
+    associator_hom_f, associator_hom_φ, tensorObj_b, Limits.zero_comp, Limits.comp_zero,
+    zero_add, add_zero]
+  simp only [Preadditive.add_comp, Preadditive.comp_add, Linear.smul_comp, Linear.comp_smul,
+    MonoidalPreadditive.add_tensor, MonoidalPreadditive.tensor_add, smul_tensorHom',
+    tensorHom_smul', smul_add, smul_smul, associator_naturality, tensorHom_comp_tensorHom]
+  abel
+
+@[simp] lemma associator_inv_f (X Y Z : ChiExt χ) :
+    (α_ X Y Z).inv.f = (α_ X.M Y.M Z.M).inv := rfl
+@[simp] lemma associator_inv_φ (X Y Z : ChiExt χ) :
+    (α_ X Y Z).inv.φ = (α_ X.L Y.L Z.L).inv := rfl
+@[simp] lemma associator_inv_w (X Y Z : ChiExt χ) : (α_ X Y Z).inv.w = 0 := rfl
+@[simp] lemma whiskerLeft_f' (X : ChiExt χ) {Y Y' : ChiExt χ} (q : Y ⟶ Y') :
+    (X ◁ q).f = 𝟙 X.M ⊗ₘ q.f := rfl
+@[simp] lemma whiskerLeft_φ' (X : ChiExt χ) {Y Y' : ChiExt χ} (q : Y ⟶ Y') :
+    (X ◁ q).φ = 𝟙 X.L ⊗ₘ q.φ := rfl
+@[simp] lemma whiskerLeft_w' (X : ChiExt χ) {Y Y' : ChiExt χ} (q : Y ⟶ Y') :
+    (X ◁ q).w = (𝟙 X.M ≫ X.b) ⊗ₘ q.w + 0 ⊗ₘ (q.f ≫ Y'.b) + χ • (0 ⊗ₘ q.w) := rfl
+@[simp] lemma whiskerRight_f' {X X' : ChiExt χ} (p : X ⟶ X') (Y : ChiExt χ) :
+    (p ▷ Y).f = p.f ⊗ₘ 𝟙 Y.M := rfl
+@[simp] lemma whiskerRight_φ' {X X' : ChiExt χ} (p : X ⟶ X') (Y : ChiExt χ) :
+    (p ▷ Y).φ = p.φ ⊗ₘ 𝟙 Y.L := rfl
+@[simp] lemma whiskerRight_w' {X X' : ChiExt χ} (p : X ⟶ X') (Y : ChiExt χ) :
+    (p ▷ Y).w = (p.f ≫ X'.b) ⊗ₘ 0 + p.w ⊗ₘ (𝟙 Y.M ≫ Y.b) + χ • (p.w ⊗ₘ 0) := rfl
+
+/-- **Pages 77 and 78.** `χ`-split extensions form a monoidal category; the unit is
+`(𝒪, 𝒪, id)`, `π(u, λ) = λ + χu`. -/
+instance : MonoidalCategory (ChiExt χ) := MonoidalCategory.ofTensorHom
+  (id_tensorHom_id := fun _ _ => by ext <;> simp)
+  (id_tensorHom := fun _ _ _ _ => rfl)
+  (tensorHom_id := fun _ _ => rfl)
+  (tensorHom_comp_tensorHom := tensorHom_comp_tensorHom')
+  (associator_naturality := associator_naturality')
+  (leftUnitor_naturality := fun _ => by ext <;> simp)
+  (rightUnitor_naturality := fun _ => by ext <;> simp)
+  (pentagon := fun _ _ _ _ => by ext <;> simp [pentagon])
+  (triangle := fun _ _ => by ext <;> simp)
+
+/-- The commutativity constraint `x₁ * x₂ ↦ x₂ * x₁`. -/
+def braiding (X Y : ChiExt χ) : X ⊗ Y ≅ Y ⊗ X :=
+  strictIso (β_ X.M Y.M) (β_ X.L Y.L) (by simp)
+
+@[simp] lemma braiding_hom_f (X Y : ChiExt χ) :
+    (braiding X Y).hom.f = (β_ X.M Y.M).hom := rfl
+@[simp] lemma braiding_hom_φ (X Y : ChiExt χ) :
+    (braiding X Y).hom.φ = (β_ X.L Y.L).hom := rfl
+@[simp] lemma braiding_hom_w (X Y : ChiExt χ) : (braiding X Y).hom.w = 0 := rfl
+
+/-- **Pages 77 and 78.** The monoidal category of `χ`-split extensions is symmetric. -/
+instance : SymmetricCategory (ChiExt χ) where
+  braiding := braiding
+  braiding_naturality_right X _ _ f := by refine hom_ext ?_ ?_ ?_ <;> simp
+  braiding_naturality_left f Z := by refine hom_ext ?_ ?_ ?_ <;> simp
+  hexagon_forward X Y Z := by
+    refine hom_ext ?_ ?_ ?_ <;> simp
+  hexagon_reverse X Y Z := by
+    refine hom_ext ?_ ?_ ?_ <;> simp
+  symmetry X Y := by refine hom_ext ?_ ?_ ?_ <;> simp
+
+/-- A morphism whose components on `M` and on `L` are isomorphisms is an isomorphism. -/
+theorem isIso_of {X Y : ChiExt χ} (p : X ⟶ Y) [IsIso p.f] [IsIso p.φ] : IsIso p := by
+  refine ⟨⟨⟨inv p.f, inv p.φ, -(inv p.f ≫ p.w ≫ inv p.φ), ?_⟩, ?_, ?_⟩⟩
+  · have h := congrArg (fun g => inv p.f ≫ g ≫ inv p.φ) p.comm
+    simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id, Preadditive.add_comp,
+      Preadditive.comp_add, IsIso.inv_hom_id_assoc, Linear.smul_comp, Linear.comp_smul] at h
+    rw [h, smul_neg]; abel
+  · refine hom_ext (by simp) (by simp) ?_
+    simp
+  · refine hom_ext (by simp) (by simp) ?_
+    simp
+
+/-- An isomorphism has isomorphisms as components on `L`. -/
+def isoL {X Y : ChiExt χ} (e : X ≅ Y) : X.L ≅ Y.L where
+  hom := e.hom.φ
+  inv := e.inv.φ
+  hom_inv_id := by rw [← comp_φ, e.hom_inv_id]; rfl
+  inv_hom_id := by rw [← comp_φ, e.inv_hom_id]; rfl
+
+/-- An isomorphism has isomorphisms as components on `M`. -/
+def isoM {X Y : ChiExt χ} (e : X ≅ Y) : X.M ≅ Y.M where
+  hom := e.hom.f
+  inv := e.inv.f
+  hom_inv_id := by rw [← comp_f, e.hom_inv_id]; rfl
+  inv_hom_id := by rw [← comp_f, e.inv_hom_id]; rfl
+
+variable (χ) in
+/-- The object `(𝒪, L, b)` of a section `b` of `L` (page 77, `M = 𝒪`: `b = π(x₀)`). -/
+def ofSection (L : ModuleCat.{u} R) (b : L) : ChiExt χ :=
+  ⟨ModuleCat.of R R, L, ModuleCat.ofHom (LinearMap.toSpanSingleton R L b)⟩
+
+/-- **Page 79, the invertibility criterion, for any `L`.** The object `(𝒪, L, b)` is
+invertible for the product iff `L` is an invertible module and `b` generates `L` modulo
+`χ`, i.e. `T₀ = −b₀` generates `L₀ = L/χL` on `V(χ)`. -/
+theorem invertible_iff_generates (L : ModuleCat.{u} R) (b : L) :
+    (∃ Y : ChiExt χ, Nonempty (ofSection χ L b ⊗ Y ≅ 𝟙_ _)) ↔
+      Module.Invertible R L ∧ ∀ x : L, ∃ (r : R) (y : L), x = r • b + χ • y := by
+  constructor
+  · rintro ⟨Y, ⟨e⟩⟩
+    have eL := (isoL e).toLinearEquiv
+    have hinv : Module.Invertible R L := Module.Invertible.left eL
+    refine ⟨hinv, fun x => ?_⟩
+    let φ : L ⊗[R] Y.L →ₗ[R] R := e.hom.φ.hom
+    let f : R ⊗[R] Y.M →ₗ[R] R := e.hom.f.hom
+    let w : R ⊗[R] Y.M →ₗ[R] R := e.hom.w.hom
+    have hcomm : φ ∘ₗ TensorProduct.map (LinearMap.toSpanSingleton R L b) Y.b.hom = f + χ • w :=
+      congrArg ModuleCat.Hom.hom e.hom.comm
+    obtain ⟨t, ht⟩ : ∃ t, f t = 1 := (isoM e).toLinearEquiv.surjective (1 : R)
+    obtain ⟨m', rfl⟩ : ∃ m' : Y.M, (1 : R) ⊗ₜ m' = t :=
+      ⟨TensorProduct.lid R Y.M t, by
+        rw [← TensorProduct.lid_symm_apply]; exact (TensorProduct.lid R Y.M).symm_apply_apply t⟩
+    set y := Y.b.hom m'
+    have hc : φ (b ⊗ₜ y) = 1 + χ * w ((1 : R) ⊗ₜ m') := by
+      have := LinearMap.congr_fun hcomm ((1 : R) ⊗ₜ m')
+      simp only [LinearMap.comp_apply, TensorProduct.map_tmul, LinearMap.toSpanSingleton_apply,
+        one_smul, LinearMap.add_apply, LinearMap.smul_apply, ht, smul_eq_mul] at this
+      exact this
+    have key : φ (b ⊗ₜ y) • x = φ (x ⊗ₜ y) • b := by
+      have h1 := congrArg (fun z => TensorProduct.rid R L (LinearMap.lTensor L φ
+        (TensorProduct.assoc R L L Y.L (z ⊗ₜ y)))) (Module.Invertible.tmul_comm (m₁ := x) (m₂ := b))
+      simp only [LinearMap.lTensor_tmul, TensorProduct.assoc_tmul, TensorProduct.rid_tmul] at h1
+      exact h1
+    refine ⟨φ (x ⊗ₜ y), -(w ((1 : R) ⊗ₜ m')) • x, ?_⟩
+    rw [← key, hc]
+    module
+  · rintro ⟨hinv, hgen⟩
+    -- a linear form `β` with `β(b) ≡ 1 mod χ`
+    obtain ⟨β, c, hβ⟩ : ∃ (β : Module.Dual R L) (c : R), β b = 1 + χ * c := by
+      let I : Submodule R R := LinearMap.range (Module.Dual.eval R L b) ⊔ Ideal.span {χ}
+      have hI : ∀ t : Module.Dual R L ⊗[R] L, contractLeft R L t ∈ I := by
+        intro t
+        induction t with
+        | tmul γ x =>
+          obtain ⟨r, y, rfl⟩ := hgen x
+          rw [contractLeft_apply, map_add, map_smul, map_smul]
+          refine Submodule.add_mem_sup ⟨r • γ, by simp⟩ ?_
+          exact Ideal.mul_mem_right _ _ (Ideal.mem_span_singleton_self χ)
+        | add t t' ht ht' => rw [map_add]; exact I.add_mem ht ht'
+      obtain ⟨t, ht⟩ := hinv.bijective.2 1
+      have h1 := hI t
+      rw [ht, Submodule.mem_sup] at h1
+      obtain ⟨a, ⟨β, rfl⟩, z, hz, haz⟩ := h1
+      obtain ⟨d, rfl⟩ := Ideal.mem_span_singleton'.mp hz
+      exact ⟨β, -d, by rw [Module.Dual.eval_apply] at haz; linear_combination haz⟩
+    let Y : ChiExt χ :=
+      ⟨ModuleCat.of R R, ModuleCat.of R (Module.Dual R L),
+        ModuleCat.ofHom (LinearMap.toSpanSingleton R (Module.Dual R L) β)⟩
+    let eM : R ⊗[R] R ≃ₗ[R] R := TensorProduct.lid R R
+    let eL : L ⊗[R] Module.Dual R L ≃ₗ[R] R :=
+      (TensorProduct.comm R L (Module.Dual R L)).trans (Module.Invertible.linearEquiv R L)
+    have hlin : eL.toLinearMap ∘ₗ TensorProduct.map (LinearMap.toSpanSingleton R L b)
+        (LinearMap.toSpanSingleton R (Module.Dual R L) β)
+          = eM.toLinearMap + χ • (c • eM.toLinearMap) := by
+      refine TensorProduct.ext' fun r s => ?_
+      simp only [eL, eM, LinearMap.comp_apply, TensorProduct.map_tmul, LinearEquiv.coe_coe,
+        LinearEquiv.trans_apply, TensorProduct.comm_tmul, Module.Invertible.linearEquiv,
+        LinearEquiv.ofBijective_apply, contractLeft_apply, LinearMap.add_apply,
+        LinearMap.smul_apply, TensorProduct.lid_tmul, LinearMap.toSpanSingleton_apply,
+        map_smul, hβ, smul_eq_mul, LinearMap.smul_apply]
+      ring
+    let p : ofSection χ L b ⊗ Y ⟶ 𝟙_ _ :=
+      ⟨eM.toModuleIso.hom, eL.toModuleIso.hom, ModuleCat.ofHom (c • eM.toLinearMap),
+        ModuleCat.hom_ext hlin⟩
+    have : IsIso p.f := inferInstanceAs (IsIso eM.toModuleIso.hom)
+    have : IsIso p.φ := inferInstanceAs (IsIso eL.toModuleIso.hom)
+    have := isIso_of p
+    exact ⟨Y, ⟨asIso p⟩⟩
+
+open scoped Pointwise in
+/-- The criterion in the page's words: `(𝒪, L, b)` is invertible iff `L` is invertible and
+the class of `b` generates `L₀ = L/χL`. -/
+theorem invertible_iff_span (L : ModuleCat.{u} R) (b : L) :
+    (∃ Y : ChiExt χ, Nonempty (ofSection χ L b ⊗ Y ≅ 𝟙_ _)) ↔ Module.Invertible R L ∧
+      Submodule.span R {Submodule.Quotient.mk (p := χ • (⊤ : Submodule R L)) b} = ⊤ := by
+  rw [invertible_iff_generates, generates_iff_span]
+
+end ChiExt
+
+end ChiCategory
+
 end Grothendieck.Folder84

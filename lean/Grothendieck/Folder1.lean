@@ -1389,3 +1389,607 @@ theorem sum_singularValues_rpow_add_le_of_le_two (u v : E →ₗ[𝕜] F) {n : �
 end Schatten
 
 end Grothendieck.Folder1
+
+/-!
+## Pages 71–73: the system (16) for every `m` (finding `1-sigma-nm-system`)
+
+For linear maps `u, v : E → F` between finite-dimensional complex inner product spaces and all
+`n, m`, `sigma_system` proves `σ_n^m(u+v) ≤ ∑_{p ≤ m} σ_n^p(u) σ_n^{m-p}(v)`; this removes the
+restriction `m ≤ 2` of `sigma_system_of_le_two`. Hence the product form (15) for every `n`
+(`prod_one_add_singularValues_add_le`) and the subadditivity of `∑_{i<n} s_i^p`, `0 < p < 1`
+(`sum_singularValues_rpow_add_le`, page 129), unconditionally.
+
+The proof keeps the page's idea (`Λ^m` of a sum, a Cauchy–Schwarz bound on the mixed terms,
+Prop. 3) but writes `Λ^m` as principal `m × m` minors, `α_m(M) = ∑_{|K| = m} det M_K`:
+
+* with `x_j, y_j` (`j < n`) the Schmidt vectors of `T = u + v`, `σ_n^m(T) = α_m(⟪y_i, T x_j⟫)`
+  (`sigma_le_alpha_compr`);
+* each compression factors as `⟪y_i, w x_j⟫ = ((√S Φ)* (√S Ψ))_{ij}` through the Schmidt
+  expansion of `w` (`compr_eq`), so the compression of `T` is `G* H` with `H = [√S_u Ψ_u; √S_v Ψ_v]`
+  and `G` likewise (`sigma_system`);
+* `α_m(G* H) = α_m(H G*)` (`alpha_mul_comm`), and each minor obeys
+  `|det (H G*)_K|² ≤ det (H H*)_K · det (G G*)_K` (`norm_det_mul_sq_le`) and Fischer's inequality
+  `det (H H*)_K ≤ det (P_H)_K` with `P_H` the block-diagonal part (`det_le_det_blockMask`);
+  `α_m(P_H) = ∑_p α_p(·) α_{m-p}(·)` (`alpha_fromBlocks_zero`);
+* the interlacing bound `α_p(Ψ* S Ψ) ≤ σ_n^p(w)` (`alpha_conj_diagonal_le`), from the min-max
+  count `λ_i(Ψ* S Ψ) ≤ s_i(w)` (`eigenvalues₀_le_of_conj_diagonal`), replaces Prop. 3.
+
+Not formalised: real scalars (the matrix lemmas are over `ℂ`; the cases `m ≤ 2` above hold over
+`ℝ` too), Prop. 3 as a supremum, and compact operators on Hilbert spaces.
+-/
+
+namespace Grothendieck.Folder1
+
+open Finset Module InnerProductSpace Matrix Polynomial
+open scoped MatrixOrder ComplexOrder ComplexConjugate
+
+section SigmaSystemMatrix
+
+variable {n : Type*} [Fintype n] [DecidableEq n]
+
+/-- `α_k(A B) = α_k(B A)` for rectangular `A`, `B` (Sylvester's determinant identity). -/
+theorem alpha_mul_comm {o : Type*} [Fintype o] [DecidableEq o] (A : Matrix n o ℂ)
+    (B : Matrix o n ℂ) (k : ℕ) : alpha k (A * B) = alpha k (B * A) := by
+  simp only [alpha, Matrix.map_mul]
+  rw [← Matrix.smul_mul, det_one_add_mul_comm, Matrix.mul_smul]
+
+/-- `α_k` of a block-diagonal matrix: `α_k(P ⊕ Q) = ∑_{p ≤ k} α_p(P) α_{k-p}(Q)`. -/
+theorem alpha_fromBlocks_zero {o : Type*} [Fintype o] [DecidableEq o] (P : Matrix n n ℂ)
+    (Q : Matrix o o ℂ) (k : ℕ) :
+    alpha k (fromBlocks P 0 0 Q) = ∑ p ∈ range (k + 1), alpha p P * alpha (k - p) Q := by
+  have h : (1 : Matrix (n ⊕ o) (n ⊕ o) ℂ[X]) + (X : ℂ[X]) • (fromBlocks P 0 0 Q).map C =
+      fromBlocks (1 + (X : ℂ[X]) • P.map C) 0 0 (1 + (X : ℂ[X]) • Q.map C) := by
+    rw [fromBlocks_map, fromBlocks_smul, ← fromBlocks_one, fromBlocks_add]
+    simp
+  simp only [alpha, h, det_fromBlocks_zero₂₁, coeff_mul]
+  exact Finset.Nat.sum_antidiagonal_eq_sum_range_succ
+    (fun i j => (det (1 + (X : ℂ[X]) • P.map C)).coeff i *
+      (det (1 + (X : ℂ[X]) • Q.map C)).coeff j) k
+
+/-- **Fischer's inequality** for a positive semidefinite block matrix:
+`det [[A, B], [B*, D]] ≤ det A · det D`. -/
+theorem det_fromBlocks_le {o : Type*} [Fintype o] [DecidableEq o] {A : Matrix n n ℂ}
+    {B : Matrix n o ℂ} {D : Matrix o o ℂ} (h : (fromBlocks A B Bᴴ D).PosSemidef) :
+    det (fromBlocks A B Bᴴ D) ≤ det A * det D := by
+  have hA : A.PosSemidef := by
+    have := h.submatrix Sum.inl
+    rwa [show (fromBlocks A B Bᴴ D).submatrix Sum.inl Sum.inl = A by ext; rfl] at this
+  have hD : D.PosSemidef := by
+    have := h.submatrix Sum.inr
+    rwa [show (fromBlocks A B Bᴴ D).submatrix Sum.inr Sum.inr = D by ext; rfl] at this
+  by_cases hA0 : det A = 0
+  · obtain ⟨v, hv, hAv⟩ := exists_mulVec_eq_zero_iff.2 hA0
+    have hw : star (Sum.elim v 0) ⬝ᵥ (fromBlocks A B Bᴴ D *ᵥ Sum.elim v 0) = 0 := by
+      simp [fromBlocks_mulVec, hAv, dotProduct, Fintype.sum_sum_type]
+    have hMw := (h.dotProduct_mulVec_zero_iff).1 hw
+    have : det (fromBlocks A B Bᴴ D) = 0 :=
+      exists_mulVec_eq_zero_iff.1 ⟨Sum.elim v 0, fun h0 => hv (by
+        ext i; simpa using congrFun h0 (Sum.inl i)), hMw⟩
+    rw [this, hA0, zero_mul]
+  have hAd : A.PosDef := hA.posDef_iff_det_ne_zero.2 hA0
+  have : Invertible A := invertibleOfIsUnitDet A (isUnit_iff_ne_zero.2 hA0)
+  have hschur : (D - Bᴴ * A⁻¹ * B).PosSemidef := (PosDef.fromBlocks₁₁ B D hAd).1 h
+  have hS : (Bᴴ * A⁻¹ * B).PosSemidef := hAd.inv.posSemidef.conjTranspose_mul_mul_same B
+  have hle := det_le_det_add hS hschur
+  rw [add_sub_cancel] at hle
+  rw [det_fromBlocks₁₁, invOf_eq_nonsing_inv]
+  exact mul_le_mul_of_nonneg_left hle hA.det_nonneg
+
+/-- The block-diagonal part of a matrix along a predicate `c` on the indices. -/
+def blockMask (c : n → Prop) [DecidablePred c] (M : Matrix n n ℂ) : Matrix n n ℂ :=
+  of fun i j => if (c i ↔ c j) then M i j else 0
+
+/-- **Fischer's inequality**, in mask form: `det M ≤ det (blockMask c M)` for `M ≥ 0`. -/
+theorem det_le_det_blockMask (c : n → Prop) [DecidablePred c] {M : Matrix n n ℂ}
+    (hM : M.PosSemidef) : det M ≤ det (blockMask c M) := by
+  set e : n ≃ {i // c i} ⊕ {i // ¬ c i} := (Equiv.sumCompl c).symm
+  have h1 : reindex e e M = fromBlocks (toBlocks₁₁ (reindex e e M)) (toBlocks₁₂ (reindex e e M))
+      (toBlocks₁₂ (reindex e e M))ᴴ (toBlocks₂₂ (reindex e e M)) := by
+    conv_lhs => rw [← fromBlocks_toBlocks (reindex e e M)]
+    congr 1
+    ext i j
+    simpa [toBlocks₂₁, toBlocks₁₂, e] using (congrFun (congrFun hM.1 i.1) j.1).symm
+  have h2 : reindex e e (blockMask c M) =
+      fromBlocks (toBlocks₁₁ (reindex e e M)) 0 0 (toBlocks₂₂ (reindex e e M)) := by
+    ext (i | i) (j | j) <;> simp [blockMask, e, i.2, j.2, toBlocks₁₁, toBlocks₂₂]
+  have hP : (reindex e e M).PosSemidef := hM.submatrix e.symm
+  rw [h1] at hP
+  rw [← det_reindex_self e M, ← det_reindex_self e (blockMask c M), h2, det_fromBlocks_zero₂₁,
+    h1]
+  exact det_fromBlocks_le hP
+
+/-- The determinant form of the Cauchy–Schwarz inequality:
+`|det (X Y)|² ≤ det (X X*) · det (Y* Y)`. -/
+theorem norm_det_mul_sq_le {o : Type*} [Fintype o] (X : Matrix n o ℂ) (Y : Matrix o n ℂ) :
+    ‖det (X * Y)‖ ^ 2 ≤ (det (X * Xᴴ)).re * (det (Yᴴ * Y)).re := by
+  have hW := posSemidef_self_mul_conjTranspose (fromRows X Yᴴ)
+  rw [conjTranspose_fromRows_eq_fromCols_conjTranspose, fromRows_mul_fromCols,
+    conjTranspose_conjTranspose] at hW
+  have hW' : (fromBlocks (X * Xᴴ) (Yᴴ * Xᴴ)ᴴ (Yᴴ * Xᴴ) (Yᴴ * Y)).PosSemidef := by
+    rwa [conjTranspose_mul, conjTranspose_conjTranspose, conjTranspose_conjTranspose]
+  have h := norm_det_sq_le hW'
+  have ha := (posSemidef_self_mul_conjTranspose X).det_nonneg
+  have hb := (posSemidef_conjTranspose_mul_self Y).det_nonneg
+  have h' := (Complex.le_def.1 h).1
+  rw [Complex.ofReal_re, Complex.mul_re, ← (Complex.nonneg_iff.1 ha).2,
+    ← (Complex.nonneg_iff.1 hb).2, ← conjTranspose_mul, det_conjTranspose, norm_star] at h'
+  simpa using h'
+
+end SigmaSystemMatrix
+
+section Interlacing
+
+variable {d : ℕ}
+
+/-- The quadratic form of `Ψ* D Ψ`, `D = diag(s)`: `⟪z, Ψ* D Ψ z⟫ = ∑_k s_k |(Ψ z)_k|²`. -/
+theorem inner_toEuclideanLin_conj_diagonal (s : ℕ → ℝ) (Ψ : Matrix (Fin d) (Fin d) ℂ)
+    (z : EuclideanSpace ℂ (Fin d)) :
+    ⟪z, toEuclideanLin (Ψᴴ * diagonal (fun k : Fin d => ((s k : ℝ) : ℂ)) * Ψ) z⟫_ℂ =
+      ∑ k : Fin d, ((s k * ‖(Ψ *ᵥ z) k‖ ^ 2 : ℝ) : ℂ) := by
+  rw [EuclideanSpace.inner_eq_star_dotProduct, toLpLin_apply]
+  rw [← mulVec_mulVec, ← mulVec_mulVec, dotProduct_comm, dotProduct_mulVec, ← star_mulVec]
+  simp only [dotProduct, mulVec_diagonal, Pi.star_apply]
+  refine sum_congr rfl fun k _ => ?_
+  rw [Complex.ofReal_mul, Complex.ofReal_pow, ← Complex.mul_conj', Complex.star_def]
+  ring
+
+
+/-- **Cauchy interlacing, in the form needed for (16).** Let `s` be antitone and `≥ 0`, and `Ψ` a
+matrix with `‖Ψ z‖² ≤ ∑_{j < N} |z_j|²`. Then the `i`-th largest eigenvalue of `Ψ* diag(s) Ψ` is
+at most `s_i` if `i < N`, and is `0` otherwise. The proof is the min-max dimension count: a
+nonzero `z` orthogonal to the eigenvectors after `i` and killed by the first `i` coordinates of
+`Ψ` exists. -/
+theorem eigenvalues₀_le_of_conj_diagonal (s : ℕ → ℝ) (hs : Antitone s) (hs0 : ∀ k, 0 ≤ s k)
+    (N : ℕ) (Ψ : Matrix (Fin d) (Fin d) ℂ)
+    (hΨ : ∀ z : Fin d → ℂ, ∑ k, ‖(Ψ *ᵥ z) k‖ ^ 2 ≤
+      ∑ j ∈ univ.filter (fun j : Fin d => (j : ℕ) < N), ‖z j‖ ^ 2)
+    (hA : (Ψᴴ * diagonal (fun k : Fin d => ((s k : ℝ) : ℂ)) * Ψ).IsHermitian)
+    (i : Fin (Fintype.card (Fin d))) :
+    hA.eigenvalues₀ i ≤ if (i : ℕ) < N then s i else 0 := by
+  set A := Ψᴴ * diagonal (fun k : Fin d => ((s k : ℝ) : ℂ)) * Ψ with hAdef
+  set T := toEuclideanLin A
+  have hT : T.IsSymmetric := isSymmetric_toEuclideanLin_iff.mpr hA
+  have hn : finrank ℂ (EuclideanSpace ℂ (Fin d)) = Fintype.card (Fin d) := finrank_euclideanSpace
+  set b := hT.eigenvectorBasis hn
+  set lam := hT.eigenvalues hn
+  have hlam : hA.eigenvalues₀ = lam := rfl
+  have hanti : Antitone lam := hT.eigenvalues_antitone hn
+  have hform : ∀ z, ⟪z, T z⟫_ℂ = ∑ l, ((lam l * ‖⟪b l, z⟫_ℂ‖ ^ 2 : ℝ) : ℂ) := by
+    intro z
+    rw [← b.sum_inner_mul_inner z (T z)]
+    refine sum_congr rfl fun l _ => ?_
+    rw [← hT, hT.apply_eigenvectorBasis, inner_smul_left, ← inner_conj_symm z (b l)]
+    rw [Complex.ofReal_mul, Complex.ofReal_pow, ← Complex.mul_conj']
+    simp only [RCLike.conj_ofReal, lam, b]
+    rw [show ∀ a b c : ℂ, a * (b * c) = b * (c * a) from fun a b c => by ring]
+    rfl
+  -- the linear conditions
+  let ι' := {l : Fin (Fintype.card (Fin d)) // i < l} ⊕ {k : Fin d // (k : ℕ) < i}
+  let e := (WithLp.linearEquiv 2 ℂ (Fin d → ℂ)).toLinearMap
+  let φ : ι' → EuclideanSpace ℂ (Fin d) →ₗ[ℂ] ℂ := Sum.elim (fun l => innerₛₗ ℂ (b l.1))
+    (fun k => if (i : ℕ) < N then LinearMap.proj k.1 ∘ₗ Ψ.mulVecLin ∘ₗ e
+      else LinearMap.proj k.1 ∘ₗ e)
+  have hcard : Fintype.card ι' < Fintype.card (Fin d) := by
+    have h1 : Fintype.card {l : Fin (Fintype.card (Fin d)) // i < l} ≤
+        Fintype.card (Fin d) - 1 - i := by
+      refine (Fintype.card_le_of_injective (fun l => (⟨l.1 - i - 1, by omega⟩ :
+        Fin (Fintype.card (Fin d) - 1 - i))) fun a b h => ?_).trans (by simp)
+      have h' : (a.1 : ℕ) - i - 1 = b.1 - i - 1 := by simpa using congrArg Fin.val h
+      have ha : (i : ℕ) < a.1 := a.2
+      have hb : (i : ℕ) < b.1 := b.2
+      exact Subtype.ext (Fin.ext (by omega))
+    have h2 : Fintype.card {k : Fin d // (k : ℕ) < i} ≤ i := by
+      refine (Fintype.card_le_of_injective (fun k => (⟨k.1, k.2⟩ : Fin i)) fun a b h => ?_).trans
+        (by simp)
+      exact Subtype.ext (Fin.ext (by simpa using congrArg Fin.val h))
+    have := i.2
+    simp only [ι', Fintype.card_sum]
+    omega
+  have hker : LinearMap.ker (LinearMap.pi φ) ≠ ⊥ := LinearMap.ker_ne_bot_of_finrank_lt (by
+    rw [Module.finrank_fintype_fun_eq_card, hn]; exact hcard)
+  obtain ⟨z, hzker, hz0⟩ := Submodule.exists_mem_ne_zero_of_ne_bot hker
+  have hz : ∀ x, φ x z = 0 := fun x => by
+    have := congrFun (LinearMap.mem_ker.1 hzker) x
+    simpa using this
+  have hz1 : ∀ l, i < l → ⟪b l, z⟫_ℂ = 0 := fun l hl => by
+    simpa [φ] using hz (Sum.inl ⟨l, hl⟩)
+  have hz2 : ∀ k : Fin d, (k : ℕ) < i →
+      (if (i : ℕ) < N then (Ψ *ᵥ z) k else z k) = 0 := fun k hk => by
+    have := hz (Sum.inr ⟨k, hk⟩)
+    split_ifs at this ⊢ <;> simpa [φ, e, *] using this
+  -- the two bounds on `⟪z, T z⟫`
+  have hznorm : ‖z‖ ^ 2 = ∑ j, ‖z j‖ ^ 2 := EuclideanSpace.norm_sq_eq z
+  have hlow : lam i * ‖z‖ ^ 2 ≤ (⟪z, T z⟫_ℂ).re := by
+    rw [hform, Complex.re_sum, ← b.sum_sq_norm_inner_right z, mul_sum]
+    refine sum_le_sum fun l _ => ?_
+    simp only [Complex.ofReal_re]
+    rcases le_or_gt l i with h | h
+    · exact mul_le_mul_of_nonneg_right (hanti h) (by positivity)
+    · rw [hz1 l h]; simp
+  have hup : (⟪z, T z⟫_ℂ).re ≤ (if (i : ℕ) < N then s i else 0) * ‖z‖ ^ 2 := by
+    rw [inner_toEuclideanLin_conj_diagonal, Complex.re_sum]
+    simp only [Complex.ofReal_re]
+    have hb := hΨ z
+    split_ifs with hiN
+    · calc ∑ k : Fin d, s k * ‖(Ψ *ᵥ z) k‖ ^ 2 ≤ ∑ k : Fin d, s i * ‖(Ψ *ᵥ z) k‖ ^ 2 := by
+            refine sum_le_sum fun k _ => ?_
+            rcases lt_or_ge (k : ℕ) i with h | h
+            · have := hz2 k h; simp only [hiN, ↓reduceIte] at this; rw [this]; simp
+            · exact mul_le_mul_of_nonneg_right (hs h) (by positivity)
+        _ = s i * ∑ k : Fin d, ‖(Ψ *ᵥ z) k‖ ^ 2 := by rw [mul_sum]
+        _ ≤ s i * ‖z‖ ^ 2 := by
+            refine mul_le_mul_of_nonneg_left (hb.trans ?_) (hs0 _)
+            rw [hznorm]
+            exact sum_le_sum_of_subset_of_nonneg (filter_subset _ _) fun _ _ _ => by positivity
+    · have h0 : ∑ j ∈ univ.filter (fun j : Fin d => (j : ℕ) < N), ‖z j‖ ^ 2 = 0 :=
+        sum_eq_zero fun j hj => by
+          have hj' : (j : ℕ) < i := by simp at hj; omega
+          have := hz2 j hj'; simp only [hiN, ↓reduceIte] at this; rw [this]; simp
+      rw [h0] at hb
+      have hw : ∀ k, ‖(Ψ *ᵥ z) k‖ ^ 2 = 0 := fun k =>
+        le_antisymm ((single_le_sum (fun k _ => by positivity) (mem_univ k)).trans hb)
+          (by positivity)
+      simp [hw]
+  have hzpos : 0 < ‖z‖ ^ 2 := by positivity
+  rw [hlam]
+  exact le_of_mul_le_mul_right (hlow.trans hup) hzpos
+
+/-- Reindexing a sum of products over the `p`-subsets along an equivalence. -/
+theorem sum_powersetCard_prod_equiv {α β R : Type*} [Fintype α] [Fintype β] [DecidableEq β]
+    [CommSemiring R] (σ : α ≃ β) (f : β → R) (p : ℕ) :
+    ∑ K ∈ (univ : Finset α).powersetCard p, ∏ i ∈ K, f (σ i) =
+      ∑ K ∈ (univ : Finset β).powersetCard p, ∏ j ∈ K, f j := by
+  rw [← map_univ_equiv σ, powersetCard_map, sum_map]
+  refine sum_congr rfl fun K _ => ?_
+  simp [prod_map]
+
+/-- Sums of products over the `p`-subsets of `Fin c` are sums over the `p`-subsets of
+`range c`. -/
+theorem sum_powersetCard_fin (c p : ℕ) {R : Type*} [CommSemiring R] (g : ℕ → R) :
+    ∑ K ∈ (univ : Finset (Fin c)).powersetCard p, ∏ j ∈ K, g j =
+      ∑ t ∈ (range c).powersetCard p, ∏ i ∈ t, g i := by
+  rw [← Nat.Iio_eq_range, ← Fin.map_valEmbedding_univ, powersetCard_map, sum_map]
+  refine sum_congr rfl fun K _ => ?_
+  simp [prod_map]
+
+
+/-- Comparing sums of products over `p`-subsets: if `f` vanishes on `A \ B` and agrees with
+`g ≥ 0` on `A ∩ B`, then `∑_{t ⊆ A} ∏_t f ≤ ∑_{t ⊆ B} ∏_t g`. -/
+theorem sum_powersetCard_prod_le {A B : Finset ℕ} {f g : ℕ → ℝ} (p : ℕ)
+    (hg : ∀ i ∈ B, 0 ≤ g i) (hf : ∀ i ∈ A, i ∉ B → f i = 0)
+    (hfg : ∀ i ∈ A, i ∈ B → f i = g i) :
+    ∑ t ∈ A.powersetCard p, ∏ i ∈ t, f i ≤ ∑ t ∈ B.powersetCard p, ∏ i ∈ t, g i := by
+  calc ∑ t ∈ A.powersetCard p, ∏ i ∈ t, f i
+      = ∑ t ∈ (A.powersetCard p).filter (· ⊆ B), ∏ i ∈ t, f i := by
+        rw [sum_filter_of_ne]
+        intro t ht hne
+        by_contra hsub
+        obtain ⟨i, hit, hiB⟩ := not_subset.1 hsub
+        exact hne (prod_eq_zero hit (hf i ((mem_powersetCard.1 ht).1 hit) hiB))
+    _ = ∑ t ∈ (A.powersetCard p).filter (· ⊆ B), ∏ i ∈ t, g i := by
+        refine sum_congr rfl fun t ht => prod_congr rfl fun i hi => ?_
+        rw [mem_filter, mem_powersetCard] at ht
+        exact hfg i (ht.1.1 hi) (ht.2 hi)
+    _ ≤ ∑ t ∈ B.powersetCard p, ∏ i ∈ t, g i := by
+        refine sum_le_sum_of_subset_of_nonneg ?_ fun t ht _ =>
+          prod_nonneg fun i hi => hg i ((mem_powersetCard.1 ht).1 hi)
+        intro t ht
+        rw [mem_filter, mem_powersetCard] at ht
+        exact mem_powersetCard.2 ⟨ht.2, ht.1.2⟩
+
+/-- `α_p` of a diagonal matrix is the `p`-th elementary symmetric function of its entries. -/
+theorem alpha_diagonal {n : Type*} [Fintype n] [DecidableEq n] (μ : n → ℂ) (p : ℕ) :
+    alpha p (diagonal μ) = ∑ K ∈ (univ : Finset n).powersetCard p, ∏ i ∈ K, μ i := by
+  rw [alpha_eq_sum_minors]
+  refine sum_congr rfl fun K _ => ?_
+  rw [submatrix_diagonal _ _ Subtype.val_injective, det_diagonal]
+  exact prod_coe_sort K μ
+
+/-- `α_p` of a Hermitian matrix is the `p`-th elementary symmetric function of its eigenvalues. -/
+theorem alpha_eq_sum_eigenvalues {n : Type*} [Fintype n] [DecidableEq n] {A : Matrix n n ℂ}
+    (hA : A.IsHermitian) (p : ℕ) :
+    alpha p A = ∑ K ∈ (univ : Finset n).powersetCard p, ∏ i ∈ K, ((hA.eigenvalues i : ℝ) : ℂ) := by
+  conv_lhs => rw [hA.spectral_theorem, Unitary.conjStarAlgAut_apply, mul_assoc, alpha_mul_comm,
+    mul_assoc, Unitary.coe_star_mul_self, mul_one, alpha_diagonal]
+  rfl
+
+/-- **The interlacing bound.** For `s` antitone and `≥ 0` and `Ψ` with
+`‖Ψ z‖² ≤ ∑_{j < N} |z_j|²`, `α_p(Ψ* diag(s) Ψ) ≤ e_p(s_0, …, s_{N-1})`. -/
+theorem alpha_conj_diagonal_le (s : ℕ → ℝ) (hs : Antitone s) (hs0 : ∀ k, 0 ≤ s k)
+    (N : ℕ) (Ψ : Matrix (Fin d) (Fin d) ℂ)
+    (hΨ : ∀ z : Fin d → ℂ, ∑ k, ‖(Ψ *ᵥ z) k‖ ^ 2 ≤
+      ∑ j ∈ univ.filter (fun j : Fin d => (j : ℕ) < N), ‖z j‖ ^ 2) (p : ℕ) :
+    (alpha p (Ψᴴ * diagonal (fun k : Fin d => ((s k : ℝ) : ℂ)) * Ψ)).re ≤
+      ∑ t ∈ (range N).powersetCard p, ∏ i ∈ t, s i := by
+  set A := Ψᴴ * diagonal (fun k : Fin d => ((s k : ℝ) : ℂ)) * Ψ
+  have hPSD : A.PosSemidef := by
+    refine PosSemidef.conjTranspose_mul_mul_same ?_ Ψ
+    refine (posSemidef_diagonal_iff).2 fun k => ?_
+    exact_mod_cast hs0 k
+  have hA := hPSD.1
+  set g : ℕ → ℝ := fun k => if k < N then s k else 0
+  set σ := (Fintype.equivOfCardEq (Fintype.card_fin _) :
+    Fin (Fintype.card (Fin d)) ≃ Fin d).symm
+  have hev : ∀ i, hA.eigenvalues i = hA.eigenvalues₀ (σ i) := fun i => rfl
+  have hle : ∀ i, hA.eigenvalues i ≤ g (σ i) := fun i => by
+    rw [hev]; exact eigenvalues₀_le_of_conj_diagonal s hs hs0 N Ψ hΨ hA (σ i)
+  rw [alpha_eq_sum_eigenvalues hA, Complex.re_sum]
+  calc ∑ K ∈ (univ : Finset (Fin d)).powersetCard p,
+        (∏ i ∈ K, ((hA.eigenvalues i : ℝ) : ℂ)).re
+      = ∑ K ∈ (univ : Finset (Fin d)).powersetCard p, ∏ i ∈ K, hA.eigenvalues i := by
+        refine sum_congr rfl fun K _ => ?_
+        rw [← Complex.ofReal_prod, Complex.ofReal_re]
+    _ ≤ ∑ K ∈ (univ : Finset (Fin d)).powersetCard p, ∏ i ∈ K, g (σ i) :=
+        sum_le_sum fun K _ => prod_le_prod₀ (fun i _ => hPSD.eigenvalues_nonneg i)
+          fun i _ => hle i
+    _ = ∑ t ∈ (range (Fintype.card (Fin d))).powersetCard p, ∏ i ∈ t, g i := by
+        rw [sum_powersetCard_prod_equiv σ (fun j => g j), sum_powersetCard_fin]
+    _ ≤ ∑ t ∈ (range N).powersetCard p, ∏ i ∈ t, s i :=
+        sum_powersetCard_prod_le p (fun i _ => hs0 i)
+          (fun i _ hi => by simp [g, mem_range.not.1 hi])
+          (fun i _ hi => by simp [g, mem_range.1 hi])
+
+end Interlacing
+
+section Assembly
+
+variable {ι : Type*} [Fintype ι] [DecidableEq ι]
+
+omit [DecidableEq ι] in
+/-- The block-diagonal part of `[A; B] [A; B]*` is `A A* ⊕ B B*`. -/
+theorem blockMask_fromRows_mul (A B : Matrix ι ι ℂ) :
+    blockMask (fun i : ι ⊕ ι => i.isLeft = true) (fromRows A B * (fromRows A B)ᴴ) =
+      fromBlocks (A * Aᴴ) 0 0 (B * Bᴴ) := by
+  rw [conjTranspose_fromRows_eq_fromCols_conjTranspose, fromRows_mul_fromCols]
+  ext (i | i) (j | j) <;> simp [blockMask]
+
+/-- **The Cauchy–Schwarz–Fischer step**: for `H, G` with rows indexed by `ι ⊕ ι`,
+`|α_m(H G*)| ≤ √α_m(P_H) · √α_m(P_G)`, where `P_H` is the block-diagonal part of `H H*`. -/
+theorem norm_alpha_mul_conjTranspose_le (H G : Matrix (ι ⊕ ι) ι ℂ) (m : ℕ) :
+    ‖alpha m (H * Gᴴ)‖ ≤
+      √(alpha m (blockMask (fun i : ι ⊕ ι => i.isLeft = true) (H * Hᴴ))).re *
+        √(alpha m (blockMask (fun i : ι ⊕ ι => i.isLeft = true) (G * Gᴴ))).re := by
+  set c : ι ⊕ ι → Prop := fun i => i.isLeft = true
+  have key : ∀ (X : Matrix (ι ⊕ ι) ι ℂ) (K : Finset (ι ⊕ ι)),
+      0 ≤ (det ((X * Xᴴ).submatrix (Subtype.val : K → ι ⊕ ι) Subtype.val)).re ∧
+      (det ((X * Xᴴ).submatrix (Subtype.val : K → ι ⊕ ι) Subtype.val)).re ≤
+        (det ((blockMask c (X * Xᴴ)).submatrix (Subtype.val : K → ι ⊕ ι) Subtype.val)).re := by
+    intro X K
+    have hP := (posSemidef_self_mul_conjTranspose X).submatrix (Subtype.val : K → ι ⊕ ι)
+    have h := det_le_det_blockMask (fun i : K => c i.1) hP
+    refine ⟨(Complex.nonneg_iff.1 hP.det_nonneg).1, ?_⟩
+    have h' := (Complex.le_def.1 h).1
+    convert h' using 3
+    ext; rfl
+  rw [alpha_eq_sum_minors, alpha_eq_sum_minors, alpha_eq_sum_minors, Complex.re_sum,
+    Complex.re_sum]
+  refine (norm_sum_le _ _).trans ((sum_le_sum fun K _ => ?_).trans
+    (Real.sum_sqrt_mul_sqrt_le _ (fun K => (key H K).1.trans (key H K).2)
+      (fun K => (key G K).1.trans (key G K).2)))
+  have hcs := norm_det_mul_sq_le (H.submatrix (Subtype.val : K → ι ⊕ ι) id)
+    (Gᴴ.submatrix id (Subtype.val : K → ι ⊕ ι))
+  have e : ∀ X : Matrix (ι ⊕ ι) ι ℂ, X.submatrix (Subtype.val : K → ι ⊕ ι) id *
+      (X.submatrix (Subtype.val : K → ι ⊕ ι) id)ᴴ = (X * Xᴴ).submatrix Subtype.val Subtype.val :=
+    fun X => by rw [conjTranspose_submatrix, ← submatrix_mul _ _ _ id _ Function.bijective_id]
+  rw [← submatrix_mul _ _ _ id _ Function.bijective_id, e, ← conjTranspose_submatrix,
+    conjTranspose_conjTranspose, e] at hcs
+  rw [← Real.sqrt_mul ((key H K).1.trans (key H K).2)]
+  refine Real.le_sqrt_of_sq_le (hcs.trans ?_)
+  exact mul_le_mul (key H K).2 (key G K).2 (key G K).1 ((key H K).1.trans (key H K).2)
+
+/-- With `α_p(A A*) ≤ a_p` and `α_p(B B*) ≤ b_p`, the block-diagonal part `P` of `[A; B][A; B]*`
+has `α_m(P) ≤ ∑_{p ≤ m} a_p b_{m-p}`. -/
+theorem re_alpha_blockMask_le (A B : Matrix ι ι ℂ) (a b : ℕ → ℝ)
+    (ha : ∀ p, (alpha p (A * Aᴴ)).re ≤ a p) (hb : ∀ p, (alpha p (B * Bᴴ)).re ≤ b p) (m : ℕ) :
+    (alpha m (blockMask (fun i : ι ⊕ ι => i.isLeft = true) (fromRows A B * (fromRows A B)ᴴ))).re
+      ≤ ∑ p ∈ range (m + 1), a p * b (m - p) := by
+  rw [blockMask_fromRows_mul, alpha_fromBlocks_zero, Complex.re_sum]
+  refine sum_le_sum fun p _ => ?_
+  have h1 := Complex.nonneg_iff.1 (alpha_nonneg (posSemidef_self_mul_conjTranspose A) p)
+  have h2 := Complex.nonneg_iff.1 (alpha_nonneg (posSemidef_self_mul_conjTranspose B) (m - p))
+  rw [Complex.mul_re, ← h1.2, zero_mul, sub_zero]
+  exact mul_le_mul (ha p) (hb _) h2.1 (h1.1.trans (ha p))
+
+end Assembly
+
+section SigmaSystem
+
+variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E] [FiniteDimensional ℂ E]
+  {F : Type*} [NormedAddCommGroup F] [InnerProductSpace ℂ F] [FiniteDimensional ℂ F]
+
+/-- The Gram-type matrix `(⟪g_k, h_j⟫)_{k,j}` of two families. -/
+noncomputable def gramMat {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] {d : ℕ}
+    (g h : Fin d → H) : Matrix (Fin d) (Fin d) ℂ :=
+  of fun k j => ⟪g k, h j⟫_ℂ
+
+/-- If `(g_k)` and `(h_j)` are pairwise orthogonal of norm `≤ 1` and `h_j = 0` for `j ≥ N`, then
+`‖(⟪g_k, h_j⟫) z‖² ≤ ∑_{j < N} |z_j|²`. -/
+theorem gramMat_bound {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] {d : ℕ}
+    (g h : Fin d → H) (hg : ∀ k l, k ≠ l → ⟪g k, g l⟫_ℂ = 0) (hg1 : ∀ k, ‖g k‖ ≤ 1)
+    (hh : ∀ j l, j ≠ l → ⟪h j, h l⟫_ℂ = 0) (hh1 : ∀ j, ‖h j‖ ≤ 1) (N : ℕ)
+    (hN : ∀ j : Fin d, N ≤ j → h j = 0) (z : Fin d → ℂ) :
+    ∑ k, ‖(gramMat g h *ᵥ z) k‖ ^ 2 ≤
+      ∑ j ∈ univ.filter (fun j : Fin d => (j : ℕ) < N), ‖z j‖ ^ 2 := by
+  set w : H := ∑ j, z j • h j
+  have hmv : ∀ k, (gramMat g h *ᵥ z) k = ⟪g k, w⟫_ℂ := fun k => by
+    simp only [mulVec, dotProduct, gramMat, of_apply, w, inner_sum, inner_smul_right, mul_comm]
+  simp only [hmv]
+  refine (sum_norm_inner_sq_le univ g (fun k _ l _ hkl => hg k l hkl) (fun k _ => hg1 k) w).trans ?_
+  have hw : ‖w‖ ^ 2 = ∑ j, ‖z j‖ ^ 2 * ‖h j‖ ^ 2 := by
+    rw [← @inner_self_eq_norm_sq ℂ, sum_inner, map_sum]
+    refine sum_congr rfl fun j _ => ?_
+    rw [inner_sum, sum_eq_single j (fun l _ hlj => by
+      rw [inner_smul_left, inner_smul_right, hh j l (Ne.symm hlj), mul_zero, mul_zero])
+      (fun h => absurd (mem_univ j) h), inner_smul_left, inner_smul_right, ← mul_assoc,
+      RCLike.conj_mul, inner_self_eq_norm_sq_to_K]
+    norm_cast
+  rw [hw, sum_filter]
+  refine sum_le_sum fun j _ => ?_
+  split_ifs with hj
+  · exact mul_le_of_le_one_right (by positivity) (pow_le_one₀ (norm_nonneg _) (hh1 j))
+  · rw [hN j (not_lt.1 hj)]; simp
+
+/-- The first `n` right Schmidt vectors of `T`, completed by zeros. -/
+noncomputable def xs (T : E →ₗ[ℂ] F) (n : ℕ) (j : Fin (finrank ℂ E)) : E :=
+  if (j : ℕ) < n then ebasis T j else 0
+
+/-- The first `n` left Schmidt vectors of `T`, completed by zeros. -/
+noncomputable def ys (T : E →ₗ[ℂ] F) (n : ℕ) (j : Fin (finrank ℂ E)) : F :=
+  if (j : ℕ) < n then fvec T j else 0
+
+theorem inner_ebasis_of_ne (T : E →ₗ[ℂ] F) {k l : Fin (finrank ℂ E)} (h : k ≠ l) :
+    ⟪ebasis T k, ebasis T l⟫_ℂ = 0 := (ebasis T).orthonormal.2 h
+
+theorem norm_ebasis_le (T : E →ₗ[ℂ] F) (k : Fin (finrank ℂ E)) : ‖ebasis T k‖ ≤ 1 :=
+  ((ebasis T).orthonormal.1 k).le
+
+theorem inner_xs_of_ne (T : E →ₗ[ℂ] F) (n : ℕ) {k l : Fin (finrank ℂ E)} (h : k ≠ l) :
+    ⟪xs T n k, xs T n l⟫_ℂ = 0 := by
+  unfold xs; split_ifs <;> simp [inner_ebasis_of_ne T h]
+
+theorem norm_xs_le (T : E →ₗ[ℂ] F) (n : ℕ) (k : Fin (finrank ℂ E)) : ‖xs T n k‖ ≤ 1 := by
+  unfold xs; split_ifs; exacts [norm_ebasis_le T k, by simp]
+
+theorem inner_ys_of_ne (T : E →ₗ[ℂ] F) (n : ℕ) {k l : Fin (finrank ℂ E)} (h : k ≠ l) :
+    ⟪ys T n k, ys T n l⟫_ℂ = 0 := by
+  unfold ys; split_ifs <;> simp [inner_fvec_of_ne T h]
+
+theorem norm_ys_le (T : E →ₗ[ℂ] F) (n : ℕ) (k : Fin (finrank ℂ E)) : ‖ys T n k‖ ≤ 1 := by
+  unfold ys; split_ifs; exacts [norm_fvec_le T k, by simp]
+
+/-- The compression `(⟪y_i, w x_j⟫)_{i,j}` of `w` to the first `n` Schmidt pairs of `T`. -/
+noncomputable def compr (T w : E →ₗ[ℂ] F) (n : ℕ) :
+    Matrix (Fin (finrank ℂ E)) (Fin (finrank ℂ E)) ℂ :=
+  of fun i j => ⟪ys T n i, w (xs T n j)⟫_ℂ
+
+/-- `diag(√s_k(w))`. -/
+noncomputable def sqrtDiag (w : E →ₗ[ℂ] F) : Matrix (Fin (finrank ℂ E)) (Fin (finrank ℂ E)) ℂ :=
+  diagonal fun k => ((√(w.singularValues k) : ℝ) : ℂ)
+
+/-- `(√S)* √S = S` for `S = diag(s_k(w))`. -/
+theorem sqrtDiag_conj_mul (w : E →ₗ[ℂ] F) :
+    (sqrtDiag w)ᴴ * sqrtDiag w =
+      diagonal (fun k : Fin (finrank ℂ E) => ((w.singularValues k : ℝ) : ℂ)) := by
+  rw [sqrtDiag, diagonal_conjTranspose, diagonal_mul_diagonal]
+  congr 1
+  funext k
+  rw [Pi.star_apply, RCLike.star_def, Complex.conj_ofReal, ← Complex.ofReal_mul,
+    Real.mul_self_sqrt (w.singularValues_nonneg k)]
+
+/-- `⟪a, w b⟫ = ∑_k ⟪a, f_k⟫ s_k ⟪e_k, b⟫`, the Schmidt expansion of `w`. -/
+theorem inner_apply_eq_sum_schmidt (w : E →ₗ[ℂ] F) (a : F) (b : E) :
+    ⟪a, w b⟫_ℂ = ∑ k, ⟪a, fvec w k⟫_ℂ * ((w.singularValues k : ℝ) : ℂ) * ⟪ebasis w k, b⟫_ℂ := by
+  conv_lhs => rw [← (ebasis w).sum_repr' b]
+  rw [map_sum, inner_sum]
+  refine sum_congr rfl fun k _ => ?_
+  rw [map_smul, apply_ebasis_eq, inner_smul_right, inner_smul_right]
+  simp only [RCLike.ofReal_eq_complex_ofReal]
+  ring
+
+/-- **The factorisation** `compr T w = (√S Φ)* (√S Ψ)`, with `Φ = (⟪f_k(w), y_j⟫)`,
+`Ψ = (⟪e_k(w), x_j⟫)` and `S = diag(s_k(w))`. -/
+theorem compr_eq (T w : E →ₗ[ℂ] F) (n : ℕ) :
+    compr T w n = (sqrtDiag w * gramMat (fvec w) (ys T n))ᴴ *
+      (sqrtDiag w * gramMat (ebasis w) (xs T n)) := by
+  rw [conjTranspose_mul, Matrix.mul_assoc, ← Matrix.mul_assoc (sqrtDiag w)ᴴ, sqrtDiag_conj_mul]
+  ext i j
+  rw [mul_apply]
+  simp only [compr, of_apply, diagonal_mul, conjTranspose_apply, gramMat,
+    inner_apply_eq_sum_schmidt]
+  refine sum_congr rfl fun k _ => ?_
+  rw [RCLike.star_def, inner_conj_symm, mul_assoc]
+
+/-- `compr T T n` is the diagonal matrix of `s_j(T)`, `j < n`. -/
+theorem compr_self (T : E →ₗ[ℂ] F) (n : ℕ) :
+    compr T T n = diagonal fun j : Fin (finrank ℂ E) => (((if (j : ℕ) < n then T.singularValues j else 0 : ℝ)) : ℂ) := by
+  ext i j
+  simp only [compr, of_apply, xs, ys, diagonal_apply]
+  by_cases hij : i = j
+  · subst hij
+    by_cases h : (i : ℕ) < n <;> simp [h, inner_fvec_apply_ebasis]
+  · by_cases h1 : (i : ℕ) < n <;> by_cases h2 : (j : ℕ) < n <;>
+      simp [h1, h2, hij, apply_ebasis_eq, inner_fvec_of_ne T hij]
+
+/-- `σ_n^m(T) ≤ Re α_m(compr T T n)` (in fact equal). -/
+theorem sigma_le_alpha_compr (T : E →ₗ[ℂ] F) (n m : ℕ) :
+    sigma n m T ≤ (alpha m (compr T T n)).re := by
+  rw [compr_self, alpha_diagonal, Complex.re_sum]
+  simp only [← Complex.ofReal_prod, Complex.ofReal_re]
+  rw [sum_powersetCard_fin (finrank ℂ E) m
+    (fun j => if j < n then T.singularValues j else 0), sigma]
+  exact sum_powersetCard_prod_le m
+    (fun i _ => by split_ifs; exacts [T.singularValues_nonneg i, le_rfl])
+    (fun i _ hi => T.singularValues_of_finrank_le (by simpa using hi))
+    (fun i hi _ => by simp [mem_range.1 hi])
+
+/-- The interlacing bound for the two factors of `compr T w n`:
+`α_p(√S Ψ (√S Ψ)*) ≤ σ_n^p(w)`. -/
+theorem re_alpha_sqrtDiag_gramMat_le {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H]
+    (w : E →ₗ[ℂ] F) (g h : Fin (finrank ℂ E) → H) (hg : ∀ k l, k ≠ l → ⟪g k, g l⟫_ℂ = 0)
+    (hg1 : ∀ k, ‖g k‖ ≤ 1) (hh : ∀ j l, j ≠ l → ⟪h j, h l⟫_ℂ = 0) (hh1 : ∀ j, ‖h j‖ ≤ 1)
+    (n : ℕ) (hn : ∀ j : Fin (finrank ℂ E), n ≤ j → h j = 0) (p : ℕ) :
+    (alpha p (sqrtDiag w * gramMat g h * (sqrtDiag w * gramMat g h)ᴴ)).re ≤ sigma n p w := by
+  rw [alpha_mul_comm, conjTranspose_mul, Matrix.mul_assoc, ← Matrix.mul_assoc (sqrtDiag w)ᴴ,
+    sqrtDiag_conj_mul, ← Matrix.mul_assoc]
+  exact alpha_conj_diagonal_le (fun k => w.singularValues k) w.singularValues_antitone
+    w.singularValues_nonneg n _ (gramMat_bound g h hg hg1 hh hh1 n hn) p
+
+/-- **The system (16) of page 71**, for every `m` and `n`, for linear maps between
+finite-dimensional complex inner product spaces:
+`σ_n^m(u+v) ≤ ∑_{p=0}^{m} σ_n^p(u) σ_n^{m-p}(v)`. -/
+theorem sigma_system (u v : E →ₗ[ℂ] F) (n m : ℕ) :
+    sigma n m (u + v) ≤ ∑ p ∈ range (m + 1), sigma n p u * sigma n (m - p) v := by
+  set T := u + v
+  set H := fromRows (sqrtDiag u * gramMat (ebasis u) (xs T n))
+    (sqrtDiag v * gramMat (ebasis v) (xs T n))
+  set G := fromRows (sqrtDiag u * gramMat (fvec u) (ys T n))
+    (sqrtDiag v * gramMat (fvec v) (ys T n))
+  have hM : compr T T n = Gᴴ * H := by
+    rw [conjTranspose_fromRows_eq_fromCols_conjTranspose, fromCols_mul_fromRows, ← compr_eq,
+      ← compr_eq]
+    ext i j
+    simp [compr, T]
+  have hxs : ∀ j : Fin (finrank ℂ E), n ≤ j → xs T n j = 0 := fun j hj => by
+    simp [xs, not_lt.2 hj]
+  have hys : ∀ j : Fin (finrank ℂ E), n ≤ j → ys T n j = 0 := fun j hj => by
+    simp [ys, not_lt.2 hj]
+  have bΨ : ∀ (w : E →ₗ[ℂ] F) p, (alpha p (sqrtDiag w * gramMat (ebasis w) (xs T n) *
+      (sqrtDiag w * gramMat (ebasis w) (xs T n))ᴴ)).re ≤ sigma n p w := fun w p =>
+    re_alpha_sqrtDiag_gramMat_le w _ _ (fun _ _ h => inner_ebasis_of_ne w h) (norm_ebasis_le w)
+      (fun _ _ h => inner_xs_of_ne T n h) (norm_xs_le T n) n hxs p
+  have bΦ : ∀ (w : E →ₗ[ℂ] F) p, (alpha p (sqrtDiag w * gramMat (fvec w) (ys T n) *
+      (sqrtDiag w * gramMat (fvec w) (ys T n))ᴴ)).re ≤ sigma n p w := fun w p =>
+    re_alpha_sqrtDiag_gramMat_le w _ _ (fun _ _ h => inner_fvec_of_ne w h) (norm_fvec_le w)
+      (fun _ _ h => inner_ys_of_ne T n h) (norm_ys_le T n) n hys p
+  have hH := re_alpha_blockMask_le _ _ _ _ (bΨ u) (bΨ v) m
+  have hG := re_alpha_blockMask_le _ _ _ _ (bΦ u) (bΦ v) m
+  set R := ∑ p ∈ range (m + 1), sigma n p u * sigma n (m - p) v
+  have hR : 0 ≤ R := sum_nonneg fun p _ => mul_nonneg (sigma_nonneg n p u) (sigma_nonneg n _ v)
+  calc sigma n m T ≤ (alpha m (compr T T n)).re := sigma_le_alpha_compr T n m
+    _ ≤ ‖alpha m (compr T T n)‖ := Complex.re_le_norm _
+    _ = ‖alpha m (H * Gᴴ)‖ := by rw [hM, alpha_mul_comm]
+    _ ≤ _ := norm_alpha_mul_conjTranspose_le H G m
+    _ ≤ √R * √R := mul_le_mul (Real.sqrt_le_sqrt hH) (Real.sqrt_le_sqrt hG)
+        (Real.sqrt_nonneg _) (Real.sqrt_nonneg _)
+    _ = R := Real.mul_self_sqrt hR
+
+/-- **The product form (15) of page 71, for every `n`**: for `r ≥ 0`,
+`∏_{i<n} (1 + r s_i(u+v)) ≤ ∏_{i<n} (1 + r s_i(u)) · ∏_{i<n} (1 + r s_i(v))`. -/
+theorem prod_one_add_singularValues_add_le (u v : E →ₗ[ℂ] F) (n : ℕ) {r : ℝ} (hr : 0 ≤ r) :
+    ∏ i ∈ range n, (1 + r * (u + v).singularValues i) ≤
+      (∏ i ∈ range n, (1 + r * u.singularValues i)) *
+        ∏ i ∈ range n, (1 + r * v.singularValues i) :=
+  prod_le_of_sigma_system u v n (fun m _ => sigma_system u v n m) hr
+
+/-- **Page 129, unconditionally in finite dimension**: for `0 < p < 1`,
+`∑_{i<n} s_i(u+v)^p ≤ ∑_{i<n} s_i(u)^p + ∑_{i<n} s_i(v)^p`. -/
+theorem sum_singularValues_rpow_add_le (u v : E →ₗ[ℂ] F) (n : ℕ) {p : ℝ} (hp0 : 0 < p)
+    (hp1 : p < 1) :
+    ∑ i ∈ range n, (u + v).singularValues i ^ p ≤
+      ∑ i ∈ range n, u.singularValues i ^ p + ∑ i ∈ range n, v.singularValues i ^ p :=
+  sum_singularValues_rpow_add_le_of_prod u v n hp0 hp1 fun _ hr =>
+    prod_one_add_singularValues_add_le u v n hr
+
+end SigmaSystem
+
+end Grothendieck.Folder1

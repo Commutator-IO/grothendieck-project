@@ -338,3 +338,354 @@ theorem proposition [NoetherianSpace X] [QuasiSober X] (hH : ConditionH F) :
 
 end Sheaves
 end Grothendieck.Folder42
+
+/-!
+# Folder 42, pages 1, 2, 5 and 6: réseaux of local rings, Corollaire 3
+
+The modernised reading states (Corollaire 3, the theorem of page 2 with the edition's
+hypothesis « `Y` séparé »):
+
+> Let `S` be locally Noetherian, `X` and `Y` locally of finite type over `S`, `Y` separated over
+> `S`. Then `Hom_S(X, Y) → Hom_{p(S)}(p(X), p(Y))` is bijective.
+
+Proved here as `Reseau.toReseau_bijective` (for `X` locally Noetherian, `Y` locally of finite
+type and separated over an arbitrary `S`) and `Reseau.corollaire3` (the page's hypotheses).
+
+What the proof makes plain. Injectivity (`toReseau_injective`) needs only `X` locally
+Noetherian: neither separatedness nor finite type of `Y` is used, since the réseau datum at `x`
+fixes the composite `Spec 𝒪_{X,x} → Y`, and two morphisms agreeing there agree near `x`.
+Separatedness enters at one place, Lemme 3, in the form `ext_of_injective_of_isSeparated`: two
+`S`-morphisms `Spec 𝒪_{X,x''} → Y` that agree after `Spec 𝒪_{X,x} → Spec 𝒪_{X,x''}`, an
+injective ring map, are equal. Lemme 1 is used for the locus where a spread-out morphism agrees
+with the réseau homomorphism (`isOpen_matches`), on a locally Noetherian scheme rather than a
+Noetherian space. Finite type of `Y` enters only through Mathlib's spreading out
+(`spread_out_of_isGermInjective'`), the limit theorem of EGA IV the reading cites.
+-/
+
+namespace Grothendieck.Folder42.Reseau
+
+open AlgebraicGeometry CategoryTheory Limits Topology TopologicalSpace
+
+universe u
+
+section Topology
+
+variable {T : Type*} [TopologicalSpace T]
+
+/-- The topological step of Lemme 1, for a quasi-sober space covered by Noetherian opens (such
+as a locally Noetherian scheme): it reduces to `isOpen_of_stableUnderGeneralization` on each
+Noetherian open. -/
+theorem isOpen_of_stableUnderGeneralization_of_locally [QuasiSober T]
+    (hT : ∀ x : T, ∃ U : Opens T, x ∈ U ∧ NoetherianSpace U) {E : Set T}
+    (hgen : StableUnderGeneralization E)
+    (hloc : ∀ x ∈ E, ∃ W : Set T, IsOpen W ∧ x ∈ W ∧ W ∩ closure {x} ⊆ E) : IsOpen E := by
+  rw [isOpen_iff_forall_mem_open]
+  intro x hx
+  obtain ⟨U, hxU, hU⟩ := hT x
+  have : QuasiSober U := U.isOpenEmbedding'.quasiSober
+  have hE' : IsOpen (Subtype.val ⁻¹' E : Set U) := by
+    refine isOpen_of_stableUnderGeneralization ?_ ?_
+    · intro a b hab hb
+      exact hgen ((subtype_specializes_iff _ _).1 hab) hb
+    · intro y hy
+      obtain ⟨W, hW, hyW, hWE⟩ := hloc y hy
+      refine ⟨Subtype.val ⁻¹' W, hW.preimage continuous_subtype_val, hyW, ?_⟩
+      rintro z ⟨hzW, hzc⟩
+      refine hWE ⟨hzW, ?_⟩
+      rw [← specializes_iff_mem_closure] at hzc ⊢
+      exact (subtype_specializes_iff _ _).1 hzc
+  refine ⟨Subtype.val '' (Subtype.val ⁻¹' E : Set U), ?_,
+    U.isOpen.isOpenMap_subtype_val _ hE', ⟨⟨x, hxU⟩, hx, rfl⟩⟩
+  rintro _ ⟨z, hz, rfl⟩
+  exact hz
+
+end Topology
+
+variable {X Y S : Scheme.{u}} (sX : X ⟶ S) (sY : Y ⟶ S)
+
+/-- **A homomorphism of réseaux of local rings `p(X) → p(Y)` over `p(S)` (page 1).** An
+application of the specialisation orders, increasing (`x ⤳ x'`, « `x'` specialises `x` »,
+gives `φ x ⤳ φ x'`), lying over `S`, with a local homomorphism `𝒪_{Y,φ(x)} → 𝒪_{X,x}` at each
+point, compatible with the generisation maps, and compatible with the structure maps to the
+local rings of `S`. The localisation axiom of a réseau is a property of `p(X)` and `p(Y)`, which
+come from schemes, so it is not a field here. -/
+structure ReseauHom where
+  toFun : X → Y
+  mono : ∀ {x x' : X}, x ⤳ x' → toFun x ⤳ toFun x'
+  liesOver : ∀ x, sX x = sY (toFun x)
+  stalk : ∀ x, Y.presheaf.stalk (toFun x) ⟶ X.presheaf.stalk x
+  isLocalHom : ∀ x, IsLocalHom (stalk x).hom
+  compat : ∀ {x x' : X} (h : x ⤳ x'),
+    stalk x' ≫ X.presheaf.stalkSpecializes h = Y.presheaf.stalkSpecializes (mono h) ≫ stalk x
+  overStalk : ∀ x, sY.stalkMap (toFun x) ≫ stalk x =
+    S.presheaf.stalkSpecializes (Inseparable.of_eq (liesOver x)).specializes ≫ sX.stalkMap x
+
+attribute [instance] ReseauHom.isLocalHom
+
+variable {sX sY}
+
+namespace ReseauHom
+
+/-- The `S`-morphism `Spec 𝒪_{X,x} → Y` that `Φ` gives at `x`: `Spec` of the local homomorphism,
+followed by `Spec 𝒪_{Y,φ(x)} → Y`. -/
+noncomputable def germ (Φ : ReseauHom sX sY) (x : X) : Spec (X.presheaf.stalk x) ⟶ Y :=
+  Spec.map (Φ.stalk x) ≫ Y.fromSpecStalk (Φ.toFun x)
+
+/-- The germs of `Φ` are compatible with generisation. -/
+theorem germ_specializes (Φ : ReseauHom sX sY) {x x' : X} (h : x ⤳ x') :
+    Spec.map (X.presheaf.stalkSpecializes h) ≫ Φ.germ x' = Φ.germ x := by
+  rw [germ, ← Spec.map_comp_assoc, Φ.compat h, Spec.map_comp_assoc,
+    Scheme.SpecMap_stalkSpecializes_fromSpecStalk, germ]
+
+/-- The germs of `Φ` are `S`-morphisms. -/
+theorem germ_comp (Φ : ReseauHom sX sY) (x : X) :
+    Φ.germ x ≫ sY = X.fromSpecStalk x ≫ sX := by
+  rw [germ, Category.assoc, ← Scheme.SpecMap_stalkMap_fromSpecStalk, ← Spec.map_comp_assoc,
+    Φ.overStalk, Spec.map_comp_assoc, Scheme.SpecMap_stalkSpecializes_fromSpecStalk,
+    Scheme.SpecMap_stalkMap_fromSpecStalk]
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The germ at `x` sends the closed point to `φ(x)`. -/
+theorem germ_closedPoint (Φ : ReseauHom sX sY) (x : X) :
+    Φ.germ x (IsLocalRing.closedPoint (X.presheaf.stalk x)) = Φ.toFun x := by
+  rw [germ, Scheme.Hom.comp_apply, Spec_closedPoint, Scheme.fromSpecStalk_closedPoint]
+
+/-- A réseau homomorphism is determined by its germs: the point is the image of the closed point,
+and `Spec 𝒪_{Y,y} → Y` is a monomorphism. -/
+theorem ext_of_germ {Φ Ψ : ReseauHom sX sY} (h : ∀ x, Φ.germ x = Ψ.germ x) : Φ = Ψ := by
+  have hfun : Φ.toFun = Ψ.toFun := funext fun x => by
+    rw [← germ_closedPoint, h, germ_closedPoint]
+  cases Φ with | mk f _ _ α _ _ _ => cases Ψ with | mk g _ _ β _ _ _ =>
+  dsimp only at hfun
+  subst hfun
+  have : α = β := funext fun x => by
+    have hx := h x
+    simp only [germ] at hx
+    exact Spec.map_injective ((cancel_mono _).1 hx)
+  subst this
+  rfl
+
+end ReseauHom
+
+/-- The réseau homomorphism of an `S`-morphism. -/
+noncomputable def toReseau (f : X ⟶ Y) (hf : f ≫ sY = sX) : ReseauHom sX sY where
+  toFun := f
+  mono h := f.base.hom.map_specializes h
+  liesOver x := by rw [← hf]; rfl
+  stalk x := f.stalkMap x
+  isLocalHom x := inferInstance
+  compat h := (f.stalkSpecializes_stalkMap _ _ h).symm
+  overStalk x := by
+    subst hf
+    rw [Scheme.Hom.stalkMap_comp]
+    simp
+
+/-- The germ of `p(f)` at `x` is `Spec 𝒪_{X,x} → X → Y`. -/
+theorem toReseau_germ (f : X ⟶ Y) (hf : f ≫ sY = sX) (x : X) :
+    (toReseau f hf).germ x = X.fromSpecStalk x ≫ f :=
+  Scheme.SpecMap_stalkMap_fromSpecStalk f
+
+
+/-- Two morphisms out of a locally Noetherian scheme that agree on every `Spec 𝒪_{W,w}` are
+equal. -/
+theorem eq_of_fromSpecStalk_comp {W : Scheme.{u}} [IsLocallyNoetherian W] {a b : W ⟶ Y}
+    (h : ∀ w, W.fromSpecStalk w ≫ a = W.fromSpecStalk w ≫ b) : a = b :=
+  Scheme.hom_ext_of_forall a b fun w => spread_out_unique_of_isGermInjective' a b (h w)
+
+/-- **Injectivity (Corollaire 2).** Two `S`-morphisms with the same réseau homomorphism are equal,
+for `X` locally Noetherian; neither separatedness nor finite type of `Y` is needed: the data at
+`x` already fix the germ of the morphism at `x`. -/
+theorem toReseau_injective [IsLocallyNoetherian X] {f g : X ⟶ Y} (hf : f ≫ sY = sX)
+    (hg : g ≫ sY = sX) (h : toReseau f hf = toReseau g hg) : f = g :=
+  eq_of_fromSpecStalk_comp fun x => by
+    rw [← toReseau_germ f hf, ← toReseau_germ g hg, h]
+
+/-- In a scheme, `𝒪_{W,w''} → 𝒪_{W,w}` is injective for `w ⤳ w''` in an affine open on which
+the germ at `w` is injective. -/
+theorem stalkSpecializes_injective {W : Scheme.{u}} {w w'' : W} (hw : w ⤳ w'') (U : W.Opens)
+    (hU : IsAffineOpen U) (hwU : w ∈ U) (hw''U : w'' ∈ U)
+    (hinj : Function.Injective (W.presheaf.germ U w hwU)) :
+    Function.Injective (W.presheaf.stalkSpecializes hw) := by
+  let _ := TopCat.Presheaf.algebra_section_stalk W.presheaf (⟨w'', hw''U⟩ : U)
+  have := hU.isLocalization_stalk ⟨w'', hw''U⟩
+  rw [injective_iff_map_eq_zero]
+  intro z hz
+  obtain ⟨⟨a, s⟩, e⟩ := IsLocalization.surj (hU.primeIdealOf ⟨w'', hw''U⟩).asIdeal.primeCompl z
+  have ha : W.presheaf.germ U w hwU a = 0 := by
+    have h1 := congrArg (W.presheaf.stalkSpecializes hw) e
+    rw [map_mul, hz, zero_mul] at h1
+    have h2 : W.presheaf.stalkSpecializes hw (algebraMap Γ(W, U) _ a) =
+        W.presheaf.germ U w hwU a :=
+      TopCat.Presheaf.germ_stalkSpecializes_apply W.presheaf hw''U hw a
+    rw [← h2, ← h1]
+  rw [hinj (ha.trans (map_zero _).symm), map_zero] at e
+  exact (IsLocalization.map_units _ s).mul_left_eq_zero.mp e
+
+/-- Two `Z`-morphisms `Spec R → Y`, `Y` separated over `Z`, that agree after `Spec T → Spec R`
+for an injective `R → T`, are equal: their equaliser is a closed subscheme through which a
+scheme-theoretically dense morphism factors. -/
+theorem ext_of_injective_of_isSeparated {Z : Scheme.{u}} {R T : CommRingCat.{u}} (φ : R ⟶ T)
+    (hφ : Function.Injective φ) {a b : Spec R ⟶ Y} (s : Y ⟶ Z) [IsSeparated s]
+    (h : a ≫ s = b ≫ s) (hab : Spec.map φ ≫ a = Spec.map φ ≫ b) : a = b := by
+  let X' : Over Z := Over.mk (a ≫ s)
+  let Y' : Over Z := Over.mk s
+  let U' : Over Z := Over.mk (Spec.map φ ≫ a ≫ s)
+  let a' : X' ⟶ Y' := Over.homMk a
+  let b' : X' ⟶ Y' := Over.homMk b (by simp [X', Y', h])
+  let ι' : U' ⟶ X' := Over.homMk (Spec.map φ)
+  have : IsSeparated Y'.hom := ‹_›
+  have hfac : (equalizer.lift ι' (by ext1; exact hab)).left ≫ (equalizer.ι a' b').left =
+      Spec.map φ := by
+    rw [← Over.comp_left, equalizer.lift_ι]; rfl
+  have hker : (Spec.map φ).ker = ⊥ := by
+    rw [Scheme.ker_of_isAffine, ← Scheme.IdealSheafData.equivOfIsAffine_symm_apply,
+      ← map_bot (Scheme.IdealSheafData.equivOfIsAffine).symm]
+    congr 1
+    rw [← RingHom.injective_iff_ker_eq_bot]
+    have := Scheme.ΓSpecIso_naturality φ
+    have e : (Spec.map φ).appTop = (Scheme.ΓSpecIso R).hom ≫ φ ≫ (Scheme.ΓSpecIso T).inv := by
+      rw [← reassoc_of% this, Iso.hom_inv_id, Category.comp_id]
+    rw [e]
+    exact ((ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso T).inv).1.comp hφ).comp
+      (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso R).hom).1
+  have : IsIso (equalizer.ι a' b').left := by
+    rw [IsClosedImmersion.isIso_iff_ker_eq_bot, eq_bot_iff, ← hker, ← hfac]
+    exact Scheme.Hom.le_ker_comp _ _
+  rw [← cancel_epi (equalizer.ι a' b').left]
+  congrm $(equalizer.condition a' b').left
+
+
+namespace ReseauHom
+
+variable (Φ : ReseauHom sX sY)
+
+/-- `h : W → Y` agrees with `Φ` at `w`, along `ι : W → X`. -/
+def Matches {W : Scheme.{u}} (ι : W ⟶ X) (h : W ⟶ Y) (w : W) : Prop :=
+  W.fromSpecStalk w ≫ h = Spec.map (ι.stalkMap w) ≫ Φ.germ (ι w)
+
+/-- Agreement with `Φ` is preserved by precomposition. -/
+theorem matches_comp {W W' : Scheme.{u}} {ι : W ⟶ X} {h : W ⟶ Y} (k : W' ⟶ W) {j : W' ⟶ X}
+    (hj : k ≫ ι = j) (w' : W') (H : Φ.Matches ι h (k w')) : Φ.Matches j (k ≫ h) w' := by
+  subst hj
+  unfold Matches at *
+  rw [← Scheme.SpecMap_stalkMap_fromSpecStalk_assoc, H, Scheme.Hom.stalkMap_comp]
+  exact (Spec.map_comp_assoc _ _ _).symm
+
+/-- Generisation, read along `ι`. -/
+theorem germ_along_specializes {W : Scheme.{u}} (ι : W ⟶ X) {w w'' : W} (hw : w ⤳ w'') :
+    Spec.map (W.presheaf.stalkSpecializes hw) ≫ Spec.map (ι.stalkMap w'') ≫ Φ.germ (ι w'') =
+      Spec.map (ι.stalkMap w) ≫ Φ.germ (ι w) := by
+  rw [← Spec.map_comp_assoc, ← ι.stalkSpecializes_stalkMap, Spec.map_comp_assoc,
+    Φ.germ_specializes]
+
+/-- The heart of the argument (Lemme 1 and Lemme 3): the locus where `h` agrees with `Φ` is
+open, for `W` locally Noetherian and `Y` separated over `S`. -/
+theorem isOpen_matches [IsSeparated sY] {W : Scheme.{u}} [IsLocallyNoetherian W] {ι : W ⟶ X}
+    {h : W ⟶ Y} (hh : h ≫ sY = ι ≫ sX) : IsOpen {w | Φ.Matches ι h w} := by
+  apply isOpen_of_stableUnderGeneralization_of_locally
+  · intro w
+    obtain ⟨_, ⟨U, hU, rfl⟩, hwU, -⟩ :=
+      W.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ w) isOpen_univ
+    have := IsLocallyNoetherian.component_noetherian ⟨U, hU⟩
+    exact ⟨U, hwU, noetherianSpace_of_isAffineOpen U hU⟩
+  · intro a b hab hb
+    change Φ.Matches ι h b
+    change Φ.Matches ι h a at hb
+    unfold Matches at *
+    rw [← Scheme.SpecMap_stalkSpecializes_fromSpecStalk hab, Category.assoc, hb,
+      germ_along_specializes]
+  · intro w hw
+    obtain ⟨U, hwU, hU, hinj⟩ := W.exists_germ_injective w
+    refine ⟨U, U.isOpen, hwU, ?_⟩
+    rintro w'' ⟨hw''U, hc⟩
+    have hsp : w ⤳ w'' := specializes_iff_mem_closure.2 hc
+    apply ext_of_injective_of_isSeparated (W.presheaf.stalkSpecializes hsp)
+      (stalkSpecializes_injective hsp U hU hwU hw''U hinj) sY
+    · simp only [Category.assoc, hh, Φ.germ_comp, Scheme.SpecMap_stalkMap_fromSpecStalk_assoc]
+    · rw [Scheme.SpecMap_stalkSpecializes_fromSpecStalk_assoc, germ_along_specializes]
+      exact hw
+
+end ReseauHom
+
+set_option backward.isDefEq.respectTransparency false in
+/-- `Spec 𝒪_{U,x} → Spec 𝒪_{X,x} → U` is the canonical map. -/
+theorem SpecMap_stalkMap_fromSpecStalkOfMem (U : X.Opens) (x : X) (hx : x ∈ U) :
+    Spec.map (U.ι.stalkMap ⟨x, hx⟩) ≫ U.fromSpecStalkOfMem x hx =
+      U.toScheme.fromSpecStalk ⟨x, hx⟩ := by
+  simp only [Scheme.Opens.fromSpecStalkOfMem, Spec.map_inv, IsIso.hom_inv_id_assoc]
+
+/-- `Spec` of the stalk map of an open immersion is an epimorphism (an isomorphism). -/
+theorem epi_SpecMap_stalkMap {A B : Scheme.{u}} (k : A ⟶ B) [IsOpenImmersion k] (a : A) :
+    Epi (Spec.map (k.stalkMap a)) :=
+  inferInstance
+
+/-- **Surjectivity (Corollaire 3).** Every réseau homomorphism over `p(S)` comes from an
+`S`-morphism, for `X` locally Noetherian and `Y` locally of finite type and separated over `S`.
+Each germ spreads out to a neighbourhood (EGA IV's limit theorem, Mathlib's
+`spread_out_of_isGermInjective'`); the locus where the spread-out morphism agrees with `Φ` is open
+(`isOpen_matches`); on these loci the morphisms glue by injectivity. -/
+theorem toReseau_surjective [IsLocallyNoetherian X] [LocallyOfFiniteType sY] [IsSeparated sY]
+    (Φ : ReseauHom sX sY) : ∃ (f : X ⟶ Y) (hf : f ≫ sY = sX), toReseau f hf = Φ := by
+  choose U hxU f hf1 hf2 using fun x =>
+    spread_out_of_isGermInjective' sX sY (Φ.germ x) (Φ.germ_comp x)
+  have hx : ∀ x, Φ.Matches (U x).ι (f x) ⟨x, hxU x⟩ := by
+    intro x
+    unfold ReseauHom.Matches
+    change _ = _ ≫ Φ.germ x
+    rw [hf1 x]
+    have e := congrArg (· ≫ f x) (SpecMap_stalkMap_fromSpecStalkOfMem (U x) x (hxU x))
+    simp only at e
+    exact e.symm
+  let V : ∀ x, (U x).toScheme.Opens := fun x =>
+    ⟨{w | Φ.Matches (U x).ι (f x) w}, Φ.isOpen_matches (hf2 x)⟩
+  let 𝒰 : X.OpenCover :=
+    { I₀ := X, X x := (V x).toScheme, f x := (V x).ι ≫ (U x).ι,
+      mem₀ := by
+        rw [Scheme.presieve₀_mem_precoverage_iff]
+        exact ⟨fun x ↦ ⟨x, ⟨⟨x, hxU x⟩, hx x⟩, rfl⟩, inferInstance⟩ }
+  let g : ∀ x, (V x).toScheme ⟶ Y := fun x => (V x).ι ≫ f x
+  have hmatch : ∀ x (v : V x), Φ.Matches ((V x).ι ≫ (U x).ι) (g x) v :=
+    fun x v => Φ.matches_comp (V x).ι rfl v v.2
+  have hglue : ∀ x y, pullback.fst (𝒰.f x) (𝒰.f y) ≫ g x = pullback.snd _ _ ≫ g y := by
+    intro x y
+    have : IsLocallyNoetherian (pullback (𝒰.f x) (𝒰.f y)) :=
+      isLocallyNoetherian_of_isOpenImmersion (pullback.fst _ _ ≫ 𝒰.f x)
+    refine eq_of_fromSpecStalk_comp fun p => ?_
+    exact (Φ.matches_comp (pullback.fst _ _) rfl p (hmatch x _)).trans
+      (Φ.matches_comp (pullback.snd _ _) pullback.condition.symm p (hmatch y _)).symm
+  let F := 𝒰.glueMorphisms g hglue
+  have hF : ∀ x, 𝒰.f x ≫ F = g x := 𝒰.ι_glueMorphisms g hglue
+  have hFS : F ≫ sY = sX := 𝒰.hom_ext _ _ fun x => by
+    rw [← Category.assoc, hF]
+    simp only [g, Category.assoc, hf2]
+    rfl
+  refine ⟨F, hFS, ReseauHom.ext_of_germ fun z => ?_⟩
+  rw [toReseau_germ]
+  let v : (V z).toScheme := ⟨⟨z, hxU z⟩, hx z⟩
+  have h1 := hmatch z v
+  unfold ReseauHom.Matches at h1
+  have hF' : ((V z).ι ≫ (U z).ι) ≫ F = g z := hF z
+  have h2 := Scheme.SpecMap_stalkMap_fromSpecStalk_assoc ((V z).ι ≫ (U z).ι)
+    (x := v) F
+  rw [hF'] at h2
+  have := epi_SpecMap_stalkMap ((V z).ι ≫ (U z).ι) v
+  exact this.left_cancellation _ _ (h2.trans h1)
+
+/-- **Corollaire 3, the theorem of page 2 in the edition's form.** For `X` locally Noetherian and
+`Y` locally of finite type and separated over `S`, `f ↦ p(f)` is a bijection from the
+`S`-morphisms `X → Y` onto the homomorphisms of réseaux of local rings `p(X) → p(Y)` over
+`p(S)`. -/
+theorem toReseau_bijective [IsLocallyNoetherian X] [LocallyOfFiniteType sY] [IsSeparated sY] :
+    Function.Bijective (fun f : {f : X ⟶ Y // f ≫ sY = sX} => toReseau f.1 f.2) :=
+  ⟨fun f g h => Subtype.ext (toReseau_injective f.2 g.2 h),
+    fun Φ => let ⟨f, hf, e⟩ := toReseau_surjective Φ; ⟨⟨f, hf⟩, e⟩⟩
+
+/-- **Corollaire 3 with the page's hypotheses** (`S` locally Noetherian, `X` and `Y` locally of
+finite type over `S`) and the edition's (`Y` separated over `S`). -/
+theorem corollaire3 [IsLocallyNoetherian S] [LocallyOfFiniteType sX] [LocallyOfFiniteType sY]
+    [IsSeparated sY] :
+    Function.Bijective (fun f : {f : X ⟶ Y // f ≫ sY = sX} => toReseau f.1 f.2) :=
+  have := LocallyOfFiniteType.isLocallyNoetherian sX
+  toReseau_bijective
+
+end Grothendieck.Folder42.Reseau

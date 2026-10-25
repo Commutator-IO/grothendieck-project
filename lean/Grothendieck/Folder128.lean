@@ -503,3 +503,1159 @@ end Colength
 
 end Grothendieck.Folder128
 
+
+/-!
+## Pages 4–9: effective descent along a nilpotent conductor
+
+The reading (« Descente effective le long d'un conducteur nilpotent », Prop. 2 and Cor. 1):
+`A → S` a ring map (the page's `A → A'`), `I` an ideal of `A` mapped injectively onto an ideal
+of `S` (`IsConductorIdeal`: `I` lies in the conductor, and `A = S ×_{S/IS} A/I` is a Milnor
+square), `I` nilpotent. Descent data are written as comodules over the coring `S ⊗_A S`
+(`DescentDatum`: an `S`-linear `ψ : E → S ⊗_A E`, `ψ(e) = φ(1 ⊗ e)` for the gluing `φ`, with
+counit and cocycle conditions); `DescentDatum.invariants` is `H⁰`, `DescentDatum.IsEffective`
+says the invariants are flat and `S ⊗_A E^ψ → E` is bijective, `DescentDatum.reduce` is the
+datum induced on `E₀ = S/IS ⊗_S E` relative to `A/I → S/IS`, and `IsEffectiveDescentFlat`
+is « morphisme de descente effective pour les modules plats » (`IsDescentFlat`: `M ≅ H⁰` for
+`M` flat, plus every datum on a flat `S`-module effective).
+
+* `flat_of_isNilpotent`: the local flatness criterion for a nilpotent ideal, which the page uses
+  unnamed (`M/IM` flat over `A/I` and `I ⊗ M → M` injective ⇒ `M` flat), with no Noetherian
+  hypothesis;
+* `DescentDatum.isEffective_of_reduce` (Prop. 2): a datum on a flat `S`-module whose reduction
+  modulo `I` is effective is effective;
+* `isEffectiveDescentFlat_of_quotient` (Cor. 1): if `Spec S/IS → Spec A/I` is an effective
+  descent morphism for flat modules, so is `Spec S → Spec A`.
+
+The proof is not the page's induction on the nilpotency order, nor its long exact sequence.
+(1) `e` is invariant iff its reduction is (`mem_invariants_iff`): if `ψ(e) − 1 ⊗ e` lies in
+`IS · (S ⊗ E)`, it is `1 ⊗ y` with `y ∈ I E` (`I` is an ideal of `S`), and the counit gives
+`y = 0`; this is page 5's computation, which needs neither `I² = 0` nor flatness. So
+`E^ψ → E₀^{ψ₀}` is onto with kernel `I E`. (2) Hence `E = S · E^ψ + I E`, and `E^ψ` spans `E`
+by Nakayama for the nilpotent `IS` (`span_invariants_eq_top`). (3) `S ⊗_A E^ψ → E` is
+injective: an element of its kernel reduces to `0`, so lies in `IS · (S ⊗ E^ψ) = 1 ⊗ I E^ψ`,
+where the map is injective. (4) `E^ψ / I E^ψ ≅ E₀^{ψ₀}` is flat over `A/I`, and
+`I ⊗_A E^ψ ≅ I ⊗_S E → E` is injective since `E` is flat over `S` — the only use of the
+flatness of `E`; the local criterion concludes. Neither `A ≅ H⁰(S/A)` nor `H¹(S/A) = 0` is used.
+
+Not formalised: Cor. 2 and Cor. 3 (preschemes, and the stability under flat base change), and
+the example « `S/IS` faithfully flat over `A/I` », since mathlib has faithfully flat descent of
+modules only as comonadicity; Cor. 1 is proved with its hypothesis as stated.
+-/
+
+namespace Grothendieck.Folder128.Descent
+
+universe u
+
+section LocalCriterion
+
+variable {A : Type*} [CommRing A] (I : Ideal A) {M : Type*} [AddCommGroup M] [Module A M]
+
+variable (G : Type*) [AddCommGroup G] [Module A G]
+
+/-- `I ⊗ G → G`, `λ ⊗ g ↦ λ g`. -/
+noncomputable def smulMap : I ⊗[A] G →ₗ[A] G :=
+  TensorProduct.lift ((LinearMap.lsmul A G).comp I.subtype)
+
+@[simp] lemma smulMap_tmul (r : I) (g : G) : smulMap I G (r ⊗ₜ g) = (r : A) • g := rfl
+
+lemma range_smulMap : LinearMap.range (smulMap I G) = I • (⊤ : Submodule A G) := by
+  refine le_antisymm ?_ (Submodule.smul_le.2 fun r hr g _ => ⟨⟨r, hr⟩ ⊗ₜ g, rfl⟩)
+  rintro _ ⟨t, rfl⟩
+  induction t using TensorProduct.inductionOn with
+  | tmul r g => exact Submodule.smul_mem_smul r.2 trivial
+  | add s t hs ht => rw [map_add]; exact add_mem hs ht
+
+variable {I G}
+
+/-- For `G` flat and `I ⊗ M → M` injective, `(I ⊗ G) ⊗ M → G ⊗ M` is injective. -/
+lemma rTensor_smulMap_injective [Module.Flat A G]
+    (h1 : Function.Injective (I.subtype.rTensor M)) :
+    Function.Injective ((smulMap I G).rTensor M) := by
+  have hμ : Function.Injective ((TensorProduct.lid A M).toLinearMap ∘ₗ I.subtype.rTensor M) := by
+    rw [LinearMap.coe_comp]; exact (TensorProduct.lid A M).injective.comp h1
+  have e : (smulMap I G).rTensor M = ((TensorProduct.lid A M).toLinearMap ∘ₗ I.subtype.rTensor M).lTensor G ∘ₗ
+      (TensorProduct.assoc A G I M).toLinearMap ∘ₗ
+        (TensorProduct.comm A I G).toLinearMap.rTensor M := by
+    refine TensorProduct.ext_threefold fun r g m => ?_
+    simp [TensorProduct.smul_tmul]
+  rw [e]
+  refine (Module.Flat.lTensor_preserves_injective_linearMap _ hμ).comp
+    ((TensorProduct.assoc A G I M).injective.comp ?_)
+  rw [← LinearEquiv.coe_rTensor]
+  exact (LinearEquiv.rTensor M (TensorProduct.comm A I G)).injective
+
+/-- Tensoring with `M` an injective map of `A/I`-modules stays injective when `M/IM` is flat
+over `A/I`. -/
+lemma rTensor_injective_of_quotient (h0 : Module.Flat (A ⧸ I) ((A ⧸ I) ⊗[A] M))
+    {X Y : Type*} [AddCommGroup X] [Module (A ⧸ I) X] [Module A X] [IsScalarTower A (A ⧸ I) X]
+    [AddCommGroup Y] [Module (A ⧸ I) Y] [Module A Y] [IsScalarTower A (A ⧸ I) Y]
+    (v : X →ₗ[A ⧸ I] Y) (hv : Function.Injective v) :
+    Function.Injective ((v.restrictScalars A).rTensor M) := by
+  let cX := AlgebraTensorModule.cancelBaseChange A (A ⧸ I) (A ⧸ I) X M
+  let cY := AlgebraTensorModule.cancelBaseChange A (A ⧸ I) (A ⧸ I) Y M
+  have e : ((v.restrictScalars A).rTensor M) =
+      (cY.toLinearMap.restrictScalars A) ∘ₗ (v.rTensor ((A ⧸ I) ⊗[A] M)).restrictScalars A ∘ₗ
+        (cX.symm.toLinearMap.restrictScalars A) := by
+    refine TensorProduct.ext' fun x m => ?_
+    simp [cX, cY]
+  rw [e]
+  exact cY.injective.comp ((Module.Flat.rTensor_preserves_injective_linearMap _ hv).comp
+    cX.symm.injective)
+
+/-- `Tor₁(G/L, M) = 0` for `G` flat and `I G ⊂ L ⊂ G`: `L ⊗ M → G ⊗ M` is injective. -/
+lemma rTensor_subtype_injective_of_flat [Module.Flat A G]
+    (h0 : Module.Flat (A ⧸ I) ((A ⧸ I) ⊗[A] M))
+    (h1 : Function.Injective (I.subtype.rTensor M)) (L : Submodule A G)
+    (hIL : I • (⊤ : Submodule A G) ≤ L) :
+    Function.Injective (L.subtype.rTensor M) := by
+  -- the image `L̄` of `L` in `G / I G`, an `A/I`-submodule
+  let Lb : Submodule (A ⧸ I) (G ⧸ (I • ⊤ : Submodule A G)) :=
+    { carrier := (I • ⊤ : Submodule A G).mkQ '' L
+      add_mem' := by
+        rintro _ _ ⟨x, hx, rfl⟩ ⟨y, hy, rfl⟩
+        exact ⟨x + y, L.add_mem hx hy, map_add _ _ _⟩
+      zero_mem' := ⟨0, L.zero_mem, map_zero _⟩
+      smul_mem' := by
+        rintro c _ ⟨x, hx, rfl⟩
+        obtain ⟨c, rfl⟩ := Ideal.Quotient.mk_surjective c
+        exact ⟨c • x, L.smul_mem c hx, (Module.Quotient.mk_smul_mk G I c x).symm⟩ }
+  let r : L →ₗ[A] Lb :=
+    { toFun := fun x => ⟨(I • ⊤ : Submodule A G).mkQ x, x, x.2, rfl⟩
+      map_add' := fun x y => Subtype.ext (map_add _ _ _)
+      map_smul' := fun c x => Subtype.ext (map_smul (I • ⊤ : Submodule A G).mkQ c (x : G)) }
+  have hr : Function.Surjective r := by
+    rintro ⟨_, x, hx, rfl⟩
+    exact ⟨⟨x, hx⟩, rfl⟩
+  have hrange : ∀ t, smulMap I G t ∈ L := fun t =>
+    hIL (by rw [← range_smulMap]; exact ⟨t, rfl⟩)
+  let φL : I ⊗[A] G →ₗ[A] L := (smulMap I G).codRestrict L hrange
+  have hex : Function.Exact φL r := by
+    intro y
+    constructor
+    · intro hy
+      have : ((y : G) : G) ∈ (I • ⊤ : Submodule A G) := by
+        have := congr_arg Subtype.val hy
+        simpa [r, Submodule.Quotient.mk_eq_zero] using this
+      rw [← range_smulMap] at this
+      obtain ⟨t, ht⟩ := this
+      exact ⟨t, Subtype.ext ht⟩
+    · rintro ⟨t, rfl⟩
+      refine Subtype.ext ?_
+      simp only [r, φL, LinearMap.coe_mk, AddHom.coe_mk, LinearMap.codRestrict_apply,
+        Submodule.mkQ_apply, ZeroMemClass.coe_zero, Submodule.Quotient.mk_eq_zero]
+      rw [← range_smulMap]; exact ⟨t, rfl⟩
+  have hcomp : (Lb.subtype.restrictScalars A) ∘ₗ r = (I • ⊤ : Submodule A G).mkQ ∘ₗ L.subtype := rfl
+  have hφ : L.subtype ∘ₗ φL = smulMap I G := rfl
+  rw [injective_iff_map_eq_zero]
+  intro y hy
+  have hry : r.rTensor M y = 0 := by
+    apply rTensor_injective_of_quotient h0 Lb.subtype (Submodule.injective_subtype _)
+    rw [map_zero, ← LinearMap.rTensor_comp_apply, hcomp, LinearMap.rTensor_comp_apply, hy,
+      map_zero]
+  obtain ⟨z, rfl⟩ := (rTensor_exact M hex hr y).1 hry
+  have hz : z = 0 := by
+    apply rTensor_smulMap_injective h1
+    rw [map_zero, ← hφ, LinearMap.rTensor_comp_apply, hy]
+  rw [hz, map_zero]
+
+/-- `Tor₁(F/K, M) = 0` whenever `I F ⊂ K`: for `u : K → F` injective with `I F ⊂ u(K)`,
+`K ⊗ M → F ⊗ M` is injective (reduction to a free module mapping onto `F`). -/
+lemma rTensor_injective_of_smul_le (h0 : Module.Flat (A ⧸ I) ((A ⧸ I) ⊗[A] M))
+    (h1 : Function.Injective (I.subtype.rTensor M)) {K F : Type*} [AddCommGroup K] [Module A K]
+    [AddCommGroup F] [Module A F] (u : K →ₗ[A] F) (hu : Function.Injective u)
+    (hIu : I • (⊤ : Submodule A F) ≤ LinearMap.range u) :
+    Function.Injective (u.rTensor M) := by
+  let p : (F →₀ A) →ₗ[A] F := Finsupp.linearCombination A id
+  have hp : Function.Surjective p := Finsupp.linearCombination_id_surjective A F
+  let L : Submodule A (F →₀ A) := (LinearMap.range u).comap p
+  have hIL : I • (⊤ : Submodule A (F →₀ A)) ≤ L :=
+    Submodule.smul_le.2 fun c hc g _ => by
+      show p (c • g) ∈ LinearMap.range u
+      rw [map_smul]; exact hIu (Submodule.smul_mem_smul hc trivial)
+  let e := LinearEquiv.ofInjective u hu
+  let q : L →ₗ[A] K := e.symm.toLinearMap ∘ₗ p.restrict (p := L) (q := LinearMap.range u) fun (x : F →₀ A) (h : x ∈ L) => h
+  have huq : u ∘ₗ q = p ∘ₗ L.subtype := by
+    ext x
+    simp only [q, LinearMap.coe_comp, Function.comp_apply, LinearEquiv.coe_coe]
+    exact congr_arg Subtype.val (e.apply_symm_apply _)
+  have hq : Function.Surjective q := by
+    intro k
+    obtain ⟨g, hg⟩ := hp (u k)
+    refine ⟨⟨g, ⟨k, hg.symm⟩⟩, hu ?_⟩
+    rw [← LinearMap.comp_apply, huq]; exact hg
+  have hker : LinearMap.ker p ≤ L := fun g hg => by
+    show p g ∈ LinearMap.range u
+    rw [LinearMap.mem_ker.1 hg]; exact zero_mem _
+  let ι := Submodule.inclusion hker
+  have hqι : q ∘ₗ ι = 0 := by
+    ext x
+    apply hu
+    rw [← LinearMap.comp_apply u, ← LinearMap.comp_assoc, huq]
+    simp [ι, LinearMap.mem_ker.1 x.2]
+  have hLinj := rTensor_subtype_injective_of_flat h0 h1 L hIL
+  rw [injective_iff_map_eq_zero]
+  intro x hx
+  obtain ⟨y, rfl⟩ := LinearMap.rTensor_surjective M hq x
+  have h2 : p.rTensor M (L.subtype.rTensor M y) = 0 := by
+    rw [← LinearMap.rTensor_comp_apply, ← huq, LinearMap.rTensor_comp_apply, hx]
+  have hex2 := rTensor_exact (M := LinearMap.ker p) (N := F →₀ A) (P := F)
+    (f := (LinearMap.ker p).subtype) (g := p) M (LinearMap.exact_subtype_ker_map p) hp
+  obtain ⟨w, hw⟩ := (hex2 _).1 h2
+  have : y = ι.rTensor M w := by
+    apply hLinj
+    rw [← hw, ← LinearMap.rTensor_comp_apply]
+    rfl
+  rw [this, ← LinearMap.rTensor_comp_apply, hqι, LinearMap.rTensor_zero, LinearMap.zero_apply]
+
+/-- **Local flatness criterion for a nilpotent ideal** (no Noetherian hypothesis). If `I` is
+nilpotent, `M/IM` is flat over `A/I` and `I ⊗ M → M` is injective, then `M` is flat. -/
+theorem flat_of_isNilpotent (hI : IsNilpotent I)
+    (h0 : Module.Flat (A ⧸ I) ((A ⧸ I) ⊗[A] M))
+    (h1 : Function.Injective (I.subtype.rTensor M)) : Module.Flat A M := by
+  rw [Module.Flat.iff_rTensor_injective']
+  intro J
+  have key : ∀ k : ℕ, Function.Injective ((J ⊔ I ^ k).subtype.rTensor M) := by
+    intro k
+    induction k with
+    | zero =>
+      rw [pow_zero, Ideal.one_eq_top, sup_top_eq]
+      have : (⊤ : Ideal A).subtype = (Submodule.topEquiv : (⊤ : Ideal A) ≃ₗ[A] A).toLinearMap :=
+        rfl
+      rw [this, ← LinearEquiv.coe_rTensor]
+      exact (LinearEquiv.rTensor M _).injective
+    | succ k ih =>
+      have hle : J ⊔ I ^ (k + 1) ≤ J ⊔ I ^ k := sup_le_sup_left (Ideal.pow_le_pow_right k.le_succ) _
+      have : (J ⊔ I ^ (k + 1)).subtype = (J ⊔ I ^ k).subtype ∘ₗ Submodule.inclusion hle := rfl
+      rw [this, LinearMap.rTensor_comp]
+      refine ih.comp (rTensor_injective_of_smul_le h0 h1 _ (Submodule.inclusion_injective hle) ?_)
+      refine Submodule.smul_le.2 fun c hc x _ => ⟨⟨c * x, ?_⟩, Subtype.ext rfl⟩
+      have hx : c * (x : A) ∈ I * (J ⊔ I ^ k) := Ideal.mul_mem_mul hc x.2
+      rw [Ideal.mul_sup, ← pow_succ'] at hx
+      exact (sup_le_sup_right (Ideal.mul_le.2 fun a _ b hb => J.mul_mem_left a hb) _ : I * J ⊔ I ^ (k + 1) ≤ J ⊔ I ^ (k + 1)) hx
+  obtain ⟨n, hn⟩ := hI
+  have := key n
+  rwa [hn, Ideal.zero_eq_bot, sup_bot_eq] at this
+
+end LocalCriterion
+
+section Defs
+
+variable (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]
+
+/-- A descent datum on an `S`-module `E` relative to `R → S` (Grothendieck, page 4), written as
+a comodule over the coring `S ⊗_R S`: an `S`-linear `ψ : E → S ⊗_R E` (`ψ(e) = φ(1 ⊗ e)` for
+the gluing isomorphism `φ`), with counit `Σ bᵢ eᵢ = e` and the cocycle condition. -/
+structure DescentDatum (E : Type u) [AddCommGroup E] [Module S E] [Module R E]
+    [IsScalarTower R S E] where
+  /-- The coaction `e ↦ Σ bᵢ ⊗ eᵢ`. -/
+  ψ : E →ₗ[S] S ⊗[R] E
+  /-- Counit: `Σ bᵢ eᵢ = e`. -/
+  counit : ∀ e, LinearMap.liftBaseChange S (LinearMap.id : E →ₗ[R] E) (ψ e) = e
+  /-- Cocycle: `Σ bᵢ ⊗ ψ(eᵢ) = Σ bᵢ ⊗ 1 ⊗ eᵢ`. -/
+  coassoc : ∀ e, (ψ.restrictScalars R).lTensor S (ψ e) =
+    (TensorProduct.mk R S E 1).lTensor S (ψ e)
+
+variable {R S}
+
+namespace DescentDatum
+
+variable {E : Type u} [AddCommGroup E] [Module S E] [Module R E] [IsScalarTower R S E]
+
+/-- The invariants `{e | ψ(e) = 1 ⊗ e}` (the `H⁰` of the descent complex). -/
+def invariants (d : DescentDatum R S E) : Submodule R E :=
+  LinearMap.eqLocus (d.ψ.restrictScalars R) (TensorProduct.mk R S E 1)
+
+lemma mem_invariants (d : DescentDatum R S E) {e : E} :
+    e ∈ d.invariants ↔ d.ψ e = 1 ⊗ₜ e := Iff.rfl
+
+/-- The datum is effective: its invariants `E₀` are flat and `S ⊗_R E₀ → E` is bijective, so the
+datum is isomorphic to the canonical one on `S ⊗_R E₀`. -/
+def IsEffective (d : DescentDatum R S E) : Prop :=
+  Module.Flat R d.invariants ∧
+    Function.Bijective (LinearMap.liftBaseChange S d.invariants.subtype)
+
+end DescentDatum
+
+variable (R S) in
+/-- The canonical descent datum on `S ⊗_R M`, `b ⊗ m ↦ b ⊗ 1 ⊗ m`. -/
+noncomputable def canonical (M : Type u) [AddCommGroup M] [Module R M] :
+    DescentDatum R S (S ⊗[R] M) where
+  ψ := (TensorProduct.mk R S M 1).baseChange S
+  counit x := by
+    induction x using TensorProduct.inductionOn with
+    | tmul b m => simp [TensorProduct.smul_tmul']
+    | add x y hx hy => simp only [map_add, hx, hy]
+  coassoc x := by
+    induction x using TensorProduct.inductionOn with
+    | tmul b m => simp
+    | add x y hx hy => simp only [map_add, hx, hy]
+
+variable (R S) in
+/-- `Spec S → Spec R` is a descent morphism for flat modules: for `M` flat, `M → S ⊗_R M` is
+injective with image the invariants of the canonical datum (`M ≅ H⁰(S/R, M)`). -/
+def IsDescentFlat : Prop :=
+  ∀ (M : Type u) [AddCommGroup M] [Module R M] [Module.Flat R M],
+    Function.Injective (TensorProduct.mk R S M 1) ∧
+      (canonical R S M).invariants ≤ LinearMap.range (TensorProduct.mk R S M 1)
+
+variable (R S) in
+/-- `Spec S → Spec R` is an effective descent morphism for flat modules: a descent morphism, and
+every descent datum on a flat `S`-module is effective. -/
+def IsEffectiveDescentFlat : Prop :=
+  IsDescentFlat R S ∧
+    ∀ (E : Type u) [AddCommGroup E] [Module S E] [Module R E] [IsScalarTower R S E]
+      [Module.Flat S E] (d : DescentDatum R S E), d.IsEffective
+
+end Defs
+
+section Reduction
+
+variable {A S : Type u} [CommRing A] [CommRing S] [Algebra A S]
+
+variable (S) in
+/-- `I` is an ideal of `A` mapped injectively onto an ideal of `S` (Grothendieck, page 1): `I`
+lies in the conductor, and `A → S`, `A/I → S/IS` is a Milnor square. -/
+structure IsConductorIdeal (I : Ideal A) : Prop where
+  inj : ∀ x ∈ I, algebraMap A S x = 0 → x = 0
+  ideal : ∀ x ∈ I, ∀ b : S, ∃ y ∈ I, b * algebraMap A S x = algebraMap A S y
+
+variable {I : Ideal A}
+
+lemma IsConductorIdeal.mem_map (h : IsConductorIdeal S I) {r : S} :
+    r ∈ I.map (algebraMap A S) ↔ ∃ x ∈ I, algebraMap A S x = r := by
+  refine ⟨fun hr => ?_, by rintro ⟨x, hx, rfl⟩; exact Ideal.mem_map_of_mem _ hx⟩
+  let J : Ideal S :=
+    { carrier := {r | ∃ x ∈ I, algebraMap A S x = r}
+      add_mem' := by
+        rintro _ _ ⟨x, hx, rfl⟩ ⟨y, hy, rfl⟩
+        exact ⟨x + y, I.add_mem hx hy, map_add _ _ _⟩
+      zero_mem' := ⟨0, I.zero_mem, map_zero _⟩
+      smul_mem' := by
+        rintro b _ ⟨x, hx, rfl⟩
+        obtain ⟨y, hy, e⟩ := h.ideal x hx b
+        exact ⟨y, hy, e.symm⟩ }
+  exact (Ideal.map_le_iff_le_comap.2 (fun x hx => ⟨x, hx, rfl⟩) : I.map (algebraMap A S) ≤ J) hr
+
+lemma isNilpotent_map (hI : IsNilpotent I) : IsNilpotent (I.map (algebraMap A S)) := by
+  obtain ⟨n, hn⟩ := hI
+  exact ⟨n, by rw [← Ideal.map_pow, hn, Ideal.zero_eq_bot, Ideal.map_bot, Ideal.zero_eq_bot]⟩
+
+variable (I) {N : Type u} [AddCommGroup N] [Module A N]
+  {M₀ : Type u} [AddCommMonoid M₀] [Module (A ⧸ I) M₀] [Module A M₀]
+  [IsScalarTower A (A ⧸ I) M₀]
+
+/-- Reduction modulo `I`: `S ⊗_A N → S₀ ⊗_{A₀} M₀`, `b ⊗ n ↦ b̄ ⊗ g(n)`. -/
+noncomputable def red (g : N →ₗ[A] M₀) :
+    S ⊗[A] N →ₗ[S] (S ⧸ I.map (algebraMap A S)) ⊗[A ⧸ I] M₀ :=
+  LinearMap.liftBaseChange S
+    ((TensorProduct.mk (A ⧸ I) (S ⧸ I.map (algebraMap A S)) M₀ 1).restrictScalars A ∘ₗ g)
+
+variable {I}
+
+lemma red_tmul (g : N →ₗ[A] M₀) (b : S) (n : N) :
+    red I g (b ⊗ₜ n) = Ideal.Quotient.mk _ b ⊗ₜ g n := by
+  simp [red, TensorProduct.smul_tmul', Algebra.smul_def]
+
+/-- In `S ⊗_A N`, `I S · (S ⊗ N) = 1 ⊗ I N`. -/
+lemma exists_tmul_of_mem_smul (h : IsConductorIdeal S I) {z : S ⊗[A] N}
+    (hz : z ∈ (I.map (algebraMap A S) • ⊤ : Submodule S (S ⊗[A] N))) :
+    ∃ y ∈ (I • ⊤ : Submodule A N), z = 1 ⊗ₜ y := by
+  refine Submodule.smul_induction_on (p := fun z => ∃ y ∈ (I • ⊤ : Submodule A N), z = 1 ⊗ₜ y)
+    hz (fun r hr x _ => ?_) (fun x y hx hy => ?_)
+  · clear ‹x ∈ ⊤›
+    induction x using TensorProduct.inductionOn with
+    | tmul b n =>
+      obtain ⟨x, hx, e⟩ := h.mem_map.1 (Ideal.mul_mem_right b _ hr)
+      refine ⟨x • n, Submodule.smul_mem_smul hx trivial, ?_⟩
+      rw [TensorProduct.smul_tmul', smul_eq_mul, ← e, Algebra.algebraMap_eq_smul_one,
+        TensorProduct.smul_tmul]
+    | add x y hx hy =>
+      obtain ⟨u, hu, eu⟩ := hx
+      obtain ⟨v, hv, ev⟩ := hy
+      exact ⟨u + v, add_mem hu hv, by rw [smul_add, eu, ev, TensorProduct.tmul_add]⟩
+  · obtain ⟨u, hu, rfl⟩ := hx
+    obtain ⟨v, hv, rfl⟩ := hy
+    exact ⟨u + v, add_mem hu hv, (TensorProduct.tmul_add _ _ _).symm⟩
+
+/-- The kernel of the reduction: if `g` is onto with kernel in `I N`, then `red g z = 0` forces
+`z ∈ I S · (S ⊗ N)`. The proof builds `β : S₀ ⊗_{A₀} M₀ → (S ⊗ N)/I S (S ⊗ N)` with
+`β ∘ red g` the projection. -/
+lemma mem_smul_of_red_eq_zero (g : N →ₗ[A] M₀)
+    (hg : Function.Surjective g) (hk : ∀ a b, g a = g b → a - b ∈ (I • ⊤ : Submodule A N))
+    {z : S ⊗[A] N}
+    (hz : red I g z = 0) :
+    z ∈ (I.map (algebraMap A S) • ⊤ : Submodule S (S ⊗[A] N)) := by
+  set P := (I.map (algebraMap A S) • ⊤ : Submodule S (S ⊗[A] N))
+  let _ : Module (A ⧸ I) (S ⊗[A] N ⧸ P) :=
+    Module.compHom _ (algebraMap (A ⧸ I) (S ⧸ I.map (algebraMap A S)))
+  have : IsScalarTower (A ⧸ I) (S ⧸ I.map (algebraMap A S)) (S ⊗[A] N ⧸ P) :=
+    ⟨fun a b q => by
+      show (a • b) • q = algebraMap _ (S ⧸ I.map (algebraMap A S)) a • b • q
+      rw [Algebra.smul_def, mul_smul]⟩
+  have hfx : ∀ (x : A) (q : S ⊗[A] N ⧸ P),
+      (Ideal.Quotient.mk (I.map (algebraMap A S)) (algebraMap A S x)) • q = x • q := by
+    intro x q
+    obtain ⟨t, rfl⟩ := Submodule.mkQ_surjective _ q
+    rw [Submodule.mkQ_apply, Module.Quotient.mk_smul_mk, algebraMap_smul,
+      Submodule.Quotient.mk_smul]
+  have : IsScalarTower A (A ⧸ I) (S ⊗[A] N ⧸ P) :=
+    ⟨fun x a q => by
+      obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective a
+      show algebraMap _ (S ⧸ I.map (algebraMap A S)) (x • Ideal.Quotient.mk I a) • q =
+        x • algebraMap _ (S ⧸ I.map (algebraMap A S)) (Ideal.Quotient.mk I a) • q
+      rw [Algebra.smul_def, map_mul, mul_smul]
+      exact hfx x _⟩
+  let h₁ : N →ₗ[A] S ⊗[A] N ⧸ P := P.mkQ.restrictScalars A ∘ₗ TensorProduct.mk A S N 1
+  have hker : ∀ n ∈ (I • ⊤ : Submodule A N), h₁ n = 0 := fun n hn => by
+    refine Submodule.smul_induction_on (p := fun n => h₁ n = 0) hn
+      (fun x hx n _ => ?_) (fun a b ha hb => by rw [map_add, ha, hb, add_zero])
+    simp only [h₁, LinearMap.coe_comp, Function.comp_apply, TensorProduct.mk_apply,
+      LinearMap.coe_restrictScalars, Submodule.mkQ_apply, Submodule.Quotient.mk_eq_zero]
+    rw [← TensorProduct.smul_tmul, ← algebraMap_smul S x, ← TensorProduct.smul_tmul']
+    exact Submodule.smul_mem_smul (Ideal.mem_map_of_mem _ hx) trivial
+  have key : ∀ a b, g a = g b → h₁ a = h₁ b := fun a b hab => by
+    rw [← sub_eq_zero, ← map_sub]; exact hker _ (hk a b hab)
+  let h₂ : M₀ →ₗ[A] S ⊗[A] N ⧸ P :=
+    { toFun := fun m => h₁ (Function.surjInv hg m)
+      map_add' := fun m m' => by
+        rw [← map_add]
+        exact key _ _ (by rw [map_add, Function.surjInv_eq hg, Function.surjInv_eq hg,
+          Function.surjInv_eq hg])
+      map_smul' := fun c m => by
+        rw [RingHom.id_apply, ← map_smul]
+        exact key _ _ (by rw [map_smul, Function.surjInv_eq hg, Function.surjInv_eq hg]) }
+  have h₂g : ∀ n, h₂ (g n) = h₁ n := fun n => key _ _ (Function.surjInv_eq hg _)
+  let h₃ : M₀ →ₗ[A ⧸ I] S ⊗[A] N ⧸ P :=
+    h₂.extendScalarsOfSurjective Ideal.Quotient.mk_surjective
+  let β := LinearMap.liftBaseChange (S ⧸ I.map (algebraMap A S)) h₃
+  have hβ : ∀ t, β (red I g t) = P.mkQ t := fun t => by
+    induction t using TensorProduct.inductionOn with
+    | tmul b n =>
+      rw [red_tmul, LinearMap.liftBaseChange_tmul]
+      show (Ideal.Quotient.mk _ b) • h₂ (g n) = _
+      rw [h₂g]
+      simp only [h₁, LinearMap.coe_comp, Function.comp_apply, TensorProduct.mk_apply,
+        LinearMap.coe_restrictScalars, Submodule.mkQ_apply]
+      rw [Module.Quotient.mk_smul_mk, TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+    | add x y hx hy => rw [map_add, map_add, hx, hy, map_add]
+  have := hβ z
+  rwa [hz, map_zero, eq_comm, Submodule.mkQ_apply, Submodule.Quotient.mk_eq_zero] at this
+
+/-- Combining the two: `red g z = 0` gives `z = 1 ⊗ y` with `y ∈ I N`. -/
+lemma exists_tmul_of_red_eq_zero (h : IsConductorIdeal S I) (g : N →ₗ[A] M₀)
+    (hg : Function.Surjective g) (hk : ∀ a b, g a = g b → a - b ∈ (I • ⊤ : Submodule A N))
+    {z : S ⊗[A] N}
+    (hz : red I g z = 0) : ∃ y ∈ (I • ⊤ : Submodule A N), z = 1 ⊗ₜ y :=
+  exists_tmul_of_mem_smul h (mem_smul_of_red_eq_zero g hg hk hz)
+
+end Reduction
+
+section Reduce
+
+variable {A S : Type u} [CommRing A] [CommRing S] [Algebra A S] {I : Ideal A}
+  {E : Type u} [AddCommGroup E] [Module S E] [Module A E] [IsScalarTower A S E]
+
+/-- `lTensor` along a base ring is linear over it. -/
+lemma lTensor_smul_apply {R B X Y : Type*} [CommRing R] [CommRing B] [Algebra R B]
+    [AddCommGroup X] [Module R X] [AddCommGroup Y] [Module R Y] (f : X →ₗ[R] Y) (b : B)
+    (t : B ⊗[R] X) : f.lTensor B (b • t) = b • f.lTensor B t := by
+  rw [← LinearMap.baseChange_eq_lTensor, map_smul]
+
+variable (I) in
+/-- `π : E → E₀ = S₀ ⊗_S E`, `e ↦ 1 ⊗ e` (the reduction `E → E/IE`). -/
+noncomputable abbrev proj : E →ₗ[S] (S ⧸ I.map (algebraMap A S)) ⊗[S] E :=
+  TensorProduct.mk S (S ⧸ I.map (algebraMap A S)) E 1
+
+omit [Module A E] [IsScalarTower A S E] in
+lemma proj_surjective : Function.Surjective (proj I : E →ₗ[S] _) := by
+  intro x
+  induction x using TensorProduct.inductionOn with
+  | tmul s e =>
+    obtain ⟨s, rfl⟩ := Ideal.Quotient.mk_surjective s
+    refine ⟨s • e, ?_⟩
+    rw [TensorProduct.mk_apply, ← TensorProduct.smul_tmul, Algebra.smul_def, mul_one]
+    rfl
+  | add x y hx hy =>
+    obtain ⟨u, rfl⟩ := hx
+    obtain ⟨v, rfl⟩ := hy
+    exact ⟨u + v, map_add _ _ _⟩
+
+omit [Module A E] [IsScalarTower A S E] in
+lemma mem_ker_proj {e : E} :
+    proj (S := S) I e = 0 ↔ e ∈ (I.map (algebraMap A S) • ⊤ : Submodule S E) := by
+  have h := LinearMap.congr_fun (TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ (M := E)
+    (I.map (algebraMap A S))) e
+  rw [proj, ← h, LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.map_eq_zero_iff,
+    Submodule.mkQ_apply, Submodule.Quotient.mk_eq_zero]
+
+lemma mem_smul_iff (h : IsConductorIdeal S I) {e : E} :
+    e ∈ (I.map (algebraMap A S) • ⊤ : Submodule S E) ↔ e ∈ (I • ⊤ : Submodule A E) := by
+  constructor
+  · intro he
+    refine Submodule.smul_induction_on (p := fun e => e ∈ (I • ⊤ : Submodule A E)) he
+      (fun r hr e _ => ?_) (fun _ _ => add_mem)
+    obtain ⟨x, hx, rfl⟩ := h.mem_map.1 hr
+    rw [algebraMap_smul]
+    exact Submodule.smul_mem_smul hx trivial
+  · intro he
+    refine Submodule.smul_induction_on (p := fun e => e ∈ (I.map (algebraMap A S) • ⊤ :
+      Submodule S E)) he (fun x hx e _ => ?_) (fun _ _ => add_mem)
+    rw [← algebraMap_smul S x e]
+    exact Submodule.smul_mem_smul (Ideal.mem_map_of_mem _ hx) Submodule.mem_top
+
+variable (I) in
+/-- `ρ : S ⊗_A E → S₀ ⊗_{A₀} E₀`, the reduction of `S ⊗ E`. -/
+noncomputable abbrev redE :
+    S ⊗[A] E →ₗ[S] (S ⧸ I.map (algebraMap A S)) ⊗[A ⧸ I] ((S ⧸ I.map (algebraMap A S)) ⊗[S] E) :=
+  red I ((proj I).restrictScalars A)
+
+namespace DescentDatum
+
+variable (I) in
+/-- **The reduction of a descent datum modulo `I`**: on `E₀ = S₀ ⊗_S E`, relative to
+`A₀ = A/I → S₀ = S/IS`, `ψ₀(s ⊗ e) = s · ρ(ψ(e))`. -/
+noncomputable def reduce (d : DescentDatum A S E) :
+    DescentDatum (A ⧸ I) (S ⧸ I.map (algebraMap A S)) ((S ⧸ I.map (algebraMap A S)) ⊗[S] E) where
+  ψ := LinearMap.liftBaseChange _ (redE I ∘ₗ d.ψ)
+  counit x := by
+    have key : ∀ t : S ⊗[A] E, LinearMap.liftBaseChange (S ⧸ I.map (algebraMap A S))
+        (LinearMap.id : ((S ⧸ I.map (algebraMap A S)) ⊗[S] E) →ₗ[A ⧸ I] _) (redE I t) =
+        proj I (LinearMap.liftBaseChange S (LinearMap.id : E →ₗ[A] E) t) := fun t => by
+      induction t using TensorProduct.inductionOn with
+      | tmul b e =>
+        rw [red_tmul, LinearMap.liftBaseChange_tmul, LinearMap.liftBaseChange_tmul]
+        simp only [LinearMap.coe_restrictScalars, TensorProduct.mk_apply, LinearMap.id_apply,
+          map_smul, TensorProduct.smul_tmul']
+        rfl
+      | add x y hx hy => simp only [map_add, hx, hy]
+    induction x using TensorProduct.inductionOn with
+    | tmul s e =>
+      rw [LinearMap.liftBaseChange_tmul, map_smul, LinearMap.comp_apply, key, d.counit]
+      rw [TensorProduct.mk_apply, TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+    | add x y hx hy => simp only [map_add, hx, hy]
+  coassoc x := by
+    set ψ₀ : (S ⧸ I.map (algebraMap A S)) ⊗[S] E →ₗ[S ⧸ I.map (algebraMap A S)] _ :=
+      LinearMap.liftBaseChange _ (redE I ∘ₗ d.ψ)
+    let ρ₂ := red (S := S) I ((redE (S := S) I (E := E)).restrictScalars A)
+    have L1 : ∀ t : S ⊗[A] E, (ψ₀.restrictScalars (A ⧸ I)).lTensor _ (redE I t) =
+        ρ₂ ((d.ψ.restrictScalars A).lTensor S t) := fun t => by
+      induction t using TensorProduct.inductionOn with
+      | tmul b e =>
+        rw [red_tmul, LinearMap.lTensor_tmul, LinearMap.lTensor_tmul, red_tmul]
+        simp only [ψ₀, LinearMap.coe_restrictScalars, TensorProduct.mk_apply,
+          LinearMap.liftBaseChange_one_tmul, LinearMap.comp_apply]
+      | add x y hx hy => simp only [map_add, hx, hy]
+    have L2 : ∀ t : S ⊗[A] E,
+        (TensorProduct.mk (A ⧸ I) (S ⧸ I.map (algebraMap A S)) _ 1).lTensor _ (redE I t) =
+        ρ₂ ((TensorProduct.mk A S E 1).lTensor S t) := fun t => by
+      induction t using TensorProduct.inductionOn with
+      | tmul b e =>
+        rw [red_tmul, LinearMap.lTensor_tmul, LinearMap.lTensor_tmul, red_tmul]
+        simp only [LinearMap.coe_restrictScalars, TensorProduct.mk_apply, red_tmul,
+          map_one]
+      | add x y hx hy => simp only [map_add, hx, hy]
+    induction x using TensorProduct.inductionOn with
+    | tmul s e =>
+      rw [LinearMap.liftBaseChange_tmul, LinearMap.comp_apply, lTensor_smul_apply,
+        lTensor_smul_apply, L1, d.coassoc, L2]
+    | add x y hx hy => simp only [map_add, hx, hy]
+
+end DescentDatum
+
+end Reduce
+
+section Main
+
+variable {A S : Type u} [CommRing A] [CommRing S] [Algebra A S] {I : Ideal A}
+  {E : Type u} [AddCommGroup E] [Module S E] [Module A E] [IsScalarTower A S E]
+
+lemma proj_restrict_surjective :
+    Function.Surjective ((proj (S := S) I).restrictScalars A : E →ₗ[A] _) :=
+  proj_surjective (S := S) (E := E)
+
+lemma ker_proj_le (h : IsConductorIdeal S I) :
+    LinearMap.ker ((proj (S := S) I).restrictScalars A : E →ₗ[A] _) ≤ I • ⊤ := fun _ he =>
+  (mem_smul_iff h).1 (mem_ker_proj.1 he)
+
+namespace DescentDatum
+
+/-- **Step 1** (the square-zero computation of page 5, which needs no nilpotence): `e` is
+invariant iff its reduction is. So the invariants of `E₀` are the image of those of `E`, and
+every `e ∈ I E` is invariant. -/
+lemma mem_invariants_iff (h : IsConductorIdeal S I) (d : DescentDatum A S E) (e : E) :
+    e ∈ d.invariants ↔ proj I e ∈ (d.reduce I).invariants := by
+  have hψ : (d.reduce I).ψ (proj I e) = redE I (d.ψ e) := LinearMap.liftBaseChange_one_tmul _ _ _
+  have h1 : redE (S := S) I ((1 : S) ⊗ₜ[A] e) = 1 ⊗ₜ proj I e := by
+    rw [red_tmul, map_one]; rfl
+  rw [mem_invariants, mem_invariants, hψ, ← h1]
+  refine ⟨fun he => by rw [he], fun he => ?_⟩
+  rw [← sub_eq_zero, ← map_sub] at he
+  obtain ⟨y, -, hy⟩ := exists_tmul_of_red_eq_zero h _ (proj_restrict_surjective (S := S) (E := E))
+    (fun a b hab => ker_proj_le (S := S) (E := E) h
+      (by rw [LinearMap.mem_ker, map_sub, hab, sub_self])) he
+  have := congr_arg (LinearMap.liftBaseChange S (LinearMap.id : E →ₗ[A] E)) hy
+  rw [map_sub, d.counit, LinearMap.liftBaseChange_one_tmul, LinearMap.id_apply,
+    LinearMap.liftBaseChange_one_tmul, LinearMap.id_apply, sub_self] at this
+  rw [← sub_eq_zero, hy, ← this, TensorProduct.tmul_zero]
+
+/-- **Step 2** (Nakayama for the nilpotent ideal `IS`): if the reduction is effective, the
+invariants generate `E` over `S`. -/
+lemma span_invariants_eq_top (h : IsConductorIdeal S I) (hI : IsNilpotent I)
+    (d : DescentDatum A S E) (h₀ : (d.reduce I).IsEffective) :
+    Submodule.span S (d.invariants : Set E) = ⊤ := by
+  set P := Submodule.span S (d.invariants : Set E)
+  set I' := I.map (algebraMap A S)
+  have hstep : ⊤ ≤ P ⊔ I' • ⊤ := by
+    intro e _
+    obtain ⟨t, ht⟩ := h₀.2.2 (proj I e)
+    have hmem : proj I e ∈ P.map (proj I) := by
+      have hr : proj I e ∈ LinearMap.range
+          (LinearMap.liftBaseChange (S ⧸ I') (d.reduce I).invariants.subtype) := ⟨t, ht⟩
+      rw [LinearMap.range_liftBaseChange, Submodule.range_subtype] at hr
+      have hr' : proj I e ∈ (Submodule.span (S ⧸ I') ((d.reduce I).invariants :
+          Set ((S ⧸ I') ⊗[S] E))).restrictScalars S := hr
+      rw [Submodule.restrictScalars_span S (S ⧸ I') Ideal.Quotient.mk_surjective] at hr'
+      refine (Submodule.span_le.2 ?_) hr'
+      intro x hx
+      obtain ⟨y, rfl⟩ := proj_surjective (I := I) x
+      exact ⟨y, Submodule.subset_span ((mem_invariants_iff h d y).2 hx), rfl⟩
+    obtain ⟨p, hp, hpe⟩ := hmem
+    have : e - p ∈ I' • (⊤ : Submodule S E) := by
+      rw [← mem_ker_proj, map_sub, hpe, sub_self]
+    rw [show e = p + (e - p) by abel]
+    exact Submodule.add_mem_sup hp this
+  have key : ∀ k : ℕ, ⊤ ≤ P ⊔ I' ^ k • ⊤ := by
+    intro k
+    induction k with
+    | zero => rw [pow_zero, Ideal.one_eq_top, Submodule.top_smul]; exact le_sup_right
+    | succ k ih =>
+      refine ih.trans (sup_le le_sup_left ?_)
+      calc I' ^ k • (⊤ : Submodule S E) ≤ I' ^ k • (P ⊔ I' • ⊤) := Submodule.smul_mono le_rfl hstep
+        _ = I' ^ k • P ⊔ (I' ^ k * I') • ⊤ := by rw [Submodule.smul_sup, Submodule.mul_smul]
+        _ ≤ P ⊔ I' ^ (k + 1) • ⊤ := by
+          rw [← pow_succ]; exact sup_le_sup_right Submodule.smul_le_right _
+  obtain ⟨n, hn⟩ := isNilpotent_map (S := S) hI
+  have := key n
+  rw [hn, Ideal.zero_eq_bot, Submodule.bot_smul, sup_bot_eq] at this
+  exact top_le_iff.1 this
+
+/-! The invariants are handled through an injective `ι : N → E` onto them, `N` any module
+(in the end `N = E^ψ`, `ι` the inclusion). -/
+
+variable {N : Type u} [AddCommGroup N] [Module A N]
+
+/-- `I S · E ⊂ ι(I N)` once the invariants span `E`. -/
+lemma exists_of_mem_smul (h : IsConductorIdeal S I) (ι : N →ₗ[A] E)
+    (hspan : Submodule.span S (Set.range ι) = ⊤) {e : E}
+    (he : e ∈ (I.map (algebraMap A S) • ⊤ : Submodule S E)) :
+    ∃ y ∈ (I • ⊤ : Submodule A N), e = ι y := by
+  have key : ∀ x ∈ Submodule.span S (Set.range ι), ∀ r ∈ I.map (algebraMap A S),
+      ∃ y ∈ (I • ⊤ : Submodule A N), r • x = ι y := by
+    intro x hx
+    induction hx using Submodule.span_induction with
+    | mem x hx =>
+      intro r hr
+      obtain ⟨n, rfl⟩ := hx
+      obtain ⟨c, hc, rfl⟩ := h.mem_map.1 hr
+      exact ⟨c • n, Submodule.smul_mem_smul hc trivial, by rw [algebraMap_smul, map_smul]⟩
+    | zero => exact fun r _ => ⟨0, zero_mem _, by simp⟩
+    | add x y _ _ hx hy =>
+      intro r hr
+      obtain ⟨u, hu, eu⟩ := hx r hr
+      obtain ⟨v, hv, ev⟩ := hy r hr
+      exact ⟨u + v, add_mem hu hv, by rw [smul_add, eu, ev, map_add]⟩
+    | smul b x _ hx =>
+      intro r hr
+      rw [smul_smul]
+      exact hx _ (Ideal.mul_mem_right _ _ hr)
+  refine Submodule.smul_induction_on (p := fun (e : E) => ∃ y ∈ (I • ⊤ : Submodule A N),
+    e = ι y) he (fun r hr x _ => key x (hspan ▸ Submodule.mem_top) r hr) ?_
+  rintro _ _ ⟨u, hu, rfl⟩ ⟨v, hv, rfl⟩
+  exact ⟨u + v, add_mem hu hv, (map_add _ _ _).symm⟩
+
+variable (I) in
+/-- The reduction `N ≅ E^ψ → E₀^{ψ₀}` of the invariants. -/
+noncomputable def projInv (h : IsConductorIdeal S I) (d : DescentDatum A S E) (ι : N →ₗ[A] E)
+    (hrange : ∀ n, ι n ∈ d.invariants) : N →ₗ[A] (d.reduce I).invariants where
+  toFun n := ⟨proj I (ι n), (mem_invariants_iff h d _).1 (hrange n)⟩
+  map_add' _ _ := Subtype.ext (by simp only [map_add, Submodule.coe_add])
+  map_smul' c n := Subtype.ext (by
+    simp only [map_smul, RingHom.id_apply, Submodule.coe_smul_of_tower]
+    exact ((proj I).restrictScalars A).map_smul c (ι n))
+
+lemma projInv_surjective (h : IsConductorIdeal S I) (d : DescentDatum A S E) (ι : N →ₗ[A] E)
+    (hrange : ∀ n, ι n ∈ d.invariants) (hrange' : ∀ e ∈ d.invariants, ∃ n, ι n = e) :
+    Function.Surjective (projInv I h d ι hrange) := by
+  rintro ⟨x, hx⟩
+  obtain ⟨y, rfl⟩ := proj_surjective (I := I) x
+  obtain ⟨n, rfl⟩ := hrange' y ((mem_invariants_iff h d y).2 hx)
+  exact ⟨n, rfl⟩
+
+lemma mem_smul_of_proj_eq_zero (h : IsConductorIdeal S I) (ι : N →ₗ[A] E)
+    (hι : Function.Injective ι) (hspan : Submodule.span S (Set.range ι) = ⊤) {n : N}
+    (hn : proj (S := S) I (ι n) = 0) : n ∈ (I • ⊤ : Submodule A N) := by
+  obtain ⟨_, hy, e⟩ := exists_of_mem_smul h ι hspan (mem_ker_proj.1 hn)
+  rwa [hι e]
+
+/-- The core of Prop. 2, for any `ι : N → E` injective onto the invariants. -/
+theorem flat_and_bijective_of_reduce (h : IsConductorIdeal S I) (hI : IsNilpotent I)
+    [Module.Flat S E] (d : DescentDatum A S E) (h₀ : (d.reduce I).IsEffective)
+    (ι : N →ₗ[A] E) (hι : Function.Injective ι) (hrange : ∀ n, ι n ∈ d.invariants)
+    (hrange' : ∀ e ∈ d.invariants, ∃ n, ι n = e) :
+    Module.Flat A N ∧ Function.Bijective (LinearMap.liftBaseChange S ι) := by
+  have hspan : Submodule.span S (Set.range ι) = ⊤ := by
+    rw [← span_invariants_eq_top h hI d h₀]
+    congr 1
+    ext e
+    exact ⟨by rintro ⟨n, rfl⟩; exact hrange n, fun he => hrange' e he⟩
+  set g := projInv I h d ι hrange
+  have hg := projInv_surjective h d ι hrange hrange'
+  have hg0 : ∀ n, proj (S := S) I (ι n) = 0 → n ∈ (I • ⊤ : Submodule A N) := fun n hn =>
+    mem_smul_of_proj_eq_zero h ι hι hspan hn
+  set α := LinearMap.liftBaseChange S ι
+  have hsurj : Function.Surjective α := by
+    rw [← LinearMap.range_eq_top, LinearMap.range_liftBaseChange]
+    exact hspan
+  -- `α₀ ∘ red g = π ∘ α`
+  have hcomm : ∀ t, LinearMap.liftBaseChange (S ⧸ I.map (algebraMap A S))
+      (d.reduce I).invariants.subtype (red (S := S) (M₀ := (d.reduce I).invariants) I g t) =
+        proj I (α t) := fun t => by
+    induction t using TensorProduct.inductionOn with
+    | tmul b x =>
+      rw [red_tmul, LinearMap.liftBaseChange_tmul, LinearMap.liftBaseChange_tmul]
+      simp only [Submodule.subtype_apply, g, projInv, LinearMap.coe_mk, AddHom.coe_mk,
+        map_smul, TensorProduct.mk_apply, TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+      rw [Algebra.smul_def, mul_one]
+      rfl
+    | add x y hx hy => simp only [map_add, hx, hy]
+  have hinj : Function.Injective α := by
+    rw [injective_iff_map_eq_zero]
+    intro t ht
+    have h0 : red (S := S) (M₀ := (d.reduce I).invariants) I g t = 0 :=
+      h₀.2.1 (by rw [hcomm, ht, map_zero, map_zero])
+    have hk : ∀ a b, g a = g b → a - b ∈ (I • ⊤ : Submodule A N) := fun a b hab => by
+      refine hg0 _ ?_
+      have : proj I (ι a) = proj I (ι b) := congr_arg Subtype.val hab
+      rw [map_sub, map_sub, this, sub_self]
+    have := exists_tmul_of_red_eq_zero (M₀ := (d.reduce I).invariants) (z := t) h g hg hk
+    obtain ⟨y, -, rfl⟩ := this h0
+    have : y = 0 := hι (by simpa [α] using ht)
+    rw [this, TensorProduct.tmul_zero]
+  refine ⟨flat_of_isNilpotent hI ?_ ?_, hinj, hsurj⟩
+  · -- `A/I ⊗_A N ≅ E₀^{ψ₀}`, flat over `A/I`
+    let φ := LinearMap.liftBaseChange (A ⧸ I) g
+    have hφ : Function.Bijective φ := by
+      refine ⟨?_, fun x => ?_⟩
+      · rw [injective_iff_map_eq_zero]
+        intro t ht
+        obtain ⟨n, rfl⟩ : ∃ n, (1 : A ⧸ I) ⊗ₜ[A] n = t := by
+          obtain ⟨q, rfl⟩ := (TensorProduct.quotTensorEquivQuotSMul N I).symm.surjective t
+          obtain ⟨n, rfl⟩ := Submodule.mkQ_surjective _ q
+          exact ⟨n, rfl⟩
+        rw [LinearMap.liftBaseChange_one_tmul] at ht
+        have hn := hg0 n (congr_arg Subtype.val ht)
+        rw [← TensorProduct.quotTensorEquivQuotSMul_symm_mk, LinearEquiv.map_eq_zero_iff,
+          Submodule.Quotient.mk_eq_zero]
+        exact hn
+      · obtain ⟨n, rfl⟩ := hg x
+        exact ⟨1 ⊗ₜ n, LinearMap.liftBaseChange_one_tmul _ _ _⟩
+    have : Module.Flat (A ⧸ I) (d.reduce I).invariants := h₀.1
+    exact Module.Flat.of_linearEquiv (LinearEquiv.ofBijective φ hφ)
+  · -- `I ⊗_A N ≅ I ⊗_S (S ⊗_A N) ≅ I ⊗_S E → E` is injective, `E` being flat over `S`
+    set I' := I.map (algebraMap A S)
+    let j : I →ₗ[A] I' :=
+      { toFun := fun x => ⟨algebraMap A S x, Ideal.mem_map_of_mem _ x.2⟩
+        map_add' := fun x y => Subtype.ext (map_add _ _ _)
+        map_smul' := fun c x => Subtype.ext (by simp [Algebra.smul_def]) }
+    have hj : Function.Bijective j := by
+      refine ⟨fun x y hxy => ?_, fun r => ?_⟩
+      · have : algebraMap A S ((x : A) - y) = 0 := by
+          rw [map_sub, sub_eq_zero]; exact congr_arg Subtype.val hxy
+        exact Subtype.ext (sub_eq_zero.1 (h.inj _ (I.sub_mem x.2 y.2) this))
+      · obtain ⟨x, hx, e⟩ := h.mem_map.1 r.2
+        exact ⟨⟨x, hx⟩, Subtype.ext e⟩
+    let αe := LinearEquiv.ofBijective α ⟨hinj, hsurj⟩
+    let Φ : I ⊗[A] N →ₗ[A] E :=
+      (TensorProduct.lid S E).toLinearMap.restrictScalars A ∘ₗ
+        (I'.subtype.rTensor E).restrictScalars A ∘ₗ
+          (αe.toLinearMap.lTensor I').restrictScalars A ∘ₗ
+            (AlgebraTensorModule.cancelBaseChange A S S I' N).symm.toLinearMap.restrictScalars A ∘ₗ
+              j.rTensor N
+    have hΦ : Φ = (ι ∘ₗ (TensorProduct.lid A N).toLinearMap) ∘ₗ I.subtype.rTensor N := by
+      refine TensorProduct.ext' fun x n => ?_
+      simp only [Φ, αe, α, j]
+      simp [algebraMap_smul]
+      exact congr_arg _ (LinearMap.liftBaseChange_one_tmul _ _ _)
+    have hΦinj : Function.Injective Φ := by
+      have h1 : Function.Injective (j.rTensor N) := by
+        have : j.rTensor N = (LinearEquiv.ofBijective j hj).rTensor N := rfl
+        rw [this, LinearEquiv.coe_rTensor]
+        exact (LinearEquiv.rTensor N (LinearEquiv.ofBijective j hj)).injective
+      have h3 : Function.Injective (αe.toLinearMap.lTensor I') := by
+        rw [← LinearEquiv.coe_lTensor]
+        exact (LinearEquiv.lTensor I' αe).injective
+      have h4 : Function.Injective (I'.subtype.rTensor E) :=
+        Module.Flat.rTensor_preserves_injective_linearMap _ Subtype.val_injective
+      exact (TensorProduct.lid S E).injective.comp (h4.comp (h3.comp
+        ((AlgebraTensorModule.cancelBaseChange A S S I' N).symm.injective.comp h1)))
+    rw [hΦ, LinearMap.coe_comp] at hΦinj
+    exact hΦinj.of_comp
+
+/-- **Folder 128, Prop. 2** (Grothendieck, pages 4–7). Let `I` be a nilpotent ideal of `A`
+mapped isomorphically onto an ideal of `S`, and `E` a flat `S`-module with a descent datum
+relative to `A → S` whose reduction modulo `I` (relative to `A/I → S/IS`) is effective. Then the
+datum is effective: the invariants `E^ψ` are flat over `A` and `S ⊗_A E^ψ → E` is bijective.
+Neither `A ≅ H⁰(S/A)` nor `H¹(S/A) = 0` is needed. -/
+theorem isEffective_of_reduce (h : IsConductorIdeal S I) (hI : IsNilpotent I)
+    [Module.Flat S E] (d : DescentDatum A S E) (h₀ : (d.reduce I).IsEffective) :
+    d.IsEffective := by
+  obtain ⟨h1, h2⟩ := flat_and_bijective_of_reduce h hI d h₀ (N := d.invariants)
+    d.invariants.subtype Subtype.val_injective (fun n => n.2) (fun e he => ⟨⟨e, he⟩, rfl⟩)
+  exact ⟨h1, h2⟩
+
+end DescentDatum
+
+/-- `M → M₀ = A/I ⊗ M` is onto, with kernel `I M`. -/
+lemma mk_quot_surjective (M : Type u) [AddCommGroup M] [Module A M] :
+    Function.Surjective (TensorProduct.mk A (A ⧸ I) M 1) := fun t => by
+  obtain ⟨q, rfl⟩ := (TensorProduct.quotTensorEquivQuotSMul M I).symm.surjective t
+  obtain ⟨n, rfl⟩ := Submodule.mkQ_surjective _ q
+  exact ⟨n, rfl⟩
+
+lemma mk_quot_eq_zero {M : Type u} [AddCommGroup M] [Module A M] {m : M} :
+    TensorProduct.mk A (A ⧸ I) M 1 m = 0 ↔ m ∈ (I • ⊤ : Submodule A M) := by
+  rw [TensorProduct.mk_apply, ← TensorProduct.quotTensorEquivQuotSMul_symm_mk,
+    LinearEquiv.map_eq_zero_iff, Submodule.Quotient.mk_eq_zero]
+
+/-- **Folder 128, Cor. 1** (Grothendieck, page 7). Let `I` be a nilpotent ideal of `A` mapped
+isomorphically onto an ideal of `S` (`I` in the conductor). If `Spec S/IS → Spec A/I` is an
+effective descent morphism for flat modules, so is `Spec S → Spec A`. -/
+theorem isEffectiveDescentFlat_of_quotient (h : IsConductorIdeal S I) (hI : IsNilpotent I)
+    (h₀ : IsEffectiveDescentFlat (A ⧸ I) (S ⧸ I.map (algebraMap A S))) :
+    IsEffectiveDescentFlat A S := by
+  refine ⟨fun M _ _ _ => ?_, fun E _ _ _ _ _ d =>
+    DescentDatum.isEffective_of_reduce h hI d (h₀.2 _ (d.reduce I))⟩
+  obtain ⟨hinj₀, hinv₀⟩ := h₀.1 ((A ⧸ I) ⊗[A] M)
+  let gM : M →ₗ[A] (A ⧸ I) ⊗[A] M := TensorProduct.mk A (A ⧸ I) M 1
+  have hgM : Function.Surjective gM := mk_quot_surjective M
+  have hk : ∀ a b, gM a = gM b → a - b ∈ (I • ⊤ : Submodule A M) := fun a b hab => by
+    rw [← mk_quot_eq_zero, map_sub, sub_eq_zero]; exact hab
+  have hred1 : ∀ m, red (S := S) I gM (1 ⊗ₜ m) = 1 ⊗ₜ gM m := fun m => by
+    rw [red_tmul, map_one]
+  constructor
+  · -- `M → S ⊗ M` is injective
+    rw [injective_iff_map_eq_zero]
+    intro m hm
+    have h1 : gM m = 0 := hinj₀ (by
+      rw [map_zero]
+      have := hred1 m
+      rw [show (1 : S) ⊗ₜ[A] m = 0 from hm, map_zero] at this
+      exact this.symm)
+    obtain ⟨t, rfl⟩ : m ∈ LinearMap.range (smulMap I M) := by
+      rw [range_smulMap]; exact mk_quot_eq_zero.1 h1
+    let ν : I ⊗[A] M →ₗ[A] S ⊗[A] M := (Algebra.linearMap A S ∘ₗ I.subtype).rTensor M
+    have hν : Function.Injective ν := Module.Flat.rTensor_preserves_injective_linearMap _
+      (fun x y hxy => Subtype.ext (sub_eq_zero.1 (h.inj _ (I.sub_mem x.2 y.2)
+        (by rw [map_sub, sub_eq_zero]; exact hxy))))
+    have he : TensorProduct.mk A S M 1 ∘ₗ smulMap I M = ν := by
+      refine TensorProduct.ext' fun x n => ?_
+      simp [ν, Algebra.algebraMap_eq_smul_one, TensorProduct.smul_tmul]
+    have : ν t = 0 := by rw [← he, LinearMap.comp_apply]; exact hm
+    rw [hν (this.trans (map_zero ν).symm), map_zero]
+  · -- the invariants of `S ⊗ M` come from `M`
+    intro x hx
+    rw [DescentDatum.mem_invariants] at hx
+    let ρ₂ := red (S := S) I ((red (S := S) I gM).restrictScalars A)
+    have L1 : ∀ t, (canonical (A ⧸ I) (S ⧸ I.map (algebraMap A S)) ((A ⧸ I) ⊗[A] M)).ψ
+        (red I gM t) = ρ₂ ((canonical A S M).ψ t) := fun t => by
+      induction t using TensorProduct.inductionOn with
+      | tmul b m =>
+        simp only [canonical, red_tmul, LinearMap.baseChange_tmul, TensorProduct.mk_apply, ρ₂,
+          LinearMap.coe_restrictScalars, map_one]
+      | add x y hx hy => simp only [map_add, hx, hy]
+    have L2 : ∀ t, (1 : S ⧸ I.map (algebraMap A S)) ⊗ₜ[A ⧸ I] red I gM t =
+        ρ₂ ((1 : S) ⊗ₜ[A] t) := fun t => by
+      rw [red_tmul, map_one]; rfl
+    have hx₀ : red (S := S) I gM x ∈
+        (canonical (A ⧸ I) (S ⧸ I.map (algebraMap A S)) ((A ⧸ I) ⊗[A] M)).invariants := by
+      rw [DescentDatum.mem_invariants, L1, hx, ← L2]
+    obtain ⟨m₀, hm₀⟩ := hinv₀ hx₀
+    obtain ⟨m, rfl⟩ := hgM m₀
+    have hz : red (S := S) I gM (x - 1 ⊗ₜ m) = 0 := by
+      rw [map_sub, hred1, sub_eq_zero]; exact hm₀.symm
+    obtain ⟨y, -, hy⟩ := exists_tmul_of_red_eq_zero h gM hgM hk hz
+    exact ⟨m + y, by rw [TensorProduct.mk_apply, TensorProduct.tmul_add, ← hy,
+      add_sub_cancel]⟩
+
+end Main
+
+end Grothendieck.Folder128.Descent
+
+
+/-!
+## Pages 19–29: descent along the infinitesimal neighbourhoods — what is proved
+
+The reading (« Descente le long des voisinages infinitésimaux ») states a Théorème (page 25):
+for `A` semi-local noetherian with radical `𝔪`, `A'` finite over `A`, `A_n = A/𝔪^{n+1}`,
+`A'_n = A' ⊗ A_n`, the conditions `H¹(A'_n/A_n) = 0`, `H¹(A'_n/A_n, Gl_r)` trivial and
+« `Spec A'_n → Spec H⁰(A'_n/A_n)` is an effective descent morphism for flat modules », for all
+`n`, are equivalent, and imply effective descent of flat modules of finite type along
+`Spec A' → Spec H⁰(A'/A)`. Its proof (pages 26–29) rests on Lemme 1 (pages 19–20), whose proof
+the reading finds wrong (the multiplicative coboundary is a logarithmic derivative), on
+Cor. 2–3 (pages 21–22), on Lemme 2 (pages 23–24), and on an unwritten passage to the limit.
+The theorem itself is **not** formalised here. This section proves the parts of its proof that
+hold as written, or in a stronger form:
+
+* `lemme2` (Lemme 2, page 23, with the edition's observation that hypothesis (i) is superfluous):
+  `C` integral over `B` with finitely many maximal ideals, distinct maximal ideals of `C` lying
+  over distinct ideals of `B`, purely inseparable residue extensions. Then every `u ∈ M_n(C)` has
+  a `v ∈ M_n(B)` with `u + v` invertible. No infinite residue field is assumed: a finite
+  residue field is perfect, so the radicial extension is trivial and `v = 1 − u` works there;
+  over an infinite residue field `v` is a scalar `t`, `t` avoiding the roots of the monic
+  `det(t + u)`. The Chinese remainder theorem glues the residue fields.
+  `exists_isUnit_add_map` is the same with « infinite or `B → C/𝔫` onto » as hypothesis.
+* `exists_isUnit_add`: the case `n = 1`, the N.B. of Lemme 1 (page 19), `C = C^* + B` for
+  `C = H⁰(A'_0/A_0)` over the image of `B = H⁰(A'/A)`, under the same hypotheses (that
+  `Spec C → Spec B` is radicial is asserted on the page and not proved, here or there).
+* `tensorEquiv`, `bijective_mapOfCompatibleSMul`, `mem_H0_iff` (the bracket of pages 26–27):
+  for `A → B → S` with `B` mapping into `H⁰(S/A) = {s | s ⊗ 1 = 1 ⊗ s}`, the tensor products
+  `S ⊗_A E` and `S ⊗_B E` coincide for every `S`-module `E`; so descent data and Amitsur
+  complexes relative to `S/A` and to `S/H⁰(S/A)` are the same, and `H⁰(S/B) = H⁰(S/A)`.
+* `coboundary_mul_eq`: the identity behind the reading's objection to Lemme 1, page 20:
+  `p₂(u) p₁(u)⁻¹ = 1 + p₁(u)⁻¹ (p₂(u) − p₁(u))`, so the multiplicative coboundary is
+  `u⁻¹ ∂(u)`, not `∂(u)`.
+
+Not formalised: Amitsur cohomology `H¹(A'/A)` and the non-abelian `H¹(A'/A, Gl_r)` (mathlib has
+neither), Lemme 1 and its corollaries (unproved in the folder), the induction on `n`, the
+Mittag-Leffler and Artin–Rees passage to the limit of b), and c).
+-/
+
+namespace Grothendieck.Folder128.Infinitesimal
+
+section Lemme2
+
+open Matrix Polynomial Function
+
+
+
+/-- Over an infinite ring `R` injected into a domain `K`, every `u ∈ M_n(K)` becomes
+nonsingular after adding a scalar `f(t)`: `det(t + u)` is the monic `charpoly(−u)` at `t`. -/
+lemma exists_det_ne_zero_of_infinite {R K : Type*} [CommRing R] [CommRing K] [IsDomain K]
+    (f : R →+* K) (hf : Function.Injective f) [Infinite R]
+    {n : Type*} [Fintype n] [DecidableEq n] (u : Matrix n n K) :
+    ∃ t : R, (u + Matrix.scalar n (f t)).det ≠ 0 := by
+  by_contra! h
+  have hp : (-u).charpoly = 0 := by
+    apply Polynomial.eq_zero_of_infinite_isRoot
+    refine Set.infinite_of_injective_forall_mem hf fun t => ?_
+    simp only [Set.mem_ofPred_eq, Polynomial.IsRoot, eval_charpoly, sub_neg_eq_add, add_comm]
+    exact h t
+  exact (charpoly_monic (-u)).ne_zero hp
+
+variable {B C : Type*} [CommRing B] [CommRing C] [Algebra B C]
+
+/-- `B → C/𝔫`. -/
+abbrev resMap (𝔫 : MaximalSpectrum C) : B →+* C ⧸ 𝔫.asIdeal :=
+  (Ideal.Quotient.mk 𝔫.asIdeal).comp (algebraMap B C)
+
+/-- The kernel of `B → C/𝔫` is `𝔫 ∩ B`. -/
+lemma ker_resMap (𝔫 : MaximalSpectrum C) :
+    RingHom.ker (resMap (B := B) 𝔫) = 𝔫.asIdeal.comap (algebraMap B C) := by
+  ext b
+  exact Ideal.Quotient.eq_zero_iff_mem
+
+/-- The residue-field step of Lemme 2: at a maximal ideal `𝔫` of `C` whose residue field is
+reached by an infinite `B/(𝔫 ∩ B)` or onto from `B`, every matrix over `C/𝔫` becomes nonsingular
+after adding a matrix of `B`. -/
+lemma exists_det_ne_zero_residue (𝔫 : MaximalSpectrum C)
+    (h : Infinite (B ⧸ 𝔫.asIdeal.comap (algebraMap B C)) ∨ Function.Surjective (resMap (B := B) 𝔫))
+    {n : Type*} [Fintype n] [DecidableEq n] (u : Matrix n n (C ⧸ 𝔫.asIdeal)) :
+    ∃ w : Matrix n n B, (u + w.map (resMap 𝔫)).det ≠ 0 := by
+  have := 𝔫.isMaximal
+  rcases h with h | h
+  · have e := Ideal.quotEquivOfEq (ker_resMap (B := B) 𝔫).symm
+    have : Infinite (B ⧸ RingHom.ker (resMap (B := B) 𝔫)) :=
+      Infinite.of_injective (⇑e) e.injective
+    have : IsDomain (C ⧸ 𝔫.asIdeal) := Ideal.Quotient.isDomain _
+    obtain ⟨t, ht⟩ := exists_det_ne_zero_of_infinite (RingHom.kerLift (resMap (B := B) 𝔫))
+      (RingHom.kerLift_injective _) u
+    obtain ⟨t, rfl⟩ := Ideal.Quotient.mk_surjective t
+    refine ⟨Matrix.scalar n t, ?_⟩
+    convert ht using 3
+    ext i j
+    by_cases hij : i = j <;> simp [hij, Matrix.scalar_apply]
+  · choose g hg using h
+    refine ⟨Matrix.of fun i j => g ((1 - u) i j), ?_⟩
+    have : u + (Matrix.of fun i j => g ((1 - u) i j)).map (resMap 𝔫) = 1 := by
+      ext i j
+      rw [Matrix.add_apply, Matrix.map_apply, Matrix.of_apply, hg, Matrix.sub_apply, add_sub_cancel]
+    rw [this, Matrix.det_one]; exact one_ne_zero
+
+/-- **Folder 128, Lemme 2, general form** (Grothendieck, page 23). `C` integral over `B` with
+finitely many maximal ideals, distinct maximal ideals of `C` lying over distinct (maximal) ideals
+of `B`, and at each `𝔫` either `B/(𝔫 ∩ B)` infinite or `B → C/𝔫` onto. Then for every
+`u ∈ M_n(C)` there is `v ∈ M_n(B)` with `u + v` invertible. -/
+theorem exists_isUnit_add_map [Algebra.IsIntegral B C] [Finite (MaximalSpectrum C)]
+    (hinj : ∀ 𝔫 𝔫' : MaximalSpectrum C,
+      𝔫.asIdeal.comap (algebraMap B C) = 𝔫'.asIdeal.comap (algebraMap B C) → 𝔫 = 𝔫')
+    (hres : ∀ 𝔫 : MaximalSpectrum C, Infinite (B ⧸ 𝔫.asIdeal.comap (algebraMap B C)) ∨
+      Function.Surjective (resMap (B := B) 𝔫))
+    {n : Type*} [Fintype n] [DecidableEq n] (u : Matrix n n C) :
+    ∃ v : Matrix n n B, IsUnit (u + v.map (algebraMap B C)) := by
+  choose w hw using fun 𝔫 => exists_det_ne_zero_residue 𝔫 (hres 𝔫) (u.map (Ideal.Quotient.mk _))
+  let I : MaximalSpectrum C → Ideal B := fun 𝔫 => 𝔫.asIdeal.comap (algebraMap B C)
+  have hmax : ∀ 𝔫, (I 𝔫).IsMaximal := fun 𝔫 => by
+    have := 𝔫.isMaximal; exact Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := B) 𝔫.asIdeal
+  have hcop : Pairwise (IsCoprime on I) := fun 𝔫 𝔫' hne => by
+    have := hmax 𝔫; have := hmax 𝔫'
+    exact Ideal.isCoprime_of_isMaximal fun h => hne (hinj 𝔫 𝔫' h)
+  have hcrt : ∀ i j, ∃ x : B, ∀ 𝔫, x - w 𝔫 i j ∈ I 𝔫 := fun i j => by
+    obtain ⟨q, hq⟩ := Ideal.quotientInfToPiQuotient_surj hcop
+      (fun 𝔫 => Ideal.Quotient.mk (I 𝔫) (w 𝔫 i j))
+    obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective q
+    refine ⟨x, fun 𝔫 => ?_⟩
+    rw [← Ideal.Quotient.eq]
+    exact congrFun hq 𝔫
+  choose v hv using hcrt
+  refine ⟨Matrix.of v, ?_⟩
+  rw [Matrix.isUnit_iff_isUnit_det]
+  by_contra hu
+  obtain ⟨𝔪, h𝔪, hmem⟩ := exists_max_ideal_of_mem_nonunits hu
+  let 𝔫 : MaximalSpectrum C := ⟨𝔪, h𝔪⟩
+  apply hw 𝔫
+  have hmap : (Ideal.Quotient.mk 𝔪).mapMatrix (u + (Matrix.of v).map (algebraMap B C)) =
+      u.map (Ideal.Quotient.mk _) + (w 𝔫).map (resMap 𝔫) := by
+    ext i j
+    have := hv i j 𝔫
+    simp only [RingHom.mapMatrix_apply, Matrix.map_apply, Matrix.add_apply, Matrix.of_apply,
+      map_add, RingHom.comp_apply]
+    congr 1
+    rw [Ideal.Quotient.eq]
+    simpa [I, ← map_sub] using this
+  rw [← hmap, ← RingHom.map_det, Ideal.Quotient.eq_zero_iff_mem]
+  exact hmem
+
+/-- **Folder 128, Lemme 2** (Grothendieck, page 23), without hypothesis (i). Let `C` be integral
+over `B` with finitely many maximal ideals, two distinct maximal ideals of `C` lying over
+distinct ideals of `B`, and every residue extension `k(𝔫)/k(𝔪)` purely inseparable (`C` finite
+and radicial over `B`). Then for every `u ∈ M_n(C)` there is `v ∈ M_n(B)` with `u + φ(v)`
+invertible. A finite residue field is perfect, so there the radicial extension is trivial. -/
+theorem lemme2 [Algebra.IsIntegral B C] [Finite (MaximalSpectrum C)]
+    (hinj : ∀ 𝔫 𝔫' : MaximalSpectrum C,
+      𝔫.asIdeal.comap (algebraMap B C) = 𝔫'.asIdeal.comap (algebraMap B C) → 𝔫 = 𝔫')
+    (hrad : ∀ 𝔫 : MaximalSpectrum C,
+      IsPurelyInseparable (B ⧸ 𝔫.asIdeal.comap (algebraMap B C)) (C ⧸ 𝔫.asIdeal))
+    {n : Type*} [Fintype n] [DecidableEq n] (u : Matrix n n C) :
+    ∃ v : Matrix n n B, IsUnit (u + v.map (algebraMap B C)) := by
+  refine exists_isUnit_add_map hinj (fun 𝔫 => ?_) u
+  rcases finite_or_infinite (B ⧸ 𝔫.asIdeal.comap (algebraMap B C)) with hfin | hinf
+  · right
+    have := 𝔫.isMaximal
+    have : (𝔫.asIdeal.comap (algebraMap B C)).IsMaximal :=
+      Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := B) 𝔫.asIdeal
+    let := Ideal.Quotient.field (𝔫.asIdeal.comap (algebraMap B C))
+    let := Ideal.Quotient.field 𝔫.asIdeal
+    have := hrad 𝔫
+    intro c
+    obtain ⟨b', hb'⟩ := IsPurelyInseparable.surjective_algebraMap_of_isSeparable
+      (B ⧸ 𝔫.asIdeal.comap (algebraMap B C)) (C ⧸ 𝔫.asIdeal) c
+    obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective b'
+    exact ⟨b, hb'⟩
+  · exact Or.inl hinf
+
+/-- **Folder 128, N.B. of Lemme 1** (Grothendieck, page 19): under the hypotheses of `lemme2`,
+`C = C^* + B`, every `c ∈ C` is a unit up to an element of `B`. -/
+theorem exists_isUnit_add [Algebra.IsIntegral B C] [Finite (MaximalSpectrum C)]
+    (hinj : ∀ 𝔫 𝔫' : MaximalSpectrum C,
+      𝔫.asIdeal.comap (algebraMap B C) = 𝔫'.asIdeal.comap (algebraMap B C) → 𝔫 = 𝔫')
+    (hrad : ∀ 𝔫 : MaximalSpectrum C,
+      IsPurelyInseparable (B ⧸ 𝔫.asIdeal.comap (algebraMap B C)) (C ⧸ 𝔫.asIdeal))
+    (c : C) : ∃ b : B, IsUnit (c + algebraMap B C b) := by
+  obtain ⟨v, hv⟩ := lemme2 hinj hrad (Matrix.of fun _ _ : Fin 1 => c)
+  refine ⟨v 0 0, ?_⟩
+  rw [Matrix.isUnit_iff_isUnit_det, Matrix.det_unique] at hv
+  simpa using hv
+
+
+end Lemme2
+
+section Tensor
+
+open TensorProduct
+
+
+
+variable (A B S : Type*) [CommRing A] [CommRing B] [CommRing S] [Algebra A B] [Algebra B S]
+  [Algebra A S] [IsScalarTower A B S]
+
+/-- `H⁰(S/A) = {s ∣ s ⊗ 1 = 1 ⊗ s}`, the equalizer of `S ⇉ S ⊗_A S` (the page's `B`). -/
+def H0 : Subalgebra A S where
+  carrier := {s | s ⊗ₜ[A] (1 : S) = 1 ⊗ₜ s}
+  mul_mem' {x y} hx hy := by
+    simp only [Set.mem_ofPred_eq] at *
+    have : (x * y) ⊗ₜ[A] (1 : S) = (x ⊗ₜ[A] (1 : S)) * (y ⊗ₜ 1) := by simp
+    rw [this, hx, hy]; simp
+  add_mem' {x y} hx hy := by
+    simp only [Set.mem_ofPred_eq] at *
+    rw [add_tmul, tmul_add, hx, hy]
+  algebraMap_mem' r := by
+    simp only [Set.mem_ofPred_eq, Algebra.algebraMap_eq_smul_one, smul_tmul]
+
+variable {A B S}
+
+omit [Algebra A B] [IsScalarTower A B S] in
+/-- `(b s) ⊗ e = s ⊗ (b e)` in `S ⊗_A E` for `b` mapping into `H⁰(S/A)`. -/
+lemma compatibleSMul (hB : ∀ b : B, algebraMap B S b ∈ H0 A S)
+    (E : Type*) [AddCommGroup E] [Module A E] [Module B E] [Module S E] [IsScalarTower A S E]
+    [IsScalarTower B S E] : CompatibleSMul A B S E := by
+  constructor
+  intro b s e
+  have h1 := congrArg (fun t => (s ⊗ₜ[A] (1 : S)) * t) (hB b)
+  simp only [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul] at h1
+  have h2 := congrArg (LinearMap.lTensor S ((LinearMap.toSpanSingleton S E e).restrictScalars A)) h1
+  simp only [LinearMap.lTensor_tmul, LinearMap.restrictScalars_apply,
+    LinearMap.toSpanSingleton_apply, one_smul] at h2
+  rw [Algebra.smul_def, mul_comm, h2, algebraMap_smul]
+
+
+/-- **Folder 128, page 20: the multiplicative coboundary is a logarithmic derivative.** For a
+unit `u` of `S`, `p₂(u) p₁(u)⁻¹ = 1 + p₁(u)⁻¹ (p₂(u) − p₁(u))` in `S ⊗_A S`, with
+`p₁(u) = u ⊗ 1` and `p₂(u) = 1 ⊗ u`: the class `∂_m(u)` is `u⁻¹ ∂_a(u)`, which is why the
+square of page 20 does not commute. -/
+theorem coboundary_mul_eq (u : Sˣ) :
+    ((1 : S) ⊗ₜ[A] (u : S)) * ((↑u⁻¹ : S) ⊗ₜ[A] (1 : S)) =
+      1 + ((↑u⁻¹ : S) ⊗ₜ[A] (1 : S)) * ((1 : S) ⊗ₜ[A] (u : S) - (u : S) ⊗ₜ[A] (1 : S)) := by
+  simp only [mul_sub, Algebra.TensorProduct.tmul_mul_tmul, one_mul, mul_one, Units.inv_mul,
+    ← Algebra.TensorProduct.one_def]
+  abel
+
+/-- `S ⊗_B E ≃ S ⊗_A E` when `B` maps into `H⁰(S/A)` (folder 128, pages 26–27). -/
+noncomputable def tensorEquiv (hB : ∀ b : B, algebraMap B S b ∈ H0 A S)
+    (E : Type*) [AddCommGroup E] [Module A E] [Module B E] [Module S E] [IsScalarTower A S E]
+    [IsScalarTower B S E] [IsScalarTower A B E] : S ⊗[B] E ≃ₗ[S] S ⊗[A] E :=
+  haveI := compatibleSMul hB E
+  TensorProduct.equivOfCompatibleSMul A B S S E
+
+@[simp] lemma tensorEquiv_tmul (hB : ∀ b : B, algebraMap B S b ∈ H0 A S)
+    (E : Type*) [AddCommGroup E] [Module A E] [Module B E] [Module S E] [IsScalarTower A S E]
+    [IsScalarTower B S E] [IsScalarTower A B E] (s : S) (e : E) :
+    tensorEquiv hB E (s ⊗ₜ e) = s ⊗ₜ e := rfl
+
+/-- **Folder 128, pages 26–27** (the page's bracket, justified by the edition). If `A → B → S`
+and `B` maps into `H⁰(S/A)`, the canonical map `S ⊗_A E → S ⊗_B E` is bijective for every
+`S`-module `E`: descent data relative to `S/A` and to `S/B` are the same. -/
+theorem bijective_mapOfCompatibleSMul (hB : ∀ b : B, algebraMap B S b ∈ H0 A S)
+    (E : Type*) [AddCommGroup E] [Module A E] [Module B E] [Module S E] [IsScalarTower A S E]
+    [IsScalarTower B S E] [IsScalarTower A B E] :
+    Function.Bijective (TensorProduct.mapOfCompatibleSMul B A S S E) :=
+  (tensorEquiv hB E).symm.bijective
+
+/-- With `B` mapping into `H⁰(S/A)`, `H⁰(S/B) = H⁰(S/A)`. -/
+theorem mem_H0_iff (hB : ∀ b : B, algebraMap B S b ∈ H0 A S) (s : S) :
+    s ∈ H0 B S ↔ s ∈ H0 A S := by
+  change s ⊗ₜ[B] (1 : S) = 1 ⊗ₜ s ↔ s ⊗ₜ[A] (1 : S) = 1 ⊗ₜ s
+  rw [← (tensorEquiv hB S).injective.eq_iff, tensorEquiv_tmul, tensorEquiv_tmul]
+
+end Tensor
+
+end Grothendieck.Folder128.Infinitesimal

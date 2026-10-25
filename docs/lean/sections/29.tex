@@ -19,6 +19,38 @@ Dans la situation ci-dessus, l'application induite sur l'inertie modérée est l
 \end{encadre}
 {\small Mathlib n'a pas l'inertie modérée des schémas réguliers. On se reportera aux notes de Grothendieck (\lot{29}{6}{120}).\par}
 
+\noindent\emph{Le degré comme donnée primitive (pages~212 et~214).} Deux feuillets insérés, \q{1 bis} et \q{1 ter}, axiomatisent directement la notion de morphisme de degré~$n$, sans foncteur fibre ni points à compter (\lot{29}{11}{212}). Sur une catégorie $C$, on se donne pour chaque $n \in \mathbf N$ une classe $\mathrm{deg}_n$ de morphismes telle que : a) elle est stable par changement de base ; b) elle est additive pour les sommes finies ($\varnothing \to Y$ est de degré~$0$, et si $X = X_1 \sqcup X_2$ avec $X_i \to Y$ de degré $n_i$, alors $X \to Y$ est de degré $n_1 + n_2$) ; c) un isomorphisme est de degré~$1$ ; d$'$) pour tout $f : X \to Y$, $Y = \coprod_{n \in \mathbf N} Y_n$ avec $X \times_Y Y_n \to Y_n$ de degré~$n$ ; d) un morphisme de degré $n \geq 1$ est de descente effective universelle ; e) un morphisme de degré~$0$ a une source vide et est l'inclusion d'un sommande direct. La \q{Conclusion} de la page~214 affirme que, sous ces conditions et les conditions (0) à (2) de la page~212 (limites projectives finies, monomorphismes inclusions de sommandes directs), la notion est uniquement déterminée, et qu'un morphisme est de degré~$n$ si et seulement s'il devient $[1, n]$, la somme de $n$ copies de la base, après un changement de base de descente effective universelle.
+
+Dans la vérification, la classe des morphismes trivialisants est un paramètre $E$, puisque mathlib n'a pas les morphismes de descente effective universelle ; on n'en utilise que les propriétés que la page utilise. On note $\mathrm{Triv}_n(E)$ la classe des $f : X \to Y$ pour lesquels il existe $g : Y' \to Y$ dans $E$ avec $X \times_Y Y' \simeq [1, n]_{Y'}$ au-dessus de $Y'$.
+
+\begin{contrexemple}[Grothendieck, page 214, la Conclusion telle qu'elle est écrite\piste{29-degree-n-as-primitive}]
+Les conditions a) à e) ne déterminent pas la notion de degré. Si $\mathrm{deg}$ les vérifie, la classe $\mathrm{deg}^{\leq}$, où $\mathrm{deg}^{\leq}_0 = \mathrm{deg}_0$ et où $f$ est de degré~$n \geq 1$ s'il est de degré~$k$ pour un $1 \leq k \leq n$, les vérifie aussi. Dans la catégorie des ensembles finis, avec pour $E$ les surjections, le degré usuel (toutes les fibres ont $n$ éléments) et son $\mathrm{deg}^{\leq}$ sont deux notions distinctes : l'identité d'un point y est de degré~$1$ et~$2$.
+\end{contrexemple}
+
+\begin{proof}
+Pour $\mathrm{deg}^{\leq}$, a), c), d$'$) et e) se lisent sur $\mathrm{deg}$, d) vient de ce qu'un degré $k \geq 1$ est encore $\geq 1$, et b) de ce que $1 \leq k_1 \leq n_1$ et $1 \leq k_2 \leq n_2$ donnent $k_1 + k_2 \leq n_1 + n_2$. Dans les ensembles finis, le degré usuel vérifie a) à e) : les fibres se conservent par changement de base et s'additionnent sur une somme, $Y_n$ est l'ensemble des points dont la fibre a $n$ éléments, une fibre non vide donne la surjectivité. L'identité d'un point n'y est pas de degré~$2$.
+\end{proof}
+
+Le pas de la page~214 qui cède est \q{donc par additivité, $X'_1 \to Y'$ est de degré $n - 1$} : de $X' = Y' \sqcup X'_1$ de degré~$n$ et $Y' \to Y'$ de degré~$1$, la condition b) ne permet pas de soustraire. C'est une simplification, et elle suppose qu'un morphisme n'a qu'un degré. On ajoute donc la condition
+
+\smallskip
+\noindent (u) si $f : X \to Y$ est à la fois de degré~$m$ et de degré~$n$, avec $m \neq n$, alors $Y$ est vide (initial),
+\smallskip
+
+\noindent que le degré usuel des ensembles finis vérifie, et que $\mathrm{deg}^{\leq}$ ne vérifie pas.
+
+\begin{theoreme}[d'après les pages 212 et 214, avec la condition (u)\piste{29-degree-n-as-primitive}]
+Soit $C$ une catégorie à produits fibrés, finitairement extensive (sommes finies disjointes et universelles), dans laquelle tout monomorphisme est l'inclusion d'un sommande direct. Soit $E$ une classe de morphismes contenant les identités, stable par composition, et dont tout changement de base d'un élément est un épimorphisme. Si $\mathrm{deg}$ vérifie a) à e) pour $E$ et la condition (u), alors pour tout~$n$, $\mathrm{deg}_n = \mathrm{Triv}_n(E)$. En particulier deux telles notions de degré coïncident.
+\end{theoreme}
+
+\begin{proof}
+\emph{Sens direct}, par récurrence sur $n$, en suivant la page~214. Pour $n = 0$, $X$ est vide par e), et $g = \mathrm{id}_Y$ convient. Pour $n \geq 1$, $f$ est dans $E$ par d) ; on change de base par $f$ lui-même : $q : X' = X \times_Y X \to X$ est de degré~$n$ par a). La diagonale est un monomorphisme, donc $X' = X \sqcup X'_1$, la diagonale étant une section de $q$. \emph{Simplification} : on décompose $X = \coprod_j Z_j$ par d$'$) pour $r : X'_1 \to X$. Au-dessus de $Z_j$, la somme universelle donne $X' \times_X Z_j = Z_j \sqcup (X'_1 \times_X Z_j)$, de degré $1 + j$ par b) et c), et de degré~$n$ par a) ; par (u), $Z_j$ est vide pour $j \neq n - 1$, donc $Z_{n-1} = X$ et $r$ est de degré $n - 1$. La récurrence fournit $h : W \to X$ dans $E$ avec $X'_1 \times_X W \simeq [1, n-1]_W$ ; alors $h f$ est dans $E$, et $X \times_Y W = X' \times_X W = W \sqcup (X'_1 \times_X W) \simeq [1, n]_W$.
+
+\emph{Réciproque}, que la page n'écrit pas. Soient $g : Y' \to Y$ dans $E$ et $X \times_Y Y' \simeq [1, n]_{Y'}$, qui est de degré~$n$ par b) et c). On décompose $Y = \coprod_k Y_k$ par d$'$) pour $f$, et l'on pose $R_k = Y' \times_Y Y_k$. Au-dessus de $R_k$, le changement de base de $f$ est de degré~$n$ (par $Y'$) et de degré~$k$ (par $Y_k$) ; par (u), $R_k$ est vide pour $k \neq n$. Alors $R_k \to Y_k$, changement de base de $g$, est un épimorphisme de source vide, et $Y_k$ est vide dans une catégorie extensive. Donc $Y = Y_n$ et $f$ est de degré~$n$.
+\end{proof}
+
+\noindent Lean : \href{\leanblob/Folder29.lean}{\texttt{DegreeAxioms}, \texttt{DegreeAxioms.atMost}, \texttt{atMost\_ne}, \texttt{Finite.degree\_not\_unique}} pour le contre-exemple ; \texttt{cancel} (la simplification), \texttt{deg\_imp\_triv} (la récurrence de la page~214), \texttt{triv\_imp\_deg} (la réciproque), \texttt{deg\_iff\_triv} et \texttt{unique} pour le théorème. Le contre-exemple reste vrai si l'on ajoute les conditions (0) à (2), que les ensembles finis vérifient (ce point n'est pas formalisé) ; la réciproque n'utilise de $E$ que l'universalité des épimorphismes, la récurrence que les identités et la composition. Ne sont pas formalisés : que les morphismes de descente effective universelle ont ces propriétés (leur stabilité par composition est un théorème de la théorie de la descente), et l'énoncé A(iii) qu'en tire la page pour les catégories multigaloisiennes.
+
 Les autres pistes de la cote, hors de portée de Lean pour l'instant :
 
 \begin{encadre}
@@ -34,14 +66,6 @@ Pour $(R, r)$ défini par un schéma $Z$ muni d'un groupe fini d'opérateurs $G$
 \end{enonce}
 \end{encadre}
 
-\begin{encadre}
-\begin{theoreme*}[Grothendieck, pages 212 et 214, le degré comme donnée primitive\piste{29-degree-n-as-primitive}]\nonverifie
-Sur une catégorie, six conditions sur une classe de morphismes de degré~$n$ (changement de base, additivité finie, isomorphismes de degré~$1$, décomposition $Y = \coprod_n Y_n$ avec $X \times_Y Y_n \to Y_n$ de degré~$n$, descente effective en degré $\geq 1$, vide en degré~$0$) déterminent la notion de façon unique ; elle coïncide alors avec \q{trivialisé par un morphisme de descente effective universelle}.
-\end{theoreme*}
-\end{encadre}
-\begin{demopage}[pages 212 et 214]
-La page suppose aussi les conditions (0) à (2) de la page~212, que l'encadré omet. Elle montre par récurrence sur $n$ qu'un morphisme $X \to Y$ de degré~$n$ devient $[1, n]$ après un morphisme de descente effective universelle ; pour $n = 0$, $X$ est vide. Pour $n > 0$, la diagonale fait de $X$ un sommande direct universel de $X \times_Y X \simeq X \sqcup X'_1$, où $X'_1 \to X$ est de degré $n - 1$ ; la récurrence le trivialise par un $Y'' \to X$, d'où $X \times_Y Y'' \simeq Y'' \times [1, n]$, et $Y'' \to Y$ est de descente effective universelle comme composé (p.~214). La \q{Conclusion} en tire l'unicité, sans écrire qu'un morphisme ainsi trivialisé est de degré~$n$.
-\end{demopage}
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 87 à 97, $\pi_1$ modéré et auto-intersection\piste{29-formal-tame-pi1-self-intersection}]\nonverifie

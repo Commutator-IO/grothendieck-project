@@ -1828,3 +1828,252 @@ theorem toSix_scal (μ : (ZMod n)ˣ) :
 end ModelToSix
 
 end Grothendieck.Folder79
+
+/-! ## The double cone (page 275) and homotheties at distance three (pages 187 and 188)
+
+A *regular triangulated 2-polyhedron* is taken here in the weakest form the
+argument uses: a symmetric relation `A` on `S` (the edges), connected, whose
+stars all carry a polygon of the same order `n ≥ 3` (`IsPolygon n (onStar A A s)`,
+the condition (A2) of the reading, with all vertex orders equal). Every edge then lies
+in exactly two triangles, so this contains the triangulated 2-polyhedra of the
+folder whose vertices all have order `n`, in particular the regular ones. -/
+
+namespace Grothendieck.Folder79
+
+section DoubleCone
+
+variable {n : ℕ} {S : Type*} {A : S → S → Prop}
+
+/-- In the cycle `k ~ k ± 1` of `Z/n`, `n ≥ 3`, two distinct indices with the
+same neighbours are opposite (`j = i + 2`), and then `4 = 0`. -/
+theorem cyc_same_nbrs (hn : 2 < n) {i j : ZMod n} (hij : i ≠ j)
+    (h : ∀ k : ZMod n, (k - i = 1 ∨ k - i = -1) ↔ (k - j = 1 ∨ k - j = -1)) :
+    j = i + 2 ∧ (4 : ZMod n) = 0 := by
+  have hj : j = i + 2 := by
+    rcases (h (i + 1)).1 (Or.inl (by ring)) with h1 | h1
+    · exact absurd (by linear_combination h1) hij
+    · linear_combination -h1
+  refine ⟨hj, ?_⟩
+  subst hj
+  rcases (h (i - 1)).1 (Or.inr (by ring)) with h2 | h2
+  · linear_combination -h2
+  · exact absurd (by linear_combination -h2) (two_ne_zero_of_lt hn)
+
+theorem eq_four_of_four_eq_zero (hn : 2 < n) (h : (4 : ZMod n) = 0) : n = 4 := by
+  have : ((4 : ℕ) : ZMod n) = 0 := by exact_mod_cast h
+  rw [ZMod.natCast_eq_zero_iff] at this
+  have := Nat.le_of_dvd (by norm_num) this
+  interval_cases n <;> omega
+
+/-- Adjacency inside a star, read on a polygon indexing of it. -/
+theorem adj_iff_of_pol {s : S} {φ : ZMod n ≃ star A s} (hφ : onStar A A s = cyc φ 1)
+    (a b : ZMod n) : A (φ a) (φ b) ↔ (b - a = 1 ∨ b - a = -1) := by
+  change onStar A A s (φ a) (φ b) ↔ _
+  rw [hφ]; simp [cyc]
+
+/-- No loops: a vertex is not in its own star, since a polygon has none. -/
+theorem not_adj_self (hn : 2 < n) (hpol : ∀ s, IsPolygon n (onStar A A s)) (s : S) :
+    ¬ A s s := by
+  intro h
+  obtain ⟨φ, hφ⟩ := hpol s
+  have h1 : (1 : ZMod n) ≠ 0 := fun h1 => two_ne_zero_of_lt hn (by
+    rw [show (2 : ZMod n) = 1 + 1 by norm_num, h1, add_zero])
+  have := (adj_iff_of_pol hφ (φ.symm ⟨s, h⟩) (φ.symm ⟨s, h⟩)).1 (by simpa using h)
+  rw [sub_self] at this
+  rcases this with h0 | h0
+  · exact h1 h0.symm
+  · exact h1 (neg_eq_zero.1 h0.symm)
+
+/-- **Page 275, the double cone.** In a connected triangulated 2-polyhedron
+whose vertices all have the same order `n ≥ 3`, two distinct vertices `s ≠ s'`
+with the same star force `n = 4` and the octahedron: the graph is isomorphic to
+`K_{2,2,2}`, the vertices `Fin 3 × Bool` joined when their first coordinates
+differ, the pairs `{(i, false), (i, true)}` being the opposite vertices. -/
+theorem double_cone (hA : ∀ a b, A a b → A b a) (hn : 2 < n)
+    (hpol : ∀ s, IsPolygon n (onStar A A s)) (hconn : ∀ a b, Relation.ReflTransGen A a b)
+    {s s' : S} (hss : s ≠ s') (hst : star A s = star A s') :
+    n = 4 ∧ ∃ e : S ≃ Fin 3 × Bool, ∀ a b, A a b ↔ (e a).1 ≠ (e b).1 := by
+  have mem : ∀ w, A s w ↔ A s' w := fun w => by
+    change w ∈ star A s ↔ w ∈ star A s'; rw [hst]
+  have nss := not_adj_self hn hpol s
+  have ns's' := not_adj_self hn hpol s'
+  -- at a vertex `u` of the common star, `s` and `s'` are opposite in the star of `u`
+  have key : ∀ u, A s u → ∃ φ : ZMod n ≃ star A u, onStar A A u = cyc φ 1 ∧
+      ∃ i : ZMod n, (φ i : S) = s ∧ (φ (i + 2) : S) = s' ∧ (4 : ZMod n) = 0 := by
+    intro u hu
+    obtain ⟨φ, hφ⟩ := hpol u
+    have hsu : A u s := hA _ _ hu
+    have hs'u : A u s' := hA _ _ ((mem u).1 hu)
+    set i := φ.symm ⟨s, hsu⟩
+    set j := φ.symm ⟨s', hs'u⟩
+    have hi : (φ i : S) = s := by simp [i]
+    have hj : (φ j : S) = s' := by simp [j]
+    have hij : i ≠ j := fun e => hss (by rw [← hi, ← hj, e])
+    have := cyc_same_nbrs hn hij (fun k => by
+      rw [← adj_iff_of_pol hφ, ← adj_iff_of_pol hφ, hi, hj, mem])
+    refine ⟨φ, hφ, i, hi, ?_, this.2⟩
+    rw [← this.1, hj]
+  obtain ⟨φ, hφ⟩ := hpol s
+  obtain ⟨-, -, -, -, -, h4⟩ := key _ (φ 0).2
+  have hn4 := eq_four_of_four_eq_zero hn h4
+  subst hn4
+  -- the star of a vertex of the star is `{s, s'}` and two vertices of the star
+  have close : ∀ u, A s u → ∀ w, A u w → w = s ∨ w = s' ∨ A s w := by
+    intro u hu w hw
+    obtain ⟨ψ, hψ, i, hi, hi2, -⟩ := key u hu
+    set k := ψ.symm ⟨w, hw⟩
+    have hk : (ψ k : S) = w := by simp [k]
+    have hd : ∀ d : ZMod 4, d = 0 ∨ d = 2 ∨ d = 1 ∨ d = -1 := by decide
+    rcases hd (k - i) with hd | hd | hd | hd
+    · left; rw [← hk, ← hi, sub_eq_zero.1 hd]
+    · right; left; rw [← hk, ← hi2, ← hd]; ring_nf
+    all_goals
+      right; right
+      rw [← hk, ← hi]
+      exact (adj_iff_of_pol hψ _ _).2 (by tauto)
+  have all : ∀ w, w = s ∨ w = s' ∨ A s w := by
+    intro w
+    induction hconn s w with
+    | refl => exact Or.inl rfl
+    | tail _ hab ih =>
+      rename_i a b _
+      rcases ih with rfl | rfl | ha
+      · exact Or.inr (Or.inr hab)
+      · exact Or.inr (Or.inr ((mem _).2 hab))
+      · exact close a ha b hab
+  -- the isomorphism with `K_{2,2,2}`
+  let idx : Fin 3 × Bool → ZMod 4 := fun p => ((p.1 : ℕ) + 3 + 2 * (if p.2 then 1 else 0) : ℕ)
+  have adjIdx : ∀ a b : Fin 3 × Bool, a.1 ≠ 0 → b.1 ≠ 0 →
+      ((idx b - idx a = 1 ∨ idx b - idx a = -1) ↔ a.1 ≠ b.1) := by decide
+  have injIdx : ∀ a b : Fin 3 × Bool, a.1 ≠ 0 → b.1 ≠ 0 → idx a = idx b → a = b := by decide
+  have surjIdx : ∀ k : ZMod 4, ∃ p : Fin 3 × Bool, p.1 ≠ 0 ∧ idx p = k := by decide
+  let g : Fin 3 × Bool → S := fun p =>
+    if p.1 = 0 then (if p.2 then s' else s) else (φ (idx p) : S)
+  have hE : ∀ k, A s (φ k) := fun k => (φ k).2
+  have hE' : ∀ k, A s' (φ k) := fun k => (mem _).1 (φ k).2
+  have nss' : ¬ A s s' := fun h => ns's' ((mem _).1 h)
+  have ns's : ¬ A s' s := fun h => nss' (hA _ _ h)
+  have adj : ∀ a b, A (g a) (g b) ↔ a.1 ≠ b.1 := by
+    rintro ⟨a1, a2⟩ ⟨b1, b2⟩
+    by_cases ha : a1 = 0 <;> by_cases hb : b1 = 0
+    · subst ha; subst hb
+      cases a2 <;> cases b2 <;> simp [g, nss, ns's', nss', ns's]
+    · subst ha
+      cases a2 <;> simp [g, hb, Ne.symm hb, hE, hE']
+    · subst hb
+      cases b2 <;> simp [g, ha, hE, hE', fun h => hA _ _ h]
+    · simp only [g, ha, hb, ite_false]
+      exact (adj_iff_of_pol hφ _ _).trans (adjIdx (a1, a2) (b1, b2) ha hb)
+  have g0f : g (0, false) = s := by simp [g]
+  have g0t : g (0, true) = s' := by simp [g]
+  have gE : ∀ p : Fin 3 × Bool, p.1 ≠ 0 → g p = φ (idx p) := fun p hp => by simp [g, hp]
+  have notE : ∀ p : Fin 3 × Bool, p.1 ≠ 0 → g p ≠ s ∧ g p ≠ s' := fun p hp => by
+    rw [gE p hp]
+    refine ⟨fun h => nss ?_, fun h => ns's' ?_⟩
+    · have := hE (idx p); rwa [h] at this
+    · have := hE' (idx p); rwa [h] at this
+  have inj : Function.Injective g := by
+    rintro ⟨a1, a2⟩ ⟨b1, b2⟩ h
+    by_cases ha : a1 = 0 <;> by_cases hb : b1 = 0
+    · subst ha; subst hb
+      cases a2 <;> cases b2 <;> first | rfl | (rw [g0f, g0t] at h; exact (hss h).elim) |
+        (rw [g0t, g0f] at h; exact (hss h.symm).elim)
+    · subst ha
+      cases a2
+      · exact ((notE _ hb).1 (h.symm.trans g0f)).elim
+      · exact ((notE _ hb).2 (h.symm.trans g0t)).elim
+    · subst hb
+      cases b2
+      · exact ((notE _ ha).1 (h.trans g0f)).elim
+      · exact ((notE _ ha).2 (h.trans g0t)).elim
+    · rw [gE _ ha, gE _ hb] at h
+      exact injIdx _ _ ha hb (φ.injective (Subtype.ext h))
+  have surj : Function.Surjective g := by
+    intro w
+    rcases all w with rfl | rfl | hw
+    · exact ⟨(0, false), by simp [g]⟩
+    · exact ⟨(0, true), by simp [g]⟩
+    · obtain ⟨p, hp, hpk⟩ := surjIdx (φ.symm ⟨w, hw⟩)
+      exact ⟨p, by simp [g, hp, hpk]⟩
+  let e := Equiv.ofBijective g ⟨inj, surj⟩
+  refine ⟨rfl, e.symm, fun a b => ?_⟩
+  rw [← adj, show g (e.symm a) = a from e.apply_symm_apply a,
+    show g (e.symm b) = b from e.apply_symm_apply b]
+
+end DoubleCone
+
+
+section HomothetyOctahedron
+
+variable {n : ℕ} {H : Type*} [Group H] {U₀ : Subgroup H} {σ : H} {l : Equiv.Perm (H ⧸ U₀)}
+
+/-- `H` carries stars to stars: `g • t` is a neighbour of `g • a` iff `t` is one of `a`. -/
+theorem isArc_smul_iff (g : H) (a t : H ⧸ U₀) :
+    IsArc (U₀ := U₀) (σ := σ) (g • a) (g • t) ↔ IsArc (U₀ := U₀) (σ := σ) a t := by
+  refine ⟨fun h => ?_, fun h => h.smul g⟩
+  simpa using h.smul g⁻¹
+
+/-- **Pages 187 and 188, (32) a″), with the double cone of page 275.** Let the
+coset graph `H/U₀` (`σ² ∈ U₀`) be connected, with every star a polygon of order
+`n ≥ 3`: a regular triangulated 2-polyhedron, `H` being transitive on its arcs.
+If an `H`-equivariant permutation `λ ≠ 1` moves some vertex `x` to distance at
+most `2` (`λ x = x`, or `λ x` a neighbour of `x`, or a common neighbour), then
+`n = 4`, the polyhedron is the octahedron, and `λ` is its antipody: for every
+vertex `y`, `λ y ≠ y` has the star of `y`. -/
+theorem homothety_dist_le_two (hσ : σ * σ ∈ U₀) (hl : ∀ (h : H) x, l (h • x) = h • l x)
+    (hl1 : l ≠ 1) (hn : 2 < n)
+    (hpol : ∀ s, IsPolygon n (onStar (IsArc (U₀ := U₀) (σ := σ)) (IsArc (U₀ := U₀) (σ := σ)) s))
+    (hconn : ∀ a b, Relation.ReflTransGen (IsArc (U₀ := U₀) (σ := σ)) a b) {x : H ⧸ U₀}
+    (hx : l x = x ∨ IsArc (U₀ := U₀) (σ := σ) x (l x) ∨
+      ∃ t, IsArc (U₀ := U₀) (σ := σ) x t ∧ IsArc (U₀ := U₀) (σ := σ) t (l x)) :
+    n = 4 ∧ (∃ e : H ⧸ U₀ ≃ Fin 3 × Bool, ∀ a b, IsArc (U₀ := U₀) (σ := σ) a b ↔ (e a).1 ≠ (e b).1) ∧
+      ∀ y, l y ≠ y ∧ star (IsArc (U₀ := U₀) (σ := σ)) (l y) = star (IsArc (U₀ := U₀) (σ := σ)) y := by
+  have fixed : ∀ y, l y ≠ y := fun y e => hl1 (homothety_fixed hl e)
+  -- the star of `x` has two distinct vertices, so `λ x` is not a neighbour of `x`
+  have hadj : ¬ IsArc (U₀ := U₀) (σ := σ) x (l x) := by
+    intro h
+    obtain ⟨φ, -⟩ := hpol x
+    have h01 : (0 : ZMod n) ≠ 1 := fun h01 => two_ne_zero_of_lt hn (by
+      rw [show (2 : ZMod n) = 1 + 1 by norm_num, ← h01, add_zero])
+    have e0 := homothety_adj hl h (φ 0).2
+    have e1 := homothety_adj hl h (φ 1).2
+    exact h01 (φ.injective (Subtype.ext (e0.trans e1.symm)))
+  obtain ⟨t, h1, h2⟩ : ∃ t, IsArc (U₀ := U₀) (σ := σ) x t ∧ IsArc (U₀ := U₀) (σ := σ) t (l x) := by
+    rcases hx with hx | hx | hx
+    · exact (fixed x hx).elim
+    · exact (hadj hx).elim
+    · exact hx
+  have hst : star (IsArc (U₀ := U₀) (σ := σ)) x = star (IsArc (U₀ := U₀) (σ := σ)) (l x) :=
+    Set.ext fun t' => homothety_common_nbr hσ hl h1 h2 t'
+  obtain ⟨h4, e, he⟩ := double_cone (fun a b h => h.symm hσ) hn hpol hconn
+    (fixed x).symm hst
+  refine ⟨h4, ⟨e, he⟩, fun y => ⟨fixed y, ?_⟩⟩
+  -- transport the equality of stars from `x` to `y = g • x`
+  obtain ⟨g, rfl⟩ : ∃ g : H, g • x = y := by
+    induction x using QuotientGroup.induction_on with
+    | H a =>
+      induction y using QuotientGroup.induction_on with
+      | H b => exact ⟨b * a⁻¹, by
+          rw [← smul_s₀ a, ← smul_s₀ b, smul_smul, inv_mul_cancel_right]⟩
+  ext t'
+  change IsArc _ _ ↔ IsArc _ _
+  rw [hl, ← smul_inv_smul g t', isArc_smul_iff, isArc_smul_iff]
+  exact (Set.ext_iff.1 hst _).symm
+
+/-- **Page 188, (32) a″): distance exactly three.** Same setting, outside the
+octahedron (`n ≠ 4`): an `H`-equivariant permutation `λ ≠ 1` moves no vertex
+to itself, to a neighbour, or to distance `2`. When `λ x` (or `λ⁻¹ x`, which is
+equivariant too) is at distance at most `3` from `x`, the distance is `3`. -/
+theorem homothety_dist_three (hσ : σ * σ ∈ U₀) (hl : ∀ (h : H) x, l (h • x) = h • l x)
+    (hl1 : l ≠ 1) (hn : 2 < n) (h4 : n ≠ 4)
+    (hpol : ∀ s, IsPolygon n (onStar (IsArc (U₀ := U₀) (σ := σ)) (IsArc (U₀ := U₀) (σ := σ)) s))
+    (hconn : ∀ a b, Relation.ReflTransGen (IsArc (U₀ := U₀) (σ := σ)) a b) (x : H ⧸ U₀) :
+    l x ≠ x ∧ ¬ IsArc (U₀ := U₀) (σ := σ) x (l x) ∧
+      ¬ ∃ t, IsArc (U₀ := U₀) (σ := σ) x t ∧ IsArc (U₀ := U₀) (σ := σ) t (l x) := by
+  refine ⟨fun h => ?_, fun h => ?_, fun h => ?_⟩ <;>
+    exact h4 (homothety_dist_le_two hσ hl hl1 hn hpol hconn (by tauto)).1
+
+end HomothetyOctahedron
+
+end Grothendieck.Folder79
+

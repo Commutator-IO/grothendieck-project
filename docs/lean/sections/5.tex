@@ -1,4 +1,4 @@
-\section[Cote 5 : les coefficients $q_i$ de l'algèbre universelle à puissances divisées]{Cote 5 : les coefficients $q_i$ de l'algèbre universelle à puissances divisées\protect\verifie{Folder5}}\label{sec:5}
+\section[Cote 5 : l'algèbre artinienne universelle à puissances divisées]{Cote 5 : l'algèbre artinienne universelle à puissances divisées\protect\verifie{Folder5}}\label{sec:5}
 
 La cote 5, \emph{Cristaux et cohomologie de De Rham : généralités, correspondances Deligne et Berthelot}, que l'inventaire date de 1965--1969, porte sur les puissances divisées et les sites cristallins. À la page~4, l'algèbre locale artinienne universelle sur $W(k)$ dont l'idéal maximal porte des puissances divisées nulles en degrés $\geq p^{\nu+1}$ est présentée comme $W[\Lambda_0, \dots, \Lambda_\nu]/(\Lambda_i^p - q_i\Lambda_{i+1}, \Lambda_\nu^p, \Lambda_0 - p)$, où $\Lambda_i = \gamma_{p^i}(p)$ et $q_i = (p^{i+1})!/((p^i)!)^p$ (\lot{5}{1}{4}) ; la relation est $\gamma_{p^i}(x)^p = q_i\, \gamma_{p^{i+1}}(x)$. Une note de la lecture s'appuie sur $v_p(q_\nu) = 1$.
 
@@ -8,12 +8,46 @@ Pour tout entier $p$ et tout $i$, $((p^i)!)^p\, q_i = (p^{i+1})!$ : $q_i$ est un
 
 \noindent L'énoncé tient. La valuation vient de la formule de Legendre sous la forme $v_p((pm)!) = v_p(m!) + m$ ; voir les théorèmes \texttt{factorial\_eq\_mul\_q}, \texttt{q\_eq\_multinomial} et \texttt{padicValNat\_q} de \href{\leanblob/Folder5.lean}{\texttt{Folder5.lean}}.
 
+\noindent\emph{L'universalité (page~4).} La page place l'énoncé d'universalité entre crochets, sans démonstration ; la lecture en esquisse une par l'enveloppe à puissances divisées. La vérification en donne une autre, qui n'utilise que mathlib. On travaille sur un anneau intègre $W$ de caractéristique nulle où les entiers premiers à $p$ sont inversibles : c'est le cas de $W(k)$ et de $\mathbf Z_p$ (\texttt{padicInt\_isUnit\_natCast}). On pose
+\[
+A^{(\nu)} = W[\Lambda_0, \ldots, \Lambda_\nu] \big/ \bigl(\Lambda_i^{p} - q_i\Lambda_{i+1}\ (i < \nu),\ \Lambda_\nu^{p}\bigr), \qquad W^{(\nu)} = A^{(\nu)}/(\Lambda_0 - p),
+\]
+qui est bien le quotient de $W[\Lambda]$ par toutes les relations de la page (\texttt{presentation}), et $J = (\Lambda_0, \ldots, \Lambda_\nu) \subset W^{(\nu)}$.
+
+\begin{theoreme}[Grothendieck, page 4, universalité de la présentation\piste{5-universal-artinian-pd-normal-form}]
+L'idéal $J$ de $W^{(\nu)}$ porte une structure de puissances divisées $\delta$ telle que $\delta_{p^i}(p) = \Lambda_i$ pour $0 \leq i \leq \nu$ et $\delta_n(y) = 0$ pour $y \in J$ et $n \geq p^{\nu+1}$. Pour toute $W$-algèbre $T$ munie d'un idéal $I$ à puissances divisées $\gamma$ tel que $p \in I$ et $\gamma_n(p) = 0$ pour $n \geq p^{\nu+1}$, il existe un unique morphisme de $W$-algèbres $W^{(\nu)} \to T$ compatible aux puissances divisées ; il envoie $\Lambda_i$ sur $\gamma_{p^i}(p)$.
+\end{theoreme}
+
+\begin{proof}
+\emph{Un plongement.} Soit $K$ le corps des fractions de $W$ et $B = K[X]/(X^{p^{\nu+1}})$. L'application $\psi : \Lambda_i \mapsto X^{p^i}/(p^i)!$ respecte les relations, puisque $((p^i)!)^p q_i = (p^{i+1})!$, et définit $\psi : A^{(\nu)} \to B$. Elle est injective. D'une part les monômes $\Lambda^a$ à exposants $0 \leq a_i < p$ engendrent $A^{(\nu)}$ comme $W$-module : leur $W$-module est stable par multiplication par chaque $\Lambda_j$, grâce à la retenue de la page~8 ($\Lambda_j^{p} = q_j\Lambda_{j+1}$, ou $0$ si $j = \nu$). D'autre part $\psi(\Lambda^a)$ est un multiple non nul de $X^{\sum a_i p^i}$, et ces exposants sont distincts et $< p^{\nu+1}$ (écriture en base $p$). Un élément $\sum w_a \Lambda^a$ de noyau nul a donc tous ses $w_a$ nuls.
+
+\emph{Les puissances divisées de $A^{(\nu)}$.} Comme $B$ est une $\mathbf Q$-algèbre, tout idéal de $B$ porte les puissances divisées $x^n/n!$. On les ramène sur $\bar I = (\Lambda_0, \ldots, \Lambda_\nu) \subset A^{(\nu)}$ par $\psi$ : il suffit que $\gamma_n(\psi(y))$ soit dans $\psi(\bar I)$ pour $y \in \bar I$. Par les formules de la somme et du produit, il suffit de le voir pour $y = \Lambda_i$, et comme $\gamma_n(\gamma_{p^i}(X))$ est un multiple entier de $\gamma_{np^i}(X)$, il suffit que chaque $\gamma_k(X) = X^k/k!$ vienne de $A^{(\nu)}$. C'est une récurrence sur $k$ : si $p^e$ est la plus grande puissance de $p$ divisant $k$, on a $\binom{k}{p^e}\gamma_k = \gamma_{p^e}\,\gamma_{k-p^e}$, et $\binom{k}{p^e} \equiv k/p^e \not\equiv 0 \pmod p$ par le théorème de Lucas, donc inversible dans $W$ ; et $\gamma_{p^e}(X) = \psi(\Lambda_e)$ si $e \leq \nu$, tandis que $\gamma_k(X) = 0$ si $k \geq p^{\nu+1}$.
+
+\emph{Passage au quotient.} L'augmentation $\varepsilon : A^{(\nu)} \to W$, $\Lambda_i \mapsto 0$, a pour noyau $\bar I$. Si $(\Lambda_0 - p)a \in \bar I$, alors $-p\,\varepsilon(a) = 0$, donc $a \in \bar I$ ; et $\gamma_n((\Lambda_0 - p)a) = (\Lambda_0 - p)^n\gamma_n(a)$. Ainsi $(\Lambda_0 - p) \cap \bar I$ est un sous-idéal à puissances divisées, et celles-ci passent à $J = \bar I\,W^{(\nu)}$. On a $\delta_{p^i}(p) = \delta_{p^i}(\Lambda_0) = \Lambda_i$ par injectivité de $\psi$, et $\delta_n(y) = 0$ pour $n \geq p^{\nu+1}$ parce que $\psi(y)$ est un multiple de $X$.
+
+\emph{L'universalité.} Le morphisme $\Lambda_i \mapsto \gamma_{p^i}(p)$ respecte les relations : $\gamma_{p^i}(p)^p = q_i\,\gamma_{p^{i+1}}(p)$ (\texttt{dpow\_pow\_eq\_q}), $\gamma_{p^\nu}(p)^p = q_\nu\gamma_{p^{\nu+1}}(p) = 0$ et $\gamma_1(p) = p$. Il commute aux $\delta_k(p)$ par la même récurrence sur $k$, et donc aux puissances divisées des générateurs $\Lambda_i$, ce qui suffit. Un morphisme compatible envoie nécessairement $\Lambda_i = \delta_{p^i}(p)$ sur $\gamma_{p^i}(p)$, d'où l'unicité.
+\end{proof}
+
+\noindent L'énoncé tient, sous une forme plus forte que celle de la page : ni la locali\-té, ni l'artinianité, ni le corps résiduel n'interviennent, et l'hypothèse sur $T$ ne porte que sur les $\gamma_n(p)$. Lean : \texttt{universal}, \texttt{dpWν}, \texttt{dpWν\_p}, \texttt{dpWν\_eq\_zero}, \texttt{presentation} ; pour les étapes, \texttt{boxSpan\_eq\_top} (la retenue), \texttt{deg\_injective}, \texttt{psi\_injective}, \texttt{dpow\_split} et \texttt{choose\_pow\_mul\_pow\_modEq} (Lucas), \texttt{psi\_hmem}, \texttt{dpIbar}, \texttt{isSubDPIdeal\_Kp}, dans \href{\leanblob/Folder5.lean}{\texttt{Folder5.lean}}.
+
+\begin{theoreme}[Grothendieck, pages 5 et 6, la suffisance du lemme\piste{5-universal-artinian-pd-normal-form}]
+Soient $\lambda_0, \ldots, \lambda_\nu \in W$ avec $\lambda_0 = p$ et $\lambda_i^p = q_i\lambda_{i+1}$ (ainsi $\lambda_i = p^{p^i}/(p^i)!$), et $\Theta_i = \Lambda_i - \lambda_i$. Dans $W^{(\nu)}$, on a $p^i\Theta_i = 0$ pour $0 \leq i \leq \nu$ et $p^\nu\lambda_\nu^p = 0$ ; si $\lambda_\nu = p^m u$ avec $u$ inversible, $p^{\nu + pm} = 0$.
+\end{theoreme}
+
+\begin{proof}
+Récurrence sur $i$, comme à la page~6 : $\Theta_0 = \Lambda_0 - p = 0$. Si $p^i\Theta_i = 0$, la différence $\Lambda_i^p - \lambda_i^p = q_i\Theta_{i+1}$ est un multiple de $\Lambda_i - \lambda_i = \Theta_i$, donc $p^i q_i \Theta_{i+1} = 0$ ; comme $q_i = p\,r_i$ avec $r_i$ premier à $p$ ($v_p(q_i) = 1$), $p^{i+1}\Theta_{i+1} = 0$. Pour $i = \nu$, $\Lambda_\nu^p = 0$ donne de même $p^\nu\lambda_\nu^p = 0$. On n'a pas besoin de développer le binôme.
+\end{proof}
+
+\noindent Pour $\lambda_\nu = p^{p^\nu}/(p^\nu)!$, $m = p^\nu - (p^\nu - 1)/(p-1)$ (par \texttt{sub\_one\_mul\_padicValNat\_factorial\_pow}) et $\nu + pm = c(\nu)$ : c'est le \q{$p^{c(\nu)} \in I$} de la page~6. Lean : \texttt{p\_pow\_mul\_Θ\_mem}, \texttt{p\_pow\_mul\_lam\_pow\_mem}, \texttt{p\_pow\_mem\_Kp}, énoncés comme appartenances à l'idéal $(\Lambda_0 - p)$ de $A^{(\nu)}$.
+
+Reste hors de la vérification la nécessité, que la page laisse \q{au lecteur} :
+
 \begin{encadre}
-\begin{theoreme*}[Grothendieck, pages 4 à 8, algèbre artinienne universelle à puissances divisées\piste{5-universal-artinian-pd-normal-form}]\nonverifie
-La $W(k)$-algèbre locale artinienne universelle dont l'idéal maximal porte des puissances divisées nulles en degrés $\geq p^{\nu+1}$ est $W[\Lambda_0, \ldots, \Lambda_\nu]/(\Lambda_i^p - q_i\Lambda_{i+1}, \Lambda_\nu^p, \Lambda_0 - p)$, avec $q_i = (p^{i+1})!/((p^i)!)^p$. Dans les coordonnées $\Theta_i = \Lambda_i - p^{p^i}/(p^i)!$, elle a une forme normale explicite : le coefficient de $\Theta^a$ est pris modulo $p^i$, où $a_i$ est le premier exposant non nul, et le terme constant modulo $p^{c(\nu)}$, avec $c(\nu) = \nu + p\,[p^\nu - (p^{\nu-1} + \cdots + 1)]$.
+\begin{theoreme*}[Grothendieck, pages 5 à 7, forme normale dans les $\Theta_i$\piste{5-universal-artinian-pd-normal-form}]\nonverifie
+Dans les coordonnées $\Theta_i = \Lambda_i - p^{p^i}/(p^i)!$, $W^{(\nu)}$ a une forme normale explicite : $\sum w_a\Theta^a$ est nul si et seulement si le coefficient de $\Theta^a$ est dans $p^iW$, où $a_i$ est le premier exposant non nul, et le terme constant dans $p^{c(\nu)}W$, avec $c(\nu) = \nu + p\,[p^\nu - (p^{\nu-1} + \cdots + 1)]$ ; de même pour les quotients $W^{(\nu,r)}$, avec $p^{i-r}$ et $p^{c(\nu)-r}$.
 \end{theoreme*}
 \end{encadre}
-{\small Les feuillets en esquissent une démonstration incomplète (pages 4 à 7), où la nécessité est \q{laissée au lecteur}. L'intégralité des $q_i$ et leur valuation sont démontrées ci-dessus ; la forme normale demande des calculs dans les vecteurs de Witt, et la nécessité n'est vérifiée par l'édition qu'à la machine, pour quelques $(p, \nu)$.\par}
+{\small La suffisance (les conditions a) et b) donnent des éléments nuls) est démontrée ci-dessus. La nécessité, c'est-à-dire que ces conditions découpent un idéal, et avec elle la forme normale, la longueur, l'ordre exact $p^{c(\nu)}$ de $1$ et les quotients $W^{(\nu,r)}$ de la page~7, n'est pas formalisée ; l'édition ne l'a vérifiée qu'à la machine, pour quelques $(p, \nu)$. Le plongement $\psi$ en donne un cadre : $W^{(\nu)}$ est $A^{(\nu)}$, libre de base les $\Lambda^a$, modulo $(\Lambda_0 - p)$.\par}
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 49 et 50, dualité étale pour les sites annelés\piste{5-deligne-letter-ringed-duality}]\nonverifie
