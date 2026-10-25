@@ -425,6 +425,26 @@ export function MethodPage() {
               built from <code className="text-[12px]">docs/cicm/article.tex</code>
             </span>
           </p>
+
+          <P id="article-problems" className="prose-fonds mt-6">
+            <em>Open Questions from Grothendieck's Montpellier Notes: Eighteen Statements a
+            Formalisation Could Not Reach</em>{' '}
+            is a working paper for mathematicians. It collects statements from the folders that the
+            Lean formalisation could not settle, most of them in theories Mathlib does not have yet,
+            each with its page, the context, what the literature search found, the ideas of proof on
+            the page and in the edition, and what would settle it.
+          </P>
+          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
+            <a
+              href="/article/grothendieck-problems.pdf"
+              className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
+            >
+              PDF
+            </a>
+            <span className="text-ink-400">
+              built from <code className="text-[12px]">docs/problems/article.tex</code>
+            </span>
+          </p>
         </section>
       </main>
 

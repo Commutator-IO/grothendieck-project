@@ -828,6 +828,8 @@ copyFileSync(resolve(root, 'docs/rhm/article.pdf'), resolve(served, 'grothendiec
 copyFileSync(resolve(root, 'docs/lean/article.pdf'), resolve(served, 'grothendieck-lean.pdf'));
 // The fourth, for CICM: the formalisation of the statements (docs/cicm/).
 copyFileSync(resolve(root, 'docs/cicm/article.pdf'), resolve(served, 'grothendieck-cicm.pdf'));
+// The fifth, open questions for mathematicians from what Lean did not reach (docs/problems/).
+copyFileSync(resolve(root, 'docs/problems/article.pdf'), resolve(served, 'grothendieck-problems.pdf'));
 
 const elements = [...new Set([...xml.matchAll(/<([a-zA-Z]+)[\s>/]/g)].map((m) => m[1]))].sort();
 process.stdout.write(
