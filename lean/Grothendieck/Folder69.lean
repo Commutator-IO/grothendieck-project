@@ -358,7 +358,7 @@ theorem card_aut : Nat.card {f : C ≃g C // ∀ v, f v ∈ t ↔ v ∈ t} = 115
   · change meets (σ.1 u) (σ.1 v) = true ↔ meets u v = true
     rw [σ.2.1 u v]
 
-/-! ## Problem 18 of `docs/problems/article.tex`: the group of a marked triangle (statement only)
+/-! ## Problem 18 of `docs/problems/article.tex`: the group of a marked triangle
 
 Pages 25 and 26 describe `Aut(C, t)` as an extension of `𝔖_t × 𝔖_{V*}` by a group `Ψ̃` of
 order 32, the Baer product of the three pull-backs of the quaternion group `Q₈ = Ṽ` along the
@@ -366,9 +366,12 @@ projections of `Ψ(V, t) = Ker(V^t → V)`. Concretely, `Ψ̃` is the group of t
 `(q₁, q₂, q₃)` of quaternions whose product is central (so that their images in `V = Q₈/{±1}`
 sum to zero), modulo the central triples `(ε₁, ε₂, ε₃)` with `ε₁ε₂ε₃ = 1`.
 
-Only the statement is here, as a `Prop`, with no proof and no `sorry`. The order 1152 is
-proved above (`card_Wt`); the rest of the page (the reconstruction of the graph from
-`(t, V, P̃)`, the characterisation of `Ψ̃` by the anisotropy conditions, the equivalence of
+The statement is the `Prop` `problem18`, proved below (`problem18_holds`): `φ` is the action
+on the three lines of `t` and on the three partitions `V*`, checked to be onto on explicit
+elements; `H → Ker φ` is `(a, b, c) ↦ α(a) β(ab) γ(abc)` for three tables of automorphisms,
+a homomorphism because it is one on generators (finite kernel computations), onto because
+`card H / 4 = 32 = card W_t / 36` (`card_Wt`). The rest of the page (the reconstruction of
+the graph from `(t, V, P̃)`, the characterisation of `Ψ̃` by the anisotropy conditions, the equivalence of
 categories) is not formalised. -/
 
 section Problem18
@@ -389,6 +392,465 @@ def problem18 : Prop :=
             (x : Q8 × Q8 × Q8).2.1 ∈ Subgroup.center Q8 ∧
             (x : Q8 × Q8 × Q8).2.2 ∈ Subgroup.center Q8 ∧
             (x : Q8 × Q8 × Q8).1 * (x : Q8 × Q8 × Q8).2.1 * (x : Q8 × Q8 × Q8).2.2 = 1)
+
+/-! ### Proof
+
+`φ = (φ₁, φ₂)`: `φ₁` is the action on the three lines of `t`; `φ₂` the action on the three
+partitions `{2, 3 | 4, 5}`, `{2, 4 | 3, 5}`, `{2, 5 | 3, 4}` of the four other triangles
+through each line of `t` (the `V*` of page 26). They are read on the 144 ordered pairs
+`(x, y)` of skew lines outside `t` meeting the same line of `t`: two such pairs are in the
+same class iff the number of incidences (meeting or equal) between them is even. The
+kernel `Ψ̃` is reached from `H` by `(a, b, c) ↦ α(a) β(ab) γ(abc)`, where `α(q)`, `β(q)`,
+`γ(-1)` are the images of `(q, q⁻¹, 1)`, `(1, q, q⁻¹)`, `(1, 1, -1)`; it is a homomorphism
+since it is one on these generators, and onto by counting (`card_Wt`). -/
+
+open QuaternionGroup
+
+/-- How `W_t` moves the class of the representative `r i`. -/
+def clsFun {α : Type} (act : Perm (Fin 27) → α → α) (c : α → Fin 3) (r : Fin 3 → α)
+    (σ : Perm (Fin 27)) (i : Fin 3) : Fin 3 :=
+  c (act σ (r i))
+
+theorem clsFun_mul {α : Type} (act : Perm (Fin 27) → α → α)
+    (hact : ∀ σ τ p, act (σ * τ) p = act σ (act τ p)) (X : α → Prop) (c : α → Fin 3)
+    (r : Fin 3 → α) (hr : ∀ i, X (r i) ∧ c (r i) = i)
+    (hX : ∀ σ ∈ Wt, ∀ p, X p → X (act σ p))
+    (hc : ∀ σ ∈ Wt, ∀ p q, X p → X q → c p = c q → c (act σ p) = c (act σ q))
+    {σ τ : Perm (Fin 27)} (hσ : σ ∈ Wt) (hτ : τ ∈ Wt) (i : Fin 3) :
+    clsFun act c r (σ * τ) i = clsFun act c r σ (clsFun act c r τ i) := by
+  unfold clsFun
+  rw [hact]
+  exact hc σ hσ _ _ (hX τ hτ _ (hr i).1) (hr _).1 (hr _).2.symm
+
+/-- The action of `W_t` on three classes of objects, as a homomorphism. -/
+def clsHom {α : Type} (act : Perm (Fin 27) → α → α)
+    (hact : ∀ σ τ p, act (σ * τ) p = act σ (act τ p)) (hact1 : ∀ p, act 1 p = p)
+    (X : α → Prop) (c : α → Fin 3) (r : Fin 3 → α) (hr : ∀ i, X (r i) ∧ c (r i) = i)
+    (hX : ∀ σ ∈ Wt, ∀ p, X p → X (act σ p))
+    (hc : ∀ σ ∈ Wt, ∀ p q, X p → X q → c p = c q → c (act σ p) = c (act σ q)) :
+    Wt →* Perm (Fin 3) where
+  toFun σ :=
+    { toFun := clsFun act c r σ.1
+      invFun := clsFun act c r σ.1⁻¹
+      left_inv := fun i => by
+        rw [← clsFun_mul act hact X c r hr hX hc (inv_mem σ.2) σ.2, inv_mul_cancel]
+        simp [clsFun, hact1, (hr i).2]
+      right_inv := fun i => by
+        rw [← clsFun_mul act hact X c r hr hX hc σ.2 (inv_mem σ.2), mul_inv_cancel]
+        simp [clsFun, hact1, (hr i).2] }
+  map_one' := Equiv.ext fun i => by simp [clsFun, hact1, (hr i).2]
+  map_mul' σ τ := Equiv.ext fun i => clsFun_mul act hact X c r hr hX hc σ.2 τ.2 i
+
+/-- The index of a line of `t`. -/
+def c1 (v : Fin 27) : Fin 3 := if v = 0 then 0 else if v = 7 then 1 else 2
+
+/-- The lines `a₀, b₁, c₀₁` of `t`. -/
+def r1 : Fin 3 → Fin 27 := ![0, 7, 12]
+
+theorem c1_inj : ∀ p q : Fin 27, p ∈ t → q ∈ t → c1 p = c1 q → p = q := by decide +kernel
+
+/-- `φ₁`: the action on the three lines of `t`. -/
+def phi1 : Wt →* Perm (Fin 3) :=
+  clsHom (fun σ v => σ v) (fun _ _ _ => rfl) (fun _ => rfl) (fun v => v ∈ t) c1 r1
+    (by decide +kernel) (fun σ hσ p hp => (hσ.2 p).2 hp)
+    (fun _ _ p q hp hq h => by rw [c1_inj p q hp hq h])
+
+/-- The relation « meeting or equal », as bit `27 u + v`. -/
+@[irreducible] def meqBits : ℕ :=
+  0x1099f0c1255d141933618319b24895554521cc986170e8a2552c925 * 2 ^ 512 +
+    0x3168a2b81e0c316f086156d08a336909278e10a2fe010c3d22103f52210bd922 * 2 ^ 256 +
+    0x11b8e2213b03c217a007c1fb4883f05488bd06489b90388bb100f0fa1001ff81
+
+/-- Meeting or equal, read on `meqBits`. -/
+def meq (u v : Fin 27) : Bool := meqBits.testBit (27 * u.val + v.val)
+
+theorem meq_spec : ∀ u v : Fin 27, meq u v = (meets u v || decide (u = v)) := by decide +kernel
+
+/-- Two pairs of lines are in the same class iff they have an even number of incidences. -/
+def fpar (p q : Fin 27 × Fin 27) : Bool :=
+  !(xor (xor (meq p.1 q.1) (meq p.1 q.2)) (xor (meq p.2 q.1) (meq p.2 q.2)))
+
+/-- The pairs `(b₂, b₃)`, `(b₂, b₄)`, `(b₂, b₅)`: the partitions `{2, 3 | 4, 5}`,
+`{2, 4 | 3, 5}`, `{2, 5 | 3, 4}`. -/
+def r2 : Fin 3 → Fin 27 × Fin 27 := ![(8, 9), (8, 10), (8, 11)]
+
+/-- The class of a pair. -/
+def c2 (p : Fin 27 × Fin 27) : Fin 3 :=
+  if fpar p (8, 9) then 0 else if fpar p (8, 10) then 1 else 2
+
+/-- Ordered pairs of skew lines outside `t` meeting the same line of `t`. -/
+def X2 (p : Fin 27 × Fin 27) : Prop :=
+  p.1 ∉ t ∧ p.2 ∉ t ∧ meets p.1 p.2 = false ∧ p.1 ≠ p.2 ∧
+    ∃ l ∈ t, meets p.1 l = true ∧ meets p.2 l = true
+
+instance : DecidablePred X2 := fun p => by unfold X2; infer_instance
+
+/-- The 144 pairs of `X2`, by class. -/
+def X2cls : Fin 3 → List (Fin 27 × Fin 27) :=
+  ![[(1, 21), (1, 26), (2, 3), (2, 18), (3, 2), (3, 17), (4, 5), (4, 20), (5, 4),
+      (5, 19), (6, 21), (6, 26), (8, 9), (8, 14), (9, 8), (9, 13), (10, 11), (10, 16),
+      (11, 10), (11, 15), (13, 9), (13, 14), (14, 8), (14, 13), (15, 11), (15, 16), (16, 10),
+      (16, 15), (17, 3), (17, 18), (18, 2), (18, 17), (19, 5), (19, 20), (20, 4), (20, 19),
+      (21, 1), (21, 6), (22, 23), (22, 24), (23, 22), (23, 25), (24, 22), (24, 25), (25, 23),
+      (25, 24), (26, 1), (26, 6)],
+    [(1, 22), (1, 25), (2, 4), (2, 19), (3, 5), (3, 20), (4, 2), (4, 17), (5, 3),
+      (5, 18), (6, 22), (6, 25), (8, 10), (8, 15), (9, 11), (9, 16), (10, 8), (10, 13),
+      (11, 9), (11, 14), (13, 10), (13, 15), (14, 11), (14, 16), (15, 8), (15, 13), (16, 9),
+      (16, 14), (17, 4), (17, 19), (18, 5), (18, 20), (19, 2), (19, 17), (20, 3), (20, 18),
+      (21, 23), (21, 24), (22, 1), (22, 6), (23, 21), (23, 26), (24, 21), (24, 26), (25, 1),
+      (25, 6), (26, 23), (26, 24)],
+    [(1, 23), (1, 24), (2, 5), (2, 20), (3, 4), (3, 19), (4, 3), (4, 18), (5, 2),
+      (5, 17), (6, 23), (6, 24), (8, 11), (8, 16), (9, 10), (9, 15), (10, 9), (10, 14),
+      (11, 8), (11, 13), (13, 11), (13, 16), (14, 10), (14, 15), (15, 9), (15, 14), (16, 8),
+      (16, 13), (17, 5), (17, 20), (18, 4), (18, 19), (19, 3), (19, 18), (20, 2), (20, 17),
+      (21, 22), (21, 25), (22, 21), (22, 26), (23, 1), (23, 6), (24, 1), (24, 6), (25, 21),
+      (25, 26), (26, 22), (26, 25)]]
+
+theorem mem_X2cls : ∀ p, X2 p → ∃ k, p ∈ X2cls k := by decide +kernel
+
+theorem c2_cls : ∀ k, ((X2cls k).all fun p => c2 p == k) = true := by decide +kernel
+
+theorem fpar_cls : ∀ k k',
+    ((X2cls k).all fun p => (X2cls k').all fun q => fpar p q == decide (k = k')) = true := by
+  decide +kernel
+
+theorem c2_iff {p q : Fin 27 × Fin 27} (hp : X2 p) (hq : X2 q) :
+    c2 p = c2 q ↔ fpar p q = true := by
+  obtain ⟨k, hk⟩ := mem_X2cls p hp
+  obtain ⟨k', hk'⟩ := mem_X2cls q hq
+  have h1 := List.all_eq_true.1 (c2_cls k) p hk
+  have h2 := List.all_eq_true.1 (c2_cls k') q hk'
+  have h3 := List.all_eq_true.1 (List.all_eq_true.1 (fpar_cls k k') p hk) q hk'
+  simp only [beq_iff_eq] at h1 h2 h3
+  rw [h1, h2, h3, decide_eq_true_iff]
+
+theorem meq_inv {σ : Perm (Fin 27)} (hσ : σ ∈ Wt) (u v : Fin 27) :
+    meq (σ u) (σ v) = meq u v := by
+  simp only [meq_spec, hσ.1 u v, σ.injective.eq_iff]
+
+theorem fpar_inv {σ : Perm (Fin 27)} (hσ : σ ∈ Wt) (p q : Fin 27 × Fin 27) :
+    fpar (σ p.1, σ p.2) (σ q.1, σ q.2) = fpar p q := by
+  simp only [fpar, meq_inv hσ]
+
+theorem X2_act {σ : Perm (Fin 27)} (hσ : σ ∈ Wt) {p : Fin 27 × Fin 27} (hp : X2 p) :
+    X2 (σ p.1, σ p.2) := by
+  obtain ⟨h1, h2, h3, h4, l, hl, h5, h6⟩ := hp
+  exact ⟨fun h => h1 ((hσ.2 _).1 h), fun h => h2 ((hσ.2 _).1 h), (hσ.1 _ _).trans h3,
+    fun h => h4 (σ.injective h), σ l, (hσ.2 l).2 hl, (hσ.1 _ _).trans h5, (hσ.1 _ _).trans h6⟩
+
+theorem c2_act {σ : Perm (Fin 27)} (hσ : σ ∈ Wt) {p q : Fin 27 × Fin 27} (hp : X2 p)
+    (hq : X2 q) (h : c2 p = c2 q) : c2 (σ p.1, σ p.2) = c2 (σ q.1, σ q.2) := by
+  have h' := (c2_iff hp hq).1 h
+  rw [← fpar_inv hσ p q] at h'
+  exact (c2_iff (X2_act hσ hp) (X2_act hσ hq)).2 h'
+
+/-- `φ₂`: the action on the three partitions. -/
+def phi2 : Wt →* Perm (Fin 3) :=
+  clsHom (fun σ p => (σ p.1, σ p.2)) (fun _ _ _ => rfl) (fun _ => rfl) X2 c2 r2
+    (by decide +kernel) (fun _ hσ _ hp => X2_act hσ hp)
+    (fun _ hσ _ _ hp hq h => c2_act hσ hp hq h)
+
+/-- `φ = (φ₁, φ₂) : W_t → 𝔖_t × 𝔖_{V*}`. -/
+def phi : Wt →* Perm (Fin 3) × Perm (Fin 3) := phi1.prod phi2
+
+/-- Elements of `W_t` moving only one factor. -/
+noncomputable def e07 : Wt :=
+  ⟨ofFun g0_7 (by decide), ofFun_mem _ _ (by decide +kernel) (by decide +kernel)⟩
+/-- See `e07`. -/
+noncomputable def e012 : Wt :=
+  ⟨ofFun g0_12 (by decide), ofFun_mem _ _ (by decide +kernel) (by decide +kernel)⟩
+/-- See `e07`. -/
+noncomputable def e112 : Wt :=
+  ⟨ofFun g1_12 (by decide), ofFun_mem _ _ (by decide +kernel) (by decide +kernel)⟩
+/-- See `e07`. -/
+noncomputable def e33 : Wt :=
+  ⟨ofFun g3_3 (by decide), ofFun_mem _ _ (by decide +kernel) (by decide +kernel)⟩
+/-- See `e07`. -/
+noncomputable def e34 : Wt :=
+  ⟨ofFun g3_4 (by decide), ofFun_mem _ _ (by decide +kernel) (by decide +kernel)⟩
+/-- See `e07`. -/
+noncomputable def e35 : Wt :=
+  ⟨ofFun g3_5 (by decide), ofFun_mem _ _ (by decide +kernel) (by decide +kernel)⟩
+
+theorem phi_left : ∀ s : Perm (Fin 3),
+    ∃ σ ∈ [1, e07, e012, e112, e07 * e112, e112 * e07], phi σ = (s, 1) := by decide +kernel
+
+theorem phi_right : ∀ s : Perm (Fin 3),
+    ∃ σ ∈ [1, e33, e34, e35, e33 * e34, e34 * e33], phi σ = (1, s) := by decide +kernel
+
+theorem phi_surj : Function.Surjective phi := by
+  rintro ⟨s1, s2⟩
+  obtain ⟨σ, -, hσ⟩ := phi_left s1
+  obtain ⟨τ, -, hτ⟩ := phi_right s2
+  exact ⟨σ * τ, by rw [map_mul, hσ, hτ, Prod.mk_mul_mk, mul_one, one_mul]⟩
+
+theorem card_ker_phi : Nat.card phi.ker = 32 := by
+  have h := Subgroup.card_mul_index phi.ker
+  have h36 : Nat.card (Perm (Fin 3) × Perm (Fin 3)) = 36 := by
+    rw [Nat.card_eq_fintype_card]; rfl
+  rw [Subgroup.index_ker, MonoidHom.range_eq_top.2 phi_surj, Subgroup.card_top, card_Wt,
+    h36] at h
+  omega
+
+/-- `Q₈ → Q₈ / {±1} = V`. -/
+def piQ : Q8 → Multiplicative (ZMod 2 × ZMod 2)
+  | .a i => Multiplicative.ofAdd (0, (i.val : ZMod 2))
+  | .xa i => Multiplicative.ofAdd (1, (i.val : ZMod 2))
+
+/-- See `piQ`. -/
+def piH : Q8 →* Multiplicative (ZMod 2 × ZMod 2) where
+  toFun := piQ
+  map_one' := by decide +kernel
+  map_mul' := by decide +kernel
+
+/-- `(a, b, c) ↦ ā + b̄ + c̄ ∈ V`. -/
+def sumV : Q8 × Q8 × Q8 →* Multiplicative (ZMod 2 × ZMod 2) :=
+  piH.comp (MonoidHom.fst _ _) * piH.comp ((MonoidHom.fst _ _).comp (MonoidHom.snd _ _)) *
+    piH.comp ((MonoidHom.snd _ _).comp (MonoidHom.snd _ _))
+
+/-- The triples of quaternions with central product. -/
+def H18 : Subgroup (Q8 × Q8 × Q8) := sumV.ker
+
+theorem mem_center_Q8 (z : Q8) : z ∈ Subgroup.center Q8 ↔ z = a 0 ∨ z = a 2 := by
+  rw [Subgroup.mem_center_iff]; revert z; decide +kernel
+
+theorem mem_H18' (x : Q8 × Q8 × Q8) :
+    x ∈ H18 ↔ x.1 * x.2.1 * x.2.2 = a 0 ∨ x.1 * x.2.1 * x.2.2 = a 2 := by
+  rw [H18, MonoidHom.mem_ker]; revert x; decide +kernel
+
+theorem mem_H18 (x : Q8 × Q8 × Q8) : x ∈ H18 ↔ x.1 * x.2.1 * x.2.2 ∈ Subgroup.center Q8 := by
+  rw [mem_center_Q8, mem_H18']
+
+/-- The `k`-th of a list of permutations of `Fin 27` stored in five-bit fields. -/
+def permBits (B k : ℕ) (v : Fin 27) : Fin 27 :=
+  ⟨B / 2 ^ (5 * (27 * k + v.val)) % 32 % 27, Nat.mod_lt _ (by decide)⟩
+
+/-- The table of `α`: `α(q)` is the image of `(q, q⁻¹, 1)`, for `q = a 0, …, a 3, xa 0, …, xa 3`
+(codes `0, …, 7`). -/
+@[irreducible] def alphaBits : ℕ :=
+  0xd66f8b54432150 * 2 ^ 1024 +
+    0x952d8d73e070c653a1815cdf16d4a349b9b07b1285a8e6188a408359be2d510c * 2 ^ 768 +
+    0x854254b635cf81c3194e8605737c5b528d26e6c1ec4a16a3986229020d5af8cd * 2 ^ 512 +
+    0x6748c9f06b98a5a127310a21841ace2f6ad2728c1ee6b16a4a0e62906208356b * 2 ^ 256 +
+    0xe3359d2327c1ae6296849cc42886106b38bdab49ca307b9ac5a928398a418820
+
+/-- The table of `β`: `β(q)` is the image of `(1, q, q⁻¹)`. -/
+@[irreducible] def betaBits : ℕ :=
+  0xb54c1d64b3909a * 2 ^ 1024 +
+    0x95418873d67c50838dc1735741c5092125ab7b1c8828f92cc71b02d5307592ce * 2 ^ 768 +
+    0x426a550621cf59f1420e3705cd5d0714248496adec7220a3e4b31c6c035ed9c0 * 2 ^ 512 +
+    0x6931894b6b98f82127d14928d41ace2f6ad2728c1ee6b16a4a0e629062080d7b * 2 ^ 256 +
+    0x6701a4c6252dae63e0849f4524a3506b38bdab49ca307b9ac5a928398a418820
+
+/-- The image of `(1, 1, -1)`, the central element of `Ψ̃`. -/
+@[irreducible] def zBits : ℕ :=
+  0x56d7c674520c4b5250c83dcd38693944c0
+
+/-- `α` on codes. -/
+def alphaT (c : Fin 8) : Fin 27 → Fin 27 := permBits alphaBits c.val
+
+/-- `β` on codes. -/
+def betaT (c : Fin 8) : Fin 27 → Fin 27 := permBits betaBits c.val
+
+/-- Multiplication of `Q₈` on codes, in three-bit fields. -/
+def mulBits : ℕ := 0x443d67688b3e0d19f521afac9f5443b3e21ad670d1fac688
+
+/-- Inversion of `Q₈` on codes. -/
+def invBits : ℕ := 0xb3e298
+
+/-- Multiplication on the codes `a 0, …, a 3, xa 0, …, xa 3 ↦ 0, …, 7`. -/
+def mulT (i j : Fin 8) : Fin 8 :=
+  ⟨mulBits / 2 ^ (3 * (8 * i.val + j.val)) % 8, Nat.mod_lt _ (by decide)⟩
+
+/-- Inversion on the codes. -/
+def invT (i : Fin 8) : Fin 8 := ⟨invBits / 2 ^ (3 * i.val) % 8, Nat.mod_lt _ (by decide)⟩
+
+/-- The code of a quaternion: `a 0, …, a 3, xa 0, …, xa 3 ↦ 0, …, 7`. -/
+def code (q : Q8) : Fin 8 :=
+  if q = a 0 then 0 else if q = a 1 then 1 else if q = a 2 then 2 else if q = a 3 then 3
+  else if q = xa 0 then 4 else if q = xa 1 then 5 else if q = xa 2 then 6 else 7
+
+theorem code_mul : ∀ p q : Q8, code (p * q) = mulT (code p) (code q) := by decide +kernel
+theorem code_inv : ∀ p : Q8, code p⁻¹ = invT (code p) := by decide +kernel
+theorem code_one : code 1 = 0 := by decide +kernel
+
+theorem guard_code (x : Q8 × Q8 × Q8)
+    (h : x.1 * x.2.1 * x.2.2 = a 0 ∨ x.1 * x.2.1 * x.2.2 = a 2) :
+    mulT (mulT (code x.1) (code x.2.1)) (code x.2.2) = 0 ∨
+      mulT (mulT (code x.1) (code x.2.1)) (code x.2.2) = 2 := by
+  rw [← code_mul, ← code_mul]
+  rcases h with h | h <;> rw [h] <;> decide +kernel
+
+/-- `γ`, on codes. -/
+def gammaT (c : Fin 8) : Fin 27 → Fin 27 := if c = 2 then permBits zBits 0 else id
+
+/-- `α(a) β(ab) γ(abc)`, on codes. -/
+def G3 (i1 i2 i3 : Fin 8) (v : Fin 27) : Fin 27 :=
+  alphaT i1 (betaT (mulT i1 i2) (gammaT (mulT (mulT i1 i2) i3) v))
+
+/-- `(a, b, c) ↦ α(a) β(ab) γ(abc)`. -/
+def Ff (x : Q8 × Q8 × Q8) : Fin 27 → Fin 27 := G3 (code x.1) (code x.2.1) (code x.2.2)
+
+theorem alpha_inj : ∀ q, Function.Injective (alphaT q) := by decide +kernel
+theorem beta_inj : ∀ q, Function.Injective (betaT q) := by decide +kernel
+theorem gamma_inj : ∀ q, Function.Injective (gammaT q) := by decide +kernel
+theorem alpha_meets : ∀ q u v, meets (alphaT q u) (alphaT q v) = meets u v := by
+  decide +kernel
+theorem beta_meets : ∀ q u v, meets (betaT q u) (betaT q v) = meets u v := by
+  decide +kernel
+theorem gamma_meets : ∀ q u v, meets (gammaT q u) (gammaT q v) = meets u v := by
+  decide +kernel
+theorem alpha_t : ∀ q v, alphaT q v ∈ t ↔ v ∈ t := by decide +kernel
+theorem beta_t : ∀ q v, betaT q v ∈ t ↔ v ∈ t := by decide +kernel
+theorem gamma_t : ∀ q v, gammaT q v ∈ t ↔ v ∈ t := by decide +kernel
+
+theorem Ff_inj (x : Q8 × Q8 × Q8) : Function.Injective (Ff x) :=
+  (alpha_inj _).comp ((beta_inj _).comp (gamma_inj _))
+
+theorem Ff_mem (x : Q8 × Q8 × Q8) : ofFun (Ff x) (Ff_inj x) ∈ Wt :=
+  ofFun_mem _ _ (fun u v => by simp only [Ff, G3, alpha_meets, beta_meets, gamma_meets])
+    (fun v => by simp only [Ff, G3, alpha_t, beta_t, gamma_t])
+
+theorem G3_ker : ∀ (i1 i2 i3 : Fin 8) (i : Fin 3), c1 (G3 i1 i2 i3 (r1 i)) = i ∧
+    c2 (G3 i1 i2 i3 (r2 i).1, G3 i1 i2 i3 (r2 i).2) = i := by decide +kernel
+
+/-- `α(a) β(ab) γ(abc)` as an element of `Ker φ`. -/
+noncomputable def Fsub (x : Q8 × Q8 × Q8) : phi.ker :=
+  ⟨⟨ofFun (Ff x) (Ff_inj x), Ff_mem x⟩, MonoidHom.mem_ker.2 <|
+    Prod.ext (Equiv.ext fun i => (G3_ker _ _ _ i).1) (Equiv.ext fun i => (G3_ker _ _ _ i).2)⟩
+
+theorem Fsub_eq_one (x : Q8 × Q8 × Q8) : Fsub x = 1 ↔ ∀ v, Ff x v = v :=
+  ⟨fun h v => congrArg (fun σ : phi.ker => (σ : Perm (Fin 27)) v) h,
+    fun h => Subtype.ext (Subtype.ext (Equiv.ext h))⟩
+
+/-- The generators `(q, q⁻¹, 1)`, `(1, q, q⁻¹)`, `(1, 1, ±1)` of `H`. -/
+def gensH : Set H18 :=
+  {y | ∃ q : Q8, (y : Q8 × Q8 × Q8) = (q, q⁻¹, 1) ∨ (y : Q8 × Q8 × Q8) = (1, q, q⁻¹) ∨
+    ((y : Q8 × Q8 × Q8) = (1, 1, q) ∧ (q = a 0 ∨ q = a 2))}
+
+theorem closure_gensH : Submonoid.closure gensH = ⊤ := by
+  refine eq_top_iff.2 fun x _ => ?_
+  obtain ⟨⟨x1, x2, x3⟩, hx⟩ := x
+  have hc := (mem_H18' _).1 hx
+  have hA : ((x1, x1⁻¹, 1) : Q8 × Q8 × Q8) ∈ H18 := (mem_H18' _).2 (Or.inl (by simp))
+  have hB : ((1, x1 * x2, (x1 * x2)⁻¹) : Q8 × Q8 × Q8) ∈ H18 :=
+    (mem_H18' _).2 (Or.inl (by simp))
+  have hC : ((1, 1, x1 * x2 * x3) : Q8 × Q8 × Q8) ∈ H18 :=
+    (mem_H18' _).2 (by simpa using hc)
+  have e : (⟨(x1, x2, x3), hx⟩ : H18) = ⟨_, hA⟩ * ⟨_, hB⟩ * ⟨_, hC⟩ := by
+    refine Subtype.ext (Prod.ext ?_ (Prod.ext ?_ ?_)) <;> simp [mul_assoc]
+  rw [e]
+  exact Submonoid.mul_mem _ (Submonoid.mul_mem _ (Submonoid.subset_closure ⟨x1, Or.inl rfl⟩)
+    (Submonoid.subset_closure ⟨x1 * x2, Or.inr (Or.inl rfl)⟩))
+    (Submonoid.subset_closure ⟨x1 * x2 * x3, Or.inr (Or.inr ⟨rfl, hc⟩)⟩)
+
+theorem all_fin {n : ℕ} {P : Fin n → Bool} (h : (List.finRange n).all P = true) (i : Fin n) :
+    P i = true :=
+  List.all_eq_true.1 h i (List.mem_finRange i)
+
+/-- The guard `abc = ±1`, on codes. -/
+def guardB (i1 i2 i3 : Fin 8) : Bool := mulT (mulT i1 i2) i3 == 0 || mulT (mulT i1 i2) i3 == 2
+
+theorem guardB_of {i1 i2 i3 : Fin 8} (h : mulT (mulT i1 i2) i3 = 0 ∨ mulT (mulT i1 i2) i3 = 2) :
+    guardB i1 i2 i3 = true := by
+  rcases h with h | h <;> simp [guardB, h]
+
+theorem G3_mulA_all : ((List.finRange 8).all fun i1 => (List.finRange 8).all fun i2 =>
+    (List.finRange 8).all fun i3 => !guardB i1 i2 i3 || (List.finRange 8).all fun d =>
+      (List.finRange 27).all fun v =>
+        G3 (mulT i1 d) (mulT i2 (invT d)) (mulT i3 0) v == G3 i1 i2 i3 (G3 d (invT d) 0 v)) =
+    true := by
+  decide +kernel
+
+theorem G3_mulB_all : ((List.finRange 8).all fun i1 => (List.finRange 8).all fun i2 =>
+    (List.finRange 8).all fun i3 => !guardB i1 i2 i3 || (List.finRange 8).all fun d =>
+      (List.finRange 27).all fun v =>
+        G3 (mulT i1 0) (mulT i2 d) (mulT i3 (invT d)) v == G3 i1 i2 i3 (G3 0 d (invT d) v)) =
+    true := by
+  decide +kernel
+
+theorem G3_mulC_all : ((List.finRange 8).all fun i1 => (List.finRange 8).all fun i2 =>
+    (List.finRange 8).all fun i3 => !guardB i1 i2 i3 || (List.finRange 8).all fun d =>
+      !(d == 0 || d == 2) || (List.finRange 27).all fun v =>
+        G3 (mulT i1 0) (mulT i2 0) (mulT i3 d) v == G3 i1 i2 i3 (G3 0 0 d v)) = true := by
+  decide +kernel
+
+theorem G3_mulA {i1 i2 i3 : Fin 8} (h : guardB i1 i2 i3 = true) (d : Fin 8) (v : Fin 27) :
+    G3 (mulT i1 d) (mulT i2 (invT d)) (mulT i3 0) v = G3 i1 i2 i3 (G3 d (invT d) 0 v) := by
+  have h' := all_fin (all_fin (all_fin G3_mulA_all i1) i2) i3
+  simp only [h, Bool.not_true, Bool.false_or] at h'
+  exact beq_iff_eq.1 (all_fin (all_fin h' d) v)
+
+theorem G3_mulB {i1 i2 i3 : Fin 8} (h : guardB i1 i2 i3 = true) (d : Fin 8) (v : Fin 27) :
+    G3 (mulT i1 0) (mulT i2 d) (mulT i3 (invT d)) v = G3 i1 i2 i3 (G3 0 d (invT d) v) := by
+  have h' := all_fin (all_fin (all_fin G3_mulB_all i1) i2) i3
+  simp only [h, Bool.not_true, Bool.false_or] at h'
+  exact beq_iff_eq.1 (all_fin (all_fin h' d) v)
+
+theorem G3_mulC {i1 i2 i3 : Fin 8} (h : guardB i1 i2 i3 = true) {d : Fin 8}
+    (hd : (d == 0 || d == 2) = true) (v : Fin 27) :
+    G3 (mulT i1 0) (mulT i2 0) (mulT i3 d) v = G3 i1 i2 i3 (G3 0 0 d v) := by
+  have h' := all_fin (all_fin (all_fin G3_mulC_all i1) i2) i3
+  simp only [h, Bool.not_true, Bool.false_or] at h'
+  have h'' := all_fin h' d
+  simp only [hd, Bool.not_true, Bool.false_or] at h''
+  exact beq_iff_eq.1 (all_fin h'' v)
+
+/-- The surjection `H → Ker φ`. -/
+noncomputable def f18 : H18 →* phi.ker :=
+  MonoidHom.ofClosureMEqTopRight (fun x => Fsub x.1) closure_gensH
+    (Subtype.ext (Subtype.ext (Equiv.ext (by decide +kernel))))
+    (by
+      rintro ⟨x, hx⟩ ⟨y, hy⟩ ⟨q, hq⟩
+      refine Subtype.ext (Subtype.ext (Equiv.ext fun v => ?_))
+      change Ff (x * y) v = Ff x (Ff y v)
+      have hx' := (mem_H18' x).1 hx
+      rcases hq with h | h | ⟨h, hq⟩ <;> simp only at h <;> subst h <;>
+        simp only [Ff, Prod.fst_mul, Prod.snd_mul, code_mul, code_inv, code_one]
+      · exact G3_mulA (guardB_of (guard_code x hx')) _ v
+      · exact G3_mulB (guardB_of (guard_code x hx')) _ v
+      · exact G3_mulC (guardB_of (guard_code x hx')) (by rcases hq with rfl | rfl <;> decide +kernel) v)
+
+/-- The kernel condition: central coordinates with product one. -/
+def kcond (x : Q8 × Q8 × Q8) : Prop :=
+  (x.1 = a 0 ∨ x.1 = a 2) ∧ (x.2.1 = a 0 ∨ x.2.1 = a 2) ∧ (x.2.2 = a 0 ∨ x.2.2 = a 2) ∧
+    x.1 * x.2.1 * x.2.2 = 1
+
+instance : DecidablePred kcond := fun x => by unfold kcond; infer_instance
+
+theorem ker_cond : ∀ x : Q8 × Q8 × Q8, (x.1 * x.2.1 * x.2.2 = a 0 ∨ x.1 * x.2.1 * x.2.2 = a 2) →
+    ((∀ v, Ff x v = v) ↔ kcond x) := by decide +kernel
+
+theorem f18_eq_one' (x : H18) : f18 x = 1 ↔ kcond x.1 :=
+  (Fsub_eq_one x.1).trans (ker_cond x.1 ((mem_H18' _).1 x.2))
+
+theorem f18_eq_one (x : H18) : f18 x = 1 ↔
+    ((x : Q8 × Q8 × Q8).1 ∈ Subgroup.center Q8 ∧
+      (x : Q8 × Q8 × Q8).2.1 ∈ Subgroup.center Q8 ∧
+      (x : Q8 × Q8 × Q8).2.2 ∈ Subgroup.center Q8 ∧
+      (x : Q8 × Q8 × Q8).1 * (x : Q8 × Q8 × Q8).2.1 * (x : Q8 × Q8 × Q8).2.2 = 1) := by
+  simp only [mem_center_Q8]
+  exact f18_eq_one' x
+
+theorem card_H18 : Nat.card H18 = 128 := by
+  rw [Nat.card_congr (Equiv.subtypeEquivRight mem_H18'), Nat.card_eq_fintype_card]
+  decide +kernel
+
+theorem card_ker_f18 : Nat.card f18.ker = 4 := by
+  rw [Nat.card_congr ((Equiv.subtypeEquivRight fun x => (MonoidHom.mem_ker).trans
+      (f18_eq_one' x)).trans (Equiv.subtypeSubtypeEquivSubtypeInter (· ∈ H18) kcond)),
+    Nat.card_congr (Equiv.subtypeEquivRight fun x => and_congr_left' (mem_H18' x)),
+    Nat.card_eq_fintype_card]
+  decide +kernel
+
+/-- **Problem 18 (group part) holds.** -/
+theorem problem18_holds : problem18 := by
+  refine ⟨H18, mem_H18, phi, phi_surj, f18, ?_, f18_eq_one⟩
+  have h := Subgroup.card_mul_index f18.ker
+  rw [Subgroup.index_ker, card_ker_f18, card_H18] at h
+  exact MonoidHom.range_eq_top.1
+    (Subgroup.eq_top_of_card_eq _ ((by omega : Nat.card f18.range = 32).trans card_ker_phi.symm))
+
 
 end Problem18
 
