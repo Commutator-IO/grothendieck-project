@@ -480,7 +480,7 @@ for (const raw of body.split('\n')) {
 
   // #90 — the hypotheses a counterexample of the edition's is set against: read
   // on the facsimile before the verdict is taken to hold of the page.
-  if (/^Hypotheses behind/.test(section)) {
+  if (section.startsWith('Hypotheses behind')) {
     const hyp = /^\*\*(\d+(?:-\d+)?)(?:,\s*pp?\.\s*([\d–, -]+))?:\*\*\s*(.*)$/.exec(text);
     if (hyp && isCote(hyp[1])) {
       // « 3–5 » is the range 3, 4, 5; « 35, 37 » the two pages.
