@@ -27,7 +27,7 @@
 \newcommand{\leanst}{\par\smallskip\noindent\textbf{Lean.} }
 \newcommand{\settle}{\par\smallskip\noindent\textbf{What would settle it.} }
 
-\title[Open questions from Grothendieck's Montpellier notes]{Open questions from Grothendieck's Montpellier notes:\\ eighteen statements a formalisation could not reach}
+\title[Open questions from Grothendieck's Montpellier notes]{Open questions from Grothendieck's Montpellier notes:\\ seventeen statements a formalisation could not reach}
 \author{Michel Hua}
 \address{Commutator, Paris, France}
 \email{michel@commutator.io}
@@ -37,7 +37,7 @@
 \begin{document}
 
 \begin{abstract}
-The University of Montpellier has put online 178 folders of Alexandre Grothendieck's mathematical working notes. Since August 2026 an edition has transcribed 164 of them with a language model, restated each in current notation, searched the literature for the statements they contain, and formalised what it could in Lean~4 against Mathlib. Most of the statements that look new sit in theories Mathlib does not have yet: étale cohomology, topoi, stacks, abelian schemes, motives. This note collects eighteen of them for mathematicians. Each comes with its folder and page, the context, what the literature search found, the argument the page gives or sketches, the steps the edition added, and what would settle it. None of the statements has been checked by a specialist, and several may already be in print; a reference is as welcome as a proof or a counterexample.
+The University of Montpellier has put online 178 folders of Alexandre Grothendieck's mathematical working notes. Since August 2026 an edition has transcribed 164 of them with a language model, restated each in current notation, searched the literature for the statements they contain, and formalised what it could in Lean~4 against Mathlib. Most of the statements that look new sit in theories Mathlib does not have yet: étale cohomology, topoi, stacks, abelian schemes, motives. This note collects seventeen of them for mathematicians. Each comes with its folder and page, the context, what the literature search found, the argument the page gives or sketches, the steps the edition added, and what would settle it. None of the statements has been checked by a specialist, and several may already be in print; a reference is as welcome as a proof or a counterexample.
 \end{abstract}
 
 \maketitle
@@ -318,20 +318,6 @@ Is a combinatorial arrangement of pseudolines in the real projective plane witho
 
 \settle A proof of (A1)--(A6), or the face-width bound with a uniqueness theorem.
 
-\begin{problem}[An added pseudoline is determined by its crossing order]\label{p:cyc}
-Let $\Sigma$ be an arrangement of oriented pseudolines in the real projective plane, and $D$ a pseudoline in general position with respect to $\Sigma$. Is the position of $D$ (up to isotopy fixing $\Sigma$) determined by the antipody-compatible cyclic order in which its double cover meets the pseudolines of $\Sigma$?
-\end{problem}
-
-\src{\fac{154}, p.~18, \emph{[Système de pseudo-droites]}, dated by the inventory 1983--1984 and by his own dated leaves to 23 December 1983--2 February 1984: \q{il ne devrait pas être difficile de montrer que cette application est l'injection}. Nothing in the folder proves it.}
-
-\ideas This looks like a short consequence of oriented-matroid theory (our sketch). The cyclic order of $i, j, -i, -j$ on the double cover decides on which side of $D$ the vertex $D_i \cap D_j$ lies. In chirotope terms, the triples of $\chi_{\Sigma \cup D}$ not containing $D$ are those of $\Sigma$, and those containing $D$ are $\pm\chi_{\Sigma/D}$, the contraction, the sign being the reorientation of $D$ \cite[\S2.2.2]{miyata}. So $\Sigma \cup D$ is determined by $\Sigma$ and $\Sigma/D$, and the Folkman--Lawrence representation theorem carries this to positions.
-
-\known We found the ingredients (Miyata, after Björner et al., p.~125; Felsner--Goodman \S5.2) but no printed statement. Björner--Las Vergnas--Sturmfels--White--Ziegler, \S\S3.4--3.5 and 7.1, could not be consulted.
-
-\leanst The oriented-matroid form is stated, without proof, as \texttt{problem17} in \nolinkurl{lean/Grothendieck/Folder154.lean}, with rank-3 chirotopes defined by the Grassmann--Plücker relations. In that form it follows from alternation alone; the page's statement also needs the topological representation theorem and the identification of the crossing order with the contraction, which Mathlib does not have.
-
-\settle A reference; and the check that positions taken up to isotopy fixing $\Sigma$ correspond to single-element extensions.
-
 \begin{problem}[The $27$ lines around a triangle]\label{p:27}
 A Schläfli graph (the $27$ lines on a cubic surface, joined when they meet) with a marked triangle $t$: is it equivalent to the data of a $3$-element set $t$, a $2$-dimensional $\mathbb F_2$-vector space $V$, and a torsor $\tilde P$ under the central extension $\tilde\Psi(V, t) = \bigwedge_{i \in t} p_i^*(\tilde V)$ of $\Psi(V, t) = \ker(V^t \to V)$ by $\mathbb F_2$, where $\tilde V$ is the quaternion group $Q_8$ seen as the extension of $V$ by $\mathbb F_2$ split over no subgroup of order~$2$, and $\bigwedge$ is the Baer product; and is $\tilde\Psi$ characterised by the page's anisotropy conditions for $\dim V \le 2$, uniquely up to unique isomorphism?
 \end{problem}
@@ -346,7 +332,7 @@ A Schläfli graph (the $27$ lines on a cubic surface, joined when they meet) wit
 
 \section{How the list was made, and its limits}
 
-The eighteen problems were chosen from the register of findings among the rows still open, outside what Lean reached or with Lean reaching only a count, and with a statement precise enough to be proved or refuted. Rows whose only interest is a slip on the page, a dating, or a statement now known to be in print were left out, as were the conjectures already in the published record (the standard conjectures, the section conjecture, the $p$-curvature conjecture, the homotopy hypothesis), which the companion paper discusses \cite{huacicm}.
+The seventeen problems were chosen from the register of findings among the rows still open, outside what Lean reached or with Lean reaching only a count, and with a statement precise enough to be proved or refuted. Rows whose only interest is a slip on the page, a dating, or a statement now known to be in print were left out, as were the conjectures already in the published record (the standard conjectures, the section conjecture, the $p$-curvature conjecture, the homotopy hypothesis), which the companion paper discusses \cite{huacicm}.
 
 Three limits apply to every entry. The transcriptions are first passes by a language model, and doubtful readings are marked but not all checked against the facsimile; a statement may rest on a misread word, and the entries say where we know this. The literature searches were made by the same means, with full texts where they were open and abstracts otherwise; an entry that says \q{not found} reports a search, not an absence. And the steps marked \q{ours} have not been checked by a specialist.
 
@@ -380,7 +366,6 @@ This note was drafted with a language model (Claude Opus 5.5, Anthropic) from th
 \bibitem{kockmoerdijk1996} A.~Kock, I.~Moerdijk, Spaces with local equivalence relations, and their monodromy, \emph{Topology Appl.} 72 (1996), 47--78.
 \bibitem{mathew} A.~Mathew, On $K(1)$-local TR, \emph{Compositio Math.} 157 (2021), arXiv:2005.08744.
 \bibitem{milneadt} J.~S.~Milne, \emph{Arithmetic Duality Theorems}, 2nd ed., BookSurge, 2006.
-\bibitem{miyata} H.~Miyata, On symmetry groups of oriented matroids, arXiv:1301.6451.
 \bibitem{paynethas} S.~E.~Payne, J.~A.~Thas, \emph{Finite Generalized Quadrangles}, 2nd ed., EMS, 2009.
 \bibitem{poonenstoll} B.~Poonen, M.~Stoll, The Cassels--Tate pairing on polarized abelian varieties, \emph{Ann.\ of Math.} 150 (1999), 1109--1149.
 \bibitem{pop2019} F.~Pop, Finite tripod variants of I/OM: on Ihara's question/Oda--Matsumoto conjecture, \emph{Invent.\ Math.} (2019), 745--797.
