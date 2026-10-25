@@ -580,11 +580,20 @@ function ProvedInLean() {
   );
 }
 
-// « Vers une géométrie des formes » (June–July 1986), folders 156-1 to 156-8: the
-// unpublished manuscript described in Grothendieck's letter to Yamashita. The
-// counts are read from FINDINGS, so the table follows the rows as they change.
-const FORMES = ['156-1', '156-2', '156-3', '156-4', '156-5', '156-6', '156-7', '156-8'];
-const FORMES_COLUMNS = [
+// The book-length manuscripts of the fonds that nobody has edited (the edited ones —
+// Longue Marche §1–37, Pursuing Stacks I, the Dérivateurs, the Esquisse — are left
+// out). Counts are read from FINDINGS, so the table follows the rows as they change.
+const MANUSCRIPTS = [
+  { title: 'Vers une géométrie des formes', when: 'June–July 1986', cotes: ['156-1', '156-2', '156-3', '156-4', '156-5', '156-6', '156-7', '156-8'], note: 'the manuscript of the letter to Yamashita, 9 July 1986' },
+  { title: 'La Longue Marche, after § 37', when: 'from 1981', cotes: ['140-2', '140-3', '140-4'], note: 'not transcribed yet; § 1–37 edited by Malgoire (1995)' },
+  { title: 'Complexe de De Rham à puissances divisées', when: '1975–1976', cotes: ['136'], note: 'notes for a 1976 lecture at the IHÉS' },
+  { title: 'Teichmülleries', when: '1981–1983', cotes: ['144'], note: '' },
+  { title: "Structure à l'infini des M_{g,ν}", when: 'undated', cotes: ['147'], note: '' },
+  { title: "Icosaèdres, bi-icosaèdres et algèbres d'Azumaya", when: '1982–1986', cotes: ['83'], note: '' },
+  { title: 'Formes quadratiques', when: 'c. 1982–1986', cotes: ['84'], note: '' },
+  { title: 'Quadriques affines, extensions quadratiques', when: 'from 1977', cotes: ['77'], note: '' },
+];
+const MS_COLUMNS = [
   { key: 'unsearched', label: 'Unsearched', test: (n: Finding) => n.kind === 'mathematical' && n.status === 'unsearched' },
   { key: 'candidate', label: 'Candidate', test: (n: Finding) => n.kind === 'mathematical' && n.status === 'candidate' },
   { key: 'matched', label: 'Matched', test: (n: Finding) => n.kind === 'mathematical' && n.status === 'matched' },
@@ -593,30 +602,31 @@ const FORMES_COLUMNS = [
   { key: 'lean', label: 'Proved in Lean', test: (n: Finding) => n.lean !== undefined },
 ] as const;
 
-function GeometryOfForms() {
-  const rows = FORMES.map((cote) => {
-    const here = FINDINGS.filter((n) => n.cote === cote);
-    return { cote, title: BY_ID.get(cote)?.title ?? '', counts: FORMES_COLUMNS.map((c) => here.filter(c.test).length), total: here.length };
+function UnpublishedManuscripts() {
+  const rows = MANUSCRIPTS.map((m) => {
+    const here = FINDINGS.filter((n) => m.cotes.includes(n.cote));
+    const pages = m.cotes.reduce((a, c) => a + (BY_ID.get(c)?.pages ?? 0), 0);
+    return { ...m, pages, counts: MS_COLUMNS.map((c) => here.filter(c.test).length), total: here.length };
   });
-  const totals = FORMES_COLUMNS.map((_, i) => rows.reduce((a, r) => a + r.counts[i], 0));
-  const all = rows.reduce((a, r) => a + r.total, 0);
+  const totals = MS_COLUMNS.map((_, i) => rows.reduce((a, r) => a + r.counts[i], 0));
   return (
-    <section id="geometrie-des-formes" className="mt-10 scroll-mt-16">
-      <h2 className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">
-        Vers une géométrie des formes (1986)
-      </h2>
+    <section id="unpublished-manuscripts" className="mt-10 scroll-mt-16">
+      <h2 className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">Unpublished manuscripts</h2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
-        Eight chapters written between 5 June and 4 July 1986, dated in his hand, 691 pages up to 15 July
-        according to the inventory: the manuscript he describes to Jun-Ichi Yamashita in a letter of
-        9 July 1986. It has never been edited. The table counts the rows below for each folder, by
-        outcome; « proved in Lean » counts rows whose statement has a Lean proof, whatever their outcome.
+        The folders that read as books rather than working notes, and that nobody has edited. The
+        rows below are counted for each, by outcome; « proved in Lean » counts rows whose statement has
+        a Lean proof, whatever their outcome. Pages are the inventory's. At the BnF, the{' '}
+        <em>Géométrie élémentaire schématique</em> (1992, 549 leaves), <em>Trialité</em> (1995) and
+        the <em>Notions de géographie combinatoire</em> (1996) are of the same kind, but are not
+        transcribed.
       </p>
       <div className="mt-3 overflow-x-auto">
-        <table className="w-full min-w-[640px] border-collapse text-[12.5px]">
+        <table className="w-full min-w-[720px] border-collapse text-[12.5px]">
           <thead>
             <tr className="text-left text-ink-500">
-              <th className="py-1 pr-3 font-semibold">Folder</th>
-              {FORMES_COLUMNS.map((c) => (
+              <th className="py-1 pr-3 font-semibold">Manuscript</th>
+              <th className="py-1 pr-3 text-right font-semibold">Pages</th>
+              {MS_COLUMNS.map((c) => (
                 <th key={c.key} className="py-1 pr-3 text-right font-semibold">{c.label}</th>
               ))}
               <th className="py-1 text-right font-semibold">All rows</th>
@@ -624,23 +634,30 @@ function GeometryOfForms() {
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.cote} className="border-t border-ink-100">
+              <tr key={r.title} className="border-t border-ink-100 align-top">
                 <td className="py-1 pr-3 text-ink-800">
-                  <a href={`/#${r.cote}`} className="font-semibold hover:text-brand-700">n° {r.cote}</a>{' '}
-                  <span className="text-ink-500">{r.title.replace(/\s*:.*$/, '')}</span>
+                  <span className="font-semibold"><em>{notation(r.title)}</em></span>{' '}
+                  <span className="text-ink-500">({r.when}) ·{' '}
+                    {r.cotes.map((c, i) => (
+                      <span key={c}>{i > 0 && ', '}<a href={`/#${c}`} className="hover:text-brand-700">{c}</a></span>
+                    ))}
+                  </span>
+                  {r.note && <div className="text-[11.5px] text-ink-400">{r.note}</div>}
                 </td>
+                <td className="py-1 pr-3 text-right tabular-nums">{r.pages}</td>
                 {r.counts.map((k, i) => (
-                  <td key={FORMES_COLUMNS[i].key} className="py-1 pr-3 text-right tabular-nums">{k || '·'}</td>
+                  <td key={MS_COLUMNS[i].key} className="py-1 pr-3 text-right tabular-nums">{k || '·'}</td>
                 ))}
                 <td className="py-1 text-right tabular-nums">{r.total}</td>
               </tr>
             ))}
             <tr className="border-t border-ink-300 font-semibold">
-              <td className="py-1 pr-3 text-ink-800">All eight</td>
+              <td className="py-1 pr-3 text-ink-800">All</td>
+              <td className="py-1 pr-3 text-right tabular-nums">{rows.reduce((a, r) => a + r.pages, 0)}</td>
               {totals.map((k, i) => (
-                <td key={FORMES_COLUMNS[i].key} className="py-1 pr-3 text-right tabular-nums">{k}</td>
+                <td key={MS_COLUMNS[i].key} className="py-1 pr-3 text-right tabular-nums">{k}</td>
               ))}
-              <td className="py-1 text-right tabular-nums">{all}</td>
+              <td className="py-1 text-right tabular-nums">{rows.reduce((a, r) => a + r.total, 0)}</td>
             </tr>
           </tbody>
         </table>
@@ -773,7 +790,7 @@ export function FindingsPage() {
 
         <ProvedInLean />
 
-        <GeometryOfForms />
+        <UnpublishedManuscripts />
 
         <div id="full-list" className="scroll-mt-16" />
 
