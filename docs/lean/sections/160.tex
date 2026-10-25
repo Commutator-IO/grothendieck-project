@@ -32,4 +32,14 @@ Soient $K$ un corps de caractéristique $p$, $n \geq 1$ et $e \in K^n$ avec $\De
 Les coefficients de $g$ sont fixes par Frobenius, donc $\bigl(\sum_k g_{jk} e_k\bigr)^{p^i} = \sum_k g_{jk} e_k^{p^i}$ : la matrice de Moore de $g \cdot e$ est celle de $e$ multipliée par la transposée de $g$, et les déterminants se multiplient. La deuxième assertion est le théorème précédent, puisque $(-1)^n A_0(e) = \Delta_n(e)^{p-1}$. Soit $y$ avec $y^{p-1} = \Delta_n(e)^{p-1}$ ; alors $y \neq 0$, et $c = y/\Delta_n(e)$ vérifie $c^{p-1} = 1$, donc $c^p = c$. Les solutions de $c^p = c$ dans $K$ sont les $p$ éléments de $\mathbf F_p$, puisqu'un polynôme de degré $p$ a au plus $p$ racines : $c \in \mathbf F_p^\times$, et la matrice diagonale $g = \mathrm{diag}(c, 1, \dots, 1)$ donne $\Delta_n(g \cdot e) = c\,\Delta_n(e) = y$. La dernière assertion vient de la première, $\Delta_n(e)$ étant non nul et $\mathbf F_p \to K$ injectif.
 \end{proof}
 
-Ne sont pas démontrés ici : la version relative pour $(E, u)$ non trivial et la trivialisation $(\Lambda^n \check E)^{\otimes(p-1)} \simeq \mathcal O_S$ par $\Lambda^n \check u$ ; le théorème de Dickson (pages~9 à~12) ; la bijection $a \mapsto \operatorname{Ker} f_a$ des pages~2 à~6 ; que deux bases d'un même $M$ diffèrent d'un élément de $\mathrm{GL}_n(\mathbf F_p)$, et la forme relative du corollaire de la page~13 sur une base $S$.
+\begin{lemme}[Changement de base]
+Soient $K$ un corps de caractéristique $p$ et $e, f \in K^n$ deux familles $\mathbf F_p$-libres engendrant le même sous-$\mathbf F_p$-espace $M \subset K$. Il existe $g \in \mathrm{GL}_n(\mathbf F_p)$ tel que $f = g \cdot e$, et alors $\Delta_n(f) = \det(g)\,\Delta_n(e)$.
+\end{lemme}
+
+\begin{proof}
+Les familles $e$ et $f$ sont deux bases de $M$ ; la matrice de passage $P$, de colonnes les coordonnées des $f_j$ dans la base $e$, est inversible, et $f_j = \sum_k P_{kj} e_k$, soit $f = {}^t\!P \cdot e$ avec $\det {}^t\!P = \det P$ inversible. La formule pour $\Delta_n$ est alors la première assertion de l'énoncé précédent. Voir \texttt{exists\_act\_eq\_of\_span\_eq} et \texttt{moore\_eq\_of\_span\_eq}, qui s'appuient sur \texttt{Basis.toMatrix}, \texttt{Basis.invertibleToMatrix} et \texttt{Basis.sum\_toMatrix\_smul\_self} de Mathlib.
+\end{proof}
+
+\noindent Les valeurs $\Delta_n(f)$, pour $f$ parcourant les bases de $M$, sont donc exactement les $\Delta_n(g \cdot e)$ pour une base fixée $e$ : avec l'énoncé précédent, elles forment l'ensemble des racines $(p-1)$-ièmes de $(-1)^n a_0$, et deux bases ont même valeur si et seulement si elles diffèrent d'un élément de $\mathrm{SL}_n(\mathbf F_p)$.
+
+Ne sont pas démontrés ici : la version relative pour $(E, u)$ non trivial et la trivialisation $(\Lambda^n \check E)^{\otimes(p-1)} \simeq \mathcal O_S$ par $\Lambda^n \check u$ ; le théorème de Dickson (pages~9 à~12) ; la bijection $a \mapsto \operatorname{Ker} f_a$ des pages~2 à~6 ; la forme relative du corollaire de la page~13 sur une base $S$, et l'identification de $\Delta_n(e)$ à une trivialisation de $\Lambda^n_{\mathbf F_p} M$ au sens de la puissance extérieure.

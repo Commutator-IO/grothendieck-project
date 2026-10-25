@@ -815,3 +815,218 @@ theorem isCohomologous_of_faithful [Module.Finite O A] [Infinite (ResidueField O
 end InertiaLocal
 
 end Grothendieck.Folder46
+
+/-!
+## Folder 46, page 90: injectivity in the Sylow form, `A` not necessarily commutative
+
+For two cocycles `c, c'` the average over the cosets is `b = Σ_{gΛ} c'(g) g(z) c(g)⁻¹`; it is
+well defined when `c'(λ) λ(z) c(λ)⁻¹ = z` on `Λ`, and then `c'(γ) γ(b) = b c(γ)`
+(`mul_smul_sum_cosets_twist`). If `c = u⁻¹ c' λ(u)` on `Λ` and `π(c) = v⁻¹ π(c') g(v)`, the element
+`z = w u` works as soon as `w` is fixed by `Λ` for the action twisted by `c'`,
+`λ ⋆ w = c'(λ) λ(w) c'(λ)⁻¹`, with `π(w) = v π(u)⁻¹`. So the margin's surjectivity is needed
+for the twisted action — the hypothesis must « survive the twist » (`isCohomologous_of_restrict`,
+`injective_restrict`, `injective_sylow`). It does in two cases: when `c'` is a coboundary on
+`Λ` (twisted invariants are then `t⁻¹ A^Λ t`; `injective_sylow_of_isCoboundary`, which contains
+the kernel form with `c' = 1`), and when `A` is commutative (`injective_sylow_comm`).
+-/
+
+namespace Grothendieck.Folder46
+
+section SylowInjective
+
+variable {Γ A B : Type*} [Group Γ] [Ring A] [MulSemiringAction Γ A] [Ring B]
+  [MulSemiringAction Γ B]
+
+/-- The twisted cocycle rule on the summands `f(h) = c'(h) h(z) c(h)⁻¹`:
+`c'(g) g(f(h)) = f(gh) c(g)`. -/
+theorem mul_smul_twist_cocycle {c c' : Γ → Aˣ} (hc : IsCocycle c) (hc' : IsCocycle c') (z : A)
+    (g h : Γ) :
+    (c' g : A) * g • ((c' h : A) * h • z * ↑(c h)⁻¹) =
+      (c' (g * h) : A) * (g * h) • z * ↑(c (g * h))⁻¹ * c g := by
+  rw [smul_mul', smul_mul', smul_inv_eq hc, smul_smul, hc' g h]
+  simp only [mul_assoc]
+
+/-- A twisted-fixed element for the action `x ↦ c'(γ) γ(x) c(γ)⁻¹` that is a unit `b` makes
+`c` and `c'` cohomologous: `c(γ) = b⁻¹ c'(γ) γ(b)`. -/
+theorem isCohomologous_of_fixed {c c' : Γ → Aˣ} (b : Aˣ)
+    (h : ∀ g, (c' g : A) * g • (b : A) = b * c g) :
+    ∃ u : Aˣ, ∀ g, (c g : A) = ↑u⁻¹ * c' g * g • (u : A) :=
+  ⟨b, fun g => by rw [mul_assoc, h, ← mul_assoc, Units.inv_mul, one_mul]⟩
+
+variable [Fintype Γ]
+
+open scoped Classical in
+/-- The twisted average over the cosets `Γ/Λ`: if `c'(λ) λ(z) c(λ)⁻¹ = z` for `λ ∈ Λ`, then
+`b = Σ_{gΛ} c'(g) g(z) c(g)⁻¹` is well defined and satisfies `c'(γ) γ(b) = b c(γ)`. -/
+theorem mul_smul_sum_cosets_twist {c c' : Γ → Aˣ} (hc : IsCocycle c) (hc' : IsCocycle c')
+    (Λ : Subgroup Γ) (z : A) (hz : ∀ l ∈ Λ, (c' l : A) * l • z * ↑(c l)⁻¹ = z) (g : Γ) :
+    (c' g : A) * g • ∑ q : Γ ⧸ Λ, (c' q.out : A) * q.out • z * ↑(c q.out)⁻¹ =
+      (∑ q : Γ ⧸ Λ, (c' q.out : A) * q.out • z * ↑(c q.out)⁻¹) * c g := by
+  set f : Γ → A := fun h => (c' h : A) * h • z * ↑(c h)⁻¹
+  have hf : ∀ h, ∀ l ∈ Λ, f (h * l) = f h := fun h l hl => by
+    have e := mul_smul_twist_cocycle hc hc' z h l
+    rw [hz l hl] at e
+    refine (Units.mul_left_inj (c h)).1 ?_
+    simp only [f] at e ⊢
+    rw [← e, mul_assoc _ (↑(c h)⁻¹ : A), Units.inv_mul, mul_one]
+  change (c' g : A) * g • ∑ q : Γ ⧸ Λ, f q.out = (∑ q : Γ ⧸ Λ, f q.out) * c g
+  rw [smul_sum, mul_sum, sum_mul]
+  simp_rw [f, mul_smul_twist_cocycle hc hc' z g]
+  refine (Equiv.sum_comp (MulAction.toPerm g) _).symm.trans (sum_congr rfl fun q _ => ?_) |>.symm
+  obtain ⟨⟨l, hl⟩, hq⟩ := QuotientGroup.mk_out_eq_mul Λ (g * q.out)
+  have e : (MulAction.toPerm g q : Γ ⧸ Λ) = (g * q.out : Γ) := by
+    conv_lhs => rw [← q.out_eq']
+    rfl
+  simp only [e, hq]
+  exact congrArg (· * (c g : A)) (hf _ l hl)
+
+open scoped Classical in
+/-- **Injectivity in the Sylow form, at the level of rings.** For a surjective equivariant
+`π : A → B` with `1 + Ker π ⊂ Aˣ`, a subgroup `Λ` of index invertible in `A`, and two cocycles
+`c, c'` cohomologous on `Λ` and modulo `Ker π`, `c` and `c'` are cohomologous, provided `B` lifts
+to the elements fixed by `Λ` for the action twisted by `c'`, `w ↦ c'(λ) λ(w) c'(λ)⁻¹`. -/
+theorem isCohomologous_of_restrict (π : A →+* B) (hπ : Function.Surjective π)
+    (hequiv : ∀ (g : Γ) (a : A), π (g • a) = g • π a)
+    (hker : ∀ x, π x = 0 → IsUnit (1 + x)) (Λ : Subgroup Γ) (hn : IsUnit (Λ.index : A))
+    {c c' : Γ → Aˣ} (hc : IsCocycle c) (hc' : IsCocycle c')
+    (hlift : ∀ y, ∃ w, (∀ l ∈ Λ, (c' l : A) * l • w * ↑(c' l)⁻¹ = w) ∧ π w = y)
+    (hΛ : ∃ u : Aˣ, ∀ l ∈ Λ, (c l : A) = ↑u⁻¹ * c' l * l • (u : A))
+    (hπc : ∃ v : Bˣ, ∀ g, π (c g) = ↑v⁻¹ * π (c' g) * g • (v : B)) :
+    ∃ u : Aˣ, ∀ g, (c g : A) = ↑u⁻¹ * c' g * g • (u : A) := by
+  obtain ⟨u, hu⟩ := hΛ
+  obtain ⟨v, hv⟩ := hπc
+  obtain ⟨w, hwΛ, hw⟩ := hlift (↑v * π ↑u⁻¹)
+  set z := w * u
+  have hz : ∀ l ∈ Λ, (c' l : A) * l • z * ↑(c l)⁻¹ = z := fun l hl => by
+    have hw' : (c' l : A) * l • w = w * c' l := by
+      conv_rhs => rw [← hwΛ l hl]
+      rw [mul_assoc _ (↑(c' l)⁻¹ : A), Units.inv_mul, mul_one]
+    refine (Units.mul_left_inj (c l)).1 ?_
+    rw [mul_assoc _ (↑(c l)⁻¹ : A), Units.inv_mul, mul_one, hu l hl, smul_mul', ← mul_assoc,
+      hw', mul_assoc w, mul_assoc w, ← mul_assoc (u : A), ← mul_assoc (u : A), Units.mul_inv,
+      one_mul]
+  have hπz : π z = ↑v := by
+    rw [map_mul, hw, mul_assoc, ← map_mul, Units.inv_mul, map_one, mul_one]
+  obtain ⟨z', hz'⟩ := hπ ↑v⁻¹
+  have hzu : IsUnit z := isUnit_of_mul_sub_one_mem (RingHom.ker π) (fun x hx => hker x hx)
+    (a' := z') (by simp [RingHom.mem_ker, hπz, hz']) (by simp [RingHom.mem_ker, hπz, hz'])
+  obtain ⟨m, hm⟩ := hn.mul hzu
+  set b := ∑ q : Γ ⧸ Λ, (c' q.out : A) * q.out • z * ↑(c q.out)⁻¹
+  set x := b - m
+  have hx : π x = 0 := by
+    have : ∀ s : Γ, π ((c' s : A) * s • z * ↑(c s)⁻¹) = ↑v := fun s => by
+      have h1 : π (c s) * π ↑(c s)⁻¹ = 1 := by rw [← map_mul, Units.mul_inv, map_one]
+      rw [hv s] at h1
+      rw [map_mul, map_mul, hequiv, hπz]
+      calc π (c' s) * s • (v : B) * π ↑(c s)⁻¹
+          = ↑v * (↑v⁻¹ * π (c' s) * s • (v : B) * π ↑(c s)⁻¹) := by
+            simp only [← mul_assoc, Units.mul_inv, one_mul]
+        _ = ↑v := by rw [h1, mul_one]
+    have hm' : π (m : A) = (Λ.index : B) * ↑v := by rw [hm, map_mul, map_natCast, hπz]
+    simp only [x, b, map_sub, map_sum, this, sum_const, card_univ, hm', nsmul_eq_mul,
+      sub_eq_zero, Λ.index_eq_card, Nat.card_eq_fintype_card]
+  have hb : b = m * (1 + ↑m⁻¹ * x) := by
+    rw [mul_add, mul_one, ← mul_assoc, Units.mul_inv, one_mul, add_sub_cancel]
+  obtain ⟨b', hb'⟩ : IsUnit b := hb ▸ m.isUnit.mul (hker _ (by rw [map_mul, hx, mul_zero]))
+  exact isCohomologous_of_fixed b' fun g => hb' ▸ mul_smul_sum_cosets_twist hc hc' Λ z hz g
+
+omit [Fintype Γ] [MulSemiringAction Γ B] in
+/-- When `c'` is a coboundary `t⁻¹ λ(t)` on `Λ`, the elements fixed by `Λ` for the action
+twisted by `c'` are the `t⁻¹ w t`, `w ∈ A^Λ`: the untwisted lifting hypothesis gives the
+twisted one. -/
+theorem twisted_lift_of_isCoboundary (π : A →+* B) (Λ : Subgroup Γ)
+    (hlift : ∀ y, ∃ w, (∀ l ∈ Λ, l • w = w) ∧ π w = y) {c' : Γ → Aˣ}
+    (ht : ∃ t : Aˣ, ∀ l ∈ Λ, (c' l : A) = ↑t⁻¹ * l • (t : A)) (y : B) :
+    ∃ w, (∀ l ∈ Λ, (c' l : A) * l • w * ↑(c' l)⁻¹ = w) ∧ π w = y := by
+  obtain ⟨t, ht⟩ := ht
+  obtain ⟨w, hwΛ, hw⟩ := hlift (π t * y * π ↑t⁻¹)
+  refine ⟨↑t⁻¹ * w * t, fun l hl => ?_, ?_⟩
+  · refine (Units.mul_left_inj (c' l)).1 ?_
+    have hli : (l • (t : A)) * l • ((t⁻¹ : Aˣ) : A) = 1 := by
+      rw [← smul_mul', Units.mul_inv, smul_one]
+    rw [mul_assoc _ (↑(c' l)⁻¹ : A), Units.inv_mul, mul_one, ht l hl, smul_mul', smul_mul',
+      hwΛ l hl]
+    simp only [mul_assoc]
+    rw [← mul_assoc (l • (t : A)), hli, one_mul]
+    simp only [Units.mul_inv_cancel_left]
+  · rw [map_mul, map_mul, hw]
+    simp only [← mul_assoc, ← map_mul, Units.inv_mul, map_one, one_mul]
+    rw [mul_assoc, ← map_mul, Units.inv_mul, map_one, mul_one]
+
+end SylowInjective
+
+section SylowInjectiveLocal
+
+variable {O A : Type*} [CommRing O] [Ring A] [Algebra O A] [IsLocalRing O]
+  {Γ B : Type*} [Group Γ] [Fintype Γ] [MulSemiringAction Γ A] [Ring B] [MulSemiringAction Γ B]
+
+/-- **Page 90, injectivity in the Sylow form** (forme reconstituée par l'édition): `A` finite
+over `𝒪`, not necessarily commutative, `π : A → B` onto with kernel in `𝔪A`, `Λ` of index prime
+to `p`. Two cocycles cohomologous modulo `𝔪A` and on `Λ` are cohomologous, provided `B` lifts to
+the elements fixed by `Λ` for the action twisted by `c'`. -/
+theorem injective_restrict [Module.Finite O A] (Λ : Subgroup Γ)
+    (hp : ¬ ringChar (ResidueField O) ∣ Λ.index) (π : A →+* B) (hπ : Function.Surjective π)
+    (hequiv : ∀ (g : Γ) (a : A), π (g • a) = g • π a)
+    (hker : ∀ x, π x = 0 → x ∈ maximalIdeal O • (⊤ : Submodule O A)) {c c' : Γ → Aˣ}
+    (hc : IsCocycle c) (hc' : IsCocycle c')
+    (hlift : ∀ y, ∃ w, (∀ l ∈ Λ, (c' l : A) * l • w * ↑(c' l)⁻¹ = w) ∧ π w = y)
+    (hΛ : ∃ u : Aˣ, ∀ l ∈ Λ, (c l : A) = ↑u⁻¹ * c' l * l • (u : A))
+    (hπc : ∃ v : Bˣ, ∀ g, π (c g) = ↑v⁻¹ * π (c' g) * g • (v : B)) :
+    ∃ u : Aˣ, ∀ g, (c g : A) = ↑u⁻¹ * c' g * g • (u : A) :=
+  isCohomologous_of_restrict π hπ hequiv (fun x hx => isUnit_one_add_of_mem_smul_top (hker x hx))
+    Λ (isUnit_index Λ hp) hc hc' hlift hΛ hπc
+
+/-- `injective_restrict` with `Λ` a Sylow `p`-subgroup, `p` the residue characteristic. -/
+theorem injective_sylow [Module.Finite O A] [Fact (ringChar (ResidueField O)).Prime]
+    (Λ : Sylow (ringChar (ResidueField O)) Γ) (π : A →+* B) (hπ : Function.Surjective π)
+    (hequiv : ∀ (g : Γ) (a : A), π (g • a) = g • π a)
+    (hker : ∀ x, π x = 0 → x ∈ maximalIdeal O • (⊤ : Submodule O A)) {c c' : Γ → Aˣ}
+    (hc : IsCocycle c) (hc' : IsCocycle c')
+    (hlift : ∀ y, ∃ w, (∀ l ∈ (Λ : Subgroup Γ), (c' l : A) * l • w * ↑(c' l)⁻¹ = w) ∧ π w = y)
+    (hΛ : ∃ u : Aˣ, ∀ l ∈ (Λ : Subgroup Γ), (c l : A) = ↑u⁻¹ * c' l * l • (u : A))
+    (hπc : ∃ v : Bˣ, ∀ g, π (c g) = ↑v⁻¹ * π (c' g) * g • (v : B)) :
+    ∃ u : Aˣ, ∀ g, (c g : A) = ↑u⁻¹ * c' g * g • (u : A) :=
+  injective_restrict (Λ : Subgroup Γ) Λ.not_dvd_index π hπ hequiv hker hc hc' hlift hΛ hπc
+
+/-- The Sylow form with the margin's untwisted hypothesis `A^Λ → B` onto, when `c'` is a
+coboundary on `Λ` (with `c' = 1`: `ker_trivial_sylow`). -/
+theorem injective_sylow_of_isCoboundary [Module.Finite O A]
+    [Fact (ringChar (ResidueField O)).Prime]
+    (Λ : Sylow (ringChar (ResidueField O)) Γ) (π : A →+* B) (hπ : Function.Surjective π)
+    (hequiv : ∀ (g : Γ) (a : A), π (g • a) = g • π a)
+    (hker : ∀ x, π x = 0 → x ∈ maximalIdeal O • (⊤ : Submodule O A))
+    (hlift : ∀ y, ∃ w, (∀ l ∈ (Λ : Subgroup Γ), l • w = w) ∧ π w = y) {c c' : Γ → Aˣ}
+    (hc : IsCocycle c) (hc' : IsCocycle c')
+    (ht : ∃ t : Aˣ, ∀ l ∈ (Λ : Subgroup Γ), (c' l : A) = ↑t⁻¹ * l • (t : A))
+    (hΛ : ∃ u : Aˣ, ∀ l ∈ (Λ : Subgroup Γ), (c l : A) = ↑u⁻¹ * c' l * l • (u : A))
+    (hπc : ∃ v : Bˣ, ∀ g, π (c g) = ↑v⁻¹ * π (c' g) * g • (v : B)) :
+    ∃ u : Aˣ, ∀ g, (c g : A) = ↑u⁻¹ * c' g * g • (u : A) :=
+  injective_sylow Λ π hπ hequiv hker hc hc'
+    (twisted_lift_of_isCoboundary π (Λ : Subgroup Γ) hlift ht) hΛ hπc
+
+end SylowInjectiveLocal
+
+section SylowInjectiveComm
+
+variable {O A : Type*} [CommRing O] [CommRing A] [Algebra O A] [IsLocalRing O]
+  {Γ B : Type*} [Group Γ] [Fintype Γ] [MulSemiringAction Γ A] [Ring B] [MulSemiringAction Γ B]
+
+/-- **Page 90 for `A` commutative: `H¹(Γ, A*) → H¹(Γ, B*) × H¹(Λ, A*)` is injective** under the
+margin's hypothesis `A^Λ → B` onto, `Λ` a Sylow `p`-subgroup. -/
+theorem injective_sylow_comm [Module.Finite O A] [Fact (ringChar (ResidueField O)).Prime]
+    (Λ : Sylow (ringChar (ResidueField O)) Γ) (π : A →+* B) (hπ : Function.Surjective π)
+    (hequiv : ∀ (g : Γ) (a : A), π (g • a) = g • π a)
+    (hker : ∀ x, π x = 0 → x ∈ maximalIdeal O • (⊤ : Submodule O A))
+    (hlift : ∀ y, ∃ w, (∀ l ∈ (Λ : Subgroup Γ), l • w = w) ∧ π w = y) {c c' : Γ → Aˣ}
+    (hc : IsCocycle c) (hc' : IsCocycle c')
+    (hΛ : ∃ u : Aˣ, ∀ l ∈ (Λ : Subgroup Γ), (c l : A) = ↑u⁻¹ * c' l * l • (u : A))
+    (hπc : ∃ v : Bˣ, ∀ g, π (c g) = ↑v⁻¹ * π (c' g) * g • (v : B)) :
+    ∃ u : Aˣ, ∀ g, (c g : A) = ↑u⁻¹ * c' g * g • (u : A) :=
+  injective_sylow Λ π hπ hequiv hker hc hc' (fun y => by
+    obtain ⟨w, hwΛ, hw⟩ := hlift y
+    refine ⟨w, fun l hl => ?_, hw⟩
+    rw [hwΛ l hl, mul_comm (c' l : A), mul_assoc, Units.mul_inv, mul_one]) hΛ hπc
+
+end SylowInjectiveComm
+
+end Grothendieck.Folder46

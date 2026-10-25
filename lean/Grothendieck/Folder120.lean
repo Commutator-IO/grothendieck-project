@@ -640,6 +640,102 @@ theorem pushout_exists [Nonempty R] (hU : T.Unions) (h6 : T.M6) (h7 : T.M7)
   exact ⟨_, inferInstance, J₁, J₂, hJ₁, hJ₂, hb₁, hb₂, ha, hP, hglue, huniv⟩
 
 
+/-! ### Necessity of the criterion of page 10
+
+« Inversement, si la somme existe et que l'oubli la respecte, un plongement `F : X ↪ R^A`
+donne `f = F ∘ g₁` et `g = F ∘ g₂`. » Here the pushout is a tame `P ⊂ R^N` with tame `q₁`,
+`q₂`, so `F` is the inclusion of `P`, and « the forgetful functor respects it » is the
+set-theoretic universal property `IsSetPushout`. -/
+
+/-- The cocone `q₁ : X₁ → P`, `q₂ : X₂ → P` under `X₁ ← Z → X₂` is a pushout in sets: it
+commutes, `P` is the union of the two images, and every pair of maps to a non-empty set `S`
+compatible on `Z` factors through it (uniquely on `P`, since `P` is covered). -/
+def IsSetPushout {I₁ I₂ K N : Type} (Z : Set (K → R)) (X₁ : Set (I₁ → R))
+    (X₂ : Set (I₂ → R)) (i₁ : (K → R) → I₁ → R) (i₂ : (K → R) → I₂ → R) (P : Set (N → R))
+    (q₁ : (I₁ → R) → N → R) (q₂ : (I₂ → R) → N → R) : Prop :=
+  (∀ z ∈ Z, q₁ (i₁ z) = q₂ (i₂ z)) ∧ P = q₁ '' X₁ ∪ q₂ '' X₂ ∧
+    ∀ (S : Type) [Nonempty S] (u₁ : (I₁ → R) → S) (u₂ : (I₂ → R) → S),
+      (∀ z ∈ Z, u₁ (i₁ z) = u₂ (i₂ z)) →
+      ∃ u : (N → R) → S, (∀ x ∈ X₁, u (q₁ x) = u₁ x) ∧ ∀ x ∈ X₂, u (q₂ x) = u₂ x
+
+/-- **The criterion of page 10, necessity.** If `i₁`, `i₂` are injective on `Z` and a tame
+cocone `q₁`, `q₂` into `P ⊂ R^N` is a pushout in sets, the coordinates of `q₁`, `q₂` are tame
+functions satisfying a), b), c). Neither (M5′), (M6), (M7) nor the tameness of `P` is used;
+c) holds in the stronger form `q₁ x₁ = q₂ x₂ → x₂ ∈ i₂(Z)`. -/
+theorem criterion_of_pushout {I₁ I₂ K N : Type} [Finite I₁] [Finite I₂] [Finite N]
+    {X₁ : Set (I₁ → R)} {X₂ : Set (I₂ → R)} {Z : Set (K → R)}
+    {i₁ : (K → R) → I₁ → R} {i₂ : (K → R) → I₂ → R}
+    (hinj₁ : Set.InjOn i₁ Z) (hinj₂ : Set.InjOn i₂ Z) {P : Set (N → R)}
+    {q₁ : (I₁ → R) → N → R} {q₂ : (I₂ → R) → N → R}
+    (hq₁ : graphOn X₁ q₁ ∈ T.M (I₁ ⊕ N)) (hq₂ : graphOn X₂ q₂ ∈ T.M (I₂ ⊕ N))
+    (hP : IsSetPushout Z X₁ X₂ i₁ i₂ P q₁ q₂) :
+    (∀ n, T.IsTameFun X₁ (fun x => q₁ x n)) ∧ (∀ n, T.IsTameFun X₂ (fun x => q₂ x n)) ∧
+    (∀ z ∈ Z, q₁ (i₁ z) = q₂ (i₂ z)) ∧ Set.InjOn q₁ X₁ ∧ Set.InjOn q₂ X₂ ∧
+    ∀ x₁ ∈ X₁, (∀ z ∈ Z, x₁ ≠ i₁ z) → ∀ x₂ ∈ X₂, (∀ z ∈ Z, x₂ ≠ i₂ z) →
+      q₁ x₁ ≠ q₂ x₂ := by
+  obtain ⟨ha, -, hU⟩ := hP
+  refine ⟨T.isTameFun_of_graph hq₁, T.isTameFun_of_graph hq₂, ha, ?_, ?_, ?_⟩
+  · intro x hx x' hx' e
+    obtain ⟨u, hu, -⟩ := hU Prop (fun y => y = x) (fun y => ∃ z ∈ Z, y = i₂ z ∧ i₁ z = x)
+      fun z hz => propext ⟨fun h => ⟨z, hz, rfl, h⟩, fun ⟨z', hz', e', h⟩ => by
+        rw [hinj₂ hz hz' e']; exact h⟩
+    exact (cast ((e ▸ hu x hx).symm.trans (hu x' hx')) rfl).symm
+  · intro x hx x' hx' e
+    obtain ⟨u, -, hu⟩ := hU Prop (fun y => ∃ z ∈ Z, y = i₁ z ∧ i₂ z = x) (fun y => y = x)
+      fun z hz => propext ⟨fun ⟨z', hz', e', h⟩ => by rw [hinj₁ hz hz' e']; exact h,
+        fun h => ⟨z, hz, rfl, h⟩⟩
+    exact (cast ((e ▸ hu x hx).symm.trans (hu x' hx')) rfl).symm
+  · intro x₁ hx₁ _ x₂ hx₂ hz₂ e
+    obtain ⟨u, hu₁, hu₂⟩ := hU Prop (fun _ => True) (fun y => ∃ z ∈ Z, y = i₂ z)
+      fun z hz => propext ⟨fun _ => ⟨z, hz, rfl⟩, fun _ => trivial⟩
+    obtain ⟨z, hz, ez⟩ := cast ((e ▸ hu₁ x₁ hx₁).symm.trans (hu₂ x₂ hx₂)) trivial
+    exact hz₂ z hz ez
+
+/-- **The criterion of pages 10 and 11**, both directions, for tame embeddings `i₁`, `i₂`
+under (M5′): there are tame families `f`, `g` satisfying a), b), c) iff there is a tame
+`P ⊂ R^N` with a tame cocone which is a pushout in sets (the forgetful functor respects it)
+and has the universal property for tame maps (the pushout exists in tame spaces). -/
+theorem criterion_iff [Nonempty R] (hU : T.Unions) {I₁ I₂ K : Type} [Finite I₁] [Finite I₂]
+    {X₁ : Set (I₁ → R)} {X₂ : Set (I₂ → R)} {Z : Set (K → R)}
+    (hX₁ : X₁ ∈ T.M I₁) (hX₂ : X₂ ∈ T.M I₂) {i₁ : (K → R) → I₁ → R} {i₂ : (K → R) → I₂ → R}
+    (hm₁ : Set.MapsTo i₁ Z X₁) (hm₂ : Set.MapsTo i₂ Z X₂)
+    (hinj₁ : Set.InjOn i₁ Z) (hinj₂ : Set.InjOn i₂ Z) :
+    (∃ (A : Type) (_ : Finite A) (f : (I₁ → R) → A → R) (g : (I₂ → R) → A → R),
+      graphOn X₁ f ∈ T.M (I₁ ⊕ A) ∧ graphOn X₂ g ∈ T.M (I₂ ⊕ A) ∧
+      (∀ z ∈ Z, f (i₁ z) = g (i₂ z)) ∧ Set.InjOn f X₁ ∧ Set.InjOn g X₂ ∧
+      ∀ x₁ ∈ X₁, (∀ z ∈ Z, x₁ ≠ i₁ z) → ∀ x₂ ∈ X₂, (∀ z ∈ Z, x₂ ≠ i₂ z) → f x₁ ≠ g x₂) ↔
+    ∃ (N : Type) (_ : Finite N) (P : Set (N → R)) (q₁ : (I₁ → R) → N → R)
+      (q₂ : (I₂ → R) → N → R), P ∈ T.M N ∧ graphOn X₁ q₁ ∈ T.M (I₁ ⊕ N) ∧
+      graphOn X₂ q₂ ∈ T.M (I₂ ⊕ N) ∧ IsSetPushout Z X₁ X₂ i₁ i₂ P q₁ q₂ ∧
+      ∀ (L : Type) [Finite L] (f₁ : (I₁ → R) → L → R) (f₂ : (I₂ → R) → L → R),
+        graphOn X₁ f₁ ∈ T.M (I₁ ⊕ L) → graphOn X₂ f₂ ∈ T.M (I₂ ⊕ L) →
+        (∀ z ∈ Z, f₁ (i₁ z) = f₂ (i₂ z)) →
+        ∃ h : (N → R) → L → R, graphOn P h ∈ T.M (N ⊕ L) ∧
+          (∀ x ∈ X₁, h (q₁ x) = f₁ x) ∧ (∀ x ∈ X₂, h (q₂ x) = f₂ x) := by
+  classical
+  constructor
+  · rintro ⟨A, _, f, g, hf, hg, ha, hb₁, hb₂, hc⟩
+    obtain ⟨hP, glue, huniv⟩ := T.pushout_of_criterion hU hX₁ hX₂ hm₁ hm₂ hf hg ha hb₁ hb₂ hc
+    refine ⟨A, inferInstance, _, f, g, hP, hf, hg, ⟨ha, rfl, ?_⟩, huniv⟩
+    intro S _ u₁ u₂ hu
+    let u : (A → R) → S := fun p =>
+      if hp : ∃ x ∈ X₁, f x = p then u₁ hp.choose
+      else if hp' : ∃ x ∈ X₂, g x = p then u₂ hp'.choose else Classical.ofNonempty
+    refine ⟨u, fun x hx => ?_, fun x hx => ?_⟩
+    · have hp : ∃ x' ∈ X₁, f x' = f x := ⟨x, hx, rfl⟩
+      simp only [u, hp, ↓reduceDIte]
+      rw [hb₁ hp.choose_spec.1 hx hp.choose_spec.2]
+    · by_cases hp : ∃ x' ∈ X₁, f x' = g x
+      · simp only [u, hp, ↓reduceDIte]
+        obtain ⟨z, hz, e₁, e₂⟩ := (glue _ hp.choose_spec.1 x hx).1 hp.choose_spec.2
+        rw [e₁, e₂, hu z hz]
+      · have hp' : ∃ x' ∈ X₂, g x' = g x := ⟨x, hx, rfl⟩
+        simp only [u, hp, hp', ↓reduceDIte]
+        rw [hb₂ hp'.choose_spec.1 hx hp'.choose_spec.2]
+  · rintro ⟨N, _, P, q₁, q₂, -, hq₁, hq₂, hP, -⟩
+    obtain ⟨-, -, ha, hb₁, hb₂, hc⟩ := T.criterion_of_pushout hinj₁ hinj₂ hq₁ hq₂ hP
+    exact ⟨N, inferInstance, q₁, q₂, hq₁, hq₂, ha, hb₁, hb₂, hc⟩
+
 end TameModel
 
 end Grothendieck.Folder120

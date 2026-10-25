@@ -1154,3 +1154,188 @@ theorem quadruplet_u'' (Y : A) :
 
 end Quadruplets
 end Grothendieck.Folder19
+
+/-!
+## The degenerate case (pages 10–11)
+
+> Si `φ'φ''` et `φ''φ'` sont constants de valeur l'objet final, les deux triangles sont
+> vides de contenu et `A` est simplement la catégorie des quadruplets, sans condition.
+> […] image essentielle de `g'` : `u''` est un isomorphisme ; image essentielle de
+> `g''` : `u'` est un isomorphisme.
+
+* `essImage_iff` — for any index set `I`: if `g_i` is fully faithful and `f = (f_j)` is
+  conservative, `Y ∈ essImage g_i` iff `f_j(η_i,Y)` is invertible for every `j ≠ i`
+  (for `j = i` it always is). No degeneracy is needed.
+* `Quadruplet.degenere` — in the degenerate case every `(X', X'', u', u'')` is a
+  quadruple: the triangles land in a final object.
+* `essImage_g'_iff`, `essImage_g''_iff` — with `f` comonadic, the quadruple of an object
+  `Y` (`quadruplets`) lies in the essential image of `g'` iff `u''` is invertible, and in
+  that of `g''` iff `u'` is: `essImage_g'_quadruplets`, `essImage_g''_quadruplets` state it
+  for an arbitrary quadruple, through `Φ = comparison ⋙ versQuadruplets`. The degenerate
+  hypothesis is not used: the criterion of the page holds whenever `g'`, `g''` are fully
+  faithful and `f` is comonadic.
+* `essImage_inter` — the intersection is « `u'` and `u''` invertible »;
+  `final_of_inter` — in the degenerate case, `X'` and `X''` are then final.
+-/
+
+namespace Grothendieck.Folder19
+
+open CategoryTheory Limits
+
+universe w' v' u₁' u₂'
+
+section CasDegenere
+
+variable {I : Type w'} {A : Type u₁'} [Category.{v'} A] {B : I → Type u₂'}
+  [∀ i, Category.{v'} (B i)]
+variable (f : ∀ i, A ⥤ B i) (g : ∀ i, B i ⥤ A) (adj : ∀ i, f i ⊣ g i)
+
+/-- **The essential image of `g_i`.** If `g_i` is fully faithful and `f = (f_j)` is
+conservative, `Y` lies in the essential image of `g_i` iff `f_j(η_i,Y)` is invertible for
+every `j ≠ i`. -/
+theorem essImage_iff [DecidableEq I] (i : I) [(g i).Full] [(g i).Faithful]
+    [(Functor.pi' f).ReflectsIsomorphisms] (Y : A) :
+    (g i).essImage Y ↔ ∀ j, j ≠ i → IsIso ((f j).map ((adj i).unit.app Y)) := by
+  rw [← (adj i).isIso_unit_app_iff_mem_essImage]
+  refine ⟨fun _ j _ => inferInstance, fun h => ?_⟩
+  refine (isIso_iff_of_reflects_iso _ (Functor.pi' f)).1 ((isIso_pi_iff _).2 fun j => ?_)
+  change IsIso ((f j).map ((adj i).unit.app Y))
+  by_cases hj : j = i
+  · subst hj
+    infer_instance
+  · exact h j hj
+
+/-- A comonadic `f` is conservative. -/
+theorem reflectsIso_of_comonadic [HasProductsOfShape I A]
+    [(Comonad.comparison (adjPi f g adj)).IsEquivalence] :
+    (Functor.pi' f).ReflectsIsomorphisms :=
+  reflectsIsomorphisms_of_iso (Comonad.comparisonForget (adjPi f g adj))
+
+end CasDegenere
+
+section CasDegenereDeux
+
+variable {A : Type u₁'} [Category.{v'} A] {B : WalkingPair → Type u₂'}
+  [∀ i, Category.{v'} (B i)]
+variable (f : ∀ i, A ⥤ B i) (g : ∀ i, B i ⥤ A) (adj : ∀ i, f i ⊣ g i)
+variable [(g .left).Full] [(g .left).Faithful] [(g .right).Full] [(g .right).Faithful]
+
+variable {f g adj} in
+/-- **The degenerate case: no condition.** If `φ'φ''` and `φ''φ'` take final values, every
+`(X', X'', u', u'')` is a quadruple. -/
+def Quadruplet.degenere
+    (h' : ∀ X, IsTerminal ((phi f g .left .right).obj ((phi f g .right .left).obj X)))
+    (h'' : ∀ X, IsTerminal ((phi f g .right .left).obj ((phi f g .left .right).obj X)))
+    (X' : B .left) (X'' : B .right) (u' : X' ⟶ (phi f g .left .right).obj X'')
+    (u'' : X'' ⟶ (phi f g .right .left).obj X') : Quadruplet f g adj where
+  X' := X'
+  X'' := X''
+  u' := u'
+  u'' := u''
+  tri' := (h' X').hom_ext _ _
+  tri'' := (h'' X'').hom_ext _ _
+
+variable {f g adj} in
+/-- An isomorphism of quadruples carries the invertibility of `u''`. -/
+theorem Quadruplet.isIso_u''_of_iso {P Q : Quadruplet f g adj} (e : P ≅ Q) [IsIso P.u''] :
+    IsIso Q.u'' := by
+  have hX' : IsIso e.hom.h' := ⟨e.inv.h', congrArg Quadruplet.Hom.h' e.hom_inv_id,
+    congrArg Quadruplet.Hom.h' e.inv_hom_id⟩
+  have hX'' : IsIso e.inv.h'' := ⟨e.hom.h'', congrArg Quadruplet.Hom.h'' e.inv_hom_id,
+    congrArg Quadruplet.Hom.h'' e.hom_inv_id⟩
+  have : Q.u'' = e.inv.h'' ≫ P.u'' ≫ (phi f g .right .left).map e.hom.h' := by
+    rw [e.hom.w'', ← Category.assoc,
+      show e.inv.h'' ≫ e.hom.h'' = 𝟙 _ from congrArg Quadruplet.Hom.h'' e.inv_hom_id,
+      Category.id_comp]
+  rw [this]
+  infer_instance
+
+variable {f g adj} in
+/-- An isomorphism of quadruples carries the invertibility of `u'`. -/
+theorem Quadruplet.isIso_u'_of_iso {P Q : Quadruplet f g adj} (e : P ≅ Q) [IsIso P.u'] :
+    IsIso Q.u' := by
+  have hX'' : IsIso e.hom.h'' := ⟨e.inv.h'', congrArg Quadruplet.Hom.h'' e.hom_inv_id,
+    congrArg Quadruplet.Hom.h'' e.inv_hom_id⟩
+  have hX' : IsIso e.inv.h' := ⟨e.hom.h', congrArg Quadruplet.Hom.h' e.inv_hom_id,
+    congrArg Quadruplet.Hom.h' e.hom_inv_id⟩
+  have : Q.u' = e.inv.h' ≫ P.u' ≫ (phi f g .left .right).map e.hom.h'' := by
+    rw [e.hom.w', ← Category.assoc,
+      show e.inv.h' ≫ e.hom.h' = 𝟙 _ from congrArg Quadruplet.Hom.h' e.inv_hom_id,
+      Category.id_comp]
+  rw [this]
+  infer_instance
+
+/-- For a fully faithful `Φ`, `Φ(Y)` is in the essential image of `G ⋙ Φ` iff `Y` is in
+that of `G`. -/
+theorem essImage_comp_obj_iff {C D E : Type*} [Category C] [Category D] [Category E]
+    (G : C ⥤ D) (Φ : D ⥤ E) [Φ.Full] [Φ.Faithful] (Y : D) :
+    (G ⋙ Φ).essImage (Φ.obj Y) ↔ G.essImage Y :=
+  ⟨fun ⟨X, ⟨e⟩⟩ => ⟨X, ⟨Φ.preimageIso e⟩⟩, fun ⟨X, ⟨e⟩⟩ => ⟨X, ⟨Φ.mapIso e⟩⟩⟩
+
+variable [HasProductsOfShape WalkingPair A]
+variable [∀ j, PreservesLimitsOfShape (Discrete WalkingPair) (f j)]
+variable [(Comonad.comparison (adjPi f g adj)).IsEquivalence]
+
+/-- `Φ : A ≃ quadruples`, `Y ↦ (f'Y, f''Y, f'(η''_Y), f''(η'_Y))`. -/
+noncomputable abbrev versQ : A ⥤ Quadruplet f g adj :=
+  Comonad.comparison (adjPi f g adj) ⋙ versQuadruplets f g adj
+
+/-- **Pages 10–11: the essential image of `g'`.** `Y` lies in the essential image of `g'`
+iff the `u''` of its quadruple, `f''(η'_Y)`, is invertible. -/
+theorem essImage_g'_iff (Y : A) :
+    (g .left).essImage Y ↔ IsIso ((versQ f g adj).obj Y).u'' := by
+  have := reflectsIso_of_comonadic f g adj
+  rw [essImage_iff f g adj .left Y, quadruplet_u'']
+  exact ⟨fun h => h .right (by decide), fun h j hj => by cases j <;> first | exact h | exact absurd rfl hj⟩
+
+/-- **Pages 10–11: the essential image of `g''`.** `Y` lies in the essential image of `g''`
+iff the `u'` of its quadruple, `f'(η''_Y)`, is invertible. -/
+theorem essImage_g''_iff (Y : A) :
+    (g .right).essImage Y ↔ IsIso ((versQ f g adj).obj Y).u' := by
+  have := reflectsIso_of_comonadic f g adj
+  rw [essImage_iff f g adj .right Y, quadruplet_u']
+  exact ⟨fun h => h .left (by decide), fun h j hj => by cases j <;> first | exact h | exact absurd rfl hj⟩
+
+/-- **Pages 10–11, on the quadruples.** A quadruple lies in the essential image of
+`g' ⋙ Φ` iff `u''` is invertible. -/
+theorem essImage_g'_quadruplets (Q : Quadruplet f g adj) :
+    (g .left ⋙ versQ f g adj).essImage Q ↔ IsIso Q.u'' := by
+  obtain ⟨Y, ⟨e⟩⟩ := Functor.EssSurj.mem_essImage (F := versQ f g adj) Q
+  have h1 : (g .left ⋙ versQ f g adj).essImage Q ↔
+      (g .left ⋙ versQ f g adj).essImage ((versQ f g adj).obj Y) :=
+    ⟨.ofIso e.symm, .ofIso e⟩
+  rw [h1, essImage_comp_obj_iff, essImage_g'_iff f g adj]
+  exact ⟨fun _ => Quadruplet.isIso_u''_of_iso e, fun _ => Quadruplet.isIso_u''_of_iso e.symm⟩
+
+/-- **Pages 10–11, on the quadruples.** A quadruple lies in the essential image of
+`g'' ⋙ Φ` iff `u'` is invertible. -/
+theorem essImage_g''_quadruplets (Q : Quadruplet f g adj) :
+    (g .right ⋙ versQ f g adj).essImage Q ↔ IsIso Q.u' := by
+  obtain ⟨Y, ⟨e⟩⟩ := Functor.EssSurj.mem_essImage (F := versQ f g adj) Q
+  have h1 : (g .right ⋙ versQ f g adj).essImage Q ↔
+      (g .right ⋙ versQ f g adj).essImage ((versQ f g adj).obj Y) :=
+    ⟨.ofIso e.symm, .ofIso e⟩
+  rw [h1, essImage_comp_obj_iff, essImage_g''_iff f g adj]
+  exact ⟨fun _ => Quadruplet.isIso_u'_of_iso e, fun _ => Quadruplet.isIso_u'_of_iso e.symm⟩
+
+/-- The intersection of the two essential images: `u'` and `u''` invertible. -/
+theorem essImage_inter (Q : Quadruplet f g adj) :
+    ((g .left ⋙ versQ f g adj).essImage Q ∧ (g .right ⋙ versQ f g adj).essImage Q) ↔
+      (IsIso Q.u' ∧ IsIso Q.u'') := by
+  rw [essImage_g'_quadruplets, essImage_g''_quadruplets]
+  exact And.comm
+
+/-- In the degenerate case, a quadruple of the intersection has `X'` and `X''` final. -/
+theorem final_of_inter
+    (h' : ∀ X, IsTerminal ((phi f g .left .right).obj ((phi f g .right .left).obj X)))
+    (h'' : ∀ X, IsTerminal ((phi f g .right .left).obj ((phi f g .left .right).obj X)))
+    (Q : Quadruplet f g adj) (hQ : (g .left ⋙ versQ f g adj).essImage Q ∧
+      (g .right ⋙ versQ f g adj).essImage Q) :
+    Nonempty (IsTerminal Q.X') ∧ Nonempty (IsTerminal Q.X'') := by
+  obtain ⟨_, _⟩ := (essImage_inter f g adj Q).1 hQ
+  exact ⟨⟨(h' Q.X').ofIso (asIso (Q.u' ≫ (phi f g .left .right).map Q.u'')).symm⟩,
+    ⟨(h'' Q.X'').ofIso (asIso (Q.u'' ≫ (phi f g .right .left).map Q.u')).symm⟩⟩
+
+end CasDegenereDeux
+
+end Grothendieck.Folder19

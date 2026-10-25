@@ -211,7 +211,7 @@ Sur $C = \mathbb Z \sqcup \mathbb Z$, les deux copies sont décalées d'un cran 
 La réunion disjointe est nécessaire : sur une seule copie de $\mathbb Z$, un $e_m^*$ sur deux est pleinement fidèle, puisque $r_m e_m = \mathrm{id}$. Les deux copies décalées d'un cran font qu'aucun $F_k$ ne l'est. Une note de la lecture, à la page~81, tient une chaîne infinie dans les deux sens pour impossible \q{dans des situations très générales} ; l'exemple montre qu'elle existe entre topos de préfaisceaux. La suggestion de la page, un $g$ à la fois adjoint à gauche et à droite de $f$, n'est pas celle suivie ici.
 \end{remarque}
 
-Ne sont pas démontrés ici : l'énoncé de Morita (équivalence si et seulement si $U$ est petit et projectif) ; la Conclusion des pages~4 à~6 (adjonctions et comonades) ; la reconstruction de l'adjonction ; les topos de coalgèbres (page~6) ; le cas dégénéré des pages~10 et~11 (images essentielles de $g'$ et $g''$, intersection ponctuelle) ; les pages~7 à~95 (résolutions standard, cohomologie relative, SGA~4, localisation, recollement, catégories fibrées).
+Ne sont pas démontrés ici : l'énoncé de Morita (équivalence si et seulement si $U$ est petit et projectif) ; la Conclusion des pages~4 à~6 (adjonctions et comonades) ; la reconstruction de l'adjonction ; les topos de coalgèbres (page~6) ; dans le cas dégénéré des pages~10 et~11, l'équivalence de l'intersection des images essentielles de $g'$ et $g''$ avec la sous-catégorie pleine de $B'$ où $\lambda'$ est inversible, et les trois conditions équivalentes pour qu'elle soit ponctuelle ; les pages~7 à~95 (résolutions standard, cohomologie relative, SGA~4, localisation, recollement, catégories fibrées).
 
 \begin{encadre}
 \begin{theoreme}[Grothendieck, pages 7 à 11, comonade sur une base produit\piste{19-comonad-matrix-product-base}]\label{thm:19-quadruplets}
@@ -240,6 +240,29 @@ un morphisme de quadruplets étant un couple $(t', t'')$ qui commute à $u'$ et 
 \end{proof}
 
 \begin{remarque}
-Le manuscrit écrit \q{il semble qu'on trouve} et biffe le calcul : il est juste, à condition d'ajouter l'hypothèse que la page tient de son cadre général, la commutation de $f'$ et $f''$ aux produits binaires, et, pour décrire $A$ elle-même et non les coalgèbres, la comonadicité de $f$, qui est le propos du théorème~1.12. Le cas dégénéré qui suit (pages~10 et~11, $\varphi'\varphi''$ et $\varphi''\varphi'$ constants de valeur l'objet final, images essentielles de $g'$ et $g''$, intersection ponctuelle) n'est pas formalisé.
+Le manuscrit écrit \q{il semble qu'on trouve} et biffe le calcul : il est juste, à condition d'ajouter l'hypothèse que la page tient de son cadre général, la commutation de $f'$ et $f''$ aux produits binaires, et, pour décrire $A$ elle-même et non les coalgèbres, la comonadicité de $f$, qui est le propos du théorème~1.12. Le cas dégénéré qui suit (pages~10 et~11) fait l'objet du théorème~\ref{thm:19-degenere}.
+\end{remarque}
+
+\begin{encadre}
+\begin{theoreme}[Grothendieck, pages 10 et 11, le cas dégénéré\piste{19-comonad-matrix-product-base}]\label{thm:19-degenere}
+On se place dans la situation du point~(3) du théorème~\ref{thm:19-quadruplets}, $f = (f', f'')$ comonadique, et l'on note $\Phi : A \to \mathrm{Quad}$, $Y \mapsto (f'Y, f''Y, f'(\eta''_Y), f''(\eta'_Y))$, l'équivalence qu'il fournit.
+\begin{enumerate}
+\item Si $\varphi'\varphi''$ et $\varphi''\varphi'$ sont à valeurs finales, tout $(X', X'', u', u'')$ est un quadruplet : les deux triangles sont sans contenu.
+\item Sans hypothèse de dégénérescence, un quadruplet $Q$ est dans l'image essentielle de $\Phi g'$ si et seulement si $u''$ est inversible, et dans celle de $\Phi g''$ si et seulement si $u'$ l'est ; de façon équivalente, $Y \in A$ est dans l'image essentielle de $g'$ si et seulement si $f''(\eta'_Y)$ est inversible. Plus généralement, pour $I$ quelconque, $g_i$ pleinement fidèle et $f = (f_j)$ conservatif, $Y$ est dans l'image essentielle de $g_i$ si et seulement si $f_j(\eta_{i, Y})$ est inversible pour tout $j \neq i$.
+\item L'intersection des deux images essentielles est formée des quadruplets où $u'$ et $u''$ sont inversibles ; dans le cas dégénéré, $X'$ et $X''$ y sont finals.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+(1) Les deux membres de chaque triangle sont des flèches vers un objet final (Lean : \texttt{Quadruplet.degenere}).
+
+(2) Pour $g_i$ pleinement fidèle, $Y$ est dans l'image essentielle de $g_i$ si et seulement si $\eta_{i, Y}$ est inversible (mathlib : \texttt{isIso\_unit\_app\_iff\_mem\_essImage}). Or $f_i(\eta_{i, Y})$ l'est toujours, par l'identité triangulaire $\varepsilon_{i, f_i Y} \circ f_i(\eta_{i, Y}) = 1$ et l'inversibilité de $\varepsilon_i$ ; un $f$ conservatif, ce qu'est tout foncteur comonadique, rend donc $\eta_{i, Y}$ inversible dès que les $f_j(\eta_{i, Y})$, $j \neq i$, le sont (Lean : \texttt{essImage\_iff}, \texttt{reflectsIso\_of\_comonadic}). Pour deux facteurs, $f''(\eta'_Y)$ est l'entrée $u''$ de $\Phi(Y)$ (\texttt{essImage\_g'\_iff}, \texttt{essImage\_g''\_iff}). Enfin $\Phi$ est pleinement fidèle et essentiellement surjective, et un isomorphisme de quadruplets $(t', t'') : P \to Q$ donne $u''_Q \circ t'' = \varphi''(t') \circ u''_P$, avec $t'$ et $t''$ inversibles, ce qui transporte l'inversibilité (Lean : \texttt{Quadruplet.isIso\_u''\_of\_iso}, \texttt{essImage\_g'\_quadruplets}, \texttt{essImage\_g''\_quadruplets}).
+
+(3) La première assertion est la conjonction des deux précédentes (\texttt{essImage\_inter}). Si $u'$ et $u''$ sont inversibles, $\varphi'(u'') \circ u' : X' \to \varphi'\varphi''(X')$ l'est, et le but est final ; de même pour $X''$ (\texttt{final\_of\_inter}).
+\end{proof}
+
+\begin{remarque}
+Le critère de la page, \q{image essentielle de $g'$ : $u''$ est un isomorphisme}, ne dépend pas de la dégénérescence : il vaut dès que $g'$, $g''$ sont pleinement fidèles et $f$ comonadique. Restent non formalisées l'équivalence de l'intersection avec la sous-catégorie pleine de $B'$ où $\lambda'$ est inversible et les trois conditions équivalentes pour que cette intersection soit ponctuelle.
 \end{remarque}
 

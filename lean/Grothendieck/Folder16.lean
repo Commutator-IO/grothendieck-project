@@ -1215,3 +1215,159 @@ theorem critere_lefschetz (ℰ : Subring E) (G : Graduation π n) {L : E} (hLE :
 end DecompositionPrimitive
 
 end Grothendieck.Folder16
+
+/-! ### No. 6, page 9: the converse (3) ⇒ (1)
+
+The theorem of page 9 states (1) ⇔ (2) ⇔ (3), with (1) « the Lefschetz conditions `(6.1)ᵢ`,
+`(6.2)ᵢ` (the inverse of `L^{n-i}` in `ℰ`) hold and the `πᵢ` are in `ℰ` » and (3) « every
+projector `π_{i,α}` of the primitive decomposition is in `ℰ` »; page 12 marks one implication
+« Démonstration à fournir ». Of (3) ⇒ (1), only the projectors follow:
+`projecteurs_mem_of_primitifs` puts every `π_a` in `ℰ` (`π_a` is the sum of the blocks of
+degree `a`). The inverses do not: `reciproque_trois_un_fausse` is a ring `E = M₂(R)`, `n = 1`,
+`L = e₂₁`, in which the decomposition and the inverse of `L` exist in `E` and every projector
+lies in the subring `ℰ` of lower-triangular matrices, but no `w ∈ ℰ` has `w L π₀ = π₀` and no
+`Λ ∈ ℰ` has `LΛ = 1 - ∑ p_{j,0}`: (3) implies neither (1) nor (2). -/
+
+namespace Grothendieck.Folder16
+
+section Reciproque
+
+variable {E : Type*} [Ring E] {π : ℤ → E} {n : ℕ} {L : E} {p : ℕ → ℕ → E}
+
+/-- `π_a` is the sum of the primitive blocks of degree `a`. -/
+theorem DecompositionPrimitive.proj_eq_sum (D : DecompositionPrimitive π n L p) (a : ℤ) :
+    π a = ∑ j ∈ Finset.range (n + 1), ∑ β ∈ Finset.range (n - j + 1),
+      if a = (j : ℤ) + 2 * β then p j β else 0 := by
+  rw [← mul_one (π a), ← D.sum, Finset.mul_sum]
+  refine Finset.sum_congr rfl fun j hj => ?_
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun β hβ => ?_
+  rw [Finset.mem_range] at hj hβ
+  exact D.left j (by omega) β (by omega) a
+
+/-- **Page 9, (3) ⇒ (1), the projectors.** If every primitive projector `p_{j,β}` lies in the
+subring `ℰ`, so does every grading projector `π_a`. -/
+theorem projecteurs_mem_of_primitifs (ℰ : Subring E) (D : DecompositionPrimitive π n L p)
+    (hp : ∀ j ≤ n, ∀ β ≤ n - j, p j β ∈ ℰ) (a : ℤ) : π a ∈ ℰ := by
+  rw [D.proj_eq_sum a]
+  refine ℰ.sum_mem fun j hj => ℰ.sum_mem fun β hβ => ?_
+  rw [Finset.mem_range] at hj hβ
+  split_ifs
+  · exact hp j (by omega) β (by omega)
+  · exact ℰ.zero_mem
+
+end Reciproque
+
+section ContreExemple
+
+/-- Entrywise check of a `2 × 2` matrix identity. -/
+local macro "mat" : tactic =>
+  `(tactic| (ext i j; fin_cases i <;> fin_cases j <;> simp [Matrix.mul_apply, Fin.sum_univ_two]))
+
+variable (R : Type*) [CommRing R]
+
+/-- The lower-triangular matrices, a subring of `M₂(R)`. -/
+def triInf : Subring (Matrix (Fin 2) (Fin 2) R) where
+  carrier := {M | M 0 1 = 0}
+  mul_mem' {A B} hA hB := by
+    simp_all [Matrix.mul_apply, Fin.sum_univ_two]
+  one_mem' := by simp
+  add_mem' {A B} hA hB := by simp_all
+  zero_mem' := by simp
+  neg_mem' {A} hA := by simp_all
+
+/-- The grading of the counterexample: `M⁰ = R e₁`, `M² = R e₂`, `M¹ = 0`. -/
+def πc : ℤ → Matrix (Fin 2) (Fin 2) R := fun a =>
+  if a = 0 then !![1, 0; 0, 0] else if a = 2 then !![0, 0; 0, 1] else 0
+
+/-- `L = e₂₁`, `e₁ ↦ e₂`. -/
+def Lc : Matrix (Fin 2) (Fin 2) R := !![0, 0; 1, 0]
+
+/-- The primitive decomposition: `P⁰ = R e₁`, `L P⁰ = R e₂`, `P¹ = 0`. -/
+def pc : ℕ → ℕ → Matrix (Fin 2) (Fin 2) R := fun j β =>
+  if j = 0 ∧ β = 0 then !![1, 0; 0, 0] else if j = 0 ∧ β = 1 then !![0, 0; 0, 1] else 0
+
+/-- The inverse of `L : M⁰ → M²` in `E`, `e₂ ↦ e₁`; it is not lower-triangular. -/
+def wc : ℕ → Matrix (Fin 2) (Fin 2) R := fun i => if i = 0 then !![0, 1; 0, 0] else 0
+
+theorem graduation_c : Graduation (πc R) 1 where
+  idem a := by unfold πc; split_ifs <;> mat
+  orth a b h := by unfold πc; split_ifs <;> first | omega | mat
+  supp a ha := by
+    simp only [Finset.mem_Icc, Nat.cast_one, mul_one] at ha
+    simp only [πc]; split_ifs <;> first | omega | rfl
+  sum := by
+    rw [show Finset.Icc (0 : ℤ) (2 * (1 : ℕ)) = {0, 1, 2} by decide]
+    simp only [πc]; mat
+
+theorem homogene_Lc : Homogene (πc R) 2 (Lc R) := by
+  intro a b hab
+  unfold πc Lc; split_ifs <;> first | omega | mat
+
+theorem decomposition_c : DecompositionPrimitive (πc R) 1 (Lc R) (pc R) where
+  idem j hj β hβ := by unfold pc; split_ifs <;> mat
+  orth j hj β hβ k hk γ hγ h := by
+    unfold pc; split_ifs <;> first | (exfalso; apply h; ext <;> simp <;> omega) |
+      mat
+  sum := by simp only [Finset.sum_range_succ, pc]; mat
+  left j hj β hβ a := by
+    unfold πc pc; split_ifs <;> first | omega | mat
+  right j hj β hβ a := by
+    unfold πc pc; split_ifs <;> first | omega | mat
+  comm j hj β hβ := by
+    obtain rfl : j = 0 := by omega
+    obtain rfl : β = 0 := by omega
+    simp only [pc, Lc]; mat
+  top j hj := by
+    interval_cases j <;> (simp only [pc, Lc]; mat)
+  image j hj β hβ := by
+    interval_cases j
+    · interval_cases β
+      · exact ⟨1, by simp⟩
+      · exact ⟨!![0, 1; 0, 0], by simp only [pc, Lc]; mat⟩
+    · obtain rfl : β = 0 := by omega
+      exact ⟨0, by simp [pc]⟩
+
+/-- **Page 9, (3) ⇏ (1) and (3) ⇏ (2).** In `E = M₂(R)` (`R` any nonzero commutative ring,
+`ℤ` included), with `n = 1`, `L = e₂₁` of degree `2`: the primitive decomposition holds in `E`,
+`L : M⁰ → M²` has an inverse of degree `-2` in `E` (`(6.3)` holds in `E`), and `L`, every
+grading projector and every primitive projector lie in the subring `ℰ` of lower-triangular
+matrices; yet no `w ∈ ℰ` satisfies `w L π₀ = π₀` (`(6.3)₀` fails in `ℰ`) and no `Λ ∈ ℰ`
+satisfies the first relation of `(6.7)`. -/
+theorem reciproque_trois_un_fausse [Nontrivial R] :
+    ∃ (π : ℤ → Matrix (Fin 2) (Fin 2) R) (L : Matrix (Fin 2) (Fin 2) R)
+      (p : ℕ → ℕ → Matrix (Fin 2) (Fin 2) R) (ℰ : Subring (Matrix (Fin 2) (Fin 2) R)),
+      Graduation π 1 ∧ Homogene π 2 L ∧ DecompositionPrimitive π 1 L p ∧
+      (∃ w : ℕ → Matrix (Fin 2) (Fin 2) R,
+        (∀ i : ℕ, i ≤ 1 → Homogene π (-(2 * ((1 : ℕ) - (i : ℤ)))) (w i)) ∧
+        (∀ i ≤ 1, w i * L ^ (1 - i) * π i = π i) ∧
+        (∀ i ≤ 1, L ^ (1 - i) * w i * π (2 * 1 - i) = π (2 * 1 - i))) ∧
+      L ∈ ℰ ∧ (∀ a, π a ∈ ℰ) ∧ (∀ j ≤ 1, ∀ β ≤ 1 - j, p j β ∈ ℰ) ∧
+      (¬ ∃ w ∈ ℰ, w * L ^ (1 - 0) * π 0 = π 0) ∧
+      (¬ ∃ Λ ∈ ℰ, L * Λ = 1 - ∑ j ∈ Finset.range (1 + 1), p j 0) := by
+  refine ⟨πc R, Lc R, pc R, triInf R, graduation_c R, homogene_Lc R, decomposition_c R,
+    ⟨wc R, ?_, ?_, ?_⟩, show Lc R 0 1 = 0 by simp [Lc], ?_, ?_, ?_, ?_⟩
+  · intro i hi a b hab
+    interval_cases i
+    · unfold πc wc; split_ifs <;> first | omega | mat
+    · simp [wc]
+  · intro i hi
+    interval_cases i <;> (simp only [πc, wc, Lc]; mat)
+  · intro i hi
+    interval_cases i
+    · simp only [πc, wc, Lc]; mat
+    · simp [πc, wc]
+  · exact fun a => by show πc R a 0 1 = 0; unfold πc; split_ifs <;> simp
+  · exact fun j _ β _ => by show pc R j β 0 1 = 0; unfold pc; split_ifs <;> simp
+  · rintro ⟨w, hw, h⟩
+    have h01 : w 0 1 = 0 := hw
+    have := congrFun (congrFun h 0) 0
+    simp [πc, Lc, Matrix.mul_apply, Fin.sum_univ_two, h01] at this
+  · rintro ⟨Λ, hΛ, h⟩
+    have h01 : Λ 0 1 = 0 := hΛ
+    have := congrFun (congrFun h 1) 1
+    simp [pc, Lc, Matrix.mul_apply, Fin.sum_univ_two, h01] at this
+
+end ContreExemple
+
+end Grothendieck.Folder16

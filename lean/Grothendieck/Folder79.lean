@@ -2058,3 +2058,142 @@ end HomothetyOctahedron
 
 end Grothendieck.Folder79
 
+
+/-! ## `Z ↪ Z'_n` except for the octahedron (pages 139 and 140, with page 275)
+
+The hypothesis « no two vertices share a star » of `eq_of_toSix` is replaced by
+the double cone: in a connected regular triangulated 2-polyhedron of order
+`n ≠ 4` it holds, and for `n = 4` the polyhedron is the octahedron. The
+exception is real: over `Z/4`, the antipody `σ` and the identity both satisfy
+To 6 with `ν = 1`. -/
+
+namespace Grothendieck.Folder79
+
+section ToSixOctahedron
+
+variable {n : ℕ} {S : Type*} {A : S → S → Prop}
+
+/-- In a symmetric graph whose stars are polygons, every edge lies in a triangle. -/
+theorem triangulated_of_pol (hA : ∀ a b, A a b → A b a)
+    (hpol : ∀ s, IsPolygon n (onStar A A s)) {u t : S} (h : A u t) :
+    ∃ w, A w u ∧ A w t := by
+  obtain ⟨φ, hφ⟩ := hpol u
+  obtain ⟨k, hk⟩ := φ.surjective ⟨t, h⟩
+  refine ⟨φ (k + 1), hA _ _ (φ _).2, hA _ _ ?_⟩
+  have := (adj_iff_of_pol hφ k (k + 1)).2 (Or.inl (by ring))
+  simpa [hk] using this
+
+/-- A permutation preserving every star leaves `A` untwisted: `A_λ = A`. -/
+theorem twistGraph_eq_self {l : Equiv.Perm S} (hl : ∀ u, star A (l u) = star A u) :
+    twistGraph A l = A := by
+  funext u t
+  apply propext
+  have h := Set.ext_iff.1 (hl (l⁻¹ u)) t
+  rw [show l (l⁻¹ u) = u by simp] at h
+  exact h.symm
+
+/-- Such a permutation satisfies To 6 with `ν = 1`. -/
+theorem toSix_one_of_star_eq (hn : 2 < n) (hpol : ∀ s, IsPolygon n (onStar A A s))
+    {l : Equiv.Perm S} (hl : ∀ u, star A (l u) = star A u) : ToSix A hpol l 1 := by
+  intro s
+  rw [twistGraph_eq_self hl]
+  exact (congrArg Subtype.val (twist_one hn ⟨_, hpol s⟩)).symm
+
+/-- **Pages 139 and 140: `Z ↪ Z'_n`, the octahedron excepted.** In a connected
+symmetric graph whose stars are polygons of order `n ≥ 3`, `n ≠ 4`, two
+permutations satisfying To 6 with the same `ν ∈ Z'_n`, and whose twisted graphs
+are triangulated, are equal. -/
+theorem eq_of_toSix_of_ne_four (hA : ∀ a b, A a b → A b a) (hn : 2 < n) (h4 : n ≠ 4)
+    {hpol : ∀ s, IsPolygon n (onStar A A s)} (hconn : ∀ a b, Relation.ReflTransGen A a b)
+    {l l' : Equiv.Perm S} {ν ν' : (ZMod n)ˣ} (h : ToSix A hpol l ν) (h' : ToSix A hpol l' ν')
+    (hν : ν' = ν ∨ ν' = -ν)
+    (hl : ∀ u t, twistGraph A l u t → ∃ w, twistGraph A l w u ∧ twistGraph A l w t)
+    (hl' : ∀ u t, twistGraph A l' u t → ∃ w, twistGraph A l' w u ∧ twistGraph A l' w t) :
+    l = l' :=
+  eq_of_toSix hn (fun _ _ hst => by_contra fun hss =>
+    h4 (double_cone hA hn hpol hconn hss hst).1) h h' hν hl hl'
+
+/-- The same without `n ≠ 4`: two such permutations are equal, or the graph is
+the octahedron `K_{2,2,2}`. -/
+theorem eq_of_toSix_or_octahedron (hA : ∀ a b, A a b → A b a) (hn : 2 < n)
+    {hpol : ∀ s, IsPolygon n (onStar A A s)} (hconn : ∀ a b, Relation.ReflTransGen A a b)
+    {l l' : Equiv.Perm S} {ν ν' : (ZMod n)ˣ} (h : ToSix A hpol l ν) (h' : ToSix A hpol l' ν')
+    (hν : ν' = ν ∨ ν' = -ν)
+    (hl : ∀ u t, twistGraph A l u t → ∃ w, twistGraph A l w u ∧ twistGraph A l w t)
+    (hl' : ∀ u t, twistGraph A l' u t → ∃ w, twistGraph A l' w u ∧ twistGraph A l' w t) :
+    l = l' ∨ (n = 4 ∧ ∃ e : S ≃ Fin 3 × Bool, ∀ a b, A a b ↔ (e a).1 ≠ (e b).1) := by
+  by_cases hstar : ∀ s s', star A s = star A s' → s = s'
+  · exact Or.inl (eq_of_toSix hn hstar h h' hν hl hl')
+  · push Not at hstar
+    obtain ⟨s, s', hst, hss⟩ := hstar
+    exact Or.inr (double_cone hA hn hpol hconn hss hst)
+
+end ToSixOctahedron
+
+section OctahedronModel
+
+variable {R : Type*} [CommRing R]
+
+theorem adj_symm_model (e : R) {v t : Vtx R} (h : Adj R e v t) : Adj R e t v := by
+  induction v using Vtx.ind with
+  | H x y hxy =>
+  induction t using Vtx.ind with
+  | H z w hz =>
+  rw [adj_vtx] at h ⊢
+  rw [det2_swap]
+  rcases h with h | h <;> rw [h] <;> simp
+
+theorem adj_sigma_of (hR : Exceptional R) (e : Rˣ) {v t : Vtx R} (h : Adj R e v t) :
+    Adj R e (sigma hR v) t := by
+  induction v using Vtx.ind with
+  | H x y hxy =>
+  induction t using Vtx.ind with
+  | H z w hz =>
+  rw [sigma_vtx, adj_vtx]
+  rw [adj_vtx] at h
+  have hu : IsUnit (det2 x z) := h.elim (fun h => h ▸ e.isUnit) (fun h => h ▸ e.isUnit.neg)
+  rcases (same_star_iff hxy).2 (Or.inr (Or.inr ⟨hR, Or.inl rfl⟩)) z hu with h1 | h1 <;>
+    rw [h1] <;> rcases h with h | h <;> rw [h] <;> simp
+
+/-- `σ(ẋ)` has the star of `ẋ` in `P_{M, ±e}`. -/
+theorem star_sigma (hR : Exceptional R) (e : Rˣ) (v : Vtx R) :
+    star (Adj R e) (sigma hR v) = star (Adj R e) v :=
+  Set.ext fun t => ⟨fun h => by
+    have := adj_sigma_of hR e h; rwa [sigma_sigma] at this, adj_sigma_of hR e⟩
+
+/-- `σ` as a permutation of `M*/±1`. -/
+noncomputable def sigmaPerm (hR : Exceptional R) : Equiv.Perm (Vtx R) where
+  toFun := sigma hR
+  invFun := sigma hR
+  left_inv := sigma_sigma hR
+  right_inv := sigma_sigma hR
+
+/-- **The octahedral exception of page 139 is real.** Over `Z/4`, in
+`P_{M, ±e}` (the octahedron), the antipody `σ` and the identity both satisfy
+To 6 with `ν = 1`, both twisted graphs are triangulated, and `σ ≠ 1`: the map
+`λ ↦ ν` is not injective. -/
+theorem octahedron_toSix (e : (ZMod 4)ˣ) :
+    ToSix (Adj (ZMod 4) e) (isPolygon_adj (by norm_num) e) (sigmaPerm exceptional_zmod_four) 1 ∧
+      ToSix (Adj (ZMod 4) e) (isPolygon_adj (by norm_num) e) 1 1 ∧
+      (∀ u t, twistGraph (Adj (ZMod 4) e) (sigmaPerm exceptional_zmod_four) u t →
+        ∃ w, twistGraph (Adj (ZMod 4) e) (sigmaPerm exceptional_zmod_four) w u ∧
+          twistGraph (Adj (ZMod 4) e) (sigmaPerm exceptional_zmod_four) w t) ∧
+      (∀ u t, twistGraph (Adj (ZMod 4) e) 1 u t →
+        ∃ w, twistGraph (Adj (ZMod 4) e) 1 w u ∧ twistGraph (Adj (ZMod 4) e) 1 w t) ∧
+      sigmaPerm exceptional_zmod_four ≠ 1 := by
+  have hs := star_sigma exceptional_zmod_four e
+  have h1 : ∀ u, star (Adj (ZMod 4) e) ((1 : Equiv.Perm (Vtx (ZMod 4))) u) =
+      star (Adj (ZMod 4) e) u := fun _ => rfl
+  have tri : ∀ u t, Adj (ZMod 4) e u t → ∃ w, Adj (ZMod 4) e w u ∧ Adj (ZMod 4) e w t :=
+    fun _ _ h => triangulated_of_pol (fun _ _ => adj_symm_model (e : ZMod 4))
+      (isPolygon_adj (by norm_num) e) h
+  refine ⟨toSix_one_of_star_eq (by norm_num) _ (l := sigmaPerm exceptional_zmod_four) hs, toSix_one_of_star_eq (by norm_num) _ h1,
+    by rw [twistGraph_eq_self hs]; exact tri, by rw [twistGraph_eq_self h1]; exact tri, ?_⟩
+  intro h
+  apply sigma_ne_scal exceptional_zmod_four (by decide) 1 (vtx det2_e)
+  rw [scal_one]
+  exact congrArg (fun p : Equiv.Perm (Vtx (ZMod 4)) => p (vtx det2_e)) h
+
+end OctahedronModel
+
+end Grothendieck.Folder79

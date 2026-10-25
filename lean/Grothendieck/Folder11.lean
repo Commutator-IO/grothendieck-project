@@ -1195,3 +1195,180 @@ theorem evaluation_equivalence :
   ⟨fun hB φ ψ h n => faithful hB φ ψ h n, fun hB g => full hB g, fun _ _ _ _ hP => essSurj hP⟩
 
 end Folder11.Simplicial
+
+/-!
+# Folder 11 (pages 37 and 41), continued: `(α ⊔ β)_* = α_* ⊗ β_*` and the constant object
+
+Two remainders of finding `11-simplicial-bivariant-poincare-equivalence`.
+
+* `adj_tensor`: between Poincaré algebras, the push-forward adjoint to `h ⊗ h'` is
+  `h_* ⊗ h'_*` (page 41's second condition of speciality, as a consequence of the first);
+  `push_sumPt`: in a special simplicial bivariant algebra, read through the Künneth
+  isomorphisms, `(α ⊔ id_pt)_* = α_* ⊗ id`, and `pull_sumPt` the same for pull-backs.
+* `constFun`: the constant object `I ↦ P`, all images the identity; for a Poincaré algebra
+  `P ≠ k` it is not special (`constFun_not_special`), and no natural transformation from
+  `I ↦ P^{⊗ I}` to it is onto at a point (`constFun_not_full`): the equivalence of page 37
+  fails without « spéciale », and `full` needs its target special.
+-/
+
+namespace Folder11.Simplicial
+
+open TensorProduct
+
+universe u
+
+variable {k : Type u} [Field k]
+
+section TensorAdj
+
+variable {D D' E E' : Type*} [CommRing D] [Algebra k D] [CommRing D'] [Algebra k D']
+  [CommRing E] [Algebra k E] [CommRing E'] [Algebra k E']
+  {κD : D →ₗ[k] k} {κD' : D' →ₗ[k] k}
+
+/-- **Page 41.** Into Poincaré algebras, the push-forward of `h ⊗ h'` is `h_* ⊗ h'_*`. -/
+theorem adj_tensor (hD : IsPoincare D κD) (hD' : IsPoincare D' κD') (κE : E →ₗ[k] k)
+    (κE' : E' →ₗ[k] k) (h : D →ₐ[k] E) (h' : D' →ₐ[k] E') :
+    adj (poincare_tensor hD hD') (tgauge κE κE') (Algebra.TensorProduct.map h h') =
+      TensorProduct.map (adj hD κE h) (adj hD' κE' h') := by
+  refine (adj_unique _ _ _ _ fun x y => ?_).symm
+  induction x with
+  | add x x' hx hx' => simp [mul_add, hx, hx']
+  | tmul a b =>
+    induction y with
+    | add y y' hy hy' => simp only [add_mul, map_add]; rw [hy, hy']
+    | tmul c d => simp [tgauge_tmul, adj_spec]
+
+end TensorAdj
+
+namespace SFun
+
+/-- `α ⊔ id_pt : I ⊔ pt → J ⊔ pt`. -/
+def sumPt {m n : ℕ} (α : Fin (m + 1) → Fin (n + 1)) : Fin (m + 2) → Fin (n + 2) :=
+  Fin.lastCases (motive := fun _ => Fin (n + 2)) (Fin.last (n + 1)) fun i => Fin.castSucc (α i)
+
+variable (A : SFun k)
+
+theorem pull_sumPt {m n : ℕ} (α : Fin (m + 1) → Fin (n + 1)) :
+    (A.pull (sumPt α)).comp (A.kun m) =
+      (A.kun n).comp (Algebra.TensorProduct.map (A.pull α) (AlgHom.id k _)) := by
+  refine Algebra.TensorProduct.ext' fun a b => ?_
+  have h1 : sumPt α ∘ Fin.castSucc = Fin.castSucc ∘ α := funext fun i => by
+    simp [sumPt, Fin.lastCases_castSucc]
+  have h2 : sumPt α ∘ (fun _ : Fin (0 + 1) => Fin.last (m + 1)) = fun _ => Fin.last (n + 1) :=
+    funext fun _ => by simp [sumPt, Fin.lastCases_last]
+  simp only [AlgHom.comp_apply, kun, Algebra.TensorProduct.productMap_apply_tmul,
+    Algebra.TensorProduct.map_tmul, AlgHom.id_apply, map_mul]
+  rw [← AlgHom.comp_apply, ← A.pull_comp, h1, A.pull_comp, AlgHom.comp_apply,
+    ← AlgHom.comp_apply (A.pull (sumPt α)), ← A.pull_comp, h2]
+
+end SFun
+
+theorem Special.gauge_kun {A : SFun k} (hA : Special A) (n : ℕ) (z : A.obj n ⊗[k] A.obj 0) :
+    A.κ (n + 1) (A.kun n z) = tgauge (A.κ n) (A.κ 0) z := by
+  exact LinearMap.congr_fun (f := A.κ (n + 1) ∘ₗ (A.kun n).toLinearMap)
+    (TensorProduct.ext' fun a b => by simp [hA.gauge_mul, tgauge_tmul]) z
+
+/-- **Page 41, `(α ⊔ β)_* = α_* ⊗ β_*` for `β = id_pt`.** In a special simplicial bivariant
+algebra, through the Künneth isomorphisms, the push-forward along `α ⊔ id_pt` is `α_* ⊗ id`. -/
+theorem push_sumPt {A : SFun k} (hA : Special A) {m n : ℕ} (α : Fin (m + 1) → Fin (n + 1))
+    (z : A.obj n ⊗[k] A.obj 0) :
+    A.push (SFun.sumPt α) (A.kun n z) =
+      A.kun m (TensorProduct.map (A.push α) LinearMap.id z) := by
+  refine eq_of_pairing (hA.poincare_all (m + 1)) fun y => ?_
+  obtain ⟨w, rfl⟩ := (hA.kunneth m).2 y
+  rw [pair_spec (A.proj _) (A.gauge _), ← AlgHom.comp_apply, A.pull_sumPt, AlgHom.comp_apply,
+    ← map_mul, ← map_mul, hA.gauge_kun, hA.gauge_kun]
+  induction z with
+  | add x x' hx hx' => simp [mul_add, hx, hx']
+  | tmul a b =>
+    induction w with
+    | add y y' hy hy' => simp only [add_mul, map_add]; rw [hy, hy']
+    | tmul c d => simp [tgauge_tmul, pair_spec (A.proj α) (A.gauge α)]
+
+/-! ## The constant object -/
+
+section Const
+
+variable {P : Type*} [CommRing P] [Algebra k P]
+
+/-- The constant simplicial bivariant algebra `I ↦ P`, every image the identity. -/
+def constFun (P : Type u) [CommRing P] [Algebra k P] (κ : P →ₗ[k] k) : SFun k where
+  obj _ := P
+  κ _ := κ
+  pull _ := AlgHom.id k P
+  push _ := LinearMap.id
+  pull_id _ := rfl
+  pull_comp _ _ := rfl
+  push_id _ := rfl
+  push_comp _ _ := rfl
+  proj _ _ _ := rfl
+  gauge _ _ := rfl
+
+/-- For a Poincaré algebra `P ≠ k`, some `a` has `κ(1) a ≠ κ(a) 1`. -/
+theorem exists_ne_of_poincare {κ : P →ₗ[k] k} (hP : IsPoincare P κ)
+    (hk : ¬ Function.Surjective (algebraMap k P)) :
+    ∃ a : P, κ 1 • a ≠ algebraMap k P (κ a) := by
+  by_cases h1 : κ 1 = 0
+  · have : Nontrivial P := not_subsingleton_iff_nontrivial.1 fun _ =>
+      hk fun x => ⟨0, Subsingleton.elim _ _⟩
+    obtain ⟨y, hy⟩ : ∃ y : P, κ (y * 1) ≠ 0 := by
+      by_contra hc
+      push Not at hc
+      exact one_ne_zero (hP.2 1 hc)
+    refine ⟨y, fun h => ?_⟩
+    rw [h1, zero_smul, eq_comm, map_eq_zero_iff _ (algebraMap k P).injective] at h
+    exact hy (by rw [mul_one]; exact h)
+  · obtain ⟨a, ha⟩ := not_forall.1 hk
+    refine ⟨a, fun h => ha ⟨(κ 1)⁻¹ * κ a, ?_⟩⟩
+    rw [map_mul, ← h, Algebra.smul_def, ← mul_assoc, ← map_mul, inv_mul_cancel₀ h1, map_one,
+      one_mul]
+
+/-- The constant object is not special: its Künneth map `P ⊗ P → P` is the multiplication,
+which identifies `a ⊗ 1` and `1 ⊗ a`. -/
+theorem constFun_not_special {P : Type u} [CommRing P] [Algebra k P] {κ : P →ₗ[k] k}
+    (hP : IsPoincare P κ) (hk : ¬ Function.Surjective (algebraMap k P)) :
+    ¬ Special (constFun P κ) := fun hA => by
+  obtain ⟨a, ha⟩ := exists_ne_of_poincare hP hk
+  have h := (hA.kunneth 0).1 (a₁ := a ⊗ₜ[k] (1 : P)) (a₂ := (1 : P) ⊗ₜ[k] a) (by
+    erw [Algebra.TensorProduct.productMap_apply_tmul, Algebra.TensorProduct.productMap_apply_tmul]
+    exact mul_comm _ _)
+  have h' : (a ⊗ₜ[k] (1 : P) : P ⊗[k] P) = (1 : P) ⊗ₜ[k] a := h
+  have := congr(TensorProduct.rid k P (TensorProduct.map LinearMap.id κ $h'))
+  simp only [TensorProduct.map_tmul, LinearMap.id_apply, TensorProduct.rid_tmul] at this
+  exact ha (by rw [this, Algebra.algebraMap_eq_smul_one])
+
+/-- **Without « spéciale », page 37 fails.** The constant object `I ↦ P` and the special object
+`I ↦ P^{⊗ I}` have the same Poincaré value `P` at a point, yet no natural transformation from
+the second to the first is onto at a point: in particular the two are not isomorphic, and the
+isomorphism `P^{⊗ pt} ≅ P` of `𝒞` is not the value of a natural transformation. -/
+theorem constFun_not_full {P : Type u} [CommRing P] [Algebra k P] {κ : P →ₗ[k] k}
+    (hP : IsPoincare P κ) (hk : ¬ Function.Surjective (algebraMap k P))
+    (φ : NatT (powFun hP) (constFun P κ)) : ¬ Function.Surjective (φ.pull 0) := fun hs => by
+  have hpt : ∀ i : Fin 2, (powPull (k := k) (P := P) (SFun.pt i)).comp (φ.pull 0) = φ.pull 1 :=
+    fun i => (φ.nat_pull (SFun.pt i)).symm
+  have hsing : ∀ a : P, single (k := k) (n := 1) 0 a = single 1 a := fun a => by
+    obtain ⟨x, hx⟩ := hs (single 0 a)
+    have e : ∀ i : Fin 2, single (k := k) (n := 1) i a = φ.pull 1 x := fun i => by
+      rw [← hpt i]
+      change _ = powPull (SFun.pt i) (φ.pull 0 x)
+      rw [hx]
+      exact (AlgHom.congr_fun (powPull_single (SFun.pt i) 0) a).symm
+    rw [e 0, e 1]
+  obtain ⟨a, ha⟩ := exists_ne_of_poincare hP hk
+  let f : Pow k P 1 →ₗ[k] P := PiTensorProduct.lift
+    ((MultilinearMap.mkPiAlgebra k (Fin 2) P).compLinearMap fun i =>
+      if i = 0 then LinearMap.id else (Algebra.linearMap k P) ∘ₗ κ)
+  have hf : ∀ i : Fin 2, f (single i a) =
+      (if i = 0 then a else 1) * algebraMap k P (κ (if i = 0 then 1 else a)) := fun i => by
+    simp only [f, single, PiTensorProduct.singleAlgHom_apply, MonoidHom.mulSingle_apply,
+      PiTensorProduct.lift.tprod, MultilinearMap.compLinearMap_apply,
+      MultilinearMap.mkPiAlgebra_apply, Fin.prod_univ_two]
+    fin_cases i <;> simp
+  have := congr(f $(hsing a))
+  rw [hf, hf] at this
+  simp only [ite_true, one_ne_zero, ite_false, one_mul] at this
+  exact ha (by rw [Algebra.smul_def, mul_comm, this])
+
+end Const
+
+end Folder11.Simplicial

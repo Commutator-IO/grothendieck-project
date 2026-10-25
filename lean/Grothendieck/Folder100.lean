@@ -503,3 +503,47 @@ theorem exists_coheight_eq_one [IsDomain R] (hR : ¬ IsField R) {ι : Type*} [Co
   exact hη o ho
 
 end Grothendieck.Folder100.Baire
+
+/-!
+## `dim closure {x}` as a topological dimension
+
+The Corollary above measures `dim closure {x}` by the coheight of `x` in `Spec R`. Here that
+choice is justified: for any commutative ring, the topological Krull dimension of the closure of
+`x` (chains of irreducible closed subsets of the subspace `closure {x}`) is the coheight of `x`.
+The closure is `V(x)` (`PrimeSpectrum.closure_singleton`), homeomorphic to `Spec (R ⧸ x)`
+through the closed embedding `comap (R → R ⧸ x)`; its dimension is `dim R ⧸ x`
+(`PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim`), which is the Krull dimension of the
+poset `V(x) = Ici x` (`ringKrullDim_quotient`), i.e. the coheight of `x`.
+-/
+
+namespace Grothendieck.Folder100.Baire
+
+open IsLocalRing PrimeSpectrum Topology
+
+/-- For a point `x` of `Spec A`, the topological Krull dimension of `closure {x}` equals the
+coheight of `x` (both are `dim A ⧸ x`). -/
+theorem topologicalKrullDim_closure_singleton {A : Type*} [CommRing A] (x : PrimeSpectrum A) :
+    topologicalKrullDim (closure ({x} : Set (PrimeSpectrum A))) = Order.coheight x := by
+  have hs := Ideal.Quotient.mk_surjective (I := x.asIdeal)
+  let e : PrimeSpectrum (A ⧸ x.asIdeal) ≃ₜ closure ({x} : Set (PrimeSpectrum A)) :=
+    (isClosedEmbedding_comap_of_surjective _ _ hs).isEmbedding.toHomeomorph.trans
+      (Homeomorph.setCongr (by rw [range_comap_of_surjective _ _ hs, Ideal.mk_ker, PrimeSpectrum.closure_singleton]))
+  rw [← IsHomeomorph.topologicalKrullDim_eq _ e.isHomeomorph,
+    topologicalKrullDim_eq_ringKrullDim, ringKrullDim_quotient, Order.coheight_eq_krullDim_Ici]
+  rfl
+
+variable {R : Type*} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
+  [IsAdicComplete (maximalIdeal R) R]
+
+/-- **Corollary of page 38, with `dim closure {x}` the topological dimension.** In `Spec R`,
+`R` a complete noetherian local domain not a field, countably many proper closed subsets miss
+some point `x` whose closure has topological Krull dimension `1`. -/
+theorem exists_topologicalKrullDim_closure_eq_one [IsDomain R] (hR : ¬ IsField R)
+    {ι : Type*} [Countable ι] (Z : ι → Set (PrimeSpectrum R)) (hZ : ∀ i, IsClosed (Z i))
+    (hZu : ∀ i, Z i ≠ Set.univ) :
+    ∃ x : PrimeSpectrum R, topologicalKrullDim (closure ({x} : Set (PrimeSpectrum R))) = 1 ∧
+      ∀ i, x ∉ Z i := by
+  obtain ⟨x, hx, hZx⟩ := exists_coheight_eq_one hR Z hZ hZu
+  exact ⟨x, by rw [topologicalKrullDim_closure_singleton, hx]; rfl, hZx⟩
+
+end Grothendieck.Folder100.Baire

@@ -45,6 +45,14 @@ Sur un corps, les $\mu_i$ quelconques (caractéristique~$2$ comprise), un sous-e
 
 \noindent La vérification porte sur l'énoncé tel quel (\texttt{invariant\_iff} dans \href{\leanblob/Folder72.lean}{\texttt{Folder72.lean}}) et sur le corollaire~(c) de la page~80 (\texttt{invariant\_iff\_of\_ne\_zero}). Pour $i < n$, $Z^*_i \subset Z'_i$ si et seulement si $\beta_i = 0$ (\texttt{Zs\_le\_Zp\_iff}) : c'est le \q{$\in$} de la marge de la page~79 que la lecture retient, non le \q{$\notin$} de la page~81.
 
+Aux pages~80 à~82, la cote en tire l'irréductibilité de la représentation sur l'hyperplan $C$ ; le d) barré de la page~80 demande $\rho \neq 0$ et tous les $\beta_i \neq 0$, le c) de la page~82 omet $\rho \neq 0$.
+
+\begin{theoreme}[D'après les pages 80 à 82, forme complétée par l'édition\piste{72-invariant-subspaces-string}]
+Sur un corps, les $\mu_i$ quelconques, les sous-espaces de $C$ stables par tous les $\tau_i$ sont $0$, $C$, la droite $k\tilde c$ si $\rho = 0$, et, pour $i < n$ tel que $\beta_i = 0$, $Z^*_i$ et $Z'_i$ lorsque $Z'_i \subset C$. Si tous les $\beta_i$ sont non nuls, il ne reste que $0$, $C$ et, si $\rho = 0$, $k\tilde c$. La représentation sur $C$ est donc irréductible si et seulement si tous les $\beta_i$ sont non nuls et, pour $n \geq 1$, $\rho \neq 0$ ; pour $n = 0$, $C$ est une droite.
+\end{theoreme}
+
+\noindent Voir \texttt{invariant\_le\_Vh\_iff}, \texttt{invariant\_le\_Vh\_iff\_of\_ne\_zero} et \texttt{irreducible\_on\_C\_iff} dans \href{\leanblob/Folder72.lean}{\texttt{Folder72.lean}}. On intersecte la liste de \texttt{invariant\_iff} avec $C$ : $E \not\subset C$ puisque $\pi(s_0) = 1$, $k\tilde c \subset C$ si et seulement si $\pi(\tilde c) = \rho = 0$, et $Z^*_i \subset C$ toujours. Pour la nécessité, $Z^*_i$ contient $h_{i+1}$ et non $h_0$, qui est dans $C$ ; si $\rho = 0$ et $n \geq 1$, $k\tilde c$ est une droite de $C$ distincte de $C$, car $h_0 \in C$ n'est pas multiple de $\tilde c$, dont la dernière coordonnée vaut $1$. Le seul \q{tous les $\beta_i \neq 0$} du c) de la page~82 ne suffit donc pas : $\rho = 0$ laisse la droite invariante $k\tilde c \subset C$.
+
 Aux pages~96 à~100, sur un anneau $k$, pour un $k$-module $E$, des pseudo-réflexions $\tau_i = \mathrm{id} + a'_i \otimes a_i$ et $s_0 \in E$, avec $\nu_i = \langle s_0, a'_0\rangle\langle a_0, a'_1\rangle \cdots \langle a_{i-1}, a'_i\rangle$, la cote démontre l'équivalence des conditions (A) (commutation des $\tau_i$ non consécutifs, $\tau_i s_0 = s_0$ pour $i \geq 1$, liberté des $s_i$) et (B) (accouplements nuls hors des indices consécutifs, $\langle s_0, a'_i\rangle = 0$ pour $i \geq 1$, liberté de $(s_0, a_0, \dots, a_n)$, $\nu_n$ inversible) ; la remarque de la page~102 la reprend avec des bases de $E$ (\lot{72}{5}{96}).
 
 \begin{theoreme}[D'après les pages 96 à 100 et 102\piste{72-pinned-realisations-over-base}]
@@ -59,4 +67,4 @@ Une réalisation qui vérifie (B̄), normalisée par $\langle s_0, a'_0\rangle =
 
 \noindent Les déclarations \texttt{pinned\_classification}, \texttt{pinned\_rigid}, \texttt{model\_condB}, \texttt{model\_isUnit\_iff} et \texttt{invariants\_eq} vérifient l'énoncé. Les invariants se lisent sur $(\tau_i, s_0)$ seuls : normalisée, $a_i = s_{i+1} - s_i$, $\tau_i a_i = \lambda_i a_i$ et $\tau_i a_{i+1} = a_{i+1} + \beta_i a_i$.
 
-Ne sont pas démontrés ici : le schéma en groupes $\mathcal U_\rho$ et sa lissité, l'énoncé projectif sur une base (automorphismes de $X = \mathbf P(E)$ commutant aux $\tau_i$ projectifs), le torseur des drapeaux de la page~87, les comptes des pages~79 et~80, l'irréductibilité sur $C$ des pages~80 à~82, l'existence locale du point de départ (pages~102 à~105) et le cas d'un module localement libre non libre.
+Ne sont pas démontrés ici : le schéma en groupes $\mathcal U_\rho$ et sa lissité, l'énoncé projectif sur une base (automorphismes de $X = \mathbf P(E)$ commutant aux $\tau_i$ projectifs), le torseur des drapeaux de la page~87, les comptes des pages~79 et~80, l'existence locale du point de départ (pages~102 à~105) et le cas d'un module localement libre non libre.

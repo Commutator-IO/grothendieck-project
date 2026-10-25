@@ -888,3 +888,397 @@ theorem versEpingle_pushout {Z X Y P : Adm M} {f : Z ⟶ X} {g : Z ⟶ Y} {l : X
 end Prefaisceaux
 
 end Grothendieck.Folder104
+
+/-! ### Pages 14–15: closed parts, and pinnings given on the maximal elements -/
+
+namespace Grothendieck.Folder104
+
+open CategoryTheory Opposite
+
+universe w
+
+section Fermees
+
+variable {M : Type w} [SmallCategory M]
+
+/-- Transport of the pinning along an equality of elements. -/
+lemma Epingle.u_congr (K : Epingle M) {ξ η : K.K} (h : ξ = η) (y : Sous (K.τ ξ)) :
+    K.u ξ y = K.u η ⟨y.1, y.2 ≫ eqToHom (congrArg K.τ h)⟩ := by
+  subst h
+  simp
+
+/-- `u_ξ(d_n) = ξ`, with the top of `I_n` written through a type equality. -/
+lemma Epingle.u_top' (K : Epingle M) (ξ : K.K) {D : M} (h : K.τ ξ = D) :
+    K.u ξ ⟨D, eqToHom h.symm⟩ = ξ := by
+  subst h
+  simpa using K.u_top ξ
+
+lemma Epingle.u_le_self (K : Epingle M) (ξ : K.K) (y : Sous (K.τ ξ)) : K.u ξ y ≤ ξ :=
+  (K.u_range ξ).le ⟨y, rfl⟩
+
+lemma sous_eqToHom {D D' E : M} (e : D = D') (f : D' ⟶ E) :
+    (⟨D, eqToHom e ≫ f⟩ : Sous E) = ⟨D', f⟩ := by
+  subst e
+  simp
+
+/-- **Page 14.** A morphism `f : K → L` maps `K_{≤ξ}` onto `L_{≤f(ξ)}`. -/
+theorem Epingle.Hom.image_Iic {K L : Epingle M} (φ : K ⟶ L) (ξ : K.K) :
+    φ.f '' Set.Iic ξ = Set.Iic (φ.f ξ) := by
+  rw [← K.u_range, ← L.u_range, ← Set.range_comp]
+  ext η
+  constructor
+  · rintro ⟨y, rfl⟩
+    exact ⟨_, (φ.u_f ξ y).symm⟩
+  · rintro ⟨y, rfl⟩
+    refine ⟨⟨y.1, y.2 ≫ eqToHom (φ.τ_f ξ)⟩, ?_⟩
+    simp [φ.u_f]
+
+/-- Composing with a monomorphism is injective on `I_D`. -/
+lemma sous_comp_injective {D E : M} (g : D ⟶ E) [Mono g] {y y' : Sous D}
+    (h : (⟨y.1, y.2 ≫ g⟩ : Sous E) = ⟨y'.1, y'.2 ≫ g⟩) : y = y' := by
+  obtain ⟨F, c⟩ := y
+  obtain ⟨F', c'⟩ := y'
+  dsimp only at h
+  obtain ⟨rfl, h⟩ := Sigma.mk.inj_iff.1 h
+  rw [(cancel_mono g).1 (eq_of_heq h)]
+
+/-- `Sous.le` is unchanged by composing with a monomorphism. -/
+lemma sous_le_comp {D E : M} (g : D ⟶ E) [Mono g] (y y' : Sous D) :
+    Sous.le (⟨y.1, y.2 ≫ g⟩ : Sous E) ⟨y'.1, y'.2 ≫ g⟩ ↔ Sous.le y y' := by
+  refine exists_congr fun w => ?_
+  rw [← Category.assoc, cancel_mono]
+
+/-- **Page 14.** … and injectively: `f` induces a bijection `K_{≤ξ} ≃ L_{≤f(ξ)}`. -/
+theorem Epingle.Hom.injOn_Iic {K L : Epingle M} (φ : K ⟶ L) (ξ : K.K) :
+    Set.InjOn φ.f (Set.Iic ξ) := by
+  rintro a ha b hb hab
+  rw [← K.u_range] at ha hb
+  obtain ⟨y, rfl⟩ := ha
+  obtain ⟨y', rfl⟩ := hb
+  rw [φ.u_f, φ.u_f] at hab
+  rw [sous_comp_injective _ (L.u_injective _ hab)]
+
+/-- On `K_{≤ξ}` the bijection is an isomorphism of ordered sets. -/
+theorem Epingle.Hom.le_iff_of_le {K L : Epingle M} (φ : K ⟶ L) {ξ a b : K.K} (ha : a ≤ ξ)
+    (hb : b ≤ ξ) : φ.f a ≤ φ.f b ↔ a ≤ b := by
+  refine ⟨fun h => ?_, fun h => φ.strictMono.monotone h⟩
+  obtain ⟨c, hc, hca⟩ : φ.f a ∈ φ.f '' Set.Iic b := by rw [φ.image_Iic]; exact h
+  rwa [← φ.injOn_Iic ξ (hc.trans hb) ha hca]
+
+/-- **Page 14.** An injective `f` is an isomorphism onto its image with the induced order. -/
+theorem Epingle.Hom.le_iff_of_injective {K L : Epingle M} (φ : K ⟶ L)
+    (hφ : Function.Injective φ.f) {a b : K.K} : φ.f a ≤ φ.f b ↔ a ≤ b := by
+  refine ⟨fun h => ?_, fun h => φ.strictMono.monotone h⟩
+  obtain ⟨c, hc, hca⟩ : φ.f a ∈ φ.f '' Set.Iic b := by rw [φ.image_Iic]; exact h
+  rwa [← hφ hca]
+
+/-- **Page 14.** The image `L' = f(K)` is a closed part of `L`: stable under smaller elements. -/
+theorem Epingle.Hom.isLowerSet_range {K L : Epingle M} (φ : K ⟶ L) :
+    IsLowerSet (Set.range φ.f) := by
+  rintro _ η hη ⟨ξ, rfl⟩
+  obtain ⟨c, -, rfl⟩ : η ∈ φ.f '' Set.Iic ξ := by rw [φ.image_Iic]; exact hη
+  exact ⟨c, rfl⟩
+
+/-- **Page 14, the induced pinning.** A closed part `S` of `L` (`IsLowerSet`) is an `M`-pinned
+poset with the induced order, type and pinning `u^S_ξ = u^L_ξ`, which lands in `S`. -/
+def Epingle.restreint (L : Epingle M) (S : Set L.K) (hS : IsLowerSet S) : Epingle M where
+  K := S
+  τ s := L.τ s.1
+  τ_strict s t h := L.τ_strict s.1 t.1 h
+  u s y := ⟨L.u s.1 y, hS (L.u_le_self s.1 y) s.2⟩
+  u_top s := Subtype.ext (L.u_top s.1)
+  u_injective s y y' h := L.u_injective s.1 (congrArg Subtype.val h)
+  u_range s := by
+    ext t
+    constructor
+    · rintro ⟨y, rfl⟩
+      exact L.u_le_self s.1 y
+    · intro ht
+      obtain ⟨y, hy⟩ := (L.u_range s.1).ge ht
+      exact ⟨y, Subtype.ext hy⟩
+  u_le s y y' := L.u_le s.1 y y'
+  τ_u s y := L.τ_u s.1 y
+  u_u s y z := Subtype.ext (L.u_u s.1 y z)
+
+/-- The inclusion of a closed part, a morphism of pinned posets (« l'inclusion est
+admissible »). -/
+def Epingle.inclusion (L : Epingle M) (S : Set L.K) (hS : IsLowerSet S) :
+    L.restreint S hS ⟶ L where
+  f := Subtype.val
+  strictMono _ _ h := h
+  τ_f _ := rfl
+  u_f _ y := L.u_congr rfl y
+
+/-- A bijective morphism of pinned posets is an isomorphism. -/
+theorem Epingle.isIso_of_bijective {K L : Epingle M} (φ : K ⟶ L) (hφ : Function.Bijective φ.f)
+    (hle : ∀ a b, φ.f a ≤ φ.f b → a ≤ b) : IsIso φ := by
+  let e := Equiv.ofBijective φ.f hφ
+  have τg : ∀ η, K.τ (e.symm η) = L.τ η := fun η =>
+    (φ.τ_f (e.symm η)).symm.trans (congrArg L.τ (e.apply_symm_apply η))
+  let ψ : L ⟶ K :=
+    { f := e.symm
+      strictMono := fun a b hab => by
+        refine lt_of_le_of_ne (hle _ _ ?_) fun h => hab.ne (e.symm.injective h)
+        change e (e.symm a) ≤ e (e.symm b)
+        simpa using hab.le
+      τ_f := τg
+      u_f := fun η y => by
+        apply hφ.1
+        change e (e.symm _) = φ.f _
+        rw [Equiv.apply_symm_apply, φ.u_f,
+          L.u_congr (show φ.f (e.symm η) = η from e.apply_symm_apply η)]
+        congr 1
+        simp }
+  exact ⟨ψ, Epingle.hom_ext (funext e.symm_apply_apply), Epingle.hom_ext (funext e.apply_symm_apply)⟩
+
+/-- `φ`, with values in its image. -/
+def Epingle.Hom.versImage {K L : Epingle M} (φ : K ⟶ L) :
+    K ⟶ L.restreint (Set.range φ.f) φ.isLowerSet_range where
+  f ξ := ⟨φ.f ξ, ξ, rfl⟩
+  strictMono _ _ h := φ.strictMono h
+  τ_f := φ.τ_f
+  u_f ξ y := Subtype.ext (φ.u_f ξ y)
+
+lemma Epingle.Hom.versImage_inclusion {K L : Epingle M} (φ : K ⟶ L) :
+    φ.versImage ≫ L.inclusion _ φ.isLowerSet_range = φ := rfl
+
+/-- **Page 14.** An injective `f : K → L` is an isomorphism of pinned posets of `K` onto its image
+`L' = f(K)`, a closed part with the induced pinning, followed by the inclusion. -/
+theorem Epingle.Hom.isIso_versImage {K L : Epingle M} (φ : K ⟶ L)
+    (hφ : Function.Injective φ.f) : IsIso φ.versImage :=
+  Epingle.isIso_of_bijective _ ⟨fun _ _ h => hφ (congrArg Subtype.val h),
+    fun ⟨_, ξ, rfl⟩ => ⟨ξ, rfl⟩⟩ fun _ _ h => (φ.le_iff_of_injective hφ).1 h
+
+/-- **Page 14, uniqueness of the induced pinning.** The pinning of a closed part `S` making the
+inclusion admissible is unique: any pinned poset `P` with an injective morphism onto `S` is
+isomorphic to `S` with the induced pinning, compatibly with the maps to `L`. -/
+theorem Epingle.unique_restreint {P L : Epingle M} (S : Set L.K) (hS : IsLowerSet S) (ι : P ⟶ L)
+    (hι : Function.Injective ι.f) (hrange : Set.range ι.f = S) :
+    ∃ e : P ≅ L.restreint S hS, e.hom ≫ L.inclusion S hS = ι := by
+  subst hrange
+  have := ι.isIso_versImage hι
+  exact ⟨asIso ι.versImage, rfl⟩
+
+variable (hmono : ∀ {X Y : M} (f : X ⟶ Y), Mono f)
+  (hend : ∀ {X : M} (f : X ⟶ X), f = 𝟙 X) (hsk : Skeletal M)
+
+include hmono in
+/-- The representable presheaf `D` is non-singular, by (i). -/
+lemma nonSingulier_yoneda (D : M) : NonSingulier (yoneda.obj D) := fun _ _ x a b hab => by
+  have := hmono x
+  exact (cancel_mono x).1 hab
+
+/-- The morphism `Ĩ_D → K` from the pinned poset of the model `D` given by an element `ξ` of
+type `D`: `(D', a) ↦ u_ξ(D', a)`. -/
+def Epingle.pointe (K : Epingle M) (ξ : K.K) {D : M} (h : K.τ ξ = D) :
+    versEpingleObj hend hsk (yoneda.obj D) (nonSingulier_yoneda hmono D) ⟶ K where
+  f p := K.u ξ ⟨p.1, (p.2 : p.1 ⟶ D) ≫ eqToHom h.symm⟩
+  strictMono := by
+    have key : ∀ p q : Elem (yoneda.obj D),
+        (ordreElem hend hsk _).le p q ↔
+          K.u ξ ⟨p.1, (p.2 : p.1 ⟶ D) ≫ eqToHom h.symm⟩ ≤
+            K.u ξ ⟨q.1, (q.2 : q.1 ⟶ D) ≫ eqToHom h.symm⟩ := by
+      intro p q
+      have := hmono (eqToHom h.symm)
+      rw [K.u_le, sous_le_comp (eqToHom h.symm) ⟨p.1, p.2⟩ ⟨q.1, q.2⟩]
+      rfl
+    intro p q hpq
+    obtain ⟨h1, h2⟩ := lt_iff_le_not_ge.1 hpq
+    exact lt_iff_le_not_ge.2 ⟨(key p q).1 h1, fun h' => h2 ((key q p).2 h')⟩
+  τ_f p := K.τ_u _ _
+  u_f := by
+    rintro ⟨E, a⟩ ⟨F, c⟩
+    refine Eq.trans ?_ (K.u_u ξ ⟨E, (a : E ⟶ D) ≫ eqToHom h.symm⟩ ⟨F, c⟩).symm
+    change K.u ξ ⟨F, ((c : F ⟶ E) ≫ (a : E ⟶ D)) ≫ eqToHom h.symm⟩ =
+      K.u ξ ⟨F, (c : F ⟶ E) ≫ (a : E ⟶ D) ≫ eqToHom h.symm⟩
+    exact congrArg (fun g => K.u ξ ⟨F, g⟩) (Category.assoc _ _ _)
+
+include hmono hend hsk in
+/-- **Page 14.** The monomorphisms of `M`-pinned posets are the morphisms `f` that are
+injective. (Through the equivalence of page 13 they are also the monomorphisms of `M̂`,
+`mono_iff_injective_versEpingle`.) -/
+theorem Epingle.mono_iff_injective {K L : Epingle M} (φ : K ⟶ L) :
+    Mono φ ↔ Function.Injective φ.f := by
+  constructor
+  · intro hφ ξ η hξη
+    have h2 : K.τ η = K.τ ξ := by rw [← φ.τ_f η, ← hξη, φ.τ_f]
+    have e : K.pointe hmono hend hsk ξ rfl ≫ φ = K.pointe hmono hend hsk η h2 ≫ φ := by
+      ext p
+      change φ.f (K.u ξ _) = φ.f (K.u η _)
+      rw [φ.u_f, φ.u_f, L.u_congr hξη]
+      congr 1
+      simp
+    have := congrArg (fun ψ => ψ.f ⟨K.τ ξ, 𝟙 _⟩) ((cancel_mono φ).1 e)
+    change K.u ξ _ = K.u η _ at this
+    rwa [Category.id_comp, Category.id_comp, K.u_top', K.u_top'] at this
+  · intro hφ
+    exact ⟨fun g h e => Epingle.hom_ext (funext fun x => hφ (congrFun (congrArg Epingle.Hom.f e) x))⟩
+
+end Fermees
+
+section Recollement
+
+variable {M : Type w} [SmallCategory M]
+
+variable (M) in
+/-- **Page 15, the data of a pinning on the maximal elements.** On a poset `K` with a type map
+`τ`, for each `α` of a family `A` (the maximal elements, on the page) an isomorphism
+`v_α : I_{τ α} ≅ K_{≤α}` with `v_α(d) = α` and `τ ∘ v_α = τ_{τ α}`, subject to the gluing
+condition: for `ξ = v_α(y) = v_β(y')`, the two isomorphisms `I_n ≅ K_{≤ξ}` they induce — `v_α`
+composed with the admissible map `y`, and `v_β` with `y'` — are the same; the two antecedents
+`y`, `y'` having the same type `n` (`h`). -/
+structure Recollement (K : Type w) [PartialOrder K] (τ : K → M) (A : Set K) where
+  /-- The pinnings `v_α`, used only for `α ∈ A`. -/
+  v : (α : K) → Sous (τ α) → K
+  v_top : ∀ α ∈ A, v α ⟨τ α, 𝟙 _⟩ = α
+  v_injective : ∀ α ∈ A, Function.Injective (v α)
+  v_range : ∀ α ∈ A, Set.range (v α) = Set.Iic α
+  v_le : ∀ α ∈ A, ∀ y y', v α y ≤ v α y' ↔ Sous.le y y'
+  τ_v : ∀ α ∈ A, ∀ y, τ (v α y) = y.1
+  /-- The gluing condition of page 15. -/
+  compatible : ∀ α ∈ A, ∀ β ∈ A, ∀ (y : Sous (τ α)) (y' : Sous (τ β)) (h : y.1 = y'.1),
+    v α y = v β y' → ∀ z : Sous y.1, v α ⟨z.1, z.2 ≫ y.2⟩ = v β ⟨z.1, z.2 ≫ eqToHom h ≫ y'.2⟩
+
+namespace Recollement
+
+variable {K : Type w} [PartialOrder K] {τ : K → M} {A : Set K} (R : Recollement M K τ A)
+  (hA : ∀ ξ, ∃ α ∈ A, ξ ≤ α)
+
+include hA in
+lemma exists_rep (ξ : K) : ∃ p : (α : K) × Sous (τ α), p.1 ∈ A ∧ R.v p.1 p.2 = ξ := by
+  obtain ⟨α, hα, hξ⟩ := hA ξ
+  obtain ⟨y, hy⟩ := (R.v_range α hα).ge hξ
+  exact ⟨⟨α, y⟩, hα, hy⟩
+
+/-- A chosen `α ∈ A` above `ξ`, and the antecedent `y` of `ξ` under `v_α`. -/
+noncomputable def rep (ξ : K) : (α : K) × Sous (τ α) := (R.exists_rep hA ξ).choose
+
+lemma rep_mem (ξ : K) : (R.rep hA ξ).1 ∈ A := (R.exists_rep hA ξ).choose_spec.1
+
+lemma rep_v (ξ : K) : R.v (R.rep hA ξ).1 (R.rep hA ξ).2 = ξ := (R.exists_rep hA ξ).choose_spec.2
+
+lemma τ_rep (ξ : K) : τ ξ = (R.rep hA ξ).2.1 :=
+  (congrArg τ (R.rep_v hA ξ)).symm.trans (R.τ_v _ (R.rep_mem hA ξ) _)
+
+/-- The glued pinning: `u_ξ = v_α ∘ (· ≫ y)` for `ξ = v_α(y)`. -/
+noncomputable def u (ξ : K) (z : Sous (τ ξ)) : K :=
+  R.v (R.rep hA ξ).1 ⟨z.1, z.2 ≫ eqToHom (R.τ_rep hA ξ) ≫ (R.rep hA ξ).2.2⟩
+
+/-- The glued pinning does not depend on the choice of `α`: this is the gluing condition. -/
+lemma u_eq {ξ : K} {β : K} (hβ : β ∈ A) (y' : Sous (τ β)) (hv : R.v β y' = ξ) (z : Sous (τ ξ)) :
+    R.u hA ξ z = R.v β ⟨z.1, z.2 ≫ eqToHom ((congrArg τ hv).symm.trans (R.τ_v β hβ y')) ≫ y'.2⟩ := by
+  have := R.compatible _ (R.rep_mem hA ξ) β hβ (R.rep hA ξ).2 y'
+    ((R.τ_rep hA ξ).symm.trans ((congrArg τ hv).symm.trans (R.τ_v β hβ y')))
+    ((R.rep_v hA ξ).trans hv.symm) ⟨z.1, z.2 ≫ eqToHom (R.τ_rep hA ξ)⟩
+  change R.v (R.rep hA ξ).1 _ = _
+  simpa only [Category.assoc, eqToHom_trans_assoc] using this
+
+variable (hτ : ∀ ξ η : K, ξ < η → Nonempty (τ ξ ⟶ τ η) ∧ τ ξ ≠ τ η)
+  (hmono : ∀ {X Y : M} (f : X ⟶ Y), Mono f)
+
+lemma v_le_self {α : K} (hα : α ∈ A) (y : Sous (τ α)) : R.v α y ≤ α :=
+  (R.v_range α hα).le ⟨y, rfl⟩
+
+include hmono in
+/-- **Page 15, sufficiency.** Pinnings given on a family `A` of elements such that every element
+is below one of them, satisfying the gluing condition, glue to an `M`-pinning of `K`. -/
+noncomputable def recolle : Epingle M where
+  K := K
+  τ := τ
+  τ_strict := hτ
+  u := R.u hA
+  u_top ξ := by
+    change R.v _ ⟨τ ξ, 𝟙 _ ≫ _⟩ = ξ
+    rw [Category.id_comp, sous_eqToHom]
+    exact R.rep_v hA ξ
+  u_injective ξ z z' h := by
+    have := hmono (eqToHom (R.τ_rep hA ξ) ≫ (R.rep hA ξ).2.2)
+    exact sous_comp_injective _ (R.v_injective _ (R.rep_mem hA ξ) h)
+  u_range ξ := by
+    ext η
+    constructor
+    · rintro ⟨z, rfl⟩
+      have hle := (R.v_le _ (R.rep_mem hA ξ) ⟨z.1, z.2 ≫ eqToHom (R.τ_rep hA ξ) ≫
+        (R.rep hA ξ).2.2⟩ (R.rep hA ξ).2).2 ⟨z.2 ≫ eqToHom (R.τ_rep hA ξ), by simp⟩
+      rwa [R.rep_v] at hle
+    · intro hη
+      have hξα : ξ ≤ (R.rep hA ξ).1 :=
+        (R.rep_v hA ξ).symm.trans_le (R.v_le_self (R.rep_mem hA ξ) _)
+      obtain ⟨y'', rfl⟩ := (R.v_range _ (R.rep_mem hA ξ)).ge (hη.trans hξα)
+      have hη' := (R.v_le _ (R.rep_mem hA ξ) _ _).1
+        ((show _ ≤ ξ from hη).trans_eq (R.rep_v hA ξ).symm)
+      obtain ⟨w, hw⟩ := hη'
+      refine ⟨⟨y''.1, w ≫ eqToHom (R.τ_rep hA ξ).symm⟩, ?_⟩
+      change R.v _ _ = _
+      simp [hw]
+  u_le ξ z z' := by
+    have := hmono (eqToHom (R.τ_rep hA ξ) ≫ (R.rep hA ξ).2.2)
+    exact (R.v_le _ (R.rep_mem hA ξ) _ _).trans (sous_le_comp _ z z')
+  τ_u ξ z := R.τ_v _ (R.rep_mem hA ξ) _
+  u_u ξ y z := by
+    refine (R.u_eq hA (ξ := R.u hA ξ y) (R.rep_mem hA ξ)
+      ⟨y.1, y.2 ≫ eqToHom (R.τ_rep hA ξ) ≫ (R.rep hA ξ).2.2⟩ rfl _).trans ?_
+    change R.v _ _ = R.v _ _
+    congr 1
+    simp
+
+include hmono in
+/-- The glued pinning extends the given ones: `u_α = v_α` for `α ∈ A`. -/
+theorem recolle_u_of_mem {α : K} (hα : α ∈ A) : (R.recolle hA hτ hmono).u α = R.v α := by
+  funext z
+  refine (R.u_eq hA hα ⟨τ α, 𝟙 _⟩ (R.v_top α hα) z).trans ?_
+  congr 1
+  simp
+  rfl
+
+end Recollement
+
+/-- **Page 15, necessity.** The pinnings `u_α` of an `M`-pinned poset, `α` in any family `A`,
+satisfy the gluing condition. -/
+def Epingle.recollement (P : Epingle M) (A : Set P.K) : Recollement M P.K P.τ A where
+  v := P.u
+  v_top α _ := P.u_top α
+  v_injective α _ := P.u_injective α
+  v_range α _ := P.u_range α
+  v_le α _ := P.u_le α
+  τ_v α _ := P.τ_u α
+  compatible α _ β _ y y' h hv z := by
+    refine (P.u_u α y z).symm.trans ((P.u_congr hv _).trans
+      (Eq.trans ?_ ((P.u_u β y' ⟨z.1, z.2 ≫ eqToHom h⟩).trans ?_)))
+    · congr 1
+      simp
+    · simp
+
+/-- **Page 15, « est connu dès qu'on connaît les `u_α` ».** An `M`-pinning of `K` is determined
+by its pinnings `u_α` on a family `A` such that every element is below one of them: for
+`ξ = u_α(y)`, `u_ξ = u_α ∘ (· ≫ y)`. -/
+theorem Epingle.u_eq_of_le (P : Epingle M) {α : P.K} (y : Sous (P.τ α)) (ξ : P.K)
+    (hv : P.u α y = ξ) (z : Sous (P.τ ξ)) :
+    P.u ξ z = P.u α ⟨z.1, z.2 ≫ eqToHom ((congrArg P.τ hv).symm.trans (P.τ_u α y)) ≫ y.2⟩ := by
+  subst hv
+  refine Eq.trans ?_ ((P.u_u α y ⟨z.1, z.2 ≫ eqToHom (P.τ_u α y)⟩).trans ?_)
+  · congr 1
+    simp
+  · simp
+
+/-- **Page 15, uniqueness.** A pinning of `(K, τ)` agreeing with given data `v_α` on a family `A`
+covering `K` is the glued one. -/
+theorem Recollement.recolle_unique (hmono : ∀ {X Y : M} (f : X ⟶ Y), Mono f) (P : Epingle M)
+    {A : Set P.K} (hA : ∀ ξ, ∃ α ∈ A, ξ ≤ α) (R : Recollement M P.K P.τ A)
+    (hR : ∀ α ∈ A, R.v α = P.u α) : (R.recolle hA P.τ_strict hmono).u = P.u := by
+  funext (ξ : P.K) (z : Sous (P.τ ξ))
+  refine (R.u_eq hA (R.rep_mem hA ξ) _ (R.rep_v hA ξ) z).trans ?_
+  rw [P.u_eq_of_le (R.rep hA ξ).2 ξ
+    ((congrFun (hR _ (R.rep_mem hA ξ)) _).symm.trans (R.rep_v hA ξ))]
+  exact congrFun (hR _ (R.rep_mem hA ξ)) _
+
+/-- On a finite poset every element is below a maximal one, so the maximal elements form a
+family as in page 15 (finiteness of `Max K` is all the page assumes; only the covering is used). -/
+theorem exists_le_isMax {K : Type*} [PartialOrder K] [Finite K] (ξ : K) :
+    ∃ α ∈ {α : K | IsMax α}, ξ ≤ α := by
+  obtain ⟨b, hb, hmax⟩ := Finite.exists_le_maximal (p := fun _ : K => True) trivial
+  exact ⟨b, fun c hc => hmax.2 trivial hc, hb⟩
+
+end Recollement
+
+end Grothendieck.Folder104

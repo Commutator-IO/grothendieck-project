@@ -447,4 +447,38 @@ theorem moore_act_eq_iff {n : ℕ} (e : Fin n → K) (he : moore p e ≠ 0)
   have := charP_of_injective_algebraMap (algebraMap (ZMod p) K).injective p
   rw [moore_act, moore_act, mul_left_inj' he, (algebraMap (ZMod p) K).injective.eq_iff]
 
+
+/-! ### Two bases of the same `M` differ by an element of `GLₙ(𝔽_p)` -/
+
+/-- **Two bases of the same `M` differ by an element of `GLₙ(𝔽_p)`.** If `e, f ∈ Kⁿ` are
+`𝔽_p`-linearly independent and span the same `𝔽_p`-subspace `M ⊂ K`, then `f = g · e` for a
+matrix `g` over `𝔽_p` with invertible determinant: `g` is the transpose of the change-of-basis
+matrix `Basis.toMatrix`, invertible by `Basis.invertibleToMatrix`. -/
+theorem exists_act_eq_of_span_eq {n : ℕ} {e f : Fin n → K}
+    (he : LinearIndependent (ZMod p) e) (hf : LinearIndependent (ZMod p) f)
+    (hM : Submodule.span (ZMod p) (Set.range e) = Submodule.span (ZMod p) (Set.range f)) :
+    ∃ g : Matrix (Fin n) (Fin n) (ZMod p), IsUnit g.det ∧ act p g e = f := by
+  let be : Module.Basis (Fin n) (ZMod p) (Submodule.span (ZMod p) (Set.range e)) :=
+    Module.Basis.span he
+  let bf : Module.Basis (Fin n) (ZMod p) (Submodule.span (ZMod p) (Set.range e)) :=
+    (Module.Basis.span hf).map (LinearEquiv.ofEq _ _ hM.symm)
+  have := be.invertibleToMatrix bf
+  refine ⟨(be.toMatrix bf)ᵀ, by rw [det_transpose]; exact isUnit_det_of_invertible _, ?_⟩
+  funext j
+  have h := congrArg Subtype.val (be.sum_toMatrix_smul_self bf j)
+  have hbf : ((bf j : Submodule.span (ZMod p) (Set.range e)) : K) = f j := by
+    simp [bf, Module.Basis.span_apply]
+  simpa [act, Algebra.smul_def, be, hbf, Module.Basis.span_apply] using h
+
+/-- **The Moore determinants of two bases of `M` differ by `det g`, `g ∈ GLₙ(𝔽_p)`**: every
+trivialisation `Δₙ(f)` given by a basis `f` of `M` is a `Δₙ(g · e)` for one fixed basis `e`. -/
+theorem moore_eq_of_span_eq {n : ℕ} {e f : Fin n → K}
+    (he : LinearIndependent (ZMod p) e) (hf : LinearIndependent (ZMod p) f)
+    (hM : Submodule.span (ZMod p) (Set.range e) = Submodule.span (ZMod p) (Set.range f)) :
+    ∃ g : Matrix (Fin n) (Fin n) (ZMod p), IsUnit g.det ∧ act p g e = f ∧
+      moore p f = algebraMap (ZMod p) K g.det * moore p e := by
+  have := charP_of_injective_algebraMap (algebraMap (ZMod p) K).injective p
+  obtain ⟨g, hg, rfl⟩ := exists_act_eq_of_span_eq p he hf hM
+  exact ⟨g, hg, rfl, moore_act p g e⟩
+
 end Grothendieck.Folder160

@@ -49,10 +49,11 @@ Supposons $R$ non vide et (M5$'$). Soient $i_1 : Z \hookrightarrow X_1$ et $i_2 
 \begin{enumerate}
 \item (Critère de la page~10, suffisance.) Si des familles modérées $J_1 : X_1 \to R^N$, $J_2 : X_2 \to R^N$ sont injectives, vérifient $J_1 i_1 = J_2 i_2$ sur $Z$ et $J_1(x_1) \neq J_2(x_2)$ hors de $i_1(Z)$ et de $i_2(Z)$, alors $J_1(X_1) \cup J_2(X_2)$ est modérée, c'est la somme amalgamée ensembliste ($J_1 x_1 = J_2 x_2$ si et seulement si $x_1 = i_1 z$ et $x_2 = i_2 z$), et toute paire d'applications modérées $f_1$, $f_2$ compatibles sur $Z$ se factorise par une application modérée.
 \item (Proposition de la page~12.) Sous (M6) et (M7), de telles familles existent : la somme amalgamée existe et l'oubli la respecte.
+\item (Critère de la page~10, nécessité.) Inversement, si une partie modérée $P \subset R^N$ et des familles modérées $q_1 : X_1 \to P$, $q_2 : X_2 \to P$ forment une somme amalgamée dans les ensembles ($q_1 i_1 = q_2 i_2$ sur $Z$, $P = q_1(X_1) \cup q_2(X_2)$, et toute paire d'applications vers un ensemble non vide compatibles sur $Z$ se factorise par $P$), les coordonnées de $q_1$ et $q_2$ sont des fonctions modérées vérifiant a), b), c). Les conditions a), b), c) équivalent donc à l'existence d'une somme amalgamée modérée que l'oubli respecte.
 \end{enumerate}
 \end{theoreme}
 
-\noindent L'énoncé tient (\href{\leanblob/Folder120.lean}{\texttt{pushout\_of\_criterion}}, \href{\leanblob/Folder120.lean}{\texttt{pushout\_exists}}), y compris la conclusion restituée à la page~13 : les deux images se rencontrent exactement le long de $Z$.
+\noindent L'énoncé tient (\href{\leanblob/Folder120.lean}{\texttt{pushout\_of\_criterion}}, \href{\leanblob/Folder120.lean}{\texttt{pushout\_exists}}), y compris la conclusion restituée à la page~13 : les deux images se rencontrent exactement le long de $Z$. La nécessité tient aussi (\href{\leanblob/Folder120.lean}{\texttt{criterion\_of\_pushout}}, \href{\leanblob/Folder120.lean}{\texttt{criterion\_iff}}) : le plongement $F$ de la lecture est l'inclusion $P \subset R^N$, et $f = q_1$, $g = q_2$. Pour b), on factorise par $P$ le couple à valeurs dans les propositions $u_1(y) = (y = x)$, $u_2(y) = (\exists z \in Z,\ y = i_2 z \text{ et } i_1 z = x)$, compatible sur $Z$ parce que $i_2$ est injectif : $q_1 x = q_1 x'$ force $x' = x$. Pour c), le couple $u_1 = \mathrm{vrai}$, $u_2(y) = (y \in i_2(Z))$ montre que $q_1 x_1 = q_2 x_2$ force $x_2 \in i_2(Z)$, ce qui est plus fort que c). Ni (M5$'$), ni (M6), ni (M7), ni le caractère modéré de $P$ ne servent à cette direction ; l'injectivité de $i_1$ et $i_2$ y sert.
 
 \[
 \begin{tikzcd}[column sep=large]
@@ -67,4 +68,4 @@ C'est le point~1 : si $f_1 i_1 = f_2 i_2$, il existe une application modérée, 
 La propriété universelle demande $R$ non vide, puisqu'il faut une application vers $R^L$ ; ce sont les cas triviaux que la page~4 exclut. (M5$'$) ne sert qu'à la réunion $J_1(X_1) \cup J_2(X_2)$ et au graphe de l'application induite. (M6) sert avec sa seconde moitié, l'injectivité hors de $Z$, que la lecture ne déduit de la première que sur un corps.
 \end{remarque}
 
-Ne sont pas démontrés ici : la catégorie $\Sigma$ des espaces modérés et ses limites finies (pages~5 à~7), le NB de la page~10 pour les diagrammes finis et la nécessité du critère, les ind-espaces et la topologie des pages~14 à~19, et le programme de trivialité de la page~24.
+Ne sont pas démontrés ici : la catégorie $\Sigma$ des espaces modérés et ses limites finies (pages~5 à~7), le NB de la page~10 pour les diagrammes finis, les ind-espaces et la topologie des pages~14 à~19, et le programme de trivialité de la page~24.

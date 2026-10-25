@@ -377,3 +377,108 @@ theorem not_irreducibleSpace_complex :
 end Counterexample
 
 end Grothendieck.Folder53
+
+/-!
+# Folder 53, page 9: the counterexample at scheme level
+
+The base change `ℂ ⊗_ℝ ℝ[x,y]/(x² + y²)` is identified with `ℂ[x,y]/(x² + y²)`
+(`baseChangeEquiv`: `ℂ ⊗_ℝ ℝ[x][y] ≅ ℂ[x][y]`, then `tensorQuotientEquiv`), and the
+counterexample is stated with Mathlib's schemes: `Spec ℝ[x,y]/(x² + y²)` is integral
+(`isIntegral_spec_sumSq`) but not geometrically irreducible over `ℝ`
+(`not_geometricallyIrreducible_sumSq`, both in
+`isIntegral_and_not_geometricallyIrreducible_sumSq`): its fibre over `Spec ℂ` is
+`Spec ℂ[x,y]/(x² + y²)` (`pullbackSpecIso`), the two lines `x = ± i y`.
+-/
+
+namespace Grothendieck.Folder53
+
+section SchemeCounterexample
+
+open Polynomial TensorProduct Algebra.TensorProduct AlgebraicGeometry CategoryTheory
+
+/-- `ℂ ⊗_ℝ ℝ[x][y] → ℂ[x][y]`, `z ⊗ f ↦ z f`. -/
+noncomputable def baseChangeHom : ℂ ⊗[ℝ] ℝ[X][X] →ₐ[ℂ] ℂ[X][X] :=
+  Algebra.TensorProduct.lift (Algebra.ofId ℂ ℂ[X][X])
+    (mapAlgHom (mapAlgHom (Algebra.ofId ℝ ℂ))) fun _ _ => Commute.all _ _
+
+/-- `ℂ[x][y] → ℂ ⊗_ℝ ℝ[x][y]`, `x ↦ 1 ⊗ x`, `y ↦ 1 ⊗ y`. -/
+noncomputable def baseChangeInv : ℂ[X][X] →ₐ[ℂ] ℂ ⊗[ℝ] ℝ[X][X] :=
+  Polynomial.eval₂AlgHom
+    (Polynomial.aeval ((1 : ℂ) ⊗ₜ[ℝ] (Polynomial.C Polynomial.X : ℝ[X][X])))
+    ((1 : ℂ) ⊗ₜ[ℝ] (Polynomial.X : ℝ[X][X]))
+    fun _ => by exact mul_comm (_ : ℂ ⊗[ℝ] ℝ[X][X]) _
+
+theorem baseChangeInv_X :
+    baseChangeInv Polynomial.X = (1 : ℂ) ⊗ₜ[ℝ] (Polynomial.X : ℝ[X][X]) :=
+  Polynomial.eval₂_X _ _
+
+theorem baseChangeInv_C_X :
+    baseChangeInv (Polynomial.C Polynomial.X) =
+      (1 : ℂ) ⊗ₜ[ℝ] (Polynomial.C Polynomial.X : ℝ[X][X]) :=
+  (Polynomial.eval₂_C _ _).trans (Polynomial.aeval_X _)
+
+theorem baseChangeHom_tmul (z : ℂ) (f : ℝ[X][X]) :
+    baseChangeHom (z ⊗ₜ[ℝ] f) =
+      Polynomial.C (Polynomial.C z) * f.map (Polynomial.mapRingHom (algebraMap ℝ ℂ)) :=
+  Algebra.TensorProduct.lift_tmul _ _ _ _ _
+
+/-- `ℂ ⊗_ℝ ℝ[x][y] ≅ ℂ[x][y]` as `ℂ`-algebras. -/
+noncomputable def baseChangeEquiv : ℂ ⊗[ℝ] ℝ[X][X] ≃ₐ[ℂ] ℂ[X][X] :=
+  AlgEquiv.ofAlgHom baseChangeHom baseChangeInv
+    (by
+      refine Polynomial.algHom_ext' (Polynomial.algHom_ext ?_) ?_ <;>
+        simp [baseChangeInv_C_X, baseChangeInv_X, baseChangeHom_tmul])
+    (by
+      refine Algebra.TensorProduct.ext (by ext)
+        (Polynomial.algHom_ext' (Polynomial.algHom_ext ?_) ?_) <;>
+        simp [baseChangeInv_C_X, baseChangeInv_X, baseChangeHom_tmul])
+
+theorem baseChangeEquiv_tmul_sumSq : baseChangeEquiv ((1 : ℂ) ⊗ₜ[ℝ] sumSq ℝ) = sumSq ℂ := by
+  simp [baseChangeEquiv, baseChangeHom, sumSq]
+
+/-- `ℝ[x,y]/(x² + y²)`, as a named type (a `def`, so that `ℂ ⊗[ℝ] SumSqRing` elaborates with
+the module structure coming from the algebra). -/
+def SumSqRing : Type := ℝ[X][X] ⧸ Ideal.span {sumSq ℝ}
+
+noncomputable instance : CommRing SumSqRing := Ideal.Quotient.commRing _
+
+noncomputable instance : Algebra ℝ SumSqRing := Ideal.Quotient.algebra _
+
+instance : IsDomain SumSqRing :=
+  haveI := isPrime_span_sumSq_real
+  Ideal.Quotient.isDomain _
+
+/-- `ℂ ⊗_ℝ ℝ[x,y]/(x² + y²) ≅ ℂ[x,y]/(x² + y²)` as `ℂ`-algebras. -/
+noncomputable def tensorQuotSumSqEquiv :
+    ℂ ⊗[ℝ] SumSqRing ≃ₐ[ℂ] ℂ[X][X] ⧸ Ideal.span {sumSq ℂ} :=
+  (tensorQuotientEquiv ℂ ℝ[X][X] ℂ (Ideal.span {sumSq ℝ})).trans <|
+    Ideal.quotientEquivAlg _ _ baseChangeEquiv (by
+      rw [Ideal.map_span, Ideal.map_span, Set.image_singleton, Set.image_singleton]
+      simp [baseChangeEquiv_tmul_sumSq])
+
+/-- `X = Spec ℝ[x,y]/(x² + y²)` is integral. -/
+theorem isIntegral_spec_sumSq : IsIntegral (Spec (CommRingCat.of SumSqRing)) := inferInstance
+
+/-- `X = Spec ℝ[x,y]/(x² + y²)` is not geometrically irreducible over `ℝ`: its base change to
+`ℂ` is `Spec ℂ[x,y]/(x² + y²)`, which is not irreducible. -/
+theorem not_geometricallyIrreducible_sumSq :
+    ¬ GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap ℝ SumSqRing))) := by
+  intro h
+  have h1 := pullback_of_geometrically h.geometrically_irreducibleSpace ℂ
+    (Spec.map (CommRingCat.ofHom (algebraMap ℝ ℂ)))
+  rw [(pullbackSpecIso ℝ SumSqRing ℂ).hom.homeomorph.irreducibleSpace_iff] at h1
+  exact not_irreducibleSpace_complex ((PrimeSpectrum.homeomorphOfRingEquiv
+    ((Algebra.TensorProduct.comm ℝ _ _).trans
+      (tensorQuotSumSqEquiv.restrictScalars ℝ)).toRingEquiv).irreducibleSpace_iff.1
+    (show IrreducibleSpace (PrimeSpectrum (SumSqRing ⊗[ℝ] ℂ)) from h1))
+
+/-- The counterexample of page 9 with Mathlib's schemes: `Spec ℝ[x,y]/(x² + y²)` is integral
+but not geometrically irreducible over `ℝ`. -/
+theorem isIntegral_and_not_geometricallyIrreducible_sumSq :
+    IsIntegral (Spec (CommRingCat.of SumSqRing)) ∧
+      ¬ GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap ℝ SumSqRing))) :=
+  ⟨isIntegral_spec_sumSq, not_geometricallyIrreducible_sumSq⟩
+
+end SchemeCounterexample
+
+end Grothendieck.Folder53

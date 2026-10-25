@@ -49,10 +49,20 @@ L'ordre du groupe divise $6$, et $3$ si $2 = 0$, par le théorème~\ref{thm:140-
 La minoration n'utilise ni racine de $\zeta^2 - \zeta + 1$ ni l'hypothèse $3 \neq 0$ : la caractéristique~$3$ est couverte, comme la lecture l'annonce. Dans la cote~146, l'ordre $6$ du même cocycle se lit aux points fixes $-1$ et $\zeta$ ; ici la partie d'ordre~$3$ se lit sur le diviseur et la partie d'ordre~$2$ sur la constante.
 
 \begin{sloppypar}
-\noindent Vérifié dans le modèle (\texttt{card\_H1\_units\_dvd}, \texttt{dvd\_of\_zsmul\_tan}, \texttt{H1\_units}, \texttt{H1\_units\_char\_two}) ; le modèle est comparé aux substitutions et aux dérivées de la cote~146 par \texttt{ev\_smul\_lam}, \texttt{ev\_smul\_lam'}, \texttt{smul\_incl} et \texttt{ev\_tan}. Lean ne démontre pas que les unités de $U_{0,3}$ sont celles du modèle, qui est le calcul classique des unités de $k[\lambda, 1/\lambda, 1/(1-\lambda)]$.
+\noindent Vérifié dans le modèle (\texttt{card\_H1\_units\_dvd}, \texttt{dvd\_of\_zsmul\_tan}, \texttt{H1\_units}, \texttt{H1\_units\_char\_two}) ; le modèle est comparé aux substitutions et aux dérivées de la cote~146 par \texttt{ev\_smul\_lam}, \texttt{ev\_smul\_lam'}, \texttt{smul\_incl} et \texttt{ev\_tan}. Que les unités de $U_{0,3}$ soient celles du modèle est le calcul classique des unités de $k[\lambda, 1/\lambda, 1/(1-\lambda)]$ ; il est démontré ci-dessous.
 \end{sloppypar}
 
-Ne sont pas démontrés ici : $\mathrm{Pic}(U_{0,3}) = 0$ et la suite de Hochschild--Serre, qui identifient le groupe de Picard du champ quotient à ce $H^1$, et le choix de la page, qui prend pour générateur $\mathcal O(1)$ sur $\mathbf P(V_J)$ au lieu de la classe tangente. L'énoncé de la page reste donc ouvert sous sa forme géométrique :
+\begin{theoreme}[calcul classique, ajouté par l'édition]\label{thm:140-1-unites}
+Soit $k$ un anneau intègre et $A = k[\lambda, 1/\lambda, 1/(1-\lambda)]$, le localisé de $k[\lambda]$ en $\lambda(1-\lambda)$. L'application $(c, a, b) \mapsto c\,\lambda^a(1-\lambda)^b$ est un isomorphisme de $k^* \times \mathbf Z \times \mathbf Z$ sur $A^*$ ; autrement dit $\mathcal O(U_{0,3})^*$ est le modèle $k^* \times V(J)$, les constantes s'envoyant sur les constantes. Si $k$ est un corps, $\mathrm{Pic}(A) = 0$.
+\end{theoreme}
+
+\begin{proof}
+Les éléments $\lambda$ et $1 - \lambda$ sont premiers dans $k[\lambda]$ et ne se divisent pas l'un l'autre (évaluer en $0$ et en~$1$). Injectivité : si $c\,\lambda^a(1-\lambda)^b = 1$, on chasse les dénominateurs, $c\,\lambda^{a_+}(1-\lambda)^{b_+} = \lambda^{a_-}(1-\lambda)^{b_-}$ dans $k[\lambda]$, qui s'injecte dans $A$ ; un premier qui ne divise ni une unité ni l'autre premier se simplifie, d'où $a_+ = a_-$, $b_+ = b_-$ et $c = 1$. Surjectivité : une unité $u$ s'écrit $p/(\lambda(1-\lambda))^n$ et son inverse $q/(\lambda(1-\lambda))^m$, donc $pq = \lambda^N(1-\lambda)^N$ dans $k[\lambda]$. Par récurrence sur $N$, un diviseur d'un produit de premiers est associé à un sous-produit : $p = w\,\lambda^i(1-\lambda)^j$ avec $w \in k[\lambda]^* = k^*$ ($k$ intègre), et $u = w\,\lambda^{i-n}(1-\lambda)^{j-n}$. Sur un corps, $A$ est un localisé de l'anneau principal $k[\lambda]$, donc factoriel, et le groupe de Picard d'un anneau factoriel est nul.
+\end{proof}
+
+\noindent Vérifié tel quel (\texttt{dvd\_pow\_mul\_pow}, \texttt{C\_mul\_pow\_inj}, \texttt{unitOf\_eq\_one}, \texttt{exists\_unitOf}, \texttt{toUnits\_bijective}, \texttt{unitsEquiv}, \texttt{toUnits\_incl}, \texttt{pic\_O3\_subsingleton}). Lean ne définit pas l'action de $\mathfrak S_3$ sur $A$ par les substitutions anharmoniques et ne vérifie pas que \texttt{unitsEquiv} est équivariant ; l'action du modèle n'est comparée aux substitutions que point par point, par \texttt{ev\_smul\_lam} et \texttt{ev\_smul\_lam'}.
+
+Ne sont pas démontrés ici : l'équivariance de l'identification des unités, $\mathrm{Pic}(U_{0,3}) = 0$ sur une base $S$ générale (il l'est sur un corps, théorème~\ref{thm:140-1-unites}) et la suite de Hochschild--Serre, qui identifient le groupe de Picard du champ quotient à ce $H^1$, et le choix de la page, qui prend pour générateur $\mathcal O(1)$ sur $\mathbf P(V_J)$ au lieu de la classe tangente. L'énoncé de la page reste donc ouvert sous sa forme géométrique :
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 22, 24 et 29, Picard du champ {$[U_{0,3}/\mathfrak S_3]$}\piste{140-1-equivariant-pic-u03}]\nonverifie

@@ -1356,4 +1356,133 @@ theorem invariants_eq {M₂ : Type*} [AddCommGroup M₂] [Module k M₂] {b : �
 
 end Pinned
 
+/-! ## Irreducibility on `C` (pages 80–82)
+
+Finding `72-invariant-subspaces-string`, reading section XIV, « Irréductibilité sur
+`C` ». Over a field, in the coordinates above, the subspaces of the hyperplane
+`C = Vh` (`π = 0`) stable under all `τᵢ`:
+
+* `invariant_le_Vh_iff`: in general, `0`, `C`, the line `K c̃` when `ρ = 0`
+  (`c ∈ C`), and, for `i < n` with `βᵢ = 0`, `Z*ᵢ` (always in `C`, `Zs_le_Vh`)
+  and `Z'ᵢ` when `Z'ᵢ ⊂ C`.
+* `invariant_le_Vh_iff_of_ne_zero`: if all `βᵢ ≠ 0`, only `0`, `C`, and `K c̃` when
+  `ρ = 0`.
+* `irreducible_on_C_iff`: the representation on `C` is irreducible iff all
+  `βᵢ ≠ 0` and (`n = 0` or `ρ ≠ 0`). So « all `βᵢ ≠ 0` » alone (page 82, c)) does
+  not suffice for `n ≥ 1`: `ρ = 0` gives the invariant line `K c̃ ⊂ C`, as the
+  struck-out d) of page 80 says. For `n = 0`, `C` is a line.
+-/
+
+section Irreducible
+
+variable {K : Type u} [Field K] {μ' β' : ℕ → K}
+
+lemma e_mem_Vh {k : ℕ} (hk : k ≠ 0) : (e n k : Fin (n + 2) → K) ∈ Vh n :=
+  co_e_ne (Ne.symm hk)
+
+lemma e_zero_not_mem_Vh : (e n 0 : Fin (n + 2) → K) ∉ Vh n := by
+  intro h
+  have h1 := co_e_self (R := K) (n := n) 0 (by omega)
+  change co n 0 _ = 0 at h
+  exact zero_ne_one (h ▸ h1)
+
+lemma ct_mem_Vh_iff : ct n μ' β' ∈ Vh n ↔ ρ n μ' β' = 0 := by
+  change co n 0 _ = 0 ↔ _; rw [co_ct_zero]
+
+lemma Zs_le_Vh (i : ℕ) : Zs n i ≤ (Vh n : Submodule K (Fin (n + 2) → K)) :=
+  fun _ hx => hx 0 (Nat.zero_le _)
+
+lemma ct_ne_zero : ct n μ' β' ≠ 0 := by
+  intro h
+  simpa [h] using co_ct_top (n := n) (μ := μ') (β := β')
+
+/-- **Pages 80–82.** The invariant subspaces contained in `C`, in general. -/
+theorem invariant_le_Vh_iff (W : Submodule K (Fin (n + 2) → K)) :
+    (Invariant n μ' β' W ∧ W ≤ Vh n) ↔
+      W = ⊥ ∨ W = Vh n ∨ (ρ n μ' β' = 0 ∧ W = K ∙ ct n μ' β') ∨
+        ∃ i < n, β' i = 0 ∧ (W = Zs n i ∨ (W = Zp n μ' β' i ∧ Zp n μ' β' i ≤ Vh n)) := by
+  constructor
+  · rintro ⟨hW, hle⟩
+    rcases (invariant_iff W).1 hW with h | h | h | h | ⟨i, hi, hβ, h | h⟩
+    · exact Or.inl h
+    · subst h; exact absurd (hle Submodule.mem_top) e_zero_not_mem_Vh
+    · refine Or.inr (Or.inr (Or.inl ⟨ct_mem_Vh_iff.1 (hle ?_), h⟩))
+      rw [h]; exact Submodule.mem_span_singleton_self _
+    · exact Or.inr (Or.inl h)
+    · subst h; exact Or.inr (Or.inr (Or.inr ⟨i, hi, hβ, Or.inr ⟨rfl, hle⟩⟩))
+    · exact Or.inr (Or.inr (Or.inr ⟨i, hi, hβ, Or.inl h⟩))
+  · rintro (rfl | rfl | ⟨h0, rfl⟩ | ⟨i, hi, hβ, rfl | ⟨rfl, hle⟩⟩)
+    · exact ⟨(invariant_iff _).2 (Or.inl rfl), bot_le⟩
+    · exact ⟨(invariant_iff _).2 (Or.inr (Or.inr (Or.inr (Or.inl rfl)))), le_rfl⟩
+    · exact ⟨(invariant_iff _).2 (Or.inr (Or.inr (Or.inl rfl))),
+        (Submodule.span_singleton_le_iff_mem _ _).2 (ct_mem_Vh_iff.2 h0)⟩
+    · exact ⟨Zs_invariant hβ, Zs_le_Vh i⟩
+    · exact ⟨Zp_invariant hi hβ, hle⟩
+
+/-- If all `βᵢ ≠ 0`, the invariant subspaces of `C` are `0`, `C`, and `K c̃` when `ρ = 0`. -/
+theorem invariant_le_Vh_iff_of_ne_zero (hβ : ∀ i < n, β' i ≠ 0)
+    (W : Submodule K (Fin (n + 2) → K)) :
+    (Invariant n μ' β' W ∧ W ≤ Vh n) ↔
+      W = ⊥ ∨ W = Vh n ∨ (ρ n μ' β' = 0 ∧ W = K ∙ ct n μ' β') := by
+  rw [invariant_le_Vh_iff]
+  constructor
+  · rintro (h | h | h | ⟨i, hi, h0, _⟩)
+    exacts [Or.inl h, Or.inr (Or.inl h), Or.inr (Or.inr h), absurd h0 (hβ i hi)]
+  · tauto
+
+/-- For `n = 0`, `ρ = 0` makes `c̃` span `C`. -/
+lemma span_ct_eq_Vh_of_zero {μ'' β'' : ℕ → K} (h0 : ρ 0 μ'' β'' = 0) :
+    K ∙ ct 0 μ'' β'' = Vh 0 := by
+  refine le_antisymm ((Submodule.span_singleton_le_iff_mem _ _).2 (ct_mem_Vh_iff.2 h0)) ?_
+  intro x hx
+  refine Submodule.mem_span_singleton.2 ⟨x 1, ?_⟩
+  have hc0 := co_ct_zero (n := 0) (μ := μ'') (β := β'')
+  have hc1 := co_ct_top (n := 0) (μ := μ'') (β := β'')
+  change co 0 0 x = 0 at hx
+  rw [co_zero_apply] at hx hc0
+  rw [co_of_lt (by omega)] at hc1
+  funext j
+  fin_cases j
+  · simp [hx, hc0, h0]
+  · have h1 : ct 0 μ'' β'' 1 = 1 := hc1
+    simp [h1]
+
+/-- **Irreducibility on `C`** (pages 80–82): no subspace of `C` other than `0` and `C`
+is stable under all `τᵢ` iff all `βᵢ ≠ 0` and, for `n ≥ 1`, `ρ ≠ 0`. -/
+theorem irreducible_on_C_iff :
+    (∀ W : Submodule K (Fin (n + 2) → K), W ≤ Vh n → Invariant n μ' β' W →
+        W = ⊥ ∨ W = Vh n) ↔
+      (∀ i < n, β' i ≠ 0) ∧ (n = 0 ∨ ρ n μ' β' ≠ 0) := by
+  constructor
+  · intro h
+    refine ⟨fun i hi hβ => ?_, ?_⟩
+    · have hm : (e n (i + 2) : Fin (n + 2) → K) ∈ Zs n i := fun k hk => co_e_ne (by omega)
+      rcases h (Zs n i) (Zs_le_Vh i) (Zs_invariant hβ) with h1 | h1
+      · rw [h1, Submodule.mem_bot] at hm
+        simpa [hm] using co_e_self (R := K) (n := n) (i + 2) (by omega)
+      · have h1' : (e n 1 : Fin (n + 2) → K) ∈ Zs n i := h1 ▸ e_mem_Vh one_ne_zero
+        have h2 := co_e_self (R := K) (n := n) 1 (by omega)
+        exact zero_ne_one (h1' 1 (by omega) ▸ h2)
+    · by_contra hc
+      push Not at hc
+      obtain ⟨hn, hρ⟩ := hc
+      rcases h (K ∙ ct n μ' β') ((Submodule.span_singleton_le_iff_mem _ _).2 (ct_mem_Vh_iff.2 hρ))
+          ((invariant_iff _).2 (Or.inr (Or.inr (Or.inl rfl)))) with h1 | h1
+      · rw [Submodule.span_singleton_eq_bot] at h1; exact ct_ne_zero h1
+      · have hm : (e n 1 : Fin (n + 2) → K) ∈ K ∙ ct n μ' β' := h1 ▸ e_mem_Vh one_ne_zero
+        obtain ⟨a, ha⟩ := Submodule.mem_span_singleton.1 hm
+        have h2 := congrArg (co n (n + 1)) ha
+        rw [map_smul, co_ct_top, smul_eq_mul, mul_one, co_e_ne (by omega)] at h2
+        rw [h2, zero_smul] at ha
+        simpa [← ha] using co_e_self (R := K) (n := n) 1 (by omega)
+  · rintro ⟨hβ, hρ⟩ W hW hinv
+    rcases (invariant_le_Vh_iff_of_ne_zero hβ W).1 ⟨hinv, hW⟩ with h | h | ⟨h0, h⟩
+    · exact Or.inl h
+    · exact Or.inr h
+    · rcases hρ with rfl | hρ
+      · exact Or.inr (h.trans (span_ct_eq_Vh_of_zero h0))
+      · exact (hρ h0).elim
+
+end Irreducible
+
 end Grothendieck.Folder72

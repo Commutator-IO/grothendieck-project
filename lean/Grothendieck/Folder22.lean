@@ -820,4 +820,27 @@ theorem no_derivation_mv (i₀ : σ) (h : ¬ Module.Finite K Ω[K⁄R]) :
 
 end SeveralVariables
 
+/-! ### Page 23 in `n` variables: failure of formal smoothness -/
+
+section SeveralVariablesSmooth
+
+variable {R K : Type*} [CommRing R] [Field K] [Algebra R K] {σ : Type*} [Finite σ]
+  [DecidableEq σ]
+
+/-- **Page 23's Proposition in `n ≥ 1` variables, formal smoothness**: for a field `K` over `R`
+with `Ω_{K/R}` infinite-dimensional, `K⟦t₁, …, tₙ⟧` with the discrete topology is not formally
+smooth over `K`. As for `n = 1`: a formally smooth `S` would give, by Jacobi–Zariski, a retraction
+`r` of `S ⊗_K Ω_{K/R} → Ω_{S/R}` (`retraction_of_formallySmooth`), and `r ∘ d_{S/R}` would be a
+derivation inducing `d_{K/R}`, which `no_derivation_mv` excludes. -/
+theorem not_formallySmooth_mv (i₀ : σ) (h : ¬ Module.Finite K Ω[K⁄R]) :
+    ¬ Algebra.FormallySmooth K (MvPowerSeries σ K) := by
+  intro _
+  obtain ⟨r, hr⟩ := retraction_of_formallySmooth R K (MvPowerSeries σ K)
+  refine no_derivation_mv i₀ h ⟨r.compDer (KaehlerDifferential.D R (MvPowerSeries σ K)),
+    fun c => ?_⟩
+  simpa [MvPowerSeries.c_eq_algebraMap] using
+    LinearMap.congr_fun hr (1 ⊗ₜ KaehlerDifferential.D R K c)
+
+end SeveralVariablesSmooth
+
 end Grothendieck.Folder22

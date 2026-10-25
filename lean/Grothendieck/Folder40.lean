@@ -407,3 +407,84 @@ theorem fibre_nilpotent : z (k := k) p ^ p = 0 := by
 end Fibre
 
 end Grothendieck.Folder40
+
+/-!
+## The fibre product is `C₁[T]/(T^p)`
+
+Added 2026-10-25. The isomorphism of page 27, `C₁ ⊗_A C₂ ≃ C₁[T]/(T^p)`, as an isomorphism
+of `C₁`-algebras sending `z = 1 ⊗ t - (-s + s²) ⊗ 1` to the class of `T`. Forward:
+`x ⊗ y ↦ x · φ(y)`, with `φ : C₂ → C₁[T]/(T^p)`, `t ↦ T + (-s + s²)`, well defined since
+`(T + b)^p = T^p + b^p = -X + X²` (`add_pow_char`, `neg_X_add_X_sq_eq_pow`). Backward:
+`T ↦ z`, well defined by `fibre_nilpotent`. The two composites are the identity on
+generators.
+-/
+
+namespace Grothendieck.Folder40
+
+open Polynomial TensorProduct
+
+section FibreIso
+
+variable {k : Type*} [Field k] (p : ℕ) [hp : Fact p.Prime] [CharP k p]
+
+/-- `E = C₁[T]/(T^p)`. -/
+abbrev E := AdjoinRoot (X ^ p : (C₁ (k := k) p)[X])
+
+/-- `b = -s + s²` in `C₁`. -/
+noncomputable abbrev b : C₁ (k := k) p := -AdjoinRoot.root _ + AdjoinRoot.root _ ^ 2
+
+omit [CharP k p] in
+instance nontrivial_E : Nontrivial (E (k := k) p) :=
+  AdjoinRoot.nontrivial _ (by rw [degree_X_pow]; exact_mod_cast hp.out.ne_zero)
+
+/-- In `C₁[T]/(T^p)`: `(T + c)^p = c^p`. -/
+theorem root_add_pow_E (c : E (k := k) p) : (AdjoinRoot.root _ + c) ^ p = c ^ p := by
+  have := charP_of_algebra (k := k) p (R := E (k := k) p)
+  have hr := AdjoinRoot.eval₂_root (X ^ p : (C₁ (k := k) p)[X])
+  rw [eval₂_X_pow] at hr
+  rw [add_pow_char, hr, zero_add]
+
+/-- `C₂ → C₁[T]/(T^p)`, `t ↦ T + b`. -/
+noncomputable def C₂toE : C₂ (k := k) p →ₐ[PowerSeries k] E (k := k) p :=
+  AdjoinRoot.liftAlgHom _ (Algebra.ofId _ _) (AdjoinRoot.root _ + algebraMap _ _ (b p)) (by
+    rw [eval₂_sub, eval₂_X_pow, eval₂_C, root_add_pow_E, ← map_pow,
+      ← neg_X_add_X_sq_eq_pow (k := k), sub_eq_zero, ← AdjoinRoot.algebraMap_eq,
+      ← IsScalarTower.algebraMap_apply (PowerSeries k) (C₁ (k := k) p) (E (k := k) p)]
+    rfl)
+
+/-- `C₁ ⊗_A C₂ → C₁[T]/(T^p)`, `x ⊗ y ↦ x · φ(y)`. -/
+noncomputable def fibreToE :
+    C₁ (k := k) p ⊗[PowerSeries k] C₂ (k := k) p →ₐ[C₁ (k := k) p] E (k := k) p :=
+  Algebra.TensorProduct.lift (Algebra.ofId _ _) (C₂toE p) (fun _ _ => Commute.all _ _)
+
+/-- `C₁[T]/(T^p) → C₁ ⊗_A C₂`, `T ↦ z`. -/
+noncomputable def EtoFibre :
+    E (k := k) p →ₐ[C₁ (k := k) p] C₁ (k := k) p ⊗[PowerSeries k] C₂ (k := k) p :=
+  AdjoinRoot.liftAlgHom _ (Algebra.ofId _ _) (z p) (by
+    rw [eval₂_X_pow]; exact fibre_nilpotent p)
+
+theorem fibreToE_z : fibreToE p (z (k := k) p) = AdjoinRoot.root _ := by
+  simp [z, fibreToE, C₂toE]
+
+theorem EtoFibre_root : EtoFibre p (AdjoinRoot.root _) = z (k := k) p :=
+  AdjoinRoot.liftAlgHom_root _ _ _ _
+
+/-- **Page 27: the fibre product is `C₁[T]/(T^p)`.** `C₁ ⊗_A C₂ ≃ C₁[T]/(T^p)` as
+`C₁`-algebras, `z = 1 ⊗ t - (-s + s²) ⊗ 1 ↦ T`. -/
+noncomputable def fibreEquiv :
+    C₁ (k := k) p ⊗[PowerSeries k] C₂ (k := k) p ≃ₐ[C₁ (k := k) p] E (k := k) p :=
+  AlgEquiv.ofAlgHom (fibreToE p) (EtoFibre p)
+    (AdjoinRoot.algHom_ext (by rw [AlgHom.comp_apply, EtoFibre_root, fibreToE_z,
+      AlgHom.id_apply]))
+    (Algebra.TensorProduct.ext (Algebra.ext_id _ _ _) (AdjoinRoot.algHom_ext (by
+      have h : (1 : C₁ (k := k) p) ⊗ₜ[PowerSeries k] (AdjoinRoot.root _ : C₂ (k := k) p) =
+          z p + algebraMap (C₁ (k := k) p) _ (b p) := by simp [z]
+      simp only [AlgHom.comp_apply, AlgHom.coe_restrictScalars',
+        Algebra.TensorProduct.includeRight_apply, AlgHom.id_apply, h, map_add, AlgHom.commutes,
+        fibreToE_z, EtoFibre_root])))
+
+theorem fibreEquiv_z : fibreEquiv p (z (k := k) p) = AdjoinRoot.root _ := fibreToE_z p
+
+end FibreIso
+
+end Grothendieck.Folder40

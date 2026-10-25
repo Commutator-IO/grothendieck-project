@@ -742,3 +742,228 @@ theorem ev_tan (σ : G3) {x : K} (hx : Folder146.U x) :
 end Ev
 
 end Grothendieck.Folder140_1
+
+/-! ## The units of `U_{0,3}` are the model, and `Pic(U_{0,3}) = 0`
+
+`O3 k = k[λ, 1/λ, 1/(1 − λ)]` is `Localization.Away (X (1 − X))` of `k[X]`. For `k` a domain,
+`unitsEquiv : Units3 k ≃+ O3 k^*` sends `(c, v)` to `c λ^{v₀} (1 − λ)^{v₁}` (`toUnits`): it is
+injective because `X` and `1 − X` are non-associated primes of `k[X]` (`C_mul_pow_inj`,
+`unitOf_eq_one`), and surjective because a unit `p / (X (1 − X))^n` has `p ∣ X^N (1 − X)^N`, so
+`p = u X^i (1 − X)^j` with `u ∈ k[X]^* = k^*` (`dvd_pow_mul_pow`, `exists_unitOf`). Over a field,
+`O3 K` is a localization of a principal ideal domain, hence factorial, and its Picard group is
+trivial (`pic_O3_subsingleton`). The action of `𝔖₃` on `O3 k` by the anharmonic substitutions
+is not defined here: the model's action is compared with them pointwise by `ev_smul_lam`. -/
+namespace Grothendieck.Folder140_1
+
+open Polynomial Units3
+
+section Ring
+
+/-- A divisor of `π s`, `π` prime, divides `s` or is `π` times a divisor of `s`. -/
+lemma dvd_prime_mul {R : Type} [CommRing R] [IsDomain R] {π p s : R} (hπ : Prime π)
+    (h : p ∣ π * s) : p ∣ s ∨ ∃ p', p = π * p' ∧ p' ∣ s := by
+  obtain ⟨c, hc⟩ := h
+  rcases hπ.dvd_or_dvd ⟨s, hc.symm⟩ with ⟨p', rfl⟩ | ⟨c', rfl⟩
+  · exact .inr ⟨p', rfl, c, mul_left_cancel₀ hπ.ne_zero (by rw [hc]; ring)⟩
+  · exact .inl ⟨c', mul_left_cancel₀ hπ.ne_zero (by rw [hc]; ring)⟩
+
+/-- The divisors of `π^a ρ^b`, `π` and `ρ` prime, are the `u π^i ρ^j`, `u` a unit. -/
+lemma dvd_pow_mul_pow {R : Type} [CommRing R] [IsDomain R] {π ρ : R} (hπ : Prime π)
+    (hρ : Prime ρ) (a b : ℕ) {p : R} (h : p ∣ π ^ a * ρ ^ b) :
+    ∃ u : Rˣ, ∃ i j : ℕ, p = u * π ^ i * ρ ^ j := by
+  induction a generalizing p with
+  | zero =>
+    rw [pow_zero, one_mul] at h
+    induction b generalizing p with
+    | zero => exact ⟨(isUnit_of_dvd_one (by simpa using h)).unit, 0, 0, by simp⟩
+    | succ b ih =>
+      rw [pow_succ'] at h
+      rcases dvd_prime_mul hρ h with h' | ⟨p', rfl, h'⟩
+      · exact ih h'
+      · obtain ⟨u, i, j, rfl⟩ := ih h'
+        exact ⟨u, i, j + 1, by ring⟩
+  | succ a ih =>
+    rw [pow_succ', mul_assoc] at h
+    rcases dvd_prime_mul hπ h with h' | ⟨p', rfl, h'⟩
+    · exact ih h'
+    · obtain ⟨u, i, j, rfl⟩ := ih h'
+      exact ⟨u, i + 1, j, by ring⟩
+
+/-- `π^a x = π^b y` with `π` dividing neither `x` nor `y` forces `a = b` and `x = y`. -/
+lemma pow_mul_cancel {R : Type} [CommRing R] [IsDomain R] {π x y : R} (hπ : Prime π)
+    (hx : ¬ π ∣ x) (hy : ¬ π ∣ y) {a b : ℕ} (h : π ^ a * x = π ^ b * y) : a = b ∧ x = y := by
+  have key : ∀ {a b : ℕ} {x y : R}, ¬ π ∣ x → π ^ a * x = π ^ b * y → a ≤ b → a = b ∧ x = y := by
+    intro a b x y hx h hab
+    obtain ⟨d, rfl⟩ := Nat.exists_eq_add_of_le hab
+    rw [pow_add, mul_assoc] at h
+    have h' := mul_left_cancel₀ (pow_ne_zero a hπ.ne_zero) h
+    rcases d with _ | d
+    · simpa using h'
+    · exact absurd ⟨π ^ d * y, by rw [h']; ring⟩ hx
+  rcases le_total a b with hab | hab
+  · exact key hx h hab
+  · exact (key hy h.symm hab).imp Eq.symm Eq.symm
+
+end Ring
+
+variable {k : Type} [CommRing k] [IsDomain k]
+
+lemma one_sub_X_ne_zero : (1 - X : k[X]) ≠ 0 := fun h => by
+  simpa using congrArg (eval 0) h
+
+lemma prime_one_sub_X : Prime (1 - X : k[X]) := by
+  simpa using (prime_X_sub_C (1 : k)).neg
+
+lemma X_not_dvd_one_sub_X : ¬ (X : k[X]) ∣ 1 - X := fun ⟨q, hq⟩ => by
+  simpa using congrArg (eval 0) hq
+
+lemma one_sub_X_not_dvd_X : ¬ (1 - X : k[X]) ∣ X := fun ⟨q, hq⟩ => by
+  simpa using congrArg (eval 1) hq
+
+variable (k) in
+/-- The coordinate ring `k[λ, 1/λ, 1/(1 − λ)]` of `U_{0,3}`. -/
+abbrev O3 := Localization.Away (X * (1 - X) : k[X])
+
+lemma X_mul_ne_zero : (X * (1 - X) : k[X]) ≠ 0 := mul_ne_zero X_ne_zero one_sub_X_ne_zero
+
+lemma algebraMap_O3_injective : Function.Injective (algebraMap k[X] (O3 k)) :=
+  IsLocalization.injective (M := Submonoid.powers (X * (1 - X) : k[X])) (O3 k)
+    (powers_le_nonZeroDivisors_of_noZeroDivisors X_mul_ne_zero)
+
+/-- The unit `λ` of `O(U_{0,3})`. -/
+noncomputable def lamU : (O3 k)ˣ :=
+  (isUnit_of_mul_isUnit_left (by
+    rw [← map_mul]; exact IsLocalization.Away.algebraMap_isUnit _ :
+    IsUnit (algebraMap k[X] (O3 k) X * algebraMap k[X] (O3 k) (1 - X)))).unit
+
+/-- The unit `1 − λ` of `O(U_{0,3})`. -/
+noncomputable def lam'U : (O3 k)ˣ :=
+  (isUnit_of_mul_isUnit_right (by
+    rw [← map_mul]; exact IsLocalization.Away.algebraMap_isUnit _ :
+    IsUnit (algebraMap k[X] (O3 k) X * algebraMap k[X] (O3 k) (1 - X)))).unit
+
+omit [IsDomain k] in
+@[simp] lemma val_lamU : (lamU (k := k) : O3 k) = algebraMap k[X] (O3 k) X := rfl
+omit [IsDomain k] in
+@[simp] lemma val_lam'U : (lam'U (k := k) : O3 k) = algebraMap k[X] (O3 k) (1 - X) := rfl
+
+/-- The constants. -/
+noncomputable def cU : kˣ →* (O3 k)ˣ := Units.map (algebraMap k (O3 k)).toMonoidHom
+
+omit [IsDomain k] in
+@[simp] lemma val_cU (c : kˣ) : (cU c : O3 k) = algebraMap k[X] (O3 k) (C (c : k)) := by
+  simp [cU, IsScalarTower.algebraMap_apply k k[X] (O3 k)]
+
+/-- The unit `c λ^a (1 − λ)^b` of `O(U_{0,3})`. -/
+noncomputable def unitOf (c : kˣ) (a b : ℤ) : (O3 k)ˣ := cU c * lamU ^ a * lam'U ^ b
+
+omit [IsDomain k] in
+lemma unitOf_mul (c c' : kˣ) (a b a' b' : ℤ) :
+    unitOf (c * c') (a + a') (b + b') = unitOf c a b * unitOf c' a' b' := by
+  simp only [unitOf, map_mul, zpow_add]; ac_rfl
+
+omit [IsDomain k] in
+lemma val_unitOf_nat (c : kˣ) (a b : ℕ) :
+    (unitOf c a b : O3 k) = algebraMap k[X] (O3 k) (C (c : k) * X ^ a * (1 - X) ^ b) := by
+  simp [unitOf]
+
+/-- The model of the units is the units of `U_{0,3}`: `(c, v) ↦ c λ^{v₀} (1 − λ)^{v₁}`. -/
+noncomputable def toUnits : Units3 k →+ Additive (O3 k)ˣ where
+  toFun x := Additive.ofMul (unitOf (Additive.toMul (show Additive kˣ from x.cst))
+    ((x.dv : Fin 3 → ℤ) 0) ((x.dv : Fin 3 → ℤ) 1))
+  map_zero' := by
+    change Additive.ofMul (unitOf 1 0 0) = 0
+    simp [unitOf]
+  map_add' x y := by
+    rw [← ofMul_mul, ← unitOf_mul]; rfl
+
+
+/-- A prime `π` dividing neither `ρ` nor any unit divides no `u ρ^n`. -/
+lemma not_dvd_unit_mul_pow {R : Type} [CommRing R] {π ρ : R} (hπ : Prime π) (hρ : ¬ π ∣ ρ)
+    (u : R) (hu : IsUnit u) (n : ℕ) : ¬ π ∣ u * ρ ^ n := fun h =>
+  (hπ.dvd_or_dvd h).elim (fun h => hπ.not_isUnit (isUnit_of_dvd_unit h hu))
+    (fun h => hρ (hπ.dvd_of_dvd_pow h))
+
+/-- `c X^a (1 − X)^b = c' X^{a'} (1 − X)^{b'}` in `k[X]` forces `c = c'`, `a = a'`, `b = b'`. -/
+lemma C_mul_pow_inj {c c' : kˣ} {a b a' b' : ℕ}
+    (h : C (c : k) * X ^ a * (1 - X) ^ b = C (c' : k) * X ^ a' * (1 - X) ^ b') :
+    c = c' ∧ a = a' ∧ b = b' := by
+  have hu : ∀ c : kˣ, IsUnit (C (c : k)) := fun c => isUnit_C.2 c.isUnit
+  obtain ⟨ha, h1⟩ := pow_mul_cancel prime_X
+    (not_dvd_unit_mul_pow prime_X X_not_dvd_one_sub_X _ (hu c) b)
+    (not_dvd_unit_mul_pow prime_X X_not_dvd_one_sub_X _ (hu c') b')
+    (show X ^ a * (C (c : k) * (1 - X) ^ b) = X ^ a' * (C (c' : k) * (1 - X) ^ b') by
+      linear_combination h)
+  have hn : ∀ c : kˣ, ¬ (1 - X : k[X]) ∣ C (c : k) := fun c h =>
+    prime_one_sub_X.not_isUnit (isUnit_of_dvd_unit h (hu c))
+  obtain ⟨hb, h2⟩ := pow_mul_cancel prime_one_sub_X (hn c) (hn c')
+    (show (1 - X) ^ b * C (c : k) = (1 - X) ^ b' * C (c' : k) by linear_combination h1)
+  exact ⟨Units.ext (C_injective h2), ha, hb⟩
+
+/-- `c λ^a (1 − λ)^b = 1` only for `c = 1`, `a = b = 0`. -/
+theorem unitOf_eq_one {c : kˣ} {a b : ℤ} (h : unitOf c a b = 1) : c = 1 ∧ a = 0 ∧ b = 0 := by
+  have ea := Int.toNat_sub_toNat_neg a
+  have eb := Int.toNat_sub_toNat_neg b
+  have e : unitOf c a.toNat b.toNat = unitOf 1 (-a).toNat (-b).toNat := by
+    have := unitOf_mul c 1 a b ((-a).toNat) ((-b).toNat)
+    rwa [h, one_mul, mul_one, show a + (-a).toNat = a.toNat by omega,
+      show b + (-b).toNat = b.toNat by omega] at this
+  have e' := congrArg Units.val e
+  rw [val_unitOf_nat, val_unitOf_nat] at e'
+  obtain ⟨hc, ha, hb⟩ := C_mul_pow_inj (algebraMap_O3_injective e')
+  exact ⟨hc, by omega, by omega⟩
+
+/-- Every unit of `k[λ, 1/λ, 1/(1 − λ)]` is a `c λ^a (1 − λ)^b`, `c ∈ k^*`. -/
+theorem exists_unitOf (u : (O3 k)ˣ) : ∃ c : kˣ, ∃ a b : ℤ, u = unitOf c a b := by
+  set x : k[X] := X * (1 - X)
+  obtain ⟨n, p, hp⟩ := IsLocalization.Away.surj x (u : O3 k)
+  obtain ⟨m, q, hq⟩ := IsLocalization.Away.surj x ((u⁻¹ : (O3 k)ˣ) : O3 k)
+  have hpq : p * q = X ^ (n + m) * (1 - X) ^ (n + m) := by
+    rw [← mul_pow]
+    apply algebraMap_O3_injective
+    rw [map_mul, ← hp, ← hq, map_pow, pow_add]
+    linear_combination (algebraMap k[X] (O3 k) x ^ n * algebraMap k[X] (O3 k) x ^ m) *
+      Units.mul_inv u
+  obtain ⟨w, i, j, hw⟩ := dvd_pow_mul_pow prime_X prime_one_sub_X (n + m) (n + m) ⟨q, hpq.symm⟩
+  obtain ⟨r, hr, hrw⟩ := Polynomial.isUnit_iff.1 w.isUnit
+  refine ⟨hr.unit, i - n, j - n, mul_right_cancel (b := unitOf 1 n n) ?_⟩
+  rw [← unitOf_mul, mul_one, sub_add_cancel, sub_add_cancel]
+  apply Units.ext
+  rw [Units.val_mul, val_unitOf_nat, val_unitOf_nat, IsUnit.unit_spec, hrw, ← hw, ← hp]
+  simp [x, mul_pow]
+
+theorem toUnits_bijective : Function.Bijective (toUnits (k := k)) := by
+  refine ⟨(injective_iff_map_eq_zero _).2 fun x hx => ?_, fun u => ?_⟩
+  · obtain ⟨hc, ha, hb⟩ := unitOf_eq_one (congrArg Additive.toMul hx)
+    have hs : ∑ j, (x.dv : Fin 3 → ℤ) j = 0 := x.dv.2
+    rw [Fin.sum_univ_three, ha, hb] at hs
+    refine Units3.ext (congrArg Additive.ofMul hc) (Subtype.ext (funext fun j => ?_))
+    fin_cases j
+    exacts [ha, hb, by change (x.dv : Fin 3 → ℤ) 2 = 0; omega]
+  · obtain ⟨c, a, b, hu⟩ := exists_unitOf (Additive.toMul u)
+    refine ⟨mk (Additive.ofMul c) ⟨![a, b, -a - b], by
+      change ∑ j, (![a, b, -a - b] : Fin 3 → ℤ) j = 0; simp [Fin.sum_univ_three]⟩, ?_⟩
+    change Additive.ofMul (unitOf c a b) = u
+    rw [← hu]; rfl
+
+/-- The units of `U_{0,3} = Spec k[λ, 1/λ, 1/(1 − λ)]`, `k` a domain, are the model `Units3 k`:
+`O(U_{0,3})^* = k^* × λ^ℤ × (1 − λ)^ℤ`. -/
+noncomputable def unitsEquiv : Units3 k ≃+ Additive (O3 k)ˣ :=
+  AddEquiv.ofBijective toUnits toUnits_bijective
+
+omit [IsDomain k] in
+/-- The constants of the model go to the constants. -/
+lemma toUnits_incl (c : Triv k) :
+    toUnits (incl c) = Additive.ofMul (cU (Additive.toMul (show Additive kˣ from c))) := by
+  change Additive.ofMul (unitOf (Additive.toMul (show Additive kˣ from c)) 0 0) = _
+  simp [unitOf]
+
+/-- `Pic(U_{0,3}) = 0` over a field: `K[λ, 1/λ, 1/(1 − λ)]` is a localization of the principal
+ideal domain `K[λ]`, hence factorial, and the Picard group of a factorial domain is trivial. -/
+theorem pic_O3_subsingleton (K : Type) [Field K] : Subsingleton (CommRing.Pic (O3 K)) := by
+  have : IsDomain (O3 K) := IsLocalization.Away.isDomain _ (X_mul_ne_zero (k := K))
+  have : UniqueFactorizationMonoid (O3 K) :=
+    UniqueFactorizationMonoid.of_isLocalization (S := Submonoid.powers (X * (1 - X) : K[X])) _
+  infer_instance
+
+end Grothendieck.Folder140_1
