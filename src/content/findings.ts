@@ -7002,7 +7002,7 @@ export const FINDINGS: Finding[] = [
     literature: [
       'Cisinski, Les préfaisceaux comme modèles des types d’homotopie, Astérisque 308 (2006), 4.3.1–4.3.2 (author’s copy, cisinski.app.uni-regensburg.de/smf_ast_308.pdf)',
       'Maltsiniotis, La théorie de l’homotopie de Grothendieck, version provisoire août 2001 (prst.pdf), Proposition 7.1, Définition 7.2, Remarque 7.3',
-      'MathOverflow, answer 516224 to question 516223 (mathoverflow.net/a/516224), by D.-C. Cisinski, 21 October 2026 (CC BY-SA): in Proposition 4.3.2 of Astérisque 308, (g) ⇒ (c) holds only under a further assumption, for instance that A is a test category to begin with; as far as the author knows, the rest of the book is not affected',
+      'MathOverflow, question 516223 (mathoverflow.net/questions/516223), answer by D.-C. Cisinski, 21 October 2026 (CC BY-SA): in Proposition 4.3.2 of Astérisque 308, (g) ⇒ (c) holds only under a further assumption, for instance that A is a test category to begin with; as far as the author knows, the rest of the book is not affected',
     ],
     status: 'confirmed',
     settle:

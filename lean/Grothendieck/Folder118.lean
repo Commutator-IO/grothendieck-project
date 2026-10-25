@@ -123,8 +123,8 @@ equivalent, among them (c): for presheaves `X`, `Y` on `A`, the canonical functo
 products. For `A = BG`, `G ≠ 1`, (g)
 holds (`condition_g_holds`) and (c) fails (`not_condition_c`; witnesses
 `not_isWeqOver_regular`, `not_isWeqOver_point`), so (g) does not imply (c) (`g_not_imp_c`).
-Cisinski confirmed on MathOverflow (answer 516224 to question 516223,
-https://mathoverflow.net/a/516224, 21 October 2026) that (g) ⇒ (c) needs a further assumption, e.g. that `A` be a test category.
+Cisinski confirmed on MathOverflow (https://mathoverflow.net/questions/516223, answer of
+21 October 2026) that (g) ⇒ (c) needs a further assumption, e.g. that `A` be a test category.
 
 Same 1-truncated model as above. A functor of action groupoids `X//G → Y//H` is given by a
 group morphism `φ : G →* H` and a map `f : X → Y` with `f (g • x) = φ g • f x`; it is a weak
