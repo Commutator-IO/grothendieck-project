@@ -325,8 +325,7 @@ def problem17 : Prop :=
     ∃ s : SignType, s ≠ 0 ∧ ∀ x y z : Option E,
       N₁.χ x y z = (if none = x ∨ none = y ∨ none = z then s else 1) * N₂.χ x y z
 
-lemma signType_eq_zero_of_eq_neg {x : SignType} (h : x = -x) : x = 0 := by
-  cases x <;> simp_all
+lemma signType_eq_zero_of_eq_neg {x : SignType} (h : x = -x) : x = 0 := by cases x <;> simp_all
 
 /-- Alternation: a chirotope vanishes when its first two arguments coincide. -/
 lemma Chirotope3.eq_zero₁₂ {E : Type} (N : Chirotope3 E) (a c : E) : N.χ a a c = 0 :=
@@ -342,20 +341,16 @@ lemma Chirotope3.eq_zero₁₃ {E : Type} (N : Chirotope3 E) (a b : E) : N.χ a 
 
 /-- Alternation: moving the first argument to the last place is an even permutation. -/
 lemma Chirotope3.eq_first {E : Type} (N : Chirotope3 E) (a b c : E) :
-    N.χ c a b = N.χ a b c := by
-  rw [N.swap12, N.swap23, neg_neg]
+    N.χ c a b = N.χ a b c := by rw [N.swap12, N.swap23, neg_neg]
 
 /-- Problem 17 holds in this form, by alternation alone: the triples without the new element
 are those of `M`, those with exactly one are, up to the sign of a permutation, read off the
 contraction, and those with two or three vanish. -/
-theorem problem17_holds : problem17 := by
-  rintro E M N₁ N₂ h₁ h₂ ⟨s, hs, hc⟩
-  refine ⟨s, hs, ?_⟩
-  rintro (_ | a) (_ | b) (_ | c) <;> simp [Chirotope3.eq_zero₁₂, Chirotope3.eq_zero₂₃, Chirotope3.eq_zero₁₃]
-  · rw [N₁.eq_first, N₂.eq_first]; exact hc _ _
-  · rw [N₁.swap23, N₂.swap23, hc, mul_neg]
-  · exact hc _ _
-  · rw [h₁, h₂]
+theorem problem17_holds : problem17 := fun E M N₁ N₂ h₁ h₂ ⟨s, hs, hc⟩ => ⟨s, hs, by
+  rintro (_ | a) (_ | b) (_ | c) <;> simp [Chirotope3.eq_zero₁₂, Chirotope3.eq_zero₂₃,
+    Chirotope3.eq_zero₁₃, h₁ _ _ _, h₂ _ _ _, hc, N₁.swap23 (some _) (some _) none,
+    N₂.swap23 (some _) (some _) none, N₁.eq_first (some _) (some _) none,
+    N₂.eq_first (some _) (some _) none]⟩
 
 end Problem17
 

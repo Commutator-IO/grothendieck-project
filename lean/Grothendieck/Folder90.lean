@@ -288,20 +288,14 @@ theorem iInf_pow_ne_bot_of_minimalPrime {p : Ideal A} (hp : p ∈ minimalPrimes 
     (h : p ⊔ Ideal.span {π} = ⊤) : ⨅ n : ℕ, Ideal.span {π} ^ n ≠ ⊥ := by
   obtain ⟨y, hy, z, hz, hyz⟩ := Submodule.mem_sup.1 (h ▸ Submodule.mem_top (x := (1 : A)))
   obtain ⟨c, rfl⟩ := Ideal.mem_span_singleton'.1 hz
-  have hy' := Set.disjoint_left.1 (Ideal.disjoint_nonZeroDivisors_of_mem_minimalPrimes hp) hy
-  rw [SetLike.mem_coe, mem_nonZeroDivisors_iff_right] at hy'
-  push Not at hy'
-  obtain ⟨a, hay, ha⟩ := hy'
-  have h1 : a * (c * π) = a := by
-    linear_combination (-1 : A) * hay + a * hyz
-  have hn : ∀ n : ℕ, a * (c * π) ^ n = a := fun n => by
-    induction n with
-    | zero => simp
-    | succ n ih => rw [pow_succ', ← mul_assoc, h1, ih]
-  intro hbot
-  refine ha (Ideal.mem_bot.1 (hbot ▸ Ideal.mem_iInf.2 fun n => ?_))
-  rw [Ideal.span_singleton_pow, Ideal.mem_span_singleton']
-  exact ⟨a * c ^ n, by rw [mul_assoc, ← mul_pow, hn]⟩
+  obtain ⟨a, hay, ha⟩ : ∃ a, a * y = 0 ∧ a ≠ 0 := by
+    simpa [mem_nonZeroDivisors_iff_right] using
+      Set.disjoint_left.1 (Ideal.disjoint_nonZeroDivisors_of_mem_minimalPrimes hp) hy
+  have h1 : a * (c * π) = a := by linear_combination a * hyz - hay
+  have hn (n : ℕ) : a * (c * π) ^ n = a := by induction n <;> simp_all [pow_succ', ← mul_assoc]
+  refine fun hbot => ha (Ideal.mem_bot.1 (hbot ▸ Ideal.mem_iInf.2 fun n => ?_))
+  exact Ideal.span_singleton_pow π n ▸
+    Ideal.mem_span_singleton'.2 ⟨a * c ^ n, by rw [mul_assoc, ← mul_pow, hn]⟩
 
 /-- **Components meeting the special fibre give `d(A) = 0`, for `A` reduced and Noetherian.**
 For a minimal prime `𝔭`, `A/𝔭` is a Noetherian domain in which `π` generates a proper ideal,
@@ -311,9 +305,8 @@ theorem iInf_pow_eq_bot_of_minimalPrimes [IsNoetherianRing A] [IsReduced A]
     (h : ∀ p ∈ minimalPrimes A, p ⊔ Ideal.span {π} ≠ ⊤) :
     ⨅ n : ℕ, Ideal.span {π} ^ n = ⊥ := by
   refine eq_bot_iff.2 fun x hx => ?_
-  rw [← Ideal.radical_bot_of_isReduced, ← Ideal.sInf_minimalPrimes, Ideal.mem_sInf]
-  intro p hp
-  have := hp.isPrime
+  rw [← Ideal.radical_bot_of_isReduced, ← Ideal.sInf_minimalPrimes]
+  refine Ideal.mem_sInf.2 fun p hp => have := hp.isPrime; ?_
   let f := Ideal.Quotient.mk p
   have hI : (Ideal.span {π}).map f ≠ ⊤ := fun hI => h p hp (by
     simpa [f, Ideal.comap_map_of_surjective' f Ideal.Quotient.mk_surjective, sup_comm] using
