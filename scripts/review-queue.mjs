@@ -506,6 +506,32 @@ for (const raw of body.split('\n')) {
     }
   }
 
+  // A finding recorded as stated without proof: is an argument written nearby?
+  if (section.startsWith('Statements recorded as stated without proof')) {
+    const st = /^\*\*(\d+(?:-\d+)?)(?:,\s*pp?\.\s*([\d–, -]+))?:\*\*\s*(.*)$/.exec(text);
+    if (st && isCote(st[1])) {
+      const ps = (st[2] ?? '').split(/,\s*/).flatMap((r) => {
+        const [a, b] = r.split('–').map(Number);
+        return b > a ? Array.from({ length: b - a + 1 }, (_, i) => a + i) : a ? [a] : [];
+      });
+      const fid = /\(finding `([^`]+)`\)/.exec(st[3])?.[1];
+      push({
+        id: `unproved-${fid ?? `${st[1]}-p${ps[0] ?? 0}`}`,
+        section: n,
+        kind: 'unproved',
+        cote: st[1],
+        page: ps[0] ?? null,
+        prompt: `Is an argument for this statement of folder ${st[1]} written on the leaves?`,
+        choices: [C('No, it is only stated', 'right'), C('Yes, an argument or a sketch', 'other', 'Where: page, verso or margin'), C('A special case only', 'other', 'Which case, and where')],
+        hint: `${ps.length ? facsimileAt(ps) : `Leaf through the facsimile of folder ${st[1]}`}, and at the leaves just after, the versos and the margins.`,
+        claim: `${st[3][0].toUpperCase()}${st[3].slice(1)}`.replace(/\s*\(finding `[^`]+`\)\.?$/, '.'),
+        details: text.replace(/\*\*/g, ''),
+        context: 'The finding is recorded as stated without proof; an argument on the leaves would make it partly proved (2026-10-26).',
+      }, null);
+      continue;
+    }
+  }
+
   // A finding too imprecise to state: what the leaves can still fix.
   if (section.startsWith('Statements too imprecise')) {
     const imp = /^\*\*(\d+(?:-\d+)?)(?:,\s*pp?\.\s*([\d–, -]+))?:\*\*\s*(.*)$/.exec(text);

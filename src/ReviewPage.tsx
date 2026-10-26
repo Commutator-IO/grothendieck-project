@@ -52,6 +52,7 @@ const KIND_NAME: Record<ReviewKind, string> = {
   reference: 'Reference',
   hypothesis: 'Hypothesis behind a counterexample',
   imprecise: 'Statement too imprecise to fix',
+  unproved: 'Stated without proof?',
 };
 
 function useSnippets(): Record<string, Snippet> | null {
