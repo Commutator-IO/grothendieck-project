@@ -1,14 +1,24 @@
-\documentclass[11pt,a4paper]{amsart}
+\documentclass[11pt]{article}
 % Built with tectonic (XeTeX): cd docs/problems && tectonic -X compile article.tex
+% Same page design as the Lean article (docs/lean/article.tex): Charter, 27 mm margins, 1.1 spacing.
 \usepackage{fontspec}
-\usepackage{amsmath,amssymb,amsthm}
-\usepackage[margin=30mm]{geometry}
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{\setmainfont{XCharter}}
+\IfFontExistsTF{Menlo}{\setmonofont{Menlo}[Scale=0.82]}{\setmonofont{DejaVu Sans Mono}[Scale=0.82]}
+\usepackage{polyglossia}\setmainlanguage{english}\setotherlanguage{french}
 \usepackage{microtype}
+\usepackage[a4paper,margin=27mm]{geometry}
+\usepackage{setspace}\setstretch{1.1}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{2.2ex plus 1ex}{1.2ex}
+\usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 \usepackage{xurl}
 \usepackage{enumitem}
 \setlist{nosep,leftmargin=*}
 \setlength{\emergencystretch}{2em}
+\setlength{\parskip}{0.35em}
 \newcommand{\q}[1]{«\,#1\,»}
 \newcommand{\fac}[1]{\href{https://grothendieck.umontpellier.fr/#1.pdf}{folder~#1}}
 \newcommand{\cd}{\operatorname{cd}}
@@ -20,27 +30,30 @@
 \newcommand{\Gal}{\operatorname{Gal}}
 \theoremstyle{definition}
 \newtheorem{problem}{Problem}
-\newcommand{\src}[1]{\par\smallskip\noindent\textbf{Source.} #1}
-\newcommand{\ctx}{\par\smallskip\noindent\textbf{Context.} }
-\newcommand{\known}{\par\smallskip\noindent\textbf{What is known.} }
-\newcommand{\ideas}{\par\smallskip\noindent\textbf{Ideas.} }
-\newcommand{\leanst}{\par\smallskip\noindent\textbf{Lean.} }
-\newcommand{\settle}{\par\smallskip\noindent\textbf{What would settle it.} }
+% Each problem statement in a frame, as the statements of the Lean article.
+\tcolorboxenvironment{problem}{enhanced, breakable, colback=white, colframe=black!55, boxrule=0.6pt, arc=0pt, left=7pt, right=7pt, top=4pt, bottom=4pt, before skip=14pt, after skip=8pt}
+\newcommand{\entry}[1]{\par\medskip\noindent\textbf{#1}\enspace}
+\newcommand{\src}[1]{\entry{Source.}#1}
+\newcommand{\ctx}{\entry{Context.}}
+\newcommand{\known}{\entry{What is known.}}
+\newcommand{\ideas}{\entry{Ideas.}}
+\newcommand{\leanst}{\entry{Lean.}}
+\newcommand{\settle}{\entry{What would settle it.}}
 
-\title[Open questions from Grothendieck's Montpellier notes]{Open questions from Grothendieck's Montpellier notes:\\ sixteen statements a formalisation could not reach}
-\author{Michel Hua}
-\address{Commutator, Paris, France}
-\email{michel@commutator.io}
-\thanks{ORCID 0009-0002-8304-0683. Working paper, first version, October 2026.}
-\date{25 October 2026}
+\title{Open questions from Grothendieck's Montpellier notes:\\ sixteen statements a formalisation could not reach}
+\author{Michel Hua\\ \small Commutator, Paris\\ \small\texttt{michel@commutator.io} · ORCID 0009-0002-8304-0683}
+\date{Working paper, 25 October 2026}
 
 \begin{document}
+
+
+
+\maketitle
 
 \begin{abstract}
 The University of Montpellier has put online 178 folders of Alexandre Grothendieck's mathematical working notes. Since August 2026 an edition has transcribed 164 of them with a language model, restated each in current notation, searched the literature for the statements they contain, and formalised what it could in Lean~4 against Mathlib. Most of the statements that look new sit in theories Mathlib does not have yet: étale cohomology, topoi, stacks, abelian schemes, motives. This note collects sixteen of them for mathematicians. Each comes with its folder and page, the context, what the literature search found, the argument the page gives or sketches, the steps the edition added, and what would settle it. None of the statements has been checked by a specialist, and several may already be in print; a reference is as welcome as a proof or a counterexample.
 \end{abstract}
 
-\maketitle
 
 \section{Why this note}
 
