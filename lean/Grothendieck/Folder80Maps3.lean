@@ -32,11 +32,16 @@ vertices, edges, incidence — with the line of each edge; `SkelIso` is an isomo
   fourth line `Δ` through none of its vertices, a triangle cycle bounds iff `Δ` crosses an even
   number of its sides. The canonical orientation `ω` of the triangle is therefore read on the
   skeleton, and it does not depend on `Δ`.
+* `line_cycle`, `seg_unique`: a cycle carried by one line is `0` or the line, so two segments of
+  a line with the same ends are equal or complementary: segments are read on the skeleton.
+* `SkelIso.triangle_map`: (A5) transported. A skeleton isomorphism carries a triangle cycle that
+  bounds to one that bounds, whenever a fourth line avoids the vertices of the triangle.
 
 **Not formalised.** That the face paths are read on the skeleton: conditions (A1)–(A4) (the
-cyclic order around a vertex, its lifts, the transport along an edge) and the cases (A6) and
-`III₆` of the canonical orientation, where every other line passes through a vertex of the
-triangle. These are what remains of the page 54 theorem.
+cyclic order around a vertex, its lifts, the transport along an edge, including the Jordan-type
+fact that the triangle cut out by a face path bounds) and the cases (A6) and `III₆` of the
+canonical orientation, where every other line passes through a vertex of the triangle. These are
+what remains of the page 54 theorem.
 -/
 
 namespace Grothendieck.Folder80Maps3
@@ -1135,6 +1140,164 @@ theorem lift_iff (hbf : BigonFree X.On) (hbf' : BigonFree X'.On) (hs : X.Straigh
     exact ⟨⟨g, g', congrFun l, congrFun r⟩, g0, g1, g2, gv, ge⟩
 
 end Lift
+
+/-! ### Segments of a line are read on the skeleton -/
+
+section Segments
+
+open Matrix
+
+open Classical in
+/-- **A cycle carried by one line is `0` or the whole line.** -/
+theorem line_cycle (hbf : BigonFree X.On) (hs : X.Straight) {l : L} {z : X.M.Edge → ZMod 2}
+    (hz : z ∈ X.Z1) (hl : ∀ e, z e ≠ 0 → X.lineE e = l) : z = 0 ∨ z = X.lineChain l := by
+  have hw : ∀ x, X.line x = l →
+      z (X.M.edge ((X.phi ^ X.nu (X.M.vtx x)) x)) = z (X.M.edge x) := fun x hx => by
+    have h0 := congrFun (LinearMap.mem_ker.1 hz) (X.M.vtx x)
+    simp only [Matrix.mulVecLin_apply, Pi.zero_apply] at h0
+    rw [incM_mulVec, Finset.sum_congr rfl
+      (g := fun e => if X.Inc (X.M.vtx x) e ∧ X.lineE e = X.line x then z e else 0) fun e _ => by
+        by_cases h1 : X.Inc (X.M.vtx x) e <;> by_cases h2 : X.lineE e = X.line x <;> simp [h1, h2]
+        exact by_contra fun h => h2 (hx ▸ hl e h), ← Finset.sum_filter, (line_edges hbf hs x).1,
+      Finset.sum_pair (line_edges hbf hs x).2] at h0
+    exact (two_eq _ _ h0).symm
+  have step : ∀ x y, X.M.vtx y = X.M.vtx x → X.line y = X.line x → X.line x = l →
+      z (X.M.edge y) = z (X.M.edge x) := fun x y hv hly hx => by
+    have : X.M.edge y ∈ Finset.univ.filter fun e => X.Inc (X.M.vtx x) e ∧ X.lineE e = X.line x :=
+      by simpa [hly] using ⟨y, hv, rfl⟩
+    rw [(line_edges hbf hs x).1] at this
+    rcases Finset.mem_insert.1 this with h | h
+    · rw [h]
+    · rw [Finset.mem_singleton.1 h, hw x hx]
+  have const : ∀ d e, X.line d = l → X.line e = l → z (X.M.edge e) = z (X.M.edge d) :=
+    fun d e hd he => (eqvGen_iff (fun x => X.line x = l → z (X.M.edge x) = z (X.M.edge d))
+      (by
+        rintro x y (rfl | ⟨h1, h2⟩)
+        · simp [X.line_a0]
+        · exact ⟨fun h hl' => (step x y h1 h2 (h2.symm.trans hl')).trans (h (h2.symm.trans hl')),
+            fun h hl' => (step x y h1 h2 hl').symm.trans (h (h2.trans hl'))⟩)
+      (X.conn d e (hd.trans he.symm))).1 (fun _ => rfl) he
+  by_cases h0 : ∃ d, X.line d = l
+  · obtain ⟨d0, hd0⟩ := h0
+    rcases zmod2_cases (z (X.M.edge d0)) with h | h
+    · refine .inl (funext fun e => ?_)
+      obtain ⟨d, rfl⟩ := edge_surj e
+      exact by_contra fun hne => hne (by rw [const d0 d hd0 (hl _ hne), h]; rfl)
+    · refine .inr (funext fun e => ?_)
+      obtain ⟨d, rfl⟩ := edge_surj e
+      simp only [lineChain]
+      split_ifs with hd
+      · rw [const d0 d hd0 hd, h]
+      · exact by_contra fun hne => hd (hl _ hne)
+  · exact .inl (funext fun e => by
+      obtain ⟨d, rfl⟩ := edge_surj e
+      exact by_contra fun hne => h0 ⟨d, hl _ hne⟩)
+
+open Classical in
+/-- **Segments are read on the skeleton.** Two chains carried by a line `l` with the same
+boundary (for instance two segments of `l` with the same ends) are equal or complementary in
+`l`; so a segment is determined by its ends and any one of its edges. -/
+theorem seg_unique (hbf : BigonFree X.On) (hs : X.Straight) {l : L} {P P' : X.M.Edge → ZMod 2}
+    (hP : ∀ e, P e ≠ 0 → X.lineE e = l) (hP' : ∀ e, P' e ≠ 0 → X.lineE e = l)
+    (h : X.incM *ᵥ P = X.incM *ᵥ P') : P' = P ∨ P' = P + X.lineChain l := by
+  have hz : P + P' ∈ X.Z1 := by
+    simp only [LinearMap.mem_ker, Matrix.mulVecLin_apply, Matrix.mulVec_add, h]
+    exact funext fun v => add_self' _
+  rcases line_cycle hbf hs hz fun e he => by_contra fun h' => he (by
+      simp [by_contra fun h => h' (hP e h), by_contra fun h => h' (hP' e h)]) with h0 | h0
+  · exact .inl (funext fun e => (two_eq _ _ (congrFun h0 e)).symm)
+  · refine .inr (funext fun e => ?_)
+    rw [Pi.add_apply, ← h0, Pi.add_apply, ← add_assoc, add_self', zero_add]
+
+end Segments
+
+/-! ### Transport of triangle orientations along a skeleton isomorphism -/
+
+section Transport
+
+open Matrix
+
+variable {D' L' : Type*} [Fintype D'] {X' : PseudolineMap D' L'}
+
+omit [Fintype D] in
+/-- A line passes through a vertex iff one of its edges ends there: `On` is read on the
+skeleton. -/
+theorem on_iff {v : X.M.Vtx} {l : L} : X.On v l ↔ ∃ e, X.Inc v e ∧ X.lineE e = l :=
+  ⟨fun ⟨d, hd, hl⟩ => ⟨X.M.edge d, ⟨d, hd, rfl⟩, hl⟩, fun ⟨_, h, hl⟩ => hl ▸ on_of_inc h⟩
+
+namespace SkelIso
+
+variable (f : SkelIso X X')
+
+omit [Fintype D] [Fintype D'] in
+theorem on_map {v : X.M.Vtx} {l : L} : X.On v l ↔ X'.On (f.fV v) (f.fL l) := by
+  simp only [on_iff]
+  constructor
+  · rintro ⟨e, h, rfl⟩; exact ⟨f.fE e, (f.inc _ _).1 h, f.line e⟩
+  · rintro ⟨e', h, hl⟩
+    refine ⟨f.fE.symm e', (f.inc _ _).2 (by simpa using h), f.fL.injective ?_⟩
+    rw [← f.line]; simpa using hl
+
+/-- The image of a chain of edges. -/
+def mapC (c : X.M.Edge → ZMod 2) : X'.M.Edge → ZMod 2 := c ∘ f.fE.symm
+
+omit [Fintype D] [Fintype D'] in
+@[simp] theorem mapC_apply (c : X.M.Edge → ZMod 2) (e : X.M.Edge) : f.mapC c (f.fE e) = c e := by
+  simp [mapC]
+
+omit [Fintype D] [Fintype D'] in
+theorem supp_map {c : X.M.Edge → ZMod 2} {a : L} (h : ∀ e, c e ≠ 0 → X.lineE e = a) (e' : X'.M.Edge)
+    (h' : f.mapC c e' ≠ 0) : X'.lineE e' = f.fL a := by
+  obtain ⟨e, rfl⟩ := f.fE.surjective e'
+  rw [f.line, h e (by rwa [mapC_apply] at h')]
+
+open Classical in
+theorem bd_map {c : X.M.Edge → ZMod 2} {p q : X.M.Vtx}
+    (h : X.incM *ᵥ c = Pi.single p 1 + Pi.single q 1) :
+    X'.incM *ᵥ f.mapC c = Pi.single (f.fV p) 1 + Pi.single (f.fV q) 1 := by
+  funext v'
+  obtain ⟨v, rfl⟩ := f.fV.surjective v'
+  have := congrFun h v
+  rw [incM_mulVec] at this ⊢
+  rw [← f.fE.sum_comp]
+  simp only [mapC_apply, ← f.inc]
+  simpa [Pi.single_apply] using this
+
+omit [Fintype D] [Fintype D'] in
+theorem meets_map {e : X.M.Edge} {a Δ : L} (h : X.lineE e = a ∧ ∃ w, X.Inc w e ∧ X.On w Δ) :
+    X'.lineE (f.fE e) = f.fL a ∧ ∃ w, X'.Inc w (f.fE e) ∧ X'.On w (f.fL Δ) := by
+  obtain ⟨rfl, w, h1, h2⟩ := h
+  exact ⟨f.line e, f.fV w, (f.inc _ _).1 h1, f.on_map.1 h2⟩
+
+open Classical in
+/-- **Skeleton isomorphisms preserve the orientation of triangles** ((A5) transported). For a
+triangle of three non-concurrent lines with a fourth line through none of its vertices, a
+triangle cycle bounds a union of faces iff its image by a skeleton isomorphism does. -/
+theorem triangle_map (hbf : BigonFree X.On) (hbf' : BigonFree X'.On) (hs : X.Straight)
+    (hs' : X'.Straight) {a b c Δ : L}
+    {pab pbc pca : X.M.Vtx} (hpab : X.On pab a ∧ X.On pab b) (hpbc : X.On pbc b ∧ X.On pbc c)
+    (hpca : X.On pca c ∧ X.On pca a) (hab : a ≠ b) (hnc : ¬X.On pab c)
+    (hΔ : ¬X.On pab Δ ∧ ¬X.On pbc Δ ∧ ¬X.On pca Δ) {Pa Pb Pc : X.M.Edge → ZMod 2}
+    (sa : ∀ e, Pa e ≠ 0 → X.lineE e = a) (sb : ∀ e, Pb e ≠ 0 → X.lineE e = b)
+    (sc : ∀ e, Pc e ≠ 0 → X.lineE e = c)
+    (ba : X.incM *ᵥ Pa = Pi.single pab 1 + Pi.single pca 1)
+    (bb : X.incM *ᵥ Pb = Pi.single pab 1 + Pi.single pbc 1)
+    (bc : X.incM *ᵥ Pc = Pi.single pbc 1 + Pi.single pca 1) {ea eb ec : X.M.Edge}
+    (ha : X.lineE ea = a ∧ ∃ w, X.Inc w ea ∧ X.On w Δ)
+    (hb : X.lineE eb = b ∧ ∃ w, X.Inc w eb ∧ X.On w Δ)
+    (hc : X.lineE ec = c ∧ ∃ w, X.Inc w ec ∧ X.On w Δ) :
+    Pa + Pb + Pc ∈ X.B1 ↔ f.mapC Pa + f.mapC Pb + f.mapC Pc ∈ X'.B1 := by
+  have o := fun {v} {l} => f.on_map (v := v) (l := l)
+  rw [triangle_iff hbf hs hpab hpbc hpca hab hnc hΔ sa sb sc ba bb bc ha hb hc,
+    triangle_iff hbf' hs' ⟨o.1 hpab.1, o.1 hpab.2⟩ ⟨o.1 hpbc.1, o.1 hpbc.2⟩
+      ⟨o.1 hpca.1, o.1 hpca.2⟩ (f.fL.injective.ne hab) (o.not.1 hnc)
+      ⟨o.not.1 hΔ.1, o.not.1 hΔ.2.1, o.not.1 hΔ.2.2⟩ (f.supp_map sa) (f.supp_map sb)
+      (f.supp_map sc) (f.bd_map ba) (f.bd_map bb) (f.bd_map bc) (f.meets_map ha)
+      (f.meets_map hb) (f.meets_map hc), mapC_apply, mapC_apply, mapC_apply]
+
+end SkelIso
+
+end Transport
 
 end PseudolineMap
 
