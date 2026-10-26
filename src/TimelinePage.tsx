@@ -7,6 +7,7 @@ import proposedRaw from './content/proposed-datings.json';
 import { CommentButton, commentData, useComments } from './components/Comments.tsx';
 import type { CommentContext } from './lib/report.ts';
 import { openEnd, parseDating, type Dating } from './lib/dating.ts';
+import { REDISCOVERIES, type Rediscovery } from './content/rediscoveries.ts';
 
 /**
  * When the folders were written — and how anyone knows.
@@ -533,6 +534,176 @@ function Volumes() {
   );
 }
 
+/* ---------- figure: statements of the notes found in print ---------- */
+
+type RediscoveryGroup = 'later' | 'concurrent' | 'own' | 'earlier' | 'unclear';
+const RD_GROUPS: { key: RediscoveryGroup; label: string; color: string; shape: 'circle' | 'square' | 'diamond' | 'ring' }[] = [
+  { key: 'later', label: 'Printed after the folder’s dating', color: '#38539d', shape: 'circle' },
+  { key: 'concurrent', label: 'Printed within the folder’s dating', color: 'var(--color-ink-500)', shape: 'circle' },
+  { key: 'own', label: 'His own printed work, or his circle’s', color: '#128557', shape: 'diamond' },
+  { key: 'earlier', label: 'Printed before the folder’s dating', color: '#eb6834', shape: 'square' },
+  { key: 'unclear', label: 'A textbook statement, no single source', color: 'var(--color-ink-400)', shape: 'ring' },
+];
+const rdGroup = (r: Rediscovery): RediscoveryGroup => (r.kind === 'circle' ? 'own' : r.kind);
+
+function RdMark({ shape, color, x, y, r = 3.4 }: { shape: string; color: string; x: number; y: number; r?: number }) {
+  if (shape === 'square') return <rect x={x - r} y={y - r} width={2 * r} height={2 * r} fill={color} />;
+  if (shape === 'diamond') return <rect x={x - r} y={y - r} width={2 * r} height={2 * r} fill={color} transform={`rotate(45 ${x} ${y})`} />;
+  if (shape === 'ring') return <circle cx={x} cy={y} r={r - 0.6} fill="#fff" stroke={color} strokeWidth={1.4} />;
+  return <circle cx={x} cy={y} r={r} fill={color} />;
+}
+
+function Rediscoveries() {
+  const [sel, setSel] = useState<Rediscovery | null>(null);
+  const W = 900;
+  const L = 74;
+  const R = 16;
+  const Y0 = 1950;
+  const Y1 = 2026;
+  const ROW = 9;
+  const HEAD = 18;
+  const x = (y: number) => L + ((Math.max(Y0, Math.min(Y1, y)) - Y0) / (Y1 - Y0)) * (W - L - R);
+  const lag = (r: Rediscovery) => (r.pub > r.to ? r.pub - r.to : r.pub < r.from ? r.pub - r.from : 0);
+  const groups = RD_GROUPS.map((g) => ({
+    ...g,
+    rows: REDISCOVERIES.filter((r) => rdGroup(r) === g.key).sort((a, b) => lag(b) - lag(a) || a.from - b.from),
+  }));
+  let yy = 26;
+  const layout = groups.map((g) => {
+    const top = yy;
+    yy += HEAD + g.rows.length * ROW + 6;
+    return { ...g, top };
+  });
+  const H = yy + 4;
+  const ticks = [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
+  const count = (k: RediscoveryGroup) => REDISCOVERIES.filter((r) => rdGroup(r) === k).length;
+  return (
+    <section className="mt-12">
+      <H2 id="found-in-print">Statements of the notes found in print</H2>
+      <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
+        The {REDISCOVERIES.length} mathematical findings that the edition later found in the literature. Each row sets the
+        folder’s dating, as a grey bar, against the year of the printed source that matches it. {count('later')} were printed
+        after the end of the folder’s dating, often decades later; {count('earlier')} before it, results he redid in his own
+        notation without citing them; {count('own')} are his own printed work or his students’ and colleagues’; {count('concurrent')}{' '}
+        appeared within the dating. The datings are the inventory’s, often inferred, so none of this is a claim of priority.
+        Sources before 1950 are pinned to the left edge. Hover a row for the folder and the source.
+      </p>
+      <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[12px] text-ink-600">
+        {RD_GROUPS.map((g) => (
+          <span key={g.key} className="inline-flex items-center gap-1.5">
+            <svg width="12" height="12" aria-hidden="true">
+              <RdMark shape={g.shape} color={g.color} x={6} y={6} />
+            </svg>
+            {g.label} ({count(g.key)})
+          </span>
+        ))}
+        <span className="inline-flex items-center gap-1.5">
+          <svg width="18" height="8" aria-hidden="true">
+            <rect x="1" y="2" width="16" height="4" fill="var(--color-ink-200)" />
+          </svg>
+          Folder’s dating (inventory)
+        </span>
+      </div>
+      <div className="mt-3 overflow-x-auto" onMouseLeave={() => setSel(null)}>
+        <svg
+          viewBox={`0 0 ${W} ${H}`}
+          className="w-full min-w-[640px] rounded-[var(--radius-card)] border border-ink-200 bg-white"
+          role="img"
+          aria-label="For each statement of the notes found in print, the folder's dating and the year of the matching source"
+        >
+          {ticks.map((t) => (
+            <g key={t}>
+              <line x1={x(t)} x2={x(t)} y1={18} y2={H - 4} stroke="var(--color-ink-100)" strokeWidth={1} />
+              <text x={x(t)} y={13} textAnchor="middle" className="tabular" style={{ fontSize: 10, fill: 'var(--color-ink-500)' }}>
+                {t}
+              </text>
+            </g>
+          ))}
+          {layout.map((g) => (
+            <g key={g.key}>
+              <text x={8} y={g.top + 12} style={{ fontSize: 10.5, fontWeight: 600, fill: 'var(--color-ink-700)' }}>
+                {g.label}
+              </text>
+              {g.rows.map((r, i) => {
+                const y = g.top + HEAD + i * ROW + ROW / 2;
+                const on = sel === null || sel === r;
+                const x0 = x(r.from);
+                const x1 = Math.max(x(r.to), x0 + 2);
+                const xp = x(r.pub);
+                return (
+                  <g key={r.id} opacity={on ? 1 : 0.3} onMouseEnter={() => setSel(r)} style={{ cursor: 'pointer' }}>
+                    <rect x={0} y={y - ROW / 2} width={W} height={ROW} fill="transparent" />
+                    <text x={L - 8} y={y + 3} textAnchor="end" className="tabular" style={{ fontSize: 8.5, fill: 'var(--color-ink-500)' }}>
+                      {r.cote}
+                    </text>
+                    <line x1={Math.min(xp, x0)} x2={Math.max(xp, x1)} y1={y} y2={y} stroke={g.color} strokeWidth={0.8} opacity={0.5} />
+                    <rect x={x0} y={y - 2} width={x1 - x0} height={4} fill={r.open ? 'var(--color-ink-100)' : 'var(--color-ink-200)'} />
+                    {r.pub < Y0 && (
+                      <text x={xp + 6} y={y + 3} style={{ fontSize: 8, fill: 'var(--color-ink-500)' }}>
+                        {r.pub}
+                      </text>
+                    )}
+                    <RdMark shape={g.shape} color={g.color} x={xp} y={y} />
+                  </g>
+                );
+              })}
+            </g>
+          ))}
+        </svg>
+      </div>
+      <p className="mt-2 min-h-[2.5em] text-[12.5px] leading-relaxed text-ink-600">
+        {sel ? (
+          <>
+            <span className="font-semibold text-ink-900">Folder {sel.cote}</span>, dated {sel.from}
+            {sel.to !== sel.from ? `–${sel.to}` : ''}
+            {sel.open ? ' (lower bound only)' : ''} · <span className="text-ink-800">{sel.source}</span> ({sel.pub}) ·{' '}
+            <a href={`/findings/#${sel.id}`} className="text-brand-700 hover:underline">
+              the finding
+            </a>
+          </>
+        ) : (
+          <span className="text-ink-400">Hover a row for the folder, its dating and the printed source.</span>
+        )}
+      </p>
+      <details className="mt-2 text-[12.5px] text-ink-600">
+        <summary className="cursor-pointer text-ink-500 hover:text-brand-700">The rows as a table</summary>
+        <table className="mt-2 w-full max-w-[56em] border-collapse">
+          <thead>
+            <tr className="text-left text-ink-500">
+              <th className="py-1 pr-3 font-semibold">Folder</th>
+              <th className="py-1 pr-3 font-semibold">Dating</th>
+              <th className="py-1 pr-3 font-semibold">Source</th>
+              <th className="py-1 pr-3 text-right font-semibold">Year</th>
+              <th className="py-1 font-semibold">Relation</th>
+            </tr>
+          </thead>
+          <tbody>
+            {groups.flatMap((g) =>
+              g.rows.map((r) => (
+                <tr key={r.id} className="border-t border-ink-100">
+                  <td className="tabular py-1 pr-3">
+                    <a href={`/findings/#${r.id}`} className="hover:text-brand-700">
+                      {r.cote}
+                    </a>
+                  </td>
+                  <td className="tabular py-1 pr-3">
+                    {r.from}
+                    {r.to !== r.from ? `–${r.to}` : ''}
+                    {r.open ? '+' : ''}
+                  </td>
+                  <td className="py-1 pr-3 text-ink-800">{r.source}</td>
+                  <td className="tabular py-1 pr-3 text-right">{r.pub}</td>
+                  <td className="py-1 text-ink-500">{g.label}</td>
+                </tr>
+              )),
+            )}
+          </tbody>
+        </table>
+      </details>
+    </section>
+  );
+}
+
 /* ---------- figure 1: the ranges and the dots ---------- */
 
 /**
@@ -1019,6 +1190,7 @@ export function TimelinePage() {
         <Ranges />
         <Works />
         <Volumes />
+        <Rediscoveries />
         <Strips />
         <Calendar />
         <Register />
