@@ -1937,13 +1937,10 @@ theorem pairMap_bijective (R : P.Representation) (n : ℕ) (W X Y : C) : Functio
   let e : (R.obj n W ⟶ X ⨯ Y) ≃ (R.obj n W ⟶ X) × (R.obj n W ⟶ Y) :=
     ⟨fun φ => (φ ≫ prod.fst, φ ≫ prod.snd), fun p => prod.lift p.1 p.2,
       fun φ => by ext <;> simp, fun p => by simp⟩
-  have : P.pairMap n W X Y =
-      (e.trans ((R.rep n W X).prodCongr (R.rep n W Y))) ∘ (R.rep n W _).symm := by
-    ext1 a
-    obtain ⟨φ, rfl⟩ := (R.rep n W _).surjective a
-    simp [e, pairMap_rep R]
-  rw [this]
-  exact (Equiv.bijective _).comp (Equiv.bijective _)
+  convert (e.trans ((R.rep n W X).prodCongr (R.rep n W Y))).bijective.comp (R.rep n W _).symm.bijective
+  ext1 a
+  obtain ⟨φ, rfl⟩ := (R.rep n W _).surjective a
+  simp [e, pairMap_rep R]
 
 /-- The pairing `(f, g) ↦ (f, g) : W → X × Y` in degree `n`. -/
 noncomputable def pairEquiv (R : P.Representation) (n : ℕ) (W X Y : C) : P.Hom n W (X ⨯ Y) ≃ P.Hom n W X × P.Hom n W Y :=
@@ -1969,14 +1966,13 @@ noncomputable def add (R : P.Representation) {n : ℕ} {W X : C} (a b : P.Hom n 
 
 lemma rep_add (R : P.Representation) {n : ℕ} {W X : C} (φ ψ : R.obj n W ⟶ X) :
     R.rep n W X (φ + ψ) = add R (R.rep n W X φ) (R.rep n W X ψ) := by
-  rw [add, pairEquiv_symm_rep, ← Representation.rep_comp]
-  simp
+  simp [add, pairEquiv_symm_rep, ← Representation.rep_comp]
 
 /-- The sum is the group law of `Hom(Γⁿ W, X)` carried by `φ ↦ φ ∘ γₙ`: an abelian group
 law on `𝐏ₙ(W, X)`. -/
 theorem add_eq (R : P.Representation) {n : ℕ} {W X : C} (a b : P.Hom n W X) :
     add R a b = R.rep n W X ((R.rep n W X).symm a + (R.rep n W X).symm b) := by
-  rw [rep_add, Equiv.apply_symm_apply, Equiv.apply_symm_apply]
+  simp [rep_add]
 
 /-- `(f + g) ∘ h = f ∘ h + g ∘ h`, for `h` of any degree (p. 74). -/
 theorem comp_add (R : P.Representation) {p q n : ℕ} {V W X : C} (h : P.Hom p V W) (a b : P.Hom q W X)
@@ -1991,9 +1987,8 @@ theorem comp_add (R : P.Representation) {p q n : ℕ} {V W X : C} (h : P.Hom p V
 
 /-- On degree one, the sum is the addition of `C` (axiom c)). -/
 theorem ι_add (R : P.Representation) {W X : C} (f g : W ⟶ X) : add R (P.ι f) (P.ι g) = P.ι (f + g) := by
-  have : (pairEquiv R 1 W X X).symm (P.ι f, P.ι g) = P.ι (prod.lift f g) :=
-    (Equiv.symm_apply_eq _).2 (by simp [pairEquiv, P.pairMap_ι])
-  rw [add, this, ← P.ι_comp]
+  rw [add, show (pairEquiv R 1 W X X).symm (P.ι f, P.ι g) = P.ι (prod.lift f g) from
+    (Equiv.symm_apply_eq _).2 (by simp [pairEquiv, P.pairMap_ι]), ← P.ι_comp]
   simp
 
 end Additive
