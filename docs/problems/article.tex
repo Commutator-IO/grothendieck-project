@@ -306,7 +306,7 @@ A bigon-free arrangement $\mathcal A$ either is $\mathrm{II}_4$ or contains $\ma
 \emph{The numbering.} Adding pseudolines never removes a vertex from a pseudoline already there, so it suffices that each pseudoline, when added, meets the earlier ones in at least three points. A pseudoline meets the six sides of a $\mathrm{III}_6$ in at least three points: its vertices have multiplicity at most three, and two triple points share a side, so two vertices cover at most five sides. So if $\mathcal A \supseteq \mathrm{III}_6$, start there and add the rest in any order. Otherwise $\mathcal A$ contains at most one diagonal $\delta$ of $Q$: start from $Q$, add every pseudoline other than $\delta$ (each meets $Q$ in at least three points), and add $\delta$ last, when it has all its vertices in $\mathcal A$, at least three.
 \end{proof}
 
-This agrees with a computer enumeration of all arrangements of at most nine pseudolines (\nolinkurl{computations/bigon}). We have not found the statement in print; it is elementary, and probably folklore among people who work on arrangements.
+This agrees with a computer enumeration of all arrangements of at most nine pseudolines (\nolinkurl{computations/bigon}). The dichotomy is also checked in Lean for combinatorial maps (generalised maps of Euler characteristic~$1$ whose flags are labelled by the pseudolines; \nolinkurl{lean/Grothendieck/Folder80Maps2.lean}, \texttt{map\_dichotomy}); the numbering and the passage from a topological arrangement to its map are not formalised. We have not found the statement in print; it is elementary, and probably folklore among people who work on arrangements.
 
 \begin{problem}[A bigon-free arrangement is determined by its skeleton]\label{p:skel}
 Is a combinatorial arrangement of pseudolines in the real projective plane without bigonal pseudolines determined by its $1$-skeleton together with the decomposition of the edges into pseudolines, functorially: is the functor from bigon-free arrangements to their decomposed skeleta fully faithful, so that every automorphism of the decomposed skeleton comes from the arrangement?
@@ -318,9 +318,9 @@ Is a combinatorial arrangement of pseudolines in the real projective plane witho
 
 \ideas Our pointer, unchecked: if the graph is $3$-connected and its embedding has face-width at least~$3$, these uniqueness theorems give the statement, without even the decomposition into pseudolines, since an automorphism then maps facial walks to facial walks. A non-contractible curve meets every pseudoline, so face-width~$2$ means two points covering all of them; for a bigon-free arrangement this happens exactly for two pencils with no pseudoline through both centres, such as $\mathrm{II}_4$ and $\mathrm{II}'_{3,2}$, which then need a separate argument, as does $3$-connectivity in the non-simple case.
 
-\leanst Not attempted: maps on surfaces are not in Mathlib.
+\leanst Partly proved, in the combinatorial maps of page~60 with its axiom that each pseudoline goes straight through each vertex (\nolinkurl{lean/Grothendieck/Folder80Maps3.lean}). The functor is faithful (\texttt{faithful}). A skeleton isomorphism comes from an isomorphism of arrangements exactly when it preserves the face paths of length three, which is page~41's theorem (\texttt{lift\_iff}), so fullness comes down to reading these paths on the skeleton. Also proved: the mod~$2$ homology of the map (the cycles modulo the boundaries have dimension at most~$1$), and (A5), the orientation of a triangle read on the skeleton when a fourth pseudoline avoids its vertices. Not formalised: (A1)--(A4), (A6) and the complete quadrangle, hence not full faithfulness.
 
-\settle A proof of (A1)--(A6), or the face-width bound with a uniqueness theorem.
+\settle A proof of (A1)--(A4), (A6), or the face-width bound with a uniqueness theorem.
 
 \section{How the list was made, and its limits}
 
