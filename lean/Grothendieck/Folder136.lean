@@ -659,3 +659,443 @@ theorem pd_row_cohomology (n : ℕ) :
 end PDKoszul
 
 end Grothendieck.Folder136
+
+/-!
+# Folder 136, pages 5 to 7: the coordinate model is `Γ^•Φ ⊗ Λ^qΨ`, simplicially
+
+The section above works in the coordinate model `k{T}{Y_1, …, Y_m}[dY_1, …, dY_m]` that
+pages 5–7 give for `C^{••}_{[m]}`. Here the model is identified with the reading's
+`C^{•,q}_{[m]} = Γ_k(Φ_[m]) ⊗_k Λ^q_k Ψ_[m]`, `Φ_[m] = k^{m+1}`, `Ψ_[m] = Φ_[m]/k·T`,
+`T = ∑ Xᵢ = (1, …, 1)`, over any commutative ring `k`, and the simplicial structure is built.
+
+* `dp_prod_linearIndependent`, `dpBasis`: **the basis theorem for `Γ` of a free module of
+  finite rank** — for a basis `(bᵢ)` of `M`, the `∏ᵢ bᵢ^{(aᵢ)}` are a basis of `Γ_k(M)`.
+  Mathlib defines `Γ_k(M)` (`DividedPowerAlgebra`) and proves that these products span; their
+  independence is new here. The proof maps `Γ_k(M)` to the convolution algebra
+  `(Sym M^∨)^*` of the primitively generated bialgebra `Sym M^∨`, by `x^{(n)} ↦ (coefficient of
+  Xⁿ in φ ↦ φ(x) X)` (`pdRep`, the four relations `pdF_zero`, `pdF_smul`, `pdF_mul`,
+  `pdF_add`); there `∏ᵢ bᵢ^{(aᵢ)}` becomes the coefficient of `X^a` after
+  `φ ↦ ∑ φ(bᵢ) Xᵢ` (`pdRep_prod`), which is `1` on `∏ (b^∨ᵢ)^{aᵢ}` and `0` on the other
+  monomials. No division is used.
+* `tyBasis`: the basis `T, Y₁, …, Y_m` (`Yᵢ = Xᵢ`, `X₀ = T − ∑ Yᵢ`) of `Φ_[m]`;
+  `psiBasis`: the basis `dY₁, …, dY_m` of `Ψ_[m]`; `pdModelBasis`, `pdModelBasis_apply`: the
+  basis `T^{(a)} Y^{(β)} ⊗ dY_I`, `|I| = q`, of `Γ(Φ_[m]) ⊗ Λ^qΨ_[m]` — exactly the
+  monomials whose coefficients `f a β I` the section above works with.
+* `dp_one_mul_dpBasis`: `T^{(j)} T^{(a)} Y^{(β)} = c_{j,a} T^{(a+j)} Y^{(β)}`, the
+  `k{T}`-module structure `tMul` of the coefficient model.
+* `pdSimplicial`: the simplicial `k`-module `[n] ↦ Γ(Φ_[n]) ⊗ Λ^qΨ_[n]`, `θ ↦ Γ(Φ(θ)) ⊗
+  Λ^q(Ψ(θ))`, `Φ(θ) = (f ↦ f ∘ θ)` (`pdModelMap_id`, `pdModelMap_comp`); `pdModelMap_tPow`:
+  `T^{(p)}` is a simplicial section, the augmentation `k_* → C^{p,0}_*`.
+
+Not formalised: the differential `d(x^{(n)}) = x^{(n−1)} dx` on `Γ(Φ) ⊗ Λ^•Ψ` and its
+agreement with `pdD` in the basis, the grading by `p` (Mathlib's `Γ` is not yet graded) and
+the product of `Γ ⊗ Λ^•`, the presentation `S{X₀, …, X_n}[dX]/(∑Xᵢ − t, ∑dXᵢ)_pd` of page 5,
+and the transport of the face maps into the coordinates `(T, Y)`.
+-/
+
+open TensorProduct Coalgebra WithConv Polynomial Finset
+
+namespace Grothendieck.Folder136
+
+section PDBasis
+
+variable (k : Type*) [CommRing k] {M : Type*} [AddCommGroup M] [Module k M]
+
+local notation "Cd" => SymmetricAlgebra k (Module.Dual k M)
+
+/-- Evaluation at `m`: `Sym M^∨ → k[X]`, `φ ↦ φ(m) X`. -/
+noncomputable def pdEv (m : M) : Cd →ₐ[k] k[X] :=
+  SymmetricAlgebra.lift ((Module.Dual.eval k M m).smulRight X)
+
+@[simp] theorem pdEv_ι (m : M) (φ : Module.Dual k M) :
+    pdEv k m (SymmetricAlgebra.ι k _ φ) = φ m • X := by
+  simp [pdEv]
+
+/-- The image of `m^{(n)}`: the coefficient of `Xⁿ` after `pdEv m`. -/
+noncomputable def pdF (p : ℕ × M) : WithConv (Cd →ₗ[k] k) :=
+  toConv (lcoeff k p.1 ∘ₗ (pdEv k p.2).toLinearMap)
+
+theorem pdF_zero (m : M) : pdF k (0, m) = 1 := by
+  have : (Polynomial.aeval (0 : k)).comp (pdEv k m) = Bialgebra.counitAlgHom k Cd :=
+    SymmetricAlgebra.algHom_ext (by ext; simp [SymmetricAlgebra.algebraMapInv_ι])
+  apply ofConv_injective; ext c
+  rw [pdF, ofConv_toConv, LinearMap.comp_apply, lcoeff_apply, coeff_zero_eq_eval_zero,
+    ← coe_aeval_eq_eval]
+  exact congr($this c)
+
+theorem coeff_aeval_C_mul_X (r : k) (n : ℕ) (q : k[X]) :
+    (aeval (C r * X) q).coeff n = r ^ n * q.coeff n := by
+  induction q using Polynomial.induction_on' with
+  | add p q hp hq => simp [hp, hq, mul_add]
+  | monomial N a =>
+    simp only [aeval_monomial, algebraMap_eq, mul_pow, ← C_pow, ← mul_assoc, ← C_mul,
+      coeff_C_mul_X_pow, coeff_monomial]
+    split_ifs <;> simp_all [mul_comm]
+
+theorem pdF_smul (n : ℕ) (r : k) (m : M) : pdF k (n, r • m) = r ^ n • pdF k (n, m) := by
+  have : pdEv k (r • m) = (aeval (C r * X)).comp (pdEv k m) :=
+    SymmetricAlgebra.algHom_ext (by ext; simp [smul_eq_C_mul, mul_assoc, coeff_C_mul, mul_left_comm])
+  apply ofConv_injective; ext c
+  simp [pdF, this, coeff_aeval_C_mul_X]
+
+/-- `(a ⊗ 1 + 1 ⊗ b)^N = ∑ binom(N, i) aⁱ ⊗ bʲ`. -/
+theorem add_tmul_one_pow {A B : Type*} [CommRing A] [Algebra k A] [CommRing B] [Algebra k B]
+    (a : A) (b : B) (N : ℕ) : (a ⊗ₜ[k] (1 : B) + 1 ⊗ₜ b) ^ N =
+      ∑ x ∈ antidiagonal N, N.choose x.1 • ((a ^ x.1) ⊗ₜ[k] (b ^ x.2)) := by
+  rw [(Commute.all _ _).add_pow']
+  simp [Algebra.TensorProduct.tmul_pow]
+
+/-- The comultiplication of `k[X]`, `X ↦ X ⊗ 1 + 1 ⊗ X`. -/
+noncomputable abbrev polyComul : k[X] →ₐ[k] k[X] ⊗[k] k[X] := aeval (X ⊗ₜ 1 + 1 ⊗ₜ X)
+
+theorem pdEv_comul (m : M) :
+    (Algebra.TensorProduct.map (pdEv k m) (pdEv k m)).comp (Bialgebra.comulAlgHom k Cd) =
+      (polyComul k).comp (pdEv k m) :=
+  SymmetricAlgebra.algHom_ext (by ext; simp [smul_tmul'])
+
+theorem polyComul_monomial (N : ℕ) (a : k) :
+    polyComul k (monomial N a) =
+      ∑ x ∈ antidiagonal N, (a * N.choose x.1) • (((X : k[X]) ^ x.1) ⊗ₜ[k] ((X : k[X]) ^ x.2)) := by
+  rw [← C_mul_X_pow_eq_monomial, map_mul, map_pow, aeval_X, add_tmul_one_pow, aeval_C, mul_sum]
+  refine sum_congr rfl fun x _ => ?_
+  rw [mul_smul, ← Algebra.smul_def, Nat.cast_smul_eq_nsmul]
+
+theorem polyComul_coeff (n p : ℕ) (q : k[X]) :
+    LinearMap.mul' k k (map (lcoeff k n) (lcoeff k p) (polyComul k q)) =
+      (n + p).choose n * q.coeff (n + p) := by
+  induction q using Polynomial.induction_on' with
+  | add p q hp hq => simp [hp, hq, mul_add]
+  | monomial N a =>
+    rw [polyComul_monomial, map_sum, map_sum]
+    by_cases h : n + p = N
+    · subst h
+      rw [sum_eq_single (n, p) (fun x hx hne => ?_) (by simp)]
+      · simp [mul_comm]
+      · rw [HasAntidiagonal.mem_antidiagonal] at hx
+        simp only [map_smul, map_tmul, lcoeff_apply, coeff_X_pow, LinearMap.mul'_apply]
+        split_ifs <;> simp_all [Prod.ext_iff]
+    · rw [sum_eq_zero fun x hx => ?_]
+      · simp [coeff_monomial, Ne.symm h]
+      rw [HasAntidiagonal.mem_antidiagonal] at hx
+      simp only [map_smul, map_tmul, lcoeff_apply, coeff_X_pow, LinearMap.mul'_apply]
+      split_ifs <;> simp_all
+
+theorem pdF_map_comul (n p : ℕ) (u v : M) (c : Cd) :
+    map (pdF k (n, u)).ofConv (pdF k (p, v)).ofConv (comul c) =
+      map (lcoeff k n) (lcoeff k p)
+        (Algebra.TensorProduct.map (pdEv k u) (pdEv k v) (Bialgebra.comulAlgHom k Cd c)) := by
+  rw [pdF, pdF, ofConv_toConv, ofConv_toConv, TensorProduct.map_comp]
+  rfl
+
+theorem pdF_mul (n p : ℕ) (m : M) :
+    pdF k (n, m) * pdF k (p, m) = (n + p).choose n • pdF k (n + p, m) := by
+  apply ofConv_injective; ext c
+  rw [LinearMap.convMul_apply, pdF_map_comul, ← AlgHom.comp_apply, pdEv_comul, AlgHom.comp_apply,
+    polyComul_coeff, ofConv_smul]
+  simp [pdF]
+
+theorem coeff_lmul' (n : ℕ) (t : k[X] ⊗[k] k[X]) :
+    ∑ x ∈ antidiagonal n, LinearMap.mul' k k (map (lcoeff k x.1) (lcoeff k x.2) t) =
+      (Algebra.TensorProduct.lmul' k t).coeff n := by
+  induction t with
+  | tmul x y => simp [coeff_mul]
+  | add x y hx hy => simp [sum_add_distrib, hx, hy]
+
+theorem pdF_add (n : ℕ) (u v : M) :
+    pdF k (n, u + v) = ∑ x ∈ antidiagonal n, pdF k (x.1, u) * pdF k (x.2, v) := by
+  have : ((Algebra.TensorProduct.lmul' k).comp (Algebra.TensorProduct.map (pdEv k u)
+      (pdEv k v))).comp (Bialgebra.comulAlgHom k Cd) = pdEv k (u + v) :=
+    SymmetricAlgebra.algHom_ext (by ext; simp [add_smul])
+  apply ofConv_injective; ext c
+  simp only [ofConv_sum, LinearMap.sum_apply, LinearMap.convMul_apply, pdF_map_comul]
+  rw [coeff_lmul', ← AlgHom.comp_apply, ← AlgHom.comp_apply, this]
+  rfl
+
+/-- The algebra map `Γ(M) → (Sym M^∨)^*`, `x^{(n)} ↦ (φ₁ ⋯ φ_r ↦ [r = n] ∏ φᵢ(x))`. -/
+noncomputable def pdRep : DividedPowerAlgebra k M →ₐ[k] WithConv (Cd →ₗ[k] k) :=
+  DividedPowerAlgebra.lift' (f := pdF k) (pdF_zero k) (pdF_smul k) (pdF_mul k) (pdF_add k)
+
+theorem pdRep_dp (n : ℕ) (m : M) : pdRep k (DividedPowerAlgebra.dp k n m) = pdF k (n, m) :=
+  DividedPowerAlgebra.lift'_apply_dp ..
+
+variable {σ : Type*} [Fintype σ] [DecidableEq σ] (b : Module.Basis σ k M)
+
+/-- `Sym M^∨ → k[X_σ]`, `φ ↦ ∑ φ(bᵢ) Xᵢ`. -/
+noncomputable def pdCoordEv : Cd →ₐ[k] MvPolynomial σ k :=
+  SymmetricAlgebra.lift (∑ i, (Module.Dual.eval k M (b i)).smulRight (MvPolynomial.X i))
+
+omit [DecidableEq σ] in
+@[simp] theorem pdCoordEv_ι (φ : Module.Dual k M) :
+    pdCoordEv k b (SymmetricAlgebra.ι k _ φ) = ∑ i, φ (b i) • MvPolynomial.X i := by
+  simp [pdCoordEv]
+
+/-- `Xⱼ ↦ 1 ⊗ Xⱼ` for `j ≠ i`, `Xᵢ ↦ X ⊗ 1 + 1 ⊗ Xᵢ`. -/
+noncomputable def pdTheta (i : σ) : MvPolynomial σ k →ₐ[k] k[X] ⊗[k] MvPolynomial σ k :=
+  MvPolynomial.aeval fun j => (if j = i then X else 0) ⊗ₜ 1 + 1 ⊗ₜ MvPolynomial.X j
+
+theorem pdEv_comul_EV (i : σ) :
+    (Algebra.TensorProduct.map (pdEv k (b i)) (pdCoordEv k b)).comp (Bialgebra.comulAlgHom k Cd) =
+      (pdTheta k i).comp (pdCoordEv k b) :=
+  SymmetricAlgebra.algHom_ext (by
+    ext φ
+    simp [pdTheta, smul_add, sum_add_distrib, tmul_sum, smul_tmul', ite_tmul, smul_ite])
+
+omit [Fintype σ] in
+theorem pdTheta_monomial (i : σ) (γ : σ →₀ ℕ) (c : k) :
+    pdTheta k i (MvPolynomial.monomial γ c) =
+      ((X : k[X]) ⊗ₜ[k] (1 : MvPolynomial σ k) + 1 ⊗ₜ MvPolynomial.X i) ^ γ i *
+        (1 ⊗ₜ MvPolynomial.monomial (γ.erase i) c) := by
+  conv_lhs => rw [← Finsupp.single_add_erase i γ, ← one_mul c, ← MvPolynomial.monomial_mul_monomial,
+    ← MvPolynomial.X_pow_eq_monomial]
+  rw [map_mul, map_pow, pdTheta, MvPolynomial.aeval_X, MvPolynomial.monomial_eq,
+    map_mul, MvPolynomial.aeval_C, map_finsuppProd]
+  simp only [↓reduceIte]
+  congr 1
+  rw [← Algebra.TensorProduct.includeRight_apply, map_mul,
+    map_finsuppProd, ← MvPolynomial.algebraMap_eq, AlgHom.commutes]
+  refine congrArg _ (Finsupp.prod_congr fun j hj => ?_)
+  rw [Finsupp.support_erase, mem_erase] at hj
+  simp [hj.1]
+
+omit [Fintype σ] in
+theorem pdTheta_coeff (i : σ) (n : ℕ) {a : σ →₀ ℕ} (ha : a i = 0) (q : MvPolynomial σ k) :
+    LinearMap.mul' k k (TensorProduct.map (lcoeff k n) (MvPolynomial.lcoeff k a) (pdTheta k i q)) =
+      q.coeff (Finsupp.single i n + a) := by
+  induction q using MvPolynomial.induction_on' with
+  | add p q hp hq => simp [hp, hq]
+  | monomial γ c =>
+    have key : ∀ x ∈ antidiagonal (γ i), LinearMap.mul' k k (TensorProduct.map (lcoeff k n)
+        (MvPolynomial.lcoeff k a) ((γ i).choose x.1 • (((X : k[X]) ^ x.1) ⊗ₜ[k]
+          (MvPolynomial.X i ^ x.2)) * (1 ⊗ₜ MvPolynomial.monomial (γ.erase i) c))) =
+        if x = (n, 0) ∧ γ.erase i = a then c else 0 := by
+      intro x hx
+      rw [HasAntidiagonal.mem_antidiagonal] at hx
+      rw [smul_mul_assoc, Algebra.TensorProduct.tmul_mul_tmul, mul_one,
+        MvPolynomial.X_pow_eq_monomial, MvPolynomial.monomial_mul_monomial, one_mul]
+      simp only [map_nsmul, map_tmul, lcoeff_apply, coeff_X_pow, MvPolynomial.lcoeff_apply,
+        MvPolynomial.coeff_monomial, LinearMap.mul'_apply]
+      have e : Finsupp.single i x.2 + γ.erase i = a ↔ x.2 = 0 ∧ γ.erase i = a := by
+        refine ⟨fun h => ?_, fun h => by simp [h.1, h.2]⟩
+        have h2 : x.2 = 0 := by simpa [ha] using DFunLike.congr_fun h i
+        exact ⟨h2, by simpa [h2] using h⟩
+      obtain ⟨x1, x2⟩ := x
+      simp only at hx e ⊢
+      simp only [e]
+      by_cases h1 : n = x1 <;> by_cases h2 : x2 = 0 <;> simp [h1, h2, @eq_comm _ x1] at hx ⊢
+      subst hx
+      simp
+    rw [pdTheta_monomial, add_tmul_one_pow, sum_mul, map_sum, map_sum, sum_congr rfl key]
+    have e : γ = Finsupp.single i n + a ↔ γ i = n ∧ γ.erase i = a := by
+      refine ⟨fun h => ?_, fun h => ?_⟩
+      · subst h; simp [ha, Finsupp.erase_add]
+      · rw [← Finsupp.single_add_erase i γ, h.1, h.2]
+    simp only [ite_and, sum_ite_eq', MvPolynomial.coeff_monomial, e,
+      HasAntidiagonal.mem_antidiagonal, add_zero, @eq_comm _ n]
+
+/-- The coefficient of `X^a` after `pdCoordEv`: the dual basis element of `∏ bᵢ^{(aᵢ)}`. -/
+noncomputable def pdFF (a : σ →₀ ℕ) : WithConv (Cd →ₗ[k] k) :=
+  toConv (MvPolynomial.lcoeff k a ∘ₗ (pdCoordEv k b).toLinearMap)
+
+omit [DecidableEq σ] in
+theorem pdFF_zero : pdFF k b 0 = 1 := by
+  have : (MvPolynomial.aeval (0 : σ → k)).comp (pdCoordEv k b) = Bialgebra.counitAlgHom k Cd :=
+    SymmetricAlgebra.algHom_ext (by ext; simp [SymmetricAlgebra.algebraMapInv_ι])
+  apply ofConv_injective; ext c
+  have h := congr($this c)
+  rw [AlgHom.comp_apply, MvPolynomial.aeval_zero, Algebra.algebraMap_self, RingHom.id_apply] at h
+  exact h
+
+theorem pdF_mul_pdFF (i : σ) (n : ℕ) {a : σ →₀ ℕ} (ha : a i = 0) :
+    pdF k (n, b i) * pdFF k b a = pdFF k b (Finsupp.single i n + a) := by
+  apply ofConv_injective; ext c
+  have : TensorProduct.map (pdF k (n, b i)).ofConv (pdFF k b a).ofConv (comul c) =
+      TensorProduct.map (lcoeff k n) (MvPolynomial.lcoeff k a)
+        (Algebra.TensorProduct.map (pdEv k (b i)) (pdCoordEv k b) (Bialgebra.comulAlgHom k Cd c)) := by
+    rw [pdF, pdFF, ofConv_toConv, ofConv_toConv, TensorProduct.map_comp]
+    rfl
+  rw [LinearMap.convMul_apply, this, ← AlgHom.comp_apply, pdEv_comul_EV, AlgHom.comp_apply,
+    pdTheta_coeff k i n ha]
+  rfl
+
+theorem pdRep_prod (a : σ →₀ ℕ) :
+    pdRep k (a.prod fun i n => DividedPowerAlgebra.dp k n (b i)) = pdFF k b a := by
+  induction a using Finsupp.induction with
+  | zero => simp [pdFF_zero]
+  | single_add i n a hi hn ih =>
+    rw [Finsupp.prod_add_index_of_disjoint (by simp [hn, hi]),
+      Finsupp.prod_single_index (by exact DividedPowerAlgebra.dp_zero), map_mul, ih, pdRep_dp,
+      pdF_mul_pdFF k b i n (Finsupp.notMem_support_iff.1 hi)]
+
+/-- The monomial `∏ⱼ (b^∨ⱼ)^{γⱼ}` of `Sym M^∨`. -/
+noncomputable def pdTest (γ : σ →₀ ℕ) : Cd := γ.prod fun j e => SymmetricAlgebra.ι k _ (b.coord j) ^ e
+
+omit [DecidableEq σ] in
+theorem pdCoordEv_test (γ : σ →₀ ℕ) : pdCoordEv k b (pdTest k b γ) = MvPolynomial.monomial γ 1 := by
+  simp [pdTest, Finsupp.prod, MvPolynomial.prod_X_pow_eq_monomial]
+
+/-- **The basis theorem for `Γ` of a free module of finite rank**: if `(bᵢ)` is a basis of
+`M`, the products `∏ᵢ bᵢ^{(aᵢ)}`, `a ∈ ℕ^{(σ)}`, are a basis of `Γ_k(M)`, over any commutative
+ring `k`. -/
+theorem dp_prod_linearIndependent :
+    LinearIndependent k (fun a : σ →₀ ℕ => a.prod fun i n => DividedPowerAlgebra.dp k n (b i)) := by
+  refine LinearIndependent.of_comp (pdRep k).toLinearMap (linearIndependent_iff'.2 ?_)
+  intro s g hg a ha
+  have := congr(($hg).ofConv (pdTest k b a))
+  simpa [pdRep_prod, pdFF, pdCoordEv_test, MvPolynomial.coeff_monomial, ha] using this
+
+/-- The basis `∏ᵢ bᵢ^{(aᵢ)}` of `Γ_k(M)`. -/
+noncomputable def dpBasis : Module.Basis (σ →₀ ℕ) k (DividedPowerAlgebra k M) :=
+  .mk (dp_prod_linearIndependent k b)
+    (DividedPowerAlgebra.submodule_span_prod_dp_eq_top b.span_eq).ge
+
+theorem dpBasis_apply (a : σ →₀ ℕ) :
+    dpBasis k b a = a.prod fun i n => DividedPowerAlgebra.dp k n (b i) :=
+  Module.Basis.mk_apply ..
+
+end PDBasis
+
+section PDModel
+
+variable (k : Type*) [CommRing k] (m : ℕ)
+
+/-- The coordinates `(T, Y₁, …, Y_m)` on `Φ_[m] = k^{m+1}`: `T = ∑ Xᵢ`, `Yᵢ = Xᵢ`, so
+`X₀ = T − ∑ Yᵢ`. -/
+def tyEquiv : (Fin (m + 1) → k) ≃ₗ[k] (Option (Fin m) → k) where
+  toFun f o := o.elim (f 0) fun i => f i.succ - f 0
+  invFun c := Fin.cases (c none) fun i => c (some i) + c none
+  map_add' f g := by ext (_ | i) <;> simp; ring
+  map_smul' r f := by ext (_ | i) <;> simp [mul_sub]
+  left_inv f := by ext j; cases j using Fin.cases <;> simp
+  right_inv c := by ext (_ | i) <;> simp
+
+/-- The basis `T = (1, …, 1)`, `Yᵢ = e_{i+1}` of `Φ_[m]`. -/
+noncomputable def tyBasis : Module.Basis (Option (Fin m)) k (Fin (m + 1) → k) :=
+  .ofEquivFun (tyEquiv k m)
+
+@[simp] theorem tyBasis_none : tyBasis k m none = 1 := by
+  ext j; cases j using Fin.cases <;> simp [tyBasis, tyEquiv, Module.Basis.coe_ofEquivFun]
+
+@[simp] theorem tyBasis_some (i : Fin m) : tyBasis k m (some i) = Pi.single i.succ 1 := by
+  ext j; cases j using Fin.cases <;> simp [tyBasis, tyEquiv, Module.Basis.coe_ofEquivFun,
+    Pi.single_apply]
+
+/-- `Ψ_[m] = Φ_[m] / k·T`. -/
+abbrev PsiM := (Fin (m + 1) → k) ⧸ (k ∙ (1 : Fin (m + 1) → k))
+
+/-- `f ↦ (f(i+1) − f(0))ᵢ`, the coordinates `Yᵢ` modulo `T`. -/
+def psiCoord : (Fin (m + 1) → k) →ₗ[k] (Fin m → k) where
+  toFun f i := f i.succ - f 0
+  map_add' f g := by ext; simp; ring
+  map_smul' r f := by ext; simp [mul_sub]
+
+theorem ker_psiCoord : LinearMap.ker (psiCoord k m) = k ∙ (1 : Fin (m + 1) → k) := by
+  ext f
+  simp only [LinearMap.mem_ker, Submodule.mem_span_singleton, funext_iff, psiCoord,
+    LinearMap.coe_mk, AddHom.coe_mk, Pi.zero_apply, sub_eq_zero]
+  refine ⟨fun h => ⟨f 0, fun j => ?_⟩, fun ⟨a, h⟩ i => by simp [← h]⟩
+  cases j using Fin.cases <;> simp [h]
+
+theorem psiCoord_surjective : Function.Surjective (psiCoord k m) :=
+  fun c => ⟨Fin.cases 0 c, by ext; simp [psiCoord]⟩
+
+/-- `Ψ_[m] ≃ k^m`. -/
+noncomputable def psiEquiv : PsiM k m ≃ₗ[k] (Fin m → k) :=
+  (Submodule.quotEquivOfEq _ _ (ker_psiCoord k m).symm).trans
+    ((psiCoord k m).quotKerEquivOfSurjective (psiCoord_surjective k m))
+
+/-- The basis `dY₁, …, dY_m` of `Ψ_[m]`: the classes of the `Yᵢ`. -/
+noncomputable def psiBasis : Module.Basis (Fin m) k (PsiM k m) :=
+  (Pi.basisFun k (Fin m)).map (psiEquiv k m).symm
+
+theorem psiBasis_apply (i : Fin m) :
+    psiBasis k m i = Submodule.mkQ _ (Pi.single i.succ 1) := by
+  rw [psiBasis, Module.Basis.map_apply, LinearEquiv.symm_apply_eq]
+  ext j
+  rw [psiEquiv, LinearEquiv.trans_apply, Submodule.mkQ_apply, Submodule.quotEquivOfEq_mk,
+    LinearMap.quotKerEquivOfSurjective_apply_mk]
+  simp [psiCoord, Pi.single_apply]
+
+/-- The term `Γ(Φ_[m]) ⊗ Λ^q Ψ_[m]` of the bigraded algebra, all `p` at once. -/
+abbrev PDModel (q : ℕ) := DividedPowerAlgebra k (Fin (m + 1) → k) ⊗[k] ⋀[k]^q (PsiM k m)
+
+variable {k m}
+
+/-- `Ψ(θ)`: `Φ(θ) = (f ↦ f ∘ θ)` fixes `T`, so passes to `Ψ = Φ/k·T`. -/
+noncomputable def psiMap {n : ℕ} (θ : Fin (n + 1) → Fin (m + 1)) : PsiM k m →ₗ[k] PsiM k n :=
+  Submodule.mapQ _ _ (LinearMap.funLeft k k θ)
+    (Submodule.span_singleton_le_iff_mem _ _ |>.2 (Submodule.mem_span_singleton_self _))
+
+/-- The simplicial operator `θ^* = Γ(Φ(θ)) ⊗ Λ^q(Ψ(θ))`. -/
+noncomputable def pdModelMap (q : ℕ) {n : ℕ} (θ : Fin (n + 1) → Fin (m + 1)) :
+    PDModel k m q →ₗ[k] PDModel k n q :=
+  TensorProduct.map (DividedPowerAlgebra.map k (LinearMap.funLeft k k θ)).toLinearMap
+    (exteriorPower.map q (psiMap θ))
+
+theorem pdModelMap_id (q : ℕ) : pdModelMap (k := k) (m := m) q id = LinearMap.id := by
+  have h1 : LinearMap.funLeft k k (id : Fin (m + 1) → Fin (m + 1)) = LinearMap.id := rfl
+  have h2 : psiMap (k := k) (id : Fin (m + 1) → Fin (m + 1)) = LinearMap.id := by
+    rw [psiMap, ← Submodule.mapQ_id]; rfl
+  rw [pdModelMap, h1, h2, DividedPowerAlgebra.map_id, exteriorPower.map_id]
+  exact TensorProduct.map_id
+
+theorem pdModelMap_comp (q : ℕ) {n l : ℕ} (θ : Fin (n + 1) → Fin (m + 1))
+    (θ' : Fin (l + 1) → Fin (n + 1)) :
+    pdModelMap (k := k) q (θ ∘ θ') = pdModelMap q θ' ∘ₗ pdModelMap q θ := by
+  have h1 : LinearMap.funLeft k k (θ ∘ θ') =
+      LinearMap.funLeft k k θ' ∘ₗ LinearMap.funLeft k k θ := rfl
+  have h2 : psiMap (k := k) (θ ∘ θ') = psiMap θ' ∘ₗ psiMap θ := by
+    rw [psiMap, psiMap, psiMap, ← Submodule.mapQ_comp]; rfl
+  rw [pdModelMap, pdModelMap, pdModelMap, h1, h2, DividedPowerAlgebra.map_comp,
+    exteriorPower.map_comp, ← TensorProduct.map_comp]
+  rfl
+
+variable (k) in
+/-- **The simplicial `k`-module `C^{•,q}_* = Γ^•Φ_* ⊗ Λ^qΨ_*`** (pages 5–7), with
+`Φ_* : [n] ↦ k^{n+1}` and `Ψ_* = Φ_*/k_*`. -/
+noncomputable def pdSimplicial (q : ℕ) : CategoryTheory.Functor SimplexCategoryᵒᵖ (ModuleCat k) where
+  obj n := ModuleCat.of k (PDModel k n.unop.len q)
+  map θ := ModuleCat.ofHom (pdModelMap q θ.unop.toOrderHom)
+  map_id _ := ModuleCat.hom_ext (pdModelMap_id q)
+  map_comp θ θ' := ModuleCat.hom_ext (pdModelMap_comp q θ.unop.toOrderHom θ'.unop.toOrderHom)
+
+/-- `T^{(p)}` is a simplicial section: `θ^*(T^{(p)} ⊗ ω) = T^{(p)} ⊗ θ^*ω`, so
+`1 ↦ T^{(p)}` is the augmentation `k_* → C^{p,0}_*`. -/
+theorem pdModelMap_tPow (q : ℕ) {n : ℕ} (θ : Fin (n + 1) → Fin (m + 1)) (p : ℕ)
+    (w : ⋀[k]^q (PsiM k m)) :
+    pdModelMap q θ (DividedPowerAlgebra.dp k p 1 ⊗ₜ w) =
+      DividedPowerAlgebra.dp k p 1 ⊗ₜ exteriorPower.map q (psiMap θ) w := by
+  simp [pdModelMap]
+  rfl
+
+end PDModel
+
+section PDModelBasis
+
+variable (k : Type*) [CommRing k] (m : ℕ)
+
+/-- **The coordinate model** (pages 5–7): `C^{•,q}_{[m]} = Γ(Φ_[m]) ⊗ Λ^qΨ_[m]` is free on
+the `T^{(a)} Y^{(β)} ⊗ dY_I`, `a ∈ ℕ`, `β ∈ ℕ^m`, `I ⊆ {1, …, m}` with `|I| = q`. -/
+noncomputable def pdModelBasis (q : ℕ) :
+    Module.Basis ((Option (Fin m) →₀ ℕ) × Set.powersetCard (Fin m) q) k (PDModel k m q) :=
+  (dpBasis k (tyBasis k m)).tensorProduct ((psiBasis k m).exteriorPower q)
+
+theorem pdModelBasis_apply (q : ℕ) (a : Option (Fin m) →₀ ℕ) (I : Set.powersetCard (Fin m) q) :
+    pdModelBasis k m q (a, I) = (a.prod fun o n => DividedPowerAlgebra.dp k n (tyBasis k m o)) ⊗ₜ
+      exteriorPower.ιMulti_family k q (psiBasis k m) I := by
+  simp [pdModelBasis, dpBasis_apply]
+
+/-- **The `k{T}`-module structure** in the basis: `T^{(j)} · T^{(a)} Y^{(β)} =
+c_{j,a} T^{(a+j)} Y^{(β)}`, the multiplication `tMul` of the coefficient model. -/
+theorem dp_one_mul_dpBasis (j : ℕ) (a : Option (Fin m) →₀ ℕ) :
+    DividedPowerAlgebra.dp k j 1 * dpBasis k (tyBasis k m) a =
+      (a none + j).choose j • dpBasis k (tyBasis k m) (a + Finsupp.single none j) := by
+  have h (b : Option (Fin m) →₀ ℕ) := (Finsupp.mul_prod_erase' b none
+    (fun o n => DividedPowerAlgebra.dp k n (tyBasis k m o))
+    (fun _ => DividedPowerAlgebra.dp_zero)).symm
+  rw [dpBasis_apply, dpBasis_apply, h a, h (a + _), ← mul_assoc, ← tyBasis_none k m,
+    DividedPowerAlgebra.dp_mul, Finsupp.erase_add, Finsupp.erase_single, add_zero]
+  simp [add_comm j, mul_assoc]
+
+end PDModelBasis
+
+end Grothendieck.Folder136
