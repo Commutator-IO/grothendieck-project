@@ -1744,9 +1744,7 @@ attribute [simp] Splitting.ψ_x₀
   LinearMap.congr_fun s.p_ι u
 
 @[simp] lemma Splitting.p_x₀ (s : X.Splitting) : s.p s.x₀ = 0 := by
-  have h := s.decomp s.x₀
-  rw [s.ψ_x₀, one_smul, add_eq_right] at h
-  simpa using congrArg s.p h
+  simpa using congrArg s.p (by simpa using s.decomp s.x₀ : X.ι (s.p s.x₀) = 0)
 
 /-- In a splitting, `π = χ p + ψ·b` with `b = π(x₀)`. -/
 lemma Splitting.π_eq (s : X.Splitting) (e : E) : X.π e = χ • s.p e + X.ψ e • X.π s.x₀ := by
@@ -1766,11 +1764,7 @@ noncomputable def splittingOf (hι : Function.Injective X.ι) (hex : ∀ e, X.ψ
   let eι := LinearEquiv.ofInjective X.ι hι
   let p : E →ₗ[R] L := eι.symm.toLinearMap ∘ₗ Submodule.inclusion hr ∘ₗ q.rangeRestrict
   have hp : ∀ e, X.ι (p e) = q e := fun e => by simp [p, eι]
-  refine ⟨x₀, p, hx₀, ?_, fun e => by rw [hp]; simp [q]⟩
-  ext u
-  apply hι
-  rw [LinearMap.comp_apply, hp]
-  simp [q]
+  exact ⟨x₀, p, hx₀, LinearMap.ext fun u => hι (by simp [hp, q]), fun e => by simp [hp, q]⟩
 
 end ChiTriv
 
@@ -1808,11 +1802,7 @@ noncomputable def incl : L₁ ⊗[R] L₂ →ₗ[R] Amal X₁ X₂ :=
   (LinearMap.range (relK X₁ X₂)).mkQ ∘ₗ LinearMap.inr R _ _
 
 theorem star_comp_jK : starA X₁ X₂ ∘ₗ jK X₁ X₂ = incl X₁ X₂ ∘ₗ μK X₁ X₂ := by
-  refine LinearMap.ext fun k => ?_
-  simp only [starA, incl, LinearMap.comp_apply, LinearMap.inl_apply, LinearMap.inr_apply,
-    Submodule.mkQ_apply]
-  rw [Submodule.Quotient.eq]
-  exact ⟨k, by simp [relK]⟩
+  exact LinearMap.ext fun k => (Submodule.Quotient.eq _).2 ⟨k, by simp [relK]⟩
 
 /-- The descent of `(g, h)` with `g ∘ j = h ∘ μ` to the amalgamated sum. -/
 noncomputable def amalDesc {N : Type*} [AddCommGroup N] [Module R N] (g : E₁ ⊗[R] E₂ →ₗ[R] N)
@@ -1851,9 +1841,8 @@ theorem isPushout {R : Type u} [CommRing R] {χ : R} {L₁ E₁ L₂ E₂ : Type
   · intro s; ext x; simp
   · intro s m h₁ h₂
     ext1
-    apply amal_hom_ext
-    · exact LinearMap.ext fun x => by simpa using congrArg (fun f => f.hom x) h₁
-    · exact LinearMap.ext fun x => by simpa using congrArg (fun f => f.hom x) h₂
+    exact amal_hom_ext _ _ (LinearMap.ext fun x => by simpa using congrArg (fun f => f.hom x) h₁)
+      (LinearMap.ext fun x => by simpa using congrArg (fun f => f.hom x) h₂)
 
 /-- `ψ₁ ⊗ ψ₂ : E₁ ⊗ E₂ → 𝒪`. -/
 noncomputable def psiT : E₁ ⊗[R] E₂ →ₗ[R] R := LinearMap.mul' R R ∘ₗ map X₁.ψ X₂.ψ
@@ -1940,8 +1929,7 @@ amalgamated sum with `𝒪 × (L₁ ⊗ L₂)`. -/
 noncomputable def splitEquiv (s₁ : X₁.Splitting) (s₂ : X₂.Splitting) :
     Amal X₁ X₂ ≃ₗ[R] R × (L₁ ⊗[R] L₂) :=
   LinearEquiv.ofLinearMap (coord s₁ s₂) (uncoord s₁ s₂)
-    (by
-      ext <;> simp [coord, uncoord, coordT, psiT])
+    (by ext <;> simp [coord, uncoord, coordT, psiT])
     (by
       refine amal_hom_ext _ _ (TensorProduct.ext' fun e₁ e₂ => ?_) (by ext; simp [coord, uncoord])
       rw [LinearMap.id_comp, LinearMap.comp_apply, LinearMap.comp_apply, star_eq_split s₁ s₂]
@@ -1973,14 +1961,10 @@ theorem prod_exact (s₁ : X₁.Splitting) (s₂ : X₂.Splitting) :
     ⟨starA X₁ X₂ (r • s₁.x₀ ⊗ₜ s₂.x₀), by simp [psiA]⟩⟩
   ext z
   refine ⟨fun hz => ⟨(coord s₁ s₂ z).2, ?_⟩, ?_⟩
-  · have e := (splitEquiv s₁ s₂).symm_apply_apply z
-    have h1 : (coord s₁ s₂ z).1 = psiA X₁ X₂ z := by
-      rw [← LinearMap.fst_apply (R := R), ← LinearMap.comp_apply]
-      congr 1
+  · have h1 : LinearMap.fst R R _ ∘ₗ coord s₁ s₂ = psiA X₁ X₂ := by
       apply amal_hom_ext <;> ext <;> simp [coordT, psiA]
-    rw [splitEquiv_symm_apply, splitEquiv_apply, ← Prod.mk.eta (p := coord s₁ s₂ z), h1,
-      LinearMap.mem_ker.1 hz] at e
-    simpa [uncoord] using e
+    simpa [uncoord, show (coord s₁ s₂ z).1 = 0 from (LinearMap.congr_fun h1 z).trans hz] using
+      (splitEquiv s₁ s₂).symm_apply_apply z
   · rintro ⟨u, rfl⟩
     simp [psiA]
 
@@ -2020,10 +2004,10 @@ theorem biaffine_universal (s₁ : X₁.Splitting) (s₂ : X₂.Splitting) (f : 
     rw [← d₁, h₁ _ _ _ s₁.ψ_x₀ hy₂, ← d₂, h₂ _ _ _ s₁.ψ_x₀ s₂.ψ_x₀, d₂]
     simp [coord, coordT, hy₂]
     abel
-  · refine amal_hom_ext _ _ (TensorProduct.ext' fun e₁ e₂ => ?_) (by rw [hgα]; ext; simp [coord])
-    have hα : ∀ x, g (incl X₁ X₂ x) = α x := fun x => by rw [← hgα]; rfl
+  · subst hgα
+    refine amal_hom_ext _ _ (TensorProduct.ext' fun e₁ e₂ => ?_) (by ext; simp [coord])
     rw [LinearMap.comp_apply, LinearMap.comp_apply, star_eq_split s₁ s₂ e₁ e₂]
-    simp [hα, hg _ _ s₁.ψ_x₀ s₂.ψ_x₀, coordT]
+    simp [hg _ _ s₁.ψ_x₀ s₂.ψ_x₀, coordT]
 
 /-- Conversely every linear map out of `E₁ * E₂` restricts to a bi-affine pair, with no
 condition on `ψ`. -/
@@ -2102,8 +2086,7 @@ lemma bc2_map (φ : L →ₗ[R] L') (z : L ⊗[R] L) :
 /-- **Base change of the discriminant**: `δ(b_S, c_S) = δ(b, c)_S`. -/
 theorem discL_baseChange (b : L) (c : L ⊗[R] L) :
     discL ((1 : S) ⊗ₜ[R] b) (bc2 S L c) = bc2 S L (discL b c) := by
-  simp only [discL, map_sub, bc2_tmul, bc2_smul]
-  rw [map_ofNat]
+  simp only [discL, map_sub, bc2_tmul, bc2_smul, map_ofNat]
 
 /-- **Base change of the triplet condition**: `T₀² ≡ δ mod 4` passes to every `S`. -/
 theorem tripletCond_baseChange {δ : L ⊗[R] L} {τ : L}
@@ -2116,9 +2099,7 @@ theorem tripletCond_baseChange {δ : L ⊗[R] L} {τ : L}
   · rw [Submodule.Quotient.eq]
     exact mem_twoL.2 ⟨(1 : S) ⊗ₜ a, by
       rw [← map_ofNat (algebraMap R S) 2, algebraMap_smul, ← tmul_smul, ha, tmul_sub]⟩
-  · have := congrArg (bc2 S L) hk
-    rw [map_sub, bc2_tmul, bc2_smul, map_ofNat] at this
-    exact this
+  · simpa only [map_sub, bc2_tmul, bc2_smul, map_ofNat] using congrArg (bc2 S L) hk
 
 /-- **Base change of morphisms of covers.** If `(φ, t)` is a morphism
 `(L, b, c) → (L', b', c')`, then `(φ_S, 1 ⊗ t)` is a morphism of the base-changed covers. -/
@@ -2177,9 +2158,8 @@ variable {b c}
 lemma qbasis_repr {y : QAlg b c} {a e : R}
     (hy : y = algebraMap R _ a + algebraMap R _ e * AdjoinRoot.root _) :
     (qbasis b c).repr y 0 = a ∧ (qbasis b c).repr y 1 = e := by
-  have : y = a • qbasis b c 0 + e • qbasis b c 1 := by
-    simp [hy, Algebra.smul_def]
-  rw [this, map_add, map_smul, map_smul, Module.Basis.repr_self, Module.Basis.repr_self]
+  rw [show y = a • qbasis b c 0 + e • qbasis b c 1 by simp [hy, Algebra.smul_def], map_add,
+    map_smul, map_smul, Module.Basis.repr_self, Module.Basis.repr_self]
   simp
 
 /-- `y · U` in the basis `(1, U)`. -/
@@ -2230,9 +2210,7 @@ lemma recon_of (a e : R) :
   Prod.ext (trace_qalg a e) (qbasis_repr rfl).2
 
 lemma recon_one : recon (1 : QAlg b c) = (2, 0) := by
-  have h := recon_of (b := b) (c := c) 1 0
-  simp only [map_one, map_zero, zero_mul, add_zero] at h
-  rw [h]; ring_nf
+  simpa using recon_of (b := b) (c := c) 1 0
 
 /-- **The product of page 51**, without division:
 `2 β(yy') = ββ' + γγ'δ` and `2 γ(yy') = βγ' + γβ'`. -/
@@ -2272,15 +2250,14 @@ theorem recon_injective (h2 : ∀ x : R, 2 * x = 0 → x = 0) :
   obtain ⟨a, e, rfl⟩ := coords_exist y
   rw [recon_of, Prod.mk_eq_zero] at hy
   obtain ⟨h1, rfl⟩ := hy
-  rw [zero_mul, sub_zero] at h1
-  simp [h2 a h1]
+  simp [h2 a (by simpa using h1)]
 
 /-- A linear form on `A` in the basis `(1, U)`. -/
 lemma dual_coords (x : Module.Dual R (QAlg b c)) (a e : R) :
     x (algebraMap R _ a + algebraMap R _ e * AdjoinRoot.root _) =
       a * x 1 + e * x (AdjoinRoot.root _) := by
-  rw [Algebra.algebraMap_eq_smul_one, ← Algebra.smul_def, map_add, map_smul, map_smul,
-    smul_eq_mul, smul_eq_mul]
+  rw [Algebra.algebraMap_eq_smul_one, ← Algebra.smul_def]
+  simp
 
 /-- The coordinates `(λ, ζ)` of `x ∈ E = Ǎ` (page 49): `λ = ψ(x) = x(1)` and
 `ζ = 2x − ψ(x)T ∈ L`, read on `U`. -/
@@ -2303,9 +2280,7 @@ theorem eCoord_range (l ζ : R) :
   · rintro ⟨s, rfl⟩
     refine ⟨l • (qbasis b c).coord 0 + s • (qbasis b c).coord 1, ?_⟩
     rw [eCoord_eq]
-    have e1 : (1 : QAlg b c) = qbasis b c 0 := by simp
-    have e2 : AdjoinRoot.root (qpoly b c) = qbasis b c 1 := by simp
-    simp only [LinearMap.add_apply, LinearMap.smul_apply, e1, e2, Module.Basis.coord_apply,
+    simp only [LinearMap.add_apply, LinearMap.smul_apply, ← qbasis_zero, ← qbasis_one, Module.Basis.coord_apply,
       Module.Basis.repr_self, smul_eq_mul]
     ext <;> simp; ring
 
