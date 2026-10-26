@@ -358,11 +358,9 @@ theorem abs_lt_of_near_int {D : ℝ → ℝ} (hD : Continuous D) {a : ℝ} (ha :
 theorem eq_zero_of_intValued {D : ℝ → ℝ} (hD : Continuous D) {a : ℝ} (ha : D a = 0)
     (h : ∀ x, ∃ n : ℤ, D x = n) (x : ℝ) : D x = 0 := by
   obtain ⟨n, hn⟩ := h x
-  have := abs_lt_of_near_int hD ha le_rfl (fun y => by
-    obtain ⟨m, hm⟩ := h y; simp [hm]) x
+  have := abs_lt_of_near_int hD ha le_rfl (fun y => by obtain ⟨m, hm⟩ := h y; simp [hm]) x
   rw [hn] at this ⊢
-  have : |n| < 1 := by exact_mod_cast this.trans (by norm_num : (1 / 2 : ℝ) < 1)
-  exact_mod_cast Int.abs_lt_one_iff.1 this
+  exact_mod_cast Int.abs_lt_one_iff.1 (by exact_mod_cast this.trans (by norm_num : (1 / 2 : ℝ) < 1))
 
 /-- The map of the circle `AddCircle 1` induced by a lift `F` with `F (x + 1) = F x - 1`. -/
 noncomputable def descend (F : C(ℝ, ℝ)) (hF : ∀ x, F (x + 1) = F x - 1) :
@@ -431,10 +429,8 @@ theorem lift_add_one {f : C(UnitAddCircle, UnitAddCircle)} (hf : Function.Inject
   suffices F 1 = F 0 - 1 by linarith
   obtain ⟨m, hm⟩ := hper 0
   rw [zero_add] at hm
-  have hm1 : m ≤ -1 := by
-    have : (m : ℝ) < 0 := by linarith [ha zero_lt_one]
-    exact Int.le_sub_one_of_lt (by exact_mod_cast this)
-  rcases hm1.lt_or_eq with hm2 | hm2
+  have hm1 : m < 0 := by exact_mod_cast (by linarith [ha zero_lt_one] : (m : ℝ) < 0)
+  rcases (show m < -1 ∨ m = -1 by omega) with hm2 | hm2
   · exfalso
     have hm2' : (m : ℝ) ≤ -2 := by exact_mod_cast (show m ≤ -2 by omega)
     obtain ⟨t, ⟨ht0, ht1⟩, ht⟩ := intermediate_value_Icc' zero_le_one hc.continuousOn
@@ -458,38 +454,34 @@ theorem exists_gluing_of_mem {P Q : Marking r} {c : ℤ} {f : C(UnitAddCircle, U
     coe_eq_coe_iff.1 (by rw [← hF, hk])
   choose m hm using hm
   have hstep : ∀ k, m (k + 1) = m k := fun k => by
-    have hp1 : P.pt k < P.pt (k + 1) := P.strictMono (by omega)
     have hp2 : P.pt (k + 1) ≤ P.pt k + 1 := by
       rw [← P.periodic]; exact P.strictMono.monotone (by have := P.r_pos; omega)
     have hq1 : Q.pt (c - (k + 1)) < Q.pt (c - k) := Q.strictMono (by omega)
     have hq2 : Q.pt (c - k) ≤ Q.pt (c - (k + 1)) + 1 := by
       rw [← Q.periodic]; exact Q.strictMono.monotone (by have := Q.r_pos; omega)
     have hF1 : F (P.pt k + 1) ≤ F (P.pt (k + 1)) := ha.antitone hp2
-    have hF2 : F (P.pt (k + 1)) < F (P.pt k) := ha hp1
+    have hF2 : F (P.pt (k + 1)) < F (P.pt k) := ha (P.strictMono (by omega))
     rw [h1] at hF1
-    have e1 := hm k
-    have e2 := hm (k + 1)
-    have : m (k + 1) - m k < 1 := by exact_mod_cast (by linarith : (m (k + 1) : ℝ) - m k < 1)
-    have : -1 < m (k + 1) - m k := by exact_mod_cast (by linarith : -1 < (m (k + 1) : ℝ) - m k)
+    have : m (k + 1) - m k < 1 := by
+      exact_mod_cast (by linarith [hm k, hm (k + 1)] : (m (k + 1) : ℝ) - m k < 1)
+    have : -1 < m (k + 1) - m k := by
+      exact_mod_cast (by linarith [hm k, hm (k + 1)] : -1 < (m (k + 1) : ℝ) - m k)
     omega
   have hconst : ∀ k, m k = m 0 := fun k => by
     induction k using Int.induction_on with
     | zero => rfl
     | succ k ih => rw [hstep, ih]
     | pred k ih => rw [← ih, ← hstep, sub_add_cancel]
-  refine ⟨⟨fun x => F x - m 0, by fun_prop⟩, ⟨fun x y h => ?_, fun x => ?_, fun k => ?_⟩, ?_⟩
-  · simpa using ha h
-  · simp [h1]; ring
-  · have := hm k; rw [hconst k] at this; simp only [ContinuousMap.coe_mk]; linarith
+  refine ⟨⟨fun x => F x - m 0, by fun_prop⟩, ⟨fun x y h => by simpa using ha h,
+    fun x => by simp [h1]; ring, fun k => ?_⟩, ?_⟩
+  · simp only [ContinuousMap.coe_mk]; linarith [hconst k ▸ hm k]
   · ext y
     induction y using QuotientAddGroup.induction_on
     simp only [descend_coe, ContinuousMap.coe_mk, hF]
     exact coe_eq_coe_iff.2 ⟨-m 0, by push_cast; ring⟩
 
 theorem toCircle_surjective (P Q : Marking r) (c : ℤ) : Function.Surjective (toCircle P Q c) :=
-  fun f => by
-    obtain ⟨G, hG, h⟩ := exists_gluing_of_mem f.2
-    exact ⟨⟨G, hG⟩, Subtype.ext h⟩
+  fun f => let ⟨G, hG, h⟩ := exists_gluing_of_mem f.2; ⟨⟨G, hG⟩, Subtype.ext h⟩
 
 
 theorem continuous_toCircle (P Q : Marking r) (c : ℤ) : Continuous (toCircle P Q c) := by
@@ -533,11 +525,8 @@ noncomputable def gluingsHomeomorph (P Q : Marking r) (c : ℤ) :
         exact ((le_max_left _ _).trans_lt h).trans_le (min_le_left _ _)) x
     have h2 := hδε x (((le_max_right _ _).trans_lt h).trans_le (min_le_right _ _))
     simp only [Function.uncurry_apply_pair, Real.dist_eq] at h2 ⊢
-    calc |(e.symm f).1 x - (e.symm f₀).1 x₀|
-        ≤ |(e.symm f).1 x - (e.symm f₀).1 x| + |(e.symm f₀).1 x - (e.symm f₀).1 x₀| :=
-          abs_sub_le _ _ _
-      _ < ε / 2 + ε / 2 := add_lt_add (h1.trans_le (min_le_left _ _)) h2
-      _ = ε := add_halves ε
+    exact ((abs_sub_le _ _ _).trans_lt (add_lt_add (h1.trans_le (min_le_left _ _)) h2)).trans_eq
+      (add_halves ε)
 
 @[simp] theorem gluingsHomeomorph_apply (P Q : Marking r) (c : ℤ) (F : gluings P Q c) (x : ℝ) :
     (gluingsHomeomorph P Q c F).1 x = F.1 x := rfl
@@ -576,8 +565,7 @@ theorem sub_const_mem {f : C(UnitAddCircle, UnitAddCircle)} (hf : f ∈ circleRe
 theorem add_const_mem {g : C(UnitAddCircle, UnitAddCircle)} (hg : g ∈ circleReversing₀)
     (a : UnitAddCircle) : g + ContinuousMap.const _ a ∈ circleReversing := by
   obtain ⟨hb, ⟨G, hc, ha, hG⟩, -⟩ := hg
-  induction a using QuotientAddGroup.induction_on
-  rename_i A
+  induction a using QuotientAddGroup.induction_on with | H A =>
   exact ⟨(Equiv.addRight _).bijective.comp hb, fun x => G x + A, by fun_prop,
     fun x y h => by simpa using ha h, fun x => by simp [hG]⟩
 
@@ -593,14 +581,8 @@ noncomputable def circleReversingHomeomorph :
   invFun p := ⟨_, add_const_mem p.2.2 p.1⟩
   left_inv f := by ext; simp
   right_inv p := by ext <;> simp [apply_zero_of_mem₀ p.2.2]
-  continuous_toFun := by
-    refine (continuous_eval_const 0).comp continuous_subtype_val |>.prodMk
-      (Continuous.subtype_mk ?_ _)
-    exact continuous_subtype_val.sub (ContinuousMap.continuous_const'.comp
-      ((continuous_eval_const 0).comp continuous_subtype_val))
-  continuous_invFun :=
-    ((continuous_subtype_val.comp continuous_snd).add
-      (ContinuousMap.continuous_const'.comp continuous_fst)).subtype_mk _
+  continuous_toFun := by fun_prop
+  continuous_invFun := by fun_prop
 
 
 /-- **The case `r = 0` (page 49).** Without marked points the orientation-reversing

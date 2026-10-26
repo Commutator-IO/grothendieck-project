@@ -1531,11 +1531,10 @@ lemma isUnit_ν_iff (n : ℕ) :
 /-- A family lower triangular in a basis, with invertible diagonal, is a basis. -/
 lemma isBasisFam_of_lowtri {m : ℕ} (b : Basis (Fin m) k M) (v : Fin m → M)
     (hup : ∀ i j : Fin m, i < j → b.repr (v j) i = 0) (hdiag : ∀ j, IsUnit (b.repr (v j) j)) :
-    IsBasisFam k v := by
-  refine b.is_basis_iff_det.2 ?_
-  rw [b.det_apply, Matrix.det_of_isLowerTriangular _ (fun i j h => by
-    rw [Basis.toMatrix_apply]; exact hup i j h)]
-  exact IsUnit.prod_univ_iff.2 fun i => by rw [Basis.toMatrix_apply]; exact hdiag i
+    IsBasisFam k v :=
+  b.is_basis_iff_det.2 <| by
+    rw [b.det_apply, Matrix.det_of_isLowerTriangular (b.toMatrix v) hup]
+    exact IsUnit.prod_univ_iff.2 hdiag
 
 /-- **The start vectors** (pages 104–105): with `(v, a₀, …, aₙ)` a basis and `φ` the
 coordinate on `v`, `s₀` satisfies (B̄′) iff it lies in `F`, off `D` and off `Δ`. -/
@@ -1557,18 +1556,15 @@ theorem condB'_iff_of_basis {v : M} (hv : IsBasisFam k (fun j : Fin (n + 2) => a
         hφa i (by omega), Finsupp.single_eq_of_ne' (Fin.ne_of_val_ne (by simp)), smul_zero]] at h
     rw [Basis.coord_apply, Basis.coord_apply, hv0, add_zero, map_smul, Finsupp.smul_apply,
       smul_eq_mul, Finsupp.single_eq_same, Fin.val_zero] at h
-    exact IsUnit.of_mul_eq_one_right _ h
+    exact .of_mul_eq_one_right _ h
   · rintro ⟨h11, h0, hφ⟩
     refine ⟨hb, h11, isBasisFam_of_lowtri (bas hv) _ (fun i j hij => ?_) (fun j => ?_),
-      (isUnit_ν_iff n).2 ⟨h0, hc⟩⟩
-    · obtain ⟨_ | j, hj⟩ := j
-      · simp at hij
-      · rw [show av a s0 (j + 1) = a j from rfl, hφa j (by omega),
-          Finsupp.single_eq_of_ne' hij.ne']
-    · obtain ⟨_ | j, hj⟩ := j
-      · exact hφ
-      · rw [show av a s0 (j + 1) = a j from rfl, hφa j (by omega), Finsupp.single_eq_same]
-        exact isUnit_one
+      (isUnit_ν_iff n).2 ⟨h0, hc⟩⟩ <;> obtain ⟨_ | j, hj⟩ := j
+    · simp at hij
+    · rw [show av a s0 (j + 1) = a j from rfl, hφa j (by omega),
+        Finsupp.single_eq_of_ne' hij.ne']
+    · exact hφ
+    · simp [show av a s0 (j + 1) = a j from rfl, hφa j (by omega)]
 
 /-- Back-substitution (page 104): by b) and c), every `x` has the same image as some
 `s ∈ F` under any form vanishing on `a₀, …, a_{n−1}`. -/
@@ -1601,7 +1597,8 @@ theorem exists_condB'_iff [IsLocalRing k] :
       (∀ i j, i + 2 ≤ j → j ≤ n → a' j (a i) = 0) ∧ ∀ i < n, IsUnit (a' (i + 1) (a i)) := by
   constructor
   · rintro ⟨s0, hb, h11, hbas, hν⟩
-    refine ⟨⟨s0, hbas⟩, fun y => ?_, hb, ((isUnit_ν_iff n).1 hν).2⟩
+    obtain ⟨h0, hc⟩ := (isUnit_ν_iff n).1 hν
+    refine ⟨⟨s0, hbas⟩, fun y => ?_, hb, hc⟩
     -- the matrix `(⟨av i, a'ⱼ⟩)` is upper triangular with diagonal `⟨s₀, a'₀⟩, c₀, …`
     set N : Matrix (Fin (n + 1)) (Fin (n + 1)) k := fun j i => a' j (av a s0 i)
     have hN : IsUnit N := by
@@ -1609,14 +1606,11 @@ theorem exists_condB'_iff [IsLocalRing k] :
         obtain ⟨_ | i, hi⟩ := i
         · exact h11 j (Fin.lt_def.1 h) (by omega)
         · exact hb i j (show i + 1 < (j : ℕ) from h) (by omega)]
-      refine IsUnit.prod_univ_iff.2 fun ⟨j, hj⟩ => ?_
-      rcases j with _ | j
-      · exact ((isUnit_ν_iff n).1 hν).1
-      · exact ((isUnit_ν_iff n).1 hν).2 j (by omega)
+      exact IsUnit.prod_univ_iff.2 fun ⟨j, hj⟩ => match j with
+        | 0 => h0
+        | j + 1 => hc j (by omega)
     obtain ⟨z, hz⟩ := Matrix.mulVec_surjective_iff_isUnit.2 hN y
-    refine ⟨∑ i, z i • av a s0 i, funext fun j => ?_⟩
-    rw [← hz]
-    simp [Matrix.mulVec, dotProduct, N, mul_comm]
+    exact ⟨∑ i, z i • av a s0 i, funext fun j => by simp [← hz, Matrix.mulVec, dotProduct, N, mul_comm]⟩
   · rintro ⟨⟨v, hv⟩, ha', hb, hc⟩
     set φ := (bas hv).coord 0
     have hφ : ∀ i ≤ n, φ (a i) = 0 := fun i hi => by
@@ -1639,9 +1633,9 @@ theorem exists_condB'_iff [IsLocalRing k] :
     by_cases h2 : IsUnit (a' 0 s)
     · exact ⟨s, (condB'_iff_of_basis hv hb hc).2 ⟨hs, h2, hs1⟩⟩
     refine ⟨s + t, (condB'_iff_of_basis hv hb hc).2
-      ⟨fun i h h' => by simp [hs i h h', ht i h h'], ?_, ?_⟩⟩
-    · rw [map_add, add_comm]; exact key _ _ (by simp [ht0]) h2
-    · rw [map_add]; exact key _ _ hs1 h1
+      ⟨fun i h h' => by simp [hs i h h', ht i h h'], ?_,
+        by rw [map_add]; exact key _ _ hs1 h1⟩⟩
+    rw [map_add, add_comm]; exact key _ _ (by simp [ht0]) h2
 
 /-- With the other half of (10), the start vector of `exists_condB'_iff` satisfies (B̄),
 hence (Ā). -/
@@ -1699,8 +1693,7 @@ theorem surjective_of_strict [Module.IsReflexive k M]
       show a' j = (b j : Module.Dual k M) by simp [b, Basis.span_apply],
       Submodule.projectionOnto_apply_left, Basis.coord_apply, Basis.repr_self,
       Finsupp.single_apply]
-  refine fun y => ⟨∑ i, y i • x i, funext fun j => ?_⟩
-  simp [hx]
+  exact fun y => ⟨∑ i, y i • x i, funext fun j => by simp [hx]⟩
 
 /-- **Local existence of the start vector, with the page's « strictement libre »**: over a
 local ring, on `M` free of rank `n + 2`, under a) and a′) in the strict sense, b) and c),
@@ -1861,10 +1854,8 @@ theorem not_condAw_imp : ∃ (a : ℕ → Fin 2 → ℤ) (a' : ℕ → Module.Du
   refine ⟨fun _ => Pi.single 1 1, fun _ => 2 • LinearMap.proj 0, Pi.single 0 1, ?_, ?_⟩
   · rw [Fintype.linearIndependent_iff]
     intro g hg
-    have h0 := congrFun hg 0
-    have h1 := congrFun hg 1
-    simp [Fin.sum_univ_two, sv, ps_apply] at h0 h1
-    intro i; fin_cases i <;> simp_all
+    simp [Fin.sum_univ_two, sv, ps_apply, funext_iff, Fin.forall_fin_two] at hg
+    exact Fin.forall_fin_two.2 ⟨by omega, hg.2⟩
   · simp [ν, Int.isUnit_iff]
 
 /-- (Ā) forces `E` to be free. -/

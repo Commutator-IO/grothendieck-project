@@ -837,8 +837,7 @@ theorem pdEv_comul_EV (i : σ) :
     (Algebra.TensorProduct.map (pdEv k (b i)) (pdCoordEv k b)).comp (Bialgebra.comulAlgHom k Cd) =
       (pdTheta k i).comp (pdCoordEv k b) :=
   SymmetricAlgebra.algHom_ext (by
-    ext φ
-    simp [pdTheta, smul_add, sum_add_distrib, tmul_sum, smul_tmul', ite_tmul, smul_ite])
+    ext φ; simp [pdTheta, smul_add, sum_add_distrib, tmul_sum, smul_tmul', ite_tmul, smul_ite])
 
 omit [Fintype σ] in
 theorem pdTheta_monomial (i : σ) (γ : σ →₀ ℕ) (c : k) :
@@ -868,22 +867,18 @@ theorem pdTheta_coeff (i : σ) (n : ℕ) {a : σ →₀ ℕ} (ha : a i = 0) (q :
         (MvPolynomial.lcoeff k a) ((γ i).choose x.1 • (((X : k[X]) ^ x.1) ⊗ₜ[k]
           (MvPolynomial.X i ^ x.2)) * (1 ⊗ₜ MvPolynomial.monomial (γ.erase i) c))) =
         if x = (n, 0) ∧ γ.erase i = a then c else 0 := by
-      intro x hx
+      rintro ⟨x1, x2⟩ hx
       rw [HasAntidiagonal.mem_antidiagonal] at hx
+      have e : Finsupp.single i x2 + γ.erase i = a ↔ x2 = 0 ∧ γ.erase i = a := by
+        refine ⟨fun h => ?_, fun h => by simp [h.1, h.2]⟩
+        have h2 : x2 = 0 := by simpa [ha] using DFunLike.congr_fun h i
+        exact ⟨h2, by simpa [h2] using h⟩
       rw [smul_mul_assoc, Algebra.TensorProduct.tmul_mul_tmul, mul_one,
         MvPolynomial.X_pow_eq_monomial, MvPolynomial.monomial_mul_monomial, one_mul]
       simp only [map_nsmul, map_tmul, lcoeff_apply, coeff_X_pow, MvPolynomial.lcoeff_apply,
-        MvPolynomial.coeff_monomial, LinearMap.mul'_apply]
-      have e : Finsupp.single i x.2 + γ.erase i = a ↔ x.2 = 0 ∧ γ.erase i = a := by
-        refine ⟨fun h => ?_, fun h => by simp [h.1, h.2]⟩
-        have h2 : x.2 = 0 := by simpa [ha] using DFunLike.congr_fun h i
-        exact ⟨h2, by simpa [h2] using h⟩
-      obtain ⟨x1, x2⟩ := x
-      simp only at hx e ⊢
-      simp only [e]
+        MvPolynomial.coeff_monomial, LinearMap.mul'_apply, e]
       by_cases h1 : n = x1 <;> by_cases h2 : x2 = 0 <;> simp [h1, h2, @eq_comm _ x1] at hx ⊢
-      subst hx
-      simp
+      subst hx; simp
     rw [pdTheta_monomial, add_tmul_one_pow, sum_mul, map_sum, map_sum, sum_congr rfl key]
     have e : γ = Finsupp.single i n + a ↔ γ i = n ∧ γ.erase i = a := by
       refine ⟨fun h => ?_, fun h => ?_⟩
@@ -940,8 +935,8 @@ theorem dp_prod_linearIndependent :
     LinearIndependent k (fun a : σ →₀ ℕ => a.prod fun i n => DividedPowerAlgebra.dp k n (b i)) := by
   refine LinearIndependent.of_comp (pdRep k).toLinearMap (linearIndependent_iff'.2 ?_)
   intro s g hg a ha
-  have := congr(($hg).ofConv (pdTest k b a))
-  simpa [pdRep_prod, pdFF, pdCoordEv_test, MvPolynomial.coeff_monomial, ha] using this
+  simpa [pdRep_prod, pdFF, pdCoordEv_test, MvPolynomial.coeff_monomial, ha] using
+    congr(($hg).ofConv (pdTest k b a))
 
 /-- The basis `∏ᵢ bᵢ^{(aᵢ)}` of `Γ_k(M)`. -/
 noncomputable def dpBasis : Module.Basis (σ →₀ ℕ) k (DividedPowerAlgebra k M) :=
