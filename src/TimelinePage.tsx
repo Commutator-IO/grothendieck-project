@@ -407,7 +407,7 @@ const VOLUMES: Volume[] = ([
   { title: 'Les Dérivateurs', short: 'Dérivateurs', years: '1990–91', kind: 'hand', status: 'edited', pages: 0, cotes: range('157-', 1, 5), note: 'edited by Künzer, Malgoire and Maltsiniotis' , edition: 'ed. Künzer, Malgoire and Maltsiniotis (online)' },
   { title: 'Géométrie élémentaire schématique', short: 'Géom. élém. schématique', years: '1992', kind: 'clean', status: 'bnf', pages: 1098, note: 'BnF, box 3: 549 leaves written on both sides' },
   { title: 'Trialité', years: '1995', kind: 'clean', status: 'bnf', pages: 89, note: 'BnF, box 43: 89 leaves (counted as pages)' },
-  { title: 'Notions de « géographie combinatoire »', short: 'Géographie combinatoire', years: '1996', kind: 'clean', status: 'bnf', pages: 0, note: 'BnF, box 43: number of leaves not recorded on 23 October 2026, drawn at the minimum width' },
+  { title: 'Notions de « géographie combinatoire »', short: 'Géographie combinatoire', years: '1996', kind: 'clean', status: 'bnf', pages: 32, note: 'BnF, box 43, pochette 1: 32 leaves of text (28–30 June 1996) and 4 of figures, from the BnF notice' },
 ] as Volume[]).map((v) => (v.cotes ? { ...v, pages: pagesOf(v.cotes) } : v));
 
 const VOLUME_STYLE: Record<VolumeStatus, { fill: string; stroke: string; dash?: string; label: string }> = {
