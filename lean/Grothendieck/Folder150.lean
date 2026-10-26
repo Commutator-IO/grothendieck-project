@@ -142,3 +142,157 @@ theorem eq_of_strictlyCompatible {X₁ X₂ : Set ℝ} (h₁ : IsStrictlyCompati
   rw [split X₁ h₁.1.2.1, split X₂ h₂.1.2.1, h₁.inter_T, h₂.inter_T, h, half]
 
 end Grothendieck.Folder150
+
+/-!
+## Pages 45–47: the combinatorial criterion of the flag fibrations
+
+Pages 45–47 (the modernised reading, end of paragraph 10) state that, `d = (i_1, …, i_p)` an
+initial segment of the flag `d' = (i_1, …, i_n)`, the boundary of the fibres of
+`Σ_{d'} → Σ_d` is stratified by the `Σ_e`, `e ⊋ d'` a flag with the same terms as `d'` up to
+`i_p` and the same last term `i_n`, that these `e` are the non-empty flags of the ordinal sum
+`I_{]i_p,i_{p+1}[} ⊔ … ⊔ I_{]i_{n-1},i_n[}`, and hence that the fibres have no boundary exactly
+when `i_{k+1}` covers `i_k` for `p ≤ k < n`. Only the order theory is checked here.
+
+What is modelled. `I` is any partial order, a flag a finite chain `D : Finset I`, `m = i_p` a
+term of `D` (so `d` is the terms of `D` below `m`) and `t = i_n` its last term. `gaps D m` is the
+union of the open intervals between consecutive terms of `D` from `m` on, which is their ordinal
+sum (`lt_of_mem_Ioo`). `Above D m t e` says that `e` is a flag containing `D` with the same terms
+up to `m` and the same last term.
+* `mem_gaps_iff`: the ordinal sum is the set of points off `D`, strictly between `m` and `t`, and
+  comparable with every term of `D`;
+* `aboveEquiv`, `aboveEquiv_eq_empty`, `aboveEquiv_subset`: `e ↦ e \ D` is an order isomorphism
+  from these `e` onto the flags of the ordinal sum, `D` itself going to the empty flag;
+* `gaps_eq_empty_iff`, `flags_gaps_iff`, `above_eq_iff`: the ordinal sum, equivalently its set of
+  non-empty flags, equivalently the set of `e ≠ D`, is empty exactly when every step of `D` from
+  `m` on is a cover; the terms below `m` do not intervene.
+
+Not formalised: the unfolding itself, the manifolds with boundary `Σ_d`, the fibrations, the
+cylindrical stratification of their boundaries and the identification of the boundary strata
+with the `Σ_e`; Mathlib has no stratified spaces.
+-/
+
+namespace Grothendieck.Folder150.Flags
+
+variable {I : Type*} [PartialOrder I] {D e : Finset I} {m t a b x : I}
+
+/-- `a < b` are consecutive terms of the flag `D`. -/
+def Consec (D : Finset I) (a b : I) : Prop := a ∈ D ∧ b ∈ D ∧ a < b ∧ ∀ c ∈ D, ¬(a < c ∧ c < b)
+
+/-- The ordinal sum `I_{]i_p,i_{p+1}[} ⊔ … ⊔ I_{]i_{n-1},i_n[}`, `m = i_p`, inside `I`. -/
+def gaps (D : Finset I) (m : I) : Set I := {x | ∃ a b, Consec D a b ∧ m ≤ a ∧ x ∈ Set.Ioo a b}
+
+/-- The flags `e ⊇ D` with the same terms as `D` up to `m` and the same last term `t`. -/
+def Above (D : Finset I) (m t : I) (e : Finset I) : Prop :=
+  IsChain (· ≤ ·) (e : Set I) ∧ D ⊆ e ∧ (∀ x ∈ e, x ≤ m → x ∈ D) ∧ ∀ x ∈ e, x ≤ t
+
+variable (hD : IsChain (· ≤ ·) (D : Set I)) (hm : m ∈ D) (ht : t ∈ D) (htop : ∀ x ∈ D, x ≤ t)
+include hD
+
+/-- The union is an ordinal sum: the interval of a lower step lies below that of a higher one. -/
+theorem lt_of_mem_Ioo {a' b' y : I} (h : Consec D a b) (h' : Consec D a' b')
+    (hx : x ∈ Set.Ioo a b) (hy : y ∈ Set.Ioo a' b') (ha : a < a') : x < y := by
+  refine hx.2.trans_le ((hD.total h'.1 h.2.1).elim (fun h₁ => ?_) id) |>.trans hy.1
+  exact h₁.eq_or_lt.elim (·.ge) fun h₁ => (h.2.2.2 a' h'.1 ⟨ha, h₁⟩).elim
+
+include hm ht htop in
+theorem mem_gaps_iff : x ∈ gaps D m ↔ x ∉ D ∧ m < x ∧ x < t ∧ ∀ y ∈ D, x ≤ y ∨ y ≤ x := by
+  classical
+  constructor
+  · rintro ⟨a, b, ⟨ha, hb, -, hc⟩, hma, hax, hxb⟩
+    refine ⟨fun hx => hc x hx ⟨hax, hxb⟩, hma.trans_lt hax, hxb.trans_le (htop b hb), fun y hy => ?_⟩
+    obtain hya | hay := hD.total hy ha
+    · exact .inr (hya.trans hax.le)
+    obtain hyb | hby := hD.total hy hb
+    · obtain h | rfl := hay.lt_or_eq
+      · obtain h' | rfl := hyb.lt_or_eq
+        · exact (hc y hy ⟨h, h'⟩).elim
+        · exact .inl hxb.le
+      · exact .inr hax.le
+    · exact .inl (hxb.le.trans hby)
+  · rintro ⟨hxD, hmx, hxt, hcomp⟩
+    obtain ⟨a, haL, haM⟩ := (D.filter (· < x)).exists_maximal ⟨m, by simp [hm, hmx]⟩
+    obtain ⟨b, hbU, hbM⟩ := (D.filter (x < ·)).exists_minimal ⟨t, by simp [ht, hxt]⟩
+    simp only [Finset.mem_filter] at haL hbU haM hbM
+    refine ⟨a, b, ⟨haL.1, hbU.1, haL.2.trans hbU.2, fun c hc ⟨hac, hcb⟩ => ?_⟩, ?_, haL.2, hbU.2⟩
+    · obtain hxc | hcx := hcomp c hc
+      · obtain h | rfl := hxc.lt_or_eq
+        · exact hcb.not_ge (hbM ⟨hc, h⟩ hcb.le)
+        · exact hxD hc
+      · obtain h | rfl := hcx.lt_or_eq
+        · exact hac.not_ge (haM ⟨hc, h⟩ hac.le)
+        · exact hxD hc
+    · exact (hD.total hm haL.1).elim id fun h => haM ⟨hm, hmx⟩ h
+
+variable [DecidableEq I]
+
+include hm ht htop in
+theorem above_iff : Above D m t e ↔ IsChain (· ≤ ·) (e : Set I) ∧ D ⊆ e ∧
+    ((e \ D : Finset I) : Set I) ⊆ gaps D m := by
+  refine ⟨fun ⟨he, hDe, hlo, hhi⟩ => ⟨he, hDe, fun x hx => ?_⟩, fun ⟨he, hDe, hg⟩ => ⟨he, hDe,
+    fun x hx hxm => ?_, fun x hx => ?_⟩⟩
+  · simp only [Finset.coe_sdiff, Set.mem_sdiff, Finset.mem_coe] at hx
+    refine (mem_gaps_iff hD hm ht htop).2 ⟨hx.2, ?_, (hhi x hx.1).lt_of_ne ?_,
+      fun y hy => he.total hx.1 (hDe hy)⟩
+    · exact ((he.total (hDe hm) hx.1).resolve_right fun h => hx.2 (hlo x hx.1 h)).lt_of_ne
+        (by rintro rfl; exact hx.2 hm)
+    · rintro rfl; exact hx.2 ht
+  all_goals by_contra! h
+  · have := ((mem_gaps_iff hD hm ht htop).1 (hg (Finset.mem_coe.2 (Finset.mem_sdiff.2 ⟨hx, h⟩)))).2.1
+    exact this.not_ge hxm
+  · exact h (if hxD : x ∈ D then htop x hxD else
+      ((mem_gaps_iff hD hm ht htop).1 (hg (Finset.mem_coe.2 (Finset.mem_sdiff.2 ⟨hx, hxD⟩)))).2.2.1.le)
+
+include hm ht htop in
+/-- `e ↦ e \ D` identifies the flags above `D` with the flags of the ordinal sum. -/
+def aboveEquiv : {e // Above D m t e} ≃ {c : Finset I // IsChain (· ≤ ·) (c : Set I) ∧
+    (c : Set I) ⊆ gaps D m} where
+  toFun e := ⟨e.1 \ D, ((above_iff hD hm ht htop).1 e.2).1.mono (by simp),
+    ((above_iff hD hm ht htop).1 e.2).2.2⟩
+  invFun c := ⟨c.1 ∪ D, (above_iff hD hm ht htop).2 ⟨by
+    rw [Finset.coe_union, isChain_union]
+    exact ⟨c.2.1, hD, fun x hx y hy _ =>
+      (((mem_gaps_iff hD hm ht htop).1 (c.2.2 hx)).2.2.2 y hy)⟩, Finset.subset_union_right,
+    by rw [Finset.union_sdiff_right]; exact (Finset.coe_subset.2 Finset.sdiff_subset).trans c.2.2⟩⟩
+  left_inv e := Subtype.ext (Finset.sdiff_union_of_subset e.2.2.1)
+  right_inv c := Subtype.ext (Finset.union_sdiff_cancel_right (Finset.disjoint_left.2
+    fun _ hx => ((mem_gaps_iff hD hm ht htop).1 (c.2.2 hx)).1))
+
+theorem aboveEquiv_eq_empty (e : {e // Above D m t e}) :
+    (aboveEquiv hD hm ht htop e).1 = ∅ ↔ e.1 = D := by
+  exact Finset.sdiff_eq_empty_iff_subset.trans ⟨(·.antisymm e.2.2.1), (·.le)⟩
+
+theorem aboveEquiv_subset (e e' : {e // Above D m t e}) :
+    (aboveEquiv hD hm ht htop e).1 ⊆ (aboveEquiv hD hm ht htop e').1 ↔ e.1 ⊆ e'.1 := by
+  change e.1 \ D ⊆ e'.1 \ D ↔ _
+  exact ⟨fun h x hx => if hxD : x ∈ D then e'.2.2.1 hxD else
+    (Finset.mem_sdiff.1 (h (Finset.mem_sdiff.2 ⟨hx, hxD⟩))).1, (Finset.sdiff_subset_sdiff · le_rfl)⟩
+
+omit hD [DecidableEq I] in
+/-- (a): the ordinal sum is empty exactly when every step of `D` from `m` on is a cover. -/
+theorem gaps_eq_empty_iff : gaps D m = ∅ ↔ ∀ a b, Consec D a b → m ≤ a → a ⋖ b := by
+  simp only [Set.eq_empty_iff_forall_notMem, gaps, Set.mem_ofPred_eq, not_exists, not_and]
+  exact ⟨fun h a b hab hm => ⟨hab.2.2.1, fun c h₁ h₂ => h c a b hab hm ⟨h₁, h₂⟩⟩,
+    fun h x a b hab hm hx => (h a b hab hm).2 hx.1 hx.2⟩
+
+omit hD [DecidableEq I] in
+/-- (a), as stated: the ordinal sum has no non-empty flag exactly when each step is a cover. -/
+theorem flags_gaps_iff : (∀ c : Finset I, IsChain (· ≤ ·) (c : Set I) →
+    (c : Set I) ⊆ gaps D m → c = ∅) ↔ ∀ a b, Consec D a b → m ≤ a → a ⋖ b := by
+  rw [← gaps_eq_empty_iff]
+  refine ⟨fun h => Set.eq_empty_iff_forall_notMem.2 fun x hx => ?_,
+    fun h c _ hc => Finset.coe_eq_empty.1 (Set.subset_eq_empty hc h)⟩
+  simpa using h {x} (by simp) (by simpa)
+
+include hm ht htop in
+/-- (b) with (a): `D` is the only flag above itself, i.e. the fibres of `Σ_{d'} → Σ_d` have no
+boundary strata, exactly when every step of `D` from `m = i_p` on is a cover. -/
+theorem above_eq_iff : (∀ e, Above D m t e → e = D) ↔ ∀ a b, Consec D a b → m ≤ a → a ⋖ b := by
+  rw [← flags_gaps_iff]
+  refine ⟨fun h c hc hcg => ?_, fun h e he => ?_⟩
+  · have := (aboveEquiv_eq_empty hD hm ht htop _).2 (h _ ((aboveEquiv hD hm ht htop).symm
+      ⟨c, hc, hcg⟩).2)
+    rwa [Equiv.apply_symm_apply] at this
+  · exact (aboveEquiv_eq_empty hD hm ht htop ⟨e, he⟩).1 (h _ (aboveEquiv hD hm ht htop ⟨e, he⟩).2.1
+      (aboveEquiv hD hm ht htop ⟨e, he⟩).2.2)
+
+end Grothendieck.Folder150.Flags

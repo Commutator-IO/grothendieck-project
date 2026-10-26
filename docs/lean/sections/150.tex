@@ -75,6 +75,28 @@ Dans le déploiement d'une stratification équisingulière non singulière, pré
 \end{encadre}
 {\small Le mot qui qualifie \q{successeur} à la page~47 est une addition incertaine ; le critère est fixé par la page~46, lisible. Mathlib n'a pas les stratifications équisingulières ni leurs déploiements. On se reportera aux notes de Grothendieck (\lot{150}{1}{1}).\par}
 
+\noindent\emph{Le critère combinatoire, vérifié.} Le théorème reste non démontré, mais sa partie purement ordinale est vérifiée par Lean (\texttt{Folder150.Flags}). Soit $I$ un ensemble ordonné quelconque, $d' = (i_1 < \dots < i_n)$ un drapeau, $m = i_p$ l'un de ses termes et $d = (i_1, \dots, i_p)$ le segment initial qu'il détermine. On note $J$ la réunion des intervalles ouverts $]i_k, i_{k+1}[$, $p \leq k < n$, et l'on appelle \emph{drapeaux au-dessus de $d'$} les drapeaux $e \supset d'$ qui ont les mêmes termes que $d'$ jusqu'à $i_p$ et le même dernier terme $i_n$ : ce sont les indices des strates $\Sigma_e$ du bord des fibres.
+
+\begin{encadre}
+\begin{enonce}[énoncé de l'édition, pages~45 à~47, partie combinatoire]
+\begin{enumerate}
+\item[(i)] $J$ est la somme ordinale des $I_{]i_k, i_{k+1}[}$ : un point d'un intervalle est en dessous de tout point d'un intervalle plus haut. C'est l'ensemble des points hors de $d'$, strictement compris entre $i_p$ et $i_n$ et comparables à tous les termes de $d'$.
+\item[(ii)] $e \mapsto e \smallsetminus d'$ est un isomorphisme d'ensembles ordonnés (par inclusion) des drapeaux au-dessus de $d'$ sur les drapeaux de $J$, qui envoie $d'$ sur le drapeau vide.
+\item[(iii)] Les conditions suivantes sont équivalentes : $J$ est vide ; $J$ n'a aucun drapeau non vide ; $d'$ est le seul drapeau au-dessus de lui-même ; $i_{k+1}$ couvre $i_k$ dans $I$ pour $p \leq k < n$. Les termes $i_1, \dots, i_{p-1}$ n'interviennent pas.
+\end{enumerate}
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+(i) Si $x \in \,]i_k, i_{k+1}[$ et $y \in \,]i_l, i_{l+1}[$ avec $k < l$, on a $i_{k+1} \leq i_l$, sans quoi $i_l$ serait un terme de $d'$ strictement entre $i_k$ et $i_{k+1}$ ; donc $x < i_{k+1} \leq i_l < y$. Un point de $]i_k, i_{k+1}[$ n'est pas un terme, puisque les termes sont consécutifs, et il est comparable à tous les termes, qui sont soit $\leq i_k$, soit $\geq i_{k+1}$. Réciproquement, si $x \notin d'$ est comparable à tous les termes et $i_p < x < i_n$, soit $a$ le plus grand terme $< x$ et $b$ le plus petit terme $> x$ ; ils sont consécutifs, et $a \geq i_p$.
+
+(ii) Soit $e$ au-dessus de $d'$ et $x \in e \smallsetminus d'$. Comme $e$ est une chaîne qui contient $d'$, $x$ est comparable à tous les termes ; il n'est pas $\leq i_p$, puisque $e$ et $d'$ ont les mêmes termes jusqu'à $i_p$, ni égal à $i_n$, et il est $\leq i_n$ : par (i), $x \in J$. Inversement, si $c$ est un drapeau de $J$, $c \cup d'$ est une chaîne, puisque les points de $J$ sont comparables aux termes, et elle est au-dessus de $d'$ par (i). Les deux applications sont inverses l'une de l'autre parce que $J$ ne rencontre pas $d'$, et elles respectent l'inclusion.
+
+(iii) $J$ est vide si et seulement si chaque $]i_k, i_{k+1}[$, $k \geq p$, l'est, c'est-à-dire si $i_{k+1}$ couvre $i_k$ ; un point de $J$ est un drapeau non vide ; et par (ii) les drapeaux au-dessus de $d'$ autres que $d'$ correspondent aux drapeaux non vides de $J$.
+\end{proof}
+
+{\small\noindent\emph{Portée de la vérification.} Lean vérifie (i) à (iii) pour un ensemble ordonné quelconque, les drapeaux étant des chaînes finies (\texttt{lt\_of\_mem\_Ioo}, \texttt{mem\_gaps\_iff}, \texttt{aboveEquiv}, \texttt{aboveEquiv\_eq\_empty}, \texttt{aboveEquiv\_subset}, \texttt{gaps\_eq\_empty\_iff}, \texttt{flags\_gaps\_iff}, \texttt{above\_eq\_iff}). Ne sont pas formalisés : le déploiement, les variétés à bord $\Sigma_d$, les fibrations $\Sigma_{d'} \to \Sigma_d$, la stratification cylindrique de leur bord et l'identification de ses strates aux $\Sigma_e$, c'est-à-dire tout ce qui fait passer du critère ordinal à la lissité. C'est pourquoi l'encadré ci-dessus reste non vérifié.\par}
+
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 47 à 66 et 70, le déploiement comme espace ordonné\piste{150-unfolding-as-ordered-space}]\nonverifie
 Les données déployées d'une stratification équisingulière indexée par un ensemble ordonné fini $I$ (strates déployées $\Sigma_i$, tubes de raccord $\Sigma_{ij}$ fibrés sur $\Sigma_i$ et plongés de façon fermée, avec collier, dans $\Sigma_j$) équivalent à un seul espace topologique ordonné $\Sigma$, dont le graphe de l'ordre est la réunion des tubes. Cet espace est soumis à des conditions de propreté, de transversalité et de finitude, chaque $\Sigma_{<x}$ étant fini et totalement ordonné, et muni d'une application strictement croissante $\pi_0(\Sigma) \to I$, non nécessairement surjective.
