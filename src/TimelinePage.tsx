@@ -380,30 +380,30 @@ function Works() {
 const WPP = { hand: 140, typed: 200, printed: 450 } as const;
 type VolumeKind = keyof typeof WPP;
 type VolumeStatus = 'printed' | 'edited' | 'unedited' | 'bnf';
-type Volume = { title: string; short?: string; years: string; kind: VolumeKind; status: VolumeStatus; pages: number; cotes?: string[]; note?: string };
+type Volume = { title: string; short?: string; years: string; kind: VolumeKind; status: VolumeStatus; pages: number; cotes?: string[]; note?: string; edition?: string };
 
 const pagesOf = (cotes: string[]) => cotes.reduce((a, c) => a + (COTES.find((k) => k.id === c)?.pages ?? 0), 0);
 const range = (p: string, a: number, b: number) => Array.from({ length: b - a + 1 }, (_, i) => `${p}${a + i}`);
 
 const VOLUMES: Volume[] = ([
-  { title: 'EGA I', years: '1960', kind: 'printed', status: 'printed', pages: 228, note: 'Publ. Math. IHÉS 4' },
-  { title: 'SGA 1', years: '1960–61', kind: 'printed', status: 'printed', pages: 447, note: 'LNM 224 (1971)' },
+  { title: 'EGA I', years: '1960', kind: 'printed', status: 'printed', pages: 228, note: 'Publ. Math. IHÉS 4' , edition: '2nd edition, Springer, Grundlehren 166 (1971)' },
+  { title: 'SGA 1', years: '1960–61', kind: 'printed', status: 'printed', pages: 447, note: 'LNM 224 (1971)' , edition: 're-edited, SMF, Documents mathématiques 3 (2003)' },
   { title: 'EGA II', years: '1961', kind: 'printed', status: 'printed', pages: 222, note: 'Publ. Math. IHÉS 8' },
   { title: 'EGA III', years: '1961–63', kind: 'printed', status: 'printed', pages: 258, note: 'Publ. Math. IHÉS 11, 17' },
-  { title: 'SGA 2', years: '1962', kind: 'printed', status: 'printed', pages: 290, note: 'approximate' },
-  { title: 'SGA 3', years: '1962–64', kind: 'printed', status: 'printed', pages: 1750, note: 'LNM 151–153, approximate' },
+  { title: 'SGA 2', years: '1962', kind: 'printed', status: 'printed', pages: 290, note: 'approximate' , edition: 're-edited, SMF, Documents mathématiques 4 (2005)' },
+  { title: 'SGA 3', years: '1962–64', kind: 'printed', status: 'printed', pages: 1750, note: 'LNM 151–153, approximate' , edition: 're-edited by Gille and Polo, SMF, Documents mathématiques 7–8 (2011)' },
   { title: 'SGA 4', years: '1963–64', kind: 'printed', status: 'printed', pages: 1580, note: 'LNM 269, 270, 305, approximate' },
   { title: 'EGA IV', years: '1964–67', kind: 'printed', status: 'printed', pages: 1106, note: 'Publ. Math. IHÉS 20, 24, 28, 32' },
   { title: 'SGA 5', years: '1965–66', kind: 'printed', status: 'printed', pages: 480, note: 'LNM 589, approximate' },
   { title: 'SGA 6', years: '1966–67', kind: 'printed', status: 'printed', pages: 700, note: 'LNM 225, approximate' },
   { title: 'SGA 7', years: '1967–69', kind: 'printed', status: 'printed', pages: 960, note: 'LNM 288, 340, approximate' },
-  { title: 'La Longue Marche', short: 'Longue Marche', years: '1981', kind: 'hand', status: 'unedited', pages: 0, cotes: range('140-', 1, 4), note: '§ 1–37 edited by Malgoire (1995), the rest unedited' },
+  { title: 'La Longue Marche', short: 'Longue Marche', years: '1981', kind: 'hand', status: 'unedited', pages: 0, cotes: range('140-', 1, 4), note: '§ 1–37 edited by Malgoire (1995), the rest unedited' , edition: '§ 1–37 only, ed. Malgoire, Université Montpellier II (1995)' },
   { title: 'Teichmülleries', years: '1981–83', kind: 'hand', status: 'unedited', pages: 0, cotes: ['144'] },
   { title: "Structure à l'infini des M_{g,ν}", short: 'Structure à l’infini', years: '1982–83', kind: 'hand', status: 'unedited', pages: 0, cotes: ['147'], note: 'dated by the edition to the winter of 1982–83' },
-  { title: 'À la poursuite des champs', short: 'Poursuite des champs', years: '1983', kind: 'typed', status: 'edited', pages: 0, cotes: range('134-', 2, 8), note: 'volume I edited by Maltsiniotis (2022)' },
-  { title: "Esquisse d'un programme", short: 'Esquisse', years: '1984', kind: 'printed', status: 'edited', pages: 44, note: 'as printed in Geometric Galois Actions 1 (1997)' },
+  { title: 'À la poursuite des champs', short: 'Poursuite des champs', years: '1983', kind: 'typed', status: 'edited', pages: 0, cotes: range('134-', 2, 8), note: 'volume I edited by Maltsiniotis (2022)' , edition: 'vol. I, ed. Maltsiniotis, SMF, Documents mathématiques 20 (2022)' },
+  { title: "Esquisse d'un programme", short: 'Esquisse', years: '1984', kind: 'printed', status: 'edited', pages: 44, note: 'as printed in Geometric Galois Actions 1 (1997)' , edition: 'in Geometric Galois Actions 1, Cambridge (1997)' },
   { title: 'Vers une géométrie des formes', short: 'Géométrie des formes', years: '1986', kind: 'hand', status: 'unedited', pages: 0, cotes: range('156-', 1, 9) },
-  { title: 'Les Dérivateurs', short: 'Dérivateurs', years: '1990–91', kind: 'hand', status: 'edited', pages: 0, cotes: range('157-', 1, 5), note: 'edited by Künzer, Malgoire and Maltsiniotis' },
+  { title: 'Les Dérivateurs', short: 'Dérivateurs', years: '1990–91', kind: 'hand', status: 'edited', pages: 0, cotes: range('157-', 1, 5), note: 'edited by Künzer, Malgoire and Maltsiniotis' , edition: 'ed. Künzer, Malgoire and Maltsiniotis (online)' },
   { title: 'Géométrie élémentaire schématique', short: 'Géom. élém. schématique', years: '1992', kind: 'hand', status: 'bnf', pages: 1098, note: 'BnF, box 3: 549 leaves written on both sides' },
   { title: 'Trialité', years: '1995', kind: 'hand', status: 'bnf', pages: 89, note: 'BnF, box 43: 89 leaves (counted as pages)' },
   { title: 'Notions de « géographie combinatoire »', short: 'Géographie combinatoire', years: '1996', kind: 'hand', status: 'bnf', pages: 0, note: 'BnF, box 43: number of leaves not recorded on 23 October 2026, drawn at the minimum width' },
@@ -415,6 +415,8 @@ const VOLUME_STYLE: Record<VolumeStatus, { fill: string; stroke: string; dash?: 
   unedited: { fill: '#fff', stroke: 'var(--color-brand-600)', label: 'Manuscript, unedited (Montpellier)' },
   bnf: { fill: '#fff', stroke: 'var(--color-brand-600)', dash: '3 2', label: 'Manuscript, unedited and not transcribed (BnF)' },
 };
+
+const RIBBON = '#eb6834';
 
 function Volumes() {
   const [sel, setSel] = useState<Volume | null>(null);
@@ -460,6 +462,12 @@ function Volumes() {
             {VOLUME_STYLE[k].label}
           </span>
         ))}
+        <span className="inline-flex items-center gap-1.5">
+          <svg width="10" height="14" aria-hidden="true">
+            <path d="M1 0 h8 v13 l-4 -4 l-4 4 z" fill={RIBBON} />
+          </svg>
+          Published since: a later edition, or the first edition of a manuscript
+        </span>
       </div>
       <div className="mt-3 overflow-x-auto" onMouseLeave={() => setSel(null)}>
         <svg
@@ -478,6 +486,7 @@ function Volumes() {
             return (
               <g key={v.title} opacity={on ? 1 : 0.35} onMouseEnter={() => setSel(v)} style={{ cursor: 'pointer' }}>
                 <rect x={bx} y={y0} width={w} height={BOOK} rx={2} fill={st.fill} stroke={st.stroke} strokeWidth={1.5} strokeDasharray={st.dash} />
+                {v.edition && <path d={`M${bx + w / 2 - Math.min(4, w / 2 - 1)} ${y0 - 1} h${2 * Math.min(4, w / 2 - 1)} v14 l-${Math.min(4, w / 2 - 1)} -4 l-${Math.min(4, w / 2 - 1)} 4 z`} fill={RIBBON} />}
                 {w >= 13 && (
                   <text
                     transform={`translate(${bx + w / 2 + 3.5} ${y0 + BOOK - 6}) rotate(-90)`}
@@ -500,6 +509,7 @@ function Volumes() {
             <span className="font-semibold text-ink-900">{sel.title}</span> ({sel.years}) · {fmt(sel.pages)} {sel.kind === 'printed' ? 'printed' : sel.kind === 'typed' ? 'typed' : 'handwritten'} pages · about {fmt(Math.round(words(sel) / 1000) * 1000)} words
             {sel.cotes && <> · folders {sel.cotes[0]}–{sel.cotes[sel.cotes.length - 1].split('-').pop()}</>}
             {sel.note && <> · {sel.note}</>}
+            {sel.edition && <> · <span className="text-ink-800">published since: {sel.edition}</span></>}
           </>
         ) : (
           <span className="text-ink-400">Hover a spine for the work, its pages and its estimated length.</span>
@@ -526,7 +536,7 @@ function Volumes() {
                 <td className="tabular py-1 pr-3 text-right">{fmt(v.pages)}</td>
                 <td className="py-1 pr-3">{v.kind}</td>
                 <td className="tabular py-1 pr-3 text-right">{fmt(Math.round(words(v) / 1000) * 1000)}</td>
-                <td className="py-1 text-ink-500">{[VOLUME_STYLE[v.status].label, v.note].filter(Boolean).join(' · ')}</td>
+                <td className="py-1 text-ink-500">{[VOLUME_STYLE[v.status].label, v.note, v.edition && `published since: ${v.edition}`].filter(Boolean).join(' · ')}</td>
               </tr>
             ))}
           </tbody>
