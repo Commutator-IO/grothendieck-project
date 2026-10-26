@@ -30,6 +30,7 @@
 \newcommand{\Gal}{\operatorname{Gal}}
 \theoremstyle{definition}
 \newtheorem{problem}{Problem}
+\theoremstyle{plain}\newtheorem*{proposition}{Proposition}\theoremstyle{definition}
 % Each problem statement in a frame, as the statements of the Lean article.
 \tcolorboxenvironment{problem}{enhanced, breakable, colback=white, colframe=black!55, boxrule=0.6pt, arc=0pt, left=7pt, right=7pt, top=4pt, bottom=4pt, before skip=14pt, after skip=8pt}
 \newcommand{\entry}[1]{\par\medskip\noindent\textbf{#1}\enspace}
@@ -42,7 +43,7 @@
 
 \title{Open questions from Grothendieck's Montpellier notes:\\ fourteen statements a formalisation could not reach}
 \author{Michel Hua\\ \small Commutator, Paris\\ \small\texttt{michel@commutator.io} · ORCID 0009-0002-8304-0683}
-\date{Working paper, 25 October 2026}
+\date{Working paper, 26 October 2026}
 
 \begin{document}
 
@@ -51,7 +52,7 @@
 \maketitle
 
 \begin{abstract}
-The University of Montpellier has put online 178 folders of Alexandre Grothendieck's mathematical working notes. Since August 2026 an edition has transcribed 164 of them with a language model, restated each in current notation, searched the literature for the statements they contain, and formalised what it could in Lean~4 against Mathlib. Most of the statements that look new sit in theories Mathlib does not have yet: étale cohomology, topoi, stacks, abelian schemes, motives. This note collects fourteen of them for mathematicians. Each comes with its folder and page, the context, what the literature search found, the argument the page gives or sketches, the steps the edition added, and what would settle it. None of the statements has been checked by a specialist, and several may already be in print; a reference is as welcome as a proof or a counterexample.
+The University of Montpellier has put online 178 folders of Alexandre Grothendieck's mathematical working notes. Since August 2026 an edition has transcribed 165 of them with a language model, restated each in current notation, searched the literature for the statements they contain, and formalised what it could in Lean~4 against Mathlib. Most of the statements that look new sit in theories Mathlib does not have yet: étale cohomology, topoi, stacks, abelian schemes, motives. This note collects fourteen of them for mathematicians. Each comes with its folder and page, the context, what the literature search found, the argument the page gives or sketches, the steps the edition added, and what would settle it. None of the statements has been checked by a specialist, and several may already be in print; a reference is as welcome as a proof or a counterexample.
 \end{abstract}
 
 
@@ -59,9 +60,9 @@ The University of Montpellier has put online 178 folders of Alexandre Grothendie
 
 Grothendieck gave his mathematical papers to Jean Malgoire in 1990 and 1995. They were deposited at the University of Montpellier in 2010 and given to it in 2012, and the university placed 178 folders, 16,074 pages by its inventory's count, in open access as facsimiles. They are working notes: drafts in ink and pencil, restarted, struck, annotated, almost never dated. Twenty folders have been edited by hand. The rest had not been transcribed.
 
-Since August 2026 an edition has read the remaining folders with a language model as first transcriber, and written for each folder a \emph{modernised reading}, a restatement in current notation made from the transcription and never from the hand. A register of \emph{findings} lists the statements of the folders that may not stand in the literature, each written as a claim about the literature with what was searched and what would settle it; at the time of writing it holds 463 rows, of which 81 turned out to be in print. Statements were then formalised in Lean~4 against a pinned revision of Mathlib, about two thousand theorems in all. A companion paper describes the formalisation~\cite{huacicm}.
+Since August 2026 an edition has read the remaining folders with a language model as first transcriber, and written for each folder a \emph{modernised reading}, a restatement in current notation made from the transcription and never from the hand. A register of \emph{findings} lists the statements of the folders that may not stand in the literature, each written as a claim about the literature with what was searched and what would settle it; at the time of writing it holds 456 rows, of which 83 turned out to be in print. Statements were then formalised in Lean~4 against a pinned revision of Mathlib, about two thousand theorems in all. A companion paper describes the formalisation~\cite{huacicm}.
 
-Lean settles a statement only when the objects it speaks of exist in the library. In October 2026, 203 open findings with no proof were sorted by what Mathlib can reach: 16 were reachable as it stands, 39 in part, and 147 not at all, because they live in étale or crystalline cohomology, topoi, stacks, derivators, motives or Hodge theory~\cite{huacicm}. Those are exactly the parts of the notes where Grothendieck's own work was. The aim of this note is to hand the most promising of them to people who can prove them with pen and paper, or say where they are already proved.
+Lean settles a statement only when the objects it speaks of exist in the library. In October 2026, 203 open findings with no proof were sorted by what Mathlib can reach: 16 were reachable as it stands, 39 in part and 147 not at all, and one was set aside as ill-posed; the 147 are out of reach because they live in étale or crystalline cohomology, topoi, stacks, derivators, motives or Hodge theory~\cite{huacicm}. Those are exactly the parts of the notes where Grothendieck's own work was. The aim of this note is to hand the most promising of them to people who can prove them with pen and paper, or say where they are already proved.
 
 \subsection*{How to read the entries}
 
@@ -72,19 +73,19 @@ The transcriptions themselves are not public: the rights belong to Grothendieck'
 \section{Étale cohomology and Hodge theory}
 
 \begin{problem}[A global bound with a shift of 3]\label{p:cd}
-For a field $k$ of characteristic $\ell$ put $\ell^{\nu(k)} = [k : k^{\ell}]$, and for a scheme $Z$ of characteristic $\ell$ let $\nu(Z)$ be the supremum of $\nu(k(z))$ over its maximal points. Let $X$ be an affine scheme on which $\ell$ is not invertible, so that $V(\ell) \subset X$ has characteristic $\ell$. Is it true that
+For a field $k$ of characteristic $p$ put $p^{\nu(k)} = [k : k^{p}]$, and for a scheme $Z$ of characteristic $p$ let $\nu(Z)$ be the supremum of $\nu(k(z))$ over its maximal points. Let $X$ be an affine scheme on which $p$ is not invertible, so that $V(p) \subset X$ has characteristic $p$. Is it true that
 \[
-\cd_\ell(X) \;\le\; \sup\Bigl(\sup_{x \in X} \cd_\ell k(x),\ \nu(V(\ell)) + 3\Bigr)\,?
+\cd_p(X) \;\le\; \sup\Bigl(\sup_{x \in X} \cd_p k(x),\ \nu(V(p)) + 3\Bigr)\,?
 \]
 \end{problem}
 
-\src{\fac{31}, p.~84, \emph{SGA A [SGA 4] (résidus de rédaction)}, inventory dating [1963--1973]. The page is headed \q{Conjectures sur la cohomologie des schémas affines}; this is its conjecture~2°).}
+\src{\fac{31}, p.~84, \emph{SGA A [SGA 4] (résidus de rédaction)}, inventory dating [1963--1973]. The page is headed \q{Conjectures sur la cohomologie des schémas affines}; this is its conjecture~2°). The page writes $\ell$ for the prime; we write $p$, since it is the characteristic of $V(p)$ and not a prime invertible on $X$.}
 
-\ctx M.~Artin wrote in SGA~4 X~3.0 that in unequal characteristic one must \q{certainement tenir compte} of $[k : k^{\ell}]$, without a bound. The same page states a local form, 4°): for $U$ open in the spectrum of a henselian local domain $A$ of residue characteristic $\ell$ with fraction field of characteristic~$0$, $\cd_\ell(U) \le \dim A + \nu(k) + \cd_\ell(k)$. The words around \q{ouvert} in 4°) are hard to read, so whether $U$ is meant to be affine, and whether it may meet $V(\ell)$, is not known.
+\ctx M.~Artin wrote in SGA~4 X~3.0 that in unequal characteristic one must \q{certainement tenir compte} of the rank of $\Omega^1_k$, without a bound \cite{sga4}. The same page states a local form, 4°): for $U$ open in the spectrum of a henselian local domain $A$ of residue characteristic $p$ with fraction field of characteristic~$0$, $\cd_p(U) \le \dim A + \nu(k) + \cd_p(k)$. The words around \q{ouvert} in 4°) are hard to read, so whether $U$ is meant to be affine, and whether it may meet $V(p)$, is not known.
 
-\known The local form holds, in a sharper form, for $U$ a non-empty affine open of $\Spec A[1/\ell]$ with $A$ excellent: Gabber and Orgogozo prove $\cd_\ell(U) = \dim A + \dim_\ell(k)$ \cite[Th.~6.1]{gabberorgogozo}, and Kato's $\ell$-dimension satisfies $\dim_\ell(k) \le \nu(k) + \cd_\ell(k)$. Mathew bounds $\cd_\ell$ of affine opens of $\Spec R[1/\ell]$ for $R$ excellent normal and henselian along an ideal containing~$\ell$, in terms of $\dim R_{\mathfrak p} + \log_\ell [\kappa(\mathfrak p) : \kappa(\mathfrak p)^\ell]$ \cite[Prop.~4.5]{mathew}. Globally we found only $\cd_\ell(X) \le \dim X + \sup_x \cd_\ell k(x)$ for $X$ qcqs of finite dimension \cite[Cor.~3.29]{clausenmathew}, which gives $2n+3$ for $\Spec \mathbb Z_\ell[x_1,\dots,x_n]$ where the page's bound gives $n+3$. Gabber and Zavyalov settle the analogous expectation for affinoids \cite[Th.~1.7]{gabberzavyalov}; the Travaux de Gabber treat $\ell$ invertible only.
+\known The local form holds, in a sharper form, for $U$ a non-empty affine open of $\Spec A[1/p]$ with $A$ an excellent henselian local domain and $\operatorname{char} K = 0$: Gabber and Orgogozo prove $\cd_p(U) = \dim A + \dim_p(k)$ \cite[Th.~6.1]{gabberorgogozo}, and Kato's $p$-dimension satisfies $\dim_p(k) \le \nu(k) + \cd_p(k)$, which is immediate from their Définition~1.1. Mathew proves that the residue fields of $\Spec R[1/p]$ have $\cd_p \le d+1$ when $R$ is an excellent normal domain, henselian along an ideal $I \ni p$, with $\dim R_{\mathfrak p} + \log_p [\kappa(\mathfrak p) : \kappa(\mathfrak p)^p] \le d$ for $\mathfrak p \supseteq I$; the same bound for the affine opens $\Spec R[1/f]$ of $\Spec R[1/p]$ is established in the course of the proof \cite[Prop.~4.5]{mathew}. Globally, SGA~4 gives $\cd_p X \le 2\dim X + 1$ for $X$ of finite type over $\mathbb Z$ \cite[X~6.2]{sga4}, and Clausen and Mathew give $\cd_p(X) \le \dim X + \sup_x \cd_p k(x)$ for $X$ qcqs of finite Krull dimension \cite[Cor.~3.29]{clausenmathew}; for $\Spec \mathbb Z_p[x_1,\dots,x_n]$, which is not of finite type over $\mathbb Z$, the latter gives $2n+3$ where the page's bound gives $n+3$. Gabber and Zavyalov settle the analogous expectation for affinoids \cite[Th.~1.7]{gabberzavyalov}; the Travaux de Gabber treat $\ell$ invertible only.
 
-\ideas The constant cannot be lowered to~$2$ (our observation): for $X = \Spec \mathbb Z$ and $\ell$ odd, $\nu(V(\ell)) = 0$ and $\sup_x \cd_\ell k(x) = \cd_\ell \mathbb Q = 2$, while Artin--Verdier duality gives $H^3(\Spec \mathbb Z, j_!\mu_\ell) \cong \mathbb Z/\ell$ \cite[II.3]{milneadt}, so $\cd_\ell(\Spec \mathbb Z) = 3$. A natural route is the excision sequence for $V(\ell) \subset X$ and its complement $X[1/\ell]$: $V(\ell)$ is affine of characteristic~$\ell$, so of $\ell$-cohomological dimension at most~$1$ \cite[X~5.1]{sga4}; local cohomology along $V(\ell)$ can be moved to the henselisation along $V(\ell)$ by Gabber's affine analogue of proper base change, where Gabber--Orgogozo and Mathew apply. The difficulty is to absorb the dimension terms of those local bounds into $\sup_x \cd_\ell k(x)$, which the page's bound allows, and to see where the shift~$3$ comes from: the page does not explain it.
+\ideas The constant cannot be lowered to~$2$ (our observation): for $X = \Spec \mathbb Z$ and $p$ odd, $\nu(V(p)) = 0$ and $\sup_x \cd_p k(x) = \cd_p \mathbb Q = 2$, while $\cd_p(\Spec \mathbb Z) = 3$ \cite[X~6.1]{sga4}; by Artin--Verdier duality $H^3(\Spec \mathbb Z, j_!\mu_p) \cong \mathbb Z/p$ \cite[II.3.2, 3.3]{milneadt}. A natural route, which is the one of Mathew's proof, is the excision sequence for $V(p) \subset X$ and its complement $X[1/p]$: for $X$ noetherian, $V(p)$ is affine of characteristic~$p$, so of $p$-cohomological dimension at most~$1$ \cite[X~5.1]{sga4} (for $X$ not noetherian a limit argument is needed); local cohomology along $V(p)$ can be moved to the henselisation along $V(p)$ by Gabber's affine analogue of proper base change, where Gabber--Orgogozo and Mathew apply. The difficulty is to absorb the dimension terms of those local bounds into $\sup_x \cd_p k(x)$, which the page's bound allows, and to see where the shift~$3$ comes from: the page does not explain it.
 
 \leanst Not attempted: Mathlib has no étale cohomology.
 
@@ -98,49 +99,49 @@ Let $A$ be a noetherian local domain with fraction field $K$ and residue field $
 with exactly two possible exceptions: (a)~$r$ is the characteristic of $K$; (b)~$r = 2$ and some point $x$ of $\Spec A$ has an orderable residue field $k(x)$ with $\cd_2 k(x)(\sqrt{-1})$ finite. It adds that exception~(b) disappears when $A$ is regular, and reduces to \q{$k$ itself real} when $A$ is catenary and universally japanese. Are these refinements true?
 \end{problem}
 
-\src{\fac{31}, p.~22, inventory dating [1963--1973]. The margin gives the example that keeps exception~(b) alive: the local ring at the origin of $\mathbb R[X,Y]/(X^2+Y^2)$, a real domain whose only real point is the origin. The margin also asks: \q{cette restriction est-elle essentielle ???}}
+\src{\fac{31}, p.~22, inventory dating [1963--1973]. The margin gives the example that keeps exception~(b) alive: the local ring at the origin of $\mathbb R[X,Y]/(X^2+Y^2)$, a real domain whose only real point is the origin (Artin's example after SGA~4 X~2.3). The margin also asks: \q{cette restriction est-elle essentielle ???}}
 
-\known The inequality is SGA~4 X~2.4 when $r$ is invertible in $A$, with the cruder exception \q{some residue field orderable}, and with the page's marginal example \cite{sga4}. When $r$ is the residue characteristic and $\operatorname{char} K = 0$, it follows for $A$ excellent henselian from Gabber--Orgogozo~\S3 \cite{gabberorgogozo}. We found nothing on the finer exception~(b), on the regular case, on the catenary refinement, or on $r$ the residue characteristic for $A$ neither excellent nor henselian. Serre's \emph{Cohomologie galoisienne} II~\S4 was not consulted.
+\known The inequality is SGA~4 X~2.4 when $r$ is invertible in $A$, with the cruder exception \q{some residue field orderable} \cite{sga4}. When $r$ is the residue characteristic and $\operatorname{char} K = 0$, it follows for $A$ excellent henselian from Gabber--Orgogozo~\S3 \cite{gabberorgogozo}. We found nothing on the finer exception~(b), on the regular case, on the catenary refinement, or on $r$ the residue characteristic for $A$ neither excellent nor henselian. Serre's \emph{Cohomologie galoisienne} II~\S4 and Scheiderer's \emph{Real and Étale Cohomology} \cite{scheiderer}, where cohomological dimension in the presence of orderings is treated, remain to be read.
 
-\ideas Artin's proof goes by induction on $\dim A$, down to a henselian discrete valuation ring through a height-one prime \cite[X~2.3]{sga4}. The finer exception~(b) says that what matters is the virtual cohomological dimension of the real residue fields, which suggests running the same induction with $\cd_2$ replaced by $\cd_2$ of $k(x)(\sqrt{-1})$ at the real points. The page's exception list covers $r$ equal to the residue characteristic in mixed characteristic, which SGA~4 X~2.4 does not.
+\ideas Artin's proof of X~2.4 goes by induction on $\dim A$, down to a henselian local ring of dimension one through a height-one prime, where X~2.3 and 2.2 apply \cite{sga4}. The finer exception~(b) says that what matters is the virtual cohomological dimension of the real residue fields, which suggests running the same induction with $\cd_2$ replaced by $\cd_2$ of $k(x)(\sqrt{-1})$ at the real points. The page's exception list covers $r$ equal to the residue characteristic in mixed characteristic, which SGA~4 X~2.4 does not.
 
 \leanst Not attempted (Galois cohomology of fields is in Mathlib only in low degree).
 
 \settle A reference for (b) and the two refinements, or an example of a regular local domain where the inequality fails at $r = 2$.
 
 \begin{problem}[Hodge types of the deleted neighbourhood of a point]\label{p:box}
-Let $Y$ be a complex algebraic variety of dimension $n$, $j : X \hookrightarrow Y$ an open immersion with $X$ smooth and dense, $y \in Y \smallsetminus X$, and $H^i = H^i(X \cap B_y) = (R^i j_*\mathbb Q)_y$ with its mixed Hodge structure \cite{durfee}. Then
+Let $Y$ be a complex algebraic variety of dimension $n$, $j : X \hookrightarrow Y$ an open immersion with $X$ smooth and dense, $y \in Y \smallsetminus X$, and $H^i = H^i(X \cap B_y) = (R^i j_*\mathbb Q)_y$ with its mixed Hodge structure (Durfee \cite{durfee} when $(Y \smallsetminus X) \cap B_y = \{y\}$; in general through Saito's mixed Hodge modules \cite{saito}). Then
 \[
 h^{p,q}(H^i) \ne 0 \;\Longrightarrow\; p, q \in [\max(0, i-n+1),\ \min(i, n)],
 \]
-so the weights lie in $[0, 2i]$ for $i \le n-1$ and in $[2(i-n+1), 2n]$ for $i \ge n$, and the level $\max|p-q|$ is at most $\min(i, 2n-1-i) \le \min(i, n-1)$. Is this in the literature, and what is the right relative statement for a proper morphism?
+so the weights lie in $[0, 2i]$ for $i \le n-1$ and in $[2(i-n+1), 2n]$ for $n \le i \le 2n-1$ (and $H^i = 0$ for $i \ge 2n$), and the level $\max|p-q|$ is at most $\min(i, 2n-1-i) \le \min(i, n-1)$. Is this in the literature, and what is the right relative statement for a proper morphism?
 \end{problem}
 
 \src{\fac{12}, pp.~115--119, \emph{Généralités (sous-groupes de Galois motiviques)}, inventory dating 1964--[c.~1971]. Page~119 boxes \q{poids $\le 2\inf(i,n)$, niveau $\le \inf(i, n-1)$} for $X$ regular, $F = \mathbb Q_\ell$ and $f$ an immersion with $n = \dim \overline{f(X)}$, in his yoga of weights and levels of $\ell$-adic sheaves. The same page asks, with a question mark, for a relative version with $n = d_y(f)$ and level $\le \min(i,n)$. The typescript says of its own conclusions (p.~96): \q{la portée des \q{résultats} de notre travail est nécessairement sujette à caution, puisqu'ils dépendent de conjectures non prouvées à l'heure actuelle} (the Weil conjectures and resolution of singularities).}
 
 \ctx The page's argument is a Leray spectral sequence for a factorisation of $f$ as an open immersion with normal crossings complement followed by a proper map, conditional on resolution, purity and the Weil conjectures, with tables of weights and levels. The Hodge-theoretic statement above is our translation.
 
-\known Deligne bounds the Hodge types of the cohomology of a variety \cite[8.2.4]{hodge3}; Durfee constructs the mixed Hodge structure on $H^i(X \cap B_y)$ and its weight spectral sequence; Durfee--Saito, Steenbrink, Navarro Aznar and El~Zein bound weights; for isolated singularities the box is implicit in the literature on links, for instance \cite[\S2]{friedmanlaza}. We did not find the box, or the level bound, for arbitrary $y$.
+\known Deligne bounds the Hodge types of the cohomology of a variety \cite[8.2.4]{hodge3}; Durfee constructs the mixed Hodge structure on $H^i(X \cap B_y)$ and its weight spectral sequence; Durfee--Saito, Steenbrink, Navarro Aznar and El~Zein bound weights; for isolated singularities the box is implicit in the literature on links: it follows from semipurity and duality as in \cite[Th.~2.6, Def.~2.7]{friedmanlaza}. We did not find the box, or the level bound, for arbitrary $y$.
 
-\ideas Our argument: take a resolution $\pi : \tilde Y \to Y$, an isomorphism over $X$, with $D = \pi^{-1}(Y \smallsetminus X)$ simple normal crossings; put $F = \pi^{-1}(y)$ and $F_q = F \cap D^{(q)}$. Then $\dim F_0 \le n-1$ and $\dim F_q \le n-q$. Durfee's weight spectral sequence $E_1 = H^{k-q}(F_q)(-q) \Rightarrow H^k(X \cap B_y)$ and Hodge~III 8.2.4~(i), (ii) for the compact $F_q$ put every $E_1$ term in the box. Locally the lower end moves up by one because $\pi^{-1}(y)$ has dimension at most $n-1$. The cone over a smooth projective $V$ of dimension $n-1$ with $h^{i,0}(V) \ne 0$ attains level $i$ for $i \le n-1$ and $n-1$ at $i = n$. For a proper $f$ with fibre dimension $d$ the gain fails, since a smooth family of curves already has $H^1$ of level $1 = d$; so the relative question of page~119 cannot keep $n-1$ if $d_y(f)$ is the fibre dimension.
+\ideas Our argument: take a resolution $\pi : \tilde Y \to Y$, an isomorphism over $X$, with $D = \pi^{-1}(Y \smallsetminus X)$ simple normal crossings; put $F = \pi^{-1}(y)$ and $F_q = F \cap D^{(q)}$. Then $\dim F_0 \le n-1$ and $\dim F_q \le n-q$. The weight spectral sequence $E_1 = H^{k-q}(F_q)(-q) \Rightarrow H^k(X \cap B_y)$ (Durfee's, in the case he treats; we have not checked its form in the general case) and Hodge~III 8.2.4~(i), (ii) for the compact $F_q$ put every $E_1$ term in the box. Locally the lower end moves up by one because $\pi^{-1}(y)$ has dimension at most $n-1$. The cone over a smooth projective $V$ of dimension $n-1$ with $h^{i,0}(V) \ne 0$ attains level $i$ for $i \le n-1$ and $n-1$ at $i = n$. For a proper $f$ with fibre dimension $d$ the gain fails, since a smooth family of curves already has $H^1$ of level $1 = d$; so the relative question of page~119 cannot keep $n-1$ if $d_y(f)$ is the fibre dimension.
 
 \leanst Not attempted: no Hodge structures on cohomology in Mathlib.
 
 \settle A reference for the box; a relative statement interpolating between the immersion case and the smooth proper case; its $\ell$-adic form with level read as divisibility of Frobenius eigenvalues.
 
-\begin{problem}[An $\Ext^2$ that vanishes when $2$ is invertible?]\label{p:ext2}
-Is $\mathcal Ext^2_{\mathbb Z}(G, M) = 0$, on the fppf site of a base on which $2$ is invertible, for every finite locally free commutative group scheme $G$ and every quasi-coherent $M$?
+\begin{problem}[An $\Ext^2$ that vanishes when $2$ is invertible: beyond smooth coefficients]\label{p:ext2}
+On the fppf site of a base on which $2$ is invertible, is $\mathcal Ext^2_{\mathbb Z}(G, M) = 0$ for every finite locally free commutative group scheme $G$ and every quasi-coherent $M$, not only for the smooth coefficients covered by Breen's theorem below?
 \end{problem}
 
 \src{\fac{129}, p.~95, \emph{Notes séminaire Montréal}, inventory dating [1970]. A parenthetical NB after a theorem on Ext over truncated rings: \q{$\Ext^2_{\mathbb Z}(G, M) = 0$ si 2 inv., pour tt $G$ fini loc.\ libre}, with the remark that this simplifies the deformation theory of Barsotti--Tate groups for $p \ne 2$. The word \q{inv.} is uncertain in the transcription, and the page gives no proof.}
 
-\known Illusie places the obstruction to deforming a truncated Barsotti--Tate group in $\Ext^2_{\mathbb Z}(G_0, t_{G_0} \otimes J)$ and says that proving directly that it vanishes is out of reach \cite{illusie2023}. On $S_0 = \Spec k$ the NB, read this way, would kill that obstruction at once for $p$ odd. That is a tension with Illusie's account, not a refutation.
+\known Breen proved, five years later, that $\mathcal Ext^i(G, H) = 0$ for $1 < i < 2p-2$, for $G$ finite flat and $H$ smooth commutative quasi-projective, when every residue characteristic is at least $p$ and multiplication by every prime $q < p$ is an automorphism of $G$; and that $\mathcal Ext^{2p-2}(\alpha_p, H) \ne 0$ in characteristic~$p$ for $H = \mathbb G_a, \mathbb G_m$ \cite{breen1975}. With $p = 3$ this gives the NB for smooth coefficients, in particular for vector bundles, when $2$ is invertible; with $p = 2$ it shows $\mathcal Ext^2(\alpha_2, \mathbb G_a) \ne 0$, which supports the reading \q{si 2 inv.}. Illusie places the obstruction to deforming a truncated Barsotti--Tate group over a perfect field in $\Ext^2_{\mathbb Z}(G_0, t_{G_0} \otimes J)$ and says that proving directly that it vanishes is out of reach \cite[p.~2]{illusie2023}; Breen's theorem, which he does not cite, bears on that group.
 
-\ideas The first test is $G = \alpha_p$, $M = \mathbb G_a$ over a perfect field of odd characteristic, with Breen's computations of the extensions of the additive group \cite{breen1978}. If $\mathcal Ext^2(\alpha_p, \mathbb G_a) \ne 0$, the NB as read is false and the facsimile should be checked for another word than \q{inv.}
+\ideas Breen's theorem is stated for the étale sheafification of the Ext sheaves. The remaining cases are a quasi-coherent $M$ that is not locally free, and the passage from Breen's sheaves to the global groups on the fppf site, through the local-to-global spectral sequence.
 
 \leanst Not attempted: no fppf cohomology in Mathlib.
 
-\settle The computation of $\mathcal Ext^2(\alpha_p, \mathbb G_a)$ for $p$ odd, or a reference for the vanishing.
+\settle Breen's vanishing for an arbitrary quasi-coherent $M$, or a counterexample; and whether it gives Illusie's obstruction directly.
 
 \section{Algebraic cycles}
 
@@ -159,7 +160,7 @@ correct as stated?
 
 \src{\fac{16}, p.~49, \emph{Formalisme algébrique des correspondances et algèbres de Poincaré-Hodge}, inventory dating 1966--1967, in a letter of January 1967. The letters use $A$, $C$, $D$ in senses that do not match the later published labels; the conditions above are the reading's restatement. The letter to Coates places the question in the motivic picture (p.~48): \q{The complete yoga then being that we have the category of motives which is semi-simple !}.}
 
-\known The equivalence $C(X) \iff C(Y) + A^0(X \times X)$ and its descent along a chain of hyperplane sections are Kleiman's \cite[Th.~2.13]{kleiman1968}. The splitting of $A^0$ into the two one-sided conditions was not found in Kleiman 1968 and 1994, Grothendieck 1969, Charles 2013, Ramón Marí, or Milne; André's book \cite[ch.~5]{andre} remains to be read.
+\known The equivalence $C(X) \iff C(Y) + A^0(X \times X)$ and its descent along a chain of hyperplane sections are Kleiman's \cite[Th.~2.13]{kleiman1968}. The splitting of $A^0$ into the two one-sided conditions was not found in Kleiman 1968 and 1994, Grothendieck 1969, Charles 2013, Ramón Marí, or Milne; André's book \cite[ch.~5, \S5.2]{andre} remains to be read.
 
 \ideas The page factors the critical operator through the section. For $n = 2m$: $L^2 = \varphi_* \circ L_Y \circ \varphi^* : H^{2m-2}(X) \to H^{2m-2}(Y) \to H^{2m}(Y) \to H^{2m+2}(X)$; for $n = 2m+1$: $L = \varphi_*\varphi^* : H^{2m}(X) \to H^{2m+2}(X)$. With it (our reconstruction, $n = 2m$): an algebraic $z \in H^{2m+2}(X)$ is $\varphi_*y$ with $y$ algebraic by $A''^{0}$; by weak and hard Lefschetz, $y = L_Y\varphi^*x$ for a unique $x$, and $z = L^2x$; if $L_Y^{-1}$ preserves algebraic classes on $Y$, $\varphi^*x$ is algebraic, and then $x$ is algebraic by $A'^{0}$. So the splitting holds given the Lefschetz condition on the section in the relevant degree. In the displayed equivalence it is applied to $T = X \times X$, whose hyperplane section is not $Y \times Y$; whether the hypothesis on the section is supplied by the induction, or must be added, is the point to check.
 
@@ -181,21 +182,21 @@ Let $A/S$ be an abelian scheme of relative dimension~$2$ with dual $B$, and $\de
 
 \leanst Not attempted: no abelian schemes in Mathlib.
 
-\settle A specialist's check of the argument. One abelian surface over a number field with a polarisation of type $(1,2)$ and $c_\lambda \ne 0$ refutes the statement. A sharp consequence to test: for a genus-$2$ curve $C/k$ whose Jacobian has real multiplication by $\mathcal O_D$, $D \equiv 1 \bmod 8$, defined over~$k$, the theta class is a sum of two classes of even $\chi$, so the statement would force $\Pic^1_C$ to have a $k$-point.
+\settle A specialist's check of the argument. One abelian surface over a number field with a polarisation of type $(1,2)$ and $c_\lambda \ne 0$ refutes the statement. A sharp consequence to test (our heuristic, unchecked): for a genus-$2$ curve $C/k$ whose Jacobian has real multiplication by $\mathcal O_D$, $D \equiv 1 \bmod 8$, defined over~$k$, the theta class is a sum of two classes of even $\chi$, so the statement would force $\Pic^1_C$ to have a $k$-point.
 
-\begin{problem}[Counting Kostant rigidifications]\label{p:kostant}
-Let $G$ be a simple adjoint group with Coxeter number $h$, Weyl group $W$, and $z$ the order of the centre of its simply connected cover, over a field of characteristic $p$ with $(h, p) = 1$. Consider quadruples $(T, B, T', B')$ with $T$, $T'$ maximal tori in apposition in Kostant's sense and $B \supset T$, $B' \supset T'$ Borel subgroups. Does $G$ act freely, with quotient finite étale of rank $|W|^2/(h\,z\,\varphi(h))$, and of rank $|W|^2/(h\,z)$ once a generator of $T \cap N(T') \simeq \mu_h$ is fixed?
+\begin{problem}[Kostant's tori in apposition: are the Borels opposite?]\label{p:kostant}
+Let $G$ be a complex simple adjoint group with Coxeter number $h$ and Weyl group $W$, and let $T$, $T'$ be maximal tori in apposition in Kostant's sense \cite{kostant}, with Borel subgroups $B \supset T$ and $B' \supset T'$. Are $B$ and $B'$ always in general position, that is, is $B \cap B'$ a maximal torus? If not for all such quadruples $(T, B, T', B')$, is there a distinguished conjugacy class of quadruples, stable under the outer automorphisms?
 \end{problem}
 
-\src{\fac{123}, pp.~21, 28, 30, 34, \emph{[Autour de Kostant]}, letter to Kostant of 22 October 1969 (p.~21) and p.~34. The letter's footnote describes $N(T) \cap N(T')$ as an extension of $(\mathbb Z/h)^*$ by $\mathbb Z/h \times \mathfrak z$, of order $h\,z\,\varphi(h)$. No proof is given.}
+\src{\fac{123}, pp.~21--22, \emph{[Autour de Kostant]}, letter to Kostant of 22 October 1969: \q{is it true that for some, or for all, such quadruples, $B$ and $B'$ are \q{in general position} [\dots] ? Is there in any sense a \emph{distinguished} conjugacy class of such quadruples [\dots] ?} The letter states without proof that the quadruples form $|W|^2/(h\,z\,\varphi(h))$ conjugacy classes, $z$ the order of the centre of the simply connected cover, and (in a footnote in his hand) that $N(T) \cap N(T')$ is an extension of $(\mathbb Z/h)^*$ by $\mathbb Z/h \times Z(\tilde G)$.}
 
-\ideas The number is an integer in the small cases: $1, 2, 4, 12$ for $A_1, A_2, B_2, G_2$. Our step: an element fixing $(T, B, T', B')$ lies in $N(T) \cap B = T$ and in $T'$, so the action is free once $T \cap T' = 1$, which page~30 writes. The count then reduces to the order of $N(T) \cap N(T')$, whose image in $W$ should be the extension of $P^\vee/Q^\vee$ by $(\mathbb Z/h)^*$.
+\known The count, which this note listed as open until 26 October 2026, follows from standard theory (our argument, unchecked by a specialist). Let $x = \rho^\vee(e^{2\pi i/h})$, the principal element of $T$, and $T'$ the centraliser of a cyclic element $E' = \sum_i c_i e_{\alpha_i} + c_0 e_{-\theta}$. An element $t \in T$ normalising $T'$ sends $E'$ into $\mathfrak h' \cap \mathfrak g^{\mathrm{Ad}(x) = \zeta}$, which is the line $\mathbb C E'$, so $\alpha_i(t) = \theta(t)^{-1} = \lambda$ with $\lambda^h = 1$: $T \cap N(T') = \langle x \rangle$, of order $h$. The image of $N(T) \cap N(T')$ in $W$ is the set of $w$ with $w(x) \in \langle x \rangle$: the stabiliser of $x$ is the group $\Omega \cong P^\vee / Q^\vee$ of order $z$ (in the adjoint group $x$ has a disconnected centraliser), $x$ is conjugate to $x^k$ exactly for $k$ prime to $h$ \cite{kostant,springer}, and each such $w$ lifts into $N(T')$, because regular semisimple elements of the eigenspaces $\mathfrak g^{\zeta^j}$, $j$ prime to $h$, have the same centralisers as those of $\mathfrak g^{\zeta}$ and their Cartan subspaces are conjugate under $Z_G(x)^\circ = T$. Hence $|N(T) \cap N(T')| = h\,z\,\varphi(h)$; the stabiliser of a quadruple is $T \cap T' = 1$, and the count follows. A computer count over $\mathbf F_q$ (\nolinkurl{computations/kostant}) agrees: 2, 4 and 12 orbits for $A_2$, $B_2$ and $G_2$. For general position we found nothing.
 
-\known We found no such count. Kostant 1959 and Springer's \emph{Regular elements of finite reflection groups} (1974) are where it would be.
+\ideas For $A_2$ all $36$ pairs $(B, B')$ are opposite: the eigenvectors of $E'$ are the Fourier vectors $(1, \omega^k, \omega^{2k})$, and the standard flag is transverse to every flag they span. In general the question is the Bruhat cell of $(B, B')$ for $B'$ running over the $|W|$ Borels through $T'$: whether it is always the open cell.
 
-\leanst Not attempted in Lean. A computer count over $\mathbf F_q$, for primes $q \equiv 1 \bmod h$ up to $37$ (\nolinkurl{computations/kostant}), finds a free action with 2, 4 and 12 orbits for $A_2$, $B_2$ and $G_2$, and 4, 8 and 24 once a generator is fixed, agreeing with $|W|^2/(hz\varphi(h))$, and finds $|N(T) \cap N(T')| = hz\varphi(h)$ in each case.
+\leanst Not attempted in Lean. The computer count above can be extended to the relative position of $B$ and $B'$ in $B_2$ and $G_2$, which we have not done.
 
-\settle A proof of $|N(T) \cap N(T')| = h\,z\,\varphi(h)$, or the count in print.
+\settle The relative position of $B$ and $B'$ for all quadruples, by an argument or by computation in each type.
 
 \section{Topoi and stacks}
 
@@ -205,7 +206,7 @@ The theories of commutative rings with irreducible spectrum (nilradical prime) a
 
 \src{\fac{161-2}, pp.~39, 41--42, \emph{Algèbre universelle}, inventory dating [c.~1963--1973]. Page~39: \q{Cette topologie n'est pas quasi-compacte}; page~42, margin: \q{topologie non cohérente ! A-t-elle assez de pts ??}; page~41, margin: \q{encore un topos non cohérent (bien que sous-topos d'un topos cohérent)}.}
 
-\known Coherent toposes have enough points (Deligne); these theories are geometric but, as presented, use the infinite disjunction hidden in \q{nilpotent}. We found neither non-coherence nor the existence of points stated for them, in Johnstone or in Caramello's work on theories of rings \cite{elephant,caramello}.
+\known Locally coherent toposes have enough points (Deligne, \cite[VI, 9.0]{sga4}); these theories are geometric but, as presented, use the infinite disjunction hidden in \q{nilpotent}. We found neither non-coherence nor the existence of points stated for them, in Johnstone \cite{elephant} or in Caramello's criteria for De Morgan classifying toposes, which take quotients of the theory of rings as examples \cite[\S5]{caramello}.
 
 \ideas Non-coherence needs more than the presentation: one must show that no coherent axiomatisation exists, for instance by exhibiting a cover in the classifying topos with no finite subcover. For points, Barr's theorem gives a Boolean cover, not points; a model-theoretic argument, or an explicit set of local rings detecting the theory, is needed.
 
@@ -219,13 +220,13 @@ Is there an equivalence between the category of pairs $(X, R)$, with $X$ a topol
 
 \src{\fac{119}, pp.~144--145, dated \q{Mars 1986} on p.~144. Under \q{Th}: \q{On a $C \rightleftarrows C'$}, both arrows marked $\approx$. No proof. A third condition on $f$ is partly illegible; the reading suggests it may be a simple connectedness of the fibres.}
 
-\known SGA~4 IV, Exercise~9.8.3 j)--k), gives the functor $(X, R) \mapsto (\Top(X) \to \Top(X/R))$ \cite{sga4}; Rosenthal proves $\Top(X/R)$ a topos for strictly open $R$ \cite{rosenthal}; Kock and Moerdijk construct the inverse, $a \mapsto \mathrm{Lker}(a)$, and show the round trips are identities under simple connectedness or kernel-pair conditions \cite[Lemma~5.1, \S6]{kockmoerdijk1992}, and characterise étendues as $\mathrm{sh}(M, r)$ \cite{kockmoerdijk1996}. We found no statement of an equivalence of categories.
+\known SGA~4 IV, Exercise~9.8.3 j)--k), gives the functor $(X, R) \mapsto (\Top(X) \to \Top(X/R))$ \cite{sga4}; Rosenthal states that the topos $\mathrm{sh}(X; r)$ exists for strictly open $r$ (Th.~3.9, proof in his thesis) and proves it is an étendue for strictly regular $r$ \cite{rosenthal}; Kock and Moerdijk show that every étendue is of the form $\mathrm{sh}(M, r)$, construct the inverse $a \mapsto \mathrm{Lker}(a)$ and show the round trips are identities under simple connectedness or kernel-pair conditions \cite{kockmoerdijk1992}, and study monodromy versus holonomy \cite{kockmoerdijk1996}. We found no statement of an equivalence of categories.
 
 \ideas The two functors are there; the problem is the right conditions on both sides so that they are mutually inverse, and which quotient topos the page means: the topos of $R$-invariant sheaves (sheaves on a monodromy groupoid) or the holonomy quotient, which Kock and Moerdijk distinguish.
 
 \leanst Not attempted: no geometric morphisms of topoi in Mathlib.
 
-\settle A correct statement with proof, or Moerdijk's Zaragoza lectures (1993), which we could not read and where it might be.
+\settle A correct statement with proof, or Moerdijk's Zaragoza lectures \cite{moerdijk1993}, which we could not read and where it might be.
 
 \begin{problem}[Realising the symmetry invariant of a Picard stack]\label{p:pic}
 Let $M$, $N$ be abelian sheaves on a topos, and ${}_2N$ the $2$-torsion of $N$. Is every homomorphism $M \to {}_2N$ the symmetry invariant of a Picard stack pinned by $M$ and $N$?
@@ -233,9 +234,9 @@ Let $M$, $N$ be abelian sheaves on a topos, and ${}_2N$ the $2$-torsion of $N$. 
 
 \src{\fac{134-1}, p.~5, letter to Deligne, Lodève, 27 August 1974 (Breen's copy, forwarded by Deligne): \q{Je sais prouver (sauf erreur) que tout hom.\ $M \to {}_2N$ provient d'un champ de Picard convenable (épinglé par $M$, $N$) (a priori l'obstruction est dans $\Ext^3(X; M, N)$, mais un argument \q{universel} prouve qu'elle est nulle)}. No argument is written. On p.~6 the letter asks his own version of this problem: \q{Question : Le triangle exact (T) et la suite exacte (*) sont-ils connus par les compétences (Quillen, Breen, Illusie\dots) ? Connaissent-ils des variantes \q{supérieures} ?} (are they known to the experts, and do they know higher variants?).}
 
-\known Picard stacks with invariants $M$, $N$ are classified by $\mathrm{RHom}(\mathbb Z(M), N)$ truncated in degree~$2$ (\emph{Pursuing Stacks}; Breen 1999 \cite{breen1999}). No printed source states the realisation, or refutes it on a topos.
+\known Strict Picard stacks are classified by $\Ext^2$ (Deligne, \cite[XVIII, 1.4]{sga4}); Breen classifies Gr-stacks by $H^3$ and gives the universal coefficient spectral sequence $\Ext^p(H_q(B), A) \Rightarrow H^{p+q}(B, A)$ \cite[\S6]{breen1999}. No printed source we found states the realisation, or refutes it on a topos.
 
-\ideas Two sketches disagree. The reading realises the invariant by hand for $M$ free, on the split stack $M \times BN$ with an antisymmetric form $b$ such that $b(e_i, e_i) = q(e_i)$, and passes to general $M$ through a resolution. We doubt that step, from memory and without having checked it: the construction depends on a basis. On the classifying topos of abelian groups, a Picard stack pinned by the generic group $U$ and $U/2U$, with the projection as invariant, would make Moore spectra truncated above $\pi_1$ functorial in finitely presented abelian groups; but the stable Moore-space category on finitely generated groups is a non-split linear extension, split on cyclic groups \cite[Rem.~1.5.5]{baues}. If that translation is right, the obstruction does not vanish universally. The statement does hold over a point and for $M$ constant and free.
+\ideas Two sketches disagree. The reading realises the invariant by hand for $M$ free, on the split stack $M \times BN$ with an antisymmetric form $b$ such that $b(e_i, e_i) = q(e_i)$, and passes to general $M$ through a resolution. We doubt that step, which we have not checked: the construction depends on a basis. On the classifying topos of abelian groups, a Picard stack pinned by the generic group $U$ and $U/2U$, with the projection as invariant, would make Moore spectra truncated above $\pi_1$ functorial in finitely presented abelian groups; but the stable Moore-space category on finitely generated groups is a non-split linear extension, split on cyclic groups \cite[Rem.~1.5.5]{baues}. If that translation is right, the obstruction does not vanish universally. The statement does hold over a point and for $M$ constant and free.
 
 \leanst Not attempted: no stacks on a topos in Mathlib.
 
@@ -247,7 +248,7 @@ Over a scheme $S$, a \q{domaine de ramification} is a stack of multigaloisian ca
 
 \src{\fac{29}, p.~197, \emph{Groupe fondamental [autour de SGA~4 et SGA~7]}, inventory dating 1959--1969: Proposition~6, stated without proof, with the corollary \q{nécessairement pleinement fidèle}. The axiom R2 of pp.~190--193 is itself not verified by the edition. Earlier in the folder (p.~24) he notes where removing the auxiliary choices leads: \q{il semble qu'on soit infailliblement conduit à prendre comme catégorie [\dots] la catégorie [\dots] elle-même qu'on se propose de construire et d'étudier !}, comparing it with sites and their topoi.}
 
-\known Nothing found. The work on stacks of ramified Galois covers (\emph{Stacks of ramified Galois covers}, arXiv:1307.1116; \emph{Ramified Galois covers via monoidal functors}, arXiv:1507.05309) is where an equivalent statement would sit; neither surfaced in our search, which is not the same as their not containing it.
+\known Nothing found. Tonini's work on stacks of ramified Galois covers \cite{tonini2013,tonini2017} is where an equivalent statement would sit; neither surfaced in our search, which is not the same as their not containing it.
 
 \ideas The corollary says that a ramification domain maps into another only as a subdomain. The proof should reduce to the case $(R, r)$ given by $(Z, G)$, where a morphism is determined by the image of the universal $G$-torsor.
 
@@ -263,9 +264,9 @@ Let $X$ be an anabelian curve over a field $K$ of finite type over $\mathbb Q$, 
 
 \src{\fac{142}, pp.~94--95, 98--101, \emph{Action de Galois sur Teichmüller}, inventory dating [from 1978]. Page~95 conjectures the conditions sufficient \q{lorsque $X$ est (disons) une courbe algébrique anabélienne, avec $K$ extension de type fini de $\mathbb Q$}; page~98 calls the loop condition \q{sûrement la plus importante de toutes, et de très loin !}. Pages~98--99 are largely illegible.}
 
-\known Ihara's question and the Oda--Matsumoto conjecture characterise the Galois group as the automorphisms of the geometric fundamental group functor on all varieties compatible with all morphisms; Pop proved it in that form, and tripod variants for finite étale covers of $\mathbb P^1 \smallsetminus \{0,1,\infty\}$ \cite{pop2019}. Hoshi--Mochizuki and others give injectivity for a single hyperbolic curve; Collas's survey leaves a combinatorial candidate for $G_{\mathbb Q}$ open \cite{collas}. We found no characterisation attached to one curve and its covers, with base points and the inertia condition. Pop's tripod paper could not be read.
+\known Ihara's question and the Oda--Matsumoto conjecture characterise the Galois group as the automorphisms of the geometric fundamental group functor on all varieties compatible with all morphisms; Pop proved it in that form, and finite tripod variants, built from varieties of dimension greater than one with finitely many dominant rational maps to $\mathbb P^1 \smallsetminus \{0,1,\infty\}$ \cite[Def.~2.2, Th.~2.9]{pop2019}. Hoshi--Mochizuki and others give injectivity for a single hyperbolic curve; Collas proposes a combinatorial model $GT^{NF}$ as a candidate for $G_{\mathbb Q}$, left to forthcoming work \cite[\S4.3.3]{collas}. We found no characterisation attached to one curve and its covers, with base points and the inertia condition.
 
-\ideas If Pop's tripod variant covers the covers of one hyperbolic curve, the problem reduces to comparing his compatibility conditions with the page's list; the loop condition would then be the extra information that makes one curve suffice.
+\ideas Pop's variants need a base of dimension greater than one, so they do not cover the covers of one curve; that is what the page's loop condition at the cusps would have to supply. Here \q{anabelian curve} is the page's word for a hyperbolic curve.
 
 \leanst Not attempted: no étale fundamental group in Mathlib.
 
@@ -287,19 +288,23 @@ Let $X$ be a smooth complex analytic space (or orbifold) with a normal crossings
 
 \settle A reference for the gluing theorem, or a proof, and the check of the hypothesis for $M_{g,\nu}$.
 
-\section{Pseudoline arrangements}
+\section{Pseudoline arrangements}\label{sec:pseudo}
 
 A pseudoline arrangement in the real projective plane is \emph{bigonal along} one of its pseudolines $D$ when $D$ carries exactly two vertices of the arrangement, so that every other pseudoline meets $D$ at one of them. In the page's notation, $\mathrm{II}_4$ is four pseudolines in general position, $\mathrm{II}_5$ five in general position, $\mathrm{II}'_{3,2}$ a pencil of three and a pencil of two without the line joining their centres, and $\mathrm{III}_6$ the complete quadrangle (the six lines joining four points, no three collinear).
 
-The page's boxed dichotomy (\fac{80}, pp.~20, 24, 28, from 1981), listed here as an open problem until 26 October 2026, has a short proof, and so does the numbering lemma of page~28; we record it so that the problem below keeps its context. Four pseudolines are in \emph{general position} when no three of them pass through one point.
+An arrangement is \emph{bigon-free} when none of its pseudolines is bigonal, and four pseudolines are in \emph{general position} when no three of them pass through one point. The page's boxed dichotomy, which this note listed as an open problem until 26 October 2026, has a short proof, and so does the numbering lemma of page~28; we record it because the problem below depends on it.
 
-\emph{Claim.} A bigon-free arrangement $\mathcal A$ either is $\mathrm{II}_4$ or contains $\mathrm{II}_5$, $\mathrm{II}'_{3,2}$ or $\mathrm{III}_6$; and its pseudolines can be numbered, starting from a $\mathrm{II}_4$ or a $\mathrm{III}_6$, so that every partial arrangement is bigon-free.
+\begin{proposition}[Grothendieck, \fac{80}, pp.~20, 24, 28; the proof is ours]
+A bigon-free arrangement $\mathcal A$ either is $\mathrm{II}_4$ or contains $\mathrm{II}_5$, $\mathrm{II}'_{3,2}$ or $\mathrm{III}_6$; and its pseudolines can be numbered, starting from a $\mathrm{II}_4$ or a $\mathrm{III}_6$, so that every partial arrangement is bigon-free.
+\end{proposition}
 
-\emph{Step 1: $\mathcal A$ contains four pseudolines in general position.} $\mathcal A$ is not a pencil, so by Melchior's form of the Sylvester--Gallai theorem, valid for pseudolines \cite{melchior,grunbaum}, it has a simple crossing $p = a \cap b$. Since $a$ is not bigonal it carries vertices $q_1, \dots, q_k$ besides $p$, with $k \ge 2$. Take $c \ne a$ through $q_i$ and $d \ne a$ through $q_j$, $i \ne j$. Then $\{a, b, c, d\}$ is in general position as soon as $c \cap b \ne d \cap b$: indeed $c, d$ miss $p$, meet $a$ at different points, and $c \cap d$ lies neither on $a$ nor on $b$. If this fails for every choice, all these pseudolines meet $b$ at one point $r$; two pseudolines meet only once, so each $q_i$ lies on $a$ and on a single other pseudoline $c_i$, all through $r$, and every pseudoline meets $a$ at $p$ or at some $q_i$. Then $\mathcal A = \{a, b, c_1, \dots, c_k\}$ and $b$ carries only $p$ and $r$, so it is bigonal, which is excluded.
+\begin{proof}
+\emph{Four pseudolines in general position.} $\mathcal A$ is not a near-pencil, since each pencil line of a near-pencil carries only the centre and its point on the transversal; so it has a simple crossing $p = a \cap b$ \cite[Th.~3.6]{kellyrottenberg}, see also \cite[Th.~1.3]{bokowskipokora}. Since $a$ is not bigonal it carries vertices $q_1, \dots, q_k$ besides $p$, with $k \ge 2$. Take $c \ne a$ through $q_i$ and $d \ne a$ through $q_j$, $i \ne j$. Then $\{a, b, c, d\}$ is in general position as soon as $c \cap b \ne d \cap b$: indeed $c, d$ miss $p$, meet $a$ at different points, and $c \cap d$ lies neither on $a$ nor on $b$. If this fails for every choice, all these pseudolines meet $b$ at one point $r$; two pseudolines meet only once, so each $q_i$ lies on $a$ and on a single other pseudoline $c_i$, all through $r$, and every pseudoline meets $a$ at $p$ or at some $q_i$. Then $\mathcal A = \{a, b, c_1, \dots, c_k\}$ and $b$ carries only $p$ and $r$, so it is bigonal, which is excluded.
 
-\emph{Step 2: the dichotomy.} Let $Q \subset \mathcal A$ be four pseudolines in general position, and $\ell \in \mathcal A \smallsetminus Q$. If $\ell$ passes through none of the six vertices of $Q$, then $Q \cup \{\ell\}$ is a $\mathrm{II}_5$; if through exactly one, a $\mathrm{II}'_{3,2}$. Otherwise $\ell$ passes through exactly two, which must be an opposite pair $\{x \cap y, z \cap w\}$ of the quadrilateral $Q = \{x,y,z,w\}$ (two vertices on a common side would force $\ell$ to be that side). Call such an $\ell$ a diagonal of $Q$; there are at most three. If $\mathcal A$ contains neither $\mathrm{II}_5$ nor $\mathrm{II}'_{3,2}$, then $\mathcal A$ is $Q$ plus some diagonals. One diagonal alone would be bigonal; two diagonals together with $Q$ form a $\mathrm{III}_6$ (the four triple points are the vertices of the quadrangle and the six pseudolines its sides); with three, $\mathcal A$ contains a $\mathrm{III}_6$ again.
+\emph{The dichotomy.} Let $Q \subset \mathcal A$ be four pseudolines in general position, and $\ell \in \mathcal A \smallsetminus Q$. If $\ell$ passes through none of the six vertices of $Q$, then $Q \cup \{\ell\}$ is a $\mathrm{II}_5$; if through exactly one, a $\mathrm{II}'_{3,2}$. Otherwise $\ell$ passes through exactly two, which must be an opposite pair $\{x \cap y, z \cap w\}$ of the quadrilateral $Q = \{x,y,z,w\}$ (two vertices on a common side would force $\ell$ to be that side). Call such an $\ell$ a diagonal of $Q$; there are at most three. If $\mathcal A$ contains neither $\mathrm{II}_5$ nor $\mathrm{II}'_{3,2}$, then $\mathcal A$ is $Q$ plus some diagonals. One diagonal alone would be bigonal; two diagonals together with $Q$ form a $\mathrm{III}_6$ (the four triple points are the vertices of the quadrangle and the six pseudolines its sides); with three, $\mathcal A$ contains a $\mathrm{III}_6$ again.
 
-\emph{Step 3: the numbering.} Adding pseudolines never removes a vertex from a pseudoline already there, so it suffices that each pseudoline, when added, meets the earlier ones in at least three points. A pseudoline meets the six sides of a $\mathrm{III}_6$ in at least three points, since two vertices of $\mathrm{III}_6$ never cover all six sides; so if $\mathcal A \supseteq \mathrm{III}_6$, start there and add the rest in any order. Otherwise $\mathcal A$ contains at most one diagonal $\delta$ of $Q$: start from $Q$, add every pseudoline other than $\delta$ (each meets $Q$ in at least three points), and add $\delta$ last, when it has all its vertices in $\mathcal A$, at least three.
+\emph{The numbering.} Adding pseudolines never removes a vertex from a pseudoline already there, so it suffices that each pseudoline, when added, meets the earlier ones in at least three points. A pseudoline meets the six sides of a $\mathrm{III}_6$ in at least three points: its vertices have multiplicity at most three, and two triple points share a side, so two vertices cover at most five sides. So if $\mathcal A \supseteq \mathrm{III}_6$, start there and add the rest in any order. Otherwise $\mathcal A$ contains at most one diagonal $\delta$ of $Q$: start from $Q$, add every pseudoline other than $\delta$ (each meets $Q$ in at least three points), and add $\delta$ last, when it has all its vertices in $\mathcal A$, at least three.
+\end{proof}
 
 This agrees with a computer enumeration of all arrangements of at most nine pseudolines (\nolinkurl{computations/bigon}). We have not found the statement in print; it is elementary, and probably folklore among people who work on arrangements.
 
@@ -309,9 +314,9 @@ Is a combinatorial arrangement of pseudolines in the real projective plane witho
 
 \src{\fac{80}, pp.~39--54. The statement of page~54 (\q{En résumé}) is clean. It composes a full faithfulness theorem (p.~39) for arrangements with an orientation of every non-concurrent triple (pp.~41--49, conditions (A1)--(A4)) with a canonical reconstruction of these orientations from the skeleton (pp.~49--54, (A5), (A6), with the complete quadrangle as residual case). Conditions (A1)--(A6) are said to hold \q{bien entendu} and not proved.}
 
-\known Local sequences determine an arrangement up to isomorphism in the Euclidean setting, and a Euclidean pseudoline arrangement graph has a unique planar embedding (Bose--Everett--Wismath); uniqueness of embeddings of graphs of large face-width is known (Robertson--Vitray, Mohar) \cite{felsnergoodman}. We found no statement for the projective, bigon-free case with automorphisms.
+\known Line arrangements in the projective plane are determined up to isomorphism by their circular sequences up to local equivalence (Goodman--Pollack), and the graph of a simple projective arrangement of at least four pseudolines is $4$-connected \cite[Th.~5.2.2, 5.5.1]{felsnergoodman}. Embeddings of graphs in the projective plane are unique at face-width at least~$3$ and are classified at face-width $2$ and $3$ \cite{vitray,mohar1995,mohar-robertson-vitray}. We found no statement for the projective, bigon-free case with automorphisms.
 
-\ideas Our pointer, unchecked: the bigon exception coincides with the case where the map has face-width~$2$ (a non-contractible curve through the pencil centre and one point of the transversal), which is where uniqueness-of-embedding theorems stop applying. If bigon-free projective arrangements have face-width at least~$3$, Mohar--Thomassen's uniqueness theorems may give the result directly.
+\ideas Our pointer, unchecked: the bigon exception coincides with the case where the map has face-width~$2$ (a non-contractible curve through the pencil centre and one point of the transversal), which is where uniqueness-of-embedding theorems stop applying. If bigon-free projective arrangements have face-width at least~$3$, these uniqueness theorems may give the result directly.
 
 \leanst Not attempted: maps on surfaces are not in Mathlib.
 
@@ -325,39 +330,52 @@ Three limits apply to every entry. The transcriptions are first passes by a lang
 
 Corrections, references and proofs are welcome at the address above. The register of findings, the Lean files and the notices of the folders are on the project's site, \url{https://grothendieck.commutator.io/}.
 
+\subsection*{Changes}
+26 October 2026: the pseudoline dichotomy of \fac{80} proved (\S\ref{sec:pseudo}); the count of Kostant quadruples derived, and Problem~\ref{p:kostant} replaced by the question Grothendieck asked Kostant; Problem~\ref{p:ext2} narrowed after Breen's 1975 theorem; references corrected after a citation check.
+
 \subsection*{Declaration}
 This note was drafted with a language model (Claude Opus 5.5, Anthropic) from the edition's registers: the findings, the modernised readings and the Lean files. The transcriptions and the modernised readings it relies on were also made with language models (Claude Opus~5 and Opus~5.5). The author received no funding for this work.
 
 \begin{thebibliography}{99}
 
-\bibitem{andre} Y.~André, \emph{Une introduction aux motifs}, Panoramas et Synthèses~17, SMF, 2004.
+\bibitem{andre} Y.~André, \emph{Une introduction aux motifs (motifs purs, motifs mixtes, périodes)}, Panoramas et Synthèses~17, SMF, 2004.
 \bibitem{baues} H.-J.~Baues, \emph{Homotopy Type and Homology}, Oxford Mathematical Monographs, 1996.
-\bibitem{breen1978} L.~Breen, Extensions du groupe additif, \emph{Publ.\ Math.\ IHÉS} 48 (1978).
-\bibitem{breen1999} L.~Breen, Monoidal categories and multiextensions, \emph{Compositio Math.} 117 (1999), arXiv:math/9809104.
-\bibitem{caramello} O.~Caramello, De Morgan classifying toposes, arXiv:0808.1519.
-\bibitem{clausenmathew} D.~Clausen, A.~Mathew, Hyperdescent and étale K-theory, \emph{Invent.\ Math.} 225 (2021), arXiv:1905.06611.
-\bibitem{collas} B.~Collas, Anabelian perspectives in Galois--Teichmüller theory, arXiv:2603.02848, 2026.
+\bibitem{bokowskipokora} J.~Bokowski, P.~Pokora, On the Sylvester--Gallai and the orchard problem for pseudoline arrangements, \emph{Period.\ Math.\ Hungar.} 77 (2018), 164--174, arXiv:1607.05864.
+\bibitem{breen1975} L.~Breen, Un théorème d'annulation pour certains $\Ext^i$ de faisceaux abéliens, \emph{Ann.\ Sci.\ ÉNS} (4) 8 (1975), 339--352.
+\bibitem{breen1999} L.~Breen, Monoidal categories and multiextensions, \emph{Compositio Math.} 117 (1999), 295--335, arXiv:math/9809104.
+\bibitem{caramello} O.~Caramello, De Morgan classifying toposes, \emph{Adv.\ Math.} 222 (2009), 2117--2144, arXiv:0808.1519.
+\bibitem{clausenmathew} D.~Clausen, A.~Mathew, Hyperdescent and étale K-theory, \emph{Invent.\ Math.} 225 (2021), 981--1076, arXiv:1905.06611.
+\bibitem{collas} B.~Collas, Anabelian perspectives in Galois-Teichmüller theory, arXiv:2603.02848, 2026.
 \bibitem{hodge3} P.~Deligne, Théorie de Hodge~III, \emph{Publ.\ Math.\ IHÉS} 44 (1974), 5--77.
 \bibitem{durfee} A.~H.~Durfee, Mixed Hodge structures on punctured neighborhoods, \emph{Duke Math.\ J.} 50 (1983), 1017--1040.
-\bibitem{grunbaum} B.~Grünbaum, \emph{Arrangements and Spreads}, CBMS Regional Conf.\ Ser.\ Math.~10, AMS, 1972.
-\bibitem{melchior} E.~Melchior, Über Vielseite der projektiven Ebene, \emph{Deutsche Math.} 5 (1941), 461--475.
 \bibitem{felsnergoodman} S.~Felsner, J.~E.~Goodman, Pseudoline arrangements, in \emph{Handbook of Discrete and Computational Geometry}, 3rd ed., ch.~5, CRC Press, 2017.
-\bibitem{friedmanlaza} R.~Friedman, R.~Laza, arXiv:2207.07566, 2022.
-\bibitem{gabberorgogozo} O.~Gabber, F.~Orgogozo, Sur la $p$-dimension des corps, \emph{Invent.\ Math.} 174 (2008), arXiv:0706.0671.
-\bibitem{gabberzavyalov} O.~Gabber, B.~Zavyalov, Algebraization techniques and rigid-analytic Artin--Grothendieck vanishing, \emph{Ann.\ Sci.\ ÉNS} (2026), arXiv:2402.08741.
+\bibitem{friedmanlaza} R.~Friedman, R.~Laza, The higher Du Bois and higher rational properties for isolated singularities, \emph{J.\ Algebraic Geom.} 33 (2024), 493--520, arXiv:2207.07566.
+\bibitem{gabberorgogozo} O.~Gabber, F.~Orgogozo, Sur la $p$-dimension des corps, \emph{Invent.\ Math.} 174 (2008), 47--80, arXiv:0706.0671.
+\bibitem{gabberzavyalov} O.~Gabber, B.~Zavyalov, Algebraization techniques and rigid-analytic Artin--Grothendieck vanishing, \emph{Ann.\ Sci.\ ÉNS} 59 (2026), 387--436, arXiv:2402.08741.
 \bibitem{hls} A.~Hatcher, P.~Lochak, L.~Schneps, On the Teichmüller tower of mapping class groups, \emph{J.\ reine angew.\ Math.} 521 (2000), 1--24.
 \bibitem{huacicm} M.~Hua, Formalising a mathematician's working notes: Lean proofs from the Grothendieck archive, preprint, 2026, \url{https://grothendieck.commutator.io/article/grothendieck-cicm.pdf}.
-\bibitem{illusie2023} L.~Illusie, Revisiting deformations of truncated Barsotti--Tate groups, 2023.
-\bibitem{elephant} P.~T.~Johnstone, \emph{Sketches of an Elephant: A Topos Theory Compendium}, Oxford, 2002.
-\bibitem{kleiman1968} S.~L.~Kleiman, Algebraic cycles and the Weil conjectures, in \emph{Dix exposés sur la cohomologie des schémas}, North-Holland, 1968, 359--386.
+\bibitem{illusie2023} L.~Illusie, Revisiting deformations of truncated Barsotti--Tate groups, talk notes, Chicago, 6 March 2023, \url{https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-Chicago-2023-1.pdf}.
+\bibitem{elephant} P.~T.~Johnstone, \emph{Sketches of an Elephant: A Topos Theory Compendium}, 2 vols, Oxford Logic Guides 43--44, Oxford, 2002.
+\bibitem{kellyrottenberg} L.~M.~Kelly, R.~Rottenberg, Simple points in pseudoline arrangements, \emph{Pacific J.\ Math.} 40 (1972), 617--622.
+\bibitem{kleiman1968} S.~L.~Kleiman, Algebraic cycles and the Weil conjectures, in \emph{Dix exposés sur la cohomologie des schémas}, Adv.\ Stud.\ Pure Math.~3, North-Holland, 1968, 359--386.
 \bibitem{kockmoerdijk1992} A.~Kock, I.~Moerdijk, Every étendue comes from a local equivalence relation, \emph{J.\ Pure Appl.\ Algebra} 82 (1992), 155--174.
 \bibitem{kockmoerdijk1996} A.~Kock, I.~Moerdijk, Spaces with local equivalence relations, and their monodromy, \emph{Topology Appl.} 72 (1996), 47--78.
-\bibitem{mathew} A.~Mathew, On $K(1)$-local TR, \emph{Compositio Math.} 157 (2021), arXiv:2005.08744.
+\bibitem{kostant} B.~Kostant, The principal three-dimensional subgroup and the Betti numbers of a complex simple Lie group, \emph{Amer.\ J.\ Math.} 81 (1959), 973--1032.
+\bibitem{mathew} A.~Mathew, On $K(1)$-local TR, \emph{Compositio Math.} 157 (2021), 1079--1119, arXiv:2005.08744.
 \bibitem{milneadt} J.~S.~Milne, \emph{Arithmetic Duality Theorems}, 2nd ed., BookSurge, 2006.
+\bibitem{moerdijk1993} I.~Moerdijk, Foliations, groupoids and Grothendieck étendues, \emph{Rev.\ Acad.\ Cienc.\ Zaragoza} (2) 48 (1993), 5--33.
+\bibitem{mohar1995} B.~Mohar, Uniqueness and minimality of large face-width embeddings of graphs, \emph{Combinatorica} 15 (1995), 541--556.
+\bibitem{mohar-robertson-vitray} B.~Mohar, N.~Robertson, R.~P.~Vitray, Planar graphs on the projective plane, \emph{Discrete Math.} 149 (1996), 141--157.
 \bibitem{poonenstoll} B.~Poonen, M.~Stoll, The Cassels--Tate pairing on polarized abelian varieties, \emph{Ann.\ of Math.} 150 (1999), 1109--1149.
-\bibitem{pop2019} F.~Pop, Finite tripod variants of I/OM: on Ihara's question/Oda--Matsumoto conjecture, \emph{Invent.\ Math.} (2019), 745--797.
-\bibitem{rosenthal} K.~Rosenthal, Sheaves and local equivalence relations, \emph{Cahiers Top.\ Géom.\ Diff.} 25 (1984), 179--206.
-\bibitem{sga4} M.~Artin, A.~Grothendieck, J.-L.~Verdier, \emph{Théorie des topos et cohomologie étale des schémas} (SGA~4), LNM 269, 270, 305, Springer, 1972--1973.
+\bibitem{pop2019} F.~Pop, Finite tripod variants of I/OM: on Ihara's question/Oda--Matsumoto conjecture, \emph{Invent.\ Math.} 216 (2019), 745--797.
+\bibitem{rosenthal} K.~I.~Rosenthal, Sheaves and local equivalence relations, \emph{Cahiers Top.\ Géom.\ Diff.} 25 (1984), 179--206.
+\bibitem{saito} M.~Saito, Mixed Hodge modules, \emph{Publ.\ RIMS} 26 (1990), 221--333.
+\bibitem{scheiderer} C.~Scheiderer, \emph{Real and Étale Cohomology}, Lecture Notes in Math.~1588, Springer, 1994.
+\bibitem{sga4} M.~Artin, A.~Grothendieck, J.-L.~Verdier (eds.), \emph{Théorie des topos et cohomologie étale des schémas} (SGA~4), LNM 269, 270, 305, Springer, 1972--1973.
+\bibitem{springer} T.~A.~Springer, Regular elements of finite reflection groups, \emph{Invent.\ Math.} 25 (1974), 159--198.
+\bibitem{tonini2013} F.~Tonini, Stacks of ramified Galois covers, PhD thesis, 2013, arXiv:1307.1116.
+\bibitem{tonini2017} F.~Tonini, Ramified Galois covers via monoidal functors, \emph{Transform.\ Groups} 22 (2017), 845--868, arXiv:1507.05309.
+\bibitem{vitray} R.~P.~Vitray, The 2 and 3 representative projective planar embeddings, \emph{J.\ Combin.\ Theory Ser.\ B} 54 (1992), 1--12.
 
 \end{thebibliography}
 

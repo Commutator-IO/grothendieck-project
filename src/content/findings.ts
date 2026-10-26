@@ -4091,9 +4091,10 @@ export const FINDINGS: Finding[] = [
     ours:
       "The reading marks the count as asserted, not proved. It checks that the number is an integer for A₁, A₂, B₂ and G₂ (1, 2, 4, 12). This pass’s own step, not on the page: an element fixing (T, B, T′, B′) lies in N(T) ∩ B = T and in T′, so the action is free once T ∩ T′ = 1. The count then reduces to the order of N(T) ∩ N(T′), which the folder asserts and does not prove. 2026-10-26, computation (computations/kostant): computations/kostant/kostant_count.py counts the G(F_q)-orbits on rational Kostant rigidifications (T, B, T', B') of the split adjoint groups A2, B2 and G2. It uses the standard library only. G(F_q) is transitive on (T, B), so the script counts T(F_q)-orbits on pairs (Lie T', Lie B'). Here Lie T' runs over the centralisers of e = e_b1 + e_b2 + c e_{-theta}, for every positive system and every c in F_q^*. For every q tested it finds 2, 4 and 12 orbits for A2, B2 and G2. That is card(W)^2/(h z phi(h)), as on the page; with a generator of T ∩ N(T') fixed, the counts are 4, 8 and 24 = card(W)^2/(h z). The action is free: every orbit has (q-1)^2 elements. T ∩ T' = 1, and T ∩ N(T') is cyclic of order h. |N(T) ∩ N(T')| = 18, 16 and 12 = h z phi(h), and its image in W has order z phi(h). In every class, B ∩ B' is a maximal torus. The rank is inferred from the counts being constant across five primes; reducing the count to these T(F_q)-orbits uses Lang's theorem and the rationality of the eigenline D, which are argued, not machine-checked.",
     literature: [
+      "Kostant, Amer. J. Math. 81 (1959), 973–1032, and Springer, Invent. Math. 25 (1974), 159–198: metadata checked 2026-10-26, full texts not opened. The edition derives |N(T) ∩ N(T′)| = h z φ(h) from their theory (T ∩ N(T′) = ⟨x⟩ for the principal element x; image in W the w with w(x) ∈ ⟨x⟩, of order z φ(h) through Ω ≅ P^∨/Q^∨; lifting by Vinberg's conjugacy of Cartan subspaces), so the count follows; written in the problems paper and the Lean article, unchecked by a specialist. Open: whether B and B′ are always in general position (true for A₂).",
       'General web search, 2026-10-10, for counts of Borel pairs over tori in apposition: no count found. Kostant 1959 (Amer. J. Math. 81) was not opened.',
     ],
-    status: 'unsearched',
+    status: 'candidate',
     settle:
       'Prove or refute |N(T) ∩ N(T′)| = h·z·φ(h) (the image in W should be W_K ≅ P∨/Q∨ extended by (ℤ/hℤ)*). Then look for the count in Kostant 1959 §§6–9, Springer, « Regular elements of finite reflection groups » (1974), and the literature on Coxeter tori and Kostant–Coxeter pairs. A small-rank computer check (A₂, B₂, G₂) of orbit counts would settle the number independently.',
     reach: 'beyond',
@@ -4456,9 +4457,10 @@ export const FINDINGS: Finding[] = [
     ours:
       'The reading leaves the statement as the page’s own and does not verify it. This pass adds one observation, which is its own step and not a source. Illusie 2023 places the obstruction to deforming a BTₙ in Ext²_ℤ(G₀, t_{G₀} ⊗ J), and says that proving directly that it vanishes is “out of reach”. On S₀ = Spec k the NB as read would make that obstruction vanish at once for p odd. So the NB, read this way, is in tension with Illusie’s account. This is not a refutation.',
     literature: [
+      "L. Breen, « Un théorème d'annulation pour certains Ext^i de faisceaux abéliens », Ann. Sci. ÉNS (4) 8 (1975), 339–352, pp. 339–340 (read 2026-10-26): Ext^i(G, H) = 0 for 1 < i < 2p − 2, G finite flat, H smooth commutative quasi-projective, residue characteristics ≥ p and multiplication by every prime q < p an automorphism of G (étale-sheafified); Remarque 3°: Ext^{2p−2}(α_p, H) ≠ 0 in characteristic p for H = G_a, G_m. With p = 3 this is the NB for smooth coefficients (vector bundles) when 2 is invertible, and with p = 2 it supports the reading « si 2 inv. »; open: arbitrary quasi-coherent M, fppf groups.",
       'Illusie, « Revisiting deformations of truncated Barsotti–Tate groups » (Chicago 2023), §1, pp. 2 and 6. The NB is not stated there.',
     ],
-    status: 'unsearched',
+    status: 'candidate',
     settle:
       'First have the transcription re-read the word « inv. » on page 95 against the facsimile. Then compute 𝐸𝑥𝑡²_ℤ(α_p, 𝔾_a) over a perfect field of odd characteristic. The tools are Breen, « Extensions du groupe additif » (Publ. IHÉS 48, 1978) and Illusie, Astérisque 127 §2–4. If it is non-zero, the NB as read is refuted. If not, look for the vanishing in Astérisque 127.',
     reach: 'beyond',
