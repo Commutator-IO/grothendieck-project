@@ -361,16 +361,7 @@ export function MethodPage() {
               Dater, reprendre, déplacer. Les notes de travail d'Alexandre Grothendieck et une
               pratique mathématique (fonds de Montpellier, 1949–1991)
             </em>{' '}
-            is a second paper, in French, prepared for the{' '}
-            <a
-              href="https://smf.emath.fr/publications/revue-dhistoire-des-mathematiques"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700"
-            >
-              Revue d'histoire des mathématiques
-            </a>
-            . Its subject is what the notes show: how the fonds came to be dated,
+            is a second paper, in French. Its subject is what the notes show: how the fonds came to be dated,
             how he wrote, and what recurs and what stops across thirty years. Several readings it
             depends on have been checked against the facsimile; the rest are the machine's, and
             an annex lists what remains to check.

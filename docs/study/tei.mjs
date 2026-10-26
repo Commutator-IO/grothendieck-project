@@ -820,7 +820,7 @@ const served = resolve(root, 'public/article');
 mkdirSync(served, { recursive: true });
 copyFileSync(xmlPath, resolve(served, 'grothendieck-jtei.xml'));
 copyFileSync(resolve(here, 'article.pdf'), resolve(served, 'grothendieck-jtei.pdf'));
-// The second article, for the Revue d'histoire des mathématiques, is served
+// The second article, on the fonds as a whole, is served
 // beside it: a PDF only, since that journal takes LaTeX and not TEI.
 copyFileSync(resolve(root, 'docs/rhm/article.pdf'), resolve(served, 'grothendieck-rhm.pdf'));
 // The third, the readings' statements proved in Lean (lean/), with their
