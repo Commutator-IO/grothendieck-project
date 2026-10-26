@@ -45,21 +45,13 @@ open Relation
 
 /-- A relation contained in an equivalence closure has its equivalence closure inside. -/
 theorem eqvGen_of_le {α : Type*} {r s : α → α → Prop} (h : ∀ x y, r x y → EqvGen s x y)
-    {a b : α} (hab : EqvGen r a b) : EqvGen s a b := by
-  induction hab with
-  | rel x y h' => exact h x y h'
-  | refl => exact .refl _
-  | symm _ _ _ ih => exact ih.symm
-  | trans _ _ _ _ _ i1 i2 => exact i1.trans _ _ _ i2
+    {a b : α} (hab : EqvGen r a b) : EqvGen s a b := EqvGen.eqvGen_le h _ _ hab
 
 /-- A set invariant under the generators of an equivalence closure is invariant under it. -/
 theorem eqvGen_iff {α : Type*} {r : α → α → Prop} (S : α → Prop) (h : ∀ x y, r x y → (S x ↔ S y))
-    {a b : α} (hab : EqvGen r a b) : S a ↔ S b := by
-  induction hab with
-  | rel x y h' => exact h x y h'
-  | refl => exact Iff.rfl
-  | symm _ _ _ ih => exact ih.symm
-  | trans _ _ _ _ _ i1 i2 => exact i1.trans i2
+    {a b : α} (hab : EqvGen r a b) : S a ↔ S b :=
+  (Equivalence.eqvGen_iff (r := fun x y => S x ↔ S y) ⟨fun _ => .rfl, .symm, .trans⟩).1
+    (EqvGen.mono h _ _ hab)
 
 /-- A generalised map: flags with three fixed-point-free involutions, `a0` and `a2` commuting
 with `a0 a2` fixed-point-free. -/
@@ -133,11 +125,8 @@ theorem edge_eq {d e : D} :
   · rintro (rfl | rfl | rfl | rfl) <;> simp
 
 theorem edge_four (d : D) : [d, M.a0 d, M.a2 d, M.a0 (M.a2 d)].Nodup := by
-  have := M.a0_ne d; have := M.a2_ne d; have := M.a02_ne d
-  have := M.a0_ne (M.a2 d)
-  have : M.a0 d ≠ M.a2 d := fun h => M.a02_ne d (by rw [← h, M.a0_a0])
-  have : M.a0 d ≠ M.a0 (M.a2 d) := fun h => M.a2_ne d (by rw [a0_eq_iff, M.a0_a0] at h; exact h.symm)
-  simp_all [eq_comm]
+  have := M.a0_ne d; have := M.a2_ne d; have := M.a02_ne d; have := M.a0_ne (M.a2 d)
+  simp_all [eq_comm, a0_eq_iff, M.a0_a0]
 
 end GMap
 
@@ -222,14 +211,11 @@ theorem at_four {d x1 x2 x3 x4 : D} (hn : [x1, x2, x3, x4].Nodup)
     (hf : X.M.vtx f = X.M.vtx d) (hl : X.line f = X.line d) : f ∈ [x1, x2, x3, x4] := by
   have h4 := X.pass d
   rw [Nat.card_eq_fintype_card, Fintype.card_subtype] at h4
-  have hsub : [x1, x2, x3, x4].toFinset ⊆
-      Finset.univ.filter fun e => X.M.vtx e = X.M.vtx d ∧ X.line e = X.line d := fun x hx' => by
-    simp only [Finset.mem_filter, Finset.mem_univ, true_and]; exact hx _ (List.mem_toFinset.1 hx')
-  have := Finset.eq_of_subset_of_card_le hsub (by rw [h4, List.toFinset_card_of_nodup hn]; rfl)
-  have hf' : f ∈ Finset.univ.filter fun e => X.M.vtx e = X.M.vtx d ∧ X.line e = X.line d := by
-    simp [hf, hl]
-  rw [← this] at hf'
-  simpa using hf'
+  have := Finset.eq_of_subset_of_card_le (s := [x1, x2, x3, x4].toFinset)
+    (t := Finset.univ.filter fun e => X.M.vtx e = X.M.vtx d ∧ X.line e = X.line d)
+    (fun x hx' => by simpa using hx _ (List.mem_toFinset.1 hx'))
+    (by rw [h4, List.toFinset_card_of_nodup hn]; rfl)
+  simpa [hf, hl] using (Finset.ext_iff.1 this f).2
 
 /-- No loop: the two ends of an edge are distinct vertices. -/
 theorem noLoop (hbf : BigonFree X.On) (d : D) : X.M.vtx (X.M.a0 d) ≠ X.M.vtx d := by
@@ -259,17 +245,10 @@ theorem edge_a1_a2_ne (hbf : BigonFree X.On) (u : D) :
         x = u ∨ x = X.M.a1 u ∨ x = X.M.a2 u ∨ x = X.M.a1 (X.M.a2 u) := fun x hx => by
       refine (eqvGen_iff (fun x => x = u ∨ x = X.M.a1 u ∨ x = X.M.a2 u ∨
         x = X.M.a1 (X.M.a2 u)) ?_ (Quot.eqvGen_exact hx)).2 (.inl rfl)
-      have c1 : ∀ x, x = u ∨ x = X.M.a1 u ∨ x = X.M.a2 u ∨ x = X.M.a1 (X.M.a2 u) →
-          X.M.a1 x = u ∨ X.M.a1 x = X.M.a1 u ∨ X.M.a1 x = X.M.a2 u ∨
-            X.M.a1 x = X.M.a1 (X.M.a2 u) := by
-        rintro x (rfl | rfl | rfl | rfl) <;> simp [X.M.a1_a1]
-      have c2 : ∀ x, x = u ∨ x = X.M.a1 u ∨ x = X.M.a2 u ∨ x = X.M.a1 (X.M.a2 u) →
-          X.M.a2 x = u ∨ X.M.a2 x = X.M.a1 u ∨ X.M.a2 x = X.M.a2 u ∨
-            X.M.a2 x = X.M.a1 (X.M.a2 u) := by
-        rintro x (rfl | rfl | rfl | rfl) <;> simp [X.M.a2_a2, k]
+      have k' : X.M.a2 (X.M.a1 (X.M.a2 u)) = X.M.a1 u := by rw [k, X.M.a2_a2]
       rintro x y (rfl | rfl)
-      · exact ⟨c1 x, fun h => by simpa [X.M.a1_a1] using c1 _ h⟩
-      · exact ⟨c2 x, fun h => by simpa [X.M.a2_a2] using c2 _ h⟩
+      · simp only [a1_eq_iff, X.M.a1_a1]; tauto
+      · simp only [a2_eq_iff, ← k, k', X.M.a2_a2]; tauto
     have hl1 : X.line (X.M.a1 u) ≠ X.line u := fun hl => hel <| by
       rcases hS e hev with rfl | rfl | rfl | rfl <;> simp_all [X.line_a2]
     classical
@@ -278,13 +257,8 @@ theorem edge_a1_a2_ne (hbf : BigonFree X.On) (u : D) :
     have hsub : (Finset.univ.filter fun e => X.M.vtx e = X.M.vtx u ∧ X.line e = X.line u) ⊆
         {u, X.M.a2 u} := fun x hx => by
       simp only [Finset.mem_filter, Finset.mem_univ, true_and] at hx
-      rcases hS x hx.1 with rfl | rfl | rfl | rfl
-      · simp
-      · exact absurd hx.2 hl1
-      · simp
-      · exact absurd (by rw [k, X.line_a2] at hx; exact hx.2) hl1
-    have := (Finset.card_le_card hsub).trans (Finset.card_insert_le _ _)
-    simp only [Finset.card_singleton] at this
+      rcases hS x hx.1 with rfl | rfl | rfl | rfl <;> simp_all [X.line_a2]
+    have := (Finset.card_le_card hsub).trans Finset.card_le_two
     omega
   · exact hn (X.M.a2 (X.M.a1 u)) (by rw [← k]; simp)
 
@@ -361,17 +335,10 @@ theorem bd_apply (S : X.M.Face → ZMod 2) (d : D) :
     (X.bdM *ᵥ S) (X.M.edge d) = S (X.M.face d) + S (X.M.face (X.M.a2 d)) := by
   classical
   have : ∀ e, (X.bdM *ᵥ S) e = S (X.M.face e.out) + S (X.M.face (X.M.a2 e.out)) := fun e => by
-    simp only [bdM, Matrix.mulVec, dotProduct, Matrix.of_apply, add_mul, ite_mul, one_mul,
-      zero_mul, Finset.sum_add_distrib]
-    have key : ∀ a : X.M.Face, ∑ x, (if a = x then S x else 0) = S a := fun a => by
-      rw [Finset.sum_eq_single a (fun b _ hb => ite_eq_right_iff.2 fun h => (hb h.symm).elim) (by simp)]
-      simp
-    rw [key, key]
+    simp [bdM, Matrix.mulVec, dotProduct, add_mul, Finset.sum_add_distrib]
   rw [this]
-  rcases edge_eq.1 (Quot.out_eq (X.M.edge d)) with h | h | h | h <;> rw [h]
-  · simp [← X.M.a0_a2]
-  · simp [X.M.a2_a2, add_comm]
-  · simp [← X.M.a0_a2, X.M.a2_a2, add_comm]
+  rcases edge_eq.1 (Quot.out_eq (X.M.edge d)) with h | h | h | h <;>
+    simp [h, ← X.M.a0_a2, X.M.a2_a2, add_comm]
 
 /-- The flags at a vertex on a given edge are `d` and `a2 d`. -/
 theorem at_edge (hbf : BigonFree X.On) {d x : D} :
@@ -442,14 +409,9 @@ theorem B1_le_Z1 (hbf : BigonFree X.On) : X.B1 ≤ X.Z1 := by
   · obtain ⟨d', rfl, he⟩ := h
     have : Finset.filter (fun x => X.M.edge x = X.M.edge d)
         (Finset.univ.filter fun x => X.M.vtx x = X.M.vtx d') = {d', X.M.a2 d'} := by
-      ext x; simp only [Finset.mem_filter, Finset.mem_univ, true_and, Finset.mem_insert,
-        Finset.mem_singleton]
-      rw [← at_edge hbf, ← he]
+      ext; simp [← at_edge hbf, he]
     rw [this, Finset.sum_pair (X.M.a2_ne d').symm, ← bd_apply, he]
-  · symm
-    refine Finset.sum_eq_zero fun x hx => ?_
-    simp only [Finset.mem_filter, Finset.mem_univ, true_and] at hx
-    exact (h ⟨x, hx.1, hx.2⟩).elim
+  · exact (Finset.sum_eq_zero fun x hx => (h ⟨x, by simpa using hx⟩).elim).symm
 
 /-- **`Z₁/B₁` has dimension at most `1`** (from `χ = 1`): this is the page 42 relation
 `c₂ = c(K)`, the first Betti number of the skeleton. -/
@@ -468,10 +430,8 @@ theorem finrank_Z1_le (hbf : BigonFree X.On) :
     have h : ∀ d, S (X.M.face d) = S (X.M.face (X.M.a2 d)) := fun d => two_eq _ _ <| by
       have := congrFun (LinearMap.mem_ker.1 hS) (X.M.edge d)
       rwa [Matrix.mulVecLin_apply, bd_apply] at this
-    obtain ⟨d, rfl⟩ := Quot.exists_rep f
-    obtain ⟨d', rfl⟩ := Quot.exists_rep f'
-    exact const_of_inv (X := X) (fun d => S (X.M.face d)) (by simp) (by simp) (fun d => (h d).symm)
-      d d'
+    induction f using Quot.ind; induction f' using Quot.ind
+    exact const_of_inv (X := X) (fun d => S (X.M.face d)) (by simp) (by simp) (h · |>.symm) _ _
   have r1 := LinearMap.finrank_range_add_finrank_ker X.incM.mulVecLin
   have r2 := LinearMap.finrank_range_add_finrank_ker X.incMᵀ.mulVecLin
   have r3 := LinearMap.finrank_range_add_finrank_ker X.bdM.mulVecLin
@@ -662,12 +622,8 @@ theorem line_inj (hs : X.Straight) (y : D) {i j : ℕ} (hij : i < j)
     simp only [List.toFinset_cons, List.toFinset_nil, insert_empty_eq, Finset.mem_insert,
       Finset.mem_singleton] at he
     simp only [Finset.mem_filter, Finset.mem_univ, true_and]
-    rcases he with rfl | rfl | rfl | rfl | rfl
-    · simp
-    · simp [hl]
-    · exact ⟨by simp, straight_pow hs y i⟩
-    · exact ⟨by simp, (straight_pow hs y j).trans hl.symm⟩
-    · simp [X.line_a2]
+    rcases he with rfl | rfl | rfl | rfl | rfl <;>
+      simp [ν, hl, X.line_a2, straight_pow hs y i, straight_pow hs y j]
   have := Finset.card_le_card hsub
   rw [List.toFinset_card_of_nodup hn, h4] at this
   simp at this
@@ -714,15 +670,8 @@ theorem line_edges (hbf : BigonFree X.On) (hs : X.Straight) (x : D) :
     refine ⟨⟨(X.M.a2_ne x).symm, hxx', fun h => by simpa using q ν 0 x h.symm⟩,
       ⟨by simpa using q 0 ν x, fun h => hxx' (by simpa [X.M.a2_a2] using congrArg X.M.a2 h)⟩,
       (X.M.a2_ne x').symm⟩
-  have hee : X.M.edge x ≠ X.M.edge x' := fun h => by
-    rcases edge_eq.1 h.symm with h | h | h | h
-    · exact hxx' h.symm
-    · exact noLoop hbf x (by rw [← h]; simp [x'])
-    · exact a2_ne_pow (X := X) 0 ν x (by simpa using h.symm)
-    · exact noLoop hbf (X.M.a2 x) (by rw [← h]; simp [x'])
-  have hfil : (Finset.univ.filter fun e => X.Inc (X.M.vtx x) e ∧ X.lineE e = X.line x) =
-      {X.M.edge x, X.M.edge x'} := by
-    ext e
+  refine ⟨?_, fun h => ?_⟩
+  · ext e
     simp only [Finset.mem_filter, Finset.mem_univ, true_and, Finset.mem_insert,
       Finset.mem_singleton]
     constructor
@@ -732,7 +681,11 @@ theorem line_edges (hbf : BigonFree X.On) (hs : X.Straight) (x : D) :
       rcases this with rfl | rfl | rfl | rfl <;> simp
     · rintro (rfl | rfl)
       exacts [⟨⟨x, rfl, rfl⟩, rfl⟩, ⟨⟨x', by simp [x'], rfl⟩, hx'⟩]
-  exact ⟨hfil, hee⟩
+  rcases edge_eq.1 h.symm with h | h | h | h
+  · exact hxx' h.symm
+  · exact noLoop hbf x (by rw [← h]; simp [x'])
+  · exact a2_ne_pow (X := X) 0 ν x (by simpa using h.symm)
+  · exact noLoop hbf (X.M.a2 x) (by rw [← h]; simp [x'])
 
 /-! ### The parity lemma -/
 
@@ -770,11 +723,7 @@ theorem parity (hbf : BigonFree X.On) (hs : X.Straight) (S : X.M.Face → ZMod 2
   have hμ : ∀ d, X.line d = Δ → μ (X.M.edge d) = S (X.M.face d) := fun d hd => by
     have h0 : S (X.M.face (X.M.a2 d)) = S (X.M.face d) :=
       (two_eq _ _ (by rw [add_comm, ← bd_apply]; exact h1 _ hd))
-    simp only [μ]
-    rcases edge_eq.1 (Quot.out_eq (X.M.edge d)) with h | h | h | h <;> rw [h]
-    · simp
-    · exact h0
-    · simpa using h0
+    rcases edge_eq.1 (Quot.out_eq (X.M.edge d)) with h | h | h | h <;> simp [μ, h, h0]
   -- the local count at a vertex of `Δ`
   have loc : ∀ w, X.On w Δ → ∑ e, (if X.Inc w e ∧ X.lineE e = Δ then μ e else 0) =
       if ∃ e, X.Inc w e ∧ z e ≠ 0 then 1 else 0 := by
@@ -804,11 +753,8 @@ theorem parity (hbf : BigonFree X.On) (hs : X.Straight) (S : X.M.Face → ZMod 2
         refine Finset.sum_congr rfl fun w _ => ?_
         by_cases hw : X.On w Δ
         · rw [loc w hw]; simp [hw]
-        · rw [ite_eq_right (fun h => hw h.1), Finset.sum_eq_zero]
-          rintro e - 
-          rw [ite_eq_right]
-          rintro ⟨⟨d, rfl, rfl⟩, hd⟩
-          exact hw ⟨d, rfl, hd⟩
+        · rw [ite_eq_right (fun h => hw h.1), Finset.sum_eq_zero fun e _ =>
+            ite_eq_right fun ⟨⟨d, h1, h2⟩, hd⟩ => hw ⟨d, h1, by subst h2; exact hd⟩]
     _ = ∑ e, ∑ w, (if X.Inc w e then (if X.lineE e = Δ then μ e else 0) else 0) := by
         rw [Finset.sum_comm]; simp only [ite_and]
     _ = 0 := Finset.sum_eq_zero fun e _ => by
@@ -1015,17 +961,11 @@ theorem tri_bound (hbf : BigonFree X.On) (hs : X.Straight) {a b c Δ : L}
       (if w = wb then Pb eb else 0) + (if w = wc then Pc ec else 0) from ?_]
   · simp [Finset.sum_add_distrib]
   by_cases h1 : w = wa
-  · subst h1
-    rw [ite_eq_left rfl, ite_eq_right (ne oa nba), ite_eq_right (ne oa nca), add_zero, add_zero]
-    exact ind_val hwaΔ va hwa ha.1
+  · subst h1; simpa [ne oa nba, ne oa nca] using ind_val hwaΔ va hwa ha.1
   by_cases h2 : w = wb
-  · subst h2
-    rw [ite_eq_right (ne ob nab), ite_eq_left rfl, ite_eq_right (ne ob ncb), add_zero, zero_add]
-    exact ind_val hwbΔ vb hwb hb.1
+  · subst h2; simpa [ne ob nab, ne ob ncb] using ind_val hwbΔ vb hwb hb.1
   by_cases h3 : w = wc
-  · subst h3
-    rw [ite_eq_right (ne oc nac), ite_eq_right (ne oc nbc), ite_eq_left rfl, zero_add, zero_add]
-    exact ind_val hwcΔ vc hwc hc.1
+  · subst h3; simpa [ne oc nac, ne oc nbc] using ind_val hwcΔ vc hwc hc.1
   rw [ite_eq_right h1, ite_eq_right h2, ite_eq_right h3, add_zero, add_zero]
   exact ite_eq_right fun ⟨hw, e, he, hz⟩ => hz (v0 w (fun h => h1 (meet_eq haΔ h hw oa hwaΔ))
     (fun h => h2 (meet_eq hbΔ h hw ob hwbΔ)) (fun h => h3 (meet_eq hcΔ h hw oc hwcΔ)) e he)
@@ -1064,9 +1004,7 @@ theorem triangle_iff (hbf : BigonFree X.On) (hs : X.Straight) {a b c Δ : L}
   refine ⟨tri_bound hbf hs hpab hpbc hpca hab hnc hΔ sa sb sc ba bb bc ha hb hc, fun h0 => ?_⟩
   have hz : Pa + Pb + Pc ∈ X.Z1 := by
     simp only [LinearMap.mem_ker, Matrix.mulVecLin_apply, Matrix.mulVec_add, ba, bb, bc]
-    funext v
-    simp only [Pi.add_apply, Pi.zero_apply]
-    exact (by decide : ∀ p q r : ZMod 2, p + r + (p + q) + (q + r) = 0) _ _ _
+    exact funext fun v => (by decide : ∀ p q r : ZMod 2, p + r + (p + q) + (q + r) = 0) _ _ _
   by_contra hn
   have hl := (flip hbf hs (show a ≠ Δ from fun h => hΔ.1 (h ▸ hpab.1)) hz).not.1 hn
   rw [not_not, add_right_comm, add_right_comm Pa] at hl
@@ -1089,9 +1027,7 @@ theorem line_a1_ne (hs : X.Straight) (d : D) : X.line (X.M.a1 d) ≠ X.line d :=
   obtain ⟨e, he, hl⟩ := X.two d
   have h2 : 1 < X.nu (X.M.vtx d) := Finset.one_lt_card.2 ⟨_, Finset.mem_image.2 ⟨d, by simp, rfl⟩,
     _, Finset.mem_image.2 ⟨e, by simp [he], rfl⟩, Ne.symm hl⟩
-  have := line_inj hs d zero_lt_one h2
-  rw [pow_zero, pow_one, Equiv.Perm.one_apply, phi_apply, X.line_a2] at this
-  exact Ne.symm this
+  exact fun h => line_inj hs d zero_lt_one h2 (by simpa [phi_apply, X.line_a2] using h.symm)
 
 variable (X) in
 /-- `e1, e, e2` are three consecutive sides of a face: the corner `(e1, e)` at one end of `e`
@@ -1142,12 +1078,8 @@ theorem exists_dart (hbf : BigonFree X.On) (hs : X.Straight) (f : SkelIso X X')
   rw [← h2, inc_iff] at iv iw
   have hvw : f.fV (X.M.vtx d) ≠ f.fV (X.M.vtx (X.M.a0 d)) := fun h => noLoop hbf d (f.fV.injective h).symm
   by_contra hne
-  have hw : X'.M.vtx d' = f.fV (X.M.vtx (X.M.a0 d)) := by
-    rcases iv with h | h
-    · exact (hne h.symm).elim
-    · rcases iw with h' | h'
-      · exact h'.symm
-      · exact (hvw (h.trans h'.symm)).elim
+  have hw : X'.M.vtx d' = f.fV (X.M.vtx (X.M.a0 d)) :=
+    (iw.resolve_right fun h' => hvw ((iv.resolve_left fun h => hne h.symm).trans h'.symm)).symm
   -- the edge after `d` would join both ends of `d`, on another line
   have : X.Inc (X.M.vtx (X.M.a0 d)) (X.M.edge (X.M.a1 d)) := by
     rw [f.inc, ← h1, ← hw]; exact ⟨_, vtx_a1 d', rfl⟩
@@ -1166,16 +1098,13 @@ theorem lift (hbf : BigonFree X.On) (hbf' : BigonFree X'.On) (hs : X.Straight) (
   have hv' : ∀ d, X'.M.vtx (X'.M.a0 (g d)) = f.fV (X.M.vtx (X.M.a0 d)) := fun d => by
     have := (f.inc _ _).1 (⟨_, rfl, edge_a0 d⟩ : X.Inc (X.M.vtx (X.M.a0 d)) (X.M.edge d))
     rw [← he, inc_iff] at this
-    exact this.resolve_left (fun h => noLoop hbf d (f.fV.injective (h.trans (hv d))))
-      |>.symm
+    exact (this.resolve_left fun h => noLoop hbf d (f.fV.injective (h.trans (hv d)))).symm
   refine ⟨g, fun d => ?_, fun d => ?_, fun d => ?_, hv, he, fun d => ?_⟩
   · exact dart_unique hbf' (by rw [hv, hv']) (by simp [he]) (by rw [h1, h3])
   · exact dart_unique hbf' (by simp [hv]) (by rw [he, h1]) (by rw [h1, X.M.a1_a1, X'.M.a1_a1, he])
-  · rcases (at_edge hbf').1 (⟨by simp [hv], by simp [he]⟩ :
+  · exact ((at_edge hbf').1 (⟨by simp [hv], by simp [he]⟩ :
       X'.M.vtx (g (X.M.a2 d)) = X'.M.vtx (g d) ∧ X'.M.edge (g (X.M.a2 d)) = X'.M.edge (g d))
-      with h | h
-    · exact (edge_a1_a2_ne hbf d (f.fE.injective (by rw [← h1, ← h1, h]))).elim
-    · exact h
+      ).resolve_left fun h => edge_a1_a2_ne hbf d (f.fE.injective (by rw [← h1, ← h1, h]))
   · rw [← lineE_edge, he, f.line]; rfl
 
 /-- **Fullness reduces to face paths.** An isomorphism of decomposed skeletons of two bigon-free
@@ -1194,10 +1123,7 @@ theorem lift_iff (hbf : BigonFree X.On) (hbf' : BigonFree X'.On) (hs : X.Straigh
     · rintro ⟨d, rfl, rfl, rfl⟩
       exact ⟨g d, by rw [← g1, ge], ge d, by rw [← g0, ← g1, ge]⟩
     · rintro ⟨d', h1, h2, h3⟩
-      refine ⟨g.symm d', f.fE.injective ?_, f.fE.injective ?_, f.fE.injective ?_⟩
-      · rw [← ge, g1, g.apply_symm_apply, h1]
-      · rw [← ge, g.apply_symm_apply, h2]
-      · rw [← ge, g1, g0, g.apply_symm_apply, h3]
+      refine ⟨g.symm d', ?_, ?_, ?_⟩ <;> apply f.fE.injective <;> simp [← ge, g0, g1, h1, h2, h3]
   · intro hT
     obtain ⟨g, g0, g1, g2, gv, ge, -⟩ := lift hbf hbf' hs f fun _ _ _ => (hT _ _ _).1
     obtain ⟨g', -, g1', -, gv', ge', -⟩ := lift hbf' hbf hs' f.symm fun e1 e e2 h =>
