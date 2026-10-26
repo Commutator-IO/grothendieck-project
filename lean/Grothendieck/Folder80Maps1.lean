@@ -82,9 +82,8 @@ theorem disjoint_of_conf {v w X Y : E → SignType} (hvX : Conf v X) (hvY : Conf
   revert h1 h2 h3 h4; simp only [Pi.neg_apply]
   cases v e <;> cases w e <;> cases X e <;> cases Y e <;> decide
 
-theorem neg_ne_zero' {Z : E → SignType} (h : Z ≠ 0) : -Z ≠ 0 := fun h' => h <| funext fun e => by
-  have := congrFun h' e; revert this; simp only [Pi.neg_apply, Pi.zero_apply]
-  cases Z e <;> decide
+theorem neg_ne_zero' {Z : E → SignType} (h : Z ≠ 0) : -Z ≠ 0 := fun h' => h <| by
+  rw [← neg_neg Z, h']; rfl
 
 variable {L : Set (E → SignType)}
 
@@ -104,10 +103,6 @@ theorem not_lattice_of_disjoint (hL : ∀ X ∈ L, ∀ Y ∈ L, comp X Y ∈ L) 
   have hwY : Conf w (-comp v (-w)) := fun e => by
     simp only [comp, Pi.neg_apply]; split_ifs with h
     exacts [Or.inr (neg_neg _).symm, Or.inl ((hvw e).resolve_left h)]
-  have hXe : comp v w e = v e := by simp [comp, he]
-  have hXf : comp v w f = w f := by simp [comp, hvf]
-  have hYe : comp v (-w) e = v e := by simp [comp, he]
-  have hYf : comp v (-w) f = -w f := by simp [comp, hvf]
   intro hlat
   have hvXY : v ∈ PCl L (comp v w) ∩ PCl L (comp v (-w)) :=
     ⟨⟨hv, hv0, Or.inl hvX⟩, ⟨hv, hv0, Or.inl hvX⟩⟩
@@ -123,7 +118,7 @@ theorem not_lattice_of_disjoint (hL : ∀ X ∈ L, ∀ Y ∈ L, comp X Y ∈ L) 
   have h2' := h2.imp (fun h => And.intro (h e) (h f)) (fun h => And.intro (h e) (h f))
   have hv' := hvXY.2.2.imp (· e) (· e)
   have hw' := hwXY.2.2.imp (· f) (· f)
-  simp only [Pi.neg_apply, hXe, hXf, hYe, hYf, neg_neg] at h1' h2' hv' hw'
+  simp only [Pi.neg_apply, comp, he, hvf, ↓reduceIte, neg_neg] at h1' h2' hv' hw'
   revert he hf h1' h2' hv' hw'
   generalize v e = a; generalize w f = b; generalize W e = c; generalize W f = d
   cases a <;> cases b <;> cases c <;> cases d <;> decide
@@ -155,15 +150,13 @@ theorem pcl_inter_of [Fintype E] (hL : ∀ X ∈ L, ∀ Y ∈ L, comp X Y ∈ L)
     rintro Z ⟨hZ, hZ0, hZX, hZY⟩ e
     have hMZ : comp M Z ∈ S := ⟨hL _ hM.1 _ hZ, (conf_comp M Z).ne_zero hM.2.1,
       hM.2.2.1.comp hZX, hM.2.2.2.comp hZY⟩
-    have heq := Finset.eq_of_subset_of_card_le (fun e he => by
-      simp only [Finset.mem_filter, Finset.mem_univ, true_and] at he ⊢; simp [comp, he])
-      (hmax _ hMZ)
+    have heq := Finset.eq_of_subset_of_card_le (fun e => by
+      simp only [Finset.mem_filter, Finset.mem_univ, true_and]; simp +contextual [comp]) (hmax _ hMZ)
     by_cases hZe : Z e = 0
     · exact Or.inl hZe
     have hMe : M e ≠ 0 := fun hMe => by
-      have : e ∈ Finset.univ.filter fun e => comp M Z e ≠ 0 :=
-        Finset.mem_filter.2 ⟨Finset.mem_univ _, by simp [comp, hMe, hZe]⟩
-      rw [← heq] at this; simp [hMe] at this
+      have := congrArg (e ∈ ·) heq
+      simp only [Finset.mem_filter] at this; simp [comp, hMe, hZe] at this
     exact Or.inr (((hZX e).resolve_left hZe).trans ((hM.2.2.1 e).resolve_left hMe).symm)
   refine ⟨M, hM.1, hM.2.1, Set.ext fun Z => (hmem Z).trans ⟨?_, ?_⟩⟩
   · rintro ⟨hZ, hZ0, h | h⟩
@@ -220,8 +213,8 @@ theorem neg_mem_cov {X : ι → SignType} (hX : X ∈ cov ℓ) : -X ∈ cov ℓ 
 theorem eventually_sign (a b : ℝ) : ∀ᶠ t in 𝓝[>] (0 : ℝ),
     SignType.sign (a + t * b) = if SignType.sign a = 0 then SignType.sign b else SignType.sign a := by
   have hc : Tendsto (fun t : ℝ => a + t * b) (𝓝[>] 0) (𝓝 a) :=
-    tendsto_nhdsWithin_of_tendsto_nhds ((by fun_prop : Continuous fun t : ℝ => a + t * b).tendsto'
-      0 a (by simp))
+    ((by fun_prop : Continuous fun t : ℝ => a + t * b).tendsto' 0 a (by simp)).mono_left
+      nhdsWithin_le_nhds
   rcases lt_trichotomy a 0 with h | rfl | h
   · filter_upwards [hc.eventually (gt_mem_nhds h)] with t ht
     simp [sign_neg ht, sign_neg h]
@@ -328,7 +321,7 @@ theorem tp_II32 (i j m : Fin 5) :
 
 theorem II32_nondegenerate : NoCommonVertex II32 := by
   have : NoCommonVertex L32 := by unfold NoCommonVertex; decide
-  intro i j hij; obtain ⟨m, hm⟩ := this i j hij; exact ⟨m, by rw [tp_II32]; exact_mod_cast hm⟩
+  intro i j hij; obtain ⟨m, hm⟩ := this i j hij; exact ⟨m, by rwa [tp_II32, Int.cast_ne_zero]⟩
 
 /-- No line of `II′_{3,2}` is bigonal: each carries at least three vertices. -/
 theorem II32_no_bigon (i : Fin 5) : ¬ Bigonal II32 i := by

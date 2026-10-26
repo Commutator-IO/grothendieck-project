@@ -115,20 +115,20 @@ omit meet in
 theorem C.swap23 {a b c : L} : C on a b c → C on a c b := fun ⟨p, h1, h2, h3⟩ => ⟨p, h1, h3, h2⟩
 
 omit meet in
-theorem GP4.swap12 {a b c d : L} (h : GP4 on a b c d) : GP4 on b a c d := by
-  obtain ⟨h1, h2, h3, h4, h5, h6, h7, h8, h9, h10⟩ := h
-  exact ⟨Ne.symm h1, h4, h5, h2, h3, h6, fun h => h7 h.swap12, fun h => h8 h.swap12, h10, h9⟩
+theorem GP4.swap12 {a b c d : L} (h : GP4 on a b c d) : GP4 on b a c d :=
+  let ⟨h1, h2, h3, h4, h5, h6, h7, h8, h9, h10⟩ := h
+  ⟨Ne.symm h1, h4, h5, h2, h3, h6, fun h => h7 h.swap12, fun h => h8 h.swap12, h10, h9⟩
 
 omit meet in
-theorem GP4.swap23 {a b c d : L} (h : GP4 on a b c d) : GP4 on a c b d := by
-  obtain ⟨h1, h2, h3, h4, h5, h6, h7, h8, h9, h10⟩ := h
-  exact ⟨h2, h1, h3, Ne.symm h4, h6, h5, fun h => h7 h.swap23, h9, h8,
+theorem GP4.swap23 {a b c d : L} (h : GP4 on a b c d) : GP4 on a c b d :=
+  let ⟨h1, h2, h3, h4, h5, h6, h7, h8, h9, h10⟩ := h
+  ⟨h2, h1, h3, Ne.symm h4, h6, h5, fun h => h7 h.swap23, h9, h8,
     fun h => h10 h.swap12⟩
 
 omit meet in
-theorem GP4.swap34 {a b c d : L} (h : GP4 on a b c d) : GP4 on a b d c := by
-  obtain ⟨h1, h2, h3, h4, h5, h6, h7, h8, h9, h10⟩ := h
-  exact ⟨h1, h3, h2, h5, h4, Ne.symm h6, h8, h7, fun h => h9 h.swap23, fun h => h10 h.swap23⟩
+theorem GP4.swap34 {a b c d : L} (h : GP4 on a b c d) : GP4 on a b d c :=
+  let ⟨h1, h2, h3, h4, h5, h6, h7, h8, h9, h10⟩ := h
+  ⟨h1, h3, h2, h5, h4, Ne.symm h6, h8, h7, fun h => h9 h.swap23, fun h => h10 h.swap23⟩
 
 /-- Step 1: from a simple crossing, four lines in general position. -/
 theorem quad_of {a b c d : L} {p qc qd rc rd : P} (hab : a ≠ b) (hpa : on p a) (hpb : on p b)
@@ -285,20 +285,15 @@ theorem dichotomy (two : ∀ p l, on p l → ∃ m, m ≠ l ∧ on p m) (hbf : B
     IsII4 on ∨ HasII5 on ∨ HasII32 on ∨ HasIII6 on := by
   obtain ⟨p, a, b, hab, hpa, hpb, honly⟩ := hsc
   obtain ⟨x, y, z, w, g⟩ := exists_gp4 meet two hbf hab hpa hpb honly
-  by_contra hcon
-  simp only [not_or] at hcon
-  obtain ⟨n4, n5, n32, n6⟩ := hcon
+  by_contra! ⟨n4, n5, n32, n6⟩
   have cls := fun l (h1 : l ≠ x) h2 h3 h4 => diag_of g h1 h2 h3 h4 n5 n32
   obtain ⟨δ, h1, h2, h3, h4⟩ : ∃ δ, δ ≠ x ∧ δ ≠ y ∧ δ ≠ z ∧ δ ≠ w := by
-    by_contra h
-    push Not at h
+    by_contra! h
     exact n4 ⟨x, y, z, w, g, fun m => by tauto⟩
   have g2 := g.swap23
   have g3 := g.swap34.swap23
   have hall : ∀ m, m = x ∨ m = y ∨ m = z ∨ m = w ∨ m = δ := fun m => by
-    by_contra hm
-    push Not at hm
-    obtain ⟨k1, k2, k3, k4, k5⟩ := hm
+    by_contra! ⟨k1, k2, k3, k4, k5⟩
     rcases cls δ h1 h2 h3 h4 with ⟨e1, e2⟩ | ⟨e1, e2⟩ | ⟨e1, e2⟩ <;>
       rcases cls m k1 k2 k3 k4 with ⟨f1, f2⟩ | ⟨f1, f2⟩ | ⟨f1, f2⟩
     · exact k5 (diag_unique meet g f1 f2 e1 e2)
@@ -312,10 +307,8 @@ theorem dichotomy (two : ∀ p l, on p l → ∃ m, m ≠ l ∧ on p m) (hbf : B
     · exact k5 (diag_unique meet g3 f1 f2 e1 e2)
   rcases cls δ h1 h2 h3 h4 with ⟨e1, e2⟩ | ⟨e1, e2⟩ | ⟨e1, e2⟩
   · exact not_bigonFree meet two hbf g e1 e2 hall
-  · exact not_bigonFree meet two hbf g2 e1 e2 fun m => by
-      rcases hall m with h | h | h | h | h <;> simp [h]
-  · exact not_bigonFree meet two hbf g3 e1 e2 fun m => by
-      rcases hall m with h | h | h | h | h <;> simp [h]
+  · exact not_bigonFree meet two hbf g2 e1 e2 fun m => by have := hall m; tauto
+  · exact not_bigonFree meet two hbf g3 e1 e2 fun m => by have := hall m; tauto
 
 end Core
 
@@ -328,7 +321,7 @@ theorem eqvGen_iff {α : Type*} {r : α → α → Prop} (S : α → Prop) (h : 
     {a b : α} (hab : EqvGen r a b) : S a ↔ S b := by
   induction hab with
   | rel x y h' => exact h x y h'
-  | refl => exact Iff.rfl
+  | refl => rfl
   | symm _ _ _ ih => exact ih.symm
   | trans _ _ _ _ _ i1 i2 => exact i1.trans i2
 
@@ -470,10 +463,7 @@ theorem at_four {d x1 x2 x3 x4 : D} (hn : [x1, x2, x3, x4].Nodup)
       Finset.univ.filter fun e => X.M.vtx e = X.M.vtx d ∧ X.line e = X.line d := fun x hx' => by
     simp only [Finset.mem_filter, Finset.mem_univ, true_and]; exact hx _ (List.mem_toFinset.1 hx')
   have := Finset.eq_of_subset_of_card_le hsub (by rw [h4, List.toFinset_card_of_nodup hn]; rfl)
-  have hf' : f ∈ Finset.univ.filter fun e => X.M.vtx e = X.M.vtx d ∧ X.line e = X.line d := by
-    simp [hf, hl]
-  rw [← this] at hf'
-  simpa using hf'
+  rw [← List.mem_toFinset, this]; simp [hf, hl]
 
 /-- No loop: the two ends of an edge are distinct vertices. -/
 theorem noLoop (hbf : BigonFree X.On) (d : D) : X.M.vtx (X.M.a0 d) ≠ X.M.vtx d := by
@@ -503,9 +493,8 @@ theorem noMulti (hbf : BigonFree X.On) {x y : D} (hv : X.M.vtx x = X.M.vtx y)
       simp only [List.nodup_cons, List.mem_cons, List.not_mem_nil, or_false, not_or,
         List.nodup_nil, and_true, not_false_eq_true]
       refine ⟨⟨fun h => X.M.a2_ne x ?_, hd (by simp) (by simp), hd (by simp) (by simp)⟩,
-        ⟨hd (by simp) (by simp), hd (by simp) (by simp)⟩, fun h => X.M.a2_ne y ?_⟩
-      · simpa [X.M.a0_a0] using (congrArg X.M.a0 h).symm
-      · simpa [X.M.a0_a0] using (congrArg X.M.a0 h).symm
+        ⟨hd (by simp) (by simp), hd (by simp) (by simp)⟩, fun h => X.M.a2_ne y ?_⟩ <;>
+        simpa [X.M.a0_a0] using (congrArg X.M.a0 h).symm
     have h1 : ∀ z ∈ [x, X.M.a2 x, y, X.M.a2 y], X.M.vtx z = X.M.vtx x ∧ X.line z = X.line x := by
       simp [hv, hl, X.line_a2]
     have h2 : ∀ z ∈ [X.M.a0 x, X.M.a0 (X.M.a2 x), X.M.a0 y, X.M.a0 (X.M.a2 y)],
@@ -572,8 +561,7 @@ theorem face_six (hbf : BigonFree X.On) (d : D) :
     fun x hx => by
       simp only [List.mem_toFinset, List.mem_cons] at hx
       rcases hx with rfl | rfl | rfl | rfl | rfl | rfl | h <;> simp_all
-  have := Finset.card_le_card hsub
-  rwa [List.toFinset_card_of_nodup hn] at this
+  exact (List.toFinset_card_of_nodup hn).symm.trans_le (Finset.card_le_card hsub)
 
 open Classical in
 /-- **Melchior's inequality** gives a simple crossing: from `χ = 1`, `4E = 4 Σ ν(v)` and
@@ -588,7 +576,7 @@ theorem melchior (hbf : BigonFree X.On) :
     fun v c => by simp [On]
   have hV : Fintype.card D = ∑ v, 4 * ν v := by
     rw [← Finset.card_univ, Finset.card_eq_sum_card_fiberwise (f := X.M.vtx) (t := Finset.univ)
-      (fun _ _ => Finset.mem_coe.2 (Finset.mem_univ _))]
+      (by simp)]
     refine Finset.sum_congr rfl fun v _ => ?_
     rw [Finset.card_eq_sum_card_image X.line, Finset.sum_const_nat (m := 4), mul_comm]
     intro l hl
@@ -599,7 +587,7 @@ theorem melchior (hbf : BigonFree X.On) :
     congr 1; ext a; simp [(Finset.mem_filter.1 he).2]
   have hE : Fintype.card D = 4 * Fintype.card X.M.Edge := by
     rw [← Finset.card_univ, Finset.card_eq_sum_card_fiberwise (f := X.M.edge) (t := Finset.univ)
-      (fun _ _ => Finset.mem_coe.2 (Finset.mem_univ _))]
+      (by simp)]
     have : ∀ q, (Finset.univ.filter fun a => X.M.edge a = q).card = 4 := fun q => by
       obtain ⟨d, rfl⟩ : ∃ d, X.M.edge d = q := Quot.exists_rep q
       have h : _ = 4 := List.toFinset_card_of_nodup (edge_four (M := X.M) d)
@@ -608,7 +596,7 @@ theorem melchior (hbf : BigonFree X.On) :
     simp only [this, Finset.sum_const, Finset.card_univ, smul_eq_mul, mul_comm]
   have hF : 6 * Fintype.card X.M.Face ≤ Fintype.card D := by
     rw [← Finset.card_univ (α := D), Finset.card_eq_sum_card_fiberwise (f := X.M.face)
-      (t := Finset.univ) (fun _ _ => Finset.mem_coe.2 (Finset.mem_univ _))]
+      (t := Finset.univ) (by simp)]
     calc 6 * Fintype.card X.M.Face = ∑ _q : X.M.Face, 6 := by simp [mul_comm]
       _ ≤ _ := Finset.sum_le_sum fun q _ => by
         obtain ⟨d, rfl⟩ : ∃ d, X.M.face d = q := Quot.exists_rep q
@@ -616,8 +604,7 @@ theorem melchior (hbf : BigonFree X.On) :
   have heul := X.euler
   simp only [GMap.euler, Nat.card_eq_fintype_card] at heul
   obtain ⟨v, -, hv⟩ : ∃ v ∈ Finset.univ, ν v < 3 := by
-    by_contra h
-    push Not at h
+    by_contra! h
     have := Finset.sum_le_sum h
     rw [← Finset.mul_sum] at hV
     simp only [Finset.sum_const, Finset.card_univ, smul_eq_mul] at this
@@ -629,9 +616,7 @@ theorem melchior (hbf : BigonFree X.On) :
   obtain ⟨a, b, hab, hab'⟩ := Finset.card_eq_two.1 (show ν (X.M.vtx d) = 2 by omega)
   refine ⟨X.M.vtx d, a, b, hab, (hν _ _).2 (by simp [hab']), (hν _ _).2 (by simp [hab']),
     fun c hc => ?_⟩
-  have := (hν _ _).1 hc
-  rw [hab'] at this
-  simpa using this
+  simpa [hab'] using (hν _ _).1 hc
 
 /-- **The page's boxed statement** (pages 20, 24): every bigon-free combinatorial arrangement of
 pseudolines in the real projective plane is `II_4` or contains `II_5`, `II′_{3,2}` or

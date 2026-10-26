@@ -572,8 +572,6 @@ theorem algebraicIndependent_of {n : ℕ} (x : Fin n → MvPolynomial (Fin n) (Z
       have := isIntegral_aeval p MvPolynomial.X _
         (fun i => by rw [MvPolynomial.aeval_X_left_apply]; exact hx i) f
       rwa [MvPolynomial.aeval_X_left_apply] at this⟩
-  have : Algebra.IsAlgebraic (Algebra.adjoin (ZMod p) (Set.range x))
-      (MvPolynomial (Fin n) (ZMod p)) := Algebra.IsIntegral.isAlgebraic
   exact (Algebra.IsAlgebraic.isTranscendenceBasis_of_le_trdeg_of_finite (ZMod p) x
     (by rw [MvPolynomial.trdeg_of_isDomain, Cardinal.lift_id])).1
 
@@ -701,17 +699,11 @@ theorem mem_field (f : MvPolynomial (Fin n) (ZMod p))
       have : (σ : (𝕂 n) →+* (𝕂 n)).comp (ι n) =
           (ι n).comp (MvPolynomial.aeval (act p (of l) MvPolynomial.X)).toRingHom := by
         apply MvPolynomial.ringHom_ext
-        · intro r
-          exact RingHom.congr_fun (RingHom.ext_zmod (((σ : (𝕂 n) →+* (𝕂 n)).comp (ι n)).comp
-            MvPolynomial.C) (((ι n).comp
-              (MvPolynomial.aeval (act p (of l) MvPolynomial.X)).toRingHom).comp
-                MvPolynomial.C)) r
-        · intro k
-          simp [hl, act, lin]
+        · intro r; rw [← ZMod.natCast_zmod_val r]; simp only [map_natCast]
+        · intro k; simp [hl, act, lin]
       exact RingHom.congr_fun this a
     have hg : IsUnit (of l).det := by
-      rw [isUnit_iff_ne_zero]
-      intro h0
+      refine isUnit_iff_ne_zero.2 fun h0 => ?_
       obtain ⟨v, hv, hv0⟩ := exists_vecMul_eq_zero_iff.2 h0
       have h := hcomp (lin p v)
       rw [aeval_act_lin, hv0, show lin p (0 : Fin n → ZMod p) = 0 by simp [lin], map_zero,
@@ -721,7 +713,7 @@ theorem mem_field (f : MvPolynomial (Fin n) (ZMod p))
     rw [hcomp, hf _ hg fun a ha => IsFractionRing.injective _ (𝕂 n) <| by
       rw [← hcomp]; exact σ.commutes ⟨_, ha⟩]
   obtain ⟨y, hy⟩ := IntermediateField.mem_bot.1 hfix
-  rw [← hy]; exact y.2
+  exact hy ▸ y.2
 
 /-- **`𝔽_p[x]` is integrally closed in `𝔽_p[X]` relative to `𝔽_p(x)`**: a polynomial whose image
 lies in `𝔽_p(x)` lies in `𝔽_p[x]`, since `𝔽_p[x]` is a polynomial algebra (hence normal) over
@@ -755,8 +747,7 @@ theorem mem_adjoin_of_mem_field (f : MvPolynomial (Fin n) (ZMod p)) (hf : (ι n)
     rw [← hj, ← hb]
     simp only [j, IsFractionRing.liftAlgHom_apply, IsFractionRing.lift_algebraMap]
     exact b.2
-  rw [hB] at hfB
-  obtain ⟨c, hc, hcf⟩ := Subalgebra.mem_map.1 hfB
+  obtain ⟨c, hc, hcf⟩ := Subalgebra.mem_map.1 (hB ▸ hfB)
   rwa [← hι hcf]
 
 end
@@ -788,9 +779,7 @@ noncomputable def dicksonSL (n : ℕ) (i : Fin n) : MvPolynomial (Fin n) (ZMod p
 theorem aeval_act_Δ {n : ℕ} (g : Matrix (Fin n) (Fin n) (ZMod p)) :
     MvPolynomial.aeval (act p g MvPolynomial.X) (Δ p n) = MvPolynomial.C g.det * Δ p n := by
   rw [Δ, ← AlgHom.coe_toRingHom, map_moore, ← MvPolynomial.algebraMap_eq, ← moore_act]
-  congr 1
-  funext k
-  simp
+  congr 1; ext; simp
 
 theorem dickson_mem_adjoin_SL {n : ℕ} (i : Fin n) :
     dickson p n i ∈ Algebra.adjoin (ZMod p) (Set.range (dicksonSL p n)) := by
@@ -824,9 +813,7 @@ theorem dickson_theorem_SL {n : ℕ} (f : MvPolynomial (Fin n) (ZMod p)) :
     exact MvPolynomial.C_injective _ _ (this.trans MvPolynomial.C_1.symm)
   induction hf using Algebra.adjoin_induction with
   | mem x hx =>
-    obtain ⟨i, rfl⟩ := hx
-    unfold dicksonSL
-    split_ifs
+    obtain ⟨i, rfl⟩ := hx; unfold dicksonSL; split_ifs
     · rw [aeval_act_Δ, hg, map_one, one_mul]
     · exact aeval_act_dickson p g (hg ▸ isUnit_one) i
   | algebraMap r => exact MvPolynomial.aeval_C _ _
