@@ -6,7 +6,7 @@ La cote 160, \emph{Schémas [en] groupes : notes manuscrites (s.d.)}, est rangé
 Soit $p$ premier. Sur tout anneau commutatif, $\Delta_n(c\xi) = c^{(p^n-1)/(p-1)}\Delta_n(\xi)$. Il existe des polynômes $A_0, \dots, A_{n-1} \in \mathbf F_p[X_1, \dots, X_n]$ tels que, pour toute $\mathbf F_p$-algèbre $S$ et tout $\xi \in S^n$, $\xi_k^{p^n} + \sum_i A_i(\xi)\, \xi_k^{p^i} = 0$ pour tout $k$ ; si $\Delta_n(\xi)$ est inversible, les $A_i(\xi)$ sont les seuls coefficients de cette relation. Enfin $A_0 = (-1)^n \Delta_n^{p-1}$.
 \end{theoreme}
 
-\noindent L'énoncé tient : voir \texttt{moore\_smul'}, \texttt{dickson\_relation\_eval}, \texttt{dickson\_unique} et \texttt{A\_zero\_eval} dans \href{\leanblob/Folder160.lean}{\texttt{Folder160.lean}}, avec le signe $(-1)^n$ que page et lecture laissent en $\pm$.
+\noindent L'énoncé tient : voir \texttt{moore\_smul'}, \texttt{dickson\_relation\_eval}, \texttt{dickson\_unique} et \texttt{A\_zero\_eval} dans \href{\leanblob/Folder160.lean}{\texttt{Folder160.\allowbreak{}lean}}, avec le signe $(-1)^n$ que page et lecture laissent en $\pm$.
 
 \begin{remarque}
 Les $A_i$ sont les coefficients de $\prod_{\lambda \in \mathbf F_p^n}(T - \lambda \cdot X)$, et $\Delta_{n+1}(T, X_1, \dots, X_n) = (-1)^n \Delta_n \prod_\lambda (T - \lambda \cdot X)$ : les $p^n$ formes $\lambda \cdot X$ sont des racines distinctes d'un polynôme de degré $p^n$ en $T$ dont le coefficient dominant $\pm\Delta_n$ est non nul (par récurrence sur $n$). La factorisation de la page~7 et sa constante $c$ ne servent pas.
@@ -37,7 +37,7 @@ Soient $K$ un corps de caractéristique $p$ et $e, f \in K^n$ deux familles $\ma
 \end{lemme}
 
 \begin{proof}
-Les familles $e$ et $f$ sont deux bases de $M$ ; la matrice de passage $P$, de colonnes les coordonnées des $f_j$ dans la base $e$, est inversible, et $f_j = \sum_k P_{kj} e_k$, soit $f = {}^t\!P \cdot e$ avec $\det {}^t\!P = \det P$ inversible. La formule pour $\Delta_n$ est alors la première assertion de l'énoncé précédent. Voir \texttt{exists\_act\_eq\_of\_span\_eq} et \texttt{moore\_eq\_of\_span\_eq}, qui s'appuient sur \texttt{Basis.toMatrix}, \texttt{Basis.invertibleToMatrix} et \texttt{Basis.sum\_toMatrix\_smul\_self} de Mathlib.
+Les familles $e$ et $f$ sont deux bases de $M$ ; la matrice de passage $P$, de colonnes les coordonnées des $f_j$ dans la base $e$, est inversible, et $f_j = \sum_k P_{kj} e_k$, soit $f = {}^t\!P \cdot e$ avec $\det {}^t\!P = \det P$ inversible. La formule pour $\Delta_n$ est alors la première assertion de l'énoncé précédent. Voir \texttt{exists\_act\_eq\_of\_span\_eq} et \texttt{moore\_eq\_of\_span\_eq}, qui s'appuient sur \texttt{Basis.\allowbreak{}toMatrix}, \texttt{Basis.\allowbreak{}invertibleToMatrix} et \texttt{Basis.\allowbreak{}sum\_toMatrix\_smul\_self} de Mathlib.
 \end{proof}
 
 \noindent Les valeurs $\Delta_n(f)$, pour $f$ parcourant les bases de $M$, sont donc exactement les $\Delta_n(g \cdot e)$ pour une base fixée $e$ : avec l'énoncé précédent, elles forment l'ensemble des racines $(p-1)$-ièmes de $(-1)^n a_0$, et deux bases ont même valeur si et seulement si elles diffèrent d'un élément de $\mathrm{SL}_n(\mathbf F_p)$.
