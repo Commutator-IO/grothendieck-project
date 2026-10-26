@@ -1875,3 +1875,190 @@ end Equivalence
 end
 
 end Grothendieck.Folder137.Perfect
+
+/-!
+# Folder 137, pages 74–76: axioms a)–c) in a polynomial category with representable degrees
+
+Axioms a)–c) of p. 74 ask that `𝐏` have finite products, that they be products in
+`𝐏₁` as well, and that `𝐏₁` be additive; the page deduces that each `𝐏(X, Y)` is an
+abelian group, with `(f + g) ∘ h = f ∘ h + g ∘ h`. In the graded form used above
+(`PolynomialCategory`, one set `𝐏ₙ(X, Y)` per degree) this is proved here, degree by
+degree, for any polynomial category whose degrees are representable on `C`:
+
+* `pairMap_bijective`: if `C` has binary products, then for every `n` the degree-one
+  projections make `X × Y` a product in `𝐏ₙ`: `𝐏ₙ(W, X × Y) ≃ 𝐏ₙ(W, X) × 𝐏ₙ(W, Y)`
+  (axiom a) degreewise); `pairMap_ι`: on degree-one maps it is the pairing of `C`
+  (axiom b)); `terminal_unique`: `𝐏ₙ(W, 0)` is a point.
+* `add`: if `C` is moreover preadditive (axiom c)), `f + g = m ∘ (f, g)` with
+  `m = pr₁ + pr₂ : X × X → X` of degree one; `add_eq` shows it is the group law of
+  `Hom(Γⁿ W, X)` carried by `φ ↦ φ ∘ γₙ`, hence an abelian group law; `comp_add`:
+  `(f + g) ∘ h = f ∘ h + g ∘ h` for `h` of any degree; `ι_add`: on degree one it is
+  the addition of `C`.
+* For the polynomial category of a `⊗-pd`-category (the Kleisli category `toPoly`),
+  `PDCategory.add_eq`: this law is the addition of `Hom(Γⁿ W, X)`.
+
+Not formalised: the total category `𝐏(X, Y) = ⊕ₙ 𝐏ₙ(X, Y)` (composition of
+inhomogeneous maps needs `Γ^q` of a sum of maps of different degrees), and the
+multidegree decompositions of d).
+-/
+
+namespace Grothendieck.Folder137
+
+open CategoryTheory Limits
+
+universe v u
+
+variable {C : Type u} [Category.{v} C]
+
+namespace PolynomialCategory
+
+variable (P : PolynomialCategory C)
+
+section Products
+
+variable [HasBinaryProducts C]
+
+/-- The components of a map of degree `n` into `X × Y`, by the degree-one projections. -/
+noncomputable def pairMap (n : ℕ) (W X Y : C) (a : P.Hom n W (X ⨯ Y)) : P.Hom n W X × P.Hom n W Y :=
+  (P.comp a (P.ι prod.fst) (one_mul n), P.comp a (P.ι prod.snd) (one_mul n))
+
+lemma pairMap_ι {W X Y : C} (v : W ⟶ X) (w : W ⟶ Y) :
+    P.pairMap 1 W X Y (P.ι (prod.lift v w)) = (P.ι v, P.ι w) := by
+  simp [pairMap, ← P.ι_comp]
+
+variable {P}
+
+lemma pairMap_rep (R : P.Representation) {n : ℕ} {W X Y : C} (φ : R.obj n W ⟶ X ⨯ Y) :
+    P.pairMap n W X Y (R.rep n W _ φ) = (R.rep n W X (φ ≫ prod.fst), R.rep n W Y (φ ≫ prod.snd)) := by
+  simp [pairMap, R.rep_comp]
+
+/-- Axiom a), degreewise: `𝐏ₙ(W, X × Y) ≃ 𝐏ₙ(W, X) × 𝐏ₙ(W, Y)`. -/
+theorem pairMap_bijective (R : P.Representation) (n : ℕ) (W X Y : C) : Function.Bijective (P.pairMap n W X Y) := by
+  let e : (R.obj n W ⟶ X ⨯ Y) ≃ (R.obj n W ⟶ X) × (R.obj n W ⟶ Y) :=
+    ⟨fun φ => (φ ≫ prod.fst, φ ≫ prod.snd), fun p => prod.lift p.1 p.2,
+      fun φ => by ext <;> simp, fun p => by simp⟩
+  have : P.pairMap n W X Y =
+      (e.trans ((R.rep n W X).prodCongr (R.rep n W Y))) ∘ (R.rep n W _).symm := by
+    ext1 a
+    obtain ⟨φ, rfl⟩ := (R.rep n W _).surjective a
+    simp [e, pairMap_rep R]
+  rw [this]
+  exact (Equiv.bijective _).comp (Equiv.bijective _)
+
+/-- The pairing `(f, g) ↦ (f, g) : W → X × Y` in degree `n`. -/
+noncomputable def pairEquiv (R : P.Representation) (n : ℕ) (W X Y : C) : P.Hom n W (X ⨯ Y) ≃ P.Hom n W X × P.Hom n W Y :=
+  Equiv.ofBijective _ (pairMap_bijective R n W X Y)
+
+lemma pairEquiv_symm_rep (R : P.Representation) {n : ℕ} {W X Y : C} (φ : R.obj n W ⟶ X) (ψ : R.obj n W ⟶ Y) :
+    (pairEquiv R n W X Y).symm (R.rep n W X φ, R.rep n W Y ψ) = R.rep n W _ (prod.lift φ ψ) :=
+  (Equiv.symm_apply_eq _).2 (by simp [pairEquiv, pairMap_rep R])
+
+omit [HasBinaryProducts C] in
+/-- The final object of `C` is final in every degree. -/
+theorem terminal_unique [HasTerminal C] (R : P.Representation) (n : ℕ) (W : C) :
+    Nonempty (Unique (P.Hom n W (⊤_ C))) :=
+  ⟨(R.rep n W _).symm.unique⟩
+
+section Additive
+
+variable [Preadditive C]
+
+/-- The sum `f + g = m ∘ (f, g)`, with `m = pr₁ + pr₂ : X × X → X` of degree one (p. 74). -/
+noncomputable def add (R : P.Representation) {n : ℕ} {W X : C} (a b : P.Hom n W X) : P.Hom n W X :=
+  P.comp ((pairEquiv R n W X X).symm (a, b)) (P.ι (prod.fst + prod.snd)) (one_mul n)
+
+lemma rep_add (R : P.Representation) {n : ℕ} {W X : C} (φ ψ : R.obj n W ⟶ X) :
+    R.rep n W X (φ + ψ) = add R (R.rep n W X φ) (R.rep n W X ψ) := by
+  rw [add, pairEquiv_symm_rep, ← Representation.rep_comp]
+  simp
+
+/-- The sum is the group law of `Hom(Γⁿ W, X)` carried by `φ ↦ φ ∘ γₙ`: an abelian group
+law on `𝐏ₙ(W, X)`. -/
+theorem add_eq (R : P.Representation) {n : ℕ} {W X : C} (a b : P.Hom n W X) :
+    add R a b = R.rep n W X ((R.rep n W X).symm a + (R.rep n W X).symm b) := by
+  rw [rep_add, Equiv.apply_symm_apply, Equiv.apply_symm_apply]
+
+/-- `(f + g) ∘ h = f ∘ h + g ∘ h`, for `h` of any degree (p. 74). -/
+theorem comp_add (R : P.Representation) {p q n : ℕ} {V W X : C} (h : P.Hom p V W) (a b : P.Hom q W X)
+    (hn : q * p = n) : P.comp h (add R a b) hn = add R (P.comp h a hn) (P.comp h b hn) := by
+  have hpair : P.comp h ((pairEquiv R q W X X).symm (a, b)) hn =
+      (pairEquiv R n V X X).symm (P.comp h a hn, P.comp h b hn) := by
+    rw [Equiv.eq_symm_apply]
+    have hab := (pairEquiv R q W X X).apply_symm_apply (a, b)
+    simp only [pairEquiv, Equiv.ofBijective_apply, pairMap, Prod.ext_iff] at hab ⊢
+    simp only [P.assoc' _ _ _ (one_mul q), hab, and_self]
+  rw [add, add, ← hpair, P.assoc'' _ _ _ hn]
+
+/-- On degree one, the sum is the addition of `C` (axiom c)). -/
+theorem ι_add (R : P.Representation) {W X : C} (f g : W ⟶ X) : add R (P.ι f) (P.ι g) = P.ι (f + g) := by
+  have : (pairEquiv R 1 W X X).symm (P.ι f, P.ι g) = P.ι (prod.lift f g) :=
+    (Equiv.symm_apply_eq _).2 (by simp [pairEquiv, P.pairMap_ι])
+  rw [add, this, ← P.ι_comp]
+  simp
+
+end Additive
+
+end Products
+
+end PolynomialCategory
+
+/-- In the polynomial category of a `⊗-pd`-category, the sum `m ∘ (f, g)` of p. 74 is
+the addition of `Hom(Γⁿ W, X)`. -/
+theorem PDCategory.add_eq (G : PDCategory C) [HasBinaryProducts C] [Preadditive C] {n : ℕ}
+    {W X : C} (a b : (G.Γ n).obj W ⟶ X) :
+    PolynomialCategory.add G.representation (W := W) a b = a + b := by
+  have h : ∀ c : (G.Γ n).obj W ⟶ X, (G.representation.rep n W X).symm c = c := fun c =>
+    (Equiv.symm_apply_eq _).2 (G.representation_rep c).symm
+  refine (PolynomialCategory.add_eq G.representation a b).trans ?_
+  erw [h, h]
+  exact G.representation_rep _
+
+end Grothendieck.Folder137
+
+/-!
+# Folder 137, pages 79–84: the example of `k`-modules, what Mathlib reaches
+
+The example of p. 84: `k`-modules with the divided powers `Γ(M)` form a
+`⊗-pd`-category, `𝐏_p(X, Y) = Hom(Γ^p X, Y)` being the homogeneous polynomial laws of
+degree `p` (Roby). Mathlib has `DividedPowerAlgebra R M`, its generators
+`dp R n m = m^{[n]}`, the relations, and its functoriality, but not its grading, nor
+Roby's theorem, nor the map `α_{p,q} : Γ^{pq} → Γ^p Γ^q` (whose definition needs the
+universal property of `Γ^{pq}` for polynomial laws). What follows is what holds at the
+level of the universal maps `γₙ = (m ↦ m^{[n]})`:
+
+* `dp_comp_smul`: for any linear `φ : Γ(M) → N`, `m ↦ φ(m^{[n]})` is homogeneous of
+  degree `n` (axiom d)); `dp_comp_map`: it is natural in `M` along degree-one maps;
+* `dp_dp_smul`: the composite `m ↦ (m^{[q]})^{[p]}`, the image of `m^{[pq]}` under
+  `α_{p,q}` (p. 80), is homogeneous of degree `p q` (axiom e));
+* `dp_one_add`: `γ₁` is additive (degree one), and `dp_null_of_ne_zero` (Mathlib):
+  `Γⁱ(0) = 0` for `i > 0`; `dp_add` (Mathlib) is the exponential formula
+  `Γⁿ(X ⊕ Y) = ⊕ Γⁱ X ⊗ Γʲ Y` on generators.
+-/
+
+namespace Grothendieck.Folder137.Modules
+
+open DividedPowerAlgebra
+
+variable {R M N M' : Type*} [CommRing R] [AddCommGroup M] [Module R M] [AddCommGroup N]
+  [Module R N] [AddCommGroup M'] [Module R M']
+
+/-- Axiom d) in the example: `m ↦ φ(m^{[n]})` is homogeneous of degree `n`. -/
+theorem dp_comp_smul (φ : DividedPowerAlgebra R M →ₗ[R] N) (n : ℕ) (r : R) (m : M) :
+    φ (dp R n (r • m)) = r ^ n • φ (dp R n m) := by
+  rw [dp_smul, map_smul]
+
+/-- Precomposing `m ↦ φ(m^{[n]})` with a degree-one map `f` gives `φ ∘ Γ(f)` on `γₙ`. -/
+theorem dp_comp_map (φ : DividedPowerAlgebra R M' →ₗ[R] N) (f : M →ₗ[R] M') (n : ℕ) (m : M) :
+    φ (dp R n (f m)) = (φ ∘ₗ (map R f).toLinearMap) (dp R n m) := by
+  simp
+
+/-- Axiom e) in the example: `m ↦ (m^{[q]})^{[p]}` is homogeneous of degree `p q`. -/
+theorem dp_dp_smul (p q : ℕ) (r : R) (m : M) :
+    dp R p (dp R q (r • m)) = r ^ (p * q) • dp R p (dp R q m) := by
+  rw [dp_smul, dp_smul, ← pow_mul, mul_comm]
+
+/-- `γ₁` is additive. -/
+theorem dp_one_add (x y : M) : dp R 1 (x + y) = dp R 1 x + dp R 1 y :=
+  (embed R M).map_add x y
+
+end Grothendieck.Folder137.Modules

@@ -71,6 +71,8 @@ import Grothendieck.Folder77
 import Grothendieck.Folder78
 import Grothendieck.Folder79
 import Grothendieck.Folder80
+import Grothendieck.Folder80Maps1
+import Grothendieck.Folder80Maps2
 import Grothendieck.Folder82
 import Grothendieck.Folder83
 import Grothendieck.Folder84

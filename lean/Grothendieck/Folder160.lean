@@ -7,6 +7,10 @@ import Mathlib.Algebra.Polynomial.Roots
 import Mathlib.FieldTheory.Finite.Basic
 import Mathlib.RingTheory.Polynomial.Basic
 import Mathlib.RingTheory.MvPolynomial.Basic
+import Mathlib.FieldTheory.Galois.Basic
+import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
+import Mathlib.RingTheory.Polynomial.UniqueFactorization
+import Mathlib.RingTheory.Polynomial.RationalRoot
 
 /-!
 # Folder 160, pages 7–9 and 13–15: the Moore determinant and the Dickson coefficients
@@ -480,5 +484,353 @@ theorem moore_eq_of_span_eq {n : ℕ} {e f : Fin n → K}
   have := charP_of_injective_algebraMap (algebraMap (ZMod p) K).injective p
   obtain ⟨g, hg, rfl⟩ := exists_act_eq_of_span_eq p he hf hM
   exact ⟨g, hg, rfl, moore_act p g e⟩
+
+
+/-! ### Dickson's theorem (pages 9–12)
+
+`𝔽_p[X₁, …, Xₙ]^{GLₙ(𝔽_p)} = 𝔽_p[A₀, …, A_{n−1}]` (`dickson_theorem`) and
+`𝔽_p[X₁, …, Xₙ]^{SLₙ(𝔽_p)} = 𝔽_p[Δₙ, A₁, …, A_{n−1}]` (`dickson_theorem_SL`), both polynomial
+algebras (`dickson_algebraicIndependent`, `dicksonSL_algebraicIndependent`). The proof is the
+Galois one, not the page's (Zariski's Main Theorem): `𝔽_p[X]` is integral over `𝔽_p[A]`, since
+each `X_k` is a root of the monic `∏ (T − λ · X)`, so the `n` elements `A_i` are algebraically
+independent (transcendence degree); `𝔽_p(X)` is the splitting field over `𝔽_p(A)` of
+`∏ (T − λ · X)`, separable since its derivative is `A₀ ≠ 0`, and each of its automorphisms sends
+`X_k` to some `λ · X`, so is some `g ∈ GLₙ(𝔽_p)`; an invariant thus lies in `𝔽_p(A)`, and in
+`𝔽_p[A]` since a polynomial algebra is integrally closed. -/
+
+/-- The Dickson invariants `A₀, …, A_{n−1}`. -/
+noncomputable def dickson (n : ℕ) (i : Fin n) : MvPolynomial (Fin n) (ZMod p) := A p n i
+
+theorem P_eval_lin {n : ℕ} (l : Fin n → ZMod p) : (P p n).eval (lin p l) = 0 := by
+  have h := D_eval_lin p l
+  rw [D_eq_C_mul_P, eval_mul, eval_C] at h
+  exact (mul_eq_zero.1 h).resolve_left (lc_ne_zero p n)
+
+theorem coeff_P_mem (n m : ℕ) :
+    (P p n).coeff m ∈ Algebra.adjoin (ZMod p) (Set.range (dickson p n)) := by
+  by_cases hm : ∃ i : Fin (n + 1), m = p ^ (i : ℕ)
+  · obtain ⟨i, rfl⟩ := hm
+    rcases Fin.eq_castSucc_or_eq_last i with ⟨j, rfl⟩ | rfl
+    · exact Algebra.subset_adjoin ⟨j, rfl⟩
+    · rw [Fin.val_last, ← A, A_top]; exact one_mem _
+  · rw [coeff_P_of_ne p n m fun i h => hm ⟨i, h⟩]; exact zero_mem _
+
+/-- For every `ξ ∈ Tⁿ`, each `f(ξ)` is integral over any subalgebra containing the `A_i(ξ)`. -/
+theorem isIntegral_aeval {n : ℕ} {T : Type*} [CommRing T] [Algebra (ZMod p) T] (ξ : Fin n → T)
+    (B : Subalgebra (ZMod p) T) (hB : ∀ i, MvPolynomial.aeval ξ (dickson p n i) ∈ B)
+    (f : MvPolynomial (Fin n) (ZMod p)) : IsIntegral B (MvPolynomial.aeval ξ f) := by
+  have hX : ∀ k, IsIntegral B (ξ k) := fun k => by
+    have hl : (P p n).map (MvPolynomial.aeval ξ).toRingHom ∈ lifts (algebraMap B T) :=
+      (lifts_iff_coeff_lifts _).2 fun m => by
+        have h := (Subalgebra.mem_map (f := MvPolynomial.aeval ξ)).2 ⟨_, coeff_P_mem p n m, rfl⟩
+        rw [AlgHom.map_adjoin, ← Set.range_comp] at h
+        exact ⟨⟨_, Algebra.adjoin_le (Set.range_subset_iff.2 hB) h⟩, by rw [coeff_map]; rfl⟩
+    obtain ⟨q, hq, -, hmo⟩ := lifts_and_natDegree_eq_and_monic hl ((P_monic p n).map _)
+    refine ⟨q, hmo, ?_⟩
+    rw [← eval_map, hq, eval_map, ← MvPolynomial.aeval_X (R := ZMod p) ξ k,
+      show MvPolynomial.aeval ξ (MvPolynomial.X k) = (MvPolynomial.aeval ξ).toRingHom
+        (MvPolynomial.X k) from rfl, eval₂_at_apply, ← lin_single, P_eval_lin, map_zero]
+  induction f using MvPolynomial.induction_on with
+  | C a => rw [MvPolynomial.aeval_C, IsScalarTower.algebraMap_apply (ZMod p) B T]
+           exact isIntegral_algebraMap
+  | add f g hf hg => rw [map_add]; exact hf.add hg
+  | mul_X f k hf => rw [map_mul, MvPolynomial.aeval_X]; exact hf.mul (hX k)
+
+theorem P_eq_prod (n : ℕ) : P p n = ∏ l : Fin n → ZMod p, (X - C (lin p l)) := by
+  rw [P, roots_D, ← Finset.prod_eq_multiset_prod, Finset.prod_image fun l _ l' _ h =>
+    lin_injective p n h]
+
+theorem aeval_act_lin {n : ℕ} (g : Matrix (Fin n) (Fin n) (ZMod p)) (l : Fin n → ZMod p) :
+    MvPolynomial.aeval (act p g MvPolynomial.X) (lin p l) = lin p (l ᵥ* g) := by
+  simp only [lin, act, map_sum, map_mul, MvPolynomial.aeval_C, MvPolynomial.aeval_X, vecMul,
+    dotProduct, MvPolynomial.algebraMap_eq, Finset.mul_sum, Finset.sum_mul, ← mul_assoc]
+  rw [Finset.sum_comm]
+
+/-- **The Dickson invariants are invariant under `GLₙ(𝔽_p)`**: `g` permutes the forms `λ · X`. -/
+theorem aeval_act_dickson {n : ℕ} (g : Matrix (Fin n) (Fin n) (ZMod p)) (hg : IsUnit g.det)
+    (i : Fin n) : MvPolynomial.aeval (act p g MvPolynomial.X) (dickson p n i) = dickson p n i := by
+  have hbij : Function.Bijective fun l : Fin n → ZMod p => l ᵥ* g :=
+    Finite.injective_iff_bijective.1 fun l l' h => by
+      simpa [vecMul_vecMul, mul_nonsing_inv _ hg] using congrArg (· ᵥ* g⁻¹) h
+  have h : (P p n).map (MvPolynomial.aeval (act p g MvPolynomial.X)).toRingHom = P p n := by
+    rw [P_eq_prod, Polynomial.map_prod]
+    simp only [Polynomial.map_sub, map_X, map_C, AlgHom.toRingHom_eq_coe, RingHom.coe_coe,
+      aeval_act_lin]
+    exact Fintype.prod_bijective _ hbij _ _ fun _ => rfl
+  rw [dickson, A]; conv_rhs => rw [← h]
+  rw [coeff_map]; rfl
+
+/-- A family `x` whose subalgebra contains the `A_i` is algebraically independent:
+`𝔽_p[X₁, …, Xₙ]` is integral over `𝔽_p[x]`, so the `n` elements `x_i` span a ring of
+transcendence degree `n`. -/
+theorem algebraicIndependent_of {n : ℕ} (x : Fin n → MvPolynomial (Fin n) (ZMod p))
+    (hx : ∀ i, dickson p n i ∈ Algebra.adjoin (ZMod p) (Set.range x)) :
+    AlgebraicIndependent (ZMod p) x := by
+  have : Algebra.IsIntegral (Algebra.adjoin (ZMod p) (Set.range x))
+      (MvPolynomial (Fin n) (ZMod p)) :=
+    ⟨fun f => by
+      have := isIntegral_aeval p MvPolynomial.X _
+        (fun i => by rw [MvPolynomial.aeval_X_left_apply]; exact hx i) f
+      rwa [MvPolynomial.aeval_X_left_apply] at this⟩
+  have : Algebra.IsAlgebraic (Algebra.adjoin (ZMod p) (Set.range x))
+      (MvPolynomial (Fin n) (ZMod p)) := Algebra.IsIntegral.isAlgebraic
+  exact (Algebra.IsAlgebraic.isTranscendenceBasis_of_le_trdeg_of_finite (ZMod p) x
+    (by rw [MvPolynomial.trdeg_of_isDomain, Cardinal.lift_id])).1
+
+/-- **The Dickson invariants are algebraically independent**: `𝔽_p[A₀, …, A_{n−1}]` is a
+polynomial algebra on them. -/
+theorem dickson_algebraicIndependent (n : ℕ) : AlgebraicIndependent (ZMod p) (dickson p n) :=
+  algebraicIndependent_of p _ fun i => Algebra.subset_adjoin ⟨i, rfl⟩
+
+/-! #### The Galois argument, in `𝔽_p(X₁, …, Xₙ)` -/
+
+local notation "𝕂" n:max => FractionRing (MvPolynomial (Fin n) (ZMod p))
+local notation "ι" n:max => algebraMap (MvPolynomial (Fin n) (ZMod p)) (𝕂 n)
+
+theorem roots_map_P (n : ℕ) :
+    ((P p n).map (ι n)).roots =
+      (Finset.univ.image (lin p (n := n))).val.map (ι n) := by
+  have hr : (P p n).roots = (D p n).roots := roots_multiset_prod_X_sub_C _
+  rw [← roots_D, ← hr, roots_map_of_injective_of_card_eq_natDegree (IsFractionRing.injective _ _)]
+  rw [hr, card_roots_D, natDegree_D, natDegree_P]
+
+theorem derivative_P (n : ℕ) : derivative (P p n) = C (A p n 0) := by
+  ext m
+  rw [coeff_derivative, coeff_C]
+  split_ifs with hm
+  · subst hm; simp [A]
+  · by_cases h : ∃ i : Fin (n + 1), m + 1 = p ^ (i : ℕ)
+    · obtain ⟨i, hi⟩ := h
+      have hi0 : (i : ℕ) ≠ 0 := by rintro h0; rw [h0, pow_zero] at hi; omega
+      have : ((m : MvPolynomial (Fin n) (ZMod p)) + 1) = ((p ^ (i : ℕ) : ℕ) : _) := by
+        rw [← hi]; push_cast; rfl
+      rw [this, (CharP.cast_eq_zero_iff _ p _).2 (dvd_pow_self p hi0), mul_zero]
+    · rw [coeff_P_of_ne p n _ fun i h' => h ⟨i, h'⟩, zero_mul]
+
+section
+variable {n : ℕ} (x : Fin n → MvPolynomial (Fin n) (ZMod p))
+  (hx : ∀ i, dickson p n i ∈ Algebra.adjoin (ZMod p) (Set.range x))
+include hx
+
+/-- The field `𝔽_p(x) ⊂ 𝔽_p(X₁, …, Xₙ)` generated by the family `x`. -/
+noncomputable abbrev field : IntermediateField (ZMod p) (𝕂 n) :=
+  IntermediateField.adjoin (ZMod p) (Set.range ((ι n) ∘ x))
+
+omit hx in
+theorem map_adjoin_eq :
+    (Algebra.adjoin (ZMod p) (Set.range x)).map (IsScalarTower.toAlgHom (ZMod p) _ (𝕂 n)) =
+      Algebra.adjoin (ZMod p) (Set.range ((ι n) ∘ x)) := by
+  rw [AlgHom.map_adjoin, ← Set.range_comp]; rfl
+
+theorem exists_map_eq_P : ∃ Q : (field p x)[X],
+    Q.map (algebraMap _ (𝕂 n)) = (P p n).map (ι n) :=
+  (lifts_iff_coeff_lifts _).2 fun m => by
+    have h := (Subalgebra.mem_map (f := IsScalarTower.toAlgHom (ZMod p) _ (𝕂 n))).2
+      ⟨_, Algebra.adjoin_le (Set.range_subset_iff.2 hx) (coeff_P_mem p n m), rfl⟩
+    rw [map_adjoin_eq] at h
+    exact ⟨⟨_, IntermediateField.algebra_adjoin_le_adjoin _ _ h⟩, by rw [coeff_map]; rfl⟩
+
+omit hx in
+theorem eval_map_P_X (k : Fin n) :
+    ((P p n).map (ι n)).eval ((ι n) (MvPolynomial.X k)) = 0 := by
+  rw [eval_map, eval₂_at_apply, ← lin_single, P_eval_lin, map_zero]
+
+omit hx in
+theorem isSplittingField (Q : (field p x)[X])
+    (hQ : Q.map (algebraMap _ (𝕂 n)) = (P p n).map (ι n)) :
+    Q.IsSplittingField (field p x) (𝕂 n) := by
+  rw [isSplittingField_iff_intermediateField, hQ, splits_iff_card_roots, roots_map_P,
+    natDegree_map_eq_of_injective (IsFractionRing.injective _ _), natDegree_P, Multiset.card_map,
+    Finset.card_val, Finset.card_image_of_injective _ (lin_injective p n)]
+  refine ⟨by simp, eq_top_iff.2 fun y _ => ?_⟩
+  set E := IntermediateField.adjoin (field p x) (Q.rootSet (𝕂 n))
+  have h : ∀ a : MvPolynomial (Fin n) (ZMod p), (ι n) a ∈ E := fun a => by
+    induction a using MvPolynomial.induction_on with
+    | C a =>
+      rw [← MvPolynomial.algebraMap_eq, ← IsScalarTower.algebraMap_apply,
+        IsScalarTower.algebraMap_apply (ZMod p) (field p x) (𝕂 n)]
+      exact E.algebraMap_mem _
+    | add f g hf hg => rw [map_add]; exact add_mem hf hg
+    | mul_X f k hf =>
+      rw [map_mul]
+      refine mul_mem hf (IntermediateField.subset_adjoin _ _ ?_)
+      rw [mem_rootSet', hQ, aeval_def, ← eval_map, hQ, eval_map_P_X]
+      exact ⟨Monic.ne_zero ((P_monic p n).map _), rfl⟩
+  obtain ⟨a, b, -, rfl⟩ := IsFractionRing.div_surjective (A := MvPolynomial (Fin n) (ZMod p)) y
+  exact div_mem (h a) (h b)
+
+/-- `𝔽_p(X₁, …, Xₙ)` is Galois over `𝔽_p(x)`: it is the splitting field of `∏ (T − λ · X)`,
+separable since its derivative is the constant `A₀ = ±Δₙ^{p−1} ≠ 0`. -/
+theorem isGalois : IsGalois (field p x) (𝕂 n) := by
+  obtain ⟨Q, hQ⟩ := exists_map_eq_P p x hx
+  have := isSplittingField p x Q hQ
+  refine IsGalois.of_separable_splitting_field (p := Q) ?_
+  rw [← separable_map (algebraMap _ (𝕂 n)), hQ, separable_def, derivative_map, derivative_P,
+    map_C]
+  have hc : (ι n) (A p n 0) ≠ 0 := by
+    rw [A_zero, (IsFractionRing.injective _ _).ne_iff' (map_zero _)]
+    exact mul_ne_zero (pow_ne_zero _ (neg_ne_zero.2 one_ne_zero))
+      (pow_ne_zero _ (Δ_ne_zero p n))
+  exact ⟨0, C ((ι n) (A p n 0))⁻¹, by rw [zero_mul, zero_add, ← C_mul, inv_mul_cancel₀ hc, C_1]⟩
+
+/-- **Every automorphism of `𝔽_p(X)` over `𝔽_p(x)` is some `g ∈ GLₙ(𝔽_p)`**: it sends each
+`X_k` to a root `λ · X` of `∏ (T − λ · X)`. Hence a polynomial invariant under those `g` that
+fix `𝔽_p(x)` lies in `𝔽_p(x)`. -/
+theorem mem_field (f : MvPolynomial (Fin n) (ZMod p))
+    (hf : ∀ g : Matrix (Fin n) (Fin n) (ZMod p), IsUnit g.det →
+      (∀ a, (ι n) a ∈ field p x → MvPolynomial.aeval (act p g MvPolynomial.X) a = a) →
+      MvPolynomial.aeval (act p g MvPolynomial.X) f = f) :
+    (ι n) f ∈ field p x := by
+  obtain ⟨Q, hQ⟩ := exists_map_eq_P p x hx
+  have := isSplittingField p x Q hQ
+  have := isGalois p x hx
+  have := IsSplittingField.finiteDimensional (𝕂 n) Q
+  have hfix := (IsGalois.mem_bot_iff_fixed ((ι n) f)).2 fun σ => by
+    have hroot : ∀ k, ∃ l : Fin n → ZMod p,
+        σ ((ι n) (MvPolynomial.X k)) = (ι n) (lin p l) := fun k => by
+      have hmem : σ ((ι n) (MvPolynomial.X k)) ∈ ((P p n).map (ι n)).roots := by
+        rw [mem_roots ((P_monic p n).map _).ne_zero, IsRoot.def, ← hQ, eval_map_algebraMap,
+          aeval_algHom_apply, ← eval_map_algebraMap, hQ, eval_map_P_X, map_zero]
+      rw [roots_map_P] at hmem
+      obtain ⟨a, ha, h⟩ := Multiset.mem_map.1 hmem
+      obtain ⟨l, -, rfl⟩ := Finset.mem_image.1 ha
+      exact ⟨l, h.symm⟩
+    choose l hl using hroot
+    have hcomp : ∀ a, σ ((ι n) a) = (ι n) (MvPolynomial.aeval (act p (of l) MvPolynomial.X) a) := by
+      intro a
+      have : (σ : (𝕂 n) →+* (𝕂 n)).comp (ι n) =
+          (ι n).comp (MvPolynomial.aeval (act p (of l) MvPolynomial.X)).toRingHom := by
+        apply MvPolynomial.ringHom_ext
+        · intro r
+          exact RingHom.congr_fun (RingHom.ext_zmod (((σ : (𝕂 n) →+* (𝕂 n)).comp (ι n)).comp
+            MvPolynomial.C) (((ι n).comp
+              (MvPolynomial.aeval (act p (of l) MvPolynomial.X)).toRingHom).comp
+                MvPolynomial.C)) r
+        · intro k
+          simp [hl, act, lin]
+      exact RingHom.congr_fun this a
+    have hg : IsUnit (of l).det := by
+      rw [isUnit_iff_ne_zero]
+      intro h0
+      obtain ⟨v, hv, hv0⟩ := exists_vecMul_eq_zero_iff.2 h0
+      have h := hcomp (lin p v)
+      rw [aeval_act_lin, hv0, show lin p (0 : Fin n → ZMod p) = 0 by simp [lin], map_zero,
+        map_eq_zero_iff σ σ.injective, map_eq_zero_iff _ (IsFractionRing.injective _ _),
+        show (0 : MvPolynomial (Fin n) (ZMod p)) = lin p 0 by simp [lin]] at h
+      exact hv (lin_injective p n h)
+    rw [hcomp, hf _ hg fun a ha => IsFractionRing.injective _ (𝕂 n) <| by
+      rw [← hcomp]; exact σ.commutes ⟨_, ha⟩]
+  obtain ⟨y, hy⟩ := IntermediateField.mem_bot.1 hfix
+  rw [← hy]; exact y.2
+
+/-- **`𝔽_p[x]` is integrally closed in `𝔽_p[X]` relative to `𝔽_p(x)`**: a polynomial whose image
+lies in `𝔽_p(x)` lies in `𝔽_p[x]`, since `𝔽_p[x]` is a polynomial algebra (hence normal) over
+which `𝔽_p[X]` is integral. -/
+theorem mem_adjoin_of_mem_field (f : MvPolynomial (Fin n) (ZMod p)) (hf : (ι n) f ∈ field p x) :
+    f ∈ Algebra.adjoin (ZMod p) (Set.range x) := by
+  set ι' := IsScalarTower.toAlgHom (ZMod p) (MvPolynomial (Fin n) (ZMod p)) (𝕂 n)
+  have hι : Function.Injective ι' := IsFractionRing.injective _ _
+  set B := Algebra.adjoin (ZMod p) (Set.range ((ι n) ∘ x))
+  have hB : B = (Algebra.adjoin (ZMod p) (Set.range x)).map ι' := (map_adjoin_eq p x).symm
+  have : IsIntegrallyClosed B := IsIntegrallyClosed.of_equiv
+    ((algebraicIndependent_of p x hx).map' hι).aevalEquiv.toRingEquiv
+  have hint : IsIntegral B ((ι n) f) := by
+    have h := isIntegral_aeval p (ι' ∘ MvPolynomial.X) B (fun i => by
+      rw [← MvPolynomial.aeval_unique ι', hB]
+      exact Subalgebra.mem_map.2 ⟨_, hx i, rfl⟩) f
+    rwa [← MvPolynomial.aeval_unique ι'] at h
+  obtain ⟨r, hr, s, hs, hrs⟩ := IntermediateField.mem_adjoin_iff_div.1 hf
+  have hfB : (ι n) f ∈ B := by
+    by_cases hs0 : s = 0
+    · rw [hrs, hs0, div_zero]; exact zero_mem _
+    have hinj : Function.Injective (Algebra.ofId B (𝕂 n)) := fun _ _ h => Subtype.ext h
+    let j := IsFractionRing.liftAlgHom (K := FractionRing B) hinj
+    have hj : j (IsLocalization.mk' _ (⟨r, hr⟩ : B)
+        ⟨⟨s, hs⟩, mem_nonZeroDivisors_of_ne_zero fun h => hs0 (congrArg Subtype.val h)⟩) =
+          (ι n) f := by
+      simp only [j, IsFractionRing.liftAlgHom_apply, IsFractionRing.lift_mk', hrs]; rfl
+    rw [← hj] at hint
+    obtain ⟨b, hb⟩ := IsIntegrallyClosed.isIntegral_iff.1
+      ((isIntegral_algHom_iff j j.toRingHom.injective).1 hint)
+    rw [← hj, ← hb]
+    simp only [j, IsFractionRing.liftAlgHom_apply, IsFractionRing.lift_algebraMap]
+    exact b.2
+  rw [hB] at hfB
+  obtain ⟨c, hc, hcf⟩ := Subalgebra.mem_map.1 hfB
+  rwa [← hι hcf]
+
+end
+
+/-- **Dickson's theorem** (pages 9–11): `𝔽_p[X₁, …, Xₙ]^{GLₙ(𝔽_p)} = 𝔽_p[A₀, …, A_{n−1}]`.
+A polynomial is invariant under every `g ∈ GLₙ(𝔽_p)`, acting by `X_j ↦ Σ_k g_{jk} X_k`, iff it
+lies in the subalgebra generated by the Dickson invariants; this subalgebra is a polynomial
+algebra on them (`dickson_algebraicIndependent`). -/
+theorem dickson_theorem {n : ℕ} (f : MvPolynomial (Fin n) (ZMod p)) :
+    (∀ g : Matrix (Fin n) (Fin n) (ZMod p), IsUnit g.det →
+      MvPolynomial.aeval (act p g MvPolynomial.X) f = f) ↔
+      f ∈ Algebra.adjoin (ZMod p) (Set.range (dickson p n)) := by
+  have hx : ∀ i, dickson p n i ∈ Algebra.adjoin (ZMod p) (Set.range (dickson p n)) :=
+    fun i => Algebra.subset_adjoin ⟨i, rfl⟩
+  refine ⟨fun hf => mem_adjoin_of_mem_field p _ hx f
+    (mem_field p _ hx f fun g hg _ => hf g hg), fun hf g hg => ?_⟩
+  induction hf using Algebra.adjoin_induction with
+  | mem x hx => obtain ⟨i, rfl⟩ := hx; exact aeval_act_dickson p g hg i
+  | algebraMap r => exact MvPolynomial.aeval_C _ _
+  | add x y _ _ hx hy => rw [map_add, hx, hy]
+  | mul x y _ _ hx hy => rw [map_mul, hx, hy]
+
+/-! #### The `SL` variant (pages 11–12) -/
+
+/-- The generators `Δₙ, A₁, …, A_{n−1}` of the `SLₙ(𝔽_p)`-invariants. -/
+noncomputable def dicksonSL (n : ℕ) (i : Fin n) : MvPolynomial (Fin n) (ZMod p) :=
+  if (i : ℕ) = 0 then Δ p n else A p n i
+
+theorem aeval_act_Δ {n : ℕ} (g : Matrix (Fin n) (Fin n) (ZMod p)) :
+    MvPolynomial.aeval (act p g MvPolynomial.X) (Δ p n) = MvPolynomial.C g.det * Δ p n := by
+  rw [Δ, ← AlgHom.coe_toRingHom, map_moore, ← MvPolynomial.algebraMap_eq, ← moore_act]
+  congr 1
+  funext k
+  simp
+
+theorem dickson_mem_adjoin_SL {n : ℕ} (i : Fin n) :
+    dickson p n i ∈ Algebra.adjoin (ZMod p) (Set.range (dicksonSL p n)) := by
+  by_cases hi : (i : ℕ) = 0
+  · have h : Δ p n ∈ Algebra.adjoin (ZMod p) (Set.range (dicksonSL p n)) :=
+      Algebra.subset_adjoin ⟨i, by simp [dicksonSL, hi]⟩
+    rw [dickson, hi, A_zero]
+    exact mul_mem (pow_mem (neg_mem (one_mem _)) _) (pow_mem h _)
+  · exact Algebra.subset_adjoin ⟨i, by simp [dicksonSL, dickson, hi]⟩
+
+/-- `Δₙ, A₁, …, A_{n−1}` are algebraically independent. -/
+theorem dicksonSL_algebraicIndependent (n : ℕ) :
+    AlgebraicIndependent (ZMod p) (dicksonSL p n) :=
+  algebraicIndependent_of p _ (dickson_mem_adjoin_SL p)
+
+/-- **The `SL` variant** (pages 11–12):
+`𝔽_p[X₁, …, Xₙ]^{SLₙ(𝔽_p)} = 𝔽_p[Δₙ, A₁, …, A_{n−1}]`, a polynomial algebra
+(`dicksonSL_algebraicIndependent`). -/
+theorem dickson_theorem_SL {n : ℕ} (f : MvPolynomial (Fin n) (ZMod p)) :
+    (∀ g : Matrix (Fin n) (Fin n) (ZMod p), g.det = 1 →
+      MvPolynomial.aeval (act p g MvPolynomial.X) f = f) ↔
+      f ∈ Algebra.adjoin (ZMod p) (Set.range (dicksonSL p n)) := by
+  have hx := dickson_mem_adjoin_SL p (n := n)
+  refine ⟨fun hf => mem_adjoin_of_mem_field p _ hx f (mem_field p _ hx f fun g _ hfix => hf g ?_),
+    fun hf g hg => ?_⟩
+  · rcases Nat.eq_zero_or_pos n with rfl | hn
+    · exact det_isEmpty
+    have h := hfix (Δ p n) (IntermediateField.subset_adjoin _ _ ⟨⟨0, hn⟩, by simp [dicksonSL]⟩)
+    rw [aeval_act_Δ] at h
+    have := mul_right_cancel₀ (Δ_ne_zero p n) (h.trans (one_mul _).symm)
+    exact MvPolynomial.C_injective _ _ (this.trans MvPolynomial.C_1.symm)
+  induction hf using Algebra.adjoin_induction with
+  | mem x hx =>
+    obtain ⟨i, rfl⟩ := hx
+    unfold dicksonSL
+    split_ifs
+    · rw [aeval_act_Δ, hg, map_one, one_mul]
+    · exact aeval_act_dickson p g (hg ▸ isUnit_one) i
+  | algebraMap r => exact MvPolynomial.aeval_C _ _
+  | add x y _ _ hx hy => rw [map_add, hx, hy]
+  | mul x y _ _ hx hy => rw [map_mul, hx, hy]
 
 end Grothendieck.Folder160
