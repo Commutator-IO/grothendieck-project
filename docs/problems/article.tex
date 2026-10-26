@@ -193,7 +193,7 @@ Let $G$ be a simple adjoint group with Coxeter number $h$, Weyl group $W$, and $
 
 \known We found no such count. Kostant 1959 and Springer's \emph{Regular elements of finite reflection groups} (1974) are where it would be.
 
-\leanst Not attempted. A computer count of orbits for $A_2$, $B_2$, $G_2$ over a small finite field would settle the number independently.
+\leanst Not attempted in Lean. A computer count over $\mathbf F_q$, for primes $q \equiv 1 \bmod h$ up to $37$ (\nolinkurl{computations/kostant}), finds a free action with 2, 4 and 12 orbits for $A_2$, $B_2$ and $G_2$, and 4, 8 and 24 once a generator is fixed, agreeing with $|W|^2/(hz\varphi(h))$, and finds $|N(T) \cap N(T')| = hz\varphi(h)$ in each case.
 
 \settle A proof of $|N(T) \cap N(T')| = h\,z\,\varphi(h)$, or the count in print.
 
@@ -209,7 +209,7 @@ Let $C$ be a small category with Karoubi envelope $C'$. Is $\Ind(C)$ a topos if 
 
 \ideas The reading corrected one condition of the page: it asks for a left-exact \emph{right} adjoint where Giraud's criterion needs $\Ind(C)$ reflective in $\hat C$ with a left-exact \emph{left} adjoint. The reading checked only the equivalence of the topos condition with this corrected condition and with the Gabriel--Ulmer form; the intrinsic conditions, and the \q{parfait} clause, were not checked.
 
-\leanst The statement is formalised, without proof, as \texttt{problem8} in \nolinkurl{lean/Grothendieck/Folder37.lean}, reading \q{topos} as Grothendieck topos and the topology of the page as Mathlib's \nolinkurl{coherentTopology} (finite effective epimorphic families), which needs the Karoubi envelope precoherent. A proof would need Giraud's theorem, which Mathlib does not have.
+\leanst Lean refutes the equivalence as stated: for the small category of finitely generated presheaves on the category with objects $\mathrm{top}$ and $\mathrm{pt}_n$ ($n \in \mathbf N$) and one arrow $\mathrm{pt}_n \to \mathrm{top}$ for each $n$, condition (ii) holds but Ind of it is not balanced, hence not a Grothendieck topos ((\texttt{not\_problem8} in \nolinkurl{lean/Grothendieck/Folder37.lean})).
 
 \settle A reference for the intrinsic characterisation, or a proof of its equivalence with the Gabriel--Ulmer form.
 
@@ -313,7 +313,7 @@ Does every arrangement of pseudolines in the real projective plane without bigon
 
 \known Grünbaum's \emph{Arrangements and Spreads} and the literature on near-pencils and Sylvester--Gallai-type structure are where it would be. We checked only that the counterexample to the page's Théorème satisfies the dichotomy, and that $\mathrm{III}_6$ contains neither $\mathrm{II}_5$ nor $\mathrm{II}'_{3,2}$.
 
-\leanst Not attempted. A computer enumeration of bigon-free arrangements of up to nine or ten pseudolines would test it.
+\leanst Not attempted in Lean. A computer enumeration (\nolinkurl{computations/bigon}) of all 461053 arrangements of at most nine pseudolines, together with a search of the arrangements avoiding $\mathrm{II}_5$, $\mathrm{II}'_{3,2}$ and $\mathrm{III}_6$ and a short induction, shows that the dichotomy holds for every n and that the numbering exists for every bigon-free arrangement of at most nine pseudolines. The induction is argued, not formalised.
 
 \settle A proof, a counterexample, or a reference.
 

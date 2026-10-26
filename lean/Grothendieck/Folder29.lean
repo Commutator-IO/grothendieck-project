@@ -563,3 +563,77 @@ theorem degree_not_unique : ∃ D₁ D₂ : DegreeAxioms surj, D₁.deg ≠ D₂
     atMost_ne standard standard_uniqueDegree _ not_isInitial_punit⟩
 
 end Folder29.Degree.Finite
+
+/-!
+## Finite sets satisfy conditions (0)–(2)
+
+`FintypeCat` (universe 0) with the surjections as descent class satisfies all hypotheses of
+`Folder29.Degree.deg_iff_triv`: it is essentially small (0), has finite limits (1), every
+monomorphism is the inclusion of a direct summand (2), and it is finitary extensive; pullbacks
+of surjections are epimorphisms. Hence `Finite.deg_iff_triv` and `Finite.unique`: a degree with
+(u) is the fibre cardinality, and `Finite.not_uniqueDegree_atMost`: the counterexample
+`standard.atMost` survives (0)–(2) and fails (u).
+-/
+
+namespace Folder29.Degree.Finite
+
+open CategoryTheory Limits FintypeCat
+
+/-- Finite sets are finitary extensive (finite sums disjoint and universal). -/
+instance : FinitaryExtensive FintypeCat.{0} :=
+  finitaryExtensive_of_preserves_and_reflects_isomorphism (forget FintypeCat)
+
+/-- Condition (2) for finite sets: every monomorphism is the inclusion of a direct summand,
+its complement being the rest of the target. -/
+theorem mono_complement {A B : FintypeCat.{0}} (m : A ⟶ B) [Mono m] :
+    ∃ (Z : FintypeCat.{0}) (c : Z ⟶ B), Nonempty (IsColimit (BinaryCofan.mk m c)) := by
+  have hm : Function.Injective m := (mono_iff_injective ((forget FintypeCat).map m)).1
+    inferInstance
+  refine ⟨FintypeCat.of {b : B // b ∉ Set.range m}, homMk Subtype.val, ⟨isColimitOfReflects
+    (forget _) ((isColimitMapCoconeBinaryCofanEquiv _ _ _).symm
+      ((Types.binaryCofan_isColimit_iff _).2 ?_).some)⟩⟩
+  refine ⟨hm, Subtype.val_injective, ?_⟩
+  change IsCompl (Set.range m) (Set.range (Subtype.val : {b // b ∉ Set.range m} → B))
+  rw [Subtype.range_coe_subtype]
+  exact isCompl_compl
+
+/-- Condition (0) for finite sets: the isomorphism classes form a small set. -/
+theorem essentiallySmall : EssentiallySmall.{0} FintypeCat.{0} :=
+  EssentiallySmall.mk' FintypeCat.Skeleton.equivalence.symm
+
+/-- Conditions (0)–(2) of page 212 hold in finite sets: essentially small, finite limits,
+every monomorphism the inclusion of a direct summand. -/
+theorem conditions :
+    EssentiallySmall.{0} FintypeCat.{0} ∧ HasFiniteLimits FintypeCat.{0} ∧
+      ∀ {A B : FintypeCat.{0}} (m : A ⟶ B) [Mono m],
+        ∃ (Z : FintypeCat.{0}) (c : Z ⟶ B), Nonempty (IsColimit (BinaryCofan.mk m c)) :=
+  ⟨essentiallySmall, inferInstance, mono_complement⟩
+
+instance : surj.ContainsIdentities := ⟨fun _ => Function.surjective_id⟩
+
+instance : surj.IsStableUnderComposition := ⟨fun _ _ hf hg => hg.comp hf⟩
+
+/-- Pullbacks of surjections are epimorphisms (indeed surjections). -/
+theorem surj_pullback_epi {A B Y' Y : FintypeCat.{0}} {a : A ⟶ Y'} {b : A ⟶ B} {g : Y' ⟶ Y}
+    {k : B ⟶ Y} (hg : surj g) (sq : IsPullback a b g k) : Epi b := by
+  have := (Types.isPullback_iff _ _ _ _).1 (sq.map (forget FintypeCat))
+  simp at this
+  refine (forget _).epi_of_epi_map ((epi_iff_surjective _).2 fun β => ?_)
+  obtain ⟨y', hy'⟩ := hg (k β)
+  obtain ⟨p, -, hp⟩ := this.2.2 y' β hy'
+  exact ⟨p, hp⟩
+
+/-- **The Conclusion of page 214 in finite sets**: with (u), a degree for the surjections is
+the fibre cardinality, and degree `n` means trivialised into `n` sheets by a surjection. -/
+theorem deg_iff_triv (n : ℕ) {X Y : FintypeCat.{0}} (f : X ⟶ Y) : deg n f ↔ Triv surj n f :=
+  Degree.deg_iff_triv mono_complement surj_pullback_epi standard standard_uniqueDegree n f
+
+/-- Uniqueness in finite sets: a degree for the surjections with (u) is the fibre cardinality. -/
+theorem unique (D : DegreeAxioms surj) (hu : D.UniqueDegree) : D.deg = deg :=
+  Degree.unique mono_complement surj_pullback_epi D standard hu standard_uniqueDegree
+
+/-- Under (0)–(2) the counterexample `standard.atMost` survives, and it fails (u). -/
+theorem not_uniqueDegree_atMost : ¬ standard.atMost.UniqueDegree := fun h =>
+  atMost_ne standard standard_uniqueDegree _ not_isInitial_punit (unique _ h).symm
+
+end Folder29.Degree.Finite
