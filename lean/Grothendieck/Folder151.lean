@@ -291,3 +291,90 @@ theorem colimTop_ne : T.colimTop ≠ (inferInstance : TopologicalSpace P) := by
 end Tubes
 
 end Grothendieck.Folder151
+
+/-!
+## Depth one: the gluing theorem holds
+
+For a closed stratum `X₀ ⊂ X` (two strata, `I = {0 < 1}`, one covering pair) and a tube `𝒱̄` of
+`X₀` in `X` that is a neighbourhood of `X₀`, the four vertices `X₀*, 𝒱_{0,1}, 𝒱*_{0,1}, X₁*`
+with their three inclusions have colimit `X` in `Top` (`DepthOne.exists_unique_desc`), and the
+colimit topology is that of `X` (`DepthOne.colimTop_eq`). The point: `𝒱̄` and `X ∖ X₀` are
+neighbourhoods covering `X`. Not formalised: depth one for several strata (`I` without chains
+of length 2), and cone-bundle tubes.
+-/
+
+namespace Grothendieck.Folder151
+
+namespace DepthOne
+
+variable {X : Type*} [TopologicalSpace X] (X₀ V : Set X)
+
+/-- The four vertices of `Ĩ` for `X ⊃ X₀`: `X₀* = X₀`, `𝒱_{0,1} = 𝒱̄` (here `R_{0,1} = ∅`),
+`𝒱*_{0,1} = 𝒱̄ ∖ X₀` (here `Ẋ₁ = X₀`) and `X₁* = X ∖ X₀`. -/
+def piece : Fin 4 → Set X := ![X₀, V, V \ X₀, X₀ᶜ]
+
+/-- The three arrows `X₀* → 𝒱_{0,1} ← 𝒱*_{0,1} → X₁*`, as (source, target). -/
+def arrows : List (Fin 4 × Fin 4) := [(0, 1), (2, 1), (2, 3)]
+
+omit [TopologicalSpace X] in
+/-- The three arrows are inclusions as soon as the tube contains its soul. -/
+theorem piece_subset_of_mem_arrows (h₀ : X₀ ⊆ V) {a b : Fin 4} (h : (a, b) ∈ arrows) :
+    piece X₀ V a ⊆ piece X₀ V b := by
+  simp only [arrows, List.mem_cons, Prod.mk.injEq, List.not_mem_nil, or_false] at h
+  rcases h with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩
+  exacts [h₀, sdiff_subset, fun _ hp => hp.2]
+
+/-- The colimit topology: the finest making the inclusions of the four vertices continuous. -/
+@[instance_reducible]
+def colimTop : TopologicalSpace X :=
+  ⨆ i, TopologicalSpace.coinduced (Subtype.val : piece X₀ V i → X) inferInstance
+
+open Classical in
+/-- Depth one: if `X₀` is closed and the tube `𝒱̄` is a neighbourhood of `X₀`, then `X` with the
+four inclusions is the colimit of `Ĩ` in `Top`: a compatible family of continuous maps out of the
+vertices factors uniquely through a continuous map out of `X`. -/
+theorem exists_unique_desc (hX₀ : IsClosed X₀) (hV : X₀ ⊆ interior V)
+    {Z : Type*} [TopologicalSpace Z] (f : ∀ i, piece X₀ V i → Z)
+    (hc : ∀ i, Continuous (f i))
+    (hf : ∀ a b, (a, b) ∈ arrows → ∀ p (ha : p ∈ piece X₀ V a) (hb : p ∈ piece X₀ V b),
+      f a ⟨p, ha⟩ = f b ⟨p, hb⟩) :
+    ∃! g : X → Z, Continuous g ∧ ∀ i (x : piece X₀ V i), g x = f i x := by
+  let g : X → Z := fun p => if h : p ∈ X₀ then f 0 ⟨p, h⟩ else f 3 ⟨p, h⟩
+  have hg : ∀ i (x : piece X₀ V i), g x = f i x := by
+    have h21 := hf 2 1 (by simp [arrows]); have h23 := hf 2 3 (by simp [arrows])
+    rintro (_ | _ | _ | _ | _) ⟨p, hp⟩
+    · simp [g, show p ∈ X₀ from hp]
+    · by_cases h : p ∈ X₀
+      · simpa [g, h] using hf 0 1 (by simp [arrows]) p h hp
+      · simpa [g, h] using (h23 p ⟨hp, h⟩ h).symm.trans (h21 p _ hp)
+    · simpa [g, hp.2] using (h23 p hp hp.2).symm
+    · simp [g, show p ∉ X₀ from hp]
+    · omega
+  refine ⟨g, ⟨continuous_of_cover_nhds (s := piece X₀ V) (fun p => ?_) fun i => ?_, hg⟩,
+    fun g' ⟨_, hg'⟩ => funext fun p => ?_⟩
+  · by_cases h : p ∈ X₀
+    · exact ⟨1, mem_interior_iff_mem_nhds.1 (hV h)⟩
+    · exact ⟨3, hX₀.isOpen_compl.mem_nhds h⟩
+  · rw [continuousOn_iff_continuous_domRestrict]
+    exact (funext (hg i) : (piece X₀ V i).domRestrict g = f i) ▸ hc i
+  · by_cases h : p ∈ X₀
+    exacts [(hg' 0 ⟨p, h⟩).trans (hg 0 ⟨p, h⟩).symm, (hg' 3 ⟨p, h⟩).trans (hg 3 ⟨p, h⟩).symm]
+
+/-- Depth one: the colimit topology of the four vertices is the topology of `X`. -/
+theorem colimTop_eq (hX₀ : IsClosed X₀) (hV : X₀ ⊆ interior V) :
+    colimTop X₀ V = ‹TopologicalSpace X› := by
+  refine le_antisymm (iSup_le fun i => continuous_subtype_val.coinduced_le) fun U hU => ?_
+  simp only [isOpen_iSup_iff, isOpen_coinduced] at hU
+  obtain ⟨W, hW, e⟩ := isOpen_induced_iff.1 (hU 1)
+  obtain ⟨W', hW', e'⟩ := isOpen_induced_iff.1 (hU 3)
+  have h1 p (hp : p ∈ V) : p ∈ W ↔ p ∈ U := Set.ext_iff.1 e ⟨p, hp⟩
+  have h3 p (hp : p ∉ X₀) : p ∈ W' ↔ p ∈ U := Set.ext_iff.1 e' ⟨p, hp⟩
+  convert (hW'.inter hX₀.isOpen_compl).union (hW.inter (isOpen_interior (s := V))) using 1
+  ext p
+  have := h1 p; have := h3 p; have := @interior_subset _ _ V p; have := @hV p
+  simp only [mem_union, mem_inter_iff, mem_compl_iff]
+  tauto
+
+end DepthOne
+
+end Grothendieck.Folder151

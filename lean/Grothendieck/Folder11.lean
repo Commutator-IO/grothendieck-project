@@ -1372,3 +1372,236 @@ theorem constFun_not_full {P : Type u} [CommRing P] [Algebra k P] {κ : P →ₗ
 end Const
 
 end Folder11.Simplicial
+
+/-!
+# Folder 11 (page 54): the reduction of a general join to the blocks of `R''`
+
+Finding `11-tautological-diagonal-product-rule`, continued. For two partitions `R`, `R'` of
+the indices and their join `R''` (given as a partition coarser than both whose blocks are
+connected by the blocks of `R` and `R'`), `δ_R δ_{R'}` is the product over the blocks `C` of
+`R''` of the value `F` of page 56 on `C` with `b + b'` the numbers of blocks of `R` and `R'`
+inside `C`; and for any set `M` of marked indices (point classes `y_m`), the product
+`∏_M y_m · δ_R δ_{R'}` is the product over `C` of: that value if `C` has no mark, `∏_C y_v` if
+it has one mark and `b + b' = |C| + 1`, `0` otherwise.
+
+* `join_rule`: the unmarked product, and `b + b' ≤ |C| + 1` for each block.
+* `join_rule_marked`: the marked product.
+* `join_rule_two_marks`: two marks in one block of `R''` give `0`.
+-/
+
+namespace Folder11
+
+section Join
+
+variable {k A : Type*} [CommRing k] [CommRing A] [Algebra k A] (D : DiagData k A)
+  {B : Type*} [CommRing B] [Algebra k B] {I : Type*} (ι : I → A →ₐ[k] B)
+  [LinearOrder I] [Fintype I]
+
+/-- The star of a nonempty block: its least element joined to the others. -/
+noncomputable def star (p : Finset I) (hp : p.Nonempty) : Multiset (I × I) :=
+  (p.erase (p.min' hp)).val.map fun v => (p.min' hp, v)
+
+/-- Two indices lie in one block of `R` or one block of `R'`. -/
+def Rel (R R' : Finpartition (Finset.univ : Finset I)) (a b : I) : Prop :=
+  (∃ p ∈ R.parts, a ∈ p ∧ b ∈ p) ∨ ∃ p ∈ R'.parts, a ∈ p ∧ b ∈ p
+
+/-- The number of blocks of `R` inside `C`. -/
+def nb (R : Finpartition (Finset.univ : Finset I)) (C : Finset I) : ℕ :=
+  (R.parts.filter (· ⊆ C)).card
+
+/-- The star edges of the blocks of `R` and `R'` inside `C`. -/
+noncomputable def edgesIn (R R' : Finpartition (Finset.univ : Finset I)) (C : Finset I) :
+    Multiset (I × I) :=
+  ∑ p ∈ R.parts.attach.filter (·.1 ⊆ C), star p.1 (R.nonempty_of_mem_parts p.2) +
+    ∑ p ∈ R'.parts.attach.filter (·.1 ⊆ C), star p.1 (R'.nonempty_of_mem_parts p.2)
+
+/-- The value of a block with a set `S` of marks. -/
+noncomputable def Fm (S : Finset I) (c : ℕ) (V : Finset I) (r : I) : B :=
+  if S = ∅ then F D ι c V r else if S.card = 1 ∧ c = 0 then ∏ v ∈ V, yy D ι v else 0
+
+theorem sub_block {R R'' : Finpartition (Finset.univ : Finset I)} (h : R ≤ R'')
+    {p C : Finset I} (hp : p ∈ R.parts) (hC : C ∈ R''.parts) {x : I} (hx : x ∈ p)
+    (hxC : x ∈ C) : p ⊆ C := by
+  obtain ⟨C', hC', hpC'⟩ := h hp
+  rwa [R''.eq_of_mem_parts hC hC' hxC (hpC' hx)]
+
+theorem prod_fiber {R R'' : Finpartition (Finset.univ : Finset I)} (h : R ≤ R'')
+    (f : {p // p ∈ R.parts} → B) :
+    ∏ p ∈ R.parts.attach, f p =
+      ∏ C ∈ R''.parts.attach, ∏ p ∈ R.parts.attach.filter (·.1 ⊆ C.1), f p := by
+  rw [← Finset.prod_fiberwise_of_maps_to (t := R''.parts.attach)
+    (g := fun p => ⟨R''.part (p.1.min' (R.nonempty_of_mem_parts p.2)),
+      R''.part_mem.2 (Finset.mem_univ _)⟩) fun _ _ => Finset.mem_attach _ _]
+  refine Finset.prod_congr rfl fun C _ => Finset.prod_congr ?_ fun _ _ => rfl
+  ext p
+  simp only [Finset.mem_filter, Finset.mem_attach, true_and, Subtype.ext_iff,
+    R''.part_eq_iff_mem C.2]
+  exact ⟨sub_block h p.2 C.2 (Finset.min'_mem _ _), fun hp => hp (Finset.min'_mem _ _)⟩
+
+theorem card_block {R R'' : Finpartition (Finset.univ : Finset I)} (h : R ≤ R'')
+    {C : Finset I} (hC : C ∈ R''.parts) :
+    ∑ p ∈ R.parts.filter (· ⊆ C), p.card = C.card := by
+  refine (Finset.card_biUnion fun p hp q hq hpq => R.disjoint (Finset.mem_filter.1 hp).1
+    (Finset.mem_filter.1 hq).1 hpq).symm.trans (congrArg Finset.card ?_)
+  ext x
+  simp only [Finset.mem_biUnion, Finset.mem_filter]
+  refine ⟨fun ⟨p, ⟨_, hp⟩, hx⟩ => hp hx, fun hx => ?_⟩
+  obtain ⟨p, hp, hxp⟩ := R.exists_mem (Finset.mem_univ x)
+  exact ⟨p, ⟨hp, sub_block h hp hC hxp hx⟩, hxp⟩
+
+theorem card_edgesIn (R : Finpartition (Finset.univ : Finset I)) (C : Finset I) :
+    Multiset.card (∑ p ∈ R.parts.attach.filter (·.1 ⊆ C),
+      star p.1 (R.nonempty_of_mem_parts p.2)) + nb R C =
+      ∑ p ∈ R.parts.filter (· ⊆ C), p.card := by
+  simp only [star, Multiset.card_sum, Multiset.card_map, Finset.card_val, nb]
+  rw [Finset.card_eq_sum_ones, Finset.sum_filter, Finset.sum_filter, Finset.sum_filter,
+    ← Finset.sum_attach R.parts (fun p => if p ⊆ C then 1 else 0),
+    ← Finset.sum_attach R.parts (fun p => if p ⊆ C then p.card else 0), ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun p _ => ?_
+  split_ifs
+  · rw [Finset.card_erase_of_mem (Finset.min'_mem _ _),
+      Nat.sub_add_cancel (Finset.card_pos.2 (R.nonempty_of_mem_parts p.2))]
+  · rfl
+
+omit [Fintype I] in
+theorem eqvGen_star {p : Finset I} (hp : p.Nonempty) {E : Multiset (I × I)}
+    (hE : ∀ e ∈ star p hp, e ∈ E) {a b : I} (ha : a ∈ p) (hb : b ∈ p) :
+    Relation.EqvGen (fun a b => (a, b) ∈ E) a b := by
+  have hm : ∀ c ∈ p, Relation.EqvGen (fun a b => (a, b) ∈ E) (p.min' hp) c := fun c hc => by
+    by_cases h : c = p.min' hp
+    · rw [h]; exact .refl _
+    · exact .rel _ _ (hE _ (Multiset.mem_map.2 ⟨c, Finset.mem_erase.2 ⟨h, hc⟩, rfl⟩))
+  exact (hm a ha).symm.trans _ _ _ (hm b hb)
+
+theorem conn_block {R R' R'' : Finpartition (Finset.univ : Finset I)} (hR : R ≤ R'')
+    (hR' : R' ≤ R'') {C : Finset I} (hC : C ∈ R''.parts) {v w : I}
+    (h : Relation.EqvGen (Rel R R') v w) :
+    (v ∈ C ↔ w ∈ C) ∧ (v ∈ C → Relation.EqvGen (fun a b => (a, b) ∈ edgesIn R R' C) v w) := by
+  induction h with
+  | rel a b hab =>
+    have key : ∀ (Q : Finpartition (Finset.univ : Finset I)), Q ≤ R'' → ∀ p ∈ Q.parts,
+        a ∈ p → b ∈ p → (∀ hp : p ∈ Q.parts, p ⊆ C → ∀ e ∈ star p (Q.nonempty_of_mem_parts hp),
+          e ∈ edgesIn R R' C) →
+        (a ∈ C ↔ b ∈ C) ∧ (a ∈ C → Relation.EqvGen (fun a b => (a, b) ∈ edgesIn R R' C) a b) :=
+      fun Q hQ p hp ha hb hE =>
+        ⟨⟨fun h => sub_block hQ hp hC ha h hb, fun h => sub_block hQ hp hC hb h ha⟩,
+          fun h => eqvGen_star _ (hE hp (sub_block hQ hp hC ha h)) ha hb⟩
+    rcases hab with ⟨p, hp, ha, hb⟩ | ⟨p, hp, ha, hb⟩
+    · refine key R hR p hp ha hb fun hp hpC e he => Multiset.mem_add.2 (.inl ?_)
+      exact Multiset.mem_sum.2 ⟨⟨p, hp⟩, Finset.mem_filter.2 ⟨Finset.mem_attach _ _, hpC⟩, he⟩
+    · refine key R' hR' p hp ha hb fun hp hpC e he => Multiset.mem_add.2 (.inr ?_)
+      exact Multiset.mem_sum.2 ⟨⟨p, hp⟩, Finset.mem_filter.2 ⟨Finset.mem_attach _ _, hpC⟩, he⟩
+  | refl => exact ⟨Iff.rfl, fun _ => .refl _⟩
+  | symm a b _ ih => exact ⟨ih.1.symm, fun h => (ih.2 (ih.1.2 h)).symm⟩
+  | trans a b c _ _ ih1 ih2 =>
+    exact ⟨ih1.1.trans ih2.1, fun h => (ih1.2 h).trans _ _ _ (ih2.2 (ih1.1.1 h))⟩
+
+/-- **Page 54, the reduction to the blocks of `R''`.** For partitions `R`, `R'` and their join
+`R''` (coarser than both, each block connected through blocks of `R` and `R'`), with `b`, `b'`
+the numbers of blocks of `R`, `R'` inside a block `C`: `b + b' ≤ |C| + 1`, and `δ_R δ_{R'}` is
+the product over the blocks `C` of the small diagonal `δ_C` if `b + b' = |C| + 1`,
+`χ ∏_C y_v` if `b + b' = |C|`, `0` if `b + b' < |C|`. -/
+theorem join_rule (R R' R'' : Finpartition (Finset.univ : Finset I)) (hR : R ≤ R'')
+    (hR' : R' ≤ R'') (hc : ∀ C ∈ R''.parts, ∀ v ∈ C, ∀ w ∈ C, Relation.EqvGen (Rel R R') v w) :
+    (∀ C ∈ R''.parts, nb R C + nb R' C ≤ C.card + 1) ∧
+    δR D ι R * δR D ι R' = ∏ C ∈ R''.parts.attach,
+      F D ι (C.1.card + 1 - nb R C.1 - nb R' C.1) C.1
+        (C.1.min' (R''.nonempty_of_mem_parts C.2)) := by
+  have hg : ∀ C ∈ R''.parts, ∀ r ∈ C, C.card ≤ Multiset.card (edgesIn R R' C) + 1 ∧
+      P D ι (edgesIn R R' C) = F D ι (Multiset.card (edgesIn R R' C) + 1 - C.card) C r := by
+    intro C hC r hr
+    refine graph_rule D ι _ _ _ rfl (fun e he => ?_)
+      (fun v hv w hw => (conn_block hR hR' hC (hc C hC v hv w hw)).2 hv) r hr
+    obtain ⟨Q, p, hp, he⟩ : ∃ Q : Finpartition (Finset.univ : Finset I), ∃ p ∈ Q.parts.attach.filter
+        (·.1 ⊆ C), e ∈ star p.1 (Q.nonempty_of_mem_parts p.2) := by
+      rcases Multiset.mem_add.1 he with he | he <;>
+        obtain ⟨p, hp, he⟩ := Multiset.mem_sum.1 he
+      exacts [⟨R, p, hp, he⟩, ⟨R', p, hp, he⟩]
+    obtain ⟨v, hv, rfl⟩ := Multiset.mem_map.1 he
+    have hpC := (Finset.mem_filter.1 hp).2
+    exact ⟨hpC (Finset.min'_mem _ (Q.nonempty_of_mem_parts p.2)), hpC (Finset.mem_of_mem_erase hv)⟩
+  have hcard : ∀ C ∈ R''.parts, Multiset.card (edgesIn R R' C) + nb R C + nb R' C =
+      2 * C.card := fun C hC => by
+    have h1 := card_edgesIn R C
+    have h2 := card_edgesIn R' C
+    rw [card_block hR hC] at h1
+    rw [card_block hR' hC] at h2
+    rw [edgesIn, Multiset.card_add]
+    omega
+  refine ⟨fun C hC => ?_, ?_⟩
+  · have := (hg C hC _ (Finset.min'_mem C (R''.nonempty_of_mem_parts hC))).1
+    have := hcard C hC
+    omega
+  · have hst : ∀ (Q : Finpartition (Finset.univ : Finset I)) (p : {p // p ∈ Q.parts}),
+        δ D ι p.1 (p.1.min' (Q.nonempty_of_mem_parts p.2)) =
+          P D ι (star p.1 (Q.nonempty_of_mem_parts p.2)) := fun Q p => (P_star D ι _ _).symm
+    rw [δR, δR, prod_fiber hR, prod_fiber hR', ← Finset.prod_mul_distrib]
+    refine Finset.prod_congr rfl fun C _ => ?_
+    have hmin := Finset.min'_mem C.1 (R''.nonempty_of_mem_parts C.2)
+    simp only [hst, ← P_sum, ← P_add]
+    rw [← edgesIn, (hg C.1 C.2 _ hmin).2]
+    congr 1
+    have := hcard C.1 C.2
+    omega
+
+omit [Fintype I] in
+theorem y_F (c : ℕ) {V : Finset I} {i r : I} (hi : i ∈ V) (hr : r ∈ V) :
+    yy D ι i * F D ι c V r = if c = 0 then ∏ v ∈ V, yy D ι v else 0 := by
+  rcases c with _ | _ | c
+  · simp [F, y_δ D ι hi hr]
+  · simp [F, y_prod_eq_zero D ι hi]
+  · simp [F]
+
+omit [Fintype I] in
+theorem marks_F (c : ℕ) {V S : Finset I} {r : I} (hS : S ⊆ V) (hr : r ∈ V) :
+    (∏ m ∈ S, yy D ι m) * F D ι c V r = Fm D ι S c V r := by
+  unfold Fm
+  split_ifs with h0 h1
+  · simp [h0]
+  · obtain ⟨m, rfl⟩ := Finset.card_eq_one.1 h1.1
+    rw [Finset.prod_singleton, y_F D ι c (hS (Finset.mem_singleton_self m)) hr]
+    simp [h1.2]
+  · obtain ⟨m, hm⟩ := Finset.nonempty_iff_ne_empty.2 h0
+    rw [← Finset.mul_prod_erase _ _ hm, mul_right_comm, y_F D ι c (hS hm) hr]
+    split_ifs with hc
+    · have : (S.erase m).Nonempty := by
+        rw [← Finset.card_pos, Finset.card_erase_of_mem hm]
+        have := Finset.card_pos.2 ⟨m, hm⟩
+        omega
+      obtain ⟨m', hm'⟩ := this
+      rw [← Finset.mul_prod_erase _ _ hm', ← mul_assoc, mul_comm (∏ v ∈ V, yy D ι v),
+        y_prod_eq_zero D ι (hS (Finset.mem_of_mem_erase hm')), zero_mul]
+    · simp
+
+/-- **Page 54, with marked points.** For a set `M` of marked indices, `∏_M y_m · δ_R δ_{R'}` is
+the product over the blocks `C` of `R''` of the value of `C` without marks if `M ∩ C = ∅`,
+`∏_C y_v` if `C` has one mark and `b + b' = |C| + 1`, and `0` otherwise. -/
+theorem join_rule_marked (R R' R'' : Finpartition (Finset.univ : Finset I)) (hR : R ≤ R'')
+    (hR' : R' ≤ R'') (hc : ∀ C ∈ R''.parts, ∀ v ∈ C, ∀ w ∈ C, Relation.EqvGen (Rel R R') v w)
+    (M : Finset I) :
+    (∏ m ∈ M, yy D ι m) * (δR D ι R * δR D ι R') = ∏ C ∈ R''.parts.attach,
+      Fm D ι (M.filter (· ∈ C.1)) (C.1.card + 1 - nb R C.1 - nb R' C.1) C.1
+        (C.1.min' (R''.nonempty_of_mem_parts C.2)) := by
+  rw [(join_rule D ι R R' R'' hR hR' hc).2, ← Finset.prod_fiberwise_of_maps_to
+    (t := R''.parts.attach) (g := fun m => ⟨R''.part m, R''.part_mem.2 (Finset.mem_univ _)⟩)
+    fun _ _ => Finset.mem_attach _ _, ← Finset.prod_mul_distrib]
+  refine Finset.prod_congr rfl fun C _ => ?_
+  rw [← marks_F D ι _ (fun _ h => (Finset.mem_filter.1 h).2) (Finset.min'_mem _ _)]
+  congr 2
+  ext m
+  simp [Subtype.ext_iff, R''.part_eq_iff_mem C.2]
+
+/-- Two marks in one block of `R''` give `0`. -/
+theorem join_rule_two_marks (R R' R'' : Finpartition (Finset.univ : Finset I)) (hR : R ≤ R'')
+    (hR' : R' ≤ R'') (hc : ∀ C ∈ R''.parts, ∀ v ∈ C, ∀ w ∈ C, Relation.EqvGen (Rel R R') v w)
+    {j j' : I} (hjj : j ≠ j') {C : Finset I} (hC : C ∈ R''.parts) (hj : j ∈ C) (hj' : j' ∈ C) :
+    yy D ι j * yy D ι j' * (δR D ι R * δR D ι R') = 0 := by
+  have := Finset.prod_pair (f := yy D ι) hjj ▸ join_rule_marked D ι R R' R'' hR hR' hc {j, j'}
+  refine this.trans <| Finset.prod_eq_zero (i := ⟨C, hC⟩) (Finset.mem_attach _ _) ?_
+  have : Finset.filter (· ∈ C) {j, j'} = {j, j'} := Finset.filter_true_of_mem fun x hx => by
+    rcases Finset.mem_insert.1 hx with rfl | hx <;> simp_all
+  simp [Fm, this, Finset.card_pair hjj]
+
+end Join
+
+end Folder11

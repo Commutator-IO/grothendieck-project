@@ -1219,4 +1219,275 @@ theorem dichotomy_of_infinite [Infinite k] :
 
 end EarArea
 
+
+/-! ## Page 14: `N(u_*)` is the space of Lagrange multipliers of the ear-area map
+
+* `earArea_add`: `φ(u + v) = φ(u) + dφ_u(v) + φ(v)` for the ear-area map
+  `φ(u)_i = u_{i-1} ∧ u_i`, so `dEar u` is its differential (`hasStrictFDerivAt_earArea`
+  over `ℝ`).
+* `isMult_iff_lagrange`, `isMult_iff_closed`: `λ ∈ N(u_*)` iff
+  `Σ λ_i dφ_i = w ∧ Σ dv_i` for some `w` — the page's `Σ λ_i df_i = μ Σ dx_i + ν Σ dy_i` —
+  iff `Σ λ_i dφ_i` vanishes on the closed deformations `Σ dv_i = 0`.
+* `multSpace_eq_bot_iff`: `N(u_*) = 0` iff `dφ_u` maps the closed deformations onto
+  `k^{ℤ/n}`: the case (a) of page 28 is the case where `φ`, restricted to the polygons with
+  `Σ u_i` fixed, is a submersion at `u_*`.
+-/
+
+section Lagrange
+
+variable [Field k] {n : ℕ}
+
+/-- The ear-area map: `φ(u)_i = u_{i-1} ∧ u_i`. -/
+def earArea (u : ZMod n → Fin 2 → k) (i : ZMod n) : k := wedge (u (i - 1)) (u i)
+
+/-- Its differential at `u`: `dφ_u(v)_i = v_{i-1} ∧ u_i + u_{i-1} ∧ v_i`. -/
+def dEar (u : ZMod n → Fin 2 → k) : (ZMod n → Fin 2 → k) →ₗ[k] (ZMod n → k) where
+  toFun v i := wedge (v (i - 1)) (u i) + wedge (u (i - 1)) (v i)
+  map_add' a b := by funext i; simp [wedge]; ring
+  map_smul' c a := by funext i; simp [wedge]; ring
+
+/-- `φ` is quadratic, with differential `dEar`. -/
+theorem earArea_add (u v : ZMod n → Fin 2 → k) :
+    earArea (u + v) = earArea u + dEar u v + earArea v := by
+  funext i; simp [earArea, dEar, wedge]; ring
+
+variable [NeZero n]
+
+theorem wedge_sum (w : Fin 2 → k) (v : ZMod n → Fin 2 → k) :
+    wedge w (∑ i, v i) = ∑ i, wedge w (v i) := by
+  simp [wedge, Finset.mul_sum, Finset.sum_sub_distrib]
+
+/-- Summation by parts: `Σ λ_i dφ_i(v) = Σ L_i ∧ v_i`. -/
+theorem sum_mul_dEar (u v : ZMod n → Fin 2 → k) (l : ZMod n → k) :
+    ∑ i, l i * dEar u v i = ∑ i, wedge (lagr u l i) (v i) := by
+  have e := Equiv.sum_comp (Equiv.addRight (1 : ZMod n))
+    fun i => l i * wedge (v (i - 1)) (u i)
+  simp only [Equiv.coe_addRight, add_sub_cancel_right] at e
+  calc ∑ i, l i * dEar u v i
+      = ∑ i, l i * wedge (v (i - 1)) (u i) + ∑ i, l i * wedge (u (i - 1)) (v i) := by
+        simp [dEar, mul_add, Finset.sum_add_distrib]
+    _ = ∑ i, wedge (lagr u l i) (v i) := by
+        rw [← e, ← Finset.sum_add_distrib]; congr 1; funext i; simp [lagr, wedge]; ring
+
+theorem lagr_const (u : ZMod n → Fin 2 → k) (l : ZMod n → k) (h : IsMult u l) (i : ZMod n) :
+    lagr u l i = lagr u l 0 := by
+  rw [isMult_iff_lagr] at h
+  have : ∀ m : ℕ, lagr u l (m : ZMod n) = lagr u l 0 := fun m => by
+    induction m with
+    | zero => simp
+    | succ m ih => rw [Nat.cast_succ, ← h, ih]
+  rw [← ZMod.natCast_zmod_val i, this]
+
+theorem sum_wedge_single (L : ZMod n → Fin 2 → k) (i : ZMod n) (e : Fin 2 → k) :
+    ∑ j, wedge (L j) ((Pi.single i e : ZMod n → Fin 2 → k) j) = wedge (L i) e := by
+  rw [Finset.sum_eq_single i (fun j _ hj => by simp [hj, wedge]) (by simp)]; simp
+
+/-- **Page 14.** `λ ∈ N(u_*)` iff `Σ λ_i dφ_i` vanishes on the closed deformations. -/
+theorem isMult_iff_closed (u : ZMod n → Fin 2 → k) (l : ZMod n → k) :
+    IsMult u l ↔ ∀ v, ∑ i, v i = 0 → ∑ i, l i * dEar u v i = 0 := by
+  refine ⟨fun h v hv => ?_, fun hw => ?_⟩
+  · rw [sum_mul_dEar]; simp only [lagr_const u l h, ← wedge_sum, hv]; simp [wedge]
+  rw [isMult_iff_lagr]
+  intro i
+  have key : ∀ e : Fin 2 → k, wedge (lagr u l i) e = wedge (lagr u l (i + 1)) e := fun e => by
+    have := hw (Pi.single i e - Pi.single (i + 1) e) (by simp [Finset.sum_sub_distrib])
+    have h1 := sum_wedge_single (lagr u l) i e
+    have h2 := sum_wedge_single (lagr u l) (i + 1) e
+    simp only [sum_mul_dEar, wedge, Pi.sub_apply, mul_sub, Finset.sum_sub_distrib] at this h1 h2 ⊢
+    linear_combination this - h1 + h2
+  funext j
+  fin_cases j
+  · simpa [wedge] using key ![0, 1]
+  · simpa [wedge] using key ![1, 0]
+
+/-- **Page 14, the Lagrange form.** `λ ∈ N(u_*)` iff `Σ λ_i dφ_i = w ∧ Σ dv_i` for a
+constant vector `w`: the page's `Σ λ_i df_i = μ Σ dx_i + ν Σ dy_i`. -/
+theorem isMult_iff_lagrange (u : ZMod n → Fin 2 → k) (l : ZMod n → k) :
+    IsMult u l ↔ ∃ w : Fin 2 → k, ∀ v, ∑ i, l i * dEar u v i = wedge w (∑ i, v i) :=
+  ⟨fun h => ⟨lagr u l 0, fun v => by rw [sum_mul_dEar, wedge_sum]; simp only [lagr_const u l h]⟩,
+    fun ⟨w, hw⟩ => (isMult_iff_closed u l).2 fun v hv => by rw [hw, hv]; simp [wedge]⟩
+
+/-- The closed deformations: `Σ v_i = 0`. -/
+def closedDef : Submodule k (ZMod n → Fin 2 → k) where
+  carrier := {v | ∑ i, v i = 0}
+  add_mem' ha hb := by simp_all [Finset.sum_add_distrib]
+  zero_mem' := by simp
+  smul_mem' c v hv := by simp_all [← Finset.smul_sum]
+
+/-- **Pages 14 and 28, case (a).** `N(u_*) = 0` iff `dφ_u` maps the closed deformations
+onto `k^{ℤ/n}`: `φ`, on the polygons with `Σ u_i` fixed, is a submersion at `u_*`. -/
+theorem multSpace_eq_bot_iff (u : ZMod n → Fin 2 → k) :
+    multSpace u = ⊥ ↔ closedDef.map (dEar u) = ⊤ := by
+  have hf : ∀ (f : Module.Dual k (ZMod n → k)) x, f x = ∑ j, f (Pi.single j 1) * x j :=
+    fun f x => by
+      conv_lhs => rw [pi_eq_sum_univ x]
+      simp only [map_sum, map_smul, smul_eq_mul, mul_comm]
+      congr! 3 with j
+      funext i; simp [Pi.single_apply, eq_comm]
+  rw [Submodule.eq_bot_iff]
+  refine ⟨fun h => by_contra fun hW => ?_, fun h l hl => funext fun j => ?_⟩
+  · obtain ⟨f, hf0, hfW⟩ := Submodule.exists_dual_map_eq_bot_of_lt_top (lt_top_iff_ne_top.2 hW)
+      inferInstance
+    have hl := h (fun j => f (Pi.single j 1)) <| (isMult_iff_closed u _).2 fun v hv => by
+      rw [← hf, ← Submodule.mem_bot k, ← hfW]
+      exact Submodule.mem_map_of_mem (Submodule.mem_map_of_mem (p := closedDef) hv)
+    exact hf0 (LinearMap.ext fun x => by rw [hf]; simp [fun j => congrFun hl j])
+  · obtain ⟨v, hv, hvj⟩ := (Submodule.eq_top_iff'.1 h) (Pi.single j 1)
+    have := (isMult_iff_closed u l).1 hl v hv
+    simpa [hvj, Pi.single_apply] using this
+
+omit [NeZero n] in
+/-- The ear-area map is bilinear in two copies of `u`. -/
+def earBilin : (ZMod n → Fin 2 → k) →ₗ[k] (ZMod n → Fin 2 → k) →ₗ[k] (ZMod n → k) :=
+  LinearMap.mk₂ k (fun a b i => wedge (a (i - 1)) (b i))
+    (fun _ _ _ => by funext; simp [wedge]; ring) (fun _ _ _ => by funext; simp [wedge]; ring)
+    (fun _ _ _ => by funext; simp [wedge]; ring) (fun _ _ _ => by funext; simp [wedge]; ring)
+
+/-- Over a complete nontrivially normed field, `dEar u` is the strict derivative of the
+ear-area map at `u`. -/
+theorem hasStrictFDerivAt_earArea {𝕜 : Type*} [NontriviallyNormedField 𝕜] [CompleteSpace 𝕜]
+    (u : ZMod n → Fin 2 → 𝕜) :
+    HasStrictFDerivAt earArea (dEar u).toContinuousLinearMap u := by
+  have h := (earBilin (k := 𝕜) (n := n)).toContinuousBilinearMap.hasStrictFDerivAt_of_bilinear
+    (hasStrictFDerivAt_id u) (hasStrictFDerivAt_id u)
+  refine HasStrictFDerivAt.congr_fderiv (f := earArea) h (ContinuousLinearMap.ext fun v => ?_)
+  funext i; simp [earBilin, dEar, add_comm]
+
+end Lagrange
+
+/-! ## Page 28: the four cases, and the nine-gon of page 18
+
+* `four_cases`: for nonzero sides and `|k| > n`, `N(u_*)` is in one of the four cases of the
+  Théorème of page 28 — (a) `N(u_*) = 0`; (b₁) a nowhere-zero multiplier and dimension `1`;
+  (b₂) a nowhere-zero multiplier and dimension `2`; (c) `N(u_*) ≠ 0` inside some `H_i`,
+  and dimension `1` — and `four_cases_exclusive`: in only one.
+* `special_two_span`: in case (c) at `i`, `N(u_*)` is the line of the unique multiplier with
+  `λ_i = 0`, `λ_{i+1} = 1`, to which `zero_multiplier_criterion` applies (for `i = 0`).
+* `nonagon`: the star nine-gon of page 18 has `N(u_*)` a line, spanned by a multiplier zero
+  at `0` and nowhere else, for every value of the parameters allowed by the page.
+-/
+
+section FourCases
+
+variable [Field k] {n : ℕ} [NeZero n] (u : ZMod n → Fin 2 → k) (hu : ∀ i, u i ≠ 0)
+include hu
+
+omit hu in
+theorem finrank_ne_zero_of_mem {l : ZMod n → k} (hl : l ∈ multSpace u) (hl0 : l ≠ 0) :
+    Module.finrank k (multSpace u) ≠ 0 := fun h =>
+  hl0 (by simpa using (Submodule.finrank_eq_zero.1 h ▸ hl : l ∈ (⊥ : Submodule k _)))
+
+/-- **Page 28, the Théorème: the four cases** (`|k| > n`). -/
+theorem four_cases (hk : (n : ℕ∞) < ENat.card k) :
+    multSpace u = ⊥ ∨
+      ((∃ l ∈ multSpace u, ∀ i, l i ≠ 0) ∧ Module.finrank k (multSpace u) = 1) ∨
+      ((∃ l ∈ multSpace u, ∀ i, l i ≠ 0) ∧ Module.finrank k (multSpace u) = 2) ∨
+      (multSpace u ≠ ⊥ ∧ (∃ i, ∀ l ∈ multSpace u, l i = 0) ∧
+        Module.finrank k (multSpace u) = 1) := by
+  have h2 := finrank_multSpace_le_two u hu
+  rcases dichotomy u hk with ⟨l, hl, hl0⟩ | hH
+  · have := finrank_ne_zero_of_mem u hl fun h => hl0 0 (by simp [h])
+    right
+    interval_cases h : Module.finrank k (multSpace u)
+    · exact absurd rfl this
+    · exact Or.inl ⟨⟨l, hl, hl0⟩, rfl⟩
+    · exact Or.inr (Or.inl ⟨⟨l, hl, hl0⟩, rfl⟩)
+  · by_cases hb : multSpace u = ⊥
+    · exact Or.inl hb
+    obtain ⟨i, hi⟩ := hH
+    obtain ⟨l, hl, hl0⟩ := (Submodule.ne_bot_iff _).1 hb
+    have := finrank_ne_zero_of_mem u hl hl0
+    have := finrank_le_one_of_le_hyperplane u hu i hi
+    exact Or.inr (Or.inr (Or.inr ⟨hb, ⟨i, hi⟩, by omega⟩))
+
+omit hu [NeZero n] in
+/-- The four cases exclude one another: (a) excludes a nowhere-zero multiplier and is
+`N(u_*) ≠ 0` negated, (b₁) and (b₂) differ by the dimension, and (b) excludes (c). -/
+theorem four_cases_exclusive :
+    (multSpace u = ⊥ → ¬ ∃ l ∈ multSpace u, ∀ i, l i ≠ 0) ∧
+      ((∃ l ∈ multSpace u, ∀ i, l i ≠ 0) → ¬ ∃ i, ∀ l ∈ multSpace u, l i = 0) :=
+  ⟨fun h ⟨l, hl, hl0⟩ => hl0 0 (by rw [h] at hl; simp [(Submodule.mem_bot k).1 hl]),
+    fun ⟨l, hl, hl0⟩ ⟨i, hi⟩ => hl0 i (hi l hl)⟩
+
+/-- **Page 28, case (c).** If `N(u_*) ≠ 0` lies in `H_i`, it is the line spanned by a
+multiplier with `λ_i = 0` and `λ_{i+1} = 1`. -/
+theorem special_two_span (hb : multSpace u ≠ ⊥) (i : ZMod n)
+    (hi : ∀ l ∈ multSpace u, l i = 0) :
+    ∃ l ∈ multSpace u, l i = 0 ∧ l (i + 1) = 1 ∧ ∀ l' ∈ multSpace u, ∃ c : k, l' = c • l := by
+  obtain ⟨l, hl, hl0⟩ := (Submodule.ne_bot_iff _).1 hb
+  have h1 : l (i + 1) ≠ 0 := fun h => hl0 (eq_zero_of_consecutive u hu l hl i (hi l hl) h)
+  have hm : (l (i + 1))⁻¹ • l ∈ multSpace u := Submodule.smul_mem _ _ hl
+  have hne : (⟨_, hm⟩ : multSpace u) ≠ 0 := fun h => by
+    have := congrArg (fun x : multSpace u => x.1 (i + 1)) h
+    simp [h1] at this
+  have hf : Module.finrank k (multSpace u) = 1 :=
+    le_antisymm (finrank_le_one_of_le_hyperplane u hu i hi) (Nat.one_le_iff_ne_zero.2
+      (finrank_ne_zero_of_mem u hl hl0))
+  refine ⟨_, hm, by simp [hi l hl], by simp [h1], fun l' hl' => ?_⟩
+  obtain ⟨c, hc⟩ := (finrank_eq_one_iff_of_nonzero' _ hne).1 hf ⟨l', hl'⟩
+  exact ⟨c, (congrArg Subtype.val hc).symm⟩
+
+end FourCases
+
+section Nonagon
+
+variable [Field k]
+
+/-- The star nine-gon of page 18, by its sides: vertices `s₀ = (0,0)`, `s₁ = (1,0)`,
+`s₂ = (1,1)`, `s₃ = (β₁, β₁)`, `s₄ = (β₁, y₄)`, `s₅ = (β₂β₁, β₂y₄)`, `s₆ = (β₂β₁, y₆)`,
+`s₇ = (β₃β₂β₁, β₃y₆)`, `s₈ = (β₃β₂β₁, y₈)`, `s₉ = s₀`. The odd sides are parallel to `u₁`,
+the even ones lie on lines through `s₀`. -/
+def nonagon (b₁ b₂ b₃ y₄ y₆ y₈ : k) : ZMod 9 → Fin 2 → k :=
+  ![![1, 0], ![0, 1], ![b₁ - 1, b₁ - 1], ![0, y₄ - b₁], ![(b₂ - 1) * b₁, (b₂ - 1) * y₄],
+    ![0, y₆ - b₂ * y₄], ![(b₃ - 1) * (b₂ * b₁), (b₃ - 1) * y₆], ![0, y₈ - b₃ * y₆],
+    ![-(b₃ * (b₂ * b₁)), -y₈]]
+
+/-- **Page 18.** For `βⱼ ≠ 0, 1`, `y₄ ≠ β₁`, `y₆ ≠ β₂y₄`, `y₈ ≠ β₃y₆`, the nine-gon's
+`N(u_*)` is a line, spanned by a multiplier zero at `0` and nowhere else. -/
+theorem nonagon_multSpace {b₁ b₂ b₃ y₄ y₆ y₈ : k} (h₁ : b₁ ≠ 0) (h₁' : b₁ ≠ 1) (h₂ : b₂ ≠ 0)
+    (h₂' : b₂ ≠ 1) (h₃ : b₃ ≠ 0) (h₃' : b₃ ≠ 1) (h₄ : y₄ ≠ b₁) (h₆ : y₆ ≠ b₂ * y₄)
+    (h₈ : y₈ ≠ b₃ * y₆) :
+    ∃ l ∈ multSpace (nonagon b₁ b₂ b₃ y₄ y₆ y₈), l 0 = 0 ∧ (∀ i, i ≠ 0 → l i ≠ 0) ∧
+      ∀ l' ∈ multSpace (nonagon b₁ b₂ b₃ y₄ y₆ y₈), ∃ c : k, l' = c • l := by
+  set u := nonagon b₁ b₂ b₃ y₄ y₆ y₈
+  have hu : ∀ i, u i ≠ 0 := by
+    intro i h
+    have e0 := congrFun h 0
+    have e1 := congrFun h 1
+    fin_cases i <;> simp [u, nonagon, sub_eq_zero, h₁, h₁', h₂, h₂', h₃, h₃', h₄, h₆, h₈] at e0 e1
+  obtain ⟨l, h0, h1, hl⟩ := (zero_multiplier_criterion (by norm_num) u hu).2 ⟨by
+    rw [← sum_range_eq_sum]
+    funext j; fin_cases j <;> simp [Finset.sum_range_succ, u, nonagon] <;> ring, by
+    intro i h2 h8
+    interval_cases i
+    all_goals refine Or.inr ?_
+    all_goals simp only [partialSum, Finset.sum_range_succ, Finset.range_one, Finset.sum_singleton,
+      Nat.cast_ofNat, Nat.cast_one, Nat.cast_zero, Nat.reduceSub, u, nonagon, wedge, Pi.add_apply,
+      Matrix.cons_val, Matrix.cons_val_zero, Matrix.cons_val_one, Fin.isValue]
+    exacts [Or.inl ⟨by ring, by ring⟩, Or.inr ⟨by ring, by ring⟩, Or.inl ⟨by ring, by ring⟩,
+      Or.inr ⟨by ring, by ring⟩, Or.inl ⟨by ring, by ring⟩, Or.inr ⟨by ring, by ring⟩,
+      Or.inl ⟨by ring, by ring⟩]⟩
+  have hl0 : l ≠ 0 := fun h => by simp [h] at h1
+  have hf : Module.finrank k (multSpace u) = 1 := by
+    have := finrank_multSpace_le_two u hu
+    have := finrank_ne_zero_of_mem u hl hl0
+    have : Module.finrank k (multSpace u) ≠ 2 := fun h => by
+      have := congrFun (((finrank_multSpace_eq_two_iff u hu
+        ⟨0, 1, by simp [u, nonagon, wedge]⟩).1 h).2.1 1) 0
+      norm_num [u, nonagon, sub_eq_zero, h₁, h₂'] at this
+    omega
+  refine ⟨l, hl, h0, fun i hi => ?_, fun l' hl' => ?_⟩
+  · obtain ⟨m, hm1, hm8, rfl⟩ : ∃ m : ℕ, 1 ≤ m ∧ m ≤ 8 ∧ (m : ZMod 9) = i :=
+      ⟨i.val, Nat.pos_of_ne_zero fun h => hi ((ZMod.val_eq_zero i).1 h),
+        Nat.le_of_lt_succ (ZMod.val_lt i), ZMod.natCast_zmod_val i⟩
+    rw [Ne, mult_eq_zero_iff u hu l h0 h1 hl m hm1]
+    intro h
+    have e0 := congrFun h 0
+    interval_cases m <;> simp [partialSum, Finset.sum_range_succ, u, nonagon] at e0
+    all_goals ((try ring_nf at e0); simp [h₁, h₂, h₃] at e0)
+  · obtain ⟨c, hc⟩ := (finrank_eq_one_iff_of_nonzero' _
+      (fun h => hl0 (congrArg Subtype.val h) : (⟨l, hl⟩ : multSpace u) ≠ 0)).1 hf ⟨l', hl'⟩
+    exact ⟨c, (congrArg Subtype.val hc).symm⟩
+
+end Nonagon
 end Folder73

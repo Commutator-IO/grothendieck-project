@@ -57,6 +57,12 @@ Soient $R$ et $R'$ deux partitions des $k$ indices, à $s$ et $s'$ blocs, dont l
 
 Les arêtes de $R$ et $R'$ joignant chaque bloc à son plus petit élément sont au nombre de $2k - s - s'$, et forment un multigraphe connexe : le théorème~\ref{thm:11-graphes} donne tout (Lean : \texttt{graph\_rule}, \texttt{product\_rule}, \texttt{product\_rule\_pointed}).
 
+\begin{enonce}[D'après la page 54, réduction aux blocs de $R''$, énoncé de l'édition]
+Soient $R$ et $R'$ deux partitions des indices, et $R''$ une partition moins fine que l'une et l'autre dont chaque bloc est connexe pour la relation \q{être dans un même bloc de $R$ ou de $R'$} (c'est la borne supérieure de $R$ et $R'$). Pour un bloc $C$ de $R''$, soient $b$ et $b'$ les nombres de blocs de $R$ et de $R'$ contenus dans $C$. Alors $b + b' \leqslant |C| + 1$, et $\delta_R\,\delta_{R'} = \prod_{C \in R''} c_C$, où $c_C$ vaut $\delta_C$ si $b + b' = |C| + 1$, $\chi \prod_{v \in C} y_v$ si $b + b' = |C|$, et $0$ si $b + b' < |C|$. Plus généralement, pour toute partie $M$ d'indices marqués, $\prod_{m \in M} y_m \cdot \delta_R\,\delta_{R'}$ est le produit sur les blocs $C$ de : $c_C$ si $C$ ne contient aucune marque ; $\prod_{v \in C} y_v$ s'il en contient une et si $b + b' = |C| + 1$ ; $0$ sinon. En particulier, deux marques dans un même bloc de $R''$ donnent $0$.
+\end{enonce}
+
+Les classes $\varepsilon_{R,J}$ de la lecture sont les $y_j\,\delta_R$ pour $j \in J$, puisque $y_j\,\delta_J = \prod_{i \in J} y_i$ ; l'énoncé, avec $M = \{j, j'\}$, donne donc la proposition de la lecture tout entière, pour des partitions quelconques. On regroupe les blocs de $R$ et de $R'$ selon le bloc de $R''$ qui les contient : les arêtes en étoile de ceux qui tombent dans $C$ sont au nombre de $2|C| - b - b'$ et rendent $C$ connexe (une chaîne de la relation ne sort pas du bloc de son origine), et le théorème~\ref{thm:11-graphes} s'applique bloc par bloc ; une marque $y_m$ se range dans le facteur de son bloc, où $y_m\,\delta_C = \prod_{v \in C} y_v$, $y_m^2 = 0$ et $y_m \prod_{v \in C} y_v = 0$ concluent (Lean : \texttt{join\_rule}, \texttt{join\_rule\_marked}, \texttt{join\_rule\_two\_marks}). La borne supérieure $R''$ est donnée par ses propriétés, non construite.
+
 \begin{enonce}[Page 56, stabilités, en un facteur]
 Dans $B \otimes A$, l'image directe $\mathrm{id} \otimes \int$ par la projection qui oublie le dernier facteur $\ast$ annule les classes qui ne le font pas intervenir, et envoie $x\,y_\ast$ et $x\,\delta_{i\ast}$ sur $x$ ; l'image inverse envoie $\delta_{ij}$ sur $\delta_{ij}$ et $y_i$ sur $y_i$.
 \end{enonce}
@@ -65,7 +71,7 @@ Lean : \texttt{push\_old}, \texttt{push\_point}, \texttt{push\_diag}, \texttt{pu
 
 \paragraph{Remarques.} La règle tient plus généralement que la table de la lecture : pour tout multigraphe connexe, dans toute algèbre où vivent une classe de la diagonale et une classe de point. Le coefficient $\chi$ du cas $s + s' = k$, biffé sur la page, est bien celui que la lecture rétablit. La nullité de l'image directe d'une classe qui n'implique pas le facteur oublié demande $\int 1 = 0$, ce que donne en géométrie la raison de degré.
 
-Ne sont pas démontrés ici : le cadre géométrique et la formule d'intersection en excès ; la réduction d'une jointure quelconque aux blocs de $R''$ et l'engendrement par $\boxtimes$ de la conclusion encadrée ; la catégorie des correspondances d'une théorie bivariante (pages~2 à~18), les sous-foncteurs stables (pages~20 à~24), les signes de Koszul des pages~26 à~30 et la Proposition de la page~39, la seconde mouture (pages~41 à~47) hors de l'équivalence de la sous-section suivante.
+Ne sont pas démontrés ici : le cadre géométrique et la formule d'intersection en excès ; l'engendrement par $\boxtimes$ de la conclusion encadrée ; la catégorie des correspondances d'une théorie bivariante (pages~2 à~18), les sous-foncteurs stables (pages~20 à~24), les signes de Koszul des pages~26 à~30 et la Proposition de la page~39, la seconde mouture (pages~41 à~47) hors de l'équivalence de la sous-section suivante.
 
 \subsection*{Algèbres bivariantes simpliciales et algèbres de Poincaré (pages 37 et 41)}
 

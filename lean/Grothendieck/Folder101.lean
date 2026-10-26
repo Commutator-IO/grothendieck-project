@@ -254,4 +254,77 @@ theorem duality_dim_one [IsAdicComplete (maximalIdeal A) A] :
     rw [← hH]
     simp [phi1]
 
+/-! ## The converse: `Ext¹_A(K, A) = 0` forces completeness -/
+
+/-- **Converse of fact b)**: if every `A`-linear map `K → K/A` lifts to an `A`-linear map
+`K → K` (that is, `Hom_A(K, K) → Hom_A(K, K/A)` is onto, i.e. `Ext¹_A(K, A) = 0`, `K` being
+injective), then `A` is complete. A Cauchy sequence `(eₙ)` gives `f : K → K/A`,
+`x ↦ eₙ x mod A` for any `n` with `ϖⁿ x ∈ A`; a lift `g` of `f` has limit `g 1`. -/
+theorem isAdicComplete_of_lift
+    (H : ∀ f : K →ₗ[A] KA A K, ∃ g : K →ₗ[A] K, ∀ x, Submodule.Quotient.mk (g x) = f x) :
+    IsAdicComplete (maximalIdeal A) A := by
+  obtain ⟨ϖ, hϖ⟩ := IsDiscreteValuationRing.exists_irreducible A
+  set p := algebraMap A K ϖ with hpdef
+  have hp : p ≠ 0 := (map_ne_zero_iff _ (IsFractionRing.injective A K)).2 hϖ.ne_zero
+  have hI : ∀ n, (maximalIdeal A ^ n • ⊤ : Submodule A A) = Ideal.span {ϖ ^ n} := fun n => by
+    rw [hϖ.maximalIdeal_eq, Ideal.span_singleton_pow, smul_eq_mul, Ideal.mul_top]
+  refine { prec' := fun e he => ?_ }
+  simp only [hI, SModEq.sub_mem, Ideal.mem_span_singleton'] at he ⊢
+  -- every `x` has some `n` with `ϖⁿ x ∈ A`
+  choose N hNx using fun x : K => show ∃ n, p ^ n * x ∈ Aₖ A K by
+    obtain ⟨a, n, rfl⟩ := exists_eq_div_pow hϖ x
+    exact ⟨n, a, by simp [hp, ← hpdef, mul_left_comm]⟩
+  set E : ℕ → K := fun n => algebraMap A K (e n) with hE
+  -- independence of `n`
+  have key : ∀ x n, p ^ n * x ∈ Aₖ A K → ∀ m, n ≤ m → E m * x - E n * x ∈ Aₖ A K := by
+    rintro x n ⟨b, hb⟩ m hnm
+    obtain ⟨t, ht⟩ := he hnm
+    refine ⟨-(t * b), ?_⟩
+    have := congrArg (algebraMap A K) ht
+    simp only [hE, Algebra.linearMap_apply, map_mul, map_pow, map_sub, map_neg, ← hpdef] at *
+    linear_combination (-x) * this - algebraMap A K t * hb
+  have well : ∀ x n, p ^ n * x ∈ Aₖ A K →
+      (Submodule.Quotient.mk (E (N x) * x) : KA A K) = Submodule.Quotient.mk (E n * x) :=
+    fun x n hn => by
+    rw [Submodule.Quotient.eq]
+    convert (Aₖ A K).sub_mem (key x n hn _ (le_max_left _ (N x)))
+      (key x _ (hNx x) _ (le_max_right n _)) using 1; ring
+  have mono : ∀ x n m, p ^ n * x ∈ Aₖ A K → n ≤ m → p ^ m * x ∈ Aₖ A K := by
+    rintro x n m hn hnm
+    obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le hnm
+    convert (Aₖ A K).smul_mem (ϖ ^ k) hn using 1
+    rw [Algebra.smul_def, map_pow, ← hpdef]; ring
+  let f : K →ₗ[A] KA A K :=
+    { toFun := fun x => Submodule.Quotient.mk (E (N x) * x)
+      map_add' := fun x y => by
+        have hx := mono x _ (N x + N y + N (x + y)) (hNx x) (by omega)
+        have hy := mono y _ (N x + N y + N (x + y)) (hNx y) (by omega)
+        rw [well x _ hx, well y _ hy, well (x + y) _ (by rw [mul_add]; exact add_mem hx hy),
+          ← Submodule.Quotient.mk_add, mul_add]
+      map_smul' := fun a x => by
+        rw [well (a • x) (N x) (by rw [mul_smul_comm]; exact (Aₖ A K).smul_mem a (hNx x)),
+          RingHom.id_apply, ← Submodule.Quotient.mk_smul, mul_smul_comm] }
+  have hf : ∀ x n, p ^ n * x ∈ Aₖ A K → f x = Submodule.Quotient.mk (E n * x) := well
+  obtain ⟨g, hg⟩ := H f
+  obtain ⟨L, hL⟩ : g 1 - E 0 ∈ Aₖ A K := by
+    rw [← Submodule.Quotient.eq, hg, hf 1 0 ⟨1, by simp⟩, mul_one]
+  refine ⟨L + e 0, fun n => ?_⟩
+  obtain ⟨a, ha⟩ : g (p ^ n)⁻¹ - E n * (p ^ n)⁻¹ ∈ Aₖ A K := by
+    rw [← Submodule.Quotient.eq, hg, hf _ n ⟨1, by simp [hp]⟩]
+  have h1 : g 1 = p ^ n * g (p ^ n)⁻¹ := by
+    rw [← map_pow, ← Algebra.smul_def, ← map_smul, Algebra.smul_def, map_pow, ← hpdef,
+      mul_inv_cancel₀ (pow_ne_zero _ hp)]
+  refine ⟨-a, IsFractionRing.injective A K ?_⟩
+  simp only [Algebra.linearMap_apply] at hL ha
+  simp only [map_mul, map_neg, map_pow, map_sub, map_add, ← hpdef, hL, h1, ha, hE]
+  field_simp
+  ring
+
+/-- For a discrete valuation ring, completeness is equivalent to `Ext¹_A(K, A) = 0`, in the form
+« every `A`-linear `K → K/A` lifts to `K` » (`lift_K` and `isAdicComplete_of_lift`). -/
+theorem isAdicComplete_iff_lift : IsAdicComplete (maximalIdeal A) A ↔
+    ∀ f : K →ₗ[A] KA A K, ∃ g : K →ₗ[A] K, ∀ x, Submodule.Quotient.mk (g x) = f x :=
+  ⟨fun _ f => let ⟨c, hc⟩ := lift_K f; ⟨LinearMap.mulLeft A c, fun x => (hc x).symm⟩,
+    isAdicComplete_of_lift⟩
+
 end Grothendieck.Folder101

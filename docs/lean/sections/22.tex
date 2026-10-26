@@ -151,7 +151,27 @@ Toute dérivation de $K$ tue les puissances $p$-ièmes, donc $dy = a_1\,dx$ dans
 \end{proof}
 
 \begin{remarque}
-La démonstration ne calcule pas $k'$ : elle établit seulement que $\partial/\partial y$ le tue, c'est-à-dire la $p$-liberté de $(x, y)$ sur $k'$ que la page~28 démontre par l'absurde. Le but est $\Omega_{K/k'}$, qui est le $\Omega^1_K$ de la page puisque $k'$ est formé de puissances $p$-ièmes ; l'identification n'est pas formalisée. Seule la spécialisation $a_i = 0$ pour $2 \leq i \leq p-1$, que la page~28 propose, est démontrée ; pour $p = 2$ c'est l'exemple entier.
+La démonstration ne calcule pas $k'$ : elle établit seulement que $\partial/\partial y$ le tue, c'est-à-dire la $p$-liberté de $(x, y)$ sur $k'$ que la page~28 démontre par l'absurde. Le but est $\Omega_{K/k'}$, qui est le $\Omega^1_K$ de la page puisque $k'$ est formé de puissances $p$-ièmes (lemme~\ref{thm:22-identification} ci-dessous). Pour $p = 2$ la spécialisation est l'exemple entier ; le cas général est le contre-exemple~\ref{thm:22-differentielles-general}.
 \end{remarque}
 
-Ne sont pas démontrés ici : la lissité, la non-ramification et l'étalitude formelles pour des topologies préadiques, et leurs critères de relèvement ; en particulier la moitié $t$-adique de l'obstruction ; dans le corollaire~3.5, la réduction à un système indexé par $\mathbb N$ ; les numéros~3.2 et~3.6 à~3.13 (algèbres de Cohen, homomorphismes réguliers) ; le \q{a fortiori \ldots\ sur $k$} de la page~23 ; le contre-exemple des pages~26 et~28 pour $a_2, \ldots, a_{p-1}$ non nuls ; les pages~1 à~8, 18 à~21, 25 et~27.
+\begin{encadre}
+\begin{lemme}[identification $\Omega_{K/k'} = \Omega_K$]\label{thm:22-identification}
+Soient $R \to S \to B$ des homomorphismes d'anneaux commutatifs, $B$ de caractéristique $p$, tels que l'image de $S$ dans $B$ soit formée de puissances $p$-ièmes. Alors $\Omega_{B/R} \to \Omega_{B/S}$ est bijective. En particulier $\Omega_K = \Omega_{K/\mathbb F_p} \to \Omega_{K/k'}$ est un isomorphisme pour tout $k' \subset K^p$.
+\end{lemme}
+\end{encadre}
+
+\begin{proof}
+La suite $B \otimes_S \Omega_{S/R} \to \Omega_{B/R} \to \Omega_{B/S} \to 0$ est exacte, et sa première flèche envoie $b \otimes ds$ sur $b\, d(w^p) = p\, b\, w^{p-1}\, dw = 0$ si $s$ a pour image $w^p$ ; elle est donc nulle (Lean : \texttt{map\_bijective\_of\_pow}, \texttt{omega\_kPrimeOf\_bijective}).
+\end{proof}
+
+\begin{encadre}
+\begin{contrexemple}[Grothendieck, pages 26 et 28, noyau des différentielles, l'exemple général\piste{22-differentials-kernel-counterexample}]\label{thm:22-differentielles-general}
+Soient $p$ un nombre premier, $K = \mathbb F_p(x, b_0, \ldots, b_{p-1})$, $a_i = b_i^p$, $y = \sum_{i=0}^{p-1} a_i x^i$, $k = \mathbb F_p(x, y) \subset K$ et $k' = k \cap K^p$. Alors $\Omega_{k/k'} \otimes_k K \to \Omega_K$ n'est pas injective ; de façon équivalente, $dy - y'\,dx$, où $y' = \sum_i i\, a_i x^{i-1}$, est dans le noyau de $\Omega_k \otimes_k K \to \Omega_K$ sans être dans le sous-$K$-espace engendré par les $dc \otimes 1$, $c \in k'$.
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+C'est l'argument de la spécialisation, valable pour tout plongement $k = \mathbb F_p(x, y) \to K$ avec $dy = y'\,dx$ pour toute dérivation de $K$ et $y' \notin k$ : si $c = w^p \in k'$, la règle de dérivation des fonctions composées pour $\partial_x$ donne $0 = \partial c/\partial x + y'\, \partial c/\partial y$, donc $\partial c/\partial y = 0$, et $\partial/\partial y$ fournit une forme linéaire qui tue les $dc \otimes 1$, $c \in k'$, et vaut $1$ sur $dy - y'\,dx$. Ici $dy = y'\,dx$ car les $a_i$ sont des puissances $p$-ièmes. Reste $y' \notin k$, conséquence de l'indépendance algébrique de $x, y, y'$ : la spécialisation $b_0 \mapsto T_1$, $b_1 \mapsto T_2$, $b_i \mapsto 0$ pour $i \geq 2$ envoie $(x, y, y')$ sur $(T_0, T_1^p + T_2^p T_0, T_2^p)$, le triplet de la spécialisation, dont l'indépendance est démontrée plus haut. On conclut comme pour $a_1$ (Lean : \texttt{contre\_exemple\_general}, \texttt{contre\_exemple\_general\_span}, \texttt{not\_injective\_to\_omega}, \texttt{ker\_not\_span}, \texttt{tripleG\_injective}).
+\end{proof}
+
+Ne sont pas démontrés ici : la lissité, la non-ramification et l'étalitude formelles pour des topologies préadiques, et leurs critères de relèvement ; en particulier la moitié $t$-adique de l'obstruction ; dans le corollaire~3.5, la réduction à un système indexé par $\mathbb N$ ; les numéros~3.2 et~3.6 à~3.13 (algèbres de Cohen, homomorphismes réguliers) ; le \q{a fortiori \ldots\ sur $k$} de la page~23 ; la seconde variante de la page~28, avec $a_1$ algébrique sur $\mathbb F$ ; les pages~1 à~8, 18 à~21, 25 et~27.

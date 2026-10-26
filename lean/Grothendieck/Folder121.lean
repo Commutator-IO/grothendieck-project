@@ -2,6 +2,7 @@ import Mathlib.Topology.Closure
 import Mathlib.Data.Finset.Powerset
 import Mathlib.Order.WellFounded
 import Mathlib.Order.CompleteLattice.Finset
+import Mathlib.Topology.Connected.Basic
 
 /-!
 # Folder 121, pages 3–16: the coarsest admissible cellular decomposition
@@ -488,5 +489,267 @@ one coarser than all the others. -/
 theorem page14 (hF : Tame F) (L : Finset (Set X)) (hL : ∀ Y ∈ L, Y ∈ F) :
     ∃ P, Good F L univ P ∧ ∀ Q, Good F L univ Q → Coarser P Q :=
   exists_coarsest hF hF.univ_mem isClosed_univ L hL
+
+end Grothendieck.Folder121
+
+/-!
+### Connected cells (page 16, condition f))
+
+Condition f) of page 9: a locally closed member `B ∖ C` (`B`, `C` closed members) has finitely
+many connected components, all in `F`. The remark of page 16: under a) to f), the proposition of
+page 14 holds with connected cells, the coarsest being taken among the decompositions with
+connected cells (`page16`, by `exists_coarsest_conn` on every closed member). The open cells of
+the induction step are replaced by their connected components; a component `V` of an open cell
+`U` satisfies `V̄ ∩ U ⊆ V`, which gives the frontier condition, and a connected cell of a
+competing decomposition lying in `U` lies in one component, which gives « la plus grossière ».
+-/
+
+namespace Grothendieck.Folder121
+
+open Set
+
+variable {X : Type*} [TopologicalSpace X] {F : Set (Set X)}
+
+/-- Condition f) (page 9): a locally closed member has finitely many connected components, all
+of them members. -/
+def CondF (F : Set (Set X)) : Prop :=
+  ∀ B ∈ F, ∀ C ∈ F, IsClosed B → IsClosed C →
+    (connectedComponentIn (B \ C) '' (B \ C)).Finite ∧
+      ∀ x ∈ B \ C, connectedComponentIn (B \ C) x ∈ F
+
+/-- A good decomposition with connected cells. -/
+def GoodC (F : Set (Set X)) (L : Finset (Set X)) (Z : Set X) (P : Finset (Set X)) : Prop :=
+  Good F L Z P ∧ ∀ c ∈ P, IsConnected c
+
+/-- One step of the induction with connected cells. -/
+theorem step_conn (hF : Tame F) (hf : CondF F) {Z : Set X} (hZF : Z ∈ F) (hZc : IsClosed Z)
+    (L : Finset (Set X)) (hL : ∀ Y ∈ L, Y ∈ F)
+    (IH : ∀ B, B ∈ F → IsClosed B → B ⊆ Z → Rare B Z → ∀ L' : Finset (Set X),
+      (∀ Y ∈ L', Y ∈ F) → ∃ P, GoodC F L' B P ∧ ∀ Q, GoodC F L' B Q → Coarser P Q) :
+    ∃ P, GoodC F L Z P ∧ ∀ Q, GoodC F L Z Q → Coarser P Q := by
+  classical
+  set X' := ⋃ Y ∈ L, bd Z (Y ∩ Z)
+  have hbd : ∀ Y ∈ L, bd Z (Y ∩ Z) ⊆ X' := fun Y hY =>
+    subset_biUnion_of_mem (u := fun Y => bd Z (Y ∩ Z)) hY
+  have hX'F : X' ∈ F :=
+    hF.biUnion_mem L _ fun Y hY => hF.bd_mem hZF (hF.inter_mem (hL Y hY) hZF)
+  have hX'c : IsClosed X' := isClosed_biUnion_finset fun Y _ => isClosed_bd Z _
+  have hX'Z : X' ⊆ Z := iUnion₂_subset fun Y _ =>
+    inter_subset_left.trans (closure_minimal inter_subset_right hZc)
+  have hX'r : Rare X' Z := rare_biUnion L _ fun Y hY =>
+    ⟨hF.rare_bd hZF (hF.inter_mem (hL Y hY) hZF) inter_subset_right, isClosed_bd Z _⟩
+  set U := (L.powerset.image (cell Z X' L)).filter (·.Nonempty)
+  have hU : ∀ c, c ∈ U ↔ (∃ S, S ⊆ L ∧ cell Z X' L S = c) ∧ c.Nonempty := by simp [U]
+  have hUsub : ∀ c ∈ U, c ⊆ Z \ X' := by
+    intro c hc
+    obtain ⟨⟨S, -, rfl⟩, -⟩ := (hU c).1 hc
+    exact fun y hy => ⟨hy.1, hy.2.1⟩
+  have hUmem : ∀ y ∈ Z, y ∉ X' → cell Z X' L (L.filter fun Y => y ∈ Y) ∈ U := fun y hy hy' =>
+    (hU _).2 ⟨⟨_, Finset.filter_subset _ _, rfl⟩, ⟨y, mem_cell_filter hy hy'⟩⟩
+  have hUU : ∀ c ∈ U, ∀ d ∈ U, (closure c ∩ d).Nonempty → c = d := by
+    intro c hc d hd ⟨x, hxc, hxd⟩
+    obtain ⟨⟨S, hS, rfl⟩, -⟩ := (hU c).1 hc
+    obtain ⟨⟨T, hT, rfl⟩, -⟩ := (hU d).1 hd
+    rw [eq_of_pattern hT hS (pattern_of_closure hbd hxd hxc)]
+  -- an open cell is locally closed, so condition f) applies to it
+  have hloc : ∀ u ∈ U, closure u \ X' = u := by
+    intro u hu
+    refine Subset.antisymm (fun y ⟨hy, hyX⟩ => ?_) fun y hy =>
+      ⟨subset_closure hy, (hUsub u hu hy).2⟩
+    have hyZ : y ∈ Z := closure_minimal (fun z hz => (hUsub u hu hz).1) hZc hy
+    rw [hUU u hu _ (hUmem y hyZ hyX) ⟨y, hy, mem_cell_filter hyZ hyX⟩]
+    exact mem_cell_filter hyZ hyX
+  have hfu : ∀ u ∈ U, (connectedComponentIn u '' u).Finite ∧
+      ∀ x ∈ u, connectedComponentIn u x ∈ F := fun u hu => by
+    obtain ⟨S, -, rfl⟩ := ((hU u).1 hu).1
+    have := hf _ (hF.closure_mem _ (hF.cell_mem S hZF hX'F hL)) _ hX'F isClosed_closure hX'c
+    rwa [hloc _ hu] at this
+  -- the connected components of the open cells
+  set W := (U.finite_toSet.biUnion fun u hu => (hfu u hu).1).toFinset
+  have hW : ∀ c, c ∈ W ↔ ∃ u ∈ U, ∃ x ∈ u, connectedComponentIn u x = c := by simp [W]
+  have hWcl : ∀ u ∈ U, ∀ x ∈ u, closure (connectedComponentIn u x) ∩ u ⊆
+      connectedComponentIn u x := fun u _ x hx =>
+    (isPreconnected_connectedComponentIn.subset_closure
+      (subset_inter subset_closure (connectedComponentIn_subset _ _)) inter_subset_left)
+      |>.subset_connectedComponentIn ⟨subset_closure (mem_connectedComponentIn hx),
+        hx⟩ inter_subset_right |>.trans (connectedComponentIn_eq
+          (mem_connectedComponentIn hx)).symm.subset
+  have hWsub : ∀ c ∈ W, c ⊆ Z \ X' := by
+    intro c hc
+    obtain ⟨u, hu, x, -, rfl⟩ := (hW c).1 hc
+    exact (connectedComponentIn_subset _ _).trans (hUsub u hu)
+  have hWF : ∀ c ∈ W, c ∈ F := by
+    intro c hc
+    obtain ⟨u, hu, x, hx, rfl⟩ := (hW c).1 hc
+    exact (hfu u hu).2 x hx
+  have hWconn : ∀ c ∈ W, IsConnected c := by
+    intro c hc
+    obtain ⟨u, -, x, hx, rfl⟩ := (hW c).1 hc
+    exact isConnected_connectedComponentIn_iff.2 hx
+  have hWmem : ∀ y ∈ Z, y ∉ X' →
+      connectedComponentIn (cell Z X' L (L.filter fun Y => y ∈ Y)) y ∈ W := fun y hy hy' =>
+    (hW _).2 ⟨_, hUmem y hy hy', y, mem_cell_filter hy hy', rfl⟩
+  have hWW : ∀ c ∈ W, ∀ d ∈ W, (closure c ∩ d).Nonempty → c = d := by
+    intro c hc d hd ⟨z, hzc, hzd⟩
+    obtain ⟨u, hu, x, hx, rfl⟩ := (hW c).1 hc
+    obtain ⟨v, hv, y, hy, rfl⟩ := (hW d).1 hd
+    obtain rfl := hUU u hu v hv
+      ⟨z, closure_mono (connectedComponentIn_subset _ _) hzc, connectedComponentIn_subset _ _ hzd⟩
+    rw [connectedComponentIn_eq (hWcl u hu x hx ⟨hzc, connectedComponentIn_subset _ _ hzd⟩),
+      connectedComponentIn_eq hzd]
+  set L' := L.image (· ∩ X') ∪ W.image (fun u => closure u ∩ X')
+  have hL'F : ∀ Y ∈ L', Y ∈ F := by
+    intro Y hY
+    rcases Finset.mem_union.1 hY with h | h
+    · obtain ⟨Y₀, hY₀, rfl⟩ := Finset.mem_image.1 h
+      exact hF.inter_mem (hL Y₀ hY₀) hX'F
+    · obtain ⟨u, hu, rfl⟩ := Finset.mem_image.1 h
+      exact hF.inter_mem (hF.closure_mem _ (hWF u hu)) hX'F
+  have hL'1 : ∀ Y ∈ L, Y ∩ X' ∈ L' := fun Y hY =>
+    Finset.mem_union_left _ (Finset.mem_image_of_mem _ hY)
+  have hL'2 : ∀ u ∈ W, closure u ∩ X' ∈ L' := fun u hu =>
+    Finset.mem_union_right _ (Finset.mem_image_of_mem (fun u => closure u ∩ X') hu)
+  obtain ⟨P', ⟨⟨hP', hP'F, hP'c⟩, hP'conn⟩, hP'min⟩ := IH X' hX'F hX'c hX'Z hX'r L' hL'F
+  have hP'X : ∀ c ∈ P', c ⊆ X' := fun c hc => hP'.subset hc
+  have hcl : ∀ c ∈ P', closure c ⊆ X' := fun c hc => closure_minimal (hP'X c hc) hX'c
+  have hPU : ∀ c ∈ P', ∀ d ∈ W, ¬ (closure c ∩ d).Nonempty := by
+    rintro c hc d hd ⟨x, hxc, hxd⟩
+    exact (hWsub d hd hxd).2 (hcl c hc hxc)
+  refine ⟨P' ∪ W, ⟨⟨⟨?_, ?_, ?_, ?_, ?_⟩, ?_, ?_⟩, ?_⟩, ?_⟩
+  · intro c hc
+    rcases Finset.mem_union.1 hc with h | h
+    exacts [hP'.nonempty c h, (hWconn c h).1]
+  · intro c hc d hd hcd
+    rcases Finset.mem_union.1 hc with hc | hc <;> rcases Finset.mem_union.1 hd with hd | hd
+    · exact hP'.disjoint c hc d hd hcd
+    · exact Set.disjoint_left.2 fun x hxc hxd => hPU c hc d hd ⟨x, subset_closure hxc, hxd⟩
+    · exact Set.disjoint_right.2 fun x hxd hxc => hPU d hd c hc ⟨x, subset_closure hxd, hxc⟩
+    · exact Set.disjoint_left.2 fun x hxc hxd => hcd (hWW c hc d hd ⟨x, subset_closure hxc, hxd⟩)
+  · rw [Finset.set_biUnion_union, hP'.cover]
+    have : ⋃ c ∈ W, c = Z \ X' := by
+      refine Subset.antisymm (iUnion₂_subset hWsub) fun y hy => ?_
+      exact mem_biUnion (hWmem y hy.1 hy.2) (mem_connectedComponentIn (mem_cell_filter hy.1 hy.2))
+    rw [this, union_sdiff_cancel hX'Z]
+  · intro c hc d hd hcd
+    rcases Finset.mem_union.1 hc with hc | hc <;> rcases Finset.mem_union.1 hd with hd | hd
+    · exact hP'.frontier c hc d hd hcd
+    · exact absurd hcd (hPU c hc d hd)
+    · obtain ⟨x, hxc, hxd⟩ := hcd
+      rcases hP'c _ (hL'2 c hc) d hd with h | h
+      · exact h.trans inter_subset_left
+      · exact absurd (Set.disjoint_left.1 h hxd) (fun h' => h' ⟨hxc, hP'X d hd hxd⟩)
+    · rw [← hWW c hc d hd hcd]; exact subset_closure
+  · intro c hc d hd hcd
+    rcases Finset.mem_union.1 hc with hc | hc <;> rcases Finset.mem_union.1 hd with hd | hd
+    · exact hP'.distinct c hc d hd hcd
+    · obtain ⟨y, hy⟩ := (hWconn d hd).1
+      exact absurd ⟨y, hcd ▸ subset_closure hy, hy⟩ (hPU c hc d hd)
+    · obtain ⟨y, hy⟩ := (hWconn c hc).1
+      exact absurd ⟨y, hcd.symm ▸ subset_closure hy, hy⟩ (hPU d hd c hc)
+    · obtain ⟨y, hy⟩ := (hWconn d hd).1
+      exact hWW c hc d hd ⟨y, hcd ▸ subset_closure hy, hy⟩
+  · intro c hc
+    rcases Finset.mem_union.1 hc with h | h
+    exacts [hP'F c h, hWF c h]
+  · intro Y hY c hc
+    rcases Finset.mem_union.1 hc with hc | hc
+    · rcases hP'c _ (hL'1 Y hY) c hc with h | h
+      · exact Or.inl (h.trans inter_subset_left)
+      · exact Or.inr (Set.disjoint_left.2 fun x hxc hxY =>
+          Set.disjoint_left.1 h hxc ⟨hxY, hP'X c hc hxc⟩)
+    · obtain ⟨u, hu, x, -, rfl⟩ := (hW c).1 hc
+      obtain ⟨⟨S, hS, rfl⟩, -⟩ := (hU u).1 hu
+      by_cases h : Y ∈ S
+      · exact Or.inl fun y hy => ((connectedComponentIn_subset _ _ hy).2.2 Y hY).2 h
+      · exact Or.inr (Set.disjoint_left.2 fun y hy hyY =>
+          h (((connectedComponentIn_subset _ _ hy).2.2 Y hY).1 hyY))
+  · intro c hc
+    rcases Finset.mem_union.1 hc with h | h
+    exacts [hP'conn c h, hWconn c h]
+  -- the decomposition is the coarsest
+  rintro Q ⟨⟨hQ, hQF, hQc⟩, hQconn⟩ q hq
+  have hdich : ∀ c ∈ Q, c ⊆ X' ∨ c ⊆ Z \ X' := by
+    intro c hc
+    by_cases hm : (c ∩ X').Nonempty
+    · obtain ⟨x, hxc, hxX⟩ := hm
+      obtain ⟨Y, hY, hxb⟩ := mem_iUnion₂.1 hxX
+      exact Or.inl ((subset_bd hQ (fun c hc => hQc Y hY c hc) hc ⟨x, hxc, hxb⟩).trans (hbd Y hY))
+    · exact Or.inr fun y hy => ⟨hQ.subset hc hy, fun hyX => hm ⟨y, hy, hyX⟩⟩
+  -- a cell of `Q` in the open part lies in the component of any of its points
+  have hQW : ∀ d ∈ Q, d ⊆ Z \ X' → ∀ y ∈ d,
+      d ⊆ connectedComponentIn (cell Z X' L (L.filter fun Y => y ∈ Y)) y := fun d hd hdU y hy =>
+    (hQconn d hd).2.subset_connectedComponentIn hy
+      (subset_cell (fun Y hY => hQc Y hY d hd) hdU hy)
+  rcases hdich q hq with hqX | hqU
+  · set Q' := Q.filter (· ⊆ X')
+    have hQ'Q : Q' ⊆ Q := Finset.filter_subset _ _
+    have hQ' : GoodC F L' X' Q' := by
+      refine ⟨⟨⟨fun c hc => hQ.nonempty c (hQ'Q hc),
+        fun c hc d hd => hQ.disjoint c (hQ'Q hc) d (hQ'Q hd), ?_,
+        fun c hc d hd => hQ.frontier c (hQ'Q hc) d (hQ'Q hd),
+        fun c hc d hd => hQ.distinct c (hQ'Q hc) d (hQ'Q hd)⟩,
+        fun c hc => hQF c (hQ'Q hc), ?_⟩, fun c hc => hQconn c (hQ'Q hc)⟩
+      · refine Subset.antisymm (iUnion₂_subset fun c hc => (Finset.mem_filter.1 hc).2)
+          fun x hx => ?_
+        obtain ⟨c, hc, hxc⟩ := hQ.exists_mem (hX'Z hx)
+        rcases hdich c hc with h | h
+        · exact mem_biUnion (Finset.mem_filter.2 ⟨hc, h⟩) hxc
+        · exact absurd hx (h hxc).2
+      · intro Y' hY' c hc
+        have hcX := (Finset.mem_filter.1 hc).2
+        rcases Finset.mem_union.1 hY' with h | h
+        · obtain ⟨Y, hY, rfl⟩ := Finset.mem_image.1 h
+          rcases hQc Y hY c (hQ'Q hc) with h' | h'
+          · exact Or.inl (subset_inter h' hcX)
+          · exact Or.inr (h'.mono_right inter_subset_left)
+        · obtain ⟨w, hw, rfl⟩ := Finset.mem_image.1 h
+          by_cases hm : (closure w ∩ c).Nonempty
+          · left
+            refine subset_inter ?_ hcX
+            have hw' : w ⊆ ⋃ s ∈ Q.filter (· ⊆ w), s := by
+              intro y hy
+              obtain ⟨u, hu, x, -, rfl⟩ := (hW w).1 hw
+              obtain ⟨⟨S, hS, rfl⟩, -⟩ := (hU u).1 hu
+              have hyu := connectedComponentIn_subset _ _ hy
+              obtain ⟨d, hd, hyd⟩ := hQ.exists_mem hyu.1
+              have hdU : d ⊆ Z \ X' := (hdich d hd).resolve_left fun h => hyu.2.1 (h hyd)
+              have := hQW d hd hdU y hyd
+              rw [filter_eq_of_mem_cell hS hyu, ← connectedComponentIn_eq hy] at this
+              exact mem_biUnion (Finset.mem_filter.2 ⟨hd, this⟩) hyd
+            obtain ⟨s, hs, hcs⟩ := hQ.of_closure (Finset.filter_subset _ _) (hQ'Q hc)
+              (hm.mono (inter_subset_inter_left _ (closure_mono hw')))
+            exact hcs.trans (closure_mono (Finset.mem_filter.1 hs).2)
+          · exact Or.inr (Set.disjoint_left.2 fun x hxc hx => hm ⟨x, hx.1, hxc⟩)
+    obtain ⟨p, hp, hqp⟩ := hP'min Q' hQ' q (Finset.mem_filter.2 ⟨hq, hqX⟩)
+    exact ⟨p, Finset.mem_union_left _ hp, hqp⟩
+  · obtain ⟨y, hy⟩ := hQ.nonempty q hq
+    exact ⟨_, Finset.mem_union_right _ (hWmem y (hqU hy).1 (hqU hy).2), hQW q hq hqU y hy⟩
+
+/-- Induction on condition e), with connected cells, on every closed member. -/
+theorem exists_coarsest_conn (hF : Tame F) (hf : CondF F) {Z : Set X} (hZF : Z ∈ F)
+    (hZc : IsClosed Z) (L : Finset (Set X)) (hL : ∀ Y ∈ L, Y ∈ F) :
+    ∃ P, GoodC F L Z P ∧ ∀ Q, GoodC F L Z Q → Coarser P Q := by
+  let R : Set X → Set X → Prop := fun B Z =>
+    (Z.Nonempty ∧ Z ∈ F ∧ IsClosed Z) ∧ (B ∈ F ∧ IsClosed B ∧ B ⊆ Z ∧ Rare B Z)
+  have hwf : WellFounded R := wellFounded_iff_isEmpty_descending_chain.2 ⟨fun ⟨f, hf⟩ => by
+    obtain ⟨n, hn⟩ := hF.dcc f (fun n => ⟨(hf n).1.2.1, (hf n).1.2.2⟩)
+      (fun n => ⟨(hf n).2.2.2.1, (hf n).2.2.2.2⟩)
+    exact (hf n).1.1.ne_empty hn⟩
+  induction Z using hwf.induction generalizing L with
+  | _ Z ih =>
+    rcases Z.eq_empty_or_nonempty with rfl | hne
+    · refine ⟨∅, ⟨⟨⟨by simp, by simp, by simp, by simp, by simp⟩, by simp, by simp [Compat]⟩,
+        by simp⟩, fun Q hQ q hq => ?_⟩
+      obtain ⟨x, hx⟩ := hQ.1.1.nonempty q hq
+      exact (hQ.1.1.subset hq hx).elim
+    · exact step_conn hF hf hZF hZc L hL fun B hBF hBc hBZ hBr L' hL' =>
+        ih B ⟨⟨hne, hZF, hZc⟩, hBF, hBc, hBZ, hBr⟩ hBF hBc L' hL'
+
+/-- **Page 16.** Under a) to f), for every finite family `L ⊂ F` there is an `F`-admissible
+cellular decomposition of `X` with connected cells of which the members of `L` are unions of
+cells, and among them one coarser than all the others. -/
+theorem page16 (hF : Tame F) (hf : CondF F) (L : Finset (Set X)) (hL : ∀ Y ∈ L, Y ∈ F) :
+    ∃ P, GoodC F L univ P ∧ ∀ Q, GoodC F L univ Q → Coarser P Q :=
+  exists_coarsest_conn hF hf hF.univ_mem isClosed_univ L hL
 
 end Grothendieck.Folder121

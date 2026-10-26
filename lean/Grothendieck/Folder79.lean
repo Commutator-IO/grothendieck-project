@@ -2197,3 +2197,121 @@ theorem octahedron_toSix (e : (ZMod 4)ˣ) :
 end OctahedronModel
 
 end Grothendieck.Folder79
+
+
+/-! ## The antipody of the octahedron is a homothety (pages 188 and 275, abstract form)
+
+For a graph isomorphic to the octahedron `K_{2,2,2}` the antipody (each vertex to
+the one other vertex not adjacent to it) is defined from the graph alone, so it
+commutes with every automorphism; it has the star of each vertex, hence satisfies
+the homothety condition (H1), and it is the only permutation `λ ≠ 1` commuting
+with `H` that moves a vertex to distance at most `2`. It does not satisfy the
+faithfulness (72), so it lies in no group `IsHomothetyGroup`. -/
+
+namespace Grothendieck.Folder79
+
+section OctahedronAntipody
+
+variable {S : Type*} {A : S → S → Prop} (e : S ≃ Fin 3 × Bool)
+
+/-- The antipody of a graph identified with `K_{2,2,2}` by `e`. -/
+def octAnti : Equiv.Perm S :=
+  e.symm.permCongr <|
+    Function.Involutive.toPerm (fun p : Fin 3 × Bool => (p.1, !p.2)) fun _ => by simp
+
+@[simp] theorem octAnti_apply (y : S) : octAnti e y = e.symm ((e y).1, !(e y).2) := rfl
+
+variable {e} (he : ∀ a b, A a b ↔ (e a).1 ≠ (e b).1)
+include he
+
+omit he in
+theorem octAnti_ne (y : S) : octAnti e y ≠ y := fun h => by
+  simpa using congrArg (·.2) (congrArg e h)
+
+/-- The non-neighbours of `y` are `y` and its antipode. -/
+theorem not_adj_iff_octAnti {y z : S} : ¬ A y z ↔ z = y ∨ z = octAnti e y := by
+  rw [he, not_not, ← e.apply_eq_iff_eq, octAnti_apply, ← e.apply_eq_iff_eq,
+    Equiv.apply_symm_apply]
+  rcases e z with ⟨a, b⟩; rcases e y with ⟨c, d⟩
+  cases b <;> cases d <;> simp [eq_comm]
+
+theorem star_octAnti (y : S) : star A (octAnti e y) = star A y := by
+  ext t; change A _ t ↔ A y t; simp [he]
+
+omit he in
+theorem octAnti_symm : (octAnti e)⁻¹ = octAnti e :=
+  Equiv.ext fun y => (octAnti e).injective (by simp [Equiv.Perm.inv_def])
+
+/-- Condition (H1): `{s, t}` is an edge iff `{λ s, λ⁻¹ t}` is one. -/
+theorem octAnti_homothety (s t : S) : A (octAnti e s) ((octAnti e)⁻¹ t) ↔ A s t := by
+  rw [octAnti_symm]; simp [he]
+
+/-- The antipode is at distance `2`. -/
+theorem octAnti_common_nbr (y : S) : ¬ A y (octAnti e y) ∧ ∃ t, A y t ∧ A t (octAnti e y) :=
+  ⟨(not_adj_iff_octAnti he).2 (Or.inr rfl), e.symm ((e y).1 + 1, true), by simp [he]⟩
+
+/-- The antipody commutes with every injective map preserving the graph. -/
+theorem octAnti_comm {g : S → S} (hg : ∀ a b, A (g a) (g b) ↔ A a b)
+    (hi : Function.Injective g) (y : S) : octAnti e (g y) = g (octAnti e y) :=
+  (((not_adj_iff_octAnti he).1 ((hg _ _).not.2 (octAnti_common_nbr he y).1)).resolve_left
+    (hi.ne (octAnti_ne y))).symm
+
+/-- A permutation moving every vertex to another vertex with the same star is the
+antipody. -/
+theorem eq_octAnti {l : Equiv.Perm S} (hl : ∀ y, l y ≠ y ∧ star A (l y) = star A y) :
+    l = octAnti e := by
+  have hn : ∀ y, ¬ A y y := by simp [he]
+  ext y
+  refine ((not_adj_iff_octAnti he).1 fun h => hn (l y) ?_).resolve_left (hl y).1
+  change l y ∈ star A (l y); rwa [(hl y).2]
+
+end OctahedronAntipody
+
+section OctahedronHomothety
+
+variable {H : Type*} [Group H] {U₀ : Subgroup H} {σ : H} {e : H ⧸ U₀ ≃ Fin 3 × Bool}
+
+/-- **The octahedral exception of page 188 is a homothety, in the abstract setting.**
+Let the coset graph `H/U₀` be the octahedron (`σ² ∈ U₀` is not needed). Its
+antipody commutes with `H`, satisfies the homothety condition (70 b), is not the identity, has the
+star of each vertex (so `A_λ = A`: it is strict), and moves each vertex to
+distance `2`. It fails the faithfulness (72), so it lies in no homothety group
+`IsHomothetyGroup`. -/
+theorem octAnti_isHomothety
+    (he : ∀ a b, IsArc (U₀ := U₀) (σ := σ) a b ↔ (e a).1 ≠ (e b).1) :
+    (∀ (h : H) x, octAnti e (h • x) = h • octAnti e x) ∧
+      (∀ s t, IsArc (σ := σ) s t → IsArc (σ := σ) (octAnti e s) ((octAnti e)⁻¹ t)) ∧
+      octAnti e ≠ 1 ∧ twistGraph (IsArc (σ := σ)) (octAnti e) = IsArc (σ := σ) ∧
+      (∀ x, ¬ IsArc (σ := σ) x (octAnti e x) ∧
+        ∃ t, IsArc (σ := σ) x t ∧ IsArc (σ := σ) t (octAnti e x)) ∧
+      (∃ u : H, u • s₀ U₀ = s₀ U₀ ∧ u • t₀ U₀ σ = octAnti e (t₀ U₀ σ)) ∧
+      ∀ Z, IsHomothetyGroup U₀ σ Z → octAnti e ∉ Z := by
+  have h72 : ∃ u : H, u • s₀ U₀ = s₀ U₀ ∧
+      u • t₀ U₀ σ = octAnti e (t₀ U₀ σ) :=
+    IsArc.stab_trans ⟨1, one_smul _ _, one_smul _ _⟩
+      ((he _ _).2 (by simpa using (he _ _).1 ⟨1, one_smul _ _, one_smul _ _⟩))
+  refine ⟨fun h => octAnti_comm he (isArc_smul_iff h) (MulAction.injective h),
+    fun s t => (octAnti_homothety he s t).2,
+    fun h => octAnti_ne (e := e) (s₀ U₀) (by rw [h]; rfl),
+    twistGraph_eq_self (star_octAnti he), octAnti_common_nbr he, h72, fun Z hZ hm => ?_⟩
+  obtain ⟨u, hu1, hu2⟩ := h72
+  exact octAnti_ne (e := e) (s₀ U₀) (by rw [hZ.faithful _ hm u hu1 hu2]; rfl)
+
+/-- **Page 188, the exception is the antipody.** In a connected coset graph whose
+stars are polygons of order `n ≥ 3`, an `H`-equivariant permutation `λ ≠ 1`
+moving some vertex to distance at most `2` is the antipody of the octahedron. -/
+theorem homothety_dist_le_two_eq {n : ℕ} {l : Equiv.Perm (H ⧸ U₀)} (hσ : σ * σ ∈ U₀)
+    (hl : ∀ (h : H) x, l (h • x) = h • l x) (hl1 : l ≠ 1) (hn : 2 < n)
+    (hpol : ∀ s, IsPolygon n
+      (onStar (IsArc (U₀ := U₀) (σ := σ)) (IsArc (U₀ := U₀) (σ := σ)) s))
+    (hconn : ∀ a b, Relation.ReflTransGen (IsArc (U₀ := U₀) (σ := σ)) a b) {x : H ⧸ U₀}
+    (hx : l x = x ∨ IsArc (U₀ := U₀) (σ := σ) x (l x) ∨
+      ∃ t, IsArc (U₀ := U₀) (σ := σ) x t ∧ IsArc (U₀ := U₀) (σ := σ) t (l x)) :
+    ∃ e : H ⧸ U₀ ≃ Fin 3 × Bool,
+      (∀ a b, IsArc (U₀ := U₀) (σ := σ) a b ↔ (e a).1 ≠ (e b).1) ∧ l = octAnti e := by
+  obtain ⟨-, ⟨e, he⟩, hy⟩ := homothety_dist_le_two hσ hl hl1 hn hpol hconn hx
+  exact ⟨e, he, eq_octAnti he hy⟩
+
+end OctahedronHomothety
+
+end Grothendieck.Folder79

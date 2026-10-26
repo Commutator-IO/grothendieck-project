@@ -20,6 +20,7 @@ import Mathlib.Data.Nat.Choose.Dvd
 import Grothendieck.Upstream.HasseDerivXPowMul
 import Grothendieck.Upstream.PolynomialIsCoprimeX
 import Grothendieck.Upstream.DerivationLieMulLeft
+import Mathlib.RingTheory.PicardGroup
 
 /-!
 # Folder 93, pages 72, 115–123: the Schwarzian difference with divided derivatives
@@ -1971,5 +1972,135 @@ theorem rigidity_alpha_nine [IsLocalRing A] [CharP A 3] (s : A[X])
   refine rigidity_alpha_local 3 2 α (by norm_num) (fun k hk3 hk9 => natCast_isUnit 3 ?_) s hs hN
   norm_num at hk9
   interval_cases k <;> decide
+
+end Grothendieck.Folder93.Alpha
+
+/-!
+# Folder 93, pages 121–123: the reduction for `Pic(A) = 0`
+
+`rigidity_alpha_pic`: the Proposition of pages 121–123 in `B = A[T]/(T^(p^N) − α)` for any
+`A` with `Pic(A) = 0`. The `A`-submodule `I = {x ∈ A + AT : s x ∈ A + AT}` of `B` (the
+denominators of the homographies equal to `s`) satisfies `c I ⊆ A` and `(1 − cT) I ⊆ A`, by the
+coefficient of `Y²` in the Taylor expansion of `s x`; it contains `c^(p^N − 1)` and
+`(1 − cT)^(p^N − 1)` (`rigidity_alpha`), and `α c^(p^N) + (1 − cT)^(p^N) = 1`. So
+`I · (Ac + A(1 − cT)) = A`: `I` is an invertible submodule of `B`, and `Pic(A) = 0` makes it
+`A u` with `u` a unit of `B` (`Submodule.ker_unitsToPic`). `rigidity_alpha_pic_of_gt`,
+`rigidity_alpha_pic_four`, `rigidity_alpha_pic_nine`: the cases `p > 3`, `p = 2`, `p = 3`.
+-/
+
+namespace Grothendieck.Folder93.Alpha
+
+open Polynomial
+
+local notation "D" => Polynomial.hasseDeriv
+
+variable {A : Type*} [CommRing A] (p n : ℕ) (α : A)
+
+/-- The Proposition of pages 121–123 in `B = A[T]/(T^(p^n) − α)` when `Pic(A) = 0`. -/
+theorem rigidity_alpha_pic [Subsingleton (CommRing.Pic A)] [Fact p.Prime] [CharP A p]
+    (hq : 3 < p ^ n) (hC : ∀ k, 3 ≤ k → k < p ^ n → IsUnit ((k.choose 3 : ℕ) : A)) (s : A[X])
+    (hs : IsUnit (AdjoinRoot.mk (P p n α) (D 1 s))) (hN : AdjoinRoot.mk (P p n α) (N s) = 0) :
+    ∃ a b c d : A,
+      AdjoinRoot.mk (P p n α) (s * (C c * X + C d)) = AdjoinRoot.mk (P p n α) (C a * X + C b) ∧
+      IsUnit (AdjoinRoot.mk (P p n α) (C c * X + C d)) := by
+  set π := AdjoinRoot.mk (P p n α)
+  set β := AdjoinRoot.root (P p n α)
+  obtain ⟨u, hu⟩ := hs
+  obtain ⟨g, hg⟩ : ∃ g, π g = ↑u⁻¹ :=
+    AdjoinRoot.induction_on (f := P p n α) (↑u⁻¹ : B p n α) fun g => ⟨g, rfl⟩
+  have hg1 : π (D 1 s * g) = 1 := by rw [map_mul, ← hu, hg, Units.mul_inv]
+  have : FaithfulSMul A (B p n α) :=
+    (faithfulSMul_iff_algebraMap_injective _ _).2 (of_injective p n α)
+  let I : Submodule A (B p n α) :=
+    { carrier := {x | ∃ c d a b : A,
+        x = π (C c * X + C d) ∧ π (s * (C c * X + C d)) = π (C a * X + C b)}
+      add_mem' := by
+        rintro _ _ ⟨c, d, a, b, rfl, h⟩ ⟨c', d', a', b', rfl, h'⟩
+        refine ⟨c + c', d + d', a + a', b + b', by simp only [map_add, map_mul]; ring, ?_⟩
+        simp only [map_add, map_mul] at h h' ⊢
+        linear_combination h + h'
+      zero_mem' := ⟨0, 0, 0, 0, by simp⟩
+      smul_mem' := by
+        rintro l _ ⟨c, d, a, b, rfl, h⟩
+        refine ⟨l * c, l * d, l * a, l * b, ?_, ?_⟩ <;>
+          simp only [Algebra.smul_def, AdjoinRoot.algebraMap_eq, AdjoinRoot.of, RingHom.comp_apply,
+            map_add, map_mul] at h ⊢ <;> [ring; linear_combination π (C l) * h] }
+  set cb := π (denom s g 1 0)
+  have hcb : cb = -(π (D 2 s) * π g) := by simp [cb, denom]
+  have key : ∀ x ∈ I, (∃ y : A, π (C y) = x * cb) ∧ ∃ y : A, π (C y) = x * (1 - cb * β) := by
+    rintro _ ⟨c, d, a, b, rfl, h⟩
+    have h2 := X_pow_dvd_iff.1 (θ_of_mk_eq_zero p n α (sub_eq_zero.2 h)) 2 (by omega)
+    simp only [map_sub, map_mul, map_add, θ_X, θ_C, coeff_sub, coeff_add, mul_add, coeff_mul_C,
+      coeff_C, ← mul_assoc, coeff_mul_X, θ_coeff] at h2
+    norm_num [← hasseDeriv_one] at h2
+    have e : π (C c * X + C d) * cb = π (C c) := by
+      rw [hcb]; simp only [π, map_mul, map_add, AdjoinRoot.mk_C, AdjoinRoot.mk_X] at hg1 h2 ⊢
+      linear_combination (-π g) * h2 + AdjoinRoot.of (P p n α) c * hg1
+    refine ⟨⟨c, e.symm⟩, d, ?_⟩
+    rw [mul_sub, mul_one, ← mul_assoc, e]; simp [π, β]
+  obtain ⟨a₁, b₁, c₁, d₁, h1, h1', γ, hγ⟩ := rigidity_alpha p n α hq hC s g hg1 hN 1 0
+  obtain ⟨a₂, b₂, c₂, d₂, h2, h2', -⟩ := rigidity_alpha p n α hq hC s g hg1 hN 0 1
+  have hm1 : cb ^ (p ^ n - 1) ∈ I := ⟨c₁, d₁, a₁, b₁, h1'.symm, h1⟩
+  have e2 : π (denom s g 0 1) = 1 - cb * β := by rw [hcb]; simp [π, β, denom]
+  have hm2 : (1 - cb * β) ^ (p ^ n - 1) ∈ I := ⟨c₂, d₂, a₂, b₂, by rw [h2', e2], h2⟩
+  let J : Submodule A (B p n α) := Submodule.span A {cb, 1 - cb * β}
+  have hIJ : I * J = 1 := by
+    apply le_antisymm
+    · refine Submodule.mul_le.2 fun x hx y hy => ?_
+      obtain ⟨l, m, rfl⟩ := Submodule.mem_span_pair.1 hy
+      obtain ⟨⟨y₁, e₁⟩, y₂, e₂⟩ := key x hx
+      refine Submodule.mem_one.2 ⟨l * y₁ + m * y₂, ?_⟩
+      rw [mul_add, mul_smul_comm, mul_smul_comm, ← e₁, ← e₂]
+      simp [Algebra.smul_def, π]
+    · rw [Submodule.one_le]
+      have : (1 : B p n α) =
+          α • (cb ^ (p ^ n - 1) * cb) + (1 - cb * β) ^ (p ^ n - 1) * (1 - cb * β) := by
+        rw [← pow_succ, ← pow_succ, Nat.sub_add_cancel (q_pos p n), sub_pow_char_pow, mul_pow, hγ,
+          root_pow, one_pow]
+        simp [Algebra.smul_def]; ring
+      rw [this]
+      exact add_mem (Submodule.smul_mem _ _ (Submodule.mul_mem_mul hm1 (Submodule.subset_span
+        (by simp)))) (Submodule.mul_mem_mul hm2 (Submodule.subset_span (by simp)))
+  obtain ⟨v, hv⟩ :
+      Units.mkOfMulEqOne I J hIJ ∈ (Units.map (Submodule.spanSingleton A).toMonoidHom).range := by
+    rw [← Submodule.ker_unitsToPic, MonoidHom.mem_ker]; exact Subsingleton.elim _ _
+  obtain ⟨c, d, a, b, e, h⟩ : (v : B p n α) ∈ I := by
+    rw [← show _ = I from congrArg Units.val hv]; exact Submodule.mem_span_singleton_self _
+  exact ⟨a, b, c, d, h, e ▸ v.isUnit⟩
+
+/-- `p > 3`, `B = A[T]/(T^p − α)` (page 122), `Pic(A) = 0`. -/
+theorem rigidity_alpha_pic_of_gt [Subsingleton (CommRing.Pic A)] [hp : Fact p.Prime]
+    [CharP A p] (hp3 : 3 < p) (s : A[X]) (hs : IsUnit (AdjoinRoot.mk (P p 1 α) (D 1 s)))
+    (hN : AdjoinRoot.mk (P p 1 α) (N s) = 0) :
+    ∃ a b c d : A,
+      AdjoinRoot.mk (P p 1 α) (s * (C c * X + C d)) = AdjoinRoot.mk (P p 1 α) (C a * X + C b) ∧
+      IsUnit (AdjoinRoot.mk (P p 1 α) (C c * X + C d)) := by
+  refine rigidity_alpha_pic p 1 α (by simpa using hp3) (fun k hk3 hkp => natCast_isUnit p
+    fun h => ?_) s hs hN
+  have := (Nat.Prime.dvd_factorial hp.out).1 <| by
+    rw [← Nat.choose_mul_factorial_mul_factorial hk3, mul_assoc]; exact h.mul_right _
+  simp at hkp; omega
+
+/-- `p = 2`, `B = A[T]/(T^4 − α)` (page 123), `Pic(A) = 0`. -/
+theorem rigidity_alpha_pic_four [Subsingleton (CommRing.Pic A)] [CharP A 2] (s : A[X])
+    (hs : IsUnit (AdjoinRoot.mk (P 2 2 α) (D 1 s))) (hN : AdjoinRoot.mk (P 2 2 α) (N s) = 0) :
+    ∃ a b c d : A,
+      AdjoinRoot.mk (P 2 2 α) (s * (C c * X + C d)) = AdjoinRoot.mk (P 2 2 α) (C a * X + C b) ∧
+      IsUnit (AdjoinRoot.mk (P 2 2 α) (C c * X + C d)) :=
+  have : Fact (Nat.Prime 2) := ⟨Nat.prime_two⟩
+  rigidity_alpha_pic 2 2 α (by norm_num) (fun k hk3 hk4 => by
+    obtain rfl : k = 3 := by norm_num at hk4; omega
+    simp) s hs hN
+
+/-- `p = 3`, `B = A[T]/(T^9 − α)` (page 123, right-hand column), `Pic(A) = 0`. -/
+theorem rigidity_alpha_pic_nine [Subsingleton (CommRing.Pic A)] [CharP A 3] (s : A[X])
+    (hs : IsUnit (AdjoinRoot.mk (P 3 2 α) (D 1 s))) (hN : AdjoinRoot.mk (P 3 2 α) (N s) = 0) :
+    ∃ a b c d : A,
+      AdjoinRoot.mk (P 3 2 α) (s * (C c * X + C d)) = AdjoinRoot.mk (P 3 2 α) (C a * X + C b) ∧
+      IsUnit (AdjoinRoot.mk (P 3 2 α) (C c * X + C d)) :=
+  have : Fact (Nat.Prime 3) := ⟨Nat.prime_three⟩
+  rigidity_alpha_pic 3 2 α (by norm_num) (fun k hk3 hk9 => natCast_isUnit 3 <| by
+    norm_num at hk9; interval_cases k <;> decide) s hs hN
+
 
 end Grothendieck.Folder93.Alpha

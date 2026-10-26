@@ -22,7 +22,21 @@ Soient $a$, $b$ la base de $\xi$, de poids $0$ et $p$, avec $Xa = b$ et $Xb = 0$
 Cet isomorphisme rend triangulaire, à coefficient dominant $1$, l'écriture de $\xi^n$ sur les $e_{0,i}$ : $\xi \cdot e_{0,k} = e_{0,k+1} + \sigma_p\, e_{0,k-1}$ donne par récurrence $\xi^n = e_{0,n+1} + \sum_{i \leq n} c_{ni}\, e_{0,i}$, soit le $\alpha = 0$ que la page~197 obtient par les poids. La preuve n'utilise que l'inversibilité de $k$, ni la caractéristique nulle ni $p \geq 1$ : l'énoncé est plus général que celui dont la page a besoin (\texttt{xi\_tensor\_string}).
 \end{remarque}
 
-Ne sont pas démontrés ici : que toute représentation indécomposable soit une chaîne (lemmes~1 et~2 des pages~192 à~194), et l'anneau $R(G) = \mathbf Z[\mathbf Z][\xi]$ lui-même, qui demande cette classification et le théorème de Krull--Schmidt, absents de mathlib ; le passage du groupe algébrique à son algèbre de Lie.
+\begin{enonce}[Grothendieck, pages 192 à 194, lemmes 1 et 2\piste{10-split-ring-ga-rtimes-gm}]
+En caractéristique nulle et pour $p \geq 1$, soit $V$ une représentation de dimension finie non nulle, avec $[Y, X] = pX$, sur laquelle $Y$ est diagonalisable à valeurs propres entières, $V = \bigoplus_{n \in \mathbf Z} \operatorname{Ker}(Y - n)$. Si $V$ est indécomposable, c'est-à-dire si ses seuls endomorphismes idempotents sont $0$ et $1$, alors $V \simeq e_{n,k}$ pour un $n \in \mathbf Z$ et un $k \geq 1$.
+\end{enonce}
+
+\begin{proof}
+Comme $X$ envoie le poids $c$ sur le poids $c + p$ et que les poids de $V$ sont en nombre fini, $X$ est nilpotent ; soit $m$ tel que $X^{m+1} = 0 \neq X^m$. Prenons un vecteur propre $v$ de $Y$, de poids $n$, avec $X^m v \neq 0$, et une coordonnée $\psi$ dans une base propre de $Y$ telle que $\psi(X^m v) = 1$ : on a $\psi \circ Y = \mu\, \psi$, et $\mu = n + pm$ est le poids de $X^m v$. Comme $X^a v$ est de poids $n + pa$, on obtient $\psi(X^a v) = 0$ pour $a \neq m$, la caractéristique étant nulle et $p \neq 0$. Posons $P(x) = \sum_{l=0}^{m} \psi(X^{m-l} x)\, X^l v$. Alors $P$ commute à $X$ (car $X^{m+1} = 0$) et à $Y$ (car $X^{a} Y = (Y - pa) X^{a}$), et $P(X^l v) = X^l v$, de sorte que $P$ est un idempotent non nul : $P = 1$. Les $X^l v$, $0 \leq l \leq m$, engendrent donc $V$ ; ils sont libres, puisque $\psi(X^{m-l'} X^l v) = \delta_{l l'}$, et forment une chaîne de type $e_{n,m+1}$.
+\end{proof}
+
+\noindent Lean : \href{\leanblobmain/Folder10.lean}{\texttt{indecomposable\_is\_string}} (avec une base propre de $Y$) et \href{\leanblobmain/Folder10.lean}{\texttt{indecomposable\_is\_string'}} (avec $\sum_n \operatorname{Ker}(Y - n) = V$).
+
+\begin{remarque}
+La preuve ne suit pas celle de la page, qui construit la suite $E_0 \to E_1 \to \cdots$ et montre par récurrence que les $u_i$ sont injectifs, puis bijectifs : elle scinde directement la plus longue chaîne par un supplémentaire stable. L'hypothèse que $Y$ soit semi-simple est celle que la lecture tire du cas~II pour une représentation rationnelle de $G$ ; on ne peut l'omettre au niveau de l'algèbre de Lie, puisque $X = 0$ et $Y$ un bloc de Jordan de taille $2$ donnent une représentation indécomposable qui n'est pas une chaîne. Il en va de même de $p \geq 1$ : pour $p = 0$, $X$ n'est plus forcément nilpotent.
+\end{remarque}
+
+Ne sont pas démontrés ici : le passage d'une représentation rationnelle du groupe algébrique $G$ à la représentation $(V, X, Y)$ de son algèbre de Lie, avec $Y$ semi-simple à poids entiers, et l'anneau $R(G) = \mathbf Z[\mathbf Z][\xi]$ lui-même, qui demande encore le théorème de Krull--Schmidt, absent de mathlib.
 
 \subsection*{Page 65 : le $H^2$ d'un tore de norme un}
 

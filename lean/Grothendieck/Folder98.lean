@@ -5,6 +5,9 @@ import Mathlib.Algebra.Group.Subgroup.Defs
 import Mathlib.SetTheory.Cardinal.NatCard
 import Mathlib.Algebra.Group.Action.Defs
 import Mathlib.CategoryTheory.Iso
+import Mathlib.Topology.Covering.Basic
+import Mathlib.Topology.Algebra.ConstMulAction
+import Mathlib.Algebra.Group.Action.Sum
 
 /-!
 # Folder 98: the axioms of a theory of norms in the model of G-sets (pages 10–12), and the
@@ -409,5 +412,238 @@ theorem corollaire5_iff (x y : Φ Ω) :
     exact ⟨Ω, 𝟙 _, σ.hom, by dsimp only; rw [hid]⟩
 
 end Classes
+
+/-! ### Example III (page 13): coverings and `Φ(E) = X ×^Γ E`
+
+`Γ` acts on a space `X` by homeomorphisms, and every point has a neighbourhood `U` with
+`gU ∩ U = ∅` for `g ≠ 1` (the action is free and properly discontinuous in the sense of
+covering spaces, the reading of « non ramifié »). `Φ(E)` is the quotient of `X × E` by the
+diagonal action, `E` a discrete `Γ`-set. -/
+
+section ExampleIII
+
+open Topology
+
+variable {Γ : Type*} [Group Γ] {X : Type*} [MulAction Γ X]
+  {E F : Type*} [MulAction Γ E] [MulAction Γ F]
+
+variable (Γ X) in
+/-- `Φ(E) = X ×^Γ E`, the contracted product. -/
+abbrev Phi (E : Type*) [MulAction Γ E] := Quotient (MulAction.orbitRel Γ (X × E))
+
+variable (Γ) in
+/-- The class of `(x, e)` in `X ×^Γ E`. -/
+def Phi.mk (x : X) (e : E) : Phi Γ X E := Quotient.mk _ (x, e)
+
+theorem Phi.mk_eq_mk {x y : X} {e e' : E} :
+    Phi.mk Γ x e = Phi.mk Γ y e' ↔ ∃ g : Γ, g • y = x ∧ g • e' = e := by
+  simp [Phi.mk, Quotient.eq, MulAction.orbitRel_apply, MulAction.mem_orbit_iff, Prod.ext_iff]
+
+theorem Phi.mk_smul (g : Γ) (x : X) (e : E) : Phi.mk Γ (g • x) (g • e) = Phi.mk Γ x e :=
+  Phi.mk_eq_mk.2 ⟨g, rfl, rfl⟩
+
+@[elab_as_elim]
+theorem Phi.ind {P : Phi Γ X E → Prop} (h : ∀ x e, P (Phi.mk Γ x e)) (q : Phi Γ X E) : P q :=
+  Quotient.ind (fun p => h p.1 p.2) q
+
+variable (Γ X) in
+/-- `Φ(f) : X ×^Γ E → X ×^Γ F` for an equivariant `f : E → F`. -/
+def Phi.map (f : E → F) (hf : ∀ (g : Γ) e, f (g • e) = g • f e) : Phi Γ X E → Phi Γ X F :=
+  Quotient.map (Prod.map id f) fun _ b ⟨g, h⟩ => ⟨g, h ▸ Prod.ext rfl (hf g b.2).symm⟩
+
+@[simp] theorem Phi.map_mk {f : E → F} (hf : ∀ (g : Γ) e, f (g • e) = g • f e) (x : X) (e : E) :
+    Phi.map Γ X f hf (Phi.mk Γ x e) = Phi.mk Γ x (f e) := rfl
+
+/-- The points of `Φ(E)` over `[x, e']` are the `[x, i]`, `f i = e'`. -/
+theorem Phi.map_eq_mk {f : E → F} (hf : ∀ (g : Γ) e, f (g • e) = g • f e) (x : X) (e' : F)
+    (p : Phi Γ X E) : Phi.map Γ X f hf p = Phi.mk Γ x e' ↔ ∃ i, f i = e' ∧ Phi.mk Γ x i = p := by
+  induction p using Phi.ind with | h y e => ?_
+  refine ⟨fun h => ?_, by rintro ⟨i, rfl, h⟩; rw [← h]; rfl⟩
+  obtain ⟨g, rfl, hg⟩ := Phi.mk_eq_mk.1 h.symm
+  exact ⟨g • e, by rw [hf, hg], Phi.mk_smul g y e⟩
+
+/-- For a free action, `i ↦ [x, i]` is injective. -/
+theorem Phi.mk_injective (hfree : ∀ (g : Γ) (x : X), g • x = x → g = 1) (x : X) :
+    Function.Injective (Phi.mk Γ x : E → Phi Γ X E) := fun i j h => by
+  obtain ⟨g, hg, rfl⟩ := Phi.mk_eq_mk.1 h
+  rw [hfree g x hg, one_smul]
+
+/-- Example III, the hypothesis of page 13 (« on suppose que `Φ` transforme les morphismes de
+degré `r` en morphismes de degré `r` »): for a free action, `Φ` preserves degrees. -/
+theorem hasDeg_phi (hfree : ∀ (g : Γ) (x : X), g • x = x → g = 1) {f : E → F}
+    (hf : ∀ (g : Γ) e, f (g • e) = g • f e) {r : ℕ} (hr : HasDeg f r) :
+    HasDeg (Phi.map Γ X f hf) r := by
+  classical
+  refine hasDeg_of_finset (fun q => (fib hr q.out.2).image (Phi.mk Γ q.out.1)) (fun q p => ?_)
+    fun q => (Finset.card_image_of_injective _ (Phi.mk_injective hfree _)).trans (card_fib ..)
+  conv_rhs => rw [← q.out_eq]
+  simp only [Finset.mem_image, mem_fib]
+  exact (Phi.map_eq_mk hf _ _ p).symm
+
+/-- `Φ` commutes with finite sums: `X ×^Γ (E ⊔ F) ≃ (X ×^Γ E) ⊔ (X ×^Γ F)`. -/
+def Phi.sumEquiv : Phi Γ X (E ⊕ F) ≃ Phi Γ X E ⊕ Phi Γ X F where
+  toFun := Quotient.lift (fun p => p.2.elim (.inl <| Phi.mk Γ p.1 ·) (.inr <| Phi.mk Γ p.1 ·))
+    fun _ b ⟨g, h⟩ => by subst h; obtain ⟨x, e | e⟩ := b <;> exact congrArg _ (Phi.mk_smul ..)
+  invFun := Sum.elim (Phi.map Γ X Sum.inl fun _ _ => rfl) (Phi.map Γ X Sum.inr fun _ _ => rfl)
+  left_inv := Phi.ind fun x e => by cases e <;> rfl
+  right_inv := by rintro (q | q) <;> induction q using Phi.ind <;> rfl
+
+/-! The page goes on: `Φ` takes canonical morphisms to canonical morphisms, and breaks off.
+`Sym^r_F(E)` is a `Γ`-set, `Can_{E/F}` is equivariant (`can_smul`), and `Φ(Can_{E/F})`, followed
+by the comparison `X ×^Γ Sym^r_F(E) → Sym^r_{Φ F}(Φ E)`, is `Can_{Φ E/Φ F}`. -/
+
+/-- `Sym^r_F(E)` is a `Γ`-set when `f` is equivariant. -/
+@[reducible] def SymY.mulAction {f : E → F} (hf : ∀ (g : Γ) e, f (g • e) = g • f e) (r : ℕ) :
+    MulAction Γ (SymY f r) where
+  smul g p := ⟨g • p.1, p.2.1.map (g • ·), by simp [p.2.2.1], fun x hx => by
+    obtain ⟨x', hx', rfl⟩ := Multiset.mem_map.1 hx
+    rw [hf, p.2.2.2 x' hx']⟩
+  one_smul p := SymY.ext (one_smul ..) (by
+    change Multiset.map (fun x => (1 : Γ) • x) p.2.1 = p.2.1; simp)
+  mul_smul g h p := SymY.ext (mul_smul ..) (by
+    change Multiset.map (fun x => (g * h) • x) p.2.1 = (p.2.1.map (h • ·)).map (g • ·)
+    simp [mul_smul])
+
+/-- `Can_{E/F}` is equivariant. -/
+theorem can_smul' {f : E → F} (hf : ∀ (g : Γ) e, f (g • e) = g • f e) {r : ℕ} (hr : HasDeg f r)
+    (g : Γ) (y : F) : letI := SymY.mulAction hf r; Can hr (g • y) = g • Can hr y :=
+  SymY.ext rfl (can_smul hr hf g y)
+
+/-- The comparison `X ×^Γ Sym^r_F(E) → Sym^r_{Φ F}(Φ E)`, `[x, (e', m)] ↦ ([x, e'], [x, m])`. -/
+def Phi.symComp {f : E → F} (hf : ∀ (g : Γ) e, f (g • e) = g • f e) (r : ℕ) :
+    letI := SymY.mulAction hf r; Phi Γ X (SymY f r) → SymY (Phi.map Γ X f hf) r :=
+  letI := SymY.mulAction hf r
+  Quotient.lift (fun p => ⟨Phi.mk Γ p.1 p.2.1, p.2.2.1.map (Phi.mk Γ p.1), by simp [p.2.2.2.1],
+      fun _ h => by
+        obtain ⟨i, hi, rfl⟩ := Multiset.mem_map.1 h
+        rw [Phi.map_mk, p.2.2.2.2 i hi]⟩)
+    fun a b ⟨g, h⟩ => by
+      subst h
+      refine SymY.ext (Phi.mk_smul ..) ?_
+      change (b.2.2.1.map (g • ·)).map (Phi.mk Γ (g • b.1)) = b.2.2.1.map (Phi.mk Γ b.1)
+      simp [Phi.mk_smul]
+
+/-- Example III, the claim on which page 13 breaks off: `Φ` takes `Can_{E/F}` to
+`Can_{Φ E/Φ F}`, through the comparison `Phi.symComp`. -/
+theorem phi_can (hfree : ∀ (g : Γ) (x : X), g • x = x → g = 1) {f : E → F}
+    (hf : ∀ (g : Γ) e, f (g • e) = g • f e) {r : ℕ} (hr : HasDeg f r) (q : Phi Γ X F) :
+    letI := SymY.mulAction hf r
+    Phi.symComp hf r (Phi.map Γ X (Can hr) (can_smul' hf hr) q) =
+      Can (hasDeg_phi hfree hf hr) q := by
+  induction q using Phi.ind with | h x e' => ?_
+  refine SymY.ext rfl ?_
+  change (fib hr e').val.map (Phi.mk Γ x) = (fib (hasDeg_phi hfree hf hr) _).val
+  refine (Multiset.Nodup.ext ((fib hr e').nodup.map (Phi.mk_injective hfree x))
+    (fib _ _).nodup).2 fun p => ?_
+  simp only [Multiset.mem_map, Finset.mem_val, mem_fib, Phi.map_eq_mk]
+
+/-- For a free action the comparison is bijective: `X ×^Γ Sym^r_F(E) ≅ Sym^r_{Φ F}(Φ E)`. -/
+theorem Phi.symComp_bijective (hfree : ∀ (g : Γ) (x : X), g • x = x → g = 1) {f : E → F}
+    (hf : ∀ (g : Γ) e, f (g • e) = g • f e) (r : ℕ) :
+    letI := SymY.mulAction hf r; Function.Bijective (Phi.symComp (X := X) hf r) := by
+  let := SymY.mulAction hf r
+  constructor
+  · intro a b hab
+    induction a using Phi.ind with | h x p => ?_
+    induction b using Phi.ind with | h y p' => ?_
+    obtain ⟨e', m, hm⟩ := p
+    obtain ⟨e'', n, hn⟩ := p'
+    have h2 : m.map (Phi.mk Γ x) = n.map (Phi.mk Γ y) := congrArg (fun s => s.2.1) hab
+    obtain ⟨g, hgx, hge⟩ := Phi.mk_eq_mk.1 (congrArg Sigma.fst hab)
+    refine Phi.mk_eq_mk.2 ⟨g, hgx, SymY.ext hge (Multiset.map_injective (Phi.mk_injective hfree x) ?_)⟩
+    change g • y = x at hgx
+    change (n.map (g • ·)).map _ = _
+    rw [h2, ← hgx]
+    simp [Phi.mk_smul]
+  · rintro ⟨q, M, hM, hMq⟩
+    obtain ⟨⟨x, e'⟩, rfl⟩ := Quotient.mk_surjective q
+    have hpt p (hp : p ∈ M) : ∃ i, f i = e' ∧ Phi.mk Γ x i = p :=
+      (Phi.map_eq_mk hf x e' p).1 (hMq p hp)
+    refine ⟨Phi.mk Γ x ⟨e', M.pmap (fun _ h => Classical.choose h) hpt, by simpa using hM,
+      fun i hi => ?_⟩, SymY.ext rfl ?_⟩
+    · obtain ⟨p, hp, rfl⟩ := Multiset.mem_pmap.1 hi
+      exact (Classical.choose_spec (hpt p hp)).1
+    · change (M.pmap _ hpt).map (Phi.mk Γ x) = M
+      rw [Multiset.map_pmap]
+      exact (Multiset.pmap_congr M fun p hp _ _ => (Classical.choose_spec (hpt p hp)).2).trans
+        ((Multiset.pmap_eq_map _ id M hpt).trans M.map_id)
+
+section Topology
+
+variable [TopologicalSpace X] [ContinuousConstSMul Γ X] [TopologicalSpace E] [DiscreteTopology E]
+  [TopologicalSpace F] [DiscreteTopology F]
+
+omit [ContinuousConstSMul Γ X] [DiscreteTopology E] in
+theorem Phi.continuous_mk (e : E) : Continuous (Phi.mk Γ · e : X → Phi Γ X E) :=
+  continuous_quotient_mk'.comp (continuous_id.prodMk continuous_const)
+
+/-- `x ↦ [x, e]` is open, the quotient by a group action being open. -/
+theorem Phi.isOpenMap_mk (e : E) : IsOpenMap (Phi.mk Γ · e : X → Phi Γ X E) := by
+  have : ContinuousConstSMul Γ E := ⟨fun _ => continuous_of_discreteTopology⟩
+  refine (isOpenMap_quotient_mk'_mul (Γ := Γ) (T := X × E)).comp fun U hU => ?_
+  convert hU.prod (isOpen_discrete {e}) using 1
+  ext ⟨x, e'⟩
+  simp [eq_comm, and_comm]
+
+omit [ContinuousConstSMul Γ X] [DiscreteTopology F] in
+theorem Phi.continuous_map {f : E → F} (hf : ∀ (g : Γ) e, f (g • e) = g • f e) :
+    Continuous (Phi.map Γ X f hf) :=
+  (continuous_id.prodMap continuous_of_discreteTopology).quotient_map' _
+
+/-- Example III: for `Γ` acting on `X` with every point having a neighbourhood disjoint from its
+translates, `Φ` takes every equivariant map of discrete `Γ`-sets to a covering map; by
+`hasDeg_phi`, one with `r` sheets when the map has degree `r`. -/
+theorem isCoveringMap_phi
+    (hdisj : ∀ x : X, ∃ U ∈ 𝓝 x, ∀ g : Γ, ((g • ·) '' U ∩ U).Nonempty → g = 1)
+    {f : E → F} (hf : ∀ (g : Γ) e, f (g • e) = g • f e) : IsCoveringMap (Phi.map Γ X f hf) := by
+  intro q
+  induction q using Phi.ind with | h x e' => ?_
+  obtain ⟨U₀, hU₀, hd₀⟩ := hdisj x
+  have hU : IsOpen (interior U₀) := isOpen_interior
+  have hxU : x ∈ interior U₀ := mem_interior_iff_mem_nhds.2 hU₀
+  have hd : ∀ (g : Γ), ∀ y ∈ interior U₀, ∀ z ∈ interior U₀, g • z = y → g = 1 :=
+    fun g y hy z hz h => hd₀ g ⟨y, ⟨z, interior_subset hz, h⟩, interior_subset hy⟩
+  have hV : IsOpen ((Phi.mk Γ · e' : X → Phi Γ X F) '' interior U₀) :=
+    Phi.isOpenMap_mk e' _ hU
+  let W (i : f ⁻¹' {e'}) := (Phi.mk Γ · i.1 : X → Phi Γ X E) '' interior U₀
+  have hexh : Phi.map Γ X f hf ⁻¹' ((Phi.mk Γ · e') '' interior U₀) ⊆ ⋃ i, W i := by
+    rintro p ⟨y, hy, hp⟩
+    obtain ⟨i, hi, rfl⟩ := (Phi.map_eq_mk hf y e' p).1 hp.symm
+    exact Set.mem_iUnion.2 ⟨⟨i, hi⟩, y, hy, rfl⟩
+  rcases isEmpty_or_nonempty (f ⁻¹' {e'}) with hE | hne
+  · refine (IsEvenlyCovered.of_preimage_eq_empty Empty (hV.mem_nhds ⟨x, hxU, rfl⟩)
+      (Set.eq_empty_of_subset_empty (hexh.trans (by simp)))).to_isEvenlyCovered_preimage
+  have : Nonempty (Phi Γ X F → Phi Γ X E) := ⟨fun _ => Phi.mk Γ x hne.some.1⟩
+  refine (IsEvenlyCovered.of_trivialization (t := hV.trivializationDiscrete W _
+    (fun i S hS => ⟨fun h => ?_, fun h => ?_⟩) (fun i => ?_) (fun i => ?_) (fun i j hij => ?_) hexh)
+    ⟨x, hxU, rfl⟩).to_isEvenlyCovered_preimage
+  · exact (h.preimage (Phi.continuous_map hf)).inter (Phi.isOpenMap_mk i.1 _ hU)
+  · have : S = (Phi.mk Γ · e') '' (interior U₀ ∩ (Phi.mk Γ · i.1) ⁻¹'
+        (Phi.map Γ X f hf ⁻¹' S ∩ W i)) := by
+      ext w
+      refine ⟨fun hw => ?_, ?_⟩
+      · obtain ⟨y, hy, rfl⟩ := hS hw
+        refine ⟨y, ⟨hy, ?_, y, hy, rfl⟩, rfl⟩
+        change Phi.mk Γ y (f i.1) ∈ S
+        rwa [show f i.1 = e' from i.2]
+      · rintro ⟨y, ⟨-, hy, -⟩, rfl⟩
+        change Phi.mk Γ y (f i.1) ∈ S at hy
+        rwa [show f i.1 = e' from i.2] at hy
+    rw [this]
+    exact Phi.isOpenMap_mk e' _ (hU.inter (h.preimage (Phi.continuous_mk i.1)))
+  · rintro _ ⟨y, hy, rfl⟩ _ ⟨z, hz, rfl⟩ h
+    obtain ⟨g, hg, -⟩ := Phi.mk_eq_mk.1 (h : Phi.mk Γ y (f i.1) = Phi.mk Γ z (f i.1))
+    rw [hd g y hy z hz hg, one_smul] at hg
+    exact congrArg (Phi.mk Γ · i.1) hg.symm
+  · rintro _ ⟨y, hy, rfl⟩
+    exact ⟨_, ⟨y, hy, rfl⟩, congrArg (Phi.mk Γ y) i.2⟩
+  · refine Set.disjoint_left.2 fun _ ⟨y, hy, h1⟩ ⟨z, hz, h2⟩ => hij ?_
+    obtain ⟨g, hg, h⟩ := Phi.mk_eq_mk.1 (h2.trans h1.symm)
+    rw [hd g z hz y hy hg, one_smul] at h
+    exact Subtype.ext h
+
+end Topology
+
+end ExampleIII
 
 end Grothendieck.Folder98

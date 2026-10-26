@@ -1560,4 +1560,193 @@ theorem trivLi_four_iff (h2 : (2 : K) ≠ 0) (h3 : (3 : K) ≠ 0) {ζ : K}
   ⟨coboundary_der_of_trivLi, fun ⟨h, hh, hc⟩ =>
     trivLi_of_dvd (by simpa using six_dvd h2 h3 hζ m h hh hc)⟩
 
+
+/-! ## The Coxeter relations of `𝔖₅` and `𝔖₆`
+
+The sections on `n = 5` and `n = 6` give the substitutions and their factors on the adjacent
+transpositions only, and work with words (`wAct`, `wCoc`). They satisfy the Coxeter relations of
+type `A`: `s_i² = 1`, `s_i s_j s_i = s_j s_i s_j` for `|i − j| = 1` and `s_i s_j = s_j s_i` for
+`|i − j| ≥ 2`, both for the substitution and for the factor composed by the cocycle rule
+(`CoxRel`; `coxRel_cL`, `coxRel_c5`, `coxRel_cL6`, `coxRel_c6`). So the maps
+`(x, t) ↦ (s x, c(s)(x) t)` of the trivial line bundle over `M_{0,n}(K)` define an action of the
+Coxeter group of type `A_{n−1}` (`CoxRel.lift`, Mathlib's `CoxeterSystem.lift`), and the
+substitution and the factor of a word depend only on its image in that group
+(`CoxRel.wAct_eq`), on every field. That the Coxeter group of type `A_{n−1}` is `𝔖_n` is
+classical; Mathlib does not state it. -/
+
+/-- The Coxeter relations of type `A_n` for substitutions `act` of `V` and factors `c`, on the
+generators: `s_i² = 1`, the braid relation for `j + 1 = i` and commutation for `j + 1 < i`,
+each for the substitution and for the factor by the cocycle rule. -/
+structure CoxRel {α : Type*} (n : ℕ) (V : α → Prop) (act : Fin n → α → α) (c : Fin n → α → K) :
+    Prop where
+  maps : ∀ i x, V x → V (act i x)
+  sq : ∀ i x, V x → act i (act i x) = x ∧ c i (act i x) * c i x = 1
+  braid : ∀ i j : Fin n, (j : ℕ) + 1 = i → ∀ x, V x →
+    act i (act j (act i x)) = act j (act i (act j x)) ∧
+      c i (act j (act i x)) * c j (act i x) * c i x = c j (act i (act j x)) * c i (act j x) * c j x
+  comm : ∀ i j : Fin n, (j : ℕ) + 1 < i → ∀ x, V x →
+    act i (act j x) = act j (act i x) ∧ c i (act j x) * c j x = c j (act i x) * c i x
+
+variable {α : Type*} {n : ℕ} {V : α → Prop} {act : Fin n → α → α} {c : Fin n → α → K}
+
+/-- The generator `s_i` on the trivial line bundle over `V`: `(x, t) ↦ (s_i x, c(s_i)(x) t)`. -/
+def bun (hV : ∀ i x, V x → V (act i x)) (c : Fin n → α → K) (i : Fin n) :
+    Function.End ({x // V x} × K) :=
+  fun q => (⟨act i q.1, hV i _ q.1.2⟩, c i q.1 * q.2)
+
+/-- The maps `bun` satisfy the relations `(s_i s_j)^{m_{ij}} = 1` of the Coxeter matrix of
+type `A_n` (`m_{ii} = 1`, `m_{ij} = 3` for `|i − j| = 1`, `2` otherwise). -/
+theorem CoxRel.isLiftable (h : CoxRel n V act c) :
+    (CoxeterMatrix.A n).IsLiftable (bun h.maps c) := by
+  have sq i : bun h.maps c i * bun h.maps c i = 1 := funext fun ⟨⟨x, hx⟩, t⟩ =>
+    Prod.ext (Subtype.ext (h.sq i x hx).1) (by
+      change c i (act i x) * (c i x * t) = t; linear_combination t * (h.sq i x hx).2)
+  have br {i j : Fin n} (hij : (j : ℕ) + 1 = i) : bun h.maps c i * (bun h.maps c j *
+      bun h.maps c i) = bun h.maps c j * (bun h.maps c i * bun h.maps c j) :=
+    funext fun ⟨⟨x, hx⟩, t⟩ => Prod.ext (Subtype.ext (h.braid i j hij x hx).1) (by
+      change c i (act j (act i x)) * (c j (act i x) * (c i x * t)) =
+        c j (act i (act j x)) * (c i (act j x) * (c j x * t))
+      linear_combination t * (h.braid i j hij x hx).2)
+  have cm {i j : Fin n} (hij : (j : ℕ) + 1 < i) : bun h.maps c i * bun h.maps c j =
+      bun h.maps c j * bun h.maps c i := funext fun ⟨⟨x, hx⟩, t⟩ =>
+    Prod.ext (Subtype.ext (h.comm i j hij x hx).1) (by
+      change c i (act j x) * (c j x * t) = c j (act i x) * (c i x * t)
+      linear_combination t * (h.comm i j hij x hx).2)
+  have can {a : Function.End ({x // V x} × K)} (ha : a * a = 1) X : a * (a * X) = X := by
+    rw [← mul_assoc, ha, one_mul]
+  have three {a b : Function.End ({x // V x} × K)} (ha : a * a = 1) (hb : b * b = 1)
+      (e : a * (b * a) = b * (a * b)) : (a * b) ^ 3 = 1 :=
+    calc (a * b) ^ 3 = a * (b * a) * (b * (a * b)) := by
+          simp only [pow_succ, pow_zero, one_mul, mul_assoc]
+      _ = 1 := by rw [e]; simp only [mul_assoc, can ha, can hb, hb]
+  have two {a b : Function.End ({x // V x} × K)} (ha : a * a = 1) (hb : b * b = 1)
+      (e : a * b = b * a) : (a * b) ^ 2 = 1 :=
+    calc (a * b) ^ 2 = a * (b * a) * b := by simp only [pow_two, mul_assoc]
+      _ = 1 := by rw [← e]; simp only [can ha, hb]
+  intro i j
+  simp only [CoxeterMatrix.A, Matrix.of_apply]
+  split_ifs with h1 h2
+  · subst h1; rw [pow_one, sq]
+  · rcases h2 with h2 | h2
+    · exact three (sq i) (sq j) (br h2)
+    · exact three (sq i) (sq j) (br h2).symm
+  · rcases lt_or_gt_of_ne (show (j : ℕ) ≠ i from fun e => h1 (Fin.ext e.symm)) with h3 | h3
+    · exact two (sq i) (sq j) (cm (by omega))
+    · exact two (sq i) (sq j) (cm (by omega)).symm
+
+/-- The action of the Coxeter group of type `A_n` on the trivial line bundle over `V`. -/
+def CoxRel.lift (h : CoxRel n V act c) :
+    (CoxeterMatrix.A n).Group →* Function.End ({x // V x} × K) :=
+  (CoxeterMatrix.A n).toCoxeterSystem.lift ⟨_, h.isLiftable⟩
+
+/-- A word acts by its substitution and its factor. -/
+theorem CoxRel.lift_word (h : CoxRel n V act c) (w : List (Fin n)) (x : {x // V x}) (t : K) :
+    (h.lift (w.map (CoxeterMatrix.A n).toCoxeterSystem.simple).prod (x, t)).1.1 =
+        wAct act w x ∧
+      (h.lift (w.map (CoxeterMatrix.A n).toCoxeterSystem.simple).prod (x, t)).2 =
+        wCoc act c w x * t := by
+  induction w with
+  | nil => exact ⟨rfl, (one_mul t).symm⟩
+  | cons i w ih =>
+    rw [List.map_cons, List.prod_cons, map_mul, CoxRel.lift, CoxeterSystem.lift_apply_simple]
+    exact ⟨congrArg (act i) ih.1, by simp only [wCoc, ← ih.1, ← ih.2, mul_assoc]; rfl⟩
+
+/-- **The words pass to the group**: two words with the same image in the Coxeter group of
+type `A_n` have the same substitution and the same factor. -/
+theorem CoxRel.wAct_eq (h : CoxRel n V act c) {w w' : List (Fin n)}
+    (e : (w.map (CoxeterMatrix.A n).toCoxeterSystem.simple).prod =
+      (w'.map (CoxeterMatrix.A n).toCoxeterSystem.simple).prod) {x : α} (hx : V x) :
+    wAct act w x = wAct act w' x ∧ wCoc act c w x = wCoc act c w' x := by
+  have h1 := h.lift_word w ⟨x, hx⟩ 1
+  have h2 := h.lift_word w' ⟨x, hx⟩ 1
+  rw [e] at h1
+  exact ⟨h1.1.symm.trans h2.1, by simpa using h1.2.symm.trans h2.2⟩
+
+lemma U5_ne {p : K × K} (h : U5 p) : p.1 ≠ 0 ∧ p.1 - 1 ≠ 0 ∧ p.2 ≠ 0 ∧ p.2 - 1 ≠ 0 ∧
+    p.1 - p.2 ≠ 0 :=
+  ⟨h.1, sub_ne_zero.2 h.2.1, h.2.2.1, sub_ne_zero.2 h.2.2.2.1, sub_ne_zero.2 h.2.2.2.2⟩
+
+lemma U6_ne {p : K × K × K} (h : U6 p) : p.1 ≠ 0 ∧ p.1 - 1 ≠ 0 ∧ p.2.1 ≠ 0 ∧ p.2.1 - 1 ≠ 0 ∧
+    p.1 - p.2.1 ≠ 0 ∧ p.2.2 ≠ 0 ∧ p.2.2 - 1 ≠ 0 ∧ p.1 - p.2.2 ≠ 0 ∧ p.2.1 - p.2.2 ≠ 0 :=
+  ⟨h.1.1, sub_ne_zero.2 h.1.2.1, h.1.2.2.1, sub_ne_zero.2 h.1.2.2.2.1,
+    sub_ne_zero.2 h.1.2.2.2.2, h.2.1.2.2.1, sub_ne_zero.2 h.2.1.2.2.2.1,
+    sub_ne_zero.2 h.2.1.2.2.2.2, sub_ne_zero.2 h.2.2⟩
+
+lemma act4_U5 (i : Fin 3) {p : K × K} (hp : U5 p) : U5 (act4 i p) := act5_U5 _ hp
+
+lemma act6s_U6 (i : Fin 4) {p : K × K × K} (hp : U6 p) : U6 (act6s i p) := act6_U6 _ hp
+
+section
+
+attribute [local simp] act5 cL act4 c5 act6 cL6 act6s c6
+
+/-- Closes the components left once all intermediate points are substituted. -/
+macro "cox_close" : tactic => `(tactic| (split_ands <;> first | trivial | ring))
+
+set_option hygiene false in
+/-- Checks `s_i² = 1`: the intermediate point is a variable `q`, the denominators are cleared
+in `q`, then `q` is substituted and they are cleared in `x`. -/
+macro "cox_sq " act:ident hU:ident hne:ident : tactic => `(tactic| (
+  have h1 := $hU i hx
+  generalize e1 : $act i x = q at *
+  have := $hne hx; have := $hne h1
+  casesm* _ ∧ _
+  fin_cases i <;> simp [Prod.ext_iff] <;> (try field_simp) <;> simp at e1 <;> subst e1 <;>
+    dsimp only <;> (try field_simp) <;> cox_close))
+
+set_option hygiene false in
+/-- Checks the braid relation, one level of intermediate points at a time. -/
+macro "cox_braid " act:ident hU:ident hne:ident : tactic => `(tactic| (
+  have h1 := $hU i hx; have h2 := $hU j h1; have h3 := $hU j hx; have h4 := $hU i h3
+  generalize e1 : $act i x = q at *; generalize e2 : $act j q = r at *
+  generalize e3 : $act j x = q' at *; generalize e4 : $act i q' = r' at *
+  have := $hne hx; have := $hne h1; have := $hne h2; have := $hne h3; have := $hne h4
+  casesm* _ ∧ _
+  fin_cases i <;> fin_cases j <;> simp at hij <;> simp [Prod.ext_iff] <;> (try field_simp) <;>
+    simp at e2 e4 <;> subst e2 e4 <;> dsimp only <;> (try field_simp) <;>
+    simp at e1 e3 <;> subst e1 e3 <;> dsimp only <;> (try field_simp) <;> cox_close))
+
+set_option hygiene false in
+/-- Checks the commutation of distant generators. -/
+macro "cox_comm " act:ident hU:ident hne:ident : tactic => `(tactic| (
+  have h1 := $hU j hx; have h3 := $hU i hx
+  generalize e1 : $act j x = q at *; generalize e3 : $act i x = q' at *
+  have := $hne hx; have := $hne h1; have := $hne h3
+  casesm* _ ∧ _
+  fin_cases i <;> fin_cases j <;> simp at hij <;> simp [Prod.ext_iff] <;> (try field_simp) <;>
+    simp at e1 e3 <;> subst e1 e3 <;> dsimp only <;> (try field_simp) <;> cox_close))
+
+/-- **The Coxeter relations of `𝔖₅`** for the substitutions `act5` and the factors `cL` of
+`L`, checked with the intermediate points as variables, clearing the denominators one level at
+a time. -/
+theorem coxRel_cL : CoxRel 4 U5 (act5 (K := K)) cL where
+  maps i _ := act5_U5 i
+  sq i x hx := by cox_sq act5 act5_U5 U5_ne
+  braid i j hij x hx := by cox_braid act5 act5_U5 U5_ne
+  comm i j hij x hx := by cox_comm act5 act5_U5 U5_ne
+
+/-- **The Coxeter relations of `𝔖₄`** for `s₁, s₂, s₃` and the factors `c5` of `L₅`. -/
+theorem coxRel_c5 : CoxRel 3 U5 (act4 (K := K)) c5 where
+  maps i _ := act4_U5 i
+  sq i x hx := by cox_sq act4 act4_U5 U5_ne
+  braid i j hij x hx := by cox_braid act4 act4_U5 U5_ne
+  comm i j hij x hx := by cox_comm act4 act4_U5 U5_ne
+
+/-- **The Coxeter relations of `𝔖₆`** for the substitutions `act6` and the factors `cL6`. -/
+theorem coxRel_cL6 : CoxRel 5 U6 (act6 (K := K)) cL6 where
+  maps i _ := act6_U6 i
+  sq i x hx := by cox_sq act6 act6_U6 U6_ne
+  braid i j hij x hx := by cox_braid act6 act6_U6 U6_ne
+  comm i j hij x hx := by cox_comm act6 act6_U6 U6_ne
+
+/-- **The Coxeter relations of `𝔖₅`** for `s₁, …, s₄` on `M_{0,6}` and the factors `c6` of
+`L₆`. -/
+theorem coxRel_c6 : CoxRel 4 U6 (act6s (K := K)) c6 where
+  maps i _ := act6s_U6 i
+  sq i x hx := by cox_sq act6s act6s_U6 U6_ne
+  braid i j hij x hx := by cox_braid act6s act6s_U6 U6_ne
+  comm i j hij x hx := by cox_comm act6s act6s_U6 U6_ne
+
+end
+
 end Grothendieck.Folder146

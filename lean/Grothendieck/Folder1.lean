@@ -1983,3 +1983,289 @@ theorem sum_singularValues_rpow_add_le (u v : E →ₗ[ℂ] F) (n : ℕ) {p : �
 end SigmaSystem
 
 end Grothendieck.Folder1
+
+/-!
+## Pages 71–73: the system (16) over `ℝ`, and Prop. 3 as a supremum (finding `1-sigma-nm-system`)
+
+* `sigma_system_real`: (16) for every `m` and `n` for linear maps between finite-dimensional
+  *real* inner product spaces, hence (15) (`prod_one_add_singularValues_add_le_real`) and the
+  subadditivity of `∑_{i<n} s_i^p`, `0 < p < 1` (`sum_singularValues_rpow_add_le_real`). The
+  proof complexifies: `cplx u` is the matrix of `u` in orthonormal bases, read over `ℂ`; the
+  characteristic polynomial of `(cplx u)* (cplx u)` is that of `u* u` mapped to `ℂ`
+  (`charpoly_map`), so their eigenvalues, hence the singular values, agree
+  (`eigenvalues_eq_of_charpoly_map`, `singularValues_cplx`), and `cplx` is additive.
+* `isGreatest_norm_alpha_comp`: **Prop. 3** in finite dimension over `ℂ`: `σ_n^m(u)` is the
+  largest value of `|α_m(w u)|` over the linear maps `w : F → E` with `‖w z‖ ≤ ‖z‖` and
+  `rank w ≤ n` (`α_m` in any basis of `E`, `alpha_toMatrix_eq`). The upper bound
+  (`norm_alpha_comp_le`) writes the matrix of `w u` in the Schmidt basis of `w*` as
+  `D N`, `α_m(D N) = α_m(N D)`, and `N D` is a compression `(⟪y_i, u x_j⟫)` by families
+  orthogonal, of norm `≤ 1` and zero from `n` on (`norm_alpha_cmat_le`, through the
+  factorisation `cmat_eq`, Cauchy–Schwarz `norm_alpha_mul_conjTranspose_le_sqrt` and the
+  interlacing bound); it is attained by `w₀ = ∑_{j<n} e_j ⟨f_j, ·⟩` (`wmax`).
+
+Not formalised: the second form `sup α_m(|w u|)` of Prop. 3, Prop. 3 over `ℝ`, the trace-class
+formula (14), compact operators, and the optimality claim of page 73.
+-/
+
+namespace Grothendieck.Folder1
+
+open Finset Module InnerProductSpace Matrix Polynomial
+open scoped MatrixOrder ComplexOrder ComplexConjugate
+
+section RealSigmaSystem
+
+/-- Two self-adjoint operators, one real and one complex, whose characteristic polynomials
+correspond under `ℝ → ℂ`, have the same eigenvalues. -/
+theorem eigenvalues_eq_of_charpoly_map {E E' : Type*} [NormedAddCommGroup E]
+    [InnerProductSpace ℝ E] [FiniteDimensional ℝ E] [NormedAddCommGroup E']
+    [InnerProductSpace ℂ E'] [FiniteDimensional ℂ E'] {T : E →ₗ[ℝ] E} {T' : E' →ₗ[ℂ] E'}
+    (hT : T.IsSymmetric) (hT' : T'.IsSymmetric) {d : ℕ} (hd : finrank ℝ E = d)
+    (hd' : finrank ℂ E' = d) (h : T'.charpoly = T.charpoly.map (algebraMap ℝ ℂ)) :
+    hT.eigenvalues hd = hT'.eigenvalues hd' := by
+  rw [← List.ofFn_inj, ← hT.sort_roots_charpoly_eq_eigenvalues, ←
+    hT'.sort_roots_charpoly_eq_eigenvalues, h, hT.splits_charpoly.roots_map, Multiset.map_map]
+  congr 2
+
+variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [FiniteDimensional ℝ E]
+  {F : Type*} [NormedAddCommGroup F] [InnerProductSpace ℝ F] [FiniteDimensional ℝ F]
+
+/-- The complexification of a real linear map, as the complex matrix of `u` in orthonormal
+bases. -/
+noncomputable def cplx (u : E →ₗ[ℝ] F) :
+    EuclideanSpace ℂ (Fin (finrank ℝ E)) →ₗ[ℂ] EuclideanSpace ℂ (Fin (finrank ℝ F)) :=
+  toEuclideanLin ((LinearMap.toMatrix (stdOrthonormalBasis ℝ E).toBasis
+    (stdOrthonormalBasis ℝ F).toBasis u).map (algebraMap ℝ ℂ))
+
+theorem cplx_add (u v : E →ₗ[ℝ] F) : cplx (u + v) = cplx u + cplx v := by
+  simp [cplx, Matrix.map_add]
+
+theorem singularValues_cplx (u : E →ₗ[ℝ] F) : (cplx u).singularValues = u.singularValues := by
+  have hd : finrank ℂ (EuclideanSpace ℂ (Fin (finrank ℝ E))) = finrank ℝ E :=
+    finrank_euclideanSpace_fin
+  have hc : (LinearMap.adjoint (cplx u) ∘ₗ cplx u).charpoly =
+      (LinearMap.adjoint u ∘ₗ u).charpoly.map (algebraMap ℝ ℂ) := by
+    rw [cplx, ← toEuclideanLin_conjTranspose_eq_adjoint]
+    simp only [toEuclideanLin_eq_toLin_orthonormal]
+    rw [← Matrix.toLin_mul, charpoly_toLin,
+      ← LinearMap.charpoly_toMatrix _ (stdOrthonormalBasis ℝ E).toBasis,
+      LinearMap.toMatrix_comp _ (stdOrthonormalBasis ℝ F).toBasis, LinearMap.toMatrix_adjoint,
+      ← charpoly_map]
+    congr 1
+    rw [Matrix.map_mul]
+    congr 1
+    ext i j
+    simp
+  ext i
+  rcases lt_or_ge i (finrank ℝ E) with hi | hi
+  · rw [(cplx u).singularValues_of_lt hd hi, u.singularValues_of_lt rfl hi,
+      eigenvalues_eq_of_charpoly_map _ _ rfl hd hc]
+  · rw [(cplx u).singularValues_of_finrank_le (hd.symm ▸ hi), u.singularValues_of_finrank_le hi]
+
+theorem sigma_cplx (n m : ℕ) (u : E →ₗ[ℝ] F) : sigma n m (cplx u) = sigma n m u := by
+  simp only [sigma, singularValues_cplx]
+
+/-- **The system (16) of page 71 over `ℝ`**, for every `m` and `n`. -/
+theorem sigma_system_real (u v : E →ₗ[ℝ] F) (n m : ℕ) :
+    sigma n m (u + v) ≤ ∑ p ∈ range (m + 1), sigma n p u * sigma n (m - p) v := by
+  simpa only [← cplx_add, sigma_cplx] using sigma_system (cplx u) (cplx v) n m
+
+/-- The product form (15) over `ℝ`, for every `n`. -/
+theorem prod_one_add_singularValues_add_le_real (u v : E →ₗ[ℝ] F) (n : ℕ) {r : ℝ}
+    (hr : 0 ≤ r) :
+    ∏ i ∈ range n, (1 + r * (u + v).singularValues i) ≤
+      (∏ i ∈ range n, (1 + r * u.singularValues i)) *
+        ∏ i ∈ range n, (1 + r * v.singularValues i) :=
+  prod_le_of_sigma_system u v n (fun m _ => sigma_system_real u v n m) hr
+
+/-- Page 129 over `ℝ`: `∑_{i<n} s_i(u+v)^p ≤ ∑_{i<n} s_i(u)^p + ∑_{i<n} s_i(v)^p`, `0 < p < 1`. -/
+theorem sum_singularValues_rpow_add_le_real (u v : E →ₗ[ℝ] F) (n : ℕ) {p : ℝ} (hp0 : 0 < p)
+    (hp1 : p < 1) :
+    ∑ i ∈ range n, (u + v).singularValues i ^ p ≤
+      ∑ i ∈ range n, u.singularValues i ^ p + ∑ i ∈ range n, v.singularValues i ^ p :=
+  sum_singularValues_rpow_add_le_of_prod u v n hp0 hp1 fun _ hr =>
+    prod_one_add_singularValues_add_le_real u v n hr
+
+end RealSigmaSystem
+
+section PropositionThree
+
+/-- The determinant form of Cauchy–Schwarz, summed over the principal minors:
+`|α_m(H G*)| ≤ √α_m(H H*) · √α_m(G G*)`. -/
+theorem norm_alpha_mul_conjTranspose_le_sqrt {o ι : Type*} [Fintype o] [DecidableEq o]
+    [Fintype ι] (H G : Matrix o ι ℂ) (m : ℕ) :
+    ‖alpha m (H * Gᴴ)‖ ≤ √(alpha m (H * Hᴴ)).re * √(alpha m (G * Gᴴ)).re := by
+  have key : ∀ (X : Matrix o ι ℂ) (K : Finset o),
+      0 ≤ (det ((X * Xᴴ).submatrix (Subtype.val : K → o) Subtype.val)).re := fun X _ =>
+    (Complex.nonneg_iff.1 ((posSemidef_self_mul_conjTranspose X).submatrix _).det_nonneg).1
+  rw [alpha_eq_sum_minors, alpha_eq_sum_minors, alpha_eq_sum_minors, Complex.re_sum,
+    Complex.re_sum]
+  refine (norm_sum_le _ _).trans ((sum_le_sum fun K _ => ?_).trans
+    (Real.sum_sqrt_mul_sqrt_le _ (key H) (key G)))
+  have hcs := norm_det_mul_sq_le (H.submatrix (Subtype.val : K → o) id)
+    (Gᴴ.submatrix id (Subtype.val : K → o))
+  have e : ∀ X : Matrix o ι ℂ, X.submatrix (Subtype.val : K → o) id *
+      (X.submatrix (Subtype.val : K → o) id)ᴴ = (X * Xᴴ).submatrix Subtype.val Subtype.val :=
+    fun X => by rw [conjTranspose_submatrix, ← submatrix_mul _ _ _ id _ Function.bijective_id]
+  rw [← submatrix_mul _ _ _ id _ Function.bijective_id, e, ← conjTranspose_submatrix,
+    conjTranspose_conjTranspose, e] at hcs
+  rw [← Real.sqrt_mul (key H K)]
+  exact Real.le_sqrt_of_sq_le hcs
+
+/-- `α_m` of the matrix of an endomorphism does not depend on the basis. -/
+theorem alpha_toMatrix_eq {E ι ι' : Type*} [AddCommGroup E] [Module ℂ E] [Fintype ι]
+    [DecidableEq ι] [Fintype ι'] [DecidableEq ι'] (b : Basis ι ℂ E) (b' : Basis ι' ℂ E)
+    (A : E →ₗ[ℂ] E) (m : ℕ) :
+    alpha m (LinearMap.toMatrix b b A) = alpha m (LinearMap.toMatrix b' b' A) := by
+  rw [← basis_toMatrix_mul_linearMap_toMatrix_mul_basis_toMatrix b b' b b', alpha_mul_comm,
+    ← Matrix.mul_assoc, b'.toMatrix_mul_toMatrix_flip, Matrix.one_mul]
+
+variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E] [FiniteDimensional ℂ E]
+  {F : Type*} [NormedAddCommGroup F] [InnerProductSpace ℂ F] [FiniteDimensional ℂ F]
+
+/-- The compression `(⟪y_i, w x_j⟫)_{i,j}` of `w` by two families. -/
+noncomputable def cmat (x : Fin (finrank ℂ E) → E) (y : Fin (finrank ℂ E) → F)
+    (w : E →ₗ[ℂ] F) : Matrix (Fin (finrank ℂ E)) (Fin (finrank ℂ E)) ℂ :=
+  of fun i j => ⟪y i, w (x j)⟫_ℂ
+
+/-- `cmat x y w = (√S Φ)* (√S Ψ)`, with `Φ = (⟪f_k(w), y_j⟫)`, `Ψ = (⟪e_k(w), x_j⟫)`. -/
+theorem cmat_eq (x : Fin (finrank ℂ E) → E) (y : Fin (finrank ℂ E) → F) (w : E →ₗ[ℂ] F) :
+    cmat x y w = (sqrtDiag w * gramMat (fvec w) y)ᴴ * (sqrtDiag w * gramMat (ebasis w) x) := by
+  rw [conjTranspose_mul, Matrix.mul_assoc, ← Matrix.mul_assoc (sqrtDiag w)ᴴ, sqrtDiag_conj_mul]
+  ext i j
+  rw [mul_apply]
+  simp only [cmat, of_apply, diagonal_mul, conjTranspose_apply, gramMat,
+    inner_apply_eq_sum_schmidt]
+  refine sum_congr rfl fun k _ => ?_
+  rw [RCLike.star_def, inner_conj_symm, mul_assoc]
+
+/-- **The upper half of Prop. 3, for compressions**: for families `x`, `y` pairwise orthogonal,
+of norm `≤ 1` and zero from the index `n` on, `|α_m(⟪y_i, u x_j⟫)| ≤ σ_n^m(u)`. -/
+theorem norm_alpha_cmat_le (u : E →ₗ[ℂ] F) (x : Fin (finrank ℂ E) → E)
+    (y : Fin (finrank ℂ E) → F) (hx : ∀ k l, k ≠ l → ⟪x k, x l⟫_ℂ = 0) (hx1 : ∀ k, ‖x k‖ ≤ 1)
+    (hy : ∀ k l, k ≠ l → ⟪y k, y l⟫_ℂ = 0) (hy1 : ∀ k, ‖y k‖ ≤ 1) (n : ℕ)
+    (hxn : ∀ j : Fin (finrank ℂ E), n ≤ j → x j = 0)
+    (hyn : ∀ j : Fin (finrank ℂ E), n ≤ j → y j = 0) (m : ℕ) :
+    ‖alpha m (cmat x y u)‖ ≤ sigma n m u := by
+  rw [cmat_eq, alpha_mul_comm]
+  refine (norm_alpha_mul_conjTranspose_le_sqrt _ _ m).trans ?_
+  calc _ ≤ √(sigma n m u) * √(sigma n m u) := mul_le_mul
+        (Real.sqrt_le_sqrt (re_alpha_sqrtDiag_gramMat_le u _ _
+          (fun _ _ h => inner_ebasis_of_ne u h) (norm_ebasis_le u) hx hx1 n hxn m))
+        (Real.sqrt_le_sqrt (re_alpha_sqrtDiag_gramMat_le u _ _
+          (fun _ _ h => inner_fvec_of_ne u h) (norm_fvec_le u) hy hy1 n hyn m))
+        (Real.sqrt_nonneg _) (Real.sqrt_nonneg _)
+    _ = sigma n m u := Real.mul_self_sqrt (sigma_nonneg n m u)
+
+/-- The adjoint of a contraction is a contraction. -/
+theorem norm_adjoint_apply_le {w : F →ₗ[ℂ] E} (hw : ∀ z, ‖w z‖ ≤ ‖z‖) (z : E) :
+    ‖LinearMap.adjoint w z‖ ≤ ‖z‖ := by
+  set a := LinearMap.adjoint w z
+  have h : ‖a‖ ^ 2 ≤ ‖a‖ * ‖z‖ := by
+    rw [← @inner_self_eq_norm_sq ℂ, LinearMap.adjoint_inner_right]
+    calc _ ≤ ‖⟪w a, z⟫_ℂ‖ := Complex.re_le_norm _
+      _ ≤ ‖w a‖ * ‖z‖ := norm_inner_le_norm _ _
+      _ ≤ ‖a‖ * ‖z‖ := mul_le_mul_of_nonneg_right (hw a) (norm_nonneg _)
+  nlinarith [norm_nonneg a, norm_nonneg z]
+
+/-- **Prop. 3 of page 72, upper bound**: for a contraction `w : F → E` of rank `≤ n`,
+`|α_m(w u)| ≤ σ_n^m(u)`, `α_m` computed in any basis of `E`. -/
+theorem norm_alpha_comp_le (u : E →ₗ[ℂ] F) {w : F →ₗ[ℂ] E} (hw : ∀ z, ‖w z‖ ≤ ‖z‖)
+    {n : ℕ} (hn : finrank ℂ (LinearMap.range w) ≤ n) (m : ℕ) {ι : Type*} [Fintype ι]
+    [DecidableEq ι] (b : Basis ι ℂ E) :
+    ‖alpha m (LinearMap.toMatrix b b (w ∘ₗ u))‖ ≤ sigma n m u := by
+  set w' := LinearMap.adjoint w
+  set t : Fin (finrank ℂ E) → ℂ := fun k => ((√(w'.singularValues k) : ℝ) : ℂ)
+  have ht1 : ∀ k, ‖t k‖ ≤ 1 := fun k => by
+    rw [Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (Real.sqrt_nonneg _),
+      Real.sqrt_le_one, ← norm_apply_ebasis]
+    exact (norm_adjoint_apply_le hw _).trans (norm_ebasis_le w' k)
+  have ht0 : ∀ k : Fin (finrank ℂ E), n ≤ k → t k = 0 := fun k hk => by
+    simp [t, w'.singularValues_eq_zero_iff_le_finrank_range.2
+      ((LinearMap.finrank_range_adjoint w).trans_le (hn.trans hk))]
+  set D : Matrix (Fin (finrank ℂ E)) (Fin (finrank ℂ E)) ℂ := diagonal t
+  set N : Matrix (Fin (finrank ℂ E)) (Fin (finrank ℂ E)) ℂ :=
+    of fun i j => t i * ⟪fvec w' i, u (ebasis w' j)⟫_ℂ
+  have hM : LinearMap.toMatrix (ebasis w').toBasis (ebasis w').toBasis (w ∘ₗ u) = D * N := by
+    ext i j
+    rw [LinearMap.toMatrix_apply, OrthonormalBasis.coe_toBasis_repr_apply,
+      OrthonormalBasis.repr_apply_apply, OrthonormalBasis.coe_toBasis, LinearMap.comp_apply,
+      ← LinearMap.adjoint_inner_left, apply_ebasis_eq, inner_smul_left, diagonal_mul]
+    simp only [N, of_apply, t, ← mul_assoc, ← Complex.ofReal_mul,
+      Real.mul_self_sqrt (w'.singularValues_nonneg _)]
+    simp [w']
+  have hC : N * D = cmat (fun j => t j • ebasis w' j) (fun i => t i • fvec w' i) u := by
+    ext i j
+    simp [N, D, cmat, t]
+    ring
+  rw [alpha_toMatrix_eq b (ebasis w').toBasis, hM, alpha_mul_comm, hC]
+  refine norm_alpha_cmat_le u _ _ (fun k l h => ?_) (fun k => ?_) (fun k l h => ?_) (fun k => ?_)
+    n (fun j hj => by simp [ht0 j hj]) (fun j hj => by simp [ht0 j hj]) m
+  · simp [inner_ebasis_of_ne w' h]
+  · rw [norm_smul]; exact (mul_le_of_le_one_right (norm_nonneg _) (norm_ebasis_le w' k)).trans (ht1 k)
+  · simp [inner_fvec_of_ne w' h]
+  · rw [norm_smul]; exact (mul_le_of_le_one_right (norm_nonneg _) (norm_fvec_le w' k)).trans (ht1 k)
+
+/-- The contraction `w₀ = ∑_{j<n} e_j ⟨f_j, ·⟩` of rank `≤ n` that attains Prop. 3. -/
+noncomputable def wmax (u : E →ₗ[ℂ] F) (n : ℕ) : F →ₗ[ℂ] E :=
+  ∑ k, (innerₛₗ ℂ (ys u n k)).smulRight (ebasis u k)
+
+theorem inner_ebasis_wmax (u : E →ₗ[ℂ] F) (n : ℕ) (i : Fin (finrank ℂ E)) (z : F) :
+    ⟪ebasis u i, wmax u n z⟫_ℂ = ⟪ys u n i, z⟫_ℂ := by
+  simp [wmax, orthonormal_iff_ite.1 (ebasis u).orthonormal]
+
+theorem norm_wmax_apply_le (u : E →ₗ[ℂ] F) (n : ℕ) (z : F) : ‖wmax u n z‖ ≤ ‖z‖ := by
+  refine pow_le_pow_iff_left₀ (norm_nonneg _) (norm_nonneg _) two_ne_zero |>.1 ?_
+  rw [← (ebasis u).sum_sq_norm_inner_right]
+  simp only [inner_ebasis_wmax]
+  exact sum_norm_inner_sq_le univ _ (fun k _ l _ h => inner_ys_of_ne u n h)
+    (fun k _ => norm_ys_le u n k) z
+
+theorem finrank_range_wmax_le (u : E →ₗ[ℂ] F) (n : ℕ) :
+    finrank ℂ (LinearMap.range (wmax u n)) ≤ n := by
+  classical
+  set S := (univ.filter fun k : Fin (finrank ℂ E) => (k : ℕ) < n).image (ebasis u)
+  have hle : LinearMap.range (wmax u n) ≤ Submodule.span ℂ (S : Set E) := by
+    rintro _ ⟨z, rfl⟩
+    rw [wmax, LinearMap.sum_apply]
+    refine Submodule.sum_mem _ fun k _ => ?_
+    by_cases hk : (k : ℕ) < n
+    · exact Submodule.smul_mem _ _ (Submodule.subset_span (by simpa [S] using ⟨k, hk, rfl⟩))
+    · simp [ys, hk]
+  refine (Submodule.finrank_mono hle).trans ((finrank_span_finset_le_card S).trans
+    (card_image_le.trans ?_))
+  calc #(univ.filter fun k : Fin (finrank ℂ E) => (k : ℕ) < n) ≤ #(range n) :=
+        card_le_card_of_injOn (fun k => (k : ℕ)) (fun k hk => by simpa using hk)
+          (fun a _ b _ h => Fin.ext h)
+    _ = n := card_range n
+
+theorem toMatrix_wmax_comp (u : E →ₗ[ℂ] F) (n : ℕ) :
+    LinearMap.toMatrix (ebasis u).toBasis (ebasis u).toBasis (wmax u n ∘ₗ u) = compr u u n := by
+  ext i j
+  rw [LinearMap.toMatrix_apply, OrthonormalBasis.coe_toBasis_repr_apply,
+    OrthonormalBasis.repr_apply_apply, OrthonormalBasis.coe_toBasis, LinearMap.comp_apply,
+    inner_ebasis_wmax]
+  simp only [compr, of_apply, xs]
+  split_ifs with hj
+  · rfl
+  · by_cases hij : i = j
+    · subst hij; simp [ys, hj]
+    · rw [apply_ebasis_eq, inner_smul_right, ys]
+      split_ifs <;> simp [inner_fvec_of_ne u hij]
+
+/-- **Prop. 3 of page 72**, in finite dimension: `σ_n^m(u)` is the largest value of
+`|α_m(w u)|` over the contractions `w : F → E` of rank `≤ n` (in any basis of `E`). -/
+theorem isGreatest_norm_alpha_comp (u : E →ₗ[ℂ] F) (n m : ℕ) {ι : Type*} [Fintype ι]
+    [DecidableEq ι] (b : Basis ι ℂ E) :
+    IsGreatest {r | ∃ w : F →ₗ[ℂ] E, (∀ z, ‖w z‖ ≤ ‖z‖) ∧
+      finrank ℂ (LinearMap.range w) ≤ n ∧ r = ‖alpha m (LinearMap.toMatrix b b (w ∘ₗ u))‖}
+      (sigma n m u) := by
+  refine ⟨⟨wmax u n, norm_wmax_apply_le u n, finrank_range_wmax_le u n, le_antisymm ?_
+    (norm_alpha_comp_le u (norm_wmax_apply_le u n) (finrank_range_wmax_le u n) m b)⟩, ?_⟩
+  · rw [alpha_toMatrix_eq b (ebasis u).toBasis, toMatrix_wmax_comp]
+    exact (sigma_le_alpha_compr u n m).trans (Complex.re_le_norm _)
+  · rintro _ ⟨w, hw, hn, rfl⟩
+    exact norm_alpha_comp_le u hw hn m b
+
+end PropositionThree
+
+end Grothendieck.Folder1

@@ -150,7 +150,25 @@ Pour le point 2, l'effectivité se déduit du point 1 appliqué à la réduction
 La page procède autrement : elle traite le cas $I^2 = 0$ par la suite exacte de cohomologie de $0 \to I\,C^\bullet_D \to C^\bullet_D(A'/A, E') \to C^\bullet_D(A'_0/A_0, E'_0) \to 0$, puis raisonne par récurrence sur l'ordre de nilpotence. L'étape~1 montre que cette récurrence n'est pas nécessaire. Comme le note la lecture, les hypothèses $A \simeq H^0(A'/A)$ et $H^1(A'/A) = 0$ de l'énoncé ne servent pas au point~1. Le dernier pas de la page~6, l'isomorphisme $E \otimes_A A' \to E'$, presque illisible, est ici l'étape~3, qui ne demande pas la platitude de $E'$.
 \end{remarque}
 
-\noindent\emph{Portée de la vérification.} Lean définit les données de descente par la coaction (\texttt{Descent.\allowbreak{}DescentDatum}), leurs invariants, l'effectivité (\texttt{DescentDatum.\allowbreak{}IsEffective}), la réduction (\texttt{DescentDatum.\allowbreak{}reduce}) et les morphismes de descente effective pour les modules plats (\texttt{IsEffectiveDescentFlat}), et démontre le point~1 (\texttt{DescentDatum.\allowbreak{}isEffective\_of\_reduce}), le point~2 (\texttt{isEffectiveDescentFlat\_of\_quotient}) et le critère local de platitude (\texttt{flat\_of\_isNilpotent}), pour des anneaux commutatifs quelconques. L'hypothèse sur $I$ y est \texttt{IsConductorIdeal}. Ne sont pas formalisés l'exemple \q{$A'_0$ fidèlement plat sur $A_0$}, mathlib n'ayant la descente fidèlement plate des modules que sous forme de comonadicité, ni les corollaires 2 et~3 (énoncé ci-dessous).
+\begin{theoreme}[Grothendieck, page 7, exemple du corollaire~1\piste{128-nilpotent-conductor-flat-descent}]\label{thm:128-fid-plat}
+\begin{enumerate}
+\item Si $A \to A'$ est plat, $A' \otimes_A E \to E'$ est bijectif pour toute donnée de descente sur un $A'$-module $E'$, $E$ désignant ses invariants.
+\item Si $A \to A'$ est fidèlement plat, $\operatorname{Spec} A' \to \operatorname{Spec} A$ est un morphisme de descente effective pour les modules plats.
+\item Soient $A \to A'$ et $I$ comme au théorème~\ref{thm:128-descente}, $I$ nilpotent. Si $A'_0$ est fidèlement plat sur $A_0$, $\operatorname{Spec} A' \to \operatorname{Spec} A$ est un morphisme de descente effective pour les modules plats.
+\end{enumerate}
+\end{theoreme}
+
+\begin{proof}
+Point 1. Soit $f = \psi - (1 \otimes \cdot) : E' \to A' \otimes_A E'$, $A$-linéaire, de noyau $E$. Le cocycle dit que $\psi(e)$ est annulé par $A' \otimes f$ ; $A'$ étant plat, le noyau de $A' \otimes f$ est l'image de $A' \otimes_A E$, qui s'injecte dans $A' \otimes_A E'$. On écrit donc $\psi(e) = j(t)$, avec $j : A' \otimes_A E \hookrightarrow A' \otimes_A E'$, et la counité donne $\theta(t) = e$ pour $\theta : A' \otimes_A E \to E'$ : $\theta$ est surjectif. Pour $x$ invariant, $\psi(\theta(b \otimes x)) = b \psi(x) = b \otimes x = j(b \otimes x)$, donc $j = \psi \circ \theta$, et $\theta$ est injectif puisque $j$ l'est.
+
+Point 2. Pour $M$ un $A$-module, $M \to A' \otimes_A M$ est injectif par fidèle platitude. Si $E'$ est plat sur $A'$, $A' \otimes_A E \simeq E'$ est plat sur $A'$, donc $E$ est plat sur $A$ (la platitude descend le long d'un morphisme fidèlement plat) : la donnée est effective. Enfin, pour la donnée canonique sur $A' \otimes_A M$, d'invariants $N$, l'application $\iota : M \to N$, $m \mapsto 1 \otimes m$, vérifie $\theta \circ (A' \otimes \iota) = \mathrm{id}$ ; $\theta$ étant bijectif par le point~1, $A' \otimes \iota$ est surjectif, donc $\iota$ aussi par fidèle platitude : $M \simeq H^0(A'/A, M)$.
+
+Point 3. C'est le point~2 du théorème~\ref{thm:128-descente}, dont l'hypothèse est donnée par le point~2 appliqué à $A_0 \to A'_0$.
+\end{proof}
+
+La démonstration est la descente fidèlement plate classique, écrite directement sur les coactions : elle n'utilise pas la comonadicité de l'extension des scalaires.
+
+\noindent\emph{Portée de la vérification.} Lean définit les données de descente par la coaction (\texttt{Descent.\allowbreak{}DescentDatum}), leurs invariants, l'effectivité (\texttt{DescentDatum.\allowbreak{}IsEffective}), la réduction (\texttt{DescentDatum.\allowbreak{}reduce}) et les morphismes de descente effective pour les modules plats (\texttt{IsEffectiveDescentFlat}), et démontre le point~1 (\texttt{DescentDatum.\allowbreak{}isEffective\_of\_reduce}), le point~2 (\texttt{isEffectiveDescentFlat\_of\_quotient}) et le critère local de platitude (\texttt{flat\_of\_isNilpotent}), pour des anneaux commutatifs quelconques. L'hypothèse sur $I$ y est \texttt{IsConductorIdeal}. Il démontre aussi le théorème~\ref{thm:128-fid-plat} : le point~1 (\texttt{DescentDatum.\allowbreak{}bijective\_of\_flat}), le point~2 (\texttt{isEffectiveDescentFlat\_of\_faithfullyFlat}, avec \texttt{surjective\_of\_section} et la descente de la platitude \texttt{Module.\allowbreak{}Flat.\allowbreak{}of\_flat\_tensorProduct} de mathlib) et le point~3 (\texttt{isEffectiveDescentFlat\_of\_quotient\_faithfullyFlat}). Ne sont pas formalisés les corollaires 2 et~3 (énoncé ci-dessous).
 
 Ne sont pas démontrés ici, de la même cote :
 
@@ -159,7 +177,7 @@ Ne sont pas démontrés ici, de la même cote :
 Soient $X$ un préschéma, $\mathcal I$ un idéal quasi-cohérent nilpotent de $\mathcal O_X$ et $X' = \operatorname{Spec} \mathcal A' \to X$ affine, $\mathcal I$ s'envoyant isomorphiquement sur un idéal de $\mathcal A'$ et $X'_0$ étant fidèlement plat sur $X_0 = V(\mathcal I)$. Alors $X' \to X$ est un morphisme de descente effective pour les modules quasi-cohérents plats, et le reste après tout changement de base plat $Y \to X$.
 \end{theoreme*}
 \end{encadre}
-{\small Le cas affine, avec l'hypothèse plus faible que $\operatorname{Spec} A'_0 \to \operatorname{Spec} A_0$ soit de descente effective pour les modules plats, est le théorème~\ref{thm:128-descente}. Restent non vérifiés le recollement sur un préschéma, la stabilité par changement de base plat, et le passage de \q{fidèlement plat} à \q{descente effective}, qui demande la descente fidèlement plate des modules.\par}
+{\small Le cas affine, avec l'hypothèse plus faible que $\operatorname{Spec} A'_0 \to \operatorname{Spec} A_0$ soit de descente effective pour les modules plats, est le théorème~\ref{thm:128-descente}, et le cas affine tel qu'énoncé, avec $A'_0$ fidèlement plat sur $A_0$, est le point~3 du théorème~\ref{thm:128-fid-plat}. Restent non vérifiés le recollement sur un préschéma et la stabilité par changement de base plat.\par}
 
 \begin{encadre}
 \begin{theoreme*}[Grothendieck, pages 19 à 29, descente infinitésimale\piste{128-infinitesimal-descent-theorem}]\nonverifie

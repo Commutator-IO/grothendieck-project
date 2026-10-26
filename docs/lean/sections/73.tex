@@ -110,4 +110,48 @@ Si aucun $H_i$ ne contient $N(u_*)$, les $N(u_*) \cap H_i$ sont $n$ sous-espaces
 La page suppose $k$ infini ; il suffit que $k$ ait plus de $n$ éléments, et l'hypothèse ne sert qu'à la dichotomie. L'hypothèse de non-alignement, que la lecture ajoute, est nécessaire (le segment $(e, -e, e, -e)$), et la condition $3 \mid n$, biffée sur la page, est conséquence des autres : si $3 \nmid n$, $u_{i+3} = u_i$ rend la suite constante (Lean : \texttt{triangle\_of\_collinear}, \texttt{dichotomy}, \texttt{finrank\_le\_one\_of\_le\_hyperplane}).
 \end{remarque}
 
-Ne sont pas démontrés ici : l'énumération des quatre cas de la page~28 comme cas mutuellement exclusifs, au-delà de la dichotomie et des dimensions ; l'interprétation de $N(u_*)$ comme espace conormal de l'application \q{aires des oreilles} sur les polygones fermés ; l'équation du second degré du pentagone (page~19) et la formule de Gauss ; l'ennéagone de la page~18, dont la lecture vérifie numériquement que $N(u_*)$ est une droite ; le foncteur $\mathrm{Polg}_n$ de la page~1 ; l'énoncé du plan projectif sur $\operatorname{Spec}\mathbf{Z}$.
+\begin{theoreme}[D'après les pages 14 et 28, $N(u_*)$ est l'espace des multiplicateurs de Lagrange, forme de l'édition\piste{73-ear-area-multiplier-classification}]\label{thm:73-lagrange}
+Soient $k$ un corps, $n \geqslant 1$ et $\varphi : V^{\mathbf{Z}/n\mathbf{Z}} \to k^{\mathbf{Z}/n\mathbf{Z}}$, $\varphi(u)_i = u_{i-1} \wedge u_i$, l'application \q{aires des oreilles}. Elle est quadratique : $\varphi(u + v) = \varphi(u) + d\varphi_u(v) + \varphi(v)$, avec $d\varphi_u(v)_i = v_{i-1} \wedge u_i + u_{i-1} \wedge v_i$, et sur un corps valué complet, $\mathbf{R}$ par exemple, $d\varphi_u$ est sa différentielle stricte en $u$. Pour $\lambda \in k^{\mathbf{Z}/n\mathbf{Z}}$, les conditions suivantes sont équivalentes :
+\begin{enumerate}
+\item $\lambda \in N(u_*)$ ;
+\item il existe $w \in V$ tel que $\sum_i \lambda_i\, d\varphi_{u_*}(v)_i = w \wedge \sum_i v_i$ pour tout $v$ : c'est l'égalité $\sum \lambda_i\, df_i = \mu \sum dx_i + \nu \sum dy_i$ de la page~14 ;
+\item $\sum_i \lambda_i\, d\varphi_{u_*}(v)_i = 0$ pour toute déformation fermée, $\sum_i v_i = 0$.
+\end{enumerate}
+En particulier $N(u_*) = 0$ si et seulement si $d\varphi_{u_*}$ envoie les déformations fermées sur $k^{\mathbf{Z}/n\mathbf{Z}}$ : le cas général~(a) de la page~28 est celui où $\varphi$, restreinte aux polygones de $\sum u_i$ fixé, est une submersion en $u_*$.
+\end{theoreme}
+
+\begin{proof}
+L'identité quadratique se développe ; elle fait de $d\varphi_u$ la partie linéaire de $\varphi$ en $u$, et la différentielle stricte vient de ce que $\varphi(u) = B(u, u)$ pour une application bilinéaire $B$, continue en dimension finie. Une sommation par parties donne $\sum_i \lambda_i\, d\varphi_u(v)_i = \sum_i L_i \wedge v_i$, où $L_i = \lambda_i u_{i-1} - \lambda_{i+1} u_{i+1}$ est la forme de Lagrange du théorème~\ref{thm:73-critere}. Si $\lambda \in N(u_*)$, $L_i$ ne dépend pas de $i$, et la somme vaut $L_0 \wedge \sum_i v_i$ : c'est 2, et 2 entraîne 3. Réciproquement, la déformation $v = e$ en $i$, $-e$ en $i + 1$, nulle ailleurs, est fermée, et 3 donne $(L_i - L_{i+1}) \wedge e = 0$ pour tout $e \in V$, d'où $L_i = L_{i+1}$ : c'est $(\ast)$. Enfin, $N(u_*)$ est, par 3, l'orthogonal pour $\sum_i \lambda_i m_i$ de l'image $W$ des déformations fermées ; si $W \neq k^{\mathbf{Z}/n\mathbf{Z}}$, une forme linéaire non nulle nulle sur $W$ (mathlib, \texttt{Submodule.\allowbreak{}exists\_dual\_map\_eq\_bot\_of\_lt\_top}) est un $\lambda \neq 0$ de $N(u_*)$ ; si $W$ est tout l'espace, $\lambda$ est orthogonal à chaque vecteur de base, donc nul.
+\end{proof}
+
+Lean : \texttt{earArea\_add}, \texttt{hasStrictFDerivAt\_earArea}, \texttt{isMult\_iff\_lagrange}, \texttt{isMult\_iff\_closed}, \texttt{multSpace\_eq\_bot\_iff}. Aucune page ne fait le lien entre le $N(u_*)$ de la page~28 et les multiplicateurs de la page~14 ; il est de la lecture, et l'énoncé, qui ne suppose pas le polygone fermé, de l'édition.
+
+\begin{theoreme}[Grothendieck, page 28, le théorème des quatre cas, sous une hypothèse plus faible\piste{73-zero-multiplier-criterion}]\label{thm:73-quatre-cas}
+Soient $k$ un corps ayant plus de $n$ éléments et $u_*$ une suite de $n$ vecteurs non nuls de $V$. On est dans un et un seul des cas suivants :
+\begin{enumerate}
+\item[(a)] \emph{cas général} : $N(u_*) = 0$ ;
+\item[(b$_1$)] \emph{cas spécial I} : $N(u_*)$ contient un $\lambda$ sans composante nulle, et $\dim N(u_*) = 1$ ;
+\item[(b$_2$)] \emph{cas hyperspécial} : $N(u_*)$ contient un $\lambda$ sans composante nulle, et $\dim N(u_*) = 2$ ;
+\item[(c)] \emph{cas spécial II} : $N(u_*) \neq 0$ et $N(u_*) \subset H_i$ pour un $i$ ; alors $\dim N(u_*) = 1$, et $N(u_*)$ est la droite engendrée par l'unique multiplicateur tel que $\lambda_i = 0$ et $\lambda_{i+1} = 1$, auquel s'applique, pour $i = 0$, le critère du théorème~\ref{thm:73-critere}.
+\end{enumerate}
+\end{theoreme}
+
+\begin{proof}
+Par la dichotomie (théorème~\ref{thm:73-dichotomie}), ou bien un $\lambda \in N(u_*)$ n'a aucune composante nulle, ou bien $N(u_*)$ est dans un $H_i$. Dans le premier cas $\lambda \neq 0$, et $1 \leqslant \dim N(u_*) \leqslant 2$ : c'est (b$_1$) ou (b$_2$). Dans le second, ou bien $N(u_*) = 0$, c'est (a), ou bien $1 \leqslant \dim N(u_*) \leqslant 1$, c'est (c). Les cas s'excluent : (a) interdit un $\lambda$ sans zéro et nie $N(u_*) \neq 0$, (b$_1$) et (b$_2$) diffèrent par la dimension, et un $\lambda \in N(u_*)$ sans composante nulle n'est dans aucun $H_i$. En (c), un $\lambda \neq 0$ de $N(u_*)$ a $\lambda_i = 0$, donc $\lambda_{i+1} \neq 0$ (deux composantes consécutives nulles annulent tout) ; on le normalise, et il engendre la droite $N(u_*)$.
+\end{proof}
+
+Lean : \texttt{four\_cases}, \texttt{four\_cases\_exclusive}, \texttt{special\_two\_span}. La page suppose $k$ infini ; plus de $n$ éléments suffit, et cette hypothèse ne sert qu'à l'exhaustivité. Le cas hyperspécial est décrit par le théorème~\ref{thm:73-hyperspecial} quand les $u_i$ ne sont pas alignés.
+
+\begin{theoreme}[D'après la page 18, l'ennéagone étoilé, forme de l'édition\piste{73-zero-multiplier-criterion}]\label{thm:73-enneagone}
+Soient $k$ un corps, $\beta_1, \beta_2, \beta_3 \in k \setminus \{0, 1\}$ et $y_4, y_6, y_8 \in k$ avec $y_4 \neq \beta_1$, $y_6 \neq \beta_2 y_4$, $y_8 \neq \beta_3 y_6$, et l'ennéagone de sommets
+\[ s_0 = (0,0),\ s_1 = (1,0),\ s_2 = (1,1),\ s_3 = (\beta_1, \beta_1),\ s_4 = (\beta_1, y_4),\ s_5 = (\beta_2\beta_1, \beta_2 y_4),\ s_6 = (\beta_2\beta_1, y_6),\ s_7 = (\beta_3\beta_2\beta_1, \beta_3 y_6),\ s_8 = (\beta_3\beta_2\beta_1, y_8). \]
+Alors $N(u_*)$ est une droite, engendrée par un multiplicateur $\lambda$ tel que $\lambda_0 = 0$ et $\lambda_i \neq 0$ pour $i \neq 0$.
+\end{theoreme}
+
+\begin{proof}
+Les côtés sont non nuls. Le polygone est fermé ; pour $i$ pair, $u_{i-1}$ est vertical comme $u_1$ et $u_i$ est porté par la droite $s_0s_i$ ; pour $i$ impair, $u_i$ est vertical et $s_i$ est sur la droite $s_0s_{i-1}$, qui porte $u_{i-1}$. Le critère du théorème~\ref{thm:73-critere} donne un $\lambda \in N(u_*)$ avec $\lambda_0 = 0$ et $\lambda_1 = 1$, et $\lambda_i \neq 0$ pour $1 \leqslant i \leqslant 8$ puisque $s_i \neq s_0$ : l'abscisse de $s_i$, pour $i \geqslant 3$, est un produit de $\beta_j$ non nuls. Comme $u_0 \wedge u_1 = 1$ et que $u_4 \neq u_1$ (l'abscisse de $u_4$ est $(\beta_2 - 1)\beta_1 \neq 0$), le polygone n'est pas un triangle parcouru trois fois, et $\dim N(u_*) \neq 2$ par le théorème~\ref{thm:73-hyperspecial} ; donc $\dim N(u_*) = 1$.
+\end{proof}
+
+Lean : \texttt{nonagon}, \texttt{nonagon\_multSpace}. La lecture le vérifiait numériquement \q{pour des valeurs génériques des paramètres} ; il vaut pour toutes les valeurs qu'autorise la page, sur tout corps. On est dans le cas spécial~II, en $i = 0$.
+
+Ne sont pas démontrés ici : l'équation du second degré du pentagone (page~19) et la formule de Gauss ; le foncteur $\mathrm{Polg}_n$ de la page~1 ; l'énoncé du plan projectif sur $\operatorname{Spec}\mathbf{Z}$.

@@ -682,3 +682,160 @@ theorem corollaire3 [IsLocallyNoetherian S] [LocallyOfFiniteType sX] [LocallyOfF
   toReseau_bijective
 
 end Grothendieck.Folder42.Reseau
+
+/-!
+# Folder 42, page 5: Lemme 3 in the page's form
+
+The modernised reading states:
+
+> **Lemme 3.** Suppose `Y` *separated* over `S`. Then `F : U ↦ Hom_S(U, Y)` satisfies (H).
+
+Proved here as `Reseau.lemme3`, for `X` locally Noetherian and `Y` separated over an arbitrary
+`S`: `homSheaf` is the sheaf `F` (`isSheaf_homPresheaf`, morphisms glue), `ConditionH` is the
+condition (H) of page 3, and the open of `closure {x}` is any affine open around `x` on which the
+germ map at `x` is injective. The page's « plus précisément » is
+`stalkSpecializes_homSheaf_injective`: `F_y → F_x` is injective whenever `𝒪_{X,y} → 𝒪_{X,x}` is,
+which is the case for `X = Spec A`, `A → A_𝔭` injective and `𝔮 ⊇ 𝔭` by Lemme 2 (2). With the
+proposition of page 3, it gives Corollaire 2 for `X` Noetherian (`Reseau.corollaire2`).
+
+What the proof makes plain. A germ of `F` at `x` is determined by the composite
+`Spec 𝒪_{X,x} → Y` (`germ_homSheaf_eq_iff`), which uses only `X` locally Noetherian; the
+injectivity is then `ext_of_injective_of_isSeparated`, the only use of separatedness.
+-/
+
+namespace Grothendieck.Folder42.Reseau
+
+open AlgebraicGeometry CategoryTheory Limits Topology TopologicalSpace Opposite
+
+universe u
+
+variable {X Y S : Scheme.{u}} (sX : X ⟶ S) (sY : Y ⟶ S)
+
+/-- The presheaf `U ↦ Hom_S(U, Y)` on `X`. -/
+noncomputable def homPresheaf : TopCat.Presheaf (Type u) X.toTopCat where
+  obj U := {f : (unop U : X.Opens).toScheme ⟶ Y // f ≫ sY = (unop U : X.Opens).ι ≫ sX}
+  map i := ↾fun f => ⟨X.homOfLE i.unop.le ≫ f.1, by simp [f.2]⟩
+  map_id U := by ext f; simp [Scheme.homOfLE_rfl]
+  map_comp i j := by ext f; simp [Scheme.homOfLE_homOfLE_assoc]
+
+variable {sX sY}
+
+theorem homPresheaf_map_val {U V : (X.Opens)ᵒᵖ} (i : U ⟶ V) (f : (homPresheaf sX sY).obj U) :
+    ((homPresheaf sX sY).map i f).1 = X.homOfLE i.unop.le ≫ f.1 := rfl
+
+/-- **The sheaf of `S`-morphisms (page 5).** `U ↦ Hom_S(U, Y)` is a sheaf: morphisms glue. -/
+theorem isSheaf_homPresheaf : (homPresheaf sX sY).IsSheaf := by
+  refine TopCat.Presheaf.isSheaf_of_isSheafUniqueGluing_types _ fun ι (U : ι → X.Opens) sf hsf => ?_
+  let 𝒰 : (iSup U).toScheme.OpenCover :=
+    { I₀ := ι, X i := (U i).toScheme, f i := X.homOfLE (le_iSup U i),
+      mem₀ := by
+        rw [Scheme.presieve₀_mem_precoverage_iff]
+        refine ⟨fun x => ?_, inferInstance⟩
+        obtain ⟨i, hi⟩ := Opens.mem_iSup.1 x.2
+        exact ⟨i, ⟨x.1, hi⟩, Subtype.ext (by simp [Scheme.homOfLE_apply])⟩ }
+  have hglue i j : pullback.fst (𝒰.f i) (𝒰.f j) ≫ (sf i).1 = pullback.snd _ _ ≫ (sf j).1 := by
+    refine (cancel_epi (isPullback_opens_inf_le (le_iSup U i) (le_iSup U j)).isoPullback.hom).mp ?_
+    simpa only [𝒰, IsPullback.isoPullback_hom_fst_assoc, IsPullback.isoPullback_hom_snd_assoc,
+      homPresheaf_map_val]
+      using congrArg Subtype.val (hsf i j)
+  refine ⟨⟨𝒰.glueMorphisms (fun i => (sf i).1) hglue, ?_⟩, fun i => ?_, fun s hs => ?_⟩
+  · exact 𝒰.hom_ext _ _ fun i => by simp [𝒰.ι_glueMorphisms_assoc, (sf i).2, 𝒰]
+  · apply Subtype.ext
+    change X.homOfLE _ ≫ 𝒰.glueMorphisms (fun i => (sf i).1) hglue = (sf i).1
+    exact 𝒰.ι_glueMorphisms _ _ i
+  · exact Subtype.ext (𝒰.hom_ext _ _ fun i => by
+      rw [𝒰.ι_glueMorphisms, ← hs i, homPresheaf_map_val])
+
+variable (sX sY) in
+/-- The sheaf `F : U ↦ Hom_S(U, Y)` of page 5. -/
+noncomputable def homSheaf : TopCat.Sheaf (Type u) X.toTopCat :=
+  ⟨homPresheaf sX sY, isSheaf_homPresheaf⟩
+
+@[reassoc]
+theorem fromSpecStalkOfMem_homOfLE {U V : X.Opens} (h : U ≤ V) (x : X) (hx : x ∈ U) :
+    U.fromSpecStalkOfMem x hx ≫ X.homOfLE h = V.fromSpecStalkOfMem x (h hx) := by
+  simp [← cancel_mono V.ι]
+
+@[reassoc]
+theorem SpecMap_stalkSpecializes_fromSpecStalkOfMem {U : X.Opens} {x y : X} (h : x ⤳ y)
+    (hy : y ∈ U) : Spec.map (X.presheaf.stalkSpecializes h) ≫ U.fromSpecStalkOfMem y hy =
+      U.fromSpecStalkOfMem x (h.mem_open U.isOpen hy) := by
+  simp [← cancel_mono U.ι, Scheme.SpecMap_stalkSpecializes_fromSpecStalk]
+
+/-- Two morphisms `U → Y` that agree on `Spec 𝒪_{X,x}` agree near `x`. -/
+theorem exists_homOfLE_eq [IsLocallyNoetherian X] {U : X.Opens} {x : X} (hx : x ∈ U)
+    {a b : U.toScheme ⟶ Y} (h : U.fromSpecStalkOfMem x hx ≫ a = U.fromSpecStalkOfMem x hx ≫ b) :
+    ∃ (W : X.Opens) (hW : W ≤ U), x ∈ W ∧ X.homOfLE hW ≫ a = X.homOfLE hW ≫ b := by
+  have := isLocallyNoetherian_of_isOpenImmersion U.ι
+  have key : ∀ w : (U : Scheme.{u}), U.toScheme.fromSpecStalk w ≫ a =
+      U.toScheme.fromSpecStalk w ≫ b → ∃ V : U.toScheme.Opens, w ∈ V ∧ V.ι ≫ a = V.ι ≫ b :=
+    fun w h => spread_out_unique_of_isGermInjective' a b h
+  obtain ⟨V, hV, e⟩ := key ⟨x, hx⟩ (by
+    rw [← SpecMap_stalkMap_fromSpecStalkOfMem]
+    exact (Category.assoc _ _ _).trans ((congrArg (Spec.map _ ≫ ·) h).trans
+      (Category.assoc _ _ _).symm))
+  refine ⟨U.ι ''ᵁ V, U.ι_image_le V, by exact ⟨_, hV, rfl⟩, ?_⟩
+  rw [← Scheme.Opens.isoImage_ι_inv_ι, Category.assoc, Category.assoc, e]
+
+/-- Germs of `F` at `x` are equal iff the morphisms agree on `Spec 𝒪_{X,x}`. -/
+theorem germ_homSheaf_eq_iff [IsLocallyNoetherian X] {U V : X.Opens} {x : X} (hU : x ∈ U)
+    (hV : x ∈ V) (a : (homPresheaf sX sY).obj (op U)) (b : (homPresheaf sX sY).obj (op V)) :
+    (homPresheaf sX sY).germ U x hU a = (homPresheaf sX sY).germ V x hV b ↔
+      U.fromSpecStalkOfMem x hU ≫ a.1 = V.fromSpecStalkOfMem x hV ≫ b.1 := by
+  constructor
+  · intro h
+    obtain ⟨W, hW, iU, iV, e⟩ := TopCat.Presheaf.germ_eq (homPresheaf sX sY) x hU hV a b h
+    have e' : X.homOfLE iU.le ≫ a.1 = X.homOfLE iV.le ≫ b.1 := congrArg Subtype.val e
+    rw [← fromSpecStalkOfMem_homOfLE iU.le x hW, ← fromSpecStalkOfMem_homOfLE iV.le x hW,
+      Category.assoc, Category.assoc, e']
+  · intro h
+    have hUV : x ∈ U ⊓ V := ⟨hU, hV⟩
+    have h' : (U ⊓ V).fromSpecStalkOfMem x hUV ≫ X.homOfLE inf_le_left ≫ a.1 =
+        (U ⊓ V).fromSpecStalkOfMem x hUV ≫ X.homOfLE inf_le_right ≫ b.1 := by
+      simpa only [fromSpecStalkOfMem_homOfLE_assoc] using h
+    obtain ⟨W, hW, hxW, e⟩ := exists_homOfLE_eq hUV h'
+    rw [← (homPresheaf sX sY).germ_res_apply (homOfLE (hW.trans inf_le_left)) x hxW a,
+      ← (homPresheaf sX sY).germ_res_apply (homOfLE (hW.trans inf_le_right)) x hxW b]
+    congr 1
+    apply Subtype.ext
+    simp only [Scheme.homOfLE_homOfLE_assoc] at e
+    exact e
+
+/-- **Lemme 3, local form, on the sheaf.** If `𝒪_{X,y} → 𝒪_{X,x}` is injective, so is `F_y → F_x`,
+for `Y` separated over `S`. -/
+theorem stalkSpecializes_homSheaf_injective [IsLocallyNoetherian X] [IsSeparated sY] {x y : X}
+    (h : x ⤳ y) (hinj : Function.Injective (X.presheaf.stalkSpecializes h)) :
+    Function.Injective ((homPresheaf sX sY).stalkSpecializes h) := by
+  intro s t hst
+  obtain ⟨U, hU, a, rfl⟩ := (homPresheaf sX sY).exists_germ_eq s
+  obtain ⟨V, hV, b, rfl⟩ := (homPresheaf sX sY).exists_germ_eq t
+  rw [TopCat.Presheaf.germ_stalkSpecializes_apply, TopCat.Presheaf.germ_stalkSpecializes_apply,
+    germ_homSheaf_eq_iff] at hst
+  rw [germ_homSheaf_eq_iff]
+  apply ext_of_injective_of_isSeparated _ hinj sY
+  · simp [a.2, b.2]
+  · rw [SpecMap_stalkSpecializes_fromSpecStalkOfMem_assoc,
+      SpecMap_stalkSpecializes_fromSpecStalkOfMem_assoc]
+    exact hst
+
+/-- **Lemme 3 (page 5), in the page's form.** For `X` locally Noetherian and `Y` separated over
+`S`, the sheaf `F : U ↦ Hom_S(U, Y)` satisfies (H). -/
+theorem lemme3 [IsLocallyNoetherian X] [IsSeparated sY] : ConditionH (homSheaf sX sY) := by
+  intro x
+  obtain ⟨U, hxU, hU, hinj⟩ := X.exists_germ_injective x
+  exact ⟨U, hxU, fun y ⟨hyU, _⟩ h =>
+    stalkSpecializes_homSheaf_injective h (stalkSpecializes_injective h U hU hxU hyU hinj)⟩
+
+/-- **Corollaire 2 (page 5), through the proposition of page 3.** For `X` Noetherian and `Y`
+separated over `S`, an `S`-morphism `X → Y` is the same thing
+as a coherent family of germs of `F`. -/
+theorem corollaire2 [IsNoetherian X] [IsSeparated sY] :
+    Function.Bijective (fun s : ToType ((homSheaf sX sY).1.obj (op ⊤)) =>
+      (⟨fun x => (homSheaf sX sY).presheaf.germ ⊤ x trivial s, fun _ _ h =>
+        (homSheaf sX sY).presheaf.germ_stalkSpecializes_apply (U := ⊤) (hy := trivial) h s⟩ :
+        {ξ // IsCoherentGerms (homSheaf sX sY) ξ})) :=
+  have : NoetherianSpace X.toTopCat := inferInstanceAs (NoetherianSpace X)
+  have : QuasiSober X.toTopCat := inferInstanceAs (QuasiSober X)
+  proposition _ lemme3
+
+end Grothendieck.Folder42.Reseau

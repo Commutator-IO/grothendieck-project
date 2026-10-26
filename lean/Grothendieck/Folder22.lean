@@ -114,6 +114,15 @@ What is proved:
   `Ω_{K/k'}`. The proof does not compute `k'`: it shows that `∂/∂y` kills `k'`, because
   `∂/∂x` of `K` kills `Kᵖ` and the chain rule gives `∂_x c + a₁ ∂_y c = 0` for `c ∈ k'`, while
   `a₁ ∉ k` (`a1_not_mem`, from the algebraic independence of `x, y, a₁`, `triple_injective`).
+* Added 2026-10-26. The identification `Ω_{K/k'} = Ω_K` holds whenever `k'` lands in `Kᵖ`
+  (`map_bijective_of_pow`, from the exact sequence `K ⊗_{k'} Ω_{k'} → Ω_K → Ω_{K/k'} → 0`, whose
+  first map is zero), and the page's general example with `a₂, …, a_{p−1}` holds for every prime
+  `p` (`contre_exemple_general`): for `K = 𝔽_p(x, b₀, …, b_{p−1})`, `a_i = b_iᵖ`, `y = Σ a_i xⁱ`,
+  the map `Ω_{k/k'} ⊗_k K → Ω_K` is not injective, and `dy − y' dx` (`y' = Σ i a_i xⁱ⁻¹`) lies
+  in the kernel of `K ⊗_k Ω_k → Ω_K` but not in the span of the `dc`, `c ∈ k'`
+  (`contre_exemple_general_span`). The argument is the special case's, for any `k → K` with
+  `dy = y' dx` and `y' ∉ k`; `x, y, y'` are algebraically independent because the specialisation
+  `b_i ↦ 0` (`i ≥ 2`) sends them to `x, y, a₁` of the special case (`tripleG_injective`).
 
 What this certifies is that the reading holds together at these points, not
 that it is what the page says (issue #26).
@@ -842,5 +851,287 @@ theorem not_formallySmooth_mv (i₀ : σ) (h : ¬ Module.Finite K Ω[K⁄R]) :
     LinearMap.congr_fun hr (1 ⊗ₜ KaehlerDifferential.D R K c)
 
 end SeveralVariablesSmooth
+
+
+/-! ### Pages 26 and 28: `Ω_{K/k'} = Ω_K`, and the general example with `a₂, …, a_{p−1}` -/
+
+section ContreGeneral
+
+open MvPolynomial
+
+/-- In characteristic `p`, every derivation kills `p`-th powers. -/
+theorem der_pow_char' (p : ℕ) {R B M : Type*} [CommRing R] [CommRing B] [Algebra R B] [CharP B p]
+    [AddCommGroup M] [Module B M] [Module R M] (D : Derivation R B M) (a : B) : D (a ^ p) = 0 := by
+  rw [D.leibniz_pow, ← Nat.cast_smul_eq_nsmul B, CharP.cast_eq_zero, zero_smul]
+
+/-- **`Ω_{B/S} = Ω_{B/R}` when `S` lands in `Bᵖ`.** For `R → S → B` with `B` of characteristic
+`p` and the image of `S` made of `p`-th powers, `Ω_{B/R} → Ω_{B/S}` is bijective: by the exact
+sequence `B ⊗_S Ω_{S/R} → Ω_{B/R} → Ω_{B/S} → 0`, whose first map is zero. -/
+theorem map_bijective_of_pow (p : ℕ) (R S B : Type*) [CommRing R] [CommRing S] [CommRing B]
+    [Algebra R S] [Algebra S B] [Algebra R B] [IsScalarTower R S B] [CharP B p]
+    (h : ∀ s : S, ∃ w : B, w ^ p = algebraMap S B s) :
+    Function.Bijective (KaehlerDifferential.map R S B B) := by
+  refine ⟨(injective_iff_map_eq_zero _).2 fun x hx => ?_, KaehlerDifferential.map_surjective R S B⟩
+  obtain ⟨t, rfl⟩ := (KaehlerDifferential.exact_mapBaseChange_map R S B x).1 hx
+  have h0 : KaehlerDifferential.map R R S B = 0 := by
+    ext s
+    obtain ⟨w, hw⟩ := h s
+    simp [KaehlerDifferential.map_D, ← hw, der_pow_char' p]
+  clear hx
+  induction t using TensorProduct.inductionOn with
+  | tmul b ω => simp [KaehlerDifferential.mapBaseChange_tmul, h0]
+  | add t u ht hu => rw [map_add, ht, hu, add_zero]
+
+/-! #### The argument for any `k = 𝔽_p(x, y) → K` with `dy = y' dx` and `y' ∉ k` -/
+
+variable (p : ℕ) [Fact p.Prime] (K : Type) [Field K] [CharP K p] [Algebra (ZMod p) K]
+  [Algebra (FracF p (Fin 2)) K] [IsScalarTower (ZMod p) (FracF p (Fin 2)) K]
+
+/-- `k' = k ∩ Kᵖ`. -/
+noncomputable def kPrimeOf : Subfield (FracF p (Fin 2)) :=
+  (frobenius K p).fieldRange.comap (algebraMap (FracF p (Fin 2)) K)
+
+variable {K} (y' : K)
+  (hy : ∀ {R M : Type} [CommRing R] [Algebra R K] [AddCommGroup M] [Module K M] [Module R M]
+    (D : Derivation R K M),
+      D (algebraMap _ K (var p (1 : Fin 2))) = y' • D (algebraMap _ K (var p (0 : Fin 2))))
+  (hy' : ∀ z, algebraMap (FracF p (Fin 2)) K z ≠ y')
+  (dx : Derivation (ZMod p) K K) (hdx : dx (algebraMap _ K (var p (0 : Fin 2))) = 1)
+
+include hy hy' hdx in
+/-- `∂/∂y` kills `k'`: the chain rule along `k → K` for `∂/∂x` gives `∂_x c + y' ∂_y c = 0`. -/
+theorem partialD_one_kPrimeOf (c : FracF p (Fin 2)) (hc : c ∈ kPrimeOf p K) :
+    algebraMap _ K (partialD p 1 c) = 0 := by
+  obtain ⟨w, hw⟩ := hc
+  have h : dx.compAlgebraMap (FracF p (Fin 2)) = dx (algebraMap _ K (var p (1 : Fin 2))) •
+      (Algebra.linearMap _ K).compDer (partialD p 1) +
+        dx (algebraMap _ K (var p (0 : Fin 2))) • (Algebra.linearMap _ K).compDer (partialD p 0) :=
+    derivation_ext p fun i => by fin_cases i <;> simp [partialD_var]
+  have h := congrArg (· c) h
+  simp [← hw, _root_.frobenius_def, der_pow_char' p, hy, hdx] at h
+  by_contra hne
+  refine hy' (-(partialD p 0 c) / partialD p 1 c) ?_
+  rw [map_div₀, map_neg, neg_div, eq_comm, eq_neg_iff_add_eq_zero, add_div' _ _ _ hne,
+    div_eq_zero_iff]
+  exact Or.inl (by linear_combination -h)
+
+/-- `∂/∂y : k → K` as a `k'`-derivation. -/
+noncomputable def deltaOf : Derivation (kPrimeOf p K) (FracF p (Fin 2)) K where
+  toFun := (Algebra.linearMap (FracF p (Fin 2)) K).compDer (partialD p 1)
+  map_add' := map_add _
+  map_smul' c z := by
+    rw [RingHom.id_apply, Algebra.smul_def, Derivation.leibniz,
+      show (Algebra.linearMap (FracF p (Fin 2)) K).compDer (partialD p 1)
+          (algebraMap (kPrimeOf p K) (FracF p (Fin 2)) c) = 0 from
+        partialD_one_kPrimeOf p y' hy hy' dx hdx _ c.2, smul_zero, add_zero]
+    rfl
+  map_one_eq_zero' := Derivation.map_one_eq_zero _
+  leibniz' := Derivation.leibniz _
+
+include hy hy' hdx in
+/-- `K ⊗_k Ω_{k/k'} → Ω_{K/k'}` is not injective: `dy − y' dx` is a nonzero element of its
+kernel. -/
+theorem not_injective_of :
+    ¬ Function.Injective (KaehlerDifferential.mapBaseChange (kPrimeOf p K) (FracF p (Fin 2)) K) := by
+  intro hinj
+  let ω : K ⊗[FracF p (Fin 2)] Ω[FracF p (Fin 2)⁄kPrimeOf p K] :=
+    (1 : K) ⊗ₜ KaehlerDifferential.D _ _ (var p (1 : Fin 2)) -
+      y' ⊗ₜ KaehlerDifferential.D _ _ (var p (0 : Fin 2))
+  have h0 : KaehlerDifferential.mapBaseChange _ _ K ω = 0 := by
+    simp [ω, KaehlerDifferential.mapBaseChange_tmul, KaehlerDifferential.map_D, hy]
+  have h1 : (deltaOf p y' hy hy' dx hdx).liftKaehlerDifferential.liftBaseChange K ω = 1 := by
+    simp [ω, deltaOf, partialD_var]
+  rw [hinj (h0.trans (map_zero _).symm), map_zero] at h1
+  exact zero_ne_one h1
+
+include hy hy' hdx in
+/-- The same, without `Ω_{k/k'}`: `dy − y' dx` lies in the kernel of `K ⊗_k Ω_k → Ω_K` but not in
+the `K`-span of the `1 ⊗ dc`, `c ∈ k ∩ Kᵖ`. -/
+theorem ker_not_span :
+    KaehlerDifferential.mapBaseChange (ZMod p) (FracF p (Fin 2)) K
+        ((1 : K) ⊗ₜ KaehlerDifferential.D _ _ (var p (1 : Fin 2)) -
+          y' ⊗ₜ KaehlerDifferential.D _ _ (var p (0 : Fin 2))) = 0 ∧
+      (1 : K) ⊗ₜ KaehlerDifferential.D _ _ (var p (1 : Fin 2)) -
+          y' ⊗ₜ KaehlerDifferential.D _ _ (var p (0 : Fin 2)) ∉
+        Submodule.span K (Set.range fun c : kPrimeOf p K =>
+          (1 : K) ⊗ₜ[FracF p (Fin 2)] KaehlerDifferential.D (ZMod p) _ (c : FracF p (Fin 2))) := by
+  refine ⟨by simp [KaehlerDifferential.mapBaseChange_tmul, KaehlerDifferential.map_D, hy],
+    fun h => ?_⟩
+  let L := ((Algebra.linearMap (FracF p (Fin 2)) K).compDer
+    (partialD p 1)).liftKaehlerDifferential.liftBaseChange K
+  have hL : Submodule.span K (Set.range fun c : kPrimeOf p K =>
+      (1 : K) ⊗ₜ[FracF p (Fin 2)] KaehlerDifferential.D (ZMod p) _ (c : FracF p (Fin 2))) ≤
+        LinearMap.ker L := Submodule.span_le.2 <| Set.range_subset_iff.2 fun c => by
+    simpa [L] using partialD_one_kPrimeOf p y' hy hy' dx hdx _ c.2
+  simpa [L, partialD_var] using hL h
+
+/-! #### `Ω_{K/k'} = Ω_K` -/
+
+/-- The `𝔽_p`-algebra `k'`, with the `𝔽_p`-action it already has. -/
+noncomputable instance : Algebra (ZMod p) (kPrimeOf p K) :=
+  .ofModule (fun r x y => Subtype.ext (smul_mul_assoc r (x : FracF p (Fin 2)) y))
+    fun r x y => Subtype.ext (mul_smul_comm r (x : FracF p (Fin 2)) y)
+
+instance : IsScalarTower (ZMod p) (kPrimeOf p K) K :=
+  .of_algebraMap_eq <| RingHom.congr_fun <| RingHom.ext_zmod (algebraMap (ZMod p) K)
+    ((algebraMap (kPrimeOf p K) K).comp (algebraMap (ZMod p) (kPrimeOf p K)))
+
+omit [IsScalarTower (ZMod p) (FracF p (Fin 2)) K] in
+variable (K) in
+/-- `Ω_K → Ω_{K/k'}` is bijective, `k'` consisting of `p`-th powers. -/
+theorem omega_kPrimeOf_bijective :
+    Function.Bijective (KaehlerDifferential.map (ZMod p) (kPrimeOf p K) K K) :=
+  map_bijective_of_pow p _ _ _ fun c => c.2
+
+variable (K) in
+/-- `Ω_K ≅ Ω_{K/k'}`. -/
+noncomputable def omegaEquiv : Ω[K⁄ZMod p] ≃ₗ[K] Ω[K⁄kPrimeOf p K] :=
+  .ofBijective _ (omega_kPrimeOf_bijective p K)
+
+include hy hy' hdx in
+/-- **The counterexample as the page states it**: `Ω_{k/k'} ⊗_k K → Ω_K` is not injective. -/
+theorem not_injective_to_omega :
+    ¬ Function.Injective ((omegaEquiv p K).symm.toLinearMap.restrictScalars (FracF p (Fin 2)) ∘ₗ
+      (KaehlerDifferential.mapBaseChange (kPrimeOf p K) (FracF p (Fin 2)) K).restrictScalars _) :=
+  fun h => not_injective_of p y' hy hy' dx hdx fun a b hab => @h a b (by simp [hab])
+
+end ContreGeneral
+
+/-! #### The general example: `K = 𝔽_p(x, b₀, …, b_{p−1})`, `y = Σ a_i xⁱ`, `a_i = b_iᵖ` -/
+
+section Generale
+
+open MvPolynomial
+
+variable (p : ℕ)
+
+/-- `y = Σ b_iᵖ xⁱ` in `𝔽_p[x, b₀, …, b_{p−1}]`, the variable `none` being `x`. -/
+noncomputable def yG : MvPolynomial (Option (Fin p)) (ZMod p) :=
+  ∑ i : Fin p, X (some i) ^ p * X none ^ (i : ℕ)
+
+/-- `y' = ∂y/∂x = Σ i b_iᵖ xⁱ⁻¹`. -/
+noncomputable def y'G : MvPolynomial (Option (Fin p)) (ZMod p) :=
+  ∑ i : Fin p, X (some i) ^ p *
+    (((i : ℕ) : MvPolynomial (Option (Fin p)) (ZMod p)) * X none ^ ((i : ℕ) - 1))
+
+/-- `(x, y, y')`. -/
+noncomputable def tripleG : Fin 3 → MvPolynomial (Option (Fin p)) (ZMod p) := ![X none, yG p, y'G p]
+
+/-- The specialisation `b₀ ↦ X₁`, `b₁ ↦ X₂`, `b_i ↦ 0` for `i ≥ 2`, which sends `(x, y, y')` to
+`triple p`. -/
+noncomputable def spec :
+    MvPolynomial (Option (Fin p)) (ZMod p) →ₐ[ZMod p] MvPolynomial (Fin 3) (ZMod p) :=
+  aeval fun o => o.elim (X 0) fun i => if (i : ℕ) = 0 then X 1 else if (i : ℕ) = 1 then X 2 else 0
+
+variable [hp : Fact p.Prime]
+
+/-- A sum over `Fin p` of terms vanishing outside `0, 1`. -/
+theorem sum_fin_two {M : Type*} [AddCommMonoid M] (f : Fin p → M)
+    (hf : ∀ i : Fin p, (i : ℕ) ≠ 0 → (i : ℕ) ≠ 1 → f i = 0) :
+    ∑ i, f i = f ⟨0, hp.out.pos⟩ + f ⟨1, hp.out.one_lt⟩ :=
+  Finset.sum_eq_add_of_mem _ _ (Finset.mem_univ _) (Finset.mem_univ _) (by simp [Fin.ext_iff])
+    fun i _ hi => hf i (fun h => hi.1 (Fin.ext h)) fun h => hi.2 (Fin.ext h)
+
+theorem spec_comp : (spec p).comp (aeval (tripleG p)) = aeval (triple p) := by
+  refine algHom_ext fun i => ?_
+  fin_cases i <;> simp only [AlgHom.comp_apply, aeval_X]
+  · simp [spec, tripleG, triple]
+  all_goals
+    simp only [tripleG, yG, y'G, Fin.reduceFinMk, Matrix.cons_val, map_sum]
+    rw [sum_fin_two p]
+    · simp [spec, triple]
+    · intro i h0 h1
+      simp only [spec, map_mul, map_pow, aeval_X, Option.elim_some, h0, h1, ↓reduceIte,
+        zero_pow hp.out.ne_zero, zero_mul]
+
+/-- `x, y, y'` are algebraically independent: specialising gives `triple p`. -/
+theorem tripleG_injective : Function.Injective (aeval (R := ZMod p) (tripleG p)) :=
+  .of_comp (f := spec p) (by rw [← AlgHom.coe_comp, spec_comp]; exact triple_injective p hp.out.pos)
+
+/-- `K = 𝔽_p(x, b₀, …, b_{p−1})`. -/
+abbrev KG := FracF p (Option (Fin p))
+
+/-- `𝔽_p[X, Y] → K`, `X ↦ x`, `Y ↦ y`. -/
+noncomputable def phiG : MvPolynomial (Fin 2) (ZMod p) →ₐ[ZMod p] KG p :=
+  (IsScalarTower.toAlgHom _ _ _).comp ((aeval (tripleG p)).comp (rename Fin.castSucc))
+
+theorem phiG_injective : Function.Injective (phiG p) :=
+  (IsFractionRing.injective _ _).comp
+    ((tripleG_injective p).comp (rename_injective _ (Fin.castSucc_injective 2)))
+
+noncomputable instance : Algebra (FracF p (Fin 2)) (KG p) :=
+  (IsFractionRing.liftAlgHom (phiG_injective p)).toRingHom.toAlgebra
+
+instance : IsScalarTower (ZMod p) (FracF p (Fin 2)) (KG p) :=
+  .of_algebraMap_eq fun c => ((IsFractionRing.liftAlgHom (phiG_injective p)).commutes c).symm
+
+theorem algebraMap_KG (f : MvPolynomial (Fin 2) (ZMod p)) :
+    algebraMap (FracF p (Fin 2)) (KG p) (algebraMap _ _ f) =
+      algebraMap _ _ (aeval (tripleG p) (rename Fin.castSucc f)) :=
+  IsFractionRing.lift_algebraMap (phiG_injective p) f
+
+/-- `D y = y' D x` for every derivation of `K`: the `a_i` are `p`-th powers. -/
+theorem der_yG {R M : Type} [CommRing R] [Algebra R (KG p)] [AddCommGroup M] [Module (KG p) M]
+    [Module R M] (D : Derivation R (KG p) M) :
+    D (algebraMap _ (KG p) (var p (1 : Fin 2))) =
+      algebraMap _ (KG p) (y'G p) • D (algebraMap _ (KG p) (var p (0 : Fin 2))) := by
+  simp only [algebraMap_KG, rename_X, aeval_X]
+  change D (algebraMap _ (KG p) (yG p)) = algebraMap _ _ (y'G p) • D (algebraMap _ _ (X none))
+  simp only [yG, y'G, map_sum, map_mul, map_pow, map_natCast, Derivation.leibniz,
+    der_pow_char' p, smul_zero, add_zero, Finset.sum_smul]
+  refine Finset.sum_congr rfl fun i _ => ?_
+  rw [D.leibniz_pow, mul_smul, mul_smul, ← Nat.cast_smul_eq_nsmul (KG p)]
+
+/-- `y' ∉ k`: from the algebraic independence of `x, y, y'`. -/
+theorem y'G_not_mem (z : FracF p (Fin 2)) : algebraMap _ (KG p) z ≠ algebraMap _ _ (y'G p) := by
+  intro hz
+  obtain ⟨f, g, hg, rfl⟩ := IsFractionRing.div_surjective (MvPolynomial (Fin 2) (ZMod p)) z
+  have hg0 : g ≠ 0 := nonZeroDivisors.ne_zero hg
+  have hB : algebraMap _ (KG p) (aeval (tripleG p) (rename Fin.castSucc g)) ≠ 0 :=
+    fun h => hg0 (phiG_injective p (h.trans (map_zero _).symm))
+  rw [map_div₀, algebraMap_KG, algebraMap_KG, div_eq_iff hB, ← map_mul] at hz
+  have key : aeval (tripleG p) (rename Fin.castSucc f) =
+      aeval (tripleG p) (X 2 * rename Fin.castSucc g) := by
+    apply IsFractionRing.injective (MvPolynomial (Option (Fin p)) (ZMod p)) (KG p)
+    rw [hz, map_mul (aeval _), aeval_X]
+    rfl
+  replace key := tripleG_injective p key
+  let π : MvPolynomial (Fin 3) (ZMod p) →ₐ[ZMod p] MvPolynomial (Fin 3) (ZMod p) :=
+    aeval ![X 0, X 1, 0]
+  have hπ : π.comp (rename Fin.castSucc) = rename Fin.castSucc := by
+    ext i; fin_cases i <;> simp [π]
+  have hf : rename Fin.castSucc f = (0 : MvPolynomial (Fin 3) (ZMod p)) := by
+    have := congrArg π key
+    rw [map_mul, ← AlgHom.comp_apply, ← AlgHom.comp_apply, hπ] at this
+    simpa [π] using this
+  rw [hf, eq_comm, mul_eq_zero, or_iff_right (X_ne_zero 2)] at key
+  exact hg0 (rename_injective _ (Fin.castSucc_injective 2) (key.trans (map_zero _).symm))
+
+theorem partialD_x : partialD p (none : Option (Fin p))
+    (algebraMap _ (KG p) (var p (0 : Fin 2))) = 1 := by
+  simp [algebraMap_KG, tripleG, partialD_var]
+
+/-- **The general counterexample of pages 26 and 28.** For
+`K = 𝔽_p(x, b₀, …, b_{p−1})`, `a_i = b_iᵖ`, `y = Σ a_i xⁱ`, `k = 𝔽_p(x, y)` and
+`k' = k ∩ Kᵖ`, the map `Ω_{k/k'} ⊗_k K → Ω_K` is not injective. -/
+theorem contre_exemple_general :
+    ¬ Function.Injective ((omegaEquiv p (KG p)).symm.toLinearMap.restrictScalars (FracF p (Fin 2)) ∘ₗ
+      (KaehlerDifferential.mapBaseChange (kPrimeOf p (KG p)) (FracF p (Fin 2)) (KG p)).restrictScalars
+        _) :=
+  not_injective_to_omega p _ (der_yG p) (y'G_not_mem p) _ (partialD_x p)
+
+/-- Equivalently, the kernel of `K ⊗_k Ω_k → Ω_K` is not generated by the `dc`, `c ∈ k ∩ Kᵖ`:
+`dy − y' dx` is in it and not in their span. -/
+theorem contre_exemple_general_span :
+    KaehlerDifferential.mapBaseChange (ZMod p) (FracF p (Fin 2)) (KG p)
+        ((1 : KG p) ⊗ₜ KaehlerDifferential.D _ _ (var p (1 : Fin 2)) -
+          algebraMap _ _ (y'G p) ⊗ₜ KaehlerDifferential.D _ _ (var p (0 : Fin 2))) = 0 ∧
+      (1 : KG p) ⊗ₜ KaehlerDifferential.D _ _ (var p (1 : Fin 2)) -
+          algebraMap _ _ (y'G p) ⊗ₜ KaehlerDifferential.D _ _ (var p (0 : Fin 2)) ∉
+        Submodule.span (KG p) (Set.range fun c : kPrimeOf p (KG p) =>
+          (1 : KG p) ⊗ₜ[FracF p (Fin 2)] KaehlerDifferential.D (ZMod p) _ (c : FracF p (Fin 2))) :=
+  ker_not_span p _ (der_yG p) (y'G_not_mem p) _ (partialD_x p)
+
+end Generale
 
 end Grothendieck.Folder22

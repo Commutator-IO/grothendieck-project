@@ -543,3 +543,444 @@ end Plane
 end
 
 end Grothendieck.Folder94
+
+/-!
+## Pages 8–9: the dense open of Lemme 6 for `X = S`
+
+Finding `94-generic-tor-regular-sequences`, remainder « the dense open `U` for `X = S` ».
+
+* `isWeaklyRegular_of_gr'`: the key step with an arbitrary `A`-algebra `B` for `A/J` and an
+  arbitrary nonzero module `T` (here `A_𝔭`) for `A`;
+* `isLocalizedModule_layerMap`: the layers commute with localisation,
+  `grᵏ_J(S⁻¹M) = S⁻¹ grᵏ_J(M)`; with `isLocalizedModule_mk_restrictScalars`, `layerEquiv`
+  identifies `grᵏ_J(M_𝔭)` with `(A/J)_q ⊗ grᵏ_J(M)` for `𝔭` over `q ∈ Spec(A/J)`;
+* `exists_isOpen_dense_isWeaklyRegular'` (main theorem): for `A` noetherian, `J` nilpotent with
+  `A/J` reduced (e.g. the nilradical) and `R` a finite `A`-module, there is a dense open
+  `U ⊆ Spec A` such that, for `𝔭 ∈ U`, every `A_𝔭`-weakly regular sequence is `R_𝔭`-weakly
+  regular. `U` is the image in `Spec A` (homeomorphic to `Spec(A/J)`) of the intersection of the
+  free loci over `A/J` of the finitely many nonzero layers of `A` and `R`: open by finite
+  presentation (`Module.isOpen_freeLocus`), dense because it contains every minimal prime, at
+  which the reduced ring `A/J` localises to a field.
+
+Not formalised: the Koszul step to `Tor_i^A(R, A_𝔭/(t)) = 0` (as above), and the case of `X` of
+finite type over `S` (Lemme 16), which needs generic flatness.
+
+## Page 7: the converse of Remarque 5 bis under global finiteness, module-theoretic steps
+
+Finding `94-rank-constructibility`, remainder « the converse under global finiteness ». The
+argument: on `B = (A/𝔭)_g` where the rank is `n`, the stalks `P_q` of Prop. 4 have constant fibre
+rank `n` over the reduced local rings `B_q`, hence are free; `F(B)` is then finite projective, and
+`F(B) ⊗ M → F(M)`, bijective at every localisation, gives `F_B ≅ Hom(F(B)^∨, −)`.
+
+* `free_of_finrank_eq_of_isReduced`: over a reduced local ring, a finite module whose fibre rank
+  at the closed point equals its rank at every minimal prime is free (no noetherian hypothesis);
+* `nonempty_equiv_hom_dual`: if `P` is finitely presented with free localisations at the maximal
+  ideals and `φ : P ⊗ M → N` is bijective at every maximal ideal, `P` is projective and
+  `N ≅ Hom(P^∨, M)`.
+
+Not formalised: Prop. 4 (the stalk representability, via pro-representability and Matlis
+duality), and the passage from the functor `F` to these module statements (that `F(B)_q` is the
+representing module `P_q`, and the naturality and localisation of `F(B) ⊗ M → F(M)`).
+-/
+
+namespace Grothendieck.Folder94
+
+variable {A : Type*} [CommRing A]
+
+section General
+
+variable {J : Ideal A} (B : Type*) [CommRing B] [Algebra A B]
+
+/-- `isWeaklyRegular_of_flat` with an arbitrary `A`-algebra `B` in place of `A/J`. -/
+theorem isWeaklyRegular_of_flat' (N : Type*) [AddCommGroup N] [Module B N] [Module A N]
+    [IsScalarTower A B N] [Module.Flat B N] {rs : List A}
+    (h : IsWeaklyRegular B rs) : IsWeaklyRegular N rs := by
+  rw [← isWeaklyRegular_map_algebraMap_iff B N]
+  rw [← isWeaklyRegular_map_algebraMap_iff B B] at h
+  exact ((TensorProduct.rid B N).isWeaklyRegular_congr _).mp
+    (h.isWeaklyRegular_lTensor (M₂ := N))
+
+/-- `isWeaklyRegular_quotient_of_layers_free` with an arbitrary `A`-algebra `B` in place of `A/J`:
+if `JⁿM = 0`, `M ≠ 0` and the layers of `M` are free over `B`, every `M`-weakly regular sequence
+is `B`-weakly regular (same proof). -/
+theorem isWeaklyRegular_of_layers_free' {M : Type*} [AddCommGroup M] [Module A M]
+    [Nontrivial M] {n : ℕ} (hn : filt J M n = ⊥) (ι : ℕ → Type*)
+    (e : ∀ k, layer J M k ≃ₗ[A] (ι k →₀ B)) {rs : List A} (h : IsWeaklyRegular M rs) :
+    IsWeaklyRegular B rs := by
+  classical
+  have hex : ∃ k, filt J M (k + 1) = ⊥ :=
+    ⟨n, eq_bot_iff.mpr ((filt_antitone (Nat.le_succ n)).trans hn.le)⟩
+  set m := Nat.find hex with hmdef
+  have hm : filt J M (m + 1) = ⊥ := Nat.find_spec hex
+  have hm0 : filt J M m ≠ ⊥ := by
+    intro h0
+    rcases m.eq_zero_or_pos with hz | hs
+    · rw [hz, filt_zero] at h0
+      exact top_ne_bot h0
+    · have := Nat.find_min' hex (m := m - 1) (by rwa [Nat.sub_add_cancel hs])
+      omega
+  have hcomap : (filt J M (m + 1)).comap (filt J M m).subtype = ⊥ := by
+    rw [hm, comap_bot, ker_subtype]
+  let eL : ↥(filt J M m) ≃ₗ[A] (ι m →₀ B) :=
+    (quotEquivOfEqBot _ hcomap).symm.trans (e m)
+  have hne : Nonempty (ι m) := by
+    by_contra hι
+    rw [not_nonempty_iff] at hι
+    have : Subsingleton ↥(filt J M m) := eL.toEquiv.subsingleton
+    exact hm0 Submodule.eq_bot_of_subsingleton
+  obtain ⟨i⟩ := hne
+  induction rs using List.reverseRecOn with
+  | nil => exact IsWeaklyRegular.nil _ _
+  | append_singleton rs y ih =>
+    rw [isWeaklyRegular_append_iff] at h
+    have h0 := ih h.1
+    have hlay : ∀ k, IsWeaklyRegular (layer J M k) rs := fun k =>
+      ((e k).isWeaklyRegular_congr rs).mpr (isWeaklyRegular_of_flat' B _ h0)
+    have hq : IsWeaklyRegular (M ⧸ filt J M m) rs :=
+      isWeaklyRegular_quotient_filt m fun k _ => hlay k
+    have hf := Submodule.injective_subtype (filt J M m)
+    have hfg := LinearMap.exact_subtype_mkQ (filt J M m)
+    have hg := (filt J M m).mkQ_surjective
+    have hinj := injective_mapQ_of_exact hf hfg hg hq
+    refine isWeaklyRegular_of_retract (i := Finsupp.lsingle (R := A) i)
+      (p := Finsupp.lapply (R := A) i) (by ext; simp) ((eL.isWeaklyRegular_congr _).mp ?_)
+    rw [isWeaklyRegular_append_iff]
+    refine ⟨(isWeaklyRegular_iff_of_exact hf hfg hg hq).mpr h.1, ?_⟩
+    have h2 := h.2
+    rw [isWeaklyRegular_singleton_iff] at h2 ⊢
+    exact h2.of_injective _ hinj
+
+/-- The key step of Lemmes 6 b) and 16 with an arbitrary `A`-algebra `B` in place of `A/J` and an
+arbitrary nonzero `A`-module `T` in place of `A`: if `JⁿT = JⁿR = 0`, the layers of `T` are free
+over `B` and those of `R` flat over `B`, every `T`-weakly regular sequence is `R`-weakly regular. -/
+theorem isWeaklyRegular_of_gr' {T R : Type*} [AddCommGroup T] [Module A T] [Nontrivial T]
+    [AddCommGroup R] [Module A R] {n : ℕ} (hT : filt J T n = ⊥) (hR : filt J R n = ⊥)
+    (ι : ℕ → Type*) (eT : ∀ k, layer J T k ≃ₗ[A] (ι k →₀ B))
+    (N : ℕ → Type*) [∀ k, AddCommGroup (N k)] [∀ k, Module B (N k)] [∀ k, Module A (N k)]
+    [∀ k, IsScalarTower A B (N k)] [∀ k, Module.Flat B (N k)]
+    (eR : ∀ k, layer J R k ≃ₗ[A] N k) {rs : List A} (h : IsWeaklyRegular T rs) :
+    IsWeaklyRegular R rs :=
+  isWeaklyRegular_of_layers hR fun k => ((eR k).isWeaklyRegular_congr rs).mpr
+    (isWeaklyRegular_of_flat' B _ (isWeaklyRegular_of_layers_free' B hT ι eT h))
+
+end General
+
+section LocalizeLayers
+
+variable (J : Ideal A) (S : Submonoid A) {M N : Type*} [AddCommGroup M] [Module A M]
+  [AddCommGroup N] [Module A N] (f : M →ₗ[A] N) [IsLocalizedModule S f]
+
+/-- `Jᵏ(S⁻¹M)` is the localisation of `JᵏM`. -/
+theorem filt_eq_localized₀ (k : ℕ) : filt J N k = (filt J M k).localized₀ S f := by
+  rw [filt, localized₀_smul, localized₀_top]
+
+/-- The map `grᵏ_J(M) → grᵏ_J(N)` induced by a localisation `f : M → N = S⁻¹M`. -/
+def layerMap (k : ℕ) : layer J M k →ₗ[A] layer J N k :=
+  mapQ _ _ (f.restrict fun x hx => by
+    rw [filt_eq_localized₀ J S f]; exact ⟨x, hx, 1, by simp⟩) fun x hx => by
+    simp only [mem_comap, subtype_apply, LinearMap.restrict_apply] at hx ⊢
+    rw [filt_eq_localized₀ J S f]; exact ⟨x, hx, 1, by simp⟩
+
+variable {J S}
+
+include f in
+theorem mem_filt_of_smul {k : ℕ} (s : S) {y : N} (h : s • y ∈ filt J N k) : y ∈ filt J N k := by
+  rw [filt_eq_localized₀ J S f] at h ⊢
+  obtain ⟨m, hm, t, e⟩ := h
+  refine ⟨m, hm, s * t, ?_⟩
+  rw [IsLocalizedModule.mk'_eq_iff, mul_comm, mul_smul, ← e, IsLocalizedModule.mk'_cancel']
+
+include f in
+theorem exists_smul_eq_of_mem_filt {k : ℕ} (s : S) {y : N} (h : y ∈ filt J N k) :
+    ∃ z ∈ filt J N k, s • z = y := by
+  rw [filt_eq_localized₀ J S f] at h ⊢
+  obtain ⟨m, hm, t, rfl⟩ := h
+  exact ⟨_, ⟨m, hm, s * t, rfl⟩, by
+    rw [Submonoid.smul_def, ← IsLocalizedModule.mk'_smul, ← Submonoid.smul_def,
+      IsLocalizedModule.mk'_cancel_left]⟩
+
+/-- **The layers commute with localisation**: `grᵏ_J(S⁻¹M) = S⁻¹ grᵏ_J(M)`. -/
+instance isLocalizedModule_layerMap (k : ℕ) : IsLocalizedModule S (layerMap J S f k) where
+  map_units s := by
+    refine (Module.End.isUnit_iff _).mpr ⟨fun a b e => ?_, fun b => ?_⟩
+    · rw [← sub_eq_zero] at e ⊢
+      rw [← map_sub] at e
+      generalize a - b = c at e
+      induction c using Submodule.Quotient.induction_on with
+      | H y =>
+        rw [Module.algebraMap_end_apply, ← Submodule.Quotient.mk_smul,
+          Submodule.Quotient.mk_eq_zero] at e
+        rw [Submodule.Quotient.mk_eq_zero]
+        exact mem_filt_of_smul f s e
+    · induction b using Submodule.Quotient.induction_on with
+      | H y =>
+        obtain ⟨z, hz, e⟩ := exists_smul_eq_of_mem_filt f s y.2
+        exact ⟨Submodule.Quotient.mk ⟨z, hz⟩, congrArg Submodule.Quotient.mk (Subtype.ext e)⟩
+  surj y := by
+    induction y using Submodule.Quotient.induction_on with
+    | H y =>
+      obtain ⟨y, hy⟩ := y
+      rw [filt_eq_localized₀ J S f] at hy
+      obtain ⟨m, hm, t, rfl⟩ := hy
+      exact ⟨(Submodule.Quotient.mk ⟨m, hm⟩, t), congrArg Submodule.Quotient.mk
+        (Subtype.ext (IsLocalizedModule.mk'_cancel' f m t))⟩
+  exists_of_eq {a b} e := by
+    induction a using Submodule.Quotient.induction_on with
+    | H a =>
+    induction b using Submodule.Quotient.induction_on with
+    | H b =>
+      rw [layerMap, mapQ_apply, mapQ_apply, Submodule.Quotient.eq] at e
+      simp only [mem_comap, subtype_apply, AddSubgroupClass.coe_sub,
+        LinearMap.restrict_apply, ← map_sub] at e
+      rw [filt_eq_localized₀ J S f] at e
+      obtain ⟨x, hx, t, e⟩ := e
+      rw [IsLocalizedModule.mk'_eq_iff, ← LinearMap.map_smul_of_tower] at e
+      obtain ⟨c, hc⟩ := IsLocalizedModule.exists_of_eq (S := S) e
+      refine ⟨c * t, ?_⟩
+      rw [← Submodule.Quotient.mk_smul, ← Submodule.Quotient.mk_smul, Submodule.Quotient.eq]
+      simp only [mem_comap, subtype_apply, ← smul_sub, mul_smul]
+      rw [Submodule.coe_smul_of_tower, Submodule.coe_smul_of_tower, AddSubgroupClass.coe_sub, ← hc]
+      exact (filt J M (k + 1)).smul_of_tower_mem c hx
+
+end LocalizeLayers
+
+section GenericOpen
+
+open Module PrimeSpectrum TensorProduct Pointwise
+
+variable {J : Ideal A}
+
+/-- `J` kills the layers. -/
+theorem isTorsionBySet_layer (M : Type*) [AddCommGroup M] [Module A M] (k : ℕ) :
+    IsTorsionBySet A (layer J M k) J := by
+  rintro x ⟨a, ha⟩
+  induction x using Submodule.Quotient.induction_on with
+  | H y =>
+    rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.mk_eq_zero, mem_comap,
+      subtype_apply, Submodule.coe_smul_of_tower, filt, pow_succ', Submodule.mul_smul]
+    exact smul_mem_smul ha y.2
+
+/-- The layers are `A/J`-modules. -/
+@[instance_reducible]
+def layerModule (M : Type*) [AddCommGroup M] [Module A M] (k : ℕ) :
+    Module (A ⧸ J) (layer J M k) :=
+  (isTorsionBySet_layer M k).module
+
+attribute [local instance] layerModule
+
+instance (M : Type*) [AddCommGroup M] [Module A M] (k : ℕ) :
+    IsScalarTower A (A ⧸ J) (layer J M k) :=
+  IsTorsionBySet.isScalarTower _
+
+/-- The base change `L → (A/J)_q ⊗ L` is, over `A`, a localisation at the inverse image of `q`. -/
+instance isLocalizedModule_mk_restrictScalars (q : PrimeSpectrum (A ⧸ J)) (L : Type*)
+    [AddCommGroup L] [Module A L] [Module (A ⧸ J) L] [IsScalarTower A (A ⧸ J) L] :
+    IsLocalizedModule (q.asIdeal.comap (Ideal.Quotient.mk J)).primeCompl
+      ((TensorProduct.mk (A ⧸ J) (Localization.AtPrime q.asIdeal) L 1).restrictScalars A) where
+  map_units s := by
+    have := (Module.End.isUnit_iff _).mp (IsLocalizedModule.map_units (S := q.asIdeal.primeCompl)
+      (TensorProduct.mk (A ⧸ J) (Localization.AtPrime q.asIdeal) L 1) ⟨Ideal.Quotient.mk J s, s.2⟩)
+    exact (Module.End.isUnit_iff _).mpr (by
+      convert this using 1; ext x; exact (algebraMap_smul (A ⧸ J) (s : A) x).symm)
+  surj y := by
+    obtain ⟨⟨x, t, ht⟩, e⟩ := IsLocalizedModule.surj q.asIdeal.primeCompl
+      (TensorProduct.mk (A ⧸ J) (Localization.AtPrime q.asIdeal) L 1) y
+    obtain ⟨t, rfl⟩ := Ideal.Quotient.mk_surjective t
+    exact ⟨(x, ⟨t, ht⟩), (algebraMap_smul (A ⧸ J) t y).symm.trans e⟩
+  exists_of_eq {x₁ x₂} e := by
+    obtain ⟨⟨c, hc⟩, e⟩ := IsLocalizedModule.exists_of_eq (S := q.asIdeal.primeCompl)
+      (f := TensorProduct.mk (A ⧸ J) (Localization.AtPrime q.asIdeal) L 1) e
+    obtain ⟨c, rfl⟩ := Ideal.Quotient.mk_surjective c
+    refine ⟨⟨c, hc⟩, ?_⟩
+    change c • x₁ = c • x₂
+    rw [← algebraMap_smul (A ⧸ J) c x₁, ← algebraMap_smul (A ⧸ J) c x₂]
+    exact e
+
+/-- Over a reduced ring every minimal prime lies in the free locus of every module. -/
+theorem mem_freeLocus_of_mem_minimalPrimes {R L : Type*} [CommRing R] [IsReduced R]
+    [AddCommGroup L] [Module R L] (q : PrimeSpectrum R) (hq : q.asIdeal ∈ minimalPrimes R) :
+    q ∈ freeLocus R L := by
+  have := Ring.KrullDimLE.of_isLocalization q.asIdeal hq (Localization.AtPrime q.asIdeal)
+  let : Field (Localization.AtPrime q.asIdeal) := Ring.KrullDimLE.isField_of_isReduced.toField
+  exact Module.Free.of_divisionRing _ _
+
+/-- A set of primes containing every minimal prime is dense. -/
+theorem dense_of_minimalPrimes_subset {R : Type*} [CommRing R] {V : Set (PrimeSpectrum R)}
+    (hV : ∀ q : PrimeSpectrum R, q.asIdeal ∈ minimalPrimes R → q ∈ V) : Dense V := fun p => by
+  obtain ⟨q, hq, hq'⟩ := Ideal.exists_minimalPrimes_le (J := p.asIdeal) bot_le
+  exact ((le_iff_specializes ⟨q, hq.1.1⟩ p).mp hq').mem_closed isClosed_closure
+    (subset_closure (hV ⟨q, hq.1.1⟩ hq))
+
+/-- At a point of the free locus of the nonzero layers, all layers are free. -/
+theorem free_tensor_layer (q : PrimeSpectrum (A ⧸ J)) {M : Type*} [AddCommGroup M] [Module A M]
+    {n : ℕ} (hM : filt J M n = ⊥) (hq : ∀ k < n, q ∈ freeLocus (A ⧸ J) (layer J M k)) (k : ℕ) :
+    Module.Free (Localization.AtPrime q.asIdeal)
+      (Localization.AtPrime q.asIdeal ⊗[A ⧸ J] layer J M k) := by
+  rcases lt_or_ge k n with hk | hk
+  · exact (mem_freeLocus_iff_tensor q _).1 (hq k hk)
+  · have : Subsingleton (filt J M k) := by
+      rw [eq_bot_iff.2 ((filt_antitone hk).trans hM.le)]; infer_instance
+    infer_instance
+
+/-- **Compatibility of the layers with localisation.** If `N = M_𝔭` with `𝔭` the inverse image
+of `q ∈ Spec(A/J)`, then `grᵏ_J(N) ≅ (A/J)_q ⊗ grᵏ_J(M)`. -/
+noncomputable def layerEquiv (q : PrimeSpectrum (A ⧸ J)) {M N : Type*} [AddCommGroup M]
+    [Module A M] [AddCommGroup N] [Module A N] (f : M →ₗ[A] N)
+    [IsLocalizedModule (q.asIdeal.comap (Ideal.Quotient.mk J)).primeCompl f] (k : ℕ) :
+    layer J N k ≃ₗ[A] Localization.AtPrime q.asIdeal ⊗[A ⧸ J] layer J M k :=
+  IsLocalizedModule.linearEquiv (q.asIdeal.comap (Ideal.Quotient.mk J)).primeCompl
+    (layerMap J (q.asIdeal.comap (Ideal.Quotient.mk J)).primeCompl f k)
+    ((TensorProduct.mk (A ⧸ J) (Localization.AtPrime q.asIdeal) (layer J M k) 1).restrictScalars A)
+
+/-- Weak regularity only depends on the sequence up to units. -/
+theorem isWeaklyRegular_of_forall₂_associated {B M : Type*} [CommRing B] [AddCommGroup M]
+    [Module B M] {rs rs' : List B} (h : List.Forall₂ Associated rs rs')
+    (hM : IsWeaklyRegular M rs) : IsWeaklyRegular M rs' := by
+  induction h generalizing M with
+  | nil => exact hM
+  | @cons a b _ _ hab _ ih =>
+    obtain ⟨u, rfl⟩ := hab
+    rw [isWeaklyRegular_cons_iff] at hM ⊢
+    have heq : (a * (u : B)) • (⊤ : Submodule B M) = a • ⊤ := by
+      rw [mul_smul]
+      congr 1
+      refine eq_top_iff.2 fun x _ => (Submodule.mem_smul_pointwise_iff_exists x (u : B) ⊤).2
+        ⟨(↑u⁻¹ : B) • x, Submodule.mem_top, ?_⟩
+      rw [smul_smul, u.mul_inv, one_smul]
+    exact ⟨hM.1.mul (u.isUnit.isSMulRegular M),
+      ((Submodule.quotEquivOfEq _ _ heq).isWeaklyRegular_congr _).mpr (ih hM.2)⟩
+
+variable [IsNoetherianRing A]
+
+/-- The layers of a finite module are finite over `A/J`, hence finitely presented. -/
+instance (M : Type*) [AddCommGroup M] [Module A M] [Module.Finite A M] (k : ℕ) :
+    FinitePresentation (A ⧸ J) (layer J M k) :=
+  have := Module.Finite.of_restrictScalars_finite A (A ⧸ J) (layer J M k)
+  finitePresentation_of_finite _ _
+
+/-- **Lemme 6, the dense open, for `X = S`.** Let `A` be noetherian, `J` a nilpotent ideal with
+`A/J` reduced (e.g. the nilradical), and `R` a finite `A`-module. There is a dense open
+`U ⊆ Spec A` such that at every `𝔭 ∈ U` every sequence of `A` weakly regular on `A_𝔭` is weakly
+regular on `R_𝔭`. `U` is the locus where the finitely many nonzero layers of `A` and of `R`
+are free over `A/J` (open by finite presentation, dense since it contains the minimal primes,
+at which `A/J` localises to a field). -/
+theorem exists_isOpen_dense_isWeaklyRegular {n : ℕ} (hn : J ^ n = ⊥) [IsReduced (A ⧸ J)]
+    (R : Type*) [AddCommGroup R] [Module A R] [Module.Finite A R] :
+    ∃ U : Set (PrimeSpectrum A), IsOpen U ∧ Dense U ∧ ∀ 𝔭 ∈ U, ∀ rs : List A,
+      IsWeaklyRegular (Localization.AtPrime 𝔭.asIdeal) rs →
+        IsWeaklyRegular (LocalizedModule 𝔭.asIdeal.primeCompl R) rs := by
+  have hJ : J ≤ nilradical A := fun x hx => ⟨n, by simpa [hn] using Ideal.pow_mem_pow hx n⟩
+  let h := (isClosedEmbedding_comap_of_surjective _ _
+    Ideal.Quotient.mk_surjective).isEmbedding.toHomeomorphOfSurjective
+    (comap_quotientMk_bijective_of_le_nilradical hJ).2
+  let V : Set (PrimeSpectrum (A ⧸ J)) :=
+    ⋂ k ∈ Finset.range n, freeLocus (A ⧸ J) (layer J A k) ∩ freeLocus (A ⧸ J) (layer J R k)
+  have hV : IsOpen V := isOpen_biInter_finset fun k _ => isOpen_freeLocus.inter isOpen_freeLocus
+  refine ⟨h '' V, h.isOpenMap _ hV, h.surjective.denseRange.dense_image h.continuous
+    (dense_of_minimalPrimes_subset fun q hq => Set.mem_iInter₂.2 fun k _ =>
+      ⟨mem_freeLocus_of_mem_minimalPrimes q hq, mem_freeLocus_of_mem_minimalPrimes q hq⟩), ?_⟩
+  rintro _ ⟨q, hq, rfl⟩ rs hrs
+  have hq' k (hk : k < n) := Set.mem_iInter₂.1 hq k (Finset.mem_range.2 hk)
+  have := free_tensor_layer q (M := A) (by simp [filt, hn]) fun k hk => (hq' k hk).1
+  have := free_tensor_layer q (M := R) (by simp [filt, hn]) fun k hk => (hq' k hk).2
+  have : IsLocalizedModule (q.asIdeal.comap (Ideal.Quotient.mk J)).primeCompl
+      (Algebra.linearMap A (Localization.AtPrime (h q).asIdeal)) :=
+    inferInstanceAs (IsLocalizedModule (h q).asIdeal.primeCompl _)
+  have : IsLocalizedModule (q.asIdeal.comap (Ideal.Quotient.mk J)).primeCompl
+      (LocalizedModule.mkLinearMap (h q).asIdeal.primeCompl R) :=
+    inferInstanceAs (IsLocalizedModule (h q).asIdeal.primeCompl _)
+  exact isWeaklyRegular_of_gr' (Localization.AtPrime q.asIdeal) (J := J) (n := n)
+    (by simp [filt, hn]) (by simp [filt, hn]) _
+    (fun k => (layerEquiv q (Algebra.linearMap A (Localization.AtPrime (h q).asIdeal)) k).trans
+      ((Module.Free.chooseBasis _ _).repr.restrictScalars A))
+    (fun k => Localization.AtPrime q.asIdeal ⊗[A ⧸ J] layer J R k)
+    (layerEquiv q (LocalizedModule.mkLinearMap (h q).asIdeal.primeCompl R)) hrs
+
+/-- **Lemme 6 for `X = S`, as stated.** The same dense open `U`, for every `A_𝔭`-weakly regular
+sequence of `A_𝔭` (each term is a unit times the image of an element of `A`). -/
+theorem exists_isOpen_dense_isWeaklyRegular' {n : ℕ} (hn : J ^ n = ⊥) [IsReduced (A ⧸ J)]
+    (R : Type*) [AddCommGroup R] [Module A R] [Module.Finite A R] :
+    ∃ U : Set (PrimeSpectrum A), IsOpen U ∧ Dense U ∧
+      ∀ 𝔭 ∈ U, ∀ rs : List (Localization.AtPrime 𝔭.asIdeal),
+        IsWeaklyRegular (Localization.AtPrime 𝔭.asIdeal) rs →
+          IsWeaklyRegular (LocalizedModule 𝔭.asIdeal.primeCompl R) rs := by
+  obtain ⟨U, hU, hd, H⟩ := exists_isOpen_dense_isWeaklyRegular hn R
+  refine ⟨U, hU, hd, fun 𝔭 h𝔭 rs hrs => ?_⟩
+  let S := 𝔭.asIdeal.primeCompl
+  have hass : List.Forall₂ Associated rs
+      ((rs.map fun x => (IsLocalization.sec S x).1).map (algebraMap A _)) := by
+    rw [List.map_map, List.forall₂_map_right_iff]
+    exact List.forall₂_same.2 fun x _ =>
+      ⟨(IsLocalization.map_units _ (IsLocalization.sec S x).2).unit, IsLocalization.sec_spec S x⟩
+  have h1 := isWeaklyRegular_of_forall₂_associated hass hrs
+  rw [isWeaklyRegular_map_algebraMap_iff] at h1
+  exact isWeaklyRegular_of_forall₂_associated (hass.flip.imp fun _ _ => Associated.symm)
+    ((isWeaklyRegular_map_algebraMap_iff _ _ _).2 (H 𝔭 h𝔭 _ h1))
+
+end GenericOpen
+
+section Converse
+
+open Module TensorProduct IsLocalRing
+
+/-- **Rem. 5 bis, constant fibre rank over a reduced ring.** Over a reduced local ring `B`, a
+finite module `P` with `dim_{B_𝔮}(B_𝔮 ⊗ P) = dim_k(k ⊗ P)` at every minimal prime `𝔮` (where
+`B_𝔮` is a field) is free. A basis of `k ⊗ P` lifts to a surjection `Bⁿ → P`; at each minimal
+`𝔮` it becomes a surjection between `B_𝔮`-spaces of the same dimension, hence injective, so the
+coordinates of a kernel element lie in every minimal prime, i.e. in the nilradical `0`. -/
+theorem free_of_finrank_eq_of_isReduced {B P : Type*} [CommRing B] [IsLocalRing B] [IsReduced B]
+    [AddCommGroup P] [Module B P] [Module.Finite B P]
+    (h : ∀ 𝔮 : PrimeSpectrum B, 𝔮.asIdeal ∈ minimalPrimes B →
+      finrank (Localization.AtPrime 𝔮.asIdeal) (Localization.AtPrime 𝔮.asIdeal ⊗[B] P) =
+        finrank (ResidueField B) (ResidueField B ⊗[B] P)) :
+    Module.Free B P := by
+  let b := Module.finBasis (ResidueField B) (ResidueField B ⊗[B] P)
+  choose v hv using fun i => TensorProduct.mk_surjective B P (ResidueField B)
+    Ideal.Quotient.mk_surjective (b i)
+  let f := Fintype.linearCombination B v
+  have hf : Surjective f := by
+    rw [← LinearMap.range_eq_top, Fintype.range_linearCombination]
+    exact span_eq_top_of_tmul_eq_basis v b hv
+  have hinj : Injective f := by
+    rw [injective_iff_map_eq_zero]
+    intro x hx
+    ext i
+    have hmem : x i ∈ (⊥ : Ideal B).radical := by
+      rw [← Ideal.sInf_minimalPrimes, Submodule.mem_sInf]
+      intro 𝔮 h𝔮
+      have := h𝔮.1.1
+      have := Ring.KrullDimLE.of_isLocalization 𝔮 h𝔮 (Localization.AtPrime 𝔮)
+      let : Field (Localization.AtPrime 𝔮) := Ring.KrullDimLE.isField_of_isReduced.toField
+      have hfq : Injective (f.baseChange (Localization.AtPrime 𝔮)) := by
+        refine (LinearMap.injective_iff_surjective_of_finrank_eq_finrank ?_).2
+          (LinearMap.lTensor_surjective _ hf)
+        rw [finrank_baseChange, h ⟨𝔮, h𝔮.1.1⟩ h𝔮, finrank_fin_fun, Module.finrank_eq_card_basis b,
+          Fintype.card_fin]
+      have h1 : (1 : Localization.AtPrime 𝔮) ⊗ₜ[B] x = 0 :=
+        hfq (by rw [LinearMap.baseChange_tmul, hx, tmul_zero, map_zero])
+      have h2 := congrFun (congrArg (piScalarRight B B (Localization.AtPrime 𝔮) (Fin _)) h1) i
+      simp only [piScalarRight_apply, piScalarRightHom_tmul, map_zero, Pi.zero_apply] at h2
+      rw [Algebra.smul_def, mul_one, IsLocalization.map_eq_zero_iff (Ideal.primeCompl 𝔮)] at h2
+      obtain ⟨⟨m, hm⟩, e⟩ := h2
+      exact (h𝔮.1.1.mem_or_mem (e ▸ 𝔮.zero_mem)).resolve_left hm
+    simpa [nilradical_eq_zero] using hmem
+  exact Module.Free.of_equiv (LinearEquiv.ofBijective f ⟨hinj, hf⟩)
+
+/-- **Rem. 5 bis, the last step.** If `P` (here `F(B)`) is finitely presented with free
+localisations at the maximal ideals, and `φ : P ⊗ M → N` (here `F(B) ⊗ M → F(M)`) is bijective
+at every maximal ideal, then `P` is projective and `N ≅ Hom(P^∨, M)`. -/
+theorem nonempty_equiv_hom_dual {B P M N : Type*} [CommRing B] [AddCommGroup P] [Module B P]
+    [Module.FinitePresentation B P] [AddCommGroup M] [Module B M] [AddCommGroup N] [Module B N]
+    (hP : ∀ (m : Ideal B) [m.IsMaximal],
+      Module.Free (Localization.AtPrime m) (LocalizedModule m.primeCompl P))
+    (φ : P ⊗[B] M →ₗ[B] N)
+    (hφ : ∀ (m : Ideal B) [m.IsMaximal], Bijective (LocalizedModule.map m.primeCompl φ)) :
+    Module.Projective B P ∧ Nonempty (N ≃ₗ[B] (Dual B P →ₗ[B] M)) := by
+  have : Module.Projective B P := projective_of_localization_maximal fun m _ => inferInstance
+  exact ⟨this, ⟨(LinearEquiv.ofBijective φ (bijective_of_localized_maximal φ hφ)).symm ≪≫ₗ
+    TensorProduct.congr (evalEquiv B P) (LinearEquiv.refl B M) ≪≫ₗ
+    dualTensorHomEquiv B (Dual B P) M⟩⟩
+
+end Converse
+
+end Grothendieck.Folder94

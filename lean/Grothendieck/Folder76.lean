@@ -777,3 +777,175 @@ theorem triangleBoundary_not_hornFill : ¬ triangleBoundary.HornFill := by
   exact absurd u.2 (by decide)
 
 end Grothendieck.Folder76.Sommets
+
+/-!
+# Folder 76, page 27: the flag presheaf as a semi-simplicial set
+
+The reading concludes (« Ainsi, pour tout `G`-ensemble `X` ») that `D_* = ∐_H D(H)`, ordered by
+`d ≤ d'` iff `H ⊆ H'` and `d` is the restriction of `d'`, satisfies (a), and defines a
+semi-simplicial set satisfying (1) with `D_m = ∐_{card H = m + 1} X / N_H`, whose vertex relation
+is transitive. This is the « hence » of finding `76-flag-presheaf-gset-lemma`.
+
+* `flagSS`: the semi-simplicial set, `u^*` sending a flag of type `H = {h₀ < ⋯ < h_m}` to its
+  restriction to `{h_{u 0} < ⋯ < h_{u k}}`; its faces are pairwise distinct (condition (1)),
+  since distinct `u` give distinct types.
+* `flagSS_le_iff`: its poset of simplices is `∐_H D(H)` with the order above, and
+  `flagSS_isFlagGeom` is condition (a) for it.
+* `flagSS_prec_iff`: its edge relation on `D₀` is the relation `≺` of page 27; hence
+  `flagSS_prec_trans` (transitivity) and `flagSS_vertexOrder`: the orders of the simplices all
+  come from one order on `D₀` satisfying (b) and (c).
+-/
+
+namespace Grothendieck.Folder76
+
+open Sommets
+
+variable {G : Type*} [Group G] {n : ℕ} {σ : Fin (n + 1) → G} {X : Type} [MulAction G X]
+
+lemma res_self {H : Set (Fin (n + 1))} (h : H ⊆ H) (d : D σ X H) : res h d = d := by
+  obtain ⟨x, rfl⟩ := mk_surjective H d; rfl
+
+lemma res_eq_res {L K A B : Set (Fin (n + 1))} (hL : L ⊆ K) {h₁ : K ⊆ A} {h₂ : K ⊆ B}
+    {c : D σ X A} {a : D σ X B} (e : res h₁ c = res h₂ a) (h₃ : L ⊆ A) (h₄ : L ⊆ B) :
+    res h₃ c = res h₄ a := by
+  rw [← res_res hL h₁, e, res_res]
+
+/-- The types of cardinality `m + 1`. -/
+abbrev Typ (n m : ℕ) : Type := {H : Finset (Fin (n + 1)) // H.card = m + 1}
+
+variable (σ X) in
+/-- `D_m = ∐_{card H = m + 1} D(H)`. -/
+abbrev Simp (m : ℕ) : Type := Σ H : Typ n m, D σ X (H.1 : Set (Fin (n + 1)))
+
+lemma simp_eq_iff {k : ℕ} {H H' : Typ n k} (a : D σ X H.1) (b : D σ X H'.1) :
+    (⟨H, a⟩ : Simp σ X k) = ⟨H', b⟩ ↔
+      H.1 = H'.1 ∧ ∀ h : (H.1 : Set (Fin (n + 1))) ⊆ H'.1, a = res h b := by
+  obtain ⟨H, hc⟩ := H
+  obtain ⟨H', hc'⟩ := H'
+  refine ⟨fun h => ?_, fun ⟨e, h⟩ => by subst e; rw [h subset_rfl, res_self]⟩
+  cases h
+  exact ⟨rfl, fun h => (res_self h a).symm⟩
+
+/-- The type of the face `u^* d` of a flag `d` of type `H`: the image of `u` in `H`. -/
+def faceType {k m : ℕ} (u : Fin (k + 1) ↪o Fin (m + 1)) (H : Typ n m) : Typ n k :=
+  ⟨Finset.univ.map (u.trans (H.1.orderEmbOfFin H.2)).toEmbedding, by simp⟩
+
+lemma faceType_sub {k m : ℕ} (u : Fin (k + 1) ↪o Fin (m + 1)) (H : Typ n m) :
+    ((faceType u H).1 : Set (Fin (n + 1))) ⊆ H.1 := fun _ h => by
+  obtain ⟨i, -, rfl⟩ := Finset.mem_map.1 h
+  exact Finset.orderEmbOfFin_mem H.1 H.2 (u i)
+
+lemma orderEmbOfFin_faceType {k m : ℕ} (u : Fin (k + 1) ↪o Fin (m + 1)) (H : Typ n m) :
+    (faceType u H).1.orderEmbOfFin (faceType u H).2 = u.trans (H.1.orderEmbOfFin H.2) :=
+  (Finset.orderEmbOfFin_unique' (faceType u H).2 fun i =>
+    Finset.mem_map_of_mem _ (Finset.mem_univ i)).symm
+
+lemma faceType_comp {k m l : ℕ} (u : Fin (k + 1) ↪o Fin (m + 1)) (v : Fin (m + 1) ↪o Fin (l + 1))
+    (H : Typ n l) : (faceType (u.trans v) H).1 = (faceType u (faceType v H)).1 := by
+  show _ = Finset.univ.map (u.trans ((faceType v H).1.orderEmbOfFin (faceType v H).2)).toEmbedding
+  rw [orderEmbOfFin_faceType]; rfl
+
+lemma map_univ_orderEmbOfFin {m : ℕ} (H : Typ n m) :
+    Finset.univ.map (H.1.orderEmbOfFin H.2).toEmbedding = H.1 :=
+  Finset.coe_injective (by simp)
+
+variable (σ X) in
+/-- **The semi-simplicial set of flags** (page 27): `D_m = ∐_{card H = m + 1} X / N_H`, with
+`u^*` the restriction to the image of `u` in the type. It satisfies (1). -/
+def flagSS : NonSingular where
+  X := Simp σ X
+  map u x := ⟨faceType u x.1, res (faceType_sub u x.1) x.2⟩
+  map_id x := (simp_eq_iff _ _).2 ⟨map_univ_orderEmbOfFin x.1, fun _ => rfl⟩
+  map_comp u v x :=
+    (simp_eq_iff _ _).2 ⟨faceType_comp u v x.1, fun _ => by dsimp only; rw [res_res, res_res]⟩
+  cond1 x u v h := by
+    have hS := ((simp_eq_iff _ _).1 h).1
+    have hu : u.trans (x.1.1.orderEmbOfFin x.1.2) = v.trans (x.1.1.orderEmbOfFin x.1.2) := by
+      rw [← orderEmbOfFin_faceType u, ← orderEmbOfFin_faceType v]
+      exact Finset.orderEmbOfFin_unique' (faceType v x.1).2 fun i => by
+        rw [← hS]; exact Finset.orderEmbOfFin_mem _ _ i
+    exact RelEmbedding.ext fun i => (x.1.1.orderEmbOfFin x.1.2).injective (congrArg (· i) hu)
+
+/-- The poset of simplices of `flagSS` is `D_* = ∐_H D(H)`, with `d ≤ d'` iff `H ⊆ H'` and `d` is
+the restriction of `d'`. -/
+theorem flagSS_le_iff {k m : ℕ} {H : Typ n k} {H' : Typ n m} (a : D σ X H.1) (b : D σ X H'.1) :
+    (⟨k, ⟨H, a⟩⟩ : Σ m, (flagSS σ X).X m) ≤ ⟨m, ⟨H', b⟩⟩ ↔
+      ∃ h : (H.1 : Set (Fin (n + 1))) ⊆ H'.1, a = res h b := by
+  constructor
+  · rintro ⟨u, hu⟩
+    obtain ⟨hH, hab⟩ := (simp_eq_iff _ _).1 hu
+    exact ⟨hH ▸ faceType_sub u H', (hab (by rw [hH])).trans (by rw [res_res])⟩
+  · rintro ⟨h, rfl⟩
+    let e := H'.1.orderIsoOfFin H'.2
+    let f := H.1.orderEmbOfFin H.2
+    let u : Fin (k + 1) ↪o Fin (m + 1) := OrderEmbedding.ofStrictMono
+      (fun i => e.symm ⟨f i, h (Finset.orderEmbOfFin_mem _ _ i)⟩)
+      fun i j hij => e.symm.strictMono (Subtype.mk_lt_mk.2 (f.strictMono hij))
+    have hu : u.trans (H'.1.orderEmbOfFin H'.2) = f := RelEmbedding.ext fun i => by
+      rw [RelEmbedding.trans_apply, ← Finset.coe_orderIsoOfFin_apply]
+      exact congrArg Subtype.val (e.apply_symm_apply _)
+    have hH : (faceType u H').1 = H.1 := by
+      show Finset.univ.map (u.trans (H'.1.orderEmbOfFin H'.2)).toEmbedding = H.1
+      rw [hu]; exact map_univ_orderEmbOfFin H
+    exact ⟨u, (simp_eq_iff _ _).2 ⟨hH.symm, fun _ => by dsimp only; exact (res_res _ _ _).symm⟩⟩
+
+/-- **Condition (a)** of page 20 for `D_* = ∐_H D(H)`. -/
+theorem flagSS_isFlagGeom : IsFlagGeom (Σ m, (flagSS σ X).X m) := (flagSS σ X).isFlagGeom
+
+lemma faceType_pt {m : ℕ} (i : Fin (m + 1)) (H : Typ n m) :
+    (faceType (NonSingular.pt i) H).1 = {H.1.orderEmbOfFin H.2 i} := by
+  ext a
+  simp only [faceType, Finset.mem_map, Finset.mem_univ, true_and, Finset.mem_singleton]
+  exact ⟨fun ⟨_, h⟩ => h.symm, fun h => ⟨0, h.symm⟩⟩
+
+/-- The edge relation of `flagSS` on `D₀` is the relation `≺` of page 27. -/
+theorem flagSS_prec_iff {i j : Fin (n + 1)} (hi : ({i} : Finset _).card = 0 + 1)
+    (hj : ({j} : Finset _).card = 0 + 1) (a : D σ X ({i} : Finset _))
+    (b : D σ X ({j} : Finset _)) :
+    (flagSS σ X).Prec ⟨⟨{i}, hi⟩, a⟩ ⟨⟨{j}, hj⟩, b⟩ ↔
+      Prec (res (by simp) a : D σ X {i}) (res (by simp) b : D σ X {j}) := by
+  constructor
+  · rintro ⟨⟨P, c⟩, h₀, h₁⟩
+    obtain ⟨hP₀, hc₀⟩ := (simp_eq_iff _ _).1 h₀
+    obtain ⟨hP₁, hc₁⟩ := (simp_eq_iff _ _).1 h₁
+    rw [faceType_pt, Finset.singleton_inj] at hP₀ hP₁
+    refine ⟨hP₀ ▸ hP₁ ▸ (P.1.orderEmbOfFin P.2).strictMono (by decide), P.1,
+      by simp [← hP₀, Finset.orderEmbOfFin_mem], by simp [← hP₁, Finset.orderEmbOfFin_mem], c,
+      ?_, ?_⟩
+    · exact res_eq_res (by simp [faceType_pt, hP₀]) (hc₀ (by simp [faceType_pt, hP₀])) _ _
+    · exact res_eq_res (by simp [faceType_pt, hP₁]) (hc₁ (by simp [faceType_pt, hP₁])) _ _
+  · intro hp
+    obtain ⟨hij, d, hd₁, hd₂⟩ := (prec_iff_pair _ _).1 hp
+    let P : Typ n 1 := ⟨{i, j}, Finset.card_pair hij.ne⟩
+    have hP : P.1.orderEmbOfFin P.2 0 = i ∧ P.1.orderEmbOfFin P.2 1 = j := by
+      have h0 := Finset.orderEmbOfFin_mem P.1 P.2 0
+      have h1 := Finset.orderEmbOfFin_mem P.1 P.2 1
+      have hlt := (P.1.orderEmbOfFin P.2).strictMono (show (0 : Fin 2) < 1 by decide)
+      simp only [P, Finset.mem_insert, Finset.mem_singleton] at h0 h1
+      rcases h0 with h0 | h0 <;> rcases h1 with h1 | h1 <;> rw [h0, h1] at hlt <;>
+        first | exact ⟨h0, h1⟩ | exact absurd hlt (lt_irrefl _) | exact absurd hlt (lt_asymm hij)
+    refine ⟨⟨P, res (by simp [P]) d⟩, (simp_eq_iff _ _).2 ⟨by rw [faceType_pt, hP.1], fun _ => ?_⟩,
+      (simp_eq_iff _ _).2 ⟨by rw [faceType_pt, hP.2], fun _ => ?_⟩⟩ <;> rw [res_res]
+    · exact res_eq_res (by simp [faceType_pt, hP.1]) hd₁ _ _
+    · exact res_eq_res (by simp [faceType_pt, hP.2]) hd₂ _ _
+
+/-- **Transitivity** of the edge relation of `flagSS`, for every `G`-set `X`. -/
+theorem flagSS_prec_trans (hσ : ∀ i j : Fin (n + 1), (i : ℕ) + 2 ≤ j → Commute (σ i) (σ j))
+    (x y w : (flagSS σ X).X 0) (hxy : (flagSS σ X).Prec x y) (hyw : (flagSS σ X).Prec y w) :
+    (flagSS σ X).Prec x w := by
+  obtain ⟨⟨_, h₁⟩, a⟩ := x
+  obtain ⟨⟨_, h₂⟩, b⟩ := y
+  obtain ⟨⟨_, h₃⟩, c⟩ := w
+  obtain ⟨i, rfl⟩ := Finset.card_eq_one.1 h₁
+  obtain ⟨j, rfl⟩ := Finset.card_eq_one.1 h₂
+  obtain ⟨k, rfl⟩ := Finset.card_eq_one.1 h₃
+  rw [flagSS_prec_iff] at *
+  exact prec_trans hσ hxy hyw
+
+/-- **The « hence » of page 27**: for every `G`-set `X`, the orders of the simplices of the
+semi-simplicial set of flags all come from one order on `D₀` satisfying (b) and (c). -/
+theorem flagSS_vertexOrder (hσ : ∀ i j : Fin (n + 1), (i : ℕ) + 2 ≤ j → Commute (σ i) (σ j)) :
+    ∃ r, IsVertexOrder r ∧ ofVertex r = (flagSS σ X).ord :=
+  (flagSS σ X).trans_iff_vertexOrder.1 (flagSS_prec_trans hσ)
+
+end Grothendieck.Folder76

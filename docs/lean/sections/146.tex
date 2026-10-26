@@ -126,7 +126,7 @@ Sur les générateurs, $c_L(s)^4 = h(sx)/h(x)$ se vérifie directement ; par exe
 Le $12$ de la page pour $L$ est donc un exposant qui trivialise, celui que donne le calcul $(L^4)^3 \simeq \mathcal O$, mais pas le meilleur ; c'est la même situation que pour $n = 4$, où la page~72 trouvait $L^{\otimes 6} \simeq 1$ quand l'ordre est $3$.
 
 \begin{sloppypar}
-\noindent Vérifié au niveau des cocycles (\texttt{cL\_pow\_four}, \texttt{coboundary\_cL\_iff}, \texttt{c5\_pow\_twelve}, \texttt{coboundary\_c5\_iff}). Lean manipule les mots en $s_1, \ldots, s_4$ : la substitution d'un mot est la composée, son facteur est donné par la règle de cocycle (\texttt{wAct}, \texttt{wCoc}), et l'énoncé \q{pour tout élément du groupe} devient \q{pour tout mot}. Ne sont pas démontrés en Lean : que les substitutions et les facteurs vérifient les relations de Coxeter de $\mathfrak S_5$, de sorte que les mots passent au groupe (vérifié par le calcul formel), et la dérivation des facteurs $c_L$, $c_5$ à partir des homographies, faite ci-dessus.
+\noindent Vérifié au niveau des cocycles (\texttt{cL\_pow\_four}, \texttt{coboundary\_cL\_iff}, \texttt{c5\_pow\_twelve}, \texttt{coboundary\_c5\_iff}). Lean manipule les mots en $s_1, \ldots, s_4$ : la substitution d'un mot est la composée, son facteur est donné par la règle de cocycle (\texttt{wAct}, \texttt{wCoc}), et l'énoncé \q{pour tout élément du groupe} devient \q{pour tout mot}. Que les mots passent au groupe, c'est-à-dire que substitutions et facteurs vérifient les relations de Coxeter de $\mathfrak S_5$, est démontré plus bas (énoncé \q{relations de Coxeter}, après la colonne $n = 6$). N'est pas démontrée en Lean la dérivation des facteurs $c_L$, $c_5$ à partir des homographies, faite ci-dessus.
 \end{sloppypar}
 
 Passons à la colonne $n = 6$, où la page porte \q{$20\,?$} pour $L$ et \q{$60\,?$} pour $L_i$.
@@ -180,7 +180,27 @@ Sur les générateurs, $c_6(s)^{10} = -g(sx)/g(x)$, d'où $c_6(s)^{20} = g(sx)^2
 Les deux valeurs de la page sont des exposants qui trivialisent, puisque $5 \mid 20$ et $20 \mid 60$, mais aucune n'est la plus petite. L'ordre $3$, que suggère le $60 = 3 \cdot 20$ de la page, n'apparaît pas : comme $c_6^{20}$ est un cobord, le facteur $f$ en un point fixé par un $3$-cycle vérifie $f^{20} = 1$ et $f^3 = 1$, donc $f = 1$. Sur les trois colonnes, $L$ est d'ordre $n - 1$ et $L_i$ d'ordre $(n - 1)(n - 2)$, le nombre de la première ligne du tableau.\footnote{Le groupe lui-même est connu : $H^1(\mathfrak S_n, \mathcal O(M_{0,n})^*) = \mathrm{Pic}\,[M_{0,n}/\mathfrak S_n]$ est cyclique d'ordre $2(n - 1)$ pour $n$ pair en caractéristique ne divisant pas $n$ (Gorchinskiy--Viviani \cite[th.~3.6]{gorchinskiyviviani2008} ; Arsie--Vistoli \cite[th.~5.1]{arsievistoli2004} calculent le groupe de Picard du champ des courbes hyperelliptiques, dont celui-ci est un sous-groupe d'indice $1$ ou $2$) ; les ordres de $L$ et des $L_i$ en découlent, mais ne sont énoncés pour ces fibrés dans aucun texte trouvé.}
 
 \begin{sloppypar}
-\noindent Vérifié au niveau des cocycles (\texttt{act6\_U6}, \texttt{cL6\_pow\_five}, \texttt{c6\_pow\_ten}, \texttt{fix\_five}, \texttt{fix\_four6}, \texttt{coboundary\_cL6\_iff}, \texttt{coboundary\_c6\_iff}), avec les mots en $s_1, \ldots, s_5$ comme pour $n = 5$ (\texttt{wAct}, \texttt{wCoc}). Ne sont pas démontrés en Lean : les relations de Coxeter de $\mathfrak S_6$ pour ces substitutions et ces facteurs (vérifiées par le calcul formel), la dérivation des facteurs à partir des homographies, et la résolution du système linéaire, dont Lean ne vérifie que la solution.
+\noindent Vérifié au niveau des cocycles (\texttt{act6\_U6}, \texttt{cL6\_pow\_five}, \texttt{c6\_pow\_ten}, \texttt{fix\_five}, \texttt{fix\_four6}, \texttt{coboundary\_cL6\_iff}, \texttt{coboundary\_c6\_iff}), avec les mots en $s_1, \ldots, s_5$ comme pour $n = 5$ (\texttt{wAct}, \texttt{wCoc}). Les relations de Coxeter de $\mathfrak S_6$ pour ces substitutions et ces facteurs sont démontrées ci-dessous (énoncé \q{relations de Coxeter}). Ne sont pas démontrées en Lean la dérivation des facteurs à partir des homographies, et la résolution du système linéaire, dont Lean ne vérifie que la solution.
+\end{sloppypar}
+
+\noindent\emph{Les relations de Coxeter.} Les substitutions et les facteurs n'ont été donnés que sur les transpositions adjacentes, et les énoncés ci-dessus portent sur les mots. Pour qu'ils portent sur le groupe, il faut que deux mots qui représentent la même permutation aient même substitution et même facteur, c'est-à-dire que les générateurs vérifient les relations de Coxeter.
+
+\begin{encadre}
+\begin{enonce}[De l'édition : relations de Coxeter\piste{146-equivariant-trivialising-exponents}]
+Sur tout corps $K$, les quatre familles de générateurs ci-dessus --- $s_1, \ldots, s_4$ avec $c_L$ et $s_1, s_2, s_3$ avec $c_5$ sur $M_{0,5}(K)$, $s_1, \ldots, s_5$ avec $c_L$ et $s_1, \ldots, s_4$ avec $c_6$ sur $M_{0,6}(K)$ --- vérifient les relations de Coxeter de type $A$ :
+\[
+s_i^2 = 1, \qquad s_i s_j s_i = s_j s_i s_j \ (|i - j| = 1), \qquad s_i s_j = s_j s_i \ (|i - j| \geq 2),
+\]
+pour la substitution et pour le facteur composé par la règle de cocycle. Les applications $(x, t) \mapsto (s_i x, c(s_i)(x)\, t)$ du fibré trivial $M_{0,n}(K) \times K$ définissent donc une action du groupe de Coxeter de type $A_{n-1}$, et la substitution et le facteur d'un mot ne dépendent que de son image dans ce groupe.
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+Chaque relation est une identité entre fractions rationnelles, à vérifier sur $M_{0,n}(K)$. Le calcul direct bute sur les dénominateurs emboîtés : dans $s_3 s_3$, par exemple, apparaît $1/\bigl((1 - \lambda) - \mu(\lambda - 1)/(\lambda - \mu)\bigr)$, dont il faut savoir qu'il ne s'annule pas. On nomme donc les points intermédiaires : pour $s_i s_j s_i = s_j s_i s_j$, on pose $q = s_i x$, $r = s_j q$, $q' = s_j x$, $r' = s_i q'$, qui sont dans $M_{0,n}(K)$ puisque les substitutions le préservent. L'identité, écrite en $r$ et $r'$, n'a pour dénominateurs que leurs coordonnées et leurs différences, non nulles ; on les chasse, on remplace $r$ et $r'$ par leurs expressions en $q$ et $q'$, on chasse de nouveau, puis on descend à $x$, où il reste une identité polynomiale. Les relations entraînent $(s_i s_j)^3 = 1$ et $(s_i s_j)^2 = 1$ dans le monoïde des applications du fibré, ce qui est la présentation du groupe de Coxeter de type $A_{n-1}$. Que ce groupe soit $\mathfrak S_n$ est classique.
+\end{proof}
+
+\begin{sloppypar}
+\noindent Vérifié dans \href{\leanblob/Folder146.lean}{\texttt{Folder146.\allowbreak{}lean}} : \texttt{CoxRel} pour les relations sur les générateurs, \texttt{coxRel\_cL}, \texttt{coxRel\_c5}, \texttt{coxRel\_cL6}, \texttt{coxRel\_c6} pour les quatre familles, \texttt{CoxRel.isLiftable} et \texttt{CoxRel.lift} pour l'action du groupe de Coxeter (par \texttt{CoxeterSystem.lift} de Mathlib), \texttt{CoxRel.lift\_word} et \texttt{CoxRel.wAct\_eq} pour le passage des mots au groupe. Mathlib n'identifie pas le groupe de Coxeter de type $A_{n-1}$ à $\mathfrak S_n$ ; ce dernier pas n'est pas formalisé.
 \end{sloppypar}
 
 Le tableau~\ref{tab:146-exposants} met en regard les valeurs de la page et les ordres calculés.

@@ -742,3 +742,155 @@ theorem norm_one_torus_H2_injective_quadratic [IsGalois K L] (Z : IntermediateFi
 
 
 end Grothendieck.Folder10.NormOneTorus
+
+namespace Grothendieck.Folder10
+
+variable {K : Type*} [Field K]
+
+/-! ## Every indecomposable is a string (Lemmes 1 and 2, pp. 192–194)
+
+A finite-dimensional representation `(V, X, Y)` with `[Y, X] = p X` on which `Y` is
+diagonalisable with integer weights — the restriction to `𝔾_m` of a rational representation
+of `G`, semisimple by case II — and which is indecomposable (its only idempotent
+endomorphisms are `0` and `1`) is a string `e_{n,k}`. The proof does not follow the chain
+`E₀ → E₁ → ⋯` of the page: with `X^{k+1} = 0 ≠ X^k`, take a weight vector `v` with
+`X^k v ≠ 0` and a weight functional `ψ` (`ψ ∘ Y = μ ψ`, `μ` the weight of `X^k v`) with
+`ψ(X^k v) = 1`; then `ψ(X^a v) = δ_{a,k}` by weights, and
+`x ↦ Σ_l ψ(X^{k-l} x) X^l v` is an idempotent endomorphism of the representation, nonzero, so
+the identity, and the `X^l v` form a string. Over a field of characteristic `0` with `p ≥ 1`;
+the semisimplicity of `Y` cannot be dropped (`X = 0`, `Y` a Jordan block).
+-/
+
+section Classification
+
+variable {V : Type*} [AddCommGroup V] [Module K V] {p : ℕ} {X Y : Module.End K V}
+
+/-- `Y X^a = X^a Y + a p X^a`, from `[Y, X] = p X`. -/
+lemma Y_X_pow (hR : ∀ u, Y (X u) = X (Y u) + (p : K) • X u) (a : ℕ) (u : V) :
+    Y ((X ^ a) u) = (X ^ a) (Y u) + ((a : K) * p) • (X ^ a) u := by
+  induction a with
+  | zero => simp
+  | succ a ih =>
+    rw [pow_succ', Module.End.mul_apply, hR, ih, map_add, map_smul, Module.End.mul_apply]
+    push_cast
+    module
+
+/-- **Lemmes 1–2, p. 194**: an indecomposable representation with `[Y, X] = p X` and a basis
+of eigenvectors of `Y` with integer weights is a string `e_{n,k}`, `k ≥ 1`. -/
+theorem indecomposable_is_string [CharZero K] [FiniteDimensional K V] [Nontrivial V]
+    (hp : p ≠ 0) (hR : ∀ u, Y (X u) = X (Y u) + (p : K) • X u)
+    {ι : Type*} (b : Module.Basis ι K V) (w : ι → ℤ) (hb : ∀ i, Y (b i) = (w i : K) • b i)
+    (hind : ∀ f : Module.End K V, f ∘ₗ X = X ∘ₗ f → f ∘ₗ Y = Y ∘ₗ f → f * f = f →
+      f = 0 ∨ f = 1) :
+    ∃ n : ℤ, ∃ k, 0 < k ∧ IsoRep (sX k) (sY p n k) X Y := by
+  classical
+  have hc : ∀ i u, b.coord i (Y u) = w i * b.coord i u := fun i u => by
+    have : b.coord i ∘ₗ Y = (w i : K) • b.coord i := b.ext fun j => by
+      simp only [LinearMap.comp_apply, hb, map_smul, LinearMap.smul_apply, Module.Basis.coord_apply,
+        Module.Basis.repr_self, smul_eq_mul]
+      rcases eq_or_ne j i with rfl | h <;> simp [*]
+    exact congrArg (· u) this
+  have heig : ∀ {u : V} {c : K}, Y u = c • u → u ≠ 0 → ∃ i, (w i : K) = c ∧ b.coord i u ≠ 0 := by
+    intro u c hu hu0
+    obtain ⟨i, hi⟩ : ∃ i, b.repr u i ≠ 0 := by
+      by_contra! h
+      exact hu0 (b.repr.injective (Finsupp.ext fun i => by simp [h]))
+    refine ⟨i, mul_right_cancel₀ hi ?_, hi⟩
+    simpa [hu] using (hc i u).symm
+  have hXa : ∀ (a : ℕ) j, Y ((X ^ a) (b j)) = ((w j : K) + a * p) • (X ^ a) (b j) := fun a j => by
+    rw [Y_X_pow hR, hb, map_smul, add_smul]
+  have hN : ∃ N, X ^ N = 0 := by
+    have := Module.Finite.finite_basis b
+    cases nonempty_fintype ι
+    obtain ⟨M, hM⟩ : ∃ M : ℕ, ∀ i, (w i).natAbs ≤ M :=
+      ⟨_, fun i => Finset.single_le_sum (f := fun i => (w i).natAbs) (by simp) (Finset.mem_univ i)⟩
+    refine ⟨2 * M + 1, b.ext fun j => ?_⟩
+    by_contra h
+    obtain ⟨i, hi, -⟩ := heig (hXa _ j) h
+    have h3 : w i = w j + ((2 * M + 1 : ℕ) : ℤ) * p :=
+      Int.cast_injective (α := K) (by push_cast at hi ⊢; exact hi)
+    have h4 : ((2 * M + 1 : ℕ) : ℤ) ≤ ((2 * M + 1 : ℕ) : ℤ) * p :=
+      le_mul_of_one_le_right (by positivity) (by exact_mod_cast Nat.one_le_iff_ne_zero.mpr hp)
+    have := hM i
+    have := hM j
+    omega
+  obtain ⟨k, hk, hk1⟩ : ∃ k, X ^ (k + 1) = 0 ∧ X ^ k ≠ 0 := by
+    have hm : Nat.find hN ≠ 0 := fun h => one_ne_zero (h ▸ Nat.find_spec hN : X ^ 0 = 0)
+    exact ⟨Nat.find hN - 1, by rw [Nat.sub_add_cancel (Nat.pos_of_ne_zero hm)]; exact Nat.find_spec hN,
+      Nat.find_min hN (by omega)⟩
+  obtain ⟨j, hj⟩ : ∃ j, (X ^ k) (b j) ≠ 0 := by
+    by_contra! h
+    exact hk1 (b.ext fun j => by simpa using h j)
+  obtain ⟨i, hi, hci⟩ := heig (hXa k j) hj
+  let ψ := (b.coord i ((X ^ k) (b j)))⁻¹ • b.coord i
+  have hψY : ∀ u, ψ (Y u) = w i * ψ u := fun u => by simp [ψ, hc]; ring
+  have hψv : ∀ a : ℕ, ψ ((X ^ a) (b j)) = if a = k then 1 else 0 := by
+    intro a
+    split_ifs with ha
+    · subst ha; simpa [ψ] using inv_mul_cancel₀ hci
+    · have h1 := hψY ((X ^ a) (b j))
+      rw [hXa, map_smul, smul_eq_mul, hi] at h1
+      have h2 : ((a : K) - k) * p ≠ 0 :=
+        mul_ne_zero (sub_ne_zero.mpr (by exact_mod_cast ha)) (by exact_mod_cast hp)
+      exact (mul_eq_zero.mp (by linear_combination h1 :
+        ((a : K) - k) * p * ψ ((X ^ a) (b j)) = 0)).resolve_left h2
+  have hψX : ∀ (a : ℕ) u, ψ ((X ^ a) (Y u)) = ((w j : K) + (k - a) * p) * ψ ((X ^ a) u) := by
+    intro a u
+    rw [← sub_eq_of_eq_add (Y_X_pow hR a u), map_sub, hψY, map_smul, hi, smul_eq_mul]
+    ring
+  let e : (Fin (k + 1) → K) →ₗ[K] V :=
+    ∑ l : Fin (k + 1), (LinearMap.proj l).smulRight ((X ^ (l : ℕ)) (b j))
+  let g : V →ₗ[K] (Fin (k + 1) → K) := LinearMap.pi fun l : Fin (k + 1) => ψ ∘ₗ X ^ (k - l)
+  have he : ∀ l, e (Pi.single l 1) = (X ^ (l : ℕ)) (b j) := by intro l; simp [e, Pi.single_apply]
+  have hge : g ∘ₗ e = LinearMap.id := by
+    refine (Pi.basisFun K _).ext fun l => funext fun l' => ?_
+    simp only [LinearMap.comp_apply, Pi.basisFun_apply, he, g, LinearMap.pi_apply,
+      ← Module.End.mul_apply, ← pow_add, hψv, LinearMap.id_apply, Pi.single_apply, Fin.ext_iff]
+    have := l.2
+    have := l'.2
+    split_ifs <;> first | rfl | omega
+  have heX : e ∘ₗ sX (k + 1) = X ∘ₗ e := (Pi.basisFun K _).ext fun l => by
+    simp only [LinearMap.comp_apply, Pi.basisFun_apply, sX_single, he]
+    split_ifs with h
+    · rw [he, pow_succ', Module.End.mul_apply]
+    · rw [map_zero, ← Module.End.mul_apply, ← pow_succ', show (l : ℕ) + 1 = k + 1 by omega, hk,
+        LinearMap.zero_apply]
+  have heY : e ∘ₗ sY p (w j) (k + 1) = Y ∘ₗ e := (Pi.basisFun K _).ext fun l => by
+    simp only [LinearMap.comp_apply, Pi.basisFun_apply, sY_single, map_smul, he, hXa, wt]
+    rw [mul_comm]
+  have hgX : g ∘ₗ X = sX (k + 1) ∘ₗ g := LinearMap.ext fun u => funext fun l => by
+    simp only [LinearMap.comp_apply, g, LinearMap.pi_apply, sX_apply, ← Module.End.mul_apply,
+      ← pow_succ]
+    split_ifs with h
+    · rw [show k - l + 1 = k - (l - 1) by omega]
+    · rw [show k - l + 1 = k + 1 by omega, hk]; simp
+  have hgY : g ∘ₗ Y = sY p (w j) (k + 1) ∘ₗ g := LinearMap.ext fun u => funext fun l => by
+    simp only [LinearMap.comp_apply, g, LinearMap.pi_apply, sY_apply, hψX, wt]
+    rw [Nat.cast_sub (by omega : (l : ℕ) ≤ k)]
+    ring
+  obtain h | h := hind (e ∘ₗ g)
+    (by rw [LinearMap.comp_assoc, hgX, ← LinearMap.comp_assoc, heX, LinearMap.comp_assoc])
+    (by rw [LinearMap.comp_assoc, hgY, ← LinearMap.comp_assoc, heY, LinearMap.comp_assoc])
+    (by rw [Module.End.mul_eq_comp, LinearMap.comp_assoc, ← LinearMap.comp_assoc g, hge,
+      LinearMap.id_comp])
+  · have := congrArg (fun f => (g ∘ₗ f) (b j) 0) h
+    rw [← LinearMap.comp_assoc, hge] at this
+    simp [g, hψv] at this
+  · exact ⟨w j, k + 1, k.succ_pos, LinearEquiv.ofLinearMap e g h hge, heX, heY⟩
+
+/-- The same, with `Y` diagonalisable with integer eigenvalues: `V = ⨁_{n ∈ ℤ} ker (Y - n)`. -/
+theorem indecomposable_is_string' [CharZero K] [FiniteDimensional K V] [Nontrivial V]
+    (hp : p ≠ 0) (hR : ∀ u, Y (X u) = X (Y u) + (p : K) • X u)
+    (hY : ⨆ n : ℤ, Y.eigenspace (n : K) = ⊤)
+    (hind : ∀ f : Module.End K V, f ∘ₗ X = X ∘ₗ f → f ∘ₗ Y = Y ∘ₗ f → f * f = f →
+      f = 0 ∨ f = 1) :
+    ∃ n : ℤ, ∃ k, 0 < k ∧ IsoRep (sX k) (sY p n k) X Y := by
+  have h := DirectSum.isInternal_submodule_of_iSupIndep_of_iSup_eq_top
+    ((Module.End.eigenspaces_iSupIndep Y).comp Int.cast_injective) hY
+  exact indecomposable_is_string hp hR (h.collectedBasis fun n => Module.Free.chooseBasis K _)
+    Sigma.fst
+    (fun a => Module.End.mem_eigenspace_iff.mp (h.collectedBasis_mem _ a)) hind
+
+end Classification
+
+end Grothendieck.Folder10

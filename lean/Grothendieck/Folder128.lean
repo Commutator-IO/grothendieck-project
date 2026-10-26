@@ -2359,3 +2359,93 @@ theorem prop1_i (e : (B ⧸ LinearMap.range (Algebra.linearMap A B)) ≃ₗ[A] A
 end Field
 
 end Grothendieck.Folder128.ColengthLocal
+
+/-!
+## Page 7: the example « `S/IS` faithfully flat over `A/I` »
+
+The reading's example for Cor. 1: if `S/IS` is faithfully flat over `A/I`, then
+`Spec S → Spec A` is an effective descent morphism for flat modules. What is needed is faithfully
+flat descent of modules, proved here directly on the comodules `DescentDatum`, not through
+mathlib's comonadicity (`ModuleCat.comonadicExtendScalars`).
+
+* `DescentDatum.bijective_of_flat`: for `R → S` flat, `S ⊗_R E^ψ → E` is bijective for every
+  datum. By the cocycle condition `ψ(e)` lies in the kernel of `S ⊗ (ψ − 1 ⊗ ·)`, which is
+  `S ⊗ E^ψ` since `S` is flat; this factors `ψ` through `S ⊗ E^ψ ↪ S ⊗ E`, and the counit makes
+  the factorisation inverse to `S ⊗ E^ψ → E`;
+* `isEffectiveDescentFlat_of_faithfullyFlat`: a faithfully flat `R → S` is an effective descent
+  morphism for flat modules (`E^ψ` is flat by descent of flatness,
+  `Module.Flat.of_flat_tensorProduct`; `M → S ⊗ M` is injective, and onto the invariants by the
+  previous point applied to the canonical datum);
+* `isEffectiveDescentFlat_of_quotient_faithfullyFlat`: the example, by Cor. 1.
+-/
+
+namespace Grothendieck.Folder128.Descent
+
+universe u
+
+variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
+  {E : Type u} [AddCommGroup E] [Module S E] [Module R E] [IsScalarTower R S E]
+
+namespace DescentDatum
+
+/-- For `R → S` flat, `S ⊗_R E^ψ → E` is bijective for every descent datum. -/
+theorem bijective_of_flat [Module.Flat R S] (d : DescentDatum R S E) :
+    Function.Bijective (LinearMap.liftBaseChange S d.invariants.subtype) := by
+  set j := d.invariants.subtype.lTensor S
+  have hj : Function.Injective j :=
+    Module.Flat.lTensor_preserves_injective_linearMap _ Subtype.val_injective
+  have hex : Function.Exact j ((d.ψ.restrictScalars R - TensorProduct.mk R S E 1).lTensor S) :=
+    Module.Flat.lTensor_exact S fun e => by simp [sub_eq_zero, mem_invariants]
+  refine ⟨fun x y hxy => hj ?_, fun e => ?_⟩
+  · have key : ∀ t, j t = d.ψ (LinearMap.liftBaseChange S d.invariants.subtype t) := fun t => by
+      induction t using TensorProduct.inductionOn with
+      | tmul b x => simp [j, (mem_invariants d).1 x.2, smul_tmul']
+      | add x y hx hy => simp only [map_add, hx, hy]
+    rw [key, key, hxy]
+  · have hμ : ∀ t, LinearMap.liftBaseChange S d.invariants.subtype t =
+        LinearMap.liftBaseChange S LinearMap.id (j t) := fun t => by
+      induction t using TensorProduct.inductionOn with
+      | tmul b x => simp [j]
+      | add x y hx hy => simp only [map_add, hx, hy]
+    obtain ⟨t, ht⟩ := (hex (d.ψ e)).1 (by simp [d.coassoc])
+    exact ⟨t, (hμ t).trans ((congrArg _ ht).trans (d.counit e))⟩
+
+end DescentDatum
+
+/-- If `S ⊗ ι` has an injective left inverse and `S` is faithfully flat, `ι` is onto. -/
+lemma surjective_of_section [Module.FaithfullyFlat R S] {M P : Type u} [AddCommGroup M]
+    [Module R M] [AddCommGroup P] [Module R P] (ι : M →ₗ[R] P) (θ : S ⊗[R] P → S ⊗[R] M)
+    (hθ : Function.Injective θ) (h : ∀ y, θ (ι.lTensor S y) = y) : Function.Surjective ι :=
+  (Module.FaithfullyFlat.lTensor_surjective_iff_surjective R S ι).1
+    fun z => ⟨θ z, hθ (h (θ z))⟩
+
+/-- **Faithfully flat descent of modules.** A faithfully flat `R → S` is an effective descent
+morphism for flat modules. -/
+theorem isEffectiveDescentFlat_of_faithfullyFlat [Module.FaithfullyFlat R S] :
+    IsEffectiveDescentFlat R S := by
+  refine ⟨fun M _ _ _ => ⟨Module.FaithfullyFlat.tensorProduct_mk_injective M, ?_⟩,
+    fun E _ _ _ _ _ d => ⟨?_, d.bijective_of_flat⟩⟩
+  · intro x hx
+    let ι : M →ₗ[R] (canonical R S M).invariants := (TensorProduct.mk R S M 1).codRestrict _
+      fun m => by simp [DescentDatum.mem_invariants, canonical]
+    obtain ⟨m, hm⟩ := surjective_of_section (S := S) (M := M)
+      (P := (canonical R S M).invariants) ι _ (canonical R S M).bijective_of_flat.1
+      (fun y => by
+        induction y using TensorProduct.inductionOn with
+        | tmul b m =>
+          change b • ((1 : S) ⊗ₜ[R] m) = _
+          rw [smul_tmul', smul_eq_mul, mul_one]
+        | add x y hx hy => simp only [map_add] at hx hy ⊢; rw [hx, hy]) ⟨x, hx⟩
+    exact ⟨m, congrArg Subtype.val hm⟩
+  · have := Module.Flat.of_linearEquiv (LinearEquiv.ofBijective _ d.bijective_of_flat)
+    exact Module.Flat.of_flat_tensorProduct R _ S
+
+/-- **Folder 128, the example of Cor. 1** (Grothendieck, page 7). Let `I` be a nilpotent ideal of
+`A` mapped isomorphically onto an ideal of `S`. If `S/IS` is faithfully flat over `A/I`, then
+`Spec S → Spec A` is an effective descent morphism for flat modules. -/
+theorem isEffectiveDescentFlat_of_quotient_faithfullyFlat {A S : Type u} [CommRing A]
+    [CommRing S] [Algebra A S] {I : Ideal A} (h : IsConductorIdeal S I) (hI : IsNilpotent I)
+    [Module.FaithfullyFlat (A ⧸ I) (S ⧸ I.map (algebraMap A S))] : IsEffectiveDescentFlat A S :=
+  isEffectiveDescentFlat_of_quotient h hI isEffectiveDescentFlat_of_faithfullyFlat
+
+end Grothendieck.Folder128.Descent

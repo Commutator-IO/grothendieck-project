@@ -26,7 +26,17 @@ L'injectivité sur $\mathrm{Ext}^0$ est a) appliqué à une différence. Pour la
 L'énoncé tient tel que la page le démontre ; la complétude ne sert qu'en b). La fin de l'argument d'injectivité, en partie illisible sur la page, est rétablie par la lecture dans cet ordre, et Lean la confirme. Les deux pages ne numérotent pas les applications de la même façon. La page~10 les indexe par le degré de cohomologie locale, si bien que $\varphi^1$ part de $\mathrm{Ext}^0$ ; la page~11 écrit au contraire $E^0 \xrightarrow{\varphi^0} \mathrm{Hom}(\mathrm{Coker}\, u, K/A)$. Les noms \texttt{phi0} et \texttt{phi1} du code Lean suivent la page~11.
 \end{remarque}
 
-Ne sont pas démontrés ici : l'équivalence entre $\mathcal O_X$-modules et triplets, le calcul des $\mathrm{Ext}$ et des $H^i_x$ dans ce modèle, et l'équivalence entre $\mathrm{Ext}^1_A(K, A) = 0$ et la complétude, que la lecture cite de mémoire. En dimension~$2$ la dualité échoue, et la page~14 le découvre (piste \texttt{101-sheaf-duality-dim-two-fails}, ci-dessous) :
+La note de la lecture qui cite de mémoire l'équivalence entre $\mathrm{Ext}^1_A(K, A) = 0$ et la complétude est exacte ; c'est la réciproque de b).
+
+\begin{enonce}[Réciproque du fait b), note de la lecture\piste{101-sheaf-duality-dim-one}]\label{thm:101-reciproque}
+Soit $A$ un anneau de valuation discrète, de corps des fractions $K$. Alors $A$ est complet si et seulement si toute application $A$-linéaire $K \to K/A$ se relève en une application $A$-linéaire $K \to K$, autrement dit si et seulement si $\mathrm{Hom}_A(K, K) \to \mathrm{Hom}_A(K, K/A)$ est surjective, ce qui équivaut à $\mathrm{Ext}^1_A(K, A) = 0$ puisque $K$ est injectif.
+\end{enonce}
+
+\begin{proof}
+Le sens direct est b). Réciproquement, $A$ est séparé pour la topologie $\mathfrak m$-adique (Krull). Soit $(e_n)$ une suite de Cauchy, $e_m - e_n \in \varpi^n A$ pour $n \leqslant m$. Pour $x \in K$ et $n$ tel que $\varpi^n x \in A$, la classe de $e_n x$ modulo $A$ ne dépend pas de $n$, car $(e_m - e_n) x \in \varpi^n x A \subset A$ ; elle définit une application $A$-linéaire $f : K \to K/A$. Un relèvement $g$ de $f$ vérifie $g(1) \equiv e_0 \bmod A$, donc $g(1) \in A$, et $g(1) - e_n = \varpi^n \bigl(g(\varpi^{-n}) - e_n \varpi^{-n}\bigr) \in \varpi^n A$ : la suite converge vers $g(1)$.
+\end{proof}
+
+Ne sont pas démontrés ici : l'équivalence entre $\mathcal O_X$-modules et triplets, et le calcul des $\mathrm{Ext}$ (et, en particulier, l'identification de $\mathrm{Ext}^1_A(K, A)$ au conoyau de $\mathrm{Hom}_A(K, K) \to \mathrm{Hom}_A(K, K/A)$, qui n'est pas formalisée) et des $H^i_x$ dans ce modèle. En dimension~$2$ la dualité échoue, et la page~14 le découvre (piste \texttt{101-sheaf-duality-dim-two-fails}, ci-dessous) :
 
 \begin{encadre}
 \begin{contrexemple*}[pages 10, 14 et 15, dualité locale en dimension deux\piste{101-sheaf-duality-dim-two-fails}]\nonverifie
