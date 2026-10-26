@@ -36,12 +36,19 @@ vertices, edges, incidence — with the line of each edge; `SkelIso` is an isomo
   a line with the same ends are equal or complementary: segments are read on the skeleton.
 * `SkelIso.triangle_map`: (A5) transported. A skeleton isomorphism carries a triangle cycle that
   bounds to one that bounds, whenever a fourth line avoids the vertices of the triangle.
+* `path_bounds`: Jordan for the triangles of page 50. The triangle cut out by a face path
+  `e1, e, e2` (the edge `e` and segments of the lines of `e1`, `e2` starting with them) bounds a
+  union of faces. The proof is a parity count along the line of `e` (`edge_parity`).
+* `corner2`, `path_map`, `full_simple`: **page 54 for simple arrangements.** At a vertex of two
+  lines the corners are read on the skeleton; with `path_bounds`, `triangle_map` (a fourth line
+  avoiding the triangle always exists when every vertex is on two lines) and `lift_iff`, every
+  isomorphism of decomposed skeleta of two simple bigon-free arrangements lifts, uniquely: the
+  skeleton functor is fully faithful on simple arrangements.
 
-**Not formalised.** That the face paths are read on the skeleton: conditions (A1)–(A4) (the
-cyclic order around a vertex, its lifts, the transport along an edge, including the Jordan-type
-fact that the triangle cut out by a face path bounds) and the cases (A6) and `III₆` of the
-canonical orientation, where every other line passes through a vertex of the triangle. These are
-what remains of the page 54 theorem.
+**Not formalised.** Fullness for arrangements with multiple points (vertices of `ν ≥ 3`
+lines): reading the cyclic order of the edges at such a vertex ((A1)–(A3)), and the cases (A6)
+and `III₆` of the canonical orientation, where every other line passes through a vertex of the
+triangle. These are what remains of the page 54 theorem.
 -/
 
 namespace Grothendieck.Folder80Maps3
@@ -1298,6 +1305,386 @@ theorem triangle_map (hbf : BigonFree X.On) (hbf' : BigonFree X'.On) (hs : X.Str
 end SkelIso
 
 end Transport
+
+/-! ### The triangle of a face path bounds (Jordan for the triangles of page 50) -/
+
+section FacePath
+
+open Matrix
+
+/-- Half a turn after `y` meets the edges of the line `a1 y` once: a chain on that line which
+is `1` at the edge after `y` has sum `1` there. -/
+theorem half_one (hs : X.Straight) (y : D) {l : L} {P : X.M.Edge → ZMod 2}
+    (hP : ∀ e, P e ≠ 0 → X.lineE e = l) (hl : X.line (X.M.a1 y) = l)
+    (h1 : P (X.M.edge (X.M.a1 y)) = 1) :
+    ∑ i ∈ Finset.range (X.nu (X.M.vtx y)), P (X.M.edge ((X.phi ^ (i + 1)) y)) = 1 := by
+  classical
+  have hν : 0 < X.nu (X.M.vtx y) := Finset.card_pos.2 ⟨X.line y, Finset.mem_image.2 ⟨y, by simp, rfl⟩⟩
+  rw [Finset.sum_eq_single 0]
+  · simpa [phi_apply] using h1
+  · intro i hi hi0
+    refine by_contra fun h => line_inj hs (X.phi y) (Nat.pos_of_ne_zero hi0) (by simpa using hi) ?_
+    rw [pow_zero, Equiv.Perm.one_apply, phi_apply, X.line_a2, hl, ← hP _ h, lineE_edge, pow_succ,
+      Equiv.Perm.mul_apply]
+    rfl
+  · exact fun h => absurd (Finset.mem_range.2 hν) h
+
+/-- A chain on a line missing the vertex of `y` vanishes on the half turn after `y`. -/
+theorem half_zero (y : D) {l : L} {P : X.M.Edge → ZMod 2} (hP : ∀ e, P e ≠ 0 → X.lineE e = l)
+    (hy : ¬X.On (X.M.vtx y) l) :
+    ∑ i ∈ Finset.range (X.nu (X.M.vtx y)), P (X.M.edge ((X.phi ^ (i + 1)) y)) = 0 :=
+  Finset.sum_eq_zero fun _ _ => off_line hP hy ⟨_, vtx_phi' _ _, rfl⟩
+
+open Classical in
+/-- The half turn after `y` does not come back to the edge of `y`. -/
+theorem half_edge (hbf : BigonFree X.On) (y : D) :
+    ∑ i ∈ Finset.range (X.nu (X.M.vtx y)),
+      (Pi.single (X.M.edge y) 1 : X.M.Edge → ZMod 2) (X.M.edge ((X.phi ^ (i + 1)) y)) = 0 := by
+  refine Finset.sum_eq_zero fun i hi => Pi.single_eq_of_ne (fun h => ?_) _
+  have hi := Finset.mem_range.1 hi
+  rcases (at_edge hbf).1 ⟨vtx_phi' _ _, h⟩ with h | h
+  · exact pow_ne (X := X) y (Nat.succ_pos i) (by omega) (by simpa using h.symm)
+  · exact a2_ne_pow 0 (i + 1) y (by simpa using h.symm)
+
+open Classical in
+/-- **The parity lemma along a line, across one edge.** Let `z = ∂S` vanish on the edges of the
+line `m` of `d` other than `e = edge d`, and at the vertices of `m` other than the ends of `e`.
+Then the half turns after `d` and after `a0 d` (on the same side of `e`) meet `z` an even
+number of times in all. -/
+theorem edge_parity (hbf : BigonFree X.On) (hs : X.Straight) (S : X.M.Face → ZMod 2) (d : D)
+    (h1 : ∀ ε, X.lineE ε = X.line d → ε ≠ X.M.edge d → (X.bdM *ᵥ S) ε = 0)
+    (h0 : ∀ q, X.On q (X.line d) → q ≠ X.M.vtx d → q ≠ X.M.vtx (X.M.a0 d) →
+      ∀ ε, X.Inc q ε → (X.bdM *ᵥ S) ε = 0) :
+    ∑ i ∈ Finset.range (X.nu (X.M.vtx d)), (X.bdM *ᵥ S) (X.M.edge ((X.phi ^ (i + 1)) d)) +
+      ∑ i ∈ Finset.range (X.nu (X.M.vtx (X.M.a0 d))),
+        (X.bdM *ᵥ S) (X.M.edge ((X.phi ^ (i + 1)) (X.M.a0 d))) = 0 := by
+  set Δ := X.line d
+  let μ : X.M.Edge → ZMod 2 := fun ε => if ε = X.M.edge d then S (X.M.face d) else S (X.M.face ε.out)
+  have hμ : ∀ y, X.line y = Δ → (X.M.edge y ≠ X.M.edge d ∨ y = d ∨ y = X.M.a0 d) →
+      μ (X.M.edge y) = S (X.M.face y) := by
+    rintro y hy (hne | rfl | rfl)
+    · have h0' : S (X.M.face (X.M.a2 y)) = S (X.M.face y) :=
+        two_eq _ _ (by rw [add_comm, ← bd_apply]; exact h1 _ hy hne)
+      simp only [μ, hne, ite_false]
+      rcases edge_eq.1 (Quot.out_eq (X.M.edge y)) with h | h | h | h <;> simp [h, h0']
+    · simp [μ]
+    · simp [μ]
+  have loc : ∀ x, X.line x = Δ → μ (X.M.edge x) = S (X.M.face x) →
+      μ (X.M.edge ((X.phi ^ X.nu (X.M.vtx x)) x)) = S (X.M.face ((X.phi ^ X.nu (X.M.vtx x)) x)) →
+      ∑ ε, (if X.Inc (X.M.vtx x) ε ∧ X.lineE ε = Δ then μ ε else 0) =
+        ∑ i ∈ Finset.range (X.nu (X.M.vtx x)), (X.bdM *ᵥ S) (X.M.edge ((X.phi ^ (i + 1)) x)) := by
+    intro x hx m1 m2
+    obtain ⟨hfil, hee⟩ := line_edges hbf hs x
+    rw [hx] at hfil
+    rw [← Finset.sum_filter, hfil, Finset.sum_pair hee, m1, m2, face_phi_pow S, ← add_assoc,
+      add_self', zero_add]
+  have glob : ∑ q, ∑ ε, (if X.Inc q ε ∧ X.lineE ε = Δ then μ ε else 0) = 0 := by
+    rw [Finset.sum_comm]
+    refine Finset.sum_eq_zero fun ε _ => ?_
+    obtain ⟨y, rfl⟩ := edge_surj ε
+    simp only [ite_and]
+    rw [sum_inc hbf y (fun _ => if X.lineE (X.M.edge y) = Δ then μ (X.M.edge y) else 0), add_self']
+  rw [Fintype.sum_eq_add (X.M.vtx d) (X.M.vtx (X.M.a0 d)) (noLoop hbf d).symm] at glob
+  · rwa [loc d rfl (hμ d rfl (.inr (.inl rfl))) (hμ _ (hs d) (.inl (line_edges hbf hs d).2.symm)),
+      loc (X.M.a0 d) (X.line_a0 d) (hμ _ (X.line_a0 d) (.inr (.inr rfl)))
+        (hμ _ ((hs _).trans (X.line_a0 d)) (.inl (by simpa using (line_edges hbf hs (X.M.a0 d)).2.symm)))] at glob
+  · rintro q ⟨hqv, hqw⟩
+    by_cases hq : X.On q Δ
+    · obtain ⟨x, rfl, hx⟩ := hq
+      have far : ∀ y, X.M.vtx y = X.M.vtx x → X.M.edge y ≠ X.M.edge d := fun y hy h => by
+        rcases (inc_iff d (X.M.vtx x)).1 (h ▸ ⟨y, hy, rfl⟩) with h' | h'
+        exacts [hqv h', hqw h']
+      rw [loc x hx (hμ x hx (.inl (far x rfl))) (hμ _ ((hs x).trans hx) (.inl (far _ (by simp))))]
+      exact Finset.sum_eq_zero fun i _ => h0 _ ⟨x, rfl, hx⟩ hqv hqw _ ⟨_, by simp, rfl⟩
+    · exact Finset.sum_eq_zero fun ε _ => ite_eq_right fun ⟨h1, h2⟩ => hq (h2 ▸ on_of_inc h1)
+
+open Classical in
+/-- The boundary of an edge is its two ends. -/
+theorem bd_single (hbf : BigonFree X.On) (d : D) :
+    X.incM *ᵥ (Pi.single (X.M.edge d) 1 : X.M.Edge → ZMod 2) =
+      Pi.single (X.M.vtx d) 1 + Pi.single (X.M.vtx (X.M.a0 d)) 1 := by
+  have hvw := noLoop hbf d
+  funext v
+  simp only [Matrix.mulVec_single, incM]
+  by_cases h1 : v = X.M.vtx d
+  · subst h1; simp [hvw.symm, show X.Inc (X.M.vtx d) (X.M.edge d) from ⟨d, rfl, rfl⟩]
+  by_cases h2 : v = X.M.vtx (X.M.a0 d)
+  · subst h2; simp [hvw, show X.Inc (X.M.vtx (X.M.a0 d)) (X.M.edge d) from ⟨_, rfl, edge_a0 d⟩]
+  have hn : ¬X.Inc v (X.M.edge d) := fun h => ((inc_iff d v).1 h).elim h1 h2
+  simp [h1, h2, hn]
+
+open Classical in
+/-- **The triangle of a face path bounds** (Jordan's theorem for the triangles of page 50). Let
+`a1 d, d, a1 a0 d` be the flags of a face path `e1, e, e2` (`e = edge d` joining `v` to `w`),
+and `Pa`, `Pb` segments of the lines of `e1` and `e2` from `v` and `w` to a common vertex `p`,
+starting with `e1` and `e2`. Then the triangle cycle `e + Pa + Pb` bounds a union of faces. -/
+theorem path_bounds (hbf : BigonFree X.On) (hs : X.Straight) (d : D) {p : X.M.Vtx}
+    {Pa Pb : X.M.Edge → ZMod 2} (sa : ∀ e, Pa e ≠ 0 → X.lineE e = X.line (X.M.a1 d))
+    (sb : ∀ e, Pb e ≠ 0 → X.lineE e = X.line (X.M.a1 (X.M.a0 d)))
+    (ba : X.incM *ᵥ Pa = Pi.single (X.M.vtx d) 1 + Pi.single p 1)
+    (bb : X.incM *ᵥ Pb = Pi.single (X.M.vtx (X.M.a0 d)) 1 + Pi.single p 1)
+    (ha : Pa (X.M.edge (X.M.a1 d)) = 1) (hb : Pb (X.M.edge (X.M.a1 (X.M.a0 d))) = 1) :
+    Pi.single (X.M.edge d) 1 + Pa + Pb ∈ X.B1 := by
+  set a := X.line (X.M.a1 d)
+  set b := X.line (X.M.a1 (X.M.a0 d))
+  have ham : a ≠ X.line d := line_a1_ne hs d
+  have hbm : b ≠ X.line d := by have := line_a1_ne hs (X.M.a0 d); rwa [X.line_a0] at this
+  have hvw := noLoop hbf d
+  have va : X.On (X.M.vtx d) a := ⟨X.M.a1 d, vtx_a1 d, rfl⟩
+  have vm : X.On (X.M.vtx d) (X.line d) := ⟨d, rfl, rfl⟩
+  have wb : X.On (X.M.vtx (X.M.a0 d)) b := ⟨_, vtx_a1 _, rfl⟩
+  have wm : X.On (X.M.vtx (X.M.a0 d)) (X.line d) := ⟨_, rfl, X.line_a0 d⟩
+  have nwa : ¬X.On (X.M.vtx (X.M.a0 d)) a := fun h => hvw (meet_eq ham h wm va vm)
+  have nvb : ¬X.On (X.M.vtx d) b := fun h => hvw (meet_eq hbm wb wm h vm)
+  have sc : ∀ e, X.lineChain a e ≠ 0 → X.lineE e = a := fun e h => by_contra fun h' => h (by
+    simp [lineChain, h'])
+  have p0 : ∀ {P : X.M.Edge → ZMod 2} {l}, (∀ e, P e ≠ 0 → X.lineE e = l) → ∀ {ε},
+      X.lineE ε ≠ l → P ε = 0 := fun hP ε h => by_contra fun h' => h (hP ε h')
+  have he := bd_single hbf d
+  have hz : Pi.single (X.M.edge d) 1 + Pa + Pb ∈ X.Z1 := by
+    simp only [LinearMap.mem_ker, Matrix.mulVecLin_apply, Matrix.mulVec_add, he, ba, bb]
+    exact funext fun v => (by decide : ∀ x y q : ZMod 2, x + y + (x + q) + (y + q) = 0) _ _ _
+  rw [flip hbf hs ham hz]
+  rintro ⟨S, hS⟩
+  simp only [Matrix.mulVecLin_apply] at hS
+  have key := edge_parity hbf hs S d (fun ε hε hne => by
+      rw [hS, Pi.add_apply, Pi.add_apply, Pi.add_apply, Pi.single_eq_of_ne hne,
+        p0 sa fun h => ham (h.symm.trans hε), p0 sb fun h => hbm (h.symm.trans hε),
+        p0 sc fun h => ham (h.symm.trans hε)]
+      simp)
+    fun q hq hqv hqw ε hε => by
+      have hqa : ¬X.On q a := fun h => hqv (meet_eq ham h hq va vm)
+      have hqb : ¬X.On q b := fun h => hqw (meet_eq hbm h hq wb wm)
+      rw [hS, Pi.add_apply, Pi.add_apply, Pi.add_apply, off_line sa hqa hε, off_line sb hqb hε,
+        off_line sc hqa hε, Pi.single_eq_of_ne fun h => by
+          rcases (inc_iff d q).1 (h ▸ hε) with h' | h'
+          exacts [hqv h', hqw h']]
+      simp
+  rw [hS] at key
+  simp only [Pi.add_apply, Finset.sum_add_distrib] at key
+  have e2 := half_edge hbf (X.M.a0 d)
+  rw [edge_a0] at e2
+  rw [half_edge hbf d, e2, half_one hs d sa rfl ha, half_zero d sb nvb,
+    half_one hs d sc rfl (by simp [lineChain, a]), half_zero _ sa nwa,
+    half_one hs (X.M.a0 d) sb rfl hb, half_zero _ sc nwa] at key
+  exact absurd key (by decide)
+
+end FacePath
+
+/-! ### Simple arrangements: the skeleton functor is full -/
+
+section Simple
+
+open Matrix
+
+open Classical in
+/-- **Segments exist**, and can be made to start with any given edge of the line. -/
+theorem seg_start (hbf : BigonFree X.On) (hs : X.Straight) {l : L} {v p : X.M.Vtx}
+    (hv : X.On v l) (hp : X.On p l) {e1 : X.M.Edge} (he1 : X.lineE e1 = l) :
+    ∃ P : X.M.Edge → ZMod 2, (∀ e, P e ≠ 0 → X.lineE e = l) ∧
+      X.incM *ᵥ P = Pi.single v 1 + Pi.single p 1 ∧ P e1 = 1 := by
+  obtain ⟨x0, rfl, hx0⟩ := hv
+  obtain ⟨y, rfl, hy⟩ := hp
+  obtain ⟨P, hP, hb⟩ : ∃ P : X.M.Edge → ZMod 2, (∀ e, P e ≠ 0 → X.lineE e = l) ∧
+      X.incM *ᵥ P = Pi.single (X.M.vtx x0) 1 + Pi.single (X.M.vtx y) 1 := by
+    refine confine (l := l) (fun q => ∃ P : X.M.Edge → ZMod 2, (∀ e, P e ≠ 0 → X.lineE e = l) ∧
+      X.incM *ᵥ P = Pi.single (X.M.vtx x0) 1 + Pi.single q 1) ?_ hx0
+      ⟨0, by simp, funext fun _ => by simp [add_self']⟩ hy
+    rintro x hx ⟨P, hP, hb⟩
+    refine ⟨P + Pi.single (X.M.edge x) 1, fun e he => ?_, ?_⟩
+    · by_cases h : e = X.M.edge x
+      · rw [h, lineE_edge, hx]
+      · exact hP e (by simpa [Pi.single_eq_of_ne h] using he)
+    · rw [Matrix.mulVec_add, hb, bd_single hbf]
+      exact funext fun _ => (by decide : ∀ a b c : ZMod 2, a + b + (b + c) = a + c) _ _ _
+  rcases zmod2_cases (P e1) with h | h
+  · refine ⟨P + X.lineChain l, fun e he => by_contra fun h' => he ?_, ?_, ?_⟩
+    · simp [by_contra fun h'' => h' (hP e h''), lineChain, h']
+    · rw [Matrix.mulVec_add, hb, show X.incM *ᵥ X.lineChain l = 0 from lineChain_mem hbf hs l,
+        add_zero]
+    · simp [h, lineChain, he1]
+  · exact ⟨P, hP, hb, h⟩
+
+open Classical in
+/-- At a vertex of two lines, a line through it other than that of `y` is that of `a1 y`. -/
+theorem two_lines (hs : X.Straight) {y : D} (hν : X.nu (X.M.vtx y) = 2) {l : L}
+    (hl : X.On (X.M.vtx y) l) (hne : l ≠ X.line y) : l = X.line (X.M.a1 y) := by
+  by_contra h
+  obtain ⟨x, hx, rfl⟩ := hl
+  have : 2 < X.nu (X.M.vtx y) := Finset.two_lt_card_iff.2 ⟨X.line y, X.line (X.M.a1 y), X.line x,
+    Finset.mem_image.2 ⟨y, by simp, rfl⟩, Finset.mem_image.2 ⟨_, by simp, rfl⟩,
+    Finset.mem_image.2 ⟨x, by simp [hx], rfl⟩, (line_a1_ne hs y).symm, hne.symm, fun e => h e.symm⟩
+  omega
+
+/-- **Corners at a vertex of two lines** ((A1)–(A3) in the simple case): the edges of the other
+line at the vertex of `y` are the edges after `y` and after `a2 y`. -/
+theorem corner2 (hbf : BigonFree X.On) (hs : X.Straight) {y : D} (hν : X.nu (X.M.vtx y) = 2)
+    {ε : X.M.Edge} (hε : X.Inc (X.M.vtx y) ε) (hl : X.lineE ε ≠ X.line y) :
+    ε = X.M.edge (X.M.a1 y) ∨ ε = X.M.edge (X.M.a1 (X.M.a2 y)) := by
+  classical
+  have l2 : X.line (X.M.a1 (X.M.a2 y)) = X.line (X.M.a1 y) := two_lines hs hν ⟨_, by simp, rfl⟩
+    (by have := line_a1_ne hs (X.M.a2 y); rwa [X.line_a2] at this)
+  obtain ⟨hfil, -⟩ := line_edges hbf hs (X.M.a1 y)
+  have m : ∀ ζ, X.Inc (X.M.vtx y) ζ → X.lineE ζ = X.line (X.M.a1 y) → ζ = X.M.edge (X.M.a1 y) ∨
+      ζ = X.M.edge ((X.phi ^ X.nu (X.M.vtx (X.M.a1 y))) (X.M.a1 y)) := fun ζ h1 h2 => by
+    have : ζ ∈ Finset.univ.filter fun e =>
+        X.Inc (X.M.vtx (X.M.a1 y)) e ∧ X.lineE e = X.line (X.M.a1 y) := by simp [h1, h2]
+    rw [hfil] at this; simpa using this
+  rcases m ε hε (two_lines hs hν (on_of_inc hε) hl) with h | h
+  · exact .inl h
+  rcases m _ ⟨X.M.a1 (X.M.a2 y), by simp, rfl⟩ l2 with h' | h'
+  · exact (edge_a1_a2_ne hbf y h').elim
+  · exact .inr (h.trans h'.symm)
+
+open Classical in
+/-- At the end `vtx y` of a segment on the line of `a1 y`, through a vertex of two lines, the
+segment takes the value `1` on exactly one of the two edges of its line. -/
+theorem seg_end2 (hbf : BigonFree X.On) (hs : X.Straight) {y : D} (hν : X.nu (X.M.vtx y) = 2)
+    {P : X.M.Edge → ZMod 2} {p : X.M.Vtx} (hP : ∀ e, P e ≠ 0 → X.lineE e = X.line (X.M.a1 y))
+    (hb : X.incM *ᵥ P = Pi.single (X.M.vtx y) 1 + Pi.single p 1) (hp : p ≠ X.M.vtx y) :
+    P (X.M.edge (X.M.a1 y)) + P (X.M.edge (X.M.a1 (X.M.a2 y))) = 1 := by
+  have h0 := congrFun hb (X.M.vtx y)
+  rw [incM_mulVec, Fintype.sum_eq_add _ _ (edge_a1_a2_ne hbf y).symm fun ζ ⟨h1, h2⟩ => by
+    rw [ite_eq_right_iff]
+    intro hζ
+    by_contra h
+    exact (corner2 hbf hs hν hζ (by rw [hP ζ h]; exact line_a1_ne hs y)).elim h1 h2] at h0
+  simpa [Pi.single_eq_of_ne hp.symm, show X.Inc (X.M.vtx y) (X.M.edge (X.M.a1 y)) from
+    ⟨_, vtx_a1 y, rfl⟩, show X.Inc (X.M.vtx y) (X.M.edge (X.M.a1 (X.M.a2 y))) from
+    ⟨_, by simp, rfl⟩] using h0
+
+omit [Fintype D] in
+theorem meets_of {l Δ : L} (h : l ≠ Δ) : ∃ e, X.lineE e = l ∧ ∃ w, X.Inc w e ∧ X.On w Δ := by
+  obtain ⟨q, ⟨⟨x, hx, hxl⟩, hq⟩, -⟩ := X.meet l Δ h
+  exact ⟨X.M.edge x, hxl, q, ⟨x, hx, rfl⟩, hq⟩
+
+variable {D' L' : Type*} [Fintype D'] {X' : PseudolineMap D' L'}
+
+open Classical in
+omit [Fintype D] [Fintype D'] in
+theorem SkelIso.mapC_single (f : SkelIso X X') (e : X.M.Edge) :
+    f.mapC (Pi.single e 1) = Pi.single (f.fE e) 1 := by
+  funext e'
+  obtain ⟨e0, rfl⟩ := f.fE.surjective e'
+  simp [Pi.single_apply]
+
+open Classical in
+/-- **A skeleton isomorphism of simple arrangements carries face paths to face paths.** -/
+theorem path_map (hbf : BigonFree X.On) (hbf' : BigonFree X'.On) (hs : X.Straight)
+    (hs' : X'.Straight) (h2 : ∀ y : D, X.nu (X.M.vtx y) = 2) (h2' : ∀ y : D', X'.nu (X'.M.vtx y) = 2)
+    (f : SkelIso X X') {e1 e e2 : X.M.Edge} (h : X.Path3 e1 e e2) :
+    X'.Path3 (f.fE e1) (f.fE e) (f.fE e2) := by
+  obtain ⟨d, rfl, rfl, rfl⟩ := h
+  have ham : X.line (X.M.a1 d) ≠ X.line d := line_a1_ne hs d
+  have hbm : X.line (X.M.a1 (X.M.a0 d)) ≠ X.line d := by
+    have := line_a1_ne hs (X.M.a0 d); rwa [X.line_a0] at this
+  have hvw := noLoop hbf d
+  have va : X.On (X.M.vtx d) (X.line (X.M.a1 d)) := ⟨X.M.a1 d, vtx_a1 d, rfl⟩
+  have vm : X.On (X.M.vtx d) (X.line d) := ⟨d, rfl, rfl⟩
+  have wb : X.On (X.M.vtx (X.M.a0 d)) (X.line (X.M.a1 (X.M.a0 d))) := ⟨_, vtx_a1 _, rfl⟩
+  have wm : X.On (X.M.vtx (X.M.a0 d)) (X.line d) := ⟨_, rfl, X.line_a0 d⟩
+  have nwa : ¬X.On (X.M.vtx (X.M.a0 d)) (X.line (X.M.a1 d)) := fun h => hvw (meet_eq ham h wm va vm)
+  have nvb : ¬X.On (X.M.vtx d) (X.line (X.M.a1 (X.M.a0 d))) := fun h => hvw (meet_eq hbm wb wm h vm)
+  have hab : X.line (X.M.a1 d) ≠ X.line (X.M.a1 (X.M.a0 d)) := fun h => nwa (h ▸ wb)
+  obtain ⟨p, ⟨pa, pb⟩, -⟩ := X.meet _ _ hab
+  have hpv : p ≠ X.M.vtx d := fun h => nvb (h ▸ pb)
+  have hpw : p ≠ X.M.vtx (X.M.a0 d) := fun h => nwa (h ▸ pa)
+  obtain ⟨Pa, sa, ba, ha⟩ := seg_start hbf hs va pa (e1 := X.M.edge (X.M.a1 d)) rfl
+  obtain ⟨Pb, sb, bb, hb⟩ := seg_start hbf hs wb pb (e1 := X.M.edge (X.M.a1 (X.M.a0 d))) rfl
+  -- a fourth line avoiding the triangle
+  obtain ⟨q1, q2, q3, o1, o2, o3, n12, n13, n23⟩ := hbf (X.line (X.M.a1 d))
+  obtain ⟨q, oq, hqv, hqp⟩ : ∃ q, X.On q (X.line (X.M.a1 d)) ∧ q ≠ X.M.vtx d ∧ q ≠ p := by
+    by_contra hc
+    push Not at hc
+    have k := fun q (hq : X.On q (X.line (X.M.a1 d))) => (eq_or_ne q (X.M.vtx d)).imp_right (hc q hq)
+    rcases k _ o1 with rfl | rfl <;> rcases k _ o2 with h2 | h2 <;> rcases k _ o3 with h3 | h3 <;>
+      simp_all
+  obtain ⟨x, rfl, hx⟩ := oq
+  obtain ⟨y, hyv, hyl⟩ := X.two x
+  set Δ := X.line y
+  have hΔa : Δ ≠ X.line (X.M.a1 d) := hx ▸ hyl
+  have oΔ : X.On (X.M.vtx x) Δ := ⟨y, hyv, rfl⟩
+  have hΔm : X.line d ≠ Δ := fun h => hqv (meet_eq ham ⟨x, rfl, hx⟩ (h ▸ oΔ) va vm)
+  have hΔb : X.line (X.M.a1 (X.M.a0 d)) ≠ Δ := fun h => hqp (meet_eq hab ⟨x, rfl, hx⟩ (h ▸ oΔ) pa pb)
+  have nv : ¬X.On (X.M.vtx d) Δ := fun h => hΔa (two_lines hs (h2 d) h hΔm.symm)
+  have nw : ¬X.On (X.M.vtx (X.M.a0 d)) Δ := fun h => hΔb.symm (two_lines hs (h2 _) h
+    (by rw [X.line_a0]; exact hΔm.symm))
+  have np : ¬X.On p Δ := by
+    obtain ⟨z, rfl, hz⟩ := pa
+    intro h
+    have e1 := two_lines hs (h2 z) h (hz ▸ hΔa)
+    have e2 := two_lines hs (h2 z) pb (hz ▸ hab.symm)
+    exact hΔb (e2.trans e1.symm)
+  have ss : ∀ ε, (Pi.single (X.M.edge d) 1 : X.M.Edge → ZMod 2) ε ≠ 0 → X.lineE ε = X.line d :=
+    fun ε h => by
+      by_cases hε : ε = X.M.edge d
+      · rw [hε]; rfl
+      · exact absurd (Pi.single_eq_of_ne hε _) h
+  obtain ⟨_, hem⟩ := meets_of hΔm
+  obtain ⟨_, hea⟩ := meets_of hΔa.symm
+  obtain ⟨_, heb⟩ := meets_of hΔb
+  have hT' := (f.triangle_map hbf hbf' hs hs' ⟨vm, va⟩ ⟨pa, pb⟩ ⟨wb, wm⟩ ham.symm nvb ⟨nv, np, nw⟩
+    ss sa sb (bd_single hbf d) ba (by rw [bb, add_comm]) hem hea heb).1
+    (path_bounds hbf hs d sa sb ba bb ha hb)
+  rw [SkelIso.mapC_single] at hT'
+  -- the image in `X'`
+  obtain ⟨d0, hd0v, hd0e⟩ := (f.inc _ _).1 (⟨d, rfl, rfl⟩ : X.Inc (X.M.vtx d) (X.M.edge d))
+  have l0 : X'.line d0 = f.fL (X.line d) := by rw [← lineE_edge, hd0e, f.line]; rfl
+  have i1 := (f.inc _ _).1 (⟨_, vtx_a1 d, rfl⟩ : X.Inc (X.M.vtx d) (X.M.edge (X.M.a1 d)))
+  have la : X'.lineE (f.fE (X.M.edge (X.M.a1 d))) = f.fL (X.line (X.M.a1 d)) := f.line _
+  obtain ⟨d', hv', he', h1'⟩ : ∃ d', X'.M.vtx d' = f.fV (X.M.vtx d) ∧
+      X'.M.edge d' = f.fE (X.M.edge d) ∧ X'.M.edge (X'.M.a1 d') = f.fE (X.M.edge (X.M.a1 d)) := by
+    rcases corner2 hbf' hs' (h2' d0) (hd0v ▸ i1) (by rw [la, l0]; exact f.fL.injective.ne ham)
+      with h | h
+    exacts [⟨d0, hd0v, hd0e, h.symm⟩, ⟨_, by simp [hd0v], by simp [hd0e], h.symm⟩]
+  have l' : X'.line d' = f.fL (X.line d) := by rw [← lineE_edge, he', f.line]; rfl
+  have hw' : X'.M.vtx (X'.M.a0 d') = f.fV (X.M.vtx (X.M.a0 d)) := by
+    have := (f.inc _ _).1 (⟨_, rfl, edge_a0 d⟩ : X.Inc (X.M.vtx (X.M.a0 d)) (X.M.edge d))
+    rw [← he', inc_iff] at this
+    exact (this.resolve_left fun h => hvw (f.fV.injective (h.trans hv'))).symm
+  have i2 := (f.inc _ _).1 (⟨_, vtx_a1 _, rfl⟩ :
+    X.Inc (X.M.vtx (X.M.a0 d)) (X.M.edge (X.M.a1 (X.M.a0 d))))
+  rcases corner2 hbf' hs' (h2' (X'.M.a0 d')) (hw' ▸ i2)
+    (by rw [f.line, X'.line_a0, l']; exact f.fL.injective.ne hbm) with h3 | h3
+  · exact ⟨d', h1', he', h3.symm⟩
+  exfalso
+  -- the other side of `e`: its face path triangle would bound too
+  have la2 : X'.line (X'.M.a1 (X'.M.a2 d')) = f.fL (X.line (X.M.a1 d)) := by
+    rw [two_lines hs' (h2' d') ⟨X'.M.a1 (X'.M.a2 d'), by simp, rfl⟩
+      (by have := line_a1_ne hs' (X'.M.a2 d'); rwa [X'.line_a2] at this), ← lineE_edge, h1', f.line]
+    rfl
+  obtain ⟨Q, sQ, bQ, hQ⟩ := seg_start hbf' hs' (f.on_map.1 va) (f.on_map.1 pa)
+    (e1 := X'.M.edge (X'.M.a1 (X'.M.a2 d'))) la2
+  have r : X'.M.a0 (X'.M.a2 d') = X'.M.a2 (X'.M.a0 d') := X'.M.a0_a2 d'
+  have hT2 := path_bounds hbf' hs' (X'.M.a2 d') (p := f.fV p) (Pa := Q) (Pb := f.mapC Pb)
+    (by rwa [la2]) (by rw [r, ← lineE_edge, ← h3, f.line]; exact f.supp_map sb)
+    (by simpa [hv'] using bQ) (by simpa [r, hw'] using f.bd_map bb) hQ
+    (by rw [r, ← h3, SkelIso.mapC_apply, hb])
+  rw [edge_a2, he'] at hT2
+  rcases seg_unique hbf' hs' (f.supp_map sa) sQ (by rw [f.bd_map ba, bQ]) with hq | hq
+  · have := seg_end2 hbf' hs' (h2' d') (P := f.mapC Pa) (p := f.fV p)
+      (by rw [← lineE_edge, h1', f.line]; exact f.supp_map sa) (by rw [f.bd_map ba, hv'])
+      (fun h => hpv (f.fV.injective (h.trans hv')))
+    rw [h1', SkelIso.mapC_apply, ha, ← hq, hQ] at this
+    exact absurd this (by decide)
+  · refine lineChain_not_mem hbf' hs' (f.fL.injective.ne ham) ?_
+    convert X'.B1.add_mem hT' hT2 using 1
+    rw [hq]
+    exact funext fun _ => (by decide : ∀ s x y c : ZMod 2, c = s + x + y + (s + (x + c) + y)) _ _ _ _
+
+/-- **Full faithfulness for simple arrangements** (page 54, when every vertex is on exactly two
+lines). Every isomorphism of decomposed skeleta of two simple bigon-free arrangements that go
+straight comes from a unique isomorphism of the arrangements. -/
+theorem full_simple (hbf : BigonFree X.On) (hbf' : BigonFree X'.On) (hs : X.Straight)
+    (hs' : X'.Straight) (h2 : ∀ y : D, X.nu (X.M.vtx y) = 2)
+    (h2' : ∀ y : D', X'.nu (X'.M.vtx y) = 2) (f : SkelIso X X') :
+    ∃ g : D ≃ D', (∀ d, g (X.M.a0 d) = X'.M.a0 (g d)) ∧ (∀ d, g (X.M.a1 d) = X'.M.a1 (g d)) ∧
+      (∀ d, g (X.M.a2 d) = X'.M.a2 (g d)) ∧ (∀ d, X'.M.vtx (g d) = f.fV (X.M.vtx d)) ∧
+      ∀ d, X'.M.edge (g d) = f.fE (X.M.edge d) :=
+  (lift_iff hbf hbf' hs hs' f).2 fun _ _ _ => ⟨path_map hbf hbf' hs hs' h2 h2' f, fun h => by
+    simpa [SkelIso.symm] using path_map hbf' hbf hs' hs h2' h2 f.symm h⟩
+
+end Simple
 
 end PseudolineMap
 
