@@ -1457,7 +1457,7 @@ export const PROOFS: Proof[] = [
     name: "Flag fibrations, the combinatorial criterion",
     statement: "For d = (i_1,…,i_p) an initial segment of the flag d′ = (i_1,…,i_n) of a poset I, the flags e ⊇ d′ with the same terms up to i_p and the same last term (the boundary strata Σ_e of the fibres of Σ_{d′} → Σ_d) correspond, via e ↦ e ∖ d′, to the flags of the ordinal sum I_{]i_p,i_{p+1}[} ⊔ … ⊔ I_{]i_{n-1},i_n[}, d′ going to the empty flag; so there are no boundary strata exactly when i_{k+1} covers i_k for p ≤ k < n. Here the order-theoretic part only.",
     found: "Holds for any partial order: the union of the open intervals is their ordinal sum, e ↦ e ∖ d′ is an inclusion-preserving bijection onto its flags, and it is empty exactly when every step from i_p on is a cover, the terms below i_p playing no role. Not formalised: the unfolding, the fibrations and their boundary stratification, so the smoothness statement stays unverified.",
-    verdict: "holds (combinatorial part)",
+    verdict: "partly proved",
     lean: "lean/Grothendieck/Folder150.lean",
     theorems: ["Flags.lt_of_mem_Ioo", "Flags.mem_gaps_iff", "Flags.above_iff", "Flags.aboveEquiv", "Flags.aboveEquiv_eq_empty", "Flags.aboveEquiv_subset", "Flags.gaps_eq_empty_iff", "Flags.flags_gaps_iff", "Flags.above_eq_iff"],
   },

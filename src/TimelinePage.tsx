@@ -399,12 +399,14 @@ const VOLUMES: Volume[] = ([
   { title: 'SGA 7', years: '1967–69', kind: 'printed', status: 'printed', pages: 960, note: 'LNM 288, 340, approximate' },
   { title: 'La Longue Marche', short: 'Longue Marche', years: '1981', kind: 'hand', status: 'unedited', pages: 0, cotes: range('140-', 1, 4), note: '§ 1–37 edited by Malgoire (1995), the rest unedited' },
   { title: 'Teichmülleries', years: '1981–83', kind: 'hand', status: 'unedited', pages: 0, cotes: ['144'] },
+  { title: "Structure à l'infini des M_{g,ν}", short: 'Structure à l’infini', years: '1982–83', kind: 'hand', status: 'unedited', pages: 0, cotes: ['147'], note: 'dated by the edition to the winter of 1982–83' },
   { title: 'À la poursuite des champs', short: 'Poursuite des champs', years: '1983', kind: 'typed', status: 'edited', pages: 0, cotes: range('134-', 2, 8), note: 'volume I edited by Maltsiniotis (2022)' },
   { title: "Esquisse d'un programme", short: 'Esquisse', years: '1984', kind: 'printed', status: 'edited', pages: 44, note: 'as printed in Geometric Galois Actions 1 (1997)' },
   { title: 'Vers une géométrie des formes', short: 'Géométrie des formes', years: '1986', kind: 'hand', status: 'unedited', pages: 0, cotes: range('156-', 1, 9) },
   { title: 'Les Dérivateurs', short: 'Dérivateurs', years: '1990–91', kind: 'hand', status: 'edited', pages: 0, cotes: range('157-', 1, 5), note: 'edited by Künzer, Malgoire and Maltsiniotis' },
   { title: 'Géométrie élémentaire schématique', short: 'Géom. élém. schématique', years: '1992', kind: 'hand', status: 'bnf', pages: 1098, note: 'BnF, box 3: 549 leaves written on both sides' },
   { title: 'Trialité', years: '1995', kind: 'hand', status: 'bnf', pages: 89, note: 'BnF, box 43: 89 leaves (counted as pages)' },
+  { title: 'Notions de « géographie combinatoire »', short: 'Géographie combinatoire', years: '1996', kind: 'hand', status: 'bnf', pages: 0, note: 'BnF, box 43: number of leaves not recorded on 23 October 2026, drawn at the minimum width' },
 ] as Volume[]).map((v) => (v.cotes ? { ...v, pages: pagesOf(v.cotes) } : v));
 
 const VOLUME_STYLE: Record<VolumeStatus, { fill: string; stroke: string; dash?: string; label: string }> = {
