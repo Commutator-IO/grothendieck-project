@@ -1485,4 +1485,390 @@ theorem irreducible_on_C_iff :
 
 end Irreducible
 
+
+/-! ## The start vector (pages 102–105)
+
+Finding `72-pinned-realisations-over-base`, the proposition of pages 102–105. Its
+condition b) is the triangular half of (10) only, so it concerns the conditions (B̄′)
+of the corollary of pages 97–98 (`CondB'`); (B̄) is (B̄′) plus the other half of (10),
+which does not involve `s₀` (`condB_iff_condB'`).
+
+* `condB'_iff_of_basis` (pages 104–105, over any ring): if `(v, a₀, …, aₙ)` is a basis,
+  `φ` the coordinate on `v`, and b), c) hold, then `s₀` satisfies (B̄′) iff
+  `⟨s₀, a'ᵢ⟩ = 0` for `1 ≤ i ≤ n` (`s₀ ∈ F`), `⟨s₀, a'₀⟩` is a unit (`s₀ ∉ D`) and
+  `φ(s₀)` is a unit (`s₀ ∉ Δ`).
+* `exists_condB'_iff` (pages 102–105, over a local ring): a start vector with (B̄′)
+  exists iff a) `(a₀, …, aₙ)` extends to a basis by one vector, a′) `x ↦ (⟨x, a'ᵢ⟩)ᵢ`
+  maps onto `kⁿ⁺¹`, b) `⟨aᵢ, a'ⱼ⟩ = 0` for `i + 2 ≤ j`, c) `⟨aᵢ, a'ᵢ₊₁⟩` units. The
+  residue field may be `𝔽₂`: `s₀` is one of `t`, `s`, `s + t`.
+-/
+
+section StartVector
+
+open Module
+
+variable {k : Type*} [CommRing k] {M : Type*} [AddCommGroup M] [Module k M]
+  {a : ℕ → M} {a' : ℕ → Module.Dual k M} {s0 : M} {n : ℕ}
+
+/-- Conditions (B̄′) of the corollary of pages 97–98: (17), `(s₀, a₀, …, aₙ)` a basis,
+(19). -/
+def CondB' (n : ℕ) (a : ℕ → M) (a' : ℕ → Module.Dual k M) (s0 : M) : Prop :=
+  (∀ i j, i + 2 ≤ j → j ≤ n → a' j (a i) = 0) ∧ (∀ i, 1 ≤ i → i ≤ n → a' i s0 = 0) ∧
+    IsBasisFam k (fun j : Fin (n + 2) => av a s0 j) ∧ IsUnit (ν a a' s0 n)
+
+theorem condB_iff_condB' :
+    CondB n a a' s0 ↔ CondB' n a a' s0 ∧ ∀ i j, i + 2 ≤ j → j ≤ n → a' i (a j) = 0 := by
+  simp only [CondB, CondB', forall_and]; tauto
+
+lemma isUnit_ν_iff (n : ℕ) :
+    IsUnit (ν a a' s0 n) ↔ IsUnit (a' 0 s0) ∧ ∀ i < n, IsUnit (a' (i + 1) (a i)) := by
+  induction n with
+  | zero => simp [ν]
+  | succ n ih =>
+    simp only [ν, IsUnit.mul_iff, ih, Nat.lt_succ_iff_lt_or_eq, or_imp, forall_and,
+      forall_eq, and_assoc]
+
+/-- A family lower triangular in a basis, with invertible diagonal, is a basis. -/
+lemma isBasisFam_of_lowtri {m : ℕ} (b : Basis (Fin m) k M) (v : Fin m → M)
+    (hup : ∀ i j : Fin m, i < j → b.repr (v j) i = 0) (hdiag : ∀ j, IsUnit (b.repr (v j) j)) :
+    IsBasisFam k v := by
+  refine b.is_basis_iff_det.2 ?_
+  rw [b.det_apply, Matrix.det_of_isLowerTriangular _ (fun i j h => by
+    rw [Basis.toMatrix_apply]; exact hup i j h)]
+  exact IsUnit.prod_univ_iff.2 fun i => by rw [Basis.toMatrix_apply]; exact hdiag i
+
+/-- **The start vectors** (pages 104–105): with `(v, a₀, …, aₙ)` a basis and `φ` the
+coordinate on `v`, `s₀` satisfies (B̄′) iff it lies in `F`, off `D` and off `Δ`. -/
+theorem condB'_iff_of_basis {v : M} (hv : IsBasisFam k (fun j : Fin (n + 2) => av a v j))
+    (hb : ∀ i j, i + 2 ≤ j → j ≤ n → a' j (a i) = 0) (hc : ∀ i < n, IsUnit (a' (i + 1) (a i))) :
+    CondB' n a a' s0 ↔ (∀ i, 1 ≤ i → i ≤ n → a' i s0 = 0) ∧ IsUnit (a' 0 s0) ∧
+      IsUnit ((bas hv).coord 0 s0) := by
+  have hφa : ∀ i (hi : i ≤ n), (bas hv).repr (a i) = Finsupp.single ⟨i + 1, by omega⟩ 1 :=
+    fun i hi => bas_repr hv ⟨i + 1, by omega⟩
+  constructor
+  · rintro ⟨-, h11, hbas, hν⟩
+    refine ⟨h11, ((isUnit_ν_iff n).1 hν).1, ?_⟩
+    obtain ⟨c, hc⟩ := (Submodule.mem_span_range_iff_exists_fun k).1
+      (hbas.2.ge (Submodule.mem_top (x := v)))
+    have h := congrArg ((bas hv).coord 0) hc
+    have hv0 : (bas hv).repr v = Finsupp.single 0 1 := bas_repr hv 0
+    rw [map_sum, Fin.sum_univ_succ, Finset.sum_eq_zero fun i _ => by
+      rw [map_smul, show av a s0 (i.succ : ℕ) = a i from rfl, Basis.coord_apply,
+        hφa i (by omega), Finsupp.single_eq_of_ne' (Fin.ne_of_val_ne (by simp)), smul_zero]] at h
+    rw [Basis.coord_apply, Basis.coord_apply, hv0, add_zero, map_smul, Finsupp.smul_apply,
+      smul_eq_mul, Finsupp.single_eq_same, Fin.val_zero] at h
+    exact IsUnit.of_mul_eq_one_right _ h
+  · rintro ⟨h11, h0, hφ⟩
+    refine ⟨hb, h11, isBasisFam_of_lowtri (bas hv) _ (fun i j hij => ?_) (fun j => ?_),
+      (isUnit_ν_iff n).2 ⟨h0, hc⟩⟩
+    · obtain ⟨_ | j, hj⟩ := j
+      · simp at hij
+      · rw [show av a s0 (j + 1) = a j from rfl, hφa j (by omega),
+          Finsupp.single_eq_of_ne' hij.ne']
+    · obtain ⟨_ | j, hj⟩ := j
+      · exact hφ
+      · rw [show av a s0 (j + 1) = a j from rfl, hφa j (by omega), Finsupp.single_eq_same]
+        exact isUnit_one
+
+/-- Back-substitution (page 104): by b) and c), every `x` has the same image as some
+`s ∈ F` under any form vanishing on `a₀, …, a_{n−1}`. -/
+lemma exists_mem_F (hb : ∀ i j, i + 2 ≤ j → j ≤ n → a' j (a i) = 0)
+    (hc : ∀ i < n, IsUnit (a' (i + 1) (a i))) (f : Module.Dual k M) (hf : ∀ i < n, f (a i) = 0)
+    (x : M) : ∃ s, f s = f x ∧ ∀ i, 1 ≤ i → i ≤ n → a' i s = 0 := by
+  suffices ∀ m ≤ n, ∃ s, f s = f x ∧ ∀ i, n - m < i → i ≤ n → a' i s = 0 by
+    obtain ⟨s, h1, h2⟩ := this n le_rfl
+    exact ⟨s, h1, fun i hi hin => h2 i (by omega) hin⟩
+  intro m
+  induction m with
+  | zero => exact fun _ => ⟨x, rfl, fun i h1 h2 => by omega⟩
+  | succ m ih =>
+    intro hm
+    obtain ⟨s, h1, h2⟩ := ih (by omega)
+    obtain ⟨p, hp⟩ : ∃ p, n - m = p + 1 := ⟨n - m - 1, by omega⟩
+    have hu := (hc p (by omega)).mul_val_inv
+    refine ⟨s - (↑(hc p (by omega)).unit⁻¹ * a' (p + 1) s) • a p, ?_, fun i hi hin => ?_⟩
+    · rw [map_sub, map_smul, hf p (by omega), smul_zero, sub_zero, h1]
+    · rw [map_sub, map_smul, smul_eq_mul]
+      rcases (show i = p + 1 ∨ n - m < i by omega) with rfl | hi'
+      · linear_combination (-a' (p + 1) s) * hu
+      · rw [h2 i hi' hin, hb p i (by omega) hin, mul_zero, sub_zero]
+
+/-- **Local existence of the start vector** (pages 102–105): over a local ring, a start
+vector satisfying (B̄′) exists iff a), a′), b), c) hold. -/
+theorem exists_condB'_iff [IsLocalRing k] :
+    (∃ s0, CondB' n a a' s0) ↔ (∃ v, IsBasisFam k (fun j : Fin (n + 2) => av a v j)) ∧
+      Function.Surjective (fun x : M => fun i : Fin (n + 1) => a' i x) ∧
+      (∀ i j, i + 2 ≤ j → j ≤ n → a' j (a i) = 0) ∧ ∀ i < n, IsUnit (a' (i + 1) (a i)) := by
+  constructor
+  · rintro ⟨s0, hb, h11, hbas, hν⟩
+    refine ⟨⟨s0, hbas⟩, fun y => ?_, hb, ((isUnit_ν_iff n).1 hν).2⟩
+    -- the matrix `(⟨av i, a'ⱼ⟩)` is upper triangular with diagonal `⟨s₀, a'₀⟩, c₀, …`
+    set N : Matrix (Fin (n + 1)) (Fin (n + 1)) k := fun j i => a' j (av a s0 i)
+    have hN : IsUnit N := by
+      rw [Matrix.isUnit_iff_isUnit_det, Matrix.det_of_isUpperTriangular fun j i (h : i < j) => by
+        obtain ⟨_ | i, hi⟩ := i
+        · exact h11 j (Fin.lt_def.1 h) (by omega)
+        · exact hb i j (show i + 1 < (j : ℕ) from h) (by omega)]
+      refine IsUnit.prod_univ_iff.2 fun ⟨j, hj⟩ => ?_
+      rcases j with _ | j
+      · exact ((isUnit_ν_iff n).1 hν).1
+      · exact ((isUnit_ν_iff n).1 hν).2 j (by omega)
+    obtain ⟨z, hz⟩ := Matrix.mulVec_surjective_iff_isUnit.2 hN y
+    refine ⟨∑ i, z i • av a s0 i, funext fun j => ?_⟩
+    rw [← hz]
+    simp [Matrix.mulVec, dotProduct, N, mul_comm]
+  · rintro ⟨⟨v, hv⟩, ha', hb, hc⟩
+    set φ := (bas hv).coord 0
+    have hφ : ∀ i ≤ n, φ (a i) = 0 := fun i hi => by
+      rw [Basis.coord_apply, show a i = av a v ((⟨i + 1, by omega⟩ : Fin (n + 2)) : ℕ) from rfl,
+        bas_repr, Finsupp.single_eq_of_ne (by simp [Fin.ext_iff])]
+    obtain ⟨s, hs1, hs⟩ := exists_mem_F hb hc φ (fun i hi => hφ i hi.le) v
+    have hv0 : (bas hv).repr v = Finsupp.single 0 1 := bas_repr hv 0
+    have hs1 : IsUnit (φ s) := by
+      rw [hs1, Basis.coord_apply, hv0, Finsupp.single_eq_same]; exact isUnit_one
+    obtain ⟨t, ht⟩ := ha' (Pi.single 0 1)
+    have ht0 : a' 0 t = 1 := by simpa using congrFun ht 0
+    have ht : ∀ i, 1 ≤ i → i ≤ n → a' i t = 0 := fun i h1 h2 => by
+      simpa [Fin.ext_iff, show i ≠ 0 by omega, Nat.mod_eq_of_lt (show i < n + 1 by omega)]
+        using congrFun ht ⟨i, by omega⟩
+    have key : ∀ x y : k, IsUnit x → ¬IsUnit y → IsUnit (x + y) := fun x y hx hy =>
+      (IsLocalRing.isUnit_or_isUnit_of_isUnit_add (b := -y) (by simpa using hx)).resolve_right
+        (by simpa using hy)
+    by_cases h1 : IsUnit (φ t)
+    · exact ⟨t, (condB'_iff_of_basis hv hb hc).2 ⟨ht, by simp [ht0], h1⟩⟩
+    by_cases h2 : IsUnit (a' 0 s)
+    · exact ⟨s, (condB'_iff_of_basis hv hb hc).2 ⟨hs, h2, hs1⟩⟩
+    refine ⟨s + t, (condB'_iff_of_basis hv hb hc).2
+      ⟨fun i h h' => by simp [hs i h h', ht i h h'], ?_, ?_⟩⟩
+    · rw [map_add, add_comm]; exact key _ _ (by simp [ht0]) h2
+    · rw [map_add]; exact key _ _ hs1 h1
+
+/-- With the other half of (10), the start vector of `exists_condB'_iff` satisfies (B̄),
+hence (Ā). -/
+theorem exists_condA_iff [IsLocalRing k] :
+    (∃ s0, CondA n a a' s0) ↔ (∃ v, IsBasisFam k (fun j : Fin (n + 2) => av a v j)) ∧
+      Function.Surjective (fun x : M => fun i : Fin (n + 1) => a' i x) ∧
+      (∀ i j, i + 2 ≤ j → j ≤ n → a' j (a i) = 0 ∧ a' i (a j) = 0) ∧
+      ∀ i < n, IsUnit (a' (i + 1) (a i)) := by
+  simp only [condA_iff_condB, condB_iff_condB', exists_and_right, exists_condB'_iff, forall_and]
+  tauto
+
+/-- Over a local ring, on `M` free of rank `n + 2`, condition a) of the page —
+`(a₀, …, aₙ)` strictly free, i.e. independent with a complementary submodule — gives the
+vector `v` completing it to a basis. -/
+theorem exists_completion [IsLocalRing k] [Module.Free k M] [Module.Finite k M]
+    (hM : finrank k M = n + 2) (hli : LinearIndependent k (fun i : Fin (n + 1) => a i))
+    {Q : Submodule k M}
+    (hQ : IsCompl (Submodule.span k (Set.range fun i : Fin (n + 1) => a i)) Q) :
+    ∃ v, IsBasisFam k (fun j : Fin (n + 2) => av a v j) := by
+  set P := Submodule.span k (Set.range fun i : Fin (n + 1) => a i)
+  have : Module.Finite k Q := Module.Finite.equiv (P.quotientEquivOfIsCompl Q hQ)
+  have : Module.Projective k Q :=
+    .of_split Q.subtype _ (Submodule.projectionOnto_comp_subtype hQ.symm)
+  have : Module.Free k Q := Module.free_of_flat_of_isLocalRing
+  have : Module.Free k P := .of_basis (Basis.span hli)
+  have : Module.Finite k P := .of_basis (Basis.span hli)
+  have hQ1 : finrank k Q = 1 := by
+    have h := (P.prodEquivOfIsCompl Q hQ).finrank_eq
+    rw [Module.finrank_prod, hM, finrank_span_eq_card hli, Fintype.card_fin] at h
+    omega
+  set bQ := Module.finBasisOfFinrankEq k Q hQ1
+  have hsp : ⊤ ≤ Submodule.span k (Set.range fun j : Fin (n + 2) => av a (bQ 0 : M) j) := by
+    rw [← hQ.sup_eq_top, sup_le_iff]
+    refine ⟨Submodule.span_le.2 ?_, fun x hx => ?_⟩
+    · rintro _ ⟨i, rfl⟩
+      exact Submodule.subset_span ⟨i.succ, rfl⟩
+    · have h := congrArg Subtype.val (bQ.sum_repr ⟨x, hx⟩)
+      rw [Fin.sum_univ_one, Submodule.coe_smul] at h
+      rw [show x = _ from h.symm]
+      exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨0, rfl⟩)
+  exact ⟨bQ 0, linearIndependent_of_top_le_span_of_card_eq_finrank hsp (by simp [hM]),
+    top_le_iff.1 hsp⟩
+
+/-- On a reflexive `M` (for instance free of finite rank), condition a′) of the page —
+`(a'₀, …, a'ₙ)` strictly free in `M^∨` — makes `x ↦ (⟨x, a'ᵢ⟩)ᵢ` surjective. -/
+theorem surjective_of_strict [Module.IsReflexive k M]
+    (hli : LinearIndependent k (fun i : Fin (n + 1) => a' i)) {Q : Submodule k (Module.Dual k M)}
+    (hQ : IsCompl (Submodule.span k (Set.range fun i : Fin (n + 1) => a' i)) Q) :
+    Function.Surjective (fun x : M => fun i : Fin (n + 1) => a' i x) := by
+  set b := Basis.span hli
+  set x : Fin (n + 1) → M := fun i =>
+    (Module.evalEquiv k M).symm ((b.coord i).comp (Submodule.projectionOnto _ Q hQ))
+  have hx : ∀ i j : Fin (n + 1), a' j (x i) = if j = i then 1 else 0 := fun i j => by
+    rw [Module.apply_evalEquiv_symm_apply, LinearMap.comp_apply,
+      show a' j = (b j : Module.Dual k M) by simp [b, Basis.span_apply],
+      Submodule.projectionOnto_apply_left, Basis.coord_apply, Basis.repr_self,
+      Finsupp.single_apply]
+  refine fun y => ⟨∑ i, y i • x i, funext fun j => ?_⟩
+  simp [hx]
+
+/-- **Local existence of the start vector, with the page's « strictement libre »**: over a
+local ring, on `M` free of rank `n + 2`, under a) and a′) in the strict sense, b) and c),
+there is a start vector satisfying (B̄′). -/
+theorem exists_condB'_of_strict [IsLocalRing k] [Module.Free k M] [Module.Finite k M]
+    (hM : finrank k M = n + 2) (ha : LinearIndependent k (fun i : Fin (n + 1) => a i))
+    {Q : Submodule k M} (hQ : IsCompl (Submodule.span k (Set.range fun i : Fin (n + 1) => a i)) Q)
+    (ha' : LinearIndependent k (fun i : Fin (n + 1) => a' i)) {Q' : Submodule k (Dual k M)}
+    (hQ' : IsCompl (Submodule.span k (Set.range fun i : Fin (n + 1) => a' i)) Q')
+    (hb : ∀ i j, i + 2 ≤ j → j ≤ n → a' j (a i) = 0) (hc : ∀ i < n, IsUnit (a' (i + 1) (a i))) :
+    ∃ s0, CondB' n a a' s0 :=
+  exists_condB'_iff.2 ⟨exists_completion hM ha hQ, surjective_of_strict ha' hQ', hb, hc⟩
+
+end StartVector
+
+/-! ## The theorem in the « libre » (direct summand) sense (pages 96–100, 103)
+
+Finding `72-pinned-realisations-over-base`. For `E` an arbitrary module (locally free and
+not free, for instance), « libre » read as on page 103: a family is strictly free if it
+is independent and its span has a complementary submodule (`IsStrictFam`).
+
+* `condAs_iff_condBs`: (A) ⇔ (B) with (9) and (12) in this sense, over any commutative
+  ring and any module. The proof restricts everything to the span of the family, where
+  it is the theorem with bases (`condA_iff_condB`); under (A), `⟨sᵢ, a'ᵢ⟩` is a unit, read
+  off a coordinate of the projection along the complement, so `aᵢ` lies in the span.
+* `not_condAw_imp`: in the weak sense (independence only), (A) does not imply (13):
+  `k = ℤ`, `n = 0`, `s₀ = e₀`, `a₀ = e₁`, `a'₀ = 2e₀*`.
+* `free_of_condA`: (Ā) forces `E` free, so on a locally free non-free `E` there is no
+  global start vector; the existence of pages 102–105 is local (`exists_condB'_iff`).
+-/
+
+section Strict
+
+open Module
+
+variable {k : Type*} [CommRing k] {M : Type*} [AddCommGroup M] [Module k M]
+  {a : ℕ → M} {a' : ℕ → Module.Dual k M} {s0 : M} {n : ℕ}
+
+variable (k) in
+/-- A family is strictly free: independent, with a span that is a direct summand. -/
+def IsStrictFam {m : ℕ} (f : Fin m → M) : Prop :=
+  LinearIndependent k f ∧ ∃ Q : Submodule k M, IsCompl (Submodule.span k (Set.range f)) Q
+
+/-- Conditions (A): (7), (8), (9) with « libre » in the strict sense. -/
+def CondAs (n : ℕ) (a : ℕ → M) (a' : ℕ → Module.Dual k M) (s0 : M) : Prop :=
+  (∀ i j, i + 2 ≤ j → j ≤ n → ps a a' i * ps a a' j = ps a a' j * ps a a' i) ∧
+    (∀ i, 1 ≤ i → i ≤ n → ps a a' i s0 = s0) ∧
+    IsStrictFam k (fun j : Fin (n + 2) => sv a a' s0 j)
+
+/-- Conditions (B): (10), (11), (12) with « libre » in the strict sense, (13). -/
+def CondBs (n : ℕ) (a : ℕ → M) (a' : ℕ → Module.Dual k M) (s0 : M) : Prop :=
+  (∀ i j, i + 2 ≤ j → j ≤ n → a' j (a i) = 0 ∧ a' i (a j) = 0) ∧
+    (∀ i, 1 ≤ i → i ≤ n → a' i s0 = 0) ∧
+    IsStrictFam k (fun j : Fin (n + 2) => av a s0 j) ∧ IsUnit (ν a a' s0 n)
+
+/-- `aᵢ` seen in a submodule containing it (`0` otherwise). -/
+noncomputable def resA (N : Submodule k M) (a : ℕ → M) (i : ℕ) : N := by
+  classical exact if h : a i ∈ N then ⟨a i, h⟩ else 0
+
+/-- `a'ᵢ` restricted to a submodule. -/
+def resA' (N : Submodule k M) (a' : ℕ → Module.Dual k M) (i : ℕ) : Module.Dual k N :=
+  (a' i).domRestrict N
+
+variable {N : Submodule k M}
+
+lemma coe_resA {i : ℕ} (h : a i ∈ N) : (resA N a i : M) = a i := by simp [resA, h]
+
+lemma coe_ps_res (hN : ∀ i ≤ n, a i ∈ N) {i : ℕ} (hi : i ≤ n) (x : N) :
+    (ps (resA N a) (resA' N a') i x : M) = ps a a' i x := by
+  simp [ps_apply, resA', coe_resA (hN i hi)]
+
+lemma coe_sv_res (hN : ∀ i ≤ n, a i ∈ N) (hs : s0 ∈ N) :
+    ∀ j ≤ n + 1, ((sv (resA N a) (resA' N a') ⟨s0, hs⟩ j : N) : M) = sv a a' s0 j := by
+  intro j hj
+  induction j with
+  | zero => rfl
+  | succ j ih => rw [sv, coe_ps_res hN (by omega), ih (by omega), sv]
+
+lemma ν_res (hN : ∀ i ≤ n, a i ∈ N) (hs : s0 ∈ N) :
+    ∀ j ≤ n, ν (resA N a) (resA' N a') ⟨s0, hs⟩ j = ν a a' s0 j := by
+  intro j hj
+  induction j with
+  | zero => rfl
+  | succ j ih => simp [ν, ih (by omega), resA', coe_resA (hN j (by omega))]
+
+lemma coe_av_res (hN : ∀ i ≤ n, a i ∈ N) (hs : s0 ∈ N) (j : Fin (n + 2)) :
+    ((av (resA N a) ⟨s0, hs⟩ j : N) : M) = av a s0 j := by
+  obtain ⟨_ | j, hj⟩ := j
+  · rfl
+  · exact coe_resA (hN j (by omega))
+
+/-- A family of `N` is a basis of `N` iff, in `M`, it is independent and spans `N`. -/
+lemma isBasisFam_res {m : ℕ} {f : Fin m → M} {g : Fin m → N} (hg : ∀ j, (g j : M) = f j) :
+    IsBasisFam k g ↔ LinearIndependent k f ∧ Submodule.span k (Set.range f) = N := by
+  have hf : f = N.subtype ∘ g := funext fun j => (hg j).symm
+  subst hf
+  refine and_congr (LinearMap.linearIndependent_iff _ N.ker_subtype).symm ?_
+  rw [Set.range_comp, Submodule.span_image]
+  exact ⟨fun h => by rw [h, Submodule.map_subtype_top], fun h =>
+    Submodule.map_injective_of_injective N.injective_subtype (h.trans N.map_subtype_top.symm)⟩
+
+/-- (A) ⇔ (B) in the strict sense, for any module. -/
+theorem condAs_iff_condBs : CondAs n a a' s0 ↔ CondBs n a a' s0 := by
+  constructor
+  · rintro ⟨h7, h8, hli, Q, hQ⟩
+    set N := Submodule.span k (Set.range fun j : Fin (n + 2) => sv a a' s0 j)
+    have hsN : ∀ j ≤ n + 1, sv a a' s0 j ∈ N := fun j hj =>
+      Submodule.subset_span ⟨⟨j, by omega⟩, rfl⟩
+    -- `⟨sᵢ, a'ᵢ⟩ aᵢ = s_{i+1} − sᵢ`, and the coordinate on `s_{i+1}` is `1`
+    have hN : ∀ i ≤ n, a i ∈ N := by
+      intro i hi
+      set g := ((Basis.span hli).coord ⟨i + 1, by omega⟩).comp (N.projectionOnto Q hQ)
+      have hg : ∀ j : Fin (n + 2), g (sv a a' s0 j) = if (j : ℕ) = i + 1 then 1 else 0 := by
+        intro j
+        rw [LinearMap.comp_apply, show sv a a' s0 j = ((Basis.span hli j : N) : M) by
+          simp [Basis.span_apply], Submodule.projectionOnto_apply_left, Basis.coord_apply,
+          Basis.repr_self, single_apply_fin, eq_comm]
+      have h := congrArg g (sv_succ (a := a) (a' := a') (s0 := s0) i)
+      rw [map_add, map_smul, hg ⟨i + 1, by omega⟩, show sv a a' s0 i = sv a a' s0
+        ((⟨i, by omega⟩ : Fin (n + 2)) : ℕ) from rfl, hg ⟨i, by omega⟩] at h
+      simp only [ite_true, show i ≠ i + 1 by omega, ite_false, zero_add, smul_eq_mul] at h
+      have hu := IsUnit.of_mul_eq_one _ h.symm
+      have := N.sub_mem (hsN (i + 1) (by omega)) (hsN i (by omega))
+      rwa [sv_succ, add_sub_cancel_left, Submodule.smul_mem_iff_of_isUnit _ hu] at this
+    have hs : s0 ∈ N := hsN 0 (by omega)
+    obtain ⟨h10, h11, hbas, hν⟩ := condB_of_condA (n := n) (a := resA N a) (a' := resA' N a')
+      (s0 := ⟨s0, hs⟩) ⟨fun i j hij hj => LinearMap.ext fun x => Subtype.ext (by
+        simpa only [Module.End.mul_apply, coe_ps_res hN (show i ≤ n by omega), coe_ps_res hN hj]
+          using congrArg (· (x : M)) (h7 i j hij hj)),
+        fun i h1 h2 => Subtype.ext (by rw [coe_ps_res hN h2]; exact h8 i h1 h2),
+        (isBasisFam_res fun j => coe_sv_res hN hs j (by omega)).2 ⟨hli, rfl⟩⟩
+    obtain ⟨hli', hspan⟩ := (isBasisFam_res (coe_av_res hN hs)).1 hbas
+    refine ⟨fun i j hij hj => ?_, fun i h1 h2 => ?_, ⟨hli', Q, hspan ▸ hQ⟩,
+      ν_res hN hs n le_rfl ▸ hν⟩
+    · simpa [resA', coe_resA (hN i (by omega)), coe_resA (hN j hj)] using h10 i j hij hj
+    · simpa [resA'] using h11 i h1 h2
+  · rintro ⟨h10, h11, ⟨hli, Q, hQ⟩, hν⟩
+    set N := Submodule.span k (Set.range fun j : Fin (n + 2) => av a s0 j)
+    have hN : ∀ i ≤ n, a i ∈ N := fun i hi => Submodule.subset_span ⟨⟨i + 1, by omega⟩, rfl⟩
+    have hs : s0 ∈ N := Submodule.subset_span ⟨⟨0, by omega⟩, rfl⟩
+    obtain ⟨-, -, hbas⟩ := condA_of_condB (n := n) (a := resA N a) (a' := resA' N a')
+      (s0 := ⟨s0, hs⟩) ⟨fun i j hij hj => by
+        simpa [resA', coe_resA (hN i (by omega)), coe_resA (hN j hj)] using h10 i j hij hj,
+        fun i h1 h2 => by simpa [resA'] using h11 i h1 h2,
+        (isBasisFam_res (coe_av_res hN hs)).2 ⟨hli, rfl⟩, (ν_res hN hs n le_rfl).symm ▸ hν⟩
+    obtain ⟨hli', hspan⟩ := (isBasisFam_res fun j => coe_sv_res hN hs j (by omega)).1 hbas
+    refine ⟨fun i j hij hj => LinearMap.ext fun x => ?_, fun i h1 h2 => by
+      rw [ps_apply, h11 i h1 h2, zero_smul, add_zero], hli', Q, hspan ▸ hQ⟩
+    simp only [Module.End.mul_apply, ps_apply, map_add, map_smul, (h10 i j hij hj).1,
+      (h10 i j hij hj).2, zero_smul, add_zero]
+    abel
+
+/-- In the weak sense (independence only), (A) does not give (13): over `ℤ`, `n = 0`,
+`s₀ = e₀`, `a₀ = e₁`, `a'₀ = 2e₀*`, `(s₀, s₁) = (e₀, e₀ + 2e₁)` is independent and
+`ν₀ = 2`. -/
+theorem not_condAw_imp : ∃ (a : ℕ → Fin 2 → ℤ) (a' : ℕ → Module.Dual ℤ (Fin 2 → ℤ)) (s0 : _),
+    LinearIndependent ℤ (fun j : Fin 2 => sv a a' s0 j) ∧ ¬IsUnit (ν a a' s0 0) := by
+  refine ⟨fun _ => Pi.single 1 1, fun _ => 2 • LinearMap.proj 0, Pi.single 0 1, ?_, ?_⟩
+  · rw [Fintype.linearIndependent_iff]
+    intro g hg
+    have h0 := congrFun hg 0
+    have h1 := congrFun hg 1
+    simp [Fin.sum_univ_two, sv, ps_apply] at h0 h1
+    intro i; fin_cases i <;> simp_all
+  · simp [ν, Int.isUnit_iff]
+
+/-- (Ā) forces `E` to be free. -/
+theorem free_of_condA (h : CondA n a a' s0) : Module.Free k M := .of_basis (bas h.2.2)
+
+end Strict
 end Grothendieck.Folder72
