@@ -377,7 +377,8 @@ function Works() {
 // 107 handwritten folders, mean over the 3 typescript folders transcribed);
 // printed is an estimate for the IHÉS Publications and the Lecture Notes, not
 // a measurement.
-const WPP = { hand: 140, typed: 200, printed: 450 } as const;
+// clean: the BnF fair copies (1992–1996), written out as courses, denser than the working notes; an estimate, to count on a page at the BnF.
+const WPP = { hand: 140, clean: 250, typed: 200, printed: 450 } as const;
 type VolumeKind = keyof typeof WPP;
 type VolumeStatus = 'printed' | 'edited' | 'unedited' | 'bnf';
 type Volume = { title: string; short?: string; years: string; kind: VolumeKind; status: VolumeStatus; pages: number; cotes?: string[]; note?: string; edition?: string };
@@ -404,9 +405,9 @@ const VOLUMES: Volume[] = ([
   { title: "Esquisse d'un programme", short: 'Esquisse', years: '1984', kind: 'printed', status: 'edited', pages: 44, note: 'as printed in Geometric Galois Actions 1 (1997)' , edition: 'in Geometric Galois Actions 1, Cambridge (1997)' },
   { title: 'Vers une géométrie des formes', short: 'Géométrie des formes', years: '1986', kind: 'hand', status: 'unedited', pages: 0, cotes: range('156-', 1, 9) },
   { title: 'Les Dérivateurs', short: 'Dérivateurs', years: '1990–91', kind: 'hand', status: 'edited', pages: 0, cotes: range('157-', 1, 5), note: 'edited by Künzer, Malgoire and Maltsiniotis' , edition: 'ed. Künzer, Malgoire and Maltsiniotis (online)' },
-  { title: 'Géométrie élémentaire schématique', short: 'Géom. élém. schématique', years: '1992', kind: 'hand', status: 'bnf', pages: 1098, note: 'BnF, box 3: 549 leaves written on both sides' },
-  { title: 'Trialité', years: '1995', kind: 'hand', status: 'bnf', pages: 89, note: 'BnF, box 43: 89 leaves (counted as pages)' },
-  { title: 'Notions de « géographie combinatoire »', short: 'Géographie combinatoire', years: '1996', kind: 'hand', status: 'bnf', pages: 0, note: 'BnF, box 43: number of leaves not recorded on 23 October 2026, drawn at the minimum width' },
+  { title: 'Géométrie élémentaire schématique', short: 'Géom. élém. schématique', years: '1992', kind: 'clean', status: 'bnf', pages: 1098, note: 'BnF, box 3: 549 leaves written on both sides' },
+  { title: 'Trialité', years: '1995', kind: 'clean', status: 'bnf', pages: 89, note: 'BnF, box 43: 89 leaves (counted as pages)' },
+  { title: 'Notions de « géographie combinatoire »', short: 'Géographie combinatoire', years: '1996', kind: 'clean', status: 'bnf', pages: 0, note: 'BnF, box 43: number of leaves not recorded on 23 October 2026, drawn at the minimum width' },
 ] as Volume[]).map((v) => (v.cotes ? { ...v, pages: pagesOf(v.cotes) } : v));
 
 const VOLUME_STYLE: Record<VolumeStatus, { fill: string; stroke: string; dash?: string; label: string }> = {
@@ -450,7 +451,9 @@ function Volumes() {
         spine's thickness is proportional to an estimate of its length in words, not in pages: a
         handwritten page of his carries about {WPP.hand} words, a typed page about {WPP.typed}, a
         printed page of EGA or SGA about {WPP.printed}. The first two figures are measured on the
-        transcriptions; the printed one is an estimate, and the SGA page counts are approximate.
+        transcriptions; the printed one is an estimate, and the SGA page counts are approximate. The three
+        BnF texts are fair copies written out as courses, much denser than the working notes: they are
+        counted at about {WPP.clean} words a page, an estimate not yet measured.
         Hover a spine for its pages and words.
       </p>
       <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[12px] text-ink-600">
@@ -506,7 +509,7 @@ function Volumes() {
       <p className="mt-2 min-h-[2.5em] text-[12.5px] leading-relaxed text-ink-600">
         {sel ? (
           <>
-            <span className="font-semibold text-ink-900">{sel.title}</span> ({sel.years}) · {fmt(sel.pages)} {sel.kind === 'printed' ? 'printed' : sel.kind === 'typed' ? 'typed' : 'handwritten'} pages · about {fmt(Math.round(words(sel) / 1000) * 1000)} words
+            <span className="font-semibold text-ink-900">{sel.title}</span> ({sel.years}) · {fmt(sel.pages)} {sel.kind === 'printed' ? 'printed' : sel.kind === 'typed' ? 'typed' : sel.kind === 'clean' ? 'handwritten (fair copy)' : 'handwritten'} pages · about {fmt(Math.round(words(sel) / 1000) * 1000)} words
             {sel.cotes && <> · folders {sel.cotes[0]}–{sel.cotes[sel.cotes.length - 1].split('-').pop()}</>}
             {sel.note && <> · {sel.note}</>}
             {sel.edition && <> · <span className="text-ink-800">published since: {sel.edition}</span></>}
