@@ -40,7 +40,7 @@
 \newcommand{\leanst}{\entry{Lean.}}
 \newcommand{\settle}{\entry{What would settle it.}}
 
-\title{Open questions from Grothendieck's Montpellier notes:\\ fifteen statements a formalisation could not reach}
+\title{Open questions from Grothendieck's Montpellier notes:\\ fourteen statements a formalisation could not reach}
 \author{Michel Hua\\ \small Commutator, Paris\\ \small\texttt{michel@commutator.io} · ORCID 0009-0002-8304-0683}
 \date{Working paper, 25 October 2026}
 
@@ -51,7 +51,7 @@
 \maketitle
 
 \begin{abstract}
-The University of Montpellier has put online 178 folders of Alexandre Grothendieck's mathematical working notes. Since August 2026 an edition has transcribed 164 of them with a language model, restated each in current notation, searched the literature for the statements they contain, and formalised what it could in Lean~4 against Mathlib. Most of the statements that look new sit in theories Mathlib does not have yet: étale cohomology, topoi, stacks, abelian schemes, motives. This note collects fifteen of them for mathematicians. Each comes with its folder and page, the context, what the literature search found, the argument the page gives or sketches, the steps the edition added, and what would settle it. None of the statements has been checked by a specialist, and several may already be in print; a reference is as welcome as a proof or a counterexample.
+The University of Montpellier has put online 178 folders of Alexandre Grothendieck's mathematical working notes. Since August 2026 an edition has transcribed 164 of them with a language model, restated each in current notation, searched the literature for the statements they contain, and formalised what it could in Lean~4 against Mathlib. Most of the statements that look new sit in theories Mathlib does not have yet: étale cohomology, topoi, stacks, abelian schemes, motives. This note collects fourteen of them for mathematicians. Each comes with its folder and page, the context, what the literature search found, the argument the page gives or sketches, the steps the edition added, and what would settle it. None of the statements has been checked by a specialist, and several may already be in print; a reference is as welcome as a proof or a counterexample.
 \end{abstract}
 
 
@@ -291,17 +291,17 @@ Let $X$ be a smooth complex analytic space (or orbifold) with a normal crossings
 
 A pseudoline arrangement in the real projective plane is \emph{bigonal along} one of its pseudolines $D$ when $D$ carries exactly two vertices of the arrangement, so that every other pseudoline meets $D$ at one of them. In the page's notation, $\mathrm{II}_4$ is four pseudolines in general position, $\mathrm{II}_5$ five in general position, $\mathrm{II}'_{3,2}$ a pencil of three and a pencil of two without the line joining their centres, and $\mathrm{III}_6$ the complete quadrangle (the six lines joining four points, no three collinear).
 
-\begin{problem}[A dichotomy for arrangements without bigonal pseudolines]\label{p:bigon}
-Does every arrangement of pseudolines in the real projective plane without bigonal pseudolines either equal $\mathrm{II}_4$ or contain a sub-arrangement of type $\mathrm{II}_5$, $\mathrm{II}'_{3,2}$ or $\mathrm{III}_6$? Equivalently, since $\mathrm{II}_5$ and $\mathrm{II}'_{3,2}$ are the only bigon-free arrangements of five pseudolines: does every bigon-free arrangement other than $\mathrm{II}_4$ contain a bigon-free five-line sub-arrangement or a complete quadrangle? Can its pseudolines then be numbered so that each one, added to the previous ones, is never bigonal?
-\end{problem}
+The page's boxed dichotomy (\fac{80}, pp.~20, 24, 28, from 1981), listed here as an open problem until 26 October 2026, has a short proof, and so does the numbering lemma of page~28; we record it so that the problem below keeps its context. Four pseudolines are in \emph{general position} when no three of them pass through one point.
 
-\src{\fac{80}, pp.~20, 24, 28, \emph{Systèmes de pseudo-droites}, inventory dating [from 1981]. Boxed on page~24; announced on page~20 with the three configurations drawn; the numbering is the Lemme of page~28, of which only an \q{Idée} is written. The page derives the boxed form from a Théorème of page~24 which, as written, is false; no independent proof is on the pages.}
+\emph{Claim.} A bigon-free arrangement $\mathcal A$ either is $\mathrm{II}_4$ or contains $\mathrm{II}_5$, $\mathrm{II}'_{3,2}$ or $\mathrm{III}_6$; and its pseudolines can be numbered, starting from a $\mathrm{II}_4$ or a $\mathrm{III}_6$, so that every partial arrangement is bigon-free.
 
-\known Grünbaum's \emph{Arrangements and Spreads} and the literature on near-pencils and Sylvester--Gallai-type structure are where it would be. We checked only that the counterexample to the page's Théorème satisfies the dichotomy, and that $\mathrm{III}_6$ contains neither $\mathrm{II}_5$ nor $\mathrm{II}'_{3,2}$.
+\emph{Step 1: $\mathcal A$ contains four pseudolines in general position.} $\mathcal A$ is not a pencil, so by Melchior's form of the Sylvester--Gallai theorem, valid for pseudolines \cite{melchior,grunbaum}, it has a simple crossing $p = a \cap b$. Since $a$ is not bigonal it carries vertices $q_1, \dots, q_k$ besides $p$, with $k \ge 2$. Take $c \ne a$ through $q_i$ and $d \ne a$ through $q_j$, $i \ne j$. Then $\{a, b, c, d\}$ is in general position as soon as $c \cap b \ne d \cap b$: indeed $c, d$ miss $p$, meet $a$ at different points, and $c \cap d$ lies neither on $a$ nor on $b$. If this fails for every choice, all these pseudolines meet $b$ at one point $r$; two pseudolines meet only once, so each $q_i$ lies on $a$ and on a single other pseudoline $c_i$, all through $r$, and every pseudoline meets $a$ at $p$ or at some $q_i$. Then $\mathcal A = \{a, b, c_1, \dots, c_k\}$ and $b$ carries only $p$ and $r$, so it is bigonal, which is excluded.
 
-\leanst Not attempted in Lean. A computer enumeration (\nolinkurl{computations/bigon}) of all 461053 arrangements of at most nine pseudolines, together with a search of the arrangements avoiding $\mathrm{II}_5$, $\mathrm{II}'_{3,2}$ and $\mathrm{III}_6$ and a short induction, shows that the dichotomy holds for every n and that the numbering exists for every bigon-free arrangement of at most nine pseudolines. The induction is argued, not formalised.
+\emph{Step 2: the dichotomy.} Let $Q \subset \mathcal A$ be four pseudolines in general position, and $\ell \in \mathcal A \smallsetminus Q$. If $\ell$ passes through none of the six vertices of $Q$, then $Q \cup \{\ell\}$ is a $\mathrm{II}_5$; if through exactly one, a $\mathrm{II}'_{3,2}$. Otherwise $\ell$ passes through exactly two, which must be an opposite pair $\{x \cap y, z \cap w\}$ of the quadrilateral $Q = \{x,y,z,w\}$ (two vertices on a common side would force $\ell$ to be that side). Call such an $\ell$ a diagonal of $Q$; there are at most three. If $\mathcal A$ contains neither $\mathrm{II}_5$ nor $\mathrm{II}'_{3,2}$, then $\mathcal A$ is $Q$ plus some diagonals. One diagonal alone would be bigonal; two diagonals together with $Q$ form a $\mathrm{III}_6$ (the four triple points are the vertices of the quadrangle and the six pseudolines its sides); with three, $\mathcal A$ contains a $\mathrm{III}_6$ again.
 
-\settle A proof, a counterexample, or a reference.
+\emph{Step 3: the numbering.} Adding pseudolines never removes a vertex from a pseudoline already there, so it suffices that each pseudoline, when added, meets the earlier ones in at least three points. A pseudoline meets the six sides of a $\mathrm{III}_6$ in at least three points, since two vertices of $\mathrm{III}_6$ never cover all six sides; so if $\mathcal A \supseteq \mathrm{III}_6$, start there and add the rest in any order. Otherwise $\mathcal A$ contains at most one diagonal $\delta$ of $Q$: start from $Q$, add every pseudoline other than $\delta$ (each meets $Q$ in at least three points), and add $\delta$ last, when it has all its vertices in $\mathcal A$, at least three.
+
+This agrees with a computer enumeration of all arrangements of at most nine pseudolines (\nolinkurl{computations/bigon}). We have not found the statement in print; it is elementary, and probably folklore among people who work on arrangements.
 
 \begin{problem}[A bigon-free arrangement is determined by its skeleton]\label{p:skel}
 Is a combinatorial arrangement of pseudolines in the real projective plane without bigonal pseudolines determined by its $1$-skeleton together with the decomposition of the edges into pseudolines, functorially: is the functor from bigon-free arrangements to their decomposed skeleta fully faithful, so that every automorphism of the decomposed skeleton comes from the arrangement?
@@ -319,7 +319,7 @@ Is a combinatorial arrangement of pseudolines in the real projective plane witho
 
 \section{How the list was made, and its limits}
 
-The fifteen problems were chosen from the register of findings among the rows still open and outside what Lean reached, and with a statement precise enough to be proved or refuted. Rows whose only interest is a slip on the page, a dating, or a statement now known to be in print were left out, as were the conjectures already in the published record (the standard conjectures, the section conjecture, the $p$-curvature conjecture, the homotopy hypothesis), which the companion paper discusses \cite{huacicm}.
+The fourteen problems were chosen from the register of findings among the rows still open and outside what Lean reached, and with a statement precise enough to be proved or refuted. Rows whose only interest is a slip on the page, a dating, or a statement now known to be in print were left out, as were the conjectures already in the published record (the standard conjectures, the section conjecture, the $p$-curvature conjecture, the homotopy hypothesis), which the companion paper discusses \cite{huacicm}.
 
 Three limits apply to every entry. The transcriptions are first passes by a language model, and doubtful readings are marked but not all checked against the facsimile; a statement may rest on a misread word, and the entries say where we know this. The literature searches were made by the same means, with full texts where they were open and abstracts otherwise; an entry that says \q{not found} reports a search, not an absence. And the steps marked \q{ours} have not been checked by a specialist.
 
@@ -339,6 +339,8 @@ This note was drafted with a language model (Claude Opus 5.5, Anthropic) from th
 \bibitem{collas} B.~Collas, Anabelian perspectives in Galois--Teichmüller theory, arXiv:2603.02848, 2026.
 \bibitem{hodge3} P.~Deligne, Théorie de Hodge~III, \emph{Publ.\ Math.\ IHÉS} 44 (1974), 5--77.
 \bibitem{durfee} A.~H.~Durfee, Mixed Hodge structures on punctured neighborhoods, \emph{Duke Math.\ J.} 50 (1983), 1017--1040.
+\bibitem{grunbaum} B.~Grünbaum, \emph{Arrangements and Spreads}, CBMS Regional Conf.\ Ser.\ Math.~10, AMS, 1972.
+\bibitem{melchior} E.~Melchior, Über Vielseite der projektiven Ebene, \emph{Deutsche Math.} 5 (1941), 461--475.
 \bibitem{felsnergoodman} S.~Felsner, J.~E.~Goodman, Pseudoline arrangements, in \emph{Handbook of Discrete and Computational Geometry}, 3rd ed., ch.~5, CRC Press, 2017.
 \bibitem{friedmanlaza} R.~Friedman, R.~Laza, arXiv:2207.07566, 2022.
 \bibitem{gabberorgogozo} O.~Gabber, F.~Orgogozo, Sur la $p$-dimension des corps, \emph{Invent.\ Math.} 174 (2008), arXiv:0706.0671.

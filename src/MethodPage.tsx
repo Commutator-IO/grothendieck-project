@@ -427,7 +427,7 @@ export function MethodPage() {
           </p>
 
           <P id="article-problems" className="prose-fonds mt-6">
-            <em>Open Questions from Grothendieck's Montpellier Notes: Fifteen Statements a
+            <em>Open Questions from Grothendieck's Montpellier Notes: Fourteen Statements a
             Formalisation Could Not Reach</em>{' '}
             is a working paper for mathematicians. It collects statements from the folders that the
             Lean formalisation could not settle, most of them in theories Mathlib does not have yet,
