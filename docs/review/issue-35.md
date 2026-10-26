@@ -174,3 +174,13 @@ A systematic pass on the imprecisely dated folders (src/content/proposed-datings
 - [ ] **134-8, p. 63:** inventory [1983], typed dates 22.10 to 12.11; p. 63 asks for copies of typescript pp. 259–381 and its P.S. (« absent … jusque vers le six août ») points to late July or early August 1983. Check the P.S.
 - [ ] **138, pp. 105, 109:** inventory « vers 1976–1978 »; p. 105 is on a letter dated 11.1.1977 and p. 109 on a notice of 12.12.1977, so these pages are not of 1976. Check the two versos.
 
+# Statements too imprecise to fix (2026-10-26)
+
+### Can the leaves fix what the reading could not?
+
+Four findings stay « too imprecise » because the reading could not fix a word, a count or the order of two leaves. None of these needs the mathematics: each is a reading of the hand, a recount on a chart, or a look at a sheet. An answer either fixes the statement, so that it can be searched in the literature or formalised, or confirms that the leaves cannot.
+
+- [ ] **112, pp. 1–4:** the definitions of « lisse » and « négligeable » and the question « W_y⁻¹ Lisse_ℤ(A) → D_lc(B̂_ab) une équivalence ? » as read. Read the words left illegible on both sides of the definition of « négligeable », the second factor of the tensor product L^{(a)} ⊗ …, the category B and the functor L ↦ L^b, and what the class W_y, the subscript lc and the signs ∫ and ∗ stand for.
+- [ ] **148, pp. 30, 32:** the chart of p. 30 (nine types of special structures, 542 in all) and the arrow count of p. 32, 5 × 60 + 11 × 120 = 1620, written over a struck 1580. Recount the arrows on the chart by type, and read the line of γ^{1′}_r (« 3 × 120 = 3 × 40 » over a blackened equality) and the sources and targets drawn for γ⁰_r, γ²_r and γ^{2′}_r, which the reading could not match with the tally.
+- [ ] **148, pp. 36–37:** the reading puts these pages in the order 37, 36, 38. Check whether pp. 36 and 37 are the two faces of one sheet (then the « reversal » is only which face was scanned first) or two sheets filed out of order.
+- [ ] **146, pp. 62, 64:** these pages number formulas (53)–(55) and (26)–(27), from runs that start outside the folder. Check that pp. 62 and 64 are single leaves with nothing numbered on their versos.

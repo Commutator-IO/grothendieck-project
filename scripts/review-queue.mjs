@@ -506,6 +506,31 @@ for (const raw of body.split('\n')) {
     }
   }
 
+  // A finding too imprecise to state: what the leaves can still fix.
+  if (section.startsWith('Statements too imprecise')) {
+    const imp = /^\*\*(\d+(?:-\d+)?)(?:,\s*pp?\.\s*([\d–, -]+))?:\*\*\s*(.*)$/.exec(text);
+    if (imp && isCote(imp[1])) {
+      const ps = (imp[2] ?? '').split(/,\s*/).flatMap((r) => {
+        const [a, b] = r.split('–').map(Number);
+        return b > a ? Array.from({ length: b - a + 1 }, (_, i) => a + i) : a ? [a] : [];
+      });
+      push({
+        id: `imprecise-${imp[1]}-p${ps[0] ?? 0}`,
+        section: n,
+        kind: 'imprecise',
+        cote: imp[1],
+        page: ps[0] ?? null,
+        prompt: `Can the leaves of folder ${imp[1]} fix what the reading left open?`,
+        choices: [C('Yes, here is what the page has', 'other', 'The words, the count or the leaves'), C('The page is as the reading says', 'right'), C('The page cannot settle it', 'illegible')],
+        hint: `${ps.length ? facsimileAt(ps) : `Leaf through the facsimile of folder ${imp[1]}`}: read or count what the box names.`,
+        claim: `${imp[3][0].toUpperCase()}${imp[3].slice(1)}`,
+        details: text.replace(/\*\*/g, ''),
+        context: 'A finding stays too imprecise to search or formalise until these leaves are read (2026-10-26).',
+      }, null);
+      continue;
+    }
+  }
+
   if (section.startsWith('Hypotheses behind')) {
     const hyp = /^\*\*(\d+(?:-\d+)?)(?:,\s*pp?\.\s*([\d–, -]+))?:\*\*\s*(.*)$/.exec(text);
     if (hyp && isCote(hyp[1])) {
