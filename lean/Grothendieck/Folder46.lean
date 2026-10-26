@@ -1154,11 +1154,9 @@ theorem isCohomologous_of_semilocal
     fun a b x hx => map_mem_smul_top _ (LinearMap.mulRight O _) <|
       map_mem_smul_top _ (LinearMap.mulLeft O _) (inv_smul_mem_smul_top hO hx σ)
   refine ⟨c h * h • w' * ↑(c' h)⁻¹, ?_, ?_⟩
-  · convert conj (c' h) (c' h) h₁ using 1
-    rw [smul_sub, smul_one, mul_sub, sub_mul, mul_one, Units.mul_inv, smul_mul']
-    conv_lhs => rw [hfix]
-    simp only [mul_assoc, Units.inv_mul_cancel_left]
-  · convert conj (c h) (c h) h₂ using 1
+  on_goal 1 => convert conj (c' h) (c' h) h₁ using 1
+  on_goal 2 => convert conj (c h) (c h) h₂ using 1
+  all_goals
     rw [smul_sub, smul_one, mul_sub, sub_mul, mul_one, Units.mul_inv, smul_mul']
     conv_lhs => rw [hfix]
     simp only [mul_assoc, Units.inv_mul_cancel_left]
@@ -1211,8 +1209,7 @@ theorem exists_trace_one_mod (𝔪 : Ideal O) (D : Subgroup Γ) [Fintype D] {k :
   obtain ⟨s, hs⟩ := hρ (∑ δ : D, δ • ρ l₀)⁻¹
   refine ⟨l₀ * s, hρ𝔪 _ ?_⟩
   have hg : ∀ g : D, g • ∑ δ : D, δ • ρ l₀ = ∑ δ : D, δ • ρ l₀ := fun g => by
-    rw [smul_sum]
-    simp_rw [smul_smul]
+    simp_rw [smul_sum, smul_smul]
     exact Equiv.sum_comp (Equiv.mulLeft g) fun s => s • ρ l₀
   simp only [map_sub, map_sum, smul_mul', map_mul, hρD, hs, map_one, smul_inv'', hg, ← sum_mul,
     mul_inv_cancel₀ hμ, sub_self]
@@ -1292,30 +1289,29 @@ theorem isCohomologous_of_shapiro {e : A} (hcen : ∀ (g : Γ) (a : A), g • e 
     rw [← mul_assoc, ← hcen, mul_assoc]
   -- `x ↦ c₁(g) g(x) c₂(g)⁻¹` keeps `x ∈ eA` in `g(e)A`, and multiplies diagonally
   have hloc : ∀ (c₁ c₂ : Γ → Aˣ) (x : A), e * x = x → ∀ g : Γ,
-      (c₁ g : A) * g • x * ↑(c₂ g)⁻¹ = g • e * ((c₁ g : A) * g • x * ↑(c₂ g)⁻¹) := by
-    intro c₁ c₂ x hx g
+      (c₁ g : A) * g • x * ↑(c₂ g)⁻¹ = g • e * ((c₁ g : A) * g • x * ↑(c₂ g)⁻¹) :=
+    fun c₁ c₂ x hx g => by
     conv_rhs => rw [← mul_assoc, ← mul_assoc, hcen g (c₁ g : A), mul_assoc (c₁ g : A), ← smul_mul',
       hx]
   have hdiag : ∀ (c₁ c₂ : Γ → Aˣ) (x y : A), x * y = e → ∀ g : Γ,
-      (c₁ g : A) * g • x * ↑(c₂ g)⁻¹ * ((c₂ g : A) * g • y * ↑(c₁ g)⁻¹) = g • e := by
-    intro c₁ c₂ x y hxy g
+      (c₁ g : A) * g • x * ↑(c₂ g)⁻¹ * ((c₂ g : A) * g • y * ↑(c₁ g)⁻¹) = g • e :=
+    fun c₁ c₂ x y hxy g => by
     simp only [mul_assoc, Units.inv_mul_cancel_left]
     rw [← mul_assoc (g • x), ← smul_mul', hxy, ← mul_assoc, ← hcen, mul_assoc, Units.mul_inv,
       mul_one]
   have hprod : ∀ (c₁ c₂ : Γ → Aˣ) (x y : A), e * x = x → e * y = y → x * y = e →
       (∑ q : Γ ⧸ D, (c₁ q.out : A) * q.out • x * ↑(c₂ q.out)⁻¹) *
-        (∑ q : Γ ⧸ D, (c₂ q.out : A) * q.out • y * ↑(c₁ q.out)⁻¹) = 1 := by
-    intro c₁ c₂ x y hx hy hxy
+        (∑ q : Γ ⧸ D, (c₂ q.out : A) * q.out • y * ↑(c₁ q.out)⁻¹) = 1 :=
+    fun c₁ c₂ x y hx hy hxy => by
     rw [sum_mul_sum, ← hsum]
     refine sum_congr rfl fun q _ => ?_
     rw [sum_eq_single q (fun r _ hr => ?_) (by simp), hdiag c₁ c₂ x y hxy]
     rw [hloc c₁ c₂ x hx, hloc c₂ c₁ y hy, mul_assoc, hcomm, ← mul_assoc,
       horth _ _ (hne q r (Ne.symm hr)), zero_mul]
-  have h₁ := hprod c' c z z' hz hz' hzz'
-  have h₂ := hprod c c' z' z hz' hz hz'z
   have hzD : ∀ l ∈ D, (c' l : A) * l • z * ↑(c l)⁻¹ = z := fun l hl => by
     rw [hD l hl, mul_assoc, Units.mul_inv, mul_one]
-  exact isCohomologous_of_fixed ⟨_, _, h₁, h₂⟩ (mul_smul_sum_cosets_twist hc hc' D z hzD)
+  exact isCohomologous_of_fixed ⟨_, _, hprod c' c z z' hz hz' hzz', hprod c c' z' z hz' hz hz'z⟩
+    (mul_smul_sum_cosets_twist hc hc' D z hzD)
 
 end Shapiro
 
