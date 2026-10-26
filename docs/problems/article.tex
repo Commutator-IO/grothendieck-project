@@ -27,7 +27,7 @@
 \newcommand{\leanst}{\par\smallskip\noindent\textbf{Lean.} }
 \newcommand{\settle}{\par\smallskip\noindent\textbf{What would settle it.} }
 
-\title[Open questions from Grothendieck's Montpellier notes]{Open questions from Grothendieck's Montpellier notes:\\ seventeen statements a formalisation could not reach}
+\title[Open questions from Grothendieck's Montpellier notes]{Open questions from Grothendieck's Montpellier notes:\\ sixteen statements a formalisation could not reach}
 \author{Michel Hua}
 \address{Commutator, Paris, France}
 \email{michel@commutator.io}
@@ -37,7 +37,7 @@
 \begin{document}
 
 \begin{abstract}
-The University of Montpellier has put online 178 folders of Alexandre Grothendieck's mathematical working notes. Since August 2026 an edition has transcribed 164 of them with a language model, restated each in current notation, searched the literature for the statements they contain, and formalised what it could in Lean~4 against Mathlib. Most of the statements that look new sit in theories Mathlib does not have yet: étale cohomology, topoi, stacks, abelian schemes, motives. This note collects seventeen of them for mathematicians. Each comes with its folder and page, the context, what the literature search found, the argument the page gives or sketches, the steps the edition added, and what would settle it. None of the statements has been checked by a specialist, and several may already be in print; a reference is as welcome as a proof or a counterexample.
+The University of Montpellier has put online 178 folders of Alexandre Grothendieck's mathematical working notes. Since August 2026 an edition has transcribed 164 of them with a language model, restated each in current notation, searched the literature for the statements they contain, and formalised what it could in Lean~4 against Mathlib. Most of the statements that look new sit in theories Mathlib does not have yet: étale cohomology, topoi, stacks, abelian schemes, motives. This note collects sixteen of them for mathematicians. Each comes with its folder and page, the context, what the literature search found, the argument the page gives or sketches, the steps the edition added, and what would settle it. None of the statements has been checked by a specialist, and several may already be in print; a reference is as welcome as a proof or a counterexample.
 \end{abstract}
 
 \maketitle
@@ -318,21 +318,9 @@ Is a combinatorial arrangement of pseudolines in the real projective plane witho
 
 \settle A proof of (A1)--(A6), or the face-width bound with a uniqueness theorem.
 
-\begin{problem}[The $27$ lines around a triangle]\label{p:27}
-A Schläfli graph (the $27$ lines on a cubic surface, joined when they meet) with a marked triangle $t$: is it equivalent to the data of a $3$-element set $t$, a $2$-dimensional $\mathbb F_2$-vector space $V$, and a torsor $\tilde P$ under the central extension $\tilde\Psi(V, t) = \bigwedge_{i \in t} p_i^*(\tilde V)$ of $\Psi(V, t) = \ker(V^t \to V)$ by $\mathbb F_2$, where $\tilde V$ is the quaternion group $Q_8$ seen as the extension of $V$ by $\mathbb F_2$ split over no subgroup of order~$2$, and $\bigwedge$ is the Baer product; and is $\tilde\Psi$ characterised by the page's anisotropy conditions for $\dim V \le 2$, uniquely up to unique isomorphism?
-\end{problem}
-
-\src{\fac{69}, pp.~7--8, 14--15, 25--26, 113, \emph{Graphes cubiques}, inventory dating [from 1976]. The page rebuilds the graph as $t \sqcup \coprod_i \tilde P/N'_i$ and gives $\operatorname{Aut}(C, t)$ as an extension of $\mathfrak S_t \times \mathfrak S_{V^*}$ by $\tilde\Psi$, of order $32 \cdot 36 = 1152$.}
-
-\known The reconstruction of the configuration around a triangle from a group of order~$32$ acting simply transitively on the $32$ triangles disjoint from $t$ is Kantor's coset construction of the generalised quadrangle $\mathrm{GQ}(4,2)$ \cite[\S\S10.4--10.6]{paynethas}, and we identify $\tilde\Psi$ with the extraspecial group $2^{1+4}_+$, the normal $2$-subgroup of $W(F_4)$. What we did not find is the presentation of that group as the Baer product of the three pull-backs of $Q_8$, its characterisation by anisotropy conditions with uniqueness up to unique isomorphism, and the statement as an equivalence of categories.
-
-\leanst The count is proved: on the $27$-line graph the automorphisms preserving a triangle form a group of order $1152$, those fixing it pointwise one of order $192$, by a stabiliser chain checked by the kernel. The group part is stated as \texttt{problem18} in \nolinkurl{lean/Grothendieck/Folder69.lean} and proved (\texttt{problem18\_holds}): the stabiliser maps onto $\mathfrak S_3 \times \mathfrak S_3$, by its action on the three lines of $t$ and on the three partitions of the other triangles through them, and the kernel is the triples of quaternions with central product modulo the central triples of product one; the checks are finite and run in the kernel. The reconstruction from $(t, V, \tilde P)$ and the equivalence of categories are not formalised.
-
-\settle Kantor 1980 or Freudenthal 1975, where the residue would be if it is anywhere; or a proof of the equivalence.
-
 \section{How the list was made, and its limits}
 
-The seventeen problems were chosen from the register of findings among the rows still open, outside what Lean reached or with Lean reaching only a count, and with a statement precise enough to be proved or refuted. Rows whose only interest is a slip on the page, a dating, or a statement now known to be in print were left out, as were the conjectures already in the published record (the standard conjectures, the section conjecture, the $p$-curvature conjecture, the homotopy hypothesis), which the companion paper discusses \cite{huacicm}.
+The sixteen problems were chosen from the register of findings among the rows still open and outside what Lean reached, and with a statement precise enough to be proved or refuted. Rows whose only interest is a slip on the page, a dating, or a statement now known to be in print were left out, as were the conjectures already in the published record (the standard conjectures, the section conjecture, the $p$-curvature conjecture, the homotopy hypothesis), which the companion paper discusses \cite{huacicm}.
 
 Three limits apply to every entry. The transcriptions are first passes by a language model, and doubtful readings are marked but not all checked against the facsimile; a statement may rest on a misread word, and the entries say where we know this. The literature searches were made by the same means, with full texts where they were open and abstracts otherwise; an entry that says \q{not found} reports a search, not an absence. And the steps marked \q{ours} have not been checked by a specialist.
 
@@ -366,7 +354,6 @@ This note was drafted with a language model (Claude Opus 5.5, Anthropic) from th
 \bibitem{kockmoerdijk1996} A.~Kock, I.~Moerdijk, Spaces with local equivalence relations, and their monodromy, \emph{Topology Appl.} 72 (1996), 47--78.
 \bibitem{mathew} A.~Mathew, On $K(1)$-local TR, \emph{Compositio Math.} 157 (2021), arXiv:2005.08744.
 \bibitem{milneadt} J.~S.~Milne, \emph{Arithmetic Duality Theorems}, 2nd ed., BookSurge, 2006.
-\bibitem{paynethas} S.~E.~Payne, J.~A.~Thas, \emph{Finite Generalized Quadrangles}, 2nd ed., EMS, 2009.
 \bibitem{poonenstoll} B.~Poonen, M.~Stoll, The Cassels--Tate pairing on polarized abelian varieties, \emph{Ann.\ of Math.} 150 (1999), 1109--1149.
 \bibitem{pop2019} F.~Pop, Finite tripod variants of I/OM: on Ihara's question/Oda--Matsumoto conjecture, \emph{Invent.\ Math.} (2019), 745--797.
 \bibitem{rosenthal} K.~Rosenthal, Sheaves and local equivalence relations, \emph{Cahiers Top.\ Géom.\ Diff.} 25 (1984), 179--206.
