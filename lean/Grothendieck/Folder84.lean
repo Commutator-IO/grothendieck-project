@@ -1678,3 +1678,776 @@ end ChiExt
 end ChiCategory
 
 end Grothendieck.Folder84
+
+
+/-! ## The intrinsic product of `χ`-trivialised extensions (pages 65 to 76)
+
+Finding `84-chi-trivialised-extension-product`, the product by amalgamated sum. A
+`χ`-trivialised extension of `𝒪` by `L` (`ChiTriv`) is `ι : L → E`, `ψ : E → 𝒪` with `ψι = 0`
+and a `χ`-rétraction `π : E → L` with `πι = χ`; nothing is split. The product `E₁ * E₂`
+(`Amal`) is the amalgamated sum of `E₁ ⊗ E₂` and `L₁ ⊗ L₂` along
+`μ : (L₁ ⊗ E₂) ⊕ (E₁ ⊗ L₂) → L₁ ⊗ L₂`, `μ = (id ⊗ π₂, π₁ ⊗ id)` (page 68), over any
+commutative ring and without division:
+
+* `isPushout`: it is a pushout in `ModuleCat` (Mathlib's `IsPushout`); `amalDesc`,
+  `amal_hom_ext`: its universal property;
+* `prodA`: it is `χ`-trivialised, `π(x₁ * x₂) = π₁(x₁) ⊗ π₂(x₂)` (`piA_star`, page 70),
+  `ψ(x₁ * x₂) = ψ₁(x₁)ψ₂(x₂)`; `star_ι_left`, `star_ι_right`, `star_add`: the formulaire of
+  pages 72 to 74;
+* `ChiTriv.splittingOf`: every extension of `𝒪` splits on an affine base;
+  `splitEquiv`, `split_coords`, `prod_exact`, `prodSplitting_b`: for any splittings
+  `E₁ * E₂ ≅ 𝒪 × (L₁ ⊗ L₂)`, an extension with `b = b₁ ⊗ b₂` (page 78), and
+  `ChiExt.ofSectionTensorIso` identifies it with the coordinate product of `ChiExt`;
+* `biaffine_universal`, `biaffine_of_linear` (pages 75 and 76): bi-affine pairs `(f, α)` on
+  `P₁ × P₂` are exactly the linear maps out of `E₁ * E₂`.
+
+Not formalised: the intrinsic functoriality and coherence constraints (they are transported
+from `ChiExt` through the splittings), extensions of a general `M` and non-affine bases. -/
+
+open CategoryTheory TensorProduct
+
+namespace Grothendieck.Folder84
+
+section Amalgam
+
+variable {R : Type*} [CommRing R] (χ : R)
+
+/-- A `χ`-trivialised extension of `𝒪` by `L` (page 65): `ι : L → E`, `ψ : E → 𝒪` with
+`ψι = 0`, and the `χ`-rétraction `π : E → L` with `πι = χ`. -/
+structure ChiTriv (L E : Type*) [AddCommGroup L] [Module R L] [AddCommGroup E] [Module R E] where
+  ι : L →ₗ[R] E
+  ψ : E →ₗ[R] R
+  π : E →ₗ[R] L
+  ψ_ι : ψ ∘ₗ ι = 0
+  π_ι : π ∘ₗ ι = χ • LinearMap.id
+
+variable {χ}
+variable {L E : Type*} [AddCommGroup L] [Module R L] [AddCommGroup E] [Module R E]
+
+/-- A splitting: a section `x₀` of `P₁ = ψ⁻¹(1)` and the retraction `p : E → L` it defines. -/
+structure ChiTriv.Splitting (X : ChiTriv χ L E) where
+  x₀ : E
+  p : E →ₗ[R] L
+  ψ_x₀ : X.ψ x₀ = 1
+  p_ι : p ∘ₗ X.ι = LinearMap.id
+  decomp : ∀ e, X.ι (p e) + X.ψ e • x₀ = e
+
+namespace ChiTriv
+
+variable {X : ChiTriv χ L E}
+
+attribute [simp] Splitting.ψ_x₀
+
+@[simp] lemma ψ_ι_apply (u : L) : X.ψ (X.ι u) = 0 := LinearMap.congr_fun X.ψ_ι u
+@[simp] lemma π_ι_apply (u : L) : X.π (X.ι u) = χ • u := LinearMap.congr_fun X.π_ι u
+@[simp] lemma Splitting.p_ι_apply (s : X.Splitting) (u : L) : s.p (X.ι u) = u :=
+  LinearMap.congr_fun s.p_ι u
+
+@[simp] lemma Splitting.p_x₀ (s : X.Splitting) : s.p s.x₀ = 0 := by
+  have h := s.decomp s.x₀
+  rw [s.ψ_x₀, one_smul, add_eq_right] at h
+  simpa using congrArg s.p h
+
+/-- In a splitting, `π = χ p + ψ·b` with `b = π(x₀)`. -/
+lemma Splitting.π_eq (s : X.Splitting) (e : E) : X.π e = χ • s.p e + X.ψ e • X.π s.x₀ := by
+  conv_lhs => rw [← s.decomp e]
+  simp
+
+/-- **Every extension of `𝒪` splits** on an affine base: if `0 → L → E → R → 0` is exact,
+it has a splitting. -/
+noncomputable def splittingOf (hι : Function.Injective X.ι) (hex : ∀ e, X.ψ e = 0 → ∃ u, X.ι u = e)
+    (hψ : Function.Surjective X.ψ) : X.Splitting := by
+  let x₀ := (hψ 1).choose
+  have hx₀ : X.ψ x₀ = 1 := (hψ 1).choose_spec
+  let q : E →ₗ[R] E := LinearMap.id - (LinearMap.toSpanSingleton R E x₀) ∘ₗ X.ψ
+  have hr : LinearMap.range q ≤ LinearMap.range X.ι := by
+    rintro _ ⟨e, rfl⟩
+    exact hex _ (by simp [q, hx₀])
+  let eι := LinearEquiv.ofInjective X.ι hι
+  let p : E →ₗ[R] L := eι.symm.toLinearMap ∘ₗ Submodule.inclusion hr ∘ₗ q.rangeRestrict
+  have hp : ∀ e, X.ι (p e) = q e := fun e => by simp [p, eι]
+  refine ⟨x₀, p, hx₀, ?_, fun e => by rw [hp]; simp [q]⟩
+  ext u
+  apply hι
+  rw [LinearMap.comp_apply, hp]
+  simp [q]
+
+end ChiTriv
+
+variable {L₁ E₁ L₂ E₂ : Type*} [AddCommGroup L₁] [Module R L₁] [AddCommGroup E₁] [Module R E₁]
+  [AddCommGroup L₂] [Module R L₂] [AddCommGroup E₂] [Module R E₂]
+  (X₁ : ChiTriv χ L₁ E₁) (X₂ : ChiTriv χ L₂ E₂)
+
+/-- `(L₁ ⊗ E₂) ⊕ (E₁ ⊗ L₂)`, which maps onto `E₁ ⊗₀ E₂ = L₁ ⊗ E₂ + E₁ ⊗ L₂ ⊂ E₁ ⊗ E₂`. -/
+abbrev Kdom := (L₁ ⊗[R] E₂) × (E₁ ⊗[R] L₂)
+
+/-- The map `(L₁ ⊗ E₂) ⊕ (E₁ ⊗ L₂) → E₁ ⊗ E₂`, with image `E₁ ⊗₀ E₂`. -/
+noncomputable def jK : Kdom (R := R) (L₁ := L₁) (E₁ := E₁) (L₂ := L₂) (E₂ := E₂) →ₗ[R] E₁ ⊗[R] E₂ :=
+  (map X₁.ι LinearMap.id) ∘ₗ LinearMap.fst R _ _ + (map LinearMap.id X₂.ι) ∘ₗ LinearMap.snd R _ _
+
+/-- `μ`, equal to `id ⊗ π₂` on `L₁ ⊗ E₂` and to `π₁ ⊗ id` on `E₁ ⊗ L₂` (page 68). -/
+noncomputable def μK : Kdom (R := R) (L₁ := L₁) (E₁ := E₁) (L₂ := L₂) (E₂ := E₂) →ₗ[R]
+    L₁ ⊗[R] L₂ :=
+  (map LinearMap.id X₂.π) ∘ₗ LinearMap.fst R _ _ + (map X₁.π LinearMap.id) ∘ₗ LinearMap.snd R _ _
+
+/-- The relations of the amalgamated sum. -/
+noncomputable def relK : Kdom (R := R) (L₁ := L₁) (E₁ := E₁) (L₂ := L₂) (E₂ := E₂) →ₗ[R]
+    (E₁ ⊗[R] E₂) × (L₁ ⊗[R] L₂) :=
+  LinearMap.prod (jK X₁ X₂) (-μK X₁ X₂)
+
+/-- **The product `E₁ * E₂` (pages 68 to 70)**: the amalgamated sum of `E₁ ⊗ E₂` and
+`L₁ ⊗ L₂` along `μ : E₁ ⊗₀ E₂ → L₁ ⊗ L₂`, with no splitting chosen. -/
+abbrev Amal := ((E₁ ⊗[R] E₂) × (L₁ ⊗[R] L₂)) ⧸ LinearMap.range (relK X₁ X₂)
+
+/-- `x₁ ⊗ x₂ ↦ x₁ * x₂`. -/
+noncomputable def starA : E₁ ⊗[R] E₂ →ₗ[R] Amal X₁ X₂ :=
+  (LinearMap.range (relK X₁ X₂)).mkQ ∘ₗ LinearMap.inl R _ _
+
+/-- `L₁ ⊗ L₂ → E₁ * E₂`. -/
+noncomputable def incl : L₁ ⊗[R] L₂ →ₗ[R] Amal X₁ X₂ :=
+  (LinearMap.range (relK X₁ X₂)).mkQ ∘ₗ LinearMap.inr R _ _
+
+theorem star_comp_jK : starA X₁ X₂ ∘ₗ jK X₁ X₂ = incl X₁ X₂ ∘ₗ μK X₁ X₂ := by
+  refine LinearMap.ext fun k => ?_
+  simp only [starA, incl, LinearMap.comp_apply, LinearMap.inl_apply, LinearMap.inr_apply,
+    Submodule.mkQ_apply]
+  rw [Submodule.Quotient.eq]
+  exact ⟨k, by simp [relK]⟩
+
+/-- The descent of `(g, h)` with `g ∘ j = h ∘ μ` to the amalgamated sum. -/
+noncomputable def amalDesc {N : Type*} [AddCommGroup N] [Module R N] (g : E₁ ⊗[R] E₂ →ₗ[R] N)
+    (h : L₁ ⊗[R] L₂ →ₗ[R] N) (w : g ∘ₗ jK X₁ X₂ = h ∘ₗ μK X₁ X₂) : Amal X₁ X₂ →ₗ[R] N :=
+  (LinearMap.range (relK X₁ X₂)).liftQ (LinearMap.coprod g h) (by
+    rintro _ ⟨k, rfl⟩
+    simpa [relK, add_neg_eq_zero] using LinearMap.congr_fun w k)
+
+variable {N : Type*} [AddCommGroup N] [Module R N]
+
+@[simp] lemma amalDesc_starA (g : E₁ ⊗[R] E₂ →ₗ[R] N) (h : L₁ ⊗[R] L₂ →ₗ[R] N)
+    (w : g ∘ₗ jK X₁ X₂ = h ∘ₗ μK X₁ X₂) (x : E₁ ⊗[R] E₂) :
+    amalDesc X₁ X₂ g h w (starA X₁ X₂ x) = g x := by simp [amalDesc, starA]
+
+@[simp] lemma amalDesc_incl (g : E₁ ⊗[R] E₂ →ₗ[R] N) (h : L₁ ⊗[R] L₂ →ₗ[R] N)
+    (w : g ∘ₗ jK X₁ X₂ = h ∘ₗ μK X₁ X₂) (x : L₁ ⊗[R] L₂) :
+    amalDesc X₁ X₂ g h w (incl X₁ X₂ x) = h x := by simp [amalDesc, incl]
+
+theorem amal_hom_ext {F G : Amal X₁ X₂ →ₗ[R] N} (h₁ : F ∘ₗ starA X₁ X₂ = G ∘ₗ starA X₁ X₂)
+    (h₂ : F ∘ₗ incl X₁ X₂ = G ∘ₗ incl X₁ X₂) : F = G :=
+  Submodule.linearMap_qext _ (LinearMap.prod_ext h₁ h₂)
+
+/-- **The amalgamated sum is a pushout** (in `ModuleCat`, Mathlib's `IsPushout`). -/
+theorem isPushout {R : Type u} [CommRing R] {χ : R} {L₁ E₁ L₂ E₂ : Type u} [AddCommGroup L₁]
+    [Module R L₁] [AddCommGroup E₁] [Module R E₁] [AddCommGroup L₂] [Module R L₂]
+    [AddCommGroup E₂] [Module R E₂] (X₁ : ChiTriv χ L₁ E₁) (X₂ : ChiTriv χ L₂ E₂) :
+    IsPushout (ModuleCat.ofHom (jK X₁ X₂)) (ModuleCat.ofHom (μK X₁ X₂))
+      (ModuleCat.ofHom (starA X₁ X₂)) (ModuleCat.ofHom (incl X₁ X₂)) := by
+  have w : ModuleCat.ofHom (jK X₁ X₂) ≫ ModuleCat.ofHom (starA X₁ X₂) =
+      ModuleCat.ofHom (μK X₁ X₂) ≫ ModuleCat.ofHom (incl X₁ X₂) := by
+    rw [← ModuleCat.ofHom_comp, ← ModuleCat.ofHom_comp, star_comp_jK]
+  refine IsPushout.of_isColimit (Limits.PushoutCocone.IsColimit.mk w
+    (fun s => ModuleCat.ofHom (amalDesc X₁ X₂ s.inl.hom s.inr.hom
+      (congrArg ModuleCat.Hom.hom s.condition))) ?_ ?_ ?_)
+  · intro s; ext x; simp
+  · intro s; ext x; simp
+  · intro s m h₁ h₂
+    ext1
+    apply amal_hom_ext
+    · exact LinearMap.ext fun x => by simpa using congrArg (fun f => f.hom x) h₁
+    · exact LinearMap.ext fun x => by simpa using congrArg (fun f => f.hom x) h₂
+
+/-- `ψ₁ ⊗ ψ₂ : E₁ ⊗ E₂ → 𝒪`. -/
+noncomputable def psiT : E₁ ⊗[R] E₂ →ₗ[R] R := LinearMap.mul' R R ∘ₗ map X₁.ψ X₂.ψ
+
+@[simp] lemma psiT_tmul (x₁ : E₁) (x₂ : E₂) : psiT X₁ X₂ (x₁ ⊗ₜ x₂) = X₁.ψ x₁ * X₂.ψ x₂ := rfl
+
+/-- The augmentation `ψ : E₁ * E₂ → 𝒪`. -/
+noncomputable def psiA : Amal X₁ X₂ →ₗ[R] R :=
+  amalDesc X₁ X₂ (psiT X₁ X₂) 0 (by ext <;> simp [psiT, jK])
+
+/-- The `χ`-rétraction `π(x₁ * x₂) = π₁(x₁) ⊗ π₂(x₂)` (page 70, « On y gagne ! »). -/
+noncomputable def piA : Amal X₁ X₂ →ₗ[R] L₁ ⊗[R] L₂ :=
+  amalDesc X₁ X₂ (map X₁.π X₂.π) (χ • LinearMap.id) (by
+    ext <;> simp [jK, μK, smul_tmul', tmul_smul])
+
+/-- **The product is a `χ`-trivialised extension**, constructed without any division and
+without choosing a splitting. -/
+noncomputable def prodA : ChiTriv χ (L₁ ⊗[R] L₂) (Amal X₁ X₂) where
+  ι := incl X₁ X₂
+  ψ := psiA X₁ X₂
+  π := piA X₁ X₂
+  ψ_ι := by ext; simp [psiA]
+  π_ι := by ext; simp [piA]
+
+@[simp] lemma piA_star (x₁ : E₁) (x₂ : E₂) :
+    piA X₁ X₂ (starA X₁ X₂ (x₁ ⊗ₜ x₂)) = X₁.π x₁ ⊗ₜ X₂.π x₂ := by simp [piA]
+
+@[simp] lemma psiA_star (x₁ : E₁) (x₂ : E₂) :
+    psiA X₁ X₂ (starA X₁ X₂ (x₁ ⊗ₜ x₂)) = X₁.ψ x₁ * X₂.ψ x₂ := by simp [psiA, psiT]
+
+/-- **Formulaire (pages 72 to 74)**: `u₁ * x₂ = u₁ ⊗ π₂(x₂)`. -/
+lemma star_ι_left (u₁ : L₁) (x₂ : E₂) :
+    starA X₁ X₂ (X₁.ι u₁ ⊗ₜ x₂) = incl X₁ X₂ (u₁ ⊗ₜ X₂.π x₂) := by
+  simpa [jK, μK] using LinearMap.congr_fun (star_comp_jK X₁ X₂) (u₁ ⊗ₜ x₂, 0)
+
+/-- `x₁ * u₂ = π₁(x₁) ⊗ u₂`. -/
+lemma star_ι_right (x₁ : E₁) (u₂ : L₂) :
+    starA X₁ X₂ (x₁ ⊗ₜ X₂.ι u₂) = incl X₁ X₂ (X₁.π x₁ ⊗ₜ u₂) := by
+  simpa [jK, μK] using LinearMap.congr_fun (star_comp_jK X₁ X₂) (0, x₁ ⊗ₜ u₂)
+
+/-- `(x₁ + u₁) * (x₂ + u₂) = x₁ * x₂ + u₁ ⊗ π₂(x₂) + π₁(x₁) ⊗ u₂ + χ u₁ ⊗ u₂`. -/
+theorem star_add (x₁ : E₁) (u₁ : L₁) (x₂ : E₂) (u₂ : L₂) :
+    starA X₁ X₂ ((x₁ + X₁.ι u₁) ⊗ₜ (x₂ + X₂.ι u₂)) = starA X₁ X₂ (x₁ ⊗ₜ x₂) +
+      incl X₁ X₂ (u₁ ⊗ₜ X₂.π x₂ + X₁.π x₁ ⊗ₜ u₂ + χ • u₁ ⊗ₜ u₂) := by
+  simp only [add_tmul, tmul_add, map_add, star_ι_left, star_ι_right, ChiTriv.π_ι_apply]
+  abel
+
+variable {X₁ X₂}
+
+/-- The coordinates `E₁ * E₂ → 𝒪 × (L₁ ⊗ L₂)` of a pair of splittings. -/
+noncomputable def coordT (s₁ : X₁.Splitting) (s₂ : X₂.Splitting) :
+    E₁ ⊗[R] E₂ →ₗ[R] R × (L₁ ⊗[R] L₂) :=
+  LinearMap.prod (psiT X₁ X₂)
+    (map s₁.p X₂.π + map (LinearMap.toSpanSingleton R L₁ (X₁.π s₁.x₀) ∘ₗ X₁.ψ) s₂.p)
+
+noncomputable def coord (s₁ : X₁.Splitting) (s₂ : X₂.Splitting) :
+    Amal X₁ X₂ →ₗ[R] R × (L₁ ⊗[R] L₂) :=
+  amalDesc X₁ X₂ (coordT s₁ s₂) (LinearMap.inr R R _) (by
+    ext u e <;> simp [coordT, psiT, jK, μK]
+    rw [s₁.π_eq u, add_tmul, smul_tmul'])
+
+@[simp] lemma coord_star (s₁ : X₁.Splitting) (s₂ : X₂.Splitting) (x : E₁ ⊗[R] E₂) :
+    coord s₁ s₂ (starA X₁ X₂ x) = coordT s₁ s₂ x := amalDesc_starA ..
+
+@[simp] lemma coord_incl (s₁ : X₁.Splitting) (s₂ : X₂.Splitting) (x : L₁ ⊗[R] L₂) :
+    coord s₁ s₂ (incl X₁ X₂ x) = (0, x) := amalDesc_incl ..
+
+noncomputable def uncoord (s₁ : X₁.Splitting) (s₂ : X₂.Splitting) :
+    R × (L₁ ⊗[R] L₂) →ₗ[R] Amal X₁ X₂ :=
+  LinearMap.coprod (LinearMap.toSpanSingleton R _ (starA X₁ X₂ (s₁.x₀ ⊗ₜ s₂.x₀))) (incl X₁ X₂)
+
+/-- Every `e₁ * e₂` in the coordinates of two splittings. -/
+lemma star_eq_split (s₁ : X₁.Splitting) (s₂ : X₂.Splitting) (e₁ : E₁) (e₂ : E₂) :
+    starA X₁ X₂ (e₁ ⊗ₜ e₂) = (X₁.ψ e₁ * X₂.ψ e₂) • starA X₁ X₂ (s₁.x₀ ⊗ₜ s₂.x₀) +
+      incl X₁ X₂ (s₁.p e₁ ⊗ₜ X₂.π e₂ + X₁.ψ e₁ • X₁.π s₁.x₀ ⊗ₜ s₂.p e₂) := by
+  conv_lhs => rw [← s₁.decomp e₁, ← s₂.decomp e₂]
+  rw [s₂.π_eq e₂]
+  simp only [add_tmul, tmul_add, ← smul_tmul', tmul_smul, map_add, map_smul, star_ι_left,
+    star_ι_right, ChiTriv.π_ι_apply]
+  module
+
+/-- **The split case (pages 77 and 78).** A splitting of each factor identifies the
+amalgamated sum with `𝒪 × (L₁ ⊗ L₂)`. -/
+noncomputable def splitEquiv (s₁ : X₁.Splitting) (s₂ : X₂.Splitting) :
+    Amal X₁ X₂ ≃ₗ[R] R × (L₁ ⊗[R] L₂) :=
+  LinearEquiv.ofLinearMap (coord s₁ s₂) (uncoord s₁ s₂)
+    (by
+      ext <;> simp [coord, uncoord, coordT, psiT])
+    (by
+      refine amal_hom_ext _ _ (TensorProduct.ext' fun e₁ e₂ => ?_) (by ext; simp [coord, uncoord])
+      rw [LinearMap.id_comp, LinearMap.comp_apply, LinearMap.comp_apply, star_eq_split s₁ s₂]
+      simp [coord, uncoord, coordT, psiT])
+
+@[simp] lemma splitEquiv_apply (s₁ : X₁.Splitting) (s₂ : X₂.Splitting) (z : Amal X₁ X₂) :
+    splitEquiv s₁ s₂ z = coord s₁ s₂ z := rfl
+
+@[simp] lemma splitEquiv_symm_apply (s₁ : X₁.Splitting) (s₂ : X₂.Splitting)
+    (z : R × (L₁ ⊗[R] L₂)) : (splitEquiv s₁ s₂).symm z = uncoord s₁ s₂ z := rfl
+
+/-- In the coordinates of two splittings, the product is the split extension
+`0 → L₁ ⊗ L₂ → 𝒪 × (L₁ ⊗ L₂) → 𝒪 → 0` (`ψ = fst`, `ι = inr`) with the `χ`-rétraction
+`π(λ, u) = λ b₁ ⊗ b₂ + χu`: **`b = b₁ ⊗ b₂`** (page 78, « Il n'y a pas plus simple ! »). -/
+theorem split_coords (s₁ : X₁.Splitting) (s₂ : X₂.Splitting) :
+    psiA X₁ X₂ ∘ₗ (splitEquiv s₁ s₂).symm.toLinearMap = LinearMap.fst R R _ ∧
+      (splitEquiv s₁ s₂).toLinearMap ∘ₗ incl X₁ X₂ = LinearMap.inr R R _ ∧
+      piA X₁ X₂ ∘ₗ (splitEquiv s₁ s₂).symm.toLinearMap =
+        LinearMap.coprod (LinearMap.toSpanSingleton R _ (X₁.π s₁.x₀ ⊗ₜ X₂.π s₂.x₀))
+          (χ • LinearMap.id) := by
+  refine ⟨?_, ?_, ?_⟩ <;> ext <;> simp [uncoord, coord, psiA, piA]
+
+/-- **The product is an extension** of `𝒪` by `L₁ ⊗ L₂` as soon as the factors are split
+(which they always are on an affine base, `ChiTriv.splittingOf`). -/
+theorem prod_exact (s₁ : X₁.Splitting) (s₂ : X₂.Splitting) :
+    Function.Injective (incl X₁ X₂) ∧ LinearMap.ker (psiA X₁ X₂) = LinearMap.range (incl X₁ X₂) ∧
+      Function.Surjective (psiA X₁ X₂) := by
+  refine ⟨fun a b h => by simpa using congrArg (coord s₁ s₂) h, ?_, fun r =>
+    ⟨starA X₁ X₂ (r • s₁.x₀ ⊗ₜ s₂.x₀), by simp [psiA]⟩⟩
+  ext z
+  refine ⟨fun hz => ⟨(coord s₁ s₂ z).2, ?_⟩, ?_⟩
+  · have e := (splitEquiv s₁ s₂).symm_apply_apply z
+    have h1 : (coord s₁ s₂ z).1 = psiA X₁ X₂ z := by
+      rw [← LinearMap.fst_apply (R := R), ← LinearMap.comp_apply]
+      congr 1
+      apply amal_hom_ext <;> ext <;> simp [coordT, psiA]
+    rw [splitEquiv_symm_apply, splitEquiv_apply, ← Prod.mk.eta (p := coord s₁ s₂ z), h1,
+      LinearMap.mem_ker.1 hz] at e
+    simpa [uncoord] using e
+  · rintro ⟨u, rfl⟩
+    simp [psiA]
+
+/-- The splitting `x₁ * x₂` of the product, with `b = π(x₁ * x₂) = b₁ ⊗ b₂`. -/
+noncomputable def prodSplitting (s₁ : X₁.Splitting) (s₂ : X₂.Splitting) :
+    (prodA X₁ X₂).Splitting where
+  x₀ := starA X₁ X₂ (s₁.x₀ ⊗ₜ s₂.x₀)
+  p := LinearMap.snd R R _ ∘ₗ (splitEquiv s₁ s₂).toLinearMap
+  ψ_x₀ := by simp [prodA]
+  p_ι := by ext; simp [prodA, coord]
+  decomp z := by
+    obtain ⟨⟨r, u⟩, rfl⟩ := (splitEquiv s₁ s₂).symm.surjective z
+    simp [prodA, uncoord, psiA, coordT, add_comm]
+
+theorem prodSplitting_b (s₁ : X₁.Splitting) (s₂ : X₂.Splitting) :
+    (prodA X₁ X₂).π (prodSplitting s₁ s₂).x₀ = X₁.π s₁.x₀ ⊗ₜ X₂.π s₂.x₀ := piA_star ..
+
+/-- **Universal property of bi-affine maps (pages 75 and 76).** A pair `(f, α)`, `f` defined on
+`P₁ × P₂` (`ψᵢ(xᵢ) = 1`) and `α : L₁ ⊗ L₂ → N` linear, with
+`f(x₁ + u₁, x₂) = f(x₁, x₂) + α(u₁ ⊗ π₂(x₂))` and `f(x₁, x₂ + u₂) = f(x₁, x₂) + α(π₁(x₁) ⊗ u₂)`,
+factors uniquely through `(x₁, x₂) ↦ x₁ * x₂`: there is exactly one linear
+`g : E₁ * E₂ → N` with `g(x₁ * x₂) = f(x₁, x₂)` and `g|_{L₁ ⊗ L₂} = α`. -/
+theorem biaffine_universal (s₁ : X₁.Splitting) (s₂ : X₂.Splitting) (f : E₁ → E₂ → N)
+    (α : L₁ ⊗[R] L₂ →ₗ[R] N)
+    (h₁ : ∀ x₁ x₂ u₁, X₁.ψ x₁ = 1 → X₂.ψ x₂ = 1 →
+      f (x₁ + X₁.ι u₁) x₂ = f x₁ x₂ + α (u₁ ⊗ₜ X₂.π x₂))
+    (h₂ : ∀ x₁ x₂ u₂, X₁.ψ x₁ = 1 → X₂.ψ x₂ = 1 →
+      f x₁ (x₂ + X₂.ι u₂) = f x₁ x₂ + α (X₁.π x₁ ⊗ₜ u₂)) :
+    ∃! g : Amal X₁ X₂ →ₗ[R] N, (∀ x₁ x₂, X₁.ψ x₁ = 1 → X₂.ψ x₂ = 1 →
+      g (starA X₁ X₂ (x₁ ⊗ₜ x₂)) = f x₁ x₂) ∧ g ∘ₗ incl X₁ X₂ = α := by
+  refine ⟨LinearMap.coprod (LinearMap.toSpanSingleton R N (f s₁.x₀ s₂.x₀)) α ∘ₗ coord s₁ s₂,
+    ⟨fun y₁ y₂ hy₁ hy₂ => ?_, by ext; simp [coord]⟩, fun g ⟨hg, hgα⟩ => ?_⟩
+  · have d₁ := s₁.decomp y₁
+    have d₂ := s₂.decomp y₂
+    rw [hy₁, one_smul, add_comm] at d₁
+    rw [hy₂, one_smul, add_comm] at d₂
+    rw [← d₁, h₁ _ _ _ s₁.ψ_x₀ hy₂, ← d₂, h₂ _ _ _ s₁.ψ_x₀ s₂.ψ_x₀, d₂]
+    simp [coord, coordT, hy₂]
+    abel
+  · refine amal_hom_ext _ _ (TensorProduct.ext' fun e₁ e₂ => ?_) (by rw [hgα]; ext; simp [coord])
+    have hα : ∀ x, g (incl X₁ X₂ x) = α x := fun x => by rw [← hgα]; rfl
+    rw [LinearMap.comp_apply, LinearMap.comp_apply, star_eq_split s₁ s₂ e₁ e₂]
+    simp [hα, hg _ _ s₁.ψ_x₀ s₂.ψ_x₀, coordT]
+
+/-- Conversely every linear map out of `E₁ * E₂` restricts to a bi-affine pair, with no
+condition on `ψ`. -/
+theorem biaffine_of_linear (g : Amal X₁ X₂ →ₗ[R] N) (x₁ : E₁) (x₂ : E₂) (u₁ : L₁) (u₂ : L₂) :
+    g (starA X₁ X₂ ((x₁ + X₁.ι u₁) ⊗ₜ x₂)) =
+        g (starA X₁ X₂ (x₁ ⊗ₜ x₂)) + g (incl X₁ X₂ (u₁ ⊗ₜ X₂.π x₂)) ∧
+      g (starA X₁ X₂ (x₁ ⊗ₜ (x₂ + X₂.ι u₂))) =
+        g (starA X₁ X₂ (x₁ ⊗ₜ x₂)) + g (incl X₁ X₂ (X₁.π x₁ ⊗ₜ u₂)) := by
+  simp [add_tmul, tmul_add, star_ι_left, star_ι_right]
+
+end Amalgam
+
+/-- **The two products agree.** For split objects with `M = 𝒪`, the coordinate product of
+`ChiExt` is `(𝒪, L₁, b₁) ⊗ (𝒪, L₂, b₂) ≅ (𝒪, L₁ ⊗ L₂, b₁ ⊗ b₂)`, the coordinates of the
+intrinsic product (`split_coords`, `prodSplitting_b`). -/
+def ChiExt.ofSectionTensorIso {R : Type u} [CommRing R] (χ : R) (L₁ L₂ : ModuleCat.{u} R)
+    (b₁ : L₁) (b₂ : L₂) :
+    ChiExt.ofSection χ L₁ b₁ ⊗ ChiExt.ofSection χ L₂ b₂ ≅
+      ChiExt.ofSection χ (L₁ ⊗ L₂) (b₁ ⊗ₜ[R] b₂) :=
+  ChiExt.strictIso (λ_ (ModuleCat.of R R)) (Iso.refl _)
+    (ModuleCat.MonoidalCategory.tensor_ext fun (r s : R) => by
+      change (r • b₁) ⊗ₜ[R] (s • b₂) = (r • s) • (b₁ ⊗ₜ[R] b₂)
+      rw [tmul_smul, ← smul_tmul', smul_smul, smul_eq_mul, mul_comm])
+
+
+
+/-! ## Base change and the reconstruction of pages 49 to 52
+
+Finding `84-two-regular-triplet-classification`, continued.
+
+* `bc2`, `discL_baseChange`, `tripletCond_baseChange`, `isCoverHom_baseChange`,
+  `tripletHom_baseChange`: the functor `(L, b, c) ↦ (L, δ, T₀)` commutes with every base
+  change `R → S`, on objects and on morphisms (the fibred statement, affine bases);
+* free case, with Mathlib's `Algebra.trace` and `Algebra.norm` (`trace_qalg`, `norm_qalg`):
+  `recon : y ↦ (Tr y, γ)` has image `{β ≡ γ T₀ mod 2}` (`recon_range`, any `R`), is injective
+  when `2` is regular (`recon_injective`), sends `1` to `(2, 0)`, and
+  `2(yy') = (ββ' + γγ'δ, βγ' + γβ')`, `4N = β² − γ²δ` (`recon_mul`, `recon_norm`); on
+  `E = Ǎ`, `eCoord : x ↦ (λ, ζ)` with image `{ζ ≡ λT₀}` (`eCoord_range`, `eCoord_injective`),
+  the coupling `2⟨y, x⟩ = λβ + γζ` (`coupling`), `4Q = ζ² − λ²δ` (`four_qE`) and
+  `φ_N(β, γ) = (β, −γδ)`, `Q(φ_N(y)) = −N(y)δ` (`phiN_coords`, the box of page 46);
+* `L` invertible: each division of pages 49 to 52 is legitimate (`div_norm`,
+  `div_prod_fst`, `div_prod_snd`, `div_qform`) and the product stays in `Γ A` (`div_prod_mem`).
+
+Not formalised: the page-45 equivalence between rank-2 algebras and `(L, P₁, Q)` when `L` is
+not trivial, and non-affine bases. -/
+
+section BaseChange
+
+variable {R : Type*} [CommRing R] (S : Type*) [CommRing S] [Algebra R S]
+variable {L L' : Type*} [AddCommGroup L] [Module R L] [AddCommGroup L'] [Module R L']
+
+/-- `L ⊗ L → L_S ⊗_S L_S`, `x ⊗ y ↦ (1 ⊗ x) ⊗ (1 ⊗ y)`: base change of a section of
+`L^{⊗2}`. -/
+noncomputable def bc2 (L : Type*) [AddCommGroup L] [Module R L] :
+    L ⊗[R] L →ₗ[R] (S ⊗[R] L) ⊗[S] (S ⊗[R] L) :=
+  TensorProduct.lift (LinearMap.mk₂ R (fun x y => ((1 : S) ⊗ₜ[R] x) ⊗ₜ[S] ((1 : S) ⊗ₜ[R] y))
+    (fun _ _ _ => by simp [tmul_add, add_tmul]) (fun r x y => by
+      rw [tmul_smul, ← smul_tmul', ← algebraMap_smul S r])
+    (fun _ _ _ => by simp [tmul_add]) (fun r x y => by
+      rw [tmul_smul, ← algebraMap_smul S r, ← algebraMap_smul S r, tmul_smul]))
+
+@[simp] lemma bc2_tmul (x y : L) :
+    bc2 S L (x ⊗ₜ y) = ((1 : S) ⊗ₜ[R] x) ⊗ₜ[S] ((1 : S) ⊗ₜ[R] y) := rfl
+
+lemma bc2_smul (r : R) (z : L ⊗[R] L) : bc2 S L (r • z) = algebraMap R S r • bc2 S L z := by
+  rw [map_smul, algebraMap_smul]
+
+/-- Base change commutes with `φ ⊗ φ`. -/
+lemma bc2_map (φ : L →ₗ[R] L') (z : L ⊗[R] L) :
+    bc2 S L' (TensorProduct.map φ φ z) =
+      TensorProduct.map (φ.baseChange S) (φ.baseChange S) (bc2 S L z) := by
+  induction z using TensorProduct.inductionOn with
+  | tmul x y => simp
+  | add z z' hz hz' => simp [hz, hz']
+
+/-- **Base change of the discriminant**: `δ(b_S, c_S) = δ(b, c)_S`. -/
+theorem discL_baseChange (b : L) (c : L ⊗[R] L) :
+    discL ((1 : S) ⊗ₜ[R] b) (bc2 S L c) = bc2 S L (discL b c) := by
+  simp only [discL, map_sub, bc2_tmul, bc2_smul]
+  rw [map_ofNat]
+
+/-- **Base change of the triplet condition**: `T₀² ≡ δ mod 4` passes to every `S`. -/
+theorem tripletCond_baseChange {δ : L ⊗[R] L} {τ : L}
+    (h : TripletCond δ (Submodule.Quotient.mk τ)) :
+    TripletCond (bc2 S L δ) (Submodule.Quotient.mk ((1 : S) ⊗ₜ[R] τ)) := by
+  obtain ⟨τ', hτ', k, hk⟩ := h
+  rw [Submodule.Quotient.eq] at hτ'
+  obtain ⟨a, ha⟩ := mem_twoL.1 hτ'
+  refine ⟨(1 : S) ⊗ₜ τ', ?_, bc2 S L k, ?_⟩
+  · rw [Submodule.Quotient.eq]
+    exact mem_twoL.2 ⟨(1 : S) ⊗ₜ a, by
+      rw [← map_ofNat (algebraMap R S) 2, algebraMap_smul, ← tmul_smul, ha, tmul_sub]⟩
+  · have := congrArg (bc2 S L) hk
+    rw [map_sub, bc2_tmul, bc2_smul, map_ofNat] at this
+    exact this
+
+/-- **Base change of morphisms of covers.** If `(φ, t)` is a morphism
+`(L, b, c) → (L', b', c')`, then `(φ_S, 1 ⊗ t)` is a morphism of the base-changed covers. -/
+theorem isCoverHom_baseChange [Module.Invertible R L'] {b : L} {c : L ⊗[R] L} {b' : L'}
+    {c' : L' ⊗[R] L'} {φ : L ≃ₗ[R] L'} {t : L'} (h : IsCoverHom b c b' c' φ t) :
+    IsCoverHom ((1 : S) ⊗ₜ[R] b) (bc2 S L c) ((1 : S) ⊗ₜ[R] b') (bc2 S L' c')
+      (φ.baseChange R S L L') ((1 : S) ⊗ₜ[R] t) := by
+  obtain ⟨hb, hc⟩ := (isCoverHom_iff b c b' c' φ t).1 h
+  refine (isCoverHom_iff _ _ _ _ _ _).2 ⟨?_, ?_⟩
+  · rw [LinearEquiv.baseChange_tmul, hb, tmul_add, ← map_ofNat (algebraMap R S) 2,
+      algebraMap_smul, tmul_smul]
+  · have e := bc2_map S (φ : L →ₗ[R] L') c
+    rw [hc, map_add, map_add, bc2_tmul, bc2_tmul] at e
+    exact e.symm
+
+/-- **Base change of morphisms of triplets**: `φ_S` is again an isomorphism of triplets. -/
+theorem tripletHom_baseChange {δ : L ⊗[R] L} {δ' : L' ⊗[R] L'} {τ : L} {τ' : L'}
+    (φ : L ≃ₗ[R] L') (hδ : TensorProduct.map (φ : L →ₗ[R] L') (φ : L →ₗ[R] L') δ = δ')
+    (hT : mod2 (φ : L →ₗ[R] L') (Submodule.Quotient.mk τ) = Submodule.Quotient.mk τ') :
+    TensorProduct.map ((φ.baseChange R S L L' : _ ≃ₗ[S] _) : S ⊗[R] L →ₗ[S] S ⊗[R] L')
+        (φ.baseChange R S L L' : S ⊗[R] L →ₗ[S] S ⊗[R] L') (bc2 S L δ) = bc2 S L' δ' ∧
+      mod2 (φ.baseChange R S L L' : S ⊗[R] L →ₗ[S] S ⊗[R] L')
+        (Submodule.Quotient.mk ((1 : S) ⊗ₜ[R] τ)) = Submodule.Quotient.mk ((1 : S) ⊗ₜ[R] τ') := by
+  refine ⟨by rw [← hδ, bc2_map]; rfl, ?_⟩
+  rw [mod2_mk, LinearEquiv.coe_coe, LinearEquiv.baseChange_tmul, Submodule.Quotient.eq]
+  rw [mod2_mk, LinearEquiv.coe_coe, Submodule.Quotient.eq] at hT
+  obtain ⟨a, ha⟩ := mem_twoL.1 hT
+  exact mem_twoL.2 ⟨(1 : S) ⊗ₜ a, by
+    rw [← map_ofNat (algebraMap R S) 2, algebraMap_smul, ← tmul_smul, ha, tmul_sub]⟩
+
+end BaseChange
+
+section Reconstruction
+
+open Polynomial
+
+variable {R : Type*} [CommRing R] (b c : R)
+
+/-- The basis `(1, U)` of `R[U]/(U² + bU + c)`. -/
+noncomputable def qbasis : Module.Basis (Fin 2) R (QAlg b c) :=
+  .mk (v := ![1, AdjoinRoot.root (qpoly b c)])
+    (LinearIndependent.pair_iff.2 fun s t h => coords_zero (by
+      simpa [Algebra.smul_def] using h))
+    (by
+      rintro y -
+      obtain ⟨a, e, rfl⟩ := coords_exist y
+      rw [Algebra.algebraMap_eq_smul_one, ← Algebra.smul_def]
+      exact add_mem (Submodule.smul_mem _ _ (Submodule.subset_span ⟨0, rfl⟩))
+        (Submodule.smul_mem _ _ (Submodule.subset_span ⟨1, rfl⟩)))
+
+variable {b c}
+
+@[simp] lemma qbasis_zero : qbasis b c 0 = 1 := by simp [qbasis]
+@[simp] lemma qbasis_one : qbasis b c 1 = AdjoinRoot.root _ := by simp [qbasis]
+
+lemma qbasis_repr {y : QAlg b c} {a e : R}
+    (hy : y = algebraMap R _ a + algebraMap R _ e * AdjoinRoot.root _) :
+    (qbasis b c).repr y 0 = a ∧ (qbasis b c).repr y 1 = e := by
+  have : y = a • qbasis b c 0 + e • qbasis b c 1 := by
+    simp [hy, Algebra.smul_def]
+  rw [this, map_add, map_smul, map_smul, Module.Basis.repr_self, Module.Basis.repr_self]
+  simp
+
+/-- `y · U` in the basis `(1, U)`. -/
+lemma mul_root (a e : R) :
+    (algebraMap R (QAlg b c) a + algebraMap R _ e * AdjoinRoot.root _) * AdjoinRoot.root _ =
+      algebraMap R _ (-(e * c)) + algebraMap R _ (a - e * b) * AdjoinRoot.root _ := by
+  simp only [map_neg, map_sub, map_mul]
+  linear_combination (algebraMap R (QAlg b c) e) * root_sq b c
+
+/-- The trace (Mathlib's `Algebra.trace`) of `a + eU` is `2a − eb`. -/
+theorem trace_qalg (a e : R) :
+    Algebra.trace R (QAlg b c) (algebraMap R _ a + algebraMap R _ e * AdjoinRoot.root _) =
+      2 * a - e * b := by
+  rw [Algebra.trace_eq_matrix_trace (qbasis b c), Matrix.trace_fin_two,
+    Algebra.leftMulMatrix_eq_repr_mul, Algebra.leftMulMatrix_eq_repr_mul]
+  simp only [qbasis_zero, qbasis_one, mul_one, mul_root]
+  rw [(qbasis_repr rfl).1, (qbasis_repr rfl).2]
+  ring
+
+/-- The norm (Mathlib's `Algebra.norm`) of `a + eU` is `a² − abe + ce²`. -/
+theorem norm_qalg (a e : R) :
+    Algebra.norm R (algebraMap R (QAlg b c) a + algebraMap R _ e * AdjoinRoot.root _) =
+      a ^ 2 - a * b * e + c * e ^ 2 := by
+  rw [Algebra.norm_eq_matrix_det (qbasis b c), Matrix.det_fin_two,
+    Algebra.leftMulMatrix_eq_repr_mul, Algebra.leftMulMatrix_eq_repr_mul,
+    Algebra.leftMulMatrix_eq_repr_mul, Algebra.leftMulMatrix_eq_repr_mul]
+  simp only [qbasis_zero, qbasis_one, mul_one, mul_root]
+  rw [(qbasis_repr rfl).1, (qbasis_repr rfl).2, (qbasis_repr rfl).1, (qbasis_repr rfl).2]
+  ring
+
+/-- Products in the basis `(1, U)`. -/
+lemma mul_coords (a e a' e' : R) :
+    (algebraMap R (QAlg b c) a + algebraMap R _ e * AdjoinRoot.root _) *
+        (algebraMap R _ a' + algebraMap R _ e' * AdjoinRoot.root _) =
+      algebraMap R _ (a * a' - e * e' * c) +
+        algebraMap R _ (a * e' + a' * e - e * e' * b) * AdjoinRoot.root _ := by
+  simp only [map_sub, map_mul, map_add]
+  linear_combination (algebraMap R (QAlg b c) e * algebraMap R (QAlg b c) e') * root_sq b c
+
+/-- The reconstruction map of pages 49 to 52: `y ↦ (Tr y, γ)`, with `y = (Tr y + γ z)/2`,
+`z = 2U + b`, `z² = δ`. -/
+noncomputable def recon : QAlg b c →ₗ[R] R × R :=
+  (Algebra.trace R (QAlg b c)).prod (Finsupp.lapply 1 ∘ₗ (qbasis b c).repr.toLinearMap)
+
+lemma recon_of (a e : R) :
+    recon (algebraMap R (QAlg b c) a + algebraMap R _ e * AdjoinRoot.root _) =
+      (2 * a - e * b, e) :=
+  Prod.ext (trace_qalg a e) (qbasis_repr rfl).2
+
+lemma recon_one : recon (1 : QAlg b c) = (2, 0) := by
+  have h := recon_of (b := b) (c := c) 1 0
+  simp only [map_one, map_zero, zero_mul, add_zero] at h
+  rw [h]; ring_nf
+
+/-- **The product of page 51**, without division:
+`2 β(yy') = ββ' + γγ'δ` and `2 γ(yy') = βγ' + γβ'`. -/
+theorem recon_mul (y y' : QAlg b c) :
+    2 * (recon (y * y')).1 = (recon y).1 * (recon y').1 + (recon y).2 * (recon y').2 * disc b c ∧
+      2 * (recon (y * y')).2 = (recon y).1 * (recon y').2 + (recon y).2 * (recon y').1 := by
+  obtain ⟨a, e, rfl⟩ := coords_exist y
+  obtain ⟨a', e', rfl⟩ := coords_exist y'
+  rw [mul_coords, recon_of, recon_of, recon_of, disc]
+  constructor <;> ring
+
+/-- **The norm of page 51**: `4N(β, γ) = β² − γ²δ`, Mathlib's `Algebra.norm`. -/
+theorem recon_norm (y : QAlg b c) :
+    4 * Algebra.norm R y = (recon y).1 ^ 2 - (recon y).2 ^ 2 * disc b c := by
+  obtain ⟨a, e, rfl⟩ := coords_exist y
+  rw [norm_qalg, recon_of, disc]
+  ring
+
+/-- **The image (page 50)**: `Γ A = {(β, γ) | β ≡ γ T₀ mod 2}`, `T₀ = b mod 2`, any `R`. -/
+theorem recon_range (β γ : R) :
+    (∃ y : QAlg b c, recon y = (β, γ)) ↔ ∃ s, β = γ * b + 2 * s := by
+  constructor
+  · rintro ⟨y, hy⟩
+    obtain ⟨a, e, rfl⟩ := coords_exist y
+    rw [recon_of, Prod.mk.injEq] at hy
+    exact ⟨a - e * b, by rw [← hy.1, ← hy.2]; ring⟩
+  · rintro ⟨s, rfl⟩
+    exact ⟨algebraMap R _ (s + γ * b) + algebraMap R _ γ * AdjoinRoot.root _, by
+      rw [recon_of]; ext <;> simp; ring⟩
+
+/-- **The reconstruction is faithful** when `2` is a non-zero-divisor: `y` is known by its
+trace and `γ`. -/
+theorem recon_injective (h2 : ∀ x : R, 2 * x = 0 → x = 0) :
+    Function.Injective (recon (b := b) (c := c)) := by
+  rw [← LinearMap.ker_eq_bot, LinearMap.ker_eq_bot']
+  intro y hy
+  obtain ⟨a, e, rfl⟩ := coords_exist y
+  rw [recon_of, Prod.mk_eq_zero] at hy
+  obtain ⟨h1, rfl⟩ := hy
+  rw [zero_mul, sub_zero] at h1
+  simp [h2 a h1]
+
+/-- A linear form on `A` in the basis `(1, U)`. -/
+lemma dual_coords (x : Module.Dual R (QAlg b c)) (a e : R) :
+    x (algebraMap R _ a + algebraMap R _ e * AdjoinRoot.root _) =
+      a * x 1 + e * x (AdjoinRoot.root _) := by
+  rw [Algebra.algebraMap_eq_smul_one, ← Algebra.smul_def, map_add, map_smul, map_smul,
+    smul_eq_mul, smul_eq_mul]
+
+/-- The coordinates `(λ, ζ)` of `x ∈ E = Ǎ` (page 49): `λ = ψ(x) = x(1)` and
+`ζ = 2x − ψ(x)T ∈ L`, read on `U`. -/
+noncomputable def eCoord (x : Module.Dual R (QAlg b c)) : R × R :=
+  (x 1, (2 • x - x 1 • Algebra.trace R (QAlg b c)) (AdjoinRoot.root _))
+
+lemma eCoord_eq (x : Module.Dual R (QAlg b c)) :
+    eCoord x = (x 1, 2 * x (AdjoinRoot.root _) + x 1 * b) := by
+  have := trace_qalg (b := b) (c := c) 0 1
+  simp only [map_zero, map_one, one_mul, zero_add, mul_zero, zero_sub] at this
+  simp [eCoord, this]
+
+/-- **`Γ E = {(λ, ζ) | ζ ≡ λ T₀ mod 2}` (page 49)**, any `R`. -/
+theorem eCoord_range (l ζ : R) :
+    (∃ x : Module.Dual R (QAlg b c), eCoord x = (l, ζ)) ↔ ∃ s, ζ = l * b + 2 * s := by
+  constructor
+  · rintro ⟨x, hx⟩
+    rw [eCoord_eq, Prod.mk.injEq] at hx
+    exact ⟨x (AdjoinRoot.root _), by rw [← hx.1, ← hx.2]; ring⟩
+  · rintro ⟨s, rfl⟩
+    refine ⟨l • (qbasis b c).coord 0 + s • (qbasis b c).coord 1, ?_⟩
+    rw [eCoord_eq]
+    have e1 : (1 : QAlg b c) = qbasis b c 0 := by simp
+    have e2 : AdjoinRoot.root (qpoly b c) = qbasis b c 1 := by simp
+    simp only [LinearMap.add_apply, LinearMap.smul_apply, e1, e2, Module.Basis.coord_apply,
+      Module.Basis.repr_self, smul_eq_mul]
+    ext <;> simp; ring
+
+theorem eCoord_injective (h2 : ∀ x : R, 2 * x = 0 → x = 0) {x x' : Module.Dual R (QAlg b c)}
+    (h : eCoord x = eCoord x') : x = x' := by
+  rw [eCoord_eq, eCoord_eq, Prod.mk.injEq] at h
+  obtain ⟨h1, h2'⟩ := h
+  rw [h1, add_left_inj] at h2'
+  have hU : x (AdjoinRoot.root _) = x' (AdjoinRoot.root _) := by
+    rw [← sub_eq_zero]; exact h2 _ (by rw [mul_sub, h2', sub_self])
+  refine (qbasis b c).ext fun i => ?_
+  fin_cases i <;> simp [h1, hU]
+
+/-- **The coupling (page 50)**: `2⟨y, x⟩ = λβ + γζ`. -/
+theorem coupling (x : Module.Dual R (QAlg b c)) (y : QAlg b c) :
+    2 * x y = (eCoord x).1 * (recon y).1 + (recon y).2 * (eCoord x).2 := by
+  obtain ⟨a, e, rfl⟩ := coords_exist y
+  rw [eCoord_eq, recon_of, dual_coords]
+  ring
+
+/-- The quadratic function `Q` of page 45 on `E`, in the coordinates of the splitting
+`x₀ = (1, 0)`: `Q(λ, μ) = μ² + bλμ + cλ²`, i.e. `Q(x₀ + u) = u² + bu + c`. -/
+noncomputable def qE (x : Module.Dual R (QAlg b c)) : R :=
+  x (AdjoinRoot.root _) ^ 2 + b * x 1 * x (AdjoinRoot.root _) + c * x 1 ^ 2
+
+/-- **The form of page 52**: `Q(λ, ζ) = (ζ² − λ²δ)/4`, without division. -/
+theorem four_qE (x : Module.Dual R (QAlg b c)) :
+    4 * qE x = (eCoord x).2 ^ 2 - (eCoord x).1 ^ 2 * disc b c := by
+  rw [eCoord_eq, qE, disc]; ring
+
+/-- The polar form `φ_N(y) = Tr(y)Tr(·) − Tr(y·)` of the norm, `A → E` (page 46). -/
+noncomputable def phiN (y : QAlg b c) : Module.Dual R (QAlg b c) :=
+  Algebra.trace R _ y • Algebra.trace R _ - Algebra.trace R _ ∘ₗ LinearMap.mulLeft R y
+
+/-- **Page 50**: `φ_N(β, γ) = (β, −γδ)`, and **the box of page 46**: `Q(φ_N(y)) = −N(y)δ`. -/
+theorem phiN_coords (y : QAlg b c) :
+    eCoord (phiN y) = ((recon y).1, -((recon y).2 * disc b c)) ∧
+      qE (phiN y) = -(Algebra.norm R y * disc b c) := by
+  obtain ⟨a, e, rfl⟩ := coords_exist y
+  have h1 : phiN (algebraMap R (QAlg b c) a + algebraMap R _ e * AdjoinRoot.root _) 1 =
+      2 * a - e * b := by
+    have := trace_qalg (b := b) (c := c) 1 0
+    simp only [map_one, map_zero, zero_mul, add_zero] at this
+    simp only [phiN, LinearMap.sub_apply, LinearMap.smul_apply, LinearMap.comp_apply,
+      LinearMap.mulLeft_apply, mul_one, trace_qalg, smul_eq_mul, this]
+    ring
+  have hU : phiN (algebraMap R (QAlg b c) a + algebraMap R _ e * AdjoinRoot.root _)
+      (AdjoinRoot.root _) = 2 * e * c - a * b := by
+    have := trace_qalg (b := b) (c := c) 0 1
+    simp only [map_one, map_zero, one_mul, zero_add] at this
+    simp only [phiN, LinearMap.sub_apply, LinearMap.smul_apply, LinearMap.comp_apply,
+      LinearMap.mulLeft_apply, mul_root, trace_qalg, smul_eq_mul, this]
+    ring
+  rw [eCoord_eq, recon_of, norm_qalg, qE, h1, hU, disc]
+  constructor
+  · ext <;> simp; ring
+  · ring
+
+end Reconstruction
+
+section ReconstructionL
+
+variable {R : Type*} [CommRing R] {L : Type*} [AddCommGroup L] [Module R L]
+
+/-- `(γ, γ') ↦ (γ ⊗ γ')(−)`, the pairing `Ľ × Ľ × L^{⊗2} → 𝒪` used in `γγ'δ`. -/
+noncomputable def pairL (γ γ' : Module.Dual R L) : L ⊗[R] L →ₗ[R] R :=
+  LinearMap.mul' R R ∘ₗ TensorProduct.map γ γ'
+
+@[simp] lemma pairL_tmul (γ γ' : Module.Dual R L) (x y : L) :
+    pairL γ γ' (x ⊗ₜ y) = γ x * γ' y := rfl
+
+variable {δ : L ⊗[R] L} {τ : L} {β β' : R} {γ γ' : Module.Dual R L}
+
+/-- **The norm `(β² − γ²δ)/4` of page 51 is defined**: if `β ≡ γ(τ)` mod `2` and
+`τ² ≡ δ` mod `4`, then `β² − γ²δ ∈ 4𝒪`. -/
+theorem div_norm (hδ : ∃ k, τ ⊗ₜ τ - δ = (4 : R) • k) (hβ : ∃ s, β = γ τ + 2 * s) :
+    ∃ n, β ^ 2 - pairL γ γ δ = 4 * n := by
+  obtain ⟨k, hk⟩ := hδ
+  obtain ⟨s, rfl⟩ := hβ
+  refine ⟨γ τ * s + s ^ 2 + pairL γ γ k, ?_⟩
+  rw [show δ = τ ⊗ₜ τ - (4 : R) • k by rw [← hk]; abel, map_sub, map_smul, pairL_tmul,
+    smul_eq_mul]
+  ring
+
+/-- **The first coordinate `(ββ' + γγ'δ)/2` of the product (page 51) is defined.** -/
+theorem div_prod_fst (hδ : ∃ k, τ ⊗ₜ τ - δ = (4 : R) • k) (hβ : ∃ s, β = γ τ + 2 * s)
+    (hβ' : ∃ s, β' = γ' τ + 2 * s) : ∃ m, β * β' + pairL γ γ' δ = 2 * m := by
+  obtain ⟨k, hk⟩ := hδ
+  obtain ⟨s, rfl⟩ := hβ
+  obtain ⟨s', rfl⟩ := hβ'
+  refine ⟨γ τ * γ' τ + s * γ' τ + s' * γ τ + 2 * s * s' - 2 * pairL γ γ' k, ?_⟩
+  rw [show δ = τ ⊗ₜ τ - (4 : R) • k by rw [← hk]; abel, map_sub, map_smul, pairL_tmul,
+    smul_eq_mul]
+  ring
+
+/-- Symmetry of `Ľ ⊗ Ľ` for `L` invertible: `γ'(τ)γ = γ(τ)γ'`. -/
+lemma dual_symm [Module.Invertible R L] (γ γ' : Module.Dual R L) (τ : L) :
+    γ' τ • γ = γ τ • γ' := by
+  have := congrArg (fun z => TensorProduct.rid R _ (LinearMap.lTensor (Module.Dual R L)
+    (Module.Dual.eval R L τ) z)) (Module.Invertible.tmul_comm (R := R) (m₁ := γ) (m₂ := γ'))
+  simpa using this
+
+/-- **The second coordinate `(βγ' + γβ')/2` of the product (page 51) is defined**, for `L`
+invertible. -/
+theorem div_prod_snd [Module.Invertible R L] (hβ : ∃ s, β = γ τ + 2 * s)
+    (hβ' : ∃ s, β' = γ' τ + 2 * s) : ∃ g : Module.Dual R L, β • γ' + β' • γ = (2 : R) • g := by
+  obtain ⟨s, rfl⟩ := hβ
+  obtain ⟨s', rfl⟩ := hβ'
+  refine ⟨γ τ • γ' + s • γ' + s' • γ, ?_⟩
+  rw [add_smul, add_smul, dual_symm γ γ' τ]
+  module
+
+/-- **The product stays in `Γ A`**: if `2` is regular, the halves `β''`, `γ''` satisfy
+`β'' ≡ γ''(τ)` mod `2` again (page 51, « il le vérifie à chaque étape »). -/
+theorem div_prod_mem (h2 : ∀ x : R, 2 * x = 0 → x = 0) (hδ : ∃ k, τ ⊗ₜ τ - δ = (4 : R) • k)
+    (hβ : ∃ s, β = γ τ + 2 * s) (hβ' : ∃ s, β' = γ' τ + 2 * s) {β'' : R}
+    {γ'' : Module.Dual R L} (h₁ : 2 * β'' = β * β' + pairL γ γ' δ)
+    (h₂ : (2 : R) • γ'' = β • γ' + β' • γ) : ∃ s, β'' = γ'' τ + 2 * s := by
+  obtain ⟨k, hk⟩ := hδ
+  obtain ⟨s, rfl⟩ := hβ
+  obtain ⟨s', rfl⟩ := hβ'
+  have hτ := LinearMap.congr_fun h₂ τ
+  simp only [LinearMap.smul_apply, LinearMap.add_apply, smul_eq_mul] at hτ
+  rw [show δ = τ ⊗ₜ τ - (4 : R) • k by rw [← hk]; abel, map_sub, map_smul, pairL_tmul,
+    smul_eq_mul] at h₁
+  refine ⟨s * s' - pairL γ γ' k, ?_⟩
+  rw [← sub_eq_zero]
+  apply h2
+  linear_combination h₁ - hτ
+
+/-- **The form `(ζ² − λ²δ)/4` of page 52 is defined**, for `L` invertible: if `ζ ≡ λτ`
+mod `2L`, then `ζ² − λ²δ ∈ 4L^{⊗2}`. -/
+theorem div_qform [Module.Invertible R L] (hδ : ∃ k, τ ⊗ₜ τ - δ = (4 : R) • k) {l : R} {ζ : L}
+    (hζ : ∃ a, ζ = l • τ + (2 : R) • a) : ∃ q, ζ ⊗ₜ ζ - l ^ 2 • δ = (4 : R) • q := by
+  obtain ⟨k, hk⟩ := hδ
+  obtain ⟨a, rfl⟩ := hζ
+  refine ⟨l ^ 2 • k + l • (τ ⊗ₜ a) + a ⊗ₜ a, ?_⟩
+  rw [show δ = τ ⊗ₜ τ - (4 : R) • k by rw [← hk]; abel]
+  simp only [add_tmul, tmul_add, ← smul_tmul', tmul_smul]
+  rw [Module.Invertible.tmul_comm (m₁ := a) (m₂ := τ)]
+  module
+
+end ReconstructionL
+
+end Grothendieck.Folder84
