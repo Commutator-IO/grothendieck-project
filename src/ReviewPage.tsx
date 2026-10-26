@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
+import { BnfReview } from './components/BnfReview.tsx';
 import { FacsimilePane, type OpenBatch } from './components/FacsimilePane.tsx';
+import BNF from './content/review-bnf.json';
 import { BY_ID } from './content/catalogue.ts';
 import QUEUE from './content/review-queue.json';
 import { batchRange, pdfIndexOf, sourceUrl, useFacsimileProxy } from './lib/batches.ts';
@@ -79,6 +81,8 @@ export function ReviewPage() {
   const [paneBatch, setPaneBatch] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
   const [showAnswered, setShowAnswered] = useState(false);
+  // Two sets of questions: the Montpellier checks of #35, and the BnF visit (#37), which has no facsimile online.
+  const [source, setSource] = useState<'montpellier' | 'bnf'>(() => (location.hash.startsWith('#bnf') ? 'bnf' : 'montpellier'));
 
   // The items listed: answered ones (not skipped) are hidden unless asked for, so the list is what is left to do.
   const listed = useMemo(
@@ -184,7 +188,7 @@ export function ReviewPage() {
 
   return (
     <>
-      <div className={`transition-[padding] duration-150 ${pane ? 'lg:pr-[var(--pane,0px)]' : ''}`}>
+      <div className={`transition-[padding] duration-150 ${pane && source === 'montpellier' ? 'lg:pr-[var(--pane,0px)]' : ''}`}>
         <Header path="/review/" />
         <main className="mx-auto max-w-6xl px-4 py-8 sm:px-5">
           <header className="max-w-[48em]">
@@ -204,7 +208,33 @@ export function ReviewPage() {
             </p>
           </header>
 
-          <div className="mt-6 grid gap-6 2xl:grid-cols-[14rem_minmax(0,1fr)]">
+          <div role="tablist" aria-label="Questions" className="mt-5 flex gap-1 border-b border-ink-200">
+            {(
+              [
+                ['montpellier', `Montpellier fonds (${listed.length})`],
+                ['bnf', `BnF visit, NAF 29093 (${BNF.boxes.reduce((n, b) => n + b.items.length, 0)})`],
+              ] as const
+            ).map(([k, label]) => (
+              <button
+                key={k}
+                role="tab"
+                type="button"
+                aria-selected={source === k}
+                onClick={() => {
+                  setSource(k);
+                  history.replaceState(null, '', k === 'bnf' ? '#bnf' : `#${item.id}`);
+                }}
+                className={`-mb-px border-b-2 px-3 py-2 text-[14px] ${
+                  source === k ? 'border-brand-700 font-semibold text-ink-900' : 'border-transparent text-ink-500 hover:text-ink-800'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+
+          {source === 'bnf' && <BnfReview />}
+          <div hidden={source === 'bnf'} className="mt-6 grid gap-6 2xl:grid-cols-[14rem_minmax(0,1fr)]">
             <nav aria-label="Checks" className="order-2 2xl:order-1">
               <label className="block text-[11px] font-semibold uppercase tracking-wider text-ink-400" htmlFor="kind">
                 Show
@@ -431,7 +461,7 @@ export function ReviewPage() {
         </main>
         <Footer />
       </div>
-      {pane && <FacsimilePane open={facsimile} onClose={() => setPane(false)} onBatch={setPaneBatch} />}
+      {pane && source === 'montpellier' && <FacsimilePane open={facsimile} onClose={() => setPane(false)} onBatch={setPaneBatch} />}
     </>
   );
 }
