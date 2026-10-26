@@ -1030,3 +1030,293 @@ theorem injective_sylow_comm [Module.Finite O A] [Fact (ringChar (ResidueField O
 end SylowInjectiveComm
 
 end Grothendieck.Folder46
+
+/-!
+## Folder 46, pages 84–89: the semi-local base and the first arrow
+
+Let `𝒪` be a commutative ring on which the finite group `Γ` acts, `𝔪` a maximal ideal whose
+conjugates `σ⁻¹(𝔪)` are all the maximal ideals of `𝒪` (transitivity, page 84; `𝒪` is then
+semi-local), `Γ_d ⊂ Γ` the decomposition group of `𝔪`, and `A` a finite `𝒪`-algebra, not
+necessarily commutative, with semilinear `Γ`-action. The page passes to the completion, where
+`Â*` is induced from `Γ_d` (Shapiro), and descends by Artin–Rees. Here one average does both:
+with `e ∈ 𝒪`, `e ≡ 1 mod 𝔪`, `e ∈ σ⁻¹(𝔪)` for `σ ∉ Γ_d` (Chinese remainders), and `λ` of trace
+one modulo `𝔪` for `Γ_d`, the element `u = Σ_{σ∈Γ} c'(σ) σ(eλw) c(σ)⁻¹` reduces modulo `𝔪` to the
+`Γ_d`-average of `w`, hence to `w`; by twisted invariance it is invertible modulo every conjugate
+of `𝔪`, hence a unit (Nakayama over the Jacobson radical). So two cocycles `Γ → A*` whose
+restrictions to `Γ_d` are cohomologous modulo `𝔪A` (a fortiori in `A_𝔪*`) are cohomologous
+(`isCohomologous_of_semilocal`), and in the tame case with infinite residue field the composite
+`H¹(Γ, A*) → H¹(Γ_i, (A/𝔪A)*)` is injective (`isCohomologous_of_restrict_inertia_semilocal`).
+-/
+
+namespace Grothendieck.Folder46
+
+section SemiLocal
+
+variable {O A : Type*} [CommRing O] [Ring A] [Algebra O A] [Module.Finite O A]
+
+/-- Nakayama over a semi-local ring: an `O`-linear endomorphism of a finite `O`-module that is
+surjective modulo `I j` for a finite family of ideals, each maximal ideal containing one of them,
+is surjective. -/
+theorem surjective_of_forall {ι : Type*} [Fintype ι] (I : ι → Ideal O)
+    (hI : ∀ 𝔫 : Ideal O, 𝔫.IsMaximal → ∃ j, I j ≤ 𝔫) (f : A →ₗ[O] A)
+    (hf : ∀ j a, ∃ b, a - f b ∈ I j • (⊤ : Submodule O A)) (a : A) : ∃ b, f b = a := by
+  classical
+  have key : ∀ s : Finset ι, (⊤ : Submodule O A) ≤ LinearMap.range f ⊔ (∏ j ∈ s, I j) • ⊤ := by
+    intro s
+    induction s using Finset.induction_on with
+    | empty => simp
+    | insert j s hj ih =>
+      intro x _
+      obtain ⟨b, hb⟩ := hf j x
+      rw [prod_insert hj, Submodule.mul_smul]
+      have h : I j • (⊤ : Submodule O A) ≤ LinearMap.range f ⊔ I j • (∏ j ∈ s, I j) • ⊤ :=
+        (Submodule.smul_mono le_rfl ih).trans <| (Submodule.smul_sup _ _ _).le.trans <|
+          sup_le_sup_right Submodule.smul_le_right _
+      rw [← sub_add_cancel x (f b)]
+      exact add_mem (h hb) (Submodule.mem_sup_left ⟨b, rfl⟩)
+  have hP : ∏ j, I j ≤ Ideal.jacobson ⊥ := le_sInf fun 𝔫 ⟨_, h𝔫⟩ => by
+    obtain ⟨j, hj⟩ := hI 𝔫 h𝔫
+    exact Ideal.prod_le_inf.trans ((Finset.inf_le (mem_univ j)).trans hj)
+  exact Submodule.le_of_le_smul_of_le_jacobson_bot Module.Finite.fg_top hP (key univ)
+    Submodule.mem_top
+
+/-- An element invertible modulo each `I j`, on both sides, is a unit. -/
+theorem isUnit_of_forall {ι : Type*} [Fintype ι] (I : ι → Ideal O)
+    (hI : ∀ 𝔫 : Ideal O, 𝔫.IsMaximal → ∃ j, I j ≤ 𝔫) {x : A}
+    (hx : ∀ j, ∃ y, x * y - 1 ∈ I j • (⊤ : Submodule O A) ∧
+      y * x - 1 ∈ I j • (⊤ : Submodule O A)) : IsUnit x := by
+  obtain ⟨y, hy⟩ := surjective_of_forall I hI (LinearMap.mulLeft O x) (fun j a => by
+    obtain ⟨y, h, -⟩ := hx j
+    exact ⟨y * a, by simpa [sub_mul, mul_assoc] using
+      Submodule.neg_mem _ (map_mem_smul_top _ (LinearMap.mulRight O a) h)⟩) 1
+  obtain ⟨z, hz⟩ := surjective_of_forall I hI (LinearMap.mulRight O x) (fun j a => by
+    obtain ⟨y, -, h⟩ := hx j
+    exact ⟨a * y, by simpa [mul_sub, mul_assoc] using
+      Submodule.neg_mem _ (map_mem_smul_top _ (LinearMap.mulLeft O a) h)⟩) 1
+  exact isUnit_iff_exists_and_exists.2 ⟨⟨y, hy⟩, ⟨z, hz⟩⟩
+
+variable {Γ : Type*} [Group Γ] [MulSemiringAction Γ O] [MulSemiringAction Γ A]
+
+omit [Module.Finite O A] in
+/-- `σ⁻¹(I A) ⊂ σ⁻¹(I) A`, with `σ⁻¹(I) = {a | σ(a) ∈ I}`. -/
+theorem inv_smul_mem_smul_top (hO : ∀ (g : Γ) (a : O), g • algebraMap O A a = algebraMap O A (g • a))
+    {I : Ideal O} {x : A} (hx : x ∈ I • (⊤ : Submodule O A)) (g : Γ) :
+    g⁻¹ • x ∈ I.comap (MulSemiringAction.toRingHom Γ O g) • (⊤ : Submodule O A) := by
+  refine Submodule.smul_induction_on hx (fun a ha b _ => ?_) fun x y hx hy => ?_
+  · rw [Algebra.smul_def a b, smul_mul', hO, ← Algebra.smul_def (g⁻¹ • a)]
+    exact Submodule.smul_mem_smul (by simpa using ha) trivial
+  · rw [smul_add]; exact add_mem hx hy
+
+variable [Fintype Γ]
+
+/-- **Pages 84–89, the semi-local base and the first arrow.** Let `𝔪` be a maximal ideal of `𝒪`
+whose conjugates `{a | σ(a) ∈ 𝔪}` are all the maximal ideals, `D` a subgroup of `Γ` (the
+decomposition group `Γ_d`), `L ∈ 𝒪` with `σ(L) ∈ 𝔪` for `σ ∉ D` and `Σ_σ σ(L) ≡ 1 mod 𝔪`, and
+`A` a finite `𝒪`-algebra, not necessarily commutative, with semilinear `Γ`-action. Two cocycles
+`c, c' : Γ → A*` whose restrictions to `D` are cohomologous modulo `𝔪A` — by `w` invertible
+modulo `𝔪A` with `c'(δ) δ(w) ≡ w c(δ)` — are cohomologous in `A*`. -/
+theorem isCohomologous_of_semilocal
+    (hO : ∀ (g : Γ) (a : O), g • algebraMap O A a = algebraMap O A (g • a)) (𝔪 : Ideal O)
+    (htrans : ∀ 𝔫 : Ideal O, 𝔫.IsMaximal → ∃ σ : Γ, 𝔫 = 𝔪.comap (MulSemiringAction.toRingHom Γ O σ))
+    (D : Subgroup Γ) {L : O} (hL₁ : ∀ σ ∉ D, σ • L ∈ 𝔪) (hL₂ : ∑ σ : Γ, σ • L - 1 ∈ 𝔪)
+    {c c' : Γ → Aˣ} (hc : IsCocycle c) (hc' : IsCocycle c') {w w' : A}
+    (hww' : w * w' - 1 ∈ 𝔪 • (⊤ : Submodule O A)) (hw'w : w' * w - 1 ∈ 𝔪 • (⊤ : Submodule O A))
+    (hD : ∀ δ ∈ D, (c' δ : A) * δ • w - w * c δ ∈ 𝔪 • (⊤ : Submodule O A)) :
+    ∃ u : Aˣ, ∀ g, (c g : A) = ↑u⁻¹ * c' g * g • (u : A) := by
+  refine isCohomologous_of_isUnit_sum hc hc' (algebraMap O A L * w) ?_
+  set u := ∑ s, (c' s : A) * s • (algebraMap O A L * w) * ↑(c s)⁻¹
+  have hu : u - w ∈ 𝔪 • (⊤ : Submodule O A) := by
+    have : u - w = ∑ s, (s • L) • ((c' s : A) * s • w * ↑(c s)⁻¹ - w) + (∑ s : Γ, s • L - 1) • w := by
+      have ht : ∀ s : Γ, (c' s : A) * s • (algebraMap O A L * w) * ↑(c s)⁻¹ =
+          (s • L) • ((c' s : A) * s • w * ↑(c s)⁻¹) := fun s => by
+        rw [smul_mul', hO]; simp only [Algebra.smul_def, mul_assoc, Algebra.left_comm]
+      simp only [u, ht, smul_sub, sum_sub_distrib, sub_smul, sum_smul, one_smul]
+      abel
+    rw [this]
+    refine add_mem (sum_mem fun s _ => ?_) (Submodule.smul_mem_smul hL₂ trivial)
+    by_cases hs : s ∈ D
+    · refine Submodule.smul_mem _ _ ?_
+      simpa [sub_mul, mul_assoc] using map_mem_smul_top _ (LinearMap.mulRight O ↑(c s)⁻¹) (hD s hs)
+    · exact Submodule.smul_mem_smul (hL₁ s hs) trivial
+  have h₁ : u * w' - 1 ∈ 𝔪 • (⊤ : Submodule O A) := by
+    rw [show u * w' - 1 = (u - w) * w' + (w * w' - 1) by noncomm_ring]
+    exact add_mem (map_mem_smul_top _ (LinearMap.mulRight O w') hu) hww'
+  have h₂ : w' * u - 1 ∈ 𝔪 • (⊤ : Submodule O A) := by
+    rw [show w' * u - 1 = w' * (u - w) + (w' * w - 1) by noncomm_ring]
+    exact add_mem (map_mem_smul_top _ (LinearMap.mulLeft O w') hu) hw'w
+  refine isUnit_of_forall (fun σ : Γ => 𝔪.comap (MulSemiringAction.toRingHom Γ O σ))
+    (fun 𝔫 h𝔫 => (htrans 𝔫 h𝔫).imp fun σ h => h.ge) fun σ => ?_
+  set h := σ⁻¹
+  have hfix : u = c' h * h • u * ↑(c h)⁻¹ := by
+    rw [mul_smul_sum_twist hc hc', mul_assoc, Units.mul_inv, mul_one]
+  have conj : ∀ (a b : Aˣ) {x}, x ∈ 𝔪 • (⊤ : Submodule O A) →
+      (a : A) * h • x * ↑b⁻¹ ∈ 𝔪.comap (MulSemiringAction.toRingHom Γ O σ) • (⊤ : Submodule O A) :=
+    fun a b x hx => map_mem_smul_top _ (LinearMap.mulRight O _) <|
+      map_mem_smul_top _ (LinearMap.mulLeft O _) (inv_smul_mem_smul_top hO hx σ)
+  refine ⟨c h * h • w' * ↑(c' h)⁻¹, ?_, ?_⟩
+  · convert conj (c' h) (c' h) h₁ using 1
+    rw [smul_sub, smul_one, mul_sub, sub_mul, mul_one, Units.mul_inv, smul_mul']
+    conv_lhs => rw [hfix]
+    simp only [mul_assoc, Units.inv_mul_cancel_left]
+  · convert conj (c h) (c h) h₂ using 1
+    rw [smul_sub, smul_one, mul_sub, sub_mul, mul_one, Units.mul_inv, smul_mul']
+    conv_lhs => rw [hfix]
+    simp only [mul_assoc, Units.inv_mul_cancel_left]
+
+omit [Algebra O A] [Module.Finite O A] [MulSemiringAction Γ A] in
+/-- **Chinese remainders.** If `D` is the decomposition group of the maximal ideal `𝔪` and
+`l ∈ 𝒪` has trace one modulo `𝔪` for `D`, then `L = e l`, with `e ≡ 1 mod 𝔪` and `e ∈ σ⁻¹(𝔪)`
+for `σ ∉ D`, has `σ(L) ∈ 𝔪` for `σ ∉ D` and trace one modulo `𝔪` for `Γ`. -/
+theorem exists_trace_one_semilocal (𝔪 : Ideal O) [𝔪.IsMaximal] (D : Subgroup Γ) [Fintype D]
+    (hD : ∀ σ, σ ∈ D ↔ 𝔪.comap (MulSemiringAction.toRingHom Γ O σ) = 𝔪) {l : O}
+    (hl : ∑ δ : D, (δ : Γ) • l - 1 ∈ 𝔪) :
+    ∃ L : O, (∀ σ ∉ D, σ • L ∈ 𝔪) ∧ ∑ σ : Γ, σ • L - 1 ∈ 𝔪 := by
+  classical
+  obtain ⟨m, hm, e, he, hme⟩ := Submodule.mem_sup.1 <| (Ideal.sup_prod_eq_top (I := 𝔪) (s := univ)
+    (J := fun σ => if σ ∈ D then ⊤ else 𝔪.comap (MulSemiringAction.toRingHom Γ O σ))
+    fun σ _ => by
+      split_ifs with h
+      · exact sup_top_eq _
+      · have := Ideal.comap_isMaximal_of_surjective (MulSemiringAction.toRingHom Γ O σ)
+          (K := 𝔪) fun a => ⟨σ⁻¹ • a, smul_inv_smul σ a⟩
+        exact Ideal.IsMaximal.coprime_of_ne ‹_› this fun h' => h ((hD σ).2 h'.symm)).symm ▸
+      Submodule.mem_top (x := (1 : O))
+  obtain rfl : e = 1 - m := by rw [← hme]; ring
+  have he' : ∀ σ ∉ D, σ • (1 - m) ∈ 𝔪 := fun σ hσ => by
+    simpa [hσ] using (Ideal.prod_le_inf.trans (Finset.inf_le (mem_univ σ))) he
+  have he1 : ∀ σ ∈ D, σ • (1 - m) - 1 ∈ 𝔪 := fun σ hσ => by
+    have := hm
+    rw [← (hD σ).1 hσ] at this
+    simpa [smul_sub] using 𝔪.neg_mem this
+  refine ⟨(1 - m) * l, fun σ hσ => by rw [smul_mul']; exact 𝔪.mul_mem_right _ (he' σ hσ), ?_⟩
+  have h1 : ∑ δ : D, (δ : Γ) • l = ∑ σ, if σ ∈ D then σ • l else 0 := by
+    rw [← Finset.sum_filter]; exact (Finset.sum_subtype (p := (· ∈ D)) _ (fun _ => by simp) fun σ => σ • l).symm
+  rw [show ∑ σ : Γ, σ • ((1 - m) * l) - 1 = ∑ σ, (σ • ((1 - m) * l) -
+      if σ ∈ D then σ • l else 0) + (∑ δ : D, (δ : Γ) • l - 1) by rw [h1, sum_sub_distrib]; ring]
+  refine add_mem (sum_mem fun σ _ => ?_) hl
+  split_ifs with hσ
+  · rw [smul_mul', ← sub_one_mul]; exact 𝔪.mul_mem_right _ (he1 σ hσ)
+  · rw [sub_zero, smul_mul']; exact 𝔪.mul_mem_right _ (he' σ hσ)
+
+omit [Algebra O A] [Module.Finite O A] [MulSemiringAction Γ A] [Fintype Γ] in
+/-- **An element of trace one modulo `𝔪` for the decomposition group.** For `ρ : 𝒪 → k` onto a
+field with kernel in `𝔪`, equivariant for `D`, and `|D_i|` invertible in `k` (`D_i` the inertia,
+acting trivially on `k`), some `l ∈ 𝒪` has `Σ_{δ∈D} δ(l) ≡ 1 mod 𝔪`. -/
+theorem exists_trace_one_mod (𝔪 : Ideal O) (D : Subgroup Γ) [Fintype D] {k : Type*} [Field k]
+    [MulSemiringAction D k] (ρ : O →+* k) (hρ : Function.Surjective ρ)
+    (hρ𝔪 : ∀ a, ρ a = 0 → a ∈ 𝔪) (hρD : ∀ (δ : D) (a : O), ρ ((δ : Γ) • a) = δ • ρ a)
+    (hN : ((inertia D k).card : k) ≠ 0) : ∃ l : O, ∑ δ : D, (δ : Γ) • l - 1 ∈ 𝔪 := by
+  obtain ⟨μ, hμ⟩ := exists_sum_smul_ne_zero hN
+  obtain ⟨l₀, rfl⟩ := hρ μ
+  obtain ⟨s, hs⟩ := hρ (∑ δ : D, δ • ρ l₀)⁻¹
+  refine ⟨l₀ * s, hρ𝔪 _ ?_⟩
+  have hg : ∀ g : D, g • ∑ δ : D, δ • ρ l₀ = ∑ δ : D, δ • ρ l₀ := fun g => by
+    rw [smul_sum]
+    simp_rw [smul_smul]
+    exact Equiv.sum_comp (Equiv.mulLeft g) fun s => s • ρ l₀
+  simp only [map_sub, map_sum, smul_mul', map_mul, hρD, hs, map_one, smul_inv'', hg, ← sum_mul,
+    mul_inv_cancel₀ hμ, sub_self]
+
+/-- **Pages 84–89, semi-local base, tame inertia, infinite residue field: `H¹(Γ, A*) →
+H¹(Γ_i, (A/𝔪A)*)` is injective.** With `𝔪`, `Γ_d = D` and `A` as in
+`isCohomologous_of_semilocal`, `ρ : 𝒪 → k` the residue map of `𝔪` (onto a field `k`, infinite,
+with kernel in `𝔪`, equivariant for `D`), `|Γ_i|` invertible in `k`, and `π : A → B = A/𝔪A` (any
+surjective `D`-equivariant map to a finite-dimensional `k`-algebra with semilinear action, with
+kernel in `𝔪A`): two cocycles `Γ → A*` whose images are cohomologous in `B*` on `Γ_i` — a
+fortiori if they are cohomologous on `Γ_i` in `A_𝔪*` — are cohomologous in `A*`. -/
+theorem isCohomologous_of_restrict_inertia_semilocal
+    (hO : ∀ (g : Γ) (a : O), g • algebraMap O A a = algebraMap O A (g • a)) (𝔪 : Ideal O)
+    [𝔪.IsMaximal]
+    (htrans : ∀ 𝔫 : Ideal O, 𝔫.IsMaximal → ∃ σ : Γ, 𝔫 = 𝔪.comap (MulSemiringAction.toRingHom Γ O σ))
+    (D : Subgroup Γ) [Fintype D]
+    (hD : ∀ σ, σ ∈ D ↔ 𝔪.comap (MulSemiringAction.toRingHom Γ O σ) = 𝔪)
+    {k : Type*} [Field k] [Infinite k] [MulSemiringAction D k] (ρ : O →+* k)
+    (hρ : Function.Surjective ρ) (hρ𝔪 : ∀ a, ρ a = 0 → a ∈ 𝔪)
+    (hρD : ∀ (δ : D) (a : O), ρ ((δ : Γ) • a) = δ • ρ a) (hN : ((inertia D k).card : k) ≠ 0)
+    {B : Type*} [Ring B] [Algebra k B] [FiniteDimensional k B] [MulSemiringAction D B]
+    (hB : ∀ (g : D) (μ : k), g • algebraMap k B μ = algebraMap k B (g • μ))
+    (π : A →+* B) (hπ : Function.Surjective π)
+    (hequiv : ∀ (g : D) (a : A), π ((g : Γ) • a) = g • π a)
+    (hker : ∀ x, π x = 0 → x ∈ 𝔪 • (⊤ : Submodule O A))
+    {c c' : Γ → Aˣ} (hc : IsCocycle c) (hc' : IsCocycle c')
+    (hres : ∃ v₀ : Bˣ, ∀ n ∈ inertia D k, π (c n) = ↑v₀⁻¹ * π (c' n) * n • (v₀ : B)) :
+    ∃ u : Aˣ, ∀ g, (c g : A) = ↑u⁻¹ * c' g * g • (u : A) := by
+  obtain ⟨v₀, hv₀⟩ := hres
+  have hcD : IsCocycle fun δ : D => Units.map (π : A →* B) (c δ) :=
+    isCocycle_map π hequiv fun g h => hc g h
+  have hcD' := isCocycle_twist (isCocycle_map π hequiv (c := fun δ : D => c' δ)
+    fun g h => hc' g h) v₀
+  obtain ⟨v, hv⟩ := isCohomologous_of_eqOn_inertia hB hN hcD hcD' fun n hn => by
+    ext; simp [hv₀ n hn]
+  obtain ⟨l, hl⟩ := exists_trace_one_mod 𝔪 D ρ hρ hρ𝔪 hρD hN
+  obtain ⟨L, hL₁, hL₂⟩ := exists_trace_one_semilocal 𝔪 D hD hl
+  obtain ⟨w, hw⟩ := hπ ↑(v₀ * v)
+  obtain ⟨w', hw'⟩ := hπ ↑(v₀ * v)⁻¹
+  refine isCohomologous_of_semilocal hO 𝔪 htrans D hL₁ hL₂ hc hc' (w := w) (w' := w')
+    (hker _ (by rw [map_sub, map_mul, hw, hw', Units.mul_inv, map_one, sub_self]))
+    (hker _ (by rw [map_sub, map_mul, hw, hw', Units.inv_mul, map_one, sub_self])) fun δ hδ => hker _ ?_
+  have := hv ⟨δ, hδ⟩
+  simp only [Units.coe_map, MonoidHom.coe_ofClass, Units.val_mul, MulSemiringAction.toRingHom_apply] at this
+  rw [map_sub, map_mul, map_mul, hequiv ⟨δ, hδ⟩, hw, sub_eq_zero, this]
+  simp only [Units.val_mul, smul_mul', mul_assoc, Units.mul_inv_cancel_left]
+
+end SemiLocal
+
+end Grothendieck.Folder46
+
+namespace Grothendieck.Folder46
+
+section Shapiro
+
+variable {Γ A : Type*} [Group Γ] [Fintype Γ] [Ring A] [MulSemiringAction Γ A]
+
+open scoped Classical in
+/-- **Shapiro's lemma, injectivity (pages 85–86).** Let `e ∈ A` be an idempotent whose
+conjugates `σ(e)` are central, pairwise orthogonal when distinct, and sum to `1` over
+`Γ/Γ_d`, `Γ_d` the stabiliser of `e` — so `A = Π_{Γ/Γ_d} σ(e)A` and `A*` is induced from
+`(eA)*`, as for the completion `Â = Π_𝔫 Â_𝔫` of the page. Two cocycles `c, c' : Γ → A*` whose
+restrictions to `Γ_d` are cohomologous in `(eA)*` (by `z ∈ eA` with inverse `z'` in `eA`) are
+cohomologous in `A*`, by `b = Σ_{gΓ_d} c'(g) g(z) c(g)⁻¹`. No hypothesis on `|Γ|`. -/
+theorem isCohomologous_of_shapiro {e : A} (hcen : ∀ (g : Γ) (a : A), g • e * a = a * g • e)
+    (horth : ∀ g h : Γ, g • e ≠ h • e → g • e * h • e = 0)
+    (hsum : ∑ q : Γ ⧸ MulAction.stabilizer Γ e, q.out • e = 1)
+    {c c' : Γ → Aˣ} (hc : IsCocycle c) (hc' : IsCocycle c') {z z' : A} (hz : e * z = z)
+    (hz' : e * z' = z') (hzz' : z * z' = e) (hz'z : z' * z = e)
+    (hD : ∀ δ ∈ MulAction.stabilizer Γ e, (c' δ : A) * δ • z = z * c δ) :
+    ∃ u : Aˣ, ∀ g, (c g : A) = ↑u⁻¹ * c' g * g • (u : A) := by
+  set D := MulAction.stabilizer Γ e
+  have hne : ∀ q r : Γ ⧸ D, q ≠ r → q.out • e ≠ r.out • e := fun q r hqr h => hqr <| by
+    rw [← q.out_eq', ← r.out_eq']
+    exact QuotientGroup.eq.2 (show (q.out⁻¹ * r.out) • e = e by rw [mul_smul, ← h, inv_smul_smul])
+  have hcomm : ∀ (g : Γ) (a b : A), a * (g • e * b) = g • e * (a * b) := fun g a b => by
+    rw [← mul_assoc, ← hcen, mul_assoc]
+  -- `x ↦ c₁(g) g(x) c₂(g)⁻¹` keeps `x ∈ eA` in `g(e)A`, and multiplies diagonally
+  have hloc : ∀ (c₁ c₂ : Γ → Aˣ) (x : A), e * x = x → ∀ g : Γ,
+      (c₁ g : A) * g • x * ↑(c₂ g)⁻¹ = g • e * ((c₁ g : A) * g • x * ↑(c₂ g)⁻¹) := by
+    intro c₁ c₂ x hx g
+    conv_rhs => rw [← mul_assoc, ← mul_assoc, hcen g (c₁ g : A), mul_assoc (c₁ g : A), ← smul_mul',
+      hx]
+  have hdiag : ∀ (c₁ c₂ : Γ → Aˣ) (x y : A), x * y = e → ∀ g : Γ,
+      (c₁ g : A) * g • x * ↑(c₂ g)⁻¹ * ((c₂ g : A) * g • y * ↑(c₁ g)⁻¹) = g • e := by
+    intro c₁ c₂ x y hxy g
+    simp only [mul_assoc, Units.inv_mul_cancel_left]
+    rw [← mul_assoc (g • x), ← smul_mul', hxy, ← mul_assoc, ← hcen, mul_assoc, Units.mul_inv,
+      mul_one]
+  have hprod : ∀ (c₁ c₂ : Γ → Aˣ) (x y : A), e * x = x → e * y = y → x * y = e →
+      (∑ q : Γ ⧸ D, (c₁ q.out : A) * q.out • x * ↑(c₂ q.out)⁻¹) *
+        (∑ q : Γ ⧸ D, (c₂ q.out : A) * q.out • y * ↑(c₁ q.out)⁻¹) = 1 := by
+    intro c₁ c₂ x y hx hy hxy
+    rw [sum_mul_sum, ← hsum]
+    refine sum_congr rfl fun q _ => ?_
+    rw [sum_eq_single q (fun r _ hr => ?_) (by simp), hdiag c₁ c₂ x y hxy]
+    rw [hloc c₁ c₂ x hx, hloc c₂ c₁ y hy, mul_assoc, hcomm, ← mul_assoc,
+      horth _ _ (hne q r (Ne.symm hr)), zero_mul]
+  have h₁ := hprod c' c z z' hz hz' hzz'
+  have h₂ := hprod c c' z' z hz' hz hz'z
+  have hzD : ∀ l ∈ D, (c' l : A) * l • z * ↑(c l)⁻¹ = z := fun l hl => by
+    rw [hD l hl, mul_assoc, Units.mul_inv, mul_one]
+  exact isCohomologous_of_fixed ⟨_, _, h₁, h₂⟩ (mul_smul_sum_cosets_twist hc hc' D z hzD)
+
+end Shapiro
+
+end Grothendieck.Folder46
