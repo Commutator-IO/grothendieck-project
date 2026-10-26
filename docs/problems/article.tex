@@ -40,7 +40,7 @@
 \newcommand{\leanst}{\entry{Lean.}}
 \newcommand{\settle}{\entry{What would settle it.}}
 
-\title{Open questions from Grothendieck's Montpellier notes:\\ sixteen statements a formalisation could not reach}
+\title{Open questions from Grothendieck's Montpellier notes:\\ fifteen statements a formalisation could not reach}
 \author{Michel Hua\\ \small Commutator, Paris\\ \small\texttt{michel@commutator.io} · ORCID 0009-0002-8304-0683}
 \date{Working paper, 25 October 2026}
 
@@ -51,7 +51,7 @@
 \maketitle
 
 \begin{abstract}
-The University of Montpellier has put online 178 folders of Alexandre Grothendieck's mathematical working notes. Since August 2026 an edition has transcribed 164 of them with a language model, restated each in current notation, searched the literature for the statements they contain, and formalised what it could in Lean~4 against Mathlib. Most of the statements that look new sit in theories Mathlib does not have yet: étale cohomology, topoi, stacks, abelian schemes, motives. This note collects sixteen of them for mathematicians. Each comes with its folder and page, the context, what the literature search found, the argument the page gives or sketches, the steps the edition added, and what would settle it. None of the statements has been checked by a specialist, and several may already be in print; a reference is as welcome as a proof or a counterexample.
+The University of Montpellier has put online 178 folders of Alexandre Grothendieck's mathematical working notes. Since August 2026 an edition has transcribed 164 of them with a language model, restated each in current notation, searched the literature for the statements they contain, and formalised what it could in Lean~4 against Mathlib. Most of the statements that look new sit in theories Mathlib does not have yet: étale cohomology, topoi, stacks, abelian schemes, motives. This note collects fifteen of them for mathematicians. Each comes with its folder and page, the context, what the literature search found, the argument the page gives or sketches, the steps the edition added, and what would settle it. None of the statements has been checked by a specialist, and several may already be in print; a reference is as welcome as a proof or a counterexample.
 \end{abstract}
 
 
@@ -199,20 +199,6 @@ Let $G$ be a simple adjoint group with Coxeter number $h$, Weyl group $W$, and $
 
 \section{Topoi and stacks}
 
-\begin{problem}[When is $\Ind(C)$ a topos?]\label{p:ind}
-Let $C$ be a small category with Karoubi envelope $C'$. Is $\Ind(C)$ a topos if and only if $C'$ has finite colimits and its canonical functor to sheaves for the finitary topology (covers refined by finite epimorphic families) preserves them? When $C$ has finite limits, is this equivalent to $C$ having finite colimits and satisfying condition~ST) of SGA~4 I~8.8~f)?
-\end{problem}
-
-\src{\fac{37}, p.~22, \emph{Rééditions SGA, EGA}, inventory dating 1967--1971: a typed \q{Exercice 2}, pencilled \q{SGA 4 VI 2}, listing six conditions as equivalent, with ink additions (the Karoubi envelope) and no proof. It adds that the topos is then \q{parfait} exactly when $C'$ has finite limits. The exercise is not in Exposé~VI of the re-edition of SGA~4.}
-
-\known That a topos of the form $\Ind(E_{\mathrm{fp}})$ is a locally finitely presentable category is Gabriel--Ulmer \cite{gabrielulmer}; the intrinsic conditions on $C$ were not found, in Johnstone's \emph{Elephant} D3.3 \cite{elephant} or elsewhere.
-
-\ideas The reading corrected one condition of the page: it asks for a left-exact \emph{right} adjoint where Giraud's criterion needs $\Ind(C)$ reflective in $\hat C$ with a left-exact \emph{left} adjoint. The reading checked only the equivalence of the topos condition with this corrected condition and with the Gabriel--Ulmer form; the intrinsic conditions, and the \q{parfait} clause, were not checked.
-
-\leanst Lean refutes the equivalence as stated: for the small category of finitely generated presheaves on the category with objects $\mathrm{top}$ and $\mathrm{pt}_n$ ($n \in \mathbf N$) and one arrow $\mathrm{pt}_n \to \mathrm{top}$ for each $n$, condition (ii) holds but Ind of it is not balanced, hence not a Grothendieck topos ((\texttt{not\_problem8} in \nolinkurl{lean/Grothendieck/Folder37.lean})).
-
-\settle A reference for the intrinsic characterisation, or a proof of its equivalence with the Gabriel--Ulmer form.
-
 \begin{problem}[Two classifying topoi that are not coherent]\label{p:noncoh}
 The theories of commutative rings with irreducible spectrum (nilradical prime) and of rings with zero-dimensional spectrum are geometric. The page says their classifying topoi, subtopoi of the coherent classifying topos of rings, are not coherent, their presenting topologies on affine schemes of finite type over $\mathbb Z$ not being quasi-compact. Is that right, and do these topoi have enough points?
 \end{problem}
@@ -333,7 +319,7 @@ Is a combinatorial arrangement of pseudolines in the real projective plane witho
 
 \section{How the list was made, and its limits}
 
-The sixteen problems were chosen from the register of findings among the rows still open and outside what Lean reached, and with a statement precise enough to be proved or refuted. Rows whose only interest is a slip on the page, a dating, or a statement now known to be in print were left out, as were the conjectures already in the published record (the standard conjectures, the section conjecture, the $p$-curvature conjecture, the homotopy hypothesis), which the companion paper discusses \cite{huacicm}.
+The fifteen problems were chosen from the register of findings among the rows still open and outside what Lean reached, and with a statement precise enough to be proved or refuted. Rows whose only interest is a slip on the page, a dating, or a statement now known to be in print were left out, as were the conjectures already in the published record (the standard conjectures, the section conjecture, the $p$-curvature conjecture, the homotopy hypothesis), which the companion paper discusses \cite{huacicm}.
 
 Three limits apply to every entry. The transcriptions are first passes by a language model, and doubtful readings are marked but not all checked against the facsimile; a statement may rest on a misread word, and the entries say where we know this. The literature searches were made by the same means, with full texts where they were open and abstracts otherwise; an entry that says \q{not found} reports a search, not an absence. And the steps marked \q{ours} have not been checked by a specialist.
 
@@ -357,7 +343,6 @@ This note was drafted with a language model (Claude Opus 5.5, Anthropic) from th
 \bibitem{friedmanlaza} R.~Friedman, R.~Laza, arXiv:2207.07566, 2022.
 \bibitem{gabberorgogozo} O.~Gabber, F.~Orgogozo, Sur la $p$-dimension des corps, \emph{Invent.\ Math.} 174 (2008), arXiv:0706.0671.
 \bibitem{gabberzavyalov} O.~Gabber, B.~Zavyalov, Algebraization techniques and rigid-analytic Artin--Grothendieck vanishing, \emph{Ann.\ Sci.\ ÉNS} (2026), arXiv:2402.08741.
-\bibitem{gabrielulmer} P.~Gabriel, F.~Ulmer, \emph{Lokal präsentierbare Kategorien}, LNM~221, Springer, 1971.
 \bibitem{hls} A.~Hatcher, P.~Lochak, L.~Schneps, On the Teichmüller tower of mapping class groups, \emph{J.\ reine angew.\ Math.} 521 (2000), 1--24.
 \bibitem{huacicm} M.~Hua, Formalising a mathematician's working notes: Lean proofs from the Grothendieck archive, preprint, 2026, \url{https://grothendieck.commutator.io/article/grothendieck-cicm.pdf}.
 \bibitem{illusie2023} L.~Illusie, Revisiting deformations of truncated Barsotti--Tate groups, 2023.
