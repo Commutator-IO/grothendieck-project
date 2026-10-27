@@ -559,84 +559,104 @@ const MTP_BOXES = GROUPS.map((g) => ({
   folders: g.cotes.length,
   pages: g.cotes.reduce((a, c) => a + (PAGES_OF.get(c) ?? 0), 0),
 }));
-const BOX_GREY = '#cdc6b8';
+const SHEET_CM = 0.01; // a sheet of 80 g paper is about a tenth of a millimetre thick
+const A4 = { w: 21, d: 29.7 }; // cm
 
-function Boxes() {
-  const [sel, setSel] = useState<string | null>(null);
-  const fmt = (n: number) => n.toLocaleString('en-US');
-  const max = Math.max(...MTP_BOXES.map((b) => b.pages), ...BNF_BOXES.map((b) => b.leaves));
-  const BAR = 230;
-  const ROW = 15;
-  const LABEL = 190;
-  const W = LABEL + BAR + 48;
-  const x = (n: number) => (n / max) * BAR;
-  const mtpTotal = MTP_BOXES.reduce((a, b) => a + b.pages, 0);
-  const bnfTotal = BNF_BOXES.reduce((a, b) => a + b.leaves, 0);
-  const cut = (t: string) => (t.length > 32 ? t.slice(0, 31) + '…' : t);
-  const bnfFill = (b: BnfBox) => (b.maths === 'whole' ? DARK : b.maths === 'part' ? LIGHT : BOX_GREY);
-  const column = (
-    label: string,
-    rows: { key: string; name: string; n: number; fill: string; detail: string }[],
-  ) => (
+interface RoomBox {
+  key: string;
+  label: string;
+  sheets: number;
+  fill: string;
+  detail: string;
+}
+
+/** Shade a hex colour: f < 1 darkens, f > 1 lightens. */
+function shade(hex: string, f: number): string {
+  const n = parseInt(hex.slice(1), 16);
+  const c = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) =>
+    Math.round(f < 1 ? v * f : v + (255 - v) * (f - 1)),
+  );
+  return `rgb(${c.join(',')})`;
+}
+
+/** One room seen in isometric projection: A4 boxes on a floor grid, each as tall as its stack of paper. */
+function Room({ title, boxes, cols, rows, sel, onSel }: { title: string; boxes: RoomBox[]; cols: number; rows: number; sel: string | null; onSel: (k: string | null) => void }) {
+  const GAP = 8; // cm between boxes
+  const PX = 1.15; // px per cm
+  const cos = Math.cos(Math.PI / 6);
+  const sin = Math.sin(Math.PI / 6);
+  const floorW = cols * (A4.w + GAP) + GAP;
+  const floorD = rows * (A4.d + GAP) + GAP;
+  const P = (x: number, y: number, z: number) => [(x - y) * cos * PX, ((x + y) * sin - z) * PX] as const;
+  const maxH = 30; // cm of headroom drawn above the floor
+  const xs = [P(floorW, 0, 0)[0], P(0, floorD, 0)[0]];
+  const minX = Math.min(...xs, 0);
+  const W = Math.max(...xs, 0) - minX + 16;
+  const top = P(0, 0, maxH)[1];
+  const H = P(floorW, floorD, 0)[1] - top + 16;
+  const pt = (x: number, y: number, z: number) => {
+    const [a, b] = P(x, y, z);
+    return `${(a - minX + 8).toFixed(1)},${(b - top + 8).toFixed(1)}`;
+  };
+  const placed = boxes.map((b, i) => ({ b, cx: GAP + (i % cols) * (A4.w + GAP), cy: GAP + Math.floor(i / cols) * (A4.d + GAP) }));
+  // Paint back to front.
+  const order = [...placed].sort((p, q) => p.cx + p.cy - (q.cx + q.cy));
+  return (
     <figure className="min-w-0">
-      <figcaption className="text-[12.5px] font-semibold text-ink-800">{label}</figcaption>
-      <svg
-        viewBox={`0 0 ${W} ${rows.length * ROW + 6}`}
-        className="mt-1 w-full rounded-[var(--radius-card)] border border-ink-200 bg-white"
-        role="img"
-        aria-label={label}
-        onMouseLeave={() => setSel(null)}
-      >
-        {rows.map((r, i) => {
-          const y = i * ROW + 4;
-          const on = sel === null || sel === r.key;
+      <figcaption className="text-[12.5px] font-semibold text-ink-800">{title}</figcaption>
+      <svg viewBox={`0 0 ${W.toFixed(0)} ${H.toFixed(0)}`} className="mt-1 w-full rounded-[var(--radius-card)] border border-ink-200 bg-white" role="img" aria-label={title} onMouseLeave={() => onSel(null)}>
+        <polygon points={[pt(0, 0, 0), pt(floorW, 0, 0), pt(floorW, floorD, 0), pt(0, floorD, 0)].join(' ')} fill="#f4f1ea" stroke="#d9d3c7" />
+        <polygon points={[pt(0, 0, 0), pt(floorW, 0, 0), pt(floorW, 0, maxH), pt(0, 0, maxH)].join(' ')} fill="#faf8f4" stroke="#e4dfd5" />
+        <polygon points={[pt(0, 0, 0), pt(0, floorD, 0), pt(0, floorD, maxH), pt(0, 0, maxH)].join(' ')} fill="#f7f4ee" stroke="#e4dfd5" />
+        {order.map(({ b, cx, cy }) => {
+          const h = Math.max(0.4, b.sheets * SHEET_CM);
+          const x0 = cx, x1 = cx + A4.w, y0 = cy, y1 = cy + A4.d;
+          const on = sel === null || sel === b.key;
           return (
-            <g key={r.key} opacity={on ? 1 : 0.35} onMouseEnter={() => setSel(r.key)} style={{ cursor: 'pointer' }}>
-              <title>{r.detail}</title>
-              <text x={LABEL - 6} y={y + 9.5} textAnchor="end" style={{ fontSize: 9.5, fill: 'var(--color-ink-700)' }}>
-                {cut(r.name)}
-              </text>
-              <rect x={LABEL} y={y + 1} width={Math.max(1.5, x(r.n))} height={ROW - 4} rx={1.5} fill={r.fill} />
-              <text x={LABEL + x(r.n) + 4} y={y + 9.5} className="tabular" style={{ fontSize: 9, fill: 'var(--color-ink-500)' }}>
-                {fmt(r.n)}
-              </text>
+            <g key={b.key} opacity={on ? 1 : 0.3} onMouseEnter={() => onSel(b.key)} style={{ cursor: 'pointer' }}>
+              <title>{b.detail}</title>
+              <polygon points={[pt(x1, y0, 0), pt(x1, y1, 0), pt(x1, y1, h), pt(x1, y0, h)].join(' ')} fill={shade(b.fill, 0.72)} />
+              <polygon points={[pt(x0, y1, 0), pt(x1, y1, 0), pt(x1, y1, h), pt(x0, y1, h)].join(' ')} fill={shade(b.fill, 0.88)} />
+              <polygon points={[pt(x0, y0, h), pt(x1, y0, h), pt(x1, y1, h), pt(x0, y1, h)].join(' ')} fill={shade(b.fill, 1.25)} stroke={shade(b.fill, 0.6)} strokeWidth={0.4} />
             </g>
           );
         })}
       </svg>
     </figure>
   );
-  const detail =
-    sel === null
-      ? null
-      : sel.startsWith('m:')
-        ? (() => {
-            const b = MTP_BOXES.find((m) => 'm:' + m.id === sel)!;
-            return `Montpellier, ${GROUPS.find((g) => g.id === b.id)!.title}: ${b.folders} folder${b.folders > 1 ? 's' : ''}, ${fmt(b.pages)} pages`;
-          })()
-        : (() => {
-            const b = BNF_BOXES.find((m) => 'b:' + m.box === sel)!;
-            return `BnF, NAF 29093 (${b.box}), ${b.title}${b.years ? `, ${b.years}` : ''}: ${fmt(b.leaves)} leaves`;
-          })();
+}
+
+function Boxes() {
+  const [sel, setSel] = useState<string | null>(null);
+  const fmt = (n: number) => n.toLocaleString('en-US');
+  const mtpTotal = MTP_BOXES.reduce((a, b) => a + b.pages, 0);
+  const bnfTotal = BNF_BOXES.reduce((a, b) => a + b.leaves, 0);
+  const CARD = '#b89b72';
+  const bnfFill = (b: BnfBox) => (b.maths === 'whole' ? DARK : b.maths === 'part' ? LIGHT : CARD);
+  const mtp: RoomBox[] = MTP_BOXES.map((b) => ({ key: 'm:' + b.id, label: b.title, sheets: b.pages, fill: DARK, detail: `${b.title}: ${b.folders} folder${b.folders > 1 ? 's' : ''}, ${fmt(b.pages)} pages, a stack of about ${Math.round(b.pages * SHEET_CM)} cm` }));
+  const bnf: RoomBox[] = BNF_BOXES.map((b) => ({ key: 'b:' + b.box, label: `(${b.box}) ${b.title}`, sheets: b.leaves, fill: bnfFill(b), detail: `NAF 29093 (${b.box}), ${b.title}${b.years ? `, ${b.years}` : ''}: ${fmt(b.leaves)} leaves, a stack of about ${Math.round(b.leaves * SHEET_CM)} cm` }));
+  const all = [...mtp, ...bnf];
+  const cur = all.find((b) => b.key === sel);
   return (
     <section className="mt-12">
-      <H2 id="boxes">The two fonds, box by box</H2>
+      <H2 id="boxes">The two fonds as two rooms of boxes</H2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
-        Montpellier groups its {COTES.length} folders into {GROUPS.length} thematic groups ({fmt(mtpTotal)} pages by
-        its inventory); the{' '}
+        Each box is an A4 sheet seen from above, as tall as its stack of paper at a tenth of a millimetre a sheet. On
+        the left, Montpellier's {GROUPS.length} thematic groups ({COTES.length} folders, {fmt(mtpTotal)} pages by its
+        inventory); on the right, the{' '}
         <a href={BNF} target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:text-brand-700">
           BnF
-        </a>{' '}
-        keeps the later writings, 1987 to 1999, in {BNF_BOXES.length} boxes ({fmt(bnfTotal)} leaves by its notices).
-        The two archives do not count alike: Montpellier counts pages, the BnF counts leaves, and a leaf written on both
-        sides is two pages. The bars share one scale. Montpellier is mathematics throughout; at the BnF only box (3) is
-        a mathematical text, and boxes (40), (42) and (43) hold some mathematics among other notes.
+        </a>
+        's {BNF_BOXES.length} boxes of later writings, 1987 to 1999 ({fmt(bnfTotal)} leaves by its notices). Both rooms
+        are drawn to the same scale. Montpellier counts pages and the BnF counts leaves, and a leaf written on both sides
+        is two pages, so a Montpellier stack may be up to twice too tall. Montpellier is mathematics throughout; at the
+        BnF only box (3) is a mathematical text, and boxes (40), (42) and (43) hold some mathematics among other notes.
       </p>
       <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[12px] text-ink-600">
         {[
           [DARK, 'Mathematics'],
           [LIGHT, 'Partly mathematics (BnF)'],
-          [BOX_GREY, 'Other writings (BnF)'],
+          [CARD, 'Other writings (BnF)'],
         ].map(([c, l]) => (
           <span key={l} className="inline-flex items-center gap-1.5">
             <svg width="12" height="10" aria-hidden="true">
@@ -647,17 +667,11 @@ function Boxes() {
         ))}
       </div>
       <div className="mt-3 grid gap-5 md:grid-cols-2">
-        {column(
-          `Montpellier: ${GROUPS.length} groups, in pages`,
-          MTP_BOXES.map((b) => ({ key: 'm:' + b.id, name: b.title, n: b.pages, fill: DARK, detail: `${b.title}: ${fmt(b.pages)} pages` })),
-        )}
-        {column(
-          `BnF, NAF 29093: ${BNF_BOXES.length} boxes, in leaves`,
-          BNF_BOXES.map((b) => ({ key: 'b:' + b.box, name: `(${b.box}) ${b.title}`, n: b.leaves, fill: bnfFill(b), detail: `(${b.box}) ${b.title}: ${fmt(b.leaves)} leaves` })),
-        )}
+        <Room title={`Montpellier: ${GROUPS.length} groups`} boxes={mtp} cols={7} rows={7} sel={sel} onSel={setSel} />
+        <Room title={`BnF, NAF 29093: ${BNF_BOXES.length} boxes`} boxes={bnf} cols={7} rows={7} sel={sel} onSel={setSel} />
       </div>
       <p className="mt-2 min-h-[1.5em] text-[12.5px] text-ink-600">
-        {detail ?? <span className="text-ink-400">Hover a bar for the group or box.</span>}
+        {cur ? cur.detail : <span className="text-ink-400">Hover a box for the group or box, and the height of its stack.</span>}
       </p>
     </section>
   );
