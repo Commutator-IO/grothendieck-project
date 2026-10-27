@@ -579,59 +579,86 @@ function shade(hex: string, f: number): string {
   return `rgb(${c.join(',')})`;
 }
 
-/** One room seen in isometric projection: A4 boxes on a floor grid, each as tall as its stack of paper. */
-function Room({ title, boxes, cols, rows, sel, onSel }: { title: string; boxes: RoomBox[]; cols: number; rows: number; sel: string | null; onSel: (k: string | null) => void }) {
-  const GAP = 8; // cm between boxes
-  const PX = 1.15; // px per cm
+/**
+ * One bay of library shelving in isometric projection. The boxes have an A4 footprint and lie flat,
+ * as tall as their stack of paper; they are stacked tallest first into piles that fit between two
+ * shelves, and the piles fill the shelves from the bottom, left to right, bay after bay.
+ */
+const SHELF = { w: 100, d: 32, gap: 37, levels: 6 }; // cm: a bay 1 m wide, shelves 37 cm apart
+const CEILING = 250; // cm: a typical stack-room ceiling, above shelving about 2.2 m tall
+
+function Room({ title, boxes, bays, sel, onSel }: { title: string; boxes: RoomBox[]; bays: number; sel: string | null; onSel: (k: string | null) => void }) {
+  const PX = 1; // px per cm
   const cos = Math.cos(Math.PI / 6);
   const sin = Math.sin(Math.PI / 6);
-  const floorW = cols * (A4.w + GAP) + GAP;
-  const floorD = rows * (A4.d + GAP) + GAP;
+  const pileMax = SHELF.gap - 4; // headroom under the next shelf
+  const perShelf = Math.floor(SHELF.w / (A4.w + 3));
+  const floorW = bays * SHELF.w;
+  const floorD = SHELF.d + 40;
   const P = (x: number, y: number, z: number) => [(x - y) * cos * PX, ((x + y) * sin - z) * PX] as const;
-  const maxH = 40; // cm: the height a pile may reach, and the headroom drawn
-  const xs = [P(floorW, 0, 0)[0], P(0, floorD, 0)[0]];
-  const minX = Math.min(...xs, 0);
-  const W = Math.max(...xs, 0) - minX + 16;
-  const top = P(0, 0, maxH)[1];
+  const xs = [P(floorW, 0, 0)[0], P(0, floorD, 0)[0], 0];
+  const minX = Math.min(...xs);
+  const W = Math.max(...xs) - minX + 16;
+  const top = P(0, 0, CEILING)[1];
   const H = P(floorW, floorD, 0)[1] - top + 16;
   const pt = (x: number, y: number, z: number) => {
     const [a, b] = P(x, y, z);
     return `${(a - minX + 8).toFixed(1)},${(b - top + 8).toFixed(1)}`;
   };
-  // Stack the boxes into piles no taller than the room (first fit, tallest first), then set the piles on the floor grid.
+  const poly = (ps: [number, number, number][]) => ps.map((q) => pt(...q)).join(' ');
+  // Piles that fit between two shelves.
   const piles: { boxes: { b: RoomBox; z: number; h: number }[]; top: number }[] = [];
   for (const b of [...boxes].sort((p, q) => q.sheets - p.sheets)) {
     const h = Math.max(0.4, b.sheets * SHEET_CM);
-    const pile = piles.find((p) => p.top + h <= maxH);
+    const pile = piles.find((p) => p.top + h <= pileMax);
     if (pile) {
       pile.boxes.push({ b, z: pile.top, h });
       pile.top += h;
     } else piles.push({ boxes: [{ b, z: 0, h }], top: h });
   }
-  const placed = piles.flatMap((p, i) =>
-    p.boxes.map((x) => ({ ...x, cx: GAP + (i % cols) * (A4.w + GAP), cy: GAP + Math.floor(i / cols) * (A4.d + GAP) })),
-  );
-  // Paint back to front, and bottom to top within a pile.
-  const order = [...placed].sort((p, q) => p.cx + p.cy - (q.cx + q.cy) || p.z - q.z);
+  const placed = piles.flatMap((p, i) => {
+    const shelf = Math.floor(i / perShelf);
+    const bay = Math.floor(shelf / SHELF.levels);
+    const level = shelf % SHELF.levels;
+    const cx = bay * SHELF.w + 2 + (i % perShelf) * (A4.w + 3);
+    return p.boxes.map((x) => ({ ...x, cx, cy: 1, z: x.z + level * SHELF.gap + 2 }));
+  });
+  const order = [...placed].sort((p, q) => p.cx - q.cx || p.z - q.z);
+  const shelfH = SHELF.levels * SHELF.gap;
   return (
-    <figure className="min-w-0">
+    <figure className="min-w-0 max-w-[300px]">
       <figcaption className="text-[12.5px] font-semibold text-ink-800">{title}</figcaption>
       <svg viewBox={`0 0 ${W.toFixed(0)} ${H.toFixed(0)}`} className="mt-1 w-full rounded-[var(--radius-card)] border border-ink-200 bg-white" role="img" aria-label={title} onMouseLeave={() => onSel(null)}>
-        <polygon points={[pt(0, 0, 0), pt(floorW, 0, 0), pt(floorW, floorD, 0), pt(0, floorD, 0)].join(' ')} fill="#f4f1ea" stroke="#d9d3c7" />
-        <polygon points={[pt(0, 0, 0), pt(floorW, 0, 0), pt(floorW, 0, maxH), pt(0, 0, maxH)].join(' ')} fill="#faf8f4" stroke="#e4dfd5" />
-        <polygon points={[pt(0, 0, 0), pt(0, floorD, 0), pt(0, floorD, maxH), pt(0, 0, maxH)].join(' ')} fill="#f7f4ee" stroke="#e4dfd5" />
+        <polygon points={poly([[0, 0, 0], [floorW, 0, 0], [floorW, floorD, 0], [0, floorD, 0]])} fill="#f4f1ea" stroke="#d9d3c7" />
+        <polygon points={poly([[0, 0, 0], [floorW, 0, 0], [floorW, 0, CEILING], [0, 0, CEILING]])} fill="#faf8f4" stroke="#e4dfd5" />
+        <polygon points={poly([[0, 0, 0], [0, floorD, 0], [0, floorD, CEILING], [0, 0, CEILING]])} fill="#f7f4ee" stroke="#e4dfd5" />
+        <text x={10} y={18} style={{ fontSize: 11, fill: 'var(--color-ink-400)' }}>ceiling ≈ {CEILING / 100} m</text>
+        {/* uprights at the back */}
+        {Array.from({ length: bays + 1 }, (_, k) => (
+          <line key={'u' + k} x1={pt(k * SHELF.w, 0, 0).split(',')[0]} y1={pt(k * SHELF.w, 0, 0).split(',')[1]} x2={pt(k * SHELF.w, 0, shelfH).split(',')[0]} y2={pt(k * SHELF.w, 0, shelfH).split(',')[1]} stroke="#9a9184" strokeWidth={1.2} />
+        ))}
+        {/* shelf boards */}
+        {Array.from({ length: SHELF.levels + 1 }, (_, l) =>
+          Array.from({ length: bays }, (_, k) => (
+            <polygon key={`s${l}-${k}`} points={poly([[k * SHELF.w, 0, l * SHELF.gap], [(k + 1) * SHELF.w, 0, l * SHELF.gap], [(k + 1) * SHELF.w, SHELF.d, l * SHELF.gap], [k * SHELF.w, SHELF.d, l * SHELF.gap]])} fill="#e6e1d8" stroke="#b9b1a4" strokeWidth={0.6} />
+          )),
+        )}
         {order.map(({ b, cx, cy, z, h }) => {
           const x0 = cx, x1 = cx + A4.w, y0 = cy, y1 = cy + A4.d;
           const on = sel === null || sel === b.key;
           return (
             <g key={b.key} opacity={on ? 1 : 0.3} onMouseEnter={() => onSel(b.key)} style={{ cursor: 'pointer' }}>
               <title>{b.detail}</title>
-              <polygon points={[pt(x1, y0, z), pt(x1, y1, z), pt(x1, y1, z + h), pt(x1, y0, z + h)].join(' ')} fill={shade(b.fill, 0.72)} />
-              <polygon points={[pt(x0, y1, z), pt(x1, y1, z), pt(x1, y1, z + h), pt(x0, y1, z + h)].join(' ')} fill={shade(b.fill, 0.88)} />
-              <polygon points={[pt(x0, y0, z + h), pt(x1, y0, z + h), pt(x1, y1, z + h), pt(x0, y1, z + h)].join(' ')} fill={shade(b.fill, 1.25)} stroke={shade(b.fill, 0.6)} strokeWidth={0.4} />
+              <polygon points={poly([[x1, y0, z], [x1, y1, z], [x1, y1, z + h], [x1, y0, z + h]])} fill={shade(b.fill, 0.72)} />
+              <polygon points={poly([[x0, y1, z], [x1, y1, z], [x1, y1, z + h], [x0, y1, z + h]])} fill={shade(b.fill, 0.88)} />
+              <polygon points={poly([[x0, y0, z + h], [x1, y0, z + h], [x1, y1, z + h], [x0, y1, z + h]])} fill={shade(b.fill, 1.25)} stroke={shade(b.fill, 0.6)} strokeWidth={0.4} />
             </g>
           );
         })}
+        {/* front uprights */}
+        {Array.from({ length: bays + 1 }, (_, k) => (
+          <line key={'f' + k} x1={pt(k * SHELF.w, SHELF.d, 0).split(',')[0]} y1={pt(k * SHELF.w, SHELF.d, 0).split(',')[1]} x2={pt(k * SHELF.w, SHELF.d, shelfH).split(',')[0]} y2={pt(k * SHELF.w, SHELF.d, shelfH).split(',')[1]} stroke="#9a9184" strokeWidth={1.4} />
+        ))}
       </svg>
     </figure>
   );
@@ -652,7 +679,7 @@ function Boxes() {
     <section className="mt-12">
       <H2 id="boxes">The two fonds as two rooms of boxes</H2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
-        Each box has the footprint of an A4 sheet and is as tall as its stack of paper, at a tenth of a millimetre a sheet; the boxes are stacked, tallest first, into piles of at most 40 cm, to take as little floor as possible. On
+        Each box has the footprint of an A4 sheet and is as tall as its stack of paper, at a tenth of a millimetre a sheet; the boxes lie flat on the shelves of a 1 m bay (shelves 37 cm apart, about 2.2 m of shelving under a stack-room ceiling of about 2.5 m, both typical figures, not the archives' own), stacked tallest first between two shelves. On
         the left, Montpellier's {GROUPS.length} thematic groups ({COTES.length} folders, {fmt(mtpTotal)} pages by its
         inventory); on the right, the{' '}
         <a href={BNF} target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:text-brand-700">
@@ -677,9 +704,9 @@ function Boxes() {
           </span>
         ))}
       </div>
-      <div className="mt-3 grid gap-5 md:grid-cols-2">
-        <Room title={`Montpellier: ${GROUPS.length} groups`} boxes={mtp} cols={5} rows={4} sel={sel} onSel={setSel} />
-        <Room title={`BnF, NAF 29093: ${BNF_BOXES.length} boxes`} boxes={bnf} cols={5} rows={4} sel={sel} onSel={setSel} />
+      <div className="mt-3 flex flex-wrap gap-8">
+        <Room title={`Montpellier: ${GROUPS.length} groups`} boxes={mtp} bays={1} sel={sel} onSel={setSel} />
+        <Room title={`BnF, NAF 29093: ${BNF_BOXES.length} boxes`} boxes={bnf} bays={1} sel={sel} onSel={setSel} />
       </div>
       <p className="mt-2 min-h-[1.5em] text-[12.5px] text-ink-600">
         {cur ? cur.detail : <span className="text-ink-400">Hover a box for the group or box, and the height of its stack.</span>}
