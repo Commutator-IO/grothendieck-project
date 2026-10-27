@@ -580,36 +580,32 @@ function shade(hex: string, f: number): string {
 }
 
 /**
- * One bay of library shelving in isometric projection. The boxes have an A4 footprint and lie flat,
- * as tall as their stack of paper; they are stacked tallest first into piles that fit between two
- * shelves, and the piles fill the shelves from the bottom, left to right, bay after bay.
+ * Library shelving seen in perspective, from the front, by a person standing in the aisle. The boxes
+ * have an A4 footprint and lie flat, as tall as their stack of paper; they are stacked tallest first
+ * into piles that fit between two shelves, and fill first the shelves within easy reach. Faces are
+ * painted far to near, so a shelf hides what lies behind it.
  */
-const SHELF = { w: 100, d: 32, gap: 37, levels: 5 }; // cm: a bay 1 m wide, shelves 37 cm apart, about 1.85 m tall
-const WALL = 200; // cm of wall drawn behind the bay
+const SHELF = { w: 100, d: 32, gap: 37, levels: 5, board: 2 }; // cm: bays 1 m wide, shelves 37 cm apart, about 1.85 m tall
 // Shelves filled first: those within easy reach of a person of average height (about 0.75 m to 1.5 m), then the others.
 const REACH_ORDER = [2, 3, 1, 4, 0];
+const EYE = { z: 160, dist: 240 }; // cm: eye height, and distance from the front of the shelving
+
+type V3 = [number, number, number];
 
 function Room({ title, sets, sel, onSel }: { title: string; sets: { label: string; boxes: RoomBox[] }[]; sel: string | null; onSel: (k: string | null) => void }) {
   const bays = sets.length;
-  const PX = 1; // px per cm
-  const cos = Math.cos(Math.PI / 6);
-  const sin = Math.sin(Math.PI / 6);
-  const pileMax = SHELF.gap - 4; // headroom under the next shelf
+  const width = bays * SHELF.w;
+  const shelfH = SHELF.levels * SHELF.gap;
+  const pileMax = SHELF.gap - SHELF.board - 3;
   const perShelf = Math.floor(SHELF.w / (A4.w + 3));
-  const floorW = bays * SHELF.w;
-  const floorD = SHELF.d + 40;
-  const P = (x: number, y: number, z: number) => [(x - y) * cos * PX, ((x + y) * sin - z) * PX] as const;
-  const xs = [P(floorW, 0, 0)[0], P(0, floorD, 0)[0], 0];
-  const minX = Math.min(...xs);
-  const W = Math.max(...xs) - minX + 16;
-  const top = P(0, 0, WALL)[1];
-  const H = P(floorW, floorD, 0)[1] - top + 16;
-  const pt = (x: number, y: number, z: number) => {
-    const [a, b] = P(x, y, z);
-    return `${(a - minX + 8).toFixed(1)},${(b - top + 8).toFixed(1)}`;
+  const eyeX = -width * 0.15; // standing a little to the left of the shelving, for depth
+  const F = 330; // focal length, px
+  // x: along the shelving, y: depth away from the viewer, z: up.
+  const proj = ([x, y, z]: V3): [number, number] => {
+    const k = F / (EYE.dist + y);
+    return [(x - eyeX) * k, (EYE.z - z) * k];
   };
-  const poly = (ps: [number, number, number][]) => ps.map((q) => pt(...q)).join(' ');
-  // For each set, piles that fit between two shelves, laid out in its own bay.
+  // Piles per set, in its own bay.
   const placed = sets.flatMap((set, bay) => {
     const piles: { boxes: { b: RoomBox; z: number; h: number }[]; top: number }[] = [];
     for (const b of [...set.boxes].sort((p, q) => q.sheets - p.sheets)) {
@@ -622,55 +618,76 @@ function Room({ title, sets, sel, onSel }: { title: string; sets: { label: strin
     }
     return piles.flatMap((p, i) => {
       const level = REACH_ORDER[Math.floor(i / perShelf) % SHELF.levels];
-      const cx = bay * SHELF.w + 2 + (i % perShelf) * (A4.w + 3);
-      return p.boxes.map((x) => ({ ...x, level, cx, cy: 1, z: x.z + level * SHELF.gap + 2 }));
+      const x0 = bay * SHELF.w + 3 + (i % perShelf) * (A4.w + 3);
+      return p.boxes.map((x) => ({ ...x, x0, z: x.z + level * SHELF.gap + SHELF.board }));
     });
   });
-  const order = [...placed].sort((p, q) => p.cx - q.cx || p.z - q.z);
-  const shelfH = SHELF.levels * SHELF.gap;
+  type Face = { pts: V3[]; fill: string; stroke?: string; key?: string; detail?: string; depth: number };
+  const faces: Face[] = [];
+  const add = (pts: V3[], fill: string, extra: Partial<Face> = {}) => {
+    const c = pts.reduce((a, q) => [a[0] + q[0] / pts.length, a[1] + q[1] / pts.length, a[2] + q[2] / pts.length], [0, 0, 0]);
+    faces.push({ pts, fill, depth: Math.hypot(c[0] - eyeX, c[1] + EYE.dist, c[2] - EYE.z), ...extra });
+  };
+  // A box (or board) as visible faces.
+  const cuboid = (x0: number, x1: number, y0: number, y1: number, z0: number, z1: number, base: string, extra: Partial<Face> = {}) => {
+    add([[x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1]], shade(base, 0.9), extra); // front
+    if (EYE.z > z1) add([[x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1]], shade(base, 1.2), extra); // top
+    if (EYE.z < z0) add([[x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0]], shade(base, 0.6), extra); // underside
+    if (eyeX < x0) add([[x0, y0, z0], [x0, y1, z0], [x0, y1, z1], [x0, y0, z1]], shade(base, 0.75), extra); // left side
+    if (eyeX > x1) add([[x1, y0, z0], [x1, y1, z0], [x1, y1, z1], [x1, y0, z1]], shade(base, 0.75), extra); // right side
+  };
+  const WOOD = '#d9d1c3';
+  for (let l = 0; l <= SHELF.levels; l++) cuboid(0, width, 0, SHELF.d, l * SHELF.gap, l * SHELF.gap + SHELF.board, WOOD);
+  for (const p of placed) {
+    cuboid(p.x0, p.x0 + A4.w, 1, 1 + A4.d, p.z, p.z + p.h, p.b.fill, { key: p.b.key, detail: p.b.detail, stroke: shade(p.b.fill, 0.6) });
+  }
+  faces.sort((a, b) => b.depth - a.depth);
+  // The uprights: back posts behind everything, front posts in front of everything.
+  const post = (x: number, y: number): V3[] => [[x - 1.5, y, 0], [x + 1.5, y, 0], [x + 1.5, y, shelfH + SHELF.board], [x - 1.5, y, shelfH + SHELF.board]];
+  const backPosts = Array.from({ length: bays + 1 }, (_, k) => post(k * SHELF.w, SHELF.d));
+  const frontPosts = Array.from({ length: bays + 1 }, (_, k) => post(k * SHELF.w, 0));
+  // Frame: the back wall and the floor.
+  const wall: V3[] = [[-40, SHELF.d + 2, 0], [width + 40, SHELF.d + 2, 0], [width + 40, SHELF.d + 2, 210], [-40, SHELF.d + 2, 210]];
+  const floor: V3[] = [[-40, -60, 0], [width + 40, -60, 0], [width + 40, SHELF.d + 2, 0], [-40, SHELF.d + 2, 0]];
+  const all = [...wall, ...floor, ...faces.flatMap((f) => f.pts)].map(proj);
+  const minX = Math.min(...all.map((q) => q[0])) - 6;
+  const minY = Math.min(...all.map((q) => q[1])) - 18;
+  const W = Math.max(...all.map((q) => q[0])) - minX + 6;
+  const H = Math.max(...all.map((q) => q[1])) - minY + 6;
+  const pts = (q: V3[]) => q.map((v) => proj(v)).map(([a, b]) => `${(a - minX).toFixed(1)},${(b - minY).toFixed(1)}`).join(' ');
   return (
-    <figure className="w-full max-w-[520px]">
+    <figure className="w-full max-w-[560px]">
       {title && <figcaption className="text-[12.5px] font-semibold text-ink-800">{title}</figcaption>}
       <svg viewBox={`0 0 ${W.toFixed(0)} ${H.toFixed(0)}`} className="mt-1 w-full rounded-[var(--radius-card)] border border-ink-200 bg-white" role="img" aria-label={title || sets.map((x) => x.label).join(', ')} onMouseLeave={() => onSel(null)}>
-        <polygon points={poly([[0, 0, 0], [floorW, 0, 0], [floorW, floorD, 0], [0, floorD, 0]])} fill="#f4f1ea" stroke="#d9d3c7" />
-        <polygon points={poly([[0, 0, 0], [floorW, 0, 0], [floorW, 0, WALL], [0, 0, WALL]])} fill="#faf8f4" stroke="#e4dfd5" />
-        <polygon points={poly([[0, 0, 0], [0, floorD, 0], [0, floorD, WALL], [0, 0, WALL]])} fill="#f7f4ee" stroke="#e4dfd5" />
-        {/* uprights at the back */}
-        {Array.from({ length: bays + 1 }, (_, k) => (
-          <line key={'u' + k} x1={pt(k * SHELF.w, 0, 0).split(',')[0]} y1={pt(k * SHELF.w, 0, 0).split(',')[1]} x2={pt(k * SHELF.w, 0, shelfH).split(',')[0]} y2={pt(k * SHELF.w, 0, shelfH).split(',')[1]} stroke="#9a9184" strokeWidth={1.2} />
-        ))}
-        {/* Each shelf board, then the boxes standing on it; the next board up is drawn over them, so no box crosses a shelf. */}
-        {Array.from({ length: SHELF.levels + 1 }, (_, l) => (
-          <g key={'lvl' + l}>
-            {Array.from({ length: bays }, (_, k) => (
-              <polygon key={`s${l}-${k}`} points={poly([[k * SHELF.w, 0, l * SHELF.gap], [(k + 1) * SHELF.w, 0, l * SHELF.gap], [(k + 1) * SHELF.w, SHELF.d, l * SHELF.gap], [k * SHELF.w, SHELF.d, l * SHELF.gap]])} fill="#e6e1d8" stroke="#b9b1a4" strokeWidth={0.6} />
-            ))}
-            {order.filter((o) => o.level === l).map(({ b, cx, cy, z, h }) => {
-              const x0 = cx, x1 = cx + A4.w, y0 = cy, y1 = cy + A4.d;
-              const on = sel === null || sel === b.key;
-              return (
-                <g key={b.key} opacity={on ? 1 : 0.3} onMouseEnter={() => onSel(b.key)} style={{ cursor: 'pointer' }}>
-                  <title>{b.detail}</title>
-                  <polygon points={poly([[x1, y0, z], [x1, y1, z], [x1, y1, z + h], [x1, y0, z + h]])} fill={shade(b.fill, 0.72)} />
-                  <polygon points={poly([[x0, y1, z], [x1, y1, z], [x1, y1, z + h], [x0, y1, z + h]])} fill={shade(b.fill, 0.88)} />
-                  <polygon points={poly([[x0, y0, z + h], [x1, y0, z + h], [x1, y1, z + h], [x0, y1, z + h]])} fill={shade(b.fill, 1.25)} stroke={shade(b.fill, 0.6)} strokeWidth={0.4} />
-                </g>
-              );
-            })}
-          </g>
-        ))}
-        {sets.map((set, k) => {
-          const [lx, ly] = pt(k * SHELF.w + SHELF.w / 2, SHELF.d, SHELF.levels * SHELF.gap + 14).split(',').map(Number);
+        <polygon points={pts(floor)} fill="#f2eee6" />
+        <polygon points={pts(wall)} fill="#faf8f4" stroke="#e4dfd5" />
+        {backPosts.map((q, k) => <polygon key={'bp' + k} points={pts(q)} fill="#b9b0a2" />)}
+        {faces.map((f, n) => {
+          const on = !f.key || sel === null || sel === f.key;
           return (
-            <text key={'lab' + k} x={lx} y={ly} textAnchor="middle" style={{ fontSize: 8.5, fontWeight: 600, fill: 'var(--color-ink-700)' }}>
+            <polygon
+              key={n}
+              points={pts(f.pts)}
+              fill={f.fill}
+              stroke={f.stroke ?? '#b3aa9c'}
+              strokeWidth={0.4}
+              opacity={on ? 1 : 0.3}
+              onMouseEnter={f.key ? () => onSel(f.key!) : undefined}
+              style={f.key ? { cursor: 'pointer' } : undefined}
+            >
+              {f.detail && <title>{f.detail}</title>}
+            </polygon>
+          );
+        })}
+        {frontPosts.map((q, k) => <polygon key={'fp' + k} points={pts(q)} fill="#8f8678" />)}
+        {sets.map((set, k) => {
+          const [lx, ly] = proj([k * SHELF.w + SHELF.w / 2, 0, shelfH + 14]);
+          return (
+            <text key={'lab' + k} x={lx - minX} y={ly - minY} textAnchor="middle" style={{ fontSize: 11, fontWeight: 600, fill: 'var(--color-ink-700)' }}>
               {set.label}
             </text>
           );
         })}
-        {/* front uprights */}
-        {Array.from({ length: bays + 1 }, (_, k) => (
-          <line key={'f' + k} x1={pt(k * SHELF.w, SHELF.d, 0).split(',')[0]} y1={pt(k * SHELF.w, SHELF.d, 0).split(',')[1]} x2={pt(k * SHELF.w, SHELF.d, shelfH).split(',')[0]} y2={pt(k * SHELF.w, SHELF.d, shelfH).split(',')[1]} stroke="#9a9184" strokeWidth={1.4} />
-        ))}
       </svg>
     </figure>
   );
