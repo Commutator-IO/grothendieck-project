@@ -588,7 +588,7 @@ function Room({ title, boxes, cols, rows, sel, onSel }: { title: string; boxes: 
   const floorW = cols * (A4.w + GAP) + GAP;
   const floorD = rows * (A4.d + GAP) + GAP;
   const P = (x: number, y: number, z: number) => [(x - y) * cos * PX, ((x + y) * sin - z) * PX] as const;
-  const maxH = 30; // cm of headroom drawn above the floor
+  const maxH = 40; // cm: the height a pile may reach, and the headroom drawn
   const xs = [P(floorW, 0, 0)[0], P(0, floorD, 0)[0]];
   const minX = Math.min(...xs, 0);
   const W = Math.max(...xs, 0) - minX + 16;
@@ -598,9 +598,21 @@ function Room({ title, boxes, cols, rows, sel, onSel }: { title: string; boxes: 
     const [a, b] = P(x, y, z);
     return `${(a - minX + 8).toFixed(1)},${(b - top + 8).toFixed(1)}`;
   };
-  const placed = boxes.map((b, i) => ({ b, cx: GAP + (i % cols) * (A4.w + GAP), cy: GAP + Math.floor(i / cols) * (A4.d + GAP) }));
-  // Paint back to front.
-  const order = [...placed].sort((p, q) => p.cx + p.cy - (q.cx + q.cy));
+  // Stack the boxes into piles no taller than the room (first fit, tallest first), then set the piles on the floor grid.
+  const piles: { boxes: { b: RoomBox; z: number; h: number }[]; top: number }[] = [];
+  for (const b of [...boxes].sort((p, q) => q.sheets - p.sheets)) {
+    const h = Math.max(0.4, b.sheets * SHEET_CM);
+    const pile = piles.find((p) => p.top + h <= maxH);
+    if (pile) {
+      pile.boxes.push({ b, z: pile.top, h });
+      pile.top += h;
+    } else piles.push({ boxes: [{ b, z: 0, h }], top: h });
+  }
+  const placed = piles.flatMap((p, i) =>
+    p.boxes.map((x) => ({ ...x, cx: GAP + (i % cols) * (A4.w + GAP), cy: GAP + Math.floor(i / cols) * (A4.d + GAP) })),
+  );
+  // Paint back to front, and bottom to top within a pile.
+  const order = [...placed].sort((p, q) => p.cx + p.cy - (q.cx + q.cy) || p.z - q.z);
   return (
     <figure className="min-w-0">
       <figcaption className="text-[12.5px] font-semibold text-ink-800">{title}</figcaption>
@@ -608,16 +620,15 @@ function Room({ title, boxes, cols, rows, sel, onSel }: { title: string; boxes: 
         <polygon points={[pt(0, 0, 0), pt(floorW, 0, 0), pt(floorW, floorD, 0), pt(0, floorD, 0)].join(' ')} fill="#f4f1ea" stroke="#d9d3c7" />
         <polygon points={[pt(0, 0, 0), pt(floorW, 0, 0), pt(floorW, 0, maxH), pt(0, 0, maxH)].join(' ')} fill="#faf8f4" stroke="#e4dfd5" />
         <polygon points={[pt(0, 0, 0), pt(0, floorD, 0), pt(0, floorD, maxH), pt(0, 0, maxH)].join(' ')} fill="#f7f4ee" stroke="#e4dfd5" />
-        {order.map(({ b, cx, cy }) => {
-          const h = Math.max(0.4, b.sheets * SHEET_CM);
+        {order.map(({ b, cx, cy, z, h }) => {
           const x0 = cx, x1 = cx + A4.w, y0 = cy, y1 = cy + A4.d;
           const on = sel === null || sel === b.key;
           return (
             <g key={b.key} opacity={on ? 1 : 0.3} onMouseEnter={() => onSel(b.key)} style={{ cursor: 'pointer' }}>
               <title>{b.detail}</title>
-              <polygon points={[pt(x1, y0, 0), pt(x1, y1, 0), pt(x1, y1, h), pt(x1, y0, h)].join(' ')} fill={shade(b.fill, 0.72)} />
-              <polygon points={[pt(x0, y1, 0), pt(x1, y1, 0), pt(x1, y1, h), pt(x0, y1, h)].join(' ')} fill={shade(b.fill, 0.88)} />
-              <polygon points={[pt(x0, y0, h), pt(x1, y0, h), pt(x1, y1, h), pt(x0, y1, h)].join(' ')} fill={shade(b.fill, 1.25)} stroke={shade(b.fill, 0.6)} strokeWidth={0.4} />
+              <polygon points={[pt(x1, y0, z), pt(x1, y1, z), pt(x1, y1, z + h), pt(x1, y0, z + h)].join(' ')} fill={shade(b.fill, 0.72)} />
+              <polygon points={[pt(x0, y1, z), pt(x1, y1, z), pt(x1, y1, z + h), pt(x0, y1, z + h)].join(' ')} fill={shade(b.fill, 0.88)} />
+              <polygon points={[pt(x0, y0, z + h), pt(x1, y0, z + h), pt(x1, y1, z + h), pt(x0, y1, z + h)].join(' ')} fill={shade(b.fill, 1.25)} stroke={shade(b.fill, 0.6)} strokeWidth={0.4} />
             </g>
           );
         })}
@@ -641,7 +652,7 @@ function Boxes() {
     <section className="mt-12">
       <H2 id="boxes">The two fonds as two rooms of boxes</H2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
-        Each box is an A4 sheet seen from above, as tall as its stack of paper at a tenth of a millimetre a sheet. On
+        Each box has the footprint of an A4 sheet and is as tall as its stack of paper, at a tenth of a millimetre a sheet; the boxes are stacked, tallest first, into piles of at most 40 cm, to take as little floor as possible. On
         the left, Montpellier's {GROUPS.length} thematic groups ({COTES.length} folders, {fmt(mtpTotal)} pages by its
         inventory); on the right, the{' '}
         <a href={BNF} target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:text-brand-700">
@@ -667,8 +678,8 @@ function Boxes() {
         ))}
       </div>
       <div className="mt-3 grid gap-5 md:grid-cols-2">
-        <Room title={`Montpellier: ${GROUPS.length} groups`} boxes={mtp} cols={7} rows={7} sel={sel} onSel={setSel} />
-        <Room title={`BnF, NAF 29093: ${BNF_BOXES.length} boxes`} boxes={bnf} cols={7} rows={7} sel={sel} onSel={setSel} />
+        <Room title={`Montpellier: ${GROUPS.length} groups`} boxes={mtp} cols={5} rows={4} sel={sel} onSel={setSel} />
+        <Room title={`BnF, NAF 29093: ${BNF_BOXES.length} boxes`} boxes={bnf} cols={5} rows={4} sel={sel} onSel={setSel} />
       </div>
       <p className="mt-2 min-h-[1.5em] text-[12.5px] text-ink-600">
         {cur ? cur.detail : <span className="text-ink-400">Hover a box for the group or box, and the height of its stack.</span>}
