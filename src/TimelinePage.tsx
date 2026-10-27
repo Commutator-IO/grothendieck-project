@@ -619,29 +619,41 @@ function Room({ title, sets, sel, onSel }: { title: string; sets: { label: strin
     return piles.flatMap((p, i) => {
       const level = REACH_ORDER[Math.floor(i / perShelf) % SHELF.levels];
       const x0 = bay * SHELF.w + 3 + (i % perShelf) * (A4.w + 3);
-      return p.boxes.map((x) => ({ ...x, x0, z: x.z + level * SHELF.gap + SHELF.board }));
+      return p.boxes.map((x) => ({ ...x, level, x0, z: x.z + level * SHELF.gap + SHELF.board }));
     });
   });
   type Face = { pts: V3[]; fill: string; stroke?: string; key?: string; detail?: string; depth: number };
-  const faces: Face[] = [];
-  const add = (pts: V3[], fill: string, extra: Partial<Face> = {}) => {
+  const depthOf = (pts: V3[]) => {
     const c = pts.reduce((a, q) => [a[0] + q[0] / pts.length, a[1] + q[1] / pts.length, a[2] + q[2] / pts.length], [0, 0, 0]);
-    faces.push({ pts, fill, depth: Math.hypot(c[0] - eyeX, c[1] + EYE.dist, c[2] - EYE.z), ...extra });
+    return Math.hypot(c[0] - eyeX, c[1] + EYE.dist, c[2] - EYE.z);
   };
-  // A box (or board) as visible faces.
-  const cuboid = (x0: number, x1: number, y0: number, y1: number, z0: number, z1: number, base: string, extra: Partial<Face> = {}) => {
-    add([[x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1]], shade(base, 0.9), extra); // front
-    if (EYE.z > z1) add([[x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1]], shade(base, 1.2), extra); // top
-    if (EYE.z < z0) add([[x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0]], shade(base, 0.6), extra); // underside
-    if (eyeX < x0) add([[x0, y0, z0], [x0, y1, z0], [x0, y1, z1], [x0, y0, z1]], shade(base, 0.75), extra); // left side
-    if (eyeX > x1) add([[x1, y0, z0], [x1, y1, z0], [x1, y1, z1], [x1, y0, z1]], shade(base, 0.75), extra); // right side
+  // A box (or board) as its visible faces, painted far to near.
+  const cuboid = (x0: number, x1: number, y0: number, y1: number, z0: number, z1: number, base: string, extra: Partial<Face> = {}): Face[] => {
+    const out: Face[] = [];
+    const add = (pts: V3[], fill: string) => out.push({ pts, fill, depth: depthOf(pts), ...extra });
+    add([[x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1]], shade(base, 0.9)); // front
+    if (EYE.z > z1) add([[x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1]], shade(base, 1.2)); // top
+    if (EYE.z < z0) add([[x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0]], shade(base, 0.6)); // underside
+    if (eyeX < x0) add([[x0, y0, z0], [x0, y1, z0], [x0, y1, z1], [x0, y0, z1]], shade(base, 0.75)); // left side
+    if (eyeX > x1) add([[x1, y0, z0], [x1, y1, z0], [x1, y1, z1], [x1, y0, z1]], shade(base, 0.75)); // right side
+    return out.sort((a, b) => b.depth - a.depth);
   };
   const WOOD = '#d9d1c3';
-  for (let l = 0; l <= SHELF.levels; l++) cuboid(0, width, 0, SHELF.d, l * SHELF.gap, l * SHELF.gap + SHELF.board, WOOD);
-  for (const p of placed) {
-    cuboid(p.x0, p.x0 + A4.w, 1, 1 + A4.d, p.z, p.z + p.h, p.b.fill, { key: p.b.key, detail: p.b.detail, stroke: shade(p.b.fill, 0.6) });
-  }
-  faces.sort((a, b) => b.depth - a.depth);
+  const board = (l: number) => cuboid(0, width, 0, SHELF.d, l * SHELF.gap, l * SHELF.gap + SHELF.board, WOOD);
+  const boxesOn = (l: number) =>
+    placed
+      .filter((p) => p.level === l)
+      .flatMap((p) => cuboid(p.x0, p.x0 + A4.w, 1, 1 + A4.d, p.z, p.z + p.h, p.b.fill, { key: p.b.key, detail: p.b.detail, stroke: shade(p.b.fill, 0.6) }))
+      .sort((a, b) => b.depth - a.depth);
+  // Order by shelf, so no box crosses a shelf. Below eye level a shelf is seen from above and covers the
+  // boxes beneath it: draw bottom-up, board then its boxes. Above eye level a shelf is seen from below and
+  // covers the boxes standing on it: draw top-down, the board over a level, its boxes, then the board under.
+  const below = Array.from({ length: SHELF.levels }, (_, l) => l).filter((l) => (l + 1) * SHELF.gap <= EYE.z);
+  const above = Array.from({ length: SHELF.levels }, (_, l) => l).filter((l) => (l + 1) * SHELF.gap > EYE.z);
+  const faces: Face[] = [];
+  for (const l of below) faces.push(...board(l), ...boxesOn(l));
+  for (const l of [...above].reverse()) faces.push(...board(l + 1), ...boxesOn(l));
+  faces.push(...board(above.length ? above[0] : SHELF.levels));
   // The uprights: back posts behind everything, front posts in front of everything.
   const post = (x: number, y: number): V3[] => [[x - 1.5, y, 0], [x + 1.5, y, 0], [x + 1.5, y, shelfH + SHELF.board], [x - 1.5, y, shelfH + SHELF.board]];
   const backPosts = Array.from({ length: bays + 1 }, (_, k) => post(k * SHELF.w, SHELF.d));
