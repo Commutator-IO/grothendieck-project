@@ -589,7 +589,8 @@ const WALL = 200; // cm of wall drawn behind the bay
 // Shelves filled first: those within easy reach of a person of average height (about 0.75 m to 1.5 m), then the others.
 const REACH_ORDER = [2, 3, 1, 4, 0];
 
-function Room({ title, boxes, bays, sel, onSel }: { title: string; boxes: RoomBox[]; bays: number; sel: string | null; onSel: (k: string | null) => void }) {
+function Room({ title, sets, sel, onSel }: { title: string; sets: { label: string; boxes: RoomBox[] }[]; sel: string | null; onSel: (k: string | null) => void }) {
+  const bays = sets.length;
   const PX = 1; // px per cm
   const cos = Math.cos(Math.PI / 6);
   const sin = Math.sin(Math.PI / 6);
@@ -608,29 +609,29 @@ function Room({ title, boxes, bays, sel, onSel }: { title: string; boxes: RoomBo
     return `${(a - minX + 8).toFixed(1)},${(b - top + 8).toFixed(1)}`;
   };
   const poly = (ps: [number, number, number][]) => ps.map((q) => pt(...q)).join(' ');
-  // Piles that fit between two shelves.
-  const piles: { boxes: { b: RoomBox; z: number; h: number }[]; top: number }[] = [];
-  for (const b of [...boxes].sort((p, q) => q.sheets - p.sheets)) {
-    const h = Math.max(0.4, b.sheets * SHEET_CM);
-    const pile = piles.find((p) => p.top + h <= pileMax);
-    if (pile) {
-      pile.boxes.push({ b, z: pile.top, h });
-      pile.top += h;
-    } else piles.push({ boxes: [{ b, z: 0, h }], top: h });
-  }
-  const placed = piles.flatMap((p, i) => {
-    const shelf = Math.floor(i / perShelf);
-    const bay = Math.floor(shelf / SHELF.levels);
-    const level = REACH_ORDER[shelf % SHELF.levels];
-    const cx = bay * SHELF.w + 2 + (i % perShelf) * (A4.w + 3);
-    return p.boxes.map((x) => ({ ...x, level, cx, cy: 1, z: x.z + level * SHELF.gap + 2 }));
+  // For each set, piles that fit between two shelves, laid out in its own bay.
+  const placed = sets.flatMap((set, bay) => {
+    const piles: { boxes: { b: RoomBox; z: number; h: number }[]; top: number }[] = [];
+    for (const b of [...set.boxes].sort((p, q) => q.sheets - p.sheets)) {
+      const h = Math.max(0.4, b.sheets * SHEET_CM);
+      const pile = piles.find((p) => p.top + h <= pileMax);
+      if (pile) {
+        pile.boxes.push({ b, z: pile.top, h });
+        pile.top += h;
+      } else piles.push({ boxes: [{ b, z: 0, h }], top: h });
+    }
+    return piles.flatMap((p, i) => {
+      const level = REACH_ORDER[Math.floor(i / perShelf) % SHELF.levels];
+      const cx = bay * SHELF.w + 2 + (i % perShelf) * (A4.w + 3);
+      return p.boxes.map((x) => ({ ...x, level, cx, cy: 1, z: x.z + level * SHELF.gap + 2 }));
+    });
   });
   const order = [...placed].sort((p, q) => p.cx - q.cx || p.z - q.z);
   const shelfH = SHELF.levels * SHELF.gap;
   return (
-    <figure className="min-w-0 max-w-[300px]">
-      <figcaption className="text-[12.5px] font-semibold text-ink-800">{title}</figcaption>
-      <svg viewBox={`0 0 ${W.toFixed(0)} ${H.toFixed(0)}`} className="mt-1 w-full rounded-[var(--radius-card)] border border-ink-200 bg-white" role="img" aria-label={title} onMouseLeave={() => onSel(null)}>
+    <figure className="w-full max-w-[520px]">
+      {title && <figcaption className="text-[12.5px] font-semibold text-ink-800">{title}</figcaption>}
+      <svg viewBox={`0 0 ${W.toFixed(0)} ${H.toFixed(0)}`} className="mt-1 w-full rounded-[var(--radius-card)] border border-ink-200 bg-white" role="img" aria-label={title || sets.map((x) => x.label).join(', ')} onMouseLeave={() => onSel(null)}>
         <polygon points={poly([[0, 0, 0], [floorW, 0, 0], [floorW, floorD, 0], [0, floorD, 0]])} fill="#f4f1ea" stroke="#d9d3c7" />
         <polygon points={poly([[0, 0, 0], [floorW, 0, 0], [floorW, 0, WALL], [0, 0, WALL]])} fill="#faf8f4" stroke="#e4dfd5" />
         <polygon points={poly([[0, 0, 0], [0, floorD, 0], [0, floorD, WALL], [0, 0, WALL]])} fill="#f7f4ee" stroke="#e4dfd5" />
@@ -658,6 +659,14 @@ function Room({ title, boxes, bays, sel, onSel }: { title: string; boxes: RoomBo
             })}
           </g>
         ))}
+        {sets.map((set, k) => {
+          const [lx, ly] = pt(k * SHELF.w + SHELF.w / 2, SHELF.d, SHELF.levels * SHELF.gap + 14).split(',').map(Number);
+          return (
+            <text key={'lab' + k} x={lx} y={ly} textAnchor="middle" style={{ fontSize: 8.5, fontWeight: 600, fill: 'var(--color-ink-700)' }}>
+              {set.label}
+            </text>
+          );
+        })}
         {/* front uprights */}
         {Array.from({ length: bays + 1 }, (_, k) => (
           <line key={'f' + k} x1={pt(k * SHELF.w, SHELF.d, 0).split(',')[0]} y1={pt(k * SHELF.w, SHELF.d, 0).split(',')[1]} x2={pt(k * SHELF.w, SHELF.d, shelfH).split(',')[0]} y2={pt(k * SHELF.w, SHELF.d, shelfH).split(',')[1]} stroke="#9a9184" strokeWidth={1.4} />
@@ -708,8 +717,15 @@ function Boxes() {
         ))}
       </div>
       <div className="mt-3 flex flex-wrap gap-8">
-        <Room title={`Montpellier: ${GROUPS.length} groups`} boxes={mtp} bays={1} sel={sel} onSel={setSel} />
-        <Room title={`BnF, NAF 29093: ${BNF_BOXES.length} boxes`} boxes={bnf} bays={1} sel={sel} onSel={setSel} />
+        <Room
+          title=""
+          sets={[
+            { label: `Montpellier · ${GROUPS.length} groups`, boxes: mtp },
+            { label: `BnF · ${BNF_BOXES.length} boxes`, boxes: bnf },
+          ]}
+          sel={sel}
+          onSel={setSel}
+        />
       </div>
       <p className="mt-2 min-h-[1.5em] text-[12.5px] text-ink-600">
         {cur ? cur.detail : <span className="text-ink-400">Hover a box for the group or box, and the height of its stack.</span>}
