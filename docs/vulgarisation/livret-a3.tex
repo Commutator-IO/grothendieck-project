@@ -1,0 +1,9 @@
+% Imposition pour impression sur une feuille A3 recto verso, pliée en deux :
+% recto = pages 4 | 1 (dos et une), verso = pages 2 | 3 (double page intérieure).
+% Compiler après article.tex : tectonic -X compile livret-a3.tex
+\documentclass{article}
+\usepackage[a3paper,landscape,margin=0mm]{geometry}
+\usepackage{pdfpages}
+\begin{document}
+\includepdf[pages={4,1,2,3},nup=2x1,delta=0 0,frame=false]{article.pdf}
+\end{document}
