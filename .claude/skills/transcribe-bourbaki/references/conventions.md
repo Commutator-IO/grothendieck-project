@@ -78,3 +78,18 @@ reading and never settles one.
 - Practicalities: braces round a tikz-cd label containing a comma; no \hfill or \qquad in prose; an
   underlined letter in prose goes inside $…$; a long struck passage is \struck{\ill{}} with any guess in
   a \note (a long struck \uncertain overflows).
+
+## 2026-10-27 — rédactions 377 (item 933) and 551 (item 1102), attribution pass on 383, 384, 384 brouillon, 387, 391, 392, 397, 413, Opus 5.5
+- 377 (Fonds Cartier, PCR 070): cover sheet, then typist's « - n - » = PDF page minus 1. Vectors typed with a
+  double underline (\underline{\underline{v}}); underlined K(X) for compactly supported continuous functions; the
+  second measure is a special sign read \nu, the product measure a « ϖ » read \pi. Annotated in ink by the
+  owner's hand (« PC » top right of p. 2), plus a loose handwritten sheet « Lemme (Bruhat) » at the end.
+- 551 (Fonds Boutet de Monvel, BDMR 011): the scan is faint; pdftoppm at 130 dpi is unreadable, so extract the
+  600 dpi JPEGs with `pdfimages -j` and read half-pages at 1000 px wide with `-level 30%,88%`. Contents paged in
+  roman (pp. 2-3); from p. 4 the typist's page = PDF page minus 3. Typewriter script letters for the Banach types
+  (\mathscr{C}, \mathscr{L}, \mathscr{H}) and for the derived classes α with a script index; class symbols
+  ε, π (typed like « ¶ »), η, θ. Diagonal ink « Archives P. Cartier » on pp. 2 and 26 (archival).
+- Attribution pass (Fonds Cartier copies, PCR 075-101): every annotated page seen carries one cursive ink hand,
+  the hand of the « PC » / « P.C. » initials on the title pages (383, 384, 392, 413). No page shows
+  Grothendieck's hand; nothing in them is his to transcribe. Keep « main non identifiée » if any is ever
+  transcribed, since the initials make Cartier likely but do not prove the marginalia are his.
