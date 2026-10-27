@@ -532,6 +532,32 @@ for (const raw of body.split('\n')) {
     }
   }
 
+  // #94 — reused paper whose printed side was never read (computer listings).
+  if (section.startsWith('Printed side of reused paper')) {
+    const pr = /^\*\*(\d+(?:-\d+)?)(?:,\s*pp?\.\s*([\d–, -]+))?:\*\*\s*(.*)$/.exec(text);
+    if (pr && isCote(pr[1])) {
+      const ps = (pr[2] ?? '').split(/,\s*/).flatMap((r) => {
+        const [a, b] = r.split('–').map(Number);
+        return b > a ? Array.from({ length: b - a + 1 }, (_, i) => a + i) : a ? [a] : [];
+      });
+      push({
+        id: `paper-${pr[1]}-p${ps[0] ?? 0}`,
+        section: n,
+        kind: 'paper',
+        cote: pr[1],
+        batch: batchOf(ps[0] ?? 1),
+        page: ps[0] ?? null,
+        prompt: `What is printed on the reused computer listings of folder ${pr[1]}?`,
+        choices: [C('Unrelated output: reused paper', 'right', 'What it is, in a few words'), C('A computation about arrangements or configurations', 'other', 'What it computes'), C('Something else', 'other', 'What the printed side shows')],
+        hint: `${ps.length ? facsimileAt(ps) : `Leaf through the facsimile of folder ${pr[1]}`}: read the printed side only — the banner (job name, user, computing centre) and the content.`,
+        claim: `${pr[3][0].toUpperCase()}${pr[3].slice(1)}`,
+        details: text.replace(/\*\*/g, ''),
+        context: 'The transcription records his notes on these leaves but not what the listings print (issue #94).',
+      }, null);
+      continue;
+    }
+  }
+
   // A finding too imprecise to state: what the leaves can still fix.
   if (section.startsWith('Statements too imprecise')) {
     const imp = /^\*\*(\d+(?:-\d+)?)(?:,\s*pp?\.\s*([\d–, -]+))?:\*\*\s*(.*)$/.exec(text);

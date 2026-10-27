@@ -222,3 +222,11 @@ Four findings stay « too imprecise » because the reading could not fix a word,
 - [ ] **102, p. 12:** Over a locally noetherian base S, a monomorphism u : G → F of functors on S-schemes that is formally étale is an open immersion as soon as F and G are fpqc sheaves commuting with filtered colimits of rings and with adic limits of artinian rings (finding `102-open-immersion-criterion`).
 - [ ] **91, pp. 24–28, 31:** For X proper, flat and of finite presentation over S and P → X locally of finite presentation, the Weil restriction Res_{X/S}(P) (and so Hom_S(X,Y)) is representable by a scheme — not only an algebraic space — under three conditions on finitely many closed subschemes Z_i (representable Res_{Z_i/S}, normal flatness of X along Z_i, every associated point of a … (finding `91-res-representable-by-scheme`).
 - [ ] **91, pp. 125–131:** Over a complete discrete valuation ring V with perfect residue field, a dominant generically separable rational map φ : X_K ⇢ Y_K with Y proper induces a map of sets on Greenberg schemes that sends « thick » points to thick points, and, when X_K and Y_K are smooth, sends constructible sets to constructible sets and is piecewise a morphism « of finite index … (finding `91-greenberg-rational-maps-constructible`).
+
+# Printed side of reused paper (#94, 2026-10-27)
+
+### What do the computer listings print?
+
+Folder 154 is largely written on fan-fold computer listings. The transcription records his notes on them, and of the printed side only the banner « GUTS » and machine dates of 16 and 19 August 1982. Reading the printed side tells whether the paper is simply reused or a computation bearing on his pseudolines.
+
+- [ ] **154, pp. 61, 72, 81, 90, 95, 97, 99:** the printed side of the listings: the banner « GUTS » (job name, user, computing centre?), the machine dates (16 and 19 August 1982), and what the content is — unrelated output, or a computation about line arrangements, configurations or permutations.
