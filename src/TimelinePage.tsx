@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
-import { COTES } from './content/catalogue.ts';
+import { BNF_BOXES, type BnfBox } from './content/bnf-boxes.ts';
+import { COTES, GROUPS } from './content/catalogue.ts';
 import datedRaw from './content/dated-leaves.json';
 import handRaw from './content/hand.json';
 import proposedRaw from './content/proposed-datings.json';
@@ -545,6 +546,119 @@ function Volumes() {
           </tbody>
         </table>
       </details>
+    </section>
+  );
+}
+
+/* ---------- figure: the boxes of the two fonds ---------- */
+
+const PAGES_OF = new Map(COTES.map((c) => [c.id, c.pages ?? 0]));
+const MTP_BOXES = GROUPS.map((g) => ({
+  id: g.id,
+  title: g.title.replace(/\s*\(.*$/, '').replace(/^MATHÉMATIQUES \/ RECHERCHE \/ /, ''),
+  folders: g.cotes.length,
+  pages: g.cotes.reduce((a, c) => a + (PAGES_OF.get(c) ?? 0), 0),
+}));
+const BOX_GREY = '#cdc6b8';
+
+function Boxes() {
+  const [sel, setSel] = useState<string | null>(null);
+  const fmt = (n: number) => n.toLocaleString('en-US');
+  const max = Math.max(...MTP_BOXES.map((b) => b.pages), ...BNF_BOXES.map((b) => b.leaves));
+  const BAR = 230;
+  const ROW = 15;
+  const LABEL = 190;
+  const W = LABEL + BAR + 48;
+  const x = (n: number) => (n / max) * BAR;
+  const mtpTotal = MTP_BOXES.reduce((a, b) => a + b.pages, 0);
+  const bnfTotal = BNF_BOXES.reduce((a, b) => a + b.leaves, 0);
+  const cut = (t: string) => (t.length > 32 ? t.slice(0, 31) + '…' : t);
+  const bnfFill = (b: BnfBox) => (b.maths === 'whole' ? DARK : b.maths === 'part' ? LIGHT : BOX_GREY);
+  const column = (
+    label: string,
+    rows: { key: string; name: string; n: number; fill: string; detail: string }[],
+  ) => (
+    <figure className="min-w-0">
+      <figcaption className="text-[12.5px] font-semibold text-ink-800">{label}</figcaption>
+      <svg
+        viewBox={`0 0 ${W} ${rows.length * ROW + 6}`}
+        className="mt-1 w-full rounded-[var(--radius-card)] border border-ink-200 bg-white"
+        role="img"
+        aria-label={label}
+        onMouseLeave={() => setSel(null)}
+      >
+        {rows.map((r, i) => {
+          const y = i * ROW + 4;
+          const on = sel === null || sel === r.key;
+          return (
+            <g key={r.key} opacity={on ? 1 : 0.35} onMouseEnter={() => setSel(r.key)} style={{ cursor: 'pointer' }}>
+              <title>{r.detail}</title>
+              <text x={LABEL - 6} y={y + 9.5} textAnchor="end" style={{ fontSize: 9.5, fill: 'var(--color-ink-700)' }}>
+                {cut(r.name)}
+              </text>
+              <rect x={LABEL} y={y + 1} width={Math.max(1.5, x(r.n))} height={ROW - 4} rx={1.5} fill={r.fill} />
+              <text x={LABEL + x(r.n) + 4} y={y + 9.5} className="tabular" style={{ fontSize: 9, fill: 'var(--color-ink-500)' }}>
+                {fmt(r.n)}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+    </figure>
+  );
+  const detail =
+    sel === null
+      ? null
+      : sel.startsWith('m:')
+        ? (() => {
+            const b = MTP_BOXES.find((m) => 'm:' + m.id === sel)!;
+            return `Montpellier, ${GROUPS.find((g) => g.id === b.id)!.title}: ${b.folders} folder${b.folders > 1 ? 's' : ''}, ${fmt(b.pages)} pages`;
+          })()
+        : (() => {
+            const b = BNF_BOXES.find((m) => 'b:' + m.box === sel)!;
+            return `BnF, NAF 29093 (${b.box}), ${b.title}${b.years ? `, ${b.years}` : ''}: ${fmt(b.leaves)} leaves`;
+          })();
+  return (
+    <section className="mt-12">
+      <H2 id="boxes">The two fonds, box by box</H2>
+      <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
+        Montpellier groups its {COTES.length} folders into {GROUPS.length} thematic groups ({fmt(mtpTotal)} pages by
+        its inventory); the{' '}
+        <a href={BNF} target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:text-brand-700">
+          BnF
+        </a>{' '}
+        keeps the later writings, 1987 to 1999, in {BNF_BOXES.length} boxes ({fmt(bnfTotal)} leaves by its notices).
+        The two archives do not count alike: Montpellier counts pages, the BnF counts leaves, and a leaf written on both
+        sides is two pages. The bars share one scale. Montpellier is mathematics throughout; at the BnF only box (3) is
+        a mathematical text, and boxes (40), (42) and (43) hold some mathematics among other notes.
+      </p>
+      <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[12px] text-ink-600">
+        {[
+          [DARK, 'Mathematics'],
+          [LIGHT, 'Partly mathematics (BnF)'],
+          [BOX_GREY, 'Other writings (BnF)'],
+        ].map(([c, l]) => (
+          <span key={l} className="inline-flex items-center gap-1.5">
+            <svg width="12" height="10" aria-hidden="true">
+              <rect x="0" y="1" width="12" height="8" rx="1.5" fill={c} />
+            </svg>
+            {l}
+          </span>
+        ))}
+      </div>
+      <div className="mt-3 grid gap-5 md:grid-cols-2">
+        {column(
+          `Montpellier: ${GROUPS.length} groups, in pages`,
+          MTP_BOXES.map((b) => ({ key: 'm:' + b.id, name: b.title, n: b.pages, fill: DARK, detail: `${b.title}: ${fmt(b.pages)} pages` })),
+        )}
+        {column(
+          `BnF, NAF 29093: ${BNF_BOXES.length} boxes, in leaves`,
+          BNF_BOXES.map((b) => ({ key: 'b:' + b.box, name: `(${b.box}) ${b.title}`, n: b.leaves, fill: bnfFill(b), detail: `(${b.box}) ${b.title}: ${fmt(b.leaves)} leaves` })),
+        )}
+      </div>
+      <p className="mt-2 min-h-[1.5em] text-[12.5px] text-ink-600">
+        {detail ?? <span className="text-ink-400">Hover a bar for the group or box.</span>}
+      </p>
     </section>
   );
 }
@@ -1205,6 +1319,7 @@ export function TimelinePage() {
         <Ranges />
         <Works />
         <Volumes />
+        <Boxes />
         <Rediscoveries />
         <Strips />
         <Calendar />
