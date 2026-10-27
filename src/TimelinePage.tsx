@@ -584,8 +584,10 @@ function shade(hex: string, f: number): string {
  * as tall as their stack of paper; they are stacked tallest first into piles that fit between two
  * shelves, and the piles fill the shelves from the bottom, left to right, bay after bay.
  */
-const SHELF = { w: 100, d: 32, gap: 37, levels: 6 }; // cm: a bay 1 m wide, shelves 37 cm apart
-const CEILING = 250; // cm: a typical stack-room ceiling, above shelving about 2.2 m tall
+const SHELF = { w: 100, d: 32, gap: 37, levels: 5 }; // cm: a bay 1 m wide, shelves 37 cm apart, about 1.85 m tall
+const WALL = 200; // cm of wall drawn behind the bay
+// Shelves filled first: those within easy reach of a person of average height (about 0.75 m to 1.5 m), then the others.
+const REACH_ORDER = [2, 3, 1, 4, 0];
 
 function Room({ title, boxes, bays, sel, onSel }: { title: string; boxes: RoomBox[]; bays: number; sel: string | null; onSel: (k: string | null) => void }) {
   const PX = 1; // px per cm
@@ -599,7 +601,7 @@ function Room({ title, boxes, bays, sel, onSel }: { title: string; boxes: RoomBo
   const xs = [P(floorW, 0, 0)[0], P(0, floorD, 0)[0], 0];
   const minX = Math.min(...xs);
   const W = Math.max(...xs) - minX + 16;
-  const top = P(0, 0, CEILING)[1];
+  const top = P(0, 0, WALL)[1];
   const H = P(floorW, floorD, 0)[1] - top + 16;
   const pt = (x: number, y: number, z: number) => {
     const [a, b] = P(x, y, z);
@@ -619,7 +621,7 @@ function Room({ title, boxes, bays, sel, onSel }: { title: string; boxes: RoomBo
   const placed = piles.flatMap((p, i) => {
     const shelf = Math.floor(i / perShelf);
     const bay = Math.floor(shelf / SHELF.levels);
-    const level = shelf % SHELF.levels;
+    const level = REACH_ORDER[shelf % SHELF.levels];
     const cx = bay * SHELF.w + 2 + (i % perShelf) * (A4.w + 3);
     return p.boxes.map((x) => ({ ...x, cx, cy: 1, z: x.z + level * SHELF.gap + 2 }));
   });
@@ -630,9 +632,8 @@ function Room({ title, boxes, bays, sel, onSel }: { title: string; boxes: RoomBo
       <figcaption className="text-[12.5px] font-semibold text-ink-800">{title}</figcaption>
       <svg viewBox={`0 0 ${W.toFixed(0)} ${H.toFixed(0)}`} className="mt-1 w-full rounded-[var(--radius-card)] border border-ink-200 bg-white" role="img" aria-label={title} onMouseLeave={() => onSel(null)}>
         <polygon points={poly([[0, 0, 0], [floorW, 0, 0], [floorW, floorD, 0], [0, floorD, 0]])} fill="#f4f1ea" stroke="#d9d3c7" />
-        <polygon points={poly([[0, 0, 0], [floorW, 0, 0], [floorW, 0, CEILING], [0, 0, CEILING]])} fill="#faf8f4" stroke="#e4dfd5" />
-        <polygon points={poly([[0, 0, 0], [0, floorD, 0], [0, floorD, CEILING], [0, 0, CEILING]])} fill="#f7f4ee" stroke="#e4dfd5" />
-        <text x={10} y={18} style={{ fontSize: 11, fill: 'var(--color-ink-400)' }}>ceiling ≈ {CEILING / 100} m</text>
+        <polygon points={poly([[0, 0, 0], [floorW, 0, 0], [floorW, 0, WALL], [0, 0, WALL]])} fill="#faf8f4" stroke="#e4dfd5" />
+        <polygon points={poly([[0, 0, 0], [0, floorD, 0], [0, floorD, WALL], [0, 0, WALL]])} fill="#f7f4ee" stroke="#e4dfd5" />
         {/* uprights at the back */}
         {Array.from({ length: bays + 1 }, (_, k) => (
           <line key={'u' + k} x1={pt(k * SHELF.w, 0, 0).split(',')[0]} y1={pt(k * SHELF.w, 0, 0).split(',')[1]} x2={pt(k * SHELF.w, 0, shelfH).split(',')[0]} y2={pt(k * SHELF.w, 0, shelfH).split(',')[1]} stroke="#9a9184" strokeWidth={1.2} />
@@ -679,7 +680,7 @@ function Boxes() {
     <section className="mt-12">
       <H2 id="boxes">The two fonds as two rooms of boxes</H2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
-        Each box has the footprint of an A4 sheet and is as tall as its stack of paper, at a tenth of a millimetre a sheet; the boxes lie flat on the shelves of a 1 m bay (shelves 37 cm apart, about 2.2 m of shelving under a stack-room ceiling of about 2.5 m, both typical figures, not the archives' own), stacked tallest first between two shelves. On
+        Each box has the footprint of an A4 sheet and is as tall as its stack of paper, at a tenth of a millimetre a sheet; the boxes lie flat on the shelves of a 1 m bay (shelves 37 cm apart, about 1.85 m in all, typical figures rather than the archives' own), stacked tallest first between two shelves, and placed first on the shelves within easy reach, between about 0.75 m and 1.5 m. On
         the left, Montpellier's {GROUPS.length} thematic groups ({COTES.length} folders, {fmt(mtpTotal)} pages by its
         inventory); on the right, the{' '}
         <a href={BNF} target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:text-brand-700">
