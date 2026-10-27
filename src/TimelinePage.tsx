@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import { BNF_BOXES, type BnfBox } from './content/bnf-boxes.ts';
+import { BOURBAKI_FONDS } from './content/bourbaki-boxes.ts';
 import { COTES, GROUPS } from './content/catalogue.ts';
 import datedRaw from './content/dated-leaves.json';
 import handRaw from './content/hand.json';
@@ -598,7 +599,7 @@ function Room({ title, sets, sel, onSel }: { title: string; sets: { label: strin
   const shelfH = SHELF.levels * SHELF.gap;
   const pileMax = SHELF.gap - SHELF.board - 3;
   const perShelf = Math.floor(SHELF.w / (A4.w + 3));
-  const eyeX = -width * 0.15; // standing a little to the left of the shelving, for depth
+  const eyeX = width / 2; // standing in front of the middle of the shelving
   const F = 330; // focal length, px
   // x: along the shelving, y: depth away from the viewer, z: up.
   const proj = ([x, y, z]: V3): [number, number] => {
@@ -714,11 +715,21 @@ function Boxes() {
   const bnfFill = (b: BnfBox) => (b.maths === 'whole' ? DARK : b.maths === 'part' ? LIGHT : CARD);
   const mtp: RoomBox[] = MTP_BOXES.map((b) => ({ key: 'm:' + b.id, label: b.title, sheets: b.pages, fill: DARK, detail: `${b.title}: ${b.folders} folder${b.folders > 1 ? 's' : ''}, ${fmt(b.pages)} pages, a stack of about ${Math.round(b.pages * SHEET_CM)} cm` }));
   const bnf: RoomBox[] = BNF_BOXES.map((b) => ({ key: 'b:' + b.box, label: `(${b.box}) ${b.title}`, sheets: b.leaves, fill: bnfFill(b), detail: `NAF 29093 (${b.box}), ${b.title}${b.years ? `, ${b.years}` : ''}: ${fmt(b.leaves)} leaves, a stack of about ${Math.round(b.leaves * SHEET_CM)} cm` }));
-  const all = [...mtp, ...bnf];
+  // The Bourbaki archive by source collection, cut into boxes of at most 3,000 pages (30 cm) so they fit between two shelves.
+  const BOX_MAX = 3000;
+  const bkTotal = BOURBAKI_FONDS.reduce((a, f) => a + f.pages, 0);
+  const bk: RoomBox[] = BOURBAKI_FONDS.flatMap((f) => {
+    const n = Math.ceil(f.pages / BOX_MAX);
+    return Array.from({ length: n }, (_, i) => {
+      const pages = i < n - 1 ? BOX_MAX : f.pages - BOX_MAX * (n - 1);
+      return { key: `k:${f.collection}:${i}`, label: f.collection, sheets: pages, fill: DARK, detail: `Bourbaki, ${f.collection}${n > 1 ? ` (box ${i + 1} of ${n})` : ''}: ${fmt(pages)} pages, a stack of about ${Math.round(pages * SHEET_CM)} cm` };
+    });
+  });
+  const all = [...mtp, ...bnf, ...bk];
   const cur = all.find((b) => b.key === sel);
   return (
     <section className="mt-12">
-      <H2 id="boxes">The two fonds as two rooms of boxes</H2>
+      <H2 id="boxes">Three archives on the shelves</H2>
       <p className="mt-2 max-w-[44em] text-[13.5px] leading-relaxed text-ink-600">
         Each box has the footprint of an A4 sheet and is as tall as its stack of paper, at a tenth of a millimetre a sheet; the boxes lie flat on the shelves of a 1 m bay (shelves 37 cm apart, about 1.85 m in all, typical figures rather than the archives' own), stacked tallest first between two shelves, and placed first on the shelves within easy reach, between about 0.75 m and 1.5 m. On
         the left, Montpellier's {GROUPS.length} thematic groups ({COTES.length} folders, {fmt(mtpTotal)} pages by its
@@ -726,10 +737,16 @@ function Boxes() {
         <a href={BNF} target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:text-brand-700">
           BnF
         </a>
-        's {BNF_BOXES.length} boxes of later writings, 1987 to 1999 ({fmt(bnfTotal)} leaves by its notices). Both rooms
+        's {BNF_BOXES.length} boxes of later writings, 1987 to 1999 ({fmt(bnfTotal)} leaves by its notices). All the bays
         are drawn to the same scale. Montpellier counts pages and the BnF counts leaves, and a leaf written on both sides
         is two pages, so a Montpellier stack may be up to twice too tall. Montpellier is mathematics throughout; at the
         BnF only box (3) is a mathematical text, and boxes (40), (42) and (43) hold some mathematics among other notes.
+        For comparison, the third bay holds the{' '}
+        <a href="https://archives-bourbaki.ahp-numerique.fr" target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:text-brand-700">
+          Bourbaki archive
+        </a>{' '}
+        put online by the Archives Henri Poincaré: {fmt(bkTotal)} pages of drafts, reports and circulars from{' '}
+        {BOURBAKI_FONDS.length} source collections, the larger ones cut into boxes of at most 3,000 pages.
       </p>
       <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[12px] text-ink-600">
         {[
@@ -751,6 +768,7 @@ function Boxes() {
           sets={[
             { label: `Montpellier · ${GROUPS.length} groups`, boxes: mtp },
             { label: `BnF · ${BNF_BOXES.length} boxes`, boxes: bnf },
+            { label: `Bourbaki · ${BOURBAKI_FONDS.length} collections`, boxes: bk },
           ]}
           sel={sel}
           onSel={setSel}
