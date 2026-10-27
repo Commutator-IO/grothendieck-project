@@ -44,10 +44,16 @@ vertices, edges, incidence — with the line of each edge; `SkelIso` is an isomo
   avoiding the triangle always exists when every vertex is on two lines) and `lift_iff`, every
   isomorphism of decomposed skeleta of two simple bigon-free arrangements lifts, uniquely: the
   skeleton functor is fully faithful on simple arrangements.
+* `side_bounds`, `side_not`: (A4), at vertices of any multiplicity. Two edges leaving the ends of
+  an edge `e` strictly on the same side (within the half turns after `d` and after `a0 d`) cut
+  out with `e` a triangle that bounds; on opposite sides, one that does not. With
+  `triangle_map`, whether they leave `e` on the same side is read on the skeleton when a fourth
+  line avoids the triangle. `phi_period`: the `2ν` edge-ends at a vertex form one cycle of `φ`.
 
 **Not formalised.** Fullness for arrangements with multiple points (vertices of `ν ≥ 3`
-lines): reading the cyclic order of the edges at such a vertex ((A1)–(A3)), and the cases (A6)
-and `III₆` of the canonical orientation, where every other line passes through a vertex of the
+lines): recovering the cyclic order of the edges at such a vertex from the sides of its edges
+((A1)–(A3): two edges are adjacent iff no other line separates them), and the cases (A6) and
+`III₆` of the canonical orientation, where every other line passes through a vertex of the
 triangle. These are what remains of the page 54 theorem.
 -/
 
@@ -1685,6 +1691,204 @@ theorem full_simple (hbf : BigonFree X.On) (hbf' : BigonFree X'.On) (hs : X.Stra
     simpa [SkelIso.symm] using path_map hbf' hbf hs' hs h2' h2 f.symm h⟩
 
 end Simple
+
+/-! ### Sides of an edge: the transport (A4) of page 50 -/
+
+section Sides
+
+open Matrix
+
+/-- Half a turn after `y` meets each other line once: a chain on the line of the `(j+1)`-th
+edge-end after `y` (before the opposite end of `y`), with value `1` there, has sum `1` on the
+half turn. -/
+theorem half_one_gen (hs : X.Straight) (y : D) {j : ℕ} (hj : j + 1 < X.nu (X.M.vtx y)) {l : L}
+    {P : X.M.Edge → ZMod 2} (hP : ∀ e, P e ≠ 0 → X.lineE e = l)
+    (hl : X.line ((X.phi ^ (j + 1)) y) = l) (h1 : P (X.M.edge ((X.phi ^ (j + 1)) y)) = 1) :
+    ∑ i ∈ Finset.range (X.nu (X.M.vtx y)), P (X.M.edge ((X.phi ^ (i + 1)) y)) = 1 := by
+  have sh : ∀ i, (X.phi ^ (i + 1)) y = (X.phi ^ i) (X.phi y) := fun i => by
+    rw [pow_succ, Equiv.Perm.mul_apply]
+  rw [Finset.sum_eq_single j]
+  · exact h1
+  · intro i hi hij
+    have hi := Finset.mem_range.1 hi
+    refine by_contra fun h => ?_
+    have e : X.line ((X.phi ^ i) (X.phi y)) = X.line ((X.phi ^ j) (X.phi y)) := by
+      rw [← sh, ← sh, hl, ← hP _ h, lineE_edge]
+    rcases Nat.lt_or_gt_of_ne hij with h' | h'
+    · exact line_inj hs (X.phi y) h' (by simp; omega) e
+    · exact line_inj hs (X.phi y) h' (by simp; omega) e.symm
+  · exact fun h => absurd (Finset.mem_range.2 (by omega)) h
+
+open Classical in
+/-- **Triangles leaving an edge on one side bound** (the general form of `path_bounds`). Let
+`e = edge d` join `v` to `w`, `e1` the `(j+1)`-th and `e2` the `(k+1)`-th edge-end after `d`
+at `v` and after `a0 d` at `w`, both strictly within the half turn on the side of the face of
+`d`, and `Pa`, `Pb` segments of their lines from `v`, `w` to a common vertex starting with
+them. Then the triangle `e + Pa + Pb` bounds. -/
+theorem side_bounds (hbf : BigonFree X.On) (hs : X.Straight) (d : D) {j k : ℕ}
+    (hj : j + 1 < X.nu (X.M.vtx d)) (hk : k + 1 < X.nu (X.M.vtx (X.M.a0 d))) {p : X.M.Vtx}
+    {Pa Pb : X.M.Edge → ZMod 2} (sa : ∀ e, Pa e ≠ 0 → X.lineE e = X.line ((X.phi ^ (j + 1)) d))
+    (sb : ∀ e, Pb e ≠ 0 → X.lineE e = X.line ((X.phi ^ (k + 1)) (X.M.a0 d)))
+    (ba : X.incM *ᵥ Pa = Pi.single (X.M.vtx d) 1 + Pi.single p 1)
+    (bb : X.incM *ᵥ Pb = Pi.single (X.M.vtx (X.M.a0 d)) 1 + Pi.single p 1)
+    (ha : Pa (X.M.edge ((X.phi ^ (j + 1)) d)) = 1)
+    (hb : Pb (X.M.edge ((X.phi ^ (k + 1)) (X.M.a0 d))) = 1) :
+    Pi.single (X.M.edge d) 1 + Pa + Pb ∈ X.B1 := by
+  set a := X.line ((X.phi ^ (j + 1)) d)
+  set b := X.line ((X.phi ^ (k + 1)) (X.M.a0 d))
+  have ham : a ≠ X.line d := fun h => line_inj hs d (Nat.succ_pos j) hj (by simpa using h.symm)
+  have hbm : b ≠ X.line d := fun h => line_inj hs (X.M.a0 d) (Nat.succ_pos k) hk
+    (by rw [pow_zero, Equiv.Perm.one_apply, X.line_a0]; exact h.symm)
+  have hvw := noLoop hbf d
+  have va : X.On (X.M.vtx d) a := ⟨_, vtx_phi' _ _, rfl⟩
+  have vm : X.On (X.M.vtx d) (X.line d) := ⟨d, rfl, rfl⟩
+  have wb : X.On (X.M.vtx (X.M.a0 d)) b := ⟨_, vtx_phi' _ _, rfl⟩
+  have wm : X.On (X.M.vtx (X.M.a0 d)) (X.line d) := ⟨_, rfl, X.line_a0 d⟩
+  have nwa : ¬X.On (X.M.vtx (X.M.a0 d)) a := fun h => hvw (meet_eq ham h wm va vm)
+  have nvb : ¬X.On (X.M.vtx d) b := fun h => hvw (meet_eq hbm wb wm h vm)
+  have sc : ∀ e, X.lineChain a e ≠ 0 → X.lineE e = a := fun e h => by_contra fun h' => h (by
+    simp [lineChain, h'])
+  have p0 : ∀ {P : X.M.Edge → ZMod 2} {l}, (∀ e, P e ≠ 0 → X.lineE e = l) → ∀ {ε},
+      X.lineE ε ≠ l → P ε = 0 := fun hP ε h => by_contra fun h' => h (hP ε h')
+  have hz : Pi.single (X.M.edge d) 1 + Pa + Pb ∈ X.Z1 := by
+    simp only [LinearMap.mem_ker, Matrix.mulVecLin_apply, Matrix.mulVec_add, bd_single hbf d, ba,
+      bb]
+    exact funext fun v => (by decide : ∀ x y q : ZMod 2, x + y + (x + q) + (y + q) = 0) _ _ _
+  rw [flip hbf hs ham hz]
+  rintro ⟨S, hS⟩
+  simp only [Matrix.mulVecLin_apply] at hS
+  have key := edge_parity hbf hs S d (fun ε hε hne => by
+      rw [hS, Pi.add_apply, Pi.add_apply, Pi.add_apply, Pi.single_eq_of_ne hne,
+        p0 sa fun h => ham (h.symm.trans hε), p0 sb fun h => hbm (h.symm.trans hε),
+        p0 sc fun h => ham (h.symm.trans hε)]
+      simp)
+    fun q hq hqv hqw ε hε => by
+      have hqa : ¬X.On q a := fun h => hqv (meet_eq ham h hq va vm)
+      have hqb : ¬X.On q b := fun h => hqw (meet_eq hbm h hq wb wm)
+      rw [hS, Pi.add_apply, Pi.add_apply, Pi.add_apply, off_line sa hqa hε, off_line sb hqb hε,
+        off_line sc hqa hε, Pi.single_eq_of_ne fun h => by
+          rcases (inc_iff d q).1 (h ▸ hε) with h' | h'
+          exacts [hqv h', hqw h']]
+      simp
+  rw [hS] at key
+  simp only [Pi.add_apply, Finset.sum_add_distrib] at key
+  have e2 := half_edge hbf (X.M.a0 d)
+  rw [edge_a0] at e2
+  rw [half_edge hbf d, e2, half_one_gen hs d hj sa rfl ha, half_zero d sb nvb,
+    half_one_gen hs d hj sc rfl (by simp [lineChain, a]), half_zero _ sa nwa,
+    half_one_gen hs (X.M.a0 d) hk sb rfl hb, half_zero _ sc nwa] at key
+  exact absurd key (by decide)
+
+open Classical in
+/-- `φ` has period `2ν` at every flag: the `2ν` edge-ends at a vertex are a cycle. -/
+theorem phi_period (x : D) : (X.phi ^ (2 * X.nu (X.M.vtx x))) x = x := by
+  set ν := X.nu (X.M.vtx x)
+  let g : ℕ × Bool → D := fun q => if q.2 then X.M.a2 ((X.phi ^ q.1) x) else (X.phi ^ q.1) x
+  have pinj : ∀ {i i' : ℕ}, i < 2 * ν → i' < 2 * ν → (X.phi ^ i) x = (X.phi ^ i') x → i = i' := by
+      intro i i' hi hi' h
+      rcases lt_trichotomy i i' with h' | h' | h'
+      exacts [(pow_ne x h' hi' h).elim, h', (pow_ne x h' hi h.symm).elim]
+  have hA : (((Finset.range (2 * ν)) ×ˢ (Finset.univ : Finset Bool)).image g).card = 4 * ν := by
+    rw [Finset.card_image_of_injOn]
+    · simp; ring
+    rintro ⟨i, b⟩ hi ⟨i', b'⟩ hi' h
+    simp only [Finset.coe_product, Finset.coe_range, Set.mem_prod, Set.mem_Iio] at hi hi'
+    cases b <;> cases b' <;> simp only [g, Bool.false_eq_true, ite_false, ite_true] at h
+    · rw [pinj hi.1 hi'.1 h]
+    · exact (a2_ne_pow i' i x h.symm).elim
+    · exact (a2_ne_pow i i' x h).elim
+    · rw [pinj hi.1 hi'.1 (by simpa [X.M.a2_a2] using congrArg X.M.a2 h)]
+  have heq := Finset.eq_of_subset_of_card_le (s := ((Finset.range (2 * ν)) ×ˢ
+    (Finset.univ : Finset Bool)).image g) (t := Finset.univ.filter fun d => X.M.vtx d = X.M.vtx x)
+    (fun y hy => by
+      obtain ⟨⟨i, b⟩, -, rfl⟩ := Finset.mem_image.1 hy
+      cases b <;> simp [g])
+    (by rw [card_vtx, hA])
+  obtain ⟨⟨i, b⟩, hi, h⟩ := Finset.mem_image.1 (heq ▸ (by simp :
+    (X.phi ^ (2 * ν)) x ∈ Finset.univ.filter fun d => X.M.vtx d = X.M.vtx x))
+  simp only [Finset.mem_product, Finset.mem_range, Finset.mem_univ, and_true] at hi
+  cases b
+  · simp only [g, Bool.false_eq_true, ite_false] at h
+    have := four_nu_le ((X.phi ^ i) x) (q := 2 * ν - i) (by omega) (by
+      rw [← Equiv.Perm.mul_apply, ← pow_add, Nat.sub_add_cancel hi.le, ← h])
+    rw [vtx_phi'] at this
+    obtain rfl : i = 0 := by omega
+    simpa using h.symm
+  · exact (a2_ne_pow i _ x h).elim
+
+open Classical in
+/-- At the end `vtx x` of a segment of the line of `x`, the segment is `1` on exactly one of the
+two edges of that line. -/
+theorem seg_end (hbf : BigonFree X.On) (hs : X.Straight) (x : D) {P : X.M.Edge → ZMod 2}
+    {p : X.M.Vtx} (hP : ∀ e, P e ≠ 0 → X.lineE e = X.line x)
+    (hb : X.incM *ᵥ P = Pi.single (X.M.vtx x) 1 + Pi.single p 1) (hp : p ≠ X.M.vtx x) :
+    P (X.M.edge x) + P (X.M.edge ((X.phi ^ X.nu (X.M.vtx x)) x)) = 1 := by
+  have h0 := congrFun hb (X.M.vtx x)
+  rw [incM_mulVec, Finset.sum_congr rfl
+    (g := fun e => if X.Inc (X.M.vtx x) e ∧ X.lineE e = X.line x then P e else 0) fun e _ => by
+      by_cases h1 : X.Inc (X.M.vtx x) e <;> by_cases h2 : X.lineE e = X.line x <;> simp [h1, h2]
+      exact by_contra fun h => h2 (hP e h), ← Finset.sum_filter, (line_edges hbf hs x).1,
+    Finset.sum_pair (line_edges hbf hs x).2] at h0
+  simpa [Pi.single_eq_of_ne hp.symm] using h0
+
+open Classical in
+/-- **Triangles leaving an edge on opposite sides do not bound.** With the notation of
+`side_bounds`, but `e2` taken on the side of the face of `a2 d` (after `a0 (a2 d)` at `w`), the
+triangle `e + Pa + Pb` does not bound. With `side_bounds`: whether two edges at the two ends of
+`e` leave it on the same side is read on the bounding triangles, that is (A4). -/
+theorem side_not (hbf : BigonFree X.On) (hs : X.Straight) (d : D) {j k : ℕ}
+    (hj : j + 1 < X.nu (X.M.vtx d)) (hk : k + 1 < X.nu (X.M.vtx (X.M.a0 d))) {p : X.M.Vtx}
+    (hpv : p ≠ X.M.vtx d) {Pa Pb : X.M.Edge → ZMod 2}
+    (sa : ∀ e, Pa e ≠ 0 → X.lineE e = X.line ((X.phi ^ (j + 1)) d))
+    (sb : ∀ e, Pb e ≠ 0 → X.lineE e = X.line ((X.phi ^ (k + 1)) (X.M.a0 (X.M.a2 d))))
+    (ba : X.incM *ᵥ Pa = Pi.single (X.M.vtx d) 1 + Pi.single p 1)
+    (bb : X.incM *ᵥ Pb = Pi.single (X.M.vtx (X.M.a0 d)) 1 + Pi.single p 1)
+    (ha : Pa (X.M.edge ((X.phi ^ (j + 1)) d)) = 1)
+    (hb : Pb (X.M.edge ((X.phi ^ (k + 1)) (X.M.a0 (X.M.a2 d)))) = 1) :
+    Pi.single (X.M.edge d) 1 + Pa + Pb ∉ X.B1 := by
+  intro hT
+  set ν := X.nu (X.M.vtx d)
+  set a := X.line ((X.phi ^ (j + 1)) d)
+  have ham : a ≠ X.line d := fun h => line_inj hs d (Nat.succ_pos j) hj (by simpa using h.symm)
+  -- the other edge of `a` at `v`, seen from `a2 d`
+  have key : (X.phi ^ (ν - (j + 1))) (X.M.a2 d) = X.M.a2 ((X.phi ^ (ν + (j + 1))) d) := by
+    have hp := phi_period (X := X) (X.M.a2 d)
+    rw [vtx_a2] at hp
+    rw [show (X.phi ^ (ν + (j + 1))) d = (X.phi ^ ((ν + (j + 1) : ℕ) : ℤ)) d by
+      rw [zpow_natCast], a2_zpow]
+    conv_rhs => rw [← hp]
+    rw [← Equiv.Perm.mul_apply, ← zpow_natCast X.phi (2 * ν), ← _root_.zpow_add,
+      ← zpow_natCast X.phi (ν - (j + 1))]
+    congr 2; omega
+  have hν : X.nu (X.M.vtx ((X.phi ^ (j + 1)) d)) = ν := by rw [vtx_phi']
+  have hx : (X.phi ^ ν) ((X.phi ^ (j + 1)) d) = (X.phi ^ (ν + (j + 1))) d := by
+    rw [← Equiv.Perm.mul_apply, ← pow_add]
+  have e0 := seg_end hbf hs ((X.phi ^ (j + 1)) d) sa (by rw [vtx_phi']; exact ba)
+    (by rw [vtx_phi']; exact hpv)
+  rw [ha, hν, hx] at e0
+  have z0 : Pa (X.M.edge ((X.phi ^ (ν + (j + 1))) d)) = 0 := by
+    linear_combination e0
+  have hj' : ν - (j + 1) - 1 + 1 = ν - (j + 1) := by omega
+  have la2 : X.line ((X.phi ^ (ν + (j + 1))) d) = a := by rw [← hx, ← hν]; exact hs _
+  have la : X.line ((X.phi ^ (ν - (j + 1) - 1 + 1)) (X.M.a2 d)) = a := by
+    rw [hj', key, X.line_a2, la2]
+  have hT2 := side_bounds hbf hs (X.M.a2 d) (j := ν - (j + 1) - 1) (k := k) (p := p)
+    (Pa := Pa + X.lineChain a) (Pb := Pb) (by rw [vtx_a2]; omega)
+    (by rw [X.M.a0_a2, vtx_a2]; exact hk)
+    (fun e h => by
+      rw [la]
+      by_contra h'
+      exact h (by simp [lineChain, h', by_contra fun h'' => h' (sa e h'')]))
+    sb (by rw [Matrix.mulVec_add, ba, show X.incM *ᵥ X.lineChain a = 0 from
+      lineChain_mem hbf hs a, add_zero, vtx_a2])
+    (by rw [X.M.a0_a2, vtx_a2]; exact bb)
+    (by rw [Pi.add_apply, hj', key, edge_a2, z0]; simp [lineChain, la2]) hb
+  rw [edge_a2] at hT2
+  refine lineChain_not_mem hbf hs ham ?_
+  convert X.B1.add_mem hT hT2 using 1
+  exact funext fun _ => (by decide : ∀ s x y c : ZMod 2, c = s + x + y + (s + (x + c) + y)) _ _ _ _
+
+end Sides
 
 end PseudolineMap
 
