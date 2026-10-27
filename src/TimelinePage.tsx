@@ -623,7 +623,7 @@ function Room({ title, boxes, bays, sel, onSel }: { title: string; boxes: RoomBo
     const bay = Math.floor(shelf / SHELF.levels);
     const level = REACH_ORDER[shelf % SHELF.levels];
     const cx = bay * SHELF.w + 2 + (i % perShelf) * (A4.w + 3);
-    return p.boxes.map((x) => ({ ...x, cx, cy: 1, z: x.z + level * SHELF.gap + 2 }));
+    return p.boxes.map((x) => ({ ...x, level, cx, cy: 1, z: x.z + level * SHELF.gap + 2 }));
   });
   const order = [...placed].sort((p, q) => p.cx - q.cx || p.z - q.z);
   const shelfH = SHELF.levels * SHELF.gap;
@@ -638,24 +638,26 @@ function Room({ title, boxes, bays, sel, onSel }: { title: string; boxes: RoomBo
         {Array.from({ length: bays + 1 }, (_, k) => (
           <line key={'u' + k} x1={pt(k * SHELF.w, 0, 0).split(',')[0]} y1={pt(k * SHELF.w, 0, 0).split(',')[1]} x2={pt(k * SHELF.w, 0, shelfH).split(',')[0]} y2={pt(k * SHELF.w, 0, shelfH).split(',')[1]} stroke="#9a9184" strokeWidth={1.2} />
         ))}
-        {/* shelf boards */}
-        {Array.from({ length: SHELF.levels + 1 }, (_, l) =>
-          Array.from({ length: bays }, (_, k) => (
-            <polygon key={`s${l}-${k}`} points={poly([[k * SHELF.w, 0, l * SHELF.gap], [(k + 1) * SHELF.w, 0, l * SHELF.gap], [(k + 1) * SHELF.w, SHELF.d, l * SHELF.gap], [k * SHELF.w, SHELF.d, l * SHELF.gap]])} fill="#e6e1d8" stroke="#b9b1a4" strokeWidth={0.6} />
-          )),
-        )}
-        {order.map(({ b, cx, cy, z, h }) => {
-          const x0 = cx, x1 = cx + A4.w, y0 = cy, y1 = cy + A4.d;
-          const on = sel === null || sel === b.key;
-          return (
-            <g key={b.key} opacity={on ? 1 : 0.3} onMouseEnter={() => onSel(b.key)} style={{ cursor: 'pointer' }}>
-              <title>{b.detail}</title>
-              <polygon points={poly([[x1, y0, z], [x1, y1, z], [x1, y1, z + h], [x1, y0, z + h]])} fill={shade(b.fill, 0.72)} />
-              <polygon points={poly([[x0, y1, z], [x1, y1, z], [x1, y1, z + h], [x0, y1, z + h]])} fill={shade(b.fill, 0.88)} />
-              <polygon points={poly([[x0, y0, z + h], [x1, y0, z + h], [x1, y1, z + h], [x0, y1, z + h]])} fill={shade(b.fill, 1.25)} stroke={shade(b.fill, 0.6)} strokeWidth={0.4} />
-            </g>
-          );
-        })}
+        {/* Each shelf board, then the boxes standing on it; the next board up is drawn over them, so no box crosses a shelf. */}
+        {Array.from({ length: SHELF.levels + 1 }, (_, l) => (
+          <g key={'lvl' + l}>
+            {Array.from({ length: bays }, (_, k) => (
+              <polygon key={`s${l}-${k}`} points={poly([[k * SHELF.w, 0, l * SHELF.gap], [(k + 1) * SHELF.w, 0, l * SHELF.gap], [(k + 1) * SHELF.w, SHELF.d, l * SHELF.gap], [k * SHELF.w, SHELF.d, l * SHELF.gap]])} fill="#e6e1d8" stroke="#b9b1a4" strokeWidth={0.6} />
+            ))}
+            {order.filter((o) => o.level === l).map(({ b, cx, cy, z, h }) => {
+              const x0 = cx, x1 = cx + A4.w, y0 = cy, y1 = cy + A4.d;
+              const on = sel === null || sel === b.key;
+              return (
+                <g key={b.key} opacity={on ? 1 : 0.3} onMouseEnter={() => onSel(b.key)} style={{ cursor: 'pointer' }}>
+                  <title>{b.detail}</title>
+                  <polygon points={poly([[x1, y0, z], [x1, y1, z], [x1, y1, z + h], [x1, y0, z + h]])} fill={shade(b.fill, 0.72)} />
+                  <polygon points={poly([[x0, y1, z], [x1, y1, z], [x1, y1, z + h], [x0, y1, z + h]])} fill={shade(b.fill, 0.88)} />
+                  <polygon points={poly([[x0, y0, z + h], [x1, y0, z + h], [x1, y1, z + h], [x0, y1, z + h]])} fill={shade(b.fill, 1.25)} stroke={shade(b.fill, 0.6)} strokeWidth={0.4} />
+                </g>
+              );
+            })}
+          </g>
+        ))}
         {/* front uprights */}
         {Array.from({ length: bays + 1 }, (_, k) => (
           <line key={'f' + k} x1={pt(k * SHELF.w, SHELF.d, 0).split(',')[0]} y1={pt(k * SHELF.w, SHELF.d, 0).split(',')[1]} x2={pt(k * SHELF.w, SHELF.d, shelfH).split(',')[0]} y2={pt(k * SHELF.w, SHELF.d, shelfH).split(',')[1]} stroke="#9a9184" strokeWidth={1.4} />
