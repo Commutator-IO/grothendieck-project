@@ -47,3 +47,5 @@ vérifier ; l'article porte une déclaration.
   (114 : proposition 4 réfutée présentée comme vraie ; 47 : antériorité sur
   Mukai que la datation ne permet pas) et celle de 27, qui dit encore son
   tapuscrit publié.
+
+- `article-hal.tex` — the version deposited on HAL: same text, without the journal's layout (`rhm.sty`), A4; its bibliography macros are in `halbib.sty`. Compile with `tectonic -X compile article-hal.tex`.

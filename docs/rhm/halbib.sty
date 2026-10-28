@@ -1,0 +1,62 @@
+% Macros bibliographiques reprises de rhm.sty (lignes 239-297), pour la version HAL.
+\ProvidesPackage{halbib}
+\RequirePackage[square,sort]{natbib}
+%%%%%%% BIBLIOGRAPHIE AVEC NATBIB ET RHMUNSRTNAT %%%%%%
+
+\bibpunct{[}{]}{;}{a}{}{;}%CS
+\renewcommand\betweenauthors{\&}%CS
+\gdef\harvardand{\&}
+\def\bibfont{\small}%CS
+\AtBeginDocument{%
+    \nocite{*}%
+    \let\refname\bibname%
+}%CS
+\let\citepyear\citeyearpar%CS
+
+\bibhang50pt
+\renewcommand\NAT@bibsetup%
+   [1]{\leftmargin\bibhang
+       \itemindent-\leftmargin
+       \labelwidth\z@skip
+       \itemsep\bibsep
+       \parsep\z@skip}
+
+\def\RHMoldauteur{}
+\def\RHMauteur#1{\def\tempa{#1}\ifx\tempa\RHMoldauteur
+  \else \def\RHMoldauteur{#1} #1 \\\relax \hbox{}\fi}
+
+\def\RHMEtiquette#1{%
+   \setbox\@tempboxa\hbox{\hskip-\bibhang\kern\normalparindent
+       \hbox{[\textup{#1}]}\kern\labelsep}%
+   \ifdim\wd\@tempboxa<0pt \wd\@tempboxa 0pt \fi
+   \box\@tempboxa}
+
+\def\RHMfirstnewblock{\noindent\hbox{}}
+
+\AtBeginDocument{%
+\def\@tempa{english}
+\ifx\@tempa\smf@language
+   \def\smfdansname{in}%
+   \def\smfmultipages{pp.\kern2pt}
+   \def\smfunipage{p.\kern2pt}
+   \def\smfedition{edition}
+   \def\smfnumeroname{no.}
+   \def\smfedbyname{ed.\kern3pt by}
+\else
+   \def\smfdansname{dans}%
+   \def\smfmultipages{p.\kern2pt}
+   \def\smfunipage{p.\kern2pt}
+   \def\smfedition{\'edition}   
+   \def\smfnumeroname{n\textsuperscript{o}}
+   \let\smfedsname\smfedname
+   \def\smfedbyname{\'ed.\kern3pt par}
+\fi
+}
+
+%%%%%% MACROS UTILES %%%%%%%%
+
+\def\siecle#1{\textsc{\expandafter\romannumeral #1}\textsuperscript{e} si\`ecle}
+\let\up\textsuperscript
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+

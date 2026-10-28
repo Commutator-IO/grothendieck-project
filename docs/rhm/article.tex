@@ -3,6 +3,13 @@
 % mathématiques (smf.emath.fr, « Instructions pour les auteurs »), copiés
 % dans ce répertoire : smfart.cls, rhm.sty, smfthm.sty, smfhyperref.sty,
 % smfenum.sty, rhmunsrtnat.bst. Compilé sous XeTeX (tectonic), d'où fontspec.
+\ifdefined\hal
+% Version HAL : classe générale de la SMF, sans le complément de la revue ;
+% page A4 et natbib chargé ici, comme le faisait rhm.sty.
+\usepackage[a4paper,margin=30mm]{geometry}
+\makeatletter\providecommand\normalparindent{\parindent}\makeatother
+\usepackage{halbib}
+\else
 \usepackage{rhm}
 % The Revue's printed page is 155 x 240 mm (measured on a published article);
 % rhm.sty sets the 11.2 x 17.7 cm measure, centred here on that page, so that
@@ -12,6 +19,7 @@
 \evensidemargin=\oddsidemargin
 \topmargin=\dimexpr(\paperheight-\textheight-\headheight-\headsep-\footskip)/2-1in\relax
 \special{papersize=155mm,240mm}
+\fi
 \usepackage{fontspec}
 \usepackage[english,main=french]{babel}
 \usepackage{microtype}
