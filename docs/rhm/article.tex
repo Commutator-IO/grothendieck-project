@@ -1,8 +1,25 @@
+\ifdefined\ams
+\documentclass[11pt]{amsart}
+% Essai à la manière des revues de l'AMS : classe amsart.
+\makeatletter
+\newcommand\alttitle[1]{\gdef\@alttitle{#1}}
+\newcommand\altkeywords[1]{\gdef\@altkeywords{#1}}
+\newsavebox\altabsbox
+\newenvironment{altabstract}{\global\setbox\altabsbox\vbox\bgroup\advance\hsize-2pc\small\noindent\textsc{Abstract}. \textbf{\@alttitle.}\ \ignorespaces}{\egroup}
+\g@addto@macro\@setabstract{\ifvoid\altabsbox\else\par\medskip\centerline{\box\altabsbox}\fi}
+\providecommand\normalparindent{\parindent}
+\def\smfandname{et}\def\smfbyname{par}\def\smfedname{éd.}\def\smfedsname{éd.}\def\smfphdthesisname{Thèse}\def\smfmastersthesisname{Mémoire}
+\makeatother
+\usepackage[a4paper,margin=30mm]{geometry}
+\usepackage{halbib}
+\else
 \documentclass[a4paper,french]{smfart}
+\fi
 % La classe de la SMF et le complément de la Revue d'histoire des
 % mathématiques (smf.emath.fr, « Instructions pour les auteurs »), copiés
 % dans ce répertoire : smfart.cls, rhm.sty, smfthm.sty, smfhyperref.sty,
 % smfenum.sty, rhmunsrtnat.bst. Compilé sous XeTeX (tectonic), d'où fontspec.
+\ifdefined\ams\else
 \ifdefined\hal
 % Version HAL : classe générale de la SMF, sans le complément de la revue ;
 % page A4 et natbib chargé ici, comme le faisait rhm.sty.
@@ -19,6 +36,7 @@
 \evensidemargin=\oddsidemargin
 \topmargin=\dimexpr(\paperheight-\textheight-\headheight-\headsep-\footskip)/2-1in\relax
 \special{papersize=155mm,240mm}
+\fi
 \fi
 \usepackage{fontspec}
 \usepackage[english,main=french]{babel}
