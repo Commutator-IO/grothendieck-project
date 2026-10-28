@@ -37,7 +37,7 @@ was not yet online on 21 October 2026 (the 2027 page still showed the 2026
 call). The 2026 call allowed regular papers and project and survey papers of
 **up to 15 pages plus bibliography** in LNCS style, submitted on EasyChair;
 the 2026 deadlines were in April. This draft is 17 pages, the body ending on
-page 14 and the references after it, so there is about one page to spare.
+page 15 and the references after it, so it is at the limit.
 It fits the « project and survey » category best. Springer compiles with
 pdfLaTeX; the site copy is built with XeTeX (tectonic), and the pdfLaTeX
 branch of the preamble has not been run here.
