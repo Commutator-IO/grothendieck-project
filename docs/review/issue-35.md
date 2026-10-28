@@ -230,3 +230,14 @@ Four findings stay « too imprecise » because the reading could not fix a word,
 Folder 154 is largely written on fan-fold computer listings. The transcription records his notes on them, and of the printed side only the banner « GUTS » and machine dates of 16 and 19 August 1982. Reading the printed side tells whether the paper is simply reused or a computation bearing on his pseudolines.
 
 - [ ] **154, pp. 61, 72, 81, 90, 95, 97, 99:** the printed side of the listings: the banner « GUTS » (job name, user, computing centre?), the machine dates (16 and 19 August 1982), and what the content is — unrelated output, or a computation about line arrangements, configurations or permutations.
+
+# Words quoted outside the edition (2026-10-28)
+
+### Is the quotation on the page?
+
+A draft answer to a MathOverflow question on the Grothendieck–Teichmüller conjecture quotes a few words from these pages. They come from first-pass transcriptions; a quotation is used only once the words are confirmed on the facsimile.
+
+- [ ] **142, pp. 94–95:** the sentence that conjectures the necessary conditions sufficient, read as « Je pense qu'on […] pas trop […], » (end of p. 94) « exagère en conjecturant » (p. 95), « exagère » doubtful. Read the two gaps and the doubtful word.
+- [ ] **142, p. 99:** condition 1), read as « c'est sûrement la plus importante de toutes, et de très loin ! », « et de » doubtful.
+- [ ] **147, p. 59:** the four « élémentaires » cases of modular dimension ≤ 2, and the end of the sentence that follows: « impliqués dans ces cas, donnera la clef pour une compréhension complète dans le cas général ».
+

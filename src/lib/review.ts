@@ -9,7 +9,7 @@ import { REPO, shortQuote } from './report.ts';
  * and then only GitHub's own form opens, for the reader to submit or not.
  */
 
-export type ReviewKind = 'ill' | 'uncertain' | 'add' | 'supplied' | 'date' | 'letter' | 'argument' | 'reference' | 'hypothesis' | 'imprecise' | 'unproved' | 'paper';
+export type ReviewKind = 'ill' | 'uncertain' | 'add' | 'supplied' | 'date' | 'letter' | 'argument' | 'reference' | 'hypothesis' | 'imprecise' | 'unproved' | 'paper' | 'quoted';
 
 export interface ReviewItem {
   id: string;

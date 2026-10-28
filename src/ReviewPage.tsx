@@ -54,6 +54,7 @@ const KIND_NAME: Record<ReviewKind, string> = {
   imprecise: 'Statement too imprecise to fix',
   unproved: 'Stated without proof?',
   paper: 'Printed side of reused paper',
+  quoted: 'Words quoted outside the edition',
 };
 
 function useSnippets(): Record<string, Snippet> | null {

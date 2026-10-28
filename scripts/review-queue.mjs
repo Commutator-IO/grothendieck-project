@@ -608,6 +608,32 @@ for (const raw of body.split('\n')) {
     }
   }
 
+  // Words of his quoted in a text outside the edition (an answer, an article):
+  // read on the facsimile before the quotation is used.
+  if (section.startsWith('Words quoted outside the edition')) {
+    const q = /^\*\*(\d+(?:-\d+)?)(?:,\s*pp?\.\s*([\d–, -]+))?:\*\*\s*(.*)$/.exec(text);
+    if (q && isCote(q[1])) {
+      const ps = (q[2] ?? '').split(/,\s*/).flatMap((r) => {
+        const [a, b] = r.split('–').map(Number);
+        return b > a ? Array.from({ length: b - a + 1 }, (_, i) => a + i) : a ? [a] : [];
+      });
+      push({
+        id: `quoted-${q[1]}-p${ps[0] ?? 0}`,
+        section: n,
+        kind: 'quoted',
+        cote: q[1],
+        page: ps[0] ?? null,
+        prompt: `Are these words of folder ${q[1]} on the page as the transcription reads them?`,
+        choices: [C('Yes, word for word', 'right'), C('A word differs', 'other', 'What the page has'), C('Not legible enough to quote', 'illegible')],
+        hint: `${ps.length ? facsimileAt(ps) : `Leaf through the facsimile of folder ${q[1]}`}: read the words in « » in the box, and the gaps marked […].`,
+        claim: `${q[3][0].toUpperCase()}${q[3].slice(1)}`,
+        details: text.replace(/\*\*/g, ''),
+        context: 'These words are quoted outside the edition; a quotation is used only once a reader of the hand has checked it (2026-10-28).',
+      }, null);
+      continue;
+    }
+  }
+
   // §1 — the unread words of the densest batches.
   if (!fromMoved && sub.startsWith('1.')) {
     const cote = /^(\S+)/.exec(text)[1];
