@@ -712,6 +712,8 @@ function Boxes() {
   const mtpTotal = MTP_BOXES.reduce((a, b) => a + b.pages, 0);
   const bnfTotal = BNF_BOXES.reduce((a, b) => a + b.leaves, 0);
   const CARD = '#b89b72';
+  // Bourbaki collections in which no document names Grothendieck.
+  const PLAIN = '#cfd3dc';
   const bnfFill = (b: BnfBox) => (b.maths === 'whole' ? DARK : b.maths === 'part' ? LIGHT : CARD);
   const mtp: RoomBox[] = MTP_BOXES.map((b) => ({ key: 'm:' + b.id, label: b.title, sheets: b.pages, fill: DARK, detail: `${b.title}: ${b.folders} folder${b.folders > 1 ? 's' : ''}, ${fmt(b.pages)} pages, a stack of about ${Math.round(b.pages * SHEET_CM)} cm` }));
   const bnf: RoomBox[] = BNF_BOXES.map((b) => ({ key: 'b:' + b.box, label: `(${b.box}) ${b.title}`, sheets: b.leaves, fill: bnfFill(b), detail: `NAF 29093 (${b.box}), ${b.title}${b.years ? `, ${b.years}` : ''}: ${fmt(b.leaves)} leaves, a stack of about ${Math.round(b.leaves * SHEET_CM)} cm` }));
@@ -722,7 +724,8 @@ function Boxes() {
     const n = Math.ceil(f.pages / BOX_MAX);
     return Array.from({ length: n }, (_, i) => {
       const pages = i < n - 1 ? BOX_MAX : f.pages - BOX_MAX * (n - 1);
-      return { key: `k:${f.collection}:${i}`, label: f.collection, sheets: pages, fill: DARK, detail: `Bourbaki, ${f.collection}${n > 1 ? ` (box ${i + 1} of ${n})` : ''}: ${fmt(pages)} pages, a stack of about ${Math.round(pages * SHEET_CM)} cm` };
+      const names = f.grothendieck ? `, ${f.grothendieck} document${f.grothendieck > 1 ? 's' : ''} naming Grothendieck` : ', no document naming Grothendieck';
+      return { key: `k:${f.collection}:${i}`, label: f.collection, sheets: pages, fill: f.grothendieck ? DARK : PLAIN, detail: `Bourbaki, ${f.collection}${n > 1 ? ` (box ${i + 1} of ${n})` : ''}: ${fmt(pages)} pages, a stack of about ${Math.round(pages * SHEET_CM)} cm${names}` };
     });
   });
   const all = [...mtp, ...bnf, ...bk];
@@ -746,13 +749,14 @@ function Boxes() {
           Bourbaki archive
         </a>{' '}
         put online by the Archives Henri Poincaré: {fmt(bkTotal)} pages of drafts, reports and circulars from{' '}
-        {BOURBAKI_FONDS.length} source collections, the larger ones cut into boxes of at most 3,000 pages.
+        {BOURBAKI_FONDS.length} source collections, the larger ones cut into boxes of at most 3,000 pages; only the {BOURBAKI_FONDS.filter((f) => f.grothendieck).length} collections with a document that names Grothendieck are in blue.
       </p>
       <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[12px] text-ink-600">
         {[
           [DARK, 'Mathematics'],
           [LIGHT, 'Partly mathematics (BnF)'],
           [CARD, 'Other writings (BnF)'],
+          [PLAIN, 'Bourbaki, Grothendieck not named'],
         ].map(([c, l]) => (
           <span key={l} className="inline-flex items-center gap-1.5">
             <svg width="12" height="10" aria-hidden="true">
