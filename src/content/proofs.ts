@@ -463,6 +463,19 @@ export const PROOFS: Proof[] = [
     theorems: ['model', 'table_two', 'table_three', 'graph_rule', 'product_rule', 'product_rule_pointed', 'push_old', 'push_point', 'push_diag', 'pull_d'],
   },
   {
+    folder: '13',
+    batch: 3,
+    page: '33, 47',
+    name: 'The double-lattice question: the inclusion V^G ⊂ V ∩ g(V̄), and the Tate case',
+    statement:
+      "Page 47 asks whether, over an algebraic extension of ℚ, M ↦ (T_DR(M), T_B(M), φ) is fully faithful, that is whether V^G ⊂ V ∩ g(V̄) is an equality for every G-module V; the inclusion always holds, and for V of rank one « c'est une puissance de Tate, et ça marche ». Page 33 describes V ∩ T′(V) as the x ∈ V with g⁻¹x ∈ V_K.",
+    found:
+      "Both statements the page makes without argument hold, in the edition's models: an element of B ⊆ Λ fixed by the whole group lies in B ∩ g·Λ; and for ℚ(n), whose Betti line is ℚ and de Rham line (2πi)ⁿℚ̄ in ℂ, ℚ ∩ (2πi)ⁿℚ̄ is ℚ for n = 0 and {0} otherwise, which is V^G for the weight-n character of 𝔾_m. For n ≠ 0 the proof uses the transcendence of π (Lindemann), which mathlib lacks; it is an explicit hypothesis. Not formalised: the identification of ℚ(n) with these lines, the group H of pp. 33–34, and the general question, which is the period conjecture.",
+    verdict: 'partly proved',
+    lean: 'lean/Grothendieck/Folder13.lean',
+    theorems: ['mem_inter_smul_iff', 'invariants_subset_inter_smul', 'isAlgebraic_I', 'isAlgebraic_of_zpow', 'tate'],
+  },
+  {
     folder: '16',
     batch: 1,
     page: '6–16, 24–28, 47–48',
