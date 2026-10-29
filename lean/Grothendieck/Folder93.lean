@@ -21,6 +21,10 @@ import Grothendieck.Upstream.HasseDerivXPowMul
 import Grothendieck.Upstream.PolynomialIsCoprimeX
 import Grothendieck.Upstream.DerivationLieMulLeft
 import Mathlib.RingTheory.PicardGroup
+import Mathlib.RingTheory.Localization.Away.Basic
+import Mathlib.RingTheory.FiniteType
+import Mathlib.RingTheory.Algebraic.Defs
+import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 
 /-!
 # Folder 93, pages 72, 115–123: the Schwarzian difference with divided derivatives
@@ -1583,6 +1587,49 @@ theorem horizontal_unit_iff_Fp (a : (ZMod p)[X]) :
   exact ⟨1, 1, one_mul 1, by simp⟩
 
 end CartierFp
+
+/-!
+## Pages 193–194: the converse asked by the page (statement only)
+
+Page 194 asks of the remark of page 193, « La réciproque est-elle vraie ? »: if the
+`p`-curvature of a connection vanishes for almost all `p`, is the monodromy finite? This is the
+Grothendieck–Katz `p`-curvature conjecture (Katz 1972, *Algebraic solutions of differential
+equations*). It is open. `PCurvatureConjecture` **states it, without proof,** for a vector
+bundle with connection on an open subset of the affine line over a base of finite type: the
+ring `A = R[x][1/g]`, `R` a domain of finite type over `ℤ` of characteristic `0`, with `D = d/dx`
+(a derivation with `D x = 1` that kills `R`), and `∇ = D + Γ` on `Aⁿ`.
+
+* The `p`-curvature at `p` is the reduction modulo `p` of `Γ_p = curvMat D Γ p`
+  (`pCurvature_apply`): on `A/pA` the operator `Dᵖ` vanishes, so `∇ᵖ - ∇_{Dᵖ}` is `Γ_p`
+  reduced. The hypothesis says that for all but finitely many primes `p` every entry of `Γ_p`
+  lies in `pA`.
+* Finite monodromy at the generic point is written, as Katz writes it, as a full set of
+  algebraic solutions: a field `L ⊇ A` with a derivation extending `D`, and an invertible
+  matrix `Y` with entries algebraic over `A` and `D Y + Γ Y = 0`.
+
+Over a single curve with a chosen coordinate this is a special case of the conjecture, still
+open in rank `≥ 2` and outside the solvable case (Chudnovsky, André, Bost). A `Prop`, not an
+axiom; nothing depends on it. The easy direction in characteristic `p` is
+`curvMat_eq_zero_of_horizontal`, and Cartier's converse, at one prime, is
+`horizontal_unit_iff` and `horizontal_span`.
+-/
+
+open Polynomial in
+/-- **The Grothendieck–Katz `p`-curvature conjecture** on an open subset of the affine line
+(statement, open; page 194, « La réciproque est-elle vraie ? »). -/
+def PCurvatureConjecture : Prop :=
+  ∀ (R : Type) [CommRing R] [IsDomain R] [CharZero R] [Algebra.FiniteType ℤ R]
+    (g : R[X]), g ≠ 0 →
+    ∀ (A : Type) [CommRing A] [Algebra R[X] A] [IsLocalization.Away g A]
+      (D : Derivation ℤ A A),
+    D (algebraMap R[X] A X) = 1 → (∀ r : R, D (algebraMap R[X] A (C r)) = 0) →
+    ∀ (n : ℕ) (Γ : Matrix (Fin n) (Fin n) A),
+    {p : ℕ | p.Prime ∧ ¬ ∀ i j, curvMat D Γ p i j ∈ Ideal.span {(p : A)}}.Finite →
+    ∃ (L : Type) (_ : Field L) (_ : Algebra A L),
+      Function.Injective (algebraMap A L) ∧
+      ∃ D' : Derivation ℤ L L, (∀ a, D' (algebraMap A L a) = algebraMap A L (D a)) ∧
+        ∃ Y : Matrix (Fin n) (Fin n) L, IsUnit Y.det ∧ (∀ i j, IsAlgebraic A (Y i j)) ∧
+          Y.map D' + Γ.map (algebraMap A L) * Y = 0
 
 end Grothendieck.Folder93.PCurvature
 
