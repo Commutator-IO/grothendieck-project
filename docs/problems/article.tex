@@ -165,11 +165,24 @@ correct as stated?
 
 \known The equivalence $C(X) \iff C(Y) + A^0(X \times X)$ and its descent along a chain of hyperplane sections are Kleiman's \cite[Th.~2.13]{kleiman1968}. The splitting of $A^0$ into the two one-sided conditions was not found in Kleiman 1968 and 1994, Grothendieck 1969, Charles 2013, Ramón Marí, or Milne; André's book \cite[ch.~5, \S5.2]{andre} remains to be read.
 
-\ideas The page factors the critical operator through the section. For $n = 2m$: $L^2 = \varphi_* \circ L_Y \circ \varphi^* : H^{2m-2}(X) \to H^{2m-2}(Y) \to H^{2m}(Y) \to H^{2m+2}(X)$; for $n = 2m+1$: $L = \varphi_*\varphi^* : H^{2m}(X) \to H^{2m+2}(X)$. With it (our reconstruction, $n = 2m$): an algebraic $z \in H^{2m+2}(X)$ is $\varphi_*y$ with $y$ algebraic by $A''^{0}$; by weak and hard Lefschetz, $y = L_Y\varphi^*x$ for a unique $x$, and $z = L^2x$; if $L_Y^{-1}$ preserves algebraic classes on $Y$, $\varphi^*x$ is algebraic, and then $x$ is algebraic by $A'^{0}$. So the splitting holds given the Lefschetz condition on the section in the relevant degree. In the displayed equivalence it is applied to $T = X \times X$, whose hyperplane section is not $Y \times Y$; whether the hypothesis on the section is supplied by the induction, or must be added, is the point to check.
+\ideas The page factors the critical operator through the section. For $n = 2m$: $L^2 = \varphi_* \circ L_Y \circ \varphi^* : H^{2m-2}(X) \to H^{2m-2}(Y) \to H^{2m}(Y) \to H^{2m+2}(X)$; for $n = 2m+1$: $L = \varphi_*\varphi^* : H^{2m}(X) \to H^{2m+2}(X)$. What follows is our reconstruction, unchecked by a specialist.
+
+\emph{$n = 2m$ even.} Let $z \in H^{2m+2}(X)$ be algebraic. By $A''^{0}$, $z = \varphi_*y$ with $y \in H^{2m}(Y)$ algebraic. Since $\dim Y = 2m-1$, hard Lefschetz makes $L_Y : H^{2m-2}(Y) \to H^{2m}(Y)$ bijective and weak Lefschetz makes $\varphi^* : H^{2m-2}(X) \to H^{2m-2}(Y)$ bijective, so $y = L_Y\varphi^*x$ for a unique $x \in H^{2m-2}(X)$, and $z = L^2x$. If $L_Y^{-1} : H^{2m}(Y) \to H^{2m-2}(Y)$ preserves algebraic classes, then $\varphi^*x = L_Y^{-1}y$ is algebraic, and $x$ is algebraic by $A'^{0}$. This hypothesis is the critical Lefschetz condition $A^0(Y)$ of the odd-dimensional section. So, for $n$ even,
+\[
+A'^{0}(X) + A''^{0}(X) + A^0(Y) \;\Longrightarrow\; A^0(X).
+\]
+
+\emph{$n = 2m+1$ odd.} Here $z = \varphi_*y$ with $y \in H^{2m}(Y)$ algebraic, and $x = L^{-1}z$ satisfies $\varphi_*(\varphi^*x - y) = 0$. By the projection formula the kernel of $\varphi_*$ on $H^{2m}(Y)$ is the orthogonal $V$ of $\varphi^*H^{2m}(X)$, the vanishing cohomology, and $H^{2m}(Y) = \varphi^*H^{2m}(X) \oplus V$. So $\varphi^*x = p(y)$, where $p = \varphi^* L^{-1} \varphi_*$ is the projection along~$V$, and $A'^{0}$ gives $A^0(X)$ as soon as $p$ preserves algebraic classes. But that condition follows from $A^0(X)$ itself. In odd dimension the splitting is therefore a reformulation, unless the decomposition of the algebraic classes of $H^{2m}(Y)$ along $\varphi^*H^{2m}(X) \oplus V$ is supplied otherwise; we do not see that $C(Y)$ supplies it, since $\varphi^*H^{2m}(X)$ is not a Lefschetz piece of~$Y$.
+
+\emph{Application to $X \times X$.} The displayed equivalence applies the even case to $T = X \times X$, of dimension $2n$. Its hyperplane section $Y_T$ has dimension $2n-1$ and is not $Y \times Y$, and the hypothesis needed is $A^0(Y_T)$, the critical Lefschetz condition in degrees $2n-2$ and $2n$ of a variety of dimension $2n-1$. The direction $\Rightarrow$ holds: $C(X)$ gives $C(X \times X)$ \cite{kleiman1968}, and with $\Lambda_T$ algebraic a class $x$ with $\varphi^*x$ algebraic is $L_T^{-1}\varphi_*\varphi^*x$, hence algebraic, so $C(X)$ gives $A'^{0}(T)$, and $A''^{0}(T)$ likewise. For $\Leftarrow$, an induction on dimension supplies $C$ only below $\dim X = n$, not for $Y_T$. So what our reconstruction proves is
+\[
+C(Y) + A'^{0}(X \times X) + A''^{0}(X \times X) + A^0(Y_T) \;\Longrightarrow\; C(X),
+\]
+and the question is whether the last term can be dropped, or replaced by a condition on varieties of dimension below~$n$. If it cannot, the splitting gains nothing on Kleiman's $C(X) \iff C(Y) + A^0(X \times X)$, where $A^0$ already bears on $X \times X$ directly.
 
 \leanst Not attempted: no Weil cohomology in Mathlib.
 
-\settle A reference for the splitting, or a precise statement of the hypotheses under which it holds, applied to $X \times X$.
+\settle A reference for the splitting; or a proof that $A^0(Y_T)$ can be dropped from the last display, or replaced by conditions on varieties of dimension below $n$; or an argument that it cannot, in which case the reduction is circular.
 
 \section{Abelian varieties and reductive groups}
 
@@ -181,7 +194,17 @@ Let $A/S$ be an abelian scheme of relative dimension~$2$ with dual $B$, and $\de
 
 \known Poonen and Stoll define $c_\lambda$ and prove $2c_\lambda = 0$, with no criterion in terms of $\chi(\lambda)$ or the dimension \cite[\S4]{poonenstoll}. We found no such criterion elsewhere.
 
-\ideas The reading thought the conclusion depends on compatibilities of trivialisations that the folder asks for and never proves. Our argument, unchecked, needs none for mere triviality. The map $L \mapsto \det(\hat L)^{\pm1}$, with $\hat L$ the Fourier--Mukai transform, is a morphism of fppf sheaves $\Pic^\delta_{A/S} \to \Pic^{\varphi(\delta)}_{B/S}$, equivariant along $\varphi(\delta)^\sim$ by the theorem of the square. The same construction on $B$ goes back to $\Pic^{\varphi\varphi(\delta)}_{A/S}$, and in dimension~$2$, $\varphi\varphi(\delta) = \delta$. The composite $B \to B$ is multiplication by $\mp\chi(\delta)$. Hence $(\chi(\delta) \pm 1)\,[\Pic^\delta] = 0$, and $2\,[\Pic^\delta] = 0$ through $L \mapsto L \otimes [-1]^*L$. Both $\chi \pm 1$ are odd when $\chi$ is even, so the class vanishes whatever the signs. Whether the trivialisation obtained is canonical is a separate question.
+\ideas The reading thought the conclusion depends on compatibilities of trivialisations that the folder asks for and never proves. Our argument, unchecked, needs none for mere triviality. Write $c = [\Pic^\delta_{A/S}] \in H^1(S, B)$, $\chi = \chi(\delta)$, and $\varphi_L : A \to B$ for the isogeny of a line bundle $L$ of class~$\delta$, of degree $\chi^2$.
+
+\emph{Step 1, the map.} For $L$ of class $\delta$, relatively ample of index~$0$, the Fourier--Mukai transform $\hat L$ is a vector bundle of rank $\chi$ on $B$, and $\varphi_L^*\hat L \cong \pi^*(\pi_*L) \otimes L^{-1}$ \cite[\S3]{mukai1981}. Put $N = \det \hat L$. Then $\varphi_L^*N \cong L^{-\chi}$ up to a line bundle from $S$, so $\varphi_L \circ \varphi_N \circ \varphi_L = -\chi\,\varphi_L$, and since $\varphi_L$ is an isogeny, $\varphi_L \circ \varphi_N = [-\chi]$ on~$B$. The construction commutes with base change, since $\hat L$ is computed in degree~$0$; it defines a morphism of fppf sheaves $\Psi : \Pic^\delta_{A/S} \to \Pic^{[N]}_{B/S}$, which needs $L$ only fppf-locally.
+
+\emph{Step 2, equivariance.} Translating $L$ by $b \in B = \Pic^0_{A/S}$ translates $\hat L$: $\widehat{L \otimes P_b} \cong T_b^*\hat L$ \cite[\S3]{mukai1981}. Taking determinants, $\Psi(L \otimes P_b) = T_b^*N = N \otimes P_{\varphi_N(b)}$ by the theorem of the square. So $\Psi$ is equivariant along $\varphi_N : B \to A = \Pic^0_{B/S}$.
+
+\emph{Step 3, the way back.} The same construction on $B$ sends $N$ to $N' = \det \hat N$ on $A$, equivariantly along $\varphi_{N'} : A \to B$. From $\varphi_L \varphi_N = [-\chi]$ and $\deg \varphi_N = \chi^{2g}/\chi^2$ in relative dimension $g$, one gets $\chi(N) = \pm\chi^{g-1}$ and $\varphi_{N'} = \pm\chi^{g-2}\varphi_L$. This is where the dimension enters: for $g = 2$, $N'$ has class $\pm\delta$, and composing with $L \mapsto L^{-1}$ if the sign is negative, $\Psi' \circ \Psi$ maps $\Pic^\delta_{A/S}$ to itself. For $g \ne 2$ the way back lands in the class $\pm\chi^{g-2}\delta$, and the argument does not close.
+
+\emph{Step 4, the torsor class.} The composite is equivariant along $\varphi_{N'} \circ \varphi_N = \pm\varphi_L\varphi_N = [\mp\chi]$. A morphism from a $B$-torsor to itself that is equivariant along an endomorphism $\psi$ of $B$ shows $\psi_*c = c$, so $(\chi \pm 1)\,c = 0$. Independently $2c = 0$ \cite[\S4]{poonenstoll}, through $L \mapsto L \otimes [-1]^*L$. When $\chi$ is even, $\chi \pm 1$ is odd and prime to~$2$, so $c = 0$ whatever the sign.
+
+The points a specialist should check are the sign conventions in Steps 1 and~2, which decide whether the composite is $[\chi]$ or $[-\chi]$ but not the conclusion; the passage from $\varphi_L\varphi_N\varphi_L = -\chi\varphi_L$ to $\varphi_L\varphi_N = [-\chi]$ over a base; and the compatibility of the Fourier--Mukai transform with base change for a polarisation that exists only fppf-locally. Whether the trivialisation obtained is canonical, which is what the folder asks, is a separate question.
 
 \leanst Not attempted: no abelian schemes in Mathlib.
 
@@ -339,7 +362,7 @@ Let $X$ be smooth projective of dimension $n$ over an algebraically closed field
 
 \entry{Where it stops.} The letter of 1965 misses a way of moving a cycle to infinity in the affine complement $X \smallsetminus Y$, which the weak-to-full step needs. The letter to Coates says of the induction: \q{Thus the main problems arise already for 1-cycles on threefolds} (\fac{16}, p.~46). The 1965 conditions are stated modulo algebraic equivalence, and in that form they are false (Griffiths), as the modernised reading notes. For positivity there is only the one line of folder~15.
 
-\entry{Today.} Open in general. The Lefschetz type is known for curves, surfaces and abelian varieties \cite{kleiman1968}, and the Hodge type in characteristic~$0$ by the Hodge--Riemann relations. Deligne proved the Weil conjectures without them.
+\entry{Today.} Open in general. The Lefschetz type is known for curves, surfaces and abelian varieties \cite{kleiman1968}, and the Hodge type in characteristic~$0$ by the Hodge--Riemann relations. Deligne proved the Weil conjectures without them. An OpenAI preprint of 6 October 2026, not peer-reviewed and not formalised, announces the Hodge conjecture for complex abelian varieties with complex multiplication and deduces the Hodge type for abelian varieties in every characteristic \cite{openaimath}.
 
 \begin{bigconj}[The generalised Hodge conjecture, in its $\ell$-adic form]\label{c:hodge}
 For $X$ smooth projective, the coniveau filtration $\mathrm{Filt}^j H^i(\bar X, \mathbb Q_\ell)$, made of the classes that vanish on the complement of a closed subset of codimension $\ge j$, is the realisation of the largest sub-motive of $h^i(X)$ of level $\le i - 2j$.
@@ -351,7 +374,7 @@ For $X$ smooth projective, the coniveau filtration $\mathrm{Filt}^j H^i(\bar X, 
 
 \entry{Where it stops.} The reverse inclusion, that the largest sub-motive of low level lies in the coniveau filtration, is never argued, and the Frobenius characterisation of p.~54 is struck. In folder~36 he cannot show, even granting the standard conjectures, that the level of a motive can only drop under specialisation: \q{la triste vérité est que je ne sais pas} (p.~16).
 
-\entry{Today.} Open. Grothendieck's 1969 paper corrected Hodge's general conjecture of 1950, which is false, into this form.
+\entry{Today.} Open. Grothendieck's 1969 paper corrected Hodge's general conjecture of 1950, which is false, into this form. The OpenAI preprint on abelian varieties with complex multiplication deduces it for them, not beyond \cite{openaimath}.
 
 \begin{bigconj}[The period conjecture]\label{c:per}
 Over $\overline{\mathbb Q}$, the functor that sends a motive to its de Rham realisation, its Betti realisation and the comparison isomorphism between them is fully faithful; equivalently, the periods of a motive generate a field of transcendence degree equal to the dimension of its motivic Galois group.
@@ -375,7 +398,7 @@ $n$-groupoids, up to $n$-equivalence, are the same as homotopy $n$-types, and $\
 
 \entry{Where it stops.} Nothing is proved: the definition of non-strict $n$-categories is the missing piece, and he writes of the \q{inquiétant mirage} of $n$-limits (p.~169, reading uncertain). He cannot define the classifying topos of an $n$-gerbe for $n \ge 2$ (p.~45), and asks Breen for candidates for the non-abelian complexes. \emph{Pursuing Stacks} (1983), not transcribed in the edition, takes the programme up with coherators and test categories.
 
-\entry{Today.} The answer depends on the model. It is false for strict $n$-groupoids from $n = 3$ (Simpson) and open for Grothendieck's globular $\infty$-groupoids in Maltsiniotis's formulation; an OpenAI preprint of 24 September 2026, not peer-reviewed, announces a proof for the Ara--Henry coherators \cite{huacicm}.
+\entry{Today.} The answer depends on the model. It is false for strict $n$-groupoids from $n = 3$ (Simpson) and open for Grothendieck's globular $\infty$-groupoids in Maltsiniotis's formulation; an OpenAI preprint of 24 September 2026, not peer-reviewed, announces a proof for the Ara--Henry coherators, of which only the elementary-expansion step is formalised in Lean \cite{openaimath}.
 
 \begin{bigconj}[The section conjecture]\label{c:sec}
 For a hyperbolic curve $U$ over a field $K$ of finite type over $\mathbb Q$, every section of $\pi_1(U) \to \Gal(\bar K/K)$ comes, up to conjugacy, from a rational point of $U$ or from a rational point at infinity.
@@ -387,7 +410,7 @@ For a hyperbolic curve $U$ over a field $K$ of finite type over $\mathbb Q$, eve
 
 \entry{Where it stops.} No route to surjectivity appears. Mordell's conjecture, which Faltings proved in 1983, is never used; the only arithmetic input is the Mordell--Weil theorem, for injectivity. The case of the thrice-punctured sphere at a cusp rests on a relation the page calls \q{hautement plausible} (p.~60). On reduction he writes that he has no idea for the moment (p.~102), and the explicit cocycle of a point is called fascinating work not yet begun (\fac{142}, p.~81).
 
-\entry{Today.} Open. Injectivity is known, as are a birational $p$-adic form (Koenigsmann) and the real analogue.
+\entry{Today.} Open. Injectivity is known, as are a birational $p$-adic form (Koenigsmann) and the real analogue. An OpenAI preprint (24 September and 6 October 2026), not peer-reviewed and not formalised, announces the local $p$-adic conjecture for curves of genus at least~$2$, and the global one over number fields when a descent locus equals the rational points, which covers $X_0(N)$ and $X_1(N)$ of genus at least~$2$ over $\mathbb Q$; the affine, cuspidal form of folder~149 is not claimed \cite{openaimath}.
 
 \begin{bigconj}[Ihara's question: $\Gal(\overline{\mathbb Q}/\mathbb Q)$ and the Teichmüller tower]\label{c:gt}
 The outer action of $\Gal(\overline{\mathbb Q}/\mathbb Q)$ on the profinite fundamental groups of the moduli spaces $M_{g,\nu}$ identifies it with the automorphisms of the tower that respect its structure; in Drinfeld's form, $\Gal(\overline{\mathbb Q}/\mathbb Q) \to \widehat{GT}$ is an isomorphism.
@@ -399,7 +422,7 @@ The outer action of $\Gal(\overline{\mathbb Q}/\mathbb Q)$ on the profinite fund
 
 \entry{Where it stops.} The sufficiency of the conditions, the $M_{0,4}$--$M_{0,5}$ conjecture, the programme of folder~147 and the gluing theorem are announced, not proved. Page~59 of folder~147 speaks of the discrete groups, in the analytic setting; reading it as the two-level principle for the Galois action is the edition's. The last step, that an automorphism satisfying the relations of the tower comes from Galois, is not attempted anywhere in the notes.
 
-\entry{Today.} Open; the map is injective by Belyi's theorem. The two-level principle for the discrete tower was proved by Hatcher, Lochak and Schneps \cite{hls}.
+\entry{Today.} Open; the map is injective by Belyi's theorem. The two-level principle for the discrete tower was proved by Hatcher, Lochak and Schneps \cite{hls}. An OpenAI preprint of 23 September 2026, not peer-reviewed, announces the Deligne--Drinfeld conjecture, that the rational Grothendieck--Teichmüller Lie algebra is free on one generator in each odd weight $\ge 3$; it does not touch Ihara's question \cite{openaimath}.
 
 \begin{bigconj}[The $p$-curvature conjecture]\label{c:pcurv}
 Let $S$ be integral, of finite type and dominant over $\Spec \mathbb Z$, $X/S$ smooth, and $E$ a vector bundle on $X$ with an integrable connection. If the $p$-curvature of $E$ vanishes at almost all closed points of $S$, then $E$ has finite monodromy at the generic point.
@@ -422,7 +445,7 @@ Three limits apply to every entry. The transcriptions are first passes by a lang
 Corrections, references and proofs are welcome at the address above. The register of findings, the Lean files and the notices of the folders are on the project's site, \url{https://grothendieck.commutator.io/}.
 
 \subsection*{Changes}
-26 October 2026: the pseudoline dichotomy of \fac{80} proved (\S\ref{sec:pseudo}); the count of Kostant quadruples derived, and Problem~\ref{p:kostant} replaced by the question Grothendieck asked Kostant; Problem~\ref{p:ext2} narrowed after Breen's 1975 theorem; references corrected after a citation check. 29 October 2026: \S\ref{sec:big} added, on the routes the notes take to seven published conjectures.
+26 October 2026: the pseudoline dichotomy of \fac{80} proved (\S\ref{sec:pseudo}); the count of Kostant quadruples derived, and Problem~\ref{p:kostant} replaced by the question Grothendieck asked Kostant; Problem~\ref{p:ext2} narrowed after Breen's 1975 theorem; references corrected after a citation check. 29 October 2026: \S\ref{sec:big} added, on the routes the notes take to seven published conjectures; the arguments for Problems~\ref{p:lef} and~\ref{p:surf} written out step by step, with what a specialist should check; the OpenAI preprints on four of the seven conjectures noted.
 
 \subsection*{Declaration}
 This note was drafted with a language model (Claude Opus 5.5, Anthropic) from the edition's registers: the findings, the modernised readings and the Lean files. The transcriptions and the modernised readings it relies on were also made with language models (Claude Opus~5 and Opus~5.5). The author received no funding for this work.
@@ -457,8 +480,10 @@ This note was drafted with a language model (Claude Opus 5.5, Anthropic) from th
 \bibitem{mathew} A.~Mathew, On $K(1)$-local TR, \emph{Compositio Math.} 157 (2021), 1079--1119, arXiv:2005.08744.
 \bibitem{milneadt} J.~S.~Milne, \emph{Arithmetic Duality Theorems}, 2nd ed., BookSurge, 2006.
 \bibitem{moerdijk1993} I.~Moerdijk, Foliations, groupoids and Grothendieck étendues, \emph{Rev.\ Acad.\ Cienc.\ Zaragoza} (2) 48 (1993), 5--33.
+\bibitem{mukai1981} S.~Mukai, Duality between $D(X)$ and $D(\hat X)$ with its application to Picard sheaves, \emph{Nagoya Math.\ J.} 81 (1981), 153--175.
 \bibitem{mohar1995} B.~Mohar, Uniqueness and minimality of large face-width embeddings of graphs, \emph{Combinatorica} 15 (1995), 541--556.
 \bibitem{mohar-robertson-vitray} B.~Mohar, N.~Robertson, R.~P.~Vitray, Planar graphs on the projective plane, \emph{Discrete Math.} 149 (1996), 141--157.
+\bibitem{openaimath} OpenAI, \texttt{openai/math}, repository of manuscripts and Lean files, \url{https://github.com/openai/math}, folder \texttt{preprints}, read on 17 and 26 October 2026; none of the manuscripts is peer-reviewed.
 \bibitem{poonenstoll} B.~Poonen, M.~Stoll, The Cassels--Tate pairing on polarized abelian varieties, \emph{Ann.\ of Math.} 150 (1999), 1109--1149.
 \bibitem{pop2019} F.~Pop, Finite tripod variants of I/OM: on Ihara's question/Oda--Matsumoto conjecture, \emph{Invent.\ Math.} 216 (2019), 745--797.
 \bibitem{rosenthal} K.~I.~Rosenthal, Sheaves and local equivalence relations, \emph{Cahiers Top.\ Géom.\ Diff.} 25 (1984), 179--206.
