@@ -33,6 +33,9 @@
 \theoremstyle{plain}\newtheorem*{proposition}{Proposition}\theoremstyle{definition}
 % Each problem statement in a frame, as the statements of the Lean article.
 \tcolorboxenvironment{problem}{enhanced, breakable, colback=white, colframe=black!55, boxrule=0.6pt, arc=0pt, left=7pt, right=7pt, top=4pt, bottom=4pt, before skip=14pt, after skip=8pt}
+% The large conjectures of \S\ref{sec:big}, in a lighter frame.
+\newtheorem{bigconj}{Conjecture}
+\tcolorboxenvironment{bigconj}{enhanced, breakable, colback=black!3, colframe=black!35, boxrule=0.4pt, arc=0pt, left=7pt, right=7pt, top=4pt, bottom=4pt, before skip=14pt, after skip=8pt}
 \newcommand{\entry}[1]{\par\medskip\noindent\textbf{#1}\enspace}
 \newcommand{\src}[1]{\entry{Source.}#1}
 \newcommand{\ctx}{\entry{Context.}}
@@ -43,7 +46,7 @@
 
 \title{Open questions from Grothendieck's Montpellier notes:\\ fourteen statements a formalisation could not reach}
 \author{Michel Hua\\ \small Commutator, Paris\\ \small\texttt{michel@commutator.io} · ORCID 0009-0002-8304-0683}
-\date{Working paper, 26 October 2026}
+\date{Working paper, 29 October 2026}
 
 \begin{document}
 
@@ -52,7 +55,7 @@
 \maketitle
 
 \begin{abstract}
-The University of Montpellier has put online 178 folders of Alexandre Grothendieck's mathematical working notes. Since August 2026 an edition has transcribed 165 of them with a language model, restated each in current notation, searched the literature for the statements they contain, and formalised what it could in Lean~4 against Mathlib. Most of the statements that look new sit in theories Mathlib does not have yet: étale cohomology, topoi, stacks, abelian schemes, motives. This note collects fourteen of them for mathematicians. Each comes with its folder and page, the context, what the literature search found, the argument the page gives or sketches, the steps the edition added, and what would settle it. None of the statements has been checked by a specialist, and several may already be in print; a reference is as welcome as a proof or a counterexample.
+The University of Montpellier has put online 178 folders of Alexandre Grothendieck's mathematical working notes. Since August 2026 an edition has transcribed 165 of them with a language model, restated each in current notation, searched the literature for the statements they contain, and formalised what it could in Lean~4 against Mathlib. Most of the statements that look new sit in theories Mathlib does not have yet: étale cohomology, topoi, stacks, abelian schemes, motives. This note collects fourteen of them for mathematicians. Each comes with its folder and page, the context, what the literature search found, the argument the page gives or sketches, the steps the edition added, and what would settle it. A last section takes seven conjectures that are in print under his name, from the standard conjectures to the $p$-curvature conjecture, and drafts from the pages the route he meant to take to each and where it stops. None of the statements has been checked by a specialist, and several may already be in print; a reference is as welcome as a proof or a counterexample.
 \end{abstract}
 
 
@@ -262,7 +265,7 @@ Over a scheme $S$, a \q{domaine de ramification} is a stack of multigaloisian ca
 Let $X$ be an anabelian curve over a field $K$ of finite type over $\mathbb Q$, and $\hat\Pi_1(X, I)$ its profinite fundamental groupoid on a finite set $I$ of base points. The page lists necessary conditions for a vertex-fixing automorphism $\Theta$ of $\hat\Pi_1(X, I)$ to come from $\Gal(\bar K/K)$: it lifts to $\hat\Pi_1(X', I')$ for every finite étale cover $X'$ of $X$ defined over $K$; it preserves the kernels of $\hat\pi_1(X', x') \to \hat\pi_1(Y, f(x'))$ for every $K$-morphism $f : X' \to Y$; it is compatible with morphisms between covers; and it satisfies the loop condition at the cusps with a single multiplier. Are these conditions sufficient?
 \end{problem}
 
-\src{\fac{142}, pp.~94--95, 98--101, \emph{Action de Galois sur Teichmüller}, inventory dating [from 1978]. Page~95 conjectures the conditions sufficient \q{lorsque $X$ est (disons) une courbe algébrique anabélienne, avec $K$ extension de type fini de $\mathbb Q$}; page~98 calls the loop condition \q{sûrement la plus importante de toutes, et de très loin !}. Pages~98--99 are largely illegible.}
+\src{\fac{142}, pp.~94--95, 98--101, \emph{Action de Galois sur Teichmüller}, inventory dating [from 1978]. Page~95 conjectures the conditions sufficient \q{lorsque $X$ est (disons) une courbe algébrique anabélienne, avec $K$ extension de type fini de $\mathbb Q$}; page~99 calls the loop condition \q{sûrement la plus importante de toutes, et de très loin !}. Pages~98--99 are largely illegible.}
 
 \known Ihara's question and the Oda--Matsumoto conjecture characterise the Galois group as the automorphisms of the geometric fundamental group functor on all varieties compatible with all morphisms; Pop proved it in that form, and finite tripod variants, built from varieties of dimension greater than one with finitely many dominant rational maps to $\mathbb P^1 \smallsetminus \{0,1,\infty\}$ \cite[Def.~2.2, Th.~2.9]{pop2019}. Hoshi--Mochizuki and others give injectivity for a single hyperbolic curve; Collas proposes a combinatorial model $GT^{NF}$ as a candidate for $G_{\mathbb Q}$, left to forthcoming work \cite[\S4.3.3]{collas}. We found no characterisation attached to one curve and its covers, with base points and the inertia condition.
 
@@ -322,16 +325,104 @@ Is a combinatorial arrangement of pseudolines in the real projective plane witho
 
 \settle The case with multiple points: a proof of (A1)--(A3) at a vertex of three or more pseudolines, of (A6) and of the complete quadrangle case, or the face-width bound with a uniqueness theorem.
 
+\section{The large conjectures, and how the notes approach them}\label{sec:big}
+
+The fourteen problems above are statements the literature may not have. Seven conjectures of the notes are in it, under Grothendieck's name: the companion paper lists where each first appears in the fonds \cite{huacicm}. This section asks a different question of the same pages: how did he mean to prove them? For each conjecture it gives the statement in today's form, the pages, a draft of the route the pages take, where the route stops, and what is known now. The drafts are the edition's, made from the transcriptions with a language model; they say what the pages do and no more, and where a step comes from the modernised reading rather than the page they say so. None of the seven is solved here, and none of the routes is complete on the page.
+
+\begin{bigconj}[The standard conjectures]\label{c:std}
+Let $X$ be smooth projective of dimension $n$ over an algebraically closed field, with a Weil cohomology $H$ and the Lefschetz operator $L$ of an ample class. \emph{Lefschetz type}: the inverse of $L^{n-i} : H^i(X) \to H^{2n-i}(X)$ is induced by an algebraic correspondence. \emph{Hodge type}: on the primitive algebraic classes of $H^{2i}(X)$, $2i \le n$, the form $(-1)^i \langle L^{n-2i}x, x\rangle$ is positive definite.
+\end{bigconj}
+
+\src{\fac{14}, pp.~43--46, letter to Serre of 27 August 1965, printed in their correspondence; \fac{14}, pp.~105--113; \fac{16}, pp.~32--54, with letters to Coates (pp.~43--49), inventory dating 1966--1967; \fac{12}, pp.~158--166; \fac{15}, p.~169.}
+
+\entry{The route.} The 1965 letter fixes the order of the argument. A Lefschetz condition on cycles gives a Künneth formula for cycles, hence characteristic polynomials of algebraic endomorphisms with integer coefficients, hence the Weil conjectures except the absolute values of the eigenvalues; the positivity gives the absolute values, and the two together make the motives semisimple. He says he can derive the full Lefschetz condition from a weak, restriction-type one, provided it holds over base fields that are not algebraically closed. Folder~16 then sets up an induction along hyperplane sections $\varphi : Y \hookrightarrow X$. The identity $\Lambda_Y = \varphi^*\Lambda_X^2\varphi_*$ (p.~39) gives $C(X) \Rightarrow C(Y)$, with $C$ the Lefschetz-type conjecture; conversely, \q{Moyennant $C(Y)$, $C(X)$ équivaut à la condition} that $\Lambda_X\varphi_*$ be algebraic (p.~41), which is the Lefschetz condition on $X \times Y$ in the critical degree only. Iterating down a chain of sections reduces $C$ for all varieties to that critical condition for all varieties (pp.~44--45); Problem~\ref{p:lef} is the next step, which splits the critical condition into two one-sided ones (p.~49). A letter to Coates gives a second reduction (pp.~47--48): $C(X)$ follows from integral characteristic polynomials and the existence of \emph{some} algebraic isomorphism $H^{2n-i} \to H^i$, by Cayley--Hamilton. For positivity the route goes through algebras: the rings $\operatorname{End}(h^i(X))$ should carry a positive involution, hence be semisimple, hence the motives form a semisimple abelian category (\fac{12}, p.~158; \fac{16}, p.~48); and one line proposes \q{Positivité à la Hodge en se ramenant à des questions de diviseurs} by induction (\fac{15}, p.~169).
+
+\entry{Where it stops.} The letter of 1965 misses a way of moving a cycle to infinity in the affine complement $X \smallsetminus Y$, which the weak-to-full step needs. The letter to Coates says of the induction: \q{Thus the main problems arise already for 1-cycles on threefolds} (\fac{16}, p.~46). The 1965 conditions are stated modulo algebraic equivalence, and in that form they are false (Griffiths); the modernised reading notes it. The positivity route is one line.
+
+\entry{Today.} Open in general. The Lefschetz type is known for curves, surfaces and abelian varieties \cite{kleiman1968}, and the Hodge type in characteristic~$0$ by the Hodge--Riemann relations. Deligne proved the Weil conjectures without them.
+
+\begin{bigconj}[The generalised Hodge conjecture, in its $\ell$-adic form]\label{c:hodge}
+For $X$ smooth projective, the coniveau filtration $\mathrm{Filt}^j H^i(\bar X, \mathbb Q_\ell)$, made of the classes that vanish on the complement of a closed subset of codimension $\ge j$, is the realisation of the largest sub-motive of $h^i(X)$ of level $\le i - 2j$.
+\end{bigconj}
+
+\src{\fac{12}, pp.~2--3, 41--42, 52--54, inventory dating 1964--[c.~1971]; \fac{36}, pp.~12, 16. The pages do not name the conjecture; the name is the reading's.}
+
+\entry{The route.} Page~3 states the expected equality and draws its consequence, granting resolution of singularities and the standard conjectures \q{(conséquence de la résolution et des conjectures standard)}: the dimensions of the $\mathrm{Filt}^j H^i$ are independent of $\ell$, since traces of motivic endomorphisms are rational and independent of~$\ell$ (pp.~29--30). One inclusion comes from the coniveau spectral sequence, read at $E_1$: for $X$ smooth projective the classes supported in codimension $p$ are Gysin images, of level $\le n - 2p$ (p.~41). For the level itself, pp.~52--54 read weight and effectivity on the eigenvalues of Frobenius, and folder~36 applies this after reduction to a finite field: a piece of level~$1$ has eigenvalues divisible by $q^{n-1}$, so a $p$-adic unit eigenvalue shows that a piece is not of level~$1$ (p.~16).
+
+\entry{Where it stops.} The reverse inclusion, that the largest sub-motive of low level lies in the coniveau filtration, is never argued, and the Frobenius characterisation of p.~54 is struck. In folder~36 he cannot show, even granting the standard conjectures, that the level of a motive can only drop under specialisation: \q{la triste vérité est que je ne sais pas} (p.~16).
+
+\entry{Today.} Open. Grothendieck's 1969 paper corrected Hodge's general conjecture of 1950, which is false, into this form.
+
+\begin{bigconj}[The period conjecture]\label{c:per}
+Over $\overline{\mathbb Q}$, the functor that sends a motive to its de Rham realisation, its Betti realisation and the comparison isomorphism between them is fully faithful; equivalently, the periods of a motive generate a field of transcendence degree equal to the dimension of its motivic Galois group.
+\end{bigconj}
+
+\src{\fac{13}, \emph{Groupe de Galois motivique}, pp.~30--34, 47--51, dated 1965; \fac{18}, pp.~10--12, 41--50, inventory dating 1969--[c.~1972].}
+
+\entry{The route.} Folder~13 starts from a negative observation: the algebraic data of a realisation do not say which Hodge data come from motives, and must be completed by conditions of the type \q{arg.\ de transcendance} (p.~31). Pages~33--34 prove an abstract lemma: if $g$ places the second lattice and $H$ is the group generated by the closure of the elements $ts^{-1}$, then $V \cap T'(V) = V^H$, so full faithfulness becomes $V^H = V^G$ for every representation~$V$. Page~47 asks the question without filtration or Hodge structure, reduces it at once to $\overline{\mathbb Q}$ and to $V$ simple, and settles rank one: \q{c'est une puissance de Tate, et ça marche}. Folder~18 turns it into transcendence: the field generated by a generic period point has transcendence degree $\dim G - 1$ for a group $G$ attached to the motive (p.~11), which \q{contient le th.\ de Schneider} for elliptic curves without complex multiplication; elliptic curves are the test case (p.~12), and pp.~46--50 sketch an adelic analogue.
+
+\entry{Where it stops.} No non-Tate motive is treated. For a product of two non-isogenous elliptic curves without complex multiplication his bound gives at most $5$ against the expected $6$ (\fac{18}, p.~44). Over a field of finite type the functor is not fully faithful, and the page breaks off on \q{idiot !} before hoping for a weaker result (\fac{13}, p.~48).
+
+\entry{Today.} Open. For an elliptic curve with complex multiplication the periods and quasi-periods have transcendence degree~$2$ (Chudnovsky); without, the expected degree~$4$ is open. A Lean statement of the elliptic case is in the Tau Ceti roadmap on elliptic periods.
+
+\begin{bigconj}[The homotopy hypothesis]\label{c:hh}
+$n$-groupoids, up to $n$-equivalence, are the same as homotopy $n$-types, and $\infty$-groupoids the same as homotopy types.
+\end{bigconj}
+
+\src{\fac{134-2}, pp.~42--46, postscript of a letter to Breen of 5 February 1975; pp.~48--51, letter of 17 February; pp.~145--149 and 167--170, French original of the letter of July 1975; \fac{134-1}, p.~6, letter to Deligne of 27 August 1974.}
+
+\entry{The route.} To a Kan complex $K$ he attaches an $n$-category $C_n(K)$ of points, paths and homotopies, the top level taken up to homotopy, and notes that $\pi_i(K) \cong \pi_i(C_n K)$ for $i \le n$ almost by definition (pp.~42--43); the two localised categories should then be equivalent. He does not treat the hypothesis as a theorem about a given definition: the yoga \q{pourrait constituer un fil d'Ariane} for defining non-strict $n$-categories, their functors and their equivalences (p.~43). He checks the dictionary on familiar constructions (p.~45): loops and $\operatorname{Hom}(x,x)$, mapping spaces and functor categories, homotopy fibres and fibre products, $K(\pi, n)$ and $n$-gerbes, truncation and classes of top arrows. The abelian case comes first: strict Picard $n$-categories should be complexes of length~$n$, and the correspondence between simplicial sets and $\infty$-groupoids a set-theoretic Dold--Puppe (pp.~146--147); for groups in $n$-categories he wants a \q{non-commutative chain complex}, and for $n = 1$ gives crossed modules with their invariant in $H^3$ (pp.~148--149). The functor from simplicial sets to $n$-groupoids is not negotiable: a theory without it \q{me semblerait canularesque} (p.~146). On the topos side, locally constant stacks on $X$ should be functors on $\Pi_n(X)$, and $\Pi_n$ recovered from them as in Galois theory (pp.~48--51, 167--170).
+
+\entry{Where it stops.} Nothing is proved: the definition of non-strict $n$-categories is the missing piece, and he writes of the \q{inquiétant mirage} of $n$-limits (p.~169, reading uncertain). He cannot define the classifying topos of an $n$-gerbe for $n \ge 2$ (p.~45), and asks Breen for candidates for the non-abelian complexes. \emph{Pursuing Stacks} (1983), not transcribed in the edition, takes the programme up with coherators and test categories.
+
+\entry{Today.} The answer depends on the model. It is false for strict $n$-groupoids from $n = 3$ (Simpson) and open for Grothendieck's globular $\infty$-groupoids in Maltsiniotis's formulation; an OpenAI preprint of 24 September 2026, not peer-reviewed, announces a proof for the Ara--Henry coherators \cite{huacicm}.
+
+\begin{bigconj}[The section conjecture]\label{c:sec}
+For a hyperbolic curve $U$ over a field $K$ of finite type over $\mathbb Q$, every section of $\pi_1(U) \to \Gal(\bar K/K)$ comes, up to conjugacy, from a rational point of $U$ or from a rational point at infinity.
+\end{bigconj}
+
+\src{\fac{149}, pp.~26--127, undated: Theorem~3 (pp.~31--33), the \q{Conjecture fondamentale} (p.~47), Conjectures A, B and B$'$ (pp.~55--62), relative curves (pp.~63--64, where \q{Nos conjectures impliquent donc qu'il y a exactement deux sortes de telles sections}), specialisation (pp.~69--98), the birational form (pp.~123--127); \fac{142}, pp.~79--81.}
+
+\entry{The route.} Only injectivity is proved, and arithmetically: he first tried a geometric proof, \q{Finalement, je n'arrive pas à le prouver par voie géométrique} (p.~26). He reduces to a semi-abelian variety and the Kummer sequences for all~$n$; a point with trivial class is infinitely divisible, hence zero since the group of rational points is finitely generated (pp.~31--33), and one prime $\ell$ is not enough (p.~33). The section conjecture is the case \q{$V$ a point} of his conjecture on morphisms (p.~48). The rest is reformulation. Sections at a cusp are told from rational points by filling the hole (p.~54). Conjecture~B recasts the statement as a fixed point: the action of the Galois group on the universal cover completed by its cusps has \q{un pt fixe et un seul} (p.~58). Over a model the sections become lifts to $\pi_1(S)$, and a local criterion says that a rational point extends over a discrete valuation ring exactly when its section kills the inertia (p.~73); this compares sections over $K$ and over the residue fields. Pages~98--103 try to build counterexamples from bad reduction, without success.
+
+\entry{Where it stops.} No route to surjectivity appears. Mordell's conjecture, which Faltings proved in 1983, is never used; the only arithmetic input is the Mordell--Weil theorem, for injectivity. The case of the thrice-punctured sphere at a cusp rests on a relation the page calls \q{hautement plausible} (p.~60). On reduction he writes that he has no idea for the moment (p.~102), and the explicit cocycle of a point is called fascinating work not yet begun (\fac{142}, p.~81).
+
+\entry{Today.} Open. Injectivity is known, as are a birational $p$-adic form (Koenigsmann) and the real analogue.
+
+\begin{bigconj}[Ihara's question: $\Gal(\overline{\mathbb Q}/\mathbb Q)$ and the Teichmüller tower]\label{c:gt}
+The outer action of $\Gal(\overline{\mathbb Q}/\mathbb Q)$ on the profinite fundamental groups of the moduli spaces $M_{g,\nu}$ identifies it with the automorphisms of the tower that respect its structure; in Drinfeld's form, $\Gal(\overline{\mathbb Q}/\mathbb Q) \to \widehat{GT}$ is an isomorphism.
+\end{bigconj}
+
+\src{\fac{142}, pp.~12--16, 21--41, 86--100, inventory dating [from 1978]; \fac{143}, pp.~28--30; \fac{145}, pp.~4--37; \fac{147}, pp.~59, 103, 148--151; \fac{144}, p.~4; \fac{146}; \fac{67}, p.~49, January 1984.}
+
+\entry{The route.} The target is stated in folder~143: \q{On aimerait} that $\pi_1(M_{g,\nu})$ map isomorphically onto the outer automorphisms of the profinite surface group that satisfy the loop condition, which would describe the Galois group through them (p.~29). Folder~142 reduces the action on any curve to the thrice-punctured sphere, by Belyi and a Lefschetz-type curve (pp.~86--88), and lists the necessary conditions for an automorphism of the profinite groupoid to come from Galois: it lifts to the covers, stabilises the kernels of morphisms, is compatible with morphisms between covers, and satisfies the loop condition, \q{sûrement la plus importante de toutes, et de très loin !} (p.~99). He conjectures them sufficient for one curve (pp.~94--95, Problem~\ref{p:gal}). Since the first conditions cannot be written down directly in the parameters (p.~98), he turns to the moduli spaces, with a conjecture tied to $M_{0,4}$ and $M_{0,5}$ that the page announces and that is nearly illegible (pp.~98--99). The low levels are computed: automorphisms commuting with $\mathfrak S_3$ as triples satisfying one relation (folder~142), pairs $(p, g)$ with a marginal \q{$= \chi(u)$} (folder~145), presentations in modular dimension $0$ and~$1$ (folder~146). Folder~147 then plans the discrete tower: a more or less complete understanding of the cases of modular dimension at most~$2$ \q{donnera la clef pour une compréhension complète dans le cas général} (p.~59), a programme to present all the groups and their maps by generators and relations (p.~103), and a gluing theorem at infinity over the strata of codimension $1$ and~$2$ (pp.~149--151, Problem~\ref{p:nc}).
+
+\entry{Where it stops.} The sufficiency of the conditions, the $M_{0,4}$--$M_{0,5}$ conjecture, the programme of folder~147 and the gluing theorem are announced, not proved. Page~59 of folder~147 speaks of the discrete groups, in the analytic setting; reading it as the two-level principle for the Galois action is the edition's. The last step, that an automorphism satisfying the relations of the tower comes from Galois, is not attempted anywhere in the notes.
+
+\entry{Today.} Open; the map is injective by Belyi's theorem. The two-level principle for the discrete tower was proved by Hatcher, Lochak and Schneps \cite{hls}.
+
+\begin{bigconj}[The $p$-curvature conjecture]\label{c:pcurv}
+Let $S$ be integral, of finite type and dominant over $\Spec \mathbb Z$, $X/S$ smooth, and $E$ a vector bundle on $X$ with an integrable connection. If the $p$-curvature of $E$ vanishes at almost all closed points of $S$, then $E$ has finite monodromy at the generic point.
+\end{bigconj}
+
+\src{\fac{93}, pp.~188--212, \emph{Connexions de Gauss--Manin et équations de Picard--Fuchs}, inventory dating [1972]--1981. No other folder has it.}
+
+\entry{The route.} Page~194 notes, without proof, that finite monodromy forces vanishing $p$-curvature at almost all closed points, and asks: \q{La réciproque est-elle vraie ?} It then splits rank one: \q{La question précédente se décompose en deux}. First, is the class of $E$ in the Picard group torsion? If so, $E = \mathcal O_X$ with connection $d + \omega$, and the question becomes whether a closed form that is locally logarithmic at almost all primes has a multiple that is logarithmic. In characteristic~$0$ the target is explicit: the logarithmic forms are a group $\mathbb Z^r$ by Rosenlicht, so the integrable classes form $(\mathbb Q/\mathbb Z)^r$ (pp.~191--192). Pages~195--197 extend the question to torsors under group schemes, and for an abelian scheme rewrite it on the universal vector extension of the dual: a section that is divisible by $p$ at every closed point, is it of finite order? He reduces it to a local-global statement about connected subgroups, and the case of unipotent rank~$0$ is the one on which, \q{si ce résultat était acquis}, everything reduces to the semi-abelian case. Pages~198--212 compute the condition $\tilde C\omega = \tilde\omega$ on the Cartier operator and the Verschiebung of the Picard functor with connection; that these serve the question is our reading, not the page's.
+
+\entry{Where it stops.} The converse and each of its reductions stay questions. There is no Gauss--Manin case, no Chebotarev argument and no reduction to curves in the notes.
+
+\entry{Today.} Open. Katz proved it for Gauss--Manin connections (1972), and it holds for connections with solvable monodromy, rank one included (Chudnovsky for curves, André, Bost).
+
 \section{How the list was made, and its limits}
 
-The fourteen problems were chosen from the register of findings among the rows still open and outside what Lean reached, and with a statement precise enough to be proved or refuted. Rows whose only interest is a slip on the page, a dating, or a statement now known to be in print were left out, as were the conjectures already in the published record (the standard conjectures, the section conjecture, the $p$-curvature conjecture, the homotopy hypothesis), which the companion paper discusses \cite{huacicm}.
+The fourteen problems were chosen from the register of findings among the rows still open and outside what Lean reached, and with a statement precise enough to be proved or refuted. Rows whose only interest is a slip on the page, a dating, or a statement now known to be in print were left out, as were the conjectures already in the published record, which \S\ref{sec:big} treats from the side of the routes the notes take, and the companion paper from the side of their first appearance \cite{huacicm}.
 
 Three limits apply to every entry. The transcriptions are first passes by a language model, and doubtful readings are marked but not all checked against the facsimile; a statement may rest on a misread word, and the entries say where we know this. The literature searches were made by the same means, with full texts where they were open and abstracts otherwise; an entry that says \q{not found} reports a search, not an absence. And the steps marked \q{ours} have not been checked by a specialist.
 
 Corrections, references and proofs are welcome at the address above. The register of findings, the Lean files and the notices of the folders are on the project's site, \url{https://grothendieck.commutator.io/}.
 
 \subsection*{Changes}
-26 October 2026: the pseudoline dichotomy of \fac{80} proved (\S\ref{sec:pseudo}); the count of Kostant quadruples derived, and Problem~\ref{p:kostant} replaced by the question Grothendieck asked Kostant; Problem~\ref{p:ext2} narrowed after Breen's 1975 theorem; references corrected after a citation check.
+26 October 2026: the pseudoline dichotomy of \fac{80} proved (\S\ref{sec:pseudo}); the count of Kostant quadruples derived, and Problem~\ref{p:kostant} replaced by the question Grothendieck asked Kostant; Problem~\ref{p:ext2} narrowed after Breen's 1975 theorem; references corrected after a citation check. 29 October 2026: \S\ref{sec:big} added, on the routes the notes take to seven published conjectures.
 
 \subsection*{Declaration}
 This note was drafted with a language model (Claude Opus 5.5, Anthropic) from the edition's registers: the findings, the modernised readings and the Lean files. The transcriptions and the modernised readings it relies on were also made with language models (Claude Opus~5 and Opus~5.5). The author received no funding for this work.
