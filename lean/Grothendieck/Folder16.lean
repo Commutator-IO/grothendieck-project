@@ -1370,4 +1370,72 @@ theorem reciproque_trois_un_fausse [Nontrivial R] :
 
 end ContreExemple
 
+
+/-!
+## Page 49: splitting the critical Lefschetz condition (the edition's reconstruction)
+
+Page 49 of the letter to Coates factors the critical Lefschetz operator through a hyperplane
+section `φ : Y → X` and splits the critical condition `A⁰(X)` into a restriction condition
+`A'⁰` and a Gysin condition `A''⁰`. The statements below are the edition's reconstruction
+(problems paper, Problem 5), in abstract linear algebra: cohomology groups are `k`-modules, the
+algebraic classes are submodules `a…`, `res` is `φ^*`, `gys` is `φ_*`.
+
+* `split_even` (`dim X = 2m`): with `L² = φ_* ∘ L_Y ∘ φ^*`, `φ^*` onto in degree `2m − 2` and
+  `L_Y : H^{2m-2}(Y) ≃ H^{2m}(Y)`, the conditions `A''⁰(X)` (every algebraic class of
+  `H^{2m+2}(X)` is `φ_*` of an algebraic class), `A⁰(Y)` (`L_Y⁻¹` keeps algebraic classes) and
+  `A'⁰(X)` (`x` is algebraic when `φ^* x` is) put every algebraic class of `H^{2m+2}(X)` in
+  `L²` of the algebraic classes of `H^{2m-2}(X)`.
+* `split_odd` (`dim X = 2m + 1`): with `L = φ_* ∘ φ^*` invertible, the same conclusion follows
+  from `A''⁰`, `A'⁰` and the condition that the projection `p = φ^* L⁻¹ φ_*` keeps algebraic
+  classes; `split_odd_circular`: that condition already follows from `A⁰(X)` itself, so in odd
+  dimension the splitting is a reformulation.
+
+Not formalised: weak and hard Lefschetz, Weil cohomologies, and whether `A⁰(Y_T)` is supplied
+on a hyperplane section of `X × X`, which is the open point of Problem 5.
+-/
+
+section Scission
+
+variable {k H₂ H₄ G₂ G₄ : Type*} [Field k]
+  [AddCommGroup H₂] [Module k H₂] [AddCommGroup H₄] [Module k H₄]
+  [AddCommGroup G₂] [Module k G₂] [AddCommGroup G₄] [Module k G₄]
+
+/-- Page 49, even dimension (the edition's reconstruction): `A''⁰(X) + A⁰(Y) + A'⁰(X)` puts the
+algebraic classes of `H^{2m+2}(X)` in `L² = φ_* L_Y φ^*` of those of `H^{2m-2}(X)`. -/
+theorem split_even (res : H₂ →ₗ[k] G₂) (hres : Function.Surjective res)
+    (LY : G₂ ≃ₗ[k] G₄) (gys : G₄ →ₗ[k] H₄)
+    (aH₂ : Submodule k H₂) (aH₄ : Submodule k H₄) (aG₂ : Submodule k G₂) (aG₄ : Submodule k G₄)
+    (hA'' : aH₄ ≤ aG₄.map gys) (hAY : aG₄.map LY.symm.toLinearMap ≤ aG₂)
+    (hA' : ∀ x, res x ∈ aG₂ → x ∈ aH₂) :
+    aH₄ ≤ aH₂.map (gys ∘ₗ LY.toLinearMap ∘ₗ res) := by
+  intro z hz
+  obtain ⟨y, hy, rfl⟩ := hA'' hz
+  have hw : LY.symm y ∈ aG₂ := hAY ⟨y, hy, rfl⟩
+  obtain ⟨x, hx⟩ := hres (LY.symm y)
+  refine ⟨x, hA' x (hx ▸ hw), ?_⟩
+  simp [hx]
+
+/-- Page 49, odd dimension: with `L = φ_* φ^*` invertible, `A''⁰`, `A'⁰` and the stability of
+the algebraic classes under `p = φ^* L⁻¹ φ_*` give `A⁰(X)` (surjectivity on algebraic
+classes). The factorisation `L = φ_* φ^*` is not even needed: the argument only inverts `L`. -/
+theorem split_odd (res : H₂ →ₗ[k] G₂) (gys : G₂ →ₗ[k] H₄) (L : H₂ ≃ₗ[k] H₄)
+    (aH₂ : Submodule k H₂) (aH₄ : Submodule k H₄) (aG : Submodule k G₂)
+    (hA'' : aH₄ ≤ aG.map gys) (hp : ∀ y ∈ aG, res (L.symm (gys y)) ∈ aG)
+    (hA' : ∀ x, res x ∈ aG → x ∈ aH₂) :
+    aH₄ ≤ aH₂.map L.toLinearMap := by
+  intro z hz
+  obtain ⟨y, hy, rfl⟩ := hA'' hz
+  exact ⟨L.symm (gys y), hA' _ (hp y hy), by simp⟩
+
+/-- The odd case is circular: if `φ^*` and `φ_*` keep algebraic classes and `L⁻¹` does
+(`A⁰(X)`), the projection `p = φ^* L⁻¹ φ_*` keeps them. -/
+theorem split_odd_circular (res : H₂ →ₗ[k] G₂) (gys : G₂ →ₗ[k] H₄) (L : H₂ ≃ₗ[k] H₄)
+    (aH₂ : Submodule k H₂) (aH₄ : Submodule k H₄) (aG : Submodule k G₂)
+    (hres : ∀ x ∈ aH₂, res x ∈ aG) (hgys : ∀ y ∈ aG, gys y ∈ aH₄)
+    (hA0 : ∀ z ∈ aH₄, L.symm z ∈ aH₂) :
+    ∀ y ∈ aG, res (L.symm (gys y)) ∈ aG :=
+  fun y hy => hres _ (hA0 _ (hgys y hy))
+
+end Scission
+
 end Grothendieck.Folder16
