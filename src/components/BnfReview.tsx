@@ -42,6 +42,9 @@ function save(s: Store) {
 }
 
 type Box = (typeof BNF.boxes)[number];
+// Boxes whose review is finished carry `done` (the date) and leave the tab; « Copy all answers »
+// still exports what was entered for them.
+const BOXES: Box[] = BNF.boxes.filter((b) => !('done' in b));
 const plain = (s: string) => s.replace(/«\s*/g, '"').replace(/\s*»/g, '"');
 const one = (s?: string) => (s ?? '').trim().replace(/\s*\n\s*/g, ' ');
 
@@ -78,10 +81,10 @@ export function BnfReview() {
   const [s, setS] = useState<Store>(load);
   const [boxId, setBoxId] = useState<string>(() => {
     const h = decodeURIComponent(location.hash.slice(1));
-    return BNF.boxes.find((b) => h === `bnf-${b.id}`)?.id ?? BNF.boxes[0].id;
+    return BOXES.find((b) => h === `bnf-${b.id}`)?.id ?? BOXES[0].id;
   });
   const [copied, setCopied] = useState(false);
-  const box = BNF.boxes.find((b) => b.id === boxId) ?? BNF.boxes[0];
+  const box = BOXES.find((b) => b.id === boxId) ?? BOXES[0];
 
   const set = (id: string, patch: Partial<Ans>) => {
     const next = { ...s, [id]: { ...s[id], ...patch } };
@@ -138,7 +141,7 @@ export function BnfReview() {
       </details>
 
       <div role="tablist" aria-label="Boxes" className="mt-4 flex flex-wrap gap-1.5">
-        {BNF.boxes.map((b) => (
+        {BOXES.map((b) => (
           <button
             key={b.id}
             role="tab"
