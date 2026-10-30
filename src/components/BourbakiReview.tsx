@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Checks of the local Bourbaki transcriptions (#50), for the dev server only. The questions live in
+ * Checks of the local transcriptions (Bourbaki rédactions, Buffalo lectures, Quillen notebooks), for the dev server only. The questions live in
  * public/transcripts-bourbaki/review.json, which .gitignore keeps out of the repository with the
  * transcriptions themselves; the built site has neither, so this tab is not offered there. Each check
- * opens the AHP's facsimile at its page beside the rendered transcription. Answers stay in this browser.
+ * opens the facsimile at its page (or the recording at its second) beside the rendered transcription. Answers stay in this browser.
  */
 
 type Mark = 'yes' | 'no' | 'unsure';
@@ -67,7 +67,7 @@ const html = (d: Doc, c: Check) =>
   `/${d.base ?? 'transcripts-bourbaki'}/${d.base ? d.id.replace(/^quillen-/, '') : d.id}/batch-${String(c.batch).padStart(2, '0')}.${d.lang ?? 'fr'}.html`;
 
 function markdown(r: Review, s: Store): string {
-  const out = ['Answers from the local Bourbaki review (#50); readings only, nothing quoted beyond a few words.', ''];
+  const out = ['Answers from the local review tab (Bourbaki, Buffalo, Quillen); readings only, nothing quoted beyond a few words.', ''];
   for (const d of r.docs) {
     const rows = d.checks.filter((c) => s[c.id]?.mark || one(s[c.id]?.note));
     if (!rows.length) continue;
@@ -139,9 +139,9 @@ export function BourbakiReview() {
   return (
     <div className="mt-6">
       <p className="max-w-[48em] text-[14px] leading-relaxed text-ink-700">
-        The doubtful readings of the local Bourbaki transcriptions (first passes, {r.built}). Each check shows the AHP facsimile at its page
-        and the rendered transcription; answer, add a word if needed, then copy the answers into the chat. This tab exists only on the dev
-        server.
+        The doubtful readings of the local transcriptions: Bourbaki rédactions, Buffalo lectures and Quillen notebooks. Each check shows
+        the facsimile at its page, or plays the recording from its second, beside the transcription; answer, add a word if needed, then
+        copy the answers into the chat. This tab exists only on the dev server.
       </p>
       <div className="mt-3 flex flex-wrap items-center gap-2 text-[13px]">
         <span className="text-ink-500">
