@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
 
 /**
  * Checks of the local transcriptions (Bourbaki rédactions, Buffalo lectures, Quillen notebooks), for the dev server only. The questions live in
@@ -61,6 +63,28 @@ function save(s: Store) {
   }
 }
 
+// The questions quote transcription excerpts: their $…$ is set with KaTeX, and the apparatus macros
+// are reduced to plain text (\add{x} → x, \struck/\note dropped, \ill → […]) so the excerpt reads.
+const plainApparatus = (s: string) =>
+  s
+    .replace(/\\(?:struck|note)\{[^{}]*\}/g, '')
+    .replace(/\\ill\{\}/g, '[…]')
+    .replace(/\\(?:add|uncertain|emph|marginal|supplied)\{([^{}]*)\}/g, '$1')
+    .replace(/\\\[([^]*?)\\\]/g, ' $$$1$$ ');
+function Question({ text }: { text: string }) {
+  const parts = plainApparatus(text).split(/(\$[^$]+\$)/g);
+  return (
+    <>
+      {parts.map((p, i) =>
+        p.startsWith('$') && p.endsWith('$') && p.length > 2 ? (
+          <span key={i} dangerouslySetInnerHTML={{ __html: katex.renderToString(p.slice(1, -1), { throwOnError: false }) }} />
+        ) : (
+          <span key={i}>{p}</span>
+        ),
+      )}
+    </>
+  );
+}
 const one = (s?: string) => (s ?? '').trim().replace(/\s*\n\s*/g, ' ');
 // Bourbaki rédactions by default; a Quillen notebook names its own folder and language.
 const html = (d: Doc, c: Check) =>
@@ -195,7 +219,7 @@ export function BourbakiReview() {
                 : `p. ${check.page}`}
               .
             </span>{' '}
-            {check.q}
+            <Question text={check.q} />
           </p>
           <div className="mt-2 flex flex-wrap gap-2">
             {MARKS.map(([m, label]) => (
@@ -240,7 +264,7 @@ export function BourbakiReview() {
                 </a>{' '}
                 ·{' '}
                 <a className="text-brand-700 underline" href={doc.item} target="_blank" rel="noreferrer">
-                  AHP notice
+                  {doc.base ? 'Clay notice' : 'AHP notice'}
                 </a>{' '}
                 ·{' '}
                 <a className="text-brand-700 underline" href={html(doc, check)} target="_blank" rel="noreferrer">
