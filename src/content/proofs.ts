@@ -1112,6 +1112,17 @@ export const PROOFS: Proof[] = [
     theorems: ["irreducibleSpace_of_stable", "irreducibleSpace_of_map", "smul_mem_irreducibleComponents", "isPrime_span_sumSq_real", "not_irreducibleSpace_complex", "ker_toLines"],
   },
   {
+    folder: "148",
+    batch: 2,
+    page: "30–32",
+    name: "The chart of special structures on five points: 542 vertices, 1620 arrows",
+    statement: "With 120/|G| structures of each of the nine types of page 30 (G = 𝔻₅, 𝔖₃, ℤ/4, ℤ/2 or 1), the three levels have 62, 240 and 240 structures, 542 in all; the fourteen arrow types of page 32 number 180 + 420 + 1020 = 1620.",
+    found: "The counts are the folder's. Lean checks the arithmetic from the group orders and the arrow numbers as the reading tabulates them, not the classification of the structures or of the arrows.",
+    verdict: "holds",
+    lean: "lean/Grothendieck/Folder148Chart.lean",
+    theorems: ["Grothendieck.Folder148Chart.counts_eq", "Grothendieck.Folder148Chart.vertices", "Grothendieck.Folder148Chart.arrows_eq"],
+  },
+  {
     folder: "147",
     batch: 4,
     page: "62–64",

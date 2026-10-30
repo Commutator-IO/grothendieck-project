@@ -24,6 +24,7 @@ import Grothendieck.Folder140_1
 import Grothendieck.Folder145
 import Grothendieck.Folder146
 import Grothendieck.Folder148
+import Grothendieck.Folder148Chart
 import Grothendieck.Folder150
 import Grothendieck.Folder151
 import Grothendieck.Folder152
