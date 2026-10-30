@@ -100,6 +100,7 @@ export function BourbakiReview() {
       </p>
     );
   if (!r) return <p className="mt-6 text-[14px] text-ink-500">Loading…</p>;
+  if (!r.docs.length) return <p className="mt-6 text-[14px] text-ink-600">No checks left: every doubtful reading has been answered.</p>;
 
   const doc = r.docs.find((d) => d.id === docId) ?? r.docs[0];
   const check = doc.checks.find((c) => c.id === checkId) ?? doc.checks[0];
