@@ -65,12 +65,33 @@ function save(s: Store) {
 
 // The questions quote transcription excerpts: their $…$ is set with KaTeX, and the apparatus macros
 // are reduced to plain text (\add{x} → x, \struck/\note dropped, \ill → […]) so the excerpt reads.
-const plainApparatus = (s: string) =>
-  s
-    .replace(/\\(?:struck|note)\{[^{}]*\}/g, '')
-    .replace(/\\ill\{\}/g, '[…]')
-    .replace(/\\(?:add|uncertain|emph|marginal|supplied)\{([^{}]*)\}/g, '$1')
-    .replace(/\\\[([^]*?)\\\]/g, ' $$$1$$ ');
+// Rewrite \name{…} macros with balanced braces: keep the argument, or drop the whole macro.
+const macro = (s: string, names: string[], keep: boolean) => {
+  const re = new RegExp(`\\\\(?:${names.join('|')})\\{`, 'g');
+  let out = '';
+  let last = 0;
+  for (let m = re.exec(s); m; m = re.exec(s)) {
+    let j = m.index + m[0].length;
+    for (let d = 1; j < s.length && d; j++) d += s[j] === '{' ? 1 : s[j] === '}' ? -1 : 0;
+    out += s.slice(last, m.index) + (keep ? s.slice(m.index + m[0].length, j - 1) : '');
+    last = j;
+    re.lastIndex = j;
+  }
+  return out + s.slice(last);
+};
+const plainApparatus = (s: string) => {
+  let out = s.replace(/``([^`']*)''/g, '“$1”').replace(/\\ill\{\}/g, '[…]').replace(/\\rule\{[^{}]*\}\{[^{}]*\}/g, '');
+  out = macro(out, ['struck', 'note'], false);
+  out = macro(out, ['add', 'uncertain', 'emph', 'marginal', 'supplied'], true);
+  out = out.replace(/\\\[\s*\\\]/g, ' ').replace(/\\\[([^]*?)\\\]/g, ' $$$1$$ ').replace(/\\\[|\\\]/g, ' ');
+  // An excerpt cut inside a formula leaves an odd number of $: drop the broken end.
+  if ((out.match(/\$/g) ?? []).length % 2) {
+    const a = out.indexOf('$');
+    const head = out.slice(0, a);
+    out = /\\|[{}^_]/.test(head) || !head.trim() ? '… ' + out.slice(a + 1) : out.slice(0, out.lastIndexOf('$')) + ' …';
+  }
+  return out;
+};
 function Question({ text }: { text: string }) {
   const parts = plainApparatus(text).split(/(\$[^$]+\$)/g);
   return (
