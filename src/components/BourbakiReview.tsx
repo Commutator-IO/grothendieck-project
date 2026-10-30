@@ -204,6 +204,10 @@ export function BourbakiReview() {
               Transcription, batch {check.batch}
             </a>
           </p>
+          <p className="mt-1 text-[12px] text-ink-500">
+            p. {check.page} is the PDF page, the number the archive pencils top right. Some viewers ignore the page in the link and
+            open at p. 1, which shows the start of the rédaction: go to p. {check.page} by hand.
+          </p>
           <div className="mt-3 grid gap-3 2xl:grid-cols-2">
             <iframe key={`f-${doc.id}-${check.page}`} title="Facsimile" src={`${doc.pdf}#page=${check.page}`} className="h-[80vh] w-full rounded-md border border-ink-200 bg-white" />
             <iframe key={`t-${doc.id}-${check.batch}`} title="Transcription" src={html(doc, check)} className="h-[80vh] w-full rounded-md border border-ink-200 bg-white" />
