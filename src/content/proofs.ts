@@ -1112,6 +1112,17 @@ export const PROOFS: Proof[] = [
     theorems: ["irreducibleSpace_of_stable", "irreducibleSpace_of_map", "smul_mem_irreducibleComponents", "isPrime_span_sumSq_real", "not_irreducibleSpace_complex", "ker_toLines"],
   },
   {
+    folder: "89",
+    batch: 1,
+    page: "15–18",
+    name: "The fundamental relation of the 3-3 sets: u ∧ v = v ∧ w = w ∧ u ⟺ u + v + w = 0",
+    statement: "In R² over any commutative ring R, with u ∧ v the determinant of the pair and u ∧ v a unit, u ∧ v = v ∧ w = w ∧ u holds exactly when u + v + w = 0.",
+    found: "The page says only « on vérifie de suite » and works over a field. The edition's proof uses Cramer's identity (v ∧ w)u + (w ∧ u)v + (u ∧ v)w = 0, which gives d(u + v + w) = 0 when the three wedges equal d; the statement holds over any commutative ring once u ∧ v is a unit.",
+    verdict: "holds, more generally",
+    lean: "lean/Grothendieck/Folder89.lean",
+    theorems: ["Grothendieck.Folder89.cramer", "Grothendieck.Folder89.fundamental_relation"],
+  },
+  {
     folder: "93",
     batch: 7,
     page: "121–123",
