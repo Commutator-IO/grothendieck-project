@@ -93,3 +93,9 @@ reading and never settles one.
   the hand of the « PC » / « P.C. » initials on the title pages (383, 384, 392, 413). No page shows
   Grothendieck's hand; nothing in them is his to transcribe. Keep « main non identifiée » if any is ever
   transcribed, since the initials make Cartier likely but do not prove the marginalia are his.
+
+## 2026-10-30 — rédaction 453 (Fonds Cartier, PCR 138, item 1031), Opus 5.5
+- One typed sheet after the cover sheet (PDF page 2 = the text). No reader's ink.
+- Hilbert's τ is a special typed sign with its bound variable typed as a subscript (\tau_x); the
+  existential quantifier is typed as a barred reversed E (\exists); primes are apostrophes.
+- The text cites rédaction 424 (artinian universes): keep internal references as typed.
