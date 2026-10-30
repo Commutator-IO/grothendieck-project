@@ -221,7 +221,7 @@ export function ReviewPage() {
               [
                 ['montpellier', `Montpellier fonds (${listed.length})`],
                 ['bnf', `BnF visit, NAF 29093 (${BNF.boxes.reduce((n, b) => n + b.items.length, 0)})`],
-                ...(import.meta.env.DEV ? ([['bourbaki', 'Bourbaki, local']] as const) : []),
+                ...(import.meta.env.DEV ? ([['bourbaki', 'Local: Bourbaki, Buffalo']] as const) : []),
               ] as const
             ).map(([k, label]) => (
               <button
