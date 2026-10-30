@@ -82,7 +82,8 @@ export function BourbakiReview() {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    fetch('/transcripts-bourbaki/review.json')
+    // no-store: the file is edited between sessions, and a cached copy would show answered checks again.
+    fetch('/transcripts-bourbaki/review.json', { cache: 'no-store' })
       .then((res) => (res.ok ? res.json() : Promise.reject(new Error(String(res.status)))))
       .then((j: Review) => {
         setR(j);
