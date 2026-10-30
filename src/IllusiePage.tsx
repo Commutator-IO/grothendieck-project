@@ -2,33 +2,26 @@ import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react
 import { Footer, Header } from './components/Frame.tsx';
 import inventoryRaw from './content/illusie.json';
 import { ITEM_NOTES } from './content/illusie-highlights.ts';
-import { PUBLIC_VIEWS } from './content/illusie-public.ts';
 import type { IllusieView } from './components/IllusieReader.tsx';
 
 /**
- * The Fonds Grothendieck–Illusie, as an inventory (#85).
+ * The Fonds Grothendieck–Illusie, as an inventory with its facsimiles (#85).
  *
  * The IHÉS holds this fonds — Grothendieck's letters to Luc Illusie, his
  * correspondence with colleagues, notes, EGA and SGA papers — and keeps its
- * scans on a bare file server, repo-archives.ihes.fr, outside its public
- * catalogue. Until the IHÉS answers on their use, this page is metadata only:
- * the titles, dates and page counts its own item records give
- * (scripts/illusie-catalogue.mjs), each linking out to the item's directory
- * there. No scan is framed, relayed, mirrored or thumbnailed.
+ * scans on its file server, repo-archives.ihes.fr. The inventory gives the
+ * titles, dates and page counts of its own item records
+ * (scripts/illusie-catalogue.mjs). Since 30 October 2026 the fonds is treated
+ * as published, like Montpellier's (Michel Hua: the address has long been
+ * widely known), so every item opens in the reading view with the IHÉS's page
+ * views, loaded from that server; nothing is relayed, mirrored or stored here.
  *
- * The reading view — each item's transcription beside its facsimile, the
- * layout of the Montpellier folders (components/IllusieReader.tsx) — is built
- * but switched off: it is compiled in only when the build is made with
- * RENDER_ILLUSIE (repository variable, read by the deploy as
- * VITE_RENDER_ILLUSIE), and in the dev server. Off, the condition below is a
- * constant `false`, the lazy import goes with it, and the deployed page is the
- * inventory alone, without the pane or a single image address.
+ * The transcriptions are not part of the repository (transcripts-illusie/ is
+ * ignored). They show beside the facsimile only in the dev server, or in a
+ * build made with RENDER_ILLUSIE on a machine that holds them.
  */
 
-const RENDER_ILLUSIE = import.meta.env.DEV || import.meta.env.VITE_RENDER_ILLUSIE === 'true';
 const IllusieReader = lazy(() => import('./components/IllusieReader.tsx').then((m) => ({ default: m.IllusieReader })));
-/** Whether an item opens in the reading view: every item with RENDER_ILLUSIE, else only the exceptions. */
-const readable = (id: string) => RENDER_ILLUSIE || id in PUBLIC_VIEWS;
 
 /** `#FG_IL_2_GIRAUD69/1/p3`: an item, a batch of twenty pages, a page. As on the fonds' pages. */
 function fromHash(): { id: string; batch: number; page?: number } | null {
@@ -70,12 +63,11 @@ export function IllusiePage() {
   const [onlyHits, setOnlyHits] = useState(false);
   const [open, setOpen] = useState(() => {
     const h = fromHash();
-    return h && readable(h.id) ? h : null;
+    return h && ITEMS.some((i) => i.id === h.id) ? h : null;
   });
-  // All page addresses only in a build that shows every item; otherwise the exceptions'.
-  const [views, setViews] = useState<Record<string, IllusieView>>(PUBLIC_VIEWS);
+  // The page addresses of every item, loaded with the page rather than bundled into it.
+  const [views, setViews] = useState<Record<string, IllusieView>>({});
   useEffect(() => {
-    if (!RENDER_ILLUSIE) return;
     void import('./content/illusie-pages.json').then((m) =>
       setViews((m.default as unknown as { views: Record<string, IllusieView> }).views),
     );
@@ -86,7 +78,7 @@ export function IllusiePage() {
     // leaves the reading view as it is.
     const onHash = () => {
       const h = fromHash();
-      if (h && readable(h.id)) setOpen(h);
+      if (h && ITEMS.some((i) => i.id === h.id)) setOpen(h);
     };
     addEventListener('hashchange', onHash);
     return () => removeEventListener('hashchange', onHash);
@@ -140,27 +132,16 @@ export function IllusiePage() {
         </header>
 
         <aside className="mt-6 max-w-[46em] rounded-xl border border-ink-200 bg-ink-50 px-4 py-3 text-[13px] leading-relaxed text-ink-700">
-          {RENDER_ILLUSIE ? (
-            <>
-              The fonds is held by the IHÉS. Its scans are on the IHÉS's file server and are not reproduced
-              here: the facsimile pane loads the IHÉS's page views from that server, and no image or PDF of
-              them is stored on this site. The correspondence is under its authors' rights.
-            </>
-          ) : (
-            <>
-              The fonds is held by the IHÉS. Its scans are on the IHÉS's file server and are not reproduced
-              here: no image, PDF or transcription of them is stored on this site, and only the letter to
-              Giraud of 13 June 1969 opens with its page views, loaded from the IHÉS's server. The
-              correspondence is under its authors' rights.
-            </>
-          )} For any use of the documents, contact the IHÉS archives,{' '}
+          The fonds is held by the IHÉS. The facsimile pane loads the IHÉS's page views from its file
+          server; no image or PDF of them is stored on this site, and no transcription is published. The
+          correspondence is under its authors' rights. For any use of the documents, contact the IHÉS archives,{' '}
           <a href="mailto:archives@ihes.fr" className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2">
             archives@ihes.fr
           </a>
           .
         </aside>
 
-        {item && open && readable(item.id) && (
+        {item && open && (
           <Suspense fallback={null}>
             <IllusieReader
               item={item}
@@ -215,8 +196,7 @@ export function IllusiePage() {
               {g.items.map((i) => (
                 <li key={i.id} className={`rounded-xl border bg-white px-4 py-3 ${ITEM_NOTES[i.id] ? 'border-alerte-500 ring-1 ring-alerte-500' : 'border-ink-200'}`}>
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    {readable(i.id) ? (
-                      <span className="min-w-0 flex-1">
+                    <span className="min-w-0 flex-1">
                         <a
                           href={`#${i.id}/1`}
                           onClick={(e) => {
@@ -233,17 +213,6 @@ export function IllusiePage() {
                           IHÉS ↗
                         </a>
                       </span>
-                    ) : (
-                      <a
-                        href={i.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="min-w-0 flex-1 text-[14px] font-medium text-ink-900 hover:text-brand-700"
-                      >
-                        {i.title ?? <span className="italic text-ink-500">No readable record</span>}{' '}
-                        <span className="text-ink-400">↗</span>
-                      </a>
-                    )}
                     <span className="tabular shrink-0 text-[12px] text-ink-500">{i.date ?? i.sort ?? 's.d.'}</span>
                   </div>
                   <p className="mt-1 text-[12px] text-ink-500">

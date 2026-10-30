@@ -11,11 +11,11 @@ import { batchName, useManifest } from '../lib/batches.ts';
  * turns the facsimile's pages. The facsimile is the IHÉS's
  * own jpg views, loaded from its server; nothing is relayed or copied.
  *
- * The page addresses come as a prop: from src/content/illusie-pages.json in a
- * build made with RENDER_ILLUSIE (and in the dev server), otherwise only for
- * the exceptions of src/content/illusie-public.ts — the IHÉS has not published
- * the fonds, and until it agrees the deployed site carries no other item's.
+ * The page addresses come as a prop, from src/content/illusie-pages.json. The
+ * transcriptions are ignored by git, so the transcription side shows only in
+ * the dev server or in a build made with RENDER_ILLUSIE where they exist.
  */
+const RENDER_ILLUSIE = import.meta.env.DEV || import.meta.env.VITE_RENDER_ILLUSIE === 'true';
 
 export interface IllusieItem {
   id: string;
@@ -39,7 +39,7 @@ export function IllusieReader({
   onClose,
 }: {
   item: IllusieItem;
-  /** The item's page views on the IHÉS server: all items from illusie-pages.json with RENDER_ILLUSIE, else the exceptions of illusie-public.ts. */
+  /** The item's page views on the IHÉS server, from illusie-pages.json. */
   view: IllusieView | undefined;
   batch: number;
   page?: number;
@@ -50,7 +50,7 @@ export function IllusieReader({
   const manifest = useManifest();
   const jpg = view?.jpg ?? [];
   const pages = item.pages || jpg.length;
-  const transcribed = batchesOf(manifest?.illusie, item.id, 'fr');
+  const transcribed = RENDER_ILLUSIE ? batchesOf(manifest?.illusie, item.id, 'fr') : [];
 
   return (
     <ReadingView

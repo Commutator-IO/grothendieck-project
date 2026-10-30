@@ -41,12 +41,12 @@ jobs:
     # (`gh variable set RENDER_TRANSCRIPTS --body false`, then re-run or push),
     # or for one manual run by unticking the box. Unset, it is on.
     #
-    # RENDER_ILLUSIE is the Illusie tab's switch, and the other way round: off
-    # unless the repository variable is exactly `true`. On, the deploy renders
-    # transcripts-illusie/*.tex and builds the tab's reading view — the
-    # transcription beside the IHÉS's page views, loaded from its server. Off,
-    # the tab is the inventory alone: no pane, no image address, no reading
-    # view, since the IHÉS has not published the fonds (#85).
+    # RENDER_ILLUSIE is the switch of the Illusie tab's transcriptions, and the
+    # other way round: off unless the repository variable is exactly `true`.
+    # The tab always shows every item's IHÉS page views, loaded from its server
+    # (the fonds counts as published since 2026-10-30, #85); on, the deploy
+    # would also render transcripts-illusie/*.tex, which git ignores, so a CI
+    # build has none to render.
     #
     # RENDER_BOURBAKI is the Bourbaki tab's, built the same way: off unless the
     # repository variable is exactly `true`. On, the build compiles in the
