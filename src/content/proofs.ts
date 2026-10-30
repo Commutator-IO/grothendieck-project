@@ -1112,6 +1112,17 @@ export const PROOFS: Proof[] = [
     theorems: ["irreducibleSpace_of_stable", "irreducibleSpace_of_map", "smul_mem_irreducibleComponents", "isPrime_span_sumSq_real", "not_irreducibleSpace_complex", "ker_toLines"],
   },
   {
+    folder: "123",
+    batch: 2,
+    page: "feuillets 33–34",
+    name: "The number of Kostant rigidifications, card(W)²/(h z φ(h)), in small rank",
+    statement: "The announced number card(W)²/(h z φ(h)) of conjugacy classes of quadruples (T, B, T′, B′) is an integer for every simple type of rank at most 8 and for E₆, E₇, E₈, F₄, G₂, and equals 1, 2, 4, 12 for A₁, A₂, B₂, G₂.",
+    found: "The folder announces the count and proves neither it nor the free action behind it; the reading checks four cases by hand. Lean checks the arithmetic in small rank, not the geometry.",
+    verdict: "holds",
+    lean: "lean/Grothendieck/Folder123Kostant.lean",
+    theorems: ["Grothendieck.Folder123Kostant.small_cases", "Grothendieck.Folder123Kostant.integral_A", "Grothendieck.Folder123Kostant.integral_B", "Grothendieck.Folder123Kostant.integral_C", "Grothendieck.Folder123Kostant.integral_D", "Grothendieck.Folder123Kostant.integral_exceptional"],
+  },
+  {
     folder: "148",
     batch: 2,
     page: "30–32",

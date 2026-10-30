@@ -89,6 +89,7 @@ import Grothendieck.Folder90Comodules
 import Grothendieck.Folder93
 import Grothendieck.Folder94
 import Grothendieck.Folder98
+import Grothendieck.Folder123Kostant
 import Grothendieck.Folder147
 import Grothendieck.Upstream.AdjunctionIdempotent
 import Grothendieck.Upstream.ChoosePrimePowSubOne
