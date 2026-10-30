@@ -99,3 +99,12 @@ reading and never settles one.
 - Hilbert's τ is a special typed sign with its bound variable typed as a subscript (\tau_x); the
   existential quantifier is typed as a barred reversed E (\exists); primes are apostrophes.
 - The text cites rédaction 424 (artinian universes): keep internal references as typed.
+
+## 2026-10-30 — rédaction 128 (ACNB fonds, NBR 035, item 537), Opus 5.5
+- Académie des sciences copy: cover sheet on PDF p. 1; typist's « - n - » = PDF page − 1. Diagonal
+  archival ink on p. 2 (« Archives (…) mars 50 »).
+- Fill-in hand draws a gothic S for families of bounded sets (\mathfrak{S}), a script T for
+  topologies (\mathscr{T}_{\mathfrak{S}}, \mathscr{T}_b), script L + gothic F for « LF » spaces
+  (\mathscr{L}\mathfrak{F}), script L of \mathscr{L}(E,F); exponent f of E^f typed above the letter.
+- The renderer has no \textsc, \hfill or center environment: write PROPOSITION as typed, drop
+  the typist's closing rules.
