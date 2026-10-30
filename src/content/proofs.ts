@@ -1112,6 +1112,17 @@ export const PROOFS: Proof[] = [
     theorems: ["irreducibleSpace_of_stable", "irreducibleSpace_of_map", "smul_mem_irreducibleComponents", "isPrime_span_sumSq_real", "not_irreducibleSpace_complex", "ker_toLines"],
   },
   {
+    folder: "147",
+    batch: 4,
+    page: "62–64",
+    name: "The stratified class of M₁,₁ over ℤ (formula (80))",
+    statement: "From the strata of the j-line (generic stabiliser ±1, S₀ with ℤ/4, S₁ with ℤ/6, and the points over 𝔽₂ and 𝔽₃ with groups of order 24 and 12), ½[U] + ¼[S′₀] + ⅙[S′₁] + ζ₂/24 + ζ₃/12 = ½(𝕃 − 1) − 1/12 + ζ₂/8 + ζ₃/6, the cusp adds ½, and over ℤ[1/6] this is (79).",
+    found: "The page states (80); the modernised reading redid the computation. Lean checks the arithmetic of the strata with 𝕃, ζ₂, ζ₃ as indeterminates, not the geometry of the stratification.",
+    verdict: "holds",
+    lean: "lean/Grothendieck/Folder147.lean",
+    theorems: ["Grothendieck.Folder147.class_M11", "Grothendieck.Folder147.class_M11_bar", "Grothendieck.Folder147.class_M11_away_from_6"],
+  },
+  {
     folder: "89",
     batch: 1,
     page: "15–18",
