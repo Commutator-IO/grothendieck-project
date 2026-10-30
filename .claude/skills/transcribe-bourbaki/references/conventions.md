@@ -108,3 +108,11 @@ reading and never settles one.
   (\mathscr{L}\mathfrak{F}), script L of \mathscr{L}(E,F); exponent f of E^f typed above the letter.
 - The renderer has no \textsc, \hfill or center environment: write PROPOSITION as typed, drop
   the typist's closing rules.
+
+## 2026-10-30 — rédactions 582 (BDMR 038) and 553 (BDMR 012), Opus 5.5
+- 1970s Boutet de Monvel copies are clean offset typescripts; double-struck R, C, H are typed with a
+  symbol ball (\mathbb). 553 marks letters for the printer with a small pencil curl below: under L of
+  L(E,F) for script (\mathscr{L}), under S and F for gothic (\mathfrak{S}_1, \mathfrak{F}); the mark
+  itself is not reproduced.
+- An \emph{} that runs over a page break must be closed before \page{} and reopened after it, or
+  tectonic stops with « Paragraph ended before \text@command ».
