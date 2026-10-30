@@ -127,7 +127,7 @@ export function BnfReview() {
       </p>
 
       <details className="mt-4 rounded-md border border-ink-200 bg-white px-3 py-2 text-[13px] text-ink-700" open>
-        <summary className="cursor-pointer font-semibold text-ink-900">Four sessions, by pochette</summary>
+        <summary className="cursor-pointer font-semibold text-ink-900">Sessions to come, by pochette</summary>
         <ol className="mt-2 grid gap-1">
           {BNF.sessions.map((se) => (
             <li key={se.n}>
