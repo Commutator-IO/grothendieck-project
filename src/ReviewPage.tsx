@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Footer, Header } from './components/Frame.tsx';
 import { BnfReview } from './components/BnfReview.tsx';
+import { BourbakiReview } from './components/BourbakiReview.tsx';
 import { FacsimilePane, type OpenBatch } from './components/FacsimilePane.tsx';
 import BNF from './content/review-bnf.json';
 import { BY_ID } from './content/catalogue.ts';
@@ -86,7 +87,10 @@ export function ReviewPage() {
   const [copied, setCopied] = useState(false);
   const [showAnswered, setShowAnswered] = useState(false);
   // Two sets of questions: the Montpellier checks of #35, and the BnF visit (#37), which has no facsimile online.
-  const [source, setSource] = useState<'montpellier' | 'bnf'>(() => (location.hash.startsWith('#bnf') ? 'bnf' : 'montpellier'));
+  // A third, the Bourbaki transcriptions (#50), on the dev server only: their questions sit in an ignored file.
+  const [source, setSource] = useState<'montpellier' | 'bnf' | 'bourbaki'>(() =>
+    location.hash.startsWith('#bnf') ? 'bnf' : import.meta.env.DEV && location.hash.startsWith('#bourbaki') ? 'bourbaki' : 'montpellier',
+  );
 
   // The items listed: answered ones (not skipped) are hidden unless asked for, so the list is what is left to do.
   const listed = useMemo(
@@ -217,6 +221,7 @@ export function ReviewPage() {
               [
                 ['montpellier', `Montpellier fonds (${listed.length})`],
                 ['bnf', `BnF visit, NAF 29093 (${BNF.boxes.reduce((n, b) => n + b.items.length, 0)})`],
+                ...(import.meta.env.DEV ? ([['bourbaki', 'Bourbaki, local']] as const) : []),
               ] as const
             ).map(([k, label]) => (
               <button
@@ -226,7 +231,7 @@ export function ReviewPage() {
                 aria-selected={source === k}
                 onClick={() => {
                   setSource(k);
-                  history.replaceState(null, '', k === 'bnf' ? '#bnf' : `#${item.id}`);
+                  history.replaceState(null, '', k === 'montpellier' ? `#${item.id}` : `#${k}`);
                 }}
                 className={`-mb-px border-b-2 px-3 py-2 text-[14px] ${
                   source === k ? 'border-brand-700 font-semibold text-ink-900' : 'border-transparent text-ink-500 hover:text-ink-800'
@@ -238,7 +243,8 @@ export function ReviewPage() {
           </div>
 
           {source === 'bnf' && <BnfReview />}
-          <div hidden={source === 'bnf'} className="mt-6 grid gap-6 2xl:grid-cols-[14rem_minmax(0,1fr)]">
+          {import.meta.env.DEV && source === 'bourbaki' && <BourbakiReview />}
+          <div hidden={source !== 'montpellier'} className="mt-6 grid gap-6 2xl:grid-cols-[14rem_minmax(0,1fr)]">
             <nav aria-label="Checks" className="order-2 2xl:order-1">
               <label className="block text-[11px] font-semibold uppercase tracking-wider text-ink-400" htmlFor="kind">
                 Show
