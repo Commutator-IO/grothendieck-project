@@ -1,6 +1,7 @@
 import Grothendieck.Bourbaki288
 import Grothendieck.Bourbaki453
 import Grothendieck.Bourbaki457
+import Grothendieck.Bourbaki582
 import Grothendieck.Folder1
 import Grothendieck.Folder10
 import Grothendieck.Folder100
