@@ -62,7 +62,7 @@ for (const f of files) {
     else if (!set.has(Number(page))) issues.push(`${f}: \\lot{${cote}}{${batch}}{${page}}: page ${page} is not in batch ${batch}`);
   }
   // 2 and 3: boxes « [Grothendieck, pages … , title\piste{id}] »
-  for (const m of src.matchAll(/\\begin\{\w+\*?\}\[((?:[^\[\]]|\[[^\]]*\])*)\]/g)) {
+  for (const m of src.matchAll(/\\begin\{\w+\*?\}\[((?:[^[\]]|\[[^\]]*\])*)\]/g)) {
     const title = m[1];
     const pages = pagesIn(title);
     if (!pages) continue;
