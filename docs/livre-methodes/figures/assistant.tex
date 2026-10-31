@@ -1,0 +1,32 @@
+% Chapitre 5 : l'assistant et son contexte.
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,
+  ctx/.style={boite, minimum width=3.1cm, text width=2.9cm}]
+  \node[boite, minimum width=3.2cm, minimum height=1.3cm, draw=tonregle, fill=tonregle!7,
+    line width=0.8pt, font=\sffamily\small] (s) at (0,0)
+    {\textbf{Session}\\[-1pt]\footnotesize la conversation en cours};
+  \node[ctx] (mcp) at (0,2.1) {\textbf{Serveurs MCP}\\[-1pt]\scriptsize issues, navigateur,\\Lean, articles};
+  \node[ctx] (skills) at (-4.7,1.05) {\textbf{Skills}\\[-1pt]\scriptsize une procédure
+    écrite par tâche, lue au besoin};
+  \node[ctx] (mem) at (-4.7,-1.05) {\textbf{Mémoire}\\[-1pt]\scriptsize un fait par
+    fichier, daté, relu au début};
+  \node[ctx] (sub) at (4.7,0) {\textbf{Sous-agents}\\[-1pt]\scriptsize ne voient que leur
+    consigne};
+  \node[ctx] (repo) at (0,-2.2) {\textbf{Dépôt}\\[-1pt]\scriptsize fichiers, commandes,\\commits};
+  \node[ctx] (cloud) at (4.7,-2.2) {\textbf{Session dans le cloud}\\[-1pt]\scriptsize
+    clone le dépôt, pousse ses commits};
+  \draw[fleche] (skills) -- (s);
+  \draw[fleche, <->] (mem) -- (s);
+  \draw[fleche, <->] (s) -- (mcp);
+  \draw[fleche, <->] (s) -- (repo);
+  \draw[fleche, <->] (cloud) -- (repo);
+  \draw[fleche] ([yshift=2mm]s.east) -- node[etiq, above] {consigne} ([yshift=2mm]sub.west);
+  \draw[fleche, tonregle] ([yshift=-2mm]sub.west) -- node[etiq, below, text=tonregle]
+    {rapport,\\à vérifier} ([yshift=-2mm]s.east);
+\end{tikzpicture}
+\caption{L'assistant et son contexte. La session ne garde rien d'une fois sur l'autre :
+ce qu'elle sait vient des skills, de la mémoire et du dépôt. Les sous-agents et les
+sessions dans le cloud ne voient que leur consigne et le dépôt.}
+\label{fig:assistant}
+\end{figure}

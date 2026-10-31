@@ -1,0 +1,27 @@
+% Chapitre 6 : la boucle de relecture.
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,
+  etape/.style={boite, minimum width=2.9cm, text width=2.75cm, minimum height=1.25cm}]
+  \node[etape] (marques) at (0,0) {\textbf{Marques de doute}\\[-1pt]\scriptsize
+    \texttt{\textbackslash uncertain}, \texttt{\textbackslash ill} dans la transcription};
+  \node[etape] (page) at (4.55,0) {\textbf{Page de relecture}\\[-1pt]\scriptsize
+    l'image, la lecture proposée, une question fermée};
+  \node[etape] (rep) at (9.1,0) {\textbf{Réponses}\\[-1pt]\scriptsize oui, non,
+    incertain, copiées en un bloc};
+  \node[etape] (source) at (9.1,-2.4) {\textbf{Appliquées à la source}\\[-1pt]\scriptsize
+    le fichier,\\son \mbox{en-tête},\\puis un commit};
+  \node[etape, draw=tonregle, fill=tonregle!7] (close) at (4.55,-2.4) {\textbf{Question
+    fermée}\\[-1pt]\scriptsize retirée de la page};
+  \draw[fleche] (marques) -- node[etiq, above] {fichier JSON} (page);
+  \draw[fleche] (page) -- node[etiq, above] {une personne} (rep);
+  \draw[fleche] (rep) -- node[etiq, right] {l'assistant} (source);
+  \draw[fleche] (source) -- (close);
+  \draw[fleche, tonregle] (rep.north) -- ++(0,0.5) -| node[etiq, text=tonregle, pos=0.25,
+    above] {incertain : la question est reposée, plus précise} (page.north);
+\end{tikzpicture}
+\caption{La boucle de relecture. L'assistant marque ses doutes, une personne y répond sur
+une page qui montre l'original, et l'assistant applique les réponses dans le fichier
+source avant de fermer la question.}
+\label{fig:relecture}
+\end{figure}

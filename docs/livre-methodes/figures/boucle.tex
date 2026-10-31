@@ -1,0 +1,29 @@
+% Chapitre 5c : la boucle conversation, script, énoncé Lean, preuve, rédaction.
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,
+  etape/.style={boite, minimum width=2.15cm, text width=2.0cm, minimum height=1.25cm}]
+  \foreach \i/\n/\t/\d in {0/conv/Conversation/l'énoncé{,} comme à un collègue,
+      1/test/Script/les petits cas,
+      2/enonce/Énoncé Lean/avec \texttt{sorry}{,} qui compile,
+      3/preuve/Preuve/compilée{,} axiomes vérifiés,
+      4/redac/Rédaction/en LaTeX{,} depuis la preuve} {
+    \node[etape] (\n) at (\i*2.55,0) {\textbf{\t}\\[-1pt]\scriptsize\d};
+  }
+  \foreach \a/\b in {conv/test, test/enonce, enonce/preuve, preuve/redac}
+    \draw[fleche] (\a) -- (\b);
+  % les retours
+  \draw[fleche, tonexemple, rounded corners=4pt] (test.south) -- ++(0,-0.55) -| 
+    node[etiq, text=tonexemple, pos=0.25, below] {contre-exemple} (conv.south);
+  \draw[fleche, tonexemple, rounded corners=4pt] (preuve.south) -- ++(0,-0.55) -|
+    node[etiq, text=tonexemple, pos=0.25, below] {preuve qui échoue} (enonce.south);
+  \draw[fleche, tonexemple, rounded corners=4pt] (enonce.north) -- ++(0,0.5) -|
+    node[etiq, text=tonexemple, pos=0.25, above] {hypothèse qui manque} (conv.north);
+  \draw[fleche, tonexemple, rounded corners=4pt] (redac.north) -- ++(0,0.5) -|
+    node[etiq, text=tonexemple, pos=0.25, above] {écart avec la preuve} (preuve.north);
+\end{tikzpicture}
+\caption{La boucle du chapitre. Les flèches en couleur sont les retours : un contre-exemple
+renvoie à la conversation, une preuve qui échoue renvoie à l'énoncé, et la rédaction se
+corrige sur le fichier Lean, qui fait foi.}
+\label{fig:boucle}
+\end{figure}

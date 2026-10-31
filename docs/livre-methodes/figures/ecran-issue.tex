@@ -1,0 +1,57 @@
+% Chapitre 2 : écran fictif d'une issue avec sa liste de cases.
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,
+  texte/.style={font=\sffamily\scriptsize, anchor=west, inner sep=0pt}]
+  \fenetre{12.4}{7.2}{Issue \#89}
+  \node[font=\sffamily\bfseries, anchor=west] at (0.35,6.15)
+    {Exposé I : les énoncés précis et leur littérature \mdseries\color{black!50}\#89};
+  \node[etiquette, fill=tonregle, text=white, anchor=west] at (0.4,5.55) {Ouverte};
+  \node[font=\sffamily\scriptsize, text=black!65, anchor=west] at (1.55,5.55)
+    {2 tâches faites sur 4};
+  \fill[black!10] (4.4,5.5) rectangle (6.4,5.6);
+  \fill[tonregle] (4.4,5.5) rectangle (5.4,5.6);
+  \draw[black!20] (0.35,5.2) -- (12.05,5.2);
+  % corps de l'issue
+  \node[texte, anchor=north west, text width=7.4cm, align=left] at (0.4,4.95)
+    {Relever les énoncés de l'exposé I et chercher chacun dans la littérature, avec la
+    page. Suite de \textcolor{tonregle}{\#84}.};
+  \foreach \y/\f/\t in {3.95/1/lire l'exposé I{,} chercher les énoncés précis,
+      3.45/1/recherche bibliographique{,} énoncé par énoncé,
+      2.95/0/formaliser ce qui n'est pas dans la littérature,
+      2.45/0/proposer le résultat à la bibliothèque commune} {
+    \draw[black!45, rounded corners=1pt] (0.45,\y-0.13) rectangle (0.71,\y+0.13);
+    \ifnum\f=1
+      \fill[tonregle, rounded corners=1pt] (0.45,\y-0.13) rectangle (0.71,\y+0.13);
+      \draw[white, line width=0.9pt, line cap=round, line join=round]
+        (0.5,\y) -- (0.57,\y-0.07) -- (0.67,\y+0.08);
+      \node[texte, text=black!55] at (0.9,\y) {\t};
+    \else
+      \node[texte] at (0.9,\y) {\t};
+    \fi
+  }
+  % fil de l'issue
+  \draw[black!20] (0.35,1.95) -- (8.0,1.95);
+  \fill[black!35] (0.58,1.45) circle (0.07);
+  \node[texte, text=black!65] at (0.85,1.45)
+    {référencée par le commit \texttt{\color{tonregle}4233568}, il y a deux jours};
+  \fill[black!35] (0.58,0.85) circle (0.07);
+  \node[texte, text=black!65] at (0.85,0.85)
+    {étiquette \emph{en attente} ajoutée : la page 12 attend une réponse de l'archive};
+  % colonne de droite
+  \node[font=\sffamily\scriptsize\bfseries, text=black!65, anchor=west] at (8.6,4.8) {Étiquettes};
+  \node[etiquette, draw=black!40, fill=black!5, anchor=west] at (8.6,4.35) {lecture};
+  \node[etiquette, draw=black!40, fill=black!5, anchor=west] at (9.6,4.35) {Lean};
+  \node[etiquette, draw=tonregle, fill=tonregle!8, text=tonregle, anchor=west] at (10.45,4.35)
+    {en attente};
+  \node[font=\sffamily\scriptsize\bfseries, text=black!65, anchor=west] at (8.6,3.7) {Liens};
+  \node[texte, text=tonregle] at (8.6,3.3) {\#84 exposé I, notations};
+  \node[texte, text=tonregle] at (8.6,2.9) {\#95 rédactions en Lean};
+  \node[font=\sffamily\scriptsize\bfseries, text=black!65, anchor=west] at (8.6,2.25) {Projet};
+  \node[texte] at (8.6,1.85) {Lecture des exposés};
+\end{tikzpicture}
+\caption{Écran fictif : une issue. Le titre pose la question, la liste de cases en montre
+l'avancement, et le fil garde la trace du commit qui l'a fait avancer et de ce qu'on
+attend.}
+\label{fig:ecran-issue}
+\end{figure}

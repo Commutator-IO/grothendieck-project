@@ -1,0 +1,60 @@
+% Chapitre 1 : écran fictif d'une pull request.
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,
+  titre/.style={font=\sffamily\scriptsize\bfseries, anchor=north west, inner sep=0pt},
+  texte/.style={font=\sffamily\scriptsize, anchor=north west, inner sep=0pt, align=left}]
+  \fenetre{12.4}{8.6}{Pull request \#12}
+  % en-tête
+  \node[font=\sffamily\bfseries, anchor=west] at (0.35,7.55)
+    {Lemme 5 : preuve complète \mdseries\color{black!50}\#12};
+  \node[etiquette, fill=tonregle, text=white, anchor=west] at (0.4,6.95) {Ouverte};
+  \node[font=\sffamily\scriptsize, text=black!65, anchor=west] at (1.55,6.95)
+    {demande la fusion de \texttt{lemme-5} dans \texttt{main}, 2 commits};
+  \draw[black!20] (0.35,6.6) -- (12.05,6.6);
+  % description, selon le modèle du dépôt
+  \draw[black!30, rounded corners=2pt] (0.35,3.45) rectangle (7.7,6.35);
+  \fill[black!5] (0.36,5.95) rectangle (7.69,6.34);
+  \node[font=\sffamily\scriptsize, text=black!65, anchor=west] at (0.5,6.15) {Description};
+  \node[titre] at (0.55,5.8) {Ce qui change};
+  \node[texte, text width=6.9cm] at (0.55,5.5) {Le \texttt{sorry} de \texttt{Lemme5.lean} disparaît.};
+  \node[titre] at (0.55,5.05) {Pourquoi};
+  \node[texte, text width=6.9cm] at (0.55,4.75) {Le théorème 2 de l'article en dépend.};
+  \node[titre] at (0.55,4.4) {Comment on l'a vérifié};
+  \node[texte, text width=6.9cm] at (0.55,4.1) {\texttt{lake build} sans erreur ;
+    \texttt{\#print axioms} ne montre que les trois axiomes attendus.};
+  % commentaire de relecture
+  \fill[black!45] (0.65,2.85) circle (0.2);
+  \node[font=\sffamily\tiny\bfseries, text=white] at (0.65,2.85) {R};
+  \draw[black!30, rounded corners=2pt] (1.05,0.3) rectangle (7.7,3.1);
+  \fill[black!5] (1.06,2.7) rectangle (7.69,3.09);
+  \node[font=\sffamily\scriptsize, text=black!65, anchor=west] at (1.2,2.9)
+    {\textbf{relectrice} a commenté \texttt{Lemme5.lean}, ligne 14};
+  \node[mono, text=black!70, fill=black!4, text width=6.1cm, align=left, inner sep=2pt, anchor=north west]
+    at (1.2,2.5) {14\quad theorem lemme5 [IsLocalRing R] :};
+  \node[texte, text width=6.3cm] at (1.2,2.0) {L'article dit « pour tout anneau
+    noethérien », mais l'énoncé Lean suppose aussi l'anneau local. Lequel des deux
+    garde-t-on ? Si c'est le second, il faut corriger l'article.};
+  \node[bouton, anchor=south east] at (7.55,0.42) {Répondre};
+  % vérifications
+  \draw[black!30, rounded corners=2pt] (8.0,2.45) rectangle (12.05,6.35);
+  \fill[black!5] (8.01,5.95) rectangle (12.04,6.34);
+  \node[font=\sffamily\scriptsize, text=black!65, anchor=west] at (8.15,6.15)
+    {Vérifications : 2 sur 3 passent};
+  \foreach \y/\m/\t/\d in {5.55/\ok/Compilation Lean/4 min,
+      5.05/\ok/Compilation LaTeX/1 min, 4.55/\ko/Lint/2 erreurs} {
+    \node[anchor=west, inner sep=0pt] at (8.2,\y) {\m};
+    \node[font=\sffamily\scriptsize, anchor=west] at (8.55,\y) {\t};
+    \node[font=\sffamily\tiny, text=black!55, anchor=east] at (11.9,\y) {\d};
+  }
+  \draw[black!20] (8.0,4.2) -- (12.05,4.2);
+  \node[bouton, fill=black!12, text=black!45, draw=black!25, anchor=west] at (8.2,3.7)
+    {Fusionner};
+  \node[font=\sffamily\tiny, text=tonko, anchor=north west, text width=3.6cm] at (8.2,3.3)
+    {Fusion bloquée tant qu'une vérification échoue.};
+\end{tikzpicture}
+\caption{Écran fictif : une pull request. La description suit le modèle du dépôt, une
+vérification échoue et bloque la fusion, et la relectrice pose une question sur une ligne
+précise du fichier.}
+\label{fig:ecran-pr}
+\end{figure}

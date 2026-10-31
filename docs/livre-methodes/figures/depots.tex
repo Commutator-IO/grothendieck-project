@@ -1,0 +1,32 @@
+% Chapitre 8 : dépôt public, dépôt privé.
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,
+  depot/.style={draw=black!45, fill=black!3, rounded corners=3pt, minimum width=4.6cm,
+    minimum height=3.3cm, anchor=north},
+  liste/.style={font=\sffamily\scriptsize, align=left, anchor=north west, text width=4.2cm}]
+  \node[boite, minimum width=5.4cm, text width=5.2cm] (src) at (5.9,5.0)
+    {\textbf{Archive}\\[-1pt]\scriptsize les documents et leurs images, servis par la source ; les images ne sont copiées dans aucun des deux dépôts};
+  \node[depot] (pub) at (2.3,3.0) {};
+  \node[font=\sffamily\small\bfseries, anchor=north west] at (pub.north west) [xshift=2mm, yshift=-2mm] {Dépôt public};
+  \node[liste] at ([xshift=2mm, yshift=-8mm]pub.north west)
+    {le code et les outils\\les preuves en Lean\\les articles\\ce qui est rédigé
+    dans ses propres mots : numéro, titre, énoncés\\le \texttt{README} et sa procédure};
+  \node[depot] (priv) at (9.5,3.0) {};
+  \node[font=\sffamily\small\bfseries, anchor=north west] at (priv.north west) [xshift=2mm, yshift=-2mm] {Dépôt privé};
+  \node[liste] at ([xshift=2mm, yshift=-8mm]priv.north west)
+    {les transcriptions en attente\\d'un accord\\les notes de dépouillement\\la
+    correspondance\\le \texttt{README} et sa procédure,\\qui autorise à y committer};
+  \draw[fleche] (src.south west) to[out=-120, in=60] node[etiq, left, pos=0.5]
+    {on lit, on énonce\\dans ses mots} (pub.north);
+  \draw[fleche] (src.south east) to[out=-60, in=120] node[etiq, right, pos=0.5]
+    {on transcrit} (priv.north);
+  \draw[fleche, tonko, dashed, line width=0.8pt] (priv.west) -- (pub.east)
+    node[midway, font=\sffamily\large\bfseries, text=tonko, fill=white, inner sep=1pt] {×}
+    node[midway, below=4mm, etiq, text=tonko] {jamais de copie\\sans vérifier};
+\end{tikzpicture}
+\caption{Dépôt public et dépôt privé. Chacun reçoit de la source ce qu'il a le droit de
+garder ; aucune flèche ne doit aller du dépôt privé vers le dépôt public sans qu'on ait
+vérifié ce qu'on copie.}
+\label{fig:depots}
+\end{figure}

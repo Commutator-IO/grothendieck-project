@@ -1,0 +1,30 @@
+% Chapitre 3 : la chaîne d'intégration continue.
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[boite, minimum width=2.1cm] (push) at (0,0) {\ttfamily git push\\[1pt]
+    \sffamily\scriptsize sur \texttt{main}};
+  \node[boite, minimum width=3.3cm, fill=white] (lean) at (3.9,1.1) {Compiler les preuves\\[-1pt]
+    \ttfamily\scriptsize lake build};
+  \node[boite, minimum width=3.3cm, fill=white] (tex) at (3.9,0) {Compiler l'article\\[-1pt]
+    \ttfamily\scriptsize tectonic -X compile};
+  \node[boite, minimum width=3.3cm, fill=white] (lint) at (3.9,-1.1) {Vérifier le style\\[-1pt]
+    \ttfamily\scriptsize npm run lint};
+  \begin{scope}[on background layer]
+    \node[draw=black!35, dashed, fill=black!3, rounded corners=3pt, inner sep=7pt,
+      fit=(lean)(tex)(lint), label={[etiq]above:une machine virtuelle neuve}] (vm) {};
+  \end{scope}
+  \node[boite, minimum width=3.2cm, draw=tonok, fill=tonok!7] (ok) at (8.9,0.95)
+    {\ok\ tout passe\\[-1pt]\scriptsize déploiement sur Pages};
+  \node[boite, minimum width=3.2cm, draw=tonko, fill=tonko!6] (ko) at (8.9,-0.95)
+    {\ko\ une étape échoue\\[-1pt]\scriptsize croix rouge, rien n'est publié};
+  \draw[fleche] (push) -- (vm.west |- push);
+  \draw[fleche, tonok] (vm.east |- ok) -- (ok);
+  \draw[fleche, tonko] (vm.east |- ko) -- (ko);
+  \node[etiq, below=3mm of ko] {on lit l'erreur, on corrige,\\on envoie un nouveau commit};
+  \node[etiq, above=3mm of ok] {le site en ligne a passé\\toutes les vérifications};
+\end{tikzpicture}
+\caption{La chaîne d'intégration continue. Chaque envoi déclenche les mêmes vérifications
+sur une machine neuve ; le site n'est déployé que si toutes passent.}
+\label{fig:ci}
+\end{figure}

@@ -1,0 +1,42 @@
+% Chapitre 6 : écran fictif de la page de relecture locale.
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,
+  texte/.style={font=\sffamily\scriptsize, anchor=west, inner sep=0pt}]
+  \fenetre{12.4}{8.0}{Relecture}
+  % barre d'adresse
+  \draw[black!25, fill=black!3, rounded corners=5pt] (0.3,6.95) rectangle (12.1,7.3);
+  \node[font=\ttfamily\scriptsize, text=black!60, anchor=west] at (0.5,7.125)
+    {localhost:5173/relecture};
+  % le fac-similé
+  \draw[black!40, pattern=north east lines, pattern color=black!18] (0.3,0.4) rectangle (5.6,6.6);
+  \node[fill=white, font=\sffamily\scriptsize, text=black!60, inner sep=3pt] at (2.95,4.9)
+    {page scannée};
+  \draw[tonregle, line width=1pt, fill=white, fill opacity=0.6] (1.5,3.0) rectangle (3.9,3.5);
+  \node[font=\sffamily\tiny, text=tonregle, anchor=north west] at (1.5,2.95) {le mot en question};
+  \node[font=\sffamily\tiny, text=black!55, anchor=south west] at (0.35,0.45)
+    {lot 4, page 7};
+  % la carte de question
+  \draw[black!35, rounded corners=3pt, fill=white] (6.0,1.6) rectangle (12.1,6.6);
+  \node[texte, text=black!55] at (6.25,6.25) {Doute 3 sur 12};
+  \fill[black!10] (9.6,6.2) rectangle (11.85,6.3);
+  \fill[tonregle] (9.6,6.2) rectangle (10.15,6.3);
+  \node[texte, font=\sffamily\scriptsize\bfseries] at (6.25,5.7) {Lecture proposée};
+  \node[texte, font=\ttfamily\scriptsize] at (6.25,5.3) {\textbackslash uncertain\{faisceau cohérent\}};
+  \node[texte, anchor=north west, text width=5.6cm, align=left] at (6.25,4.85)
+    {Le mot encadré sur la page se lit-il bien \mbox{\og cohérent\fg{} ?}};
+  \node[bouton, anchor=west] (oui) at (6.25,3.85) {Oui};
+  \node[bouton, anchor=west, right=2mm of oui] (non) {Non};
+  \node[bouton, anchor=west, right=2mm of non] {Incertain};
+  \draw[black!30, rounded corners=2pt] (6.25,2.0) rectangle (11.85,3.2);
+  \node[texte, text=black!40, anchor=north west] at (6.4,3.05) {Note (facultative)};
+  % pied de page
+  \node[texte, text=black!55] at (6.05,1.05) {9 réponses en attente};
+  \node[bouton, fill=tonregle, text=white, draw=tonregle, anchor=east] at (12.1,1.05)
+    {Copier les réponses};
+\end{tikzpicture}
+\caption{Écran fictif : la page de relecture locale. À gauche la page de l'original, à
+droite une question fermée sur la lecture proposée. Les réponses s'accumulent dans le
+navigateur jusqu'à ce qu'on les copie dans la conversation.}
+\label{fig:ecran-relecture}
+\end{figure}

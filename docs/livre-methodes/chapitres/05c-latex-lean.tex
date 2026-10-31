@@ -26,6 +26,10 @@ comprendre ce que Lean a démontré, qui n'est pas toujours ce qu'on croyait.
         preuve formelle. Le texte renvoie au fichier et au nom du théorème.
 \end{enumerate}
 
+La figure~\ref{fig:boucle} dessine cette boucle avec ses retours.
+
+\input{figures/boucle}
+
 \begin{regle}
 Le fichier Lean fait foi. Si la rédaction et la preuve divergent, c'est la rédaction qu'on
 corrige ; si l'énoncé de l'article ne correspond pas à celui de Lean, on le dit dans
@@ -56,6 +60,40 @@ Deux remarques sur cet exemple. La première idée venait de la conversation, pa
 Lean n'a fait que la rendre sûre. Et l'histoire du travail se lit dans le dépôt : le script
 de vérification, le fichier Lean, le commit qui modifie l'article, chacun avec son message.
 
+\section{Du tableau noir au fichier}
+
+On ne pense pas toujours au clavier. Un calcul se fait souvent au tableau ou sur une feuille,
+et c'est là que la conversation peut commencer. On photographie le tableau ou la page avec
+son téléphone, on donne l'image à l'assistant, et on lui demande de la transcrire en LaTeX :
+il lit l'écriture, les formules, et souvent les diagrammes. On obtient en quelques minutes
+un fichier qui se compile, qu'on relit à côté de la photo, et qu'on peut ensuite énoncer
+en Lean comme le reste.
+
+Quelques précautions rendent la lecture bien meilleure :
+\begin{itemize}
+  \item une photo prise de face, bien éclairée, sans reflet sur le tableau ; une page par
+        image plutôt qu'un tableau entier vu de loin ;
+  \item demander à l'assistant de marquer ce qu'il n'arrive pas à lire, au lieu de deviner
+        (chapitre~\ref{ch:review}) : un indice effacé, une flèche qui part on ne sait d'où ;
+  \item garder la photo dans le dépôt, à côté de la transcription, et le dire dans
+        l'en-tête du fichier : c'est la source qu'on relira si la transcription est
+        contestée.
+\end{itemize}
+
+\begin{exemple}
+À la fin d'une séance de travail à deux, on photographie les trois panneaux du tableau.
+Le soir, l'assistant en tire un fichier LaTeX : les définitions, le lemme qu'on a cru
+démontrer, la figure. La relecture à côté des photos trouve deux indices mal lus et une
+hypothèse qu'on avait dite sans l'écrire. Le lemme part ensuite en Lean, et c'est là
+qu'on apprend s'il était vrai.
+\end{exemple}
+
+\begin{warningblock}
+Une photo d'un tableau peut montrer autre chose que des mathématiques : un nom, un
+message, une personne. On recadre avant de l'envoyer, et l'on ne verse pas dans un dépôt
+public les notes manuscrites d'un collègue sans son accord.
+\end{warningblock}
+
 \section{Les silences de Lean}
 
 Une preuve formelle établit la lecture qu'on en a faite. Elle ne dit pas que cette lecture
@@ -72,6 +110,7 @@ l'article affirme.
 \end{warningblock}
 
 \begin{outils}
+L'appareil photo du téléphone, ou un scanner de documents, pour le tableau et les notes manuscrites ;
 Claude Code avec le serveur MCP \texttt{lean-lsp} pour la boucle ; Python ou C pour les
 vérifications de petits cas ; \texttt{decide} et \texttt{native\_decide} dans Lean pour
 certifier un contre-exemple fini ; le paquet \texttt{mathaidisclose} pour la déclaration

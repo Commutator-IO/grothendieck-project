@@ -1,0 +1,38 @@
+% Chapitre 5 : écran fictif d'une session de Claude Code dans un terminal.
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,
+  outil/.style={mono, text=tonregle},
+  sortie/.style={mono, text=black!55}]
+  \fenetre{12.4}{7.4}{Terminal : claude}
+  \fill[black!3] (0.02,0.02) rectangle (12.38,6.83);
+  % la demande
+  \draw[black!35, rounded corners=2pt] (0.3,5.75) rectangle (12.1,6.6);
+  \node[mono, text=tonregle] at (0.45,6.35) {>};
+  \node[mono] at (0.75,6.35) {Le lemme 2 tient-il sans l'hypothèse de finitude ? Essaie de};
+  \node[mono] at (0.75,6.0) {retirer l'hypothèse dans Lemme2.lean, ou trouve un contre-exemple.};
+  % les outils
+  \foreach \y/\o/\a in {5.3/Read/{Lemmes/Lemme2.lean},
+      4.45/Edit/{Lemmes/Lemme2.lean (+3 -5)},
+      3.6/Bash/{lake env lean Lemmes/Lemme2.lean},
+      2.75/Bash/lake env lean Axiomes.lean} {
+    \fill[tonregle] (0.5,\y) circle (0.06);
+    \node[outil] at (0.75,\y) {\o};
+    \node[mono] at (1.75,\y) {\a};
+  }
+  \node[sortie] at (0.75,4.95) {└ 41 lignes};
+  \node[sortie] at (0.75,4.1) {└ retire [Finite ι] ; la preuve utilise seulement Noetherian};
+  \node[sortie] at (0.75,3.25) {└ aucune erreur, aucun avertissement};
+  \node[sortie] at (0.75,2.4) {└ lemme2 dépend de [propext, Classical.choice, Quot.sound]};
+  % la réponse
+  \node[mono] at (0.5,1.85) {Oui. La finitude ne servait qu'à un pas que la noethérianité};
+  \node[mono] at (0.5,1.5) {suffit à justifier. Le lemme compile sans elle et ne dépend que};
+  \node[mono] at (0.5,1.15) {des trois axiomes attendus. Rien n'est commité : à relire.};
+  \draw[black!25] (0.3,0.7) -- (12.1,0.7);
+  \node[mono, text=black!45] at (0.45,0.4) {> \color{black!30}▌};
+\end{tikzpicture}
+\caption{Écran fictif : une session de l'assistant dans un terminal. La demande est
+écrite comme à un collègue ; chaque ligne marquée d'un point est un outil appelé (lire,
+modifier un fichier, lancer une commande), avec sa sortie en gris.}
+\label{fig:ecran-terminal}
+\end{figure}

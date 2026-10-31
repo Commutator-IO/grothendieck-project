@@ -26,7 +26,40 @@
 \usepackage[most]{tcolorbox}
 
 \usepackage{tikz}
-\usetikzlibrary{calc,positioning,arrows.meta}
+\usetikzlibrary{calc,positioning,arrows.meta,patterns,fit,backgrounds}
+
+% Les figures : schémas et écrans fictifs, dessinés en TikZ pour que leurs
+% étiquettes soient composées dans les polices du texte. Gris neutres, une
+% seule couleur d'accent par figure ; le vert et le rouge ne servent qu'aux
+% résultats des vérifications.
+\definecolor{tonok}{HTML}{15803D}
+\definecolor{tonko}{HTML}{B91C1C}
+\tikzset{
+  boite/.style={draw=black!45, fill=black!3, rounded corners=2pt,
+    font=\sffamily\footnotesize, align=center, inner sep=4pt, minimum height=8mm},
+  fleche/.style={-{Stealth[length=2.2mm]}, draw=black!60, line width=0.6pt},
+  etiq/.style={font=\sffamily\scriptsize, text=black!70, align=center},
+  mono/.style={font=\ttfamily\scriptsize, anchor=west, inner sep=0pt},
+  bouton/.style={draw=black!40, fill=black!5, rounded corners=2pt,
+    font=\sffamily\scriptsize, inner xsep=5pt, inner ysep=2.5pt},
+  etiquette/.style={rounded corners=4pt, font=\sffamily\tiny, inner xsep=4pt,
+    inner ysep=2pt},
+}
+% Une fenêtre fictive de #1 cm sur #2 cm, coin inférieur gauche à l'origine,
+% avec une barre de titre de 0,55 cm qui porte #3.
+\newcommand{\fenetre}[3]{%
+  \fill[white] (0,0) rectangle (#1,#2);
+  \begin{scope}
+    \clip[rounded corners=3pt] (0,0) rectangle (#1,#2);
+    \fill[black!9] (0,#2-0.55) rectangle (#1,#2);
+  \end{scope}
+  \draw[black!30] (0,#2-0.55) -- (#1,#2-0.55);
+  \draw[black!40, rounded corners=3pt] (0,0) rectangle (#1,#2);
+  \foreach \i in {0,1,2} \fill[black!25] (0.3+\i*0.28,#2-0.275) circle (0.07);
+  \node[font=\sffamily\scriptsize, text=black!65] at (#1/2,#2-0.275) {#3};
+}
+\newcommand{\ok}{{\ttfamily\color{tonok}✓}}
+\newcommand{\ko}{{\ttfamily\color{tonko}✗}}
 
 \usepackage[hidelinks]{hyperref}
 
