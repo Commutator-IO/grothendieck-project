@@ -123,7 +123,10 @@ async function visit(series, path) {
   const { dirs, files } = await listing(url);
   requests++;
   const xmlName = `${name}.xml`;
-  const jpg = files.filter((f) => /\.jpe?g$/i.test(f)).length;
+  // Some items carry a second rendering of each page, `_NN-diff.jpg`, beside `_NN.jpg`: the same
+  // page, not another one, so it is neither counted nor listed.
+  const isView = (f) => /\.jpe?g$/i.test(f) && !/-diff\.jpe?g$/i.test(f);
+  const jpg = files.filter(isView).length;
   const tif = files.filter((f) => /\.tiff?$/i.test(f)).length;
   const hasXml = files.includes(xmlName);
   if (hasXml || jpg || tif) {
@@ -152,7 +155,7 @@ async function visit(series, path) {
       rec.metadata = false;
     }
     items.push(rec);
-    const jpgs = files.filter((f) => /\.jpe?g$/i.test(f)).sort(natural);
+    const jpgs = files.filter(isView).sort(natural);
     const pdf = files.find((f) => f === `${name}_web.pdf`) ?? files.find((f) => f === `${name}.pdf`) ?? null;
     views[name] = { jpg: jpgs, pdf };
     process.stdout.write(`${name}  ${rec.pages} p.  ${rec.title ?? '(no metadata)'}\n`);
