@@ -170,3 +170,35 @@ The tools are Python 3 (standard library only) and gcc. The per-class files
 go to `out/`, which is not versioned (45 MB for n = 9). There is one line
 per bigon-free class: its multiple points, then its canonical chirotope.
 The pseudolines are written in hex digits.
+
+## Three-pencil test (Problem 14, 31 October 2026)
+
+`three_pencil.py` tests Problem 14 of the problems paper (pp. 39–54: is a
+bigon-free arrangement determined by its labelled skeleton?) on the case
+that Lean leaves open. `full_of_fourth'` (`lean/Grothendieck/Folder80Maps3.lean`)
+proves it when every triangle has a fourth pseudoline through none of its
+vertices. A triangle without one has three multiple vertices with every other
+pseudoline through one of them. So the open case is the arrangements lying in
+the three pencils at the vertices of a triangle, starting with `III_6`.
+
+For each bigon-free class of `out/all_n.txt` in that case, the script reads
+the order of the points along each pseudoline from the rank-2 contraction of
+the chirotope. A labelled-skeleton isomorphism is then a permutation of the
+pseudolines that maps points to points and the cycle of points on each
+pseudoline to the cycle on its image, up to rotation and reflection. An
+arrangement isomorphism is a permutation that preserves the chirotope up to
+reorientation and global sign. Two checks:
+
+1. every automorphism of the labelled skeleton comes from an automorphism of
+   the arrangement;
+2. two different classes never have isomorphic labelled skeleta (compared
+   among classes with the same point sizes and the same numbers of points per
+   pseudoline).
+
+**Result: no counterexample for n ≤ 9.** There are 3, 5, 22 and 102
+three-pencil bigon-free classes for n = 6, 7, 8, 9 (none for n ≤ 5). Every
+skeleton automorphism is realised (groups of order up to 24; `III_6` has 24,
+its 𝔖₄), and none of the 904 pairs of classes compared has isomorphic
+skeleta. Run `python3 three_pencil.py 9` after `run.py` (about a minute);
+the output is in `three_pencil_results.txt`. This is evidence for the
+statement in the open case, not a proof: n ≥ 10 is not enumerated.
