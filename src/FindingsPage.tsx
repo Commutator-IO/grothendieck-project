@@ -525,9 +525,13 @@ function Pager({
  * statement holds, under the hypotheses written and those alone — not that
  * the reading is what the page says.
  */
+// A card on an IHÉS item names it by its identifier and opens it on the Illusie tab.
+const proofCote = (p: (typeof PROOFS)[number]) => (isIhes(p.folder) ? `IHÉS ${p.folder}` : `n° ${p.folder}`);
+const proofHref = (p: (typeof PROOFS)[number]) =>
+  isIhes(p.folder) ? `/illusie/#${p.folder}/${p.batch}/p${parseInt(p.page, 10)}` : `/#${p.folder}/${p.batch}/p${p.page}`;
 const proofCtx = (p: (typeof PROOFS)[number]): CommentContext => ({
   kind: 'proof',
-  label: `n° ${p.folder} · ${p.name}`,
+  label: `${proofCote(p)} · ${p.name}`,
   cote: p.folder,
   batch: p.batch,
   ref: p.lean,
@@ -566,10 +570,10 @@ function ProvedInLean() {
         {shown.map((p) => (
           <article key={`${p.lean}#${p.page}#${p.name}`} className="card px-4 py-3" {...commentData(proofCtx(p))}>
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <a href={`/#${p.folder}/${p.batch}/p${p.page}`} className="text-[14px] font-semibold text-ink-900 hover:text-brand-700">
-                n° {p.folder} · {p.name}
+              <a href={proofHref(p)} className="text-[14px] font-semibold text-ink-900 hover:text-brand-700">
+                {proofCote(p)} · {p.name}
               </a>
-              <span className="text-[12.5px] text-ink-500">{BY_ID.get(p.folder)?.title.replace(/\s*:.*$/, '')}</span>
+              <span className="text-[12.5px] text-ink-500">{coteInfo(p.folder)?.title.replace(/\s*:.*$/, '')}</span>
               <CommentButton scope="findings" ctx={proofCtx(p)} text={p.statement} className="ml-auto" />
               <span className="rounded-full bg-ink-800 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
                 {[p.verdict].flat().join(' · ')}

@@ -9471,6 +9471,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: "matched",
     settle: "The axiomatic version (a class P of projective objects in an abelian category) is matched only once SGA 6 Exposé I is read.",
+    lean: {"file": "lean/Grothendieck/IhesSGA6_1_5.lean", "found": "Proved for modules over any ring (all in the ring’s universe). IsNPresented R n M by recursion (n = 0 finite; n+1 a surjection from a finite free module with n-presented kernel); it is Module.Finite at 0 and Module.FinitePresentation at 1. Prop. 4.2 as on the page (an extension of two n-presented modules is n-presented, IsNPresented.of_exact), Prop. 4.4 as on the page (with M₀ (n+1)-presented, X is (n+1)-presented iff the kernel is n-presented, IsNPresented.iff_of_exact), the Stacks two-out-of-three forms (of_exact_left, of_exact_right; the edition’s), Cor. 4.3 (prod), Cor. 4.7 bis (of_retract), the projective remark of § 5 (succ_of_projective), and the characterisation by every or some surjection from a finite free module (Stacks 064U/064X). Not formalised: the abelian-category setting of § 4, ∞-presentations, Cor. 4.5–4.9 and §§ 5–7."},
   },
   {
     id: "FG_IL_5_SGA6_1_5-projective-dimension-local-question",
@@ -9563,6 +9564,7 @@ export const FINDINGS: Finding[] = [
     ],
     status: "matched",
     settle: "None needed for the match.",
+    lean: {"file": "lean/Grothendieck/IhesSGA6_2_3.lean", "found": "K₀ of a pretriangulated category defined as the free abelian group on objects modulo the triangle relations (Mathlib has none); proved: cl 0 = 0, isomorphic objects have equal classes, cl X[1] = −cl X and cl X[n] = (−1)ⁿ cl X, cl(X ⊞ Y) = cl X + cl Y, cl X − cl Y = cl(X ⊞ Y[1]), every element is the class of one object, the universal property, functoriality for triangulated functors, and the « if » half of the two-triangle criterion. The Euler identity Σ(−1)ⁱ dim Vⁱ = Σ(−1)ⁱ dim Hⁱ for a bounded complex of finite-dimensional vector spaces is proved in the same file. Not formalised: the « only if » half of the criterion, the Verdier-quotient sequence, K(C) ≅ K(D^b(C))."},
   },
   {
     id: "FG_IL_5_SGA6_2_3-class-equality-criterion",
