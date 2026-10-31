@@ -13,6 +13,7 @@
 \usepackage{titlesec}
 \titlespacing*{\section}{0pt}{2.2ex plus 1ex}{1.2ex}
 \usepackage{xcolor}
+\usepackage{tikz}
 \usepackage[hidelinks]{hyperref}
 \usepackage{xurl}
 \usepackage{enumitem}
@@ -316,7 +317,64 @@ Let $X$ be a smooth complex analytic space (or orbifold) with a normal crossings
 
 \section{Pseudoline arrangements}\label{sec:pseudo}
 
-A pseudoline arrangement in the real projective plane is \emph{bigonal along} one of its pseudolines $D$ when $D$ carries exactly two vertices of the arrangement, so that every other pseudoline meets $D$ at one of them. In the page's notation, $\mathrm{II}_4$ is four pseudolines in general position, $\mathrm{II}_5$ five in general position, $\mathrm{II}'_{3,2}$ a pencil of three and a pencil of two without the line joining their centres, and $\mathrm{III}_6$ the complete quadrangle (the six lines joining four points, no three collinear).
+A pseudoline arrangement in the real projective plane is \emph{bigonal along} one of its pseudolines $D$ when $D$ carries exactly two vertices of the arrangement, so that every other pseudoline meets $D$ at one of them. In the page's notation, $\mathrm{II}_4$ is four pseudolines in general position, $\mathrm{II}_5$ five in general position, $\mathrm{II}'_{3,2}$ a pencil of three and a pencil of two without the line joining their centres, and $\mathrm{III}_6$ the complete quadrangle (the six lines joining four points, no three collinear); Figure~\ref{fig:pseudo} draws all four.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=0.62,line cap=round]
+  \draw[black!25] (0,0) rectangle (4,3);
+  \draw (0,1.54) -- (4,2.065);
+  \draw (1.163,0) -- (3.467,3);
+  \draw (1.602,3) -- (1.995,0);
+  \draw (0.622,3) -- (4,0.405);
+  \node[below,font=\small] at (2,0) {$\mathrm{II}_{4}$};
+\end{tikzpicture}\hfill
+\begin{tikzpicture}[scale=0.62,line cap=round]
+  \draw[black!25] (0,0) rectangle (4,3);
+  \draw (0,1.95) -- (4,1.95);
+  \draw (0,0.603) -- (3.298,3);
+  \draw (1.039,0) -- (2.014,3);
+  \draw (1.039,3) -- (2.014,0);
+  \draw (0,2.397) -- (3.298,0);
+  \node[below,font=\small] at (2,0) {$\mathrm{II}_{5}$};
+\end{tikzpicture}
+
+\medskip
+\begin{tikzpicture}[scale=0.62,line cap=round]
+  \draw[black!25] (0,0) rectangle (4,3);
+  \draw (0.825,0) -- (1.575,3);
+  \draw (0.825,3) -- (1.575,0);
+  \draw (1.2,0) -- (1.2,3);
+  \draw (0,0.66) -- (4,1.86);
+  \draw (0,2.34) -- (4,1.14);
+  \fill (1.2,1.5) circle (1.6pt);
+  \fill (2.8,1.5) circle (1.6pt);
+  \node[left,inner sep=1.5pt,font=\scriptsize] at (1.2,1.5) {$P$};
+  \node[right,inner sep=1.5pt,font=\scriptsize] at (2.8,1.5) {$Q$};
+  \node[below,font=\small] at (2,0) {$\mathrm{II}'_{3,2}$};
+\end{tikzpicture}\hfill
+\begin{tikzpicture}[scale=0.62,line cap=round]
+  \draw[black!25] (0,0) rectangle (4,3);
+  \draw (0,0.5) -- (4,0.5);
+  \draw (0.159,0) -- (2.205,3);
+  \draw (0,0.267) -- (4,2.133);
+  \draw (1.795,3) -- (3.841,0);
+  \draw (0,2.133) -- (4,0.267);
+  \draw (2,0) -- (2,3);
+  \fill (0.5,0.5) circle (1.6pt);
+  \fill (3.5,0.5) circle (1.6pt);
+  \fill (2,2.7) circle (1.6pt);
+  \fill (2,1.2) circle (1.6pt);
+  \node[below left,inner sep=1.5pt,font=\scriptsize] at (0.5,0.5) {$P_1$};
+  \node[below right,inner sep=1.5pt,font=\scriptsize] at (3.5,0.5) {$P_2$};
+  \node[above,inner sep=1.5pt,font=\scriptsize] at (2,2.7) {$P_3$};
+  \node[right,inner sep=1.5pt,font=\scriptsize] at (2,1.2) {$P_4$};
+  \node[below,font=\small] at (2,0) {$\mathrm{III}_{6}$};
+\end{tikzpicture}
+
+\medskip
+\caption{The four arrangements of the dichotomy, drawn with straight lines in an affine chart chosen so that every crossing is visible. In $\mathrm{II}'_{3,2}$ the line $PQ$ is absent; in the complete quadrangle $\mathrm{III}_6$ the six lines join $P_1,\dots,P_4$, and the triangle $P_1P_2P_3$ has every other line through one of its vertices, the case Problem~\ref{p:skel} leaves open.}\label{fig:pseudo}
+\end{figure}
 
 An arrangement is \emph{bigon-free} when none of its pseudolines is bigonal, and four pseudolines are in \emph{general position} when no three of them pass through one point. The page's boxed dichotomy, which this note listed as an open problem until 26 October 2026, has a short proof, and so does the numbering lemma of page~28; we record it because the problem below depends on it.
 
