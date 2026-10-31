@@ -15,6 +15,11 @@ commit message or the site. The site's Quillen tab would show transcriptions
 only if built with `RENDER_QUILLEN=true`, and that switch is the user's, not
 this skill's.
 
+**Where they are kept.** Since 2026-10-31 the transcriptions are versioned in the private
+repository `Commutator-IO/quillen-project` (local clone `~/Commutator/quillen-project`),
+which has its own copy of this skill. Work there; the local `transcripts-quillen/` of this
+public repository stays git-ignored and is only a working copy.
+
 Since 2026-09-30 the user's instruction is to transcribe nothing yet. Run this
 skill only when they ask for a specific notebook in so many words.
 
