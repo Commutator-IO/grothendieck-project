@@ -116,7 +116,13 @@ particular:
 - his prose about the mathematics stays;
 - uncertainty is marked, never resolved: `\ill{}` for what cannot be read,
   `\uncertain{}` for a reading offered;
-- what he struck out stays: `\struck{}`;
+- what he struck out stays: `\struck{}`; but a passage he crossed out
+  heavily, so dark that the words underneath cannot be made out without
+  guessing, is not worth a precise reading (Michel, 2026-10-31): write
+  `\struck{\ill{}}` with a short `\note{}` saying how much is crossed out
+  (« trois lignes biffées, illisibles »), and do not spend time on it.
+  Doubtful words inside a struck passage are never put on the review tab;
+  only the readings of the kept text are;
 - `\add{}` is his ink, `\supplied{}` is ours;
 - no correction of his mathematics — flag it, do not repair it;
 - the same permitted LaTeX subset, so that the file could be rendered one day
