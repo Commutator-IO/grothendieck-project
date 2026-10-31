@@ -28,10 +28,16 @@ differ by a sign `s i` and a reorientation `ε i`:
   vertices.
 * `reorientation_of_locallyEquivalent`: **steps 2–4.** If the two chirotopes are locally
   equivalent along every line, `χ' ∘ σ` is the reorientation of `χ` by `s`.
+* `const_add_cut`, `locallyEquivalent_of_sameSeparation`: **the rank-2 step.** On a complete
+  multipartite graph with at least three parts, a sign function balanced on every 4-cycle is a
+  constant plus a cut. Along a line, the 4-cycle sums of `χ` are its separation relation (which
+  pair of vertices separates which on the line), so two chirotopes with the same separation
+  relation along every line are locally equivalent.
+* `reorientation_of_sameSeparation`: **steps 1–4 together.**
 
-**Not formalised.** The two representation theorems at the ends: the rank-2 one that turns a
-skeleton isomorphism into `LocallyEquivalent`, and Folkman–Lawrence, which turns the
-reorientation into a homeomorphism of the projective plane.
+**Not formalised.** Folkman–Lawrence, which turns the reorientation into a homeomorphism of the
+projective plane, and the fact that on an actual arrangement the separation relation along `i`
+is the one the cyclic order of the vertices of `L_i` records.
 -/
 
 namespace Grothendieck.Folder80Signs
@@ -205,5 +211,139 @@ theorem reorientation_of_locallyEquivalent (hI : Incidence on) (hbf : BigonFree 
   have h0 := eq_zero s12 s23 hI hbf hloc h
   simp only [ψ] at h0
   linear_combination h0 - (χ i j l + s i + s j + s l) * two
+
+section RankTwo
+
+/-! ### The rank-2 step
+
+Along a line `i`, the other lines fall into classes, one per vertex of `i`. A sign function on
+pairs of lines in distinct classes is *balanced* when its sum over every 4-cycle of the complete
+multipartite graph is `0`. For the product of two chirotopes, this says that the two contractions
+at `i` have the same separation relation: `{j, k}` separates `{l, m}` on `i` iff
+`χ i j l + χ i j m + χ i k l + χ i k m = 1`, and that is what the cyclic order of the vertices
+along `i`, up to reversal, records. -/
+
+variable {V C : Type*} {cls : V → C} {φ : V → V → ZMod 2}
+
+/-- **The rank-2 lemma.** On a complete multipartite graph with at least three parts, a symmetric
+sign function balanced on every 4-cycle is a constant plus a cut. -/
+theorem const_add_cut (hsym : ∀ j l, φ l j = φ j l)
+    (h4 : ∀ j k l m, cls j ≠ cls l → cls j ≠ cls m → cls k ≠ cls l → cls k ≠ cls m →
+      φ j l + φ j m + φ k l + φ k m = 0)
+    {p q r : V} (hpq : cls p ≠ cls q) (hqr : cls q ≠ cls r) (hpr : cls p ≠ cls r) :
+    ∃ (s : ZMod 2) (ε : V → ZMod 2), ∀ j l, cls j ≠ cls l → φ j l = s + ε j + ε l := by
+  classical
+  -- `s` is the value of the triangle `p, q, r`; `ε` is read from `p`, or from `q` on the class
+  -- of `p`
+  refine ⟨φ p q + φ q r + φ r p, fun j => if cls j = cls p then φ q j + φ p q
+    else φ p j + (φ p q + φ q r + φ r p), ?_⟩
+  -- one end in the class of `p`: a 4-cycle through `p` and `q`
+  have half : ∀ j l, cls j = cls p → cls l ≠ cls p →
+      φ j l = φ q j + φ p q + φ p l := by
+    intro j l hj hl
+    have e := h4 j p l q (fun e => hl (e.symm.trans hj)) (fun e => hpq (hj.symm.trans e))
+      (Ne.symm hl) hpq
+    linear_combination (norm := (ring_nf; reduce_mod_char)) e + hsym q j
+  intro j l hjl
+  by_cases hj : cls j = cls p <;> by_cases hl : cls l = cls p
+  · exact absurd (hj.trans hl.symm) hjl
+  · simp only [hj, hl, ↓reduceIte]
+    linear_combination (norm := (ring_nf; reduce_mod_char)) half j l hj hl
+  · simp only [hj, hl, ↓reduceIte]
+    linear_combination (norm := (ring_nf; reduce_mod_char)) half l j hl hj + hsym j l
+  · simp only [hj, hl, ↓reduceIte]
+    -- both ends outside the class of `p`: the triangle `p, j, l` has the value of `p, q, r`
+    by_cases hlq : cls l = cls q
+    · have hjq : cls j ≠ cls q := fun e => hjl (e.trans hlq.symm)
+      have e1 := h4 l q j p (Ne.symm hjl) hl (fun e => hjl (e.symm.trans hlq.symm)) (Ne.symm hpq)
+      have e2 := h4 j r q p hjq hj (Ne.symm hqr) (Ne.symm hpr)
+      linear_combination (norm := (ring_nf; reduce_mod_char)) e1 + e2 + hsym j l + hsym p l +
+        hsym j q + hsym p q + hsym p j + hsym q r
+    · have e1 := h4 j q p l hj hjl (Ne.symm hpq) (fun e => hlq e.symm)
+      have e2 := h4 l r q p hlq hl (Ne.symm hqr) (Ne.symm hpr)
+      linear_combination (norm := (ring_nf; reduce_mod_char)) e1 + e2 + hsym p j + hsym p q +
+        hsym q l + hsym p l + hsym q r
+
+end RankTwo
+
+/-- The two chirotopes have the same separation relation along every line: what an isomorphism
+of labelled skeleta gives, the cyclic order of the vertices along `i` being kept up to
+reversal. -/
+def SameSeparation (χ χ' : L → L → L → ZMod 2) (σ : L → L) : Prop :=
+  ∀ i j k l m, Basis on i j l → Basis on i j m → Basis on i k l → Basis on i k m →
+    χ' (σ i) (σ j) (σ l) + χ' (σ i) (σ j) (σ m) + χ' (σ i) (σ k) (σ l) + χ' (σ i) (σ k) (σ m) =
+      χ i j l + χ i j m + χ i k l + χ i k m
+
+/-- **The rank-2 step.** In a bigon-free incidence structure, chirotopes with the same separation
+relation along every line are locally equivalent. -/
+theorem locallyEquivalent_of_sameSeparation (hI : Incidence on) (hbf : BigonFree on)
+    {χ χ' : L → L → L → ZMod 2} {σ : L → L}
+    (a23 : ∀ i j l, χ i l j = χ i j l + 1) (a23' : ∀ i j l, χ' i l j = χ' i j l + 1)
+    (H : SameSeparation (on := on) χ χ' σ) : LocallyEquivalent (on := on) χ χ' σ := by
+  classical
+  -- the class of `j` along `i` is the point `i ∩ j`
+  let c : L → L → P := fun i j => if h : i ≠ j then Classical.choose (hI.meet i j h)
+    else Classical.choice ⟨Classical.choose (hbf i)⟩
+  have c_on : ∀ {i j}, i ≠ j → on (c i j) i ∧ on (c i j) j := fun {i j} h => by
+    simp only [c, ne_eq, h, not_false_eq_true, ↓reduceDIte]; exact Classical.choose_spec (hI.meet i j h)
+  have c_eq : ∀ {i j : L} {p : P}, i ≠ j → on p i → on p j → c i j = p :=
+    fun h hi hj => hI.unique h (c_on h).1 (c_on h).2 hi hj
+  have basis_iff : ∀ {i j l : L}, i ≠ j → i ≠ l → (Basis on i j l ↔ c i j ≠ c i l) := by
+    intro i j l hj hl
+    constructor
+    · rintro ⟨-, -, -, hno⟩ e
+      exact hno ⟨c i j, (c_on hj).1, (c_on hj).2, e ▸ (c_on hl).2⟩
+    · intro hne
+      refine ⟨hj, hl, fun e => hne (by subst e; rfl), fun ⟨p, pi, pj, pl⟩ => hne ?_⟩
+      rw [c_eq hj pi pj, c_eq hl pi pl]
+  -- at each line, apply the rank-2 lemma to the other lines
+  have local_i : ∀ i, ∃ (s : ZMod 2) (ε : L → ZMod 2), ∀ j l, Basis on i j l →
+      χ' (σ i) (σ j) (σ l) = χ i j l + s + ε j + ε l := by
+    intro i
+    let V := {j : L // i ≠ j}
+    let φ : V → V → ZMod 2 := fun j l => χ' (σ i) (σ j) (σ l) + χ i j l
+    have hsym : ∀ j l, φ l j = φ j l := fun j l => by
+      simp only [φ]; rw [a23 i, a23' (σ i)]
+      linear_combination (norm := (ring_nf; reduce_mod_char))
+    have h4 : ∀ j k l m : V, c i j ≠ c i l → c i j ≠ c i m → c i k ≠ c i l → c i k ≠ c i m →
+        φ j l + φ j m + φ k l + φ k m = 0 := by
+      intro j k l m h1 h2 h3 h4
+      have e := H i j k l m ((basis_iff j.2 l.2).2 h1) ((basis_iff j.2 m.2).2 h2)
+        ((basis_iff k.2 l.2).2 h3) ((basis_iff k.2 m.2).2 h4)
+      simp only [φ]
+      linear_combination (norm := (ring_nf; reduce_mod_char)) e
+    -- three vertices on `i`, and a second line through each
+    obtain ⟨p, q, r, hp, hq, hr, hpq, hpr, hqr⟩ := hbf i
+    obtain ⟨jp, hjp, pjp⟩ := hI.two hp
+    obtain ⟨jq, hjq, qjq⟩ := hI.two hq
+    obtain ⟨jr, hjr, rjr⟩ := hI.two hr
+    have cp := c_eq (Ne.symm hjp) hp pjp
+    have cq := c_eq (Ne.symm hjq) hq qjq
+    have cr := c_eq (Ne.symm hjr) hr rjr
+    obtain ⟨s, ε, hε⟩ := const_add_cut (cls := fun j : V => c i j) hsym h4
+      (p := ⟨jp, Ne.symm hjp⟩) (q := ⟨jq, Ne.symm hjq⟩) (r := ⟨jr, Ne.symm hjr⟩)
+      (by simp only [cp, cq]; exact hpq) (by simp only [cq, cr]; exact hqr)
+      (by simp only [cp, cr]; exact hpr)
+    refine ⟨s, fun j => if h : i ≠ j then ε ⟨j, h⟩ else 0, fun j l hB => ?_⟩
+    have hj := hB.1; have hl := hB.2.1
+    have := hε ⟨j, hj⟩ ⟨l, hl⟩ ((basis_iff hj hl).1 hB)
+    simp only [φ, ne_eq, hj, hl, not_false_eq_true, ↓reduceDIte] at this ⊢
+    linear_combination (norm := (ring_nf; reduce_mod_char)) this
+  choose s ε hε using local_i
+  exact ⟨s, ε, hε⟩
+
+/-- **Steps 1–4, from the cyclic orders to the reorientation.** In a bigon-free incidence
+structure, two alternating chirotopes with the same separation relation along every line differ
+by a reorientation. Only Folkman–Lawrence, from the reorientation to a homeomorphism, and the
+reading of the separation relation on an actual arrangement, are left outside. -/
+theorem reorientation_of_sameSeparation (hI : Incidence on) (hbf : BigonFree on)
+    {χ χ' : L → L → L → ZMod 2} {σ : L → L}
+    (a12 : ∀ i j l, χ j i l = χ i j l + 1) (a23 : ∀ i j l, χ i l j = χ i j l + 1)
+    (a12' : ∀ i j l, χ' j i l = χ' i j l + 1) (a23' : ∀ i j l, χ' i l j = χ' i j l + 1)
+    (H : SameSeparation (on := on) χ χ' σ) :
+    ∃ r : L → ZMod 2, ∀ i j l, Basis on i j l →
+      χ' (σ i) (σ j) (σ l) = χ i j l + r i + r j + r l :=
+  reorientation_of_locallyEquivalent hI hbf a12 a23 a12' a23'
+    (locallyEquivalent_of_sameSeparation hI hbf a23 a23' H)
 
 end Grothendieck.Folder80Signs
