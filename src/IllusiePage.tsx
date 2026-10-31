@@ -132,7 +132,7 @@ export function IllusiePage() {
         </header>
 
         <aside className="mt-6 max-w-[46em] rounded-xl border border-ink-200 bg-ink-50 px-4 py-3 text-[13px] leading-relaxed text-ink-700">
-          The fonds is held by the IHÉS. The facsimile pane loads the IHÉS's page views from its file
+          The fonds is held by the IHÉS. The facsimile pane loads the IHÉS's page views, or its PDF, from its file
           server; no image or PDF of them is stored on this site, and no transcription is published. The
           correspondence is under its authors' rights. For any use of the documents, contact the IHÉS archives,{' '}
           <a href="mailto:archives@ihes.fr" className="font-medium text-brand-600 underline decoration-brand-200 underline-offset-2">

@@ -86,12 +86,13 @@ export function IllusieReader({
               pageOffset: 0,
             }
           : {
-              file: '',
+              // No page views, but the PDF itself: framed from the IHÉS server, not copied.
+              file: view?.pdf ? item.url + encodeURIComponent(view.pdf) : '',
               original: view?.pdf ? item.url + encodeURIComponent(view.pdf) : item.url,
               heading: `Fonds Grothendieck–Illusie · ${item.id}`,
-              why: 'The IHÉS keeps this item as TIFF masters and a PDF, with no page views a pane can show. The PDF opens on its server, in a tab of its own.',
+              why: 'The IHÉS keeps this item as TIFF masters only, with no page views or PDF a pane can show. It opens on its server, in a tab of its own.',
               credit:
-                'Fonds Grothendieck–Illusie, IHÉS. Under its authors’ rights; for any use, archives@ihes.fr.',
+                'Facsimile: Fonds Grothendieck–Illusie, IHÉS. The PDF is loaded from its server, repo-archives.ihes.fr, and not copied here. Under its authors’ rights; for any use, archives@ihes.fr.',
               pageOffset: 0,
             },
       }}
