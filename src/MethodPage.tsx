@@ -436,6 +436,26 @@ export function MethodPage() {
               built from <code className="text-[12px]">docs/problems/article.tex</code>
             </span>
           </p>
+          <P id="book-methods" className="prose-fonds mt-6">
+            <em>Méthodes d'atelier : le génie logiciel au service d'un projet mathématique</em>{' '}
+            is a short book in French for mathematicians, on the practices this edition runs on:
+            git as a laboratory notebook, issues, continuous integration, Lean and mathlib, working
+            with an AI assistant (written procedures, cloud sessions, the LaTeX–Lean loop, the
+            humaniser passes), keeping apart what the machine produced from what a person checked,
+            literature searches without priority claims, rights and withdrawal. Its examples come
+            from this project but name no corpus (#100).
+          </P>
+          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
+            <a
+              href="/article/methodes-d-atelier.pdf"
+              className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
+            >
+              PDF
+            </a>
+            <span className="text-ink-400">
+              built from <code className="text-[12px]">docs/livre-methodes/livre.tex</code>
+            </span>
+          </p>
         </section>
       </main>
 

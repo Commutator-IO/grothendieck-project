@@ -830,6 +830,9 @@ copyFileSync(resolve(root, 'docs/lean/article.pdf'), resolve(served, 'grothendie
 copyFileSync(resolve(root, 'docs/cicm/article.pdf'), resolve(served, 'grothendieck-cicm.pdf'));
 // The fifth, open questions for mathematicians from what Lean did not reach (docs/problems/).
 copyFileSync(resolve(root, 'docs/problems/article.pdf'), resolve(served, 'grothendieck-problems.pdf'));
+// And a book in French on the methods behind the edition, written for mathematicians and
+// naming no corpus (docs/livre-methodes/, #100).
+copyFileSync(resolve(root, 'docs/livre-methodes/livre.pdf'), resolve(served, 'methodes-d-atelier.pdf'));
 
 const elements = [...new Set([...xml.matchAll(/<([a-zA-Z]+)[\s>/]/g)].map((m) => m[1]))].sort();
 process.stdout.write(
