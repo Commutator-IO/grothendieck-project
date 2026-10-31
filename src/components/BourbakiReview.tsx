@@ -183,31 +183,6 @@ export function BourbakiReview() {
       on ? 'border-brand-700 bg-brand-700 text-white' : 'border-ink-300 bg-white text-ink-800 hover:border-brand-500'
     }`;
 
-  const ask = (
-    <>
-      <p className="text-[15px] leading-relaxed text-ink-900">
-        <span className="font-semibold">
-          {doc.video && check.t !== undefined ? `${Math.floor(check.t / 60)}:${String(check.t % 60).padStart(2, '0')}` : `p. ${check.page}`}.
-        </span>{' '}
-        <Question text={check.q} />
-      </p>
-      <div className="mt-2 flex flex-wrap gap-2">
-        {MARKS.map(([m, label]) => (
-          <button key={m} type="button" className={btn(s[check.id]?.mark === m)} onClick={() => set(check.id, { mark: m })}>
-            {label}
-          </button>
-        ))}
-      </div>
-      <textarea
-        className="mt-2 w-full rounded-md border border-ink-300 p-2 text-[13px]"
-        rows={2}
-        placeholder="What you read (a few words)"
-        value={s[check.id]?.note ?? ''}
-        onChange={(e) => set(check.id, { note: e.target.value })}
-      />
-    </>
-  );
-
   return (
     <div className="mt-6">
       <p className="max-w-[48em] text-[14px] leading-relaxed text-ink-700">
@@ -260,9 +235,31 @@ export function BourbakiReview() {
         </nav>
 
         <section>
+          <p className="text-[15px] leading-relaxed text-ink-900">
+            <span className="font-semibold">
+              {doc.video && check.t !== undefined
+                ? `${Math.floor(check.t / 60)}:${String(check.t % 60).padStart(2, '0')}`
+                : `p. ${check.page}`}
+              .
+            </span>{' '}
+            <Question text={check.q} />
+          </p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {MARKS.map(([m, label]) => (
+              <button key={m} type="button" className={btn(s[check.id]?.mark === m)} onClick={() => set(check.id, { mark: m })}>
+                {label}
+              </button>
+            ))}
+          </div>
+          <textarea
+            className="mt-2 w-full rounded-md border border-ink-300 p-2 text-[13px]"
+            rows={2}
+            placeholder="What you read (a few words)"
+            value={s[check.id]?.note ?? ''}
+            onChange={(e) => set(check.id, { note: e.target.value })}
+          />
           {doc.video ? (
             <>
-              {ask}
               <p className="mt-1 text-[12px] text-ink-500">
                 <a
                   className="text-brand-700 underline"
@@ -283,40 +280,27 @@ export function BourbakiReview() {
               />
             </>
           ) : (
-            // The question and the transcription on the left, the facsimile on the right, so the page
-            // stays in view while answering.
-            <div className="grid gap-4 lg:grid-cols-2">
-              <div>
-                {ask}
-                <p className="mt-1 text-[12px] text-ink-500">
-                  <a className="text-brand-700 underline" href={`${doc.pdf}#page=${check.page}`} target="_blank" rel="noreferrer">
-                    Facsimile, p. {check.page}
-                  </a>{' '}
-                  ·{' '}
-                  <a className="text-brand-700 underline" href={doc.item} target="_blank" rel="noreferrer">
-                    {doc.images ? 'IHÉS item' : doc.base ? 'Clay notice' : 'AHP notice'}
-                  </a>{' '}
-                  ·{' '}
-                  <a className="text-brand-700 underline" href={html(doc, check)} target="_blank" rel="noreferrer">
-                    Transcription, batch {check.batch}
-                  </a>
-                </p>
-                {!doc.images && (
-                  <p className="mt-1 text-[12px] text-ink-500">
-                    p. {check.page} is the PDF page, the number the archive pencils top right. Some viewers ignore the page in the link and
-                    open at p. 1, which shows the start of the rédaction: go to p. {check.page} by hand.
-                  </p>
-                )}
-                <iframe
-                  key={`t-${doc.id}-${check.batch}`}
-                  title="Transcription"
-                  src={html(doc, check)}
-                  className="mt-3 h-[60vh] w-full rounded-md border border-ink-200 bg-white"
-                />
-              </div>
-              <div className="lg:sticky lg:top-4 lg:self-start">
+            <>
+              <p className="mt-1 text-[12px] text-ink-500">
+                <a className="text-brand-700 underline" href={`${doc.pdf}#page=${check.page}`} target="_blank" rel="noreferrer">
+                  Facsimile, p. {check.page}
+                </a>{' '}
+                ·{' '}
+                <a className="text-brand-700 underline" href={doc.item} target="_blank" rel="noreferrer">
+                  {doc.images ? 'IHÉS item' : doc.base ? 'Clay notice' : 'AHP notice'}
+                </a>{' '}
+                ·{' '}
+                <a className="text-brand-700 underline" href={html(doc, check)} target="_blank" rel="noreferrer">
+                  Transcription, batch {check.batch}
+                </a>
+              </p>
+              {!doc.images && <p className="mt-1 text-[12px] text-ink-500">
+                p. {check.page} is the PDF page, the number the archive pencils top right. Some viewers ignore the page in the link and open
+                at p. 1, which shows the start of the rédaction: go to p. {check.page} by hand.
+              </p>}
+              <div className="mt-3 grid gap-3 2xl:grid-cols-2">
                 {doc.images?.[check.page - 1] ? (
-                  <div className="h-[85vh] overflow-auto rounded-md border border-ink-200 bg-white">
+                  <div className="h-[80vh] overflow-auto rounded-md border border-ink-200 bg-white">
                     <img key={`i-${doc.id}-${check.page}`} src={doc.images[check.page - 1]} alt={`Facsimile, view ${check.page}`} className="w-full" />
                   </div>
                 ) : (
@@ -324,11 +308,17 @@ export function BourbakiReview() {
                     key={`f-${doc.id}-${check.page}`}
                     title="Facsimile"
                     src={`${doc.pdf}#page=${check.page}`}
-                    className="h-[85vh] w-full rounded-md border border-ink-200 bg-white"
+                    className="h-[80vh] w-full rounded-md border border-ink-200 bg-white"
                   />
                 )}
+                <iframe
+                  key={`t-${doc.id}-${check.batch}`}
+                  title="Transcription"
+                  src={html(doc, check)}
+                  className="h-[80vh] w-full rounded-md border border-ink-200 bg-white"
+                />
               </div>
-            </div>
+            </>
           )}
         </section>
       </div>
