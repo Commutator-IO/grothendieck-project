@@ -100,9 +100,11 @@ printed in the \emph{Correspondance Grothendieck--Serre}. Folder~16
 pseudo-inverse $\Lambda$, Poincaré--Hodge algebras. Part of that algebra is
 proved in the Lean appendix (the normalisation of $\mathfrak{sl}_2$ and the
 pseudo-inverse, folder~16), and the register records one statement of the
-folder as possibly unpublished: the Lefschetz-type conjecture follows from
+folder: the Lefschetz-type conjecture follows from
 $D(X)$ and the existence of \emph{some} algebraic isomorphism
-$H^{2n-i} \to H^i$, not necessarily inverse to $L^{n-i}$ (unsearched).
+$H^{2n-i} \to H^i$, not necessarily inverse to $L^{n-i}$. The same reduction,
+over $\mathbb C$ with rational coefficients, is one step of Beilinson's proof
+(Beilinson 2012, \S2.3, proof of (b)).
 
 Folder~50 (dated by the inventory from 1965 on) sets out axioms for the
 endomorphisms of an abelian variety: a polarising class, the Rosati involution,
@@ -126,14 +128,17 @@ to its de Rham realisation, its Betti realisation and the comparison
 isomorphism between them is fully faithful. It reduces the question to
 $k = \overline{\mathbb Q}$ and recasts it as $V^G = V \cap g(\overline V)$ for
 the motivic Galois group, noting that the rank-one (Tate) case works. This is
-the de Rham--Betti form of what is now called Grothendieck's period conjecture
-(register: \emph{matched}, Bost--Charles 2016, Conj.~2.12).
+the de Rham--Betti form of what is now called Grothendieck's period conjecture.
+Bost and Charles state the conjecture as the Zariski density of the comparison
+isomorphism in the torsor of motivic periods (Bost--Charles 2016, Conj.~2.12).
+The two forms are not known to be equivalent: with the standard conjectures,
+theirs implies full faithfulness (Prop.~2.13).
 
 \emph{Status.} Open. The elliptic case can be stated with Mathlib's
 \texttt{PeriodPair} and \texttt{weierstrassP}: for a lattice with algebraic
 invariants and no complex multiplication, the periods and quasi-periods
 $\omega_1, \omega_2, \eta_1, \eta_2$ should have transcendence degree~4; with
-complex multiplication the degree is~2 (Chudnovsky, 1976).
+complex multiplication the degree is~2 (Chudnovsky 1980, \S2\,A, Th.~1 and~3).
 
 \subsection{The homotopy hypothesis (1975)}
 On 5 February 1975, the postscript of a letter to Lawrence Breen sets out the
@@ -147,8 +152,8 @@ shelfmark~134-2, pp.~145--184), of which the folder otherwise holds only English
 R.~Brown's translation.
 
 \emph{Status.} Depends on the model: false for strict $n$-groupoids from
-$n = 3$ (Simpson), regarded as open for Grothendieck's own globular
-$\infty$-groupoids in Maltsiniotis's formulation. An OpenAI preprint dated 24 September 2026, not peer-reviewed, announces a proof for every Grothendieck coherator in the Ara--Henry convention, together with Henry's pushout conjecture on elementary expansions (OpenAI, \q{The Grothendieck homotopy hypothesis via elementary expansions}). Its Lean companion (\texttt{lean/OAI/CategoryTheory/Globular} in the same repository, Apache~2.0: 58 files, about 12\,750 lines, no \texttt{sorry}) defines globular theories, coherators and their models, and proves the elementary-expansion theorem; it does not state the comparison with spaces, which is the homotopy hypothesis itself.
+$n = 3$ (Simpson 1998, Prop.~5.1, Cor.~6.1), regarded as open for Grothendieck's own globular
+$\infty$-groupoids in Maltsiniotis's formulation. An OpenAI preprint dated 24 September 2026, not peer-reviewed, announces a proof for every Grothendieck coherator in the Ara--Henry convention, together with Henry's pushout conjecture on elementary expansions (Henry 2016, Conj.~5.3.3, from which Cor.~5.3.13 deduces the hypothesis; OpenAI, \q{The Grothendieck homotopy hypothesis via elementary expansions}). Its Lean companion (\texttt{lean/OAI/CategoryTheory/Globular} in the same repository, Apache~2.0: 58 files, about 12\,750 lines, no \texttt{sorry}) defines globular theories, coherators and their models, and proves the elementary-expansion theorem; it does not state the comparison with spaces, which is the homotopy hypothesis itself.
 
 \subsection{The section conjecture}
 An undated page of folder~149 concludes \q{Nos conjectures impliquent donc
@@ -338,7 +343,9 @@ as context.
 \small\raggedright
 \begin{itemize}[leftmargin=*]
 \item Y. André, \emph{Une introduction aux motifs}, Panoramas et Synthèses 17, SMF, 2004.
+\item A. Beilinson, \q{Remarks on Grothendieck's standard conjectures}, in \emph{Regulators}, Contemp. Math. 571, AMS, 2012, arXiv:1006.1116.
 \item J.-B. Bost and F. Charles, \q{Some remarks concerning the Grothendieck period conjecture}, \emph{J. reine angew. Math.} 714 (2016).
+\item G. V. Chudnovsky, \q{Algebraic independence of values of exponential and elliptic functions}, in \emph{Proc. ICM Helsinki 1978}, vol.~1, 1980.
 \item P. Colmez and J.-P. Serre (eds.), \emph{Correspondance Grothendieck--Serre}, SMF, 2001.
 \item V. G. Drinfeld, \q{On quasitriangular quasi-Hopf algebras and on a group that is closely connected with $\mathrm{Gal}(\overline{\mathbb Q}/\mathbb Q)$}, \emph{Leningrad Math. J.} 2 (1991).
 \item Google DeepMind, \emph{Formal Conjectures}, \url{https://github.com/google-deepmind/formal-conjectures}.
@@ -346,11 +353,13 @@ as context.
 \item A. Grothendieck, \q{Standard conjectures on algebraic cycles}, in \emph{Algebraic Geometry (Bombay Colloquium, 1968)}, OUP, 1969.
 \item A. Grothendieck, \q{Esquisse d'un programme} and letter to G. Faltings (27 June 1983), in L. Schneps and P. Lochak (eds.), \emph{Geometric Galois Actions} 1, LMS Lecture Notes 242, CUP, 1997.
 \item A. Grothendieck, \emph{À la poursuite des champs}, vol.~I, ed. G. Maltsiniotis, Documents mathématiques 20, SMF, 2022.
+\item S. Henry, \q{Algebraic models of homotopy types and the homotopy hypothesis}, preprint, arXiv:1609.04622 (2016).
 \item Y. Ihara, \q{Braids, Galois groups, and some arithmetic functions}, \emph{Proc. ICM Kyoto} (1990).
 \item S. Kleiman, \q{Algebraic cycles and the Weil conjectures}, in \emph{Dix exposés sur la cohomologie des schémas}, 1968; \q{The standard conjectures}, \emph{Proc. Symp. Pure Math.} 55 (1994).
 \item G. Maltsiniotis, \q{Grothendieck $\infty$-groupoids, and still another definition of $\infty$-categories}, arXiv:1009.2331 (2010).
 \item OpenAI, \q{The Grothendieck homotopy hypothesis via elementary expansions}, preprint, 24 September 2026, \url{https://github.com/openai/math/blob/main/preprints/The-Grothendieck-homotopy-hypothesis-via-elementary-expansions-September-24-2026/paper.pdf}.
 \item OpenAI, \emph{math}: mathematical manuscripts and supporting proof artifacts produced by an internal OpenAI model, \url{https://github.com/openai/math}, 6 October 2026.
+\item C. Simpson, \q{Homotopy types of strict 3-groupoids}, preprint, arXiv:math/9810059 (1998).
 \item J. Stix, \emph{Rational Points and Arithmetic of Fundamental Groups}, LNM 2054, Springer, 2013.
 \item A. Grothendieck, \q{Hodge's general conjecture is false for trivial reasons}, \emph{Topology} 8 (1969).
 \item N. Katz, \q{Nilpotent connections and the monodromy theorem}, \emph{Publ. Math. IHÉS} 39 (1970); \q{Algebraic solutions of differential equations}, \emph{Invent. Math.} 18 (1972).
