@@ -1,0 +1,90 @@
+\chapter{Une interface web en localhost}
+
+Un projet de recherche finit par manier plus de documents qu'on n'en peut ouvrir à la
+main : des scans, des transcriptions, des tableaux de résultats, des listes de questions.
+Plutôt que d'empiler les fenêtres, on peut demander à l'assistant de construire une petite
+application web qui tourne sur sa propre machine, à l'adresse \texttt{localhost}. Elle n'a
+pas besoin d'être belle ni d'être publique ; elle doit montrer côte à côte ce qu'on veut
+comparer, et laisser une trace de ce qu'on a décidé.
+
+\section{L'outillage}
+
+On n'a pas besoin d'être développeur web. L'assistant installe un \emph{dev server}
+(Vite, avec React, dans le projet qui sert d'exemple), écrit les pages, et le lance :
+
+\begin{terminal}
+npm install
+# lance le serveur ; la page se recharge à chaque modification
+npm run dev
+# puis ouvrir http://localhost:5173
+\end{terminal}
+
+L'application de bureau de Claude a un navigateur intégré. L'assistant y ouvre lui-même la
+page, lit la console, fait une capture d'écran et vérifie qu'un bouton fait ce qu'il doit
+faire avant de dire que c'est fini. On travaille donc en conversation : « mets le scan à
+gauche et la transcription à droite », « coche ce filtre par défaut », et l'on voit le
+résultat dans la seconde.
+
+\begin{regle}
+Une page locale lit des fichiers du dépôt ou des fichiers ignorés par \fichier{.gitignore}
+; elle n'envoie rien nulle part. Ce qui est privé le reste, même quand la page l'affiche.
+\end{regle}
+
+\section{Consulter plusieurs fonds à la fois}
+
+Le premier usage est la lecture. Une page par document, avec à gauche l'image de la page
+servie par l'archive qui la détient, et à droite la transcription, la lecture moderne, les
+notes. Un onglet par fonds, un catalogue filtrable, un lien direct vers chaque page.
+
+\begin{exemple}
+Dans le projet, les images des archives ne sont jamais copiées sur le site public : la page
+les demande à l'archive au moment de la lecture, par un petit relais, et affiche « ne
+répond pas » quand l'archive est en panne. En local, les copies privées servent à
+transcrire, jamais à être affichées à d'autres.
+\end{exemple}
+
+Un interrupteur décide de ce que la page montre. Les transcriptions d'un fonds dont on n'a
+pas l'autorisation s'affichent en local et disparaissent du site public par un seul réglage
+(chapitre~\ref{ch:droits}).
+
+\section{Faire des reviews}
+
+Le deuxième usage est la vérification humaine (chapitre~\ref{ch:review}). L'assistant
+dépose ses doutes dans un fichier JSON ; la page de review en fait une liste de questions
+fermées, chacune avec l'image de la page et la lecture proposée. On répond par des
+boutons, on ajoute une note si besoin, et un bouton « copier les réponses » produit un bloc
+de texte qu'on colle dans la conversation. L'assistant applique les réponses, retire les
+questions réglées et reformule celles qui restent.
+
+\begin{tipblock}
+Les réponses restent dans le navigateur (\texttt{localStorage}) tant qu'on ne les a pas
+envoyées. On peut fermer la page au milieu d'une séance et la reprendre le lendemain.
+\end{tipblock}
+
+La même page sert à préparer une visite en bibliothèque : une fiche par boîte d'archives,
+les questions à poser à chaque pochette, et des cases à cocher qu'on remplit sur place,
+depuis un téléphone.
+
+\section{Construire des simulations}
+
+Le troisième usage est l'exploration. Quand une question se teste sur des exemples, on
+demande à l'assistant une page interactive : des curseurs pour les paramètres, une figure
+qui se redessine, un tableau de résultats. Le calcul lourd reste dans un script (Python,
+C, Lean) dont la page lit la sortie ; la page sert à regarder, à repérer le cas qui
+cloche, à formuler la conjecture suivante.
+
+\begin{exemple}
+Pour un problème d'arrangements de droites, un script énumère tous les cas jusqu'à neuf
+droites et écrit ses résultats dans un fichier. Une page peut alors montrer chaque
+arrangement, avec ses sommets et ses triangles, et colorer ceux où une hypothèse tombe en
+défaut. Regarder ces cas apprend souvent plus que lire les chiffres : on voit quelle
+hypothèse supplémentaire manque.
+\end{exemple}
+
+\section{Ce qu'on garde de ces pages}
+
+Une page locale est un instrument de travail, pas un produit. On la garde simple, on la
+modifie en conversation, et l'on n'hésite pas à la jeter quand la question est réglée.
+Ce qui doit durer passe ailleurs : les réponses dans les fichiers du dépôt, les résultats
+dans un commit, les conclusions dans une issue ou un article. Quand une page mérite d'être
+partagée, elle part sur le site public, derrière les mêmes interrupteurs.
