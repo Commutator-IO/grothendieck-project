@@ -31,6 +31,8 @@ interface Doc {
   /** For a Quillen notebook: the folder of its rendered transcriptions, and their language. */
   base?: string;
   lang?: string;
+  /** For an IHÉS item: its page views, page N at index N-1, shown in place of the PDF. */
+  images?: string[];
   pdf: string;
   item: string;
   checks: Check[];
@@ -109,10 +111,10 @@ function Question({ text }: { text: string }) {
 const one = (s?: string) => (s ?? '').trim().replace(/\s*\n\s*/g, ' ');
 // Bourbaki rédactions by default; a Quillen notebook names its own folder and language.
 const html = (d: Doc, c: Check) =>
-  `/${d.base ?? 'transcripts-bourbaki'}/${d.base ? d.id.replace(/^quillen-/, '') : d.id}/batch-${String(c.batch).padStart(2, '0')}.${d.lang ?? 'fr'}.html`;
+  `/${d.base ?? 'transcripts-bourbaki'}/${d.base ? d.id.replace(/^(quillen|illusie)-/, '') : d.id}/batch-${String(c.batch).padStart(2, '0')}.${d.lang ?? 'fr'}.html`;
 
 function markdown(r: Review, s: Store): string {
-  const out = ['Answers from the local review tab (Bourbaki, Buffalo, Quillen); readings only, nothing quoted beyond a few words.', ''];
+  const out = ['Answers from the local review tab (Bourbaki, Buffalo, Quillen, Illusie); readings only, nothing quoted beyond a few words.', ''];
   for (const d of r.docs) {
     const rows = d.checks.filter((c) => s[c.id]?.mark || one(s[c.id]?.note));
     if (!rows.length) continue;
@@ -184,7 +186,7 @@ export function BourbakiReview() {
   return (
     <div className="mt-6">
       <p className="max-w-[48em] text-[14px] leading-relaxed text-ink-700">
-        The doubtful readings of the local transcriptions: Bourbaki rédactions, Buffalo lectures and Quillen notebooks. Each check shows
+        The doubtful readings of the local transcriptions: Bourbaki rédactions, Buffalo lectures, Quillen notebooks and IHÉS items of the Illusie fonds. Each check shows
         the facsimile at its page, or plays the recording from its second, beside the transcription; answer, add a word if needed, then
         copy the answers into the chat. This tab exists only on the dev server.
       </p>
@@ -285,24 +287,30 @@ export function BourbakiReview() {
                 </a>{' '}
                 ·{' '}
                 <a className="text-brand-700 underline" href={doc.item} target="_blank" rel="noreferrer">
-                  {doc.base ? 'Clay notice' : 'AHP notice'}
+                  {doc.images ? 'IHÉS item' : doc.base ? 'Clay notice' : 'AHP notice'}
                 </a>{' '}
                 ·{' '}
                 <a className="text-brand-700 underline" href={html(doc, check)} target="_blank" rel="noreferrer">
                   Transcription, batch {check.batch}
                 </a>
               </p>
-              <p className="mt-1 text-[12px] text-ink-500">
+              {!doc.images && <p className="mt-1 text-[12px] text-ink-500">
                 p. {check.page} is the PDF page, the number the archive pencils top right. Some viewers ignore the page in the link and open
                 at p. 1, which shows the start of the rédaction: go to p. {check.page} by hand.
-              </p>
+              </p>}
               <div className="mt-3 grid gap-3 2xl:grid-cols-2">
-                <iframe
-                  key={`f-${doc.id}-${check.page}`}
-                  title="Facsimile"
-                  src={`${doc.pdf}#page=${check.page}`}
-                  className="h-[80vh] w-full rounded-md border border-ink-200 bg-white"
-                />
+                {doc.images?.[check.page - 1] ? (
+                  <div className="h-[80vh] overflow-auto rounded-md border border-ink-200 bg-white">
+                    <img key={`i-${doc.id}-${check.page}`} src={doc.images[check.page - 1]} alt={`Facsimile, view ${check.page}`} className="w-full" />
+                  </div>
+                ) : (
+                  <iframe
+                    key={`f-${doc.id}-${check.page}`}
+                    title="Facsimile"
+                    src={`${doc.pdf}#page=${check.page}`}
+                    className="h-[80vh] w-full rounded-md border border-ink-200 bg-white"
+                  />
+                )}
                 <iframe
                   key={`t-${doc.id}-${check.batch}`}
                   title="Transcription"
