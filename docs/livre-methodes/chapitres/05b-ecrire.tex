@@ -1,0 +1,71 @@
+\chapter{Écrire en \LaTeX{} avec l'assistant}
+
+Un assistant écrit vite du \LaTeX{} correct : il connaît les paquets, les environnements,
+les macros d'une classe de revue. Il écrit aussi, par défaut, une prose reconnaissable entre
+mille. Ce chapitre décrit la chaîne qu'on a suivie pour les articles du projet : un premier
+jet par l'assistant, la compilation, une passe d'humanisation, puis la lecture de l'auteur.
+
+\section{Le premier jet}
+
+On donne à l'assistant le plan, les sources et les contraintes de la revue : longueur,
+style de citation, classe, résumé. Il écrit les fichiers \fichier{.tex} et les compile
+lui-même.
+
+\begin{terminal}
+# compiler sans installation de TeX ; les paquets se téléchargent au besoin
+tectonic -X compile article.tex
+\end{terminal}
+
+\begin{regle}
+L'assistant ne s'arrête pas à « ça compile » : il relit la sortie, corrige les lignes qui
+débordent dans la marge et les références non résolues, et regarde les pages qu'il a
+modifiées.
+\end{regle}
+
+Les nombres de l'article viennent de scripts, et les figures sont dessinées depuis les
+données (chapitre~\ref{ch:publier}). L'assistant les relance quand les données changent ;
+il n'invente pas un chiffre pour boucher un trou, et le dit quand il manque une source.
+
+\section{Une passe d'humanisation}
+
+La prose d'un modèle de langage a des tics : adjectifs gonflés, triades, phrases-slogans en
+fin de paragraphe, tirets partout, connecteurs mécaniques. En français s'y ajoutent des
+anglicismes (« adresser un problème ») et un vocabulaire administratif. Un relecteur les
+remarque, et certaines revues s'en méfient.
+
+On a écrit pour cela deux procédures, à la manière du chapitre précédent :
+\texttt{humaniseur-fr} pour le français et \texttt{humanizer} pour l'anglais. Chacune
+recense les tics, dit par quoi les remplacer, et impose quelques règles de prudence :
+
+\begin{itemize}
+  \item une seule passe ; une deuxième aplatit le texte au lieu de l'améliorer ;
+  \item ne jamais abaisser le registre : un article reste soutenu ;
+  \item ne toucher qu'à la prose, jamais aux formules, aux commandes, aux macros ni aux
+        références ;
+  \item ne rien ajouter qui ne soit dans la source ou dans les données : ni fait, ni
+        chiffre, ni citation.
+\end{itemize}
+
+\begin{terminal}
+# dans la conversation avec l'assistant
+/humaniseur-fr docs/article/sections/*.tex   (article en français)
+/humanizer docs/paper/sections/*.tex         (article en anglais)
+\end{terminal}
+
+Pour un article en anglais, on rédige directement en anglais et l'on passe
+\texttt{humanizer}. Traduire un texte français déjà humanisé reproduit d'autres tics,
+ceux de la traduction ; mieux vaut une passe sur le texte final, dans sa langue.
+
+\begin{tipblock}
+La passe d'humanisation trouve souvent des affirmations trop fortes en même temps que des
+tics de style : « démontre » là où l'article cité « conjecture », « premier » là où
+l'on n'a rien vérifié. On les corrige sur le fond, pas seulement sur la forme.
+\end{tipblock}
+
+\section{La lecture de l'auteur}
+
+Rien ne remplace la dernière lecture, crayon en main. L'auteur y vérifie que chaque phrase
+dit ce qu'il pense, que chaque référence dit ce qu'on lui fait dire, et qu'il saurait
+défendre le texte devant un rapporteur sans l'assistant à côté. C'est aussi là qu'il réécrit
+dans sa propre voix ce qu'il publiera sous son nom, comme l'exigent certaines revues et la
+plupart des sites d'entraide.

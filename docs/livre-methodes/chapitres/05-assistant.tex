@@ -60,6 +60,40 @@ vérifie les affirmations qui comptent (une référence, un énoncé, un résult
 compilation) avant de les reprendre.
 \end{warningblock}
 
+\section{Des sessions dans le nuage}
+
+Claude Code ne tourne pas seulement sur sa propre machine. On peut ouvrir une session dans
+le nuage, depuis le site de Claude ou depuis l'application de bureau : une machine
+distante clone le dépôt depuis GitHub, y travaille, et pousse ses commits. La machine
+locale reste libre, et l'on peut fermer l'ordinateur pendant que la tâche avance.
+
+C'est le bon outil pour une tâche longue et bien délimitée : une série de preuves à
+compléter, une relecture de tout un dossier, la mise à jour des chiffres d'un article. Trois
+précautions évitent la plupart des ennuis.
+
+\begin{description}
+  \item[La session ne voit que le dépôt.] Tout ce qui est ignoré par \fichier{.gitignore}
+        (copies d'archives, transcriptions privées, brouillons locaux) lui manque. Une
+        tâche qui en a besoin reste sur la machine locale, ou reçoit dans sa consigne ce
+        qu'il lui faut, reformulé, jamais les fichiers privés eux-mêmes.
+  \item[Une branche, un seul propriétaire.] Si une session dans le nuage et une session
+        locale poussent sur la même branche, leurs commits se croisent et l'une écrase
+        les hypothèses de l'autre. On attribue chaque branche à une seule session, et
+        l'on récupère (\cmd{git fetch}) avant de reprendre la main.
+  \item[La consigne tient seule.] Comme pour une sous-tâche, la session distante ne
+        connaît pas la conversation en cours. On lui écrit ce qu'il faut faire, où, avec
+        quelles règles et comment vérifier, puis on relit ses commits comme ceux d'un
+        collaborateur.
+\end{description}
+
+\begin{exemple}
+Pendant qu'une session locale répondait aux relectures de plusieurs propositions de
+contribution, une session dans le nuage a poussé sur les mêmes branches. Un de ses
+commits cassait la compilation ; l'autre réintroduisait des citations que la relecture
+venait de demander de retirer. La réparation a pris une heure. La règle « une branche, un
+seul propriétaire » vient de là.
+\end{exemple}
+
 \section{Un budget}
 
 Le travail d'un assistant consomme un quota de calcul. On fixe un plafond par semaine et

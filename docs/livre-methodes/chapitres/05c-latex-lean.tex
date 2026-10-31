@@ -1,0 +1,72 @@
+\chapter{Faire des mathématiques en conversation : \LaTeX{} et Lean}
+
+La combinaison la plus utile du projet a été celle-ci : discuter d'un énoncé avec
+l'assistant, le faire vérifier par Lean, puis le rédiger en \LaTeX{} à partir de la preuve
+vérifiée. Chacun des trois corrige les deux autres. La conversation propose, Lean tranche,
+et la rédaction oblige à comprendre ce qui a été démontré.
+
+\section{La boucle}
+
+\begin{enumerate}
+  \item \textbf{Poser la question en mathématicien.} On écrit l'énoncé dans la
+        conversation, avec ses hypothèses, comme à un collègue. L'assistant cherche une
+        démonstration, propose des cas particuliers, signale ce qui manque.
+  \item \textbf{Tester avant de prouver.} Quand l'énoncé porte sur des objets finis,
+        un script vérifie d'abord les petits cas. Un contre-exemple trouvé en dix
+        secondes épargne une journée de preuve.
+  \item \textbf{Énoncer en Lean.} L'assistant écrit l'énoncé dans Lean, avec
+        \texttt{sorry} comme preuve, et le fait compiler. C'est le moment où les
+        hypothèses implicites apparaissent : Lean refuse un énoncé qui ne dit pas sur
+        quel anneau, quelle catégorie, quel ensemble il porte.
+  \item \textbf{Prouver.} L'assistant comble le \texttt{sorry}, en s'aidant des outils de
+        recherche de la bibliothèque, compile, lit les erreurs, recommence. On vérifie à
+        la fin les axiomes (\cmd{\#print axioms}).
+  \item \textbf{Rédiger.} À partir de la preuve qui compile, l'assistant écrit la
+        démonstration en \LaTeX, dans la langue de l'article, en suivant les étapes de la
+        preuve formelle. Le texte renvoie au fichier et au nom du théorème.
+\end{enumerate}
+
+\begin{regle}
+Le fichier Lean fait foi. Si la rédaction et la preuve divergent, c'est la rédaction qu'on
+corrige ; si l'énoncé de l'article ne correspond pas à celui de Lean, on le dit dans
+l'article.
+\end{regle}
+
+\section{Un exemple}
+
+Une liste de problèmes ouverts contenait la question suivante : un arrangement de
+pseudo-droites du plan projectif, dont chaque pseudo-droite porte au moins trois sommets,
+est-il déterminé par son graphe étiqueté ? Une formalisation antérieure réglait le cas où
+chaque triangle a une quatrième droite évitant ses sommets ; restait le cas des trois
+faisceaux.
+
+\begin{exemple}
+En conversation, l'assistant a reformulé la question en termes de chirotopes : le graphe
+fixe, le long de chaque droite, l'ordre cyclique des sommets, donc les signes à un
+retournement près. Il en a tiré une fonction de signes qui doit valoir~$1$. Un script a
+vérifié la version linéaire sur $\mathbb F_2$ pour tous les arrangements d'au plus neuf
+droites (37\,213 treillis, aucune obstruction). Le cas difficile se réglait en coupant le
+triangle en deux le long d'une droite bien choisie. Lean a ensuite démontré l'algèbre des
+signes, puis le pas de rang~$2$. L'article, enfin, donne la démonstration en une page, avec
+une figure, et dit ce qui reste hors de Lean : le théorème de représentation
+topologique.
+\end{exemple}
+
+Deux remarques sur cet exemple. La première idée venait de la conversation, pas de Lean ;
+Lean n'a fait que la rendre sûre. Et l'histoire du travail se lit dans le dépôt : le script
+de vérification, le fichier Lean, le commit qui modifie l'article, chacun avec son message.
+
+\section{Ce que Lean ne dit pas}
+
+Une preuve formelle établit la lecture qu'on en a faite. Elle ne dit pas que cette lecture
+est celle de l'auteur d'un texte qu'on édite, ni que le résultat est nouveau
+(chapitre~\ref{ch:litterature}). Elle ne dit pas non plus que la rédaction en \LaTeX{} est
+claire. Un lecteur humain reste nécessaire pour cela, et la passe d'humanisation du
+chapitre précédent ne le remplace pas.
+
+\begin{warningblock}
+Un assistant peut \og démontrer \fg{} un énoncé en Lean en le rendant trivial : une
+hypothèse trop forte, une définition vide, un \texttt{sorry} caché dans une définition. On
+lit l'énoncé du théorème avant de lire sa preuve, et l'on vérifie qu'il dit bien ce que
+l'article affirme.
+\end{warningblock}
