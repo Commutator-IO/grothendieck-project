@@ -1,0 +1,97 @@
+\chapter{Le dépôt, cahier de laboratoire}
+
+Un texte mathématique change sans cesse : une hypothèse ajoutée, une notation corrigée, une
+démonstration réécrite. Trois mois plus tard on veut savoir quand l'hypothèse est apparue,
+et pourquoi. Un dossier de fichiers numérotés \fichier{article-v3-final-bis.tex} ne le dit
+pas. Un gestionnaire de versions le dit, à condition qu'on lui ait donné de quoi répondre.
+
+\section{Ce qu'est un dépôt}
+
+L'outil est \texttt{git}. Un dépôt est un dossier dont \texttt{git} garde l'histoire : chaque
+état enregistré, appelé \emph{commit}, porte la liste des fichiers modifiés, la différence
+ligne à ligne, une date, un auteur et un message. On peut revenir à n'importe quel état,
+comparer deux états, et chercher dans l'histoire.
+
+\begin{terminal}
+# créer un dépôt dans le dossier courant
+git init
+# inscrire une modification
+git add article.tex
+git commit -m "Lemme 3 : la finitude est nécessaire (cf. 3.4)"
+# l'histoire, un commit par ligne
+git log --oneline
+\end{terminal}
+
+Le dépôt local se double d'une copie sur un service d'hébergement (GitHub, GitLab, ou un
+serveur de l'université). La copie distante sert de sauvegarde, de point de rencontre avec
+les collaborateurs et, on le verra, de déclencheur pour les vérifications automatiques.
+
+\section{Un commit par idée}
+
+\begin{regle}
+Un commit contient une seule idée, et son message dit pourquoi.
+\end{regle}
+
+« Corrige le lemme 3 » dit quoi. « Lemme 3 : l'hypothèse de finitude est nécessaire,
+contre-exemple en 3.4 » dit pourquoi, et c'est ce qu'on cherchera. Le message est écrit
+pour un lecteur qui n'a pas le contexte : soi-même dans six mois, ou une collaboratrice.
+
+Une idée par commit permet de défaire une idée sans défaire les autres. Si la correction du
+lemme 3 et le renommage d'une notation sont dans le même commit, on ne peut annuler l'un
+sans l'autre.
+
+\begin{exemple}
+Dans le projet qui sert d'exemple, un commit typique s'intitule : « Problème 14 : la règle
+des signes le long de chaque droite suffit, avec un triangle coupé en deux quand aucune
+quatrième droite n'évite ses sommets ; preuve en Lean, vérification sur 37\,213 cas ». En
+une phrase, on sait ce qui a changé, comment, et où regarder.
+\end{exemple}
+
+\section{Retrouver quand et pourquoi}
+
+Deux commandes répondent à presque toutes les questions d'histoire.
+
+\begin{terminal}
+# les commits qui ont ajouté ou retiré ce mot
+git log -S "finitude" -- article.tex
+# pour chaque ligne, le dernier commit qui l'a touchée
+git blame article.tex
+\end{terminal}
+
+La première retrouve le moment où une hypothèse est apparue. La seconde montre, ligne à
+ligne, de quel commit vient le texte actuel ; le message de ce commit dit pourquoi.
+
+\section{Figer une version}
+
+Quand un article part chez un éditeur, on veut pouvoir retrouver exactement le texte
+envoyé, même après des mois de corrections. Une \emph{étiquette} (tag) nomme un commit.
+
+\begin{terminal}
+# nommer l'état actuel
+git tag article-soumis-2026-10
+git push origin article-soumis-2026-10
+# ce qui a changé depuis l'envoi
+git diff article-soumis-2026-10 -- article.tex
+\end{terminal}
+
+La dernière commande donne la liste des changements à joindre à une version révisée.
+
+\section{Ne jamais réécrire l'histoire publiée}
+
+\begin{warningblock}
+Une fois un commit envoyé sur la copie distante, on ne le modifie plus. Les commandes qui
+réécrivent l'histoire (\cmd{git push --force}, \cmd{git rebase} sur une branche partagée)
+détruisent le travail des autres et la trace qu'on voulait garder.
+\end{warningblock}
+
+Une erreur se corrige par un nouveau commit qui la répare et le dit. L'erreur reste visible
+dans l'histoire, avec sa correction, et c'est très bien ainsi : on sait qu'elle a existé,
+et ce qu'elle a pu entraîner entre-temps.
+
+\section{Branches, ou pas}
+
+Les équipes de développement travaillent sur des \emph{branches} qu'elles fusionnent
+ensuite. Pour un projet mené seul, une seule branche principale suffit souvent. Les
+branches deviennent utiles quand on contribue au dépôt d'un autre (on y reviendra avec
+mathlib au chapitre~\ref{ch:lean}) ou quand deux chantiers longs doivent avancer sans se
+gêner.

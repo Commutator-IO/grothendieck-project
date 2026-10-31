@@ -1,0 +1,84 @@
+\chapter{Un assistant de preuve au quotidien}\label{ch:lean}
+
+Un assistant de preuve vérifie chaque pas d'une démonstration. On s'en sert ici avec
+Lean~4 et sa bibliothèque mathlib, mais les règles valent pour d'autres. Ce chapitre ne
+décrit pas le langage : il décrit ce qui, autour du langage, rend un projet de
+formalisation tenable sur la durée.
+
+\section{Des versions épinglées}
+
+mathlib change chaque jour : des lemmes sont renommés, d'autres disparaissent. Un projet
+fixe donc la version exacte de Lean et de mathlib qu'il utilise, dans les fichiers
+\fichier{lean-toolchain} et \fichier{lake-manifest.json}. On met à jour quand on le
+décide, d'un coup, et l'on répare ce qui casse dans un commit qui ne fait que cela.
+
+\begin{terminal}
+# télécharger mathlib déjà compilée
+lake exe cache get
+# compiler le projet
+lake build
+# compiler un seul fichier, plus vite
+lake env lean Fichier.lean
+\end{terminal}
+
+\section{Compter ce qui manque}
+
+Un énoncé écrit mais non démontré porte \texttt{sorry}. Lean l'accepte avec un
+avertissement. Le danger est qu'un \texttt{sorry} oublié soutienne silencieusement un
+théorème qu'on croit démontré.
+
+\begin{regle}
+On vérifie les axiomes d'un théorème avant de le dire démontré.
+\end{regle}
+
+\begin{terminal}
+#print axioms monTheoreme
+-- attendu : [propext, Classical.choice, Quot.sound]
+-- si sorryAx apparaît, une partie de la preuve manque
+\end{terminal}
+
+Les trois axiomes attendus sont ceux de la bibliothèque ; tout autre nom est un trou. Un
+\texttt{sorry} n'est pas une honte : c'est la marque honnête de ce qui reste à faire. Il
+devient un problème quand il se cache dans une \emph{définition} dont dépendent ensuite
+des théorèmes, parce qu'alors ces théorèmes parlent d'un objet qui n'existe pas.
+
+\section{Distinguer l'énoncé et sa lecture}
+
+Formaliser un énoncé, c'est choisir une lecture. Une preuve en Lean montre que \emph{cette
+lecture} est vraie, pas qu'elle est celle de l'auteur. Dans un projet d'édition, la
+formalisation trouve parfois un énoncé faux tel qu'il est écrit ; elle ne dit jamais, à elle
+seule, ce que l'auteur voulait dire.
+
+\begin{exemple}
+Une note affirme qu'un produit fini de modules plats est plat, et que la réciproque vaut.
+La formalisation trouve que la bibliothèque contient déjà la première partie ; la seconde
+devient l'énoncé cible. Le fichier le dit en commentaire, en une phrase : ce qui est dans
+mathlib, ce qui est démontré ici.
+\end{exemple}
+
+\section{Contribuer à la bibliothèque}
+
+Un lemme général dont on a eu besoin manque souvent à mathlib. Le proposer est utile, à
+condition de suivre les règles de la communauté :
+\begin{itemize}
+  \item vérifier que le lemme n'existe pas déjà sous un autre nom ;
+  \item suivre les conventions de nommage, de style et de documentation ;
+  \item discuter d'abord, sur le forum de la communauté, avant d'ajouter une théorie
+        nouvelle ;
+  \item déclarer l'usage d'un assistant fondé sur un modèle de langage, comme le
+        demandent les règles du projet, et ne pas lui faire écrire les échanges avec les
+        relecteurs.
+\end{itemize}
+
+\begin{warningblock}
+Les règles de contribution des bibliothèques communes évoluent, en particulier sur l'usage
+de l'intelligence artificielle. On les relit avant chaque contribution.
+\end{warningblock}
+
+\section{Feuilles de route}
+
+Certains projets collectifs publient des \emph{feuilles de route} de formalisation : pour
+une théorie, la liste des définitions et des théorèmes à écrire, leurs dépendances et les
+énoncés cibles, avec un fichier Lean qui les énonce sans les démontrer. Écrire une telle
+feuille à partir de ses propres notes oblige à dire précisément ce qui manque et dans quel
+ordre ; la faire relire par d'autres est le meilleur test de cette précision.

@@ -1,0 +1,74 @@
+\chapter{Travailler avec un assistant}
+
+Un assistant fondé sur un modèle de langage lit des fichiers, lance des commandes, écrit du
+texte et du code. Dans le projet qui sert d'exemple, il a transcrit des pages manuscrites,
+écrit des preuves en Lean, cherché des références et rédigé des brouillons. Il s'agissait
+de Claude, d'Anthropic, utilisé dans un terminal avec l'outil Claude Code. Ce chapitre dit
+comment on organise ce travail pour qu'il reste vérifiable.
+
+\section{Ce qu'on délègue, ce qu'on garde}
+
+On délègue ce qui se vérifie : une compilation, une recherche dont on peut relire les
+sources, une transcription qu'on peut comparer à la page, une preuve que le noyau de Lean
+contrôle. On garde ce qui engage : le choix des questions, ce qu'on publie, ce qu'on écrit
+sous son nom à d'autres personnes, et le jugement final sur la mathématique.
+
+\begin{regle}
+Tout ce que l'assistant produit est un brouillon jusqu'à ce qu'une vérification, par la
+machine ou par une personne, l'ait établi. Le fichier dit lequel des deux.
+\end{regle}
+
+\section{Des procédures écrites}
+
+Un assistant ne garde pas de mémoire d'une session à l'autre, sauf ce qu'on lui écrit. On
+rédige donc les procédures récurrentes comme on rédigerait un protocole d'expérience : un
+fichier par tâche, qui dit ce qu'il faut produire, dans quel ordre, avec quelles règles,
+et ce qu'il ne faut jamais faire. Claude Code appelle ces fichiers des \emph{skills}.
+
+\begin{exemple}
+La procédure de transcription d'une page manuscrite tient en quelques pages. Elle fixe le
+lot (vingt pages au plus par passe, parce qu'au-delà l'attention baisse sans prévenir), le
+format (un sous-ensemble restreint de \LaTeX, avec des macros pour l'illisible et
+l'incertain), l'en-tête (le modèle qui a lu, la date, la mention « non relu par une
+personne »), et la liste de ce qu'on ne fait pas : corriger la mathématique de l'auteur,
+deviner un mot illisible, recopier une page qui n'en contient pas.
+\end{exemple}
+
+Ces procédures s'améliorent avec le travail. Quand une erreur revient, on ajoute une règle
+et sa raison ; la raison empêche la règle de devenir un rite.
+
+\section{Une mémoire explicite}
+
+Les décisions prises en route (ne pas citer telle source, ne jamais pousser de force sur
+telle branche, contacter d'abord telle personne) se perdent si elles ne sont écrites nulle
+part. On les garde dans des fichiers courts, un fait par fichier, avec la date et la raison,
+que l'assistant relit au début de chaque session. Une décision qui change donne un nouveau
+fichier, ou une correction datée de l'ancien.
+
+\section{Déléguer en parallèle}
+
+Un assistant peut confier des sous-tâches à d'autres instances qui travaillent en même
+temps : lire quatre documents à la fois, écrire deux preuves indépendantes. Le gain de temps
+est réel ; le risque aussi. Chaque sous-tâche reçoit une consigne complète, parce qu'elle ne
+voit rien d'autre ; deux sous-tâches ne touchent jamais les mêmes fichiers ; et leurs
+résultats sont relus avant d'être intégrés.
+
+\begin{warningblock}
+Un rapport de sous-tâche est écrit avec la même assurance, qu'il soit juste ou faux. On
+vérifie les affirmations qui comptent (une référence, un énoncé, un résultat de
+compilation) avant de les reprendre.
+\end{warningblock}
+
+\section{Un budget}
+
+Le travail d'un assistant consomme un quota de calcul. On fixe un plafond par semaine et
+l'on vérifie où l'on en est avant de lancer une tâche longue. Le plafond oblige à choisir :
+ce qu'on fait maintenant, ce qui attend.
+
+\section{Déclarer}
+
+Les revues et les sites d'entraide ont des politiques différentes sur les textes écrits avec
+un modèle de langage. Certaines revues les refusent ; certains sites interdisent les
+réponses générées ; d'autres demandent seulement une déclaration. On lit la politique avant
+de soumettre, on déclare l'usage dans les termes demandés, et l'on écrit soi-même ce qu'on
+publie sous son nom.

@@ -1,0 +1,63 @@
+\chapter{La compilation continue}
+
+Un article en \LaTeX{} qui compilait hier ne compile plus aujourd'hui ; une preuve formelle
+qui passait se casse quand la bibliothèque change. On s'en aperçoit au pire moment, la
+veille d'un envoi. L'\emph{intégration continue} consiste à confier ces vérifications à une
+machine, qui les refait à chaque modification envoyée sur le dépôt distant.
+
+\section{Le principe}
+
+On écrit dans le dépôt un fichier qui décrit les vérifications. À chaque envoi
+(\cmd{git push}), le service d'hébergement démarre une machine virtuelle, y copie le dépôt,
+exécute les vérifications et affiche le résultat : une coche verte ou une croix rouge à côté
+du commit. Sur GitHub, ce service s'appelle \emph{GitHub Actions} et le fichier vit dans
+\fichier{.github/workflows/}.
+
+\begin{terminal}
+name: verifications
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compiler les preuves
+        run: lake build
+      - name: Compiler l'article
+        run: tectonic -X compile article.tex
+\end{terminal}
+
+\section{Ce qu'on vérifie}
+
+Tout ce qui peut échouer sans qu'on le voie :
+\begin{itemize}
+  \item les preuves formelles, compilées en entier ;
+  \item les documents \LaTeX{}, compilés, avec les avertissements de débordement de ligne
+        traités comme des erreurs si l'on y tient ;
+  \item le style du code (un \emph{linter}), et les types pour les programmes qui en ont ;
+  \item les vérifications propres au projet : qu'une page citée existe, que chaque
+        référence interne pointe quelque part, qu'un fichier de données respecte son schéma.
+\end{itemize}
+
+\begin{regle}
+Un avertissement qu'on ne lit jamais est une erreur qu'on n'a pas encore vue. On fait
+échouer la compilation sur les avertissements qui comptent.
+\end{regle}
+
+\section{Le coût d'une erreur}
+
+Une erreur vue à la minute coûte une minute. Vue par un rapporteur six mois plus tard, elle
+coûte une révision et un peu de confiance. L'intégration continue ne trouve pas les erreurs
+mathématiques ; elle trouve tout le reste, et libère l'attention pour les premières.
+
+\begin{tipblock}
+Avant d'envoyer, on lance localement les mêmes commandes que la machine. Une vérification
+locale manquée et rattrapée par l'intégration continue n'est pas grave ; mais si la croix
+rouge devient habituelle, plus personne ne la regarde.
+\end{tipblock}
+
+\section{Déployer depuis la branche principale}
+
+Le même mécanisme publie. Quand les vérifications passent, une dernière étape construit le
+site du projet et le met en ligne. La règle devient alors : ce qui est sur la branche
+principale est en ligne, et ce qui est en ligne a passé les vérifications.

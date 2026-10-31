@@ -1,0 +1,48 @@
+\chapter{Aide-mémoire des commandes}
+
+\section*{git}
+\begin{terminal}
+# ce qui a changé depuis le dernier commit
+git status
+# enregistrer une idée
+git add fichier && git commit -m "…"
+# les vingt derniers commits
+git log --oneline -20
+# quand ce mot est apparu ou a disparu
+git log -S "mot" -- fichier
+# le commit de chaque ligne
+git blame fichier
+# figer une version
+git tag nom && git push origin nom
+# ce qui a changé depuis
+git diff nom -- fichier
+\end{terminal}
+
+\section*{Tickets (GitHub, en ligne de commande)}
+\begin{terminal}
+# les tickets ouverts
+gh issue list
+# lire un ticket
+gh issue view 95
+# répondre
+gh issue comment 95 --body "…"
+gh issue close 95 --comment "Réglé par 4233568."
+\end{terminal}
+
+\section*{Lean}
+\begin{terminal}
+# mathlib déjà compilée
+lake exe cache get
+# tout compiler
+lake build
+# un seul fichier
+lake env lean Fichier.lean
+-- vérifier qu'aucun sorry ne se cache
+#print axioms monTheoreme
+\end{terminal}
+
+\section*{\LaTeX{}}
+\begin{terminal}
+# compiler, paquets téléchargés au besoin
+tectonic -X compile article.tex
+\end{terminal}

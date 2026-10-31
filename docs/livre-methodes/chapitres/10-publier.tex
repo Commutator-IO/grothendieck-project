@@ -1,0 +1,50 @@
+\chapter{Publier}
+
+Un projet de ce genre produit des articles, des fichiers de données et un site. Tous se
+construisent depuis le dépôt, par des commandes qu'on peut relancer.
+
+\section{Des articles reproductibles}
+
+\begin{regle}
+Un chiffre cité dans un article se recalcule par une commande, et la commande est dans le
+dépôt.
+\end{regle}
+
+Les nombres changent pendant que l'article s'écrit : pages lues, théorèmes démontrés,
+entrées d'un registre. Si chaque chiffre est recompté par un script, la mise à jour d'une
+version révisée prend une minute, et la méthode de comptage est écrite quelque part. Les
+figures se dessinent de la même façon, depuis les données, en TikZ, pour que leurs
+étiquettes soient composées dans les polices du texte.
+
+\begin{terminal}
+# redessiner les figures depuis les données
+node figures.mjs
+# compiler, sans installation de TeX
+tectonic -X compile article.tex
+\end{terminal}
+
+L'outil \texttt{tectonic} compile un document \LaTeX{} en téléchargeant les paquets dont il
+a besoin ; une seule commande suffit sur n'importe quelle machine, y compris celle de
+l'intégration continue.
+
+\section{Des formats d'échange}
+
+Certaines revues demandent un format structuré à côté du PDF : par exemple TEI, un format
+XML des humanités numériques, validé contre le schéma de la revue. On écrit un convertisseur
+une fois, et la validation entre dans les vérifications automatiques : un fichier qui ne
+passe plus le schéma fait échouer la construction.
+
+\section{Un site construit depuis le dépôt}
+
+Le site du projet (une page par document, des registres, une page de relecture) est
+construit par un outil de pages statiques et déployé à chaque envoi sur la branche
+principale. Les mathématiques s'y affichent avec KaTeX, depuis le même \LaTeX{} que les PDF.
+Les documents dont on n'a pas les droits n'y figurent qu'avec l'interrupteur allumé
+(chapitre~\ref{ch:droits}).
+
+\section{Soumettre et réviser}
+
+On étiquette la version soumise (chapitre 1). À la révision, \cmd{git diff} depuis
+l'étiquette donne la liste des changements, qu'on résume en quelques lignes pour l'éditeur.
+On ne soumet jamais deux fois le même article comme s'il était nouveau : une version
+révisée passe par la soumission existante.

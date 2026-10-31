@@ -1,0 +1,65 @@
+\chapter{Les tickets, carnet de recherche}
+
+Un projet de recherche accumule des questions ouvertes : une référence à vérifier, une page
+illisible, un lemme qui manque, une lettre à écrire. Dans un carnet papier, elles se
+perdent entre deux calculs. Les services d'hébergement offrent pour cela des
+\emph{tickets} (\emph{issues}), conçus pour suivre des bogues et qui servent très bien à
+suivre des questions.
+
+\section{Une question par ticket}
+
+\begin{regle}
+Un ticket pose une seule question, assez précise pour qu'on sache quand elle est réglée.
+\end{regle}
+
+« Vérifier la bibliographie » ne se ferme jamais. « Vérifier que le théorème 2.4 de
+l'article cité dit bien ce qu'on lui fait dire, et donner la page » se ferme le jour où
+c'est fait. Le titre énonce la question ; le corps donne le contexte, les liens, et ce qui
+a déjà été essayé.
+
+\section{Listes de cases}
+
+Quand une question se découpe en étapes, le corps du ticket porte une liste de cases à
+cocher. L'hébergeur en affiche l'avancement, et chaque case cochée dit ce qui est fait sans
+qu'on ait à relire le fil.
+
+\begin{terminal}
+- [x] lire l'exposé I, chercher les énoncés précis
+- [x] recherche bibliographique, énoncé par énoncé
+- [ ] formaliser ce qui n'est pas dans la littérature
+- [ ] proposer le résultat à la bibliothèque commune
+\end{terminal}
+
+\section{Relier les tickets}
+
+Un ticket en appelle d'autres. Écrire \texttt{\#89} dans le texte d'un ticket crée un lien
+vers le ticket 89, et l'hébergeur montre le lien des deux côtés. Un commit dont le message
+contient \texttt{\#89} apparaît dans le fil du ticket : la question et le travail qui la
+règle se retrouvent au même endroit.
+
+\begin{exemple}
+Une suite de trois tickets peut ainsi garder la trace d'une recherche : le premier constate
+qu'une notation change de sens au milieu d'un chapitre ; le deuxième recense les passages
+touchés ; le troisième, ouvert plus tard, demande à un spécialiste de trancher un cas
+douteux. Chacun renvoie au précédent.
+\end{exemple}
+
+\section{Fermer}
+
+\begin{regle}
+On ferme un ticket quand sa question est réglée, et on dit comment dans un dernier
+message.
+\end{regle}
+
+Le dernier message (« réglé par le commit \texttt{4233568} : la référence est la
+proposition 5.1, pas le lemme 5.3 ») rend le ticket utile à qui le retrouvera. Un ticket
+qu'on abandonne se ferme aussi, avec la raison de l'abandon : un abandon expliqué est une
+information.
+
+\section{Les tickets comme mémoire publique}
+
+Sur un dépôt public, les tickets sont lisibles par tous. Ils montrent comment le travail a
+été fait, ce qui a été vérifié, ce qui reste douteux. C'est un avantage pour la confiance
+qu'on peut accorder au résultat. C'est aussi une contrainte : on n'y écrit rien qu'on ne
+publierait pas, ni citation longue d'un texte protégé, ni information personnelle
+(chapitre~\ref{ch:droits}).

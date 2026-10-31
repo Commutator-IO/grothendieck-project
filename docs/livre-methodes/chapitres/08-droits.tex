@@ -1,0 +1,47 @@
+\chapter{Droits, provenance et retrait}\label{ch:droits}
+
+Un projet qui travaille sur des documents d'archives, des manuscrits ou des textes
+d'autres auteurs manie des droits qu'il ne détient pas. Le dépôt public rend chaque erreur
+visible et durable. Ce chapitre décrit comment séparer ce qui peut être publié de ce qui
+doit rester privé, et comment garder la possibilité de retirer.
+
+\section{Trois niveaux}
+
+\begin{description}
+  \item[Public] le code, les outils, les données dérivées qu'on a le droit de diffuser,
+        les articles ;
+  \item[Privé] les copies locales de documents, les transcriptions de textes protégés,
+        tant que les ayants droit n'ont pas donné leur accord ;
+  \item[Jamais stocké] les images des documents eux-mêmes, quand la source les sert déjà :
+        on les affiche depuis la source, on ne les recopie pas.
+\end{description}
+
+\section{Le fichier \texttt{.gitignore}}
+
+Un dossier inscrit dans \fichier{.gitignore} n'entre jamais dans le dépôt : \texttt{git}
+l'ignore, et rien de ce qu'il contient ne peut être poussé par mégarde. Les transcriptions
+privées et les copies locales y vont.
+
+\begin{warningblock}
+\cmd{git add -f} passe outre le \fichier{.gitignore}. On ne l'utilise jamais sur un dossier
+privé. Un fichier poussé une fois reste dans l'histoire même si on le supprime ensuite.
+\end{warningblock}
+
+\section{Un interrupteur à la compilation}
+
+Quand la question des droits n'est pas réglée, on peut garder les documents dans le dépôt
+sans les montrer sur le site. Une variable lue au moment de la construction du site (par
+exemple \texttt{RENDER\_TRANSCRIPTS=false}) retire l'affichage en un réglage, sans toucher
+au contenu. Si les ayants droit le demandent, on retire ; s'ils l'accordent, on rallume.
+
+\section{Citations courtes}
+
+Dans les tickets, les messages de commit et les articles, on cite quelques mots à la fois,
+avec la source précise, et l'on résume le reste dans ses propres mots. La règle vaut pour
+l'assistant comme pour soi, et on l'écrit dans ses procédures.
+
+\section{Ne pas désigner les personnes}
+
+Les dépôts publics sont indexés. On n'y nomme pas les personnes privées qui apparaissent
+dans les documents, ni les correspondants qui ont répondu à une demande sans s'attendre à
+être cités. On décrit leur rôle, pas leur nom.
