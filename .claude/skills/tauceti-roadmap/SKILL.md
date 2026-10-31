@@ -76,8 +76,8 @@ wrapped at 100 characters (a 137-character line was a P3).
   is for entire functions, #1059; Prop. 2.14 is for free extensions, #1060). Read only from legal
   places (arXiv, HAL, Numdam, GDZ, author pages). A paywalled work is cited by its locator alone; do
   not write "uncertified" in the README, which is a manifest status, not mathematics (#1058, last
-  round). No MathOverflow, private communication, unrefereed preprint as a source; never
-  csg.igrothendieck.org.
+  round). No MathOverflow, private communication or unrefereed preprint as a source, and no
+  unofficial transcription site of the manuscripts.
 - **Open conjectures are research motivation, never deliverables**: no `def Conj : Prop`, no named
   predicate, no "consequence package", no successor that states them (IharaQuestion,
   EllipticPeriodConjecture, HomotopyHypothesis, SkeletonDetermines were all removed). Conditional
