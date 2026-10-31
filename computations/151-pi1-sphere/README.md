@@ -1,7 +1,7 @@
 # Π₁ too coarse for the sphere (folder 151)
 
 Tests the example « Π₁ trop grossier pour la sphère » (appendix of
-`docs/lean/article.tex`, folder 151, given there as pp. 61–63; Findings piste
+`docs/lean/article.tex`, folder 151, given there as pp. 61–63 before the correction of 31 October 2026, now pp. 38–42; Findings piste
 `151-pi1-too-coarse-for-the-sphere`). Run `python3 check.py` (about 10 s); the
 output is `results.txt`.
 

@@ -723,7 +723,7 @@ export const FINDINGS: Finding[] = [
   {
     id: '151-pi1-too-coarse-for-the-sphere',
     cote: '151',
-    pages: '61–63',
+    pages: '38–42',
     kind: 'mathematical',
     claim:
       'The Π₁ level of the stratified formalism is shown to be too coarse by computing it on P¹_C ≃ S², where the amalgamated sum of the tube diagram is homotopically trivial although the sphere is not; raising the level by one, to the gerbe, recovers H²(S², A) ≃ A.',
