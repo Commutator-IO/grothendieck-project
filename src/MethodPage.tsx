@@ -437,7 +437,7 @@ export function MethodPage() {
             </span>
           </p>
           <P id="book-methods" className="prose-fonds mt-6">
-            <em>Méthodes d'atelier : le software craftsmanship au service d'un projet mathématique</em>{' '}
+            <em>Mathématiques outillées : le génie logiciel au service de la recherche</em>{' '}
             is a short book in French for mathematicians, on the practices this edition runs on:
             git as a laboratory notebook, issues, continuous integration, Lean and mathlib, working
             with an AI assistant (written procedures, cloud sessions, the LaTeX–Lean loop, the
