@@ -60,7 +60,7 @@ const name = (s: string | null) =>
 
 export function IllusiePage() {
   const [q, setQ] = useState('');
-  const [onlyHits, setOnlyHits] = useState(false);
+  const [onlyHits, setOnlyHits] = useState(true);
   const [open, setOpen] = useState(() => {
     const h = fromHash();
     return h && ITEMS.some((i) => i.id === h.id) ? h : null;
