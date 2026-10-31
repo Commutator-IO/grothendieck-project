@@ -1,4 +1,4 @@
-\chapter{La compilation continue}
+\chapter{L'intégration continue (CI)}
 
 Un article en \LaTeX{} qui compilait hier ne compile plus aujourd'hui ; une preuve formelle
 qui passait se casse quand la bibliothèque change. On s'en aperçoit au pire moment, la
@@ -8,7 +8,7 @@ machine, qui les refait à chaque modification envoyée sur le dépôt distant.
 \section{Le principe}
 
 On écrit dans le dépôt un fichier qui décrit les vérifications. À chaque envoi
-(\cmd{git push}), le service d'hébergement démarre une machine virtuelle, y copie le dépôt,
+(\cmd{git push}), le service d'hébergement (GitHub, GitLab) démarre une machine virtuelle, y copie le dépôt,
 exécute les vérifications et affiche le résultat : une coche verte ou une croix rouge à côté
 du commit. Sur GitHub, ce service s'appelle \emph{GitHub Actions} et le fichier vit dans
 \fichier{.github/workflows/}.
@@ -56,7 +56,7 @@ locale manquée et rattrapée par l'intégration continue n'est pas grave ; mais
 rouge devient habituelle, plus personne ne la regarde.
 \end{tipblock}
 
-\section{Déployer depuis la branche principale}
+\section{Déployer depuis la branche \texttt{main}}
 
 Le même mécanisme publie. Quand les vérifications passent, une dernière étape construit le
 site du projet et le met en ligne. La règle devient alors : ce qui est sur la branche

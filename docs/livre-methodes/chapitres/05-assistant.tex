@@ -48,22 +48,22 @@ fichier, ou une correction datée de l'ancien.
 
 \section{Déléguer en parallèle}
 
-Un assistant peut confier des sous-tâches à d'autres instances qui travaillent en même
+Un assistant peut confier des sous-agents à d'autres instances qui travaillent en même
 temps : lire quatre documents à la fois, écrire deux preuves indépendantes. Le gain de temps
-est réel ; le risque aussi. Chaque sous-tâche reçoit une consigne complète, parce qu'elle ne
-voit rien d'autre ; deux sous-tâches ne touchent jamais les mêmes fichiers ; et leurs
+est réel ; le risque aussi. Chaque sous-agent reçoit une consigne complète, parce qu'elle ne
+voit rien d'autre ; deux sous-agents ne touchent jamais les mêmes fichiers ; et leurs
 résultats sont relus avant d'être intégrés.
 
 \begin{warningblock}
-Un rapport de sous-tâche est écrit avec la même assurance, qu'il soit juste ou faux. On
+Un rapport de sous-agent est écrit avec la même assurance, qu'il soit juste ou faux. On
 vérifie les affirmations qui comptent (une référence, un énoncé, un résultat de
 compilation) avant de les reprendre.
 \end{warningblock}
 
-\section{Des sessions dans le nuage}
+\section{Des sessions dans le cloud}
 
 Claude Code ne tourne pas seulement sur sa propre machine. On peut ouvrir une session dans
-le nuage, depuis le site de Claude ou depuis l'application de bureau : une machine
+le cloud, depuis le site de Claude ou depuis l'application de bureau : une machine
 distante clone le dépôt depuis GitHub, y travaille, et pousse ses commits. La machine
 locale reste libre, et l'on peut fermer l'ordinateur pendant que la tâche avance.
 
@@ -76,20 +76,19 @@ précautions évitent la plupart des ennuis.
         (copies d'archives, transcriptions privées, brouillons locaux) lui manque. Une
         tâche qui en a besoin reste sur la machine locale, ou reçoit dans sa consigne ce
         qu'il lui faut, reformulé, jamais les fichiers privés eux-mêmes.
-  \item[Une branche, un seul propriétaire.] Si une session dans le nuage et une session
+  \item[Une branche, un seul propriétaire.] Si une session dans le cloud et une session
         locale poussent sur la même branche, leurs commits se croisent et l'une écrase
         les hypothèses de l'autre. On attribue chaque branche à une seule session, et
         l'on récupère (\cmd{git fetch}) avant de reprendre la main.
-  \item[La consigne tient seule.] Comme pour une sous-tâche, la session distante ne
+  \item[La consigne tient seule.] Comme pour un sous-agent, la session distante ne
         connaît pas la conversation en cours. On lui écrit ce qu'il faut faire, où, avec
         quelles règles et comment vérifier, puis on relit ses commits comme ceux d'un
         collaborateur.
 \end{description}
 
 \begin{exemple}
-Pendant qu'une session locale répondait aux relectures de plusieurs propositions de
-contribution, une session dans le nuage a poussé sur les mêmes branches. Un de ses
-commits cassait la compilation ; l'autre réintroduisait des citations que la relecture
+Pendant qu'une session locale répondait aux reviews de plusieurs pull requests, une session dans le cloud a poussé sur les mêmes branches. Un de ses
+commits cassait la compilation ; l'autre réintroduisait des citations que la review
 venait de demander de retirer. La réparation a pris une heure. La règle « une branche, un
 seul propriétaire » vient de là.
 \end{exemple}

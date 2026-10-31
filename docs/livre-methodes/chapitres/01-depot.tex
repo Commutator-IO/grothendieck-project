@@ -3,7 +3,7 @@
 Un texte mathématique change sans cesse : une hypothèse ajoutée, une notation corrigée, une
 démonstration réécrite. Trois mois plus tard on veut savoir quand l'hypothèse est apparue,
 et pourquoi. Un dossier de fichiers numérotés \fichier{article-v3-final-bis.tex} ne le dit
-pas. Un gestionnaire de versions le dit, à condition qu'on lui ait donné de quoi répondre.
+pas. Un gestionnaire de versions (\emph{version control}) le dit, à condition qu'on lui ait donné de quoi répondre.
 
 \section{Le dépôt et ses commits}
 
@@ -22,7 +22,7 @@ git commit -m "Lemme 3 : la finitude est nécessaire (cf. 3.4)"
 git log --oneline
 \end{terminal}
 
-Le dépôt local se double d'une copie sur un service d'hébergement (GitHub, GitLab, ou un
+Le dépôt local se double d'une copie sur un service d'hébergement (GitHub, GitLab) (GitHub, GitLab, ou un
 serveur de l'université). La copie distante sert de sauvegarde, de point de rencontre avec
 les collaborateurs et, on le verra, de déclencheur pour les vérifications automatiques.
 
@@ -64,7 +64,7 @@ ligne, de quel commit vient le texte actuel ; le message de ce commit dit pourqu
 \section{Figer une version}
 
 Quand un article part chez un éditeur, on veut pouvoir retrouver exactement le texte
-envoyé, même après des mois de corrections. Une \emph{étiquette} (tag) nomme un commit.
+envoyé, même après des mois de corrections. Une \emph{tag} (tag) nomme un commit.
 
 \begin{terminal}
 # nommer l'état actuel
@@ -91,7 +91,8 @@ peut chercher ce qu'elle a entraîné entre-temps.
 \section{Branches, ou pas}
 
 Les équipes de développement travaillent sur des \emph{branches} qu'elles fusionnent
-ensuite. Pour un projet mené seul, une seule branche principale suffit souvent. Les
+ensuite par une \emph{pull request} : une demande de fusion que d'autres relisent
+(\emph{code review}) avant de l'accepter. Pour un projet mené seul, une seule branche, \texttt{main}, suffit souvent. Les
 branches deviennent utiles quand on contribue au dépôt d'un autre (on y reviendra avec
 mathlib au chapitre~\ref{ch:lean}) ou quand deux chantiers longs doivent avancer sans se
 gêner.
