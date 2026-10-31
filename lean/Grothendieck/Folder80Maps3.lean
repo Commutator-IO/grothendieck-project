@@ -57,6 +57,9 @@ vertices, edges, incidence — with the line of each edge; `SkelIso` is an isomo
   triangle of a bigon-free arrangement has a fourth line through none of its vertices
   (`FourthLine`, transported by `SkelIso.fourth_map`), every isomorphism of decomposed skeleta
   lifts uniquely: the skeleton functor is fully faithful there, multiple points included.
+* `fourth_at`, `fourth_of_simpleCorner`, `full_of_simpleCorner`: a triangle with a vertex on
+  only two lines always has a fourth line, so fullness holds whenever every triangle has a
+  double vertex (`SimpleCorner`): a triangle without a fourth line has three multiple vertices.
 
 **Not formalised.** The arrangements where some triangle has no fourth line avoiding its
 vertices: (A6) and the complete quadrangle `III₆`. These are what remains of the page 54
@@ -2252,6 +2255,97 @@ theorem full_of_fourth' (hbf : BigonFree X.On) (hbf' : BigonFree X'.On) (hs : X.
   full_of_fourth hbf hbf' hs hs' hF (f.fourth_map hF) f
 
 end Corners
+
+/-! ### When a fourth line exists: triangles with a double vertex -/
+
+section SimpleCorner
+
+omit [Fintype D] in
+/-- A line has a vertex other than any two given ones. -/
+theorem third_vertex (hbf : BigonFree X.On) (l : L) (s t : X.M.Vtx) :
+    ∃ q, X.On q l ∧ q ≠ s ∧ q ≠ t := by
+  obtain ⟨q1, q2, q3, o1, o2, o3, n12, n13, n23⟩ := hbf l
+  by_contra hc
+  push Not at hc
+  have k := fun q (hq : X.On q l) => (eq_or_ne q s).imp_right (hc q hq)
+  rcases k _ o1 with rfl | rfl <;> rcases k _ o2 with h2 | h2 <;> rcases k _ o3 with h3 | h3 <;>
+    simp_all
+
+omit [Fintype D] in
+/-- Through a vertex of `l` passes another line. -/
+theorem other_line {q : X.M.Vtx} {l : L} (hq : X.On q l) : ∃ Δ, Δ ≠ l ∧ X.On q Δ := by
+  obtain ⟨z, rfl, hz⟩ := hq
+  obtain ⟨y, hyv, hyl⟩ := X.two z
+  exact ⟨X.line y, fun h => hyl (h.trans hz.symm), y, hyv, rfl⟩
+
+omit [Fintype D] in
+/-- Two vertices on a line are avoided by some line. -/
+theorem fourth_degen (hbf : BigonFree X.On) {u v : X.M.Vtx} {l : L} (hu : X.On u l)
+    (hv : X.On v l) : ∃ Δ, ¬X.On u Δ ∧ ¬X.On v Δ := by
+  obtain ⟨t, ht, htu, htv⟩ := third_vertex hbf l u v
+  obtain ⟨Δ, hΔ, htΔ⟩ := other_line ht
+  exact ⟨Δ, fun h => htu (meet_eq hΔ h hu htΔ ht).symm, fun h => htv (meet_eq hΔ h hv htΔ ht).symm⟩
+
+omit [Fintype D] in
+/-- **A triangle with a double vertex has a fourth line.** If only the two sides `a`, `b` pass
+through the vertex `u` of the triangle `u, v, w`, some line passes through none of its
+vertices. -/
+theorem fourth_at (hbf : BigonFree X.On) {a b c : L} {u v w : X.M.Vtx} (h1 : X.On u a)
+    (h2 : X.On u b) (h3 : X.On v b) (h4 : X.On v c) (h5 : X.On w c) (h6 : X.On w a)
+    (h7 : ¬X.On u c) (hu : ∀ l, X.On u l → l = a ∨ l = b) :
+    ∃ Δ, ¬X.On u Δ ∧ ¬X.On v Δ ∧ ¬X.On w Δ := by
+  obtain ⟨q, hq, hqv, hqw⟩ := third_vertex hbf c v w
+  obtain ⟨Δ, hΔ, hqΔ⟩ := other_line hq
+  have hac : a ≠ c := fun h => h7 (h ▸ h1)
+  have hbc : b ≠ c := fun h => h7 (h ▸ h2)
+  refine ⟨Δ, fun h => ?_, fun h => hqv (meet_eq hΔ hqΔ hq h h4), fun h => hqw (meet_eq hΔ hqΔ hq h h5)⟩
+  rcases hu Δ h with rfl | rfl
+  · exact hqw (meet_eq hac hqΔ hq h6 h5)
+  · exact hqv (meet_eq hbc hqΔ hq h3 h4)
+
+variable (X) in
+/-- Every (non-degenerate) triangle has a vertex through which only two of its sides pass. -/
+def SimpleCorner : Prop := ∀ (a b c : L) (u v w : X.M.Vtx), a ≠ b → X.On u a → X.On u b →
+  X.On v b → X.On v c → X.On w c → X.On w a → ¬X.On u c →
+    (∀ l, X.On u l → l = a ∨ l = b) ∨ (∀ l, X.On v l → l = b ∨ l = c) ∨
+      ∀ l, X.On w l → l = c ∨ l = a
+
+omit [Fintype D] in
+/-- Triangles with a double vertex have fourth lines: `SimpleCorner` implies `FourthLine`. A
+triangle without a fourth line has three multiple vertices, as in the complete quadrangle. -/
+theorem fourth_of_simpleCorner (hbf : BigonFree X.On) (H : X.SimpleCorner) : X.FourthLine := by
+  intro a b c u v w h1 h2 h3 h4 h5 h6 h7
+  have hac : a ≠ c := fun h => h7 (h ▸ h1)
+  by_cases hab : a = b
+  · subst hab
+    have hvw : v = w := meet_eq hac h3 h4 h6 h5
+    subst hvw
+    obtain ⟨Δ, hu, hv⟩ := fourth_degen hbf h1 h3
+    exact ⟨Δ, hu, hv, hv⟩
+  have hbc : b ≠ c := fun h => h7 (h ▸ h2)
+  have nva : ¬X.On v a := fun h => h7 (meet_eq hab h1 h2 h h3 ▸ h4)
+  have nwb : ¬X.On w b := fun h => h7 (meet_eq hab h1 h2 h6 h ▸ h5)
+  rcases H a b c u v w hab h1 h2 h3 h4 h5 h6 h7 with hu | hv | hw
+  · exact fourth_at hbf h1 h2 h3 h4 h5 h6 h7 hu
+  · obtain ⟨Δ, n1, n2, n3⟩ := fourth_at hbf h3 h4 h5 h6 h1 h2 nva hv
+    exact ⟨Δ, n3, n1, n2⟩
+  · obtain ⟨Δ, n1, n2, n3⟩ := fourth_at hbf h5 h6 h1 h2 h3 h4 nwb hw
+    exact ⟨Δ, n2, n3, n1⟩
+
+variable {D' L' : Type*} [Fintype D'] {X' : PseudolineMap D' L'}
+
+/-- **Full faithfulness when every triangle has a double vertex.** If every triangle of a
+bigon-free arrangement has a vertex on exactly two lines (for instance a simple arrangement),
+every isomorphism of its decomposed skeleton with that of another bigon-free arrangement comes
+from a unique isomorphism of the arrangements. The complete quadrangle `III₆` is excluded. -/
+theorem full_of_simpleCorner (hbf : BigonFree X.On) (hbf' : BigonFree X'.On) (hs : X.Straight)
+    (hs' : X'.Straight) (H : X.SimpleCorner) (f : SkelIso X X') :
+    ∃ g : D ≃ D', (∀ d, g (X.M.a0 d) = X'.M.a0 (g d)) ∧ (∀ d, g (X.M.a1 d) = X'.M.a1 (g d)) ∧
+      (∀ d, g (X.M.a2 d) = X'.M.a2 (g d)) ∧ (∀ d, X'.M.vtx (g d) = f.fV (X.M.vtx d)) ∧
+      ∀ d, X'.M.edge (g d) = f.fE (X.M.edge d) :=
+  full_of_fourth' hbf hbf' hs hs' (fourth_of_simpleCorner hbf H) f
+
+end SimpleCorner
 
 end PseudolineMap
 
