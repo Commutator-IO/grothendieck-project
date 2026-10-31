@@ -49,10 +49,12 @@ function statusOf(id) {
   const i = findings.indexOf(`id: '${id}'`);
   return i < 0 ? null : /status: '(\w+)'/.exec(findings.slice(i))?.[1];
 }
-function checkOf(ids) {
+function checkOf(ids, cote, statement) {
   if (ids.some((id) => verification.problem.includes(id))) return 'problème ouvert';
-  const comp = ids.map((id) => verification.computation[id]).find(Boolean);
-  if (comp) return `calcul (\\texttt{computations/${comp}})`;
+  const comp =
+    ids.map((id) => verification.computation[id]).find(Boolean) ??
+    verification.computationRows.find((r) => r.cote === cote && statement.startsWith(r.statement.replace(/^Grothendieck,\s*/, '')));
+  if (comp) return `calcul, ${comp.verdict}`;
   const st = ids.map(statusOf);
   if (st.includes('matched') || st.includes('confirmed')) return 'publié';
   if (st.includes('refuted')) return 'réfuté';
@@ -69,7 +71,9 @@ for (const file of inputs) {
     const line = src.slice(src.lastIndexOf('\n', m.index) + 1, m.index);
     const title = line.match(/\\begin\{\w+\*?\}\[(.*)\]\s*$/)?.[1] ?? '';
     const ids = [...title.matchAll(/\\piste(?:resolue)?\{([^}]+)\}/g)].map((x) => x[1]);
-    rows.push({ cote: coteOf(title, file, section), statement: clean(title) || '(sans titre)', check: checkOf(ids) });
+    const cote = coteOf(title, file, section);
+    const statement = clean(title) || '(sans titre)';
+    rows.push({ cote, statement, check: checkOf(ids, cote, statement) });
   }
 }
 
@@ -82,7 +86,7 @@ writeFileSync(
   `% Engendré par nonverifies.mjs — ne pas éditer à la main.
 \\section*{Énoncés non vérifiés en Lean}\\addcontentsline{toc}{section}{Énoncés non vérifiés en Lean}
 
-Les ${rows.length} énoncés marqués \\textcolor{piste}{\\ensuremath{\\lozenge}} dans la marge, dans l'ordre du texte : la cote, l'énoncé tel que le titre le donne, la vérification autre que Lean, la page. La vérification est \\emph{publié} quand la recherche bibliographique a trouvé l'énoncé imprimé, \\emph{réfuté} quand un contre-exemple le contredit, \\emph{problème ouvert} quand il est posé dans l'article des problèmes ouverts, \\emph{calcul} quand un programme le teste sur de petits cas ; un tiret signale qu'aucune vérification n'est prévue.
+Les ${rows.length} énoncés marqués \\textcolor{piste}{\\ensuremath{\\lozenge}} dans la marge, dans l'ordre du texte : la cote, l'énoncé tel que le titre le donne, la vérification autre que Lean, la page. La vérification est \\emph{publié} quand la recherche bibliographique a trouvé l'énoncé imprimé, \\emph{réfuté} quand un contre-exemple le contredit, \\emph{problème ouvert} quand il est posé dans l'article des problèmes ouverts, \\emph{calcul} quand un programme du dossier \\texttt{computations/} le teste sur de petits cas, avec son verdict (accord, désaccord, ou non testable par calcul) ; un tiret signale qu'aucune vérification n'est prévue.
 
 {\\small
 \\begin{longtable}{@{}l>{\\raggedright\\arraybackslash}p{0.52\\linewidth}>{\\raggedright\\arraybackslash}p{0.2\\linewidth}r@{}}
