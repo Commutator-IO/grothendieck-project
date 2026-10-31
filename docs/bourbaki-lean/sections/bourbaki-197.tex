@@ -1,0 +1,41 @@
+\section[Rédaction Bourbaki \redac{197} : la courbe $y^2 = P(x)$ en caractéristique~$2$]{Rédaction Bourbaki \redac{197} : une courbe $y^2 = P(x)$ qui n'est pas normale en caractéristique~$2$\protect\verifie{Redaction197}}\label{sec:bourbaki-197}
+
+La rédaction \redac{197}, \q{Rapport de Géométrie algébrique. Chapitre~I. Théorie globale élémentaire}, des archives Bourbaki (Archives Henri Poincaré, \ahp{612}) est datée de mai 1954 par sa notice, qui la donne à Pierre Samuel. Elle pose les premières notions de la géométrie algébrique globale et les illustre d'exemples de courbes planes. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+\emph{Courbes normales.} Soient $k$ un corps et $P \in k[x]$ un polynôme. La courbe plane affine d'équation $y^2 = P(x)$ a pour anneau de coordonnées $A = k[x, y]/(y^2 - P(x))$. Quand $P$ n'est pas un carré, $y^2 - P$ est irréductible, $A$ est intègre et la courbe a un corps de fonctions $K = k(x)[y]$, extension de degré~$2$ de $k(x)$. La courbe est \emph{normale} si $A$ est intégralement clos dans $K$ : toute fraction de $K$ racine d'un polynôme unitaire à coefficients dans $A$ est déjà dans $A$. Pour une courbe sur un corps parfait, être normal revient à n'avoir aucun point singulier. Le cas type d'échec est la cubique cuspidale $y^2 = x^3$ : la fraction $t = y/x$ vérifie $t^2 = x$, elle est entière sur $A$ sans lui appartenir, et la courbe a un point de rebroussement à l'origine.
+
+\emph{La page.} À la page~39, la rédaction affirme que, pour $P$ irréductible, la courbe $y^2 = P(x)$ est toujours normale, sans condition sur la caractéristique de $k$. En caractéristique différente de~$2$, c'est juste. En caractéristique~$2$, c'est faux.
+
+\emph{Pourquoi la caractéristique~$2$ fait exception.} Le critère jacobien localise les points singuliers de la courbe $F(x, y) = y^2 - P(x) = 0$ là où les deux dérivées partielles s'annulent. On a $\partial F / \partial y = 2y$ et $\partial F / \partial x = -P'(x)$. Hors de la caractéristique~$2$, la première ne s'annule que pour $y = 0$, la seconde demande alors $P'(x) = 0$ en une racine $x$ de $P$ : une racine double, impossible pour $P$ sans facteur carré lorsque $k$ est parfait. En caractéristique~$2$, la dérivée $2y$ est identiquement nulle, et tout point de la courbe où $P'$ s'annule est singulier, que $P$ ait une racine double ou non. Sur $\mathbf F_2$, pour $P = x^3 + x + 1$, on a $P' = 3x^2 + 1 = (x + 1)^2$, qui s'annule en $x = 1$, et $P(1) = 1$ : le point $(1, 1)$ de la courbe est singulier.
+
+\begin{encadre}
+\begin{contrexemple}[énoncé de l'édition]
+Sur $k = \mathbf F_2$, le polynôme $P = x^3 + x + 1$ est irréductible, l'anneau $A = \mathbf F_2[x, y]/(y^2 - P(x))$ est intègre, et il n'est pas intégralement clos : la fraction $t = (y + 1)/(x + 1)$ vérifie $t^2 = x$ et n'appartient pas à $A$. L'assertion de la page~39 est donc fausse en caractéristique~$2$.
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+Le polynôme $P$ est de degré~$3$ et n'a pas de racine dans $\mathbf F_2$ ($P(0) = P(1) = 1$) ; il est donc irréductible. Ce n'est pas un carré dans $\mathbf F_2[x]$, son degré étant impair. Le polynôme $y^2 - P$, unitaire en $y$, est alors irréductible sur $\mathbf F_2[x]$ : une racine $r$ dans le corps $\mathbf F_2(x)$ serait entière sur l'anneau factoriel, donc intégralement clos, $\mathbf F_2[x]$, donc dans $\mathbf F_2[x]$, et $r^2 = P$ serait un carré. Comme $\mathbf F_2[x, y]$ est factoriel, $y^2 - P$ est premier, et $A$ est intègre.
+
+En caractéristique~$2$, $(y + 1)^2 = y^2 + 1 = x^3 + x = x(x + 1)^2$. Dans le corps des fractions de $A$, $x + 1$ n'est pas nul, car sa valeur au point $(0, 1)$ de la courbe vaut~$1$. La fraction $t = (y + 1)/(x + 1)$ vérifie donc $t^2 = x$ : elle est racine du polynôme unitaire $T^2 - x$, et entière sur $A$. Il reste à voir que $x + 1$ ne divise pas $y + 1$ dans $A$. On utilise l'anneau des nombres duaux $\mathbf F_2[\varepsilon]$, $\varepsilon^2 = 0$, et l'homomorphisme $\psi : A \to \mathbf F_2[\varepsilon]$ qui envoie $x$ sur $1$ et $y$ sur $1 + \varepsilon$ ; il est bien défini, car $(1 + \varepsilon)^2 = 1 + 2\varepsilon + \varepsilon^2 = 1 = P(1)$. C'est le point singulier $(1, 1)$, muni d'un vecteur tangent vertical. Alors $\psi(x + 1) = 0$ et $\psi(y + 1) = \varepsilon \neq 0$ ; si $y + 1 = s(x + 1)$, on aurait $\varepsilon = \psi(s) \cdot 0 = 0$. Donc $t \notin A$.
+\end{proof}
+
+\emph{Vérification en Lean.} Lean vérifie le contre-exemple dans \href{\leanblobmain/Redaction197.lean}{\texttt{Redaction197.\allowbreak{}lean}}, où l'anneau $A$ est construit comme $\mathbf F_2[x][y]/(y^2 - P)$ (\texttt{AdjoinRoot} de mathlib). L'irréductibilité de $P$ est \texttt{P\_irreducible}, celle de $y^2 - P$ est \texttt{f\_irreducible}, par le critère de mathlib \texttt{Monic.\allowbreak{}irreducible\_iff\_irreducible\_map\_fraction\_map}, et l'intégrité de $A$ est l'instance \texttt{isDomain}. L'identité $(y + 1)^2 = x(x + 1)^2$ est \texttt{key} ; l'homomorphisme vers les nombres duaux est \texttt{ψ}, et la non-divisibilité \texttt{not\_dvd}. La fraction $t$ est entière (\texttt{isIntegral\_t}) et ne vient pas de $A$ (\texttt{t\_not\_mem}) ; d'où \texttt{not\_isIntegrallyClosed}, et l'énoncé final \texttt{not\_page39}, qui réunit l'irréductibilité de $P$, l'intégrité de $A$ et l'échec de la normalité.
+
+\emph{L'énoncé juste.} Hors de la caractéristique~$2$, l'assertion de la page est juste, et vaut plus généralement pour $P$ sans facteur carré.
+
+\begin{encadre}
+\begin{theoreme*}[Hartshorne, \emph{Algebraic Geometry}, II, exercice~6.4]
+Soient $k$ un corps de caractéristique différente de~$2$ et $P \in k[x]$ un polynôme non constant sans facteur carré. Alors l'anneau $k[x, y]/(y^2 - P(x))$ est intégralement clos.
+\end{theoreme*}
+\end{encadre}
+
+\begin{demopage}[esquisse de l'édition]
+Le corps des fractions est $k(x)(y)$, de base $1, y$ sur $k(x)$. Un élément $u = a + by$, $a, b \in k(x)$, a pour trace $2a$ et pour norme $a^2 - b^2 P$ ; il est entier sur $k[x]$ si et seulement si ces deux nombres sont dans $k[x]$. Comme $2$ est inversible, $a \in k[x]$, puis $b^2 P \in k[x]$, et $P$ sans facteur carré force $b \in k[x]$. La clôture intégrale de $k[x]$ dans $k(x)(y)$ est donc $k[x] \oplus k[x]\,y = A$.
+\end{demopage}
+
+\noindent L'esquisse montre où sert l'hypothèse : en caractéristique~$2$, la trace $2a$ est nulle et ne contraint plus $a$. Dans l'exemple, $t = (y + 1)/(x + 1) = 1/(x+1) + y/(x+1)$ a pour trace $0$ et pour norme $(1 + P)/(x + 1)^2 = x$, toutes deux polynomiales, sans que ses coordonnées le soient.
+
+Ne sont pas démontrés ici : l'énoncé juste en caractéristique différente de~$2$ ; l'équivalence entre normalité et absence de point singulier pour une courbe, qui ne sert qu'à l'intuition ; la description de la normalisation de la courbe de l'exemple.
+
+\litterature{l'énoncé juste est un exercice de manuel (Hartshorne, \emph{Algebraic Geometry}, chapitre~II, exercice~6.4 \cite{hartshorne1977}), qui suppose explicitement la caractéristique différente de~$2$. Le contre-exemple est élémentaire et l'édition ne le donne pas pour nouveau. Ce n'est pas une piste.}

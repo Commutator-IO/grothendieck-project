@@ -84,7 +84,7 @@
 \maketitle
 
 \begin{abstract}
-\noindent Les archives Bourbaki conservent les rédactions, projets de chapitres que les membres du groupe se faisaient circuler et discutaient en congrès. Ce document lit des énoncés précis dans quinze de ces rédactions, de 1950 à 1974, en analyse fonctionnelle, topologie, théorie des ensembles, algèbre, théorie des catégories et algèbre homologique, et les démontre. Chaque démonstration suit une preuve vérifiée dans l'assistant de preuve Lean~4 \cite{lean4}, avec sa bibliothèque mathlib \cite{mathlib2020}, et elle est rédigée pour être lue sans Lean. Pour chaque énoncé, le document dit d'où il vient, ce qu'il veut dire, comment on le démontre, ce qui n'est pas formalisé et ce que l'on sait de sa présence dans la littérature. Plusieurs énoncés tapés sont faux, et des contre-exemples le montrent.
+\noindent Les archives Bourbaki conservent les rédactions, projets de chapitres que les membres du groupe se faisaient circuler et discutaient en congrès. Ce document lit des énoncés précis dans seize de ces rédactions, de 1950 à 1974, en analyse fonctionnelle, topologie, théorie des ensembles, algèbre, géométrie algébrique, théorie des catégories et algèbre homologique, et les démontre. Chaque démonstration suit une preuve vérifiée dans l'assistant de preuve Lean~4 \cite{lean4}, avec sa bibliothèque mathlib \cite{mathlib2020}, et elle est rédigée pour être lue sans Lean. Pour chaque énoncé, le document dit d'où il vient, ce qu'il veut dire, comment on le démontre, ce qui n'est pas formalisé et ce que l'on sait de sa présence dans la littérature. Plusieurs énoncés tapés sont faux, et des contre-exemples le montrent.
 \end{abstract}
 
 \tableofcontents
@@ -95,7 +95,7 @@
 
 \emph{La règle sur les transcriptions.} Les rédactions lues ici ont été transcrites en \LaTeX{} pour ce travail. Ces transcriptions restent privées : elles ne sont ni publiées ni versées au dépôt du projet tant que les Archives Henri Poincaré et l'Association des collaborateurs de Nicolas Bourbaki n'en ont pas donné l'accord. Le document ne cite donc presque rien du texte des rédactions, au plus quelques mots ; il énonce chaque résultat dans ses propres termes et renvoie à la page du fac-similé, que chacun peut consulter sur le site des archives.
 
-\emph{Le choix des énoncés.} Deux passes ont fourni les énoncés. La première a transcrit les documents que l'onglet Bourbaki du site du projet signale : les rédactions \redac{128}, 288, 453, 457, 582 et~596 en viennent. La seconde, plus récente, ne lit que les rédactions des livres que Bourbaki n'a pas publiés, là où des mathématiques inédites ont le plus de chances de se trouver : environ 5\,900 pages en 105 rédactions, sur la géométrie algébrique, les catégories et l'algèbre homologique, les variétés différentielles, la topologie élémentaire, la géométrie différentielle et d'autres sujets. Chaque rédaction y est parcourue à la recherche d'énoncés précis (définitions, théorèmes, contre-exemples, questions posées). Chaque énoncé fait l'objet d'une recherche bibliographique ; s'il est retrouvé dans un texte publié, la rédaction est marquée \q{retrouvée} et l'on passe. Seuls les énoncés précis qui n'ont pas été retrouvés, ou qui sont faux tels qu'ils sont tapés, sont formalisés. Les rédactions \redac{205}, 239, 321, 402, 438, 448, 461, 469 et~476 viennent de cette seconde passe. Le relevé marque deux d'entre elles, \redac{321} et~402, comme retrouvées dans la littérature ; leurs sections le disent, avec ce que la formalisation y ajoute.
+\emph{Le choix des énoncés.} Deux passes ont fourni les énoncés. La première a transcrit les documents que l'onglet Bourbaki du site du projet signale : les rédactions \redac{128}, 288, 453, 457, 582 et~596 en viennent. La seconde, plus récente, ne lit que les rédactions des livres que Bourbaki n'a pas publiés, là où des mathématiques inédites ont le plus de chances de se trouver : environ 5\,900 pages en 105 rédactions, sur la géométrie algébrique, les catégories et l'algèbre homologique, les variétés différentielles, la topologie élémentaire, la géométrie différentielle et d'autres sujets. Chaque rédaction y est parcourue à la recherche d'énoncés précis (définitions, théorèmes, contre-exemples, questions posées). Chaque énoncé fait l'objet d'une recherche bibliographique ; s'il est retrouvé dans un texte publié, la rédaction est marquée \q{retrouvée} et l'on passe. Seuls les énoncés précis qui n'ont pas été retrouvés, ou qui sont faux tels qu'ils sont tapés, sont formalisés. Les rédactions \redac{197}, 205, 239, 321, 402, 438, 448, 461, 469 et~476 viennent de cette seconde passe. Le relevé marque deux d'entre elles, \redac{321} et~402, comme retrouvées dans la littérature ; leurs sections le disent, avec ce que la formalisation y ajoute.
 
 \emph{Les garanties de Lean.} Chaque section cite en note de son titre le fichier Lean qui en contient les preuves, dans la bibliothèque \texttt{lean/Bourbaki/} du projet, un fichier par rédaction. Lean vérifie mécaniquement qu'un énoncé tient sous les hypothèses écrites. Il ne garantit pas que l'énoncé rend fidèlement la page, ni qu'il est nouveau. Quand la démonstration rédigée suit une autre voie que la rédaction, la section le dit. Une démonstration que l'on résume d'après la page sans la vérifier en Lean est marquée dans la marge (\textcolor{piste}{\ensuremath{\lozenge}}~\emph{non vérifiée en Lean}).
 
@@ -128,6 +128,7 @@ N\textsuperscript{o} & Énoncé & Verdict & Fichier Lean & \S\\
 \multicolumn{5}{@{}l}{\textit{Théorie des ensembles}}\\[1pt]
 453 & Les univers forment une chaîne & partiel & \href{\leanblobmain/Redaction453.lean}{\texttt{Redaction453}} & \ref{sec:bourbaki-453}\\
 \multicolumn{5}{@{}l}{\textit{Algèbre}}\\[1pt]
+197 & La courbe $y^2 = P(x)$ en caractéristique~$2$ & faux sur la page (contre-exemple) & \href{\leanblobmain/Redaction197.lean}{\texttt{Redaction197}} & \ref{sec:bourbaki-197}\\
 457 & Degré et nombre de points & faux sur la page (contre-exemple) ; confirmé tel que lu & \href{\leanblobmain/Redaction457.lean}{\texttt{Redaction457}} & \ref{sec:bourbaki-457}\\
 582 & Les indices de Schur sur $\mathbf R$ & faux sur la page (contre-exemple) ; partiel & \href{\leanblobmain/Redaction582.lean}{\texttt{Redaction582}} & \ref{sec:bourbaki-582}\\
 596 & Toute classe est une différence & plus général ; partiel & \href{\leanblobmain/Redaction596.lean}{\texttt{Redaction596}} & \ref{sec:bourbaki-596}\\
@@ -154,6 +155,7 @@ N\textsuperscript{o} & Énoncé & Verdict & Fichier Lean & \S\\
 \input{sections/bourbaki-453}
 
 \part{Algèbre}
+\input{sections/bourbaki-197}
 \input{sections/bourbaki-457}
 \input{sections/bourbaki-582}
 \input{sections/bourbaki-596}
@@ -166,6 +168,7 @@ Les énoncés démontrés ici sont lus sur des transcriptions des rédactions pr
 \begin{thebibliography}{99}\small
 \bibitem{bbi2001} D.~Burago, Yu.~Burago et S.~Ivanov, \emph{A Course in Metric Geometry}, Graduate Studies in Mathematics 33, American Mathematical Society, Providence, 2001 ; doi:10.1090/gsm/033.
 \bibitem{freyd1964} P.~Freyd, \emph{Abelian Categories. An Introduction to the Theory of Functors}, Harper \& Row, New York, 1964.
+\bibitem{hartshorne1977} R.~Hartshorne, \emph{Algebraic Geometry}, Graduate Texts in Mathematics 52, Springer, New York, 1977 ; doi:10.1007/978-1-4757-3849-0.
 \bibitem{johnstone2002} P.~T.~Johnstone, \emph{Sketches of an Elephant. A Topos Theory Compendium}, vol.~1, Oxford Logic Guides 43, Oxford University Press, 2002.
 \bibitem{lean4} L.~de Moura et S.~Ullrich, « The Lean~4 theorem prover and programming language », dans \emph{Automated Deduction -- CADE~28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635 ; doi:10.1007/978-3-030-79876-5\_37.
 \bibitem{mathlib2020} The mathlib Community, « The Lean mathematical library », dans \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP~2020)}, ACM, 2020, 367--381 ; doi:10.1145/3372885.3373824.
