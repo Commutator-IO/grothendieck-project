@@ -202,3 +202,134 @@ its 𝔖₄), and none of the 904 pairs of classes compared has isomorphic
 skeleta. Run `python3 three_pencil.py 9` after `run.py` (about a minute);
 the output is in `three_pencil_results.txt`. This is evidence for the
 statement in the open case, not a proof: n ≥ 10 is not enumerated.
+
+## Face-width test (Problem 14, 31 October 2026)
+
+`three_pencil_facewidth.py` tests a possible route to the three-pencil case:
+if the skeleton graph G is 3-connected and its embedding in ℝP² has large
+enough face-width, a uniqueness-of-embedding theorem would make every
+automorphism of G, labelled or not, carry facial walks to facial walks, so
+that it comes from a homeomorphism.
+
+**The theorems (as read).** Mohar, « Face-width of embedded graphs », Math.
+Slovaca 47 (1997) 35–63, read in the DML-CZ copy:
+
+* p. 37, Prop. 3.1: fw = ½ ew(Γ), where Γ is the vertex-face (radial) graph.
+* p. 40, Prop. 3.9: for a non-planar embedding, « G 3-connected and fw ≥ 3 »
+  is equivalent to the embedding being polyhedral (all facial walks are
+  cycles, and two faces meet in nothing, a vertex or an edge).
+* p. 48, §6, reporting Robertson (in Robertson–Vitray 1990): a 3-connected
+  graph embedded in a surface of genus g with fw ≥ 2g + 3 is uniquely
+  embeddable in that surface. « Unique » means that every other embedding in
+  that surface has the same facial walks. That forces every automorphism to
+  be induced by a homeomorphism. For ℝP², g = 1, so the bound is **fw ≥ 5**.
+* p. 48, Negami (1985): a 5-connected projective-planar graph other than K₆
+  that contains a subdivision of K₆ has a unique embedding in ℝP². Also
+  p. 48: some 4-connected triangulations of ℝP² are not uniquely embeddable.
+  K₆ is excluded from Negami's statement. It is 5-connected and its
+  embedding in ℝP² has fw = 3. By our own count, not read in a source, it
+  has at least 720/60 = 12 equivalence classes of embeddings: 60 is the
+  order of the map group of the hemi-icosahedron. So fw = 3 does not suffice in ℝP²,
+  even with high connectivity.
+
+Not read, for want of an open copy: Robertson–Vitray 1990; Mohar–Robertson–
+Vitray, Discrete Math. 149 (1996); Vitray 1992 and 1993; Negami 1985 and 1988;
+Mohar–Thomassen, *Graphs on Surfaces*, ch. 5.
+
+**Method.** The script reads the 132 three-pencil classes as
+`three_pencil.py` does and computes the following for each one.
+
+* *G*: points as vertices, and segments between consecutive points as edges.
+  The script checks that G is a simple graph. A pseudoline with k ≥ 3 points
+  gives k distinct edges, and two points share at most one pseudoline.
+* *κ(G)*: Menger, by unit-capacity max-flow on the vertex-split digraph over
+  all non-adjacent pairs.
+* *fw*: the double cover of the arrangement is the sphere complex of
+  covectors (cocircuits, one-zero covectors, topes), obtained by composing
+  cocircuits. A non-contractible closed curve meeting G only in vertices
+  lifts to a path from a vertex x to −x in the radial graph of the sphere. So
+  fw = min over cocircuits X of dist(X, −X)/2, and the script records a
+  witness curve.
+* *Checks.*
+  * A second computation of fw ≤ 3 or fw ≥ 4, by crossing parity: it goes
+    through all 2- and 3-point curves and their faces, and requires the same
+    parity on every pseudoline.
+  * τ ≤ fw, where τ is the least number of points meeting every
+    pseudoline. Two non-contractible curves of ℝP² intersect, so every
+    non-contractible curve meets every pseudoline.
+  * Polyhedrality agrees with (κ ≥ 3 and fw ≥ 3), as Prop. 3.9 requires.
+  * The label-respecting automorphisms equal those of `three_pencil.py`.
+* *Automorphisms*: |Aut G| of the bare graph, against the map automorphisms
+  (those that preserve the facial cycles).
+
+**Result.**
+
+| n | classes | κ | fw | τ | polyhedral | curve through the 3 corners | Aut G > map group |
+|---|---|---|---|---|---|---|---|
+| 6 | 3 | 4 (all) | 3 (all) | 3 | 3 | 2 | **3** |
+| 7 | 5 | 4 | 3 | 3 | 5 | 3 | 0 |
+| 8 | 22 | 4 | 3 | 3 | 22 | 11 | 0 |
+| 9 | 102 | 4 | 3 (76), **4 (26)** | 3 | 102 | 44 | 0 |
+
+* All 132 embeddings are polyhedral: G is 4-connected and fw ∈ {3, 4}. No
+  class reaches the fw ≥ 5 of the uniqueness theorem.
+* fw ≤ 3 fails for 26 classes at n = 9: no non-contractible curve passes
+  through three points only. In all 26, the three corners carry four
+  pseudolines each. 42 classes at n = 9 have that shape, and in the other
+  16 a curve passes through the three corners alone, so fw = 3 there. A curve through the three corners alone exists in only 60 of the
+  132 classes. Inside a triangle of the three sides, a face touches two
+  corners only if no pseudoline through the third corner crosses that
+  triangle.
+* **The route fails at n = 6.** In all three n = 6 classes, G has
+  automorphisms that come from no homeomorphism. These are 12 against 6,
+  6 against 3, and, for `III_6`, 144 against 24. For `III_6`, G = K₇ − K₃:
+  the four triple points are joined to everything, and the three diagonal
+  points are independent. So Aut G = 𝔖₄ × 𝔖₃, while the map group is 𝔖₄,
+  and G has 6 inequivalent polyhedral embeddings in ℝP². Uniqueness of the
+  embedding is false there, so no theorem can supply it. The labelled
+  automorphisms are all induced (0 failures, as in `three_pencil.py`). For
+  `III_6` the labels are what rule out the other embeddings.
+* For n = 7, 8, 9 every automorphism of the bare graph is induced. Whether
+  those graphs have other, non-isomorphic embeddings in ℝP² was not
+  computed.
+
+**Proved for every n:** τ = 3, hence fw ≥ 3, for every bigon-free
+three-pencil arrangement. The proof:
+
+1. τ = 1 would put all pseudolines through one point.
+2. Suppose τ = 2, with points p and q. If pq is a pseudoline, it carries
+   only p and q, which is a bigon.
+3. Otherwise the arrangement is a pencil P at p and a pencil Q at q. A
+   triangle (a, b, c) without a fourth line has, say, a, b in P and c in Q.
+   A line of Q other than c must pass through a corner p, a∩c or b∩c. It
+   cannot pass through p (it would be pq), nor through a∩c or b∩c (it meets
+   c only at q). So Q = {c}, and the lines of P carry only two points.
+
+Unproved: κ ≥ 3 for every n (κ ≤ 4 as soon as there is a double point), and
+any upper bound on fw for n ≥ 10.
+
+Run `python3 three_pencil_facewidth.py 9` after `run.py` (about two
+minutes). The output is in `three_pencil_facewidth_results.txt`.
+
+## The sign obstruction (`obstruction.py`)
+
+The problems paper now answers Problem 14 by an argument on chirotopes. An isomorphism of
+labelled skeleta with permutation s keeps, along each pseudoline, the cyclic order of the
+vertices up to reversal. So ψ = χ′∘s · χ is, at each pseudoline, a constant times a cut. The
+argument shows that such a ψ is a reorientation, provided every pseudoline carries three
+vertices. The steps are proved in Lean in `lean/Grothendieck/Folder80Signs.lean`.
+
+The script checks the same linear algebra over 𝔽₂ on each intersection lattice of
+`out/all_n.txt`. It computes the dimension of the sign functions that are balanced on the
+4-cycles at every pseudoline, minus the dimension of the reorientations.
+
+| n | lattices | obstruction 0 |
+|---|---|---|
+| 4 | 1 | 1 |
+| 5 | 2 | 2 |
+| 6 | 10 | 10 |
+| 7 | 61 | 61 |
+| 8 | 946 | 946 |
+| 9 | 36 193 | 36 193 |
+
+Run `python3 obstruction.py 9` after `run.py` (about three minutes).

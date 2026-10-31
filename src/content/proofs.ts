@@ -1551,4 +1551,15 @@ export const PROOFS: Proof[] = [
     lean: "lean/Grothendieck/Folder80Maps3.lean",
     theorems: ["faithful", "lift", "lift_iff", "finrank_Z1_le", "B1_le_Z1", "rot_card", "parity", "lineChain_mem", "lineChain_not_mem", "flip", "tri_bound", "triangle_iff"],
   },
+  {
+    folder: "80",
+    batch: 2,
+    page: "39–54",
+    name: "The skeleton of a bigon-free arrangement: the sign argument, three pencils included",
+    statement: "Two chirotopes of a bigon-free arrangement whose contractions agree along every pseudoline, up to a sign and a reorientation, differ by a reorientation; with the representation theorems, every isomorphism of decomposed skeleta comes from a homeomorphism.",
+    found: "Proved for any incidence structure in which two lines meet in one point, every point lies on two lines and every line carries three points, with chirotopes written as sign bits on the triples without a common point. At each line the product psi of the two chirotopes, corrected by the signs s, is a coboundary delta_j + delta_l. It vanishes on a triangle with a fourth line avoiding its vertices, since the four triples of four lines in general position then have equal values summing to zero (eq_zero_of_fourth). It vanishes on every other triangle a, b, c: a line x through b ∩ c splits it at a into a, b, x and a, x, c, which have fourth lines through a ∩ c and a ∩ b (eq_zero). Hence chi' o sigma is chi reoriented by s (reorientation_of_locallyEquivalent). Not formalised: the rank-2 representation theorem, which turns a skeleton isomorphism into the local hypothesis, and Folkman–Lawrence, which turns the reorientation into a homeomorphism.",
+    verdict: "partly proved",
+    lean: "lean/Grothendieck/Folder80Signs.lean",
+    theorems: ["basis_of_avoid", "eq_zero_of_fourth", "eq_zero", "reorientation_of_locallyEquivalent"],
+  },
 ];

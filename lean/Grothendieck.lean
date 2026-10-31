@@ -81,6 +81,7 @@ import Grothendieck.Folder80
 import Grothendieck.Folder80Maps1
 import Grothendieck.Folder80Maps2
 import Grothendieck.Folder80Maps3
+import Grothendieck.Folder80Signs
 import Grothendieck.Folder82
 import Grothendieck.Folder83
 import Grothendieck.Folder84
