@@ -49,12 +49,18 @@ vertices, edges, incidence — with the line of each edge; `SkelIso` is an isomo
   out with `e` a triangle that bounds; on opposite sides, one that does not. With
   `triangle_map`, whether they leave `e` on the same side is read on the skeleton when a fourth
   line avoids the triangle. `phi_period`: the `2ν` edge-ends at a vertex form one cycle of `φ`.
+* `between_iff`, `side_tri`, `SkelIso.side_map`, `SkelIso.corner_map`: (A1)–(A3) at vertices of
+  any multiplicity. Two edges at a vertex are adjacent iff no edge lies between them (on the side
+  of each with respect to the other); sides are read by bounding triangles (`side_tri`), so a
+  skeleton isomorphism carries corners to corners when every triangle has a fourth line.
+* `path_map_gen`, `full_of_fourth`, `full_of_fourth'`: **page 54 away from `III₆`.** If every
+  triangle of a bigon-free arrangement has a fourth line through none of its vertices
+  (`FourthLine`, transported by `SkelIso.fourth_map`), every isomorphism of decomposed skeleta
+  lifts uniquely: the skeleton functor is fully faithful there, multiple points included.
 
-**Not formalised.** Fullness for arrangements with multiple points (vertices of `ν ≥ 3`
-lines): recovering the cyclic order of the edges at such a vertex from the sides of its edges
-((A1)–(A3): two edges are adjacent iff no other line separates them), and the cases (A6) and
-`III₆` of the canonical orientation, where every other line passes through a vertex of the
-triangle. These are what remains of the page 54 theorem.
+**Not formalised.** The arrangements where some triangle has no fourth line avoiding its
+vertices: (A6) and the complete quadrangle `III₆`. These are what remains of the page 54
+theorem.
 -/
 
 namespace Grothendieck.Folder80Maps3
@@ -1889,6 +1895,363 @@ theorem side_not (hbf : BigonFree X.On) (hs : X.Straight) (d : D) {j k : ℕ}
   exact funext fun _ => (by decide : ∀ s x y c : ZMod 2, c = s + x + y + (s + (x + c) + y)) _ _ _ _
 
 end Sides
+
+/-! ### The cyclic order at a vertex: (A1)–(A3) -/
+
+section Order
+
+variable (X) in
+/-- The edge `ε` leaves the vertex of `x` strictly on the side of the flag `x` of its edge:
+it is the end of one of the `ν - 1` edge-ends after `x` and before the opposite end. -/
+def Side (x : D) (ε : X.M.Edge) : Prop :=
+  ∃ j, j + 1 < X.nu (X.M.vtx x) ∧ X.M.edge ((X.phi ^ (j + 1)) x) = ε
+
+/-- Edge-ends at a vertex are distinct along a full turn. -/
+theorem edge_pow_inj (hbf : BigonFree X.On) (x : D) {i j : ℕ} (hi : i < 2 * X.nu (X.M.vtx x))
+    (hj : j < 2 * X.nu (X.M.vtx x)) (h : X.M.edge ((X.phi ^ i) x) = X.M.edge ((X.phi ^ j) x)) :
+    i = j := by
+  rcases (at_edge hbf).1 ⟨by simp, h⟩ with h' | h'
+  · rcases lt_trichotomy i j with c | c | c
+    exacts [(pow_ne x c hj h').elim, c, (pow_ne x c hi h'.symm).elim]
+  · exact (a2_ne_pow j i x h'.symm).elim
+
+/-- `φ^i a2 = a2 φ^(2ν - i)`. -/
+theorem pow_a2 (x : D) {i : ℕ} (hi : i ≤ 2 * X.nu (X.M.vtx x)) :
+    (X.phi ^ i) (X.M.a2 x) = X.M.a2 ((X.phi ^ (2 * X.nu (X.M.vtx x) - i)) x) := by
+  have hp := phi_period (X := X) (X.M.a2 x)
+  rw [vtx_a2] at hp
+  rw [show (X.phi ^ (2 * X.nu (X.M.vtx x) - i)) x =
+      (X.phi ^ ((2 * X.nu (X.M.vtx x) - i : ℕ) : ℤ)) x by rw [zpow_natCast], a2_zpow]
+  conv_rhs => rw [← hp]
+  rw [← Equiv.Perm.mul_apply, ← zpow_natCast X.phi (2 * X.nu (X.M.vtx x)), ← _root_.zpow_add,
+    ← zpow_natCast X.phi i]
+  congr 2; omega
+
+/-- The two sides of an edge at a vertex are disjoint. -/
+theorem side_disj (hbf : BigonFree X.On) {x : D} {ε : X.M.Edge} (h1 : X.Side x ε)
+    (h2 : X.Side (X.M.a2 x) ε) : False := by
+  obtain ⟨i, hi, rfl⟩ := h1
+  obtain ⟨j, hj, h⟩ := h2
+  rw [vtx_a2] at hj
+  rw [pow_a2 x (by omega), edge_a2] at h
+  have := edge_pow_inj hbf x (by omega) (by omega) h
+  omega
+
+/-- Every edge at a vertex off the line of `x` leaves on one of the two sides of the edge of
+`x`. -/
+theorem side_cover (hs : X.Straight) (x : D) {ε : X.M.Edge}
+    (hε : X.Inc (X.M.vtx x) ε) (hl : X.lineE ε ≠ X.line x) : X.Side x ε ∨ X.Side (X.M.a2 x) ε := by
+  classical
+  obtain ⟨z, hz, rfl⟩ := hε
+  obtain ⟨k, hk⟩ := vtx_orbit hz
+  have hν : 0 < X.nu (X.M.vtx x) :=
+    Finset.card_pos.2 ⟨X.line x, Finset.mem_image.2 ⟨x, by simp, rfl⟩⟩
+  have hr : (X.phi ^ k) x = (X.phi ^ (k % (2 * X.nu (X.M.vtx x) : ℕ)).toNat) x := by
+    have h' : ((X.phi ^ ((2 * X.nu (X.M.vtx x) : ℕ) : ℤ)) ^ (k / (2 * X.nu (X.M.vtx x) : ℕ))) x =
+        x := Equiv.Perm.zpow_apply_eq_self_of_apply_eq_self (by rw [zpow_natCast]; exact phi_period x) _
+    conv_lhs => rw [← Int.emod_add_mul_ediv k (2 * X.nu (X.M.vtx x) : ℕ), zpow_add,
+      Equiv.Perm.mul_apply, zpow_mul, h']
+    rw [← zpow_natCast, Int.toNat_of_nonneg (Int.emod_nonneg _ (by omega))]
+  have hlt : (k % (2 * X.nu (X.M.vtx x) : ℕ)).toNat < 2 * X.nu (X.M.vtx x) := by
+    have := Int.emod_lt_of_pos k (by omega : (0 : ℤ) < (2 * X.nu (X.M.vtx x) : ℕ)); omega
+  generalize (k % (2 * X.nu (X.M.vtx x) : ℕ)).toNat = i at hr hlt
+  have he : X.M.edge z = X.M.edge ((X.phi ^ i) x) := by rcases hk with rfl | rfl <;> simp [hr]
+  by_cases h0 : i = 0
+  · exact (hl (by simp [he, h0])).elim
+  by_cases hν' : i = X.nu (X.M.vtx x)
+  · exact (hl (by rw [he, hν', lineE_edge]; exact hs x)).elim
+  rcases Nat.lt_or_gt_of_ne hν' with h1 | h1
+  · exact .inl ⟨i - 1, by omega, by rw [Nat.sub_add_cancel (by omega)]; exact he.symm⟩
+  · refine .inr ⟨2 * X.nu (X.M.vtx x) - i - 1, by rw [vtx_a2]; omega, ?_⟩
+    rw [show 2 * X.nu (X.M.vtx x) - i - 1 + 1 = 2 * X.nu (X.M.vtx x) - i by omega,
+      pow_a2 x (by omega), edge_a2, show 2 * X.nu (X.M.vtx x) - (2 * X.nu (X.M.vtx x) - i) = i by
+        omega, he]
+
+/-- **Adjacency from betweenness.** The `i`-th edge-end after `x` (`1 ≤ i < ν`) is the next one,
+`i = 1`, iff no edge lies on its side of the edge of `x` and, at the same time, on the side
+of the edge of `x` with respect to it. -/
+theorem between_iff (hbf : BigonFree X.On) (x : D) {i : ℕ} (hi1 : 1 ≤ i)
+    (hi : i < X.nu (X.M.vtx x)) :
+    (∃ ζ, X.Side x ζ ∧ X.Side (X.M.a2 ((X.phi ^ i) x)) ζ) ↔ 1 < i := by
+  have hp := phi_period (X := X) x
+  constructor
+  · rintro ⟨ζ, ⟨k, hk, rfl⟩, ⟨l, hl, h⟩⟩
+    simp only [vtx_a2, vtx_phi'] at hl
+    rw [pow_a2 _ (by simp only [vtx_phi']; omega), edge_a2, vtx_phi', ← Equiv.Perm.mul_apply,
+      ← pow_add] at h
+    rcases Nat.lt_or_ge i (l + 1) with c | c
+    · have := edge_pow_inj hbf x (by omega) (by omega) h
+      omega
+    · rw [show 2 * X.nu (X.M.vtx x) - (l + 1) + i = i - (l + 1) + 2 * X.nu (X.M.vtx x) by omega,
+        pow_add, Equiv.Perm.mul_apply, hp] at h
+      have := edge_pow_inj hbf x (by omega) (by omega) h
+      omega
+  · intro h1
+    refine ⟨_, ⟨0, by omega, rfl⟩, ⟨i - 2, by simp only [vtx_a2, vtx_phi']; omega, ?_⟩⟩
+    rw [pow_a2 _ (by simp only [vtx_phi']; omega), edge_a2, vtx_phi', ← Equiv.Perm.mul_apply,
+      ← pow_add, show 2 * X.nu (X.M.vtx x) - (i - 2 + 1) + i = 0 + 1 + 2 * X.nu (X.M.vtx x) by
+        omega, pow_add, Equiv.Perm.mul_apply, hp]
+
+end Order
+
+/-! ### Corners are read on the skeleton when every triangle has a fourth line -/
+
+section Corners
+
+open Matrix
+
+theorem one_lt_nu (y : D) : 1 < X.nu (X.M.vtx y) := by
+  classical
+  obtain ⟨e, he, hl⟩ := X.two y
+  exact Finset.one_lt_card.2 ⟨_, Finset.mem_image.2 ⟨y, by simp, rfl⟩, _,
+    Finset.mem_image.2 ⟨e, by simp [he], rfl⟩, Ne.symm hl⟩
+
+theorem side_line (hs : X.Straight) {x : D} {ε : X.M.Edge} (h : X.Side x ε) :
+    X.Inc (X.M.vtx x) ε ∧ X.lineE ε ≠ X.line x := by
+  obtain ⟨j, hj, rfl⟩ := h
+  exact ⟨⟨_, vtx_phi' _ _, rfl⟩, fun h => line_inj hs x (Nat.succ_pos j) hj (by simpa using h.symm)⟩
+
+/-- The edge after `x` leaves on the side of `x`. -/
+theorem side_one (x : D) : X.Side x (X.M.edge (X.M.a1 x)) :=
+  ⟨0, one_lt_nu x, by simp [phi_apply]⟩
+
+/-- Seen from the `i`-th edge-end after `x`, the edge of `x` is on the side of `a2`. -/
+theorem side_back (x : D) {i : ℕ} (hi1 : 1 ≤ i) (hi : i < X.nu (X.M.vtx x)) :
+    X.Side (X.M.a2 ((X.phi ^ i) x)) (X.M.edge x) := by
+  refine ⟨i - 1, by simp only [vtx_a2, vtx_phi']; omega, ?_⟩
+  rw [Nat.sub_add_cancel hi1, pow_a2 _ (by simp only [vtx_phi']; omega), edge_a2, vtx_phi',
+    ← Equiv.Perm.mul_apply, ← pow_add, Nat.sub_add_cancel (by omega), phi_period]
+
+open Classical in
+variable (X) in
+/-- The triangle cut out by `e` (from `v` to `w`) and the edges `ζ` at `v` and `η` at `w`
+bounds: segments of their lines starting with them meet at `p`, and with `e` they bound. -/
+def Tri (v w : X.M.Vtx) (e ζ η : X.M.Edge) : Prop :=
+  ∃ (p : X.M.Vtx) (P Q : X.M.Edge → ZMod 2), (∀ e', P e' ≠ 0 → X.lineE e' = X.lineE ζ) ∧
+    (∀ e', Q e' ≠ 0 → X.lineE e' = X.lineE η) ∧ X.incM *ᵥ P = Pi.single v 1 + Pi.single p 1 ∧
+    X.incM *ᵥ Q = Pi.single w 1 + Pi.single p 1 ∧ P ζ = 1 ∧ Q η = 1 ∧
+    X.On p (X.lineE ζ) ∧ X.On p (X.lineE η) ∧ Pi.single e 1 + P + Q ∈ X.B1
+
+/-- **(A4) as an equivalence.** For `η` leaving the far end of the edge of `x` on the side of
+`a0 x`, an edge `ζ` at the vertex of `x` leaves on the side of `x` iff their triangle bounds. -/
+theorem side_tri (hbf : BigonFree X.On) (hs : X.Straight) (x : D) {ζ η : X.M.Edge}
+    (hζ : X.Side x ζ ∨ X.Side (X.M.a2 x) ζ) (hη : X.Side (X.M.a0 x) η) :
+    X.Tri (X.M.vtx x) (X.M.vtx (X.M.a0 x)) (X.M.edge x) ζ η ↔ X.Side x ζ := by
+  have hvw := noLoop hbf x
+  obtain ⟨hηi, hηl⟩ := side_line hs hη
+  rw [X.line_a0] at hηl
+  have wη : X.On (X.M.vtx (X.M.a0 x)) (X.lineE η) := on_of_inc hηi
+  have wm : X.On (X.M.vtx (X.M.a0 x)) (X.line x) := ⟨_, rfl, X.line_a0 x⟩
+  have vm : X.On (X.M.vtx x) (X.line x) := ⟨x, rfl, rfl⟩
+  have nvη : ¬X.On (X.M.vtx x) (X.lineE η) := fun h => hvw (meet_eq hηl wη wm h vm)
+  obtain ⟨k, hk, rfl⟩ := hη
+  constructor
+  · rintro ⟨p, P, Q, sP, sQ, bP, bQ, hP, hQ, -, pη, hT⟩
+    refine hζ.resolve_right fun ⟨j, hj, hjz⟩ => ?_
+    subst hjz
+    refine side_not hbf hs (X.M.a2 x) (p := p) hj (by rw [X.M.a0_a2, vtx_a2]; exact hk)
+      (fun h => nvη (by rw [h, vtx_a2] at pη; exact pη)) sP (by simpa [X.M.a2_a2] using sQ)
+      (by rw [vtx_a2]; exact bP) (by rw [X.M.a0_a2, vtx_a2]; exact bQ) hP
+      (by simpa [X.M.a2_a2] using hQ) ?_
+    rwa [edge_a2]
+  · rintro ⟨j, hj, rfl⟩
+    have vζ : X.On (X.M.vtx x) (X.line ((X.phi ^ (j + 1)) x)) := ⟨_, vtx_phi' _ _, rfl⟩
+    have hab : X.line ((X.phi ^ (j + 1)) x) ≠ X.line ((X.phi ^ (k + 1)) (X.M.a0 x)) := fun h =>
+      nvη (by rw [lineE_edge, ← h]; exact vζ)
+    obtain ⟨p, ⟨pa, pb⟩, -⟩ := X.meet _ _ hab
+    obtain ⟨P, sP, bP, hP⟩ := seg_start hbf hs vζ pa (e1 := X.M.edge ((X.phi ^ (j + 1)) x)) rfl
+    obtain ⟨Q, sQ, bQ, hQ⟩ := seg_start hbf hs wη pb
+      (e1 := X.M.edge ((X.phi ^ (k + 1)) (X.M.a0 x))) rfl
+    exact ⟨p, P, Q, sP, sQ, bP, bQ, hP, hQ, pa, pb, side_bounds hbf hs x hj hk sP sQ bP bQ hP hQ⟩
+
+variable (X) in
+/-- Every triangle has a fourth line through none of its vertices: no `III₆`-type
+obstruction. -/
+def FourthLine : Prop := ∀ (a b c : L) (u v w : X.M.Vtx), X.On u a → X.On u b → X.On v b →
+  X.On v c → X.On w c → X.On w a → ¬X.On u c → ∃ Δ, ¬X.On u Δ ∧ ¬X.On v Δ ∧ ¬X.On w Δ
+
+variable {D' L' : Type*} [Fintype D'] {X' : PseudolineMap D' L'}
+
+open Classical in
+/-- Skeleton isomorphisms preserve bounding triangles `Tri` when fourth lines exist. -/
+theorem SkelIso.tri_map (hbf : BigonFree X.On) (hbf' : BigonFree X'.On) (hs : X.Straight)
+    (hs' : X'.Straight) (hF : X.FourthLine) (f : SkelIso X X') {v w : X.M.Vtx}
+    {e ζ η : X.M.Edge} (hv : X.Inc v e) (hw : X.Inc w e) (hvw : v ≠ w) (hζ : X.Inc v ζ)
+    (hη : X.Inc w η) (hζl : X.lineE ζ ≠ X.lineE e) (hηl : X.lineE η ≠ X.lineE e)
+    (h : X.Tri v w e ζ η) : X'.Tri (f.fV v) (f.fV w) (f.fE e) (f.fE ζ) (f.fE η) := by
+  obtain ⟨p, P, Q, sP, sQ, bP, bQ, hP, hQ, pa, pb, hT⟩ := h
+  have vm := on_of_inc hv
+  have wm := on_of_inc hw
+  have va := on_of_inc hζ
+  have wb := on_of_inc hη
+  have nvb : ¬X.On v (X.lineE η) := fun h => hvw (meet_eq hηl h vm wb wm)
+  obtain ⟨Δ, n1, n2, n3⟩ := hF _ _ _ v p w vm va pa pb wb wm nvb
+  have ss : ∀ ε, (Pi.single e 1 : X.M.Edge → ZMod 2) ε ≠ 0 → X.lineE ε = X.lineE e :=
+    fun ε h => by
+      by_cases hε : ε = e
+      · rw [hε]
+      · exact absurd (Pi.single_eq_of_ne hε _) h
+  have be : X.incM *ᵥ (Pi.single e 1 : X.M.Edge → ZMod 2) = Pi.single v 1 + Pi.single w 1 := by
+    obtain ⟨d, rfl, rfl⟩ := hv
+    rcases (inc_iff d w).1 hw with h | h
+    · exact (hvw h.symm).elim
+    · rw [bd_single hbf d, h]
+  obtain ⟨_, hem⟩ := meets_of (fun h => n1 (h ▸ vm) : X.lineE e ≠ Δ)
+  obtain ⟨_, hea⟩ := meets_of (fun h => n1 (h ▸ va) : X.lineE ζ ≠ Δ)
+  obtain ⟨_, heb⟩ := meets_of (fun h => n3 (h ▸ wb) : X.lineE η ≠ Δ)
+  have hT' := (f.triangle_map hbf hbf' hs hs' ⟨vm, va⟩ ⟨pa, pb⟩ ⟨wb, wm⟩ hζl.symm nvb ⟨n1, n2, n3⟩
+    ss sP sQ be bP (by rw [bQ, add_comm]) hem hea heb).1 hT
+  rw [SkelIso.mapC_single] at hT'
+  refine ⟨f.fV p, f.mapC P, f.mapC Q, ?_, ?_, f.bd_map bP, f.bd_map bQ, by simpa using hP,
+    by simpa using hQ, ?_, ?_, hT'⟩
+  · rw [f.line]; exact f.supp_map sP
+  · rw [f.line]; exact f.supp_map sQ
+  · rw [f.line]; exact f.on_map.1 pa
+  · rw [f.line]; exact f.on_map.1 pb
+
+open Classical in
+/-- **Sides are read on the skeleton.** If a skeleton isomorphism carries one edge `α` on the
+side of `x` to the side of `x'`, it carries every edge on the side of `x` to the side of
+`x'`. -/
+theorem SkelIso.side_map (hbf : BigonFree X.On) (hbf' : BigonFree X'.On) (hs : X.Straight)
+    (hs' : X'.Straight) (hF : X.FourthLine) (hF' : X'.FourthLine) (f : SkelIso X X') {x : D}
+    {x' : D'} (hv : X'.M.vtx x' = f.fV (X.M.vtx x)) (he : X'.M.edge x' = f.fE (X.M.edge x))
+    {α : X.M.Edge} (hα : X.Side x α) (hα' : X'.Side x' (f.fE α)) {ζ : X.M.Edge}
+    (hζ' : X'.Inc (X'.M.vtx x') (f.fE ζ)) (hζl' : X'.lineE (f.fE ζ) ≠ X'.line x') :
+    X.Side x ζ ↔ X'.Side x' (f.fE ζ) := by
+  have hvw := noLoop hbf x
+  have hw' : X'.M.vtx (X'.M.a0 x') = f.fV (X.M.vtx (X.M.a0 x)) := by
+    have := (f.inc _ _).1 (⟨_, rfl, edge_a0 x⟩ : X.Inc (X.M.vtx (X.M.a0 x)) (X.M.edge x))
+    rw [← he, inc_iff] at this
+    exact (this.resolve_left fun h => hvw (f.fV.injective (h.trans hv))).symm
+  have l' : X'.line x' = f.fL (X.line x) := by rw [← lineE_edge, he, f.line]; rfl
+  have hη := side_one (X := X) (X.M.a0 x)
+  obtain ⟨hηi, hηl⟩ := side_line hs hη
+  rw [X.line_a0] at hηl
+  have fwd : ∀ {ε}, X.Inc (X.M.vtx x) ε → X.lineE ε ≠ X.line x →
+      (X.Tri (X.M.vtx x) (X.M.vtx (X.M.a0 x)) (X.M.edge x) ε (X.M.edge (X.M.a1 (X.M.a0 x))) ↔
+        X'.Tri (X'.M.vtx x') (X'.M.vtx (X'.M.a0 x')) (X'.M.edge x') (f.fE ε)
+          (f.fE (X.M.edge (X.M.a1 (X.M.a0 x))))) := fun hε hεl => by
+    rw [hv, hw', he]
+    refine ⟨f.tri_map hbf hbf' hs hs' hF ⟨x, rfl, rfl⟩ ⟨_, rfl, edge_a0 x⟩ hvw.symm hε hηi hεl
+      hηl, fun h => ?_⟩
+    simpa [SkelIso.symm] using f.symm.tri_map hbf' hbf hs' hs hF' ((f.inc _ _).1 ⟨x, rfl, rfl⟩)
+      ((f.inc _ _).1 ⟨_, rfl, edge_a0 x⟩) (f.fV.injective.ne hvw.symm) ((f.inc _ _).1 hε)
+      ((f.inc _ _).1 hηi) (by rw [f.line, f.line]; exact f.fL.injective.ne hεl)
+      (by rw [f.line, f.line]; exact f.fL.injective.ne hηl) h
+  have hα0 := side_line hs hα
+  have hη' : X'.Side (X'.M.a0 x') (f.fE (X.M.edge (X.M.a1 (X.M.a0 x)))) := by
+    have hi : X'.Inc (X'.M.vtx (X'.M.a0 x')) (f.fE (X.M.edge (X.M.a1 (X.M.a0 x)))) := by
+      rw [hw']; exact (f.inc _ _).1 hηi
+    have hl : X'.lineE (f.fE (X.M.edge (X.M.a1 (X.M.a0 x)))) ≠ X'.line (X'.M.a0 x') := by
+      rw [f.line, X'.line_a0, l']; exact f.fL.injective.ne hηl
+    refine (side_cover hs' _ hi hl).resolve_right fun h => ?_
+    have t := (fwd hα0.1 hα0.2).1 ((side_tri hbf hs x (.inl hα) hη).2 hα)
+    have := (side_tri hbf' hs' (X'.M.a2 x') (ζ := f.fE α)
+      (η := f.fE (X.M.edge (X.M.a1 (X.M.a0 x)))) (.inr (by rwa [X'.M.a2_a2]))
+      (by rwa [X'.M.a0_a2])).1 (by simpa [X'.M.a0_a2] using t)
+    exact side_disj hbf' hα' this
+  have hζ : X.Inc (X.M.vtx x) ζ := (f.inc _ _).2 (hv ▸ hζ')
+  have hζl : X.lineE ζ ≠ X.line x := fun h => hζl' (by rw [f.line, h, l'])
+  rw [← side_tri hbf hs x (side_cover hs x hζ hζl) hη, fwd hζ hζl,
+    side_tri hbf' hs' x' (side_cover hs' x' hζ' hζl') hη']
+
+/-- **Corners are read on the skeleton** ((A1)–(A3)): a skeleton isomorphism carries the edge
+after a flag `x` (the corner at its vertex) to the edge after one of the two flags of the image
+edge at the image vertex. -/
+theorem SkelIso.corner_map (hbf : BigonFree X.On) (hbf' : BigonFree X'.On) (hs : X.Straight)
+    (hs' : X'.Straight) (hF : X.FourthLine) (hF' : X'.FourthLine) (f : SkelIso X X') (x : D)
+    {x0 : D'} (hv : X'.M.vtx x0 = f.fV (X.M.vtx x)) (he : X'.M.edge x0 = f.fE (X.M.edge x)) :
+    ∃ x', X'.M.vtx x' = f.fV (X.M.vtx x) ∧ X'.M.edge x' = f.fE (X.M.edge x) ∧
+      X'.M.edge (X'.M.a1 x') = f.fE (X.M.edge (X.M.a1 x)) := by
+  have hc := side_one (X := X) x
+  obtain ⟨hci, hcl⟩ := side_line hs hc
+  have l0 : X'.line x0 = f.fL (X.line x) := by rw [← lineE_edge, he, f.line]; rfl
+  obtain ⟨x', hv', he', hc'⟩ : ∃ x', X'.M.vtx x' = f.fV (X.M.vtx x) ∧
+      X'.M.edge x' = f.fE (X.M.edge x) ∧ X'.Side x' (f.fE (X.M.edge (X.M.a1 x))) := by
+    rcases side_cover hs' x0 (by rw [hv]; exact (f.inc _ _).1 hci)
+      (by rw [f.line, l0]; exact f.fL.injective.ne hcl) with h | h
+    exacts [⟨x0, hv, he, h⟩, ⟨_, by rw [vtx_a2, hv], by rw [edge_a2, he], h⟩]
+  refine ⟨x', hv', he', ?_⟩
+  obtain ⟨j, hj, hjc⟩ := hc'
+  rcases Nat.eq_zero_or_pos j with rfl | hj0
+  · rw [← hjc]; simp [phi_apply]
+  exfalso
+  obtain ⟨ζ', h1, h2⟩ := (between_iff hbf' x' (i := j + 1) (by omega) hj).2 (by omega)
+  have s1 := (f.side_map hbf hbf' hs hs' hF hF' hv' he' hc ⟨j, hj, hjc⟩ (ζ := f.fE.symm ζ')
+    (by simpa using (side_line hs' h1).1) (by simpa using (side_line hs' h1).2)).2
+    (by simpa using h1)
+  have s2 := (f.side_map hbf hbf' hs hs' hF hF' (x := X.M.a2 (X.phi x))
+    (x' := X'.M.a2 ((X'.phi ^ (j + 1)) x')) (by simp [hv']) (by
+      rw [edge_a2, edge_a2, hjc]; simp [phi_apply]) (α := X.M.edge x)
+    (by simpa using side_back x le_rfl (one_lt_nu x))
+    (by rw [← he']; exact side_back x' (by omega) hj) (ζ := f.fE.symm ζ')
+    (by simpa using (side_line hs' h2).1) (by simpa using (side_line hs' h2).2)).2
+    (by simpa using h2)
+  exact absurd ((between_iff hbf x le_rfl (one_lt_nu x)).1 ⟨_, s1, by simpa using s2⟩)
+    (lt_irrefl 1)
+
+/-- **A skeleton isomorphism carries face paths to face paths** when every triangle has a fourth
+line avoiding its vertices, at vertices of any multiplicity. -/
+theorem path_map_gen (hbf : BigonFree X.On) (hbf' : BigonFree X'.On) (hs : X.Straight)
+    (hs' : X'.Straight) (hF : X.FourthLine) (hF' : X'.FourthLine) (f : SkelIso X X')
+    {e1 e e2 : X.M.Edge} (h : X.Path3 e1 e e2) : X'.Path3 (f.fE e1) (f.fE e) (f.fE e2) := by
+  obtain ⟨d, rfl, rfl, rfl⟩ := h
+  have hvw := noLoop hbf d
+  obtain ⟨d0, hd0v, hd0e⟩ := (f.inc _ _).1 (⟨d, rfl, rfl⟩ : X.Inc (X.M.vtx d) (X.M.edge d))
+  obtain ⟨x', hv', he', h1'⟩ := f.corner_map hbf hbf' hs hs' hF hF' d hd0v hd0e
+  have hw' : X'.M.vtx (X'.M.a0 x') = f.fV (X.M.vtx (X.M.a0 d)) := by
+    have := (f.inc _ _).1 (⟨_, rfl, edge_a0 d⟩ : X.Inc (X.M.vtx (X.M.a0 d)) (X.M.edge d))
+    rw [← he', inc_iff] at this
+    exact (this.resolve_left fun h => hvw (f.fV.injective (h.trans hv'))).symm
+  obtain ⟨z', hzv, hze, hz1⟩ := f.corner_map hbf hbf' hs hs' hF hF' (X.M.a0 d) hw'
+    (by simp [he'])
+  rcases (at_edge hbf').1 ⟨hzv.trans hw'.symm, by simp [hze, he']⟩ with rfl | rfl
+  · exact ⟨x', h1', he', hz1⟩
+  exfalso
+  have t := f.tri_map hbf hbf' hs hs' hF ⟨d, rfl, rfl⟩ ⟨_, rfl, edge_a0 d⟩ hvw.symm
+    (side_line hs (side_one d)).1 (side_line hs (side_one (X.M.a0 d))).1
+    (side_line hs (side_one d)).2
+    (by have := (side_line hs (side_one (X.M.a0 d))).2; rwa [X.line_a0] at this)
+    ((side_tri hbf hs d (.inl (side_one d)) (side_one _)).2 (side_one d))
+  have := (side_tri hbf' hs' (X'.M.a2 x') (ζ := f.fE (X.M.edge (X.M.a1 d)))
+    (η := f.fE (X.M.edge (X.M.a1 (X.M.a0 d)))) (.inr (by rw [X'.M.a2_a2, ← h1']; exact side_one x'))
+    (by rw [X'.M.a0_a2, ← hz1]; exact side_one _)).1 (by simpa [X'.M.a0_a2, hv', hw', he'] using t)
+  exact side_disj hbf' (by rw [← h1']; exact side_one x') this
+
+/-- **Full faithfulness without simplicity** (page 54, away from `III₆`). If every triangle of
+both arrangements has a fourth line avoiding its vertices, every isomorphism of decomposed
+skeleta comes from a unique isomorphism of the arrangements. -/
+theorem full_of_fourth (hbf : BigonFree X.On) (hbf' : BigonFree X'.On) (hs : X.Straight)
+    (hs' : X'.Straight) (hF : X.FourthLine) (hF' : X'.FourthLine) (f : SkelIso X X') :
+    ∃ g : D ≃ D', (∀ d, g (X.M.a0 d) = X'.M.a0 (g d)) ∧ (∀ d, g (X.M.a1 d) = X'.M.a1 (g d)) ∧
+      (∀ d, g (X.M.a2 d) = X'.M.a2 (g d)) ∧ (∀ d, X'.M.vtx (g d) = f.fV (X.M.vtx d)) ∧
+      ∀ d, X'.M.edge (g d) = f.fE (X.M.edge d) :=
+  (lift_iff hbf hbf' hs hs' f).2 fun _ _ _ => ⟨path_map_gen hbf hbf' hs hs' hF hF' f, fun h => by
+    simpa [SkelIso.symm] using path_map_gen hbf' hbf hs' hs hF' hF f.symm h⟩
+
+omit [Fintype D] [Fintype D'] in
+/-- Having fourth lines is read on the skeleton. -/
+theorem SkelIso.fourth_map (f : SkelIso X X') (hF : X.FourthLine) : X'.FourthLine := by
+  intro a b c u v w h1 h2 h3 h4 h5 h6 h7
+  have o : ∀ {u l}, X'.On u l → X.On (f.fV.symm u) (f.fL.symm l) := fun h => by
+    rw [f.on_map]; simpa using h
+  obtain ⟨Δ, n1, n2, n3⟩ := hF _ _ _ _ _ _ (o h1) (o h2) (o h3) (o h4) (o h5) (o h6)
+    fun h => h7 (by simpa using f.on_map.1 h)
+  exact ⟨f.fL Δ, fun h => n1 (by simpa using o h), fun h => n2 (by simpa using o h),
+    fun h => n3 (by simpa using o h)⟩
+
+/-- **Full faithfulness away from `III₆`.** If every triangle of a bigon-free arrangement has
+a fourth line avoiding its vertices, every isomorphism of its decomposed skeleton with that of
+another bigon-free arrangement comes from a unique isomorphism of the arrangements. -/
+theorem full_of_fourth' (hbf : BigonFree X.On) (hbf' : BigonFree X'.On) (hs : X.Straight)
+    (hs' : X'.Straight) (hF : X.FourthLine) (f : SkelIso X X') :
+    ∃ g : D ≃ D', (∀ d, g (X.M.a0 d) = X'.M.a0 (g d)) ∧ (∀ d, g (X.M.a1 d) = X'.M.a1 (g d)) ∧
+      (∀ d, g (X.M.a2 d) = X'.M.a2 (g d)) ∧ (∀ d, X'.M.vtx (g d) = f.fV (X.M.vtx d)) ∧
+      ∀ d, X'.M.edge (g d) = f.fE (X.M.edge d) :=
+  full_of_fourth hbf hbf' hs hs' hF (f.fourth_map hF) f
+
+end Corners
 
 end PseudolineMap
 
