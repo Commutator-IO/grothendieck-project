@@ -118,7 +118,9 @@ particular:
   `\uncertain{}` for a reading offered;
 - what he struck out stays: `\struck{}`; but a passage he crossed out
   heavily, so dark that the words underneath cannot be made out without
-  guessing, is not worth a precise reading (Michel, 2026-10-31): write
+  guessing, is not worth a precise reading (Michel, 2026-10-31). His notebooks are
+  clean, and he blacked out his mistakes on purpose so that they would no longer
+  be read; the erasure is his decision, which the transcription respects: write
   `\struck{\ill{}}` with a short `\note{}` saying how much is crossed out
   (« trois lignes biffées, illisibles »), and do not spend time on it.
   Doubtful words inside a struck passage are never put on the review tab;
