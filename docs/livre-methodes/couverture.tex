@@ -7,6 +7,25 @@
   \thispagestyle{empty}
   \begin{tikzpicture}[remember picture, overlay]
     \fill[toncouv] (current page.south west) rectangle (current page.north east);
+    % des formules en filigrane
+    \begin{scope}[every node/.style={text=toncouvencre, opacity=0.32, inner sep=0pt}]
+      \node[font=\Large, rotate=-4] at ($(current page.north west)+(4.6cm,-2.6cm)$)
+        {$\displaystyle\sum_{n\geq 1}\frac{1}{n^2}=\frac{\pi^2}{6}$};
+      \node[font=\large] at ($(current page.north west)+(9.6cm,-3.4cm)$)
+        {$e^{i\pi}+1=0$};
+      \node[font=\Large, rotate=3] at ($(current page.north west)+(5.2cm,-10.2cm)$)
+        {$\displaystyle\int_{-\infty}^{+\infty} e^{-x^2}\,dx=\sqrt{\pi}$};
+      \node[font=\ttfamily\small] at ($(current page.north west)+(6.4cm,-12.4cm)$)
+        {theorem two\_mul (n : ℕ) : 2 * n = n + n := by omega};
+      \node[font=\large, rotate=-3] at ($(current page.north west)+(4.4cm,-14.6cm)$)
+        {$\displaystyle 0\to A\to B\to C\to 0$};
+      \node[font=\Large] at ($(current page.north west)+(9.4cm,-16.4cm)$)
+        {$\displaystyle\zeta(s)=\prod_{p}\frac{1}{1-p^{-s}}$};
+      \node[font=\large, rotate=4] at ($(current page.north west)+(4.8cm,-18.4cm)$)
+        {$\chi(S^2)=V-E+F=2$};
+      \node[font=\ttfamily\small] at ($(current page.north west)+(6.0cm,-8.2cm)$)
+        {\#print axioms -- propext, Quot.sound};
+    \end{scope}
     % le grand mot, couché, en encre sombre
     \node[rotate=90, anchor=south, inner sep=0pt, text=toncouvencre,
           font=\firathin\fontsize{118}{118}\selectfont]
