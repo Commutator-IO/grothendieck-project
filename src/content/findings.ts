@@ -9286,4 +9286,80 @@ export const FINDINGS: Finding[] = [
 // 111: no entry. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (% Pass header of 111.modern.tex, 2026-10-03), from its departures and footnote pool; no disagreement. The folder is a photocopy of the « Tapis de Quillen » typescript of September 1968, whose candidates are already entered under 162-5 (162-5-bordism-correspondences-universal and the codicological rows on the photocopy and the Karoubi note); the Picard-category identification of p. 7 is Deligne's (SGA 4 XVIII 1.4), and the counterexamples of pp. 3, 4, 8 and 16 are the edition's. Nothing new qualifies.
 // 122: no entry. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (% Pass header of 122.modern.tex, 2026-10-03); no disagreement with the reading. Every statement the folder establishes is a match, already named in the reading's footnotes and cited from memory, not re-read in this pass. Manifolds with boundary, collar, Poincaré–Lefschetz duality, the sequences of (W, P), (W, Q), (W, R) and Mayer–Vietoris with their pairing by duality (pp. 2–10): textbook; compactness and a self-injective Λ are the edition's, and the Thom-isomorphism degree on p. 6 is the edition's correction. The open-book model and its dictionary with the Milnor fibre over the punctured disc (pp. 12–16): Milnor, Singular points of complex hypersurfaces (1968), the name open book Winkelnkemper (1973); posed without proof, and the count « 40, en fait 80 » breaks off on « mais ». Triangles (a)–(e), the duality map u (the intersection form of the Milnor fibre) and their self-transposition (pp. 19–25): Poincaré–Lefschetz and Verdier duality; the class of u in H^{2n}(π, K⊗K), the shift of RΓ^π against duals and the pairing (d)↔(e) are the edition's, the page's sign is left « ? ». Cohomology-sphere criterion via the Gysin residue (pp. 27, 33): elementary from the Gysin sequence, the closed-connected hypothesis supplied by the edition. Local Lefschetz, H^i(M) = 0 for i > n and the middle-degree six-term sequence around u (pp. 27–31): SGA 2, Milnor 1968 (link (n−2)-connected, Milnor fibre a bouquet of n-spheres), Andreotti–Frankel, Artin's affine Lefschetz (SGA 4 XIV); the page's bound and its « surj » were repaired by the edition, and the page stops before the ker/coker-of-the-intersection-form statement the reading footnotes as Milnor's. Page 33's « H^i(V_s) = 0 si i ≠ 0, n−1, n » is false for the link in degree 2n−1 as read and is a doubt in the reading. Page 34 (finiteness conditions on a-adic ind-systems not stable under kernels under AB5) rests on \ill{} and \uncertain{} words and its example is struck through and stops on « Q = »: not a checkable claim. No codicological entry: nothing was checked against the facsimile; no literature searched in this pass.
 // 33: no entry. Pass: Opus 5.5 (claude-opus-5-5) on an Opus 5.5 reading (% Pass header of 33.modern.tex, 2026-10-04); no disagreement with the reading. The folder is the working draft of the 1965 étale formalism for SGA 5 (trace, specialisation, Verdier duality, Gysin, Künneth, Lefschetz terms), and every statement it establishes is a match named in the reading's footnotes and cited from memory, not re-read in this pass: SGA 4 XVII–XVIII and SGA 5 for the formalism, Deligne « Théorèmes de finitude » (SGA 4½) for the cases the page reaches only by resolution, Gabber's absolute purity (Fujiwara) for pp. 9–11, Fujiwara and Varshavsky for the local terms of p. 179. What remains is the edition's repair (pp. 9, 17, 19, 33, 35, 47, 49, 55, 65, 73, 79, 89, 93, 111, 115, 145–147, 159) or announced and never established (p. 45 global duality, pp. 57–59, 69, 87, §§ 27–29), and p. 171 is false as read over a non-separably-closed field; none of it qualifies.
+// IHÉS, Fonds Grothendieck–Illusie, SGA 7 notes (FG_IL_5_SGA7_3, FG_IL_5_SGA7_4). Pass: Opus 5.5 (claude-opus-5-5), 2026-10-31, on first-pass transcriptions (transcripts-illusie/, local) with no modernised reading; drafts in outreach/findings-sga7-2026-10-31.md.
+  {
+    id: 'FG_IL_5_SGA7_3-wild-inertia-nearby-cycles',
+    cote: 'FG_IL_5_SGA7_3',
+    pages: '45 (with 14–15 for the conditions of 3.2, 43 for 6.1)',
+    kind: 'mathematical',
+    claim:
+      'The question asked in 6.4 has an affirmative answer in print: for X regular of finite type over a strictly local trait, with X − U a divisor with normal crossings whose vertical components are smooth with multiplicities prime to p, the wild inertia P acts trivially on the nearby-cycle sheaves Ψ^q_ν, hence on H^i(U_η̄, Λ_ν) when X is proper; this is Rapoport–Zink 1982, Satz 2.23, when U = X_η, and Nakayama 1998 (as given in Illusie, Astérisque 279, Th. 8.3, (8.4.2) and Cor. 8.4.3) for log smooth pairs, which covers horizontal components.',
+    basis:
+      'View 45 asks, under the conditions of 3.2 (view 14: X regular, X − U with normal crossings, ℓ ≠ p), whether P acts trivially on Ψ^q_ν when the reduced components of X_0 are smooth over k̄ and (boxed margin) the multiplicities are prime to p; it notes that the consequence for H^i(U_η̄) with X proper is not proved either, except for i = 1, promised for a later exposé.',
+    ours:
+      'Matching the page’s hypotheses to Rapoport–Zink’s (2.2) and Satz 2.21 for U = X_η is the pass’s own step, and so is matching them to log smoothness for U ⊊ X_η: with the log structure defined by X − U, Illusie’s criterion (Astérisque 279, 1.7) asks that the torsion of P^gp/(m_1, …, m_r, 0, …, 0) be invertible; that torsion is Z/gcd(m_i), so multiplicities prime to p suffice. The word read « tame » is \\uncertain{} but the formula and the « i.e. » clause carry the question; « k̄ » is read under an overwrite. First-pass transcription, unchecked.',
+    literature: [
+      'M. Rapoport, Th. Zink, Invent. Math. 68 (1982) — (2.2) « normale Schnitte », Satz 2.21 (purity when gcd(e_i, p) = 1), Satz 2.23 (under 2.21, the wild ramification group acts trivially on R^iΨΛ), introduction p. 23 (citing SGA 7 I, Th. 3.3); read as page images',
+      'L. Illusie, An overview of the work of K. Fujiwara, K. Kato, and C. Nakayama on logarithmic étale cohomology, Astérisque 279 (2002) — p. 272, 1.5–1.7, Th. 8.3 (= Nakayama 1998, 3.2), (8.4.2) and Cor. 8.4.3, Cor. 8.4.4 (= Nakayama 1998, 3.5)',
+      'L. Illusie, Autour du théorème de monodromie locale, Astérisque 223 (1994) — 3.2, 3.5',
+      'L. Illusie, Grothendieck and vanishing cycles, Ann. Fac. Sci. Toulouse Math. 30 (2021) — 2.6–2.8, 6.3',
+      'Not read: SGA 7 I, Exp. I 3.3; Nakayama, Compositio 112 (1998); T. Saito, JIMJ 2 (2003)',
+    ],
+    status: 'matched',
+    settle:
+      'Matched for U = X_η (Rapoport–Zink 1982, Satz 2.23 under 2.21) and for general U with X − U a normal crossings divisor (Illusie, Astérisque 279, (8.4.2) and Cor. 8.4.3, after Nakayama 1998, 3.2 and 3.5), once the pair is log smooth. Still to check: the log-smoothness step against Nakayama 1998 itself, and the margin and « k̄ » of view 45 against the scan.',
+    reach: 'beyond',
+    theory: 'other: étale cohomology, nearby cycles and log étale cohomology',
+    onPage: 'stated',
+  },
+  {
+    id: 'FG_IL_5_SGA7_4-kummer-tower-cd',
+    cote: 'FG_IL_5_SGA7_4',
+    pages: '11',
+    kind: 'mathematical',
+    claim:
+      'The question of Remarque 2.8 — whether, for X = Spec A strictly local of dimension n, t ∈ A, U = Spec A_t and U(∞) the limit of the Kummer covers U[t^{1/m}] (m prime to p), one has cd_ℓ U(∞) ≤ n − 1 — fails as stated, without an excellence hypothesis: Orgogozo’s regular noetherian strictly local schemes of dimension d with an affine open D(f) of ℓ-cohomological dimension 2d − 1 (Astérisque 363–364, XVIII-B Cor. 3.2.5, 5.1.6) give cd_ℓ U(∞) ≥ 2d − 2 > d − 1 for d ≥ 2; for quasi-excellent A the bound n − 1 was not found in the sources searched, where only the bound n stands (Gabber’s affine Lefschetz, XV Cor. 1.2.4).',
+    basis:
+      'View 11, Remarque 2.8, stated as a question suggested by 2.3, with the bracket that the SGA 4 XIV standard conjecture would give only cd_ℓ U(m) ≤ n and so cd_ℓ U(∞) ≤ n. No noetherian or excellence hypothesis on A is written.',
+    ours:
+      'The passage from Orgogozo’s example to U(∞) is the pass’s own step: U(∞) → U is a pro-étale Galois cover with group Ẑ^{(p′)}(1), of ℓ-cohomological dimension 1, so Hochschild–Serre gives cd_ℓ U ≤ cd_ℓ U(∞) + 1; with cd_ℓ U = 2d − 1 this forces cd_ℓ U(∞) ≥ 2d − 2. Reading « coefficients premiers à p » as cd_ℓ for ℓ ≠ p follows the page’s own bracket. Struck \\ill{} words right after « t ∈ Γ(A) » may have held a hypothesis. First-pass transcription, unchecked.',
+    literature: [
+      'Illusie–Laszlo–Orgogozo (eds.), Astérisque 363–364 (2014), arXiv:1207.3648 — Exp. XV (Pilloni–Stroh) Th. 1.1.2, Cor. 1.2.4, Rem. 1.1.3',
+      'Same volume, Exp. XVIII-A (Illusie) Th. 1.1, Rem. 1.5',
+      'Same volume, Exp. XVIII-B (Orgogozo) Cor. 3.2.5, Th. 4.1.1, Th. 5.1.4, Cor. 5.1.6',
+      'Searched for a Milnor-tube or Kummer-tower bound of n − 1, not found: the whole of Astérisque 363–364; Illusie, Grothendieck and vanishing cycles (2021); Illusie, Vanishing cycles over general bases; Illusie, Around the Thom–Sebastiani theorem (arXiv:1604.07004)',
+      'Not read: SGA 4 XIV; SGA 7 I Exp. I and XIII; Illusie, Perversité et variation (2003)',
+    ],
+    status: 'refuted',
+    settle:
+      'As stated (no excellence) the answer is no, by XVIII-B Cor. 3.2.5 and the Hochschild–Serre step, which a person should check. The quasi-excellent case still stands: for A essentially of finite type over a strictly henselian trait and t a uniformiser, U(∞) is the tame Milnor fibre and the bound n − 1 should follow from the vanishing of RΨ above dim X_η (the page’s own 2.3; SGA 7 not read). For general t: ask F. Orgogozo or L. Illusie.',
+    reach: 'beyond',
+    theory: 'other: étale cohomological dimension of strictly local schemes',
+    onPage: 'stated',
+  },
+  {
+    id: 'FG_IL_5_SGA7_4-depth-local-acyclicity',
+    cote: 'FG_IL_5_SGA7_4',
+    pages: '28 (with 21–27 for 5.1–5.7 a)',
+    kind: 'mathematical',
+    claim:
+      'The conjecture of Remarque 5.7 b) — that a flat morphism Spec B → Spec A of noetherian strictly local schemes, whose special fibre has after every finite residue extension a singular locus of dimension ≤ d, is locally (m − d − 1)-acyclic for primes ≠ p, m being the geometric depth of B, and locally 1-aspherical when m − d ≥ 2 — was not found proved or refuted in the sources searched, which do record as proved the two inputs the page names for it: SGA 2 XIV 6.3 (through M. Raynaud 1974) and, over a trait, an étale-depth bound from geometric depth (Illusie 2003).',
+    basis:
+      'View 28, Remarque 5.7 b), stated as a conjecture the results of § 5 suggest (Th. 5.2, Cor. 5.3 Cas II, Cor. 5.4, Th. 5.6), expected from « SGA 1 XIV 6.3 » and resolution for schemes finite over S, at least for A and B excellent (margin). Nothing in the statement is \\uncertain{}; struck alternatives with \\ill{} words stand beside it.',
+    ours:
+      'Reading « SGA 1 XIV 6.3 » as SGA 2 XIV 6.3 is the edition’s (SGA 1 has no Exposé XIV). Unfolding « loc. (m − d − 1)-acyclique » as Φ^i = 0 for i ≤ m − d − 2 follows the page’s 5.2. The page writes prof géom B where Cor. 5.3 Cas II uses the special fibre’s geometric depth; kept as written. First-pass transcription, unchecked.',
+    literature: [
+      'SGA 2, Exp. XIV (Laszlo ed., arXiv:math/0511279) — 5.3, 5.4, 5.6 with editor’s note (6), 6.2–6.3 with editor’s note (7)',
+      'M. Raynaud, Ann. Sci. ÉNS 7 (1974) — III, Cor. 1.3',
+      'Illusie–Laszlo–Orgogozo (eds.), Astérisque 363–364 — Exp. XV, XVIII-A, XVIII-B; searched throughout for depth',
+      'L. Illusie, Grothendieck and vanishing cycles (2021), 1–2 and 6.2; L. Illusie, Vanishing cycles over general bases, §3 — no criterion from geometric depth found',
+      'Not read: Illusie, Perversité et variation, Manuscripta Math. 112 (2003) (paywalled); SGA 7 II, Exp. XV–XVI; Hamm–Lê',
+    ],
+    status: 'candidate',
+    settle:
+      'Read Illusie, Perversité et variation (2003), for the case of a trait: with the page’s Théorème 5.2 it may give the acyclicity half when A is a trait and f of finite type. Then ask F. Orgogozo whether the statement over a strictly local base of dimension > 1 is known. Check « B » against the scan of view 28.',
+    reach: 'beyond',
+    theory: 'other: étale cohomology, vanishing cycles and depth',
+    onPage: 'stated',
+  },
 ];

@@ -8,15 +8,29 @@ import { PLAIN } from './content/summary.ts';
 import { FindingsChart } from './components/FindingsChart.tsx';
 import { SeeAlso, ThreadsSection } from './components/Threads.tsx';
 import { BY_ID } from './content/catalogue.ts';
+import illusieRaw from './content/illusie.json';
 import type { Finding, PlainItem } from './lib/types.ts';
 import { notation } from './lib/notation.tsx';
 import { CommentButton, commentData, useComments } from './components/Comments.tsx';
 import type { CommentContext } from './lib/report.ts';
 
 const SITE = 'https://grothendieck.commutator.io';
+
+/** IHÉS items of the Fonds Grothendieck–Illusie, named by their own identifiers rather than a Montpellier cote. */
+const ILLUSIE = new Map(
+  (illusieRaw as unknown as { items: { id: string; title: string | null; date: string | null }[] }).items.map((i) => [i.id, i]),
+);
+const isIhes = (cote: string) => ILLUSIE.has(cote);
+const shelfmark = (cote: string) => (isIhes(cote) ? `IHÉS ${cote}` : `Cote n° ${cote}`);
+const coteInfo = (cote: string) => {
+  const i = ILLUSIE.get(cote);
+  if (i) return { title: i.title ?? '', date: i.date ?? '' };
+  const c = BY_ID.get(cote);
+  return c ? { title: c.title, date: c.date } : undefined;
+};
 const findingCtx = (n: Finding): CommentContext => ({
   kind: 'finding',
-  label: `n° ${n.cote}, pages ${n.pages}`,
+  label: `${isIhes(n.cote) ? `IHÉS ${n.cote}, views` : `n° ${n.cote}, pages`} ${n.pages}`,
   cote: n.cote,
   ref: n.id,
   details: [`**Pages** ${n.pages}`, `**Status** ${n.status}`],
@@ -193,7 +207,7 @@ function Field({
  * with nothing naming its folder.
  */
 function Row({ n, withCote }: { n: Finding; withCote?: boolean }) {
-  const c = withCote ? BY_ID.get(n.cote) : undefined;
+  const c = withCote ? coteInfo(n.cote) : undefined;
   return (
     <li id={n.id} className="card group scroll-mt-16 p-5" {...commentData(findingCtx(n))}>
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5">
@@ -202,11 +216,11 @@ function Row({ n, withCote }: { n: Finding; withCote?: boolean }) {
             the only place the shelfmark appears. */}
         {withCote && (
           <span className="tabular text-[12.5px] font-semibold text-ink-700" title={c?.title}>
-            Cote n° {n.cote}
+            {shelfmark(n.cote)}
           </span>
         )}
         <span className="tabular text-[12.5px] font-semibold text-ink-700">
-          pages {n.pages}
+          {isIhes(n.cote) ? 'views' : 'pages'} {n.pages}
         </span>
         <Badge n={n} />
         <span className="text-[10px] uppercase tracking-wide text-ink-400">{KIND[n.kind]}</span>
@@ -283,11 +297,11 @@ function Row({ n, withCote }: { n: Finding; withCote?: boolean }) {
 
 /** The rows of one shelfmark, under a heading that names the folder once. */
 function CoteGroup({ cote, rows, total }: { cote: string; rows: Finding[]; total: number }) {
-  const c = BY_ID.get(cote);
+  const c = coteInfo(cote);
   return (
     <section className="mt-6 first:mt-3">
       <h3 className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
-        <span className="tabular text-[13.5px] font-semibold text-ink-800">Cote n° {cote}</span>
+        <span className="tabular text-[13.5px] font-semibold text-ink-800">{shelfmark(cote)}</span>
         {c && <span className="text-[12.5px] text-ink-500">{c.title}</span>}
         {c && <span className="tabular text-[12px] text-ink-400">{c.date}</span>}
         <span className="tabular text-[12px] text-ink-400">
