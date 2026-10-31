@@ -1,0 +1,179 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+% Charter et Menlo (macOS) ; ailleurs, XCharter et DejaVu Sans Mono, dont ils dérivent.
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{\setmainfont{XCharter}}
+\IfFontExistsTF{Menlo}{\setmonofont{Menlo}[Scale=0.82]}{\setmonofont{DejaVu Sans Mono}[Scale=0.82]}
+\usepackage{polyglossia}\setmainlanguage{french}\setotherlanguage{english}
+\usepackage{microtype}
+\usepackage[most]{tcolorbox}
+\usepackage{marginnote}% \nonverifie, dans les encadrés
+% Chaque partie commence sur une nouvelle page.
+\usepackage{etoolbox}
+% Numéros de partie en chiffres : les ordinaux en toutes lettres de polyglossia s'arrêtent avant la vingtième.
+\usepackage{titlesec}
+\titleformat{\part}[display]{\normalfont\bfseries}{\large Partie~\arabic{part}}{0.4em}{\huge}
+\titlespacing*{\part}{0pt}{0pt}{2em}
+\pretocmd{\part}{\clearpage}{}{}
+% Les résultats principaux de l'annexe sont encadrés.
+\newtcolorbox{encadre}{enhanced, breakable, colback=white, colframe=black!55, boxrule=0.6pt, arc=0pt, left=6pt, right=6pt, top=2pt, bottom=2pt, before skip=8pt, after skip=8pt}
+% L’ : la paire de crénage de Charter colle l’apostrophe au L ; on rajoute une fine espace.
+\XeTeXinterchartokenstate=1
+\newXeTeXintercharclass\LetterL
+\newXeTeXintercharclass\Apostrophe
+\XeTeXcharclass`L=\LetterL
+\XeTeXcharclass`'=\Apostrophe
+\XeTeXcharclass"2019=\Apostrophe
+\XeTeXinterchartoks\LetterL\Apostrophe={\kern0.07em}
+\usepackage[a4paper,margin=27mm]{geometry}
+\usepackage{booktabs,longtable,array}
+\usepackage{pdflscape}% le tableau récapitulatif, en paysage
+\usepackage{setspace}\setstretch{1.1}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{tikz-cd}
+\usetikzlibrary{decorations.pathreplacing}
+
+
+\newcommand{\q}[1]{«\,#1\,»}
+% Les rédactions des archives Bourbaki (Archives Henri Poincaré) : une notice par item.
+\newcommand{\ahp}[1]{\href{https://archives-bourbaki.ahp-numerique.fr/items/show/#1}{item~#1}}
+\newcommand{\redac}[1]{n\textsuperscript{o}\,#1}
+% Le fichier de la preuve vérifiée, une fois par section. Les fichiers de lean/Bourbaki/
+% n'existent pas encore sous une étiquette publiée : les liens pointent vers main.
+\newcommand{\leanblobmain}{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Bourbaki}
+\newcommand{\verifie}[2][\leanblobmain]{\footnote{Preuve vérifiée : \href{#1/#2.lean}{\texttt{lean/Bourbaki/\detokenize{#2}.lean}}.}}
+\definecolor{frise}{HTML}{2F4DA8}
+\definecolor{piste}{HTML}{B53D1D}
+% La démonstration de la page, résumée, pour un énoncé non démontré en Lean : marquée dans la marge.
+\newenvironment{demopage}[1][]{\par\smallskip\noindent\marginpar{\raggedright\footnotesize\textcolor{piste}{\ensuremath{\lozenge}}~non vérifiée en Lean}\textit{Démonstration de la page}\if\relax\detokenize{#1}\relax\else{} (#1)\fi.~}{\par\smallskip}
+% L'état de la recherche bibliographique, en fin de section.
+\newcommand{\litterature}[1]{\par\smallskip\noindent\textit{Littérature.} #1\par}
+\theoremstyle{plain}
+\newtheorem*{enonce}{Énoncé}
+\newtheorem{lemme}{Lemme}[section]
+\newtheorem{theoreme}[lemme]{Théorème}
+\newtheorem{contrexemple}[lemme]{Contre-exemple}
+\newtheorem{conjecture}[lemme]{Conjecture}
+\newtheorem*{conjecture*}{Conjecture}
+\newtheorem{corollaire}[lemme]{Corollaire}
+\newtheorem*{corollaire*}{Corollaire}
+\theoremstyle{definition}
+\newtheorem{exemple}[lemme]{Exemple}
+\newtheorem*{exemple*}{Exemple}
+\newtheorem{methode}[lemme]{Méthode}
+\newtheorem*{methode*}{Méthode}
+\newtheorem*{definition*}{Définition}
+\theoremstyle{plain}
+\newtheorem*{theoreme*}{Théorème}
+\newtheorem*{contrexemple*}{Contre-exemple}
+\theoremstyle{definition}
+\newtheorem*{definition}{Définition}
+\theoremstyle{remark}
+\newtheorem*{remarque}{Remarque}
+\raggedbottom\emergencystretch=1.5em
+% Long Lean names (\texttt{A.b\_c\_d}) may break after an underscore, without a hyphen.
+\let\bkunderscore\_
+\renewcommand{\_}{\bkunderscore\allowbreak}
+
+\title{\Large Rédactions Bourbaki : énoncés démontrés en Lean}
+\author{Michel Hua\\ \small Chercheur indépendant, Paris\\ \small \texttt{michel@commutator.io}}
+\date{\small Octobre 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent Les archives Bourbaki conservent les rédactions, projets de chapitres que les membres du groupe se faisaient circuler et discutaient en congrès. Ce document lit des énoncés précis dans quinze de ces rédactions, de 1950 à 1974, en analyse fonctionnelle, topologie, théorie des ensembles, algèbre, théorie des catégories et algèbre homologique, et les démontre. Chaque démonstration suit une preuve vérifiée dans l'assistant de preuve Lean~4 \cite{lean4}, avec sa bibliothèque mathlib \cite{mathlib2020}, et elle est rédigée pour être lue sans Lean. Pour chaque énoncé, le document dit d'où il vient, ce qu'il veut dire, comment on le démontre, ce qui n'est pas formalisé et ce que l'on sait de sa présence dans la littérature. Plusieurs énoncés tapés sont faux, et des contre-exemples le montrent.
+\end{abstract}
+
+\tableofcontents
+
+\section*{Introduction}\addcontentsline{toc}{section}{Introduction}
+
+\emph{L'archive.} Les Archives Henri Poincaré (Nancy) publient en ligne les archives de Nicolas Bourbaki, avec l'Association des collaborateurs de Nicolas Bourbaki : 891 documents, environ 42\,850 pages, sur le site \url{https://archives-bourbaki.ahp-numerique.fr}. L'essentiel est fait de rédactions numérotées, c'est-à-dire de projets de chapitres des \emph{Éléments de mathématique}, tapés par un membre, ronéotés et discutés en congrès, puis repris par un autre. Chaque document a une notice, qui donne son numéro, son titre, son auteur présumé et sa date quand on les connaît. Ce document cite chaque rédaction par son numéro, son titre et son item sur le site, et reprend l'auteur et la date tels que la notice les donne. Une notice qui ne nomme personne laisse la rédaction anonyme ici.
+
+\emph{La règle sur les transcriptions.} Les rédactions lues ici ont été transcrites en \LaTeX{} pour ce travail. Ces transcriptions restent privées : elles ne sont ni publiées ni versées au dépôt du projet tant que les Archives Henri Poincaré et l'Association des collaborateurs de Nicolas Bourbaki n'en ont pas donné l'accord. Le document ne cite donc presque rien du texte des rédactions, au plus quelques mots ; il énonce chaque résultat dans ses propres termes et renvoie à la page du fac-similé, que chacun peut consulter sur le site des archives.
+
+\emph{Le choix des énoncés.} Deux passes ont fourni les énoncés. La première a transcrit les documents que l'onglet Bourbaki du site du projet signale : les rédactions \redac{128}, 288, 453, 457, 582 et~596 en viennent. La seconde, plus récente, ne lit que les rédactions des livres que Bourbaki n'a pas publiés, là où des mathématiques inédites ont le plus de chances de se trouver : environ 5\,900 pages en 105 rédactions, sur la géométrie algébrique, les catégories et l'algèbre homologique, les variétés différentielles, la topologie élémentaire, la géométrie différentielle et d'autres sujets. Chaque rédaction y est parcourue à la recherche d'énoncés précis (définitions, théorèmes, contre-exemples, questions posées). Chaque énoncé fait l'objet d'une recherche bibliographique ; s'il est retrouvé dans un texte publié, la rédaction est marquée \q{retrouvée} et l'on passe. Seuls les énoncés précis qui n'ont pas été retrouvés, ou qui sont faux tels qu'ils sont tapés, sont formalisés. Les rédactions \redac{205}, 239, 321, 402, 438, 448, 461, 469 et~476 viennent de cette seconde passe. Le relevé marque deux d'entre elles, \redac{321} et~402, comme retrouvées dans la littérature ; leurs sections le disent, avec ce que la formalisation y ajoute.
+
+\emph{Les garanties de Lean.} Chaque section cite en note de son titre le fichier Lean qui en contient les preuves, dans la bibliothèque \texttt{lean/Bourbaki/} du projet, un fichier par rédaction. Lean vérifie mécaniquement qu'un énoncé tient sous les hypothèses écrites. Il ne garantit pas que l'énoncé rend fidèlement la page, ni qu'il est nouveau. Quand la démonstration rédigée suit une autre voie que la rédaction, la section le dit. Une démonstration que l'on résume d'après la page sans la vérifier en Lean est marquée dans la marge (\textcolor{piste}{\ensuremath{\lozenge}}~\emph{non vérifiée en Lean}).
+
+\emph{L'organisation.} Les sections sont rangées en quatre parties, par thème, et dans chaque partie par date. Chacune présente la rédaction, explique les notions dont l'énoncé a besoin, donne l'énoncé avec son intuition et sa démonstration, puis la liste de ce qui n'est pas démontré et un paragraphe \emph{Littérature}. Ce dernier distingue les énoncés retrouvés dans la littérature et les pistes candidates, que la recherche n'a pas retrouvées dans les sources lues. Une piste candidate n'est pas un résultat nouveau établi : c'est un énoncé dont l'absence de la littérature reste à confirmer, et le paragraphe dit ce qui a été cherché et ce qui reste à lire. Les résultats principaux sont encadrés. Un énoncé que la page fait porte le nom de Bourbaki et le numéro de la rédaction ; une forme que l'édition a ajoutée (généralisation, correction, reformulation) se dit énoncé de l'édition.
+
+\section*{Tableau récapitulatif}\addcontentsline{toc}{section}{Tableau récapitulatif}
+
+Une ligne par rédaction, dans l'ordre des parties : le numéro, l'énoncé démontré en quelques mots, le verdict, le fichier Lean et la section. \emph{Confirmé tel que lu} : l'énoncé tient sous les hypothèses de la page ; \emph{plus général} : il tient sous des hypothèses plus faibles ; \emph{forme de l'édition} : l'édition démontre une reformulation équivalente ; \emph{partiel} : une partie seulement est démontrée, ou dans un modèle ; \emph{faux sur la page} : un contre-exemple réfute une affirmation tapée ; \emph{question tranchée} : la page pose une question, et la réponse est démontrée ; \emph{déjà dans mathlib} : le fichier ne fait que rapporter à la page des énoncés que mathlib contient.
+
+\begin{center}
+{\small\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{1.2cm}>{\raggedright\arraybackslash}p{6.3cm}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{2.6cm}r@{}}
+\toprule
+N\textsuperscript{o} & Énoncé & Verdict & Fichier Lean & \S\\
+\midrule
+\endhead
+\multicolumn{5}{@{}l}{\textit{Analyse et topologie}}\\[1pt]
+128 & Espaces bornologiques et tonnelés & déjà dans mathlib & \href{\leanblobmain/Redaction128.lean}{\texttt{Redaction128}} & \ref{sec:bourbaki-128}\\
+239 & Un faisceau mou qui n'est pas fin & question tranchée (non, contre-exemple) & \href{\leanblobmain/Redaction239.lean}{\texttt{Redaction239}} & \ref{sec:bourbaki-239}\\
+288 & La loi exponentielle & plus général & \href{\leanblobmain/Redaction288.lean}{\texttt{Redaction288}} & \ref{sec:bourbaki-288}\\
+402 & Distances localisables & confirmé tel que lu ; plus général & \href{\leanblobmain/Redaction402.lean}{\texttt{Redaction402}} & \ref{sec:bourbaki-402}\\
+205 & Un critère de revêtement & faux sur la page (contre-exemple) & \href{\leanblobmain/Redaction205.lean}{\texttt{Redaction205}} & \ref{sec:bourbaki-205}\\
+\multicolumn{5}{@{}l}{\textit{Catégories et algèbre homologique}}\\[1pt]
+321 & Carrés cartésiens dans une catégorie abélienne & confirmé tel que lu ; faux sur la page (coquille, contre-exemple) & \href{\leanblobmain/Redaction321.lean}{\texttt{Redaction321}} & \ref{sec:bourbaki-321}\\
+438 & Une identité triangulaire suffit & confirmé tel que lu & \href{\leanblobmain/Redaction438.lean}{\texttt{Redaction438}} & \ref{sec:bourbaki-438}\\
+448 & Objets libres sur un diagramme & question tranchée (non, contre-exemple) & \href{\leanblobmain/Redaction448.lean}{\texttt{Redaction448}} & \ref{sec:bourbaki-448}\\
+461 & Carrés semi-cartésiens & forme de l'édition ; plus général & \href{\leanblobmain/Redaction461.lean}{\texttt{Redaction461}} & \ref{sec:bourbaki-461}\\
+469 & Le foncteur constant crée les limites & confirmé tel que lu ; partiel & \href{\leanblobmain/Redaction469.lean}{\texttt{Redaction469}} & \ref{sec:bourbaki-469}\\
+476 & Deux exercices sur les graphes & faux sur la page (contre-exemple) ; partiel & \href{\leanblobmain/Redaction476.lean}{\texttt{Redaction476}} & \ref{sec:bourbaki-476}\\
+\multicolumn{5}{@{}l}{\textit{Théorie des ensembles}}\\[1pt]
+453 & Les univers forment une chaîne & partiel & \href{\leanblobmain/Redaction453.lean}{\texttt{Redaction453}} & \ref{sec:bourbaki-453}\\
+\multicolumn{5}{@{}l}{\textit{Algèbre}}\\[1pt]
+457 & Degré et nombre de points & faux sur la page (contre-exemple) ; confirmé tel que lu & \href{\leanblobmain/Redaction457.lean}{\texttt{Redaction457}} & \ref{sec:bourbaki-457}\\
+582 & Les indices de Schur sur $\mathbf R$ & faux sur la page (contre-exemple) ; partiel & \href{\leanblobmain/Redaction582.lean}{\texttt{Redaction582}} & \ref{sec:bourbaki-582}\\
+596 & Toute classe est une différence & plus général ; partiel & \href{\leanblobmain/Redaction596.lean}{\texttt{Redaction596}} & \ref{sec:bourbaki-596}\\
+\bottomrule
+\end{longtable}}
+\end{center}
+
+\part{Analyse et topologie}
+\input{sections/bourbaki-128}
+\input{sections/bourbaki-239}
+\input{sections/bourbaki-288}
+\input{sections/bourbaki-402}
+\input{sections/bourbaki-205}
+
+\part{Catégories et algèbre homologique}
+\input{sections/bourbaki-321}
+\input{sections/bourbaki-438}
+\input{sections/bourbaki-448}
+\input{sections/bourbaki-461}
+\input{sections/bourbaki-469}
+\input{sections/bourbaki-476}
+
+\part{Théorie des ensembles}
+\input{sections/bourbaki-453}
+
+\part{Algèbre}
+\input{sections/bourbaki-457}
+\input{sections/bourbaki-582}
+\input{sections/bourbaki-596}
+
+
+\section*{Déclaration sur l'usage de l'intelligence artificielle}\addcontentsline{toc}{section}{Déclaration sur l'usage de l'intelligence artificielle}
+
+Les énoncés démontrés ici sont lus sur des transcriptions des rédactions produites par des modèles de langage d'Anthropic (Claude) sous des règles éditoriales écrites par l'auteur ; ces transcriptions n'ont pas été relues en entier par une personne. Les preuves formelles ont été écrites en Lean~4 par Claude Opus~5.5, sous la direction de l'auteur, et Lean en vérifie mécaniquement la correction contre la bibliothèque mathlib. Le même modèle en a tiré les démonstrations rédigées de ce document. L'auteur a relu le choix des énoncés, les corrections apportées aux pages et le texte, et en assume l'entière responsabilité. Lean garantit qu'un énoncé tient sous les hypothèses écrites. Il ne garantit ni que l'énoncé rend fidèlement la page, ni qu'il est nouveau.
+
+\begin{thebibliography}{99}\small
+\bibitem{bbi2001} D.~Burago, Yu.~Burago et S.~Ivanov, \emph{A Course in Metric Geometry}, Graduate Studies in Mathematics 33, American Mathematical Society, Providence, 2001 ; doi:10.1090/gsm/033.
+\bibitem{freyd1964} P.~Freyd, \emph{Abelian Categories. An Introduction to the Theory of Functors}, Harper \& Row, New York, 1964.
+\bibitem{johnstone2002} P.~T.~Johnstone, \emph{Sketches of an Elephant. A Topos Theory Compendium}, vol.~1, Oxford Logic Guides 43, Oxford University Press, 2002.
+\bibitem{lean4} L.~de Moura et S.~Ullrich, « The Lean~4 theorem prover and programming language », dans \emph{Automated Deduction -- CADE~28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635 ; doi:10.1007/978-3-030-79876-5\_37.
+\bibitem{mathlib2020} The mathlib Community, « The Lean mathematical library », dans \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP~2020)}, ACM, 2020, 367--381 ; doi:10.1145/3372885.3373824.
+\bibitem{mitchell1965} B.~Mitchell, \emph{Theory of Categories}, Pure and Applied Mathematics 17, Academic Press, New York, 1965.
+\bibitem{mo423444} Question 423444, \emph{MathOverflow}, 2022, \url{https://mathoverflow.net/questions/423444}.
+\bibitem{sga4-1} M.~Artin, A.~Grothendieck et J.-L.~Verdier, \emph{Théorie des topos et cohomologie étale des schémas (SGA~4)}, tome~1, Lecture Notes in Mathematics 269, Springer, Berlin, 1972 ; doi:10.1007/BFb0081551.
+\bibitem{spanier1966} E.~H.~Spanier, \emph{Algebraic Topology}, McGraw-Hill, New York, 1966.
+\bibitem{stacks} The Stacks Project Authors, \emph{The Stacks Project}, \url{https://stacks.math.columbia.edu}.
+\end{thebibliography}
+
+\end{document}

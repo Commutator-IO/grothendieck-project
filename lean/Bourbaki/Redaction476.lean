@@ -40,7 +40,7 @@ gives a ray, by following the arrows from any vertex) and König's lemma; the ge
 of Exercise 3 for strongly connected quivers.
 -/
 
-namespace Grothendieck.Bourbaki476
+namespace Bourbaki.Redaction476
 
 open SimpleGraph
 
@@ -277,4 +277,4 @@ theorem ex3_no_hom_zmod2 : ¬ ∃ h : Fin 3 → ZMod 2, ∀ s t, ex3 s t → h t
 theorem ex3_not_bipartite : ¬ ∃ c : Fin 3 → Bool, ∀ s t, ex3 s t → c s ≠ c t := by
   decide
 
-end Grothendieck.Bourbaki476
+end Bourbaki.Redaction476

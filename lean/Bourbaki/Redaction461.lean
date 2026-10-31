@@ -3,7 +3,7 @@ import Mathlib.CategoryTheory.Abelian.CommSq
 /-!
 # Bourbaki, rédaction n° 461 (Chevalley, 1966), § 2.6: semi-cartesian squares
 
-Rédaction 461, « Catégories abéliennes », studies in § 2.6 (pp. 65–74 of the scan) the
+Rédaction 461, « Catégories abéliennes », studies in § 2.6 (pp. 65–77 of the scan) the
 commutative squares of an abelian category `C`
 ```
  a ──α₁──▶ a₁
@@ -13,8 +13,11 @@ commutative squares of an abelian category `C`
 ```
 for which the map `μ` from the pushout of `(α₁, α₂)` to `b` is a monomorphism and the map `ν`
 from `a` to the pullback of `(β₁, β₂)` is an epimorphism. Proposition 13 (p. 65) shows that the
-two conditions are equivalent, and equivalent to the exactness of
-`a ⟶ a₁ ⊞ a₂ ⟶ b` in the middle; Definition 3 (p. 66) calls such squares semi-cartesian.
+two conditions are equivalent, and equivalent to the exactness of the sequence
+`0 ⟶ pullback ⟶ a₁ ⊞ a₂ ⟶ pushout ⟶ 0` (maps `ζ = σ₁ω₁ + σ₂ω₂` and `ρ = φ₁π₁ − φ₂π₂` on the
+page), restated in Remark 1 (p. 66); Definition 3 (p. 66) calls such squares semi-cartesian.
+The characterisation proved here, by the exactness of `a ⟶ a₁ ⊞ a₂ ⟶ b` in the middle, is an
+equivalent reformulation chosen by the edition, not the page's statement.
 Cartesian and cocartesian squares are semi-cartesian.
 
 Proposition 14 (pp. 66–67): a semi-cartesian square with `α₁` mono is cartesian and `β₂` is
@@ -37,7 +40,9 @@ category): it is the pushout square of `(α₁, α₂)` followed by the square w
 * `exact_iff`: exactness of `CommSq.shortComplex` in terms of morphisms, up to refinements.
 * `mono_fromPushout_iff_exact`, `epi_toPullback_iff_exact`, `mono_fromPushout_iff_epi_toPullback`,
   `isSemiCartesian_iff_exact`, `isSemiCartesian_iff_mono`, `isSemiCartesian_iff_epi`:
-  **Proposition 13, p. 65.**
+  **Proposition 13, p. 65**, the equivalence of `μ` mono and `ν` epi as on the page; the third
+  condition is the edition's reformulation (exactness of `a ⟶ a₁ ⊞ a₂ ⟶ b`), not the page's
+  sequence `0 ⟶ pullback ⟶ a₁ ⊞ a₂ ⟶ pushout ⟶ 0`, which is not formalised.
 * `IsPushout.isSemiCartesian`, `IsPullback.isSemiCartesian`: cocartesian and cartesian squares
   are semi-cartesian (p. 66).
 * `IsSemiCartesian.flip`: the symmetric square is semi-cartesian (p. 67).
@@ -51,13 +56,16 @@ category): it is the pushout square of `(α₁, α₂)` followed by the square w
 * `isSemiCartesian_iff_exists_factorisation`: **Corollary 2 of Proposition 15, p. 70.**
 * `isSemiCartesian_iff_exact_kernel_cokernel`: **Corollary 4 of Proposition 16, pp. 73–74.**
 
-**Not formalised.** The rédaction's own proof of the necessity in Corollary 2 (epi-mono
-factorisation in the arrow category, then Corollary 1); Proposition 16 and its Corollaries 2
-and 3 (the four and five lemmas, in Mathlib as `Abelian.mono_of_epi_of_mono_of_mono` and
-`Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono`).
+**Not formalised.** The page's form of Proposition 13 and Remark 1 (p. 66), the exactness of
+`0 ⟶ pullback ⟶ a₁ ⊞ a₂ ⟶ pushout ⟶ 0`; the corollary of Proposition 14 (p. 67: monomorphisms
+and epimorphisms are universal); the rédaction's own proof of the necessity in Corollary 2
+(epi-mono factorisation in the arrow category, then Corollary 1); Proposition 16 and its
+Corollaries 1 (p. 72), 2 and 3 (Corollaries 2 and 3 are the four and five lemmas, in Mathlib as
+`Abelian.mono_of_epi_of_mono_of_mono` and `Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono`);
+Proposition 17 (pp. 74–76, a nine-lemma-like statement) and Proposition 17 bis (pp. 76–77).
 -/
 
-namespace Grothendieck.Bourbaki461
+namespace Bourbaki.Redaction461
 
 open CategoryTheory Limits Preadditive
 
@@ -373,4 +381,4 @@ theorem isSemiCartesian_iff_exact_kernel_cokernel :
         simpa using hk
       simp [hk', sub_comp]
 
-end Grothendieck.Bourbaki461
+end Bourbaki.Redaction461

@@ -1,0 +1,60 @@
+\section[IHÉS SGA\,6 1/5 : modules à $n$-présentation finie]{IHÉS SGA\,6 1/5 : modules à $n$-présentation finie, extensions, noyaux et facteurs directs\protect\verifie[\leanblobmain]{IhesSGA6_1_5}}\label{sec:ihes-sga6-1-5}
+
+Cette section ne porte pas sur une cote du fonds de Montpellier, mais sur une pièce du fonds Grothendieck--Illusie de l'IHÉS, \texttt{FG\_IL\_5\_SGA6\_1\_5}, que le site montre à l'onglet Illusie (\href{https://grothendieck.commutator.io/illusie/\#FG_IL_5_SGA6_1_5/1/p1}{vue~1}). C'est un tapuscrit de treize feuillets, numérotés 22 à 34, écrit à la première personne ; des corrections à l'encre brune, noire et bleue y sont d'une main que les pages ne permettent pas d'identifier. Il contient les numéros 4 à 7 d'un texte plus long sur les $n$-présentations finies, et le catalogue de l'IHÉS le range parmi les pièces de SGA~6, avec la date \q{1966 ?}. Aucune lecture modernisée n'en a été faite : les énoncés ci-dessous sont lus sur la transcription des vues~1 à~5.
+
+\emph{L'idée.} Un module $M$ de type fini est un quotient d'un module libre de type fini : il y a une suite exacte $L_0 \to M \to 0$ avec $L_0 = A^k$. Il est de présentation finie si l'on peut, de plus, prolonger la suite en $L_1 \to L_0 \to M \to 0$ avec $L_1$ libre de type fini : un nombre fini de générateurs, et un nombre fini de relations entre eux. Rien n'empêche de continuer, avec un nombre fini de relations entre les relations, et ainsi de suite. Le tapuscrit appelle \emph{$n$-présentation finie} de $M$ une suite exacte
+\[
+  L_n \to L_{n-1} \to \cdots \to L_1 \to L_0 \to M \to 0
+\]
+de modules libres de type fini (définition~4.1). Il note $\underline C_n$ la classe des modules qui en ont une, et convient que $\underline C_n$ contient tous les modules si $n < 0$. Ainsi $\underline C_0$ est la classe des modules de type fini, $\underline C_1$ celle des modules de présentation finie, et
+\[
+  \underline C_0 \supset \underline C_1 \supset \underline C_2 \supset \cdots .
+\]
+Sur un anneau noethérien, la suite est constante à partir de $n = 0$, puisqu'un sous-module d'un module de type fini y est de type fini. Le tapuscrit en tire lui-même la remarque que ces classes ne servent que pour des anneaux non noethériens, qui interviennent en théorie de la descente même quand on part d'anneaux noethériens.
+
+Le n\textsuperscript{o}\,4 se place dans une catégorie abélienne, avec une classe d'objets projectifs stable par sommes finies à la place des modules libres de type fini ; le n\textsuperscript{o}\,5 l'applique aux modules à gauche sur un anneau non nécessairement commutatif. On lit ici les énoncés du n\textsuperscript{o}\,4 dans le cas des modules.
+
+\begin{encadre}
+\begin{enonce}[Tapuscrit, vues 1 à 5, énoncés 4.2 à 4.7~bis et n\textsuperscript{o}\,5, pour les modules]
+Soient $A$ un anneau et $n \geq 0$ un entier.
+\begin{itemize}
+\item[(4.2)] Si $0 \to M' \to M \to M'' \to 0$ est une suite exacte avec $M'$ et $M''$ dans $\underline C_n$, alors $M$ est dans $\underline C_n$.
+\item[(4.3)] Une somme directe finie de modules de $\underline C_n$ est dans $\underline C_n$.
+\item[(4.4)] Si $0 \to R \to M_0 \to X \to 0$ est une suite exacte avec $M_0$ dans $\underline C_n$, alors $X$ est dans $\underline C_n$ si et seulement si $R$ est dans $\underline C_{n-1}$.
+\item[(4.7~bis)] Un facteur direct d'un module de $\underline C_n$ est dans $\underline C_n$.
+\item[(n\textsuperscript{o}\,5)] Les classes $\underline C_n$ ne changent pas si l'on demande seulement aux $L_i$ d'être projectifs de type fini.
+\end{itemize}
+\end{enonce}
+\end{encadre}
+
+\emph{Pourquoi le décalage d'indice dans 4.4.} Si $X$ est le quotient de $M_0$ par $R$, des générateurs de $M_0$ engendrent $X$, et les relations de $X$ sont celles de $M_0$ augmentées des éléments de $R$. Pour présenter $X$ jusqu'à l'étage $n$, il suffit donc de présenter $R$ jusqu'à l'étage $n - 1$ : chaque étage de $R$ fournit un étage de plus pour $X$. Dans le cas $n = 1$ avec $M_0 = A^k$, on retrouve un fait classique : $X$ est de présentation finie si et seulement si le noyau d'une surjection $A^k \to X$ est de type fini, et alors le noyau de toute surjection de ce genre l'est.
+
+\emph{La démonstration.} Le tapuscrit démontre 4.2 par la construction \q{en fer à cheval} de Cartan et Eilenberg (chapitre~V, 2.2, de \cite{cartaneilenberg1956}), qui résout une extension à partir des résolutions des deux termes extrêmes. Il démontre 4.4 par récurrence sur $n$, en modifiant une présentation de $X$ jusqu'à ce qu'elle se relève en une surjection sur $M_0$ ; ce passage du feuillet~23 (vue~2) est encadré au crayon et barré, avec des mots biffés puis soulignés de tirets, et sa forme finale n'est pas sûre. La preuve vérifiée suit une autre route, qui tient en une seule construction.
+
+\begin{lemme}\label{lem:ihes-sga6-1-5-coprod}
+Soient $p : N \to M$ une surjection et $u : F \to M$ une surjection depuis un module projectif $F$. Il existe une surjection $g : \ker p \times F \to N$ dont le noyau est isomorphe à $\ker u$.
+\end{lemme}
+
+\begin{proof}
+Comme $F$ est projectif, $u$ se relève en $h : F \to N$ avec $p \circ h = u$. On pose $g(a, b) = a + h(b)$. Pour $y \in N$, on choisit $b \in F$ tel que $u(b) = p(y)$ ; alors $a = y - h(b)$ est dans $\ker p$, et $g(a, b) = y$. Si $g(a, b) = 0$, on applique $p$ et l'on trouve $u(b) = 0$ ; de plus $a = -h(b)$ est déterminé par $b$. Inversement, pour $b \in \ker u$, le couple $(-h(b), b)$ est dans $\ker g$. L'application $(a, b) \mapsto b$ est donc un isomorphisme de $\ker g$ sur $\ker u$.
+\end{proof}
+
+\noindent On démontre alors, par récurrence sur $n$, les énoncés dans l'ordre suivant.
+
+\emph{Le sens \q{il suffit} de 4.4 au rang $n + 1$, à partir de 4.2 au rang $n$.} Soient $0 \to R \to M_0 \to X \to 0$ exacte, $M_0 \in \underline C_{n+1}$ et $R \in \underline C_n$. On choisit une surjection $u : L_0 \to M_0$, avec $L_0$ libre de type fini et $\ker u \in \underline C_n$. Le noyau $S$ de la surjection composée $L_0 \to X$ est une extension de $R$ par $\ker u$ : la suite $0 \to \ker u \to S \to R \to 0$ est exacte. Par 4.2 au rang $n$, $S$ est dans $\underline C_n$, donc $X$ est dans $\underline C_{n+1}$. C'est le raisonnement de la vue~3.
+
+\emph{4.2 au rang $n$.} Soit $0 \to M' \to M \to M'' \to 0$ exacte, avec $M'$ et $M''$ dans $\underline C_n$. On choisit une surjection $u : L_0 \to M''$ dont le noyau est dans $\underline C_{n-1}$. Le lemme~\ref{lem:ihes-sga6-1-5-coprod} donne une suite exacte $0 \to \ker u \to M' \times L_0 \to M \to 0$. Le produit $M' \times L_0$ est dans $\underline C_n$ (pour deux facteurs, on fait le produit des deux présentations, étage par étage). Le sens \q{il suffit} de 4.4 au rang $n$ conclut. Pour $n = 0$, $M$ est un quotient du module de type fini $M' \times L_0$.
+
+\emph{4.7~bis.} Si $M$ est un facteur direct de $N \in \underline C_n$, la suite $0 \to M_1 \to N \to M \to 0$ est scindée, et le facteur complémentaire $M_1$ est lui aussi un facteur direct de $N$. Par récurrence, $M_1$ est dans $\underline C_{n-1}$, et le sens \q{il suffit} de 4.4 donne $M \in \underline C_n$. C'est l'argument de la vue~4, que le tapuscrit écrit en une ligne.
+
+\emph{Le sens \q{il faut} de 4.4, sous une hypothèse plus faible.} Soit $0 \to R \to M_0 \to X \to 0$ exacte, avec $M_0 \in \underline C_{n-1}$ et $X \in \underline C_n$. On choisit une surjection $u : L_0 \to X$ dont le noyau est dans $\underline C_{n-1}$. Le lemme donne $0 \to \ker u \to R \times L_0 \to M_0 \to 0$. Par 4.2 au rang $n - 1$, $R \times L_0$ est dans $\underline C_{n-1}$, et $R$, qui en est un facteur direct, aussi, par 4.7~bis.
+
+\emph{Le n\textsuperscript{o}\,5.} Un module projectif de type fini $P$ est un facteur direct d'un $A^k$, donc il est dans tous les $\underline C_n$ par 4.7~bis. Si $P \to M$ est une surjection de noyau dans $\underline C_n$, le sens \q{il suffit} de 4.4 donne $M \in \underline C_{n+1}$.
+
+\begin{remarque}
+Le sens \q{il faut} de 4.4 demande seulement $M_0 \in \underline C_{n-1}$, au lieu de $M_0 \in \underline C_n$. C'est la forme des trois énoncés \q{deux sur trois} pour une suite exacte courte $0 \to M' \to M \to M'' \to 0$ (Stacks, \href{https://stacks.math.columbia.edu/tag/064R}{064R} \cite{stacks}) : si $M'$ et $M''$ sont dans $\underline C_n$, $M$ aussi ; si $M \in \underline C_{n+1}$ et $M' \in \underline C_n$, alors $M'' \in \underline C_{n+1}$ ; si $M \in \underline C_n$ et $M'' \in \underline C_{n+1}$, alors $M' \in \underline C_n$. Les trois sont démontrés.
+\end{remarque}
+
+\noindent\emph{Vérification en Lean.} La définition est faite par récurrence, ce qui est un choix de l'édition, le tapuscrit écrivant la suite exacte : \texttt{IsNPresented R n M} dit pour $n = 0$ que $M$ est de type fini, et au rang $n + 1$ qu'une surjection $R^k \to M$ a son noyau dans le rang $n$. L'anneau $R$ est quelconque, non nécessairement commutatif, comme au n\textsuperscript{o}\,5, et les modules sont pris dans l'univers de $R$, pour que les noyaux y restent. Aux rangs $0$ et $1$, la notion est celle de mathlib : \texttt{isNPresented\_zero\_iff} (\texttt{Module.Finite}) et \texttt{isNPresented\_one\_iff} (\texttt{Module.FinitePresentation}). Le lemme~\ref{lem:ihes-sga6-1-5-coprod} est \texttt{exists\_coprod}. La proposition~4.2 est \texttt{IsNPresented.of\_exact} ; le corollaire~4.3, pour deux facteurs, \texttt{IsNPresented.prod} ; la proposition~4.4, telle que la page l'énonce, \texttt{IsNPresented.iff\_of\_exact} ; les trois énoncés de la remarque, \texttt{IsNPresented.of\_exact}, \texttt{IsNPresented.of\_exact\_right} et \texttt{IsNPresented.of\_exact\_left} ; le corollaire~4.7~bis, \texttt{IsNPresented.of\_retract} ; le n\textsuperscript{o}\,5, \texttt{IsNPresented.of\_projective} et \texttt{IsNPresented.succ\_of\_projective}. Avec $M_0$ libre de type fini, \texttt{isNPresented\_succ\_iff\_forall} et \texttt{isNPresented\_succ\_iff\_exists} disent qu'un module est dans $\underline C_{n+1}$ si et seulement s'il est de type fini et que le noyau d'une, ou de toute, surjection depuis un module libre de type fini est dans $\underline C_n$ (Stacks \href{https://stacks.math.columbia.edu/tag/064U}{064U} et \href{https://stacks.math.columbia.edu/tag/064X}{064X}). Les noms sont ceux de \href{\leanblobmain/IhesSGA6_1_5.lean}{\texttt{IhesSGA6\_1\_5.\allowbreak{}lean}}.
+
+Ne sont pas démontrés ici : le cadre d'une catégorie abélienne du n\textsuperscript{o}\,4 ; les $\infty$-présentations et le corollaire~4.7 ; les corollaires~4.5 et~4.6, sur des suites exactes plus longues ; la proposition~4.8 et le corollaire~4.9, sur les foncteurs exacts et les foncteurs dérivés ; la suite du n\textsuperscript{o}\,5 (changement de base plat, localisation, résolutions finies, immersions régulières) et les n\textsuperscript{os}\,6 et~7 (présentation relative sur une algèbre, préschémas).

@@ -1,0 +1,56 @@
+\section[Rédaction Bourbaki \redac{461} : carrés semi-cartésiens]{Rédaction Bourbaki \redac{461} : les carrés semi-cartésiens d'une catégorie abélienne\protect\verifie{Redaction461}}\label{sec:bourbaki-461}
+
+La rédaction \redac{461}, \q{Catégories abéliennes}, des archives Bourbaki (Archives Henri Poincaré, \ahp{1036}) est datée de février 1966 par sa notice, qui la donne à Claude Chevalley ; elle compte 121 pages. Son §~2.6 (p.~65--77 du fac-similé) étudie une classe de carrés commutatifs plus large que celle des carrés cartésiens et cocartésiens, qu'il appelle semi-cartésiens. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+\emph{Le carré.} On considère, dans une catégorie abélienne, un carré commutatif
+\[
+\begin{tikzcd}
+a \arrow[r, "\alpha_1"] \arrow[d, "\alpha_2"'] & a_1 \arrow[d, "\beta_1"] \\
+a_2 \arrow[r, "\beta_2"'] & b
+\end{tikzcd}
+\]
+On note $\mu$ la flèche de la somme amalgamée de $(\alpha_1, \alpha_2)$ vers $b$, et $\nu$ la flèche de $a$ vers le produit fibré de $(\beta_1, \beta_2)$. Le carré est cocartésien quand $\mu$ est un isomorphisme, cartésien quand $\nu$ en est un. La rédaction affaiblit les deux conditions à la fois.
+
+\begin{definition}[rédaction \redac{461}, définition~3, p.~66]
+Le carré est \emph{semi-cartésien} si $\mu$ est un monomorphisme et $\nu$ un épimorphisme.
+\end{definition}
+
+\emph{L'intuition, dans les modules.} Dire que $\nu$ est surjective, c'est dire que tout couple $(x_1, x_2) \in a_1 \times a_2$ de même image dans $b$ provient d'un élément de $a$. Dire que $\mu$ est injective, c'est dire que les seules relations entre les images de $a_1$ et de $a_2$ dans $b$ sont celles qui viennent de $a$. Les deux conditions disent la même chose. La proposition~13 de la page les donne pour équivalentes entre elles et à l'exactitude de la suite $0 \to a_1 \times_b a_2 \to a_1 \oplus a_2 \to a_1 \sqcup_a a_2 \to 0$, du produit fibré vers la somme amalgamée, ce que reprend la remarque~1 de la page~66. L'édition en démontre une forme équivalente, plus commode à vérifier : la suite $a \to a_1 \oplus a_2 \to b$, de flèches $(\alpha_1, -\alpha_2)$ et $(\beta_1, \beta_2)$, est exacte au milieu. Le carré de flèches $\mathbf Z \to 0$, $\mathbf Z \to 0$, $0 \to \mathbf Z$, $0 \to \mathbf Z$ est semi-cartésien sans être ni cartésien (le produit fibré est nul, $a$ ne l'est pas) ni cocartésien (la somme amalgamée est nulle, $b$ ne l'est pas).
+
+\emph{Chasser les éléments sans éléments.} Une catégorie abélienne n'a pas d'éléments. Mathlib les remplace par des flèches $T \to a$, et une égalité \q{à raffinement près} est une égalité après composition par un épimorphisme $T' \to T$. On raisonne alors comme dans les modules : \q{choisir un antécédent} devient \q{trouver un antécédent après un raffinement}. Toutes les preuves de cette section sont des chasses de ce type, qui passent par un seul lemme, \texttt{exact\_iff} : l'exactitude de $a \to a_1 \oplus a_2 \to b$ s'écrit sur les couples de flèches $x_1 : T \to a_1$, $x_2 : T \to a_2$ tels que $\beta_1 x_1 + \beta_2 x_2 = 0$, qui doivent provenir de $a$ après raffinement.
+
+\begin{encadre}
+\begin{enonce}[Bourbaki, rédaction \redac{461}, §~2.6, propositions~13 à~15 et corollaires]
+\begin{enumerate}
+\item[a)] (Proposition~13, p.~65, sous une forme de l'édition.) Les conditions \q{$\mu$ est un monomorphisme}, \q{$\nu$ est un épimorphisme} et \q{$a \to a_1 \oplus a_2 \to b$ est exacte} sont équivalentes. La page énonce l'équivalence des deux premières, et, pour troisième condition, l'exactitude de $0 \to a_1 \times_b a_2 \to a_1 \oplus a_2 \to a_1 \sqcup_a a_2 \to 0$. Les carrés cartésiens et les carrés cocartésiens sont semi-cartésiens.
+\item[b)] (Proposition~14, p.~66--67.) Un carré semi-cartésien où $\alpha_1$ est un monomorphisme est cartésien, et $\beta_2$ est alors un monomorphisme. Dualement, si $\beta_2$ est un épimorphisme, il est cocartésien, et $\alpha_1$ est un épimorphisme.
+\item[c)] (Proposition~15, p.~67, et corollaire~2, p.~70.) Un carré cocartésien suivi d'un carré cartésien est semi-cartésien. Réciproquement, tout carré semi-cartésien s'obtient ainsi.
+\item[d)] (Proposition~15, p.~67, et corollaire~1, p.~69.) Si un carré semi-cartésien se décompose en un carré du haut et un carré du bas, le carré du haut est semi-cartésien dès que la flèche verticale gauche du carré du bas est un monomorphisme, et le carré du bas l'est dès que la flèche verticale droite du carré du haut est un épimorphisme. Avec les deux hypothèses, le carré du haut est cocartésien et celui du bas cartésien.
+\item[e)] (Corollaire~4 de la proposition~16, p.~73--74.) Le carré est semi-cartésien si et seulement si les suites $\ker \alpha_1 \to a_2 \to b$ et $a \to a_1 \to \operatorname{coker} \beta_2$ sont exactes.
+\end{enumerate}
+\end{enonce}
+\end{encadre}
+
+\begin{remarque}
+Pour d), la rédaction suppose le carré du bas monomorphe et celui du haut épimorphe dans la catégorie des flèches, c'est-à-dire deux monomorphismes et deux épimorphismes. Une seule des deux flèches suffit chaque fois. L'énoncé démontré est donc un peu plus général que celui de la page.
+\end{remarque}
+
+\begin{proof}
+a) La somme amalgamée de $(\alpha_1, \alpha_2)$ est le conoyau de $a \to a_1 \oplus a_2$ ; la flèche $a_1 \oplus a_2 \to b$ se factorise par elle, en $\mu$. Donc $\mu$ est injective si et seulement si le noyau de $a_1 \oplus a_2 \to b$ n'est pas plus gros que l'image de $a$ : c'est l'exactitude. De même, le produit fibré de $(\beta_1, \beta_2)$ est, au signe près, le noyau de $a_1 \oplus a_2 \to b$, et $\nu$ est surjective si et seulement si $a$ le recouvre : c'est encore l'exactitude. Un carré cocartésien a une suite exacte, par la proposition~2 de la rédaction \redac{321} (section~\ref{sec:bourbaki-321}) ; pour un carré cartésien, tout couple $(x_1, x_2)$ de même image dans $b$ (au signe près) se relève par la propriété universelle, sans raffinement.
+
+b) Si $\alpha_1$ est un monomorphisme, $\nu$ en est un, car $\alpha_1$ est le composé de $\nu$ et de la première projection. Comme $\nu$ est aussi un épimorphisme, c'est un isomorphisme, et le carré est cartésien. Si $\zeta : T \to a_2$ vérifie $\beta_2 \zeta = 0$, le couple $(0, \zeta)$ définit une flèche vers le produit fibré, qui provient d'une flèche $y : T \to a$ avec $\alpha_1 y = 0$ ; comme $\alpha_1$ est un monomorphisme, $y = 0$, et $\zeta = \alpha_2 y = 0$. Donc $\beta_2$ est un monomorphisme. La seconde moitié est duale.
+
+c) Dans un carré cocartésien suivi d'un carré cartésien, un couple $(x_1, x_2)$ de même image dans $b$ se relève d'abord dans le produit fibré du carré du bas, puis, après raffinement, dans $a$ par l'exactitude du carré du haut. Pour la réciproque, la rédaction factorise le carré dans la catégorie des flèches en un épimorphisme suivi d'un monomorphisme, puis applique le corollaire~1. La preuve vérifiée prend une décomposition plus directe : la somme amalgamée de $(\alpha_1, \alpha_2)$ au-dessus, puis le carré formé de $a_2 \to a_1 \sqcup_a a_2$, de l'identité de $a_2$, de $\mu$ et de $\beta_2$. Ce second carré est cartésien parce que $\mu$ est un monomorphisme : deux flèches qui ont même image par $\mu$ sont égales.
+
+d) Si la flèche verticale gauche $v_0$ du carré du bas est un monomorphisme, un couple pour le carré du haut, poussé par $v_0$, devient un couple pour le grand carré ; il se relève dans $a$, et l'on revient en simplifiant par $v_0$. Si la flèche verticale droite $u_1$ du carré du haut est un épimorphisme, on relève d'abord, après raffinement, la composante qui vit au sommet du carré du bas en une flèche vers $a_1$, puis on applique la propriété du grand carré. Avec les deux hypothèses, b) appliqué aux deux petits carrés donne le dernier point.
+
+e) Dans les modules : un couple $(x_1, x_2)$ de même image dans $b$ donne, modulo $\beta_2$, un élément de $a_1$ nul dans $\operatorname{coker} \beta_2$, qui provient de $a$ par la seconde suite ; la différence restante est un élément de $a_2$ d'image nulle dans $b$, qui provient du noyau de $\alpha_1$ par la première. La réciproque se lit dans l'autre sens. La preuve vérifiée fait la même chasse, à raffinement près.
+\end{proof}
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} La définition est \texttt{IsSemiCartesian}. La proposition~13 est \texttt{mono\_fromPushout\_iff\_exact}, \texttt{epi\_toPullback\_iff\_exact} et \texttt{isSemiCartesian\_iff\_exact} ; les cas cartésien et cocartésien sont \texttt{IsPullback.\allowbreak{}isSemiCartesian} et \texttt{IsPushout.\allowbreak{}isSemiCartesian}, et la symétrie du carré est \texttt{IsSemiCartesian.\allowbreak{}flip}. La proposition~14 est \texttt{IsSemiCartesian.\allowbreak{}isPullback\_of\_mono} et \texttt{IsSemiCartesian.\allowbreak{}isPushout\_of\_epi}. La proposition~15 est \texttt{isSemiCartesian\_of\_isPushout\_of\_isPullback}, \texttt{IsSemiCartesian.\allowbreak{}left\_of\_comp} et \texttt{IsSemiCartesian.\allowbreak{}right\_of\_comp}. Les corollaires~1, 2 et~4 sont \texttt{IsSemiCartesian.\allowbreak{}isPushout\_isPullback\_of\_comp}, \texttt{isSemiCartesian\_iff\_exists\_factorisation} et \texttt{isSemiCartesian\_iff\_exact\_kernel\_cokernel}, dans \href{\leanblobmain/Redaction461.lean}{\texttt{Redaction461.\allowbreak{}lean}}. Le petit exemple de $\mathbf Z$ n'est pas formalisé.
+\end{sloppypar}
+
+Ne sont pas démontrés ici : la forme de la page de la proposition~13 et de la remarque~1, l'exactitude de la suite du produit fibré vers la somme amalgamée ; le corollaire de la proposition~14 (p.~67), qui dit que les monomorphismes et les épimorphismes sont universels ; la démonstration propre à la rédaction de la nécessité dans le corollaire~2, par la factorisation épimorphisme-monomorphisme dans la catégorie des flèches ; la proposition~16 et ses corollaires~1 (p.~72), 2 et~3, ces deux derniers étant le lemme des quatre et le lemme des cinq, déjà dans mathlib ; la proposition~17 (p.~74--76), proche du lemme des neuf, et la proposition~17~bis (p.~76--77).
+
+\litterature{piste candidate. Le relevé des rédactions retient le §~2.6 comme candidat : la notion de carré semi-cartésien et ses caractérisations n'ont pas été retrouvées. Les deux traités de la même époque, Freyd 1964 \cite{freyd1964} et Mitchell 1965 \cite{mitchell1965}, restent à consulter ; la vérification n'est pas faite.}

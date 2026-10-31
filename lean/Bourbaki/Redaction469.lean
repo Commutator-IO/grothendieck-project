@@ -49,7 +49,7 @@ step that recovers it (addition of morphisms from biproducts and a zero object t
 `A` is) is Mathlib's `functorCategoryAbelian`.
 -/
 
-namespace Grothendieck.Bourbaki469
+namespace Bourbaki.Redaction469
 
 open CategoryTheory Limits Functor
 
@@ -316,4 +316,4 @@ noncomputable def abelianOfFunctorCategory [Preadditive A] [Nonempty C]
     exact isIso_of_reflects_iso _ (const C)
   exact Abelian.ofCoimageImageComparisonIsIso
 
-end Grothendieck.Bourbaki469
+end Bourbaki.Redaction469

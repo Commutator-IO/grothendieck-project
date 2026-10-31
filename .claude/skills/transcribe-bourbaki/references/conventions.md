@@ -116,3 +116,34 @@ reading and never settles one.
   itself is not reproduced.
 - An \emph{} that runs over a page break must be closed before \page{} and reopened after it, or
   tectonic stops with « Paragraph ended before \text@command ».
+
+## 2026-10-31 — rédaction 239 (ENS secretariat copy, item 777), batch 3 (pp. 81-102), Opus 5.5
+- The file opens with Tribu 41's « Décisions sur les faisceaux » (PDF pp. 1-3) before the rédaction. In the
+  last batch the typist numbers « - 72 - » twice (PDF 84 and 85): typist = PDF − 12 up to p. 84, PDF − 13
+  from p. 86 (§ 4) to the end (« - 89 - » = PDF 102). The scan is 150 dpi native: render at 150 and crop
+  half-pages; upscaling crops (300-500 %) is what reads the marginalia.
+- Fill-in hand: gothic F and G of sheaves (the G drawn like « Of » or « g »), gothic A of sheaves of rings
+  (like « Ol »), gothic B, gothic S of the Zorn sets, script U of coverings, script C of continuous germs,
+  a long-s-shaped letter read \mathscr{S}, a grey double-struck Z (\mathbb{Z}), Γ typed as a hooked T.
+  The base Φ is typed sometimes as φ with a stroke: set \Phi throughout. The chain in the Zorn argument of
+  th. 2 (p. 93) is a different gothic letter, read \mathfrak{B} with \uncertain. On p. 101 the element a of
+  lemma 2 is drawn like the gothic A: read a, noted.
+- One cursive ink hand annotates § 3-4 throughout (« Exer », « Bel exer. », « On sait pas », « Est-ce
+  utile ? », terminology remarks, two textual corrections, a rewritten formula on p. 98). It quotes « JPS »,
+  so it is not Serre; no initials on these pages, so « main non identifiée » (the brief's « Samuel's copy »
+  is not shown by the pages). The hand writes short and joined: budget zooms for every marginal.
+
+## 2026-10-31 — rédaction 461 (Fonds Cartier, PCR 143, item 1036), batch 2 (pp. 41-80), Opus 5.5
+- Cover sheet on PDF p. 1 and a summary page; typist's « - n - » = PDF page − 2 throughout this batch.
+- The typewriter has α, ε, φ, ω, ξ, ∈, ⊂; a fill-in hand on the stencil draws β, γ, δ, η, θ (as ϑ), λ, Λ, μ
+  (sometimes), ν (a looped « ν » like a reversed « ɔ »), ρ, σ, ζ, χ (a slashed « ɤ »), ψ, the capitals Ξ (a
+  box-like Ξ), Φ, Ψ, Ω, and all diagram arrows. Set without apparatus. Double-struck capitals are drawn too:
+  ℤ, and \mathbb{S}, \mathbb{B} for source and target (𝕊ε = b, 𝔹ε = a).
+- Typed underlined « Fl », « Hom », « Diag », « Comp » are \underline{\mathrm{…}}; the opposite category is
+  typed C with a raised capital O, kept $C^{O}$; « b//a » (quotient object) is $b /\!/ a$.
+- Diagrams are typed with a dot under each object and dashed arrows: set them in tikz-cd; square labels
+  (I)-(IV) at the centre of squares are not in the renderer's subset (no phantom arrows): say them in a \note.
+- The typescript reuses numbers inside § 2 (Déf. 3 and 4 twice, n° 4 and n° 6/7) and has many slips in
+  indices (ω_0 for ω'_0, a for a_0, C_{/a} for C_{/b}): keep as typed with a short « Ainsi tapé » \note.
+- Two inks besides the stencil: a second ink hand (marginal sketch p. 48, a heading note p. 59) — « main
+  non identifiée »; pencilled « PC » top right of p. 46.

@@ -31,7 +31,7 @@ an Elephant*, Lemma A1.1.1 (not checked against the book).
 product), for which the lemma is a step.
 -/
 
-namespace Grothendieck.Bourbaki438
+namespace Bourbaki.Redaction438
 
 open CategoryTheory Functor
 
@@ -137,4 +137,4 @@ def adjunctionOfRightTriangle
       left_triangle := by ext X; simpa using leftTriangle_of_rightTriangle η ε hr hl X
       right_triangle := by ext Y; simpa using hr Y }
 
-end Grothendieck.Bourbaki438
+end Bourbaki.Redaction438

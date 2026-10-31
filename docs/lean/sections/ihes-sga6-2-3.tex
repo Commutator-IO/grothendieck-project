@@ -1,0 +1,65 @@
+\section[IHÉS SGA\,6 2/3 : le groupe $K$ d'une catégorie triangulée, la formule d'Euler]{IHÉS SGA\,6 2/3 : le groupe $K$ d'une catégorie triangulée, et la formule d'Euler\protect\verifie[\leanblobmain]{IhesSGA6_2_3}}\label{sec:ihes-sga6-2-3}
+
+Comme la section~\ref{sec:ihes-sga6-1-5}, cette section porte sur une pièce du fonds Grothendieck--Illusie de l'IHÉS, \texttt{FG\_IL\_5\_SGA6\_2\_3} (\href{https://grothendieck.commutator.io/illusie/\#FG_IL_5_SGA6_2_3/1/p1}{vue~1}). Ce sont des notes manuscrites de quinze vues, intitulées \q{Groupes $K$}, qui portent en haut de la première \q{(Pour Illusie)} ; le catalogue de l'IHÉS les date \q{1965 ?}. Elles esquissent un exposé sur les groupes $K$ : le groupe d'une catégorie triangulée, sa comparaison avec celui d'une catégorie abélienne, puis une généralisation. Aucune lecture modernisée n'en a été faite : les énoncés ci-dessous sont lus sur la transcription des vues~1 à~3.
+
+\emph{L'idée.} On cherche à mesurer les objets d'une catégorie par des nombres, ou des éléments d'un groupe abélien, de façon additive. Pour les espaces vectoriels de dimension finie, la dimension vérifie $\dim V = \dim V' + \dim V''$ pour toute suite exacte $0 \to V' \to V \to V'' \to 0$. Une \emph{fonction additive} sur une catégorie abélienne est une fonction $\chi$ des objets qui vérifie la même règle, et le groupe $K$ est le réceptacle universel de ces fonctions : le groupe abélien libre sur les objets, divisé par les relations $[V] = [V'] + [V'']$. Dans une catégorie triangulée, comme la catégorie dérivée, les \emph{triangles distingués} $X \to Y \to Z \to X[1]$ jouent le rôle des suites exactes courtes ; une suite exacte courte de complexes donne un tel triangle. Les notes posent donc : $K(\mathcal C)$ est le quotient du groupe abélien libre sur les objets de $\mathcal C$ par le sous-groupe engendré par les $[Y] - [X] - [Z]$, un pour chaque triangle distingué, et $\mathrm{cl}(X)$ est l'image de $X$ (vue~1).
+
+Il faut rappeler ce qu'on demande aux triangles. Une catégorie \emph{prétriangulée} est une catégorie additive munie d'un foncteur de translation $X \mapsto X[1]$, inversible, et d'une classe de triangles $X \to Y \to Z \to X[1]$, dits distingués, telle que : un triangle isomorphe à un triangle distingué est distingué ; pour tout $X$, le triangle $X \xrightarrow{\mathrm{id}} X \to 0 \to X[1]$ est distingué ; tout morphisme $X \to Y$ se complète en un triangle distingué ; $X \to Y \to Z \to X[1]$ est distingué si et seulement si sa rotation $Y \to Z \to X[1] \to Y[1]$ l'est (au signe près) ; enfin un carré commutatif entre deux triangles distingués se complète en un morphisme de triangles. Une catégorie triangulée vérifie de plus l'axiome de l'octaèdre, qui ne sert pas ici.
+
+\begin{encadre}
+\begin{enonce}[Notes, vues 1 et 2]
+Soit $\mathcal C$ une catégorie triangulée. Dans $K(\mathcal C)$ :
+\begin{itemize}
+\item $\mathrm{cl}(0) = 0$, et $\mathrm{cl}(X) = \mathrm{cl}(X')$ si $X \simeq X'$ ;
+\item $\mathrm{cl}(X[n]) = (-1)^n\,\mathrm{cl}(X)$ pour tout $n \in \mathbf Z$, en particulier $\mathrm{cl}(X[1]) = -\mathrm{cl}(X)$ ;
+\item $\mathrm{cl}(X \oplus Y) = \mathrm{cl}(X) + \mathrm{cl}(Y)$ ;
+\item (proposition de la vue~2) tout élément de $K(\mathcal C)$ s'écrit $\mathrm{cl}(X)$ pour un objet $X$ ;
+\item (fonctorialité) un foncteur exact $\varphi : \mathcal C \to \mathcal C'$ induit un homomorphisme $K(\varphi)$ tel que $K(\varphi)(\mathrm{cl}\,X) = \mathrm{cl}\,\varphi(X)$, et deux foncteurs isomorphes induisent le même.
+\end{itemize}
+\end{enonce}
+\end{encadre}
+
+\noindent Les notes écrivent ces propriétés pour une fonction additive $\chi$ quelconque, en partie dans une accolade ajoutée d'une encre plus foncée en marge de la vue~1 ; la propriété universelle de $K(\mathcal C)$ les transporte à $\mathrm{cl}$, et réciproquement.
+
+\begin{proof}
+Chaque égalité vient d'un triangle bien choisi. Le triangle $0 \to 0 \to 0 \to 0$ donne $\mathrm{cl}(0) = \mathrm{cl}(0) + \mathrm{cl}(0)$, d'où $\mathrm{cl}(0) = 0$. Pour un isomorphisme $e : X \to Y$, le triangle $X \xrightarrow{e} Y \to 0 \to X[1]$ est isomorphe à $X \xrightarrow{\mathrm{id}} X \to 0 \to X[1]$, donc distingué, et donne $\mathrm{cl}(Y) = \mathrm{cl}(X) + \mathrm{cl}(0)$. La rotation de $X \to X \to 0 \to X[1]$ est le triangle $X \to 0 \to X[1] \to X[1]$, qui donne $\mathrm{cl}(0) = \mathrm{cl}(X) + \mathrm{cl}(X[1])$, soit $\mathrm{cl}(X[1]) = -\mathrm{cl}(X)$. Comme $X[n+1] \simeq X[n][1]$, une récurrence sur $n$, vers le haut et vers le bas, donne $\mathrm{cl}(X[n]) = (-1)^n\,\mathrm{cl}(X)$. Le triangle scindé $X \to X \oplus Y \to Y \xrightarrow{0} X[1]$ est distingué, et donne la somme directe.
+
+Pour la surjectivité, un élément de $K(\mathcal C)$ est une combinaison $\sum_i \mathrm{cl}(X_i) - \sum_j \mathrm{cl}(Y_j)$. Puisque $-\mathrm{cl}(Y) = \mathrm{cl}(Y[1])$, c'est une somme de classes, donc la classe d'une somme directe :
+\[
+  \sum_i \mathrm{cl}(X_i) - \sum_j \mathrm{cl}(Y_j) = \mathrm{cl}\Bigl(\bigoplus_i X_i \oplus \bigoplus_j Y_j[1]\Bigr).
+\]
+En particulier $\mathrm{cl}(X) - \mathrm{cl}(Y) = \mathrm{cl}(X \oplus Y[1])$. Enfin, un foncteur exact envoie triangles distingués sur triangles distingués, donc $X \mapsto \mathrm{cl}\,\varphi(X)$ est additive et passe au quotient ; si $\varphi \simeq \varphi'$, les objets $\varphi(X)$ et $\varphi'(X)$ sont isomorphes et ont la même classe.
+\end{proof}
+
+\begin{remarque}
+La translation fait la différence avec les catégories abéliennes. À la vue~4, les notes doutent que tout élément du $K$ d'une catégorie abélienne soit une classe $\mathrm{cl}(X)$, et n'affirment que la forme $\mathrm{cl}(X) - \mathrm{cl}(Y)$, celle de la proposition~3\,a) de la rédaction Bourbaki n\textsuperscript{o}\,596 (document \texttt{bourbaki-lean.pdf}). Dans une catégorie triangulée, l'objet $Y[1]$ joue le rôle de $-Y$. Pour les espaces vectoriels gradués de dimension finie, où $X[1]$ décale les degrés, la caractéristique d'Euler $\sum_i (-1)^i \dim X^i$ change de signe par translation, ce qui est l'égalité $\chi(X[1]) = -\chi(X)$.
+\end{remarque}
+
+\emph{Le critère des deux triangles.} Un corollaire de la vue~2 dit que $\mathrm{cl}(X) = \mathrm{cl}(X')$ si et seulement s'il existe deux triangles distingués $A \to B \to C \to A[1]$ et $A' \to B' \to C' \to A'[1]$ tels que
+\[
+  X \oplus B \oplus A[1] \oplus C[1] \;\simeq\; X' \oplus B' \oplus A'[1] \oplus C'[1].
+\]
+Le sens \q{si} est un calcul : la classe de $B \oplus A[1] \oplus C[1]$ est $\mathrm{cl}(B) - \mathrm{cl}(A) - \mathrm{cl}(C) = 0$. Il est démontré. Le sens \q{seulement si} est le lemme~2.4 de Thomason \cite{thomason1997}. Les notes le déduisent d'une description de $K(\mathcal C)$ comme quotient du monoïde des classes d'isomorphie d'objets par le sous-monoïde des $B \oplus A[1] \oplus C[1]$ ; ce sens n'est pas formalisé.
+
+\emph{La formule d'Euler.} À la vue~3, pour une fonction additive $\chi$ sur une catégorie abélienne, la cinquième propriété d'une liste est
+\[
+  \sum_i (-1)^i \chi(X^i) = \sum_i (-1)^i \chi\bigl(H^i(X^\bullet)\bigr)
+\]
+pour un complexe $X^\bullet$ fini. La même égalité est en marge de la vue~2 de la pièce voisine \texttt{FG\_IL\_5\_SGA6\_2\_1}, pour la somme alternée des classes. Elle dit que la caractéristique d'Euler d'un complexe ne dépend que de sa cohomologie. En particulier, un complexe exact a une somme alternée nulle : pour $0 \to K \to K^2 \to K \to 0$ exacte, $1 - 2 + 1 = 0$. On la démontre ici pour la dimension.
+
+\begin{encadre}
+\begin{enonce}[Notes, vue~3, propriété~5, pour $\chi = \dim$]
+Soit $V^0 \xrightarrow{d^0} V^1 \xrightarrow{d^1} \cdots \xrightarrow{d^{n-1}} V^n \to 0$ un complexe d'espaces vectoriels de dimension finie sur un corps, éventuellement gauche ($d^{i+1} \circ d^i = 0$). Avec $H^i = \ker d^i / \operatorname{im} d^{i-1}$,
+\[
+  \sum_{i=0}^{n} (-1)^i \dim V^i = \sum_{i=0}^{n} (-1)^i \dim H^i .
+\]
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+Notons $z_i = \dim \ker d^i$ et $b_i = \dim \operatorname{im} d^{i-1}$, avec $b_0 = 0$, et $b_{n+1} = 0$ puisque $d^n = 0$. Le théorème du rang donne $\dim V^i = z_i + b_{i+1}$, et $\operatorname{im} d^{i-1} \subset \ker d^i$ donne $\dim H^i = z_i - b_i$. La différence des deux membres est donc $\sum_{i=0}^n (-1)^i (b_{i+1} + b_i)$, une somme télescopique : les termes $b_1, \dots, b_n$ s'y annulent deux à deux, et il reste $b_0 + (-1)^n b_{n+1} = 0$.
+\end{proof}
+
+\noindent\emph{Vérification en Lean.} La catégorie est prétriangulée au sens de mathlib (\texttt{Pretriangulated C}), qui n'a pas de groupe $K_0$ de catégorie triangulée ; l'axiome de l'octaèdre n'est pas supposé. Le groupe est \texttt{K₀ C}, quotient de \texttt{FreeAbelianGroup C} par le sous-groupe \texttt{relations C} qu'engendrent les relations des triangles distingués : c'est la forme que l'édition donne au $\mathbf Z^{(\mathrm{Ob}\,\mathcal C)}$ des notes. La relation d'un triangle est \texttt{cl\_obj₂}, la propriété universelle \texttt{lift}, \texttt{lift\_cl} et \texttt{hom\_ext}. Les énoncés encadrés sont \texttt{cl\_zero}, \texttt{cl\_eq\_of\_iso}, \texttt{cl\_shift\_one}, \texttt{cl\_shift}, \texttt{cl\_biprod}, \texttt{cl\_sub}, \texttt{cl\_surjective}, et, pour la fonctorialité, \texttt{map}, \texttt{map\_cl} et \texttt{map\_eq\_of\_iso}. Le sens \q{si} du critère des deux triangles est \texttt{cl\_eq\_of\_iso\_biprod}. La formule d'Euler est \texttt{sum\_finrank\_eq\_sum\_finrank\_cohomology} : le complexe est une famille $(V^i)_{i \in \mathbf N}$ d'espaces de dimension finie sur un anneau à division, avec $d^n = 0$, et la cohomologie \texttt{cohomology d i} est le quotient de $\ker d^i$ par l'image de $d^{i-1}$, vue dans $\ker d^i$. La somme télescopique est \texttt{sum\_alternating\_telescope}. Les noms sont ceux de \href{\leanblobmain/IhesSGA6_2_3.lean}{\texttt{IhesSGA6\_2\_3.\allowbreak{}lean}}.
+
+Ne sont pas démontrés ici : le sens \q{seulement si} du critère des deux triangles, et la description de $K(\mathcal C)$ par le monoïde des classes d'isomorphie ; le fait qu'une équivalence induise un isomorphisme ; la suite exacte $K(\mathcal D) \to K(\mathcal C) \to K(\mathcal C/\mathcal D) \to 0$ pour une sous-catégorie épaisse, que la vue~3 marque \q{à vérifier} ; la comparaison $K(\mathcal C) \simeq K(D^b(\mathcal C))$ pour une catégorie abélienne, au n\textsuperscript{o}\,2 ; la formule d'Euler pour une fonction additive quelconque, ou pour les longueurs de modules.

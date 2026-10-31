@@ -1,0 +1,27 @@
+\section[Rédaction Bourbaki \redac{205} : un critère de revêtement]{Rédaction Bourbaki \redac{205} : relever les carrés ne suffit pas à faire un revêtement\protect\verifie{Redaction205}}\label{sec:bourbaki-205}
+
+La rédaction \redac{205}, \q{Topologie élémentaire. Chapitre~III. Groupe fondamental et revêtements (état~1)}, des archives Bourbaki (Archives Henri Poincaré, \ahp{702} ; l'\ahp{867} en donne le même texte) n'est pas datée, et sa notice ne nomme pas d'auteur ; elle compte 46 pages. Elle se termine par une liste d'exercices, dont le deuxième (p.~45) propose une caractérisation des revêtements. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+\emph{Revêtements et relèvements.} Une application continue $p : Y \to X$ est un revêtement si chaque point de $X$ a un voisinage ouvert $U$ dont l'image réciproque est une réunion disjointe d'ouverts, les \q{feuillets}, que $p$ envoie chacun homéomorphiquement sur $U$. L'exemple type est $\mathbf R \to \mathbf S^1$, $t \mapsto e^{2i\pi t}$. Un revêtement a deux propriétés : ses fibres $p^{-1}(x)$ sont discrètes, et toute application continue d'un carré $[0, 1]^2$ dans $X$ se relève continûment à $Y$, de façon unique une fois choisi le relevé d'un point. L'exercice~2, pour une base $X$ connexe, localement connexe et soumise à une condition de la rédaction notée (RU), affirme la réciproque : ces deux propriétés feraient de $p$ un revêtement.
+
+\emph{Pourquoi cela échoue.} Les deux propriétés ne parlent que d'applications définies sur des espaces connexes, et un espace $Y$ peut être fait de morceaux qui se rapprochent sans se toucher. Une application d'un carré, connexe, reste alors dans un seul morceau, et les relèvements sont uniques ; mais deux morceaux peuvent s'approcher l'un de l'autre au-dessus d'un même point, et $p$ n'est injective sur aucun voisinage du point limite.
+
+\begin{encadre}
+\begin{contrexemple}[rédaction \redac{205}, exercice~2, p.~45]
+Soit $Y \subset [0, 1] \times \mathbf R \times \mathbf R$ la réunion du segment $\{(x, 0, 0)\}$ et, pour $n \geq 1$, des graphes $\{(x, |nx - 1|, 1/n)\}$, et soit $p : Y \to [0, 1]$ la première projection. Les fibres de $p$ sont discrètes ; toute application continue d'un espace connexe dans $[0, 1]$, en particulier du carré, se relève de façon unique une fois fixé le relevé d'un point. Mais $p$ n'est pas un homéomorphisme local, et n'est donc pas un revêtement, bien que $[0, 1]$ soit connexe, localement connexe et contractile.
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+Chaque feuillet est l'image d'une section continue $x \mapsto (x, |nx - 1|, 1/n)$ de $p$, et un point de $Y$ est déterminé par sa première et sa dernière coordonnée. La dernière coordonnée, le \emph{niveau}, est une fonction continue sur $Y$ qui ne prend qu'une infinité dénombrable de valeurs ($0$ et les $1/n$). Sur un espace connexe, une fonction réelle continue a pour image un intervalle ; un intervalle dénombrable est réduit à un point. Un relevé continu d'une application d'un espace connexe a donc un niveau constant : il reste sur un feuillet. Il existe (on compose avec la section du feuillet du point imposé) et il est unique (le niveau et la projection le déterminent). Les fibres sont discrètes, car au-dessus de $x$ les points des différents feuillets ont des niveaux ou des deuxièmes coordonnées séparés. Enfin, au-dessus de $1/n$, le feuillet $n$ passe par $(1/n, 0, 1/n)$ et le segment par $(1/n, 0, 0)$. Ces deux points distincts ont la même image, et tous deux tendent vers $(0, 0, 0)$ quand $n$ grandit : aucun voisinage de ce point n'est envoyé injectivement par $p$.
+\end{proof}
+
+\noindent L'énoncé juste demande en plus que $p$ soit un homéomorphisme local, ce que suppose d'ailleurs l'exemple que l'exercice donne entre parenthèses, ou que $Y$ soit localement connexe.
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} L'échec du revêtement est \texttt{not\_isLocallyInjective\_proj}, \texttt{not\_isLocalHomeomorph\_proj} et \texttt{not\_isCoveringMap\_proj} ; les fibres discrètes sont \texttt{discreteTopology\_fiber} ; le relèvement unique est \texttt{existsUnique\_lift}, avec les cas du carré et du chemin \texttt{existsUnique\_lift\_square} et \texttt{existsUnique\_lift\_path} ; le lemme sur les fonctions à valeurs dénombrables est \texttt{level\_eq\_of\_isPreconnected}, dans \href{\leanblobmain/Redaction205.lean}{\texttt{Redaction205.\allowbreak{}lean}}.
+\end{sloppypar}
+
+Ne sont pas démontrés ici : la condition (RU) de la rédaction, qui n'est pas énoncée (l'intervalle $[0, 1]$ la vérifie sous toute lecture raisonnable, puisqu'il est contractile et a une base d'ouverts contractiles) ; la caractérisation corrigée elle-même.
+
+\litterature{l'exercice est faux tel qu'il est écrit, et l'énoncé corrigé est un résultat de manuel (Spanier, \emph{Algebraic Topology}, chapitre~2, §~4 \cite{spanier1966} ; l'endroit exact n'a pas été vérifié). Ce n'est pas une piste.}

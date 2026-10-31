@@ -1,0 +1,54 @@
+\section[Rédaction Bourbaki \redac{321} : carrés cartésiens dans une catégorie abélienne]{Rédaction Bourbaki \redac{321} : carrés cartésiens et cocartésiens dans une catégorie abélienne\protect\verifie{Redaction321}}\label{sec:bourbaki-321}
+
+La rédaction \redac{321} des archives Bourbaki (Archives Henri Poincaré, \ahp{887}), intitulée \q{Pull-backs}, tient en six pages dactylographiées que la notice date de mai--juin 1959 et donne à Serge Lang. Elle fixe un carré commutatif dans une catégorie abélienne et compare deux propriétés universelles, celle du produit fibré (carré cartésien) et celle de la somme amalgamée (carré cocartésien), avec l'exactitude d'une suite construite sur le carré. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+\emph{Le carré.} On note
+\[
+\begin{tikzcd}
+P \arrow[r, "U"] \arrow[d, "V"'] & B \arrow[d, "v"] \\
+A \arrow[r, "u"'] & Q
+\end{tikzcd}
+\]
+le carré, avec $uV = vU$. Dans la catégorie des modules sur un anneau, le produit fibré de $u$ et $v$ est le sous-module $\{(a, b) \in A \oplus B : u(a) = v(b)\}$, c'est-à-dire le noyau de l'application $(a, b) \mapsto u(a) - v(b)$. Dire que le carré est cartésien, c'est dire que $p \mapsto (V(p), U(p))$ identifie $P$ à ce noyau. De même, la somme amalgamée de $V$ et $U$ est le quotient de $A \oplus B$ par les éléments $(V(p), -U(p))$, et le carré est cocartésien quand $(a, b) \mapsto u(a) + v(b)$ identifie $Q$ à ce quotient. La rédaction transporte ces deux descriptions dans une catégorie abélienne quelconque.
+
+\begin{encadre}
+\begin{enonce}[Bourbaki, rédaction \redac{321}, proposition~2, p.~4]
+Le carré est cartésien si et seulement si la suite $0 \to P \to A \oplus B \to Q$, de flèches $(V, U)$ et $u - v$, est exacte. Il est cocartésien si et seulement si la suite $P \to A \oplus B \to Q \to 0$, de flèches $(V, -U)$ et $u + v$, est exacte.
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+Une flèche $T \to P$ et un couple $(x, y)$ de flèches $T \to A$, $T \to B$ avec $ux = vy$ sont deux façons de dire la même chose qu'une flèche $T \to A \oplus B$ dont le composé avec $u - v$ est nul. La propriété universelle du produit fibré dit alors exactement que $P$, par $(V, U)$, est le noyau de $u - v$ : c'est l'exactitude de la première suite, flèche de gauche comprise. La seconde moitié est la même chose, flèches renversées : la propriété de la somme amalgamée dit que $Q$, par $u + v$, est le conoyau de $(V, -U)$.
+\end{proof}
+
+\noindent La rédaction utilise une seule convention de signe pour les deux suites. Les deux complexes diffèrent par l'automorphisme $(a, b) \mapsto (a, -b)$ de $A \oplus B$, qui ne change pas leur exactitude ; le fichier le vérifie (\texttt{shortComplexIso}).
+
+\emph{Quand un carré cartésien est cocartésien.} Dans les modules, l'intersection de deux sous-modules $M$ et $N$ donne un carré qui est à la fois cartésien et cocartésien, avec $M + N$ au coin opposé. Pour un carré cartésien quelconque, la flèche $A \oplus B \to Q$ n'a aucune raison d'être surjective : si $A = B = 0$ et $Q \neq 0$, le carré est cartésien avec $P = 0$, et il n'est pas cocartésien. La proposition~4 de la page~4 dit que c'est la seule obstruction.
+
+\begin{encadre}
+\begin{enonce}[Bourbaki, rédaction \redac{321}, propositions~4 et~5, pp.~4--5]
+Un carré cartésien dans lequel $v$ (ou $u$) est un épimorphisme est cocartésien. Dualement, un carré cocartésien dans lequel $U$ (ou $V$) est un monomorphisme est cartésien. Dans un carré cartésien, si $v$ est un épimorphisme, $V$ en est un ; dans un carré cocartésien, si $V$ est un monomorphisme, $v$ en est un.
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+Si le carré est cartésien, la suite $0 \to P \to A \oplus B \to Q$ est exacte par la proposition~2. Si $v$ est un épimorphisme, la flèche $u - v$ l'est aussi, puisque sa restriction à $B$ est $-v$. La suite $P \to A \oplus B \to Q \to 0$ est donc exacte, au signe près, et le carré est cocartésien par la proposition~2. L'énoncé dual se démontre de la même façon, flèches renversées. Pour la proposition~5, on raisonne d'abord dans les modules : si $v$ est surjective et $a \in A$, on choisit $b$ avec $v(b) = u(a)$, et le couple $(a, b)$ est un élément de $P$ d'image $a$. Dans une catégorie abélienne, le même raisonnement se fait sur des flèches $T \to A$, quitte à remplacer $T$ par un objet $T'$ qui le recouvre par un épimorphisme ; c'est la technique des \q{raffinements} de mathlib, qui tient lieu d'éléments.
+\end{proof}
+
+\emph{Une coquille dans le dual.} Tel qu'il est tapé, l'énoncé dual de la proposition~4 demande que la flèche notée $u$ soit un monomorphisme. Si on lit $u$ comme la flèche du bas, $A \to Q$, l'énoncé est faux.
+
+\begin{contrexemple}[rédaction \redac{321}, dual de la proposition~4, lu sur la flèche du bas]
+Soit $X$ un objet non nul. Le carré de sommets $P = X$ et $A = B = Q = 0$ est cocartésien, et sa flèche du bas $u$, l'identité de~$0$, est un isomorphisme. Il n'est pas cartésien.
+\end{contrexemple}
+
+\begin{proof}
+La somme amalgamée de $X \to 0$ et $X \to 0$ est $0$ : le carré est cocartésien. Le produit fibré de $0 \to 0$ et $0 \to 0$ est $0$, qui n'est pas isomorphe à $X$.
+\end{proof}
+
+\noindent La flèche voulue est la flèche du haut $U$, celle qui joue pour la somme amalgamée le rôle que joue $v$ pour le produit fibré ; avec elle, l'énoncé est juste, et c'est lui qu'énonce l'encadré.
+
+\noindent\emph{Vérification en Lean.} La proposition~2 est \texttt{isPullback\_iff\_exact} et \texttt{isPushout\_iff\_exact}. Mathlib avait déjà le sens direct de la première moitié ; le fichier ajoute les réciproques. La proposition~4 et son dual sont \texttt{isPushout\_of\_isPullback\_of\_epi\_right}, \texttt{isPullback\_of\_isPushout\_of\_mono\_top} et leurs variantes symétriques, la proposition~5 est \texttt{epi\_fst\_of\_isPullback} (sa moitié sur les monomorphismes vaut dans toute catégorie et est déjà dans mathlib), et le contre-exemple est \texttt{not\_isPullback\_of\_isPushout\_of\_mono\_bottom}, dans \href{\leanblobmain/Redaction321.lean}{\texttt{Redaction321.\allowbreak{}lean}}.
+
+Ne sont pas démontrées ici, parce que mathlib les contient : la proposition~1, existence des produits fibrés et des sommes amalgamées, barrée sur le tapuscrit ; la proposition~3, unicité des flèches vers un produit fibré, barrée aussi ; la proposition~6, recollement de deux carrés cartésiens.
+
+\litterature{les énoncés sont classiques. La proposition~4 est l'étiquette 08N4 du Stacks Project \cite{stacks}, et le relevé des rédactions classe celle-ci parmi les textes retrouvés dans la littérature.}

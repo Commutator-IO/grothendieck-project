@@ -49,7 +49,7 @@ not formalised.
 
 open Cardinal Polynomial Function
 
-namespace Grothendieck.Bourbaki457
+namespace Bourbaki.Redaction457
 
 /-- The Cantor set, as the space of binary sequences. -/
 abbrev Cantor := ℕ → Bool
@@ -208,4 +208,4 @@ theorem finrank_eq_card_points {k : Type*} [Field k] {A : Type*} [CommRing A] [A
     _ = Nat.card (Σ i, K i →ₐ[k] Ω) := by rw [Nat.card_sigma]; exact Finset.sum_congr rfl fun i _ => (hc i).symm
     _ ≤ _ := Nat.card_le_card_of_injective φ hφ
 
-end Grothendieck.Bourbaki457
+end Bourbaki.Redaction457

@@ -1,0 +1,33 @@
+\section[Rédaction Bourbaki n\textsuperscript{o}\,453 : les univers forment une chaîne]{Rédaction Bourbaki n\textsuperscript{o}\,453 : sous l'axiome de Grothendieck, les univers forment une chaîne\protect\verifie{Redaction453}}\label{sec:bourbaki-453}
+
+La rédaction n\textsuperscript{o}\,453 des archives Bourbaki (Archives Henri Poincaré, \href{https://archives-bourbaki.ahp-numerique.fr/items/show/1031}{item 1031}), que sa notice date de septembre 1965 et donne à Pierre Samuel, tient en une page dactylographiée et non signée sur les univers et le symbole~$\tau$. Elle rapporte un résultat d'un étudiant de troisième cycle de Samuel : l'axiome de Grothendieck sur les univers entraîne que tout ensemble est artinien. Le congrès de mars 1965, ajoute-t-elle, l'avait soupçonné. Les univers sont le fondement ensembliste de la théorie des topos : SGA~4 les introduit dans l'appendice de son exposé~I \cite{sga4-1}. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+\emph{Les univers.} Un univers est un ensemble $U$ stable par les opérations usuelles : il contient les éléments de ses éléments, les paires et l'ensemble des parties de ses éléments, et les réunions de familles indexées par l'un de ses éléments. Toute construction faite à partir d'éléments de $U$ reste dans $U$. On peut alors parler de catégories \q{petites} relativement à $U$ et appliquer à la catégorie de tous les petits ensembles, qui n'est pas petite, les constructions qu'on ferait sur un ensemble. SGA~4 pose que tout ensemble appartient à un univers.
+
+\emph{Le symbole $\tau$.} La \emph{Théorie des ensembles} de Bourbaki ne prend pas les quantificateurs comme primitifs. Pour une relation $P(x)$, elle forme un objet $\tau_x P(x)$, qui vérifie $P$ dès qu'un objet quelconque la vérifie : c'est un témoin choisi une fois pour toutes, et l'on définit $(\exists x)\,P(x)$ comme $P(\tau_x P(x))$. L'axiome de Grothendieck, noté (AG) dans la rédaction, demande que ce choix respecte les univers.
+
+\begin{definition}
+Une famille $\mathcal U$ d'ensembles vérifie (AG) si, pour toute relation $P$ et tout $U \in \mathcal U$ qui contient un objet vérifiant $P$, on a $\tau_x P(x) \in U$.
+\end{definition}
+
+\noindent Un ensemble est \emph{artinien} quand l'appartenance n'y a pas de chaîne infinie descendante $x_0 \ni x_1 \ni x_2 \ni \cdots$. Dire que tout ensemble est artinien, c'est l'axiome de fondation, que la théorie de Bourbaki ne pose pas. Le résultat rapporté est donc surprenant : une condition sur le choix des témoins entraîne la fondation.
+
+\emph{Le pas a).} La démonstration de la rédaction a deux pas, et le premier est le cœur de l'affaire. Il dit que deux univers sont toujours comparables pour l'inclusion. Si $U \not\subset U'$ et $U' \not\subset U$, on applique (AG) à la relation \q{$x \notin U \cap U'$}. Elle a un témoin dans $U$, un élément de $U$ hors de $U'$, et un témoin dans $U'$. Le témoin choisi $t = \tau_x(x \notin U \cap U')$ est donc à la fois dans $U$ et dans $U'$. La rédaction s'arrête à cette double appartenance. La contradiction vient de ce que $t$ vérifie la relation, puisqu'elle a un témoin : $t \notin U \cap U'$.
+
+\begin{encadre}
+\begin{enonce}[Bourbaki, rédaction n\textsuperscript{o}\,453, pas a)]
+Si une famille $\mathcal U$ d'ensembles vérifie (AG), deux éléments de $\mathcal U$ sont toujours comparables pour l'inclusion : $\mathcal U$ est une chaîne.
+\end{enonce}
+\end{encadre}
+
+\begin{remarque}
+Le pas a) n'utilise aucune propriété des univers : ni leurs stabilités, ni l'existence d'un univers contenant un ensemble donné. Il vaut pour toute famille d'ensembles qui vérifie (AG), et ne demande du symbole $\tau$ que la propriété du témoin. Dans la théorie usuelle, où l'on pose l'axiome de fondation, les univers non dénombrables sont les ensembles $V_\kappa$ pour $\kappa$ fortement inaccessible, et sont donc comparables. (AG) donne ici cette comparaison sans fondation.
+\end{remarque}
+
+\begin{demopage}[pas b)]
+Soit $y$ un ensemble non artinien, et $U$ un univers qui le contient. Soit $c$ la borne supérieure des cardinaux des éléments de $U$. Un ordinal de von Neumann $z$ de cardinal $2^c$ est artinien, et, d'après la rédaction n\textsuperscript{o}\,424, les éléments artiniens d'un univers qui contient $z$ forment un univers $U'$ qui contient $z$. Alors $U \not\subset U'$, à cause de $y$, et $U' \not\subset U$, car $z$ est de cardinal $2^c > c$ et ne peut appartenir à $U$. Cela contredit le pas a).
+\end{demopage}
+
+\noindent\emph{Vérification en Lean.} Lean n'a pas d'appartenance entre ensembles au sens de Bourbaki. Les \q{ensembles} y sont les éléments d'un type $\alpha$ non vide, une famille d'univers est une famille $\mathcal U$ de parties de $\alpha$, et $\tau$ est le choix de Hilbert de Lean, \texttt{Classical.\allowbreak{}epsilon}, qui vérifie $P(\varepsilon P)$ dès qu'un objet vérifie $P$ (\texttt{Classical.\allowbreak{}epsilon\_spec}). Ce modèle suffit, puisque le pas a) ne fait intervenir que l'appartenance aux deux univers et la propriété du témoin. L'axiome (AG) est \texttt{AxiomAG}, et l'énoncé encadré est \texttt{isChain\_of\_axiomAG}, dans \href{\leanblobmain/Redaction453.lean}{\texttt{Redaction453.\allowbreak{}lean}}.
+
+Ne sont pas démontrés ici : le pas b), qui demande les ensembles artiniens, les ordinaux de von Neumann, l'arithmétique des cardinaux d'un univers et le résultat de la rédaction n\textsuperscript{o}\,424 ; la conclusion de la rédaction, que tout ensemble est artinien.

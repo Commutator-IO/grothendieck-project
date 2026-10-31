@@ -1,0 +1,40 @@
+\section[Rédaction Bourbaki \redac{476} : deux exercices sur les graphes]{Rédaction Bourbaki \redac{476} : deux exercices sur les graphes qui demandent une hypothèse\protect\verifie{Redaction476}}\label{sec:bourbaki-476}
+
+La rédaction \redac{476}, \q{Catégories. Chapitre~I. Diagrammes et graphes}, des archives Bourbaki (Archives Henri Poincaré, \ahp{1048}) est datée d'octobre 1966 par sa notice, qui la donne à Pierre Cartier ; elle compte 69 pages. Son premier paragraphe se termine (p.~6) par des exercices sur les graphes et leurs orientations. Deux d'entre eux, tels qu'ils sont tapés, sont faux. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+\emph{Orientations.} Un graphe a des sommets et des arêtes, une arête joignant deux sommets distincts. L'orienter, c'est choisir pour chaque arête un sens : l'arête $\{v, w\}$ devient une flèche $v \to w$ ou $w \to v$. Un arbre est un graphe connexe sans cycle : entre deux sommets, il y a un seul chemin sans retour en arrière. Dans un arbre fini à $n$ sommets, il y a $n - 1$ arêtes ; on ne peut donc pas l'orienter de façon que chaque sommet soit la source d'exactement une flèche, car il faudrait $n$ flèches. L'exercice~2 affirme que c'est possible pour tout arbre infini.
+
+\emph{Le contre-exemple.} L'étoile infinie, un centre relié à une infinité dénombrable de feuilles, est un arbre infini. Une feuille n'a qu'une arête, qui doit partir d'elle ; toutes les arêtes pointent donc vers le centre, et le centre n'est la source d'aucune flèche.
+
+\emph{Ce qui est vrai.} L'énoncé tient pour les arbres qui ont un \emph{rayon}, c'est-à-dire un chemin infini $f(0), f(1), f(2), \dots$ qui ne repasse jamais par le même sommet. Il suffit d'orienter chaque arête vers le côté où file le rayon. Si l'on retire l'arête $\{v, w\}$, l'arbre se coupe en deux morceaux, et le rayon finit dans l'un d'eux ; on oriente $v \to w$ si c'est celui de $w$. Dans un arbre infini où chaque sommet n'a qu'un nombre fini de voisins, un rayon existe toujours, par le lemme de König. C'est sans doute le cas que l'exercice avait en vue.
+
+\begin{encadre}
+\begin{contrexemple}[rédaction \redac{476}, exercice~2, p.~6]
+L'étoile infinie est un arbre infini qui n'a aucune orientation où chaque sommet est la source d'exactement une flèche.
+\end{contrexemple}
+\begin{enonce}[exercice~2 corrigé, un sens, énoncé de l'édition]
+Un arbre qui a un rayon a une orientation où chaque sommet est la source d'exactement une flèche.
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+Le contre-exemple a été vu. Pour l'énoncé corrigé, on oriente comme on l'a dit, et il faut voir deux choses. D'abord, chaque arête reçoit un seul sens : quand on la retire, l'arbre a exactement deux morceaux, et la queue du rayon, à partir d'un rang où il n'emprunte plus cette arête, reste dans l'un des deux. Ensuite, chaque sommet $v$ est la source d'exactement une flèche. Le rayon ne repasse pas par $v$ ; à partir d'un certain rang, il évite $v$, et sa queue reste dans un seul morceau de l'arbre privé de $v$. Ce morceau est relié à $v$ par une seule arête, faute de quoi il y aurait un cycle, et c'est la seule arête qui part de $v$.
+\end{proof}
+
+\emph{L'exercice~3.} Un carquois est un graphe orienté, où l'on admet plusieurs flèches et des boucles. Sa période est le plus grand commun diviseur des longueurs de ses chemins fermés, et vaut $0$ s'il n'en a pas. L'exercice relie la période $d$ aux morphismes du carquois vers le cycle $\mathbf Z/d$ (vers $\mathbf Z$ si $d = 0$), c'est-à-dire aux fonctions $h$ sur les sommets telles que $h(t) = h(s) + 1$ pour toute flèche $s \to t$. Pour un carquois fortement connexe, où l'on va de tout sommet à tout autre, une telle fonction existe pour $\mathbf Z/d$. Sans cette hypothèse, que l'exercice ne pose pas, l'énoncé tombe.
+
+\begin{encadre}
+\begin{contrexemple}[rédaction \redac{476}, exercice~3, sans connexité forte]
+Le carquois à trois sommets $a \to b$, $a \to c$, $c \to b$ n'a aucun chemin fermé, et sa période est $0$. Il n'a de morphisme vers $\mathbf Z/d$ que pour $d = 1$ : ni vers $\mathbf Z$, ni vers $\mathbf Z/2$. Le triangle sous-jacent n'a pas de coloriage en deux couleurs.
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+Une hauteur strictement croissante le long des flèches ($0$ en $a$, $1$ en $c$, $2$ en $b$) interdit tout chemin fermé. Les deux chemins de $a$ à $b$ ont pour longueurs $1$ et $2$ ; une fonction $h$ comme ci-dessus donnerait $h(b) = h(a) + 1 = h(a) + 2$, soit $1 = 0$ dans $\mathbf Z/d$, ce qui force $d = 1$. Enfin un triangle a un nombre impair de côtés et ne se colorie pas en deux couleurs.
+\end{proof}
+
+\noindent\emph{Vérification en Lean.} Une orientation est la structure \texttt{Orientation}, la condition sur les sources est \texttt{Orientation.\allowbreak{}OutDegreeOne}. L'étoile est un arbre infini (\texttt{star\_isTree}), le contre-exemple est \texttt{not\_exists\_outDegreeOne\_star}, et l'énoncé corrigé est \texttt{exists\_outDegreeOne\_of\_ray}. Pour l'exercice~3, l'absence de chemin fermé est \texttt{ex3\_noClosedPath}, les morphismes vers les cycles sont traités par \texttt{ex3\_no\_hom\_zmod} et \texttt{ex3\_no\_hom\_zmod2}, et le coloriage par \texttt{ex3\_not\_bipartite}, dans \href{\leanblobmain/Redaction476.lean}{\texttt{Redaction476.\allowbreak{}lean}}.
+
+Ne sont pas démontrés ici : la réciproque de l'exercice~2 corrigé (une orientation de ce type donne un rayon, en suivant les flèches depuis un sommet quelconque) ; le lemme de König ; l'énoncé général de l'exercice~3 pour les carquois fortement connexes.
+
+\litterature{les deux exercices ne sont pas des pistes : ce sont des erreurs d'énoncé, et aucune recherche bibliographique n'a été consignée à leur sujet.}

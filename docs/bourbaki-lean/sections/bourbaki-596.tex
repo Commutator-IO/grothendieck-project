@@ -1,0 +1,29 @@
+\section[Rédaction Bourbaki n\textsuperscript{o}\,596 : toute classe est une différence]{Rédaction Bourbaki n\textsuperscript{o}\,596 : dans un groupe de Grothendieck, toute classe est une différence\protect\verifie{Redaction596}}\label{sec:bourbaki-596}
+
+La rédaction n\textsuperscript{o}\,596 des archives Bourbaki (Archives Henri Poincaré, \href{https://archives-bourbaki.ahp-numerique.fr/items/show/1142}{item 1142}) est une rédaction du chapitre~VIII d'\emph{Algèbre}, sur les modules et anneaux semi-simples, que sa notice donne à Jean-Louis Verdier et Hyman Bass et date de septembre 1973 à août 1974. Sa seconde partie, datée de mai 1974 sur sa table des matières, s'ouvre sur un §~10, \q{Groupes et anneaux de Grothendieck}. Des corrections à l'encre, d'une main non identifiée, reprennent le texte tapé. Seul le §~10 est transcrit, et sa transcription reste locale pour l'instant ; on n'en cite ici que son titre. Le rapport de Serre sur le même chapitre, deux ans plus tôt, demandait ce paragraphe (section~\ref{sec:bourbaki-582}).
+
+\emph{Le groupe de Grothendieck.} Soit $A$ un anneau. La rédaction part d'un ensemble additif $\underline C$ de classes de $A$-modules : il contient la classe du module nul et, avec les classes de $E$ et de $E'$, celle de $E \oplus E'$. Une fonction additive sur $\underline C$, à valeurs dans un groupe abélien, est une fonction $\varphi$ des classes telle que $\varphi(E) = \varphi(E') + \varphi(E'')$ pour toute suite exacte $0 \to E' \to E \to E'' \to 0$ de modules de type $\underline C$. La longueur, sur les modules de longueur finie, et la dimension, sur les espaces vectoriels de dimension finie, en sont des exemples. Le groupe $K(\underline C)$ est le quotient du groupe abélien libre sur $\underline C$ par les relations $[E] = [E'] + [E'']$ des suites exactes. La classe $[E]$ est la fonction additive universelle (proposition~1) : $K(\underline C)$ est l'endroit où l'on peut soustraire des modules, et où une suite exacte compte comme une somme.
+
+\emph{La proposition~3\,a).} Elle affirme que tout élément $x$ de $K(\underline C)$ s'écrit $[E] - [F]$, pour deux modules $E$ et $F$ de type $\underline C$. Ainsi un entier relatif est la différence de deux entiers naturels. La démonstration de la page tient en deux lignes. Par construction, $x$ est une combinaison à coefficients entiers de classes, donc s'écrit $\sum_i [E_i] - \sum_j [F_j]$. On regroupe chaque côté en une somme directe, $E = \bigoplus_i E_i$ et $F = \bigoplus_j F_j$, puisque $[E_1 \oplus E_2] = [E_1] + [E_2]$ ; cette égalité vient de la suite exacte scindée $0 \to E_1 \to E_1 \oplus E_2 \to E_2 \to 0$.
+
+L'argument n'utilise que deux faits : l'application $\mathrm{cl}(E) \mapsto [E]$ est additive pour la somme directe, et son image engendre $K(\underline C)$. Il vaut donc dans la généralité suivante.
+
+\begin{encadre}
+\begin{enonce}[Rédaction n\textsuperscript{o}\,596, §~10, proposition~3\,a), forme abstraite de l'édition]
+Soient $M$ un monoïde commutatif, $G$ un groupe abélien et $f : M \to G$ un morphisme de monoïdes dont l'image engendre $G$. Tout élément de $G$ s'écrit $f(a) - f(b)$, avec $a, b \in M$.
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+L'ensemble des différences $f(a) - f(b)$ contient l'image de $f$ (prendre $b = 0$) et l'élément neutre. Il est stable par addition, car $(f(a) - f(b)) + (f(c) - f(d)) = f(a + c) - f(b + d)$, et par passage à l'opposé, en échangeant $a$ et $b$. C'est donc un sous-groupe qui contient l'image de $f$, et il est égal à $G$.
+\end{proof}
+
+\noindent La proposition~3\,a) est le cas où $M$ est l'ensemble $\underline C$ muni de la somme directe, de neutre la classe du module nul, et $G = K(\underline C)$. L'additivité de $f$ est l'égalité $[E_1 \oplus E_2] = [E_1] + [E_2]$, et l'image engendre par construction.
+
+\begin{remarque}
+L'énoncé abstrait couvre deux groupes distincts. Le groupe complété du monoïde $(\underline C, \oplus)$ ne connaît que les suites exactes scindées ; $K(\underline C)$ en est le quotient par les relations de toutes les suites exactes. Pour les groupes abéliens finis, la suite $0 \to \mathbf Z/2 \to \mathbf Z/4 \to \mathbf Z/2 \to 0$ donne $[\mathbf Z/4] = [\mathbf Z/2 \oplus \mathbf Z/2]$ dans $K(\underline C)$. Dans le groupe complété, les deux classes restent distinctes : le monoïde des classes de groupes abéliens finis est simplifiable, par le théorème de structure, et s'injecte dans son groupe complété. La proposition~3\,b) de la rédaction décrit justement, par des suites exactes, quand deux modules ont la même classe dans $K(\underline C)$.
+\end{remarque}
+
+\noindent\emph{Vérification en Lean.} L'énoncé encadré est \texttt{diff\_of\_closure} : pour un morphisme additif $f : M \to G$ dont l'image engendre $G$, tout élément de $G$ est un $f(a) - f(b)$. La preuve est la récurrence de la démonstration ci-dessus, sur les éléments du sous-groupe engendré. Le cas du groupe complété d'un monoïde commutatif, \texttt{GrothendieckAddGroup} dans mathlib, est \texttt{grothendieckAddGroup\_diff}. Les noms sont ceux de \href{\leanblobmain/Redaction596.lean}{\texttt{Redaction596.\allowbreak{}lean}}. Les modules, leurs classes, les suites exactes et le groupe $K(\underline C)$ lui-même ne sont pas formalisés : le passage de l'énoncé abstrait à la proposition~3\,a) est celui qu'on vient d'écrire, non vérifié.
+
+Ne sont pas démontrés ici : la proposition~1, propriété universelle de $K(\underline C)$ ; la proposition~2, fonctorialité par restriction et extension des scalaires ; la proposition~3\,b) ; la suite du §~10, conséquences des théorèmes de Krull--Remak--Schmidt et de Jordan--Hölder, résolutions et structures multiplicatives.

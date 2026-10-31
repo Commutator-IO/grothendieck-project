@@ -48,7 +48,7 @@ Cofree objects over `T` relative to `S` are the terminal objects of Mathlib's
 hypothesis on the `D(i)`).
 -/
 
-namespace Grothendieck.Bourbaki448
+namespace Bourbaki.Redaction448
 
 open CategoryTheory Limits Functor Opposite
 
@@ -209,4 +209,4 @@ theorem free_not_pointwise :
 
 end Free
 
-end Grothendieck.Bourbaki448
+end Bourbaki.Redaction448

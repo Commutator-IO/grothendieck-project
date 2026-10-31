@@ -1,0 +1,47 @@
+\section[Cote 89 : la relation fondamentale en rang deux]{Cote 89 : trois vecteurs de somme nulle dans un module libre de rang deux\protect\verifie[\leanblobmain]{Folder89}}\label{sec:89}
+
+La cote 89, \emph{[Hexagone] combinatoire. [Ensembles 3-3] : notes manuscrites (s.d.)}, vingt pages non datées du groupe de cotes 69 à 102 que l'inventaire date de 1976 à vers 1986, part de la structure la plus pauvre qui soit : six objets rangés en deux groupes de trois. Les pages~2 à~14 y lisent un hexagone, puis un plan sur $\mathbf F_3$. Les pages~15 à~18 reprennent la question sur un anneau quelconque : comment reconstituer un module libre de rang~$2$ à partir de l'ensemble de ses droites, muni de quelques données combinatoires (\lot{89}{1}{15}). Pour définir l'addition à partir des seules droites, la page~16 s'appuie sur une relation entre trois vecteurs, qu'elle dit se vérifier \q{de suite}. C'est elle que l'on démontre ici.
+
+\emph{Les données.} Soient $\Lambda$ un anneau commutatif et $V$ un $\Lambda$-module libre de rang~$2$. Une \emph{droite} de $V$ est un facteur direct libre de rang~$1$ ; pour une droite $x$, on note $D_x$ le sous-module et $T_x$ l'ensemble de ses générateurs. Deux générateurs d'une même droite diffèrent d'une unité de $\Lambda$, de sorte que $T_x$ est un torseur sous le groupe $\Lambda^*$ des unités. Le déterminant $\det V = \Lambda^2 V$ est libre de rang~$1$, et l'on note $u \wedge v$ l'image de $(u, v)$ ; dans une base, $u \wedge v = u_0 v_1 - u_1 v_0$. Deux droites $x$ et $y$ sont \emph{disjointes} si $V = D_x \oplus D_y$, ce qui revient à dire que $u \wedge v$ engendre $\det V$ pour $u \in T_x$ et $v \in T_y$, ou encore que $u \wedge v$ est une unité quand on identifie $\det V$ à $\Lambda$ par une base. Sur un corps, deux droites sont disjointes dès qu'elles sont distinctes ; sur un anneau local, il faut que leurs réductions modulo l'idéal maximal le soient.
+
+\emph{L'image du triangle.} Sur $\mathbf R$, $u \wedge v$ est l'aire orientée du parallélogramme construit sur $u$ et $v$. Trois vecteurs de somme nulle sont les côtés d'un triangle parcouru dans l'ordre (figure~\ref{fig:89-triangle}). Deux côtés consécutifs engendrent alors toujours le même parallélogramme, d'aire double de celle du triangle et de même orientation : $u \wedge v = v \wedge w = w \wedge u$. La relation de la page dit que la réciproque est vraie, et qu'elle l'est sur tout anneau dès que $u$ et $v$ forment une base.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1, >=stealth, every node/.style={font=\small}]
+\coordinate (A) at (0,0);
+\coordinate (B) at (3,0.4);
+\coordinate (C) at (1.2,2);
+\fill[piste!10] (A) -- (B) -- (C) -- cycle;
+\draw[->, very thick] (A) -- node[below] {$u$} (B);
+\draw[->, very thick] (B) -- node[above right] {$v$} (C);
+\draw[->, very thick] (C) -- node[above left] {$w$} (A);
+\draw[black!45, dashed] (C) -- (-1.8,1.6) -- (A);
+\node[black!60] at (-0.45,1.15) {\footnotesize $u \wedge v$};
+\end{tikzpicture}
+\caption{Trois vecteurs de somme nulle, côtés d'un triangle parcouru dans l'ordre. Le parallélogramme construit sur $u$ et $v$, complété en pointillé, a pour aire orientée $u \wedge v$, le double de celle du triangle ; les paires $(v, w)$ et $(w, u)$ donnent la même.}
+\label{fig:89-triangle}
+\end{figure}
+
+\begin{encadre}
+\begin{enonce}[Grothendieck, page 16, la relation fondamentale]
+Soient $\Lambda$ un anneau commutatif, $V$ un $\Lambda$-module libre de rang~$2$, $x$ et $y$ deux droites disjointes, $z$ une droite, et $u \in T_x$, $v \in T_y$, $w \in T_z$. Alors
+\[ u \wedge v = v \wedge w = w \wedge u \iff u + v + w = 0 . \]
+\end{enonce}
+\end{encadre}
+
+\noindent La page ajoute que ces relations entraînent que $z$ est disjointe de $x$ et de $y$. La lecture modernisée démontre l'équivalence en écrivant $w = au + bv$ dans la base $(u, v)$ : les égalités équivalent à $a = b = -1$. La démonstration suivie ici, celle de la preuve vérifiée, passe par une identité qui vaut pour trois vecteurs quelconques.
+
+\begin{proof}
+On choisit une base de $V$, qui identifie $\det V$ à $\Lambda$. Pour trois vecteurs quelconques $u$, $v$, $w$ de $V$, on a l'identité de Cramer
+\[ (v \wedge w)\, u + (w \wedge u)\, v + (u \wedge v)\, w = 0 . \]
+Elle exprime que trois vecteurs d'un plan sont liés, avec pour coefficients les mineurs de rang~$2$, et se vérifie coordonnée par coordonnée : pour la première, les six termes de $(v_0 w_1 - v_1 w_0) u_0 + (w_0 u_1 - w_1 u_0) v_0 + (u_0 v_1 - u_1 v_0) w_0$ s'annulent deux à deux. Si les trois produits extérieurs valent un même $d$, l'identité devient $d\,(u + v + w) = 0$, et $d = u \wedge v$ est une unité puisque $x$ et $y$ sont disjointes, d'où $u + v + w = 0$. Réciproquement, si $w = -(u + v)$, alors $v \wedge w = -\,v \wedge u = u \wedge v$ et $w \wedge u = -\,v \wedge u = u \wedge v$.
+\end{proof}
+
+\begin{remarque}
+L'énoncé tient sous une hypothèse plus faible que celle de la page : $w$ n'a pas besoin d'engendrer une droite, et seule sert l'inversibilité de $u \wedge v$. Celle-ci ne peut être omise. Sur $\mathbf Z$, avec $u = v = w = (1, 0)$, les trois produits extérieurs sont nuls, donc égaux, alors que $u + v + w = (3, 0)$. La conséquence que la page ajoute se lit sur les égalités : si $u + v + w = 0$, alors $v \wedge w$ et $w \wedge u$ sont égaux à $u \wedge v$, donc inversibles, et $z$ est disjointe de $y$ et de $x$. Elle n'est pas vérifiée en Lean.
+\end{remarque}
+
+\noindent La preuve vérifiée travaille dans $R^2$, pour un anneau commutatif $R$ quelconque, avec le produit extérieur $u_0 v_1 - u_1 v_0$ (\texttt{wedge}) ; c'est le cas général, puisque $V$ est libre de rang~$2$. Elle établit l'identité de Cramer coordonnée par coordonnée (\texttt{cramer}), puis l'équivalence sous la seule hypothèse que $u \wedge v$ est une unité (\texttt{fundamental\_relation}). Les noms sont ceux de \href{\leanblobmain/Folder89.lean}{\texttt{Folder89.\allowbreak{}lean}}.
+
+Ne sont pas démontrés ici : la disjonction de $z$ que la page ajoute ; la reconstruction de $V$, sur un corps, à partir de l'ensemble de ses droites, des torseurs $T_x$, du torseur des générateurs de $\det V$, de la relation de disjonction et des isomorphismes de $T_x \wedge T_y$ sur ce dernier torseur (page~17), avec la seule propriété de ces données que la page~18 écrit ; les hexagones et les ensembles 3-3 des pages~2 à~8, leur groupe d'automorphismes d'ordre~$36$ ; les plans sur $\mathbf F_3$ des pages~9 à~14 ; les polygones combinatoires des pages~19 et~20.

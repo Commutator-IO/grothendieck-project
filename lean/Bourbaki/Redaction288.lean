@@ -39,7 +39,7 @@ here, in either convention.
 
 open Set Filter Topology
 
-namespace Grothendieck.Bourbaki288
+namespace Bourbaki.Redaction288
 
 variable {X Y Z : Type*} [TopologicalSpace X] [TopologicalSpace Y] [TopologicalSpace Z]
 
@@ -129,4 +129,4 @@ theorem coe_curryHomeomorph [LocallyCompactSpace Y] (hX : CompactsLocallyCompact
 example [T2Space X] [LocallyCompactSpace Y] : C(X × Y, Z) ≃ₜ C(X, C(Y, Z)) :=
   curryHomeomorphOfR1
 
-end Grothendieck.Bourbaki288
+end Bourbaki.Redaction288

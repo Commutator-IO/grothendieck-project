@@ -1,0 +1,25 @@
+\section[Rédaction Bourbaki \redac{448} : objets libres sur un diagramme]{Rédaction Bourbaki \redac{448} : les objets libres sur un diagramme ne se calculent pas toujours point par point\protect\verifie{Redaction448}}\label{sec:bourbaki-448}
+
+La rédaction \redac{448}, \q{Foncteurs adjoints. Limites}, des archives Bourbaki (Archives Henri Poincaré, \ahp{1026}) est datée d'août 1965 par sa notice, qui la donne à Claude Chevalley ; elle compte 107 pages. Une remarque de sa page~20 pose une question et la laisse en exercice au congrès. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+\emph{Objets libres.} Soient $F : \mathcal Y \to \mathcal X$ un foncteur et $T$ un objet de $\mathcal X$. Un objet libre sur $T$ relativement à $F$ est un objet $E$ de $\mathcal Y$ muni d'une flèche $\varphi : T \to F(E)$ par laquelle toute flèche $T \to F(E')$ se factorise de façon unique, en $F(g) \circ \varphi$ pour un $g : E \to E'$. Pour $F$ le foncteur d'oubli des modules vers les ensembles, c'est le module libre de base $T$. Un objet colibre est la notion duale, avec une flèche $F(E) \to T$. Dans le langage de mathlib, un objet libre est un objet initial de la catégorie des flèches $T \to F(\cdot)$, un objet colibre un objet final de celle des flèches $F(\cdot) \to T$.
+
+\emph{Sur un diagramme.} Soit $D : I \to \mathcal X$ un diagramme et $F_* : \mathcal Y^I \to \mathcal X^I$ la composition par $F$. Un objet libre sur $D$ relativement à $F_*$ est un diagramme $E : I \to \mathcal Y$ avec une transformation naturelle $\varphi : D \to F \circ E$, universelle. Le corollaire de la proposition~4 dit que, si chaque $D(i)$ a un objet libre relativement à $F$, les valeurs $(E(i), \varphi(i))$ sont libres sur les $D(i)$ : l'objet libre sur un diagramme se calcule point par point. La remarque de la page~20 demande si l'hypothèse sur les $D(i)$ est nécessaire.
+
+\emph{L'intuition.} Un objet libre sur un diagramme doit satisfaire une propriété universelle pour toutes les familles compatibles à la fois. Les flèches du diagramme imposent des liens entre les composantes, et ces liens peuvent rendre unique un choix qui, en un point isolé, ne l'est pas. Un objet universel sur le diagramme peut alors exister sans qu'aucun objet universel n'existe en un point. C'est le phénomène connu des limites dans une catégorie de foncteurs, qui ne se calculent pas point par point quand la catégorie d'arrivée en manque.
+
+\begin{encadre}
+\begin{contrexemple}[réponse à la remarque de la rédaction \redac{448}, p.~20]
+Soient $\mathcal Y$ la catégorie à un objet et une flèche, $\mathcal X$ la catégorie des ensembles, $F$ le foncteur qui choisit un ensemble à un point, $I$ la catégorie $0 \to 1$ et $D$ l'application du point dans $\{\mathrm{vrai}, \mathrm{faux}\}$ de valeur $\mathrm{vrai}$. Il existe un objet colibre sur $D$ relativement à $F_*$, et aucun objet colibre sur $D$ n'a en $1$ une valeur colibre sur $D(1)$ relativement à $F$ : il n'y a d'ailleurs aucun objet colibre sur $D(1)$. En renversant les flèches de la catégorie des ensembles, on obtient le même échec pour les objets libres, cas qu'énonce la remarque. La réponse à la question est donc non.
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+Comme $\mathcal Y$ n'a qu'un objet et qu'une flèche, un objet sur un ensemble $T$ relativement à $F$ n'est qu'un point de $T$, et deux tels objets ont au plus une flèche entre eux, qui existe s'ils sont le même point. Un objet colibre sur $T$ est donc un point par lequel tout point de $T$ se factorise : il en existe un si et seulement si $T$ a un seul point. L'ensemble $D(1)$ en a deux, et n'a pas d'objet colibre. Sur le diagramme $D$, un objet relativement à $F_*$ est une famille compatible de points, un en $0$, un en $1$, le second image du premier. Le point de $D(0)$ est unique, et son image est $\mathrm{vrai}$ : il y a exactement une famille compatible, qui est donc colibre. Sa valeur en $1$ est un point de $D(1)$, qui ne peut être colibre puisque $D(1)$ n'en a pas.
+\end{proof}
+
+\noindent\emph{Vérification en Lean.} Le diagramme est \texttt{D}, l'objet colibre sur $D$ est \texttt{cofree}, et le contre-exemple est \texttt{cofree\_not\_pointwise} : il réunit \texttt{isTerminalCofree} et \texttt{isEmpty\_isTerminal\_one}. Le cas des objets libres, dans la catégorie opposée à celle des ensembles et avec la valeur en $0$, est \texttt{free\_not\_pointwise}, dans \href{\leanblobmain/Redaction448.lean}{\texttt{Redaction448.\allowbreak{}lean}}.
+
+Ne sont pas démontrés ici : le corollaire de la proposition~4 lui-même, c'est-à-dire le calcul point par point sous l'hypothèse sur les $D(i)$.
+
+\litterature{le relevé des rédactions tient la réponse pour une piste candidate. Le phénomène général, des limites non calculées point par point dans une catégorie de foncteurs, est connu (nLab, article \emph{functor category}) ; le contre-exemple en est un cas particulier, puisque $\mathcal Y$ y est la catégorie finale. La question elle-même, telle que la pose la rédaction pour un foncteur $F$ quelconque, n'a pas été retrouvée dans la littérature consultée.}

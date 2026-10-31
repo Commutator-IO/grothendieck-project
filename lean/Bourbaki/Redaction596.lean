@@ -20,7 +20,7 @@ are not formalised. `grothendieckAddGroup_diff` is the case of the group complet
 the image of `M` generates by construction.
 -/
 
-namespace Grothendieck.Bourbaki596
+namespace Bourbaki.Redaction596
 
 open Algebra
 
@@ -51,4 +51,4 @@ theorem grothendieckAddGroup_diff {M : Type*} [AddCommMonoid M] (x : Grothendiec
       ← AddLocalization.mk_zero_eq_addMonoidOf_mk, GrothendieckAddGroup.mk_sub_mk]
     congr 1 <;> simp
 
-end Grothendieck.Bourbaki596
+end Bourbaki.Redaction596

@@ -20,7 +20,7 @@ locally_bounded` (first-countable domain) for A–A′ together, and the instanc
 seminorms, equivalent to « barrels are neighbourhoods » in the locally convex case).
 -/
 
-namespace Grothendieck.Bourbaki128
+namespace Bourbaki.Redaction128
 
 /-- Prop. A and A′ of rédaction 128, for a first-countable (e.g. metrizable) domain. -/
 theorem propA' {𝕜 𝕜' E F : Type*} [AddCommGroup E] [TopologicalSpace E] [IsTopologicalAddGroup E]
@@ -38,4 +38,4 @@ theorem propB {𝕜 E : Type*} [NontriviallyNormedField 𝕜] [AddCommGroup E] [
     BarrelledSpace 𝕜 E :=
   inferInstance
 
-end Grothendieck.Bourbaki128
+end Bourbaki.Redaction128

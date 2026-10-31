@@ -14,7 +14,7 @@ report's own definitions the values are `(m, e) = (2, 1)` for `D = ℂ` (`L = �
 
 open Quaternion
 
-namespace Grothendieck.Bourbaki582
+namespace Bourbaki.Redaction582
 
 /-- `D = ℂ`: `m = [ℂ : ℝ] = 2` and `e = 1`, since `[D : L] = [ℂ : ℂ] = 1 = 1²`. -/
 theorem schur_complex : Module.finrank ℝ ℂ = 2 * 1 ^ 2 := by
@@ -24,4 +24,4 @@ theorem schur_complex : Module.finrank ℝ ℂ = 2 * 1 ^ 2 := by
 theorem schur_quaternion : Module.finrank ℝ ℍ[ℝ] = 1 * 2 ^ 2 := by
   simp [Quaternion.finrank_eq_four]
 
-end Grothendieck.Bourbaki582
+end Bourbaki.Redaction582

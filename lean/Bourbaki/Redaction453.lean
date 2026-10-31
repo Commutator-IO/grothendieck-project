@@ -18,7 +18,7 @@ step is formalised; the second (an artinian universe containing a set of cardina
 rédaction 424) needs the cardinal arithmetic of universes and is not.
 -/
 
-namespace Grothendieck.Bourbaki453
+namespace Bourbaki.Redaction453
 
 variable {α : Type*} [Nonempty α]
 
@@ -40,4 +40,4 @@ theorem isChain_of_axiomAG {𝒰 : Set (Set α)} (h : AxiomAG 𝒰) : IsChain (�
   have h2 : Classical.epsilon P ∈ V := h V hV P ⟨y, hyV, fun h => hyU h.1⟩
   exact Classical.epsilon_spec hP ⟨h1, h2⟩
 
-end Grothendieck.Bourbaki453
+end Bourbaki.Redaction453
