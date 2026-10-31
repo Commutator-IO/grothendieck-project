@@ -87,6 +87,8 @@ interface Segment {
   date: string | null;
   tape: string;
   bad: boolean;
+  /** Set where the edition dated a new session found inside a side. */
+  note?: string;
 }
 interface Video {
   id: string;
@@ -253,12 +255,14 @@ export function BuffaloPage() {
                       <button
                         type="button"
                         onClick={() => play(v.id, s.start)}
+                        title={s.note}
                         aria-current={playing?.id === v.id && playing.t === s.start ? 'true' : undefined}
                         className="flex w-full items-baseline justify-between gap-2 rounded-lg border border-ink-200 px-3 py-1.5 text-left text-[12.5px] text-ink-700 hover:border-brand-500 hover:bg-brand-50 aria-[current=true]:border-brand-500 aria-[current=true]:bg-brand-50"
                       >
                         <span>
                           <span className="font-medium text-ink-900">{s.date ? day(s.date) : 'Undated'}</span> · {s.tape}
                           {s.bad && <span className="text-ink-400"> · bad tape</span>}
+                          {s.note && <span className="text-ink-400"> · new session</span>}
                         </span>
                         <span className="tabular shrink-0 text-[11.5px] text-ink-400">{hms(s.start)}</span>
                       </button>
