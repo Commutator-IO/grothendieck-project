@@ -14,6 +14,11 @@ excludes except for its preamble. Never `git add -f` one, never paste one into
 an issue, a PR, a commit message or the site, never quote more than a few
 words of one in chat.
 
+**Where they are kept.** Since 2026-10-31 the transcriptions are versioned in the private
+repository `Commutator-IO/bourbaki-project` (local clone `~/Commutator/bourbaki-project`),
+which has its own copy of this skill. Work there; the local `transcripts-bourbaki/` of this
+public repository stays git-ignored and is only a working copy.
+
 **Runs on Opus 5.5, and on nothing else**, the same rule as
 `/transcribe-grothendieck`, and the header records which model read the pages.
 
