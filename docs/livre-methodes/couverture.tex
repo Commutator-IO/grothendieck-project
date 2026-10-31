@@ -1,0 +1,64 @@
+% Couverture et quatrième de couverture : un aplat rouge, le titre en petit, le
+% second mot en très grand, couché le long du bord droit.
+\definecolor{toncouv}{HTML}{C33A28}   % cinabre de commutator.io
+\definecolor{toncouvencre}{HTML}{5E1A12}
+
+\newcommand{\couverture}{%
+  \thispagestyle{empty}
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[toncouv] (current page.south west) rectangle (current page.north east);
+    % le grand mot, couché, en encre sombre
+    \node[rotate=90, anchor=south, inner sep=0pt, text=toncouvencre,
+          font=\firathin\fontsize{118}{118}\selectfont]
+      at ($(current page.south east)+(-0.9cm,12.4cm)$) {outillées};
+    % le titre en petit, et le filet qui le relie au grand mot
+    \node[anchor=base west, inner sep=0pt, text=white, font=\sffamily\Large]
+      (titre) at ($(current page.north west)+(2.2cm,-6cm)$) {Mathématiques};
+    \draw[toncouvencre, line width=1.6pt]
+      ($(titre.base east)+(0.35cm,0.12cm)$) -- ($(current page.east|-titre.base)+(-4.6cm,0.12cm)$);
+    \node[anchor=north west, inner sep=0pt, text=white!88, font=\sffamily\small,
+          text width=8cm, align=left]
+      at ($(titre.base west)+(0,-0.6cm)$) {le génie logiciel au service de la recherche};
+    % les auteurs en bas à droite
+    \node[anchor=south east, inner sep=0pt, text=white, font=\sffamily\normalsize,
+          align=left]
+      at ($(current page.south east)+(-5.4cm,2.2cm)$)
+      {Michel Hua\\[2pt]{\small\color{white!80} avec Claude comme assistant}\\[2pt]
+       {\footnotesize\color{white!70} version \versionlivre}};
+    % la marque, discrète, en bas à gauche
+    \node[anchor=south west, inner sep=0pt, text=white!75, font=\sffamily\scriptsize]
+      at ($(current page.south west)+(2.2cm,2.2cm)$) {commutator.io};
+  \end{tikzpicture}
+  \null\clearpage
+}
+
+\newcommand{\quatrieme}{%
+  \cleardoublepage
+  \thispagestyle{empty}
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[toncouv] (current page.south west) rectangle (current page.north east);
+    \node[anchor=north west, text width=11.6cm, align=justify, text=white,
+          font=\normalsize, inner sep=0pt]
+      at ($(current page.north west)+(2.4cm,-3.4cm)$) {%
+      {\sffamily\Large Mathématiques outillées}\par\bigskip
+      Un assistant de code lit des articles, transcrit des notes manuscrites, écrit du LaTeX
+      qui compile et démontre des énoncés en Lean. Il écrit vite, souvent juste, et ses
+      erreurs ont la même assurance que le reste.\par\medskip
+      Ce livre s'adresse aux mathématiciennes et aux mathématiciens qui veulent s'en servir
+      sans perdre la trace de ce qui a été vérifié. Il emprunte au génie logiciel ses outils
+      les plus simples : le dépôt git comme cahier de laboratoire, les issues comme carnet de
+      recherche, l'intégration continue, Lean et mathlib pour vérifier, une page locale pour
+      relire. Il en tire des règles : un en-tête sur chaque fichier, le doute marqué plutôt
+      que résolu, aucune nouveauté affirmée sans recherche, rien de publié qu'on n'a pas le
+      droit de publier.\par\medskip
+      Aucune formation en informatique n'est supposée. Il faut seulement accepter d'ouvrir
+      un terminal, et de le faire souvent.};
+    \draw[toncouvencre, line width=1.6pt]
+      ($(current page.south west)+(2.4cm,3.4cm)$) -- ++(3cm,0);
+    \node[anchor=south west, inner sep=0pt, font=\sffamily\footnotesize, text=white!80]
+      at ($(current page.south west)+(2.4cm,2.2cm)$) {version \versionlivre\ · 2026};
+    \node[anchor=south east, inner sep=0pt, font=\sffamily\scriptsize, text=white!75]
+      at ($(current page.south east)+(-2.4cm,2.2cm)$) {commutator.io};
+  \end{tikzpicture}
+  \null
+}
