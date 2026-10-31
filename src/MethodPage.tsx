@@ -436,6 +436,26 @@ export function MethodPage() {
               built from <code className="text-[12px]">docs/problems/article.tex</code>
             </span>
           </p>
+          <P id="article-bourbaki-lean" className="prose-fonds mt-6">
+            <em>Rédactions Bourbaki : énoncés démontrés en Lean</em>{' '}
+            is a working paper in French. It takes precise statements from fifteen rédactions of
+            the Bourbaki archive (Archives Henri Poincaré), from 1950 to 1974, and proves them, each
+            proof checked in Lean and written out for a reader who does not use Lean: where the
+            rédaction comes from, the intuition, the proof, what is not formalised and what the
+            literature search found. Several typed statements turn out false, with counterexamples.
+            The transcriptions stay private until the AHP and the ACNB agree.
+          </P>
+          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
+            <a
+              href="/article/bourbaki-lean.pdf"
+              className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
+            >
+              PDF
+            </a>
+            <span className="text-ink-400">
+              built from <code className="text-[12px]">docs/bourbaki-lean/article.tex</code>
+            </span>
+          </p>
           <P id="book-methods" className="prose-fonds mt-6">
             <em>Mathématiques outillées : le génie logiciel au service de la recherche</em>{' '}
             is a short book in French for mathematicians, on the practices this edition runs on:
@@ -447,7 +467,7 @@ export function MethodPage() {
           </P>
           <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
             <a
-              href="/article/methodes-d-atelier.pdf"
+              href="/article/maths-toolbox.pdf"
               className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
             >
               PDF
