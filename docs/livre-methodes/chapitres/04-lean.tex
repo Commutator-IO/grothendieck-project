@@ -61,6 +61,94 @@ devient l'énoncé cible. Le fichier le dit en commentaire, en une phrase : ce q
 mathlib, ce qui est démontré ici.
 \end{exemple}
 
+\section{Connaître mathlib}
+
+Presque tout ce qu'on démontre en Lean repose sur mathlib, la bibliothèque mathématique
+commune : plus de deux cent mille théorèmes, de l'algèbre linéaire à la théorie de la
+mesure, écrits et relus par plusieurs centaines de contributeurs. Savoir s'y retrouver
+compte plus que connaître le langage.
+
+\begin{itemize}
+  \item La documentation en ligne (\url{https://leanprover-community.github.io/mathlib4_docs})
+        donne chaque définition et chaque lemme avec son fichier ; les noms suivent des
+        conventions régulières (\texttt{mul\_comm}, \texttt{Finset.sum\_le\_sum}), qu'on
+        finit par deviner.
+  \item LeanSearch et Loogle cherchent un lemme, l'un en langue naturelle, l'autre par la
+        forme de son énoncé ; les tactiques \texttt{exact?} et \texttt{apply?} le
+        cherchent depuis le but courant.
+  \item \emph{Mathematics in Lean} (\url{https://leanprover-community.github.io/mathematics_in_lean})
+        est le cours d'introduction ; le Zulip de la communauté répond aux questions.
+\end{itemize}
+
+L'assistant fait ces recherches très bien, à condition de lui en donner les moyens (le
+serveur \texttt{lean-lsp} plus bas). Mais c'est à soi de savoir ce que la bibliothèque
+contient dans son domaine, parce que cela décide de ce qu'on peut formaliser.
+
+\section{Trier selon ce que mathlib atteint}
+
+Avant de formaliser une liste d'énoncés, on la trie. Trois catégories suffisent :
+\begin{enumerate}
+  \item atteignable maintenant, avec mathlib telle qu'elle est ;
+  \item un projet de quelques centaines de lignes, dont une partie seulement est
+        atteignable ;
+  \item hors de portée, parce que les objets dont parle l'énoncé n'existent pas encore
+        dans la bibliothèque, ou seulement sous une forme élémentaire.
+\end{enumerate}
+
+\begin{exemple}
+Sur deux cents énoncés tirés de notes de travail en géométrie algébrique, seize étaient
+dans la première catégorie, trente-neuf dans la deuxième, près de cent cinquante dans la
+troisième : cohomologie étale, topos, champs, motifs manquent encore à mathlib. Ce que la
+machine a pu vérifier suivait la couverture de la bibliothèque, pas le centre de gravité
+des notes.
+\end{exemple}
+
+Le tri ne dit rien de la nouveauté d'un énoncé. Il dit aussi où l'on sera tenté de
+tricher : quand l'énoncé général est hors de portée, on peut en démontrer un cas
+particulier (sur un anneau noethérien, sur le fibré trivial, en coordonnées). C'est utile,
+mais c'est une preuve \emph{partielle}, et le fichier comme l'article le disent. On renonce
+à un énoncé dont la seule partie atteignable serait un cas particulier choisi par
+commodité.
+
+\section{Un verdict par énoncé}
+
+Chaque énoncé formalisé reçoit un verdict pris dans une liste fermée, par exemple :
+\emph{vrai} ; \emph{vrai, plus généralement} ; \emph{démontré en partie} ; \emph{la lecture
+avait perdu une hypothèse} ; \emph{faux tel qu'il est écrit}, avec le contre-exemple en
+Lean. Une liste fermée empêche les nuances qui n'engagent à rien, et elle se compte : un
+article peut dire combien d'énoncés tiennent, combien sont faux, combien restent
+partiels.
+
+La formalisation trouve plus souvent des erreurs dans ce qu'on a \emph{ajouté} à un texte
+que dans le texte lui-même : une glose moderne trop rapide, une hypothèse oubliée en
+recopiant, une égalité là où l'original ne disait qu'une inclusion. On distingue les deux
+dans le verdict.
+
+Une preuve a enfin trois formes lisibles : le fichier Lean, qui fait foi ; une fiche
+courte (énoncé, source, verdict) ; et une démonstration rédigée en français pour un
+mathématicien qui ne lit pas Lean, avec l'intuition et ce qui n'est pas démontré
+(chapitre~\ref{ch:review}).
+
+\section{Attribuer avec précision}
+
+Formaliser les notes de quelqu'un d'autre oblige à séparer trois choses : ce que la page
+affirme, ce que la lecture en fait, ce que le formalisateur a dû ajouter. Une règle simple
+suffit : un énoncé porte le nom de l'auteur (« X, page $N$ ») seulement si la page
+l'affirme ; « d'après la page $N$ » quand la preuve établit davantage ; une étiquette
+neutre pour les lemmes, les contre-exemples et les hypothèses que l'on a introduits
+soi-même. La même règle vaut pour une contribution à mathlib : on ne nomme un
+mathématicien dans une pull request que pour un énoncé qui est vraiment le sien.
+
+\section{Les conjectures}
+
+Une conjecture ne se démontre pas, mais elle peut s'\emph{énoncer} en Lean. Le dépôt
+\emph{Formal Conjectures} de Google DeepMind
+(\url{https://github.com/google-deepmind/formal-conjectures}) en rassemble, chacune avec
+une source citée. Encore faut-il que mathlib ait les objets dont elle parle : une
+conjecture énoncée avec des substituts de fortune est une autre conjecture. Quand
+l'énoncé n'est pas encore exprimable, on démontre ce qui l'entoure (les cas connus, le sens
+facile, les exemples) et l'on écrit la conjecture en prose à côté.
+
 \section{Contribuer à la bibliothèque}
 
 Un lemme général dont on a eu besoin manque souvent à mathlib. Le proposer, par une
@@ -75,6 +163,11 @@ condition de suivre les règles de la communauté :
         demandent les règles du projet, et ne pas lui faire écrire les échanges avec les
         relecteurs.
 \end{itemize}
+
+Il aide de ranger dès le départ les lemmes généraux dans un dossier à part
+(\fichier{Upstream/}, par exemple), écrits selon les conventions de mathlib : le jour où
+on les propose, il n'y a qu'à les déplacer. Une pull request à mathlib est relue par des
+bénévoles exigeants ; elle peut prendre des semaines, et c'est normal.
 
 \begin{warningblock}
 Les règles de contribution des bibliothèques communes évoluent, en particulier sur l'usage

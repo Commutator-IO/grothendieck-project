@@ -22,6 +22,35 @@ Tout ce que l'assistant produit est un brouillon jusqu'à ce qu'une vérificatio
 machine ou par une personne, l'ait établi. Le fichier dit lequel des deux.
 \end{regle}
 
+\section{L'éditeur : VS Code}
+
+L'assistant travaille dans le terminal, mais on lit, on relit et on corrige dans un
+éditeur. Le plus répandu est VS Code (Visual Studio Code), gratuit, qui tourne sous macOS,
+Windows et Linux ; on y installe des extensions selon ses besoins :
+\begin{itemize}
+  \item \emph{Lean 4}, l'extension officielle, qui affiche à côté du code les buts restant à
+        démontrer et les erreurs, ligne par ligne (figure~\ref{fig:ecran-lean}) ;
+  \item \emph{LaTeX Workshop}, qui compile à chaque enregistrement, montre le PDF à côté
+        de la source et passe d'un endroit du PDF à la ligne correspondante d'un clic
+        (SyncTeX) ;
+  \item l'onglet de gestion de versions, intégré, qui montre les fichiers modifiés et
+        leurs diffs avant un commit ; l'extension \emph{GitHub Pull Requests} pour relire
+        et commenter une pull request sans quitter l'éditeur ;
+  \item l'extension de Claude Code, ou GitHub Copilot, pour voir les modifications de
+        l'assistant comme des diffs qu'on accepte ou refuse ;
+  \item \emph{Live Share}, pour éditer à deux le même fichier à distance.
+\end{itemize}
+
+\begin{tipblock}
+La relecture la plus efficace d'un travail d'assistant se fait sur le diff, pas sur le
+fichier entier : l'éditeur montre en couleur ce qui a changé, et c'est cela qu'on signe.
+\end{tipblock}
+
+D'autres éditeurs font le même travail : VSCodium, la version libre de VS Code sans
+télémétrie ; Cursor, une variante de VS Code centrée sur l'assistant ; les éditeurs de
+JetBrains ; Emacs et Neovim, qui ont leurs modes Lean et LaTeX. L'essentiel est que
+l'éditeur montre les buts de Lean, le PDF et les diffs.
+
 \section{Des procédures écrites}
 
 Un assistant ne garde pas de mémoire d'une session à l'autre, sauf ce qu'on lui écrit. On
@@ -125,7 +154,7 @@ publie sous son nom.
 
 \begin{outils}
 Claude Code (terminal, application de bureau, sessions dans le cloud) ; Codex
-d'OpenAI ; GitHub Copilot dans l'éditeur ; OpenCode, ouvert, qui peut tourner sur un modèle
+d'OpenAI ; GitHub Copilot dans l'éditeur ; VS Code et ses extensions Lean 4, LaTeX Workshop, GitHub Pull Requests et Live Share ; OpenCode, ouvert, qui peut tourner sur un modèle
 hébergé en Europe ou sur ses propres machines. Les \emph{skills} suivent un format ouvert,
 décrit sur \url{https://agentskills.io} ; le répertoire \url{https://skills.sh} en recense
 beaucoup. Les serveurs MCP branchent l'assistant sur d'autres outils : Linear, un navigateur,
