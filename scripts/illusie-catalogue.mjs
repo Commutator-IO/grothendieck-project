@@ -188,7 +188,7 @@ writeFileSync(
   PAGES_OUT,
   JSON.stringify(
     {
-      $why: 'Page views of the Fonds Grothendieck–Illusie items, by name, from the directory listings on repo-archives.ihes.fr (scripts/illusie-catalogue.mjs). « jpg » lists the views in page order, « pdf » the file linked to when there are none. Names only: the files stay on the IHÉS server. Imported only by a build made with RENDER_ILLUSIE.',
+      $why: 'Page views of the Fonds Grothendieck–Illusie items, by name, from the directory listings on repo-archives.ihes.fr (scripts/illusie-catalogue.mjs). « jpg » lists the views in page order, « pdf » the PDF framed when there are none (`<name>_web.pdf`, else `<name>.pdf`). Names only: the files stay on the IHÉS server.',
       views,
     },
     null,
