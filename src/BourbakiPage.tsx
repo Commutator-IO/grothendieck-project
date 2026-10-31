@@ -95,7 +95,7 @@ const fold = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCa
 
 export function BourbakiPage() {
   const [type, setType] = useState<string>('all');
-  const [onlyHits, setOnlyHits] = useState(false);
+  const [onlyHits, setOnlyHits] = useState(true);
   const [q, setQ] = useState('');
   // The pane opens when a document is chosen, or when the link names one.
   const [sel, setSel] = useState<Doc | undefined>(named);
