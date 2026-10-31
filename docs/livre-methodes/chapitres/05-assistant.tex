@@ -2,8 +2,8 @@
 
 Un assistant fondé sur un modèle de langage lit des fichiers, lance des commandes, écrit du
 texte et du code. Dans le projet qui sert d'exemple, il a transcrit des pages manuscrites,
-écrit des preuves en Lean, cherché des références et rédigé des brouillons. Il s'agissait
-de Claude, d'Anthropic, utilisé dans un terminal avec l'outil Claude Code. Ce chapitre décrit
+écrit des preuves en Lean, cherché des références et rédigé des brouillons. C'était
+Claude, d'Anthropic, utilisé dans un terminal avec l'outil Claude Code. Ce chapitre décrit
 l'organisation qui garde ce travail vérifiable.
 
 La figure~\ref{fig:ecran-terminal} montre à quoi ressemble une telle session.
@@ -48,7 +48,7 @@ fichier entier : l'éditeur montre en couleur ce qui a changé, et c'est cela qu
 
 D'autres éditeurs font le même travail : VSCodium, la version libre de VS Code sans
 télémétrie ; Cursor, une variante de VS Code centrée sur l'assistant ; les éditeurs de
-JetBrains ; Emacs et Neovim, qui ont leurs modes Lean et LaTeX. L'essentiel est que
+JetBrains ; Emacs et Neovim, qui ont leurs modes Lean et LaTeX. Il suffit que
 l'éditeur montre les buts de Lean, le PDF et les diffs.
 
 \section{Des procédures écrites}
@@ -86,9 +86,9 @@ mémoire, les outils branchés, et les autres instances auxquelles elle délègu
 
 \section{Déléguer en parallèle}
 
-Un assistant peut confier des sous-agents à d'autres instances qui travaillent en même
+Un assistant peut lancer des sous-agents, d'autres instances qui travaillent en même
 temps : lire quatre documents à la fois, écrire deux preuves indépendantes. Le gain de temps
-est réel ; le risque aussi. Chaque sous-agent reçoit une consigne complète, parce qu'elle ne
+est réel ; le risque aussi. Chaque sous-agent reçoit une consigne complète, parce qu'il ne
 voit rien d'autre ; deux sous-agents ne touchent jamais les mêmes fichiers ; et leurs
 résultats sont relus avant d'être intégrés.
 
@@ -105,7 +105,7 @@ le cloud, depuis le site de Claude ou depuis l'application de bureau : une machi
 distante clone le dépôt depuis GitHub, y travaille, et pousse ses commits. La machine
 locale reste libre, et l'on peut fermer l'ordinateur pendant que la tâche avance.
 
-C'est le bon outil pour une tâche longue et bien délimitée : une série de preuves à
+On s'en sert pour une tâche longue et bien délimitée : une série de preuves à
 compléter, une relecture de tout un dossier, la mise à jour des chiffres d'un article. Trois
 précautions évitent la plupart des ennuis.
 
@@ -159,8 +159,8 @@ hébergé en Europe ou sur ses propres machines. Les \emph{skills} suivent un fo
 décrit sur \url{https://agentskills.io} ; le répertoire \url{https://skills.sh} en recense
 beaucoup. Les serveurs MCP branchent l'assistant sur d'autres outils : Linear, un navigateur,
 Lean, une base d'articles. Dans ce projet : des skills de transcription
-(\texttt{transcribe-grothendieck}, \texttt{transcribe-quillen}, \texttt{transcribe-bourbaki}),
-de lecture (\texttt{modernize-grothendieck}, \texttt{tag-grothendieck}), de recherche
+de manuscrits, de carnets et de tapuscrits, un pour chaque fonds d'archives, de lecture
+modernisée et d'étiquetage par mots-clés, de recherche
 (\texttt{find-novelty}), de vérification des citations (\texttt{citation-verification}) et de
 relecture (\texttt{peer-review}).
 \end{outils}

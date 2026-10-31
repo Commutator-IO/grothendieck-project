@@ -1,8 +1,8 @@
 \chapter{Un assistant de preuve au quotidien}\label{ch:lean}
 
 Un assistant de preuve vérifie chaque pas d'une démonstration. On s'en sert ici avec
-Lean~4 et sa bibliothèque mathlib, mais les règles valent pour d'autres. Ce chapitre ne
-décrit pas le langage : il décrit ce qui, autour du langage, rend un projet de
+Lean~4 et sa bibliothèque mathlib, mais les règles valent pour d'autres. Ce chapitre laisse
+le langage de côté et s'attache à ce qui, autour de lui, rend un projet de
 formalisation tenable sur la durée.
 
 \section{Des versions épinglées}
@@ -98,12 +98,12 @@ Avant de formaliser une liste d'énoncés, on la trie. Trois catégories suffise
 \begin{exemple}
 Sur deux cents énoncés tirés de notes de travail en géométrie algébrique, seize étaient
 dans la première catégorie, trente-neuf dans la deuxième, près de cent cinquante dans la
-troisième : cohomologie étale, topos, champs, motifs manquent encore à mathlib. Ce que la
-machine a pu vérifier suivait la couverture de la bibliothèque, pas le centre de gravité
+troisième : cohomologie étale, topos, champs, motifs manquent encore à mathlib. Les vérifications
+de la machine suivaient la couverture de la bibliothèque, pas le centre de gravité
 des notes.
 \end{exemple}
 
-Le tri ne dit rien de la nouveauté d'un énoncé. Il dit aussi où l'on sera tenté de
+Le tri ne dit rien de la nouveauté d'un énoncé. Il dit en revanche où l'on sera tenté de
 tricher : quand l'énoncé général est hors de portée, on peut en démontrer un cas
 particulier (sur un anneau noethérien, sur le fibré trivial, en coordonnées). C'est utile,
 mais c'est une preuve \emph{partielle}, et le fichier comme l'article le disent. On renonce
@@ -151,9 +151,8 @@ facile, les exemples) et l'on écrit la conjecture en prose à côté.
 
 \section{Contribuer à la bibliothèque}
 
-Un lemme général dont on a eu besoin manque souvent à mathlib. Le proposer, par une
-\emph{pull request} sur le dépôt de la bibliothèque, est utile, à
-condition de suivre les règles de la communauté :
+Un lemme général dont on a eu besoin manque souvent à mathlib. On rend service en le proposant par une
+\emph{pull request} sur le dépôt de la bibliothèque, pourvu qu'on suive les règles de la communauté :
 \begin{itemize}
   \item vérifier que le lemme n'existe pas déjà sous un autre nom ;
   \item suivre les conventions de nommage, de style et de documentation ;
@@ -164,7 +163,7 @@ condition de suivre les règles de la communauté :
         relecteurs.
 \end{itemize}
 
-Il aide de ranger dès le départ les lemmes généraux dans un dossier à part
+Mieux vaut ranger dès le départ les lemmes généraux dans un dossier à part
 (\fichier{Upstream/}, par exemple), écrits selon les conventions de mathlib : le jour où
 on les propose, il n'y a qu'à les déplacer. Une pull request à mathlib est relue par des
 bénévoles exigeants ; elle peut prendre des semaines, et c'est normal.
