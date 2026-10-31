@@ -1,17 +1,45 @@
-Ce livre s'adresse à une mathématicienne ou à un mathématicien qui mène un projet trop gros
-pour tenir dans sa tête : l'édition d'un corpus de notes, la formalisation d'une théorie
-dans un assistant de preuve, un livre écrit à plusieurs, un séminaire dont on veut garder
-les traces. Il décrit les outils et les pratiques du \emph{software craftsmanship} qui rendent un tel
-projet tenable, et la
-façon dont on s'en sert quand une partie du travail est confiée à un assistant fondé sur un
-modèle de langage.
+Les assistants de code changent en profondeur la façon dont on écrit un texte
+mathématique. Il y a encore peu, un modèle de langage produisait au mieux un brouillon à
+reprendre ligne à ligne. Aujourd'hui, un assistant qui travaille dans un dépôt lit des
+articles, transcrit des notes manuscrites, écrit du \LaTeX{} qui compile, énonce des
+théorèmes dans un assistant de preuve et les démontre, cherche dans la littérature et
+rédige une première version. Donnez-lui un rapport de stage et quelques articles publics
+sur le sujet, avec un dépôt qui cadre bien ce qu'on attend : en une dizaine de minutes, il
+en tire une leçon exploitable. De nouvelles techniques d'écriture automatique apparaissent,
+et elles demandent une méthode.
 
-Les méthodes viennent d'un projet que j'ai mené seul, pendant quelques mois, avec un
-assistant : la transcription, la lecture et la formalisation partielle de plusieurs
-milliers de pages de notes mathématiques manuscrites. Ce projet n'est pas le sujet du
-livre. Il lui fournit ses exemples, réduits à la leçon qu'ils portent, et quelques chiffres
-pour donner l'échelle. J'ai appris la plupart de ces règles en commettant l'erreur qu'elles
-évitent.
+Cette méthode, je l'ai cherchée en mathématicien qui a quitté la recherche après son master
+pour faire carrière dans l'ingénierie des données. J'en ai gardé deux choses : un goût pour
+les mathématiques, et l'habitude des outils qui rendent un programme fiable. La
+programmation fonctionnelle m'avait appris qu'on peut écrire du code « comme en maths », de
+façon rigoureuse ; les assistants de preuve poussent l'idée jusqu'au bout. Pendant quelques
+mois, et surtout pendant des week-ends, j'ai mené avec un assistant, et avec de nombreuses
+sessions lancées en parallèle dans le cloud, un projet qui m'aurait autrefois demandé une
+thèse : transcrire plusieurs milliers de pages de notes mathématiques manuscrites, les
+lire, chercher dans la littérature ce qu'elles contenaient de connu, et faire démontrer
+par la machine les énoncés qu'on ne trouvait nulle part. Une bonne partie portait sur un
+domaine que je n'ai jamais étudié.
+
+C'est ce dernier point qui m'a convaincu d'écrire ce livre. Si un non-spécialiste peut
+compiler de tels recueils de résultats, la question n'est plus seulement mathématique ;
+elle est de méthode. Un assistant écrit un texte très convaincant, et vrai par construction
+la plupart du temps. C'est déconcertant, et cela demande de la vigilance : une erreur s'y
+glisse avec la même assurance que le reste. Il faut donc savoir à chaque instant ce qui a été vérifié,
+par qui, et comment. Les revues commencent à fixer des règles (certaines refusent les
+textes écrits avec l'intelligence artificielle), les sites d'entraide aussi, et les
+enjeux pour la formation et l'emploi des chercheurs sont réels. Il manque une sorte de code
+de la route pour les chercheurs qui utilisent ces outils et veulent partager l'espace public
+du débat scientifique sans le dégrader. Ce livre n'a pas cette prétention, mais il en
+propose quelques articles.
+
+Il s'adresse à une mathématicienne ou à un mathématicien qui mène un projet trop gros pour
+tenir dans sa tête : l'édition d'un corpus de notes, la formalisation d'une théorie dans un
+assistant de preuve, un livre écrit à plusieurs, un séminaire dont on veut garder les
+traces. Il décrit les outils et les pratiques du \emph{software craftsmanship} qui rendent
+un tel projet tenable, et la façon dont on s'en sert quand une partie du travail est
+confiée à un assistant. Le projet qui m'a servi n'en est pas le sujet : il fournit des
+exemples, réduits à la leçon qu'ils portent, et quelques chiffres pour donner l'échelle.
+J'ai appris la plupart de ces règles en commettant l'erreur qu'elles évitent.
 
 On ne suppose aucune formation en informatique. Il faut savoir ouvrir un terminal et taper
 une commande, et accepter de le faire souvent. Chaque chapitre part d'un problème que pose
@@ -19,11 +47,14 @@ le travail mathématique (retrouver pourquoi un énoncé a changé, savoir ce qu
 et par qui, ne pas publier ce qu'on n'a pas le droit de publier) et montre l'outil qui le
 règle, puis la discipline sans laquelle l'outil ne sert à rien.
 
-L'outil, sans discipline, ne sert pas à grand-chose. Un dépôt \texttt{git} où chaque commit s'intitule
-« modifications » ne garde rien de ce qu'on voudra savoir dans trois mois. Une liste
-d'issues que personne ne ferme tourne au grenier. Et un assistant sans règles écrites
-produit beaucoup, très vite, sans qu'on sache ensuite ce qui a été relu. La plupart des
-pages qui suivent décrivent donc des règles, chacune avec sa raison.
+Car l'outil, sans discipline, ne sert pas à grand-chose. Un dépôt \texttt{git} où chaque
+commit s'intitule « modifications » ne garde rien de ce qu'on voudra savoir dans trois
+mois. Une liste d'issues que personne ne ferme tourne au grenier. Et un assistant sans
+règles écrites produit beaucoup, très vite, sans qu'on sache ensuite ce qui a été relu. La
+plupart des pages qui suivent décrivent donc des règles, chacune avec sa raison.
+
+Ces pratiques seront sans doute courantes d'ici un an ou deux, et d'autres les auront
+décrites mieux que moi. Je les écris maintenant parce qu'elles servent maintenant.
 
 Le livre se lit dans l'ordre, mais chaque chapitre tient seul. L'annexe rassemble les
 commandes citées.
