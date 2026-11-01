@@ -1,0 +1,66 @@
+\section[Rédaction Bourbaki n\textsuperscript{o}\,197 : coordonnées de Chow d'un produit]{Rédaction Bourbaki n\textsuperscript{o}\,197 : les coordonnées de Chow d'un produit\protect\verifie{Redaction197Chow}}\label{sec:bourbaki-197-chow}
+
+La rédaction n\textsuperscript{o}\,197 des archives Bourbaki, de P.~Samuel, datée de mai 1954 par sa notice (Archives Henri Poincaré, \ahp{612}), traite des coordonnées de Chow des cycles de l'espace projectif. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+\emph{Coordonnées de Chow.} Un cycle $X$ de dimension $r$ et de degré $d$ de l'espace projectif $\mathbf P^n$ rencontre en $d$ points, comptés avec multiplicité, un sous-espace linéaire générique de codimension $r+1$. La condition pour que $r+1$ hyperplans $u^{(0)}, \ldots, u^{(r)}$ et $X$ se rencontrent est l'annulation d'une forme $F_X(u^{(0)}, \ldots, u^{(r)})$, homogène de degré $d$ en chaque $u^{(i)}$ : c'est la forme de Chow de $X$, définie à un scalaire près, et ses coefficients sont les coordonnées de Chow de $X$. Pour un cycle de dimension nulle, c'est-à-dire une somme de points, la forme est le produit des formes linéaires $\sum_k u_k x_k$ évaluées aux points. Pour trois points $(x_j, y_j)$ du plan affine, vus dans $\mathbf P^2$, elle vaut
+\[
+\prod_{j=1}^3 (v_0 + v_1 x_j + v_2 y_j) = \sum_{p+q \leq 3} e_{pq}(x, y)\, v_0^{3-p-q} v_1^p v_2^q ,
+\]
+où $e_{pq}(x, y)$ est la somme, sur les façons de choisir $p$ des trois points pour fournir leur $x$ et $q$ autres pour fournir leur $y$, du produit des coordonnées choisies : $e_{10} = x_1 + x_2 + x_3$, $e_{11} = \sum_{i \neq j} x_i y_j$, $e_{21} = x_1x_2y_3 + x_1x_3y_2 + x_2x_3y_1$, et $e_{00} = 1$. Ce sont les fonctions multisymétriques élémentaires des trois points ; elles sont symétriques sous les permutations des points, mais n'engendrent pas toujours l'anneau de toutes les fonctions symétriques, comme on le verra.
+
+\emph{La page.} Le produit $X \times Y$ de deux cycles se plonge dans un espace projectif par le plongement de Segre, et c'est un cycle de cet espace, qui a ses propres coordonnées de Chow. D'après la page~82, il paraît vraisemblable au rédacteur que ces coordonnées s'expriment comme des polynômes universels à coefficients entiers en les coordonnées de Chow de $X$ et celles de $Y$. La page ne le démontre pas. On montre ci-dessous que l'énoncé tient sur un corps pour les cycles de dimension nulle, et qu'il tombe sur $\mathbf Z$ dès le cas de deux cycles de trois points du plan.
+
+\emph{Le produit de deux cycles de points.} Soient $A$ le cycle des points $w_i = (c_i, d_i)$ et $B$ celui des points $q_j = (a_j, b_j)$, $i, j = 1, 2, 3$. Le produit $A \times B$ est formé des neuf points $(w_i, q_j)$, et le plongement de Segre $\mathbf P^2 \times \mathbf P^2 \to \mathbf P^8$ envoie le point $\bigl((1 : c_i : d_i), (1 : a_j : b_j)\bigr)$ sur le point dont les neuf coordonnées sont les produits $X_k Y_l$, où $X = (1, c_i, d_i)$ et $Y = (1, a_j, b_j)$. La forme de Chow du produit est donc $\prod_{i,j} \sum_{k,l} u_{kl} X_k Y_l$, en neuf variables $u_{kl}$. Donnons la valeur~$1$ à $u_{00}$, $u_{11}$ et $u_{22}$, et la valeur~$0$ aux six autres : on obtient le polynôme
+\[
+T = \prod_{i, j = 1}^{3} \bigl(1 + c_i a_j + d_i b_j\bigr) \in \mathbf Z[a, b, c, d],
+\]
+à douze variables. Ses coefficients sont des sommes de coordonnées de Chow du produit. Si l'énoncé de la page tenait, $T$ serait donc un polynôme à coefficients entiers en les neuf fonctions $e_{pq}(c, d)$ et les neuf fonctions $e_{pq}(a, b)$, avec $1 \leq p + q \leq 3$.
+
+\emph{Le cas d'un corps.} Notons $\mathrm{TS}_w$ l'anneau des polynômes en $c, d$ symétriques sous les permutations des trois points $w_i$, et $C_w \subseteq \mathrm{TS}_w$ la sous-algèbre engendrée par les $e_{pq}(c, d)$ ; de même $\mathrm{TS}_q$ et $C_q$ pour les points $q_j$. Pour chaque $i$, le facteur $\prod_j (1 + c_i a_j + d_i b_j)$ est la forme de Chow de $B$ évaluée en $(1, c_i, d_i)$, c'est-à-dire $\sum_{p,q} e_{pq}(a, b)\, c_i^p d_i^q$. Le produit sur $i$ est donc un polynôme en les $c_i, d_i$, symétrique sous les permutations des $w_i$, dont les coefficients sont dans $C_q$ : $T$ appartient à $\mathrm{TS}_w \otimes C_q$. En regroupant les facteurs selon $j$ plutôt que selon $i$, on obtient de même $T \in C_w \otimes \mathrm{TS}_q$. Sur un corps $k$, pour des sous-espaces $U \subseteq F$ et $V \subseteq F'$, on a $(U \otimes F') \cap (F \otimes V) = U \otimes V$ : il suffit de choisir une base de $F$ qui prolonge une base de $U$ et une base de $F'$ qui prolonge une base de $V$, et de lire les coefficients d'un tenseur dans la base produit. D'où $T \in C_w \otimes C_q$, ce qui est l'énoncé de la page pour les cycles de dimension nulle. Le même argument vaut pour des cycles de $m$ et $m'$ points de l'espace affine de dimension quelconque.
+
+\emph{Pourquoi l'argument tombe sur $\mathbf Z$.} Sur $\mathbf Z$, dans chaque bidegré, $C_w$ et $\mathrm{TS}_w$ sont des réseaux de même rang, le premier contenu dans le second, car sur $\mathbf Q$ les fonctions élémentaires engendrent toutes les fonctions symétriques. Pour des réseaux, l'intersection ne se comporte plus comme un produit d'indices. Dans le cas le plus simple, $\mathrm{TS} = \mathbf Z$ et $C = 3\mathbf Z$ : les deux réseaux $C \otimes \mathrm{TS}$ et $\mathrm{TS} \otimes C$ valent $3\mathbf Z$, leur intersection aussi, alors que $C \otimes C = 9\mathbf Z$. L'intersection est d'indice $3$, le plus petit commun multiple des indices, et non $9$, leur produit. L'argument précédent ne place alors $T$ que dans l'intersection, qui peut être plus grande que $C_w \otimes C_q$. Pour que cet écart se produise, il faut que $C$ soit strictement plus petit que $\mathrm{TS}$. D.~Rydh a déterminé quand les fonctions multisymétriques élémentaires engendrent toutes les fonctions multisymétriques sur un anneau $A$, et, pour trois points du plan, il faut et il suffit que $3$ soit inversible dans $A$ (\cite[corollaire~8.10]{rydh2007}, qui reprend un théorème d'E.~Briand \cite{briand2004}). La remarque~8.11 du même article relie ce défaut au schéma de Chow des cycles de dimension nulle. Sur $\mathbf Z$, l'écart existe donc, et le calcul qui suit montre que $T$ tombe dedans.
+
+\emph{Le certificat.} Écrivons un monôme en $x_1, y_1, x_2, y_2, x_3, y_3$ comme la suite de ses trois couples d'exposants, $((\alpha_1, \beta_1), (\alpha_2, \beta_2), (\alpha_3, \beta_3))$. La forme linéaire $\alpha$ sur $\mathbf Z[x, y]$ lit huit coefficients avec des poids :
+\[
+\begin{array}{lr@{\qquad}lr}
+((1,0),(1,0),(0,2)) & 1, & ((2,0),(0,1),(0,1)) & -2,\\
+((1,1),(1,0),(0,1)) & -1, & ((2,0),(0,2),(0,0)) & -1,\\
+((1,1),(1,1),(0,0)) & -2, & ((2,1),(0,1),(0,0)) & -1,\\
+((1,2),(1,0),(0,0)) & -1, & ((2,2),(0,0),(0,0)) & -2.
+\end{array}
+\]
+Ces huit monômes sont un représentant de chaque orbite, sous les permutations des points, des monômes de bidegré $(2,2)$, c'est-à-dire de degré $2$ en les $x$ et $2$ en les $y$. Sur un polynôme symétrique, $\alpha$ est donc une combinaison des coefficients des huit fonctions symétriques monomiales de ce bidegré. Comme $e_{pq}$ est de bidegré $(p, q)$, un produit de fonctions élémentaires de bidegré $(2,2)$ est l'un des huit produits $e_{01}^2 e_{10}^2$, $e_{01}^2 e_{20}$, $e_{01}e_{10}e_{11}$, $e_{01}e_{21}$, $e_{02}e_{10}^2$, $e_{02}e_{20}$, $e_{10}e_{12}$ et $e_{11}^2$, et $\alpha$ y prend les valeurs
+\[
+-21,\quad -6,\quad -12,\quad 0,\quad -9,\quad -3,\quad -3,\quad -9,
+\]
+toutes divisibles par $3$. Sur un produit de fonctions élémentaires d'un autre bidegré, $\alpha$ est nulle, puisqu'elle ne lit que des monômes de bidegré $(2,2)$. Elle prend donc des valeurs divisibles par $3$ sur tout polynôme à coefficients entiers en les $e_{pq}$. Sur la fonction symétrique monomiale de $x_1x_2y_3^2$, somme des trois monômes de son orbite, elle vaut $1$ : cette fonction est symétrique et n'est pas un polynôme entier en les $e_{pq}$, ce qui rend visible le défaut de la remarque de Rydh en ce bidegré (ce dernier calcul n'est pas formalisé).
+
+\begin{encadre}
+\begin{contrexemple}[réponse à la question de la rédaction \redac{197}, p.~82, cycles de trois points, énoncé de l'édition]
+Soit $T = \prod_{i,j=1}^3 (1 + c_i a_j + d_i b_j) \in \mathbf Z[a, b, c, d]$. Il n'existe aucun polynôme $G$ à coefficients entiers en dix-huit variables tel que $T = G\bigl((e_{pq}(c, d))_{1 \leq p+q \leq 3}, (e_{pq}(a, b))_{1 \leq p+q \leq 3}\bigr)$. Autrement dit, $T$ n'appartient pas au sous-anneau de $\mathbf Z[a,b,c,d]$ engendré par les fonctions multisymétriques élémentaires des deux cycles.
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+Soit $\beta = \alpha \otimes \alpha$ la forme linéaire sur $\mathbf Z[a, b, c, d]$ qui applique $\alpha$ aux variables $(c, d)$ et aux variables $(a, b)$ : sur un polynôme, elle fait la somme pondérée par $w_m w_{m'}$ des coefficients des monômes produits d'un monôme $m$ lu par $\alpha$ en $(c, d)$ et d'un monôme $m'$ lu par $\alpha$ en $(a, b)$. Sur un produit $P(c, d)\, Q(a, b)$, elle vaut $\alpha(P)\, \alpha(Q)$. Un polynôme $G$ en les deux familles de fonctions élémentaires est une combinaison entière de produits $E(c, d)\, E'(a, b)$, où $E$ et $E'$ sont des produits de fonctions élémentaires, et $\beta$ y vaut $\alpha(E)\, \alpha(E')$, multiple de $3 \cdot 3 = 9$. Donc $\beta(G) \in 9\mathbf Z$.
+
+Calculons $\beta(T)$. En regroupant les facteurs de $T$ selon $j$, on a $T = \prod_j \sum_{p,q} e_{pq}(c, d)\, a_j^p b_j^q$, de sorte que le coefficient en $(a, b)$ du monôme $((p_1, q_1), (p_2, q_2), (p_3, q_3))$ est $e_{p_1q_1} e_{p_2q_2} e_{p_3q_3}(c, d)$. Appliquer $\alpha$ en $(a, b)$ donne donc
+\[
+e_{10}^2 e_{02} - e_{11} e_{10} e_{01} - 2\, e_{11}^2 - e_{12} e_{10} - 2\, e_{20} e_{01}^2 - e_{20} e_{02} - e_{21} e_{01} - 2\, e_{22},
+\]
+avec $e_{22} = 0$ puisque $2 + 2 > 3$. Appliquer ensuite $\alpha$ en $(c, d)$ et lire les huit valeurs du certificat donne
+\[
+\beta(T) = -9 + 12 + 18 + 3 + 12 + 3 - 0 - 0 = 39 .
+\]
+Or $39$ n'est pas divisible par $9$, et $T$ n'est pas de la forme $G(e(c, d), e(a, b))$.
+\end{proof}
+
+Le nombre $39 = 3 \cdot 13$ est divisible par $3$, comme il le doit : $T$ appartient à l'intersection $(\mathrm{TS}_w \otimes C_q) \cap (C_w \otimes \mathrm{TS}_q)$, sur laquelle $\beta$ prend des valeurs divisibles par~$3$. C'est exactement l'écart entre le plus petit commun multiple et le produit des indices décrit plus haut.
+
+\begin{sloppypar}
+\emph{Vérification en Lean.} Le fichier \href{\leanblobmain/Redaction197Chow.lean}{\texttt{Redaction197Chow.\allowbreak{}lean}} écrit l'anneau $\mathbf Z[a, b, c, d]$ comme $\mathbf Z[c, d][a, b]$, définit les $e_{pq}$ par la liste de leurs monômes et les caractérise par l'identité $\prod_i (1 + c_i U + d_i W) = \sum_{p,q} e_{pq}\, U^p W^q$ (\texttt{prod\_eq\_sum\_e}). Les coefficients sont calculés sur des listes de monômes, que le noyau de Lean multiplie et lit lui-même : les huit valeurs de $\alpha$ (\texttt{alpha\_e\_products}) et $\beta(T) = 39$ (\texttt{beta\_T}) sont ainsi vérifiées par calcul. La divisibilité par~$3$ sur tout polynôme en les $e_{pq}$ (\texttt{three\_dvd\_alpha\_aeval}) passe par les bidegrés, qui s'additionnent dans les produits de listes, et par la résolution des deux équations de bidegré en les exposants. La divisibilité par~$9$ (\texttt{nine\_dvd\_beta\_aeval}) et le contre-exemple (\texttt{not\_exists\_integral\_formula}, et \texttt{T\_not\_mem\_adjoin} pour le sous-anneau engendré) en découlent.
+\end{sloppypar}
+
+\emph{Ce qui n'est pas démontré.} Le cas des cycles de dimension positive n'est pas traité : la forme de Chow d'un produit y est plus difficile à écrire, et l'on ne sait pas ici si l'énoncé de la page tient sur un corps dans ce cas, ni s'il tombe sur $\mathbf Z$ pour d'autres raisons que celle-ci. Le cas d'un corps pour les cycles de dimension nulle est démontré plus haut en prose et n'est pas formalisé ; le passage de la forme de Chow du produit de Segre à $T$, par spécialisation des variables $u_{kl}$, ne l'est pas non plus, et $T$ est défini directement en Lean.
+
+\litterature{piste candidate. Le défaut de génération des fonctions multisymétriques par les élémentaires sur $\mathbf Z$ est connu \cite{briand2004, rydh2007}, et Rydh en tire des conséquences pour le schéma de Chow des cycles de dimension nulle. Un contre-exemple explicite à l'expression entière des coordonnées de Chow d'un produit n'a pas été retrouvé dans les sources lues ; il reste à lire la thèse de Rydh sur les familles de cycles et le schéma de Chow, que son article cite pour ces questions, et les traitements classiques des formes de Chow des produits.}
