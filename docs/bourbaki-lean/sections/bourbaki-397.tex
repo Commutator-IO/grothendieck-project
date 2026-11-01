@@ -2,7 +2,7 @@
 
 La rédaction \redac{397}, \q{Compléments au chapitre VII d'Algèbre. Dualité des modules de longueur finie sur un anneau principal}, des archives Bourbaki (Archives Henri Poincaré, \ahp{948}) est datée d'avril 1963. Elle définit les modules injectifs, démontre le critère de Baer (sa proposition~2) et en tire un corollaire : sur un anneau principal, un module est injectif si et seulement s'il est divisible ; puis un \q{corollaire du corollaire} : tout quotient d'un module injectif est injectif. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
 
-\emph{L'idée.} Sur un anneau principal $R$, un idéal est engendré par un seul élément $a$. Prolonger à $R$ une application linéaire $g$ définie sur l'idéal $(a)$, c'est choisir l'image $q$ de $1$, avec la seule contrainte $a\,q = g(a)$ : c'est exactement résoudre une équation de divisibilité. Le critère de Baer, qui ramène l'injectivité aux prolongements depuis les idéaux, fait le reste.
+\emph{L'idée.} Sur un anneau principal $R$, un idéal est engendré par un seul élément $a$. Prolonger à $R$ une application linéaire $g$ définie sur l'idéal $(a)$, c'est choisir l'image $q$ de $1$, sous la seule contrainte $a\,q = g(a)$, ce qui revient à diviser $g(a)$ par $a$ dans $Q$. Le critère de Baer ramène l'injectivité à ces prolongements depuis les idéaux.
 
 \begin{encadre}
 \begin{enonce}[Bourbaki, rédaction \redac{397}, corollaire de la proposition~2 et son corollaire]
@@ -29,4 +29,4 @@ c) Si $Q$ est injectif, il est divisible par b), et un quotient d'un module divi
 \noindent\emph{Vérification en Lean.} a) est \texttt{baer\_of\_divisible} et \texttt{injective\_of\_divisible}, b) \texttt{divisible\_of\_injective}, l'équivalence \texttt{injective\_iff\_divisible}, et c) \texttt{injective\_quotient}, dans \href{\leanblobmain/Redaction397.lean}{\texttt{Redaction397.\allowbreak{}lean}}. Le critère de Baer de mathlib demande que $R$ et $Q$ soient dans le même univers, et la formalisation garde cette restriction.
 \end{sloppypar}
 
-\litterature{retrouvée. Le critère est de Baer (1940) ; l'équivalence entre divisible et injectif sur un anneau principal est classique (Lam, \emph{Lectures on Modules and Rings}, §~3). mathlib n'en avait que le cas de $\mathbf Z$ (\texttt{Module.Baer.of\_divisible}) ; le cas général est un candidat pour mathlib, sans être une piste de l'édition.}
+\litterature{retrouvée. Le critère est de Baer (1940) ; l'équivalence entre divisible et injectif sur un anneau principal est classique (Lam, \emph{Lectures on Modules and Rings}, §~3). mathlib n'en avait que le cas de $\mathbf Z$ (\texttt{Module.Baer.of\_divisible}) ; le cas général est proposé pour mathlib, et l'édition ne le donne pas pour nouveau.}
