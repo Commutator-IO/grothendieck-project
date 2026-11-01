@@ -1,423 +1,470 @@
 \documentclass[11pt]{article}
 \usepackage{fontspec}
-% Charter et Menlo (macOS) ; ailleurs, XCharter et DejaVu Sans Mono, dont ils dérivent.
+% Charter and Menlo (macOS); elsewhere, XCharter and DejaVu Sans Mono, from which they derive.
 \IfFontExistsTF{Charter}{\setmainfont{Charter}}{\setmainfont{XCharter}}
 \IfFontExistsTF{Menlo}{\setmonofont{Menlo}[Scale=0.82]}{\setmonofont{DejaVu Sans Mono}[Scale=0.82]}
-\usepackage{polyglossia}\setmainlanguage{french}\setotherlanguage{english}
+\usepackage{polyglossia}\setmainlanguage{english}
 \usepackage{microtype}
-% L’ : la paire de crénage de Charter colle l’apostrophe au L ; on rajoute une fine espace.
-\XeTeXinterchartokenstate=1
-\newXeTeXintercharclass\LetterL
-\newXeTeXintercharclass\Apostrophe
-\XeTeXcharclass`L=\LetterL
-\XeTeXcharclass`'=\Apostrophe
-\XeTeXcharclass"2019=\Apostrophe
-\XeTeXinterchartoks\LetterL\Apostrophe={\kern0.07em}
 \usepackage[a4paper,margin=27mm]{geometry}
 \usepackage{setspace}\setstretch{1.1}
 \usepackage{xcolor}
-\usepackage[hidelinks]{hyperref}
+\usepackage[hidelinks,pageanchor=false]{hyperref}
 \usepackage{amsmath,amssymb}
 \definecolor{frise}{HTML}{2F4DA8}
 
-\newcommand{\q}[1]{«\,#1\,»}
-% La vidéo de la section en cours ; chaque entrée renvoie à sa seconde.
+\newcommand{\q}[1]{``#1''}
+% The video of the current section; each entry points to its second.
 \newcommand{\videoid}{}
 \newcommand{\video}[1]{\renewcommand{\videoid}{#1}}
-\newcommand{\face}[1]{\par\medskip\noindent\textbf{#1}\par\smallskip}
-% Une entrée : le moment de la bande (lien vers YouTube), puis l'énoncé.
+\newcommand{\face}[1]{\par\medskip\noindent{\small\bfseries #1}\par\smallskip\nopagebreak}
+% A topic: the numbered headings, in lecture order.
+\newcommand{\topic}[1]{\section{#1}}
+% A session: date as a small label (not in the contents).
+\newcommand{\sessiondate}[1]{\par\bigskip\noindent{\small\scshape\textcolor{frise}{#1}}\par\nopagebreak}
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries}{\thesection}{0.8em}{}
+\titlespacing*{\section}{0pt}{2.2ex plus 0.5ex}{1.2ex}
+\usepackage{needspace}
+% An entry: the moment on the tape (link to YouTube), then the statement.
 \newlength{\horo}\settowidth{\horo}{\small\texttt{00:00:00}\quad}
 \newcommand{\entree}[3]{\par\noindent\hangindent=\horo\hangafter=1%
   \makebox[\horo][l]{\small\href{https://www.youtube.com/watch?v=\videoid&t=#1s}{\textcolor{frise}{\texttt{#2}}}}#3\par\smallskip}
 \raggedbottom\emergencystretch=1.5em
 
-\title{\Large Cours de Buffalo sur la théorie des groupes algébriques (1973) :\\ index des résultats}
-\author{Michel Hua\\ \small Chercheur indépendant, Paris\\ \small \texttt{michel@commutator.io}}
-\date{\small Novembre 2026}
+\title{\Large Buffalo Lectures on the Theory of Algebraic Groups (1973):\\ Index of Results}
+\author{Michel Hua\\ \small Independent researcher, Paris\\ \small \texttt{michel@commutator.io}}
+\date{\small November 2026}
 
 \begin{document}
-\maketitle
-
-\section*{Introduction}\addcontentsline{toc}{section}{Introduction}
-
-\emph{Le cours.} En juin et juillet 1973, Alexandre Grothendieck a fait à l'université d'État de New York à Buffalo un cours sur la théorie des groupes algébriques, en anglais, à côté de deux autres cours, sur la géométrie algébrique et sur la théorie des topos. Les séances ont été enregistrées sur bandes magnétiques. Ce document s'appuie sur les enregistrements publiés par la chaîne YouTube \q{Erwin Schulhoff} en deux vidéos ; il cite chaque séance par sa date, sa bande et sa face, d'après les descriptions de ces vidéos, et chaque moment par sa position dans la vidéo.
-
-\emph{Ce qu'est cet index.} Pour chaque résultat ou définition traité dans une séance, l'index donne une ligne : l'énoncé, dans la langue mathématique d'aujourd'hui et dans nos propres mots, et le moment de la bande où il est traité, sous la forme d'un lien vers la vidéo à la seconde près. Une entrée correspond à un énoncé, non à une minute de cours. Quelques mots entre guillemets reprennent un nom ou un terme forgé dans le cours, quand il importe. Quand ce qui est dit est esquissé ou incomplet, l'entrée donne l'énoncé correct, avec les hypothèses qu'il demande ; une affirmation fausse telle qu'elle est entendue n'est pas reprise. Un passage dont l'audition reste douteuse n'est pas indexé.
-
-\emph{Ce qu'il n'est pas.} Cet index n'est pas une transcription ni un résumé du cours. Il ne reprend ni les explications, ni les exemples développés, ni les digressions, ni l'ordre de l'exposé au-delà de la succession des énoncés, et il ne cite pas le cours. Le cours tel qu'il a été prononcé est une œuvre orale protégée, dont les droits appartiennent aux ayants droit d'Alexandre Grothendieck ; seuls les enregistrements font foi, et l'on s'y reporte par les liens. Les énoncés sont ici des énoncés mathématiques standard, rédigés par nous.
-
-\emph{Ce qui manque.} Les vidéos de ce cours contiennent aussi des séances du cours de géométrie algébrique : la fin de la deuxième bande du 11 juin et les deux faces suivantes de la première vidéo, et deux faces du 11 juillet de la seconde. Elles sont indexées dans l'index de ce cours, non ici. Quatre faces ont un son dégradé (19 juin, bande 1, faces A et B ; 27 juin, bande 1, faces A et B) : seuls les énoncés entendus avec certitude y sont indexés, et ces faces le sont moins complètement que les autres. La première face de la première vidéo ne porte ni étiquette ni date ; elle est indexée à part, en tête.
-
+\begin{titlepage}
+\centering\vspace*{3cm}
+{\LARGE\bfseries Buffalo Lectures on the Theory\\[0.4em] of Algebraic Groups (1973)\par}
+\vspace{0.8cm}{\Large Index of Results\par}
+\vspace{2cm}{\large Alexandre Grothendieck, State University of New York at Buffalo\\ June--July 1973\par}
+\vspace{2cm}{\large Michel Hua\\[0.2em] \small Independent researcher, Paris\\ \texttt{michel@commutator.io}\par}
+\vfill{\small November 2026\par}
+\end{titlepage}
+\pagenumbering{roman}
+\setcounter{tocdepth}{1}
 \tableofcontents
+\clearpage\pagenumbering{arabic}
+\clearpage
 
-\section{Face sans date}\label{s-sans-date}
-\noindent\textit{Vidéo 1/2 (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}) : bande sans étiquette 1, face A (0:00:00--0:14:18).}\par\medskip
+\section*{Introduction}
+
+\emph{The course.} In June and July 1973, Alexandre Grothendieck gave a course on the theory of algebraic groups at the State University of New York at Buffalo, in English, alongside two other courses, on algebraic geometry and on topos theory. The sessions were recorded on magnetic tape. This document relies on the recordings published by the YouTube channel \q{Erwin Schulhoff} in two videos; it cites each session by its date, tape and side, following the descriptions of these videos, and each moment by its position in the video.
+
+\emph{What this index is.} For each result or definition treated in a session, the index gives one line: the statement, in today’s mathematical language and in our own words, and the moment of the tape where it is treated, as a link to the video at the exact second. An entry corresponds to a statement, not to a minute of the lecture. A few words in quotation marks reproduce a name or a term coined in the course, when it matters. When what is said is sketched or incomplete, the entry gives the correct statement, with the hypotheses it requires; a claim that is false as heard is not reproduced. A passage whose audio remains doubtful is not indexed.
+
+\emph{What it is not.} This index is neither a transcript nor a summary of the course. It reproduces neither the explanations, nor the worked examples, nor the digressions, nor the order of the exposition beyond the succession of statements, and it does not quote the course. The course as delivered is a protected oral work, whose rights belong to the heirs of Alexandre Grothendieck; only the recordings are authoritative, and they are reached through the links. The statements here are standard mathematical statements, written by us.
+
+\emph{What is missing.} The videos of this course also contain sessions of the algebraic geometry course: the end of the second tape of 11 June and the two following sides of the first video, and two sides of 11 July in the second. They are indexed in the index of that course, not here. Four sides have degraded sound (19 June, tape 1, sides A and B; 27 June, tape 1, sides A and B): only the statements heard with certainty are indexed there, and these sides are less completely indexed than the others. The first side of the first video bears neither label nor date; it is indexed separately, at the head.
+
+
+\sessiondate{Undated side}
+\noindent\textit{Video 1/2 (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}): unlabelled tape 1, side A (0:00:00--0:14:18).}\par\medskip
 \video{_lTf_L0yvrU}
-\face{Bande sans étiquette 1, face A}
-\entree{3}{0:00:03}{Un foncteur $F\colon\mathcal{C}\to\mathcal{C}'$ commutant aux produits finis et à l'objet final transforme un objet en groupes $X$ de $\mathcal{C}$ en un objet en groupes $F(X)$ de $\mathcal{C}'$.}
-\entree{135}{0:02:15}{Plus généralement, un foncteur commutant aux limites projectives finies qui servent à écrire les axiomes d'une structure algébrique (anneau, module, action d'un groupe) transporte cette structure.}
-\entree{267}{0:04:27}{Les espaces algébriques affines sur $k$ forment la sous-catégorie pleine des foncteurs des $k$-algèbres dans $\mathbf{Ens}$ qui sont représentables ; elle est équivalente à l'opposée de la catégorie des $k$-algèbres.}
-\entree{393}{0:06:33}{L'espace $X$ représenté par la $k$-algèbre $A$ vérifie $X(k')=\mathrm{Hom}_{k\text{-alg}}(A,k')$ pour toute $k$-algèbre $k'$.}
-\entree{596}{0:09:56}{Une structure de groupe sur un espace affine $X$ équivaut à une structure de groupe sur chaque $X(k')$, fonctorielle en $k'$ : une factorisation du foncteur $X$ par le foncteur d'oubli des groupes vers $\mathbf{Ens}$.}
-\entree{660}{0:11:00}{Un groupe algébrique affine sur $k$ est un foncteur des $k$-algèbres dans les groupes dont le foncteur d'ensembles sous-jacent est représentable.}
-\entree{722}{0:12:02}{Le groupe additif $\mathbb{G}_a\colon k'\mapsto(k',+)$ et le groupe multiplicatif $\mathbb{G}_m\colon k'\mapsto k'^{*}$ sont des groupes algébriques affines commutatifs.}
-\entree{790}{0:13:10}{Le groupe linéaire $\mathrm{GL}_n\colon k'\mapsto\mathrm{GL}_n(k')$ des matrices $n\times n$ inversibles à coefficients dans $k'$ est un groupe algébrique affine, non commutatif en général.}
-\section{4 juin 1973}\label{s-1973-06-04}
-\noindent\textit{Vidéo 1/2 (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}) : bande 1, face A (0:14:18--1:02:09) ; bande 1, face B (1:02:09--1:24:56).}\par\medskip
+\face{Unlabelled tape 1, side A}
+\topic{Functors of points and affine algebraic groups}
+\entree{3}{0:00:03}{A functor $F\colon\mathcal{C}\to\mathcal{C}'$ commuting with finite products and the final object takes a group object $X$ of $\mathcal{C}$ to a group object $F(X)$ of $\mathcal{C}'$.}
+\entree{135}{0:02:15}{More generally, a functor commuting with the finite projective limits used to write the axioms of an algebraic structure (ring, module, group action) carries that structure over.}
+\entree{267}{0:04:27}{The affine algebraic spaces over $k$ form the full subcategory of representable functors from $k$-algebras to $\mathbf{Ens}$; it is equivalent to the opposite of the category of $k$-algebras.}
+\entree{393}{0:06:33}{The space $X$ represented by the $k$-algebra $A$ satisfies $X(k')=\mathrm{Hom}_{k\text{-alg}}(A,k')$ for every $k$-algebra $k'$.}
+\entree{596}{0:09:56}{A group structure on an affine space $X$ is equivalent to a group structure on each $X(k')$, functorial in $k'$: a factorization of the functor $X$ through the forgetful functor from groups to $\mathbf{Ens}$.}
+\entree{660}{0:11:00}{An affine algebraic group over $k$ is a functor from $k$-algebras to groups whose underlying set-valued functor is representable.}
+\entree{722}{0:12:02}{The additive group $\mathbb{G}_a\colon k'\mapsto(k',+)$ and the multiplicative group $\mathbb{G}_m\colon k'\mapsto k'^{*}$ are commutative affine algebraic groups.}
+\entree{790}{0:13:10}{The linear group $\mathrm{GL}_n\colon k'\mapsto\mathrm{GL}_n(k')$ of invertible $n\times n$ matrices with entries in $k'$ is an affine algebraic group, in general non-commutative.}
+\sessiondate{4 June 1973}
+\noindent\textit{Video 1/2 (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}): tape 1, side A (0:14:18--1:02:09); tape 1, side B (1:02:09--1:24:56).}\par\medskip
 \video{_lTf_L0yvrU}
-\face{Bande 1, face A}
-\entree{932}{0:15:32}{Le foncteur $\mathcal{O}\colon k'\mapsto k'$ est un objet en $k$-algèbres ; $\mathbb{G}_a$ est $\mathcal{O}$ muni de l'addition, et $\mathbb{G}_m$ est le plus grand sous-groupe du monoïde multiplicatif de $\mathcal{O}$.}
-\entree{995}{0:16:35}{$\mathbb{G}_a$, $\mathbb{G}_m$ et $\mathrm{GL}_n$ sont représentés par $k[t]$, $k[t,t^{-1}]$ et $k[t_{ij}][1/\Delta]$, où $\Delta=\det(t_{ij})$.}
-\entree{1061}{0:17:41}{Le groupe orthogonal d'une forme quadratique $Q$ en $n$ variables, $k'\mapsto\{g\in\mathrm{GL}_n(k') : Q\circ g=Q\}$, est un groupe algébrique affine : c'est un stabilisateur pour l'action de $\mathrm{GL}_n$.}
-\entree{1262}{0:21:02}{Le sous-groupe triangulaire supérieur $T_n$ de $\mathrm{GL}_n$ est représenté par $k[t_{ij}\ (i\le j)][t_{11}^{-1},\ldots,t_{nn}^{-1}]$.}
-\entree{1337}{0:22:17}{Le sous-groupe strictement triangulaire (diagonale égale à $1$) de $\mathrm{GL}_n$ est représenté par l'algèbre de polynômes $k[t_{ij}\ (i<j)]$.}
-\entree{1466}{0:24:26}{Le groupe $\{(x,y) : xy=1\}$, de loi coordonnée par coordonnée, est représenté par $k[x,y]/(xy-1)\simeq k[x,x^{-1}]$ : il est isomorphe à $\mathbb{G}_m$.}
-\entree{1661}{0:27:41}{L'homomorphisme $\mathbb{G}_m\to\mathrm{GL}_n$, $\lambda\mapsto\lambda I_n$, est un monomorphisme ; son image est formée des homothéties.}
-\entree{1724}{0:28:44}{L'homomorphisme $\mathbb{G}_m\to\mathrm{GL}_n$, $\lambda\mapsto\mathrm{diag}(1,\ldots,\lambda,\ldots,1)$ ($\lambda$ à la $i$-ème place), n'est pas central.}
-\entree{2181}{0:36:21}{Le centre d'un objet en groupes $G$ est le noyau du morphisme $G\to\underline{\mathrm{Aut}}(G)$, qui à $g$ associe l'automorphisme intérieur défini par $g$ ; c'est un sous-foncteur en groupes de $G$.}
-\entree{2376}{0:39:36}{$g\in G(Z)$ est dans le centre si et seulement si son image dans $G(Z')$ est centrale pour tout morphisme $Z'\to Z$. Sur un corps, le centre d'un groupe algébrique affine est représentable (énoncé admis).}
-\entree{2441}{0:40:41}{Un morphisme $Z\to G$ est dit central s'il se factorise par le centre de $G$ ; le morphisme $\mathbb{G}_m\to\mathrm{GL}_n$, $\lambda\mapsto\lambda I_n$, est central.}
-\entree{2510}{0:41:50}{En caractéristique $p>0$, le foncteur $\underline{\mathrm{Aut}}(\mathbb{G}_a)$ n'est pas représentable ; c'est une limite inductive filtrante de schémas (un ind-schéma).}
-\entree{2639}{0:43:59}{L'application $\lambda\mapsto\begin{pmatrix}1&\lambda\\0&1\end{pmatrix}$ est un homomorphisme $\mathbb{G}_a\to\mathrm{GL}_2$ ; composé avec $\mathrm{GL}_2\to\mathrm{GL}_n$ (identité sur les $n-2$ autres vecteurs de base), il plonge $\mathbb{G}_a$ dans $\mathrm{GL}_n$.}
-\entree{2769}{0:46:09}{Sur un corps, tout groupe algébrique affine de type fini est isomorphe à un sous-groupe fermé de $\mathrm{GL}_n$ pour un $n$ convenable (énoncé annoncé, non démontré).}
-\entree{2834}{0:47:14}{Pour un $k$-module $M$, le foncteur $W(M)\colon k'\mapsto M\otimes_kk'$ est un module sur le foncteur en anneaux $\mathcal{O}$.}
-\entree{2899}{0:48:19}{Si $M\simeq k^n$, alors $W(M)$ est isomorphe à l'espace affine standard de dimension $n$.}
-\entree{2966}{0:49:26}{Si $M$ est facteur direct d'un module libre de type fini (projectif de type fini), $W(M)$ est représentable : c'est le noyau de $1-p\colon W(L)\to W(L)$, où $p$ est un projecteur de $L=k^m$ d'image $M$.}
-\entree{3227}{0:53:47}{Réciproque : si $W(M)$ est représentable, alors $M$ est projectif de type fini (démontrée dans la séance suivante).}
-\entree{3290}{0:54:50}{Un foncteur représentable des $k$-algèbres dans $\mathbf{Ens}$ transforme les injections de $k$-algèbres en injections.}
-\entree{3352}{0:55:52}{Un foncteur représentable des $k$-algèbres dans $\mathbf{Ens}$ commute aux limites projectives quelconques, donc aux produits : $F(\prod_ik_i)\simeq\prod_iF(k_i)$.}
-\entree{3486}{0:58:06}{$M$ est plat si et seulement si $k'\mapsto M\otimes_kk'$ transforme les injections de $k$-algèbres en injections (prendre les algèbres $k\oplus N'\subset k\oplus N$ à idéal de carré nul) ; donc $W(M)$ représentable implique $M$ plat.}
-\face{Bande 1, face B}
-\entree{3734}{1:02:14}{Si $W(M)$ est représentable, $M$ est de type fini (l'identité $M\otimes k^I\simeq M^I$ force toute famille d'éléments de $M$ à tomber dans un sous-module de type fini). Sur un anneau noethérien, plat de type fini équivaut à projectif de type fini.}
-\entree{3925}{1:05:25}{Si $W(M)$ est représentable, $M$ est de présentation finie : pour $0\to R\to L\to M\to0$ avec $L$ libre de type fini, $R$ vérifie la même propriété $R\otimes k^I\simeq R^I$ (lemme des cinq).}
-\entree{4053}{1:07:33}{Pour un $k$-module $M$ quelconque, $V(M)\colon k'\mapsto\mathrm{Hom}_k(M,k')$ est un module sur le foncteur en anneaux $\mathcal{O}$.}
-\entree{4185}{1:09:45}{Le foncteur $V(M)$ est toujours représentable, par l'algèbre symétrique $S_k(M)=\bigoplus_{n\ge0}S^n(M)$ ; pour $M$ libre de rang $n$, c'est l'algèbre de polynômes à $n$ indéterminées.}
-\entree{4261}{1:11:01}{L'espace $V(M)=\mathrm{Spec}\,S_k(M)$ est de type fini sur $k$ si et seulement si $M$ est de type fini.}
-\entree{4324}{1:12:04}{Le foncteur $M\mapsto W(M)$ est covariant et $M\mapsto V(M)$ est contravariant, à valeurs dans les modules sur le foncteur en anneaux $\mathcal{O}$.}
-\entree{4515}{1:15:15}{Les foncteurs $W$ et $V$ sont pleinement fidèles : les applications $\mathrm{Hom}_k(M,N)\to\mathrm{Hom}_{\mathcal{O}}(W(M),W(N))$ et $\mathrm{Hom}_k(M,N)\to{}$ $\mathrm{Hom}_{\mathcal{O}}(V(N),V(M))$ sont bijectives.}
-\entree{4641}{1:17:21}{L'accouplement $M\otimes k'\times\mathrm{Hom}_k(M,k')\to k'$ définit un accouplement $\mathcal{O}$-bilinéaire $V(M)\times W(M)\to\mathcal{O}$, fonctoriel en $M$.}
-\entree{4831}{1:20:31}{Bidualité : pour tout module $M$, l'accouplement $V(M)\times W(M)\to\mathcal{O}$ identifie chacun des foncteurs $V(M)$, $W(M)$ au dual $\underline{\mathrm{Hom}}_{\mathcal{O}}(-,\mathcal{O})$ de l'autre.}
-\entree{4960}{1:22:40}{Si $M$ est projectif de type fini, $W(M)\simeq V(M^{\vee})$, donc $W(M)$ est représenté par l'algèbre symétrique $S_k(M^{\vee})$ du dual de $M$.}
-\section{6 juin 1973}\label{s-1973-06-06}
-\noindent\textit{Vidéo 1/2 (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}) : bande 1, face A (1:24:56--2:12:28).}\par\medskip
+\face{Tape 1, side A}
+\topic{Basic examples: $\mathbb{G}_a$, $\mathbb{G}_m$, $\mathrm{GL}_n$ and their subgroups}
+\entree{932}{0:15:32}{The functor $\mathcal{O}\colon k'\mapsto k'$ is a $k$-algebra object; $\mathbb{G}_a$ is $\mathcal{O}$ with its addition, and $\mathbb{G}_m$ is the largest subgroup of the multiplicative monoid of $\mathcal{O}$.}
+\entree{995}{0:16:35}{$\mathbb{G}_a$, $\mathbb{G}_m$ and $\mathrm{GL}_n$ are represented by $k[t]$, $k[t,t^{-1}]$ and $k[t_{ij}][1/\Delta]$, where $\Delta=\det(t_{ij})$.}
+\entree{1061}{0:17:41}{The orthogonal group of a quadratic form $Q$ in $n$ variables, $k'\mapsto\{g\in\mathrm{GL}_n(k') : Q\circ g=Q\}$, is an affine algebraic group: it is a stabilizer for the action of $\mathrm{GL}_n$.}
+\entree{1262}{0:21:02}{The upper triangular subgroup $T_n$ of $\mathrm{GL}_n$ is represented by $k[t_{ij}\ (i\le j)][t_{11}^{-1},\ldots,t_{nn}^{-1}]$.}
+\entree{1337}{0:22:17}{The strictly triangular subgroup (diagonal equal to $1$) of $\mathrm{GL}_n$ is represented by the polynomial algebra $k[t_{ij}\ (i<j)]$.}
+\entree{1466}{0:24:26}{The group $\{(x,y) : xy=1\}$, with coordinatewise law, is represented by $k[x,y]/(xy-1)\simeq k[x,x^{-1}]$: it is isomorphic to $\mathbb{G}_m$.}
+\entree{1661}{0:27:41}{The homomorphism $\mathbb{G}_m\to\mathrm{GL}_n$, $\lambda\mapsto\lambda I_n$, is a monomorphism; its image consists of the scalar matrices.}
+\entree{1724}{0:28:44}{The homomorphism $\mathbb{G}_m\to\mathrm{GL}_n$, $\lambda\mapsto\mathrm{diag}(1,\ldots,\lambda,\ldots,1)$ ($\lambda$ in the $i$-th place), is not central.}
+\topic{Centers and central morphisms}
+\entree{2181}{0:36:21}{The center of a group object $G$ is the kernel of the morphism $G\to\underline{\mathrm{Aut}}(G)$ sending $g$ to the inner automorphism defined by $g$; it is a subgroup functor of $G$.}
+\entree{2376}{0:39:36}{$g\in G(Z)$ lies in the center if and only if its image in $G(Z')$ is central for every morphism $Z'\to Z$. Over a field, the center of an affine algebraic group is representable (statement admitted).}
+\entree{2441}{0:40:41}{A morphism $Z\to G$ is called central if it factors through the center of $G$; the morphism $\mathbb{G}_m\to\mathrm{GL}_n$, $\lambda\mapsto\lambda I_n$, is central.}
+\entree{2510}{0:41:50}{In characteristic $p>0$, the functor $\underline{\mathrm{Aut}}(\mathbb{G}_a)$ is not representable; it is a filtered inductive limit of schemes (an ind-scheme).}
+\entree{2639}{0:43:59}{The map $\lambda\mapsto\begin{pmatrix}1&\lambda\\0&1\end{pmatrix}$ is a homomorphism $\mathbb{G}_a\to\mathrm{GL}_2$; composed with $\mathrm{GL}_2\to\mathrm{GL}_n$ (identity on the other $n-2$ basis vectors), it embeds $\mathbb{G}_a$ in $\mathrm{GL}_n$.}
+\entree{2769}{0:46:09}{Over a field, every affine algebraic group of finite type is isomorphic to a closed subgroup of $\mathrm{GL}_n$ for a suitable $n$ (statement announced, not proved).}
+\topic{Module functors $W(M)$ and $V(M)$}
+\entree{2834}{0:47:14}{For a $k$-module $M$, the functor $W(M)\colon k'\mapsto M\otimes_kk'$ is a module over the ring functor $\mathcal{O}$.}
+\entree{2899}{0:48:19}{If $M\simeq k^n$, then $W(M)$ is isomorphic to the standard affine space of dimension $n$.}
+\entree{2966}{0:49:26}{If $M$ is a direct factor of a finitely generated free module (finitely generated projective), $W(M)$ is representable: it is the kernel of $1-p\colon W(L)\to W(L)$, where $p$ is a projector of $L=k^m$ with image $M$.}
+\entree{3227}{0:53:47}{Conversely, if $W(M)$ is representable, then $M$ is finitely generated projective (proved in the next session).}
+\entree{3290}{0:54:50}{A representable functor from $k$-algebras to $\mathbf{Ens}$ takes injections of $k$-algebras to injections.}
+\entree{3352}{0:55:52}{A representable functor from $k$-algebras to $\mathbf{Ens}$ commutes with arbitrary projective limits, hence with products: $F(\prod_ik_i)\simeq\prod_iF(k_i)$.}
+\entree{3486}{0:58:06}{$M$ is flat if and only if $k'\mapsto M\otimes_kk'$ takes injections of $k$-algebras to injections (take the algebras $k\oplus N'\subset k\oplus N$ with ideal of square zero); hence $W(M)$ representable implies $M$ flat.}
+\face{Tape 1, side B}
+\entree{3734}{1:02:14}{If $W(M)$ is representable, $M$ is finitely generated (the identity $M\otimes k^I\simeq M^I$ forces every family of elements of $M$ to fall into a finitely generated submodule). Over a noetherian ring, flat of finite type is equivalent to finitely generated projective.}
+\entree{3925}{1:05:25}{If $W(M)$ is representable, $M$ is finitely presented: for $0\to R\to L\to M\to0$ with $L$ finitely generated free, $R$ satisfies the same property $R\otimes k^I\simeq R^I$ (five lemma).}
+\entree{4053}{1:07:33}{For an arbitrary $k$-module $M$, $V(M)\colon k'\mapsto\mathrm{Hom}_k(M,k')$ is a module over the ring functor $\mathcal{O}$.}
+\entree{4185}{1:09:45}{The functor $V(M)$ is always representable, by the symmetric algebra $S_k(M)=\bigoplus_{n\ge0}S^n(M)$; for $M$ free of rank $n$, this is the polynomial algebra in $n$ indeterminates.}
+\entree{4261}{1:11:01}{The space $V(M)=\mathrm{Spec}\,S_k(M)$ is of finite type over $k$ if and only if $M$ is finitely generated.}
+\entree{4324}{1:12:04}{The functor $M\mapsto W(M)$ is covariant and $M\mapsto V(M)$ is contravariant, with values in modules over the ring functor $\mathcal{O}$.}
+\entree{4515}{1:15:15}{The functors $W$ and $V$ are fully faithful: the maps $\mathrm{Hom}_k(M,N)\to{}$\linebreak $\mathrm{Hom}_{\mathcal{O}}(W(M),W(N))$ and $\mathrm{Hom}_k(M,N)\to{}$ $\mathrm{Hom}_{\mathcal{O}}(V(N),V(M))$ are bijective.}
+\entree{4641}{1:17:21}{The pairing $M\otimes k'\times\mathrm{Hom}_k(M,k')\to k'$ defines an $\mathcal{O}$-bilinear pairing $V(M)\times W(M)\to\mathcal{O}$, functorial in $M$.}
+\entree{4831}{1:20:31}{Biduality: for every module $M$, the pairing $V(M)\times W(M)\to\mathcal{O}$ identifies each of the functors $V(M)$, $W(M)$ with the dual $\underline{\mathrm{Hom}}_{\mathcal{O}}(-,\mathcal{O})$ of the other.}
+\entree{4960}{1:22:40}{If $M$ is finitely generated projective, $W(M)\simeq V(M^{\vee})$, hence $W(M)$ is represented by the symmetric algebra $S_k(M^{\vee})$ of the dual of $M$.}
+\sessiondate{6 June 1973}
+\noindent\textit{Video 1/2 (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}): tape 1, side A (1:24:56--2:12:28).}\par\medskip
 \video{_lTf_L0yvrU}
-\face{Bande 1, face A}
-\entree{5101}{1:25:01}{Le foncteur $k'\mapsto\mathrm{Hom}_{k'}(M_{k'},N_{k'})$ est le foncteur $\underline{\mathrm{Hom}}_{\mathcal{O}}(W(M),W(N))$.}
-\entree{5166}{1:26:06}{Pour $M=k$, ce foncteur est $W(N)$ : il n'est donc représentable en général que si $N$ est projectif de type fini.}
-\entree{5230}{1:27:10}{Si $N$ est projectif de type fini, $k'\mapsto\mathrm{Hom}_{k'}(M_{k'},N_{k'})$ est isomorphe à $V(M\otimes N^{\vee})$, représenté par l'algèbre symétrique de $M\otimes N^{\vee}$.}
-\entree{5556}{1:32:36}{Pour $N$ projectif de type fini, $\underline{\mathrm{End}}(N)\colon k'\mapsto\mathrm{End}(N_{k'})$ est un objet en $\mathcal{O}$-algèbres non commutatives, représenté par $S_k(N\otimes N^{\vee})$.}
-\entree{5749}{1:35:49}{Si $R$ est un objet en anneaux (non nécessairement commutatifs) d'une catégorie à limites projectives finies, le sous-foncteur $R^{*}$ des éléments inversibles est représentable (paires $(x,y)$ avec $xy=1$ et $yx=1$, par produits fibrés).}
-\entree{5940}{1:39:00}{Pour $N$ projectif de type fini, $\underline{\mathrm{Aut}}(N)=\underline{\mathrm{End}}(N)^{*}$ est représentable ; c'est la version intrinsèque de $\mathrm{GL}_n$.}
-\entree{6070}{1:41:10}{Si $A$ représente $\underline{\mathrm{End}}(N)$, le groupe $\underline{\mathrm{Aut}}(N)$ est représenté par $A[\Delta^{-1}]$, où $\Delta$ est le déterminant ; un endomorphisme d'un module projectif de type fini est inversible si et seulement si son déterminant l'est.}
-\entree{6199}{1:43:19}{Le noyau de l'élévation à la puissance $n$ sur $\mathbb{G}_m$ est le groupe $\mu_n$ : $\mu_n(k')=\{\lambda\in k' : \lambda^n=1\}$.}
-\entree{6328}{1:45:28}{$\mu_n$ est représenté par $k[t]/(t^n-1)$, algèbre libre de rang $n$ de base $1,x,\ldots,x^{n-1}$ ; c'est un sous-espace fermé de $\mathbb{G}_m$.}
-\entree{6393}{1:46:33}{Un espace affine représenté par une algèbre qui est un $k$-module de type fini est dit fini sur $k$ ; $\mu_n$ est un groupe fini sur $k$.}
-\entree{6521}{1:48:41}{Si le corps $K$ est algébriquement clos de caractéristique $p$ divisant $n$, $\mu_n(K)$ est cyclique d'ordre $n'$, quotient de $n$ par la plus grande puissance de $p$ qui le divise.}
-\entree{6586}{1:49:46}{En caractéristique $p$, $\mu_{p^i}(K)$ est trivial pour tout corps $K$, bien que $\mu_{p^i}$ soit représenté par une algèbre de rang $p^i$ : le groupe n'est pas réduit à l'unité.}
-\entree{6715}{1:51:55}{En caractéristique $p$, $\lambda\mapsto\lambda^p$ est bijectif sur $\mathbb{G}_m(K)$ pour tout corps parfait $K$, mais ce n'est pas un isomorphisme $\mathbb{G}_m\to\mathbb{G}_m$ : $t\mapsto t^p$ n'est pas surjectif sur $k[t,t^{-1}]$.}
-\entree{6843}{1:54:03}{$\mathrm{SL}_n$ est le noyau du déterminant $\mathrm{GL}_n\to\mathbb{G}_m$.}
-\entree{6906}{1:55:06}{Le centre de $\mathrm{GL}_n$ est $\mathbb{G}_m$ plongé comme groupe des homothéties.}
-\entree{7035}{1:57:15}{L'intersection de $\mathrm{SL}_n$ et du groupe des homothéties est $\mu_n$, car $\det(\lambda I_n)=\lambda^n$.}
-\entree{7099}{1:58:19}{Le centre de $\mathrm{SL}_n$ est $\mu_n$.}
-\entree{7164}{1:59:24}{Le groupe projectif $\mathrm{PGL}_n$ est le quotient de $\mathrm{GL}_n$ par son centre, et aussi le quotient de $\mathrm{SL}_n$ par $\mu_n$ (annoncé, les quotients étant traités plus tard).}
-\entree{7227}{2:00:27}{En caractéristique $p$, le morphisme $\mathrm{SL}_p\to\mathrm{PGL}_p$, de noyau $\mu_p$, n'est pas un isomorphisme.}
-\entree{7290}{2:01:30}{En caractéristique $p$, $\lambda\mapsto\lambda^p$ est un endomorphisme de l'anneau $\mathcal{O}$, donc de $\mathbb{G}_a$ ; il en est de même de $\lambda\mapsto\lambda^{p^i}$.}
-\entree{7417}{2:03:37}{Les endomorphismes de $\mathbb{G}_a$ en caractéristique $p$ sont les combinaisons linéaires finies, à coefficients dans $k$, des $\lambda\mapsto\lambda^{p^i}$.}
-\entree{7480}{2:04:40}{Le noyau de $\lambda\mapsto\lambda^{p^i}$ sur $\mathbb{G}_a$ est le groupe $\alpha_{p^i}$ : $\alpha_{p^i}(k')=\{\lambda\in k' : \lambda^{p^i}=0\}$ ; il est trivial sur les anneaux réduits.}
-\entree{7545}{2:05:45}{$\alpha_{p^i}$ est représenté par $k[t]/(t^{p^i})$, algèbre libre de rang $p^i$ ; ce n'est pas le groupe trivial (nombres duaux).}
-\entree{7625}{2:07:05}{Si l'algèbre qui représente un espace affine est un $k$-module libre de rang $n$ ($k\ne0$), l'espace est dit de rang $n$ ; pour un groupe, le rang est l'ordre.}
-\entree{7690}{2:08:10}{$\mu_n$ est un groupe d'ordre $n$ et $\alpha_{p^i}$ un groupe d'ordre $p^i$ ; le groupe des points à valeurs dans un corps d'un groupe d'ordre $n$ est d'ordre au plus $n$.}
-\entree{7841}{2:10:41}{En caractéristique $p$, $F_G\colon(\lambda_{ij})\mapsto(\lambda_{ij}^p)$ est un endomorphisme du groupe $G=\mathrm{GL}_n$ (de même pour ses sous-groupes définis sur $\mathbb{F}_p$).}
-\entree{7907}{2:11:47}{Le noyau de $F_G$ sur $\mathrm{GL}_n$ est le foncteur des matrices telles que $\lambda_{ij}^p=0$ pour $i\ne j$ et $\lambda_{ii}^p=1$.}
-\section{11 juin 1973}\label{s-1973-06-11}
-\noindent\textit{Vidéo 1/2 (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}) : bande 1 (2:12:28--3:00:08) ; bande 2 (3:00:08--3:45:53).}\par\medskip
+\face{Tape 1, side A}
+\topic{Endomorphism and automorphism functors}
+\entree{5101}{1:25:01}{The functor $k'\mapsto\mathrm{Hom}_{k'}(M_{k'},N_{k'})$ is the functor $\underline{\mathrm{Hom}}_{\mathcal{O}}(W(M),W(N))$.}
+\entree{5166}{1:26:06}{For $M=k$, this functor is $W(N)$: so in general it is representable only if $N$ is finitely generated projective.}
+\entree{5230}{1:27:10}{If $N$ is finitely generated projective, $k'\mapsto\mathrm{Hom}_{k'}(M_{k'},N_{k'})$ is isomorphic to $V(M\otimes N^{\vee})$, represented by the symmetric algebra of $M\otimes N^{\vee}$.}
+\entree{5556}{1:32:36}{For $N$ finitely generated projective, $\underline{\mathrm{End}}(N)\colon k'\mapsto\mathrm{End}(N_{k'})$ is a non-commutative $\mathcal{O}$-algebra object, represented by $S_k(N\otimes N^{\vee})$.}
+\entree{5749}{1:35:49}{If $R$ is a ring object (not necessarily commutative) of a category with finite projective limits, the subfunctor $R^{*}$ of invertible elements is representable (pairs $(x,y)$ with $xy=1$ and $yx=1$, by fibre products).}
+\entree{5940}{1:39:00}{For $N$ finitely generated projective, $\underline{\mathrm{Aut}}(N)=\underline{\mathrm{End}}(N)^{*}$ is representable; it is the intrinsic version of $\mathrm{GL}_n$.}
+\entree{6070}{1:41:10}{If $A$ represents $\underline{\mathrm{End}}(N)$, the group $\underline{\mathrm{Aut}}(N)$ is represented by $A[\Delta^{-1}]$, where $\Delta$ is the determinant; an endomorphism of a finitely generated projective module is invertible if and only if its determinant is.}
+\topic{The groups $\mu_n$}
+\entree{6199}{1:43:19}{The kernel of raising to the $n$-th power on $\mathbb{G}_m$ is the group $\mu_n$: $\mu_n(k')=\{\lambda\in k' : \lambda^n=1\}$.}
+\entree{6328}{1:45:28}{$\mu_n$ is represented by $k[t]/(t^n-1)$, a free algebra of rank $n$ with basis $1,x,\ldots,x^{n-1}$; it is a closed subspace of $\mathbb{G}_m$.}
+\entree{6393}{1:46:33}{An affine space represented by an algebra that is a finitely generated $k$-module is called finite over $k$; $\mu_n$ is a finite group over $k$.}
+\entree{6521}{1:48:41}{If the field $K$ is algebraically closed of characteristic $p$ dividing $n$, $\mu_n(K)$ is cyclic of order $n'$, the quotient of $n$ by the largest power of $p$ dividing it.}
+\entree{6586}{1:49:46}{In characteristic $p$, $\mu_{p^i}(K)$ is trivial for every field $K$, although $\mu_{p^i}$ is represented by an algebra of rank $p^i$: the group is not reduced to the identity.}
+\entree{6715}{1:51:55}{In characteristic $p$, $\lambda\mapsto\lambda^p$ is bijective on $\mathbb{G}_m(K)$ for every perfect field $K$, but it is not an isomorphism $\mathbb{G}_m\to\mathbb{G}_m$: $t\mapsto t^p$ is not surjective on $k[t,t^{-1}]$.}
+\topic{$\mathrm{SL}_n$, $\mathrm{PGL}_n$ and centers}
+\entree{6843}{1:54:03}{$\mathrm{SL}_n$ is the kernel of the determinant $\mathrm{GL}_n\to\mathbb{G}_m$.}
+\entree{6906}{1:55:06}{The center of $\mathrm{GL}_n$ is $\mathbb{G}_m$ embedded as the group of scalar matrices.}
+\entree{7035}{1:57:15}{The intersection of $\mathrm{SL}_n$ and the group of scalar matrices is $\mu_n$, since $\det(\lambda I_n)=\lambda^n$.}
+\entree{7099}{1:58:19}{The center of $\mathrm{SL}_n$ is $\mu_n$.}
+\entree{7164}{1:59:24}{The projective group $\mathrm{PGL}_n$ is the quotient of $\mathrm{GL}_n$ by its center, and also the quotient of $\mathrm{SL}_n$ by $\mu_n$ (announced, quotients being treated later).}
+\entree{7227}{2:00:27}{In characteristic $p$, the morphism $\mathrm{SL}_p\to\mathrm{PGL}_p$, with kernel $\mu_p$, is not an isomorphism.}
+\topic{The groups $\alpha_{p^i}$ and the Frobenius}
+\entree{7290}{2:01:30}{In characteristic $p$, $\lambda\mapsto\lambda^p$ is an endomorphism of the ring $\mathcal{O}$, hence of $\mathbb{G}_a$; so is $\lambda\mapsto\lambda^{p^i}$.}
+\entree{7417}{2:03:37}{The endomorphisms of $\mathbb{G}_a$ in characteristic $p$ are the finite linear combinations, with coefficients in $k$, of the maps $\lambda\mapsto\lambda^{p^i}$.}
+\entree{7480}{2:04:40}{The kernel of $\lambda\mapsto\lambda^{p^i}$ on $\mathbb{G}_a$ is the group $\alpha_{p^i}$: $\alpha_{p^i}(k')=\{\lambda\in k' : \lambda^{p^i}=0\}$; it is trivial on reduced rings.}
+\entree{7545}{2:05:45}{$\alpha_{p^i}$ is represented by $k[t]/(t^{p^i})$, a free algebra of rank $p^i$; it is not the trivial group (dual numbers).}
+\entree{7625}{2:07:05}{If the algebra representing an affine space is a free $k$-module of rank $n$ ($k\ne0$), the space is said to have rank $n$; for a group, the rank is the order.}
+\entree{7690}{2:08:10}{$\mu_n$ is a group of order $n$ and $\alpha_{p^i}$ a group of order $p^i$; the group of field-valued points of a group of order $n$ has order at most $n$.}
+\entree{7841}{2:10:41}{In characteristic $p$, $F_G\colon(\lambda_{ij})\mapsto(\lambda_{ij}^p)$ is an endomorphism of the group $G=\mathrm{GL}_n$ (likewise for its subgroups defined over $\mathbb{F}_p$).}
+\entree{7907}{2:11:47}{The kernel of $F_G$ on $\mathrm{GL}_n$ is the functor of matrices such that $\lambda_{ij}^p=0$ for $i\ne j$ and $\lambda_{ii}^p=1$.}
+\sessiondate{11 June 1973}
+\noindent\textit{Video 1/2 (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}): tape 1 (2:12:28--3:00:08); tape 2 (3:00:08--3:45:53).}\par\medskip
 \video{_lTf_L0yvrU}
-\face{Bande 1}
-\entree{7949}{2:12:29}{Le noyau de Frobenius de $\mathrm{GL}_n$ est représenté par $k[t_{ij}]/(t_{ij}^p\ (i\ne j),\ t_{ii}^p-1)$ ; c'est un groupe infinitésimal, non commutatif pour $n\ge2$.}
-\entree{8015}{2:13:35}{Le Frobenius $F_G\colon\mathrm{GL}_n\to\mathrm{GL}_n$ est un épimorphisme en un sens précisé plus tard, non un isomorphisme : $\mathrm{GL}_n$ est le quotient de $\mathrm{GL}_n$ par ce sous-groupe infinitésimal.}
-\entree{8101}{2:15:01}{Pour un groupe abélien $M$, on pose $D(M)\colon k'\mapsto\mathrm{Hom}_{\mathbb{Z}}(M,k'^{*})$ ; c'est un foncteur en groupes contravariant en $M$.}
-\entree{8234}{2:17:14}{$D(\mathbb{Z})=\mathbb{G}_m$ et $D(\mathbb{Z}/n\mathbb{Z})=\mu_n$ ; $D(M\oplus N)\simeq D(M)\times D(N)$, donc si $M$ est de type fini, $D(M)$ est un produit de copies de $\mathbb{G}_m$ et de groupes $\mu_n$.}
-\entree{8368}{2:19:28}{L'algèbre de groupe $k[M]$ d'un groupe abélien $M$ est le $k$-module libre de base $(e^m)_{m\in M}$ avec $e^me^{m'}=e^{m+m'}$ ; elle est commutative, associative et unitaire.}
-\entree{8563}{2:22:43}{$D(M)$ est représenté par $k[M]$ : $\mathrm{Hom}_{\mathbb{Z}}(M,k'^{*})\simeq\mathrm{Hom}_{k\text{-alg}}(k[M],k')$ ; pour $M=\mathbb{Z}$, $k[M]=k[t,t^{-1}]$.}
-\entree{8704}{2:25:04}{Sur un corps, les groupes $D(M)$ avec $M$ de type fini sont exactement les sous-groupes fermés des groupes de matrices diagonales (sous-groupes de $\mathbb{G}_m^r$).}
-\entree{8833}{2:27:13}{Un groupe (ou foncteur en groupes) $G$ est dit radiciel ou infinitésimal si $G(k')$ est réduit à l'élément neutre pour toute $k$-algèbre réduite $k'$ ; exemples en caractéristique $p$ : $\mu_p$, $\alpha_p$.}
-\entree{8899}{2:28:19}{Sur un corps de caractéristique $0$, un groupe algébrique radiciel est trivial (énoncé annoncé, non démontré).}
-\entree{9215}{2:33:35}{$D(M)(k')=\mathrm{Hom}_{\mathrm{gr}}(M_{k'},\mathbb{G}_{m,k'})$ : $D(M)$ est le dual du foncteur constant $M_k$ par rapport à $\mathbb{G}_m$.}
-\entree{9346}{2:35:46}{Une loi de composition sur $X=\mathrm{Spec}\,A$ équivaut à un homomorphisme de $k$-algèbres $\pi\colon A\to A\otimes_kA$ ; une action de $X$ sur $Y=\mathrm{Spec}\,B$ à un homomorphisme $B\to A\otimes_kB$.}
-\entree{9603}{2:40:03}{L'associativité de la loi équivaut à $(\pi\otimes\mathrm{id}_A)\circ\pi=(\mathrm{id}_A\otimes\pi)\circ\pi$.}
-\entree{9735}{2:42:15}{Une section de $X=\mathrm{Spec}\,A$ sur l'objet final équivaut à une augmentation $\varepsilon\colon A\to k$ (homomorphisme de $k$-algèbres).}
-\entree{9927}{2:45:27}{$\varepsilon$ est unité à gauche et à droite si et seulement si $(\varepsilon\otimes\mathrm{id}_A)\circ\pi=\mathrm{id}_A=(\mathrm{id}_A\otimes\varepsilon)\circ\pi$ ; une telle $\varepsilon$ est unique.}
-\entree{10053}{2:47:33}{La loi est commutative si et seulement si $\tau\circ\pi=\pi$, où $\tau\colon A\otimes A\to A\otimes A$ est l'échange $x\otimes y\mapsto y\otimes x$.}
-\entree{10309}{2:51:49}{L'existence d'inverses s'exprime par un homomorphisme $\sigma\colon A\to A$ tel que $m\circ(\mathrm{id}_A\otimes\sigma)\circ\pi$ soit le composé de $\varepsilon$ et de l'unité $k\to A$ ($m$ la multiplication de $A$) ; $\sigma$ est alors unique.}
-\entree{10378}{2:52:58}{Une structure de groupe sur $\mathrm{Spec}\,A$ équivaut à la donnée de $\pi$, $\varepsilon$ et $\sigma$ vérifiant l'associativité, l'unité et l'inverse ; $\varepsilon$ et $\sigma$ sont alors déterminés par $\pi$.}
-\entree{10706}{2:58:26}{Pour un $k$-module $A$ quelconque, une comultiplication associative et unitaire $\pi\colon A\to A\otimes_kA$, d'augmentation $\varepsilon$ (unique), définit une structure de coalgèbre sur $A$.}
-\face{Bande 2}
-\entree{10811}{3:00:11}{Une bigèbre est un $k$-module $A$ muni d'une structure d'algèbre et d'une structure de coalgèbre telles que $\pi$ soit un homomorphisme d'algèbres, ce qui équivaut à ce que la multiplication $A\otimes A\to A$ soit un morphisme de coalgèbres.}
-\entree{10943}{3:02:23}{Une action d'un monoïde affine $G=\mathrm{Spec}\,A$ sur $X=\mathrm{Spec}\,B$ équivaut à un homomorphisme de $k$-algèbres $\omega\colon B\to A\otimes_kB$.}
-\entree{11141}{3:05:41}{L'associativité de l'action, $g(g'x)=(gg')x$, s'écrit $(\pi\otimes\mathrm{id}_B)\circ\omega=(\mathrm{id}_A\otimes\omega)\circ\omega$.}
-\entree{11270}{3:07:50}{L'axiome $1\cdot x=x$ s'écrit $(\varepsilon\otimes\mathrm{id}_B)\circ\omega=\mathrm{id}_B$.}
-\entree{11466}{3:11:06}{Ces deux axiomes n'utilisent que la structure de coalgèbre de $A$ : un module $B$ muni de $\omega\colon B\to A\otimes B$ les vérifiant est un comodule sur la coalgèbre $A$.}
-\entree{11541}{3:12:21}{Pour un objet en groupes $G$, une action de $G$ sur $X$ équivaut à un homomorphisme $G\to\underline{\mathrm{Aut}}(X)$.}
-\entree{11735}{3:15:35}{La comultiplication de $\mathbb{G}_a=\mathrm{Spec}\,k[t]$ est $\pi(t)=t\otimes1+1\otimes t$ (en écrivant $t'=t\otimes1$, $t''=1\otimes t$ : $t\mapsto t'+t''$).}
-\entree{11993}{3:19:53}{La comultiplication de $\mathbb{G}_m=\mathrm{Spec}\,k[t,t^{-1}]$ est $\pi(t)=t\otimes t$ (en écrivant $t'=t\otimes1$, $t''=1\otimes t$ : $t\mapsto t't''$).}
-\entree{12188}{3:23:08}{Un groupe $G$ opère linéairement sur un $k$-module $M$ s'il opère sur le module fonctoriel $W(M)$ par automorphismes, c'est-à-dire par un homomorphisme $G\to\underline{\mathrm{Aut}}_{\mathcal{O}}(W(M))$.}
-\entree{12640}{3:30:40}{Si $G=\mathrm{Spec}\,A$, une telle action (sans les axiomes) équivaut à un homomorphisme $k$-linéaire $u_0\colon M\to A\otimes_kM$, c'est-à-dire à l'action du point universel de $G(A)$ sur $A\otimes_kM$.}
-\entree{12770}{3:32:50}{L'axiome d'unité de l'action linéaire s'écrit $(\varepsilon\otimes\mathrm{id}_M)\circ u_0=\mathrm{id}_M$.}
-\entree{12836}{3:33:56}{L'axiome d'associativité de l'action linéaire s'écrit $(\pi\otimes\mathrm{id}_M)\circ u_0=(\mathrm{id}_A\otimes u_0)\circ u_0$.}
-\entree{13155}{3:39:15}{La catégorie des $k$-modules sur lesquels $G=\mathrm{Spec}\,A$ opère linéairement ne dépend que de la coalgèbre $A$ : c'est la catégorie des comodules sur cette coalgèbre.}
-\entree{13362}{3:42:42}{Une action de $G$ sur $X=\mathrm{Spec}\,B$ équivaut à une structure de comodule $\omega\colon B\to A\otimes B$ qui est un homomorphisme de $k$-algèbres, c'est-à-dire à une action de $G$ sur le module $B$ respectant sa structure d'algèbre.}
-\section{13 juin 1973}\label{s-1973-06-13}
-\noindent\textit{Vidéo 1/2 (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}) : bande 2, face A (5:03:20--5:52:45) ; bande 2, face B (5:52:45--6:37:31).}\par\medskip
+\face{Tape 1}
+\entree{7949}{2:12:29}{The Frobenius kernel of $\mathrm{GL}_n$ is represented by $k[t_{ij}]/(t_{ij}^p\ (i\ne j),\ t_{ii}^p-1)$; it is an infinitesimal group, non-commutative for $n\ge2$.}
+\entree{8015}{2:13:35}{The Frobenius $F_G\colon\mathrm{GL}_n\to\mathrm{GL}_n$ is an epimorphism in a sense made precise later, not an isomorphism: $\mathrm{GL}_n$ is the quotient of $\mathrm{GL}_n$ by this infinitesimal subgroup.}
+\topic{Diagonalizable groups}
+\entree{8101}{2:15:01}{For an abelian group $M$, set $D(M)\colon k'\mapsto\mathrm{Hom}_{\mathbb{Z}}(M,k'^{*})$; it is a group functor, contravariant in $M$.}
+\entree{8234}{2:17:14}{$D(\mathbb{Z})=\mathbb{G}_m$ and $D(\mathbb{Z}/n\mathbb{Z})=\mu_n$; $D(M\oplus N)\simeq D(M)\times D(N)$, hence if $M$ is finitely generated, $D(M)$ is a product of copies of $\mathbb{G}_m$ and of groups $\mu_n$.}
+\entree{8368}{2:19:28}{The group algebra $k[M]$ of an abelian group $M$ is the free $k$-module with basis $(e^m)_{m\in M}$ and $e^me^{m'}=e^{m+m'}$; it is commutative, associative and unital.}
+\entree{8563}{2:22:43}{$D(M)$ is represented by $k[M]$: $\mathrm{Hom}_{\mathbb{Z}}(M,k'^{*})\simeq\mathrm{Hom}_{k\text{-alg}}(k[M],k')$; for $M=\mathbb{Z}$, $k[M]=k[t,t^{-1}]$.}
+\entree{8704}{2:25:04}{Over a field, the groups $D(M)$ with $M$ finitely generated are exactly the closed subgroups of groups of diagonal matrices (subgroups of $\mathbb{G}_m^r$).}
+\entree{8833}{2:27:13}{A group (or group functor) $G$ is called radicial or infinitesimal if $G(k')$ is reduced to the neutral element for every reduced $k$-algebra $k'$; examples in characteristic $p$: $\mu_p$, $\alpha_p$.}
+\entree{8899}{2:28:19}{Over a field of characteristic $0$, a radicial algebraic group is trivial (statement announced, not proved).}
+\entree{9215}{2:33:35}{$D(M)(k')=\mathrm{Hom}_{\mathrm{gr}}(M_{k'},\mathbb{G}_{m,k'})$: $D(M)$ is the dual of the constant functor $M_k$ with respect to $\mathbb{G}_m$.}
+\topic{Group laws as comultiplications}
+\entree{9346}{2:35:46}{A composition law on $X=\mathrm{Spec}\,A$ is equivalent to a homomorphism of $k$-algebras $\pi\colon A\to A\otimes_kA$; an action of $X$ on $Y=\mathrm{Spec}\,B$ to a homomorphism $B\to A\otimes_kB$.}
+\entree{9603}{2:40:03}{Associativity of the law is equivalent to $(\pi\otimes\mathrm{id}_A)\circ\pi=(\mathrm{id}_A\otimes\pi)\circ\pi$.}
+\entree{9735}{2:42:15}{A section of $X=\mathrm{Spec}\,A$ over the final object is equivalent to an augmentation $\varepsilon\colon A\to k$ (a homomorphism of $k$-algebras).}
+\entree{9927}{2:45:27}{$\varepsilon$ is a left and right unit if and only if $(\varepsilon\otimes\mathrm{id}_A)\circ\pi=\mathrm{id}_A=(\mathrm{id}_A\otimes\varepsilon)\circ\pi$; such an $\varepsilon$ is unique.}
+\entree{10053}{2:47:33}{The law is commutative if and only if $\tau\circ\pi=\pi$, where $\tau\colon A\otimes A\to A\otimes A$ is the swap $x\otimes y\mapsto y\otimes x$.}
+\entree{10309}{2:51:49}{The existence of inverses is expressed by a homomorphism $\sigma\colon A\to A$ such that $m\circ(\mathrm{id}_A\otimes\sigma)\circ\pi$ is the composite of $\varepsilon$ and the unit $k\to A$ ($m$ the multiplication of $A$); $\sigma$ is then unique.}
+\entree{10378}{2:52:58}{A group structure on $\mathrm{Spec}\,A$ is equivalent to the data of $\pi$, $\varepsilon$ and $\sigma$ satisfying associativity, unit and inverse axioms; $\varepsilon$ and $\sigma$ are then determined by $\pi$.}
+\entree{10706}{2:58:26}{For an arbitrary $k$-module $A$, an associative and counital comultiplication $\pi\colon A\to A\otimes_kA$, with augmentation $\varepsilon$ (unique), defines a coalgebra structure on $A$.}
+\face{Tape 2}
+\entree{10811}{3:00:11}{A bialgebra is a $k$-module $A$ with an algebra structure and a coalgebra structure such that $\pi$ is an algebra homomorphism, which is equivalent to the multiplication $A\otimes A\to A$ being a coalgebra morphism.}
+\topic{Actions and comodules}
+\entree{10943}{3:02:23}{An action of an affine monoid $G=\mathrm{Spec}\,A$ on $X=\mathrm{Spec}\,B$ is equivalent to a homomorphism of $k$-algebras $\omega\colon B\to A\otimes_kB$.}
+\entree{11141}{3:05:41}{Associativity of the action, $g(g'x)=(gg')x$, is written $(\pi\otimes\mathrm{id}_B)\circ\omega=(\mathrm{id}_A\otimes\omega)\circ\omega$.}
+\entree{11270}{3:07:50}{The axiom $1\cdot x=x$ is written $(\varepsilon\otimes\mathrm{id}_B)\circ\omega=\mathrm{id}_B$.}
+\entree{11466}{3:11:06}{These two axioms use only the coalgebra structure of $A$: a module $B$ with $\omega\colon B\to A\otimes B$ satisfying them is a comodule over the coalgebra $A$.}
+\entree{11541}{3:12:21}{For a group object $G$, an action of $G$ on $X$ is equivalent to a homomorphism $G\to\underline{\mathrm{Aut}}(X)$.}
+\entree{11735}{3:15:35}{The comultiplication of $\mathbb{G}_a=\mathrm{Spec}\,k[t]$ is $\pi(t)=t\otimes1+1\otimes t$ (writing $t'=t\otimes1$, $t''=1\otimes t$: $t\mapsto t'+t''$).}
+\entree{11993}{3:19:53}{The comultiplication of $\mathbb{G}_m=\mathrm{Spec}\,k[t,t^{-1}]$ is $\pi(t)=t\otimes t$ (writing $t'=t\otimes1$, $t''=1\otimes t$: $t\mapsto t't''$).}
+\entree{12188}{3:23:08}{A group $G$ acts linearly on a $k$-module $M$ if it acts on the functorial module $W(M)$ by automorphisms, that is, by a homomorphism $G\to\underline{\mathrm{Aut}}_{\mathcal{O}}(W(M))$.}
+\entree{12640}{3:30:40}{If $G=\mathrm{Spec}\,A$, such an action (without the axioms) is equivalent to a $k$-linear homomorphism $u_0\colon M\to A\otimes_kM$, that is, to the action of the universal point of $G(A)$ on $A\otimes_kM$.}
+\entree{12770}{3:32:50}{The unit axiom of the linear action is written $(\varepsilon\otimes\mathrm{id}_M)\circ u_0=\mathrm{id}_M$.}
+\entree{12836}{3:33:56}{The associativity axiom of the linear action is written $(\pi\otimes\mathrm{id}_M)\circ u_0=(\mathrm{id}_A\otimes u_0)\circ u_0$.}
+\entree{13155}{3:39:15}{The category of $k$-modules on which $G=\mathrm{Spec}\,A$ acts linearly depends only on the coalgebra $A$: it is the category of comodules over this coalgebra.}
+\entree{13362}{3:42:42}{An action of $G$ on $X=\mathrm{Spec}\,B$ is equivalent to a comodule structure $\omega\colon B\to A\otimes B$ that is a homomorphism of $k$-algebras, that is, to an action of $G$ on the module $B$ respecting its algebra structure.}
+\sessiondate{13 June 1973}
+\noindent\textit{Video 1/2 (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}): tape 2, side A (5:03:20--5:52:45); tape 2, side B (5:52:45--6:37:31).}\par\medskip
 \video{_lTf_L0yvrU}
-\face{Bande 2, face A}
-\entree{18372}{5:06:12}{Une action de $G=\mathrm{Spec}\,A$ sur $X=\mathrm{Spec}\,B$ équivaut à un morphisme d'algèbres $\omega\colon B\to B\otimes A$ vérifiant deux axiomes, d'unité et d'associativité.}
-\entree{18563}{5:09:23}{Une action de $G$ sur un $k$-module $M$ est donnée par $\delta\colon M\to M\otimes A$ ; un point $g\colon A\to k'$ de $G(k')$ agit sur $M_{k'}$ par $(\mathrm{id}_M\otimes g)\circ\delta$.}
-\entree{18689}{5:11:29}{Axiomes de l'action : $(\mathrm{id}_M\otimes\varepsilon)\circ\delta=\mathrm{id}_M$ et $(\mathrm{id}_M\otimes\pi)\circ\delta=(\delta\otimes\mathrm{id}_A)\circ\delta$ ; pour une action à droite on compose avec la symétrie de $A\otimes A$.}
-\entree{18879}{5:14:39}{Pour un monoïde, l'action sur un module ne dépend que de la structure de cogèbre de $A$, non de sa multiplication.}
-\entree{18942}{5:15:42}{Définition : une cogèbre est un module $A$ muni de $\pi\colon A\to A\otimes A$ coassociative et d'une counité $\varepsilon\colon A\to k$ ; un comodule est un $M$ muni de $\delta\colon M\to M\otimes A$ vérifiant les deux axiomes précédents.}
-\entree{19072}{5:17:52}{Une structure de cogèbre sur un module $A$ équivaut à une structure d'algèbre sur le foncteur en modules $V(A)\colon k'\mapsto\mathrm{Hom}_k(A,k')$, au-dessus du foncteur en anneaux $\mathcal{O}$.}
-\entree{19134}{5:18:54}{$M$ est un comodule à gauche sur la cogèbre $A$ si et seulement si $V(M)$ est un module à droite sur l'algèbre $V(A)$, compatiblement à sa structure de $\mathcal{O}$-module.}
-\entree{19270}{5:21:10}{Pour des $k$-modules $P,Q,R$, les applications $k$-linéaires $R\to P\otimes Q$ correspondent bijectivement aux applications $\mathcal{O}$-bilinéaires $V(P)\times V(Q)\to V(R)$.}
-\entree{19532}{5:25:32}{Pour $P=Q=R=A$ : un morphisme $A\to A\otimes A$ est un produit sur $V(A)$ ; il est coassociatif, resp. counitaire, si et seulement si ce produit est associatif, resp. admet une unité bilatère.}
-\entree{19661}{5:27:41}{Un morphisme $M\to M\otimes A$ est un accouplement $V(M)\times V(A)\to V(M)$ ; les deux axiomes de comodule expriment que c'est une structure de module à droite sur l'algèbre $V(A)$.}
-\entree{19801}{5:30:01}{La valeur $V(A)(k)=A^\vee$ est une $k$-algèbre, dite \q{algèbre des distributions} de la cogèbre $A$ ; on la note $H$.}
-\entree{19931}{5:32:11}{Si $M$ est un comodule sur $A$, c'est un module à gauche sur l'algèbre $H=A^\vee$ ; l'élément $s\in H$ agit par $(\mathrm{id}_M\otimes s)\circ\delta$.}
-\entree{20270}{5:37:50}{Si $A$ est projectif de type fini, une structure de comodule sur $M$ équivaut à une structure de module à gauche sur l'algèbre $H=A^\vee$.}
-\entree{20536}{5:42:16}{Si $A=\bigoplus A_\alpha$ est somme directe de projectifs de type fini (par exemple $k$ corps), $H=\varprojlim A_\alpha^\vee$ ; les transitions et les projections $H\to A_\alpha^\vee$ sont surjectives et $H$ porte la topologie de la convergence simple.}
-\entree{20601}{5:43:21}{Dans ce cas, les morphismes $N\to M\otimes A$ correspondent aux actions bilinéaires $H\times N\to M$ continues : pour tout $x\in N$, $s\mapsto sx$ se factorise par un $A_\alpha^\vee$.}
-\entree{20793}{5:46:33}{Dans ce cas, une structure de comodule à gauche sur $M$ équivaut à une structure de $H$-module à gauche continue (unité pour l'axiome d'unité, associativité pour le second).}
-\entree{20924}{5:48:44}{Dans ce cas, une structure de cogèbre sur $A$ équivaut à une structure d'algèbre continue sur $H$ (counité pour unité bilatère, coassociativité pour associativité) : $H$ est une algèbre topologique.}
-\entree{21055}{5:50:55}{Pour $R,P,Q$ sommes directes de projectifs de type fini, les morphismes $R\to P\otimes Q$ correspondent bijectivement aux applications bilinéaires continues $P^\vee\times Q^\vee\to R^\vee$.}
-\face{Bande 2, face B}
-\entree{21300}{5:55:00}{Pour une surjection $M\to M''$, $V(M'')\to V(M)$ est injectif ; $M''$ est dit stable si $V(M'')$ est un sous-$V(A)$-module de $V(M)$, et il porte alors une unique structure de comodule quotient.}
-\entree{21685}{6:01:25}{Un sous-module $M'\subset M$ porte une structure induite si l'on a $M'\to M'\otimes A$ rendant l'inclusion un morphisme de comodules ; elle est unique si $M'\otimes A\to M\otimes A$ est injectif.}
-\entree{21749}{6:02:29}{Lorsque $M'\otimes A\to M\otimes A$ est injectif, $M'$ est stable si et seulement si le quotient $M''$ l'est.}
-\entree{21812}{6:03:32}{L'injectivité de $M'\otimes A\to M\otimes A$ vaut si $A$ est plat sur $k$, ou si $M''$ est plat, ou si $M'$ est facteur direct ; pour $A$ plat, les sous-comodules sont stables par sommes et intersections finies.}
-\entree{22019}{6:06:59}{Si $A$ est l'algèbre d'un monoïde $G$, un quotient $M''$ est stable si et seulement si $G$ opère sur $M''$ de sorte que $M\to M''$ soit équivariant ; l'opération est alors unique.}
-\entree{22219}{6:10:19}{Si $A$ est somme directe de projectifs de type fini, un sous-module $M'$ est un sous-comodule si et seulement si c'est un sous-$H$-module.}
-\entree{22283}{6:11:23}{Dans ce cas, tout sous-module $M'$ est contenu dans un plus petit sous-comodule, le sous-$H$-module engendré ; il est de type fini si $M'$ l'est.}
-\entree{22476}{6:14:36}{Le plus petit sous-comodule contenant un élément $x$ est $Hx$, image de $s\mapsto sx$ ; il est de type fini.}
-\entree{22545}{6:15:45}{Dans ce cas, tout comodule est limite inductive filtrante de sous-comodules de type fini sur $k$ ; si $G$ opère sur $M$, $M$ est réunion filtrante de sous-modules de type fini stables par $G$.}
-\entree{22676}{6:17:56}{Une cogèbre $A$ est un comodule sur elle-même de deux façons, par les représentations régulières à gauche et à droite ; c'est un bicomodule, et $V(A)$ opère sur lui-même à gauche et à droite.}
-\entree{22806}{6:20:06}{Dans ce cas, tout sous-module $B\subset A$ est contenu dans un plus petit sous-bicomodule (sous-bimodule engendré sur $H$), de type fini si $B$ l'est.}
-\entree{22996}{6:23:16}{Si $A/B$ est plat, $B$ est stable à gauche et à droite si et seulement si $\pi(B)\subset B\otimes B$, c'est-à-dire si $B$ est une sous-cogèbre.}
-\entree{23061}{6:24:21}{Sur un corps, toute cogèbre est limite inductive filtrante de sous-cogèbres de dimension finie ; dualement, $H$ est limite projective d'algèbres de dimension finie $A_i^\vee$, à transitions surjectives.}
-\entree{23196}{6:26:36}{Proposition : sur un corps $k$, un monoïde (resp. groupe) algébrique affine est limite projective filtrante de monoïdes (resp. groupes) affines de type fini.}
-\entree{23263}{6:27:43}{Un groupe affine de type fini sur un corps est isomorphe à un sous-groupe fermé d'un $\mathrm{GL}_n$ ; un monoïde affine de type fini, à un sous-monoïde fermé de l'espace des endomorphismes de $k^n$.}
-\entree{23455}{6:30:55}{Pour un groupe, on peut choisir les sous-cogèbres stables par l'antipode, d'où les $G_i$ des groupes.}
-\section{19 juin 1973}\label{s-1973-06-19}
-\noindent\textit{Vidéo 1/2 (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}) : bande 1, face A (6:37:31--7:24:41) ; bande 1, face B (7:24:41--7:58:41).}\par\medskip
+\face{Tape 2, side A}
+\entree{18372}{5:06:12}{An action of $G=\mathrm{Spec}\,A$ on $X=\mathrm{Spec}\,B$ is equivalent to an algebra morphism $\omega\colon B\to B\otimes A$ satisfying two axioms, unit and associativity.}
+\entree{18563}{5:09:23}{An action of $G$ on a $k$-module $M$ is given by $\delta\colon M\to M\otimes A$; a point $g\colon A\to k'$ of $G(k')$ acts on $M_{k'}$ by $(\mathrm{id}_M\otimes g)\circ\delta$.}
+\entree{18689}{5:11:29}{Axioms of the action: $(\mathrm{id}_M\otimes\varepsilon)\circ\delta=\mathrm{id}_M$ and $(\mathrm{id}_M\otimes\pi)\circ\delta=(\delta\otimes\mathrm{id}_A)\circ\delta$; for a right action one composes with the symmetry of $A\otimes A$.}
+\entree{18879}{5:14:39}{For a monoid, the action on a module depends only on the coalgebra structure of $A$, not on its multiplication.}
+\entree{18942}{5:15:42}{Definition: a coalgebra is a module $A$ with a coassociative $\pi\colon A\to A\otimes A$ and a counit $\varepsilon\colon A\to k$; a comodule is an $M$ with $\delta\colon M\to M\otimes A$ satisfying the two preceding axioms.}
+\topic{The algebra of distributions of a coalgebra}
+\entree{19072}{5:17:52}{A coalgebra structure on a module $A$ is equivalent to an algebra structure on the module functor $V(A)\colon k'\mapsto\mathrm{Hom}_k(A,k')$, over the ring functor $\mathcal{O}$.}
+\entree{19134}{5:18:54}{$M$ is a left comodule over the coalgebra $A$ if and only if $V(M)$ is a right module over the algebra $V(A)$, compatibly with its $\mathcal{O}$-module structure.}
+\entree{19270}{5:21:10}{For $k$-modules $P,Q,R$, the $k$-linear maps $R\to P\otimes Q$ correspond bijectively to the $\mathcal{O}$-bilinear maps $V(P)\times V(Q)\to V(R)$.}
+\entree{19532}{5:25:32}{For $P=Q=R=A$: a morphism $A\to A\otimes A$ is a product on $V(A)$; it is coassociative, resp. counital, if and only if this product is associative, resp. has a two-sided unit.}
+\entree{19661}{5:27:41}{A morphism $M\to M\otimes A$ is a pairing $V(M)\times V(A)\to V(M)$; the two comodule axioms express that this is a right module structure over the algebra $V(A)$.}
+\entree{19801}{5:30:01}{The value $V(A)(k)=A^\vee$ is a $k$-algebra, called the \q{algebra of distributions} of the coalgebra $A$; it is denoted $H$.}
+\entree{19931}{5:32:11}{If $M$ is a comodule over $A$, it is a left module over the algebra $H=A^\vee$; the element $s\in H$ acts by $(\mathrm{id}_M\otimes s)\circ\delta$.}
+\entree{20270}{5:37:50}{If $A$ is finitely generated projective, a comodule structure on $M$ is equivalent to a left module structure over the algebra $H=A^\vee$.}
+\entree{20536}{5:42:16}{If $A=\bigoplus A_\alpha$ is a direct sum of finitely generated projectives (for example $k$ a field), $H=\varprojlim A_\alpha^\vee$; the transition maps and the projections $H\to A_\alpha^\vee$ are surjective and $H$ carries the topology of pointwise convergence.}
+\entree{20601}{5:43:21}{In this case, the morphisms $N\to M\otimes A$ correspond to continuous bilinear actions $H\times N\to M$: for every $x\in N$, $s\mapsto sx$ factors through some $A_\alpha^\vee$.}
+\entree{20793}{5:46:33}{In this case, a left comodule structure on $M$ is equivalent to a continuous left $H$-module structure (unit for the unit axiom, associativity for the second).}
+\entree{20924}{5:48:44}{In this case, a coalgebra structure on $A$ is equivalent to a continuous algebra structure on $H$ (counit for two-sided unit, coassociativity for associativity): $H$ is a topological algebra.}
+\entree{21055}{5:50:55}{For $R,P,Q$ direct sums of finitely generated projectives, the morphisms $R\to P\otimes Q$ correspond bijectively to the continuous bilinear maps $P^\vee\times Q^\vee\to R^\vee$.}
+\face{Tape 2, side B}
+\topic{Subcomodules and finiteness}
+\entree{21300}{5:55:00}{For a surjection $M\to M''$, $V(M'')\to V(M)$ is injective; $M''$ is called stable if $V(M'')$ is a sub-$V(A)$-module of $V(M)$, and it then carries a unique quotient comodule structure.}
+\entree{21685}{6:01:25}{A submodule $M'\subset M$ carries an induced structure if there is a map $M'\to M'\otimes A$ making the inclusion a morphism of comodules; it is unique if $M'\otimes A\to M\otimes A$ is injective.}
+\entree{21749}{6:02:29}{When $M'\otimes A\to M\otimes A$ is injective, $M'$ is stable if and only if the quotient $M''$ is.}
+\entree{21812}{6:03:32}{Injectivity of $M'\otimes A\to M\otimes A$ holds if $A$ is flat over $k$, or if $M''$ is flat, or if $M'$ is a direct factor; for $A$ flat, subcomodules are stable under finite sums and intersections.}
+\entree{22019}{6:06:59}{If $A$ is the algebra of a monoid $G$, a quotient $M''$ is stable if and only if $G$ acts on $M''$ so that $M\to M''$ is equivariant; the action is then unique.}
+\entree{22219}{6:10:19}{If $A$ is a direct sum of finitely generated projectives, a submodule $M'$ is a subcomodule if and only if it is a sub-$H$-module.}
+\entree{22283}{6:11:23}{In this case, every submodule $M'$ is contained in a smallest subcomodule, the sub-$H$-module it generates; it is finitely generated if $M'$ is.}
+\entree{22476}{6:14:36}{The smallest subcomodule containing an element $x$ is $Hx$, the image of $s\mapsto sx$; it is finitely generated.}
+\entree{22545}{6:15:45}{In this case, every comodule is a filtered inductive limit of subcomodules finitely generated over $k$; if $G$ acts on $M$, $M$ is a filtered union of finitely generated $G$-stable submodules.}
+\entree{22676}{6:17:56}{A coalgebra $A$ is a comodule over itself in two ways, by the left and right regular representations; it is a bicomodule, and $V(A)$ acts on itself on the left and on the right.}
+\entree{22806}{6:20:06}{In this case, every submodule $B\subset A$ is contained in a smallest sub-bicomodule (the sub-bimodule generated over $H$), finitely generated if $B$ is.}
+\entree{22996}{6:23:16}{If $A/B$ is flat, $B$ is stable on the left and on the right if and only if $\pi(B)\subset B\otimes B$, that is, if $B$ is a subcoalgebra.}
+\entree{23061}{6:24:21}{Over a field, every coalgebra is a filtered inductive limit of finite-dimensional subcoalgebras; dually, $H$ is a projective limit of finite-dimensional algebras $A_i^\vee$, with surjective transition maps.}
+\topic{Affine groups as limits of groups of finite type}
+\entree{23196}{6:26:36}{Proposition: over a field $k$, an affine algebraic monoid (resp. group) is a filtered projective limit of affine monoids (resp. groups) of finite type.}
+\entree{23263}{6:27:43}{An affine group of finite type over a field is isomorphic to a closed subgroup of some $\mathrm{GL}_n$; an affine monoid of finite type, to a closed submonoid of the space of endomorphisms of $k^n$.}
+\entree{23455}{6:30:55}{For a group, one can choose the subcoalgebras stable under the antipode, so that the $G_i$ are groups.}
+\sessiondate{19 June 1973}
+\noindent\textit{Video 1/2 (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}): tape 1, side A (6:37:31--7:24:41); tape 1, side B (7:24:41--7:58:41).}\par\medskip
 \video{_lTf_L0yvrU}
-\face{Bande 1, face A}
-\noindent\textit{Son dégradé : seuls les énoncés entendus avec certitude sont indexés.}\par\smallskip
-\entree{24059}{6:40:59}{Correction : un monoïde affine de type fini se plonge comme sous-monoïde fermé du monoïde $M_n$ de toutes les matrices $n\times n$ ; pour un groupe, l'image est contenue dans $\mathrm{GL}_n$.}
-\entree{24788}{6:53:08}{Dans cette immersion (représentation régulière à gauche sur un sous-module de type fini $M$ engendrant $A$), les éléments de $M$ sont des coefficients de la représentation, donc dans l'image de l'anneau de $M_n$.}
-\entree{25194}{6:59:54}{Le monoïde multiplicatif $(\mathbb{A}^1,\times)$ ne se plonge dans aucun groupe, car ses points ne sont pas inversibles.}
-\entree{25719}{7:08:39}{Pour $X=\mathrm{Spec}\,A$, le schéma des distributions est $\mathrm{Dist}(X)=V(A)\colon k'\mapsto\mathrm{Hom}_k(A,k')$ ; il est représenté par l'algèbre symétrique de $A$ sur $k$ et c'est un foncteur en $\mathcal{O}$-modules.}
-\entree{25918}{7:11:58}{$\mathrm{Dist}$ est covariant en $X$ : un morphisme $X\to Y$ donne $\mathrm{Dist}(X)\to\mathrm{Dist}(Y)$.}
-\entree{26050}{7:14:10}{Il y a un accouplement $\mathrm{Dist}(X)\times\mathrm{Dist}(Y)\to\mathrm{Dist}(X\times Y)$, $(u,v)\mapsto u\boxtimes v$, induit par $A\otimes B\to k'\otimes k'\to k'$.}
-\entree{26115}{7:15:15}{Le morphisme $V(A)\otimes_{\mathcal{O}}V(B)\to V(A\otimes B)$ n'est un isomorphisme que si $A$ ou $B$ est projectif de type fini sur $k$.}
-\entree{26180}{7:16:20}{Propriété universelle : les accouplements $V(A)\times V(B)\to V(N)$ correspondent aux morphismes $N\to A\otimes B$ ; on a donc $\mathrm{Dist}(X\times Y)=\mathrm{Dist}(X)\boxtimes\mathrm{Dist}(Y)$, fonctoriellement en $X$ et $Y$.}
-\entree{26307}{7:18:27}{$X$ est un sous-foncteur de $\mathrm{Dist}(X)$, les morphismes d'algèbres $A\to k'$ étant des applications $k$-linéaires particulières.}
-\entree{26440}{7:20:40}{Une multiplication $A\otimes A\to A$ correspond à une diagonale $\delta\colon\mathrm{Dist}(X)\to\mathrm{Dist}(X)\boxtimes\mathrm{Dist}(X)$, déduite de la diagonale $X\to X\times X$ ; l'inclusion de $X$ commute aux diagonales.}
-\entree{26634}{7:23:54}{Une structure d'algèbre sur un module $A$ équivaut à une structure de cogèbre sur $V(A)$.}
-\face{Bande 1, face B}
-\noindent\textit{Son dégradé : seuls les énoncés entendus avec certitude sont indexés.}\par\smallskip
-\entree{26689}{7:24:49}{L'algèbre $A$ est associative, commutative, unitaire si et seulement si $\delta$ est coassociative, cocommutative, counitaire, la counité $\varepsilon\colon V(A)\to\mathcal{O}$ provenant de l'unité de $A$.}
-\entree{26884}{7:28:04}{Un point $x\in\mathrm{Dist}(X)(k')$ appartient à $X(k')$ si et seulement si $\delta(x)=x\boxtimes x$ et $\varepsilon(x)=1$.}
-\entree{27165}{7:32:45}{Une loi de composition $X\times X\to X$ s'étend en une loi sur $\mathrm{Dist}(X)$, via $\mathrm{Dist}(X\times X)=\mathrm{Dist}(X)\boxtimes\mathrm{Dist}(X)$ ; elle est compatible à $\delta$ et induit la loi donnée sur $X$.}
-\entree{27234}{7:33:54}{Réciproquement, une loi sur $\mathrm{Dist}(X)$ compatible à $\delta$ provient d'une loi sur $X$ ; celle-ci est associative, commutative, unitaire si et seulement si la loi sur $\mathrm{Dist}(X)$ l'est.}
-\entree{27502}{7:38:22}{Si $G$ est un monoïde, $\mathrm{Dist}(G)$ est une algèbre associative et $G$ s'identifie à un sous-foncteur de celle-ci ; si $G$ est un groupe, $G$ est contenu dans le foncteur des éléments inversibles.}
-\entree{27567}{7:39:27}{Une opération à gauche d'un monoïde $G$ sur un $k$-module $M$ équivaut à une opération à gauche du foncteur $\mathrm{Dist}(G)$ sur le foncteur $W(M)\colon k'\mapsto M\otimes k'$.}
-\entree{27700}{7:41:40}{Si l'algèbre $A$ de $G$ est somme directe de projectifs de type fini, $\mathrm{Dist}(G)(k)=A^\vee$ est une algèbre topologique à produit continu, et une opération de $G$ sur $M$ équivaut à une structure de module continu sur elle.}
-\entree{27899}{7:44:59}{Les distributions \q{concentrées à l'origine}, nulles sur une puissance de $I=\mathrm{Ker}\,\varepsilon$, forment une sous-algèbre de $\mathrm{Dist}(G)$, l'\q{hyperalgèbre} de $G$.}
-\entree{27965}{7:46:05}{L'hyperalgèbre est augmentée, somme de $\mathcal{O}$ et du noyau $\mathrm{Dist}^{+}(G)$ de l'augmentation ; elle contient l'algèbre de Lie de $G$, dont le crochet est le commutateur de l'algèbre.}
-\entree{28035}{7:47:15}{En caractéristique $p$, la puissance $p$-ième de l'hyperalgèbre induit sur l'algèbre de Lie la structure de $p$-algèbre de Lie.}
-\entree{28231}{7:50:31}{Pour un groupe fini constant $\Gamma$, $\mathrm{Dist}(\Gamma_k)$ est l'algèbre du groupe $k[\Gamma]$.}
-\entree{28489}{7:54:49}{Pour $\Gamma$ fini constant, l'idéal d'augmentation $I$ de $k^{\Gamma}$ vérifie $I^2=I$, donc l'algèbre de Lie de $\Gamma_k$ est nulle.}
-\section{20 juin 1973}\label{s-1973-06-20}
-\noindent\textit{Vidéo 1/2 (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}) : bande 1, face A (7:58:41--8:46:36) ; bande 1, face B (8:46:36--8:59:13).}\par\medskip
+\face{Tape 1, side A}
+\noindent\textit{Degraded sound: only the statements heard with certainty are indexed.}\par\smallskip
+\entree{24059}{6:40:59}{Correction: an affine monoid of finite type embeds as a closed submonoid of the monoid $M_n$ of all $n\times n$ matrices; for a group, the image is contained in $\mathrm{GL}_n$.}
+\entree{24788}{6:53:08}{In this embedding (left regular representation on a finitely generated submodule $M$ generating $A$), the elements of $M$ are coefficients of the representation, hence lie in the image of the ring of $M_n$.}
+\entree{25194}{6:59:54}{The multiplicative monoid $(\mathbb{A}^1,\times)$ embeds in no group, since its points are not invertible.}
+\topic{The distribution functor}
+\entree{25719}{7:08:39}{For $X=\mathrm{Spec}\,A$, the scheme of distributions is $\mathrm{Dist}(X)=V(A)\colon k'\mapsto\mathrm{Hom}_k(A,k')$; it is represented by the symmetric algebra of $A$ over $k$ and is a functor in $\mathcal{O}$-modules.}
+\entree{25918}{7:11:58}{$\mathrm{Dist}$ is covariant in $X$: a morphism $X\to Y$ gives $\mathrm{Dist}(X)\to\mathrm{Dist}(Y)$.}
+\entree{26050}{7:14:10}{There is a pairing $\mathrm{Dist}(X)\times\mathrm{Dist}(Y)\to\mathrm{Dist}(X\times Y)$, $(u,v)\mapsto u\boxtimes v$, induced by $A\otimes B\to k'\otimes k'\to k'$.}
+\entree{26115}{7:15:15}{The morphism $V(A)\otimes_{\mathcal{O}}V(B)\to V(A\otimes B)$ is an isomorphism only if $A$ or $B$ is finitely generated projective over $k$.}
+\entree{26180}{7:16:20}{Universal property: the pairings $V(A)\times V(B)\to V(N)$ correspond to the morphisms $N\to A\otimes B$; hence $\mathrm{Dist}(X\times Y)=\mathrm{Dist}(X)\boxtimes\mathrm{Dist}(Y)$, functorially in $X$ and $Y$.}
+\entree{26307}{7:18:27}{$X$ is a subfunctor of $\mathrm{Dist}(X)$, the algebra morphisms $A\to k'$ being particular $k$-linear maps.}
+\entree{26440}{7:20:40}{A multiplication $A\otimes A\to A$ corresponds to a diagonal $\delta\colon\mathrm{Dist}(X)\to\mathrm{Dist}(X)\boxtimes\mathrm{Dist}(X)$, deduced from the diagonal $X\to X\times X$; the inclusion of $X$ commutes with the diagonals.}
+\entree{26634}{7:23:54}{An algebra structure on a module $A$ is equivalent to a coalgebra structure on $V(A)$.}
+\face{Tape 1, side B}
+\noindent\textit{Degraded sound: only the statements heard with certainty are indexed.}\par\smallskip
+\entree{26689}{7:24:49}{The algebra $A$ is associative, commutative, unital if and only if $\delta$ is coassociative, cocommutative, counital, the counit $\varepsilon\colon V(A)\to\mathcal{O}$ coming from the unit of $A$.}
+\entree{26884}{7:28:04}{A point $x\in\mathrm{Dist}(X)(k')$ belongs to $X(k')$ if and only if $\delta(x)=x\boxtimes x$ and $\varepsilon(x)=1$.}
+\entree{27165}{7:32:45}{A composition law $X\times X\to X$ extends to a law on $\mathrm{Dist}(X)$, via $\mathrm{Dist}(X\times X)=\mathrm{Dist}(X)\boxtimes\mathrm{Dist}(X)$; it is compatible with $\delta$ and induces the given law on $X$.}
+\entree{27234}{7:33:54}{Conversely, a law on $\mathrm{Dist}(X)$ compatible with $\delta$ comes from a law on $X$; the latter is associative, commutative, unital if and only if the law on $\mathrm{Dist}(X)$ is.}
+\entree{27502}{7:38:22}{If $G$ is a monoid, $\mathrm{Dist}(G)$ is an associative algebra and $G$ is identified with a subfunctor of it; if $G$ is a group, $G$ is contained in the functor of invertible elements.}
+\entree{27567}{7:39:27}{A left action of a monoid $G$ on a $k$-module $M$ is equivalent to a left action of the functor $\mathrm{Dist}(G)$ on the functor $W(M)\colon k'\mapsto M\otimes k'$.}
+\entree{27700}{7:41:40}{If the algebra $A$ of $G$ is a direct sum of finitely generated projectives, $\mathrm{Dist}(G)(k)=A^\vee$ is a topological algebra with continuous product, and an action of $G$ on $M$ is equivalent to a continuous module structure over it.}
+\topic{Hyperalgebra and Lie algebra}
+\entree{27899}{7:44:59}{The distributions \q{concentrated at the origin}, vanishing on a power of $I=\mathrm{Ker}\,\varepsilon$, form a subalgebra of $\mathrm{Dist}(G)$, the \q{hyperalgebra} of $G$.}
+\entree{27965}{7:46:05}{The hyperalgebra is augmented, the sum of $\mathcal{O}$ and the kernel $\mathrm{Dist}^{+}(G)$ of the augmentation; it contains the Lie algebra of $G$, whose bracket is the commutator of the algebra.}
+\entree{28035}{7:47:15}{In characteristic $p$, the $p$-th power in the hyperalgebra induces on the Lie algebra the structure of a $p$-Lie algebra.}
+\entree{28231}{7:50:31}{For a constant finite group $\Gamma$, $\mathrm{Dist}(\Gamma_k)$ is the group algebra $k[\Gamma]$.}
+\entree{28489}{7:54:49}{For $\Gamma$ finite constant, the augmentation ideal $I$ of $k^{\Gamma}$ satisfies $I^2=I$, hence the Lie algebra of $\Gamma_k$ is zero.}
+\sessiondate{20 June 1973}
+\noindent\textit{Video 1/2 (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}): tape 1, side A (7:58:41--8:46:36); tape 1, side B (8:46:36--8:59:13).}\par\medskip
 \video{_lTf_L0yvrU}
-\face{Bande 1, face A}
-\entree{28722}{7:58:42}{Les distributions du groupe diagonalisable $D(M)$ forment l'algèbre $k^M$ des fonctions sur $M$ avec le produit ordinaire des fonctions.}
-\entree{28851}{8:00:51}{Les fonctions $p_m$ (valeur $1$ en $m$, $0$ ailleurs) sont des idempotents deux à deux orthogonaux de $k^M$, de somme $1$ au sens de la topologie produit.}
-\entree{28993}{8:03:13}{Dans une représentation continue de $D(M)$ sur $V$, les $p_m$ agissent comme projecteurs orthogonaux ; pour tout $x\in V$, seuls un nombre fini de $p_mx$ sont non nuls et $x=\sum_m p_mx$.}
-\entree{29057}{8:04:17}{Une action de $D(M)$ sur $V$ équivaut à une graduation de type $M$ : $V=\bigoplus_{m\in M}V_m$.}
-\entree{29140}{8:05:40}{Sur $V_m$, un point $g$ de $D(M)$ agit par multiplication par le caractère $\chi_m(g)$, où $\chi_m\colon D(M)\to\mathbb{G}_m$ est associé à $m$ par l'accouplement $D(M)\times M\to\mathbb{G}_m$.}
-\entree{29272}{8:07:52}{La catégorie des représentations de $D(M)$ sur des $k$-modules est équivalente à celle des $k$-modules gradués de type $M$.}
-\entree{29334}{8:08:54}{Le produit tensoriel de deux représentations correspond au produit tensoriel de modules gradués, les degrés s'ajoutant : $\chi_m\chi_{m'}=\chi_{m+m'}$.}
-\entree{29397}{8:09:57}{Sur un schéma de base $S$ quelconque, les représentations de $D(M)_S$ sur des modules quasi-cohérents sont de même les modules quasi-cohérents gradués de type $M$.}
-\entree{29527}{8:12:07}{Le schéma constant $M_S$ est la réunion disjointe de copies de $S$ indexées par $M$ ; $M\mapsto M_S$ commute aux produits finis, donc envoie les groupes sur des groupes de $S$.}
-\entree{29590}{8:13:10}{Pour $S$ non vide, $M_S\to S$ est de type fini si et seulement si $M$ est fini ; pour $S$ affine non vide, $M_S$ est affine si et seulement si $M$ est fini.}
-\entree{29654}{8:14:14}{Pour $M$ abélien, $D(M)$ est le faisceau en groupes $\underline{\mathrm{Hom}}_{\text{gr}}(M_S,\mathbb{G}_{m})$ des homomorphismes de groupes de $M_S$ dans $\mathbb{G}_{m,S}$.}
-\entree{29781}{8:16:21}{Les $S'$-morphismes $M_{S'}\to X$ sont les applications de $M$ dans $\Gamma(S',X)$ ; ils respectent les lois de composition si et seulement si ces applications les respectent.}
-\entree{29981}{8:19:41}{L'accouplement $D(M)\times M_S\to\mathbb{G}_m$ donne un morphisme canonique de $M_S$ dans son bidual $D(D(M))$.}
-\entree{30047}{8:20:47}{Théorème : $M_S\to D(D(M))$ est un isomorphisme, c'est-à-dire que les homomorphismes $D(M)\to\mathbb{G}_m$ sur $S$ sont les sections de $M_S$, ou partitions de $S$ en ouverts $S_m$ indexés par $M$.}
-\entree{30047}{8:20:47}{Si $S$ est connexe et non vide, tout homomorphisme $D(M)\to\mathbb{G}_m$ provient d'un unique élément $m\in M$.}
-\entree{30490}{8:28:10}{Le foncteur $D$ est une anti-équivalence entre groupes abéliens constants $M_S$ et groupes diagonalisables sur $S$.}
-\entree{30624}{8:30:24}{Pour une variété abélienne $G$, le faisceau $\underline{\mathrm{Ext}}^1(G,\mathbb{G}_m)$ est la variété abélienne duale.}
-\entree{30818}{8:33:38}{Définition : $X\to S$ est fini s'il est affine, $X=\mathrm{Spec}\,\mathcal{A}$ avec $\mathcal{A}$ une $\mathcal{O}_S$-algèbre quasi-cohérente de type fini comme module ; il est fini localement libre si $\mathcal{A}$ est localement libre de type fini.}
-\entree{30944}{8:35:44}{Un morphisme est fini localement libre si et seulement s'il est fini, plat et de présentation finie.}
-\entree{31080}{8:38:00}{Définition : pour un monoïde commutatif $G$ fini localement libre sur $S$, le dual est $D(G)=\underline{\mathrm{Hom}}_{\text{mon}}(G,\mathcal{O}^{\times})$, où $\mathcal{O}^{\times}$ est $\mathbb{A}^1$ muni de la multiplication ; $\mathbb{G}_m$ en est le plus grand sous-groupe.}
-\entree{31206}{8:40:06}{Pour un groupe $G$, les homomorphismes de monoïdes $G\to\mathcal{O}^{\times}$ sont les homomorphismes de groupes $G\to\mathbb{G}_m$.}
-\entree{31268}{8:41:08}{Théorème (dualité de Cartier) : $D(G)$ est représentable par un schéma en monoïdes fini localement libre sur $S$, et $G\to D(D(G))$ est un isomorphisme.}
-\entree{31461}{8:44:21}{Pour $G=\mathrm{Spec}\,A$ fini localement libre, $D(G)(S')$ est le sous-foncteur de $W(A)$ formé des sections $u$ de $A_{S'}$ telles que $\varepsilon(u)=1$ et $\pi(u)=u\otimes u$.}
-\face{Bande 1, face B}
-\entree{31598}{8:46:38}{Une section $u$ de $A_{S'}$ vérifiant $\varepsilon(u)=1$ et $\pi(u)=u\otimes u$ est un morphisme d'algèbres $H_{S'}\to\mathcal{O}_{S'}$, où $H=A^\vee$ porte la multiplication transposée de $\pi$.}
-\entree{31728}{8:48:48}{Si $G=\mathrm{Spec}\,A$ est commutatif, fini et localement libre, $D(G)=\mathrm{Spec}\,H$ avec $H=A^\vee$ ; la multiplication de $A$ donne la comultiplication de $H$, d'où la loi de groupe de $D(G)$.}
-\entree{31792}{8:49:52}{Si $G$ n'est pas commutatif, $D(G)$ est représenté par le spectre de l'algèbre abélianisée $H^{\mathrm{ab}}$, quasi-cohérente mais non nécessairement localement libre.}
-\entree{31922}{8:52:02}{Pour les schémas en monoïdes commutatifs finis localement libres, les axiomes de multiplication et de comultiplication sont autoduaux ; $A\mapsto A^\vee$ y induit une involution de la catégorie.}
-\entree{31988}{8:53:08}{Pour $G$ commutatif fini localement libre, $D(D(G))=\mathrm{Spec}\,A^{\vee\vee}=G$, la dualité $\underline{\mathrm{Hom}}(\,\cdot\,,\mathbb{G}_m)$ étant la dualité des modules localement libres échangeant multiplication et diagonale.}
-\entree{32051}{8:54:11}{Le dual de $\mu_n=D(\mathbb{Z}/n)$ est le groupe constant $\mathbb{Z}/n$, fini localement libre ; sur $\mathrm{Spec}\,\mathbb{Z}$, $\mu_n$ n'est pas constant pour $n>1$.}
-\entree{32185}{8:56:25}{En caractéristique $p$, $\mathbb{Z}/p$ et $\mu_p$ sont duaux l'un de l'autre, $\mu_p$ étant purement infinitésimal.}
-\entree{32249}{8:57:29}{En caractéristique $p$, $\alpha_p$ est isomorphe à son dual ; pour $n\ge2$, $\alpha_{p^n}$ ne l'est pas.}
-\section{27 juin 1973}\label{s-1973-06-27}
-\noindent\textit{Vidéo 2/2 (\href{https://www.youtube.com/watch?v=3ULFIl_2Wis}{\texttt{3ULFIl\_2Wis}}) : bande 1, face A (0:00:00--0:47:18) ; bande 1, face B (0:47:18--1:28:21).}\par\medskip
+\face{Tape 1, side A}
+\topic{Representations of diagonalizable groups}
+\entree{28722}{7:58:42}{The distributions of the diagonalizable group $D(M)$ form the algebra $k^M$ of functions on $M$ with the ordinary product of functions.}
+\entree{28851}{8:00:51}{The functions $p_m$ (value $1$ at $m$, $0$ elsewhere) are pairwise orthogonal idempotents of $k^M$, with sum $1$ in the sense of the product topology.}
+\entree{28993}{8:03:13}{In a continuous representation of $D(M)$ on $V$, the $p_m$ act as orthogonal projectors; for every $x\in V$, only finitely many $p_mx$ are nonzero and $x=\sum_m p_mx$.}
+\entree{29057}{8:04:17}{An action of $D(M)$ on $V$ is equivalent to a grading of type $M$: $V=\bigoplus_{m\in M}V_m$.}
+\entree{29140}{8:05:40}{On $V_m$, a point $g$ of $D(M)$ acts by multiplication by the character $\chi_m(g)$, where $\chi_m\colon D(M)\to\mathbb{G}_m$ is associated to $m$ by the pairing $D(M)\times M\to\mathbb{G}_m$.}
+\entree{29272}{8:07:52}{The category of representations of $D(M)$ on $k$-modules is equivalent to that of $M$-graded $k$-modules.}
+\entree{29334}{8:08:54}{The tensor product of two representations corresponds to the tensor product of graded modules, the degrees adding: $\chi_m\chi_{m'}=\chi_{m+m'}$.}
+\entree{29397}{8:09:57}{Over an arbitrary base scheme $S$, the representations of $D(M)_S$ on quasi-coherent modules are likewise the $M$-graded quasi-coherent modules.}
+\topic{Constant schemes and duality for diagonalizable groups}
+\entree{29527}{8:12:07}{The constant scheme $M_S$ is the disjoint union of copies of $S$ indexed by $M$; $M\mapsto M_S$ commutes with finite products, hence sends groups to groups over $S$.}
+\entree{29590}{8:13:10}{For $S$ non-empty, $M_S\to S$ is of finite type if and only if $M$ is finite; for $S$ affine and non-empty, $M_S$ is affine if and only if $M$ is finite.}
+\entree{29654}{8:14:14}{For $M$ abelian, $D(M)$ is the group sheaf $\underline{\mathrm{Hom}}_{\text{gr}}(M_S,\mathbb{G}_{m})$ of group homomorphisms from $M_S$ to $\mathbb{G}_{m,S}$.}
+\entree{29781}{8:16:21}{The $S'$-morphisms $M_{S'}\to X$ are the maps from $M$ to $\Gamma(S',X)$; they respect the composition laws if and only if these maps do.}
+\entree{29981}{8:19:41}{The pairing $D(M)\times M_S\to\mathbb{G}_m$ gives a canonical morphism from $M_S$ to its bidual $D(D(M))$.}
+\entree{30047}{8:20:47}{Theorem: $M_S\to D(D(M))$ is an isomorphism, that is, the homomorphisms $D(M)\to\mathbb{G}_m$ over $S$ are the sections of $M_S$, or partitions of $S$ into open sets $S_m$ indexed by $M$.}
+\entree{30047}{8:20:47}{If $S$ is connected and non-empty, every homomorphism $D(M)\to\mathbb{G}_m$ comes from a unique element $m\in M$.}
+\entree{30490}{8:28:10}{The functor $D$ is an anti-equivalence between constant abelian groups $M_S$ and diagonalizable groups over $S$.}
+\entree{30624}{8:30:24}{For an abelian variety $G$, the sheaf $\underline{\mathrm{Ext}}^1(G,\mathbb{G}_m)$ is the dual abelian variety.}
+\topic{Finite locally free schemes and Cartier duality}
+\entree{30818}{8:33:38}{Definition: $X\to S$ is finite if it is affine, $X=\mathrm{Spec}\,\mathcal{A}$ with $\mathcal{A}$ a quasi-coherent $\mathcal{O}_S$-algebra finitely generated as a module; it is finite locally free if $\mathcal{A}$ is locally free of finite type.}
+\entree{30944}{8:35:44}{A morphism is finite locally free if and only if it is finite, flat and of finite presentation.}
+\entree{31080}{8:38:00}{Definition: for a commutative monoid $G$ finite locally free over $S$, the dual is $D(G)=\underline{\mathrm{Hom}}_{\text{mon}}(G,\mathcal{O}^{\times})$, where $\mathcal{O}^{\times}$ is $\mathbb{A}^1$ with multiplication; $\mathbb{G}_m$ is its largest subgroup.}
+\entree{31206}{8:40:06}{For a group $G$, the monoid homomorphisms $G\to\mathcal{O}^{\times}$ are the group homomorphisms $G\to\mathbb{G}_m$.}
+\entree{31268}{8:41:08}{Theorem (Cartier duality): $D(G)$ is representable by a finite locally free monoid scheme over $S$, and $G\to D(D(G))$ is an isomorphism.}
+\entree{31461}{8:44:21}{For $G=\mathrm{Spec}\,A$ finite locally free, $D(G)(S')$ is the subfunctor of $W(A)$ consisting of the sections $u$ of $A_{S'}$ such that $\varepsilon(u)=1$ and $\pi(u)=u\otimes u$.}
+\face{Tape 1, side B}
+\entree{31598}{8:46:38}{A section $u$ of $A_{S'}$ satisfying $\varepsilon(u)=1$ and $\pi(u)=u\otimes u$ is an algebra morphism $H_{S'}\to\mathcal{O}_{S'}$, where $H=A^\vee$ carries the multiplication transposed from $\pi$.}
+\entree{31728}{8:48:48}{If $G=\mathrm{Spec}\,A$ is commutative, finite and locally free, $D(G)=\mathrm{Spec}\,H$ with $H=A^\vee$; the multiplication of $A$ gives the comultiplication of $H$, hence the group law of $D(G)$.}
+\entree{31792}{8:49:52}{If $G$ is not commutative, $D(G)$ is represented by the spectrum of the abelianized algebra $H^{\mathrm{ab}}$, quasi-coherent but not necessarily locally free.}
+\entree{31922}{8:52:02}{For finite locally free commutative monoid schemes, the axioms of multiplication and comultiplication are self-dual; $A\mapsto A^\vee$ induces an involution of the category.}
+\entree{31988}{8:53:08}{For $G$ commutative finite locally free, $D(D(G))=\mathrm{Spec}\,A^{\vee\vee}=G$, the duality $\underline{\mathrm{Hom}}(\,\cdot\,,\mathbb{G}_m)$ being the duality of locally free modules exchanging multiplication and diagonal.}
+\entree{32051}{8:54:11}{The dual of $\mu_n=D(\mathbb{Z}/n)$ is the constant group $\mathbb{Z}/n$, finite locally free; over $\mathrm{Spec}\,\mathbb{Z}$, $\mu_n$ is not constant for $n>1$.}
+\entree{32185}{8:56:25}{In characteristic $p$, $\mathbb{Z}/p$ and $\mu_p$ are dual to each other, $\mu_p$ being purely infinitesimal.}
+\entree{32249}{8:57:29}{In characteristic $p$, $\alpha_p$ is isomorphic to its dual; for $n\ge2$, $\alpha_{p^n}$ is not.}
+\sessiondate{27 June 1973}
+\noindent\textit{Video 2/2 (\href{https://www.youtube.com/watch?v=3ULFIl_2Wis}{\texttt{3ULFIl\_2Wis}}): tape 1, side A (0:00:00--0:47:18); tape 1, side B (0:47:18--1:28:21).}\par\medskip
 \video{3ULFIl_2Wis}
-\face{Bande 1, face A}
-\noindent\textit{Son dégradé : seuls les énoncés entendus avec certitude sont indexés.}\par\smallskip
-\entree{575}{0:09:35}{Tout morphisme d'un schéma $X$ vers $\mathrm{Spec}\,k$, $k$ un corps, est universellement ouvert.}
-\entree{638}{0:10:38}{Un morphisme plat et localement de présentation finie $f\colon X\to S$ est ouvert.}
-\entree{1393}{0:23:13}{Si $X$ est un $k$-schéma connexe et s'il existe un $k$-morphisme $Z\to X$ avec $Z$ non vide et géométriquement connexe, alors $X$ est géométriquement connexe.}
-\entree{1999}{0:33:19}{Un schéma en groupes $G$ connexe sur $k$ est géométriquement connexe, puisqu'il possède le point rationnel $e$.}
-\entree{2067}{0:34:27}{La composante connexe $G^0$ de l'élément neutre, munie de la structure induite réduite, est géométriquement connexe.}
-\entree{2141}{0:35:41}{Si $G$ est localement de type fini sur $k$, $G^0$ est ouvert dans $G$ et, avec la structure induite d'ouvert, c'est un sous-schéma en groupes de $G$.}
-\entree{2396}{0:39:56}{Si $k$ est parfait, $G^0$ muni de sa structure réduite est un sous-schéma en groupes fermé de $G$.}
-\entree{2460}{0:41:00}{Un morphisme d'un schéma réduit $X$ vers $Y$ se factorise par un sous-schéma fermé $Y'$ dès qu'il le fait ensemblistement ; sur un corps parfait, un produit de schémas réduits est réduit.}
-\entree{2663}{0:44:23}{Si $k$ est parfait, $G_{\mathrm{red}}$ est un sous-schéma en groupes fermé de $G$.}
-\face{Bande 1, face B}
-\noindent\textit{Son dégradé : seuls les énoncés entendus avec certitude sont indexés.}\par\smallskip
-\entree{2844}{0:47:24}{Un $k$-schéma est étale s'il est somme disjointe de spectres d'extensions finies séparables de $k$ ; c'est équivalent à être réduit à corps résiduels séparables, i.e. géométriquement réduit.}
-\entree{2911}{0:48:31}{Si $k'$ est une extension séparablement close de $k$, un $k$-schéma $X$ est étale si et seulement si $X_{k'}$ est constant, c'est-à-dire somme de copies de $\mathrm{Spec}\,k'$.}
-\entree{3119}{0:51:59}{La propriété d'être étale sur $k$ est stable par extension du corps de base.}
-\entree{3449}{0:57:29}{Pour $X$ étale sur $k$ et $\overline{k}$ clôture séparable de $k$ dans $k'$, on a $X(\overline{k})=X(k')$, et $\pi=\mathrm{Gal}(\overline{k}/k)$ opère sur $X(\overline{k})$.}
-\entree{3514}{0:58:34}{Le groupe $\pi=\mathrm{Gal}(\overline{k}/k)$, limite projective des groupes finis $\mathrm{Gal}(k_i/k)$, est profini ; l'action de $\pi$ sur $X(\overline{k})$ est continue (chaque stabilisateur de point est ouvert).}
-\entree{3644}{1:00:44}{Le foncteur $X\mapsto X(\overline{k})$ est une équivalence de la catégorie des $k$-schémas étales sur celle des $\pi$-ensembles discrets (à action continue).}
-\entree{3706}{1:01:46}{Les limites projectives finies de $k$-schémas étales sont étales, calculées comme dans les schémas, et correspondent aux limites projectives finies de $\pi$-ensembles.}
-\entree{3771}{1:02:51}{Les $k$-schémas en groupes étales correspondent aux groupes munis d'une action continue de $\pi$, via $G\mapsto G(\overline{k})$.}
-\entree{4027}{1:07:07}{Si $k'/k$ est finie séparable de degré $n$, $\mathrm{Spec}\,k'$ est connexe mais $\mathrm{Spec}\,k'\otimes_k k''$ a $n$ points si $k''$ est séparablement close : il n'est pas géométriquement connexe.}
-\entree{4291}{1:11:31}{Si $T=\coprod_{i\in I}\mathrm{Spec}\,k$ est constant, se donner un morphisme $X\to T$ revient à se donner une décomposition $X=\coprod_{i\in I}X_i$ en ouverts et fermés.}
-\entree{4508}{1:15:08}{Pour $T$ étale sur $k$, les $k$-morphismes $X\to T$ correspondent aux morphismes $X_{\overline{k}}\to T_{\overline{k}}$ commutant à l'action de $\pi$.}
-\entree{4764}{1:19:24}{Si $X$ est cohérent avec $X_{\overline{k}}$ localement connexe (par exemple de type fini), $\pi$ opère continûment sur $\pi_0(X_{\overline{k}})$ ; l'ensemble correspondant définit un $k$-schéma étale $\pi_0(X/k)$.}
-\entree{4828}{1:20:28}{Le morphisme canonique $X\to\pi_0(X/k)$ est surjectif, à fibres géométriquement connexes.}
-\entree{5017}{1:23:37}{Cette propriété caractérise $\pi_0(X/k)$ : toute factorisation de $X$ en un morphisme surjectif à fibres géométriquement connexes suivi d'un morphisme étale lui est isomorphe de façon unique.}
-\entree{5082}{1:24:42}{$X\to\pi_0(X/k)$ est universel pour les morphismes de $X$ vers un $k$-schéma étale.}
-\entree{5148}{1:25:48}{Pour $S'$ au-dessus de $k$, $\pi_0(X/k)(S')$ est l'ensemble des parties ouvertes et fermées $C$ de $X_{S'}$ dont les fibres sur $S'$ sont non vides et géométriquement connexes.}
-\section{2 juillet 1973}\label{s-1973-07-02}
-\noindent\textit{Vidéo 2/2 (\href{https://www.youtube.com/watch?v=3ULFIl_2Wis}{\texttt{3ULFIl\_2Wis}}) : bande 1, face A (1:28:21--2:16:01) ; bande 1, face B (2:16:01--2:49:55).}\par\medskip
+\face{Tape 1, side A}
+\noindent\textit{Degraded sound: only the statements heard with certainty are indexed.}\par\smallskip
+\topic{Connected components of group schemes}
+\entree{575}{0:09:35}{Every morphism from a scheme $X$ to $\mathrm{Spec}\,k$, $k$ a field, is universally open.}
+\entree{638}{0:10:38}{A flat morphism $f\colon X\to S$, locally of finite presentation, is open.}
+\entree{1393}{0:23:13}{If $X$ is a connected $k$-scheme and there is a $k$-morphism $Z\to X$ with $Z$ non-empty and geometrically connected, then $X$ is geometrically connected.}
+\entree{1999}{0:33:19}{A connected group scheme $G$ over $k$ is geometrically connected, since it has the rational point $e$.}
+\entree{2067}{0:34:27}{The connected component $G^0$ of the neutral element, with the induced reduced structure, is geometrically connected.}
+\entree{2141}{0:35:41}{If $G$ is locally of finite type over $k$, $G^0$ is open in $G$ and, with the induced open structure, it is a group subscheme of $G$.}
+\entree{2396}{0:39:56}{If $k$ is perfect, $G^0$ with its reduced structure is a closed group subscheme of $G$.}
+\entree{2460}{0:41:00}{A morphism from a reduced scheme $X$ to $Y$ factors through a closed subscheme $Y'$ as soon as it does so set-theoretically; over a perfect field, a product of reduced schemes is reduced.}
+\entree{2663}{0:44:23}{If $k$ is perfect, $G_{\mathrm{red}}$ is a closed group subscheme of $G$.}
+\face{Tape 1, side B}
+\noindent\textit{Degraded sound: only the statements heard with certainty are indexed.}\par\smallskip
+\topic{Étale schemes and Galois action}
+\entree{2844}{0:47:24}{A $k$-scheme is étale if it is a disjoint sum of spectra of finite separable extensions of $k$; this is equivalent to being reduced with separable residue fields, i.e. geometrically reduced.}
+\entree{2911}{0:48:31}{If $k'$ is a separably closed extension of $k$, a $k$-scheme $X$ is étale if and only if $X_{k'}$ is constant, that is, a sum of copies of $\mathrm{Spec}\,k'$.}
+\entree{3119}{0:51:59}{The property of being étale over $k$ is stable under extension of the base field.}
+\entree{3449}{0:57:29}{For $X$ étale over $k$ and $\overline{k}$ the separable closure of $k$ in $k'$, we have $X(\overline{k})=X(k')$, and $\pi=\mathrm{Gal}(\overline{k}/k)$ acts on $X(\overline{k})$.}
+\entree{3514}{0:58:34}{The group $\pi=\mathrm{Gal}(\overline{k}/k)$, the projective limit of the finite groups $\mathrm{Gal}(k_i/k)$, is profinite; the action of $\pi$ on $X(\overline{k})$ is continuous (each point stabilizer is open).}
+\entree{3644}{1:00:44}{The functor $X\mapsto X(\overline{k})$ is an equivalence from the category of étale $k$-schemes to that of discrete $\pi$-sets (with continuous action).}
+\entree{3706}{1:01:46}{Finite projective limits of étale $k$-schemes are étale, computed as in schemes, and correspond to finite projective limits of $\pi$-sets.}
+\entree{3771}{1:02:51}{Étale $k$-group schemes correspond to groups equipped with a continuous action of $\pi$, via $G\mapsto G(\overline{k})$.}
+\entree{4027}{1:07:07}{If $k'/k$ is finite separable of degree $n$, $\mathrm{Spec}\,k'$ is connected but $\mathrm{Spec}\,k'\otimes_k k''$ has $n$ points if $k''$ is separably closed: it is not geometrically connected.}
+\entree{4291}{1:11:31}{If $T=\coprod_{i\in I}\mathrm{Spec}\,k$ is constant, giving a morphism $X\to T$ amounts to giving a decomposition $X=\coprod_{i\in I}X_i$ into open and closed pieces.}
+\entree{4508}{1:15:08}{For $T$ étale over $k$, the $k$-morphisms $X\to T$ correspond to the morphisms $X_{\overline{k}}\to T_{\overline{k}}$ commuting with the action of $\pi$.}
+\topic{The scheme of connected components}
+\entree{4764}{1:19:24}{If $X$ is coherent with $X_{\overline{k}}$ locally connected (for example of finite type), $\pi$ acts continuously on $\pi_0(X_{\overline{k}})$; the corresponding set defines an étale $k$-scheme $\pi_0(X/k)$.}
+\entree{4828}{1:20:28}{The canonical morphism $X\to\pi_0(X/k)$ is surjective, with geometrically connected fibres.}
+\entree{5017}{1:23:37}{This property characterizes $\pi_0(X/k)$: any factorization of $X$ as a surjective morphism with geometrically connected fibres followed by an étale morphism is uniquely isomorphic to it.}
+\entree{5082}{1:24:42}{$X\to\pi_0(X/k)$ is universal among morphisms from $X$ to an étale $k$-scheme.}
+\entree{5148}{1:25:48}{For $S'$ over $k$, $\pi_0(X/k)(S')$ is the set of open and closed subsets $C$ of $X_{S'}$ whose fibres over $S'$ are non-empty and geometrically connected.}
+\sessiondate{2 July 1973}
+\noindent\textit{Video 2/2 (\href{https://www.youtube.com/watch?v=3ULFIl_2Wis}{\texttt{3ULFIl\_2Wis}}): tape 1, side A (1:28:21--2:16:01); tape 1, side B (2:16:01--2:49:55).}\par\medskip
 \video{3ULFIl_2Wis}
-\face{Bande 1, face A}
-\entree{5302}{1:28:22}{Contre-exemple : $X=\mathrm{Spec}\,\mathbb{R}[x,y]/(x^2+y^2)$ est irréductible, avec le point rationnel $0$, mais n'est pas géométriquement irréductible : sur $\mathbb{C}$, $x^2+y^2=(x+iy)(x-iy)$.}
-\entree{5435}{1:30:35}{Notons $\Sigma\subset X$ la réunion, pour $i\neq j$, des images dans $X$ des intersections $X'_i\cap X'_j$ des composantes irréductibles de $X_{k'}$, $k'$ clôture séparable de $k$ ; $\Sigma$ ne dépend pas de $k'$.}
-\entree{5696}{1:34:56}{Si $X$ est irréductible, $Z$ non vide géométriquement irréductible, et $f\colon Z\to X$ vérifie $f(Z)\not\subset\Sigma$, alors $X$ est géométriquement irréductible.}
-\entree{5696}{1:34:56}{L'hypothèse $f(Z)\not\subset\Sigma$ est vérifiée si $f(Z)$ contient un point en lequel $X$ est géométriquement normal, car alors une seule composante irréductible de $X_{k'}$ passe au-dessus de ce point.}
-\entree{6157}{1:42:37}{Un $k$-schéma étale est connexe non vide si et seulement s'il est isomorphe à $\mathrm{Spec}\,K$, $K$ extension finie séparable de $k$, i.e. si et seulement si $E$ est non vide et $\pi$ y opère transitivement.}
-\entree{6289}{1:44:49}{Les composantes connexes de $X$ correspondent aux orbites de $\pi$ dans $E$ ; $X$ est quasi-compact si et seulement si $E$ est fini.}
-\entree{6358}{1:45:58}{Les limites projectives finies d'étales sont étales, mais pas les limites projectives infinies en général.}
-\entree{6489}{1:48:09}{Un morphisme de $k$-schémas étales est un monomorphisme (resp. un épimorphisme) si et seulement s'il est injectif (resp. surjectif) sur les $\pi$-ensembles associés, et alors aussi dans la catégorie des schémas.}
-\entree{6553}{1:49:13}{Soit $G$ un groupe discret opérant sur $X$ étale ; $X$ est un torseur sous $G_k$ si et seulement si $E=X(\overline{k})$ est un $G$-torseur d'ensembles.}
-\entree{6815}{1:53:35}{Les $G_k$-torseurs étales munis d'un point géométrique correspondent aux homomorphismes continus $\pi\to G$ ; le torseur est connexe si et seulement si $\pi\to G$ est surjectif.}
-\entree{6815}{1:53:35}{Les extensions galoisiennes de $k$ de groupe $G$ fini correspondent aux homomorphismes surjectifs $\pi\to G$.}
-\entree{7205}{2:00:05}{Le corps résiduel $\kappa(t)$ du point $t$ de $\pi_0(X/k)$ est la plus grande sous-algèbre étale de $\Gamma(X_t,\mathcal{O}_{X_t})$ sur $k$.}
-\entree{7396}{2:03:16}{La formation de $\pi_0(X/k)$ commute au changement de base et aux produits : $\pi_0(X\times_k Y/k)=\pi_0(X/k)\times_k\pi_0(Y/k)$.}
-\entree{7500}{2:05:00}{Si $G$ est un $k$-schéma en groupes localement de type fini, $\pi_0(G/k)$ est un schéma en groupes étale.}
-\entree{7565}{2:06:05}{Dans ce cas $G\to\pi_0(G/k)$ est un homomorphisme surjectif plat de noyau $G^0$ ; $\pi_0(G/k)$ est le quotient $G/G^0$.}
-\entree{7824}{2:10:24}{Si $k'$ est une clôture séparable de $k$, l'espace sous-jacent à $(\mathrm{Spec}\,k')_{k'}$ est la limite projective des $\mathrm{Gal}(k_i/k)$, compact totalement discontinu, de faisceau structural les fonctions localement constantes à valeurs dans $k'$.}
-\entree{8019}{2:13:39}{Pour $X=\mathrm{Spec}\,k'$, $\pi_0(X_{k'})\simeq\pi$ comme espaces topologiques : en général $\pi_0$ est un ensemble profini, non discret, hors du cas localement connexe.}
-\face{Bande 1, face B}
-\entree{8163}{2:16:03}{Un $k$-schéma $X$ est pro-étale s'il est limite projective filtrante de $k$-schémas finis étales ; dans le cas affine, $X=\mathrm{Spec}\,A$ avec $A$ réunion filtrante de sous-algèbres finies étales.}
-\entree{8298}{2:18:18}{Une $k$-algèbre est ind-étale si et seulement si elle est entière et séparable sur $k$.}
-\entree{8360}{2:19:20}{Un $k$-schéma est affine pro-étale si et seulement si $X_{k'}$ l'est sur $k'$, pour toute extension $k'$ de $k$.}
-\entree{8425}{2:20:25}{Si $k$ est séparablement clos, $X\mapsto X(k)$, avec la topologie de la convergence simple, est une équivalence entre schémas affines pro-étales et espaces compacts totalement discontinus.}
-\entree{8556}{2:22:36}{Le schéma correspondant à un tel espace a pour faisceau structural celui des fonctions localement constantes à valeurs dans $k$.}
-\entree{8622}{2:23:42}{Un schéma est localement profini si tout point a un voisinage ouvert affine pro-étale.}
-\entree{8688}{2:24:48}{Le schéma $\pi_0(X/k)$, localement profini, est défini comme universel pour les morphismes de $X$ vers un $k$-schéma localement profini ; lorsqu'il existe, il commute au changement de base et aux produits.}
-\entree{8752}{2:25:52}{Pour un schéma en groupes $G$ quelconque, $G/G^0$ se définit comme $\pi_0(G/k)$ ; c'est un groupe profini en général.}
-\entree{8898}{2:28:18}{Dans un schéma quasi-compact $X$, la composante connexe d'un point $x$ est l'intersection des parties ouvertes et fermées contenant $x$.}
-\entree{9030}{2:30:30}{Soient $k$ parfait, $X$ un $k$-schéma régulier, $k'$ une extension de $k$, avec $X$ localement essentiellement de type fini sur $k$ ou $k'$ essentiellement de type fini sur $k$ ; alors $X_{k'}$ est régulier.}
-\entree{9092}{2:31:32}{Une algèbre $A$ est essentiellement de type fini sur $k$ si $A\simeq S^{-1}B$ avec $B$ de type fini sur $k$ et $S$ multiplicative ; une extension $k'$ l'est si et seulement si elle est de type fini comme corps.}
-\entree{9412}{2:36:52}{Pour $X$ localement essentiellement de type fini sur $k$ et $k_1$ extension parfaite de $k$, sont équivalents : $X\times_k Y$ régulier pour tout $Y$ régulier ; $X_{k'}$ régulier pour tout $k'$ ; $X_{k_1}$ régulier ; $X_{k'}$ régulier pour tout $k'$ fini.}
-\entree{9541}{2:39:01}{Dans ce cas $X$ est dit géométriquement régulier ; $X$ est lisse sur $k$ s'il est localement de type fini et géométriquement régulier.}
-\entree{9797}{2:43:17}{Si $A\to B$ est un homomorphisme local plat d'anneaux locaux noethériens avec $A$ régulier et $B/\mathfrak{m}_AB$ régulier, alors $B$ est régulier.}
-\entree{9991}{2:46:31}{Descente plate de la régularité : si $A\to B$ est un homomorphisme local plat d'anneaux locaux noethériens et si $B$ est régulier, alors $A$ est régulier.}
-\section{10 juillet 1973}\label{s-1973-07-10}
-\noindent\textit{Vidéo 2/2 (\href{https://www.youtube.com/watch?v=3ULFIl_2Wis}{\texttt{3ULFIl\_2Wis}}) : bande 1, face A (2:49:55--3:38:08) ; bande 1, face B (3:38:08--3:54:11).}\par\medskip
+\face{Tape 1, side A}
+\topic{Geometric irreducibility}
+\entree{5302}{1:28:22}{Counterexample: $X=\mathrm{Spec}\,\mathbb{R}[x,y]/(x^2+y^2)$ is irreducible, with the rational point $0$, but is not geometrically irreducible: over $\mathbb{C}$, $x^2+y^2=(x+iy)(x-iy)$.}
+\entree{5435}{1:30:35}{Let $\Sigma\subset X$ be the union, for $i\neq j$, of the images in $X$ of the intersections $X'_i\cap X'_j$ of the irreducible components of $X_{k'}$, $k'$ the separable closure of $k$; $\Sigma$ does not depend on $k'$.}
+\entree{5696}{1:34:56}{If $X$ is irreducible, $Z$ non-empty geometrically irreducible, and $f\colon Z\to X$ satisfies $f(Z)\not\subset\Sigma$, then $X$ is geometrically irreducible.}
+\entree{5696}{1:34:56}{The hypothesis $f(Z)\not\subset\Sigma$ holds if $f(Z)$ contains a point at which $X$ is geometrically normal, since then only one irreducible component of $X_{k'}$ passes over this point.}
+\topic{Étale schemes, torsors and Galois extensions}
+\entree{6157}{1:42:37}{An étale $k$-scheme is connected and non-empty if and only if it is isomorphic to $\mathrm{Spec}\,K$, $K$ a finite separable extension of $k$, i.e. if and only if $E$ is non-empty and $\pi$ acts transitively on it.}
+\entree{6289}{1:44:49}{The connected components of $X$ correspond to the $\pi$-orbits in $E$; $X$ is quasi-compact if and only if $E$ is finite.}
+\entree{6358}{1:45:58}{Finite projective limits of étale schemes are étale, but infinite projective limits are not in general.}
+\entree{6489}{1:48:09}{A morphism of étale $k$-schemes is a monomorphism (resp. an epimorphism) if and only if it is injective (resp. surjective) on the associated $\pi$-sets, and then also in the category of schemes.}
+\entree{6553}{1:49:13}{Let $G$ be a discrete group acting on $X$ étale; $X$ is a torsor under $G_k$ if and only if $E=X(\overline{k})$ is a $G$-torsor of sets.}
+\entree{6815}{1:53:35}{The étale $G_k$-torsors equipped with a geometric point correspond to the continuous homomorphisms $\pi\to G$; the torsor is connected if and only if $\pi\to G$ is surjective.}
+\entree{6815}{1:53:35}{The Galois extensions of $k$ with finite group $G$ correspond to the surjective homomorphisms $\pi\to G$.}
+\topic{Properties of $\pi_0$}
+\entree{7205}{2:00:05}{The residue field $\kappa(t)$ of the point $t$ of $\pi_0(X/k)$ is the largest étale subalgebra of $\Gamma(X_t,\mathcal{O}_{X_t})$ over $k$.}
+\entree{7396}{2:03:16}{The formation of $\pi_0(X/k)$ commutes with base change and with products: $\pi_0(X\times_k Y/k)=\pi_0(X/k)\times_k\pi_0(Y/k)$.}
+\entree{7500}{2:05:00}{If $G$ is a $k$-group scheme locally of finite type, $\pi_0(G/k)$ is an étale group scheme.}
+\entree{7565}{2:06:05}{In this case $G\to\pi_0(G/k)$ is a flat surjective homomorphism with kernel $G^0$; $\pi_0(G/k)$ is the quotient $G/G^0$.}
+\entree{7824}{2:10:24}{If $k'$ is a separable closure of $k$, the space underlying $(\mathrm{Spec}\,k')_{k'}$ is the projective limit of the $\mathrm{Gal}(k_i/k)$, compact and totally disconnected, with structure sheaf the locally constant functions with values in $k'$.}
+\entree{8019}{2:13:39}{For $X=\mathrm{Spec}\,k'$, $\pi_0(X_{k'})\simeq\pi$ as topological spaces: in general $\pi_0$ is a profinite set, not discrete, outside the locally connected case.}
+\face{Tape 1, side B}
+\topic{Pro-étale and locally profinite schemes}
+\entree{8163}{2:16:03}{A $k$-scheme $X$ is pro-étale if it is a filtered projective limit of finite étale $k$-schemes; in the affine case, $X=\mathrm{Spec}\,A$ with $A$ a filtered union of finite étale subalgebras.}
+\entree{8298}{2:18:18}{A $k$-algebra is ind-étale if and only if it is integral and separable over $k$.}
+\entree{8360}{2:19:20}{A $k$-scheme is affine pro-étale if and only if $X_{k'}$ is so over $k'$, for every extension $k'$ of $k$.}
+\entree{8425}{2:20:25}{If $k$ is separably closed, $X\mapsto X(k)$, with the topology of pointwise convergence, is an equivalence between affine pro-étale schemes and compact totally disconnected spaces.}
+\entree{8556}{2:22:36}{The scheme corresponding to such a space has as structure sheaf that of locally constant functions with values in $k$.}
+\entree{8622}{2:23:42}{A scheme is locally profinite if every point has an affine pro-étale open neighbourhood.}
+\entree{8688}{2:24:48}{The locally profinite scheme $\pi_0(X/k)$ is defined as universal for morphisms from $X$ to a locally profinite $k$-scheme; when it exists, it commutes with base change and products.}
+\entree{8752}{2:25:52}{For an arbitrary group scheme $G$, $G/G^0$ is defined as $\pi_0(G/k)$; it is a profinite group in general.}
+\entree{8898}{2:28:18}{In a quasi-compact scheme $X$, the connected component of a point $x$ is the intersection of the open and closed subsets containing $x$.}
+\topic{Regularity and base change}
+\entree{9030}{2:30:30}{Let $k$ be perfect, $X$ a regular $k$-scheme, $k'$ an extension of $k$, with $X$ locally essentially of finite type over $k$ or $k'$ essentially of finite type over $k$; then $X_{k'}$ is regular.}
+\entree{9092}{2:31:32}{An algebra $A$ is essentially of finite type over $k$ if $A\simeq S^{-1}B$ with $B$ of finite type over $k$ and $S$ multiplicative; an extension $k'$ is so if and only if it is finitely generated as a field.}
+\entree{9412}{2:36:52}{For $X$ locally essentially of finite type over $k$ and $k_1$ a perfect extension of $k$, the following are equivalent: $X\times_k Y$ regular for every regular $Y$; $X_{k'}$ regular for every $k'$; $X_{k_1}$ regular; $X_{k'}$ regular for every finite $k'$.}
+\entree{9541}{2:39:01}{In this case $X$ is called geometrically regular; $X$ is smooth over $k$ if it is locally of finite type and geometrically regular.}
+\entree{9797}{2:43:17}{If $A\to B$ is a flat local homomorphism of noetherian local rings with $A$ regular and $B/\mathfrak{m}_AB$ regular, then $B$ is regular.}
+\entree{9991}{2:46:31}{Flat descent of regularity: if $A\to B$ is a flat local homomorphism of noetherian local rings and $B$ is regular, then $A$ is regular.}
+\sessiondate{10 July 1973}
+\noindent\textit{Video 2/2 (\href{https://www.youtube.com/watch?v=3ULFIl_2Wis}{\texttt{3ULFIl\_2Wis}}): tape 1, side A (2:49:55--3:38:08); tape 1, side B (3:38:08--3:54:11).}\par\medskip
 \video{3ULFIl_2Wis}
-\face{Bande 1, face A}
-\entree{10265}{2:51:05}{Si $k$ est parfait et si $X$, $S$ sont deux $k$-schémas réguliers dont l'un est essentiellement de type fini sur $k$, alors $X\times_k S$ est régulier.}
-\entree{10463}{2:54:23}{Un schéma géométriquement régulier sur $k$ est régulier ; la réciproque vaut pour tout $X$ si et seulement si $k$ est parfait.}
-\entree{10525}{2:55:25}{La régularité géométrique (donc la lissité) est invariante par extension du corps de base, et stable par produit de schémas essentiellement de type fini.}
-\entree{10598}{2:56:38}{Sans finitude sur $X$ : $X\times_k Y$ régulier pour tout $Y$ régulier essentiellement de type fini, $X_{k'}$ régulier pour tout $k'$ de type fini, $X_{k'}$ régulier pour tout $k'$ fini radiciel, sont équivalents ; $X$ est dit alors géométriquement régulier.}
-\entree{10920}{3:02:00}{Les mêmes équivalences, en des points, définissent la régularité géométrique de $X$ en un point $x$.}
-\entree{10989}{3:03:09}{Si $X$ est localement de type fini, régulier en $x$ et si $\kappa(x)$ est séparable sur $k$, alors $X$ est géométriquement régulier en $x$.}
-\entree{11054}{3:04:14}{Critère jacobien : pour $X$ localement de type fini sur $k$, $X$ est géométriquement régulier en $x$ si et seulement s'il existe un voisinage ouvert $U$ de $x$ et un morphisme étale $U\to\mathbb{A}^n_k$.}
-\entree{11119}{3:05:19}{Pour des schémas de type fini sur un corps, un morphisme est étale s'il est plat et à fibres étales, i.e. spectres de produits finis d'extensions finies séparables des corps résiduels.}
-\entree{11314}{3:08:34}{Pour $X$ localement de type fini, la régularité géométrique en $x$ est appelée lissité en $x$ ; un schéma étale sur $\mathbb{A}^n_k$ est lisse.}
-\entree{11575}{3:12:55}{Une extension de type fini de $k$ est séparable si et seulement si elle est extension finie séparable d'une extension transcendante pure de $k$.}
-\entree{12229}{3:23:49}{Pour un morphisme localement de présentation finie, l'ensemble des points où il est plat est ouvert ; l'ensemble des points où il est étale est ouvert.}
-\entree{12422}{3:27:02}{L'ensemble $X_{\mathrm{sm}}$ des points lisses d'un schéma localement de type fini sur $k$ est ouvert.}
-\entree{12486}{3:28:06}{Pour $X$ localement de type fini sur $k$, $X_{\mathrm{sm}}$ est dense si et seulement si $X$ est lisse en chaque point maximal, i.e. $X$ est réduit aux points génériques et leurs corps résiduels sont séparables sur $k$.}
-\entree{12550}{3:29:10}{Une extension de type fini $K$ de $k$ est géométriquement régulière si et seulement si elle est séparable, i.e. si et seulement si elle est géométriquement réduite.}
-\entree{12689}{3:31:29}{Si $k$ est parfait et $X$ réduit localement de type fini sur $k$, l'ensemble des points lisses de $X$ est ouvert dense.}
-\entree{12756}{3:32:36}{Si $k$ est parfait, le produit sur $k$ de deux schémas normaux est normal ; autrement dit, le produit tensoriel de deux $k$-algèbres normales est normal.}
-\entree{12948}{3:35:48}{Pour $k_1$ extension parfaite de $k$, sont équivalents : $X\times_k Y$ normal pour tout $Y$ normal ; $X_{k'}$ normal pour tout $k'$ ; $X_{k_1}$ normal ; $X_{k'}$ normal pour tout $k'$ fini radiciel ; $X$ est dit alors géométriquement normal.}
-\entree{13011}{3:36:51}{La normalité géométrique est stable par changement de base et par produit, entraîne la normalité, et lui équivaut pour tout $X$ si et seulement si $k$ est parfait.}
-\face{Bande 1, face B}
-\entree{13091}{3:38:11}{Pour un schéma en groupes $G$ sur $k$, sont équivalents : $G$ est séparable (géométriquement réduit) ; $G$ est géométriquement normal ; et, si $G$ est localement de type fini, $G$ est lisse sur $k$.}
-\entree{13544}{3:45:44}{Si $G$ opère sur $X$ avec $G\times X\to X\times X$, $(g,x)\mapsto(gx,x)$, surjectif et si $X$ est séparable, alors $X$ est géométriquement normal, et lisse s'il est de plus localement de type fini.}
-\entree{13739}{3:48:59}{Si $k$ est parfait, $G_{\mathrm{red}}$ est géométriquement normal, et lisse si $G$ est localement de type fini.}
-\entree{13803}{3:50:03}{Si $G$ est localement de type fini sur $k$, les composantes connexes de $G$ coïncident avec ses composantes irréductibles.}
-\entree{13937}{3:52:17}{Dans un espace localement noethérien, composantes connexes et irréductibles coïncident si et seulement si par chaque point passe une seule composante irréductible.}
-\section{11 juillet 1973}\label{s-1973-07-11}
-\noindent\textit{Vidéo 2/2 (\href{https://www.youtube.com/watch?v=3ULFIl_2Wis}{\texttt{3ULFIl\_2Wis}}) : bande 1, face A (3:54:11--4:42:14) ; bande 1, face B (4:42:14--5:30:34) ; bande 3 (7:01:38--7:11:20).}\par\medskip
+\face{Tape 1, side A}
+\entree{10265}{2:51:05}{If $k$ is perfect and $X$, $S$ are two regular $k$-schemes, one of which is essentially of finite type over $k$, then $X\times_k S$ is regular.}
+\entree{10463}{2:54:23}{A geometrically regular scheme over $k$ is regular; the converse holds for every $X$ if and only if $k$ is perfect.}
+\entree{10525}{2:55:25}{Geometric regularity (hence smoothness) is invariant under extension of the base field, and stable under products of schemes essentially of finite type.}
+\entree{10598}{2:56:38}{Without finiteness on $X$: $X\times_k Y$ regular for every regular $Y$ essentially of finite type, $X_{k'}$ regular for every finitely generated $k'$, $X_{k'}$ regular for every finite radicial $k'$, are equivalent; $X$ is then called geometrically regular.}
+\entree{10920}{3:02:00}{The same equivalences, at points, define the geometric regularity of $X$ at a point $x$.}
+\entree{10989}{3:03:09}{If $X$ is locally of finite type, regular at $x$, and $\kappa(x)$ is separable over $k$, then $X$ is geometrically regular at $x$.}
+\entree{11054}{3:04:14}{Jacobian criterion: for $X$ locally of finite type over $k$, $X$ is geometrically regular at $x$ if and only if there are an open neighbourhood $U$ of $x$ and an étale morphism $U\to\mathbb{A}^n_k$.}
+\entree{11119}{3:05:19}{For schemes of finite type over a field, a morphism is étale if it is flat with étale fibres, i.e. spectra of finite products of finite separable extensions of the residue fields.}
+\entree{11314}{3:08:34}{For $X$ locally of finite type, geometric regularity at $x$ is called smoothness at $x$; a scheme étale over $\mathbb{A}^n_k$ is smooth.}
+\entree{11575}{3:12:55}{A finitely generated extension of $k$ is separable if and only if it is a finite separable extension of a purely transcendental extension of $k$.}
+\entree{12229}{3:23:49}{For a morphism locally of finite presentation, the set of points where it is flat is open; the set of points where it is étale is open.}
+\entree{12422}{3:27:02}{The set $X_{\mathrm{sm}}$ of smooth points of a scheme locally of finite type over $k$ is open.}
+\entree{12486}{3:28:06}{For $X$ locally of finite type over $k$, $X_{\mathrm{sm}}$ is dense if and only if $X$ is smooth at every maximal point, i.e. $X$ is reduced to generic points whose residue fields are separable over $k$.}
+\entree{12550}{3:29:10}{A finitely generated extension $K$ of $k$ is geometrically regular if and only if it is separable, i.e. if and only if it is geometrically reduced.}
+\entree{12689}{3:31:29}{If $k$ is perfect and $X$ is reduced locally of finite type over $k$, the set of smooth points of $X$ is open and dense.}
+\topic{Geometric normality}
+\entree{12756}{3:32:36}{If $k$ is perfect, the product over $k$ of two normal schemes is normal; in other words, the tensor product of two normal $k$-algebras is normal.}
+\entree{12948}{3:35:48}{For $k_1$ a perfect extension of $k$, the following are equivalent: $X\times_k Y$ normal for every normal $Y$; $X_{k'}$ normal for every $k'$; $X_{k_1}$ normal; $X_{k'}$ normal for every finite radicial $k'$; $X$ is then called geometrically normal.}
+\entree{13011}{3:36:51}{Geometric normality is stable under base change and products, implies normality, and is equivalent to it for every $X$ if and only if $k$ is perfect.}
+\face{Tape 1, side B}
+\topic{Smoothness of group schemes}
+\entree{13091}{3:38:11}{For a group scheme $G$ over $k$, the following are equivalent: $G$ is separable (geometrically reduced); $G$ is geometrically normal; and, if $G$ is locally of finite type, $G$ is smooth over $k$.}
+\entree{13544}{3:45:44}{If $G$ acts on $X$ with $G\times X\to X\times X$, $(g,x)\mapsto(gx,x)$, surjective and $X$ is separable, then $X$ is geometrically normal, and smooth if moreover locally of finite type.}
+\entree{13739}{3:48:59}{If $k$ is perfect, $G_{\mathrm{red}}$ is geometrically normal, and smooth if $G$ is locally of finite type.}
+\entree{13803}{3:50:03}{If $G$ is locally of finite type over $k$, the connected components of $G$ coincide with its irreducible components.}
+\entree{13937}{3:52:17}{In a locally noetherian space, connected and irreducible components coincide if and only if only one irreducible component passes through each point.}
+\sessiondate{11 July 1973}
+\noindent\textit{Video 2/2 (\href{https://www.youtube.com/watch?v=3ULFIl_2Wis}{\texttt{3ULFIl\_2Wis}}): tape 1, side A (3:54:11--4:42:14); tape 1, side B (4:42:14--5:30:34); tape 3 (7:01:38--7:11:20).}\par\medskip
 \video{3ULFIl_2Wis}
-\face{Bande 1, face A}
-\entree{14121}{3:55:21}{Tout schéma en groupes sur un corps est séparé.}
-\entree{14186}{3:56:26}{Un schéma en groupes $G$ sur $S$ est séparé si et seulement si sa section unité est une immersion fermée ; la diagonale est l'image réciproque de la section unité par $(g,h)\mapsto gh^{-1}$.}
-\entree{14253}{3:57:33}{Pour un schéma en groupes $G$ sur un corps, la loi de composition $G\times G\to G$ est ouverte, car c'est la composée de l'isomorphisme $(g,x)\mapsto(gx,x)$ et de la première projection, universellement ouverte.}
-\entree{14392}{3:59:52}{Si $G$ opère sur $X$ et que $G\times X\to X\times X$, $(g,x)\mapsto(gx,x)$, est un isomorphisme ($X$ est alors un torseur dès que $X\neq\varnothing$), l'action $G\times X\to X$ est ouverte et plate, fidèlement plate si $X\neq\varnothing$.}
-\entree{14457}{4:00:57}{Pour $U\subset G$ et $V\subset X$ ouverts, $UV\subset X$ désigne l'image de $U\times V$ par l'action $G\times X\to X$ ; si l'action est ouverte, $UV$ est ouvert.}
-\entree{14584}{4:03:04}{Si $G$ opère sur $X$, pour tous ouverts $U\subset G$ et $V\subset X$ l'ensemble $UV$ est stable par la composante irréductible $G^0$ de l'élément neutre.}
-\entree{14648}{4:04:08}{Si $X$ est comme ci-dessus un torseur sous $G$ (ou $X=G$), $UV$ est stable par spécialisation.}
-\entree{14734}{4:05:34}{Dans ce cas, $UV$ est fermé si $U$ et $V$ sont quasi-compacts, ou si $G$ est localement de type fini.}
-\entree{14802}{4:06:42}{Un torseur $X$ sous un schéma en groupes sur un corps est réunion d'ouverts qui sont aussi fermés et quasi-compacts.}
-\entree{14933}{4:08:53}{Les composantes connexes d'un tel torseur, en particulier celle de l'élément neutre de $G$, sont quasi-compactes.}
-\entree{15781}{4:23:01}{Si les applications orbitales $G\to X$, $g\mapsto gx$, sont généralisantes (par exemple pour un torseur), une partie $W\subset X$ est stable par $G^0$ si et seulement si elle est stable par spécialisation et par généralisation.}
-\entree{16103}{4:28:23}{Définition : $X$ est un espace homogène sous $G$ si $X\neq\varnothing$ et si, après extension du corps de base et choix d'un point rationnel $x$, l'application $G\to X$, $g\mapsto gx$, est surjective.}
-\entree{16295}{4:31:35}{Si l'application $G\to X$, $g\mapsto gx$, atteint un point maximal de $X$ (en particulier si elle est surjective), elle est plate après réduction, donc universellement généralisante.}
-\entree{16552}{4:35:52}{Soit $f\colon X\to Y$ un morphisme équivariant, $X\neq\varnothing$, $G$ opérant transitivement sur $X$ (ensemblistement) : $f$ généralisante en un point, $f$ universellement généralisante, et une fibre au-dessus d'un point maximal de $Y$ non vide sont équivalents.}
-\entree{16614}{4:36:54}{Sous ces hypothèses, l'image d'une composante irréductible de $X$ est une composante irréductible de $Y$, et cette propriété équivaut aux trois précédentes.}
-\face{Bande 1, face B}
-\entree{17079}{4:44:39}{Si $f\colon G\to H$ est un homomorphisme de groupes sur un corps, généralisant en un point, alors $f(G^0)=H^0$ (composantes irréductibles de l'élément neutre).}
-\entree{17500}{4:51:40}{Si $G$ est de type fini sur un corps et $H\subset G$ un sous-groupe, le quotient $G/H$ (au sens des faisceaux fpqc) existe et est un schéma de type fini.}
-\entree{17500}{4:51:40}{Pour un homomorphisme $G\to G'$ avec $G$ de type fini, de noyau $K$, le quotient $G/K$ est un groupe de type fini et l'homomorphisme se factorise par un monomorphisme $G/K\to G'$.}
-\entree{17566}{4:52:46}{Un monomorphisme entre groupes de type fini sur un corps est une immersion fermée.}
-\entree{17629}{4:53:49}{L'image d'un homomorphisme entre groupes de type fini sur un corps est fermée.}
-\entree{17756}{4:55:56}{Un groupe séparable est dit totalement discontinu si sa composante connexe de l'élément neutre est réduite à un point.}
-\entree{17820}{4:57:00}{Les groupes étales sur $k$ correspondent aux groupes abstraits $\Gamma$ munis d'une action continue du groupe de Galois $\pi$ de $k_s/k$ ; continue signifie que le stabilisateur de chaque $x\in\Gamma$ est ouvert.}
-\entree{17948}{4:59:08}{Les groupes pro-étales (limites projectives de groupes finis étales) correspondent aux groupes profinis munis d'une action continue de $\pi$ ; sur un corps séparablement clos, aux groupes profinis.}
-\entree{18222}{5:03:42}{Un schéma en groupes radiciel ($G_{\mathrm{red}}$ réduit à l'élément neutre) est affine et limite projective de groupes radiciels de type fini, donc finis.}
-\entree{18288}{5:04:48}{Conjecture : un groupe séparable et connexe sur $k$ est extension d'un groupe $G_0$ de type fini par un sous-groupe affine $R$, avec $G\to G_0$ fidèlement plat et quasi-compact.}
-\entree{18355}{5:05:55}{Théorème de Chevalley : sur un corps parfait, un groupe algébrique lisse connexe est extension d'une variété abélienne par un groupe affine.}
-\entree{18616}{5:10:16}{Cette extension est canonique : la partie affine est le plus grand sous-groupe lisse connexe affine, et il est invariant.}
-\entree{18681}{5:11:21}{Pour un schéma en groupes $G$ sur un corps, $G^0$ muni du faisceau structural induit est un schéma ; c'est la limite projective des ouverts-fermés qui le contiennent, à morphismes de transition affines.}
-\entree{18745}{5:12:25}{Sur un corps parfait, $G^0_{\mathrm{red}}$ est un sous-groupe de $G$, d'où $G\supset G^0\supset G^0_{\mathrm{red}}$ : $G/G^0$ est totalement discontinu, $G^0/G^0_{\mathrm{red}}$ radiciel, $G^0_{\mathrm{red}}$ lisse connexe.}
-\entree{19004}{5:16:44}{En caractéristique $0$, un groupe radiciel est trivial.}
-\entree{19065}{5:17:45}{En caractéristique $0$, un schéma en groupes localement de type fini sur un corps est lisse.}
-\entree{19065}{5:17:45}{En caractéristique $p$, le Frobenius relatif est un homomorphisme $F_G\colon G\to G^{(p)}$ ; $G$ est dit de hauteur un si $F_G$ est trivial, et un tel groupe est radiciel.}
-\entree{19129}{5:18:49}{Un groupe fini radiciel $G$ a la suite croissante de sous-groupes $\ker F^n$ ($F$ le Frobenius), dont les quotients successifs sont de hauteur un ; si $F^n$ est trivial, $G$ est extension successive de $n$ groupes de hauteur un.}
-\entree{19256}{5:20:56}{Les groupes finis de hauteur un sur $k$ sont équivalents aux algèbres de Lie restreintes ($p$-algèbres de Lie) de dimension finie sur $k$.}
-\entree{19319}{5:21:59}{Une algèbre de Lie restreinte est une algèbre de Lie en caractéristique $p$ munie de $x\mapsto x^{[p]}$ telle que $(x+y)^{[p]}-x^{[p]}-y^{[p]}$ soit donné par la formule de Jacobson, un polynôme de Lie en $x,y$.}
-\entree{19382}{5:23:02}{Pour tout schéma en groupes $G$ sur un anneau de caractéristique $p$, $\mathrm{Lie}(G)$ est une algèbre de Lie restreinte, la puissance $p$-ième d'une dérivation étant une dérivation.}
-\entree{19444}{5:24:04}{Si $G_1$ est le noyau du Frobenius de $G$, on a $\mathrm{Lie}(G)=\mathrm{Lie}(G_1)$.}
-\entree{19511}{5:25:11}{Sur un corps algébriquement clos, les groupes radiciels commutatifs simples de hauteur un sont $\alpha_p$ et $\mu_p$, correspondant aux algèbres de Lie restreintes simples de dimension un.}
-\face{Bande 3}
-\entree{25299}{7:01:39}{Une variété abélienne complexe de dimension $n$ est un tore complexe compact $\mathbb{C}^n/\Lambda$, où $\Lambda$ est un réseau de rang $2n$.}
-\entree{25299}{7:01:39}{Sur un corps algébriquement clos, un groupe affine lisse connexe est extension d'un groupe semi-simple par son radical, qui est résoluble.}
-\entree{25361}{7:02:41}{À isogénie près, un groupe semi-simple est un produit de groupes simples.}
-\entree{25361}{7:02:41}{Sur un corps algébriquement clos, les groupes semi-simples sont classifiés, à isogénie près, par leurs systèmes de racines, indépendamment de la caractéristique.}
-\entree{25487}{7:04:47}{Sur un corps algébriquement clos, le radical d'un groupe affine lisse connexe est extension d'un tore $\mathbb{G}_m^r$ par un groupe unipotent.}
-\entree{25487}{7:04:47}{Sur un corps quelconque, un tore est déterminé par son réseau des caractères, muni de l'action du groupe de Galois qui le tord.}
-\entree{25487}{7:04:47}{Sur un corps algébriquement clos, un groupe unipotent lisse connexe est extension successive de groupes $\mathbb{G}_a$.}
+\face{Tape 1, side A}
+\topic{Group schemes over a field: openness and torsors}
+\entree{14121}{3:55:21}{Every group scheme over a field is separated.}
+\entree{14186}{3:56:26}{A group scheme $G$ over $S$ is separated if and only if its unit section is a closed immersion; the diagonal is the inverse image of the unit section under $(g,h)\mapsto gh^{-1}$.}
+\entree{14253}{3:57:33}{For a group scheme $G$ over a field, the composition law $G\times G\to G$ is open, since it is the composite of the isomorphism $(g,x)\mapsto(gx,x)$ and the first projection, which is universally open.}
+\entree{14392}{3:59:52}{If $G$ acts on $X$ and $G\times X\to X\times X$, $(g,x)\mapsto(gx,x)$, is an isomorphism ($X$ is then a torsor as soon as $X\neq\varnothing$), the action $G\times X\to X$ is open and flat, faithfully flat if $X\neq\varnothing$.}
+\entree{14457}{4:00:57}{For open sets $U\subset G$ and $V\subset X$, $UV\subset X$ denotes the image of $U\times V$ under the action $G\times X\to X$; if the action is open, $UV$ is open.}
+\entree{14584}{4:03:04}{If $G$ acts on $X$, for all open sets $U\subset G$ and $V\subset X$ the set $UV$ is stable under the irreducible component $G^0$ of the neutral element.}
+\entree{14648}{4:04:08}{If $X$ is as above a torsor under $G$ (or $X=G$), $UV$ is stable under specialization.}
+\entree{14734}{4:05:34}{In this case, $UV$ is closed if $U$ and $V$ are quasi-compact, or if $G$ is locally of finite type.}
+\entree{14802}{4:06:42}{A torsor $X$ under a group scheme over a field is a union of open sets that are also closed and quasi-compact.}
+\entree{14933}{4:08:53}{The connected components of such a torsor, in particular that of the neutral element of $G$, are quasi-compact.}
+\entree{15781}{4:23:01}{If the orbit maps $G\to X$, $g\mapsto gx$, are generalizing (for example for a torsor), a subset $W\subset X$ is stable under $G^0$ if and only if it is stable under specialization and generalization.}
+\topic{Homogeneous spaces}
+\entree{16103}{4:28:23}{Definition: $X$ is a homogeneous space under $G$ if $X\neq\varnothing$ and if, after extension of the base field and choice of a rational point $x$, the map $G\to X$, $g\mapsto gx$, is surjective.}
+\entree{16295}{4:31:35}{If the map $G\to X$, $g\mapsto gx$, reaches a maximal point of $X$ (in particular if it is surjective), it is flat after reduction, hence universally generalizing.}
+\entree{16552}{4:35:52}{Let $f\colon X\to Y$ be an equivariant morphism, $X\neq\varnothing$, $G$ acting transitively on $X$ (set-theoretically): $f$ generalizing at one point, $f$ universally generalizing, and a non-empty fibre over a maximal point of $Y$ are equivalent.}
+\entree{16614}{4:36:54}{Under these hypotheses, the image of an irreducible component of $X$ is an irreducible component of $Y$, and this property is equivalent to the three preceding ones.}
+\face{Tape 1, side B}
+\topic{Quotients and images}
+\entree{17079}{4:44:39}{If $f\colon G\to H$ is a group homomorphism over a field, generalizing at one point, then $f(G^0)=H^0$ (irreducible components of the neutral element).}
+\entree{17500}{4:51:40}{If $G$ is of finite type over a field and $H\subset G$ a subgroup, the quotient $G/H$ (in the sense of fpqc sheaves) exists and is a scheme of finite type.}
+\entree{17500}{4:51:40}{For a homomorphism $G\to G'$ with $G$ of finite type, with kernel $K$, the quotient $G/K$ is a group of finite type and the homomorphism factors through a monomorphism $G/K\to G'$.}
+\entree{17566}{4:52:46}{A monomorphism between groups of finite type over a field is a closed immersion.}
+\entree{17629}{4:53:49}{The image of a homomorphism between groups of finite type over a field is closed.}
+\topic{Totally disconnected, étale and pro-étale groups}
+\entree{17756}{4:55:56}{A separable group is called totally disconnected if its connected component of the neutral element is reduced to a point.}
+\entree{17820}{4:57:00}{Étale groups over $k$ correspond to abstract groups $\Gamma$ equipped with a continuous action of the Galois group $\pi$ of $k_s/k$; continuous means that the stabilizer of each $x\in\Gamma$ is open.}
+\entree{17948}{4:59:08}{Pro-étale groups (projective limits of finite étale groups) correspond to profinite groups equipped with a continuous action of $\pi$; over a separably closed field, to profinite groups.}
+\entree{18222}{5:03:42}{A radicial group scheme ($G_{\mathrm{red}}$ reduced to the neutral element) is affine and a projective limit of radicial groups of finite type, hence finite.}
+\topic{Structure of connected group schemes}
+\entree{18288}{5:04:48}{Conjecture: a separable connected group over $k$ is an extension of a group $G_0$ of finite type by an affine subgroup $R$, with $G\to G_0$ faithfully flat and quasi-compact.}
+\entree{18355}{5:05:55}{Chevalley's theorem: over a perfect field, a smooth connected algebraic group is an extension of an abelian variety by an affine group.}
+\entree{18616}{5:10:16}{This extension is canonical: the affine part is the largest smooth connected affine subgroup, and it is invariant.}
+\entree{18681}{5:11:21}{For a group scheme $G$ over a field, $G^0$ with the induced structure sheaf is a scheme; it is the projective limit of the open-closed subsets containing it, with affine transition morphisms.}
+\entree{18745}{5:12:25}{Over a perfect field, $G^0_{\mathrm{red}}$ is a subgroup of $G$, hence $G\supset G^0\supset G^0_{\mathrm{red}}$: $G/G^0$ is totally disconnected, $G^0/G^0_{\mathrm{red}}$ radicial, $G^0_{\mathrm{red}}$ smooth connected.}
+\entree{19004}{5:16:44}{In characteristic $0$, a radicial group is trivial.}
+\topic{Height one and restricted Lie algebras}
+\entree{19065}{5:17:45}{In characteristic $0$, a group scheme locally of finite type over a field is smooth.}
+\entree{19065}{5:17:45}{In characteristic $p$, the relative Frobenius is a homomorphism $F_G\colon G\to G^{(p)}$; $G$ is said to have height one if $F_G$ is trivial, and such a group is radicial.}
+\entree{19129}{5:18:49}{A finite radicial group $G$ has the increasing sequence of subgroups $\ker F^n$ ($F$ the Frobenius), whose successive quotients have height one; if $F^n$ is trivial, $G$ is a successive extension of $n$ groups of height one.}
+\entree{19256}{5:20:56}{Finite groups of height one over $k$ are equivalent to restricted Lie algebras ($p$-Lie algebras) of finite dimension over $k$.}
+\entree{19319}{5:21:59}{A restricted Lie algebra is a Lie algebra in characteristic $p$ with a map $x\mapsto x^{[p]}$ such that $(x+y)^{[p]}-x^{[p]}-y^{[p]}$ is given by Jacobson's formula, a Lie polynomial in $x,y$.}
+\entree{19382}{5:23:02}{For every group scheme $G$ over a ring of characteristic $p$, $\mathrm{Lie}(G)$ is a restricted Lie algebra, the $p$-th power of a derivation being a derivation.}
+\entree{19444}{5:24:04}{If $G_1$ is the kernel of the Frobenius of $G$, then $\mathrm{Lie}(G)=\mathrm{Lie}(G_1)$.}
+\entree{19511}{5:25:11}{Over an algebraically closed field, the simple commutative radicial groups of height one are $\alpha_p$ and $\mu_p$, corresponding to the simple restricted Lie algebras of dimension one.}
+\face{Tape 3}
+\topic{Structure of affine groups (preview)}
+\entree{25299}{7:01:39}{A complex abelian variety of dimension $n$ is a compact complex torus $\mathbb{C}^n/\Lambda$, where $\Lambda$ is a lattice of rank $2n$.}
+\entree{25299}{7:01:39}{Over an algebraically closed field, a smooth connected affine group is an extension of a semisimple group by its radical, which is solvable.}
+\entree{25361}{7:02:41}{Up to isogeny, a semisimple group is a product of simple groups.}
+\entree{25361}{7:02:41}{Over an algebraically closed field, semisimple groups are classified, up to isogeny, by their root systems, independently of the characteristic.}
+\entree{25487}{7:04:47}{Over an algebraically closed field, the radical of a smooth connected affine group is an extension of a torus $\mathbb{G}_m^r$ by a unipotent group.}
+\entree{25487}{7:04:47}{Over an arbitrary field, a torus is determined by its character lattice, equipped with the action of the Galois group that twists it.}
+\entree{25487}{7:04:47}{Over an algebraically closed field, a smooth connected unipotent group is a successive extension of groups $\mathbb{G}_a$.}
 
 \end{document}

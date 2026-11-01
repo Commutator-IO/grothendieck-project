@@ -1,4 +1,6 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
 import { Footer, Header } from './components/Frame.tsx';
 import catalogueRaw from './content/buffalo.json';
 import type { Board } from './components/Blackboard.tsx';
@@ -124,12 +126,49 @@ function fromHash(): { id: string; t: number } | null {
 
 const link = 'font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700';
 
-// The index of results of each course, in our own words (docs/buffalo-*/index.tex, served by docs/study/tei.mjs).
-const INDEX_PDF: Record<string, string> = {
-  topos: '/article/buffalo-topos.pdf',
-  ag: '/article/buffalo-ag.pdf',
-  groups: '/article/buffalo-groupes.pdf',
-};
+// The index of results of each course, in our own words: docs/buffalo-*/index.tex, read into
+// src/content/buffalo-index.json by scripts/buffalo-index.mjs (the PDF is compiled from the same .tex).
+type IndexItem =
+  | { k: 'topic'; text: string }
+  | { k: 'session'; text: string }
+  | { k: 'side'; text: string }
+  | { k: 'entry'; v: string; t: number; ts: string; text: string };
+type CourseIndex = { pdf: string; entries: number; items: IndexItem[] };
+const loadIndex = () => import('./content/buffalo-index.json').then((m) => m.default as unknown as Record<string, CourseIndex>);
+
+const tex = (s: string) => katex.renderToString(s, { throwOnError: false });
+const statement = (s: string) => s.split(/(\$[^$]*\$)/).map((p) => (p.startsWith('$') ? tex(p.slice(1, -1)) : p)).join('');
+
+/** One course's index, typeset like the transcripts' reading view; a timestamp plays the tape there. */
+function CourseIndexView({ index, playing, onPlay }: { index: CourseIndex; playing: { id: string; t: number } | null; onPlay: (id: string, t: number) => void }) {
+  const html = useMemo(() => index.items.map((i) => statement(i.text)), [index]);
+  return (
+    <div className="buffalo-index text-[14.5px] leading-relaxed text-ink-800">
+      {index.items.map((i, n) =>
+        i.k === 'topic' ? (
+          <h3 key={n} className="titre mt-8 border-b border-ink-200 pb-1 text-[18px] text-ink-900 first:mt-0" dangerouslySetInnerHTML={{ __html: html[n] }} />
+        ) : i.k === 'session' ? (
+          <p key={n} className="mt-5 text-[12px] font-semibold uppercase tracking-[0.06em] text-brand-600" dangerouslySetInnerHTML={{ __html: html[n] }} />
+        ) : i.k === 'side' ? (
+          <p key={n} className="mt-2 text-[12px] italic text-ink-500" dangerouslySetInnerHTML={{ __html: html[n] }} />
+        ) : (
+          <div key={n} className="mt-1.5 grid grid-cols-[4.6rem_minmax(0,1fr)] gap-2">
+            <button
+              type="button"
+              onClick={() => onPlay(i.v, i.t)}
+              aria-current={playing?.id === i.v && playing.t === i.t ? 'true' : undefined}
+              title="Play the tape from here"
+              className="tabular self-start rounded px-1 py-0.5 text-left font-mono text-[12px] text-brand-600 hover:bg-brand-50 aria-[current=true]:bg-brand-100"
+            >
+              {i.ts}
+            </button>
+            <p dangerouslySetInnerHTML={{ __html: html[n] }} />
+          </div>
+        ),
+      )}
+    </div>
+  );
+}
 
 export function BuffaloPage() {
   const [playing, setPlaying] = useState(fromHash);
@@ -141,9 +180,23 @@ export function BuffaloPage() {
   const play = (id: string, t: number) => {
     history.replaceState(null, '', `#${id}@${t}`);
     setPlaying({ id, t });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   const video = playing && CAT.courses.flatMap((c) => c.videos).find((v) => v.id === playing.id);
+  const [course, setCourse] = useState(() => CAT.courses.find((c) => c.videos.some((v) => v.id === fromHash()?.id))?.id ?? CAT.courses[0].id);
+  const [indexes, setIndexes] = useState<Record<string, CourseIndex> | null>(null);
+  useEffect(() => {
+    loadIndex().then(setIndexes);
+  }, []);
+  const close = () => {
+    history.replaceState(null, '', location.pathname);
+    setPlaying(null);
+  };
+  useEffect(() => {
+    if (!playing) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && close();
+    addEventListener('keydown', onKey);
+    return () => removeEventListener('keydown', onKey);
+  }, [playing]);
   const [now, setNow] = useState(0);
   const [seek, setSeek] = useState<{ t: number } | null>(null);
   const [board, setBoard] = useState<Board | null>(null);
@@ -196,99 +249,128 @@ export function BuffaloPage() {
           is not checked.
         </aside>
 
-        {video && playing && (
-          <section className="mt-8" aria-label="Player">
-            <div className="flex items-baseline justify-between gap-3">
-              <p className="text-[13px] font-semibold text-ink-800">
-                {video.title}, from {hms(playing.t)}
-              </p>
-              <button
-                type="button"
-                onClick={() => {
-                  history.replaceState(null, '', location.pathname);
-                  setPlaying(null);
-                }}
-                className="rounded-lg border border-ink-200 px-2.5 py-1 text-[12px] text-ink-600 hover:bg-ink-50"
-              >
-                Close
-              </button>
-            </div>
-            {/* The videos are a still photograph over the sound, so the board gets the room. */}
-            <div className={`mt-2 grid gap-4 ${board ? 'lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]' : ''}`}>
-              <div className="aspect-video w-full self-start overflow-hidden rounded-xl border border-ink-200 bg-ink-900">
-                <Player id={playing.id} t={playing.t} onTime={setNow} seek={seek} />
-              </div>
-              {board && (
-                <div className="h-[70vh]">
-                  <Suspense fallback={null}>
-                    <Blackboard board={board} now={now} onSeek={(s) => setSeek({ t: s })} />
-                  </Suspense>
-                </div>
-              )}
-            </div>
-          </section>
-        )}
-
         <nav className="mt-8 flex flex-wrap gap-2" aria-label="Courses">
           {CAT.courses.map((c) => (
-            <a
+            <button
               key={c.id}
-              href={`#${c.id}`}
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById(c.id)?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="rounded-lg border border-ink-200 px-3 py-1 text-[12.5px] text-ink-700 hover:border-brand-500 hover:bg-brand-50"
+              type="button"
+              onClick={() => setCourse(c.id)}
+              aria-pressed={course === c.id}
+              className="rounded-lg border border-ink-200 px-3 py-1 text-[12.5px] text-ink-700 hover:border-brand-500 hover:bg-brand-50 aria-pressed:border-brand-500 aria-pressed:bg-brand-50 aria-pressed:font-semibold"
             >
               {c.title} · {hours(c)} h
-            </a>
+            </button>
           ))}
         </nav>
 
-        {CAT.courses.map((c) => (
-          <section key={c.id} id={c.id} className="mt-10 scroll-mt-20">
-            <h2 className="titre text-[22px] text-ink-900">{c.title}</h2>
-            {INDEX_PDF[c.id] && (
-              <p className="mt-2 max-w-[46em] text-[13px] leading-relaxed text-ink-700">
-                <a href={INDEX_PDF[c.id]} target="_blank" rel="noopener noreferrer" className={link}>
-                  Index des résultats (PDF)
-                </a>{' '}
-                — one line per result, definition or example, in our own words, with a link to the moment of the tape;
-                an index, not a transcription.
-              </p>
-            )}
-            {c.videos.map((v) => (
-              <div key={v.id} className="mt-5">
-                <p className="text-[13.5px] font-semibold text-ink-800">
-                  Part {v.part} of {v.of} · {hms(v.duration)}{' '}
-                  <a href={`https://www.youtube.com/watch?v=${v.id}`} target="_blank" rel="noopener noreferrer" className={`ml-1 text-[12px] ${link}`}>
-                    YouTube ↗
-                  </a>
+        {CAT.courses
+          .filter((c) => c.id === course)
+          .map((c) => (
+            <section key={c.id} id={c.id} className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
+              <div className="min-w-0">
+                <h2 className="titre text-[24px] text-ink-900">{c.title}</h2>
+                <p className="mt-2 max-w-[46em] text-[13px] leading-relaxed text-ink-600">
+                  Index of results: one line per result, definition or example, in our own words, with the moment of
+                  the tape; an index, not a transcription.
+                  {indexes?.[c.id] && (
+                    <>
+                      {' '}
+                      {indexes[c.id].entries} entries ·{' '}
+                      <a href={indexes[c.id].pdf} target="_blank" rel="noopener noreferrer" className={link}>
+                        PDF
+                      </a>
+                    </>
+                  )}
                 </p>
-                <ul className="mt-2 grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
-                  {v.segments.map((s) => (
-                    <li key={s.start}>
-                      <button
-                        type="button"
-                        onClick={() => play(v.id, s.start)}
-                        title={s.note}
-                        aria-current={playing?.id === v.id && playing.t === s.start ? 'true' : undefined}
-                        className="flex w-full items-baseline justify-between gap-2 rounded-lg border border-ink-200 px-3 py-1.5 text-left text-[12.5px] text-ink-700 hover:border-brand-500 hover:bg-brand-50 aria-[current=true]:border-brand-500 aria-[current=true]:bg-brand-50"
-                      >
-                        <span>
-                          <span className="font-medium text-ink-900">{s.date ? day(s.date) : 'Undated'}</span> · {s.tape}
-                          {s.bad && <span className="text-ink-400"> · bad tape</span>}
-                          {s.note && <span className="text-ink-400"> · new session</span>}
-                        </span>
-                        <span className="tabular shrink-0 text-[11.5px] text-ink-400">{hms(s.start)}</span>
-                      </button>
-                    </li>
+
+                <details className="mt-4 rounded-xl border border-ink-200 px-4 py-2">
+                  <summary className="cursor-pointer text-[13px] font-semibold text-ink-800">
+                    Tape sides ({SEGMENTS(c).length})
+                  </summary>
+                  {c.videos.map((v) => (
+                    <div key={v.id} className="mt-3">
+                      <p className="text-[12.5px] font-semibold text-ink-800">
+                        Part {v.part} of {v.of} · {hms(v.duration)}{' '}
+                        <a href={`https://www.youtube.com/watch?v=${v.id}`} target="_blank" rel="noopener noreferrer" className={`ml-1 text-[12px] ${link}`}>
+                          YouTube ↗
+                        </a>
+                      </p>
+                      <ul className="mt-1.5 grid gap-1.5 sm:grid-cols-2">
+                        {v.segments.map((s) => (
+                          <li key={s.start}>
+                            <button
+                              type="button"
+                              onClick={() => play(v.id, s.start)}
+                              title={s.note}
+                              aria-current={playing?.id === v.id && playing.t === s.start ? 'true' : undefined}
+                              className="flex w-full items-baseline justify-between gap-2 rounded-lg border border-ink-200 px-3 py-1.5 text-left text-[12px] text-ink-700 hover:border-brand-500 hover:bg-brand-50 aria-[current=true]:border-brand-500 aria-[current=true]:bg-brand-50"
+                            >
+                              <span>
+                                <span className="font-medium text-ink-900">{s.date ? day(s.date) : 'Undated'}</span> · {s.tape}
+                                {s.bad && <span className="text-ink-400"> · bad tape</span>}
+                                {s.note && <span className="text-ink-400"> · new session</span>}
+                              </span>
+                              <span className="tabular shrink-0 text-[11px] text-ink-400">{hms(s.start)}</span>
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
-                </ul>
+                </details>
+
+                <div className="mt-6">
+                  {indexes?.[c.id] ? (
+                    <CourseIndexView index={indexes[c.id]} playing={playing} onPlay={play} />
+                  ) : (
+                    <p className="text-[13px] text-ink-400">Loading the index…</p>
+                  )}
+                </div>
               </div>
-            ))}
-          </section>
-        ))}
+
+              {/* The player, as on the morphology site: sticky beside the index on a large screen, so one reads and
+                  listens at once; anchored to the bottom on a phone. */}
+              <aside>
+                {video && playing ? (
+                  <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ink-200 bg-white lg:sticky lg:inset-x-auto lg:bottom-auto lg:top-20 lg:z-auto lg:border-0 lg:bg-transparent">
+                    <div className="overflow-hidden bg-ink-900 lg:rounded-xl">
+                      <div className="aspect-video w-full">
+                        <Player id={playing.id} t={playing.t} onTime={setNow} seek={seek} />
+                      </div>
+                      <div className="flex items-center gap-2 px-3 py-1.5">
+                        <p className="min-w-0 flex-1 truncate text-[12.5px] text-ink-100">
+                          {video.title}, from {hms(playing.t)}
+                        </p>
+                        <button
+                          type="button"
+                          onClick={close}
+                          aria-label="Stop the video"
+                          title="Stop the video (Esc)"
+                          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/30 text-[13px] text-white/75 hover:bg-white/15"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    </div>
+                    {/* The reconstructed blackboard, where one exists for the side being played. */}
+                    {board && (
+                      <div className="mt-3 hidden h-[55vh] lg:block">
+                        <Suspense fallback={null}>
+                          <Blackboard board={board} now={now} onSeek={(s) => setSeek({ t: s })} />
+                        </Suspense>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="sticky top-20 hidden rounded-xl border border-dashed border-ink-300 px-4 py-5 text-[13px] leading-relaxed text-ink-500 lg:block">
+                    <p className="font-semibold text-ink-700">The player opens here</p>
+                    <p className="mt-1">Click a timestamp: the tape plays from that moment beside the index.</p>
+                  </div>
+                )}
+                {video && playing && <div aria-hidden="true" className="lg:hidden" style={{ height: 'calc(56.25vw + 2.75rem)' }} />}
+              </aside>
+            </section>
+          ))}
 
         <p className="mt-10 text-[12px] text-ink-400">
           Grothendieck at Buffalo 1973, tapes preserved and transmitted by John Duskin and William Lawvere,
