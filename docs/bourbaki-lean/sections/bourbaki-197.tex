@@ -17,8 +17,31 @@ Sur $k = \mathbf F_2$, le polynôme $P = x^3 + x + 1$ est irréductible, l'annea
 \begin{proof}
 Le polynôme $P$ est de degré~$3$ et n'a pas de racine dans $\mathbf F_2$ ($P(0) = P(1) = 1$) ; il est donc irréductible. Ce n'est pas un carré dans $\mathbf F_2[x]$, son degré étant impair. Le polynôme $y^2 - P$, unitaire en $y$, est alors irréductible sur $\mathbf F_2[x]$ : une racine $r$ dans le corps $\mathbf F_2(x)$ serait entière sur l'anneau factoriel, donc intégralement clos, $\mathbf F_2[x]$, donc dans $\mathbf F_2[x]$, et $r^2 = P$ serait un carré. Comme $\mathbf F_2[x, y]$ est factoriel, $y^2 - P$ est premier, et $A$ est intègre.
 
-En caractéristique~$2$, $(y + 1)^2 = y^2 + 1 = x^3 + x = x(x + 1)^2$. Dans le corps des fractions de $A$, $x + 1$ n'est pas nul, car sa valeur au point $(0, 1)$ de la courbe vaut~$1$. La fraction $t = (y + 1)/(x + 1)$ vérifie donc $t^2 = x$ : elle est racine du polynôme unitaire $T^2 - x$, et entière sur $A$. Il reste à voir que $x + 1$ ne divise pas $y + 1$ dans $A$. On utilise l'anneau des nombres duaux $\mathbf F_2[\varepsilon]$, $\varepsilon^2 = 0$, et l'homomorphisme $\psi : A \to \mathbf F_2[\varepsilon]$ qui envoie $x$ sur $1$ et $y$ sur $1 + \varepsilon$ ; il est bien défini, car $(1 + \varepsilon)^2 = 1 + 2\varepsilon + \varepsilon^2 = 1 = P(1)$. C'est le point singulier $(1, 1)$, muni d'un vecteur tangent vertical. Alors $\psi(x + 1) = 0$ et $\psi(y + 1) = \varepsilon \neq 0$ ; si $y + 1 = s(x + 1)$, on aurait $\varepsilon = \psi(s) \cdot 0 = 0$. Donc $t \notin A$.
+En caractéristique~$2$, $(y + 1)^2 = y^2 + 1 = x^3 + x = x(x + 1)^2$. Dans le corps des fractions de $A$, $x + 1$ n'est pas nul, car sa valeur au point $(0, 1)$ de la courbe vaut~$1$. La fraction $t = (y + 1)/(x + 1)$ vérifie donc $t^2 = x$ : elle est racine du polynôme unitaire $T^2 - x$, et entière sur $A$. Il reste à voir que $x + 1$ ne divise pas $y + 1$ dans $A$. On utilise l'anneau des nombres duaux $\mathbf F_2[\varepsilon]$, $\varepsilon^2 = 0$, et l'homomorphisme $\psi : A \to \mathbf F_2[\varepsilon]$ qui envoie $x$ sur $1$ et $y$ sur $1 + \varepsilon$ ; il est bien défini, car $(1 + \varepsilon)^2 = 1 + 2\varepsilon + \varepsilon^2 = 1 = P(1)$. C'est le point singulier $(1, 1)$, muni d'un vecteur tangent vertical (figure~\ref{fig:bourbaki-197}). Alors $\psi(x + 1) = 0$ et $\psi(y + 1) = \varepsilon \neq 0$ ; si $y + 1 = s(x + 1)$, on aurait $\varepsilon = \psi(s) \cdot 0 = 0$. Donc $t \notin A$.
 \end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\draw[black!35] (0,0) -- (2,0) (0,0) -- (0,2) (2,0) -- (2,2) (0,2) -- (2,2);
+\draw[black!70] (0,0) circle (2.2pt);
+\draw[black!70] (2,0) circle (2.2pt);
+\fill[frise] (0,2) circle (2.2pt);
+\fill[frise] (2,2) circle (2.2pt);
+\draw[piste] (2,2) circle (5pt);
+\draw[->, piste, thick] (2,2.18) -- (2,3.0) node[right] {$\psi$ : $x \mapsto 1$, $y \mapsto 1 + \varepsilon$};
+\node[below] at (0,-0.1) {$0$};
+\node[below] at (2,-0.1) {$1$};
+\node[left] at (-0.1,0) {$0$};
+\node[left] at (-0.1,2) {$1$};
+\node[below] at (1,-0.55) {$x$};
+\node[left] at (-0.6,1) {$y$};
+\node[frise, above left] at (0,2.05) {$(0, 1)$};
+\node[frise, right=6pt] at (2,1.8) {$(1, 1)$, singulier};
+\end{tikzpicture}
+\caption{Les quatre points de $\mathbf F_2^2$ ; ceux de la courbe $y^2 = x^3 + x + 1$ sont $(0, 1)$ et $(1, 1)$ (en bleu), puisque $P(0) = P(1) = 1$. L'homomorphisme $\psi : A \to \mathbf F_2[\varepsilon]$ de la preuve est le point singulier $(1, 1)$ muni d'un vecteur tangent vertical : $\psi(x + 1) = 0$ et $\psi(y + 1) = \varepsilon$, de sorte que $x + 1$ ne peut diviser $y + 1$. Au point $(0, 1)$, au contraire, $x + 1$ vaut $1$.}
+\label{fig:bourbaki-197}
+\end{figure}
 
 \emph{Vérification en Lean.} Lean vérifie le contre-exemple dans \href{\leanblobmain/Redaction197.lean}{\texttt{Redaction197.\allowbreak{}lean}}, où l'anneau $A$ est construit comme $\mathbf F_2[x][y]/(y^2 - P)$ (\texttt{AdjoinRoot} de mathlib). L'irréductibilité de $P$ est \texttt{P\_irreducible}, celle de $y^2 - P$ est \texttt{f\_irreducible}, par le critère de mathlib \texttt{Monic.\allowbreak{}irreducible\_iff\_irreducible\_map\_fraction\_map}, et l'intégrité de $A$ est l'instance \texttt{isDomain}. L'identité $(y + 1)^2 = x(x + 1)^2$ est \texttt{key} ; l'homomorphisme vers les nombres duaux est \texttt{ψ}, et la non-divisibilité \texttt{not\_dvd}. La fraction $t$ est entière (\texttt{isIntegral\_t}) et ne vient pas de $A$ (\texttt{t\_not\_mem}) ; d'où \texttt{not\_isIntegrallyClosed}, et l'énoncé final \texttt{not\_page39}, qui réunit l'irréductibilité de $P$, l'intégrité de $A$ et l'échec de la normalité.
 

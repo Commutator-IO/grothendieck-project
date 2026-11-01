@@ -4,7 +4,33 @@ La rédaction \redac{476}, \q{Catégories. Chapitre~I. Diagrammes et graphes}, d
 
 \emph{Orientations.} Un graphe a des sommets et des arêtes, une arête joignant deux sommets distincts. L'orienter, c'est choisir pour chaque arête un sens : l'arête $\{v, w\}$ devient une flèche $v \to w$ ou $w \to v$. Un arbre est un graphe connexe sans cycle : entre deux sommets, il y a un seul chemin sans retour en arrière. Dans un arbre fini à $n$ sommets, il y a $n - 1$ arêtes ; on ne peut donc pas l'orienter de façon que chaque sommet soit la source d'exactement une flèche, car il faudrait $n$ flèches. L'exercice~2 affirme que c'est possible pour tout arbre infini.
 
-\emph{Le contre-exemple.} L'étoile infinie, un centre relié à une infinité dénombrable de feuilles, est un arbre infini. Une feuille n'a qu'une arête, qui doit partir d'elle ; toutes les arêtes pointent donc vers le centre, et le centre n'est la source d'aucune flèche.
+\emph{Le contre-exemple.} L'étoile infinie, un centre relié à une infinité dénombrable de feuilles, est un arbre infini. Une feuille n'a qu'une arête, qui doit partir d'elle ; toutes les arêtes pointent donc vers le centre, et le centre n'est la source d'aucune flèche (figure~\ref{fig:bourbaki-476}).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\begin{scope}
+\fill (0,0) circle (2pt);
+\foreach \k in {0,...,8} {
+  \fill ({90+\k*36}:1.35) circle (1.7pt);
+  \draw[->, frise, shorten >=3pt, shorten <=3pt] ({90+\k*36}:1.35) -- (0,0);
+}
+\foreach \k in {9} { \draw[black!45, dotted, thick] ({90+\k*36-8}:1.25) arc ({90+\k*36-8}:{90+\k*36+8}:1.25); }
+\node at (0,-1.95) {l'étoile infinie};
+\end{scope}
+\begin{scope}[xshift=4.2cm, yshift=-0.5cm]
+\node (a) at (0,0) {$a$};
+\node (c) at (1.2,1.3) {$c$};
+\node (b) at (2.4,0) {$b$};
+\draw[->, frise] (a) -- (b);
+\draw[->, frise] (a) -- (c);
+\draw[->, frise] (c) -- (b);
+\node at (1.2,-1.45) {le carquois de l'exercice~3};
+\end{scope}
+\end{tikzpicture}
+\caption{À gauche, l'étoile infinie, dont on dessine neuf feuilles : l'arête d'une feuille doit partir d'elle, toutes les flèches vont au centre, et le centre n'est la source d'aucune flèche. À droite, le carquois $a \to b$, $a \to c$, $c \to b$ : il n'a pas de chemin fermé, et ses deux chemins de $a$ à $b$, de longueurs $1$ et $2$, interdisent tout morphisme vers $\mathbf Z$ ou $\mathbf Z/d$ pour $d \ne 1$.}
+\label{fig:bourbaki-476}
+\end{figure}
 
 \emph{Ce qui est vrai.} L'énoncé tient pour les arbres qui ont un \emph{rayon}, c'est-à-dire un chemin infini $f(0), f(1), f(2), \dots$ qui ne repasse jamais par le même sommet. Il suffit d'orienter chaque arête vers le côté où file le rayon. Si l'on retire l'arête $\{v, w\}$, l'arbre se coupe en deux morceaux, et le rayon finit dans l'un d'eux ; on oriente $v \to w$ si c'est celui de $w$. Dans un arbre infini où chaque sommet n'a qu'un nombre fini de voisins, un rayon existe toujours, par le lemme de König. C'est sans doute le cas que l'exercice avait en vue.
 

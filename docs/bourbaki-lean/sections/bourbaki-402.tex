@@ -23,10 +23,39 @@ L'espace est alors connexe. La rédaction le suppose connexe ; avec la définiti
 \begin{proof}
 a) Soient $d_1$ et $d_2$ les deux distances, égales sur le voisinage $W$. Pour une $W$-chaîne de $a$ à $b$, on a $d_1(a, b) \leq \sum d_1(x_i, x_{i+1}) = \sum d_2(x_i, x_{i+1})$, la première inégalité par l'inégalité triangulaire, l'égalité parce que chaque pas est dans $W$. Comme $d_2$ est localisable, le membre de droite peut être rendu $< d_2(a, b) + \delta$ pour tout $\delta > 0$. Donc $d_1 \leq d_2$, et par symétrie $d_1 = d_2$.
 
-b) Le cœur est le suivant : pour tout $\varepsilon > 0$, il existe $c$ dans la frontière avec $d(a, c) + d(c, b) < d(a, b) + \varepsilon$. Si $a$ ou $b$ est sur la frontière, on le prend pour $c$. Sinon, $a$ est intérieur à $A$ et $b$ extérieur. Soit $V$ l'ensemble des points à distance $< \varepsilon/3$ de la frontière, et $W$ la réunion de trois carrés : intérieur de $A$ fois lui-même, $V \times V$, extérieur de $A$ fois lui-même. C'est un ouvert, et il contient la diagonale, puisque tout point est intérieur, sur la frontière ou extérieur. Une $W$-chaîne de longueur $< d(a, b) + \varepsilon/3$ part de l'intérieur et finit à l'extérieur. Un pas dans le premier carré reste à l'intérieur, et un pas ne peut passer de l'intérieur à l'extérieur que par $V \times V$ ; la chaîne a donc un point $x_i$ dans $V$, à distance $< \varepsilon/3$ d'un point $c$ de la frontière. En coupant la chaîne en $x_i$, on a $d(a, x_i) + d(x_i, b) < d(a, b) + \varepsilon/3$, et deux inégalités triangulaires par $c$ donnent la conclusion. L'inégalité inverse, $d(a, b) \leq d(a, c) + d(c, b)$, est l'inégalité triangulaire.
+b) Le cœur est le suivant : pour tout $\varepsilon > 0$, il existe $c$ dans la frontière avec $d(a, c) + d(c, b) < d(a, b) + \varepsilon$. Si $a$ ou $b$ est sur la frontière, on le prend pour $c$. Sinon, $a$ est intérieur à $A$ et $b$ extérieur. Soit $V$ l'ensemble des points à distance $< \varepsilon/3$ de la frontière, et $W$ la réunion de trois carrés : intérieur de $A$ fois lui-même, $V \times V$, extérieur de $A$ fois lui-même. C'est un ouvert, et il contient la diagonale, puisque tout point est intérieur, sur la frontière ou extérieur. Une $W$-chaîne de longueur $< d(a, b) + \varepsilon/3$ part de l'intérieur et finit à l'extérieur. Un pas dans le premier carré reste à l'intérieur, et un pas ne peut passer de l'intérieur à l'extérieur que par $V \times V$ ; la chaîne a donc un point $x_i$ dans $V$, à distance $< \varepsilon/3$ d'un point $c$ de la frontière (figure~\ref{fig:bourbaki-402}). En coupant la chaîne en $x_i$, on a $d(a, x_i) + d(x_i, b) < d(a, b) + \varepsilon/3$, et deux inégalités triangulaires par $c$ donnent la conclusion. L'inégalité inverse, $d(a, b) \leq d(a, c) + d(c, b)$, est l'inégalité triangulaire.
 
 c) Les corollaires en découlent. Pour la boule ouverte, un point $b$ de la sphère est approché par des points $c$ de la frontière de la boule ; une telle frontière est toujours contenue dans la sphère. Pour le dernier, la frontière de la boule est un fermé du compact, et la fonction $c \mapsto d(c, b)$ y atteint son minimum, qui vaut $d(a, b) - r$ par b). Enfin, si $X$ était réunion de deux ouverts fermés disjoints non vides $A$ et son complémentaire, b) donnerait un point de la frontière de $A$, qui est vide : $X$ est connexe.
 \end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.3, every node/.style={font=\small}]
+\fill[black!9] (0,0) circle (1.8);
+\draw[black!45, dashed] (0,0) circle (1.45);
+\draw[black!45, dashed] (0,0) circle (2.15);
+\draw[thick] (0,0) circle (1.8);
+\node at (-0.7,-1.0) {$A$};
+\draw[frise, thick] (-1,-0.2) -- (-0.3,0.1) -- (0.4,0.0) -- (1.0,0.2) -- (1.5,0.35) -- (1.95,0.45) -- (2.8,0.4) -- (3.6,0.35) -- (4.3,0.5);
+\fill[frise] (-1,-0.2) circle (1.5pt);
+\fill[frise] (-0.3,0.1) circle (1.5pt);
+\fill[frise] (0.4,0.0) circle (1.5pt);
+\fill[frise] (1.0,0.2) circle (1.5pt);
+\fill[frise] (1.5,0.35) circle (1.5pt);
+\fill[frise] (1.95,0.45) circle (1.5pt);
+\fill[frise] (2.8,0.4) circle (1.5pt);
+\fill[frise] (3.6,0.35) circle (1.5pt);
+\fill[frise] (4.3,0.5) circle (1.5pt);
+\node[below left=-1pt] at (-1,-0.2) {$a$};
+\node[right=1pt] at (4.3,0.5) {$b$};
+\node[frise, below=2pt] at (1.5,0.35) {$x_i$};
+\fill[piste] (1.753,0.409) circle (1.6pt);
+\node[piste, above=1pt] at (1.753,0.409) {$c$};
+\draw[black!45] (125:1.98) -- (125:2.6) node[above left=-2pt] {$V$};
+\end{tikzpicture}
+\caption{La preuve de la proposition~2\,b) dans le plan euclidien, dont la distance est localisable. La partie $A$ est le disque grisé, sa frontière le cercle en trait plein, et $V$, la bande entre les deux cercles en tirets, est formée des points à distance $< \varepsilon/3$ de la frontière. Une $W$-chaîne de $a$ à $b$ (en bleu) ne peut passer de l'intérieur de $A$ à son extérieur que par un pas dans $V \times V$ : elle a un point $x_i$ dans $V$, à distance $< \varepsilon/3$ d'un point $c$ de la frontière.}
+\label{fig:bourbaki-402}
+\end{figure}
 
 \emph{La note manuscrite.} Appelons $\varepsilon$-localisable une distance qui vérifie la définition pour les seuls voisinages $\{d < \varepsilon\}$. Sur $\mathbf Q$, la distance usuelle est $\varepsilon$-localisable : une progression arithmétique de $a$ à $b$ en $n$ pas a pour longueur exactement $|b - a|$, avec des pas aussi petits qu'on veut. Mais $\mathbf Q$ n'est pas connexe, donc n'est pas localisable, et la proposition~2 y est fausse : pour $A = \{x < \sqrt 2\}$, ouvert et fermé dans $\mathbf Q$, la frontière est vide. La forme proposée en regard ne suffit donc pas à la démonstration de la page.
 

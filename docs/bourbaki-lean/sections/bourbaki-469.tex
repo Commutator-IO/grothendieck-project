@@ -12,8 +12,17 @@ Soit $\mathcal C$ une catégorie non vide. Le foncteur $\mathrm{const} : \mathca
 
 \emph{L'idée.} La limite $L$ est un foncteur, et chacune de ses valeurs $L(d)$ porte un cône sur $F$. Ce cône, rendu constant, donne une flèche $u_d$ du foncteur constant de valeur $L(d)$ vers $L$. On recolle ensuite les composantes diagonales $(u_d)_d$ en un endomorphisme de $L$, compatible aux projections ; par l'unicité dans la propriété universelle de $L$, c'est l'identité. Cette identité sur la diagonale suffit à donner, en chaque $d$, l'unicité qui manquait.
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzcd}[column sep=large]
+\mathrm{const}\, L(d) \arrow[r, "u_d"] \arrow[rr, bend right=18, "\mathrm{const}\,(\pi_j)_d"'] & L \arrow[r, "\pi_j"] & \mathrm{const}\, F(j)
+\end{tikzcd}
+\caption{La flèche $u_d$ de la preuve, dans la catégorie de foncteurs $\mathcal A^{\mathcal C}$. Les composantes $(\pi_j)_d : L(d) \to F(j)$ forment un cône sur $F$ ; rendu constant, il se factorise par la limite $L$ de $\mathrm{const} \circ F$. Les composantes diagonales $(u_d)_d : L(d) \to L(d)$ forment un endomorphisme de $L$ compatible aux projections $\pi_j$, qui est donc l'identité.}
+\label{fig:bourbaki-469}
+\end{figure}
+
 \begin{proof}
-Notons $\pi_j : L \to \mathrm{const}\, F(j)$ les projections de la limite. En un objet $d$, les composantes $(\pi_j)_d : L(d) \to F(j)$ forment un cône sur $F$. Le cône constant correspondant se factorise par $L$ : il existe $u_d : \mathrm{const}\, L(d) \to L$ avec $\pi_j \circ u_d = \mathrm{const}\,(\pi_j)_d$. Pour une flèche $f : d \to d'$, les deux flèches $u_{d'} \circ \mathrm{const}\, L(f)$ et $u_d$ ont les mêmes composés avec les projections, donc sont égales. Cette relation dit que les composantes $(u_d)_d : L(d) \to L(d)$ forment une transformation naturelle $w : L \to L$. Elle vérifie $\pi_j \circ w = \pi_j$ pour tout $j$, donc $w = \mathrm{id}_L$ : chaque $(u_d)_d$ est l'identité de $L(d)$.
+Notons $\pi_j : L \to \mathrm{const}\, F(j)$ les projections de la limite. En un objet $d$, les composantes $(\pi_j)_d : L(d) \to F(j)$ forment un cône sur $F$. Le cône constant correspondant se factorise par $L$ : il existe $u_d : \mathrm{const}\, L(d) \to L$ avec $\pi_j \circ u_d = \mathrm{const}\,(\pi_j)_d$ (figure~\ref{fig:bourbaki-469}). Pour une flèche $f : d \to d'$, les deux flèches $u_{d'} \circ \mathrm{const}\, L(f)$ et $u_d$ ont les mêmes composés avec les projections, donc sont égales. Cette relation dit que les composantes $(u_d)_d : L(d) \to L(d)$ forment une transformation naturelle $w : L \to L$. Elle vérifie $\pi_j \circ w = \pi_j$ pour tout $j$, donc $w = \mathrm{id}_L$ : chaque $(u_d)_d$ est l'identité de $L(d)$.
 
 Montrons que $L(d)$ est une limite de $F$. Un cône $s$ de sommet $X$ sur $F$ donne, rendu constant, une flèche $\mathrm{const}\, X \to L$, dont la composante en $d$ est une flèche $X \to L(d)$ compatible au cône. Pour l'unicité, soient $m, m' : X \to L(d)$ deux flèches compatibles. Les flèches $u_d \circ \mathrm{const}\, m$ et $u_d \circ \mathrm{const}\, m'$ de $\mathrm{const}\, X$ vers $L$ ont les mêmes composés avec les projections, donc sont égales ; leurs composantes en $d$ sont $(u_d)_d \circ m = m$ et $m'$. Ainsi $m = m'$. Comme $L(d)$ et $L(d')$ sont deux limites du même diagramme, la flèche $L(f)$, compatible aux cônes, est l'isomorphisme canonique entre elles.
 

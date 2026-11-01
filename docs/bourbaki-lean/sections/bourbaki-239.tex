@@ -15,8 +15,65 @@ Sur $X = [0, 1]$, le faisceau $U \mapsto C(U, \mathbf T)$ des applications conti
 \begin{proof}
 \emph{Pas fin.} Soit $(\varphi_U)$ une famille d'endomorphismes des groupes $C(U, \mathbf T)$, compatible aux restrictions, qui soit l'identité sur un voisinage ouvert d'un point $p$ et triviale sur un voisinage ouvert d'un point $q$. L'image $g = \varphi_X(-1)$ vérifie $g^2 = \varphi_X(1) = 1$ ; elle est donc à valeurs dans $\{\pm 1\}$, et constante puisque $X$ est connexe. Près de $p$, elle vaut $-1$ ; près de $q$, elle vaut $1$. C'est absurde. Pour $X = [0, 1]$, il suffit de prendre $F = \{0\}$ et $V = [0, 1[$.
 
-\emph{Mou.} Soient $K$ un fermé de $[0, 1]$, $U$ un ouvert qui le contient et $f : [0, 1] \to \mathbf T$ une application continue sur $U$ (ses valeurs ailleurs sont quelconques). On découpe $[0, 1]$ en $M$ intervalles de longueur $1/M$, assez fins pour que tout intervalle qui rencontre le $1/M$-voisinage de $K$ soit contenu dans $U$ et que $f$ y varie de moins de $1$ ; on appelle ces intervalles les bons. Sur un bon intervalle $[x_i, x_{i+1}]$, le quotient $f(t)/f(x_i)$ reste dans le demi-plan droit, et son argument $\Delta_i(t)$ est une fonction continue ; on la prolonge à tout $[0, 1]$ en bloquant $t$ aux bornes de l'intervalle. Sur un mauvais intervalle, on fait tourner $\Delta_i$ linéairement de $0$ à l'argument de $f(x_{i+1})/f(x_i)$. L'application globale est $g = f(0)\, e^{i\sum_i \Delta_i}$. Le produit se télescope, et sur chaque bon intervalle il redonne $f$ ; comme les bons intervalles couvrent un voisinage de $K$, $g$ coïncide avec $f$ près de $K$. La construction n'utilise pas la théorie des revêtements.
+\emph{Mou.} Soient $K$ un fermé de $[0, 1]$, $U$ un ouvert qui le contient et $f : [0, 1] \to \mathbf T$ une application continue sur $U$ (ses valeurs ailleurs sont quelconques). On découpe $[0, 1]$ en $M$ intervalles de longueur $1/M$, assez fins pour que tout intervalle qui rencontre le $1/M$-voisinage de $K$ soit contenu dans $U$ et que $f$ y varie de moins de $1$ ; on appelle ces intervalles les bons. Sur un bon intervalle $[x_i, x_{i+1}]$, le quotient $f(t)/f(x_i)$ reste dans le demi-plan droit, et son argument $\Delta_i(t)$ est une fonction continue ; on la prolonge à tout $[0, 1]$ en bloquant $t$ aux bornes de l'intervalle. Sur un mauvais intervalle, on fait tourner $\Delta_i$ linéairement de $0$ à l'argument de $f(x_{i+1})/f(x_i)$. L'application globale est $g = f(0)\, e^{i\sum_i \Delta_i}$. Le produit se télescope, et sur chaque bon intervalle il redonne $f$ ; comme les bons intervalles couvrent un voisinage de $K$, $g$ coïncide avec $f$ près de $K$ (figure~\ref{fig:bourbaki-239}). La construction n'utilise pas la théorie des revêtements.
 \end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[every node/.style={font=\small}]
+\fill[black!7] (0.77,-1.45) rectangle (3.63,1.95);
+\fill[black!7] (6.27,-1.45) rectangle (8.58,1.95);
+\node[black!60, above] at (2.2,1.95) {$U$};
+\node[black!60, above] at (7.42,1.95) {$U$};
+\draw[black!55] (0,-1.45) -- (11,-1.45);
+\foreach \j in {0,...,20} { \draw[black!55] ({0.55*\j},-1.52) -- ({0.55*\j},-1.38); }
+\draw[piste, line width=2.4pt] (1.65,-1.45) -- (2.75,-1.45);
+\draw[piste, line width=2.4pt] (7.15,-1.45) -- (7.70,-1.45);
+\node[piste, below] at (2.2,-1.52) {$K$};
+\node[piste, below] at (7.42,-1.52) {$K$};
+\node[below] at (0,-1.52) {$0$};
+\node[below] at (11,-1.52) {$1$};
+\draw[frise!55, line width=2.6pt, line join=round] (0.000,-0.330) -- (0.550,0.495);
+\draw[frise!55, line width=2.6pt, line join=round] (0.550,0.495) -- (1.100,0.647);
+\draw[frise!55, line width=2.6pt, line join=round] (1.100,0.647) -- (1.169,0.656) -- (1.238,0.664) -- (1.306,0.670) -- (1.375,0.675) -- (1.444,0.678) -- (1.513,0.680) -- (1.581,0.682) -- (1.650,0.682);
+\draw[frise!55, line width=2.6pt, line join=round] (1.650,0.682) -- (1.719,0.681) -- (1.788,0.680) -- (1.856,0.678) -- (1.925,0.676) -- (1.994,0.673) -- (2.062,0.670) -- (2.131,0.666) -- (2.200,0.662);
+\draw[frise!55, line width=2.6pt, line join=round] (2.200,0.662) -- (2.269,0.657) -- (2.338,0.653) -- (2.406,0.648) -- (2.475,0.643) -- (2.544,0.638) -- (2.612,0.632) -- (2.681,0.626) -- (2.750,0.620);
+\draw[frise!55, line width=2.6pt, line join=round] (2.750,0.620) -- (2.819,0.613) -- (2.888,0.606) -- (2.956,0.598) -- (3.025,0.590) -- (3.094,0.580) -- (3.162,0.571) -- (3.231,0.560) -- (3.300,0.548);
+\draw[frise!55, line width=2.6pt, line join=round] (3.300,0.548) -- (3.850,0.660);
+\draw[frise!55, line width=2.6pt, line join=round] (3.850,0.660) -- (4.400,1.650);
+\draw[frise!55, line width=2.6pt, line join=round] (4.400,1.650) -- (4.950,0.770);
+\draw[frise!55, line width=2.6pt, line join=round] (4.950,0.770) -- (5.500,-0.550);
+\draw[frise!55, line width=2.6pt, line join=round] (5.500,-0.550) -- (6.050,0.110);
+\draw[frise!55, line width=2.6pt, line join=round] (6.050,0.110) -- (6.600,-1.077);
+\draw[frise!55, line width=2.6pt, line join=round] (6.600,-1.077) -- (6.669,-1.080) -- (6.738,-1.078) -- (6.806,-1.073) -- (6.875,-1.064) -- (6.944,-1.050) -- (7.012,-1.033) -- (7.081,-1.011) -- (7.150,-0.986);
+\draw[frise!55, line width=2.6pt, line join=round] (7.150,-0.986) -- (7.219,-0.957) -- (7.287,-0.924) -- (7.356,-0.888) -- (7.425,-0.848) -- (7.494,-0.805) -- (7.562,-0.760) -- (7.631,-0.711) -- (7.700,-0.660);
+\draw[frise!55, line width=2.6pt, line join=round] (7.700,-0.660) -- (7.769,-0.607) -- (7.837,-0.551) -- (7.906,-0.494) -- (7.975,-0.435) -- (8.044,-0.375) -- (8.113,-0.314) -- (8.181,-0.253) -- (8.250,-0.191);
+\draw[frise!55, line width=2.6pt, line join=round] (8.250,-0.191) -- (8.800,-0.880);
+\draw[frise!55, line width=2.6pt, line join=round] (8.800,-0.880) -- (9.350,0.440);
+\draw[frise!55, line width=2.6pt, line join=round] (9.350,0.440) -- (9.900,-1.045);
+\draw[frise!55, line width=2.6pt, line join=round] (9.900,-1.045) -- (10.450,-0.220);
+\draw[frise!55, line width=2.6pt, line join=round] (10.450,-0.220) -- (11.000,1.045);
+\draw[black!45, thin] (0.000,-0.330) -- (0.275,-0.503) -- (0.550,0.495) -- (0.660,0.406) -- (0.770,0.577);
+\draw[black!45, thin] (3.630,0.475) -- (3.740,-0.111) -- (3.850,0.660) -- (4.125,0.584) -- (4.400,1.650) -- (4.675,0.648) -- (4.950,0.770) -- (5.225,-1.015) -- (5.500,-0.550) -- (5.775,-1.171) -- (6.050,0.110) -- (6.160,1.277) -- (6.270,-1.011);
+\draw[black!45, thin] (8.580,0.104) -- (8.690,-0.440) -- (8.800,-0.880) -- (9.075,-0.514) -- (9.350,0.440) -- (9.625,1.747) -- (9.900,-1.045) -- (10.175,0.187) -- (10.450,-0.220) -- (10.725,1.274) -- (11.000,1.045);
+\draw[black, semithick] (0.770,0.577) -- (0.842,0.596) -- (0.913,0.613) -- (0.985,0.627) -- (1.056,0.640) -- (1.128,0.651) -- (1.199,0.660) -- (1.270,0.667) -- (1.342,0.672) -- (1.413,0.677) -- (1.485,0.680) -- (1.557,0.681) -- (1.628,0.682) -- (1.700,0.682) -- (1.771,0.681) -- (1.843,0.679) -- (1.914,0.676) -- (1.986,0.673) -- (2.057,0.670) -- (2.128,0.666) -- (2.200,0.662) -- (2.272,0.657) -- (2.343,0.653) -- (2.415,0.647) -- (2.486,0.642) -- (2.558,0.636) -- (2.629,0.631) -- (2.701,0.624) -- (2.772,0.618) -- (2.844,0.610) -- (2.915,0.603) -- (2.987,0.594) -- (3.058,0.585) -- (3.129,0.575) -- (3.201,0.565) -- (3.272,0.553) -- (3.344,0.540) -- (3.415,0.526) -- (3.487,0.510) -- (3.558,0.493) -- (3.630,0.475);
+\draw[black, semithick] (6.270,-1.011) -- (6.328,-1.029) -- (6.385,-1.044) -- (6.443,-1.056) -- (6.501,-1.066) -- (6.559,-1.074) -- (6.616,-1.078) -- (6.674,-1.080) -- (6.732,-1.079) -- (6.790,-1.075) -- (6.847,-1.068) -- (6.905,-1.058) -- (6.963,-1.046) -- (7.021,-1.030) -- (7.079,-1.012) -- (7.136,-0.991) -- (7.194,-0.968) -- (7.252,-0.942) -- (7.309,-0.913) -- (7.367,-0.882) -- (7.425,-0.848) -- (7.483,-0.813) -- (7.540,-0.775) -- (7.598,-0.735) -- (7.656,-0.693) -- (7.714,-0.650) -- (7.772,-0.605) -- (7.829,-0.558) -- (7.887,-0.510) -- (7.945,-0.461) -- (8.003,-0.411) -- (8.060,-0.361) -- (8.118,-0.309) -- (8.176,-0.258) -- (8.233,-0.205) -- (8.291,-0.153) -- (8.349,-0.101) -- (8.407,-0.049) -- (8.465,0.003) -- (8.522,0.054) -- (8.580,0.104);
+\fill[black!70] (0.000,-0.330) circle (1.5pt);
+\fill[black!70] (0.550,0.495) circle (1.5pt);
+\fill[black!70] (3.850,0.660) circle (1.5pt);
+\fill[black!70] (4.400,1.650) circle (1.5pt);
+\fill[black!70] (4.950,0.770) circle (1.5pt);
+\fill[black!70] (5.500,-0.550) circle (1.5pt);
+\fill[black!70] (6.050,0.110) circle (1.5pt);
+\fill[black!70] (8.800,-0.880) circle (1.5pt);
+\fill[black!70] (9.350,0.440) circle (1.5pt);
+\fill[black!70] (9.900,-1.045) circle (1.5pt);
+\fill[black!70] (10.450,-0.220) circle (1.5pt);
+\fill[black!70] (11.000,1.045) circle (1.5pt);
+\end{tikzpicture}
+\caption{La preuve de \q{mou} sur un exemple, avec $M = 20$. En abscisse, $[0, 1]$ et ses points de subdivision ; en ordonnée, un argument, c'est-à-dire un relevé dans $\mathbf R$ des valeurs dans le cercle. Le fermé $K$ est en rouge, l'ouvert $U$ en gris. L'application $f$ est continue sur $U$ (trait noir) et quelconque ailleurs (trait gris) ; les points gris sont ses valeurs aux points de subdivision hors de $U$. L'application globale $g$ (trait bleu large) coïncide avec $f$ sur les bons intervalles, ceux qui rencontrent le $1/M$-voisinage de $K$, et tourne à vitesse constante sur les autres, d'une valeur de $f$ à la suivante par le plus court arc.}
+\label{fig:bourbaki-239}
+\end{figure}
 
 \begin{sloppypar}
 \noindent\emph{Vérification en Lean.} \q{Pas fin} est \texttt{not\_exists\_endomorphism}, sur tout espace préconnexe, avec la restriction \texttt{Opens.\allowbreak{}res}, et \texttt{not\_fine\_unitInterval} pour $[0, 1]$, $F = \{0\}$ et $V = [0, 1[$ ; \q{mou} est \texttt{exists\_eqOn\_nhds} et \texttt{exists\_eqOn\_nhds'}, dont l'application globale est \texttt{globalMap}, dans \href{\leanblobmain/Redaction239.lean}{\texttt{Redaction239.\allowbreak{}lean}}.

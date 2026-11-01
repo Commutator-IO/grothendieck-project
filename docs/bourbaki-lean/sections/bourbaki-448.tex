@@ -15,8 +15,25 @@ Soient $\mathcal Y$ la catégorie à un objet et une flèche, $\mathcal X$ la ca
 \end{encadre}
 
 \begin{proof}
-Comme $\mathcal Y$ n'a qu'un objet et qu'une flèche, un objet sur un ensemble $T$ relativement à $F$ n'est qu'un point de $T$, et deux tels objets ont au plus une flèche entre eux, qui existe s'ils sont le même point. Un objet colibre sur $T$ est donc un point par lequel tout point de $T$ se factorise : il en existe un si et seulement si $T$ a un seul point. L'ensemble $D(1)$ en a deux, et n'a pas d'objet colibre. Sur le diagramme $D$, un objet relativement à $F_*$ est une famille compatible de points, un en $0$, un en $1$, le second image du premier. Le point de $D(0)$ est unique, et son image est $\mathrm{vrai}$ : il y a exactement une famille compatible, qui est donc colibre. Sa valeur en $1$ est un point de $D(1)$, qui ne peut être colibre puisque $D(1)$ n'en a pas.
+Comme $\mathcal Y$ n'a qu'un objet et qu'une flèche, un objet sur un ensemble $T$ relativement à $F$ n'est qu'un point de $T$, et deux tels objets ont au plus une flèche entre eux, qui existe s'ils sont le même point. Un objet colibre sur $T$ est donc un point par lequel tout point de $T$ se factorise : il en existe un si et seulement si $T$ a un seul point. L'ensemble $D(1)$ en a deux, et n'a pas d'objet colibre. Sur le diagramme $D$, un objet relativement à $F_*$ est une famille compatible de points, un en $0$, un en $1$, le second image du premier. Le point de $D(0)$ est unique, et son image est $\mathrm{vrai}$ : il y a exactement une famille compatible, qui est donc colibre (figure~\ref{fig:bourbaki-448}). Sa valeur en $1$ est un point de $D(1)$, qui ne peut être colibre puisque $D(1)$ n'en a pas.
 \end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=stealth, every node/.style={font=\small}]
+\draw[black!55] (0,0) ellipse (0.55 and 0.8);
+\node at (0,-1.15) {$D(0)$};
+\draw[black!55] (3.4,0) ellipse (0.95 and 1.0);
+\node at (3.4,-1.35) {$D(1)$};
+\fill[frise] (0,0) circle (2pt) node[left=2pt] {$\ast$};
+\fill[frise] (3.2,0.4) circle (2pt) node[right=2pt] {$\mathrm{vrai}$};
+\fill (3.2,-0.4) circle (2pt) node[right=2pt] {$\mathrm{faux}$};
+\draw[->, frise] (0.12,0.04) to[bend left=12] (3.08,0.38);
+\node[above] at (1.6,0.62) {$D(0 \to 1)$};
+\end{tikzpicture}
+\caption{Le diagramme $D$ de la réponse, sur la catégorie $I = \{0 \to 1\}$. Un objet relativement à $F_*$ est une famille compatible de points, un dans chaque $D(i)$ ; il n'y en a qu'une (en bleu), qui est donc colibre. Sa valeur en $1$, le point $\mathrm{vrai}$, n'est pas colibre sur $D(1)$ : un objet colibre sur $D(1)$ seul serait un point égal à tous les points de $D(1)$, qui en a deux.}
+\label{fig:bourbaki-448}
+\end{figure}
 
 \noindent\emph{Vérification en Lean.} Le diagramme est \texttt{D}, l'objet colibre sur $D$ est \texttt{cofree}, et le contre-exemple est \texttt{cofree\_not\_pointwise} : il réunit \texttt{isTerminalCofree} et \texttt{isEmpty\_isTerminal\_one}. Le cas des objets libres, dans la catégorie opposée à celle des ensembles et avec la valeur en $0$, est \texttt{free\_not\_pointwise}, dans \href{\leanblobmain/Redaction448.lean}{\texttt{Redaction448.\allowbreak{}lean}}.
 

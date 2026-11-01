@@ -11,6 +11,22 @@ A \arrow[r, "u"'] & Q
 \]
 le carré, avec $uV = vU$. Dans la catégorie des modules sur un anneau, le produit fibré de $u$ et $v$ est le sous-module $\{(a, b) \in A \oplus B : u(a) = v(b)\}$, c'est-à-dire le noyau de l'application $(a, b) \mapsto u(a) - v(b)$. Dire que le carré est cartésien, c'est dire que $p \mapsto (V(p), U(p))$ identifie $P$ à ce noyau. De même, la somme amalgamée de $V$ et $U$ est le quotient de $A \oplus B$ par les éléments $(V(p), -U(p))$, et le carré est cocartésien quand $(a, b) \mapsto u(a) + v(b)$ identifie $Q$ à ce quotient. La rédaction transporte ces deux descriptions dans une catégorie abélienne quelconque.
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzcd}
+T \arrow[drr, bend left=20, "y"] \arrow[ddr, bend right=20, "x"'] \arrow[dr, dashed] & & \\
+& P \arrow[r, "U"] \arrow[d, "V"'] & B \arrow[d, "v"] \\
+& A \arrow[r, "u"'] & Q
+\end{tikzcd}
+\qquad\qquad
+\begin{tikzcd}[column sep=large, row sep=large]
+& & T \arrow[dl, dashed] \arrow[d, "{(x,\,y)}"'] \arrow[dr, "0"] & \\
+0 \arrow[r] & P \arrow[r, "{(V,\,U)}"'] & A \oplus B \arrow[r, "u - v"'] & Q
+\end{tikzcd}
+\caption{À gauche, la propriété universelle du produit fibré : un couple de flèches $x : T \to A$, $y : T \to B$ tel que $ux = vy$ se factorise de façon unique par $P$ (en tirets). À droite, la même donnée lue dans $A \oplus B$ : la flèche $(x, y)$ a un composé nul avec $u - v$, et la factorisation par $P$ dit que $P$ est le noyau de $u - v$.}
+\label{fig:bourbaki-321}
+\end{figure}
+
 \begin{encadre}
 \begin{enonce}[Bourbaki, rédaction \redac{321}, proposition~2, p.~4]
 Le carré est cartésien si et seulement si la suite $0 \to P \to A \oplus B \to Q$, de flèches $(V, U)$ et $u - v$, est exacte. Il est cocartésien si et seulement si la suite $P \to A \oplus B \to Q \to 0$, de flèches $(V, -U)$ et $u + v$, est exacte.
@@ -18,7 +34,7 @@ Le carré est cartésien si et seulement si la suite $0 \to P \to A \oplus B \to
 \end{encadre}
 
 \begin{proof}
-Une flèche $T \to P$ et un couple $(x, y)$ de flèches $T \to A$, $T \to B$ avec $ux = vy$ sont deux façons de dire la même chose qu'une flèche $T \to A \oplus B$ dont le composé avec $u - v$ est nul. La propriété universelle du produit fibré dit alors exactement que $P$, par $(V, U)$, est le noyau de $u - v$ : c'est l'exactitude de la première suite, flèche de gauche comprise. La seconde moitié est la même chose, flèches renversées : la propriété de la somme amalgamée dit que $Q$, par $u + v$, est le conoyau de $(V, -U)$.
+Une flèche $T \to P$ et un couple $(x, y)$ de flèches $T \to A$, $T \to B$ avec $ux = vy$ sont deux façons de dire la même chose qu'une flèche $T \to A \oplus B$ dont le composé avec $u - v$ est nul (figure~\ref{fig:bourbaki-321}). La propriété universelle du produit fibré dit alors exactement que $P$, par $(V, U)$, est le noyau de $u - v$ : c'est l'exactitude de la première suite, flèche de gauche comprise. La seconde moitié est la même chose, flèches renversées : la propriété de la somme amalgamée dit que $Q$, par $u + v$, est le conoyau de $(V, -U)$.
 \end{proof}
 
 \noindent La rédaction utilise une seule convention de signe pour les deux suites. Les deux complexes diffèrent par l'automorphisme $(a, b) \mapsto (a, -b)$ de $A \oplus B$, qui ne change pas leur exactitude ; le fichier le vérifie (\texttt{shortComplexIso}).
