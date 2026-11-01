@@ -1,4 +1,5 @@
 import Bourbaki.Redaction128
+import Bourbaki.Redaction162
 import Bourbaki.Redaction197
 import Bourbaki.Redaction197Chow
 import Bourbaki.Redaction197Resultant

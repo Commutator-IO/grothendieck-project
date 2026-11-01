@@ -1,0 +1,28 @@
+\section[Rédaction Bourbaki \redac{162} : images des ensembles maigres par une application $C^1$]{Rédaction Bourbaki \redac{162} : une application $C^1$ de $\mathbf R^n$ dans $\mathbf R^n$ conserve les ensembles maigres\protect\verifie{Redaction162}}\label{sec:bourbaki-162}
+
+La rédaction \redac{162}, \q{Variétés différentiables. Chapitre I, différentielles (état 3)}, des archives Bourbaki (Archives Henri Poincaré, \ahp{573}) est de Dieudonné et date de mars 1952. Son §~2 démontre une majoration de la mesure extérieure de l'image $\theta(B)$ par l'intégrale de la valeur absolue du jacobien sur $B$, pour une application $\theta$ continûment différentiable d'un ouvert $A$ de $\mathbf R^n$ dans $\mathbf R^n$, puis en tire des conséquences de nature topologique. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+\emph{Les deux propositions.} La proposition~2 (p.~88 du fac-similé) dit que l'image de l'ensemble des points critiques, où le jacobien s'annule, est maigre, et même réunion dénombrable de compacts de mesure nulle. La proposition~3 (même page) dit que $\theta$ envoie toute partie maigre de $A$ sur une partie maigre de $\mathbf R^n$. La démonstration ramène le cas d'un fermé rare à celui d'un compact rare $B$, traite la partie critique par la proposition~2, recouvre le reste par un nombre fini d'ouverts sur lesquels $\theta$ est un homéomorphisme sur un ouvert, puis conclut par le théorème de Baire que $\theta(B)$, fermé et maigre, est rare.
+
+\emph{Le verdict.} Les deux énoncés sont exacts, et la démonstration aussi. On pourrait craindre qu'une fonction régulière envoie un ensemble de Cantor sur un intervalle, comme le fait la fonction de Cantor, qui n'est que continue ; en dimension égale c'est impossible pour une application $C^1$, la partie critique ayant une image négligeable et la partie régulière étant traitée par le théorème d'inversion locale. L'égalité des dimensions est en revanche indispensable : la première projection $\mathbf R^2 \to \mathbf R$ envoie la droite rare $\mathbf R \times \{0\}$ sur $\mathbf R$, et l'addition envoie le produit $C \times C$ de l'ensemble triadique de Cantor par lui-même, qui est rare, sur le segment $[0, 2]$.
+
+\begin{encadre}
+\begin{theoreme}[propositions~2 et~3 de la rédaction \redac{162}]\mbox{}
+Soient $E$ un espace normé réel de dimension finie, $A$ un ouvert de $E$ et $f : A \to E$ une application de classe $C^1$.
+\begin{enumerate}
+\item[a)] L'image par $f$ de l'ensemble des points de $A$ où $\det Df$ s'annule est maigre ; l'image de ses points situés dans un compact $C \subset A$ est rare.
+\item[b)] Pour toute partie maigre $B \subset A$, l'image $f(B)$ est maigre dans $E$.
+\item[c)] Il existe une application de classe $C^\infty$ de $\mathbf R^2$ dans $\mathbf R$ qui envoie une partie rare sur une partie non maigre.
+\end{enumerate}
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+a) Les points critiques situés dans $C$ forment un compact, puisque $x \mapsto \det Df(x)$ est continue sur $A$ ; son image est compacte et de mesure de Haar nulle par le lemme de Sard en dimension égale, donc fermée d'intérieur vide. L'ouvert $A$ est réunion dénombrable de boules fermées contenues dans $A$, d'où l'énoncé global. b) En un point régulier $x$, le théorème d'inversion locale fournit un voisinage ouvert $U$ de $x$ sur lequel $f$ est un homéomorphisme sur un ouvert ; une partie maigre de $E$ trace sur $U$ une partie maigre de $U$, dont l'image est maigre, un plongement conservant les ensembles maigres. L'ouvert des points réguliers est recouvert par une famille dénombrable de tels $U$ (l'espace est à base dénombrable), et $f(B)$ est contenu dans la réunion de l'image des points critiques et des images $f(B \cap U)$. c) La première projection convient, avec la partie $\mathbf R \times \{0\}$ ; son image $\mathbf R$ n'est pas maigre d'après le théorème de Baire.
+\end{proof}
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} a) est \texttt{isNowhereDense\_image\_critical} et \texttt{isMeagre\_image\_critical} ; b) est \texttt{exists\_nhds\_isMeagre\_image} puis \texttt{isMeagre\_image} ; c) est \texttt{not\_isMeagre\_fst\_image}, dans \href{\leanblobmain/Redaction162.lean}{\texttt{Redaction162.\allowbreak{}lean}}. Les preuves s'appuient sur le lemme de Sard de mathlib en dimension égale et sur son théorème d'inversion locale ; l'énoncé b) ne semble pas figurer dans mathlib. L'exemple de $C \times C$ n'est pas formalisé.
+\end{sloppypar}
+
+\litterature{le théorème de Sard (1942) donne, en dimension égale et en classe $C^1$, un ensemble de valeurs critiques négligeable, et l'on sait qu'il est aussi maigre. L'énoncé général \q{une application ayant la propriété de Sard conserve les ensembles maigres} figure, dans le cadre des structures définissablement complètes, chez Fornasiero et Servi (arXiv 0803.3560). Pour les applications $C^1$ de $\mathbf R^n$ dans $\mathbf R^n$, le résultat est de folklore ; on n'en a pas trouvé d'énoncé explicite dans un manuel. Le texte imprimé des \emph{Variétés} n'a pas été consulté.}
