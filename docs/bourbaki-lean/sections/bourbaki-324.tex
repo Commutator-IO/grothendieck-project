@@ -1,0 +1,25 @@
+\section[Rédaction Bourbaki \redac{324} : rang constant en caractéristique $p$]{Rédaction Bourbaki \redac{324} : rang constant en caractéristique $p$ sur un corps imparfait\protect\verifie{Redaction324}}\label{sec:bourbaki-324}
+
+La rédaction \redac{324}, \q{Variétés différentiables et analytiques. Fascicule de résultats (état 1)}, des archives Bourbaki (Archives Henri Poincaré, \ahp{755}) est de Serre et datée de juin 1959. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+Le corps de base $K$ est un corps valué complet. Au §~4, n\textsuperscript{o}~9 (pp.~44--45 du fac-similé), le texte énonce en caractéristique nulle l'équivalence de deux conditions : $f$ est de rang $r$ au voisinage de $P$ ; $f$ s'écrit $z'_i = z_i$ ($i \le r$), $z'_i = 0$ ($i > r$) dans des coordonnées locales convenables. Dans ses notes finales (p.~94, note~5 du §~4), le rédacteur observe qu'en caractéristique $p$ la seconde condition entraîne la première mais non l'inverse, $x \mapsto x^p$ étant partout de rang nul. Il propose de caractériser plutôt les applications qui s'écrivent localement $z'_i = z_i^{p^{k(i)}}$ ($i \le r$), $z'_i = 0$ ($i > r$), et se demande si ce sont exactement celles qui sont localement de rang constant pour les dérivations de toutes hauteurs.
+
+Sur un corps imparfait la réponse est non, pour toute notion de rang qui ne dépend que du germe de $f$ à translation près.
+
+\begin{encadre}
+\begin{contrexemple}[à la caractérisation envisagée dans la rédaction \redac{324}]\mbox{}
+Soit $K$ un corps valué complet non discret de caractéristique~$2$ et $t \in K$ qui n'est pas un carré, par exemple $K = \mathbf F_2(\!(t)\!)$. L'application polynomiale $f(x, y) = x^2 + t y^2$ de $K^2$ dans $K$ est additive, donc $f(P + h) = f(P) + f(h)$ et $f$ a le même germe en tout point à translation près ; sa différentielle est partout nulle. Elle est injective. Elle n'admet pourtant, au voisinage d'aucun point, d'expression $z'_1 = z_1^{2^k}$ ou $z'_1 = 0$ dans des coordonnées locales.
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+En caractéristique~$2$, $(x + x')^2 = x^2 + x'^2$, d'où l'additivité, et $d f = 2x\,dx + 2ty\,dy = 0$. Si $x^2 + t y^2 = 0$ avec $y \ne 0$, alors $t = (x/y)^2$, exclu ; donc $f$ a un noyau nul, et elle est injective. Une expression de la forme proposée, la cible étant de dimension~$1$, fait dépendre $f$ de la seule coordonnée $z_1$ sur un ouvert $U$ : deux points de $U$ de même $z_1$ et de $z_2$ distincts, qui existent puisque l'image de $U$ par la carte est ouverte et que $K$ n'a pas de point isolé, ont même image, contre l'injectivité.
+\end{proof}
+
+Le même exemple vaut en caractéristique $p$ avec $x^p + t y^p$, $t \notin K^p$ : il repose sur le fait que $\{1, t\}$ est une $p$-base, de sorte que $f$ est même une bijection de $K^2$ sur $K$. Sur un corps parfait cet obstacle disparaît, puisque $x^p + c\,y^p = (x + c^{1/p} y)^p$ ; la question y reste ouverte ici.
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} L'application est \texttt{sqForm} ; \texttt{sqForm\_add}, \texttt{hasFDerivAt\_sqForm} et \texttt{sqForm\_injective} donnent l'additivité, la différentielle nulle et l'injectivité, \texttt{not\_injOn\_of\_factor\_fst} l'argument de non-injectivité, \texttt{sqForm\_not\_normalForm} la conclusion, et \texttt{laurent\_X\_not\_square}, \texttt{sqForm\_laurent\_injective} l'exemple $\mathbf F_2(\!(X)\!)$, dans \href{\leanblobmain/Redaction324.lean}{\texttt{Redaction324.\allowbreak{}lean}}. Les cartes sont réduites à ce que l'argument utilise (une application d'image ouverte) ; ni les variétés analytiques ni les dérivations de Hasse--Schmidt ne sont formalisées.
+\end{sloppypar}
+
+\litterature{Serre, \emph{Lie Algebras and Lie Groups} (1964), partie~II, ch.~III, où le théorème du rang est énoncé en caractéristique nulle ; Bourbaki, \emph{Variétés différentielles et analytiques, fascicule de résultats} (1967), §~5 ; EGA~IV, §~17, et EGA~$0_{\mathrm{IV}}$, §~21 ($p$-bases) ; les travaux de Dieudonné sur les groupes formels en caractéristique $p$ (1955--1957). On n'a trouvé dans la littérature ni la question du rédacteur ni cet exemple dans le cadre des variétés analytiques.}

@@ -1,3 +1,4 @@
+import Bourbaki.Redaction089
 import Bourbaki.Redaction128
 import Bourbaki.Redaction162
 import Bourbaki.Redaction197
@@ -7,6 +8,7 @@ import Bourbaki.Redaction205
 import Bourbaki.Redaction239
 import Bourbaki.Redaction288
 import Bourbaki.Redaction321
+import Bourbaki.Redaction324
 import Bourbaki.Redaction355
 import Bourbaki.Redaction380
 import Bourbaki.Redaction384

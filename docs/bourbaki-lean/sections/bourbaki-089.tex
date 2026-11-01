@@ -1,0 +1,25 @@
+\section[Rédaction Bourbaki \redac{089} : la question mise au concours]{Rédaction Bourbaki \redac{089} : formes positives et intégrales sur le spectre\protect\verifie{Redaction089}}\label{sec:bourbaki-089}
+
+La rédaction \redac{089}, \q{Rapport sur la théorie des algèbres normées}, des archives Bourbaki (Archives Henri Poincaré, \ahp{497}) est le rapport de Godement, vers 1948. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+Au chapitre~II (pp.~130--133 du fac-similé), le théorème~3 dit ceci. Soit $A$ une $*$-algèbre de Banach commutative à involution continue et $f$ une forme linéaire continue positive, $f(x^*x) \ge 0$. Il existe une unique mesure de Radon positive $\mu_f$ sur le spectre telle que les transformées de Gelfand soient de carré intégrable et que $f(xyz) = \int \widehat{xyz}\, d\mu_f$ pour tous $x, y, z$. Le rapporteur remarque que la formule $f(x) = \int \hat x\, d\mu_f$ est fausse en général, que la formule à deux facteurs $f(xy) = \int \widehat{xy}\, d\mu_f$ vaut dans un exemple (c'est alors Plancherel), et ne sait pas la décider dans un second exemple ; il demande si elle vaut toujours, autrement dit si le théorème~3 est optimal, et met la question au concours.
+
+La réponse est non, et un contre-exemple de dimension deux suffit. Comme toute mesure qui vérifie la formule à deux facteurs vérifie celle à trois facteurs, elle est forcément $\mu_f$ ; il suffit donc d'exhiber $f$ telle que $\mu_f = 0$ et $f(xy) \ne 0$.
+
+\begin{encadre}
+\begin{contrexemple}[à la formule à deux facteurs de la rédaction \redac{089}]\mbox{}
+Soit $N$ la $\mathbf C$-algèbre de base $\varepsilon, \varepsilon^2$, avec $\varepsilon^3 = 0$, normée par $\|a\varepsilon + b\varepsilon^2\| = \max(|a|, |b|)$ et munie de l'involution $(a\varepsilon + b\varepsilon^2)^* = \bar a \varepsilon + \bar b \varepsilon^2$. Soit $f(a\varepsilon + b\varepsilon^2) = b$. Alors $N$ est une $*$-algèbre de Banach commutative à involution continue, $f$ est continue, positive et hermitienne, $N$ n'a aucun caractère, $f(xyz) = 0$ pour tous $x, y, z$, et $f(\varepsilon \cdot \varepsilon) = 1$. Aucune mesure sur le spectre ne représente $f$ sur les produits de deux éléments.
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+On a $(a\varepsilon + b\varepsilon^2)(c\varepsilon + d\varepsilon^2) = ac\,\varepsilon^2$, de norme $|a||c|$, et tout produit de trois éléments est nul. Pour $x = a\varepsilon + b\varepsilon^2$, $f(x^* x) = \bar a a = |a|^2 \ge 0$. Un caractère $\varphi$ vérifie $\varphi(x)^3 = \varphi(x^3) = 0$, donc est nul, ce qui est exclu : le spectre est vide, toute intégrale sur lui est nulle, ce qui donne la formule à trois facteurs et met en défaut celle à deux facteurs en $x = y = \varepsilon$.
+\end{proof}
+
+L'exemple est radical, mais la semi-simplicité ne sauve pas la formule. Sur l'algèbre des fonctions de classe $C^2$ sur $[0,1]$ nulles en $0$, produit ponctuel, conjugaison, norme $\sum_{k \le 2} \sup|x^{(k)}|/k!$, dont les caractères sont les évaluations en $t \in \mathopen]0,1]$, la forme $f(x) = x''(0)$ vérifie $f(\bar x x) = 2|x'(0)|^2 \ge 0$ et annule les produits de trois éléments, donc $\mu_f = 0$, alors que $f(t \cdot t) = 2$. Dans les deux cas l'algèbre n'a pas d'unité approchée bornée ; c'est ce qui rend $f$ non représentable. Dans l'exemple que le rapporteur laissait en suspens (fonctions intégrables de classe $C^1$ à transformée de Fourier portée par $\lambda > 0$, $f(x) = x'(0)/i$, $\mu_f = \lambda\,d\lambda$), la formule à deux facteurs est en revanche vraie : $\sqrt\lambda\,\hat x$ est de carré intégrable, donc $\lambda \hat x \hat y$ est intégrable et l'on dérive la formule d'inversion sous le signe somme.
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} L'algèbre $N$ est \texttt{Nil3} ; \texttt{Nil3.mul\_mul\_eq\_zero}, \texttt{Nil3.characterSpace\_eq\_empty}, \texttt{Nil3.coeff\_star\_mul\_self\_nonneg}, \texttt{Nil3.formula52} et \texttt{Nil3.not\_formula53} portent le contre-exemple, et \texttt{not\_formula53\_always} nie l'énoncé renforcé pour les $\mathbf C$-algèbres de Banach commutatives à involution continue, dans \href{\leanblobmain/Redaction089.lean}{\texttt{Redaction089.\allowbreak{}lean}}. L'exemple semi-simple et celui du rapporteur ne sont pas formalisés.
+\end{sloppypar}
+
+\litterature{Godement, \emph{Les fonctions de type positif et la théorie des groupes}, Trans. AMS 63 (1948) ; Naimark, \emph{Normed Rings} ; Rickart, \emph{General Theory of Banach Algebras} (1960), ch.~IV, formes positives représentables (\q{extendable}) ; Dixmier, \emph{Les C*-algèbres} (1964), ch.~2 ; Bonsall et Duncan, \emph{Complete Normed Algebras} (1973), §~37. La question à deux facteurs n'y est pas posée telle quelle ; les contre-exemples découlent de la notion de forme représentable.}
