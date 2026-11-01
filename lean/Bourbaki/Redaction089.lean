@@ -31,8 +31,25 @@ while `f (ε * ε) = 1` and any integral over the (empty) spectrum is `0`.
   there is a measure on the character space satisfying (53) », is false.
 
 The algebra used is radical. The question remains negative for semisimple algebras: on the
-functions of class `C²` on `[0, 1]` vanishing at `0`, the form `x ↦ x''(0)` is positive,
-kills triple products, and takes the value `2` on `t ↦ t²`; this is not formalised here.
+functions of class `C²` on `[0, 1]` vanishing at `0`, whose characters are the evaluations at
+`t ∈ (0, 1]`, the form `x ↦ x''(0)` is positive, kills triple products, and takes the value `2`
+on `t ↦ t²`. This is formalised on the subalgebra of real polynomials vanishing at `0`, with
+the evaluations at the points of `[0, 1]` for characters (the point `0` gives the zero
+functional, so allowing it only enlarges the class of measures):
+
+* `C2.secondDerivAtZero`: the form `x ↦ x''(0)` on `ℝ[X]`;
+* `C2.secondDerivAtZero_mul_mul`: it kills triple products of polynomials vanishing at `0`;
+* `C2.secondDerivAtZero_mul_self_nonneg`: it is positive, `f (x x) = 2 x'(0)² ≥ 0`
+  (`C2.secondDerivAtZero_mul_self`);
+* `C2.Formula52`, `C2.Formula53`: formulas (52) and (53) for a measure on `[0, 1]`;
+* `C2.formula52_zero`: (52) holds for the zero measure, so it is not vacuous;
+* `C2.not_formula53`: for every finite measure on `[0, 1]` satisfying (52), (53) fails at
+  `x = y = t`, since `∫ t³ dμ = 0` forces `∫ t² dμ = 0` while `f (t · t) = 2`;
+* `C2.not_formula52_and_formula53`: no finite measure on `[0, 1]` satisfies both.
+
+Not modelled for this example: the `C²` norm and completeness, the complex scalars and the
+involution (trivial on real polynomials), continuity of `f`, and the identification of the
+characters of the completed algebra with the evaluations, which stay in prose.
 -/
 
 open WeakDual MeasureTheory ComplexOrder
@@ -190,6 +207,82 @@ theorem not_formula53_always :
   let _ : MeasurableSpace (characterSpace ℂ Nil3) := ⊤
   obtain ⟨μ, hμ⟩ := h Nil3 coeff coeff_star_mul_self_nonneg
   exact not_formula53 μ (hμ eps eps)
+
+/-! ### The semisimple counterexample, on polynomials
+
+The algebra `{x ∈ C²[0, 1] : x 0 = 0}` is replaced by its subalgebra of real polynomials
+vanishing at `0`, the characters by the evaluations at the points of `[0, 1]`, and a measure on
+the spectrum by a finite measure on `[0, 1]`. -/
+
+namespace C2
+
+open Polynomial
+
+/-- The form `x ↦ x''(0)` on real polynomials. -/
+noncomputable def secondDerivAtZero (p : ℝ[X]) : ℝ := (derivative (derivative p)).eval 0
+
+/-- **The form kills triple products** of polynomials vanishing at `0`. -/
+theorem secondDerivAtZero_mul_mul {x y z : ℝ[X]} (hx : x.eval 0 = 0) (hy : y.eval 0 = 0)
+    (hz : z.eval 0 = 0) : secondDerivAtZero (x * y * z) = 0 := by
+  simp [secondDerivAtZero, derivative_mul, hx, hy, hz]
+
+/-- `(x x)''(0) = 2 x'(0)²` when `x 0 = 0`. -/
+theorem secondDerivAtZero_mul_self {x : ℝ[X]} (hx : x.eval 0 = 0) :
+    secondDerivAtZero (x * x) = 2 * (derivative x).eval 0 ^ 2 := by
+  simp [secondDerivAtZero, derivative_mul, hx]; ring
+
+/-- **The form is positive** on polynomials vanishing at `0` (the involution is trivial on real
+polynomials). -/
+theorem secondDerivAtZero_mul_self_nonneg {x : ℝ[X]} (hx : x.eval 0 = 0) :
+    0 ≤ secondDerivAtZero (x * x) := by
+  rw [secondDerivAtZero_mul_self hx]; positivity
+
+/-- `f (t · t) = 2`. -/
+theorem secondDerivAtZero_X_mul_X : secondDerivAtZero (X * X) = 2 := by
+  norm_num [secondDerivAtZero, derivative_mul]
+
+/-- Every polynomial is integrable for a finite measure on `[0, 1]`. -/
+theorem integrable_eval (μ : Measure (Set.Icc (0 : ℝ) 1)) [IsFiniteMeasure μ] (p : ℝ[X]) :
+    Integrable (fun t : Set.Icc (0 : ℝ) 1 => p.eval (t : ℝ)) μ :=
+  (p.continuous.comp continuous_subtype_val).integrable_of_hasCompactSupport
+    (HasCompactSupport.of_compactSpace _)
+
+/-- Formula (52) for the measure `μ` on `[0, 1]`, on polynomials vanishing at `0`. -/
+def Formula52 (μ : Measure (Set.Icc (0 : ℝ) 1)) : Prop :=
+  ∀ x y z : ℝ[X], x.eval 0 = 0 → y.eval 0 = 0 → z.eval 0 = 0 →
+    secondDerivAtZero (x * y * z) = ∫ t, (x * y * z).eval (t : ℝ) ∂μ
+
+/-- Formula (53) for the measure `μ` on `[0, 1]`, on polynomials vanishing at `0`. -/
+def Formula53 (μ : Measure (Set.Icc (0 : ℝ) 1)) : Prop :=
+  ∀ x y : ℝ[X], x.eval 0 = 0 → y.eval 0 = 0 →
+    secondDerivAtZero (x * y) = ∫ t, (x * y).eval (t : ℝ) ∂μ
+
+/-- **Formula (52) is satisfiable**: the zero measure satisfies it. -/
+theorem formula52_zero : Formula52 0 := fun _ _ _ hx hy hz => by
+  rw [integral_zero_measure, secondDerivAtZero_mul_mul hx hy hz]
+
+/-- **Formula (52) forces the failure of (53)** at `x = y = t`: from `∫ t³ dμ = f (t³) = 0`
+the measure is carried by `{0}`, so `∫ t² dμ = 0 ≠ 2 = f (t · t)`. -/
+theorem not_formula53 (μ : Measure (Set.Icc (0 : ℝ) 1)) [IsFiniteMeasure μ]
+    (h52 : Formula52 μ) :
+    secondDerivAtZero (X * X) ≠ ∫ t, (X * X : ℝ[X]).eval (t : ℝ) ∂μ := by
+  have h3 := h52 X X X eval_X eval_X eval_X
+  rw [secondDerivAtZero_mul_mul eval_X eval_X eval_X, eq_comm,
+    integral_eq_zero_iff_of_nonneg (fun t => by simp; have := t.2.1; positivity)
+      (integrable_eval μ _)] at h3
+  have h2 : (fun t : Set.Icc (0 : ℝ) 1 => (X * X : ℝ[X]).eval (t : ℝ)) =ᵐ[μ] 0 := by
+    filter_upwards [h3] with t ht
+    simp at ht ⊢
+    exact ht
+  rw [integral_congr_ae h2, secondDerivAtZero_X_mul_X]
+  simp
+
+/-- **No finite measure on `[0, 1]` satisfies both (52) and (53)** for the form `x ↦ x''(0)`. -/
+theorem not_formula52_and_formula53 (μ : Measure (Set.Icc (0 : ℝ) 1)) [IsFiniteMeasure μ] :
+    ¬ (Formula52 μ ∧ Formula53 μ) := fun ⟨h52, h53⟩ =>
+  not_formula53 μ h52 (h53 X X eval_X eval_X)
+
+end C2
 
 end Bourbaki.Redaction089
 
