@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 
@@ -48,10 +48,25 @@ export function Blackboard({ board, now, onSeek }: { board: Board; now: number; 
     if (el) el.scrollTo({ top: el.scrollHeight, behavior: shown - before.current === 1 ? 'smooth' : 'auto' });
     before.current = shown;
   }, [shown]);
+  // No horizontal scrolling: a line of chalk wider than the board (a long display formula) is
+  // written smaller until it fits, as one would on a real board.
+  useLayoutEffect(() => {
+    const fit = () =>
+      pane.current?.querySelectorAll<HTMLElement>('.chalk').forEach((b) => {
+        b.style.fontSize = '';
+        const w = b.clientWidth;
+        const need = Math.max(b.scrollWidth, ...[...b.querySelectorAll<HTMLElement>('.katex-display > .katex')].map((k) => k.scrollWidth));
+        if (need > w + 1) b.style.fontSize = `${(parseFloat(getComputedStyle(b).fontSize) * w) / need}px`;
+      });
+    fit();
+    const ro = new ResizeObserver(fit);
+    if (pane.current) ro.observe(pane.current);
+    return () => ro.disconnect();
+  }, [shown, html]);
 
   return (
     <div className="blackboard flex h-full flex-col rounded-xl border-[6px] border-[#5b4632] bg-[#1b1d1c] shadow-inner">
-      <div ref={pane} className="flex-1 overflow-y-auto px-5 py-4">
+      <div ref={pane} className="flex-1 overflow-y-auto overflow-x-hidden px-5 py-4">
         {board.items.slice(0, shown).map((i, k) => (
           <button
             key={k}
