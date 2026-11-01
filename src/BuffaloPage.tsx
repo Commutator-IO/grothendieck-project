@@ -285,7 +285,7 @@ export function BuffaloPage() {
         {CAT.courses
           .filter((c) => c.id === course)
           .map((c) => (
-            <section key={c.id} id={c.id} className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
+            <section key={c.id} id={c.id} className={`mt-6 grid gap-8 ${board ? 'lg:grid-cols-[minmax(0,1fr)_520px]' : 'lg:grid-cols-[minmax(0,1fr)_360px]'}`}>
               <div className="min-w-0">
                 <h2 className="titre text-[24px] text-ink-900">{c.title}</h2>
                 <p className="mt-2 max-w-[46em] text-[13px] leading-relaxed text-ink-600">
@@ -351,8 +351,17 @@ export function BuffaloPage() {
                   listens at once; anchored to the bottom on a phone. */}
               <aside>
                 {video && playing ? (
-                  <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ink-200 bg-white lg:sticky lg:inset-x-auto lg:bottom-auto lg:top-20 lg:z-auto lg:border-0 lg:bg-transparent">
-                    <div className="overflow-hidden bg-ink-900 lg:rounded-xl">
+                  <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ink-200 bg-white lg:sticky lg:inset-x-auto lg:bottom-auto lg:top-20 lg:z-auto lg:flex lg:flex-col lg:gap-3 lg:border-0 lg:bg-transparent">
+                    {/* The reconstructed blackboard, where one exists for the side being played: on top and wide, since
+                        the video is a still photograph over the sound. */}
+                    {board && (
+                      <div className="hidden h-[64vh] lg:block">
+                        <Suspense fallback={null}>
+                          <Blackboard board={board} now={now} onSeek={(s) => setSeek({ t: s })} />
+                        </Suspense>
+                      </div>
+                    )}
+                    <div className={`overflow-hidden bg-ink-900 lg:rounded-xl ${board ? 'lg:ml-auto lg:w-[300px]' : ''}`}>
                       <div className="aspect-video w-full">
                         <Player id={playing.id} t={playing.t} onTime={setNow} seek={seek} />
                       </div>
@@ -371,14 +380,6 @@ export function BuffaloPage() {
                         </button>
                       </div>
                     </div>
-                    {/* The reconstructed blackboard, where one exists for the side being played. */}
-                    {board && (
-                      <div className="mt-3 hidden h-[55vh] lg:block">
-                        <Suspense fallback={null}>
-                          <Blackboard board={board} now={now} onSeek={(s) => setSeek({ t: s })} />
-                        </Suspense>
-                      </div>
-                    )}
                   </div>
                 ) : (
                   <div className="sticky top-20 hidden rounded-xl border border-dashed border-ink-300 px-4 py-5 text-[13px] leading-relaxed text-ink-500 lg:block">

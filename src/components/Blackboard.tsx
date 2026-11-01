@@ -66,10 +66,6 @@ export function Blackboard({ board, now, onSeek }: { board: Board; now: number; 
         ))}
         {shown === 0 && <p className="chalk text-[20px] text-[#8b8f8a]">The board fills as the lecture goes on.</p>}
       </div>
-      <p className="border-t border-[#3a3d3b] px-5 py-2 text-[11.5px] leading-snug text-[#9a9e99]">
-        Reconstructed from the recording's automatic captions, not from the board itself: wording, layout and notation
-        are ours; yellow items are less certain. {board.pass}
-      </p>
     </div>
   );
 }
