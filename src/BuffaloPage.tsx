@@ -242,11 +242,17 @@ export function BuffaloPage() {
     const key = video && side !== null ? `${video.id}-${String(side).padStart(4, '0')}` : null;
     if (!key || (!RENDER_BUFFALO && !(key in PUBLIC_BOARDS))) return setBoard(null);
     let alive = true;
+    const local = (k: string): Promise<Board | null> =>
+      fetch(`/transcripts-buffalo/${k}.json`).then((r) =>
+        r.ok && r.headers.get('content-type')?.includes('json') ? r.json() : null,
+      );
+    // A « Tape 2, cont. » segment of the catalogue lies inside the previous side's board.
+    const prev = video ? video.segments.filter((s) => s.start < (side ?? 0)).at(-1)?.start : undefined;
     const load: Promise<Board | null> =
       key in PUBLIC_BOARDS
         ? PUBLIC_BOARDS[key]().then((m) => m.default as Board)
-        : fetch(`/transcripts-buffalo/${key}.json`).then((r) =>
-            r.ok && r.headers.get('content-type')?.includes('json') ? r.json() : null,
+        : local(key).then((b) =>
+            b || prev === undefined ? b : local(`${video!.id}-${String(prev).padStart(4, '0')}`),
           );
     load.then((b) => alive && setBoard(b)).catch(() => alive && setBoard(null));
     return () => {
