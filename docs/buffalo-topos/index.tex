@@ -18,6 +18,7 @@
 \usepackage{xcolor}
 \usepackage[hidelinks,pageanchor=false,pdftitle={Buffalo Lectures on Topos Theory (1973): Index of Results},pdfauthor={Michel Hua}]{hyperref}
 \usepackage{amsmath,amssymb}
+\usepackage{tocloft}\setlength{\cftsecnumwidth}{2.4em}
 \definecolor{frise}{HTML}{2F4DA8}
 
 \newcommand{\q}[1]{“#1”}
@@ -75,7 +76,7 @@
 
 \emph{What it is not.} This index is neither a transcription nor a summary of the course. It reproduces neither the explanations, nor the worked examples, nor the digressions, nor the order of the exposition beyond the succession of statements, and it does not quote the course. The course as delivered is a protected oral work, whose rights belong to the rightsholders of Alexandre Grothendieck; only the recordings are authoritative, and the reader is referred to them through the links. The statements here are standard mathematical statements, written by us.
 
-\emph{What is missing.} The five sessions of the second video (30 May, 4, 6, 20 and 27 June 1973) are not yet indexed: they are marked \emph{forthcoming}. Four sides whose sound is too degraded are not indexed either (4 April, tape 1, side B; 11 May, tape 2, side A; and two sides without label or date at the end of the fourth video).
+\emph{What is missing.} The second video (30 May to late June 1973) is indexed from a full machine transcription of the sound, which is noisier than the caption-based transcriptions used for the other videos; the dating of its meetings follows the evidence of the text and is discussed at the head of each session. Four sides whose sound is too degraded are not indexed either (4 April, tape 1, side B; 11 May, tape 2, side A; and two sides without label or date at the end of the fourth video).
 
 \section{Presheaves and sheaves on a space}
 \session{4 April 1973}
@@ -396,27 +397,276 @@
 \entree[prop]{39560}{10:59:20}{For $Y$ sober, the category of points $\mathbf{Homtop}(\mathrm{pt},\mathrm{Sh}(Y))$ is equivalent to $Y$ ordered by specialization.}
 \entree[prop]{39689}{11:01:29}{For $X,Y$ sober, $\mathbf{Homtop}(\mathrm{Sh}(X),\mathrm{Sh}(Y))$ is equivalent to the continuous maps $f$ ordered by $f\le g$ iff $g(x)\in\overline{\{f(x)\}}$ for all $x$.}
 \entree[prop]{39885}{11:04:45}{If $Y$ is separated, this category is discrete.}
-\section{Sessions not yet indexed}
+\section{Points of a topos and specialization}
 \session{30 May 1973}
 \video{PqCQM3Pcl6Q}
 \noindent\textit{Video 2/4 (\href{https://www.youtube.com/watch?v=PqCQM3Pcl6Q}{\texttt{PqCQM3Pcl6Q}}): tape 1, side A (0:00:00--0:49:07); tape 1, side B (0:49:07--1:38:30); tape 2, side A (1:38:30--1:55:37).}\par\medskip
-\noindent \emph{Forthcoming}: this session has not yet been transcribed.\par
+\face{Tape 1, side A}
+\entree[rem]{274}{0:04:34}{A morphism of topoi $f\colon E\to F$ is a pair $f^*\colon F\to E$, $f_*\colon E\to F$ with $f^*\dashv f_*$ and $f^*$ left exact; topoi, their morphisms and the natural transformations between morphisms form a 2-category, with hom-categories $\mathrm{Hom}_{\mathrm{top}}(E,F)$ (recalled).}
+\entree[prop]{640}{0:10:40}{For sober spaces $X$ and $Y$, the morphisms of topoi $\mathrm{Top}(X)\to\mathrm{Top}(Y)$ come, uniquely, from continuous maps $X\to Y$ (recalled).}
+\entree[def]{765}{0:12:45}{A point of a topos $E$ is a morphism of topoi $\mathbf{Set}\to E$; the category of points is opposite to the category of fibre functors on $E$ (the inverse images of the points).}
+\entree[prop]{886}{0:14:46}{For $y$ in a space $Y$, the fibre functor $F\mapsto F_y=\varinjlim_{U\ni y}F(U)=\mathrm{Hom}(\text{“}\varprojlim\text{”}\,U,F)$ is represented by the pro-object of $\mathcal{O}_Y$ given by the open neighbourhoods of $y$.}
+\entree[prop]{1011}{0:16:51}{Fibre functors on $\mathrm{Top}(Y)$ are represented by pro-objects of $\mathcal{O}_Y$ (by objects only for open points), and morphisms between fibre functors correspond to morphisms of the representing pro-objects in the opposite direction.}
+\entree[thm]{1445}{0:24:05}{For $y,y'$ in a space $Y$, $\mathrm{Hom}(\varepsilon_y,\varepsilon_{y'})$ has at most one element, and is non-empty exactly when $y\in\overline{\{y'\}}$. So the category of fibre functors is the set $Y$ ordered by specialization, and the category of points is its opposite.}
+\entree[prop]{1632}{0:27:12}{For continuous maps $f,g\colon X\to Y$, the set of 2-morphisms $f\Rightarrow g$ between the associated morphisms of topoi has at most one element, and is non-empty exactly when $g(x)\in\overline{\{f(x)\}}$ for every $x\in X$ (up to the convention on the direction of arrows).}
+\entree[prop]{2100}{0:35:00}{For $X$ sober, every fibre functor on $\mathrm{Top}(X)$ is the stalk at a point of $X$ (an exercise, treated in Hakim's book).}
+\entree[prop]{2223}{0:37:03}{Hence $X\mapsto\mathrm{Top}(X)$ is a 2-functor from spaces to topoi, the category $\underline{\mathrm{Hom}}(X,Y)$ being the set of continuous maps $X\to Y$ ordered by pointwise specialization (taking sobrifications if needed).}
+\section{Topoi of spaces with a group action}
+\entree[def]{2361}{0:39:21}{For a discrete group $G$ acting on a space $X$, $\mathrm{Top}(X,G)$ is the topos of $G$-equivariant sheaves on $X$ (étale spaces over $X$ with a compatible $G$-action); it is functorial in the pair $(X,G)$ for equivariant maps over group homomorphisms.}
+\entree[prop]{2425}{0:40:25}{For an equivariant map $(X,G)\to(X',G')$, the inverse image of a $G'$-equivariant étale space $Y'\to X'$ is $Y'\times_{X'}X$ with its unique compatible $G$-action; this functor commutes with colimits and finite limits, hence defines a morphism of topoi $\mathrm{Top}(X,G)\to\mathrm{Top}(X',G')$.}
+\entree[cex]{2615}{0:43:35}{The functor $(X,G)\mapsto\mathrm{Top}(X,G)$ is not fully faithful, and $(X,G)$ is not recovered from its topos in general.}
+\entree[prop]{2615}{0:43:35}{If $H\lhd G$ is a normal subgroup acting freely and properly discontinuously on $X$, then $\mathrm{Top}(X/H,G/H)\simeq\mathrm{Top}(X,G)$.}
+\entree[rem]{2741}{0:45:41}{Quotient topoi of this kind are the natural framework for moduli problems (abelian varieties, curves of genus $g$), where no space with the right properties exists.}
+\entree[prop]{2741}{0:45:41}{For $G$ trivial, $\mathrm{Top}(X,1)=\mathrm{Top}(X)$; there is a morphism $\mathrm{Top}(X)\to\mathrm{Top}(X,G)$ whose inverse image forgets the $G$-action, but in general none in the other direction unless $G$ acts trivially.}
+\face{Tape 1, side B}
+\section{Points of the equivariant topos}
+\entree[prop]{2947}{0:49:07}{For $x\in X$, the functor sending a $G$-equivariant sheaf to the stalk at $x$ of its underlying sheaf is a fibre functor on $\mathrm{Top}(X,G)$; these functors are jointly conservative.}
+\entree[prop]{3015}{0:50:15}{For $X$ sober, the points $x,x'$ of $\mathrm{Top}(X,G)$ are isomorphic iff they lie in the same $G$-orbit, and $\mathrm{Isom}(x,x')=\{g\in G: gx=x'\}$; the set of isomorphism classes of points is $X/G$.}
+\entree[rem]{3136}{0:52:16}{The topology on the set of isomorphism classes of points is the quotient topology of $X/G$; if $G$ acts freely and properly, $\mathrm{Top}(X,G)$ is the topos of $X/G$.}
+\section{The classifying topos of a group}
+\entree[def]{3200}{0:53:20}{For a group $G$, the classifying topos $BG=\mathrm{Top}(\mathrm{pt},G)$ is the topos of $G$-sets; a homomorphism $G\to G'$ gives a morphism $BG\to BG'$.}
+\section{Presheaf topoi and the functors $u^*$, $u_!$, $u_*$}
+\entree[def]{3328}{0:55:28}{For a small category $C$, $\widehat{C}$ is the topos of presheaves on $C$ (contravariant functors $C\to\mathbf{Set}$); $BG$ is the case of a one-object category.}
+\entree[prop]{3328}{0:55:28}{In $\widehat{C}$, $\Gamma(F)=\mathrm{Hom}(1,F)=\varprojlim F$; for $F$ with values in abelian groups, $H^i(\widehat{C},F)=\varprojlim{}^i F$, the derived functors of the inverse limit.}
+\entree[prop]{3520}{0:58:40}{A functor $u\colon C\to C'$ induces $u^*\colon\widehat{C'}\to\widehat{C}$, $F'\mapsto F'\circ u$, which commutes with all limits and colimits; it is the inverse image of a morphism of topoi $\widehat{C}\to\widehat{C'}$, whose direct image $u_*$ is the right adjoint of $u^*$.}
+\entree[prop]{3770}{1:02:50}{For $u\colon C\to C'$, $u^*$ has both a left adjoint $u_!$ and a right adjoint $u_*$ (Kan extensions); more generally, the inverse image $f^*$ of a morphism of topoi has a left adjoint $f_!$ exactly when it commutes with arbitrary limits (granting a smallness condition left unstated in the lecture).}
+\entree[ex]{3770}{1:02:50}{For $C'=\Delta$ and $C=\Delta_{\le n}$ (finite non-empty ordinals of cardinal $\le n+1$), $u^*$ is truncation of simplicial sets, $u_!$ is the skeleton and $u_*$ the coskeleton.}
+\entree[def]{4027}{1:07:07}{When they exist, $f_!$ denotes the left adjoint of $f^*$, and $f^!$ the right adjoint of $f_*$ (which exists when $f_*$ commutes with all colimits).}
+\entree[prop]{4092}{1:08:12}{If $u^*$ has a left adjoint $u_!$ which is left exact, then $u_!$ is the inverse image of a morphism of topoi in the opposite direction, of which $u^*$ is the direct image.}
+\entree[prop]{4217}{1:10:17}{If $C$ has finite limits and $u\colon C\to C'$ preserves them, then $u_!$ is left exact, hence the inverse image of a morphism of topoi $\widehat{C'}\to\widehat{C}$.}
+\entree[prop]{4342}{1:12:22}{Without exactness hypotheses on $u$, a functor $C\to C'$ gives only a morphism $\widehat{C}\to\widehat{C'}$ in the same direction, and $C\mapsto\widehat{C}$ is a 2-functor (natural transformations give 2-morphisms).}
+\entree[prop]{4407}{1:13:27}{The functor $\mathrm{Hom}(C,C')\to\mathrm{Hom}_{\mathrm{top}}(\widehat{C},\widehat{C'})$ is fully faithful; when $C,C'$ are idempotent complete, the morphisms whose inverse image also commutes with all limits are exactly those coming from functors $C\to C'$.}
+\section{Final and initial topoi}
+\entree[prop]{4541}{1:15:41}{For every topos $E$ there is, up to unique isomorphism, exactly one morphism $E\to\mathbf{Set}$, with inverse image $I\mapsto I\cdot 1=\coprod_I 1$; the one-point topos $\mathbf{Set}$ is final among topoi.}
+\entree[prop]{4795}{1:19:55}{The direct image of this unique morphism is the global-section functor $\Gamma=\mathrm{Hom}(1,-)$.}
+\entree[prop]{5053}{1:24:13}{The inverse image $\mathbf{Set}\to E$ commutes with infinite products iff $E$ is locally connected (every object is a sum of connected objects); this expresses that products distribute over arbitrary sums in $E$.}
+\entree[q]{5182}{1:26:22}{Are the topoi of the form $\widehat{C}$ exactly those that are locally connected and, in a suitable sense, totally disconnected, i.e. those sharing all exactness properties of $\mathbf{Set}$, including those involving infinite limits?}
+\entree[prop]{5315}{1:28:35}{The empty topos $\mathrm{Top}(\varnothing)$ (the one-point category) is initial among topoi: each topos receives a unique morphism from it.}
+\entree[prop]{5501}{1:31:41}{The empty topos is strictly initial: a topos admitting a morphism to it is itself empty.}
+\entree[cex]{5628}{1:33:48}{Strict initiality of the initial object fails in groups: the trivial group is initial and final, yet non-trivial groups map to it.}
+\section{Classifying topoi in a topos, and sums}
+\entree[def]{5694}{1:34:54}{For a group object $G$ of a topos $E$, the classifying topos $B_EG$ is the topos of objects of $E$ with a $G$-action; a homomorphism $G\to G'$ gives a morphism $B_EG\to B_EG'$ (restriction of the action).}
+\entree[def]{5819}{1:36:59}{The sum $\coprod X_i$ of spaces is the disjoint union with each $X_i$ open; a map out of it is continuous iff its restrictions are, which is the universal property of the coproduct.}
+\face{Tape 2, side A}
+\section{Sums and quotients of topoi}
+\entree[prop]{6043}{1:40:43}{The product category $\prod_i E_i$ of topoi is a topos, and $\mathrm{Hom}_{\mathrm{top}}(\prod_i E_i,F)\simeq\prod_i\mathrm{Hom}_{\mathrm{top}}(E_i,F)$: it is the sum (coproduct) of the $E_i$ in the 2-category of topoi, the projections being the inverse images of the inclusions $E_i\to\prod E_i$.}
+\entree[rem]{6043}{1:40:43}{Other limits and colimits of topoi (amalgamated sums, quotients) can be formed too; applied to spaces, a quotient taken in topoi may be well behaved where the quotient of spaces is wild (stated without proof).}
+\section{Induced topoi}
+\entree[def]{6237}{1:43:57}{For an object $X'$ of a topos $E$, the induced topos $E/X'$ is the category of objects of $E$ over $X'$; it plays the part of the space $X'$ over the final object $X$ (for $E=\mathrm{Top}(X)$ and $X'$ étale over $X$, it is the topos of the space $X'$).}
+\entree[prop]{6357}{1:45:57}{The restriction $j^*\colon E\to E/X'$, $Y\mapsto Y\times X'$ (viewed over $X'$ by the second projection), commutes with colimits and finite limits; it is the inverse image of a morphism of topoi $j\colon E/X'\to E$, the localization morphism.}
+\entree[prop]{6421}{1:47:01}{$j^*$ has a left adjoint $j_!$, which forgets the structure map to $X'$, as well as the right adjoint $j_*$; the localization morphism is the analogue of an open immersion of spaces.}
+\section{Sober spaces and generic points}
 \session{4 June 1973}
 \video{PqCQM3Pcl6Q}
-\noindent\textit{Video 2/4 (\href{https://www.youtube.com/watch?v=PqCQM3Pcl6Q}{\texttt{PqCQM3Pcl6Q}}): tape 1, side A (1:55:37--2:44:38); tape 1, side B (2:44:38--3:33:35); tape 2 (3:33:35--4:22:54).}\par\medskip
-\noindent \emph{Forthcoming}: this session has not yet been transcribed.\par
+\noindent\textit{Video 2/4 (\href{https://www.youtube.com/watch?v=PqCQM3Pcl6Q}{\texttt{PqCQM3Pcl6Q}}): tape 1, side A (1:55:37--2:44:38); tape 1, side B (2:44:38--3:33:35); tape 2 (3:33:35--about 3:41:00).}\par\medskip
+\noindent\textit{The first half hour is a question session, as agreed at the end of the previous meeting. The lecture closes at 3:40:24 with the next meeting fixed for Wednesday.}\par\medskip
+\face{Tape 1, side A}
+\entree[def]{6937}{1:55:37}{A space is sober if every irreducible closed subset has exactly one generic point.}
+\entree[prop]{7000}{1:56:40}{Spaces with the same sobrification have equivalent categories of sheaves. The sober space attached to a topos has the isomorphism classes of points as underlying set, with the topology given by the subobjects of the final object; for a space $X$ it is the set of irreducible closed subsets of $X$ with the evident topology.}
+\entree[ex]{7063}{1:57:43}{For a finitely generated algebra $A$ over an algebraically closed field $K$, the set of maximal ideals with the Zariski topology (the spaces of Serre's FAC) is not sober: irreducible closed subsets of positive dimension have no generic point.}
+\entree[ex]{7188}{1:59:48}{Hausdorff spaces and schemes are sober.}
+\entree[ex]{7248}{2:00:48}{For a non-separated topological group $G$, the closure of a point is a translate of the closure of the unit; the associated sober space is the separated quotient of $G$ by $\overline{\{e\}}$, so passing to it identifies points but adds none.}
+\entree[def]{7368}{2:02:48}{On a set of ideals of a ring (maximal, prime, primary, \dots), the Zariski-type topology has as basic closed sets, for each subset $S$ of the ring, the ideals of the given type containing $S$; the closed sets are the arbitrary intersections of finite unions of these.}
+\entree[rem]{7431}{2:03:51}{Such spaces are generally non-separated, and specialization ($x\in\overline{\{y\}}$) is then an order which need not be an equivalence relation.}
+\section{Tensor product of sheaves of modules}
+\entree[def]{7496}{2:04:56}{For sheaves of modules $M$, $N$, the presheaf $U\mapsto M(U)\otimes N(U)$ is in general not a sheaf; the tensor product $M\otimes N$ is its associated sheaf, which solves the universal problem for bilinear pairings.}
+\entree[prop]{7746}{2:09:06}{If $N$ is constant free of finite rank $n$, the presheaf tensor product is already a sheaf, equal to $M^n$; the same holds when $N$ is a direct factor of such a module, $M\otimes N$ being the image of the induced projector of $M^n$.}
+\section{Algebras of finite presentation and passage to the limit}
+\entree[prop]{8242}{2:17:22}{If $A$ is a reduced algebra of finite type over $\mathbb Z$, its normalization is of finite type over $\mathbb Z$.}
+\entree[prop]{8368}{2:19:28}{If $K=\varinjlim K_i$ (filtering, $K_i$ of finite type over $\mathbb Z$) and $A$ is a $K$-algebra of finite presentation, then $A=A_i\otimes_{K_i}K$ for some $i$ and some $K_i$-algebra $A_i$ of finite presentation.}
+\entree[prop]{8431}{2:20:31}{For most geometric properties of $\mathrm{Spec}A\to\mathrm{Spec}K$ (geometrically connected, irreducible or normal fibres, non-empty fibres, surjective, flat, smooth, étale, unramified), $A$ has the property iff $A_j$ has it over $K_j$ for all large $j$ (EGA IV, chapter on limits).}
+\entree[prop]{8734}{2:25:34}{If $A$ is of finite presentation and flat over $K$, the descent datum can be chosen with $A_i$ flat over $K_i$.}
+\section{Points of presheaf topoi}
+\entree[prop]{9000}{2:30:00}{For $c\in C$, evaluation $F\mapsto F(c)$ is a fibre functor on $\widehat{C}$, and $C\to\{\text{points of }\widehat{C}\}$ is fully faithful.}
+\entree[prop]{9126}{2:32:06}{Filtering inverse limits of points of $\widehat{C}$ exist, so $C\to\{\text{points}\}$ extends to an equivalence $\mathrm{Pro}(C)\simeq\{\text{points of }\widehat{C}\}$.}
+\entree[prop]{9189}{2:33:09}{A point of $\widehat{C}$ is essential (its fibre functor commutes with all limits) iff it is a retract of a representable; if $C$ is idempotent complete, the essential points are exactly those coming from $C$.}
+\entree[prop]{9251}{2:34:11}{If $\widehat{C}\simeq\mathrm{Top}(X)$ for a space $X$, then $C$ is an ordered category: there is at most one arrow between two objects.}
+\entree[def]{9381}{2:36:21}{A category is ordered if it has at most one arrow between any two objects; it is then equivalent to the category of a preordered set, $x\le y$ iff there is an arrow $x\to y$.}
+\entree[prop]{9505}{2:38:25}{Conversely, if $C$ is an ordered category, $\widehat{C}$ is equivalent to the topos of a space with underlying set $\mathrm{Ob}\,C$.}
+\entree[def]{9632}{2:40:32}{The open sets of that space are the sieves $O\subset\mathrm{Ob}\,C$ ($x\in O$, $y\le x\Rightarrow y\in O$), which correspond to the subobjects of the final object of $\widehat{C}$.}
+\entree[prop]{9820}{2:43:40}{In this topology, the smallest open set containing $x$ is $\{y: y\le x\}$.}
+\face{Tape 1, side B}
+\section{Topoi of ordered categories and of spaces}
+\entree[prop]{9878}{2:44:38}{For an ordered category $C$ with the sieve topology on $\mathrm{Ob}\,C$, the sets $O_x$ form a basis of opens, $O_x\subset O_y$ iff $x\le y$, so presheaves on the basis are the presheaves on $C$.}
+\entree[thm]{10006}{2:46:46}{For an ordered category $C$ and its associated space, every presheaf on the basis is a sheaf (a basic open covered by basic opens is equal to one of them), so $\mathrm{Top}(X_C)\simeq\widehat{C}$.}
+\entree[prop]{10135}{2:48:55}{A point $x$ of a sober space $X$ is essential (its fibre functor commutes with arbitrary limits) iff $x$ has a smallest open neighbourhood; if $\mathrm{Top}(X)\simeq\widehat{C}$, the essential points must form a conservative family.}
+\entree[def]{10259}{2:50:59}{A subset $X'\subset X$ is very dense if every non-empty locally closed subset of $X$ meets $X'$; this is equivalent to the fibre functors at the points of $X'$ being conservative (two opens with the same trace on $X'$ are equal).}
+\entree[thm]{10388}{2:53:08}{For a sober space $X$, $\mathrm{Top}(X)\simeq\widehat{C}$ for some category $C$ iff the set of essential points of $X$ is very dense; $C$ can then be taken to be that set ordered by specialization.}
+\section{Localization of topoi}
+\entree[def]{10637}{2:57:17}{For $S'$ in a topos $E$, the morphism $E/S'\to E$ with inverse image $X\mapsto X\times S'$ is the localization morphism, and that inverse image the localization functor; a property of objects is said to hold locally if it holds after this base change.}
+\entree[ex]{10637}{2:57:17}{For $E=\mathrm{Top}(S)$ and $S'$ an étale space over $S$, the localization morphism is the one induced by the map of spaces $S'\to S$.}
+\section{Classifying topoi of subgroups as localizations}
+\entree[prop]{10701}{2:58:21}{For a homomorphism $f\colon G\to G'$ of group objects of a topos $E$, the inverse image of $Bf\colon BG\to BG'$ restricts the action along $f$ and commutes with all limits and colimits (computed in $E$).}
+\entree[thm]{10889}{3:01:29}{For a subgroup $H$ of a group object $G$ of a topos $E$, $BH\simeq BG/(G/H)$, and under this equivalence the morphism $BH\to BG$ is the localization morphism at the object $G/H$ of $BG$ (with $G$ acting by left translation).}
+\entree[prop]{11078}{3:04:38}{The equivalence sends an object $A\to G/H$ of $BG/(G/H)$ to its fibre over the unit section, with the induced $H$-action, and an object $F$ of $BH$ to the contracted product $G\times^H F$ over $G/H$; these functors are quasi-inverse.}
+\entree[rem]{12172}{3:22:52}{The morphism $BH\to BG$ behaves like a covering rather than an embedding: the localization object $G/H\to 1$ is not a monomorphism.}
+\section{Galois theory of coverings and classifying topoi}
+\entree[thm]{12232}{3:23:52}{For a connected, locally connected and locally simply connected space $Z$ with base point $z$, taking the fibre at $z$ with its monodromy action is an equivalence from coverings of $Z$ to $\pi_1(Z,z)$-sets; the inverse sends a $G$-set $E$ to $P\times^G E$, $P$ the universal covering based at $z$.}
+\entree[prop]{12552}{3:29:12}{Thus the classifying topos $BG$ of a discrete group is the topos of coverings of a space $Z$ with $\pi_1(Z,z)=G$.}
+\entree[prop]{12618}{3:30:18}{Subgroups $H\subset G$ correspond to pointed transitive $G$-sets $G/H$, hence to connected coverings $Z'\to Z$ with a point over $z$; and $BG/(G/H)$ is then the category of coverings of $Z'$.}
+\face{Tape 2}
+\section{Subgroups as coverings}
+\entree[prop]{12815}{3:33:35}{For the connected covering $Z'\to Z$ corresponding to $H\subset G$, the map $\pi_1(Z',z')\to\pi_1(Z,z)=G$ is the inclusion of $H$; so, up to homotopy, $BH\to BG$ is a covering with fibre $G/H$.}
+\entree[thm]{13017}{3:36:57}{For a group $G$ acting on a space $Z$ and a subgroup $H\subset G$, $\mathrm{Top}(Z,H)\simeq\mathrm{Top}(Z,G)/(Z\times G/H)$ ($G$ acting diagonally), the equivalence sending an object over $Z\times G/H$ to its part over $Z\times\{e\}$ with the induced $H$-action; $\mathrm{Top}(Z,H)\to\mathrm{Top}(Z,G)$ is the localization morphism.}
+\section{Adjoints $f_!$ and $f^!$ in examples}
 \session{6 June 1973}
 \video{PqCQM3Pcl6Q}
-\noindent\textit{Video 2/4 (\href{https://www.youtube.com/watch?v=PqCQM3Pcl6Q}{\texttt{PqCQM3Pcl6Q}}): tape 1 (4:22:54--5:12:09).}\par\medskip
-\noindent \emph{Forthcoming}: this session has not yet been transcribed.\par
+\noindent\textit{Video 2/4 (\href{https://www.youtube.com/watch?v=PqCQM3Pcl6Q}{\texttt{PqCQM3Pcl6Q}}): tape 2 (from about 3:43:44); tape 1 (4:22:54--5:12:09).}\par\medskip
+\noindent\textit{Dating: the catalogue starts this meeting at 4:22:54, but the text runs on there in mid-sentence; the meeting opens, on the evidence of the text, with the question session at 3:43:44, after the closing of the previous one.}\par\medskip
+\face{Tape 2 (from 3:43:44)}
+\entree[prop]{13743}{3:49:03}{For a closed embedding $i\colon Y\to X$, $i_*$ is fully faithful on abelian sheaves (an equivalence onto the sheaves vanishing off $Y$), and commutes with all limits and colimits.}
+\entree[prop]{13806}{3:50:06}{For a closed embedding $i$, on abelian sheaves $i_*$ has a right adjoint $i^!$: $i^!F$ is the subsheaf of $F$ of sections supported in $Y$, i.e. $\Gamma(U,i^!F)=\Gamma_{Y\cap U}(U,F)$.}
+\entree[rem]{13938}{3:52:18}{The right derived functors of $i^!$ are the sheaves of local cohomology.}
+\entree[prop]{14059}{3:54:19}{For an open embedding $j\colon Y\to X$, $j^*$ commutes with products, so $j_!$ exists on sheaves of sets: it views an étale space over $Y$ as an étale space over $X$, with empty stalks off $Y$.}
+\entree[prop]{14187}{3:56:27}{For sheaves of abelian groups on an open $Y\subset X$, $j_!F$ is the extension by zero: $(j_!F)(U)\subset F(U\cap Y)$ consists of the sections whose support, closed in $U\cap Y$, is closed in $U$.}
+\entree[cex]{14438}{4:00:38}{The $j_!$ for abelian sheaves is not the $j_!$ for sheaves of sets: the underlying sheaf of sets of the extension by zero has non-empty stalks off $Y$, whereas the set-theoretic $j_!$ has empty ones.}
+\entree[prop]{14625}{4:03:45}{For a continuous map $f$ of spaces, $f_*$ preserves the initial (empty) sheaf iff the image of $f$ is dense; for topoi, iff the morphism is dominating, i.e. factors through no proper closed subtopos.}
+\entree[q]{14750}{4:05:50}{For a morphism of topoi, can the right adjoint $f^!$ of $f_*$ (on sets, not on abelian objects) exist unless $f$ is an equivalence?}
+\entree[rem]{14872}{4:07:52}{On abelian sheaves $f^!$ is important (it underlies duality), and taking adjoints of the functors attached to a morphism of topoi often leads to further morphisms of topoi.}
+\section{Local properties and the notion of site}
+\entree[def]{15006}{4:10:06}{A fibre space $E\to X$ is locally trivial if $X$ has an open covering $U_i$ with $E|_{U_i}\simeq U_i\times F_i$; being locally trivial is a property that is local on $X$, whereas being trivial is not.}
+\entree[def]{15261}{4:14:21}{For a group scheme $G$ over $K$, $X$ is a torsor under $G$ if, for every $K'$, $X(K')$ is empty or a principal homogeneous space under $G(K')$.}
+\entree[rem]{15387}{4:16:27}{Such an $X$ is trivial over $K'$ iff $X_{K'}$ has a section (for a field $K'$, iff it is non-empty); it is called locally trivial for a chosen class of admissible base changes (arbitrary or Galois extensions) if it becomes trivial after one of them.}
+\entree[def]{15517}{4:18:37}{A site is a category equipped with a notion of localization, here called a topology by abuse of language (not a topology on the objects and arrows).}
+\entree[def]{15640}{4:20:40}{A topology on a category $C$ can be given, in a first form, by a set $\mathrm{Cov}(X)$ of covering families of morphisms $X_i\to X$ for each object $X$.}
+\face{Tape 1}
+\section{Coverings, pretopologies and local properties}
+\entree[ex]{15774}{4:22:54}{On algebras over a ring $A$, the families $(B_i)$ for which some finite subfamily gives a faithfully flat map $A\to\prod B_i$ are the coverings of a (simplified) fpqc-type topology.}
+\entree[def]{15905}{4:25:05}{When $C$ has fibre products, covering families are required to be stable under base change: if $(X_i\to X)$ covers $X$ and $X'\to X$ is any morphism, then $(X_i\times_XX'\to X')$ covers $X'$.}
+\entree[def]{15905}{4:25:05}{Covering families are required to be transitive: if $(X_i\to X)$ covers $X$ and each $X_i$ is covered by $(X_{ij}\to X_i)_j$, then $(X_{ij}\to X)_{i,j}$ covers $X$.}
+\entree[def]{16027}{4:27:07}{A family consisting of a single isomorphism is covering; and covering families are saturated under refinement: if $(X_i)$ covers $X$ and each $X_i\to X$ factors over $X$ through a member of a family $(X'_{i'})$, then $(X'_{i'})$ covers $X$.}
+\entree[def]{16285}{4:31:25}{A class of families satisfying base change, transitivity and the trivial axiom is a pretopology; saturating it under refinement gives a topology.}
+\entree[rem]{16285}{4:31:25}{Giraud later replaced covering families by covering sieves, which makes the formulas simpler and removes the assumption that fibre products exist.}
+\entree[def]{16476}{4:34:36}{Given a category $F_X$ attached contravariantly to each object $X$ (inverse images), a property of a situation over $X$ holds locally if it holds on the pulled-back situations over $X_i$ for some covering $(X_i\to X)$; for instance, an arrow is locally a monomorphism (resp. an isomorphism).}
+\entree[prop]{16608}{4:36:48}{For a topology generated by a pretopology, a property is local iff it holds after pullback along a covering family of the pretopology.}
+\section{Sheaves on a site}
+\entree[def]{16734}{4:38:54}{For a site $C$ with fibre products, a presheaf $F$ is separated if $F(X)\to\prod_iF(X_i)$ is injective for every covering, and a sheaf if $F(X)\to\prod_iF(X_i)\rightrightarrows\prod_{i,j}F(X_i\times_XX_j)$ is exact; $\widetilde C\subset\widehat C$ is the full subcategory of sheaves.}
+\entree[thm]{16924}{4:42:04}{For a small site $C$, $\widetilde C$ is a topos (stated with technical provisos omitted).}
+\entree[rem]{16924}{4:42:04}{Many different sites give the same topos, as a group has many presentations: the category $C$ plays the part of generators and the topology the part of relations.}
+\entree[prop]{17114}{4:45:14}{$\widetilde C$ is the topos universal for functors out of $\widehat C$ commuting with colimits and finite limits that make covering families epimorphic; covering families are in general not epimorphic in $\widehat C$.}
+\section{The associated sheaf on a site}
+\entree[thm]{17743}{4:55:43}{The inclusion $i\colon\widetilde C\to\widehat C$ has a left exact left adjoint $a$, the associated sheaf functor.}
+\entree[def]{17868}{4:57:48}{For a presheaf $F$, $LF(X)$ is the filtering colimit, over the coverings $(X_i\to X)$, of the matching families $\ker\big(\prod F(X_i)\rightrightarrows\prod F(X_i\times_XX_j)\big)$; in terms of covering sieves $R\subset X$, $LF(X)=\varinjlim_R\mathrm{Hom}(R,F)$.}
+\entree[prop]{18127}{5:02:07}{The functor $L\colon\widehat C\to\widehat C$ is left exact (a filtering colimit of finite limits), $LF$ is separated for every $F$, and $\mathrm{Hom}(F,G)\simeq\mathrm{Hom}(LF,G)$ for every sheaf $G$.}
+\entree[prop]{18258}{5:04:18}{$F\to LF$ is a monomorphism iff $F$ is separated, and an isomorphism iff $F$ is a sheaf; if $F$ is separated, $LF$ is a sheaf. Hence $a=L\circ L$.}
+\entree[prop]{18454}{5:07:34}{$\widetilde C$ is closed in $\widehat C$ under limits; a colimit of sheaves is the associated sheaf of the colimit taken in $\widehat C$; exactness properties of $\widetilde C$ involving colimits and finite limits follow from those of $\widehat C$ since $a$ is exact.}
+\entree[def]{18590}{5:09:50}{The representable presheaf $\mathrm{Hom}(-,X)$ is a sheaf iff a morphism $Y\to X$ amounts to a compatible family of morphisms $Y_i\to X$ on a covering of $Y$; when this holds for all $X$ (a subcanonical topology, a name not used in the lecture), $C\to\widehat C$ factors through $\widetilde C$.}
+\section{Algebraic structures and exactness properties}
 \session{20 June 1973}
 \video{PqCQM3Pcl6Q}
-\noindent\textit{Video 2/4 (\href{https://www.youtube.com/watch?v=PqCQM3Pcl6Q}{\texttt{PqCQM3Pcl6Q}}): tape 1, side A (5:12:09--6:01:04); tape 1, side B (6:01:04--6:50:09); tape 2, side A (6:50:09--7:38:43); tape 2, side B (7:38:43--8:27:21).}\par\medskip
-\noindent \emph{Forthcoming}: this session has not yet been transcribed.\par
+\noindent\textit{Video 2/4 (\href{https://www.youtube.com/watch?v=PqCQM3Pcl6Q}{\texttt{PqCQM3Pcl6Q}}): tape 1, side A (5:12:09--6:01:04); tape 1, side B (6:01:04--6:50:09).}\par\medskip
+\face{Tape 1, side A}
+\entree[rem]{18857}{5:14:17}{Algebraic structures (groups, rings, modules, comodules, group actions, torsors) can be expressed by direct and inverse limits and arrows between them, so they make sense in any category with the appropriate limits, subject to exactness conditions.}
+\entree[ex]{18971}{5:16:11}{A basic exactness property: filtering direct limits commute with finite inverse limits.}
+\entree[rem]{19027}{5:17:07}{Topoi are, apart from infinite inverse limits, the categories with exactly the exactness properties of $\mathbf{Set}$.}
+\entree[q]{19139}{5:18:59}{Does every type of algebraic structure have a classifying topos containing a universal model, so that types of structure correspond to topoi, added axioms to subtopoi, and the homotopy type of the classifying topos gives a classifying space of the structure? (Programme stated as expected.)}
+\entree[def]{19319}{5:21:59}{For sets $D'$ and $D''$ of diagrams, $\mathrm{Cat}_D$ is the 2-category of categories having limits of type $D'$ and colimits of type $D''$, with functors commuting with them, and natural transformations as 2-morphisms.}
+\entree[def]{19493}{5:24:53}{An exactness property of type $(I,\Sigma)$, with $I\in\mathrm{Cat}_D$ and $\Sigma$ a set of arrows of $I$: a category $C\in\mathrm{Cat}_D$ satisfies it if every morphism $\varphi\colon I\to C$ of $\mathrm{Cat}_D$ sends the arrows of $\Sigma$ to isomorphisms.}
+\entree[def]{20033}{5:33:53}{A 2-sum of objects $I_\lambda$ of a 2-category is an object $I$ with morphisms $I_\lambda\to I$ such that $\mathrm{Hom}(I,C)\to\prod_\lambda\mathrm{Hom}(I_\lambda,C)$ is an equivalence of categories for every $C$; it is determined up to equivalence, itself unique up to unique isomorphism.}
+\entree[prop]{20146}{5:35:46}{If 2-sums exist in $\mathrm{Cat}_D$, a conjunction of exactness properties $(I_\lambda,\Sigma_\lambda)$ is one exactness property $(I,\Sigma)$, with $I$ the 2-sum and $\Sigma$ the union of the images of the $\Sigma_\lambda$.}
+\entree[def]{20502}{5:41:42}{The $D$-envelope of a category $J$ is an object $\mathrm{Env}(J)$ of $\mathrm{Cat}_D$ with a functor $J\to\mathrm{Env}(J)$ such that, for every $C\in\mathrm{Cat}_D$, composition $\mathrm{Hom}_D(\mathrm{Env}(J),C)\to\mathrm{Hom}(J,C)$ is an equivalence of categories (a 2-universal problem).}
+\entree[rem]{20613}{5:43:33}{Asserted without proof: if $D'$ or $D''$ is small, every category has a $D$-envelope; it is the category obtained by adjoining the limits of type $D'$ and the colimits of type $D''$.}
+\entree[cex]{20801}{5:46:41}{The naive fibre product of categories (pairs of objects, resp. arrows, with equal images in $S$) is not invariant under equivalence: replacing $X$ and $Y$ by equivalent categories mapping into two isomorphic copies of $S$ makes it empty.}
+\entree[def]{21085}{5:51:25}{The 2-fibre product $X\times^2_SY$ of $f\colon X\to S$ and $g\colon Y\to S$ has as objects the triples $(x,y,\alpha)$ with $\alpha\colon f(x)\xrightarrow{\sim}g(y)$, and as arrows the pairs of arrows compatible with the $\alpha$'s.}
+\entree[prop]{21085}{5:51:25}{If $X\to S$ is fibred, the naive fibre product is equivalent to the 2-fibre product.}
+\entree[prop]{21261}{5:54:21}{The 2-fibre product is 2-universal: $\mathrm{Hom}(C,X\times^2_SY)\to\mathrm{Hom}(C,X)\times^2_{\mathrm{Hom}(C,S)}\mathrm{Hom}(C,Y)$ is an equivalence of categories, for every category $C$.}
+\entree[def]{21430}{5:57:10}{In any 2-category, a 2-fibre product of $X$, $Y$ over $S$ is an object $P$ with morphisms to $X$ and $Y$ and an isomorphism of the composites to $S$, such that this functor on Hom-categories is an equivalence for every object; it is determined up to equivalence, unique up to unique isomorphism.}
+\entree[def]{21549}{5:59:09}{2-limits of categories are taken of pseudo-functors $I\to\mathbf{Cat}$, for which composition holds only up to coherent isomorphism.}
+\face{Tape 1, side B}
+\section{Envelopes, localization and a worked exactness property}
+\entree[rem]{21664}{6:01:04}{All the universal problems considered are 2-universal, their solutions defined up to equivalence; 2-inverse limits are taken of pseudo-functors $I\to$ (a 2-category), and 2-direct limits by reversing arrows.}
+\entree[rem]{21959}{6:05:59}{Size conventions: a universe $U$ is fixed; categories are required to have $U$-small Hom-sets, but may be large, such as the categories of all $U$-groups or $U$-rings.}
+\entree[ex]{22260}{6:11:00}{Universality of sums as an exactness property: if $X$ is the sum of objects $x_\alpha$ and $X'\to X$ is any morphism, then with $X'_\alpha=x_\alpha\times_XX'$, the object $X'$ is the sum of the $X'_\alpha$.}
+\entree[prop]{22678}{6:17:58}{This property is expressed by inverting arrows: realisations of the diagram type in $C$ are the functors from its envelope $\tilde J$ to $C$; those for which the squares are Cartesian and $X$ is the sum are the functors inverting a set $\Sigma$ of arrows of $\tilde J$; and the conclusion says that the canonical arrow $\coprod X'_\alpha\to X'$ is also inverted.}
+\entree[def]{22849}{6:20:49}{For $J\in\mathrm{Cat}_D$ and a set $\Sigma$ of arrows of $J$, $J[\Sigma^{-1}]\in\mathrm{Cat}_D$ is defined by the 2-universal property that $\mathrm{Hom}_D(J[\Sigma^{-1}],C)\to\mathrm{Hom}_D(J,C;\Sigma)$ is an equivalence onto the functors commuting with $D$-limits that invert $\Sigma$.}
+\entree[rem]{23076}{6:24:36}{Existence of $\tilde J$ and $J[\Sigma^{-1}]$ is assumed; he expects it in all cases except possibly when neither $D'$ nor $D''$ is small.}
+\entree[def]{23134}{6:25:34}{An elementary exactness property is given by a diagram $\Delta$, diagrams $\Delta'_i$ (inverse limit type) and $\Delta''_j$ (direct limit type) with cones to vertices $x'_i$, $x''_j$ of $\Delta$, and further diagrams $\Lambda'_\alpha$, $\Lambda''_\beta$ with vertices $y'_\alpha$, $y''_\beta$: whenever a realisation of $\Delta$ in $C$ makes each $x'_i$ the limit and each $x''_j$ the colimit of the corresponding diagram, then each $y'_\alpha$ is a limit and each $y''_\beta$ a colimit of the corresponding diagram.}
+\entree[prop]{23710}{6:35:10}{An elementary exactness property becomes a functor condition: with $\Sigma$ the arrows of $\tilde\Delta$ comparing the vertices with the limits and colimits, realisations are the functors $\tilde\Delta[\Sigma^{-1}]\to C$, and one requires that they invert the further comparison arrows for $y'_\alpha$ and $y''_\beta$.}
+\entree[def]{23931}{6:38:51}{For a set $\eta$ of exactness properties, $\mathrm{Cat}_{D,\eta}\subset\mathrm{Cat}_D$ is the full sub-2-category of categories satisfying them, with the same functors.}
+\entree[def]{24284}{6:44:44}{An algebraic structure $T$ realisable in the categories $C$ of a given class assigns to each $C$ the category $T(C)$ of realisations of $T$ in $C$, functorially in the functors $C\to C'$ commuting with the relevant limits.}
+\entree[ex]{24399}{6:46:39}{The structure of group makes sense in any category with finite products; a product-preserving functor sends group objects to group objects.}
+\entree[prop]{24458}{6:47:38}{An object $P$ with an action of a group $G$ is a torsor iff $G\times P\to P\times P$ is an isomorphism and $P\to 1$ is an epimorphism; so a functor preserves torsors only if it preserves epimorphisms.}
+\entree[prop]{24514}{6:48:34}{A morphism $P\to Q$ is a monomorphism iff the square $P=P\times_QP$ is Cartesian, and an epimorphism iff the dual square is co-Cartesian; so preserving epimorphisms is an exactness property (commuting with certain pushouts).}
+\section{Limits and colimits in the 2-category of $D$-categories}
 \session{27 June 1973}
 \video{PqCQM3Pcl6Q}
-\noindent\textit{Video 2/4 (\href{https://www.youtube.com/watch?v=PqCQM3Pcl6Q}{\texttt{PqCQM3Pcl6Q}}): tape 1, side A (8:27:21--9:02:23); tape 2, side A (9:02:23--9:52:24); tape 2, side B (9:52:24--10:14:40).}\par\medskip
-\noindent \emph{Forthcoming}: this session has not yet been transcribed.\par
+\noindent\textit{Video 2/4 (\href{https://www.youtube.com/watch?v=PqCQM3Pcl6Q}{\texttt{PqCQM3Pcl6Q}}): tape 2, side A (6:50:09--7:38:43); tape 2, side B (7:38:43--8:27:21); tape 1, side A (8:27:21--9:02:23).}\par\medskip
+\noindent\textit{Dating: the catalogue puts the first two sides under 20 June, but the meeting opens at 6:52:32 with a recap of the previous week and the announcement that Wednesday 4 July is a holiday, which places it in the week of 27 June; the last side, labelled 27 June, continues it.}\par\medskip
+\face{Tape 2, side A}
+\entree[def]{25043}{6:57:23}{Standing assumptions on $D$: (1) for each category $I$, the functor $C\mapsto\mathrm{Hom}(I,C)$ on $\mathrm{Cat}_D$ is 2-representable by an object $\tilde I$; (2) for $C\in\mathrm{Cat}_D$ and a set $\Sigma$ of arrows of $C$, $R\mapsto\mathrm{Hom}_D(C,R;\Sigma)$ is 2-represented by $C[\Sigma^{-1}]\in\mathrm{Cat}_D$, which is not the plain localization in $\mathbf{Cat}$.}
+\entree[prop]{25333}{7:02:13}{Under these assumptions $\mathrm{Cat}_D$ has all 2-inverse limits, computed as in $\mathbf{Cat}$: limits of type $D'$, $D''$ and the exactness properties are checked componentwise.}
+\entree[def]{25570}{7:06:10}{The 2-inverse limit of a pseudo-functor $I\to\mathbf{Cat}$ is the category of Cartesian sections of the associated fibred category over $I$.}
+\entree[prop]{25915}{7:11:55}{$\mathrm{Cat}_D$ has all 2-direct limits: take the 2-direct limit $L$ in $\mathbf{Cat}$ (the fibred category $F$ with Cartesian arrows inverted), pass to $\tilde L$, then invert the set $\Sigma$ of arrows comparing the images of the $D$-limits of the $C_i$ with the limits in $\tilde L$.}
+\entree[ex]{26391}{7:19:51}{Finite inverse limits with left exact functors (structures defined by finite inverse limits).}
+\entree[ex]{26447}{7:20:47}{Arbitrary inverse limits with limit-preserving functors, related to the embedding $C\to\widehat C$ and to viewing a structure on an object as a structure on the functor it represents.}
+\entree[ex]{26619}{7:23:39}{Preordered categories (at most one arrow between two objects) with finite lower bounds and arbitrary upper bounds; the functors are the monotone maps preserving them.}
+\entree[ex]{26729}{7:25:29}{Semi-additive categories (initial and final objects agree, sums agree with products) with additive functors; additive categories with an extra condition.}
+\entree[ex]{26785}{7:26:25}{Abelian categories with exact functors; the universal abelian category generated by one object is $\tilde I$ for $I$ the one-point category.}
+\entree[ex]{26843}{7:27:23}{Abelian categories in which filtering direct limits exist and are exact, with functors preserving them (for instance Ind-categories).}
+\entree[ex]{26908}{7:28:28}{Categories with finite inverse and direct limits, with functors preserving them; with the exactness properties of topoi, the pretopoi (corresponding to coherent topoi).}
+\entree[ex]{26963}{7:29:23}{Topoi: $D'$ the finite diagrams, $D''$ all small diagrams (so $D''$ is not a small set), with the existence of generators imposed separately; the corresponding 2-category of topoi is too large.}
+\entree[q]{27083}{7:31:23}{Are the essential topoi, i.e. topoi in which arbitrary products of epimorphisms are epimorphisms and arbitrary products commute with sums, exactly the presheaf topoi $\widehat C$ (when they have generators)?}
+\entree[ex]{27254}{7:34:14}{Ordered sets with finite lower bounds and arbitrary upper bounds, with monotone maps preserving them; and those in which finite lower bounds distribute over arbitrary upper bounds (distributivity of products over sums).}
+\entree[def]{27374}{7:36:14}{An algebraic theory $T$ for a fixed $D$ is a pseudo-functor $C\mapsto T(C)$ from $\mathrm{Cat}_D$ to $\mathbf{Cat}$, $T(C)$ being the category of realisations of $T$ in $C$, with functors $\mathrm{Hom}_D(C,C')\to\mathrm{Hom}(T(C),T(C'))$ compatible with composition.}
+\face{Tape 2, side B}
+\section{Representable theories and constructions}
+\entree[def]{27523}{7:38:43}{A theory $T$ is representable by $R\in\mathrm{Cat}_D$ if $T(C)\simeq\mathrm{Hom}_D(R,C)$, naturally in $C$; $R$ then carries a universal realisation of $T$, every realisation in $C$ being its image under an essentially unique $D$-functor $R\to C$.}
+\entree[def]{27699}{7:41:39}{Theories over $D$ (pseudo-functors $\mathrm{Cat}_D\to\mathbf{Cat}$), their morphisms (families of functors $T(C)\to T'(C)$ compatible with the transition functors) and the transformations between these form a 2-category, with hom-categories $\underline{\mathrm{Hom}}(T,T')$.}
+\entree[prop]{27813}{7:43:33}{(Yoneda) If $T$ is represented by $R$, then $\underline{\mathrm{Hom}}(T,T')\simeq T'(R)$ for every theory $T'$.}
+\entree[def]{27874}{7:44:34}{A construction on $T$ is a morphism of theories $T\to\tau$, where $\tau(C)=C$ is the identity theory: a way of producing, functorially in $C$, an object of $C$ from a realisation of $T$ in $C$ (for groups: the centre, the abelianization, the $n$-th power).}
+\entree[prop]{27874}{7:44:34}{If $T$ is represented by $R$, the category $\underline{\mathrm{Hom}}(T,\tau)$ of constructions on $T$ is equivalent to $R$.}
+\entree[prop]{28164}{7:49:24}{The category of constructions on any theory lies in $\mathrm{Cat}_D$: its limits of type $D'$ and $D''$, and its exactness properties, are computed objectwise.}
+\entree[prop]{28467}{7:54:27}{Writing $R_T$ for the category of constructions on $T$, there is a canonical functor $T(C)\to\mathrm{Hom}_D(R_T,C)$, natural in $C$; thus $T_{R_T}$ plays the part of a representable envelope of $T$.}
+\section{Base objects and the rules for algebraic theories}
+\entree[def]{28756}{7:59:16}{A theory $T$ has base objects indexed by a small set $I$ if there is a faithful morphism of theories $T\to\tau^I$, where $\tau^I(C)=C^I$; the realisations are then families of objects of $C$ with extra structure.}
+\entree[prop]{29002}{8:03:22}{If $T$ is represented by $R$, morphisms $T\to\tau^I$ correspond to families $(R_i)_{i\in I}$ of objects of $R$ (equivalently to $D$-functors $\tilde I\to R$), and faithfulness means that $\mathrm{Hom}_D(R,C)\to C^I$ is faithful for all $C$; one then says that $I$ $D$-generates $R$.}
+\entree[rem]{29294}{8:08:14}{Expected, not proved: if $I$ generates $R$, the objects of $R$ are obtained from the base objects by a bounded number of limit operations on the arrows already constructed.}
+\entree[def]{29464}{8:11:04}{Rule 1 (empty structure): for a small set $I$, $T(C)=C^I$ is an algebraic theory with $I$ as base objects, represented by $\tilde I$.}
+\entree[def]{29637}{8:13:57}{Rule 2 (adding axioms): if $T$ is algebraic and represented by $R$, and $\Sigma$ is a set of arrows of $R$ (arrows between constructions), the theory $T'(C)\subset T(C)$ of realisations whose $D$-functor $R\to C$ inverts $\Sigma$ is algebraic, and is represented by $R[\Sigma^{-1}]$.}
+\entree[ex]{29754}{8:15:54}{For groups, commutativity is an axiom of this kind: the canonical arrow from $G$ to its abelianization is required to be an isomorphism.}
+\entree[prop]{29812}{8:16:52}{When the needed diagrams are in $D'$ or $D''$, the following are axioms of this kind: an arrow between constructions is a monomorphism (its diagonal is an isomorphism), is an epimorphism, or two parallel arrows between constructions are equal (equalizer or coequalizer an isomorphism).}
+\entree[cex]{29926}{8:18:46}{“$X$ acts faithfully on $Y$” cannot be expressed by inverting arrows, even in a topos: it is not stable under base change.}
+\entree[cex]{29982}{8:19:42}{“An object of a topos is locally constant with $n$ sheets” cannot be so expressed; the corresponding theories are not algebraic, not representable.}
+\entree[def]{30037}{8:20:37}{Rule 3 (adding arrows): if $T$ is algebraic and represented by $R$, and $H$ is a small set with source and target maps $\alpha_1,\alpha_2\colon H\to\mathrm{Ob}\,R$ (formal arrows between constructions), $T'(C)$ is the category of pairs $(\psi,\beta)$ with $\psi\in T(C)$ and, for each $h\in H$, an arrow $\beta(h)\colon\psi(\alpha_1h)\to\psi(\alpha_2h)$ in $C$; $T'(C)\to T(C)$ is faithful, no longer full.}
+\face{Tape 1, side A}
+\section{Theories as 2-fibred categories over $\mathrm{Cat}_D$}
+\entree[q]{30897}{8:34:57}{Are the algebraic theories relative to $D$, to be defined by stepwise rules, exactly the theories 2-represented by objects of $\mathrm{Cat}_D$? For $D$ the 2-category of topoi, this would identify types of algebraic structure with classifying topoi.}
+\entree[q]{31127}{8:38:47}{Can every exactness property be written as “every $D$-functor $I\to C$ factors through a given $D$-functor $I\to I'$”, i.e. $\mathrm{Hom}_D(I',C)\to\mathrm{Hom}_D(I,C)$ fully faithful with prescribed image? Only the converse direction (an exactness property gives such a pair, with $I'=I[\Sigma^{-1}]$) was shown.}
+\entree[ex]{31476}{8:44:36}{“Every monoid object is a group” is an exactness property: a monoid is a group iff the shear map $(x,y)\mapsto(x,xy)$ of $G\times G$ is an isomorphism (Cartesian squares in the nerve).}
+\entree[q]{31586}{8:46:26}{Is “every semigroup object is a monoid” an exactness property?}
+\entree[rem]{31658}{8:47:38}{A theory is identified with the family of its realisations $C\mapsto T(C)$, a 2-fibred category over $\mathrm{Cat}_D$, not with a presentation by axioms: different axiomatisations of the same structure give the same theory.}
+\entree[rem]{32109}{8:55:09}{Constructions that are functorial only for isomorphisms, not for homomorphisms, do not fit the framework.}
+\entree[cex]{32223}{8:57:03}{In a topos, “$X$ over $B$ is locally constant of type $I_n$” (locally isomorphic to the constant object with $n$ elements) makes sense intrinsically but defines no algebraic theory: it needs the object $\underline{\mathrm{Isom}}(I_{n,B},X)$, not expressible by limits alone.}
+\entree[cex]{32336}{8:58:56}{For rings, “the spectrum is connected” is expressible by these means, but “the spectrum has exactly $n$ connected components” is not, being tied to local constancy.}
+\section{Adding arrows and combining theories}
+\session{late June 1973 (catalogue: 27 June)}
+\video{PqCQM3Pcl6Q}
+\noindent\textit{Video 2/4 (\href{https://www.youtube.com/watch?v=PqCQM3Pcl6Q}{\texttt{PqCQM3Pcl6Q}}): tape 2, side A (9:02:23--9:52:24); tape 2, side B (9:52:24--10:14:40).}\par\medskip
+\noindent\textit{Dating: this meeting begins with no recap, carrying out what the previous one announced for its next session, and it ends by moving the following class from Tuesday to Monday; the tape gives no day, so the catalogue date of 27 June is kept as a label only.}\par\medskip
+\face{Tape 2, side A}
+\entree[ex]{32543}{9:02:23}{Extra structure on a group $G$ by adding arrows: a map $G^{\mathrm{ab}}\to G\times G$, or $G^3\to G^4$, constructed from $G$ in any category of $\mathrm{Cat}_D$.}
+\entree[prop]{32664}{9:04:24}{If $T$ is represented by $R$, the theory obtained by adding the arrows $H$ is represented by $R_1[\Sigma^{-1}]$, where $R_1$ is the envelope of the diagram type $R\cup H$ with the relations from composition imposed, and $\Sigma$ the arrows expressing the failure of exactness.}
+\entree[def]{33138}{9:12:18}{Rule 4 (combining theories): for a small family of algebraic theories $T_\alpha$ with base objects $I_\alpha$, the product $\prod_\alpha T_\alpha$ is algebraic, with base objects $\coprod I_\alpha$ (a group and a ring together); it is represented by the 2-sum of the $R_\alpha$ in $\mathrm{Cat}_D$ (disjoint union, $D$-envelope, then inversion of the arrows expressing exactness).}
+\entree[prop]{33430}{9:17:10}{The 2-inverse limit of a pseudo-functor $\alpha\mapsto T_\alpha$ of algebraic theories (computed objectwise on $T_\alpha(C)$) is represented by the 2-direct limit of the $R_\alpha$ in $\mathrm{Cat}_D$.}
+\entree[ex]{33551}{9:19:11}{The 2-fibre product of the theory of groups and the theory of rings over the theory of Lie rings (via the Lie ring of the descending central series, resp. the commutator bracket) is the theory of a group and a ring with an isomorphism between their Lie rings.}
+\entree[prop]{33666}{9:21:06}{For theories $T_\alpha\to\tau^I$ over the same base objects, the 2-fibre product over $\tau^I$ (all the structures on the same objects) is represented by the 2-amalgamated sum of the $R_\alpha$ over $\tilde I$; for instance, a group and a ring on the same underlying object.}
+\entree[def]{33783}{9:23:03}{A theory is algebraic if it is obtained from the empty structure by iterating rules 2, 3 and 4, transfinitely if necessary.}
+\entree[prop]{33898}{9:24:58}{Every algebraic theory is representable, by an $R$ having a small $D$-generating family (constructions by generators and relations).}
+\entree[prop]{34019}{9:26:59}{If $R$ is small, $T_R$ is algebraic: take $I=\mathrm{Ob}\,R$, start from $\tau^I$, add the arrows of $R$ as formal arrows, impose that composites and identities are respected (arrows becoming equal) and that the functor commutes with $D$-limits (arrows becoming isomorphisms).}
+\entree[prop]{34369}{9:32:49}{Making given pairs of arrows equal is itself a solvable 2-universal problem in $\mathrm{Cat}_D$ (impose the equalities in $\mathbf{Cat}$, pass to the $D$-envelope, invert the comparison arrows); so rule 2 admits two kinds of axioms: arrows becoming isomorphisms and arrows becoming equal.}
+\entree[q]{34771}{9:39:31}{If $R$ is not small and $I$ is a small family of objects with $\mathrm{Hom}_D(R,C)\to C^I$ faithful for all $C$, is $T_R$ algebraic?}
+\face{Tape 2, side B}
+\section{Generating families: limits of the criterion}
+\entree[prop]{35544}{9:52:24}{If $R$ is a lattice and $D'$, $D''$ are the finite meets and joins, $\mathrm{Hom}_D(R,C)$ is a preordered category, so every functor out of it is faithful and the faithfulness condition on $I$ is empty.}
+\entree[cex]{35722}{9:55:22}{For $R$ the ordered category of ordinals below the first ordinal outside the universe, the empty family satisfies the faithfulness condition, yet the theory is not algebraic (asserted, expected rather than proved); faithfulness of $\mathrm{Hom}_D(R,C)\to C^I$ is too weak a notion of generation.}
+\entree[q]{35840}{9:57:20}{Is it enough to require that $I\to R$ factors through no proper full $D$-subcategory $R'\subset R$ (so that $R$ is reached by transfinitely adding limits and inverting arrows from $I$)?}
+\entree[q]{36019}{10:00:19}{Which conditions on a pair $(R,I)$ make $T_R$ an algebraic theory with base objects $I$, built from the empty structure on $I$ by adding arrows and axioms?}
+\entree[q]{36186}{10:03:06}{For which $D$ are the envelope and localization problems solvable? Known for finite inverse limits with left exact functors, and for topoi; open for additive, abelian and Karoubian categories (where every projector has an image).}
+\section{Additive categories as an exactness property}
+\entree[def]{36352}{10:05:52}{A semi-additive category has finite products and sums, the canonical arrow from the initial to the final object is an isomorphism (so zero morphisms exist), and the canonical arrow $X\sqcup Y\to X\times Y$ is an isomorphism.}
+\entree[prop]{36465}{10:07:45}{In a semi-additive category every object carries a unique monoid structure and a unique comonoid structure, both commutative (Eckmann–Hilton), and the Hom-sets are commutative monoids.}
+\entree[prop]{36577}{10:09:37}{A semi-additive category is additive iff every monoid object is a group, which is an exactness property: the map $(x,y)\mapsto(x,x+y)$ of $X\times X$ is an isomorphism.}
+\entree[rem]{36760}{10:12:40}{No simple construction of an enveloping additive category is known when both direct and inverse limits occur; for finite inverse limits only, functors into abelian groups give one.}
 \section{Algebraic theories and strict cogeneration}
 \session{2 July 1973}
 \video{4gynb9uTEE4}
