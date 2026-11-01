@@ -14,13 +14,6 @@ Grothendieck, fondée sur les transcriptions du dépôt. Suivi dans #34.
   `rhmunsrtnat.bst`) sont copiés ici tels qu'elle les distribue.
   `article.pdf` est compilé et versionné
   (`cd docs/rhm && tectonic -X compile article.tex`, qui lance BibTeX).
-- `article-anonyme.tex` — la version anonyme pour l'évaluation : le même
-  texte, sans nom ni adresse, sans lien vers le site ou le dépôt, les deux
-  autocitations remplacées par « Auteur 2026a/b ». `rhm.sty` lance
-  `\nocite{*}` : `article.tex` le remplace, dans chaque version, par la liste
-  des clés de `article.bib` moins celles de l'autre version ; à régénérer
-  quand on ajoute une entrée
-  (`tectonic -X compile article-anonyme.tex`).
 
 ## Les consignes de la revue
 
