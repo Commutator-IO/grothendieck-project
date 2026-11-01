@@ -1,0 +1,46 @@
+\section[Carnet 1983-4 : l'équation cohomologique sur le tore]{Carnet 1983-4 : l'équation cohomologique sur le tore et les nombres diophantiens\protect\verifie{Notebook1983_4}}\label{sec:quillen-1983-4}
+
+\emph{Le contexte.} Au printemps 1983, le \carnet{1983}{4} étudie l'algèbre de Connes du feuilletage de Kronecker de pente irrationnelle $\theta$ sur le tore $T^2$ et ses modules projectifs. Aux pages~71--72 (ses pages~800--801), Quillen calcule le groupe de Picard du topos des orbites de ce feuilletage : les fibrés en droites y sont des fibrés en droites sur $T^2$ munis d'une connexion plate le long des feuilles, et le groupe cherché est $H^1(T^2, \mathcal O^*)$, où $\mathcal O$ est le faisceau des fonctions lisses constantes le long des feuilles.
+
+\emph{La page.} La première étape est $H^1(T^2, \mathcal O)$, calculé par la résolution fine donnée par l'opérateur $D = \theta\partial_x - \partial_y$ sur $C^\infty(T^2)$. Sur l'exponentielle $e^{2\pi i(mx + ny)}$, $D$ agit par le scalaire $2\pi i(\theta m - n)$, qui ne s'annule qu'en $(m, n) = (0, 0)$ puisque $\theta$ est irrationnel. Quillen en déduit que $D$ est inversible hors des constantes, donc que $H^0$ et $H^1$ sont tous deux égaux à $\mathbf C$, puis, par la suite exponentielle, que le groupe de Picard est $\mathbf C^*/\{e^{2\pi i n\theta}\} \times \mathbf Z$.
+
+\emph{L'intuition.} Inverser $D$ sur les exponentielles ne suffit pas : il faut que la série $\sum b_{m,n}\,(2\pi i(\theta m - n))^{-1} e^{2\pi i(mx+ny)}$ définisse encore une fonction lisse. Les coefficients d'une fonction lisse décroissent plus vite que toute puissance de $1 + |m| + |n|$ ; si les petits diviseurs $|\theta m - n|$ ne sont minorés que par une puissance de $|m|^{-1}$, la division coûte une puissance fixe et la décroissance rapide survit. Si au contraire $\theta$ est très bien approché par des rationnels, on peut placer des coefficients $b_{m,n}$ minuscules exactement aux points où $\theta m - n$ est encore plus petit, et le quotient ne décroît plus. C'est le phénomène des petits diviseurs, et c'est l'hypothèse que la page ne formule pas.
+
+\begin{enonce}
+Les suites considérées sont indexées par $\mathbf Z^2$ et à valeurs complexes. Une suite $a$ est \emph{à décroissance rapide} si, pour tout entier $k$, la quantité $|a_{m,n}|\,(1 + |m| + |n|)^k$ est bornée. Un réel $\theta$ est \emph{diophantien} s'il existe $C > 0$ et un entier $N$ tels que $|\theta m - n| \ge C\,|m|^{-N}$ pour tous entiers $m \ne 0$ et $n$. Le facteur $2\pi$ est omis : $D$ agit par $a_{m,n} \mapsto i(\theta m - n)\,a_{m,n}$.
+\end{enonce}
+
+\begin{encadre}
+\begin{theoreme}[énoncé de l'édition ; hypothèse manquante du carnet 1983-4, pp.~71--72]\label{thm:quillen-1983-4}
+Soit $\theta$ un réel irrationnel. L'opérateur $a \mapsto (i(\theta m - n)\,a_{m,n})_{m,n}$ envoie les suites à décroissance rapide dans les suites à décroissance rapide de terme $(0,0)$ nul, et il est surjectif sur ces dernières si et seulement si $\theta$ est diophantien. Plus précisément : (1)~si $\theta$ est diophantien (sans hypothèse d'irrationalité) et si $b$ est à décroissance rapide avec $b_{0,0} = 0$, la suite $a_{m,n} = b_{m,n}/(i(\theta m - n))$, $a_{0,0} = 0$, est à décroissance rapide et vérifie $i(\theta m - n)\,a_{m,n} = b_{m,n}$ ; (2)~si $\theta$ est irrationnel et non diophantien, il existe une suite $b$ à décroissance rapide, avec $b_{0,0} = 0$, qui n'a aucun antécédent à décroissance rapide.
+En particulier, la conclusion de la page vaut pour $\theta$ diophantien, et tombe en défaut pour un nombre de Liouville.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Notons $w_{m,n} = 1 + |m| + |n|$ et $\sigma_{m,n} = \theta m - n$. On a $|\sigma_{m,n}| \le (|\theta| + 1)\,w_{m,n}$, d'où la première assertion.
+
+(1) Il existe $c > 0$ et $N$ tels que $|\sigma_{m,n}|\,w_{m,n}^N \ge c$ pour $(m, n) \ne (0,0)$ : si $m \ne 0$, c'est l'hypothèse, puisque $|m| \le w_{m,n}$ ; si $m = 0$, on a $|\sigma_{0,n}| = |n| \ge 1$. Alors $|a_{m,n}|\,w^k \le |b_{m,n}|\,w^{k+N}/c$, borné. La minoration ne fait intervenir que $|m|$, et $|m| \le w$ : la dépendance en $n$ ne gêne pas dans ce sens.
+
+(2) La négation de l'hypothèse fournit, pour chaque $j$, un couple $q_j = (m_j, n_j)$ avec $m_j \ne 0$ et $|\sigma_{q_j}| < (j+1)^{-1}|m_j|^{-2j}$ ; l'irrationalité donne $\sigma_{q_j} \ne 0$. On pose $b_{q} = \sigma_q / \sqrt{|\sigma_q|}$ si $q$ est l'un des $q_j$, et $b_q = 0$ sinon ; donc $b_{0,0} = 0$ et $|b_{q_j}| = \sqrt{|\sigma_{q_j}|} < |m_j|^{-j}$. Ici intervient $n$ : comme $|\sigma_{q_j}| < 1$, on a $|n_j| \le |\theta|\,|m_j| + 1$, d'où $w_{q_j} \le (3 + |\theta|)\,|m_j|$. Pour $j \ge k$, il vient $|b_{q_j}|\,w_{q_j}^k \le (3 + |\theta|)^k |m_j|^{k-j} \le (3 + |\theta|)^k$ ; les indices $j < k$ sont en nombre fini. Donc $b$ est à décroissance rapide. Si $a$ en était un antécédent, on aurait $|a_{q_j}| = |\sigma_{q_j}|^{-1/2} > \sqrt{j+1}$, et $a$ ne serait même pas bornée.
+\end{proof}
+
+\begin{proposition}\label{prop:quillen-1983-4-liouville}
+Un nombre de Liouville n'est pas diophantien. Pour un tel $\theta$, il existe donc une suite à décroissance rapide de terme $(0,0)$ nul qui n'est pas dans l'image de $D$.
+\end{proposition}
+
+\begin{proof}
+Soient $C > 0$ et $N$. Pour une infinité de dénominateurs $b$, il existe $a$ avec $|\theta - a/b| < b^{-(N+2)}$ ; en prenant $b \ge 1/C$, on obtient $|\theta b - a| < b^{-(N+1)} \le C\,b^{-N}$, ce qui contredit la minoration. Un nombre de Liouville est irrationnel, et le théorème~\ref{thm:quillen-1983-4} s'applique.
+\end{proof}
+
+\begin{remarque}
+Pour $\theta$ non diophantien, l'image de $D$ dans les fonctions lisses de moyenne nulle est dense mais non fermée : le quotient $H^1(T^2, \mathcal O)$ calculé par la résolution est de dimension infinie et non séparé. Le calcul du groupe de Picard qui suit dans le carnet repose donc sur l'hypothèse diophantienne. L'ensemble des réels diophantiens est de mesure pleine, de sorte que la conclusion de la page vaut pour presque tout $\theta$.
+\end{remarque}
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} Le fichier \href{\leanblobmain/Notebook1983_4.lean}{\texttt{Notebook1983\_4.\allowbreak{}lean}} travaille au niveau des suites sur $\mathbf Z \times \mathbf Z$, sans analyse de Fourier. Il définit le poids \texttt{weight}, la décroissance rapide \texttt{IsRapidDecay}, le prédicat \texttt{IsDiophantine} et le symbole \texttt{symbol}. Le sens direct est \texttt{IsDiophantine.isRapidDecay\_div} et \texttt{IsDiophantine.symbol\_mul\_div}, à partir de la minoration \texttt{IsDiophantine.lower\_bound} ; la stabilité de la décroissance rapide est \texttt{IsRapidDecay.symbol\_mul}. La réciproque est \texttt{exists\_not\_mem\_range\_of\_not\_isDiophantine}, l'équivalence \texttt{surjective\_iff\_isDiophantine}, et le cas des nombres de Liouville \texttt{not\_isDiophantine\_of\_liouville} et \texttt{exists\_not\_mem\_range\_of\_liouville}, à partir du prédicat \texttt{Liouville} de mathlib. mathlib n'a ni suites à décroissance rapide sur $\mathbf Z^2$ ni nombres diophantiens en ce sens ; le fichier les définit.
+\end{sloppypar}
+
+Ne sont pas formalisés : l'identification des fonctions lisses sur $T^2$ aux suites à décroissance rapide de leurs coefficients de Fourier, la résolution du faisceau $\mathcal O$, le caractère non séparé de $H^1$ dans le cas de Liouville, la mesure pleine des nombres diophantiens, et le calcul du groupe de Picard.
+
+\litterature{retrouvé : le phénomène des petits diviseurs et l'équation cohomologique sur le tore sont classiques (V.~I.~Arnold, \emph{Chapitres supplémentaires de la théorie des équations différentielles ordinaires} ; M.~Herman, Publ. Math. IHÉS 49 (1979) ; A.~Katok, \emph{Combinatorial constructions in ergodic theory and dynamics}, AMS (2003)). Pour la cohomologie feuilletée du feuilletage de Kronecker, qui est $\mathbf C$ en degré~$1$ si et seulement si $\theta$ est diophantien et de dimension infinie non séparée sinon : A.~El Kacimi Alaoui, Compositio Math. 49 (1983) ; A.~Haefliger, J. Differential Geom. 15 (1980). L'énoncé est classique ; l'édition ne le donne pas pour nouveau et signale seulement l'hypothèse que la page ne formule pas.}
