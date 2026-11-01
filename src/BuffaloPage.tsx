@@ -132,7 +132,18 @@ type IndexItem =
   | { k: 'topic'; text: string }
   | { k: 'session'; text: string }
   | { k: 'side'; text: string }
-  | { k: 'entry'; v: string; t: number; ts: string; text: string };
+  | { k: 'entry'; v: string; t: number; ts: string; text: string; kind?: Kind; name?: string };
+type Kind = 'def' | 'thm' | 'prop' | 'ex' | 'cex' | 'rem' | 'q';
+// The kinds of entry, labelled as in a course; the colours are those of the PDF.
+const KIND: Record<Kind, { label: string; color: string; italic?: boolean }> = {
+  def: { label: 'Definition', color: '#2E6B3F' },
+  thm: { label: 'Theorem', color: '#2F4DA8', italic: true },
+  prop: { label: 'Proposition', color: '#2F4DA8', italic: true },
+  ex: { label: 'Example', color: '#8A5A00' },
+  cex: { label: 'Counterexample', color: '#A8322F' },
+  rem: { label: 'Remark', color: '#5E5E5E' },
+  q: { label: 'Question', color: '#6B3FA0' },
+};
 type CourseIndex = { pdf: string; entries: number; items: IndexItem[] };
 const loadIndex = () => import('./content/buffalo-index.json').then((m) => m.default as unknown as Record<string, CourseIndex>);
 
@@ -162,7 +173,15 @@ function CourseIndexView({ index, playing, onPlay }: { index: CourseIndex; playi
             >
               {i.ts}
             </button>
-            <p dangerouslySetInnerHTML={{ __html: html[n] }} />
+            <p className={i.kind && KIND[i.kind]?.italic ? 'italic' : undefined}>
+              {i.kind && KIND[i.kind] && (
+                <b className="mr-1.5 not-italic" style={{ color: KIND[i.kind].color }}>
+                  {KIND[i.kind].label}
+                  {i.name && <span dangerouslySetInnerHTML={{ __html: ` (${statement(i.name)})` }} />}.
+                </b>
+              )}
+              <span dangerouslySetInnerHTML={{ __html: html[n] }} />
+            </p>
           </div>
         ),
       )}

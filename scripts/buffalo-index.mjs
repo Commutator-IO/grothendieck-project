@@ -63,7 +63,7 @@ for (const [id, dir] of Object.entries(COURSES)) {
   const body = src.slice(src.indexOf('\\begin{document}'));
   const items = [];
   let video = null;
-  const re = /\\(section|topic|session|sessiondate|face|video|entree)(\*?)\{/g;
+  const re = /\\(section|topic|session|sessiondate|face|video|entree)(\*?)(?:\[(\w+)\])?(?:\[([^\]]*)\])?\{/g;
   for (let m; (m = re.exec(body)); ) {
     let [a, i] = arg(body, m.index + m[0].length - 1);
     const k = m[1];
@@ -76,7 +76,7 @@ for (const [id, dir] of Object.entries(COURSES)) {
       const [ts, j] = arg(body, i);
       const [text, l] = arg(body, j);
       if (!video) throw new Error(`${dir}: entry before any \\video`);
-      items.push({ k: 'entry', v: video, t: Number(a), ts, text: prose(text) });
+      items.push({ k: 'entry', v: video, t: Number(a), ts, text: prose(text), ...(m[3] ? { kind: m[3] } : {}), ...(m[4] ? { name: prose(m[4]) } : {}) });
       i = l;
     }
     re.lastIndex = i;

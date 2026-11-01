@@ -28,8 +28,22 @@
 \newcommand{\session}[1]{\par\bigskip\noindent{\small\bfseries\textcolor{frise}{Session of #1}}\par\nopagebreak\smallskip}
 % An entry: the moment on the tape (link to YouTube), then the statement.
 \newlength{\horo}\settowidth{\horo}{\small\texttt{00:00:00}\quad}
-\newcommand{\entree}[3]{\par\noindent\hangindent=\horo\hangafter=1%
-  \makebox[\horo][l]{\small\href{https://www.youtube.com/watch?v=\videoid&t=#1s}{\textcolor{frise}{\texttt{#2}}}}#3\par\smallskip}
+% Kinds of entry, as in a course: \entree[def]{…}, [thm], [prop], [ex], [cex], [rem], [q]; none = plain.
+\definecolor{kdef}{HTML}{2E6B3F}\definecolor{kthm}{HTML}{2F4DA8}\definecolor{kex}{HTML}{8A5A00}
+\definecolor{kcex}{HTML}{A8322F}\definecolor{krem}{HTML}{5E5E5E}\definecolor{kq}{HTML}{6B3FA0}
+\makeatletter
+\def\kind@def#1{\textcolor{kdef}{\textbf{Definition\kindname{#1}.}}\enspace}
+\def\kind@thm#1{\textcolor{kthm}{\textbf{Theorem\kindname{#1}.}}\enspace\itshape}
+\def\kind@prop#1{\textcolor{kthm}{\textbf{Proposition\kindname{#1}.}}\enspace\itshape}
+\def\kind@ex#1{\textcolor{kex}{\textbf{Example\kindname{#1}.}}\enspace}
+\def\kind@cex#1{\textcolor{kcex}{\textbf{Counterexample\kindname{#1}.}}\enspace}
+\def\kind@rem#1{\textcolor{krem}{\textbf{Remark\kindname{#1}.}}\enspace}
+\def\kind@q#1{\textcolor{kq}{\textbf{Question\kindname{#1}.}}\enspace}
+\newcommand{\kindlabel}[2]{\ifcsname kind@#1\endcsname\csname kind@#1\endcsname{#2}\fi}
+\newcommand{\kindname}[1]{\if\relax\detokenize{#1}\relax\else\ (#1)\fi}
+\makeatother
+\NewDocumentCommand{\entree}{O{}O{}mmm}{\par\raggedright\noindent\hangindent=\horo\hangafter=1%
+  \makebox[\horo][l]{\small\href{https://www.youtube.com/watch?v=\videoid&t=#3s}{\textcolor{frise}{\texttt{#4}}}}{\kindlabel{#1}{#2}#5\par}\smallskip}
 \raggedbottom\emergencystretch=4em
 
 \begin{document}
@@ -68,320 +82,320 @@
 \video{URU5jgTvjhU}
 \noindent\textit{Video 1/4 (\href{https://www.youtube.com/watch?v=URU5jgTvjhU}{\texttt{URU5jgTvjhU}}): tape 1, side A (0:00:00--0:49:11); tape 1, side B (0:49:11--1:36:58); tape 2, side A (1:36:58--2:28:43); tape 2, side B (2:28:43--2:33:29).}\par\medskip
 \face{Tape 1, side A}
-\entree{206}{0:03:26}{The open sets $\mathcal{O}(X)$ of a space $X$, ordered by inclusion, form a category: $\mathrm{Hom}(U,V)$ is a singleton if $U\subset V$, empty otherwise.}
-\entree{335}{0:05:35}{Definition: a presheaf of sets on $X$ is a functor $F\colon\mathcal{O}(X)^{\mathrm{op}}\to\mathbf{Set}$; the maps $F(V)\to F(U)$, $U\subset V$, are the restrictions.}
-\entree{466}{0:07:46}{A morphism of presheaves $F\to G$ is a natural transformation: maps $F(U)\to G(U)$ compatible with the restrictions.}
-\entree{596}{0:09:56}{Definition: $F$ is separated if, for every open covering $U=\bigcup U_i$, the map $F(U)\to\prod_i F(U_i)$ is injective.}
-\entree{859}{0:14:19}{Definition: $F$ is a sheaf if, for every covering $U=\bigcup U_i$, the sequence $F(U)\to\prod_i F(U_i)\rightrightarrows\prod_{i,j}F(U_i\cap U_j)$ is exact (equalizer).}
-\entree{988}{0:16:28}{The sheaves on $X$ form a full subcategory $\mathrm{Sh}(X)$ (denoted here \q{Top(X)}) of the category of presheaves.}
+\entree[prop]{206}{0:03:26}{The open sets $\mathcal{O}(X)$ of a space $X$, ordered by inclusion, form a category: $\mathrm{Hom}(U,V)$ is a singleton if $U\subset V$, empty otherwise.}
+\entree[def]{335}{0:05:35}{A presheaf of sets on $X$ is a functor $F\colon\mathcal{O}(X)^{\mathrm{op}}\to\mathbf{Set}$; the maps $F(V)\to F(U)$, $U\subset V$, are the restrictions.}
+\entree[def]{466}{0:07:46}{A morphism of presheaves $F\to G$ is a natural transformation: maps $F(U)\to G(U)$ compatible with the restrictions.}
+\entree[def]{596}{0:09:56}{$F$ is separated if, for every open covering $U=\bigcup U_i$, the map $F(U)\to\prod_i F(U_i)$ is injective.}
+\entree[def]{859}{0:14:19}{$F$ is a sheaf if, for every covering $U=\bigcup U_i$, the sequence $F(U)\to\prod_i F(U_i)\rightrightarrows\prod_{i,j}F(U_i\cap U_j)$ is exact (equalizer).}
+\entree[prop]{988}{0:16:28}{The sheaves on $X$ form a full subcategory $\mathrm{Sh}(X)$ (denoted here \q{Top(X)}) of the category of presheaves.}
 \section{Examples of sheaves}
-\entree{1127}{0:18:47}{Example: for a set $E$, the presheaf $U\mapsto E^U$ of maps from $U$ to $E$ is a sheaf.}
-\entree{1254}{0:20:54}{Definition: a subpresheaf $G\subset F$ is a family of subsets $G(U)\subset F(U)$ stable under the restrictions.}
-\entree{1452}{0:24:12}{A subpresheaf of a separated presheaf is separated.}
-\entree{1452}{0:24:12}{A subpresheaf $G$ of a sheaf $F$ is a sheaf if and only if membership of a section in $G$ is a local property on $U$.}
-\entree{1579}{0:26:19}{Example: if $E$ is a topological space, the continuous maps from open sets of $X$ to $E$ form a subsheaf of $U\mapsto E^U$.}
-\entree{1643}{0:27:23}{Example: for differentiable (or analytic) manifolds $X$ and $E$, the differentiable (resp. analytic) maps form a sheaf.}
-\entree{1769}{0:29:29}{Example: for $p\colon E\to X$ continuous, the continuous sections $\Gamma(U,E)$ over the open sets $U$ form a sheaf.}
-\entree{1965}{0:32:45}{The sheaf of continuous maps from $X$ to $E$ is isomorphic to the sheaf of sections of the second projection $E\times X\to X$.}
-\entree{2099}{0:34:59}{Example: on a locally compact space $X$, the Radon measures on the open sets of $X$ form a sheaf.}
-\entree{2164}{0:36:04}{Example: on a differentiable manifold, the distributions on the open sets form a sheaf.}
-\entree{2164}{0:36:04}{Example: $U\mapsto\{\text{subsets of }U\}$, with restriction by intersection, is a sheaf; the closed subsets of $U$ form a subsheaf.}
-\entree{2291}{0:38:11}{Example: on an analytic space, the analytic subsets of the open sets form a sheaf.}
+\entree[ex]{1127}{0:18:47}{For a set $E$, the presheaf $U\mapsto E^U$ of maps from $U$ to $E$ is a sheaf.}
+\entree[def]{1254}{0:20:54}{A subpresheaf $G\subset F$ is a family of subsets $G(U)\subset F(U)$ stable under the restrictions.}
+\entree[prop]{1452}{0:24:12}{A subpresheaf of a separated presheaf is separated.}
+\entree[prop]{1452}{0:24:12}{A subpresheaf $G$ of a sheaf $F$ is a sheaf if and only if membership of a section in $G$ is a local property on $U$.}
+\entree[ex]{1579}{0:26:19}{If $E$ is a topological space, the continuous maps from open sets of $X$ to $E$ form a subsheaf of $U\mapsto E^U$.}
+\entree[ex]{1643}{0:27:23}{For differentiable (or analytic) manifolds $X$ and $E$, the differentiable (resp. analytic) maps form a sheaf.}
+\entree[ex]{1769}{0:29:29}{For $p\colon E\to X$ continuous, the continuous sections $\Gamma(U,E)$ over the open sets $U$ form a sheaf.}
+\entree[prop]{1965}{0:32:45}{The sheaf of continuous maps from $X$ to $E$ is isomorphic to the sheaf of sections of the second projection $E\times X\to X$.}
+\entree[ex]{2099}{0:34:59}{On a locally compact space $X$, the Radon measures on the open sets of $X$ form a sheaf.}
+\entree[ex]{2164}{0:36:04}{On a differentiable manifold, the distributions on the open sets form a sheaf.}
+\entree[ex]{2164}{0:36:04}{$U\mapsto\{\text{subsets of }U\}$, with restriction by intersection, is a sheaf; the closed subsets of $U$ form a subsheaf.}
+\entree[ex]{2291}{0:38:11}{On an analytic space, the analytic subsets of the open sets form a sheaf.}
 \section{Sheaves of sections and the case of a point}
-\entree{2487}{0:41:27}{The sheaf of sections $\widetilde{E}$ of a space $E$ over $X$ defines a functor $\mathrm{Fib}(X)\to\mathrm{Sh}(X)$, $f\mapsto(s\mapsto f\circ s)$.}
-\entree{2680}{0:44:40}{This functor is not fully faithful: for $X$ a point, it is identified with the forgetful functor from topological spaces to $\mathbf{Set}$.}
-\entree{2745}{0:45:45}{On a point, the functor $\Gamma\colon F\mapsto F(\mathrm{pt})$ is an equivalence of categories $\mathrm{Sh}(\mathrm{pt})\simeq\mathbf{Set}$.}
-\entree{2811}{0:46:51}{For $U$ open, $\Gamma_U\colon F\mapsto F(U)$ is a functor $\mathrm{Sh}(X)\to\mathbf{Set}$; we write $\Gamma(F)=\Gamma(X,F)=F(X)$.}
+\entree[prop]{2487}{0:41:27}{The sheaf of sections $\widetilde{E}$ of a space $E$ over $X$ defines a functor $\mathrm{Fib}(X)\to\mathrm{Sh}(X)$, $f\mapsto(s\mapsto f\circ s)$.}
+\entree[cex]{2680}{0:44:40}{This functor is not fully faithful: for $X$ a point, it is identified with the forgetful functor from topological spaces to $\mathbf{Set}$.}
+\entree[prop]{2745}{0:45:45}{On a point, the functor $\Gamma\colon F\mapsto F(\mathrm{pt})$ is an equivalence of categories $\mathrm{Sh}(\mathrm{pt})\simeq\mathbf{Set}$.}
+\entree[def]{2811}{0:46:51}{For $U$ open, $\Gamma_U\colon F\mapsto F(U)$ is a functor $\mathrm{Sh}(X)\to\mathbf{Set}$; we write $\Gamma(F)=\Gamma(X,F)=F(X)$.}
 \face{Tape 1, side B}
 \noindent\textit{Not indexed (sound too degraded to be transcribed).}\par
 \section{Limits and colimits}
 \face{Tape 2, side A}
-\entree{5826}{1:37:06}{The notions dual to products, equalizers, fibre products and the terminal object are coproducts, coequalizers, pushouts and the initial object.}
-\entree{5888}{1:38:08}{In $\mathbf{Set}$, coproducts are disjoint unions and the initial object is $\varnothing$.}
-\entree{5888}{1:38:08}{In $\mathbf{Set}$, the coequalizer of $E\rightrightarrows F$ is the quotient of $F$ by the equivalence relation generated by the image of $E$ in $F\times F$.}
-\entree{6015}{1:40:15}{Example: in groups, the coproduct is the free product; the coproduct of $n$ copies of $\mathbb{Z}$ is the free group on $n$ generators.}
-\entree{6082}{1:41:22}{For the usual algebraic structures, limits are computed on the underlying sets, but colimits are not.}
-\entree{6212}{1:43:32}{If $S$ admits limits (resp. colimits) of a given type, $\mathrm{Hom}(C^{\mathrm{op}},S)$ admits them too, computed argumentwise.}
-\entree{6275}{1:44:35}{The category opposite to $\mathrm{Hom}(C^{\mathrm{op}},S)$ is $\mathrm{Hom}(C,S^{\mathrm{op}})$.}
-\entree{6401}{1:46:41}{Presheaves on $X$ admit all colimits, computed open set by open set.}
-\entree{6469}{1:47:49}{The subcategory $\mathrm{Sh}(X)$ is not stable in presheaves under any of the usual types of colimit.}
-\entree{6602}{1:50:02}{Example: the coproduct, taken in presheaves, of the terminal object with itself (the constant presheaf with two elements) is not a sheaf.}
-\entree{6730}{1:52:10}{For every sheaf $F$, $F(\varnothing)$ is a singleton ($\varnothing$ being covered by the empty family).}
-\entree{6797}{1:53:17}{Example: the initial presheaf $U\mapsto\varnothing$ is not a sheaf.}
-\entree{6861}{1:54:21}{A colimit of sheaves exists if and only if the functor $G\mapsto\mathrm{Hom}(P,G)$ on $\mathrm{Sh}(X)$ is representable, $P$ being the colimit taken in presheaves.}
+\entree[def]{5826}{1:37:06}{The notions dual to products, equalizers, fibre products and the terminal object are coproducts, coequalizers, pushouts and the initial object.}
+\entree[prop]{5888}{1:38:08}{In $\mathbf{Set}$, coproducts are disjoint unions and the initial object is $\varnothing$.}
+\entree[prop]{5888}{1:38:08}{In $\mathbf{Set}$, the coequalizer of $E\rightrightarrows F$ is the quotient of $F$ by the equivalence relation generated by the image of $E$ in $F\times F$.}
+\entree[ex]{6015}{1:40:15}{In groups, the coproduct is the free product; the coproduct of $n$ copies of $\mathbb{Z}$ is the free group on $n$ generators.}
+\entree[rem]{6082}{1:41:22}{For the usual algebraic structures, limits are computed on the underlying sets, but colimits are not.}
+\entree[prop]{6212}{1:43:32}{If $S$ admits limits (resp. colimits) of a given type, $\mathrm{Hom}(C^{\mathrm{op}},S)$ admits them too, computed argumentwise.}
+\entree[prop]{6275}{1:44:35}{The category opposite to $\mathrm{Hom}(C^{\mathrm{op}},S)$ is $\mathrm{Hom}(C,S^{\mathrm{op}})$.}
+\entree[prop]{6401}{1:46:41}{Presheaves on $X$ admit all colimits, computed open set by open set.}
+\entree[cex]{6469}{1:47:49}{The subcategory $\mathrm{Sh}(X)$ is not stable in presheaves under any of the usual types of colimit.}
+\entree[ex]{6602}{1:50:02}{The coproduct, taken in presheaves, of the terminal object with itself (the constant presheaf with two elements) is not a sheaf.}
+\entree[prop]{6730}{1:52:10}{For every sheaf $F$, $F(\varnothing)$ is a singleton ($\varnothing$ being covered by the empty family).}
+\entree[ex]{6797}{1:53:17}{The initial presheaf $U\mapsto\varnothing$ is not a sheaf.}
+\entree[prop]{6861}{1:54:21}{A colimit of sheaves exists if and only if the functor $G\mapsto\mathrm{Hom}(P,G)$ on $\mathrm{Sh}(X)$ is representable, $P$ being the colimit taken in presheaves.}
 \section{The associated sheaf}
-\entree{7053}{1:57:33}{Definition: the sheaf associated to a presheaf $P$ is a sheaf $\widetilde{P}$ equipped with $P\to\widetilde{P}$, universal among morphisms from $P$ to sheaves.}
-\entree{7116}{1:58:36}{Theorem: every presheaf admits an associated sheaf, unique up to unique isomorphism.}
-\entree{7310}{2:01:50}{Corollary: $\mathrm{Sh}(X)$ admits all colimits, the sheaf associated to the colimit computed in presheaves.}
-\entree{7310}{2:01:50}{A presheaf and its associated sheaf have the same stalks.}
-\entree{7450}{2:04:10}{In terms of étalé spaces, the coproduct of a family of sheaves is the disjoint topological sum, which is étalé over $X$.}
-\entree{7516}{2:05:16}{The coequalizer of $F\rightrightarrows G$ (étalé spaces over $X$) is $G/R$, with the quotient topology, $R$ the generated relation; $G/R$ is étalé over $X$.}
-\entree{7642}{2:07:22}{Coproducts and coequalizers of double arrows suffice to construct all colimits.}
+\entree[def]{7053}{1:57:33}{The sheaf associated to a presheaf $P$ is a sheaf $\widetilde{P}$ equipped with $P\to\widetilde{P}$, universal among morphisms from $P$ to sheaves.}
+\entree[thm]{7116}{1:58:36}{Every presheaf admits an associated sheaf, unique up to unique isomorphism.}
+\entree[prop]{7310}{2:01:50}{$\mathrm{Sh}(X)$ admits all colimits, the sheaf associated to the colimit computed in presheaves.}
+\entree[prop]{7310}{2:01:50}{A presheaf and its associated sheaf have the same stalks.}
+\entree[prop]{7450}{2:04:10}{In terms of étalé spaces, the coproduct of a family of sheaves is the disjoint topological sum, which is étalé over $X$.}
+\entree[prop]{7516}{2:05:16}{The coequalizer of $F\rightrightarrows G$ (étalé spaces over $X$) is $G/R$, with the quotient topology, $R$ the generated relation; $G/R$ is étalé over $X$.}
+\entree[prop]{7642}{2:07:22}{Coproducts and coequalizers of double arrows suffice to construct all colimits.}
 \section{Exactness properties of sheaves}
-\entree{7704}{2:08:24}{Principle: $\mathrm{Sh}(X)$ has the exactness properties of $\mathbf{Set}$ that involve arbitrary colimits and finite limits.}
-\entree{7768}{2:09:28}{In $\mathbf{Set}$, an arbitrary product of epimorphisms is an epimorphism; this is false in $\mathrm{Sh}(X)$ in general.}
-\entree{7960}{2:12:40}{Categories of presheaves (of functors to $\mathbf{Set}$) have all the exactness properties of $\mathbf{Set}$, limits and colimits being computed argumentwise.}
-\entree{8025}{2:13:45}{The functor $a\colon P\mapsto\widetilde{P}$ is left adjoint to the inclusion $i$: $\mathrm{Hom}(P,iF)\simeq\mathrm{Hom}(aP,F)$; it commutes with colimits.}
-\entree{8089}{2:14:49}{Theorem: the associated-sheaf functor is left exact (it commutes with finite products and equalizers).}
-\entree{8288}{2:18:08}{In $\mathrm{Sh}(X)$, coequalizers are stable under base change: $\mathrm{Coker}(F\rightrightarrows G)\times_H H'$ is the coequalizer of the inverse images over $H'$.}
-\entree{8672}{2:24:32}{In $\mathrm{Sh}(X)$, coproducts are stable under base change: $(\coprod_i F_i)\times_F F'\simeq\coprod_i(F_i\times_F F')$.}
+\entree[rem]{7704}{2:08:24}{Principle: $\mathrm{Sh}(X)$ has the exactness properties of $\mathbf{Set}$ that involve arbitrary colimits and finite limits.}
+\entree[cex]{7768}{2:09:28}{In $\mathbf{Set}$, an arbitrary product of epimorphisms is an epimorphism; this is false in $\mathrm{Sh}(X)$ in general.}
+\entree[prop]{7960}{2:12:40}{Categories of presheaves (of functors to $\mathbf{Set}$) have all the exactness properties of $\mathbf{Set}$, limits and colimits being computed argumentwise.}
+\entree[prop]{8025}{2:13:45}{The functor $a\colon P\mapsto\widetilde{P}$ is left adjoint to the inclusion $i$: $\mathrm{Hom}(P,iF)\simeq\mathrm{Hom}(aP,F)$; it commutes with colimits.}
+\entree[thm]{8089}{2:14:49}{The associated-sheaf functor is left exact (it commutes with finite products and equalizers).}
+\entree[prop]{8288}{2:18:08}{In $\mathrm{Sh}(X)$, coequalizers are stable under base change: $\mathrm{Coker}(F\rightrightarrows G)\times_H H'$ is the coequalizer of the inverse images over $H'$.}
+\entree[prop]{8672}{2:24:32}{In $\mathrm{Sh}(X)$, coproducts are stable under base change: $(\coprod_i F_i)\times_F F'\simeq\coprod_i(F_i\times_F F')$.}
 \section{Quotients and equivalence relations}
-\entree{8863}{2:27:43}{Definition: a quotient object of $F$ is a class of epimorphisms $F\to G$ up to isomorphism under $F$.}
+\entree[def]{8863}{2:27:43}{A quotient object of $F$ is a class of epimorphisms $F\to G$ up to isomorphism under $F$.}
 \face{Tape 2, side B}
-\entree{8923}{2:28:43}{For every morphism $F\to G$, the fibre product $F\times_G F\subset F\times F$ is an equivalence relation on $F$.}
-\entree{8987}{2:29:47}{To an equivalence relation $R\subset F\times F$ is associated the coequalizer of $R\rightrightarrows F$, a quotient of $F$ (an epimorphism).}
-\entree{9052}{2:30:52}{Definition: a quotient is effective if it is the quotient by its relation $F\times_G F$; a relation $R$ is effective if $R=F\times_{F/R}F$.}
-\entree{9117}{2:31:57}{In $\mathrm{Sh}(X)$, as in $\mathbf{Set}$, equivalence relations and quotients are effective and correspond bijectively.}
+\entree[prop]{8923}{2:28:43}{For every morphism $F\to G$, the fibre product $F\times_G F\subset F\times F$ is an equivalence relation on $F$.}
+\entree[prop]{8987}{2:29:47}{To an equivalence relation $R\subset F\times F$ is associated the coequalizer of $R\rightrightarrows F$, a quotient of $F$ (an epimorphism).}
+\entree[def]{9052}{2:30:52}{A quotient is effective if it is the quotient by its relation $F\times_G F$; a relation $R$ is effective if $R=F\times_{F/R}F$.}
+\entree[prop]{9117}{2:31:57}{In $\mathrm{Sh}(X)$, as in $\mathbf{Set}$, equivalence relations and quotients are effective and correspond bijectively.}
 \section{Torsors and stalkwise checks}
 \session{11 May 1973}
 \video{URU5jgTvjhU}
 \noindent\textit{Video 1/4 (\href{https://www.youtube.com/watch?v=URU5jgTvjhU}{\texttt{URU5jgTvjhU}}): tape 1, side A (2:33:29--3:22:55); tape 1, side B (3:22:55--4:02:08); tape 2, side A (4:02:08--4:48:29); tape 2, side B (4:48:29--5:36:41).}\par\medskip
 \face{Tape 1, side A}
-\entree{9213}{2:33:33}{In $\mathbf{Set}$, $G$ acts simply transitively on $E$ if $G\times E\to E\times E$, $(g,x)\mapsto(gx,x)$, is bijective; $E$ is a torsor if moreover $E\to\mathrm{pt}$ is surjective.}
-\entree{9274}{2:34:34}{$E\to F$ is a monomorphism if and only if $E\to E\times_F E$ is an isomorphism; dually, an epimorphism if $F\sqcup_E F\to F$ is an isomorphism.}
-\entree{9338}{2:35:38}{Definition: a torsor under a sheaf of groups $G$ is a $G$-sheaf $E$ with $G\times E\simeq E\times E$ and $E\to 1$ an epimorphism (and not $E(U)$ a torsor for every $U$).}
-\entree{9402}{2:36:42}{A morphism of sheaves is an epimorphism if and only if it is one on stalks; $E$ is a $G$-torsor if and only if each $E_x$ is a $G_x$-torsor.}
-\entree{9530}{2:38:50}{A torsor is trivial (isomorphic to $G$ acting by translations) if and only if it admits a global section; nontrivial ones exist.}
-\entree{9658}{2:40:58}{Principle: statements about structures defined by finite limits and colimits can be checked stalkwise, the fibre functors forming an exact conservative family.}
-\entree{9900}{2:45:00}{The structures of field and of integral domain cannot be expressed by finite limits alone.}
-\entree{10229}{2:50:29}{A sheaf of rings $K$ is called integral if $K'\sqcup 1\to K$ (inclusion and zero section) is an epimorphism, $K'$ being defined below.}
-\entree{10358}{2:52:38}{For two sheaves $K$, $L$, the presheaf $\underline{\mathrm{Hom}}(K,L)\colon U\mapsto\mathrm{Hom}(K|_U,L|_U)$ is a sheaf.}
-\entree{10423}{2:53:43}{The sections $f$ of $K$ whose left and right multiplications are monomorphisms of $K|_U$ form a subsheaf $K'$ (a local property).}
+\entree[def]{9213}{2:33:33}{In $\mathbf{Set}$, $G$ acts simply transitively on $E$ if $G\times E\to E\times E$, $(g,x)\mapsto(gx,x)$, is bijective; $E$ is a torsor if moreover $E\to\mathrm{pt}$ is surjective.}
+\entree[prop]{9274}{2:34:34}{$E\to F$ is a monomorphism if and only if $E\to E\times_F E$ is an isomorphism; dually, an epimorphism if $F\sqcup_E F\to F$ is an isomorphism.}
+\entree[def]{9338}{2:35:38}{A torsor under a sheaf of groups $G$ is a $G$-sheaf $E$ with $G\times E\simeq E\times E$ and $E\to 1$ an epimorphism (and not $E(U)$ a torsor for every $U$).}
+\entree[prop]{9402}{2:36:42}{A morphism of sheaves is an epimorphism if and only if it is one on stalks; $E$ is a $G$-torsor if and only if each $E_x$ is a $G_x$-torsor.}
+\entree[prop]{9530}{2:38:50}{A torsor is trivial (isomorphic to $G$ acting by translations) if and only if it admits a global section; nontrivial ones exist.}
+\entree[rem]{9658}{2:40:58}{Principle: statements about structures defined by finite limits and colimits can be checked stalkwise, the fibre functors forming an exact conservative family.}
+\entree[cex]{9900}{2:45:00}{The structures of field and of integral domain cannot be expressed by finite limits alone.}
+\entree[def]{10229}{2:50:29}{A sheaf of rings $K$ is called integral if $K'\sqcup 1\to K$ (inclusion and zero section) is an epimorphism, $K'$ being defined below.}
+\entree[prop]{10358}{2:52:38}{For two sheaves $K$, $L$, the presheaf $\underline{\mathrm{Hom}}(K,L)\colon U\mapsto\mathrm{Hom}(K|_U,L|_U)$ is a sheaf.}
+\entree[prop]{10423}{2:53:43}{The sections $f$ of $K$ whose left and right multiplications are monomorphisms of $K|_U$ form a subsheaf $K'$ (a local property).}
 \section{Generating families and images}
-\entree{10756}{2:59:16}{Definition: $(Z_i)$ is a generating family of $C$ if every monomorphism $E\to F$ such that $\mathrm{Hom}(Z_i,E)\to\mathrm{Hom}(Z_i,F)$ is bijective for all $i$ is an isomorphism.}
-\entree{10884}{3:01:24}{In $\mathrm{Sh}(X)$, $(Z_i)$ is generating if and only if the family of functors $\mathrm{Hom}(Z_i,-)$ is conservative.}
-\entree{11028}{3:03:48}{In $\mathrm{Sh}(X)$, every morphism factors, essentially uniquely, as an epimorphism followed by a monomorphism (image).}
-\entree{11157}{3:05:57}{In $\mathrm{Sh}(X)$, a morphism that is both a monomorphism and an epimorphism is an isomorphism.}
-\entree{11349}{3:09:09}{An open set $U$ of $X$ defines a sheaf: $U(V)$ is a singleton if $V\subset U$, empty otherwise.}
-\entree{11484}{3:11:24}{For every sheaf $E$, $\mathrm{Hom}(U,E)=E(U)$; the open sets of $X$ therefore form a small generating family of $\mathrm{Sh}(X)$.}
+\entree[def]{10756}{2:59:16}{$(Z_i)$ is a generating family of $C$ if every monomorphism $E\to F$ such that $\mathrm{Hom}(Z_i,E)\to\mathrm{Hom}(Z_i,F)$ is bijective for all $i$ is an isomorphism.}
+\entree[prop]{10884}{3:01:24}{In $\mathrm{Sh}(X)$, $(Z_i)$ is generating if and only if the family of functors $\mathrm{Hom}(Z_i,-)$ is conservative.}
+\entree[prop]{11028}{3:03:48}{In $\mathrm{Sh}(X)$, every morphism factors, essentially uniquely, as an epimorphism followed by a monomorphism (image).}
+\entree[prop]{11157}{3:05:57}{In $\mathrm{Sh}(X)$, a morphism that is both a monomorphism and an epimorphism is an isomorphism.}
+\entree[def]{11349}{3:09:09}{An open set $U$ of $X$ defines a sheaf: $U(V)$ is a singleton if $V\subset U$, empty otherwise.}
+\entree[prop]{11484}{3:11:24}{For every sheaf $E$, $\mathrm{Hom}(U,E)=E(U)$; the open sets of $X$ therefore form a small generating family of $\mathrm{Sh}(X)$.}
 \section{Abelian sheaves and injectives}
-\entree{11555}{3:12:35}{The abelian sheaves on $X$ (abelian group objects of $\mathrm{Sh}(X)$) form an abelian category $\mathrm{Ab}(X)$.}
-\entree{11687}{3:14:47}{$\mathrm{Ab}(X)$ admits limits and colimits; filtered colimits there commute with the forgetful functor and are exact.}
-\entree{11816}{3:16:56}{Definition: an abelian sheaf $I$ is injective if every morphism $F\to I$ extends along every monomorphism $F\to G$.}
-\entree{11881}{3:18:01}{An abelian category with exact filtered colimits and a small generating family has enough injectives; this is the case of $\mathrm{Ab}(X)$ (free abelian sheaves on the $Z_i$).}
-\entree{11945}{3:19:05}{For a sheaf of rings $A$, $\mathrm{Mod}(A)$ is abelian, with exact filtered colimits and generators, hence has enough injectives ($\mathrm{Ext}$, cohomology).}
-\entree{12072}{3:21:12}{In general $\mathrm{Ab}(X)$ does not have enough projectives; filtered limits there are not exact.}
+\entree[prop]{11555}{3:12:35}{The abelian sheaves on $X$ (abelian group objects of $\mathrm{Sh}(X)$) form an abelian category $\mathrm{Ab}(X)$.}
+\entree[prop]{11687}{3:14:47}{$\mathrm{Ab}(X)$ admits limits and colimits; filtered colimits there commute with the forgetful functor and are exact.}
+\entree[def]{11816}{3:16:56}{An abelian sheaf $I$ is injective if every morphism $F\to I$ extends along every monomorphism $F\to G$.}
+\entree[prop]{11881}{3:18:01}{An abelian category with exact filtered colimits and a small generating family has enough injectives; this is the case of $\mathrm{Ab}(X)$ (free abelian sheaves on the $Z_i$).}
+\entree[prop]{11945}{3:19:05}{For a sheaf of rings $A$, $\mathrm{Mod}(A)$ is abelian, with exact filtered colimits and generators, hence has enough injectives ($\mathrm{Ext}$, cohomology).}
+\entree[cex]{12072}{3:21:12}{In general $\mathrm{Ab}(X)$ does not have enough projectives; filtered limits there are not exact.}
 \section{Direct and inverse images}
 \face{Tape 1, side B}
-\entree{12248}{3:24:08}{Definition: for $f\colon X\to Y$, an $f$-morphism $G\to F$ is a family $G(V)\to F(U)$, for $f(U)\subset V$, compatible with the restrictions.}
-\entree{12440}{3:27:20}{An $f$-morphism is equivalent to a family $G(V)\to F(f^{-1}(V))$ compatible with the restrictions.}
-\entree{12633}{3:30:33}{$V\mapsto f^{-1}(V)$ is an increasing functor $\mathcal{O}_Y\to\mathcal{O}_X$ that commutes with arbitrary unions.}
-\entree{12702}{3:31:42}{Definition: direct image of a presheaf $F$ on $X$, $f_*F(V)=F(f^{-1}(V))$, a presheaf on $Y$.}
-\entree{12768}{3:32:48}{The $f$-morphisms $G\to F$ correspond bijectively to the morphisms $G\to f_*F$ of presheaves on $Y$.}
-\entree{12832}{3:33:52}{On presheaves, $f_*$ commutes with arbitrary limits and colimits.}
-\entree{12899}{3:34:59}{The direct image of a sheaf is a sheaf.}
-\entree{13097}{3:38:17}{$f_*\colon\mathrm{Sh}(X)\to\mathrm{Sh}(Y)$ commutes with arbitrary limits.}
-\entree{13162}{3:39:22}{In general $f_*$ commutes neither with coproducts nor with epimorphisms: for $Y$ a point, $f_*$ is $\Gamma(X,-)$.}
-\entree{13294}{3:41:34}{Definition: the inverse image $f^*G$ is equipped with a universal $f$-morphism $G\to f^*G$; $f^*$ is the left adjoint of $f_*$.}
-\entree{13485}{3:44:45}{For every functor $\varphi\colon C\to D$, the restriction $\widehat{D}\to\widehat{C}$, $P\mapsto P\circ\varphi$, has a left adjoint and a right adjoint.}
-\entree{13614}{3:46:54}{$f^*G$ is the sheaf associated to the presheaf inverse image $f^*_{\mathrm{pr}}G$.}
-\entree{13743}{3:49:03}{$f^*$ commutes with arbitrary colimits (left adjoint).}
-\entree{13813}{3:50:13}{Theorem: $f^*$ is left exact (it commutes with finite limits).}
-\entree{13945}{3:52:25}{The inverse image of a space $G\to Y$ under $f$ is $X\times_Y G\subset X\times G$, with the induced topology; it is a fibre product in topological spaces.}
-\entree{14011}{3:53:31}{The property of being étalé is stable under base change.}
-\entree{14075}{3:54:35}{For sheaves viewed as étalé spaces, $f^*G$ corresponds to the fibre product $X\times_Y G$.}
-\entree{14268}{3:57:48}{Étalé spaces over $Y$ are stable under finite limits in spaces over $Y$.}
-\entree{14268}{3:57:48}{The fibre of $X\times_Y G$ at $x$ is homeomorphic to the fibre of $G$ at $f(x)$.}
-\entree{14332}{3:58:52}{$(f^*G)_x\simeq G_{f(x)}$; hence again the left exactness of $f^*$.}
+\entree[def]{12248}{3:24:08}{For $f\colon X\to Y$, an $f$-morphism $G\to F$ is a family $G(V)\to F(U)$, for $f(U)\subset V$, compatible with the restrictions.}
+\entree[prop]{12440}{3:27:20}{An $f$-morphism is equivalent to a family $G(V)\to F(f^{-1}(V))$ compatible with the restrictions.}
+\entree[prop]{12633}{3:30:33}{$V\mapsto f^{-1}(V)$ is an increasing functor $\mathcal{O}_Y\to\mathcal{O}_X$ that commutes with arbitrary unions.}
+\entree[def]{12702}{3:31:42}{Direct image of a presheaf $F$ on $X$, $f_*F(V)=F(f^{-1}(V))$, a presheaf on $Y$.}
+\entree[prop]{12768}{3:32:48}{The $f$-morphisms $G\to F$ correspond bijectively to the morphisms $G\to f_*F$ of presheaves on $Y$.}
+\entree[prop]{12832}{3:33:52}{On presheaves, $f_*$ commutes with arbitrary limits and colimits.}
+\entree[prop]{12899}{3:34:59}{The direct image of a sheaf is a sheaf.}
+\entree[prop]{13097}{3:38:17}{$f_*\colon\mathrm{Sh}(X)\to\mathrm{Sh}(Y)$ commutes with arbitrary limits.}
+\entree[cex]{13162}{3:39:22}{In general $f_*$ commutes neither with coproducts nor with epimorphisms: for $Y$ a point, $f_*$ is $\Gamma(X,-)$.}
+\entree[def]{13294}{3:41:34}{The inverse image $f^*G$ is equipped with a universal $f$-morphism $G\to f^*G$; $f^*$ is the left adjoint of $f_*$.}
+\entree[prop]{13485}{3:44:45}{For every functor $\varphi\colon C\to D$, the restriction $\widehat{D}\to\widehat{C}$, $P\mapsto P\circ\varphi$, has a left adjoint and a right adjoint.}
+\entree[prop]{13614}{3:46:54}{$f^*G$ is the sheaf associated to the presheaf inverse image $f^*_{\mathrm{pr}}G$.}
+\entree[prop]{13743}{3:49:03}{$f^*$ commutes with arbitrary colimits (left adjoint).}
+\entree[thm]{13813}{3:50:13}{$f^*$ is left exact (it commutes with finite limits).}
+\entree[def]{13945}{3:52:25}{The inverse image of a space $G\to Y$ under $f$ is $X\times_Y G\subset X\times G$, with the induced topology; it is a fibre product in topological spaces.}
+\entree[prop]{14011}{3:53:31}{The property of being étalé is stable under base change.}
+\entree[prop]{14075}{3:54:35}{For sheaves viewed as étalé spaces, $f^*G$ corresponds to the fibre product $X\times_Y G$.}
+\entree[prop]{14268}{3:57:48}{Étalé spaces over $Y$ are stable under finite limits in spaces over $Y$.}
+\entree[prop]{14268}{3:57:48}{The fibre of $X\times_Y G$ at $x$ is homeomorphic to the fibre of $G$ at $f(x)$.}
+\entree[prop]{14332}{3:58:52}{$(f^*G)_x\simeq G_{f(x)}$; hence again the left exactness of $f^*$.}
 \face{Tape 2, side A}
 \noindent\textit{Not indexed (sound too degraded to be transcribed).}\par
 \section{Stalks and epimorphisms}
 \face{Tape 2, side B}
-\entree{17311}{4:48:31}{Two morphisms $u,v\colon F\to G$ of sheaves are equal if and only if $u_x=v_x$ for all $x$: the fibre functors form a faithful family.}
-\entree{17440}{4:50:40}{The fibre functors commute with colimits and finite limits and form a conservative family.}
-\entree{17585}{4:53:05}{$F\to G$ is an epimorphism of sheaves if and only if every section of $G$ lifts locally to a section of $F$.}
-\entree{17712}{4:55:12}{An epimorphism of sheaves is not in general an epimorphism of presheaves: $\Gamma(F)\to\Gamma(G)$ is not always surjective.}
-\entree{17712}{4:55:12}{For $X$ compact, $\Gamma(X,-)$ sends epimorphisms of sheaves to surjections if and only if $X$ is totally disconnected.}
+\entree[prop]{17311}{4:48:31}{Two morphisms $u,v\colon F\to G$ of sheaves are equal if and only if $u_x=v_x$ for all $x$: the fibre functors form a faithful family.}
+\entree[prop]{17440}{4:50:40}{The fibre functors commute with colimits and finite limits and form a conservative family.}
+\entree[prop]{17585}{4:53:05}{$F\to G$ is an epimorphism of sheaves if and only if every section of $G$ lifts locally to a section of $F$.}
+\entree[cex]{17712}{4:55:12}{An epimorphism of sheaves is not in general an epimorphism of presheaves: $\Gamma(F)\to\Gamma(G)$ is not always surjective.}
+\entree[prop]{17712}{4:55:12}{For $X$ compact, $\Gamma(X,-)$ sends epimorphisms of sheaves to surjections if and only if $X$ is totally disconnected.}
 \section{Algebraic structures on objects of a category}
-\entree{17970}{4:59:30}{Definition: a composition law on an object $E$ of $C$ is an arrow $E\times E\to E$; commutativity and associativity are expressed by diagrams.}
-\entree{18102}{5:01:42}{A left unit is an arrow $1\to E$ ($1$ terminal) such that $E\simeq 1\times E\to E\times E\to E$ is the identity.}
-\entree{18295}{5:04:55}{Via the Yoneda embedding, a law $E\times E\to E$ is equivalent to laws on the $E(Z)=\mathrm{Hom}(Z,E)$, functorial in $Z$.}
-\entree{18427}{5:07:07}{Definition: an algebraic structure (group, ring, module, etc.) on $E$ is such a structure on each $E(Z)$, functorial in $Z$.}
-\entree{18687}{5:11:27}{The structure of a category ($D_1\rightrightarrows D_0$, composition $D_1\times_{D_0}D_1\to D_1$, units) is described by fibre products.}
-\entree{18814}{5:13:34}{Definition: a category internal to $C$ is a pair $(D_0,D_1)$ with a category structure on $(D_0(Z),D_1(Z))$, functorial in $Z$.}
-\entree{18881}{5:14:41}{The embedding $C\to\widehat{C}$ commutes with arbitrary limits, but not with colimits in general.}
-\entree{18945}{5:15:45}{A structure defined by limits on a sheaf $F$ is equivalent to the same structure on each $F(U)$, functorial in $U$.}
-\entree{19073}{5:17:53}{A sheaf of groups is a functor $\mathcal{O}(X)^{\mathrm{op}}\to\mathbf{Grp}$ whose composite with the forgetful functor is a sheaf.}
-\entree{19341}{5:22:21}{The axioms of a structure defined by finite limits can be checked stalkwise.}
-\entree{19406}{5:23:26}{A functor that commutes with finite products sends group objects (ring objects, etc.) to objects of the same type.}
-\entree{19532}{5:25:32}{The stalks of a sheaf of groups (of rings, etc.) are groups (rings, etc.).}
-\entree{19665}{5:27:45}{Definition: for a $k$-coalgebra $A$, an $A$-comodule is a $k$-module $M$ equipped with $M\to M\otimes_k A$ satisfying coassociativity and counit.}
-\entree{19856}{5:30:56}{The tensor product of modules is constructed by colimits (sums, quotients), not by limits alone.}
-\entree{19999}{5:33:19}{For sheaves of modules, $M(U)\otimes_{k(U)}A(U)\to(M\otimes_k A)(U)$ is in general neither injective nor surjective.}
-\entree{20064}{5:34:24}{Definition: $E$ is a torsor under a group $G$ if $E\neq\varnothing$ and $G$ acts simply transitively on $E$.}
+\entree[def]{17970}{4:59:30}{A composition law on an object $E$ of $C$ is an arrow $E\times E\to E$; commutativity and associativity are expressed by diagrams.}
+\entree[def]{18102}{5:01:42}{A left unit is an arrow $1\to E$ ($1$ terminal) such that $E\simeq 1\times E\to E\times E\to E$ is the identity.}
+\entree[prop]{18295}{5:04:55}{Via the Yoneda embedding, a law $E\times E\to E$ is equivalent to laws on the $E(Z)=\mathrm{Hom}(Z,E)$, functorial in $Z$.}
+\entree[def]{18427}{5:07:07}{An algebraic structure (group, ring, module, etc.) on $E$ is such a structure on each $E(Z)$, functorial in $Z$.}
+\entree[prop]{18687}{5:11:27}{The structure of a category ($D_1\rightrightarrows D_0$, composition $D_1\times_{D_0}D_1\to D_1$, units) is described by fibre products.}
+\entree[def]{18814}{5:13:34}{A category internal to $C$ is a pair $(D_0,D_1)$ with a category structure on $(D_0(Z),D_1(Z))$, functorial in $Z$.}
+\entree[prop]{18881}{5:14:41}{The embedding $C\to\widehat{C}$ commutes with arbitrary limits, but not with colimits in general.}
+\entree[prop]{18945}{5:15:45}{A structure defined by limits on a sheaf $F$ is equivalent to the same structure on each $F(U)$, functorial in $U$.}
+\entree[def]{19073}{5:17:53}{A sheaf of groups is a functor $\mathcal{O}(X)^{\mathrm{op}}\to\mathbf{Grp}$ whose composite with the forgetful functor is a sheaf.}
+\entree[prop]{19341}{5:22:21}{The axioms of a structure defined by finite limits can be checked stalkwise.}
+\entree[prop]{19406}{5:23:26}{A functor that commutes with finite products sends group objects (ring objects, etc.) to objects of the same type.}
+\entree[prop]{19532}{5:25:32}{The stalks of a sheaf of groups (of rings, etc.) are groups (rings, etc.).}
+\entree[def]{19665}{5:27:45}{For a $k$-coalgebra $A$, an $A$-comodule is a $k$-module $M$ equipped with $M\to M\otimes_k A$ satisfying coassociativity and counit.}
+\entree[rem]{19856}{5:30:56}{The tensor product of modules is constructed by colimits (sums, quotients), not by limits alone.}
+\entree[cex]{19999}{5:33:19}{For sheaves of modules, $M(U)\otimes_{k(U)}A(U)\to(M\otimes_k A)(U)$ is in general neither injective nor surjective.}
+\entree[def]{20064}{5:34:24}{$E$ is a torsor under a group $G$ if $E\neq\varnothing$ and $G$ acts simply transitively on $E$.}
 \section{\'Etale morphisms and slice categories}
 \session{18 May 1973}
 \video{URU5jgTvjhU}
 \noindent\textit{Video 1/4 (\href{https://www.youtube.com/watch?v=URU5jgTvjhU}{\texttt{URU5jgTvjhU}}): tape 1, side A (5:36:41--6:26:00); tape 1, side B (6:26:00--7:14:32); tape 2, side A (7:14:32--8:03:53); tape 2, side B (8:03:53--8:23:34).}\par\medskip
 \face{Tape 1, side A}
-\entree{20360}{5:39:20}{For a point $y$ of $Y$ and the inclusion $i_y:\{y\}\to Y$, we have $i_y^*F\simeq F_y$: the stalk is the inverse image under a point.}
-\entree{20491}{5:41:31}{If $f:X\to Y$ is étale, $X$ is an object of $\mathrm{Sh}(Y)$ and $\mathrm{Sh}(X)\simeq\mathrm{Sh}(Y)/X$; a composite of étale morphisms is étale.}
-\entree{20620}{5:43:40}{Definition: for an object $X$ of a category $C$, the category $C/X$ has as objects the arrows $X'\to X$ and as morphisms the commutative triangles.}
-\entree{20684}{5:44:44}{If $f:X\to Y$ is étale, $f^*G$ is the product $G\times X$ in $\mathrm{Sh}(Y)$, viewed as an object of $\mathrm{Sh}(Y)/X$.}
-\entree{20820}{5:47:00}{For $g:X'\to X$ in $\mathrm{Sh}(Y)$, the functor $g^*:\mathrm{Sh}(Y)/X\to\mathrm{Sh}(Y)/X'$ is the base change $F\mapsto F\times_X X'$.}
-\entree{21075}{5:51:15}{$f_*$ sends every structure defined by limits (group, ring, etc.) to a structure of the same kind, but not torsors.}
-\entree{21139}{5:52:19}{$f^*$ respects structures defined by finite limits and colimits: the inverse image of a $G$-torsor is an $f^*G$-torsor.}
+\entree[prop]{20360}{5:39:20}{For a point $y$ of $Y$ and the inclusion $i_y:\{y\}\to Y$, we have $i_y^*F\simeq F_y$: the stalk is the inverse image under a point.}
+\entree[prop]{20491}{5:41:31}{If $f:X\to Y$ is étale, $X$ is an object of $\mathrm{Sh}(Y)$ and $\mathrm{Sh}(X)\simeq\mathrm{Sh}(Y)/X$; a composite of étale morphisms is étale.}
+\entree[def]{20620}{5:43:40}{For an object $X$ of a category $C$, the category $C/X$ has as objects the arrows $X'\to X$ and as morphisms the commutative triangles.}
+\entree[prop]{20684}{5:44:44}{If $f:X\to Y$ is étale, $f^*G$ is the product $G\times X$ in $\mathrm{Sh}(Y)$, viewed as an object of $\mathrm{Sh}(Y)/X$.}
+\entree[prop]{20820}{5:47:00}{For $g:X'\to X$ in $\mathrm{Sh}(Y)$, the functor $g^*:\mathrm{Sh}(Y)/X\to\mathrm{Sh}(Y)/X'$ is the base change $F\mapsto F\times_X X'$.}
+\entree[prop]{21075}{5:51:15}{$f_*$ sends every structure defined by limits (group, ring, etc.) to a structure of the same kind, but not torsors.}
+\entree[prop]{21139}{5:52:19}{$f^*$ respects structures defined by finite limits and colimits: the inverse image of a $G$-torsor is an $f^*G$-torsor.}
 \section{Ring and field objects}
-\entree{21393}{5:56:33}{Definition: a ring object $A$ of $C$ is an object equipped with a ring structure on each $A(Z)=\mathrm{Hom}_C(Z,A)$, functorial in $Z$.}
-\entree{21458}{5:57:38}{The units $A^*(Z)\subset A(Z)$ form a group-valued functor, represented by the fibre product of $m:A\times A\to A$ and $1:e\to A$.}
-\entree{21587}{5:59:47}{Definition: a ring object $A$ is a field object if the morphism $A^*\sqcup e\to A$ (inclusion and zero section) is an isomorphism.}
-\entree{21778}{6:02:58}{Integrality, first condition: for $C=m^{-1}(0)\subset A\times A$, the morphism $A\sqcup A\to C$, $x\mapsto(x,0)$, $x\mapsto(0,x)$, is an epimorphism.}
-\entree{22035}{6:07:15}{A morphism $S\to C$ is an epimorphism iff the canonical arrow $C\sqcup_S C\to C$ is an isomorphism.}
-\entree{22099}{6:08:19}{Integrality, second condition ($0\neq1$): the kernel $e'\subset e$ of $0,1:e\rightrightarrows A$ is initial; in $\mathrm{Sh}(X)$, $e'$ is the largest open set where $A=0$.}
-\entree{22292}{6:11:32}{Every kind of structure defined by finite limits and arbitrary colimits admits a \q{classifying topos}, equipped with a universal model.}
-\entree{22357}{6:12:37}{Normal rings, reduced rings, rings with connected spectrum can also be defined by such diagrammatic axioms.}
-\entree{22420}{6:13:40}{A sheaf of rings is never a presheaf of fields: its value on $\varnothing$ is the zero ring.}
-\entree{22545}{6:15:45}{On a space, such an axiom is checked stalkwise: a sheaf of rings $A$ is a field object iff each stalk $A_x$ is a field.}
+\entree[def]{21393}{5:56:33}{A ring object $A$ of $C$ is an object equipped with a ring structure on each $A(Z)=\mathrm{Hom}_C(Z,A)$, functorial in $Z$.}
+\entree[prop]{21458}{5:57:38}{The units $A^*(Z)\subset A(Z)$ form a group-valued functor, represented by the fibre product of $m:A\times A\to A$ and $1:e\to A$.}
+\entree[def]{21587}{5:59:47}{A ring object $A$ is a field object if the morphism $A^*\sqcup e\to A$ (inclusion and zero section) is an isomorphism.}
+\entree[def]{21778}{6:02:58}{Integrality, first condition: for $C=m^{-1}(0)\subset A\times A$, the morphism $A\sqcup A\to C$, $x\mapsto(x,0)$, $x\mapsto(0,x)$, is an epimorphism.}
+\entree[prop]{22035}{6:07:15}{A morphism $S\to C$ is an epimorphism iff the canonical arrow $C\sqcup_S C\to C$ is an isomorphism.}
+\entree[def]{22099}{6:08:19}{Integrality, second condition ($0\neq1$): the kernel $e'\subset e$ of $0,1:e\rightrightarrows A$ is initial; in $\mathrm{Sh}(X)$, $e'$ is the largest open set where $A=0$.}
+\entree[prop]{22292}{6:11:32}{Every kind of structure defined by finite limits and arbitrary colimits admits a \q{classifying topos}, equipped with a universal model.}
+\entree[rem]{22357}{6:12:37}{Normal rings, reduced rings, rings with connected spectrum can also be defined by such diagrammatic axioms.}
+\entree[prop]{22420}{6:13:40}{A sheaf of rings is never a presheaf of fields: its value on $\varnothing$ is the zero ring.}
+\entree[prop]{22545}{6:15:45}{On a space, such an axiom is checked stalkwise: a sheaf of rings $A$ is a field object iff each stalk $A_x$ is a field.}
 \section{Constant sheaves and sheaves of fields}
-\entree{22609}{6:16:49}{The constant sheaf $I_X=p^*I$ ($p:X\to\mathrm{pt}$) has étalé space $I\times X$; it is the coproduct of $I$ copies of the terminal object.}
-\entree{22740}{6:19:00}{If $I$ is a group, a ring or a field, $I_X$ is a sheaf of groups, of rings or of fields; for example $K_X$ for a field $K$.}
-\entree{22805}{6:20:05}{On a reduced and locally irreducible complex analytic space, the sheaf $\mathcal{M}_X$ of meromorphic functions is a sheaf of fields.}
-\entree{22867}{6:21:07}{The stalk $\mathcal{M}_{X,x}$ is the total ring of fractions of $\mathcal{O}_{X,x}$; it is a field as soon as $\mathcal{O}_{X,x}$ is a domain.}
-\entree{22934}{6:22:14}{On an integral scheme, the sheaf of rational functions is a constant sheaf of fields; the analytic sheaf $\mathcal{M}_X$ is not.}
+\entree[def]{22609}{6:16:49}{The constant sheaf $I_X=p^*I$ ($p:X\to\mathrm{pt}$) has étalé space $I\times X$; it is the coproduct of $I$ copies of the terminal object.}
+\entree[prop]{22740}{6:19:00}{If $I$ is a group, a ring or a field, $I_X$ is a sheaf of groups, of rings or of fields; for example $K_X$ for a field $K$.}
+\entree[ex]{22805}{6:20:05}{On a reduced and locally irreducible complex analytic space, the sheaf $\mathcal{M}_X$ of meromorphic functions is a sheaf of fields.}
+\entree[prop]{22867}{6:21:07}{The stalk $\mathcal{M}_{X,x}$ is the total ring of fractions of $\mathcal{O}_{X,x}$; it is a field as soon as $\mathcal{O}_{X,x}$ is a domain.}
+\entree[prop]{22934}{6:22:14}{On an integral scheme, the sheaf of rational functions is a constant sheaf of fields; the analytic sheaf $\mathcal{M}_X$ is not.}
 \section{Internal Hom and the subobject sheaf}
-\entree{22998}{6:23:18}{Definition: $\mathcal{H}om(F,G)(U)=\mathrm{Hom}(F|_U,G|_U)$ defines a sheaf on $X$, to be distinguished from the set $\mathrm{Hom}(F,G)$.}
+\entree[def]{22998}{6:23:18}{$\mathcal{H}om(F,G)(U)=\mathrm{Hom}(F|_U,G|_U)$ defines a sheaf on $X$, to be distinguished from the set $\mathrm{Hom}(F,G)$.}
 \face{Tape 1, side B}
-\entree{23169}{6:26:09}{For $X'$ étale over $X$: $\mathrm{Hom}(X',\mathcal{H}om(F,G))\simeq\mathrm{Hom}_{X'}(F\times X',G\times X')\simeq\mathrm{Hom}(F\times X',G)$.}
-\entree{23366}{6:29:26}{Definition: in a category with products, $\mathcal{H}om(F,G)$ is, if it exists, the object representing $X'\mapsto\mathrm{Hom}(F\times X',G)$; it exists in $\mathrm{Sh}(X)$.}
-\entree{23428}{6:30:28}{For group objects $F,G$, $\mathcal{H}om_{\mathrm{gr}}(F,G)$ represents $X'\mapsto\mathrm{Hom}_{\mathrm{gr}}(F_{X'},G_{X'})$, homomorphisms of group objects of $C/X'$.}
-\entree{23555}{6:32:35}{The sheaf $\mathcal{P}(F)$: $\mathcal{P}(F)(U)$ is the set of subsheaves of $F|_U$; for $X$ a point, it is the set of subsets of $F$.}
-\entree{23684}{6:34:44}{$\mathcal{P}(F)$ represents $X'\mapsto\mathrm{Sub}(F\times X')$; the subobjects of an object of $C/X'$ are the same in $C$ and in $C/X'$.}
-\entree{23881}{6:38:01}{For the terminal object $e$, $\mathcal{P}(e)$ is the sheaf that associates to $U$ the set of its open subsets; it represents $X'\mapsto\mathrm{Sub}(X')$.}
-\entree{24070}{6:41:10}{If $\mathcal{P}(e)$ exists, $\mathcal{P}(F)$ exists iff $\mathcal{H}om(F,\mathcal{P}(e))$ exists, and they are isomorphic; in $\mathbf{Set}$, $\mathcal{P}(e)$ has two elements.}
-\entree{24265}{6:44:25}{A subsheaf of $\mathcal{P}(F)$ is a family of sets of subsheaves of the $F|_U$, stable under restriction and local in $U$.}
-\entree{24395}{6:46:35}{A topology on a sheaf $F$ is defined as a subsheaf of $\mathcal{P}(F)$ satisfying the usual axioms, read in $\mathrm{Sh}(X)$.}
-\entree{24459}{6:47:39}{For $f:X\to Y$, there are canonical arrows $f^*\mathcal{H}om(F,G)\to\mathcal{H}om(f^*F,f^*G)$ and $f^*\mathcal{P}(F)\to\mathcal{P}(f^*F)$.}
-\entree{24649}{6:50:49}{These arrows are not isomorphisms in general, for example for a fibre functor; they are if $f$ is étale.}
+\entree[prop]{23169}{6:26:09}{For $X'$ étale over $X$: $\mathrm{Hom}(X',\mathcal{H}om(F,G))\simeq\mathrm{Hom}_{X'}(F\times X',G\times X')\simeq\mathrm{Hom}(F\times X',G)$.}
+\entree[def]{23366}{6:29:26}{In a category with products, $\mathcal{H}om(F,G)$ is, if it exists, the object representing $X'\mapsto\mathrm{Hom}(F\times X',G)$; it exists in $\mathrm{Sh}(X)$.}
+\entree[def]{23428}{6:30:28}{For group objects $F,G$, $\mathcal{H}om_{\mathrm{gr}}(F,G)$ represents $X'\mapsto\mathrm{Hom}_{\mathrm{gr}}(F_{X'},G_{X'})$, homomorphisms of group objects of $C/X'$.}
+\entree[def]{23555}{6:32:35}{The sheaf $\mathcal{P}(F)$: $\mathcal{P}(F)(U)$ is the set of subsheaves of $F|_U$; for $X$ a point, it is the set of subsets of $F$.}
+\entree[prop]{23684}{6:34:44}{$\mathcal{P}(F)$ represents $X'\mapsto\mathrm{Sub}(F\times X')$; the subobjects of an object of $C/X'$ are the same in $C$ and in $C/X'$.}
+\entree[prop]{23881}{6:38:01}{For the terminal object $e$, $\mathcal{P}(e)$ is the sheaf that associates to $U$ the set of its open subsets; it represents $X'\mapsto\mathrm{Sub}(X')$.}
+\entree[prop]{24070}{6:41:10}{If $\mathcal{P}(e)$ exists, $\mathcal{P}(F)$ exists iff $\mathcal{H}om(F,\mathcal{P}(e))$ exists, and they are isomorphic; in $\mathbf{Set}$, $\mathcal{P}(e)$ has two elements.}
+\entree[prop]{24265}{6:44:25}{A subsheaf of $\mathcal{P}(F)$ is a family of sets of subsheaves of the $F|_U$, stable under restriction and local in $U$.}
+\entree[def]{24395}{6:46:35}{A topology on a sheaf $F$ is defined as a subsheaf of $\mathcal{P}(F)$ satisfying the usual axioms, read in $\mathrm{Sh}(X)$.}
+\entree[prop]{24459}{6:47:39}{For $f:X\to Y$, there are canonical arrows $f^*\mathcal{H}om(F,G)\to\mathcal{H}om(f^*F,f^*G)$ and $f^*\mathcal{P}(F)\to\mathcal{P}(f^*F)$.}
+\entree[cex]{24649}{6:50:49}{These arrows are not isomorphisms in general, for example for a fibre functor; they are if $f$ is étale.}
 \section{Stalks and infinite products}
-\entree{24714}{6:51:54}{$f^*$ does not commute with infinite products in general; there is a canonical arrow $(\prod_i F_i)_x\to\prod_i(F_i)_x$.}
-\entree{24851}{6:54:11}{Its injectivity means: if $f_i,g_i$ have the same germ at $x$ for every $i$, they coincide on a common neighbourhood of $x$.}
-\entree{24919}{6:55:19}{Counterexample: $U_i$ open neighbourhoods of $x$ whose intersection is not a neighbourhood, $F$ the sheaf of maps to $\{a,b\}$, $f_i=a$, $g_i=a$ on $U_i$ and $b$ elsewhere.}
-\entree{25045}{6:57:25}{The stalk functor at $x$ commutes with products iff $x$ has a smallest open neighbourhood; if points are closed, iff $x$ is isolated.}
-\entree{25113}{6:58:33}{In $\mathrm{Sh}(X)$, an infinite product of epimorphisms is not always an epimorphism; one reduces to the case of the $F_i\to e$.}
-\entree{25307}{7:01:47}{Example: $X$ locally connected, $x$ closed, $U_i$ open neighbourhoods of $x$ whose intersection is not a neighbourhood, $F_i=U_i\sqcup(X\setminus\{x\})$; $\prod_i F_i\to e$ is not an epimorphism.}
-\entree{25503}{7:05:03}{If $X$ is compact and totally disconnected, $F\to G$ is an epimorphism iff $F(U)\to G(U)$ is surjective for every clopen set $U$; every product of epimorphisms is an epimorphism.}
+\entree[prop]{24714}{6:51:54}{$f^*$ does not commute with infinite products in general; there is a canonical arrow $(\prod_i F_i)_x\to\prod_i(F_i)_x$.}
+\entree[rem]{24851}{6:54:11}{Its injectivity means: if $f_i,g_i$ have the same germ at $x$ for every $i$, they coincide on a common neighbourhood of $x$.}
+\entree[cex]{24919}{6:55:19}{$U_i$ open neighbourhoods of $x$ whose intersection is not a neighbourhood, $F$ the sheaf of maps to $\{a,b\}$, $f_i=a$, $g_i=a$ on $U_i$ and $b$ elsewhere.}
+\entree[prop]{25045}{6:57:25}{The stalk functor at $x$ commutes with products iff $x$ has a smallest open neighbourhood; if points are closed, iff $x$ is isolated.}
+\entree[cex]{25113}{6:58:33}{In $\mathrm{Sh}(X)$, an infinite product of epimorphisms is not always an epimorphism; one reduces to the case of the $F_i\to e$.}
+\entree[ex]{25307}{7:01:47}{$X$ locally connected, $x$ closed, $U_i$ open neighbourhoods of $x$ whose intersection is not a neighbourhood, $F_i=U_i\sqcup(X\setminus\{x\})$; $\prod_i F_i\to e$ is not an epimorphism.}
+\entree[prop]{25503}{7:05:03}{If $X$ is compact and totally disconnected, $F\to G$ is an epimorphism iff $F(U)\to G(U)$ is surjective for every clopen set $U$; every product of epimorphisms is an epimorphism.}
 \section{Connectedness and cohomology}
-\entree{25977}{7:12:57}{$X$ is connected iff the terminal object of $\mathrm{Sh}(X)$ is not a sum of two non-initial subobjects.}
+\entree[prop]{25977}{7:12:57}{$X$ is connected iff the terminal object of $\mathrm{Sh}(X)$ is not a sum of two non-initial subobjects.}
 \face{Tape 2, side A}
-\entree{26075}{7:14:35}{$X$ is nonempty iff $\varnothing\to e$ is not an isomorphism in $\mathrm{Sh}(X)$; $X$ is empty iff $\mathrm{Sh}(X)$ is equivalent to the point category.}
-\entree{26202}{7:16:42}{The abelian group objects of $\mathrm{Sh}(X)$ form a category with enough injectives; $H^i(X,F)=R^i\Gamma(F)$, with $\Gamma(F)=\mathrm{Hom}(e,F)$.}
-\entree{26328}{7:18:48}{For an abelian group $M$, we set $H^i(X,M)=H^i(X,M_X)$; these groups depend only on the category $\mathrm{Sh}(X)$.}
-\entree{26392}{7:19:52}{$X$ is connected iff $\mathbb{Z}\to H^0(X,\mathbb{Z})$ is surjective; connected and nonempty iff it is bijective.}
-\entree{26457}{7:20:57}{The sections of $I_X$ over $U$ are the locally constant maps $U\to I$.}
-\entree{26587}{7:23:07}{The lattice of open sets of $X$ is that of the subobjects of the terminal object of $\mathrm{Sh}(X)$; the Čech constructions (Artin--Mazur) follow from it.}
+\entree[prop]{26075}{7:14:35}{$X$ is nonempty iff $\varnothing\to e$ is not an isomorphism in $\mathrm{Sh}(X)$; $X$ is empty iff $\mathrm{Sh}(X)$ is equivalent to the point category.}
+\entree[def]{26202}{7:16:42}{The abelian group objects of $\mathrm{Sh}(X)$ form a category with enough injectives; $H^i(X,F)=R^i\Gamma(F)$, with $\Gamma(F)=\mathrm{Hom}(e,F)$.}
+\entree[def]{26328}{7:18:48}{For an abelian group $M$, we set $H^i(X,M)=H^i(X,M_X)$; these groups depend only on the category $\mathrm{Sh}(X)$.}
+\entree[prop]{26392}{7:19:52}{$X$ is connected iff $\mathbb{Z}\to H^0(X,\mathbb{Z})$ is surjective; connected and nonempty iff it is bijective.}
+\entree[prop]{26457}{7:20:57}{The sections of $I_X$ over $U$ are the locally constant maps $U\to I$.}
+\entree[rem]{26587}{7:23:07}{The lattice of open sets of $X$ is that of the subobjects of the terminal object of $\mathrm{Sh}(X)$; the Čech constructions (Artin--Mazur) follow from it.}
 \section{Covering spaces and torsors}
-\entree{26650}{7:24:10}{If $X$ is connected, locally connected and locally simply connected, the covering spaces of $X$ correspond to $\pi_1(X,x)$-sets.}
-\entree{26716}{7:25:16}{The covering spaces of $X$ are the locally constant objects $X'$ of $\mathrm{Sh}(X)$: $X'\times U_i\simeq\coprod_{S_i}U_i$ for a covering $e=\sup_i U_i$.}
-\entree{26781}{7:26:21}{For $X$ connected and locally connected but not locally simply connected, the covering spaces are classified by a pro-group.}
-\entree{26844}{7:27:24}{For a sheaf of groups $G$ not necessarily commutative, $H^1(X,G)$ is the set of isomorphism classes of $G$-torsors.}
-\entree{26911}{7:28:31}{Definition: a $G$-torsor is an object $P$ equipped with an action of $G$ such that $G\times P\to P\times P$ is an isomorphism and $P\to e$ an epimorphism.}
-\entree{26975}{7:29:35}{$G\mapsto G_X=\coprod_G e$ is left exact; the $G_X$-torsors are the Galois covering spaces with group $G$.}
-\entree{27040}{7:30:40}{For $X$ connected, locally connected and locally simply connected, $H^1(X,G)$ is identified with $\mathrm{Hom}(\pi_1(X,x),G)$ modulo conjugation; $X$ is simply connected iff all these $H^1$ are trivial.}
+\entree[thm]{26650}{7:24:10}{If $X$ is connected, locally connected and locally simply connected, the covering spaces of $X$ correspond to $\pi_1(X,x)$-sets.}
+\entree[prop]{26716}{7:25:16}{The covering spaces of $X$ are the locally constant objects $X'$ of $\mathrm{Sh}(X)$: $X'\times U_i\simeq\coprod_{S_i}U_i$ for a covering $e=\sup_i U_i$.}
+\entree[prop]{26781}{7:26:21}{For $X$ connected and locally connected but not locally simply connected, the covering spaces are classified by a pro-group.}
+\entree[prop]{26844}{7:27:24}{For a sheaf of groups $G$ not necessarily commutative, $H^1(X,G)$ is the set of isomorphism classes of $G$-torsors.}
+\entree[def]{26911}{7:28:31}{A $G$-torsor is an object $P$ equipped with an action of $G$ such that $G\times P\to P\times P$ is an isomorphism and $P\to e$ an epimorphism.}
+\entree[prop]{26975}{7:29:35}{$G\mapsto G_X=\coprod_G e$ is left exact; the $G_X$-torsors are the Galois covering spaces with group $G$.}
+\entree[prop]{27040}{7:30:40}{For $X$ connected, locally connected and locally simply connected, $H^1(X,G)$ is identified with $\mathrm{Hom}(\pi_1(X,x),G)$ modulo conjugation; $X$ is simply connected iff all these $H^1$ are trivial.}
 \section{Stacks and gerbes}
-\entree{27104}{7:31:44}{Definition: a fibred category over $\mathcal{O}(X)$ associates to $U$ a category $F_U$, and to $V\subset U$ a restriction functor, transitive up to coherent isomorphism.}
-\entree{27167}{7:32:47}{Examples (which are stacks): $U\mapsto\mathrm{Sh}(U)$, fibre spaces over $U$, sheaves of groups on $U$, $G|_U$-torsors.}
-\entree{27291}{7:34:51}{Definition: a fibred category is a stack if the presheaves $\mathcal{H}om(F,G)$ are sheaves and if every gluing datum (cocycle on the $U_{ijk}$) is effective.}
-\entree{27549}{7:39:09}{For $G$ noncommutative, $H^2(X,G)$ is defined as a set of classes of stacks (gerbes) attached to $G$ (Giraud); it depends only on $\mathrm{Sh}(X)$.}
-\entree{27873}{7:44:33}{Definition: a stack over $\mathcal{E}$ is a fibred category over $\mathcal{E}$ with descent along epimorphic families, the intersections becoming fibre products.}
-\entree{27938}{7:45:38}{Restriction and extension give an equivalence between stacks over $\mathcal{O}(X)$ and stacks over $\mathrm{Sh}(X)$.}
+\entree[def]{27104}{7:31:44}{A fibred category over $\mathcal{O}(X)$ associates to $U$ a category $F_U$, and to $V\subset U$ a restriction functor, transitive up to coherent isomorphism.}
+\entree[ex][which are stacks]{27167}{7:32:47}{$U\mapsto\mathrm{Sh}(U)$, fibre spaces over $U$, sheaves of groups on $U$, $G|_U$-torsors.}
+\entree[def]{27291}{7:34:51}{A fibred category is a stack if the presheaves $\mathcal{H}om(F,G)$ are sheaves and if every gluing datum (cocycle on the $U_{ijk}$) is effective.}
+\entree[def]{27549}{7:39:09}{For $G$ noncommutative, $H^2(X,G)$ is defined as a set of classes of stacks (gerbes) attached to $G$ (Giraud); it depends only on $\mathrm{Sh}(X)$.}
+\entree[def]{27873}{7:44:33}{A stack over $\mathcal{E}$ is a fibred category over $\mathcal{E}$ with descent along epimorphic families, the intersections becoming fibre products.}
+\entree[prop]{27938}{7:45:38}{Restriction and extension give an equivalence between stacks over $\mathcal{O}(X)$ and stacks over $\mathrm{Sh}(X)$.}
 \section{Gluing and quotient topoi}
-\entree{28139}{7:48:59}{$\mathrm{Sh}(\coprod_i X_i)\simeq\prod_i\mathrm{Sh}(X_i)$: the sum of spaces corresponds to the product of categories.}
-\entree{28203}{7:50:03}{If $Z$ is closed in $X$ and in $Y$, $\mathrm{Sh}(X\cup_Z Y)$ is the 2-fibre product of $\mathrm{Sh}(X)$ and $\mathrm{Sh}(Y)$ over $\mathrm{Sh}(Z)$.}
-\entree{28331}{7:52:11}{For an equivalence relation $R$ on $X$, the sheaves on $X$ equipped with descent data relative to $R$ form a quotient topos, even if $X/R$ is pathological.}
+\entree[prop]{28139}{7:48:59}{$\mathrm{Sh}(\coprod_i X_i)\simeq\prod_i\mathrm{Sh}(X_i)$: the sum of spaces corresponds to the product of categories.}
+\entree[prop]{28203}{7:50:03}{If $Z$ is closed in $X$ and in $Y$, $\mathrm{Sh}(X\cup_Z Y)$ is the 2-fibre product of $\mathrm{Sh}(X)$ and $\mathrm{Sh}(Y)$ over $\mathrm{Sh}(Z)$.}
+\entree[prop]{28331}{7:52:11}{For an equivalence relation $R$ on $X$, the sheaves on $X$ equipped with descent data relative to $R$ form a quotient topos, even if $X/R$ is pathological.}
 \section{Irreducible closed sets and sober spaces}
-\entree{28459}{7:54:19}{Definition: a space $Z$ is irreducible if it is nonempty and not a union of two distinct closed subsets of $Z$.}
-\entree{28524}{7:55:24}{A separated space is irreducible iff it is a point; a variety is irreducible for the Zariski topology iff it is so in the algebraic sense.}
-\entree{28524}{7:55:24}{The closure of an irreducible subset is irreducible.}
-\entree{28590}{7:56:30}{We write $\tilde X$ for the set of irreducible closed subsets of $X$ and $i:X\to\tilde X$, $x\mapsto\overline{\{x\}}$; $i$ is bijective if $X$ is separated.}
-\entree{28654}{7:57:34}{The subsets $\tilde U=\{Y\in\tilde X : Y\cap U\neq\varnothing\}$, $U$ open, form a topology: $U\mapsto\tilde U$ respects unions and finite intersections.}
-\entree{28850}{8:00:50}{We have $i^{-1}(\tilde U)=U$; $i$ is continuous and induces a lattice isomorphism $\mathcal{O}(\tilde X)\simeq\mathcal{O}(X)$.}
-\entree{28982}{8:03:02}{Consequently $i_*:\mathrm{Sh}(X)\to\mathrm{Sh}(\tilde X)$ is an isomorphism of categories, with inverse $i^*$.}
+\entree[def]{28459}{7:54:19}{A space $Z$ is irreducible if it is nonempty and not a union of two distinct closed subsets of $Z$.}
+\entree[prop]{28524}{7:55:24}{A separated space is irreducible iff it is a point; a variety is irreducible for the Zariski topology iff it is so in the algebraic sense.}
+\entree[prop]{28524}{7:55:24}{The closure of an irreducible subset is irreducible.}
+\entree[def]{28590}{7:56:30}{We write $\tilde X$ for the set of irreducible closed subsets of $X$ and $i:X\to\tilde X$, $x\mapsto\overline{\{x\}}$; $i$ is bijective if $X$ is separated.}
+\entree[prop]{28654}{7:57:34}{The subsets $\tilde U=\{Y\in\tilde X : Y\cap U\neq\varnothing\}$, $U$ open, form a topology: $U\mapsto\tilde U$ respects unions and finite intersections.}
+\entree[prop]{28850}{8:00:50}{We have $i^{-1}(\tilde U)=U$; $i$ is continuous and induces a lattice isomorphism $\mathcal{O}(\tilde X)\simeq\mathcal{O}(X)$.}
+\entree[prop]{28982}{8:03:02}{Consequently $i_*:\mathrm{Sh}(X)\to\mathrm{Sh}(\tilde X)$ is an isomorphism of categories, with inverse $i^*$.}
 \face{Tape 2, side B}
-\entree{29036}{8:03:56}{$i:X\to\tilde X$ is injective iff $X$ is $T_0$; if $X$ is separated, $i$ is a homeomorphism.}
-\entree{29101}{8:05:01}{Definition: a generic point of a closed set $Z$ is a point whose closure is $Z$; $i$ is surjective iff every irreducible closed set has a generic point.}
-\entree{29166}{8:06:06}{Example: a variety over $K$ reduced to its $K$-rational points has irreducible closed sets without a generic point.}
-\entree{29234}{8:07:14}{Definition: $X$ is sober if every irreducible closed set has exactly one generic point, i.e. if $i:X\to\tilde X$ is bijective, hence a homeomorphism.}
-\entree{29300}{8:08:20}{For $Y$ an irreducible closed set, the stalk $F_Y=\varinjlim_{U\cap Y\neq\varnothing}F(U)$ (filtered colimit) is left exact and commutes with colimits.}
-\entree{29427}{8:10:27}{$F_{\overline{\{x\}}}=F_x$; in general $F_Y$ is the stalk at the point $Y$ of $F$ viewed as a sheaf on $\tilde X$.}
-\entree{29490}{8:11:30}{$Y\mapsto(F\mapsto F_Y)$ is a bijection from $\tilde X$ onto the classes of fibre functors $\mathrm{Sh}(X)\to\mathbf{Set}$ (left exact, commuting with $\varinjlim$).}
-\entree{29559}{8:12:39}{A fibre functor on $\mathrm{Sh}(X)$ has no nontrivial automorphism.}
-\entree{29622}{8:13:42}{$\tilde X$ is sober, and $X\mapsto\tilde X$ is left adjoint to the inclusion of sober spaces: $\mathrm{Hom}(X,Y)\simeq\mathrm{Hom}(\tilde X,Y)$ for $Y$ sober.}
-\entree{29816}{8:16:56}{On the set $\Phi(\mathcal{E})$ of classes of fibre functors, the sets $\tilde U=\{\varepsilon : \varepsilon(U)\neq\varnothing\}$, $U\subset e$, form a topology.}
-\entree{30013}{8:20:13}{$X\to\Phi(\mathrm{Sh}(X))$ is a homeomorphism iff $X$ is sober: a sober space can be reconstructed from $\mathrm{Sh}(X)$.}
-\entree{30076}{8:21:16}{If $X$ is $T_1$ (for example the closed points of a Jacobson scheme), $X$ is identified with the subspace of closed points of $\tilde X$.}
+\entree[prop]{29036}{8:03:56}{$i:X\to\tilde X$ is injective iff $X$ is $T_0$; if $X$ is separated, $i$ is a homeomorphism.}
+\entree[def]{29101}{8:05:01}{A generic point of a closed set $Z$ is a point whose closure is $Z$; $i$ is surjective iff every irreducible closed set has a generic point.}
+\entree[ex]{29166}{8:06:06}{A variety over $K$ reduced to its $K$-rational points has irreducible closed sets without a generic point.}
+\entree[def]{29234}{8:07:14}{$X$ is sober if every irreducible closed set has exactly one generic point, i.e. if $i:X\to\tilde X$ is bijective, hence a homeomorphism.}
+\entree[def]{29300}{8:08:20}{For $Y$ an irreducible closed set, the stalk $F_Y=\varinjlim_{U\cap Y\neq\varnothing}F(U)$ (filtered colimit) is left exact and commutes with colimits.}
+\entree[prop]{29427}{8:10:27}{$F_{\overline{\{x\}}}=F_x$; in general $F_Y$ is the stalk at the point $Y$ of $F$ viewed as a sheaf on $\tilde X$.}
+\entree[thm]{29490}{8:11:30}{$Y\mapsto(F\mapsto F_Y)$ is a bijection from $\tilde X$ onto the classes of fibre functors $\mathrm{Sh}(X)\to\mathbf{Set}$ (left exact, commuting with $\varinjlim$).}
+\entree[prop]{29559}{8:12:39}{A fibre functor on $\mathrm{Sh}(X)$ has no nontrivial automorphism.}
+\entree[thm]{29622}{8:13:42}{$\tilde X$ is sober, and $X\mapsto\tilde X$ is left adjoint to the inclusion of sober spaces: $\mathrm{Hom}(X,Y)\simeq\mathrm{Hom}(\tilde X,Y)$ for $Y$ sober.}
+\entree[def]{29816}{8:16:56}{On the set $\Phi(\mathcal{E})$ of classes of fibre functors, the sets $\tilde U=\{\varepsilon : \varepsilon(U)\neq\varnothing\}$, $U\subset e$, form a topology.}
+\entree[thm]{30013}{8:20:13}{$X\to\Phi(\mathrm{Sh}(X))$ is a homeomorphism iff $X$ is sober: a sober space can be reconstructed from $\mathrm{Sh}(X)$.}
+\entree[prop]{30076}{8:21:16}{If $X$ is $T_1$ (for example the closed points of a Jacobson scheme), $X$ is identified with the subspace of closed points of $\tilde X$.}
 \section{Points and morphisms of sober spaces}
 \session{25 May 1973}
 \video{URU5jgTvjhU}
 \noindent\textit{Video 1/4 (\href{https://www.youtube.com/watch?v=URU5jgTvjhU}{\texttt{URU5jgTvjhU}}): tape 1, side A (8:23:34--9:28:43); tape 1, side B (9:28:43--10:33:42); tape 2, side A (10:33:42--11:06:44).}\par\medskip
 \face{Tape 1, side A}
-\entree{30280}{8:24:40}{For $f:X\to Y$ continuous, the point $f(x)$ corresponds to the fibre functor $\varepsilon_x\circ f^*$, since $(f^*F)_x\simeq F_{f(x)}$.}
-\entree{30471}{8:27:51}{If $X$ and $Y$ are sober, every functor $\mathrm{Sh}(Y)\to\mathrm{Sh}(X)$ that is left exact and commutes with $\varinjlim$ is isomorphic to $f^*$ for a unique continuous $f$.}
-\entree{30599}{8:29:59}{Two functors on $\mathrm{Sh}(Y)$ that commute with colimits and are isomorphic on the generating subcategory $\mathcal{O}(Y)$ are isomorphic.}
-\entree{30793}{8:33:13}{For $f,g:X\to Y$, a morphism from $f$ to $g$ is a morphism between $f^*$ and $g^*$; if $Y$ is separated, there is one only if $f=g$, and it is the identity.}
+\entree[prop]{30280}{8:24:40}{For $f:X\to Y$ continuous, the point $f(x)$ corresponds to the fibre functor $\varepsilon_x\circ f^*$, since $(f^*F)_x\simeq F_{f(x)}$.}
+\entree[thm]{30471}{8:27:51}{If $X$ and $Y$ are sober, every functor $\mathrm{Sh}(Y)\to\mathrm{Sh}(X)$ that is left exact and commutes with $\varinjlim$ is isomorphic to $f^*$ for a unique continuous $f$.}
+\entree[prop]{30599}{8:29:59}{Two functors on $\mathrm{Sh}(Y)$ that commute with colimits and are isomorphic on the generating subcategory $\mathcal{O}(Y)$ are isomorphic.}
+\entree[def]{30793}{8:33:13}{For $f,g:X\to Y$, a morphism from $f$ to $g$ is a morphism between $f^*$ and $g^*$; if $Y$ is separated, there is one only if $f=g$, and it is the identity.}
 \section{Definitions of a topos}
-\entree{31066}{8:37:46}{Definition (first form): a topos is a category having the exactness properties of $\mathbf{Set}$ (arbitrary $\varinjlim$, finite $\varprojlim$) and a small generating set.}
-\entree{31132}{8:38:52}{Definition: $C\subset\mathrm{Ob}\,\mathcal{E}$ is generating if $\mathcal{E}\to\widehat{C}$, $X\mapsto\mathrm{Hom}(-,X)|_C$, is faithful.}
-\entree{31258}{8:40:58}{In a topos, it amounts to the same whether this functor is faithful, fully faithful, conservative, or conservative on monomorphisms.}
-\entree{31446}{8:44:06}{Definition (Giraud): a topos is a category with (a) finite $\varprojlim$, (b) universal disjoint coproducts, (c) universal effective equivalence relations, (d) a small generator.}
-\entree{31573}{8:46:13}{Definition: a coproduct $X=\coprod X_i$ is universal if for every $X'\to X$, the arrow $\coprod_i(X_i\times_X X')\to X'$ is an isomorphism.}
-\entree{31704}{8:48:24}{Definition: it is disjoint if the $X_i\to X$ are monomorphisms and $X_i\times_X X_j$ is initial for $i\neq j$.}
-\entree{31896}{8:51:36}{Definition: an equivalence relation $R\subset X\times X$ (each $R(Z)$ being one on $X(Z)$) is effective if $R\simeq X\times_{X/R}X$.}
-\entree{31962}{8:52:42}{It is universal if $X\to X/R$ is a universal epimorphism and if passage to the quotient commutes with base changes $Y'\to X/R$.}
-\entree{32152}{8:55:52}{In a topos, the subobjects and the quotient objects of an object form small sets.}
+\entree[def][first form]{31066}{8:37:46}{A topos is a category having the exactness properties of $\mathbf{Set}$ (arbitrary $\varinjlim$, finite $\varprojlim$) and a small generating set.}
+\entree[def]{31132}{8:38:52}{$C\subset\mathrm{Ob}\,\mathcal{E}$ is generating if $\mathcal{E}\to\widehat{C}$, $X\mapsto\mathrm{Hom}(-,X)|_C$, is faithful.}
+\entree[prop]{31258}{8:40:58}{In a topos, it amounts to the same whether this functor is faithful, fully faithful, conservative, or conservative on monomorphisms.}
+\entree[def][Giraud]{31446}{8:44:06}{A topos is a category with (a) finite $\varprojlim$, (b) universal disjoint coproducts, (c) universal effective equivalence relations, (d) a small generator.}
+\entree[def]{31573}{8:46:13}{A coproduct $X=\coprod X_i$ is universal if for every $X'\to X$, the arrow $\coprod_i(X_i\times_X X')\to X'$ is an isomorphism.}
+\entree[def]{31704}{8:48:24}{It is disjoint if the $X_i\to X$ are monomorphisms and $X_i\times_X X_j$ is initial for $i\neq j$.}
+\entree[def]{31896}{8:51:36}{An equivalence relation $R\subset X\times X$ (each $R(Z)$ being one on $X(Z)$) is effective if $R\simeq X\times_{X/R}X$.}
+\entree[def]{31962}{8:52:42}{It is universal if $X\to X/R$ is a universal epimorphism and if passage to the quotient commutes with base changes $Y'\to X/R$.}
+\entree[prop]{32152}{8:55:52}{In a topos, the subobjects and the quotient objects of an object form small sets.}
 \section{Cohomology in a topos}
-\entree{32217}{8:56:57}{$\mathcal{E}_{ab}$ is abelian, with exact filtered colimits and a generator; it therefore has enough injectives.}
-\entree{32283}{8:58:03}{An injective object of $\mathcal{E}_{ab}$ is injective in $\mathcal{E}$; in particular $\mathcal{E}$ has enough injectives.}
-\entree{32541}{9:02:21}{In a topos, $\Gamma(X)=\mathrm{Hom}(e,X)$; its derived functors on $\mathcal{E}_{ab}$ are the $H^i(\mathcal{E},-)$.}
-\entree{32668}{9:04:28}{The constant object $I_{\mathcal{E}}=\coprod_I e$: $I\mapsto I_{\mathcal{E}}$ commutes with $\varinjlim$ and finite $\varprojlim$; we set $H^i(\mathcal{E},M)=H^i(\mathcal{E},M_{\mathcal{E}})$.}
-\entree{32805}{9:06:45}{A topos has homotopy invariants (pro-groups, the Čech method of Artin--Mazur), which recover the $\pi_i$ of a locally contractible space.}
+\entree[prop]{32217}{8:56:57}{$\mathcal{E}_{ab}$ is abelian, with exact filtered colimits and a generator; it therefore has enough injectives.}
+\entree[prop]{32283}{8:58:03}{An injective object of $\mathcal{E}_{ab}$ is injective in $\mathcal{E}$; in particular $\mathcal{E}$ has enough injectives.}
+\entree[def]{32541}{9:02:21}{In a topos, $\Gamma(X)=\mathrm{Hom}(e,X)$; its derived functors on $\mathcal{E}_{ab}$ are the $H^i(\mathcal{E},-)$.}
+\entree[def]{32668}{9:04:28}{The constant object $I_{\mathcal{E}}=\coprod_I e$: $I\mapsto I_{\mathcal{E}}$ commutes with $\varinjlim$ and finite $\varprojlim$; we set $H^i(\mathcal{E},M)=H^i(\mathcal{E},M_{\mathcal{E}})$.}
+\entree[rem]{32805}{9:06:45}{A topos has homotopy invariants (pro-groups, the Čech method of Artin--Mazur), which recover the $\pi_i$ of a locally contractible space.}
 \section{Basic examples of topoi}
-\entree{32997}{9:09:57}{$\mathrm{Sh}(\varnothing)$ is equivalent to the point category: it is the \q{empty topos}.}
-\entree{33121}{9:12:01}{A topos $\mathcal{E}$ is empty iff the arrow $\varnothing_{\mathcal{E}}\to e_{\mathcal{E}}$ is an isomorphism.}
-\entree{33248}{9:14:08}{$\mathrm{Sh}(\mathrm{pt})\simeq\mathbf{Set}$ via $F\mapsto F(\mathrm{pt})$: it is the point topos, or \q{final topos}.}
-\entree{33443}{9:17:23}{A topos $\mathcal{E}$ is a point iff the functor $\mathbf{Set}\to\mathcal{E}$, $I\mapsto I_{\mathcal{E}}$, is an equivalence.}
-\entree{33505}{9:18:25}{For a discrete group $G$ acting on $X$, the category $\mathrm{Sh}(X,G)$ of étalé spaces over $X$ equipped with a compatible $G$-action is a topos.}
-\entree{33698}{9:21:38}{$\mathrm{Sh}(X,\{1\})=\mathrm{Sh}(X)$; $\mathrm{Sh}(\mathrm{pt},G)=B_G$, the category of $G$-sets, is the \q{classifying topos} of $G$.}
-\entree{33822}{9:23:42}{$(B_G)_{ab}$ is the category of $G$-modules, $\Gamma(M)=M^G$ and $H^i(B_G,M)=H^i(G,M)$, the cohomology of the classifying space of $G$.}
-\entree{33954}{9:25:54}{The cohomology of $\mathrm{Sh}(X,G)$ is the equivariant cohomology $H^i(X;G,M)$ (Tôhoku).}
+\entree[prop]{32997}{9:09:57}{$\mathrm{Sh}(\varnothing)$ is equivalent to the point category: it is the \q{empty topos}.}
+\entree[prop]{33121}{9:12:01}{A topos $\mathcal{E}$ is empty iff the arrow $\varnothing_{\mathcal{E}}\to e_{\mathcal{E}}$ is an isomorphism.}
+\entree[prop]{33248}{9:14:08}{$\mathrm{Sh}(\mathrm{pt})\simeq\mathbf{Set}$ via $F\mapsto F(\mathrm{pt})$: it is the point topos, or \q{final topos}.}
+\entree[prop]{33443}{9:17:23}{A topos $\mathcal{E}$ is a point iff the functor $\mathbf{Set}\to\mathcal{E}$, $I\mapsto I_{\mathcal{E}}$, is an equivalence.}
+\entree[prop]{33505}{9:18:25}{For a discrete group $G$ acting on $X$, the category $\mathrm{Sh}(X,G)$ of étalé spaces over $X$ equipped with a compatible $G$-action is a topos.}
+\entree[def]{33698}{9:21:38}{$\mathrm{Sh}(X,\{1\})=\mathrm{Sh}(X)$; $\mathrm{Sh}(\mathrm{pt},G)=B_G$, the category of $G$-sets, is the \q{classifying topos} of $G$.}
+\entree[prop]{33822}{9:23:42}{$(B_G)_{ab}$ is the category of $G$-modules, $\Gamma(M)=M^G$ and $H^i(B_G,M)=H^i(G,M)$, the cohomology of the classifying space of $G$.}
+\entree[prop]{33954}{9:25:54}{The cohomology of $\mathrm{Sh}(X,G)$ is the equivariant cohomology $H^i(X;G,M)$ (Tôhoku).}
 \section{Points of a topos}
 \face{Tape 1, side B}
-\entree{34130}{9:28:50}{If $G\neq1$, the topos $B_G$ is equivalent to no $\mathrm{Sh}(X)$.}
-\entree{34201}{9:30:01}{The forgetful functor $B_G\to\mathbf{Set}$ is a fibre functor, with automorphism group $G$.}
-\entree{34328}{9:32:08}{If $X$ is sober, every fibre functor on $\mathrm{Sh}(X)$ is isomorphic to $F\mapsto F_x$ for a unique $x\in X$.}
-\entree{34393}{9:33:13}{Specialization ($y\in\overline{\{x\}}$) is a preorder, which is an order if $X$ is sober; it induces $F_y\to F_x$, functorial in $F$.}
-\entree{34662}{9:37:42}{There is a morphism $\varepsilon_y\to\varepsilon_x$ iff $y$ is a specialization of $x$, and it is unique: the points of $\mathrm{Sh}(X)$ form an ordered set.}
-\entree{34728}{9:38:48}{$B_G$ has a single point up to isomorphism without being the final topos: its points have nontrivial automorphisms.}
-\entree{34858}{9:40:58}{In $\mathrm{Sh}(X,G)$, $\varepsilon^G_x:F\mapsto F_x$ is a point, with automorphism group the stabilizer $G_x$.}
+\entree[cex]{34130}{9:28:50}{If $G\neq1$, the topos $B_G$ is equivalent to no $\mathrm{Sh}(X)$.}
+\entree[ex]{34201}{9:30:01}{The forgetful functor $B_G\to\mathbf{Set}$ is a fibre functor, with automorphism group $G$.}
+\entree[prop]{34328}{9:32:08}{If $X$ is sober, every fibre functor on $\mathrm{Sh}(X)$ is isomorphic to $F\mapsto F_x$ for a unique $x\in X$.}
+\entree[prop]{34393}{9:33:13}{Specialization ($y\in\overline{\{x\}}$) is a preorder, which is an order if $X$ is sober; it induces $F_y\to F_x$, functorial in $F$.}
+\entree[prop]{34662}{9:37:42}{There is a morphism $\varepsilon_y\to\varepsilon_x$ iff $y$ is a specialization of $x$, and it is unique: the points of $\mathrm{Sh}(X)$ form an ordered set.}
+\entree[ex]{34728}{9:38:48}{$B_G$ has a single point up to isomorphism without being the final topos: its points have nontrivial automorphisms.}
+\entree[prop]{34858}{9:40:58}{In $\mathrm{Sh}(X,G)$, $\varepsilon^G_x:F\mapsto F_x$ is a point, with automorphism group the stabilizer $G_x$.}
 \section{Giraud's theorem and elementary topoi}
-\entree{35193}{9:46:33}{Theorem (Giraud): $\mathcal{E}$ is a topos iff there exist $C$ small and $i:\mathcal{E}\to\widehat{C}$ fully faithful with a left exact left adjoint.}
-\entree{35463}{9:51:03}{For every generating full subcategory $C$ of a topos, $\mathcal{E}\to\widehat{C}$ is fully faithful and has a left exact left adjoint.}
-\entree{35591}{9:53:11}{Topoi in the sense of Giraud's axioms are exactly the categories of sheaves on a site.}
-\entree{35724}{9:55:24}{In a topos, $\mathcal{H}om(X,Y)$ exists: it represents $Z\mapsto\mathrm{Hom}(X\times Z,Y)$.}
-\entree{35789}{9:56:29}{In a topos, the functor $Z\mapsto\mathrm{Sub}(Z)$ is representable by an object $P_{\mathcal{E}}$.}
-\entree{35860}{9:57:40}{Lemma: in a topos, $P:\mathcal{E}^{\circ}\to\mathbf{Set}$ is representable iff it sends colimits to limits.}
-\entree{36055}{10:00:55}{Every topos is an elementary topos (Lawvere--Tierney: finite $\varprojlim$, $\mathcal{H}om$, $P_{\mathcal{E}}$); an elementary topos with small coproducts and a small generator is a topos.}
+\entree[thm][Giraud]{35193}{9:46:33}{$\mathcal{E}$ is a topos iff there exist $C$ small and $i:\mathcal{E}\to\widehat{C}$ fully faithful with a left exact left adjoint.}
+\entree[prop]{35463}{9:51:03}{For every generating full subcategory $C$ of a topos, $\mathcal{E}\to\widehat{C}$ is fully faithful and has a left exact left adjoint.}
+\entree[prop]{35591}{9:53:11}{Topoi in the sense of Giraud's axioms are exactly the categories of sheaves on a site.}
+\entree[prop]{35724}{9:55:24}{In a topos, $\mathcal{H}om(X,Y)$ exists: it represents $Z\mapsto\mathrm{Hom}(X\times Z,Y)$.}
+\entree[prop]{35789}{9:56:29}{In a topos, the functor $Z\mapsto\mathrm{Sub}(Z)$ is representable by an object $P_{\mathcal{E}}$.}
+\entree[prop]{35860}{9:57:40}{In a topos, $P:\mathcal{E}^{\circ}\to\mathbf{Set}$ is representable iff it sends colimits to limits.}
+\entree[prop]{36055}{10:00:55}{Every topos is an elementary topos (Lawvere--Tierney: finite $\varprojlim$, $\mathcal{H}om$, $P_{\mathcal{E}}$); an elementary topos with small coproducts and a small generator is a topos.}
 \section{Presheaf topoi and the classifying topos of a group}
-\entree{36307}{10:05:07}{In $\mathrm{Sh}(X,G)$, limits, $\mathcal{H}om$ and $P$ are computed in $\mathrm{Sh}(X)$, with the induced action of $G$.}
-\entree{36436}{10:07:16}{For $C$ small, $\widehat{C}$ is a topos (limits argumentwise, representables generating), with all the exactness properties of $\mathbf{Set}$.}
-\entree{36630}{10:10:30}{$B_G=\widehat{C}$ for $C$ the category with one object whose endomorphisms are $G$.}
-\entree{36693}{10:11:33}{For $X\in C$, $F\mapsto F(X)$ is a point of $\widehat{C}$; every point is a filtered colimit of these, and $\widehat{C}$ has enough points.}
-\entree{36756}{10:12:36}{$\mathrm{Sh}(X,G)$ has enough points: the $\varepsilon^G_x$ form a conservative family.}
-\entree{36882}{10:14:42}{For a group object $G$ of a topos $\mathcal{E}$, the objects of $\mathcal{E}$ equipped with an action of $G$ form a topos $B_G$; for $\mathcal{E}=\mathbf{Set}$, the $G$-sets.}
-\entree{37075}{10:17:55}{$H^i(G,M)=H^i(B_G,M)$ for $M$ abelian with an action of $G$; $\Gamma(X)$ is the set of $G$-invariant sections of $X$.}
-\entree{37271}{10:21:11}{$B_G$ classifies $G$-torsors: for $f:\mathcal{T}\to\mathcal{E}$, the morphisms $\mathcal{T}\to B_G$ over $\mathcal{E}$ correspond to the $f^*G$-torsors.}
+\entree[prop]{36307}{10:05:07}{In $\mathrm{Sh}(X,G)$, limits, $\mathcal{H}om$ and $P$ are computed in $\mathrm{Sh}(X)$, with the induced action of $G$.}
+\entree[prop]{36436}{10:07:16}{For $C$ small, $\widehat{C}$ is a topos (limits argumentwise, representables generating), with all the exactness properties of $\mathbf{Set}$.}
+\entree[ex]{36630}{10:10:30}{$B_G=\widehat{C}$ for $C$ the category with one object whose endomorphisms are $G$.}
+\entree[prop]{36693}{10:11:33}{For $X\in C$, $F\mapsto F(X)$ is a point of $\widehat{C}$; every point is a filtered colimit of these, and $\widehat{C}$ has enough points.}
+\entree[prop]{36756}{10:12:36}{$\mathrm{Sh}(X,G)$ has enough points: the $\varepsilon^G_x$ form a conservative family.}
+\entree[def]{36882}{10:14:42}{For a group object $G$ of a topos $\mathcal{E}$, the objects of $\mathcal{E}$ equipped with an action of $G$ form a topos $B_G$; for $\mathcal{E}=\mathbf{Set}$, the $G$-sets.}
+\entree[prop]{37075}{10:17:55}{$H^i(G,M)=H^i(B_G,M)$ for $M$ abelian with an action of $G$; $\Gamma(X)$ is the set of $G$-invariant sections of $X$.}
+\entree[thm]{37271}{10:21:11}{$B_G$ classifies $G$-torsors: for $f:\mathcal{T}\to\mathcal{E}$, the morphisms $\mathcal{T}\to B_G$ over $\mathcal{E}$ correspond to the $f^*G$-torsors.}
 \section{Induced topoi}
-\entree{37400}{10:23:20}{For an object $X$ of a topos $\mathcal{E}$, $\mathcal{E}/X$ is a topos, the induced topos; $\mathrm{Sh}(Y)/X\simeq\mathrm{Sh}(X)$ for $X$ étale over $Y$.}
+\entree[prop]{37400}{10:23:20}{For an object $X$ of a topos $\mathcal{E}$, $\mathcal{E}/X$ is a topos, the induced topos; $\mathrm{Sh}(Y)/X\simeq\mathrm{Sh}(X)$ for $X$ étale over $Y$.}
 \section{Morphisms of topoi}
-\entree{37930}{10:32:10}{Between topoi, every functor $f^*$ commuting with colimits has a right adjoint $f_*$ (representability lemma).}
+\entree[prop]{37930}{10:32:10}{Between topoi, every functor $f^*$ commuting with colimits has a right adjoint $f_*$ (representability lemma).}
 \face{Tape 2, side A}
-\entree{38154}{10:35:54}{Definition: a morphism of topoi $f:\mathcal{E}\to\mathcal{F}$ is a pair of adjoint functors $f^*\dashv f_*$, with $f^*:\mathcal{F}\to\mathcal{E}$ left exact.}
-\entree{38285}{10:38:05}{The morphisms $\mathcal{E}\to\mathcal{F}$ form a category $\mathbf{Homtop}(\mathcal{E},\mathcal{F})$, whose arrows $f\to g$ are the morphisms $f_*\to g_*$ (or $g^*\to f^*$).}
-\entree{38728}{10:45:28}{Composition: $(gf)_*=g_*f_*$ and $(gf)^*=f^*g^*$; it is associative.}
-\entree{38859}{10:47:39}{Composition is a functor $\mathbf{Homtop}(\mathcal{E},\mathcal{F})\times\mathbf{Homtop}(\mathcal{F},\mathcal{G})\to\mathbf{Homtop}(\mathcal{E},\mathcal{G})$: topoi form a 2-category.}
-\entree{39237}{10:53:57}{A morphism $f$ is an equivalence of topoi iff $f^*$, or $f_*$, is an equivalence of categories.}
-\entree{39560}{10:59:20}{For $Y$ sober, the category of points $\mathbf{Homtop}(\mathrm{pt},\mathrm{Sh}(Y))$ is equivalent to $Y$ ordered by specialization.}
-\entree{39689}{11:01:29}{For $X,Y$ sober, $\mathbf{Homtop}(\mathrm{Sh}(X),\mathrm{Sh}(Y))$ is equivalent to the continuous maps $f$ ordered by $f\le g$ iff $g(x)\in\overline{\{f(x)\}}$ for all $x$.}
-\entree{39885}{11:04:45}{If $Y$ is separated, this category is discrete.}
+\entree[def]{38154}{10:35:54}{A morphism of topoi $f:\mathcal{E}\to\mathcal{F}$ is a pair of adjoint functors $f^*\dashv f_*$, with $f^*:\mathcal{F}\to\mathcal{E}$ left exact.}
+\entree[def]{38285}{10:38:05}{The morphisms $\mathcal{E}\to\mathcal{F}$ form a category $\mathbf{Homtop}(\mathcal{E},\mathcal{F})$, whose arrows $f\to g$ are the morphisms $f_*\to g_*$ (or $g^*\to f^*$).}
+\entree[prop]{38728}{10:45:28}{Composition: $(gf)_*=g_*f_*$ and $(gf)^*=f^*g^*$; it is associative.}
+\entree[prop]{38859}{10:47:39}{Composition is a functor $\mathbf{Homtop}(\mathcal{E},\mathcal{F})\times\mathbf{Homtop}(\mathcal{F},\mathcal{G})\to\mathbf{Homtop}(\mathcal{E},\mathcal{G})$: topoi form a 2-category.}
+\entree[prop]{39237}{10:53:57}{A morphism $f$ is an equivalence of topoi iff $f^*$, or $f_*$, is an equivalence of categories.}
+\entree[prop]{39560}{10:59:20}{For $Y$ sober, the category of points $\mathbf{Homtop}(\mathrm{pt},\mathrm{Sh}(Y))$ is equivalent to $Y$ ordered by specialization.}
+\entree[prop]{39689}{11:01:29}{For $X,Y$ sober, $\mathbf{Homtop}(\mathrm{Sh}(X),\mathrm{Sh}(Y))$ is equivalent to the continuous maps $f$ ordered by $f\le g$ iff $g(x)\in\overline{\{f(x)\}}$ for all $x$.}
+\entree[prop]{39885}{11:04:45}{If $Y$ is separated, this category is discrete.}
 \section{Sessions not yet indexed}
 \session{30 May 1973}
 \video{PqCQM3Pcl6Q}
@@ -408,360 +422,360 @@
 \video{4gynb9uTEE4}
 \noindent\textit{Video 3/4 (\href{https://www.youtube.com/watch?v=4gynb9uTEE4}{\texttt{4gynb9uTEE4}}): tape 1 (0:00:00--0:48:52); tape 2 (0:48:52--1:54:02); tape 3, side A (1:54:02--2:43:03); tape 3, side B (2:43:03--3:31:57).}\par\medskip
 \face{Tape 1}
-\entree{258}{0:04:18}{For $\Delta$ = categories with arbitrary limits, the localization $C\to C[\Sigma^{-1}]$ taken in $\Delta$ is bijective on objects: adding axioms adds arrows, not constructions.}
-\entree{321}{0:05:21}{A category $I$ is strictly cogenerating in its envelope $\widetilde{I}$ under arbitrary limits.}
-\entree{386}{0:06:26}{Definition: $J\subset E$ is \q{strictly generating} if every object of $E$ is a colimit of a diagram of objects of $J$; example: $J$ in $\widehat{J}$.}
-\entree{451}{0:07:31}{If $I$ is strictly cogenerating in each $R_\alpha$ of a filtered system in $\Delta$, it is so in its 2-colimit taken in $\Delta$.}
-\entree{648}{0:10:48}{Strict cogeneration is transitive; it is preserved by adjoining arrows in the sense of $\Delta$ and by localization in $\Delta$.}
-\entree{712}{0:11:52}{Corollary: at each step of the construction of an algebraic theory with base $I$, the image of $I$ remains strictly cogenerating.}
-\entree{776}{0:12:56}{Theorem: for $\Delta$ = categories with arbitrary limits, the algebraic theories are those represented by an $R\in\Delta$ having a small strictly cogenerating subcategory.}
-\entree{848}{0:14:08}{Moreover, $I\to R$ is basic if and only if the image of $I$ is strictly cogenerating; dually, $R^{\mathrm{op}}$ has arbitrary colimits and a small strictly generating set.}
-\entree{1104}{0:18:24}{If $I'\subset R$ is a small full strictly cogenerating subcategory, the $\Delta$-functor $\widetilde{I'}\to R$ is essentially surjective and full; $R$ is a category of fractions of $\widetilde{I'}$.}
-\entree{1357}{0:22:37}{Corollary: such a theory is obtained in three steps (empty structure on $I$, adjoining arrows, axioms), without transfinite construction.}
-\entree{1845}{0:30:45}{If $T$ is represented by $R$ having a small strictly cogenerating subcategory, $T(\mathbf{Set})=\mathrm{Hom}_\Delta(R,\mathbf{Set})\simeq R^{\mathrm{op}}$: $T$ is determined by its realizations in sets.}
-\entree{2233}{0:37:13}{Example: for the theory of groups, $R\simeq\mathbf{Grp}^{\mathrm{op}}$; the universal object is $\mathbb{Z}$, a cogroup of $\mathbf{Grp}$ via $\mathbb{Z}\to\mathbb{Z}*\mathbb{Z}$, $x\mapsto x_1x_2$.}
-\entree{2681}{0:44:41}{For $C$ small and a class $D'$ of diagrams, the envelope of $C$ under limits of type $D'$ is the smallest full subcategory of the envelope $\widetilde{C}$ containing $C$ and stable under these limits.}
-\entree{2746}{0:45:46}{Example: on categories with finite products, the theory of groups is represented by a small category, the full subcategory of $\mathbf{Grp}^{\mathrm{op}}$ of finitely generated free groups.}
-\entree{2813}{0:46:53}{A theory on categories with limits of type $D'$ defines by restriction one on categories with arbitrary limits; there is no inverse operation in general.}
+\entree[prop]{258}{0:04:18}{For $\Delta$ = categories with arbitrary limits, the localization $C\to C[\Sigma^{-1}]$ taken in $\Delta$ is bijective on objects: adding axioms adds arrows, not constructions.}
+\entree[prop]{321}{0:05:21}{A category $I$ is strictly cogenerating in its envelope $\widetilde{I}$ under arbitrary limits.}
+\entree[def]{386}{0:06:26}{$J\subset E$ is \q{strictly generating} if every object of $E$ is a colimit of a diagram of objects of $J$; example: $J$ in $\widehat{J}$.}
+\entree[prop]{451}{0:07:31}{If $I$ is strictly cogenerating in each $R_\alpha$ of a filtered system in $\Delta$, it is so in its 2-colimit taken in $\Delta$.}
+\entree[prop]{648}{0:10:48}{Strict cogeneration is transitive; it is preserved by adjoining arrows in the sense of $\Delta$ and by localization in $\Delta$.}
+\entree[prop]{712}{0:11:52}{At each step of the construction of an algebraic theory with base $I$, the image of $I$ remains strictly cogenerating.}
+\entree[thm]{776}{0:12:56}{For $\Delta$ = categories with arbitrary limits, the algebraic theories are those represented by an $R\in\Delta$ having a small strictly cogenerating subcategory.}
+\entree[prop]{848}{0:14:08}{Moreover, $I\to R$ is basic if and only if the image of $I$ is strictly cogenerating; dually, $R^{\mathrm{op}}$ has arbitrary colimits and a small strictly generating set.}
+\entree[prop]{1104}{0:18:24}{If $I'\subset R$ is a small full strictly cogenerating subcategory, the $\Delta$-functor $\widetilde{I'}\to R$ is essentially surjective and full; $R$ is a category of fractions of $\widetilde{I'}$.}
+\entree[prop]{1357}{0:22:37}{Such a theory is obtained in three steps (empty structure on $I$, adjoining arrows, axioms), without transfinite construction.}
+\entree[prop]{1845}{0:30:45}{If $T$ is represented by $R$ having a small strictly cogenerating subcategory, $T(\mathbf{Set})=\mathrm{Hom}_\Delta(R,\mathbf{Set})\simeq R^{\mathrm{op}}$: $T$ is determined by its realizations in sets.}
+\entree[ex]{2233}{0:37:13}{For the theory of groups, $R\simeq\mathbf{Grp}^{\mathrm{op}}$; the universal object is $\mathbb{Z}$, a cogroup of $\mathbf{Grp}$ via $\mathbb{Z}\to\mathbb{Z}*\mathbb{Z}$, $x\mapsto x_1x_2$.}
+\entree[def]{2681}{0:44:41}{For $C$ small and a class $D'$ of diagrams, the envelope of $C$ under limits of type $D'$ is the smallest full subcategory of the envelope $\widetilde{C}$ containing $C$ and stable under these limits.}
+\entree[ex]{2746}{0:45:46}{On categories with finite products, the theory of groups is represented by a small category, the full subcategory of $\mathbf{Grp}^{\mathrm{op}}$ of finitely generated free groups.}
+\entree[cex]{2813}{0:46:53}{A theory on categories with limits of type $D'$ defines by restriction one on categories with arbitrary limits; there is no inverse operation in general.}
 \section{Accessible functors}
 \face{Tape 2}
-\entree{3075}{0:51:15}{If $F:E\to E'$ is $\pi$-accessible and sends $E_\pi$ into $E'_\pi$ ($\pi$-accessible objects), $F$ is the extension $\mathrm{Ind}_\pi$ of its restriction $E_\pi\to E'_\pi$.}
-\entree{3135}{0:52:15}{For $F$ accessible and $\pi$ large enough, $F(E_\pi)\subset E'_{\pi^{\pi_0}}$ ($\pi_0$ fixed, SGA 4); since $(2^\lambda)^{\pi_0}=2^\lambda$ for $\lambda\ge\pi_0$ infinite, $F(E_\pi)\subset E'_\pi$ if $\pi=2^\lambda$.}
-\entree{3263}{0:54:23}{Corollary: an accessible functor between accessible categories respects the canonical filtration by $\pi$-accessible objects for arbitrarily large $\pi$.}
-\entree{3398}{0:56:38}{For $i:C\hookrightarrow E$ small full and $E'$ with colimits, the restriction $i^*:\mathrm{Hom}(E,E')\to\mathrm{Hom}(C,E')$ has a fully faithful left adjoint $i_!$.}
-\entree{3460}{0:57:40}{For $E$ accessible, $F:E\to E'$ is accessible if and only if it is in the essential image of $i_!$ for some small $C\subset E$.}
-\entree{3586}{0:59:46}{For $C$ small with split idempotents, $\mathrm{Ind}_\pi(C)$ has arbitrary colimits if and only if $C$ has colimits of cardinality at most $\pi$.}
-\entree{3791}{1:03:11}{For such a $C$, $\mathrm{Ind}_\pi(C)$ is the $\Delta_\pi$--$\Delta$ envelope of $C$: $\mathrm{Hom}_\Delta(\mathrm{Ind}_\pi C,F)\simeq\mathrm{Hom}_{\Delta_\pi}(C,F)$ for every $F$ with arbitrary colimits.}
+\entree[prop]{3075}{0:51:15}{If $F:E\to E'$ is $\pi$-accessible and sends $E_\pi$ into $E'_\pi$ ($\pi$-accessible objects), $F$ is the extension $\mathrm{Ind}_\pi$ of its restriction $E_\pi\to E'_\pi$.}
+\entree[prop]{3135}{0:52:15}{For $F$ accessible and $\pi$ large enough, $F(E_\pi)\subset E'_{\pi^{\pi_0}}$ ($\pi_0$ fixed, SGA 4); since $(2^\lambda)^{\pi_0}=2^\lambda$ for $\lambda\ge\pi_0$ infinite, $F(E_\pi)\subset E'_\pi$ if $\pi=2^\lambda$.}
+\entree[prop]{3263}{0:54:23}{An accessible functor between accessible categories respects the canonical filtration by $\pi$-accessible objects for arbitrarily large $\pi$.}
+\entree[prop]{3398}{0:56:38}{For $i:C\hookrightarrow E$ small full and $E'$ with colimits, the restriction $i^*:\mathrm{Hom}(E,E')\to\mathrm{Hom}(C,E')$ has a fully faithful left adjoint $i_!$.}
+\entree[prop]{3460}{0:57:40}{For $E$ accessible, $F:E\to E'$ is accessible if and only if it is in the essential image of $i_!$ for some small $C\subset E$.}
+\entree[prop]{3586}{0:59:46}{For $C$ small with split idempotents, $\mathrm{Ind}_\pi(C)$ has arbitrary colimits if and only if $C$ has colimits of cardinality at most $\pi$.}
+\entree[prop]{3791}{1:03:11}{For such a $C$, $\mathrm{Ind}_\pi(C)$ is the $\Delta_\pi$--$\Delta$ envelope of $C$: $\mathrm{Hom}_\Delta(\mathrm{Ind}_\pi C,F)\simeq\mathrm{Hom}_{\Delta_\pi}(C,F)$ for every $F$ with arbitrary colimits.}
 \section{Representability and accessible categories}
-\entree{3986}{1:06:26}{The categories $R$ representing algebraic theories are exactly the \q{co-accessible} categories: $S=T(\mathbf{Set})\simeq R^{\mathrm{op}}$ is accessible (and cocomplete).}
-\entree{4186}{1:09:46}{On a cocomplete accessible category $E$, a functor $E^{\mathrm{op}}\to\mathbf{Set}$ is representable if and only if it sends colimits to limits.}
-\entree{4249}{1:10:49}{A functor $F:E\to\mathbf{Set}$ ($E$ cocomplete accessible) is representable if and only if it commutes with arbitrary limits and is accessible.}
-\entree{4326}{1:12:06}{SGA 4: a functor $F:E\to\mathbf{Set}$ is pro-representable by a pro-object with small indexing if and only if it is left exact and accessible.}
-\entree{4391}{1:13:11}{If $E$ has arbitrary limits, a pro-representable functor $E\to\mathbf{Set}$ is representable if and only if it commutes with these limits.}
-\entree{4454}{1:14:14}{Between cocomplete accessible categories, $F$ has a right adjoint if and only if it commutes with colimits, and a left adjoint if and only if it commutes with limits and is accessible.}
-\entree{4531}{1:15:31}{Example (SGA 4): on $\mathbf{Grp}$, a functor with small values, pro-represented by a non-small system of simple groups, commutes with limits without being accessible.}
+\entree[prop]{3986}{1:06:26}{The categories $R$ representing algebraic theories are exactly the \q{co-accessible} categories: $S=T(\mathbf{Set})\simeq R^{\mathrm{op}}$ is accessible (and cocomplete).}
+\entree[prop]{4186}{1:09:46}{On a cocomplete accessible category $E$, a functor $E^{\mathrm{op}}\to\mathbf{Set}$ is representable if and only if it sends colimits to limits.}
+\entree[prop]{4249}{1:10:49}{A functor $F:E\to\mathbf{Set}$ ($E$ cocomplete accessible) is representable if and only if it commutes with arbitrary limits and is accessible.}
+\entree[prop]{4326}{1:12:06}{SGA 4: a functor $F:E\to\mathbf{Set}$ is pro-representable by a pro-object with small indexing if and only if it is left exact and accessible.}
+\entree[prop]{4391}{1:13:11}{If $E$ has arbitrary limits, a pro-representable functor $E\to\mathbf{Set}$ is representable if and only if it commutes with these limits.}
+\entree[prop]{4454}{1:14:14}{Between cocomplete accessible categories, $F$ has a right adjoint if and only if it commutes with colimits, and a left adjoint if and only if it commutes with limits and is accessible.}
+\entree[ex][SGA 4]{4531}{1:15:31}{On $\mathbf{Grp}$, a functor with small values, pro-represented by a non-small system of simple groups, commutes with limits without being accessible.}
 \section{Morphisms of algebraic theories}
-\entree{4664}{1:17:44}{A morphism of algebraic theories $T\to T'$ is equivalent to a functor $S'\to S$ commuting with colimits; its right adjoint $S\to S'$ is $T(\mathbf{Set})\to T'(\mathbf{Set})$.}
-\entree{4853}{1:20:53}{The functors $S\to S'$ arising from morphisms of algebraic theories are exactly those that commute with limits and are accessible.}
-\entree{4931}{1:22:11}{If $F\to I$ is fibred over $I$ small, with accessible fibres and transition functors, the category of cartesian sections (2-limit) and that of all sections are accessible.}
-\entree{5061}{1:24:21}{Corollary: for $E$ accessible and $I$ small, $\mathrm{Hom}(I,E)$ is accessible, as is $\mathrm{Hom}(I[I^{-1}],E)$, the functors sending every arrow to an isomorphism.}
-\entree{5320}{1:28:40}{The 2-colimit of a small system of cocomplete accessible categories, taken in cocomplete categories and cocontinuous functors, is accessible.}
-\entree{5463}{1:31:03}{Question: is the 2-colimit in $\mathbf{Cat}$ of a small system of accessible categories accessible?}
-\entree{5529}{1:32:09}{Example: the coproduct in $\mathbf{Cat}$ of two nonempty categories with colimits has no initial object, nor a coproduct of an object of each.}
-\entree{6306}{1:45:06}{For a morphism of algebraic theories, $T(\mathbf{Set})\to T'(\mathbf{Set})$ has a left adjoint (free structure); example: the enveloping group of a monoid.}
-\entree{6434}{1:47:14}{If a fully faithful functor admits a left adjoint, this adjoint is a localization (passage to a category of fractions).}
-\entree{6499}{1:48:19}{The full subtheories of $T_{R'}$ correspond to the localizations $R'\to R'[\Sigma'^{-1}]$ in $\Delta$, $\Sigma'$ stable under limits, and to the reflective full subcategories of $S'$ stable under limits.}
-\entree{6627}{1:50:27}{For an algebraic subtheory, $\Sigma'$ is generated, by limit operations, by a small set of arrows.}
-\entree{6691}{1:51:31}{Question: is a full subcategory $S$ of an accessible category $S'$, stable under limits and whose inclusion admits a left adjoint, accessible?}
+\entree[prop]{4664}{1:17:44}{A morphism of algebraic theories $T\to T'$ is equivalent to a functor $S'\to S$ commuting with colimits; its right adjoint $S\to S'$ is $T(\mathbf{Set})\to T'(\mathbf{Set})$.}
+\entree[prop]{4853}{1:20:53}{The functors $S\to S'$ arising from morphisms of algebraic theories are exactly those that commute with limits and are accessible.}
+\entree[prop]{4931}{1:22:11}{If $F\to I$ is fibred over $I$ small, with accessible fibres and transition functors, the category of cartesian sections (2-limit) and that of all sections are accessible.}
+\entree[prop]{5061}{1:24:21}{For $E$ accessible and $I$ small, $\mathrm{Hom}(I,E)$ is accessible, as is $\mathrm{Hom}(I[I^{-1}],E)$, the functors sending every arrow to an isomorphism.}
+\entree[prop]{5320}{1:28:40}{The 2-colimit of a small system of cocomplete accessible categories, taken in cocomplete categories and cocontinuous functors, is accessible.}
+\entree[q]{5463}{1:31:03}{Is the 2-colimit in $\mathbf{Cat}$ of a small system of accessible categories accessible?}
+\entree[ex]{5529}{1:32:09}{The coproduct in $\mathbf{Cat}$ of two nonempty categories with colimits has no initial object, nor a coproduct of an object of each.}
+\entree[prop]{6306}{1:45:06}{For a morphism of algebraic theories, $T(\mathbf{Set})\to T'(\mathbf{Set})$ has a left adjoint (free structure); example: the enveloping group of a monoid.}
+\entree[prop]{6434}{1:47:14}{If a fully faithful functor admits a left adjoint, this adjoint is a localization (passage to a category of fractions).}
+\entree[prop]{6499}{1:48:19}{The full subtheories of $T_{R'}$ correspond to the localizations $R'\to R'[\Sigma'^{-1}]$ in $\Delta$, $\Sigma'$ stable under limits, and to the reflective full subcategories of $S'$ stable under limits.}
+\entree[prop]{6627}{1:50:27}{For an algebraic subtheory, $\Sigma'$ is generated, by limit operations, by a small set of arrows.}
+\entree[q]{6691}{1:51:31}{Is a full subcategory $S$ of an accessible category $S'$, stable under limits and whose inclusion admits a left adjoint, accessible?}
 \section{Constructing algebraic theories}
 \face{Tape 3, side A}
-\entree{7050}{1:57:30}{Limit-passage clause: the 2-limit, over $T^I$, of a filtered system of algebraic theories with base $I$ is algebraic with base $I$.}
-\entree{7114}{1:58:34}{Representable theories form a full 2-subcategory of the $\Delta$-theories, 2-equivalent to $\Delta^{\mathrm{op}}$ via $R\mapsto T_R$; it contains the algebraic theories.}
-\entree{7240}{2:00:40}{$R$ is algebraic with (discrete) base $I$ if it is the end of a transfinite sequence in $\Delta$ starting from the envelope of $I$, each step inverting, equalizing or adding arrows, with 2-colimits at limit ordinals.}
-\entree{7434}{2:03:54}{Faithfulness of $\mathrm{Hom}_\Delta(R,C)\to C^I$ for every $C$ does not suffice for $I\to R$ to be basic (known counterexample).}
-\entree{7434}{2:03:54}{\q{Problem three} (open): is $I\to R$ basic if and only if every strictly full subcategory of $R$ stable under limits of type $D$ and containing the image of $I$ is equal to $R$?}
-\entree{7564}{2:06:04}{This condition is equivalent to: the transfinite saturation of the image of $I$ under limits of type $D'$ and $D''$ reaches $R$.}
-\entree{7694}{2:08:14}{If $D'$ and $D''$ are essentially small (and if problems one and two preserve smallness), the algebraic objects of $\Delta$ are exactly the small ones.}
-\entree{7823}{2:10:23}{Conjectural statement: if $R$ is algebraic, one can enlarge $I$ so that no arrows remain to be added; $T_R$ is then a full subtheory of $C\mapsto\mathrm{Hom}(I',C)$.}
+\entree[prop]{7050}{1:57:30}{Limit-passage clause: the 2-limit, over $T^I$, of a filtered system of algebraic theories with base $I$ is algebraic with base $I$.}
+\entree[prop]{7114}{1:58:34}{Representable theories form a full 2-subcategory of the $\Delta$-theories, 2-equivalent to $\Delta^{\mathrm{op}}$ via $R\mapsto T_R$; it contains the algebraic theories.}
+\entree[def]{7240}{2:00:40}{$R$ is algebraic with (discrete) base $I$ if it is the end of a transfinite sequence in $\Delta$ starting from the envelope of $I$, each step inverting, equalizing or adding arrows, with 2-colimits at limit ordinals.}
+\entree[cex]{7434}{2:03:54}{Faithfulness of $\mathrm{Hom}_\Delta(R,C)\to C^I$ for every $C$ does not suffice for $I\to R$ to be basic (known counterexample).}
+\entree[q]{7434}{2:03:54}{\q{Problem three} (open): is $I\to R$ basic if and only if every strictly full subcategory of $R$ stable under limits of type $D$ and containing the image of $I$ is equal to $R$?}
+\entree[prop]{7564}{2:06:04}{This condition is equivalent to: the transfinite saturation of the image of $I$ under limits of type $D'$ and $D''$ reaches $R$.}
+\entree[prop]{7694}{2:08:14}{If $D'$ and $D''$ are essentially small (and if problems one and two preserve smallness), the algebraic objects of $\Delta$ are exactly the small ones.}
+\entree[q]{7823}{2:10:23}{Conjectural statement: if $R$ is algebraic, one can enlarge $I$ so that no arrows remain to be added; $T_R$ is then a full subtheory of $C\mapsto\mathrm{Hom}(I',C)$.}
 \section{Representability of theories}
-\entree{8276}{2:17:56}{Necessary condition for 2-representability: $T$ commutes with 2-limits, $T(\varprojlim C_i)\simeq\varprojlim T(C_i)$.}
-\entree{8339}{2:18:59}{On a category with arbitrary limits, a functor to $\mathbf{Set}$ that commutes with these limits is pro-representable by a projective system, possibly non-small.}
-\entree{8410}{2:20:10}{If $T$ is 2-representable, $T$ sends faithful (resp. fully faithful) $\Delta$-functors to faithful (resp. fully faithful) functors.}
+\entree[prop]{8276}{2:17:56}{Necessary condition for 2-representability: $T$ commutes with 2-limits, $T(\varprojlim C_i)\simeq\varprojlim T(C_i)$.}
+\entree[prop]{8339}{2:18:59}{On a category with arbitrary limits, a functor to $\mathbf{Set}$ that commutes with these limits is pro-representable by a projective system, possibly non-small.}
+\entree[prop]{8410}{2:20:10}{If $T$ is 2-representable, $T$ sends faithful (resp. fully faithful) $\Delta$-functors to faithful (resp. fully faithful) functors.}
 \section{Exactness properties of theories}
-\entree{8607}{2:23:27}{Exactness property given by $R\in\Delta_D$ and $\Sigma$: every $\Delta_D$-functor $R\to C$ inverts $\Sigma$; equivalent to: $\mathrm{Hom}_{\Delta_D}(R',C)\to\mathrm{Hom}_{\Delta_D}(R,C)$ is an equivalence, $R'$ the localization.}
-\entree{8738}{2:25:38}{\q{Generalized exactness properties}: for a given $\Delta_D$-functor $R\to R'$, require that $\mathrm{Hom}(R',C)\to\mathrm{Hom}(R,C)$ be an equivalence, fully faithful or faithful.}
-\entree{8802}{2:26:42}{The 2-subcategories of $\Delta_D$ so defined are stable under 2-limits in $\mathbf{Cat}$.}
-\entree{8931}{2:28:51}{Example ($D=\varnothing$): requiring the arrow of $\{0\to1\}$ to be inverted defines groupoids.}
-\entree{8998}{2:29:58}{Equalizing the two arrows of $\{0\rightrightarrows1\}$ defines preordered categories, equivalent to preordered sets, 2-equivalent to ordered sets.}
-\entree{9126}{2:32:06}{The two conditions together define essentially discrete categories, 2-equivalent to $\mathbf{Set}$.}
-\entree{9190}{2:33:10}{For $\Delta=\mathbf{Cat}$: the envelope of $I$ is $I$; problem two is solved by the category of fractions $I[\Sigma^{-1}]$ (Gabriel--Zisman).}
-\entree{9256}{2:34:16}{For groupoids: the envelope of $I$ is its fundamental groupoid $I[I^{-1}]$, with the same connected components; problem two is trivial.}
-\entree{9381}{2:36:21}{For preorders: the envelope of $I$ is $\mathrm{Ob}\,I$ with the preorder $x\ge y$ if there is an arrow $x\to y$.}
-\entree{9444}{2:37:24}{Making relations $x_i\le y_i$ of a preorder invertible: take the preorder generated by the given preorder and the $y_i\le x_i$.}
-\entree{9510}{2:38:30}{For discrete categories: the envelope of $I$ is $\pi_0(I)$, the set of connected components; problem two is trivial.}
-\entree{9714}{2:41:54}{If $T=T_R$ and if $C$ has limits of type $\delta$ commuting with colimits of type $D''$, $T(C)$ has these limits, computed argumentwise.}
+\entree[def]{8607}{2:23:27}{Exactness property given by $R\in\Delta_D$ and $\Sigma$: every $\Delta_D$-functor $R\to C$ inverts $\Sigma$; equivalent to: $\mathrm{Hom}_{\Delta_D}(R',C)\to\mathrm{Hom}_{\Delta_D}(R,C)$ is an equivalence, $R'$ the localization.}
+\entree[def]{8738}{2:25:38}{\q{Generalized exactness properties}: for a given $\Delta_D$-functor $R\to R'$, require that $\mathrm{Hom}(R',C)\to\mathrm{Hom}(R,C)$ be an equivalence, fully faithful or faithful.}
+\entree[prop]{8802}{2:26:42}{The 2-subcategories of $\Delta_D$ so defined are stable under 2-limits in $\mathbf{Cat}$.}
+\entree[ex][$D=\varnothing$]{8931}{2:28:51}{Requiring the arrow of $\{0\to1\}$ to be inverted defines groupoids.}
+\entree[ex]{8998}{2:29:58}{Equalizing the two arrows of $\{0\rightrightarrows1\}$ defines preordered categories, equivalent to preordered sets, 2-equivalent to ordered sets.}
+\entree[ex]{9126}{2:32:06}{The two conditions together define essentially discrete categories, 2-equivalent to $\mathbf{Set}$.}
+\entree[ex]{9190}{2:33:10}{For $\Delta=\mathbf{Cat}$: the envelope of $I$ is $I$; problem two is solved by the category of fractions $I[\Sigma^{-1}]$ (Gabriel--Zisman).}
+\entree[ex]{9256}{2:34:16}{For groupoids: the envelope of $I$ is its fundamental groupoid $I[I^{-1}]$, with the same connected components; problem two is trivial.}
+\entree[ex]{9381}{2:36:21}{For preorders: the envelope of $I$ is $\mathrm{Ob}\,I$ with the preorder $x\ge y$ if there is an arrow $x\to y$.}
+\entree[ex]{9444}{2:37:24}{Making relations $x_i\le y_i$ of a preorder invertible: take the preorder generated by the given preorder and the $y_i\le x_i$.}
+\entree[ex]{9510}{2:38:30}{For discrete categories: the envelope of $I$ is $\pi_0(I)$, the set of connected components; problem two is trivial.}
+\entree[prop]{9714}{2:41:54}{If $T=T_R$ and if $C$ has limits of type $\delta$ commuting with colimits of type $D''$, $T(C)$ has these limits, computed argumentwise.}
 \face{Tape 3, side B}
-\entree{9915}{2:45:15}{A morphism of representable theories $T\to T'$ gives $T(C)\to T'(C)$ commuting with these limits; likewise $T(C)\to T(C')$ if $C\to C'$ preserves them.}
-\entree{9978}{2:46:18}{For every object $r$ of $R$, the evaluation functor $r_C:T(C)\to C$ commutes with limits of type $\delta$.}
-\entree{10040}{2:47:20}{Example: the category of torsors under a group $G\neq1$ has no products, no coproducts, and no initial or terminal object.}
-\entree{10103}{2:48:23}{If $D''=\varnothing$ and if $C$ has limits of type $\delta$ (resp. arbitrary), $T(C)$ has them too.}
-\entree{10240}{2:50:40}{For $\Delta'\subset\Delta$ (fewer limits required), restriction sends $\Delta$-theories to $\Delta'$-theories and algebraic theories to algebraic theories.}
-\entree{10370}{2:52:50}{If problems one and two have a solution in $\Delta'$, the restriction of $T_R$ to $\Delta'$ is represented by the \q{$\Delta$--$\Delta'$ envelope} $R'$ of $R$.}
-\entree{10564}{2:56:04}{$R'$ is obtained from the envelope of $R$ in $\Delta'$ by inverting the comparison arrows of the limits of type $D$ of $R$.}
-\entree{10915}{3:01:55}{The restriction functor $\mathrm{Hom}(T_1,T_2)\to\mathrm{Hom}(T'_1,T'_2)$ is in general neither faithful, nor full, nor essentially surjective.}
+\entree[prop]{9915}{2:45:15}{A morphism of representable theories $T\to T'$ gives $T(C)\to T'(C)$ commuting with these limits; likewise $T(C)\to T(C')$ if $C\to C'$ preserves them.}
+\entree[prop]{9978}{2:46:18}{For every object $r$ of $R$, the evaluation functor $r_C:T(C)\to C$ commutes with limits of type $\delta$.}
+\entree[ex]{10040}{2:47:20}{The category of torsors under a group $G\neq1$ has no products, no coproducts, and no initial or terminal object.}
+\entree[prop]{10103}{2:48:23}{If $D''=\varnothing$ and if $C$ has limits of type $\delta$ (resp. arbitrary), $T(C)$ has them too.}
+\entree[prop]{10240}{2:50:40}{For $\Delta'\subset\Delta$ (fewer limits required), restriction sends $\Delta$-theories to $\Delta'$-theories and algebraic theories to algebraic theories.}
+\entree[prop]{10370}{2:52:50}{If problems one and two have a solution in $\Delta'$, the restriction of $T_R$ to $\Delta'$ is represented by the \q{$\Delta$--$\Delta'$ envelope} $R'$ of $R$.}
+\entree[prop]{10564}{2:56:04}{$R'$ is obtained from the envelope of $R$ in $\Delta'$ by inverting the comparison arrows of the limits of type $D$ of $R$.}
+\entree[cex]{10915}{3:01:55}{The restriction functor $\mathrm{Hom}(T_1,T_2)\to\mathrm{Hom}(T'_1,T'_2)$ is in general neither faithful, nor full, nor essentially surjective.}
 \section{Envelopes and categories of fractions}
-\entree{11448}{3:10:48}{For $J$ small, $J\to\widehat{J}$ is the envelope under colimits: for $D$ cocomplete, restriction of cocontinuous functors $\widehat{J}\to D$ to $J$ is an equivalence.}
-\entree{11509}{3:11:49}{Every presheaf $F$ on $J$ is the colimit over $J/F$ of the objects of $J$ over $F$; the extension is $\widehat{\varphi}(F)=\varinjlim_{J/F}\varphi(X)$.}
-\entree{11699}{3:14:59}{Problem one for $\Delta$ = categories with small limits: the envelope of a small $I$ is $\mathrm{Hom}(I,\mathbf{Set})^{\mathrm{op}}$, with the Yoneda embedding.}
-\entree{11824}{3:17:04}{In $\Delta$, equalizing $f,g:X\rightrightarrows Y$ amounts to inverting the kernel $\mathrm{Ker}(f,g)\to X$.}
-\entree{11886}{3:18:06}{Problem two: if $\Sigma'$ is the saturation of $\Sigma$, the category of fractions $C[\Sigma'^{-1}]$ taken in $\mathbf{Cat}$ is in $\Delta$, and $C\to C[\Sigma'^{-1}]$ is the solution.}
-\entree{12093}{3:21:33}{The saturation $\Sigma'$ (arrows inverted by every $\Delta$-functor inverting $\Sigma$) contains the isomorphisms, is stable under composition and base change, and if two of $u$, $v$, $vu$ are in it, so is the third.}
-\entree{12219}{3:23:39}{If $u:X\to Y$ is in $\Sigma'$, the diagonal $X\to X\times_Y X$ is in $\Sigma'$.}
-\entree{12284}{3:24:44}{$\Sigma'$ admits a calculus of fractions: $\mathrm{Hom}(X,Y)=\varinjlim\mathrm{Hom}_C(X',Y)$, over the filtered projective system of the $X'\to X$ in $\Sigma'$.}
-\entree{12473}{3:27:53}{If $C$ has finite limits, so does $C[\Sigma'^{-1}]$, and the localization functor is left exact.}
-\entree{12539}{3:28:59}{$\Sigma'$ is stable under arbitrary fibre products: if the $X_i\to Y$ are in $\Sigma'$, so is $\prod_Y X_i\to Y$.}
-\entree{12667}{3:31:07}{$C[\Sigma'^{-1}]$ has arbitrary products, images of those of $C$; thus $C\to C[\Sigma'^{-1}]$ is a $\Delta$-functor.}
+\entree[prop]{11448}{3:10:48}{For $J$ small, $J\to\widehat{J}$ is the envelope under colimits: for $D$ cocomplete, restriction of cocontinuous functors $\widehat{J}\to D$ to $J$ is an equivalence.}
+\entree[prop]{11509}{3:11:49}{Every presheaf $F$ on $J$ is the colimit over $J/F$ of the objects of $J$ over $F$; the extension is $\widehat{\varphi}(F)=\varinjlim_{J/F}\varphi(X)$.}
+\entree[prop]{11699}{3:14:59}{Problem one for $\Delta$ = categories with small limits: the envelope of a small $I$ is $\mathrm{Hom}(I,\mathbf{Set})^{\mathrm{op}}$, with the Yoneda embedding.}
+\entree[prop]{11824}{3:17:04}{In $\Delta$, equalizing $f,g:X\rightrightarrows Y$ amounts to inverting the kernel $\mathrm{Ker}(f,g)\to X$.}
+\entree[prop]{11886}{3:18:06}{Problem two: if $\Sigma'$ is the saturation of $\Sigma$, the category of fractions $C[\Sigma'^{-1}]$ taken in $\mathbf{Cat}$ is in $\Delta$, and $C\to C[\Sigma'^{-1}]$ is the solution.}
+\entree[prop]{12093}{3:21:33}{The saturation $\Sigma'$ (arrows inverted by every $\Delta$-functor inverting $\Sigma$) contains the isomorphisms, is stable under composition and base change, and if two of $u$, $v$, $vu$ are in it, so is the third.}
+\entree[prop]{12219}{3:23:39}{If $u:X\to Y$ is in $\Sigma'$, the diagonal $X\to X\times_Y X$ is in $\Sigma'$.}
+\entree[prop]{12284}{3:24:44}{$\Sigma'$ admits a calculus of fractions: $\mathrm{Hom}(X,Y)=\varinjlim\mathrm{Hom}_C(X',Y)$, over the filtered projective system of the $X'\to X$ in $\Sigma'$.}
+\entree[prop]{12473}{3:27:53}{If $C$ has finite limits, so does $C[\Sigma'^{-1}]$, and the localization functor is left exact.}
+\entree[prop]{12539}{3:28:59}{$\Sigma'$ is stable under arbitrary fibre products: if the $X_i\to Y$ are in $\Sigma'$, so is $\prod_Y X_i\to Y$.}
+\entree[prop]{12667}{3:31:07}{$C[\Sigma'^{-1}]$ has arbitrary products, images of those of $C$; thus $C\to C[\Sigma'^{-1}]$ is a $\Delta$-functor.}
 \section{Further remarks on algebraic theories}
 \session{10 July 1973}
 \video{4gynb9uTEE4}
 \noindent\textit{Video 3/4 (\href{https://www.youtube.com/watch?v=4gynb9uTEE4}{\texttt{4gynb9uTEE4}}): tape 1, side A (3:31:57--4:36:29); tape 1, side B (4:36:29--5:41:33).}\par\medskip
 \face{Tape 1, side A}
-\entree{12928}{3:35:28}{For $E$ in $\Delta$ and a non-small saturated class $\widetilde\Sigma$, the category of fractions $E[\widetilde\Sigma^{-1}]$ may have non-small $\mathrm{Hom}$s, and is then not in $\Delta$.}
-\entree{13056}{3:37:36}{For an algebraic theory $R$ with base objects $I$, $I$ is not in general strictly cogenerating in $R$: a group structure is not determined by the maps $x\mapsto x^n$.}
-\entree{13185}{3:39:45}{Strict generation is not transitive: $\mathbb{Z}$ is strictly generating in free groups, these are so in $\mathbf{Gr}$, but $\{\mathbb{Z}\}$ is not in $\mathbf{Gr}$ (likewise in $\mathbf{Ab}$).}
-\entree{13314}{3:41:54}{An algebraic theory relative to limits is not always obtained in two steps (arrows, then axioms); a transfinite construction, indexed by a small ordinal, may be needed.}
-\entree{13380}{3:43:00}{If $R\in\Delta$ is algebraic, $R$ admits a small strictly cogenerating family; the converse is false.}
-\entree{13448}{3:44:08}{Example: $\mathbf{Set}^{\mathrm{op}}$ admits a strict generator (the two-element set) but is the category $T(\mathbf{Set})$ of no algebraic theory $T$.}
-\entree{13577}{3:46:17}{$\mathbf{Set}^{\mathrm{op}}$ is equivalent to the category of complete atomic Boolean algebras, via $X\mapsto\mathcal{P}(X)$.}
-\entree{13967}{3:52:47}{Completeness of a Boolean algebra concerns families indexed by an arbitrary set $I$: a non-small family of operations and axioms, excluded from the algebraic theories of the course.}
-\entree{14825}{4:07:05}{Every complete Boolean algebra falls, for a suitable cardinal $\pi$, under the theory of $\pi$-complete Boolean algebras, which has only a small set of operations.}
-\entree{15016}{4:10:16}{The objects of $\Delta$ representing algebraic theories are the $\Delta$-envelopes (adjoining small limits) of small categories of $\Delta_\pi$ (limits of cardinality ${\le}\,\pi$).}
-\entree{15081}{4:11:21}{The categories $S=R^{\mathrm{op}}=T(\mathbf{Set})$ of set-theoretic realizations of these theories are accessible categories.}
+\entree[cex]{12928}{3:35:28}{For $E$ in $\Delta$ and a non-small saturated class $\widetilde\Sigma$, the category of fractions $E[\widetilde\Sigma^{-1}]$ may have non-small $\mathrm{Hom}$s, and is then not in $\Delta$.}
+\entree[cex]{13056}{3:37:36}{For an algebraic theory $R$ with base objects $I$, $I$ is not in general strictly cogenerating in $R$: a group structure is not determined by the maps $x\mapsto x^n$.}
+\entree[cex]{13185}{3:39:45}{Strict generation is not transitive: $\mathbb{Z}$ is strictly generating in free groups, these are so in $\mathbf{Gr}$, but $\{\mathbb{Z}\}$ is not in $\mathbf{Gr}$ (likewise in $\mathbf{Ab}$).}
+\entree[cex]{13314}{3:41:54}{An algebraic theory relative to limits is not always obtained in two steps (arrows, then axioms); a transfinite construction, indexed by a small ordinal, may be needed.}
+\entree[prop]{13380}{3:43:00}{If $R\in\Delta$ is algebraic, $R$ admits a small strictly cogenerating family; the converse is false.}
+\entree[ex]{13448}{3:44:08}{$\mathbf{Set}^{\mathrm{op}}$ admits a strict generator (the two-element set) but is the category $T(\mathbf{Set})$ of no algebraic theory $T$.}
+\entree[prop]{13577}{3:46:17}{$\mathbf{Set}^{\mathrm{op}}$ is equivalent to the category of complete atomic Boolean algebras, via $X\mapsto\mathcal{P}(X)$.}
+\entree[rem]{13967}{3:52:47}{Completeness of a Boolean algebra concerns families indexed by an arbitrary set $I$: a non-small family of operations and axioms, excluded from the algebraic theories of the course.}
+\entree[prop]{14825}{4:07:05}{Every complete Boolean algebra falls, for a suitable cardinal $\pi$, under the theory of $\pi$-complete Boolean algebras, which has only a small set of operations.}
+\entree[prop]{15016}{4:10:16}{The objects of $\Delta$ representing algebraic theories are the $\Delta$-envelopes (adjoining small limits) of small categories of $\Delta_\pi$ (limits of cardinality ${\le}\,\pi$).}
+\entree[prop]{15081}{4:11:21}{The categories $S=R^{\mathrm{op}}=T(\mathbf{Set})$ of set-theoretic realizations of these theories are accessible categories.}
 \section{Accessible categories}
-\entree{15284}{4:14:44}{Definition: a preordered set $I$ \q{dominates $\pi$} if it is filtered and every family of cardinality ${\le}\,\pi$ of elements of $I$ has an upper bound; for $\pi\ge 2$, the second condition implies the first.}
-\entree{15352}{4:15:52}{Definition: $E$ satisfies $L_\pi$ if colimits indexed by every small $I$ dominating $\pi$ exist in $E$; $E$ satisfies $L$ if it satisfies $L_\pi$ for some small cardinal $\pi$.}
-\entree{15482}{4:18:02}{Definition: $F\colon E\to E'$ is $\pi$-accessible if $E$ satisfies $L_\pi$ and $F$ commutes with colimits indexed by the $I$ dominating $\pi$; accessible if it is $\pi$-accessible for some small $\pi$.}
-\entree{15673}{4:21:13}{Definition: an object $X$ of $E$ is $\pi$-accessible (resp. accessible) if the functor $\mathrm{Hom}(X,-)$ from $E$ to $\mathbf{Set}$ is $\pi$-accessible (resp. accessible).}
-\entree{15809}{4:23:29}{Definition: $E$ is $\pi$-accessible if it has a small full strictly generating subcategory $C$ consisting of $\pi$-accessible objects (every object is a colimit of a diagram in $C$).}
-\entree{15877}{4:24:37}{This definition is stronger than that of SGA 4, I, 9, which only required a small generating subcategory.}
-\entree{16008}{4:26:48}{If $E$, $F$ satisfy $L_\pi$, the full subcategory $\mathrm{Hom}_\pi(E,F)$ of $\pi$-accessible functors is stable in $\mathrm{Hom}(E,F)$ under colimits computed argumentwise.}
-\entree{16076}{4:27:56}{It is also stable under limits, computed argumentwise, indexed by a small category $J$ with at most $\pi$ arrows.}
-\entree{16213}{4:30:13}{In $\mathbf{Set}$, colimits along an $I$ dominating $\pi$ commute with limits along a category with at most $\pi$ arrows.}
-\entree{16213}{4:30:13}{Accessible functors form a full subcategory of $\mathrm{Hom}(E,F)$ stable under small colimits and limits computed argumentwise.}
-\entree{16276}{4:31:16}{If $E$ satisfies $L_\pi$, the full subcategory $E_\pi$ of $\pi$-accessible objects is stable under colimits indexed by a category with at most $\pi$ arrows.}
-\entree{16341}{4:32:21}{If $E$ satisfies $L$, the full subcategory of accessible objects of $E$ is stable under small colimits.}
-\entree{16406}{4:33:26}{If $E$ is accessible, every object of $E$ is accessible.}
+\entree[def]{15284}{4:14:44}{A preordered set $I$ \q{dominates $\pi$} if it is filtered and every family of cardinality ${\le}\,\pi$ of elements of $I$ has an upper bound; for $\pi\ge 2$, the second condition implies the first.}
+\entree[def]{15352}{4:15:52}{$E$ satisfies $L_\pi$ if colimits indexed by every small $I$ dominating $\pi$ exist in $E$; $E$ satisfies $L$ if it satisfies $L_\pi$ for some small cardinal $\pi$.}
+\entree[def]{15482}{4:18:02}{$F\colon E\to E'$ is $\pi$-accessible if $E$ satisfies $L_\pi$ and $F$ commutes with colimits indexed by the $I$ dominating $\pi$; accessible if it is $\pi$-accessible for some small $\pi$.}
+\entree[def]{15673}{4:21:13}{An object $X$ of $E$ is $\pi$-accessible (resp. accessible) if the functor $\mathrm{Hom}(X,-)$ from $E$ to $\mathbf{Set}$ is $\pi$-accessible (resp. accessible).}
+\entree[def]{15809}{4:23:29}{$E$ is $\pi$-accessible if it has a small full strictly generating subcategory $C$ consisting of $\pi$-accessible objects (every object is a colimit of a diagram in $C$).}
+\entree[rem]{15877}{4:24:37}{This definition is stronger than that of SGA 4, I, 9, which only required a small generating subcategory.}
+\entree[prop]{16008}{4:26:48}{If $E$, $F$ satisfy $L_\pi$, the full subcategory $\mathrm{Hom}_\pi(E,F)$ of $\pi$-accessible functors is stable in $\mathrm{Hom}(E,F)$ under colimits computed argumentwise.}
+\entree[prop]{16076}{4:27:56}{It is also stable under limits, computed argumentwise, indexed by a small category $J$ with at most $\pi$ arrows.}
+\entree[prop]{16213}{4:30:13}{In $\mathbf{Set}$, colimits along an $I$ dominating $\pi$ commute with limits along a category with at most $\pi$ arrows.}
+\entree[prop]{16213}{4:30:13}{Accessible functors form a full subcategory of $\mathrm{Hom}(E,F)$ stable under small colimits and limits computed argumentwise.}
+\entree[prop]{16276}{4:31:16}{If $E$ satisfies $L_\pi$, the full subcategory $E_\pi$ of $\pi$-accessible objects is stable under colimits indexed by a category with at most $\pi$ arrows.}
+\entree[prop]{16341}{4:32:21}{If $E$ satisfies $L$, the full subcategory of accessible objects of $E$ is stable under small colimits.}
+\entree[prop]{16406}{4:33:26}{If $E$ is accessible, every object of $E$ is accessible.}
 \section{Examples of accessible categories}
 \face{Tape 1, side B}
-\entree{16592}{4:36:32}{A small subcategory $C$ is generating by universal strict epimorphisms if every object is the target of a universally strictly epimorphic family from $C$; this is stronger than strictly generating.}
-\entree{16654}{4:37:34}{In a topos, every epimorphic family is strictly epimorphic and universal.}
-\entree{16654}{4:37:34}{If $E$ satisfies $L$, has fibre products, kernels $(u,v)\mapsto\mathrm{Ker}(u,v)$ forming an accessible functor, and such a $C$, then every object of $E$ is accessible and $E$ is accessible (SGA 4, I, 9.11).}
-\entree{16782}{4:39:42}{Example: every topos is an accessible category.}
-\entree{16782}{4:39:42}{A set $X$ of cardinality ${\ge}\,2$ is not an accessible object of $\mathbf{Set}^{\mathrm{op}}$; hence $\mathbf{Set}^{\mathrm{op}}$, which has small colimits and a generator, is not accessible.}
-\entree{16908}{4:41:48}{For $\pi$ infinite, the subsets of cardinality ${\le}\,\pi$ of a set $I$ form an ordered set dominating $\pi$, and $\prod_{i\in I}Y_i$ is the limit of the corresponding partial products.}
-\entree{17102}{4:45:02}{If $\mathrm{card}\,I>\pi$ and $\mathrm{card}\,Y_i\ge 2$, the indicator of a point of $\prod Y_i$ factors through no partial product; the opposite of a nondegenerate topos, or of $\mathbf{Ab}$, is not accessible.}
-\entree{17297}{4:48:17}{Question: if $E$ and $E^{\mathrm{op}}$ are accessible, is $E$ equivalent to the point category?}
+\entree[def]{16592}{4:36:32}{A small subcategory $C$ is generating by universal strict epimorphisms if every object is the target of a universally strictly epimorphic family from $C$; this is stronger than strictly generating.}
+\entree[prop]{16654}{4:37:34}{In a topos, every epimorphic family is strictly epimorphic and universal.}
+\entree[prop]{16654}{4:37:34}{If $E$ satisfies $L$, has fibre products, kernels $(u,v)\mapsto\mathrm{Ker}(u,v)$ forming an accessible functor, and such a $C$, then every object of $E$ is accessible and $E$ is accessible (SGA 4, I, 9.11).}
+\entree[ex]{16782}{4:39:42}{Every topos is an accessible category.}
+\entree[cex]{16782}{4:39:42}{A set $X$ of cardinality ${\ge}\,2$ is not an accessible object of $\mathbf{Set}^{\mathrm{op}}$; hence $\mathbf{Set}^{\mathrm{op}}$, which has small colimits and a generator, is not accessible.}
+\entree[prop]{16908}{4:41:48}{For $\pi$ infinite, the subsets of cardinality ${\le}\,\pi$ of a set $I$ form an ordered set dominating $\pi$, and $\prod_{i\in I}Y_i$ is the limit of the corresponding partial products.}
+\entree[prop]{17102}{4:45:02}{If $\mathrm{card}\,I>\pi$ and $\mathrm{card}\,Y_i\ge 2$, the indicator of a point of $\prod Y_i$ factors through no partial product; the opposite of a nondegenerate topos, or of $\mathbf{Ab}$, is not accessible.}
+\entree[q]{17297}{4:48:17}{If $E$ and $E^{\mathrm{op}}$ are accessible, is $E$ equivalent to the point category?}
 \section{Ind-categories}
-\entree{17429}{4:50:29}{Definition: for $C$ small, $\mathrm{Ind}(C)$ is the category of filtered inductive systems in $C$, identified via $\varinjlim$ with a full subcategory of $\widehat{C}$.}
-\entree{17557}{4:52:37}{$\mathrm{Hom}_{\mathrm{Ind}(C)}((X_i),(Y_j))=\varprojlim_i\varinjlim_j\mathrm{Hom}(X_i,Y_j)$ (SGA 4, I, 8).}
-\entree{17684}{4:54:44}{$C\to\mathrm{Ind}(C)$ is universal: for $E$ with filtered colimits, restriction to $C$ of the functors $\mathrm{Ind}(C)\to E$ commuting with these colimits is an equivalence with $\mathrm{Hom}(C,E)$.}
-\entree{17880}{4:58:00}{If $C$ has finite colimits, $\mathrm{Ind}(C)$ has small colimits and, for $E$ having them, $F\mapsto F|_C$ identifies the functors commuting with these colimits with the right exact functors $C\to E$.}
-\entree{18008}{5:00:08}{Definition: $\mathrm{Ind}_\pi(C)$ is the full subcategory of $\mathrm{Ind}(C)$ of the systems indexed by an $I$ dominating $\pi$; for $C$ small, it is $\pi$-accessible.}
-\entree{18331}{5:05:31}{An object of $\mathrm{Ind}_\pi(C)$ is $\pi$-accessible if and only if it is a direct summand of an object of $C$; a direct summand of a $\pi$-accessible object is again so.}
-\entree{18396}{5:06:36}{Definition: $C$ is Karoubian if every idempotent has an image summand; $\mathrm{Ind}(C)$ and $\mathrm{Ind}_\pi(C)$ do not change if $C$ is replaced by its Karoubian envelope.}
-\entree{18460}{5:07:40}{If $C$ is Karoubian and $E=\mathrm{Ind}_\pi(C)$, then $C\simeq E_\pi$ and $E\simeq\mathrm{Ind}_\pi(E_\pi)$.}
+\entree[def]{17429}{4:50:29}{For $C$ small, $\mathrm{Ind}(C)$ is the category of filtered inductive systems in $C$, identified via $\varinjlim$ with a full subcategory of $\widehat{C}$.}
+\entree[prop]{17557}{4:52:37}{$\mathrm{Hom}_{\mathrm{Ind}(C)}((X_i),(Y_j))=\varprojlim_i\varinjlim_j\mathrm{Hom}(X_i,Y_j)$ (SGA 4, I, 8).}
+\entree[prop]{17684}{4:54:44}{$C\to\mathrm{Ind}(C)$ is universal: for $E$ with filtered colimits, restriction to $C$ of the functors $\mathrm{Ind}(C)\to E$ commuting with these colimits is an equivalence with $\mathrm{Hom}(C,E)$.}
+\entree[prop]{17880}{4:58:00}{If $C$ has finite colimits, $\mathrm{Ind}(C)$ has small colimits and, for $E$ having them, $F\mapsto F|_C$ identifies the functors commuting with these colimits with the right exact functors $C\to E$.}
+\entree[def]{18008}{5:00:08}{$\mathrm{Ind}_\pi(C)$ is the full subcategory of $\mathrm{Ind}(C)$ of the systems indexed by an $I$ dominating $\pi$; for $C$ small, it is $\pi$-accessible.}
+\entree[prop]{18331}{5:05:31}{An object of $\mathrm{Ind}_\pi(C)$ is $\pi$-accessible if and only if it is a direct summand of an object of $C$; a direct summand of a $\pi$-accessible object is again so.}
+\entree[def]{18396}{5:06:36}{$C$ is Karoubian if every idempotent has an image summand; $\mathrm{Ind}(C)$ and $\mathrm{Ind}_\pi(C)$ do not change if $C$ is replaced by its Karoubian envelope.}
+\entree[prop]{18460}{5:07:40}{If $C$ is Karoubian and $E=\mathrm{Ind}_\pi(C)$, then $C\simeq E_\pi$ and $E\simeq\mathrm{Ind}_\pi(E_\pi)$.}
 \section{Cardinal filtrations}
-\entree{18524}{5:08:44}{For $\pi'\ge\pi$, $\mathrm{Fil}^{\pi'}=\mathrm{Ind}_{\pi,\pi'}(C)$ (systems indexed by an $I$ dominating $\pi$ with $\mathrm{card}\,I\le\pi'$) filters $\mathrm{Ind}_\pi(C)$ by essentially small subcategories, and $\mathrm{Fil}^{\pi}\simeq C$.}
-\entree{18589}{5:09:49}{The objects of $\mathrm{Fil}^{\pi'}$ are $\pi'$-accessible; if $\pi'^{\pi}=\pi'$, every $\pi'$-accessible object of $\mathrm{Ind}_\pi(C)$ is a direct summand of an object of $\mathrm{Fil}^{\pi'}$.}
-\entree{18652}{5:10:52}{\q{Cardinal filtration}: a family $(\mathrm{Fil}^{\pi'})_{\pi'\ge\pi}$ of essentially small subcategories, stable under $\varinjlim$ of index $I$ dominating $\pi$, $\mathrm{card}\,I\le\pi'$, every object of $\mathrm{Fil}^{\pi''}$ being a colimit of objects of $\mathrm{Fil}^{\pi'}$ with index dominating $\pi'$, of cardinality ${\le}\,\pi''$.}
-\entree{18847}{5:14:07}{The $\mathrm{Ind}_{\pi,\pi'}(C)$ form a cardinal filtration of $\mathrm{Ind}_\pi(C)$ if one restricts to cardinals such that $\pi''^{\pi'}=\pi''$ (bound $\pi''^{\pi'}$ of SGA 4, I, 9).}
-\entree{18911}{5:15:11}{Theorem: if $E$ has small colimits, the following are equivalent: a) $E$ is $\pi$-accessible; b) $E\simeq\mathrm{Ind}_\pi(C)$, $C$ small; c) $E_\pi$ is essentially small and strictly generating.}
-\entree{19371}{5:22:51}{If $C\subset E_\pi$ is small and full, the extension $\mathrm{Ind}_\pi(C)\to E$ is fully faithful; it is an equivalence if $C$ is strictly generating and stable under limits with at most $\pi$ arrows.}
-\entree{19433}{5:23:53}{A colimit indexed by a small category $I$ is the limit, along the ordered set (dominating $\pi$) of subcategories of $I$ with at most $\pi$ arrows, of the partial limits.}
-\entree{19702}{5:28:22}{If $E$ is $\pi$-accessible and has small colimits, $E\simeq\mathrm{Ind}_{\pi'}(E_{\pi'})$ for every $\pi'\ge\pi$.}
-\entree{19912}{5:31:52}{A $\pi$-accessible functor does not necessarily send $\pi$-accessible objects to $\pi$-accessible objects (example: $E$ a point).}
-\entree{19978}{5:32:58}{If $E$, $E'$ are $\pi_0$-accessible with small colimits, $F\colon E\to E'$ is accessible if and only if there exist $\pi\ge\pi_0$ and $f\colon E_\pi\to E'_\pi$ with $F\simeq\mathrm{Ind}_\pi(f)$.}
+\entree[prop]{18524}{5:08:44}{For $\pi'\ge\pi$, $\mathrm{Fil}^{\pi'}=\mathrm{Ind}_{\pi,\pi'}(C)$ (systems indexed by an $I$ dominating $\pi$ with $\mathrm{card}\,I\le\pi'$) filters $\mathrm{Ind}_\pi(C)$ by essentially small subcategories, and $\mathrm{Fil}^{\pi}\simeq C$.}
+\entree[prop]{18589}{5:09:49}{The objects of $\mathrm{Fil}^{\pi'}$ are $\pi'$-accessible; if $\pi'^{\pi}=\pi'$, every $\pi'$-accessible object of $\mathrm{Ind}_\pi(C)$ is a direct summand of an object of $\mathrm{Fil}^{\pi'}$.}
+\entree[def]{18652}{5:10:52}{\q{Cardinal filtration}: a family $(\mathrm{Fil}^{\pi'})_{\pi'\ge\pi}$ of essentially small subcategories, stable under $\varinjlim$ of index $I$ dominating $\pi$, $\mathrm{card}\,I\le\pi'$, every object of $\mathrm{Fil}^{\pi''}$ being a colimit of objects of $\mathrm{Fil}^{\pi'}$ with index dominating $\pi'$, of cardinality ${\le}\,\pi''$.}
+\entree[prop]{18847}{5:14:07}{The $\mathrm{Ind}_{\pi,\pi'}(C)$ form a cardinal filtration of $\mathrm{Ind}_\pi(C)$ if one restricts to cardinals such that $\pi''^{\pi'}=\pi''$ (bound $\pi''^{\pi'}$ of SGA 4, I, 9).}
+\entree[thm]{18911}{5:15:11}{If $E$ has small colimits, the following are equivalent: a) $E$ is $\pi$-accessible; b) $E\simeq\mathrm{Ind}_\pi(C)$, $C$ small; c) $E_\pi$ is essentially small and strictly generating.}
+\entree[prop]{19371}{5:22:51}{If $C\subset E_\pi$ is small and full, the extension $\mathrm{Ind}_\pi(C)\to E$ is fully faithful; it is an equivalence if $C$ is strictly generating and stable under limits with at most $\pi$ arrows.}
+\entree[prop]{19433}{5:23:53}{A colimit indexed by a small category $I$ is the limit, along the ordered set (dominating $\pi$) of subcategories of $I$ with at most $\pi$ arrows, of the partial limits.}
+\entree[prop]{19702}{5:28:22}{If $E$ is $\pi$-accessible and has small colimits, $E\simeq\mathrm{Ind}_{\pi'}(E_{\pi'})$ for every $\pi'\ge\pi$.}
+\entree[cex]{19912}{5:31:52}{A $\pi$-accessible functor does not necessarily send $\pi$-accessible objects to $\pi$-accessible objects (example: $E$ a point).}
+\entree[prop]{19978}{5:32:58}{If $E$, $E'$ are $\pi_0$-accessible with small colimits, $F\colon E\to E'$ is accessible if and only if there exist $\pi\ge\pi_0$ and $f\colon E_\pi\to E'_\pi$ with $F\simeq\mathrm{Ind}_\pi(f)$.}
 \section{Strictly generating functors}
 \session{11 July 1973}
 \video{4gynb9uTEE4}
 \noindent\textit{Video 3/4 (\href{https://www.youtube.com/watch?v=4gynb9uTEE4}{\texttt{4gynb9uTEE4}}): tape 1 (5:41:33--6:46:44); tape 2, side A (6:46:44--7:37:01).}\par\medskip
 \face{Tape 1}
-\entree{20626}{5:43:46}{For $i\colon C\to E$, $\varinjlim_{(Y,u)\in C/X}i(Y)\to X$ is an isomorphism for every $X$ if and only if $E\to\widehat{C}$, $X\mapsto\mathrm{Hom}(i(-),X)$, is fully faithful: $i$ is then called strictly generating.}
-\entree{20819}{5:46:59}{Then every $X$ is the target of a strictly epimorphic family $i(Y_\alpha)\to X$; the converse holds if $i$ is fully faithful and $E$ has fibre products and universal strictly epimorphic families.}
-\entree{21008}{5:50:08}{If $E$ has small colimits and $C$ is small, $i$ extends to $i_!\colon\widehat{C}\to E$, left adjoint to $E\to\widehat{C}$; $i$ is strictly generating if and only if $i_!$ makes $E$ a category of fractions of $\widehat{C}$.}
-\entree{21139}{5:52:19}{A category with small colimits has a small strictly generating subcategory if and only if it is equivalent to a reflective full subcategory of some $\widehat{C}$, $C$ small.}
-\entree{21201}{5:53:21}{Examples: $\mathbf{Set}^{\mathrm{op}}$ (complete atomic Boolean algebras) and $\mathbf{Ab}^{\mathrm{op}}$ (compact abelian groups) have small colimits and a small strictly generating family.}
-\entree{21464}{5:57:44}{In the category of compact spaces, the one-point space is not strictly generating: the underlying-set functor is faithful but not fully faithful.}
+\entree[prop]{20626}{5:43:46}{For $i\colon C\to E$, $\varinjlim_{(Y,u)\in C/X}i(Y)\to X$ is an isomorphism for every $X$ if and only if $E\to\widehat{C}$, $X\mapsto\mathrm{Hom}(i(-),X)$, is fully faithful: $i$ is then called strictly generating.}
+\entree[prop]{20819}{5:46:59}{Then every $X$ is the target of a strictly epimorphic family $i(Y_\alpha)\to X$; the converse holds if $i$ is fully faithful and $E$ has fibre products and universal strictly epimorphic families.}
+\entree[prop]{21008}{5:50:08}{If $E$ has small colimits and $C$ is small, $i$ extends to $i_!\colon\widehat{C}\to E$, left adjoint to $E\to\widehat{C}$; $i$ is strictly generating if and only if $i_!$ makes $E$ a category of fractions of $\widehat{C}$.}
+\entree[thm]{21139}{5:52:19}{A category with small colimits has a small strictly generating subcategory if and only if it is equivalent to a reflective full subcategory of some $\widehat{C}$, $C$ small.}
+\entree[ex]{21201}{5:53:21}{$\mathbf{Set}^{\mathrm{op}}$ (complete atomic Boolean algebras) and $\mathbf{Ab}^{\mathrm{op}}$ (compact abelian groups) have small colimits and a small strictly generating family.}
+\entree[cex]{21464}{5:57:44}{In the category of compact spaces, the one-point space is not strictly generating: the underlying-set functor is faithful but not fully faithful.}
 \section{Theories defined by finite limits}
-\entree{21923}{6:05:23}{For $\Delta_D$ (limits of type $D'$ only), the envelope of $C$ is the subcategory of $\mathrm{Hom}(C,\mathbf{Set})^{\mathrm{op}}$ generated by $C$ under iterated limits of type $D'$; $C$ embeds fully in it.}
-\entree{22054}{6:07:34}{If $R_0$ represents a theory for $\Delta_D$, the theory extended to $\Delta$ is represented by $R=T(\mathbf{Set})^{\mathrm{op}}$, the envelope of $R_0$ under small limits; $R_0\subset R$ is full.}
-\entree{22118}{6:08:38}{A theory relative to $\Delta_D$ is equivalent to the pair $(S,\Sigma_0)$, $S=T(\mathbf{Set})$, $\Sigma_0=R_0^{\mathrm{op}}\subset S$, where $S$ is the envelope of $\Sigma_0$ under small colimits.}
-\entree{22244}{6:10:44}{For $D'$ consisting of the finite diagrams, the algebraic theories are the small categories $R_0$ with finite limits; dually, $\Sigma_0$ is small with finite colimits.}
+\entree[prop]{21923}{6:05:23}{For $\Delta_D$ (limits of type $D'$ only), the envelope of $C$ is the subcategory of $\mathrm{Hom}(C,\mathbf{Set})^{\mathrm{op}}$ generated by $C$ under iterated limits of type $D'$; $C$ embeds fully in it.}
+\entree[prop]{22054}{6:07:34}{If $R_0$ represents a theory for $\Delta_D$, the theory extended to $\Delta$ is represented by $R=T(\mathbf{Set})^{\mathrm{op}}$, the envelope of $R_0$ under small limits; $R_0\subset R$ is full.}
+\entree[prop]{22118}{6:08:38}{A theory relative to $\Delta_D$ is equivalent to the pair $(S,\Sigma_0)$, $S=T(\mathbf{Set})$, $\Sigma_0=R_0^{\mathrm{op}}\subset S$, where $S$ is the envelope of $\Sigma_0$ under small colimits.}
+\entree[prop]{22244}{6:10:44}{For $D'$ consisting of the finite diagrams, the algebraic theories are the small categories $R_0$ with finite limits; dually, $\Sigma_0$ is small with finite colimits.}
 \section{Finitely presented objects}
-\entree{22374}{6:12:54}{Definition: $X$ is finitely presented ($\aleph_0$-accessible) if $\mathrm{Hom}(X,-)$ commutes with filtered colimits; we write $S_{\mathrm{fp}}$ for the full subcategory of these objects.}
-\entree{22438}{6:13:58}{For a theory defined by finite limits, $\Sigma_0\simeq S_{\mathrm{fp}}$ and $S\simeq\mathrm{Ind}(\Sigma_0)$; $S$ and $\Sigma_0$ determine each other, and $R_0\simeq(S_{\mathrm{fp}})^{\mathrm{op}}$.}
-\entree{22501}{6:15:01}{For $\Sigma_0\subset S$ full, $\mathrm{Ind}(\Sigma_0)\to S$ is fully faithful if and only if $\Sigma_0\subset S_{\mathrm{fp}}$; if $\Sigma_0$ is stable under finite colimits, it is an equivalence if and only if $\Sigma_0$ is strictly generating.}
-\entree{22570}{6:16:10}{Example: in categories of groups or modules, the finitely presented objects are the groups or modules finitely presented in the usual sense.}
-\entree{22638}{6:17:18}{$S$ with small colimits is $T(\mathbf{Set})$ for a theory defined by finite limits if and only if $S_{\mathrm{fp}}$ is essentially small and strictly generating.}
-\entree{22766}{6:19:26}{In $\mathbf{Gr}$, for $C$ full on the object $\mathbb{Z}$, $\widehat{C}$ consists of the sets acted on by the monoid $(\mathbb{Z},\times)$; $G\mapsto(G,x\mapsto x^n)$ is faithful but not full: $\mathbb{Z}$ is generating, but not strictly.}
-\entree{22960}{6:22:40}{For $C\subset E$ full, $E\to\widehat{C}$ fully faithful, faithful, conservative, or conservative on monomorphisms: distinct notions of generation, which coincide in a topos.}
-\entree{23147}{6:25:47}{Finitely generated free groups form a small strictly generating subcategory of $\mathbf{Gr}$.}
-\entree{23211}{6:26:51}{The morphisms $T\to T'$ of theories defined by finite limits correspond to the functors $S'\to S$ commuting with small colimits and preserving finitely presented objects.}
+\entree[def]{22374}{6:12:54}{$X$ is finitely presented ($\aleph_0$-accessible) if $\mathrm{Hom}(X,-)$ commutes with filtered colimits; we write $S_{\mathrm{fp}}$ for the full subcategory of these objects.}
+\entree[prop]{22438}{6:13:58}{For a theory defined by finite limits, $\Sigma_0\simeq S_{\mathrm{fp}}$ and $S\simeq\mathrm{Ind}(\Sigma_0)$; $S$ and $\Sigma_0$ determine each other, and $R_0\simeq(S_{\mathrm{fp}})^{\mathrm{op}}$.}
+\entree[prop]{22501}{6:15:01}{For $\Sigma_0\subset S$ full, $\mathrm{Ind}(\Sigma_0)\to S$ is fully faithful if and only if $\Sigma_0\subset S_{\mathrm{fp}}$; if $\Sigma_0$ is stable under finite colimits, it is an equivalence if and only if $\Sigma_0$ is strictly generating.}
+\entree[ex]{22570}{6:16:10}{In categories of groups or modules, the finitely presented objects are the groups or modules finitely presented in the usual sense.}
+\entree[thm]{22638}{6:17:18}{$S$ with small colimits is $T(\mathbf{Set})$ for a theory defined by finite limits if and only if $S_{\mathrm{fp}}$ is essentially small and strictly generating.}
+\entree[ex]{22766}{6:19:26}{In $\mathbf{Gr}$, for $C$ full on the object $\mathbb{Z}$, $\widehat{C}$ consists of the sets acted on by the monoid $(\mathbb{Z},\times)$; $G\mapsto(G,x\mapsto x^n)$ is faithful but not full: $\mathbb{Z}$ is generating, but not strictly.}
+\entree[rem]{22960}{6:22:40}{For $C\subset E$ full, $E\to\widehat{C}$ fully faithful, faithful, conservative, or conservative on monomorphisms: distinct notions of generation, which coincide in a topos.}
+\entree[prop]{23147}{6:25:47}{Finitely generated free groups form a small strictly generating subcategory of $\mathbf{Gr}$.}
+\entree[prop]{23211}{6:26:51}{The morphisms $T\to T'$ of theories defined by finite limits correspond to the functors $S'\to S$ commuting with small colimits and preserving finitely presented objects.}
 \section{Lawvere theories and finite products}
-\entree{23465}{6:31:05}{For finite products, the envelope of an object $X$ is $(\mathbf{Set}_{\mathrm{f}})^{\mathrm{op}}$, with objects $X^n$; for products of cardinality ${\le}\,\pi$, the opposite of the sets of cardinality ${\le}\,\pi$.}
-\entree{23662}{6:34:22}{A theory with one base object defined by finite products is a category with objects $\mathbb{N}$, $n$ being the $n$-th power of $1$, given by the $H_n=\mathrm{Hom}(X^n,X)$ and their substitution (Lazard’s \q{analyseurs}).}
-\entree{23791}{6:36:31}{The realizations of such a (Lawvere) theory in a category $E$ with finite products are the functors to $E$ commuting with finite products.}
-\entree{23853}{6:37:33}{For a set $I$ of base objects, one starts from the opposite of the category of finite sets over $I$ (objects $\prod_i X_i^{n_i}$, $n_i$ almost all zero).}
-\entree{23917}{6:38:37}{For a theory defined by finite products, $\Sigma_0$ is stable under finite coproducts and strictly generating in $S$, but this does not characterize the pairs $(S,\Sigma_0)$.}
-\entree{24044}{6:40:44}{$S$ with small limits is the category of models of a theory with finite products and base objects $I$ if and only if its equivalence relations are effective and $I$, consisting of finitely presented objects, detects effective epimorphisms ($\mathrm{Hom}(i,f)$ surjective).}
-\entree{24233}{6:43:53}{Then $S\to\mathbf{Set}^I$, $X\mapsto(\mathrm{Hom}(i,X))_{i\in I}$, has a left adjoint and is monadic (\q{tripleable}).}
+\entree[prop]{23465}{6:31:05}{For finite products, the envelope of an object $X$ is $(\mathbf{Set}_{\mathrm{f}})^{\mathrm{op}}$, with objects $X^n$; for products of cardinality ${\le}\,\pi$, the opposite of the sets of cardinality ${\le}\,\pi$.}
+\entree[def]{23662}{6:34:22}{A theory with one base object defined by finite products is a category with objects $\mathbb{N}$, $n$ being the $n$-th power of $1$, given by the $H_n=\mathrm{Hom}(X^n,X)$ and their substitution (Lazard’s \q{analyseurs}).}
+\entree[def]{23791}{6:36:31}{The realizations of such a (Lawvere) theory in a category $E$ with finite products are the functors to $E$ commuting with finite products.}
+\entree[rem]{23853}{6:37:33}{For a set $I$ of base objects, one starts from the opposite of the category of finite sets over $I$ (objects $\prod_i X_i^{n_i}$, $n_i$ almost all zero).}
+\entree[cex]{23917}{6:38:37}{For a theory defined by finite products, $\Sigma_0$ is stable under finite coproducts and strictly generating in $S$, but this does not characterize the pairs $(S,\Sigma_0)$.}
+\entree[thm]{24044}{6:40:44}{$S$ with small limits is the category of models of a theory with finite products and base objects $I$ if and only if its equivalence relations are effective and $I$, consisting of finitely presented objects, detects effective epimorphisms ($\mathrm{Hom}(i,f)$ surjective).}
+\entree[prop]{24233}{6:43:53}{Then $S\to\mathbf{Set}^I$, $X\mapsto(\mathrm{Hom}(i,X))_{i\in I}$, has a left adjoint and is monadic (\q{tripleable}).}
 \section{Birkhoff's theorem}
 \face{Tape 2, side A}
-\entree{24608}{6:50:08}{Birkhoff’s theorem: a full subcategory of a category of structures defined by finite products, stable under products, subobjects and quotients, is defined by equations.}
-\entree{24671}{6:51:11}{Such a subcategory is reflective: the adjoint associates to $X$ its largest quotient belonging to the subcategory.}
-\entree{24737}{6:52:17}{Counterexample: torsion-free abelian groups, stable under products and subgroups but not under quotients, are not definable by equations in $\mathbf{Ab}$.}
-\entree{24866}{6:54:26}{To a Birkhoff subcategory $S'\subset S$ corresponds $R\to R'$ bijective on objects and surjective on arrows: $T'$ is deduced from $T$ by equalizing arrows.}
-\entree{25511}{7:05:11}{Groups are the monoids in which a certain arrow is invertible; not stable under submonoids, they are not definable by equations in monoids.}
-\entree{25649}{7:07:29}{The reflective full subcategories $S'\subset S$ such that the composite $S'\to\mathbf{Set}^I$ is monadic form a larger class than that of Birkhoff subcategories.}
+\entree[thm]{24608}{6:50:08}{Birkhoff’s theorem: a full subcategory of a category of structures defined by finite products, stable under products, subobjects and quotients, is defined by equations.}
+\entree[prop]{24671}{6:51:11}{Such a subcategory is reflective: the adjoint associates to $X$ its largest quotient belonging to the subcategory.}
+\entree[cex]{24737}{6:52:17}{Torsion-free abelian groups, stable under products and subgroups but not under quotients, are not definable by equations in $\mathbf{Ab}$.}
+\entree[prop]{24866}{6:54:26}{To a Birkhoff subcategory $S'\subset S$ corresponds $R\to R'$ bijective on objects and surjective on arrows: $T'$ is deduced from $T$ by equalizing arrows.}
+\entree[cex]{25511}{7:05:11}{Groups are the monoids in which a certain arrow is invertible; not stable under submonoids, they are not definable by equations in monoids.}
+\entree[prop]{25649}{7:07:29}{The reflective full subcategories $S'\subset S$ such that the composite $S'\to\mathbf{Set}^I$ is monadic form a larger class than that of Birkhoff subcategories.}
 \section{Pseudo-topoi and classifying topoi}
-\entree{25846}{7:10:46}{Definition: a \q{pseudo-topos} satisfies Giraud’s axioms a), b), c): small colimits and finite limits; universal disjoint coproducts; universal effective equivalence relations.}
-\entree{25975}{7:12:55}{The functors considered commute with small colimits and finite limits: they are the inverse images $f^*$ of morphisms of topoi in the opposite direction.}
-\entree{26048}{7:14:08}{A topos $\mathcal{E}$ classifies a theory $T$, with universal object $U\in T(\mathcal{E})$, if $f\mapsto f^*U$ is an equivalence $\mathrm{Top}(\mathcal{F},\mathcal{E})^{\mathrm{op}}\simeq T(\mathcal{F})$ for every $\mathcal{F}$ (2-arrows oriented by the direct images).}
-\entree{26376}{7:19:36}{For $C$ small with finite limits, the envelope of $C$ among pseudo-topoi is $\widehat{C}$, with the Yoneda embedding.}
+\entree[def]{25846}{7:10:46}{A \q{pseudo-topos} satisfies Giraud’s axioms a), b), c): small colimits and finite limits; universal disjoint coproducts; universal effective equivalence relations.}
+\entree[prop]{25975}{7:12:55}{The functors considered commute with small colimits and finite limits: they are the inverse images $f^*$ of morphisms of topoi in the opposite direction.}
+\entree[def]{26048}{7:14:08}{A topos $\mathcal{E}$ classifies a theory $T$, with universal object $U\in T(\mathcal{E})$, if $f\mapsto f^*U$ is an equivalence $\mathrm{Top}(\mathcal{F},\mathcal{E})^{\mathrm{op}}\simeq T(\mathcal{F})$ for every $\mathcal{F}$ (2-arrows oriented by the direct images).}
+\entree[prop]{26376}{7:19:36}{For $C$ small with finite limits, the envelope of $C$ among pseudo-topoi is $\widehat{C}$, with the Yoneda embedding.}
 \section{Continuous functors and morphisms of sites}
-\entree{26508}{7:21:48}{Definition: $f\colon C\to C'$ between sites is continuous if $F\mapsto F\circ f$ sends sheaves on $C'$ to sheaves on $C$; this depends only on $\varepsilon_{C'}\circ f\colon C\to\widetilde{C'}$.}
-\entree{26575}{7:22:55}{By composition with $\varepsilon_C$, the functors $\widetilde{C}\to\widetilde{C'}$ commuting with small colimits are identified with the continuous functors $C\to\widetilde{C'}$.}
-\entree{26704}{7:25:04}{If $C$, $C'$ have finite limits and $f$ commutes with them, $f$ is continuous if and only if it sends covering families to covering families.}
-\entree{26704}{7:25:04}{Example: for $X'\to X$ continuous, the inverse image of open sets is such a continuous functor from the site of open sets of $X$ to that of $X'$.}
-\entree{26767}{7:26:07}{In general, $f$ is continuous if and only if, for every covering sieve $R$ of $X$, $\varepsilon_{C'}f(X)=\varinjlim_{Y\in C/R}\varepsilon_{C'}f(Y)$.}
-\entree{26832}{7:27:12}{A sieve $R$ of $X$ is covering if and only if $\varepsilon(X)=\varinjlim_{Y\in C/R}\varepsilon(Y)$ in $\widetilde{C}$.}
-\entree{27021}{7:30:21}{If $C$, $C'$ have finite limits and the topology of $C'$ is coarser than the canonical one, a continuous $f$ induces a morphism of topoi if and only if $f$ is left exact.}
-\entree{27085}{7:31:25}{Definition: a morphism of sites is a continuous functor that induces a morphism of topoi; it is oriented in the direction of that morphism.}
-\entree{27151}{7:32:31}{For a site $C$ with finite limits and a topos $\mathcal{E}$, $\mathrm{Top}(\mathcal{E},\widetilde{C})^{\mathrm{op}}$ is equivalent to the left exact functors $C\to\mathcal{E}$ sending covering families to epimorphic families.}
-\entree{27279}{7:34:39}{$\widehat{C}$ is $\widetilde{C}$ for the coarsest topology (covering families: those having a member with a section).}
-\entree{27279}{7:34:39}{If $C$ has finite limits, $\mathrm{Top}(\mathcal{E},\widehat{C})^{\mathrm{op}}$ is equivalent to the left exact functors $C\to\mathcal{E}$.}
+\entree[def]{26508}{7:21:48}{$f\colon C\to C'$ between sites is continuous if $F\mapsto F\circ f$ sends sheaves on $C'$ to sheaves on $C$; this depends only on $\varepsilon_{C'}\circ f\colon C\to\widetilde{C'}$.}
+\entree[prop]{26575}{7:22:55}{By composition with $\varepsilon_C$, the functors $\widetilde{C}\to\widetilde{C'}$ commuting with small colimits are identified with the continuous functors $C\to\widetilde{C'}$.}
+\entree[prop]{26704}{7:25:04}{If $C$, $C'$ have finite limits and $f$ commutes with them, $f$ is continuous if and only if it sends covering families to covering families.}
+\entree[ex]{26704}{7:25:04}{For $X'\to X$ continuous, the inverse image of open sets is such a continuous functor from the site of open sets of $X$ to that of $X'$.}
+\entree[prop]{26767}{7:26:07}{In general, $f$ is continuous if and only if, for every covering sieve $R$ of $X$, $\varepsilon_{C'}f(X)=\varinjlim_{Y\in C/R}\varepsilon_{C'}f(Y)$.}
+\entree[prop]{26832}{7:27:12}{A sieve $R$ of $X$ is covering if and only if $\varepsilon(X)=\varinjlim_{Y\in C/R}\varepsilon(Y)$ in $\widetilde{C}$.}
+\entree[prop]{27021}{7:30:21}{If $C$, $C'$ have finite limits and the topology of $C'$ is coarser than the canonical one, a continuous $f$ induces a morphism of topoi if and only if $f$ is left exact.}
+\entree[def]{27085}{7:31:25}{A morphism of sites is a continuous functor that induces a morphism of topoi; it is oriented in the direction of that morphism.}
+\entree[prop]{27151}{7:32:31}{For a site $C$ with finite limits and a topos $\mathcal{E}$, $\mathrm{Top}(\mathcal{E},\widetilde{C})^{\mathrm{op}}$ is equivalent to the left exact functors $C\to\mathcal{E}$ sending covering families to epimorphic families.}
+\entree[prop]{27279}{7:34:39}{$\widehat{C}$ is $\widetilde{C}$ for the coarsest topology (covering families: those having a member with a section).}
+\entree[prop]{27279}{7:34:39}{If $C$ has finite limits, $\mathrm{Top}(\mathcal{E},\widehat{C})^{\mathrm{op}}$ is equivalent to the left exact functors $C\to\mathcal{E}$.}
 \section{Classifying topoi of finite-limit theories}
 \session{12 July 1973}
 \video{ORG14LNb5gE}
 \noindent\textit{Video 4/4 (\href{https://www.youtube.com/watch?v=ORG14LNb5gE}{\texttt{ORG14LNb5gE}}): tape 1 (0:00:00--0:49:57); tape 2, side A (0:49:57--1:38:22); tape 2, side B (1:38:22--2:26:53); tape 3, side A (2:26:53--3:15:55); tape 3, side B (3:15:55--4:05:06); tape 4, side A (4:05:06--4:53:49); tape 4, side B (4:53:49--5:36:07).}\par\medskip
 \face{Tape 1}
-\entree{5}{0:00:05}{If $C$ is a small category with finite limits, $\widehat{C}$ classifies the theory $T_C$: $\mathrm{Hom}_{\mathrm{Top}}(\mathcal{E},\widehat{C})\simeq\mathrm{Hom}_{\mathrm{lex}}(C,\mathcal{E})$ for every topos $\mathcal{E}$.}
-\entree{131}{0:02:11}{Example: the classifying topos of groups is the category of covariant functors from finitely presented groups to $\mathbf{Set}$.}
-\entree{195}{0:03:15}{Example: the classifying topos of commutative rings is that of functors from finitely presented rings to $\mathbf{Set}$, i.e. of presheaves on affine schemes of finite type over $\mathbb{Z}$.}
-\entree{325}{0:05:25}{The envelope $\widetilde{C}$ of $C$ under finite limits is the opposite of the category of finitely presented functors $C\to\mathbf{Set}$; $C\to\widetilde{C}$ is fully faithful.}
-\entree{388}{0:06:28}{If $\mathcal{E}$ has finite limits, $\mathrm{Hom}(C,\mathcal{E})\simeq\mathrm{Hom}_{\mathrm{lex}}(\widetilde{C},\mathcal{E})$.}
-\entree{454}{0:07:34}{Enveloping topos of a small category $C$: the topos of presheaves on $\widetilde{C}$; the morphisms from a topos $\mathcal{E}$ to it are equivalent to $\mathrm{Hom}(C,\mathcal{E})$.}
+\entree[thm]{5}{0:00:05}{If $C$ is a small category with finite limits, $\widehat{C}$ classifies the theory $T_C$: $\mathrm{Hom}_{\mathrm{Top}}(\mathcal{E},\widehat{C})\simeq\mathrm{Hom}_{\mathrm{lex}}(C,\mathcal{E})$ for every topos $\mathcal{E}$.}
+\entree[ex]{131}{0:02:11}{The classifying topos of groups is the category of covariant functors from finitely presented groups to $\mathbf{Set}$.}
+\entree[ex]{195}{0:03:15}{The classifying topos of commutative rings is that of functors from finitely presented rings to $\mathbf{Set}$, i.e. of presheaves on affine schemes of finite type over $\mathbb{Z}$.}
+\entree[prop]{325}{0:05:25}{The envelope $\widetilde{C}$ of $C$ under finite limits is the opposite of the category of finitely presented functors $C\to\mathbf{Set}$; $C\to\widetilde{C}$ is fully faithful.}
+\entree[prop]{388}{0:06:28}{If $\mathcal{E}$ has finite limits, $\mathrm{Hom}(C,\mathcal{E})\simeq\mathrm{Hom}_{\mathrm{lex}}(\widetilde{C},\mathcal{E})$.}
+\entree[def]{454}{0:07:34}{Enveloping topos of a small category $C$: the topos of presheaves on $\widetilde{C}$; the morphisms from a topos $\mathcal{E}$ to it are equivalent to $\mathrm{Hom}(C,\mathcal{E})$.}
 \section{Subtopoi and localization}
-\entree{603}{0:10:03}{Localization: for a set $\Sigma$ of arrows of a topos $\mathcal{E}$, one seeks a universal $\Delta$-functor $\mathcal{E}\to\mathcal{E}[\Sigma^{-1}]$ making the arrows of $\Sigma$ invertible.}
-\entree{736}{0:12:16}{The subtopoi of $\mathcal{E}$ correspond bijectively to the saturated sets of arrows of $\mathcal{E}$ (stable under limits and local in nature) (SGA 4, exercise).}
-\entree{801}{0:13:21}{Definition: a morphism of topoi $i\colon\mathcal{E}'\to\mathcal{E}$ is an embedding if $i_*$ is fully faithful, i.e. if $i^*$ is a localization functor.}
-\entree{930}{0:15:30}{The subtopoi of $\mathcal{E}$ are identified with the strictly full subcategories whose inclusion admits a left exact left adjoint.}
-\entree{997}{0:16:37}{For a small category $C$, the topologies $J$ on $C$ correspond bijectively, via $J\mapsto\mathrm{Sh}(C,J)$, to the subtopoi of $\widehat{C}$.}
-\entree{1059}{0:17:39}{A continuous map $f\colon X\to Y$ induces an embedding of topoi iff the topology of $X$ is the inverse image of that of $Y$; subspaces of $Y$ give subtopoi, but not all of them.}
-\entree{1124}{0:18:44}{A morphism $\mathcal{F}\to\mathcal{E}$ factors through a subtopos $\mathcal{E}'$ iff its direct image factors through $\mathcal{E}'$, iff its inverse image factors through the localization $\mathcal{E}\to\mathcal{E}'$.}
-\entree{1189}{0:19:49}{To a subtopos $\mathcal{E}'$ one associates the arrows made invertible by $i^*$; to $\Sigma$, the objects $X$ such that $\mathrm{Hom}(Z,X)\to\mathrm{Hom}(Y,X)$ is bijective for every $Y\to Z$ in $\Sigma$.}
-\entree{1320}{0:22:00}{$\mathcal{E}[\Sigma^{-1}]$ exists and is a subtopos of $\mathcal{E}$; every subtopos is obtained in this way by inverting a family of arrows.}
-\entree{1382}{0:23:02}{If $\mathcal{E}=\mathrm{Sh}(C,J)$, its subtopoi correspond to the topologies on $C$ finer than $J$; likewise for the subtheories of the theory represented by $\mathcal{E}$.}
+\entree[rem]{603}{0:10:03}{Localization: for a set $\Sigma$ of arrows of a topos $\mathcal{E}$, one seeks a universal $\Delta$-functor $\mathcal{E}\to\mathcal{E}[\Sigma^{-1}]$ making the arrows of $\Sigma$ invertible.}
+\entree[prop]{736}{0:12:16}{The subtopoi of $\mathcal{E}$ correspond bijectively to the saturated sets of arrows of $\mathcal{E}$ (stable under limits and local in nature) (SGA 4, exercise).}
+\entree[def]{801}{0:13:21}{A morphism of topoi $i\colon\mathcal{E}'\to\mathcal{E}$ is an embedding if $i_*$ is fully faithful, i.e. if $i^*$ is a localization functor.}
+\entree[prop]{930}{0:15:30}{The subtopoi of $\mathcal{E}$ are identified with the strictly full subcategories whose inclusion admits a left exact left adjoint.}
+\entree[prop]{997}{0:16:37}{For a small category $C$, the topologies $J$ on $C$ correspond bijectively, via $J\mapsto\mathrm{Sh}(C,J)$, to the subtopoi of $\widehat{C}$.}
+\entree[prop]{1059}{0:17:39}{A continuous map $f\colon X\to Y$ induces an embedding of topoi iff the topology of $X$ is the inverse image of that of $Y$; subspaces of $Y$ give subtopoi, but not all of them.}
+\entree[prop]{1124}{0:18:44}{A morphism $\mathcal{F}\to\mathcal{E}$ factors through a subtopos $\mathcal{E}'$ iff its direct image factors through $\mathcal{E}'$, iff its inverse image factors through the localization $\mathcal{E}\to\mathcal{E}'$.}
+\entree[prop]{1189}{0:19:49}{To a subtopos $\mathcal{E}'$ one associates the arrows made invertible by $i^*$; to $\Sigma$, the objects $X$ such that $\mathrm{Hom}(Z,X)\to\mathrm{Hom}(Y,X)$ is bijective for every $Y\to Z$ in $\Sigma$.}
+\entree[thm]{1320}{0:22:00}{$\mathcal{E}[\Sigma^{-1}]$ exists and is a subtopos of $\mathcal{E}$; every subtopos is obtained in this way by inverting a family of arrows.}
+\entree[prop]{1382}{0:23:02}{If $\mathcal{E}=\mathrm{Sh}(C,J)$, its subtopoi correspond to the topologies on $C$ finer than $J$; likewise for the subtheories of the theory represented by $\mathcal{E}$.}
 \section{Generating subcategories of a topos}
-\entree{1967}{0:32:47}{If a small full subcategory $C$ generates the topos $\mathcal{E}$, $\mathcal{E}$ is a subtopos of $\widehat{C}$: $\mathcal{E}\simeq\mathrm{Sh}(C,J)$ for the induced topology.}
-\entree{2248}{0:37:28}{For $C$ full in $\mathcal{E}$: (a) $\mathcal{E}\to\widehat{C}$ fully faithful is equivalent to (b) every $X$ is a colimit of the $Y$ in $C/X$; (b) implies (c): every $X$ is the target of a strictly epimorphic family from $C$.}
-\entree{2380}{0:39:40}{Counterexample to (c) $\Rightarrow$ (b): in groups, with $C=\{\mathbb{Z}\}$, $\mathbb{Z}*\mathbb{Z}$ satisfies (c) but is not a colimit of $C/(\mathbb{Z}*\mathbb{Z})$.}
-\entree{2446}{0:40:46}{Enlarging a strictly epimorphic family can make it lose this property (all the arrows $\mathbb{Z}\to\mathbb{Z}*\mathbb{Z}$ in groups).}
-\entree{2572}{0:42:52}{If fibre products exist and distribute over coproducts, $(X_i\to X)$ is strictly epimorphic iff $\coprod X_i\to X$ is; this is false in general.}
-\entree{2765}{0:46:05}{Corrected statement: (c$'$) every $X$ is the target of a family from $C$ that is strictly and universally epimorphic; then (c$'$) implies (b).}
-\entree{2829}{0:47:09}{If a strictly and universally epimorphic family factors through a family $(X_i\to Y)$, the latter is again strictly and universally epimorphic.}
-\entree{2891}{0:48:11}{(b) is equivalent to (b$'$): for every $X$, the family of all arrows $Y\to X$, $Y$ in $C$, is strictly epimorphic.}
+\entree[prop]{1967}{0:32:47}{If a small full subcategory $C$ generates the topos $\mathcal{E}$, $\mathcal{E}$ is a subtopos of $\widehat{C}$: $\mathcal{E}\simeq\mathrm{Sh}(C,J)$ for the induced topology.}
+\entree[prop]{2248}{0:37:28}{For $C$ full in $\mathcal{E}$: (a) $\mathcal{E}\to\widehat{C}$ fully faithful is equivalent to (b) every $X$ is a colimit of the $Y$ in $C/X$; (b) implies (c): every $X$ is the target of a strictly epimorphic family from $C$.}
+\entree[cex]{2380}{0:39:40}{Counterexample to (c) $\Rightarrow$ (b): in groups, with $C=\{\mathbb{Z}\}$, $\mathbb{Z}*\mathbb{Z}$ satisfies (c) but is not a colimit of $C/(\mathbb{Z}*\mathbb{Z})$.}
+\entree[cex]{2446}{0:40:46}{Enlarging a strictly epimorphic family can make it lose this property (all the arrows $\mathbb{Z}\to\mathbb{Z}*\mathbb{Z}$ in groups).}
+\entree[prop]{2572}{0:42:52}{If fibre products exist and distribute over coproducts, $(X_i\to X)$ is strictly epimorphic iff $\coprod X_i\to X$ is; this is false in general.}
+\entree[prop]{2765}{0:46:05}{Corrected statement: (c$'$) every $X$ is the target of a family from $C$ that is strictly and universally epimorphic; then (c$'$) implies (b).}
+\entree[prop]{2829}{0:47:09}{If a strictly and universally epimorphic family factors through a family $(X_i\to Y)$, the latter is again strictly and universally epimorphic.}
+\entree[prop]{2891}{0:48:11}{(b) is equivalent to (b$'$): for every $X$, the family of all arrows $Y\to X$, $Y$ in $C$, is strictly epimorphic.}
 \face{Tape 2, side A}
-\entree{3001}{0:50:01}{A family $(Y\to X)$ is strictly epimorphic iff for every $Z$, $\mathrm{Hom}(X,Z)$ is identified with the compatible families of elements of the $\mathrm{Hom}(Y,Z)$ (sheaf condition).}
+\entree[prop]{3001}{0:50:01}{A family $(Y\to X)$ is strictly epimorphic iff for every $Z$, $\mathrm{Hom}(X,Z)$ is identified with the compatible families of elements of the $\mathrm{Hom}(Y,Z)$ (sheaf condition).}
 \section{Algebraic theories and topoi}
-\entree{3843}{1:04:03}{Theorem: $R\in\Delta$ represents an algebraic theory iff $R$ is a topos; $B\colon I\to R$ is basic iff the finite products of the $B(i)$ generate $R$.}
-\entree{4018}{1:06:58}{Every topos $R$ represents an algebraic theory: if $C\subset R$ is small, generating and stable under finite limits, $T_R$ is a full subtheory of $T_C=\mathrm{Hom}_{\mathrm{lex}}(C,-)$.}
-\entree{4236}{1:10:36}{For such a $C$, the morphisms of topoi $\mathcal{E}\to R$ correspond to the left exact functors $C\to\mathcal{E}$ sending covering families to epimorphic families.}
-\entree{4307}{1:11:47}{If $R'\to R$ induces for every topos $\mathcal{E}$ a fully faithful embedding $T_{R'}(\mathcal{E})\to T_R(\mathcal{E})$, $R'$ is a subtopos of $R$ (exercise of SGA 4).}
-\entree{4763}{1:19:23}{A subtopos of $R=\mathrm{Sh}(C,\tau)$ is $\mathrm{Sh}(C,\tau')$ with $\tau'$ finer; its theory is deduced from $T_R$ by a small set of axioms.}
+\entree[thm]{3843}{1:04:03}{$R\in\Delta$ represents an algebraic theory iff $R$ is a topos; $B\colon I\to R$ is basic iff the finite products of the $B(i)$ generate $R$.}
+\entree[prop]{4018}{1:06:58}{Every topos $R$ represents an algebraic theory: if $C\subset R$ is small, generating and stable under finite limits, $T_R$ is a full subtheory of $T_C=\mathrm{Hom}_{\mathrm{lex}}(C,-)$.}
+\entree[prop]{4236}{1:10:36}{For such a $C$, the morphisms of topoi $\mathcal{E}\to R$ correspond to the left exact functors $C\to\mathcal{E}$ sending covering families to epimorphic families.}
+\entree[prop]{4307}{1:11:47}{If $R'\to R$ induces for every topos $\mathcal{E}$ a fully faithful embedding $T_{R'}(\mathcal{E})\to T_R(\mathcal{E})$, $R'$ is a subtopos of $R$ (exercise of SGA 4).}
+\entree[prop]{4763}{1:19:23}{A subtopos of $R=\mathrm{Sh}(C,\tau)$ is $\mathrm{Sh}(C,\tau')$ with $\tau'$ finer; its theory is deduced from $T_R$ by a small set of axioms.}
 \section{Limits of topoi}
-\entree{5022}{1:23:42}{Arbitrary (not necessarily filtered) 2-limits of topoi exist; in $\Delta$, they are 2-colimits.}
-\entree{5340}{1:29:00}{Construction: $C_i\subset R_i$ compatible small generating subcategories, $C$ the 2-colimit of the $C_i$ in $\mathbf{Cat}$, then localization of the enveloping topos of $C$ at a small $\Sigma$.}
-\entree{5405}{1:30:05}{The 2-colimit of a system of small categories is obtained by inverting the cartesian arrows of the associated (co)fibred category.}
-\entree{5791}{1:36:31}{A 2-limit of accessible categories, with accessible transition functors, is accessible.}
+\entree[prop]{5022}{1:23:42}{Arbitrary (not necessarily filtered) 2-limits of topoi exist; in $\Delta$, they are 2-colimits.}
+\entree[rem]{5340}{1:29:00}{Construction: $C_i\subset R_i$ compatible small generating subcategories, $C$ the 2-colimit of the $C_i$ in $\mathbf{Cat}$, then localization of the enveloping topos of $C$ at a small $\Sigma$.}
+\entree[prop]{5405}{1:30:05}{The 2-colimit of a system of small categories is obtained by inverting the cartesian arrows of the associated (co)fibred category.}
+\entree[prop]{5791}{1:36:31}{A 2-limit of accessible categories, with accessible transition functors, is accessible.}
 \section{Algebraic theories built from finite products}
 \face{Tape 2, side B}
-\entree{5906}{1:38:26}{The category $J_0$ freely generated by finite products over a set $I$ is the opposite of the families of finite sets indexed by $I$, almost all empty; it is also the envelope under finite limits of the discrete $I$.}
-\entree{6037}{1:40:37}{$R_0=\widehat{J_0}$ classifies families of objects indexed by $I$: $\mathrm{Hom}_\Delta(R_0,\mathcal{E})\simeq\mathcal{E}^I$.}
-\entree{6100}{1:41:40}{Adding axioms: $R_{\alpha+1}=R_\alpha[\Sigma_\alpha^{-1}]$ has the same objects as $R_\alpha$, so $J_0$ still generates it.}
-\entree{6232}{1:43:52}{Adding arrows given by a graph $D=(H\rightrightarrows S)$: $R_{\alpha+1}$ is the 2-pushout in $\Delta$ of $R_\alpha$ and $\rho(\widetilde{D})$ over $\rho(S)$ ($\rho$ the enveloping topos, $\widetilde{D}$ the free category).}
-\entree{6683}{1:51:23}{In this construction, every object of $R_{\alpha+1}$ is covered by images of objects of $R_\alpha$; hence $J_0$ generates $R_{\alpha+1}$.}
-\entree{7017}{1:56:57}{Limit step: for $\alpha$ a limit, $R_\alpha$ is the 2-colimit in $\Delta$ of the $R_\beta$, $\beta<\alpha$; $J_0$ still generates it.}
-\entree{7147}{1:59:07}{Necessity: if $I\to R$ is basic for an algebraic theory, $R$ is a topos generated by the finite products of objects of $I$.}
-\entree{7213}{2:00:13}{Sufficiency: if the finite products of the objects of $I$ generate the topos $R$, the theory is obtained without transfinite recursion: finite products, arrows between them, then axioms.}
-\entree{7398}{2:03:18}{For $J$ small with finite products, the theory $\mathcal{E}\mapsto\mathrm{Hom}_\Pi(J,\mathcal{E})$ of functors preserving finite products is represented by a topos $\rho_{\Pi,\Delta}(J)$.}
-\entree{7732}{2:08:52}{If the subcategory $J_2\subset R$ of finite products of objects of $I$ generates $R$, $R$ is a subtopos of $\rho_{\Pi,\Delta}(J_2)$; two successive localizations make it one.}
-\entree{8191}{2:16:31}{Preservation of finite products is an axiom: the arrow of constructions $\varepsilon_{X\times Y}\to\varepsilon_X\times\varepsilon_Y$ must become an isomorphism.}
-\entree{8514}{2:21:54}{If $R\in\Delta$ represents a theory, its category of constructions is $R$; equalizing two arrows amounts to inverting a kernel, hence a single type of axiom.}
+\entree[prop]{5906}{1:38:26}{The category $J_0$ freely generated by finite products over a set $I$ is the opposite of the families of finite sets indexed by $I$, almost all empty; it is also the envelope under finite limits of the discrete $I$.}
+\entree[prop]{6037}{1:40:37}{$R_0=\widehat{J_0}$ classifies families of objects indexed by $I$: $\mathrm{Hom}_\Delta(R_0,\mathcal{E})\simeq\mathcal{E}^I$.}
+\entree[prop]{6100}{1:41:40}{Adding axioms: $R_{\alpha+1}=R_\alpha[\Sigma_\alpha^{-1}]$ has the same objects as $R_\alpha$, so $J_0$ still generates it.}
+\entree[rem]{6232}{1:43:52}{Adding arrows given by a graph $D=(H\rightrightarrows S)$: $R_{\alpha+1}$ is the 2-pushout in $\Delta$ of $R_\alpha$ and $\rho(\widetilde{D})$ over $\rho(S)$ ($\rho$ the enveloping topos, $\widetilde{D}$ the free category).}
+\entree[prop]{6683}{1:51:23}{In this construction, every object of $R_{\alpha+1}$ is covered by images of objects of $R_\alpha$; hence $J_0$ generates $R_{\alpha+1}$.}
+\entree[prop]{7017}{1:56:57}{Limit step: for $\alpha$ a limit, $R_\alpha$ is the 2-colimit in $\Delta$ of the $R_\beta$, $\beta<\alpha$; $J_0$ still generates it.}
+\entree[prop]{7147}{1:59:07}{Necessity: if $I\to R$ is basic for an algebraic theory, $R$ is a topos generated by the finite products of objects of $I$.}
+\entree[prop]{7213}{2:00:13}{Sufficiency: if the finite products of the objects of $I$ generate the topos $R$, the theory is obtained without transfinite recursion: finite products, arrows between them, then axioms.}
+\entree[prop]{7398}{2:03:18}{For $J$ small with finite products, the theory $\mathcal{E}\mapsto\mathrm{Hom}_\Pi(J,\mathcal{E})$ of functors preserving finite products is represented by a topos $\rho_{\Pi,\Delta}(J)$.}
+\entree[prop]{7732}{2:08:52}{If the subcategory $J_2\subset R$ of finite products of objects of $I$ generates $R$, $R$ is a subtopos of $\rho_{\Pi,\Delta}(J_2)$; two successive localizations make it one.}
+\entree[prop]{8191}{2:16:31}{Preservation of finite products is an axiom: the arrow of constructions $\varepsilon_{X\times Y}\to\varepsilon_X\times\varepsilon_Y$ must become an isomorphism.}
+\entree[prop]{8514}{2:21:54}{If $R\in\Delta$ represents a theory, its category of constructions is $R$; equalizing two arrows amounts to inverting a kernel, hence a single type of axiom.}
 \face{Tape 3, side A}
-\entree{8883}{2:28:03}{In a topos, $u\colon X\to Y$ is an epimorphism iff $Y\sqcup_X Y\to Y$ is an isomorphism; \q{being covering} is thus written as an invertibility axiom.}
+\entree[prop]{8883}{2:28:03}{In a topos, $u\colon X\to Y$ is an epimorphism iff $Y\sqcup_X Y\to Y$ is an isomorphism; \q{being covering} is thus written as an invertibility axiom.}
 \section{Classifying topos of an object and its subtopoi}
-\entree{9234}{2:33:54}{The classifying topos of an object without structure is the category of functors from finite sets to $\mathbf{Set}$ (presheaves on $J=\{X^n\}$).}
-\entree{9365}{2:36:05}{If $B_T$ classifies the theory $T$, its category of points is equivalent to $T(\mathbf{Set})$.}
-\entree{9433}{2:37:13}{For all topoi $\mathcal{E}$ and $B$, $\mathrm{Hom}_\Delta(B,\mathcal{E})$ admits filtered colimits, since in a topos they commute with finite limits.}
-\entree{9568}{2:39:28}{The essential points of the classifying topos of objects correspond to finite sets.}
-\entree{9631}{2:40:31}{The smallest subtopos containing a family of points of a topos is defined by the arrows whose stalks at these points are isomorphisms.}
-\entree{9758}{2:42:38}{The subobjects of the terminal object of the classifying topos $B$ of objects are $\varnothing$, the image of $X\to e$, and $e$: $B$ has three open subtopoi.}
-\entree{9888}{2:44:48}{The closed complement $\Phi_0$ of $B^*$ classifies initial objects; it is equivalent to the point topos, whose point is the empty set.}
-\entree{10017}{2:46:57}{The open $B^*$ classifies the objects $x$ such that $x\to e$ is an epimorphism; its points are the nonempty sets.}
-\entree{10145}{2:49:05}{The empty subtopos classifies the theory that has a model only in the empty topos.}
-\entree{10210}{2:50:10}{The subtopos $\Phi_{01}$ classifies the subobjects of the terminal object ($x\to e$ a monomorphism); its points are the sets with at most one element.}
-\entree{10342}{2:52:22}{$\Phi_1=\Phi_{01}\cap B^*$ classifies terminal objects; $\Phi_0$ and $\Phi_1$ are equivalent to the point topos but are two distinct points of $B$.}
-\entree{10537}{2:55:37}{$\Phi_{01}\simeq\widehat{\Delta_1}$, where $\Delta_1=\{0\to 1\}$: the morphisms $\mathcal{E}\to\widehat{\Delta_1}$ correspond to the monomorphisms $x\hookrightarrow e$.}
-\entree{10665}{2:57:45}{$\widehat{\Delta_1}$ is the topos of the Sierpiński space (spectrum of a discrete valuation ring); a morphism to it is equivalent to an open of the source topos.}
-\entree{10727}{2:58:47}{Every $T_0$ topological space embeds in a product of copies of the Sierpiński space.}
-\entree{10793}{2:59:53}{The subtopoi of a topos form a complete lattice (arbitrary intersections and suprema).}
+\entree[ex]{9234}{2:33:54}{The classifying topos of an object without structure is the category of functors from finite sets to $\mathbf{Set}$ (presheaves on $J=\{X^n\}$).}
+\entree[prop]{9365}{2:36:05}{If $B_T$ classifies the theory $T$, its category of points is equivalent to $T(\mathbf{Set})$.}
+\entree[prop]{9433}{2:37:13}{For all topoi $\mathcal{E}$ and $B$, $\mathrm{Hom}_\Delta(B,\mathcal{E})$ admits filtered colimits, since in a topos they commute with finite limits.}
+\entree[prop]{9568}{2:39:28}{The essential points of the classifying topos of objects correspond to finite sets.}
+\entree[prop]{9631}{2:40:31}{The smallest subtopos containing a family of points of a topos is defined by the arrows whose stalks at these points are isomorphisms.}
+\entree[ex]{9758}{2:42:38}{The subobjects of the terminal object of the classifying topos $B$ of objects are $\varnothing$, the image of $X\to e$, and $e$: $B$ has three open subtopoi.}
+\entree[ex]{9888}{2:44:48}{The closed complement $\Phi_0$ of $B^*$ classifies initial objects; it is equivalent to the point topos, whose point is the empty set.}
+\entree[ex]{10017}{2:46:57}{The open $B^*$ classifies the objects $x$ such that $x\to e$ is an epimorphism; its points are the nonempty sets.}
+\entree[ex]{10145}{2:49:05}{The empty subtopos classifies the theory that has a model only in the empty topos.}
+\entree[ex]{10210}{2:50:10}{The subtopos $\Phi_{01}$ classifies the subobjects of the terminal object ($x\to e$ a monomorphism); its points are the sets with at most one element.}
+\entree[ex]{10342}{2:52:22}{$\Phi_1=\Phi_{01}\cap B^*$ classifies terminal objects; $\Phi_0$ and $\Phi_1$ are equivalent to the point topos but are two distinct points of $B$.}
+\entree[ex]{10537}{2:55:37}{$\Phi_{01}\simeq\widehat{\Delta_1}$, where $\Delta_1=\{0\to 1\}$: the morphisms $\mathcal{E}\to\widehat{\Delta_1}$ correspond to the monomorphisms $x\hookrightarrow e$.}
+\entree[ex]{10665}{2:57:45}{$\widehat{\Delta_1}$ is the topos of the Sierpiński space (spectrum of a discrete valuation ring); a morphism to it is equivalent to an open of the source topos.}
+\entree[prop]{10727}{2:58:47}{Every $T_0$ topological space embeds in a product of copies of the Sierpiński space.}
+\entree[prop]{10793}{2:59:53}{The subtopoi of a topos form a complete lattice (arbitrary intersections and suprema).}
 \section{Flat functors and torsors}
-\entree{11198}{3:06:38}{In the opposite of finitely presented groups, the universal group is $\mathbb{Z}$ with its cogroup structure; the classifying topos of groups is its topos of presheaves.}
-\entree{11403}{3:10:03}{$\widehat{C}$ classifies the functors $C\to\mathcal{E}$ whose continuous extension to $\widehat{C}$ is left exact (flat functors); if $C$ has finite limits, these are the left exact functors.}
-\entree{11533}{3:12:13}{For a group $G$ viewed as a category $C$ with one object, $\widehat{C}=B_G$; a functor $C\to\mathcal{E}$ is an object $X$ with a $G$-action, extended by $P\mapsto P\wedge^G X$.}
-\entree{11601}{3:13:21}{Contracted product: $P\wedge^G X$ is the quotient of $P\times X$ by the diagonal action of $G$, $(pg,x)\sim(p,gx)$.}
-\entree{11667}{3:14:27}{This extension is left exact iff $X$ is a torsor under the constant group $G_{\mathcal{E}}$: $B_G$ classifies $G$-torsors.}
+\entree[ex]{11198}{3:06:38}{In the opposite of finitely presented groups, the universal group is $\mathbb{Z}$ with its cogroup structure; the classifying topos of groups is its topos of presheaves.}
+\entree[prop]{11403}{3:10:03}{$\widehat{C}$ classifies the functors $C\to\mathcal{E}$ whose continuous extension to $\widehat{C}$ is left exact (flat functors); if $C$ has finite limits, these are the left exact functors.}
+\entree[prop]{11533}{3:12:13}{For a group $G$ viewed as a category $C$ with one object, $\widehat{C}=B_G$; a functor $C\to\mathcal{E}$ is an object $X$ with a $G$-action, extended by $P\mapsto P\wedge^G X$.}
+\entree[def]{11601}{3:13:21}{Contracted product: $P\wedge^G X$ is the quotient of $P\times X$ by the diagonal action of $G$, $(pg,x)\sim(p,gx)$.}
+\entree[prop]{11667}{3:14:27}{This extension is left exact iff $X$ is a torsor under the constant group $G_{\mathcal{E}}$: $B_G$ classifies $G$-torsors.}
 \section{The classifying topos of a group}
 \face{Tape 3, side B}
-\entree{11758}{3:15:58}{Problem: for a group $G$ of a topos $S$, represent on topoi $X$ over $S$ the 2-functor of torsors under the inverse image of $G$.}
-\entree{12140}{3:22:20}{The objects of $S$ equipped with a left action of $G$ form a topos $B_G$: the forgetful functor $B_G\to S$ is faithful and commutes with all limits.}
-\entree{12268}{3:24:28}{$p^*\colon S\to B_G$ equips an object with the trivial action; a group morphism $G\to G'$ induces by restriction an essential morphism $B_G\to B_{G'}$.}
-\entree{12397}{3:26:37}{Universal torsor: $G$ acting on itself by left translations (an object of $B_G$), with the right action of $\overline{G}=p^*G$ by right translations.}
-\entree{12798}{3:33:18}{Universality: for $q\colon X\to S$, the $q^*G$-torsors on $X$ correspond to the morphisms $X\to B_G$ over $S$, via the contracted product.}
+\entree[q]{11758}{3:15:58}{For a group $G$ of a topos $S$, represent on topoi $X$ over $S$ the 2-functor of torsors under the inverse image of $G$.}
+\entree[prop]{12140}{3:22:20}{The objects of $S$ equipped with a left action of $G$ form a topos $B_G$: the forgetful functor $B_G\to S$ is faithful and commutes with all limits.}
+\entree[prop]{12268}{3:24:28}{$p^*\colon S\to B_G$ equips an object with the trivial action; a group morphism $G\to G'$ induces by restriction an essential morphism $B_G\to B_{G'}$.}
+\entree[def]{12397}{3:26:37}{Universal torsor: $G$ acting on itself by left translations (an object of $B_G$), with the right action of $\overline{G}=p^*G$ by right translations.}
+\entree[prop]{12798}{3:33:18}{Universality: for $q\colon X\to S$, the $q^*G$-torsors on $X$ correspond to the morphisms $X\to B_G$ over $S$, via the contracted product.}
 \section{Classifying topoi: further examples}
-\entree{13187}{3:39:47}{On a stack, the category of objects locally isomorphic to a section $s$, with their isomorphisms, is equivalent to that of torsors under $\underline{\mathrm{Aut}}(s)$.}
-\entree{13251}{3:40:51}{Locally free $\mathcal{O}_X$-modules of rank $n$, with their isomorphisms, are equivalent to torsors under $\mathrm{GL}_n(\mathcal{O}_X)$.}
-\entree{13379}{3:42:59}{The topos $B_{\mathrm{GL}_n}$ over the classifying topos of rings classifies ringed topoi equipped with a locally free module of rank $n$ (with isomorphisms).}
-\entree{13442}{3:44:02}{Local rings are classified by the subtopos defined by the Zariski topology on affine schemes of finite type over $\mathbb{Z}$.}
-\entree{13506}{3:45:06}{Strictly local rings are classified by a smaller subtopos, defined by a finer topology (the étale topology).}
-\entree{13632}{3:47:12}{Locally constant objects do not come from a representable theory: they are not stable under colimits (totally disconnected spaces).}
-\entree{13696}{3:48:16}{Covering spaces of rank $n$ of the terminal object do not form an algebraic structure: in $\mathbf{Set}$, sets with $n$ elements are not stable under filtered colimits.}
-\entree{13826}{3:50:26}{With only isomorphisms as morphisms, the objects locally isomorphic to the constant object $I_n$ with $n$ elements are equivalent to torsors under the constant group $\mathfrak{S}_n$.}
-\entree{13891}{3:51:31}{The topos $B_{\mathfrak{S}_n}$ of $\mathfrak{S}_n$-sets classifies covering spaces of rank $n$ of the terminal object, with their isomorphisms.}
+\entree[prop]{13187}{3:39:47}{On a stack, the category of objects locally isomorphic to a section $s$, with their isomorphisms, is equivalent to that of torsors under $\underline{\mathrm{Aut}}(s)$.}
+\entree[ex]{13251}{3:40:51}{Locally free $\mathcal{O}_X$-modules of rank $n$, with their isomorphisms, are equivalent to torsors under $\mathrm{GL}_n(\mathcal{O}_X)$.}
+\entree[prop]{13379}{3:42:59}{The topos $B_{\mathrm{GL}_n}$ over the classifying topos of rings classifies ringed topoi equipped with a locally free module of rank $n$ (with isomorphisms).}
+\entree[prop]{13442}{3:44:02}{Local rings are classified by the subtopos defined by the Zariski topology on affine schemes of finite type over $\mathbb{Z}$.}
+\entree[prop]{13506}{3:45:06}{Strictly local rings are classified by a smaller subtopos, defined by a finer topology (the étale topology).}
+\entree[cex]{13632}{3:47:12}{Locally constant objects do not come from a representable theory: they are not stable under colimits (totally disconnected spaces).}
+\entree[cex]{13696}{3:48:16}{Covering spaces of rank $n$ of the terminal object do not form an algebraic structure: in $\mathbf{Set}$, sets with $n$ elements are not stable under filtered colimits.}
+\entree[prop]{13826}{3:50:26}{With only isomorphisms as morphisms, the objects locally isomorphic to the constant object $I_n$ with $n$ elements are equivalent to torsors under the constant group $\mathfrak{S}_n$.}
+\entree[prop]{13891}{3:51:31}{The topos $B_{\mathfrak{S}_n}$ of $\mathfrak{S}_n$-sets classifies covering spaces of rank $n$ of the terminal object, with their isomorphisms.}
 \section{Connected rings}
-\entree{13957}{3:52:37}{Connectedness of the spectrum of a ring can be written in any topos (every idempotent is $0$ or $1$, and $0\neq1$) and defines a subtopos of the classifying topos of rings.}
-\entree{14022}{3:53:42}{\q{Having exactly $n$ connected components} does not define a theory: the property is not stable under filtered colimits.}
-\entree{14279}{3:57:59}{A ring locally with $n$ connected components is equivalent to a pair: $I$ locally constant of rank $n$, and a 0-connected ring $A_0$ over $I$, of which $A$ is the direct image.}
-\entree{14409}{4:00:09}{The functor $(I,A_0)\mapsto A$ is fully faithful if the ring morphisms taken are those inducing isomorphisms on the $\pi_0$.}
-\entree{14601}{4:03:21}{The classifying topos of rings locally with $n$ components is constructed over $B_{\mathfrak{S}_n}$, by classifying a 0-connected ring over the universal covering space $I_n$.}
+\entree[prop]{13957}{3:52:37}{Connectedness of the spectrum of a ring can be written in any topos (every idempotent is $0$ or $1$, and $0\neq1$) and defines a subtopos of the classifying topos of rings.}
+\entree[cex]{14022}{3:53:42}{\q{Having exactly $n$ connected components} does not define a theory: the property is not stable under filtered colimits.}
+\entree[prop]{14279}{3:57:59}{A ring locally with $n$ connected components is equivalent to a pair: $I$ locally constant of rank $n$, and a 0-connected ring $A_0$ over $I$, of which $A$ is the direct image.}
+\entree[prop]{14409}{4:00:09}{The functor $(I,A_0)\mapsto A$ is fully faithful if the ring morphisms taken are those inducing isomorphisms on the $\pi_0$.}
+\entree[rem]{14601}{4:03:21}{The classifying topos of rings locally with $n$ components is constructed over $B_{\mathfrak{S}_n}$, by classifying a 0-connected ring over the universal covering space $I_n$.}
 \face{Tape 4, side A}
-\entree{14978}{4:09:38}{The classifying topos of a ring over an object $I$ of a topos $B$ exists; if $I$ is a sum of $n$ copies of the terminal object, it is $R^n\times B$, $R$ the classifying topos of rings.}
+\entree[prop]{14978}{4:09:38}{The classifying topos of a ring over an object $I$ of a topos $B$ exists; if $I$ is a sum of $n$ copies of the terminal object, it is $R^n\times B$, $R$ the classifying topos of rings.}
 \section{Left exact functors and topoi}
-\entree{15238}{4:13:58}{If $\mathcal{E}$ is a topos and $C$ has finite limits, $C\to\mathcal{E}$ is left exact iff its extension $\widehat{C}\to\mathcal{E}$ commuting with colimits is.}
-\entree{15302}{4:15:02}{Converse: if $\mathcal{E}$ has a small strictly generating subcategory $C$ stable under finite limits and this property holds, $\mathcal{E}$ is a topos.}
-\entree{15494}{4:18:14}{The classifying topos of a theory defined by finite limits is connected and acyclic.}
-\entree{15751}{4:22:31}{Elementary topos: a category with finite limits, cartesian closed, equipped with a subobject classifier.}
-\entree{15944}{4:25:44}{Faithfulness of a $G$-action on $X$ is not stable under inverse image: it is not an algebraic structure in the sense of topoi.}
+\entree[prop]{15238}{4:13:58}{If $\mathcal{E}$ is a topos and $C$ has finite limits, $C\to\mathcal{E}$ is left exact iff its extension $\widehat{C}\to\mathcal{E}$ commuting with colimits is.}
+\entree[prop]{15302}{4:15:02}{Converse: if $\mathcal{E}$ has a small strictly generating subcategory $C$ stable under finite limits and this property holds, $\mathcal{E}$ is a topos.}
+\entree[prop]{15494}{4:18:14}{The classifying topos of a theory defined by finite limits is connected and acyclic.}
+\entree[def]{15751}{4:22:31}{Elementary topos: a category with finite limits, cartesian closed, equipped with a subobject classifier.}
+\entree[cex]{15944}{4:25:44}{Faithfulness of a $G$-action on $X$ is not stable under inverse image: it is not an algebraic structure in the sense of topoi.}
 \section{Topoi without points}
-\entree{16521}{4:35:21}{A theory represented by a nonempty topos may have no set-theoretic model: there exist topoi without points.}
-\entree{16587}{4:36:27}{Example (Deligne): Borel sets of $[0,1]$ modulo null measure, countable coverings up to null measure; the resulting topos has no point.}
+\entree[prop]{16521}{4:35:21}{A theory represented by a nonempty topos may have no set-theoretic model: there exist topoi without points.}
+\entree[ex][Deligne]{16587}{4:36:27}{Borel sets of $[0,1]$ modulo null measure, countable coverings up to null measure; the resulting topos has no point.}
 \section{The classifying topos of fields}
-\entree{16853}{4:40:53}{Classifying topos of fields: affine schemes of finite type over $\mathbb{Z}$, covering families generated by $\{D(f)\to X,\ V(f)\to X\}$ and by $X_{\mathrm{red}}\to X$.}
-\entree{16919}{4:41:59}{For $X$ quasi-compact and quasi-separated, the constructible topology (opens: unions of constructible subsets) makes $X$ compact, with the same points.}
-\entree{16981}{4:43:01}{For $X=\mathrm{Spec}\,A$, the colimit of the rings of functions of the finite constructible partitions (reduced structures) has as spectrum $X$ with the constructible topology, with stalks the residue fields.}
-\entree{17046}{4:44:06}{The classifying topos of fields is identified with presheaves on these compact schemes (constructible morphisms) turning finite sums into products; the universal field is the ring of functions.}
+\entree[prop]{16853}{4:40:53}{Classifying topos of fields: affine schemes of finite type over $\mathbb{Z}$, covering families generated by $\{D(f)\to X,\ V(f)\to X\}$ and by $X_{\mathrm{red}}\to X$.}
+\entree[prop]{16919}{4:41:59}{For $X$ quasi-compact and quasi-separated, the constructible topology (opens: unions of constructible subsets) makes $X$ compact, with the same points.}
+\entree[prop]{16981}{4:43:01}{For $X=\mathrm{Spec}\,A$, the colimit of the rings of functions of the finite constructible partitions (reduced structures) has as spectrum $X$ with the constructible topology, with stalks the residue fields.}
+\entree[prop]{17046}{4:44:06}{The classifying topos of fields is identified with presheaves on these compact schemes (constructible morphisms) turning finite sums into products; the universal field is the ring of functions.}
 \section{Flatness}
-\entree{17111}{4:45:11}{Absolutely flat rings: rings all of whose modules are flat; these are the reduced rings of Krull dimension zero.}
-\entree{17241}{4:47:21}{Flatness of a module over a ring of a topos is stable under inverse image by a morphism of topoi (Deligne).}
-\entree{17307}{4:48:27}{Criterion: $M$ is flat over $A$ if for every $U$ and every finitely generated ideal $J\subset A_U$, $M_U\otimes J\to M_U$ is a monomorphism.}
-\entree{17371}{4:49:31}{This criterion is a countable family of axioms: for each $n$, on $U_n=A^n$, the ideal generated by the $n$ universal projections.}
+\entree[def]{17111}{4:45:11}{Absolutely flat rings: rings all of whose modules are flat; these are the reduced rings of Krull dimension zero.}
+\entree[prop]{17241}{4:47:21}{Flatness of a module over a ring of a topos is stable under inverse image by a morphism of topoi (Deligne).}
+\entree[prop]{17307}{4:48:27}{Criterion: $M$ is flat over $A$ if for every $U$ and every finitely generated ideal $J\subset A_U$, $M_U\otimes J\to M_U$ is a monomorphism.}
+\entree[prop]{17371}{4:49:31}{This criterion is a countable family of axioms: for each $n$, on $U_n=A^n$, the ideal generated by the $n$ universal projections.}
 \face{Tape 4, side B}
-\entree{17700}{4:55:00}{For a relative scheme of finite presentation over a ringed topos, two notions of flatness (Hakim): a flat morphism of ringed topoi, or locally arising from a flat morphism of schemes.}
+\entree[rem]{17700}{4:55:00}{For a relative scheme of finite presentation over a ringed topos, two notions of flatness (Hakim): a flat morphism of ringed topoi, or locally arising from a flat morphism of schemes.}
 \section{Hypertopoi}
-\entree{18019}{5:00:19}{In $\mathbf{Set}$, an arbitrary product of epimorphisms is an epimorphism (analogue of total disconnectedness); this does not hold in every topos.}
-\entree{18084}{5:01:24}{The morphism $\mathcal{E}\to\mathrm{pt}$ is essential iff the constant sheaf functor commutes with arbitrary products (analogue of local connectedness).}
-\entree{18149}{5:02:29}{The topoi $\widehat{C}$ have these two properties; that they are the only ones is stated without proof. \q{Hypertopos}: these topoi, with essential morphisms.}
-\entree{18411}{5:06:51}{A small Karoubian category $D$ is determined by $\widehat{D}$: it is the category of its essential points.}
-\entree{18604}{5:10:04}{The category of points of $\widehat{C}$, $C$ with finite limits, is $\mathrm{Hom}_{\mathrm{lex}}(C,\mathbf{Set})\simeq\mathrm{Ind}(C^{\mathrm{op}})$.}
-\entree{18678}{5:11:18}{For hypertopoi, the only candidate classifying object of $T_C$ is the topos of presheaves on the category of points of $\widehat{C}$, not small in general (\q{pseudo-hypertopos}).}
+\entree[prop]{18019}{5:00:19}{In $\mathbf{Set}$, an arbitrary product of epimorphisms is an epimorphism (analogue of total disconnectedness); this does not hold in every topos.}
+\entree[prop]{18084}{5:01:24}{The morphism $\mathcal{E}\to\mathrm{pt}$ is essential iff the constant sheaf functor commutes with arbitrary products (analogue of local connectedness).}
+\entree[def]{18149}{5:02:29}{The topoi $\widehat{C}$ have these two properties; that they are the only ones is stated without proof. \q{Hypertopos}: these topoi, with essential morphisms.}
+\entree[prop]{18411}{5:06:51}{A small Karoubian category $D$ is determined by $\widehat{D}$: it is the category of its essential points.}
+\entree[prop]{18604}{5:10:04}{The category of points of $\widehat{C}$, $C$ with finite limits, is $\mathrm{Hom}_{\mathrm{lex}}(C,\mathbf{Set})\simeq\mathrm{Ind}(C^{\mathrm{op}})$.}
+\entree[rem]{18678}{5:11:18}{For hypertopoi, the only candidate classifying object of $T_C$ is the topos of presheaves on the category of points of $\widehat{C}$, not small in general (\q{pseudo-hypertopos}).}
 \section{Universes}
-\entree{18936}{5:15:36}{The Weil conjectures are proved by Deligne (1973), within étale cohomology founded on universes.}
-\entree{18997}{5:16:37}{The universe axiom is equivalent to: every cardinal is bounded by a strongly inaccessible cardinal; the existence of such a cardinal is not provable in ZFC.}
-\entree{19061}{5:17:41}{\q{Galaxy}: a set satisfying the universe axioms, except stability under unions of families indexed by one of its elements, which is weakened.}
+\entree[rem]{18936}{5:15:36}{The Weil conjectures are proved by Deligne (1973), within étale cohomology founded on universes.}
+\entree[prop]{18997}{5:16:37}{The universe axiom is equivalent to: every cardinal is bounded by a strongly inaccessible cardinal; the existence of such a cardinal is not provable in ZFC.}
+\entree[def]{19061}{5:17:41}{\q{Galaxy}: a set satisfying the universe axioms, except stability under unions of families indexed by one of its elements, which is weakened.}
 \section{The standard conjectures}
-\entree{19969}{5:32:49}{The standard conjectures are formulated on algebraic cycles modulo numerical equivalence, with no particular cohomology; they include the equality of homological and numerical equivalence.}
-\entree{20035}{5:33:55}{The standard conjectures would allow one to construct motives from algebraic cycles alone, independently of any cohomology.}
+\entree[rem]{19969}{5:32:49}{The standard conjectures are formulated on algebraic cycles modulo numerical equivalence, with no particular cohomology; they include the equality of homological and numerical equivalence.}
+\entree[rem]{20035}{5:33:55}{The standard conjectures would allow one to construct motives from algebraic cycles alone, independently of any cohomology.}
 
 \section*{References}\addcontentsline{toc}{section}{References}
 \noindent Colin McLarty, \emph{Grothendieck's 1973 topos lectures}, talk, CultureMath (DMA, École normale supérieure, Paris), video published 7 October 2018, \url{https://www.youtube.com/watch?v=5AR55ZsHmKI}.
