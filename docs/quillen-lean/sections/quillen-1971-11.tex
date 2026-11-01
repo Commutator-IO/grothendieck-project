@@ -1,0 +1,41 @@
+\section[Carnet 1971-11 : automorphismes d'ordre $p$ triviaux sur $\Omega_1$]{Carnet 1971-11 : automorphismes d'ordre $p$ d'un $p$-groupe abélien triviaux sur les éléments d'ordre $p$\protect\verifie{Notebook1971_11}}\label{sec:quillen-1971-11}
+
+\emph{Le contexte.} En 1971, Quillen étudie la cohomologie des groupes finis et le rôle de leurs sous-groupes abéliens élémentaires. Le \carnet{1971}{11} contient, à partir de la page~68, une série datée du 24 août 1971, titrée \q{$p$ odd}, annotée en marge comme une révision des théorèmes de Thompson. On y lit un lemme, puis deux propositions sur les sous-groupes abéliens élémentaires normaux maximaux d'un $p$-groupe, qui l'utilisent (pp.~69--71).
+
+\emph{Notations.} Pour un groupe abélien $B$, noté additivement, et un nombre premier $p$, on note $\Omega_1(B)$ le sous-groupe des éléments $b$ tels que $pb = 0$. Un \emph{$p$-groupe abélien} est un groupe abélien dont tout élément est annulé par une puissance de $p$.
+
+\emph{La page.} À la page~68, Quillen énonce le lemme suivant : si $\theta$ est un automorphisme d'un $p$-groupe abélien $B$, avec $\theta^p = 1$, qui est l'identité sur $\Omega_1(B)$, alors $\theta - 1$ envoie $B$ dans $\Omega_1(B)$. Sa preuve, à la page~69, passe au groupe dual $\widehat B$, écrit $\theta = 1 + N$ avec $N$ à image dans $p\widehat B$, et compare les termes du développement binomial de $(1 + N)^p = 1$ ; une première tentative, par une filtration $p$-adique, est barrée. L'hypothèse $p \ge 3$ sert à rendre le dernier terme $N^p$ assez petit. La page~69 applique ensuite le lemme à un élément d'ordre $p$ qui normalise un sous-groupe abélien.
+
+\emph{L'intuition.} Posons $\delta = \theta - 1$. L'hypothèse dit que $\delta$ tue $\Omega_1(B)$, et la conclusion que $p\delta = 0$. Comme $\delta$ commute à la multiplication par $p$, il fait baisser l'ordre : si $p^{k+1} b = 0$, alors $p^k \delta(b) = \delta(p^k b) = 0$, puisque $p^k b \in \Omega_1(B)$. Les puissances de $\delta$ sont donc de plus en plus petites, et dans le développement de $(1 + \delta)^p = 1$ le terme $p\delta$ ne peut être compensé que par des termes nuls.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, carnet 1971-11, p.~68]\label{thm:quillen-1971-11}
+Soient $p \ge 3$ un nombre premier, $B$ un groupe abélien dont tout élément est annulé par une puissance de $p$, et $\theta$ un endomorphisme de $B$ tel que $\theta^p = 1$ et $\theta(b) = b$ pour tout $b \in \Omega_1(B)$. Alors $p(\theta(b) - b) = 0$ pour tout $b \in B$, c'est-à-dire $(\theta - 1)B \subset \Omega_1(B)$.
+\end{theoreme}
+\end{encadre}
+
+\noindent L'énoncé est celui de la page, sous une forme un peu plus générale : $B$ n'est pas supposé fini, et $\theta$ est un endomorphisme, automatiquement bijectif puisque $\theta^p = 1$.
+
+\begin{proof}
+Soit $\delta = \theta - 1$. On montre, par récurrence sur $k$, que $p\delta(c) = 0$ pour tout $c$ tel que $p^k c = 0$. Pour $k = 0$, $c = 0$. Supposons le résultat vrai pour $k$, et soit $c$ tel que $p^{k+1} c = 0$. D'après la baisse de l'ordre, $p^k \delta(c) = 0$ ; l'hypothèse de récurrence appliquée à $\delta(c)$ donne $p\delta^2(c) = 0$. Alors $\delta^2(c) \in \Omega_1(B)$, donc $\delta^3(c) = 0$, puis $\delta^m(c) = 0$ pour tout $m \ge 3$, et $p\delta^m(c) = 0$ pour tout $m \ge 2$.
+
+Comme $\theta = 1 + \delta$ et que $1$ commute à $\delta$, la formule du binôme donne
+\[
+c = \theta^p(c) = \sum_{m = 0}^{p} \binom{p}{m}\, \delta^m(c) = c + p\,\delta(c) + \sum_{m = 2}^{p - 1} \binom{p}{m}\, \delta^m(c) + \delta^p(c).
+\]
+Pour $2 \le m \le p - 1$, le coefficient $\binom{p}{m}$ est divisible par $p$, et $p\delta^m(c) = 0$ : ces termes sont nuls. Le dernier, $\delta^p(c)$, est nul car $p \ge 3$. Il reste $p\delta(c) = 0$.
+\end{proof}
+
+\noindent La preuve est plus directe que celle de la page : elle ne passe pas au dual et procède par récurrence sur l'ordre des éléments. L'hypothèse $p \ge 3$ y sert au même endroit : pour $p = 2$, le dernier terme est $\delta^2(c)$, que la récurrence ne sait pas annuler.
+
+\begin{contrexemple}[énoncé de l'édition]\label{ce:quillen-1971-11}
+Pour $p = 2$, le lemme est faux. Sur $B = \mathbf Z/8$, soit $\theta = -1$. Alors $\theta^2 = 1$, et $\theta$ fixe $\Omega_1(B) = \{0, 4\}$, puisque $-4 = 4$. Mais $2(\theta(1) - 1) = -4 \ne 0$.
+\end{contrexemple}
+
+\noindent Sur $\mathbf Z/4$, en revanche, $\theta = -1$ vérifie la conclusion ($2 \cdot (-2) = 0$) : le premier contre-exemple cyclique demande l'ordre~$8$. Une recherche exhaustive, sur les groupes $\mathbf Z/9$, $\mathbf Z/27$, $\mathbf Z/9 \times \mathbf Z/3$, $\mathbf Z/9 \times \mathbf Z/9$, $\mathbf Z/27 \times \mathbf Z/3$ pour $p = 3$ et $\mathbf Z/25$ pour $p = 5$, n'a trouvé aucun automorphisme qui contredise le lemme ; pour $p = 2$, elle en trouve sur $\mathbf Z/8$ et $\mathbf Z/8 \times \mathbf Z/2$, et aucun sur $\mathbf Z/4$, $\mathbf Z/4 \times \mathbf Z/2$, $\mathbf Z/4 \times \mathbf Z/4$. Le titre \q{$p$ odd} de la page est donc nécessaire. L'hypothèse que $B$ est un $p$-groupe l'est aussi : l'anneau $\mathbf Z[\zeta_p]$ des entiers cyclotomiques, avec $\theta$ la multiplication par $\zeta_p$, a $\Omega_1 = 0$ et $\theta^p = 1$, sans que $p(\theta - 1)$ soit nul.
+
+\emph{Vérification en Lean.} Le fichier \href{\leanblobmain/Notebook1971_11.lean}{\texttt{Notebook1971\_11.\allowbreak{}lean}} démontre le théorème~\ref{thm:quillen-1971-11} sous le nom \texttt{nsmul\_sub\_one\_eq\_zero}, pour $\theta$ dans l'anneau \texttt{AddMonoid.End B} des endomorphismes de $B$, et sous le nom \texttt{addEquiv\_nsmul\_sub\_one\_eq\_zero} pour un automorphisme \texttt{B ≃+ B} dont l'itéré $p$-ième est l'identité, comme sur la page. La baisse de l'ordre est \texttt{sub\_one\_nsmul\_eq\_zero\_of\_nsmul}, le développement binomial évalué en un point \texttt{pow\_apply\_eq\_sum}. Le contre-exemple~\ref{ce:quillen-1971-11} est \texttt{zmod8\_neg}, vérifié par calcul. Les axiomes utilisés sont les trois axiomes usuels de mathlib.
+
+Ne sont pas démontrées ici les deux propositions des pages~69--71 qui utilisent le lemme, sur les sous-groupes abéliens élémentaires normaux maximaux d'un $p$-groupe.
+
+\litterature{la recherche n'a pas localisé de référence imprimée qui énonce ce lemme sous cette forme. Il est du type des lemmes qui servent aux théorèmes de remplacement de Thompson, que la page dit réviser, et à l'étude des sous-groupes abéliens élémentaires dans les travaux de Quillen de 1971--1978 sur la cohomologie des groupes finis ; les exposés de ces théorèmes dans les manuels de théorie des groupes finis n'ont pas été dépouillés. L'énoncé est élémentaire, et l'édition ne le donne pas pour nouveau.}

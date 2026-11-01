@@ -456,6 +456,26 @@ export function MethodPage() {
               built from <code className="text-[12px]">docs/bourbaki-lean/article.tex</code>
             </span>
           </p>
+          <P id="article-quillen-lean" className="prose-fonds mt-6">
+            <em>Carnets de Daniel Quillen : énoncés démontrés en Lean</em>{' '}
+            is a working paper in French. It takes three precise statements from Quillen's research
+            notebooks (Clay Mathematics Institute), from 1968, 1971 and 1983, in general topology,
+            group theory and linear algebra, and proves them, each proof checked in Lean and
+            written out for a reader who does not use Lean, with the notebook page, the intuition,
+            what is not formalised and what the literature search found. The notebooks are in
+            copyright: the paper states everything in its own words and cites notebook and page.
+          </P>
+          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[13px]">
+            <a
+              href="/article/quillen-lean.pdf"
+              className="rounded-full border border-ink-200 px-3 py-1 text-ink-700 transition hover:border-brand-400 hover:text-brand-700"
+            >
+              PDF
+            </a>
+            <span className="text-ink-400">
+              built from <code className="text-[12px]">docs/quillen-lean/article.tex</code>
+            </span>
+          </p>
           <P id="book-methods" className="prose-fonds mt-6">
             <em>Mathématiques outillées : le génie logiciel au service de la recherche</em>{' '}
             is a short book in French for mathematicians, on the practices this edition runs on:

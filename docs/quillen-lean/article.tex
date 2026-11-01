@@ -1,0 +1,107 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+% Charter et Menlo (macOS) ; ailleurs, XCharter et DejaVu Sans Mono, dont ils dérivent.
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{\setmainfont{XCharter}}
+\IfFontExistsTF{Menlo}{\setmonofont{Menlo}[Scale=0.82]}{\setmonofont{DejaVu Sans Mono}[Scale=0.82]}
+\usepackage{polyglossia}\setmainlanguage{french}\setotherlanguage{english}
+\usepackage{microtype}
+\usepackage[most]{tcolorbox}
+\usepackage{marginnote}
+% Les résultats principaux sont encadrés.
+\newtcolorbox{encadre}{enhanced, breakable, colback=white, colframe=black!55, boxrule=0.6pt, arc=0pt, left=6pt, right=6pt, top=2pt, bottom=2pt, before skip=8pt, after skip=8pt}
+% L’ : la paire de crénage de Charter colle l’apostrophe au L ; on rajoute une fine espace.
+\XeTeXinterchartokenstate=1
+\newXeTeXintercharclass\LetterL
+\newXeTeXintercharclass\Apostrophe
+\XeTeXcharclass`L=\LetterL
+\XeTeXcharclass`'=\Apostrophe
+\XeTeXcharclass"2019=\Apostrophe
+\XeTeXinterchartoks\LetterL\Apostrophe={\kern0.07em}
+\usepackage[a4paper,margin=27mm]{geometry}
+\usepackage{booktabs,longtable,array}
+\usepackage{setspace}\setstretch{1.1}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newcommand{\q}[1]{«\,#1\,»}
+% Les carnets de Quillen (Clay Mathematics Institute) : un PDF par carnet.
+\newcommand{\carnet}[2]{\href{https://www.claymath.org/library/Quillen/Working_papers/quillen\%20#1/#1-#2.pdf}{carnet~#1-#2}}
+% Le fichier de la preuve vérifiée, une fois par section. Les liens pointent vers main.
+\newcommand{\leanblobmain}{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Quillen}
+\newcommand{\verifie}[1]{\footnote{Preuve vérifiée : \href{\leanblobmain/#1.lean}{\texttt{lean/Quillen/\detokenize{#1}.lean}}.}}
+\definecolor{piste}{HTML}{B53D1D}
+% L'état de la recherche bibliographique, en fin de section.
+\newcommand{\litterature}[1]{\par\smallskip\noindent\textit{Littérature.} #1\par}
+\theoremstyle{plain}
+\newtheorem*{enonce}{Énoncé}
+\newtheorem{lemme}{Lemme}[section]
+\newtheorem{theoreme}[lemme]{Théorème}
+\newtheorem{contrexemple}[lemme]{Contre-exemple}
+\newtheorem{proposition}[lemme]{Proposition}
+\newtheorem*{theoreme*}{Théorème}
+\theoremstyle{definition}
+\newtheorem{exemple}[lemme]{Exemple}
+\theoremstyle{remark}
+\newtheorem*{remarque}{Remarque}
+\raggedbottom\emergencystretch=1.5em
+% Les noms Lean longs (\texttt{A.b\_c\_d}) peuvent se couper après un tiret bas.
+\let\bkunderscore\_
+\renewcommand{\_}{\bkunderscore\allowbreak}
+
+\title{\Large Carnets de Daniel Quillen : énoncés démontrés en Lean}
+\author{Michel Hua\\ \small Chercheur indépendant, Paris\\ \small \texttt{michel@commutator.io}}
+\date{\small Novembre 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent Les carnets de recherche de Daniel Quillen, de 1968 à 2003, sont en ligne au Clay Mathematics Institute. Ce document y relève trois énoncés précis, en topologie générale, en algèbre linéaire et en théorie des groupes, et les démontre. Chaque démonstration suit une preuve vérifiée dans l'assistant de preuve Lean~4 \cite{lean4}, avec sa bibliothèque mathlib \cite{mathlib2020}, et elle est rédigée pour être lue sans Lean. Pour chaque énoncé, le document dit d'où il vient, ce qu'il veut dire, comment on le démontre, ce qui n'est pas formalisé et ce que l'on sait de sa présence dans la littérature. Les trois énoncés sont justes ; deux tiennent sous des hypothèses plus faibles que celles de la page ou de la démonstration attendue, et le troisième échoue pour $p = 2$, comme la page le laisse entendre.
+\end{abstract}
+
+\tableofcontents
+
+\section*{Introduction}\addcontentsline{toc}{section}{Introduction}
+
+\emph{Les carnets.} Daniel Quillen (1940--2011) a tenu toute sa vie des carnets de travail, datés, où il essaie des idées, refait des calculs et note des énoncés. Le Clay Mathematics Institute les a numérisés et les publie sur \url{https://www.claymath.org/library/Quillen/} : plusieurs centaines de carnets, de 1968 à 2003, un PDF par carnet. Ce document cite chaque carnet par son année et son numéro, sous la forme \q{carnet 1968-14, p.~27}, où la page est celle du PDF ; chaque citation renvoie au PDF du Clay.
+
+\emph{La règle sur les droits.} Les carnets sont protégés par le droit d'auteur. Ce document n'en cite presque rien, au plus quelques mots ; il énonce chaque résultat dans ses propres termes et renvoie à la page du fac-similé, que chacun peut consulter. Les transcriptions faites pour ce travail restent privées.
+
+\emph{La méthode.} Les carnets ont été lus en trois temps. On repère d'abord les énoncés précis : lemmes, propositions, identités, questions posées. Chaque énoncé fait ensuite l'objet d'une recherche bibliographique. La plus grande partie de ce qu'on lit dans les carnets se retrouve dans les articles publiés de Quillen, sur l'algèbre homotopique, la cohomologie des groupes et la $K$-théorie algébrique, le cobordisme, les superconnexions, les déterminants et la cohomologie cyclique ; ces énoncés ne sont pas repris ici. On ne formalise enfin que les énoncés précis que la recherche n'a pas retrouvés imprimés, ou dont la forme imprimée ne correspond pas à la page. Les trois énoncés de ce document sont dans ce cas.
+
+\emph{Les garanties de Lean.} Chaque section cite en note de son titre le fichier Lean qui en contient les preuves, dans la bibliothèque \texttt{lean/Quillen/} du projet, un fichier par carnet. Lean vérifie mécaniquement qu'un énoncé tient sous les hypothèses écrites. Il ne garantit pas que l'énoncé rend fidèlement la page, ni qu'il est nouveau. Un énoncé que la page formule porte le nom de Quillen, le carnet et la page ; quand la démonstration établit davantage, on dit \q{d'après} ; une forme que l'édition ajoute (généralisation, réponse à une question, lemme intermédiaire) se dit énoncé de l'édition.
+
+\emph{L'organisation.} Une section par énoncé, dans l'ordre chronologique des carnets. Chacune présente la page dans son contexte, donne l'énoncé avec son intuition et sa démonstration, dit ce que Lean vérifie et ce qui n'est pas démontré, puis l'état de la recherche bibliographique.
+
+\section*{Tableau récapitulatif}\addcontentsline{toc}{section}{Tableau récapitulatif}
+
+\begin{center}
+{\small\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{1.6cm}>{\raggedright\arraybackslash}p{5.6cm}>{\raggedright\arraybackslash}p{3.9cm}>{\raggedright\arraybackslash}p{2.6cm}r@{}}
+\toprule
+Carnet & Énoncé & Verdict & Fichier Lean & \S\\
+\midrule
+\endhead
+1968-14, pp.~27--28 & Préimages compactes des fermés loin de $A$ & confirmé ; plus général (ni compacité locale, ni $\sigma$-compacité, ni $A$ fermé) & \href{\leanblobmain/Notebook1968_14.lean}{\texttt{Notebook1968\_14}} & \ref{sec:quillen-1968-14}\\
+1971-11, pp.~68--69 & Automorphismes d'ordre $p$ triviaux sur $\Omega_1$ & confirmé ; plus général (ni finitude, ni bijectivité) ; faux pour $p = 2$ & \href{\leanblobmain/Notebook1971_11.lean}{\texttt{Notebook1971\_11}} & \ref{sec:quillen-1971-11}\\
+1983-10, p.~31 & Traces des puissances impaires de $P - Q$ & question de la page ; réponse en dimension finie, sur tout anneau commutatif & \href{\leanblobmain/Notebook1983_10.lean}{\texttt{Notebook1983\_10}} & \ref{sec:quillen-1983-10}\\
+\bottomrule
+\end{longtable}}
+\end{center}
+
+\input{sections/quillen-1968-14}
+\input{sections/quillen-1971-11}
+\input{sections/quillen-1983-10}
+
+\section*{Déclaration sur l'usage de l'intelligence artificielle}\addcontentsline{toc}{section}{Déclaration sur l'usage de l'intelligence artificielle}
+
+Les énoncés démontrés ici sont lus sur des transcriptions des carnets produites par des modèles de langage d'Anthropic (Claude) sous des règles éditoriales écrites par l'auteur ; ces transcriptions n'ont pas été relues en entier par une personne. Les preuves formelles ont été écrites en Lean~4 par Claude Opus~5.5, sous la direction de l'auteur, et Lean en vérifie mécaniquement la correction contre la bibliothèque mathlib. Le même modèle en a tiré les démonstrations rédigées de ce document. L'auteur a relu le choix des énoncés et le texte, et en assume l'entière responsabilité. Lean garantit qu'un énoncé tient sous les hypothèses écrites. Il ne garantit ni que l'énoncé rend fidèlement la page, ni qu'il est nouveau.
+
+\begin{thebibliography}{99}\small
+\bibitem{ass1994} J.~Avron, R.~Seiler et B.~Simon, « The index of a pair of projections », \emph{Journal of Functional Analysis} 120 (1994), n\textsuperscript{o}\,1, 220--237 ; doi:10.1006/jfan.1994.1031.
+\bibitem{lean4} L.~de Moura et S.~Ullrich, « The Lean~4 theorem prover and programming language », dans \emph{Automated Deduction -- CADE~28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635 ; doi:10.1007/978-3-030-79876-5\_37.
+\bibitem{mathlib2020} The mathlib Community, « The Lean mathematical library », dans \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP~2020)}, ACM, 2020, 367--381 ; doi:10.1145/3372885.3373824.
+\end{thebibliography}
+
+\end{document}
