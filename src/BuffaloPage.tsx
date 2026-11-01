@@ -241,6 +241,15 @@ export function BuffaloPage() {
         {CAT.courses.map((c) => (
           <section key={c.id} id={c.id} className="mt-10 scroll-mt-20">
             <h2 className="titre text-[22px] text-ink-900">{c.title}</h2>
+            {c.id === 'topos' && (
+              <p className="mt-2 max-w-[46em] text-[13px] leading-relaxed text-ink-700">
+                <a href="/article/buffalo-topos.pdf" target="_blank" rel="noopener noreferrer" className={link}>
+                  Index des résultats (PDF)
+                </a>{' '}
+                — one line per result, definition or example, in our own words, with a link to the moment of the tape;
+                an index, not a transcription.
+              </p>
+            )}
             {c.videos.map((v) => (
               <div key={v.id} className="mt-5">
                 <p className="text-[13.5px] font-semibold text-ink-800">

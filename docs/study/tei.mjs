@@ -834,6 +834,9 @@ copyFileSync(resolve(root, 'docs/problems/article.pdf'), resolve(served, 'grothe
 copyFileSync(resolve(root, 'docs/bourbaki-lean/article.pdf'), resolve(served, 'bourbaki-lean.pdf'));
 // The seventh, the statements read in Quillen's notebooks and proved in Lean (docs/quillen-lean/).
 copyFileSync(resolve(root, 'docs/quillen-lean/article.pdf'), resolve(served, 'quillen-lean.pdf'));
+// The index of results of the 1973 Buffalo topos course, in our words, not a transcription
+// (docs/buffalo-topos/), linked from the Buffalo tab.
+copyFileSync(resolve(root, 'docs/buffalo-topos/index.pdf'), resolve(served, 'buffalo-topos.pdf'));
 // And a book in French on the methods behind the edition, written for mathematicians and
 // naming no corpus (docs/livre-methodes/, #100).
 copyFileSync(resolve(root, 'docs/livre-methodes/livre.pdf'), resolve(served, 'maths-toolbox.pdf'));
