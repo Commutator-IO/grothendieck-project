@@ -1,0 +1,29 @@
+\section[Carnet 1971-4 : un monoïde et son groupe de Grothendieck]{Carnet 1971-4 : la complétion en groupe d'un monoïde commutatif est un foncteur plat\protect\verifie{Notebook1971_4}}\label{sec:quillen-1971-4}
+
+\emph{Le contexte.} Le \carnet{1971}{4} (20 mars -- 11 avril 1971) étudie les torseurs sous une petite catégorie $\mathcal{C}$ au-dessus d'un espace ou d'un topos, en vue du théorème de Mather. Page~24 du PDF (son \q{8}, dans la seconde pagination), Quillen dit qu'un foncteur $u : \mathcal{C}_1 \to \mathcal{C}_2$ est \emph{fortement cofinal} si $(u_!, u^*)$ est un morphisme de topos de préfaisceaux, ce qui revient à demander que, pour tout objet $Y$ de $\mathcal{C}_2$, le foncteur $X \mapsto \operatorname{Hom}(Y, uX)$ soit un pro-objet de $\mathcal{C}_1$, autrement dit que sa catégorie d'éléments soit cofiltrante. Il note qu'un tel $u$ induit des isomorphismes sur les $R^q\varprojlim$. Page~25 (son \q{9}), il éprouve la définition sur l'application universelle d'un monoïde commutatif $M$ vers son groupe complété $G$, vue comme foncteur entre catégories à un objet : la condition devient que la catégorie dont les objets sont les éléments de $G$, et dont les flèches sont données par les translations par $M$, est cofiltrante, et il en vérifie les deux axiomes en quelques lignes.
+
+\emph{L'intuition.} Une flèche $g \to g'$ est un $m \in M$ tel que $mg = g'$. Deux éléments de $G$ s'écrivent avec un dénominateur commun, $g_i = m_i\,b^{-1}$, et sont donc des translatés de $b^{-1}$ : c'est l'axiome des produits. Deux flèches parallèles $m_1, m_2 : g \to g'$ ont même image dans $G$ ; par construction du groupe de Grothendieck, $c\,m_1 = c\,m_2$ pour un $c \in M$, et précomposer par la flèche $c : c^{-1}g \to g$ les égalise : c'est l'axiome des égaliseurs.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, carnet 1971-4, p.~25]\label{thm:quillen-1971-4}
+Soient $M$ un monoïde commutatif, $G(M)$ son groupe de Grothendieck et $u : M \to G(M)$ l'application canonique. Le foncteur induit entre catégories à un objet est représentablement plat : pour l'objet unique $X$, la catégorie $X/u$ est cofiltrante. En particulier, il est final.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Les objets de $X/u$ sont les éléments de $G(M)$, une flèche $g \to g'$ est un $m \in M$ tel que $u(m)\,g = g'$. La catégorie est non vide (elle contient $1$).
+
+Tout $x \in G(M)$ vérifie $u(b)\,x = u(a)$ pour certains $a, b \in M$. Pour $g_1, g_2$, choisissons $u(b_i)\,g_i = u(a_i)$ et posons $g = u(b_1 b_2)^{-1}$ ; alors $u(b_2 a_1)\,g = g_1$ et $u(b_1 a_2)\,g = g_2$.
+
+Si $m_1, m_2 : g \to g'$, alors $u(m_1)\,g = u(m_2)\,g$, donc $u(m_1) = u(m_2)$, donc $c\,m_1 = c\,m_2$ pour un $c \in M$, puisque $G(M)$ est le localisé de $M$ en $M$ tout entier. La flèche $c : u(c)^{-1} g \to g$ égalise $m_1$ et $m_2$.
+
+Un foncteur représentablement plat est final (mathlib, \texttt{final\_of\_representablyFlat}).
+\end{proof}
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} Dans \href{\leanblobmain/Notebook1971_4.lean}{\texttt{Notebook1971\_4.\allowbreak{}lean}}, le foncteur est \texttt{toGroupFunctor}, induit par \texttt{Algebra.GrothendieckGroup.of} ; le théorème est \texttt{representablyFlat\_toGroupFunctor}, au sens de \texttt{CategoryTheory.RepresentablyFlat} de mathlib (toutes les catégories \texttt{StructuredArrow X F} cofiltrantes), et \texttt{final\_toGroupFunctor}. Les deux axiomes de Quillen sont isolés comme énoncés sur le groupe de Grothendieck : \texttt{exists\_common} (produits) et \texttt{exists\_mul\_eq\_mul} (égaliseurs), avec \texttt{exists\_mul\_eq\_of}. Le monoïde est noté multiplicativement, comme sur la page.
+\end{sloppypar}
+
+Ne sont pas formalisés : l'équivalence des définitions de la page~24 (morphisme de topos, pro-objets, catégories d'éléments cofiltrantes), la remarque sur les $R^q\varprojlim$, et les énoncés sur les torseurs, que mathlib n'a pas sous une petite catégorie.
+
+\litterature{folklore de la complétion en groupe, retrouvé : foncteurs plats et catégories d'éléments filtrantes, SGA~4, exposés~I et~IV ; Mac~Lane--Moerdijk, \emph{Sheaves in Geometry and Logic} (1992), VII.6. mathlib a \texttt{RepresentablyFlat} et le groupe de Grothendieck, mais pas cet exemple. Il est proposé pour mathlib, et l'édition ne le donne pas pour nouveau.}

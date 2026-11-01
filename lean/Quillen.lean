@@ -1,9 +1,11 @@
 import Quillen.Notebook1968_1
 import Quillen.Notebook1968_13
+import Quillen.Notebook1968_13Rep
 import Quillen.Notebook1968_14
 import Quillen.Notebook1968_15
 import Quillen.Notebook1968_16
 import Quillen.Notebook1970_15
+import Quillen.Notebook1971_4
 import Quillen.Notebook1971_11
 import Quillen.Notebook1971_11Central
 import Quillen.Notebook1983_4

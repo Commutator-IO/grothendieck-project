@@ -1,0 +1,27 @@
+\section[Carnet 1968-13 : quand la restriction des représentations est pleine]{Carnet 1968-13 : quand la restriction des représentations est pleine\protect\verifie{Notebook1968_13Rep}}\label{sec:quillen-1968-13-rep}
+
+\emph{Le contexte.} Le \carnet{1968}{13} s'ouvre, à l'automne 1968, sur un théorème de Whitehead pour les petites catégories : un foncteur $f : \mathcal{C}_1 \to \mathcal{C}_2$ devrait être une équivalence faible dès que le retrait le long de $f$ induit une équivalence entre catégories dérivées de systèmes de coefficients localement constants. Dans la preuve de l'implication \q{(i) $\Rightarrow$ (ii)} (PDF, p.~4), Quillen se ramène au cas d'un homomorphisme de groupes et a besoin d'un petit lemme, qu'il énonce entre parenthèses : la restriction des modules le long d'un homomorphisme de groupes est pleinement fidèle exactement quand l'homomorphisme est surjectif, et une équivalence exactement quand il est bijectif. Il justifie la surjectivité en comparant les invariants du module de permutation $\mathbb{Z}[G/f(H)]$ sous les deux groupes, l'injectivité en remarquant que le noyau agit trivialement sur tout module restreint. Sur la page, les lettres $G$ et $H$ sont échangées entre l'énoncé et l'argument des rangs.
+
+\emph{L'intuition.} Une flèche entre restrictions commute à l'action de l'image $f(H)$, pas forcément à celle de $G$ ; il suffit d'un module où l'écart se voit. Dans $k[G/f(H)]$, la classe de base est fixée par $f(H)$ et par lui seul : la projection sur la droite qu'elle engendre commute à $H$, et elle ne commute à $G$ que si $G$ fixe cette classe, c'est-à-dire si $f(H) = G$. Pour l'injectivité, la représentation régulière $k[H]$ est fidèle, alors que le noyau de $f$ agit trivialement sur tout ce qui vient de $G$.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, carnet 1968-13, p.~4]\label{thm:quillen-1968-13-rep}
+Soient $f : H \to G$ un homomorphisme de groupes et $k$ un anneau commutatif non nul. Le foncteur de restriction $\operatorname{Rep}_k(G) \to \operatorname{Rep}_k(H)$ est plein si et seulement si $f$ est surjectif ; c'est une équivalence si et seulement si $f$ est bijectif.
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+La restriction est toujours fidèle : elle ne change pas l'application linéaire sous-jacente. Si $f$ est surjectif, une application $H$-linéaire entre restrictions commute à tout $g = f(h)$, donc est $G$-linéaire.
+
+Supposons la restriction pleine. Soient $V = k[G/f(H)]$, $c_0$ la classe de $f(H)$ et $p : V \to V$ l'application $x \mapsto x(c_0)\,c_0$. Pour $h \in H$, $f(h)$ et $f(h)^{-1}$ fixent $c_0$, donc $p(f(h)x) = f(h)\,p(x)$ : $p$ est $H$-linéaire. Elle provient donc d'une application $G$-linéaire, qui est encore $p$. Pour $g \in G$, on a $p(g c_0) = g\,p(c_0) = g c_0 \neq 0$ puisque $k$ est non nul, donc $g c_0 = c_0$, c'est-à-dire $g \in f(H)$.
+
+Si $f$ est bijectif, d'inverse $f^{-1}$, toute représentation $\rho$ de $H$ est la restriction de $\rho \circ f^{-1}$ ; la restriction est alors pleine, fidèle et essentiellement surjective. Réciproquement, supposons-la essentiellement surjective et soit $h \in \ker f$. La représentation régulière $k[H]$ est isomorphe à la restriction d'une représentation $W$ de $G$ ; $h$ agit sur $W$ par $f(h) = 1$, donc trivialement, et par transport il fixe $\delta_1 \in k[H]$. Or $h\,\delta_1 = \delta_h$, d'où $h = 1$.
+\end{proof}
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} Dans \href{\leanblobmain/Notebook1968_13Rep.lean}{\texttt{Notebook1968\_13Rep.\allowbreak{}lean}}, la restriction est le foncteur \texttt{Rep.resFunctor f} de mathlib. Le critère de plénitude est \texttt{full\_resFunctor\_iff}, dont le sens direct est \texttt{surjective\_of\_full}, avec la projection \texttt{proj} sur la classe de base du module \texttt{cosetRep} ; le critère d'équivalence est \texttt{isEquivalence\_resFunctor\_iff}, avec \texttt{injective\_of\_essSurj} (testé sur \texttt{regRep}) et \texttt{essSurj\_of\_bijective}. Les représentations vivent dans l'univers $\max(u, v_1, v_2)$, assez grand pour contenir les objets tests.
+\end{sloppypar}
+
+Le cas de Quillen est $k = \mathbb{Z}$ ; l'argument par les rangs des invariants est remplacé par la projection, qui lui est équivalente (une flèche depuis la représentation triviale est un invariant). N'est pas formalisé : le théorème de Whitehead lui-même, qui demande les catégories dérivées de coefficients localement constants.
+
+\litterature{folklore, retrouvé : l'inflation le long d'un quotient $G \to G/N$ identifie les $G/N$-modules aux $G$-modules sur lesquels $N$ agit trivialement, sous-catégorie pleine. mathlib a le sens \q{surjectif $\Rightarrow$ plein} (\texttt{Rep.full\_res}, et \texttt{Action.full\_res} pour les actions) mais ni la réciproque ni le critère d'équivalence. Ils sont proposés pour mathlib, et l'édition ne les donne pas pour nouveaux.}
