@@ -4,6 +4,7 @@ import 'katex/dist/katex.min.css';
 import { Footer, Header } from './components/Frame.tsx';
 import catalogueRaw from './content/buffalo.json';
 import type { Board } from './components/Blackboard.tsx';
+import { buffaloIssueUrl } from './lib/report.ts';
 
 // The reconstructed boards (git-ignored transcripts-buffalo/) are shown only
 // with RENDER_BUFFALO and in the dev server, with one exception: the first
@@ -151,7 +152,7 @@ const tex = (s: string) => katex.renderToString(s, { throwOnError: false });
 const statement = (s: string) => s.split(/(\$[^$]*\$)/).map((p) => (p.startsWith('$') ? tex(p.slice(1, -1)) : p)).join('');
 
 /** One course's index, typeset like the transcripts' reading view; a timestamp plays the tape there. */
-function CourseIndexView({ index, playing, onPlay }: { index: CourseIndex; playing: { id: string; t: number } | null; onPlay: (id: string, t: number) => void }) {
+function CourseIndexView({ course, index, playing, onPlay }: { course: string; index: CourseIndex; playing: { id: string; t: number } | null; onPlay: (id: string, t: number) => void }) {
   const html = useMemo(() => index.items.map((i) => statement(i.text)), [index]);
   return (
     <div className="buffalo-index text-[14.5px] leading-relaxed text-ink-800">
@@ -163,7 +164,7 @@ function CourseIndexView({ index, playing, onPlay }: { index: CourseIndex; playi
         ) : i.k === 'side' ? (
           <p key={n} className="mt-2 text-[12px] italic text-ink-500" dangerouslySetInnerHTML={{ __html: html[n] }} />
         ) : (
-          <div key={n} className="mt-1.5 grid grid-cols-[4.6rem_minmax(0,1fr)] gap-2">
+          <div key={n} className="group mt-1.5 grid grid-cols-[4.6rem_minmax(0,1fr)_1.5rem] gap-2">
             <button
               type="button"
               onClick={() => onPlay(i.v, i.t)}
@@ -182,6 +183,16 @@ function CourseIndexView({ index, playing, onPlay }: { index: CourseIndex; playi
               )}
               <span dangerouslySetInnerHTML={{ __html: html[n] }} />
             </p>
+            <a
+              href={buffaloIssueUrl(course, i)}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Report a problem with this entry (opens a GitHub issue)"
+              aria-label="Report a problem with this entry"
+              className="self-start pt-0.5 text-center text-[13px] text-ink-300 opacity-0 transition hover:text-brand-600 focus:opacity-100 group-hover:opacity-100"
+            >
+              ⚑
+            </a>
           </div>
         ),
       )}
@@ -297,6 +308,10 @@ export function BuffaloPage() {
                       {indexes[c.id].entries} entries ·{' '}
                       <a href={indexes[c.id].pdf} target="_blank" rel="noopener noreferrer" className={link}>
                         PDF
+                      </a>{' '}
+                      ·{' '}
+                      <a href={buffaloIssueUrl(c.title)} target="_blank" rel="noopener noreferrer" className={link}>
+                        Report a problem
                       </a>
                     </>
                   )}
@@ -340,7 +355,7 @@ export function BuffaloPage() {
 
                 <div className="mt-6">
                   {indexes?.[c.id] ? (
-                    <CourseIndexView index={indexes[c.id]} playing={playing} onPlay={play} />
+                    <CourseIndexView course={c.title} index={indexes[c.id]} playing={playing} onPlay={play} />
                   ) : (
                     <p className="text-[13px] text-ink-400">Loading the index…</p>
                   )}

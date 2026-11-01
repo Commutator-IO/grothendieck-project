@@ -154,3 +154,26 @@ export function commentIssueUrl(ctx: CommentContext, quote: string, comment: str
   const labels = ctx.kind === 'reading' ? `&labels=${encodeURIComponent('reading')}` : '';
   return `${REPO}/issues/new?title=${encodeURIComponent(title.slice(0, 140))}&body=${encodeURIComponent(body)}${labels}`;
 }
+
+/** A prefilled issue about one entry of a Buffalo index of results, or about a course's index as a whole. */
+export function buffaloIssueUrl(course: string, entry?: { v: string; t: number; ts: string; text: string; kind?: string }): string {
+  const plain = entry?.text.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  const title = entry ? `[Buffalo ${course} ${entry.ts}] ` : `[Buffalo ${course}] `;
+  const body = [
+    `**Course** ${course}`,
+    entry ? `**Moment** ${entry.ts}, https://www.youtube.com/watch?v=${entry.v}&t=${entry.t}s` : '**Moment** <video and timestamp, if any>',
+    entry?.kind ? `**Kind** ${entry.kind}` : null,
+    '',
+    plain ? `> ${plain}` : null,
+    '',
+    '### What is wrong, or missing',
+    '',
+    '### What you hear on the tape',
+    '',
+    '---',
+    'Sent from the Buffalo tab. The index is ours (one line per result, our own words); please quote the lecture only briefly.',
+  ]
+    .filter((l) => l !== null)
+    .join('\n');
+  return `${REPO}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}&labels=${encodeURIComponent('buffalo')}`;
+}
