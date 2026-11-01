@@ -1,4 +1,4 @@
-import Mathlib
+import Bourbaki.Upstream.ContDiffIsMeagreImage
 
 /-!
 # Bourbaki rédaction n° 162: `C¹` maps in equal dimension send meagre sets to meagre sets
@@ -27,6 +27,12 @@ meagre.
 * `isMeagre_image`: Prop. 3;
 * `not_isMeagre_fst_image`: the first projection `ℝ × ℝ → ℝ` sends a nowhere dense set to a
   non-meagre set, so Prop. 3 fails between spaces of different dimensions.
+
+The general statements live in `Bourbaki/Upstream/ContDiffIsMeagreImage.lean`
+(`ContDiffOn.isNowhereDense_image_inter_det_fderiv_eq_zero`,
+`ContDiffOn.isMeagre_image_inter_det_fderiv_eq_zero`, `ContDiffOn.exists_mem_nhds_isMeagre_image`,
+`ContDiffOn.isMeagre_image`, with the critical set written `{x | (fderiv ℝ f x).det = 0}`); the
+names below are kept for the articles that cite them. The counterexample stays here.
 -/
 
 open Set Filter Topology MeasureTheory
@@ -44,90 +50,27 @@ def critical (f : E → E) : Set E := {x | (fderiv ℝ f x).det = 0}
 /-- For a `C¹` map on an open set `A` and a compact `C ⊆ A`, the image of the critical points
 lying in `C` is nowhere dense. -/
 theorem isNowhereDense_image_critical (hA : IsOpen A) (hf : ContDiffOn ℝ 1 f A) {C : Set E}
-    (hC : IsCompact C) (hCA : C ⊆ A) : IsNowhereDense (f '' (C ∩ critical f)) := by
-  borelize E
-  have hdiff : ∀ x ∈ A, DifferentiableAt ℝ f x := fun x hx =>
-    (hf.contDiffAt (hA.mem_nhds hx)).differentiableAt one_ne_zero
-  have hdet : ContinuousOn (fun x => (fderiv ℝ f x).det) A :=
-    ContinuousLinearMap.continuous_det.comp_continuousOn
-      (hf.continuousOn_fderiv_of_isOpen hA le_rfl)
-  have hclosed : IsClosed (C ∩ critical f) :=
-    (hdet.mono hCA).preimage_isClosed_of_isClosed hC.isClosed isClosed_singleton
-  have hcpt : IsCompact (f '' (C ∩ critical f)) :=
-    (hC.of_isClosed_subset hclosed inter_subset_left).image_of_continuousOn
-      (hf.continuousOn.mono (inter_subset_left.trans hCA))
-  have hnull : (Measure.addHaar : Measure E) (f '' (C ∩ critical f)) = 0 :=
-    addHaar_image_eq_zero_of_det_fderivWithin_eq_zero Measure.addHaar
-      (fun x hx => (hdiff x (hCA hx.1)).hasFDerivAt.hasFDerivWithinAt) (fun _ hx => hx.2)
-  exact IsNowhereDense.of_isClosed_null (μ := Measure.addHaar) hcpt.isClosed hnull
+    (hC : IsCompact C) (hCA : C ⊆ A) : IsNowhereDense (f '' (C ∩ critical f)) :=
+  hf.isNowhereDense_image_inter_det_fderiv_eq_zero hA hC hCA
 
 /-- Prop. 2: for a `C¹` map on an open set `A`, the image of the critical points in `A` is
 meagre. -/
 theorem isMeagre_image_critical (hA : IsOpen A) (hf : ContDiffOn ℝ 1 f A) :
-    IsMeagre (f '' (A ∩ critical f)) := by
-  have hball : ∀ x, ∃ r : ℝ, x ∈ A → 0 < r ∧ Metric.closedBall x r ⊆ A := by
-    intro x
-    by_cases hx : x ∈ A
-    · obtain ⟨r, hr, hrA⟩ := Metric.nhds_basis_closedBall.mem_iff.1 (hA.mem_nhds hx)
-      exact ⟨r, fun _ => ⟨hr, hrA⟩⟩
-    · exact ⟨0, fun h => absurd h hx⟩
-  choose r hr using hball
-  obtain ⟨t, htA, htc, hcover⟩ := TopologicalSpace.countable_cover_nhdsWithin
-    (s := A) (f := fun x => Metric.closedBall x (r x))
-    fun x hx => mem_nhdsWithin_of_mem_nhds (Metric.closedBall_mem_nhds x (hr x hx).1)
-  refine (isMeagre_biUnion htc fun x hx =>
-    (isNowhereDense_image_critical hA hf (isCompact_closedBall x (r x))
-      (hr x (htA hx)).2).isMeagre).mono ?_
-  rintro _ ⟨y, ⟨hyA, hyc⟩, rfl⟩
-  obtain ⟨x, hx, hyx⟩ := mem_iUnion₂.1 (hcover hyA)
-  exact mem_iUnion₂.2 ⟨x, hx, y, ⟨hyx, hyc⟩, rfl⟩
+    IsMeagre (f '' (A ∩ critical f)) :=
+  hf.isMeagre_image_inter_det_fderiv_eq_zero hA
 
 /-- Near a regular point of a `C¹` map, the image of a meagre set is meagre. -/
 theorem exists_nhds_isMeagre_image (hA : IsOpen A) (hf : ContDiffOn ℝ 1 f A) {x : E}
     (hx : x ∈ A) (hreg : (fderiv ℝ f x).det ≠ 0) :
-    ∃ U ∈ 𝓝 x, ∀ B : Set E, IsMeagre B → IsMeagre (f '' (B ∩ U)) := by
-  set L := (fderiv ℝ f x).toContinuousLinearEquivOfDetNeZero hreg
-  have hstrict : HasStrictFDerivAt f (L : E →L[ℝ] E) x := by
-    rw [ContinuousLinearMap.coe_toContinuousLinearEquivOfDetNeZero]
-    exact (hf.contDiffAt (hA.mem_nhds hx)).hasStrictFDerivAt one_ne_zero
-  set e := hstrict.toOpenPartialHomeomorph f
-  refine ⟨e.source, e.open_source.mem_nhds hstrict.mem_toOpenPartialHomeomorph_source,
-    fun B hB => ?_⟩
-  have hB' : IsMeagre ((Subtype.val : e.source → E) ⁻¹' B) :=
-    hB.preimage_of_isOpenMap continuous_subtype_val e.open_source.isOpenMap_subtype_val
-  have himg := e.isOpenEmbedding_restrict.isInducing.isMeagre_image hB'
-  convert himg using 1
-  ext z
-  constructor
-  · rintro ⟨y, ⟨hyB, hys⟩, rfl⟩
-    exact ⟨⟨y, hys⟩, hyB, rfl⟩
-  · rintro ⟨⟨y, hys⟩, hyB, rfl⟩
-    exact ⟨y, ⟨hyB, hys⟩, rfl⟩
+    ∃ U ∈ 𝓝 x, ∀ B : Set E, IsMeagre B → IsMeagre (f '' (B ∩ U)) :=
+  hf.exists_mem_nhds_isMeagre_image hA hx hreg
 
 /-- Prop. 3: a `C¹` map from an open subset `A` of `E` to `E` sends meagre subsets of `A` to
 meagre subsets of `E`. (Since `A` is open, a subset of `A` is meagre in `A` exactly when it is
 meagre in `E`.) -/
 theorem isMeagre_image (hA : IsOpen A) (hf : ContDiffOn ℝ 1 f A) {B : Set E} (hBA : B ⊆ A)
-    (hB : IsMeagre B) : IsMeagre (f '' B) := by
-  have hloc : ∀ x, ∃ U : Set E, x ∈ A → (fderiv ℝ f x).det ≠ 0 →
-      U ∈ 𝓝 x ∧ IsMeagre (f '' (B ∩ U)) := by
-    intro x
-    by_cases h : x ∈ A ∧ (fderiv ℝ f x).det ≠ 0
-    · obtain ⟨U, hU, hUB⟩ := exists_nhds_isMeagre_image hA hf h.1 h.2
-      exact ⟨U, fun _ _ => ⟨hU, hUB B hB⟩⟩
-    · exact ⟨univ, fun h1 h2 => absurd ⟨h1, h2⟩ h⟩
-  choose U hU using hloc
-  set R := A \ critical f
-  obtain ⟨t, htR, htc, hcover⟩ := TopologicalSpace.countable_cover_nhdsWithin (s := R)
-    (f := U) fun x hx => mem_nhdsWithin_of_mem_nhds (hU x hx.1 hx.2).1
-  have hreg : IsMeagre (⋃ x ∈ t, f '' (B ∩ U x)) :=
-    isMeagre_biUnion htc fun x hx => (hU x (htR hx).1 (htR hx).2).2
-  refine ((isMeagre_image_critical hA hf).union hreg).mono ?_
-  rintro _ ⟨y, hyB, rfl⟩
-  by_cases hyc : y ∈ critical f
-  · exact Or.inl ⟨y, ⟨hBA hyB, hyc⟩, rfl⟩
-  · obtain ⟨x, hx, hyx⟩ := mem_iUnion₂.1 (hcover ⟨hBA hyB, hyc⟩)
-    exact Or.inr (mem_iUnion₂.2 ⟨x, hx, y, ⟨hyB, hyx⟩, rfl⟩)
+    (hB : IsMeagre B) : IsMeagre (f '' B) :=
+  hf.isMeagre_image hA hBA hB
 
 /-- Equal dimension is needed: the first projection `ℝ × ℝ → ℝ`, of class `C^n` for every
 `n`, sends the nowhere dense line `ℝ × {0}` onto `ℝ`, which is not meagre. -/

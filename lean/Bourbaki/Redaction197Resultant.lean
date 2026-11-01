@@ -1,4 +1,4 @@
-import Mathlib
+import Bourbaki.Upstream.ResultantProdXSubC
 
 /-!
 # Bourbaki rédaction n° 197: the Chow form of a product of point sets as a resultant
@@ -35,6 +35,12 @@ convention `Res(X - r, g) = g(r)` (`Polynomial.resultant_X_sub_C_left`).
 The link between `∏ᵢⱼ (u₀ + u·xᵢ + v·yⱼ)` and the Chow form of the projective closure of the
 product (the dehomogenised Chow form of a zero-cycle is the product of the linear forms at its
 points) is not formalised.
+
+The general statements live in `Bourbaki/Upstream/ResultantProdXSubC.lean`
+(`Polynomial.resultant_prod_X_sub_C_left`, `Polynomial.resultant_prod_X_sub_C_left'`,
+`Polynomial.prod_add_add_eq_resultant`, `Polynomial.prod_X_add_add_eq_resultant`); the degree
+of `∏ᵢ (X − αᵢ)` is Mathlib's `Polynomial.natDegree_finsetProd_X_sub_C_eq_card`. The names below
+are kept for the articles.
 -/
 
 open Polynomial
@@ -45,26 +51,21 @@ variable {R : Type*} [CommRing R] {ι κ : Type*}
 
 /-- The polynomial `∏ᵢ (X − αᵢ)` has degree the number of factors (over a nontrivial ring). -/
 theorem natDegree_prod_X_sub_C [Nontrivial R] (s : Finset ι) (α : ι → R) :
-    (∏ i ∈ s, (X - C (α i))).natDegree = s.card := by
-  rw [natDegree_prod_of_monic _ _ fun i _ => monic_X_sub_C (α i)]
-  simp
+    (∏ i ∈ s, (X - C (α i))).natDegree = s.card :=
+  natDegree_finsetProd_X_sub_C_eq_card s α
 
-/-- **Resultant against a product of linear factors**, over any commutative ring: for
-`P = ∏ᵢ (X − αᵢ)` and a polynomial `Q` read with formal degree `n ≥ deg Q`,
-`Res(P, Q) = ∏ᵢ Q(αᵢ)`. -/
+/-- **Resultant against a product of linear factors**, over any commutative ring:
+`Res(∏ᵢ (X − αᵢ), Q) = ∏ᵢ Q(αᵢ)` for a formal degree `n ≥ deg Q`. -/
 theorem resultant_prod_X_sub_C (s : Finset ι) (α : ι → R) (Q : R[X]) (n : ℕ)
     (hn : Q.natDegree ≤ n) :
     (∏ i ∈ s, (X - C (α i))).resultant Q (∏ i ∈ s, (X - C (α i))).natDegree n =
-      ∏ i ∈ s, Q.eval (α i) := by
-  nontriviality R
-  rw [resultant_prod_left _ _ _ _ (by simp) hn]
-  refine Finset.prod_congr rfl fun i _ => ?_
-  rw [natDegree_X_sub_C, resultant_X_sub_C_left _ _ _ hn]
+      ∏ i ∈ s, Q.eval (α i) :=
+  resultant_prod_X_sub_C_left s α Q n hn
 
 /-- The same, with the formal degrees left at their defaults. -/
 theorem resultant_prod_X_sub_C' (s : Finset ι) (α : ι → R) (Q : R[X]) :
     (∏ i ∈ s, (X - C (α i))).resultant Q = ∏ i ∈ s, Q.eval (α i) :=
-  resultant_prod_X_sub_C s α Q _ le_rfl
+  resultant_prod_X_sub_C_left' s α Q
 
 /-- **Composed sum as a resultant** (énoncé de l'édition): for `t` and families `aᵢ`, `bⱼ` of a
 commutative ring, `∏ᵢⱼ (t + aᵢ + bⱼ) = Res_z(∏ᵢ (z + aᵢ), ∏ⱼ (t − z + bⱼ))`. The roots
@@ -72,15 +73,8 @@ commutative ring, `∏ᵢⱼ (t + aᵢ + bⱼ) = Res_z(∏ᵢ (z + aᵢ), ∏ⱼ
 theorem prod_add_add_eq_resultant (s : Finset ι) (t' : Finset κ) (a : ι → R) (b : κ → R)
     (t : R) :
     ∏ i ∈ s, ∏ j ∈ t', (t + a i + b j) =
-      (∏ i ∈ s, (X + C (a i))).resultant (∏ j ∈ t', (C t - X + C (b j))) := by
-  have hP : ∏ i ∈ s, (X + C (a i)) = ∏ i ∈ s, (X - C (-a i)) := by
-    simp [sub_eq_add_neg]
-  rw [hP, resultant_prod_X_sub_C']
-  refine Finset.prod_congr rfl fun i _ => ?_
-  rw [eval_prod]
-  refine Finset.prod_congr rfl fun j _ => ?_
-  simp only [eval_add, eval_sub, eval_C, eval_X]
-  ring
+      (∏ i ∈ s, (X + C (a i))).resultant (∏ j ∈ t', (C t - X + C (b j))) :=
+  Polynomial.prod_add_add_eq_resultant s t' a b t
 
 /-- **Composed sum over the polynomial ring in `t`**: in `R[t]`, with `t = X`,
 `∏ᵢⱼ (t + aᵢ + bⱼ) = Res_z(∏ᵢ (z + aᵢ), ∏ⱼ (t − z + bⱼ))`, the resultant being taken in
@@ -89,7 +83,7 @@ theorem prod_X_add_add_eq_resultant (s : Finset ι) (t' : Finset κ) (a : ι →
     ∏ i ∈ s, ∏ j ∈ t', (X + C (a i) + C (b j) : R[X]) =
       (∏ i ∈ s, (X + C (C (a i)) : R[X][X])).resultant
         (∏ j ∈ t', (C X - X + C (C (b j)))) :=
-  prod_add_add_eq_resultant s t' (fun i => C (a i)) (fun j => C (b j)) X
+  Polynomial.prod_X_add_add_eq_resultant s t' a b
 
 /-- **The identity of the page for point sets** (énoncé de l'édition): for points `xᵢ ∈ Rⁿ`
 and `yⱼ ∈ Rᵐ`, coefficients `u ∈ Rⁿ`, `v ∈ Rᵐ` and `u₀ ∈ R`, with `R_X(z) = ∏ᵢ (z + u·xᵢ)` and

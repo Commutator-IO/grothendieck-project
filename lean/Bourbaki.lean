@@ -34,6 +34,16 @@ import Bourbaki.Redaction596
 import Bourbaki.Redaction596Algebras
 import Bourbaki.Redaction596Characters
 import Bourbaki.Redaction596Modules
+import Bourbaki.Upstream.AbelianCommSqExact
+import Bourbaki.Upstream.AeNormSqLeOfInner
+import Bourbaki.Upstream.BiprodShear
+import Bourbaki.Upstream.ContDiffIsMeagreImage
+import Bourbaki.Upstream.FlatAssociatedPrimes
+import Bourbaki.Upstream.FractionRingQuotient
+import Bourbaki.Upstream.FrobeniusRangePow
+import Bourbaki.Upstream.InjectiveIffDivisible
+import Bourbaki.Upstream.ResultantProdXSubC
+import Bourbaki.Upstream.SemiCartesianSquare
 
 /-
 The Bourbaki library: statements read in the rédactions of the Bourbaki archive

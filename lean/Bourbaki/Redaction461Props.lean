@@ -1,4 +1,6 @@
 import Mathlib
+import Bourbaki.Upstream.AbelianCommSqExact
+import Bourbaki.Upstream.BiprodShear
 
 /-!
 # Bourbaki, rédaction n° 461 (February 1966): three propositions of Chevalley's abelian categories
@@ -48,6 +50,14 @@ structure is constructed here.
 * `Fracteurs`: Definition 4;
 * `Fracteurs.J_eq`, `Fracteurs.Q_eq`: Lemma 1, two injections (surjections) with the same
   source and target are equal.
+
+The general statements of Proposition 24 and of the first Proposition 41 live in
+`Bourbaki/Upstream/BiprodShear.lean` (namespace `CategoryTheory.SemiadditiveOfBinaryBiproducts`:
+`shear`, `eq_zero_of_comp_shear_eq_zero` for `shear_weakMono`, `eq_zero_of_shear_comp_eq_zero`
+for `shear_weakEpi`, `WeakMonoEpiInvertible`, `exists_add_eq_zero_of_weakMonoEpiInvertible`,
+`preadditiveOfWeakMonoEpiInvertible`) and `Bourbaki/Upstream/AbelianCommSqExact.lean`
+(`CategoryTheory.ShortComplex.exact_of_isPullback_of_epi` for `exact_top_row`); the names
+below are aliases kept for the articles that cite them.
 -/
 
 open CategoryTheory Limits
@@ -58,101 +68,39 @@ section SubAdditive
 
 open SemiadditiveOfBinaryBiproducts
 
-variable {C : Type*} [Category C] [HasZeroMorphisms C] [HasBinaryBiproducts C]
-
-attribute [local instance] addCommMonoidHomOfHasBinaryBiproducts
-
 /-- The shear map `(x, y) ↦ (x, x + y)` of `X ⊞ X`, the matrix `(1 0; 1 1)` of the page. -/
-noncomputable def shear (X : C) : X ⊞ X ⟶ X ⊞ X :=
-  biprod.lift biprod.fst (biprod.desc (𝟙 X) (𝟙 X))
+alias shear := SemiadditiveOfBinaryBiproducts.shear
 
-theorem lift_comp_shear {Z X : C} (g₁ g₂ : Z ⟶ X) :
-    biprod.lift g₁ g₂ ≫ shear X = biprod.lift g₁ (g₁ + g₂) := by
-  ext
-  · simp [shear]
-  · simp [shear, add_eq_left_addition]
+alias lift_comp_shear := SemiadditiveOfBinaryBiproducts.lift_comp_shear
 
-theorem inl_comp_shear (X : C) : biprod.inl ≫ shear X = biprod.lift (𝟙 X) (𝟙 X) := by
-  ext <;> simp [shear]
+alias inl_comp_shear := SemiadditiveOfBinaryBiproducts.inl_comp_shear
 
-theorem inr_comp_shear (X : C) : biprod.inr ≫ shear X = biprod.inr := by
-  ext <;> simp [shear]
+alias inr_comp_shear := SemiadditiveOfBinaryBiproducts.inr_comp_shear
 
-theorem shear_comp_desc {X Z : C} (h₁ h₂ : X ⟶ Z) :
-    shear X ≫ biprod.desc h₁ h₂ = biprod.desc (h₁ + h₂) h₂ := by
-  ext
-  · rw [← Category.assoc, inl_comp_shear, biprod.inl_desc, add_eq_right_addition]
-  · rw [← Category.assoc, inr_comp_shear, biprod.inr_desc, biprod.inr_desc]
+alias shear_comp_desc := SemiadditiveOfBinaryBiproducts.shear_comp_desc
 
-theorem shear_weakMono (X : C) ⦃Z : C⦄ (g : Z ⟶ X ⊞ X) (hg : g ≫ shear X = 0) : g = 0 := by
-  have e : g = biprod.lift (g ≫ biprod.fst) (g ≫ biprod.snd) := by ext <;> simp
-  rw [e] at hg ⊢
-  rw [lift_comp_shear] at hg
-  have h₁ := congrArg (· ≫ biprod.fst) hg
-  have h₂ := congrArg (· ≫ biprod.snd) hg
-  simp only [biprod.lift_fst, biprod.lift_snd, zero_comp] at h₁ h₂
-  rw [h₁, zero_add] at h₂
-  ext <;> simp [h₁, h₂]
+alias shear_weakMono := eq_zero_of_comp_shear_eq_zero
 
-theorem shear_weakEpi (X : C) ⦃Z : C⦄ (h : X ⊞ X ⟶ Z) (hh : shear X ≫ h = 0) : h = 0 := by
-  have e : h = biprod.desc (biprod.inl ≫ h) (biprod.inr ≫ h) := by ext <;> simp
-  rw [e] at hh ⊢
-  rw [shear_comp_desc] at hh
-  have h₁ := congrArg (biprod.inl ≫ ·) hh
-  have h₂ := congrArg (biprod.inr ≫ ·) hh
-  simp only [biprod.inl_desc, biprod.inr_desc, comp_zero] at h₁ h₂
-  rw [h₂, add_zero] at h₁
-  ext <;> simp [h₁, h₂]
+alias shear_weakEpi := eq_zero_of_shear_comp_eq_zero
 
-theorem exists_add_id_eq_zero_of_isIso (X : C) [IsIso (shear X)] : ∃ g : X ⟶ X, 𝟙 X + g = 0 := by
-  refine ⟨biprod.inl ≫ inv (shear X) ≫ biprod.snd, ?_⟩
-  have e : biprod.inl ≫ inv (shear X) = biprod.lift (biprod.inl ≫ inv (shear X) ≫ biprod.fst)
-      (biprod.inl ≫ inv (shear X) ≫ biprod.snd) := by ext <;> simp
-  have h := congrArg (· ≫ shear X) e
-  simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id, lift_comp_shear] at h
-  have h₁ := congrArg (· ≫ biprod.fst) h
-  have h₂ := congrArg (· ≫ biprod.snd) h
-  simp only [biprod.inl_fst, biprod.inl_snd, biprod.lift_fst, biprod.lift_snd] at h₁ h₂
-  rw [← h₁] at h₂
-  exact h₂.symm
+alias exists_add_id_eq_zero_of_isIso :=
+  SemiadditiveOfBinaryBiproducts.exists_add_id_eq_zero_of_isIso
 
 /-- Chevalley's hypothesis: a morphism with zero kernel and zero cokernel is invertible. -/
-def WeakMonoEpiInvertible (C : Type*) [Category C] [HasZeroMorphisms C] : Prop :=
-  ∀ ⦃X Y : C⦄ (f : X ⟶ Y), (∀ ⦃Z : C⦄ (g : Z ⟶ X), g ≫ f = 0 → g = 0) →
-    (∀ ⦃Z : C⦄ (g : Y ⟶ Z), f ≫ g = 0 → g = 0) → IsIso f
+alias WeakMonoEpiInvertible := SemiadditiveOfBinaryBiproducts.WeakMonoEpiInvertible
 
-theorem exists_add_eq_zero (H : WeakMonoEpiInvertible C) {X Y : C} (f : X ⟶ Y) :
-    ∃ g : X ⟶ Y, f + g = 0 := by
-  have := H (shear X) (shear_weakMono X) (shear_weakEpi X)
-  obtain ⟨g, hg⟩ := exists_add_id_eq_zero_of_isIso X
-  refine ⟨g ≫ f, ?_⟩
-  have := congrArg (· ≫ f) hg
-  simpa [add_comp] using this
+alias exists_add_eq_zero := exists_add_eq_zero_of_weakMonoEpiInvertible
 
 /-- **Proposition 24** in its structural form: under Chevalley's hypothesis, the commutative
 monoid structure on the hom-sets given by the biproducts is that of a preadditive category. -/
-@[instance_reducible]
-noncomputable def preadditive (H : WeakMonoEpiInvertible C) : Preadditive C where
-  homGroup X Y :=
-    letI : Neg (X ⟶ Y) := ⟨fun f => (exists_add_eq_zero H f).choose⟩
-    { AddGroup.ofLeftAxioms add_assoc zero_add fun f => by
-        rw [add_comm]
-        exact (exists_add_eq_zero H f).choose_spec with
-      add_comm := add_comm }
-  add_comp _ _ _ _ _ _ := add_comp _ _ _
-  comp_add _ _ _ _ _ _ := comp_add _ _ _
+alias preadditive := preadditiveOfWeakMonoEpiInvertible
 
 /-- The addition of `preadditive H` is the one given by the biproducts. -/
-theorem preadditive_add (H : WeakMonoEpiInvertible C) {X Y : C} (f g : X ⟶ Y) :
-    @HAdd.hAdd (X ⟶ Y) (X ⟶ Y) (X ⟶ Y)
-      (@instHAdd _ (@Preadditive.homGroup C _ (preadditive H) X Y).toAdd) f g = f + g :=
-  rfl
+alias preadditive_add := preadditiveOfWeakMonoEpiInvertible_add
 
 end SubAdditive
 
 section FirstProp41
-
-variable {C : Type*} [Category C] [Abelian C]
 
 /-- **First Proposition 41** (pp. 105–106). In a commutative diagram
 ```
@@ -163,24 +111,7 @@ variable {C : Type*} [Category C] [Abelian C]
 ```
 with `α` epi, the right square cartesian, `φ₀ ≫ ξ₀ = 0` and the bottom row exact, the top row
 is exact. -/
-theorem exact_top_row {a₀ b₀ c₀ a₁ b₁ c₁ : C} {φ₀ : a₀ ⟶ b₀} {ξ₀ : b₀ ⟶ c₀}
-    {φ₁ : a₁ ⟶ b₁} {ξ₁ : b₁ ⟶ c₁} {α : a₀ ⟶ a₁} {β : b₀ ⟶ b₁} {γ : c₀ ⟶ c₁}
-    (wl : φ₀ ≫ β = α ≫ φ₁) (hI : IsPullback ξ₀ β γ ξ₁) [Epi α] (h₀ : φ₀ ≫ ξ₀ = 0)
-    (h₁ : φ₁ ≫ ξ₁ = 0) (hex : (ShortComplex.mk φ₁ ξ₁ h₁).Exact) :
-    (ShortComplex.mk φ₀ ξ₀ h₀).Exact := by
-  rw [ShortComplex.exact_iff_exact_up_to_refinements]
-  intro A x hx
-  dsimp at x hx ⊢
-  have hxβ : (x ≫ β) ≫ ξ₁ = 0 := by
-    rw [Category.assoc, ← hI.w, ← Category.assoc, hx, zero_comp]
-  obtain ⟨A₁, π₁, _, y, hy⟩ := hex.exact_up_to_refinements (x ≫ β) hxβ
-  obtain ⟨A₂, π₂, _, z, hz⟩ := surjective_up_to_refinements_of_epi α y
-  refine ⟨A₂, π₂ ≫ π₁, inferInstance, z, ?_⟩
-  dsimp at hy ⊢
-  apply hI.hom_ext
-  · simp [hx, h₀]
-  · simp only [Category.assoc]
-    rw [hy, reassoc_of% hz, wl]
+alias exact_top_row := ShortComplex.exact_of_isPullback_of_epi
 
 end FirstProp41
 
