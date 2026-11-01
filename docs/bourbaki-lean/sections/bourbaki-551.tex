@@ -22,4 +22,24 @@ La diagonale est négligeable : par Fubini, sa mesure est l'intégrale en $t$ de
 \noindent\emph{Vérification en Lean.} La diagonale est négligeable pour toute mesure sans atome (\texttt{prod\_diagonal\_eq\_zero}) ; la fonction $C$ est presque partout nulle (\texttt{C\_ae\_eq\_zero}), la fonction nulle est une covariance (\texttt{zero\_posSemidef}), et $C$ échoue pour $n = 1$ en tout point (\texttt{C\_not\_pseudoCovariance}), dans \href{\leanblobmain/Redaction551.lean}{\texttt{Redaction551.\allowbreak{}lean}}. Le théorème~5 corrigé n'est pas formalisé.
 \end{sloppypar}
 
-\litterature{les noyaux de type positif sont classiques (Aronszajn, 1950 ; Berg, Christensen et Ressel, \emph{Harmonic Analysis on Semigroups}, 1984). Le défaut est relevé dans la rédaction même, par sa \q{Note de l'éditeur} ; l'édition le formalise sans le donner pour nouveau. Le théorème~6 (une majoration presque partout de $\langle f(t), f(t')\rangle$ entraîne celle de $\|f(t)\|^2$) n'a pas été retrouvé tel quel ; il n'est pas formalisé.}
+\emph{Le théorème~6.} Le théorème~6 (p.~42 du fac-similé) porte sur une covariance décomposable $C(t, t') = \sum_n f_n(t) f_n(t')$, les $f_n$ étant mesurables ; en posant $f(t) = (f_n(t))_n$, on a $C(t, t') = \langle f(t), f(t') \rangle$ dans $\ell^2$. Il affirme l'équivalence de trois conditions, dont b) : $|C| \le M$ presque partout sur $T \times T$, et c) : $C(t, t) \le M$ presque partout sur $T$. L'implication b) $\Rightarrow$ c) n'a rien d'évident, puisque la diagonale peut être négligeable ; le contre-exemple~B de l'appendice montre d'ailleurs qu'elle tombe pour une covariance bornée quelconque. La rédaction l'obtient (p.~43--44) en passant par la forme quadratique $\iint C\,u \otimes u$ et l'intégrale vectorielle $\int u f\,dm$. On en donne ici une preuve directe, par recouvrement.
+
+\begin{encadre}
+\begin{enonce}[Rédaction \redac{551}, annexe~2, théorème~6, b) $\Rightarrow$ c)]
+Soient $(T, m)$ un espace mesuré, $m$ étant $s$-finie, $H$ un espace préhilbertien réel séparable, $f : T \to H$ une application quelconque et $M$ un réel. Si $\langle f(t), f(t') \rangle \le M$ pour $(m \otimes m)$-presque tout $(t, t')$, alors $\|f(t)\|^2 \le M$ pour $m$-presque tout $t$.
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+Soient $\eta > 0$ et $\delta > 0$ avec $4\delta^2 \le \eta$, et $(d_k)$ une suite dense dans $H$. Les parties $A_k = \{t : \|f(t)\|^2 \ge M + \eta,\ \|f(t) - d_k\| < \delta\}$ recouvrent $\{\|f\|^2 \ge M + \eta\}$. Pour $t, t' \in A_k$, on a $\|f(t) - f(t')\| < 2\delta$, d'où
+\[ \langle f(t), f(t') \rangle = \tfrac12\bigl(\|f(t)\|^2 + \|f(t')\|^2 - \|f(t) - f(t')\|^2\bigr) > M + \eta - 2\delta^2 > M. \]
+Le carré $A_k \times A_k$ est donc contenu dans la partie négligeable où la majoration est en défaut. Or la mesure produit d'un pavé est le produit des mesures extérieures de ses côtés, même s'ils ne sont pas mesurables, dès que $m$ est $s$-finie ; donc $m(A_k)^2 = 0$. On conclut par réunion dénombrable sur $k$ et sur $\eta = 1/(n+1)$.
+\end{proof}
+
+\noindent La preuve n'utilise que la majoration unilatérale $\langle f(t), f(t') \rangle \le M$, et aucune mesurabilité de $f$ : la séparabilité de $H$ suffit. Le passage par $\int u f\,dm$, qui demande que $f$ soit mesurable et la troncature par les $T_p = \{C(t,t) \le p\}$, est ainsi évité.
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} Une partie dont tous les couples vérifient $M < \langle f(t), f(t')\rangle$ est négligeable (\texttt{measure\_eq\_zero\_of\_lt\_inner}, par \texttt{MeasureTheory.\allowbreak{}Measure.\allowbreak{}prod\_prod} de mathlib, valable pour des parties quelconques) ; l'inégalité sur le produit scalaire de deux vecteurs voisins est \texttt{inner\_gt\_of\_close} ; le théorème est \texttt{ae\_norm\_sq\_le}, et \texttt{ae\_norm\_sq\_le\_of\_abs} le donne sous l'hypothèse $|C| \le M$ de la page, dans \href{\leanblobmain/Redaction551Th6.lean}{\texttt{Redaction551Th6.\allowbreak{}lean}}. Les implications c) $\Rightarrow$ b) (Cauchy--Schwarz), a) $\Rightarrow$ c) et le corollaire~1 ne sont pas formalisés.
+\end{sloppypar}
+
+\litterature{les noyaux de type positif sont classiques (Aronszajn, 1950 ; Berg, Christensen et Ressel, \emph{Harmonic Analysis on Semigroups}, 1984). Le défaut est relevé dans la rédaction même, par sa \q{Note de l'éditeur} ; l'édition le formalise sans le donner pour nouveau. Le théorème~6 (une majoration presque partout de $\langle f(t), f(t')\rangle$ entraîne celle de $\|f(t)\|^2$) n'a pas été retrouvé tel quel ; son implication b) $\Rightarrow$ c) est formalisée ci-dessus.}

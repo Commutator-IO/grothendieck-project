@@ -21,7 +21,9 @@ import Bourbaki.Redaction461Slips
 import Bourbaki.Redaction469
 import Bourbaki.Redaction476
 import Bourbaki.Redaction551
+import Bourbaki.Redaction551Th6
 import Bourbaki.Redaction582
+import Bourbaki.Redaction582Annexes
 import Bourbaki.Redaction596
 import Bourbaki.Redaction596Characters
 
