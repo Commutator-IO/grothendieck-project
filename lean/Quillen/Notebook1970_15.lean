@@ -1,4 +1,5 @@
 import Mathlib
+import Quillen.Upstream.QBinomial
 
 /-!
 # Quillen, notebook 1970-15, pp. 21–22: the Möbius function of the subspace lattice
@@ -24,6 +25,10 @@ Combinatorics* I, 3.10). The number of `k`-dimensional subspaces is the Gaussian
 The other statement of the notebook first proposed for formalisation, p. 14 (a pro-`ℓ` group has
 finitely generated cohomology iff it has an open subgroup with finite cohomology), needs the
 cohomology of profinite groups, which mathlib does not have; it is not attempted.
+
+The Gaussian binomials and the `q`-binomial theorem are general and live in
+`Quillen.Upstream.QBinomial` (`qBinomial`, `prod_one_add_pow_mul_eq_sum_qBinomial`, …); the
+declarations below keep the names of this page.
 -/
 
 namespace Quillen.Notebook1970_15
@@ -34,13 +39,9 @@ variable {R : Type*} [CommRing R]
 
 /-- The Gaussian binomial `[n, k]_q`, by the `q`-Pascal recursion
 `[n+1, k+1] = [n, k] + q^(k+1) [n, k+1]`. -/
-def qBinom (q : R) : ℕ → ℕ → R
-  | _, 0 => 1
-  | 0, _ + 1 => 0
-  | n + 1, k + 1 => qBinom q n k + q ^ (k + 1) * qBinom q n (k + 1)
+abbrev qBinom (q : R) : ℕ → ℕ → R := qBinomial q
 
-@[simp] theorem qBinom_zero_right (q : R) (n : ℕ) : qBinom q n 0 = 1 := by
-  cases n <;> rfl
+@[simp] theorem qBinom_zero_right (q : R) (n : ℕ) : qBinom q n 0 = 1 := qBinomial_zero_right q n
 
 @[simp] theorem qBinom_zero_succ (q : R) (k : ℕ) : qBinom q 0 (k + 1) = 0 := rfl
 
@@ -48,49 +49,20 @@ theorem qBinom_succ_succ (q : R) (n k : ℕ) :
     qBinom q (n + 1) (k + 1) = qBinom q n k + q ^ (k + 1) * qBinom q n (k + 1) := rfl
 
 /-- `[n, k] = 0` for `k > n`. -/
-theorem qBinom_eq_zero_of_lt (q : R) : ∀ {n k : ℕ}, n < k → qBinom q n k = 0
-  | 0, k + 1, _ => rfl
-  | n + 1, k + 1, h => by
-    rw [qBinom_succ_succ, qBinom_eq_zero_of_lt q (by omega : n < k),
-      qBinom_eq_zero_of_lt q (by omega : n < k + 1), mul_zero, add_zero]
+theorem qBinom_eq_zero_of_lt (q : R) {n k : ℕ} (h : n < k) : qBinom q n k = 0 :=
+  qBinomial_eq_zero_of_lt q h
 
 /-- The `q`-binomial theorem: `∏_{i < n} (1 + q^i t) = Σ_{k ≤ n} q^(k choose 2) [n, k] t^k`. -/
 theorem prod_one_add_eq_sum (q : R) (n : ℕ) (t : R) :
     ∏ i ∈ range n, (1 + q ^ i * t) =
-      ∑ k ∈ range (n + 1), q ^ k.choose 2 * qBinom q n k * t ^ k := by
-  induction n generalizing t with
-  | zero => simp
-  | succ n ih =>
-    rw [prod_range_succ', prod_congr rfl (fun k _ => show 1 + q ^ (k + 1) * t = 1 + q ^ k * (q * t)
-      by ring), ih (q * t)]
-    have hc : ∀ k : ℕ, (k + 1).choose 2 = k.choose 2 + k := fun k => by
-      rw [Nat.choose_succ_succ', Nat.choose_one_right, add_comm]
-    have h1 : ∀ k ∈ range (n + 1), q ^ k.choose 2 * qBinom q n k * (q * t) ^ k * t =
-        q ^ (k + 1).choose 2 * qBinom q n k * t ^ (k + 1) := fun k _ => by
-      rw [hc, pow_add, mul_pow, pow_succ]; ring
-    have h2 : ∀ k ∈ range n, q ^ (k + 1).choose 2 * qBinom q n (k + 1) * (q * t) ^ (k + 1) =
-        q ^ (k + 1).choose 2 * (q ^ (k + 1) * qBinom q n (k + 1)) * t ^ (k + 1) := fun k _ => by
-      rw [mul_pow]; ring
-    -- left: `S * (1 + t) = S + S * t`, with `S * t` the shifted sum
-    rw [pow_zero, one_mul, mul_add, mul_one, sum_mul, sum_congr rfl h1,
-      sum_range_succ' (fun k => q ^ k.choose 2 * qBinom q n k * (q * t) ^ k), sum_congr rfl h2]
-    -- right: split at `k = 0`, apply the recursion, drop the vanishing term `k = n + 1`
-    rw [sum_range_succ' _ (n + 1)]
-    simp only [qBinom_succ_succ, mul_add, add_mul, sum_add_distrib]
-    rw [sum_range_succ (fun k => q ^ (k + 1).choose 2 * (q ^ (k + 1) * qBinom q n (k + 1)) *
-      t ^ (k + 1)), qBinom_eq_zero_of_lt q (Nat.lt_succ_self n)]
-    simp only [Nat.choose_zero_succ, pow_zero, qBinom_zero_right, mul_zero, zero_mul, add_zero,
-      mul_one]
-    ring
+      ∑ k ∈ range (n + 1), q ^ k.choose 2 * qBinom q n k * t ^ k :=
+  prod_one_add_pow_mul_eq_sum_qBinomial q n t
 
 /-- The alternating sum of the Möbius function of the subspace lattice vanishes:
 `Σ_{k ≤ n} (-1)^k q^(k choose 2) [n, k] = 0` for `n ≥ 1`. -/
 theorem sum_alternating_eq_zero (q : R) {n : ℕ} (hn : 1 ≤ n) :
-    ∑ k ∈ range (n + 1), (-1) ^ k * q ^ k.choose 2 * qBinom q n k = 0 := by
-  have h := prod_one_add_eq_sum q n (-1)
-  rw [prod_eq_zero (i := 0) (mem_range.2 hn) (by simp)] at h
-  rw [h]
-  exact sum_congr rfl fun k _ => by ring
+    ∑ k ∈ range (n + 1), (-1) ^ k * q ^ k.choose 2 * qBinom q n k = 0 :=
+  sum_neg_one_pow_mul_qBinomial_eq_zero q hn
 
 /-- Quillen's check on p. 22, for rank `3`: `1 - (q² + q + 1) + q (q² + q + 1) - q³ = 0`. -/
 theorem quillen_check_rank_three (q : R) :

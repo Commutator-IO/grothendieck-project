@@ -1,4 +1,5 @@
-import Mathlib
+import Quillen.Upstream.IsPerfectNormalClosure
+import Quillen.Upstream.MatrixElementarySubgroup
 
 /-!
 # Quillen, notebooks 1968-15 and 1968-16: perfect subgroups and the elementary group
@@ -25,11 +26,17 @@ perfect groups (`Group.IsPerfect`) but neither statement.
 
 The ring `A` is any ring with unit, commutative or not, as in 1968-16. Not proved here: the
 Whitehead lemma (`E(A) = [GL(A), GL(A)]`, hence `E(A)` normal in `GL(A)`, used on 1968-16, p. 2).
+
+The proofs are general and live in `Quillen.Upstream.IsPerfectNormalClosure`
+(`Subgroup.isPerfect_normalClosure`) and `Quillen.Upstream.MatrixElementarySubgroup`
+(`Matrix.transvectionUnit`, `Matrix.elementarySubgroup`, `Matrix.isPerfect_elementarySubgroup`);
+the declarations below keep the names of this page.
 -/
 
 namespace Quillen.Notebook1968_15
 
-open Matrix
+open Matrix hiding transvectionUnit transvectionUnit_val transvectionUnit_inv_val
+  commutator_transvectionUnit
 open scoped commutatorElement
 
 section Perfect
@@ -39,14 +46,8 @@ variable {G : Type*} [Group G]
 /-- The normal closure of a perfect subgroup is perfect: each conjugate of `H` is perfect, hence
 lies in the commutator subgroup of the normal closure, which is normal. -/
 theorem normalClosure_isPerfect (H : Subgroup G) [Group.IsPerfect H] :
-    Group.IsPerfect (Subgroup.normalClosure (H : Set G)) := by
-  rw [Subgroup.isPerfect_iff]
-  set N := Subgroup.normalClosure (H : Set G)
-  refine le_antisymm (Subgroup.commutator_le_left N N) (Subgroup.normalClosure_le_normal ?_)
-  have hHN : H ≤ N := Subgroup.le_normalClosure
-  intro h hh
-  rw [← (Subgroup.commutator_eq_self : ⁅H, H⁆ = H)] at hh
-  exact Subgroup.commutator_mono hHN hHN hh
+    Group.IsPerfect (Subgroup.normalClosure (H : Set G)) :=
+  Subgroup.isPerfect_normalClosure H
 
 end Perfect
 
@@ -54,14 +55,8 @@ end Perfect
 `ZX = ZY = 0`, then `(1 + X)(1 + Y)(1 - X)(1 - Y) = 1 + Z`. -/
 theorem commutator_aux {R : Type*} [Ring R] {X Y Z : R} (hXX : X * X = 0) (hYY : Y * Y = 0)
     (hYX : Y * X = 0) (hXY : X * Y = Z) (hZX : Z * X = 0) (hZY : Z * Y = 0) :
-    (1 + X) * (1 + Y) * (1 - X) * (1 - Y) = 1 + Z := by
-  have h1 : (1 + X) * (1 + Y) = 1 + X + Y + Z := by
-    rw [← hXY]; noncomm_ring
-  have h2 : (1 + X + Y + Z) * (1 - X) = 1 + Y + Z := by
-    simp only [add_mul, mul_sub, one_mul, mul_one, hXX, hYX, hZX]; abel
-  have h3 : (1 + Y + Z) * (1 - Y) = 1 + Z := by
-    simp only [add_mul, mul_sub, one_mul, mul_one, hYY, hZY]; abel
-  rw [h1, h2, h3]
+    (1 + X) * (1 + Y) * (1 - X) * (1 - Y) = 1 + Z :=
+  one_add_mul_one_add_mul_one_sub_mul_one_sub hXX hYY hYX hXY hZX hZY
 
 section Elementary
 
@@ -69,67 +64,33 @@ variable {n : Type*} [DecidableEq n] [Fintype n] {A : Type*} [Ring A]
 
 /-- The elementary matrix `1 + a eᵢⱼ`, `i ≠ j`, as a unit of the matrix ring; its inverse is
 `1 - a eᵢⱼ`. -/
-def transvectionUnit {i j : n} (h : i ≠ j) (a : A) : (Matrix n n A)ˣ where
-  val := 1 + single i j a
-  inv := 1 + single i j (-a)
-  val_inv := by
-    have h0 : single i j a * single i j (-a) = (0 : Matrix n n A) :=
-      single_mul_single_of_ne (h := h.symm) ..
-    rw [add_mul, mul_add, mul_add, one_mul, mul_one, one_mul, h0, add_zero, add_assoc,
-      ← single_add, neg_add_cancel, single_zero, add_zero]
-  inv_val := by
-    have h0 : single i j (-a) * single i j a = (0 : Matrix n n A) :=
-      single_mul_single_of_ne (h := h.symm) ..
-    rw [add_mul, mul_add, mul_add, one_mul, mul_one, one_mul, h0, add_zero, add_assoc,
-      ← single_add, add_neg_cancel, single_zero, add_zero]
+abbrev transvectionUnit {i j : n} (h : i ≠ j) (a : A) : (Matrix n n A)ˣ :=
+  Matrix.transvectionUnit h a
 
-@[simp] theorem transvectionUnit_val {i j : n} (h : i ≠ j) (a : A) :
+theorem transvectionUnit_val {i j : n} (h : i ≠ j) (a : A) :
     ((transvectionUnit h a : (Matrix n n A)ˣ) : Matrix n n A) = 1 + single i j a := rfl
 
-@[simp] theorem transvectionUnit_inv_val {i j : n} (h : i ≠ j) (a : A) :
-    (((transvectionUnit h a)⁻¹ : (Matrix n n A)ˣ) : Matrix n n A) = 1 - single i j a := by
-  show 1 + single i j (-a) = _
-  rw [← single_neg, ← sub_eq_add_neg]
+theorem transvectionUnit_inv_val {i j : n} (h : i ≠ j) (a : A) :
+    (((transvectionUnit h a)⁻¹ : (Matrix n n A)ˣ) : Matrix n n A) = 1 - single i j a :=
+  Matrix.transvectionUnit_inv_val h a
 
 /-- The commutator formula: for `i, k, j` pairwise distinct,
 `⁅1 + a eᵢₖ, 1 + b eₖⱼ⁆ = 1 + a b eᵢⱼ`. -/
 theorem commutator_transvectionUnit {i j k : n} (hik : i ≠ k) (hkj : k ≠ j) (hij : i ≠ j)
     (a b : A) :
-    ⁅transvectionUnit hik a, transvectionUnit hkj b⁆ = transvectionUnit hij (a * b) := by
-  ext : 1
-  rw [commutatorElement_def]
-  simp only [Units.val_mul, transvectionUnit_val, transvectionUnit_inv_val]
-  exact commutator_aux (single_mul_single_of_ne (h := hik.symm) ..)
-    (single_mul_single_of_ne (h := hkj.symm) ..) (single_mul_single_of_ne (h := hij.symm) ..)
-    (single_mul_single_same ..) (single_mul_single_of_ne (h := hij.symm) ..)
-    (single_mul_single_of_ne (h := hkj.symm) ..)
+    ⁅transvectionUnit hik a, transvectionUnit hkj b⁆ = transvectionUnit hij (a * b) :=
+  Matrix.commutator_transvectionUnit hik hkj hij a b
 
 /-- The elementary subgroup `E(n, A)` of the units of `Matrix n n A`, generated by the
 `1 + a eᵢⱼ`, `i ≠ j`. -/
-def elementary (n : Type*) [DecidableEq n] [Fintype n] (A : Type*) [Ring A] :
+abbrev elementary (n : Type*) [DecidableEq n] [Fintype n] (A : Type*) [Ring A] :
     Subgroup (Matrix n n A)ˣ :=
-  Subgroup.closure {g | ∃ (i j : n) (h : i ≠ j) (a : A), g = transvectionUnit h a}
+  Matrix.elementarySubgroup n A
 
 /-- `E(n, A)` is perfect as soon as `n` has at least three elements: every generator
 `1 + a eᵢⱼ` is the commutator of `1 + a eᵢₖ` and `1 + eₖⱼ` for a third index `k`. -/
-theorem elementary_isPerfect (h3 : 3 ≤ Fintype.card n) : Group.IsPerfect (elementary n A) := by
-  rw [Subgroup.isPerfect_iff]
-  refine le_antisymm (Subgroup.commutator_le.2 fun g hg h hh => ?_) ((Subgroup.closure_le _).2 ?_)
-  · exact mul_mem (mul_mem (mul_mem hg hh) (inv_mem hg)) (inv_mem hh)
-  rintro g ⟨i, j, hij, a, rfl⟩
-  obtain ⟨k, hki, hkj⟩ : ∃ k, k ≠ i ∧ k ≠ j := by
-    by_contra hcon
-    push Not at hcon
-    have hsub : (Finset.univ : Finset n) ⊆ {i, j} := fun x _ => by
-      by_cases hx : x = i
-      · simp [hx]
-      · simp [hcon x hx]
-    have := (Finset.card_le_card hsub).trans (Finset.card_insert_le _ _)
-    rw [Finset.card_univ, Finset.card_singleton] at this
-    omega
-  rw [← mul_one a, ← commutator_transvectionUnit hki.symm hkj hij a 1]
-  exact Subgroup.commutator_mem_commutator (Subgroup.subset_closure ⟨i, k, _, a, rfl⟩)
-    (Subgroup.subset_closure ⟨k, j, _, 1, rfl⟩)
+theorem elementary_isPerfect (h3 : 3 ≤ Fintype.card n) : Group.IsPerfect (elementary n A) :=
+  Matrix.isPerfect_elementarySubgroup h3
 
 end Elementary
 

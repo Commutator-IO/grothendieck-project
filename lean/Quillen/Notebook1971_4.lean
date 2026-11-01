@@ -1,4 +1,4 @@
-import Mathlib
+import Quillen.Upstream.GrothendieckGroup
 
 /-!
 # Quillen, notebook 1971-4, p. 25: a monoid and its group completion
@@ -38,6 +38,12 @@ torsor statements around it (mathlib has no torsors under a small category).
 Literature: folklore of group completion. Flat functors and their categories of elements are in
 SGA 4, Exp. I and IV; Mac Lane–Moerdijk, *Sheaves in Geometry and Logic*, VII.6. Mathlib has
 `RepresentablyFlat` and the Grothendieck group but not this example.
+
+The proofs are general and live in `Quillen.Upstream.GrothendieckGroup`
+(`Algebra.GrothendieckGroup.exists_of_mul_eq_of`, `…of_eq_of_iff`,
+`…representablyFlat_toFunctor_of`, with additive versions); Mathlib has the underlying
+localization facts (`Submonoid.LocalizationMap.surj`, `Submonoid.LocalizationMap.eq_iff_exists`)
+but not this API. The declarations below keep the names of this page.
 -/
 
 namespace Quillen.Notebook1971_4
@@ -51,29 +57,21 @@ variable {M : Type u} [CommMonoid M]
 /-- Every element of the Grothendieck group becomes an element of `M` after multiplication by an
 element of `M`. -/
 lemma exists_mul_eq_of (x : GrothendieckGroup M) : ∃ b a : M, GrothendieckGroup.of b * x =
-    GrothendieckGroup.of a := by
-  obtain ⟨⟨a, b⟩, h⟩ := (Localization.monoidOf (⊤ : Submonoid M)).surj x
-  exact ⟨b, a, by rw [mul_comm]; exact h⟩
+    GrothendieckGroup.of a :=
+  GrothendieckGroup.exists_of_mul_eq_of x
 
 /-- **Product axiom** (1971-4, p. 25, ii): any two elements of the Grothendieck group are
 translates of a common element by elements of `M`. -/
 theorem exists_common (g₁ g₂ : GrothendieckGroup M) :
     ∃ (g : GrothendieckGroup M) (m₁ m₂ : M),
-      GrothendieckGroup.of m₁ * g = g₁ ∧ GrothendieckGroup.of m₂ * g = g₂ := by
-  obtain ⟨b₁, a₁, h₁⟩ := exists_mul_eq_of g₁
-  obtain ⟨b₂, a₂, h₂⟩ := exists_mul_eq_of g₂
-  refine ⟨(GrothendieckGroup.of (b₁ * b₂))⁻¹, b₂ * a₁, b₁ * a₂, ?_, ?_⟩
-  · rw [map_mul, map_mul, ← h₁, mul_inv_eq_iff_eq_mul]
-    ac_rfl
-  · rw [map_mul, map_mul, ← h₂, mul_inv_eq_iff_eq_mul]
-    ac_rfl
+      GrothendieckGroup.of m₁ * g = g₁ ∧ GrothendieckGroup.of m₂ * g = g₂ :=
+  GrothendieckGroup.exists_of_mul_eq_and_of_mul_eq g₁ g₂
 
 /-- **Equaliser axiom** (1971-4, p. 25, i): two elements of `M` with the same image in the
 Grothendieck group are equalised by multiplication by an element of `M`. -/
 theorem exists_mul_eq_mul {m₁ m₂ : M} (h : GrothendieckGroup.of m₁ = GrothendieckGroup.of m₂) :
-    ∃ c : M, c * m₁ = c * m₂ := by
-  obtain ⟨⟨c, _⟩, hc⟩ := (Localization.monoidOf (⊤ : Submonoid M)).eq_iff_exists.1 h
-  exact ⟨c, hc⟩
+    ∃ c : M, c * m₁ = c * m₂ :=
+  GrothendieckGroup.of_eq_of_iff.1 h
 
 /-- The canonical map `M → G(M)` as a functor between one-object categories. -/
 abbrev toGroupFunctor (M : Type u) [CommMonoid M] :
@@ -83,28 +81,12 @@ abbrev toGroupFunctor (M : Type u) [CommMonoid M] :
 /-- **The map from a commutative monoid to its Grothendieck group is representably flat**
 (1971-4, p. 25): for the unique object `X`, the category `X / u` of elements of `G(M)` with
 arrows given by `M` is cofiltered. -/
-theorem representablyFlat_toGroupFunctor : RepresentablyFlat (toGroupFunctor M) where
-  cofiltered X :=
-    { cone_objs Y₁ Y₂ := by
-        obtain ⟨g, m₁, m₂, h₁, h₂⟩ := exists_common (M := M) Y₁.hom Y₂.hom
-        exact ⟨StructuredArrow.mk (Y := SingleObj.star M) g, StructuredArrow.homMk m₁ h₁,
-          StructuredArrow.homMk m₂ h₂, trivial⟩
-      cone_maps Y Y' φ ψ := by
-        have hφ := StructuredArrow.w φ
-        have hψ := StructuredArrow.w ψ
-        obtain ⟨c, hc⟩ := exists_mul_eq_mul (M := M) (m₁ := φ.right) (m₂ := ψ.right)
-          (mul_right_cancel (hφ.trans hψ.symm))
-        refine ⟨StructuredArrow.mk (Y := SingleObj.star M)
-          ((GrothendieckGroup.of c)⁻¹ * Y.hom), StructuredArrow.homMk c
-            (mul_inv_cancel_left (GrothendieckGroup.of c) Y.hom), StructuredArrow.hom_ext _ _ ?_⟩
-        change φ.right * c = ψ.right * c
-        rw [mul_comm, hc, mul_comm]
-      nonempty := ⟨StructuredArrow.mk (Y := SingleObj.star M) (1 : GrothendieckGroup M)⟩ }
+theorem representablyFlat_toGroupFunctor : RepresentablyFlat (toGroupFunctor M) :=
+  GrothendieckGroup.representablyFlat_toFunctor_of
 
 /-- Consequently `M → G(M)` is a final functor (`CategoryTheory.final_of_representablyFlat`):
 colimits over the one-object category of `G(M)` may be computed over that of `M`. -/
 theorem final_toGroupFunctor : (toGroupFunctor M).Final :=
-  have := representablyFlat_toGroupFunctor (M := M)
-  final_of_representablyFlat _
+  GrothendieckGroup.final_toFunctor_of
 
 end Quillen.Notebook1971_4

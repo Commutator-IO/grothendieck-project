@@ -1,4 +1,5 @@
 import Mathlib
+import Quillen.Upstream.MulPowCommutator
 
 /-!
 # Quillen, notebook 1971-11, pp. 70–71: the quotient of a `p`-central group by `Ω₁`
@@ -42,6 +43,10 @@ therefore not needed for this proposition.
   of `P ⧸ omega1 p P` is central;
 * `omega1_quotient_le_center`: the same, as on the page: `Ω₁(P) ≤ Z(P)` implies
   `Ω₁(P / Ω₁(P)) ≤ Z(P / Ω₁(P))`.
+
+The commutation rules are general and live in `Quillen.Upstream.MulPowCommutator`
+(`mul_pow_eq_of_commute_commutator`, …); the declarations of the section `Commutation` below keep
+the names of this page. `Ω₁` and the `p`-central quotient stay here.
 -/
 
 universe u
@@ -56,50 +61,22 @@ variable {G : Type*} [Group G]
 
 /-- If `v * u = d * u * v` and `d` commutes with `v`, then `v ^ n * u = d ^ n * u * v ^ n`. -/
 theorem pow_mul_eq_mul_pow {u v d : G} (hd : v * u = d * u * v) (hdv : Commute d v) (n : ℕ) :
-    v ^ n * u = d ^ n * u * v ^ n := by
-  induction n with
-  | zero => simp
-  | succ n ih =>
-    calc v ^ (n + 1) * u = v ^ n * (v * u) := by rw [pow_succ, mul_assoc]
-      _ = v ^ n * d * u * v := by rw [hd]; simp only [mul_assoc]
-      _ = d * (v ^ n * u) * v := by rw [← (hdv.pow_right n).eq]; simp only [mul_assoc]
-      _ = d ^ (n + 1) * u * v ^ (n + 1) := by
-        rw [ih, pow_succ' d n, pow_succ v n]; simp only [mul_assoc]
+    v ^ n * u = d ^ n * u * v ^ n :=
+  pow_mul_eq_of_commute_commutator hd hdv n
 
 /-- The power formula in class 2: if `v * u = d * u * v` and `d` commutes with `u` and `v`, then
 `(u * v) ^ n = u ^ n * v ^ n * d ^ n.choose 2`. -/
 theorem mul_pow_eq_mul_pow_mul_pow_choose {u v d : G} (hd : v * u = d * u * v)
     (hdu : Commute d u) (hdv : Commute d v) (n : ℕ) :
-    (u * v) ^ n = u ^ n * v ^ n * d ^ n.choose 2 := by
-  induction n with
-  | zero => simp
-  | succ n ih =>
-    have hc : (n + 1).choose 2 = n + n.choose 2 := by
-      rw [show (2 : ℕ) = 1 + 1 from rfl, Nat.choose_succ_succ, Nat.choose_one_right]
-    set c := n.choose 2
-    calc (u * v) ^ (n + 1) = u ^ n * v ^ n * (d ^ c * u) * v := by
-          rw [pow_succ, ih]; simp only [mul_assoc]
-      _ = u ^ n * (v ^ n * u) * d ^ c * v := by
-          rw [(hdu.pow_left c).eq]; simp only [mul_assoc]
-      _ = u ^ n * (d ^ n * u) * v ^ n * d ^ c * v := by
-          rw [pow_mul_eq_mul_pow hd hdv n]; simp only [mul_assoc]
-      _ = u ^ n * u * (d ^ n * v ^ n) * d ^ c * v := by
-          rw [(hdu.pow_left n).eq]; simp only [mul_assoc]
-      _ = u ^ n * u * (v ^ n * ((d ^ n * d ^ c) * v)) := by
-          rw [((hdv.pow_left n).pow_right n).eq]; simp only [mul_assoc]
-      _ = u ^ n * u * (v ^ n * (v * (d ^ n * d ^ c))) := by
-          rw [((hdv.pow_left n).mul_left (hdv.pow_left c)).eq]
-      _ = u ^ (n + 1) * v ^ (n + 1) * d ^ (n + 1).choose 2 := by
-          rw [pow_succ u n, pow_succ v n, hc, pow_add]; simp only [mul_assoc]
+    (u * v) ^ n = u ^ n * v ^ n * d ^ n.choose 2 :=
+  mul_pow_eq_of_commute_commutator hd hdu hdv n
 
 /-- For `p` an odd prime, if the commutator `d` of `u` and `v` commutes with both and satisfies
 `d ^ p = 1`, then `(u * v) ^ p = u ^ p * v ^ p`. -/
 theorem mul_pow_eq_of_commutator_pow {p : ℕ} (hp : p.Prime) (hp2 : p ≠ 2) {u v d : G}
     (hd : v * u = d * u * v) (hdu : Commute d u) (hdv : Commute d v) (hdp : d ^ p = 1) :
-    (u * v) ^ p = u ^ p * v ^ p := by
-  have h2p : 2 < p := lt_of_le_of_ne hp.two_le (Ne.symm hp2)
-  obtain ⟨k, hk⟩ := hp.dvd_choose_self (by norm_num : (2 : ℕ) ≠ 0) h2p
-  rw [mul_pow_eq_mul_pow_mul_pow_choose hd hdu hdv, hk, pow_mul, hdp, one_pow, mul_one]
+    (u * v) ^ p = u ^ p * v ^ p :=
+  mul_pow_eq_mul_pow_of_commute_commutator hp hp2 hd hdu hdv hdp
 
 end Commutation
 
