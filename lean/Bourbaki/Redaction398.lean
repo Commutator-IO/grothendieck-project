@@ -1,5 +1,42 @@
 import Mathlib
 
+/-!
+# Bourbaki, rédaction n° 398 (April 1963): duality of finite-length modules over a PID
+
+Rédaction n° 398 of the Bourbaki archive (Archives Henri Poincaré, item 949) is a short
+« contre-rédaction » answering rédaction n° 397. It deliberately avoids injective modules and
+treats only modules of finite length over a principal ideal domain `A` with fraction field `K`.
+The dual of an `A`-module `E` is `E* = Hom(E, K/A)`, and the evaluation pairing gives a canonical
+map `i_E : E → E**`. Its Prop. 1 states that, for `E` of finite length, `E*` is isomorphic (not
+canonically) to `E` and `i_E` is an isomorphism; the proof reduces, by the structure theorem, to
+a cyclic module `A/tA`, whose dual is the submodule `t⁻¹A/A` of `K/A`. Prop. 2 states that `*` is
+exact on finite-length modules, and Prop. 3 that `F ↦ F⁰` is an inclusion-reversing bijection
+between submodules of `E` and of `E*`, exchanging sums and intersections. For `A = ℤ` this is the
+duality of finite abelian groups with values in `ℚ/ℤ`.
+
+This is the principal-ideal-domain case of Matlis duality. mathlib has the case of finite abelian
+groups with complex-valued characters (`AddChar.doubleDualEquiv`), not the statement over a
+general principal ideal domain. A module of finite length is encoded as a finitely generated
+torsion module (`Module.Finite` and `Module.IsTorsion`), and `K/A` as the quotient of `K` by the
+range of `Algebra.linearMap`.
+
+The proofs here do use that `K/A` is injective (it is divisible, hence satisfies Baer's criterion,
+as in rédaction n° 397): this gives injectivity of `i_E` and Prop. 2 directly; bijectivity of
+`i_E` then follows because `E** ≅ E` and an injective endomorphism of an Artinian module is
+surjective, in place of the typescript's reduction to the cyclic case.
+
+* `KModA`, `Dual`: the module `K/A` and the dual `E* = E →ₗ[A] K/A`;
+* `range_evalOne`: evaluation at `1` identifies `(A/tA)*` with the part of `K/A` killed by `t`;
+* `dualQuotEquiv`: Prop. 1 in the cyclic case, `(A/tA)* ≃ A/tA` for `t ≠ 0`;
+* `nonempty_dual_equiv`: Prop. 1, `E* ≃ E` for every finite-length `E`;
+* `evalDual`, `evalDual_injective`, `evalDual_bijective`, `evalDualEquiv`: the canonical map
+  `E → E**`, injective for torsion `E` and bijective for finite-length `E`;
+* `baer`, `dual_surjective_of_injective`, `dual_exact`: `K/A` is injective, and Prop. 2 (here for
+  arbitrary modules);
+* `orth`, `orth'`, `orthOrderIso`, `orth_sup`, `orth_inf`: Prop. 3, the orthogonality bijection
+  as an order anti-isomorphism, exchanging sums and intersections.
+-/
+
 namespace Bourbaki.Redaction398
 
 open Module
@@ -31,6 +68,8 @@ def orth' {E : Type*} [AddCommGroup E] [Module A E] (G : Submodule A (Dual A K E
   zero_mem' _ _ := map_zero _
   smul_mem' a x hx φ hφ := by simp [hx φ hφ]
 
+/-- The orthogonal in `E` of a sum of submodules of `E*` is the intersection of the
+orthogonals. -/
 theorem orth'_sup {E : Type*} [AddCommGroup E] [Module A E] (G G' : Submodule A (Dual A K E)) :
     orth' (G ⊔ G') = orth' G ⊓ orth' G' := by
   ext x
@@ -48,6 +87,7 @@ theorem orth_sup {E : Type*} [AddCommGroup E] [Module A E] (F F' : Submodule A E
   obtain ⟨y, hy, y', hy', rfl⟩ := Submodule.mem_sup.1 hx
   simp [h y hy, h' y' hy']
 
+/-- A class `k mod A` vanishes in `K/A` exactly when `k` comes from `A`. -/
 theorem mk_eq_zero_iff (k : K) :
     (Submodule.Quotient.mk k : KModA A K) = 0 ↔ ∃ a : A, algebraMap A K a = k := by
   rw [Submodule.Quotient.mk_eq_zero, LinearMap.mem_range]
@@ -67,6 +107,7 @@ variable (K) in
 noncomputable def evalOne (t : A) : Dual A K (A ⧸ Ideal.span {t}) →ₗ[A] KModA A K :=
   LinearMap.applyₗ (Submodule.Quotient.mk 1)
 
+/-- A linear form on `A/tA` is determined by its value at the class of `1`. -/
 theorem evalOne_injective (t : A) : Function.Injective (evalOne K t) := by
   refine (injective_iff_map_eq_zero _).2 fun f hf => LinearMap.ext fun y => ?_
   obtain ⟨a, rfl⟩ := Submodule.Quotient.mk_surjective _ y
@@ -96,6 +137,7 @@ theorem range_evalOne (t : A) :
 
 variable [IsFractionRing A K]
 
+/-- For `t ≠ 0`, the kernel of `a ↦ a/t mod A` is `tA`. -/
 theorem ker_divBy {t : A} (ht : t ≠ 0) : LinearMap.ker (divBy K t) = Ideal.span {t} := by
   have ht' : algebraMap A K t ≠ 0 :=
     (map_ne_zero_iff _ (IsFractionRing.injective A K)).2 ht
@@ -108,6 +150,8 @@ theorem ker_divBy {t : A} (ht : t ≠ 0) : LinearMap.ker (divBy K t) = Ideal.spa
   · rintro ⟨b, rfl⟩
     exact ⟨b, by rw [map_mul, mul_inv_cancel_right₀ ht']⟩
 
+/-- For `t ≠ 0`, the image of `a ↦ a/t mod A` is the submodule `t⁻¹A/A` of `K/A` killed
+by `t`. -/
 theorem range_divBy {t : A} (ht : t ≠ 0) :
     LinearMap.range (divBy K t) = Submodule.torsionBy A (KModA A K) t := by
   have ht' : algebraMap A K t ≠ 0 :=
@@ -310,6 +354,7 @@ theorem exists_separating {E : Type*} [AddCommGroup E] [Module A E] (hE : Module
   refine ⟨ψ ∘ₗ F.mkQ, fun y hy => ?_, hψ⟩
   simp [(Submodule.Quotient.mk_eq_zero F).2 hy]
 
+/-- For `E` torsion, `F⁰⁰ = F`: the orthogonal in `E` of `F⁰` is `F`. -/
 theorem orth'_orth {E : Type*} [AddCommGroup E] [Module A E] (hE : Module.IsTorsion A E)
     (F : Submodule A E) : orth' (orth K F) = F := by
   refine le_antisymm (fun x hx => ?_) fun x hx φ hφ => hφ x hx
@@ -317,6 +362,7 @@ theorem orth'_orth {E : Type*} [AddCommGroup E] [Module A E] (hE : Module.IsTors
   obtain ⟨φ, hφ, hφx⟩ := exists_separating (K := K) hE F h
   exact hφx (hx φ hφ)
 
+/-- The dual of a finite-length module is again torsion (it is isomorphic to the module). -/
 theorem dual_isTorsion (E : Type*) [AddCommGroup E] [Module A E] [Module.Finite A E]
     (hE : Module.IsTorsion A E) : Module.IsTorsion A (Dual A K E) := fun φ => by
   obtain ⟨d⟩ := nonempty_dual_equiv K E hE
@@ -325,6 +371,8 @@ theorem dual_isTorsion (E : Type*) [AddCommGroup E] [Module A E] [Module.Finite 
   rw [Submonoid.smul_def] at ha ⊢
   rw [map_smul, ha, map_zero]
 
+/-- For `E` of finite length, every submodule `G` of `E*` is the orthogonal of its own
+orthogonal in `E`. -/
 theorem orth_orth' {E : Type*} [AddCommGroup E] [Module A E] [Module.Finite A E]
     (hE : Module.IsTorsion A E) (G : Submodule A (Dual A K E)) : orth K (orth' G) = G := by
   refine le_antisymm (fun φ hφ => ?_) fun φ hφ x hx => hx φ hφ

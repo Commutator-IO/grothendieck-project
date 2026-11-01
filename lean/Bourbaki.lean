@@ -11,6 +11,7 @@ import Bourbaki.Redaction380
 import Bourbaki.Redaction384
 import Bourbaki.Redaction387
 import Bourbaki.Redaction397
+import Bourbaki.Redaction398
 import Bourbaki.Redaction402
 import Bourbaki.Redaction438
 import Bourbaki.Redaction448
