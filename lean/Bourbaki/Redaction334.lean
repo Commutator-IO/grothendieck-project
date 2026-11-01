@@ -25,15 +25,21 @@ of an analytic function. This file proves the one-variable facts behind that cou
 * `interior_range_pow_eq_empty`: if `Kᵖ ≠ K`, then `Kᵖ` has empty interior (the chart of the
   rédaction cannot have open image);
 * `hasDerivAt_eq_zero_of_mem_range_pow`: if `Kᵖ` is closed and `π ∉ Kᵖ`, a function with
-  values in `Kᵖ` has derivative `0` wherever it is differentiable; this is the first step in
-  proving that `t ↦ h(t)ᵖ` analytic forces `h` analytic.
+  values in `Kᵖ` has derivative `0` wherever it is differentiable (step (i));
+* `mem_fieldRange_frobenius`: `Kᵖ` as the subfield `(frobenius K p).fieldRange`;
+* `tendsto_remainder_div`: Taylor's formula along `y = cᵖ w`, the remainder of order `m`
+  divided by `(cᵖ)ᵐ` tends to `wᵐ aₘ`;
+* `coeff_mem_range_pow`: if `Kᵖ` is closed, `π ∉ Kᵖ` and a power series `Σ aₙ yⁿ` takes values
+  in `Kᵖ` near its centre, then every `aₙ` is in `Kᵖ` and `aₙ = 0` unless `p ∣ n`;
+* `analyticAt_of_analyticAt_pow`: if `K` is complete, `Kᵖ ≠ K` and `t ↦ h(t)ᵖ` is analytic at
+  `x`, then `h` is analytic at `x` (step (ii)).
 
-The second step of the strong effectivity (identifying the coefficients of a `Kᵖ`-valued power
-series as `p`-th powers, using a `Kᵖ`-basis of `K`) is done by hand in the accompanying notes,
-not here: analytic functions over a general nontrivially normed field are thin in mathlib.
+Step (ii) is proved in one variable, `T ⊆ K`; the case `T ⊆ Kᵐ` of strong effectivity is not
+done here. The proof uses neither a `Kᵖ`-basis of `K` nor `[K : Kᵖ] < ∞`, nor step (i): only
+that `Kᵖ` is a closed subfield and that `π ∉ Kᵖ`, by induction on the coefficients.
 -/
 
-open Filter Topology
+open Filter Topology NNReal ENNReal
 
 noncomputable section
 
@@ -158,5 +164,161 @@ theorem hasDerivAt_eq_zero_of_mem_range_pow (hS : IsClosed (Set.range (· ^ p : 
   refine ⟨v / u, ?_⟩
   simp only at hu hv ⊢
   rw [div_pow, hu, hv, one_mul, mul_div_cancel_right₀ _ hd0]
+
+/-! ### Step (ii): the coefficients of a `Kᵖ`-valued power series -/
+
+/-- The subfield `Kᵖ`, as the field range of Frobenius. -/
+theorem mem_fieldRange_frobenius {a : K} :
+    a ∈ (frobenius K p).fieldRange ↔ a ∈ Set.range (· ^ p : K → K) := by
+  simp [RingHom.mem_fieldRange, frobenius_def]
+
+omit [CharP K p] hp in
+/-- Taylor's formula along `y = cᵖ w`: if `g` has the power series `P = Σ aₙ yⁿ` at `x`, then
+`(g (x + cᵖ w) - Σ_{k<m} a_k (cᵖ w)ᵏ) / (cᵖ)ᵐ` tends to `wᵐ aₘ` as `c → 0`. -/
+theorem tendsto_remainder_div (hp0 : p ≠ 0) {g : K → K} {P : FormalMultilinearSeries K K K}
+    {x : K} (hP : HasFPowerSeriesAt g P x) (m : ℕ) (w : K) :
+    Tendsto (fun c : K => (g (x + c ^ p * w) - P.partialSum m (c ^ p * w)) / (c ^ p) ^ m)
+      (𝓝[≠] 0) (𝓝 (w ^ m * P.coeff m)) := by
+  set E : K → K := fun y => g (x + y) - P.partialSum (m + 1) y with hE
+  have hφ : Tendsto (fun c : K => c ^ p * w) (𝓝 0) (𝓝 0) := by
+    have h : Continuous (fun c : K => c ^ p * w) := by fun_prop
+    simpa [zero_pow hp0] using h.tendsto 0
+  have hO : (fun c : K => E (c ^ p * w)) =O[𝓝 0] fun c => c ^ (p * (m + 1)) := by
+    refine ((hP.isBigO_sub_partialSum_pow (m + 1)).comp_tendsto hφ).trans ?_
+    refine Asymptotics.IsBigO.of_bound (‖w‖ ^ (m + 1)) (Eventually.of_forall fun c => ?_)
+    refine le_of_eq ?_
+    simp only [Function.comp_apply, norm_pow, norm_norm, norm_mul, mul_pow, ← pow_mul]
+    ring
+  have ho : (fun c : K => E (c ^ p * w)) =o[𝓝 0] fun c => (c ^ p) ^ m := by
+    refine hO.trans_isLittleO ?_
+    simp_rw [← pow_mul]
+    exact Asymptotics.isLittleO_pow_pow (by have := Nat.pos_of_ne_zero hp0; nlinarith)
+  have hmain := (ho.tendsto_div_nhds_zero.mono_left
+    (nhdsWithin_le_nhds (s := {0}ᶜ))).const_add (w ^ m * P.coeff m)
+  rw [add_zero] at hmain
+  refine hmain.congr' ?_
+  filter_upwards [self_mem_nhdsWithin] with c hc
+  have hc' : (c ^ p) ^ m ≠ 0 := pow_ne_zero _ (pow_ne_zero _ hc)
+  simp only [hE, FormalMultilinearSeries.partialSum, Finset.sum_range_succ,
+    P.apply_eq_pow_smul_coeff, smul_eq_mul]
+  field_simp
+  ring
+
+/-- **Step (ii), on coefficients.** Let `Kᵖ` be closed and `π ∉ Kᵖ`. If `g` has the power series
+`Σ aₙ yⁿ` at `x` and takes values in `Kᵖ` near `x`, then every `aₙ` lies in `Kᵖ`, and `aₙ = 0`
+unless `p ∣ n`. By induction on `m`: the remainder of order `m`, evaluated at `cᵖ w` and divided
+by `(cᵖ)ᵐ`, lies in `Kᵖ` and tends to `wᵐ aₘ`; take `w = 1`, then `w = π`. -/
+theorem coeff_mem_range_pow (hS : IsClosed (Set.range (· ^ p : K → K))) {π : K}
+    (hπ : π ∉ Set.range (· ^ p : K → K)) {g : K → K} {P : FormalMultilinearSeries K K K}
+    {x : K} (hP : HasFPowerSeriesAt g P x)
+    (hg : ∀ᶠ y in 𝓝 x, g y ∈ Set.range (· ^ p : K → K)) (m : ℕ) :
+    P.coeff m ∈ Set.range (· ^ p : K → K) ∧ (¬ p ∣ m → P.coeff m = 0) := by
+  set F := (frobenius K p).fieldRange
+  have hF : ∀ a : K, a ∈ F ↔ a ∈ Set.range (· ^ p : K → K) := fun a =>
+    mem_fieldRange_frobenius p
+  have hFc : IsClosed (F : Set K) := by
+    convert hS using 1
+    ext a
+    exact hF a
+  simp_rw [← hF] at hπ hg ⊢
+  have hp0 : p ≠ 0 := hp.out.ne_zero
+  have hπ0 : π ≠ 0 := fun h => hπ (h ▸ F.zero_mem)
+  induction m using Nat.strong_induction_on with
+  | _ m ih =>
+  have hw : ∀ w : K, w ^ m * P.coeff m ∈ F := by
+    intro w
+    refine hFc.mem_of_tendsto (tendsto_remainder_div p hp0 hP m w) ?_
+    have hφ : Tendsto (fun c : K => x + c ^ p * w) (𝓝[≠] 0) (𝓝 x) := by
+      have h : Continuous (fun c : K => x + c ^ p * w) := by fun_prop
+      simpa [zero_pow hp0] using (h.tendsto 0).mono_left nhdsWithin_le_nhds
+    filter_upwards [hφ.eventually hg] with c hc
+    refine F.div_mem (F.sub_mem hc ?_) (F.pow_mem ((hF _).2 ⟨c, rfl⟩) m)
+    refine F.sum_mem fun k hk => ?_
+    rw [P.apply_eq_pow_smul_coeff, smul_eq_mul]
+    by_cases hpk : p ∣ k
+    · obtain ⟨j, rfl⟩ := hpk
+      refine F.mul_mem ?_ (ih _ (Finset.mem_range.1 hk)).1
+      rw [pow_mul']
+      exact (hF _).2 ⟨_, rfl⟩
+    · rw [(ih k (Finset.mem_range.1 hk)).2 hpk, mul_zero]
+      exact F.zero_mem
+  have ha : P.coeff m ∈ F := by simpa using hw 1
+  refine ⟨ha, fun hpm => ?_⟩
+  by_contra ha0
+  apply hπ
+  have hπm : π ^ m ∈ F := by
+    have := F.mul_mem (hw π) (F.inv_mem ha)
+    rwa [mul_assoc, mul_inv_cancel₀ ha0, mul_one] at this
+  have hπp : π ^ p ∈ F := (hF _).2 ⟨π, rfl⟩
+  have hcop : Nat.Coprime m p := ((Nat.Prime.coprime_iff_not_dvd hp.out).2 hpm).symm
+  obtain ⟨k, -, hk⟩ := Nat.exists_mul_mod_eq_one_of_coprime hcop hp.out.one_lt
+  obtain ⟨N, hN⟩ : ∃ N, p * N + 1 = m * k := by
+    have := Nat.div_add_mod (m * k) p
+    rw [hk] at this
+    exact ⟨_, this⟩
+  have hπeq : π = (π ^ m) ^ k / (π ^ p) ^ N := by
+    rw [← pow_mul, ← pow_mul, ← hN, pow_succ, mul_div_cancel_left₀ _ (pow_ne_zero _ hπ0)]
+  rw [hπeq]
+  exact F.div_mem (F.pow_mem hπm _) (F.pow_mem hπp _)
+
+/-- **Step (ii).** Let `K` be complete of characteristic `p` with `Kᵖ ≠ K`. If `t ↦ h(t)ᵖ` is
+analytic at `x`, then `h` is analytic at `x`: writing `h(x + y)ᵖ = Σ a_{pn} y^{pn}` with
+`a_{pn} = b_nᵖ`, the series `Σ b_n yⁿ` has positive radius, and its `p`-th power is
+`Σ b_nᵖ y^{pn}` because Frobenius is additive and continuous. One variable only. -/
+theorem analyticAt_of_analyticAt_pow [CompleteSpace K] {π : K}
+    (hπ : π ∉ Set.range (· ^ p : K → K)) {h : K → K} {x : K}
+    (hg : AnalyticAt K (fun t => h t ^ p) x) : AnalyticAt K h x := by
+  have hp0 : 0 < p := hp.out.pos
+  obtain ⟨P, r, hP⟩ := hg
+  have hcoef := coeff_mem_range_pow p (isClosed_range_pow p) hπ hP.hasFPowerSeriesAt
+    (Eventually.of_forall fun y => ⟨h y, rfl⟩)
+  choose b hb using fun n => (hcoef (p * n)).1
+  set Q := FormalMultilinearSeries.ofScalars K b with hQdef
+  obtain ⟨ρ, hρ0, hρr⟩ := ENNReal.lt_iff_exists_nnreal_btwn.1 (hP.r_pos.trans_le hP.r_le)
+  obtain ⟨C, -, hC⟩ := P.norm_mul_pow_le_of_lt_radius hρr
+  have hQ : (ρ : ℝ≥0∞) ≤ Q.radius := by
+    refine Q.le_radius_of_bound (max 1 C) fun n => ?_
+    rw [hQdef, FormalMultilinearSeries.ofScalars_norm]
+    have h1 := hC (p * n)
+    rw [P.norm_apply_eq_norm_coef, ← hb n, norm_pow, pow_mul', ← mul_pow] at h1
+    by_cases h' : ‖b n‖ * (ρ : ℝ) ^ n ≤ 1
+    · exact h'.trans (le_max_left _ _)
+    · exact (le_self_pow₀ (by linarith) hp0.ne').trans (h1.trans (le_max_right _ _))
+  have hQpos : 0 < Q.radius := lt_of_lt_of_le (by exact_mod_cast hρ0) hQ
+  have hfrob : Continuous (frobenius K p) := by
+    show Continuous fun a => frobenius K p a
+    simp only [frobenius_def]
+    exact continuous_pow p
+  have heq : ∀ᶠ y in 𝓝 (0 : K), h (x + y) = Q.sum y := by
+    have hball : Metric.eball (0 : K) (min r ρ) ∈ 𝓝 (0 : K) :=
+      Metric.eball_mem_nhds _ (lt_min hP.r_pos (by exact_mod_cast hρ0))
+    filter_upwards [hball] with y hy
+    have hyr : y ∈ Metric.eball (0 : K) r := Metric.eball_subset_eball (min_le_left _ _) hy
+    have hyQ : y ∈ Metric.eball (0 : K) Q.radius :=
+      Metric.eball_subset_eball ((min_le_right _ _).trans hQ) hy
+    have h1 := hP.hasSum hyr
+    have h2 := (Q.hasFPowerSeriesOnBall hQpos).hasSum hyQ
+    rw [zero_add] at h2
+    have h3 : HasSum (fun n => (Q n fun _ => y) ^ p) (Q.sum y ^ p) := by
+      simpa [Function.comp_def, frobenius_def] using h2.map (frobenius K p) hfrob
+    have h4 : HasSum (fun n => P n fun _ => y) (Q.sum y ^ p) := by
+      refine ((mul_right_injective₀ hp0.ne').hasSum_iff ?_).1 ?_
+      · rintro n hn
+        rw [P.apply_eq_pow_smul_coeff, (hcoef n).2 ?_, smul_zero]
+        rintro ⟨j, rfl⟩
+        exact hn ⟨j, rfl⟩
+      · convert h3 using 1
+        funext n
+        rw [Function.comp_apply, P.apply_eq_pow_smul_coeff, hQdef,
+          FormalMultilinearSeries.ofScalars_apply_eq, ← hb n, smul_eq_mul, smul_eq_mul,
+          mul_pow, pow_mul']
+        ring
+    exact frobenius_inj K p (by simpa [frobenius_def] using h1.unique h4)
+  have hA := (Q.hasFPowerSeriesOnBall hQpos).hasFPowerSeriesAt.comp_sub x
+  rw [zero_add] at hA
+  refine ⟨Q, hA.congr ?_⟩
+  have hx : Tendsto (fun z => z - x) (𝓝 x) (𝓝 0) := tendsto_sub_nhds_zero_iff.2 tendsto_id
+  filter_upwards [hx.eventually heq] with z hz
+  simpa using hz.symm
 
 end Bourbaki.Redaction334
