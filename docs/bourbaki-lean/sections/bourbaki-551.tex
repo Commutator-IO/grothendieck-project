@@ -1,0 +1,25 @@
+\section[Rédaction Bourbaki \redac{551} : une pseudo-covariance dépend de la diagonale]{Rédaction Bourbaki \redac{551} : une pseudo-covariance dépend de ses valeurs sur la diagonale\protect\verifie{Redaction551}}\label{sec:bourbaki-551}
+
+La rédaction \redac{551} des archives Bourbaki (Archives Henri Poincaré, \ahp{1102}), de Cartier, datée de mars 1970, contient une annexe~2, \q{Noyaux de type positif}. Elle y étudie les covariances sur un espace mesuré $(T, m)$, avec $m$ $\sigma$-finie : les fonctions réelles $C$ sur $T \times T$ dont toutes les matrices $(C(t_i, t_j))_{i,j}$ sont symétriques à valeurs propres positives. La transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+\emph{Les pseudo-covariances.} Au n\textsuperscript{o}\,4 (p.~40 du fac-similé), une \emph{pseudo-covariance} est une fonction mesurable $C$ telle que, pour tout $n$ et presque tout $(t_1, \dots, t_n) \in T^n$, la matrice $(C(t_i, t_j))$ soit symétrique à valeurs propres positives. La page ajoute qu'une fonction mesurable presque partout égale, sur $T \times T$, à une pseudo-covariance en est encore une. Le théorème~5 (p.~41) donne quatre conditions dites équivalentes : a) $C$ est une pseudo-covariance ; b) et c) portent sur les intégrales $\iint C(t,t')u(t)v(t')\,dm\,dm$ ; d) $C$ est presque partout une somme $\sum_n f_n(t) f_n(t')$. Les conditions b), c) et d) ne changent pas si l'on modifie $C$ sur une partie négligeable de $T \times T$ ; la condition a), si.
+
+\emph{Le défaut.} Pour $n = 1$, la condition a) dit que $C(t, t) \ge 0$ pour presque tout $t \in T$ : c'est une condition sur la diagonale. Si $m$ n'a pas d'atome, la diagonale est négligeable dans $T \times T$, et l'on peut y changer $C$ sans toucher à b), c), d). La \q{Note de l'éditeur} ironique qui clôt l'annexe (p.~46) relève le même point.
+
+\begin{encadre}
+\begin{contrexemple}[au n\textsuperscript{o}\,4 et au théorème~5 de la rédaction \redac{551}, tels qu'ils sont tapés]
+Soient $T = \mathbf R$, muni de la mesure de Lebesgue, et $C(t, t') = -1$ si $t = t'$, $0$ sinon. Alors $C$ est presque partout égale sur $T \times T$ à la covariance nulle, et vérifie donc b), c) et d) ; mais pour tout $t$, la matrice $(C(t,t)) = (-1)$ n'est pas positive, et $C$ n'est pas une pseudo-covariance.
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+La diagonale est négligeable : par Fubini, sa mesure est l'intégrale en $t$ de la mesure de $\{t\}$, qui est nulle. Hors de la diagonale, $C$ est nulle. La matrice nulle est positive, et $(-1)$ ne l'est pas.
+\end{proof}
+
+\noindent Ce qui reste vrai, d'après la vérification faite pour cette édition et non formalisée : a) entraîne b), et b), c), d) sont équivalentes ; toute fonction qui les vérifie est presque partout égale à une covariance (le corollaire~1 de la rédaction). Il suffit de définir les pseudo-covariances par b).
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} La diagonale est négligeable pour toute mesure sans atome (\texttt{prod\_diagonal\_eq\_zero}) ; la fonction $C$ est presque partout nulle (\texttt{C\_ae\_eq\_zero}), la fonction nulle est une covariance (\texttt{zero\_posSemidef}), et $C$ échoue pour $n = 1$ en tout point (\texttt{C\_not\_pseudoCovariance}), dans \href{\leanblobmain/Redaction551.lean}{\texttt{Redaction551.\allowbreak{}lean}}. Le théorème~5 corrigé n'est pas formalisé.
+\end{sloppypar}
+
+\litterature{les noyaux de type positif sont classiques (Aronszajn, 1950 ; Berg, Christensen et Ressel, \emph{Harmonic Analysis on Semigroups}, 1984). Le défaut est relevé dans la rédaction même, par sa \q{Note de l'éditeur} ; l'édition le formalise sans le donner pour nouveau. Le théorème~6 (une majoration presque partout de $\langle f(t), f(t')\rangle$ entraîne celle de $\|f(t)\|^2$) n'a pas été retrouvé tel quel ; il n'est pas formalisé.}
