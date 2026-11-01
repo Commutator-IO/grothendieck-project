@@ -124,6 +124,13 @@ function fromHash(): { id: string; t: number } | null {
 
 const link = 'font-medium text-brand-600 underline decoration-brand-200 underline-offset-2 hover:text-brand-700';
 
+// The index of results of each course, in our own words (docs/buffalo-*/index.tex, served by docs/study/tei.mjs).
+const INDEX_PDF: Record<string, string> = {
+  topos: '/article/buffalo-topos.pdf',
+  ag: '/article/buffalo-ag.pdf',
+  groups: '/article/buffalo-groupes.pdf',
+};
+
 export function BuffaloPage() {
   const [playing, setPlaying] = useState(fromHash);
   useEffect(() => {
@@ -241,9 +248,9 @@ export function BuffaloPage() {
         {CAT.courses.map((c) => (
           <section key={c.id} id={c.id} className="mt-10 scroll-mt-20">
             <h2 className="titre text-[22px] text-ink-900">{c.title}</h2>
-            {c.id === 'topos' && (
+            {INDEX_PDF[c.id] && (
               <p className="mt-2 max-w-[46em] text-[13px] leading-relaxed text-ink-700">
-                <a href="/article/buffalo-topos.pdf" target="_blank" rel="noopener noreferrer" className={link}>
+                <a href={INDEX_PDF[c.id]} target="_blank" rel="noopener noreferrer" className={link}>
                   Index des résultats (PDF)
                 </a>{' '}
                 — one line per result, definition or example, in our own words, with a link to the moment of the tape;

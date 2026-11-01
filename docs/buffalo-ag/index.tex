@@ -1,0 +1,1113 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+% Charter et Menlo (macOS) ; ailleurs, XCharter et DejaVu Sans Mono, dont ils dérivent.
+\IfFontExistsTF{Charter}{\setmainfont{Charter}}{\setmainfont{XCharter}}
+\IfFontExistsTF{Menlo}{\setmonofont{Menlo}[Scale=0.82]}{\setmonofont{DejaVu Sans Mono}[Scale=0.82]}
+\usepackage{polyglossia}\setmainlanguage{french}\setotherlanguage{english}
+\usepackage{microtype}
+% L’ : la paire de crénage de Charter colle l’apostrophe au L ; on rajoute une fine espace.
+\XeTeXinterchartokenstate=1
+\newXeTeXintercharclass\LetterL
+\newXeTeXintercharclass\Apostrophe
+\XeTeXcharclass`L=\LetterL
+\XeTeXcharclass`'=\Apostrophe
+\XeTeXcharclass"2019=\Apostrophe
+\XeTeXinterchartoks\LetterL\Apostrophe={\kern0.07em}
+\usepackage[a4paper,margin=27mm]{geometry}
+\usepackage{setspace}\setstretch{1.1}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath,amssymb}
+\definecolor{frise}{HTML}{2F4DA8}
+
+\newcommand{\q}[1]{«\,#1\,»}
+% La vidéo de la section en cours ; chaque entrée renvoie à sa seconde.
+\newcommand{\videoid}{}
+\newcommand{\video}[1]{\renewcommand{\videoid}{#1}}
+\newcommand{\face}[1]{\par\medskip\noindent\textbf{#1}\par\smallskip}
+% Une entrée : le moment de la bande (lien vers YouTube), puis l'énoncé.
+\newlength{\horo}\settowidth{\horo}{\small\texttt{00:00:00}\quad}
+\newcommand{\entree}[3]{\par\noindent\hangindent=\horo\hangafter=1%
+  \makebox[\horo][l]{\small\href{https://www.youtube.com/watch?v=\videoid&t=#1s}{\textcolor{frise}{\texttt{#2}}}}#3\par\smallskip}
+\raggedbottom\emergencystretch=1.5em
+
+\title{\Large Cours de Buffalo sur la géométrie algébrique (1973) :\\ index des résultats}
+\author{Michel Hua\\ \small Chercheur indépendant, Paris\\ \small \texttt{michel@commutator.io}}
+\date{\small Novembre 2026}
+
+\begin{document}
+\maketitle
+
+\section*{Introduction}\addcontentsline{toc}{section}{Introduction}
+
+\emph{Le cours.} De mai à juillet 1973, Alexandre Grothendieck a fait à l'université d'État de New York à Buffalo un cours sur la géométrie algébrique, en anglais, à côté de deux autres cours, sur la théorie des topos et sur les groupes algébriques. Les séances ont été enregistrées sur bandes magnétiques. Ce document s'appuie sur les enregistrements publiés par la chaîne YouTube \q{Erwin Schulhoff} en quatre vidéos ; il cite chaque séance par sa date, sa bande et sa face, d'après les descriptions de ces vidéos, et chaque moment par sa position dans la vidéo.
+
+\emph{Ce qu'est cet index.} Pour chaque résultat ou définition traité dans une séance, l'index donne une ligne : l'énoncé, dans la langue mathématique d'aujourd'hui et dans nos propres mots, et le moment de la bande où il est traité, sous la forme d'un lien vers la vidéo à la seconde près. Une entrée correspond à un énoncé, non à une minute de cours. Quelques mots entre guillemets reprennent un nom ou un terme forgé dans le cours, quand il importe. Quand ce qui est dit est esquissé ou incomplet, l'entrée donne l'énoncé correct, avec les hypothèses qu'il demande ; une affirmation fausse telle qu'elle est entendue n'est pas reprise. Un passage dont l'audition reste douteuse n'est pas indexé.
+
+\emph{Ce qu'il n'est pas.} Cet index n'est pas une transcription ni un résumé du cours. Il ne reprend ni les explications, ni les exemples développés, ni les digressions, ni l'ordre de l'exposé au-delà de la succession des énoncés, et il ne cite pas le cours. Le cours tel qu'il a été prononcé est une œuvre orale protégée, dont les droits appartiennent aux ayants droit d'Alexandre Grothendieck ; seuls les enregistrements font foi, et l'on s'y reporte par les liens. Les énoncés sont ici des énoncés mathématiques standard, rédigés par nous.
+
+\emph{Le découpage.} Trois séances commencent à l'intérieur d'une face que la description de la vidéo attribue à la séance précédente (6, 11 et 13 juin) ; elles sont indexées sous leur propre date, comme \q{suite} de la bande. Quelques séances de ce cours ont été publiées avec celles du cours sur les groupes algébriques : la fin de la deuxième bande du 11 juin et les deux faces suivantes de la première vidéo de ce cours, et deux faces du 11 juillet de la seconde. Elles sont indexées ici, à leur date, avec la mention de la vidéo qui les contient. Deux dates données par les descriptions sont probablement décalées d'un jour ; elles sont signalées sans être corrigées.
+
+\tableofcontents
+
+\section{29 mai 1973}\label{s-1973-05-29}
+\noindent\textit{Vidéo 1/4 (\href{https://www.youtube.com/watch?v=51wmmpHand0}{\texttt{51wmmpHand0}}) : bande 1, face A (0:00:00--0:44:40) ; bande 1, face B (0:44:40--1:34:31).}\par\medskip
+\video{51wmmpHand0}
+\face{Bande 1, face A}
+\entree{791}{0:13:11}{Pour un ensemble quelconque $I$, soit $P_I=k[T_i]_{i\in I}$ ; un polynôme $f\in P_I$ définit une application $\tilde f\colon k^I\to k$, qui en général ne détermine pas $f$.}
+\entree{920}{0:15:20}{Pour toute $k$-algèbre $k'$, $u\mapsto(u(T_i))_{i\in I}$ est une bijection de $\mathrm{Hom}_k(P_I,k')$ sur $k'^I$ (propriété universelle de l'algèbre de polynômes).}
+\entree{983}{0:16:23}{Un point $x\in k^I$ équivaut à un homomorphisme $\varepsilon_x\colon P_I\to k$, et $f(x)=\varepsilon_x(f)$.}
+\entree{1047}{0:17:27}{Pour $x$ fixé, $f\mapsto f(x)$ est un homomorphisme de $k$-algèbres $P_I\to k$ : $(f+g)(x)=f(x)+g(x)$, $(fg)(x)=f(x)g(x)$, $(\lambda f)(x)=\lambda f(x)$.}
+\entree{1570}{0:26:10}{L'espace affine standard $E^I$ est le foncteur de la catégorie des $k$-algèbres dans les ensembles, $k'\mapsto k'^I$, un homomorphisme $u$ agissant par $u^I$.}
+\entree{1703}{0:28:23}{Un système d'équations $S=(f_j)_{j\in J}$ dans $P_I$ définit un sous-foncteur $V_S\subset E^I$ : $V_S(k')$ est l'ensemble des solutions dans $k'^I$.}
+\entree{2102}{0:35:02}{Les solutions de $S$ dans toute $k$-algèbre $k'$ sont celles de l'idéal $J$ engendré par $S$ : $V_S=V_J$, où $V_J(k')=\{x\in k'^I : f(x)=0\ \forall f\in J\}$.}
+\entree{2298}{0:38:18}{L'application $J\mapsto V_J$ des idéaux de $P_I$ dans les sous-foncteurs de $E^I$ est injective ; ses valeurs sont les sous-foncteurs définis par des équations.}
+\entree{2430}{0:40:30}{Un foncteur des $k$-algèbres dans les ensembles est isomorphe à un $V_S$ si et seulement s'il est représentable : $k'\mapsto\mathrm{Hom}_k(A,k')$ pour une $k$-algèbre $A$, notée $V_A$.}
+\entree{2499}{0:41:39}{Le foncteur $V_A$ se plonge comme sous-foncteur $V_S$ de $E^I$ si et seulement si $A$ est quotient de $P_I$, c'est-à-dire engendrée comme $k$-algèbre par une famille indexée par $I$.}
+\entree{2565}{0:42:45}{Les isomorphismes de $V_A$ sur un $V_S\subset E^I$ correspondent aux familles $(a_i)_{i\in I}$ de générateurs de la $k$-algèbre $A$.}
+\face{Bande 1, face B}
+\entree{2819}{0:46:59}{Pour un idéal $J$ de $P_I$, $V_J(k')$ s'identifie, par $\mathrm{Hom}_k(P_I,k')\simeq k'^I$, à l'ensemble des homomorphismes $P_I\to k'$ nuls sur $J$, donc à $\mathrm{Hom}_k(P_I/J,k')$.}
+\entree{2889}{0:48:09}{Le foncteur $V_J$ est représenté par la $k$-algèbre $P_I/J$, l'isomorphisme étant fonctoriel en $k'$ : $V_J\simeq V_{P_I/J}$.}
+\entree{2954}{0:49:14}{Définition : les foncteurs $V_J\subset E^I$ sont les sous-espaces algébriques fermés de $E^I$ ; un foncteur isomorphe à l'un d'eux est un espace algébrique affine sur $k$.}
+\entree{3290}{0:54:50}{Toute $k$-algèbre $A$ est isomorphe à un quotient $P_I/J$ : on prend une famille génératrice $(a_i)_{i\in I}$ de $A$ (par exemple $I=A$) et $J$ le noyau de $T_i\mapsto a_i$.}
+\entree{3423}{0:57:03}{Les espaces algébriques affines sur $k$ sont exactement les foncteurs représentables ; un plongement dans $E^I$ équivaut à une famille de générateurs de l'algèbre indexée par $I$.}
+\entree{3851}{1:04:11}{Définition : un morphisme $V_J\to V_{J'}$ est une transformation naturelle, c'est-à-dire une famille d'applications $V_J(k')\to V_{J'}(k')$ compatibles aux homomorphismes de $k'$.}
+\entree{4057}{1:07:37}{Une famille $(F_{i'})_{i'\in I'}$ de polynômes de $P_I$ définit un morphisme $E^I\to E^{I'}$, car $E^{I'}=(E^1)^{I'}$ et chaque polynôme donne $k'^I\to k'$ fonctoriellement en $k'$.}
+\entree{4188}{1:09:48}{Pour des foncteurs représentés par $A$ et $A'$, les morphismes de $V_A$ dans $V_{A'}$ correspondent bijectivement aux homomorphismes de $k$-algèbres $A'\to A$.}
+\entree{4571}{1:16:11}{Tout morphisme $V_J\to V_{J'}$ est induit par une application polynomiale $E^I\to E^{I'}$ envoyant $V_J$ dans $V_{J'}$ ; elle correspond à un homomorphisme $P_{I'}\to P_I$ envoyant $J'$ dans $J$.}
+\entree{4837}{1:20:37}{Le foncteur $E^I$ est représenté par $P_I$ ; un morphisme $V_A\to E^I$ équivaut à un homomorphisme $P_I\to A$, c'est-à-dire à une famille d'éléments de $A$ indexée par $I$.}
+\entree{4970}{1:22:50}{Le morphisme $V_A\to E^I$ défini par $P_I\to A$ est un monomorphisme si et seulement si $P_I\to A$ est un épimorphisme d'anneaux ; la surjectivité est suffisante mais non nécessaire.}
+\entree{5353}{1:29:13}{L'inclusion $k[T]\to k[T,T^{-1}]$ est un épimorphisme d'anneaux non surjectif ($k\neq0$) : un homomorphisme de $k[T,T^{-1}]$ est déterminé par l'image de $T$, qui doit être inversible.}
+\entree{5417}{1:30:17}{$\mathrm{Hom}_k(k[T,T^{-1}],k')$ est en bijection avec l'ensemble des éléments inversibles de $k'$.}
+\entree{5552}{1:32:32}{Le monomorphisme $V_{k[T,T^{-1}]}\to E^1$ n'est l'isomorphisme sur aucun sous-espace fermé $V_J$ de $E^1$ : sinon $k[T]\to k[T,T^{-1}]$ serait surjectif.}
+\section{30 mai 1973}\label{s-1973-05-30}
+\noindent\textit{Vidéo 1/4 (\href{https://www.youtube.com/watch?v=51wmmpHand0}{\texttt{51wmmpHand0}}) : bande 1, face A (1:34:31--2:07:40) ; bande 1, face B (2:07:40--2:40:50) ; bande 2 (2:40:50--3:07:15).}\par\medskip
+\video{51wmmpHand0}
+\face{Bande 1, face A}
+\entree{5809}{1:36:49}{Le foncteur $E^I$ est la puissance cartésienne $I$-ième de $E^1$, qui est représenté par $k[t]$.}
+\entree{5871}{1:37:51}{Les éléments de $k'^I$ sont appelés points de $E^I$ à valeurs dans $k'$ (ou $k'$-points) ; les $k'$-points de $V_S$ sont ceux qui vérifient les équations de $S$.}
+\entree{6129}{1:42:09}{Les foncteurs $X$ isomorphes à un $V_S$ sont exactement les foncteurs représentables ; si $V_S$ est défini par $J$, il est représenté par $P_I/J$.}
+\entree{6522}{1:48:42}{Pour un idéal $J$ de $P_I$ : $f\in J$ si et seulement si $f(x')=0$ pour toute $k$-algèbre $k'$ et tout point $x'\in V_J(k')$.}
+\entree{6651}{1:50:51}{Il suffit de prendre $k'=P_I/J$ et le point correspondant à la surjection canonique $P_I\to P_I/J$ pour retrouver $J$ comme idéal des $f$ nuls sur $V_J$.}
+\entree{6782}{1:53:02}{L'application $J\mapsto V_J$ est une bijection, décroissante dans les deux sens, de l'ensemble des idéaux de $P_I$ sur l'ensemble des sous-espaces fermés de $E^I$ : $J\subset J'$ si et seulement si $V_{J'}\subset V_J$.}
+\entree{6911}{1:55:11}{Les morphismes entre espaces algébriques affines $X=V_A$ et $X'=V_{A'}$ correspondent aux homomorphismes de $k$-algèbres $A'\to A$ ; la catégorie des espaces algébriques affines est anti-équivalente à celle des $k$-algèbres.}
+\entree{7174}{1:59:34}{Si l'on ne teste que sur des corps $k'$, alors $V'_J=V'_{\widetilde J}$, où $\widetilde J=\{f : \exists n,\ f^n\in J\}$ est le radical de $J$ ; en effet $f(x)^n=0$ dans un corps entraîne $f(x)=0$.}
+\entree{7240}{2:00:40}{Le radical $\widetilde J$ est l'image réciproque dans $P_I$ du nilradical de $P_I/J$ ; $P_I/\widetilde J$ est l'anneau $P_I/J$ quotienté par son nilradical, sans nilpotent non nul.}
+\entree{7367}{2:02:47}{Sur les corps, $V'_J\subset V'_{J'}$ si et seulement si $\widetilde J\supset\widetilde{J'}$ ; $J\mapsto V'_J$ est une bijection décroissante entre idéaux radicaux de $P_I$ et sous-foncteurs de $E'^I$ (restreint aux corps) définis par équations.}
+\entree{7502}{2:05:02}{Le radical $\widetilde J$ est l'ensemble des $f\in P_I$ nuls sur $V_J(k')$ pour tout corps $k'$ sur $k$.}
+\entree{7566}{2:06:06}{Lemme : si $A$ est un anneau et $f\in A$ vérifie $u(f)=0$ pour tout homomorphisme $u$ de $A$ dans un corps, alors $f$ est nilpotent.}
+\face{Bande 1, face B}
+\entree{7663}{2:07:43}{Tout anneau non nul possède un idéal maximal (Krull) ; il en résulte que l'intersection des noyaux des homomorphismes d'un anneau dans des corps est son nilradical.}
+\entree{7725}{2:08:45}{Les noyaux des homomorphismes de $A$ dans des corps sont les idéaux premiers de $A$ ; le nilradical de $A$ est l'intersection de ses idéaux premiers.}
+\entree{7993}{2:13:13}{Nullstellensatz : si $k$ est un corps algébriquement clos et $I$ fini, le radical de $J\subset k[T_1,\dots,T_n]$ est l'ensemble des polynômes nuls sur les points de $k^n$ où $J$ s'annule.}
+\entree{8200}{2:16:40}{Forme algébrique : si $A$ est une algèbre de type fini sur un corps algébriquement clos $k$ et $f\in A$ est nul par tout $k$-homomorphisme $A\to k$, alors $f$ est nilpotent.}
+\entree{8263}{2:17:43}{Énoncé (a) : si $A$ est de type fini sur un corps algébriquement clos $k$ et si $A$ est un corps, alors $A=k$.}
+\entree{8327}{2:18:47}{Énoncé (b) : si $A$ est une algèbre de type fini sur un corps $k$, son nilradical est l'intersection de ses idéaux maximaux.}
+\entree{8452}{2:20:52}{Si $A$ est de type fini sur un corps algébriquement clos $k$, $u\mapsto\ker u$ est une bijection de $\mathrm{Hom}_k(A,k)$ sur l'ensemble des idéaux maximaux de $A$.}
+\entree{8519}{2:21:59}{Le Nullstellensatz équivaut à la conjonction de (a) et (b) ; (b) vaut sur tout corps, alors que (a) exige que $k$ soit algébriquement clos.}
+\entree{8585}{2:23:05}{Énoncé (a$'$) : sur un corps quelconque $k$, une $k$-algèbre de type fini qui est un corps est une extension finie de $k$.}
+\entree{8650}{2:24:10}{Si $A$ est de type fini sur un corps $k$ et si $f\in A$ est annulé par tout $k$-homomorphisme de $A$ dans une extension finie de $k$, alors $f$ est nilpotent.}
+\entree{8717}{2:25:17}{Sur un corps $k$ et en dimension finie, la correspondance entre sous-espaces fermés et idéaux radicaux vaut si l'on ne teste que sur les extensions finies de $k$ (sur $k$ lui-même si $k$ est algébriquement clos).}
+\entree{9373}{2:36:13}{Pour $X=V_A$, l'application $\mathrm{Hom}(X,E^1)\to A$ est une bijection d'ensembles : les morphismes $V_A\to E^1$ correspondent aux homomorphismes $k[t]\to A$, donc aux éléments de $A$.}
+\entree{9437}{2:37:17}{Le foncteur $E^1$ est un objet en algèbres sur $k$ : addition et multiplication $E^1\times E^1\to E^1$, et action de chaque scalaire de $k$.}
+\entree{9504}{2:38:24}{La structure d'anneau de $\mathrm{Hom}(X,E^1)$ déduite de celle de $E^1$ est celle de $A$ : $A=\mathrm{Hom}(V_A,E^1)$ comme $k$-algèbre.}
+\face{Bande 2}
+\entree{9652}{2:40:52}{Un élément de $A$ s'identifie à une transformation naturelle $X(k')\to k'$ ; les opérations de $A$ correspondent aux opérations ponctuelles, calculées dans chaque algèbre $k'$.}
+\entree{9780}{2:43:00}{Un morphisme $E^I\to E^1$ est donné par un unique polynôme de $P_I$ : le polynôme est déterminé par la famille des fonctions $k'^I\to k'$, pour toutes les $k$-algèbres $k'$.}
+\entree{9910}{2:45:10}{Pour $X=V_J$, restreindre les polynômes à $V_J(k')$ identifie $P_I/J$ à l'ensemble des morphismes de foncteurs $V_J\to E^1$.}
+\entree{10536}{2:55:36}{La catégorie $\mathcal{C}$ des espaces algébriques affines est opposée à celle des $k$-algèbres ; ses limites projectives correspondent aux limites inductives de $k$-algèbres.}
+\entree{10603}{2:56:43}{Définition : un produit des objets $X_i$ est un objet $X$ muni de projections $p_i$ tel que $\mathrm{Hom}(Z,X)\to\prod_i\mathrm{Hom}(Z,X_i)$ soit bijectif pour tout $Z$ ; la famille vide donne l'objet final.}
+\entree{10732}{2:58:52}{Définition : une somme des $X_i$ est un objet $X$ muni de $p_i\colon X_i\to X$ universels ; les produits de $\mathcal{C}$ sont les sommes de $k$-algèbres.}
+\entree{10867}{3:01:07}{La somme de deux $k$-algèbres $A'$ et $A''$ est $A'\otimes_kA''$, avec les homomorphismes $x'\mapsto x'\otimes1$ et $x''\mapsto1\otimes x''$ ; de même pour une famille finie.}
+\entree{11119}{3:05:19}{Pour une famille infinie $(A_i)$, la somme est la limite inductive filtrante des produits tensoriels $A_{I'}=\bigotimes_{i\in I'}A_i$, $I'$ parcourant les parties finies de $I$.}
+\entree{11182}{3:06:22}{Les limites inductives filtrantes de $k$-algèbres se calculent sur les ensembles sous-jacents, contrairement aux sommes.}
+\section{4 juin 1973}\label{s-1973-06-04}
+\noindent\textit{Vidéo 1/4 (\href{https://www.youtube.com/watch?v=51wmmpHand0}{\texttt{51wmmpHand0}}) : bande 1, face A (3:07:15--3:56:17) ; bande 1, face B (3:56:17--4:44:38) ; bande 2 (4:44:38--4:55:19).}\par\medskip
+\video{51wmmpHand0}
+\face{Bande 1, face A}
+\entree{11436}{3:10:36}{Les limites projectives de foncteurs représentables sont représentables : la catégorie $\mathcal{C}$ admet toutes les limites projectives, qui se calculent comme limites de foncteurs.}
+\entree{11506}{3:11:46}{Le produit d'une famille quelconque $(X_i)$ de $\mathcal{C}$ est le foncteur $k'\mapsto\prod_iX_i(k')$ ; si $X_i=V_{A_i}$, il est représenté par $\bigotimes_kA_i$.}
+\entree{11633}{3:13:53}{Pour $X=V_A$ et $Y=V_B$, le produit $X\times Y$ est représenté par $A\otimes_kB$.}
+\entree{11778}{3:16:18}{L'objet final de $\mathcal{C}$ est $V_k=\mathrm{Spec}\,k$ (noté $E^0_k$), car $k$ est l'objet initial de la catégorie des $k$-algèbres.}
+\entree{11778}{3:16:18}{Pour avoir toutes les limites projectives dans une catégorie, il suffit d'avoir les produits et les produits fibrés.}
+\entree{12039}{3:20:39}{Pour $S=V_A$, la catégorie $\mathcal{C}/S$ est équivalente à la catégorie opposée à celle des $A$-algèbres, c'est-à-dire à celle des espaces affines sur $A$.}
+\entree{12165}{3:22:45}{Si $S$, $X$, $Y$ sont représentés par $A$, $B$, $C$ (avec $A\to B$, $A\to C$), le produit fibré $X\times_SY$ est représenté par $B\otimes_AC$.}
+\entree{12293}{3:24:53}{Le produit $X\times Y$ est le produit fibré $X\times_{e}Y$ au-dessus de l'objet final $e$.}
+\entree{12487}{3:28:07}{Pour $S'\to S$, le changement de base $X\mapsto X'=X\times_SS'$ est adjoint à droite du foncteur $\mathcal{C}/S'\to\mathcal{C}/S$ par composition : $\mathrm{Hom}_S(Z',X)\simeq\mathrm{Hom}_{S'}(Z',X')$.}
+\entree{12811}{3:33:31}{Vu comme foncteur sur $\mathcal{C}/S'$, $X'$ est la restriction de $X$ le long de $\mathcal{C}/S'\to\mathcal{C}/S$ : $X'(Z')=X(Z')$.}
+\entree{12939}{3:35:39}{Pour $S=V_A$ et $S'=V_{A'}$, le foncteur de $X'$ sur les $A'$-algèbres est le composé du foncteur de $X$ sur les $A$-algèbres avec la restriction des scalaires $A\to A'$.}
+\entree{13009}{3:36:49}{Pour $X=V_B$ avec $B$ une $A$-algèbre, le changement de base $A\to A'$ est représenté par $B'=B\otimes_AA'$, vue comme $A'$-algèbre (notée aussi $B_{A'}$).}
+\entree{13203}{3:40:03}{Définition : le noyau d'un couple de flèches $u,v\colon X\to Y$ est le foncteur $K(Z)=\{x\in X(Z) : u(x)=v(x)\}$ ; il est représentable.}
+\entree{13331}{3:42:11}{Le noyau de $(u,v)$ est le produit fibré de $(u,v)\colon X\to Y\times Y$ et de la diagonale $\Delta_Y\colon Y\to Y\times Y$.}
+\entree{13584}{3:46:24}{La diagonale $Y=V_B\to Y\times Y$ correspond à l'augmentation $B\otimes_kB\to B$, $x\otimes y\mapsto xy$, surjective de noyau l'idéal engendré par les $x\otimes1-1\otimes x$.}
+\entree{13847}{3:50:47}{Si $u,v\colon B\to A$ correspondent à $X\rightrightarrows Y$, le noyau de $(u,v)$ est représenté par $A/I$, où $I$ est l'idéal de $A$ engendré par les $u(x)-v(x)$, $x\in B$.}
+\face{Bande 1, face B}
+\entree{14373}{3:59:33}{Les limites projectives filtrantes de $\mathcal{C}$ correspondent aux limites inductives filtrantes de $k$-algèbres, qui se calculent sur les ensembles sous-jacents.}
+\entree{14500}{4:01:40}{Toute $k$-algèbre $A$ est la réunion filtrante de ses sous-algèbres de type fini ; tout espace affine est donc limite projective filtrante d'espaces affines de type fini.}
+\entree{14628}{4:03:48}{Une $k$-algèbre est de type fini si et seulement si elle est quotient d'un anneau de polynômes en un nombre fini de variables.}
+\entree{14693}{4:04:53}{Définition : $A$ est de présentation finie si $A\simeq k[T_1,\dots,T_n]/J$ avec $J$ engendré par un nombre fini d'éléments.}
+\entree{14761}{4:06:01}{Si $A$ est de présentation finie, pour toute présentation de $A$ comme quotient d'un anneau de polynômes en un nombre fini de variables, l'idéal est de type fini.}
+\entree{14825}{4:07:05}{Théorème de la base de Hilbert : si $k$ est un corps, tout idéal de $k[T_1,\dots,T_n]$ est de type fini.}
+\entree{14889}{4:08:09}{Définition : un anneau est noethérien si tous ses idéaux sont de type fini, c'est-à-dire si toute suite croissante d'idéaux stationne.}
+\entree{14955}{4:09:15}{Si $k$ est noethérien, alors $k[T]$ l'est, donc aussi $k[T_1,\dots,T_n]$.}
+\entree{15019}{4:10:19}{Sur un anneau $k$ noethérien, toute algèbre de type fini est de présentation finie ; tout sous-espace fermé de $E^n$ est défini par un nombre fini d'équations.}
+\entree{15218}{4:13:38}{Se donner une section d'un objet $X$ au-dessus de l'objet final équivaut à se donner un point $x\in X(k)$, compatible à tout $X(Z)$ ; un objet en groupes en possède une, la section unité.}
+\entree{15347}{4:15:47}{Le noyau d'un homomorphisme de groupes affines $G\to H$, $K(Z)=\ker(G(Z)\to H(Z))$, est un groupe affine : c'est le produit fibré de $G$ et de l'objet final au-dessus de $H$ via la section unité.}
+\entree{15479}{4:17:59}{Si $G=V_A$, $H=V_B$ et $B^+$ est l'idéal d'augmentation de $B$, le noyau de $G\to H$ est représenté par $A\otimes_Bk=A/B^+A$.}
+\entree{15555}{4:19:15}{Si $B\to A$ est un homomorphisme et $J$ un idéal de $B$, alors $A\otimes_B(B/J)\simeq A/JA$.}
+\entree{15814}{4:23:34}{Si un groupe $G$ opère sur $X$ et $x\in X(k)$, le stabilisateur $G_x(Z)=\{g\in G(Z) : g\cdot x(Z)=x(Z)\}$ est représentable ; c'est l'image réciproque de $x$ par $g\mapsto g\cdot x$.}
+\entree{15944}{4:25:44}{Le stabilisateur d'un point $k$-rationnel est donc un sous-groupe affine ; l'intersection d'un nombre fini de tels stabilisateurs $G_{x_i}$ en est encore un.}
+\entree{16010}{4:26:50}{L'intersection des $G_{x_i}$, $x_i\in X_i(k)$, est le stabilisateur du point $(x_i)$ de $\prod_iX_i$.}
+\entree{16207}{4:30:07}{Pour des sous-objets $X_i\to X$ (monomorphismes), le sous-foncteur intersection est le produit fibré des $X_i$ au-dessus de $X$ ; il est donc représentable, même pour une famille infinie.}
+\entree{16465}{4:34:25}{La catégorie $\mathcal{C}$ admet toutes les limites inductives, car la catégorie des $k$-algèbres admet toutes les limites projectives.}
+\entree{16527}{4:35:27}{Les limites projectives de $k$-algèbres se calculent sur les ensembles sous-jacents, avec la structure d'algèbre induite.}
+\entree{16658}{4:37:38}{Définition : une double flèche $R\rightrightarrows X$, c'est-à-dire $R\to X\times X$, est une relation d'équivalence si c'est un monomorphisme et si chaque $R(Z)$ est le graphe d'une relation d'équivalence sur $X(Z)$.}
+\entree{16789}{4:39:49}{Le conoyau d'une double flèche $X\rightrightarrows Y$ de $\mathcal{C}$, correspondant à $u,v\colon B\to A$, est représenté par la sous-algèbre $\{x\in A : u(x)=v(x)\}$.}
+\entree{16981}{4:43:01}{Pour un sous-groupe $H$ de $G$, les flèches $(h,g)\mapsto g$ et $(h,g)\mapsto hg$ de $H\times G$ dans $G$ définissent une relation d'équivalence sur $G$, dont les classes sont les $Hg$.}
+\face{Bande 2}
+\entree{17211}{4:46:51}{Le morphisme $(h,g)\mapsto(g,hg)$ de $H\times G$ dans $G\times G$ est un monomorphisme, et définit une relation d'équivalence car $H$ est un sous-groupe.}
+\entree{17406}{4:50:06}{Le sous-groupe de Borel standard $B\subset\mathrm{GL}_n$ est le foncteur $k'\mapsto$ groupe des matrices triangulaires inversibles sur $k'$, de coefficients diagonaux $\lambda_i$ inversibles.}
+\entree{17469}{4:51:09}{Le groupe $\mathrm{GL}_n$ est représenté par $k[T_{ij}]$ auquel on adjoint l'inverse du déterminant.}
+\entree{17536}{4:52:16}{Sur un corps $k$, les fonctions sur $\mathrm{GL}_n$ invariantes par translation par $B$ sont constantes : le conoyau de $\mathrm{GL}_n\times B\rightrightarrows\mathrm{GL}_n$ dans les espaces affines est l'objet final.}
+\entree{17536}{4:52:16}{Le quotient $\mathrm{GL}_n/B$ au sens des schémas est une variété complète (variété de drapeaux), dont les fonctions globales sont les constantes.}
+\entree{17599}{4:53:19}{Le quotient de $\mathrm{GL}_n$ par le sous-groupe des scalaires est une variété affine.}
+\section{5 juin 1973}\label{s-1973-06-05}
+\noindent\textit{Vidéo 1/4 (\href{https://www.youtube.com/watch?v=51wmmpHand0}{\texttt{51wmmpHand0}}) : bande 1, face A (4:55:19--5:43:08) ; bande 1, face B (5:43:08--6:31:22) ; bande 2 (6:31:22--6:38:51).}\par\medskip
+\video{51wmmpHand0}
+\face{Bande 1, face A}
+\entree{17855}{4:57:35}{Le foncteur représenté par $K[T]$ est $K'\mapsto K'$ ; celui de $K[T,T^{-1}]$ est $K'\mapsto K'^{*}$ (éléments inversibles), l'inclusion $K'^{*}\subset K'$ venant de $K[T]\to K[T,T^{-1}]$.}
+\entree{18250}{5:04:10}{Si $X$ est représenté par $A$, le point $\mathrm{id}_A\in X(A)$ est universel : tout point de $X(K')=\mathrm{Hom}(A,K')$ est l'image de $\mathrm{id}_A$ par un unique homomorphisme $A\to K'$.}
+\entree{18383}{5:06:23}{Un épimorphisme de $K$-algèbres $K'\to K''$ correspond à un monomorphisme de foncteurs, donc à un sous-foncteur.}
+\entree{18446}{5:07:26}{Un épimorphisme d'anneaux n'est pas nécessairement surjectif ; les homomorphismes surjectifs correspondent aux immersions fermées.}
+\entree{18708}{5:11:48}{Pour $X$ d'anneau $A$, le sous-foncteur $Y_J\colon K'\mapsto\{u\in\mathrm{Hom}(A,K')\mid u(J)=0\}$ est un sous-espace fermé, et $J\mapsto Y_J$ est une bijection des idéaux de $A$ sur les sous-espaces fermés de $X$.}
+\entree{18773}{5:12:53}{On retrouve l'idéal $J$ comme l'ensemble des $f\in A$ tels que $f(x)=0$ pour tout $K'$ et tout $x\in Y(K')$.}
+\entree{18901}{5:15:01}{Cette correspondance porte sur tous les idéaux et non sur les seuls idéaux radicaux, car les algèbres test $K'$ sont quelconques.}
+\entree{18901}{5:15:01}{L'anneau $A$ s'identifie à $\mathrm{Hom}(X,\mathbb{A}^1_K)$ : $f\in A$ définit $x\mapsto f(x)=x(f)\in K'$, fonctoriellement en $K'$.}
+\entree{19097}{5:18:17}{Un $K$-module $M$ est plat si et seulement si $M\otimes_K K'\to M\otimes_K K''$ est injectif pour tout homomorphisme injectif de $K$-algèbres $K'\to K''$.}
+\entree{19161}{5:19:21}{Définition : l'algèbre des nombres duaux $D_K(N)=K\times N$ avec $(\lambda,x)(\lambda',x')=(\lambda\lambda',\lambda x'+\lambda'x)$ ; $N$ y est un idéal de carré nul, et $D_K(N)$ est fonctorielle en $N$.}
+\entree{19362}{5:22:42}{On a $M\otimes_K D_K(N)\simeq M\oplus(M\otimes_K N)$, fonctoriellement en $N$ ; cela ramène la platitude de $M$ à l'injectivité pour les algèbres.}
+\entree{19491}{5:24:51}{Les limites projectives d'espaces affines correspondent aux limites inductives d'algèbres : produits et produits fibrés aux produits tensoriels $\otimes_K$ et $A\otimes_C B$.}
+\entree{19491}{5:24:51}{Le noyau d'une double flèche $u,v\colon A\rightrightarrows B$ d'algèbres correspond au quotient de $B$ par l'idéal engendré par les $u(x)-v(x)$.}
+\entree{19557}{5:25:57}{Le noyau d'un homomorphisme de groupes algébriques affines et le stabilisateur d'un point rationnel d'un espace affine muni d'une action de $G$ sont des sous-groupes algébriques fermés de $G$.}
+\entree{19684}{5:28:04}{Le plongement des espaces affines dans les foncteurs sur les algèbres commute aux limites projectives mais pas aux limites inductives.}
+\entree{19812}{5:30:12}{La somme finie d'espaces affines $X_i$ d'anneaux $A_i$ est l'espace affine d'anneau $\prod_i A_i$ ; les injections canoniques correspondent aux projections $\prod_j A_j\to A_i$.}
+\entree{19886}{5:31:26}{Les morphismes $X_i\to\coprod_j X_j$ sont des immersions fermées (les projections sont surjectives), donc injectifs sur les points à valeurs dans tout $K'$.}
+\entree{20208}{5:36:48}{Définition : un objet $X$ d'une catégorie est connexe si toute décomposition $X=X'\sqcup X''$ force $X'$ ou $X''$ à être initial ; dans les espaces topologiques on retrouve la connexité.}
+\entree{20350}{5:39:10}{Le foncteur $K'\mapsto\mathrm{Hom}(0,K')$ de l'algèbre nulle a un seul élément si $K'=0$ et est vide sinon ; l'espace affine correspondant, \q{vide}, est l'objet initial.}
+\entree{20474}{5:41:14}{Une décomposition d'un espace affine d'anneau $A$ en somme de deux espaces affines équivaut à une décomposition de $A$ en produit de deux algèbres $A'\times A''$.}
+\entree{20539}{5:42:19}{Une décomposition $A=A'\times A''$ équivaut à la donnée d'idempotents $e',e''$ de $A$ orthogonaux, de somme $1$ (les images des unités de $A'$ et $A''$).}
+\face{Bande 1, face B}
+\entree{20656}{5:44:16}{Une décomposition de $A$ en produit de $n$ anneaux équivaut à $n$ idempotents deux à deux orthogonaux de somme $1$ ; on retrouve $A_i=A/(1-e_i)$ et $A\simeq\prod_i A_i$.}
+\entree{20722}{5:45:22}{Si $e$ est idempotent, $1-e$ l'est aussi et $e(1-e)=0$ : un couple d'idempotents orthogonaux de somme $1$ équivaut à un seul idempotent.}
+\entree{20786}{5:46:26}{Un anneau $A$ est connexe (son espace affine l'est) si et seulement si ses seuls idempotents sont $0$ et $1$.}
+\entree{20850}{5:47:30}{Définition : un objet est $0$-connexe s'il est connexe et non initial ; un anneau est $0$-connexe s'il est connexe et non nul.}
+\entree{21041}{5:50:41}{Pour $Z$ affine, un morphisme $Z\to\coprod_{i}X_i$ (somme finie) équivaut à une décomposition $Z=\coprod_i Z_i$ et des morphismes $Z_i\to X_i$.}
+\entree{21173}{5:52:53}{Si $K'$ est $0$-connexe, l'application $\coprod_i X_i(K')\to X(K')$ pour $X=\coprod_i X_i$ (somme finie) est bijective.}
+\entree{21173}{5:52:53}{Un anneau intègre est $0$-connexe.}
+\entree{21237}{5:53:57}{Un anneau local est $0$-connexe.}
+\entree{21237}{5:53:57}{Annoncé : un espace affine est connexe (resp. vide) si et seulement si l'espace topologique $\mathrm{Spec}\,A$ l'est.}
+\entree{21337}{5:55:37}{Pour $K'=0$ l'hypothèse \q{non nul} est nécessaire : $X(0)$ est un singleton alors que la somme des $X_i(0)$ a $n$ éléments.}
+\entree{21723}{6:02:03}{Définition : des points $u'\in X(K')$, $u''\in X(K'')$, à valeurs dans des corps sur $K$, sont équivalents s'ils ont même image dans $X(K''')$ pour des $K$-homomorphismes $K',K''\to K'''$ vers un corps $K'''$.}
+\entree{21859}{6:04:19}{Deux homomorphismes $u'\colon A\to K'$, $u''\colon A\to K''$ vers des corps sont équivalents si et seulement si $\ker u'=\ker u''$ ; c'est donc une relation d'équivalence.}
+\entree{21989}{6:06:29}{Le noyau d'un homomorphisme de $A$ dans un corps est un idéal premier $P$ ; les homomorphismes $A\to K'$ de noyau $P$ correspondent aux homomorphismes de corps $\kappa(P)=\mathrm{Frac}(A/P)\to K'$.}
+\entree{22052}{6:07:32}{Deux extensions $K'$, $K''$ d'un corps $\kappa$ ont une extension commune : $K'\otimes_\kappa K''$ est non nul, donc a un quotient qui est un corps.}
+\entree{22123}{6:08:43}{L'ensemble des classes de points à valeurs dans des corps s'identifie à l'ensemble $\mathrm{Spec}(A)$ des idéaux premiers de $A$.}
+\entree{22510}{6:15:10}{Pour $S\subset A$, $V(S)$ est l'ensemble des idéaux premiers contenant $S$ ; $V(S)=V(J_S)=V(\sqrt{J_S})$, où $J_S$ est l'idéal engendré par $S$.}
+\entree{22575}{6:16:15}{Le radical d'un idéal est l'intersection des idéaux premiers qui le contiennent ; $J\mapsto V(J)$ est donc une bijection des idéaux radicaux sur les parties de la forme $V(S)$.}
+\entree{22644}{6:17:24}{Pour $J$, $J'$ radicaux, $V(J)\subset V(J')$ si et seulement si $J\supset J'$.}
+\entree{22774}{6:19:34}{Pour toute famille d'idéaux, $\bigcap_i V(J_i)=V\bigl(\sum_i J_i\bigr)$.}
+\entree{22837}{6:20:37}{Pour une famille finie d'idéaux, $\bigcup_i V(J_i)=V\bigl(\bigcap_i J_i\bigr)=V\bigl(\prod_i J_i\bigr)$.}
+\entree{23031}{6:23:51}{Les $V(J)$ sont les fermés d'une topologie sur $\mathrm{Spec}(A)$, en bijection avec les idéaux radicaux de $A$.}
+\entree{23031}{6:23:51}{L'espace $\mathrm{Spec}(A)$ est quasi-compact.}
+\entree{23167}{6:26:07}{On a $V(J)=\varnothing$ si et seulement si $J=A$ (tout idéal propre est contenu dans un idéal premier).}
+\entree{23294}{6:28:14}{L'adhérence du point $x$ d'idéal premier $P$ est $V(P)$ ; le point $y$ d'idéal $Q$ est dans l'adhérence de $x$ si et seulement si $Q\supset P$.}
+\entree{23357}{6:29:17}{La spécialisation sur $\mathrm{Spec}(A)$ correspond à l'inclusion des idéaux premiers en sens inverse ; l'espace $\mathrm{Spec}(A)$ est sobre : tout fermé irréductible est l'adhérence d'un unique point.}
+\face{Bande 2}
+\entree{23485}{6:31:25}{Un espace est irréductible s'il est non vide et n'est pas réunion de deux fermés strictement plus petits ; l'adhérence d'une partie irréductible est irréductible.}
+\entree{23485}{6:31:25}{L'adhérence d'un point est irréductible ; l'image d'un espace irréductible par une application continue est irréductible.}
+\entree{23547}{6:32:27}{Un espace séparé est irréductible si et seulement s'il est réduit à un point.}
+\entree{23611}{6:33:31}{Le spectre de $A$ ne change pas, avec sa topologie, quand on remplace $A$ par $A/\mathrm{nil}(A)$, car tout idéal premier contient le nilradical.}
+\entree{23676}{6:34:36}{On a $\mathrm{Spec}(A)=\varnothing$ si et seulement si $A=0$.}
+\entree{23738}{6:35:38}{Pour $A$ réduit et $J'$, $J''$ radicaux, $\mathrm{Spec}(A)=V(J')\cup V(J'')$ si et seulement si $J'J''=0$.}
+\entree{23801}{6:36:41}{L'espace $\mathrm{Spec}(A)$ est irréductible si et seulement si $A/\mathrm{nil}(A)$ est intègre.}
+\section{6 juin 1973}\label{s-1973-06-06}
+\noindent\textit{Vidéo 1/4 (\href{https://www.youtube.com/watch?v=51wmmpHand0}{\texttt{51wmmpHand0}}) : bande 2, suite (6:38:51--7:19:33) ; bande 1 (7:19:33--8:08:05) ; bande 2 (8:08:05--8:10:17).}\par\medskip
+\video{51wmmpHand0}
+\face{Bande 2, suite}
+\entree{24256}{6:44:16}{Les parties $V(S)$ sont les fermés d'une topologie sur $\mathrm{Spec}(A)$, la topologie spectrale (de Zariski) ; $V(J)=V(J')$ si et seulement si $\sqrt J=\sqrt{J'}$.}
+\entree{24326}{6:45:26}{Le nilradical de tout anneau est l'intersection de ses idéaux premiers.}
+\entree{24456}{6:47:36}{Les points à valeurs dans un corps $K'$ de classe $x\in\mathrm{Spec}(A)$ correspondent aux $K$-homomorphismes $\kappa(x)\to K'$.}
+\entree{24518}{6:48:38}{Un espace non vide est irréductible si et seulement si deux ouverts non vides se rencontrent, si et seulement si tout ouvert non vide est dense.}
+\entree{24714}{6:51:54}{Pour tout idéal $J$ de $A$, le fermé $V(J)$, avec la topologie induite, est homéomorphe à $\mathrm{Spec}(A/J)$.}
+\entree{25035}{6:57:15}{Le fermé $V(J)$ est irréductible si et seulement si $\sqrt J$ est premier ; $P\mapsto V(P)$ est une bijection de $\mathrm{Spec}(A)$ sur les fermés irréductibles.}
+\entree{25167}{6:59:27}{Cette bijection est $x\mapsto\overline{\{x\}}$ : $\mathrm{Spec}(A)$ est sobre, tout fermé irréductible ayant un unique point générique.}
+\entree{25297}{7:01:37}{Le spectre d'un anneau intègre $A$ est séparé si et seulement si $A$ est un corps ; ceux de $\mathbb{Z}$, de $k[T]$ ou d'un anneau de valuation discrète ne le sont pas.}
+\entree{25433}{7:03:53}{Définition : une composante irréductible d'un espace est un fermé irréductible maximal parmi les fermés irréductibles.}
+\entree{25498}{7:04:58}{Toute partie irréductible d'un espace topologique est contenue dans une composante irréductible (lemme de Zorn) ; l'espace est donc réunion de ses composantes irréductibles.}
+\entree{25626}{7:07:06}{Une réunion filtrante de parties irréductibles est irréductible.}
+\entree{25626}{7:07:06}{Dans un espace séparé, les composantes irréductibles sont les points.}
+\entree{25689}{7:08:09}{Les composantes irréductibles de $\mathrm{Spec}(A)$ correspondent aux idéaux premiers minimaux de $A$ (minimaux parmi tous les premiers).}
+\entree{25949}{7:12:29}{Pour $X$ affine de type fini sur $\mathbb{C}$, d'anneau $A$, les points de $X(\mathbb{C})$ correspondent aux idéaux maximaux de $A$, c'est-à-dire aux points fermés de $\mathrm{Spec}(A)$.}
+\entree{26013}{7:13:33}{Pour $X$ de type fini sur $\mathbb{C}$, $X$ est connexe si et seulement si $X(\mathbb{C})$, avec sa topologie complexe, est connexe.}
+\entree{26144}{7:15:44}{Un espace est irréductible si et seulement s'il a exactement une composante irréductible ; l'espace vide n'en a aucune.}
+\entree{26208}{7:16:48}{Dans un espace sobre, les composantes irréductibles correspondent aux points maximaux pour la relation de spécialisation (points génériques).}
+\face{Bande 1}
+\entree{26376}{7:19:36}{Dans un espace quasi-compact, tout fermé irréductible contient un fermé irréductible minimal (lemme de Zorn).}
+\entree{26508}{7:21:48}{Une partie non vide égale à l'adhérence de chacun de ses points est un fermé irréductible minimal, et réciproquement.}
+\entree{26698}{7:24:58}{Dans un espace sobre, les fermés irréductibles minimaux sont les points fermés ; si l'espace est de plus quasi-compact, tout fermé non vide contient un point fermé.}
+\entree{26762}{7:26:02}{Les points fermés de $\mathrm{Spec}(A)$ sont les idéaux maximaux ; l'existence d'un point fermé pour $A\neq0$ est l'existence d'un idéal maximal (Krull).}
+\entree{26826}{7:27:06}{Définition : un espace est noethérien si toute suite croissante d'ouverts est stationnaire, ou de façon équivalente toute suite décroissante de fermés.}
+\entree{26888}{7:28:08}{Un espace est noethérien si et seulement si tous ses ouverts sont quasi-compacts.}
+\entree{27083}{7:31:23}{Dans un espace noethérien, toute partie est quasi-compacte et noethérienne.}
+\entree{27151}{7:32:31}{Un espace séparé noethérien est fini discret.}
+\entree{27151}{7:32:31}{Si $A$ est un anneau noethérien, $\mathrm{Spec}(A)$ est un espace noethérien.}
+\entree{27214}{7:33:34}{Les corps et les anneaux principaux sont noethériens ; si $A$ est noethérien, $A[T]$ l'est ; un anneau est noethérien si et seulement si ses idéaux sont de type fini.}
+\entree{27282}{7:34:42}{Un espace noethérien a un nombre fini de composantes irréductibles ; un anneau noethérien a donc un nombre fini d'idéaux premiers minimaux.}
+\entree{27535}{7:38:55}{Dans un espace noethérien, toute famille non vide de fermés a un élément minimal (récurrence noethérienne).}
+\entree{27747}{7:42:27}{Un anneau non noethérien peut avoir un spectre noethérien : $K\oplus V$, avec $V$ de dimension infinie et $V^2=0$, a un spectre réduit à un point.}
+\entree{27809}{7:43:29}{L'espace $\mathrm{Spec}(A)$ est noethérien si et seulement si les idéaux radicaux de $A$ vérifient la condition de chaîne croissante.}
+\entree{28019}{7:46:59}{Les points de $\mathrm{Spec}(A)$ à valeurs dans $k$ correspondent aux idéaux maximaux $M$ dont le corps résiduel $\kappa(M)$ est $k$ ; si $k$ est algébriquement clos et $A$ de type fini, ce sont tous les idéaux maximaux.}
+\entree{28083}{7:48:03}{Pour $A$ de type fini sur un corps $k$, on a $X(k)\subset X_0\subset\mathrm{Spec}(A)$, où $X_0$ est l'ensemble des idéaux maximaux, avec $X(k)=X_0$ si $k$ est algébriquement clos.}
+\entree{28151}{7:49:11}{Définition : une partie $X_0$ de $X$ est très dense si $U\mapsto U\cap X_0$, des ouverts de $X$ vers ceux de $X_0$, est injective (donc bijective).}
+\entree{28339}{7:52:19}{Une partie $X_0$ est très dense si et seulement si tout localement fermé non vide de $X$ rencontre $X_0$.}
+\entree{28403}{7:53:23}{Une partie $X_0$ est très dense si et seulement si, pour tout fermé $T$ de $X$, $T\cap X_0$ est dense dans $T$.}
+\entree{28472}{7:54:32}{Si $X_0$ est très dense dans $X$, les treillis d'ouverts sont isomorphes et $\mathrm{Sh}(X)\to\mathrm{Sh}(X_0)$ est une équivalence de catégories.}
+\entree{28537}{7:55:37}{Réciproquement, si l'image réciproque des faisceaux de $X$ vers $X_0$ est fidèle ou conservative, alors $X_0$ est très dense dans $X$.}
+\entree{28667}{7:57:47}{Si $X$ est sobre et $X_0$ très dense, $X$ est l'espace sobre associé à $X_0$ (points : fermés irréductibles de $X_0$), donc déterminé par $X_0$ à homéomorphisme près.}
+\entree{28733}{7:58:53}{Pour $A$ de type fini sur un corps, l'ensemble des points fermés de $\mathrm{Spec}(A)$ est très dense (conséquence du Nullstellensatz).}
+\entree{28988}{8:03:08}{Pour $A$ de type fini sur un corps, le nilradical de $A$ est l'intersection de ses idéaux maximaux ; pour tout anneau c'est l'intersection des idéaux premiers.}
+\entree{29114}{8:05:14}{Pour $k$ algébriquement clos, $X(k)$, avec la topologie induite, a mêmes ouverts, fermés, localement fermés, fermés irréductibles et composantes que $\mathrm{Spec}(A)$, mais n'a pas les points génériques.}
+\face{Bande 2}
+\entree{29287}{8:08:07}{La topologie de $\mathrm{Spec}(A)$ ne suffit pas à reconstruire $A$ ; il faut munir $\mathrm{Spec}(A)$ d'un faisceau d'anneaux.}
+\section{11 juin 1973}\label{s-1973-06-11}
+\noindent\textit{Vidéo 1/4 (\href{https://www.youtube.com/watch?v=51wmmpHand0}{\texttt{51wmmpHand0}}) : bande 2, suite (8:10:17--8:56:07) ; bande 1 (8:56:07--9:45:14) ; bande 2 (9:45:14--10:33:10).}\par\medskip
+\noindent\textit{Vidéo 1/2 du cours sur les groupes (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}) : bande 2, à partir de 3:45:53 (3:45:53--3:47:24) ; bande 1 (3:47:24--4:34:37) ; bande 2 (4:34:37--5:03:20).}\par\medskip
+\video{51wmmpHand0}
+\face{Bande 2, suite}
+\entree{29480}{8:11:20}{Un groupe dans une catégorie plongée dans les foncteurs est un objet $G$ muni d'une structure de groupe sur chaque $G(Z)=\mathrm{Hom}(Z,G)$, fonctorielle en $Z$ ; cela ne demande ni produit ni objet final.}
+\entree{29738}{8:15:38}{Un groupe affine réduit de type fini sur un corps algébriquement clos est lisse (son anneau est régulier) ; s'il est connexe, son corps des fonctions est une extension transcendante pure.}
+\entree{29867}{8:17:47}{Pour $A=K[T_{ij}][\Delta^{-1}]$, $\Delta=\det(T_{ij})$, l'espace affine représenté a pour points à valeurs dans $K'$ les matrices $n\times n$ à déterminant inversible : c'est $\mathrm{GL}_n$.}
+\entree{29996}{8:19:56}{Une structure de groupe sur l'espace affine d'anneau $A$ équivaut à une comultiplication $A\to A\otimes_K A$ (avec counité) satisfaisant des axiomes ; $A$ est une bigèbre.}
+\entree{30063}{8:21:03}{L'inversion $g\mapsto g^{-1}$ correspond à un automorphisme de la $K$-algèbre $A$, l'antipode.}
+\entree{30192}{8:23:12}{Les $V(J)$ sont les fermés de $\mathrm{Spec}(A)$, qui est quasi-compact ; les fermés correspondent aux idéaux radicaux.}
+\entree{30258}{8:24:18}{Les idéaux premiers correspondent aux fermés irréductibles et aux points ; $\mathrm{Spec}(A)$ est sobre, et vide si et seulement si $A=0$.}
+\entree{30323}{8:25:23}{L'espace $\mathrm{Spec}(A)$ est irréductible si et seulement si le radical de $A$ est premier, c'est-à-dire $A/\mathrm{rad}(A)$ intègre.}
+\entree{30451}{8:27:31}{Un espace est noethérien si et seulement si (a) tout fermé a un nombre fini de composantes irréductibles et (b) toute suite décroissante de fermés irréductibles est stationnaire.}
+\entree{30645}{8:30:45}{Pour $A$ de type fini sur un corps $K$, l'inclusion de l'ensemble $X_0$ des points fermés dans $\mathrm{Spec}(A)$ est un quasi-homéomorphisme ($X_0$ très dense) ; si $K$ est algébriquement clos, $X_0=X(K)$.}
+\entree{30897}{8:34:57}{Les composantes irréductibles d'un ouvert $U$ d'un espace sont les intersections avec $U$ des composantes de l'espace qui rencontrent $U$.}
+\entree{30897}{8:34:57}{Si $X$ a un nombre fini de composantes irréductibles, $X$ est localement connexe ; $x,y$ sont dans la même composante connexe si et seulement si une chaîne de composantes irréductibles les relie, deux consécutives se rencontrant.}
+\entree{31421}{8:43:41}{Un homomorphisme $u\colon A\to B$ induit $\varphi\colon\mathrm{Spec}(B)\to\mathrm{Spec}(A)$, $\mathfrak p\mapsto u^{-1}(\mathfrak p)$, premier car $A/u^{-1}(\mathfrak p)\subset B/\mathfrak p$ est intègre.}
+\entree{31557}{8:45:57}{On a $\varphi^{-1}(V(J))=V(JB)$ ; l'application $\varphi$ est donc continue.}
+\entree{31622}{8:47:02}{L'application $A\mapsto\mathrm{Spec}(A)$ est un foncteur contravariant des $K$-algèbres vers les espaces topologiques.}
+\entree{31688}{8:48:08}{Si $u\colon A\to B\simeq A/J$ est surjectif, $\varphi$ est un homéomorphisme de $\mathrm{Spec}(B)$ sur le fermé $V(J)$ : une immersion fermée.}
+\entree{31819}{8:50:19}{L'application $A\to A_f$ est un épimorphisme d'anneaux ; les homomorphismes $A_f\to K'$ sont ceux de $A$ qui envoient $f$ sur un inversible, et $\mathrm{Spec}(A_f)\to\mathrm{Spec}(A)$ est injective.}
+\entree{31882}{8:51:22}{L'application $\mathrm{Spec}(A_f)\to\mathrm{Spec}(A)$ induit des isomorphismes entre corps résiduels aux points correspondants.}
+\entree{31945}{8:52:25}{Son image est $Y_f=Y\setminus V(fA)$, l'ensemble des idéaux premiers ne contenant pas $f$, et c'est un homéomorphisme sur son image.}
+\entree{32072}{8:54:32}{Les ouverts $Y_f$, $f\in A$, forment une base de la topologie de $Y=\mathrm{Spec}(A)$.}
+\face{Bande 1 (8:56:07--9:45:14)}
+\entree{32243}{8:57:23}{On a $Y_1=Y$ et $Y_f\cap Y_g=Y_{fg}$ ; les ouverts $Y_f$ sont stables par intersections finies.}
+\entree{32306}{8:58:26}{Une application d'un espace dans $\mathrm{Spec}(A)$ est continue si et seulement si l'image réciproque de chaque $Y_f$ est ouverte.}
+\entree{32371}{8:59:31}{Pour $\varphi\colon\mathrm{Spec}(B)\to\mathrm{Spec}(A)$ induit par $u$, on a $\varphi^{-1}(Y_f)=X_{u(f)}$.}
+\entree{32699}{9:04:59}{L'application $\mathrm{Spec}(A_f)\to\mathrm{Spec}(A)$ est un plongement ouvert d'image $Y_f$ : les ouverts de base $Y_f$ s'identifient aux spectres $\mathrm{Spec}(A_f)$.}
+\entree{32774}{9:06:14}{Si $A=\prod_i A_i$ (famille finie), $\mathrm{Spec}(A)$ est la somme topologique des $\mathrm{Spec}(A_i)$, chacun étant ouvert et fermé.}
+\entree{33240}{9:14:00}{L'application canonique $\mathrm{Spec}(A\otimes_K B)\to\mathrm{Spec}(A)\times_{\mathrm{Spec}(K)}\mathrm{Spec}(B)$ est surjective, mais presque jamais injective : $\mathrm{Spec}$ ne commute pas aux produits fibrés.}
+\entree{33308}{9:15:08}{Si $x\mapsto y$ par $\mathrm{Spec}(u)$, l'injection $A/\mathfrak q\to B/\mathfrak p$ induit une inclusion $\kappa(y)\to\kappa(x)$ des corps résiduels.}
+\entree{33500}{9:18:20}{La fibre de cette application au-dessus de $(x,y)$, avec $x,y$ au-dessus de $s$, est en bijection avec $\mathrm{Spec}\bigl(\kappa(x)\otimes_{\kappa(s)}\kappa(y)\bigr)$.}
+\entree{33562}{9:19:22}{Si $\kappa(x)=\kappa(s)$ ou $\kappa(y)=\kappa(s)$, la fibre est un point ; si $\kappa(x)$ et $\kappa(y)$ sont transcendants sur $\kappa(s)$, elle est infinie.}
+\entree{34080}{9:28:00}{Pour $K$ algébriquement clos, $\mathrm{Spec}\,K[T]$ est formé des idéaux maximaux $(T-a)$, $a\in K$, et du point générique $\eta=(0)$.}
+\entree{34212}{9:30:12}{Les fermés de $\mathrm{Spec}\,K[T]$ sont les parties finies de $K$ et l'espace entier ; les ouverts non vides sont les complémentaires des parties finies de $K$.}
+\entree{34277}{9:31:17}{Pour $\mathrm{Spec}\,K[U,V]\to\mathrm{Spec}\,K[U]\times\mathrm{Spec}\,K[V]$, la fibre au-dessus de tout point de $K\times K$, $K\times\{\eta\}$ ou $\{\eta\}\times K$ est un seul point.}
+\entree{34542}{9:35:42}{La fibre au-dessus de $(\eta,\eta)$ est $\mathrm{Spec}(K(U)\otimes_K K(V))$ : le plan entier et les courbes irréductibles $f=0$ qui ne sont ni de la forme $U=\lambda$ ni $V=\lambda$.}
+\entree{34737}{9:38:57}{Pour une application continue $\varphi$, l'adhérence de $\varphi(x)$ est l'adhérence de l'image de l'adhérence de $x$.}
+\entree{34866}{9:41:06}{Les applications continues entre spectres ne sont pas caractérisées comme provenant d'homomorphismes d'anneaux.}
+\entree{34995}{9:43:15}{La topologie de $\mathrm{Spec}(A\otimes_K B)$ n'est pas l'image réciproque de la topologie produit de $\mathrm{Spec}(A)\times\mathrm{Spec}(B)$.}
+\face{Bande 2 (9:45:14--10:33:10)}
+\entree{35116}{9:45:16}{Les $K$-points de $X\times Y$ sont $X(K)\times Y(K)$ ; la topologie spectrale du produit, restreinte à ces points, est plus fine que la topologie produit.}
+\entree{35250}{9:47:30}{Si $A\to A'$ est fidèlement plat, $0\to M\to M\otimes_A A'\rightrightarrows M\otimes_A A'\otimes_A A'$ est exacte : $M$ est le sous-module des éléments de $M\otimes_A A'$ de même image par les deux changements de base (descente).}
+\entree{35570}{9:52:50}{Si $X'\to X$ admet des puissances cartésiennes finies $X'^I$ sur $X$, on obtient un objet simplicial augmenté de $\mathcal{C}/X$ (indice $I$ ensemble fini non vide, augmentation $X$).}
+\entree{36021}{10:00:21}{Pour un foncteur contravariant $F$ à valeurs dans les groupes abéliens, la somme alternée des faces donne un complexe ; sa cohomologie est la cohomologie de Čech $\check H^i(X'/X,F)$, avec une augmentation $F(X)\to\check H^0$.}
+\entree{36152}{10:02:32}{Si $X'\to X$ admet une section, l'augmentation est une équivalence d'homotopie d'objets simpliciaux : $\check H^i(X'/X,F)=0$ pour $i\geq1$ et $F(X)\simeq\check H^0$.}
+\entree{36474}{10:07:54}{Si $A\to A'$ admet une rétraction $A'\to A$, alors $H^i(A'/A,M)=0$ pour $i>0$ et $H^0=M$, où $F_M(B)=M\otimes_A B$.}
+\entree{36607}{10:10:07}{Pour $B'=A'\otimes_A B$, le complexe de Čech de $B'/B$ à coefficients dans $M_B$ est celui de $A'/A$ à coefficients dans $M$ tensorisé par $B$ au-dessus de $A$.}
+\entree{36737}{10:12:17}{Si $B$ est plat sur $A$, $H^i(B'/B,M_B)=H^i(A'/A,M)\otimes_A B$ ; si $B$ est fidèlement plat, l'exactitude de l'augmentation peut se vérifier après extension à $B$.}
+\entree{36802}{10:13:22}{Si $A'$ est fidèlement plat sur $A$, alors $H^i(A'/A,M)=0$ pour $i>0$ et $M\to H^0(A'/A,M)$ est un isomorphisme (on prend $B=A'$, où la diagonale est scindée).}
+\entree{36939}{10:15:39}{Si les $f_i$ engendrent l'idéal unité de $A$, le complexe de Čech du recouvrement de $\mathrm{Spec}(A)$ par les $X_{f_i}$, à coefficients dans $M_f$ sur $X_f$, est exact en degrés $>0$ et de $H^0=M$.}
+\entree{37068}{10:17:48}{Deux morphismes $X'\to X''$ au-dessus de $X$ induisent des morphismes homotopes entre les complexes simpliciaux ; si $X'$ et $X''$ se dominent mutuellement, ils ont même cohomologie de Čech.}
+\entree{37263}{10:21:03}{Si $f_1$ à $f_n$ engendrent l'idéal unité de $A$, l'algèbre $A\to\prod_i A_{f_i}$ est fidèlement plate.}
+\entree{37457}{10:24:17}{Le préfaisceau $X_f\mapsto M_f$ est un faisceau $\widetilde{M}$ sur $\mathrm{Spec}(A)$, et $H^i(\mathrm{Spec}(A),\widetilde{M})=0$ pour $i>0$ : un schéma affine est acyclique pour $\widetilde{M}$.}
+\entree{37586}{10:26:26}{La diagonale $\mathrm{Spec}(A)\to\mathrm{Spec}(A)\times_{\mathrm{Spec}(K)}\mathrm{Spec}(A)$ est une immersion fermée, car $A\otimes_K A\to A$, $x\otimes y\mapsto xy$, est surjectif.}
+\entree{37650}{10:27:30}{Un module $M$ de présentation finie est plat si et seulement s'il est projectif de type fini, si et seulement si $\widetilde{M}$ est localement libre sur $\mathrm{Spec}(A)$.}
+\entree{37782}{10:29:42}{À $X$ affine de type fini sur $\mathbb{C}$ est associé l'espace analytique $X^{\mathrm{an}}$, avec un morphisme d'espaces annelés $X^{\mathrm{an}}\to X$ universel pour les morphismes d'espaces analytiques vers $X$.}
+\entree{37848}{10:30:48}{Pour $M$ de type fini sur $A$ de type fini sur $\mathbb{C}$, $M$ est plat si et seulement si l'image réciproque de $\widetilde{M}$ sur $X^{\mathrm{an}}$ est localement libre, i.e. un fibré vectoriel holomorphe.}
+\video{_lTf_L0yvrU}
+\face{Bande 2, à partir de 3:45:53}
+\noindent\textit{Enregistrée sur la vidéo 1/2 du cours sur les groupes (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}) ; elle relève par son contenu du cours de géométrie algébrique.}\par\smallskip
+\entree{13553}{3:45:53}{Le spectre $X=\mathrm{Spec}\,A$ d'un anneau, muni de son faisceau structural, est un espace localement annelé.}
+\entree{13617}{3:46:57}{Le foncteur $A\mapsto\mathrm{Spec}\,A$ des anneaux vers les espaces localement annelés transforme les produits tensoriels en produits fibrés : $\mathrm{Spec}(A\otimes_kB)=\mathrm{Spec}\,A\times_{\mathrm{Spec}\,k}\mathrm{Spec}\,B$.}
+\face{Bande 1 (3:47:24--4:34:37)}
+\noindent\textit{Enregistrée sur la vidéo 1/2 du cours sur les groupes (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}) ; elle relève par son contenu du cours de géométrie algébrique.}\par\smallskip
+\entree{13646}{3:47:26}{Un faisceau sur $X=\mathrm{Spec}\,A$ équivaut à un foncteur contravariant sur les ouverts $X_f$ vérifiant la condition de faisceau pour les recouvrements d'un $X_f$ par des $X_{f_i}$.}
+\entree{13976}{3:52:56}{$X_f\subset X_g$ si et seulement s'il existe un entier $n\ge0$ et $h\in A$ tels que $f^n=gh$ ; cette relation est transitive.}
+\entree{14363}{3:59:23}{$X_f=\bigcup_iX_{f_i}$ si et seulement si $f_i^{n_i}\in fA$ pour tout $i$ et s'il existe $n$ et des $g_i\in A$ (presque tous nuls) avec $f^n=\sum_ig_if_i$.}
+\entree{14427}{4:00:27}{À un $A$-module $M$ on associe un faisceau $\widetilde{M}$ sur $X=\mathrm{Spec}\,A$ ; pour $M=A$, c'est un faisceau d'anneaux.}
+\entree{14490}{4:01:30}{On pose $\widetilde{M}(X_f)=M_f$, le localisé de $M$ en $f$, qui est la limite inductive de $M\xrightarrow{f}M\xrightarrow{f}M\to\cdots$.}
+\entree{14557}{4:02:37}{Dans $M_f$, la multiplication par $f$ est bijective, et $M\to M_f$ est l'application canonique.}
+\entree{14682}{4:04:42}{Propriété universelle : pour tout $A$-module $N$ sur lequel $f$ opère bijectivement, tout homomorphisme $M\to N$ se factorise de façon unique par $M_f$ ; en particulier $M\mapsto M_f$ est un foncteur.}
+\entree{14941}{4:09:01}{Description par fractions : $M_f$ est l'ensemble des $x/f^n$, avec $x/f^n=x'/f^{n'}$ si et seulement s'il existe $m$ tel que $f^m(f^{n'}x-f^nx')=0$.}
+\entree{15076}{4:11:16}{$A_f$ est un anneau, $A\to A_f$ un homomorphisme d'anneaux, et $\frac{x}{f^n}\cdot\frac{y}{f^{n'}}=\frac{xy}{f^{n+n'}}$.}
+\entree{15142}{4:12:22}{$M_f$ est un $A_f$-module par $\frac{\lambda}{f^n}\cdot\frac{x}{f^m}=\frac{\lambda x}{f^{n+m}}$.}
+\entree{15206}{4:13:26}{Propriété universelle de $A_f$ : tout homomorphisme de $A$ dans un anneau $R$ (même non commutatif) envoyant $f$ sur un inversible se factorise de façon unique par $A_f$.}
+\entree{15270}{4:14:30}{Se donner un $A_f$-module équivaut à se donner un $A$-module sur lequel $f$ opère bijectivement.}
+\entree{15575}{4:19:35}{Si $X_f\subset X_g$, soit $f^n=gh$, alors $g$ est inversible dans $M_f$, d'où une restriction $M_g\to M_f$, fonctorielle en $M$ et compatible à la composition : $f\mapsto M_f$ est un préfaisceau.}
+\entree{15707}{4:21:47}{Théorème : $f\mapsto M_f$ est un faisceau sur la base des ouverts $X_f$, c'est-à-dire que $M_f\to\prod_iM_{f_i}\rightrightarrows\prod_{i,j}M_{f_if_j}$ est exacte pour tout recouvrement de $X_f$ par des $X_{f_i}$.}
+\entree{15842}{4:24:02}{$\widetilde{A}$ est un faisceau d'anneaux sur $X$ et $\widetilde{M}$ est un faisceau de modules sur $\widetilde{A}$.}
+\face{Bande 2 (4:34:37--5:03:20)}
+\noindent\textit{Enregistrée sur la vidéo 1/2 du cours sur les groupes (\href{https://www.youtube.com/watch?v=_lTf_L0yvrU}{\texttt{\_lTf\_L0yvrU}}) ; elle relève par son contenu du cours de géométrie algébrique.}\par\smallskip
+\entree{16542}{4:35:42}{Les ouverts $X_f$ sont quasi-compacts : un recouvrement de $X_f$ par des $X_{f_i}$ admet un sous-recouvrement fini, car $f^n=\sum_ig_if_i$ est une somme finie ; la condition de faisceau se vérifie sur ce sous-recouvrement.}
+\entree{16989}{4:43:09}{On a $\widetilde{M}(X)=M_1=M$ et $\widetilde{M}(X_f)=M_f$ : le localisé $M_f$ est le module des sections de $\widetilde{M}$ sur l'ouvert $X_f$.}
+\entree{17115}{4:45:15}{Le localisé s'identifie à un changement de base : l'application canonique $M\otimes_AA_f\to M_f$ est un isomorphisme.}
+\entree{17311}{4:48:31}{Si $f_1,\ldots,f_r$ engendrent l'idéal unité et $A'=\prod_iA_{f_i}$, alors $A'\otimes_AA'=\prod_{i,j}A_{f_if_j}$ ; la condition de faisceau équivaut à l'exactitude de $0\to M\to M\otimes_AA'\rightrightarrows M\otimes_AA'\otimes_AA'$.}
+\entree{17443}{4:50:43}{Si $A'$ est une $A$-algèbre fidèlement plate, la suite $0\to M\to M\otimes_AA'\rightrightarrows M\otimes_AA'\otimes_AA'$ est exacte pour tout $A$-module $M$ ; elle peut être inexacte sans hypothèse (par exemple pour $A'=0$).}
+\entree{17573}{4:52:53}{Un $A$-module $M$ est plat si le foncteur $N\mapsto N\otimes_AM$ est exact, c'est-à-dire (ce foncteur étant exact à droite) s'il transforme les injections en injections.}
+\entree{17766}{4:56:06}{$M$ est fidèlement plat s'il est plat et si $N\mapsto M\otimes_AN$ est fidèle ; pour ce foncteur exact, cela équivaut à : $M\otimes_AN=0$ entraîne $N=0$.}
+\entree{17830}{4:57:10}{Si $M$ est fidèlement plat, un homomorphisme $N\to N'$ est injectif (resp. surjectif, bijectif) si et seulement si $M\otimes N\to M\otimes N'$ l'est.}
+\entree{17894}{4:58:14}{Une $A$-algèbre $A'$ est fidèlement plate si elle l'est comme module ; l'extension des scalaires des $A$-modules aux $A'$-modules est alors exacte et fidèle.}
+\entree{17958}{4:59:18}{Pour $A'$ fidèlement plate sur $A$, le complexe $0\to M\to M\otimes_AA'\to M\otimes_AA'\otimes_AA'\to\cdots$ est exact : $H^0(A'/A,M)=M$ et $H^i(A'/A,M)=0$ pour $i>0$.}
+\section{12 juin 1973}\label{s-1973-06-12}
+\noindent\textit{Vidéo 2/4 (\href{https://www.youtube.com/watch?v=thSz9ZHDK9o}{\texttt{thSz9ZHDK9o}}) : bande 1 (0:00:00--0:47:50) ; bande 2 (0:47:50--1:36:26) ; bande 2 (1:36:26--2:09:27).}\par\medskip
+\video{thSz9ZHDK9o}
+\face{Bande 1}
+\entree{66}{0:01:06}{Définition : un module $M$ est plat si le foncteur $-\otimes M$ est exact.}
+\entree{129}{0:02:09}{La diagonale d'un espace algébrique affine $X=\mathrm{Spec}\,A$ sur $K$ est une immersion fermée, car $A\otimes_K A\to A$, $x\otimes y\mapsto xy$, est surjectif.}
+\entree{336}{0:05:36}{Les sommes finies d'espaces algébriques affines sur $K$ correspondent aux produits finis de $K$-algèbres.}
+\entree{401}{0:06:41}{Définition : une somme $X=\coprod X_i$ est disjointe si les $u_i\colon X_i\to X$ sont des monomorphismes et si $X_i\times_X X_j$ est un objet initial pour $i\neq j$.}
+\entree{464}{0:07:44}{Définition : une somme $X=\coprod X_i$ est universelle si, pour tout changement de base $X'\to X$, $\coprod X'_i\to X'$ est un isomorphisme, $X'_i=X_i\times_X X'$.}
+\entree{527}{0:08:47}{Un morphisme $u_i$ est un monomorphisme si et seulement si $X_i\times_X X_i\simeq X_i$ par la diagonale.}
+\entree{593}{0:09:53}{Dans la catégorie des espaces algébriques affines sur $K$, les sommes finies sont disjointes et universelles.}
+\entree{658}{0:10:58}{Pour $A=\prod_i A_i$, les $X_i\to X$ sont des immersions fermées ($A\to A_i$ surjectif) et $A_i\otimes_A A_j=0$ pour $i\neq j$.}
+\entree{918}{0:15:18}{Si les sommes sont universelles, $(\coprod_i X_i)\times(\coprod_j Y_j)\simeq\coprod_{i,j}X_i\times Y_j$ (distributivité du produit sur la somme).}
+\entree{1176}{0:19:36}{Définition : pour un ensemble fini $I$, l'objet constant $I_C=\coprod_I e$ est la somme de $I$ copies de l'objet final $e$.}
+\entree{1239}{0:20:39}{Si les sommes finies sont universelles, $I_C\times J_C\simeq(I\times J)_C$ ; le foncteur $I\mapsto I_C$ commute aux produits fibrés et à l'objet final, donc est exact à gauche.}
+\entree{1369}{0:22:49}{Si $I$ est un groupe fini, $I_K$ est un groupe algébrique affine sur $K$ (groupe constant) ; plus généralement $I_K$ hérite de toute structure définie par des limites finies sur $I$.}
+\entree{1437}{0:23:57}{Un foncteur entre catégories à limites projectives finies est exact à gauche si et seulement s'il commute aux produits fibrés et envoie objet final sur objet final.}
+\entree{1502}{0:25:02}{On a $I_K=\mathrm{Spec}\,K^I$, où $K^I$ est la $K$-algèbre des applications de $I$ dans $K$.}
+\entree{1568}{0:26:08}{La loi $I\times I\to I$ induit sur $K^I$ la comultiplication $K^I\to K^{I\times I}\simeq K^I\otimes_K K^I$ transposée de la loi.}
+\entree{1836}{0:30:36}{Si $Y\to S$ est un monomorphisme d'espaces algébriques affines, $\mathrm{Spec}\,Y\to\mathrm{Spec}\,S$ est injective.}
+\entree{1899}{0:31:39}{Si $Y\to S$ est un monomorphisme, $\mathrm{Spec}(X\times_S Y)$ est, dans $\mathrm{Spec}\,X$, l'image réciproque de $\mathrm{Spec}\,Y$ par $\mathrm{Spec}\,X\to\mathrm{Spec}\,S$.}
+\entree{2093}{0:34:53}{Si $Y\to S$ est une immersion fermée ($A\to C$ surjectif), $Z=X\times_S Y\to X$ en est une aussi, et la topologie de $\mathrm{Spec}\,Z$ est induite par celle de $\mathrm{Spec}\,X$.}
+\entree{2156}{0:35:56}{Si $Y=S_f$ ($A\to A_f$), alors $B\otimes_A A_f=B_f$ et la topologie de $\mathrm{Spec}\,Z$ est induite par celle de $\mathrm{Spec}\,X$.}
+\entree{2288}{0:38:08}{Si $A\to C$ est un quotient $A/J$ suivi d'une localisation, la topologie de $\mathrm{Spec}(B\otimes_A C)$ est induite par $\mathrm{Spec}\,B$ et $\mathrm{Spec}$ commute à ce produit fibré.}
+\entree{2416}{0:40:16}{Pour deux sous-objets $X$, $Y$ de $S$, on a $\mathrm{Spec}(X\cap Y)=\mathrm{Spec}\,X\cap\mathrm{Spec}\,Y$ dans $\mathrm{Spec}\,S$ (ensemblistement).}
+\entree{2613}{0:43:33}{Pour un idéal premier $\mathfrak p$ de $A$ et $K'=\kappa(\mathfrak p)$, la fibre $X\times_S\mathrm{Spec}\,K'$ a pour spectre la fibre de $\mathrm{Spec}\,X\to\mathrm{Spec}\,S$ en $\mathfrak p$, avec la topologie induite.}
+\entree{2810}{0:46:50}{Pour $u\colon A\to B$ et $\varphi=\mathrm{Spec}\,u$, l'adhérence de $\varphi(V(J))$ est $V(u^{-1}(J))$, pour tout idéal $J$ de $B$.}
+\face{Bande 2 (0:47:50--1:36:26)}
+\entree{3134}{0:52:14}{Le morphisme $\varphi=\mathrm{Spec}\,u$ est dominant si et seulement si $\mathrm{Ker}\,u$ est contenu dans le nilradical de $A$ ; si $A$ est réduit, si et seulement si $u$ est injectif.}
+\entree{3405}{0:56:45}{Pour un $A$-module $M$, $X_f\mapsto M_f$ définit un faisceau $\widetilde{M}$ de $A$-modules sur $X=\mathrm{Spec}\,A$.}
+\entree{3469}{0:57:49}{$\widetilde{A}$ est un faisceau de $A$-algèbres avec $\Gamma(X,\widetilde{A})=A$ ; $\widetilde{M}$ est un faisceau de $\widetilde{A}$-modules.}
+\entree{3533}{0:58:53}{Définition : le faisceau d'anneaux $\mathcal{O}_X=\widetilde{A}$ est le faisceau structural de $X=\mathrm{Spec}\,A$, qui devient ainsi un espace annelé ; l'anneau $A$ s'en retrouve comme $\Gamma(X,\mathcal{O}_X)$.}
+\entree{3728}{1:02:08}{Le foncteur $M\mapsto\widetilde{M}$ est exact, commute aux limites inductives quelconques et au produit tensoriel.}
+\entree{3792}{1:03:12}{Si $M$ est de présentation finie, $\widetilde{\mathrm{Hom}_A(M,N)}\simeq\underline{\mathrm{Hom}}_{\mathcal{O}_X}(\widetilde{M},\widetilde{N})$ ; pour $A$ noethérien, présentation finie équivaut à type fini.}
+\entree{3856}{1:04:16}{Le foncteur $M\mapsto\widetilde{M}$ est pleinement fidèle : $\mathrm{Hom}_A(M,N)\simeq\mathrm{Hom}_{\mathcal{O}_X}(\widetilde{M},\widetilde{N})$.}
+\entree{4112}{1:08:32}{On a $\widetilde{M}\otimes_{\mathcal{O}_X}\widetilde{N}\simeq\widetilde{M\otimes_A N}$.}
+\entree{4308}{1:11:48}{On a $\widetilde{M}\simeq M\otimes_A\mathcal{O}_X$ : c'est l'image inverse de $M$ par le morphisme d'espaces annelés $(X,\mathcal{O}_X)\to(\mathrm{pt},A)$.}
+\entree{4703}{1:18:23}{Définition : un $\mathcal{O}_X$-module $\mathcal{M}$ est quasi-cohérent s'il existe un recouvrement ouvert $(X_i)$ tel que $\mathcal{M}|_{X_i}$ soit conoyau d'un morphisme $\mathcal{O}_{X_i}^{(J_1)}\to\mathcal{O}_{X_i}^{(J)}$, ensembles d'indices quelconques.}
+\entree{4841}{1:20:41}{Théorème : sur $X=\mathrm{Spec}\,A$, un $\mathcal{O}_X$-module est quasi-cohérent si et seulement s'il est isomorphe à un $\widetilde{M}$.}
+\entree{4903}{1:21:43}{Tout $\widetilde{M}$ est conoyau d'un morphisme de $\mathcal{O}_X$-modules libres $\mathcal{O}_X^{(J_1)}\to\mathcal{O}_X^{(J)}$ ; réciproquement un tel conoyau est de la forme $\widetilde{M}$.}
+\entree{5103}{1:25:03}{Si $X=\bigcup_i X_{f_i}$ (famille finie), des modules $M_i$ sur $A_{f_i}$ avec isomorphismes de recollement sur les $A_{f_if_j}$ vérifiant la condition de cocycle proviennent d'un $A$-module $M$.}
+\entree{5165}{1:26:05}{Pour $A'=\prod_i A_{f_i}$, on a $A'\otimes_A A'\simeq\prod_{i,j}A_{f_if_j}$ ; la donnée de recollement est une donnée de descente de $A'$ vers $A$.}
+\entree{5297}{1:28:17}{Si $X=\bigcup_i X_{f_i}$ (famille finie), $A\to\prod_i A_{f_i}$ est fidèlement plat.}
+\entree{5551}{1:32:31}{Définition : $X'\to X$ est de descente effective pour une catégorie fibrée $F$ si $F(X)\to D_{X'/X}(F(X'))$ (objets avec donnée de descente) est une équivalence ; fidèle ou pleinement fidèle sont des cas plus faibles.}
+\entree{5614}{1:33:34}{Si $X'\to X$ admet une section, c'est un morphisme de descente effective pour toute catégorie fibrée.}
+\entree{5680}{1:34:40}{Si $A\to A'$ est fidèlement plat, $\mathrm{Spec}\,A'\to\mathrm{Spec}\,A$ est de descente effective pour les modules : un $A$-module équivaut à un $A'$-module muni d'une donnée de descente.}
+\face{Bande 2 (1:36:26--2:09:27)}
+\entree{5791}{1:36:31}{Par descente fidèlement plate, $M\mapsto\widetilde{M}$ est une équivalence entre $A$-modules et $\mathcal{O}_X$-modules quasi-cohérents sur $X=\mathrm{Spec}\,A$.}
+\entree{5989}{1:39:49}{La fibre de $\widetilde{M}$ en le point $x$ associé à $\mathfrak p$ est $M_{\mathfrak p}=\varinjlim_{f\notin\mathfrak p}M_f$ (système filtrant).}
+\entree{6117}{1:41:57}{La fibre de $\mathcal{O}_X$ en $x$ est $\varinjlim_{f\notin\mathfrak p}A_f=A_{\mathfrak p}$.}
+\entree{6181}{1:43:01}{Définition : pour une partie multiplicative $T\subset A$, $MT^{-1}=\varinjlim_{f\in T}M_f$ ; c'est un module sur l'algèbre $AT^{-1}=\varinjlim_{f\in T}A_f$ ; pour $T=\{f^n\}$ on retrouve $M_f$.}
+\entree{6246}{1:44:06}{$M\to MT^{-1}$ est universel parmi les $A$-linéaires $M\to N$ telles que la multiplication par chaque $f\in T$ soit bijective sur $N$.}
+\entree{6375}{1:46:15}{$A\to AT^{-1}$ est universel parmi les homomorphismes $A\to B$ qui rendent inversibles les éléments de $T$.}
+\entree{6568}{1:49:28}{On a $MT^{-1}\simeq M\otimes_A AT^{-1}$.}
+\entree{6632}{1:50:32}{L'anneau $A_{\mathfrak p}$ est local, de corps résiduel $\kappa(\mathfrak p)=\mathrm{Frac}(A/\mathfrak p)$.}
+\entree{6702}{1:51:42}{Définition : un anneau $O$ est local s'il a un unique idéal maximal $\mathfrak m$ ; le corps $O/\mathfrak m$ est son corps résiduel.}
+\entree{6764}{1:52:44}{Un élément est inversible si et seulement s'il n'appartient à aucun idéal maximal ; dans un anneau local, $O^*=O\setminus\mathfrak m$.}
+\entree{6963}{1:56:03}{Si $\mathfrak m$ est un idéal de $O$ avec $O^*=O\setminus\mathfrak m$, alors $O$ est local d'idéal maximal $\mathfrak m$.}
+\entree{7027}{1:57:07}{Un anneau $O\neq0$ est local si et seulement si, pour tout $f\in O$, $f$ ou $1-f$ est inversible.}
+\entree{7093}{1:58:13}{L'idéal maximal de $A_{\mathfrak p}$ est $\mathfrak p A_{\mathfrak p}$, et $A_{\mathfrak p}/\mathfrak p A_{\mathfrak p}\simeq\kappa(\mathfrak p)$ ; ainsi $A_{\mathfrak p}^*=A_{\mathfrak p}\setminus\mathfrak pA_{\mathfrak p}$.}
+\entree{7631}{2:07:11}{Définition : un espace annelé est localement annelé si toutes ses fibres de $\mathcal{O}_X$ sont des anneaux locaux ; $\mathrm{Spec}\,A$ est localement annelé.}
+\section{13 juin 1973}\label{s-1973-06-13}
+\noindent\textit{Vidéo 2/4 (\href{https://www.youtube.com/watch?v=thSz9ZHDK9o}{\texttt{thSz9ZHDK9o}}) : bande 2, suite (2:09:27--2:25:35) ; bande 1 (2:25:35--3:14:52) ; bande 2 (3:14:52--4:03:12).}\par\medskip
+\video{thSz9ZHDK9o}
+\face{Bande 2, suite}
+\entree{7837}{2:10:37}{Le foncteur $M\mapsto\widetilde{M}$ ne commute pas aux produits infinis en général : $(\prod_i M_i)^{\sim}\to\prod_i\widetilde{M_i}$ n'est pas toujours un isomorphisme.}
+\entree{8093}{2:14:53}{Si $A$ est intègre et non un corps, $f\neq0$ non inversible et $I$ infini, $(A^I)_f\to(A_f)^I$ n'est pas surjectif.}
+\entree{8093}{2:14:53}{Pour $M=A^{(I)}$ avec $I$ infini, $\widetilde{\mathrm{Hom}_A(M,N)}\to\underline{\mathrm{Hom}}(\widetilde{M},\widetilde{N})$ n'est pas un isomorphisme en général.}
+\entree{8227}{2:17:07}{Pour $O\neq0$ : $O$ est local si et seulement si les non-inversibles forment un idéal, si et seulement si $f+g=1$ entraîne $f$ ou $g$ inversible.}
+\entree{8624}{2:23:44}{Si $A$ est local noethérien, $\hat A$ est fidèlement plat sur $A$ ; un $\hat A$-module muni d'une donnée de descente relative à $A\to\hat A$ provient d'un $A$-module $M$, unique à isomorphisme canonique près.}
+\entree{8624}{2:23:44}{Pour $A\to\hat A$ fidèlement plat, $M$ est de type fini si et seulement si $M\otimes_A\hat A$ l'est ; alors $M\otimes_A\hat A$ est le complété de $M$.}
+\face{Bande 1}
+\entree{8874}{2:27:54}{Pour $f\in\mathcal{O}_X(U)$, on pose $U_f=\{x\in U : f(x)\neq0\}$, où $f(x)$ est l'image de $f_x$ dans $\kappa(x)$ ; c'est l'ensemble des $x$ où $f_x$ est inversible.}
+\entree{9004}{2:30:04}{Un espace annelé à fibres non nulles est localement annelé si et seulement si, pour $f_1,\dots,f_n\in\mathcal{O}_X(U)$ avec $\sum f_i=1$, les $U_{f_i}$ recouvrent $U$.}
+\entree{9067}{2:31:07}{Pour $u\colon A\to B$, $\varphi\colon\mathrm{Spec}\,B\to\mathrm{Spec}\,A$, $\mathfrak p\mapsto u^{-1}(\mathfrak p)$, est continue.}
+\entree{9194}{2:33:14}{L'homomorphisme $u$ définit $\mathcal{O}_Y\to\varphi_*\mathcal{O}_X$, donné sur $Y_f$ par $A_f\to B_{u(f)}$, car $\varphi^{-1}(Y_f)=X_{u(f)}$ ; $\varphi$ est un morphisme d'espaces annelés.}
+\entree{9257}{2:34:17}{Pour une $A$-algèbre $B$ et $f\in A$, la localisation de $B$ en l'image de $f$ coïncide avec la localisation du $A$-module $B$ en $f$.}
+\entree{9386}{2:36:26}{On retrouve $u$ comme $\Gamma(\varphi^{\#})\colon\Gamma(Y,\mathcal{O}_Y)\to\Gamma(X,\mathcal{O}_X)$ ; l'application $\mathrm{Hom}(A,B)\to\mathrm{Hom}(\mathrm{Spec}\,B,\mathrm{Spec}\,A)$ est injective.}
+\entree{9513}{2:38:33}{Pour un $B$-module $N$, on a $\varphi_*\widetilde{N}\simeq\widetilde{N_{[A]}}$ : l'image directe correspond à la restriction des scalaires.}
+\entree{9833}{2:43:53}{Pour $M$ un $A$-module et $N$ un $B$-module, $\mathrm{Hom}_{\mathcal{O}_Y}(\widetilde{M},\varphi_*\widetilde{N})\simeq\mathrm{Hom}_A(M,N_{[A]})\simeq\mathrm{Hom}_B(M\otimes_A B,N)$.}
+\entree{9961}{2:46:01}{On a $\varphi^*\widetilde{M}\simeq(M\otimes_A B)^{\sim}$ : l'image inverse correspond à l'extension des scalaires.}
+\entree{10229}{2:50:29}{Un morphisme d'espaces annelés induit des homomorphismes $\mathcal{O}_{Y,\varphi(x)}\to\mathcal{O}_{X,x}$ ; définition : $u\colon O\to O'$ entre anneaux locaux est local si $u^{-1}(\mathfrak m')=\mathfrak m$.}
+\entree{10435}{2:53:55}{Pour $u\colon O\to O'$ entre anneaux locaux, on a toujours $u^{-1}(\mathfrak m')\subset\mathfrak m$ ; $u$ est local si et seulement si $u(\mathfrak m)\subset\mathfrak m'$, si et seulement si $f\in O^*\Leftrightarrow u(f)\in O'^*$.}
+\entree{10502}{2:55:02}{Définition : un morphisme d'espaces localement annelés est un morphisme d'espaces annelés dont tous les homomorphismes induits sur les fibres sont locaux.}
+\entree{10708}{2:58:28}{Pour un morphisme d'espaces annelés, $\varphi^{-1}(U_f)\subset(X_{\varphi^{-1}U})_{\varphi^*(f)}$ ; il est local si et seulement si c'est toujours une égalité, d'où $\varphi^{-1}(Y_f)=X_{\varphi^*(f)}$.}
+\face{Bande 2}
+\entree{12148}{3:22:28}{Contre-exemple : pour $V$ de valuation discrète et de corps des fractions $K$, le morphisme d'espaces annelés $\mathrm{Spec}\,K\to\mathrm{Spec}\,V$ au point fermé, avec $V\subset K$, n'est pas local et ne vient d'aucun homomorphisme d'anneaux.}
+\entree{12408}{3:26:48}{Un morphisme d'espaces localement annelés $\varphi\colon\mathrm{Spec}\,B\to\mathrm{Spec}\,A$ est égal à $\mathrm{Spec}\,u$, où $u=\Gamma(\varphi^{\#})$ : on a $\varphi(\mathfrak p)=u^{-1}(\mathfrak p)$.}
+\entree{12471}{3:27:51}{L'application $\mathrm{Hom}(A,B)\to\mathrm{Hom}_{\mathrm{loc}}(\mathrm{Spec}\,B,\mathrm{Spec}\,A)$ est bijective.}
+\entree{12602}{3:30:02}{Définition : un $k$-schéma affine est un espace localement annelé isomorphe au spectre d'une $k$-algèbre ; ils forment une catégorie équivalente à celle des espaces algébriques affines sur $k$.}
+\entree{12665}{3:31:05}{Les seules fonctions globales sur l'espace projectif complexe $\mathbb{P}^n$, $n\geq1$, sont les constantes ; il n'est donc pas affine.}
+\entree{12727}{3:32:07}{Définition : un schéma est un espace localement annelé $(X,\mathcal{O}_X)$ réunion d'ouverts $X_i$ dont chacun est isomorphe à un $\mathrm{Spec}\,A_i$.}
+\entree{12791}{3:33:11}{Se donner sur un schéma $X$ une structure de $k$-schéma équivaut à se donner un homomorphisme d'anneaux $k\to\Gamma(X,\mathcal{O}_X)$.}
+\entree{13111}{3:38:31}{Définition : $X(k')=\mathrm{Hom}_k(\mathrm{Spec}\,k',X)$ ; pour $X=\mathrm{Spec}\,A$, on retrouve l'ensemble $\mathrm{Hom}_{k\text{-alg}}(A,k')$.}
+\entree{13183}{3:39:43}{Le foncteur qui associe à un $k$-schéma $X$ le foncteur $k'\mapsto X(k')$ est pleinement fidèle de la catégorie des $k$-schémas dans celle des foncteurs des $k$-algèbres vers les ensembles.}
+\entree{13375}{3:42:55}{Si $X=\mathrm{Spec}\,A$ est affine, $\mathrm{Hom}(X,Y)\to\mathrm{Hom}(X',Y')$ est bijectif, car $\mathrm{Hom}(X',Y')=Y'(A)=Y(A)$ par Yoneda ($X'$ représentable).}
+\entree{13648}{3:47:28}{Si $X=\bigcup X_i$ est un recouvrement ouvert, $\mathrm{Hom}(X,Y)\to\prod_i\mathrm{Hom}(X_i,Y)\rightrightarrows\prod_{i,j}\mathrm{Hom}(X_{ij},Y)$ est exact pour tout espace localement annelé $Y$ ($X_{ij}=X_i\cap X_j$).}
+\entree{14251}{3:57:31}{Pour $X$ un espace localement annelé et $Y=\mathrm{Spec}\,A$, $\mathrm{Hom}_{\mathrm{loc}}(X,\mathrm{Spec}\,A)\simeq\mathrm{Hom}(A,\Gamma(X,\mathcal{O}_X))$.}
+\section{18 juin 1973}\label{s-1973-06-18}
+\noindent\textit{Vidéo 2/4 (\href{https://www.youtube.com/watch?v=thSz9ZHDK9o}{\texttt{thSz9ZHDK9o}}) : bande 1 (4:03:12--4:51:20) ; bande 2, face A (4:51:20--5:39:53) ; bande 2, face B (5:39:53--6:28:25) ; bande 3 (6:28:25--7:00:11) ; bande 3, à partir de 7:00:11 (7:00:11--7:17:49).}\par\medskip
+\video{thSz9ZHDK9o}
+\face{Bande 1}
+\entree{14657}{4:04:17}{À un homomorphisme $u\colon A\to\Gamma(X,\mathcal{O}_X)$, $X$ espace localement annelé, on associe $\varphi\colon X\to\mathrm{Spec}\,A$, $x\mapsto\ker(A\to\kappa(x))$, continue, avec $\varphi^{-1}(D(f))=X_{u(f)}$, l'ouvert où $u(f)$ est inversible.}
+\entree{14721}{4:05:21}{Les homomorphismes $A_f\to\Gamma(X_{u(f)},\mathcal{O}_X)$ donnés par la propriété universelle de $A_f$ complètent $\varphi$ en un morphisme d'espaces localement annelés $X\to\mathrm{Spec}\,A$.}
+\entree{14914}{4:08:34}{Pour tout espace localement annelé $X$, $\mathrm{Hom}(X,\mathrm{Spec}\,A)\simeq\mathrm{Hom}_{\mathrm{an}}(A,\Gamma(X,\mathcal{O}_X))$, fonctoriellement : $\mathrm{Spec}$ est adjoint à droite de $X\mapsto\Gamma(X,\mathcal{O}_X)$ (anneaux opposés).}
+\entree{15108}{4:11:48}{Se donner un schéma sur un anneau $k$ revient à se donner un schéma $X$ et un morphisme $X\to\mathrm{Spec}\,k$ ; plus généralement on étudie les schémas sur un schéma de base $S$ quelconque.}
+\entree{15240}{4:14:00}{La catégorie opposée à celle des $k$-algèbres est équivalente à celle des schémas affines au-dessus de $\mathrm{Spec}\,k$.}
+\entree{15432}{4:17:12}{Un $k$-schéma $X$ définit, par restriction de $\mathrm{Hom}(-,X)$ aux schémas affines, un foncteur des $k$-algèbres vers $\mathbf{Ens}$ ; $X(k')$ est l'ensemble des points de $X$ à valeurs dans $k'$.}
+\entree{15698}{4:21:38}{Le foncteur représenté par un schéma $X$ est un faisceau de Zariski : pour un recouvrement ouvert $Y=\bigcup Y_i$, $X(Y)\to\prod X(Y_i)\rightrightarrows\prod X(Y_{ij})$ est exact.}
+\entree{15892}{4:24:52}{Les familles d'immersions ouvertes $(Y_i\to Y)$ jointivement surjectives forment une prétopologie sur la catégorie des $k$-schémas : la topologie de Zariski.}
+\entree{16149}{4:29:09}{La restriction aux schémas affines est un foncteur pleinement fidèle des faisceaux de Zariski sur les $k$-schémas vers les faisceaux sur les $k$-schémas affines.}
+\entree{16277}{4:31:17}{Tout ouvert d'un schéma est un schéma ; les ouverts affines forment une base de la topologie (les $X_f$ le font pour un schéma affine).}
+\entree{16339}{4:32:19}{Un faisceau $X$ est déterminé par ses valeurs sur les affines : $X(Y)$ est la limite projective des $X(Y_{ijk})$, les $Y_{ijk}$ affines recouvrant les $Y_{ij}$ et $Y_i$.}
+\entree{16404}{4:33:24}{Le foncteur qui associe à un $k$-schéma son foncteur des $k$-algèbres vers $\mathbf{Ens}$ est pleinement fidèle : un schéma est déterminé à isomorphisme près par ses points à valeurs dans les algèbres.}
+\entree{16684}{4:38:04}{La somme topologique disjointe des $X_i$, munie du faisceau d'anneaux induisant $\mathcal{O}_{X_i}$ sur chaque $X_i$, est la somme des $X_i$ dans les catégories des espaces annelés et des espaces localement annelés.}
+\entree{16874}{4:41:14}{Cette somme est un schéma ; c'est donc la somme des $X_i$ dans la catégorie des schémas (et dans celle des schémas au-dessus de $S$), les $X_i$ en étant des ouverts disjoints qui la recouvrent.}
+\entree{17064}{4:44:24}{Un morphisme $S'\to\coprod_iX_i$ revient à une décomposition de $S'$ en ouverts disjoints $S'_i$ et des morphismes $S'_i\to X_i$ ; il ne se factorise en général par aucun $X_i$.}
+\entree{17128}{4:45:28}{Dans la catégorie des faisceaux de Zariski sur les schémas, le faisceau représenté par $\coprod_iX_i$ est la somme des faisceaux représentés par les $X_i$.}
+\entree{17192}{4:46:32}{Une famille de monomorphismes $F_i\to F$ de faisceaux fait de $F$ la somme des $F_i$ si $F_i\times_FF_j$ est initial pour $i\neq j$ et si les $F_i$ recouvrent $F$ (épimorphisme conjoint).}
+\entree{17324}{4:48:44}{Pour $i\neq j$, $X_i\times_XX_j$ est le schéma vide ; le schéma vide représente le faisceau initial (un point sur le schéma vide, l'ensemble vide ailleurs).}
+\entree{17450}{4:50:50}{La restriction des faisceaux de Zariski sur les $k$-schémas aux faisceaux sur les $k$-schémas affines est une équivalence de catégories (lemme de comparaison).}
+\face{Bande 2, face A}
+\entree{17483}{4:51:23}{Une famille de sous-faisceaux $(F_i)$ de $F$ en a pour borne supérieure $F$ si et seulement si la famille des inclusions $F_i\to F$ est épimorphique dans les faisceaux de Zariski.}
+\entree{17546}{4:52:26}{Un morphisme $G\to F$ de faisceaux de Zariski est un épimorphisme si et seulement si toute section de $F$ sur $S'$ se relève à $G$ localement sur $S'$ pour la topologie de Zariski.}
+\entree{17740}{4:55:40}{Des sous-faisceaux $F_i$ recouvrent $F$ si et seulement si toute section de $F$ sur $S'$ appartient, localement sur $S'$, à l'un des $F_i$.}
+\entree{17805}{4:56:45}{Pour un faisceau de Zariski $F$, $U\mapsto F(U)$ est un faisceau usuel sur chaque $S'$ ; un morphisme de faisceaux de Zariski est un épimorphisme si et seulement si c'en est un sur chaque $S'$.}
+\entree{17934}{4:58:54}{Pour $X=\coprod X_i$, les sous-faisceaux $\widetilde{X_i}$ recouvrent $\widetilde X$ : tout morphisme $S'\to X$ se factorise localement sur $S'$ par un $X_i$ (images réciproques des $X_i$).}
+\entree{18065}{5:01:05}{Si $U=\bigcup U_i$ est une réunion d'ouverts d'un schéma $X$, alors $\widetilde U$ est la borne supérieure des sous-faisceaux $\widetilde{U_i}$ de $\widetilde X$.}
+\entree{18390}{5:06:30}{L'inclusion des faisceaux dans les préfaisceaux commute à toutes les limites projectives (produits, produits fibrés), mais pas en général aux limites inductives.}
+\entree{18775}{5:12:55}{Pour une somme $F=\coprod_{i\in I}F_i$ de faisceaux de Zariski, une section de $F$ sur $S'$ est une décomposition de $S'$ en ouverts disjoints $S'_i$ avec une section de $F_i$ sur chaque $S'_i$.}
+\entree{18972}{5:16:12}{Toute décomposition de $\widetilde{S'}$ en somme de sous-faisceaux disjoints $F_i$ est de la forme $F_i=\widetilde{S'_i}$, où $S'=\coprod S'_i$ est une décomposition de $S'$ en ouverts.}
+\entree{19171}{5:19:31}{Pour la condition de faisceau, on peut se borner aux recouvrements de $S'$ par des ouverts affines, puis par des ouverts $D(f)$, qui forment une base de la topologie.}
+\entree{19298}{5:21:38}{Pour $f_i\in A'$, on a $\mathrm{Spec}\,A'=\bigcup_iD(f_i)$ si et seulement si les $f_i$ engendrent l'idéal unité.}
+\entree{19365}{5:22:45}{Un foncteur $F$ des algèbres vers $\mathbf{Ens}$ est un faisceau de Zariski si, pour $f_i\in A'$ engendrant l'idéal unité, $F(A')\to\prod F(A'_{f_i})\rightrightarrows\prod F(A'_{f_if_j})$ est exact.}
+\entree{19428}{5:23:48}{Un foncteur sur les $S$-algèbres qui est un faisceau se prolonge, de façon unique à isomorphisme unique près, en un faisceau de Zariski sur les $S$-schémas.}
+\entree{19840}{5:30:40}{Définition : un morphisme de faisceaux $F\to G$ est une immersion ouverte si, pour tout $S'\to G$ avec $S'$ schéma, $F\times_GS'\to S'$ est isomorphe à l'inclusion d'un ouvert $U'$ de $S'$ (au sens de $\widetilde{U'}\subset\widetilde{S'}$).}
+\entree{19970}{5:32:50}{Une propriété de morphismes de schémas stable par changement de base s'étend aux morphismes de faisceaux : $F\to G$ la possède si son changement de base par tout schéma $S'\to G$ la possède.}
+\entree{20034}{5:33:54}{Si $U'\subset S'$ est ouvert et $S''\to S'$ un morphisme, l'image réciproque $U''$ de $U'$ vérifie $U''=S''\times_{S'}U'$, aussi parmi les espaces localement annelés : les immersions ouvertes de schémas sont stables par changement de base.}
+\entree{20162}{5:36:02}{Les immersions ouvertes de faisceaux sont stables par changement de base.}
+\entree{20290}{5:38:10}{La composée de deux immersions ouvertes de faisceaux est une immersion ouverte.}
+\face{Bande 2, face B}
+\entree{20468}{5:41:08}{Théorème (critère de représentabilité) : un faisceau de Zariski $F$ sur $\mathrm{Sch}/S$ est représentable par un schéma si et seulement s'il a des sous-faisceaux $F_i$ avec (a) $F_i\to F$ immersion ouverte, (b) $F=\sup F_i$, (c) $F_i$ représentable.}
+\entree{20672}{5:44:32}{Dans le critère, on peut remplacer (c) par (c') : chaque $F_i$ est représentable par un schéma affine, soit, pour $S=\mathrm{Spec}\,k$, par une $k$-algèbre.}
+\entree{20737}{5:45:37}{Pour $S=\mathrm{Spec}\,k$, les $F_i$ recouvrent $F$ si, pour tout $a\in F(k')$, il existe des $f_\alpha\in k'$ engendrant l'idéal unité et des $i(\alpha)$ tels que $a|_{k'_{f_\alpha}}\in F_{i(\alpha)}(k'_{f_\alpha})$.}
+\entree{20995}{5:49:55}{Un ouvert $U'$ de $\mathrm{Spec}\,k'$ est réunion d'ouverts $D(g_\lambda)$ et $\widetilde{U'}$ est la borne supérieure des sous-foncteurs représentés par les localisés $k'_{g_\lambda}$.}
+\entree{21254}{5:54:14}{L'ouvert $\mathrm{Spec}\,k'\setminus V(J)$ représente le sous-foncteur $B\mapsto\{u\colon k'\to B\mid u(J)B=B\}$ ; si $J=(g_\lambda)$, la condition est que les $u(g_\lambda)$ engendrent l'idéal unité de $B$.}
+\entree{21454}{5:57:34}{Pour un schéma $X$ recouvert par des ouverts affines $X_i$, les $\widetilde{X_i}\to\widetilde X$ sont des immersions ouvertes qui recouvrent $\widetilde X$ : les conditions du critère sont nécessaires, avec (c').}
+\entree{21516}{5:58:36}{Si $F_j\to F$ est une immersion ouverte, $F_i\cap F_j\to F_i$ en est une (changement de base de $F_j\to F$ par $F_i\to F$).}
+\entree{21714}{6:01:54}{Des schémas $X_i$ sur $S$, des ouverts $X_{ij}\subset X_i$ et des isomorphismes $\varphi_{ij}\colon X_{ij}\to X_{ji}$ vérifiant la condition de cocycle sur $X_{ij}\cap X_{ik}$ se recollent en un $S$-schéma $X$ recouvert par les $X_i$.}
+\entree{22295}{6:11:35}{Si un schéma $X$ est recouvert par des ouverts $X_i$, $\widetilde X$ est le recollement des $\widetilde{X_i}$ le long des $\widetilde{X_{ij}}$ ; de même pour la borne supérieure de sous-faisceaux $F_i\subset F$.}
+\entree{22643}{6:17:23}{Sur un corps $k$, pour $V$ de dimension $n$, l'ensemble des droites de $V$ est le quotient $(V\setminus\{0\})/k^{\times}$.}
+\entree{22770}{6:19:30}{Dans une base de $V$, les parties $X_i=\{x_i\neq0\}$ recouvrent cet ensemble de droites, et chacune est en bijection avec $k^{n-1}$ (normaliser $x_i=1$).}
+\entree{22963}{6:22:43}{Pour $n=2$, la droite projective est obtenue en recollant deux copies de $k$ le long de $k^{\times}$ par $\lambda\mapsto\lambda^{-1}$ (coordonnées $y/x$ et $x/y$).}
+\face{Bande 3}
+\entree{23316}{6:28:36}{Pour $V$ de dimension finie sur un corps, les droites de $V$ correspondent bijectivement aux hyperplans du dual $V^{\vee}$, et les hyperplans de $V$ aux quotients de dimension $1$ de $V$.}
+\entree{23380}{6:29:40}{Convention : $\mathbf{P}(V)$ désigne désormais l'ensemble des hyperplans de $V$, c'est-à-dire des quotients de dimension $1$ de $V$ (et non l'ensemble des droites).}
+\entree{23642}{6:34:02}{Si les $f_i$ engendrent l'idéal unité et si chaque $L_{f_i}$ est libre de rang $1$, le module $L$ n'est pas nécessairement libre : être libre de rang $1$ n'est pas local sur $\mathrm{Spec}\,k'$.}
+\entree{23770}{6:36:10}{Définition : un $A$-module $L$ est inversible si $\widetilde L$ est localement libre de rang $1$, c'est-à-dire s'il existe $f_\alpha$ engendrant l'idéal unité avec $L_{f_\alpha}$ libre de rang $1$ sur $A_{f_\alpha}$.}
+\entree{23835}{6:37:15}{$L$ est inversible si et seulement s'il existe un $A$-module $M$ avec $M\otimes_AL\simeq A$ ; $M$ est alors unique à isomorphisme unique près et isomorphe à $\mathrm{Hom}_A(L,A)$, noté $L^{-1}$.}
+\entree{23907}{6:38:27}{$L$ est inversible si et seulement s'il est projectif de type fini et si $L_{\mathfrak{p}}$ est libre de rang $1$ pour tout idéal premier $\mathfrak{p}$.}
+\entree{24039}{6:40:39}{Pour $V$ libre de rang $n$, les quotients inversibles de $V_{k'}$ correspondent aux sous-modules facteurs directs de rang $n-1$ en tout premier ; il faut exiger qu'ils soient facteurs directs.}
+\entree{24104}{6:41:44}{Si $L$ est un quotient inversible de $V_{k'}$ et $k'\to k''$ un homomorphisme, $L\otimes_{k'}k''$ est un quotient inversible de $V_{k''}$ (exactitude à droite de $\otimes$, stabilité des modules inversibles).}
+\entree{24168}{6:42:48}{Définition : pour un module $V$ sur un anneau $k$, $\mathbf{P}(V)$ est le foncteur $k'\mapsto\{\text{quotients inversibles de }V\otimes_kk'\}$ sur les $k$-algèbres.}
+\entree{24233}{6:43:53}{Théorème : pour tout $k$-module $V$, sans hypothèse de finitude, le foncteur $\mathbf{P}(V)$ est représentable par un schéma, de type fini sur $k$ si $V$ est de type fini.}
+\entree{24492}{6:48:12}{$\mathbf{P}(V)(S')$ est l'ensemble des quotients inversibles de l'image réciproque de $\widetilde V$ sur $S'$ ; c'est un faisceau de Zariski, car la condition est locale.}
+\entree{24619}{6:50:19}{Si $(e_i)$ engendre $V$, $\mathbf{P}_{e_i}(k')$ est l'ensemble des quotients $L$ de $V_{k'}$ tels que l'image de $e_i$ soit une base de $L$ ; c'est un sous-faisceau de $\mathbf{P}(V)$.}
+\entree{24821}{6:53:41}{Pour tout $e\in V$, $\mathbf{P}_e\to\mathbf{P}(V)$ est une immersion ouverte : le lieu où une section d'un faisceau inversible est une base est ouvert.}
+\entree{25011}{6:56:51}{Si les $e_i$ engendrent $V$, les $\mathbf{P}_{e_i}$ recouvrent $\mathbf{P}(V)$ : localement sur $S'$, l'un des $e_i$ est une base du quotient inversible.}
+\entree{25080}{6:58:00}{$\mathbf{P}_{e_i}$ est représenté par $\mathrm{Sym}(V)/(e_i-1)$ : un point est un homomorphisme $V_{k'}\to k'$ envoyant $e_i$ sur $1$.}
+\entree{25145}{6:59:05}{Si $(e_i)_{i\in I}$ est une base de $V$, $\mathrm{Sym}(V)/(e_i-1)$ est l'anneau de polynômes en les $T_j$, $j\neq i$ : $\mathbf{P}_{e_i}$ est l'espace affine de dimension $|I|-1$.}
+\face{Bande 3, à partir de 7:00:11}
+\noindent\textit{Nouvelle séance, que la description ne date pas.}\par\smallskip
+\entree{25465}{7:04:25}{Un foncteur contravariant $F$ sur $\mathrm{Sch}/S$ est un faisceau de Zariski si, pour tout $S'$ et tout recouvrement ouvert $(S'_i)$, $F(S')\to\prod F(S'_i)\rightrightarrows\prod F(S'_i\cap S'_j)$ est exact.}
+\entree{25594}{7:06:34}{À $F$ on associe, pour chaque $S'$, le préfaisceau $F_{S'}\colon U'\mapsto F(U')$ sur l'espace $S'$ ; $F$ est un faisceau de Zariski si et seulement si tous les $F_{S'}$ sont des faisceaux usuels.}
+\entree{25794}{7:09:54}{Tout $S$-morphisme $f\colon S''\to S'$ induit un morphisme de préfaisceaux $F_{S'}\to f_*F_{S''}$, donné par $F(U')\to F(f^{-1}U')$, fonctoriel en $f$.}
+\entree{26123}{7:15:23}{Un foncteur contravariant sur $\mathrm{Sch}/S$ équivaut à des préfaisceaux $F_{S'}$ fonctoriels en $S'$ tels que $F_{S'}|_{S''}\to F_{S''}$ soit un isomorphisme pour toute immersion ouverte $S''\to S'$ ; $F(S')=F_{S'}(S')$.}
+\section{19 juin 1973}\label{s-1973-06-19}
+\noindent\textit{Vidéo 2/4 (\href{https://www.youtube.com/watch?v=thSz9ZHDK9o}{\texttt{thSz9ZHDK9o}}) : bande 1 (7:17:49--8:06:52) ; bande 2 (8:06:52--8:55:21).}\par\medskip
+\video{thSz9ZHDK9o}
+\face{Bande 1}
+\entree{26334}{7:18:54}{Les limites projectives de faisceaux de Zariski sur $\mathrm{Sch}/S$ se calculent argument par argument, et $(\varprojlim F_i)_{S'}=\varprojlim(F_i)_{S'}$.}
+\entree{26397}{7:19:57}{Pour une limite inductive $\varinjlim F_i$ calculée dans les faisceaux de Zariski, $(\varinjlim F_i)_{S'}=\varinjlim(F_i)_{S'}$, la limite étant prise dans les faisceaux sur l'espace $S'$.}
+\entree{26529}{7:22:09}{Un morphisme $F\to G$ de faisceaux de Zariski est un épimorphisme si et seulement si $F_{S'}\to G_{S'}$ en est un pour tout $S'$ : toute section de $G$ sur $U'$ est localement image d'une section de $F$.}
+\entree{26850}{7:27:30}{Un morphisme de $S$-schémas $X\to Y$ est un épimorphisme de faisceaux de Zariski si et seulement s'il admet des sections locales sur $Y$ : tout point de $Y$ a un voisinage ouvert $V$ et une section $V\to X$.}
+\entree{26981}{7:29:41}{Une famille de $S$-schémas $X_i\to Y$ est épimorphique pour les faisceaux de Zariski si et seulement si tout point de $Y$ a un voisinage sur lequel l'un des $X_i$ admet une section.}
+\entree{27459}{7:37:39}{Une immersion ouverte de faisceaux est un monomorphisme.}
+\entree{27788}{7:43:08}{La représentabilité d'un faisceau est locale sur la base : si $S=\bigcup S_i$ (ouverts) et si la restriction $F_i$ de $F$ aux schémas au-dessus de $S_i$ est représentable pour tout $i$, alors $F$ l'est.}
+\entree{27917}{7:45:17}{Dans ce cas $F_i=S_i\times_SF\to F$ est une immersion ouverte ; si $F=\sup F_i$ avec des sous-foncteurs ouverts $F_i$, alors $F$ est représentable si et seulement si chaque $F_i$ l'est.}
+\entree{27980}{7:46:20}{Un $\mathcal{O}_S$-module est quasi-cohérent s'il est localement conoyau d'un morphisme de modules libres ; il provient alors d'un module sur chaque ouvert affine de $S$.}
+\entree{28043}{7:47:23}{Pour $\mathcal{M}$ quasi-cohérent sur $S$, $\mathbf{P}(\mathcal{M})\colon S'\mapsto\{\text{quotients inversibles de }\mathcal{M}_{S'}\}$ est un faisceau de Zariski sur $\mathrm{Sch}/S$.}
+\entree{28112}{7:48:32}{Théorème : le faisceau $\mathbf{P}(\mathcal{M})$ est représentable par un $S$-schéma, le fibré projectif associé à $\mathcal{M}$ ; par localisation sur $S$, on se ramène au cas affine.}
+\entree{28307}{7:51:47}{Si $\mathcal{M}$ est engendré par des sections globales $e_i$, $P_i(S')$ est l'ensemble des quotients $L$ de $\mathcal{M}_{S'}$ pour lesquels l'image de $e_i$ est une base de $L$ ; $P_i\subset\mathbf{P}(\mathcal{M})$.}
+\entree{28503}{7:55:03}{Le morphisme $P_i\to\mathbf{P}(\mathcal{M})$ est une immersion ouverte.}
+\entree{28630}{7:57:10}{L'ensemble des points de $S'$ où une section d'un faisceau inversible est une base est ouvert.}
+\entree{28693}{7:58:13}{Les $P_i$ recouvrent $\mathbf{P}(\mathcal{M})$ : si les $e_i$ engendrent $\mathcal{M}$, localement sur $S'$ l'un d'eux engendre le quotient inversible, donc en est une base.}
+\entree{29021}{8:03:41}{Pour un $k$-module $V$, le foncteur $k'\mapsto\mathrm{Hom}_{k'}(V_{k'},k')=\mathrm{Hom}_k(V,k')$ est représenté par $\mathrm{Sym}_k(V)$.}
+\entree{29157}{8:05:57}{$P_i(k')$ est l'ensemble des homomorphismes $V_{k'}\to k'$ envoyant $e_i$ sur $1$ ; il est représenté par $\mathrm{Sym}(V)/(e_i-1)$, donc $P_i$ est représentable (cas $S$ affine).}
+\face{Bande 2}
+\entree{29283}{8:08:03}{Sur $\mathbf{P}=\mathbf{P}(\mathcal{M})$ il y a un quotient inversible universel $\mathcal{M}_{\mathbf{P}}\to\mathcal{O}_{\mathbf{P}}(1)$, correspondant au point identité du foncteur représenté.}
+\entree{29348}{8:09:08}{On pose $\mathcal{O}_{\mathbf{P}}(n)=\mathcal{O}_{\mathbf{P}}(1)^{\otimes n}$ pour $n\in\mathbb{Z}$, avec $L^{\otimes(-m)}=(L^{\otimes m})^{-1}\simeq(L^{-1})^{\otimes m}$ pour $m\geq0$.}
+\entree{29412}{8:10:12}{Propriété universelle : pour tout quotient inversible de $\mathcal{M}_{S'}$, il existe un unique morphisme $S'\to\mathbf{P}$ dont l'image réciproque du quotient universel est ce quotient.}
+\entree{29606}{8:13:26}{Le fibré vectoriel $\mathbf{V}(\mathcal{M})$ est le foncteur $S'\mapsto\mathrm{Hom}_{\mathcal{O}_{S'}}(\mathcal{M}_{S'},\mathcal{O}_{S'})$.}
+\entree{29932}{8:18:52}{Le sous-foncteur $\mathbf{V}^{*}$ des épimorphismes $\mathcal{M}_{S'}\to\mathcal{O}_{S'}$ (non nuls sur chaque fibre) est représenté par l'ouvert complémentaire de la section nulle de $\mathbf{V}(\mathcal{M})$.}
+\entree{30064}{8:21:04}{L'application $u\mapsto\mathcal{M}_{S'}/\ker u$ définit un morphisme $\mathbf{V}^{*}\to\mathbf{P}(\mathcal{M})$, d'image les quotients libres de rang $1$.}
+\entree{30256}{8:24:16}{Le morphisme $\mathbf{V}^{*}\to\mathbf{P}(\mathcal{M})$ est un épimorphisme de faisceaux : un quotient inversible est localement libre de rang $1$, donc localement de la forme $\mathcal{M}_{S'}/\ker u$.}
+\entree{30385}{8:26:25}{Le foncteur $\mathbb{G}_m\colon S'\mapsto\Gamma(S',\mathcal{O}_{S'})^{\times}$ est représenté par la droite affine privée de l'origine, d'anneau $k[t,t^{-1}]$ sur $S=\mathrm{Spec}\,k$.}
+\entree{30521}{8:28:41}{Le groupe $\mathbb{G}_m$ opère sur $\mathbf{V}^{*}$ par multiplication ; cette action est libre ($\lambda u=u\Rightarrow\lambda=1$ pour $u$ épimorphisme), alors qu'elle ne l'est pas sur $\mathbf{V}$ (l'origine est fixe).}
+\entree{30648}{8:30:48}{Les épimorphismes $u$ et $\lambda u$, avec $\lambda$ inversible, ont même noyau : $\mathbf{V}^{*}\to\mathbf{P}(\mathcal{M})$ est $\mathbb{G}_m$-invariant.}
+\entree{30775}{8:32:55}{Deux épimorphismes $u,v\colon\mathcal{M}_{S'}\to\mathcal{O}_{S'}$ définissent le même quotient si et seulement si $v=\lambda u$ avec $\lambda\in\Gamma(S',\mathcal{O}_{S'})^{\times}$.}
+\entree{30838}{8:33:58}{Le fibré vectoriel privé de sa section nulle est un $\mathbb{G}_{m,\mathbf{P}}$-torseur sur $\mathbf{P}(\mathcal{M})$, et $\mathbf{P}(\mathcal{M})=\mathbf{V}^{*}/\mathbb{G}_m$.}
+\entree{30903}{8:35:03}{Le groupe $\mathbb{G}_m=\mathrm{GL}_1$ est le foncteur $S'\mapsto\mathrm{Aut}(\mathcal{O}_{S'})$ des automorphismes du module $\mathcal{O}_{S'}$.}
+\entree{30966}{8:36:06}{Les $\mathbb{G}_m$-torseurs sur $S$ sont équivalents aux faisceaux localement libres de rang $1$ sur $S$, par $L\mapsto\mathrm{Isom}_{\mathcal{O}_S}(\mathcal{O}_S,L)$.}
+\entree{31032}{8:37:12}{Un $\mathbb{G}_m$-torseur sur $S$ est un faisceau $F$ muni d'une action libre de $\mathbb{G}_m$ tel que $F\to S$ soit un épimorphisme ; il est localement isomorphe à $\mathbb{G}_m$.}
+\entree{31099}{8:38:19}{Si un faisceau de groupes $G$ opère librement sur un faisceau $F$, alors $F$ est un torseur sous $G_T$ sur $T=F/G$.}
+\entree{31232}{8:40:32}{Le $\mathbb{G}_m$-torseur $\mathbf{V}^{*}\to\mathbf{P}$ est celui des trivialisations du quotient inversible universel : un point au-dessus de $S'\to\mathbf{P}$ est un isomorphisme de ce quotient avec $\mathcal{O}_{S'}$.}
+\entree{31617}{8:46:57}{L'espace projectif $\mathbb{P}^n$ sur un corps $k$ est $\mathbf{P}(k^{n+1})$.}
+\entree{31747}{8:49:07}{Un morphisme $X\to\mathbb{P}^n$ équivaut à un faisceau inversible $L$ sur $X$ et $n+1$ sections de $L$ qui l'engendrent en chaque point, c'est-à-dire un quotient inversible de $\mathcal{O}_X^{\,n+1}$.}
+\entree{32079}{8:54:39}{$\mathbf{P}(\mathcal{M})(S')$ est l'ensemble des classes d'isomorphisme de couples $(L,\mathcal{M}_{S'}\to L)$, avec $L$ inversible et $\mathcal{M}_{S'}\to L$ un épimorphisme.}
+\section{20 juin 1973}\label{s-1973-06-20}
+\noindent\textit{Vidéo 2/4 (\href{https://www.youtube.com/watch?v=thSz9ZHDK9o}{\texttt{thSz9ZHDK9o}}) : bande 1 (8:55:21--9:43:38) ; bande 2 (9:43:38--10:32:26).}\par\medskip
+\video{thSz9ZHDK9o}
+\face{Bande 1}
+\entree{32186}{8:56:26}{Le changement de base commute au fibré projectif : $\mathbf{P}(\mathcal{M})\times_SS'=\mathbf{P}(\mathcal{M}_{S'})$, comme foncteurs sur les schémas au-dessus de $S'$.}
+\entree{32313}{8:58:33}{La fibre $X_s$ d'un schéma $X$ sur $S$ en un point $s$ est obtenue par changement de base par $\mathrm{Spec}\,\kappa(s)\to S$ ; c'est un schéma sur le corps $\kappa(s)$.}
+\entree{32379}{8:59:39}{L'espace sous-jacent de $X_s$ est la fibre ensembliste de $X\to S$ au-dessus de $s$, munie de la topologie induite par celle de $X$.}
+\entree{32506}{9:01:46}{La fibre de $\mathbf{P}(\mathcal{M})$ en $s$ est l'espace projectif du $\kappa(s)$-espace vectoriel $\mathcal{M}(s)=\mathcal{M}_s\otimes\kappa(s)=\mathcal{M}_s/\mathfrak{m}_s\mathcal{M}_s$.}
+\entree{32636}{9:03:56}{Si $\mathcal{M}$ est de type fini et $X$ séparé sur $S$, tout $S$-morphisme $\mathbf{P}(\mathcal{M})\to X$ est d'image fermée.}
+\entree{32959}{9:09:19}{Si $\mathcal{M}\to\mathcal{N}$ est un épimorphisme de modules quasi-cohérents, on a un morphisme $\mathbf{P}(\mathcal{N})\to\mathbf{P}(\mathcal{M})$, qui est une immersion fermée.}
+\entree{33023}{9:10:23}{Pour un homomorphisme $\mathcal{M}\to\mathcal{N}$ quelconque, il y a un ouvert $U\subset\mathbf{P}(\mathcal{N})$ des quotients inversibles $L$ tels que $\mathcal{M}_{S'}\to L$ soit surjectif, et un morphisme $U\to\mathbf{P}(\mathcal{M})$.}
+\entree{33086}{9:11:26}{On a $\mathbf{P}(0)=\varnothing$ et $\mathbf{P}(\mathcal{O}_S)=S$ ; pour $\mathcal{M}=\mathcal{O}_S^{2}$, $\mathbf{P}(\mathcal{M})$ est la droite projective standard sur $S$.}
+\entree{33553}{9:19:13}{Sur $S=\mathrm{Spec}\,K$, une structure d'algèbre quasi-cohérente sur $\widetilde A$ équivaut à une structure de $K$-algèbre sur le $K$-module $A$.}
+\entree{33684}{9:21:24}{Définition : pour une $\mathcal{O}_S$-algèbre quasi-cohérente $\mathcal{A}$, $\mathrm{Spec}(\mathcal{A})$ est le foncteur $S'\mapsto\mathrm{Hom}_{\mathcal{O}_{S'}\text{-alg}}(\mathcal{A}_{S'},\mathcal{O}_{S'})$ ; sur $S$ affine, c'est $\mathrm{Spec}\,A$.}
+\entree{33941}{9:25:41}{Le foncteur $\mathrm{Spec}(\mathcal{A})$ est un faisceau de Zariski représentable par un $S$-schéma ; au-dessus d'un ouvert affine $U\subset S$, c'est $\mathrm{Spec}\,\Gamma(U,\mathcal{A})$.}
+\entree{34198}{9:29:58}{Le foncteur $\mathcal{A}\mapsto\mathrm{Spec}(\mathcal{A})$, de la catégorie opposée des $\mathcal{O}_S$-algèbres quasi-cohérentes vers les $S$-schémas, est pleinement fidèle.}
+\entree{34263}{9:31:03}{Un $S$-schéma $X$ est affine sur $S$ si l'image réciproque de tout ouvert affine de $S$ est affine ; l'image essentielle de $\mathrm{Spec}$ est formée des schémas affines sur $S$.}
+\entree{34392}{9:33:12}{Le spectre commute au changement de base : $\mathrm{Spec}(\mathcal{A})\times_SS'=\mathrm{Spec}(\mathcal{A}_{S'})$.}
+\entree{34520}{9:35:20}{Si $f\colon X\to S$ est affine, $f_*\mathcal{O}_X$ est une $\mathcal{O}_S$-algèbre quasi-cohérente ; $X\mapsto f_*\mathcal{O}_X$ est quasi-inverse de $\mathrm{Spec}$ : anti-équivalence avec les schémas affines sur $S$.}
+\entree{34651}{9:37:31}{Pour $\mathrm{Spec}\,A\to\mathrm{Spec}\,K$ et $M$ un $A$-module, l'image directe de $\widetilde M$ est le faisceau $\widetilde M$ associé à $M$ vu comme $K$-module.}
+\entree{34882}{9:41:22}{Théorème : les limites projectives finies existent dans la catégorie des schémas et dans chaque $\mathrm{Sch}/S$, c'est-à-dire un objet final et des produits fibrés.}
+\entree{34949}{9:42:29}{L'objet final des schémas est $\mathrm{Spec}\,\mathbb{Z}$, celui de $\mathrm{Sch}/S$ est $S$.}
+\face{Bande 2}
+\entree{35020}{9:43:40}{Si $S=\bigcup S_i$ est un recouvrement ouvert et si chaque $X_i\times_{S_i}Y_i$ est un schéma, alors $X\times_SY$ est un schéma : la question est locale sur $S$.}
+\entree{35088}{9:44:48}{Si $X=\bigcup X_i$ et $Y=\bigcup Y_j$ sont des recouvrements ouverts, $X\times_SY$ est un schéma si et seulement si les $X_i\times_SY_j$ le sont.}
+\entree{35214}{9:46:54}{Pour des ouverts $U\subset X$ et $V\subset Y$, $U\times_SV\to X\times_SY$ est une immersion ouverte, et les $X_i\times_SY_j$ recouvrent $X\times_SY$.}
+\entree{35549}{9:52:29}{Théorème : le produit fibré de deux $S$-schémas existe ; dans le cas affine, le produit $\mathrm{Spec}\,A\times_{\mathrm{Spec}\,K}\mathrm{Spec}\,B$ est $\mathrm{Spec}(A\otimes_KB)$.}
+\entree{35871}{9:57:51}{Le morphisme $X_s\to X$ est un monomorphisme, et un homéomorphisme sur son image munie de la topologie induite.}
+\entree{35937}{9:58:57}{Dans $X\times_SY$, le produit $X_i\times_SY_j$ est l'intersection des images réciproques de $X_i$ et de $Y_j$ par les deux projections.}
+\entree{36147}{10:02:27}{Si les $X_i=\mathrm{Spec}\,\mathcal{A}_i$ sont affines sur $S$ et forment un diagramme, leur limite projective existe dans les schémas, est affine sur $S$ et vaut $\mathrm{Spec}(\varinjlim\mathcal{A}_i)$.}
+\entree{36210}{10:03:30}{Dans les algèbres commutatives, la somme d'une famille est le produit tensoriel (éventuellement infini, limite inductive filtrante des produits tensoriels finis).}
+\entree{36274}{10:04:34}{Une limite inductive de $\mathcal{O}_S$-modules quasi-cohérents est quasi-cohérente.}
+\entree{36401}{10:06:41}{Si $X=\mathrm{Spec}\,\mathcal{A}$ est affine sur $S$ et $Z$ est un $S$-schéma de morphisme structural $g$, alors $\mathrm{Hom}_S(Z,X)\simeq\mathrm{Hom}_{\mathcal{O}_S\text{-alg}}(\mathcal{A},g_*\mathcal{O}_Z)$.}
+\entree{36923}{10:15:23}{Pour tout espace localement annelé $Z$, $\mathrm{Hom}(Z,\mathrm{Spec}\,A)=\mathrm{Hom}(A,\Gamma(Z,\mathcal{O}_Z))$ ; c'est ce qui rend les constructions précédentes valables dans les espaces localement annelés.}
+\entree{37118}{10:18:38}{Pour $\mathcal{M}$ quasi-cohérent, le foncteur des quotients localement libres de rang donné de $\mathcal{M}_{S'}$ est représentable : c'est le fibré grassmannien associé à $\mathcal{M}$.}
+\entree{37184}{10:19:44}{De même, le foncteur des drapeaux de quotients de $\mathcal{M}_{S'}$ localement libres de rangs donnés $n_1,n_2,\ldots$ est représentable (fibré en drapeaux).}
+\entree{37247}{10:20:47}{Si $\mathcal{M}$ est localement libre de rang $n$, le foncteur $S'\mapsto\mathrm{Aut}(\mathcal{M}_{S'})$ est représentable par un schéma en groupes localement isomorphe à $\mathrm{GL}_n$.}
+\entree{37565}{10:26:05}{La localisation de $X$ en un point $x$ est le schéma affine $\mathrm{Spec}(\mathcal{O}_{X,x})$.}
+\entree{37701}{10:28:21}{Pour un ouvert affine $U=\mathrm{Spec}\,A\ni x$, de premier $\mathfrak{p}$, $\mathcal{O}_{X,x}=A_{\mathfrak{p}}$ donne $\mathrm{Spec}(\mathcal{O}_{X,x})\to U\subset X$, indépendant du choix de $U$.}
+\entree{37765}{10:29:25}{Le morphisme $\mathrm{Spec}(\mathcal{O}_{X,x})\to X$ est un monomorphisme de schémas, donc injectif sur les points.}
+\entree{37831}{10:30:31}{C'est un homéomorphisme sur son image : la topologie de $\mathrm{Spec}(\mathcal{O}_{X,x})$ est induite par celle de $X$.}
+\entree{37831}{10:30:31}{Le spectre d'un anneau local a un unique point fermé, spécialisation commune de tous ses autres points (les idéaux premiers sont contenus dans l'idéal maximal).}
+\entree{37894}{10:31:34}{Une application continue préserve la relation de spécialisation entre points.}
+\section{25 juin 1973}\label{s-1973-06-25}
+\noindent\textit{Vidéo 3/4 (\href{https://www.youtube.com/watch?v=Oqhr-Gt66es}{\texttt{Oqhr-Gt66es}}) : bande 1 (0:00:00--0:48:22) ; bande 2 (0:48:22--1:18:29) ; bande 2, à partir de 1:18:29 (1:18:29--1:37:19) ; bande 3, face A (1:37:19--2:26:43) ; bande 3, face B (2:26:43--3:16:07).}\par\medskip
+\video{Oqhr-Gt66es}
+\face{Bande 1}
+\entree{1}{0:00:01}{Localisation : $\mathrm{Spec}\,\mathcal{O}_{X,x}\to X$ est un monomorphisme, d'image l'ensemble des généralisations de $x$ (points $x'$ tels que $x\in\overline{\{x'\}}$), intersection des voisinages ouverts de $x$.}
+\entree{65}{0:01:05}{Pour $X$ affine, les idéaux premiers de $A_{\mathfrak p}$ correspondent bijectivement aux idéaux premiers $\mathfrak q\subset\mathfrak p$ de $A$.}
+\entree{128}{0:02:08}{Le faisceau structural du localisé est induit par $\mathcal{O}_X$ : en toute généralisation $x'$ de $x$, les anneaux locaux de $X$ et du localisé sont isomorphes, car $(A_{\mathfrak p})_{\mathfrak qA_{\mathfrak p}}=A_{\mathfrak q}$.}
+\entree{325}{0:05:25}{Définition : un schéma local est un schéma affine dont l'anneau est local.}
+\entree{388}{0:06:28}{Un schéma est local si et seulement s'il est quasi-compact et possède un unique point fermé.}
+\entree{784}{0:13:04}{Les morphismes d'un schéma local $\mathrm{Spec}\,\mathcal{O}$ vers $X$ correspondent aux couples formés d'un point $x\in X$ (image du point fermé) et d'un homomorphisme local $\mathcal{O}_{X,x}\to\mathcal{O}$.}
+\entree{909}{0:15:09}{Pour un anneau $A$ et un anneau local $\mathcal{O}$, se donner $A\to\mathcal{O}$ revient à se donner un premier $\mathfrak p$ de $A$ (noyau de $A\to\mathcal{O}\to\kappa(\mathcal{O})$) et un homomorphisme local $A_{\mathfrak p}\to\mathcal{O}$.}
+\entree{974}{0:16:14}{Un morphisme $Y\to X$ envoyant $y$ sur $x$ induit $\mathrm{Spec}\,\mathcal{O}_{Y,y}\to\mathrm{Spec}\,\mathcal{O}_{X,x}$ : la localisation est fonctorielle en le couple (schéma, point).}
+\entree{1102}{0:18:22}{Les morphismes $\mathrm{Spec}\,k\to X$, avec $k$ un corps, correspondent aux couples d'un point $x\in X$ et d'un homomorphisme de corps $\kappa(x)\to k$.}
+\entree{1232}{0:20:32}{Pour $x\in X$, $\mathrm{Spec}\,\kappa(x)$ est un sous-schéma fermé de $\mathrm{Spec}\,\mathcal{O}_{X,x}$, et tout morphisme $\mathrm{Spec}\,k\to X$ d'image $x$ se factorise de façon unique par $\mathrm{Spec}\,\kappa(x)$.}
+\entree{1295}{0:21:35}{Un schéma réduit à un point est le spectre d'un anneau local dont l'idéal maximal est nil ; ce n'est pas nécessairement le spectre d'un corps.}
+\entree{1429}{0:23:49}{Un anneau local noethérien dont le spectre est un point a un idéal maximal nilpotent et est de longueur finie, c'est-à-dire artinien ; la réciproque est vraie.}
+\entree{1556}{0:25:56}{Exemples : $k[t]/(t^n)$ est local de longueur $n$ et $\mathbb{Z}/p^n\mathbb{Z}$ est local artinien ; leurs spectres sont des points qui ne sont pas des spectres de corps.}
+\entree{1948}{0:32:28}{Un schéma irréductible est connexe.}
+\entree{2011}{0:33:31}{Pour $G$ un ensemble infini, le schéma constant $G_k$ est réunion disjointe d'une infinité d'ouverts non vides, donc n'est pas quasi-compact.}
+\entree{2202}{0:36:42}{Définition : un schéma est noethérien s'il est quasi-compact et recouvert par un nombre fini d'ouverts affines $\mathrm{Spec}\,A_i$ avec $A_i$ noethérien ; alors $\Gamma(U,\mathcal{O}_X)$ est noethérien pour tout ouvert affine $U$.}
+\entree{2270}{0:37:50}{Définition : un schéma est localement noethérien si $\Gamma(U,\mathcal{O}_X)$ est noethérien pour tout ouvert affine $U$ ; tout ouvert quasi-compact est alors un schéma noethérien.}
+\entree{2525}{0:42:05}{La localisation d'un anneau noethérien est noethérienne, de même que le complété d'un anneau local noethérien pour les puissances d'un idéal ; mais $\widehat{A}\otimes_A\widehat{A}$ n'est pas noethérien en général.}
+\entree{2589}{0:43:09}{Définition : un schéma est artinien s'il est affine d'anneau artinien (de longueur finie comme module).}
+\entree{2728}{0:45:28}{Un schéma artinien est noethérien et discret, donc fini : c'est une somme finie de spectres d'anneaux locaux artiniens, et son anneau est le produit de ces anneaux.}
+\entree{2791}{0:46:31}{Un schéma est artinien si et seulement s'il est noethérien et d'espace sous-jacent discret.}
+\face{Bande 2}
+\entree{2904}{0:48:24}{Les morphismes quasi-compacts sont stables par changement de base.}
+\entree{2968}{0:49:28}{Les morphismes quasi-compacts sont stables par composition.}
+\entree{3033}{0:50:33}{Si $g\circ f$ est quasi-compact et $g$ quasi-séparé (diagonale quasi-compacte), alors $f$ est quasi-compact.}
+\entree{3158}{0:52:38}{Définitions : $f$ est localement de type fini si, pour tous ouverts affines $\mathrm{Spec}\,A\subset S$ et $\mathrm{Spec}\,B\subset X$ au-dessus, $B$ est une $A$-algèbre de type fini ; de type fini s'il l'est de plus quasi-compact.}
+\entree{3227}{0:53:47}{Définition : $f$ est localement de présentation finie si, pour de tels ouverts affines, $B$ est de présentation finie sur $A$ ; cette notion et la précédente sont locales sur $X$.}
+\entree{3292}{0:54:52}{Pour $X=\mathrm{Spec}\,B$ et $S=\mathrm{Spec}\,A$, $X\to S$ est localement de type fini (resp. de présentation finie) si et seulement si $B$ est de type fini (resp. de présentation finie) sur $A$.}
+\entree{3359}{0:55:59}{Si $S$ est localement noethérien, « localement de type fini » et « localement de présentation finie » coïncident.}
+\entree{3421}{0:57:01}{Les morphismes quasi-compacts, de type fini, localement de type fini, localement de présentation finie sont stables par changement de base et par composition.}
+\entree{3486}{0:58:06}{Définition : une immersion ouverte est un morphisme qui est un homéomorphisme sur un ouvert de $Y$, le faisceau structural de $X$ étant induit par celui de $Y$.}
+\entree{3549}{0:59:09}{Les sous-objets de $Y$ définis par des immersions ouvertes correspondent aux ouverts de $Y$ ; les immersions ouvertes sont stables par composition et changement de base.}
+\entree{3678}{1:01:18}{Définition : $f\colon X\to Y$ est une immersion fermée si, pour un recouvrement de $Y$ par des ouverts affines $Y_i=\mathrm{Spec}\,A_i$, $f^{-1}(Y_i)=\mathrm{Spec}\,B_i$ est affine et $A_i\to B_i$ est surjectif.}
+\entree{3740}{1:02:20}{Caractérisation intrinsèque : $f$ est une immersion fermée si et seulement si c'est un homéomorphisme sur un fermé de $Y$ et $\mathcal{O}_Y\to f_*\mathcal{O}_X$ est surjectif.}
+\entree{3941}{1:05:41}{Une immersion fermée est un monomorphisme.}
+\entree{4070}{1:07:50}{Les sous-schémas fermés de $Y$ correspondent aux idéaux quasi-cohérents $J\subset\mathcal{O}_Y$, par $J\mapsto V(J)=\mathrm{Spec}(\mathcal{O}_Y/J)$.}
+\entree{4200}{1:10:00}{Les immersions fermées sont stables par changement de base : $V(J)\times_YY'=V(J\mathcal{O}_{Y'})$, car la formation du spectre d'une algèbre commute au changement de base.}
+\entree{4265}{1:11:05}{Pour $X=V(J)$, les idéaux quasi-cohérents de $\mathcal{O}_X$ correspondent aux idéaux quasi-cohérents $K\supset J$ de $\mathcal{O}_Y$ par $K\mapsto K/J$, et $V(K/J)=V(K)$.}
+\entree{4328}{1:12:08}{Les immersions fermées sont stables par composition.}
+\entree{4647}{1:17:27}{Si $f$ est quasi-compact et quasi-séparé, l'image directe d'un $\mathcal{O}_X$-module quasi-cohérent est quasi-cohérente ; le noyau de $\mathcal{O}_Y\to f_*\mathcal{O}_X$ pour une immersion fermée est donc quasi-cohérent.}
+\face{Bande 2, à partir de 1:18:29}
+\noindent\textit{Probablement le début de la séance du 26 juin, enregistré à la suite sur la même bande.}\par\smallskip
+\entree{4903}{1:21:43}{Pour $Y=\mathrm{Spec}\,A$ et $J$ un idéal de $A$, $V(J)=\mathrm{Spec}\,A/J$ ; l'application $J\mapsto V(J)$ renverse l'ordre.}
+\entree{4968}{1:22:48}{Les sous-schémas ouverts de $Y$ sont ordonnés comme les ouverts ; les sous-schémas fermés le sont comme les idéaux quasi-cohérents correspondants, avec l'ordre renversé.}
+\entree{5038}{1:23:58}{L'intersection (produit fibré) de deux sous-schémas fermés $V(J_1)$ et $V(J_2)$ est $V(J_1+J_2)$, car $\mathcal{O}_Y/J_1\otimes_{\mathcal{O}_Y}\mathcal{O}_Y/J_2=\mathcal{O}_Y/(J_1+J_2)$.}
+\entree{5165}{1:26:05}{Définition : une immersion est un morphisme qui se factorise en une immersion fermée $X\to U$ suivie d'une immersion ouverte $U\to Y$.}
+\entree{5297}{1:28:17}{Une immersion est un homéomorphisme sur une partie localement fermée $X$ de $Y$ ; le plus grand ouvert où $X$ est fermé est $Y\setminus(\overline{X}\setminus X)$.}
+\entree{5361}{1:29:21}{Caractérisation intrinsèque : $f$ est une immersion si et seulement si c'est un homéomorphisme sur une partie localement fermée de $Y$ et $f^{-1}\mathcal{O}_Y\to\mathcal{O}_X$ est surjectif.}
+\entree{5426}{1:30:26}{De façon équivalente, tout $y\in f(X)$ a un voisinage ouvert $V$ tel que $f^{-1}(V)\to V$ soit une immersion fermée ; pour $V$ affine, $f^{-1}(V)$ est affine et l'application d'anneaux surjective.}
+\entree{5617}{1:33:37}{Les immersions sont stables par changement de base et par composition.}
+\entree{5682}{1:34:42}{Tout morphisme diagonal $X\to X\times_SX$ est une immersion ; de façon équivalente, toute section d'un $S$-schéma est une immersion, de même que le noyau de deux morphismes $u,v\colon X\to Y$ de $S$-schémas.}
+\face{Bande 3, face A}
+\entree{5841}{1:37:21}{Un anneau de valuation discrète (par exemple $\mathbb{Z}_{(p)}$, $k[t]_{(p)}$, $k[[t]]$) est un anneau intègre local ayant un seul idéal premier non nul ; son spectre a un point générique et un point spécial, adhérent au premier.}
+\entree{5903}{1:38:23}{Un anneau de valuation discrète n'est pas artinien ($\mathfrak m\supsetneq\mathfrak m^2\supsetneq\cdots$) : son spectre est fini et noethérien sans être artinien.}
+\entree{5968}{1:39:28}{Le voisinage infinitésimal d'ordre $n$ d'un point $x$, $\mathrm{Spec}\,\mathcal{O}_{X,x}/\mathfrak m_x^n$, est un schéma local artinien si $X$ est localement noethérien ; pour $I$ fini, le schéma constant $I_k$ est artinien.}
+\entree{6032}{1:40:32}{Pour $G$ un schéma en groupes de type fini sur un corps $k$, la composante neutre $G^0$ est un sous-groupe et $G/G^0$ est artinien.}
+\entree{6097}{1:41:37}{Définition : $X$ est réduit si $\mathcal{O}_X$ n'a aucune section nilpotente non nulle sur aucun ouvert ; de façon équivalente, ses anneaux locaux sont réduits.}
+\entree{6161}{1:42:41}{La propriété d'être réduit est locale, et $\mathrm{Spec}\,A$ est réduit si et seulement si $A$ est réduit.}
+\entree{6224}{1:43:44}{Définition : un schéma est intègre s'il est réduit et irréductible.}
+\entree{6355}{1:45:55}{Si $X$ est recouvert par des ouverts non vides $X_i$, $X$ est intègre si et seulement si les $X_i$ sont intègres et se rencontrent deux à deux.}
+\entree{6430}{1:47:10}{Un schéma affine $\mathrm{Spec}\,A$ est intègre si et seulement si $A$ est un anneau intègre.}
+\entree{6568}{1:49:28}{Définition : un schéma est normal si tous ses anneaux locaux sont des anneaux intègres intégralement clos.}
+\entree{6634}{1:50:34}{Un schéma normal localement noethérien est somme disjointe de schémas intègres.}
+\entree{6697}{1:51:37}{Un schéma intègre affine $\mathrm{Spec}\,A$ est normal si et seulement si $A$ est intégralement clos dans son corps des fractions.}
+\entree{6899}{1:54:59}{Pour $X$ intègre de point générique $\eta$, le corps résiduel en $\eta$ est le corps des fonctions rationnelles $K$ de $X$.}
+\entree{7023}{1:57:03}{Un morphisme $X'\to X$ de type fini entre schémas intègres, $X$ noethérien, est dit birationnel s'il induit un isomorphisme des corps de fonctions ; il est alors un isomorphisme au-dessus d'un ouvert non vide de $X$.}
+\entree{7150}{1:59:10}{Théorème principal de Zariski : si $X$ est normal noethérien intègre, tout morphisme birationnel séparé de type fini $X'\to X$ à fibres finies est une immersion ouverte.}
+\entree{7216}{2:00:16}{L'éclatement d'un point du plan affine est un morphisme birationnel, de fibre exceptionnelle une droite projective, qui n'est pas une immersion ouverte.}
+\entree{7280}{2:01:20}{La normalisation d'une courbe à point double ordinaire est birationnelle, à fibres finies, et n'est pas un isomorphisme (l'anneau local au point double n'est pas normal).}
+\entree{7347}{2:02:27}{La normalisation d'une courbe à point de rebroussement est birationnelle et bijective sans être un isomorphisme (l'anneau local n'est pas normal).}
+\entree{7413}{2:03:33}{Le morphisme de normalisation $X'\to X$ est birationnel à fibres finies, et c'est un isomorphisme si et seulement si $X$ est normal.}
+\entree{7602}{2:06:42}{Définition : un schéma est régulier si tous ses anneaux locaux sont réguliers.}
+\entree{7860}{2:11:00}{Définition : un anneau local noethérien $A$ est régulier si son idéal maximal est engendré par une suite $A$-régulière $x_1,\dots,x_n$ ; $x_1$ est non diviseur de zéro dans $A$, $x_2$ dans $A/x_1A$, et ainsi de suite.}
+\entree{7990}{2:13:10}{Pour une suite $M$-régulière (définie de même sur un module $M$), le complexe de Koszul associé est acyclique.}
+\entree{8055}{2:14:15}{Un corps est régulier ; si $A$ est régulier, $A[t]$ l'est ; donc $k[t_1,\dots,t_n]$ est régulier, de même que $\mathbb{G}_{m,k}$ et $\mathrm{GL}_{n,k}$ (ouverts de l'espace affine).}
+\entree{8121}{2:15:21}{Théorème (Serre) : un anneau local noethérien est régulier si et seulement si sa dimension globale est finie ; la localisation d'un anneau local régulier en un premier est donc régulière.}
+\entree{8186}{2:16:26}{Un anneau est dit régulier si ses localisés en tous les premiers le sont ; les anneaux principaux et de Dedekind sont réguliers (par exemple $\mathbb{Z}$ et les anneaux d'entiers de corps de nombres), ainsi que leurs anneaux de polynômes.}
+\entree{8250}{2:17:30}{Un anneau local noethérien est régulier si et seulement si son complété $\widehat{A}$ l'est.}
+\entree{8313}{2:18:33}{Une algèbre locale complète $\mathcal{O}$ sur un corps $k$, de corps résiduel $k$, est régulière si et seulement si $\mathcal{O}\simeq k[[t_1,\dots,t_n]]$ comme $k$-algèbre ; si $A$ est régulier, $A[[t]]$ l'est aussi.}
+\face{Bande 3, face B}
+\entree{8805}{2:26:45}{Un endomorphisme surjectif d'un module de type fini sur un anneau commutatif est bijectif.}
+\entree{9207}{2:33:27}{Un endomorphisme surjectif d'une algèbre de présentation finie sur un anneau est un isomorphisme (cas noethérien : noyaux des itérés stationnaires ; cas général : passage à la limite).}
+\entree{9661}{2:41:01}{Les morphismes affines contiennent les isomorphismes et sont stables par composition et par changement de base.}
+\entree{9795}{2:43:15}{Une classe de morphismes contenant les isomorphismes et stable par composition et changement de base est stable par produit fibré : $f_1\times_Sf_2\in M$ si $f_1,f_2\in M$.}
+\entree{10079}{2:47:59}{Pour une telle classe $M$ : si $g\circ f\in M$ et si la diagonale $\Delta_g\colon Y\to Y\times_ZY$ est dans $M$, alors $f\in M$.}
+\entree{10336}{2:52:16}{Se donner un morphisme $f\colon X\to Y$ au-dessus de $Z$ équivaut à se donner une section $\Gamma_f=(\mathrm{id},f)$ de $X\times_ZY\to X$ ; $f$ est la composée de $\Gamma_f$ et de la seconde projection.}
+\entree{10408}{2:53:28}{Le graphe $\Gamma_f$ est un monomorphisme et se déduit de $\Delta_g\colon Y\to Y\times_ZY$ par le changement de base $f\times\mathrm{id}_Y$.}
+\entree{10536}{2:55:36}{Pour $g\colon Y\to S$ et une classe $M$ comme ci-dessus, sont équivalents : $\Delta_g\in M$ ; tout graphe $\Gamma_f\colon X\to X\times_SY$ est dans $M$ ; pour tous $u,v\colon X\to Y$, le noyau de $(u,v)$ dans $X$ est dans $M$.}
+\entree{10860}{3:01:00}{Ces conditions équivalent aussi à : toute section de tout changement de base $Y\times_SS'\to S'$ est dans $M$.}
+\entree{10987}{3:03:07}{Le plan affine à origine doublée (deux copies du plan recollées le long du complémentaire de l'origine) a une diagonale non affine.}
+\entree{11051}{3:04:11}{Les monomorphismes sont stables par changement de base et composition ; tout morphisme diagonal est un monomorphisme ; si $g\circ f$ est un monomorphisme, $f$ en est un.}
+\entree{11114}{3:05:14}{Les morphismes surjectifs (au sens ensembliste) sont stables par composition et par changement de base.}
+\entree{11246}{3:07:26}{Les épimorphismes de schémas sont stables par composition mais pas par changement de base.}
+\entree{11579}{3:12:59}{Définition : $f\colon X\to S$ est quasi-compact si l'image réciproque de tout ouvert quasi-compact de $S$ est quasi-compacte.}
+\entree{11643}{3:14:03}{La quasi-compacité d'un morphisme est locale sur la base : si $S$ est recouvert par des ouverts affines $S_i$, $f$ est quasi-compact si et seulement si chaque $f^{-1}(S_i)$ l'est.}
+\section{26 juin 1973}\label{s-1973-06-26}
+\noindent\textit{Vidéo 3/4 (\href{https://www.youtube.com/watch?v=Oqhr-Gt66es}{\texttt{Oqhr-Gt66es}}) : bande 1 (3:16:07--4:04:57) ; bande 2, face A (4:04:57--4:36:34) ; bande 3, face A (4:36:34--5:24:51) ; bande 3, face B (5:24:51--5:56:13) ; bande 1 (5:56:13--6:44:54).}\par\medskip
+\video{Oqhr-Gt66es}
+\face{Bande 1 (3:16:07--4:04:57)}
+\entree{12226}{3:23:46}{La diagonale d'un schéma affine $\mathrm{Spec}\,B$ sur $\mathrm{Spec}\,A$ est l'immersion fermée donnée par $B\otimes_AB\to B$, $x\otimes y\mapsto xy$ ; on en déduit que la diagonale de tout $S$-schéma est une immersion.}
+\entree{12294}{3:24:54}{Si $g\circ f$ est une immersion, alors $f$ en est une.}
+\entree{12483}{3:28:03}{Une immersion est localement de type fini ; la diagonale de tout morphisme est donc localement de type fini.}
+\entree{12547}{3:29:07}{Une immersion est localement de présentation finie si et seulement si l'idéal quasi-cohérent $J$ qui la définit dans un ouvert est de type fini.}
+\entree{12611}{3:30:11}{Si $f$ est localement de type fini, sa diagonale est localement de présentation finie.}
+\entree{12804}{3:33:24}{Si $B$ est engendrée comme $A$-algèbre par des éléments $b_i$, le noyau de $B\otimes_AB\to B$ est engendré par les $b_i\otimes1-1\otimes b_i$.}
+\entree{12999}{3:36:39}{Définition : $f\colon X\to S$ est séparé si sa diagonale, qui est une immersion, est une immersion fermée, c'est-à-dire si $\Delta_f(X)$ est fermé dans $X\times_SX$.}
+\entree{13063}{3:37:43}{Équivalent : après tout changement de base, toute section a pour image un fermé ; le graphe de tout $S$-morphisme $Y\to X$ est fermé ; le noyau de tout couple $(u,v)\colon Y\to X$ est un sous-schéma fermé de $Y$.}
+\entree{13255}{3:40:55}{Prolongement des identités : si $X$ est séparé sur $S$, $Y$ réduit, et si deux $S$-morphismes $u,v\colon Y\to X$ coïncident sur un ouvert dense $U$ de $Y$, alors $u=v$.}
+\entree{13384}{3:43:04}{Même conclusion si $u\circ i=v\circ i$ pour un morphisme $i\colon U\to Y$ d'image dense.}
+\entree{13576}{3:46:16}{Une immersion surjective est une immersion fermée définie par un idéal nil ; si $Y$ est réduit, c'est un isomorphisme.}
+\entree{13639}{3:47:19}{Tout monomorphisme est séparé (sa diagonale est un isomorphisme), en particulier toute immersion est séparée.}
+\entree{13704}{3:48:24}{Si $g\circ f$ est séparé, alors $f$ est séparé.}
+\entree{13770}{3:49:30}{Définition : un schéma est séparé s'il est séparé sur $\mathrm{Spec}\,\mathbb{Z}$ ; un schéma affine est séparé, car $A\otimes A\to A$ est surjectif.}
+\entree{13832}{3:50:32}{Si $S$ est séparé, un $S$-schéma $X$ est séparé si et seulement s'il est séparé sur $S$.}
+\entree{13961}{3:52:41}{Si $S$ est séparé, tout morphisme d'un schéma affine $X$ dans $S$ est affine ; en particulier $X\times_SY$ est affine pour $X,Y$ affines sur $S$.}
+\entree{14155}{3:55:55}{Dans un schéma séparé, l'intersection de deux ouverts affines est affine ; la réciproque est fausse.}
+\entree{14219}{3:56:59}{La droite affine à origine doublée n'est pas séparée, bien que sa diagonale soit affine : deux morphismes de la droite vers elle coïncident hors de l'origine sans être égaux.}
+\face{Bande 2, face A}
+\entree{14698}{4:04:58}{Le complémentaire de la section nulle de $\mathbb{A}^n_S$ est affine pour $n=1$ et ne l'est pas pour $n\geq2$ ($S$ non vide affine).}
+\entree{14762}{4:06:02}{Le plan à origine doublée contient deux ouverts affines dont l'intersection, le complémentaire de l'origine, n'est pas affine.}
+\entree{14833}{4:07:13}{Définition : $f$ est quasi-séparé si sa diagonale est quasi-compacte.}
+\entree{14898}{4:08:18}{Équivalent : après tout changement de base, toute section est quasi-compacte ; ou le noyau de tout couple $(u,v)\colon Y\to X$ de $S$-morphismes est quasi-compact sur $Y$.}
+\entree{14967}{4:09:27}{Un morphisme séparé est quasi-séparé ; tout monomorphisme, donc tout morphisme diagonal, est quasi-séparé ; si $g\circ f$ est quasi-séparé, $f$ l'est.}
+\entree{15031}{4:10:31}{Définition : un schéma est quasi-séparé s'il l'est sur $\mathrm{Spec}\,\mathbb{Z}$ ; il l'est alors sur tout schéma au-dessus duquel il se trouve.}
+\entree{15094}{4:11:34}{Si $S$ est quasi-séparé, un $S$-schéma est quasi-séparé si et seulement s'il l'est sur $S$.}
+\entree{15158}{4:12:38}{Un schéma est quasi-séparé si et seulement si l'intersection de deux ouverts quasi-compacts est quasi-compacte.}
+\entree{15289}{4:14:49}{$S$ est quasi-séparé si et seulement si tout morphisme $X\to S$ d'un schéma quasi-compact est quasi-compact.}
+\entree{15416}{4:16:56}{$S$ est quasi-séparé si et seulement si $X\times_SY$ est quasi-compact pour tous $X,Y$ quasi-compacts sur $S$.}
+\entree{15613}{4:20:13}{Si $S$ est recouvert par des ouverts affines $S_i$, $S$ est quasi-séparé si et seulement si les $S_i\cap S_j$ sont quasi-compacts.}
+\entree{15677}{4:21:17}{Le complémentaire de l'origine dans $\mathrm{Spec}\,k[t_1,t_2,\dots]$ n'est pas quasi-compact ; deux copies recollées le long de cet ouvert forment un schéma non quasi-séparé.}
+\entree{16003}{4:26:43}{Si $g\circ f$ est quasi-compact (resp. de type fini) et $g$ quasi-séparé, alors $f$ est quasi-compact (resp. de type fini) ; la diagonale d'un morphisme localement de type fini est quasi-compacte si et seulement si elle est de type fini.}
+\entree{16068}{4:27:48}{Définition : un morphisme est cohérent s'il est quasi-compact et quasi-séparé ; un schéma est cohérent s'il l'est sur $\mathrm{Spec}\,\mathbb{Z}$.}
+\entree{16201}{4:30:01}{Les morphismes cohérents sont stables par changement de base et par composition.}
+\entree{16267}{4:31:07}{Si $g\circ f$ est cohérent et $g$ quasi-séparé, alors $f$ est cohérent.}
+\entree{16396}{4:33:16}{Si $S$ est quasi-séparé, un $S$-schéma est cohérent si et seulement s'il est cohérent sur $S$.}
+\entree{16474}{4:34:34}{Si $f\colon X\to S$ est cohérent et $\mathcal{F}$ un $\mathcal{O}_X$-module quasi-cohérent, $f_*\mathcal{F}$ est quasi-cohérent.}
+\entree{16538}{4:35:38}{Dans les mêmes conditions, les images directes supérieures $R^qf_*\mathcal{F}$ sont quasi-cohérentes.}
+\face{Bande 3, face A}
+\entree{16790}{4:39:50}{Pour un corps $k$, sont équivalents : $k$ est parfait ; $A\otimes_kB$ est réduit pour toutes $k$-algèbres réduites $A,B$ ; $A\otimes_kk'$ est réduit pour $A$ réduite et $k'/k$ extension ; $k'\otimes_kk'$ est réduit pour toute extension finie radicielle $k'/k$.}
+\entree{17048}{4:44:08}{Si $x\in k\setminus k^p$ et $k'=k[t]/(t^p-x)$, alors $k'\otimes_kk'\simeq k'[t]/(t-\alpha)^p$, avec $\alpha^p=x$, n'est pas réduit.}
+\entree{17116}{4:45:16}{Si $k$ est parfait et $K,L$ sont deux extensions de $k$, alors $K\otimes_kL$ est réduit.}
+\entree{17370}{4:49:30}{Pour une $k$-algèbre $A$ et une extension parfaite $K_1$ de $k$, sont équivalents (on dit alors $A$ géométriquement réduite, ou séparable) : $A\otimes_kB$ réduit pour toute $B$ réduite ; $A\otimes_kk'$ réduit pour toute extension $k'$ ; $A\otimes_kK_1$ réduit ; $A\otimes_kk'$ réduit pour toute extension finie radicielle $k'$.}
+\entree{17834}{4:57:14}{Définition : un $k$-schéma $X$ est géométriquement réduit, ou séparable, si $X\times_kY$ est réduit pour tout $k$-schéma réduit $Y$, ce qui équivaut aux conditions analogues sur les extensions ; on se ramène à $X$ affine.}
+\entree{17899}{4:58:19}{Un schéma séparable sur $k$ est réduit ; la réciproque vaut pour tout $X$ si et seulement si $k$ est parfait.}
+\entree{17970}{4:59:30}{Pour toute extension $k'/k$, $X$ est séparable sur $k$ si et seulement si $X_{k'}$ l'est sur $k'$.}
+\entree{18099}{5:01:39}{Un corps $k$ est séparablement clos si toute extension algébrique de $k$ est radicielle ; en caractéristique nulle, tout corps est parfait et séparablement clos équivaut à algébriquement clos.}
+\entree{18295}{5:04:55}{Pour un corps $k$, sont équivalents : $k$ est séparablement clos ; pour $A,B$ à spectres irréductibles, $\mathrm{Spec}(A\otimes_kB)$ est irréductible ; idem pour $B$ une extension ; $k'\otimes_kk'$ est intègre pour toute extension galoisienne finie $k'$.}
+\entree{18360}{5:06:00}{Si $k$ est séparablement clos et $K,L$ sont des extensions de $k$, le spectre de $K\otimes_kL$ est irréductible.}
+\entree{18552}{5:09:12}{Pour un $k$-schéma $X$ et $K_1$ séparablement clos, sont équivalents (on dit alors $X$ géométriquement irréductible) : $X\times_kY$ irréductible pour tout $Y$ irréductible ; $X_{k'}$ irréductible pour toute extension $k'$ ; $X_{K_1}$ irréductible ; $X_{k'}$ irréductible pour $k'/k$ galoisienne finie.}
+\entree{19341}{5:22:21}{Un schéma géométriquement irréductible est irréductible ; la réciproque vaut pour tout $X$ si et seulement si $k$ est séparablement clos.}
+\entree{19407}{5:23:27}{Pour toute extension $k'/k$, $X$ est géométriquement irréductible sur $k$ si et seulement si $X_{k'}$ l'est sur $k'$.}
+\face{Bande 3, face B}
+\entree{19493}{5:24:53}{Le produit de deux $k$-schémas séparables (resp. géométriquement irréductibles) est séparable (resp. géométriquement irréductible).}
+\entree{19691}{5:28:11}{Pour un corps $k$, sont équivalents : $k$ est algébriquement clos ; le produit tensoriel de deux $k$-algèbres intègres est intègre ; $A\otimes_kk'$ est intègre pour $A$ intègre et $k'/k$ extension ; $k'\otimes_kk'$ est intègre pour toute extension finie $k'/k$.}
+\entree{19761}{5:29:21}{Pour un $k$-schéma $X$ et $K_1$ algébriquement clos, sont équivalents : $X\times_kY$ intègre pour tout $Y$ intègre ; $X_{k'}$ intègre pour toute extension $k'$ ; $X_{K_1}$ intègre ; $X_{k'}$ intègre pour toute extension finie $k'$.}
+\entree{19828}{5:30:28}{Définition : $X$ est géométriquement intègre s'il est séparable et géométriquement irréductible ; il est alors intègre, et la réciproque vaut pour tout $X$ si et seulement si $k$ est algébriquement clos.}
+\entree{19891}{5:31:31}{La géométrique intégrité est invariante par extension du corps de base et stable par produit de deux $k$-schémas.}
+\entree{19954}{5:32:34}{Si $k$ est séparablement clos, le produit sur $k$ de deux schémas connexes est connexe.}
+\entree{20091}{5:34:51}{Si $k'/k$ est une extension radicielle, la projection $X_{k'}\to X$ est un homéomorphisme pour tout $k$-schéma $X$.}
+\entree{20413}{5:40:13}{Pour $Y$ non vide, la projection $X\times_kY\to X$ est surjective et ouverte, donc la topologie de $X$ est quotient de celle de $X\times_kY$.}
+\entree{20476}{5:41:16}{Si $k$ est séparablement clos et $X$ connexe non vide, alors $X_{k'}$ est connexe non vide pour toute extension $k'/k$.}
+\entree{20602}{5:43:22}{La fibre de $X\times_kY\to X$ en $x$ est $\mathrm{Spec}(\kappa(x)\otimes_k\mathcal{O}_Y)$ ; en particulier celle de $X_{k'}\to X$ en $x$ est $\mathrm{Spec}(\kappa(x)\otimes_kk')$ ; celle de $X\times_kY\to Y$ en $y$ est $X_{\kappa(y)}$.}
+\entree{20796}{5:46:36}{Si le produit de deux schémas connexes sur $k$ est toujours connexe, alors $k$ est séparablement clos : pour $k'/k$ galoisienne finie de groupe $\Gamma$, $\mathrm{Spec}(k'\otimes_kk')$ est somme de $|\Gamma|$ points.}
+\entree{20993}{5:49:53}{Pour un $k$-schéma $X$ et $K_1$ séparablement clos, sont équivalents (on dit alors $X$ géométriquement connexe) : $X\times_kY$ connexe pour tout $Y$ connexe ; $X_{k'}$ connexe pour toute extension $k'$ ; $X_{K_1}$ connexe ; $X_{k'}$ connexe pour $k'/k$ galoisienne finie.}
+\entree{20993}{5:49:53}{Un schéma géométriquement connexe (satisfaisant ces conditions) est connexe ; la réciproque vaut pour tout $X$ si et seulement si $k$ est séparablement clos.}
+\entree{21188}{5:53:08}{Une limite projective filtrante de schémas connexes, affines sur un schéma quasi-compact $X$, est connexe.}
+\entree{21315}{5:55:15}{La géométrique connexité est invariante par extension du corps de base et stable par produit de deux $k$-schémas.}
+\face{Bande 1 (5:56:13--6:44:54)}
+\noindent\textit{Datée du 26 juin par la description de la vidéo ; probablement la séance du 27 juin.}\par\smallskip
+\entree{21601}{6:00:01}{Pour des sous-faisceaux $F_i$ d'un faisceau $F$, la borne supérieure est l'image de $\coprod_iF_i\to F$, le plus petit sous-faisceau contenant les $F_i$ ; ses sections sont celles qui appartiennent localement à l'un des $F_i$.}
+\entree{22316}{6:11:56}{Le schéma obtenu en recollant une infinité (indexée par $\mathbb{Z}$) de copies d'une courbe $S$ le long de $S\setminus\{s_0\}$ est connexe, localement de type fini sur $S$, non séparé et non quasi-compact.}
+\entree{22510}{6:15:10}{Définition : un module $\mathcal{F}$ sur un espace annelé est cohérent s'il est de type fini et si le noyau de tout morphisme $\mathcal{O}_U^n\to\mathcal{F}$ est de type fini.}
+\entree{22572}{6:16:12}{Théorème (Serre) : les modules cohérents sont stables par sommes finies, noyaux, conoyaux, images et extensions.}
+\entree{22637}{6:17:17}{Si $\mathcal{O}_X$ est cohérent, les modules cohérents sont exactement ceux de présentation finie ; pour $X$ localement noethérien, $\mathcal{O}_X$ est cohérent.}
+\entree{22896}{6:21:36}{Une immersion surjective est une immersion ouverte si et seulement si c'est un isomorphisme ; il existe des immersions surjectives de but $Y$ qui ne sont pas des isomorphismes si et seulement si $Y$ n'est pas réduit.}
+\entree{23161}{6:26:01}{Pour $Y$ fermé de $X$, l'idéal $J_Y$ des sections nulles en tout point de $Y$ est quasi-cohérent ; c'est le plus grand idéal définissant $Y$, et $V(J_Y)$ est l'unique sous-schéma fermé réduit d'espace sous-jacent $Y$.}
+\entree{23290}{6:28:10}{Pour un sous-schéma fermé $V(J)$, les $V(J^{n+1})$ ont même espace sous-jacent ; ce sont ses voisinages infinitésimaux d'ordre $n$.}
+\entree{23353}{6:29:13}{Une immersion dont l'application sous-jacente est ouverte est une immersion fermée définie par un idéal nil sur un ouvert de $Y$ ; ce n'est pas une immersion ouverte en général.}
+\entree{23421}{6:30:21}{Tout schéma localement noethérien est quasi-séparé.}
+\entree{23618}{6:33:38}{Un schéma est cohérent si et seulement s'il est réunion finie d'ouverts affines $X_i$ dont les intersections $X_i\cap X_j$ sont quasi-compactes.}
+\entree{24017}{6:40:17}{L'hypothèse de quasi-compacité est nécessaire : pour $X$ somme disjointe d'une infinité de copies d'un schéma affine $S$, $f_*\mathcal{F}$ est le produit des $\mathcal{F}_i$, et un produit infini de modules quasi-cohérents ne l'est pas en général.}
+\entree{24145}{6:42:25}{Définition : un ouvert est rétrocompact si son intersection avec tout ouvert quasi-compact est quasi-compacte, c'est-à-dire si l'inclusion est quasi-compacte, donc cohérente.}
+\entree{24207}{6:43:27}{Si $U\subset X$ est un ouvert rétrocompact, tout $\mathcal{O}_U$-module quasi-cohérent $\mathcal{F}$ est la restriction à $U$ d'un module quasi-cohérent sur $X$, par exemple $i_*\mathcal{F}$.}
+\section{2 juillet 1973}\label{s-1973-07-02}
+\noindent\textit{Vidéo 3/4 (\href{https://www.youtube.com/watch?v=Oqhr-Gt66es}{\texttt{Oqhr-Gt66es}}) : bande 1, face A (6:44:54--7:33:37) ; bande 1, face B (7:33:37--8:22:13) ; bande 2, face A (8:22:13--8:28:48).}\par\medskip
+\video{Oqhr-Gt66es}
+\face{Bande 1, face A}
+\entree{24432}{6:47:12}{Si $A=\varinjlim A_i$ est une limite filtrante d'anneaux, un schéma quasi-compact et quasi-séparé de présentation finie sur $A$ provient par changement de base d'un schéma de présentation finie sur $A_i$, pour $i$ assez grand.}
+\entree{25093}{6:58:13}{Définition (naïve) : $X\to Y$ est projectif s'il existe une immersion fermée de $X$ dans $\mathbb{P}(E)$, avec $E$ quasi-cohérent de type fini sur $Y$ ; quasi-projectif si l'on a seulement une immersion.}
+\entree{25222}{7:00:22}{Si $E$ est quasi-cohérent de type fini, $\mathbb{P}(E)$ est de type fini sur $Y$ ; $\mathbb{P}(E)$ est séparé sur $Y$.}
+\entree{25350}{7:02:30}{La notion naïve de morphisme projectif est stable par changement de base, car $\mathbb{P}(E)\times_YY'=\mathbb{P}(E_{Y'})$.}
+\entree{25734}{7:08:54}{Les $Y$-morphismes $X\to\mathbb{P}(E)$ correspondent aux quotients inversibles $L$ du module $E_X$ image réciproque de $E$ sur $X$.}
+\entree{25800}{7:10:00}{Définition : un faisceau inversible $L$ sur $X$ est très ample relativement à $Y$ s'il existe un module quasi-cohérent $E$ sur $Y$ et un épimorphisme $f^*E\to L$ dont le morphisme associé $X\to\mathbb{P}(E)$ est une immersion.}
+\entree{25928}{7:12:08}{Si $X$ possède un faisceau très ample relativement à $Y$, alors $X$ est séparé sur $Y$ ; si de plus $X$ est de type fini sur $Y$ cohérent, on peut choisir $E$ de type fini.}
+\entree{26255}{7:17:35}{Si $Y$ est cohérent, $X\to Y$ admet une immersion dans $\mathbb{P}(E)$ avec $E$ quasi-cohérent de type fini si et seulement si $X$ est de type fini sur $Y$ et possède un faisceau inversible très ample relativement à $Y$.}
+\entree{26447}{7:20:47}{La propriété d'être très ample est stable par changement de base.}
+\entree{26511}{7:21:51}{Le produit tensoriel de deux faisceaux très amples est très ample (plongement de Segre $\mathbb{P}(E)\times\mathbb{P}(F)\to\mathbb{P}(E\otimes F)$) ; donc $L^{\otimes n}$ est très ample pour $n>0$ si $L$ l'est.}
+\entree{26648}{7:24:08}{Si $Y$ est quasi-compact et $X$ de type fini sur $Y$, $L$ est ample relativement à $Y$ si et seulement si une puissance $L^{\otimes n}$ ($n>0$) est très ample ; alors $L^{\otimes n}$ est très ample pour tout $n\geq n_0$.}
+\entree{26840}{7:27:20}{Les faisceaux amples sont stables par changement de base et par produit tensoriel ; pour $n>0$, $L$ est ample si et seulement si $L^{\otimes n}$ l'est.}
+\entree{27035}{7:30:35}{Dans $\mathrm{Pic}(X)\otimes\mathbb{Q}$, les classes dont un multiple positif est ample forment un cône convexe.}
+\entree{27098}{7:31:38}{Pour $Y$ quasi-compact, $\mathcal{O}_X$ est ample relativement à $Y$ si et seulement si $X$ est quasi-affine sur $Y$ ; si de plus $X$ est propre sur $Y$, alors $X\to Y$ est fini.}
+\face{Bande 1, face B}
+\entree{27219}{7:33:39}{Si $Y$ est quasi-compact, $L$ ample et $M$ inversible quelconque, alors $L^{\otimes n}\otimes M$ est ample pour $n$ assez grand ; le cône ample engendre donc $\mathrm{Pic}(X)\otimes\mathbb{Q}$ dès qu'il est non vide.}
+\entree{27285}{7:34:45}{Définition : $f\colon X\to Y$ est quasi-projectif s'il est de type fini et s'il existe un faisceau inversible sur $X$ ample relativement à $Y$.}
+\entree{27355}{7:35:55}{Définition : $f$ est projectif s'il est quasi-projectif et propre ; $f$ est propre s'il est de type fini, séparé et universellement fermé.}
+\entree{27481}{7:38:01}{Si $Y$ est cohérent, $f$ est quasi-projectif (resp. projectif) si et seulement s'il existe une immersion (resp. immersion fermée) de $X$ dans $\mathbb{P}(E)$ avec $E$ quasi-cohérent de type fini.}
+\entree{27544}{7:39:04}{Les morphismes quasi-projectifs et projectifs sont stables par changement de base.}
+\entree{28150}{7:49:10}{Les morphismes propres sont stables par changement de base et par composition.}
+\entree{28218}{7:50:18}{Si $X$ est propre sur $Y$ et $Z$ séparé sur $Y$, tout $Y$-morphisme $X\to Z$ est fermé.}
+\entree{28347}{7:52:27}{Si $X$ est de type fini sur $Y$ et $g\colon X\to Z$ une $Y$-immersion dans un $Y$-schéma propre $Z$, alors $X$ est propre sur $Y$ si et seulement si $g$ est une immersion fermée ; les immersions fermées sont propres.}
+\entree{28411}{7:53:31}{Les morphismes projectifs sont propres ; sur un corps algébriquement clos, il existe des schémas propres qui ne sont pas projectifs.}
+\entree{28486}{7:54:46}{Lemme de Chow : tout schéma propre sur un corps est dominé par un schéma projectif au moyen d'un morphisme birationnel.}
+\entree{28613}{7:56:53}{Si $E$ est quasi-cohérent de type fini, $\mathbb{P}(E)$ est propre sur $Y$ ; on se ramène à $\mathbb{P}^n_{\mathbb{Z}}$ sur $\mathrm{Spec}\,\mathbb{Z}$.}
+\entree{28743}{7:59:03}{Critère valuatif de propreté : pour $Y$ localement noethérien et $f$ de type fini, $f$ est propre si et seulement si, pour tout anneau de valuation discrète $A$ de corps des fractions $K$ et tout $\mathrm{Spec}\,A\to Y$, les sections de $X$ sur $\mathrm{Spec}\,A$ correspondent bijectivement à celles sur $\mathrm{Spec}\,K$.}
+\entree{28870}{8:01:10}{L'injectivité de cette application équivaut à la séparation de $f$ (critère valuatif de séparation).}
+\entree{29317}{8:08:37}{Pour $A$ un anneau de valuation discrète de corps des fractions $K$ et $M$ un $A$-module de type fini, les quotients de $M$ libres de rang un correspondent bijectivement aux quotients de dimension un de $M_K$, par $H\mapsto M\cap H_K$ ; donc $\mathbb{P}(M)$ vérifie le critère.}
+\entree{29521}{8:12:01}{Pour une $A$-algèbre $B$ et $x\in B$, sont équivalents : $x$ annule un polynôme unitaire à coefficients dans $A$ (entier sur $A$) ; $A[x]$ est un $A$-module de type fini ; $x$ appartient à une sous-algèbre de $B$ finie sur $A$.}
+\entree{29585}{8:13:05}{Une $A$-algèbre $B$ est entière si et seulement si elle est réunion (limite inductive) de sous-algèbres finies sur $A$.}
+\entree{29651}{8:14:11}{Les sous-algèbres et les algèbres quotients d'une algèbre entière sont entières ; le produit tensoriel de deux algèbres entières est entier ; les éléments de $B$ entiers sur $A$ forment une sous-algèbre, la fermeture intégrale de $A$ dans $B$.}
+\entree{29718}{8:15:18}{Transitivité : si $B$ est entière sur $A$ et $C$ entière sur $B$, alors $C$ est entière sur $A$.}
+\entree{29849}{8:17:29}{Définition : $f\colon X\to Y$ est fini (resp. entier) s'il est affine, $X=\mathrm{Spec}\,\mathcal{B}$, avec $\mathcal{B}$ une $\mathcal{O}_Y$-algèbre quasi-cohérente de type fini comme module (resp. entière sur $\mathcal{O}_Y$).}
+\entree{29981}{8:19:41}{Les morphismes finis et les morphismes entiers sont stables par changement de base et par composition.}
+\face{Bande 2, face A}
+\entree{30136}{8:22:16}{Un morphisme est fini si et seulement s'il est entier et de type fini ; une algèbre $B$ est finie sur $A$ si et seulement si elle est de type fini et entière.}
+\entree{30201}{8:23:21}{Un morphisme entier est séparé (car affine) et universellement fermé ; un morphisme fini est donc propre.}
+\entree{30267}{8:24:27}{Toute immersion fermée est finie, car $A/J$ est finie sur $A$.}
+\entree{30399}{8:26:39}{Lemme de montée (Cohen--Seidenberg) : si $A\subset B$ est entière, tout idéal premier de $A$ est induit par un idéal premier de $B$ ; c'est le point clé pour que les morphismes entiers soient fermés.}
+\entree{30462}{8:27:42}{Pour $k'/k$ algébrique et $X$ un $k$-schéma, la projection $X_{k'}\to X$ est fermée.}
+\section{3 juillet 1973}\label{s-1973-07-03}
+\noindent\textit{Vidéo 3/4 (\href{https://www.youtube.com/watch?v=Oqhr-Gt66es}{\texttt{Oqhr-Gt66es}}) : bande 1, face A (8:28:48--9:16:43) ; bande 1, face B (9:16:43--10:05:05) ; bande 2 (10:05:05--10:53:45).}\par\medskip
+\video{Oqhr-Gt66es}
+\face{Bande 1, face A}
+\entree{30706}{8:31:46}{Un morphisme est fini si et seulement s'il est entier et de type fini ; un morphisme est entier si et seulement s'il est affine et universellement fermé.}
+\entree{30771}{8:32:51}{Un morphisme projectif est propre ; un morphisme propre est séparé et universellement fermé.}
+\entree{30835}{8:33:55}{Les immersions fermées sont finies, les morphismes finis sont projectifs, les projectifs sont quasi-projectifs.}
+\entree{30898}{8:34:58}{Les morphismes affines et les immersions quasi-compactes sont quasi-affines ; les morphismes quasi-affines de type fini sont quasi-projectifs.}
+\entree{31028}{8:37:08}{Un morphisme est fini si et seulement s'il est propre à fibres finies.}
+\entree{31094}{8:38:14}{Un morphisme de schémas de type fini sur $\mathbb{C}$ est propre si et seulement si l'application induite entre les espaces analytiques de points complexes est propre.}
+\entree{31422}{8:43:42}{Pour $X$ cohérent et $L$ inversible, sont équivalents : les $X_f$, $f\in\Gamma(X,L^{\otimes n})$, $n>0$, forment une base de la topologie ; ceux qui sont affines en forment une base.}
+\entree{31560}{8:46:00}{Pour $X$ cohérent, ces conditions équivalent aussi à : pour tout $F$ quasi-cohérent de type fini, $F\otimes L^{\otimes n}$ est engendré par ses sections pour $n$ grand ; même condition pour les idéaux quasi-cohérents de type fini.}
+\entree{31756}{8:49:16}{Si $X$ est cohérent sur $Y=\mathrm{Spec}\,A$ affine et si $L^{\otimes n}$ est très ample relativement à $Y$ pour un $n>0$, ces conditions sont satisfaites ; la réciproque vaut si $X$ est de type fini sur $Y$.}
+\entree{31946}{8:52:26}{Définition : sur un schéma cohérent, un faisceau inversible $L$ est ample s'il satisfait les conditions équivalentes précédentes.}
+\entree{32012}{8:53:32}{Définition : $L$ est ample relativement à $Y$ s'il existe un recouvrement de $Y$ par des ouverts affines $Y_i$ tels que $L$ restreint à $f^{-1}(Y_i)$ soit ample ; il l'est alors sur tout ouvert affine de $Y$.}
+\entree{32075}{8:54:35}{S'il existe un faisceau inversible ample relativement à $Y$, alors $X$ est séparé sur $Y$.}
+\entree{32204}{8:56:44}{Pour $f$ cohérent et $Y$ quasi-compact, $L$ est ample relativement à $Y$ si et seulement si, pour tout module quasi-cohérent de type fini $F$ sur $X$, $f^*f_*(F\otimes L^{\otimes n})\to F\otimes L^{\otimes n}$ est surjectif pour $n$ grand.}
+\entree{32333}{8:58:53}{Si une puissance $L^{\otimes n}$ ($n>0$) est très ample relativement à $Y$, alors $L$ est ample ; la réciproque vaut si $f$ est de type fini et $Y$ quasi-compact.}
+\entree{32398}{8:59:58}{Pour $f\colon X\to Y$, $g\colon Y\to Z$, $Z$ quasi-compact, $L$ ample (resp. très ample) relativement à $f$ et $M$ ample (resp. très ample) relativement à $g$, le faisceau $L\otimes f^*M^{\otimes n}$ est ample (resp. très ample) relativement à $g\circ f$ pour $n\geq n_0$.}
+\entree{32732}{9:05:32}{Si $X\subset\mathbb{P}^n_Y$ et $Y\subset\mathbb{P}^m_Z$, $X$ se plonge dans $\mathbb{P}^n_Z\times_Z\mathbb{P}^m_Z$, puis par Segre dans $\mathbb{P}^{(n+1)(m+1)-1}_Z$, le faisceau induit étant $L\otimes f^*M$.}
+\entree{32997}{9:09:57}{Pour $E$ quasi-cohérent et $I$ inversible, $\mathbb{P}(E)\simeq\mathbb{P}(E\otimes I)$, le faisceau fondamental de $\mathbb{P}(E\otimes I)$ étant celui de $\mathbb{P}(E)$ tordu par l'image réciproque de $I$.}
+\entree{33188}{9:13:08}{Les notions de morphisme quasi-projectif et de morphisme projectif ne sont pas locales sur la base.}
+\entree{33252}{9:14:12}{Définition : un schéma est quasi-affine s'il est isomorphe à un ouvert quasi-compact d'un schéma affine ; il est alors séparé et cohérent.}
+\entree{33316}{9:15:16}{Tout morphisme d'un schéma $X$ vers un schéma affine $\mathrm{Spec}\,B$ se factorise de façon unique par $X\to\mathrm{Spec}\,\Gamma(X,\mathcal{O}_X)$.}
+\face{Bande 1, face B}
+\entree{33470}{9:17:50}{Pour $X$ cohérent et $A=\Gamma(X,\mathcal{O}_X)$, sont équivalents : $X$ est quasi-affine ; $X\to\mathrm{Spec}\,A$ est une immersion ouverte ; $\mathcal{O}_X$ est ample ; les $X_f$, $f\in A$, qui sont affines forment une base de la topologie ; tout module quasi-cohérent est engendré par ses sections.}
+\entree{33600}{9:20:00}{Ces conditions équivalent aussi à l'existence d'un faisceau inversible $L$ tel que $L$ et $L^{-1}$ soient amples.}
+\entree{33740}{9:22:20}{Définition : $f\colon X\to Y$ est quasi-affine s'il existe un recouvrement de $Y$ par des ouverts affines $Y_i$ tels que $f^{-1}(Y_i)$ soit quasi-affine ; c'est équivalent à $\mathcal{O}_X$ ample relativement à $Y$.}
+\entree{33808}{9:23:28}{Un morphisme est quasi-affine si et seulement s'il est cohérent et si, pour tout module quasi-cohérent $F$ sur $X$, $f^*f_*F\to F$ est surjectif.}
+\entree{33870}{9:24:30}{Les morphismes quasi-affines sont stables par changement de base et par composition, sans hypothèse de quasi-compacité.}
+\entree{33935}{9:25:35}{Une immersion est quasi-affine si et seulement si elle est quasi-compacte ; si $g\circ f$ est quasi-affine et $g$ quasi-séparé, alors $f$ est quasi-affine.}
+\entree{34060}{9:27:40}{Un morphisme séparé, de type fini et à fibres finies est quasi-affine.}
+\entree{34132}{9:28:52}{Si $Y$ est cohérent, un tel morphisme se factorise en une immersion ouverte quasi-compacte suivie d'un morphisme fini (forme moderne du théorème principal de Zariski) ; de type fini à fibres finies s'appelle quasi-fini.}
+\entree{34487}{9:34:47}{Sont équivalents : $f$ est universellement injectif (injectif après tout changement de base) ; chaque fibre a au plus un point $x$ au-dessus de $y$, avec $\kappa(x)/\kappa(y)$ radicielle. On dit alors que $f$ est radiciel.}
+\entree{34689}{9:38:09}{$f$ est radiciel si et seulement si $X(K)\to Y(K)$ est injectif pour tout corps $K$, si et seulement si la diagonale $X\to X\times_YX$ est surjective.}
+\entree{34883}{9:41:23}{Les morphismes radiciels sont stables par changement de base et par composition ; tout monomorphisme est radiciel.}
+\entree{35012}{9:43:32}{Un morphisme entier, radiciel et surjectif est un homéomorphisme universel ; réciproquement un homéomorphisme universel est entier, radiciel et surjectif.}
+\entree{35146}{9:45:46}{Pour $k'/k$ radicielle (par exemple la clôture parfaite de $k$), $\mathrm{Spec}\,k'\to\mathrm{Spec}\,k$ est un homéomorphisme universel, donc $X_{k'}\to X$ est un homéomorphisme.}
+\entree{35209}{9:46:49}{La normalisation d'une courbe à point de rebroussement est entière, radicielle et surjective, donc un homéomorphisme universel.}
+\entree{35338}{9:48:58}{La normalisation d'une courbe à point double ordinaire, privée de l'un des deux points au-dessus du point double, est un homéomorphisme qui n'est pas universel.}
+\entree{35659}{9:54:19}{Définition : $f$ est ouvert si l'application sous-jacente l'est, universellement ouvert s'il le reste après tout changement de base.}
+\entree{35806}{9:56:46}{Les morphismes ouverts sont stables par composition mais pas par changement de base ; les morphismes universellement ouverts sont stables par les deux.}
+\entree{35869}{9:57:49}{Un morphisme ouvert est généralisant : si $f(x)=y$, toute généralisation de $y$ se relève en une généralisation de $x$, c'est-à-dire que $\mathrm{Spec}\,\mathcal{O}_{X,x}\to\mathrm{Spec}\,\mathcal{O}_{Y,y}$ est surjectif.}
+\face{Bande 2}
+\entree{36375}{10:06:15}{Une limite inductive filtrante d'anneaux est nulle si et seulement si l'un de ces anneaux est nul.}
+\entree{36440}{10:07:20}{Un morphisme universellement ouvert est universellement généralisant ; les morphismes généralisants sont stables par composition, les universellement généralisants par composition et changement de base.}
+\entree{36503}{10:08:23}{Pour $\eta$ un point maximal de $X$, $\mathrm{Spec}\,\kappa(\eta)\to X$ est généralisant ; il n'est pas ouvert en général (par exemple pour la droite affine sur un corps).}
+\entree{36565}{10:09:25}{Si $f$ est localement de présentation finie, $f$ est ouvert si et seulement s'il est généralisant, et universellement ouvert si et seulement s'il est universellement généralisant.}
+\entree{36696}{10:11:36}{L'image d'un morphisme de type fini entre schémas noethériens est constructible, c'est-à-dire réunion finie de parties localement fermées.}
+\entree{36760}{10:12:40}{Une partie constructible d'un schéma est ouverte si et seulement si elle est stable par généralisation.}
+\entree{36951}{10:15:51}{Si $f$ est localement de présentation finie, $f$ est ouvert en $x$ (l'image de tout voisinage de $x$ est un voisinage de $f(x)$) si et seulement s'il est généralisant en $x$.}
+\entree{37016}{10:16:56}{Tout schéma sur un corps $k$ est universellement ouvert sur $k$.}
+\entree{37143}{10:19:03}{Définition : un module $M$ sur $A$ est plat si le foncteur $M\otimes_A-$ est exact, fidèlement plat s'il est de plus fidèle, c'est-à-dire si $M\otimes_AN=0$ entraîne $N=0$.}
+\entree{37209}{10:20:09}{Un module plat $M$ est fidèlement plat si et seulement si $u$ est injectif (resp. surjectif, bijectif) dès que $M\otimes u$ l'est.}
+\entree{37402}{10:23:22}{Un module $M$ est fidèlement plat si et seulement s'il est plat et $M/\mathfrak mM\neq0$ pour tout idéal maximal $\mathfrak m$ de $A$.}
+\entree{37726}{10:28:46}{Une $A$-algèbre $B$ est fidèlement plate si et seulement si elle est plate et $\mathrm{Spec}\,B\to\mathrm{Spec}\,A$ est surjectif.}
+\entree{37918}{10:31:58}{Si $A\to B$ est un homomorphisme local d'anneaux locaux, $B$ plat sur $A$ équivaut à $B$ fidèlement plat ; l'application des spectres est alors surjective.}
+\entree{38052}{10:34:12}{La platitude d'une algèbre est stable par localisation : si $B$ est plat sur $A$, $B[T^{-1}]$ est plat sur $A[S^{-1}]$ ; les anneaux locaux de $B$ sont donc plats sur ceux de $A$.}
+\entree{38114}{10:35:14}{Si $B$ est plat sur $A$, $\mathrm{Spec}\,B\to\mathrm{Spec}\,A$ est généralisant.}
+\entree{38243}{10:37:23}{Un module sur un espace annelé est plat si et seulement si ses fibres le sont comme modules sur les fibres du faisceau d'anneaux.}
+\entree{38374}{10:39:34}{Un module quasi-cohérent $\widetilde{M}$ sur $\mathrm{Spec}\,A$ est plat si et seulement si le $A$-module $M$ est plat.}
+\entree{38502}{10:41:42}{Un module $M$ sur $X$ est plat relativement à $f\colon X\to Y$ si chaque fibre $M_x$ est plate sur $\mathcal{O}_{Y,f(x)}$.}
+\entree{38630}{10:43:50}{Définition : $f$ est plat si $\mathcal{O}_X$ est plat relativement à $Y$ ; notion locale sur $X$ et $Y$, qui équivaut à $\mathcal{O}_{X,x}$ plat sur $\mathcal{O}_{Y,f(x)}$ pour tout $x$ ; pour $X,Y$ affines, à $B$ plat sur $A$.}
+\entree{38767}{10:46:07}{Un morphisme plat est généralisant, donc universellement généralisant ; les morphismes plats contiennent les isomorphismes et sont stables par composition et changement de base.}
+\entree{38963}{10:49:23}{Définition : $f$ est fidèlement plat s'il est plat et surjectif ; ces morphismes sont stables par composition et changement de base.}
+\entree{39030}{10:50:30}{Un morphisme $f$ est fidèlement plat si et seulement si le foncteur image réciproque $f^*$, des modules sur $Y$ vers les modules sur $X$, est exact et fidèle.}
+\entree{39165}{10:52:45}{Si $f$ est plat, l'adhérence de l'image de toute composante irréductible de $X$ est une composante irréductible de $Y$.}
+\section{9 juillet 1973}\label{s-1973-07-09}
+\noindent\textit{Vidéo 4/4 (\href{https://www.youtube.com/watch?v=vuys5SNs2eQ}{\texttt{vuys5SNs2eQ}}) : bande 1 (0:00:00--0:48:32) ; bande 2, face A (0:48:32--1:38:09) ; bande 2, face B (1:38:09--2:27:17) ; bande 3 (2:27:17--3:15:45).}\par\medskip
+\video{vuys5SNs2eQ}
+\face{Bande 1}
+\entree{2}{0:00:02}{Un morphisme généralisant envoie les points maximaux de $X$ (points génériques des composantes irréductibles) sur des points maximaux de $Y$.}
+\entree{131}{0:02:11}{Un morphisme $f\colon X\to Y$ est généralisant si et seulement si, pour tout fermé irréductible $Y'$ de $Y$, toute composante irréductible de $f^{-1}(Y')$ domine $Y'$.}
+\entree{131}{0:02:11}{Pour une extension de corps $k'/k$ et un $k$-schéma $X$, toute composante irréductible de $X_{k'}$ domine une composante irréductible de $X$.}
+\entree{327}{0:05:27}{Sur un anneau principal, un module est plat si et seulement s'il est sans torsion.}
+\entree{390}{0:06:30}{Sur un anneau intègre $A$, tout $A$-module plat est sans torsion.}
+\entree{455}{0:07:35}{Sur un anneau de Dedekind, tout module sans torsion est plat (on se ramène par localisation à un anneau de valuation discrète, donc principal).}
+\entree{520}{0:08:40}{Une limite inductive filtrante de modules plats est plate.}
+\entree{584}{0:09:44}{Soit $Y$ intègre, régulier de dimension $1$, et $X$ réduit sur $Y$ : $X$ est plat sur $Y$ si et seulement si toute composante irréductible de $X$ domine $Y$.}
+\entree{587}{0:09:47}{Sans supposer $X$ réduit (localement noethérien), $X$ est plat sur $Y$ si et seulement si tous les points associés de $X$ s'envoient sur le point générique de $Y$.}
+\entree{712}{0:11:52}{Si $Y$ est régulier, $X$ de Cohen--Macaulay et $f$ localement de type fini, $f$ est plat si et seulement si $\dim_x X=\dim_{f(x)}Y+\dim_x X_{f(x)}$ pour tout $x$.}
+\entree{900}{0:15:00}{Si $Y$ est noethérien normal, $f$ de présentation finie, universellement ouvert à fibres géométriquement réduites, alors $f$ est plat.}
+\entree{1166}{0:19:26}{Si $f\colon X\to Y$ est fidèlement plat, l'application $Y'\mapsto f^{-1}(Y')$ des sous-schémas de $Y$ dans ceux de $X$ est injective.}
+\entree{1230}{0:20:30}{Si $f$ est fidèlement plat, l'image inverse des modules quasi-cohérents est exacte et fidèle ; deux sous-modules d'un module qui deviennent égaux après image inverse sont égaux.}
+\entree{1299}{0:21:39}{Si $S'\to S$ est fidèlement plat, le foncteur de changement de base des $S$-schémas vers les $S'$-schémas est fidèle : $\mathrm{Hom}_S(X,Y)\to\mathrm{Hom}_{S'}(X',Y')$ est injectif.}
+\entree{1625}{0:27:05}{Pour un carré commutatif d'espaces annelés, il y a un morphisme canonique $g^*f_*F\to f'_*F'$, défini par adjonction.}
+\entree{1827}{0:30:27}{Si $f$ est cohérent (quasi-compact, quasi-séparé), $g$ plat et $F$ quasi-cohérent, $g^*f_*F\to f'_*g'^*F$ est un isomorphisme ; de même pour $R^if_*$.}
+\entree{2099}{0:34:59}{Si $A\to B$ est un homomorphisme local d'anneaux locaux et $B$ plat sur $A$, alors $B$ est fidèlement plat et $\mathrm{Spec}\,B\to\mathrm{Spec}\,A$ est surjectif.}
+\entree{2164}{0:36:04}{Un morphisme plat est généralisant, donc universellement généralisant.}
+\entree{2356}{0:39:16}{Le morphisme canonique $g^*f_*F\to f'_*F'$ est un isomorphisme sans hypothèse de platitude si $f$ est affine.}
+\entree{2620}{0:43:40}{Définition : $f$ est radiciel s'il est injectif universellement, c'est-à-dire reste injectif après tout changement de base.}
+\entree{2620}{0:43:40}{Si $g\colon S'\to S$ est surjectif, $f$ est surjectif (resp. radiciel) si et seulement si $f'$ l'est.}
+\entree{2686}{0:44:46}{Un morphisme est radiciel si et seulement si son morphisme diagonal est surjectif.}
+\entree{2750}{0:45:50}{Si $g$ est surjectif et quasi-compact, $f$ est quasi-compact (resp. quasi-séparé, cohérent) si et seulement si $f'$ l'est.}
+\face{Bande 2, face A}
+\entree{2913}{0:48:33}{Un morphisme $f$ est quasi-séparé si et seulement si son morphisme diagonal $\Delta_f$ est quasi-compact ; il est cohérent s'il est quasi-compact et quasi-séparé.}
+\entree{3040}{0:50:40}{Si $g\colon S'\to S$ est fidèlement plat et quasi-compact, $f$ est localement de type fini (resp. localement de présentation finie) si et seulement si $f'$ l'est.}
+\entree{3104}{0:51:44}{Un morphisme est de type fini s'il est localement de type fini et quasi-compact, de présentation finie s'il est localement de présentation finie et cohérent ; ces propriétés descendent aussi par $g$ fidèlement plat quasi-compact.}
+\entree{3297}{0:54:57}{Si $A\to A'$ est fidèlement plat, une $A$-algèbre $B$ est de type fini (resp. de présentation finie) si et seulement si $B\otimes_A A'$ l'est sur $A'$.}
+\entree{3491}{0:58:11}{Un $\mathcal{O}_X$-module quasi-cohérent $F$ est de type fini (resp. de présentation finie) si et seulement si $F'$ l'est, pour $g$ fidèlement plat quasi-compact.}
+\entree{3556}{0:59:16}{Dans les mêmes hypothèses, $F$ est localement libre de type fini, de rang $n$ donné, ou inversible, si et seulement si $F'$ l'est.}
+\entree{3624}{1:00:24}{Pour $Y'\to Y$ fidèlement plat (sans quasi-compacité), un module quasi-cohérent $F$ sur $X$ est plat sur $Y$ si et seulement si $F'$ est plat sur $Y'$ ; en particulier $f$ est plat si et seulement si $f'$ l'est.}
+\entree{3687}{1:01:27}{Si $A\to A'$ est fidèlement plat, un $A$-module $M$ est plat si et seulement si $M\otimes_A A'$ est plat sur $A'$ ; de même pour la platitude fidèle.}
+\entree{3752}{1:02:32}{Un module quasi-cohérent est localement libre de type fini si et seulement s'il est de présentation finie et plat ; cette propriété descend, avec le rang.}
+\entree{3885}{1:04:45}{Pour $g\colon S'\to S$ et $Z\subset S$, on a toujours $\overline{g^{-1}(Z)}\subset g^{-1}(\overline{Z})$ ; l'égalité pour tout $Z$ caractérise les morphismes ouverts.}
+\entree{3950}{1:05:50}{L'inclusion du point générique d'un schéma intègre $S$ dans $S$ est plate, mais en général non ouverte.}
+\entree{4013}{1:06:53}{Si $g\colon S'\to S$ est plat (ou seulement généralisant) et $f\colon Z\to S$ quasi-compact, alors $g^{-1}(\overline{f(Z)})=\overline{g^{-1}(f(Z))}$.}
+\entree{4142}{1:09:02}{Si $g$ est généralisant et $f\colon Z\to S$ quasi-compact dominant, alors $f'\colon Z'\to S'$ est dominant ; la réciproque vaut si $g$ est surjectif.}
+\entree{4464}{1:14:24}{Lemme : un morphisme quasi-compact $f\colon Z\to S$ est dominant si et seulement si sa fibre en chaque point maximal de $S$ est non vide.}
+\entree{4795}{1:19:55}{Si $g\colon S'\to S$ est plat (ou généralisant) et quasi-compact, la topologie de $g(S')$ induite par $S$ est la topologie quotient de $S'$ ; si $g$ est de plus surjectif, $g$ est submersif.}
+\entree{5252}{1:27:32}{Un morphisme fidèlement plat et quasi-compact est universellement submersif.}
+\entree{5323}{1:28:43}{Pour $g$ fidèlement plat quasi-compact : si $f'$ est ouvert (resp. fermé, généralisant, un homéomorphisme), $f$ l'est ; de même pour les propriétés universelles correspondantes.}
+\entree{5590}{1:33:10}{Si $g$ est surjectif, $f$ est surjectif si et seulement si $f'$ l'est, et $f'$ injectif entraîne $f$ injectif.}
+\entree{5811}{1:36:51}{Pour $g$ fidèlement plat quasi-compact, $f$ est séparé (resp. propre) si et seulement si $f'$ l'est.}
+\face{Bande 2, face B}
+\entree{5892}{1:38:12}{Pour $g$ fidèlement plat quasi-compact, $f$ est un isomorphisme si et seulement si $f'$ en est un (la platitude est nécessaire : une propriété topologique universelle ne suffit pas).}
+\entree{6022}{1:40:22}{Le foncteur de changement de base le long d'un morphisme fidèlement plat quasi-compact est fidèle et conservatif : une flèche au-dessus de $S$ qui devient un isomorphisme en était un.}
+\entree{6088}{1:41:28}{Un morphisme $f$ est un monomorphisme si et seulement si $\Delta_f$ est un isomorphisme ; par suite $f$ est un monomorphisme si et seulement si $f'$ en est un (pour $g$ fidèlement plat quasi-compact).}
+\entree{6217}{1:43:37}{Si $g$ est fidèlement plat, $M\mapsto M'$ est exact, fidèle et conservatif sur les modules quasi-cohérents ; $\mathrm{Hom}(M,N)\to\mathrm{Hom}(M',N')$ est injectif.}
+\entree{6408}{1:46:48}{Avec $S''=S'\times_S S'$ et les projections $p_1,p_2$, la suite $\mathrm{Hom}(M,N)\to\mathrm{Hom}(M',N')\rightrightarrows\mathrm{Hom}(M'',N'')$ est de complexe ; si $g$ est fidèlement plat, la première flèche est injective.}
+\entree{6470}{1:47:50}{Définition : $g$ est un morphisme de descente pour les modules quasi-cohérents (descente de rang $1$) si cette suite est exacte pour tous $M$, $N$ quasi-cohérents.}
+\entree{6533}{1:48:53}{Théorème : un morphisme $g$ fidèlement plat et quasi-compact est un morphisme de descente, et même de descente effective, pour les modules quasi-cohérents.}
+\entree{6663}{1:51:03}{Une donnée de recollement sur un module $M'$ de $S'$ est un isomorphisme $c\colon p_1^*M'\simeq p_2^*M'$ ; $M\mapsto(M',c)$ définit un foncteur des modules de $S$ vers les modules de $S'$ munis de recollement.}
+\entree{6732}{1:52:12}{Ce foncteur est pleinement fidèle si et seulement si $g$ est un morphisme de descente.}
+\entree{6865}{1:54:25}{Si $(M',c)$ provient d'un module sur $S$, alors, sur $S'''=S'\times_S S'\times_S S'$, on a $q_{13}^*c=q_{23}^*c\circ q_{12}^*c$ (condition de cocycle).}
+\entree{7642}{2:07:22}{Le morphisme $g$ est de descente de rang $0$ si le foncteur vers les modules à recollement est fidèle, de rang $1$ s'il est pleinement fidèle ; un morphisme fidèlement plat est de descente de rang $0$.}
+\entree{7841}{2:10:41}{Définition : une donnée de recollement vérifiant la condition de cocycle est une donnée de descente.}
+\entree{7906}{2:11:46}{Définition : $g$ est de descente de rang $2$ (descente effective) si le foncteur $\mathrm{Mod}(S)\to\mathrm{Mod}(S')$ muni de données de descente est une équivalence de catégories.}
+\entree{7970}{2:12:50}{Si $g$ est fidèlement plat et quasi-compact, $g^*$ induit une équivalence entre modules quasi-cohérents sur $S$ et modules quasi-cohérents sur $S'$ munis d'une donnée de descente.}
+\entree{8629}{2:23:49}{Si $g$ est de descente de rang $1$ au-dessus de tout ouvert, l'effectivité d'une donnée de descente est locale sur $S$ : les modules $M_\alpha$ sur un recouvrement ouvert se recollent par unicité.}
+\entree{8760}{2:26:00}{Pour un recouvrement ouvert $(S_i)$ de $S$, le morphisme $\coprod_i S_i\to S$ est de descente effective pour les modules quasi-cohérents.}
+\face{Bande 3}
+\entree{8840}{2:27:20}{Si un morphisme de descente (resp. de descente effective) $\bar S\to S$ se factorise par $S'\to S$, alors $S'\to S$ est de descente (resp. de descente effective) pour les modules quasi-cohérents.}
+\entree{8903}{2:28:23}{Un morphisme $S'\to S$ admettant une section est de descente effective pour les modules quasi-cohérents.}
+\entree{9876}{2:44:36}{Si $A\to A'$ est fidèlement plat, le foncteur $M\mapsto M\otimes_A A'$ est une équivalence des $A$-modules vers les $A'$-modules munis d'une donnée de descente.}
+\entree{10004}{2:46:44}{Le module descendu d'un $A'$-module $M'$ à donnée de descente est le noyau de $M'\rightrightarrows M''$, avec $M''=M'\otimes_A A'$ ; on a alors $M\otimes_A A'\simeq M'$.}
+\entree{10195}{2:49:55}{Si $g\colon S'\to S$ est fidèlement plat, $G\mapsto G'$ est injective des sous-modules quasi-cohérents de $F$ vers ceux de $F'$.}
+\entree{10195}{2:49:55}{Si $g$ est de plus quasi-compact, la suite des sous-modules quasi-cohérents de $F$, $F'$, $F''$ est exacte : un sous-module de $F'$ descend si et seulement si ses deux images inverses dans $F''$ coïncident.}
+\entree{10517}{2:55:17}{Si $g$ est surjectif, un sous-ensemble de $S'$ provient d'un sous-ensemble de $S$ si et seulement si ses deux images inverses dans $S''$ coïncident.}
+\entree{10644}{2:57:24}{Si $g$ est fidèlement plat et quasi-compact, les ouverts (resp. les fermés) de $S$ s'identifient aux ouverts (resp. fermés) de $S'$ ayant même image inverse dans $S''$ par $p_1$ et $p_2$.}
+\entree{10707}{2:58:27}{Même exactitude pour les sous-schémas ouverts, pour les sous-schémas fermés (idéaux quasi-cohérents), et pour les sous-schémas rétrocompacts (immersions quasi-compactes).}
+\entree{10835}{3:00:35}{Si $g$ est fidèlement plat quasi-compact, $T\mapsto g^{-1}(T)$ est injective sur les sous-schémas de $S$.}
+\entree{10967}{3:02:47}{Même pour les sous-objets (schémas munis d'un monomorphisme vers $S$) : $T'_1\subset T'_2$ entraîne $T_1\subset T_2$, par descente des isomorphismes.}
+\entree{10967}{3:02:47}{Le morphisme $(\mathbb{A}^1\setminus\{0\})\sqcup\{0\}\to\mathbb{A}^1$ est un monomorphisme qui n'est pas une immersion.}
+\entree{11096}{3:04:56}{La normalisée d'une courbe à point double ordinaire, privée d'un des deux points au-dessus du point double, est un monomorphisme bijectif qui n'est pas une immersion.}
+\entree{11349}{3:09:09}{Si $g$ est fidèlement plat quasi-compact, les parties localement fermées rétrocompactes de $S$ s'identifient à celles de $S'$ ayant même image inverse dans $S''$.}
+\entree{11483}{3:11:23}{Théorème : si $g$ est fidèlement plat quasi-compact, la suite $\mathrm{Hom}_S(X,Y)\to\mathrm{Hom}_{S'}(X',Y')\rightrightarrows{}$ $\mathrm{Hom}_{S''}(X'',Y'')$ est exacte pour tous $S$-schémas $X$, $Y$ (descente de rang $1$ pour les schémas).}
+\section{10 juillet 1973}\label{s-1973-07-10}
+\noindent\textit{Vidéo 4/4 (\href{https://www.youtube.com/watch?v=vuys5SNs2eQ}{\texttt{vuys5SNs2eQ}}) : bande 1 (3:15:45--4:03:41) ; bande 2 (4:03:41--4:52:26) ; bande 1 (4:52:26--5:41:49).}\par\medskip
+\video{vuys5SNs2eQ}
+\face{Bande 1 (3:15:45--4:03:41)}
+\entree{11824}{3:17:04}{Si $g$ est fidèlement plat quasi-compact et $Y$ quasi-séparé sur $S$, un morphisme $X'\to Y'$ compatible aux données de descente descend en un $S$-morphisme $X\to Y$ (par son graphe, sous-schéma rétrocompact de $X'\times_{S'}Y'$).}
+\entree{12082}{3:21:22}{Si $S'\to S$ est fidèlement plat quasi-compact, le foncteur des $S$-schémas vers les $S'$-schémas munis de données de descente est pleinement fidèle.}
+\entree{12211}{3:23:31}{Si $S'\to S$ est fidèlement plat quasi-compact, la catégorie des $S$-schémas affines est équivalente à celle des $S'$-schémas affines munis de données de descente.}
+\entree{12211}{3:23:31}{Si $g$ est fidèlement plat quasi-compact, $f$ est une immersion ouverte (resp. fermée, resp. quasi-compacte) si et seulement si $f'$ l'est.}
+\entree{12865}{3:34:25}{Si $f\colon Z\to S$ est quasi-compact, $s\in\overline{f(Z)}$ si et seulement si $s$ admet une généralisation dans $f(Z)$.}
+\entree{12993}{3:36:33}{Si $f\colon Z\to S$ est quasi-compact, $s$ est intérieur au complémentaire de $f(Z)$ si et seulement si toutes les généralisations de $s$ sont hors de $f(Z)$.}
+\entree{13186}{3:39:46}{Si $f\colon Z\to S$ est de présentation finie, $f(Z)$ est localement constructible dans $S$ (théorème de Chevalley) ; la preuve se ramène au cas noethérien.}
+\entree{13380}{3:43:00}{Un morphisme généralisant et localement de présentation finie est ouvert.}
+\entree{13514}{3:45:14}{La propriété d'être projectif (resp. quasi-projectif) ne descend pas : elle n'est pas locale sur la base pour la topologie de Zariski.}
+\entree{14094}{3:54:54}{Pour $g$ fidèlement plat quasi-compact, les quotients quasi-cohérents de $M$ descendent comme les sous-modules, ce qui donne la descente des sous-schémas fermés.}
+\entree{14220}{3:57:00}{Pour des schémas, le foncteur vers les schémas munis de données de descente est pleinement fidèle mais pas une équivalence en général : une donnée de descente n'est pas toujours effective.}
+\entree{14416}{4:00:16}{Pour $g$ de descente de rang $1$ (resp. $2$) pour les modules quasi-cohérents, il l'est pour les algèbres quasi-cohérentes ; produit, associativité, commutativité et unité descendent.}
+\face{Bande 2}
+\entree{14623}{4:03:43}{Si $g$ est fidèlement plat quasi-compact, $f$ est affine (resp. quasi-affine, entier, fini, quasi-fini) si et seulement si $f'$ l'est.}
+\entree{14816}{4:06:56}{Un morphisme cohérent $f\colon X\to Y$ est quasi-affine si $X\to\mathrm{Spec}\,f_*\mathcal{O}_X$ est une immersion ouverte.}
+\entree{14946}{4:09:06}{Si $A\to A'$ est fidèlement plat et $B$ une $A$-algèbre, $B$ est entière (resp. finie) sur $A$ si et seulement si $B\otimes_A A'$ l'est sur $A'$.}
+\entree{15009}{4:10:09}{Une algèbre $B$ est entière sur $A$ si et seulement si ses sous-$A$-algèbres de type fini sont finies sur $A$.}
+\entree{15077}{4:11:17}{Un morphisme est quasi-fini s'il est de type fini à fibres finies.}
+\entree{15139}{4:12:19}{Si $g$ est fidèlement plat quasi-compact, un faisceau inversible $L$ sur $X$ est ample (resp. très ample) relativement à $f$ si et seulement si $L'$ l'est relativement à $f'$.}
+\entree{15264}{4:14:24}{Définition : $L$ est très ample relativement à $f$ si $f^*f_*L\to L$ est surjectif et le morphisme induit $X\to\mathbf{P}(f_*L)$ est une immersion.}
+\entree{15735}{4:22:15}{Une donnée de recollement sur $X'$ est une donnée de descente si et seulement si $X''\rightrightarrows X'$ (au-dessus de $p_1$, $p_2$, à carrés cartésiens) est une relation d'équivalence.}
+\entree{16055}{4:27:35}{Une donnée de descente sur $X'$ est effective si et seulement si la relation d'équivalence $X''\rightrightarrows X'$ est effective universelle : le quotient $X$ existe, $X''=X'\times_X X'$, et ceci reste vrai après tout changement de base sur $X$.}
+\entree{16510}{4:35:10}{Un ouvert de $X'$ est stable par la donnée de descente si et seulement si sa partie sous-jacente a même image inverse dans $X''$ par $q_1$ et $q_2$ (condition ensembliste).}
+\entree{16640}{4:37:20}{Si $X'$ est réunion d'ouverts stables $X'_i$, la donnée de descente sur $X'$ est effective si et seulement si les données induites sur les $X'_i$ le sont.}
+\face{Bande 1 (4:52:26--5:41:49)}
+\entree{17552}{4:52:32}{Si $g$ est fidèlement plat quasi-compact et si $X'$ est recouvert par des ouverts $X'_i$ stables par la donnée de descente et affines sur $S'$, la donnée de descente sur $X'$ est effective.}
+\entree{17754}{4:55:54}{Un morphisme fidèlement plat, quasi-compact et radiciel est un homéomorphisme universel.}
+\entree{18155}{5:02:35}{Si $g$ est fidèlement plat quasi-compact radiciel, toute partie de $X'$ est stable par une donnée de descente, donc celle-ci est effective ; par exemple pour une extension de corps purement inséparable.}
+\entree{18219}{5:03:39}{Pour une extension séparable de degré $2$, il existe un schéma propre et lisse sur $k'$, non projectif, muni d'une donnée de descente non effective.}
+\entree{18281}{5:04:41}{Si $g$ est fidèlement plat quasi-compact et si $L'$ est ample relativement à $S'$ avec donnée de descente compatible sur $(X',L')$, la donnée de descente sur $X'$ est effective.}
+\entree{18554}{5:09:14}{Si $f'$ est cohérent et si $(X',L')$ est muni d'une donnée de descente, alors $E'=f'_*L'$ hérite d'une donnée de descente, par la commutation de l'image directe au changement de base plat.}
+\entree{18808}{5:13:28}{Théorème : un morphisme fidèlement plat quasi-compact est de descente de rang $2$ pour les couples $(X',L')$, $L'$ très ample relativement à la base ; le descendu $L$ est très ample.}
+\entree{18872}{5:14:32}{Si $S'\to S$ est fini localement libre de rang nulle part nul, tout $S'$-schéma quasi-projectif muni d'une donnée de descente relative à $S$ est effectif, et le schéma descendu est quasi-projectif sur $S$.}
+\entree{19389}{5:23:09}{Pour une algèbre localement libre $B$ sur $\mathcal{O}_T$, la norme $N\colon B\to\mathcal{O}_T$ (déterminant de la multiplication) est multiplicative, d'où une norme des faisceaux inversibles de $T'=\mathrm{Spec}\,B$ vers $T$.}
+\entree{19516}{5:25:16}{L'amplitude d'un faisceau inversible est conservée par image inverse et par passage à la norme.}
+\entree{19653}{5:27:33}{Si $X$ est un schéma sur un corps $k$ et si $X\otimes_k k'$ est quasi-projectif (resp. projectif) pour une extension $k'$, alors $X$ est quasi-projectif (resp. projectif).}
+\entree{19843}{5:30:43}{Principe de l'extension finie : une propriété stable par changement de base et passant à la limite, vraie après une extension de $k$, est vraie après une extension finie de $k$.}
+\entree{19909}{5:31:49}{Deux $k$-schémas de présentation finie isomorphes sur une extension de $k$ le sont sur une extension finie de $k$.}
+\entree{20176}{5:36:16}{Si $G$ opère sur $S'$ avec $S'\times G\simeq S'\times_S S'$, une donnée de descente sur un $S'$-objet $X'$ équivaut à une action de $G$ sur $X'$ compatible avec la projection vers $S'$.}
+\entree{20242}{5:37:22}{Pour $G$ le groupe constant défini par un groupe $\Gamma$, une donnée de descente équivaut à une action de $\Gamma$ sur $X'$ compatible avec celle sur $S'$.}
+\entree{20367}{5:39:27}{Si $S'\to S$ est de descente de rang $1$, $X\mapsto X'$ muni de l'action de $\Gamma$ est un foncteur pleinement fidèle.}
+\section{11 juillet 1973}\label{s-1973-07-11}
+\noindent\textit{Vidéo 2/2 du cours sur les groupes (\href{https://www.youtube.com/watch?v=3ULFIl_2Wis}{\texttt{3ULFIl\_2Wis}}) : bande 2, face A (5:30:34--6:18:36) ; bande 2, face B (6:18:36--7:01:38).}\par\medskip
+\video{3ULFIl_2Wis}
+\face{Bande 2, face A}
+\noindent\textit{Enregistrée sur la vidéo 2/2 du cours sur les groupes (\href{https://www.youtube.com/watch?v=3ULFIl_2Wis}{\texttt{3ULFIl\_2Wis}}) ; elle relève par son contenu du cours de géométrie algébrique.}\par\smallskip
+\entree{19839}{5:30:39}{Si $S'\to S$ est un torseur sous un schéma en groupes $G$, une donnée de descente sur un $S'$-schéma $X'$ équivaut à une action de $G$ sur $X'$ compatible avec celle sur $S'$.}
+\entree{19904}{5:31:44}{Pour $k'/k$ galoisienne finie de groupe $\Gamma$, $\mathrm{Spec}\,k'\to\mathrm{Spec}\,k$ est un torseur sous le groupe constant $\Gamma$.}
+\entree{19972}{5:32:52}{Pour $k'/k$ galoisienne finie de groupe $\Gamma$ et $X$, $Y$ des $k$-schémas, $\mathrm{Hom}_k(X,Y)$ est l'ensemble des $k'$-morphismes $X'\to Y'$ invariants par $\Gamma$.}
+\entree{20037}{5:33:57}{Une donnée de descente sur un $k'$-schéma $X'$ relativement à $k'/k$ équivaut à une action de $\Gamma$ sur $X'$ compatible avec celle sur $k'$ ; elle est effective si $X'$ est quasi-projectif.}
+\entree{20102}{5:35:02}{Pour $k'/k$ galoisienne infinie, $\Gamma_k=\varprojlim\Gamma_{i,k}$ (groupes constants finis des sous-extensions galoisiennes finies) est un schéma en groupes affine, et $\mathrm{Spec}\,k'$ est un torseur sous $\Gamma_k$.}
+\entree{20167}{5:36:07}{On a $\Gamma_k(k)=\Gamma$, et une donnée de descente sur $X'$ relativement à $k'/k$ équivaut à une action de $\Gamma_k$ sur $X'$ compatible avec celle sur $k'$.}
+\entree{20447}{5:40:47}{Une action de $\Gamma_k$ sur $X'$ est déterminée par l'action induite du groupe abstrait $\Gamma$, le morphisme du groupe constant $\Gamma$ vers $\Gamma_k$ étant schématiquement dominant.}
+\entree{20510}{5:41:50}{Pour $k'/k$ galoisienne quelconque, $\mathrm{Hom}_k(X,Y)$ est l'ensemble des $k'$-morphismes $X'\to Y'$ commutant à l'action de $\Gamma$.}
+\entree{20702}{5:45:02}{Descente de degré $0$ pour $(S'_i\to S)$ : un morphisme $X\to Y$ sur $S$ est déterminé par ses images réciproques sur les $S'_i$ ; degré $1$ : des morphismes sur les $S'_i$ compatibles sur les $S'_i\times_SS'_j$ proviennent d'un morphisme sur $S$.}
+\entree{20768}{5:46:08}{Descente de degré $2$ : des objets $X'_i$ sur les $S'_i$, munis d'isomorphismes sur les $S'_i\times_SS'_j$ vérifiant la condition de cocycle sur les triples, proviennent d'un objet sur $S$ (descente effective).}
+\entree{20831}{5:47:11}{Pour une famille $(S'_i\to S)$ et $S'=\coprod S'_i$, on a $S'\times_SS'=\coprod S'_i\times_SS'_j$ et les $S'$-schémas sont les familles de $S'_i$-schémas ; la descente pour la famille se ramène donc à celle de $S'\to S$.}
+\entree{21089}{5:51:29}{Une donnée de recollement sur $X'/S'$ équivaut à la donnée, pour tout $S$-schéma $T$ et tout couple $u,v\colon T\to S'$, d'un isomorphisme $u^*X'\simeq v^*X'$ fonctoriel en $T$ ; la condition de cocycle signifie que ces isomorphismes sont transitifs.}
+\entree{21346}{5:55:46}{Les objets de $S'$ munis d'une donnée de descente forment la catégorie des sections cartésiennes de la catégorie fibrée des schémas relatifs au-dessus de la sous-catégorie pleine des $S$-schémas qui se factorisent par $S'$.}
+\entree{21411}{5:56:51}{Pour une famille $(S'_i\to S)$, cette catégorie ne dépend que du crible engendré par la famille.}
+\entree{21606}{6:00:06}{Pour un changement de base fidèlement plat quasi-compact $S'\to S$, être un isomorphisme, une immersion ou propre sont des propriétés de morphismes qui descendent.}
+\entree{21668}{6:01:08}{Des morphismes $X_i\to Y_i$ sur un recouvrement ouvert $(S_i)$ de $S$, compatibles sur les intersections, se recollent en un unique morphisme $X\to Y$ ; il en va de même pour un morphisme fidèlement plat quasi-compact $S'\to S$.}
+\entree{21730}{6:02:10}{La descente fidèlement plate quasi-compacte est effective pour les modules quasi-cohérents et les schémas relatifs affines, mais pas pour les schémas relatifs quelconques.}
+\entree{21857}{6:04:17}{Le morphisme $\mathbb{G}_m\to\mathbb{G}_m$, $\lambda\mapsto\lambda^n$ ($n\geq2$) est fidèlement plat quasi-compact, de relation d'équivalence définie par $\mu_n$, mais n'a pas de section localement pour la topologie de Zariski.}
+\entree{22049}{6:07:29}{Un morphisme fidèlement plat quasi-compact $T\to S$ a une section après le changement de base $T\to S$ lui-même, donc localement pour la topologie fpqc.}
+\entree{22241}{6:10:41}{Définition : une famille $(S'_i\to S)$ est couvrante pour la topologie fpqc si $S$ est réunion d'ouverts $U$ pour lesquels il existe un nombre fini de morphismes plats quasi-compacts $U'_\alpha\to U$, d'images couvrant $U$, se factorisant chacun par un $S'_i$.}
+\entree{22369}{6:12:49}{Si les morphismes fidèlement plats quasi-compacts et les recouvrements ouverts sont de descente de degré $0$, $1$ ou $2$ pour une catégorie d'objets, il en va de même des familles couvrantes fpqc.}
+\entree{22433}{6:13:53}{Les familles couvrantes fpqc sont stables par composition et par changement de base : la catégorie des schémas est un site pour cette topologie.}
+\entree{22497}{6:14:57}{Définition : un préfaisceau $F$ sur les schémas est un faisceau fpqc si, pour toute famille couvrante $(S_i\to S)$, $F(S)\to\prod F(S_i)\rightrightarrows\prod F(S_i\times_SS_j)$ est exact.}
+\entree{22562}{6:16:02}{Un préfaisceau est un faisceau fpqc si et seulement si c'est un faisceau de Zariski et si la condition d'exactitude vaut pour tout $S'\to S$ fidèlement plat quasi-compact.}
+\entree{22691}{6:18:11}{Dans les faisceaux sur un site, les épimorphismes sont effectifs et stables par changement de base, les sommes sont distributives et le changement de base commute aux limites inductives.}
+\face{Bande 2, face B}
+\noindent\textit{Enregistrée sur la vidéo 2/2 du cours sur les groupes (\href{https://www.youtube.com/watch?v=3ULFIl_2Wis}{\texttt{3ULFIl\_2Wis}}) ; elle relève par son contenu du cours de géométrie algébrique.}\par\smallskip
+\entree{22719}{6:18:39}{Si $H$ est un sous-faisceau en groupes de $G$, le faisceau quotient $G/H$ par la relation des translations à droite existe et $G$ y opère par translations à gauche ; si $H$ est invariant, $G/H$ est un faisceau en groupes.}
+\entree{22847}{6:20:47}{Pour tout schéma $X$, le foncteur $S\mapsto\mathrm{Hom}(S,X)$ est un faisceau pour la topologie fpqc.}
+\entree{22976}{6:22:56}{Un morphisme fidèlement plat quasi-compact $S'\to S$ est un épimorphisme effectif universel : pour tout schéma $X$, $\mathrm{Hom}(S,X)\to\mathrm{Hom}(S',X)\rightrightarrows\mathrm{Hom}(S'',X)$ est exact, $S''=S'\times_SS'$.}
+\entree{23180}{6:26:20}{La topologie la plus fine pour laquelle les foncteurs représentables sont des faisceaux a pour familles couvrantes les familles universellement épimorphiques strictes.}
+\entree{23307}{6:28:27}{Topologie fppf : on remplace, dans la définition de la topologie fpqc, quasi-compact par localement de présentation finie ; un système fondamental de recouvrements est formé des familles de morphismes plats localement de présentation finie d'images couvrant $S$.}
+\entree{23437}{6:30:37}{Topologie discrète : une famille $(S_i\to S)$ est couvrante si l'un des $S_i\to S$ admet une section.}
+\entree{23437}{6:30:37}{Topologie de Zariski : une famille est couvrante si tout point de $S$ a un voisinage ouvert $U$ sur lequel l'un des $S_i\times_SU\to U$ admet une section.}
+\entree{23499}{6:31:39}{Topologie étale : un système fondamental de recouvrements est formé des familles de morphismes étales dont les images couvrent $S$.}
+\entree{23629}{6:33:49}{Un espace algébrique (Artin) est obtenu en recollant des schémas pour la topologie étale plutôt que pour celle de Zariski, c'est-à-dire en quotientant par une relation d'équivalence dont les projections sont étales.}
+\entree{23692}{6:34:52}{Un foncteur représentable $F$ est un faisceau fpqc et vérifie $F(A)=\varprojlim F(A/\mathfrak{m}^n)$ pour tout anneau local noethérien complet $A$ ; ces conditions nécessaires ne sont pas suffisantes.}
+\entree{23822}{6:37:02}{Un espace analytique complexe compact réduit irréductible, dont le corps des fonctions méromorphes a un degré de transcendance égal à sa dimension, est un espace algébrique (Artin).}
+\entree{24213}{6:43:33}{Si $R\rightrightarrows X$ est une relation d'équivalence dont les projections sont fidèlement plates quasi-compactes, un schéma $Y$ est quotient de $X$ par $R$ au sens des faisceaux fpqc si et seulement si $X\to Y$ est fidèlement plat quasi-compact et $R=X\times_YX$.}
+\entree{24410}{6:46:50}{Pour toute relation d'équivalence $R$ sur $X$, le faisceau quotient $X/R$ existe, qu'il soit ou non représentable par un schéma.}
+\entree{24539}{6:48:59}{Si les projections de la relation d'équivalence $R$ sont finies localement libres, $X/R$ est représentable par un schéma $Y$, avec $X\to Y$ fini localement libre surjectif et $R=X\times_YX$, si et seulement si $X$ est réunion d'ouverts affines stables par $R$.}
+\entree{24670}{6:51:10}{Cette condition équivaut à ce que chaque classe d'équivalence de $R$, ensemble fini, soit contenue dans un ouvert affine.}
+\entree{24799}{6:53:19}{Si $X$ est quasi-projectif sur une base affine, ou porte un faisceau inversible ample, toute partie finie de $X$ est dans un ouvert affine ; la condition est alors satisfaite.}
+\entree{24862}{6:54:22}{Pour un groupe fini $G$ opérant librement sur $X$, le quotient $X/G$ existe comme schéma si et seulement si toute orbite est contenue dans un ouvert affine.}
+\entree{24930}{6:55:30}{Sur un corps, pour une relation d'équivalence $R$ plate sur un schéma $X$ de type fini, il existe un ouvert dense de $X$, stable par $R$, dont le quotient par la relation induite existe comme schéma.}
+\entree{25060}{6:57:40}{Si $G$ est un groupe algébrique sur un corps et $H\subset G$ un sous-groupe, la relation définie par $H$ est plate et le quotient $G/H$ est un schéma, espace homogène sous $G$ par translations.}
+
+\end{document}

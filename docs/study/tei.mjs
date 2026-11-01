@@ -837,6 +837,10 @@ copyFileSync(resolve(root, 'docs/quillen-lean/article.pdf'), resolve(served, 'qu
 // The index of results of the 1973 Buffalo topos course, in our words, not a transcription
 // (docs/buffalo-topos/), linked from the Buffalo tab.
 copyFileSync(resolve(root, 'docs/buffalo-topos/index.pdf'), resolve(served, 'buffalo-topos.pdf'));
+// The indexes of results of the 1973 Buffalo courses on algebraic geometry and on algebraic groups
+// (docs/buffalo-ag/, docs/buffalo-groupes/), built the same way.
+copyFileSync(resolve(root, 'docs/buffalo-ag/index.pdf'), resolve(served, 'buffalo-ag.pdf'));
+copyFileSync(resolve(root, 'docs/buffalo-groupes/index.pdf'), resolve(served, 'buffalo-groupes.pdf'));
 // And a book in French on the methods behind the edition, written for mathematicians and
 // naming no corpus (docs/livre-methodes/, #100).
 copyFileSync(resolve(root, 'docs/livre-methodes/livre.pdf'), resolve(served, 'maths-toolbox.pdf'));
