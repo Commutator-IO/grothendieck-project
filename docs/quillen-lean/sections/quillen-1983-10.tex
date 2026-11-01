@@ -1,0 +1,44 @@
+\section[Carnet 1983-10 : traces des puissances impaires de $P - Q$]{Carnet 1983-10 : la trace des puissances impaires d'une différence de deux idempotents\protect\verifie{Notebook1983_10}}\label{sec:quillen-1983-10}
+
+\emph{Le contexte.} Le \carnet{1983}{10} travaille sur les formules d'indice en cohomologie cyclique, la théorie que Connes développe alors et à laquelle Quillen consacrera plusieurs articles. L'indice d'un opérateur de Toeplitz, ou d'un opérateur gradué, s'y écrit comme la trace d'une puissance impaire assez grande d'un opérateur construit à partir d'un idempotent.
+
+\emph{La page.} À la page~31 (sa page~154), Quillen observe que ses deux formules d'indice, la forme de Toeplitz et la forme graduée, se ramènent au même type d'expression : la trace d'une puissance impaire d'une différence $e_1 - e_2$ de deux idempotents. Il propose d'étudier $\operatorname{tr}((e_1 - e_2)^{2n+1})$ et d'essayer de montrer que c'est un entier indépendant de $n$. La page pose la question ; elle n'y répond pas.
+
+\emph{L'intuition.} En dimension infinie, $e_1 - e_2$ n'est pas à trace en général, et seule une puissance assez grande l'est ; la question est alors profonde. En dimension finie, toutes les traces existent, et la réponse attendue est $\operatorname{tr} e_1 - \operatorname{tr} e_2$, différence des rangs quand on travaille sur un corps de caractéristique nulle. Le calcul classique pose $A = P - Q$ et $B = P + Q - 1$ : ces deux matrices anticommutent et $A^2 + B^2 = 1$. Pour $m$ impair, $\operatorname{tr}(A^m B^2)$ est égal à son opposé, par cyclicité de la trace et anticommutation, d'où $\operatorname{tr}(A^m) = \operatorname{tr}(A^{m+2})$ \emph{à condition de pouvoir diviser par~$2$}. On pourrait croire que la caractéristique~$2$ fait exception. Ce n'est pas le cas.
+
+\begin{encadre}
+\begin{theoreme}[énoncé de l'édition ; réponse, en dimension finie, à la question du carnet 1983-10, p.~31]\label{thm:quillen-1983-10}
+Soient $R$ un anneau commutatif et $P$, $Q$ deux matrices carrées idempotentes à coefficients dans $R$. Pour tout entier $k \ge 0$,
+\[
+\operatorname{tr}\bigl((P - Q)^{2k+1}\bigr) = \operatorname{tr} P - \operatorname{tr} Q.
+\]
+\end{theoreme}
+\end{encadre}
+
+\begin{proof}
+Posons $C = (P - Q)^2 = P + Q - PQ - QP$. En développant, avec $P^2 = P$ et $Q^2 = Q$,
+\[
+PC = P - PQP = CP, \qquad QC = Q - QPQ = CQ :
+\]
+$C$ commute à $P$ et à $Q$, donc ses puissances aussi. On en tire
+\[
+(P - Q)\,C = (P - Q) - (PQP - QPQ).
+\]
+Soit $D$ une matrice qui commute à $P$ et à $Q$. Par cyclicité de la trace, $\operatorname{tr}(DPQP) = \operatorname{tr}(PDPQ) = \operatorname{tr}(DP^2Q) = \operatorname{tr}(DPQ)$ ; de même $\operatorname{tr}(DQPQ) = \operatorname{tr}(DQP)$, et $\operatorname{tr}(DQP) = \operatorname{tr}(PDQ) = \operatorname{tr}(DPQ)$. Donc
+\[
+\operatorname{tr}(DPQP) = \operatorname{tr}(DQPQ).
+\]
+Enfin $(P - Q)^{2k+1} = C^k (P - Q)$, et
+\[
+(P - Q)^{2k+3} = C^k (P - Q)\, C = (P - Q)^{2k+1} - \bigl(C^k PQP - C^k QPQ\bigr).
+\]
+La trace du terme entre parenthèses est nulle, par ce qui précède avec $D = C^k$. Les traces des puissances impaires de $P - Q$ sont donc toutes égales à $\operatorname{tr}(P - Q) = \operatorname{tr} P - \operatorname{tr} Q$.
+\end{proof}
+
+\noindent La preuve n'utilise que l'idempotence, la commutation de $C$ avec $P$ et $Q$ et la cyclicité de la trace ; elle ne divise jamais par~$2$. Le calcul par anticommutation montre $2\operatorname{tr}(A^m B^2) = 0$ ; la preuve ci-dessus montre directement $\operatorname{tr}(A^m B^2) = 0$, puisque $A^m B^2 = C^{k}(PQP - QPQ)$ pour $m = 2k + 1$. Un calcul exhaustif sur toutes les paires d'idempotents de taille~$2$ et~$3$ sur $\mathbf F_2$, de taille~$2$ sur $\mathbf Z/4$, et sur $\mathbf F_3$, $\mathbf F_5$, $\mathbf Z/9$, pour $k = 1, 2, 3$, confirme l'identité, en caractéristique~$2$ comme ailleurs.
+
+\emph{Vérification en Lean.} Le fichier \href{\leanblobmain/Notebook1983_10.lean}{\texttt{Notebook1983\_10.\allowbreak{}lean}} démontre le théorème~\ref{thm:quillen-1983-10} sous le nom \texttt{trace\_sub\_pow\_odd}, pour des matrices indexées par un type fini quelconque sur un anneau commutatif quelconque, l'idempotence étant le prédicat \texttt{IsIdempotentElem} de mathlib. Les étapes sont \texttt{sq\_sub\_commute\_left} et \texttt{sq\_sub\_commute\_right} (commutation de $C$), \texttt{sub\_mul\_sq\_sub} (l'identité $(P - Q)C = (P - Q) - (PQP - QPQ)$) et \texttt{trace\_mul\_PQP}. Mathlib ne contient pas cette identité : une recherche par motif sur \texttt{Matrix.trace} et \texttt{IsIdempotentElem} ne renvoie rien. Les axiomes utilisés sont les trois axiomes usuels de mathlib.
+
+Ne sont pas démontrés ici : la version en dimension infinie, où $P - Q$ n'est pas à trace et où seule une puissance impaire assez grande l'est, qui est la vraie question de la page ; l'interprétation de la valeur commune comme indice d'un opérateur de Fredholm.
+
+\litterature{la version en dimension infinie est publiée : J.~Avron, R.~Seiler et B.~Simon \cite{ass1994} démontrent, pour deux projecteurs orthogonaux d'un espace de Hilbert dont la différence a une puissance impaire $(P - Q)^{2n+1}$ à trace, que l'indice de la paire est égal à $\operatorname{tr}((P - Q)^{2n+1})$, et donc ne dépend pas de $n$ ; leur preuve repose notamment sur l’anticommutation de $P - Q$ et de $P + Q - 1$. Le cas de la dimension finie en est l'exemple le plus simple. La forme sans hypothèse sur la caractéristique n'a pas été retrouvée imprimée ; elle est élémentaire, et l'édition ne la donne pas pour nouvelle. Ce n'est pas une piste.}

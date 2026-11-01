@@ -832,6 +832,8 @@ copyFileSync(resolve(root, 'docs/cicm/article.pdf'), resolve(served, 'grothendie
 copyFileSync(resolve(root, 'docs/problems/article.pdf'), resolve(served, 'grothendieck-problems.pdf'));
 // The sixth, the statements read in Bourbaki rédactions and proved in Lean (docs/bourbaki-lean/).
 copyFileSync(resolve(root, 'docs/bourbaki-lean/article.pdf'), resolve(served, 'bourbaki-lean.pdf'));
+// The seventh, the statements read in Quillen's notebooks and proved in Lean (docs/quillen-lean/).
+copyFileSync(resolve(root, 'docs/quillen-lean/article.pdf'), resolve(served, 'quillen-lean.pdf'));
 // And a book in French on the methods behind the edition, written for mathematicians and
 // naming no corpus (docs/livre-methodes/, #100).
 copyFileSync(resolve(root, 'docs/livre-methodes/livre.pdf'), resolve(served, 'maths-toolbox.pdf'));
