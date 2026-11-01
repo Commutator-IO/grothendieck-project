@@ -1,102 +1,94 @@
 \documentclass[11pt]{article}
 \usepackage{fontspec}
-% Charter et Menlo (macOS) ; ailleurs, XCharter et DejaVu Sans Mono, dont ils dérivent.
+% Charter and Menlo (macOS); elsewhere, XCharter and DejaVu Sans Mono, from which they derive.
 \IfFontExistsTF{Charter}{\setmainfont{Charter}}{\setmainfont{XCharter}}
 \IfFontExistsTF{Menlo}{\setmonofont{Menlo}[Scale=0.82]}{\setmonofont{DejaVu Sans Mono}[Scale=0.82]}
-\usepackage{polyglossia}\setmainlanguage{french}\setotherlanguage{english}
+\usepackage{polyglossia}\setmainlanguage{english}
 \usepackage{microtype}
 \usepackage[most]{tcolorbox}
 \usepackage{marginnote}
-% Les résultats principaux sont encadrés.
+% The main results are boxed.
 \newtcolorbox{encadre}{enhanced, breakable, colback=white, colframe=black!55, boxrule=0.6pt, arc=0pt, left=6pt, right=6pt, top=2pt, bottom=2pt, before skip=8pt, after skip=8pt}
-% L’ : la paire de crénage de Charter colle l’apostrophe au L ; on rajoute une fine espace.
-\XeTeXinterchartokenstate=1
-\newXeTeXintercharclass\LetterL
-\newXeTeXintercharclass\Apostrophe
-\XeTeXcharclass`L=\LetterL
-\XeTeXcharclass`'=\Apostrophe
-\XeTeXcharclass"2019=\Apostrophe
-\XeTeXinterchartoks\LetterL\Apostrophe={\kern0.07em}
 \usepackage[a4paper,margin=27mm]{geometry}
 \usepackage{booktabs,longtable,array}
 \usepackage{setspace}\setstretch{1.1}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage{tikz-cd}% les figures
+\usepackage{tikz-cd}% the figures
 \usetikzlibrary{decorations.pathreplacing,calc}
 
-\newcommand{\q}[1]{«\,#1\,»}
-% Les carnets de Quillen (Clay Mathematics Institute) : un PDF par carnet.
-\newcommand{\carnet}[2]{\href{https://www.claymath.org/library/Quillen/Working_papers/quillen\%20#1/#1-#2.pdf}{carnet~#1-#2}}
-% Le fichier de la preuve vérifiée, une fois par section. Les liens pointent vers main.
+\newcommand{\q}[1]{“#1”}
+% Quillen's notebooks (Clay Mathematics Institute): one PDF per notebook.
+\newcommand{\carnet}[2]{\href{https://www.claymath.org/library/Quillen/Working_papers/quillen\%20#1/#1-#2.pdf}{notebook~#1-#2}}
+% The file of the checked proof, once per section. The links point to main.
 \newcommand{\leanblobmain}{https://github.com/Commutator-IO/grothendieck-project/blob/main/lean/Quillen}
-\newcommand{\verifie}[1]{\footnote{Preuve vérifiée : \href{\leanblobmain/#1.lean}{\texttt{lean/Quillen/\detokenize{#1}.lean}}.}}
+\newcommand{\verifie}[1]{\footnote{Proof checked: \href{\leanblobmain/#1.lean}{\texttt{lean/Quillen/\detokenize{#1}.lean}}.}}
 \definecolor{frise}{HTML}{2F4DA8}
 \definecolor{piste}{HTML}{B53D1D}
-% L'état de la recherche bibliographique, en fin de section.
+% The state of the literature search, at the end of a section.
 \newcommand{\piste}{\,\textcolor{piste}{\ensuremath{\blacklozenge}}}
-\newcommand{\litterature}[1]{\par\smallskip\noindent\textit{Littérature.} #1\par}
+\newcommand{\litterature}[1]{\par\smallskip\noindent\textit{Literature.} #1\par}
 \theoremstyle{plain}
-\newtheorem*{enonce}{Énoncé}
-\newtheorem{lemme}{Lemme}[section]
-\newtheorem{theoreme}[lemme]{Théorème}
-\newtheorem{contrexemple}[lemme]{Contre-exemple}
+\newtheorem*{enonce}{Statement}
+\newtheorem{lemme}{Lemma}[section]
+\newtheorem{theoreme}[lemme]{Theorem}
+\newtheorem{contrexemple}[lemme]{Counterexample}
 \newtheorem{proposition}[lemme]{Proposition}
-\newtheorem*{theoreme*}{Théorème}
+\newtheorem*{theoreme*}{Theorem}
 \theoremstyle{definition}
-\newtheorem{exemple}[lemme]{Exemple}
+\newtheorem{exemple}[lemme]{Example}
 \theoremstyle{remark}
-\newtheorem*{remarque}{Remarque}
+\newtheorem*{remarque}{Remark}
 \raggedbottom\emergencystretch=1.5em
-% Les noms Lean longs (\texttt{A.b\_c\_d}) peuvent se couper après un tiret bas.
+% Long Lean names (\texttt{A.b\_c\_d}) may break after an underscore.
 \let\bkunderscore\_
 \renewcommand{\_}{\bkunderscore\allowbreak}
 
-\title{\Large Carnets de Daniel Quillen : énoncés démontrés en Lean}
-\author{Michel Hua\\ \small Chercheur indépendant, Paris\\ \small \texttt{michel@commutator.io}}
-\date{\small Novembre 2026}
+\title{\Large Daniel Quillen's Notebooks: Statements Proved in Lean}
+\author{Michel Hua\\ \small Independent researcher, Paris\\ \small \texttt{michel@commutator.io}}
+\date{\small November 2026}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-\noindent Les carnets de recherche de Daniel Quillen, de 1968 à 2003, sont en ligne au Clay Mathematics Institute. Ce document y relève dix énoncés précis, en topologie générale, en algèbre linéaire, en théorie des groupes, en théorie des représentations, en théorie des catégories, en combinatoire et en analyse sur le tore, et les démontre. Chaque démonstration suit une preuve vérifiée dans l'assistant de preuve Lean~4 \cite{lean4}, avec sa bibliothèque mathlib \cite{mathlib2020}, et elle est rédigée pour être lue sans Lean. Pour chaque énoncé, le document dit d'où il vient, ce qu'il veut dire, comment on le démontre, ce qui n'est pas formalisé et ce que l'on sait de sa présence dans la littérature. Les dix énoncés sont justes ; trois tiennent sous des hypothèses plus faibles que celles de la page ou de la démonstration attendue, un échoue pour $p = 2$, comme la page le laisse entendre, et six sont classiques mais absents de mathlib.
+\noindent Daniel Quillen's research notebooks, from 1968 to 2003, are online at the Clay Mathematics Institute. This document picks out ten precise statements in them, in general topology, linear algebra, group theory, representation theory, category theory, combinatorics and analysis on the torus, and proves them. Each proof follows a proof checked in the Lean~4 proof assistant \cite{lean4}, with its mathlib library \cite{mathlib2020}, and is written to be read without Lean. For each statement, the document says where it comes from, what it means, how it is proved, what is not formalized, and what is known of its presence in the literature. All ten statements are correct; three hold under weaker hypotheses than those of the page or of the expected proof, one fails for $p = 2$, as the page suggests, and six are classical but absent from mathlib.
 \end{abstract}
 
 \tableofcontents
 
 \section*{Introduction}\addcontentsline{toc}{section}{Introduction}
 
-\emph{Les carnets.} Daniel Quillen (1940--2011) a tenu toute sa vie des carnets de travail, datés, où il essaie des idées, refait des calculs et note des énoncés. Le Clay Mathematics Institute les a numérisés et les publie sur \url{https://www.claymath.org/library/Quillen/} : plusieurs centaines de carnets, de 1968 à 2003, un PDF par carnet. Ce document cite chaque carnet par son année et son numéro, sous la forme \q{carnet 1968-14, p.~27}, où la page est celle du PDF ; chaque citation renvoie au PDF du Clay.
+\emph{The notebooks.} Daniel Quillen (1940--2011) kept working notebooks all his life, dated, in which he tries out ideas, redoes computations and notes statements. The Clay Mathematics Institute has digitized them and publishes them at \url{https://www.claymath.org/library/Quillen/}: several hundred notebooks, from 1968 to 2003, one PDF per notebook. This document cites each notebook by its year and number, in the form \q{notebook 1968-14, p.~27}, where the page is that of the PDF; each citation points to the Clay PDF.
 
-\emph{La règle sur les droits.} Les carnets sont protégés par le droit d'auteur. Ce document n'en cite presque rien, au plus quelques mots ; il énonce chaque résultat dans ses propres termes et renvoie à la page du fac-similé, que chacun peut consulter. Les transcriptions faites pour ce travail restent privées.
+\emph{The rule on rights.} The notebooks are protected by copyright. This document quotes almost nothing from them, a few words at most; it states each result in its own terms and refers to the page of the facsimile, which anyone can consult. The transcriptions made for this work remain private.
 
-\emph{La méthode.} Les carnets ont été lus en trois temps. On repère d'abord les énoncés précis : lemmes, propositions, identités, questions posées. Chaque énoncé fait ensuite l'objet d'une recherche bibliographique. La plus grande partie de ce qu'on lit dans les carnets se retrouve dans les articles publiés de Quillen, sur l'algèbre homotopique, la cohomologie des groupes et la $K$-théorie algébrique, le cobordisme, les superconnexions, les déterminants et la cohomologie cyclique ; ces énoncés ne sont pas repris ici. On ne formalise enfin que les énoncés précis que la recherche n'a pas retrouvés imprimés, ou dont la forme imprimée ne correspond pas à la page. Quatre énoncés de ce document sont dans ce cas. Les autres, aux carnets 1968-1, 1968-13 (restriction des représentations), 1968-15 et~16, 1970-15, 1971-4 et 1983-4, sont classiques et retrouvés ; ils sont formalisés parce que les pages s'appuient sur eux et que mathlib ne les a pas. Le losange rouge \textcolor{piste}{\ensuremath{\blacklozenge}}, dans le titre d'une section, signale les quatre carnets dont un énoncé démontré est une piste candidate : la recherche ne l'a pas retrouvé imprimé sous cette forme, ce qui ne l'établit pas comme nouveau.
+\emph{The method.} The notebooks were read in three stages. First, the precise statements are located: lemmas, propositions, identities, questions asked. Each statement is then the object of a literature search. Most of what one reads in the notebooks is found again in Quillen's published papers, on homotopical algebra, group cohomology and algebraic $K$-theory, cobordism, superconnections, determinants and cyclic cohomology; those statements are not taken up here. Finally, only the precise statements that the search did not find in print, or whose printed form does not match the page, are formalized. Four statements of this document are in that case. The others, in notebooks 1968-1, 1968-13 (restriction of representations), 1968-15 and~16, 1970-15, 1971-4 and 1983-4, are classical and found in the literature; they are formalized because the pages rely on them and mathlib does not have them. The red lozenge \textcolor{piste}{\ensuremath{\blacklozenge}}, in the title of a section, marks the four notebooks in which a proved statement is a candidate lead: the search did not find it in print in this form, which does not establish it as new.
 
-\emph{Les garanties de Lean.} Chaque section cite en note de son titre le fichier Lean qui en contient les preuves, dans la bibliothèque \texttt{lean/Quillen/} du projet, un fichier par carnet. Lean vérifie mécaniquement qu'un énoncé tient sous les hypothèses écrites. Il ne garantit pas que l'énoncé rend fidèlement la page, ni qu'il est nouveau. Un énoncé que la page formule porte le nom de Quillen, le carnet et la page ; quand la démonstration établit davantage, on dit \q{d'après} ; une forme que l'édition ajoute (généralisation, réponse à une question, lemme intermédiaire) se dit énoncé de l'édition.
+\emph{What Lean guarantees.} Each section cites, in a footnote to its title, the Lean file that contains its proofs, in the \texttt{lean/Quillen/} library of the project, one file per notebook. Lean mechanically checks that a statement holds under the hypotheses as written. It does not guarantee that the statement faithfully renders the page, nor that it is new. A statement that the page formulates carries the name of Quillen, the notebook and the page; when the proof establishes more, we say \q{after}; a form that the edition adds (a generalization, an answer to a question, an intermediate lemma) is called the edition's statement.
 
-\emph{L'organisation.} Une section par énoncé, dans l'ordre chronologique des carnets. Chacune présente la page dans son contexte, donne l'énoncé avec son intuition et sa démonstration, dit ce que Lean vérifie et ce qui n'est pas démontré, puis l'état de la recherche bibliographique.
+\emph{Organization.} One section per statement, in the chronological order of the notebooks. Each presents the page in its context, gives the statement with its intuition and its proof, says what Lean checks and what is not proved, then the state of the literature search.
 
-\section*{Tableau récapitulatif}\addcontentsline{toc}{section}{Tableau récapitulatif}
+\section*{Summary table}\addcontentsline{toc}{section}{Summary table}
 
 \begin{center}
 {\small\setlength{\tabcolsep}{4pt}
 \begin{longtable}{@{}>{\raggedright\arraybackslash}p{1.6cm}>{\raggedright\arraybackslash}p{5.6cm}>{\raggedright\arraybackslash}p{3.9cm}>{\raggedright\arraybackslash}p{2.6cm}r@{}}
 \toprule
-Carnet & Énoncé & Verdict & Fichier Lean & \S\\
+Notebook & Statement & Verdict & Lean file & \S\\
 \midrule
 \endhead
-1968-1, p.~4 & Un module simple est déterminé par sa trace & classique, retrouvé ; en toute caractéristique, sur un corps algébriquement clos & \href{\leanblobmain/Notebook1968_1.lean}{\texttt{Notebook1968\_1}} & \ref{sec:quillen-1968-1}\\
-1968-13, pp.~64--69 & L'espace $X \cup_\Phi \{\infty\}$ et le lemme du smash & espace retrouvé (Beer--Vipera) ; lemme du smash plus général (ni compacité locale, ni séparation) & \href{\leanblobmain/Notebook1968_13.lean}{\texttt{Notebook1968\_13}} & \ref{sec:quillen-1968-13}\\
-1968-13, p.~4 & La restriction des représentations est pleine si et seulement si $f$ est surjectif & classique, retrouvé ; équivalence si et seulement si $f$ est bijectif & \href{\leanblobmain/Notebook1968_13Rep.lean}{\texttt{Notebook1968\_13Rep}} & \ref{sec:quillen-1968-13-rep}\\
-1968-14, pp.~27--28 & Préimages compactes des fermés loin de $A$ & confirmé ; plus général (ni compacité locale, ni $\sigma$-compacité, ni $A$ fermé) & \href{\leanblobmain/Notebook1968_14.lean}{\texttt{Notebook1968\_14}} & \ref{sec:quillen-1968-14}\\
-1968-15, p.~28 ; 1968-16, pp.~1--2 & $E(n, A)$ parfait pour $n \ge 3$ ; lemme de Whitehead & classique, retrouvé ; sur tout anneau unitaire & \href{\leanblobmain/Notebook1968_15.lean}{\texttt{Notebook1968\_15}}, \href{\leanblobmain/Notebook1968_16.lean}{\texttt{\_16}} & \ref{sec:quillen-1968-15}\\
-1970-15, pp.~21--22 & Fonction de Möbius du treillis des sous-espaces & classique, retrouvé ; théorème binomial de Gauss & \href{\leanblobmain/Notebook1970_15.lean}{\texttt{Notebook1970\_15}} & \ref{sec:quillen-1970-15}\\
-1971-4, pp.~24--25 & Un monoïde commutatif dans son groupe de Grothendieck : foncteur plat & classique, retrouvé ; plat et final & \href{\leanblobmain/Notebook1971_4.lean}{\texttt{Notebook1971\_4}} & \ref{sec:quillen-1971-4}\\
-1971-11, pp.~68--71 & Automorphismes d'ordre $p$ triviaux sur $\Omega_1$ ; quotient $P/\Omega_1(P)$ d'un $p$-groupe $p$-central & confirmé ; plus général (ni finitude, ni bijectivité) ; faux pour $p = 2$ ; quotient : retrouvé (González-Sánchez--Weigel) & \href{\leanblobmain/Notebook1971_11.lean}{\texttt{Notebook1971\_11}}, \href{\leanblobmain/Notebook1971_11Central.lean}{\texttt{Central}} & \ref{sec:quillen-1971-11}\\
-1983-4, pp.~71--72 & Équation cohomologique de $\theta\partial_x - \partial_y$ sur le tore & classique, retrouvé ; les deux sens, pour tout $\theta$ irrationnel & \href{\leanblobmain/Notebook1983_4.lean}{\texttt{Notebook1983\_4}} & \ref{sec:quillen-1983-4}\\
-1983-10, p.~31 & Traces des puissances impaires de $P - Q$ & question de la page ; réponse en dimension finie, sur tout anneau commutatif & \href{\leanblobmain/Notebook1983_10.lean}{\texttt{Notebook1983\_10}} & \ref{sec:quillen-1983-10}\\
+1968-1, p.~4 & A simple module is determined by its trace & classical, found; in every characteristic, over an algebraically closed field & \href{\leanblobmain/Notebook1968_1.lean}{\texttt{Notebook1968\_1}} & \ref{sec:quillen-1968-1}\\
+1968-13, pp.~64--69 & The space $X \cup_\Phi \{\infty\}$ and the smash lemma & space found (Beer--Vipera); smash lemma more general (neither local compactness nor separation) & \href{\leanblobmain/Notebook1968_13.lean}{\texttt{Notebook1968\_13}} & \ref{sec:quillen-1968-13}\\
+1968-13, p.~4 & Restriction of representations is full if and only if $f$ is surjective & classical, found; equivalence if and only if $f$ is bijective & \href{\leanblobmain/Notebook1968_13Rep.lean}{\texttt{Notebook1968\_13Rep}} & \ref{sec:quillen-1968-13-rep}\\
+1968-14, pp.~27--28 & Compact preimages of closed sets away from $A$ & confirmed; more general (neither local compactness, nor $\sigma$-compactness, nor $A$ closed) & \href{\leanblobmain/Notebook1968_14.lean}{\texttt{Notebook1968\_14}} & \ref{sec:quillen-1968-14}\\
+1968-15, p.~28; 1968-16, pp.~1--2 & $E(n, A)$ perfect for $n \ge 3$; Whitehead's lemma & classical, found; over any unital ring & \href{\leanblobmain/Notebook1968_15.lean}{\texttt{Notebook1968\_15}}, \href{\leanblobmain/Notebook1968_16.lean}{\texttt{\_16}} & \ref{sec:quillen-1968-15}\\
+1970-15, pp.~21--22 & Möbius function of the lattice of subspaces & classical, found; Gauss's binomial theorem & \href{\leanblobmain/Notebook1970_15.lean}{\texttt{Notebook1970\_15}} & \ref{sec:quillen-1970-15}\\
+1971-4, pp.~24--25 & A commutative monoid in its Grothendieck group: flat functor & classical, found; flat and final & \href{\leanblobmain/Notebook1971_4.lean}{\texttt{Notebook1971\_4}} & \ref{sec:quillen-1971-4}\\
+1971-11, pp.~68--71 & Automorphisms of order $p$ trivial on $\Omega_1$; quotient $P/\Omega_1(P)$ of a $p$-central $p$-group & confirmed; more general (neither finiteness nor bijectivity); false for $p = 2$; quotient: found (González-Sánchez--Weigel) & \href{\leanblobmain/Notebook1971_11.lean}{\texttt{Notebook1971\_11}}, \href{\leanblobmain/Notebook1971_11Central.lean}{\texttt{Central}} & \ref{sec:quillen-1971-11}\\
+1983-4, pp.~71--72 & Cohomological equation of $\theta\partial_x - \partial_y$ on the torus & classical, found; both directions, for every irrational $\theta$ & \href{\leanblobmain/Notebook1983_4.lean}{\texttt{Notebook1983\_4}} & \ref{sec:quillen-1983-4}\\
+1983-10, p.~31 & Traces of odd powers of $P - Q$ & question of the page; answer in finite dimension, over any commutative ring & \href{\leanblobmain/Notebook1983_10.lean}{\texttt{Notebook1983\_10}} & \ref{sec:quillen-1983-10}\\
 \bottomrule
 \end{longtable}}
 \end{center}
@@ -112,17 +104,17 @@ Carnet & Énoncé & Verdict & Fichier Lean & \S\\
 \input{sections/quillen-1983-4}
 \input{sections/quillen-1983-10}
 
-\section*{Déclaration sur l'usage de l'intelligence artificielle}\addcontentsline{toc}{section}{Déclaration sur l'usage de l'intelligence artificielle}
+\section*{Statement on the use of artificial intelligence}\addcontentsline{toc}{section}{Statement on the use of artificial intelligence}
 
-Les énoncés démontrés ici sont lus sur des transcriptions des carnets produites par des modèles de langage d'Anthropic (Claude) sous des règles éditoriales écrites par l'auteur ; ces transcriptions n'ont pas été relues en entier par une personne. Les preuves formelles ont été écrites en Lean~4 par Claude Opus~5.5, sous la direction de l'auteur, et Lean en vérifie mécaniquement la correction contre la bibliothèque mathlib. Le même modèle en a tiré les démonstrations rédigées de ce document. L'auteur a relu le choix des énoncés et le texte, et en assume l'entière responsabilité. Lean garantit qu'un énoncé tient sous les hypothèses écrites. Il ne garantit ni que l'énoncé rend fidèlement la page, ni qu'il est nouveau.
+The statements proved here are read from transcriptions of the notebooks produced by Anthropic language models (Claude) under editorial rules written by the author; these transcriptions have not been fully reviewed by a person. The formal proofs were written in Lean~4 by Claude Opus~5.5, under the author's direction, and Lean mechanically checks their correctness against the mathlib library. The same model drew from them the written-out proofs of this document. The author reviewed the choice of statements and the text, and takes full responsibility for them. Lean guarantees that a statement holds under the hypotheses as written. It guarantees neither that the statement faithfully renders the page, nor that it is new.
 
 \begin{thebibliography}{99}\small
-\bibitem{ass1994} J.~Avron, R.~Seiler et B.~Simon, « The index of a pair of projections », \emph{Journal of Functional Analysis} 120 (1994), n\textsuperscript{o}\,1, 220--237 ; doi:10.1006/jfan.1994.1031.
-\bibitem{lean4} L.~de Moura et S.~Ullrich, « The Lean~4 theorem prover and programming language », dans \emph{Automated Deduction -- CADE~28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635 ; doi:10.1007/978-3-030-79876-5\_37.
-\bibitem{mathlib2020} The mathlib Community, « The Lean mathematical library », dans \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP~2020)}, ACM, 2020, 367--381 ; doi:10.1145/3372885.3373824.
-\bibitem{beer2008} G.~Beer, « Embeddings of bornological universes », \emph{Set-Valued Analysis} 16 (2008), n\textsuperscript{o}\,4, 477--488 ; Zbl~1171.54012.
-\bibitem{beervipera2012} G.~Beer et M.~C.~Vipera, « \textenglish{The Alexandroff one-point compactification as a prototype for extensions} », \emph{Advances in Mathematics} 231 (2012), n\textsuperscript{os}\,3--4, 1598--1618 ; doi:10.1016/j.aim.2012.07.008.
-\bibitem{hu1949} S.-T.~Hu, « \textenglish{Boundedness in a topological space} », \emph{Journal de Mathématiques Pures et Appliquées} (9) 28 (1949), 287--320.
+\bibitem{ass1994} J.~Avron, R.~Seiler and B.~Simon, \q{The index of a pair of projections}, \emph{Journal of Functional Analysis} 120 (1994), no.\,1, 220--237; doi:10.1006/jfan.1994.1031.
+\bibitem{lean4} L.~de Moura and S.~Ullrich, \q{The Lean~4 theorem prover and programming language}, in \emph{Automated Deduction -- CADE~28}, Lecture Notes in Computer Science 12699, Springer, 2021, 625--635; doi:10.1007/978-3-030-79876-5\_37.
+\bibitem{mathlib2020} The mathlib Community, \q{The Lean mathematical library}, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP~2020)}, ACM, 2020, 367--381; doi:10.1145/3372885.3373824.
+\bibitem{beer2008} G.~Beer, \q{Embeddings of bornological universes}, \emph{Set-Valued Analysis} 16 (2008), no.\,4, 477--488; Zbl~1171.54012.
+\bibitem{beervipera2012} G.~Beer and M.~C.~Vipera, \q{The Alexandroff one-point compactification as a prototype for extensions}, \emph{Advances in Mathematics} 231 (2012), nos.\,3--4, 1598--1618; doi:10.1016/j.aim.2012.07.008.
+\bibitem{hu1949} S.-T.~Hu, \q{Boundedness in a topological space}, \emph{Journal de Mathématiques Pures et Appliquées} (9) 28 (1949), 287--320.
 \end{thebibliography}
 
 \end{document}
