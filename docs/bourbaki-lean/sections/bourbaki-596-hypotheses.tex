@@ -1,0 +1,37 @@
+\section[Rédaction Bourbaki \redac{596} : trois hypothèses manquantes]{Rédaction Bourbaki \redac{596} : trois énoncés auxquels manque une hypothèse\protect\verifie{Redaction596Characters}}\label{sec:bourbaki-596-hypotheses}
+
+La rédaction \redac{596} (section~\ref{sec:bourbaki-596}) a paru, longtemps après, comme chapitre~VIII d'\emph{Algèbre} (Springer, 2012). Lue en entier, ses 289 pages sont pour l'essentiel justes et classiques : Krull--Schmidt, densité, Morita, Wedderburn, radical, algèbres absolument semi-simples, groupe de Brauer, représentations des groupes finis. Trois énoncés y sont faux tels qu'ils sont tapés, chacun parce qu'il omet une hypothèse que sa démonstration utilise. La transcription reste locale ; on n'en cite aucun passage.
+
+\emph{§~7, corollaire de la proposition~10 (p.~111 du fac-similé).} Soient $K$ un corps, $A_0$, $A_1$ deux $K$-algèbres et $S_i$ un $A_i$-module simple. Si $K$ est algébriquement clos, $S_0 \otimes_K S_1$ serait un $(A_0 \otimes_K A_1)$-module simple. La proposition~10 ne traite que de modules de dimension finie, et la preuve du corollaire invoque le théorème de Burnside, qui demande la dimension finie ; le corollaire ne la demande pas.
+
+\emph{§~12, n\textsuperscript{o}\,1, remarque après la formule~(2) (p.~249).} Pour un monoïde $G$ et un corps $k$, l'application $\mathrm{Tr}' : k \otimes_{\mathbf Z} R_k(G) \to FC(G, k)$, qui envoie la classe d'un module sur son caractère, serait un isomorphisme quand $k$ est algébriquement clos ; la référence est laissée en blanc. Il faut que $k[G]$ soit semi-simple, par exemple $G$ fini d'ordre premier à la caractéristique.
+
+\emph{§~12, n\textsuperscript{o}\,2, proposition~4\,(d) (p.~258).} Sur un corps algébriquement clos, un $G$-module $E$ de dimension finie serait simple si et seulement si $\langle E, E\rangle = \dim_k \operatorname{End}_G(E) = 1$. La preuve tire de $\operatorname{End}_G(E) \cong k$ que $E$ est semi-simple, ce qui ne suit pas.
+
+\begin{encadre}
+\begin{contrexemple}[aux trois énoncés de la rédaction \redac{596}, tels qu'ils sont tapés]
+\begin{enumerate}
+\item[a)] Soit $L = \mathbf C(t)$, simple comme module sur lui-même. Le $(L \otimes_{\mathbf C} L)$-module $L \otimes_{\mathbf C} L$ n'est pas simple : le noyau de la multiplication $L \otimes L \to L$ est un idéal propre, qui contient $t \otimes 1 - 1 \otimes t \neq 0$.
+\item[b)] Soient $G = \mathbf Z/2$, d'élément non trivial $g$, et $k$ algébriquement clos de caractéristique~$2$. Tout caractère vérifie $\chi(g) = \chi(1)$ ; la fonction centrale qui vaut $1$ en $1$ et $0$ en $g$ n'est donc pas combinaison de caractères, et $\mathrm{Tr}'$ n'est pas surjectif.
+\item[c)] Soit $k$ une clôture algébrique de $\mathbf F_3$, et $G$ le groupe des matrices triangulaires supérieures inversibles à coefficients dans $\mathbf F_3$, d'ordre~$12$, engendré par $A = \operatorname{diag}(1, -1)$ et $N = \left(\begin{smallmatrix} 1 & 1 \\ 0 & 1 \end{smallmatrix}\right)$, agissant sur $E = k^2$. Seules les homothéties commutent à $A$ et à $N$, donc $\langle E, E\rangle = 1$ ; mais la droite $k e_1$ est stable, et $E$ n'est pas simple.
+\end{enumerate}
+\end{contrexemple}
+\end{encadre}
+
+\begin{proof}
+a) Pour $x \in L$ hors de $\mathbf C$, $1$ n'est pas dans la droite $\mathbf C x$ ; il existe une forme linéaire $f$ sur $L$ nulle en $x$ et non nulle en $1$. L'application $\mathrm{id} \otimes f : L \otimes L \to L$ envoie $x \otimes 1$ sur $f(1)\,x \neq 0$ et $1 \otimes x$ sur $0$. Le noyau de la multiplication contient donc $x \otimes 1 - 1 \otimes x \neq 0$, et il ne contient pas $1$.
+
+b) Si $\rho(g)^2 = 1$, alors $(\rho(g) - 1)^2 = \rho(g)^2 - 2\rho(g) + 1 = 0$ en caractéristique~$2$ ; l'endomorphisme nilpotent $\rho(g) - 1$ est de trace nulle, d'où $\chi(g) = \chi(1)$. Les fonctions $f$ telles que $f(g) = f(1)$ forment un sous-espace qui contient les caractères et pas la fonction indiquée.
+
+c) Si $M$ commute à $A$, ses coefficients hors diagonale vérifient $2m_{12} = 2m_{21} = 0$, donc sont nuls puisque $2 \neq 0$ ; s'il commute à $N$, ses deux coefficients diagonaux sont égaux. Enfin $A e_1 = N e_1 = e_1$.
+\end{proof}
+
+\noindent Dans b) et c), la caractéristique divise l'ordre du groupe. Quand $k[G]$ est semi-simple (théorème de Maschke), les deux énoncés du §~12 sont justes ; c'est sans doute le cas que la page a en vue.
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} a) est \texttt{tmul\_one\_ne\_one\_tmul} et \texttt{not\_isSimpleModule\_tensor}, pour toute extension $L \neq K$, puis \texttt{cor\_prop10\_fails} pour $\mathbf C(t)$ ; b) est \texttt{character\_eq\_of\_sq\_eq\_one} et \texttt{single\_one\_not\_mem\_span\_characters}, pour toute famille de représentations de dimension finie ; c) est \texttt{eq\_scalar\_of\_commute}, \texttt{A\_mulVec\_e1}, \texttt{N\_mulVec\_e1} et \texttt{prop4d\_fails}, dans \href{\leanblobmain/Redaction596Characters.lean}{\texttt{Redaction596\allowbreak{}Characters.\allowbreak{}lean}}. La finitude du groupe engendré par $A$ et $N$, et le fait que $R_k(G)$ s'identifie au groupe libre sur les modules simples, ne sont pas formalisés.
+\end{sloppypar}
+
+\emph{Autres écarts relevés.} À l'exemple~1 du §~4, n\textsuperscript{o}\,3 (p.~54), les sous-$M_n(A^{\circ})$-modules de $A_s^n$ correspondent aux idéaux à droite de $A$ : le module est artinien ou noethérien quand $A_d$ l'est, et non $A_s$ comme il est tapé ; un anneau artinien à droite qui ne l'est pas à gauche, comme $\left(\begin{smallmatrix} \mathbf Q & \mathbf R \\ 0 & \mathbf R \end{smallmatrix}\right)$, sépare les deux conditions. Cet écart n'est pas formalisé. La lecture a aussi relevé des fautes dans des démonstrations dont l'énoncé reste juste (un signe dans les produits croisés du §~9, une formule de Newton au §~12) ; elles ne sont pas reprises ici.
+
+\litterature{les énoncés justes sont classiques : Curtis et Reiner, \emph{Representation Theory of Finite Groups and Associative Algebras} (1962) ; Serre, \emph{Représentations linéaires des groupes finis} (1967). Le texte imprimé de 2012 n'a pas été consulté : on ne sait pas si les trois énoncés y sont corrigés.}
