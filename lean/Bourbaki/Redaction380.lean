@@ -1,37 +1,50 @@
 import Mathlib
 
 /-!
-# Bourbaki, rédaction n° 380 (April 1962): two misstatements in Koszul's « Algèbres normées »
+# Bourbaki rédaction n° 380: a reversed pole criterion, and a compact spectrum without unit
 
-Rédaction 380 of the Bourbaki archive (Archives Henri Poincaré, item 935) is Koszul's draft of
-*Analyse fonctionnelle*, ch. I « Algèbres normées », which became *Théories spectrales*, ch. I
-(1967). Two statements are false as typed.
-
-**The pole criterion (§ 2, Prop. 6, p. 40 of the facsimile).** Lemma 5 of the draft says that `λ`
-is a pole of order `p` of the resolvent when `(x - λe)^(p-1) e_λ ≠ 0` and `(x - λe)^p e_λ = 0`,
-where `e_λ` is the idempotent attached to the isolated point `λ`. Prop. 6 restates it with the
-conditions reversed: `(x - λe)^k e_λ = 0` for `k < p` and `≠ 0` for `k = p`. No element satisfies
-the reversed condition, since vanishing at `k = p - 1` forces vanishing at `k = p`; as typed,
-Prop. 6 would say that the resolvent has no poles at all.
+Rédaction n° 380 of the Bourbaki archive (J.-L. Koszul, *Analyse fonctionnelle, chapitre I,
+Algèbres normées*, April 1962; Archives Henri Poincaré, item
+<https://archives-bourbaki.ahp-numerique.fr/items/show/935>) studies normed algebras and their
+spectra, the spaces of characters (nonzero continuous multiplicative linear forms) with the weak
+topology. On p. 40, Prop. 6 restates the pole criterion of Lemma 5 (`λ` is a pole of order `p`
+of the resolvent when `(x - λe)^(p-1) e_λ ≠ 0` and `(x - λe)^p e_λ = 0`) with the conditions reversed:
+`(x - λe)^k e_λ = 0` for `k < p` and `≠ 0` for `k = p`. No element satisfies that, since vanishing
+at `k = p - 1` forces vanishing at `k = p`.
 
 * `reversed_pole_condition_never`: in any ring, for `p ≥ 1`, there are no `a`, `e` with
   `a ^ k * e = 0` for all `k < p` and `a ^ p * e ≠ 0`;
-* `pole_condition_example`: the condition of Lemma 5 does hold for `x = 0` in `ℂ`, `λ = 0`,
-  `e_λ = 1`, `p = 1` (the resolvent `1/λ` of `0` has a simple pole at `0`).
+* `pole_condition_example`: the condition of Lemma 5 holds for `x = 0` in `ℂ`, `λ = 0`,
+  `e_λ = 1`, `p = 1`.
 
-**The spectrum of an algebra without unit (§ 3, Prop. 16, p. 54).** The draft says that the
-spectrum (the space of characters) of a normed algebra without unit is not compact. It can be
-empty: in an algebra where every product vanishes, a character `φ` has `φ(x)² = φ(x²) = 0`, so
-`φ = 0`, which is excluded.
+On p. 54, Prop. 16 asserts that the spectrum of a normed algebra without unit is not
+compact. This is false in general, and this file gives two counterexamples, both complete normed
+algebras over `ℂ` without unit.
 
-* `isEmpty_characterSpace_of_mul_self_eq_zero`: if `x * x = 0` for every `x`, the character space
-  is empty, hence compact;
-* `ZeroMulC`: `ℂ` with the zero product, a nontrivial commutative algebra without unit
-  (`not_exists_unit`);
-* `compactSpace_characterSpace_zeroMulC`: its character space is empty, hence compact.
+* `characterSpace_eq_empty_of_mul_self_eq_zero`: if `x * x = 0` for every `x` (over a field, or
+  any ring without zero divisors), there is no character at all: a character `φ` would satisfy
+  `φ x ^ 2 = φ (x * x) = 0`;
+* `ZeroMul`: the space `ℂ` with the zero multiplication, a complete normed non-unital
+  `ℂ`-algebra (`ZeroMul.not_exists_one`: it has no unit), with empty, hence compact, spectrum
+  (`ZeroMul.isCompact_characterSpace`);
+* `characterSpace_prod_eq`: the algebra `ℂ × ZeroMul` (that is, `ℂ ⊕ N` with `N² = 0` and
+  `ℂ · N = 0`), complete and without unit (`not_exists_one_prod`), has exactly one character,
+  the first projection, so its spectrum is a point, nonempty and compact
+  (`isCompact_characterSpace_prod`, `characterSpace_prod_nonempty`);
+* `not_prop16`: the statement of Prop. 16, read as « for every complete normed non-unital
+  `ℂ`-algebra, the character space is not compact », is false.
 
-Whether the printed *Théories spectrales* (1967) keeps either statement has not been checked.
+What is true is that the spectrum of a commutative Banach algebra is locally compact, and
+compact when the algebra has a unit; without a unit, the spectrum with the zero character
+added is compact (`WeakDual.CharacterSpace.union_zero_isClosed` in mathlib is the closedness
+step). Non-compactness of the spectrum without a unit holds for instance for `C₀(X)` with `X`
+locally compact non-compact, which is presumably the case the page has in mind; it is not
+formalised here.
 -/
+
+open WeakDual
+
+noncomputable section
 
 namespace Bourbaki.Redaction380
 
@@ -54,56 +67,146 @@ theorem pole_condition_example :
 
 end Pole
 
-section Spectrum
 
-open WeakDual
+/-- **No characters when every square vanishes.** If `x * x = 0` for every `x ∈ A`, the
+character space of `A` is empty. -/
+theorem characterSpace_eq_empty_of_mul_self_eq_zero {𝕜 A : Type*} [CommRing 𝕜]
+    [NoZeroDivisors 𝕜] [TopologicalSpace 𝕜] [ContinuousAdd 𝕜] [ContinuousConstSMul 𝕜 𝕜]
+    [NonUnitalNonAssocSemiring A] [TopologicalSpace A] [Module 𝕜 A]
+    (h : ∀ x : A, x * x = 0) : characterSpace 𝕜 A = ∅ := by
+  ext φ
+  simp only [Set.mem_empty_iff_false, iff_false]
+  rintro ⟨hφ, hmul⟩
+  apply hφ
+  refine DFunLike.ext _ _ fun x => ?_
+  have := hmul x x
+  rw [h x, map_zero] at this
+  exact mul_self_eq_zero.mp this.symm
 
-/-- In an algebra where every square vanishes, there is no character: `φ(x)² = φ(x * x) = 0`. -/
-theorem isEmpty_characterSpace_of_mul_self_eq_zero {𝕜 A : Type*} [Field 𝕜] [TopologicalSpace 𝕜]
-    [ContinuousAdd 𝕜] [ContinuousConstSMul 𝕜 𝕜] [NonUnitalNonAssocSemiring A] [TopologicalSpace A]
-    [Module 𝕜 A] (h : ∀ x : A, x * x = 0) : IsEmpty (characterSpace 𝕜 A) := by
-  refine ⟨fun φ => φ.prop.1 (ContinuousLinearMap.ext fun x => ?_)⟩
-  have hx : φ x * φ x = 0 := by
-    rw [← map_mul, h, map_zero]
-  exact mul_self_eq_zero.mp hx
+/-- The space `ℂ` with the zero multiplication. -/
+def ZeroMul : Type := ℂ
 
-/-- `ℂ` with the zero product: a commutative algebra without unit in which every product
-vanishes. -/
-def ZeroMulC : Type := ℂ
+namespace ZeroMul
 
-namespace ZeroMulC
+instance : NormedAddCommGroup ZeroMul := inferInstanceAs (NormedAddCommGroup ℂ)
 
-instance : NonUnitalCommRing ZeroMulC :=
-  { (inferInstance : AddCommGroup ℂ) with
-    mul := fun _ _ => (0 : ℂ)
-    left_distrib := fun _ _ _ => (add_zero (0 : ℂ)).symm
-    right_distrib := fun _ _ _ => (add_zero (0 : ℂ)).symm
-    zero_mul := fun _ => rfl
-    mul_zero := fun _ => rfl
-    mul_assoc := fun _ _ _ => rfl
-    mul_comm := fun _ _ => rfl }
+instance : NormedSpace ℂ ZeroMul := inferInstanceAs (NormedSpace ℂ ℂ)
 
-instance : Module ℂ ZeroMulC := inferInstanceAs (Module ℂ ℂ)
+instance : CompleteSpace ZeroMul := inferInstanceAs (CompleteSpace ℂ)
 
-instance : TopologicalSpace ZeroMulC := inferInstanceAs (TopologicalSpace ℂ)
+/-- The zero multiplication makes `ZeroMul` a non-unital normed ring. -/
+instance : NonUnitalNormedRing ZeroMul where
+  mul _ _ := 0
+  left_distrib _ _ _ := (add_zero 0).symm
+  right_distrib _ _ _ := (add_zero 0).symm
+  zero_mul _ := rfl
+  mul_zero _ := rfl
+  mul_assoc _ _ _ := rfl
+  dist_eq x y := by rw [dist_eq_norm', sub_eq_neg_add]
+  norm_mul_le a b := by
+    change ‖(0 : ZeroMul)‖ ≤ ‖a‖ * ‖b‖
+    rw [norm_zero]
+    positivity
 
-theorem mul_eq_zero' (x y : ZeroMulC) : x * y = 0 := rfl
+/-- Every product vanishes. -/
+theorem mul_eq_zero' (x y : ZeroMul) : x * y = 0 := rfl
 
-/-- `ZeroMulC` is nontrivial and has no unit. -/
-theorem not_exists_unit : Nontrivial ZeroMulC ∧ ¬ ∃ e : ZeroMulC, ∀ x, e * x = x := by
-  refine ⟨inferInstanceAs (Nontrivial ℂ), fun ⟨e, he⟩ => ?_⟩
-  have h1 : (1 : ℂ) = 0 := ((he (1 : ℂ)).symm.trans (mul_eq_zero' e (1 : ℂ))).symm.symm
-  exact one_ne_zero h1
+instance : IsScalarTower ℂ ZeroMul ZeroMul :=
+  ⟨fun _ _ _ => (smul_zero _).symm⟩
 
-end ZeroMulC
+instance : SMulCommClass ℂ ZeroMul ZeroMul :=
+  ⟨fun _ _ _ => (smul_zero _)⟩
 
-/-- The spectrum (character space) of `ZeroMulC` is empty, hence compact: Prop. 16 fails. -/
-theorem compactSpace_characterSpace_zeroMulC : IsEmpty (characterSpace ℂ ZeroMulC) ∧
-    CompactSpace (characterSpace ℂ ZeroMulC) := by
-  have h := isEmpty_characterSpace_of_mul_self_eq_zero (𝕜 := ℂ) (A := ZeroMulC)
-    (fun x => ZeroMulC.mul_eq_zero' x x)
-  exact ⟨h, inferInstance⟩
+instance : Nontrivial ZeroMul := inferInstanceAs (Nontrivial ℂ)
 
-end Spectrum
+/-- `ZeroMul` has no unit. -/
+theorem not_exists_one : ¬ ∃ e : ZeroMul, ∀ x, e * x = x := by
+  rintro ⟨e, he⟩
+  obtain ⟨x, hx⟩ := exists_ne (0 : ZeroMul)
+  exact hx ((he x).symm.trans (mul_eq_zero' e x))
+
+/-- The character space of `ZeroMul` is empty. -/
+theorem characterSpace_eq_empty : characterSpace ℂ ZeroMul = ∅ :=
+  characterSpace_eq_empty_of_mul_self_eq_zero fun x => mul_eq_zero' x x
+
+/-- The character space of `ZeroMul` is compact. -/
+theorem isCompact_characterSpace : IsCompact (characterSpace ℂ ZeroMul) := by
+  rw [characterSpace_eq_empty]
+  exact isCompact_empty
+
+end ZeroMul
+
+/-- The algebra `ℂ × ZeroMul` has no unit. -/
+theorem not_exists_one_prod : ¬ ∃ e : ℂ × ZeroMul, ∀ x, e * x = x := by
+  rintro ⟨e, he⟩
+  exact ZeroMul.not_exists_one ⟨e.2, fun x => congrArg Prod.snd (he (0, x))⟩
+
+/-- The first projection `ℂ × ZeroMul → ℂ`, as an element of the weak dual. -/
+noncomputable def fstChar : WeakDual ℂ (ℂ × ZeroMul) :=
+  ContinuousLinearMap.fst ℂ ℂ ZeroMul
+
+/-- **The spectrum of `ℂ × ZeroMul` is a point**: the only character is the first projection. -/
+theorem characterSpace_prod_eq : characterSpace ℂ (ℂ × ZeroMul) = {fstChar} := by
+  ext φ
+  simp only [Set.mem_singleton_iff]
+  constructor
+  · rintro ⟨hφ, hmul⟩
+    -- `φ` vanishes on `0 × ZeroMul`
+    have h2 : ∀ z : ZeroMul, φ (0, z) = 0 := by
+      intro z
+      have := hmul (0, z) (0, z)
+      have h0 : ((0, z) : ℂ × ZeroMul) * (0, z) = 0 := by
+        ext
+        · simp
+        · exact ZeroMul.mul_eq_zero' z z
+      rw [h0, map_zero] at this
+      exact mul_self_eq_zero.mp this.symm
+    -- `c = φ (1, 0)` is idempotent
+    set c := φ (1, 0) with hc
+    have hcc : c * c = c := by
+      rw [hc, ← hmul]
+      congr 1
+      ext
+      · simp
+      · exact ZeroMul.mul_eq_zero' 0 0
+    have hval : ∀ p : ℂ × ZeroMul, φ p = p.1 * c := by
+      intro p
+      have hp : p = p.1 • ((1 : ℂ), (0 : ZeroMul)) + ((0 : ℂ), p.2) := by
+        ext <;> simp
+      rw [hp, map_add, map_smul, h2, add_zero, smul_eq_mul]
+      simp [hc]
+    have hc1 : c = 1 := by
+      have h01 : c * (c - 1) = 0 := by linear_combination hcc
+      rcases mul_eq_zero.mp h01 with h | h
+      · exact absurd (DFunLike.ext _ _ fun p => by rw [hval p, h, mul_zero]; rfl) hφ
+      · exact sub_eq_zero.mp h
+    refine DFunLike.ext _ _ fun p => ?_
+    rw [hval p, hc1, mul_one]
+    rfl
+  · rintro rfl
+    refine ⟨fun h => ?_, fun x y => rfl⟩
+    have := congrArg (fun f : WeakDual ℂ (ℂ × ZeroMul) => f ((1 : ℂ), (0 : ZeroMul))) h
+    change (1 : ℂ) = 0 at this
+    exact one_ne_zero this
+
+/-- The spectrum of `ℂ × ZeroMul` is compact. -/
+theorem isCompact_characterSpace_prod : IsCompact (characterSpace ℂ (ℂ × ZeroMul)) := by
+  rw [characterSpace_prod_eq]
+  exact isCompact_singleton
+
+/-- The spectrum of `ℂ × ZeroMul` is nonempty. -/
+theorem characterSpace_prod_nonempty : (characterSpace ℂ (ℂ × ZeroMul)).Nonempty := by
+  rw [characterSpace_prod_eq]
+  exact Set.singleton_nonempty _
+
+/-- **Prop. 16 of p. 54 fails**: there is a complete normed non-unital `ℂ`-algebra whose
+character space is nonempty and compact. -/
+theorem not_prop16 :
+    ¬ ∀ (A : Type) [NonUnitalNormedRing A] [NormedSpace ℂ A] [IsScalarTower ℂ A A]
+      [SMulCommClass ℂ A A] [CompleteSpace A], (¬ ∃ e : A, ∀ x, e * x = x) →
+        ¬ IsCompact (characterSpace ℂ A) :=
+  fun h => h (ℂ × ZeroMul) not_exists_one_prod isCompact_characterSpace_prod
 
 end Bourbaki.Redaction380
+
+end

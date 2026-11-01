@@ -28,8 +28,8 @@ is closed.
   neighbourhood in `Φ` (p. 64);
 * `compactSupports`, `homeomorphOnePoint`: for `Φ` the closed compact sets, `X ∪_Φ {∞}` is
   Mathlib's one-point compactification `OnePoint X` (p. 65);
-* `closedSupports`, `isOpen_infty_closedSupports`: for `Φ` the closed sets, `∞` is isolated
-  (p. 65);
+* `closedSupports`, `isOpen_infty_closedSupports`, `homeomorphSum`: for `Φ` the closed sets,
+  `∞` is isolated and the space is the sum of `X` and a point (p. 65);
 * `smashSupports`, `smashMap`, `isQuotientMap_smashMap`: the lemma of pp. 68–69. The map
   `X⁺ × (Y ∪_Φ {∞}) → (X × Y) ∪_Ψ {∞}` that sends the wedge to `∞` is a quotient map, so the
   target is the smash product with its quotient topology.
@@ -208,6 +208,26 @@ theorem isOpen_infty_closedSupports : IsOpen ({infty (closedSupports X)} : Set (
     ext x; simp [ι_ne_infty]
   rw [this]; exact isOpen_empty
 
+/-- For `Φ` the closed sets, `X ∪_Φ {∞}` is the topological sum of `X` and a point. -/
+def homeomorphSum : X ⊕ Unit ≃ₜ Extension (closedSupports X) :=
+  Equiv.toHomeomorphOfContinuousOpen
+    { toFun := Sum.elim (ι (closedSupports X)) fun _ => infty (closedSupports X)
+      invFun := fun p => match p with
+        | some x => Sum.inl x
+        | none => Sum.inr ()
+      left_inv := by rintro (x | ⟨⟩) <;> rfl
+      right_inv := by rintro (_ | x) <;> rfl }
+    (continuous_sum_dom.2 ⟨isOpenEmbedding_ι.continuous, continuous_const⟩)
+    (isOpenMap_sum.2 ⟨isOpenEmbedding_ι.isOpenMap, fun s _ => by
+      rcases s.eq_empty_or_nonempty with rfl | ⟨u, hu⟩
+      · simp
+      · have : (fun _ : Unit => infty (closedSupports X)) '' s =
+            {infty (closedSupports X)} := by
+          ext p
+          simp only [mem_image, mem_singleton_iff]
+          exact ⟨fun ⟨_, _, h⟩ => h.symm, fun h => ⟨u, hu, h.symm⟩⟩
+        simpa [Function.comp_def, this] using isOpen_infty_closedSupports⟩)
+
 end SpecialCases
 
 section Smash
@@ -363,7 +383,8 @@ theorem isQuotientMap_smashMap (Φ : SupportFamily Y) : IsQuotientMap (smashMap 
       · intro hC
         exact ⟨by simpa using ((smashSupports Φ).isClosed _ hC).isOpen_compl,
           fun _ => ⟨_, hC, by rw [compl_compl]⟩⟩
-    · rw [preimage_smashMap_of_notMem Φ h, isOpen_iff, (isOpenEmbedding_e Φ).isOpen_iff_image_isOpen]
+    · rw [preimage_smashMap_of_notMem Φ h, isOpen_iff,
+        (isOpenEmbedding_e Φ).isOpen_iff_image_isOpen]
       exact ⟨fun hU => hU.1, fun hU => ⟨hU, fun h' => absurd h' h⟩⟩
   refine isQuotientMap_iff_isClosed.2 ⟨?_, fun s => ?_⟩
   swap

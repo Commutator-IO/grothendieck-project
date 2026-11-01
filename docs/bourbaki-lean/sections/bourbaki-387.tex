@@ -15,7 +15,7 @@ $|2|_2 = 1/2$, et l'équation $x^2 = 1$ n'a que les solutions $\pm 1$ dans l'ann
 \end{proof}
 
 \begin{sloppypar}
-\noindent\emph{Vérification en Lean.} \texttt{norm\_two} donne $\|2\| = 1/2$ dans $\mathbf Q_2$, \texttt{sq\_eq\_one\_iff} et \texttt{one\_ne\_neg\_one} les deux racines carrées de l'unité, \texttt{not\_isSquare\_neg\_one} le fait que $-1$ n'est pas un carré (par réduction modulo~$4$), et \texttt{typed\_formula\_fails} le contre-exemple, dans \href{\leanblobmain/Redaction387.lean}{\texttt{Redaction387.\allowbreak{}lean}}. L'indice exact $4$ n'est pas formalisé.
+\noindent\emph{Vérification en Lean.} \texttt{norm\_two} donne $\|2\| = 1/2$ dans $\mathbf Q_2$, \texttt{sq\_eq\_one\_iff} et \texttt{one\_ne\_neg\_one} les deux racines carrées de l'unité, \texttt{not\_isSquare\_neg\_one} le fait que $-1$ n'est pas un carré (par réduction modulo~$4$). L'indice exact est \texttt{index\_squares} : par le lemme de Hensel, les carrés de $\mathbf Z_2^\times$ sont les unités congrues à $1$ modulo~$8$ (\texttt{squares\_eq\_ker}), d'où $[U : U^2] = \operatorname{Card}(\mathbf Z/8)^\times = 4$. \texttt{typed\_formula\_fails} et \texttt{corrected\_formula\_holds} comparent ce $4$ au produit et au quotient, dans \href{\leanblobmain/Redaction387.lean}{\texttt{Redaction387.\allowbreak{}lean}}.
 \end{sloppypar}
 
 \litterature{la formule juste est classique ; la forme tapée ne l'est pas. L'exercice imprimé (\emph{Algèbre commutative}, chap.~VI, 1964) n'a pas été consulté : on ne sait pas si l'erreur y subsiste.}
