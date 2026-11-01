@@ -84,7 +84,7 @@
 \maketitle
 
 \begin{abstract}
-\noindent Les archives Bourbaki conservent les rédactions, projets de chapitres que les membres du groupe se faisaient circuler et discutaient en congrès. Ce document lit des énoncés précis dans dix-neuf de ces rédactions, de 1950 à 1974, en analyse fonctionnelle, topologie, théorie des ensembles, algèbre, géométrie algébrique, théorie des catégories et algèbre homologique, et les démontre. Chaque démonstration suit une preuve vérifiée dans l'assistant de preuve Lean~4 \cite{lean4}, avec sa bibliothèque mathlib \cite{mathlib2020}, et elle est rédigée pour être lue sans Lean. Pour chaque énoncé, le document dit d'où il vient, ce qu'il veut dire, comment on le démontre, ce qui n'est pas formalisé et ce que l'on sait de sa présence dans la littérature. Plusieurs énoncés tapés sont faux, et des contre-exemples le montrent.
+\noindent Les archives Bourbaki conservent les rédactions, projets de chapitres que les membres du groupe se faisaient circuler et discutaient en congrès. Ce document lit des énoncés précis dans vingt et une de ces rédactions, de 1950 à 1974, en analyse fonctionnelle, topologie, théorie des ensembles, algèbre, géométrie algébrique, théorie des catégories et algèbre homologique, et les démontre. Chaque démonstration suit une preuve vérifiée dans l'assistant de preuve Lean~4 \cite{lean4}, avec sa bibliothèque mathlib \cite{mathlib2020}, et elle est rédigée pour être lue sans Lean. Pour chaque énoncé, le document dit d'où il vient, ce qu'il veut dire, comment on le démontre, ce qui n'est pas formalisé et ce que l'on sait de sa présence dans la littérature. Plusieurs énoncés tapés sont faux, et des contre-exemples le montrent.
 \end{abstract}
 
 \tableofcontents
@@ -95,7 +95,7 @@
 
 \emph{La règle sur les transcriptions.} Les rédactions lues ici ont été transcrites en \LaTeX{} pour ce travail. Ces transcriptions restent privées : elles ne sont ni publiées ni versées au dépôt du projet tant que les Archives Henri Poincaré et l'Association des collaborateurs de Nicolas Bourbaki n'en ont pas donné l'accord. Le document ne cite donc presque rien du texte des rédactions, au plus quelques mots ; il énonce chaque résultat dans ses propres termes et renvoie à la page du fac-similé, que chacun peut consulter sur le site des archives.
 
-\emph{Le choix des énoncés.} Deux passes ont fourni les énoncés. La première a transcrit les documents que l'onglet Bourbaki du site du projet signale : les rédactions \redac{128}, 288, 380, 387, 397, 453, 457, 582 et~596 en viennent. La seconde, plus récente, ne lit que les rédactions des livres que Bourbaki n'a pas publiés, là où des mathématiques inédites ont le plus de chances de se trouver : environ 5\,900 pages en 105 rédactions, sur la géométrie algébrique, les catégories et l'algèbre homologique, les variétés différentielles, la topologie élémentaire, la géométrie différentielle et d'autres sujets. Chaque rédaction y est parcourue à la recherche d'énoncés précis (définitions, théorèmes, contre-exemples, questions posées). Chaque énoncé fait l'objet d'une recherche bibliographique ; s'il est retrouvé dans un texte publié, la rédaction est marquée \q{retrouvée} et l'on passe. Seuls les énoncés précis qui n'ont pas été retrouvés, ou qui sont faux tels qu'ils sont tapés, sont formalisés. Les rédactions \redac{197}, 205, 239, 321, 402, 438, 448, 461, 469 et~476 viennent de cette seconde passe. Le relevé marque deux d'entre elles, \redac{321} et~402, comme retrouvées dans la littérature ; leurs sections le disent, avec ce que la formalisation y ajoute.
+\emph{Le choix des énoncés.} Deux passes ont fourni les énoncés. La première a transcrit les documents que l'onglet Bourbaki du site du projet signale : les rédactions \redac{128}, 288, 355, 380, 384, 387, 397, 453, 457, 582 et~596 en viennent. Trois d'entre elles, 355, 384 et~397, n'ont fourni que des énoncés retrouvés dans la littérature ; ils sont formalisés parce que mathlib ne les a pas. La seconde, plus récente, ne lit que les rédactions des livres que Bourbaki n'a pas publiés, là où des mathématiques inédites ont le plus de chances de se trouver : environ 5\,900 pages en 105 rédactions, sur la géométrie algébrique, les catégories et l'algèbre homologique, les variétés différentielles, la topologie élémentaire, la géométrie différentielle et d'autres sujets. Chaque rédaction y est parcourue à la recherche d'énoncés précis (définitions, théorèmes, contre-exemples, questions posées). Chaque énoncé fait l'objet d'une recherche bibliographique ; s'il est retrouvé dans un texte publié, la rédaction est marquée \q{retrouvée} et l'on passe. Seuls les énoncés précis qui n'ont pas été retrouvés, ou qui sont faux tels qu'ils sont tapés, sont formalisés. Les rédactions \redac{197}, 205, 239, 321, 402, 438, 448, 461, 469 et~476 viennent de cette seconde passe. Le relevé marque deux d'entre elles, \redac{321} et~402, comme retrouvées dans la littérature ; leurs sections le disent, avec ce que la formalisation y ajoute.
 
 \emph{Les garanties de Lean.} Chaque section cite en note de son titre le fichier Lean qui en contient les preuves, dans la bibliothèque \texttt{lean/Bourbaki/} du projet, un fichier par rédaction. Lean vérifie mécaniquement qu'un énoncé tient sous les hypothèses écrites. Il ne garantit pas que l'énoncé rend fidèlement la page, ni qu'il est nouveau. Quand la démonstration rédigée suit une autre voie que la rédaction, la section le dit. Une démonstration que l'on résume d'après la page sans la vérifier en Lean est marquée dans la marge (\textcolor{piste}{\ensuremath{\lozenge}}~\emph{non vérifiée en Lean}).
 
@@ -119,6 +119,7 @@ N\textsuperscript{o} & Énoncé & Verdict & Fichier Lean & \S\\
 402 & Distances localisables & confirmé tel que lu ; plus général & \href{\leanblobmain/Redaction402.lean}{\texttt{Redaction402}} & \ref{sec:bourbaki-402}\\
 205 & Un critère de revêtement & faux sur la page (contre-exemple) & \href{\leanblobmain/Redaction205.lean}{\texttt{Redaction205}} & \ref{sec:bourbaki-205}\\
 380 & Pôles de la résolvante, spectre sans unité & faux sur la page (contre-exemples) & \href{\leanblobmain/Redaction380.lean}{\texttt{Redaction380}} & \ref{sec:bourbaki-380}\\
+384 & Le covolume n'est pas continu & retrouvé ; exemple de l'exercice & \href{\leanblobmain/Redaction384.lean}{\texttt{Redaction384}} & \ref{sec:bourbaki-384}\\
 \multicolumn{5}{@{}l}{\textit{Catégories et algèbre homologique}}\\[1pt]
 321 & Carrés cartésiens dans une catégorie abélienne & confirmé tel que lu ; faux sur la page (coquille, contre-exemple) & \href{\leanblobmain/Redaction321.lean}{\texttt{Redaction321}} & \ref{sec:bourbaki-321}\\
 438 & Une identité triangulaire suffit & confirmé tel que lu & \href{\leanblobmain/Redaction438.lean}{\texttt{Redaction438}} & \ref{sec:bourbaki-438}\\
@@ -136,6 +137,7 @@ N\textsuperscript{o} & Énoncé & Verdict & Fichier Lean & \S\\
 596 & Toute classe est une différence & plus général ; partiel & \href{\leanblobmain/Redaction596.lean}{\texttt{Redaction596}} & \ref{sec:bourbaki-596}\\
 387 & L'indice des puissances $n$-ièmes des unités & faux sur la page (contre-exemple) & \href{\leanblobmain/Redaction387.lean}{\texttt{Redaction387}} & \ref{sec:bourbaki-387}\\
 397 & Divisible équivaut à injectif & confirmé tel que lu ; plus général & \href{\leanblobmain/Redaction397.lean}{\texttt{Redaction397}} & \ref{sec:bourbaki-397}\\
+355 & Premiers associés et extension plate & retrouvé ; sans hypothèse noethérienne & \href{\leanblobmain/Redaction355.lean}{\texttt{Redaction355}} & \ref{sec:bourbaki-355}\\
 \bottomrule
 \end{longtable}}
 \end{center}
@@ -147,6 +149,7 @@ N\textsuperscript{o} & Énoncé & Verdict & Fichier Lean & \S\\
 \input{sections/bourbaki-402}
 \input{sections/bourbaki-205}
 \input{sections/bourbaki-380}
+\input{sections/bourbaki-384}
 
 \part{Catégories et algèbre homologique}
 \input{sections/bourbaki-321}
@@ -167,6 +170,7 @@ N\textsuperscript{o} & Énoncé & Verdict & Fichier Lean & \S\\
 \input{sections/bourbaki-596}
 \input{sections/bourbaki-387}
 \input{sections/bourbaki-397}
+\input{sections/bourbaki-355}
 
 
 \section*{Déclaration sur l'usage de l'intelligence artificielle}\addcontentsline{toc}{section}{Déclaration sur l'usage de l'intelligence artificielle}

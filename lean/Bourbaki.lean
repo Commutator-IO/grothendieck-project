@@ -6,7 +6,9 @@ import Bourbaki.Redaction205
 import Bourbaki.Redaction239
 import Bourbaki.Redaction288
 import Bourbaki.Redaction321
+import Bourbaki.Redaction355
 import Bourbaki.Redaction380
+import Bourbaki.Redaction384
 import Bourbaki.Redaction387
 import Bourbaki.Redaction397
 import Bourbaki.Redaction402

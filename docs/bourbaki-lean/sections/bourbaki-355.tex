@@ -1,0 +1,25 @@
+\section[Rédaction Bourbaki \redac{355} : premiers associés et extension plate]{Rédaction Bourbaki \redac{355} : les premiers associés d'un module plat réduit modulo un premier\protect\verifie{Redaction355}}\label{sec:bourbaki-355}
+
+La rédaction \redac{355} des archives Bourbaki (Archives Henri Poincaré, \ahp{913}), datée de janvier 1961, est le second état d'un texte sur les idéaux premiers associés et l'extension des scalaires, dont le contenu se retrouve au §~2 du chapitre~IV d'\emph{Algèbre commutative} (1961). Le premier état (rédaction 352) traitait l'extension $A \to B$ ; la préface tapée du second dit que le rédacteur doit à Grothendieck l'idée de remplacer l'anneau $B$ par un $B$-module $F$ plat sur $A$. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+\emph{L'énoncé.} Soient $\pi : A \to B$ un homomorphisme d'anneaux commutatifs, $F$ un $B$-module plat sur $A$, et $\mathfrak p$ un idéal premier de $A$. La proposition~1 dit, sans hypothèse noethérienne, que tout idéal premier associé au $B$-module $F/\mathfrak pF$ est au-dessus de $\mathfrak p$. C'est le premier pas de la proposition~2, qui calcule les premiers associés de $E \otimes_A F$.
+
+\emph{L'intuition.} Le module $F/\mathfrak pF$ est $(A/\mathfrak p) \otimes_A F$, plat sur l'anneau intègre $A/\mathfrak p$, donc sans torsion : un élément de $A$ hors de $\mathfrak p$ n'y tue rien. Un premier associé, qui est fait d'éléments qui tuent quelque chose, ne contient donc pas d'autre élément de $A$ que ceux de $\mathfrak p$, et il les contient tous, puisque $\mathfrak p$ tue $F/\mathfrak pF$.
+
+\begin{encadre}
+\begin{enonce}[Bourbaki, rédaction \redac{355}, proposition~1]
+Soient $\pi : A \to B$ un homomorphisme d'anneaux commutatifs, $F$ un $B$-module plat sur $A$, $\mathfrak p$ un idéal premier de $A$, et $\mathfrak P$ un idéal premier de $B$ associé au $B$-module $F/\mathfrak pF$, c'est-à-dire premier et égal à la racine de l'annulateur d'un élément. Alors $\pi^{-1}(\mathfrak P) = \mathfrak p$.
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+Soit $\bar x \in F/\mathfrak pF$ avec $\mathfrak P = \sqrt{\operatorname{Ann}_B(\bar x)}$. Si $a \in \mathfrak p$, alors $\pi(a)\bar x = a\bar x = 0$, d'où $a \in \pi^{-1}(\mathfrak P)$. Soit réciproquement $a \in \pi^{-1}(\mathfrak P)$ : il existe $n$ tel que $a^n \bar x = 0$. Si $a \notin \mathfrak p$, alors $a^n \notin \mathfrak p$, et la multiplication par $a^n$ est injective sur $A/\mathfrak p$, qui est intègre ; elle le reste sur $(A/\mathfrak p) \otimes_A F = F/\mathfrak pF$, puisque $F$ est plat. Donc $\bar x = 0$, son annulateur est $B$ et $\mathfrak P = B$, ce qui est exclu.
+\end{proof}
+
+\noindent La définition des premiers associés par la racine de l'annulateur, celle de mathlib, coïncide avec la définition usuelle pour un anneau $B$ noethérien ; la rédaction ne suppose rien, et la preuve vaut pour les deux.
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} Le pas de platitude est \texttt{mem\_smul\_top\_of\_smul\_mem}, et la proposition \texttt{comap\_eq\_of\_isAssociatedPrime}, énoncée pour tout sous-$B$-module $N$ de $F$ dont le sous-$A$-module sous-jacent est $\mathfrak pF$ ; \texttt{smulTop\_restrictScalars} montre que $(\mathfrak pB)F$ en est un, dans \href{\leanblobmain/Redaction355.lean}{\texttt{Redaction355.\allowbreak{}lean}}. La proposition~2 n'est pas formalisée : l'égalité, pour $A$ noethérien, demande la décomposition primaire des modules.
+\end{sloppypar}
+
+\litterature{retrouvé : Bourbaki, \emph{Algèbre commutative}, chap.~IV, §~2 (numéro du paragraphe non vérifié sur le volume) ; Matsumura, \emph{Commutative Ring Theory}, théorème~23.2 ; EGA~IV$_2$, 3.3.1. mathlib a les premiers associés mais pas leur comportement par extension plate ; l'énoncé est proposé pour mathlib, et l'édition ne le donne pas pour nouveau. L'intérêt de la rédaction est historique : la préface situe en janvier 1961, entre les deux états, la généralisation due à Grothendieck.}

@@ -1,0 +1,21 @@
+\section[Rédaction Bourbaki \redac{384} : le covolume n'est pas continu]{Rédaction Bourbaki \redac{384} : dans l'espace des sous-groupes fermés, le covolume n'est pas continu\protect\verifie{Redaction384}}\label{sec:bourbaki-384}
+
+La rédaction \redac{384} des archives Bourbaki (Archives Henri Poincaré, \ahp{940}), datée de juin 1962, est le projet de Bruhat pour le §~5 du chapitre~VIII d'\emph{Intégration}, \q{L'espace des sous-groupes fermés} (1963). Elle munit l'ensemble des fermés d'un groupe localement compact $G$ d'une structure uniforme, montre que l'espace $S$ des sous-groupes fermés est compact, et étudie le covolume des sous-groupes $H$ tels que $G/H$ soit compact : il est semi-continu inférieurement, et continu là où $G$ est engendré par un compact. L'exercice~4 montre que la continuité tombe sans cette hypothèse. Sa transcription reste locale pour l'instant ; on n'en cite ici aucun passage.
+
+\emph{L'exemple.} Soit $G = \bigoplus_{n \in \mathbf N} \mathbf Z/2$, discret, que nul compact n'engendre. Les sous-groupes $H_n = \ker p_n$, noyaux des projections sur les coordonnées, sont d'indice~$2$ : pour les mesures de comptage, leur covolume vaut~$2$. Ils tendent vers $G$, de covolume~$1$. Pour un groupe discret, la topologie de $S$ est celle de la convergence simple des fonctions indicatrices, et la convergence dit que tout $x \in G$ est dans $H_n$ pour $n$ assez grand.
+
+\begin{encadre}
+\begin{enonce}[Bourbaki, rédaction \redac{384}, exercice~4]
+Dans $G = \bigoplus_{n \in \mathbf N} \mathbf Z/2$, chaque $H_n = \ker p_n$ est d'indice~$2$, et tout $x \in G$ appartient à $H_n$ pour $n$ assez grand ; les fonctions indicatrices des $H_n$ tendent simplement vers celle de $G$.
+\end{enonce}
+\end{encadre}
+
+\begin{proof}
+La projection $p_n$ est surjective, puisque $p_n$ envoie la suite qui vaut $c$ en $n$ et $0$ ailleurs sur $c$ ; son noyau est donc d'indice $\operatorname{Card}(\mathbf Z/2) = 2$. Un élément $x$ de $G$ n'a qu'un nombre fini de coordonnées non nulles ; au-delà de la plus grande, $p_n(x) = 0$.
+\end{proof}
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} $G$ est le groupe des suites à support fini \texttt{ℕ →₀ ZMod 2} ; l'indice est \texttt{index\_ker}, la convergence \texttt{eventually\_mem\_ker} et \texttt{tendsto\_indicator}, dans \href{\leanblobmain/Redaction384.lean}{\texttt{Redaction384.\allowbreak{}lean}}. La topologie de Chabauty, absente de mathlib, n'est pas formalisée, ni la compacité de $S$.
+\end{sloppypar}
+
+\litterature{retrouvé pour le reste de la rédaction : Chabauty (\emph{Bull. SMF} 78, 1950), Fell (\emph{Proc. AMS} 13, 1962), Bourbaki, \emph{Intégration}, chap.~VIII, §~5 (1963), Raghunathan, \emph{Discrete Subgroups of Lie Groups} (1972), chap.~I. L'exercice figure probablement parmi ceux du volume imprimé, qui n'a pas été consulté. L'édition ne donne pas l'exemple pour nouveau.}
