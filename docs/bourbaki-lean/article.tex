@@ -30,7 +30,7 @@
 \usepackage{setspace}\setstretch{1.1}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
-\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsmath,amssymb,amsthm}\usepackage{mathrsfs}
 \usepackage{tikz-cd}
 \usetikzlibrary{decorations.pathreplacing}
 
@@ -48,6 +48,7 @@
 % La démonstration de la page, résumée, pour un énoncé non démontré en Lean : marquée dans la marge.
 \newenvironment{demopage}[1][]{\par\smallskip\noindent\marginpar{\raggedright\footnotesize\textcolor{piste}{\ensuremath{\lozenge}}~non vérifiée en Lean}\textit{Démonstration de la page}\if\relax\detokenize{#1}\relax\else{} (#1)\fi.~}{\par\smallskip}
 % L'état de la recherche bibliographique, en fin de section.
+\newcommand{\piste}{\,\textcolor{piste}{\ensuremath{\blacklozenge}}}
 \newcommand{\litterature}[1]{\par\smallskip\noindent\textit{Littérature.} #1\par}
 \theoremstyle{plain}
 \newtheorem*{enonce}{Énoncé}
@@ -99,7 +100,7 @@
 
 \emph{Les garanties de Lean.} Chaque section cite en note de son titre le fichier Lean qui en contient les preuves, dans la bibliothèque \texttt{lean/Bourbaki/} du projet, un fichier par rédaction. Lean vérifie mécaniquement qu'un énoncé tient sous les hypothèses écrites. Il ne garantit pas que l'énoncé rend fidèlement la page, ni qu'il est nouveau. Quand la démonstration rédigée suit une autre voie que la rédaction, la section le dit. Une démonstration que l'on résume d'après la page sans la vérifier en Lean est marquée dans la marge (\textcolor{piste}{\ensuremath{\lozenge}}~\emph{non vérifiée en Lean}).
 
-\emph{L'organisation.} Les sections sont rangées en quatre parties, par thème, et dans chaque partie par date. Chacune présente la rédaction, explique les notions dont l'énoncé a besoin, donne l'énoncé avec son intuition et sa démonstration, puis la liste de ce qui n'est pas démontré et un paragraphe \emph{Littérature}. Ce dernier distingue les énoncés retrouvés dans la littérature et les pistes candidates, que la recherche n'a pas retrouvées dans les sources lues. Une piste candidate n'est pas un résultat nouveau établi : c'est un énoncé dont l'absence de la littérature reste à confirmer, et le paragraphe dit ce qui a été cherché et ce qui reste à lire. Les résultats principaux sont encadrés. Un énoncé que la page fait porte le nom de Bourbaki et le numéro de la rédaction ; une forme que l'édition a ajoutée (généralisation, correction, reformulation) se dit énoncé de l'édition.
+\emph{L'organisation.} Les sections sont rangées en quatre parties, par thème, et dans chaque partie par date. Chacune présente la rédaction, explique les notions dont l'énoncé a besoin, donne l'énoncé avec son intuition et sa démonstration, puis la liste de ce qui n'est pas démontré et un paragraphe \emph{Littérature}. Ce dernier distingue les énoncés retrouvés dans la littérature et les pistes candidates, que la recherche n'a pas retrouvées dans les sources lues. Une piste candidate n'est pas un résultat nouveau établi : c'est un énoncé dont l'absence de la littérature reste à confirmer, et le paragraphe dit ce qui a été cherché et ce qui reste à lire. Le losange rouge \textcolor{piste}{\ensuremath{\blacklozenge}}, dans le titre d'une section, signale les huit rédactions dont un énoncé démontré est une piste candidate. Les résultats principaux sont encadrés. Un énoncé que la page fait porte le nom de Bourbaki et le numéro de la rédaction ; une forme que l'édition a ajoutée (généralisation, correction, reformulation) se dit énoncé de l'édition.
 
 \section*{Tableau récapitulatif}\addcontentsline{toc}{section}{Tableau récapitulatif}
 
@@ -140,9 +141,9 @@ N\textsuperscript{o} & Énoncé & Verdict & Fichier Lean & \S\\
 457 & Degré et nombre de points & faux sur la page (contre-exemple) ; confirmé tel que lu & \href{\leanblobmain/Redaction457.lean}{\texttt{Redaction457}} & \ref{sec:bourbaki-457}\\
 582 & Les indices de Schur sur $\mathbf R$ ; annexes & faux sur la page (contre-exemples) ; partiel & \href{\leanblobmain/Redaction582.lean}{\texttt{Redaction582}} & \ref{sec:bourbaki-582}\\
 596 & Toute classe est une différence & plus général ; partiel & \href{\leanblobmain/Redaction596.lean}{\texttt{Redaction596}} & \ref{sec:bourbaki-596}\\
-596 & Trois hypothèses manquantes (§§~7 et~12) & faux sur la page (contre-exemples) & \href{\leanblobmain/Redaction596Characters.lean}{\texttt{Redaction596Characters}} & \ref{sec:bourbaki-596-hypotheses}\\
-596 & Cinq écarts des §§~1 à~5 (modules, Morita) & faux sur la page (contre-exemples) & \href{\leanblobmain/Redaction596Modules.lean}{\texttt{Redaction596Modules}} & \ref{sec:bourbaki-596-modules}\\
-596 & Quatre écarts des §§~7 à~12 ; deux fautes de démonstration & faux sur la page (contre-exemples) & \href{\leanblobmain/Redaction596Algebras.lean}{\texttt{Redaction596Algebras}} & \ref{sec:bourbaki-596-algebres}\\
+596 & Trois hypothèses manquantes (§§~7 et~12) & faux sur la page (contre-exemples) & \href{\leanblobmain/Redaction596Characters.lean}{\texttt{Redaction596\allowbreak{}Characters}} & \ref{sec:bourbaki-596-hypotheses}\\
+596 & Cinq écarts des §§~1 à~5 (modules, Morita) & faux sur la page (contre-exemples) & \href{\leanblobmain/Redaction596Modules.lean}{\texttt{Redaction596\allowbreak{}Modules}} & \ref{sec:bourbaki-596-modules}\\
+596 & Quatre écarts des §§~7 à~12 ; deux fautes de démonstration & faux sur la page (contre-exemples) & \href{\leanblobmain/Redaction596Algebras.lean}{\texttt{Redaction596\allowbreak{}Algebras}} & \ref{sec:bourbaki-596-algebres}\\
 387 & L'indice des puissances $n$-ièmes des unités & faux sur la page (contre-exemple) & \href{\leanblobmain/Redaction387.lean}{\texttt{Redaction387}} & \ref{sec:bourbaki-387}\\
 397 & Divisible équivaut à injectif & confirmé tel que lu ; plus général & \href{\leanblobmain/Redaction397.lean}{\texttt{Redaction397}} & \ref{sec:bourbaki-397}\\
 398 & Dualité des modules de longueur finie & retrouvé (dualité de Matlis) & \href{\leanblobmain/Redaction398.lean}{\texttt{Redaction398}} & \ref{sec:bourbaki-398}\\
