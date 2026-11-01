@@ -60,7 +60,7 @@
 \maketitle
 
 \begin{abstract}
-\noindent Les carnets de recherche de Daniel Quillen, de 1968 à 2003, sont en ligne au Clay Mathematics Institute. Ce document y relève six énoncés précis, en topologie générale, en algèbre linéaire, en théorie des groupes et en combinatoire, et les démontre. Chaque démonstration suit une preuve vérifiée dans l'assistant de preuve Lean~4 \cite{lean4}, avec sa bibliothèque mathlib \cite{mathlib2020}, et elle est rédigée pour être lue sans Lean. Pour chaque énoncé, le document dit d'où il vient, ce qu'il veut dire, comment on le démontre, ce qui n'est pas formalisé et ce que l'on sait de sa présence dans la littérature. Les six énoncés sont justes ; trois tiennent sous des hypothèses plus faibles que celles de la page ou de la démonstration attendue, un échoue pour $p = 2$, comme la page le laisse entendre, et deux sont classiques mais absents de mathlib.
+\noindent Les carnets de recherche de Daniel Quillen, de 1968 à 2003, sont en ligne au Clay Mathematics Institute. Ce document y relève sept énoncés précis, en topologie générale, en algèbre linéaire, en théorie des groupes, en théorie des représentations et en combinatoire, et les démontre. Chaque démonstration suit une preuve vérifiée dans l'assistant de preuve Lean~4 \cite{lean4}, avec sa bibliothèque mathlib \cite{mathlib2020}, et elle est rédigée pour être lue sans Lean. Pour chaque énoncé, le document dit d'où il vient, ce qu'il veut dire, comment on le démontre, ce qui n'est pas formalisé et ce que l'on sait de sa présence dans la littérature. Les sept énoncés sont justes ; trois tiennent sous des hypothèses plus faibles que celles de la page ou de la démonstration attendue, un échoue pour $p = 2$, comme la page le laisse entendre, et trois sont classiques mais absents de mathlib.
 \end{abstract}
 
 \tableofcontents
@@ -71,7 +71,7 @@
 
 \emph{La règle sur les droits.} Les carnets sont protégés par le droit d'auteur. Ce document n'en cite presque rien, au plus quelques mots ; il énonce chaque résultat dans ses propres termes et renvoie à la page du fac-similé, que chacun peut consulter. Les transcriptions faites pour ce travail restent privées.
 
-\emph{La méthode.} Les carnets ont été lus en trois temps. On repère d'abord les énoncés précis : lemmes, propositions, identités, questions posées. Chaque énoncé fait ensuite l'objet d'une recherche bibliographique. La plus grande partie de ce qu'on lit dans les carnets se retrouve dans les articles publiés de Quillen, sur l'algèbre homotopique, la cohomologie des groupes et la $K$-théorie algébrique, le cobordisme, les superconnexions, les déterminants et la cohomologie cyclique ; ces énoncés ne sont pas repris ici. On ne formalise enfin que les énoncés précis que la recherche n'a pas retrouvés imprimés, ou dont la forme imprimée ne correspond pas à la page. Quatre des six énoncés de ce document sont dans ce cas. Les deux autres, aux carnets 1968-15 et~16 et 1970-15, sont classiques et retrouvés ; ils sont formalisés parce que la construction \q{plus} et la vérification de la page s'appuient sur eux et que mathlib ne les a pas.
+\emph{La méthode.} Les carnets ont été lus en trois temps. On repère d'abord les énoncés précis : lemmes, propositions, identités, questions posées. Chaque énoncé fait ensuite l'objet d'une recherche bibliographique. La plus grande partie de ce qu'on lit dans les carnets se retrouve dans les articles publiés de Quillen, sur l'algèbre homotopique, la cohomologie des groupes et la $K$-théorie algébrique, le cobordisme, les superconnexions, les déterminants et la cohomologie cyclique ; ces énoncés ne sont pas repris ici. On ne formalise enfin que les énoncés précis que la recherche n'a pas retrouvés imprimés, ou dont la forme imprimée ne correspond pas à la page. Quatre énoncés de ce document sont dans ce cas. Les autres, aux carnets 1968-1, 1968-15 et~16 et 1970-15, sont classiques et retrouvés ; ils sont formalisés parce que les pages s'appuient sur eux et que mathlib ne les a pas.
 
 \emph{Les garanties de Lean.} Chaque section cite en note de son titre le fichier Lean qui en contient les preuves, dans la bibliothèque \texttt{lean/Quillen/} du projet, un fichier par carnet. Lean vérifie mécaniquement qu'un énoncé tient sous les hypothèses écrites. Il ne garantit pas que l'énoncé rend fidèlement la page, ni qu'il est nouveau. Un énoncé que la page formule porte le nom de Quillen, le carnet et la page ; quand la démonstration établit davantage, on dit \q{d'après} ; une forme que l'édition ajoute (généralisation, réponse à une question, lemme intermédiaire) se dit énoncé de l'édition.
 
@@ -86,6 +86,7 @@
 Carnet & Énoncé & Verdict & Fichier Lean & \S\\
 \midrule
 \endhead
+1968-1, p.~4 & Un module simple est déterminé par sa trace & classique, retrouvé ; en toute caractéristique, sur un corps algébriquement clos & \href{\leanblobmain/Notebook1968_1.lean}{\texttt{Notebook1968\_1}} & \ref{sec:quillen-1968-1}\\
 1968-13, pp.~64--69 & L'espace $X \cup_\Phi \{\infty\}$ et le lemme du smash & espace retrouvé (Beer--Vipera) ; lemme du smash plus général (ni compacité locale, ni séparation) & \href{\leanblobmain/Notebook1968_13.lean}{\texttt{Notebook1968\_13}} & \ref{sec:quillen-1968-13}\\
 1968-14, pp.~27--28 & Préimages compactes des fermés loin de $A$ & confirmé ; plus général (ni compacité locale, ni $\sigma$-compacité, ni $A$ fermé) & \href{\leanblobmain/Notebook1968_14.lean}{\texttt{Notebook1968\_14}} & \ref{sec:quillen-1968-14}\\
 1968-15, p.~28 ; 1968-16, pp.~1--2 & $E(n, A)$ parfait pour $n \ge 3$ ; lemme de Whitehead & classique, retrouvé ; sur tout anneau unitaire & \href{\leanblobmain/Notebook1968_15.lean}{\texttt{Notebook1968\_15}}, \href{\leanblobmain/Notebook1968_16.lean}{\texttt{\_16}} & \ref{sec:quillen-1968-15}\\
@@ -96,6 +97,7 @@ Carnet & Énoncé & Verdict & Fichier Lean & \S\\
 \end{longtable}}
 \end{center}
 
+\input{sections/quillen-1968-1}
 \input{sections/quillen-1968-13}
 \input{sections/quillen-1968-14}
 \input{sections/quillen-1968-15}

@@ -1,0 +1,39 @@
+\section[Carnet 1968-1 : un module simple est déterminé par sa trace]{Carnet 1968-1 : un module simple est déterminé par sa trace\protect\verifie{Notebook1968_1}}\label{sec:quillen-1968-1}
+
+\emph{Le contexte.} Le \carnet{1968}{1}, daté de janvier 1968, porte surtout sur les représentations des algèbres de Lie semi-simples. À la page~4 du PDF, Quillen isole un énoncé de base : une représentation irréductible d'une algèbre de dimension finie sur $\mathbb{C}$ est déterminée par sa fonction trace $a \mapsto \operatorname{tr}(a \mid S)$. Son esquisse : la trace s'annule sur le radical, dont les éléments agissent de façon nilpotente ; par Wedderburn, le quotient semi-simple est un produit d'algèbres simples, et la trace de $S$ est non nulle sur le facteur de $S$, nulle sur les autres. Une remarque selon laquelle la trace vaut $\dim S$ en $1$ est barrée, à juste titre en caractéristique $p$, où $\dim S$ peut s'annuler dans le corps.
+
+\emph{L'intuition.} Il suffit, si $S \not\simeq T$, de trouver un élément de $A$ qui agisse sur $S$ par un projecteur de rang un et sur $T$ par zéro : ses traces sont $1$ et $0$, en toute caractéristique. Le théorème de densité de Jacobson fournit un tel élément, car les endomorphismes de $S \times T$ sont diagonaux et scalaires.
+
+\begin{encadre}
+\begin{theoreme}[Quillen, carnet 1968-1, p.~4]\label{thm:quillen-1968-1}
+Soient $k$ un corps algébriquement clos, de caractéristique quelconque, $A$ une $k$-algèbre, et $S$, $T$ deux $A$-modules simples de dimension finie sur $k$. Si $\operatorname{tr}(a \mid S) = \operatorname{tr}(a \mid T)$ pour tout $a \in A$, alors $S \simeq T$. Plus précisément, si $S \not\simeq T$, il existe $a \in A$ avec $\operatorname{tr}(a \mid S) = 1$ et $\operatorname{tr}(a \mid T) = 0$. Lorsque $A$ est de dimension finie, comme dans le carnet, l'hypothèse de dimension finie sur $S$ et $T$ est automatique.
+\end{theoreme}
+\end{encadre}
+
+\begin{lemme}[Schur]\label{lem:quillen-1968-1-schur}
+Une application $A$-linéaire entre modules simples non isomorphes est nulle. Si $k$ est algébriquement clos et $S$ de dimension finie sur $k$, tout endomorphisme $A$-linéaire de $S$ est une homothétie.
+\end{lemme}
+
+\begin{proof}
+Le noyau et l'image sont des sous-modules, donc une application non nulle entre modules simples est bijective. Un endomorphisme $g$ de $S$ admet une valeur propre $c \in k$ ; $g - c$ est $A$-linéaire et non injectif, donc nul.
+\end{proof}
+
+\begin{proof}[Démonstration du théorème]
+Le module $S \times T$ est semi-simple, somme des images des deux injections. Par le lemme~\ref{lem:quillen-1968-1-schur}, si $S \not\simeq T$, un endomorphisme $A$-linéaire $g$ de $S \times T$ s'écrit $g(s, t) = (c\,s, d\,t)$ avec $c, d \in k$. Soient $v \neq 0$ dans $S$, $\varphi$ une forme linéaire avec $\varphi(v) = 1$ et $\psi = \varphi(\cdot)\,v$, de trace $1$. L'application $f(s, t) = (\psi(s), 0)$ commute à tous ces $g$ ; comme $S \times T$ est de type fini sur son anneau d'endomorphismes (il l'est déjà sur $k$), le théorème de densité donne $a \in A$ agissant comme $f$. Alors $\operatorname{tr}(a \mid S) = \operatorname{tr}\psi = 1$ et $\operatorname{tr}(a \mid T) = 0$, ce qui contredit l'égalité des traces. Si $A$ est de dimension finie, un module simple est monogène, donc de dimension finie sur $k$.
+\end{proof}
+
+\begin{remarque}
+La démonstration évite le radical et Wedderburn--Artin, qu'emploie Quillen ; les deux voies donnent le même élément, une unité matricielle $e_{11}$ du bloc de $S$. La finitude de $A$ n'est pas utilisée, seulement celle de $S$ et de $T$.
+\end{remarque}
+
+\begin{contrexemple}
+L'hypothèse \og algébriquement clos\fg{} ne peut être omise en caractéristique $p$. Soient $L/k$ une extension purement inséparable de degré $p$ et $A = L \times L$ ; les deux modules simples $L \times 0$ et $0 \times L$ ne sont pas isomorphes, et leurs traces, $(x, y) \mapsto \operatorname{Tr}_{L/k}(x)$ et $(x, y) \mapsto \operatorname{Tr}_{L/k}(y)$, sont toutes deux nulles. De même, sur un corps algébriquement clos de caractéristique $p$, la trace ne détermine pas les modules semi-simples : $S^{\oplus p}$ et le module nul ont la même trace.
+\end{contrexemple}
+
+\begin{sloppypar}
+\noindent\emph{Vérification en Lean.} Le théorème est \texttt{nonempty\_linearEquiv\_of\_trace\_eq}, et \texttt{nonempty\_linearEquiv\_of\_trace\_eq'} pour $A$ de dimension finie ; l'élément de traces $1$ et $0$ est \texttt{exists\_trace\_eq\_one\_trace\_eq\_zero}. Le lemme~\ref{lem:quillen-1968-1-schur} est \texttt{eq\_zero\_of\_isEmpty\_linearEquiv} et \texttt{exists\_eq\_smul\_of\_isAlgClosed}, la semi-simplicité de $S \times T$ \texttt{isSemisimpleModule\_prod}, dans \href{\leanblobmain/Notebook1968_1.lean}{\texttt{Notebook1968\_1.\allowbreak{}lean}}. La densité est \texttt{Module.Finite.toModuleEnd\_moduleEnd\_surjective} de mathlib.
+\end{sloppypar}
+
+Ne sont pas formalisés : le contre-exemple ci-dessus, et l'indépendance linéaire des traces des modules simples deux à deux non isomorphes, qui découle du même argument.
+
+\litterature{retrouvé : Curtis--Reiner, \emph{Representation Theory of Finite Groups and Associative Algebras} (1962), chapitre sur les caractères des algèbres ; Lam, \emph{A First Course in Noncommutative Rings}, chapitre sur les représentations. mathlib a le théorème de densité et Wedderburn--Artin sur un corps algébriquement clos, mais pas cet énoncé ; il est proposable pour mathlib, et l'édition ne le donne pas pour nouveau.}
