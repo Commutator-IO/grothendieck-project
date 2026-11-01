@@ -28,6 +28,7 @@ import Bourbaki.Redaction582
 import Bourbaki.Redaction582Annexes
 import Bourbaki.Redaction596
 import Bourbaki.Redaction596Characters
+import Bourbaki.Redaction596Modules
 
 /-
 The Bourbaki library: statements read in the rédactions of the Bourbaki archive
