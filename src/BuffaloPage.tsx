@@ -5,6 +5,7 @@ import { Footer, Header } from './components/Frame.tsx';
 import catalogueRaw from './content/buffalo.json';
 import type { Board } from './components/Blackboard.tsx';
 import { buffaloIssueUrl } from './lib/report.ts';
+import { commentData, useComments } from './components/Comments.tsx';
 
 // The reconstructed boards (git-ignored transcripts-buffalo/) are shown only
 // with RENDER_BUFFALO and in the dev server, with one exception: the first
@@ -154,8 +155,10 @@ const statement = (s: string) => s.split(/(\$[^$]*\$)/).map((p) => (p.startsWith
 /** One course's index, typeset like the transcripts' reading view; a timestamp plays the tape there. */
 function CourseIndexView({ course, index, playing, onPlay }: { course: string; index: CourseIndex; playing: { id: string; t: number } | null; onPlay: (id: string, t: number) => void }) {
   const html = useMemo(() => index.items.map((i) => statement(i.text)), [index]);
+  // Select words in an entry to comment on them in a prefilled issue, as on the reading view.
+  const root = useComments<HTMLDivElement>('buffalo', `Buffalo — ${course}`);
   return (
-    <div className="buffalo-index text-[14.5px] leading-relaxed text-ink-800">
+    <div ref={root} className="buffalo-index text-[14.5px] leading-relaxed text-ink-800">
       {index.items.map((i, n) =>
         i.k === 'topic' ? (
           <h3 key={n} className="titre mt-8 border-b border-ink-200 pb-1 text-[18px] text-ink-900 first:mt-0" dangerouslySetInnerHTML={{ __html: html[n] }} />
@@ -164,7 +167,11 @@ function CourseIndexView({ course, index, playing, onPlay }: { course: string; i
         ) : i.k === 'side' ? (
           <p key={n} className="mt-2 text-[12px] italic text-ink-500" dangerouslySetInnerHTML={{ __html: html[n] }} />
         ) : (
-          <div key={n} className="group mt-1.5 grid grid-cols-[4.6rem_minmax(0,1fr)_1.5rem] gap-2">
+          <div
+            key={n}
+            className="group mt-1.5 grid grid-cols-[4.6rem_minmax(0,1fr)_1.5rem] gap-2"
+            {...commentData({ kind: 'lecture', label: `Buffalo, ${course}, ${i.ts}`, ref: i.ts, link: `https://www.youtube.com/watch?v=${i.v}&t=${i.t}s` })}
+          >
             <button
               type="button"
               onClick={() => onPlay(i.v, i.t)}

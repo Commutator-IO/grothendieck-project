@@ -75,7 +75,7 @@ export interface CommentContext {
   edition?: 'fr' | 'modern';
   /** A finding id, a Lean file, a folder whose dating is proposed. */
   ref?: string;
-  kind: 'reading' | 'finding' | 'plain' | 'proof' | 'dating' | 'leaf' | 'letter';
+  kind: 'reading' | 'finding' | 'plain' | 'proof' | 'dating' | 'leaf' | 'letter' | 'lecture';
   /** Lines the location needs beyond the shelfmark: the evidence of a dating, a letter's date and place. */
   details?: string[];
   /** A link back to the place, on this site. */
@@ -94,6 +94,8 @@ export const QUOTE_WORDS: Record<CommentContext['kind'], number> = {
   proof: 120,
   dating: 120,
   leaf: 120,
+  // A Buffalo index entry: our own words, not the lecture.
+  lecture: 120,
   // Letters to and from him are the correspondents' and his text, not ours.
   letter: 15,
 };
@@ -112,6 +114,7 @@ const KIND_NAME: Record<CommentContext['kind'], string> = {
   dating: 'Proposed dating',
   leaf: 'Date on a leaf',
   letter: 'Letter',
+  lecture: 'Buffalo index entry',
 };
 
 const EDITION_NAME = { fr: 'transcription (`.fr`)', modern: 'modernised reading (`.modern`)' } as const;
